@@ -1,0 +1,20 @@
+{
+  "name": "taklifnoma",
+  "private": true,
+  "version": "0.1.0",
+  "packageManager": "pnpm@11.25.0",
+  "scripts": {
+    "dev": "pnpm --filter @taklifnoma/web dev",
+    "build": "pnpm --filter @taklifnoma/web build",
+    "typecheck": "pnpm --filter @taklifnoma/web typecheck",
+    "test": "tsx --test tests/*.test.ts apps/web/src/modules/studio/draft-storage.test.ts apps/web/src/modules/catalog/*.test.ts",
+    "db:migrate": "node --env-file-if-exists=apps/web/.env.local --import tsx packages/database/src/migrate.ts"
+  },
+  "devDependencies": {
+    "@electric-sql/pglite": "^0.5.10",
+    "@types/node": "^24.10.0",
+    "prettier": "^3.9.10",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3"
+  }
+}

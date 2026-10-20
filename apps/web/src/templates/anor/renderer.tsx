@@ -1,0 +1,316 @@
+"use client";
+
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import type { Invitation, Locale } from "@taklifnoma/contracts";
+import { getContent } from "@taklifnoma/contracts";
+import { eventInstant, eventWallDate, formatDate } from "../date-format";
+import styles from "./template.module.css";
+
+type Props = {
+  invitation: Invitation;
+  invitationId: string;
+  locale: Locale;
+  guestName?: string;
+  guestToken?: string;
+  preview?: boolean;
+  fullPreview?: boolean;
+};
+
+type LegacyDate = {
+  weekday: string;
+  weekdayShort: string;
+  day: number | "";
+  month: string;
+  monthNumber: number | "";
+  year: number | "";
+  time: string;
+  long: string;
+  short: string;
+};
+
+type LegacyData = {
+  title: string;
+  groom: string;
+  bride: string;
+  hosts: string;
+  hostsLabel: string;
+  greeting: string;
+  eventType: string;
+  message: string;
+  programHeading: string;
+  dateTime: string;
+  date: LegacyDate;
+  venue: {
+    name: string;
+    address: string;
+    lat: number | null;
+    lng: number | null;
+    mapUrl: string;
+  };
+  program: Array<{ id: string; time: string; title: string }>;
+  gallery: Array<{ id: string; src: string; alt: string; caption: string }>;
+  contacts: Array<{
+    label: string;
+    value: string;
+    type: "phone" | "telegram";
+    href: string;
+  }>;
+  rsvp: Invitation["rsvp"];
+  wishesEnabled: boolean;
+  wishes: Array<{ name: string; text: string }>;
+  toyona: {
+    enabled: boolean;
+    bank: string;
+    cardNumber: string;
+    cardHolder: string;
+    note: string;
+  };
+  music: { enabled: boolean; url: string };
+};
+
+const eventLabels: Record<Locale, Record<Invitation["eventType"], string>> = {
+  "uz-Latn": {
+    wedding: "Nikoh to‘yi",
+    birthday: "Tug‘ilgan kun",
+    osh: "Nahorgi osh",
+    "qiz-bazmi": "Qiz bazmi",
+    other: "Tadbir",
+  },
+  "uz-Cyrl": {
+    wedding: "Никоҳ тўйи",
+    birthday: "Туғилган кун",
+    osh: "Наҳорги ош",
+    "qiz-bazmi": "Қиз базми",
+    other: "Тадбир",
+  },
+  en: {
+    wedding: "Wedding",
+    birthday: "Birthday",
+    osh: "Morning osh",
+    "qiz-bazmi": "Bride’s celebration",
+    other: "Celebration",
+  },
+  ru: {
+    wedding: "Свадьба",
+    birthday: "День рождения",
+    osh: "Утренний ош",
+    "qiz-bazmi": "Праздник невесты",
+    other: "Праздник",
+  },
+};
+const hostsLabels: Record<Locale, string> = {
+  "uz-Latn": "Hurmat bilan",
+  "uz-Cyrl": "Ҳурмат билан",
+  en: "With love from",
+  ru: "С уважением",
+};
+
+function makeLegacyData(
+  invitation: Invitation,
+  locale: Locale,
+  guestName: string,
+): LegacyData {
+  const content = getContent(invitation, locale);
+  const people = content.people.filter(Boolean);
+  const eventAt = invitation.startsAt
+    ? eventInstant(invitation.startsAt, invitation.timezone)
+    : null;
+  const wallDate = invitation.startsAt
+    ? eventWallDate(invitation.startsAt, invitation.timezone)
+    : null;
+  const date: LegacyDate = wallDate
+    ? {
+        weekday: formatDate(invitation.startsAt, locale, invitation.timezone, {
+          weekday: "long",
+        }),
+        weekdayShort: formatDate(
+          invitation.startsAt,
+          locale,
+          invitation.timezone,
+          { weekday: "short" },
+        ),
+        day: wallDate.getUTCDate(),
+        month: formatDate(invitation.startsAt, locale, invitation.timezone, {
+          month: "long",
+        }),
+        monthNumber: wallDate.getUTCMonth() + 1,
+        year: wallDate.getUTCFullYear(),
+        time: formatDate(invitation.startsAt, locale, invitation.timezone, {
+          hour: "2-digit",
+          minute: "2-digit",
+          hourCycle: "h23",
+        }),
+        long: formatDate(
+          invitation.startsAt,
+          locale,
+          invitation.timezone,
+          { weekday: "long", day: "numeric", month: "long", year: "numeric" },
+        ),
+        short: formatDate(
+          invitation.startsAt,
+          locale,
+          invitation.timezone,
+          { day: "numeric", month: "long", year: "numeric" },
+        ),
+      }
+    : {
+        weekday: "",
+        weekdayShort: "",
+        day: "",
+        month: "",
+        monthNumber: "",
+        year: "",
+        time: "",
+        long: "",
+        short: "",
+      };
+  const personalGreeting = guestName
+    ? content.personalGreeting.replaceAll("{name}", guestName)
+    : "";
+  const greeting = personalGreeting || content.greeting;
+  return {
+    title: content.title,
+    groom: people[0] ?? "",
+    bride: people[1] ?? "",
+    hosts: content.hosts,
+    hostsLabel: hostsLabels[locale],
+    greeting,
+    eventType: content.eventLabel || eventLabels[locale][invitation.eventType],
+    message: content.message,
+    programHeading:
+      content.programHeading ||
+      ({
+        "uz-Latn": "To‘y dasturi",
+        "uz-Cyrl": "Тўй дастури",
+        en: "The evening",
+        ru: "Программа вечера",
+      } satisfies Record<Locale, string>)[locale],
+    dateTime: eventAt?.toISOString() ?? "",
+    date,
+    venue: {
+      name: content.venueName,
+      address: [content.address, content.landmark].filter(Boolean).join(" · "),
+      lat: invitation.venue.latitude,
+      lng: invitation.venue.longitude,
+      mapUrl: invitation.venue.mapUrl,
+    },
+    program: invitation.program.map((item) => ({
+      id: item.id,
+      time: item.time,
+      title: content.programTitles[item.id] ?? "",
+    })),
+    gallery: invitation.gallery.map((item) => ({
+      id: item.id,
+      src: item.url,
+      alt: item.alt || item.caption,
+      caption: item.caption,
+    })),
+    contacts: invitation.contacts.map((item) => ({
+      label: item.label,
+      value: item.value,
+      type: item.type,
+      href:
+        item.type === "phone"
+          ? `tel:${item.value.replace(/[\s()-]/g, "")}`
+          : `https://t.me/${item.value.replace(/^@/, "")}`,
+    })),
+    rsvp: invitation.rsvp,
+    wishesEnabled: invitation.wishes.enabled,
+    wishes: [],
+    toyona: {
+      enabled: invitation.gift.enabled,
+      bank: invitation.gift.bankName,
+      cardNumber: invitation.gift.cardNumber,
+      cardHolder: invitation.gift.cardHolder,
+      note: "",
+    },
+    music: {
+      enabled: invitation.music.enabled,
+      url: invitation.music.url,
+    },
+  };
+}
+
+export function AnorInvitation({
+  invitation,
+  invitationId,
+  locale,
+  guestName = "",
+  guestToken = "",
+  preview = false,
+  fullPreview = false,
+}: Props) {
+  const frame = useRef<HTMLIFrameElement>(null);
+  const [frameLocale, setFrameLocale] = useState(locale);
+  const [loadedLocale, setLoadedLocale] = useState<Locale | null>(null);
+  const data = useMemo(
+    () => makeLegacyData(invitation, frameLocale, guestName),
+    [invitation, frameLocale, guestName],
+  );
+  const payload = useMemo(
+    () => ({
+      type: "taklifnoma:initialize",
+      payload: {
+        data,
+        locale: frameLocale,
+        enabledLocales: invitation.enabledLocales,
+        invitationId,
+        guestName,
+        guestToken,
+        preview,
+      },
+    }),
+    [data, frameLocale, invitation.enabledLocales, invitationId, guestName, guestToken, preview],
+  );
+
+  useEffect(() => setFrameLocale(locale), [locale]);
+
+  const sendData = useCallback(() => {
+    if (loadedLocale !== frameLocale) return;
+    frame.current?.contentWindow?.postMessage(payload, window.location.origin);
+  }, [frameLocale, loadedLocale, payload]);
+
+  useEffect(() => {
+    sendData();
+  }, [sendData]);
+
+  useEffect(() => {
+    const onMessage = (event: MessageEvent) => {
+      if (
+        event.origin !== window.location.origin ||
+        event.source !== frame.current?.contentWindow ||
+        event.data?.type !== "anor:language"
+      )
+        return;
+      const next = event.data.locale as Locale;
+      if (invitation.enabledLocales.includes(next)) {
+        setLoadedLocale(null);
+        setFrameLocale(next);
+      }
+    };
+    window.addEventListener("message", onMessage);
+    return () => window.removeEventListener("message", onMessage);
+  }, [invitation.enabledLocales]);
+
+  return (
+      <div
+        className={
+          fullPreview
+            ? styles.sourceFullPreview
+            : preview
+              ? styles.sourcePreview
+              : styles.sourcePublic
+        }
+      >
+      <iframe
+        key={frameLocale}
+        ref={frame}
+        title={`${data.title || data.eventType} invitation`}
+        src={`/templates/anor/source/index.html?locale=${encodeURIComponent(frameLocale)}`}
+        onLoad={() => setLoadedLocale(frameLocale)}
+        allow="autoplay; fullscreen"
+        loading="eager"
+      />
+    </div>
+  );
+}

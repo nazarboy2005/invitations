@@ -1,0 +1,13 @@
+{
+  "name": "@taklifnoma/database",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "postgres": "^3.4.7",
+    "@taklifnoma/contracts": "workspace:*"
+  }
+}

@@ -1,0 +1,523 @@
+import test, { after, before } from "node:test";
+import assert from "node:assert/strict";
+import { readFile, readdir } from "node:fs/promises";
+import { randomUUID } from "node:crypto";
+import { PGlite } from "@electric-sql/pglite";
+import {
+  createInvitation,
+  addLanguage,
+  switchTemplate,
+  invitationSchema,
+} from "../packages/contracts/src/index";
+
+// PGlite executes the production migration in its embedded PostgreSQL engine.
+// This deliberately does not pretend to test an external PostgreSQL connection.
+let db: PGlite;
+let telegramId = 2000;
+before(async () => {
+  db = new PGlite();
+  const directory = new URL(
+    "../packages/database/migrations/",
+    import.meta.url,
+  );
+  for (const name of (await readdir(directory))
+    .filter((name) => name.endsWith(".sql"))
+    .sort()) {
+    await db.exec(await readFile(new URL(name, directory), "utf8"));
+  }
+  await db.exec(
+    "INSERT INTO templates(id,name,price_minor,published) VALUES('test-alt','Test alternate',100,true)",
+  );
+});
+after(async () => {
+  await db?.close();
+});
+async function user(phone = true) {
+  const id = randomUUID();
+  await db.query(
+    "INSERT INTO users(id,telegram_user_id,display_name,phone_number,phone_source,phone_shared_at) VALUES($1,$2,'Nazar',$3,$4,$5)",
+    [
+      id,
+      ++telegramId,
+      phone ? "+998901234567" : null,
+      phone ? "telegram_contact" : null,
+      phone ? new Date() : null,
+    ],
+  );
+  return id;
+}
+async function invitation(ownerId: string) {
+  const data = createInvitation();
+  data.templateId = "anor";
+  await db.query(
+    "INSERT INTO invitations(id,owner_id,template_id,data) VALUES($1,$2,$3,$4)",
+    [data.id, ownerId, data.templateId || null, JSON.stringify(data)],
+  );
+  return data;
+}
+test("migration enforces ownership, template references, and unique Telegram identities", async () => {
+  const owner = await user();
+  const account = await db.query<{ telegram_user_id: number }>(
+    "SELECT telegram_user_id FROM users WHERE id=$1",
+    [owner],
+  );
+  await assert.rejects(
+    db.query(
+      "INSERT INTO users(telegram_user_id,display_name) VALUES($1,'Duplicate')",
+      [account.rows[0].telegram_user_id],
+    ),
+    /unique/i,
+  );
+  await assert.rejects(invitation(randomUUID()), /foreign key/i);
+  await assert.rejects(
+    db.query(
+      "INSERT INTO invitations(owner_id,template_id,data) VALUES($1,'missing','{}')",
+      [owner],
+    ),
+    /foreign key/i,
+  );
+  const saved = await invitation(owner);
+  await assert.rejects(
+    db.query("DELETE FROM users WHERE id=$1", [owner]),
+    /foreign key/i,
+  );
+  const stored = await db.query<{ owner_id: string }>(
+    "SELECT owner_id FROM invitations WHERE id=$1",
+    [saved.id],
+  );
+  assert.equal(stored.rows[0].owner_id, owner);
+});
+test("session lookup excludes incomplete phone onboarding, revoked, idle-expired, and absolute-expired sessions", async () => {
+  const complete = await user(),
+    incomplete = await user(false);
+  const insert = (
+    owner: string,
+    token: string,
+    expires: string,
+    absolute: string,
+    revoked: string | null = null,
+  ) =>
+    db.query(
+      "INSERT INTO sessions(user_id,token_hash,expires_at,absolute_expires_at,revoked_at) VALUES($1,$2,$3,$4,$5)",
+      [owner, token, expires, absolute, revoked],
+    );
+  const future = new Date(Date.now() + 86400000).toISOString(),
+    past = new Date(Date.now() - 86400000).toISOString();
+  await insert(complete, "valid", future, future);
+  await insert(incomplete, "no-phone", future, future);
+  await insert(complete, "revoked", future, future, new Date().toISOString());
+  await insert(complete, "idle-expired", past, future);
+  await insert(complete, "absolute-expired", future, past);
+  const lookup = (token: string) =>
+    db.query(
+      "SELECT s.id FROM sessions s JOIN users u ON u.id=s.user_id WHERE s.token_hash=$1 AND s.revoked_at IS NULL AND s.expires_at>now() AND s.absolute_expires_at>now() AND u.phone_shared_at IS NOT NULL",
+      [token],
+    );
+  assert.equal((await lookup("valid")).rows.length, 1);
+  for (const token of [
+    "no-phone",
+    "revoked",
+    "idle-expired",
+    "absolute-expired",
+  ])
+    assert.equal((await lookup(token)).rows.length, 0, token);
+});
+test("pending wishes stay private; approval publishes; soft deletion keeps dashboard evidence", async () => {
+  const owner = await user(),
+    draft = await invitation(owner),
+    wish = randomUUID();
+  await db.query(
+    "INSERT INTO wishes(id,invitation_id,name,message) VALUES($1,$2,'Mehmon','Baxtli bo‘ling!')",
+    [wish, draft.id],
+  );
+  const visible = () =>
+    db.query(
+      "SELECT id FROM wishes WHERE invitation_id=$1 AND status='approved' AND deleted_at IS NULL",
+      [draft.id],
+    );
+  assert.equal((await visible()).rows.length, 0);
+  await db.query(
+    "UPDATE wishes SET status='approved',moderated_by=$1,moderated_at=now() WHERE id=$2",
+    [owner, wish],
+  );
+  assert.equal((await visible()).rows.length, 1);
+  await db.query(
+    "UPDATE wishes SET status='deleted',deleted_at=now(),moderated_by=$1 WHERE id=$2",
+    [owner, wish],
+  );
+  assert.equal((await visible()).rows.length, 0);
+  const dashboard = await db.query<{ message: string; status: string }>(
+    "SELECT message,status FROM wishes WHERE invitation_id=$1",
+    [draft.id],
+  );
+  assert.equal(dashboard.rows[0].message, "Baxtli bo‘ling!");
+  assert.equal(dashboard.rows[0].status, "deleted");
+  await assert.rejects(
+    db.query("UPDATE wishes SET status='unchecked-public' WHERE id=$1", [wish]),
+    /check constraint/i,
+  );
+});
+test("invitation JSON snapshot retains language variants and stable media IDs through template switching", async () => {
+  const owner = await user(),
+    draft = addLanguage(createInvitation(), "ru"),
+    assetId = randomUUID();
+  draft.content.ru = {
+    ...draft.content.ru,
+    title: "Наш праздник",
+    greeting: "Дорогие гости!",
+  };
+  draft.gallery = [
+    {
+      id: assetId,
+      url: "https://media.example.com/photo.webp",
+      alt: "Couple",
+      caption: "Together",
+    },
+  ];
+  draft.music = {
+    enabled: true,
+    assetId: randomUUID(),
+    url: "https://media.example.com/music.mp3",
+    filename: "our-song.mp3",
+  };
+  await db.query(
+    "INSERT INTO media_assets(id,owner_id,draft_id,object_key,url,filename,mime_type,size_bytes,visibility,status) VALUES($1,$2,$3,'owner/photo.webp',$4,'photo.webp','image/webp',512,'public','ready')",
+    [assetId, owner, draft.id, draft.gallery[0].url],
+  );
+  await db.query(
+    "INSERT INTO invitations(id,owner_id,template_id,data) VALUES($1,$2,$3,$4)",
+    [draft.id, owner, draft.templateId || null, JSON.stringify(draft)],
+  );
+  const switched = switchTemplate(draft, "anor");
+  await db.query("UPDATE invitations SET template_id=$1,data=$2 WHERE id=$3", [
+    switched.templateId,
+    JSON.stringify(switched),
+    draft.id,
+  ]);
+  const record = await db.query<{ data: typeof switched; template_id: string }>(
+    "SELECT data,template_id FROM invitations WHERE id=$1",
+    [draft.id],
+  );
+  assert.deepEqual(record.rows[0].data, switched);
+  assert.equal(record.rows[0].data.gallery[0].id, assetId);
+  assert.equal(record.rows[0].data.music.assetId, draft.music.assetId);
+  assert.equal(record.rows[0].data.content.ru.greeting, "Дорогие гости!");
+  assert.equal(record.rows[0].template_id, "anor");
+  const media = await db.query<{ object_key: string; draft_id: string }>(
+    "SELECT object_key,draft_id FROM media_assets WHERE id=$1 AND owner_id=$2",
+    [assetId, owner],
+  );
+  assert.equal(media.rows[0].draft_id, draft.id);
+  assert.equal(media.rows[0].object_key, "owner/photo.webp");
+});
+test("template category migration seeds independent event browsing groups and Anor", async () => {
+  const categories = await db.query<{ id: string }>(
+    "SELECT id FROM template_categories ORDER BY position,id",
+  );
+  assert.deepEqual(
+    categories.rows.map((row) => row.id),
+    ["wedding", "birthday", "osh", "qiz-bazmi", "other"],
+  );
+  const anor = await db.query<{ published: boolean; price_minor: number }>(
+    "SELECT published,price_minor FROM templates WHERE id='anor'",
+  );
+  assert.equal(anor.rows[0].published, false);
+  assert.equal(Number(anor.rows[0].price_minor), 15000000);
+  const assignments = await db.query<{
+    template_id: string;
+    category_id: string;
+  }>(
+    "SELECT template_id,category_id FROM template_category_assignments ORDER BY template_id",
+  );
+  assert.deepEqual(assignments.rows, [
+    { template_id: "anor", category_id: "wedding" },
+  ]);
+});
+test("any template can have multiple categories or none without changing invitation content", async () => {
+  const owner = await user(),
+    draft = await invitation(owner);
+  draft.eventType = "wedding";
+  await db.query("UPDATE invitations SET data=$1 WHERE id=$2", [
+    JSON.stringify(draft),
+    draft.id,
+  ]);
+  const original = JSON.stringify(draft);
+  await db.query(
+    "INSERT INTO template_categories(id,name,position) VALUES('corporate','Korporativ tadbir',5)",
+  );
+  await db.transaction(async (tx) => {
+    await tx.query(
+      "DELETE FROM template_category_assignments WHERE template_id='test-alt'",
+    );
+    await tx.query(
+      "INSERT INTO template_category_assignments(template_id,category_id) VALUES('test-alt','birthday'),('test-alt','corporate')",
+    );
+  });
+  const categories = () =>
+    db.query<{ category_id: string }>(
+      "SELECT category_id FROM template_category_assignments WHERE template_id='test-alt' ORDER BY category_id",
+    );
+  assert.deepEqual(
+    (await categories()).rows.map((row) => row.category_id),
+    ["birthday", "corporate"],
+  );
+  // Labels are editable; IDs and their assignments are stable.
+  await db.query(
+    "UPDATE template_categories SET name='Business events' WHERE id='corporate'",
+  );
+  assert.equal((await categories()).rows[1].category_id, "corporate");
+  const saved = await db.query<{ data: typeof draft; template_id: string }>(
+    "SELECT data,template_id FROM invitations WHERE id=$1",
+    [draft.id],
+  );
+  assert.deepEqual(saved.rows[0].data, JSON.parse(original));
+  assert.equal(saved.rows[0].template_id, "anor");
+  assert.equal(saved.rows[0].data.eventType, "wedding");
+  await db.query(
+    "DELETE FROM template_category_assignments WHERE template_id='test-alt'",
+  );
+  assert.equal((await categories()).rows.length, 0);
+  assert.deepEqual(
+    (
+      await db.query<{ data: typeof draft }>(
+        "SELECT data FROM invitations WHERE id=$1",
+        [draft.id],
+      )
+    ).rows[0].data,
+    draft,
+  );
+});
+test("category foreign keys, uniqueness and transaction rollback preserve prior assignments", async () => {
+  await db.query(
+    "DELETE FROM template_category_assignments WHERE template_id='test-alt'",
+  );
+  await db.query(
+    "INSERT INTO template_category_assignments(template_id,category_id) VALUES('test-alt','wedding')",
+  );
+  await assert.rejects(
+    db.query(
+      "INSERT INTO template_category_assignments(template_id,category_id) VALUES('test-alt','wedding')",
+    ),
+    /unique/i,
+  );
+  await assert.rejects(
+    db.query(
+      "INSERT INTO template_category_assignments(template_id,category_id) VALUES('missing','wedding')",
+    ),
+    /foreign key/i,
+  );
+  await assert.rejects(
+    db.query(
+      "INSERT INTO template_category_assignments(template_id,category_id) VALUES('test-alt','missing')",
+    ),
+    /foreign key/i,
+  );
+  await assert.rejects(
+    db.transaction(async (tx) => {
+      await tx.query(
+        "DELETE FROM template_category_assignments WHERE template_id='test-alt'",
+      );
+      await tx.query(
+        "INSERT INTO template_category_assignments(template_id,category_id) VALUES('test-alt','missing')",
+      );
+    }),
+    /foreign key/i,
+  );
+  const unchanged = await db.query<{ category_id: string }>(
+    "SELECT category_id FROM template_category_assignments WHERE template_id='test-alt'",
+  );
+  assert.deepEqual(unchanged.rows, [{ category_id: "wedding" }]);
+  await assert.rejects(
+    db.query(
+      "INSERT INTO template_categories(id,name) VALUES('bad slug','Bad')",
+    ),
+    /check constraint/i,
+  );
+  await assert.rejects(
+    db.query("INSERT INTO template_categories(id,name) VALUES('empty','   ')"),
+    /check constraint/i,
+  );
+  await assert.rejects(
+    db.query(
+      "INSERT INTO template_categories(id,name,position) VALUES('negative','Negative',-1)",
+    ),
+    /check constraint/i,
+  );
+});
+test("Anor reopens multilingual content and admin replacements preserve linked guests and event locks", async () => {
+  await db.query("UPDATE templates SET published=true WHERE id='anor'");
+  const owner = await user(),
+    admin = await user(),
+    guestId = randomUUID(),
+    wishId = randomUUID(),
+    rsvpId = randomUUID();
+  await db.query("UPDATE users SET is_admin=true WHERE id=$1", [admin]);
+  let draft = addLanguage(addLanguage(createInvitation(), "ru"), "en");
+  draft.templateId = "anor";
+  draft.templateId = "anor";
+  draft.content.ru = {
+    ...draft.content["uz-Latn"],
+    title: "Наш день",
+    greeting: "Дорогие гости!",
+  };
+  draft.content.en = {
+    ...draft.content["uz-Latn"],
+    title: "Our wedding",
+    greeting: "Dear guests!",
+  };
+  draft.gallery = [
+    {
+      id: randomUUID(),
+      url: "https://media.example.com/wedding.webp",
+      alt: "Wedding portrait",
+      caption: "Our story",
+    },
+  ];
+  draft.music = {
+    enabled: true,
+    assetId: randomUUID(),
+    url: "https://media.example.com/wedding.mp3",
+    filename: "wedding.mp3",
+  };
+  await db.query(
+    "INSERT INTO invitations(id,owner_id,template_id,data) VALUES($1,$2,$3,$4)",
+    [draft.id, owner, draft.templateId, JSON.stringify(draft)],
+  );
+  draft = {
+    ...switchTemplate(draft, "anor"),
+    revision: draft.revision + 1,
+  };
+  await db.query("UPDATE invitations SET template_id=$1,data=$2 WHERE id=$3", [
+    draft.templateId,
+    JSON.stringify(draft),
+    draft.id,
+  ]);
+  const reopened = await db.query<{ data: unknown }>(
+    "SELECT data FROM invitations WHERE id=$1 AND owner_id=$2",
+    [draft.id, owner],
+  );
+  assert.deepEqual(invitationSchema.parse(reopened.rows[0].data), draft);
+
+  const publishedAt = new Date(Date.now() - 2 * 86400000),
+    deadline = new Date(Date.now() - 86400000),
+    slug = `anor-test-${draft.id}`;
+  const published = { ...draft, status: "published" as const };
+  await db.query(
+    "UPDATE invitations SET status='published',data=$1,slug=$2,first_published_at=$3,identity_locked_at=$3,edit_deadline_at=$4 WHERE id=$5",
+    [JSON.stringify(published), slug, publishedAt, deadline, draft.id],
+  );
+  await db.query(
+    "INSERT INTO invitation_guests(id,invitation_id,display_name,token_hash,locale,max_party_size) VALUES($1,$2,'Nazar',$3,'ru',3)",
+    [guestId, draft.id, randomUUID()],
+  );
+  await db.query(
+    "INSERT INTO wishes(id,invitation_id,guest_id,name,message,status) VALUES($1,$2,$3,'Nazar','Baxtli bo‘ling!','approved')",
+    [wishId, draft.id, guestId],
+  );
+  await db.query(
+    "INSERT INTO rsvp_responses(id,invitation_id,guest_id,name,status,party_size) VALUES($1,$2,$3,'Nazar','yes',2)",
+    [rsvpId, draft.id, guestId],
+  );
+
+  // Execute the exact production replacement CTE, replacing only postgres.js
+  // interpolation markers with PGlite parameter placeholders to avoid drift.
+  const route = await readFile(
+    new URL(
+      "../apps/web/src/app/api/admin/templates/[id]/route.ts",
+      import.meta.url,
+    ),
+    "utf8",
+  );
+  const productionCte = route.match(
+    /await tx`(WITH affected AS[\s\S]*?RETURNING invitation_id)`/,
+  )?.[1];
+  assert.ok(productionCte, "Production replacement CTE must exist");
+  const replacementSql = productionCte
+    .replaceAll("${id}", "$1")
+    .replaceAll("${target.id}", "$2")
+    .replaceAll("${user.id}", "$3");
+  const replace = async (from: string, to: string) =>
+    db.transaction(async (tx) => {
+      const target = await tx.query(
+        "SELECT id FROM templates WHERE id=$1 AND published=true FOR UPDATE",
+        [to],
+      );
+      assert.equal(target.rows.length, 1);
+      const changed = await tx.query<{ invitation_id: string }>(
+        replacementSql,
+        [from, to, admin],
+      );
+      assert.ok(changed.rows.some((row) => row.invitation_id === draft.id));
+      await tx.query(
+        "UPDATE templates SET published=false,replacement_template_id=$1 WHERE id=$2",
+        [to, from],
+      );
+    });
+  await replace("anor", "test-alt");
+  await db.query(
+    "UPDATE templates SET published=true,replacement_template_id=NULL WHERE id='anor'",
+  );
+  await replace("test-alt", "anor");
+
+  const final = await db.query<{
+    data: unknown;
+    template_id: string;
+    owner_id: string;
+    slug: string;
+    status: string;
+    first_published_at: Date;
+    identity_locked_at: Date;
+    edit_deadline_at: Date;
+  }>("SELECT * FROM invitations WHERE id=$1", [draft.id]);
+  const row = final.rows[0],
+    expected = {
+      ...published,
+      templateId: "anor",
+      revision: published.revision + 2,
+    };
+  assert.deepEqual(invitationSchema.parse(row.data), expected);
+  assert.equal(row.template_id, "anor");
+  assert.equal(row.owner_id, owner);
+  assert.equal(row.slug, slug);
+  assert.equal(row.status, "published");
+  assert.equal(row.first_published_at.getTime(), publishedAt.getTime());
+  assert.equal(row.identity_locked_at.getTime(), publishedAt.getTime());
+  assert.equal(row.edit_deadline_at.getTime(), deadline.getTime());
+  const linked = await db.query<{
+    id: string;
+    name: string;
+    message: string;
+    status: string;
+    party_size: number;
+  }>(
+    "SELECT g.id,g.display_name AS name,w.message,r.status,r.party_size FROM invitation_guests g JOIN wishes w ON w.guest_id=g.id JOIN rsvp_responses r ON r.guest_id=g.id WHERE g.id=$1 AND g.invitation_id=$2 AND w.id=$3 AND r.id=$4",
+    [guestId, draft.id, wishId, rsvpId],
+  );
+  assert.deepEqual(linked.rows, [
+    {
+      id: guestId,
+      name: "Nazar",
+      message: "Baxtli bo‘ling!",
+      status: "yes",
+      party_size: 2,
+    },
+  ]);
+  const audit = await db.query<{
+    actor_id: string;
+    previous_values: typeof published;
+    new_values: typeof published;
+  }>(
+    "SELECT actor_id,previous_values,new_values FROM invitation_audit_log WHERE invitation_id=$1 AND action='admin_template_replacement' ORDER BY (new_values->>'revision')::int",
+    [draft.id],
+  );
+  assert.equal(audit.rows.length, 2);
+  assert.equal(audit.rows[0].actor_id, admin);
+  assert.deepEqual(audit.rows[0].previous_values, published);
+  assert.deepEqual(audit.rows[0].new_values, {
+    ...published,
+    templateId: "test-alt",
+    revision: published.revision + 1,
+  });
+  assert.deepEqual(audit.rows[1].previous_values, audit.rows[0].new_values);
+  assert.deepEqual(audit.rows[1].new_values, expected);
+});

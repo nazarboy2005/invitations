@@ -1,0 +1,1002 @@
+.dashboard {
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--ink);
+}
+.topbar {
+  height: 85px;
+  padding: 0 max(28px, calc((100vw - 1250px) / 2));
+  border-bottom: 1px solid var(--line);
+  background: var(--surface);
+  display: flex;
+  align-items: center;
+  gap: 60px;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: -1px;
+  color: var(--ink);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.brand > span:first-child {
+  display: grid;
+  place-items: center;
+  color: var(--primary);
+  width: 35px;
+  height: 35px;
+  margin-right: 10px;
+  border: 1px solid #dac9b3;
+  border-radius: 9px 9px 18px 9px;
+}
+.brandDot {
+  color: var(--accent);
+}
+.topbar nav {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+  height: 100%;
+}
+.topbar nav a {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12px;
+  text-decoration: none;
+  color: var(--muted);
+  border-bottom: 2px solid transparent;
+  padding-top: 2px;
+  box-sizing: border-box;
+  white-space: nowrap;
+}
+.topbar nav a[aria-current] {
+  color: var(--primary);
+  border-color: var(--primary);
+  font-weight: 600;
+}
+.profile {
+  display: flex;
+  gap: 8px;
+  font-size: 11px;
+  align-items: center;
+  margin-left: auto;
+  max-width: 180px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.profile > span {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 31px;
+  height: 31px;
+  background: #f0e6d9;
+  color: var(--primary);
+  border: 3px solid #faf6ee;
+  border-radius: 50%;
+  font-size: 11px;
+}
+.main {
+  max-width: 1250px;
+  margin: auto;
+  padding: 55px 28px 36px;
+}
+.pageHeading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 25px;
+  margin-bottom: 34px;
+}
+.pageHeading p {
+  font-size: 12px;
+  color: var(--muted);
+  margin: 0 0 11px;
+}
+.pageHeading h1 {
+  font-family: var(--font-display);
+  font-size: 41px;
+  line-height: 1.1;
+  font-weight: 400;
+  margin: 0 0 12px;
+  letter-spacing: -1px;
+}
+.pageHeading > div > span {
+  font-size: 13px;
+  color: var(--muted);
+}
+.primaryButton {
+  background: var(--primary);
+  color: #fff;
+  border: 0;
+  border-radius: 7px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 12px 17px;
+  text-decoration: none;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+.primaryButton:hover {
+  background: #755a40;
+}
+.accountNotice {
+  display: flex;
+  gap: 17px;
+  align-items: center;
+  background: #f3ebdd;
+  border: 1px solid #e9ddcc;
+  border-radius: 9px;
+  padding: 23px 25px;
+  margin-bottom: 36px;
+}
+.noticeIcon {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: var(--surface);
+  display: grid;
+  place-items: center;
+  color: var(--primary);
+  flex-shrink: 0;
+}
+.accountNotice strong {
+  font-size: 13px;
+  font-weight: 600;
+}
+.accountNotice p {
+  max-width: 650px;
+  font-size: 12px;
+  line-height: 1.8;
+  color: var(--muted);
+  margin: 6px 0 0;
+}
+.accountNotice > a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  color: var(--primary);
+  font-size: 12px;
+  font-weight: 500;
+  text-decoration: none;
+  margin-left: auto;
+}
+.contentLayout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 260px;
+  gap: 35px;
+}
+.invitationList {
+  min-width: 0;
+}
+.listToolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 25px;
+  min-height: 45px;
+}
+.listToolbar > div {
+  display: flex;
+  gap: 20px;
+}
+.listToolbar button {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  padding: 9px 0 16px;
+  background: none;
+  font: inherit;
+  font-size: 12px;
+  color: var(--muted);
+  cursor: pointer;
+  white-space: nowrap;
+}
+.listToolbar button.activeTab {
+  border-color: var(--primary);
+  color: var(--primary);
+  font-weight: 600;
+}
+.listToolbar button > span {
+  border-radius: 4px;
+  padding: 1px 5px;
+  background: #ede3d4;
+  color: var(--primary);
+  font-size: 9px;
+}
+.privateLabel {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 10px;
+  color: var(--muted);
+  white-space: nowrap;
+}
+.cardGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+}
+.invitationCard {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--surface);
+  min-width: 0;
+}
+.cardArt {
+  min-height: 220px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  padding: 38px 20px 26px;
+  box-sizing: border-box;
+  overflow: hidden;
+  background: #f4eee4;
+  color: #695b4c;
+}
+.cardStatus {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  font-size: 9px;
+  background: #ffffffed;
+  border-radius: 4px;
+  color: #745d43;
+  padding: 6px 8px;
+  z-index: 1;
+}
+.cardArt > div {
+  position: relative;
+  z-index: 1;
+}
+.cardArt > div > span {
+  font-size: 9px;
+}
+.cardArt h3 {
+  font-family: var(--font-display);
+  font-size: 29px;
+  line-height: 1.25;
+  font-weight: 400;
+  margin: 12px 0;
+  overflow-wrap: anywhere;
+}
+.cardArt p {
+  font-size: 9px;
+  line-height: 1.6;
+  max-width: 230px;
+  margin: 0 auto;
+}
+.cardArt > svg {
+  margin-top: 17px;
+}
+.noTemplateLabel {
+  position: relative;
+  margin-top: 14px;
+  color: var(--muted);
+  font-size: 11px;
+}
+.cardBody {
+  padding: 19px 20px 16px;
+}
+.cardName {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+.cardName strong {
+  font-size: 14px;
+  font-weight: 600;
+}
+.cardName > span {
+  font-size: 9px;
+  color: var(--muted);
+}
+.cardDate {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: var(--muted);
+  margin: 12px 0 22px;
+}
+.cardActions {
+  border-top: 1px solid var(--line);
+  padding-top: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+.cardActions > span {
+  font-size: 9px;
+  color: var(--muted);
+}
+.cardActions > a {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--primary);
+  text-decoration: none;
+}
+.empty {
+  grid-column: 1/-1;
+  background: var(--surface);
+  border: 1px dashed #ded0be;
+  border-radius: 10px;
+  padding: 49px 25px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 330px;
+  box-sizing: border-box;
+  justify-content: center;
+}
+.emptyArt {
+  position: relative;
+  color: var(--primary);
+  margin-bottom: 18px;
+}
+.emptyArt > span {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  right: -9px;
+  bottom: 5px;
+  width: 25px;
+  height: 25px;
+  background: #efe3d0;
+  border: 3px solid white;
+  border-radius: 50%;
+}
+.empty h2 {
+  font-family: var(--font-display);
+  font-size: 27px;
+  font-weight: 400;
+  margin: 0 0 13px;
+  line-height: 1.3;
+}
+.empty p {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.9;
+  max-width: 350px;
+  margin: 0 0 23px;
+}
+.empty small {
+  font-size: 10px;
+  color: var(--muted);
+  margin-top: 15px;
+  line-height: 1.7;
+}
+.helpSidebar {
+  padding-top: 0;
+}
+.guide {
+  background: #f0e6d6;
+  border-radius: 10px 10px 42px 10px;
+  padding: 25px 24px 29px;
+  color: var(--primary);
+}
+.guideIcon {
+  display: inline-flex;
+  border: 1px solid #d5c4ad;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 17px;
+}
+.guide h2 {
+  font-family: var(--font-display);
+  font-size: 26px;
+  line-height: 1.2;
+  font-weight: 400;
+  margin: 0 0 17px;
+}
+.guide p {
+  font-size: 11px;
+  line-height: 1.9;
+  max-width: 190px;
+  color: #82705c;
+  margin-bottom: 21px;
+}
+.guide > a {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 11px;
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 600;
+}
+.tip {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 24px 3px 0;
+}
+.tip > svg {
+  flex-shrink: 0;
+  color: var(--primary);
+  margin-top: 1px;
+}
+.tip strong {
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.7;
+}
+.tip p {
+  font-size: 10px;
+  color: var(--muted);
+  line-height: 1.9;
+  margin: 7px 0 0;
+}
+.helpFooter {
+  display: flex;
+  gap: 9px;
+  font-size: 10px;
+  color: var(--muted);
+  line-height: 1.9;
+  padding: 22px 3px;
+  margin-top: 22px;
+  border-top: 1px solid var(--line);
+}
+.helpFooter svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.bottomNote {
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+  color: var(--muted);
+  padding-top: 34px;
+  max-width: 780px;
+  font-size: 10px;
+  line-height: 1.9;
+}
+.bottomNote svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.bottomNote p {
+  margin: 0;
+}
+.error {
+  background: #fff0eb;
+  border-radius: 7px;
+  padding: 17px;
+  color: #943c2f;
+  font-size: 12px;
+  line-height: 1.8;
+  margin-bottom: 20px;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+.error p {
+  margin: 0;
+}
+.error button {
+  font: inherit;
+  flex-shrink: 0;
+  border: 1px solid #d9aca1;
+  border-radius: 5px;
+  background: var(--surface);
+  color: inherit;
+  padding: 7px 10px;
+  cursor: pointer;
+}
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  min-height: 300px;
+  gap: 15px;
+  color: var(--muted);
+  font-size: 12px;
+}
+.loading svg {
+  animation: spin 1s linear infinite;
+}
+.confirmation {
+  padding: 20px;
+  background: #fff6e6;
+  border: 1px solid #e5d3ae;
+  border-radius: 7px;
+  margin-bottom: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  align-items: center;
+  font-size: 12px;
+}
+.confirmation > div {
+  flex-basis: 100%;
+  line-height: 1.7;
+}
+.confirmation p {
+  margin: 7px 0 0;
+  color: var(--muted);
+}
+.confirmation a,
+.confirmation button {
+  border: 1px solid #cdb88f;
+  border-radius: 5px;
+  padding: 8px 10px;
+  background: var(--surface);
+  color: var(--ink);
+  font: inherit;
+  font-size: 11px;
+  text-decoration: none;
+  cursor: pointer;
+}
+.dashboard :is(button, a):focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 4px;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@media (max-width: 1050px) {
+  .topbar {
+    gap: 35px;
+  }
+  .topbar nav {
+    gap: 24px;
+  }
+  .main {
+    padding-top: 40px;
+  }
+  .contentLayout {
+    grid-template-columns: minmax(0, 1fr) 230px;
+    gap: 24px;
+  }
+  .cardGrid {
+    gap: 15px;
+  }
+  .guide {
+    padding: 23px 20px;
+  }
+  .cardArt h3 {
+    font-size: 25px;
+  }
+  .cardBody {
+    padding: 16px;
+  }
+  .privateLabel {
+    display: none;
+  }
+  .listToolbar > div {
+    gap: 18px;
+  }
+  .cardActions {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .cardActions > a {
+    margin-left: auto;
+  }
+}
+@media (max-width: 800px) {
+  .topbar {
+    padding: 0 22px;
+    gap: 25px;
+  }
+  .topbar nav {
+    gap: 20px;
+  }
+  .brand {
+    font-size: 22px;
+  }
+  .profile {
+    max-width: 110px;
+  }
+  .main {
+    padding: 35px 22px;
+  }
+  .contentLayout {
+    grid-template-columns: 1fr;
+  }
+  .helpSidebar {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .guide {
+    grid-row: 1/3;
+  }
+  .guide p {
+    max-width: 230px;
+  }
+  .tip {
+    padding: 6px 0;
+  }
+  .helpFooter {
+    display: none;
+  }
+  .accountNotice {
+    padding: 20px;
+    gap: 12px;
+  }
+  .accountNotice p {
+    font-size: 11px;
+  }
+  .pageHeading h1 {
+    font-size: 36px;
+  }
+  .cardGrid {
+    gap: 20px;
+  }
+  .cardArt h3 {
+    font-size: 31px;
+  }
+}
+@media (max-width: 580px) {
+  .topbar {
+    height: 73px;
+    padding: 0 17px;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .brand {
+    font-size: 21px;
+  }
+  .brand > span:first-child {
+    width: 29px;
+    height: 29px;
+    border-radius: 7px 7px 14px 7px;
+    margin-right: 7px;
+  }
+  .topbar nav {
+    margin-left: auto;
+    gap: 16px;
+  }
+  .topbar nav a {
+    font-size: 10px;
+  }
+  .topbar nav a svg {
+    display: none;
+  }
+  .topbar nav a:first-child {
+    display: none;
+  }
+  .profile {
+    font-size: 0;
+    margin-left: 0;
+    max-width: 31px;
+    gap: 0;
+  }
+  .profile > span {
+    width: 27px;
+    height: 27px;
+    font-size: 10px;
+  }
+  .main {
+    padding: 30px 18px;
+  }
+  .pageHeading {
+    align-items: flex-start;
+    gap: 18px;
+    flex-direction: column;
+    margin-bottom: 25px;
+  }
+  .pageHeading p {
+    font-size: 11px;
+    line-height: 1.6;
+    margin-bottom: 9px;
+  }
+  .pageHeading h1 {
+    font-size: 35px;
+  }
+  .pageHeading > div > span {
+    font-size: 12px;
+  }
+  .pageHeading .primaryButton {
+    width: 100%;
+  }
+  .accountNotice {
+    padding: 19px 16px;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 25px;
+  }
+  .noticeIcon {
+    height: 35px;
+    width: 35px;
+  }
+  .accountNotice > div {
+    flex: 1;
+    min-width: 200px;
+  }
+  .accountNotice strong {
+    font-size: 12px;
+  }
+  .accountNotice p {
+    font-size: 11px;
+  }
+  .accountNotice > a {
+    margin-left: 47px;
+    font-size: 11px;
+  }
+  .listToolbar {
+    margin-bottom: 20px;
+  }
+  .listToolbar > div {
+    gap: 22px;
+  }
+  .listToolbar button {
+    font-size: 11px;
+  }
+  .cardGrid {
+    grid-template-columns: 1fr;
+  }
+  .cardArt {
+    min-height: 235px;
+  }
+  .cardArt h3 {
+    font-size: 34px;
+  }
+  .cardArt > div > span {
+    font-size: 10px;
+  }
+  .cardArt p {
+    font-size: 10px;
+  }
+  .cardBody {
+    padding: 21px;
+  }
+  .cardName strong {
+    font-size: 15px;
+  }
+  .cardName > span {
+    font-size: 10px;
+  }
+  .cardDate {
+    font-size: 12px;
+  }
+  .cardActions > span {
+    font-size: 10px;
+  }
+  .cardActions > a {
+    font-size: 12px;
+  }
+  .empty {
+    padding: 39px 21px;
+    min-height: 350px;
+  }
+  .empty h2 {
+    font-size: 27px;
+  }
+  .empty p {
+    font-size: 12px;
+  }
+  .helpSidebar {
+    grid-template-columns: 1fr;
+    gap: 19px;
+    margin-top: 5px;
+  }
+  .guide {
+    grid-row: auto;
+    padding: 25px;
+    border-radius: 10px 10px 42px 10px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 20px;
+  }
+  .guideIcon {
+    display: none;
+  }
+  .guide h2 {
+    font-size: 26px;
+    grid-row: 1/3;
+    margin: 0;
+    align-self: center;
+  }
+  .guide p {
+    font-size: 10px;
+    margin-top: 0;
+    margin-bottom: 14px;
+  }
+  .guide > a {
+    font-size: 10px;
+  }
+  .tip {
+    padding: 0 4px;
+  }
+  .bottomNote {
+    font-size: 10px;
+    padding-top: 27px;
+  }
+  .error {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .confirmation {
+    padding: 16px;
+  }
+  .confirmation button,
+  .confirmation a {
+    font-size: 10px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .loading svg {
+    animation: none;
+  }
+}
+.sessions {
+  margin-top: 35px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--surface);
+  padding: 23px 25px;
+  max-width: calc(100% - 295px);
+}
+.sessionsHeading {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  align-items: flex-start;
+}
+.sessions h2 {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0;
+}
+.sessionsHeading p,
+.sessionHint {
+  font-size: 11px;
+  line-height: 1.8;
+  color: var(--muted);
+  margin: 8px 0 15px;
+}
+.sessions button {
+  background: none;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  color: var(--primary);
+  padding: 7px 10px;
+  font: inherit;
+  font-size: 10px;
+  cursor: pointer;
+}
+.sessions button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.device {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 17px 0;
+  border-top: 1px solid var(--line);
+}
+.device > svg {
+  color: var(--muted);
+  flex-shrink: 0;
+}
+.device > div {
+  flex: 1;
+}
+.device strong {
+  font-size: 11px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  flex-wrap: wrap;
+}
+.device strong > span {
+  font-size: 9px;
+  color: var(--primary);
+  background: #f4ecdf;
+  border-radius: 4px;
+  padding: 3px 5px;
+}
+.device small {
+  display: block;
+  font-size: 10px;
+  color: var(--muted);
+  margin-top: 7px;
+}
+.deviceError {
+  color: #943c2f;
+  font-size: 11px;
+  line-height: 1.8;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 12px 0;
+}
+.logoutConfirm {
+  padding: 15px;
+  background: #fff6e6;
+  border-radius: 6px;
+  font-size: 11px;
+  line-height: 1.8;
+  margin-top: 13px;
+}
+.logoutConfirm p {
+  margin: 0 0 13px;
+}
+.logoutConfirm button {
+  margin-right: 9px;
+  background: #fff;
+}
+.logoutConfirm button:first-of-type {
+  color: #943c2f;
+  border-color: #d2b29d;
+}
+@media (max-width: 1050px) {
+  .sessions {
+    max-width: calc(100% - 254px);
+  }
+}
+@media (max-width: 800px) {
+  .sessions {
+    max-width: none;
+  }
+}
+@media (max-width: 580px) {
+  .sessions {
+    padding: 20px 17px;
+  }
+  .sessionsHeading {
+    flex-direction: column;
+    gap: 4px;
+  }
+  .sessionsHeading > button {
+    margin-bottom: 14px;
+  }
+  .device {
+    gap: 9px;
+  }
+  .device strong {
+    font-size: 10px;
+  }
+  .device small {
+    font-size: 9px;
+  }
+  .sessions button {
+    font-size: 9px;
+  }
+  .deviceError {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+}

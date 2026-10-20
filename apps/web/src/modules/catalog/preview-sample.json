@@ -1,0 +1,91 @@
+{
+  "defaultLocale": "uz-Latn",
+  "enabledLocales": ["uz-Latn", "uz-Cyrl", "en", "ru"],
+  "eventType": "wedding",
+  "startsAt": "2027-06-12T17:00",
+  "timezone": "Asia/Tashkent",
+  "program": [
+    { "id": "sample-arrival", "time": "16:00" },
+    { "id": "sample-meal", "time": "16:30" },
+    { "id": "sample-music", "time": "17:00" },
+    { "id": "sample-farewell", "time": "19:00" }
+  ],
+  "content": {
+    "uz-Latn": {
+      "title": "Bizning unutilmas kunimiz",
+      "people": ["Jasur", "Madina"],
+      "hosts": "Karimovlar oilasi",
+      "greeting": "Assalomu alaykum, aziz mehmon!",
+      "personalGreeting": "Assalomu alaykum, {name}!",
+      "message": "Hayotimizdagi quvonchli kunimizda sizni yonimizda ko‘rishdan mamnun bo‘lamiz.",
+      "eventLabel": "Nikoh to‘yi",
+      "venueName": "Zarafshon tantanalar saroyi",
+      "address": "Toshkent shahri, Yunusobod tumani",
+      "landmark": "Amir Temur xiyoboni yaqinida",
+      "programHeading": "To‘y dasturi",
+      "programTitles": {
+        "sample-arrival": "Mehmonlarni kutib olish",
+        "sample-meal": "Tabriklar va dasturxon",
+        "sample-music": "Raqs va kuy-qo‘shiqlar",
+        "sample-farewell": "Yakuniy so‘z"
+      }
+    },
+    "uz-Cyrl": {
+      "title": "Бизнинг унутилмас кунимиз",
+      "people": ["Жасур", "Мадина"],
+      "hosts": "Каримовлар оиласи",
+      "greeting": "Ассалому алайкум, азиз меҳмон!",
+      "personalGreeting": "Ассалому алайкум, {name}!",
+      "message": "Ҳаётимиздаги қувончли кунимизда сизни ёнимизда кўришдан мамнун бўламиз.",
+      "eventLabel": "Никоҳ тўйи",
+      "venueName": "Зарафшон тантаналар саройи",
+      "address": "Тошкент шаҳри, Юнусобод тумани",
+      "landmark": "Амир Темур хиёбони яқинида",
+      "programHeading": "Тўй дастури",
+      "programTitles": {
+        "sample-arrival": "Меҳмонларни кутиб олиш",
+        "sample-meal": "Табриклар ва дастурхон",
+        "sample-music": "Рақс ва куй-қўшиқлар",
+        "sample-farewell": "Якуний сўз"
+      }
+    },
+    "en": {
+      "title": "Our Unforgettable Day",
+      "people": ["Jasur", "Madina"],
+      "hosts": "The Karimov family",
+      "greeting": "Hello, dear guest!",
+      "personalGreeting": "Hello, {name}!",
+      "message": "We would be delighted to celebrate this joyful day with you.",
+      "eventLabel": "Wedding celebration",
+      "venueName": "Zarafshon Celebration Palace",
+      "address": "Yunusabad district, Tashkent",
+      "landmark": "Near Amir Temur Square",
+      "programHeading": "Wedding program",
+      "programTitles": {
+        "sample-arrival": "Welcome and reception",
+        "sample-meal": "Toasts and dinner",
+        "sample-music": "Music and dancing",
+        "sample-farewell": "Farewell"
+      }
+    },
+    "ru": {
+      "title": "Наш незабываемый день",
+      "people": ["Джасур", "Мадина"],
+      "hosts": "Семья Каримовых",
+      "greeting": "Ассалому алейкум, дорогой гость!",
+      "personalGreeting": "Ассалому алейкум, {name}!",
+      "message": "Будем рады видеть вас рядом с нами в этот радостный день.",
+      "eventLabel": "Свадебное торжество",
+      "venueName": "Дворец торжеств «Зарафшон»",
+      "address": "Юнусабадский район, Ташкент",
+      "landmark": "Рядом с площадью Амира Темура",
+      "programHeading": "Программа свадьбы",
+      "programTitles": {
+        "sample-arrival": "Встреча гостей",
+        "sample-meal": "Поздравления и ужин",
+        "sample-music": "Музыка и танцы",
+        "sample-farewell": "Заключительное слово"
+      }
+    }
+  }
+}
