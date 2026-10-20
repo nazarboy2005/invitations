@@ -16,6 +16,7 @@ import {
   LayoutTemplate,
   LoaderCircle,
   MapPin,
+  Mic2,
   Music2,
   Plus,
   Save,
@@ -23,6 +24,7 @@ import {
   Settings2,
   ShieldCheck,
   Smartphone,
+  Square,
   Trash2,
   Users,
   X,
@@ -153,6 +155,9 @@ export function Studio({
   const [imageUrl, setImageUrl] = useState("");
   const [audioPreview, setAudioPreview] = useState("");
   const [audioName, setAudioName] = useState("");
+  const [voicePreview, setVoicePreview] = useState("");
+  const [voiceName, setVoiceName] = useState("");
+  const [voiceRecording, setVoiceRecording] = useState(false);
   const [savedMusic, setSavedMusic] = useState<
     Array<{ id: string; assetId: string | null; url: string; filename: string }>
   >([]);
@@ -172,6 +177,11 @@ export function Studio({
   );
   const dialogRef = useRef<HTMLDivElement>(null);
   const previousFocus = useRef<HTMLElement | null>(null);
+  const voiceRecorder = useRef<MediaRecorder | null>(null);
+  const voiceStream = useRef<MediaStream | null>(null);
+  const voiceChunks = useRef<Blob[]>([]);
+  const voiceTimeout = useRef<number | null>(null);
+  const discardVoiceOnStop = useRef(false);
   invitationRef.current = invitation;
 
   useEffect(() => {
@@ -379,8 +389,15 @@ export function Studio({
   useEffect(
     () => () => {
       if (audioPreview) URL.revokeObjectURL(audioPreview);
+      if (voicePreview) URL.revokeObjectURL(voicePreview);
+      if (voiceTimeout.current !== null) window.clearTimeout(voiceTimeout.current);
+      if (voiceRecorder.current?.state === "recording") {
+        discardVoiceOnStop.current = true;
+        voiceRecorder.current.stop();
+      }
+      voiceStream.current?.getTracks().forEach((track) => track.stop());
     },
-    [audioPreview],
+    [audioPreview, voicePreview],
   );
 
   useEffect(() => {
@@ -474,7 +491,7 @@ export function Studio({
   const authoredPreview = hasAuthoredInvitationContent(invitation);
   const previewInvitation =
     section === 2 && !authoredPreview
-      ? createTemplatePreviewSample(invitation.templateId)
+      ? createTemplatePreviewSample(invitation.templateId, invitation)
       : invitation;
   const identityLocked = invitation.status !== "draft";
   function update(patch: Partial<Invitation>) {
@@ -661,13 +678,84 @@ export function Studio({
       setBusy(false);
     }
   }
-  async function upload(file: File, kind: "image" | "audio") {
+  async function startVoiceRecording() {
+    setError("");
+    if (!navigator.mediaDevices?.getUserMedia || typeof MediaRecorder === "undefined") {
+      setError("Bu brauzerda ovoz yozib bo'lmaydi. MP3, WAV yoki M4A fayl yuklang.");
+      return;
+    }
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      voiceStream.current = stream;
+      const mimeType = [
+        "audio/webm;codecs=opus",
+        "audio/webm",
+        "audio/mp4",
+      ].find((type) => MediaRecorder.isTypeSupported(type));
+      const recorder = mimeType ? new MediaRecorder(stream, { mimeType }) : new MediaRecorder(stream);
+      voiceChunks.current = [];
+      discardVoiceOnStop.current = false;
+      voiceRecorder.current = recorder;
+      recorder.addEventListener("dataavailable", (event) => {
+        if (event.data.size) voiceChunks.current.push(event.data);
+      });
+      recorder.addEventListener("stop", () => {
+        const blob = new Blob(voiceChunks.current, {
+          type: recorder.mimeType || "audio/webm",
+        });
+        const recordedType = blob.type.split(";")[0].toLowerCase();
+        const extension = recordedType === "audio/mp4" ? "m4a" : "webm";
+        voiceStream.current?.getTracks().forEach((track) => track.stop());
+        voiceStream.current = null;
+        voiceRecorder.current = null;
+        if (voiceTimeout.current !== null)
+          window.clearTimeout(voiceTimeout.current);
+        voiceTimeout.current = null;
+        if (discardVoiceOnStop.current) {
+          discardVoiceOnStop.current = false;
+          return;
+        }
+        setVoiceRecording(false);
+        if (blob.size < 16) {
+          setError("Ovoz yozuvi bo'sh chiqdi. Qayta urinib ko'ring.");
+          return;
+        }
+        if (blob.size > 15 * 1024 * 1024) {
+          setError("Yozuv 15 MB dan katta. Qisqaroq ovoz yozib ko'ring.");
+          return;
+        }
+        if (!["audio/webm", "audio/mp4"].includes(recordedType)) {
+          setError("Brauzer ovozni mos formatda yozmadi. MP3, WAV yoki M4A yuklang.");
+          return;
+        }
+        void upload(
+          new File([blob], `voice-greeting.${extension}`, { type: blob.type }),
+          "voice",
+        );
+      }, { once: true });
+      recorder.start(1000);
+      setVoiceRecording(true);
+      voiceTimeout.current = window.setTimeout(
+        () => recorder.state === "recording" && recorder.stop(),
+        120_000,
+      );
+    } catch {
+      voiceStream.current?.getTracks().forEach((track) => track.stop());
+      voiceStream.current = null;
+      setError("Mikrofon ruxsati berilmadi. Ruxsat bering yoki audio fayl yuklang.");
+    }
+  }
+  function stopVoiceRecording() {
+    if (voiceRecorder.current?.state === "recording") voiceRecorder.current.stop();
+  }
+  async function upload(file: File, kind: "image" | "audio" | "voice") {
     if (!invitationRef.current) return;
     setError("");
     const mimeFallback: Record<string, string> = {
       mp3: "audio/mpeg",
       m4a: "audio/mp4",
       wav: "audio/wav",
+      webm: "audio/webm",
       ogg: "audio/ogg",
       jpg: "image/jpeg",
       jpeg: "image/jpeg",
@@ -675,16 +763,23 @@ export function Studio({
       webp: "image/webp",
     };
     const contentType =
-      file.type ||
+      file.type.split(";")[0] ||
       mimeFallback[file.name.split(".").pop()?.toLowerCase() ?? ""] ||
       "";
     if (
       (kind === "image" &&
         !["image/jpeg", "image/png", "image/webp"].includes(contentType)) ||
-      (kind === "audio" && !contentType.startsWith("audio/"))
+      (kind !== "image" &&
+        ![
+          "audio/mpeg",
+          "audio/wav",
+          "audio/mp4",
+          "audio/x-m4a",
+          ...(kind === "voice" ? ["audio/webm"] : []),
+        ].includes(contentType))
     ) {
       setError(
-        "Mos fayl tanlang: rasm uchun JPG, PNG yoki WebP; musiqa uchun audio fayl.",
+        "Rasm uchun JPG, PNG yoki WebP; musiqa uchun MP3, WAV yoki M4A, ovozli tabrik uchun MP3, WAV, M4A yoki WebM tanlang.",
       );
       return;
     }
@@ -695,6 +790,9 @@ export function Studio({
     if (kind === "audio") {
       setAudioPreview(URL.createObjectURL(file));
       setAudioName(file.name);
+    } else if (kind === "voice") {
+      setVoicePreview(URL.createObjectURL(file));
+      setVoiceName(file.name);
     }
     setUploading(true);
     try {
@@ -705,7 +803,7 @@ export function Studio({
           filename: file.name,
           size: file.size,
           contentType,
-          kind,
+          kind: kind === "image" ? "image" : "audio",
           draftId: invitationRef.current.id,
         }),
       });
@@ -751,6 +849,16 @@ export function Studio({
           },
         });
         setAudioPreview("");
+      } else if (kind === "voice") {
+        update({
+          voiceMessage: {
+            enabled: true,
+            assetId: result.asset.id,
+            url: result.asset.url,
+            filename: file.name,
+          },
+        });
+        setVoicePreview("");
       } else
         update({
           gallery: [
@@ -1824,7 +1932,7 @@ export function Studio({
                     </span>
                     <input
                       type="file"
-                      accept="audio/*"
+                      accept="audio/mpeg,audio/wav,audio/mp4,audio/x-m4a"
                       disabled={uploading}
                       onChange={(event) => {
                         const file = event.target.files?.[0];
@@ -1869,6 +1977,97 @@ export function Studio({
                   <p className={styles.help}>
                     Musiqa qo‘shish majburiy emas. Ovoz mehmonning bosishi bilan
                     boshlanadi.
+                  </p>
+                </div>
+              )}
+              <Toggle
+                title="Ovozli tabrik"
+                description="Mehmonlar taklifnomani ochgach, ovozli tabrigingizni tinglay oladi."
+                checked={invitation.voiceMessage.enabled}
+                onChange={(enabled) => {
+                  if (!enabled && voiceRecording) return;
+                  update({
+                    voiceMessage: { ...invitation.voiceMessage, enabled },
+                  });
+                }}
+              />
+              {invitation.voiceMessage.enabled && (
+                <div className={styles.optionBody}>
+                  <label className={styles.audioUpload}>
+                    <Mic2 size={20} />
+                    <span>
+                      {uploading ? "Yuklanmoqda…" : "Ovozli tabrik yuklang"}
+                      <small>MP3, WAV, M4A yoki WebM (15 MB gacha)</small>
+                    </span>
+                    <input
+                      type="file"
+                      accept="audio/mpeg,audio/wav,audio/mp4,audio/x-m4a,audio/webm"
+                      disabled={uploading || voiceRecording}
+                      onChange={(event) => {
+                        const file = event.target.files?.[0];
+                        if (file) void upload(file, "voice");
+                        event.target.value = "";
+                      }}
+                    />
+                  </label>
+                  {voiceRecording ? (
+                    <button
+                      type="button"
+                      className={styles.textButton}
+                      onClick={stopVoiceRecording}
+                    >
+                      <Square size={16} /> Yozishni to'xtatish
+                    </button>
+                  ) : (
+                    <button
+                      type="button"
+                      className={styles.textButton}
+                      disabled={uploading}
+                      onClick={() => void startVoiceRecording()}
+                    >
+                      <Mic2 size={16} /> Mikrofondan ovoz yozish
+                    </button>
+                  )}
+                  <p className={styles.help}>
+                    {voiceRecording
+                      ? "Ovoz yozilmoqda. Ikki daqiqadan keyin yozuv avtomatik to'xtaydi."
+                      : "Ovoz yozish uchun mikrofonga ruxsat kerak."}
+                  </p>
+                  {(voicePreview || invitation.voiceMessage.url) && (
+                    <>
+                      <p className={styles.help}>
+                        {voicePreview
+                          ? `${voiceName} — faqat shu oynadagi sinov, hali yuklanmagan.`
+                          : invitation.voiceMessage.filename}
+                      </p>
+                      <audio
+                        controls
+                        preload="none"
+                        src={voicePreview || invitation.voiceMessage.url}
+                        className={styles.audio}
+                      />
+                      <button
+                        className={styles.textButton}
+                        onClick={() => {
+                          update({
+                            voiceMessage: {
+                              enabled: false,
+                              assetId: null,
+                              url: "",
+                              filename: "",
+                            },
+                          });
+                          setVoicePreview("");
+                          setVoiceName("");
+                        }}
+                      >
+                        <Trash2 size={14} />
+                        Ovozli tabrikni olib tashlash
+                      </button>
+                    </>
+                  )}
+                  <p className={styles.help}>
+                    Ovoz yozuvi alohida saqlanadi va fon musiqasini almashtirmaydi.
                   </p>
                 </div>
               )}

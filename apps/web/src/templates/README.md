@@ -1,9 +1,11 @@
 # Invitation templates
 
-Anor is the first Marxaba reference renderer under implementation. It is
-registered as unpublished and is not selectable until its remaining required
-integrations and asset permission are resolved. Do not treat its documented
-service limitations as completed integrations.
+Anor is the first Marxaba reference renderer. The next ten Marxaba nikoh
+references are also authorized for production integration and are tracked in
+`docs/templates/TEMPLATE_ROADMAP.md`. Anor and the ten-template batch remain
+unpublished and unselectable until their own documented completeness,
+integration, rights, and quality gates pass. Do not treat documented service
+limitations as completed integrations.
 
 Keep every future template in its own renderer, styles, assets, and motion
 implementation. When a reference source exists, integrate that exact complete
@@ -55,3 +57,12 @@ shared Marxaba runtime dependencies live beside them in `nikoh/shared`. The
 application adapter injects only contract data and public API identifiers.
 See `docs/templates/TEMPLATE_ROADMAP.md` for the full 46-template inventory,
 batch progress, and known gaps. Keep every copied source capture untouched.
+
+For silent visual QA of a full Marxaba preview, add `qaSilent=1` to the preview
+URL. This mutes background music and voice playback inside the preview frame
+while preserving the real opening interaction and animations. The flag is
+preview-only and is never sent to public invitation rendering.
+
+For ephemeral responsive-name stress checks on an empty preview, add
+`qaLongNames=1` to the preview URL. It replaces only the centralized fixture
+names, never authored creator content or saved invitations.

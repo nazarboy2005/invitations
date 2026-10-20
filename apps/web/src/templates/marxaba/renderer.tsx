@@ -16,6 +16,7 @@ type Props = {
   preview?: boolean;
   fullPreview?: boolean;
   catalogMusic?: boolean;
+  silentPlayback?: boolean;
 };
 
 const sourceLocale: Record<Locale, string> = {
@@ -35,6 +36,7 @@ export function MarxabaInvitation({
   preview = false,
   fullPreview = false,
   catalogMusic = false,
+  silentPlayback = false,
 }: Props) {
   const frame = useRef<HTMLIFrameElement>(null);
   const initialized = useRef(false);
@@ -47,35 +49,40 @@ export function MarxabaInvitation({
   );
   const enabledLanguages = invitation.enabledLocales.map((item) => sourceLocale[item]);
   const message = useMemo(
-    () => ({
-      ...sourceData,
-      music: sourceData.music.enabled
+    () => {
+      const musicUrl = sourceData.music.enabled
         ? sourceData.music.url
         : catalogMusic
           ? CATALOG_PREVIEW_MUSIC.url
-          : "",
-      slug: preview ? "" : invitationId,
-      guestToken,
-      name: guestName,
-      defaultLang: sourceLocale[frameLocale],
-      languages: enabledLanguages,
-      languageSwitcher: true,
-      i18n: sourceData.music.enabled || catalogMusic
-        ? Object.fromEntries(
-            enabledLanguages.map((language) => [
-              language,
-              {
-                music: sourceData.music.enabled
-                  ? sourceData.music.url
-                  : CATALOG_PREVIEW_MUSIC.url,
-              },
-            ]),
-          )
-        : {},
-      preview,
-      status: preview ? "published" : invitation.status,
-      apiBase: `/api/public/invitations/${encodeURIComponent(invitationId)}`,
-    }),
+          : "";
+      return {
+        ...sourceData,
+        // Samarqand Kechasi's original runtime uses `dataTime` in its lock
+        // and opening sequence; the shared contract exposes `dateTime`.
+        ...(templateId === "samarqand-kechasi"
+          ? { dataTime: sourceData.dateTime }
+          : {}),
+        voiceMessage: invitation.voiceMessage.enabled
+          ? invitation.voiceMessage
+          : { enabled: false, assetId: null, url: "", filename: "" },
+        music: musicUrl,
+        slug: preview ? "" : invitationId,
+        guestToken,
+        name: guestName,
+        defaultLang: sourceLocale[frameLocale],
+        languages: enabledLanguages,
+        languageSwitcher: true,
+        silentPlayback: preview && silentPlayback,
+        i18n: musicUrl
+          ? Object.fromEntries(
+              enabledLanguages.map((language) => [language, { music: musicUrl }]),
+            )
+          : {},
+        preview,
+        status: preview ? "published" : invitation.status,
+        apiBase: `/api/public/invitations/${encodeURIComponent(invitationId)}`,
+      };
+    },
     [catalogMusic, enabledLanguages, frameLocale, guestName, guestToken, invitation.status, invitationId, preview, sourceData],
   );
   const frameUrl = `/templates/marxaba/nikoh/templates/${encodeURIComponent(templateId)}/index.html?lang=${sourceLocale[frameLocale]}`;
@@ -85,6 +92,10 @@ export function MarxabaInvitation({
     timezone: invitation.timezone,
     languages: enabledLanguages,
     music: message.music,
+    dateTime: message.dateTime,
+    dataTime: "dataTime" in message ? message.dataTime : undefined,
+    voiceMessage: message.voiceMessage,
+    silentPlayback: message.silentPlayback,
     rsvp: invitation.rsvp.enabled,
     wishes: invitation.wishes.enabled,
     gift: invitation.gift.enabled,

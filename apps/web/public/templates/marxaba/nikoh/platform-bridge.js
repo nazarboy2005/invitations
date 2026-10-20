@@ -7,6 +7,10 @@
   // a small font-size reduction and a final wrapping fallback.
   const fitStyles = document.createElement("style");
   fitStyles.dataset.platformNameFit = "";
+  if (location.pathname.includes("/sahifa/"))
+    document.documentElement.classList.add("platform-lang-offset");
+  if (location.pathname.includes("/bogi-eram/"))
+    document.documentElement.classList.add("platform-lang-below-greeting");
   fitStyles.textContent = `
     .intro__content,
     .intro__names {
@@ -15,16 +19,31 @@
     }
     .decode-name {
       min-width: 0 !important;
+      overflow: visible !important;
     }
     .platform-name-fit--wrap {
       max-width: 100% !important;
       overflow-wrap: anywhere !important;
     }
-    .platform-name-fit--wrap > [data-slot="groom"],
-    .platform-name-fit--wrap > [data-slot="bride"] {
+    .platform-name-fit--wrap > [data-slot="groom"]:not(.decode-name),
+    .platform-name-fit--wrap > [data-slot="bride"]:not(.decode-name) {
       min-width: 0 !important;
       max-width: 100% !important;
+      white-space: normal !important;
       overflow-wrap: anywhere !important;
+    }
+    [data-slot="groom"].platform-name-fit--single-wrap,
+    [data-slot="bride"].platform-name-fit--single-wrap {
+      display: block !important;
+      min-width: 0 !important;
+      max-width: var(--platform-name-fit-width, 100%) !important;
+      white-space: normal !important;
+      overflow-wrap: anywhere !important;
+    }
+    [data-slot="groom"]:not(.decode-name),
+    [data-slot="bride"]:not(.decode-name) {
+      white-space: nowrap !important;
+      overflow-wrap: normal !important;
     }
     .decode-name.platform-name-fit--single-wrap {
       height: auto !important;
@@ -36,8 +55,61 @@
     .decode-name.platform-name-fit--single-wrap > .glyph {
       white-space: normal !important;
     }
+    @media (max-width: 380px) {
+      [data-slot="groom"].platform-name-fit--long,
+      [data-slot="bride"].platform-name-fit--long {
+        display: block !important;
+        max-width: 100% !important;
+        font-size: clamp(18px, 7vw, 28px) !important;
+        line-height: 1.1 !important;
+        white-space: normal !important;
+        overflow-wrap: anywhere !important;
+      }
+      .decode-name.platform-name-fit--long {
+        width: 100% !important;
+        height: auto !important;
+        max-width: 100% !important;
+        overflow: visible !important;
+        font-size: clamp(18px, 7vw, 28px) !important;
+        line-height: 1.1 !important;
+        letter-spacing: normal !important;
+        white-space: normal !important;
+        overflow-wrap: anywhere !important;
+        text-align: center !important;
+      }
+      .decode-name.platform-name-fit--long > .glyph {
+        min-width: 0.42em !important;
+        white-space: normal !important;
+      }
+    }
     .platform-name-fit--wrap:is(.intro__names, .hero__names, .footer__names, .finale__names) {
       flex-wrap: wrap !important;
+    }
+    @media (max-width: 520px) {
+      .mh-lang {
+        top: calc(env(safe-area-inset-top, 0px) + 6px) !important;
+        right: 8px !important;
+        padding: 2px !important;
+      }
+      .platform-lang-offset .mh-lang {
+        top: calc(env(safe-area-inset-top, 0px) + 64px) !important;
+      }
+      .platform-lang-below-greeting .mh-lang {
+        top: calc(env(safe-area-inset-top, 0px) + 100px) !important;
+      }
+      .mh-lang button {
+        min-width: 26px !important;
+        min-height: 26px !important;
+        padding: 0 4px !important;
+        font-size: 10px !important;
+      }
+    }
+    @media (max-width: 360px) {
+      html,
+      body {
+        max-width: 100% !important;
+        overflow-x: clip !important;
+      }
     }
   `;
   document.head.append(fitStyles);
@@ -53,34 +125,54 @@
   ].join(",");
 
   function fitLongNames() {
-    // Some source designs position their opening name block with both `left`
-    // and `right` insets. Keep those authored bounds, then shrink only a name
-    // whose painted text is wider than that block. This avoids clipping in
-    // narrow invitation cards without changing the source font when it fits.
+    // Preserve each template's authored type whenever it fits its clipping
+    // canvas. If a name crosses that canvas, cap only that person's line and
+    // allow it to wrap instead of distorting or cutting off the text.
     document
       .querySelectorAll('[data-slot="groom"], [data-slot="bride"]')
       .forEach((name) => {
         if (name.closest(".marquee, .shoot-marquee")) return;
 
-        const lockup = name.closest(nameLockups);
-        const width = lockup?.clientWidth || 0;
-        name.style.removeProperty("font-size");
-        const baseSize = Number.parseFloat(getComputedStyle(name).fontSize);
-        if (!width || !baseSize) return;
+        const hasLongName = (name.textContent || "").trim().length > 24;
+        name.classList.toggle(
+          "platform-name-fit--long",
+          hasLongName && window.matchMedia("(max-width: 380px)").matches,
+        );
 
+        name.classList.remove("platform-name-fit--single-wrap");
+        name.style.removeProperty("--platform-name-fit-width");
         const range = document.createRange();
         range.selectNodeContents(name);
-        const paintedWidth = range.getBoundingClientRect().width;
-        if (!paintedWidth || paintedWidth <= width - 2) return;
+        const textRect = range.getBoundingClientRect();
+        if (!textRect.width || !textRect.height) return;
 
-        const scale = Math.max(0.5, Math.min(1, (width - 2) / paintedWidth));
-        name.style.fontSize = `${baseSize * scale}px`;
+        const clippingAncestors = [];
+        for (let ancestor = name.parentElement; ancestor; ancestor = ancestor.parentElement) {
+          const style = getComputedStyle(ancestor);
+          if (!/(hidden|clip)/.test(`${style.overflowX} ${style.overflowY}`)) continue;
+          const rect = ancestor.getBoundingClientRect();
+          if (rect.width > 0 && rect.height > 0) clippingAncestors.push(rect);
+        }
+        if (!clippingAncestors.length) return;
+
+        const rightEdge = Math.min(...clippingAncestors.map((rect) => rect.right));
+        if (textRect.right <= rightEdge + 1) return;
+
+        const available = Math.floor(rightEdge - textRect.left - 1);
+        if (available < 24) return;
+        name.style.setProperty("--platform-name-fit-width", `${available}px`);
+        name.classList.add("platform-name-fit--single-wrap");
       });
 
     // Sahifa reveals each name as animated glyph spans in an overflow-hidden
     // element. Its parent cannot report the clipped text width, so measure and
     // fit each name directly while leaving the original glyph animation intact.
     document.querySelectorAll(".decode-name").forEach((name) => {
+      const hasLongName = (name.textContent || "").trim().length > 24;
+      name.classList.toggle(
+        "platform-name-fit--long",
+        hasLongName && window.matchMedia("(max-width: 380px)").matches,
+      );
       name.style.removeProperty("font-size");
       name.classList.remove("platform-name-fit--single-wrap");
       const width = name.clientWidth || name.parentElement?.clientWidth || 0;
@@ -151,10 +243,202 @@
     childList: true,
     subtree: true,
   });
+  const visibilityClassObserver = new MutationObserver((records) => {
+    if (
+      records.some(
+        ({ target }) =>
+          target === document.documentElement ||
+          (target instanceof Element &&
+            target.matches("body, .intro, .hero, .page")),
+      )
+    )
+      scheduleNameFit();
+  });
+  visibilityClassObserver.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ["class"],
+    subtree: true,
+  });
   window.addEventListener("resize", scheduleNameFit, { passive: true });
+  document.addEventListener("transitionend", scheduleNameFit, true);
+  document.addEventListener("animationend", scheduleNameFit, true);
+  document.addEventListener(
+    "click",
+    (event) => {
+      if (!(event.target instanceof Element) || !event.target.closest("#open-invitation, .seal"))
+        return;
+      let attempts = 0;
+      const revealFit = window.setInterval(() => {
+        scheduleNameFit();
+        attempts += 1;
+        if (attempts >= 16) window.clearInterval(revealFit);
+      }, 100);
+    },
+    true,
+  );
   window.addEventListener("load", scheduleNameFit, { once: true });
   if (document.fonts?.ready) document.fonts.ready.then(scheduleNameFit);
   scheduleNameFit();
+
+  // Voice greeting is a separate, optional recording. Keep playback under an
+  // explicit visitor gesture and reuse the invitation's normal public media URL.
+  const voiceLabels = {
+    uz: { play: "Ovozli tabrikni tinglash", pause: "Ovozli tabrikni to‘xtatish", failed: "Ovozli tabrikni ijro etib bo‘lmadi" },
+    "uz-Cyrl": { play: "Овозли табрикни тинглаш", pause: "Овозли табрикни тўхтатиш", failed: "Овозли табрикни ижро этиб бўлмади" },
+    en: { play: "Play voice greeting", pause: "Pause voice greeting", failed: "Voice greeting could not be played" },
+    ru: { play: "Воспроизвести голосовое поздравление", pause: "Приостановить голосовое поздравление", failed: "Не удалось воспроизвести голосовое поздравление" },
+  };
+  const voiceStyle = document.createElement("style");
+  voiceStyle.textContent = `
+    .mh-voice-button {
+      position: fixed; left: max(16px, env(safe-area-inset-left));
+      bottom: max(16px, env(safe-area-inset-bottom)); z-index: 1000;
+      display: inline-grid; place-items: center; width: 48px; height: 48px;
+      border: 1px solid currentColor; border-radius: 50%;
+      color: var(--gold, #725433); background: rgba(255, 252, 245, .96);
+      box-shadow: 0 3px 14px rgba(25, 18, 10, .2); font: inherit;
+      font-size: 20px; cursor: pointer; -webkit-tap-highlight-color: transparent;
+    }
+    .mh-voice-button[hidden] { display: none !important; }
+    .mh-voice-button:focus-visible { outline: 3px solid currentColor; outline-offset: 3px; }
+    @media (prefers-reduced-motion: reduce) {
+      .mh-voice-button { transition: none !important; animation: none !important; }
+    }
+  `;
+  document.head.append(voiceStyle);
+  let voiceApi = null;
+  let voiceAudio = null;
+  let voiceButton = null;
+  let voiceUrl = "";
+  let invitationOpened = false;
+
+  function updateVoiceButton(playing) {
+    if (!voiceButton) return;
+    const locale = document.documentElement.lang || "uz";
+    const labels = voiceLabels[locale] || voiceLabels.uz;
+    voiceButton.textContent = playing ? "Ⅱ" : "▶";
+    voiceButton.setAttribute("aria-pressed", String(playing));
+    voiceButton.setAttribute("aria-label", playing ? labels.pause : labels.play);
+    voiceButton.title = playing ? labels.pause : labels.play;
+  }
+
+  function syncVoiceMessage(data) {
+    const voice = data?.voiceMessage;
+    const nextUrl = voice?.enabled && typeof voice.url === "string" ? voice.url : "";
+    if (nextUrl === voiceUrl) {
+      if (voiceAudio) voiceAudio.muted = data?.silentPlayback === true;
+      return;
+    }
+    voiceAudio?.pause();
+    voiceAudio?.remove();
+    voiceButton?.remove();
+    voiceAudio = null;
+    voiceButton = null;
+    voiceUrl = nextUrl;
+    if (!nextUrl) return;
+
+    voiceAudio = document.createElement("audio");
+    voiceAudio.preload = "none";
+    voiceAudio.muted = data?.silentPlayback === true;
+    voiceAudio.src = nextUrl;
+    voiceAudio.addEventListener("ended", () => updateVoiceButton(false));
+    voiceAudio.addEventListener("pause", () => updateVoiceButton(false));
+    voiceButton = document.createElement("button");
+    voiceButton.type = "button";
+    voiceButton.className = "mh-voice-button";
+    voiceButton.hidden = !invitationOpened;
+    voiceButton.addEventListener("click", async () => {
+      if (!voiceAudio) return;
+      if (!voiceAudio.paused) {
+        voiceAudio.pause();
+        return;
+      }
+      try {
+        await voiceAudio.play();
+        updateVoiceButton(true);
+      } catch {
+        const locale = document.documentElement.lang || "uz";
+        voiceButton?.setAttribute("aria-label", (voiceLabels[locale] || voiceLabels.uz).failed);
+      }
+    });
+    updateVoiceButton(false);
+    document.body.append(voiceButton, voiceAudio);
+  }
+
+  function connectVoiceMessage() {
+    const api = window.Marhamat;
+    if (!api?.on) return false;
+    voiceApi = api;
+    api.on("ready", () => syncVoiceMessage(api.data));
+    api.on("open", () => {
+      invitationOpened = true;
+      if (voiceButton) voiceButton.hidden = false;
+      scheduleNameFit();
+      window.setTimeout(scheduleNameFit, 300);
+      window.setTimeout(scheduleNameFit, 1000);
+    });
+    syncVoiceMessage(api.data);
+    syncHeroDate(api.data);
+    return true;
+  }
+
+  // The Sahifa source initializes this day slot as "00" in its hero even
+  // though the shared runtime has already populated the rest of the date.
+  // Read the canonical date from the same invitation payload and repair only
+  // that mismatched hero slot; all other template-authored date layouts remain
+  // untouched.
+  function syncHeroDate(data) {
+    const day = data?.date?.day;
+    if (day == null || day === "") return;
+    const heroDay = document.querySelector('.hero__date [data-slot="date.day"]');
+    if (heroDay && heroDay.textContent?.trim() !== String(day))
+      heroDay.textContent = String(day);
+  }
+
+  window.addEventListener("load", () => {
+    if (!connectVoiceMessage()) {
+      const retry = window.setInterval(() => {
+        if (connectVoiceMessage()) window.clearInterval(retry);
+      }, 100);
+      window.setTimeout(() => window.clearInterval(retry), 5000);
+    }
+  }, { once: true });
+  window.addEventListener("message", (event) => {
+    if (
+      event.origin !== window.location.origin ||
+      event.source !== window.parent ||
+      event.data?.type !== "marxaba:update"
+    ) return;
+    requestAnimationFrame(() => syncVoiceMessage(voiceApi?.data || event.data.payload));
+  });
+
+  document.addEventListener("click", (event) => {
+    if (voiceButton && event.target instanceof Node && voiceButton.contains(event.target)) return;
+    if (document.documentElement.classList.contains("is-locked")) return;
+    invitationOpened = true;
+    // Some reference templates remove the root lock themselves without
+    // emitting Marhamat's `open` event. Reveal the shared locale control once
+    // that same unlock has happened so language switching remains available.
+    document.querySelectorAll(".mh-lang.is-hidden").forEach((control) => {
+      control.classList.remove("is-hidden");
+    });
+    if (voiceButton) voiceButton.hidden = false;
+  }, true);
+
+  // A few source openers remove `is-locked` during their own click handler,
+  // after the capture-phase click above. Observe that real state transition
+  // so their language and voice controls are exposed as well.
+  new MutationObserver(() => {
+    if (document.documentElement.classList.contains("is-locked")) return;
+    invitationOpened = true;
+    document.querySelectorAll(".mh-lang.is-hidden").forEach((control) => {
+      control.classList.remove("is-hidden");
+    });
+    if (voiceButton) voiceButton.hidden = false;
+  }).observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ["class"],
+  });
 
   try {
     const value = window.name;

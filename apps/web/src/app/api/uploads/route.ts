@@ -50,6 +50,7 @@ const inputSchema = z.object({
     "audio/wav",
     "audio/mp4",
     "audio/x-m4a",
+    "audio/webm",
   ]),
   kind: z.enum(["image", "audio"]),
   draftId: z.uuid(),
@@ -93,6 +94,7 @@ export async function POST(request: Request) {
       "audio/wav": "wav",
       "audio/mp4": "m4a",
       "audio/x-m4a": "m4a",
+      "audio/webm": "webm",
     }[input.contentType];
     const id = randomUUID(),
       key = `creators/${user.id}/${input.draftId}/${id}.${extension}`,

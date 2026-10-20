@@ -134,7 +134,10 @@
     document.fonts?.ready?.then(() => { paint(); texture.needsUpdate = true; });
     const texture = new T.CanvasTexture(canvas);
     texture.colorSpace = T.SRGBColorSpace;
-    texture.anisotropy = Math.min(4, renderer.capabilities.getMaxAnisotropy());
+    const maxAnisotropy = renderer?.capabilities?.getMaxAnisotropy?.();
+    texture.anisotropy = Number.isFinite(maxAnisotropy)
+      ? Math.min(4, Math.max(1, maxAnisotropy))
+      : 1;
     texture.needsUpdate = true;
     return texture;
   }
@@ -176,8 +179,11 @@
       const key=new T.DirectionalLight(0xffd48a,2.4); key.position.set(-2,5,6); scene.add(key);
       const fill=new T.PointLight(0x8fcbd0,1.2,18); fill.position.set(3,2,4); scene.add(fill);
       const tex=new T.TextureLoader().load('art/carpet.webp',loaded=>{
+        // TextureLoader can finish after a WebGL context loss or scene teardown.
+        // Check the shared renderer and mesh before touching GPU capabilities.
+        if(!rug||!renderer||renderer.getContext().isContextLost()){tex.dispose();return;}
         const composed=makeFlightCarpetTexture(T,loaded.image);
-        if(!rug||!renderer){composed.dispose();tex.dispose();return;}
+        if(!rug||!renderer||renderer.getContext().isContextLost()){composed.dispose();tex.dispose();return;}
         rug.material.uniforms.uMap.value=composed;
         carpetTexture=composed;
         tex.dispose();

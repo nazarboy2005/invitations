@@ -108,6 +108,13 @@ References checked on 2026-10-19: Google autocomplete https://developers.google.
 - Audio loading/conversion must not block displaying the invitation. Creator replacement/removal follows the existing editing deadline.
 - Browser behavior reference checked on 2026-10-19: https://developer.mozilla.org/en-US/docs/Web/Media/Guides/Autoplay. Requirement/design record only; no upload or player implemented.
 
+## Optional voice greeting
+
+- User requirement (2026-10-20): voice support must be included with the remaining invitation-template work.
+- Initial implementation choice for the Marxaba batch: keep one optional voice greeting separate from looping background music. Creators may upload MP3, WAV, M4A, or WebM, or record directly in the editor with an explicit microphone action (maximum two minutes and 15 MB). The invitation stores its own media reference, template switching preserves it, and the guest starts playback with an explicit accessible, localized play/pause control after opening. Never autoplay voice audio.
+- Voice assets use the existing owner-authenticated audio upload flow and are publicly readable only when referenced by a published invitation. The catalog sample never includes a voice recording.
+- The uploaded or recorded greeting is one recording shared across invitation languages. Separate locale-specific voice recordings are not supported; the editor control follows the optional-feature settings and the guest player is provided by the shared platform bridge.
+
 ## Telegram authentication and invitation ownership
 
 User requirements:
@@ -385,6 +392,13 @@ Development agents are distinct from production queue workers. The running app w
 - This request is for the implementation brief only; it does not itself resume reference integration in this session. Apply the existing modular renderer, shared-data, language, optional-feature, and reference-preservation requirements when integration is authorized.
 
 ## Shared template preview sample data (2026-10-20)
+
+- Current scope correction (2026-10-20): the user authorized preparing all ten
+  Marxaba nikoh templates listed in `docs/templates/TEMPLATE_ROADMAP.md` after
+  the earlier Anor-first restriction. Continue the full batch without waiting
+  for per-template approval. This authorizes local implementation and QA only;
+  keep each template unpublished/unselectable until its own documented gates
+  pass. Do not apply a live migration or deploy externally.
 
 - Confirmed: use one shared `apps/web/src/modules/catalog/preview-sample.json` fixture for catalog and the initial template-selection stage. It contains consistent sample names, family/hosts, event date and time, venue, greeting, invitation text, event label, and repeatable program entries in Uzbek Latin, Uzbek Cyrillic, English, and Russian.
 - User correction (2026-10-20): use Asadbek and Gulhayo as the shared example names in every locale's sample fixture.

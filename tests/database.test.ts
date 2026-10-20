@@ -180,6 +180,12 @@ test("invitation JSON snapshot retains language variants and stable media IDs th
     url: "https://media.example.com/music.mp3",
     filename: "our-song.mp3",
   };
+  draft.voiceMessage = {
+    enabled: true,
+    assetId: randomUUID(),
+    url: "https://media.example.com/voice-greeting.m4a",
+    filename: "voice-greeting.m4a",
+  };
   await db.query(
     "INSERT INTO media_assets(id,owner_id,draft_id,object_key,url,filename,mime_type,size_bytes,visibility,status) VALUES($1,$2,$3,'owner/photo.webp',$4,'photo.webp','image/webp',512,'public','ready')",
     [assetId, owner, draft.id, draft.gallery[0].url],
@@ -201,6 +207,10 @@ test("invitation JSON snapshot retains language variants and stable media IDs th
   assert.deepEqual(record.rows[0].data, switched);
   assert.equal(record.rows[0].data.gallery[0].id, assetId);
   assert.equal(record.rows[0].data.music.assetId, draft.music.assetId);
+  assert.equal(
+    record.rows[0].data.voiceMessage.assetId,
+    draft.voiceMessage.assetId,
+  );
   assert.equal(record.rows[0].data.content.ru.greeting, "Дорогие гости!");
   assert.equal(record.rows[0].template_id, "anor");
   const media = await db.query<{ object_key: string; draft_id: string }>(

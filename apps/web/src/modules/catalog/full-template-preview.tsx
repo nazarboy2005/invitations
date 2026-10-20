@@ -13,6 +13,7 @@ import { isMarxabaTemplate, MarxabaInvitation } from "@/templates/marxaba";
 import { readBrowserDraft } from "@/modules/studio/draft-storage";
 import {
   createTemplatePreviewSample,
+  createLongNamePreview,
   hasAuthoredInvitationContent,
 } from "./preview-sample";
 import styles from "./full-template-preview.module.css";
@@ -26,11 +27,15 @@ export function FullTemplatePreview({
   canSelect,
   draftId,
   demo = false,
+  silentPlayback = false,
+  longNames = false,
 }: {
   template: TemplateDefinition;
   canSelect: boolean;
   draftId?: string;
   demo?: boolean;
+  silentPlayback?: boolean;
+  longNames?: boolean;
 }) {
   const [invitation, setInvitation] = useState<Invitation | null>(null);
   const [catalogPreview, setCatalogPreview] = useState(true);
@@ -71,15 +76,15 @@ export function FullTemplatePreview({
       const resolved =
         candidate && (!demo || candidateHasContent)
           ? { ...candidate, templateId: template.id }
-          : createTemplatePreviewSample(template.id);
+          : createTemplatePreviewSample(template.id, candidate ?? undefined);
       setCatalogPreview(!candidateHasContent);
-      setInvitation(resolved);
+      setInvitation(longNames && !candidateHasContent ? createLongNamePreview(resolved) : resolved);
     }
     void load();
     return () => {
       active = false;
     };
-  }, [demo, draftId, template.id]);
+  }, [demo, draftId, longNames, template.id]);
 
   const returnHref = draftId
     ? `/studio?draft=${encodeURIComponent(draftId)}`
@@ -122,6 +127,7 @@ export function FullTemplatePreview({
           preview
           fullPreview
           catalogMusic={catalogPreview}
+          silentPlayback={silentPlayback}
         />
       ) : (
         <div className={styles.unsupported}>

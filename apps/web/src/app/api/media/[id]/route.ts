@@ -27,6 +27,9 @@ export async function GET(
               data->'music' @> jsonb_build_object(
                 'enabled', true, 'assetId', ${id}, 'url', ${mediaUrl}
               )
+              OR data->'voiceMessage' @> jsonb_build_object(
+                'enabled', true, 'assetId', ${id}, 'url', ${mediaUrl}
+              )
               OR EXISTS (
                 SELECT 1 FROM jsonb_array_elements(
                   COALESCE(data->'gallery', '[]'::jsonb)

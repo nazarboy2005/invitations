@@ -100,6 +100,14 @@ export const invitationSchema = z
       url: safeUrl,
       filename: short,
     }),
+    voiceMessage: z
+      .object({
+        enabled: z.boolean(),
+        assetId: z.string().max(100).nullable(),
+        url: safeUrl,
+        filename: short,
+      })
+      .default({ enabled: false, assetId: null, url: "", filename: "" }),
     gift: z.object({
       enabled: z.boolean(),
       receiptUploadEnabled: z.boolean(),
@@ -145,6 +153,16 @@ export const invitationSchema = z
         code: "custom",
         path: ["templateId"],
         message: "A published invitation must have a template",
+      });
+    if (
+      value.status === "published" &&
+      value.voiceMessage.enabled &&
+      (!value.voiceMessage.url || !value.voiceMessage.assetId)
+    )
+      ctx.addIssue({
+        code: "custom",
+        path: ["voiceMessage", "url"],
+        message: "An enabled voice greeting must include an uploaded audio file",
       });
     for (const locale of value.enabledLocales)
       if (!value.content[locale])
@@ -354,6 +372,7 @@ export function createInvitation(
     story: [],
     gallery: [],
     music: { enabled: false, assetId: null, url: "", filename: "" },
+    voiceMessage: { enabled: false, assetId: null, url: "", filename: "" },
     gift: {
       enabled: false,
       receiptUploadEnabled: false,

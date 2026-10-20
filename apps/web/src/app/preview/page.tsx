@@ -20,6 +20,8 @@ export default async function PreviewPage({
     template?: string | string[];
     draft?: string | string[];
     demo?: string | string[];
+    qaSilent?: string | string[];
+    qaLongNames?: string | string[];
   }>;
 }) {
   const params = await searchParams;
@@ -28,6 +30,12 @@ export default async function PreviewPage({
     : params.template;
   const draftId = Array.isArray(params.draft) ? params.draft[0] : params.draft;
   const demoParam = Array.isArray(params.demo) ? params.demo[0] : params.demo;
+  const qaSilentParam = Array.isArray(params.qaSilent)
+    ? params.qaSilent[0]
+    : params.qaSilent;
+  const qaLongNamesParam = Array.isArray(params.qaLongNames)
+    ? params.qaLongNames[0]
+    : params.qaLongNames;
   const template = templateId ? templateById(templateId) : undefined;
 
   if (template) {
@@ -38,6 +46,8 @@ export default async function PreviewPage({
         canSelect={catalog.templates.some((item) => item.id === template.id)}
         draftId={draftId}
         demo={demoParam === "1"}
+        silentPlayback={qaSilentParam === "1"}
+        longNames={qaLongNamesParam === "1"}
       />
     );
   }

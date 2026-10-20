@@ -112,6 +112,12 @@ test("Anor is a first-class template and a round trip preserves all shared event
     url: "/api/media/music-1",
     filename: "our-song.mp3",
   };
+  original.voiceMessage = {
+    enabled: true,
+    assetId: "voice-1",
+    url: "/api/media/voice-1",
+    filename: "voice-greeting.m4a",
+  };
   original.gift = {
     enabled: true,
     receiptUploadEnabled: true,
@@ -158,7 +164,18 @@ test("a language variant does not invent translations or duplicate program IDs",
 test("receipt switch requires gifts; audio and gifts are optional", () => {
   const draft = createInvitation();
   assert.equal(draft.music.enabled, false);
+  assert.equal(draft.voiceMessage.enabled, false);
   assert.equal(invitationSchema.safeParse(draft).success, true);
+  const legacyDraft = { ...draft } as Partial<typeof draft>;
+  delete legacyDraft.voiceMessage;
+  assert.equal(invitationSchema.safeParse(legacyDraft).success, true);
+  const published = createInvitation("oltin-nur");
+  published.status = "published";
+  published.voiceMessage.enabled = true;
+  assert.equal(invitationSchema.safeParse(published).success, false);
+  published.voiceMessage.assetId = "voice-1";
+  published.voiceMessage.url = "/api/media/voice-1";
+  assert.equal(invitationSchema.safeParse(published).success, true);
   draft.gift.receiptUploadEnabled = true;
   assert.equal(invitationSchema.safeParse(draft).success, false);
 });
