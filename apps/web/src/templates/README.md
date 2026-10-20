@@ -46,3 +46,12 @@ The reference requests Cormorant Garamond (400/500/600 normal and 400/500
 italic) and Great Vibes. Serve those exact Google Fonts files locally with
 matching `@font-face` declarations so rendering does not depend on a third-party
 font request or silently fall back to system fonts.
+
+The next ten Marxaba nikoh sources are copied under
+`apps/web/public/templates/marxaba/nikoh/templates/<template-id>` and use the
+same-origin `MarxabaInvitation` iframe adapter. Their original per-template
+HTML, CSS, JavaScript, motion scripts, artwork, and font faces stay together;
+shared Marxaba runtime dependencies live beside them in `nikoh/shared`. The
+application adapter injects only contract data and public API identifiers.
+See `docs/templates/TEMPLATE_ROADMAP.md` for the full 46-template inventory,
+batch progress, and known gaps. Keep every copied source capture untouched.

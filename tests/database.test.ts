@@ -210,7 +210,7 @@ test("invitation JSON snapshot retains language variants and stable media IDs th
   assert.equal(media.rows[0].draft_id, draft.id);
   assert.equal(media.rows[0].object_key, "owner/photo.webp");
 });
-test("template category migration seeds independent event browsing groups and Anor", async () => {
+test("template category migrations seed Anor and the unpublished Marxaba batch", async () => {
   const categories = await db.query<{ id: string }>(
     "SELECT id FROM template_categories ORDER BY position,id",
   );
@@ -223,15 +223,50 @@ test("template category migration seeds independent event browsing groups and An
   );
   assert.equal(anor.rows[0].published, false);
   assert.equal(Number(anor.rows[0].price_minor), 15000000);
+  const marxaba = await db.query<{ id: string; published: boolean }>(
+    "SELECT id,published FROM templates WHERE id=ANY($1::text[]) ORDER BY id",
+    [[
+      "oltin-nur",
+      "samarqand-kechasi",
+      "bogi-eram",
+      "atlas",
+      "uchar-gilam",
+      "oq-kabutar",
+      "kuzgi-chinor",
+      "muhabbat-kitobi",
+      "sahifa",
+      "oltin-uzuk",
+    ]],
+  );
+  assert.deepEqual(
+    marxaba.rows.map((row) => [row.id, row.published]),
+    [
+      ["atlas", false],
+      ["bogi-eram", false],
+      ["kuzgi-chinor", false],
+      ["muhabbat-kitobi", false],
+      ["oltin-nur", false],
+      ["oltin-uzuk", false],
+      ["oq-kabutar", false],
+      ["sahifa", false],
+      ["samarqand-kechasi", false],
+      ["uchar-gilam", false],
+    ],
+  );
   const assignments = await db.query<{
     template_id: string;
     category_id: string;
   }>(
     "SELECT template_id,category_id FROM template_category_assignments ORDER BY template_id",
   );
-  assert.deepEqual(assignments.rows, [
-    { template_id: "anor", category_id: "wedding" },
-  ]);
+  assert.deepEqual(
+    assignments.rows.filter((row) => row.template_id === "anor"),
+    [{ template_id: "anor", category_id: "wedding" }],
+  );
+  assert.equal(
+    assignments.rows.filter((row) => row.category_id === "wedding").length,
+    11,
+  );
 });
 test("any template can have multiple categories or none without changing invitation content", async () => {
   const owner = await user(),

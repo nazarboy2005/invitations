@@ -51,7 +51,8 @@ Implementation choices:
 - Support RSVP responses, guest wishes, photos of the couple/celebrants, music, and repeatable contact details including phone numbers and Telegram usernames.
 - To'yona card details and guest receipt uploads are optional creator-controlled features, as specified below.
 - Event types must support weddings (nikoh to'yi), qiz bazmi, nahorgi osh, birthdays, and expansion to other events. The exact full event-type catalog remains open.
-- Additional content found in the templates includes dress codes and palettes, story chapters, gallery captions/years, and program speakers. Support for these was recommended in the proposed schema; exact schema approval is still pending. Multilingual creation is now a confirmed requirement, as detailed below.
+- Additional content found in the templates includes gallery years and program speakers; support for these remains a recommendation pending schema approval. Story chapters are now approved as described below. Multilingual creation is a confirmed requirement, as detailed below.
+- User approval (2026-10-20): invitations may include an optional repeatable story section. Each chapter has a stable ID and localized title and story text; chapter numbering and template illustrations remain controlled by the selected template. Preserve chapter content through save/reopen and template switching. Render the section only when at least one chapter has content in the active language. Do not add sample story text to saved or published invitations.
 
 ## Invitation languages and content variants
 
@@ -95,6 +96,11 @@ References checked on 2026-10-19: Google autocomplete https://developers.google.
 ## Custom invitation music
 
 - Confirmed clarification: music is optional for each invitation. Creators may leave music off entirely; no audio upload or track selection is required to save or publish an invitation. If they want music, allow them to upload their preferred audio file and use it as background music.
+- Confirmed clarification (2026-10-20): when music is enabled, creators may either upload a new track or choose one of their previously uploaded audio tracks from a reusable personal music library. A track stays owned by its creator and can be reused across that creator's invitations; do not expose another creator's uploads in the picker.
+- User requirement (2026-10-20): preserve and check each reference template's own music and mute/play control. Every full catalog template preview must have default preview music, even when the source capture only has a toggle and no bundled track. Start it only after the visitor opens/plays the invitation; never autoplay on catalog load.
+- Catalog preview music is presentation-only and must not be saved into an invitation or override creator music settings. Creators may separately choose a clearly licensed platform library track or one of their own uploaded tracks for an invitation.
+- The default catalog soundtrack is one global setting shared by all templates. Changing that single setting updates every supported full preview; do not maintain separate per-template defaults unless the user later requests them. This global preview setting is separate from each creator's invitation music.
+- Current implementation uses "Emotional Piano" by triangelx, verified as CC0 1.0 on its Wikimedia Commons file page, for catalog previews and as an optional platform-library selection. Keep the source/license record in `apps/web/src/modules/catalog/catalog-music.ts`; replace the file if its license or availability is later disputed.
 - Keep the uploaded track linked to the invitation independently of its template; switching designs must retain the selection, asset, and enabled/disabled choice. Template defaults must not enable music against the creator's choice.
 - Recommended controls: preview, replace/remove the track, and disable music; guests receive accessible play/pause or mute controls.
 - Store audio in R2 and reference it through the proposed `media_assets` / `invitation_music` records. Validate actual audio content and size/duration; supported upload formats and exact limits remain undecided. Recommend MP3 playback output, converting accepted source formats in a background worker where necessary.
@@ -371,6 +377,7 @@ Development agents are distinct from production queue workers. The running app w
 - User additionally authorized adding Wedvitation’s public invitation previews to the local reference gallery. Capture its public catalog designs only; do not promote them into production templates without a separate decision.
 
 - User additionally authorized capturing all public Yumevite catalog template previews in the local reference gallery. Keep as reference material only; production integration requires a separate decision.
+- User additionally authorized adding the existing E-Taklifnoma (e-invitation.uz) captures to the local reference gallery. Include its seven saved previews across Nikoh to'yi, Nahor oshi, and Xatna to'yi; keep source captures untouched and do not treat this as production template integration.
 
 ## Production template conversion brief (2026-10-20)
 
@@ -380,6 +387,9 @@ Development agents are distinct from production queue workers. The running app w
 ## Shared template preview sample data (2026-10-20)
 
 - Confirmed: use one shared `apps/web/src/modules/catalog/preview-sample.json` fixture for catalog and the initial template-selection stage. It contains consistent sample names, family/hosts, event date and time, venue, greeting, invitation text, event label, and repeatable program entries in Uzbek Latin, Uzbek Cyrillic, English, and Russian.
+- User correction (2026-10-20): use Asadbek and Gulhayo as the shared example names in every locale's sample fixture.
+- User requirement (2026-10-20): show language choices as `Uz`, `Уз`, `En`, and `Ru` in the invitation language switcher, while retaining the internal locale identifiers for storage and routing.
 - Every template maps the same fixture into its own source design. Creator-authored data takes precedence; the fixture is presentation-only and must never be saved, exported, or published.
 - Keep fixture editing in source control for now. An admin settings screen for changing preview samples is a future option, not a current requirement.
 - Confirmed: the catalog card uses the template's distinctive first/opening page artwork at its full portrait aspect ratio, rather than cropping a landscape scene or substituting another image. Source metadata's dedicated preview asset takes precedence.
+- User correction: invitation names must remain fully visible in every template and at narrow screen sizes. Preserve the source's authored display typography when both names fit; adapt only the overflowing name lockup with responsive sizing or wrapping. Test unusually long names as part of template review.

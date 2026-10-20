@@ -1,0 +1,83 @@
+/* Samarqand Kechasi: styles for motion.js (inner-page animation). */
+
+/* Split text masks */
+.sk-mask{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.08em;margin-bottom:-.08em}
+.sk-unit{display:inline-block;will-change:transform}
+.hero__copy h1>span[data-slot]{display:block}
+
+/* Gold rule under the names (was width:0) */
+.name-rule{width:min(150px,40vw);height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);transform-origin:50% 50%}
+
+/* Heading ornament: two lines and a spinning eight-point star */
+.sk-ornament{display:flex;align-items:center;justify-content:center;gap:10px;margin:-14px auto 26px;width:min(200px,60%)}
+.sk-ornament i{flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--gold));transform-origin:100% 50%}
+.sk-ornament i:last-child{background:linear-gradient(270deg,transparent,var(--gold));transform-origin:0 50%}
+.sk-ornament svg{width:14px;height:14px;fill:var(--turq);flex:none;animation:sk-spin 14s linear infinite}
+
+/* Light sweep across arch shapes */
+.sk-sweep{position:absolute;inset:-20% auto -20% -60%;width:45%;z-index:3;pointer-events:none;opacity:0;background:linear-gradient(100deg,transparent,#ffd99a26 40%,#fff4d64d 50%,#ffd99a26 60%,transparent);transform:skewX(-18deg)}
+.is-lit>.sk-sweep{animation:sk-sweep 7.5s cubic-bezier(.45,0,.2,1) .2s infinite}
+
+/* Hero ambient: moon halo, rising embers, shooting stars */
+.moon::after{content:"";position:absolute;inset:-26px;border-radius:50%;background:radial-gradient(circle at 35% 50%,#ffd99a40,transparent 62%);animation:sk-halo 5s ease-in-out infinite}
+.sk-embers{position:absolute;inset:0;z-index:1;pointer-events:none;overflow:hidden}
+.sk-embers i{position:absolute;left:var(--x);bottom:-12px;width:var(--s);height:var(--s);border-radius:50%;background:radial-gradient(circle,#fff4d6,#ffd99a 45%,#ffbd5800 72%);box-shadow:0 0 10px 2px #ffbd5866;opacity:0;animation:sk-ember var(--d) linear var(--delay) infinite}
+.sk-shoot{position:absolute;top:var(--top);left:var(--left);z-index:1;width:110px;height:1.5px;border-radius:2px;pointer-events:none;background:linear-gradient(90deg,#f4eedf00,#f4eedf);opacity:0;transform:rotate(18deg);animation:sk-shoot var(--cycle) ease-in var(--delay) infinite}
+
+/* Page-wide twinkling sky behind the sections */
+.page{position:relative}
+.sk-sky{position:absolute;inset:100svh 0 0;z-index:0;pointer-events:none}
+.sk-sky i{position:absolute;inset:0;background-image:radial-gradient(1px 1px at 20px 30px,#f4eedfcc,transparent),radial-gradient(1px 1px at 130px 80px,#f4eedf99,transparent),radial-gradient(1.5px 1.5px at 70px 160px,#ffd99acc,transparent),radial-gradient(1px 1px at 190px 210px,#f4eedfaa,transparent),radial-gradient(1px 1px at 40px 250px,#2ba7a0cc,transparent);background-size:220px 280px;animation:sk-twinkle 4.5s ease-in-out infinite}
+.sk-sky i:last-child{background-size:310px 360px;background-position:90px 140px;animation-delay:-2.2s;animation-duration:6s}
+.section,.tile-band,.footer{position:relative;z-index:1}
+
+/* Calendar: the wedding-day star (core adds .is-event). The CSS flip runs from JS now. */
+.sk-motion .calendar-day.is-event{animation:none}
+.calendar-day.is-event.is-pulsing{animation:sk-star-pulse 2.6s ease-in-out infinite}
+.countdown strong{display:inline-block}
+
+/* Program: items light up when the rail reaches them */
+.program__item time,.program__item>span{transition:color .5s,text-shadow .5s}
+.program__item.is-lit time{color:#fff4d6;text-shadow:0 0 14px #ffd99a99}
+.program__item.is-lit>span{color:var(--white)}
+.program__item.is-lit i{background:var(--turq);box-shadow:0 0 14px #2ba7a0aa}
+
+/* Venue photo needs room for the Ken Burns drift */
+.venue__photo img{transform-origin:50% 60%}
+
+/* RSVP: glowing double frame + tap sparkle */
+.rsvp-section.is-lit{animation:sk-frame 4s ease-in-out infinite}
+.rsvp__choices button{position:relative;overflow:hidden}
+.sk-tap{position:absolute;left:24px;top:50%;width:12px;height:12px;margin-top:-6px;border-radius:50%;background:radial-gradient(circle,#ffd99a,#2ba7a000 70%);pointer-events:none;animation:sk-tap .7s ease-out forwards}
+
+/* Wishes: the little stars slowly turn */
+.wishes__item:before{display:inline-block;animation:sk-spin 12s linear infinite}
+
+/* To'yona box: idle bob, wiggle and sparkles */
+.lacquer-box.is-idle{animation:sk-bob 3.6s ease-in-out infinite}
+.lacquer-box.is-open{animation:none}
+.sk-sparks{position:absolute;left:50%;top:50%;width:0;height:0;pointer-events:none}
+.sk-sparks i{position:absolute;width:9px;height:9px;margin:-4.5px;background:var(--warm);clip-path:polygon(50% 0,62% 38%,100% 50%,62% 62%,50% 100%,38% 62%,0 50%,38% 38%);transform:rotate(var(--a)) translateY(calc(var(--r) * -1)) scale(0);animation:sk-spark 2.7s ease-in-out var(--delay) infinite}
+.gift-prompt{animation:sk-soft 3s ease-in-out infinite}
+
+/* Footer: twinkling stars and a glowing portal */
+.sk-twinkles{position:absolute;inset:0;pointer-events:none}
+.sk-twinkles i{position:absolute;left:var(--x);top:var(--y);width:2px;height:2px;border-radius:50%;background:#f4eedf;box-shadow:0 0 6px #ffd99a;animation:sk-twinkle var(--d) ease-in-out var(--delay) infinite}
+.footer__portal.is-lit{animation:sk-portal 3.2s ease-in-out infinite}
+
+@keyframes sk-spin{to{transform:rotate(360deg)}}
+@keyframes sk-sweep{0%{left:-60%;opacity:0}8%{opacity:1}30%{left:120%;opacity:0}100%{left:120%;opacity:0}}
+@keyframes sk-halo{50%{transform:scale(1.18);opacity:.6}}
+@keyframes sk-ember{0%{opacity:0;transform:translate3d(0,0,0) scale(.6)}12%{opacity:var(--o)}70%{opacity:calc(var(--o) * .7)}100%{opacity:0;transform:translate3d(var(--drift),-92svh,0) scale(1.1)}}
+@keyframes sk-shoot{0%,88%{opacity:0;transform:rotate(18deg) translateX(0) scaleX(.3)}90%{opacity:1}100%{opacity:0;transform:rotate(18deg) translateX(260px) scaleX(1)}}
+@keyframes sk-twinkle{50%{opacity:.35}}
+@keyframes sk-star-pulse{0%,100%{transform:scale(1);filter:drop-shadow(0 0 0 #2ba7a000)}50%{transform:scale(1.14);filter:drop-shadow(0 0 7px #2ba7a0cc)}}
+@keyframes sk-frame{50%{box-shadow:inset 0 0 40px #2ba7a022,0 0 30px #d1a95422}}
+@keyframes sk-tap{from{transform:scale(1);opacity:1}to{transform:scale(14);opacity:0}}
+@keyframes sk-bob{0%,100%{transform:translateY(0) rotate(0)}40%{transform:translateY(-8px) rotate(0)}46%{transform:translateY(-8px) rotate(-4deg)}52%{transform:translateY(-8px) rotate(4deg)}58%{transform:translateY(-8px) rotate(0)}}
+@keyframes sk-spark{0%,100%{transform:rotate(var(--a)) translateY(calc(var(--r) * -1)) scale(0);opacity:0}50%{transform:rotate(calc(var(--a) + 25deg)) translateY(calc(var(--r) * -1)) scale(1);opacity:1}}
+@keyframes sk-soft{50%{opacity:.55}}
+@keyframes sk-portal{50%{box-shadow:0 0 26px #ffd99a66,inset 0 0 14px #ffd99a44}}
+
+html[data-tier=lite] .sk-sky i,html[data-tier=lite] .sk-sweep{animation:none;display:none}
+@media (prefers-reduced-motion:reduce){.sk-embers,.sk-shoot,.sk-sky,.sk-sparks,.sk-twinkles,.sk-sweep{display:none}.sk-ornament svg,.wishes__item:before,.lacquer-box.is-idle,.gift-prompt,.rsvp-section.is-lit,.footer__portal.is-lit,.calendar-day.is-event.is-pulsing,.moon::after{animation:none}}

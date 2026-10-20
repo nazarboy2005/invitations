@@ -11,7 +11,7 @@ pnpm install
 pnpm dev
 ```
 
-Open http://127.0.0.1:3000. The editor and browser draft recovery run without credentials. Cloud saving, authentication, media uploads, and admin operations require real configured services. There is no fake signed-in user or development authentication bypass.
+Open http://127.0.0.1:3001. The editor and browser draft recovery run without credentials. Cloud saving, authentication, media uploads, and admin operations require real configured services. There is no fake signed-in user or development authentication bypass.
 
 ```powershell
 pnpm typecheck

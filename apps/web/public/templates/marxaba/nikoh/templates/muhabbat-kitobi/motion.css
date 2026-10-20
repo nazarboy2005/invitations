@@ -1,0 +1,19 @@
+/* Muhabbat Kitobi: styles for motion.js */
+.mk-motion .hero h1{position:relative}
+.mk-word{display:inline-block}
+.mk-nib{position:absolute;left:0;top:0;width:16px;height:16px;margin:-14px 0 0 -2px;pointer-events:none;background:no-repeat center/contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M3 21l3.5-9L19 2.5 21.5 5 12 17.5z' fill='%232E2A24'/%3E%3Cpath d='M3 21l5-5' stroke='%23F3E9D7' stroke-width='1'/%3E%3C/svg%3E");filter:drop-shadow(1px 2px 1px #2e2a2433)}
+.mk-flourish{display:block;width:96px;height:12px;margin:-8px auto 22px;overflow:visible}
+.mk-flourish path{fill:none;stroke:var(--burgundy,#7A2E2E);stroke-width:1.2;stroke-linecap:round;opacity:.75}
+.chapter{position:relative}
+.mk-shade{position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,#2e2a2455,#2e2a2400 70%);opacity:0}
+.stamp.is-stamped{animation:mk-ink .7s ease-out 1}
+.gift.is-idle:not([open]) .envelope{animation:mk-nudge 4s ease-in-out infinite}
+.rsvp__done{position:relative}
+.mk-heart{position:absolute;left:50%;top:30%;color:var(--burgundy,#7A2E2E);font-style:normal;font-size:16px;pointer-events:none}
+.mk-motes{position:fixed;inset:0;z-index:40;pointer-events:none;overflow:hidden}
+.mk-motes i{position:absolute;left:var(--x);top:var(--y);width:var(--s);height:var(--s);border-radius:50%;background:#e2c98c;opacity:0;animation:mk-mote var(--d) ease-in-out var(--delay) infinite}
+html.is-locked .mk-motes{display:none}
+@keyframes mk-ink{0%{box-shadow:0 0 0 0 #7a2e2e40,inset 0 0 0 3px #7a2e2e0d}100%{box-shadow:0 0 0 14px #7a2e2e00,inset 0 0 0 3px #7a2e2e0d}}
+@keyframes mk-nudge{0%,82%,100%{transform:rotate(0)}86%{transform:rotate(-7deg)}90%{transform:rotate(6deg)}94%{transform:rotate(-3deg)}}
+@keyframes mk-mote{0%{opacity:0;transform:translate(0,0)}20%{opacity:.45}80%{opacity:.3}100%{opacity:0;transform:translate(var(--dx),var(--dy))}}
+@media (prefers-reduced-motion:reduce){.mk-motes{display:none}.stamp.is-stamped,.gift.is-idle .envelope{animation:none}}

@@ -378,6 +378,20 @@
   padding-left: 17px;
   border-left: 1px solid var(--line);
 }
+.storyItem {
+  display: grid;
+  gap: 12px;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fdfbf7;
+}
+.storyItem h3 {
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 600;
+}
 .timelineDot {
   position: absolute;
   left: -4px;

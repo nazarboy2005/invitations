@@ -16,22 +16,26 @@ export async function GET(
     if (!asset) throw new ApiError(404, "NOT_FOUND", "Fayl topilmadi.");
     let publicAccess = false;
     if (
-      asset.draft_id &&
       asset.visibility === "public" &&
       /^(image|audio)\//.test(asset.mime_type)
     ) {
-      const [published] =
-        await getDb()`SELECT data FROM invitations WHERE id=${asset.draft_id} AND owner_id=${asset.owner_id} AND status='published'`;
-      const data = published?.data;
-      publicAccess =
-        !!data &&
-        (data.gallery?.some(
-          (image: { id: string; url: string }) =>
-            image.id === id && image.url === `/api/media/${id}`,
-        ) ||
-          (data.music?.enabled === true &&
-            data.music?.assetId === id &&
-            data.music?.url === `/api/media/${id}`));
+      const mediaUrl = `/api/media/${id}`;
+      const referenced =
+        await getDb()`SELECT id FROM invitations
+          WHERE owner_id=${asset.owner_id} AND status='published'
+            AND (
+              data->'music' @> jsonb_build_object(
+                'enabled', true, 'assetId', ${id}, 'url', ${mediaUrl}
+              )
+              OR EXISTS (
+                SELECT 1 FROM jsonb_array_elements(
+                  COALESCE(data->'gallery', '[]'::jsonb)
+                ) AS image
+                WHERE image->>'id'=${id} AND image->>'url'=${mediaUrl}
+              )
+            )
+          LIMIT 1`;
+      publicAccess = referenced.length > 0;
     }
     if (!publicAccess) {
       const user = await getSessionUser();

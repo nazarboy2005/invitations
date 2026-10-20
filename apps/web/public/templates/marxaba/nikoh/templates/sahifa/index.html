@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="uz" class="is-locked">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#111111">
+  <meta name="description" content="Digital invitation">
+  <title>sahifa · Invitation</title>
+  
+  
+  <link rel="stylesheet" href="fonts.css">
+  <link rel="stylesheet" href="../../shared/base.css">
+  <link rel="stylesheet" href="template.css"><link rel="stylesheet" href="motion.css">
+  <script src="../../shared/vendor/gsap.min.js" defer></script>
+  <script src="../../shared/vendor/ScrollTrigger.min.js" defer></script>
+  <script src="../../shared/vendor/lz-string.min.js" defer></script><script src="../../shared/invite-codec.js" defer></script><script src="../../shared/i18n.js" defer></script><script src="../../platform-bridge.js" defer></script><script src="../../shared/core.js" defer></script>
+  <script src="meta.js" defer></script>
+  <script src="template.js" defer></script><script src="motion.js" defer></script>
+</head>
+<body>
+  <section class="intro" id="intro" aria-label="Taklifnomani ochish">
+    <div class="intro__black" aria-hidden="true"></div>
+    <div class="intro__paper" aria-hidden="true"></div>
+    <div class="intro__content">
+      <p class="intro__issue">MAXSUS SON <i>·</i> <span data-slot="date.month"></span> <span data-slot="date.year"></span> <i>·</i> TAKLIFNOMA</p>
+      <p class="intro__greeting" data-slot="greeting"></p>
+      <div class="intro__names" aria-label="Taklifnoma egalari">
+        <span class="decode-name" data-decode="groom" data-slot="groom"></span>
+        <span class="decode-name" data-decode="bride" data-slot="bride"></span>
+      </div>
+      <div class="intro__rule"></div>
+      <button class="open-button" id="open-invitation" type="button">Sonni ochish <span aria-hidden="true">→</span></button>
+      <div class="shoot-date" aria-label="To‘y sanasi"><strong data-slot="date.day"></strong><span><b data-slot="date.month"></b><br><i data-slot="date.year"></i></span></div>
+      <div class="shoot-marquee"><div><span data-slot="eventType"></span>&nbsp; • &nbsp;<span data-slot="groom"></span> &amp; <span data-slot="bride"></span>&nbsp; • &nbsp;<span data-slot="date.day"></span>-<span data-slot="date.month"></span> <span data-slot="date.year"></span>&nbsp; • &nbsp;<span data-slot="venue.name"></span>&nbsp; • &nbsp;</div></div>
+    </div>
+    <span class="intro__folio">№ 14 / 26</span>
+  </section>
+
+  <div class="backdrop" aria-hidden="true"><span>SAHIFA<br>14—11</span></div>
+  <main class="page" id="page">
+    <header class="hero" id="hero" data-section="hero">
+      <img class="hero__photo" data-photo="gallery.0" alt="Taklifnoma surati" width="1200" height="1600" fetchpriority="high">
+      <div class="hero__fallback" aria-hidden="true"><span>SAHIFA</span><i>№ <span data-slot="date.day"></span> · <span data-slot="date.year"></span></i></div>
+      <div class="hero__shade" aria-hidden="true"></div>
+      <div class="hero__masthead"><span>SAHIFA</span><span>MAXSUS SON <b>·</b> <span data-slot="date.year"></span></span></div>
+      <div class="hero__coverline hero__coverline--top">Ular<br>‘Ha’ deyishdi</div>
+      <div class="hero__center">
+        <p class="hero__kicker" data-slot="eventType"></p>
+        <h1 class="hero__names"><span data-slot="groom"></span><em>&amp;</em><span data-slot="bride"></span></h1>
+        <div class="hero__date"><strong data-slot="date.day"></strong><span><span data-slot="date.month"></span><br><span data-slot="date.year"></span> · <span data-slot="date.time"></span></span></div>
+      </div>
+      <div class="hero__coverline hero__coverline--bottom"><span>To‘y dasturi<br>5-sahifada</span><span>Siz ham<br>taklif qilingansiz</span></div>
+      <div class="hero__barcode" aria-label="Sana kodi">||| |||| | ||| || |||<small><span data-slot="date.day"></span> <span data-slot="date.monthNumber"></span> <span data-slot="date.year"></span> · <span data-slot="venue.name"></span></small></div>
+      <div class="hero__folio">01 — 12</div>
+      <div class="marquee marquee--hero"><div data-marquee><span data-slot="eventType"></span>&nbsp; • &nbsp;<span data-slot="groom"></span> &amp; <span data-slot="bride"></span>&nbsp; • &nbsp;<span data-slot="date.day"></span>-<span data-slot="date.month"></span> <span data-slot="date.year"></span>&nbsp; • &nbsp;<span data-slot="venue.name"></span>&nbsp; • &nbsp;</div></div>
+    </header>
+
+    <section class="spread letter" id="invitation-text" data-section="invitation-text">
+      <header class="section-head"><span>02 / MUHARRIR XATI</span><span>SAHIFA · 02</span></header>
+      <p class="eyebrow">AZIZ MEHMONIMIZGA</p>
+      <h2 class="section-title title-drift">Bir sahifada<br>boshlangan hikoya.</h2>
+      <div class="letter__columns">
+        <p class="letter__body" data-slot="message"></p>
+        <div class="letter__aside"><span class="dropcap">J</span><p class="letter__quote">“Baxt — bu eng muhim sahifani birga yozish.”</p><div class="letter__sign"><small>HURMAT BILAN</small><strong data-slot="hosts"></strong></div></div>
+      </div>
+      <div class="section-foot"><span data-slot="greeting"></span><span>02</span></div>
+    </section>
+
+    <section class="spread date-spread" id="date" data-section="date">
+      <header class="section-head"><span>03 / SANA VAQT</span><span>TAQVIM · <span data-slot="date.year"></span></span></header>
+      <p class="eyebrow">UCHRASHUV KUNI</p>
+      <div class="date-layout"><strong class="date-huge" data-slot="date.day"></strong><span class="date-vertical" data-slot="date.month"></span><div class="date-meta"><span data-slot="date.weekday"></span><strong data-slot="date.time"></strong><span data-slot="date.year"></span></div></div>
+      <div class="calendar" data-calendar aria-label="To‘y kuni taqvimi"></div>
+      <p class="eyebrow countdown-label">BAXTLI KUNGACHA</p>
+      <div class="countdown" data-countdown aria-live="off">
+        <div><strong data-unit="days">00</strong><span>KUN</span></div><div><strong data-unit="hours">00</strong><span>SOAT</span></div><div><strong data-unit="minutes">00</strong><span>DAQIQA</span></div><div><strong data-unit="seconds">00</strong><span>SONIYA</span></div>
+        <p data-countdown-past hidden>Bu kunni birga nishonlaganingiz uchun rahmat!</p>
+      </div>
+      <button class="button button--dark" type="button" data-ics>Kalendarga qo‘shish <span>↗</span></button>
+      <div class="section-foot"><span><span data-slot="date.weekday"></span> · <span data-slot="date.day"></span>-<span data-slot="date.month"></span></span><span>03</span></div>
+    </section>
+
+    <section class="spread program-spread" id="program" data-section="program">
+      <header class="section-head"><span>04 / OQSHOM REJASI</span><span>VAQT · <span data-slot="venue.name"></span></span></header>
+      <p class="eyebrow">BIRGALIKDA</p><h2 class="section-title title-drift">To‘y dasturi</h2>
+      <ol class="program" data-list="program"><template><li class="program__item"><time data-field="time"></time><span data-field="title"></span><i aria-hidden="true">↗</i></li></template></ol>
+      <div class="section-foot"><span>DAVOMI BOR…</span><span>04</span></div>
+    </section>
+
+    <section class="venue-spread" id="venue" data-section="venue">
+      <header class="section-head"><span>05 / MANZIL</span><span>UCHRASHUV JOYI</span></header>
+      <div class="venue__photo"><img data-photo="venue.photo" alt="To‘y manzili" width="1200" height="800" loading="lazy" decoding="async"><span class="venue__photo-label">THE PLACE<br>TO BEGIN</span></div>
+      <div class="venue__caption"><div><p class="eyebrow">TO‘Y MANZILI</p><h2 data-slot="venue.name"></h2><p data-slot="venue.address"></p></div><span class="venue__index">05<br>—<br>14</span></div>
+      <div class="button-row"><a class="button button--dark" data-map="yandex" target="_blank" rel="noopener noreferrer">Yandex xaritada ↗</a><a class="button button--dark" data-map="google" target="_blank" rel="noopener noreferrer">Google xaritada ↗</a></div>
+    </section>
+    <section class="spread dresscode-spread" id="dresscode" data-section="dresscode">
+      <header class="section-head"><span>✦ / DRESS-KOD</span><span>KIYINISH USLUBI</span></header><p class="eyebrow">KIYINISH USLUBI</p><h2 class="section-title">Dress-kod.</h2>
+      <div class="dresscode" data-dresscode><svg class="dresscode__icon" viewBox="0 0 64 40" aria-hidden="true"><path d="M28.5 9.5a3.5 3.5 0 1 1 3.5 3.5c-1.6 0-3 1.2-3 2.8v2.2L4 34.5h56L32 18"/></svg><p class="dresscode__style" data-slot="dressCode.style"></p><p class="dresscode__text" data-slot="dressCode.text"></p><ul class="dresscode__palette" data-list="dresscode"><template><li><i data-field-attr="style:style"></i><span data-field="name"></span></li></template></ul><p class="dresscode__note" data-slot="dressCode.note"></p></div><div class="section-foot"><span>USLUB · RANG</span><span>✦</span></div>
+    </section>
+
+    <section class="spread gallery-spread" id="gallery" data-section="gallery">
+      <header class="section-head"><span>06 / FOTOSURAT</span><span>LAHZALAR</span></header><p class="eyebrow">KADR ORTIDAGI HIKOYA</p><h2 class="section-title title-drift">Bizning nigohimiz.</h2>
+      <div class="gallery gallery--editorial" data-gallery data-list="gallery" aria-label="Suratlar galereyasi"><template><button class="gallery__item" type="button" aria-label="Suratni kattalashtirish"><img data-field-attr="src:src,alt:alt" data-photo alt="Taklifnoma surati" width="740" height="980" loading="lazy" decoding="async"><span class="gallery__caption"><b data-field="caption"></b><i data-field="folio"></i></span></button></template></div>
+      <div class="gallery__controls"><button type="button" data-gallery-prev aria-label="Oldingi surat">←</button><span>CHAPDAN O‘NGGA — SURING</span><button type="button" data-gallery-next aria-label="Keyingi surat">→</button></div><div class="gallery__dots" data-gallery-dots></div>
+      <div class="section-foot"><span>CONTACT SHEET · 06</span><span>06</span></div>
+    </section>
+
+    <section class="spread rsvp-spread" id="rsvp" data-section="rsvp">
+      <header class="section-head"><span>07 / JAVOB VARAQASI</span><span>ILTIMOS, BELGILANG</span></header><p class="eyebrow">SIZNI KUTAMIZ</p><h2 class="rsvp-title">RSVP</h2><p class="rsvp__intro">Bu hikoyaning bir qismi bo‘ling.</p>
+      <form data-rsvp><div class="rsvp__fields" data-rsvp-form><div class="rsvp__choices" role="group" aria-label="Tashrif javobi"><button type="button" data-rsvp-choice="yes" aria-pressed="false">Kelaman <span>01</span></button><button type="button" data-rsvp-choice="no" aria-pressed="false">Kelmayman <span>02</span></button><button type="button" data-rsvp-choice="maybe" aria-pressed="false">Hali bilmayman <span>03</span></button></div>
+        <label class="field"><span>ISMINGIZ</span><input type="text" name="name" autocomplete="name" maxlength="80" required></label><div class="rsvp__party" data-rsvp-party><span>Necha kishi bo‘lasiz?</span><div class="stepper"><button type="button" data-rsvp-minus aria-label="Mehmonlar sonini kamaytirish">−</button><output data-rsvp-count>1</output><button type="button" data-rsvp-plus aria-label="Mehmonlar sonini oshirish">+</button></div></div>
+        <p class="rsvp__deadline" data-rsvp-deadline></p><button class="button button--paper" type="submit" data-rsvp-submit>Javobni yuborish <span>→</span></button></div><div class="rsvp__done" data-rsvp-done hidden aria-live="polite"><p class="rsvp__stamp">KELAMAN!</p><p>Javobingiz uchun rahmat!</p><p class="rsvp__summary" data-rsvp-summary></p><button class="text-link" type="button" data-rsvp-change>Javobni o‘zgartirish</button></div></form>
+      <div class="section-foot"><span>JAVOB MUDDATI · 07 NOYABR</span><span>07</span></div>
+    </section>
+
+    <section class="spread wishes-spread" id="wishes" data-section="wishes">
+      <header class="section-head"><span>08 / O‘QUVCHILAR MAKTUBLARI</span><span>OCHIQ XAT</span></header><p class="eyebrow">SIZDAN KELGAN</p><h2 class="section-title">Tilaklar</h2>
+      <ul class="wishes" data-list="wishes"><template><li class="wishes__item"><p data-field="text"></p><strong data-field="name"></strong><span>READER LETTER · SAHIFA</span></li></template></ul>
+      <form class="wish-form" data-wishes-form><label class="field"><span>ISMINGIZ</span><input name="name" maxlength="60" required></label><label class="field"><span>TILAGINGIZ</span><textarea name="text" rows="3" maxlength="360" required></textarea></label><button class="button button--dark" type="submit">Tilak yuborish ↗</button><p data-wishes-feedback role="status" aria-live="polite"></p></form>
+      <div class="section-foot"><span>OCHIQ XATLAR</span><span>08</span></div>
+    </section>
+
+    <section class="spread gift-spread" id="toyona" data-section="toyona">
+      <header class="section-head"><span>09 / EZGU NIYATLAR</span><span>TO‘YONA</span></header><p class="eyebrow">TABRIKLARINGIZ UCHUN</p><h2 class="section-title">To‘yona</h2><p data-slot="toyona.note"></p>
+      <details class="gift"><summary><span>SAHIFA · SOVG‘A KARTASI</span><strong>MA’LUMOTLARNI OCHISH <b>＋</b></strong></summary><div class="gift__details"><span data-slot="toyona.bank"></span><strong data-slot="toyona.cardNumber"></strong><span data-slot="toyona.cardHolder"></span><button class="button button--paper" type="button" data-copy="toyona.cardNumber">Nusxa olish ↗</button></div></details>
+      <div class="section-foot"><span>IXTIYORIY · MEHR BILAN</span><span>09</span></div>
+    </section>
+
+    <section class="spread contacts-spread" id="contacts" data-section="contacts">
+      <header class="section-head"><span>10 / ALOQA</span><span>TAHRIRIYAT BILAN BOG‘LANISH</span></header><p class="eyebrow">SAVOLLARINGIZ BORMI?</p><h2 class="section-title">Tahririyat bilan<br>bog‘lanish.</h2>
+      <ul class="contacts" data-list="contacts"><template><li><a data-field-attr="href:href" target="_blank" rel="noopener noreferrer"><span data-field="label"></span><strong data-field="value"></strong><i>↗</i></a></li></template></ul><div class="section-foot"><span>HAR DOIM ALOQADAMIZ</span><span>10</span></div>
+    </section>
+
+    <footer class="back-cover" id="footer" data-section="footer">
+      <div class="back-cover__top"><span>SAHIFA</span><span>YAKUNIY SAHIFA · 12</span></div><p class="back-cover__monogram" data-slot="monogram">J&amp;M</p><p class="back-cover__date" data-slot="date.long"></p><div class="back-cover__rule"></div><p data-slot="footer"></p><div class="marquee"><div data-marquee><span data-slot="groom"></span> &amp; <span data-slot="bride"></span>&nbsp; • &nbsp;<span data-slot="date.day"></span>-<span data-slot="date.month"></span> <span data-slot="date.year"></span>&nbsp; • &nbsp;HIKOYA DAVOM ETADI&nbsp; • &nbsp;</div></div>
+    </footer>
+  </main>
+  <button class="music-toggle" type="button" data-music-toggle hidden aria-label="Musiqani yoqish">♫</button><audio data-music loop preload="none" hidden></audio><div class="toast" data-toast role="status" aria-live="polite"></div>
+</body>
+</html>
+

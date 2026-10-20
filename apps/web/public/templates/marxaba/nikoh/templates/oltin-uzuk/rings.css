@@ -1,0 +1,41 @@
+/* Oltin Uzuk: photoreal ring film (see rings.js) */
+html.rx-on .intro__fallback-scene,html.rx-on .ring-fallback,html.rx-on .scene-canvas,html.rx-on .hero__reflection,html.rx-on .footer__cushion>span{display:none!important}
+
+.rx{position:absolute;left:0;right:0;margin:0 auto;aspect-ratio:1;pointer-events:none;opacity:1;--sx:-60%;--so:1;--tilt-shine:50%}
+.rx--intro{top:max(4vh,30px);z-index:1;width:min(92vw,54vh,540px)}
+.rx--hero{top:4%;z-index:1;width:min(88vw,56vh,500px)}
+.rx--footer{position:absolute;left:50%;top:-74px;width:200px;margin-left:-100px}
+.rx--footer .rx__glow{opacity:.6}
+.footer__cushion{overflow:visible}
+
+.rx__bokeh{position:absolute;left:50%;top:46%;z-index:-2;width:100vw;height:110vh;max-width:none;transform:translate(-50%,-50%);pointer-events:none}
+.rx--hero .rx__bokeh{height:80vh}
+.rx__glow{position:absolute;inset:-28%;z-index:-1;background:radial-gradient(circle at 56% 44%,rgba(226,170,86,.34),rgba(150,98,40,.14) 32%,rgba(80,50,20,.05) 50%,transparent 66%);filter:blur(4px)}
+.rx__float{position:absolute;inset:0;perspective:900px;transform-origin:50% 60%}
+.rx__tilt{position:absolute;inset:0;transform-style:preserve-3d;will-change:transform}
+.rx__angle{position:absolute;inset:0;transform-origin:56% 50%;will-change:opacity,transform}
+.rx__angle img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 18px 22px rgba(0,0,0,.55)) drop-shadow(0 2px 3px rgba(0,0,0,.4))}
+.rx__shine{position:absolute;inset:0;pointer-events:none;-webkit-mask:var(--mask) center/contain no-repeat;mask:var(--mask) center/contain no-repeat;background:linear-gradient(108deg,transparent calc(var(--sx) - 16%),rgba(255,247,222,calc(.92 * var(--so))) var(--sx),transparent calc(var(--sx) + 16%));mix-blend-mode:screen}
+.rx__shine--soft{background:radial-gradient(ellipse 46% 36% at var(--tilt-shine) 30%,rgba(255,236,190,.42),transparent 70%);mix-blend-mode:soft-light;opacity:.9}
+
+.rx__reflect{position:absolute;left:0;right:0;top:66%;height:100%;transform:scaleY(-1);filter:blur(1.4px);-webkit-mask:linear-gradient(to top,#000 0%,rgba(0,0,0,.35) 14%,transparent 30%);mask:linear-gradient(to top,#000 0%,rgba(0,0,0,.35) 14%,transparent 30%)}
+.rx__mirror{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;max-width:none}
+.rx__shadow{position:absolute;left:24%;width:64%;top:79%;height:9%;border-radius:50%;background:radial-gradient(ellipse,rgba(0,0,0,.72),rgba(0,0,0,.25) 45%,transparent 72%);filter:blur(5px)}
+
+.rx__gem{position:absolute;width:0;height:0;z-index:2;transform:translateZ(1px)}
+.rx__gem b{position:absolute;width:44px;height:44px;margin:-22px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.95),rgba(255,250,235,.35) 28%,transparent 62%);mix-blend-mode:screen;opacity:0}
+.rx__gem i{position:absolute;width:46px;height:46px;margin:-23px;background:radial-gradient(circle,#fff 0,#fffdf6 18%,rgba(255,250,235,.55) 34%,transparent 62%);clip-path:polygon(50% 0,55% 45%,100% 50%,55% 55%,50% 100%,45% 55%,0 50%,45% 45%);opacity:0;transform:scale(0)}
+.rx__gem i:nth-child(2){width:28px;height:28px;margin:-14px;left:9px;top:-7px}
+.rx__gem i:nth-child(3){width:20px;height:20px;margin:-10px;left:-10px;top:6px}
+.rx.is-lit .rx__gem b{animation:rx-glow 2.8s ease-in-out infinite}
+.rx.is-lit .rx__gem i{animation:rx-twinkle 3.4s ease-in-out infinite}
+.rx.is-lit .rx__gem i:nth-child(2){animation-delay:1.15s;animation-duration:2.9s}
+.rx.is-lit .rx__gem i:nth-child(3){animation-delay:2.1s;animation-duration:3.8s}
+.rx--footer .rx__gem i{width:26px;height:26px;margin:-13px}
+.rx__burst{position:absolute;left:-30%;top:-30%;width:160%;height:160%;max-width:none;pointer-events:none;z-index:3}
+
+@keyframes rx-twinkle{0%,62%,100%{opacity:0;transform:scale(0) rotate(0)}70%{opacity:1;transform:scale(1) rotate(45deg)}80%{opacity:.85;transform:scale(.55) rotate(90deg)}88%{opacity:0;transform:scale(0) rotate(120deg)}}
+@keyframes rx-glow{0%,100%{opacity:.25;transform:scale(.8)}50%{opacity:.75;transform:scale(1.1)}}
+
+html[data-tier=lite] .rx__reflect{filter:none}
+@media (prefers-reduced-motion:reduce){.rx__gem i,.rx__gem b{animation:none!important}.rx__gem b{opacity:.5}}

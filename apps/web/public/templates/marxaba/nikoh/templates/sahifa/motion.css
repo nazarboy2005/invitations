@@ -1,0 +1,36 @@
+/* Sahifa: styles for motion.js */
+.sh-mask{display:inline-block;overflow:hidden;vertical-align:top;padding:.04em .02em .06em;margin:-.04em -.02em -.06em}
+.sh-char{display:inline-block;will-change:transform}
+.sh-word{transition:none}
+
+/* Rules that draw themselves (replace the static border-bottom) */
+.sh-motion .hero__masthead,.sh-motion .section-head{position:relative;border-bottom-color:transparent}
+.sh-motion .hero__masthead::after,.sh-motion .section-head::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:1px;background:currentColor;opacity:.7;transform:scaleX(var(--rule,1));transform-origin:0 50%}
+
+/* Cover: a slow moving light and the breathing watermark */
+.sh-light{position:absolute;inset:-20%;z-index:-1;pointer-events:none;background:radial-gradient(circle at 30% 30%,#ffffff26,transparent 38%),radial-gradient(circle at 75% 70%,#8c1c1330,transparent 42%);animation:sh-light 14s ease-in-out infinite alternate}
+.hero__fallback{transform-origin:50% 45%}
+.hero__barcode .sh-bar{display:inline-block}
+@keyframes sh-light{to{transform:translate(12%,-10%) rotate(8deg)}}
+
+/* Giant outlined page numbers behind each spread */
+.spread,.venue-spread,.back-cover{isolation:isolate;overflow:hidden}
+.sh-num{position:absolute;right:-.06em;top:14%;z-index:-1;font:900 clamp(220px,70vw,340px)/.8 var(--display);letter-spacing:-.08em;color:transparent;-webkit-text-stroke:1px currentColor;opacity:.12;pointer-events:none;user-select:none}
+.rsvp-spread .sh-num,.venue-spread .sh-num{opacity:.2}
+
+/* The big date fills in from an outline as it lands */
+.sh-motion .date-huge{display:inline-block;transform-origin:0 70%;-webkit-text-stroke:1.5px var(--ink);color:color-mix(in srgb,var(--ink) calc(var(--fill,1) * 100%),transparent)}
+.calendar .is-event.sh-pulse{animation:sh-pulse 1.8s ease-in-out infinite}
+@keyframes sh-pulse{0%,100%{box-shadow:0 0 0 0 #8c1c1300}50%{box-shadow:0 0 0 6px #8c1c1355}}
+.countdown strong{display:inline-block}
+
+/* Reading progress */
+.sh-progress{position:fixed;left:0;right:0;top:0;z-index:90;height:3px;background:var(--accent,#8C1C13);transform-origin:0 50%;transform:scaleX(0);pointer-events:none}
+html.is-locked .sh-progress{display:none}
+
+/* RSVP choice flash */
+.rsvp__choices button{position:relative;overflow:hidden}
+.rsvp__choices button.sh-flash::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent,#ffffffaa 50%,transparent);transform:translateX(-100%);animation:sh-flash .6s ease-out forwards;pointer-events:none}
+@keyframes sh-flash{to{transform:translateX(100%)}}
+
+@media (prefers-reduced-motion:reduce){.sh-light,.calendar .is-event.sh-pulse{animation:none}.sh-progress{display:none}}

@@ -130,11 +130,11 @@
 
   function languageName(locale) {
     return ({
-      "uz-Latn": "UZ",
-      "uz-Cyrl": "ЎЗ",
-      en: "EN",
-      ru: "RU",
-    })[locale] || "UZ";
+      "uz-Latn": "Uz",
+      "uz-Cyrl": "Уз",
+      en: "En",
+      ru: "Ru",
+    })[locale] || "Uz";
   }
 
   function translateStaticText(locale) {
@@ -492,7 +492,7 @@
 
   function startMusic() {
     const audio = $("[data-music]");
-    if (!audio?.src || musicStarted || musicManuallyPaused || config?.preview) return;
+    if (!audio?.src || musicStarted || musicManuallyPaused || (config?.preview && !config?.catalogMusic)) return;
     musicStarted = true;
     audio.play().catch(() => showToast(localized[config.locale].musicOn));
   }

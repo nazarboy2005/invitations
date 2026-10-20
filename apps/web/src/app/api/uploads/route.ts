@@ -7,6 +7,34 @@ import { verifySameOrigin } from "@/server/auth";
 import { ApiError, apiError, privateHeaders, readJson } from "@/server/api";
 import { presignMedia, storageClient } from "@/server/storage";
 export const runtime = "nodejs";
+
+export async function GET() {
+  try {
+    const user = await authenticatedUser();
+    const assets = await getDb()`
+      SELECT id, url, filename, created_at
+      FROM media_assets
+      WHERE owner_id=${user.id}
+        AND status='ready'
+        AND mime_type LIKE 'audio/%'
+      ORDER BY created_at DESC
+      LIMIT 100`;
+    return NextResponse.json(
+      {
+        assets: assets.map((asset) => ({
+          id: asset.id,
+          url: asset.url,
+          filename: asset.filename,
+          createdAt: asset.created_at,
+        })),
+      },
+      { headers: privateHeaders },
+    );
+  } catch (e) {
+    return apiError(e);
+  }
+}
+
 const inputSchema = z.object({
   filename: z.string().min(1).max(200),
   size: z

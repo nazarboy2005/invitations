@@ -48,10 +48,12 @@ import {
 import styles from "./studio.module.css";
 import { readBrowserDraft, saveBrowserDraft } from "./draft-storage";
 import { AnorInvitation } from "@/templates/anor";
+import { isMarxabaTemplate, MarxabaInvitation } from "@/templates/marxaba";
 import {
   createTemplatePreviewSample,
   hasAuthoredInvitationContent,
 } from "@/modules/catalog/preview-sample";
+import { CATALOG_PREVIEW_MUSIC } from "@/modules/catalog/catalog-music";
 
 const sections = [
   {
@@ -151,6 +153,10 @@ export function Studio({
   const [imageUrl, setImageUrl] = useState("");
   const [audioPreview, setAudioPreview] = useState("");
   const [audioName, setAudioName] = useState("");
+  const [savedMusic, setSavedMusic] = useState<
+    Array<{ id: string; assetId: string | null; url: string; filename: string }>
+  >([]);
+  const [musicLibraryLoading, setMusicLibraryLoading] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [templates, setTemplates] = useState<TemplateDefinition[]>([]);
   const [categories, setCategories] =
@@ -167,6 +173,46 @@ export function Studio({
   const dialogRef = useRef<HTMLDivElement>(null);
   const previousFocus = useRef<HTMLElement | null>(null);
   invitationRef.current = invitation;
+
+  useEffect(() => {
+    if (!invitation?.music.enabled) return;
+    const controller = new AbortController();
+    setMusicLibraryLoading(true);
+    fetch("/api/uploads", { signal: controller.signal })
+      .then(async (response) => {
+        if (!response.ok) return [];
+        const result = (await response.json()) as {
+          assets?: Array<{ id: string; url: string; filename: string }>;
+        };
+        return result.assets ?? [];
+      })
+      .then((assets) =>
+        setSavedMusic([
+          {
+            id: CATALOG_PREVIEW_MUSIC.id,
+            assetId: null,
+            url: CATALOG_PREVIEW_MUSIC.url,
+            filename: CATALOG_PREVIEW_MUSIC.filename,
+          },
+          ...assets.map((asset) => ({ ...asset, assetId: asset.id })),
+        ]),
+      )
+      .catch(() => {
+        if (!controller.signal.aborted)
+          setSavedMusic([
+            {
+              id: CATALOG_PREVIEW_MUSIC.id,
+              assetId: null,
+              url: CATALOG_PREVIEW_MUSIC.url,
+              filename: CATALOG_PREVIEW_MUSIC.filename,
+            },
+          ]);
+      })
+      .finally(() => {
+        if (!controller.signal.aborted) setMusicLibraryLoading(false);
+      });
+    return () => controller.abort();
+  }, [invitation?.id, invitation?.music.enabled]);
 
   useEffect(() => {
     let alive = true;
@@ -447,6 +493,20 @@ export function Studio({
         : current,
     );
   }
+  function updateDressCode(patch: Partial<Invitation["dressCode"]>) {
+    const current = invitation;
+    if (!current) return;
+    update({ dressCode: { ...current.dressCode, ...patch } });
+  }
+  function updateDressCodeText(
+    field: "style" | "text" | "note",
+    value: string,
+  ) {
+    const current = invitation;
+    if (!current) return;
+    const values = current.dressCode[field];
+    updateDressCode({ [field]: { ...values, [locale]: value } });
+  }
   function person(index: number, value: string) {
     const people = [...content.people];
     people[index] = value;
@@ -673,6 +733,15 @@ export function Studio({
         );
       const current = invitationRef.current;
       if (kind === "audio") {
+        setSavedMusic((items) => [
+          {
+            id: result.asset.id,
+            assetId: result.asset.id,
+            url: result.asset.url,
+            filename: file.name,
+          },
+          ...items.filter((item) => item.id !== result.asset.id),
+        ]);
         update({
           music: {
             enabled: true,
@@ -1024,6 +1093,99 @@ export function Studio({
                   }
                 />
               </Field>
+              {(invitation.templateId === "muhabbat-kitobi" ||
+                invitation.story.length > 0) && (
+                <>
+                  <div className={styles.divider} />
+                  <div className={styles.groupHeader}>
+                    <div>
+                      <h2>Hikoya boblari</h2>
+                      <p className={styles.help}>
+                        Ixtiyoriy. Muhabbat Kitobi dizaynida ko‘rsatiladi. Har
+                        bir til uchun matnni alohida kiriting.
+                      </p>
+                    </div>
+                    <button
+                      className={styles.textButton}
+                      disabled={invitation.story.length >= 20}
+                      onClick={() =>
+                        update({
+                          story: [
+                            ...invitation.story,
+                            { id: crypto.randomUUID(), title: {}, text: {} },
+                          ],
+                        })
+                      }
+                    >
+                      <Plus size={15} />
+                      Bob qo‘shish
+                    </button>
+                  </div>
+                  {invitation.story.map((chapter, index) => (
+                    <div className={styles.storyItem} key={chapter.id}>
+                      <div className={styles.groupHeader}>
+                        <h3>{index + 1}-bob</h3>
+                        <button
+                          className={styles.iconButton}
+                          aria-label={`${index + 1}-bobni olib tashlash`}
+                          onClick={() =>
+                            update({
+                              story: invitation.story.filter(
+                                (item) => item.id !== chapter.id,
+                              ),
+                            })
+                          }
+                        >
+                          <Trash2 size={14} />
+                        </button>
+                      </div>
+                      <Field label="Sarlavha">
+                        <input
+                          value={chapter.title[locale] ?? ""}
+                          maxLength={300}
+                          onChange={(event) =>
+                            update({
+                              story: invitation.story.map((item) =>
+                                item.id === chapter.id
+                                  ? {
+                                      ...item,
+                                      title: {
+                                        ...item.title,
+                                        [locale]: event.target.value,
+                                      },
+                                    }
+                                  : item,
+                              ),
+                            })
+                          }
+                        />
+                      </Field>
+                      <Field label="Hikoya matni">
+                        <textarea
+                          value={chapter.text[locale] ?? ""}
+                          maxLength={10000}
+                          rows={5}
+                          onChange={(event) =>
+                            update({
+                              story: invitation.story.map((item) =>
+                                item.id === chapter.id
+                                  ? {
+                                      ...item,
+                                      text: {
+                                        ...item.text,
+                                        [locale]: event.target.value,
+                                      },
+                                    }
+                                  : item,
+                              ),
+                            })
+                          }
+                        />
+                      </Field>
+                    </div>
+                  ))}
+                </>
+              )}
             </div>
           )}
 
@@ -1204,6 +1366,122 @@ export function Studio({
                 <Plus size={17} />
                 Dastur bandini qo‘shish
               </button>
+              <div className={styles.divider} />
+              <Toggle
+                title="Kiyinish uslubi"
+                description="Taklifnomaga ixtiyoriy kiyinish uslubi va ranglar palitrasini qo‘shing."
+                checked={invitation.dressCode.enabled}
+                onChange={(enabled) => updateDressCode({ enabled })}
+              />
+              {invitation.dressCode.enabled && (
+                <div className={styles.optionBody}>
+                  <Field label="Kiyinish uslubi">
+                    <input
+                      value={invitation.dressCode.style[locale] ?? ""}
+                      maxLength={300}
+                      onChange={(event) =>
+                        updateDressCodeText("style", event.target.value)
+                      }
+                    />
+                  </Field>
+                  <Field label="Mehmonlar uchun izoh">
+                    <textarea
+                      value={invitation.dressCode.text[locale] ?? ""}
+                      maxLength={10000}
+                      rows={3}
+                      onChange={(event) =>
+                        updateDressCodeText("text", event.target.value)
+                      }
+                    />
+                  </Field>
+                  <Field label="Qo‘shimcha eslatma" hint="Ixtiyoriy">
+                    <textarea
+                      value={invitation.dressCode.note[locale] ?? ""}
+                      maxLength={10000}
+                      rows={2}
+                      onChange={(event) =>
+                        updateDressCodeText("note", event.target.value)
+                      }
+                    />
+                  </Field>
+                  <div className={styles.sectionHeading}>
+                    <strong>Ranglar palitrasi</strong>
+                    <span>{invitation.dressCode.colors.length}/12</span>
+                  </div>
+                  {invitation.dressCode.colors.map((color, index) => (
+                    <div key={color.id} className={styles.twoColumns}>
+                      <Field label={`${index + 1}-rang nomi`}>
+                        <input
+                          value={color.name[locale] ?? ""}
+                          maxLength={300}
+                          onChange={(event) =>
+                            updateDressCode({
+                              colors: invitation.dressCode.colors.map((item) =>
+                                item.id === color.id
+                                  ? {
+                                      ...item,
+                                      name: {
+                                        ...item.name,
+                                        [locale]: event.target.value,
+                                      },
+                                    }
+                                  : item,
+                              ),
+                            })
+                          }
+                        />
+                      </Field>
+                      <Field label="Rang kodi">
+                        <input
+                          type="color"
+                          value={color.hex}
+                          onChange={(event) =>
+                            updateDressCode({
+                              colors: invitation.dressCode.colors.map((item) =>
+                                item.id === color.id
+                                  ? { ...item, hex: event.target.value }
+                                  : item,
+                              ),
+                            })
+                          }
+                        />
+                      </Field>
+                      <button
+                        className={styles.textButton}
+                        type="button"
+                        onClick={() =>
+                          updateDressCode({
+                            colors: invitation.dressCode.colors.filter(
+                              (item) => item.id !== color.id,
+                            ),
+                          })
+                        }
+                      >
+                        <Trash2 size={14} /> Rangni olib tashlash
+                      </button>
+                    </div>
+                  ))}
+                  <button
+                    className={styles.addButton}
+                    type="button"
+                    disabled={invitation.dressCode.colors.length >= 12}
+                    onClick={() =>
+                      updateDressCode({
+                        colors: [
+                          ...invitation.dressCode.colors,
+                          {
+                            id: crypto.randomUUID(),
+                            name: { [locale]: "" },
+                            hex: "#c9a55c",
+                          },
+                        ],
+                      })
+                    }
+                  >
+                    <Plus size={17} /> Rang qo‘shish
+                  </button>
+                </div>
+              )}
             </div>
           )}
 
@@ -1298,7 +1576,7 @@ export function Studio({
                         <div
                           className={styles.templateArt}
                           style={{
-                            backgroundImage: `url(/templates/${template.id}/${template.previewImage ?? "stage.webp"})`,
+                            backgroundImage: `url(${template.previewImage?.startsWith("/") ? template.previewImage : `/templates/${template.id}/${template.previewImage ?? "stage.webp"}`})`,
                           }}
                           aria-label={`${template.name} dizaynining birinchi sahifasi`}
                         >
@@ -1493,10 +1771,55 @@ export function Studio({
               />
               {invitation.music.enabled && (
                 <div className={styles.optionBody}>
+                  <Field label="Musiqa kutubxonasi">
+                    <select
+                      value={
+                        savedMusic.find((item) =>
+                          invitation.music.assetId
+                            ? item.assetId === invitation.music.assetId
+                            : item.url === invitation.music.url,
+                        )?.id ?? ""
+                      }
+                      disabled={musicLibraryLoading || savedMusic.length === 0}
+                      onChange={(event) => {
+                        const track = savedMusic.find(
+                          (item) => item.id === event.target.value,
+                        );
+                        if (!track) return;
+                        setAudioPreview("");
+                        setAudioName("");
+                        update({
+                          music: {
+                            enabled: true,
+                            assetId: track.assetId,
+                            url: track.url,
+                            filename: track.filename,
+                          },
+                        });
+                      }}
+                    >
+                      <option value="">
+                        {musicLibraryLoading
+                          ? "Musiqalar yuklanmoqda…"
+                          : savedMusic.length
+                            ? "Musiqani tanlang"
+                            : "Hozircha yuklangan musiqa yo‘q"}
+                      </option>
+                      {savedMusic.map((track) => (
+                        <option key={track.id} value={track.id}>
+                          {track.filename}
+                        </option>
+                      ))}
+                    </select>
+                  </Field>
+                  <p className={styles.help}>
+                    Kutubxonadagi tayyor musiqani tanlang yoki o‘zingiznikini
+                    yuklang.
+                  </p>
                   <label className={styles.audioUpload}>
                     <Music2 size={20} />
                     <span>
-                      {uploading ? "Yuklanmoqda…" : "O‘z musiqangizni yuklang"}
+                      {uploading ? "Yuklanmoqda…" : "Yangi musiqa yuklang"}
                       <small>Audio fayl · 15 MB gacha</small>
                     </span>
                     <input
@@ -1821,24 +2144,26 @@ export function Studio({
               Jonli ko‘rinish
             </span>
             <span>{LANGUAGE_NAMES[locale]}</span>
-            {invitation.templateId === "anor" && (
-              <Link
-                className={styles.fullPreviewLink}
-                href={`/preview?template=anor&draft=${encodeURIComponent(invitation.id)}${section === 2 && !authoredPreview ? "&demo=1" : ""}`}
-                onClick={() => {
-                  try {
-                    sessionStorage.setItem(
-                      `taklifnoma:full-preview:v1:${invitation.id}`,
-                      JSON.stringify(invitation),
-                    );
-                  } catch {
-                    // The full preview can recover the last saved browser draft.
-                  }
-                }}
-              >
-                <Eye size={14} /> To‘liq ko‘rish
-              </Link>
-            )}
+            {invitation.templateId &&
+              (invitation.templateId === "anor" ||
+                isMarxabaTemplate(invitation.templateId)) && (
+                <Link
+                  className={styles.fullPreviewLink}
+                  href={`/preview?template=${encodeURIComponent(invitation.templateId)}&draft=${encodeURIComponent(invitation.id)}${section === 2 && !authoredPreview ? "&demo=1" : ""}`}
+                  onClick={() => {
+                    try {
+                      sessionStorage.setItem(
+                        `taklifnoma:full-preview:v1:${invitation.id}`,
+                        JSON.stringify(invitation),
+                      );
+                    } catch {
+                      // The full preview can recover the last saved browser draft.
+                    }
+                  }}
+                >
+                  <Eye size={14} /> To‘liq ko‘rish
+                </Link>
+              )}
           </div>
           <div className={styles.realPreview}>
             {invitation.templateId === "anor" ? (
@@ -1846,6 +2171,16 @@ export function Studio({
                 invitation={previewInvitation}
                 invitationId={invitation.id}
                 locale={locale}
+                preview
+                fullPreview
+              />
+            ) : invitation.templateId &&
+              isMarxabaTemplate(invitation.templateId) ? (
+              <MarxabaInvitation
+                invitation={previewInvitation}
+                invitationId={invitation.id}
+                locale={locale}
+                templateId={invitation.templateId}
                 preview
                 fullPreview
               />

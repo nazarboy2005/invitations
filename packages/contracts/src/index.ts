@@ -10,10 +10,10 @@ export const templateIdSchema = z
 const invitationTemplateIdSchema = templateIdSchema.or(z.literal(""));
 export type Locale = z.infer<typeof localeSchema>;
 export const LANGUAGE_NAMES: Record<Locale, string> = {
-  "uz-Latn": "O‘zbekcha",
-  "uz-Cyrl": "Ўзбекча",
-  en: "English",
-  ru: "Русский",
+  "uz-Latn": "Uz",
+  "uz-Cyrl": "Уз",
+  en: "En",
+  ru: "Ru",
 };
 const short = z.string().max(300);
 const text = z.string().max(10000);
@@ -39,6 +39,29 @@ export const contentSchema = z.object({
   programTitles: z.record(z.string(), short),
 });
 export type InvitationContent = z.infer<typeof contentSchema>;
+const localizedShortText = z.partialRecord(localeSchema, short);
+const localizedLongText = z.partialRecord(localeSchema, text);
+export const dressCodeSchema = z.object({
+  enabled: z.boolean().default(false),
+  style: localizedShortText.default({}),
+  text: localizedLongText.default({}),
+  note: localizedLongText.default({}),
+  colors: z
+    .array(
+      z.object({
+        id: z.string().min(1).max(100),
+        name: localizedShortText.default({}),
+        hex: z.string().regex(/^#[0-9a-f]{3,8}$/i),
+      }),
+    )
+    .max(12)
+    .default([]),
+});
+export const storyChapterSchema = z.object({
+  id: z.string().min(1).max(100),
+  title: localizedShortText.default({}),
+  text: localizedLongText.default({}),
+});
 export const invitationSchema = z
   .object({
     version: z.literal(1),
@@ -60,6 +83,7 @@ export const invitationSchema = z
     program: z
       .array(z.object({ id: z.string().max(100), time: z.string().max(10) }))
       .max(100),
+    story: z.array(storyChapterSchema).max(20).default([]),
     gallery: z
       .array(
         z.object({
@@ -101,6 +125,13 @@ export const invitationSchema = z
     wishes: z.object({
       enabled: z.boolean(),
       requireApproval: z.literal(true),
+    }),
+    dressCode: dressCodeSchema.default({
+      enabled: false,
+      style: {},
+      text: {},
+      note: {},
+      colors: [],
     }),
   })
   .superRefine((value, ctx) => {
@@ -162,6 +193,119 @@ export const TEMPLATES: TemplateDefinition[] = [
     accent: "#7c142b",
     published: false,
   },
+  {
+    id: "oltin-nur",
+    name: "Oltin Nur",
+    description: "Qora baxmal va oltin nur.",
+    previewImage: "/templates/marxaba/nikoh/templates/oltin-nur/preview.webp",
+    categoryIds: ["wedding"],
+    priceMinor: 15000000,
+    currency: "UZS",
+    accent: "#c6a45b",
+    published: false,
+  },
+  {
+    id: "samarqand-kechasi",
+    name: "Samarqand Kechasi",
+    description: "Registon oqshomi va oltin salyut.",
+    previewImage:
+      "/templates/marxaba/nikoh/templates/samarqand-kechasi/preview.webp",
+    categoryIds: ["wedding"],
+    priceMinor: 15000000,
+    currency: "UZS",
+    accent: "#d2a84a",
+    published: false,
+  },
+  {
+    id: "bogi-eram",
+    name: "Bog‘i Eram",
+    description: "O‘ymakor darvoza va jannat bog‘i.",
+    previewImage: "/templates/marxaba/nikoh/templates/bogi-eram/preview.webp",
+    categoryIds: ["wedding"],
+    priceMinor: 15000000,
+    currency: "UZS",
+    accent: "#9c6c3a",
+    published: false,
+  },
+  {
+    id: "atlas",
+    name: "Atlas",
+    description: "Zamonaviy atlas va adras ranglari.",
+    previewImage: "/templates/marxaba/nikoh/templates/atlas/preview.webp",
+    categoryIds: ["wedding"],
+    priceMinor: 15000000,
+    currency: "UZS",
+    accent: "#c2185b",
+    published: false,
+  },
+  {
+    id: "uchar-gilam",
+    name: "Uchar Gilam",
+    description: "Gilam ustida Buxoro uzra parvoz.",
+    previewImage: "/templates/marxaba/nikoh/templates/uchar-gilam/preview.webp",
+    categoryIds: ["wedding"],
+    priceMinor: 15000000,
+    currency: "UZS",
+    accent: "#be8738",
+    published: false,
+  },
+  {
+    id: "oq-kabutar",
+    name: "Oq Kabutar",
+    description: "Oq kabutarlar va ipak lenta.",
+    previewImage: "/templates/marxaba/nikoh/templates/oq-kabutar/preview.webp",
+    categoryIds: ["wedding"],
+    priceMinor: 15000000,
+    currency: "UZS",
+    accent: "#9a7957",
+    published: false,
+  },
+  {
+    id: "kuzgi-chinor",
+    name: "Kuzgi Chinor",
+    description: "Oltin kuz va chinor barglari.",
+    previewImage:
+      "/templates/marxaba/nikoh/templates/kuzgi-chinor/preview.webp",
+    categoryIds: ["wedding"],
+    priceMinor: 15000000,
+    currency: "UZS",
+    accent: "#a65724",
+    published: false,
+  },
+  {
+    id: "muhabbat-kitobi",
+    name: "Muhabbat Kitobi",
+    description: "Sevgi hikoyasi kitob sahifalarida.",
+    previewImage:
+      "/templates/marxaba/nikoh/templates/muhabbat-kitobi/preview.webp",
+    categoryIds: ["wedding"],
+    priceMinor: 15000000,
+    currency: "UZS",
+    accent: "#8a6348",
+    published: false,
+  },
+  {
+    id: "sahifa",
+    name: "Sahifa",
+    description: "Jurnal muqovasidan ilhomlangan taklifnoma.",
+    previewImage: "/templates/marxaba/nikoh/templates/sahifa/preview.webp",
+    categoryIds: ["wedding"],
+    priceMinor: 15000000,
+    currency: "UZS",
+    accent: "#9f7551",
+    published: false,
+  },
+  {
+    id: "oltin-uzuk",
+    name: "Oltin Uzuk",
+    description: "Haqiqiy 3D oltin uzuklar.",
+    previewImage: "/templates/marxaba/nikoh/templates/oltin-uzuk/preview.webp",
+    categoryIds: ["wedding"],
+    priceMinor: 15000000,
+    currency: "UZS",
+    accent: "#c8a14e",
+    published: false,
+  },
 ];
 export const templateById = (id: string) =>
   TEMPLATES.find((item) => item.id === id);
@@ -207,6 +351,7 @@ export function createInvitation(
     timezone: "Asia/Tashkent",
     venue: { latitude: null, longitude: null, mapUrl: "" },
     program: [],
+    story: [],
     gallery: [],
     music: { enabled: false, assetId: null, url: "", filename: "" },
     gift: {
@@ -219,6 +364,13 @@ export function createInvitation(
     contacts: [],
     rsvp: { enabled: true, deadline: "", maxPartySize: 5 },
     wishes: { enabled: true, requireApproval: true },
+    dressCode: {
+      enabled: false,
+      style: {},
+      text: {},
+      note: {},
+      colors: [],
+    },
   };
 }
 export function getContent(

@@ -5,6 +5,7 @@ import type { Invitation, Locale } from "@taklifnoma/contracts";
 import { getContent } from "@taklifnoma/contracts";
 import { eventInstant, eventWallDate, formatDate } from "../date-format";
 import styles from "./template.module.css";
+import { CATALOG_PREVIEW_MUSIC } from "@/modules/catalog/catalog-music";
 
 type Props = {
   invitation: Invitation;
@@ -14,6 +15,7 @@ type Props = {
   guestToken?: string;
   preview?: boolean;
   fullPreview?: boolean;
+  catalogMusic?: boolean;
 };
 
 type LegacyDate = {
@@ -28,13 +30,14 @@ type LegacyDate = {
   short: string;
 };
 
-type LegacyData = {
+export type LegacyData = {
   title: string;
   groom: string;
   bride: string;
   hosts: string;
   hostsLabel: string;
   greeting: string;
+  monogram: string;
   eventType: string;
   message: string;
   programHeading: string;
@@ -48,6 +51,7 @@ type LegacyData = {
     mapUrl: string;
   };
   program: Array<{ id: string; time: string; title: string }>;
+  story: Array<{ id: string; title: string; text: string }>;
   gallery: Array<{ id: string; src: string; alt: string; caption: string }>;
   contacts: Array<{
     label: string;
@@ -66,6 +70,14 @@ type LegacyData = {
     note: string;
   };
   music: { enabled: boolean; url: string };
+  timezone: string;
+  dressCode: {
+    enabled: boolean;
+    style: string;
+    text: string;
+    note: string;
+    colors: Array<{ id: string; name: string; hex: string }>;
+  };
 };
 
 const eventLabels: Record<Locale, Record<Invitation["eventType"], string>> = {
@@ -105,7 +117,7 @@ const hostsLabels: Record<Locale, string> = {
   ru: "С уважением",
 };
 
-function makeLegacyData(
+export function makeLegacyData(
   invitation: Invitation,
   locale: Locale,
   guestName: string,
@@ -140,18 +152,17 @@ function makeLegacyData(
           minute: "2-digit",
           hourCycle: "h23",
         }),
-        long: formatDate(
-          invitation.startsAt,
-          locale,
-          invitation.timezone,
-          { weekday: "long", day: "numeric", month: "long", year: "numeric" },
-        ),
-        short: formatDate(
-          invitation.startsAt,
-          locale,
-          invitation.timezone,
-          { day: "numeric", month: "long", year: "numeric" },
-        ),
+        long: formatDate(invitation.startsAt, locale, invitation.timezone, {
+          weekday: "long",
+          day: "numeric",
+          month: "long",
+          year: "numeric",
+        }),
+        short: formatDate(invitation.startsAt, locale, invitation.timezone, {
+          day: "numeric",
+          month: "long",
+          year: "numeric",
+        }),
       }
     : {
         weekday: "",
@@ -175,16 +186,19 @@ function makeLegacyData(
     hosts: content.hosts,
     hostsLabel: hostsLabels[locale],
     greeting,
+    monogram: `${people[0]?.trim().charAt(0) ?? ""} & ${people[1]?.trim().charAt(0) ?? ""}`,
     eventType: content.eventLabel || eventLabels[locale][invitation.eventType],
     message: content.message,
     programHeading:
       content.programHeading ||
-      ({
-        "uz-Latn": "To‘y dasturi",
-        "uz-Cyrl": "Тўй дастури",
-        en: "The evening",
-        ru: "Программа вечера",
-      } satisfies Record<Locale, string>)[locale],
+      (
+        {
+          "uz-Latn": "To‘y dasturi",
+          "uz-Cyrl": "Тўй дастури",
+          en: "The evening",
+          ru: "Программа вечера",
+        } satisfies Record<Locale, string>
+      )[locale],
     dateTime: eventAt?.toISOString() ?? "",
     date,
     venue: {
@@ -199,6 +213,13 @@ function makeLegacyData(
       time: item.time,
       title: content.programTitles[item.id] ?? "",
     })),
+    story: invitation.story
+      .map((chapter) => ({
+        id: chapter.id,
+        title: chapter.title[locale] ?? "",
+        text: chapter.text[locale] ?? "",
+      }))
+      .filter((chapter) => chapter.title.trim() || chapter.text.trim()),
     gallery: invitation.gallery.map((item) => ({
       id: item.id,
       src: item.url,
@@ -228,6 +249,26 @@ function makeLegacyData(
       enabled: invitation.music.enabled,
       url: invitation.music.url,
     },
+    dressCode: {
+      enabled: invitation.dressCode.enabled,
+      style: invitation.dressCode.enabled
+        ? (invitation.dressCode.style[locale] ?? "")
+        : "",
+      text: invitation.dressCode.enabled
+        ? (invitation.dressCode.text[locale] ?? "")
+        : "",
+      note: invitation.dressCode.enabled
+        ? (invitation.dressCode.note[locale] ?? "")
+        : "",
+      colors: invitation.dressCode.enabled
+        ? invitation.dressCode.colors.map((color) => ({
+            id: color.id,
+            name: color.name[locale] ?? "",
+            hex: color.hex,
+          }))
+        : [],
+    },
+    timezone: invitation.timezone,
   };
 }
 
@@ -239,6 +280,7 @@ export function AnorInvitation({
   guestToken = "",
   preview = false,
   fullPreview = false,
+  catalogMusic = false,
 }: Props) {
   const frame = useRef<HTMLIFrameElement>(null);
   const [frameLocale, setFrameLocale] = useState(locale);
@@ -247,20 +289,40 @@ export function AnorInvitation({
     () => makeLegacyData(invitation, frameLocale, guestName),
     [invitation, frameLocale, guestName],
   );
+  const rendererData = useMemo(
+    () =>
+      catalogMusic
+        ? {
+            ...data,
+            music: { enabled: true, url: CATALOG_PREVIEW_MUSIC.url },
+          }
+        : data,
+    [catalogMusic, data],
+  );
   const payload = useMemo(
     () => ({
       type: "taklifnoma:initialize",
       payload: {
-        data,
+        data: rendererData,
         locale: frameLocale,
         enabledLocales: invitation.enabledLocales,
         invitationId,
         guestName,
         guestToken,
         preview,
+        catalogMusic,
       },
     }),
-    [data, frameLocale, invitation.enabledLocales, invitationId, guestName, guestToken, preview],
+    [
+      catalogMusic,
+      frameLocale,
+      invitation.enabledLocales,
+      invitationId,
+      guestName,
+      guestToken,
+      preview,
+      rendererData,
+    ],
   );
 
   useEffect(() => setFrameLocale(locale), [locale]);
@@ -293,15 +355,15 @@ export function AnorInvitation({
   }, [invitation.enabledLocales]);
 
   return (
-      <div
-        className={
-          fullPreview
-            ? styles.sourceFullPreview
-            : preview
-              ? styles.sourcePreview
-              : styles.sourcePublic
-        }
-      >
+    <div
+      className={
+        fullPreview
+          ? styles.sourceFullPreview
+          : preview
+            ? styles.sourcePreview
+            : styles.sourcePublic
+      }
+    >
       <iframe
         key={frameLocale}
         ref={frame}

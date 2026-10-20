@@ -9,6 +9,7 @@ import {
   type TemplateDefinition,
 } from "@taklifnoma/contracts";
 import { AnorInvitation } from "@/templates/anor";
+import { isMarxabaTemplate, MarxabaInvitation } from "@/templates/marxaba";
 import { readBrowserDraft } from "@/modules/studio/draft-storage";
 import {
   createTemplatePreviewSample,
@@ -32,6 +33,7 @@ export function FullTemplatePreview({
   demo?: boolean;
 }) {
   const [invitation, setInvitation] = useState<Invitation | null>(null);
+  const [catalogPreview, setCatalogPreview] = useState(true);
 
   useEffect(() => {
     let active = true;
@@ -70,6 +72,7 @@ export function FullTemplatePreview({
         candidate && (!demo || candidateHasContent)
           ? { ...candidate, templateId: template.id }
           : createTemplatePreviewSample(template.id);
+      setCatalogPreview(!candidateHasContent);
       setInvitation(resolved);
     }
     void load();
@@ -108,6 +111,17 @@ export function FullTemplatePreview({
           locale={invitation.defaultLocale}
           preview
           fullPreview
+          catalogMusic={catalogPreview}
+        />
+      ) : isMarxabaTemplate(template.id) ? (
+        <MarxabaInvitation
+          invitation={invitation}
+          invitationId={invitation.id}
+          locale={invitation.defaultLocale}
+          templateId={template.id}
+          preview
+          fullPreview
+          catalogMusic={catalogPreview}
         />
       ) : (
         <div className={styles.unsupported}>

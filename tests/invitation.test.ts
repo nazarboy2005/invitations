@@ -22,6 +22,16 @@ test("switching designs preserves authored content, locales, media and optional 
   const first = addLanguage(createInvitation(), "uz-Cyrl");
   first.content["uz-Latn"].people = ["Nazar", "Nodira"];
   first.content["uz-Cyrl"].message = "Азиз меҳмонлар, марҳамат!";
+  first.story = [
+    {
+      id: "first-meeting",
+      title: { "uz-Latn": "Birinchi uchrashuv", en: "Our first meeting" },
+      text: {
+        "uz-Latn": "Hikoya matni",
+        en: "Story text",
+      },
+    },
+  ];
   first.gallery = [
     {
       id: "photo",
@@ -40,6 +50,29 @@ test("switching designs preserves authored content, locales, media and optional 
   assert.equal(second.id, first.id);
   assert.deepEqual({ ...second, templateId: first.templateId }, first);
   assert.notEqual(second, first);
+  assert.deepEqual(
+    invitationSchema.parse(JSON.parse(JSON.stringify(second))).story,
+    first.story,
+  );
+});
+
+test("story chapters are optional, localized, repeatable content", () => {
+  const draft = createInvitation("muhabbat-kitobi");
+  assert.deepEqual(draft.story, []);
+  assert.equal(invitationSchema.safeParse(draft).success, true);
+  draft.story = Array.from({ length: 20 }, (_, index) => ({
+    id: `chapter-${index + 1}`,
+    title: { "uz-Latn": `Bob ${index + 1}` },
+    text: { "uz-Latn": `Hikoya ${index + 1}` },
+  }));
+  const parsed = invitationSchema.parse(
+    JSON.parse(JSON.stringify(switchTemplate(draft, "anor"))),
+  );
+  assert.equal(parsed.story.length, 20);
+  assert.equal(parsed.story[0].title["uz-Latn"], "Bob 1");
+  assert.equal(parsed.story[0].text["uz-Latn"], "Hikoya 1");
+  parsed.story.push({ id: "chapter-21", title: {}, text: {} });
+  assert.equal(invitationSchema.safeParse(parsed).success, false);
 });
 test("new invitations start template-free while switching never rewrites event data", () => {
   const birthday = createInvitation();

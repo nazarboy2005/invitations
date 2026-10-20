@@ -88,7 +88,7 @@ export function TemplateGallery({
                   href={previewUrl}
                   aria-label={`${template.name}: to‘liq ko‘rinishini ochish`}
                   style={{
-                    backgroundImage: `url(/templates/${template.id}/${template.previewImage ?? "stage.webp"})`,
+                    backgroundImage: `url(${template.previewImage?.startsWith("/") ? template.previewImage : `/templates/${template.id}/${template.previewImage ?? "stage.webp"}`})`,
                   }}
                 />
                 <div className={styles.templateInfo}>

@@ -3,6 +3,7 @@ import { templateById } from "@taklifnoma/contracts";
 import { getPublishedInvitation } from "@/server/invitations";
 import { resolveGuest } from "@/server/public";
 import { AnorInvitation } from "@/templates/anor";
+import { isMarxabaTemplate, MarxabaInvitation } from "@/templates/marxaba";
 export const dynamic = "force-dynamic";
 export const metadata = {
   title: "Sizga taklifnoma",
@@ -35,14 +36,26 @@ export default async function InvitationPage({
       guestName = "";
     }
   }
-  if (invitation.templateId !== "anor") notFound();
-  return (
-    <AnorInvitation
-      invitation={invitation}
-      invitationId={result.id}
-      locale={locale}
-      guestName={guestName}
-      guestToken={query.g}
-    />
-  );
+  if (invitation.templateId === "anor")
+    return (
+      <AnorInvitation
+        invitation={invitation}
+        invitationId={result.id}
+        locale={locale}
+        guestName={guestName}
+        guestToken={query.g}
+      />
+    );
+  if (isMarxabaTemplate(invitation.templateId))
+    return (
+      <MarxabaInvitation
+        invitation={invitation}
+        invitationId={result.id}
+        locale={locale}
+        templateId={invitation.templateId}
+        guestName={guestName}
+        guestToken={query.g}
+      />
+    );
+  notFound();
 }

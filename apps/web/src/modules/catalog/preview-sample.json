@@ -13,7 +13,7 @@
   "content": {
     "uz-Latn": {
       "title": "Bizning unutilmas kunimiz",
-      "people": ["Jasur", "Madina"],
+      "people": ["Asadbek", "Gulhayo"],
       "hosts": "Karimovlar oilasi",
       "greeting": "Assalomu alaykum, aziz mehmon!",
       "personalGreeting": "Assalomu alaykum, {name}!",
@@ -32,7 +32,7 @@
     },
     "uz-Cyrl": {
       "title": "Бизнинг унутилмас кунимиз",
-      "people": ["Жасур", "Мадина"],
+      "people": ["Asadbek", "Gulhayo"],
       "hosts": "Каримовлар оиласи",
       "greeting": "Ассалому алайкум, азиз меҳмон!",
       "personalGreeting": "Ассалому алайкум, {name}!",
@@ -51,7 +51,7 @@
     },
     "en": {
       "title": "Our Unforgettable Day",
-      "people": ["Jasur", "Madina"],
+      "people": ["Asadbek", "Gulhayo"],
       "hosts": "The Karimov family",
       "greeting": "Hello, dear guest!",
       "personalGreeting": "Hello, {name}!",
@@ -70,7 +70,7 @@
     },
     "ru": {
       "title": "Наш незабываемый день",
-      "people": ["Джасур", "Мадина"],
+      "people": ["Asadbek", "Gulhayo"],
       "hosts": "Семья Каримовых",
       "greeting": "Ассалому алейкум, дорогой гость!",
       "personalGreeting": "Ассалому алейкум, {name}!",
