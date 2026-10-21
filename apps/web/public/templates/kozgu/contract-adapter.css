@@ -1,0 +1,10 @@
+/* The approved invitation contract has no fields for these captured source slots. */
+#toyona [data-slot="toyona.note"]:empty,
+#toyona [data-slot="toyona.bank"]:empty {
+  display: none;
+}
+
+/* Keep the venue map when available; collapse the unsupported empty photo slot otherwise. */
+#venue .venue__photo.has-missing-photo:not(.has-venue-map) {
+  display: none;
+}

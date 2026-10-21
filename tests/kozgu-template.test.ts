@@ -39,17 +39,32 @@ test("Ko‘zgu keeps its full captured HTML composition, art helpers, motion scr
   assert.match(html, /id="open-invitation"/);
 });
 
-test("Ko‘zgu catalog artwork is a portrait image of the source opening state", () => {
+test("Ko‘zgu catalog artwork is the exact preview asset declared by source metadata", () => {
   const preview = readFileSync(new URL("preview.webp", appRoot));
   assert.ok(preview.length > 20_000, "rendered opening artwork should be a real image, not an icon placeholder");
   assert.match(read(appRoot, "meta.js"), /preview:\s*"preview\.webp"/);
-  assert.equal(createHash("sha256").update(preview).digest("hex"), "8a7d72e4b610c6e54fb8411e71c12303e1fed9632fe2bf5317950d6b826d109f");
+  const digest = createHash("sha256").update(preview).digest("hex");
+  assert.equal(digest, "4e2296926d0cade11ed63a2630a5581c09579c4d439a5ce55a81440d5a14f3cf");
   assert.equal(preview.toString("ascii", 12, 16), "VP8 ");
-  assert.equal(preview.readUInt16LE(26) & 0x3fff, 480);
-  assert.equal(preview.readUInt16LE(28) & 0x3fff, 900);
+  assert.equal(preview.readUInt16LE(26) & 0x3fff, 720);
+  assert.equal(preview.readUInt16LE(28) & 0x3fff, 1280);
   assert.match(read(captureRoot, "meta.js"), /preview:\s*"preview\.webp"/);
   assert.equal(existsSync(new URL("preview.webp", captureRoot)), false, "the reference metadata names an absent source preview asset");
-  assert.match(read(appRoot, "SOURCE_ADAPTATIONS.md"), /no retained source\s+preview file or browser-capture record/i);
+  const provenance = JSON.parse(read(appRoot, "preview.provenance.json")) as {
+    sourceUrl: string;
+    sha256: string;
+    width: number;
+    height: number;
+    captureFilePresent: boolean;
+    catalogArtworkMatchesMetadataAsset: boolean;
+  };
+  assert.equal(provenance.sourceUrl, "https://www.marxaba.uz/templates/kozgu/preview.webp");
+  assert.equal(provenance.sha256, digest);
+  assert.equal(provenance.width, 720);
+  assert.equal(provenance.height, 1280);
+  assert.equal(provenance.captureFilePresent, false);
+  assert.equal(provenance.catalogArtworkMatchesMetadataAsset, true);
+  assert.match(read(appRoot, "SOURCE_ADAPTATIONS.md"), /exact metadata-declared image/);
   assert.match(body(html), /class="intro__stage"/);
   assert.match(body(html), /class="mirror__frame" src="art\/frame\.webp"/);
   assert.notEqual(createHash("sha256").update(preview).digest("hex"), createHash("sha256").update(readFileSync(new URL("art/frame.webp", appRoot))).digest("hex"));
@@ -81,6 +96,8 @@ test("Ko‘zgu localizes fixed text and maps the shared invitation fixture for a
   runInNewContext(read(appRoot, "platform-i18n.js"), { window });
   const translations = window.MARHAMAT_I18N;
   assert.ok(translations);
+  assert.ok(translations["Marxaba · Ko‘zgu"], "document title has localized metadata");
+  assert.ok(translations["Ko‘zgu — Marxaba raqamli taklifnomasi"], "description has localized metadata");
   const ignored = new Set(["&", "♫", "◆", "◷", "✓", "✕", "?", "‹", "›", "00", "−", "+", "↗"]);
   const visible = Array.from(body(html).matchAll(/>([^<>]+)</g), (match) => match[1].replace(/&amp;/g, "&").replace(/\s+/g, " ").trim()).filter((value) => value.length > 1 && !ignored.has(value));
   const attributes = Array.from(body(html).matchAll(/(?:aria-label|placeholder|title|alt)="([^"]+)"/g), (match) => match[1].replace(/\s+/g, " ").trim());
@@ -93,19 +110,48 @@ test("Ko‘zgu localizes fixed text and maps the shared invitation fixture for a
   for (const locale of locales) {
     const data = makeLegacyData(sample, locale, "Hurmatli mehmon", true);
     const content = sample.content[locale];
-    assert.equal(data.groom, content.people[0]);
-    assert.equal(data.bride, content.people[1]);
-    assert.equal(data.greeting, content.personalGreeting.replaceAll("{name}", "Hurmatli mehmon"));
-    assert.equal(data.eventType, content.eventLabel);
-    assert.equal(data.date.day, 12);
-    assert.equal(data.date.monthNumber, 6);
-    assert.equal(data.program.length, 6);
-    assert.equal(data.gallery.length, 6);
+    assert.equal(data.groom, content.people[0], `${locale}: first name`);
+    assert.equal(data.bride, content.people[1], `${locale}: second name`);
+    assert.equal(data.greeting, content.personalGreeting.replaceAll("{name}", "Hurmatli mehmon"), `${locale}: personalized greeting`);
+    assert.equal(data.message, content.message, `${locale}: invitation message`);
+    assert.equal(data.hosts, content.hosts, `${locale}: hosts`);
+    assert.equal(data.eventType, content.eventLabel, `${locale}: event label`);
+    assert.equal(data.date.day, 12, `${locale}: day`);
+    assert.equal(data.date.monthNumber, 6, `${locale}: month`);
+    assert.equal(data.date.year, 2027, `${locale}: year`);
+    assert.equal(data.date.time, "17:00", `${locale}: time`);
+    assert.equal(data.venue.name, content.venueName, `${locale}: venue name`);
+    assert.equal(data.venue.address, [content.address, content.landmark].filter(Boolean).join(" · "), `${locale}: address and landmark`);
+    assert.equal(data.program.length, 6, `${locale}: program length`);
+    assert.deepEqual(data.program.map(({ id, time, title }) => [id, time, title]), sample.program.map(({ id, time }) => [id, time, content.programTitles[id] ?? ""]), `${locale}: stable ordered program`);
+    assert.equal(data.dressCode.enabled, true, `${locale}: dress code enabled`);
+    assert.equal(data.dressCode.style, sample.dressCode.style[locale], `${locale}: dress style`);
+    assert.equal(data.dressCode.text, sample.dressCode.text[locale], `${locale}: dress guidance`);
+    assert.equal(data.dressCode.note, sample.dressCode.note[locale], `${locale}: dress note`);
+    assert.equal(data.gallery.length, 6, `${locale}: empty gallery cards`);
+    assert.ok(data.gallery.every(({ src, alt, caption }) => !src && !alt && !caption), `${locale}: icon-only gallery cards`);
     assert.deepEqual(data.wishes, getTemplatePreviewWishes(locale));
-    assert.equal(data.toyona.cardNumber, "8600 1234 5678 9012");
-    assert.equal(data.contacts.length, 2);
-    assert.equal(data.dressCode.colors.length, 5);
+    assert.equal(data.toyona.enabled, true, `${locale}: gift enabled`);
+    assert.equal(data.toyona.cardNumber, "8600 1234 5678 9012", `${locale}: gift card`);
+    assert.equal(data.toyona.cardHolder, "AZIZ AZIZOV", `${locale}: gift card holder`);
+    assert.equal(data.toyona.note, "", `${locale}: unsupported gift note stays empty`);
+    assert.deepEqual(data.contacts.map(({ value }) => value), ["+998 90 123 45 67", "@demo"], `${locale}: phone and Telegram`);
+    assert.equal(data.dressCode.colors.length, 5, `${locale}: dress palette`);
+    assert.ok(data.dressCode.colors.every((color) => color.name && color.hex), `${locale}: localized palette values`);
   }
+});
+
+test("Ko‘zgu hides unsupported gift fields and empty venue photos while retaining coordinate maps", () => {
+  const adapter = read(appRoot, "contract-adapter.css");
+  assert.match(html, /href="contract-adapter\.css"/);
+  assert.match(adapter, /#toyona \[data-slot="toyona\.note"\]:empty/);
+  assert.match(adapter, /#toyona \[data-slot="toyona\.bank"\]:empty/);
+  assert.match(adapter, /#venue \.venue__photo\.has-missing-photo:not\(\.has-venue-map\)/);
+  assert.equal(read(appRoot, "template.css"), read(captureRoot, "template.css"));
+  assert.match(html, /data-photo="venue\.photo"/);
+  assert.match(read(appRoot, "SOURCE_ADAPTATIONS.md"), /no matching editor\/contract\s+field/);
+  assert.match(read(appRoot, "SOURCE_ADAPTATIONS.md"), /shows a map when venue coordinates exist/);
+  assert.match(read(appRoot, "SOURCE_ADAPTATIONS.md"), /hides the empty photo frame/);
 });
 
 test("Ko‘zgu wrapper uses the shared typed renderer and preserves the source's complete supported sections", () => {
@@ -127,7 +173,22 @@ test("Ko‘zgu uses creator values and leaves a blank invitation without preview
   assert.equal(data.message, "");
   assert.equal(data.venue.name, "");
   assert.equal(data.gallery.length, 0);
+  assert.equal(data.program.length, 0);
+  assert.equal(data.date.long, "");
+  assert.equal(data.dressCode.enabled, false);
+  assert.equal(data.dressCode.colors.length, 0);
   assert.deepEqual(data.wishes, []);
   assert.equal(data.toyona.enabled, false);
   assert.equal(data.contacts.length, 0);
+});
+
+test("Ko‘zgu is registered as published with matching event support", () => {
+  const registry = readFileSync(new URL("../packages/contracts/src/index.ts", import.meta.url), "utf8");
+  const registration = registry.match(/id: "kozgu",[\s\S]*?published: (true|false),/);
+  assert.equal(registration?.[1], "true");
+  const migration = readFileSync(new URL("../packages/database/migrations/0050_publish_kozgu.sql", import.meta.url), "utf8");
+  assert.match(migration, /VALUES \('kozgu', 'Ko‘zgu', 15000000, 'UZS', true\)/);
+  assert.match(migration, /'kozgu', 'qiz-bazmi'/);
+  assert.match(migration, /'kozgu', 'fotiha'/);
+  assert.match(migration, /VALUES \('kozgu', 'wedding'\)/);
 });
