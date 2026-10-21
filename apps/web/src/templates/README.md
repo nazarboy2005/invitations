@@ -2,10 +2,12 @@
 
 Anor is the first Marxaba reference renderer. The next ten Marxaba nikoh
 references are also authorized for production integration and are tracked in
-`docs/templates/TEMPLATE_ROADMAP.md`. Anor and the ten-template batch remain
-unpublished and unselectable until their own documented completeness,
-integration and quality gates pass. Do not treat documented service
-limitations as completed integrations.
+`docs/templates/TEMPLATE_ROADMAP.md`. Anor and the other nine designs remain
+unpublished and unselectable until their documented completeness, integration
+and quality gates pass. Oltin Nur was explicitly published in the Neon catalog
+at the user’s request; external deployment and cloud-service verification
+remain pending. Do not treat documented service limitations as completed
+integrations.
 
 Keep every future template in its own renderer, styles, assets, and motion
 implementation. When a reference source exists, integrate that exact complete
