@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
-import { templateIdSchema } from "@taklifnoma/contracts";
+import { EVENT_TYPES, templateIdSchema } from "@taklifnoma/contracts";
 import { getDb } from "@taklifnoma/database";
 import { authenticatedUser } from "@/server/invitations";
 import { verifySameOrigin } from "@/server/auth";
@@ -18,13 +18,23 @@ const inputSchema = z
         "Duplicate category IDs",
       )
       .optional(),
+    supportedEventTypes: z
+      .array(z.enum(EVENT_TYPES))
+      .min(1)
+      .max(EVENT_TYPES.length)
+      .refine(
+        (types) => new Set(types).size === types.length,
+        "Duplicate supported event types",
+      )
+      .optional(),
   })
   .strict()
   .refine(
     (value) =>
       value.published !== undefined ||
       value.priceMinor !== undefined ||
-      value.categoryIds !== undefined,
+      value.categoryIds !== undefined ||
+      value.supportedEventTypes !== undefined,
   );
 export async function PATCH(
   request: Request,
@@ -65,6 +75,28 @@ export async function PATCH(
             "category_id",
           )}`;
       }
+      if (input.supportedEventTypes !== undefined) {
+        const unsupportedUsage =
+          await tx`SELECT data->>'eventType' AS event_type,count(*)::int AS count FROM invitations WHERE template_id=${id} GROUP BY data->>'eventType'`;
+        const conflicts = unsupportedUsage.filter(
+          (row) => !input.supportedEventTypes!.includes(row.event_type),
+        );
+        if (conflicts.length)
+          throw new ApiError(
+            409,
+            "EVENT_TYPE_IN_USE",
+            "Bu dizayn ushbu tadbir turi bilan ishlatilmoqda. Avval taklifnomalarni mos dizaynga o‘tkazing.",
+          );
+        await tx`DELETE FROM template_supported_event_types WHERE template_id=${id}`;
+        await tx`INSERT INTO template_supported_event_types ${tx(
+          input.supportedEventTypes.map((eventType) => ({
+            template_id: id,
+            event_type: eventType,
+          })),
+          "template_id",
+          "event_type",
+        )}`;
+      }
       if (input.published === false) {
         const [usage] =
           await tx`SELECT count(*)::int AS count FROM invitations WHERE template_id=${id}`;
@@ -88,6 +120,14 @@ export async function PATCH(
               409,
               "REPLACEMENT_UNAVAILABLE",
               "O‘rinbosar dizayn nashr qilinmagan.",
+            );
+          const incompatibleInvitations =
+            await tx`SELECT count(*)::int AS count FROM invitations i WHERE i.template_id=${id} AND NOT EXISTS (SELECT 1 FROM template_supported_event_types s WHERE s.template_id=${target.id} AND s.event_type=i.data->>'eventType')`;
+          if (incompatibleInvitations[0]?.count > 0)
+            throw new ApiError(
+              409,
+              "REPLACEMENT_EVENT_MISMATCH",
+              "O‘rinbosar dizayn ayrim taklifnomalarning tadbir turini qo‘llamaydi.",
             );
           const updated =
             await tx`WITH affected AS (SELECT id,data FROM invitations WHERE template_id=${id} FOR UPDATE), changed AS (UPDATE invitations i SET template_id=${target.id},data=i.data||jsonb_build_object('templateId',${target.id}::text,'revision',COALESCE((i.data->>'revision')::int,1)+1),updated_at=now() FROM affected a WHERE i.id=a.id RETURNING i.id,a.data AS previous_values,i.data AS new_values) INSERT INTO invitation_audit_log(invitation_id,actor_id,action,previous_values,new_values) SELECT id,${user.id},'admin_template_replacement',previous_values,new_values FROM changed RETURNING invitation_id`;

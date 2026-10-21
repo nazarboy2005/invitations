@@ -82,11 +82,7 @@ export function hasAuthoredInvitationContent(invitation: Invitation): boolean {
   const authoredGift =
     invitation.gift.enabled ||
     invitation.gift.receiptUploadEnabled ||
-    hasText([
-      invitation.gift.cardNumber,
-      invitation.gift.cardHolder,
-      invitation.gift.bankName,
-    ]);
+    hasText([invitation.gift.cardNumber, invitation.gift.cardHolder]);
   const authoredRsvp =
     invitation.rsvp.enabled !== true ||
     Boolean(invitation.rsvp.deadline.trim()) ||
@@ -102,15 +98,12 @@ export function hasAuthoredInvitationContent(invitation: Invitation): boolean {
     invitation.startsAt ||
     invitation.program.length ||
     invitation.gallery.length ||
-    invitation.contacts.length ||
+    invitation.contacts.phoneNumber.trim() ||
+    invitation.contacts.telegramUsername.trim() ||
     invitation.music.enabled ||
     invitation.music.url ||
     invitation.music.filename ||
     invitation.music.assetId ||
-    invitation.voiceMessage.enabled ||
-    invitation.voiceMessage.url ||
-    invitation.voiceMessage.filename ||
-    invitation.voiceMessage.assetId ||
     invitation.venue.mapUrl ||
     invitation.venue.latitude !== null ||
     invitation.venue.longitude !== null,

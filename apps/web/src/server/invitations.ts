@@ -38,7 +38,7 @@ export async function saveInvitation(
     if (rows[0] && rows[0].owner_id !== user.id)
       throw new ApiError(404, "NOT_FOUND", "Taklifnoma topilmadi.");
     const templates = invitation.templateId
-      ? await tx`SELECT published FROM templates WHERE id=${invitation.templateId}`
+      ? await tx`SELECT t.published, EXISTS (SELECT 1 FROM template_supported_event_types s WHERE s.template_id=t.id AND s.event_type=${invitation.eventType}) AS supports_event FROM templates t WHERE t.id=${invitation.templateId}`
       : [];
     if (
       invitation.templateId &&
@@ -49,6 +49,12 @@ export async function saveInvitation(
         409,
         "TEMPLATE_UNAVAILABLE",
         "Bu dizayn hozir mavjud emas. Boshqa dizaynni tanlang.",
+      );
+    if (invitation.templateId && !templates[0]?.supports_event)
+      throw new ApiError(
+        409,
+        "TEMPLATE_EVENT_MISMATCH",
+        "Tanlangan dizayn bu tadbir turini qo‘llamaydi. Mos dizaynni tanlang.",
       );
     if (rows[0]) {
       const previous = invitationSchema.parse(rows[0].data);

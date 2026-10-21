@@ -26,11 +26,18 @@ before(async () => {
     await db.exec(await readFile(new URL(name, directory), "utf8"));
   }
   await db.exec(
-    "INSERT INTO templates(id,name,price_minor,published) VALUES('test-alt','Test alternate',100,true)",
+    "BEGIN; INSERT INTO templates(id,name,price_minor,published) VALUES('test-alt','Test alternate',100,true); INSERT INTO template_supported_event_types(template_id,event_type) VALUES('test-alt','wedding'); COMMIT;",
   );
 });
 after(async () => {
   await db?.close();
+});
+test("login requests rely on the opaque Telegram start token, not a numeric code", async () => {
+  const columns = await db.query<{ column_name: string }>(
+    "SELECT column_name FROM information_schema.columns WHERE table_name='auth_requests'",
+  );
+  assert.ok(columns.rows.some((column) => column.column_name === "token_hash"));
+  assert.ok(!columns.rows.some((column) => column.column_name === "code"));
 });
 async function user(phone = true) {
   const id = randomUUID();
@@ -86,6 +93,143 @@ test("migration enforces ownership, template references, and unique Telegram ide
     [saved.id],
   );
   assert.equal(stored.rows[0].owner_id, owner);
+});
+test("voice-removal migration strips invitation data and preserves shared music media", async () => {
+  const owner = await user();
+  const draft = await invitation(owner);
+  const voiceOnlyId = randomUUID();
+  const musicId = randomUUID();
+  draft.music = {
+    enabled: true,
+    assetId: musicId,
+    url: `/api/media/${musicId}`,
+    filename: "shared-music.mp3",
+  };
+  const legacyData = {
+    ...draft,
+    voiceMessage: {
+      enabled: true,
+      assetId: musicId,
+      url: `/api/media/${musicId}`,
+      filename: "shared-music.mp3",
+    },
+  };
+  legacyData.voiceMessage.assetId = voiceOnlyId;
+  legacyData.voiceMessage.url = `/api/media/${voiceOnlyId}`;
+  legacyData.voiceMessage.filename = "old-greeting.m4a";
+  for (const [id, filename, mime] of [
+    [musicId, "shared-music.mp3", "audio/mpeg"],
+    [voiceOnlyId, "old-greeting.m4a", "audio/mp4"],
+  ]) {
+    await db.query(
+      "INSERT INTO media_assets(id,owner_id,draft_id,object_key,url,filename,mime_type,size_bytes,visibility,status) VALUES($1,$2,$3,$4,$5,$6,$7,64,'public','ready')",
+      [id, owner, draft.id, `test/${id}`, `/api/media/${id}`, filename, mime],
+    );
+  }
+  await db.query("UPDATE invitations SET data=$1 WHERE id=$2", [
+    JSON.stringify(legacyData),
+    draft.id,
+  ]);
+
+  await db.exec(
+    await readFile(
+      new URL(
+        "../packages/database/migrations/0010_remove_voice_greetings.sql",
+        import.meta.url,
+      ),
+      "utf8",
+    ),
+  );
+
+  const saved = await db.query<{ data: Record<string, unknown> }>(
+    "SELECT data FROM invitations WHERE id=$1",
+    [draft.id],
+  );
+  assert.equal("voiceMessage" in saved.rows[0].data, false);
+  assert.equal(
+    (saved.rows[0].data.music as { assetId: string }).assetId,
+    musicId,
+  );
+  const remaining = await db.query<{ id: string }>(
+    "SELECT id FROM media_assets WHERE id=ANY($1::uuid[]) ORDER BY id",
+    [[musicId, voiceOnlyId]],
+  );
+  assert.deepEqual(
+    remaining.rows.map((row) => row.id),
+    [musicId],
+  );
+});
+test("gift migration removes only the saved bank name", async () => {
+  const owner = await user();
+  const draft = await invitation(owner);
+  const legacyData = {
+    ...draft,
+    gift: {
+      ...draft.gift,
+      enabled: true,
+      cardNumber: "8600 1234 5678 9012",
+      cardHolder: "Asadbek Asqarov",
+      bankName: "Old bank entry",
+    },
+  };
+  await db.query("UPDATE invitations SET data=$1 WHERE id=$2", [
+    JSON.stringify(legacyData),
+    draft.id,
+  ]);
+  await db.exec(
+    await readFile(
+      new URL(
+        "../packages/database/migrations/0011_remove_gift_bank_name.sql",
+        import.meta.url,
+      ),
+      "utf8",
+    ),
+  );
+  const saved = await db.query<{ data: Record<string, unknown> }>(
+    "SELECT data FROM invitations WHERE id=$1",
+    [draft.id],
+  );
+  const gift = saved.rows[0].data.gift as Record<string, unknown>;
+  assert.equal("bankName" in gift, false);
+  assert.equal(gift.cardNumber, "8600 1234 5678 9012");
+  assert.equal(gift.cardHolder, "Asadbek Asqarov");
+  assert.equal(gift.enabled, true);
+});
+test("contact migration keeps phone and Telegram values and removes legacy cards", async () => {
+  const owner = await user();
+  const draft = await invitation(owner);
+  await db.query("UPDATE invitations SET data=$1 WHERE id=$2", [
+    JSON.stringify({
+      ...draft,
+      contacts: [
+        {
+          id: "phone",
+          type: "phone",
+          label: "Call",
+          value: "+998 90 123 45 67",
+        },
+        { id: "telegram", type: "telegram", label: "", value: "@taklifnoma" },
+      ],
+    }),
+    draft.id,
+  ]);
+  await db.exec(
+    await readFile(
+      new URL(
+        "../packages/database/migrations/0012_contacts_phone_telegram.sql",
+        import.meta.url,
+      ),
+      "utf8",
+    ),
+  );
+  const saved = await db.query<{ data: Record<string, unknown> }>(
+    "SELECT data FROM invitations WHERE id=$1",
+    [draft.id],
+  );
+  assert.deepEqual(saved.rows[0].data.contacts, {
+    phoneNumber: "+998 90 123 45 67",
+    telegramUsername: "@taklifnoma",
+  });
 });
 test("session lookup excludes incomplete phone onboarding, revoked, idle-expired, and absolute-expired sessions", async () => {
   const complete = await user(),
@@ -180,12 +324,6 @@ test("invitation JSON snapshot retains language variants and stable media IDs th
     url: "https://media.example.com/music.mp3",
     filename: "our-song.mp3",
   };
-  draft.voiceMessage = {
-    enabled: true,
-    assetId: randomUUID(),
-    url: "https://media.example.com/voice-greeting.m4a",
-    filename: "voice-greeting.m4a",
-  };
   await db.query(
     "INSERT INTO media_assets(id,owner_id,draft_id,object_key,url,filename,mime_type,size_bytes,visibility,status) VALUES($1,$2,$3,'owner/photo.webp',$4,'photo.webp','image/webp',512,'public','ready')",
     [assetId, owner, draft.id, draft.gallery[0].url],
@@ -207,10 +345,6 @@ test("invitation JSON snapshot retains language variants and stable media IDs th
   assert.deepEqual(record.rows[0].data, switched);
   assert.equal(record.rows[0].data.gallery[0].id, assetId);
   assert.equal(record.rows[0].data.music.assetId, draft.music.assetId);
-  assert.equal(
-    record.rows[0].data.voiceMessage.assetId,
-    draft.voiceMessage.assetId,
-  );
   assert.equal(record.rows[0].data.content.ru.greeting, "Дорогие гости!");
   assert.equal(record.rows[0].template_id, "anor");
   const media = await db.query<{ object_key: string; draft_id: string }>(
@@ -220,7 +354,7 @@ test("invitation JSON snapshot retains language variants and stable media IDs th
   assert.equal(media.rows[0].draft_id, draft.id);
   assert.equal(media.rows[0].object_key, "owner/photo.webp");
 });
-test("template category migrations seed Anor and the unpublished Marxaba batch", async () => {
+test("template category migrations publish Anor and keep the remaining Marxaba batch unpublished", async () => {
   const categories = await db.query<{ id: string }>(
     "SELECT id FROM template_categories ORDER BY position,id",
   );
@@ -231,22 +365,28 @@ test("template category migrations seed Anor and the unpublished Marxaba batch",
   const anor = await db.query<{ published: boolean; price_minor: number }>(
     "SELECT published,price_minor FROM templates WHERE id='anor'",
   );
-  assert.equal(anor.rows[0].published, false);
+  assert.equal(anor.rows[0].published, true);
   assert.equal(Number(anor.rows[0].price_minor), 15000000);
+  const anorEvents = await db.query<{ event_type: string }>(
+    "SELECT event_type FROM template_supported_event_types WHERE template_id='anor'",
+  );
+  assert.deepEqual(anorEvents.rows, [{ event_type: "wedding" }]);
   const marxaba = await db.query<{ id: string; published: boolean }>(
     "SELECT id,published FROM templates WHERE id=ANY($1::text[]) ORDER BY id",
-    [[
-      "oltin-nur",
-      "samarqand-kechasi",
-      "bogi-eram",
-      "atlas",
-      "uchar-gilam",
-      "oq-kabutar",
-      "kuzgi-chinor",
-      "muhabbat-kitobi",
-      "sahifa",
-      "oltin-uzuk",
-    ]],
+    [
+      [
+        "oltin-nur",
+        "samarqand-kechasi",
+        "bogi-eram",
+        "atlas",
+        "uchar-gilam",
+        "oq-kabutar",
+        "kuzgi-chinor",
+        "muhabbat-kitobi",
+        "sahifa",
+        "oltin-uzuk",
+      ],
+    ],
   );
   assert.deepEqual(
     marxaba.rows.map((row) => [row.id, row.published]),
@@ -276,6 +416,37 @@ test("template category migrations seed Anor and the unpublished Marxaba batch",
   assert.equal(
     assignments.rows.filter((row) => row.category_id === "wedding").length,
     11,
+  );
+});
+test("template event compatibility is constrained and independently assignable", async () => {
+  const existing = await db.query<{ event_type: string }>(
+    "SELECT event_type FROM template_supported_event_types WHERE template_id='test-alt'",
+  );
+  assert.deepEqual(existing.rows, [{ event_type: "wedding" }]);
+  await db.query(
+    "INSERT INTO template_supported_event_types(template_id,event_type) VALUES('test-alt','birthday')",
+  );
+  const supported = await db.query<{ event_type: string }>(
+    "SELECT event_type FROM template_supported_event_types WHERE template_id='test-alt' ORDER BY event_type",
+  );
+  assert.deepEqual(supported.rows, [
+    { event_type: "birthday" },
+    { event_type: "wedding" },
+  ]);
+  await assert.rejects(
+    db.query(
+      "INSERT INTO template_supported_event_types(template_id,event_type) VALUES('test-alt','anniversary')",
+    ),
+  );
+  await assert.rejects(
+    db.query(
+      "INSERT INTO template_supported_event_types(template_id,event_type) VALUES('test-alt','birthday')",
+    ),
+  );
+  await assert.rejects(
+    db.query(
+      "DELETE FROM template_supported_event_types WHERE template_id='anor'",
+    ),
   );
 });
 test("any template can have multiple categories or none without changing invitation content", async () => {

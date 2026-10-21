@@ -1,5 +1,4 @@
-import Link from "next/link";
-import { ArrowUpRight, LayoutTemplate } from "lucide-react";
+import { LayoutTemplate } from "lucide-react";
 import { SiteHeader } from "@/components/site-header";
 import { getCatalog } from "@/server/catalog";
 import { TemplateGallery } from "@/modules/catalog/template-gallery";
@@ -23,14 +22,6 @@ export default async function Home() {
               Har bir quvonchli kun uchun o‘zbekona ruhdagi taklifnoma yarating.
               Ma’lumotlaringizni kiriting va tayyor dizaynni tanlang.
             </p>
-            <div className={styles.actions}>
-              <Link className="button" href="/studio">
-                Ma’lumot kiritish <ArrowUpRight size={18} />
-              </Link>
-              <a href="#templates" className={styles.textLink}>
-                Holatni ko‘rish
-              </a>
-            </div>
           </div>
           <div className={styles.emptyArt} aria-hidden="true">
             <LayoutTemplate size={56} strokeWidth={1} />

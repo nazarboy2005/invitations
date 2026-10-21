@@ -64,7 +64,6 @@ export type LegacyData = {
   wishes: Array<{ name: string; text: string }>;
   toyona: {
     enabled: boolean;
-    bank: string;
     cardNumber: string;
     cardHolder: string;
     note: string;
@@ -226,21 +225,40 @@ export function makeLegacyData(
       alt: item.alt || item.caption,
       caption: item.caption,
     })),
-    contacts: invitation.contacts.map((item) => ({
-      label: item.label,
-      value: item.value,
-      type: item.type,
-      href:
-        item.type === "phone"
-          ? `tel:${item.value.replace(/[\s()-]/g, "")}`
-          : `https://t.me/${item.value.replace(/^@/, "")}`,
-    })),
+    contacts: [
+      ...(invitation.contacts.phoneNumber.trim()
+        ? [
+            {
+              label:
+                locale === "en"
+                  ? "Phone"
+                  : locale === "ru" || locale === "uz-Cyrl"
+                    ? "Телефон"
+                    : "Telefon",
+              value: invitation.contacts.phoneNumber.trim(),
+              type: "phone" as const,
+              href: `tel:${invitation.contacts.phoneNumber.replace(/[^+\d]/g, "")}`,
+            },
+          ]
+        : []),
+      ...(invitation.contacts.telegramUsername.trim()
+        ? [
+            {
+              label: "Telegram",
+              value: invitation.contacts.telegramUsername.trim().startsWith("@")
+                ? invitation.contacts.telegramUsername.trim()
+                : `@${invitation.contacts.telegramUsername.trim()}`,
+              type: "telegram" as const,
+              href: `https://t.me/${invitation.contacts.telegramUsername.trim().replace(/^@/, "")}`,
+            },
+          ]
+        : []),
+    ],
     rsvp: invitation.rsvp,
     wishesEnabled: invitation.wishes.enabled,
     wishes: [],
     toyona: {
       enabled: invitation.gift.enabled,
-      bank: invitation.gift.bankName,
       cardNumber: invitation.gift.cardNumber,
       cardHolder: invitation.gift.cardHolder,
       note: "",

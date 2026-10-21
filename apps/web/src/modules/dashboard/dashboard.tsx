@@ -274,7 +274,7 @@ export function Dashboard() {
     invitations.length +
     browserDrafts.filter((draft) => !cloudIds.has(draft.invitation.id)).length;
   function createNew() {
-    window.location.assign("/studio?new=1");
+    window.location.assign("/#templates");
   }
 
   return (
@@ -330,7 +330,7 @@ export function Dashboard() {
                 saqlang. Keyingi safar shu yerdan davom etasiz.
               </p>
             </div>
-            <Link href="/studio">
+            <Link href="/#templates">
               Davom etish
               <ArrowRight size={16} />
             </Link>

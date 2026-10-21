@@ -2,7 +2,11 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import {
   createInvitation,
+  defaultEventLabel,
+  defaultDressCode,
+  defaultInvitationMessage,
   addLanguage,
+  removeLanguage,
   switchTemplate,
   invitationSchema,
   TEMPLATES,
@@ -16,6 +20,50 @@ test("prices render consistently without depending on browser Uzbek ICU support"
   assert.equal(formatPrice(15000000), "150\u00a0000 so‘m");
   assert.equal(formatPrice(123456789), "1\u00a0234\u00a0567,89 so‘m");
   assert.equal(formatPrice(0), "0 so‘m");
+});
+
+test("default invitation wording is wedding-specific and localized", () => {
+  assert.equal(
+    defaultInvitationMessage("wedding", "uz-Latn"),
+    "Hayotimizning eng quvonchli kunida — nikoh to‘yimizda — Sizni aziz mehmonimiz sifatida ko‘rishdan baxtiyormiz.",
+  );
+  assert.equal(defaultInvitationMessage("birthday", "uz-Latn"), "");
+  assert.ok(
+    defaultInvitationMessage("wedding", "uz-Cyrl").includes("никоҳ тўйимизда"),
+  );
+  assert.ok(defaultInvitationMessage("wedding", "en").includes("wedding day"));
+  assert.ok(defaultInvitationMessage("wedding", "ru").includes("свадьбы"));
+});
+
+test("default dress code includes editable localized guidance and the five-color palette", () => {
+  const dressCode = defaultDressCode();
+  assert.equal(dressCode.enabled, true);
+  assert.equal(dressCode.style["uz-Latn"], "Kechki libos");
+  assert.equal(
+    dressCode.text["uz-Latn"],
+    "Ayollar uchun uzun kechki ko‘ylak, erkaklar uchun klassik kostyum. Quyidagi ranglardan tanlasangiz, suratlar yanada chiroyli chiqadi.",
+  );
+  assert.equal(
+    dressCode.note["uz-Latn"],
+    "Iltimos, oq libosdan saqlaning — bu kun oq rang kelinniki.",
+  );
+  assert.deepEqual(
+    dressCode.colors.map((color) => color.name["uz-Latn"]),
+    ["Shampan", "Pudra", "Zaytun", "To‘q ko‘k", "Bordo"],
+  );
+  assert.ok(dressCode.style.en);
+  assert.ok(dressCode.text.ru);
+});
+
+test("event name defaults to the selected event type in each enabled locale", () => {
+  assert.equal(defaultEventLabel("wedding", "uz-Latn"), "Nikoh to‘yi");
+  assert.equal(defaultEventLabel("wedding", "uz-Cyrl"), "Никоҳ тўйи");
+  assert.equal(defaultEventLabel("wedding", "en"), "Wedding");
+  assert.equal(defaultEventLabel("wedding", "ru"), "Свадьба");
+  const invitation = createInvitation();
+  invitation.eventType = "wedding";
+  const withRussian = addLanguage(invitation, "ru");
+  assert.equal(withRussian.content.ru.eventLabel, "Свадьба");
 });
 
 test("switching designs preserves authored content, locales, media and optional settings", () => {
@@ -112,27 +160,13 @@ test("Anor is a first-class template and a round trip preserves all shared event
     url: "/api/media/music-1",
     filename: "our-song.mp3",
   };
-  original.voiceMessage = {
-    enabled: true,
-    assetId: "voice-1",
-    url: "/api/media/voice-1",
-    filename: "voice-greeting.m4a",
-  };
   original.gift = {
     enabled: true,
     receiptUploadEnabled: true,
     cardNumber: "8600 0000 0000 0000",
     cardHolder: "Test Owner",
-    bankName: "Bank",
   };
-  original.contacts = [
-    {
-      id: "contact-1",
-      type: "telegram",
-      label: "Savollar uchun",
-      value: "@example",
-    },
-  ];
+  original.contacts = { phoneNumber: "", telegramUsername: "@example" };
   const switched = invitationSchema.parse(
     JSON.parse(JSON.stringify(switchTemplate(original, "anor"))),
   );
@@ -153,31 +187,74 @@ test("Anor is a first-class template and a round trip preserves all shared event
     ),
   );
 });
-test("a language variant does not invent translations or duplicate program IDs", () => {
+test("a language variant starts with localized defaults and blank names", () => {
   const first = createInvitation();
+  first.eventType = "wedding";
+  first.content["uz-Latn"].people = ["Asadbek", "Gulhayo"];
   const second = addLanguage(first, "ru");
   assert.deepEqual(second.program, first.program);
-  assert.equal(second.content.ru.message, "");
-  assert.deepEqual(second.content.ru.people, first.content["uz-Latn"].people);
+  assert.equal(
+    second.content.ru.message,
+    defaultInvitationMessage("wedding", "ru"),
+  );
+  assert.deepEqual(second.content.ru.people, []);
+  assert.equal(second.content.ru.greeting, "Здравствуйте, дорогой гость!");
+  assert.equal(second.content.ru.eventLabel, "Свадьба");
   assert.equal(addLanguage(second, "ru"), second);
 });
-test("receipt switch requires gifts; audio and gifts are optional", () => {
+test("removing a language deletes only that locale and protects the primary locale", () => {
+  const draft = addLanguage(addLanguage(createInvitation(), "ru"), "en");
+  draft.content.ru.people = ["Асадбек", "Гулҳаё"];
+  draft.story = [
+    {
+      id: "chapter-1",
+      title: { ru: "Знакомство", en: "First meeting" },
+      text: { ru: "Мы познакомились", en: "We met" },
+    },
+  ];
+  draft.dressCode.style = { ru: "Торжественный" };
+  const withoutRussian = removeLanguage(draft, "ru");
+  assert.deepEqual(withoutRussian.enabledLocales, ["uz-Latn", "en"]);
+  assert.equal(withoutRussian.content.ru, undefined);
+  assert.equal(withoutRussian.story[0].title.ru, undefined);
+  assert.equal(withoutRussian.story[0].text.ru, undefined);
+  assert.equal(withoutRussian.dressCode.style.ru, undefined);
+  assert.equal(removeLanguage(withoutRussian, "uz-Latn"), withoutRussian);
+  assert.equal(invitationSchema.safeParse(withoutRussian).success, true);
+});
+test("receipt switch requires gift details; music and gifts are optional", () => {
   const draft = createInvitation();
   assert.equal(draft.music.enabled, false);
-  assert.equal(draft.voiceMessage.enabled, false);
   assert.equal(invitationSchema.safeParse(draft).success, true);
-  const legacyDraft = { ...draft } as Partial<typeof draft>;
-  delete legacyDraft.voiceMessage;
-  assert.equal(invitationSchema.safeParse(legacyDraft).success, true);
-  const published = createInvitation("oltin-nur");
-  published.status = "published";
-  published.voiceMessage.enabled = true;
-  assert.equal(invitationSchema.safeParse(published).success, false);
-  published.voiceMessage.assetId = "voice-1";
-  published.voiceMessage.url = "/api/media/voice-1";
-  assert.equal(invitationSchema.safeParse(published).success, true);
+  const legacyData = {
+    ...draft,
+    voiceMessage: {
+      enabled: true,
+      assetId: "old-voice",
+      url: "/api/media/old-voice",
+      filename: "old-voice.m4a",
+    },
+  };
+  const cleaned = invitationSchema.parse(legacyData);
+  assert.equal("voiceMessage" in cleaned, false);
   draft.gift.receiptUploadEnabled = true;
   assert.equal(invitationSchema.safeParse(draft).success, false);
+});
+test("legacy gift bank name is ignored while card details remain", () => {
+  const draft = createInvitation();
+  const legacy = {
+    ...draft,
+    gift: {
+      ...draft.gift,
+      cardNumber: "8600 1234 5678 9012",
+      cardHolder: "Asadbek",
+      bankName: "Legacy bank",
+    },
+  };
+  const cleaned = invitationSchema.parse(legacy);
+  assert.equal("bankName" in cleaned.gift, false);
+  assert.equal(cleaned.gift.cardNumber, "8600 1234 5678 9012");
+  assert.equal(cleaned.gift.cardHolder, "Asadbek");
 });
 test("schema rejects script URLs and oversized repeatable sections", () => {
   const draft = createInvitation();

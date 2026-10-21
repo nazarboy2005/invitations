@@ -1,0 +1,145 @@
+.root {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+}
+
+.trigger {
+  width: 100%;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 0 15px;
+  border: 1px solid #d9cbb8;
+  border-radius: 10px;
+  color: var(--ink);
+  background: linear-gradient(180deg, #fffefa, #fbf7ef);
+  text-align: left;
+  font: inherit;
+  font-size: 14px;
+  box-shadow:
+    0 1px 2px #50371908,
+    inset 0 1px #ffffffc7;
+  transition:
+    border-color 140ms ease,
+    box-shadow 140ms ease,
+    background 140ms ease;
+}
+
+.trigger:hover:not(:disabled) {
+  border-color: #b79c79;
+  background: #fffdf8;
+}
+
+.trigger:focus-visible,
+.trigger.open {
+  outline: 0;
+  border-color: #8b7051;
+  box-shadow:
+    0 0 0 3px #bda17b30,
+    0 4px 14px #4b382010;
+}
+
+.trigger:disabled {
+  cursor: not-allowed;
+  opacity: 0.58;
+}
+
+.placeholder {
+  color: #948676;
+}
+
+.chevron {
+  flex: 0 0 auto;
+  color: #7b6853;
+  transition: transform 160ms ease;
+}
+
+.chevronOpen {
+  transform: rotate(180deg);
+}
+
+.menu {
+  position: absolute;
+  z-index: 30;
+  inset: calc(100% + 7px) 0 auto;
+  max-height: min(280px, 45vh);
+  overflow-y: auto;
+  padding: 6px;
+  border: 1px solid #e6dccd;
+  border-radius: 12px;
+  background: #fffdf8;
+  box-shadow:
+    0 14px 34px #45341d21,
+    0 2px 7px #45341d0c;
+  animation: menu-in 130ms ease-out both;
+}
+
+.option {
+  width: 100%;
+  min-height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 9px 11px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: #594b3e;
+  text-align: left;
+  font: inherit;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.option:hover,
+.option.active {
+  background: #f6efe4;
+  color: #654d35;
+}
+
+.option.selected {
+  background: #eee3d2;
+  color: #59442e;
+  font-weight: 600;
+}
+
+.option.selected.active,
+.option.selected:hover {
+  background: #eadbc5;
+}
+
+.option svg {
+  flex: 0 0 auto;
+  color: #826344;
+}
+
+.option:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+@keyframes menu-in {
+  from {
+    opacity: 0;
+    transform: translateY(-3px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .trigger,
+  .chevron {
+    transition: none;
+  }
+
+  .menu {
+    animation: none;
+  }
+}

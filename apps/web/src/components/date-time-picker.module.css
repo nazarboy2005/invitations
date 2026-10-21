@@ -1,0 +1,234 @@
+.root {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+}
+
+.trigger {
+  width: 100%;
+  min-height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 0 15px;
+  border: 1px solid #e5d8c5;
+  border-radius: 10px;
+  color: #463a2e;
+  background: linear-gradient(180deg, #fffefa, #fbf7ef);
+  text-align: left;
+  font: inherit;
+  font-size: 14px;
+  box-shadow:
+    0 1px 2px #50371908,
+    inset 0 1px #ffffffc7;
+  transition:
+    border-color 140ms ease,
+    box-shadow 140ms ease,
+    background 140ms ease;
+}
+.trigger svg {
+  flex: 0 0 auto;
+  color: #876b49;
+}
+.trigger:hover:not(:disabled),
+.trigger.open {
+  border-color: #ac906b;
+  background: #fffdf8;
+  box-shadow:
+    0 0 0 3px #bda17b20,
+    0 5px 16px #4b382010;
+}
+.trigger:focus-visible {
+  outline: 2px solid #8b7051;
+  outline-offset: 2px;
+}
+.trigger:disabled {
+  opacity: 0.58;
+  cursor: not-allowed;
+}
+.value {
+  font-variant-numeric: tabular-nums;
+}
+.placeholder {
+  color: #948676;
+}
+
+.popover {
+  position: absolute;
+  z-index: 35;
+  top: calc(100% + 8px);
+  left: 0;
+  width: min(100%, 390px);
+  min-width: min(340px, calc(100vw - 48px));
+  padding: 16px;
+  border: 1px solid #e5d9c8;
+  border-radius: 14px;
+  background: #fffdf8;
+  box-shadow:
+    0 18px 48px #46351f24,
+    0 3px 10px #46351f0c;
+  animation: appear 140ms ease-out both;
+}
+.calendarHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+.calendarHeader strong {
+  color: #44382c;
+  font-size: 14px;
+  font-weight: 650;
+}
+.calendarHeader button {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border: 1px solid #eee5d8;
+  border-radius: 9px;
+  background: #faf6ee;
+  color: #725b40;
+}
+.calendarHeader button:hover {
+  background: #f1e7d8;
+}
+.calendarGrid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 3px;
+}
+.weekday {
+  display: grid;
+  place-items: center;
+  height: 30px;
+  color: #8c7b67;
+  font-size: 11px;
+  font-weight: 600;
+}
+.emptyDay {
+  height: 38px;
+}
+.day {
+  display: grid;
+  place-items: center;
+  min-width: 0;
+  height: 38px;
+  border: 1px solid transparent;
+  border-radius: 9px;
+  background: transparent;
+  color: #514538;
+  font: inherit;
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+}
+.day:hover {
+  border-color: #e6d8c4;
+  background: #f8f2e8;
+}
+.selectedDay {
+  border-color: #8a6d4c;
+  background: #8a6d4c;
+  color: white;
+  font-weight: 650;
+}
+.selectedDay:hover {
+  background: #765c40;
+  color: white;
+}
+.timeSection {
+  margin-top: 14px;
+  padding-top: 13px;
+  border-top: 1px solid #eee5d8;
+}
+.timeTitle {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 8px;
+  color: #705a40;
+  font-size: 12px;
+  font-weight: 600;
+}
+.timeSelects {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 8px;
+}
+.timeSelects > div {
+  min-width: 0;
+}
+.timeOnly {
+  display: grid;
+  grid-template-columns: 18px 1fr auto 1fr;
+  align-items: center;
+  gap: 8px;
+}
+.timeOnly > svg {
+  color: #876b49;
+}
+.timeOnly > div {
+  min-width: 0;
+}
+.timeSeparator {
+  color: #856a49;
+  font-size: 17px;
+  font-weight: 650;
+}
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid #eee5d8;
+}
+.footer > span {
+  color: #877864;
+  font-size: 11px;
+  line-height: 1.4;
+}
+.apply {
+  min-height: 38px;
+  padding: 0 14px;
+  border: 0;
+  border-radius: 8px;
+  background: #876b4c;
+  color: #fffaf2;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+}
+.apply:hover:not(:disabled) {
+  background: #74593d;
+}
+.apply:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+@keyframes appear {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@media (max-width: 540px) {
+  .popover {
+    width: min(100%, 360px);
+    padding: 12px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .trigger,
+  .popover {
+    transition: none;
+    animation: none;
+  }
+}

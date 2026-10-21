@@ -54,10 +54,6 @@ export function detectMedia(
       return { mime: "image/webp", extension: "webp" };
   }
   if (kind === "audio") {
-    // MediaRecorder commonly emits WebM/Opus for creator voice recordings.
-    // Verify the EBML container signature instead of trusting the client MIME.
-    if (bytes.subarray(0, 4).equals(Buffer.from([0x1a, 0x45, 0xdf, 0xa3])))
-      return { mime: "audio/webm", extension: "webm" };
     if (
       bytes.toString("ascii", 0, 3) === "ID3" ||
       (bytes[0] === 255 && (bytes[1] & 0xe0) === 0xe0)

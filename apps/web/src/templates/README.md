@@ -59,7 +59,7 @@ See `docs/templates/TEMPLATE_ROADMAP.md` for the full 46-template inventory,
 batch progress, and known gaps. Keep every copied source capture untouched.
 
 For silent visual QA of a full Marxaba preview, add `qaSilent=1` to the preview
-URL. This mutes background music and voice playback inside the preview frame
+URL. This mutes background music inside the preview frame
 while preserving the real opening interaction and animations. The flag is
 preview-only and is never sent to public invitation rendering.
 

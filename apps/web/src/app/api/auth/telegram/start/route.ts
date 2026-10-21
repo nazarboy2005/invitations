@@ -1,5 +1,4 @@
 import { cookies } from "next/headers";
-import { randomInt } from "node:crypto";
 import { getDb } from "@taklifnoma/database";
 import {
   authRoute,
@@ -28,14 +27,12 @@ export async function POST(request: Request) {
         "Please wait before starting another login",
         429,
       );
-    const token = randomToken(),
-      code = String(randomInt(100000, 1000000));
+    const token = randomToken();
     const [row] =
-      await db`INSERT INTO auth_requests(token_hash,browser_hash,code,expires_at) VALUES(${digest(token)},${hash},${code},now()+interval '5 minutes') RETURNING id`;
+      await db`INSERT INTO auth_requests(token_hash,browser_hash,expires_at) VALUES(${digest(token)},${hash},now()+interval '5 minutes') RETURNING id`;
     jar.set(BROWSER_COOKIE, browser, cookieOptions(600));
     return json({
       requestId: row.id,
-      code,
       loginUrl: `https://t.me/${process.env.TELEGRAM_BOT_USERNAME!.replace(/^@/, "")}?start=auth_${token}`,
     });
   });

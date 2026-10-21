@@ -281,104 +281,15 @@
   if (document.fonts?.ready) document.fonts.ready.then(scheduleNameFit);
   scheduleNameFit();
 
-  // Voice greeting is a separate, optional recording. Keep playback under an
-  // explicit visitor gesture and reuse the invitation's normal public media URL.
-  const voiceLabels = {
-    uz: { play: "Ovozli tabrikni tinglash", pause: "Ovozli tabrikni to‘xtatish", failed: "Ovozli tabrikni ijro etib bo‘lmadi" },
-    "uz-Cyrl": { play: "Овозли табрикни тинглаш", pause: "Овозли табрикни тўхтатиш", failed: "Овозли табрикни ижро этиб бўлмади" },
-    en: { play: "Play voice greeting", pause: "Pause voice greeting", failed: "Voice greeting could not be played" },
-    ru: { play: "Воспроизвести голосовое поздравление", pause: "Приостановить голосовое поздравление", failed: "Не удалось воспроизвести голосовое поздравление" },
-  };
-  const voiceStyle = document.createElement("style");
-  voiceStyle.textContent = `
-    .mh-voice-button {
-      position: fixed; left: max(16px, env(safe-area-inset-left));
-      bottom: max(16px, env(safe-area-inset-bottom)); z-index: 1000;
-      display: inline-grid; place-items: center; width: 48px; height: 48px;
-      border: 1px solid currentColor; border-radius: 50%;
-      color: var(--gold, #725433); background: rgba(255, 252, 245, .96);
-      box-shadow: 0 3px 14px rgba(25, 18, 10, .2); font: inherit;
-      font-size: 20px; cursor: pointer; -webkit-tap-highlight-color: transparent;
-    }
-    .mh-voice-button[hidden] { display: none !important; }
-    .mh-voice-button:focus-visible { outline: 3px solid currentColor; outline-offset: 3px; }
-    @media (prefers-reduced-motion: reduce) {
-      .mh-voice-button { transition: none !important; animation: none !important; }
-    }
-  `;
-  document.head.append(voiceStyle);
-  let voiceApi = null;
-  let voiceAudio = null;
-  let voiceButton = null;
-  let voiceUrl = "";
-  let invitationOpened = false;
-
-  function updateVoiceButton(playing) {
-    if (!voiceButton) return;
-    const locale = document.documentElement.lang || "uz";
-    const labels = voiceLabels[locale] || voiceLabels.uz;
-    voiceButton.textContent = playing ? "Ⅱ" : "▶";
-    voiceButton.setAttribute("aria-pressed", String(playing));
-    voiceButton.setAttribute("aria-label", playing ? labels.pause : labels.play);
-    voiceButton.title = playing ? labels.pause : labels.play;
-  }
-
-  function syncVoiceMessage(data) {
-    const voice = data?.voiceMessage;
-    const nextUrl = voice?.enabled && typeof voice.url === "string" ? voice.url : "";
-    if (nextUrl === voiceUrl) {
-      if (voiceAudio) voiceAudio.muted = data?.silentPlayback === true;
-      return;
-    }
-    voiceAudio?.pause();
-    voiceAudio?.remove();
-    voiceButton?.remove();
-    voiceAudio = null;
-    voiceButton = null;
-    voiceUrl = nextUrl;
-    if (!nextUrl) return;
-
-    voiceAudio = document.createElement("audio");
-    voiceAudio.preload = "none";
-    voiceAudio.muted = data?.silentPlayback === true;
-    voiceAudio.src = nextUrl;
-    voiceAudio.addEventListener("ended", () => updateVoiceButton(false));
-    voiceAudio.addEventListener("pause", () => updateVoiceButton(false));
-    voiceButton = document.createElement("button");
-    voiceButton.type = "button";
-    voiceButton.className = "mh-voice-button";
-    voiceButton.hidden = !invitationOpened;
-    voiceButton.addEventListener("click", async () => {
-      if (!voiceAudio) return;
-      if (!voiceAudio.paused) {
-        voiceAudio.pause();
-        return;
-      }
-      try {
-        await voiceAudio.play();
-        updateVoiceButton(true);
-      } catch {
-        const locale = document.documentElement.lang || "uz";
-        voiceButton?.setAttribute("aria-label", (voiceLabels[locale] || voiceLabels.uz).failed);
-      }
-    });
-    updateVoiceButton(false);
-    document.body.append(voiceButton, voiceAudio);
-  }
-
-  function connectVoiceMessage() {
+  function connectInvitationData() {
     const api = window.Marhamat;
     if (!api?.on) return false;
-    voiceApi = api;
-    api.on("ready", () => syncVoiceMessage(api.data));
+    api.on("ready", () => syncHeroDate(api.data));
     api.on("open", () => {
-      invitationOpened = true;
-      if (voiceButton) voiceButton.hidden = false;
       scheduleNameFit();
       window.setTimeout(scheduleNameFit, 300);
       window.setTimeout(scheduleNameFit, 1000);
     });
-    syncVoiceMessage(api.data);
     syncHeroDate(api.data);
     return true;
   }
@@ -397,9 +308,9 @@
   }
 
   window.addEventListener("load", () => {
-    if (!connectVoiceMessage()) {
+    if (!connectInvitationData()) {
       const retry = window.setInterval(() => {
-        if (connectVoiceMessage()) window.clearInterval(retry);
+        if (connectInvitationData()) window.clearInterval(retry);
       }, 100);
       window.setTimeout(() => window.clearInterval(retry), 5000);
     }
@@ -410,32 +321,27 @@
       event.source !== window.parent ||
       event.data?.type !== "marxaba:update"
     ) return;
-    requestAnimationFrame(() => syncVoiceMessage(voiceApi?.data || event.data.payload));
+    requestAnimationFrame(() => syncHeroDate(event.data.payload));
   });
 
-  document.addEventListener("click", (event) => {
-    if (voiceButton && event.target instanceof Node && voiceButton.contains(event.target)) return;
+  document.addEventListener("click", () => {
     if (document.documentElement.classList.contains("is-locked")) return;
-    invitationOpened = true;
     // Some reference templates remove the root lock themselves without
     // emitting Marhamat's `open` event. Reveal the shared locale control once
     // that same unlock has happened so language switching remains available.
     document.querySelectorAll(".mh-lang.is-hidden").forEach((control) => {
       control.classList.remove("is-hidden");
     });
-    if (voiceButton) voiceButton.hidden = false;
   }, true);
 
   // A few source openers remove `is-locked` during their own click handler,
-  // after the capture-phase click above. Observe that real state transition
-  // so their language and voice controls are exposed as well.
+  // after the capture-phase click above. Observe that transition so language
+  // controls remain available.
   new MutationObserver(() => {
     if (document.documentElement.classList.contains("is-locked")) return;
-    invitationOpened = true;
     document.querySelectorAll(".mh-lang.is-hidden").forEach((control) => {
       control.classList.remove("is-hidden");
     });
-    if (voiceButton) voiceButton.hidden = false;
   }).observe(document.documentElement, {
     attributes: true,
     attributeFilter: ["class"],

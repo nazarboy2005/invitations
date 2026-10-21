@@ -15,19 +15,21 @@ export async function GET(
       await getDb()`SELECT * FROM media_assets WHERE id=${id} AND status='ready'`;
     if (!asset) throw new ApiError(404, "NOT_FOUND", "Fayl topilmadi.");
     let publicAccess = false;
+    if (asset.mime_type.startsWith("audio/")) {
+      const catalogTrack =
+        await getDb()`SELECT id FROM catalog_music_tracks WHERE asset_id=${id} LIMIT 1`;
+      publicAccess = catalogTrack.length > 0;
+    }
     if (
+      !publicAccess &&
       asset.visibility === "public" &&
       /^(image|audio)\//.test(asset.mime_type)
     ) {
       const mediaUrl = `/api/media/${id}`;
-      const referenced =
-        await getDb()`SELECT id FROM invitations
+      const referenced = await getDb()`SELECT id FROM invitations
           WHERE owner_id=${asset.owner_id} AND status='published'
             AND (
               data->'music' @> jsonb_build_object(
-                'enabled', true, 'assetId', ${id}, 'url', ${mediaUrl}
-              )
-              OR data->'voiceMessage' @> jsonb_build_object(
                 'enabled', true, 'assetId', ${id}, 'url', ${mediaUrl}
               )
               OR EXISTS (

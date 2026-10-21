@@ -24,14 +24,8 @@ test("template samples are illustrative complete invitations", () => {
   );
   assert.equal(hasAuthoredInvitationContent(sample), true);
   assert.equal(sample.content["uz-Latn"].message.includes("ko‘rishdan"), true);
-  assert.equal(
-    sample.content["uz-Cyrl"].eventLabel,
-    "Никоҳ тўйи",
-  );
-  assert.equal(
-    sample.content.ru.greeting,
-    "Ассалому алейкум, дорогой гость!",
-  );
+  assert.equal(sample.content["uz-Cyrl"].eventLabel, "Никоҳ тўйи");
+  assert.equal(sample.content.ru.greeting, "Ассалому алейкум, дорогой гость!");
 });
 
 test("sample objects are isolated so renderer changes cannot mutate the fixture", () => {
@@ -57,13 +51,20 @@ test("ephemeral draft previews keep the creator's selected language settings", (
 
   const catalogSample = createTemplatePreviewSample("sahifa");
   assert.equal(catalogSample.defaultLocale, "uz-Latn");
-  assert.deepEqual(catalogSample.enabledLocales, ["uz-Latn", "uz-Cyrl", "en", "ru"]);
+  assert.deepEqual(catalogSample.enabledLocales, [
+    "uz-Latn",
+    "uz-Cyrl",
+    "en",
+    "ru",
+  ]);
 });
 
 test("localized names are stored independently in each enabled language", () => {
   const invitation = createTemplatePreviewSample("oltin-nur");
   invitation.content.ru.people[0] = "Создатель";
-  const restored = invitationSchema.parse(JSON.parse(JSON.stringify(invitation)));
+  const restored = invitationSchema.parse(
+    JSON.parse(JSON.stringify(invitation)),
+  );
 
   assert.deepEqual(restored.content["uz-Latn"].people, ["Asadbek", "Gulhayo"]);
   assert.deepEqual(restored.content["uz-Cyrl"].people, ["Асадбек", "Гулҳаё"]);
@@ -88,12 +89,6 @@ test("long-name QA preview preserves every non-name invitation field", () => {
   const canonical = createTemplatePreviewSample("muhabbat-kitobi");
   canonical.content.en.greeting = "English greeting";
   canonical.content.ru.people = ["Creator one", "Creator two"];
-  canonical.voiceMessage = {
-    enabled: true,
-    assetId: "voice-asset",
-    url: "/api/media/voice-asset",
-    filename: "greeting.mp3",
-  };
   canonical.story = [
     { id: "chapter-a", title: { en: "Chapter" }, text: { en: "Story" } },
   ];
@@ -105,7 +100,6 @@ test("long-name QA preview preserves every non-name invitation field", () => {
   ]);
   assert.deepEqual(stress.content.ru.people, stress.content.en.people);
   assert.equal(stress.content.en.greeting, "English greeting");
-  assert.deepEqual(stress.voiceMessage, canonical.voiceMessage);
   assert.deepEqual(stress.story, canonical.story);
   assert.deepEqual(canonical.content.en.people, ["Asadbek", "Gulhayo"]);
   assert.deepEqual(canonical.content.ru.people, ["Creator one", "Creator two"]);
@@ -128,15 +122,6 @@ test("only empty template-selection previews may fall back to sample content", (
   ];
   assert.equal(hasAuthoredInvitationContent(storyOnly), true);
 
-  const voiceOnly = createInvitation("oltin-nur");
-  voiceOnly.voiceMessage = {
-    enabled: true,
-    assetId: "voice-1",
-    url: "/api/media/voice-1",
-    filename: "greeting.mp3",
-  };
-  assert.equal(hasAuthoredInvitationContent(voiceOnly), true);
-
   const dressCodeOnly = createInvitation("sahifa");
   dressCodeOnly.dressCode.text["uz-Latn"] = "Pastel ranglarni tanlang";
   assert.equal(hasAuthoredInvitationContent(dressCodeOnly), true);
@@ -148,4 +133,30 @@ test("only empty template-selection previews may fall back to sample content", (
   const giftDetailsOnly = createInvitation("oltin-uzuk");
   giftDetailsOnly.gift.cardHolder = "Asadbek Karimov";
   assert.equal(hasAuthoredInvitationContent(giftDetailsOnly), true);
+
+  const contactsOnly = createInvitation("anor");
+  contactsOnly.contacts.telegramUsername = "@taklifnoma";
+  assert.equal(hasAuthoredInvitationContent(contactsOnly), true);
+});
+
+test("legacy contact cards migrate to optional phone and Telegram fields", () => {
+  const invitation = createInvitation();
+  const legacy = {
+    ...invitation,
+    contacts: [
+      {
+        id: "phone",
+        type: "phone",
+        label: "Call us",
+        value: "+998 90 123 45 67",
+      },
+      { id: "telegram", type: "telegram", label: "", value: "@taklifnoma" },
+    ],
+  };
+
+  const parsed = invitationSchema.parse(legacy);
+  assert.deepEqual(parsed.contacts, {
+    phoneNumber: "+998 90 123 45 67",
+    telegramUsername: "@taklifnoma",
+  });
 });

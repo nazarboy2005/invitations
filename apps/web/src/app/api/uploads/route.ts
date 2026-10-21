@@ -35,36 +35,47 @@ export async function GET() {
   }
 }
 
-const inputSchema = z.object({
-  filename: z.string().min(1).max(200),
-  size: z
-    .number()
-    .int()
-    .min(16)
-    .max(15 * 1024 * 1024),
-  contentType: z.enum([
-    "image/png",
-    "image/jpeg",
-    "image/webp",
-    "audio/mpeg",
-    "audio/wav",
-    "audio/mp4",
-    "audio/x-m4a",
-    "audio/webm",
-  ]),
-  kind: z.enum(["image", "audio"]),
-  draftId: z.uuid(),
-});
+const inputSchema = z
+  .object({
+    filename: z.string().min(1).max(200),
+    size: z
+      .number()
+      .int()
+      .min(16)
+      .max(15 * 1024 * 1024),
+    contentType: z.enum([
+      "image/png",
+      "image/jpeg",
+      "image/webp",
+      "audio/mpeg",
+      "audio/wav",
+      "audio/mp4",
+      "audio/x-m4a",
+    ]),
+    kind: z.enum(["image", "audio"]),
+    draftId: z.uuid().optional(),
+    catalog: z.boolean().optional(),
+  })
+  .strict();
 export async function POST(request: Request) {
   try {
     verifySameOrigin(request);
     const user = await authenticatedUser();
     storageClient();
     const input = inputSchema.parse(await readJson(request, 5000));
+    if (input.catalog && (!user.isAdmin || input.kind !== "audio"))
+      throw new ApiError(403, "FORBIDDEN", "Administrator huquqi kerak.");
+    if (!input.catalog && !input.draftId)
+      throw new ApiError(
+        400,
+        "INVALID_DRAFT",
+        "Qoralama identifikatori kerak.",
+      );
     if (!input.contentType.startsWith(input.kind + "/"))
       throw new ApiError(400, "INVALID_FILE", "Fayl turini tekshiring.");
-    const existing =
-      await getDb()`SELECT owner_id,status,edit_deadline_at FROM invitations WHERE id=${input.draftId}`;
+    const existing = input.draftId
+      ? await getDb()`SELECT owner_id,status,edit_deadline_at FROM invitations WHERE id=${input.draftId}`
+      : [];
     if (
       existing[0] &&
       (existing[0].owner_id !== user.id ||
@@ -94,17 +105,18 @@ export async function POST(request: Request) {
       "audio/wav": "wav",
       "audio/mp4": "m4a",
       "audio/x-m4a": "m4a",
-      "audio/webm": "webm",
     }[input.contentType];
     const id = randomUUID(),
-      key = `creators/${user.id}/${input.draftId}/${id}.${extension}`,
+      key = input.catalog
+        ? `platform-music/${id}.${extension}`
+        : `creators/${user.id}/${input.draftId}/${id}.${extension}`,
       url = `/api/media/${id}`,
       mime =
         input.contentType === "audio/x-m4a" ? "audio/mp4" : input.contentType;
     const uploadUrl = await presignMedia(key, mime);
     // A public media asset is only anonymously readable when currently referenced
     // by its owner's published invitation; drafts remain authenticated.
-    await getDb()`INSERT INTO media_assets(id,owner_id,draft_id,object_key,url,filename,mime_type,size_bytes,visibility,status) VALUES(${id},${user.id},${input.draftId},${key},${url},${input.filename},${mime},${input.size},'public','pending')`;
+    await getDb()`INSERT INTO media_assets(id,owner_id,draft_id,object_key,url,filename,mime_type,size_bytes,visibility,status) VALUES(${id},${user.id},${input.draftId ?? null},${key},${url},${input.filename},${mime},${input.size},'public','pending')`;
     return NextResponse.json(
       {
         upload: {

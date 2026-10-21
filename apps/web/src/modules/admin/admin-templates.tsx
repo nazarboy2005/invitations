@@ -2,11 +2,13 @@
 
 import { useEffect, useState, type CSSProperties } from "react";
 import {
+  EVENT_TYPE_OPTIONS,
   formatPrice,
   type TemplateCategory,
   type TemplateDefinition,
 } from "@taklifnoma/contracts";
 import Link from "next/link";
+import { SoftSelect } from "@/components/soft-select";
 
 const inputStyle: CSSProperties = {
   padding: "11px 12px",
@@ -356,13 +358,20 @@ function TemplateRow({
   const [categoryIds, setCategoryIds] = useState<string[]>(
     template.categoryIds,
   );
+  const [supportedEventTypes, setSupportedEventTypes] = useState(
+    template.supportedEventTypes,
+  );
   const categoryKey = JSON.stringify(template.categoryIds);
+  const eventTypesKey = JSON.stringify(template.supportedEventTypes);
   useEffect(() => {
     setPrice(String(template.priceMinor / 100));
   }, [template.priceMinor]);
   useEffect(() => {
     setCategoryIds(JSON.parse(categoryKey));
   }, [categoryKey]);
+  useEffect(() => {
+    setSupportedEventTypes(JSON.parse(eventTypesKey));
+  }, [eventTypesKey]);
   const changedCategories =
     [...categoryIds].sort().join("|") !==
     [...template.categoryIds].sort().join("|");
@@ -443,21 +452,16 @@ function TemplateRow({
           {template.published && (
             <label style={labelStyle}>
               O‘rniga qo‘yiladigan dizayn
-              <select
+              <SoftSelect
+                label="O‘rniga qo‘yiladigan dizayn"
                 value={replacement}
-                onChange={(event) => setReplacement(event.target.value)}
-                disabled={busy}
-                style={inputStyle}
-              >
-                <option value="">Tanlang</option>
-                {templates
+                placeholder="Tanlang"
+                options={templates
                   .filter((item) => item.published && item.id !== template.id)
-                  .map((item) => (
-                    <option key={item.id} value={item.id}>
-                      {item.name}
-                    </option>
-                  ))}
-              </select>
+                  .map((item) => ({ value: item.id, label: item.name }))}
+                onChange={setReplacement}
+                disabled={busy}
+              />
             </label>
           )}
           <button
@@ -558,6 +562,81 @@ function TemplateRow({
             style={{ marginTop: 16 }}
           >
             Kategoriyalarni saqlash
+          </button>
+        </fieldset>
+      </form>
+      <form
+        onSubmit={(event) => {
+          event.preventDefault();
+          void onUpdate(template.id, { supportedEventTypes });
+        }}
+        style={{ borderTop: "1px solid var(--line)", paddingTop: 20 }}
+      >
+        <fieldset disabled={busy} style={{ border: 0, padding: 0, margin: 0 }}>
+          <legend
+            style={{
+              fontWeight: 500,
+              fontSize: 14,
+              padding: 0,
+              marginBottom: 10,
+            }}
+          >
+            Mos keladigan tadbirlar
+          </legend>
+          <p className="muted" style={{ margin: "0 0 12px", fontSize: 12 }}>
+            Faqat belgilangan tadbir turlari uchun dizayn tanlovda ko‘rinadi.
+            Amaldagi taklifnomalar ishlatadigan turini olib tashlab bo‘lmaydi.
+          </p>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "8px 12px" }}>
+            {EVENT_TYPE_OPTIONS.map((eventType) => (
+              <label
+                key={eventType.id}
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 9,
+                  minHeight: 44,
+                  padding: "9px 12px",
+                  borderRadius: 10,
+                  border: "1px solid var(--line)",
+                  background: supportedEventTypes.includes(eventType.id)
+                    ? "#f4ecdf"
+                    : "var(--surface)",
+                  cursor: busy ? "default" : "pointer",
+                  fontSize: 13,
+                }}
+              >
+                <input
+                  type="checkbox"
+                  checked={supportedEventTypes.includes(eventType.id)}
+                  onChange={(event) =>
+                    setSupportedEventTypes((current) =>
+                      event.target.checked
+                        ? [...current, eventType.id]
+                        : current.filter((id) => id !== eventType.id),
+                    )
+                  }
+                  style={{
+                    width: 17,
+                    height: 17,
+                    accentColor: "var(--primary)",
+                  }}
+                />
+                {eventType.name}
+              </label>
+            ))}
+          </div>
+          <button
+            className="button secondary"
+            disabled={
+              busy ||
+              supportedEventTypes.length === 0 ||
+              [...supportedEventTypes].sort().join("|") ===
+                [...template.supportedEventTypes].sort().join("|")
+            }
+            style={{ marginTop: 16 }}
+          >
+            Tadbir mosligini saqlash
           </button>
         </fieldset>
       </form>

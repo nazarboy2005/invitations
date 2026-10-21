@@ -72,16 +72,16 @@ async function askContact(chatId: number) {
     reply_markup: contactKeyboard,
   });
 }
-async function askConfirm(chatId: number, auth: Record<string, unknown>) {
+async function askConfirm(chatId: number, requestId: string) {
   await telegramCall("sendMessage", {
     chat_id: chatId,
-    text: `Saytga kirish kodi: ${auth.code}\nSaytdagi kod bilan bir xil ekanini tekshiring. Faqat o‘zingiz boshlagan kirishni tasdiqlang.\nSayt: ${new URL(process.env.APP_URL!).origin}`,
+    text: `Saytga kirishni tasdiqlang. Bu so‘rovni o‘zingiz boshlagan bo‘lsangiz, quyidagi tugmani bosing.\nSayt: ${new URL(process.env.APP_URL!).origin}`,
     reply_markup: {
       inline_keyboard: [
         [
           {
             text: "Saytga kirishni tasdiqlash",
-            callback_data: `auth_confirm:${auth.id}`,
+            callback_data: `auth_confirm:${requestId}`,
           },
         ],
       ],
@@ -134,7 +134,7 @@ async function processLocked(update: Update, db: postgres.TransactionSql) {
           text: "Kirish havolasi eskirgan yoki ishlatilgan. Saytdan yangisini oching.",
         });
       else if (!user.phone_shared_at) await askContact(message.chat.id);
-      else await askConfirm(message.chat.id, auth);
+      else await askConfirm(message.chat.id, auth.id);
     } else if (message.contact) {
       if (
         !isOwnContact(
@@ -155,7 +155,7 @@ async function processLocked(update: Update, db: postgres.TransactionSql) {
         });
         const [auth] =
           await db`SELECT * FROM auth_requests WHERE user_id=${user.id} AND state='identified' AND expires_at>now() ORDER BY created_at DESC LIMIT 1`;
-        if (auth) await askConfirm(message.chat.id, auth);
+        if (auth) await askConfirm(message.chat.id, auth.id);
         else
           await telegramCall("sendMessage", {
             chat_id: message.chat.id,

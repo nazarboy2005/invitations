@@ -1,7 +1,6 @@
 import { notFound, redirect } from "next/navigation";
 import { z } from "zod";
 import { Studio } from "@/modules/studio/studio";
-import { SiteHeader } from "@/components/site-header";
 import { getSessionUser } from "@/server/auth";
 import { getOwnedInvitation } from "@/server/invitations";
 export const dynamic = "force-dynamic";
@@ -21,10 +20,5 @@ export default async function EditPage({
   if (!user) redirect("/dashboard");
   const invitation = await getOwnedInvitation(id, user.id);
   if (!invitation) notFound();
-  return (
-    <>
-      <SiteHeader compact />
-      <Studio initialInvitation={invitation} />
-    </>
-  );
+  return <Studio initialInvitation={invitation} />;
 }

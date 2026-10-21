@@ -7,7 +7,7 @@ import type {
   TemplateCategory,
   TemplateDefinition,
 } from "@taklifnoma/contracts";
-import { formatPrice } from "@taklifnoma/contracts";
+import { EVENT_TYPE_OPTIONS, formatPrice } from "@taklifnoma/contracts";
 import styles from "@/app/home.module.css";
 
 export function TemplateGallery({
@@ -102,6 +102,17 @@ export function TemplateGallery({
                   </span>
                   <h3>{template.name}</h3>
                   <p>{template.description}</p>
+                  <span>
+                    Mos keladi:{" "}
+                    {template.supportedEventTypes
+                      .map(
+                        (id) =>
+                          EVENT_TYPE_OPTIONS.find(
+                            (eventType) => eventType.id === id,
+                          )?.name ?? id,
+                      )
+                      .join(", ")}
+                  </span>
                   {template.published ? (
                     <strong>{formatPrice(template.priceMinor)}</strong>
                   ) : (
@@ -111,14 +122,14 @@ export function TemplateGallery({
                   )}
                   <div className={styles.templateActions}>
                     <Link className="button secondary" href={previewUrl}>
-                      <Eye size={16} /> To‘liq ko‘rish
+                      <Eye size={14} /> Ko‘rish
                     </Link>
                     {template.published && (
                       <Link
-                        className="button"
-                        href={`/studio?template=${encodeURIComponent(template.id)}`}
+                        className={styles.createAction}
+                        href={`/studio?new=1&template=${encodeURIComponent(template.id)}`}
                       >
-                        Shu dizaynni tanlash <ArrowUpRight size={16} />
+                        Yaratish <ArrowUpRight size={16} />
                       </Link>
                     )}
                   </div>

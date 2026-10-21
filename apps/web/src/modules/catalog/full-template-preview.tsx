@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import {
   invitationSchema,
   type Invitation,
@@ -24,7 +23,6 @@ function previewDraftKey(id: string) {
 
 export function FullTemplatePreview({
   template,
-  canSelect,
   draftId,
   demo = false,
   silentPlayback = false,
@@ -86,27 +84,8 @@ export function FullTemplatePreview({
     };
   }, [demo, draftId, longNames, template.id]);
 
-  const returnHref = draftId
-    ? `/studio?draft=${encodeURIComponent(draftId)}`
-    : "/preview";
-  const selectHref = draftId
-    ? `/studio?draft=${encodeURIComponent(draftId)}&useTemplate=${encodeURIComponent(template.id)}`
-    : `/studio?template=${encodeURIComponent(template.id)}`;
-
   return (
     <main className={styles.fullPreview}>
-      <nav className={styles.previewToolbar} aria-label="Dizayn ko‘rish">
-        <Link href={returnHref} className={styles.toolbarBack}>
-          <ArrowLeft size={16} />
-          <span>{draftId ? "Tahrirga qaytish" : "Dizaynlar"}</span>
-        </Link>
-        {canSelect && (
-          <Link href={selectHref} className={styles.toolbarAction}>
-            <span>Shu dizaynni tanlash</span>
-            <ArrowUpRight size={16} />
-          </Link>
-        )}
-      </nav>
       {!invitation ? (
         <div className={styles.loading}>Dizayn ochilmoqda…</div>
       ) : template.id === "anor" ? (
@@ -132,7 +111,7 @@ export function FullTemplatePreview({
       ) : (
         <div className={styles.unsupported}>
           <p>Bu dizaynning to‘liq ko‘rinishi hali tayyorlanmagan.</p>
-          <Link href={returnHref}>Orqaga qaytish</Link>
+          <Link href="/#templates">Dizaynlarni ko‘rish</Link>
         </div>
       )}
     </main>

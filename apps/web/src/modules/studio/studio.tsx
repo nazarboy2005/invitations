@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { isValidElement, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import {
   ArrowDown,
@@ -16,15 +16,12 @@ import {
   LayoutTemplate,
   LoaderCircle,
   MapPin,
-  Mic2,
   Music2,
   Plus,
   Save,
   Send,
   Settings2,
-  ShieldCheck,
   Smartphone,
-  Square,
   Trash2,
   Users,
   X,
@@ -32,12 +29,18 @@ import {
 import {
   addLanguage,
   createInvitation,
+  defaultDressCode,
+  defaultEventLabel,
+  defaultLocalizedInvitationContent,
+  EVENT_TYPE_OPTIONS,
   formatPrice,
   getContent,
   invitationSchema,
   LANGUAGE_NAMES,
   LOCALES,
+  removeLanguage,
   switchTemplate,
+  templateById,
   TEMPLATE_CATEGORIES,
   templateIdSchema,
   type Invitation,
@@ -48,6 +51,8 @@ import {
   type TemplateCategory,
 } from "@taklifnoma/contracts";
 import styles from "./studio.module.css";
+import { SoftSelect } from "@/components/soft-select";
+import { DateTimePicker, TimePicker } from "@/components/date-time-picker";
 import { readBrowserDraft, saveBrowserDraft } from "./draft-storage";
 import { AnorInvitation } from "@/templates/anor";
 import { isMarxabaTemplate, MarxabaInvitation } from "@/templates/marxaba";
@@ -58,6 +63,12 @@ import {
 import { CATALOG_PREVIEW_MUSIC } from "@/modules/catalog/catalog-music";
 
 const sections = [
+  {
+    icon: LayoutTemplate,
+    title: "Dizayn tanlash",
+    short: "Dizayn",
+    note: "Tadbir va dizaynni tanlang",
+  },
   {
     icon: Users,
     title: "Asosiy ma’lumotlar",
@@ -71,18 +82,70 @@ const sections = [
     note: "Qachon va qayerda",
   },
   {
-    icon: LayoutTemplate,
-    title: "Dizayn tanlash",
-    short: "Dizayn",
-    note: "O‘zingizga mos uslub",
-  },
-  {
     icon: Settings2,
-    title: "Rasmlar va imkoniyatlar",
-    short: "Imkoniyatlar",
-    note: "Taklifingizga shaxsiylik qo‘shing",
+    title: "Qo‘shimcha",
+    short: "Qo‘shimcha",
+    note: "Qo‘shimcha imkoniyatlar",
   },
 ];
+
+function fillDressCodeDefaults(
+  current: Invitation["dressCode"],
+): Invitation["dressCode"] {
+  const defaults = defaultDressCode();
+  const missingColors = defaults.colors.filter(
+    (color) =>
+      !current.colors.some(
+        (existing) =>
+          existing.hex.toLowerCase() === color.hex.toLowerCase() ||
+          LOCALES.some(
+            (item) =>
+              existing.name[item]?.trim() &&
+              existing.name[item]?.trim() === color.name[item],
+          ),
+      ),
+  );
+  return {
+    ...current,
+    enabled: true,
+    style: Object.fromEntries(
+      LOCALES.map((item) => [
+        item,
+        current.style[item] || defaults.style[item] || "",
+      ]),
+    ),
+    text: Object.fromEntries(
+      LOCALES.map((item) => [
+        item,
+        current.text[item] || defaults.text[item] || "",
+      ]),
+    ),
+    note: Object.fromEntries(
+      LOCALES.map((item) => [
+        item,
+        current.note[item] || defaults.note[item] || "",
+      ]),
+    ),
+    colors: [
+      ...current.colors,
+      ...missingColors.slice(0, Math.max(0, 12 - current.colors.length)),
+    ],
+  };
+}
+
+const placeholders = {
+  addLanguage: "+ Til qo‘shish",
+  groomName: "Kuyovning ismi",
+  brideName: "Kelinning ismi",
+  personName: "Ism",
+  family: "Raxmonovlar oilasi",
+  venueName: "Joy nomini kiriting",
+  optional: "Ixtiyoriy",
+  programItem: "Dastur bandi nomi",
+  musicLoading: "Musiqalar yuklanmoqda…",
+  chooseMusic: "Musiqani tanlang",
+  noMusic: "Hozircha yuklangan musiqa yo‘q",
+};
 
 function Field({
   label,
@@ -93,6 +156,19 @@ function Field({
   hint?: string;
   children: React.ReactNode;
 }) {
+  if (
+    isValidElement(children) &&
+    (children.type === SoftSelect ||
+      children.type === DateTimePicker ||
+      children.type === TimePicker)
+  )
+    return (
+      <div className={styles.field}>
+        <span>{label}</span>
+        {children}
+        {hint && <small>{hint}</small>}
+      </div>
+    );
   return (
     <label className={styles.field}>
       <span>{label}</span>
@@ -139,14 +215,12 @@ export function Studio({
   );
   const [section, setSection] = useState(0);
   const [mobilePreview, setMobilePreview] = useState(false);
-  const [saved, setSaved] = useState("");
   const [notice, setNotice] = useState("");
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
   const [auth, setAuth] = useState<{
     loginUrl: string;
     requestId: string;
-    code: string;
   } | null>(null);
   const [authIdentity, setAuthIdentity] = useState<{
     displayName: string;
@@ -155,9 +229,6 @@ export function Studio({
   const [imageUrl, setImageUrl] = useState("");
   const [audioPreview, setAudioPreview] = useState("");
   const [audioName, setAudioName] = useState("");
-  const [voicePreview, setVoicePreview] = useState("");
-  const [voiceName, setVoiceName] = useState("");
-  const [voiceRecording, setVoiceRecording] = useState(false);
   const [savedMusic, setSavedMusic] = useState<
     Array<{ id: string; assetId: string | null; url: string; filename: string }>
   >([]);
@@ -175,28 +246,41 @@ export function Studio({
   const ownerId = useRef<string | null>(
     initialInvitation ? "unavailable-private-owner" : null,
   );
+  const dressCodeDefaultsApplied = useRef(new Set<string>());
   const dialogRef = useRef<HTMLDivElement>(null);
   const previousFocus = useRef<HTMLElement | null>(null);
-  const voiceRecorder = useRef<MediaRecorder | null>(null);
-  const voiceStream = useRef<MediaStream | null>(null);
-  const voiceChunks = useRef<Blob[]>([]);
-  const voiceTimeout = useRef<number | null>(null);
-  const discardVoiceOnStop = useRef(false);
   invitationRef.current = invitation;
 
   useEffect(() => {
     if (!invitation?.music.enabled) return;
     const controller = new AbortController();
     setMusicLibraryLoading(true);
-    fetch("/api/uploads", { signal: controller.signal })
-      .then(async (response) => {
-        if (!response.ok) return [];
-        const result = (await response.json()) as {
-          assets?: Array<{ id: string; url: string; filename: string }>;
-        };
-        return result.assets ?? [];
-      })
-      .then((assets) =>
+    Promise.all([
+      fetch("/api/music", { signal: controller.signal })
+        .then(async (response) => {
+          if (!response.ok) return [];
+          const result = (await response.json()) as {
+            tracks?: Array<{
+              id: string;
+              assetId: string;
+              url: string;
+              filename: string;
+            }>;
+          };
+          return result.tracks ?? [];
+        })
+        .catch(() => []),
+      fetch("/api/uploads", { signal: controller.signal })
+        .then(async (response) => {
+          if (!response.ok) return [];
+          const result = (await response.json()) as {
+            assets?: Array<{ id: string; url: string; filename: string }>;
+          };
+          return result.assets ?? [];
+        })
+        .catch(() => []),
+    ])
+      .then(([catalogTracks, assets]) =>
         setSavedMusic([
           {
             id: CATALOG_PREVIEW_MUSIC.id,
@@ -204,20 +288,10 @@ export function Studio({
             url: CATALOG_PREVIEW_MUSIC.url,
             filename: CATALOG_PREVIEW_MUSIC.filename,
           },
+          ...catalogTracks.map((track) => ({ ...track })),
           ...assets.map((asset) => ({ ...asset, assetId: asset.id })),
         ]),
       )
-      .catch(() => {
-        if (!controller.signal.aborted)
-          setSavedMusic([
-            {
-              id: CATALOG_PREVIEW_MUSIC.id,
-              assetId: null,
-              url: CATALOG_PREVIEW_MUSIC.url,
-              filename: CATALOG_PREVIEW_MUSIC.filename,
-            },
-          ]);
-      })
       .finally(() => {
         if (!controller.signal.aborted) setMusicLibraryLoading(false);
       });
@@ -232,6 +306,7 @@ export function Studio({
         const url = new URL(window.location.href);
         url.searchParams.delete("new");
         url.searchParams.delete("useTemplate");
+        url.searchParams.delete("template");
         url.searchParams.set("draft", id);
         window.history.replaceState(
           window.history.state,
@@ -258,8 +333,9 @@ export function Studio({
           new URLSearchParams(window.location.search).get("new") === "1";
         const requestedId =
           new URLSearchParams(window.location.search).get("draft") ?? undefined;
+        const query = new URLSearchParams(window.location.search);
         const requestedTemplate = templateIdSchema.safeParse(
-          new URLSearchParams(window.location.search).get("useTemplate"),
+          query.get("useTemplate") ?? query.get("template"),
         );
         const stored = fresh
           ? null
@@ -268,11 +344,18 @@ export function Studio({
               ownerId.current,
             );
         if (stored && (!initialInvitation || stored.dirty)) {
-          const restoredInvitation = requestedTemplate.success
+          const switchedInvitation = requestedTemplate.success
             ? switchTemplate(stored.invitation, requestedTemplate.data)
             : stored.invitation;
+          const restoredInvitation = switchedInvitation.dressCode.enabled
+            ? {
+                ...switchedInvitation,
+                dressCode: fillDressCodeDefaults(switchedInvitation.dressCode),
+              }
+            : switchedInvitation;
           setInvitation(restoredInvitation);
           setLocale(restoredInvitation.defaultLocale);
+          setSection(restoredInvitation.templateId ? 1 : 0);
           bindDraftUrl(stored.invitation.id);
           setNotice(
             "Shu brauzerdagi saqlanmagan o‘zgartirishlaringiz tiklandi.",
@@ -285,8 +368,23 @@ export function Studio({
         );
       }
       if (initialInvitation) {
-        setInvitation(initialInvitation);
+        const query = new URLSearchParams(window.location.search);
+        const requestedTemplate = templateIdSchema.safeParse(
+          query.get("useTemplate") ?? query.get("template"),
+        );
+        const selectedInvitation = requestedTemplate.success
+          ? switchTemplate(initialInvitation, requestedTemplate.data)
+          : initialInvitation;
+        setInvitation(
+          selectedInvitation.dressCode.enabled
+            ? {
+                ...selectedInvitation,
+                dressCode: fillDressCodeDefaults(selectedInvitation.dressCode),
+              }
+            : selectedInvitation,
+        );
         setLocale(initialInvitation.defaultLocale);
+        setSection(selectedInvitation.templateId ? 1 : 0);
         return;
       }
       const template = new URLSearchParams(window.location.search).get(
@@ -294,6 +392,18 @@ export function Studio({
       );
       const selected = templateIdSchema.safeParse(template);
       const created = createInvitation(selected.success ? selected.data : "");
+      if (selected.success) {
+        const templateDefinition = templateById(selected.data);
+        if (templateDefinition?.supportedEventTypes.length === 1) {
+          created.eventType = templateDefinition.supportedEventTypes[0];
+          created.content[created.defaultLocale] =
+            defaultLocalizedInvitationContent(
+              created.eventType,
+              created.defaultLocale,
+            );
+        }
+        setSection(1);
+      }
       setInvitation(created);
       try {
         saveBrowserDraft(created, true, ownerId.current);
@@ -309,6 +419,18 @@ export function Studio({
       alive = false;
     };
   }, [initialInvitation]);
+
+  useEffect(() => {
+    if (
+      !invitation?.dressCode.enabled ||
+      dressCodeDefaultsApplied.current.has(invitation.id)
+    )
+      return;
+    dressCodeDefaultsApplied.current.add(invitation.id);
+    const dressCode = fillDressCodeDefaults(invitation.dressCode);
+    if (JSON.stringify(dressCode) !== JSON.stringify(invitation.dressCode))
+      setInvitation({ ...invitation, dressCode });
+  }, [invitation]);
 
   useEffect(() => {
     let alive = true;
@@ -346,7 +468,6 @@ export function Studio({
 
   useEffect(() => {
     if (!invitation) return;
-    setSaved("Saqlanmoqda…");
     const timer = window.setTimeout(() => {
       try {
         saveBrowserDraft(
@@ -354,9 +475,7 @@ export function Studio({
           JSON.stringify(invitation) !== lastCloudSnapshot.current,
           ownerId.current,
         );
-        setSaved("Shu brauzerda saqlandi");
       } catch {
-        setSaved("Brauzerga saqlanmadi");
         setError(
           "Brauzer xotirasi to‘lgan yoki saqlashga ruxsat yo‘q. Hisobingizga saqlashni tanlang.",
         );
@@ -389,15 +508,8 @@ export function Studio({
   useEffect(
     () => () => {
       if (audioPreview) URL.revokeObjectURL(audioPreview);
-      if (voicePreview) URL.revokeObjectURL(voicePreview);
-      if (voiceTimeout.current !== null) window.clearTimeout(voiceTimeout.current);
-      if (voiceRecorder.current?.state === "recording") {
-        discardVoiceOnStop.current = true;
-        voiceRecorder.current.stop();
-      }
-      voiceStream.current?.getTracks().forEach((track) => track.stop());
     },
-    [audioPreview, voicePreview],
+    [audioPreview],
   );
 
   useEffect(() => {
@@ -485,12 +597,29 @@ export function Studio({
       </div>
     );
   const content = getContent(invitation, locale);
+  // Placeholder copy follows the Uzbek Latin editor UI, independently of the
+  // invitation language currently being authored.
   const selectedTemplate = templates.find(
     (item) => item.id === invitation.templateId,
   );
+  const compatibleTemplates = templates.filter(
+    (template) =>
+      template.published &&
+      template.supportedEventTypes.includes(invitation.eventType),
+  );
+  const availableCategories = categories.filter((category) =>
+    compatibleTemplates.some((template) =>
+      template.categoryIds.includes(category.id),
+    ),
+  );
+  const activeCategoryFilter = availableCategories.some(
+    (category) => category.id === categoryFilter,
+  )
+    ? categoryFilter
+    : "all";
   const authoredPreview = hasAuthoredInvitationContent(invitation);
   const previewInvitation =
-    section === 2 && !authoredPreview
+    section === 0 && !authoredPreview
       ? createTemplatePreviewSample(invitation.templateId, invitation)
       : invitation;
   const identityLocked = invitation.status !== "draft";
@@ -510,6 +639,51 @@ export function Studio({
         : current,
     );
   }
+  function changeEventType(value: string) {
+    const currentInvitation = invitation;
+    if (!currentInvitation) return;
+    const eventType = value as Invitation["eventType"];
+    const currentContent = getContent(currentInvitation, locale);
+    const previousDefaults = defaultLocalizedInvitationContent(
+      currentInvitation.eventType,
+      locale,
+    );
+    const nextDefaults = defaultLocalizedInvitationContent(eventType, locale);
+    const defaultFields = [
+      "title",
+      "greeting",
+      "message",
+      "eventLabel",
+      "programHeading",
+    ] as const;
+    const localizedPatch = Object.fromEntries(
+      defaultFields
+        .filter(
+          (field) =>
+            !currentContent[field].trim() ||
+            currentContent[field] === previousDefaults[field],
+        )
+        .map((field) => [field, nextDefaults[field]]),
+    ) as Partial<InvitationContent>;
+    const contentPatch =
+      Object.keys(localizedPatch).length === 0
+        ? {}
+        : {
+            content: {
+              ...currentInvitation.content,
+              [locale]: { ...currentContent, ...localizedPatch },
+            },
+          };
+    const selected = templates.find(
+      (item) => item.id === currentInvitation.templateId,
+    );
+    if (selected && !selected.supportedEventTypes.includes(eventType)) {
+      update({ eventType, templateId: "", ...contentPatch });
+      setNotice(
+        "Avvalgi dizayn bu tadbir turini qo‘llamaydi. Shu sahifada mos dizaynni tanlang.",
+      );
+    } else update({ eventType, ...contentPatch });
+  }
   function updateDressCode(patch: Partial<Invitation["dressCode"]>) {
     const current = invitation;
     if (!current) return;
@@ -525,7 +699,7 @@ export function Studio({
     updateDressCode({ [field]: { ...values, [locale]: value } });
   }
   function person(index: number, value: string) {
-    const people = [...content.people];
+    const people = content.people.length > 0 ? [...content.people] : ["", ""];
     people[index] = value;
     updateContent({ people });
   }
@@ -678,85 +852,13 @@ export function Studio({
       setBusy(false);
     }
   }
-  async function startVoiceRecording() {
-    setError("");
-    if (!navigator.mediaDevices?.getUserMedia || typeof MediaRecorder === "undefined") {
-      setError("Bu brauzerda ovoz yozib bo'lmaydi. MP3, WAV yoki M4A fayl yuklang.");
-      return;
-    }
-    try {
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      voiceStream.current = stream;
-      const mimeType = [
-        "audio/webm;codecs=opus",
-        "audio/webm",
-        "audio/mp4",
-      ].find((type) => MediaRecorder.isTypeSupported(type));
-      const recorder = mimeType ? new MediaRecorder(stream, { mimeType }) : new MediaRecorder(stream);
-      voiceChunks.current = [];
-      discardVoiceOnStop.current = false;
-      voiceRecorder.current = recorder;
-      recorder.addEventListener("dataavailable", (event) => {
-        if (event.data.size) voiceChunks.current.push(event.data);
-      });
-      recorder.addEventListener("stop", () => {
-        const blob = new Blob(voiceChunks.current, {
-          type: recorder.mimeType || "audio/webm",
-        });
-        const recordedType = blob.type.split(";")[0].toLowerCase();
-        const extension = recordedType === "audio/mp4" ? "m4a" : "webm";
-        voiceStream.current?.getTracks().forEach((track) => track.stop());
-        voiceStream.current = null;
-        voiceRecorder.current = null;
-        if (voiceTimeout.current !== null)
-          window.clearTimeout(voiceTimeout.current);
-        voiceTimeout.current = null;
-        if (discardVoiceOnStop.current) {
-          discardVoiceOnStop.current = false;
-          return;
-        }
-        setVoiceRecording(false);
-        if (blob.size < 16) {
-          setError("Ovoz yozuvi bo'sh chiqdi. Qayta urinib ko'ring.");
-          return;
-        }
-        if (blob.size > 15 * 1024 * 1024) {
-          setError("Yozuv 15 MB dan katta. Qisqaroq ovoz yozib ko'ring.");
-          return;
-        }
-        if (!["audio/webm", "audio/mp4"].includes(recordedType)) {
-          setError("Brauzer ovozni mos formatda yozmadi. MP3, WAV yoki M4A yuklang.");
-          return;
-        }
-        void upload(
-          new File([blob], `voice-greeting.${extension}`, { type: blob.type }),
-          "voice",
-        );
-      }, { once: true });
-      recorder.start(1000);
-      setVoiceRecording(true);
-      voiceTimeout.current = window.setTimeout(
-        () => recorder.state === "recording" && recorder.stop(),
-        120_000,
-      );
-    } catch {
-      voiceStream.current?.getTracks().forEach((track) => track.stop());
-      voiceStream.current = null;
-      setError("Mikrofon ruxsati berilmadi. Ruxsat bering yoki audio fayl yuklang.");
-    }
-  }
-  function stopVoiceRecording() {
-    if (voiceRecorder.current?.state === "recording") voiceRecorder.current.stop();
-  }
-  async function upload(file: File, kind: "image" | "audio" | "voice") {
+  async function upload(file: File, kind: "image" | "audio") {
     if (!invitationRef.current) return;
     setError("");
     const mimeFallback: Record<string, string> = {
       mp3: "audio/mpeg",
       m4a: "audio/mp4",
       wav: "audio/wav",
-      webm: "audio/webm",
-      ogg: "audio/ogg",
       jpg: "image/jpeg",
       jpeg: "image/jpeg",
       png: "image/png",
@@ -770,13 +872,9 @@ export function Studio({
       (kind === "image" &&
         !["image/jpeg", "image/png", "image/webp"].includes(contentType)) ||
       (kind !== "image" &&
-        ![
-          "audio/mpeg",
-          "audio/wav",
-          "audio/mp4",
-          "audio/x-m4a",
-          ...(kind === "voice" ? ["audio/webm"] : []),
-        ].includes(contentType))
+        !["audio/mpeg", "audio/wav", "audio/mp4", "audio/x-m4a"].includes(
+          contentType,
+        ))
     ) {
       setError(
         "Rasm uchun JPG, PNG yoki WebP; musiqa uchun MP3, WAV yoki M4A, ovozli tabrik uchun MP3, WAV, M4A yoki WebM tanlang.",
@@ -790,9 +888,6 @@ export function Studio({
     if (kind === "audio") {
       setAudioPreview(URL.createObjectURL(file));
       setAudioName(file.name);
-    } else if (kind === "voice") {
-      setVoicePreview(URL.createObjectURL(file));
-      setVoiceName(file.name);
     }
     setUploading(true);
     try {
@@ -849,16 +944,6 @@ export function Studio({
           },
         });
         setAudioPreview("");
-      } else if (kind === "voice") {
-        update({
-          voiceMessage: {
-            enabled: true,
-            assetId: result.asset.id,
-            url: result.asset.url,
-            filename: file.name,
-          },
-        });
-        setVoicePreview("");
       } else
         update({
           gallery: [
@@ -904,13 +989,7 @@ export function Studio({
           <span className={styles.documentIcon}>
             <Heart size={17} />
           </span>
-          <span>
-            Yangi taklifnoma
-            <small aria-live="polite">
-              <CheckCircle2 size={12} />
-              {saved}
-            </small>
-          </span>
+          <span>Yangi taklifnoma</span>
         </div>
         <button
           className={styles.saveButton}
@@ -918,7 +997,7 @@ export function Studio({
           disabled={busy}
         >
           <Save size={16} />
-          {busy ? "Saqlanmoqda…" : "Hisobimga saqlash"}
+          {busy ? "Saqlanmoqda…" : "Saqlash"}
         </button>
       </header>
       <div className={styles.mobileTabs}>
@@ -962,17 +1041,6 @@ export function Studio({
               </button>
             ))}
           </nav>
-          <div className={styles.sidebarNote}>
-            <ShieldCheck size={22} />
-            <p>
-              Avval tayyorlang.
-              <br />
-              Keyin hisobingizga saqlang.
-            </p>
-            <small>
-              Kiritgan ma’lumotlaringiz dizaynni almashtirganda ham saqlanadi.
-            </small>
-          </div>
         </aside>
         <main
           id="main"
@@ -1019,45 +1087,60 @@ export function Studio({
               <Globe2 size={16} />
               <div className={styles.languageTabs}>
                 {invitation.enabledLocales.map((item) => (
-                  <button
-                    key={item}
-                    className={locale === item ? styles.activeLanguage : ""}
-                    aria-pressed={locale === item}
-                    onClick={() => setLocale(item)}
-                  >
-                    {LANGUAGE_NAMES[item]}
-                    {item === invitation.defaultLocale && (
-                      <span className={styles.primaryDot} title="Asosiy til" />
+                  <span className={styles.languageItem} key={item}>
+                    <button
+                      className={locale === item ? styles.activeLanguage : ""}
+                      aria-pressed={locale === item}
+                      onClick={() => setLocale(item)}
+                    >
+                      {LANGUAGE_NAMES[item]}
+                      {item === invitation.defaultLocale && (
+                        <span
+                          className={styles.primaryDot}
+                          title="Asosiy til"
+                        />
+                      )}
+                    </button>
+                    {item !== invitation.defaultLocale && (
+                      <button
+                        type="button"
+                        className={styles.removeLanguage}
+                        aria-label={`${LANGUAGE_NAMES[item]} tilini olib tashlash`}
+                        title="Tilni olib tashlash"
+                        onClick={() => {
+                          setInvitation(removeLanguage(invitation, item));
+                          if (locale === item)
+                            setLocale(invitation.defaultLocale);
+                        }}
+                      >
+                        <X size={12} />
+                      </button>
                     )}
-                  </button>
+                  </span>
                 ))}
               </div>
               {invitation.enabledLocales.length < 4 && (
-                <select
-                  aria-label="Til qo‘shish"
+                <SoftSelect
+                  label="Til qo‘shish"
                   value=""
-                  onChange={(event) => {
-                    const next = event.target.value as Locale;
+                  placeholder={placeholders.addLanguage}
+                  options={LOCALES.filter(
+                    (item) => !invitation.enabledLocales.includes(item),
+                  ).map((item) => ({
+                    value: item,
+                    label: LANGUAGE_NAMES[item],
+                  }))}
+                  onChange={(value) => {
+                    const next = value as Locale;
                     setInvitation(addLanguage(invitation, next));
                     setLocale(next);
                   }}
-                >
-                  <option value="" disabled>
-                    + Til qo‘shish
-                  </option>
-                  {LOCALES.filter(
-                    (item) => !invitation.enabledLocales.includes(item),
-                  ).map((item) => (
-                    <option value={item} key={item}>
-                      {LANGUAGE_NAMES[item]}
-                    </option>
-                  ))}
-                </select>
+                />
               )}
             </div>
           )}
 
-          {section === 0 && (
+          {section === 1 && (
             <div className={styles.form}>
               {invitation.enabledLocales.length > 1 && (
                 <div className={styles.languageHint}>
@@ -1075,30 +1158,20 @@ export function Studio({
                   </button>
                 </div>
               )}
-              <Field label="Tadbir turi">
-                <select
-                  value={invitation.eventType}
-                  disabled={identityLocked}
-                  onChange={(event) =>
-                    update({
-                      eventType: event.target.value as Invitation["eventType"],
-                    })
-                  }
-                >
-                  <option value="wedding">Nikoh to‘yi</option>
-                  <option value="birthday">Tug‘ilgan kun</option>
-                  <option value="osh">Nahorgi osh</option>
-                  <option value="qiz-bazmi">Qiz bazmi</option>
-                  <option value="other">Boshqa tadbir</option>
-                </select>
-              </Field>
               <div className={styles.groupHeader}>
                 <h2>Kimning quvonchli kuni?</h2>
                 <button
                   className={styles.textButton}
                   disabled={identityLocked || content.people.length >= 20}
                   onClick={() =>
-                    updateContent({ people: [...content.people, ""] })
+                    updateContent({
+                      people: [
+                        ...(content.people.length > 0
+                          ? content.people
+                          : ["", ""]),
+                        "",
+                      ],
+                    })
                   }
                 >
                   <Plus size={15} />
@@ -1106,34 +1179,53 @@ export function Studio({
                 </button>
               </div>
               <div className={styles.twoColumns}>
-                {content.people.map((name, index) => (
-                  <Field label={`${index + 1}-ism`} key={index}>
-                    <div className={styles.inlineInput}>
-                      <input
-                        value={name}
-                        maxLength={300}
-                        disabled={identityLocked}
-                        onChange={(event) => person(index, event.target.value)}
-                        placeholder="Ism"
-                      />
-                      {content.people.length > 1 && (
-                        <button
-                          aria-label={`${index + 1}-ismni olib tashlash`}
+                {(content.people.length > 0 ? content.people : ["", ""]).map(
+                  (name, index) => (
+                    <Field
+                      label={
+                        invitation.eventType === "wedding" && index < 2
+                          ? index === 0
+                            ? "Kuyov ismi"
+                            : "Kelin ismi"
+                          : `${index + 1}-ism`
+                      }
+                      key={index}
+                    >
+                      <div className={styles.inlineInput}>
+                        <input
+                          value={name}
+                          maxLength={300}
                           disabled={identityLocked}
-                          onClick={() =>
-                            updateContent({
-                              people: content.people.filter(
-                                (_, i) => i !== index,
-                              ),
-                            })
+                          onChange={(event) =>
+                            person(index, event.target.value)
                           }
-                        >
-                          <X size={15} />
-                        </button>
-                      )}
-                    </div>
-                  </Field>
-                ))}
+                          placeholder={
+                            invitation.eventType === "wedding" && index < 2
+                              ? index === 0
+                                ? placeholders.groomName
+                                : placeholders.brideName
+                              : placeholders.personName
+                          }
+                        />
+                        {content.people.length > 1 && (
+                          <button
+                            aria-label={`${index + 1}-ismni olib tashlash`}
+                            disabled={identityLocked}
+                            onClick={() =>
+                              updateContent({
+                                people: content.people.filter(
+                                  (_, i) => i !== index,
+                                ),
+                              })
+                            }
+                          >
+                            <X size={15} />
+                          </button>
+                        )}
+                      </div>
+                    </Field>
+                  ),
+                )}
               </div>
               {identityLocked && (
                 <p className={styles.help}>
@@ -1144,6 +1236,7 @@ export function Studio({
               <Field label="Oila yoki mezbonlar" hint="Ixtiyoriy">
                 <input
                   value={content.hosts}
+                  placeholder={placeholders.family}
                   maxLength={300}
                   disabled={identityLocked}
                   onChange={(event) =>
@@ -1152,18 +1245,12 @@ export function Studio({
                 />
               </Field>
               <div className={styles.divider} />
-              <Field label="Taklifnoma sarlavhasi">
-                <input
-                  value={content.title}
-                  maxLength={300}
-                  onChange={(event) =>
-                    updateContent({ title: event.target.value })
-                  }
-                />
-              </Field>
               <Field label="Tadbir nomi" hint="Bu matn taklifnomada ko‘rinadi.">
                 <input
-                  value={content.eventLabel}
+                  value={
+                    content.eventLabel ||
+                    defaultEventLabel(invitation.eventType, locale)
+                  }
                   maxLength={300}
                   onChange={(event) =>
                     updateContent({ eventLabel: event.target.value })
@@ -1186,18 +1273,6 @@ export function Studio({
                   rows={5}
                   onChange={(event) =>
                     updateContent({ message: event.target.value })
-                  }
-                />
-              </Field>
-              <Field
-                label="Shaxsiy taklif salomlashuvi"
-                hint="{name} o‘rniga mehmonning ismi qo‘yiladi. Shaxsiy havolalar keyin yaratiladi."
-              >
-                <input
-                  value={content.personalGreeting}
-                  maxLength={300}
-                  onChange={(event) =>
-                    updateContent({ personalGreeting: event.target.value })
                   }
                 />
               </Field>
@@ -1297,34 +1372,15 @@ export function Studio({
             </div>
           )}
 
-          {section === 1 && (
+          {section === 2 && (
             <div className={styles.form}>
               <h2>Sana va vaqt</h2>
               <Field label="Tadbir boshlanishi">
-                <input
-                  type="datetime-local"
+                <DateTimePicker
                   value={invitation.startsAt}
                   disabled={identityLocked}
-                  onChange={(event) => update({ startsAt: event.target.value })}
+                  onChange={(startsAt) => update({ startsAt })}
                 />
-              </Field>
-              <Field label="Vaqt mintaqasi">
-                <select
-                  value={invitation.timezone}
-                  disabled={identityLocked}
-                  onChange={(event) => update({ timezone: event.target.value })}
-                >
-                  <option value="Asia/Tashkent">O‘zbekiston — Toshkent</option>
-                  <option value="Asia/Riyadh">
-                    Qatar / Saudiya Arabistoni
-                  </option>
-                  <option value="Asia/Dubai">BAA — Dubay</option>
-                  <option value="Europe/Moscow">Rossiya — Moskva</option>
-                  <option value="Europe/London">
-                    Buyuk Britaniya — London
-                  </option>
-                  <option value="UTC">UTC</option>
-                </select>
               </Field>
               {identityLocked && (
                 <p className={styles.help}>
@@ -1341,7 +1397,7 @@ export function Studio({
                   onChange={(event) =>
                     updateContent({ venueName: event.target.value })
                   }
-                  placeholder="Joy nomini kiriting"
+                  placeholder={placeholders.venueName}
                 />
               </Field>
               <Field label="To‘liq manzil">
@@ -1362,7 +1418,7 @@ export function Studio({
                   onChange={(event) =>
                     updateContent({ landmark: event.target.value })
                   }
-                  placeholder="Ixtiyoriy"
+                  placeholder={placeholders.optional}
                 />
               </Field>
               <Field
@@ -1399,15 +1455,12 @@ export function Studio({
                   <div key={item.id} className={styles.programItem}>
                     <span className={styles.timelineDot} />
                     <Field label="Vaqt">
-                      <input
-                        type="time"
+                      <TimePicker
                         value={item.time}
-                        onChange={(event) =>
+                        onChange={(time) =>
                           update({
                             program: invitation.program.map((row) =>
-                              row.id === item.id
-                                ? { ...row, time: event.target.value }
-                                : row,
+                              row.id === item.id ? { ...row, time } : row,
                             ),
                           })
                         }
@@ -1425,7 +1478,7 @@ export function Studio({
                             },
                           })
                         }
-                        placeholder="Dastur bandi nomi"
+                        placeholder={placeholders.programItem}
                       />
                     </Field>
                     <div className={styles.rowActions}>
@@ -1479,7 +1532,13 @@ export function Studio({
                 title="Kiyinish uslubi"
                 description="Taklifnomaga ixtiyoriy kiyinish uslubi va ranglar palitrasini qo‘shing."
                 checked={invitation.dressCode.enabled}
-                onChange={(enabled) => updateDressCode({ enabled })}
+                onChange={(enabled) => {
+                  if (!enabled) {
+                    updateDressCode({ enabled: false });
+                    return;
+                  }
+                  updateDressCode(fillDressCodeDefaults(invitation.dressCode));
+                }}
               />
               {invitation.dressCode.enabled && (
                 <div className={styles.optionBody}>
@@ -1593,19 +1652,34 @@ export function Studio({
             </div>
           )}
 
-          {section === 2 && (
+          {section === 0 && (
             <div className={styles.form}>
+              <Field label="Tadbir turi">
+                <SoftSelect
+                  label="Tadbir turi"
+                  value={invitation.eventType}
+                  disabled={identityLocked}
+                  options={EVENT_TYPE_OPTIONS.map((item) => ({
+                    value: item.id,
+                    label: item.name,
+                  }))}
+                  onChange={changeEventType}
+                />
+              </Field>
               {catalogNote && <p className={styles.help}>{catalogNote}</p>}
               {invitation.templateId &&
                 !templates.some(
-                  (item) => item.id === invitation.templateId && item.published,
+                  (item) =>
+                    item.id === invitation.templateId &&
+                    item.published &&
+                    item.supportedEventTypes.includes(invitation.eventType),
                 ) && (
                   <div className={styles.notice}>
-                    Bu qoralamadagi dizayn hozircha tanlash uchun mavjud emas. Ma’lumotlaringiz
-                    saqlangan; yangi dizayn qo‘shilgach tanlashingiz mumkin.
+                    Bu dizayn tanlangan tadbir turini qo‘llamaydi. Tadbir turini
+                    o‘zgartiring yoki mos dizaynni tanlang.
                   </div>
                 )}
-              {!templates.some((template) => template.published) && (
+              {compatibleTemplates.length === 0 && (
                 <div className={styles.designNotice}>
                   <CheckCircle2 size={20} />
                   <p>
@@ -1615,33 +1689,30 @@ export function Studio({
                   </p>
                 </div>
               )}
-              {templates.some((template) => template.published) && (
+              {compatibleTemplates.length > 0 && (
                 <div
                   className={styles.categoryFilters}
                   role="group"
                   aria-label="Dizayn kategoriyalari"
                 >
                   <button
-                    aria-pressed={categoryFilter === "all"}
+                    aria-pressed={activeCategoryFilter === "all"}
                     className={
-                      categoryFilter === "all" ? styles.selectedCategory : ""
+                      activeCategoryFilter === "all"
+                        ? styles.selectedCategory
+                        : ""
                     }
                     onClick={() => setCategoryFilter("all")}
                   >
                     Barchasi
-                    <span>
-                      {
-                        templates.filter((template) => template.published)
-                          .length
-                      }
-                    </span>
+                    <span>{compatibleTemplates.length}</span>
                   </button>
-                  {categories.map((category) => (
+                  {availableCategories.map((category) => (
                     <button
                       key={category.id}
-                      aria-pressed={categoryFilter === category.id}
+                      aria-pressed={activeCategoryFilter === category.id}
                       className={
-                        categoryFilter === category.id
+                        activeCategoryFilter === category.id
                           ? styles.selectedCategory
                           : ""
                       }
@@ -1650,10 +1721,8 @@ export function Studio({
                       {category.name}
                       <span>
                         {
-                          templates.filter(
-                            (template) =>
-                              template.published &&
-                              template.categoryIds.includes(category.id),
+                          compatibleTemplates.filter((template) =>
+                            template.categoryIds.includes(category.id),
                           ).length
                         }
                       </span>
@@ -1662,12 +1731,11 @@ export function Studio({
                 </div>
               )}
               <div className={styles.templateGrid}>
-                {templates
+                {compatibleTemplates
                   .filter(
                     (template) =>
-                      template.published &&
-                      (categoryFilter === "all" ||
-                        template.categoryIds.includes(categoryFilter)),
+                      activeCategoryFilter === "all" ||
+                      template.categoryIds.includes(activeCategoryFilter),
                   )
                   .map((template) => (
                     <div
@@ -1723,11 +1791,10 @@ export function Studio({
                     </div>
                   ))}
               </div>
-              {!templates.some(
+              {!compatibleTemplates.some(
                 (template) =>
-                  template.published &&
-                  (categoryFilter === "all" ||
-                    template.categoryIds.includes(categoryFilter)),
+                  activeCategoryFilter === "all" ||
+                  template.categoryIds.includes(activeCategoryFilter),
               ) && (
                 <div className={styles.categoryEmpty}>
                   <LayoutTemplate size={24} />
@@ -1882,7 +1949,8 @@ export function Studio({
               {invitation.music.enabled && (
                 <div className={styles.optionBody}>
                   <Field label="Musiqa kutubxonasi">
-                    <select
+                    <SoftSelect
+                      label="Musiqa kutubxonasi"
                       value={
                         savedMusic.find((item) =>
                           invitation.music.assetId
@@ -1891,9 +1959,20 @@ export function Studio({
                         )?.id ?? ""
                       }
                       disabled={musicLibraryLoading || savedMusic.length === 0}
-                      onChange={(event) => {
+                      placeholder={
+                        musicLibraryLoading
+                          ? placeholders.musicLoading
+                          : savedMusic.length
+                            ? placeholders.chooseMusic
+                            : placeholders.noMusic
+                      }
+                      options={savedMusic.map((track) => ({
+                        value: track.id,
+                        label: track.filename,
+                      }))}
+                      onChange={(value) => {
                         const track = savedMusic.find(
-                          (item) => item.id === event.target.value,
+                          (item) => item.id === value,
                         );
                         if (!track) return;
                         setAudioPreview("");
@@ -1907,20 +1986,7 @@ export function Studio({
                           },
                         });
                       }}
-                    >
-                      <option value="">
-                        {musicLibraryLoading
-                          ? "Musiqalar yuklanmoqda…"
-                          : savedMusic.length
-                            ? "Musiqani tanlang"
-                            : "Hozircha yuklangan musiqa yo‘q"}
-                      </option>
-                      {savedMusic.map((track) => (
-                        <option key={track.id} value={track.id}>
-                          {track.filename}
-                        </option>
-                      ))}
-                    </select>
+                    />
                   </Field>
                   <p className={styles.help}>
                     Kutubxonadagi tayyor musiqani tanlang yoki o‘zingiznikini
@@ -1977,99 +2043,8 @@ export function Studio({
                     </>
                   )}
                   <p className={styles.help}>
-                    Musiqa qo‘shish majburiy emas. Ovoz mehmonning bosishi bilan
-                    boshlanadi.
-                  </p>
-                </div>
-              )}
-              <Toggle
-                title="Ovozli tabrik"
-                description="Mehmonlar taklifnomani ochgach, ovozli tabrigingizni tinglay oladi."
-                checked={invitation.voiceMessage.enabled}
-                onChange={(enabled) => {
-                  if (!enabled && voiceRecording) return;
-                  update({
-                    voiceMessage: { ...invitation.voiceMessage, enabled },
-                  });
-                }}
-              />
-              {invitation.voiceMessage.enabled && (
-                <div className={styles.optionBody}>
-                  <label className={styles.audioUpload}>
-                    <Mic2 size={20} />
-                    <span>
-                      {uploading ? "Yuklanmoqda…" : "Ovozli tabrik yuklang"}
-                      <small>MP3, WAV, M4A yoki WebM (15 MB gacha)</small>
-                    </span>
-                    <input
-                      type="file"
-                      accept="audio/mpeg,audio/wav,audio/mp4,audio/x-m4a,audio/webm"
-                      disabled={uploading || voiceRecording}
-                      onChange={(event) => {
-                        const file = event.target.files?.[0];
-                        if (file) void upload(file, "voice");
-                        event.target.value = "";
-                      }}
-                    />
-                  </label>
-                  {voiceRecording ? (
-                    <button
-                      type="button"
-                      className={styles.textButton}
-                      onClick={stopVoiceRecording}
-                    >
-                      <Square size={16} /> Yozishni to'xtatish
-                    </button>
-                  ) : (
-                    <button
-                      type="button"
-                      className={styles.textButton}
-                      disabled={uploading}
-                      onClick={() => void startVoiceRecording()}
-                    >
-                      <Mic2 size={16} /> Mikrofondan ovoz yozish
-                    </button>
-                  )}
-                  <p className={styles.help}>
-                    {voiceRecording
-                      ? "Ovoz yozilmoqda. Ikki daqiqadan keyin yozuv avtomatik to'xtaydi."
-                      : "Ovoz yozish uchun mikrofonga ruxsat kerak."}
-                  </p>
-                  {(voicePreview || invitation.voiceMessage.url) && (
-                    <>
-                      <p className={styles.help}>
-                        {voicePreview
-                          ? `${voiceName} — faqat shu oynadagi sinov, hali yuklanmagan.`
-                          : invitation.voiceMessage.filename}
-                      </p>
-                      <audio
-                        controls
-                        preload="none"
-                        src={voicePreview || invitation.voiceMessage.url}
-                        className={styles.audio}
-                      />
-                      <button
-                        className={styles.textButton}
-                        onClick={() => {
-                          update({
-                            voiceMessage: {
-                              enabled: false,
-                              assetId: null,
-                              url: "",
-                              filename: "",
-                            },
-                          });
-                          setVoicePreview("");
-                          setVoiceName("");
-                        }}
-                      >
-                        <Trash2 size={14} />
-                        Ovozli tabrikni olib tashlash
-                      </button>
-                    </>
-                  )}
-                  <p className={styles.help}>
-                    Ovoz yozuvi alohida saqlanadi va fon musiqasini almashtirmaydi.
+                    Musiqa qo‘shish majburiy emas. Mehmon uni o‘zi bosib
+                    tinglaydi.
                   </p>
                 </div>
               )}
@@ -2115,20 +2090,6 @@ export function Studio({
                           gift: {
                             ...invitation.gift,
                             cardHolder: event.target.value,
-                          },
-                        })
-                      }
-                    />
-                  </Field>
-                  <Field label="Bank nomi (ixtiyoriy)">
-                    <input
-                      value={invitation.gift.bankName}
-                      maxLength={300}
-                      onChange={(event) =>
-                        update({
-                          gift: {
-                            ...invitation.gift,
-                            bankName: event.target.value,
                           },
                         })
                       }
@@ -2204,107 +2165,50 @@ export function Studio({
               <div className={styles.divider} />
               <div className={styles.groupHeader}>
                 <h2>Bog‘lanish</h2>
-                <button
-                  className={styles.textButton}
-                  disabled={invitation.contacts.length >= 20}
-                  onClick={() =>
-                    update({
-                      contacts: [
-                        ...invitation.contacts,
-                        {
-                          id: crypto.randomUUID(),
-                          type: "phone",
-                          label: "",
-                          value: "",
-                        },
-                      ],
-                    })
-                  }
-                >
-                  <Plus size={15} />
-                  Qo‘shish
-                </button>
               </div>
-              {invitation.contacts.length === 0 && (
-                <p className={styles.help}>
-                  Telefon raqami yoki Telegram manzilini qo‘shishingiz mumkin.
-                </p>
-              )}
-              {invitation.contacts.map((contact) => (
-                <div className={styles.contactRow} key={contact.id}>
-                  <Field label="Turi">
-                    <select
-                      value={contact.type}
-                      onChange={(event) =>
-                        update({
-                          contacts: invitation.contacts.map((item) =>
-                            item.id === contact.id
-                              ? {
-                                  ...item,
-                                  type: event.target.value as
-                                    "phone" | "telegram",
-                                }
-                              : item,
-                          ),
-                        })
-                      }
-                    >
-                      <option value="phone">Telefon</option>
-                      <option value="telegram">Telegram</option>
-                    </select>
-                  </Field>
-                  <Field label="Ism / vazifa">
-                    <input
-                      value={contact.label}
-                      maxLength={300}
-                      onChange={(event) =>
-                        update({
-                          contacts: invitation.contacts.map((item) =>
-                            item.id === contact.id
-                              ? { ...item, label: event.target.value }
-                              : item,
-                          ),
-                        })
-                      }
-                    />
-                  </Field>
-                  <Field label="Raqam / username">
-                    <input
-                      value={contact.value}
-                      maxLength={300}
-                      onChange={(event) =>
-                        update({
-                          contacts: invitation.contacts.map((item) =>
-                            item.id === contact.id
-                              ? { ...item, value: event.target.value }
-                              : item,
-                          ),
-                        })
-                      }
-                    />
-                  </Field>
-                  <button
-                    className={styles.iconButton}
-                    aria-label="Kontaktni o‘chirish"
-                    onClick={() =>
+              <div className={styles.twoColumns}>
+                <Field label="Telefon raqami">
+                  <input
+                    type="tel"
+                    autoComplete="tel"
+                    inputMode="tel"
+                    value={invitation.contacts.phoneNumber}
+                    maxLength={300}
+                    placeholder="+998 90 123 45 67"
+                    onChange={(event) =>
                       update({
-                        contacts: invitation.contacts.filter(
-                          (item) => item.id !== contact.id,
-                        ),
+                        contacts: {
+                          ...invitation.contacts,
+                          phoneNumber: event.target.value,
+                        },
                       })
                     }
-                  >
-                    <Trash2 size={16} />
-                  </button>
-                </div>
-              ))}
+                  />
+                </Field>
+                <Field label="Telegram username">
+                  <input
+                    type="text"
+                    autoComplete="username"
+                    value={invitation.contacts.telegramUsername}
+                    maxLength={300}
+                    placeholder="@username"
+                    onChange={(event) =>
+                      update({
+                        contacts: {
+                          ...invitation.contacts,
+                          telegramUsername: event.target.value,
+                        },
+                      })
+                    }
+                  />
+                </Field>
+              </div>
             </div>
           )}
           <div className={styles.exportDraft}>
             <button className={styles.textButton} onClick={exportDraft}>
               Qoralamani yuklab olish
             </button>
-            <span>Saqlashda muammo bo‘lsa, zaxira nusxa oling.</span>
           </div>
           <footer className={styles.editorFooter}>
             <button
@@ -2330,7 +2234,7 @@ export function Studio({
                 disabled={busy}
               >
                 <Save size={16} />
-                Hisobimga saqlash
+                Saqlash
               </button>
             )}
           </footer>
@@ -2350,7 +2254,7 @@ export function Studio({
                 isMarxabaTemplate(invitation.templateId)) && (
                 <Link
                   className={styles.fullPreviewLink}
-                  href={`/preview?template=${encodeURIComponent(invitation.templateId)}&draft=${encodeURIComponent(invitation.id)}${section === 2 && !authoredPreview ? "&demo=1" : ""}`}
+                  href={`/preview?template=${encodeURIComponent(invitation.templateId)}&draft=${encodeURIComponent(invitation.id)}${section === 0 && !authoredPreview ? "&demo=1" : ""}`}
                   onClick={() => {
                     try {
                       sessionStorage.setItem(
@@ -2399,7 +2303,7 @@ export function Studio({
             )}
           </div>
           <p className={styles.previewNote}>
-            {section === 2 && !authoredPreview
+            {section === 0 && !authoredPreview
               ? "Namuna ma’lumotlari faqat dizayn tanlashda ko‘rsatiladi."
               : "Siz kiritgan ma’lumotlar taklifnomada shunday ko‘rinadi."}
           </p>
@@ -2434,10 +2338,6 @@ export function Studio({
               Telegram orqali kiring. Kiritgan ma’lumotlaringiz shu yerda
               qoladi.
             </p>
-            <div className={styles.authCode}>
-              <span>Sayt va botdagi kod bir xil bo‘lsin</span>
-              <strong>{auth.code}</strong>
-            </div>
             <p role="status">{authStatus}</p>
             {authIdentity ? (
               <button
@@ -2459,7 +2359,6 @@ export function Studio({
                 Telegram orqali davom etish
               </a>
             )}
-            <small>Faqat o‘zingiz boshlagan kirishni tasdiqlang.</small>
           </div>
         </div>
       )}

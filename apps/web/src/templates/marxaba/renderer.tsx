@@ -62,9 +62,6 @@ export function MarxabaInvitation({
         ...(templateId === "samarqand-kechasi"
           ? { dataTime: sourceData.dateTime }
           : {}),
-        voiceMessage: invitation.voiceMessage.enabled
-          ? invitation.voiceMessage
-          : { enabled: false, assetId: null, url: "", filename: "" },
         music: musicUrl,
         slug: preview ? "" : invitationId,
         guestToken,
@@ -85,6 +82,8 @@ export function MarxabaInvitation({
     },
     [catalogMusic, enabledLanguages, frameLocale, guestName, guestToken, invitation.status, invitationId, preview, sourceData],
   );
+  const latestMessage = useRef(message);
+  latestMessage.current = message;
   const frameUrl = `/templates/${encodeURIComponent(templateId)}/index.html?lang=${sourceLocale[frameLocale]}`;
   const currentStructure = JSON.stringify({
     frameUrl,
@@ -94,7 +93,6 @@ export function MarxabaInvitation({
     music: message.music,
     dateTime: message.dateTime,
     dataTime: "dataTime" in message ? message.dataTime : undefined,
-    voiceMessage: message.voiceMessage,
     silentPlayback: message.silentPlayback,
     rsvp: invitation.rsvp.enabled,
     wishes: invitation.wishes.enabled,
@@ -151,6 +149,12 @@ export function MarxabaInvitation({
         ref={frame}
         title={`${sourceData.title || sourceData.eventType} invitation`}
         src={frameUrl}
+        onLoad={() => {
+          frame.current?.contentWindow?.postMessage(
+            { type: "marxaba:update", payload: latestMessage.current },
+            window.location.origin,
+          );
+        }}
         allow="autoplay; fullscreen"
         loading="eager"
       />

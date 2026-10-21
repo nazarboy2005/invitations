@@ -1,7 +1,9 @@
 import Link from "next/link";
 import { Flower2, ArrowUpRight } from "lucide-react";
+import { getSessionUser } from "@/server/auth";
 import styles from "./site-header.module.css";
-export function SiteHeader({ compact = false }: { compact?: boolean }) {
+export async function SiteHeader({ compact = false }: { compact?: boolean }) {
+  const user = await getSessionUser().catch(() => null);
   return (
     <header className={styles.header}>
       <div className={`container ${styles.inner}`}>
@@ -21,7 +23,7 @@ export function SiteHeader({ compact = false }: { compact?: boolean }) {
               Dizaynlar
             </Link>
           )}
-          <Link href="/dashboard">Taklifnomalarim</Link>
+          <Link href="/dashboard">{user ? "Taklifnomalarim" : "Kirish"}</Link>
           <Link href="/studio" className={styles.create}>
             Yaratish <ArrowUpRight size={16} />
           </Link>

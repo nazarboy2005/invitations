@@ -7,50 +7,6 @@
   background: #140b08;
 }
 
-.previewToolbar {
-  position: absolute;
-  top: max(12px, env(safe-area-inset-top));
-  left: 14px;
-  right: 14px;
-  z-index: 5;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  pointer-events: none;
-}
-
-.toolbarBack,
-.toolbarAction {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  min-height: 38px;
-  width: fit-content;
-  padding: 7px 12px;
-  border: 1px solid rgb(226 212 192 / 68%);
-  border-radius: 999px;
-  background: rgb(250 247 240 / 92%);
-  box-shadow: 0 8px 26px rgb(33 22 16 / 14%);
-  color: #51463b;
-  font-size: 12px;
-  backdrop-filter: blur(12px);
-  pointer-events: auto;
-}
-
-.toolbarBack:hover {
-  background: #f1eadf;
-}
-
-.toolbarAction {
-  justify-self: end;
-  background: #80684f;
-  color: #fffdf8;
-}
-
-.toolbarAction:hover {
-  background: #705b45;
-}
-
 .loading,
 .unsupported {
   position: absolute;
@@ -65,29 +21,4 @@
 .unsupported a {
   text-decoration: underline;
   text-underline-offset: 4px;
-}
-
-@media (max-width: 560px) {
-  .previewToolbar {
-    left: 8px;
-    right: 8px;
-  }
-
-  .toolbarBack,
-  .toolbarAction {
-    min-height: 36px;
-    padding: 6px 9px;
-  }
-
-  .toolbarBack span {
-    display: none;
-  }
-
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .toolbarBack,
-  .toolbarAction {
-    transition: none;
-  }
 }
