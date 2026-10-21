@@ -1,0 +1,11 @@
+{
+  "artifact": "preview.webp",
+  "artifactSha256": "530975d5885c8f6b10c681c40c7a33e03b2b80e9151d9012b15c5544c5cb4b35",
+  "format": "image/webp",
+  "width": 540,
+  "height": 960,
+  "sourceCapture": "Invitations - this folder will be removed from production/Marxaba/Nikoh/templates/sahro-fonusi",
+  "sourceArtwork": "art/desert-panorama.webp",
+  "sourceArtworkSha256": "6dc66a6a16cc4f39e9160f47a3a095de4959c47d2b46b206920eb3e94afcc54f",
+  "status": "derived-from-source-opening-artwork"
+}

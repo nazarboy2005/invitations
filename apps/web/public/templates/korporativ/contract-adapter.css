@@ -1,0 +1,9 @@
+/* The shared invitation contract contains venue details and coordinates, but
+   no venue photo, parking instruction, or program speaker field. Hide these
+   source-only blanks without borrowing unrelated creator or catalog imagery. */
+.venue__photo,
+.venue__parking,
+.program [data-field="speaker"]:empty,
+.section--toyona > .muted:empty {
+  display: none;
+}

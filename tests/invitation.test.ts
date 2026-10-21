@@ -60,6 +60,9 @@ test("event name defaults to the selected event type in each enabled locale", ()
   assert.equal(defaultEventLabel("wedding", "uz-Cyrl"), "Никоҳ тўйи");
   assert.equal(defaultEventLabel("wedding", "en"), "Wedding");
   assert.equal(defaultEventLabel("wedding", "ru"), "Свадьба");
+  assert.equal(defaultEventLabel("fotiha", "uz-Latn"), "Fotiha");
+  assert.equal(defaultEventLabel("qiz-uzatish", "uz-Cyrl"), "Қиз узатиш");
+  assert.equal(defaultEventLabel("sunnat-toyi", "ru"), "Суннат-той");
   const invitation = createInvitation();
   invitation.eventType = "wedding";
   const withRussian = addLanguage(invitation, "ru");
@@ -179,6 +182,16 @@ test("Anor is a first-class template and a round trip preserves all shared event
   );
   assert.equal(templateIdSchema.parse("anor"), "anor");
   assert.ok(TEMPLATES.some((template) => template.id === "anor"));
+  assert.equal(
+    TEMPLATES.find((template) => template.id === "samarqand-kechasi")
+      ?.published,
+    true,
+  );
+  assert.equal(
+    TEMPLATES.find((template) => template.id === "bogi-eram")?.published,
+    true,
+  );
+  assert.equal(TEMPLATES.find((template) => template.id === "atlas")?.published, true);
   assert.ok(
     TEMPLATES.every((template) =>
       template.categoryIds.every((id) =>

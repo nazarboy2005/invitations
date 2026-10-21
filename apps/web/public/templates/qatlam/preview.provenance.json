@@ -1,0 +1,19 @@
+{
+  "format": "image/webp",
+  "width": 720,
+  "height": 1280,
+  "sourcePage": "/templates/qatlam/index.html?lang=uz",
+  "sourceOpening": "closed pop-up invitation cover",
+  "fixture": "apps/web/src/modules/catalog/preview-sample.json",
+  "fixtureLocale": "uz-Latn",
+  "fixtureNames": [
+    "Javohir",
+    "Madina"
+  ],
+  "captureViewport": {
+    "width": 720,
+    "height": 1280,
+    "deviceScaleFactor": 1
+  },
+  "sha256": "51729eca2b0d5815cb06dc96df9f00c97cb01ddee284ed89918e4d116a510a19"
+}

@@ -394,8 +394,10 @@ export function Studio({
       const created = createInvitation(selected.success ? selected.data : "");
       if (selected.success) {
         const templateDefinition = templateById(selected.data);
-        if (templateDefinition?.supportedEventTypes.length === 1) {
-          created.eventType = templateDefinition.supportedEventTypes[0];
+        if (templateDefinition?.supportedEventTypes.length) {
+          created.eventType =
+            templateDefinition.previewEventType ??
+            templateDefinition.supportedEventTypes[0];
           created.content[created.defaultLocale] =
             defaultLocalizedInvitationContent(
               created.eventType,
@@ -602,6 +604,40 @@ export function Studio({
   const selectedTemplate = templates.find(
     (item) => item.id === invitation.templateId,
   );
+  const singleCelebrant =
+    invitation.eventType === "sunnat-toyi" ||
+    invitation.eventType === "beshik-toyi" ||
+    invitation.templateId === "beshik" ||
+    invitation.eventType === "bitiruv" ||
+    invitation.eventType === "korporativ" ||
+    invitation.templateId === "bitiruv" ||
+    invitation.templateId === "korporativ";
+  const singleCelebrantLabel =
+    invitation.eventType === "bitiruv"
+      ? "Bitiruvchining ismi"
+      : invitation.eventType === "korporativ" ||
+          (invitation.templateId === "korporativ" &&
+            invitation.eventType !== "bitiruv")
+        ? "Tashkilot yoki shaxs nomi"
+        : invitation.templateId === "bitiruv"
+          ? "Nishonlanuvchi ismi"
+          : "Bola ismi";
+  const singleCelebrantPlaceholder =
+    invitation.eventType === "bitiruv"
+      ? "Bitiruvchining ismi"
+      : invitation.eventType === "korporativ" ||
+          (invitation.templateId === "korporativ" &&
+            invitation.eventType !== "bitiruv")
+        ? "Tashkilot yoki shaxs nomi"
+        : invitation.templateId === "bitiruv"
+          ? "Nishonlanuvchining ismi"
+          : "Bolaning ismi";
+  const personFields =
+    content.people.length > 0
+      ? content.people
+      : singleCelebrant
+        ? [""]
+        : ["", ""];
   const compatibleTemplates = templates.filter(
     (template) =>
       template.published &&
@@ -699,7 +735,7 @@ export function Studio({
     updateDressCode({ [field]: { ...values, [locale]: value } });
   }
   function person(index: number, value: string) {
-    const people = content.people.length > 0 ? [...content.people] : ["", ""];
+    const people = [...personFields];
     people[index] = value;
     updateContent({ people });
   }
@@ -1160,34 +1196,33 @@ export function Studio({
               )}
               <div className={styles.groupHeader}>
                 <h2>Kimning quvonchli kuni?</h2>
-                <button
-                  className={styles.textButton}
-                  disabled={identityLocked || content.people.length >= 20}
-                  onClick={() =>
-                    updateContent({
-                      people: [
-                        ...(content.people.length > 0
-                          ? content.people
-                          : ["", ""]),
-                        "",
-                      ],
-                    })
-                  }
-                >
-                  <Plus size={15} />
-                  Ism qo‘shish
-                </button>
+                {!singleCelebrant && (
+                  <button
+                    className={styles.textButton}
+                    disabled={identityLocked || content.people.length >= 20}
+                    onClick={() =>
+                      updateContent({
+                        people: [...personFields, ""],
+                      })
+                    }
+                  >
+                    <Plus size={15} />
+                    Ism qo‘shish
+                  </button>
+                )}
               </div>
               <div className={styles.twoColumns}>
-                {(content.people.length > 0 ? content.people : ["", ""]).map(
+                {personFields.map(
                   (name, index) => (
                     <Field
                       label={
-                        invitation.eventType === "wedding" && index < 2
-                          ? index === 0
-                            ? "Kuyov ismi"
-                            : "Kelin ismi"
-                          : `${index + 1}-ism`
+                        singleCelebrant && index === 0
+                              ? singleCelebrantLabel
+                              : invitation.eventType === "wedding" && index < 2
+                                ? index === 0
+                                  ? "Kuyov ismi"
+                                  : "Kelin ismi"
+                                : `${index + 1}-ism`
                       }
                       key={index}
                     >
@@ -1200,11 +1235,13 @@ export function Studio({
                             person(index, event.target.value)
                           }
                           placeholder={
-                            invitation.eventType === "wedding" && index < 2
-                              ? index === 0
-                                ? placeholders.groomName
-                                : placeholders.brideName
-                              : placeholders.personName
+                            singleCelebrant && index === 0
+                              ? singleCelebrantPlaceholder
+                              : invitation.eventType === "wedding" && index < 2
+                                ? index === 0
+                                  ? placeholders.groomName
+                                  : placeholders.brideName
+                                : placeholders.personName
                           }
                         />
                         {content.people.length > 1 && (
@@ -2278,6 +2315,7 @@ export function Studio({
                 locale={locale}
                 preview
                 fullPreview
+                sampleWishes={section === 0 && !authoredPreview}
               />
             ) : invitation.templateId &&
               isMarxabaTemplate(invitation.templateId) ? (
@@ -2288,6 +2326,7 @@ export function Studio({
                 templateId={invitation.templateId}
                 preview
                 fullPreview
+                sampleWishes={section === 0 && !authoredPreview}
               />
             ) : (
               <div className={styles.categoryEmpty}>

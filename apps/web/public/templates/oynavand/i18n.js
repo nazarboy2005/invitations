@@ -1,0 +1,21 @@
+Object.assign(window.MARHAMAT_I18N = window.MARHAMAT_I18N || {}, {
+  "Marxaba · Oynavand": ["Marxaba · Ойнаванд", "Marxaba · Oynavand"],
+  "Oynavand — oynakori ko‘zgular saroyidagi nikoh taklifnomasi": ["Ойнаванд — свадебное приглашение в дворце зеркал", "Oynavand — a wedding invitation in a palace of mirrors"],
+  "Taklifnoma": ["Приглашение", "Invitation"], "To‘y kuni taqvimi": ["Календарь свадебного дня", "Wedding date calendar"], "Musiqani yoqish": ["Включить музыку", "Turn music on"],
+  "Taklifnoma · Nikoh to‘yi": ["Приглашение · Свадьба никах", "Invitation · Nikoh wedding"],
+  "Oynalar saroyiga kiring": ["Войдите в зеркальный дворец", "Enter the mirror palace"],
+  "Taklifnomani ko‘rish": ["Посмотреть приглашение", "View invitation"],
+  "Aziz mehmonimiz": ["Дорогой гость", "Dear guest"], "Sizni kutamiz": ["Мы ждём вас", "We are waiting for you"],
+  "Uchrashuv kuni": ["День встречи", "The day we meet"], "Baxtli kungacha": ["До счастливого дня", "Until our happy day"],
+  "kun": ["дней", "days"], "soat": ["часов", "hours"], "daqiqa": ["минут", "minutes"], "soniya": ["секунд", "seconds"],
+  "Bu kunni birga nishonlaganingiz uchun rahmat!": ["Спасибо, что разделили с нами этот день!", "Thank you for celebrating this day with us!"],
+  "Kalendarga qo‘shish": ["Добавить в календарь", "Add to calendar"], "Birgalikdagi oqshom": ["Наш вечер вместе", "An evening together"], "To‘y dasturi": ["Программа свадьбы", "Wedding program"],
+  "Manzil": ["Адрес", "Location"], "To‘y manzili": ["Место проведения", "Wedding venue"], "Yandex xaritada": ["На карте Яндекс", "Open in Yandex Maps"], "Google xaritada": ["На карте Google", "Open in Google Maps"],
+  "Kiyinish uslubi": ["Стиль одежды", "Dress style"], "Dress-kod": ["Дресс-код", "Dress code"], "Xotiralar": ["Воспоминания", "Memories"], "Lahzalar": ["Мгновения", "Moments"],
+  "Oldingi surat": ["Предыдущее фото", "Previous photo"], "Suratni kattalashtirish": ["Увеличить фото", "Enlarge photo"], "To‘y surati": ["Фото свадьбы", "Wedding photo"], "Keyingi surat": ["Следующее фото", "Next photo"], "Suratlar galereyasi": ["Фотогалерея", "Photo gallery"], "Surat tanlash": ["Выбор фото", "Choose a photo"],
+  "Bizga xabar bering": ["Дайте нам знать", "Let us know"], "Tashrifingizni tasdiqlang": ["Подтвердите ваше присутствие", "Please RSVP"], "Javobingiz biz uchun muhim.": ["Ваш ответ очень важен для нас.", "Your reply means a lot to us."],
+  "Tashrif javobi": ["Ответ о присутствии", "Attendance response"], "Kelaman": ["Приду", "I will attend"], "Kelmayman": ["Не смогу прийти", "I cannot attend"], "Hali bilmayman": ["Пока не знаю", "I am not sure yet"], "Ismingiz": ["Ваше имя", "Your name"], "Necha kishi bo‘lasiz?": ["Сколько вас будет?", "How many guests?"], "Mehmonlar sonini kamaytirish": ["Уменьшить число гостей", "Decrease guest count"], "Mehmonlar sonini oshirish": ["Увеличить число гостей", "Increase guest count"], "Javobni yuborish": ["Отправить ответ", "Send reply"], "Javobingiz uchun rahmat!": ["Спасибо за ваш ответ!", "Thank you for your reply!"], "Javobni o‘zgartirish": ["Изменить ответ", "Change reply"],
+  "Yurakdan": ["От всего сердца", "From the heart"], "Tilaklar": ["Пожелания", "Wishes"], "Tilagingiz": ["Ваше пожелание", "Your wish"], "Tilak yuborish": ["Отправить пожелание", "Send a wish"],
+  "Ezgu niyatlar": ["С добрыми пожеланиями", "With kind wishes"], "To‘yona": ["Подарок молодым", "Wedding gift"], "To‘yona ma’lumotlarini ko‘rish": ["Посмотреть реквизиты", "View gift details"], "Nusxa olish": ["Скопировать", "Copy"],
+  "Savollar uchun": ["По вопросам", "For questions"], "Bog‘lanish uchun": ["Контакты", "Contact"], "Marxaba bilan yaratildi": ["Создано с Marxaba", "Made with Marxaba"]
+});

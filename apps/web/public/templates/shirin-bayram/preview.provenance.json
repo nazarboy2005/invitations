@@ -1,0 +1,20 @@
+{
+  "format": "image/webp",
+  "width": 720,
+  "height": 1280,
+  "sourcePage": "/templates/shirin-bayram/index.html?lang=uz",
+  "sourceOpening": "closed Shirin Bayram invitation with greeting, birthday title, and cake artwork",
+  "fixture": "apps/web/src/modules/catalog/preview-sample.json",
+  "fixtureLocale": "uz-Latn",
+  "fixtureNames": [
+    "Javohir",
+    "Madina"
+  ],
+  "captureViewport": {
+    "width": 720,
+    "height": 1280,
+    "deviceScaleFactor": 1,
+    "prefersReducedMotion": true
+  },
+  "sha256": "1024f480716268e4b0ec7f42d9c34c94f8cc586f1bf4759e33b0f9d2c445d94f"
+}

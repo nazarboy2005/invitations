@@ -1,0 +1,372 @@
+import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
+import { existsSync, readFileSync, readdirSync } from "node:fs";
+import path from "node:path";
+import test from "node:test";
+import { runInNewContext } from "node:vm";
+import { fileURLToPath } from "node:url";
+import { createInvitation } from "@taklifnoma/contracts";
+import {
+  createTemplatePreviewSample,
+  getTemplatePreviewWishes,
+  hasAuthoredInvitationContent,
+} from "../apps/web/src/modules/catalog/preview-sample";
+
+const templateRoot = new URL(
+  "../apps/web/public/templates/qandil/",
+  import.meta.url,
+);
+const fixturePath = new URL(
+  "../apps/web/src/modules/catalog/preview-sample.json",
+  import.meta.url,
+);
+const captureRoot = new URL(
+  "../Invitations - this folder will be removed from production/Marxaba/Nikoh/templates/qandil/",
+  import.meta.url,
+);
+
+test("Qandil retains the captured page, source scripts, style, and illustration assets", () => {
+  const html = readFileSync(new URL("index.html", templateRoot), "utf8");
+  const capturedHtml = readFileSync(new URL("index.html", captureRoot), "utf8");
+  const body = (value: string) =>
+    (value.match(/<body[\s\S]*?<\/body>/)?.[0] ?? "")
+      .replace(/\r\n/g, "\n")
+      .trim();
+  assert.equal(body(html), body(capturedHtml));
+
+  for (const file of [
+    "template.css",
+    "template.js",
+    "lantern.js",
+    "lightfield.js",
+    "meta.js",
+    "i18n.js",
+  ]) {
+    assert.equal(
+      readFileSync(new URL(file, templateRoot), "utf8").replace(/\r\n/g, "\n"),
+      readFileSync(new URL(file, captureRoot), "utf8").replace(/\r\n/g, "\n"),
+      `${file} must remain an exact source copy`,
+    );
+  }
+  const capturedArt = readdirSync(new URL("art/", captureRoot));
+  for (const file of capturedArt) {
+    assert.deepEqual(
+      readFileSync(new URL(`art/${file}`, templateRoot)),
+      readFileSync(new URL(`art/${file}`, captureRoot)),
+      `art/${file} must remain an exact source copy`,
+    );
+  }
+  assert.ok(capturedArt.includes("skyline-far.webp"));
+  assert.ok(capturedArt.includes("skyline-near.webp"));
+  assert.match(
+    readFileSync(new URL("template.css", templateRoot), "utf8"),
+    /prefers-reduced-motion/,
+  );
+  assert.match(
+    readFileSync(new URL("template.js", templateRoot), "utf8"),
+    /reducedMotion/,
+  );
+});
+
+test("Qandil runs without capture sample data or external font requests", () => {
+  const html = readFileSync(new URL("index.html", templateRoot), "utf8");
+  assert.doesNotMatch(
+    html,
+    /sample-invitation\.js|fonts\.googleapis\.com|fonts\.gstatic\.com/,
+  );
+  assert.match(html, /shared\/nikoh\/platform-bridge\.js/);
+  assert.match(html, /shared\/nikoh\/core\.js/);
+  assert.match(html, /href="fonts\.css"/);
+  assert.match(html, /href="platform\.css"/);
+
+  const root = fileURLToPath(templateRoot);
+  const localHtmlRefs = Array.from(
+    html.matchAll(/(?:src|href)="([^"]+)"/g),
+    (match) => match[1],
+  ).filter((ref) => !/^https?:/i.test(ref) && !ref.startsWith("#"));
+  const cssRefs = ["template.css", "fonts.css"].flatMap((file) =>
+    Array.from(
+      readFileSync(new URL(file, templateRoot), "utf8").matchAll(
+        /url\(["']?([^"')]+)["']?\)/g,
+      ),
+      (match) => match[1],
+    ),
+  );
+  for (const ref of [...localHtmlRefs, ...cssRefs].filter(
+    (value) => !value.startsWith("#"),
+  )) {
+    assert.ok(
+      existsSync(path.resolve(root, ref)),
+      `local resource ${ref} must exist`,
+    );
+  }
+  const fonts = readFileSync(new URL("fonts.css", templateRoot), "utf8");
+  assert.match(fonts, /font-family:\s*'Cormorant Garamond'/);
+  assert.match(fonts, /font-family:\s*'Great Vibes'/);
+  assert.ok(
+    existsSync(new URL("preview.webp", templateRoot)),
+    "source-rendered opening preview must be packaged",
+  );
+  const preview = readFileSync(new URL("preview.webp", templateRoot));
+  assert.equal(preview.toString("ascii", 0, 4), "RIFF");
+  assert.equal(preview.toString("ascii", 8, 12), "WEBP");
+  assert.equal(preview.toString("ascii", 12, 16), "VP8L");
+  const width = 1 + preview[21] + ((preview[22] & 0x3f) << 8);
+  const height =
+    1 +
+    ((preview[22] >> 6) | (preview[23] << 2) | ((preview[24] & 0x0f) << 10));
+  assert.deepEqual(
+    [width, height],
+    [720, 1280],
+    "the source-rendered opener must preserve its portrait viewport ratio",
+  );
+});
+
+test("Qandil catalog artwork has fixture and source-render provenance checksums", () => {
+  const provenance = JSON.parse(
+    readFileSync(new URL("preview.provenance.json", templateRoot), "utf8"),
+  ) as {
+    artifact: string;
+    artifactSha256: string;
+    sourceCapture: string;
+    renderedFrom: string;
+    previewRoute: string;
+    fixture: string;
+    fixtureSha256: string;
+    locale: string;
+    viewport: { width: number; height: number; deviceScaleFactor: number };
+    verified: string;
+  };
+  const digest = (value: Buffer) =>
+    createHash("sha256").update(value).digest("hex");
+  const preview = readFileSync(new URL("preview.webp", templateRoot));
+  const fixtureBytes = readFileSync(fixturePath);
+  const fixture = JSON.parse(fixtureBytes.toString("utf8"));
+
+  assert.equal(provenance.artifact, "preview.webp");
+  assert.match(
+    readFileSync(new URL("meta.js", templateRoot), "utf8"),
+    /preview:\s*"preview\.webp"/,
+  );
+  assert.equal(provenance.artifactSha256, digest(preview));
+  assert.equal(provenance.fixtureSha256, digest(fixtureBytes));
+  assert.equal(
+    provenance.sourceCapture,
+    "Invitations - this folder will be removed from production/Marxaba/Nikoh/templates/qandil",
+  );
+  assert.equal(
+    provenance.renderedFrom,
+    "index.html opening screen using the packaged Qandil template source",
+  );
+  assert.equal(provenance.previewRoute, "/preview?template=qandil&qaSilent=1");
+  assert.equal(
+    provenance.fixture,
+    "apps/web/src/modules/catalog/preview-sample.json",
+  );
+  assert.equal(provenance.locale, "uz-Latn");
+  assert.deepEqual(provenance.viewport, {
+    width: 720,
+    height: 1280,
+    deviceScaleFactor: 1,
+  });
+  assert.deepEqual(fixture.content[provenance.locale].people, [
+    "Javohir",
+    "Madina",
+  ]);
+  assert.equal(fixture.startsAt, "2027-06-12T17:00");
+  assert.match(provenance.verified, /fresh local browser render/i);
+
+  for (const art of ["art/skyline-far.webp", "art/skyline-near.webp"]) {
+    assert.notEqual(
+      digest(preview),
+      digest(readFileSync(new URL(art, templateRoot))),
+      "catalog preview is a rendered opening, not a raw scene crop",
+    );
+  }
+});
+
+test("Qandil static copy localizes and its typed wrapper fixes the source template ID", () => {
+  const dictionaryWindow: { MARHAMAT_I18N?: Record<string, [string, string]> } =
+    {};
+  runInNewContext(
+    readFileSync(
+      new URL(
+        "../apps/web/public/templates/shared/nikoh/i18n.js",
+        import.meta.url,
+      ),
+      "utf8",
+    ),
+    { window: dictionaryWindow },
+  );
+  runInNewContext(readFileSync(new URL("i18n.js", templateRoot), "utf8"), {
+    window: dictionaryWindow,
+  });
+  runInNewContext(
+    readFileSync(new URL("platform-i18n.js", templateRoot), "utf8"),
+    {
+      window: dictionaryWindow,
+      location: { search: "?lang=uz-Latn" },
+      document: { title: "Marxaba · Qandil" },
+      URLSearchParams,
+    },
+  );
+  const dictionary = dictionaryWindow.MARHAMAT_I18N;
+  assert.ok(dictionary);
+
+  const html = readFileSync(new URL("index.html", templateRoot), "utf8");
+  const body = html.match(/<body[\s\S]*?<\/body>/)?.[0] ?? "";
+  const text = Array.from(body.matchAll(/>([^<>]+)</g), (match) =>
+    match[1]
+      .replace(/&nbsp;/g, " ")
+      .replace(/&amp;/g, "&")
+      .replace(/\s+/g, " ")
+      .trim(),
+  ).filter(
+    (value) => value.length > 1 && !/^&+$/.test(value) && !/^\d+$/.test(value),
+  );
+  const labels = Array.from(
+    body.matchAll(/(?:aria-label|placeholder|title|alt)="([^"]+)"/g),
+    (match) => match[1].trim(),
+  );
+  const title = html.match(/<title>([^<]+)<\/title>/)?.[1]?.trim() ?? "";
+  const description =
+    html.match(/<meta name="description" content="([^"]+)"/)?.[1] ?? "";
+  assert.deepEqual(
+    [...text, ...labels, title, description].filter(
+      (value) => !dictionary[value],
+    ),
+    [],
+  );
+  assert.deepEqual(
+    [...dictionary[title]],
+    ["Marxaba · Кандиль", "Marxaba · Qandil"],
+  );
+  assert.deepEqual(
+    [...dictionary[description]],
+    [
+      "Кандиль — цифровое приглашение Marxaba",
+      "Qandil — a digital invitation by Marxaba",
+    ],
+  );
+  assert.match(
+    readFileSync(new URL("platform.css", templateRoot), "utf8"),
+    /#toyona \.gift__note:empty\s*\{\s*display:\s*none;/,
+  );
+
+  const cyrillicDocument = { title };
+  runInNewContext(
+    readFileSync(new URL("platform-i18n.js", templateRoot), "utf8"),
+    {
+      window: dictionaryWindow,
+      location: { search: "?lang=uz-Cyrl" },
+      document: cyrillicDocument,
+      URLSearchParams,
+    },
+  );
+  assert.equal(cyrillicDocument.title, "Мархаба · Қандил");
+
+  const renderer = readFileSync(
+    new URL("../apps/web/src/templates/qandil/renderer.tsx", import.meta.url),
+    "utf8",
+  );
+  const barrel = readFileSync(
+    new URL("../apps/web/src/templates/qandil/index.ts", import.meta.url),
+    "utf8",
+  );
+  assert.match(
+    renderer,
+    /import type \{ Invitation, Locale \} from "@taklifnoma\/contracts"/,
+  );
+  assert.match(
+    renderer,
+    /<MarxabaInvitation \{\.\.\.props\} templateId="qandil" \/>/,
+  );
+  assert.match(barrel, /export \{ QandilInvitation \} from "\.\/renderer"/);
+});
+
+test("Qandil uses the shared four-locale preview data for all supported sections", () => {
+  const sample = createTemplatePreviewSample("qandil");
+  const locales = ["uz-Latn", "uz-Cyrl", "en", "ru"] as const;
+
+  assert.deepEqual(sample.enabledLocales, [...locales]);
+  assert.equal(sample.content["uz-Latn"].people[0], "Javohir");
+  for (const locale of locales) {
+    const content = sample.content[locale];
+    assert.ok(content.people[0]);
+    assert.ok(content.people[1]);
+    assert.ok(content.greeting);
+    assert.ok(content.message);
+    assert.ok(content.venueName);
+    assert.ok(content.address);
+    assert.ok(content.programHeading);
+    assert.ok(
+      sample.program.every((item) => content.programTitles[item.id]),
+      `${locale} must have a title for every program item`,
+    );
+    assert.ok(
+      sample.dressCode.style[locale] &&
+        sample.dressCode.text[locale] &&
+        sample.dressCode.note[locale] &&
+        sample.dressCode.colors.every((color) => color.name[locale]),
+      `${locale} must have localized dress-code copy and palette`,
+    );
+    assert.equal(getTemplatePreviewWishes(locale).length, 3);
+  }
+
+  assert.equal(sample.program.length, 6);
+  assert.deepEqual(
+    sample.gallery.map((item) => item.id),
+    [
+      "sample-memory-1",
+      "sample-memory-2",
+      "sample-memory-3",
+      "sample-memory-4",
+      "sample-memory-5",
+      "sample-memory-6",
+    ],
+  );
+  assert.ok(sample.gallery.every((item) => !item.url));
+  assert.equal(sample.gift.enabled, true);
+  assert.ok(sample.gift.cardNumber);
+  assert.ok(sample.gift.cardHolder);
+  assert.deepEqual(sample.contacts, {
+    phoneNumber: "+998 90 123 45 67",
+    telegramUsername: "@demo",
+  });
+
+  const blank = createInvitation("qandil");
+  assert.equal(hasAuthoredInvitationContent(blank), false);
+  assert.deepEqual(blank.content["uz-Latn"].people, []);
+  assert.equal(blank.program.length, 0);
+  assert.equal(blank.gallery.length, 0);
+  assert.equal(blank.gift.cardNumber, "");
+  assert.deepEqual(blank.contacts, {
+    phoneNumber: "",
+    telegramUsername: "",
+  });
+
+  const html = readFileSync(new URL("index.html", templateRoot), "utf8");
+  for (const list of [
+    "program",
+    "gallery",
+    "dresscode",
+    "wishes",
+    "contacts",
+  ]) {
+    assert.match(html, new RegExp(`data-list="${list}"`));
+  }
+  for (const section of [
+    "program",
+    "gallery",
+    "dresscode",
+    "wishes",
+    "toyona",
+    "contacts",
+  ]) {
+    assert.match(html, new RegExp(`data-section="${section}"`));
+  }
+  assert.match(html, /data-slot="toyona\.cardNumber"/);
+  assert.match(html, /data-slot="toyona\.cardHolder"/);
+  assert.match(html, /data-slot="toyona\.note"/);
+  assert.match(html, /data-slot="toyona\.bank"/);
+});

@@ -1,0 +1,16 @@
+{
+  "artifact": "preview.webp",
+  "artifactSha256": "320c54bcadc04a5c6751551dcd628861551172ba5f6a5e755ae02578beaa645c",
+  "sourceCapture": "Invitations - this folder will be removed from production/Marxaba/Nikoh/templates/qandil",
+  "renderedFrom": "index.html opening screen using the packaged Qandil template source",
+  "previewRoute": "/preview?template=qandil&qaSilent=1",
+  "fixture": "apps/web/src/modules/catalog/preview-sample.json",
+  "fixtureSha256": "4faa5157eb048e2d1ce4a47ae0ac4c45e8edcadc1debf9ece1287380ce7333e9",
+  "locale": "uz-Latn",
+  "viewport": {
+    "width": 720,
+    "height": 1280,
+    "deviceScaleFactor": 1
+  },
+  "verified": "2026-10-21: compared with a fresh local browser render; the Qandil lantern opening, Javohir and Madina sample initials, and 12 June 2027 date match the centralized fixture. The packaged asset contains the clean template artwork without browser chrome."
+}

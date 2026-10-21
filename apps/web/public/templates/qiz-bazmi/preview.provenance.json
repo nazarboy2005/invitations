@@ -1,0 +1,19 @@
+{
+  "artifact": "preview.webp",
+  "artifactSha256": "96389a7c502a7cea882d4c780026d7db2852f9554d9ee8127fff2b0b8cb71b7e",
+  "format": "image/webp",
+  "width": 450,
+  "height": 800,
+  "sourceCapture": "Invitations - this folder will be removed from production/Marxaba/Qiz uzatish/templates/qiz-bazmi",
+  "sourceOpening": "captured invitation intro, rendered after local fonts and fixture greeting load",
+  "referenceRoute": "http://127.0.0.1:3002/templates/qiz-bazmi/index.html?lang=uz",
+  "fixture": "apps/web/src/modules/catalog/preview-sample.json",
+  "locale": "uz-Latn",
+  "viewport": {
+    "width": 450,
+    "height": 800,
+    "deviceScaleFactor": 1
+  },
+  "rendering": "Headless Chrome screenshot converted to WebP through Chromium Canvas at 94% quality, as documented in README.md",
+  "verificationNote": "Recorded prior local browser render; not independently re-rendered during this integration audit. Catalog fixture content may evolve after this static artifact is rendered."
+}

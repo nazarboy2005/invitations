@@ -1,0 +1,23 @@
+{
+  "format": "image/webp",
+  "artifact": "preview.webp",
+  "width": 720,
+  "height": 1280,
+  "route": "/preview?template=paxta&qaSilent=1",
+  "sourceOpening": "initial, closed invitation cover",
+  "fixture": "apps/web/src/modules/catalog/preview-sample.json",
+  "fixtureLocale": "uz-Latn",
+  "fixtureNames": [
+    "Javohir",
+    "Madina"
+  ],
+  "sha256": "d0ff503898014aa73a8c8d416dee81637acceb13d5b5a31b771dd056c6c0f59a",
+  "captureSource": {
+    "folder": "Invitations - this folder will be removed from production/Marxaba/Nikoh/templates/paxta",
+    "indexHtmlSha256": "0d8ca4a90a8f650df52a3eb5f836300b1e0a53629164b890d4fb88f85ef2029f",
+    "templateCssSha256": "8ca3e65be6dd618d5491534347d52d72b3df4cfb2c2395496ad5aebc2cb48bc0",
+    "templateJsSha256": "0ab0e8cea6b83f35b64b91bb6db02a7bb8f57e0de4dfd747a102d572f14ad919",
+    "cottonBranchSha256": "1a513e7692cfcc98ce59e36ad757153c1898bc4f3cc03c3a277b7ba8b6662200",
+    "linenSha256": "31aa9bba3910079757d86eca1e8f6f5ec3e1d9388a4dd3208634c2eb29545d81"
+  }
+}

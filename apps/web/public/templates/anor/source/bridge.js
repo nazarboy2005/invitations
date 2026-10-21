@@ -218,6 +218,15 @@
           const image = fragment.querySelector("img");
           const picture = safeText(item.src);
           if (image && picture) image.src = picture;
+          if (image && !picture) {
+            image.alt = "";
+            image.setAttribute("aria-hidden", "true");
+            const placeholder = document.createElement("span");
+            placeholder.className = "gallery__placeholder-icon";
+            placeholder.setAttribute("aria-hidden", "true");
+            placeholder.textContent = "✦";
+            fragment.querySelector(".gallery__slide")?.append(placeholder);
+          }
           if (image && item.caption) image.dataset.caption = item.caption;
         }
         for (const child of Array.from(fragment.children)) child.dataset.generated = "true";
@@ -299,7 +308,7 @@
   function hideEmptySections(data) {
     const has = {
       program: data.program?.length,
-      gallery: data.gallery?.length,
+      gallery: config.preview || data.gallery?.length,
       contacts: data.contacts?.length,
       wishes: data.wishesEnabled,
       rsvp: data.rsvp?.enabled,
@@ -507,6 +516,12 @@
   }
 
   function setupGallery() {
+    if (!$("#gallery-preview-placeholder-style")) {
+      const style = document.createElement("style");
+      style.id = "gallery-preview-placeholder-style";
+      style.textContent = ".gallery__slide .gallery__placeholder-icon{position:absolute;inset:0;display:grid;place-items:center;color:var(--gold,#c6a66b);font-size:clamp(2.5rem,12vw,5rem);line-height:1;pointer-events:none}.gallery__slide img[aria-hidden=\"true\"]{visibility:hidden}";
+      document.head.append(style);
+    }
     const track = $(".gallery__track");
     const dots = $("[data-gallery-dots]");
     const updateDots = () => {
@@ -596,8 +611,13 @@
     if (track) track.dataset.lightboxBound = "true";
     $$('[data-gallery-prev],[data-gallery-next]').forEach((button) => { if (button.dataset.bound) return; button.dataset.bound = "true"; button.addEventListener("click", () => {
       if (!track) return;
+      const slides = $$(".gallery__slide", track);
+      if (!slides.length) return;
       const direction = button.hasAttribute("data-gallery-prev") ? -1 : 1;
-      track.scrollBy({ left: direction * track.clientWidth * 0.7, behavior: app.reducedMotion ? "auto" : "smooth" });
+      const center = track.scrollLeft + track.clientWidth / 2;
+      const current = slides.reduce((best, slide, index) => Math.abs(slide.offsetLeft + slide.offsetWidth / 2 - center) < Math.abs(slides[best].offsetLeft + slides[best].offsetWidth / 2 - center) ? index : best, 0);
+      const target = slides[(current + direction + slides.length) % slides.length];
+      target.scrollIntoView({ behavior: app.reducedMotion ? "auto" : "smooth", block: "nearest", inline: "center" });
     }); });
     updateDots();
     if (track && !track.dataset.dotsBound) {

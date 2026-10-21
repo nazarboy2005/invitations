@@ -99,6 +99,19 @@
   function init() {
     intro = $('#intro'); opener = $('#open-invitation');
     if (!intro || !opener) return;
+    const lang = window.Marhamat?.lang || document.documentElement.lang || 'uz';
+    const metadata = {
+      uz: { title: 'Atlas taklifnomasi', description: 'Zamonaviy atlas va adras ranglaridagi nikoh taklifnomasi.' },
+      'uz-Cyrl': { title: 'Атлас таклифномаси', description: 'Замонавий атлас ва адрас рангларидаги никоҳ таклифномаси.' },
+      ru: { title: 'Приглашение Atlas', description: 'Свадебное приглашение в ярких цветах узбекского атласа и адраса.' },
+      en: { title: 'Atlas invitation', description: 'A wedding invitation inspired by the vivid colours of Uzbek atlas and adras silk.' },
+    }[lang] || { title: 'Atlas taklifnomasi', description: 'Zamonaviy atlas va adras ranglaridagi nikoh taklifnomasi.' };
+    const names = [window.Marhamat?.data?.groom, window.Marhamat?.data?.bride].filter(Boolean);
+    const couple = names.length ? `${names.join(' & ')} — ` : '';
+    document.title = `${couple}${metadata.title}`;
+    document.querySelector('meta[name="description"]')?.setAttribute('content', metadata.description);
+    document.querySelector('meta[property="og:title"]')?.setAttribute('content', `${couple}${metadata.title}`);
+    document.querySelector('meta[property="og:description"]')?.setAttribute('content', metadata.description);
     if (window.Marhamat?.tier === 'lite' || window.Marhamat?.reducedMotion) intro.classList.add('is-lite');
     setupFabric(); makeStrips(); stitchIn(); prepareHero(); setupScroll();
     if (window.gsap && !window.Marhamat?.reducedMotion) { gsap.timeline({ delay: .08 }).from('.intro__greeting', { opacity: 0, y: 8, duration: .35, ease: 'power2.out' }).from('.intro__caption', { opacity: 0, y: 7, duration: .28 }, '-=.08').from('.intro__names > *', { opacity: 0, y: 12, stagger: .12, duration: .42, ease: 'power3.out' }, '-=.04').from('.intro__date', { opacity: 0, duration: .28 }, '-=.12').from('.intro__button', { opacity: 0, y: 10, duration: .4, ease: 'back.out(1.3)' }, '-=.04'); }

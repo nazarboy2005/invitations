@@ -39,6 +39,54 @@ test("login requests rely on the opaque Telegram start token, not a numeric code
   assert.ok(columns.rows.some((column) => column.column_name === "token_hash"));
   assert.ok(!columns.rows.some((column) => column.column_name === "code"));
 });
+test("Bitiruv event compatibility is additive and remains unpublished", async () => {
+  const template = await db.query<{ published: boolean }>(
+    "SELECT published FROM templates WHERE id='bitiruv'",
+  );
+  assert.deepEqual(template.rows, [{ published: false }]);
+  const categories = await db.query<{ category_id: string }>(
+    "SELECT category_id FROM template_category_assignments WHERE template_id='bitiruv'",
+  );
+  assert.deepEqual(categories.rows, [{ category_id: "other" }]);
+  const supported = await db.query<{ event_type: string }>(
+    "SELECT event_type FROM template_supported_event_types WHERE template_id='bitiruv' ORDER BY event_type",
+  );
+  assert.deepEqual(supported.rows.map((row) => row.event_type), [
+    "birthday",
+    "bitiruv",
+    "korporativ",
+  ]);
+  await assert.rejects(
+    db.query(
+      "INSERT INTO template_supported_event_types(template_id,event_type) VALUES('bitiruv','unsupported')",
+    ),
+    /check constraint/i,
+  );
+});
+test("Korporativ event compatibility is additive and remains unpublished", async () => {
+  const template = await db.query<{ published: boolean }>(
+    "SELECT published FROM templates WHERE id='korporativ'",
+  );
+  assert.deepEqual(template.rows, [{ published: false }]);
+  const categories = await db.query<{ category_id: string }>(
+    "SELECT category_id FROM template_category_assignments WHERE template_id='korporativ'",
+  );
+  assert.deepEqual(categories.rows, [{ category_id: "other" }]);
+  const supported = await db.query<{ event_type: string }>(
+    "SELECT event_type FROM template_supported_event_types WHERE template_id='korporativ' ORDER BY event_type",
+  );
+  assert.deepEqual(supported.rows.map((row) => row.event_type), [
+    "bitiruv",
+    "korporativ",
+    "yubiley",
+  ]);
+  await assert.rejects(
+    db.query(
+      "INSERT INTO template_supported_event_types(template_id,event_type) VALUES('korporativ','unsupported')",
+    ),
+    /check constraint/i,
+  );
+});
 async function user(phone = true) {
   const id = randomUUID();
   await db.query(
@@ -354,13 +402,13 @@ test("invitation JSON snapshot retains language variants and stable media IDs th
   assert.equal(media.rows[0].draft_id, draft.id);
   assert.equal(media.rows[0].object_key, "owner/photo.webp");
 });
-test("template category migrations publish Anor and keep the remaining Marxaba batch unpublished", async () => {
+test("template migrations publish completed designs while keeping unfinished designs private", async () => {
   const categories = await db.query<{ id: string }>(
     "SELECT id FROM template_categories ORDER BY position,id",
   );
   assert.deepEqual(
     categories.rows.map((row) => row.id),
-    ["wedding", "birthday", "osh", "qiz-bazmi", "other"],
+    ["wedding", "birthday", "osh", "qiz-bazmi", "other", "iftorlik"],
   );
   const anor = await db.query<{ published: boolean; price_minor: number }>(
     "SELECT published,price_minor FROM templates WHERE id='anor'",
@@ -371,6 +419,38 @@ test("template category migrations publish Anor and keep the remaining Marxaba b
     "SELECT event_type FROM template_supported_event_types WHERE template_id='anor'",
   );
   assert.deepEqual(anorEvents.rows, [{ event_type: "wedding" }]);
+  const samarqand = await db.query<{
+    published: boolean;
+    price_minor: number;
+  }>(
+    "SELECT published,price_minor FROM templates WHERE id='samarqand-kechasi'",
+  );
+  assert.equal(samarqand.rows[0].published, true);
+  assert.equal(Number(samarqand.rows[0].price_minor), 15000000);
+  const samarqandEvents = await db.query<{ event_type: string }>(
+    "SELECT event_type FROM template_supported_event_types WHERE template_id='samarqand-kechasi'",
+  );
+  assert.deepEqual(samarqandEvents.rows, [{ event_type: "wedding" }]);
+  const bogi = await db.query<{
+    published: boolean;
+    price_minor: number;
+  }>("SELECT published,price_minor FROM templates WHERE id='bogi-eram'");
+  assert.equal(bogi.rows[0].published, true);
+  assert.equal(Number(bogi.rows[0].price_minor), 15000000);
+  const bogiEvents = await db.query<{ event_type: string }>(
+    "SELECT event_type FROM template_supported_event_types WHERE template_id='bogi-eram'",
+  );
+  assert.deepEqual(bogiEvents.rows, [{ event_type: "wedding" }]);
+  const atlas = await db.query<{
+    published: boolean;
+    price_minor: number;
+  }>("SELECT published,price_minor FROM templates WHERE id='atlas'");
+  assert.equal(atlas.rows[0].published, true);
+  assert.equal(Number(atlas.rows[0].price_minor), 15000000);
+  const atlasEvents = await db.query<{ event_type: string }>(
+    "SELECT event_type FROM template_supported_event_types WHERE template_id='atlas'",
+  );
+  assert.deepEqual(atlasEvents.rows, [{ event_type: "wedding" }]);
   const marxaba = await db.query<{ id: string; published: boolean }>(
     "SELECT id,published FROM templates WHERE id=ANY($1::text[]) ORDER BY id",
     [
@@ -379,30 +459,165 @@ test("template category migrations publish Anor and keep the remaining Marxaba b
         "samarqand-kechasi",
         "bogi-eram",
         "atlas",
+        "bulbul",
         "uchar-gilam",
         "oq-kabutar",
         "kuzgi-chinor",
+        "kozgu",
         "muhabbat-kitobi",
         "sahifa",
         "oltin-uzuk",
+        "oynavand",
+        "somon-yoli",
+        "qogoz-turna",
+        "nilufar",
+        "monogram",
+        "retro-kino",
+        "suzani",
+        "orik-guli",
+        "paxta",
+        "sahro-fonusi",
+        "toscana",
+        "vals",
+        "muhr",
+        "doira",
+        "qandil",
+        "parda",
+        "ganch",
+        "hilol",
+        "qatlam",
+        "lola",
+        "qiz-bazmi",
+        "shahzoda",
+        "chavandoz",
+        "beshik",
+        "shirin-bayram",
+        "konfetti",
+        "oltin-kuz",
+        "oltin-yosh",
+        "nahor",
+        "nahorgi-osh",
       ],
     ],
   );
   assert.deepEqual(
     marxaba.rows.map((row) => [row.id, row.published]),
     [
-      ["atlas", false],
-      ["bogi-eram", false],
-      ["kuzgi-chinor", false],
-      ["muhabbat-kitobi", false],
+      ["atlas", true],
+      ["beshik", false],
+      ["bogi-eram", true],
+      ["bulbul", false],
+      ["chavandoz", false],
+      ["doira", false],
+      ["ganch", false],
+      ["hilol", false],
+      ["konfetti", false],
+      ["kozgu", false],
+      ["kuzgi-chinor", true],
+      ["lola", false],
+      ["monogram", false],
+      ["muhabbat-kitobi", true],
+      ["muhr", false],
+      ["nahor", false],
+      ["nahorgi-osh", false],
+      ["nilufar", false],
+      ["oltin-kuz", false],
       ["oltin-nur", false],
-      ["oltin-uzuk", false],
-      ["oq-kabutar", false],
-      ["sahifa", false],
-      ["samarqand-kechasi", false],
+      ["oltin-uzuk", true],
+      ["oltin-yosh", false],
+      ["oq-kabutar", true],
+      ["orik-guli", false],
+      ["oynavand", true],
+      ["parda", false],
+      ["paxta", false],
+      ["qandil", false],
+      ["qatlam", false],
+      ["qiz-bazmi", false],
+      ["qogoz-turna", true],
+      ["retro-kino", false],
+      ["sahifa", true],
+      ["sahro-fonusi", false],
+      ["samarqand-kechasi", true],
+      ["shahzoda", false],
+      ["shirin-bayram", false],
+      ["somon-yoli", true],
+      ["suzani", false],
+      ["toscana", false],
       ["uchar-gilam", false],
+      ["vals", false],
     ],
   );
+  const kozguEvents = await db.query<{ event_type: string }>(
+    "SELECT event_type FROM template_supported_event_types WHERE template_id='kozgu' ORDER BY event_type",
+  );
+  assert.deepEqual(kozguEvents.rows, [
+    { event_type: "fotiha" },
+    { event_type: "qiz-bazmi" },
+    { event_type: "wedding" },
+  ]);
+  const doiraEvents = await db.query<{ event_type: string }>(
+    "SELECT event_type FROM template_supported_event_types WHERE template_id='doira' ORDER BY event_type",
+  );
+  assert.deepEqual(doiraEvents.rows, [
+    { event_type: "sunnat-toyi" },
+    { event_type: "wedding" },
+  ]);
+  const ganchEvents = await db.query<{ event_type: string }>(
+    "SELECT event_type FROM template_supported_event_types WHERE template_id='ganch' ORDER BY event_type",
+  );
+  assert.deepEqual(ganchEvents.rows, [
+    { event_type: "fotiha" },
+    { event_type: "qiz-bazmi" },
+    { event_type: "wedding" },
+  ]);
+  const qatlamEvents = await db.query<{ event_type: string }>(
+    "SELECT event_type FROM template_supported_event_types WHERE template_id='qatlam' ORDER BY event_type",
+  );
+  assert.deepEqual(qatlamEvents.rows, [
+    { event_type: "fotiha" },
+    { event_type: "qiz-bazmi" },
+    { event_type: "wedding" },
+  ]);
+  const lolaEvents = await db.query<{ event_type: string }>(
+    "SELECT event_type FROM template_supported_event_types WHERE template_id='lola' ORDER BY event_type",
+  );
+  assert.deepEqual(lolaEvents.rows, [
+    { event_type: "fotiha" },
+    { event_type: "qiz-uzatish" },
+  ]);
+  const chavandozEvents = await db.query<{ event_type: string }>(
+    "SELECT event_type FROM template_supported_event_types WHERE template_id='chavandoz' ORDER BY event_type",
+  );
+  assert.deepEqual(chavandozEvents.rows, [
+    { event_type: "birthday" },
+    { event_type: "sunnat-toyi" },
+  ]);
+  const konfettiEvents = await db.query<{ event_type: string }>(
+    "SELECT event_type FROM template_supported_event_types WHERE template_id='konfetti' ORDER BY event_type",
+  );
+  assert.deepEqual(konfettiEvents.rows, [
+    { event_type: "birthday" },
+    { event_type: "yubiley" },
+  ]);
+  const nahorgiOshEvents = await db.query<{ event_type: string }>(
+    "SELECT event_type FROM template_supported_event_types WHERE template_id='nahorgi-osh' ORDER BY event_type",
+  );
+  assert.deepEqual(nahorgiOshEvents.rows, [
+    { event_type: "osh" },
+    { event_type: "sunnat-toyi" },
+    { event_type: "wedding" },
+  ]);
+  const hilolEvents = await db.query<{ event_type: string }>(
+    "SELECT event_type FROM template_supported_event_types WHERE template_id='hilol' ORDER BY event_type",
+  );
+  assert.deepEqual(hilolEvents.rows, [
+    { event_type: "iftorlik" },
+    { event_type: "osh" },
+  ]);
+  const iftorlikCategory = await db.query<{ name: string }>(
+    "SELECT name FROM template_categories WHERE id='iftorlik'",
+  );
+  assert.deepEqual(iftorlikCategory.rows, [{ name: "Iftorlik" }]);
   const assignments = await db.query<{
     template_id: string;
     category_id: string;
@@ -415,7 +630,7 @@ test("template category migrations publish Anor and keep the remaining Marxaba b
   );
   assert.equal(
     assignments.rows.filter((row) => row.category_id === "wedding").length,
-    11,
+    31,
   );
 });
 test("template event compatibility is constrained and independently assignable", async () => {
@@ -426,12 +641,24 @@ test("template event compatibility is constrained and independently assignable",
   await db.query(
     "INSERT INTO template_supported_event_types(template_id,event_type) VALUES('test-alt','birthday')",
   );
+  await db.query(
+    "INSERT INTO template_supported_event_types(template_id,event_type) VALUES('test-alt','fotiha')",
+  );
+  await db.query(
+    "INSERT INTO template_supported_event_types(template_id,event_type) VALUES('test-alt','iftorlik')",
+  );
+  await db.query(
+    "INSERT INTO template_supported_event_types(template_id,event_type) VALUES('test-alt','yubiley')",
+  );
   const supported = await db.query<{ event_type: string }>(
     "SELECT event_type FROM template_supported_event_types WHERE template_id='test-alt' ORDER BY event_type",
   );
   assert.deepEqual(supported.rows, [
     { event_type: "birthday" },
+    { event_type: "fotiha" },
+    { event_type: "iftorlik" },
     { event_type: "wedding" },
+    { event_type: "yubiley" },
   ]);
   await assert.rejects(
     db.query(

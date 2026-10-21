@@ -1,0 +1,20 @@
+{
+  "format": "image/webp",
+  "width": 720,
+  "height": 1280,
+  "sourcePage": "/templates/beshik/index.html?lang=uz",
+  "sourceOpening": "closed Beshik invitation with greeting, opener, and cradle artwork",
+  "fixture": "apps/web/src/modules/catalog/preview-sample.json",
+  "fixtureLocale": "uz-Latn",
+  "fixtureNames": [
+    "Javohir",
+    "Madina"
+  ],
+  "captureViewport": {
+    "width": 720,
+    "height": 1280,
+    "deviceScaleFactor": 1,
+    "prefersReducedMotion": true
+  },
+  "sha256": "82828331929c9a44348fccc673a501d1f6a93ee76cff67052d024a74a0f9baf4"
+}

@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#1E1B4B">
   <meta name="description" content="Digital invitation">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="og.jpg">
+  <meta property="og:image" content="preview.webp">
   <title>uchar-gilam · Invitation</title>
   
   
@@ -39,8 +39,9 @@
       <span class="flight-cloud flight-cloud--one"></span><span class="flight-cloud flight-cloud--two"></span>
     </div>
     <canvas class="skywriting" id="skywriting" aria-hidden="true"></canvas>
-    <div class="intro__flight-rug" aria-hidden="true"><img src="art/carpet.webp" width="1024" height="512" alt="" decoding="async"><canvas class="intro__woven-names" id="intro-woven-names"></canvas></div>
+    <div class="intro__flight-rug" aria-hidden="true"><img src="art/carpet.webp" width="1024" height="512" alt="" decoding="async"><p class="intro__rug-lettering"><span data-slot="groom"></span><i>&amp;</i><span data-slot="bride"></span><small data-slot="date.long"></small></p></div>
     <canvas class="scene-webgl" id="scene-webgl" aria-hidden="true"></canvas>
+    <p class="intro__scene-lettering" aria-hidden="true"><span data-slot="groom"></span><i>&amp;</i><span data-slot="bride"></span><small data-slot="date.long"></small></p>
     <div class="intro__copy">
       <p class="intro__kicker">Buxoro · yulduzlar yo‘li</p>
       <p class="intro__greeting" data-slot="greeting"></p>
@@ -140,7 +141,7 @@
 
     <section class="section toyona" id="toyona" data-section="toyona">
       <p class="eyebrow">Ezgu niyatlar</p><h2 class="title">To‘yona</h2><p class="toyona__note" data-slot="toyona.note"></p>
-      <details class="gift"><summary class="gift__summary"><span>To‘yona ma’lumotlarini ko‘rish</span><i aria-hidden="true">⌄</i></summary><div class="gift__open"><div class="gift__chest"><img class="gift__base" src="art/chest.webp" width="500" height="398" alt="" loading="lazy" decoding="async"><img class="gift__lid" src="art/chest-lid.webp" width="500" height="223" alt="" loading="lazy" decoding="async"></div><div class="gift__details"><span data-slot="toyona.bank"></span><strong data-slot="toyona.cardNumber"></strong><span data-slot="toyona.cardHolder"></span><button class="button button--outline" type="button" data-copy="toyona.cardNumber">Nusxa olish</button></div></div></details>
+      <details class="gift"><summary class="gift__summary"><span>To‘yona ma’lumotlarini ko‘rish</span><i aria-hidden="true">⌄</i></summary><div class="gift__open"><div class="gift__chest"><img class="gift__base" src="art/chest.webp" width="500" height="398" alt="" loading="lazy" decoding="async"><img class="gift__lid" src="art/chest-lid.webp" width="500" height="223" alt="" loading="lazy" decoding="async"></div><div class="gift__details"><strong data-slot="toyona.cardNumber"></strong><span data-slot="toyona.cardHolder"></span><button class="button button--outline" type="button" data-copy="toyona.cardNumber">Nusxa olish</button></div></div></details>
     </section>
 
     <section class="section contacts" id="contacts" data-section="contacts">

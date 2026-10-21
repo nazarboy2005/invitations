@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="uz" class="is-locked">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#fbf8f2">
+  <meta name="description" content="Toskana villasidagi gul archasi ostida nikoh to‘yi">
+  <title>Toscana · Taklifnoma</title>
+  <link rel="stylesheet" href="../shared/nikoh/base.css">
+  <link rel="stylesheet" href="fonts.css">
+  <link rel="stylesheet" href="template.css">
+  <script src="../shared/nikoh/vendor/gsap.min.js" defer></script>
+  <script src="../shared/nikoh/vendor/ScrollTrigger.min.js" defer></script>
+  <script src="../shared/nikoh/vendor/lz-string.min.js" defer></script>
+  <script src="../shared/nikoh/invite-codec.js" defer></script>
+  <script src="../shared/nikoh/i18n.js" defer></script>
+  <script src="i18n.js" defer></script>
+  <script src="../shared/nikoh/platform-bridge.js" defer></script>
+  <script src="../shared/nikoh/core.js" defer></script>
+  <script src="meta.js" defer></script>
+  <script src="aisle3d.js" defer></script>
+  <script src="template.js" defer></script>
+</head>
+<body>
+  <section class="intro" id="intro" aria-label="Kirish uchun bosing">
+    <img class="intro__poster" src="art/aisle.webp" width="900" height="1350" alt="" fetchpriority="high" decoding="async">
+    <img class="intro__arch" src="art/arch.webp" width="900" height="1350" alt="" decoding="async">
+    <div class="intro__wash" aria-hidden="true"></div>
+    <div class="sun intro__sun" aria-hidden="true"><i></i></div>
+    <div class="intro__depth intro__depth--foreground" aria-hidden="true"></div>
+    <canvas class="walk-scene" aria-hidden="true"></canvas>
+    <div class="welcome-sign">
+      <p class="eyebrow">Xush kelibsiz · Benvenuti</p>
+      <p class="welcome-sign__names"><span data-slot="groom"></span><b>&amp;</b><span data-slot="bride"></span></p>
+      <p class="welcome-sign__date" data-slot="date.long"></p>
+      <span class="welcome-sign__guest" data-slot="greeting"></span>
+      <span class="welcome-sign__easel" aria-hidden="true"></span>
+    </div>
+    <div class="intro__copy">
+      <p class="intro__kicker">Un giorno in villa</p>
+      <button class="enter-cue" id="open-invitation" type="button"><span class="seal" aria-hidden="true"><span class="seal__ring"></span><span class="seal__wax"><b class="seal__mark" data-seal></b></span></span><span class="enter-cue__label">Kirish uchun bosing</span></button>
+      <p class="intro__swipe">yoki yuqoriga suring</p>
+    </div>
+    <button class="intro__skip" id="skip-intro" type="button" hidden>O‘tkazib yuborish</button>
+  </section>
+  <canvas class="petal-field" aria-hidden="true"></canvas>
+
+  <main class="page" id="page">
+    <header class="hero" id="hero" data-section="hero">
+      <img class="hero__image" src="art/arch.webp" width="900" height="1350" alt="" fetchpriority="high" decoding="async">
+      <div class="hero__veil" aria-hidden="true"></div><div class="sun hero__sun" aria-hidden="true"><i></i></div><div class="hero__petals" aria-hidden="true"></div>
+      <div class="hero__copy"><p class="eyebrow" data-slot="eventType"></p><p class="hero__pretitle">Biz turmush quramiz</p>
+        <h1 class="hero__names"><span data-slot="groom"></span><b>&amp;</b><span data-slot="bride"></span></h1>
+        <p class="hero__date" data-slot="date.long"></p><p class="hero__venue" data-slot="venue.name"></p>
+      </div>
+      <a class="hero__cue" href="#invitation-text"><span>Pastga suring</span><i aria-hidden="true">↓</i></a>
+    </header>
+
+    <section class="chapter invitation" id="invitation-text" data-section="invitation-text">
+      <img class="chapter__photo" src="art/suite.webp" width="900" height="1350" alt="" loading="lazy" decoding="async">
+      <div class="invitation__card scene-card"><div class="blind-mark" data-monogram aria-hidden="true"></div>
+        <p class="eyebrow">Nikoh to‘yiga taklifnoma</p><h2 class="script-title" data-slot="greeting"></h2>
+        <p class="invitation__message" data-slot="message"></p><span class="hairline" aria-hidden="true"></span>
+        <p class="eyebrow" data-slot="hostsLabel"></p><p class="invitation__hosts" data-slot="hosts"></p>
+        <p class="invitation__names"><span data-slot="groom"></span><i>&amp;</i><span data-slot="bride"></span></p>
+      </div><div class="invitation__raking" aria-hidden="true"></div>
+    </section>
+
+    <section class="chapter date-chapter" id="date" data-section="date">
+      <img class="chapter__photo" src="art/savedate.webp" width="900" height="1350" alt="" loading="lazy" decoding="async">
+      <div class="date__card scene-card"><p class="eyebrow">Saqlab qo‘ying</p><h2 class="title">Baxtli kunimiz</h2>
+        <div class="date__postmark"><span data-slot="date.day"></span><i data-slot="date.month"></i><b data-slot="date.year"></b></div>
+        <div class="calendar" data-calendar aria-label="To‘y kuni taqvimi"></div>
+        <p class="date__time"><span data-slot="date.weekday"></span> · <span data-slot="date.time"></span></p>
+        <div class="countdown" data-countdown aria-live="off"><p class="eyebrow">Baxtli kungacha</p>
+          <div class="countdown__grid"><div><strong data-unit="days">00</strong><span>kun</span></div><div><strong data-unit="hours">00</strong><span>soat</span></div><div><strong data-unit="minutes">00</strong><span>daqiqa</span></div><div><strong data-unit="seconds">00</strong><span>soniya</span></div></div>
+          <p data-countdown-past hidden>Bu kunni birga nishonlaganingiz uchun rahmat!</p></div>
+        <button class="text-link" type="button" data-ics>Kalendarga qo‘shish <span>↗</span></button>
+      </div><img class="date__flower" src="art/program-cake.webp" alt="" width="900" height="600" loading="lazy" decoding="async">
+    </section>
+
+    <section class="chapter programme" id="program" data-section="program">
+      <img class="chapter__photo" src="art/finale.webp" width="900" height="1350" alt="" loading="lazy" decoding="async">
+      <div class="programme__panel scene-card"><p class="eyebrow">Un giorno insieme</p><h2 class="title">Oqshom dasturi</h2>
+        <div class="programme__rail"><i aria-hidden="true"></i><ol data-list="program"><template><li><time data-field="time"></time><span class="programme__pin" aria-hidden="true">✦</span><div><p data-field="title"></p><small data-field="note"></small></div><img class="programme__vignette" src="art/program-cake.webp" alt="" width="420" height="280" loading="lazy" decoding="async"></li></template></ol></div>
+      </div>
+    </section>
+
+    <section class="chapter venue" id="venue" data-section="venue">
+      <img class="chapter__photo" src="art/aisle.webp" width="900" height="1350" alt="" loading="lazy" decoding="async">
+      <div class="venue__scene"><p class="eyebrow">Biz uchrashadigan joy</p><h2 class="title">Manzil</h2>
+        <div class="venue__easel"><div class="venue__print"><img data-photo="venue.photo" width="800" height="600" alt="To‘y manzili" loading="lazy" decoding="async"><span data-slot="venue.name"></span></div><div class="venue__flowers" aria-hidden="true">✿</div></div>
+        <p class="venue__name" data-slot="venue.name"></p><p class="venue__address" data-slot="venue.address"></p>
+        <div class="venue__links"><a data-map="yandex" target="_blank" rel="noopener noreferrer">Yandex xaritada ↗</a><a data-map="google" target="_blank" rel="noopener noreferrer">Google xaritada ↗</a></div>
+      </div>
+    </section>
+
+    <section class="chapter dress" id="dresscode" data-section="dresscode">
+      <img class="chapter__photo" src="art/atelier.webp" width="900" height="1350" alt="" loading="lazy" decoding="async">
+      <div class="dress__board scene-card"><p class="eyebrow">The atelier</p><h2 class="title">Kiyinish uslubi</h2><div class="dresscode" data-dresscode>
+        <p class="dresscode__style" data-slot="dressCode.style"></p><p class="dresscode__text" data-slot="dressCode.text"></p>
+        <ul class="dresscode__palette" data-list="dresscode"><template><li><i data-field-attr="style:style"></i><span data-field="name"></span></li></template></ul>
+        <p class="dresscode__note" data-slot="dressCode.note"></p></div></div>
+    </section>
+
+    <section class="chapter gallery-section" id="gallery" data-section="gallery">
+      <img class="chapter__photo" src="art/album.webp" width="900" height="1350" alt="" loading="lazy" decoding="async">
+      <div class="album scene-card"><div class="album__cover"><p class="eyebrow">Our story</p><h2 class="script-title">Lahzalar</h2><span class="album__rose" aria-hidden="true">✿</span></div>
+        <div class="gallery" data-gallery data-list="gallery" aria-label="Suratlar galereyasi"><template><button class="gallery__print" type="button" aria-label="Suratni kattalashtirish"><img data-field-attr="src:src,alt:alt" data-photo width="640" height="800" loading="lazy" decoding="async"></button></template></div>
+        <div class="gallery__dots" data-gallery-dots aria-label="Surat tanlash"></div><p class="album__caption">Ochiq kitobdan bir sahifa suring</p>
+      </div>
+    </section>
+
+    <section class="chapter rsvp-section" id="rsvp" data-section="rsvp">
+      <img class="chapter__photo" src="art/reply.webp" width="900" height="1350" alt="" loading="lazy" decoding="async">
+      <div class="reply-card scene-card"><p class="eyebrow">Kindly reply</p><h2 class="title">Iltimos, javob bering</h2><p class="reply-card__deadline" data-rsvp-deadline></p>
+        <form data-rsvp><div data-rsvp-form><div class="reply-choices" role="group" aria-label="Tashrif javobi">
+          <button type="button" data-rsvp-choice="yes" aria-pressed="false">Mamnuniyat bilan kelaman</button><button type="button" data-rsvp-choice="no" aria-pressed="false">Afsuski, kela olmayman</button><button type="button" data-rsvp-choice="maybe" aria-pressed="false">Hali bilmayman</button></div>
+          <label class="line-field"><span>Ism</span><input name="name" autocomplete="name" maxlength="80" required></label>
+          <div class="rsvp__party" data-rsvp-party><span>Necha kishi bo‘lasiz?</span><div class="stepper"><button type="button" data-party-step="-1" aria-label="Mehmonlar sonini kamaytirish">−</button><output>1</output><button type="button" data-party-step="1" aria-label="Mehmonlar sonini oshirish">+</button></div></div>
+          <button class="text-link" type="submit" data-rsvp-submit>Javobni yuborish <span>↗</span></button></div>
+          <div class="rsvp__done" data-rsvp-done hidden aria-live="polite"><p data-rsvp-summary></p><button class="text-link" type="button" data-rsvp-change>Javobni o‘zgartirish</button></div></form>
+      </div><div class="reply-card__envelope" aria-hidden="true"></div>
+    </section>
+
+    <section class="chapter wishes-section" id="wishes" data-section="wishes">
+      <img class="chapter__photo" src="art/cardbox.webp" width="900" height="1350" alt="" loading="lazy" decoding="async">
+      <div class="guestbook scene-card"><p class="eyebrow">Our guest book</p><h2 class="script-title">Tilaklar</h2>
+        <ul class="wishes" data-list="wishes"><template><li><p data-field="text"></p><strong data-field="name"></strong></li></template></ul>
+        <form class="wish-form" data-wishes-form><label class="line-field"><span>Ism</span><input name="name" maxlength="60" required></label><label class="line-field"><span>Tilagingiz</span><textarea name="text" rows="2" maxlength="360" required></textarea></label><button class="text-link" type="submit">Tilak qoldirish ↗</button><p data-wishes-feedback role="status" aria-live="polite"></p></form>
+      </div>
+    </section>
+
+    <section class="chapter gifts" id="toyona" data-section="toyona">
+      <img class="chapter__photo" src="art/cardbox.webp" width="900" height="1350" alt="" loading="lazy" decoding="async">
+      <div class="gifts__copy"><p class="eyebrow">A small keepsake</p><h2 class="title">To‘yona</h2><p class="gift-note">Sizning tashrifingiz — biz uchun eng qimmatli sovg‘a.</p>
+        <details class="gift"><summary><span>Ma’lumotlarni ko‘rish</span><i aria-hidden="true">＋</i></summary><div class="gift__details"><span data-slot="toyona.bank"></span><strong data-slot="toyona.cardNumber"></strong><span data-slot="toyona.cardHolder"></span><button class="text-link" type="button" data-copy="toyona.cardNumber">Nusxa olish</button></div></details>
+      </div>
+    </section>
+
+    <section class="chapter contacts" id="contacts" data-section="contacts">
+      <img class="chapter__photo" src="art/atelier.webp" width="900" height="1350" alt="" loading="lazy" decoding="async">
+      <div class="contacts__card scene-card"><p class="eyebrow">Questions</p><h2 class="title">Bog‘lanish uchun</h2><ul data-list="contacts"><template><li><a data-field-attr="href:href" target="_blank" rel="noopener noreferrer"><span data-field="label"></span><strong data-field="value"></strong><i aria-hidden="true">↗</i></a></li></template></ul></div>
+    </section>
+
+    <section class="finale" id="finale" data-section="finale"><img src="art/finale.webp" width="900" height="1350" alt="" loading="lazy" decoding="async"><div class="finale__dusk" aria-hidden="true"></div><div class="finale__bulbs" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="finale__copy"><p class="script-title">Sizni kutamiz</p><p class="finale__names"><span data-slot="groom"></span> &amp; <span data-slot="bride"></span></p><p data-slot="date.long"></p></div><canvas class="fireflies" aria-hidden="true"></canvas></section>
+    <footer class="footer" id="footer" data-section="footer"><svg viewBox="0 0 180 46" aria-hidden="true"><path d="M8 36C50 29 91 18 168 8M52 28c-5-9-10-12-17-13m17 13c7-8 14-10 21-9m23-4c-2-8 0-12 5-15m-5 15c7-4 14-4 20-2"/></svg><p><span data-slot="groom"></span> &amp; <span data-slot="bride"></span></p><small data-slot="date.long"></small><small data-slot="footer">Marxaba bilan yaratildi</small></footer>
+  </main>
+  <button class="music-toggle" type="button" data-music-toggle hidden aria-label="Musiqani yoqish"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V5l11-2v13M9 8l11-2M6 18.5a3 2.2 0 1 1-6 0 3 2.2 0 0 1 6 0Zm11-2a3 2.2 0 1 1-6 0 3 2.2 0 0 1 6 0Z" transform="translate(3 1)"/></svg></button>
+  <audio data-music loop preload="none" hidden></audio><div class="toast" data-toast role="status" aria-live="polite"></div>
+</body>
+</html>

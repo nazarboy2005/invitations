@@ -34,10 +34,11 @@
     openingTl.to('.intro__backdrop',{scale:1.08,opacity:.72,duration:act2*.66},0)
       .to('.intro__veil',{opacity:.2,duration:act2*.58},0)
       .to('.intro__line',{opacity:1,scaleX:1,duration:.42},0)
-      .to(ceremonyGroup?.position||{},{y:.7,duration:act2*.62,ease:'power3.inOut'},.06)
-      .to(ceremonyGroup?.rotation||{},{y:-.18,duration:act2*.62,ease:'power3.inOut'},.06)
-      .add(transitionHeroScene,act2-.62)
-      .to(ceremonyGroup?.scale||{},{x:.04,y:.04,z:.04,duration:.58,ease:'power3.in'},act2-.62)
+    if(ceremonyGroup)openingTl.to(ceremonyGroup.position,{y:.7,duration:act2*.62,ease:'power3.inOut'},.06)
+      .to(ceremonyGroup.rotation,{y:-.18,duration:act2*.62,ease:'power3.inOut'},.06);
+    openingTl.add(transitionHeroScene,act2-.62);
+    if(ceremonyGroup)openingTl.to(ceremonyGroup.scale,{x:.04,y:.04,z:.04,duration:.58,ease:'power3.in'},act2-.62);
+    openingTl
       .to('.intro__copy',{yPercent:18,opacity:0,duration:.62,ease:'power2.in'},.22)
       .to('.scene-canvas',{opacity:1,duration:.75},.4)
       .to(scenePose,{x:0,y:.03,z:.18,rz:0,cx:0,cy:0,cz:-.72,duration:act2*.7,ease:'power3.inOut'},.18)
@@ -45,10 +46,10 @@
       .to('.ring-fallback__b',{x:-11,rotation:-39,duration:act2*.35,ease:'power2.in'},.08)
       .to('.ring-fallback__a',{x:0,rotation:-8,duration:act2*.42,ease:'back.out(1.35)'},act2*.36)
       .to('.ring-fallback__b',{x:0,rotation:12,duration:act2*.42,ease:'back.out(1.35)'},act2*.36)
-      .to(rings[0]?.position||{}, {x:-.24,duration:act2*.55,ease:'power3.inOut'},.1)
-      .to(rings[1]?.position||{}, {x:.22,y:.02,duration:act2*.55,ease:'power3.inOut'},.1)
       .to(scenePose,{cx:.12,duration:.08,yoyo:true,repeat:3,ease:'none'},act2*.55)
       .to(intro,{opacity:0,duration:.48},act2-.48);
+    if(rings[0])openingTl.to(rings[0].position,{x:-.24,duration:act2*.55,ease:'power3.inOut'},.1);
+    if(rings[1])openingTl.to(rings[1].position,{x:.22,y:.02,duration:act2*.55,ease:'power3.inOut'},.1);
   }
   openButton?.addEventListener('click', e => { e.stopPropagation(); beginOpen(); });
   intro?.addEventListener('click', () => { if(opening) finishOpen(); });

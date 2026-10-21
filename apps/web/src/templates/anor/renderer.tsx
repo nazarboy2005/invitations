@@ -6,6 +6,7 @@ import { getContent } from "@taklifnoma/contracts";
 import { eventInstant, eventWallDate, formatDate } from "../date-format";
 import styles from "./template.module.css";
 import { CATALOG_PREVIEW_MUSIC } from "@/modules/catalog/catalog-music";
+import { getTemplatePreviewWishes } from "@/modules/catalog/preview-sample";
 
 type Props = {
   invitation: Invitation;
@@ -16,6 +17,7 @@ type Props = {
   preview?: boolean;
   fullPreview?: boolean;
   catalogMusic?: boolean;
+  sampleWishes?: boolean;
 };
 
 type LegacyDate = {
@@ -32,6 +34,7 @@ type LegacyDate = {
 
 export type LegacyData = {
   title: string;
+  footer: string;
   groom: string;
   bride: string;
   hosts: string;
@@ -83,29 +86,61 @@ const eventLabels: Record<Locale, Record<Invitation["eventType"], string>> = {
   "uz-Latn": {
     wedding: "Nikoh to‘yi",
     birthday: "Tug‘ilgan kun",
+    yubiley: "Yubiley",
     osh: "Nahorgi osh",
+    iftorlik: "Iftorlik",
     "qiz-bazmi": "Qiz bazmi",
+    fotiha: "Fotiha",
+    "qiz-uzatish": "Qiz uzatish",
+    "sunnat-toyi": "Sunnat to‘yi",
+    "beshik-toyi": "Beshik to‘yi",
+    bitiruv: "Bitiruv kechasi",
+    korporativ: "Korporativ tadbir",
     other: "Tadbir",
   },
   "uz-Cyrl": {
     wedding: "Никоҳ тўйи",
     birthday: "Туғилган кун",
+    yubiley: "Юбилей",
     osh: "Наҳорги ош",
+    iftorlik: "Ифторлик",
     "qiz-bazmi": "Қиз базми",
+    fotiha: "Фотиҳа",
+    "qiz-uzatish": "Қиз узатиш",
+    "sunnat-toyi": "Суннат тўйи",
+    "beshik-toyi": "Бешик тўйи",
+    bitiruv: "Битирув кечаси",
+    korporativ: "Корпоратив тадбир",
     other: "Тадбир",
   },
   en: {
     wedding: "Wedding",
     birthday: "Birthday",
+    yubiley: "Anniversary",
     osh: "Morning osh",
+    iftorlik: "Iftar gathering",
     "qiz-bazmi": "Bride’s celebration",
+    fotiha: "Engagement ceremony",
+    "qiz-uzatish": "Bride send-off",
+    "sunnat-toyi": "Circumcision celebration",
+    "beshik-toyi": "Cradle celebration",
+    bitiruv: "Graduation celebration",
+    korporativ: "Corporate event",
     other: "Celebration",
   },
   ru: {
     wedding: "Свадьба",
     birthday: "День рождения",
+    yubiley: "Юбилей",
     osh: "Утренний ош",
+    iftorlik: "Ифтар",
     "qiz-bazmi": "Праздник невесты",
+    fotiha: "Помолвка",
+    "qiz-uzatish": "Проводы невесты",
+    "sunnat-toyi": "Суннат-той",
+    "beshik-toyi": "Праздник в честь колыбели",
+    bitiruv: "Выпускной вечер",
+    korporativ: "Корпоративное мероприятие",
     other: "Праздник",
   },
 };
@@ -115,11 +150,18 @@ const hostsLabels: Record<Locale, string> = {
   en: "With love from",
   ru: "С уважением",
 };
+const footerLabels: Record<Locale, string> = {
+  "uz-Latn": "Marxaba bilan yaratildi",
+  "uz-Cyrl": "Marxaba билан яратилди",
+  en: "Made with Marxaba",
+  ru: "Создано с Marxaba",
+};
 
 export function makeLegacyData(
   invitation: Invitation,
   locale: Locale,
   guestName: string,
+  sampleWishes = false,
 ): LegacyData {
   const content = getContent(invitation, locale);
   const people = content.people.filter(Boolean);
@@ -180,6 +222,7 @@ export function makeLegacyData(
   const greeting = personalGreeting || content.greeting;
   return {
     title: content.title,
+    footer: footerLabels[locale],
     groom: people[0] ?? "",
     bride: people[1] ?? "",
     hosts: content.hosts,
@@ -256,7 +299,7 @@ export function makeLegacyData(
     ],
     rsvp: invitation.rsvp,
     wishesEnabled: invitation.wishes.enabled,
-    wishes: [],
+    wishes: sampleWishes ? getTemplatePreviewWishes(locale) : [],
     toyona: {
       enabled: invitation.gift.enabled,
       cardNumber: invitation.gift.cardNumber,
@@ -299,13 +342,14 @@ export function AnorInvitation({
   preview = false,
   fullPreview = false,
   catalogMusic = false,
+  sampleWishes = false,
 }: Props) {
   const frame = useRef<HTMLIFrameElement>(null);
   const [frameLocale, setFrameLocale] = useState(locale);
   const [loadedLocale, setLoadedLocale] = useState<Locale | null>(null);
   const data = useMemo(
-    () => makeLegacyData(invitation, frameLocale, guestName),
-    [invitation, frameLocale, guestName],
+    () => makeLegacyData(invitation, frameLocale, guestName, sampleWishes),
+    [invitation, frameLocale, guestName, sampleWishes],
   );
   const rendererData = useMemo(
     () =>

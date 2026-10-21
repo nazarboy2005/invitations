@@ -1,0 +1,19 @@
+{
+  "format": "image/webp",
+  "width": 720,
+  "height": 1280,
+  "sourcePage": "/templates/shahzoda/index.html?lang=uz",
+  "sourceOpening": "intro curtain and plaque",
+  "fixture": "apps/web/src/modules/catalog/preview-sample.json",
+  "fixtureLocale": "uz-Latn",
+  "fixtureNames": [
+    "Javohir",
+    "Madina"
+  ],
+  "captureViewport": {
+    "width": 720,
+    "height": 1280,
+    "deviceScaleFactor": 1
+  },
+  "sha256": "bf0bd8e1754a1987059858f50a6882fc339ce2142315659b3896c599f7d5b516"
+}

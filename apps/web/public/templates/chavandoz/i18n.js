@@ -1,0 +1,20 @@
+Object.assign(window.MARHAMAT_I18N = window.MARHAMAT_I18N || {}, {
+  "Taklifnomani ochish": ["Открыть приглашение", "Open invitation"],
+  "CHAVANDOZ · MARXABA": ["ЧАВАНДОЗ · MARXABA", "CHAVANDOZ · MARXABA"],
+  "Kichik chavandozning bayrami": ["Праздник маленького наездника", "A celebration for our little rider"],
+  "Taklifnomani ko‘rish": ["Посмотреть приглашение", "View invitation"],
+  "Aziz mehmonimiz": ["Дорогой гость", "Dear guest"], "Sizni kutamiz": ["Мы вас ждём", "We await you"],
+  "Sana va vaqt": ["Дата и время", "Date and time"], "Baxtli kungacha": ["До счастливого дня", "Until the happy day"],
+  "kun": ["дней", "days"], "soat": ["часов", "hours"], "daqiqa": ["минут", "minutes"], "soniya": ["секунд", "seconds"],
+  "Bu kunni birga nishonlaganingiz uchun rahmat!": ["Спасибо, что отметили этот день вместе с нами!", "Thank you for celebrating this day with us!"],
+  "Kalendarga qo‘shish": ["Добавить в календарь", "Add to calendar"], "Kalendarga qo‘shish ✦": ["Добавить в календарь ✦", "Add to calendar ✦"], "Oqshom rejasi": ["План вечера", "Evening programme"], "To‘y dasturi": ["Программа праздника", "Celebration programme"],
+  "Manzil": ["Адрес", "Venue"], "To‘y manzili": ["Место праздника", "Celebration venue"], "Yandex xaritada": ["На Яндекс Картах", "On Yandex Maps"], "Google xaritada": ["На Google Картах", "On Google Maps"],
+  "Bayramona ranglar": ["Праздничные цвета", "Celebration colours"], "Dress-kod": ["Дресс-код", "Dress code"], "Xotiralar": ["Воспоминания", "Memories"], "Lahzalar": ["Мгновения", "Moments"],
+  "Oldingi surat": ["Предыдущее фото", "Previous photo"], "Keyingi surat": ["Следующее фото", "Next photo"], "Suratlar galereyasi": ["Галерея фотографий", "Photo gallery"], "Suratni kattalashtirish": ["Увеличить фото", "Enlarge photo"], "Bayram surati": ["Фото праздника", "Celebration photo"],
+  "Javob varaqasi": ["Карточка ответа", "Reply card"], "Tashrifingizni tasdiqlang": ["Подтвердите своё присутствие", "Please RSVP"], "Javobingiz biz uchun muhim.": ["Ваш ответ очень важен для нас.", "Your reply means a lot to us."],
+  "Tashrif javobi": ["Ответ о присутствии", "Attendance response"], "Kelaman ✦": ["Буду ✦", "I’ll be there ✦"], "Kelmayman": ["Не смогу прийти", "I can’t attend"], "Hali bilmayman": ["Пока не знаю", "Not sure yet"], "Ismingiz": ["Ваше имя", "Your name"], "Necha kishi bo‘lasiz?": ["Сколько вас будет?", "How many guests?"],
+  "Mehmonlar sonini kamaytirish": ["Уменьшить число гостей", "Decrease guest count"], "Mehmonlar sonini oshirish": ["Увеличить число гостей", "Increase guest count"], "Javobni yuborish": ["Отправить ответ", "Send reply"], "Javobingiz uchun rahmat!": ["Спасибо за ваш ответ!", "Thank you for your reply!"], "Javobni o‘zgartirish": ["Изменить ответ", "Change reply"],
+  "Yurakdan": ["От всего сердца", "From the heart"], "Tilaklar": ["Пожелания", "Wishes"], "Tilagingiz": ["Ваше пожелание", "Your wish"], "Tilak yuborish": ["Отправить пожелание", "Send wish"],
+  "Ezgu niyatlar uchun": ["С добрыми пожеланиями", "With kind wishes"], "To‘yona": ["Тойона", "Wedding gift"], "To‘yona ma’lumotlarini ko‘rish": ["Посмотреть реквизиты", "View gift details"], "Nusxa olish": ["Скопировать", "Copy"],
+  "Savollar uchun": ["По вопросам", "Questions"], "Bog‘lanish uchun": ["Контакты", "Contact"], "Marxaba bilan yaratildi": ["Создано с Marxaba", "Made with Marxaba"], "Marhamat bilan yaratildi": ["Создано с Marxaba", "Made with Marxaba"]
+});

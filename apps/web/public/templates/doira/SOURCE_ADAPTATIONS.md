@@ -1,0 +1,7 @@
+# Doira package notes
+
+The public package preserves the captured page body, `template.css`, `template.js`, `sound.js`, `drum.js`, `effects.js`, `scene.js`, `meta.js` (only the preview filename changes), and both source artwork files. Its 430×932 opening/catalog image is a portrait capture of the original three-beat opening scene. The source named `preview.webp` in metadata but did not contain that file; this package uses `preview.png`. The captured J/M monogram matches the shared catalog fixture's Javohir and Madina initials.
+
+The application head now loads local shared Marxaba runtime files and the exact locally hosted Playfair Display and Great Vibes font families requested by the capture. The captured body remains byte-for-byte equivalent after line-ending normalization. Its sample-invitation loader is omitted; the typed adapter supplies preview or invitation data. The static image is the source-faithful opening artwork; live catalog and creator previews receive all sample details through the canonical fixture and typed adapter.
+
+Captured fields without approved creator contract support: `venue.photo`, `toyona.bank`, and `toyona.note`. The source markup remains intact for fidelity; central rendering should omit unsupported values, and the bank-name field stays unavailable per the approved decision to remove it from the editor/database. The supported card number and cardholder remain bound to the gift contract.

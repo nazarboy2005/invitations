@@ -1,0 +1,13 @@
+{
+  "template": "oltin-kuz",
+  "route": "/templates/oltin-kuz/index.html",
+  "fixture": "apps/web/src/modules/catalog/preview-sample.json (birthday event sample)",
+  "locale": "uz-Latn",
+  "viewport": {
+    "width": 480,
+    "height": 854
+  },
+  "sourceIndexSha256": "4e4d84b6797e1ec65ee3e397dd539905badaa011f158b1a5f8bc912c884a13c8",
+  "sourceStyleSha256": "3dab19fb4d765641ef92c298f3cd5a208f35640e82edfca78af32194471f78ad",
+  "note": "Captured first reveal of the original invitation opening with sample data assembled from the central preview fixture; no sample overrides are packaged."
+}

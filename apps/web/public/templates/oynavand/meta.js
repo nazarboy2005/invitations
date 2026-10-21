@@ -1,0 +1,1 @@
+window.TEMPLATE_META = { slug: "oynavand", name: "Oynavand", tagline: "Oynakori gumbaz va ko‘zgu parchalari", mood: "Sehrli saroy nuri", tags: ["3D", "Milliy", "Luxury"], eventTypes: ["nikoh", "toy"], palette: ["#0D0F14", "#EAD9B8", "#3FB7B0"], music: "dutar + strings, magical, slow", preview: "preview.webp" };

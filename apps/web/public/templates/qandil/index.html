@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="uz" class="is-locked">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0b0d24">
+  <meta name="description" content="Qandil — Marxaba raqamli taklifnomasi">
+  <title>Marxaba · Qandil</title>
+  <link rel="stylesheet" href="../shared/nikoh/base.css">
+  <link rel="stylesheet" href="fonts.css">
+  <link rel="stylesheet" href="template.css">
+  <link rel="stylesheet" href="platform.css">
+  <script src="../shared/nikoh/vendor/gsap.min.js" defer></script>
+  <script src="../shared/nikoh/vendor/ScrollTrigger.min.js" defer></script>
+  <script src="../shared/nikoh/vendor/lz-string.min.js" defer></script>
+  <script src="../shared/nikoh/invite-codec.js" defer></script>
+  <script src="../shared/nikoh/i18n.js" defer></script><script src="i18n.js" defer></script>
+  <script src="platform-i18n.js" defer></script>
+  <script src="../shared/nikoh/platform-bridge.js" defer></script>
+  <script src="../shared/nikoh/core.js" defer></script>
+  <script src="meta.js" defer></script>
+  <script src="lantern.js" defer></script>
+  <script src="lightfield.js" defer></script>
+  <script src="template.js" defer></script>
+</head>
+<body>
+  <div class="backdrop" aria-hidden="true"></div>
+  <canvas class="motes" aria-hidden="true"></canvas>
+
+  <!-- 1. Intro film: a dark room, an unlit pierced-brass lantern. Pull it (or tap it) to light it. -->
+  <section class="intro" id="intro" aria-label="Taklifnomani ochish">
+    <p class="intro__greeting" data-slot="greeting"></p>
+    <p class="intro__kicker">Taklifnoma</p>
+    <button class="intro__lamp" id="open-invitation" type="button" aria-label="Chiroqni yoqish va taklifnomani ochish"></button>
+    <p class="intro__hint" aria-hidden="true">
+      <i class="intro__pull"><b></b></i>
+      <span class="intro__hint-pull">Chiroqni yoqish uchun pastga torting</span>
+      <span class="intro__hint-tap">yoki chiroqni bosing</span>
+    </p>
+  </section>
+
+  <main class="page" id="page">
+    <!-- 2. Hero: the lantern hangs in an open iwan; its light is the sky over Bukhara -->
+    <header class="hero" id="hero" data-section="hero">
+      <div class="sky" aria-hidden="true">
+        <canvas class="sky__dust"></canvas>
+        <i class="sky__moon"></i>
+      </div>
+      <canvas class="light" aria-hidden="true"></canvas>
+      <div class="city" aria-hidden="true">
+        <img class="city__far" src="art/skyline-far.webp" width="1200" height="600" alt="">
+        <i class="city__haze"></i>
+        <i class="city__windows"></i>
+        <img class="city__near" src="art/skyline-near.webp" width="1200" height="500" alt="">
+        <span class="city__lamps"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+      </div>
+      <svg class="iwan" viewBox="0 0 400 860" preserveAspectRatio="none" aria-hidden="true">
+        <defs>
+          <linearGradient id="q-iwan" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#140f1c"/><stop offset=".6" stop-color="#0e0b16"/><stop offset="1" stop-color="#07060d"/></linearGradient>
+          <linearGradient id="q-edge" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffcf8a" stop-opacity=".85"/><stop offset=".45" stop-color="#e09a52" stop-opacity=".45"/><stop offset="1" stop-color="#a5683a" stop-opacity="0"/></linearGradient>
+        </defs>
+        <path fill="url(#q-iwan)" fill-rule="evenodd" d="M-20-20H420V880H-20Z M26 880V246C26 150 92 72 200 -40C308 72 374 150 374 246V880Z"/>
+        <path class="iwan__edge" fill="none" stroke="url(#q-edge)" stroke-width="2.2" d="M26 880V246C26 150 92 72 200 -40C308 72 374 150 374 246V880"/>
+        <path fill="none" stroke="url(#q-edge)" stroke-width="1" stroke-dasharray="1.5 6" stroke-linecap="round" opacity=".7" d="M15 880V244C15 142 86 60 200 -54C314 60 385 142 385 244V880"/>
+        <path fill="none" stroke="#2a2033" stroke-width="5" d="M6 880V242C6 136 82 50 200 -66C318 50 394 136 394 242V880"/>
+      </svg>
+      <i class="hero__glow" aria-hidden="true"></i>
+      <div class="qandil" aria-hidden="true">
+        <i class="qandil__chain"></i>
+        <div class="qandil__lamp">
+          <canvas class="qandil__cold"></canvas>
+          <canvas class="qandil__warm"></canvas>
+          <canvas class="qandil__bloom"></canvas>
+          <canvas class="qandil__glow"></canvas>
+        </div>
+      </div>
+      <div class="hero__copy">
+        <p class="hero__kicker" data-slot="eventType"></p>
+        <h1 class="hero__names">
+          <span class="sr-only"><span data-slot="groom"></span> &amp; <span data-slot="bride"></span></span>
+          <svg class="names" viewBox="0 0 360 250" aria-hidden="true">
+            <defs>
+              <linearGradient id="q-ink" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff6e2"/><stop offset=".55" stop-color="#f6dca6"/><stop offset="1" stop-color="#e2b46a"/></linearGradient>
+              <linearGradient id="q-wipe"><stop offset="0" stop-color="#fff"/><stop offset=".46" stop-color="#fff"/><stop offset=".54" stop-color="#000"/><stop offset="1" stop-color="#000"/></linearGradient>
+              <filter id="q-halo" x="-20%" y="-40%" width="140%" height="180%"><feGaussianBlur in="SourceAlpha" stdDeviation="6" result="b"/><feFlood flood-color="#ffb45e" flood-opacity=".42"/><feComposite operator="in" in2="b"/><feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+              <mask id="q-m-groom-line" maskUnits="userSpaceOnUse"><rect class="wipe" data-name="groom" data-layer="line" x="-720" y="0" width="720" height="250" fill="url(#q-wipe)"/></mask>
+              <mask id="q-m-groom-fill" maskUnits="userSpaceOnUse"><rect class="wipe" data-name="groom" data-layer="fill" x="-720" y="0" width="720" height="250" fill="url(#q-wipe)"/></mask>
+              <mask id="q-m-amp-line" maskUnits="userSpaceOnUse"><rect class="wipe" data-name="amp" data-layer="line" x="-720" y="0" width="720" height="250" fill="url(#q-wipe)"/></mask>
+              <mask id="q-m-amp-fill" maskUnits="userSpaceOnUse"><rect class="wipe" data-name="amp" data-layer="fill" x="-720" y="0" width="720" height="250" fill="url(#q-wipe)"/></mask>
+              <mask id="q-m-bride-line" maskUnits="userSpaceOnUse"><rect class="wipe" data-name="bride" data-layer="line" x="-720" y="0" width="720" height="250" fill="url(#q-wipe)"/></mask>
+              <mask id="q-m-bride-fill" maskUnits="userSpaceOnUse"><rect class="wipe" data-name="bride" data-layer="fill" x="-720" y="0" width="720" height="250" fill="url(#q-wipe)"/></mask>
+            </defs>
+            <g filter="url(#q-halo)">
+              <text class="names__line" data-name="groom" x="180" y="82" mask="url(#q-m-groom-line)" data-slot="groom"></text>
+              <text class="names__fill" data-name="groom" x="180" y="82" mask="url(#q-m-groom-fill)" data-slot="groom"></text>
+              <text class="names__amp names__line" data-name="amp" x="180" y="138" mask="url(#q-m-amp-line)">&amp;</text>
+              <text class="names__amp names__fill" data-name="amp" x="180" y="138" mask="url(#q-m-amp-fill)">&amp;</text>
+              <text class="names__line" data-name="bride" x="180" y="208" mask="url(#q-m-bride-line)" data-slot="bride"></text>
+              <text class="names__fill" data-name="bride" x="180" y="208" mask="url(#q-m-bride-fill)" data-slot="bride"></text>
+            </g>
+          </svg>
+        </h1>
+        <p class="hero__date"><span data-slot="date.day"></span><i aria-hidden="true">✦</i><span data-slot="date.monthNumber"></span><i aria-hidden="true">✦</i><span data-slot="date.year"></span></p>
+        <p class="hero__when"><span data-slot="date.weekday"></span> · <span data-slot="date.time"></span></p>
+      </div>
+      <a class="hero__cue" href="#invitation-text"><span>Taklifnomani ko‘rish</span><i aria-hidden="true"></i></a>
+    </header>
+
+    <!-- 3. Invitation text: a letter read by the lantern's light -->
+    <section class="section section--letter" id="invitation-text" data-section="invitation-text">
+      <div class="letter">
+        <img class="letter__lamp mini-lamp" alt="" width="60" height="126">
+        <p class="eyebrow">Aziz mehmonimiz</p>
+        <p class="letter__greeting" data-slot="greeting"></p>
+        <p class="letter__message" data-slot="message"></p>
+        <span class="rule" aria-hidden="true"><i></i></span>
+        <p class="letter__label" data-slot="hostsLabel"></p>
+        <p class="letter__hosts" data-slot="hosts"></p>
+      </div>
+    </section>
+
+    <!-- 4. Date: the calendar inside a pierced brass ring that turns as you scroll -->
+    <section class="section section--date" id="date" data-section="date">
+      <p class="eyebrow">Uchrashuv kuni</p>
+      <h2 class="section__title">Baxtli kun</h2>
+      <div class="dial">
+        <i class="dial__ring" aria-hidden="true"></i>
+        <div class="dial__face">
+          <div class="calendar" data-calendar aria-label="To‘y kuni taqvimi"></div>
+          <p class="dial__time"><span data-slot="date.weekday"></span><i aria-hidden="true">✦</i><span data-slot="date.time"></span></p>
+        </div>
+      </div>
+      <p class="countdown__title">Baxtli kungacha</p>
+      <div class="countdown" data-countdown aria-live="off">
+        <div><strong data-unit="days">00</strong><span>kun</span></div>
+        <div><strong data-unit="hours">00</strong><span>soat</span></div>
+        <div><strong data-unit="minutes">00</strong><span>daqiqa</span></div>
+        <div><strong data-unit="seconds">00</strong><span>soniya</span></div>
+        <p data-countdown-past hidden>Bu kunni birga nishonlaganingiz uchun rahmat!</p>
+      </div>
+      <button class="button button--outline" type="button" data-ics>Kalendarga qo‘shish</button>
+    </section>
+
+    <!-- 5. Program: a chain of small lanterns lit one by one -->
+    <section class="section section--program" id="program" data-section="program">
+      <p class="eyebrow">Birgalikdagi oqshom</p>
+      <h2 class="section__title">To‘y dasturi</h2>
+      <div class="timeline">
+        <span class="timeline__chain" aria-hidden="true"><i class="timeline__fill"></i></span>
+        <ol class="program" data-list="program">
+          <template>
+            <li class="program__item"><time data-field="time"></time><span class="program__lamp" aria-hidden="true"></span><span class="program__title" data-field="title"></span></li>
+          </template>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 6. Venue -->
+    <section class="section section--venue" id="venue" data-section="venue">
+      <p class="eyebrow">Manzil</p>
+      <h2 class="section__title">To‘y manzili</h2>
+      <figure class="venue__photo"><img data-photo="venue.photo" alt="To‘y manzili" width="800" height="1000" loading="lazy" decoding="async"></figure>
+      <h3 class="venue__name" data-slot="venue.name"></h3>
+      <p class="venue__address" data-slot="venue.address"></p>
+      <div class="button-row">
+        <a class="button button--brass" data-map="yandex" target="_blank" rel="noopener noreferrer">Yandex xaritada</a>
+        <a class="button button--outline" data-map="google" target="_blank" rel="noopener noreferrer">Google xaritada</a>
+      </div>
+    </section>
+
+    <section class="section section--dress" id="dresscode" data-section="dresscode">
+      <p class="eyebrow">Kiyinish uslubi</p>
+      <h2 class="section__title">Dress-kod</h2>
+      <div class="dresscode" data-dresscode><svg class="dresscode__icon" viewBox="0 0 64 40" aria-hidden="true"><path d="M28.5 9.5a3.5 3.5 0 1 1 3.5 3.5c-1.6 0-3 1.2-3 2.8v2.2L4 34.5h56L32 18"/></svg><p class="dresscode__style" data-slot="dressCode.style"></p><p class="dresscode__text" data-slot="dressCode.text"></p><ul class="dresscode__palette" data-list="dresscode"><template><li><i data-field-attr="style:style"></i><span data-field="name"></span></li></template></ul><p class="dresscode__note" data-slot="dressCode.note"></p></div>
+    </section>
+
+    <!-- 7. Gallery -->
+    <section class="section section--gallery" id="gallery" data-section="gallery">
+      <p class="eyebrow">Xotiralar</p>
+      <h2 class="section__title">Lahzalar</h2>
+      <div class="gallery__frame">
+        <div class="gallery" data-gallery data-list="gallery" aria-label="Suratlar galereyasi">
+          <template>
+            <button class="gallery__item" type="button" data-field-attr="aria-label:alt" aria-label="Suratni kattalashtirish"><img data-field-attr="src:src,alt:alt" data-photo alt="To‘y surati" width="640" height="860" loading="lazy" decoding="async"></button>
+          </template>
+        </div>
+      </div>
+      <div class="gallery__nav">
+        <button class="gallery__arrow" type="button" data-gallery-prev aria-label="Oldingi surat">‹</button>
+        <div class="gallery__dots" data-gallery-dots aria-label="Surat tanlash"></div>
+        <button class="gallery__arrow" type="button" data-gallery-next aria-label="Keyingi surat">›</button>
+      </div>
+    </section>
+
+    <!-- 8. RSVP: a lit card under the lantern -->
+    <section class="section section--rsvp" id="rsvp" data-section="rsvp">
+      <div class="rsvp-card">
+        <img class="rsvp-card__lamp mini-lamp" alt="" width="54" height="113">
+        <p class="eyebrow">Bizga xabar bering</p>
+        <h2 class="section__title">Tashrifingizni tasdiqlang</h2>
+        <p class="rsvp-card__lead">Javobingiz biz uchun muhim.</p>
+        <form data-rsvp>
+          <div class="rsvp__fields" data-rsvp-form>
+            <div class="rsvp__choices" role="group" aria-label="Tashrif javobi">
+              <button type="button" data-rsvp-choice="yes" aria-pressed="false"><i aria-hidden="true">✓</i>Kelaman</button>
+              <button type="button" data-rsvp-choice="no" aria-pressed="false"><i aria-hidden="true">✕</i>Kelmayman</button>
+              <button type="button" data-rsvp-choice="maybe" aria-pressed="false"><i aria-hidden="true">?</i>Hali bilmayman</button>
+            </div>
+            <label class="field"><span>Ismingiz</span><input type="text" name="name" autocomplete="name" maxlength="80" required></label>
+            <div class="rsvp__party" data-rsvp-party>
+              <span>Necha kishi bo‘lasiz?</span>
+              <div class="stepper"><button type="button" data-rsvp-minus aria-label="Mehmonlar sonini kamaytirish">−</button><output data-rsvp-count>1</output><button type="button" data-rsvp-plus aria-label="Mehmonlar sonini oshirish">+</button></div>
+            </div>
+            <p class="rsvp__deadline" data-rsvp-deadline></p>
+            <button class="button button--brass" type="submit" data-rsvp-submit>Javobni yuborish</button>
+          </div>
+          <div class="rsvp__done" data-rsvp-done hidden aria-live="polite">
+            <img class="rsvp__lamp mini-lamp" alt="" width="64" height="134">
+            <p class="rsvp__thanks">Javobingiz uchun rahmat!</p>
+            <p class="rsvp__summary" data-rsvp-summary></p>
+            <button class="text-link" type="button" data-rsvp-change>Javobni o‘zgartirish</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- 9. Wishes -->
+    <section class="section section--wishes" id="wishes" data-section="wishes">
+      <p class="eyebrow">Yurakdan</p>
+      <h2 class="section__title">Tilaklar</h2>
+      <ul class="wishes" data-list="wishes">
+        <template>
+          <li class="wishes__item"><p data-field="text"></p><strong data-field="name"></strong></li>
+        </template>
+      </ul>
+      <form class="wish-form" data-wishes-form>
+        <label class="field"><span>Ismingiz</span><input name="name" maxlength="60" required></label>
+        <label class="field"><span>Tilagingiz</span><textarea name="text" rows="4" maxlength="360" required></textarea></label>
+        <button class="button button--outline" type="submit">Tilak yuborish</button>
+        <p class="wish-form__feedback" data-wishes-feedback role="status" aria-live="polite"></p>
+      </form>
+    </section>
+
+    <!-- 10. To‘yona: a pierced brass casket that opens on tap -->
+    <section class="section section--gift" id="toyona" data-section="toyona">
+      <p class="eyebrow">Ezgu niyatlar</p>
+      <h2 class="section__title">To‘yona</h2>
+      <p class="gift__note" data-slot="toyona.note"></p>
+      <div class="gift">
+        <button class="gift__box" type="button" aria-expanded="false" aria-controls="gift-card">
+          <span class="gift__card" id="gift-card">
+            <span class="gift__bank" data-slot="toyona.bank"></span>
+            <strong data-slot="toyona.cardNumber"></strong>
+            <span class="gift__holder" data-slot="toyona.cardHolder"></span>
+          </span>
+          <span class="gift__lid" aria-hidden="true"><i></i></span>
+          <span class="gift__label">To‘yona ma’lumotlarini ko‘rish</span>
+        </button>
+        <button class="button button--outline gift__copy" type="button" data-copy="toyona.cardNumber">Nusxa olish</button>
+      </div>
+    </section>
+
+    <!-- 11. Contacts -->
+    <section class="section section--contacts" id="contacts" data-section="contacts">
+      <p class="eyebrow">Savollar uchun</p>
+      <h2 class="section__title">Bog‘lanish uchun</h2>
+      <ul class="contacts" data-list="contacts">
+        <template>
+          <li><a data-field-attr="href:href" target="_blank" rel="noopener noreferrer"><span data-field="label"></span><strong data-field="value"></strong><i aria-hidden="true">↗</i></a></li>
+        </template>
+      </ul>
+    </section>
+
+    <!-- 12. Footer -->
+    <footer class="footer" id="footer" data-section="footer">
+      <img class="footer__lamp mini-lamp" alt="" width="70" height="147">
+      <p class="footer__names"><span data-slot="groom"></span> <span class="amp">&amp;</span> <span data-slot="bride"></span></p>
+      <p class="footer__date" data-slot="date.long"></p>
+      <small data-slot="footer">Marxaba bilan yaratildi</small>
+    </footer>
+  </main>
+
+  <button class="music-toggle" type="button" data-music-toggle hidden aria-label="Musiqani yoqish"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V6l10-2v12"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="16" r="2.5"/></svg></button>
+  <audio data-music loop preload="none" hidden></audio>
+  <div class="toast" data-toast role="status" aria-live="polite"></div>
+</body>
+</html>

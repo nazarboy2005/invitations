@@ -1,0 +1,52 @@
+/* [project]/apps/web/src/app/preview/preview.module.css [app-client] (css) */
+.preview-module__bDhGwW__galleryPage {
+  width: min(1220px, 100% - 48px);
+  margin: 0 auto;
+  padding: 52px 0 90px;
+}
+
+.preview-module__bDhGwW__galleryHeader {
+  gap: 10px;
+  margin-bottom: 32px;
+  display: grid;
+}
+
+.preview-module__bDhGwW__backLink {
+  width: fit-content;
+  color: var(--muted);
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 14px;
+  font-size: 13px;
+  display: inline-flex;
+}
+
+.preview-module__bDhGwW__galleryHeader > p {
+  color: var(--muted);
+  margin: 0;
+  font-size: 13px;
+}
+
+.preview-module__bDhGwW__galleryHeader h1 {
+  font-family: var(--font-display);
+  letter-spacing: -1px;
+  margin: 0;
+  font-size: clamp(34px, 5vw, 58px);
+  font-weight: 400;
+}
+
+.preview-module__bDhGwW__galleryHeader > span {
+  max-width: 560px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+@media (max-width: 560px) {
+  .preview-module__bDhGwW__galleryPage {
+    width: min(100% - 32px, 1220px);
+    padding-top: 32px;
+  }
+}
+
+/*# sourceMappingURL=apps_web_src_app_preview_preview_module_css_1igg3k2-ikub5._.single.css.map*/

@@ -43,7 +43,7 @@
  }
  const once = (trigger, start = 'top 80%') => ({ trigger, start, once: true });
  // Skip animations whose trigger sits in a section hidden by core (no photos, no gift, ...).
- const guard = fn => function (targets, from, to) { const st = (to || from || {}).scrollTrigger; const t = st && (typeof st.trigger === 'string' ? document.querySelector(st.trigger) : st.trigger); if (st && !live(t)) return null; const el = typeof targets === 'string' ? document.querySelector(targets) : targets; if (typeof targets === 'string' && !el) return null; return fn.apply(this, arguments); };
+ const guard = fn => function (targets, from, to) { const st = (to || from || {}).scrollTrigger; const t = st && (typeof st.trigger === 'string' ? document.querySelector(st.trigger) : st.trigger); if (st && !live(t)) return null; const el = typeof targets === 'string' ? document.querySelector(targets) : targets; if ((typeof targets === 'string' && !el) || (Array.isArray(targets) && !targets.length)) return null; return fn.apply(this, arguments); };
 
  /* ---------- Cover ---------- */
  function cover() {
@@ -231,7 +231,7 @@
  function init() {
   if (!window.gsap || !window.ScrollTrigger || reduced()) return;
   gsap.registerPlugin(ScrollTrigger);
-  gsap.fromTo = guard(gsap.fromTo.bind(gsap)); gsap.to = guard(gsap.to.bind(gsap));
+  gsap.fromTo = guard(gsap.fromTo.bind(gsap)); gsap.to = guard(gsap.to.bind(gsap)); gsap.set = guard(gsap.set.bind(gsap));
   document.documentElement.classList.add('sh-motion');
   cover(); tickers(); spreads(); letter(); date(); program(); venue(); gallery(); rsvp(); rest();
   window.addEventListener('load', () => ScrollTrigger.refresh(), { once: true });

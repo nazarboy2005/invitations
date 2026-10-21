@@ -1,0 +1,10 @@
+{
+  "asset": "preview.png",
+  "sha256": "86cc6761fcb41245546c185f175536da563e3df4200f66573478e34c02136637",
+  "width": 430,
+  "height": 932,
+  "viewport": "430x932 portrait",
+  "sourceOpening": "#intro",
+  "sourcePackage": "Invitations - this folder will be removed from production/Marxaba/Nikoh/templates/doira",
+  "captureNotes": "Portrait capture of the first, locked opening state. It shows the curtain-and-doira intro, the J/M sample monogram, locale switch, and skip control. These elements correspond to the source #intro markup, source intro styles, and the byte-identical packaged velvet-curtains-v2.webp artwork. The reference meta.js points to preview.webp, but that file is absent from the captured source folder; this PNG is the packaged catalog artwork."
+}

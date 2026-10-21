@@ -1,0 +1,9 @@
+# Shahzoda source package
+
+The captured Shahzoda HTML body, `template.css`, `template.js`, `meta.js`, and every `art/` file are preserved. The captured `sample-overrides.js` and Marxaba sample-invitation loader are not packaged. The source did not include a catalog preview image; `preview.webp` is a 720×1280 capture of the actual opening scene rendered with the canonical catalog fixture, recorded in `preview.provenance.json`.
+
+`index.html` changes are limited to local app wiring and contract binding: Google Fonts imports are served locally through `fonts.css`; shared runtime dependencies resolve under `../shared/nikoh/`; source sample metadata/date are removed; the static intro date becomes date slots; and the source's `extras.celebrant` slots bind to the first invitation person (`groom`). The template supports `sunnat-toyi`, matching its captured `sunnat` metadata. For the canonical wedding fixture in an empty catalog preview, the isolated renderer overrides the sample event label to Sunnat; authored event labels on Sunnat invitations remain unchanged.
+
+Contract gaps: the source has an optional venue photo slot (`venue.photo`) unsupported by the current contract, a `toyona.bank` slot removed by user requirement, and a `toyona.note` slot without a contract field. These remain blank and are not populated. The shared creator currently labels the two person inputs as “Kuyov ismi” and “Kelin ismi” for every event; a Sunnat-specific label for the honoree requires central editor integration. This package maps the first person to the source celebrant without changing the shared schema or editor.
+
+The opening uses source artwork and the original animation. The captured script already respects `prefers-reduced-motion`. Fixed template copy relies on the shared Marxaba locale dictionary and Uzbek Cyrillic transliteration; page title and metadata are localized in `locale-copy.js`.

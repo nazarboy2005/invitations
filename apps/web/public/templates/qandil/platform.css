@@ -1,0 +1,4 @@
+/* Qandil source has a gift-note slot; the shared invitation contract has none. */
+#toyona .gift__note:empty {
+  display: none;
+}

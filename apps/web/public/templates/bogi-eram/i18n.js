@@ -1,4 +1,6 @@
 Object.assign(window.MARHAMAT_I18N = window.MARHAMAT_I18N || {}, {
+  "Bog‘i Eram — jannat bog‘i darvozasi ortidagi nafis taklifnoma": ["Bog‘i Eram — изящное приглашение за воротами райского сада", "Bog‘i Eram — an elegant invitation beyond the gates of a garden paradise"],
+  "Bog‘ darvozasi ochiladi — Bog‘i Eram sizni chorlaydi": ["Ворота сада открываются — Bog‘i Eram приглашает вас", "The garden gate opens — Bog‘i Eram welcomes you"],
   "Sizga taklifnoma": ["Вам приглашение", "An invitation for you"],
   "Darvozani ochish uchun bosing": ["Нажмите, чтобы открыть ворота", "Tap to open the garden gate"], "Bog‘ darvozasini ochish": ["Открыть ворота сада", "Open the garden gate"],
   "O‘tkazib yuborish": ["Пропустить", "Skip"],

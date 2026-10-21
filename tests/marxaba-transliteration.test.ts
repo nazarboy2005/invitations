@@ -14,6 +14,18 @@ test("Marxaba Uzbek Cyrillic transliteration preserves Uzbek letters", () => {
   assert.equal(transliterate("O\u2018zbek to\u2018yi"), "\u040e\u0437\u0431\u0435\u043a \u0442\u045e\u0439\u0438");
   assert.equal(transliterate("G\u2018ulhayo va O\u2018rik"), "\u0492\u0443\u043b\u04b3\u0430\u0451 \u0432\u0430 \u040e\u0440\u0438\u043a");
   assert.equal(transliterate("Shahzoda, Chust va Yangi"), "\u0428\u0430\u04b3\u0437\u043e\u0434\u0430, \u0427\u0443\u0441\u0442 \u0432\u0430 \u042f\u043d\u0433\u0438");
+  assert.equal(
+    transliterate("ma\u2019lumotlarini ko\u2018rish"),
+    "\u043c\u0430\u044a\u043b\u0443\u043c\u043e\u0442\u043b\u0430\u0440\u0438\u043d\u0438 \u043a\u045e\u0440\u0438\u0448",
+  );
+  assert.equal(
+    transliterate("san'at va ta\u2019lim"),
+    "\u0441\u0430\u043d\u044a\u0430\u0442 \u0432\u0430 \u0442\u0430\u044a\u043b\u0438\u043c",
+  );
+  assert.equal(
+    transliterate("To\u2018yona ma\u2019lumotlarini ko\u2018rish"),
+    "\u0422\u045e\u0451\u043d\u0430 \u043c\u0430\u044a\u043b\u0443\u043c\u043e\u0442\u043b\u0430\u0440\u0438\u043d\u0438 \u043a\u045e\u0440\u0438\u0448",
+  );
 });
 
 test("Marxaba Cyrillic and Russian calendar labels are valid localized text", () => {

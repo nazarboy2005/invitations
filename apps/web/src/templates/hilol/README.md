@@ -1,0 +1,19 @@
+# Hilol adapter
+
+`HilolInvitation` runs the captured Hilol iftar template through the shared Marxaba iframe adapter. Its public source and assets are isolated under `apps/web/public/templates/hilol`; original Marxaba captures remain untouched. Creator preview and public display use the same renderer.
+
+## Source package and changes
+
+The package includes the captured HTML body, `template.css`, `template.js`, `i18n.js`, `meta.js`, and all three original `art/` SVGs. It excludes `sample-overrides.js` and the Marxaba site sample/runtime. The HTML head points to the shared platform runtime and local font faces. Captured Amiri and Manrope fonts are packaged in WOFF2 subsets covering Latin, Uzbek Latin extensions, and Cyrillic where the original family provides it. `i18n.js` retains the captured fixed interface translations and adds localized page title/description metadata. Translation entries used only by the captured sample invitation (sample host/venue names, program, message, dress code, palette and celebrant) are removed along with the sample override so that these values come from the invitation adapter. In `template.js`, the Three.js path and sunrise progress timezone use local platform values; the two Three.js `Vector3` scale tweens use a scalar proxy and `setScalar` to preserve their timing and easing without GSAP's unsupported `x/y/z` property warnings. The original gallery's bounded-scroll edge now marks the final card active so its next control wraps smoothly to the first. Everything else in the source JS, CSS, and body is checked against the untouched capture.
+
+The metadata calls for `preview.webp`, but no Hilol preview file is present in the capture. The packaged portrait WebP is captured from the running source opening at 450×800 / DPR 1 using canonical catalog preview names and date data; the screenshot is a browser render, not substitute artwork.
+
+## Data mapping and gaps
+
+The shared adapter maps the first localized person to the source's `extras.celebrant` slot. The source consumes invitation greeting/message/hosts, date/time/timezone, event label, venue name/address/map, program, optional dress code/music, gallery, RSVP, guest wishes (shown as duolar), gift/to‘yona, contacts, and footer. Repeating lists use shared adapter item IDs and ordering. Catalog sample data remains preview-only; public invitations do not receive sample values.
+
+Captured metadata declares category `iftorlik` and event types `iftorlik` and `osh`. The typed catalog and additive migration preserve that category and compatibility; the design remains unpublished until its remaining release checks pass. The capture includes `toyona.bank` and `toyona.note` slots, while the current gift contract has no bank-name or note fields; those stay empty. Venue artwork is a fixed source illustration rather than an unsupported venue-photo field. The captured solar progress assumed `Asia/Tashkent`; it now follows the invitation timezone where available.
+
+## Verification
+
+The focused test checks the exact captured body/CSS/meta and all original fixed-interface translations while asserting sample-only data translations are absent, the minimal documented script/head changes, local font and runtime dependencies, the actual portrait WebP dimensions, metadata compatibility, adapter wiring, and unsupported contract fields. Packaging and type checks do not establish catalog/database integration or publication readiness.

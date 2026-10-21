@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="uz" class="is-locked">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#fff7ec"><meta name="description" content="Yangi uy to‘yi · Marxaba taklifnomasi">
+<meta property="og:type" content="website"><meta property="og:title" content="Yangi uy to‘yi · Marxaba"><meta property="og:description" content="Yangi xonadonimizdagi quvonchli oqshomga marhamat"><meta property="og:image" content="preview.webp"><meta property="og:image:width" content="480"><meta property="og:image:height" content="720"><meta name="twitter:card" content="summary_large_image">
+<title>Yangi uy to‘yi · Taklifnoma</title>
+<link rel="stylesheet" href="fonts.css"><link rel="preload" as="image" href="art/house-iso.webp" fetchpriority="high"><link rel="stylesheet" href="../shared/nikoh/base.css"><link rel="stylesheet" href="template.css">
+<script src="vendor/gsap.min.js" defer></script><script src="vendor/ScrollTrigger.min.js" defer></script><script src="vendor/lz-string.min.js" defer></script>
+<script src="../shared/nikoh/invite-codec.js" defer></script><script src="../shared/nikoh/i18n.js" defer></script><script src="i18n.js" defer></script><script src="../shared/nikoh/platform-bridge.js" defer></script><script src="../shared/nikoh/core.js" defer></script><script src="meta.js" defer></script><script src="template.js" defer></script>
+</head>
+<body>
+  <section class="intro" id="intro" aria-label="Taklifnomani ochish">
+    <div class="intro__sky" aria-hidden="true"><i></i><i></i><i></i></div>
+    <div class="intro__plot" aria-hidden="true"></div>
+    <img class="intro__poster" src="art/house-iso.webp" width="900" height="600" alt="" fetchpriority="high">
+    <div class="intro__glow" aria-hidden="true"><i></i><i></i><i></i></div>
+    <canvas class="house-canvas" id="house-canvas" aria-hidden="true"></canvas>
+    <div class="intro__copy">
+      <p class="intro__greeting" data-slot="greeting"></p>
+      <p class="intro__kicker">YANGI XONADON · YANGI XURSANDCHILIK</p>
+      <h1 class="intro__title">Yangi uy to‘yi</h1>
+      <p class="intro__hosts" data-slot="hosts"></p>
+      <p class="intro__date" data-slot="date.long"></p>
+      <button class="open-button" id="open-invitation" type="button"><span>Taklifnomani ochish</span><i aria-hidden="true">⌑</i></button>
+    </div>
+    <div class="intro__act-three" aria-hidden="true"><span data-slot="extras.celebrant"></span><i></i></div>
+    <span class="intro__horizon" aria-hidden="true"></span>
+  </section>
+
+  <main class="page" id="page">
+    <header class="hero" id="hero" data-section="hero">
+      <div class="hero__sun" aria-hidden="true"></div>
+      <div class="hero__house-wrap"><img class="hero__house" src="art/house-iso.webp" width="900" height="600" alt="" loading="eager"><span class="hero__spark hero__spark--one"></span><span class="hero__spark hero__spark--two"></span></div>
+      <div class="hero__copy"><p class="hero__eyebrow" data-slot="eventType"></p><h2 class="hero__title">Eshigimiz doim ochiq</h2><p class="hero__family" data-slot="extras.celebrant"></p><p class="hero__date" data-slot="date.long"></p><a class="hero__link" href="#invitation-text">Uyimizga marhamat <span aria-hidden="true">↓</span></a></div>
+      <span class="hero__ground" aria-hidden="true"></span>
+    </header>
+
+    <section class="section room room--living" id="invitation-text" data-section="invitation-text">
+      <div class="room__vignette room__vignette--living" aria-hidden="true"><span class="room__lamp"></span><span class="room__sofa"></span><span class="room__window"></span><span class="room__plant"></span></div>
+      <p class="eyebrow">MEHMONXONAMIZDAN</p><h2 class="section__title">Sizni kutamiz</h2>
+      <p class="lead" data-slot="greeting"></p><p class="message" data-slot="message"></p>
+      <div class="hosts-card"><span class="hosts-card__seal" aria-hidden="true">⌂</span><span class="hosts-card__label" data-slot="hostsLabel"></span><strong data-slot="hosts"></strong></div>
+    </section>
+
+    <section class="section room room--date" id="date" data-section="date">
+      <div class="room__vignette room__vignette--clock" aria-hidden="true"><span class="clock-face"><i></i><b></b></span></div>
+      <p class="eyebrow">DEVORDAGI KALENDAR</p><h2 class="section__title">Uchrashuv kuni</h2>
+      <div class="calendar-frame"><div class="calendar" data-calendar aria-label="To‘y kuni taqvimi"></div></div>
+      <p class="date__time"><span aria-hidden="true">◷</span><span data-slot="date.time"></span></p>
+      <p class="countdown__title">Baxtli kungacha</p>
+      <div class="countdown" data-countdown aria-live="off">
+        <div><strong data-unit="days">00</strong><span>kun</span></div><div><strong data-unit="hours">00</strong><span>soat</span></div><div><strong data-unit="minutes">00</strong><span>daqiqa</span></div><div><strong data-unit="seconds">00</strong><span>soniya</span></div>
+        <p data-countdown-past hidden>Bu kunni birga nishonlaganingiz uchun rahmat!</p>
+      </div>
+      <button class="pill pill--line" type="button" data-ics>Kalendarga qo‘shish</button>
+    </section>
+
+    <section class="section room room--kitchen" id="program" data-section="program">
+      <div class="room__vignette room__vignette--kitchen" aria-hidden="true"><span class="kitchen__shelf"></span><span class="kitchen__pot"></span><span class="kitchen__steam"></span></div>
+      <p class="eyebrow">DASTURXON ATROFIDA</p><h2 class="section__title">To‘y dasturi</h2>
+      <p class="section__note">Bir dasturxon atrofida, ezgu tilaklar ila</p>
+      <ol class="program" data-list="program"><template><li class="program__item"><time data-field="time"></time><span data-field="title"></span><i aria-hidden="true"></i></li></template></ol>
+    </section>
+
+    <section class="section room room--venue" id="venue" data-section="venue">
+      <div class="room__vignette room__vignette--door" aria-hidden="true"><span class="door__frame"><i></i></span><span class="door__mat"></span></div>
+      <p class="eyebrow">YANGI MANZILIMIZ</p><h2 class="section__title">To‘y manzili</h2>
+      <div class="venue-card"><div class="venue-card__art"><img data-photo="venue.photo" alt="Yangi uyimiz" width="800" height="420" loading="lazy" decoding="async"><span aria-hidden="true">⌂</span><i aria-hidden="true"></i></div><h3 data-slot="venue.name"></h3><p data-slot="venue.address"></p>
+        <div class="venue-card__links"><a class="pill pill--line" data-map="yandex" target="_blank" rel="noopener noreferrer">Yandex xaritada</a><a class="pill pill--line" data-map="google" target="_blank" rel="noopener noreferrer">Google xaritada</a></div>
+      </div>
+    </section>
+
+    <section class="section room room--dress" id="dresscode" data-section="dresscode">
+      <div class="room__vignette room__vignette--swatches" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+      <p class="eyebrow">YENGIL TAVSIYA</p><h2 class="section__title">Kiyinish uslubi</h2>
+      <div class="dresscode" data-dresscode><p class="dresscode__style" data-slot="dressCode.style"></p><p class="dresscode__text" data-slot="dressCode.text"></p><ul class="dresscode__palette" data-list="dresscode"><template><li><i data-field-attr="style:style"></i><span data-field="name"></span></li></template></ul><p class="dresscode__note" data-slot="dressCode.note"></p></div>
+    </section>
+
+    <section class="section room room--garden" id="gallery" data-section="gallery">
+      <div class="garden-scenery" aria-hidden="true"><span class="garden-scenery__trellis"></span><span class="garden-scenery__vine"></span><span class="garden-scenery__tandir">♨</span></div>
+      <p class="eyebrow">BOG‘IMIZDAN</p><h2 class="section__title">Yangi uyimiz</h2><p class="section__note">Har bir burchagida mehr va xotira</p>
+      <div class="gallery__frame"><button class="gallery__arrow" type="button" data-gallery-prev aria-label="Oldingi surat">‹</button><div class="gallery" data-gallery data-list="gallery" aria-label="Suratlar galereyasi"><template><button class="gallery__item" type="button" data-field-attr="aria-label:alt"><img data-field-attr="src:src,alt:alt" data-photo alt="Yangi uyimiz" width="640" height="760" loading="lazy" decoding="async"></button></template></div><button class="gallery__arrow" type="button" data-gallery-next aria-label="Keyingi surat">›</button></div><div class="gallery__dots" data-gallery-dots aria-label="Surat tanlash"></div>
+    </section>
+
+    <section class="section room room--rsvp" id="rsvp" data-section="rsvp">
+      <div class="rsvp-doors" aria-hidden="true"><i></i><i></i><i></i></div><p class="eyebrow">ESHIGIMIZ SIZ UCHUN OCHIQ</p><h2 class="section__title">Tashrifingizni tasdiqlang</h2><p class="section__note">Javobingiz biz uchun muhim.</p>
+      <form data-rsvp><div class="rsvp__fields" data-rsvp-form><div class="rsvp__choices" role="group" aria-label="Tashrif javobi"><button type="button" data-rsvp-choice="yes" aria-pressed="false">Kelaman</button><button type="button" data-rsvp-choice="no" aria-pressed="false">Kelmayman</button><button type="button" data-rsvp-choice="maybe" aria-pressed="false">Hali bilmayman</button></div>
+        <label class="field"><span>Ismingiz</span><input type="text" name="name" autocomplete="name" maxlength="80" required></label><div class="rsvp__party" data-rsvp-party><span>Necha kishi bo‘lasiz?</span><div class="stepper"><button type="button" data-party-step="-1" aria-label="Mehmonlar sonini kamaytirish">−</button><output>1</output><button type="button" data-party-step="1" aria-label="Mehmonlar sonini oshirish">+</button></div></div>
+        <p class="rsvp__deadline" data-rsvp-deadline></p><button class="pill pill--solid" type="submit" data-rsvp-submit>Javobni yuborish</button></div><div class="rsvp__done" data-rsvp-done hidden aria-live="polite"><span class="rsvp__warmth" aria-hidden="true">✦</span><p>Javobingiz uchun rahmat!</p><p data-rsvp-summary></p><button class="text-link" type="button" data-rsvp-change>Javobni o‘zgartirish</button></div></form>
+    </section>
+
+    <section class="section room room--wishes" id="wishes" data-section="wishes">
+      <p class="eyebrow">UYIMIZGA EZGU TILAK</p><h2 class="section__title">Tilaklar</h2>
+      <ul class="wishes" data-list="wishes"><template><li class="wishes__item"><span aria-hidden="true">“</span><p data-field="text"></p><strong data-field="name"></strong></li></template></ul>
+      <form class="wish-form" data-wishes-form><label class="field"><span>Ismingiz</span><input name="name" maxlength="60" required></label><label class="field"><span>Tilagingiz</span><textarea name="text" rows="3" maxlength="360" required></textarea></label><button class="pill pill--line" type="submit">Tilak yuborish</button><p data-wishes-feedback role="status" aria-live="polite"></p></form>
+    </section>
+
+    <section class="section room room--gift" id="toyona" data-section="toyona">
+      <div class="gift-box" aria-hidden="true"><i></i><b></b></div><p class="eyebrow">EShIK OSTIDAGI SOVG‘A</p><h2 class="section__title">To‘yona</h2><p class="section__note" data-slot="toyona.note"></p>
+      <details class="gift"><summary><span>♢</span><b>To‘yona ma’lumotlarini ko‘rish</b><i aria-hidden="true">＋</i></summary><div class="gift__details"><span data-slot="toyona.bank"></span><strong data-slot="toyona.cardNumber"></strong><span data-slot="toyona.cardHolder"></span><button class="pill pill--line" type="button" data-copy="toyona.cardNumber">Nusxa olish</button></div></details>
+    </section>
+
+    <section class="section room room--contacts" id="contacts" data-section="contacts"><p class="eyebrow">SAVOLINGIZ BORMI?</p><h2 class="section__title">Bog‘lanish uchun</h2><ul class="contacts" data-list="contacts"><template><li><a data-field-attr="href:href" target="_blank" rel="noopener noreferrer"><span data-field="label"></span><strong data-field="value"></strong><i aria-hidden="true">↗</i></a></li></template></ul></section>
+    <footer class="footer" id="footer" data-section="footer"><div class="footer__roof" aria-hidden="true">⌂</div><p class="footer__hosts" data-slot="hosts"></p><small data-slot="date.long"></small><span data-slot="footer">Marxaba bilan yaratildi</span></footer>
+  </main>
+  <button class="music-toggle" type="button" data-music-toggle hidden aria-label="Musiqani yoqish">♫</button><audio data-music loop preload="none" hidden></audio><div class="toast" data-toast role="status" aria-live="polite"></div>
+</body>
+</html>

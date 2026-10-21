@@ -16,6 +16,7 @@ type Props = {
   preview?: boolean;
   fullPreview?: boolean;
   catalogMusic?: boolean;
+  sampleWishes?: boolean;
   silentPlayback?: boolean;
 };
 
@@ -37,6 +38,7 @@ export function MarxabaInvitation({
   fullPreview = false,
   catalogMusic = false,
   silentPlayback = false,
+  sampleWishes = false,
 }: Props) {
   const frame = useRef<HTMLIFrameElement>(null);
   const initialized = useRef(false);
@@ -44,44 +46,86 @@ export function MarxabaInvitation({
   const [frameLocale, setFrameLocale] = useState(locale);
   useEffect(() => setFrameLocale(locale), [locale]);
   const sourceData = useMemo(
-    () => makeLegacyData(invitation, frameLocale, guestName),
-    [invitation, frameLocale, guestName],
+    () => makeLegacyData(invitation, frameLocale, guestName, sampleWishes),
+    [invitation, frameLocale, guestName, sampleWishes],
   );
-  const enabledLanguages = invitation.enabledLocales.map((item) => sourceLocale[item]);
-  const message = useMemo(
-    () => {
-      const musicUrl = sourceData.music.enabled
-        ? sourceData.music.url
-        : catalogMusic
-          ? CATALOG_PREVIEW_MUSIC.url
-          : "";
-      return {
-        ...sourceData,
-        // Samarqand Kechasi's original runtime uses `dataTime` in its lock
-        // and opening sequence; the shared contract exposes `dateTime`.
-        ...(templateId === "samarqand-kechasi"
-          ? { dataTime: sourceData.dateTime }
-          : {}),
-        music: musicUrl,
-        slug: preview ? "" : invitationId,
-        guestToken,
-        name: guestName,
-        defaultLang: sourceLocale[frameLocale],
-        languages: enabledLanguages,
-        languageSwitcher: true,
-        silentPlayback: preview && silentPlayback,
-        i18n: musicUrl
-          ? Object.fromEntries(
-              enabledLanguages.map((language) => [language, { music: musicUrl }]),
-            )
-          : {},
-        preview,
-        status: preview ? "published" : invitation.status,
-        apiBase: `/api/public/invitations/${encodeURIComponent(invitationId)}`,
-      };
-    },
-    [catalogMusic, enabledLanguages, frameLocale, guestName, guestToken, invitation.status, invitationId, preview, sourceData],
+  const enabledLanguages = invitation.enabledLocales.map(
+    (item) => sourceLocale[item],
   );
+  const message = useMemo(() => {
+    const musicUrl = sourceData.music.enabled
+      ? sourceData.music.url
+      : catalogMusic
+        ? CATALOG_PREVIEW_MUSIC.url
+        : "";
+    return {
+      ...sourceData,
+      // Several captured single-celebrant designs bind this source-only
+      // slot. The shared contract's first person remains the source of truth.
+      extras: { celebrant: sourceData.groom || sourceData.bride },
+      ...(templateId === "bitiruv"
+        ? { monogram: (sourceData.groom || sourceData.bride).trim().charAt(0) }
+        : {}),
+      // Samarqand Kechasi's original runtime uses `dataTime` in its lock
+      // and opening sequence; the shared contract exposes `dateTime`.
+      ...(templateId === "samarqand-kechasi"
+        ? { dataTime: sourceData.dateTime }
+        : {}),
+      music: musicUrl,
+      slug: preview ? "" : invitationId,
+      guestToken,
+      name: guestName,
+      defaultLang: sourceLocale[frameLocale],
+      languages: enabledLanguages,
+      languageSwitcher: true,
+      silentPlayback: preview && silentPlayback,
+      i18n: Object.fromEntries(
+        invitation.enabledLocales.map((enabledLocale) => {
+          const localized = makeLegacyData(
+            invitation,
+            enabledLocale,
+            guestName,
+            sampleWishes,
+          );
+          return [
+            sourceLocale[enabledLocale],
+            {
+              // Some captured scripts build their opening name art from this
+              // map, while the shared runtime uses program titles during its
+              // first render. Keep both aligned with the active language.
+              groom: localized.groom,
+              bride: localized.bride,
+              extras: { celebrant: localized.groom || localized.bride },
+              ...(templateId === "bitiruv"
+                ? {
+                    monogram: (localized.groom || localized.bride)
+                      .trim()
+                      .charAt(0),
+                  }
+                : {}),
+              program: localized.program,
+              music: musicUrl,
+            },
+          ];
+        }),
+      ),
+      preview,
+      status: preview ? "published" : invitation.status,
+      apiBase: `/api/public/invitations/${encodeURIComponent(invitationId)}`,
+    };
+  }, [
+    catalogMusic,
+    enabledLanguages,
+    frameLocale,
+    guestName,
+    guestToken,
+    invitation.enabledLocales,
+    invitation.status,
+    invitationId,
+    preview,
+    sampleWishes,
+    sourceData,
+  ]);
   const latestMessage = useRef(message);
   latestMessage.current = message;
   const frameUrl = `/templates/${encodeURIComponent(templateId)}/index.html?lang=${sourceLocale[frameLocale]}`;
@@ -99,6 +143,10 @@ export function MarxabaInvitation({
     gift: invitation.gift.enabled,
     gallery: invitation.gallery.map((item) => item.id),
   });
+  // Keep React's iframe src stable. Locale changes are already handled by the
+  // explicit replace below, after the latest locale data has been put in
+  // window.name; updating both src and location at once can race and drop data.
+  const initialFrameUrl = useRef(frameUrl);
 
   useEffect(() => {
     const onMessage = (event: MessageEvent) => {
@@ -123,7 +171,10 @@ export function MarxabaInvitation({
   useEffect(() => {
     const target = frame.current?.contentWindow;
     if (!target) return;
-    if (!initialized.current || structuralSignature.current !== currentStructure) {
+    if (
+      !initialized.current ||
+      structuralSignature.current !== currentStructure
+    ) {
       try {
         target.name = JSON.stringify(message);
         target.location.replace(frameUrl);
@@ -134,7 +185,10 @@ export function MarxabaInvitation({
       structuralSignature.current = currentStructure;
       return;
     }
-    target.postMessage({ type: "marxaba:update", payload: message }, window.location.origin);
+    target.postMessage(
+      { type: "marxaba:update", payload: message },
+      window.location.origin,
+    );
   }, [currentStructure, frameUrl, message]);
 
   const frameClass = fullPreview
@@ -148,7 +202,7 @@ export function MarxabaInvitation({
       <iframe
         ref={frame}
         title={`${sourceData.title || sourceData.eventType} invitation`}
-        src={frameUrl}
+        src={initialFrameUrl.current}
         onLoad={() => {
           frame.current?.contentWindow?.postMessage(
             { type: "marxaba:update", payload: latestMessage.current },

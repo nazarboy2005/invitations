@@ -1,0 +1,11 @@
+/* The shared language picker occupies the captured lightbox's close-button corner. */
+.marhamat-lightbox .lightbox-close {
+  left: calc(16px + env(safe-area-inset-left, 0px));
+  right: auto;
+}
+
+/* The approved invitation contract has no bank-name or gift-note field. */
+.section--toyona [data-slot="toyona.note"]:empty,
+.section--toyona [data-slot="toyona.bank"]:empty {
+  display: none;
+}

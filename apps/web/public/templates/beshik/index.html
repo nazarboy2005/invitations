@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="uz" class="is-locked">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#2B3A67">
+  <meta name="description" content="Beshik to‘yi — Marxaba taklifnomasi">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Beshik · Marxaba">
+  <meta property="og:description" content="Alla ohangidagi beshik to‘yi taklifnomasi">
+  <meta property="og:image" content="preview.webp">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <title>Beshik · Marxaba</title>
+  <link rel="stylesheet" href="fonts.css">
+  <link rel="stylesheet" href="../shared/nikoh/base.css">
+  <link rel="stylesheet" href="template.css">
+  <script src="../shared/nikoh/vendor/gsap.min.js" defer></script>
+  <script src="../shared/nikoh/vendor/ScrollTrigger.min.js" defer></script>
+  <script src="../shared/nikoh/vendor/lz-string.min.js" defer></script>
+  <script src="../shared/nikoh/invite-codec.js" defer></script>
+  <script src="../shared/nikoh/i18n.js" defer></script><script src="i18n.js" defer></script>
+  <script src="../shared/nikoh/platform-bridge.js" defer></script>
+  <script src="../shared/nikoh/core.js" defer></script>
+  <script src="locale-copy.js" defer></script>
+  <script src="meta.js" defer></script>
+  <script src="template.js" defer></script>
+</head>
+<body>
+  <section class="intro" id="intro" aria-label="Taklifnomani ochish">
+    <canvas class="sky-canvas" aria-hidden="true"></canvas>
+    <div class="intro__moon" aria-hidden="true"><svg viewBox="0 0 100 100"><path d="M69 11a39 39 0 1 0 20 69A42 42 0 0 1 69 11Z"/><circle cx="58" cy="51" r="1.8"/><circle cx="71" cy="55" r="1.8"/><path d="M59 62q7 7 14 0"/></svg></div>
+    <span class="intro-star intro-star--one" aria-hidden="true">✦</span><span class="intro-star intro-star--two" aria-hidden="true">✧</span><span class="intro-star intro-star--three" aria-hidden="true">✦</span>
+    <div class="intro__scene">
+      <span class="scene-cloud scene-cloud--left" aria-hidden="true"></span><span class="scene-cloud scene-cloud--right" aria-hidden="true"></span>
+      <img class="intro__cradle" src="art/beshik.webp" width="860" height="860" alt="" fetchpriority="high">
+    </div>
+    <div class="mobile-drop" aria-hidden="true"><span class="mobile-thread"></span><i class="mobile-moon">☾</i><i class="mobile-star mobile-star--a">✦</i><i class="mobile-star mobile-star--b">✧</i><i class="mobile-cloud">☁</i></div>
+    <div class="intro__copy">
+      <p class="intro__greeting" data-slot="greeting"></p>
+      <p class="intro__caption">Alla kabi mayin bir oqshom</p>
+      <button class="open-button" id="open-invitation" type="button"><span class="button-star" aria-hidden="true">✦</span>Taklifnomani ochish</button>
+    </div>
+    <div class="act-three" aria-hidden="true"><span data-slot="groom"></span><i></i><small data-slot="hosts"></small><small data-slot="date.long"></small></div>
+  </section>
+
+  <main class="page" id="page">
+    <div class="ambient-halo" aria-hidden="true"></div>
+    <div class="page-stars" aria-hidden="true"><i class="page-star page-star--one">✧</i><i class="page-star page-star--two">✦</i><i class="page-star page-star--three">✧</i><i class="page-star page-star--four">✦</i></div>
+    <!-- 2. Hero -->
+    <header class="hero" id="hero" data-section="hero">
+      <span class="title-mobile title-mobile--hero" aria-hidden="true"><i>✦</i><b>01</b></span>
+      <p class="eyebrow" data-slot="eventType"></p>
+      <img class="hero__cradle" src="art/beshik.webp" width="860" height="860" alt="" fetchpriority="high">
+      <h1 class="hero__name" data-slot="groom"></h1>
+      <p class="hero__date" data-slot="date.long"></p>
+      <p class="hero__hosts"><span data-slot="hostsLabel"></span><b data-slot="hosts"></b></p>
+      <a class="scroll-cue" href="#invitation-text" aria-label="Taklifnomani ko‘rish"><span>↓</span></a>
+    </header>
+
+    <!-- 3. Invitation text -->
+    <section class="section section--letter" id="invitation-text" data-section="invitation-text">
+      <span class="title-mobile" aria-hidden="true"><i>☾</i><b>02</b></span>
+      <p class="eyebrow">Alla ohangida</p><h2 class="section__title">Yurakdan aytilgan tilak</h2>
+      <p class="section__lead" data-slot="greeting"></p>
+      <p class="message" data-slot="message"></p>
+      <span class="thread-rule" aria-hidden="true"><i>✧</i></span>
+      <p class="muted" data-slot="hostsLabel"></p><p class="hosts" data-slot="hosts"></p>
+    </section>
+
+    <!-- 4. Date -->
+    <section class="section section--date" id="date" data-section="date">
+      <span class="title-mobile" aria-hidden="true"><i>✦</i><b>03</b></span>
+      <p class="eyebrow">Yulduzlar belgilagan kun</p><h2 class="section__title">Baxtli kungacha</h2>
+      <div class="calendar-wrap"><span class="calendar-moon" aria-hidden="true">☾</span><div class="calendar" data-calendar aria-label="Bayram kuni taqvimi"></div></div>
+      <p class="date__time"><span aria-hidden="true">☼</span> <span data-slot="date.time"></span></p>
+      <div class="countdown" data-countdown aria-live="off">
+        <div><strong data-unit="days">00</strong><span>kun</span></div><div><strong data-unit="hours">00</strong><span>soat</span></div><div><strong data-unit="minutes">00</strong><span>daqiqa</span></div><div><strong data-unit="seconds">00</strong><span>soniya</span></div>
+        <p data-countdown-past hidden>Bu kunni biz bilan baham ko‘rganingiz uchun rahmat!</p>
+      </div>
+      <button class="button button--outline" type="button" data-ics>Kalendarga qo‘shish <span aria-hidden="true">✦</span></button>
+    </section>
+
+    <!-- 5. Program -->
+    <section class="section section--program" id="program" data-section="program">
+      <span class="title-mobile" aria-hidden="true"><i>✧</i><b>04</b></span>
+      <p class="eyebrow">Oqshom kuy-qo‘shiqlari</p><h2 class="section__title" data-slot="programHeading">To‘y dasturi</h2>
+      <svg class="program-path" viewBox="0 0 340 560" preserveAspectRatio="none" aria-hidden="true"><path d="M170 0 C310 80 35 150 170 230S310 380 170 560"/></svg>
+      <ol class="program" data-list="program"><template><li class="program__item"><i aria-hidden="true">✦</i><time data-field="time"></time><span data-field="title"></span></li></template></ol>
+    </section>
+
+    <!-- 6. Venue -->
+    <section class="section section--venue" id="venue" data-section="venue">
+      <span class="title-mobile" aria-hidden="true"><i>☾</i><b>05</b></span>
+      <p class="eyebrow">Uchrashuv manzili</p><h2 class="section__title">To‘y manzili</h2>
+      <div class="venue__photo"><img data-photo="venue.photo" alt="To‘y manzili" width="800" height="600" loading="lazy" decoding="async"><span class="photo-moon" aria-hidden="true">☾</span></div>
+      <h3 data-slot="venue.name"></h3><p class="muted" data-slot="venue.address"></p>
+      <div class="button-row"><a class="button button--outline" data-map="yandex" target="_blank" rel="noopener noreferrer">Yandex xaritada</a><a class="button button--outline" data-map="google" target="_blank" rel="noopener noreferrer">Google xaritada</a></div>
+    </section>
+
+    <!-- Dress code follows Venue -->
+    <section class="section section--dresscode" id="dresscode" data-section="dresscode">
+      <span class="title-mobile" aria-hidden="true"><i>✦</i><b>06</b></span>
+      <p class="eyebrow">Mayin ranglar</p><h2 class="section__title">Dress-kod</h2>
+      <div class="dresscode" data-dresscode><p class="dresscode__style" data-slot="dressCode.style"></p><p class="dresscode__text" data-slot="dressCode.text"></p><ul class="dresscode__palette" data-list="dresscode"><template><li><i data-field-attr="style:style"></i><span data-field="name"></span></li></template></ul><p class="dresscode__note" data-slot="dressCode.note"></p></div>
+    </section>
+
+    <!-- 7. Gallery -->
+    <section class="section section--gallery" id="gallery" data-section="gallery">
+      <span class="title-mobile" aria-hidden="true"><i>✧</i><b>07</b></span><p class="eyebrow">Yodda qoladigan onlar</p><h2 class="section__title">Lahzalar</h2>
+      <div class="gallery-string" aria-hidden="true"><span></span><i>✦</i></div>
+      <div class="gallery__frame"><button class="gallery__arrow" type="button" data-gallery-prev aria-label="Oldingi surat">‹</button><div class="gallery" data-gallery data-list="gallery" aria-label="Suratlar galereyasi"><template><button class="gallery__item" type="button" data-field-attr="aria-label:alt"><span class="peg" aria-hidden="true"></span><img data-field-attr="src:src,alt:alt" data-photo alt="Bayram surati" width="640" height="800" loading="lazy" decoding="async"></button></template></div><button class="gallery__arrow" type="button" data-gallery-next aria-label="Keyingi surat">›</button></div>
+      <div class="gallery__dots" data-gallery-dots aria-label="Surat tanlash"></div>
+    </section>
+
+    <!-- 8. RSVP -->
+    <section class="section section--rsvp" id="rsvp" data-section="rsvp">
+      <span class="title-mobile" aria-hidden="true"><i>☾</i><b>08</b></span><p class="eyebrow">Bizga xabar bering</p><h2 class="section__title">Tashrifingizni tasdiqlang</h2><p class="muted">Javobingiz biz uchun juda muhim.</p>
+      <form data-rsvp><div class="rsvp__fields" data-rsvp-form><div class="rsvp__choices" role="group" aria-label="Tashrif javobi"><button type="button" data-rsvp-choice="yes" aria-pressed="false">Kelaman <span aria-hidden="true">✦</span></button><button type="button" data-rsvp-choice="no" aria-pressed="false">Kelmayman <span aria-hidden="true">☾</span></button><button type="button" data-rsvp-choice="maybe" aria-pressed="false">Hali bilmayman <span aria-hidden="true">✧</span></button></div>
+        <label class="field"><span>Ismingiz</span><input type="text" name="name" autocomplete="name" maxlength="80" required></label>
+        <div class="rsvp__party" data-rsvp-party><span>Necha kishi bo‘lasiz?</span><div class="stepper"><button type="button" data-party-step="-1" aria-label="Mehmonlar sonini kamaytirish">−</button><output>1</output><button type="button" data-party-step="1" aria-label="Mehmonlar sonini oshirish">+</button></div></div>
+        <p class="muted rsvp__deadline" data-rsvp-deadline></p><button class="button button--primary" type="submit" data-rsvp-submit>Javobni yuborish <span aria-hidden="true">✦</span></button></div>
+        <div class="rsvp__done" data-rsvp-done hidden aria-live="polite"><span class="success-moon" aria-hidden="true">☾</span><p>Javobingiz uchun rahmat!</p><p class="rsvp__summary" data-rsvp-summary></p><button class="text-link" type="button" data-rsvp-change>Javobni o‘zgartirish</button></div></form>
+    </section>
+
+    <!-- 9. Wishes -->
+    <section class="section section--wishes" id="wishes" data-section="wishes">
+      <span class="title-mobile" aria-hidden="true"><i>✦</i><b>09</b></span><p class="eyebrow">Ko‘ngildan ko‘ngilga</p><h2 class="section__title">Tilaklar</h2>
+      <ul class="wishes" data-list="wishes"><template><li class="wishes__item"><span aria-hidden="true">✧</span><p data-field="text"></p><strong data-field="name"></strong></li></template></ul>
+      <form class="wish-form" data-wishes-form><label class="field"><span>Ismingiz</span><input name="name" maxlength="60" required></label><label class="field"><span>Tilagingiz</span><textarea name="text" rows="4" maxlength="360" required></textarea></label><button class="button button--outline" type="submit">Tilak yuborish</button><p class="wish-form__feedback" data-wishes-feedback role="status" aria-live="polite"></p></form>
+    </section>
+
+    <!-- 10. To‘yona -->
+    <section class="section section--toyona" id="toyona" data-section="toyona">
+      <span class="title-mobile" aria-hidden="true"><i>☾</i><b>10</b></span><p class="eyebrow">Ezgu niyatlaringiz uchun</p><h2 class="section__title">To‘yona</h2><p class="muted" data-slot="toyona.note"></p>
+      <details class="gift"><summary><span class="gift-pouch" aria-hidden="true"><i>✿</i></span><span>To‘yona ma’lumotlarini ko‘rish <b>＋</b></span></summary><div class="gift__details"><span data-slot="toyona.bank"></span><strong data-slot="toyona.cardNumber"></strong><span data-slot="toyona.cardHolder"></span><button class="button button--outline" type="button" data-copy="toyona.cardNumber">Nusxa olish</button></div></details>
+    </section>
+
+    <!-- 11. Contacts -->
+    <section class="section section--contacts" id="contacts" data-section="contacts">
+      <span class="title-mobile" aria-hidden="true"><i>✧</i><b>11</b></span><p class="eyebrow">Savollar bo‘lsa</p><h2 class="section__title">Bog‘lanish uchun</h2>
+      <ul class="contacts" data-list="contacts"><template><li><a data-field-attr="href:href"><span data-field="label"></span><strong data-field="value"></strong><i aria-hidden="true">↗</i></a></li></template></ul>
+    </section>
+
+    <!-- 12. Footer -->
+    <footer class="footer" id="footer" data-section="footer"><div class="footer-moon" aria-hidden="true">☾</div><div class="footer-stars" aria-hidden="true">✦　✧　✦</div><p class="footer__name" data-slot="groom"></p><small data-slot="date.long"></small><span class="footer__thread" aria-hidden="true"></span><small data-slot="footer">Marxaba bilan yaratildi</small></footer>
+  </main>
+  <button class="music-toggle" type="button" data-music-toggle hidden aria-label="Musiqani yoqish">♫</button><audio data-music loop preload="none" hidden></audio><div class="toast" data-toast role="status" aria-live="polite"></div>
+</body>
+</html>

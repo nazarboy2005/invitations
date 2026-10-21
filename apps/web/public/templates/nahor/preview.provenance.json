@@ -1,0 +1,13 @@
+{
+  "width": 480,
+  "height": 720,
+  "fixture": "apps/web/src/modules/catalog/preview-sample.json",
+  "fixtureLocale": "uz-Latn",
+  "fixtureNames": [
+    "Javohir",
+    "Madina"
+  ],
+  "sourceOpening": "closed Nahor qozon invitation with localized greeting, lid interaction, and dawn artwork",
+  "motion": "captured with reduced motion enabled for a stable catalog still",
+  "sha256": "62c7c8b73629a0e77706f3a7876e0b72ac4f42d1330217fb5c9df98525e463cc"
+}

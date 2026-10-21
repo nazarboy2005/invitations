@@ -1,0 +1,6 @@
+/* The shared invitation contract has venue name, address and map coordinates,
+   but no venue photo. Hide the source-only photo slot rather than borrowing
+   graduation or gallery art, or generating an unrelated map thumbnail. */
+#venue .venue__photo {
+  display: none;
+}

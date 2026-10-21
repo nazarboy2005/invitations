@@ -1,0 +1,5 @@
+/* The approved invitation contract has no bank-name or gift-note field. */
+.section--toyona [data-slot="toyona.note"]:empty,
+.section--toyona [data-slot="toyona.bank"]:empty {
+  display: none;
+}

@@ -17,50 +17,50 @@ catalog order.
 
 | # | Category | Template | Status |
 |---:|---|---|---|
-| 1 | Nikoh | Toscana | Not started |
-| 2 | Nikoh | Vals | Not started |
-| 3 | Nikoh | Muhr | Not started |
-| 4 | Nikoh | Bulbul | Not started |
-| 5 | Nikoh | Qandil | Not started |
-| 6 | Nikoh | Ko‘zgu | Not started |
-| 7 | Nikoh | Parda | Not started |
-| 8 | Nikoh | Doira | Not started |
-| 9 | Nikoh | Ganch | Not started |
-| 10 | Nikoh | Qatlam | Not started |
+| 1 | Nikoh | Toscana | Full source package and typed catalog/database seed integrated as unpublished; browser opening and full sample content verified in Uzbek Latin and Russian; 3 source tests and typecheck pass. Fixed three GSAP empty-target warnings by restoring source word spans after platform refresh; no warnings/errors after browser opening and locale switches. Mobile, reduced-motion, and service-release verification remain |
+| 2 | Nikoh | Vals | Full source package and typed catalog/database seed integrated as unpublished; release browser QA covers all four locales, desktop/mobile, long names, opening/skip, reduced motion, sections, assets, and silent audio; authentic 720x1280 intro preview and checksum provenance added. Venue-photo field remains unsupported; integration/release gates and publication pending |
+| 3 | Nikoh | Muhr | Full source package and typed catalog/database seed integrated as unpublished; exact-source assertions cover captured body, CSS, scripts, metadata, localization, and art. Live preview verifies opening, four locales and localized program/dress-code/wishes, RSVP choice/guest count, gift expansion, and To'yona/contact samples. Mobile, console, reduced-motion, full source comparison, and authenticated save/reopen/service gates remain |
+| 4 | Nikoh | Bulbul | Full source/body/styles/scripts/art audited against capture; catalog art corrected to the captured closed-cage opening and regression-tested; 7 focused integration tests + web typecheck pass. Live browser locale/interaction/mobile QA and service release checks remain; unpublished |
+| 5 | Nikoh | Qandil | Full source package and typed catalog/database seed integrated as unpublished; fixture-rendered 720x1280 opening visually checked against the preview; checksum provenance added; 4 focused tests, typecheck, syntax and diff checks pass. Venue-photo and unsupported To‘yona bank/note gaps documented; full release verification pending |
+| 6 | Nikoh | Ko‘zgu | Full source package and typed catalog/database seed integrated as unpublished; source fidelity, locale, interaction, and browser release verification pending |
+| 7 | Nikoh | Parda | Full source package and typed catalog/database seed integrated as unpublished; package/source audit and focused tests pass; venue-photo and unsupported To‘yona bank/note gaps documented; desktop browser opening and Russian preview content verified with clean logs; remaining locales, mobile, reduced-motion, and service release checks pending |
+| 8 | Nikoh | Doira | Full source package and typed catalog/database seed integrated as unpublished; source/body/assets, local fonts, and 430x932 opening preview reviewed; 5 focused tests, typecheck, syntax checks pass. Venue-photo and unsupported To‘yona bank/note gaps documented; browser release verification pending |
+| 9 | Nikoh | Ganch | Full source package and typed catalog/database seed integrated as unpublished; package/source audit and focused checks pass; venue-photo and unsupported To‘yona bank/note gaps documented; browser release verification pending |
+| 10 | Nikoh | Qatlam | Full source package and typed catalog/database seed integrated as unpublished; byte-level source/art audit, 720x1280 opening preview and checksum provenance verified; all 45 static strings/14 labels localized; 6 focused tests, typecheck, syntax and diff checks pass. Venue-photo and unsupported To‘yona bank/note gaps documented; browser release verification pending |
 | 11 | Nikoh | Anor | Integrated and published; available for selection at 150,000 UZS |
-| 12 | Nikoh | Oltin Nur | Integrated; mobile/desktop opening, four locales, RSVP controls, empty optionals, and silent audio checked; long-name layout fixed; publication gates pending |
-| 13 | Nikoh | Samarqand Kechasi | Source copied; shared renderer registered; verification pending |
-| 14 | Nikoh | Bog‘i Eram | Source copied; shared renderer registered; verification pending |
-| 15 | Nikoh | Atlas | Source copied; shared renderer registered; verification pending |
-| 16 | Nikoh | Uchar Gilam | Source copied; shared renderer registered; async texture callback guarded against a disposed/lost WebGL context; regression and full verification pending |
-| 17 | Nikoh | Oq Kabutar | Source copied; shared renderer registered; verification pending |
-| 18 | Nikoh | Kuzgi Chinor | Source copied; shared renderer registered; verification pending |
-| 19 | Nikoh | Muhabbat Kitobi | Source copied; shared renderer registered; localized story chapters supported; verification pending |
-| 20 | Nikoh | Sahifa | Source copied; shared renderer registered; verification pending |
-| 21 | Nikoh | Oltin Uzuk | Source copied; shared renderer registered; app copy guards empty GSAP target arrays; full verification pending |
-| 22 | Nikoh | Oynavand | Not started |
-| 23 | Nikoh | Somon Yo‘li | Not started |
-| 24 | Nikoh | Qog‘oz Turna | Not started |
-| 25 | Nikoh | Nilufar | Not started |
-| 26 | Nikoh | Suzani | Not started |
-| 27 | Nikoh | O‘rik Guli | Not started |
-| 28 | Nikoh | Paxta | Not started |
-| 29 | Nikoh | Monogram | Not started |
-| 30 | Nikoh | Retro Kino | Not started |
-| 31 | Nikoh | Sahro Fonusi | Not started |
-| 32 | Qiz uzatish | Lola | Not started |
-| 33 | Qiz uzatish | Qiz Bazmi | Not started |
-| 34 | Sunnat to‘yi | Shahzoda | Not started |
-| 35 | Sunnat to‘yi | Chavandoz | Not started |
-| 36 | Beshik to‘yi | Beshik | Not started |
-| 37 | Nikoh | Konfetti | Not started |
-| 38 | Tug‘ilgan kun va yubiley | Shirin Bayram | Not started |
-| 39 | Tug‘ilgan kun va yubiley | Oltin Yosh | Not started |
-| 40 | Tug‘ilgan kun va yubiley | Oltin Kuz | Not started |
-| 41 | Osh va iftorlik | Nahor | Not started |
-| 42 | Osh va iftorlik | Nahorgi Osh | Not started |
-| 43 | Osh va iftorlik | Hilol | Not started |
-| 44 | Boshqa tadbirlar | Bitiruv | Not started |
+| 12 | Nikoh | Oltin Nur | Integrated and published; local catalog/API verified at 150,000 UZS; opening, four locales, RSVP controls, empty optionals, silent audio, and long-name layout checked; external deployment and cloud-service readiness remain unverified |
+| 13 | Nikoh | Samarqand Kechasi | Full source and shared renderer verified; published at 150,000 UZS after four-locale, opening, long-name, date/program, RSVP/wishes and optional-section checks; external deployment remains unverified |
+| 14 | Nikoh | Bogi Eram | Full source integrated; published at 150,000 UZS after four-locale, gate, responsive preview, RSVP, empty-optional, and language-control checks; external deployment remains unverified |
+| 15 | Nikoh | Atlas | Full source integrated; published at 150,000 UZS after four-locale, responsive long-name, gate, RSVP, optional-section, and catalog checks; external deployment remains unverified |
+| 16 | Nikoh | Uchar Gilam | Skipped by explicit user request; keep unpublished and unselectable |
+| 17 | Nikoh | Oq Kabutar | Exact captured body, CSS and JavaScript retained; published at 150,000 UZS after four-locale opening, metadata, mobile, RSVP, optional-section and asset checks; external deployment and cloud-media verification remain unverified |
+| 18 | Nikoh | Kuzgi Chinor | Full reference source retained; published at 150,000 UZS after four-locale metadata, opening, mobile, RSVP, optional-section, reduced-motion guard and asset checks; external deployment and cloud-media verification remain unverified |
+| 19 | Nikoh | Muhabbat Kitobi | Full captured body, styles, motion, and assets retained; localized authored chapters use original page layout |
+| 20 | Nikoh | Sahifa | Full captured source integrated; published at 150,000 UZS after four-locale sample/content checks, 390px responsive check, opening, optionals, localized metadata, and clean console; external deployment and cloud-media verification remain unverified |
+| 21 | Nikoh | Oltin Uzuk | Captured styles, ring animation and art integrated; published at 150,000 UZS after four-locale content/metadata, wishes, 390px responsive, opening, RSVP, hidden optional-section and clean console checks |
+| 22 | Nikoh | Oynavand | Full source integrated; published at 150,000 UZS after four-locale, opening, six-item program, dress code, empty Lahzalar, To’yona/contact sample, RSVP, and asset checks; external website deployment remains unverified |
+| 23 | Nikoh | Somon Yo‘li | Full source integrated; published at 150,000 UZS after four-locale, opening, program, gift/contact fixture, RSVP/wishes, and build checks; repository-wide suite retains unrelated Paxta preview-art failure |
+| 24 | Nikoh | Qog‘oz Turna | Full captured body, styles, and motion integrated; published at 150,000 UZS after four-locale, opening, six-item program, preview-art, gallery, To'yona/contact, and RSVP checks |
+| 25 | Nikoh | Nilufar | Registered as unpublished; source/package review and full browser release checks pending |
+| 26 | Nikoh | Suzani | Registered as unpublished; source/package review and full browser release checks pending |
+| 27 | Nikoh | O‘rik Guli | Registered as unpublished; source/package review and full browser release checks pending |
+| 28 | Nikoh | Paxta | Source body/styles/scripts/assets verified; localized copy and portrait first-page art/provenance tests pass; full browser release checks pending; unpublished |
+| 29 | Nikoh | Monogram | Registered as unpublished; source/package review and full browser release checks pending |
+| 30 | Nikoh | Retro Kino | Registered as unpublished; source/package review and full browser release checks pending |
+| 31 | Nikoh | Sahro Fonusi | Registered as unpublished; source/package review and full browser release checks pending |
+| 32 | Qiz uzatish | Lola | Source package, adapter, localization and focused tests are present; preview has 480x900 checksum-backed provenance, but its prior browser-render claim was not reverified. The capture-manifest omission is resolved by the checksum-verified original lid recovered from the same deployed template. Keep unpublished pending browser and service release verification |
+| 33 | Qiz uzatish | Qiz Bazmi | Typed Marxaba renderer, contract/catalog entry, category, and additive unpublished migration 0038 verified; source compatibility maps metadata tugilgan-kun to birthday and supports qiz-uzatish/fotiha/birthday independently of qiz-bazmi category. Four-locale canonical fixture and adapter mapping tests added; source body/CSS/JS/i18n/meta/art and reduced-motion hooks verified, preview checksum/dimensions provenance recorded. Browser release checks and unsupported venue.photo/toyona.bank/toyona.note contract gaps remain; keep unpublished |
+| 34 | Sunnat to‘yi | Shahzoda | Source implementation in progress |
+| 35 | Sunnat to'yi | Chavandoz | Captured package, typed event compatibility and additive seed audited; four-locale contract fixture and source-fidelity tests pass; browser and service release checks pending; unpublished |
+| 36 | Beshik toyi | Beshik | Captured package, one-celebrant editor behavior, typed event compatibility and additive seed audited; four-locale contract fixture tests pass; unpublished pending browser and service release checks |
+| 37 | Nikoh | Konfetti | Isolated source package reviewed; shared renderer, localized birthday/jubilee fixtures, typed catalog entry, and unpublished database seed integrated |
+| 38 | Tug'ilgan kun va yubiley | Shirin Bayram | Isolated source reviewed; typed registry, unpublished database seed, and birthday-specific catalog fixture integrated; Uzbek desktop preview checked; other locales and mobile release checks pending |
+| 39 | Tug'ilgan kun va yubiley | Oltin Yosh | Isolated source package reviewed; birthday/jubilee compatibility, central samples, typed catalog, and unpublished database seed integrated; browser locale and responsive verification pending |
+| 40 | Tug'ilgan kun va yubiley | Oltin Kuz | Isolated source package reviewed; birthday/jubilee compatibility, central samples, typed catalog, and unpublished database seed integrated; Uzbek and Russian opening/program checked; responsive and remaining locale verification pending |
+| 41 | Osh va iftorlik | Nahor | Isolated source package reviewed; typed osh catalog entry, morning-specific date/program fixture, and unpublished database seed integrated; other locales and responsive release checks pending |
+| 42 | Osh va iftorlik | Nahorgi Osh | Isolated source package, typed compatibility, and unpublished database seed reviewed; authentic fixture-rendered portrait opening art is packaged with provenance and regression coverage; remaining browser release checks pending |
+| 43 | Osh va iftorlik | Hilol | Isolated source package in progress; metadata requires new typed iftorlik event compatibility alongside osh |
+| 44 | Boshqa tadbirlar | Bitiruv | Full source package is registered unpublished with source-backed bitiruv, birthday (source tugilgan-kun), and korporativ compatibility. Creator defaults to graduation, provides one honoree entry, and renders the monogram from that localized honoree; existing draft data is preserved. Unsupported venue.photo slot is hidden by a separate adapter stylesheet. Focused source suite (9/9), database/migration suite (14/14), and repository typecheck pass; keep unpublished pending browser/mobile/reduced-motion, console, and save/reopen service checks |
 | 45 | Boshqa tadbirlar | Korporativ | Not started |
 | 46 | Boshqa tadbirlar | Yangi Uy | Not started |
 
@@ -68,18 +68,85 @@ catalog order.
 
 | Order | Template | Renderer / source audit | Contract adapter | Catalog + DB | Verification / blockers |
 |---:|---|---|---|---|---|
-| 1 | Oltin Nur | Full captured source + local fonts/art copied | Shared contract mapped; optional dress code supported | Migration 0005 applied to Neon; Oltin Nur published in catalog with wedding category and existing price | Local 3001 catalog/API show the published template. Earlier desktop/mobile, four locales, RSVP state, hidden empty optionals, silent audio, and long-name checks; 41 tests, typecheck, and build pass. Telegram bot token verified; local auth configuration returns 200. External Vercel deployment is unverified; public bot webhook, R2 credentials, end-to-end cloud media/save, receipt processing, live reduced-motion and complete reference/control comparison remain outstanding. Do not call production service readiness verified.
-| 2 | Samarqand Kechasi | Full source copied; three missing reference assets recovered | Shared adapter connected; opening-cover greeting has English/Russian translations; post-open locale controls revealed for source openers that omit the shared event | Catalog IDs, exact preview art, unpublished DB seed migration added | Fresh desktop preview checked: English and Russian opening covers and full opened page use localized fixed copy; four sample program entries and empty optional sections behave as expected. Audio remained muted under `qaSilent=1`. Full interaction, mobile and publication gates pending |
-| 3 | Bog‘i Eram | Full source and local fonts/art copied | Shared adapter connected | Catalog IDs, exact preview art, unpublished DB seed migration added | Desktop locked preview checked: Asadbek/Gulhayo, four program entries, empty optional sections hidden, catalog music bound and paused; all four locale controls switch and update the rendered locale. No browser warnings/errors observed. Opening, interactions, mobile and publication gates pending |
-| 4 | Atlas | Full source and local fonts/art copied; hardcoded event/date/location copy removed | Shared adapter connected | Catalog IDs, exact preview art, unpublished DB seed migration added | Desktop locked preview checked: Asadbek/Gulhayo, four program entries, empty optional sections hidden, catalog music bound and paused; all four locale controls switch and update the rendered locale. No browser warnings/errors observed. Opening, interactions, mobile and publication gates pending |
-| 5 | Uchar Gilam | Full source copied; three missing reference assets recovered; app copy guards the async texture callback against teardown/context loss and safely defaults anisotropy when renderer capabilities are null | Shared adapter connected | Catalog IDs, exact preview art, unpublished DB seed migration added | Desktop locked preview checked: Asadbek/Gulhayo, four program entries, empty optional sections hidden, catalog music bound and paused; all four locale controls switch and update the rendered locale. No browser warnings/errors observed. Deliberate context-loss regression, opening, interactions, mobile and publication gates pending |
-| 6 | Oq Kabutar | Full source and local fonts/art copied | Shared adapter connected | Catalog IDs, exact preview art, unpublished DB seed migration added | Desktop locked preview checked: Asadbek/Gulhayo, four program entries, empty optional sections hidden, catalog music bound and paused; all four locale controls switch and update the rendered locale. No browser warnings/errors observed. Opening, interactions, mobile and publication gates pending |
-| 7 | Kuzgi Chinor | Full source and locally packaged fonts/art copied | Shared adapter connected | Catalog IDs, exact preview art, unpublished DB seed migration added | Desktop locked preview checked: Asadbek/Gulhayo, four program entries, empty optional sections hidden, catalog music bound and paused; all four locale controls switch and update the rendered locale. No browser warnings/errors observed. Opening, interactions, mobile and publication gates pending |
-| 8 | Muhabbat Kitobi | Full source copied; demo story override removed; authored story pages use the original chapter layout and illustrations | Optional repeatable localized chapter fields wired through contract, editor, save/reopen, template switching, and renderer | Catalog IDs, exact preview art, unpublished DB seed migration added | Desktop locked preview checked: Asadbek/Gulhayo, four program entries, empty optional sections hidden, catalog music bound and paused. Empty story is hidden; all four locale controls switch. Story chapter visual QA, opening, interactions, mobile and publication gates pending |
+| 1 | Oltin Nur | Full captured source + local fonts/art copied | Shared contract mapped; optional dress code supported | Migration 0005 applied to Neon; Oltin Nur published in catalog with wedding category and existing price | Local 3001 catalog/API show the published template. Desktop/mobile, four locales, RSVP state, hidden empty optionals, silent audio, and long-name checks; 41 tests, typecheck, and build pass. Telegram bot token verified; local auth configuration returns 200. External Vercel deployment is unverified; public bot webhook, R2 credentials, end-to-end cloud media/save, receipt processing, live reduced-motion and complete reference/control comparison remain outstanding. Catalog publication does not assert production service readiness.
+| 2 | Samarqand Kechasi | Full source copied; three missing reference assets recovered | Shared adapter connected; opening-cover and static page copy localized; shared language controls retained | Catalog IDs, exact preview art, publication migration 0014; wedding event support and category retained | Local responsive preview verified: opening sequence, four locales, all sample content, four program entries, dates/calendar/countdown, empty optional sections, RSVP/wishes controls, and long names. Added static-copy localization regression test. Published in catalog at 150,000 UZS; external deployment and cloud-service readiness remain unverified |
+| 3 | Bogi Eram | Full source, local fonts/art and missing motion sprites packaged; exact portrait preview artwork wired | Shared adapter connected; four locale metadata localized; language picker returns to top-right after gate opens | Catalog IDs, exact preview art, additive publication migration 0015; wedding event support/category retained | Gate intro and opening sequence visually compared with source; all four locales verified including corrected Cyrillic Gulhayo form; empty dress-code/gallery/gift/contact sections hidden; RSVP choice and guest count verified; picker position checked before/after opening and while scrolled. Project tests, typecheck, build and diff checks pass. Published at 150,000 UZS; external deployment and cloud-service readiness remain unverified |
+| 4 | Atlas | Full source and local fonts/art retained; source intro and transition compared | Shared contract connected; localized document/share metadata; long-name fitting preserves word breaks | Catalog IDs, exact preview art, additive publication migration 0016; wedding event support/category retained | Four locales and metadata verified; opening and RSVP controls checked; empty dress-code/gallery/gift/contact sections hidden; long names fit cover and hero; no console errors. 58 tests, typecheck, production build, and diff checks pass. Published at 150,000 UZS; external deployment and cloud-service readiness remain unverified |
+| 5 | Uchar Gilam | Full source copied; three missing reference assets recovered; app copy guards the async texture callback against teardown/context loss and safely defaults anisotropy when renderer capabilities are null | Shared adapter connected; fixed-copy translations cover all static HTML text, accessibility labels, and metadata values for Russian and English; Uzbek Cyrillic uses the shared transliterator | Catalog IDs, exact preview art, unpublished DB seed migration added | Prior desktop locked-preview evidence covers sample names, four program entries, empty optionals, paused catalog music, and all four locale switches. Added regression tests for static copy/metadata localization, portrait and scene assets, and late texture teardown. Full suite (62), typecheck, and production build pass. Current browser session URL policy denied preview access; opening flow, complete controls, mobile, reduced-motion, and remaining visual checks cannot be verified in this turn. Keep unpublished |
+| 6 | Oq Kabutar | Full source and local fonts/art copied; HTML body, CSS, and JavaScript match the captured source after line-ending normalization | Shared adapter connected; added missing Russian and English document metadata translations | Catalog IDs, exact preview art, unpublished seed migration plus publication migration 0017; wedding event support/category retained | Source fidelity checked; opening transition and all four locales verified; Russian title/description now localize; mobile checked at 390px with no horizontal overflow; RSVP choice and guest counter respond; empty gallery, optional gift, and contacts stay hidden; no browser console warnings/errors. All 65 tests, typecheck, build, and diff checks pass. Published at 150,000 UZS; external deployment and cloud-media/save service verification remain unverified |
+| 7 | Kuzgi Chinor | Full reference body and JavaScript retained; CSS differs only by replacing the captured external font import with locally bundled font files | Shared renderer connected; fixed Uzbek, Uzbek Cyrillic, English, and Russian page title/description translations | Catalog IDs and wedding category/event support retained; seed migration plus publication migration 0018 | All locales, including Uzbek Cyrillic metadata, verified in browser; opening transition checked; mobile at 390px has no horizontal overflow; RSVP no/yes and party count respond; empty gallery/toyona/contact sections hide; browser logs clean. Tests, typecheck, build, and diff checks pass; published at 150,000 UZS. External deployment and cloud-media/save verification remain unverified |
+| 8 | Muhabbat Kitobi | Captured body, CSS, motion, and assets retained; app adapter uses authored repeatable chapters | Localized chapter fields use the shared contract and renderer; generated chapter labels translate in all four locales | Catalog IDs, exact preview art, seed migration plus publication migration 0019; wedding category/event support retained | Opened preview and checked mobile 390px with no overflow; all four locales, RSVP choice and guest count work; empty optionals hide and browser logs are clean. Source fidelity, 69 tests, typecheck, production build, and diff checks pass. Published at 150,000 UZS; external deployment and cloud-media/save verification remain unverified |
 | 9 | Sahifa | Full source and local fonts/art copied; hardcoded sample names/location removed | Shared adapter connected | Catalog IDs, exact preview art, unpublished DB seed migration added | Desktop locked preview checked: Asadbek/Gulhayo, four program entries, empty optional sections hidden, catalog music bound and paused; all four locale controls switch and update the rendered locale. No browser warnings/errors observed. Opening, interactions, mobile and publication gates pending |
 | 10 | Oltin Uzuk | Full source and local fonts/art copied; sample engraving names/date removed; empty GSAP animation targets guarded in the app copy | Shared adapter connected | Catalog IDs, exact preview art, unpublished DB seed migration added | Desktop locked preview checked: Asadbek/Gulhayo, four program entries, empty optional sections hidden, catalog music bound and paused; all four locale controls switch and update the rendered locale. No browser warnings/errors observed. Opening, interactions, mobile and publication gates pending |
 
 ## Progress log
+- 2026-10-21: Independently checked Parda in the live local preview after its package audit: fixture names, date, full six-item program and gallery bind correctly; its source opening completes, Russian content switches correctly, and the browser has no warnings/errors. Root reran the full suite (243/243) and typecheck successfully. Parda still needs all-locale, mobile, reduced-motion, and service-release verification; no publication state changed.
+- 2026-10-21: Root independently verified Vals source fidelity, preview provenance, contract hooks, localized copy, focused tests (5/5), and web typecheck. The worker browser report covers four locales, opening/skip, reduced motion, desktop/mobile, sections, and clean Vals-frame logs. Vals remains unpublished pending project-level service and database release gates; no migration or external database was applied.
+- 2026-10-21: Toscana browser review traced three GSAP warnings to the captured title tween receiving no word spans after the shared data bridge refreshed live text. Updated only the app copy to restore the source title wrappers before the scroll animation; documented the adaptation and regression test. The opening and Uzbek Cyrillic, English, Russian locale changes plus RSVP choice/party-size controls now run without browser warnings/errors; focused tests (3/3), typecheck, syntax and scoped diff checks pass. Mobile, reduced-motion and service-release verification remain; Toscana stays unpublished.
+- 2026-10-21: Reviewed and integrated the Shirin Bayram source package. The
+  captured body, styles, localization copy, cake artwork, fonts, and animation
+  dependencies are retained in an isolated package; the typed catalog and
+  additive database seed register the birthday design as unpublished. Added a
+  localized birthday sample in the shared JSON fixture so its greeting,
+  program, venue, and child-friendly dress palette do not inherit wedding
+  copy. Focused source, preview-fixture, integration, and Beshik tests pass
+  (21); typecheck passes. The Uzbek desktop preview renders all source sections
+  and fixture content. Other locales, mobile, reduced-motion, and full
+  interaction verification remain before publication.
+- 2026-10-21: Qogoz Turna is integrated with its captured invitation body,
+  original styles and interactions, local fonts, shared renderer, and local
+  runtime. Packaged the source metadata's exact 720x1280 portrait preview
+  art. Browser review verified Uzbek Latin, Uzbek Cyrillic, English, and
+  Russian, the opening, all six localized program rows, five dress-code
+  colors, the captured empty gallery layout, shared wishes and gift/contact
+  fixture, and RSVP controls. Migrations 0026 and 0027 were applied; it is
+  published at 150,000 UZS. Focused tests, typecheck, and build pass. The
+  full suite still has the unrelated Paxta preview.webp failure. External
+  deployment and cloud-service readiness remain unverified; continue with
+  Nilufar.
+- 2026-10-21: Somon Yo'li is integrated through the shared typed renderer,
+  retaining its captured body, styles, star-map artwork, opening animation,
+  local fonts, and packaged Three.js runtime. Local preview review verified
+  Uzbek Cyrillic and English copy, six localized program rows, dress code,
+  the captured empty Lahzalar gallery, preview-only gift details, contact
+  links, RSVP controls, and three shared sample wishes. Fixed locale-specific
+  program data in the shared runtime and added regression coverage. Migrations
+  0024 and 0025 were applied; Somon Yo'li is published at 150,000 UZS and
+  appears in /api/catalog. Typecheck, build, and focused tests pass. The full
+  suite has one unrelated Paxta missing-preview.webp failure. External deploy
+  and cloud-service readiness remain unverified. Continue with Qogoz Turna.
+- 2026-10-21: Oynavand is integrated through the shared typed renderer with its
+  captured page, styles, animation, local fonts, poster art, and shared nikoh
+  runtime. The source's own Lahzalar section remains visible in the empty
+  preview; no replacement gallery cards were added. Browser review verified
+  Uzbek Latin, Uzbek Cyrillic, English, and Russian, the opening, all six
+  localized program rows, five dress-code colors, three shared sample wishes,
+  preview-only To’yona details, phone/Telegram contacts, and RSVP attendance and
+  party-size controls. Added portrait `preview.webp` from the packaged captured
+  opening artwork. Focused tests, typecheck, production build, and diff checks
+  pass; the repository-wide suite has one unrelated existing failure because
+  Paxta's `preview.webp` is missing. Migrations `0022` and `0023` published
+  Oynavand at 150,000 UZS in the catalog. External website deployment and
+  cloud-service readiness remain unverified. Continue with Somon Yo’li.
+
+
+- 2026-10-21: Continued Uchar Gilam after Atlas. Added regression coverage for
+  every static HTML label, accessibility attribute, and metadata string, and
+  localized the initial title, description, and Bukhara venue-image alt text.
+  Added checks for the exact portrait/scene assets and the late WebGL texture
+  teardown guards. All 62 tests, typecheck, and production build pass. The
+  current browser URL policy denied access to the local preview, so opening,
+  full controls, mobile and reduced-motion visual verification remain open;
+  no publication migration was applied and Uchar Gilam remains unpublished.
+  The source-to-contract audit also found a missing localized platform footer
+  value and an empty bank-name slot that contradicted the current contract. Added
+  a locale-specific footer to the shared adapter, removed the unsupported bank
+  slot, and hid the unsupported empty gift-note paragraph. A normalized
+  source/package audit confirms all 11 captured files are present: seven are
+  content-identical and four have documented integration changes.
+  A scan also found a missing `og.jpg` target; Open Graph now uses the actual
+  `preview.webp`. Tests verify local HTML/CSS/font references resolve, Google
+  Fonts are not fetched remotely, and the generated map title is translated.
 
 - 2026-10-20: Inventoried all 46 captured Marxaba designs, verified the order
   against the capture manifest, and selected the ten after Anor. Oltin Nur is
@@ -694,3 +761,85 @@ catalog order.
 - 2026-10-21: User supplied a Telegram bot token; stored it only in ignored `apps/web/.env.local`, verified its bot identity with Telegram getMe, and configured the local username plus generated session/webhook secrets. Port 3001 auth session endpoint now returns HTTP 200 (unauthenticated). No webhook was changed because APP_URL is local and no public HTTPS deployment is linked.
 
 - 2026-10-21: Removed the optional voice greeting from the studio, invitation contract, and template bridge at the creator request. Migration 0010 strips legacy invitation fields and removes voice-only media records; background music is unchanged.
+
+
+- 2026-10-21: Completed the requested Samarqand Kechasi release using catalog
+  publication migration 0014 at the existing 150,000 UZS price. Fixed the
+  English/Russian hero link and document title, and added a regression test
+  covering the template static locale copy. Local preview checks covered the
+  opening sequence, all four locales, dates/calendar/countdown, program,
+  RSVP/wishes, empty optional sections, and long names. Typecheck, all 53 tests,
+  production build, and `git diff --check` pass. The local catalog API and UI
+  show Samarqand Kechasi as published; external deployment and cloud-service
+  readiness remain unverified. This supersedes earlier roadmap notes that kept
+  Samarqand Kechasi or Oltin Nur unpublished.
+
+- 2026-10-21: Completed Bogi Eram for catalog publication. Added missing motion sprites from the exact reference paths, corrected portrait Open Graph artwork/metadata, localized document/share metadata, and fixed the language picker so its opening-screen offset ends when the gate unlocks. The shared sample spells Uzbek Cyrillic Gulhayo as the requested x-form; general transliteration remains standard. Four locales, gate opening, hidden empty optional sections, RSVP choice/guest count, responsive full preview, and picker position were checked. All project tests, typecheck, production build, and diff checks pass. Migration 0015 publishes Bogi Eram at 150,000 UZS; external deployment and cloud-service readiness remain unverified.
+
+- 2026-10-21: Completed Atlas for catalog publication. Localized browser title and sharing metadata, kept its exact portrait catalog artwork and full captured renderer, and improved the shared long-name fitter so long Uzbek names break at word boundaries after fitting to the design width. Compared the captured intro/opening with the integrated preview; verified four locale controls and metadata, hidden empty optional sections, RSVP state and party size, direct creation opening at step 2, and catalog actions. All 58 tests, typecheck, production build, syntax checks, and diff checks pass. Migration 0016 publishes Atlas at 150,000 UZS. External deployment and cloud-service readiness remain unverified.
+
+- 2026-10-21: Continued Uchar Gilam readiness work. Fixed the copied opening
+  animation's dynamic Three.js bundle URL to resolve to the packaged shared
+  runtime, and added an asset-resolution regression check. All 62 tests,
+  typecheck, production build, and diff checks pass. Runtime browser/interaction
+  verification and the remaining publication gates are still open; keep the
+  template unpublished.
+
+- 2026-10-21: Source review found one reduced-motion oversight in Uchar
+  Gilam's wish-added flourish. The event handler now skips Web Animations when
+  reduced motion is active, with a regression assertion; the RSVP and gift
+  effects already had guards. Focused template tests (4), JavaScript syntax,
+  and diff checks pass. Browser-level verification remains outstanding.
+
+- 2026-10-21: Hardened Uchar Gilam teardown further: its font-ready repaint
+  now checks whether the CanvasTexture was disposed or the renderer was
+  released before updating it. Added the condition to the teardown regression
+  test. Focused tests (4), JavaScript syntax, and diff checks pass.
+
+- 2026-10-21: Expanded the Uchar Gilam adapter test from checking only top-level
+  data roots to checking every distinct dotted content slot used in the HTML.
+  The template integration test passes with all authored slots mapped to the
+  shared legacy adapter contract.
+
+
+- 2026-10-21: Completed Oq Kabutar source-fidelity and preview review. Its packaged HTML body, CSS, and JavaScript match the untouched capture after normalizing line endings. Verified the opening, four locales, 390px mobile layout, RSVP choice/count controls, hidden empty optional sections, local art, and clean browser logs. Added Russian and English iframe title/description translations with regression coverage. All 65 tests, typecheck, production build, and diff checks pass. Additive migration 0017 publishes Oq Kabutar in the Neon catalog at 150,000 UZS; the local catalog API confirms wedding compatibility and publication. External deployment and cloud-media/save verification remain unverified. User explicitly skipped Uchar Gilam; leave it unpublished and continue with Kuzgi Chinor.
+
+- 2026-10-21: Completed Kuzgi Chinor. The packaged HTML body and JavaScript match the capture; its stylesheet differs only by replacing the external Google Fonts import with locally bundled font files. Added full static-copy/metadata and source-fidelity regression coverage, corrected all four page-metadata locales (including Uzbek Cyrillic), and verified the opening, mobile layout, RSVP choice/count, hidden empty sections, and clean browser logs. The reduced-motion behavior remains in the unchanged captured JavaScript and is guarded by the shared runtime. All 67 tests, typecheck, production build, and diff checks pass. Additive migration 0018 publishes Kuzgi Chinor at 150,000 UZS; local catalog API confirms wedding category/event support. External deployment and cloud-media/save verification remain unverified. Continue with Muhabbat Kitobi; Uchar Gilam remains skipped.
+- 2026-10-21: Completed Muhabbat Kitobi source and release checks. The captured page body, styles, motion scripts and assets are retained; the shared renderer maps authored localized story chapters into the original layout. Verified mobile width, locale controls, RSVP choice/count, empty optional sections, and clean browser logs. Added localized chapter labels and regression coverage. All 69 tests, typecheck, production build and diff checks pass. Additive migration 0019 publishes the template at 150,000 UZS; local catalog API verifies it. External deployment and cloud-media/save verification remain unverified. Continue with Sahifa; Uchar Gilam remains skipped.
+ - 2026-10-21: Completed Sahifa. Preserved the captured layout and motion with guarded empty GSAP targets, localized page metadata and shared sample wishes; fixed locale switching to retain invitation data. Verified all four locales, sample wishes, 390px overflow, opening, hidden optional sections and clean browser logs. All 72 tests, typecheck, production build and diff checks pass. Additive migration 0020 publishes Sahifa at 150,000 UZS; local catalog API confirms wedding category and event support. External deployment and cloud-media/save verification remain unverified. Continue with Oltin Uzuk; Uchar Gilam remains skipped.
+
+ - 2026-10-21: Completed Oltin Uzuk. Kept captured styles, ring assets and ring animation while mapping localized invitation fields, clothing, RSVP, gifts, and sample wishes. Corrected page metadata and guarded optional 3D animation targets so the captured photo animation opens without GSAP warnings. Verified all four locales, 390px responsive width, opening, RSVP selection/count, hidden empty optional sections, and clean browser logs. All 74 tests, typecheck, production build, JavaScript syntax checks and diff checks pass. Additive migration 0021 publishes Oltin Uzuk at 150,000 UZS; local catalog API confirms wedding category and event support. External deployment and cloud-media/save verification remain unverified. Continue with Oynavand; Uchar Gilam remains skipped.
+
+## Current Marxaba worker batch (2026-10-21)
+
+Toscana and Muhr are packaged, registered in the typed catalog, and have additive unpublished database registration in migration 0032. Toscana uses the captured aisle opening artwork because the source metadata preview file is missing. Both pass focused source/contract tests and typecheck; browser release review remains.
+
+- 2026-10-21: Independently audited Muhr's package and live preview. Focused
+  source/integration tests (7) and web TypeScript check pass. Exact-source
+  assertions cover the captured body, CSS, template/seal scripts, metadata,
+  localization, and source art; the catalog preview uses the source envelope
+  artwork. Browser checks verified the opening, Uzbek Latin/Cyrillic, English
+  and Russian sample data (six localized program entries, five dress-code
+  colors, and three wishes), RSVP choice and guest count, plus To'yona
+  expansion and contact links. Muhr remains unpublished. Mobile/reduced-motion,
+  browser-console inspection, complete source comparison, and authenticated
+  save/reopen/service verification remain release gates. The captured venue
+  photo slot and To'yona bank/note slots lack approved editor/shared-contract
+  fields and are not populated with sample data.
+
+Vals, Nilufar, Monogram, Retro Kino, Suzani, Orik Guli, Paxta, and Sahro Fonusi are packaged and registered but remain unpublished pending release review. Qandil, Bulbul, and Kozgu source packages passed parent review; Qandil has a source-rendered 720x1280 opening and verified provenance, with full live and contract review still underway. Parda, Doira, and Ganch are registered unpublished; opening-art provenance has been reviewed for Doira and Ganch. Nahorgi Osh now has a verified portrait opening and provenance-backed capture; browser release checks remain. All remain unpublished pending their individual release gates.
+
+- 2026-10-21: Integrated the reviewed Konfetti, Oltin Kuz, Oltin Yosh, and Nahor
+  source packages as unpublished catalog entries. Added exact typed birthday,
+  jubilee, and osh compatibility with separate catalog categories, an additive
+  database seed, and localized centralized preview samples. Browser checks show
+  Konfetti's full invitation sections, Oltin Kuz's Russian program after opening,
+  and Nahor's localized morning schedule. Added Nahorgi Osh's unpublished entry
+  and source compatibility, and rendered its authentic opening as a fixture-based portrait preview with provenance. It remains unpublished until browser release checks pass. Added the source-backed `iftorlik`
+  event type and localized sample needed for Hilol. Focused package, fixture,
+  migration, and type checks pass; responsive and remaining locale release
+  checks remain open.
+- 2026-10-21: Audited O‘rik Guli’s captured page body, scripts, preview artwork, fonts, four-locale copy, and shared preview contract. Added a template-scoped CSS adaptation so blank unsupported To‘yona bank and note slots do not leave empty space; regression coverage verifies the packaged stylesheet differs from capture only by the documented reduced-motion and empty-slot rules. O‘rik Guli focused source/contract tests pass (4/4). Desktop/mobile interaction, reduced-motion browser, persistence/service, and publication gates remain pending; keep unpublished.- 2026-10-21: Independently audited Monogram source packaging and static interactions. All captured files are present; only `index.html` and `i18n.js` differ for the documented dynamic year and gallery-dot label, while all other source files and assets are byte-identical. The release suite passes 6/6; source includes a reduced-motion path for opening, seal drawing, scroll motion, confetti and dust, plus responsive breakpoints and shared contract hooks for date/calendar, program, venue/map, dress code, gallery, RSVP, wishes, To‘yona and contacts. Computer-use inventory reported no browser tabs/providers in this session, so live locale/mobile/reduced-motion interaction checks remain unverified. Monogram stays unpublished.- 2026-10-21: Follow-up Monogram contract audit: confirmed that its empty To‘yona note and unsupported bank slots retained blank vertical space in the source layout. Added a narrowly scoped CSS rule in the packaged copy, documented in `SOURCE_ADAPTATIONS.md`, and expanded source-fidelity coverage to permit only that rule. Focused suite remains green (6/6); publication and browser QA are unchanged.
+- 2026-10-21: Lola audit confirmed the capture manifest includes bouquet.webp, paper.webp, pressed-tulip.webp, and sandiq.webp, but omits sandiq-lid.webp although captured CSS references it. The packaged lid is an exact 800x300 transparent WebP recovered from the deployed template, not captured local source; a source-only reconstruction from the closed-chest art would be approximation. Added checksum-backed structured preview provenance and tests. Browser inventory was empty, so prior render provenance was not independently repeated; the original lid is present in the package; browser and service release verification remain open.- 2026-10-21: Independently audited Oltin Kuz’s captured package and shared adapter. All captured files are present; packaged `index.html` and `i18n.js` contain only the documented app-shell/data-sample adaptations, and `sample-overrides.js` is excluded. Added four-locale contract mapping checks for one celebrant, localized date/address/program, dress palette, preview gallery/wishes/gift/contact data, plus static Russian/English copy/accessibility coverage. The complete focused package, fixture, and unpublished-registration suite passes (16/16); typecheck passes. Documented unsupported `extras.age`, `extras.yearLabel`, `gallery[].year`, `venue.photo`, and `toyona.bank` explicitly; keep unpublished pending product/contract review plus browser and service release checks.
+- 2026-10-21: Audited Chavandoz source packaging and integration. Confirmed the captured invitation body, CSS, metadata, translation table, and art are preserved exactly; only the documented HTML head/runtime paths and Three.js/empty-selector GSAP guards differ. Added four-locale mapping coverage for the one-person sunnat fixture, event/date/venue, six stable program entries, dress palette, icon-only gallery, wishes, To'yona, and contacts. Focused package/fixture/gallery/registration tests pass (19/19); web typecheck passes. Source gaps venue.photo, toyona.bank, and toyona.note remain documented. Browser inventory is empty; mobile, locale switch, reduced-motion, interaction, and service gates remain open; keep unpublished.
+- 2026-10-21: Audited the existing Beshik integration, corrected stale source-adaptation documentation, and added end-to-end contract fixture assertions across Uzbek Latin/Cyrillic, English, and Russian for the one-person celebrant, date, venue/landmark, six ordered program items, dress-code palette, preview gallery, wishes, To'yona, and contacts. Source/body/style/script/art assertions plus focused fixture/gallery/registration tests pass (19/19). pnpm typecheck currently fails in the shared Anor event-label maps because newly added itiruv and korporativ event IDs are missing there; this is outside Beshik's scoped adapter. CUA inventory is empty; browser, mobile, locale-switch, reduced-motion, interaction, and service release gates remain open. Beshik stays unpublished.

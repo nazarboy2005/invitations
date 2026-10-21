@@ -2,12 +2,17 @@
 
 Anor is the first Marxaba reference renderer. The next ten Marxaba nikoh
 references are also authorized for production integration and are tracked in
-`docs/templates/TEMPLATE_ROADMAP.md`. Anor and the other nine designs remain
-unpublished and unselectable until their documented completeness, integration
-and quality gates pass. Oltin Nur was explicitly published in the Neon catalog
-at the user’s request; external deployment and cloud-service verification
-remain pending. Do not treat documented service limitations as completed
-integrations.
+`docs/templates/TEMPLATE_ROADMAP.md`. Oltin Nur, Samarqand Kechasi, Bog‘i Eram,
+Atlas, Oq Kabutar, Kuzgi Chinor, Muhabbat Kitobi, Sahifa, and Oltin Uzuk are published in the Neon catalog.
+Oynavand and Somon Yo‘li are also published at 150,000 UZS after source,
+locale, opening, preview-content, program, and RSVP checks. Qog‘oz Turna is
+published at 150,000 UZS after its source, preview artwork, four-locale,
+opening, and invitation-section checks. Their additive migrations are
+`0022`–`0027`.
+External deployment and cloud-service
+verification remain pending; do not treat documented service limitations as
+completed integrations. Uchar Gilam is explicitly skipped by the user and
+must remain unpublished.
 
 Keep every future template in its own renderer, styles, assets, and motion
 implementation. When a reference source exists, integrate that exact complete
@@ -48,6 +53,15 @@ public catalog and creator template picker. The reference requests Cormorant Gar
 italic) and Great Vibes. Serve those exact Google Fonts files locally with
 matching `@font-face` declarations so rendering does not depend on a third-party
 font request or silently fall back to system fonts.
+
+Keep each template's complete captured Lahzalar/gallery section as authored,
+including its layout, empty-state decoration (when present), and interactions.
+In catalog and blank creator previews, the shared fixture supplies six
+icon-only gallery entries with empty image URLs. This lets the captured
+template list renderer show its own decorative empty-photo cards and controls;
+do not substitute photographs or hand-build a parallel gallery. These entries
+remain preview-only, and public invitations hide the gallery until the creator
+adds photos.
 
 The next ten Marxaba nikoh designs are packaged directly under
 `apps/web/public/templates/<template-id>` and use the same-origin

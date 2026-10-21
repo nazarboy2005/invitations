@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack:///[project]/apps/web/src/app/preview/preview.module.css"],"sourcesContent":[".galleryPage {\n  width: min(1220px, calc(100% - 48px));\n  margin: 0 auto;\n  padding: 52px 0 90px;\n}\n\n.galleryHeader {\n  display: grid;\n  gap: 10px;\n  margin-bottom: 32px;\n}\n\n.backLink {\n  display: inline-flex;\n  align-items: center;\n  gap: 7px;\n  width: fit-content;\n  margin-bottom: 14px;\n  color: var(--muted);\n  font-size: 13px;\n}\n\n.galleryHeader > p {\n  margin: 0;\n  color: var(--muted);\n  font-size: 13px;\n}\n\n.galleryHeader h1 {\n  margin: 0;\n  font-family: var(--font-display);\n  font-size: clamp(34px, 5vw, 58px);\n  font-weight: 400;\n  letter-spacing: -1px;\n}\n\n.galleryHeader > span {\n  max-width: 560px;\n  color: var(--muted);\n  font-size: 14px;\n  line-height: 1.8;\n}\n\n@media (max-width: 560px) {\n  .galleryPage {\n    width: min(100% - 32px, 1220px);\n    padding-top: 32px;\n  }\n}\n"],"names":[],"mappings":"AAAA;;;;;;AAMA;;;;;;AAMA;;;;;;;;;;AAUA;;;;;;AAMA;;;;;;;;AAQA;;;;;;;AAOA;EACE"}}]
+}

@@ -31,7 +31,7 @@
       min-width: 0 !important;
       max-width: 100% !important;
       white-space: normal !important;
-      overflow-wrap: anywhere !important;
+      overflow-wrap: normal !important;
     }
     [data-slot="groom"].platform-name-fit--single-wrap,
     [data-slot="bride"].platform-name-fit--single-wrap {
@@ -39,7 +39,8 @@
       min-width: 0 !important;
       max-width: var(--platform-name-fit-width, 100%) !important;
       white-space: normal !important;
-      overflow-wrap: anywhere !important;
+      overflow-wrap: break-word !important;
+      word-break: normal !important;
     }
     [data-slot="groom"]:not(.decode-name),
     [data-slot="bride"]:not(.decode-name) {
@@ -97,6 +98,9 @@
       }
       .platform-lang-below-greeting .mh-lang {
         top: calc(env(safe-area-inset-top, 0px) + 100px) !important;
+      }
+      .platform-lang-below-greeting:not(.is-locked) .mh-lang {
+        top: calc(env(safe-area-inset-top, 0px) + 6px) !important;
       }
       .mh-lang button {
         min-width: 26px !important;
@@ -162,6 +166,24 @@
         const available = Math.floor(rightEdge - textRect.left - 1);
         if (available < 24) return;
         name.style.setProperty("--platform-name-fit-width", `${available}px`);
+        const fontStyle = getComputedStyle(name);
+        const fontSize = Number.parseFloat(fontStyle.fontSize);
+        const canvas = document.createElement("canvas");
+        const context = canvas.getContext("2d");
+        if (context && fontSize) {
+          context.font = `${fontStyle.fontWeight} ${fontSize}px ${fontStyle.fontFamily}`;
+          const letterSpacing = Number.parseFloat(fontStyle.letterSpacing) || 0;
+          const longestWord = (name.textContent || "")
+            .replace(/-/g, "- ")
+            .trim()
+            .split(/\s+/)
+            .reduce((longest, word) => Math.max(
+              longest,
+              context.measureText(word).width + Math.max(0, word.length - 1) * letterSpacing,
+            ), 0);
+          if (longestWord > available)
+            name.style.fontSize = `${Math.max(18, fontSize * (available - 2) / longestWord)}px`;
+        }
         name.classList.add("platform-name-fit--single-wrap");
       });
 

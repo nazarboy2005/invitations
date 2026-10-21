@@ -1,5 +1,7 @@
 Object.assign(window.MARHAMAT_I18N = window.MARHAMAT_I18N || {}, {
   "Marxaba · Oltin Uzuk": ["Marxaba · Золотое кольцо", "Marxaba · Golden Rings"],
+  "Oltin Uzuk · Taklifnoma": ["Oltin Uzuk · Приглашение", "Oltin Uzuk · Invitation"],
+  "Hashamatli nikoh taklifnomasi": ["Роскошное свадебное приглашение", "A luxury wedding invitation"],
   "Oltin Uzuk — Marxaba raqamli taklifnomasi": ["Золотое кольцо — цифровое приглашение Marxaba", "Golden Rings — a Marxaba digital invitation"],
   "Taklifnoma": ["Приглашение", "Invitation"],
   "Taklifnomani ochish": ["Открыть приглашение", "Open invitation"],

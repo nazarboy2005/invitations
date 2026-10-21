@@ -1,0 +1,19 @@
+{
+  "artifact": "preview.webp",
+  "artifactSha256": "c99682bb44b7839e4ca192aa9edf81a47bba8e0f1fcb316d82088908e84583d8",
+  "format": "image/webp",
+  "width": 480,
+  "height": 900,
+  "sourceCapture": "Invitations - this folder will be removed from production/Marxaba/Qiz uzatish/templates/lola",
+  "renderedFrom": "captured Lola opening after opening motion settles",
+  "previewRoute": "/preview?template=lola&qaSilent=1",
+  "fixture": "apps/web/src/modules/catalog/preview-sample.json",
+  "locale": "uz-Latn",
+  "viewport": {
+    "width": 480,
+    "height": 900,
+    "deviceScaleFactor": 1
+  },
+  "verificationNote": "Prior browser-render provenance recorded in SOURCE_PROVENANCE.md; browser render was not independently repeated in the current audit.",
+  "sourceNote": "art/sandiq-lid.webp is referenced by captured CSS but omitted from the capture manifest. The packaged asset was recovered byte-for-byte from the same deployed Lola template and is checksum-verified; no approximation was used."
+}

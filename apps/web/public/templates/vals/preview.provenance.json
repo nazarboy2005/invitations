@@ -1,0 +1,27 @@
+{
+  "artifact": "preview.webp",
+  "sha256": "ad591e25d5ba5c5746ac2c0fbc8a50bf5dd15e796ebee3357b67dc0a5c0e0a31",
+  "width": 720,
+  "height": 1280,
+  "format": "WEBP",
+  "route": "/preview?template=vals&qaSilent=1",
+  "fixture": "apps/web/src/modules/catalog/preview-sample.json",
+  "fixtureSha256": "4faa5157eb048e2d1ce4a47ae0ac4c45e8edcadc1debf9ece1287380ce7333e9",
+  "capture": {
+    "sourceFolder": "Invitations - this folder will be removed from production/Marxaba/Nikoh/templates/vals",
+    "selector": "#intro",
+    "viewport": {
+      "width": 720,
+      "height": 1280,
+      "deviceScaleFactor": 1
+    },
+    "hiddenPlatformControls": [".mh-lang", "nextjs-portal"],
+    "source": {
+      "indexHtmlSha256": "a33cb05b3ce803da88d36fa62c2ca42436f48bcccd30b3e117283496e890c141",
+      "templateCssSha256": "1eac383b2977b4052dbeedac7b1ee9560e8928faf0dd9fd4a2ca9fe7712e04ca",
+      "templateJsSha256": "3d855db7c06933a329d9909a1ee559d6a935fcdf463484263de4404bce28b701",
+      "waltzAnimationSha256": "3bd462f1657a42eae6aa4fc07dd9579c7082dc96ab260b7e6ffafc26209a6328",
+      "roomArtSha256": "f4ceae9c553c13a3ea3eba00911176e4a6f1183daf98a18c4e9de458e1881ba2"
+    }
+  }
+}

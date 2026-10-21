@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="uz" class="is-locked">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f3e6d6">
+  <meta name="description" content="Bulbul · Taklifnoma">
+  <meta property="og:title" content="Bulbul · Taklifnoma">
+  <meta property="og:description" content="Tongda oltin qafas eshigi ochiladi va bulbul baxtli kuningizga yetaklaydi.">
+  <meta property="og:image" content="preview.png">
+  <title>Bulbul · Taklifnoma</title>
+  <link rel="stylesheet" href="fonts.css">
+  <link rel="stylesheet" href="../shared/nikoh/base.css">
+  <link rel="stylesheet" href="template.css">
+  <link rel="stylesheet" href="platform-adapter.css">
+  <script src="../shared/nikoh/vendor/gsap.min.js" defer></script>
+  <script src="../shared/nikoh/vendor/ScrollTrigger.min.js" defer></script>
+  <script src="../shared/nikoh/vendor/lz-string.min.js" defer></script>
+  <script src="../shared/nikoh/invite-codec.js" defer></script>
+  <script src="../shared/nikoh/i18n.js" defer></script>
+  <script src="i18n.js" defer></script>
+  <script src="../shared/nikoh/platform-bridge.js" defer></script>
+  <script src="../shared/nikoh/core.js" defer></script>
+  <script src="meta.js" defer></script>
+  <script src="plaque.js" defer></script>
+  <script src="template.js" defer></script>
+</head><body>
+  <div class="backdrop" aria-hidden="true"></div>
+
+  <!-- the nightingale: one drawing, reused for the flying bird and the small ornaments -->
+  <svg width="0" height="0" class="sr-only" aria-hidden="true" focusable="false">
+    <defs>
+      <linearGradient id="bb-body" x1=".3" y1="0" x2=".5" y2="1"><stop offset="0" stop-color="#7d5f45"/><stop offset=".5" stop-color="#a98466"/><stop offset=".78" stop-color="#e2cdb2"/><stop offset="1" stop-color="#f4e8d6"/></linearGradient>
+      <linearGradient id="bb-head" x1="0" y1="0" x2=".3" y2="1"><stop offset="0" stop-color="#76583f"/><stop offset=".7" stop-color="#94755a"/><stop offset="1" stop-color="#d9c3a6"/></linearGradient>
+      <linearGradient id="bb-tail" x1="1" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8f5534"/><stop offset="1" stop-color="#c07a45"/></linearGradient>
+      <linearGradient id="bb-wing" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#6b4f3a"/><stop offset=".6" stop-color="#8a6b51"/><stop offset="1" stop-color="#a88a6c"/></linearGradient>
+      <linearGradient id="bb-rim" x1="1" y1="0" x2="0" y2="0"><stop offset="0" stop-color="#ffe2a8" stop-opacity=".9"/><stop offset=".35" stop-color="#ffe2a8" stop-opacity="0"/></linearGradient>
+      <symbol id="bird-shape" viewBox="0 0 100 72">
+        <path d="M42 44C30 47 16 53 5 60c7 2.6 16 1.4 24-2.4C23 63 17 67 13 71c12-1.4 22-8 32-18Z" fill="url(#bb-tail)"/>
+        <path d="M37 41c0-12 11-20 24-19 11 1 16 10 13 21-3 12-16 19-28 16-7-2-9-9-9-18Z" fill="url(#bb-body)"/>
+        <circle cx="68" cy="25" r="11.5" fill="url(#bb-head)"/>
+        <path d="M63 31c3 5 8 7 13 3-1 6-6 9-12 8-2-3-2-7-1-11Z" fill="#f3e6d3" opacity=".9"/>
+        <path class="bird__folded" d="M43 32c10-5 21-2 23 7-3 9-14 14-30 12 3-6 3-14 7-19Z" fill="url(#bb-wing)"/>
+        <path class="bird__folded" d="M45 38c6-2 12-1 16 2M42 43c7-1 13 0 17 2M40 48c6 0 11 0 14 1" stroke="#c9ad8c" stroke-width="1" fill="none" opacity=".7"/>
+        <path d="M37 41c0-12 11-20 24-19 6 .4 10 3 12 7-12-5-26 0-33 12Z" fill="url(#bb-rim)" opacity=".8"/>
+        <circle cx="71.4" cy="23.6" r="3.4" fill="#efe2cf"/>
+        <circle cx="71.6" cy="23.6" r="2.3" fill="#1d130e"/>
+        <circle cx="72.4" cy="22.8" r=".75" fill="#fff"/>
+        <path d="M78.5 24.6 88.5 26.6 78.6 28.6Z" fill="#4a3426"/>
+        <path d="M53 57l-2 9m-2 0h5M59 57v9m-2 0h5" stroke="#7d5c4d" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+      </symbol>
+    </defs>
+  </svg>
+
+  <!-- 1. Intro film: a golden cage on a windowsill at dawn -->
+  <section class="intro" id="intro" aria-label="Taklifnomani ochish">
+    <div class="stage">
+    <div class="room" aria-hidden="true"><svg class="room__svg"></svg></div>
+    <div class="room__veil" aria-hidden="true"></div>
+    <div class="room__spill" aria-hidden="true"></div>
+    <div class="room__beams" aria-hidden="true"><i></i><i></i><i></i></div>
+    <div class="cage" aria-hidden="true">
+      <div class="cage__glow"></div>
+      <div class="cage__shadow"></div>
+      <img class="cage__back" src="art/cage-back.webp" width="640" height="1000" alt="">
+      <div class="cage__inside"></div>
+      <img class="cage__front" src="art/cage-front.webp" width="640" height="1000" alt="">
+      <div class="cage__door">
+        <img src="art/cage-door.webp" width="232" height="330" alt="">
+        <canvas class="plaque"></canvas>
+        <i class="plaque__back"></i>
+      </div>
+      <i class="cage__glint"></i>
+      <i class="cage__ring"></i>
+    </div>
+    <img class="sill-sprig" src="art/blossom-branch.webp" width="1440" height="480" alt="" aria-hidden="true">
+    </div>
+    <div class="intro__copy">
+      <p class="intro__kicker">Taklifnoma</p>
+      <p class="intro__greeting" data-slot="greeting"></p>
+    </div>
+    <button class="cage-door-btn" id="open-invitation" type="button" aria-label="Taklifnomani ochish"></button>
+    <p class="intro__hint"><span aria-hidden="true"></span>Qafas eshigini oching<span aria-hidden="true"></span></p>
+  </section>
+
+  <canvas class="trail" aria-hidden="true"></canvas>
+  <div class="sky-layer" aria-hidden="true"></div>
+  <div class="bird" id="bird" aria-hidden="true"><svg viewBox="0 0 100 72"><g class="bird__far-wing"><path d="M56 34C52 22 44 10 30 3c3 7 6 11 7 14-6-2-11-2-16-1 7 6 14 9 20 11-4 2-7 3-9 5 9 4 19 5 24 2Z" fill="#5f4532"/></g><g class="bird__body"><path class="bird__tail" d="M42 44C30 47 16 53 5 60c7 2.6 16 1.4 24-2.4C23 63 17 67 13 71c12-1.4 22-8 32-18Z" fill="url(#bb-tail)"/>
+<path d="M37 41c0-12 11-20 24-19 11 1 16 10 13 21-3 12-16 19-28 16-7-2-9-9-9-18Z" fill="url(#bb-body)"/>
+<circle cx="68" cy="25" r="11.5" fill="url(#bb-head)"/>
+<path d="M63 31c3 5 8 7 13 3-1 6-6 9-12 8-2-3-2-7-1-11Z" fill="#f3e6d3" opacity=".9"/>
+<path class="bird__folded" d="M43 32c10-5 21-2 23 7-3 9-14 14-30 12 3-6 3-14 7-19Z" fill="url(#bb-wing)"/>
+<path class="bird__folded" d="M45 38c6-2 12-1 16 2M42 43c7-1 13 0 17 2M40 48c6 0 11 0 14 1" stroke="#c9ad8c" stroke-width="1" fill="none" opacity=".7"/>
+<path d="M37 41c0-12 11-20 24-19 6 .4 10 3 12 7-12-5-26 0-33 12Z" fill="url(#bb-rim)" opacity=".8"/>
+<circle cx="71.4" cy="23.6" r="3.4" fill="#efe2cf"/>
+<circle cx="71.6" cy="23.6" r="2.3" fill="#1d130e"/>
+<circle cx="72.4" cy="22.8" r=".75" fill="#fff"/>
+<path d="M78.5 24.6 88.5 26.6 78.6 28.6Z" fill="#4a3426"/>
+<path class="bird__legs" d="M53 57l-2 9m-2 0h5M59 57v9m-2 0h5" stroke="#7d5c4d" stroke-width="1.6" stroke-linecap="round" fill="none"/></g><g class="bird__wing"><path d="M56 34C50 20 40 8 22 2c4 8 8 12 10 15-6-2-12-2-18 0 8 6 16 10 22 12-4 2-8 3-10 5 10 4 22 4 30 0Z" fill="url(#bb-wing)"/><path d="M48 30C42 22 34 14 24 8M44 31c-6-4-14-7-22-9M42 33c-5-1-10-1-15 0" stroke="#c9ad8c" stroke-width=".9" fill="none" opacity=".75"/></g></svg></div>
+
+  <main class="page" id="page">
+    <!-- 2. Hero: an apricot orchard at sunrise, a tapchan under the tree -->
+    <header class="hero" id="hero" data-section="hero">
+      <div class="scene" aria-hidden="true">
+        <div class="scene__pan">
+          <img class="scene__sky" src="art/scene-sky.webp" width="450" height="900" alt="">
+          <div class="scene__sun"><i></i></div>
+          <div class="scene__rays"></div>
+          <img class="scene__far" src="art/scene-far.webp" width="600" height="1200" alt="">
+          <i class="scene__horizon"></i>
+          <img class="scene__mid" src="art/scene-mid.webp" width="720" height="1440" alt="">
+          <div class="scene__dapples"></div>
+          <div class="scene__front"><img src="art/scene-front.webp" width="720" height="1440" alt=""></div>
+        </div>
+        <div class="scene__grade"></div>
+      </div>
+      <div class="hero__copy">
+        <p class="hero__kicker" data-slot="eventType"></p>
+        <h1 class="sr-only"><span data-slot="groom"></span> &amp; <span data-slot="bride"></span></h1>
+        <svg class="names" aria-hidden="true"></svg>
+        <p class="hero__date"><span data-slot="date.day"></span><i aria-hidden="true"></i><span data-slot="date.monthNumber"></span><i aria-hidden="true"></i><span data-slot="date.year"></span></p>
+        <p class="hero__when"><span data-slot="date.weekday"></span> · <span data-slot="date.time"></span></p>
+      </div>
+      <a class="hero__cue" href="#invitation-text"><span>Taklifnomani ko‘rish</span><i aria-hidden="true"></i></a>
+    </header>
+
+    <!-- 3. Invitation text -->
+    <section class="section section--letter" id="invitation-text" data-section="invitation-text">
+      <svg class="flight-line" viewBox="0 0 360 200" preserveAspectRatio="none" aria-hidden="true"><path d="M300 0C290 50 200 40 186 90c-10 38 34 56 12 84-10 13-30 18-36 26"/></svg>
+      <div class="letter">
+        <svg class="letter__bird" viewBox="0 0 100 72" aria-hidden="true"><use href="#bird-shape"/></svg>
+        <p class="eyebrow">Aziz mehmonimiz</p>
+        <p class="letter__greeting" data-slot="greeting"></p>
+        <p class="letter__message" data-slot="message"></p>
+        <span class="rule" aria-hidden="true"><i></i></span>
+        <p class="letter__label" data-slot="hostsLabel"></p>
+        <p class="letter__hosts" data-slot="hosts"></p>
+      </div>
+    </section>
+
+    <!-- 4. Date: the calendar framed by the window arch -->
+    <section class="section section--date" id="date" data-section="date">
+      <p class="eyebrow">Uchrashuv kuni</p>
+      <h2 class="section__title">Baxtli tong</h2>
+      <div class="date-window">
+        <svg class="date-window__frame" viewBox="0 0 100 140" preserveAspectRatio="none" aria-hidden="true"><path d="M3 139V60C3 34 30 18 50 3c20 15 47 31 47 57v79Z" vector-effect="non-scaling-stroke"/><path class="inner" d="M8 134V61C8 38 32 23 50 10c18 13 42 28 42 51v73Z" vector-effect="non-scaling-stroke"/></svg>
+        <div class="calendar" data-calendar aria-label="To‘y kuni taqvimi"></div>
+        <p class="date-window__time"><span data-slot="date.weekday"></span><i aria-hidden="true"></i><span data-slot="date.time"></span></p>
+      </div>
+      <p class="eyebrow eyebrow--count">Baxtli kungacha</p>
+      <div class="countdown" data-countdown aria-live="off">
+        <div><strong data-unit="days">00</strong><span>kun</span></div>
+        <div><strong data-unit="hours">00</strong><span>soat</span></div>
+        <div><strong data-unit="minutes">00</strong><span>daqiqa</span></div>
+        <div><strong data-unit="seconds">00</strong><span>soniya</span></div>
+        <p data-countdown-past hidden>Bu kunni birga nishonlaganingiz uchun rahmat!</p>
+      </div>
+      <button class="button button--outline" type="button" data-ics>Kalendarga qo‘shish</button>
+    </section>
+
+    <!-- 5. Program: a twig grows down the timeline, a blossom opens at each hour -->
+    <section class="section section--program" id="program" data-section="program">
+      <p class="eyebrow">Birgalikdagi oqshom</p>
+      <h2 class="section__title">To‘y dasturi</h2>
+      <div class="timeline">
+        <svg class="timeline__twig" viewBox="0 0 20 100" preserveAspectRatio="none" aria-hidden="true"><path class="base" d="M10 0C4 20 16 30 10 50S4 80 10 100" vector-effect="non-scaling-stroke"/><path class="fill" d="M10 0C4 20 16 30 10 50S4 80 10 100" vector-effect="non-scaling-stroke" pathLength="1"/></svg>
+        <ol class="program" data-list="program">
+          <template>
+            <li class="program__item"><i class="program__bud" aria-hidden="true"></i><time data-field="time"></time><span data-field="title"></span></li>
+          </template>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 6. Venue -->
+    <section class="section section--venue" id="venue" data-section="venue">
+      <p class="eyebrow">Manzil</p>
+      <h2 class="section__title">To‘y manzili</h2>
+      <div class="venue__photo"><img data-photo="venue.photo" alt="To‘y manzili" width="800" height="600" loading="lazy" decoding="async"></div>
+      <h3 class="venue__name" data-slot="venue.name"></h3>
+      <p class="muted" data-slot="venue.address"></p>
+      <div class="button-row">
+        <a class="button button--outline" data-map="yandex" target="_blank" rel="noopener noreferrer">Yandex xaritada</a>
+        <a class="button button--outline" data-map="google" target="_blank" rel="noopener noreferrer">Google xaritada</a>
+      </div>
+    </section>
+
+    <section class="section section--dress" id="dresscode" data-section="dresscode">
+      <p class="eyebrow">Kiyinish uslubi</p>
+      <h2 class="section__title">Dress-kod</h2>
+      <div class="dresscode" data-dresscode><svg class="dresscode__icon" viewBox="0 0 64 40" aria-hidden="true"><path d="M28.5 9.5a3.5 3.5 0 1 1 3.5 3.5c-1.6 0-3 1.2-3 2.8v2.2L4 34.5h56L32 18"/></svg><p class="dresscode__style" data-slot="dressCode.style"></p><p class="dresscode__text" data-slot="dressCode.text"></p><ul class="dresscode__palette" data-list="dresscode"><template><li><i data-field-attr="style:style"></i><span data-field="name"></span></li></template></ul><p class="dresscode__note" data-slot="dressCode.note"></p></div>
+    </section>
+
+    <!-- 7. Gallery -->
+    <section class="section section--gallery" id="gallery" data-section="gallery">
+      <p class="eyebrow">Xotiralar</p>
+      <h2 class="section__title">Lahzalar</h2>
+      <div class="gallery__frame">
+        <button class="gallery__arrow" type="button" data-gallery-prev aria-label="Oldingi surat">‹</button>
+        <div class="gallery" data-gallery data-list="gallery" aria-label="Suratlar galereyasi">
+          <template>
+            <button class="gallery__item" type="button" data-field-attr="aria-label:alt" aria-label="Suratni kattalashtirish"><img data-field-attr="src:src,alt:alt" data-photo alt="To‘y surati" width="640" height="800" loading="lazy" decoding="async"></button>
+          </template>
+        </div>
+        <button class="gallery__arrow" type="button" data-gallery-next aria-label="Keyingi surat">›</button>
+      </div>
+      <div class="gallery__dots" data-gallery-dots aria-label="Surat tanlash"></div>
+    </section>
+
+    <!-- 8. RSVP -->
+    <section class="section section--rsvp" id="rsvp" data-section="rsvp">
+      <div class="rsvp-card">
+        <svg class="rsvp-card__bird" viewBox="0 0 100 72" aria-hidden="true"><use href="#bird-shape"/></svg>
+        <p class="eyebrow">Bizga xabar bering</p>
+        <h2 class="section__title">Tashrifingizni tasdiqlang</h2>
+        <p class="muted">Javobingiz biz uchun muhim.</p>
+        <form data-rsvp>
+          <div class="rsvp__fields" data-rsvp-form>
+            <div class="rsvp__choices" role="group" aria-label="Tashrif javobi">
+              <button type="button" data-rsvp-choice="yes" aria-pressed="false">Kelaman</button>
+              <button type="button" data-rsvp-choice="no" aria-pressed="false">Kelmayman</button>
+              <button type="button" data-rsvp-choice="maybe" aria-pressed="false">Hali bilmayman</button>
+            </div>
+            <label class="field"><span>Ismingiz</span><input type="text" name="name" autocomplete="name" maxlength="80" required></label>
+            <div class="rsvp__party" data-rsvp-party>
+              <span>Necha kishi bo‘lasiz?</span>
+              <div class="stepper"><button type="button" data-rsvp-minus aria-label="Mehmonlar sonini kamaytirish">−</button><output data-rsvp-count>1</output><button type="button" data-rsvp-plus aria-label="Mehmonlar sonini oshirish">+</button></div>
+            </div>
+            <p class="muted rsvp__deadline" data-rsvp-deadline></p>
+            <button class="button button--primary" type="submit" data-rsvp-submit>Javobni yuborish</button>
+          </div>
+          <div class="rsvp__done" data-rsvp-done hidden aria-live="polite">
+            <span class="rsvp__stamp" aria-hidden="true"><svg viewBox="0 0 100 72"><use href="#bird-shape"/></svg></span>
+            <p class="rsvp__thanks">Javobingiz uchun rahmat!</p>
+            <p class="rsvp__summary" data-rsvp-summary></p>
+            <button class="text-link" type="button" data-rsvp-change>Javobni o‘zgartirish</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- 9. Wishes -->
+    <section class="section section--wishes" id="wishes" data-section="wishes">
+      <p class="eyebrow">Yurakdan</p>
+      <h2 class="section__title">Tilaklar</h2>
+      <ul class="wishes" data-list="wishes">
+        <template>
+          <li class="wishes__item"><p data-field="text"></p><strong data-field="name"></strong></li>
+        </template>
+      </ul>
+      <form class="wish-form" data-wishes-form>
+        <label class="field"><span>Ismingiz</span><input name="name" maxlength="60" required></label>
+        <label class="field"><span>Tilagingiz</span><textarea name="text" rows="4" maxlength="360" required></textarea></label>
+        <button class="button button--outline" type="submit">Tilak yuborish</button>
+        <p class="wish-form__feedback" data-wishes-feedback role="status" aria-live="polite"></p>
+      </form>
+    </section>
+
+    <!-- 10. To‘yona: a rolled note tied with a ribbon, the kind a messenger bird carries -->
+    <section class="section section--toyona" id="toyona" data-section="toyona">
+      <p class="eyebrow">Ezgu niyatlar</p>
+      <h2 class="section__title">To‘yona</h2>
+      <p class="muted" data-slot="toyona.note"></p>
+      <div class="gift">
+        <button class="gift__note" type="button" aria-expanded="false">
+          <i class="gift__ribbon" aria-hidden="true"></i><span>To‘yona ma’lumotlarini ko‘rish</span>
+        </button>
+        <div class="gift__details">
+          <span data-slot="toyona.bank"></span>
+          <strong data-slot="toyona.cardNumber"></strong>
+          <span data-slot="toyona.cardHolder"></span>
+          <button class="button button--outline" type="button" data-copy="toyona.cardNumber">Nusxa olish</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 11. Contacts -->
+    <section class="section section--contacts" id="contacts" data-section="contacts">
+      <p class="eyebrow">Savollar uchun</p>
+      <h2 class="section__title">Bog‘lanish uchun</h2>
+      <ul class="contacts" data-list="contacts">
+        <template>
+          <li><a data-field-attr="href:href" target="_blank" rel="noopener noreferrer"><span data-field="label"></span><strong data-field="value"></strong><span aria-hidden="true">↗</span></a></li>
+        </template>
+      </ul>
+    </section>
+
+    <!-- 12. Footer: two nightingales on one branch -->
+    <footer class="footer" id="footer" data-section="footer">
+      <div class="footer__branch" aria-hidden="true">
+        <img src="art/blossom-branch.webp" width="1440" height="480" alt="" loading="lazy" decoding="async">
+        <svg class="footer__bird footer__bird--a" viewBox="0 0 100 72"><use href="#bird-shape"/></svg>
+        <svg class="footer__bird footer__bird--b" viewBox="0 0 100 72"><use href="#bird-shape"/></svg>
+      </div>
+      <p class="footer__names"><span data-slot="groom"></span> <span class="amp">&amp;</span> <span data-slot="bride"></span></p>
+      <small data-slot="date.long"></small>
+      <small class="footer__made" data-slot="footer">Marxaba bilan yaratildi</small>
+    </footer>
+  </main>
+
+  <canvas class="petals" aria-hidden="true"></canvas>
+  <button class="music-toggle" type="button" data-music-toggle hidden aria-label="Musiqani yoqish"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V6l10-2v12"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="16" r="2.5"/></svg></button>
+  <audio data-music loop preload="none" hidden></audio>
+  <div class="toast" data-toast role="status" aria-live="polite"></div>
+</body>
+
+

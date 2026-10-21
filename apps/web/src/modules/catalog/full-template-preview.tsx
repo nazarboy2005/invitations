@@ -96,6 +96,7 @@ export function FullTemplatePreview({
           preview
           fullPreview
           catalogMusic={catalogPreview}
+          sampleWishes={catalogPreview}
         />
       ) : isMarxabaTemplate(template.id) ? (
         <MarxabaInvitation
@@ -107,6 +108,7 @@ export function FullTemplatePreview({
           fullPreview
           catalogMusic={catalogPreview}
           silentPlayback={silentPlayback}
+          sampleWishes={catalogPreview}
         />
       ) : (
         <div className={styles.unsupported}>

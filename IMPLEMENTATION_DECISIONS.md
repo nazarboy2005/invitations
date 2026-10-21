@@ -20,6 +20,9 @@ Confirmed requirements:
 - Platform administrators can assign any template to any category throughout the website. Categories are catalog organization, independent from an invitation's event type, selected design, price, publication state, or authored content.
 - Use shared category assignments across the public catalog and creator template picker, rather than hard-coded categories in each screen. A template can belong to multiple categories; administrators can update assignments without editing customer invitations.
 - User requirement (2026-10-21): template event compatibility is separate from catalog categories. Each template has an admin-managed set of supported event types in the database. Show only compatible published templates after the creator chooses an event type, and reject incompatible template/event pairs when saving. Admins cannot remove a supported event type while saved invitations still use that template with that event type. A template must support at least one event type.
+- Implementation recommendation (2026-10-21): the captured Marxaba metadata uses distinct Fotiha, Qiz uzatish, and Sunnat to‘yi event labels. Represent these as typed event IDs and localized creator options, mapping only the exact event types each template declares. Keep catalog category assignments unchanged; this extends the currently small event-type list based on the approved source-backed compatibility model.
+- Implementation recommendation (2026-10-21): the captured Beshik design declares Beshik to‘yi and birthday compatibility. Add Beshik to‘yi as a localized event type, keep its compatibility separate from catalog categories, and present one celebrant field for the Beshik design.
+- Source-backed event mapping (2026-10-21): add distinct localized `yubiley` and `iftorlik` event IDs when captured template metadata declares them. Map source IDs exactly (`tugilgan-kun` to `birthday`, `yubiley` to `yubiley`; `iftorlik` to `iftorlik`) and keep these event compatibility values separate from the `birthday` and `osh` catalog categories.
 - In the creator’s template picker, show only category filters that contain at least one published template compatible with the selected event type. “Barchasi” counts and displays the complete compatible template set.
 - User requirement (2026-10-21): make template selection the first creator step. Keep event type selection in that first step so the available templates and category filters can be constrained immediately. Follow with invitation details, date/location/program, and photos/options.
 - Current correction: remove every provisional/dummy template from the application. The Suzani, Shirin bayram, and Ivory Love starter designs are not approved final templates and must not appear as selectable, previewable, or public invitation designs.
@@ -425,7 +428,8 @@ Development agents are distinct from production queue workers. The running app w
   pass. Do not apply a live migration or deploy externally.
 
 - Confirmed: use one shared `apps/web/src/modules/catalog/preview-sample.json` fixture for catalog and the initial template-selection stage. It contains consistent sample names, family/hosts, event date and time, venue, greeting, invitation text, event label, and repeatable program entries in Uzbek Latin, Uzbek Cyrillic, English, and Russian.
-- User correction (2026-10-20): use Asadbek and Gulhayo as the shared example names in every locale's sample fixture.
+- User requirement (2026-10-21): show three example guest wishes in every template's catalog and initial template-selection preview, with the section eyebrow “Yurakdan” where that is part of the captured design. Keep sample wishes in the shared localized `preview-sample.json` fixture and never persist or publish them as invitation content.
+- User correction (2026-10-21): use the catalog artwork names Javohir and Madina as the shared demo couple in every locale, so opening a template preview matches its catalog card. In Uzbek Cyrillic and Russian demo names, render the Latin name sound `h` with `х` (Javohir → Жавохир); keep normal Uzbek Cyrillic spelling such as `ҳ` in the surrounding Uzbek copy. Apply these names only to catalog/initial selection samples; authored creator content replaces them and sample data is never saved or published.
 - User requirement (2026-10-20): show language choices as `Uz`, `Уз`, `En`, and `Ru` in the invitation language switcher, while retaining the internal locale identifiers for storage and routing.
 - Every template maps the same fixture into its own source design. Creator-authored data takes precedence; the fixture is presentation-only and must never be saved, exported, or published.
 - Keep fixture editing in source control for now. An admin settings screen for changing preview samples is a future option, not a current requirement.
@@ -438,3 +442,80 @@ Development agents are distinct from production queue workers. The running app w
   design. If any required release gate is still open, stay on that design and
   leave it unpublished; do not count implementation progress as publication
   readiness.
+- User selected Samarqand Kechasi as the next template and requested publication
+  through the same catalog mechanism and existing 150,000 UZS price after its
+  template checks pass. This authorizes its additive catalog publication
+  migration; it does not authorize external deployment or live payment changes.
+- User requested that, after Samarqand Kechasi, the next template be fully
+  prepared and published using the same catalog mechanism. Bog‘i Eram is the
+  next template in the approved batch. The request authorizes its additive
+  publication migration at the existing 150,000 UZS price; it does not
+  authorize external deployment or live payment changes.
+- User requested that template work continue after Bog‘i Eram. Atlas is the
+  next design and may be published with an additive migration at its existing
+  150,000 UZS price after its documented checks pass. Do not deploy externally
+  or activate live payments as part of this work.
+
+- User request (2026-10-21): continue through the remaining Marxaba templates
+  and other already captured, approved reference sources one at a time. Make each
+  publishable and publish it through the existing catalog mechanism only after
+  its required release gates pass. This supersedes the earlier pause after Atlas
+  for the newly approved sequence; it does not authorize external deployment or
+  live payment activation.
+- User clarification (2026-10-21): finish the remaining Marxaba designs first,
+  then continue with Chorlove. Work on distinct templates in parallel where
+  possible; the primary agent reviews each worker's changes and release gates
+  before publication. Unfinished designs remain unpublished. This does not
+  authorize external deployment or live payment activation.
+- User correction (2026-10-21): Uchar Gilam's names must appear directly on the
+  carpet as in its original artwork; the dark rounded text panel is not
+  acceptable. Published template previews should show the original clothing
+  section, populated with localized sample dress-code text and palette.
+
+- User correction (2026-10-21): skip Uchar Gilam completely and continue with
+  the next template. Oq Kabutar is now catalog-published at 150,000 UZS after
+  source fidelity, four locales, opening, mobile layout, RSVP state, optional
+  sections, and browser checks passed. External deployment and cloud-media/save
+  verification remain open. Continue with Kuzgi Chinor.
+- Follow-up (2026-10-21): Kuzgi Chinor is now catalog-published at 150,000 UZS
+  after the four-locale, source-fidelity, opening, mobile, RSVP, optional-section,
+  reduced-motion source guard, and asset checks passed. Its app-specific page
+  metadata uses Uzbek as the source text so Uzbek Cyrillic renders naturally.
+  External deployment and cloud-media/save verification remain open. Continue
+  with Muhabbat Kitobi; Uchar Gilam remains skipped.
+
+- Follow-up (2026-10-21): Muhabbat Kitobi is catalog-published at 150,000 UZS after its four-locale copy/metadata, source fidelity, responsive preview, RSVP, authored-story integration, and release checks passed. Story chapter labels are localized. External deployment and cloud-media/save verification remain open. Continue with Sahifa; Uchar Gilam remains skipped.
+- Follow-up (2026-10-21): Sahifa is catalog-published at 150,000 UZS after source fidelity, localized metadata, four-locale content, opening, mobile width, optional sections, and clean browser-console checks passed. Preview wishes use the shared localized sample fixture; locale switching preserves invitation data. External deployment and cloud-media/save verification remain open. Continue with Oltin Uzuk; Uchar Gilam remains skipped.
+- Follow-up (2026-10-21): Oltin Uzuk is catalog-published at 150,000 UZS after source artwork/styles, four-locale content and metadata, mobile width, opening, RSVP, optional sections, example wishes, and clean browser-console checks passed. Empty scene animations are skipped when the captured photo-based ring film replaces the 3D scene. External deployment and cloud-media/save verification remain open. Continue with Oynavand; Uchar Gilam remains skipped.
+- User requirement (2026-10-21): every catalog and initial template-selection preview must show the optional To‘yona section using the shared preview-only JSON fixture. The example card details are `8600 1234 5678 9012` and `AZIZ AZIZOV`; never include them in saved creator invitations or public invitation data.
+- User requirement (2026-10-21): every catalog and initial template-selection preview must show the Bog‘lanish section with the shared preview-only contact examples `+998 90 123 45 67` and `@demo`. Keep these out of saved creator invitations and public invitation data.
+- User requirement (2026-10-21): extend the shared preview-only wedding program to six localized entries (17:30 guest arrival, 18:00 couple entrance, 18:30 congratulations and dinner, 20:00 dancing and music, 21:30 cake, 22:30 closing words). Keep the Lahzalar section visible in template previews even when the gallery has no images; continue hiding empty galleries on public invitations.
+- User correction (2026-10-21): use each template's complete captured Lahzalar/gallery section, including its original markup, styling, and interactions, across published and remaining templates. Do not hand-build repeated placeholder cards or substitute images. Keep the preview-only gallery section visible when the fixture has no photos; use only decorative empty-state elements that are actually present in that template's captured source. The local Anor capture has the arch gallery, image template, arrows, and dots, but no empty-state star cards, so its app preview must follow that captured implementation rather than the improvised cards.
+- Follow-up (2026-10-21): Oynavand is catalog-published at 150,000 UZS after
+  source fidelity, portrait opening artwork, four-locale, opening, sample
+  program/dress-code/wishes/To‘yona/contact, empty Lahzalar, and RSVP checks.
+  Additive migrations `0022` and `0023` were applied. External website deploy
+  and cloud-service readiness remain unverified; continue with Somon Yo‘li.
+- Follow-up (2026-10-21): Somon Yo‘li is catalog-published at 150,000 UZS
+  after four-locale, opening, six-item localized program, source gallery,
+  preview-only gift/contact, RSVP/wishes, and build checks. Migrations `0024`
+  and `0025` were applied. Fixed locale-specific program delivery in the shared
+  Marxaba runtime. External website deployment and cloud-service readiness
+  remain unverified; continue with Qog‘oz Turna. The full test suite has one
+  unrelated existing failure because Paxta's expected `preview.webp` is absent.
+- Follow-up (2026-10-21): Qog‘oz Turna is catalog-published at 150,000 UZS
+  after exact captured body/style/motion checks, packaged portrait artwork,
+  four-locale browser review, opening behavior, the complete six-item program,
+  preview gallery, shared wishes, gift/contact sample, and RSVP controls passed.
+  Migrations `0026` and `0027` were applied. External deployment and cloud
+  service readiness remain unverified; continue with Nilufar.
+- User correction (2026-10-21): catalog and blank creator previews must show the
+  captured Lahzalar empty-photo icon cards across templates. Use six icon-only
+  entries with empty image URLs in the shared preview fixture so each captured
+  renderer draws its own placeholder cards and controls. Do not use sample
+  photographs. Keep these entries out of saved and public invitations; public
+  galleries remain hidden until the creator adds photos. Refresh placeholder
+  image fallback and carousel bindings when preview data arrives after iframe
+  initialization.
+
+- User requirement (2026-10-21): preview-only empty Lahzalar items display a decorative icon without the repeated “To‘y surati” fallback text. Gallery previous/next controls wrap from either end and scroll smoothly, respecting reduced-motion preferences. Keep accessible localized labels on the controls.

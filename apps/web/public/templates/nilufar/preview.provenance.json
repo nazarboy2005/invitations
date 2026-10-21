@@ -1,0 +1,9 @@
+{
+  "asset": "preview.webp",
+  "sourceAsset": "art/poster-pond.webp",
+  "sourcePackage": "Invitations - this folder will be removed from production/Marxaba/Nikoh/templates/nilufar",
+  "sha256": "d57d4a6cf59c8f7488b800a2d258417eee89d8859404753b37cb6d23fdf30994",
+  "width": 1080,
+  "height": 1920,
+  "notes": "The catalog preview is byte-identical to the captured poster-pond.webp, used as the first static background in the opening section before the interactive pond canvas animates."
+}
