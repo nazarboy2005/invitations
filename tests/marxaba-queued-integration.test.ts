@@ -60,6 +60,14 @@ const nextSourceBatchMigration = readFileSync(
   ),
   "utf8",
 );
+const kozguPublicationMigration = readFileSync(
+  new URL("../packages/database/migrations/0050_publish_kozgu.sql", import.meta.url),
+  "utf8",
+);
+const qandilPublicationMigration = readFileSync(
+  new URL("../packages/database/migrations/0049_publish_qandil.sql", import.meta.url),
+  "utf8",
+);
 const qatlamMigration = readFileSync(
   new URL(
     "../packages/database/migrations/0037_add_qatlam_template.sql",
@@ -121,7 +129,7 @@ const dispatch = readFileSync(
   "utf8",
 );
 
-test("queued Marxaba designs are registered in code and additive migrations but unpublished", () => {
+test("registered Marxaba designs reflect their release state and additive migrations", () => {
   const migrationById: Record<string, string> = {
     nilufar: nilufarMigration,
     monogram: migration,
@@ -134,9 +142,9 @@ test("queued Marxaba designs are registered in code and additive migrations but 
     toscana: sourceBatchMigration,
     muhr: sourceBatchMigration,
     bulbul: nextBatchMigration,
-    kozgu: nextBatchMigration,
+    kozgu: kozguPublicationMigration,
     doira: doiraMigration,
-    qandil: nextSourceBatchMigration,
+    qandil: qandilPublicationMigration,
     parda: nextSourceBatchMigration,
     ganch: nextSourceBatchMigration,
     qatlam: qatlamMigration,
@@ -158,7 +166,11 @@ test("queued Marxaba designs are registered in code and additive migrations but 
   >) {
     const definition = templateById(id);
     assert.ok(definition, `${id} is registered in the shared typed catalog`);
-    assert.equal(definition.published, false, `${id} must stay unpublished`);
+    assert.equal(
+      definition.published,
+      id === "kozgu" || id === "qandil",
+      `${id} publication state must match its completed release`,
+    );
     const expectedCategories: Record<string, string[]> = {
       lola: ["qiz-bazmi"],
       "qiz-bazmi": ["qiz-bazmi"],
