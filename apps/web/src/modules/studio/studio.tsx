@@ -1601,18 +1601,20 @@ export function Studio({
                   (item) => item.id === invitation.templateId && item.published,
                 ) && (
                   <div className={styles.notice}>
-                    Bu qoralamadagi dizayn endi mavjud emas. Ma’lumotlaringiz
+                    Bu qoralamadagi dizayn hozircha tanlash uchun mavjud emas. Ma’lumotlaringiz
                     saqlangan; yangi dizayn qo‘shilgach tanlashingiz mumkin.
                   </div>
                 )}
-              <div className={styles.designNotice}>
-                <CheckCircle2 size={20} />
-                <p>
-                  Hozircha tayyor dizaynlar qo‘shilmagan. Ma’lumotlaringizni
-                  qoralama sifatida saqlashingiz va dizaynlar paydo bo‘lgach
-                  tanlashingiz mumkin.
-                </p>
-              </div>
+              {!templates.some((template) => template.published) && (
+                <div className={styles.designNotice}>
+                  <CheckCircle2 size={20} />
+                  <p>
+                    Hozircha tayyor dizaynlar qo‘shilmagan. Ma’lumotlaringizni
+                    qoralama sifatida saqlashingiz va dizaynlar paydo bo‘lgach
+                    tanlashingiz mumkin.
+                  </p>
+                </div>
+              )}
               {templates.some((template) => template.published) && (
                 <div
                   className={styles.categoryFilters}

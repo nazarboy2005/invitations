@@ -407,3 +407,10 @@ Development agents are distinct from production queue workers. The running app w
 - Keep fixture editing in source control for now. An admin settings screen for changing preview samples is a future option, not a current requirement.
 - Confirmed: the catalog card uses the template's distinctive first/opening page artwork at its full portrait aspect ratio, rather than cropping a landscape scene or substituting another image. Source metadata's dedicated preview asset takes precedence.
 - User correction: invitation names must remain fully visible in every template and at narrow screen sizes. Preserve the source's authored display typography when both names fit; adapt only the overflowing name lockup with responsive sizing or wrapping. Test unusually long names as part of template review.
+
+- User request (2026-10-21): continue template work one design at a time. Finish
+  the active design with complete source-level dynamic integration and its
+  customer-ready verification, then publish it before advancing to the next
+  design. If any required release gate is still open, stay on that design and
+  leave it unpublished; do not count implementation progress as publication
+  readiness.

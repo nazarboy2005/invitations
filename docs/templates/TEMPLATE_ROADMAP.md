@@ -629,3 +629,64 @@ catalog order.
   cover; switching locales reloads the frame to its locked opening state as
   designed. Authored voice, full interaction, backend persistence/media and
   rights gates remain open.
+
+- 2026-10-21: Reviewed the Marxaba batch against the integration requirements.
+  The ten renderer/catalog entries and unpublished migration seed exist, and
+  locale and locked-preview checks are documented for the batch. No design has
+  a complete per-template record for opened interactions, reduced motion,
+  preview artwork/desktop-mobile review, and renderer behavior; additional
+  rights and runtime service gates also remain. Keep all ten unpublished and
+  unselectable. Fixed the creator template step's unconditional “no ready
+  designs” notice so it appears only when the catalog has no published design.
+  No database migration or publication state was changed.
+- 2026-10-21: The live Oq Kabutar preview exposed corrupted Uzbek Cyrillic
+  transliteration and broken Russian month/weekday labels in shared Marxaba
+  runtime data. Repaired Uzbek digraphs and Cyrillic-specific letters, replaced
+  corrupted Russian calendar strings, and confirmed the live preview now shows
+  `???`, `?????`, `????`, `??–??`, and `???????` correctly. Added runtime-data
+  regression tests for Uzbek Cyrillic and Russian calendar labels. The locale
+  correction applies to all ten renderers; it does not close their separate
+  per-template interaction, visual, rights, or service gates.
+
+- 2026-10-21: Continued the authorized Oltin Nur milestone. Compared its
+  packaged template-level source against the read-only capture: all captured
+  files are present, source art bytes match, and the production package adds
+  local fonts, exact preview art, a shared runtime bridge, and documented
+  integration-only changes. Fixed mojibake punctuation and fallback labels in
+  the shared runtime, added regression coverage, and rechecked the live Oltin
+  Nur preview in all four locales. The opening sequence, optional-section
+  hiding, calendar text, and muted catalog audio work; no browser errors were
+  observed. Oltin Nur remains unpublished: rights to redistribute the captured
+  design are not documented, and authenticated database/object-storage
+  services are not configured here for save/reopen and media verification.
+  Continue Oltin Nur; do not advance to Samarqand Kechasi until its remaining
+  release gates are closed.
+
+- 2026-10-21: Local validation after the shared runtime text correction:
+  syntax checks for the shared core/bridge and Oltin Nur scripts,
+  `pnpm typecheck`, all 40 tests, and `git diff --check` passed.
+  `pnpm build` compiled successfully but did not finish its TypeScript stage
+  before it was stopped after a prolonged no-output interval; the production
+  build is unverified.
+
+- 2026-10-21: Continued the active Oltin Nur review in the live app preview.
+  Opened the invitation, checked English copy and locale controls, toggled RSVP
+  choices and guest count without submitting, and inspected the opened design at
+  390x844. Names fit in the portrait hero and the source artwork/layout remain
+  legible at this viewport. Reduced-motion, full control coverage, authored-data
+  persistence/media delivery, and redistribution-rights evidence remain release
+  gates; no template was published and no service records were created.
+- 2026-10-21: Re-ran the production build while continuing Oltin Nur. Next.js
+  compilation, TypeScript, page-data collection, and static generation all
+  completed successfully (`pnpm build`, exit 0). This supersedes the earlier
+  stalled-build note. The successful build does not verify runtime database or
+  object-storage behavior, asset redistribution rights, or outstanding complete
+  per-template interaction/visual checks; Oltin Nur remains unpublished.
+- 2026-10-21: Continued Oltin Nur verification. In the live preview, checked
+  English locale content, RSVP choice and guest-count state, and the music
+  mute/play toggle. The reference capture contains no license, rights, or
+  attribution document; this checkout has no app `.env.local`, database URL,
+  R2 credentials, Docker/psql executable, or local PostgreSQL/object-storage
+  listener. Customer save/reopen and media delivery cannot be verified without
+  those external dependencies. Keep the template unpublished and active; do
+  not advance to Samarqand Kechasi.

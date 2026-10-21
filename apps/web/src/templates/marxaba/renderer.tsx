@@ -85,7 +85,7 @@ export function MarxabaInvitation({
     },
     [catalogMusic, enabledLanguages, frameLocale, guestName, guestToken, invitation.status, invitationId, preview, sourceData],
   );
-  const frameUrl = `/templates/marxaba/nikoh/templates/${encodeURIComponent(templateId)}/index.html?lang=${sourceLocale[frameLocale]}`;
+  const frameUrl = `/templates/${encodeURIComponent(templateId)}/index.html?lang=${sourceLocale[frameLocale]}`;
   const currentStructure = JSON.stringify({
     frameUrl,
     start: invitation.startsAt,

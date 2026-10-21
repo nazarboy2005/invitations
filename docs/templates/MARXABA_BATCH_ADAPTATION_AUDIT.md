@@ -3,7 +3,7 @@
 Audit date: 2026-10-20. Reference authority: the user-provided
 `Invitations - this folder will be removed from production.zip`, checked
 read-only. Production copies are under
-`apps/web/public/templates/marxaba/nikoh/templates/`.
+`apps/web/public/templates/<template-id>`.
 
 ## Archive and asset integrity
 
@@ -33,7 +33,7 @@ the captured page structure and design:
 |---|---|---|
 | Oltin Nur | `index.html` | Local-font and shared-bridge bootstrap; generic metadata; remove capture-only sample loader. |
 | Samarqand Kechasi | `index.html` | Local-font and shared-bridge bootstrap; generic metadata; remove capture-only sample loader. |
-| Bog‘i Eram | `index.html` | Local-font and shared-bridge bootstrap; generic metadata; remove capture-only sample loader. Its Open Graph text describes the design, not a creator couple. |
+| Bogâ€˜i Eram | `index.html` | Local-font and shared-bridge bootstrap; generic metadata; remove capture-only sample loader. Its Open Graph text describes the design, not a creator couple. |
 | Atlas | `index.html` | Common bootstrap plus replace fixed city, date, and event marquee copy with venue, date, and event fields. |
 | Uchar Gilam | `index.html`, `template.js` | Common bootstrap; protect asynchronous carpet-texture creation after renderer teardown or WebGL context loss. Texture anisotropy now tolerates a null capabilities object and falls back to 1. |
 | Oq Kabutar | `index.html` | Local-font and shared-bridge bootstrap; generic metadata; remove capture-only sample loader. |
@@ -45,7 +45,7 @@ the captured page structure and design:
 The shared `platform-bridge.js` is separate from the captured source. It adapts
 shared invitation JSON to the source templates and supplies platform-only
 features such as locale controls, overflow-safe name fitting, and optional
-voice playback. The shared `nikoh/shared/core.js` copy now honors the
+voice playback. The shared `templates/shared/nikoh/core.js` copy now honors the
 `silentPlayback` preview payload by muting its soundtrack. The platform bridge
 applies the same preview-only mute to voice audio. This lets QA exercise each
 real opening action and its animations without audible playback; public
