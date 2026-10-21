@@ -1,0 +1,10 @@
+/* Lola source slots that have no values in the approved invitation contract. */
+.venue-arch.has-missing-photo:not(.has-venue-map) {
+  display: none;
+}
+
+.toyona-note:empty,
+.sandiq-modal [data-slot="toyona.note"]:empty,
+.sandiq-modal [data-slot="toyona.bank"] {
+  display: none;
+}

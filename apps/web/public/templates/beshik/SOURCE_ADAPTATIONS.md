@@ -27,7 +27,13 @@ person field for the baby. The current contract has no venue-photo, to'yona
 bank/name, or to'yona note fields; those source slots remain empty when there
 is no creator data.
 
+`contract-adapter.css` hides the unsupported empty To‘yona bank-name and note
+slots while leaving the captured stylesheet and body unchanged. The venue
+photo remains a contract/editor gap and receives no sample image.
+
 No captured files were modified. The canonical catalog fixture remains the
 only source of preview sample content; it is not saved or published. Beshik
 stays unpublished pending browser locale, mobile, reduced-motion, interaction,
-and service verification.
+and service verification. Focused static checks cover all four fixture locales,
+the six-item program, dress palette, three preview wishes, To‘yona card/holder,
+phone/Telegram contacts, icon-only empty gallery, and blank-draft isolation.

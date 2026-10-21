@@ -1,0 +1,5 @@
+/* Oltin Nur's source has optional gift copy without a matching contract field. */
+#toyona [data-slot="toyona.note"]:empty,
+#gift-modal [data-slot="toyona.bank"]:empty {
+  display: none;
+}

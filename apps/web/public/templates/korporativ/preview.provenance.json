@@ -1,0 +1,21 @@
+{
+  "status": "source-declared-asset-verified",
+  "packagedFile": "preview.webp",
+  "sourceMetadataReference": "preview.webp",
+  "sourceFilePresent": false,
+  "remoteDeclaredAsset": {
+    "url": "https://www.marxaba.uz/templates/korporativ/preview.webp",
+    "retrievedAt": "2026-10-21",
+    "sha256": "166044154ba434bf39f279caf7a59a95c7470e178c496282d490c81a2388c88f",
+    "dimensions": {
+      "width": 720,
+      "height": 1280
+    },
+    "fixtureHonoree": "Marxaba Tech",
+    "fixtureEventLabel": "Yil yakuni kechasi",
+    "fixtureDate": "2026-11-14",
+    "fixtureTime": "18:30",
+    "matchesCanonicalFixture": true
+  },
+  "note": "The untouched local capture lacks the metadata-declared preview.webp. The exact official source asset was fetched from its metadata URL and packaged without modification. Its visible event label, Marxaba Tech honoree, event date, and time match the corporate preview fixture."
+}

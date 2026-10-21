@@ -2,6 +2,11 @@ import assert from "node:assert/strict";
 import { existsSync, readFileSync } from "node:fs";
 import test from "node:test";
 import { runInNewContext } from "node:vm";
+import { createInvitation } from "@taklifnoma/contracts";
+import {
+  createTemplatePreviewSample,
+  getTemplatePreviewWishes,
+} from "../apps/web/src/modules/catalog/preview-sample";
 
 const templateRoot = new URL(
   "../apps/web/public/templates/kuzgi-chinor/",
@@ -73,6 +78,14 @@ test("Kuzgi Chinor preserves captured source and bundles the referenced assets l
     "only the external font import should be replaced by local font files",
   );
 
+  assert.match(html, /href="contract-adapter\.css"/);
+  const adapterCss = readFileSync(
+    new URL("contract-adapter.css", templateRoot),
+    "utf8",
+  );
+  assert.match(adapterCss, /#toyona \[data-slot="toyona\.bank"\]:empty/);
+  assert.match(adapterCss, /#toyona \[data-slot="toyona\.note"\]:empty/);
+
   for (const asset of [
     "preview.webp",
     "fonts.css",
@@ -83,5 +96,67 @@ test("Kuzgi Chinor preserves captured source and bundles the referenced assets l
     "art/leaf.svg",
   ]) {
     assert.ok(existsSync(new URL(asset, templateRoot)), `${asset} is missing`);
+  }
+});
+
+test("Kuzgi Chinor preview maps the shared six-item wedding fixture in four locales", () => {
+  const sample = createTemplatePreviewSample("kuzgi-chinor");
+  const locales = ["uz-Latn", "uz-Cyrl", "en", "ru"] as const;
+
+  assert.deepEqual(sample.enabledLocales, [...locales]);
+  assert.equal(sample.program.length, 6);
+  assert.equal(sample.dressCode.colors.length, 5);
+  assert.equal(sample.gallery.length, 6);
+  assert.ok(
+    sample.gallery.every((item) => !item.url && !item.alt && !item.caption),
+  );
+  assert.equal(sample.gift.cardNumber, "8600 1234 5678 9012");
+  assert.equal(sample.gift.cardHolder, "AZIZ AZIZOV");
+  assert.equal(sample.contacts.phoneNumber, "+998 90 123 45 67");
+  assert.equal(sample.contacts.telegramUsername, "@demo");
+
+  for (const locale of locales) {
+    const content = sample.content[locale];
+    assert.equal(Object.keys(content.programTitles).length, 6, locale);
+    assert.ok(content.programTitles["sample-arrival"]);
+    assert.ok(content.programTitles["sample-farewell"]);
+    const wishes = getTemplatePreviewWishes(locale);
+    assert.equal(wishes.length, 3);
+    assert.ok(wishes.every((wish) => wish.name && wish.text));
+  }
+
+  for (const hook of [
+    'id="intro"',
+    'id="open-invitation"',
+    'data-slot="dressCode.style"',
+    'data-slot="dressCode.text"',
+    'data-slot="dressCode.note"',
+    'data-list="program"',
+    'data-list="gallery"',
+    'data-list="wishes"',
+    'data-list="contacts"',
+    'data-list="dresscode"',
+    'data-section="toyona"',
+    'data-slot="toyona.cardNumber"',
+    'data-slot="toyona.cardHolder"',
+  ]) {
+    assert.ok(html.includes(hook), `${hook} should be present in the source renderer`);
+  }
+});
+
+test("Kuzgi Chinor blank invitations do not contain preview sample details", () => {
+  const blank = createInvitation("kuzgi-chinor");
+  const sample = createTemplatePreviewSample("kuzgi-chinor");
+
+  assert.equal(blank.gift.cardNumber, "");
+  assert.equal(blank.gift.cardHolder, "");
+  assert.deepEqual(blank.contacts, { phoneNumber: "", telegramUsername: "" });
+  assert.equal(blank.program.length, 0);
+  assert.equal(blank.gallery.length, 0);
+  assert.equal("sampleWishes" in sample, false);
+  const serializedSample = JSON.stringify(sample);
+  for (const wish of getTemplatePreviewWishes("uz-Latn")) {
+    assert.equal(serializedSample.includes(wish.name), false);
+    assert.equal(serializedSample.includes(wish.text), false);
   }
 });

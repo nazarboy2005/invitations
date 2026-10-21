@@ -58,6 +58,17 @@ test("Qiz Bazmi uses the shared platform data and API adapter", () => {
   assert.match(readFileSync(new URL("../../../src/templates/qiz-bazmi/renderer.tsx", root), "utf8"), /templateId="qiz-bazmi"/);
 });
 
+test("Qiz Bazmi keeps empty preview memories icon-only and collapses unsupported empty gift note", () => {
+  const adapter = readFileSync(new URL("contract-adapter.css", root), "utf8");
+  assert.match(source, /href="contract-adapter\.css"/);
+  assert.match(adapter, /\[data-slot="toyona\.note"\]:empty\s*\{\s*display:\s*none/);
+  assert.match(source, /<img[^>]*data-photo[^>]*alt="Qiz bazmi surati"/);
+  const sharedCore = readFileSync(new URL("../shared/nikoh/core.js", root), "utf8");
+  assert.match(sharedCore, /image\.alt=source\?alt:'';if\(!source\)image\.setAttribute\('aria-hidden','true'\)/);
+  assert.match(sharedCore, /placeholder\.textContent='✦'/);
+  assert.match(sharedCore, /hideIf\('gallery',!\(Array\.isArray\(data\.gallery\)&&data\.gallery\.length\)&&!data\.preview\)/);
+});
+
 test("Qiz Bazmi keeps captured body, scripts, styles, metadata, and source artwork intact", () => {
   const capturedHtml = readFileSync(new URL("index.html", capture), "utf8");
   assert.equal(normalize(body(source)), normalize(body(capturedHtml)));
@@ -137,6 +148,9 @@ test("Qiz Bazmi renderer adapter maps every locale and leaves blank drafts empty
     assert.equal(mapped.dressCode.colors.length, 5);
     assert.equal(mapped.contacts.length, 2);
     assert.equal(mapped.toyona.cardNumber, "8600 1234 5678 9012");
+    assert.equal(mapped.toyona.cardHolder, "AZIZ AZIZOV");
+    assert.equal(mapped.toyona.note, "");
+    assert.deepEqual(mapped.contacts.map((contact) => contact.type), ["phone", "telegram"]);
   }
   const blank = makeLegacyData(createInvitation("qiz-bazmi"), "uz-Latn", "", false);
   assert.equal(blank.groom, "");

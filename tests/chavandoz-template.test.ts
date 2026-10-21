@@ -124,6 +124,9 @@ test("the adapter maps contract data and documents source-only fields without in
     assert.ok(notes.includes(gap), `${gap} gap is documented`);
   assert.match(notes, /preview-sample\.json/);
   assert.match(notes, /not present anywhere in the local Marxaba capture tree/);
+  assert.match(html, /href="contract-adapter\.css"/);
+  assert.match(read("contract-adapter.css"), /#toyona \[data-slot="toyona\.note"\]:empty/);
+  assert.match(read("contract-adapter.css"), /#toyona \[data-slot="toyona\.bank"\]:empty/);
 });
 
 test("Chavandoz maps its sunnat celebration fixture through all four locales", async () => {
@@ -183,4 +186,76 @@ test("Chavandoz maps its sunnat celebration fixture through all four locales", a
       "@demo",
     ]);
   }
+});
+
+test("Chavandoz keeps the wishes section connected to the contract and preview fixture", async () => {
+  const { makeLegacyData } = await import("../apps/web/src/templates/anor/renderer");
+  const template = html.match(/<section[^>]*data-section="wishes"[^>]*>[\s\S]*?<\/section>/)?.[0];
+  assert.ok(template, "the captured wishes section is present");
+  assert.match(template, /<ul[^>]*data-list="wishes"[^>]*>/);
+  assert.match(template, /<template>[\s\S]*?data-field="text"[\s\S]*?data-field="name"[\s\S]*?<\/template>/);
+  assert.match(template, /<form[^>]*data-wishes-form/);
+  assert.match(template, /<p[^>]*data-wishes-feedback/);
+
+  const sourceStyles = read("template.css");
+  assert.match(sourceStyles, /\.wishes\{[^}]*display:grid/);
+  assert.match(sourceStyles, /\.wishes li\{[^}]*padding:/);
+  assert.doesNotMatch(read("contract-adapter.css"), /#wishes|\.wishes/);
+
+  const sample = createTemplatePreviewSample("chavandoz");
+  const previewData = makeLegacyData(sample, "uz-Latn", "", true);
+  assert.equal(previewData.wishesEnabled, true);
+  assert.deepEqual(previewData.wishes, getTemplatePreviewWishes("uz-Latn"));
+
+  const publicData = makeLegacyData(sample, "uz-Latn", "", false);
+  assert.equal(publicData.wishesEnabled, true, "authored wishes stay enabled independently of preview examples");
+  assert.deepEqual(publicData.wishes, [], "sample guest wishes never enter public invitation data");
+
+  sample.wishes.enabled = false;
+  const disabledData = makeLegacyData(sample, "uz-Latn", "", true);
+  assert.equal(disabledData.wishesEnabled, false, "the creator toggle controls section visibility");
+  assert.deepEqual(disabledData.wishes, getTemplatePreviewWishes("uz-Latn"));
+});
+
+test("blank Chavandoz invitations do not receive catalog sample content", async () => {
+  const { makeLegacyData } = await import("../apps/web/src/templates/anor/renderer");
+  const blank = structuredClone(createTemplatePreviewSample("chavandoz"));
+  for (const locale of blank.enabledLocales) {
+    const content = blank.content[locale];
+    content.people = [];
+    content.hosts = "";
+    content.greeting = "";
+    content.message = "";
+    content.programTitles = {};
+    content.venueName = "";
+    content.address = "";
+    content.landmark = "";
+    content.personalGreeting = "";
+  }
+  blank.startsAt = "";
+  blank.program = [];
+  blank.venue = { name: "", address: "", latitude: null, longitude: null, mapUrl: "" };
+  blank.gallery = [];
+  blank.dressCode.enabled = false;
+  blank.dressCode.colors = [];
+  blank.gift.enabled = false;
+  blank.gift.cardNumber = "";
+  blank.gift.cardHolder = "";
+  blank.contacts.phoneNumber = "";
+  blank.contacts.telegramUsername = "";
+  blank.wishes.enabled = false;
+
+  const data = makeLegacyData(blank, "uz-Latn", "", false);
+  assert.equal(data.groom, "");
+  assert.equal(data.hosts, "");
+  assert.equal(data.greeting, "");
+  assert.equal(data.message, "");
+  assert.equal(data.date.long, "");
+  assert.equal(data.program.length, 0);
+  assert.deepEqual(data.gallery, []);
+  assert.equal(data.dressCode.enabled, false);
+  assert.deepEqual(data.contacts, []);
+  assert.deepEqual(data.wishes, []);
+  assert.equal(data.toyona.enabled, false);
+  assert.equal(data.toyona.cardNumber, "");
 });

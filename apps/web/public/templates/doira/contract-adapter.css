@@ -1,0 +1,5 @@
+/* Keep source gift layout intact while removing contract fields the editor does not collect. */
+.section--toyona > [data-slot="toyona.note"]:empty,
+.gift__details > [data-slot="toyona.bank"]:empty {
+  display: none;
+}

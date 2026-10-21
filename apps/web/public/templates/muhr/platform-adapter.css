@@ -1,0 +1,4 @@
+/* Keep the captured gift layout while removing a row for the unsupported bank field. */
+.gift__bank:empty {
+  display: none;
+}

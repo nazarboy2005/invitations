@@ -1,7 +1,13 @@
 import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
 import { existsSync, readFileSync } from "node:fs";
 import test from "node:test";
 import { runInNewContext } from "node:vm";
+import { createInvitation } from "@taklifnoma/contracts";
+import {
+  createTemplatePreviewSample,
+  getTemplatePreviewWishes,
+} from "../apps/web/src/modules/catalog/preview-sample";
 
 const templateRoot = new URL("../apps/web/public/templates/qogoz-turna/", import.meta.url);
 const captureRoot = new URL(
@@ -23,6 +29,9 @@ test("Qog‘oz Turna keeps its captured design and motion source", () => {
     'class="book-scene"',
     'class="scene-art scene-art--registan"',
     'id="dresscode"',
+    'data-slot="dressCode.style"',
+    'data-slot="dressCode.text"',
+    'data-slot="dressCode.note"',
     'id="wishes"',
     'data-list="wishes"',
     'data-rsvp-choice="yes"',
@@ -46,6 +55,10 @@ test("Qog‘oz Turna keeps its captured design and motion source", () => {
   assert.equal(body(html), body(capturedHtml), "the captured invitation body should stay unchanged");
   assert.match(packagedScript, /prefers-reduced-motion/);
   assert.match(read(templateRoot, "template.css"), /prefers-reduced-motion:reduce/);
+  assert.match(html, /href="contract-adapter\.css"/);
+  const adapterCss = read(templateRoot, "contract-adapter.css");
+  assert.match(adapterCss, /#toyona \[data-slot="toyona\.bank"\]:empty/);
+  assert.match(adapterCss, /#toyona \[data-slot="toyona\.note"\]:empty/);
 });
 
 test("Qog‘oz Turna uses local fonts and only the app invitation runtime", () => {
@@ -67,6 +80,29 @@ test("Qog‘oz Turna uses local fonts and only the app invitation runtime", () =
   assert.equal(preview.toString("ascii", 0, 4), "RIFF");
   assert.equal(preview.toString("ascii", 8, 12), "WEBP");
   assert.ok(preview.length > 10000, "the full portrait opening artwork should be packaged");
+});
+
+test("Qog‘oz Turna catalog cover shows its captured opening page", () => {
+  const preview = readFileSync(new URL("preview.webp", templateRoot));
+  const provenance = JSON.parse(read(templateRoot, "preview.provenance.json")) as {
+    format: string;
+    width: number;
+    height: number;
+    sourcePage: string;
+    sourceOpening: string;
+    fixture: string;
+    captureViewport: { width: number; height: number; deviceScaleFactor: number };
+    sha256: string;
+  };
+
+  assert.equal(provenance.format, "image/webp");
+  assert.equal(provenance.width, 720);
+  assert.equal(provenance.height, 1280);
+  assert.equal(provenance.sourcePage, "/templates/qogoz-turna/index.html?lang=uz");
+  assert.match(provenance.sourceOpening, /#intro.*origami/i);
+  assert.equal(provenance.fixture, "apps/web/src/modules/catalog/preview-sample.json");
+  assert.deepEqual(provenance.captureViewport, { width: 720, height: 1280, deviceScaleFactor: 1 });
+  assert.equal(createHash("sha256").update(preview).digest("hex"), provenance.sha256);
 });
 
 test("Qog‘oz Turna has fixed copy for every published language", () => {
@@ -92,4 +128,61 @@ test("Qog‘oz Turna has fixed copy for every published language", () => {
   );
   assert.ok(translations["Qog‘oz Turna · Taklifnoma"]);
   assert.ok(translations["Qog‘oz Turna — qat-qat ochiladigan nafis taklifnoma"]);
+});
+
+test("Qog‘oz Turna preview maps six localized program entries and required sections", () => {
+  const sample = createTemplatePreviewSample("qogoz-turna");
+  const locales = ["uz-Latn", "uz-Cyrl", "en", "ru"] as const;
+
+  assert.deepEqual(sample.enabledLocales, [...locales]);
+  assert.equal(sample.program.length, 6);
+  assert.equal(sample.dressCode.colors.length, 5);
+  assert.equal(sample.gallery.length, 6);
+  assert.ok(sample.gallery.every((item) => !item.url && !item.alt && !item.caption));
+  assert.equal(sample.gift.cardNumber, "8600 1234 5678 9012");
+  assert.equal(sample.gift.cardHolder, "AZIZ AZIZOV");
+  assert.equal(sample.contacts.phoneNumber, "+998 90 123 45 67");
+  assert.equal(sample.contacts.telegramUsername, "@demo");
+
+  for (const locale of locales) {
+    const content = sample.content[locale];
+    assert.equal(Object.keys(content.programTitles).length, 6, locale);
+    assert.ok(content.programTitles["sample-arrival"]);
+    assert.ok(content.programTitles["sample-farewell"]);
+    const wishes = getTemplatePreviewWishes(locale);
+    assert.equal(wishes.length, 3);
+    assert.ok(wishes.every((wish) => wish.name && wish.text));
+  }
+
+  for (const hook of [
+    'id="intro"',
+    'id="open-invitation"',
+    'data-list="program"',
+    'data-list="dresscode"',
+    'data-list="gallery"',
+    'data-list="wishes"',
+    'data-list="contacts"',
+    'data-section="toyona"',
+    'data-slot="toyona.cardNumber"',
+    'data-slot="toyona.cardHolder"',
+  ]) {
+    assert.ok(html.includes(hook), `${hook} should be present in the renderer`);
+  }
+});
+
+test("Qog‘oz Turna blank invitations exclude catalog-only sample content", () => {
+  const blank = createInvitation("qogoz-turna");
+  const sample = createTemplatePreviewSample("qogoz-turna");
+
+  assert.equal(blank.gift.cardNumber, "");
+  assert.equal(blank.gift.cardHolder, "");
+  assert.deepEqual(blank.contacts, { phoneNumber: "", telegramUsername: "" });
+  assert.equal(blank.program.length, 0);
+  assert.equal(blank.gallery.length, 0);
+  assert.equal("sampleWishes" in sample, false);
+  const serializedSample = JSON.stringify(sample);
+  for (const wish of getTemplatePreviewWishes("uz-Latn")) {
+    assert.equal(serializedSample.includes(wish.name), false);
+    assert.equal(serializedSample.includes(wish.text), false);
+  }
 });

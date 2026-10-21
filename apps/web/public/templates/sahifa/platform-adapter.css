@@ -1,0 +1,5 @@
+/* Keep unsupported optional gift fields from leaving blank rows in Sahifa. */
+.gift-spread > [data-slot="toyona.note"]:empty,
+.gift__details [data-slot="toyona.bank"]:empty {
+  display: none;
+}

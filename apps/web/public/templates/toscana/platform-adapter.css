@@ -1,0 +1,9 @@
+/* Hide the unsupported venue-photo easel only when no map or real photo exists. */
+.venue__easel:has(.venue__print.has-missing-photo) {
+  display: none;
+}
+
+/* The source bank-name hook has no field in the approved invitation contract. */
+.gift__details [data-slot="toyona.bank"]:empty {
+  display: none;
+}

@@ -1,16 +1,18 @@
 {
   "artifact": "preview.webp",
-  "artifactSha256": "320c54bcadc04a5c6751551dcd628861551172ba5f6a5e755ae02578beaa645c",
+  "artifactSha256": "8047e5e68d657a87a0b1a102c5c8256be4ee90016af06da601f20e4ded3aa634",
   "sourceCapture": "Invitations - this folder will be removed from production/Marxaba/Nikoh/templates/qandil",
-  "renderedFrom": "index.html opening screen using the packaged Qandil template source",
-  "previewRoute": "/preview?template=qandil&qaSilent=1",
-  "fixture": "apps/web/src/modules/catalog/preview-sample.json",
-  "fixtureSha256": "cbb9acd109bae0b7840745c6023c8b99af837981c882b3ea75a40de4dc72bda9",
+  "renderedFrom": "Original Qandil source index.html, initial #intro opening state rendered at 478x955 and resized to 300x600",
+  "referenceCapture": "Original source template rendered directly from index.html; no user-provided screenshot used",
   "locale": "uz-Latn",
   "viewport": {
-    "width": 720,
-    "height": 1280,
+    "width": 478,
+    "height": 955,
     "deviceScaleFactor": 1
   },
-  "verified": "2026-10-21: compared with a fresh local browser render; the Qandil lantern opening, Javohir and Madina sample initials, and 12 June 2027 date match the centralized fixture. The packaged asset contains the clean template artwork without browser chrome."
+  "artifactSize": {
+    "width": 300,
+    "height": 600
+  },
+  "verified": "2026-10-21: captured the source initial dark-room opening with its hanging brass lantern, greeting, and pull-to-open cue. Rendered directly from the preserved original source at the catalog 1:2 portrait ratio."
 }

@@ -608,28 +608,39 @@ export function Studio({
     invitation.eventType === "sunnat-toyi" ||
     invitation.eventType === "beshik-toyi" ||
     invitation.templateId === "beshik" ||
+    invitation.templateId === "nahor" ||
     invitation.eventType === "bitiruv" ||
     invitation.eventType === "korporativ" ||
     invitation.templateId === "bitiruv" ||
-    invitation.templateId === "korporativ";
+    invitation.templateId === "korporativ" ||
+    invitation.eventType === "yangi-uy" ||
+    invitation.templateId === "yangi-uy";
   const singleCelebrantLabel =
-    invitation.eventType === "bitiruv"
+    invitation.templateId === "nahor"
+      ? "Mezbon yoki oila nomi"
+      : invitation.eventType === "bitiruv"
       ? "Bitiruvchining ismi"
       : invitation.eventType === "korporativ" ||
-          (invitation.templateId === "korporativ" &&
-            invitation.eventType !== "bitiruv")
+          invitation.templateId === "korporativ"
         ? "Tashkilot yoki shaxs nomi"
-        : invitation.templateId === "bitiruv"
+        : invitation.eventType === "yangi-uy" ||
+            invitation.templateId === "yangi-uy"
+          ? "Xonadon yoki oila nomi"
+          : invitation.templateId === "bitiruv"
           ? "Nishonlanuvchi ismi"
           : "Bola ismi";
   const singleCelebrantPlaceholder =
-    invitation.eventType === "bitiruv"
+    invitation.templateId === "nahor"
+      ? "Masalan, Rahmonovlar oilasi"
+      : invitation.eventType === "bitiruv"
       ? "Bitiruvchining ismi"
       : invitation.eventType === "korporativ" ||
-          (invitation.templateId === "korporativ" &&
-            invitation.eventType !== "bitiruv")
+          invitation.templateId === "korporativ"
         ? "Tashkilot yoki shaxs nomi"
-        : invitation.templateId === "bitiruv"
+        : invitation.eventType === "yangi-uy" ||
+            invitation.templateId === "yangi-uy"
+          ? "Masalan, Rahmonovlar xonadoni"
+          : invitation.templateId === "bitiruv"
           ? "Nishonlanuvchining ismi"
           : "Bolaning ismi";
   const personFields =

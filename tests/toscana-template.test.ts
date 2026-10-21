@@ -195,3 +195,22 @@ test("Toscana static copy is translated and the wrapper uses the shared typed co
   );
   assert.match(barrel, /export \{ ToscanaInvitation \} from "\.\/renderer"/);
 });
+
+test("Toscana uses the approved map or hidden-empty fallback for its source venue-photo slot", () => {
+  assert.match(html, /data-photo="venue\.photo"/);
+  const contract = readFileSync(
+    new URL("../packages/contracts/src/index.ts", import.meta.url),
+    "utf8",
+  );
+  const venueSchema = contract.match(/venue:\s*z\.object\(\{([\s\S]*?)\}\)/)?.[1] ?? "";
+  assert.doesNotMatch(venueSchema, /photo/);
+
+  const readme = readFileSync(
+    new URL("../apps/web/src/templates/toscana/README.md", import.meta.url),
+    "utf8",
+  );
+  assert.match(readme, /`venue\.photo` slot has no field in the current[\s\S]*?creator editor/);
+  assert.match(readme, /shows a map when coordinates are[\s\S]*?hides the empty-photo[\s\S]*?not a release blocker/);
+  const adapter = readFileSync(new URL("../apps/web/public/templates/toscana/platform-adapter.css", import.meta.url), "utf8");
+  assert.match(adapter, /\.venue__easel:has\(\.venue__print\.has-missing-photo\)\s*\{\s*display:\s*none/);
+});

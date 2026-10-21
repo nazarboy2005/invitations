@@ -1,0 +1,16 @@
+{
+  "artifact": "preview.webp",
+  "artifactSha256": "9afcfb0657c308dc0ca064eb9aed5a91b39bda684e9f926ca5b864ad003799ed",
+  "sourceCapture": "Invitations - this folder will be removed from production/Marxaba/Nikoh/templates/oynavand",
+  "renderedFrom": "/preview?template=oynavand&qaSilent=1, captured after the actual source opening and shared preview fixture loaded",
+  "previewRoute": "/preview?template=oynavand&qaSilent=1",
+  "fixture": "apps/web/src/modules/catalog/preview-sample.json",
+  "fixtureSha256": "cbb9acd109bae0b7840745c6023c8b99af837981c882b3ea75a40de4dc72bda9",
+  "locale": "uz-Latn",
+  "viewport": {
+    "width": 640,
+    "height": 1280,
+    "deviceScaleFactor": 1
+  },
+  "verified": "2026-10-21: replaced the empty Oynavand poster with the full source opening and shared Javohir and Madina preview content. Captured at the catalog portrait ratio, with the complete source language control visible and no development toolbar."
+}

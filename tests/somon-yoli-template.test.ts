@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
 import { existsSync, readFileSync } from "node:fs";
 import test from "node:test";
 import { runInNewContext } from "node:vm";
@@ -40,7 +41,24 @@ test("Somon Yo‘li preserves captured layout, source styles, and artwork", () =
   for (const asset of ["art/astrolabe.webp", "art/poster-galaxy.webp"]) {
     assert.deepEqual(readFileSync(new URL(asset, root)), readFileSync(new URL(asset, capture)), `${asset} must preserve the captured artwork`);
   }
-  assert.deepEqual(readFileSync(new URL("preview.webp", root)), readFileSync(new URL("art/poster-galaxy.webp", capture)), "catalog art must show the full source opening poster");
+  const preview = readFileSync(new URL("preview.webp", root));
+  const provenance = JSON.parse(readFileSync(new URL("preview.provenance.json", root), "utf8")) as {
+    sourcePage: string;
+    sourceOpening: string;
+    fixture: string;
+    width: number;
+    height: number;
+    captureViewport: { width: number; height: number; deviceScaleFactor: number };
+    sha256: string;
+  };
+  assert.equal(provenance.sourcePage, "/templates/somon-yoli/index.html#hero");
+  assert.match(provenance.sourceOpening, /user.*catalog cover/i);
+  assert.equal(provenance.fixture, "apps/web/src/modules/catalog/preview-sample.json");
+  assert.equal(provenance.width, 1080);
+  assert.equal(provenance.height, 1920);
+  assert.deepEqual(provenance.captureViewport, { width: 540, height: 960, deviceScaleFactor: 2 });
+  assert.equal(createHash("sha256").update(preview).digest("hex"), provenance.sha256);
+  assert.notDeepEqual(preview, readFileSync(new URL("art/poster-galaxy.webp", capture)), "catalog art should show the source hero identified by the user");
   for (const asset of ["fonts/exo2-300.ttf", "fonts/exo2-400.ttf", "fonts/exo2-500.ttf", "fonts/forum-400.ttf"]) assert.ok(existsSync(new URL(asset, root)), `${asset} missing`);
   assert.doesNotMatch(html, /fonts\.googleapis\.com|sample-invitation/);
   assert.match(html, /shared\/nikoh\/platform-bridge\.js/);

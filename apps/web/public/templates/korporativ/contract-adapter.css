@@ -4,6 +4,13 @@
 .venue__photo,
 .venue__parking,
 .program [data-field="speaker"]:empty,
-.section--toyona > .muted:empty {
+.section--toyona > .muted:empty,
+.gift__details [data-slot="toyona.bank"] {
+  display: none;
+}
+
+/* Keep the source's archive label for real photos; empty preview cards use
+   the shared renderer's decorative, aria-hidden star placeholder instead. */
+.gallery__item.has-missing-photo > span:not(.photo-placeholder) {
   display: none;
 }

@@ -1,0 +1,5 @@
+/* The invitation contract intentionally omits these source-only gift fields. */
+.toyona__note:empty,
+.gift__details [data-slot="toyona.bank"]:empty {
+  display: none;
+}

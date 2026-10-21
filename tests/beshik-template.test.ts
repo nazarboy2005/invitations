@@ -5,7 +5,7 @@ import { createRequire } from "node:module";
 import path from "node:path";
 import test from "node:test";
 import { createTemplatePreviewSample, getTemplatePreviewWishes } from "../apps/web/src/modules/catalog/preview-sample";
-import { defaultEventLabel, type Locale } from "@taklifnoma/contracts";
+import { createInvitation, defaultEventLabel, templateById, type Locale } from "@taklifnoma/contracts";
 
 const require = createRequire(import.meta.url);
 require.extensions[".css"] = (module) => {
@@ -86,6 +86,19 @@ test("Beshik uses the local platform runtime and excludes reference fixture code
   assert.match(read(pkg, "SOURCE_ADAPTATIONS.md"), /beshik-toyi/);
 });
 
+test("Beshik compatibility and creator fields stay aligned with the one-celebrant source", () => {
+  const entry = templateById("beshik");
+  assert.ok(entry);
+  assert.deepEqual(entry.supportedEventTypes, ["beshik-toyi", "birthday"]);
+  assert.equal(entry.published, false);
+  const migration = readFileSync(path.join(root, "packages/database/migrations/0039_add_beshik_template.sql"), "utf8");
+  assert.match(migration, /VALUES \('beshik', 'Beshik', 15000000, 'UZS', false\)/);
+  assert.match(migration, /\('beshik', 'beshik-toyi'\)[\s\S]*\('beshik', 'birthday'\)/);
+  const editor = readFileSync(path.join(root, "apps/web/src/modules/studio/studio.tsx"), "utf8");
+  assert.match(editor, /invitation\.templateId === "beshik"/);
+  assert.match(editor, /const singleCelebrantLabel[\s\S]*?: "Bola ismi"/);
+});
+
 test("Beshik has fully local exact font faces and all source links resolve", () => {
   const html = read(pkg, "index.html");
   const fonts = read(pkg, "fonts.css");
@@ -104,6 +117,9 @@ test("Beshik has fully local exact font faces and all source links resolve", () 
     const cleanPath = reference.split(/[?#]/, 1)[0];
     assert.ok(existsSync(path.resolve(pkg, cleanPath)) || existsSync(path.resolve(pkg, "../shared/nikoh", cleanPath.replace(/^\.\.\/shared\/nikoh\//, ""))), `missing local asset ${reference}`);
   }
+  assert.ok(existsSync(path.join(pkg, "contract-adapter.css")));
+  assert.match(html, /contract-adapter\.css/);
+  assert.match(read(pkg, "SOURCE_ADAPTATIONS.md"), /contract-adapter\.css/);
 });
 
 test("Beshik preview is a checksummed portrait render of its opening state", () => {
@@ -166,27 +182,49 @@ test("Beshik maps the cradle-celebration fixture through every supported locale"
     );
     assert.equal(data.programHeading, content.programHeading, `${locale}: program heading`);
     assert.deepEqual(
-      data.program.map(({ id, title }) => [id, title]),
-      sample.program.map((item) => [item.id, content.programTitles[item.id]]),
+      data.program.map(({ id, time, title }) => [id, time, title]),
+      sample.program.map((item) => [item.id, item.time, content.programTitles[item.id]]),
       `${locale}: stable ordered program entries`,
     );
+    assert.equal(data.dressCode.enabled, true, `${locale}: clothing enabled`);
     assert.equal(data.dressCode.style, sample.dressCode.style[locale]);
     assert.equal(data.dressCode.text, sample.dressCode.text[locale]);
     assert.equal(data.dressCode.note, sample.dressCode.note[locale]);
     assert.deepEqual(
-      data.dressCode.colors.map(({ name, hex }) => [name, hex]),
-      sample.dressCode.colors.map(({ name, hex }) => [name[locale], hex]),
+      data.dressCode.colors.map(({ id, name, hex }) => [id, name, hex]),
+      sample.dressCode.colors.map(({ id, name, hex }) => [id, name[locale], hex]),
     );
     assert.equal(data.gallery.length, 6, `${locale}: preview gallery`);
-    assert.ok(data.gallery.every(({ src, alt }) => src === "" && alt === ""));
+    assert.ok(data.gallery.every(({ src, alt, caption }) => src === "" && alt === "" && caption === ""));
     assert.deepEqual(data.wishes, getTemplatePreviewWishes(locale));
     assert.equal(data.wishes.length, 3, `${locale}: preview wishes`);
     assert.equal(data.toyona.enabled, true, `${locale}: gift enabled`);
     assert.equal(data.toyona.cardNumber, "8600 1234 5678 9012");
     assert.equal(data.toyona.cardHolder, "AZIZ AZIZOV");
+    assert.equal(data.toyona.note, "", `${locale}: unsupported note remains empty`);
     assert.deepEqual(data.contacts.map(({ value }) => value), [
       "+998 90 123 45 67",
       "@demo",
     ]);
   }
+
+  const blank = makeLegacyData(createInvitation("beshik"), "uz-Latn", "", false);
+  assert.equal(blank.groom, "");
+  assert.equal(blank.bride, "");
+  assert.equal(blank.greeting, "");
+  assert.equal(blank.date.long, "");
+  assert.equal(blank.program.length, 0);
+  assert.equal(blank.dressCode.enabled, false);
+  assert.equal(blank.dressCode.colors.length, 0);
+  assert.equal(blank.gallery.length, 0);
+  assert.deepEqual(blank.wishes, []);
+  assert.equal(blank.toyona.enabled, false);
+  assert.equal(blank.toyona.cardNumber, "");
+  assert.deepEqual(blank.contacts, []);
+});
+
+test("unsupported empty To‘yona bank and note slots are hidden by scoped CSS", () => {
+  const adapter = read(pkg, "contract-adapter.css");
+  assert.match(adapter, /#toyona \[data-slot="toyona\.bank"\]:empty/);
+  assert.match(adapter, /#toyona \[data-slot="toyona\.note"\]:empty/);
 });

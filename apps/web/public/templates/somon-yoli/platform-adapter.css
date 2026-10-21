@@ -1,0 +1,5 @@
+/* The typed invitation contract has no bank name or gift note fields. */
+[data-section="toyona"] [data-slot="toyona.note"]:empty,
+[data-section="toyona"] [data-slot="toyona.bank"]:empty {
+  display: none;
+}

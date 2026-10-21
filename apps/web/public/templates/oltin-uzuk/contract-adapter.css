@@ -1,0 +1,7 @@
+/* The shared invitation contract intentionally has no free-form To‘yona note
+   or bank-name field. Keep the captured layout clean when those source-only
+   slots receive empty values from the application adapter. */
+#toyona [data-slot="toyona.note"]:empty,
+#toyona [data-slot="toyona.bank"]:empty {
+  display: none;
+}

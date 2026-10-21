@@ -6,10 +6,11 @@ import path from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
 import { runInNewContext } from "node:vm";
-import { createInvitation, templateById } from "@taklifnoma/contracts";
-import { createTemplatePreviewSample } from "../apps/web/src/modules/catalog/preview-sample";
 import { createInvitation, templateById, type Locale } from "@taklifnoma/contracts";
-import { createTemplatePreviewSample } from "../apps/web/src/modules/catalog/preview-sample";
+import {
+  createTemplatePreviewSample,
+  getTemplatePreviewWishes,
+} from "../apps/web/src/modules/catalog/preview-sample";
 
 const root = process.cwd();
 const source = path.join(
@@ -56,6 +57,7 @@ test("Nahorgi Osh fixture schedule and invitation copy map in all four locales",
     ru: "Утренний ош",
   };
   const times = ["06:30", "07:00", "08:00", "08:30", "10:00", "11:00"];
+  const adapterCss = read(pkg, "contract-adapter.css");
 
   assert.equal(sample.eventType, "osh");
   assert.equal(sample.startsAt, "2027-06-12T07:00");
@@ -76,8 +78,20 @@ test("Nahorgi Osh fixture schedule and invitation copy map in all four locales",
     assert.equal(mapped.programHeading, localized.programHeading);
     assert.deepEqual(mapped.program.map((item) => item.time), times);
     assert.ok(mapped.program.every((item) => item.title));
+    assert.deepEqual(mapped.wishes, getTemplatePreviewWishes(locale));
+    assert.equal(mapped.wishes.length, 3);
+    assert.ok(mapped.wishes.every((wish) => wish.name && wish.text));
     assert.ok(mapped.gallery.length === 6 && mapped.gallery.every((item) => !item.src));
-    assert.ok(mapped.dressCode.style && mapped.dressCode.text && mapped.dressCode.note);
+    assert.ok(mapped.dressCode.enabled && mapped.dressCode.style && mapped.dressCode.text && mapped.dressCode.note);
+    assert.equal(mapped.dressCode.colors.length, 5);
+    assert.deepEqual(mapped.dressCode.colors.map(({ name }) => name), sample.dressCode.colors.map((color) => color.name[locale]));
+    assert.equal(mapped.toyona.enabled, true);
+    assert.equal(mapped.toyona.cardNumber, sample.gift.cardNumber);
+    assert.equal(mapped.toyona.cardHolder, sample.gift.cardHolder);
+    assert.equal(mapped.toyona.note, "");
+    assert.deepEqual(mapped.contacts.map((contact) => contact.type), ["phone", "telegram"]);
+    assert.match(adapterCss, /\.venue-card__image\.has-missing-photo:not\(\.has-venue-map\)/);
+    assert.match(adapterCss, /#toyona > \.toyona__note:empty/);
   }
 
   const blank = makeLegacyData(createInvitation("nahorgi-osh"), "uz-Latn", "", false);
@@ -88,6 +102,9 @@ test("Nahorgi Osh fixture schedule and invitation copy map in all four locales",
   assert.equal(blank.gallery.length, 0);
   assert.deepEqual(blank.wishes, []);
   assert.equal(blank.toyona.enabled, false);
+  assert.equal(blank.dateTime, "");
+  assert.equal(blank.venue.name, "");
+  assert.equal(blank.dressCode.enabled, false);
   assert.equal(blank.contacts.length, 0);
 });
 
@@ -111,6 +128,8 @@ test("Nahorgi Osh documents and isolates source-only opening and venue fields", 
   const blank = createInvitation("nahorgi-osh");
   assert.match(html, /data-slot="extras\.celebrant"/);
   assert.match(html, /data-photo="venue\.photo"/);
+  assert.match(html, /href="contract-adapter\.css"/);
+  assert.match(read(renderer, "README.md"), /contract-adapter\.css/);
   assert.match(notes, /extras\.celebrant[\s\S]*first available person name/);
   assert.match(notes, /venue\.photo.*not part of the approved invitation contract/);
   assert.equal("photo" in blank.venue, false);
@@ -167,6 +186,7 @@ test("all fixed page copy and accessibility labels have English and Russian entr
 test("package uses only local platform runtime, animations, fonts, and artwork", () => {
   const html = read(pkg, "index.html");
   assert.match(html, /platform-bridge\.js/);
+  assert.match(html, /contract-adapter\.css/);
   assert.match(html, /fonts\.css/);
   assert.doesNotMatch(
     html,

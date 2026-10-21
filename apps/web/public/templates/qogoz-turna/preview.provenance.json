@@ -1,0 +1,20 @@
+{
+  "format": "image/webp",
+  "width": 720,
+  "height": 1280,
+  "sourcePage": "/templates/qogoz-turna/index.html?lang=uz",
+  "sourceOpening": "Settled #intro origami invitation opening with greeting, names, date, and open button",
+  "fixture": "apps/web/src/modules/catalog/preview-sample.json",
+  "fixtureLocale": "uz-Latn",
+  "fixtureNames": [
+    "Javohir",
+    "Madina"
+  ],
+  "captureViewport": {
+    "width": 720,
+    "height": 1280,
+    "deviceScaleFactor": 1
+  },
+  "captureMethod": "Captured from the unchanged source index.html and template.css, with its authored arrival animation frozen at the end state",
+  "sha256": "6f8425776a015ff8088e2e038427db85b707b958c14b40077d843bd18f0f0a90"
+}

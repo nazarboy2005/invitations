@@ -373,7 +373,16 @@
     const value = window.name;
     if (!value || value[0] !== "{") return;
     const data = JSON.parse(value);
-    if (data && typeof data === "object" && typeof data.slug === "string") {
+    if (
+      data?.preview === true &&
+      location.pathname.includes("/nilufar/")
+    ) {
+      // Nilufar's language control reloads its isolated document. Preserve the
+      // preview payload across that reload without treating it as a public
+      // invitation or enabling remote RSVP/wish requests.
+      window.INVITATION = data;
+      window.name = "";
+    } else if (data && typeof data === "object" && typeof data.slug === "string") {
       window.MARHAMAT_REMOTE = data;
       window.name = "";
     }

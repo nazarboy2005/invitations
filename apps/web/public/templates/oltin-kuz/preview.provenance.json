@@ -3,11 +3,16 @@
   "route": "/templates/oltin-kuz/index.html",
   "fixture": "apps/web/src/modules/catalog/preview-sample.json (birthday event sample)",
   "locale": "uz-Latn",
+  "fixtureNames": [
+    "Javohir"
+  ],
+  "sourceOpening": "birthday invitation opening with chinar artwork, celebrant name, localized date, and open button",
   "viewport": {
     "width": 480,
     "height": 854
   },
   "sourceIndexSha256": "4e4d84b6797e1ec65ee3e397dd539905badaa011f158b1a5f8bc912c884a13c8",
   "sourceStyleSha256": "3dab19fb4d765641ef92c298f3cd5a208f35640e82edfca78af32194471f78ad",
+  "previewSha256": "09b904e85b8bc3daa010bce70b195581394ace5e4779816c2c5e982e3548bc80",
   "note": "Captured first reveal of the original invitation opening with sample data assembled from the central preview fixture; no sample overrides are packaged."
 }

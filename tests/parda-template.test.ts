@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
 import { existsSync, readFileSync, readdirSync } from "node:fs";
 import path from "node:path";
 import test from "node:test";
@@ -65,6 +66,16 @@ test("Parda retains the complete captured source and embroidered artwork", () =>
     readFileSync(new URL("template.js", templateRoot), "utf8"),
     /reducedMotion/,
   );
+  const responsiveStyles = readFileSync(
+    new URL("template.css", templateRoot),
+    "utf8",
+  );
+  assert.match(responsiveStyles, /@media\s*\(min-width:\s*700px\)/);
+  assert.match(responsiveStyles, /@media\s*\(max-height:\s*700px\)/);
+  assert.match(
+    responsiveStyles,
+    /@media\s*\(prefers-reduced-motion:\s*reduce\)/,
+  );
 });
 
 test("Parda uses local runtime dependencies and bundled fonts only", () => {
@@ -112,8 +123,71 @@ test("Parda uses local runtime dependencies and bundled fonts only", () => {
   assert.deepEqual(
     [width, height],
     [480, 853],
-    "catalog art must be a direct portrait capture of Parda's actual opening",
+    "the existing Parda opening candidate is portrait-shaped",
   );
+});
+
+test("Parda preview provenance is explicit and remains a release blocker", () => {
+  const provenance = JSON.parse(
+    readFileSync(new URL("preview.provenance.json", templateRoot), "utf8"),
+  );
+  const preview = readFileSync(new URL("preview.webp", templateRoot));
+  const sourceMeta = readFileSync(new URL("meta.js", captureRoot), "utf8");
+  const sourcePreview = new URL("preview.webp", captureRoot);
+  const adaptations = readFileSync(
+    new URL("SOURCE_ADAPTATIONS.md", templateRoot),
+    "utf8",
+  );
+  assert.match(sourceMeta, /preview:\s*["']preview\.webp["']/);
+  assert.equal(existsSync(sourcePreview), false);
+  assert.equal(provenance.status, "unverified");
+  assert.equal(provenance.sourceFilePresent, false);
+  assert.equal(provenance.sourceMetadataReference, "preview.webp");
+  assert.equal(
+    provenance.remoteDeclaredAsset.url,
+    "https://www.marxaba.uz/templates/parda/preview.webp",
+  );
+  assert.equal(
+    provenance.remoteDeclaredAsset.sha256,
+    "f30879816bb88309d12ec23fa8d645b356a179800e58055c3b754cb1e18eabf6",
+  );
+  assert.deepEqual(provenance.remoteDeclaredAsset.dimensions, {
+    width: 720,
+    height: 1280,
+  });
+  assert.equal(provenance.remoteDeclaredAsset.matchesCanonicalFixture, false);
+  assert.equal(provenance.remoteDeclaredAsset.sampleTime, "18:00");
+  assert.equal(
+    provenance.sha256,
+    createHash("sha256").update(preview).digest("hex"),
+  );
+  assert.match(adaptations, /no verifiable capture record/);
+  assert.match(adaptations, /2026-11-14 at 18:00/);
+  assert.match(adaptations, /catalog-art release blocker/);
+});
+
+test("Parda leaves unsupported To‘yona bank and note values empty", () => {
+  const html = readFileSync(new URL("index.html", templateRoot), "utf8");
+  const sharedContract = readFileSync(
+    new URL("../packages/contracts/src/index.ts", import.meta.url),
+    "utf8",
+  );
+  const adapter = readFileSync(
+    new URL("../apps/web/src/templates/anor/renderer.tsx", import.meta.url),
+    "utf8",
+  );
+  const giftSchema = sharedContract.match(/gift: z\.object\(\{[\s\S]*?\}\)/)?.[0] ?? "";
+  const legacyGift = adapter.match(
+    /toyona:\s*\{\s*enabled: invitation\.gift\.enabled,[\s\S]*?\n    \}/,
+  )?.[0] ?? "";
+  assert.match(html, /<p data-slot="toyona\.bank"><\/p>/);
+  assert.match(html, /<p data-slot="toyona\.note"><\/p>/);
+  assert.match(giftSchema, /cardNumber: z\.string/);
+  assert.match(giftSchema, /cardHolder: short/);
+  assert.doesNotMatch(giftSchema, /bank|note/i);
+  assert.match(legacyGift, /note:\s*""/);
+  assert.doesNotMatch(legacyGift, /bank\s*:/i);
+  assert.doesNotMatch(legacyGift, /8600|AZIZ AZIZOV/);
 });
 
 test("Parda strings localize and typed wrapper fixes the source template ID", () => {
@@ -153,10 +227,12 @@ test("Parda strings localize and typed wrapper fixes the source template ID", ()
     body.matchAll(/(?:aria-label|placeholder|title|alt)="([^"]+)"/g),
     (match) => match[1].trim(),
   );
-  assert.deepEqual(
-    [...visibleText, ...labels].filter((value) => !dictionary[value]),
-    [],
-  );
+  const strings = [...visibleText, ...labels];
+  assert.deepEqual(strings.filter((value) => !dictionary[value]), [], "all fixed and accessible copy has translation entries");
+  for (const value of strings) {
+    assert.ok(dictionary[value]?.[0], `Russian translation exists for ${value}`);
+    assert.ok(dictionary[value]?.[1], `English translation exists for ${value}`);
+  }
   assert.match(body, /data-slot="dressCode\.style"/);
   assert.match(body, /data-slot="dressCode\.text"/);
   assert.match(body, /data-slot="dressCode\.note"/);

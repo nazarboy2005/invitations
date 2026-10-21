@@ -130,6 +130,7 @@ test("all packaged references resolve locally and reference sample runtimes rema
     "art/digits/foil-digit-0.webp",
     "art/digits/foil-digit-3.webp",
     "preview.webp",
+    "gallery-accessibility.js",
   ])
     assert.ok(existsSync(new URL(dependency, root)), `${dependency} exists`);
   assert.doesNotMatch(
@@ -202,13 +203,33 @@ test("the four-locale preview uses only the centralized fixture and blank invita
   for (const locale of locales) {
     const data = makeLegacyData(sample, locale, "Hurmatli mehmon", true);
     const content = sample.content[locale];
-    assert.equal(data.groom, content.people[0]);
-    assert.equal(data.eventType, content.eventLabel);
-    assert.equal(data.greeting, content.personalGreeting.replaceAll("{name}", "Hurmatli mehmon"));
-    assert.equal(data.date.day, 12);
-    assert.equal(data.program.length, 6);
-    assert.equal(data.gallery.length, 6);
+    assert.equal(data.groom, content.people[0], `${locale}: celebrant`);
+    assert.equal(data.bride, "", `${locale}: no second celebrant`);
+    assert.equal(data.eventType, content.eventLabel, `${locale}: event label`);
+    assert.equal(data.greeting, content.personalGreeting.replaceAll("{name}", "Hurmatli mehmon"), `${locale}: personalized greeting`);
+    assert.equal(data.message, content.message, `${locale}: invitation message`);
+    assert.equal(data.hosts, content.hosts, `${locale}: hosts`);
+    assert.equal(data.date.day, 12, `${locale}: date`);
+    assert.equal(data.date.monthNumber, 6, `${locale}: month`);
+    assert.equal(data.date.year, 2027, `${locale}: year`);
+    assert.equal(data.date.time, "17:00", `${locale}: time`);
+    assert.equal(data.venue.name, content.venueName, `${locale}: venue name`);
+    assert.equal(data.venue.address, [content.address, content.landmark].filter(Boolean).join(" · "), `${locale}: address`);
+    assert.deepEqual(data.program.map(({ id, time, title }) => [id, time, title]), sample.program.map(({ id, time }) => [id, time, content.programTitles[id] ?? ""]), `${locale}: ordered program`);
+    assert.equal(data.dressCode.enabled, true, `${locale}: clothing enabled`);
+    assert.equal(data.dressCode.style, sample.dressCode.style[locale], `${locale}: clothing style`);
+    assert.equal(data.dressCode.text, sample.dressCode.text[locale], `${locale}: clothing guidance`);
+    assert.equal(data.dressCode.note, sample.dressCode.note[locale], `${locale}: clothing note`);
+    assert.equal(data.dressCode.colors.length, 5, `${locale}: palette`);
+    assert.ok(data.dressCode.colors.every((color) => color.name && color.hex), `${locale}: localized palette`);
+    assert.equal(data.gallery.length, 6, `${locale}: empty gallery cards`);
+    assert.ok(data.gallery.every(({ src, alt, caption }) => !src && !alt && !caption), `${locale}: icon-only gallery cards`);
     assert.deepEqual(data.wishes, getTemplatePreviewWishes(locale));
+    assert.equal(data.toyona.enabled, true, `${locale}: To‘yona enabled`);
+    assert.equal(data.toyona.cardNumber, "8600 1234 5678 9012", `${locale}: card number`);
+    assert.equal(data.toyona.cardHolder, "AZIZ AZIZOV", `${locale}: card holder`);
+    assert.equal(data.toyona.note, "", `${locale}: unsupported gift note remains empty`);
+    assert.deepEqual(data.contacts.map(({ value }) => value), ["+998 90 123 45 67", "@demo"], `${locale}: phone and Telegram`);
   }
   const blank = makeLegacyData(createInvitation("oltin-yosh"), "uz-Latn", "", false);
   assert.equal(blank.groom, "");
@@ -217,6 +238,61 @@ test("the four-locale preview uses only the centralized fixture and blank invita
   assert.equal(blank.program.length, 0);
   assert.equal(blank.gallery.length, 0);
   assert.deepEqual(blank.wishes, []);
+  assert.equal(blank.dressCode.enabled, false);
+  assert.equal(blank.dressCode.colors.length, 0);
+  assert.equal(blank.toyona.enabled, false);
+  assert.equal(blank.toyona.cardNumber, "");
+  assert.equal(blank.contacts.length, 0);
+});
+
+test("unsupported optional source-only slots are hidden by the scoped contract adapter", () => {
+  const adapter = read("contract-adapter.css");
+  assert.match(html, /href="contract-adapter\.css"/);
+  assert.match(adapter, /#toyona \[data-slot="toyona\.note"\]:empty/);
+  assert.match(adapter, /#toyona \[data-slot="toyona\.bank"\]:empty/);
+  assert.match(adapter, /\[data-slot="extras\.age"\]:empty/);
+  assert.match(styles, /\.intro__age\{display:none\}/);
+  assert.match(read("../../../src/templates/oltin-yosh/README.md"), /contract-adapter\.css/);
+});
+
+test("empty Lahzalar cards keep icon-only visuals but receive localized accessible names", () => {
+  assert.match(html, /<script src="gallery-accessibility\.js" defer><\/script>/);
+  const scriptText = read("gallery-accessibility.js");
+  const emptyItem = {
+    attributes: {} as Record<string, string>,
+    getAttribute(name: string) { return this.attributes[name] ?? null; },
+    setAttribute(name: string, value: string) { this.attributes[name] = value; },
+  };
+  const authoredItem = {
+    attributes: { "aria-label": "Javohir va Madina — birinchi surat" } as Record<string, string>,
+    getAttribute(name: string) { return this.attributes[name as "aria-label"] ?? null; },
+    setAttribute(name: string, value: string) { this.attributes[name as "aria-label"] = value; },
+  };
+  const gallery = { querySelectorAll: () => [emptyItem, authoredItem] };
+  const window: any = {
+    Marhamat: { lang: "uz-Latn", on() {} },
+    addEventListener() {},
+    MutationObserver: class { observe() {} },
+  };
+  const document: any = {
+    documentElement: { dataset: { lang: "uz-Latn" } },
+    querySelector: () => gallery,
+  };
+  runInNewContext(scriptText, { window, document });
+  const adapter = window.OltinYoshGalleryAccessibility;
+  const expected: Record<string, string> = {
+    "uz-Latn": "Bayram surati 1",
+    "uz-Cyrl": "Байрам сурати 1",
+    en: "Celebration photo 1",
+    ru: "Фото с праздника 1",
+  };
+  for (const [locale, accessibleName] of Object.entries(expected)) {
+    window.Marhamat.lang = locale;
+    adapter.decorate(gallery);
+    assert.equal(emptyItem.attributes["aria-label"], accessibleName, locale);
+    assert.equal(authoredItem.attributes["aria-label"], "Javohir va Madina — birinchi surat", "creator alt text is preserved");
+  }
+  assert.equal(adapter.label("unsupported", 1), "Bayram surati 2");
 });
 
 test("the narrow adapter maps the first celebrant and source-only fields are documented", () => {

@@ -1,0 +1,5 @@
+/* Keep unsupported source-only gift fields from leaving empty rows in the platform contract. */
+#toyona [data-slot="toyona.note"]:empty,
+#toyona [data-slot="toyona.bank"]:empty {
+  display: none;
+}

@@ -7,8 +7,7 @@
   "fixture": "apps/web/src/modules/catalog/preview-sample.json",
   "fixtureLocale": "uz-Latn",
   "fixtureNames": [
-    "Javohir",
-    "Madina"
+    "Javohir"
   ],
   "captureViewport": {
     "width": 720,

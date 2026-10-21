@@ -7,6 +7,7 @@
     "Javohir",
     "Madina"
   ],
-  "sourceOpening": "captured Yangi Uy housewarming opening with the house illustration, localized source event label, and a fixture celebrant",
+  "sourceOpening": "captured Yangi Uy housewarming opening with the house illustration, localized source event label, and the pre-integration two-person sample",
+  "releaseStatus": "stale-needs-render-after-household-fixture-integration",
   "sha256": "d2d85ee39cdcc3ee0adb07a074f081a5b01479c2a2408b178eafbdd48a2af2f8"
 }

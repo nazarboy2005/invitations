@@ -337,6 +337,7 @@ export const TEMPLATE_CATEGORIES: TemplateCategory[] = [
   { id: "qiz-bazmi", name: "Qiz bazmi", position: 3 },
   { id: "other", name: "Boshqa tadbirlar", position: 4 },
   { id: "iftorlik", name: "Iftorlik", position: 5 },
+  { id: "yangi-uy", name: "Yangi uy", position: 6 },
 ];
 export type TemplateDefinition = {
   id: z.infer<typeof templateIdSchema>;
@@ -472,7 +473,7 @@ export const TEMPLATES: TemplateDefinition[] = [
     priceMinor: 15000000,
     currency: "UZS",
     accent: "#9f7551",
-    published: false,
+    published: true,
   },
   {
     id: "oltin-uzuk",
@@ -532,6 +533,7 @@ export const TEMPLATES: TemplateDefinition[] = [
     priceMinor: 15000000,
     currency: "UZS",
     accent: "#7fa99b",
+    previewEventType: "fotiha",
     published: false,
   },
   {
@@ -808,6 +810,7 @@ export const TEMPLATES: TemplateDefinition[] = [
     previewImage: "/templates/oltin-kuz/preview.webp",
     categoryIds: ["birthday"],
     supportedEventTypes: ["yubiley", "birthday"],
+    previewEventType: "birthday",
     priceMinor: 15000000,
     currency: "UZS",
     accent: "#9b7b42",

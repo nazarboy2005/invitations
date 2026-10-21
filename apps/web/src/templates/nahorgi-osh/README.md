@@ -11,7 +11,10 @@ Manrope fonts and the shared application runtime. The original shared Marxaba
 sample invitation and `sample-overrides.js` are deliberately excluded. GSAP,
 ScrollTrigger, and LZ-String load from the shared local nikoh runtime. The
 captured CSS, JavaScript, i18n dictionary, metadata, page body, and art are
-otherwise byte-identical to the reference capture.
+otherwise byte-identical to the reference capture. The app-owned
+`contract-adapter.css` hides the unsupported venue-photo frame when no map is
+available, plus empty To‘yona note, bank, and cardholder slots; it leaves the
+captured source files unchanged.
 
 The source metadata declares `osh`, `sunnat`, and `nikoh` compatibility. These
 map to the platform's `osh`, `sunnat-toyi`, and `wedding` event IDs, independent
@@ -22,6 +25,8 @@ first available person name by the shared Marxaba bridge. The source has a
 `venue.photo` slot, which is not part of the approved invitation contract and
 is not filled with sample media. It remains a gap until the contract/editor
 supports venue photos; the creator's venue text and map data continue to work.
+When the creator provides map coordinates, the shared runtime renders its
+venue-map fallback in that frame instead of hiding it.
 
 The capture's `meta.js` names `preview.webp`, but that image was not present in
 the captured folder. The package now includes an authentic portrait catalog
@@ -30,12 +35,16 @@ preview rendered from the integrated opening and the centralized
 opening page at 720×1280, centered at its source 480×1244 dimensions with the
 surrounding page background. The platform locale control and subsequent page
 content are excluded from the catalog artwork. `preview.provenance.json` records
-the source, fixture, and output SHA-256 hashes and the render/crop parameters.
+the source, fixture-at-render-time, and output SHA-256 hashes and the render/crop
+parameters. The canonical fixture is shared and evolves independently, so its
+historical checksum is not expected to match the current fixture file.
 
 The typed registry and additive migration register this template under the
 `osh` catalog category with `osh`, `sunnat-toyi`, and `wedding` event support;
 these compatibility values are separate from category membership. The
 database row remains unpublished. `tests/nahorgi-osh-template.test.ts` checks
 source fidelity, local assets/fonts, fixture and adapter mapping in all four
-locales, morning schedule values, unpublished registration, and the documented
-source-only venue photo field. Browser release verification remains pending.
+locales, morning schedule values, clothing, wishes, To‘yona/contact data, empty
+optional-field adaptation, blank-draft isolation, unpublished registration,
+and the documented source-only venue-photo field. Browser release verification
+remains pending.

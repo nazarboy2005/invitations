@@ -1,0 +1,5 @@
+/* Hide captured gift fields that have no value in the approved invitation contract. */
+#toyona [data-slot="toyona.note"]:empty,
+#toyona [data-slot="toyona.bank"]:empty {
+  display: none;
+}

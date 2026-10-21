@@ -1,0 +1,20 @@
+{
+  "format": "image/webp",
+  "width": 1080,
+  "height": 1920,
+  "sourcePage": "/templates/somon-yoli/index.html#hero",
+  "sourceOpening": "The source invitation hero with astrolabe, names, date, and motto, as identified by the user as the catalog cover",
+  "fixture": "apps/web/src/modules/catalog/preview-sample.json",
+  "fixtureLocale": "uz-Latn",
+  "fixtureNames": [
+    "Javohir",
+    "Madina"
+  ],
+  "captureViewport": {
+    "width": 540,
+    "height": 960,
+    "deviceScaleFactor": 2
+  },
+  "captureMethod": "Captured from the unchanged source index.html and template.css after opening, framed as the source hero cover; only canonical preview fixture values were supplied",
+  "sha256": "c69c5eb4222c9ebcf7404920f6aeef1b9ee3dae7b70dab7c87708949fcd9ac67"
+}

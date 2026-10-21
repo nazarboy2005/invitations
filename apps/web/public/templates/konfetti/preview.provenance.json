@@ -1,0 +1,12 @@
+{
+  "width": 450,
+  "height": 800,
+  "format": "webp",
+  "fixture": "apps/web/src/modules/catalog/preview-sample.json",
+  "fixtureLocale": "uz-Latn",
+  "fixtureEventType": "birthday",
+  "fixtureNames": ["Javohir"],
+  "sourceOpening": "Captured Konfetti candle opener, still locked before user interaction; the candle flame and source decorations are visible.",
+  "captureMethod": "Packaged source loaded in headless Chrome at 450x800 DPR 1; window.name injected through platform bridge; waited for document.fonts.ready plus 2 seconds; captured opener to PNG then encoded as WebP in Chrome canvas at quality 0.94.",
+  "sha256": "2b11a3ced8283cd94928094934181b29e8b7f50426952e8e0e8c0aea987a673a"
+}

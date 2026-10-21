@@ -1,0 +1,6 @@
+/* Hide captured source-only values that the approved invitation contract omits. */
+#toyona [data-slot="toyona.note"]:empty,
+#toyona [data-slot="toyona.bank"]:empty,
+[data-slot="extras.age"]:empty {
+  display: none;
+}

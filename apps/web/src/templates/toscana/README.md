@@ -13,3 +13,13 @@ documented source adaptations:
 Static copy localization is isolated in `apps/web/public/templates/toscana/i18n.js`;
 the missing “The atelier” translation is supplied there. Platform contract and
 API behavior stays in the shared Marxaba adapter/runtime.
+
+The shared locale runtime provides Uzbek Latin source copy, Uzbek Cyrillic
+transliteration, Russian copy, and English copy, including the captured
+accessible labels. The source's `venue.photo` slot has no field in the current
+invitation contract or creator editor. Per the user's decision, keep the
+contract unchanged: the shared runtime shows a map when coordinates are
+available, and the template-scoped `platform-adapter.css` hides the empty-photo
+easel when neither a photo nor map is available. A real photo, if supplied by
+an existing compatible payload, keeps the captured easel. Never inject sample
+photo data. This accepted fallback is not a release blocker.

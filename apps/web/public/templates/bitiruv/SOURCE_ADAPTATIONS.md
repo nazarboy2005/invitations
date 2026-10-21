@@ -14,6 +14,8 @@ The captured metadata declares catalog category `bitiruv` and event types `bitir
 
 The source contains an optional `venue.photo` slot; the approved invitation contract has no venue-photo field. Do not substitute the graduation artwork or creator gallery media there. The app-owned `contract-adapter.css` hides only this source-only photo slot, while preserving venue name, address and map links. Source metadata's `preview.webp` did not exist in the capture; the packaged preview is captured from the real opening with the shared centralized preview fixture, and its provenance is recorded beside it.
 
+The source also contains `toyona.note` and `toyona.bank` slots, which are absent from the approved shared contract (bank-name entry is intentionally removed). The same app-owned stylesheet collapses these empty slots, along with an empty optional card-holder slot, while retaining the To‘yona section and supported card number/holder data.
+
 ## Source reference
 
 Event types: `bitiruv`, `tugilgan-kun`, `korporativ`.

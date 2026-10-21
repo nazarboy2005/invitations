@@ -1,0 +1,4 @@
+/* Keep unsupported optional contract slots from leaving blank visual gaps. */
+.jewel-box > [data-slot="toyona.note"]:empty {
+  display: none;
+}

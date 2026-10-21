@@ -96,6 +96,7 @@ const eventLabels: Record<Locale, Record<Invitation["eventType"], string>> = {
     "beshik-toyi": "Beshik to‘yi",
     bitiruv: "Bitiruv kechasi",
     korporativ: "Korporativ tadbir",
+    "yangi-uy": "Yangi uy to‘yi",
     other: "Tadbir",
   },
   "uz-Cyrl": {
@@ -111,6 +112,7 @@ const eventLabels: Record<Locale, Record<Invitation["eventType"], string>> = {
     "beshik-toyi": "Бешик тўйи",
     bitiruv: "Битирув кечаси",
     korporativ: "Корпоратив тадбир",
+    "yangi-uy": "Янги уй тўйи",
     other: "Тадбир",
   },
   en: {
@@ -126,6 +128,7 @@ const eventLabels: Record<Locale, Record<Invitation["eventType"], string>> = {
     "beshik-toyi": "Cradle celebration",
     bitiruv: "Graduation celebration",
     korporativ: "Corporate event",
+    "yangi-uy": "Housewarming celebration",
     other: "Celebration",
   },
   ru: {
@@ -141,6 +144,7 @@ const eventLabels: Record<Locale, Record<Invitation["eventType"], string>> = {
     "beshik-toyi": "Праздник в честь колыбели",
     bitiruv: "Выпускной вечер",
     korporativ: "Корпоративное мероприятие",
+    "yangi-uy": "Новоселье",
     other: "Праздник",
   },
 };

@@ -1,0 +1,6 @@
+/* The invitation contract has no venue-photo, gift-note, or bank-name fields. */
+.venue__photo.has-missing-photo:not(.has-venue-map),
+.section--toyona > [data-slot="toyona.note"]:empty,
+.gift__details [data-slot="toyona.bank"] {
+  display: none;
+}

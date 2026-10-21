@@ -1,0 +1,5 @@
+/* These optional hooks are absent from the approved invitation contract. */
+.toyona-section [data-slot="toyona.note"]:empty,
+.plaque [data-slot="toyona.bank"]:empty {
+  display: none;
+}

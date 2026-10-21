@@ -124,6 +124,13 @@ const hilolMigration = readFileSync(
   ),
   "utf8",
 );
+const yangiUyMigration = readFileSync(
+  new URL(
+    "../packages/database/migrations/0048_add_yangi_uy_template.sql",
+    import.meta.url,
+  ),
+  "utf8",
+);
 const dispatch = readFileSync(
   new URL("../apps/web/src/templates/marxaba/index.ts", import.meta.url),
   "utf8",
@@ -160,6 +167,7 @@ test("registered Marxaba designs reflect their release state and additive migrat
     nahor: nahorTemplatesMigration,
     "nahorgi-osh": nahorTemplatesMigration,
     hilol: hilolMigration,
+    "yangi-uy": yangiUyMigration,
   };
   for (const id of Object.keys(migrationById) as Array<
     keyof typeof migrationById
@@ -184,6 +192,7 @@ test("registered Marxaba designs reflect their release state and additive migrat
       nahor: ["osh"],
       "nahorgi-osh": ["osh"],
       hilol: ["iftorlik"],
+      "yangi-uy": ["yangi-uy"],
     };
     assert.deepEqual(
       definition.categoryIds,
@@ -219,6 +228,7 @@ test("registered Marxaba designs reflect their release state and additive migrat
       nahor: ["osh"],
       "nahorgi-osh": ["osh", "sunnat-toyi", "wedding"],
       hilol: ["iftorlik", "osh"],
+      "yangi-uy": ["yangi-uy", "osh"],
     };
     assert.deepEqual(definition.supportedEventTypes, expectedSupport[id]);
     assert.ok(dispatch.includes(`"${id}"`), `${id} uses the shared renderer`);
@@ -266,6 +276,7 @@ test("registered Marxaba designs reflect their release state and additive migrat
     "oltin-yosh",
     "nahor",
     "hilol",
+    "yangi-uy",
   ])
     assert.ok(
       templateById(id)?.previewImage,
@@ -291,6 +302,11 @@ test("registered Marxaba designs reflect their release state and additive migrat
   assert.ok(existsSync(new URL("oltin-yosh/preview.webp", templatesRoot)));
   assert.ok(existsSync(new URL("nahor/preview.webp", templatesRoot)));
   assert.ok(existsSync(new URL("hilol/preview.webp", templatesRoot)));
+  assert.equal(
+    templateById("yangi-uy")?.previewImage,
+    "/templates/yangi-uy/preview.webp",
+  );
+  assert.ok(existsSync(new URL("yangi-uy/preview.webp", templatesRoot)));
   assert.equal(templateById("nahorgi-osh")?.previewImage, undefined);
   assert.match(jubileeMigration, /'yubiley'/);
 });

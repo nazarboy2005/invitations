@@ -1,0 +1,8 @@
+/* Platform contract currently has no venue-photo, gift-note, or bank-name field.
+   Keep the captured source untouched while removing empty optional placeholders. */
+.venue-card__image.has-missing-photo:not(.has-venue-map),
+#toyona > .toyona__note:empty,
+#toyona .gift__details > [data-slot="toyona.bank"]:empty,
+#toyona .gift__details > [data-slot="toyona.cardHolder"]:empty {
+  display: none;
+}

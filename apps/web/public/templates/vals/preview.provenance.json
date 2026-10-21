@@ -6,7 +6,7 @@
   "format": "WEBP",
   "route": "/preview?template=vals&qaSilent=1",
   "fixture": "apps/web/src/modules/catalog/preview-sample.json",
-  "fixtureSha256": "4faa5157eb048e2d1ce4a47ae0ac4c45e8edcadc1debf9ece1287380ce7333e9",
+  "fixtureSha256": "cbb9acd109bae0b7840745c6023c8b99af837981c882b3ea75a40de4dc72bda9",
   "capture": {
     "sourceFolder": "Invitations - this folder will be removed from production/Marxaba/Nikoh/templates/vals",
     "selector": "#intro",
@@ -15,7 +15,10 @@
       "height": 1280,
       "deviceScaleFactor": 1
     },
-    "hiddenPlatformControls": [".mh-lang", "nextjs-portal"],
+    "hiddenPlatformControls": [
+      ".mh-lang",
+      "nextjs-portal"
+    ],
     "source": {
       "indexHtmlSha256": "a33cb05b3ce803da88d36fa62c2ca42436f48bcccd30b3e117283496e890c141",
       "templateCssSha256": "1eac383b2977b4052dbeedac7b1ee9560e8928faf0dd9fd4a2ca9fe7712e04ca",

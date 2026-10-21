@@ -1,0 +1,9 @@
+{
+  "asset": "preview.webp",
+  "sourceAsset": "art/panel.webp",
+  "sha256": "3306fd41420f4abdb6c073698e86b67a1abf53f63c0730bec81a6f269b93cae2",
+  "width": 640,
+  "height": 1138,
+  "sourcePackage": "Invitations - this folder will be removed from production/Marxaba/Nikoh/templates/suzani",
+  "captureNote": "The capture metadata names preview.webp but that file is absent. The packaged catalog image is an exact copy of the captured portrait art/panel.webp."
+}

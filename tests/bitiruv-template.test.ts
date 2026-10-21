@@ -90,7 +90,10 @@ test("Bitiruv maps only one person's initial and hides unsupported venue photogr
   assert.match(adapter, /templateId === "bitiruv"[\s\S]*?monogram: \(localized\.groom \|\| localized\.bride\)[\s\S]*?\.charAt\(0\)/);
   const html = read(pkg, "index.html");
   assert.match(html, /href="contract-adapter\.css"/);
-  assert.match(read(pkg, "contract-adapter.css"), /#venue \.venue__photo\s*\{\s*display:\s*none/);
+  const contractAdapter = read(pkg, "contract-adapter.css");
+  assert.match(contractAdapter, /#venue \.venue__photo\s*\{\s*display:\s*none/);
+  for (const slot of ["toyona.note", "toyona.bank", "toyona.cardHolder"])
+    assert.ok(contractAdapter.includes(`[data-slot="${slot}"]:empty`));
   assert.match(html, /data-photo="venue\.photo"/);
   assert.ok(!/venuePhoto|venue\.photo\s*:/i.test(adapter));
   const editor = read(
@@ -253,7 +256,8 @@ test("Bitiruv opening art is a fixture-derived, checksummed portrait capture", (
   assert.equal(provenance.fixtureLocale, fixture.defaultLocale);
   assert.deepEqual(
     provenance.fixtureNames,
-    fixture.content[fixture.defaultLocale].people,
+    [fixture.eventSamples.bitiruv.personName[fixture.defaultLocale]],
+    "the source opening displays the single graduation honoree, not both wedding sample names",
   );
   assert.match(provenance.sourceOpening, /captured Bitiruv diploma opening/);
   assert.equal(
@@ -273,6 +277,8 @@ test("Bitiruv metadata preserves its source declarations and records resolved ad
   for (const detail of [
     "korporativ",
     "venue.photo",
+    "toyona.note",
+    "toyona.bank",
     "first character",
     "existing `other` category",
   ])

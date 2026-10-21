@@ -3,6 +3,8 @@ import { existsSync, readFileSync, readdirSync, statSync } from "node:fs";
 import path from "node:path";
 import test from "node:test";
 import { runInNewContext } from "node:vm";
+import { createInvitation, getContent, type Locale } from "@taklifnoma/contracts";
+import { createTemplatePreviewSample } from "../apps/web/src/modules/catalog/preview-sample";
 
 const projectRoot = process.cwd();
 const sourceRoot = path.join(projectRoot, "Invitations - this folder will be removed from production/Marxaba/Nikoh/templates/doira");
@@ -36,6 +38,10 @@ test("Doira preserves the complete captured markup, scripts, styles, and artwork
   assert.match(read(packageRoot, "template.js"), /M\.reducedMotion/);
   assert.match(read(packageRoot, "scene.js"), /prefers-reduced-motion/);
   assert.match(read(packageRoot, "template.css"), /prefers-reduced-motion/);
+  assert.match(packagedHtml, /href="contract-adapter\.css"/);
+  const adapterCss = read(packageRoot, "contract-adapter.css");
+  assert.match(adapterCss, /data-slot="toyona\.note"\]:empty/);
+  assert.match(adapterCss, /data-slot="toyona\.bank"\]:empty/);
 });
 
 test("Doira maps the visible invitation content and section controls", () => {
@@ -51,6 +57,35 @@ test("Doira maps the visible invitation content and section controls", () => {
   assert.ok(packagedHtml.includes('data-photo="venue.photo"'));
   assert.ok(packagedHtml.includes('data-slot="toyona.bank"'));
   assert.ok(packagedHtml.includes('data-phase="loading"'));
+});
+
+test("Doira's shared preview fixture has complete localized sections and stays out of blank drafts", () => {
+  const locales: Locale[] = ["uz-Latn", "uz-Cyrl", "en", "ru"];
+  for (const locale of locales) {
+    const sample = createTemplatePreviewSample("doira", {
+      defaultLocale: locale,
+      enabledLocales: locales,
+    });
+    const content = getContent(sample, locale);
+    assert.ok(content.people[0] && content.people[1], `${locale}: names`);
+    assert.ok(content.eventLabel, `${locale}: event label`);
+    assert.equal(sample.program.length, 6, `${locale}: program entries`);
+    assert.equal(sample.dressCode.colors.length, 5, `${locale}: clothing palette`);
+    assert.equal(sample.gift.cardNumber, "8600 1234 5678 9012", `${locale}: To‘yona`);
+    assert.equal(sample.contacts.phoneNumber, "+998 90 123 45 67", `${locale}: phone`);
+    assert.equal(sample.contacts.telegramUsername, "@demo", `${locale}: Telegram`);
+    assert.equal(sample.gallery.length, 6, `${locale}: icon-only Lahzalar`);
+    assert.ok(sample.program.every((item) => content.programTitles[item.id]), `${locale}: localized program text`);
+    assert.equal(sample.gallery.every((item) => item.url === ""), true, `${locale}: no sample photos`);
+  }
+
+  const blank = createInvitation("doira");
+  assert.deepEqual(blank.content["uz-Latn"].people, []);
+  assert.deepEqual(blank.program, []);
+  assert.deepEqual(blank.gallery, []);
+  assert.deepEqual(blank.contacts, { phoneNumber: "", telegramUsername: "" });
+  assert.equal(blank.gift.cardNumber, "");
+  assert.equal(blank.dressCode.enabled, false);
 });
 
 test("Doira uses local source fonts and authentic portrait opening artwork", () => {
@@ -125,14 +160,24 @@ test("Doira catalog art provenance locks the source opening at a portrait viewpo
 test("Doira localizes the opening and invitation controls without loading captured sample data", () => {
   const localI18n = read(packageRoot, "i18n.js");
   const context = { window: { MARHAMAT_I18N: {} } };
+  runInNewContext(read(projectRoot, "apps/web/public/templates/shared/nikoh/i18n.js"), context);
   runInNewContext(localI18n, context);
   const translations = context.window.MARHAMAT_I18N as Record<string, string[]>;
   for (const key of [
     "Doirani uch marta chaling", "Oqshom sizdan", "Ikki qalb. Bir ohang.",
     "O‘tkazib yuborish", "Uchrashuv kuni", "To‘y dasturi", "Dress-kod",
     "Lahzalar", "Tashrifingizni tasdiqlang", "To‘yona", "Tilaklar",
-    "Bog‘lanish uchun", "Doira · Taklifnoma",
+    "Bog‘lanish uchun", "Doira · Taklifnoma", "Taklifnomani ochish",
+    "Tashrif javobi", "To‘y kuni taqvimi", "Surat tanlash",
+    "Suratni kattalashtirish", "To‘y surati",
+    "Mehmonlar sonini kamaytirish", "Mehmonlar sonini oshirish",
   ]) assert.equal(translations[key]?.length, 2, `missing Russian/English copy for ${key}`);
+  const accessibleLabels = Array.from(
+    packagedHtml.matchAll(/(?:aria-label|placeholder|title|alt)="([^"]+)"/g),
+    (match) => match[1],
+  ).filter(Boolean);
+  for (const label of accessibleLabels)
+    assert.equal(translations[label]?.length, 2, `missing translation for accessible label: ${label}`);
   const head = packagedHtml.match(/<head>[\s\S]*?<\/head>/)?.[0] ?? "";
   assert.doesNotMatch(head, /fonts\.googleapis|fonts\.gstatic|sample-invitation|sample-overrides|analytics/);
 });

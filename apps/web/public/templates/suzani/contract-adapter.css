@@ -1,0 +1,10 @@
+/* The approved contract has no venue photo, gift note, or bank-name field. */
+.venue__photo.has-missing-photo:not(.has-venue-map),
+.gift__note:empty,
+.gift__details [data-slot="toyona.bank"] {
+  display: none;
+}
+
+.venue__photo.has-venue-map > span {
+  display: none;
+}

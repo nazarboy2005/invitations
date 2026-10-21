@@ -1,0 +1,15 @@
+{
+  "artifact": "preview.webp",
+  "sha256": "f96e8878573a3f052a1db27fe772ecd8a4609261000d028082cbbeb310651564",
+  "format": "image/webp",
+  "width": 720,
+  "height": 1200,
+  "sourceCapture": "Invitations - this folder will be removed from production/Marxaba/Nikoh/templates/monogram",
+  "renderedFrom": "Packaged captured opening screen with the shared preview fixture",
+  "route": "/preview?template=monogram&qaSilent=1",
+  "fixture": "apps/web/src/modules/catalog/preview-sample.json",
+  "fixtureSha256": "cbb9acd109bae0b7840745c6023c8b99af837981c882b3ea75a40de4dc72bda9",
+  "locale": "uz-Latn",
+  "viewport": { "width": 720, "height": 1200, "deviceScaleFactor": 1 },
+  "openingState": "Source locked introduction with the Monogram seal and canonical Javohir/Madina fixture content"
+}

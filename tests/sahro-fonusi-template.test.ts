@@ -6,7 +6,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import test from "node:test";
 import { runInNewContext } from "node:vm";
-import { createInvitation, type Locale } from "@taklifnoma/contracts";
+import { createInvitation, defaultEventLabel, type Locale } from "@taklifnoma/contracts";
 import { createTemplatePreviewSample, getTemplatePreviewWishes } from "../apps/web/src/modules/catalog/preview-sample";
 
 const require = createRequire(import.meta.url);
@@ -114,14 +114,44 @@ test("Sahro Fonusi localizes fixed interface copy and supports all approved loca
   const locales: Locale[] = ["uz-Latn", "uz-Cyrl", "en", "ru"];
   for (const locale of locales) {
     const mapped = makeLegacyData(sample, locale, "", true);
-    assert.equal(mapped.groom, sample.content[locale].people[0]);
-    assert.equal(mapped.bride, sample.content[locale].people[1]);
-    assert.equal(mapped.program.length, 6);
-    assert.equal(mapped.gallery.length, 6);
+    const content = sample.content[locale];
+    assert.equal(mapped.groom, content.people[0], `${locale}: first name`);
+    assert.equal(mapped.bride, content.people[1], `${locale}: second name`);
+    assert.equal(mapped.greeting, content.greeting, `${locale}: greeting`);
+    assert.equal(mapped.message, content.message, `${locale}: invitation message`);
+    assert.equal(mapped.hosts, content.hosts, `${locale}: hosts`);
+    assert.equal(mapped.eventType, content.eventLabel || defaultEventLabel(sample.eventType, locale), `${locale}: event label`);
+    assert.equal(mapped.date.day, 12, `${locale}: date`);
+    assert.equal(mapped.date.time, "17:00", `${locale}: event time`);
+    assert.equal(mapped.venue.name, content.venueName, `${locale}: venue`);
+    assert.equal(mapped.venue.address, [content.address, content.landmark].filter(Boolean).join(" · "), `${locale}: address`);
+    assert.equal(mapped.program.length, 6, `${locale}: program length`);
+    assert.deepEqual(mapped.program.map(({ id, time, title }) => [id, time, title]), sample.program.map(({ id, time }, index) => [id, time, content.programTitles[id] ?? content.programTitles[String(index)] ?? ""]), `${locale}: stable ordered program fixture`);
+    assert.equal(mapped.dressCode.enabled, true, `${locale}: dress code enabled`);
+    assert.equal(mapped.dressCode.style, sample.dressCode.style[locale], `${locale}: dress style`);
+    assert.equal(mapped.dressCode.text, sample.dressCode.text[locale], `${locale}: dress guidance`);
+    assert.equal(mapped.dressCode.note, sample.dressCode.note[locale], `${locale}: dress note`);
+    assert.equal(mapped.dressCode.colors.length, 5, `${locale}: palette`);
+    assert.ok(mapped.dressCode.colors.every((color) => color.name && color.hex));
+    assert.equal(mapped.gallery.length, 6, `${locale}: empty preview gallery cards`);
+    assert.ok(mapped.gallery.every(({ src, alt }) => !src && !alt), `${locale}: cards stay icon-only`);
     assert.deepEqual(mapped.wishes, getTemplatePreviewWishes(locale));
-    assert.equal(mapped.toyona.cardNumber, "8600 1234 5678 9012");
-    assert.equal(mapped.contacts.length, 2);
+    assert.equal(mapped.toyona.enabled, true, `${locale}: gift section`);
+    assert.equal(mapped.toyona.cardNumber, "8600 1234 5678 9012", `${locale}: card number`);
+    assert.equal(mapped.toyona.cardHolder, "AZIZ AZIZOV", `${locale}: card holder`);
+    assert.equal(mapped.toyona.note, "", `${locale}: unsupported gift note remains empty`);
+    assert.deepEqual(mapped.contacts.map(({ value }) => value), ["+998 90 123 45 67", "@demo"], `${locale}: phone and Telegram`);
   }
+});
+
+test("Sahro Fonusi hides empty unsupported gift fields without changing captured styling", () => {
+  const adapter = read(appRoot, "contract-adapter.css");
+  assert.match(html, /href="contract-adapter\.css"/);
+  assert.match(adapter, /#toyona \[data-slot="toyona\.note"\]:empty/);
+  assert.match(adapter, /#toyona \[data-slot="toyona\.bank"\]:empty/);
+  assert.equal(read(appRoot, "template.css"), read(captureRoot, "template.css"));
+  assert.match(html, /data-photo="venue\.photo"/);
+  assert.match(read(appRoot, "SOURCE_ADAPTATIONS.md"), /venue\.photo/);
 });
 
 test("Sahro Fonusi renderer pins this template to the shared typed invitation contract", async () => {
@@ -141,8 +171,13 @@ test("Sahro Fonusi consumes creator content; blank invitations do not persist pr
   assert.equal(mapped.bride, "");
   assert.equal(mapped.message, "");
   assert.equal(mapped.venue.name, "");
+  assert.equal(mapped.date.long, "");
+  assert.equal(mapped.program.length, 0);
   assert.equal(mapped.gallery.length, 0);
+  assert.equal(mapped.dressCode.enabled, false);
+  assert.equal(mapped.dressCode.colors.length, 0);
   assert.deepEqual(mapped.wishes, []);
   assert.equal(mapped.toyona.enabled, false);
+  assert.equal(mapped.toyona.cardNumber, "");
   assert.equal(mapped.contacts.length, 0);
 });

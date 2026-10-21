@@ -1,2 +1,18 @@
 /* Styles for controls added by the platform bridge, outside the captured design sheets. */
-.marhamat-lightbox .lightbox-caption{grid-column:1/-1;margin:0 auto;max-width:min(82vw,48rem);color:#f4ecdf;font:500 1rem/1.4 "Cormorant Garamond",Georgia,serif;text-align:center}
+.marhamat-lightbox .lightbox-caption {
+  grid-column: 1/-1;
+  margin: 0 auto;
+  max-width: min(82vw, 48rem);
+  color: #f4ecdf;
+  font:
+    500 1rem/1.4 "Cormorant Garamond",
+    Georgia,
+    serif;
+  text-align: center;
+}
+
+/* The shared invitation contract has no bank-name or gift-note fields. */
+#toyona [data-slot="toyona.bank"]:empty,
+#toyona [data-slot="toyona.note"]:empty {
+  display: none;
+}

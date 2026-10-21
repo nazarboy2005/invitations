@@ -1,8 +1,9 @@
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync, readFileSync, readdirSync } from "node:fs";
 import path from "node:path";
 import test from "node:test";
+import { createTemplatePreviewSample } from "../apps/web/src/modules/catalog/preview-sample";
 
 const root = process.cwd();
 const source = path.join(
@@ -112,7 +113,7 @@ test("Yangi Uy bundles the captured font families, weights, and Cyrillic glyphs"
   assert.ok(faces.length >= 20, "all requested local font faces are present");
 });
 
-test("Yangi Uy opening art is a checksummed fixture-derived portrait capture", () => {
+test("Yangi Uy catalog art stays blocked on a source-backed opening capture", () => {
   const image = readFileSync(path.join(pkg, "preview.webp"));
   const provenance = JSON.parse(read(pkg, "preview.provenance.json")) as {
     width: number;
@@ -122,6 +123,7 @@ test("Yangi Uy opening art is a checksummed fixture-derived portrait capture", (
     fixtureNames: string[];
     sourceOpening: string;
     sha256: string;
+    releaseStatus: string;
   };
   const fixture = JSON.parse(
     read(
@@ -151,9 +153,64 @@ test("Yangi Uy opening art is a checksummed fixture-derived portrait capture", (
     /captured Yangi Uy housewarming opening/,
   );
   assert.equal(
+    provenance.releaseStatus,
+    "stale-needs-render-after-household-fixture-integration",
+    "catalog artwork must be regenerated after the localized household fixture changes",
+  );
+  assert.equal(
     provenance.sha256,
     createHash("sha256").update(image).digest("hex"),
   );
+  assert.equal(
+    existsSync(path.join(source, "preview.webp")),
+    false,
+    "captured metadata names a preview.webp that the source capture does not contain",
+  );
+  assert.deepEqual(
+    readdirSync(path.join(source, "art")),
+    ["house-iso.webp"],
+    "the only captured art is an isolated house illustration, not a complete first-page render",
+  );
+  assert.deepEqual(provenance.fixtureNames, ["Javohir", "Madina"]);
+  assert.deepEqual(
+    createTemplatePreviewSample("yangi-uy").content[fixture.defaultLocale]
+      .people,
+    ["Rahmonovlar xonadoni"],
+  );
+});
+
+test("Yangi Uy sample opening data is localized and household-specific in every supported locale", () => {
+  const sample = createTemplatePreviewSample("yangi-uy");
+  const expected = {
+    "uz-Latn": {
+      person: "Rahmonovlar xonadoni",
+      event: "Yangi uy to‘yi",
+      title: "Yangi xonadonimiz",
+    },
+    "uz-Cyrl": {
+      person: "Раҳмоновлар хонадони",
+      event: "Янги уй тўйи",
+      title: "Янги хонадонимиз",
+    },
+    en: {
+      person: "The Rahmonov family home",
+      event: "Housewarming celebration",
+      title: "Our new home",
+    },
+    ru: {
+      person: "Дом семьи Рахмоновых",
+      event: "Новоселье",
+      title: "Наш новый дом",
+    },
+  } as const;
+
+  for (const [locale, opening] of Object.entries(expected)) {
+    const content = sample.content[locale as keyof typeof sample.content];
+    assert.deepEqual(content.people, [opening.person], `${locale} household`);
+    assert.equal(content.eventLabel, opening.event, `${locale} event label`);
+    assert.equal(content.title, opening.title, `${locale} page title`);
+    assert.doesNotMatch(content.people.join(" "), /Javohir|Madina|Жавохир|Мадина/);
+  }
 });
 
 test("Yangi Uy metadata and unsupported source fields are recorded precisely", () => {
@@ -162,12 +219,46 @@ test("Yangi Uy metadata and unsupported source fields are recorded precisely", (
   assert.match(metadata, /eventTypes: \["yangi-uy", "osh"\]/);
   const notes = read(pkg, "SOURCE_ADAPTATIONS.md");
   for (const gap of [
-    "yangi-uy` does not",
     "venue.photo",
-    "household-celebrant",
+    "first localized `content.people` value",
+    "0048_add_yangi_uy_template.sql",
   ])
     assert.ok(
       notes.includes(gap),
       `missing documented integration gap: ${gap}`,
     );
+});
+
+test("Yangi Uy source gallery retains controls, wrapped navigation, and empty media fallback", () => {
+  const html = read(pkg, "index.html");
+  const core = read(
+    path.join(root, "apps/web/public/templates/shared/nikoh"),
+    "core.js",
+  );
+  const sourceGallery = read(source, "index.html").match(
+    /<section class="section room room--garden"[\s\S]*?<\/section>/,
+  )?.[0];
+  const packageGallery = html.match(
+    /<section class="section room room--garden"[\s\S]*?<\/section>/,
+  )?.[0];
+  assert.ok(sourceGallery && packageGallery);
+  assert.equal(
+    packageGallery.replace(/\r\n/g, "\n"),
+    sourceGallery.replace(/\r\n/g, "\n"),
+    "captured source gallery is unchanged",
+  );
+  assert.match(packageGallery, /data-gallery-prev/);
+  assert.match(packageGallery, /data-gallery-next/);
+  assert.match(packageGallery, /data-gallery-dots/);
+  assert.match(
+    core,
+    /index=\(number\+state\.items\.length\) % state\.items\.length/,
+  );
+  assert.match(core, /behavior: reducedMotion\?'instant':'smooth'/);
+  assert.match(core, /showPhotoFallback\(img\)/);
+  const sample = createTemplatePreviewSample("yangi-uy");
+  assert.equal(sample.gallery.length, 6);
+  assert.ok(
+    sample.gallery.every(({ url, alt, caption }) => !url && !alt && !caption),
+  );
 });

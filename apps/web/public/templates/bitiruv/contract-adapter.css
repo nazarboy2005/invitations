@@ -4,3 +4,10 @@
 #venue .venue__photo {
   display: none;
 }
+
+/* The approved gift contract has no note or bank-name fields. */
+#toyona > [data-slot="toyona.note"]:empty,
+#toyona .gift > div > [data-slot="toyona.bank"]:empty,
+#toyona .gift > div > [data-slot="toyona.cardHolder"]:empty {
+  display: none;
+}

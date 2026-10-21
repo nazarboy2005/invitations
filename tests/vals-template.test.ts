@@ -105,13 +105,17 @@ test("Vals preserves the full captured design, animation, and artwork", () => {
   assert.equal(
     provenance.fixtureSha256,
     sha256(
-      readFileSync(
-        new URL(
-          "../apps/web/src/modules/catalog/preview-sample.json",
-          import.meta.url,
-        ),
+      Buffer.from(
+        readFileSync(
+          new URL(
+            "../apps/web/src/modules/catalog/preview-sample.json",
+            import.meta.url,
+          ),
+          "utf8",
+        ).replace(/\r\n/g, "\n"),
       ),
     ),
+    "fixture provenance uses stable LF-normalized JSON bytes on Windows and Unix",
   );
   assert.equal(
     provenance.capture.source.indexHtmlSha256,

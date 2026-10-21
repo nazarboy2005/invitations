@@ -70,6 +70,16 @@ test("Lola retains the captured invitation body, template styles, scripts, metad
       normalize(read(captureRoot, file)),
     );
   }
+  assert.match(html, /href="contract-adapter\.css"/);
+  assert.match(
+    read(appRoot, "contract-adapter.css"),
+    /\.venue-arch\.has-missing-photo:not\(\.has-venue-map\)\s*\{\s*display:\s*none/,
+  );
+  assert.match(
+    read(appRoot, "contract-adapter.css"),
+    /\.sandiq-modal \[data-slot="toyona\.bank"\]\s*\{\s*display:\s*none/,
+  );
+  assert.ok(existsSync(new URL("SOURCE_ADAPTATIONS.md", appRoot)));
   for (const asset of [
     "bouquet.webp",
     "paper.webp",
@@ -320,6 +330,20 @@ test("Lola receives the central sample only in template previews and blank creat
     );
     assert.equal(data.program.length, 6);
     assert.equal(data.gallery.length, 6);
+    assert.equal(data.program[1].time, "18:00");
+    assert.ok(data.program[1].title);
+    assert.equal(data.wishes.length, 3);
+    assert.ok(data.wishes.every((wish: { name: string; text: string }) => wish.name && wish.text));
+    assert.equal(data.toyona.enabled, true);
+    assert.equal(data.toyona.cardNumber, "8600 1234 5678 9012");
+    assert.equal(data.toyona.cardHolder, "AZIZ AZIZOV");
+    assert.equal("bank" in data.toyona, false);
+    assert.equal(data.toyona.note, "");
+    assert.equal(data.contacts.length, 2);
+    assert.equal(data.contacts[0].value, "+998 90 123 45 67");
+    assert.equal(data.contacts[1].value, "@demo");
+    assert.ok(data.dressCode.text);
+    assert.equal(data.dressCode.colors.length, 5);
   }
   const blank = makeLegacyData(createInvitation("lola"), "uz-Latn", "", false);
   assert.equal(blank.groom, "");

@@ -1,0 +1,5 @@
+/* The shared gift contract has no bank-name or gift-note fields. */
+#toyona [data-slot="toyona.bank"]:empty,
+#toyona [data-slot="toyona.note"]:empty {
+  display: none;
+}

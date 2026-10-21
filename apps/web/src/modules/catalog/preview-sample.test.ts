@@ -1,4 +1,6 @@
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
 import test from "node:test";
 import {
   createInvitation,
@@ -76,7 +78,7 @@ test("template samples are illustrative complete invitations", () => {
 });
 
 test("catalog fixtures use an event type supported by each selected design", () => {
-  for (const id of ["lola", "qiz-bazmi", "shahzoda", "chavandoz", "hilol"] as const) {
+  for (const id of ["lola", "qiz-bazmi", "shahzoda", "chavandoz", "hilol", "yangi-uy"] as const) {
     const template = templateById(id);
     const sample = createTemplatePreviewSample(id);
     assert.ok(template);
@@ -84,10 +86,40 @@ test("catalog fixtures use an event type supported by each selected design", () 
     if (id === "hilol") {
       assert.equal(sample.content["uz-Latn"].eventLabel, "Iftorlik");
       assert.equal(sample.content.ru.eventLabel, "Ифтар");
+    } else if (id === "yangi-uy") {
+      assert.equal(sample.content["uz-Latn"].eventLabel, "Yangi uy to‘yi");
+      assert.equal(sample.content["uz-Cyrl"].eventLabel, "Янги уй тўйи");
+      assert.equal(sample.content.en.eventLabel, "Housewarming celebration");
+      assert.equal(sample.content.ru.eventLabel, "Новоселье");
     } else {
       assert.equal(sample.content["uz-Latn"].eventLabel, "");
       assert.equal(sample.content.en.eventLabel, "");
     }
+  }
+  const nilufar = createTemplatePreviewSample("nilufar");
+  assert.equal(nilufar.eventType, "fotiha");
+  assert.deepEqual(nilufar.content["uz-Cyrl"].people, ["Жавохир", "Мадина"]);
+  assert.equal(nilufar.content["uz-Cyrl"].eventLabel, "Фотиҳа тўйи");
+  assert.equal(nilufar.content["uz-Latn"].eventLabel, "Fotiha to‘yi");
+  assert.ok(nilufar.program.every((entry) => nilufar.content.ru.programTitles[entry.id]));
+  const housewarming = createTemplatePreviewSample("yangi-uy");
+  assert.equal(housewarming.eventType, "yangi-uy");
+  assert.deepEqual(housewarming.content["uz-Latn"].people, ["Rahmonovlar xonadoni"]);
+  assert.deepEqual(housewarming.content["uz-Cyrl"].people, ["Раҳмоновлар хонадони"]);
+  assert.deepEqual(housewarming.content.en.people, ["The Rahmonov family home"]);
+  assert.deepEqual(housewarming.content.ru.people, ["Дом семьи Рахмоновых"]);
+  assert.equal(housewarming.program.length, 6);
+  assert.deepEqual(housewarming.program.map((entry) => entry.time), ["16:30", "17:00", "17:30", "18:30", "19:30", "20:00"]);
+  for (const locale of housewarming.enabledLocales) {
+    const content = housewarming.content[locale];
+    assert.ok(content.hosts && content.message && content.eventLabel && content.venueName && content.programHeading);
+    assert.ok(content.title);
+    for (const entry of housewarming.program) assert.ok(content.programTitles[entry.id]);
+    assert.ok(housewarming.dressCode.style[locale]);
+    assert.ok(housewarming.dressCode.text[locale]);
+    assert.ok(housewarming.dressCode.note[locale]);
+    assert.equal(housewarming.dressCode.colors.length, 5);
+    assert.ok(housewarming.dressCode.colors.every((color) => color.name[locale]));
   }
   const qizBazmi = createTemplatePreviewSample("qiz-bazmi");
   assert.equal(qizBazmi.eventType, "qiz-uzatish");
@@ -171,14 +203,18 @@ test("catalog fixtures use an event type supported by each selected design", () 
   );
   assert.equal(birthday.dressCode.colors[0].name.ru, "Розовый");
   const anniversary = createTemplatePreviewSample("oltin-kuz");
-  assert.equal(anniversary.eventType, "yubiley");
-  assert.equal(anniversary.content.ru.eventLabel, "Юбилей");
-  assert.equal(anniversary.content.ru.programHeading, "Программа юбилея");
+  assert.equal(anniversary.eventType, "birthday");
+  assert.equal(anniversary.content.ru.eventLabel, "День рождения");
+  assert.equal(anniversary.content.ru.programHeading, "Программа дня рождения");
   assert.equal(
     anniversary.content.ru.programTitles["sample-entrance"],
-    "Выход юбиляра",
+    "Выход именинника",
   );
   assert.equal(anniversary.startsAt, "2027-06-12T17:00");
+  const jubilee = createTemplatePreviewSample("oltin-yosh");
+  assert.equal(jubilee.eventType, "yubiley");
+  assert.equal(jubilee.content.ru.eventLabel, "Юбилей");
+  assert.equal(jubilee.content.ru.programHeading, "Программа юбилея");
   const morningOsh = createTemplatePreviewSample("nahor");
   assert.equal(morningOsh.eventType, "osh");
   assert.equal(morningOsh.content.ru.eventLabel, "Утренний ош");
@@ -230,6 +266,55 @@ test("preview wishes are populated and localized without entering invitation dat
   const sample = createTemplatePreviewSample("oq-kabutar");
   assert.deepEqual(sample.wishes, { enabled: true, requireApproval: true });
   assert.equal("sampleWishes" in sample, false);
+});
+
+test("Oq Kabutar keeps the preview wishes section connected to localized samples", () => {
+  const sample = createTemplatePreviewSample("oq-kabutar");
+  const source = readFileSync(
+    join(process.cwd(), "apps/web/public/templates/oq-kabutar/index.html"),
+    "utf8",
+  );
+
+  assert.equal(sample.wishes.enabled, true);
+  assert.match(source, /<section[^>]*data-section="wishes"/);
+  assert.match(
+    source,
+    /<ul[^>]*data-list="wishes"[^>]*>[\s\S]*?data-field="text"[\s\S]*?data-field="name"/,
+  );
+  for (const locale of sample.enabledLocales) {
+    const wishes = getTemplatePreviewWishes(locale);
+    assert.equal(wishes.length, 3);
+    assert.ok(wishes.every((wish) => wish.name.trim() && wish.text.trim()));
+  }
+});
+
+test("Shahzoda keeps its wishes section connected to localized preview samples", () => {
+  const sample = createTemplatePreviewSample("shahzoda");
+  const source = readFileSync(
+    join(process.cwd(), "apps/web/public/templates/shahzoda/index.html"),
+    "utf8",
+  );
+  const adapter = readFileSync(
+    join(process.cwd(), "apps/web/src/templates/anor/renderer.tsx"),
+    "utf8",
+  );
+
+  assert.equal(sample.wishes.enabled, true);
+  assert.match(source, /<section[^>]*data-section="wishes"/);
+  assert.match(
+    source,
+    /<ul[^>]*data-list="wishes"[^>]*>[\s\S]*?data-field="text"[\s\S]*?data-field="name"/,
+  );
+  assert.match(adapter, /wishesEnabled:\s*invitation\.wishes\.enabled/);
+  assert.match(
+    adapter,
+    /wishes:\s*sampleWishes\s*\?\s*getTemplatePreviewWishes\(locale\)\s*:\s*\[\]/,
+  );
+  for (const locale of ["uz-Latn", "uz-Cyrl", "en", "ru"] as const) {
+    const wishes = getTemplatePreviewWishes(locale);
+    assert.equal(wishes.length, 3);
+    assert.ok(wishes.every((wish) => wish.name.trim() && wish.text.trim()));
+  }
 });
 
 test("sample objects are isolated so renderer changes cannot mutate the fixture", () => {

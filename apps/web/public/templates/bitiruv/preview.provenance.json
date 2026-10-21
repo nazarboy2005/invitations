@@ -4,8 +4,7 @@
   "fixture": "apps/web/src/modules/catalog/preview-sample.json",
   "fixtureLocale": "uz-Latn",
   "fixtureNames": [
-    "Javohir",
-    "Madina"
+    "Javohir"
   ],
   "sourceOpening": "captured Bitiruv diploma opening, source graduation artwork, and one fixture celebrant",
   "sha256": "41d491539d27563dc2d8918b9b980953af6279407d2a0689fd81ad1c8e4f76e9"

@@ -1,0 +1,25 @@
+{
+  "status": "unverified",
+  "packagedFile": "preview.webp",
+  "sourceMetadataReference": "preview.webp",
+  "sourceFilePresent": false,
+  "dimensions": {
+    "width": 480,
+    "height": 853
+  },
+  "sha256": "d9873e54c170edb61f67274408d732f9f645aadee41e469577e05e10afae1e9b",
+  "remoteDeclaredAsset": {
+    "url": "https://www.marxaba.uz/templates/parda/preview.webp",
+    "retrievedAt": "2026-10-21",
+    "sha256": "f30879816bb88309d12ec23fa8d645b356a179800e58055c3b754cb1e18eabf6",
+    "dimensions": {
+      "width": 720,
+      "height": 1280
+    },
+    "sampleNames": ["Javohir", "Madina"],
+    "sampleDate": "2026-11-14",
+    "sampleTime": "18:00",
+    "matchesCanonicalFixture": false
+  },
+  "note": "The captured meta.js names preview.webp, but the untouched Parda source folder does not contain that file. The official remote asset was retrieved and its checksum verified; it is a genuine source preview with matching Javohir/Madina names, but it shows 2026-11-14 at 18:00 while the canonical fixture is 2027-06-12 at 17:00. The packaged image remains unchanged and the catalog-art blocker stays open until the opening is captured with canonical fixture data."
+}

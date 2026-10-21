@@ -32,7 +32,15 @@ Object.assign(window.MARHAMAT_I18N = window.MARHAMAT_I18N || {}, {
   "Savollar uchun": ["По вопросам", "For questions"],
   "Manzil": ["Адрес", "Venue"],
   "Kiyinish uslubi": ["Стиль одежды", "What to wear"],
-  "Xotiralar": ["Воспоминания", "Memories"]
+  "Xotiralar": ["Воспоминания", "Memories"],
+  "Taklifnomani ochish": ["Открыть приглашение", "Open invitation"],
+  "Tashrif javobi": ["Ответ о присутствии", "Attendance response"],
+  "To‘y kuni taqvimi": ["Календарь дня свадьбы", "Wedding day calendar"],
+  "Surat tanlash": ["Выбрать фотографию", "Choose a photo"],
+  "Suratni kattalashtirish": ["Увеличить фотографию", "Enlarge photo"],
+  "To‘y surati": ["Свадебная фотография", "Wedding photo"],
+  "Mehmonlar sonini kamaytirish": ["Уменьшить число гостей", "Decrease guest count"],
+  "Mehmonlar sonini oshirish": ["Увеличить число гостей", "Increase guest count"]
 });
 Object.assign(window.MARHAMAT_I18N = window.MARHAMAT_I18N || {}, {
   "Marxaba · Doira": ["Marxaba · Дойра", "Marxaba · Doira"],

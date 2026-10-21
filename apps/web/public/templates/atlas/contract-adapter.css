@@ -1,0 +1,6 @@
+/* The shared invitation contract has no free-form To‘yona note or bank name.
+   Hide the captured source-only slots when the adapter supplies empty values. */
+#toyona [data-slot="toyona.note"]:empty,
+#toyona [data-slot="toyona.bank"]:empty {
+  display: none;
+}

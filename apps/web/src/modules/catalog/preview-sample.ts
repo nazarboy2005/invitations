@@ -12,6 +12,7 @@ type EventSample = {
   personIndex: number;
   /** Optional localized one-person name used by source templates such as Bitiruv. */
   personName?: Record<Locale, string>;
+  title?: Record<Locale, string>;
   hosts: Record<Locale, string>;
   eventLabel?: Record<Locale, string>;
   startsAt?: string;
@@ -55,7 +56,19 @@ export function createTemplatePreviewSample(
   const dressCode = structuredClone(previewSample.dressCode);
   const program = previewSample.program.map((entry) => ({ ...entry }));
   let startsAt = previewSample.startsAt;
-  if (sampleEventType !== previewSample.eventType) {
+  const nilufarFotihaPreview = templateId === "nilufar" && sampleEventType === "fotiha";
+  if (nilufarFotihaPreview) {
+    const fotihaLabels: Record<Locale, string> = {
+      "uz-Latn": "Fotiha to‘yi",
+      "uz-Cyrl": "Фотиҳа тўйи",
+      en: "Engagement celebration",
+      ru: "Праздник фотиha",
+    };
+    for (const locale of Object.keys(content) as Locale[]) {
+      content[locale].eventLabel = fotihaLabels[locale];
+    }
+  }
+  if (sampleEventType !== previewSample.eventType && !nilufarFotihaPreview) {
     const eventSample = EVENT_SAMPLES[sampleEventType];
     if (eventSample) {
       if (eventSample.startsAt) startsAt = eventSample.startsAt;
@@ -65,6 +78,7 @@ export function createTemplatePreviewSample(
       });
       for (const locale of Object.keys(content) as Locale[]) {
         content[locale].eventLabel = eventSample.eventLabel?.[locale] ?? "";
+        if (eventSample.title) content[locale].title = eventSample.title[locale];
         content[locale].hosts = eventSample.hosts[locale];
         if (eventSample.message)
           content[locale].message = eventSample.message[locale];

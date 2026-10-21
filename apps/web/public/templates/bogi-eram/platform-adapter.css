@@ -1,0 +1,5 @@
+/* Platform-only empty hooks: the shared invitation contract has no bank name. */
+.toyona [data-slot="toyona.note"]:empty,
+.toyona [data-slot="toyona.bank"]:empty {
+  display: none;
+}

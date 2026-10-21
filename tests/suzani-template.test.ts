@@ -52,6 +52,12 @@ test("Suzani keeps its original markup, art, styles, and opening animation", () 
     '<canvas class="satin-hatch" aria-hidden="true"></canvas><div class="hero__art" aria-hidden="true"></div><div class="hero__cloth"',
   );
   assert.equal(normalize(body(html)), normalize(appBody));
+  assert.match(html, /href="contract-adapter\.css"/);
+  const adapter = readFileSync(new URL("contract-adapter.css", templateRoot), "utf8");
+  assert.match(adapter, /\.venue__photo\.has-missing-photo:not\(\.has-venue-map\)/);
+  assert.match(adapter, /\.gift__note:empty/);
+  assert.match(adapter, /\.gift__details \[data-slot="toyona\.bank"\]/);
+  assert.match(adapter, /\.venue__photo\.has-venue-map > span/);
   assert.equal(
     normalize(readFileSync(new URL("template.css", templateRoot), "utf8")),
     normalize(readFileSync(new URL("template.css", captureRoot), "utf8").replace(".hero:before{content:\"\";", ".hero__art{")),
@@ -70,6 +76,10 @@ test("Suzani keeps its original markup, art, styles, and opening animation", () 
 
   const source = readFileSync(new URL("template.js", templateRoot), "utf8");
   assert.match(source, /prefers-reduced-motion:\s*reduce/);
+  const styles = readFileSync(new URL("template.css", templateRoot), "utf8");
+  assert.match(styles, /@media\(min-width:700px\)/);
+  assert.match(styles, /@media\(max-width:380px\)/);
+  assert.match(styles, /@media\(prefers-reduced-motion:reduce\)/);
   assert.match(source, /function openFilm\(\)/);
   assert.match(source, /ScrollTrigger/);
   assert.ok(body(html).includes('class="hero__art" aria-hidden="true"'));
@@ -131,11 +141,20 @@ test("Suzani packages local fonts and the real portrait artwork", () => {
 
   const panel = readFileSync(new URL("art/panel.webp", templateRoot));
   const preview = readFileSync(new URL("preview.webp", templateRoot));
+  const provenance = JSON.parse(
+    readFileSync(new URL("preview.provenance.json", templateRoot), "utf8"),
+  ) as { asset: string; sourceAsset: string; sha256: string; width: number; height: number };
   assert.equal(
     createHash("sha256").update(preview).digest("hex"),
     createHash("sha256").update(panel).digest("hex"),
     "Catalog artwork must use the original full-page portrait panel asset",
   );
+  assert.equal(provenance.asset, "preview.webp");
+  assert.equal(provenance.sourceAsset, "art/panel.webp");
+  assert.equal(provenance.sha256, createHash("sha256").update(preview).digest("hex"));
+  assert.equal(provenance.width, 640);
+  assert.equal(provenance.height, 1138);
+  assert.equal(preview.toString("ascii", 8, 12), "WEBP");
   assert.ok(body(html).includes('id="toyona" data-section="toyona"'));
   assert.ok(body(html).includes('data-slot="toyona.cardNumber"'));
   assert.ok(body(html).includes('data-slot="toyona.cardHolder"'));
@@ -219,6 +238,8 @@ test("Suzani receives the shared localized preview fixture without leaking it in
     assert.equal(data.toyona.cardNumber, "8600 1234 5678 9012");
     assert.equal(data.toyona.cardHolder, "AZIZ AZIZOV");
     assert.equal(data.toyona.note, "");
+    assert.equal("bank" in data.toyona, false);
+    assert.equal("photo" in data.venue, false);
     assert.deepEqual(data.contacts.map((item) => item.value), ["+998 90 123 45 67", "@demo"]);
   }
 
@@ -230,5 +251,8 @@ test("Suzani receives the shared localized preview fixture without leaking it in
   assert.equal(blank.gallery.length, 0);
   assert.deepEqual(blank.wishes, []);
   assert.equal(blank.toyona.enabled, false);
+  assert.equal(blank.toyona.note, "");
+  assert.equal("bank" in blank.toyona, false);
+  assert.equal("photo" in blank.venue, false);
   assert.equal(blank.contacts.length, 0);
 });

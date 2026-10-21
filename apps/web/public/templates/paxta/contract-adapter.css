@@ -1,0 +1,9 @@
+/* Keep source-only fields from leaving empty blocks in contract-backed views. */
+.venue__photo.has-missing-photo:not(.has-venue-map) {
+  display: none;
+}
+
+.gift-section > .muted:empty,
+.gift__details [data-slot="toyona.bank"] {
+  display: none;
+}

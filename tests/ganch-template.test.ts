@@ -29,6 +29,12 @@ const body = (source: string) => source.match(/<body[\s\S]*?<\/body>/)?.[0] ?? "
 
 test("Ganch preserves the captured source composition, motion code, styles, metadata and artwork", () => {
   assert.equal(normalize(body(html)), normalize(body(read(captureRoot, "index.html"))));
+  assert.match(html, /href="contract-adapter\.css"/);
+  const adapter = read(appRoot, "contract-adapter.css");
+  assert.match(adapter, /\.venue__photo\.has-missing-photo:not\(\.has-venue-map\)/);
+  assert.match(adapter, /\.section--toyona > \[data-slot="toyona\.note"\]:empty/);
+  assert.match(adapter, /\.gift__details \[data-slot="toyona\.bank"\]/);
+  assert.ok(read(appRoot, "SOURCE_ADAPTATIONS.md").includes("contract-adapter.css"));
   for (const file of ["template.css", "template.js", "scene-motion.js", "meta.js", "i18n.js"]) assert.equal(normalize(read(appRoot, file)), normalize(read(captureRoot, file)));
   for (const asset of ["brass-roundel-v2.webp", "court-scene-painted.webp", "ganch-doors-v2.webp"]) assert.deepEqual(readFileSync(new URL(`art/${asset}`, appRoot)), readFileSync(new URL(`art/${asset}`, captureRoot)));
   assert.match(read(appRoot, "template.js"), /prefers-reduced-motion: reduce/);
@@ -37,11 +43,15 @@ test("Ganch preserves the captured source composition, motion code, styles, meta
   assert.match(body(html), /id="open-invitation"/);
 });
 
-test("Ganch uses a real source-rendered portrait opening image, not a copied scene asset", () => {
+test("Ganch retains its closed-door portrait but flags stale baked-in sample pixels", () => {
   const preview = readFileSync(new URL("preview.webp", appRoot));
   assert.ok(preview.length > 20_000, "rendered opening artwork must be a real image");
   assert.match(read(appRoot, "meta.js"), /preview:\s*"preview\.webp"/);
   assert.notEqual(createHash("sha256").update(preview).digest("hex"), createHash("sha256").update(readFileSync(new URL("art/ganch-doors-v2.webp", appRoot))).digest("hex"));
+  const adaptations = read(appRoot, "SOURCE_ADAPTATIONS.md");
+  assert.match(adaptations, /old `A&M` monogram and old sample date/);
+  assert.match(adaptations, /present image is\s+a release blocker/);
+  assert.match(adaptations, /does not match the central catalog fixture/);
 });
 
 test("Ganch fonts and all HTML, CSS and script assets are local and resolve offline", () => {
@@ -99,10 +109,21 @@ test("Ganch maps the centralized sample in all locales and empty creator drafts 
     assert.equal(data.date.day, 12);
     assert.equal(data.date.monthNumber, 6);
     assert.equal(data.program.length, 6);
+    assert.deepEqual(data.program.map((entry) => entry.time), ["17:30", "18:00", "18:30", "20:00", "21:30", "22:30"]);
+    assert.ok(data.program.every((entry) => entry.title));
     assert.equal(data.gallery.length, 6);
+    assert.ok(data.gallery.every((entry) => entry.src === "" && entry.alt === ""));
     assert.deepEqual(data.wishes, getTemplatePreviewWishes(locale));
+    assert.ok(data.wishes.length === 3 && data.wishes.every((wish) => wish.name && wish.text));
+    assert.equal(data.toyona.enabled, true);
     assert.equal(data.toyona.cardNumber, "8600 1234 5678 9012");
+    assert.equal(data.toyona.cardHolder, "AZIZ AZIZOV");
+    assert.equal(data.toyona.note, "");
+    assert.equal("bank" in data.toyona, false);
     assert.equal(data.contacts.length, 2);
+    assert.deepEqual(data.contacts.map((contact) => contact.value), ["+998 90 123 45 67", "@demo"]);
+    assert.equal(data.dressCode.enabled, true);
+    assert.equal(data.dressCode.text, sample.dressCode.text[locale]);
     assert.equal(data.dressCode.colors.length, 5);
   }
   const blank = makeLegacyData(createInvitation("ganch"), "uz-Latn", "", false);
@@ -113,7 +134,9 @@ test("Ganch maps the centralized sample in all locales and empty creator drafts 
   assert.equal(blank.gallery.length, 0);
   assert.deepEqual(blank.wishes, []);
   assert.equal(blank.toyona.enabled, false);
+  assert.equal(blank.toyona.note, "");
   assert.equal(blank.contacts.length, 0);
+  assert.equal(blank.dressCode.enabled, false);
 });
 
 

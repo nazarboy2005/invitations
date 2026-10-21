@@ -408,7 +408,7 @@ test("template migrations publish completed designs while keeping unfinished des
   );
   assert.deepEqual(
     categories.rows.map((row) => row.id),
-    ["wedding", "birthday", "osh", "qiz-bazmi", "other", "iftorlik"],
+    ["wedding", "birthday", "osh", "qiz-bazmi", "other", "iftorlik", "yangi-uy"],
   );
   const anor = await db.query<{ published: boolean; price_minor: number }>(
     "SELECT published,price_minor FROM templates WHERE id='anor'",

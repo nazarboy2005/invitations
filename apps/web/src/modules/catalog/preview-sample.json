@@ -296,6 +296,92 @@
     }
   },
   "eventSamples": {
+    "yangi-uy": {
+      "personIndex": 0,
+      "personName": {
+        "uz-Latn": "Rahmonovlar xonadoni",
+        "uz-Cyrl": "Раҳмоновлар хонадони",
+        "en": "The Rahmonov family home",
+        "ru": "Дом семьи Рахмоновых"
+      },
+      "eventLabel": {
+        "uz-Latn": "Yangi uy to‘yi",
+        "uz-Cyrl": "Янги уй тўйи",
+        "en": "Housewarming celebration",
+        "ru": "Новоселье"
+      },
+      "title": {
+        "uz-Latn": "Yangi xonadonimiz",
+        "uz-Cyrl": "Янги хонадонимиз",
+        "en": "Our new home",
+        "ru": "Наш новый дом"
+      },
+      "hosts": {
+        "uz-Latn": "Rahmonovlar oilasi",
+        "uz-Cyrl": "Раҳмоновлар оиласи",
+        "en": "The Rahmonov family",
+        "ru": "Семья Рахмоновых"
+      },
+      "message": {
+        "uz-Latn": "Yangi xonadonimizdagi quvonchni siz bilan baham ko‘rishga taklif qilamiz.",
+        "uz-Cyrl": "Янги хонадонимиздаги қувончни сиз билан баҳам кўришга таклиф қиламиз.",
+        "en": "Join us as we celebrate the joy of our new home.",
+        "ru": "Приглашаем вас разделить с нами радость новоселья."
+      },
+      "venueName": {
+        "uz-Latn": "Rahmonovlar yangi xonadoni",
+        "uz-Cyrl": "Раҳмоновларнинг янги хонадони",
+        "en": "The Rahmonovs’ new home",
+        "ru": "Новый дом семьи Рахмоновых"
+      },
+      "address": {
+        "uz-Latn": "Toshkent shahri, Yunusobod tumani",
+        "uz-Cyrl": "Тошкент шаҳри, Юнусобод тумани",
+        "en": "Yunusabad district, Tashkent",
+        "ru": "Юнусабадский район, Ташкент"
+      },
+      "startsAt": "2027-06-12T17:00",
+      "programTimes": ["16:30", "17:00", "17:30", "18:30", "19:30", "20:00"],
+      "programHeading": {
+        "uz-Latn": "Yangi uy to‘yi dasturi",
+        "uz-Cyrl": "Янги уй тўйи дастури",
+        "en": "Housewarming program",
+        "ru": "Программа новоселья"
+      },
+      "programTitles": {
+        "uz-Latn": ["Mehmonlarni kutib olish", "Yangi xonadon bilan tanishuv", "Uy bo‘ylab sayohat", "Dasturxon va suhbat", "Ezgu tilaklar", "Yakuniy so‘z"],
+        "uz-Cyrl": ["Меҳмонларни кутиб олиш", "Янги хонадон билан танишув", "Уй бўйлаб саёҳат", "Дастурхон ва суҳбат", "Эзгу тилаклар", "Якуний сўз"],
+        "en": ["Welcoming guests", "Welcome to our new home", "A tour of the house", "Food and conversation", "Warm wishes", "Closing words"],
+        "ru": ["Встреча гостей", "Знакомство с новым домом", "Экскурсия по дому", "Угощение и беседа", "Добрые пожелания", "Заключительное слово"]
+      },
+      "dressCode": {
+        "style": {
+          "uz-Latn": "Bayramona libos",
+          "uz-Cyrl": "Байрамона либос",
+          "en": "Festive attire",
+          "ru": "Праздничный наряд"
+        },
+        "text": {
+          "uz-Latn": "Yangi uyimizdagi bayramga qulay va ozoda libosda keling.",
+          "uz-Cyrl": "Янги уйимиздаги байрамга қулай ва озода либосда келинг.",
+          "en": "Join our housewarming in comfortable, festive attire.",
+          "ru": "Приходите на новоселье в удобной и праздничной одежде."
+        },
+        "note": {
+          "uz-Latn": "Uy ichida qulaylik uchun oyoq kiyimingizni almashtirishingiz mumkin.",
+          "uz-Cyrl": "Уй ичида қулайлик учун оёқ кийимингизни алмаштиришингиз мумкин.",
+          "en": "Feel free to change shoes for comfort indoors.",
+          "ru": "Для удобства в доме можно переобуться."
+        },
+        "colors": [
+          { "hex": "#c96f4a", "name": { "uz-Latn": "Terrakota", "uz-Cyrl": "Терракота", "en": "Terracotta", "ru": "Терракотовый" } },
+          { "hex": "#f4dfb1", "name": { "uz-Latn": "Qaymoqrang", "uz-Cyrl": "Қаймоқранг", "en": "Cream", "ru": "Кремовый" } },
+          { "hex": "#2f6f73", "name": { "uz-Latn": "Ko‘kimtir yashil", "uz-Cyrl": "Кўкимтир яшил", "en": "Teal", "ru": "Бирюзовый" } },
+          { "hex": "#7aa95c", "name": { "uz-Latn": "Zaytun", "uz-Cyrl": "Зайтун", "en": "Olive", "ru": "Оливковый" } },
+          { "hex": "#ffd27a", "name": { "uz-Latn": "Oltin", "uz-Cyrl": "Олтин", "en": "Golden", "ru": "Золотистый" } }
+        ]
+      }
+    },
     "birthday": {
       "personIndex": 0,
       "eventLabel": {
@@ -1062,22 +1148,22 @@
     "korporativ": {
       "personIndex": 0,
       "personName": {
-        "uz-Latn": "Marxaba jamoasi",
-        "uz-Cyrl": "Мархаба жамоаси",
-        "en": "Marxaba team",
-        "ru": "Команда Marxaba"
+        "uz-Latn": "Marxaba Tech",
+        "uz-Cyrl": "Marxaba Tech",
+        "en": "Marxaba Tech",
+        "ru": "Marxaba Tech"
       },
       "eventLabel": {
-        "uz-Latn": "Korporativ tadbir",
-        "uz-Cyrl": "Корпоратив тадбир",
-        "en": "Corporate event",
-        "ru": "Корпоративное мероприятие"
+        "uz-Latn": "Yil yakuni kechasi",
+        "uz-Cyrl": "Йил якуни кечаси",
+        "en": "Year-end celebration",
+        "ru": "Вечер по итогам года"
       },
       "hosts": {
-        "uz-Latn": "Marxaba jamoasi",
-        "uz-Cyrl": "Мархаба жамоаси",
-        "en": "The Marxaba team",
-        "ru": "Команда Marxaba"
+        "uz-Latn": "Marxaba Tech",
+        "uz-Cyrl": "Marxaba Tech",
+        "en": "Marxaba Tech",
+        "ru": "Marxaba Tech"
       },
       "message": {
         "uz-Latn": "Birgalikdagi yutuqlarimizni samimiy davrada nishonlaymiz.",
@@ -1135,7 +1221,7 @@
           { "hex": "#C8A86B", "name": { "uz-Latn": "Oltin", "uz-Cyrl": "Олтин", "en": "Gold", "ru": "Золотой" } }
         ]
       },
-      "startsAt": "2027-06-12T18:00",
+      "startsAt": "2026-11-14T18:30",
       "programTimes": ["17:30", "18:00", "18:30", "19:00", "20:00", "21:30"]
     }
   }

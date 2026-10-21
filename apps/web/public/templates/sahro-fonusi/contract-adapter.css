@@ -1,0 +1,5 @@
+/* The approved invitation contract has no fields for these captured source slots. */
+#toyona [data-slot="toyona.note"]:empty,
+#toyona [data-slot="toyona.bank"]:empty {
+  display: none;
+}

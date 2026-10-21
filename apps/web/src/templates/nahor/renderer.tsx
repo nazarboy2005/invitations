@@ -11,8 +11,8 @@ export type NahorInvitationProps = Omit<
 
 /** Runs Nahor's captured morning-osh invitation using the shared renderer. */
 export function NahorInvitation(props: NahorInvitationProps) {
-  // The canonical catalog fixture is a wedding. Adapt only the presentation
-  // copy for this osh design; authored content and persisted data stay intact.
+  // Normalize generic preview invitations to this source's event label only;
+  // creator content and persisted invitations always pass through unchanged.
   const invitation =
     props.preview && props.invitation.eventType !== "osh"
       ? {

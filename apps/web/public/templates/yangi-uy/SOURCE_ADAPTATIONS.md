@@ -1,22 +1,24 @@
-# Yangi Uy source package
+# Yangi Uy source and integration record
 
 Reference: `Invitations - this folder will be removed from production/Marxaba/Boshqa tadbirlar/templates/yangi-uy`.
 
-The captured page body, `template.css`, `i18n.js`, `meta.js`, and `art/house-iso.webp` are copied byte-for-byte. `template.js` is copied with one dependency URL adjustment so its WebGL house animation loads the captured Three.js vendor from this isolated package. The source retains its opening, staged 3D house build and door interaction, fallback artwork, ambient dust, scroll choreography, calendar/countdown, program, venue/map links, dress code, garden gallery, RSVP, wishes, to‘yona, contacts, and music controls.
+The captured body, `template.css`, `i18n.js`, `meta.js`, and `art/house-iso.webp` remain byte-for-byte unchanged. `template.js` has one path adaptation so the source WebGL house animation loads its captured Three.js bundle from this isolated package. The adapter head loads the local fonts, local GSAP/ScrollTrigger/LZ String dependencies, and the platform invitation bridge; it omits the reference app's sample-data loader. Preview metadata points at the fixture-rendered portrait opening with recorded dimensions, fixture name, and SHA-256.
 
-The `index.html` head is an adapter shell: it loads the application's same-origin invitation runtime, package-local fonts and original GSAP/ScrollTrigger/LZ String dependencies. It excludes the captured general sample loader and `sample-overrides.js`; creator or shared preview fixture data is injected by the separate typed adapter. The head's missing source Open Graph image (`og.jpg`) is pointed to this package's fixture-derived first-page preview instead. The body remains exactly as captured. Spectral 600 and Inter 400/500/600/700 are bundled as local WOFF2 subsets.
+The shared Marxaba renderer is used in creator preview and public display. The Yangi Uy source declares catalog category `yangi-uy` and compatible event types `yangi-uy` and `osh`. Its unpublished typed catalog record and additive migration `0048_add_yangi_uy_template.sql` register that category and event support separately. Yangi Uy is dispatched through the shared Marxaba source renderer and is not published/selectable pending browser and service release verification.
 
-The typed adapter in `apps/web/src/templates/yangi-uy` delegates invitation data and APIs to the common Marxaba renderer. In preview only, it replaces the fixture's default wedding event label with a localized housewarming label; creator-authored event labels are preserved. This template remains unregistered and unpublished in this package-only task.
+The reference's `extras.celebrant` household/host lockup maps to the first localized `content.people` value. The studio shows a one-person household field for Yangi Uy, with the Uzbek Latin example “Masalan, Rahmonovlar xonadoni”; names and hosts are independent editable contract fields. Catalog/initial-selection samples live only in `preview-sample.json` and use a localized Rahmonov household, housewarming copy, venue, six-item program, dress code, and the standard six empty gallery entries. That presentation fixture never enters a saved invitation.
 
-## Source metadata and remaining integration gaps
+The packaged 480×720 `preview.webp` still shows Javohir and Madina from before the housewarming fixture was integrated; the current sample is the single household name Rahmonovlar xonadoni. Its provenance marks it `stale-needs-render-after-household-fixture-integration`. The untouched source capture has no `preview.webp` despite that metadata name, and `art/house-iso.webp` is its only image asset. That isolated house illustration is not a complete first-page design. Without rendering the current source HTML/CSS/JavaScript and fixture, no authentic replacement image can be selected or given honest capture provenance; composing replacement lettering over the stale image or framing the isolated art as a page would be an approximation. Browser access was unavailable during this static audit, so the stale image remains unchanged and Yangi Uy stays unpublished.
 
-The captured `meta.js` declares category `yangi-uy` and event types `yangi-uy` and `osh`. `osh` exists in the shared contract; `yangi-uy` does not. A dedicated event type, localized editor option, supported-event metadata, and event-specific person/host editing need shared integration before selection/publication. This reference uses one house/family name slot (`extras.celebrant`); the common adapter presents the first available contract person in that slot, while the current invitation contract has no family-name/household-celebrant field.
+The source gallery markup is copied unchanged, including its previous/next controls and dot navigation. Shared gallery runtime binds the repeatable contract gallery list, wraps button navigation across its item count, scrolls smoothly unless reduced motion is requested, and supplies the source's decorative star fallback when an entry has no photo. The captured source's garden trellis, staged gallery-card motion, and responsive CSS remain part of the package. Full interactive/browser verification is still a release gate.
 
-The source includes an optional `venue.photo` slot, which is absent from the approved invitation contract. Leave it empty; do not substitute the house illustration or gallery. The captured metadata names `preview.webp`, but the reference folder has no such file, so this package's preview uses the actual opening renderer, artwork, and canonical presentation fixture. Preview provenance is recorded alongside the image.
+## Known contract gap
+
+The source has an optional `venue.photo` image slot, but the approved shared venue contract has no venue-photo field or upload flow. The adapter leaves that slot empty and does not substitute the house illustration or gallery images. This is recorded as a product/data capability gap; the remaining mapped source sections and interactions use the existing invitation and service contracts.
 
 ## Source declarations
 
 - Event types: `yangi-uy`, `osh`.
 - Catalog category: `yangi-uy`.
 - Style tags: `zamonaviy`, `ertak`.
-- Motion: `3d` WebGL house animation with its source 2D/illustration fallback.
+- Motion: source Three.js house build with its illustrated fallback, ambient dust, and GSAP scroll choreography.

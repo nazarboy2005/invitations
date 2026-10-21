@@ -1,0 +1,10 @@
+{
+  "artifact": "preview.webp",
+  "sha256": "2516ce705a68b6dac4654c3d6a5db9380b9af6623cdd51be130d4a37fe375c89",
+  "format": "image/webp",
+  "width": 941,
+  "height": 1672,
+  "source": "art/poster.webp",
+  "sourceCapture": "Invitations - this folder will be removed from production/Marxaba/Nikoh/templates/retro-kino",
+  "verification": "The catalog image is an exact byte-for-byte copy of the template's poster artwork and retains its portrait aspect ratio."
+}

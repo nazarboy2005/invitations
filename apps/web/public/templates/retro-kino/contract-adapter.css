@@ -1,0 +1,10 @@
+/* Keep unavailable optional contract fields from leaving empty source placeholders. */
+.venue__photo.has-missing-photo {
+  display: none;
+}
+
+.gift > [data-slot="toyona.note"]:empty,
+.gift__details > [data-slot="toyona.bank"]:empty,
+.gift__details > [data-slot="toyona.cardHolder"]:empty {
+  display: none;
+}
