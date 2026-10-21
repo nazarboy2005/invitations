@@ -69,6 +69,12 @@ export async function readJson(
   request: Request,
   maxBytes = 128_000,
 ): Promise<unknown> {
+  return JSON.parse((await readBytes(request, maxBytes)).toString("utf8"));
+}
+export async function readBytes(
+  request: Request,
+  maxBytes: number,
+): Promise<Buffer> {
   if (Number(request.headers.get("content-length")) > maxBytes)
     throw new ApiError(413, "TOO_LARGE", "So‘rov hajmi juda katta.");
   if (!request.body) throw new ApiError(400, "EMPTY_BODY", "So‘rov bo‘sh.");
@@ -89,5 +95,5 @@ export async function readJson(
   } finally {
     reader.releaseLock();
   }
-  return JSON.parse(Buffer.concat(chunks).toString("utf8"));
+  return Buffer.concat(chunks);
 }

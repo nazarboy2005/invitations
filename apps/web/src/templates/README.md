@@ -1,21 +1,14 @@
 # Invitation templates
 
-Anor is the first Marxaba reference renderer. The next ten Marxaba nikoh
-references are also authorized for production integration and are tracked in
-`docs/templates/TEMPLATE_ROADMAP.md`. Oltin Nur, Samarqand Kechasi, Bog‘i Eram,
-Atlas, Oq Kabutar, Kuzgi Chinor, Muhabbat Kitobi, Sahifa, and Oltin Uzuk are published in the Neon catalog.
-Oynavand and Somon Yo‘li are also published at 150,000 UZS after source,
-locale, opening, preview-content, program, and RSVP checks. Qog‘oz Turna is
-published at 150,000 UZS after its source, preview artwork, four-locale,
-opening, and invitation-section checks. Their additive migrations are
-`0022`–`0027`.
-Qandil and Ko‘zgu are published in the catalog at 150,000 UZS after their
-source, preview artwork, locale, responsive, gallery, venue, RSVP, and release
-checks. Their additive publication migrations are `0049_publish_qandil.sql`
-and `0050_publish_kozgu.sql`. External application deployment and cloud-service
-verification remain pending; do not treat documented service limitations as
-completed integrations. Uchar Gilam is explicitly skipped by the user and
-must remain unpublished.
+This directory contains 32 template renderer folders at different stages of
+integration and review. Static assets and captured source packages are also
+stored under `apps/web/public/templates`; their presence does not make a design
+available in the catalog. Without `DATABASE_URL`, the local typed fallback
+catalog currently exposes 10 published templates. A configured database can
+have a different catalog state. Check the typed catalog and applied migrations
+for current publication status, and see `docs/templates/TEMPLATE_ROADMAP.md`
+for template-by-template integration and release notes. External deployment
+and cloud-service verification remain separate from local renderer checks.
 
 Keep every future template in its own renderer, styles, assets, and motion
 implementation. When a reference source exists, integrate that exact complete

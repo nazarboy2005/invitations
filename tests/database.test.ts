@@ -20,11 +20,17 @@ before(async () => {
     "../packages/database/migrations/",
     import.meta.url,
   );
+  await db.exec("BEGIN");
   for (const name of (await readdir(directory))
     .filter((name) => name.endsWith(".sql"))
     .sort()) {
+    // Mirror the production runner: drain deferred triggers between migrations.
+    await db.exec(
+      "SET CONSTRAINTS ALL IMMEDIATE; SET CONSTRAINTS ALL DEFERRED",
+    );
     await db.exec(await readFile(new URL(name, directory), "utf8"));
   }
+  await db.exec("COMMIT");
   await db.exec(
     "BEGIN; INSERT INTO templates(id,name,price_minor,published) VALUES('test-alt','Test alternate',100,true); INSERT INTO template_supported_event_types(template_id,event_type) VALUES('test-alt','wedding'); COMMIT;",
   );
@@ -51,11 +57,10 @@ test("Bitiruv event compatibility is additive and remains unpublished", async ()
   const supported = await db.query<{ event_type: string }>(
     "SELECT event_type FROM template_supported_event_types WHERE template_id='bitiruv' ORDER BY event_type",
   );
-  assert.deepEqual(supported.rows.map((row) => row.event_type), [
-    "birthday",
-    "bitiruv",
-    "korporativ",
-  ]);
+  assert.deepEqual(
+    supported.rows.map((row) => row.event_type),
+    ["birthday", "bitiruv", "korporativ"],
+  );
   await assert.rejects(
     db.query(
       "INSERT INTO template_supported_event_types(template_id,event_type) VALUES('bitiruv','unsupported')",
@@ -75,11 +80,10 @@ test("Korporativ event compatibility is additive and remains unpublished", async
   const supported = await db.query<{ event_type: string }>(
     "SELECT event_type FROM template_supported_event_types WHERE template_id='korporativ' ORDER BY event_type",
   );
-  assert.deepEqual(supported.rows.map((row) => row.event_type), [
-    "bitiruv",
-    "korporativ",
-    "yubiley",
-  ]);
+  assert.deepEqual(
+    supported.rows.map((row) => row.event_type),
+    ["bitiruv", "korporativ", "yubiley"],
+  );
   await assert.rejects(
     db.query(
       "INSERT INTO template_supported_event_types(template_id,event_type) VALUES('korporativ','unsupported')",
@@ -408,7 +412,15 @@ test("template migrations publish completed designs while keeping unfinished des
   );
   assert.deepEqual(
     categories.rows.map((row) => row.id),
-    ["wedding", "birthday", "osh", "qiz-bazmi", "other", "iftorlik", "yangi-uy"],
+    [
+      "wedding",
+      "birthday",
+      "osh",
+      "qiz-bazmi",
+      "other",
+      "iftorlik",
+      "yangi-uy",
+    ],
   );
   const anor = await db.query<{ published: boolean; price_minor: number }>(
     "SELECT published,price_minor FROM templates WHERE id='anor'",

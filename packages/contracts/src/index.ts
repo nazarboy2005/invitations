@@ -175,6 +175,11 @@ export const invitationSchema = z
     id: z.string().min(1).max(100),
     templateId: invitationTemplateIdSchema,
     status: z.enum(["draft", "published", "archived"]),
+    // Assigned exclusively by the publication service. Optional for older drafts.
+    slug: z
+      .string()
+      .regex(/^[0-9A-Za-z]{6}$/)
+      .optional(),
     defaultLocale: localeSchema,
     enabledLocales: z.array(localeSchema).min(1).max(4),
     content: z.record(z.string(), contentSchema),
@@ -953,8 +958,10 @@ export function defaultInvitationMessage(
   if (eventType === "bitiruv" || eventType === "korporativ") {
     const defaults: Record<"bitiruv" | "korporativ", Record<Locale, string>> = {
       bitiruv: {
-        "uz-Latn": "Bitiruv oqshomini siz bilan birga nishonlashga taklif qilamiz.",
-        "uz-Cyrl": "Битирув оқшомини сиз билан бирга нишонлашга таклиф қиламиз.",
+        "uz-Latn":
+          "Bitiruv oqshomini siz bilan birga nishonlashga taklif qilamiz.",
+        "uz-Cyrl":
+          "Битирув оқшомини сиз билан бирга нишонлашга таклиф қиламиз.",
         en: "Join us to celebrate graduation together.",
         ru: "Приглашаем вас вместе отпраздновать выпускной вечер.",
       },
@@ -969,8 +976,10 @@ export function defaultInvitationMessage(
   }
   if (eventType === "yangi-uy") {
     return {
-      "uz-Latn": "Yangi xonadonimizdagi quvonchni siz bilan baham ko‘rishga taklif qilamiz.",
-      "uz-Cyrl": "Янги хонадонимиздаги қувончни сиз билан баҳам кўришга таклиф қиламиз.",
+      "uz-Latn":
+        "Yangi xonadonimizdagi quvonchni siz bilan baham ko‘rishga taklif qilamiz.",
+      "uz-Cyrl":
+        "Янги хонадонимиздаги қувончни сиз билан баҳам кўришга таклиф қиламиз.",
       en: "Join us as we celebrate the joy of our new home.",
       ru: "Приглашаем вас разделить с нами радость новоселья.",
     }[locale];

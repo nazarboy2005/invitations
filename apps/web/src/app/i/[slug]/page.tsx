@@ -17,6 +17,7 @@ export default async function InvitationPage({
   searchParams: Promise<{ lang?: string; g?: string }>;
 }) {
   const { slug } = await params;
+  if (!/^[0-9A-Za-z]{6}$/.test(slug)) notFound();
   const query = await searchParams;
   const result = await getPublishedInvitation(slug);
   if (!result || !templateById(result.invitation.templateId)) notFound();

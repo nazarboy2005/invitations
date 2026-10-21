@@ -1,0 +1,15 @@
+.thumbnail {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: var(--surface-soft);
+  pointer-events: none;
+}
+.viewport {
+  width: 390px;
+  height: 640px;
+  transform-origin: top left;
+}
+.viewport > div {
+  height: 100%;
+}

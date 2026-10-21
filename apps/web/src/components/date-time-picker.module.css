@@ -12,15 +12,15 @@
   justify-content: space-between;
   gap: 14px;
   padding: 0 15px;
-  border: 1px solid #e5d8c5;
+  border: 1px solid var(--line-strong);
   border-radius: 10px;
-  color: #463a2e;
-  background: linear-gradient(180deg, #fffefa, #fbf7ef);
+  color: var(--ink);
+  background: var(--surface);
   text-align: left;
   font: inherit;
   font-size: 14px;
   box-shadow:
-    0 1px 2px #50371908,
+    0 1px 2px rgb(63 57 50 / 3%),
     inset 0 1px #ffffffc7;
   transition:
     border-color 140ms ease,
@@ -29,18 +29,18 @@
 }
 .trigger svg {
   flex: 0 0 auto;
-  color: #876b49;
+  color: var(--accent-strong);
 }
 .trigger:hover:not(:disabled),
 .trigger.open {
-  border-color: #ac906b;
-  background: #fffdf8;
+  border-color: var(--accent);
+  background: var(--surface);
   box-shadow:
-    0 0 0 3px #bda17b20,
-    0 5px 16px #4b382010;
+    0 0 0 3px color-mix(in srgb, var(--accent) 18%, transparent),
+    0 5px 16px rgb(63 57 50 / 6%);
 }
 .trigger:focus-visible {
-  outline: 2px solid #8b7051;
+  outline: 2px solid var(--focus);
   outline-offset: 2px;
 }
 .trigger:disabled {
@@ -51,7 +51,7 @@
   font-variant-numeric: tabular-nums;
 }
 .placeholder {
-  color: #948676;
+  color: var(--muted);
 }
 
 .popover {
@@ -62,12 +62,12 @@
   width: min(100%, 390px);
   min-width: min(340px, calc(100vw - 48px));
   padding: 16px;
-  border: 1px solid #e5d9c8;
+  border: 1px solid var(--line);
   border-radius: 14px;
-  background: #fffdf8;
+  background: var(--surface);
   box-shadow:
-    0 18px 48px #46351f24,
-    0 3px 10px #46351f0c;
+    0 18px 48px rgb(63 57 50 / 14%),
+    0 3px 10px rgb(63 57 50 / 5%);
   animation: appear 140ms ease-out both;
 }
 .calendarHeader {
@@ -77,7 +77,7 @@
   margin-bottom: 12px;
 }
 .calendarHeader strong {
-  color: #44382c;
+  color: var(--ink);
   font-size: 14px;
   font-weight: 650;
 }
@@ -86,13 +86,13 @@
   place-items: center;
   width: 34px;
   height: 34px;
-  border: 1px solid #eee5d8;
+  border: 1px solid var(--line);
   border-radius: 9px;
-  background: #faf6ee;
-  color: #725b40;
+  background: var(--surface-soft);
+  color: var(--primary);
 }
 .calendarHeader button:hover {
-  background: #f1e7d8;
+  background: var(--accent-soft);
 }
 .calendarGrid {
   display: grid;
@@ -103,7 +103,7 @@
   display: grid;
   place-items: center;
   height: 30px;
-  color: #8c7b67;
+  color: var(--muted);
   font-size: 11px;
   font-weight: 600;
 }
@@ -118,36 +118,36 @@
   border: 1px solid transparent;
   border-radius: 9px;
   background: transparent;
-  color: #514538;
+  color: var(--ink);
   font: inherit;
   font-size: 13px;
   font-variant-numeric: tabular-nums;
 }
 .day:hover {
-  border-color: #e6d8c4;
-  background: #f8f2e8;
+  border-color: var(--line-strong);
+  background: var(--accent-soft);
 }
 .selectedDay {
-  border-color: #8a6d4c;
-  background: #8a6d4c;
+  border-color: var(--primary);
+  background: var(--primary);
   color: white;
   font-weight: 650;
 }
 .selectedDay:hover {
-  background: #765c40;
+  background: var(--primary-hover);
   color: white;
 }
 .timeSection {
   margin-top: 14px;
   padding-top: 13px;
-  border-top: 1px solid #eee5d8;
+  border-top: 1px solid var(--line);
 }
 .timeTitle {
   display: flex;
   align-items: center;
   gap: 7px;
   margin-bottom: 8px;
-  color: #705a40;
+  color: var(--primary);
   font-size: 12px;
   font-weight: 600;
 }
@@ -167,13 +167,13 @@
   gap: 8px;
 }
 .timeOnly > svg {
-  color: #876b49;
+  color: var(--accent-strong);
 }
 .timeOnly > div {
   min-width: 0;
 }
 .timeSeparator {
-  color: #856a49;
+  color: var(--primary);
   font-size: 17px;
   font-weight: 650;
 }
@@ -184,10 +184,10 @@
   gap: 12px;
   margin-top: 14px;
   padding-top: 12px;
-  border-top: 1px solid #eee5d8;
+  border-top: 1px solid var(--line);
 }
 .footer > span {
-  color: #877864;
+  color: var(--muted);
   font-size: 11px;
   line-height: 1.4;
 }
@@ -196,14 +196,14 @@
   padding: 0 14px;
   border: 0;
   border-radius: 8px;
-  background: #876b4c;
-  color: #fffaf2;
+  background: var(--primary);
+  color: var(--surface);
   font: inherit;
   font-size: 12px;
   font-weight: 600;
 }
 .apply:hover:not(:disabled) {
-  background: #74593d;
+  background: var(--primary-hover);
 }
 .apply:disabled {
   opacity: 0.45;

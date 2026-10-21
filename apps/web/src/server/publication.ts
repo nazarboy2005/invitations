@@ -1,0 +1,178 @@
+import { randomInt } from "node:crypto";
+import type postgres from "postgres";
+import { getDb } from "@taklifnoma/database";
+import {
+  invitationSchema,
+  templateById,
+  type Invitation,
+  type SessionUser,
+} from "@taklifnoma/contracts";
+import { publicationIssues } from "@taklifnoma/contracts/publication";
+import { ApiError } from "./api";
+import { CATALOG_PREVIEW_MUSIC } from "../modules/catalog/catalog-music";
+import { inspectMedia, storageProvider } from "./storage";
+
+const BASE62 = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+export function generatePublicCode() {
+  return Array.from({ length: 6 }, () => BASE62[randomInt(62)]).join("");
+}
+export function publicInvitationUrl(slug: string) {
+  if (!process.env.APP_URL)
+    throw new ApiError(503, "NOT_CONFIGURED", "Sayt manzili sozlanmagan.");
+  return new URL(`/i/${encodeURIComponent(slug)}`, process.env.APP_URL).href;
+}
+export function assertPublishable(invitation: Invitation) {
+  const issues = publicationIssues(invitation);
+  if (issues.length)
+    throw new ApiError(
+      400,
+      "PUBLICATION_INCOMPLETE",
+      issues.map((issue) => issue.message).join(" "),
+    );
+}
+
+// Both publication and subsequent public edits must reference usable media.
+export async function assertPublicMedia(
+  tx: postgres.TransactionSql,
+  invitation: Invitation,
+  userId: string,
+) {
+  if (invitation.gift.enabled && invitation.gift.receiptUploadEnabled)
+    storageProvider();
+  const assets: Array<{ object_key: string; size_bytes: number }> = [];
+  for (const image of invitation.gallery) {
+    if (/^https?:\/\//i.test(image.url)) continue; // Creator-supplied external images are supported.
+    const [asset] =
+      await tx`SELECT object_key,size_bytes FROM media_assets WHERE id::text=${image.id} AND owner_id=${userId} AND url=${image.url} AND url=('/api/media/' || id::text) AND status='ready' AND visibility='public' AND mime_type LIKE 'image/%' FOR SHARE`;
+    if (!asset)
+      throw new ApiError(
+        400,
+        "MEDIA_NOT_READY",
+        "Galereyadagi rasmlarni tekshiring yoki olib tashlang.",
+      );
+    assets.push(asset as { object_key: string; size_bytes: number });
+  }
+  if (invitation.music.enabled && invitation.music.url) {
+    if (
+      invitation.music.url !== CATALOG_PREVIEW_MUSIC.url ||
+      invitation.music.assetId
+    ) {
+      const [asset] =
+        await tx`SELECT a.object_key,a.size_bytes FROM media_assets a WHERE a.id::text=${invitation.music.assetId ?? ""} AND a.url=${invitation.music.url} AND a.url=('/api/media/' || a.id::text) AND a.status='ready' AND a.visibility='public' AND a.mime_type LIKE 'audio/%' AND (a.owner_id=${userId} OR EXISTS (SELECT 1 FROM catalog_music_tracks c WHERE c.asset_id=a.id AND c.active=true)) FOR SHARE OF a`;
+      if (!asset)
+        throw new ApiError(
+          400,
+          "MEDIA_NOT_READY",
+          "Musiqani qayta tanlang yoki o‘chiring.",
+        );
+      assets.push(asset as { object_key: string; size_bytes: number });
+    }
+  }
+  for (const asset of assets) {
+    try {
+      if (
+        (await inspectMedia(asset.object_key)).size !== Number(asset.size_bytes)
+      )
+        throw new Error("Size mismatch");
+    } catch {
+      throw new ApiError(
+        400,
+        "MEDIA_NOT_READY",
+        "Yuklangan fayl topilmadi. Rasm yoki musiqani qayta yuklang.",
+      );
+    }
+  }
+}
+
+export async function publishInvitation(
+  id: string,
+  revision: number,
+  user: SessionUser,
+  allocateCode = generatePublicCode,
+) {
+  const sql = getDb();
+  return sql.begin(async (tx) => {
+    const [row] =
+      await tx`SELECT * FROM invitations WHERE id=${id} AND owner_id=${user.id} FOR UPDATE`;
+    if (!row) throw new ApiError(404, "NOT_FOUND", "Taklifnoma topilmadi.");
+    const previous = invitationSchema.parse(row.data);
+    // A repeated successful request must not allocate a code or extend the deadline.
+    if (row.status === "published" && row.slug)
+      return {
+        invitation: { ...previous, slug: row.slug as string },
+        url: publicInvitationUrl(row.slug),
+      };
+    if (row.status !== "draft")
+      throw new ApiError(
+        403,
+        "INVITATION_ARCHIVED",
+        "Bu taklifnomani nashr qilib bo‘lmaydi.",
+      );
+    if (previous.revision !== revision)
+      throw new ApiError(
+        409,
+        "STALE_REVISION",
+        "Taklifnoma boshqa oynada o‘zgargan. Yangilangan nusxani oching.",
+      );
+    if ((process.env.PUBLISHING_MODE ?? "free") !== "free")
+      throw new ApiError(
+        503,
+        "PUBLISHING_UNAVAILABLE",
+        "Nashr qilish vaqtincha mavjud emas.",
+      );
+    const [template] =
+      await tx`SELECT t.published, EXISTS(SELECT 1 FROM template_supported_event_types s WHERE s.template_id=t.id AND s.event_type=${previous.eventType}) AS supports_event FROM templates t WHERE t.id=${previous.templateId} FOR SHARE OF t`;
+    if (!templateById(previous.templateId) || !template?.published)
+      throw new ApiError(
+        409,
+        "TEMPLATE_UNAVAILABLE",
+        "Bu dizayn hozir mavjud emas. Boshqa dizaynni tanlang.",
+      );
+    if (!template.supports_event)
+      throw new ApiError(
+        409,
+        "TEMPLATE_EVENT_MISMATCH",
+        "Tanlangan dizayn tadbir turiga mos emas.",
+      );
+    assertPublishable(previous);
+    await assertPublicMedia(tx, previous, user.id);
+    const [event] =
+      await tx`SELECT ((${previous.startsAt}::timestamp)::date + 1)::timestamp AT TIME ZONE ${previous.timezone} AS deadline, now() AS published_at`;
+    if (new Date(event.deadline) <= new Date(event.published_at))
+      throw new ApiError(
+        400,
+        "EVENT_ENDED",
+        "Tadbir kuni o‘tib ketgan. Sanani tekshiring.",
+      );
+    for (let attempt = 0; attempt < 10; attempt++) {
+      const slug = allocateCode();
+      const invitation = invitationSchema.parse({
+        ...previous,
+        status: "published",
+        slug,
+        revision: previous.revision + 1,
+      });
+      try {
+        await tx.savepoint(async (savepoint) => {
+          await savepoint`UPDATE invitations SET slug=${slug},status='published',data=${savepoint.json(invitation)},first_published_at=${event.published_at},identity_locked_at=${event.published_at},edit_deadline_at=${event.deadline},updated_at=now() WHERE id=${id}`;
+        });
+      } catch (error) {
+        if (
+          (error as { code?: string; constraint_name?: string }).code ===
+            "23505" &&
+          (error as { constraint_name?: string }).constraint_name ===
+            "invitations_slug_key"
+        )
+          continue;
+        throw error;
+      }
+      await tx`INSERT INTO invitation_audit_log(invitation_id,actor_id,action,previous_values,new_values) VALUES(${id},${user.id},'published_free',${tx.json(previous)},${tx.json({ ...invitation, publication: { mode: "free", firstPublishedAt: event.published_at, editDeadlineAt: event.deadline } })})`;
+      return { invitation, url: publicInvitationUrl(slug) };
+    }
+    throw new ApiError(
+      503,
+      "CODE_ALLOCATION_FAILED",
+      "Havola yaratilmadi. Qayta urinib ko‘ring.",
+    );
+  });
+}

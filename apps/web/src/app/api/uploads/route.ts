@@ -5,7 +5,7 @@ import { getDb } from "@taklifnoma/database";
 import { authenticatedUser } from "@/server/invitations";
 import { verifySameOrigin } from "@/server/auth";
 import { ApiError, apiError, privateHeaders, readJson } from "@/server/api";
-import { presignMedia, storageClient } from "@/server/storage";
+import { presignMedia, mediaObjectKey } from "@/server/storage";
 export const runtime = "nodejs";
 
 export async function GET() {
@@ -61,7 +61,6 @@ export async function POST(request: Request) {
   try {
     verifySameOrigin(request);
     const user = await authenticatedUser();
-    storageClient();
     const input = inputSchema.parse(await readJson(request, 5000));
     if (input.catalog && (!user.isAdmin || input.kind !== "audio"))
       throw new ApiError(403, "FORBIDDEN", "Administrator huquqi kerak.");
@@ -107,13 +106,17 @@ export async function POST(request: Request) {
       "audio/x-m4a": "m4a",
     }[input.contentType];
     const id = randomUUID(),
-      key = input.catalog
-        ? `platform-music/${id}.${extension}`
-        : `creators/${user.id}/${input.draftId}/${id}.${extension}`,
+      key = mediaObjectKey(
+        input.catalog
+          ? `platform-music/${id}.${extension}`
+          : `creators/${user.id}/${input.draftId}/${id}.${extension}`,
+      ),
       url = `/api/media/${id}`,
       mime =
         input.contentType === "audio/x-m4a" ? "audio/mp4" : input.contentType;
-    const uploadUrl = await presignMedia(key, mime);
+    const uploadUrl = key.startsWith("local/")
+      ? `/api/uploads/${id}/content`
+      : await presignMedia(key, mime);
     // A public media asset is only anonymously readable when currently referenced
     // by its owner's published invitation; drafts remain authenticated.
     await getDb()`INSERT INTO media_assets(id,owner_id,draft_id,object_key,url,filename,mime_type,size_bytes,visibility,status) VALUES(${id},${user.id},${input.draftId ?? null},${key},${url},${input.filename},${mime},${input.size},'public','pending')`;

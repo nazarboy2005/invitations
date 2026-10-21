@@ -1,11 +1,17 @@
 :root {
   --bg: #faf7f0;
   --surface: #fffdf8;
-  --ink: #51463b;
-  --muted: #7b7065;
-  --line: #e8dfd2;
-  --primary: #80684f;
-  --accent: #bda17b;
+  --surface-soft: #f7f1e5;
+  --ink: #3f3932;
+  --muted: #756e65;
+  --line: #e8e1d5;
+  --line-strong: #d9c99e;
+  --primary: #8a641c;
+  --primary-hover: #73520f;
+  --accent: #c1a05c;
+  --accent-strong: #8a641c;
+  --accent-soft: #f3ead4;
+  --focus: #9d7627;
   --font-body: Arial, "Segoe UI", sans-serif;
   --font-display: Georgia, "Times New Roman", serif;
   color-scheme: light;
@@ -50,7 +56,7 @@ a:focus-visible,
 input:focus-visible,
 textarea:focus-visible,
 select:focus-visible {
-  outline: 3px solid #bda17b;
+  outline: 3px solid var(--focus);
   outline-offset: 3px;
 }
 input,
@@ -66,8 +72,8 @@ img {
   height: auto;
 }
 ::selection {
-  background: #e9dfce;
-  color: #51463b;
+  background: var(--accent-soft);
+  color: var(--ink);
 }
 .skip-link {
   position: fixed;
@@ -97,13 +103,13 @@ img {
   border: 1px solid var(--primary);
   border-radius: 9px;
   background: var(--primary);
-  color: #fffdf8;
+  color: var(--surface);
   font-weight: 600;
   font-size: 14px;
   transition: background 0.15s;
 }
 .button:hover {
-  background: #705b45;
+  background: var(--primary-hover);
 }
 .button.secondary {
   background: transparent;
@@ -111,7 +117,7 @@ img {
   border-color: var(--line);
 }
 .button.secondary:hover {
-  background: #f1eadf;
+  background: var(--accent-soft);
 }
 .muted {
   color: var(--muted);
@@ -152,7 +158,7 @@ img {
 .tag {
   font-size: 12px;
   padding: 5px 9px;
-  background: #f2ece2;
+  background: var(--accent-soft);
   color: var(--primary);
   border-radius: 5px;
 }
@@ -164,7 +170,7 @@ img {
 }
 .empty-state {
   padding: 60px 24px;
-  border: 1px dashed #ded2c1;
+  border: 1px dashed var(--line-strong);
   border-radius: 15px;
   text-align: center;
 }

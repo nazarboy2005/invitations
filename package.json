@@ -8,6 +8,8 @@
     "build": "pnpm --filter @taklifnoma/web build",
     "typecheck": "pnpm --filter @taklifnoma/web typecheck",
     "test": "tsx --test tests/*.test.ts apps/web/src/modules/studio/draft-storage.test.ts apps/web/src/modules/catalog/*.test.ts",
+    "test:publishing": "node --env-file=apps/web/.env.local --import tsx --test tests/publishing.test.ts tests/publishing.integration.ts",
+    "telegram:poll": "node --env-file=apps/web/.env.local --import tsx scripts/telegram-poll.mts",
     "db:migrate": "node --env-file-if-exists=apps/web/.env.local --import tsx packages/database/src/migrate.ts"
   },
   "devDependencies": {

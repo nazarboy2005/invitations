@@ -9,10 +9,8 @@ import {
   CircleHelp,
   FileHeart,
   Heart,
-  LayoutTemplate,
   LoaderCircle,
-  LockKeyhole,
-  MessageSquare,
+  Clock3,
   Plus,
   Send,
   ShieldCheck,
@@ -32,6 +30,9 @@ import {
   type BrowserDraft,
 } from "@/modules/studio/draft-storage";
 import { formatDate } from "@/templates/date-format";
+import { InvitationThumbnail } from "./invitation-thumbnail";
+import { useRouter } from "next/navigation";
+import { PublishedLink } from "@/components/published-link";
 
 type DeviceSession = {
   id: string;
@@ -66,9 +67,11 @@ function deviceName(userAgent: string) {
 function InvitationCard({
   invitation,
   local = false,
+  accountSaved = !local,
 }: {
   invitation: Invitation;
   local?: boolean;
+  accountSaved?: boolean;
 }) {
   const content = getContent(invitation);
   const template = templateById(invitation.templateId);
@@ -80,30 +83,41 @@ function InvitationCard({
       month: "long",
       year: "numeric",
     }) || "Sana kiritilmagan";
+  const editUrl = local
+    ? `/studio?draft=${encodeURIComponent(invitation.id)}`
+    : `/studio/${encodeURIComponent(invitation.id)}`;
   return (
     <article className={styles.invitationCard}>
-      <div
+      <Link
+        href={editUrl}
         className={styles.cardArt}
+        aria-label={`${names}: taklifnomani tahrirlash`}
       >
-        <span className={styles.cardStatus}>
+        {template ? (
+          <InvitationThumbnail invitation={invitation} />
+        ) : (
+          <span className={styles.noTemplateLabel}>
+            <FileHeart size={26} />
+            Dizayn tanlanmagan
+          </span>
+        )}
+      </Link>
+      <div className={styles.cardBody}>
+        <span
+          className={styles.cardStatus}
+          data-published={invitation.status === "published"}
+        >
           {local
-            ? "Shu brauzerdagi qoralama"
+            ? accountSaved
+              ? "Saqlanmagan o‘zgarishlar"
+              : "Brauzerdagi qoralama"
             : invitation.status === "published"
               ? "Nashr qilingan"
               : invitation.status === "archived"
                 ? "Arxivlangan"
                 : "Qoralama"}
         </span>
-        <div>
-          <span>{content.eventLabel || "Qoralama"}</span>
-          <h3>{names}</h3>
-          <p>{content.hosts}</p>
-        </div>
-        <span className={styles.noTemplateLabel}>
-          {template?.name ?? "Dizayn tanlanmagan"}
-        </span>
-      </div>
-      <div className={styles.cardBody}>
+        <h2 className={styles.invitationName}>{names}</h2>
         <div className={styles.cardName}>
           <strong>{template?.name ?? "Dizayn tanlanmagan"}</strong>
           <span>
@@ -116,18 +130,27 @@ function InvitationCard({
           <CalendarDays size={14} />
           {date}
         </p>
+        {invitation.status === "published" && invitation.slug && (
+          <PublishedLink slug={invitation.slug} compact />
+        )}
+        {accountSaved && invitation.status === "published" && (
+          <Link
+            className={styles.activityLink}
+            href={`/dashboard/${encodeURIComponent(invitation.id)}/activity`}
+          >
+            Javoblar, tilaklar va cheklar →
+          </Link>
+        )}
         <div className={styles.cardActions}>
           <span>
-            {local ? "Hisobga saqlanmagan" : "Hisobingizda saqlangan"}
+            {local
+              ? accountSaved
+                ? "Brauzerdagi o‘zgarishlar"
+                : "Hisobga saqlanmagan"
+              : "Hisobingizda saqlangan"}
           </span>
-          <Link
-            href={
-              local
-                ? `/studio?draft=${encodeURIComponent(invitation.id)}`
-                : `/studio/${encodeURIComponent(invitation.id)}`
-            }
-          >
-            Davom etish
+          <Link href={editUrl}>
+            {invitation.status === "published" ? "Tahrirlash" : "Davom etish"}
             <ArrowRight size={15} />
           </Link>
         </div>
@@ -137,8 +160,11 @@ function InvitationCard({
 }
 
 export function Dashboard() {
+  const router = useRouter();
   const [session, setSession] = useState<SessionResponse | null>(null);
-  const [invitations, setInvitations] = useState<Invitation[]>([]);
+  const [invitations, setInvitations] = useState<
+    Array<Invitation & { createdAt?: string }>
+  >([]);
   const [browserDrafts, setBrowserDrafts] = useState<BrowserDraft[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -251,6 +277,7 @@ export function Dashboard() {
         }
       } else setSessionRefresh((value) => value + 1);
       setLogoutConfirmation(false);
+      router.refresh();
     } catch {
       setDeviceError(
         "Qurilmadan chiqish amalga oshmadi. Qayta urinib ko‘ring.",
@@ -264,12 +291,40 @@ export function Dashboard() {
   const localDrafts = browserDrafts.filter(
     (draft) => !cloudIds.has(draft.invitation.id) || draft.dirty,
   );
-  const showLocal = tab !== "published" ? localDrafts : [];
-  const visible = invitations.filter(
-    (item) =>
-      (tab === "all" || item.status === tab) &&
-      !showLocal.some((draft) => draft.invitation.id === item.id),
+  const localById = new Map(
+    localDrafts.map((draft) => [draft.invitation.id, draft]),
   );
+  const entries = [
+    ...invitations.map((invitation) => ({
+      invitation: {
+        ...(localById.get(invitation.id)?.invitation ?? invitation),
+        status: invitation.status,
+        slug: invitation.slug,
+      },
+      local: localById.has(invitation.id),
+      createdAt:
+        invitation.createdAt ?? localById.get(invitation.id)?.createdAt ?? "",
+    })),
+    ...localDrafts
+      .filter((draft) => !cloudIds.has(draft.invitation.id))
+      .map((draft) => ({
+        invitation: draft.invitation,
+        local: true,
+        createdAt: draft.createdAt || draft.savedAt,
+      })),
+  ]
+    .filter(
+      ({ invitation }) =>
+        tab === "all" ||
+        (tab === "draft"
+          ? invitation.status === "draft"
+          : invitation.status === "published"),
+    )
+    .sort(
+      (a, b) =>
+        b.createdAt.localeCompare(a.createdAt) ||
+        b.invitation.id.localeCompare(a.invitation.id),
+    );
   const count =
     invitations.length +
     browserDrafts.filter((draft) => !cloudIds.has(draft.invitation.id)).length;
@@ -279,29 +334,6 @@ export function Dashboard() {
 
   return (
     <div className={styles.dashboard}>
-      <header className={styles.topbar}>
-        <Link href="/" className={styles.brand}>
-          <span>
-            <Heart size={21} />
-          </span>
-          taklifnoma<span className={styles.brandDot}>.</span>
-        </Link>
-        <nav aria-label="Asosiy navigatsiya">
-          <Link href="/#templates">
-            <LayoutTemplate size={16} />
-            Dizaynlar
-          </Link>
-          <Link href="/dashboard" aria-current="page">
-            Taklifnomalarim
-          </Link>
-        </nav>
-        <span className={styles.profile}>
-          <span>
-            {session?.user?.displayName?.slice(0, 1).toUpperCase() ?? "M"}
-          </span>
-          {session?.user?.displayName ?? "Mehmon"}
-        </span>
-      </header>
       <main id="main" className={styles.main}>
         <div className={styles.pageHeading}>
           <div>
@@ -366,8 +398,8 @@ export function Dashboard() {
                 </button>
               </div>
               <span className={styles.privateLabel}>
-                <LockKeyhole size={12} />
-                Faqat sizga ko‘rinadi
+                <Clock3 size={12} />
+                Eng yangilari avval
               </span>
             </div>
             {error && (
@@ -385,17 +417,15 @@ export function Dashboard() {
               </div>
             ) : (
               <div className={styles.cardGrid}>
-                {showLocal.map((draft) => (
+                {entries.map(({ invitation, local }) => (
                   <InvitationCard
-                    invitation={draft.invitation}
-                    local
-                    key={draft.invitation.id}
+                    invitation={invitation}
+                    local={local}
+                    accountSaved={cloudIds.has(invitation.id)}
+                    key={invitation.id}
                   />
                 ))}
-                {visible.map((invitation) => (
-                  <InvitationCard invitation={invitation} key={invitation.id} />
-                ))}
-                {showLocal.length === 0 && visible.length === 0 && !error && (
+                {entries.length === 0 && !error && (
                   <div className={styles.empty}>
                     <div className={styles.emptyArt}>
                       <FileHeart size={54} strokeWidth={1} />
@@ -411,7 +441,7 @@ export function Dashboard() {
                     <p>
                       {tab === "published"
                         ? "Tayyor taklifnomalar nashr qilingach shu yerda ko‘rinadi."
-                        : "Ma’lumotlaringizni qoralama sifatida tayyorlang. Haqiqiy dizaynlar qo‘shilgach, ularni qayta kiritmasdan tanlaysiz."}
+                        : "Dizaynni tanlang, ma’lumotlaringizni kiriting va tayyor taklifnomani mehmonlaringizga ulashing."}
                     </p>
                     <Link href="/studio" className={styles.primaryButton}>
                       <Plus size={16} />
@@ -436,8 +466,8 @@ export function Dashboard() {
                 Mingta samimiy lahza.
               </h2>
               <p>
-                Ma’lumotlaringizni hozir saqlang. Haqiqiy dizaynlar
-                qo‘shilganda, shu yerdan tanlaysiz.
+                Dizaynni tanlang va o‘z taklifnomangizni yarating. Hozir nashr
+                qilish bepul.
               </p>
               <Link href="/#templates">
                 Dizaynlarni ko‘rish
@@ -544,7 +574,7 @@ export function Dashboard() {
           <CheckCircle2 size={15} />
           <p>
             {session?.user
-              ? "Hisobingizdagi taklifnomalar faqat siz uchun. Shaxsiy havolalar va mehmonlar boshqaruvi keyingi bosqichda qo‘shiladi."
+              ? "Qoralamalar faqat sizga ko‘rinadi. Nashr qilingan taklifnomani havolasi orqali mehmonlaringiz ochishi mumkin."
               : "Brauzer qoralamasi faqat shu qurilmada mavjud. Uni boshqa qurilmadan ochish uchun hisobingizga saqlang."}
           </p>
         </div>

@@ -8,6 +8,7 @@ import {
   submissionLimit,
 } from "@/server/public";
 import { verifySameOrigin } from "@/server/auth";
+import { digest, randomToken } from "@/server/auth/crypto";
 type Context = { params: Promise<{ id: string }> };
 export const runtime = "nodejs";
 export async function POST(request: Request, { params }: Context) {
@@ -36,6 +37,20 @@ export async function POST(request: Request, { params }: Context) {
       .parse(await readJson(request, 5000));
     await submissionLimit(request, invitationId, "rsvp");
     const guest = await resolveGuest(invitationId, input.guestToken);
+    const cookieName = "taklifnoma_rsvp";
+    const previousToken = request.headers
+      .get("cookie")
+      ?.split(";")
+      .map((value) => value.trim())
+      .find((value) => value.startsWith(cookieName + "="))
+      ?.slice(cookieName.length + 1);
+    const responseToken =
+      previousToken && /^[a-zA-Z0-9_-]{43}$/.test(previousToken)
+        ? previousToken
+        : randomToken();
+    const responseHash = digest(
+      `${invitationId}:${guest ? `guest:${guest.id}` : responseToken}`,
+    );
     const party = input.status === "yes" ? input.partySize : 0;
     const maximum = Math.min(
       invitation.rsvp.maxPartySize,
@@ -48,12 +63,20 @@ export async function POST(request: Request, { params }: Context) {
         await tx`SELECT id FROM invitation_guests WHERE id=${guest.id} FOR UPDATE`;
         await tx`DELETE FROM rsvp_responses WHERE invitation_id=${invitationId} AND guest_id=${guest.id}`;
       }
-      await tx`INSERT INTO rsvp_responses(invitation_id,guest_id,name,status,party_size) VALUES(${invitationId},${guest?.id ?? null},${input.name},${input.status},${party})`;
+      await tx`INSERT INTO rsvp_responses(invitation_id,guest_id,name,status,party_size,response_token_hash) VALUES(${invitationId},${guest?.id ?? null},${input.name},${input.status},${party},${responseHash}) ON CONFLICT(response_token_hash) DO UPDATE SET name=EXCLUDED.name,status=EXCLUDED.status,party_size=EXCLUDED.party_size,created_at=now()`;
     });
-    return NextResponse.json(
+    const response = NextResponse.json(
       { ok: true, message: "Javobingiz saqlandi. Rahmat!" },
       { status: 201 },
     );
+    response.cookies.set(cookieName, responseToken, {
+      httpOnly: true,
+      sameSite: "lax",
+      secure: new URL(request.url).protocol === "https:",
+      path: "/api/public/invitations",
+      maxAge: 365 * 24 * 60 * 60,
+    });
+    return response;
   } catch (e) {
     return apiError(e);
   }

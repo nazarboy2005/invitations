@@ -2,10 +2,10 @@ import { z } from "zod";
 import { getDb } from "@taklifnoma/database";
 import { apiError, ApiError } from "@/server/api";
 import { getSessionUser } from "@/server/auth";
-import { mediaReadUrl } from "@/server/storage";
+import { mediaResponse } from "@/server/storage";
 export const runtime = "nodejs";
 export async function GET(
-  _request: Request,
+  request: Request,
   { params }: { params: Promise<{ id: string }> },
 ) {
   try {
@@ -30,7 +30,7 @@ export async function GET(
           WHERE owner_id=${asset.owner_id} AND status='published'
             AND (
               data->'music' @> jsonb_build_object(
-                'enabled', true, 'assetId', ${id}, 'url', ${mediaUrl}
+                'enabled', true, 'assetId', ${id}::text, 'url', ${mediaUrl}::text
               )
               OR EXISTS (
                 SELECT 1 FROM jsonb_array_elements(
@@ -47,14 +47,7 @@ export async function GET(
       if (!user || user.id !== asset.owner_id)
         throw new ApiError(404, "NOT_FOUND", "Fayl topilmadi.");
     }
-    // Authorized media is transferred by R2, not buffered through a Vercel function.
-    return new Response(null, {
-      status: 302,
-      headers: {
-        Location: await mediaReadUrl(asset.object_key, asset.mime_type),
-        "Cache-Control": "private, no-store",
-      },
-    });
+    return await mediaResponse(request, asset.object_key, asset.mime_type);
   } catch (e) {
     return apiError(e);
   }

@@ -2,17 +2,29 @@ import Link from "next/link";
 import { Flower2, ArrowUpRight } from "lucide-react";
 import { getSessionUser } from "@/server/auth";
 import styles from "./site-header.module.css";
-export async function SiteHeader({ compact = false }: { compact?: boolean }) {
+import { ScrollHeader } from "./scroll-header";
+import { sans } from "@/app/platform-fonts";
+export async function SiteHeader({
+  compact = false,
+  dashboard = false,
+}: {
+  compact?: boolean;
+  dashboard?: boolean;
+}) {
   const user = await getSessionUser().catch(() => null);
   return (
-    <header className={styles.header}>
+    <ScrollHeader
+      className={`${styles.header} ${styles.editorial} ${sans.className}`}
+    >
       <div className={`container ${styles.inner}`}>
         <Link
           href="/"
           className={styles.brand}
           aria-label="Taklifnoma bosh sahifa"
         >
-          <Flower2 size={27} strokeWidth={1.5} />
+          <span className={styles.brandMark}>
+            <Flower2 size={26} strokeWidth={1.3} />
+          </span>
           <span>
             taklifnoma<span className={styles.dot}>.</span>
           </span>
@@ -23,12 +35,28 @@ export async function SiteHeader({ compact = false }: { compact?: boolean }) {
               Dizaynlar
             </Link>
           )}
-          <Link href="/dashboard">{user ? "Taklifnomalarim" : "Kirish"}</Link>
-          <Link href="/studio" className={styles.create}>
-            Yaratish <ArrowUpRight size={16} />
+          {!compact && (
+            <>
+              <Link href="/#how-it-works" className={styles.howItWorks}>
+                Qanday ishlaydi
+              </Link>
+              <Link href="/#questions" className={styles.questions}>
+                Savol-javob
+              </Link>
+            </>
+          )}
+          <Link
+            href="/dashboard"
+            className={styles.account}
+            aria-current={dashboard ? "page" : undefined}
+          >
+            {user ? "Taklifnomalarim" : "Kirish"}
+          </Link>
+          <Link href="/studio" className={styles.create} aria-label="Yaratish">
+            <span>Yaratish</span> <ArrowUpRight size={16} />
           </Link>
         </nav>
       </div>
-    </header>
+    </ScrollHeader>
   );
 }

@@ -523,7 +523,7 @@ function TemplateRow({
                   borderRadius: 6,
                   border: "1px solid var(--line)",
                   background: categoryIds.includes(category.id)
-                    ? "#f4ecdf"
+                    ? "var(--accent-soft)"
                     : "var(--surface)",
                   cursor: busy ? "default" : "pointer",
                   fontSize: 13,
@@ -600,7 +600,7 @@ function TemplateRow({
                   borderRadius: 10,
                   border: "1px solid var(--line)",
                   background: supportedEventTypes.includes(eventType.id)
-                    ? "#f4ecdf"
+                    ? "var(--accent-soft)"
                     : "var(--surface)",
                   cursor: busy ? "default" : "pointer",
                   fontSize: 13,

@@ -10,6 +10,7 @@ import {
   CheckCircle2,
   ChevronRight,
   Eye,
+  Flower2,
   Globe2,
   Heart,
   ImagePlus,
@@ -21,7 +22,6 @@ import {
   Save,
   Send,
   Settings2,
-  Smartphone,
   Trash2,
   Users,
   X,
@@ -61,6 +61,11 @@ import {
   hasAuthoredInvitationContent,
 } from "@/modules/catalog/preview-sample";
 import { CATALOG_PREVIEW_MUSIC } from "@/modules/catalog/catalog-music";
+import { PublishedLink } from "@/components/published-link";
+import {
+  publicationIssues,
+  type PublicationIssue,
+} from "@taklifnoma/contracts/publication";
 
 const sections = [
   {
@@ -68,24 +73,32 @@ const sections = [
     title: "Dizayn tanlash",
     short: "Dizayn",
     note: "Tadbir va dizaynni tanlang",
+    description:
+      "Kuningizga mos birinchi taassurot. Tadbir turini va ko‘nglingizga yaqin dizaynni tanlang.",
   },
   {
     icon: Users,
     title: "Asosiy ma’lumotlar",
     short: "Ma’lumotlar",
     note: "Ismlar va taklif matni",
+    description:
+      "Eng chiroyli taklif o‘z so‘zlaringizdan boshlanadi. Bu sahifaga o‘z hikoyangizni qo‘shing.",
   },
   {
     icon: MapPin,
     title: "Dastur va manzil",
     short: "Manzil",
     note: "Qachon va qayerda",
+    description:
+      "Mehmonlaringiz barcha kerakli ma’lumotni bir joyda topsin. Sana, manzil va dasturini belgilang.",
   },
   {
     icon: Settings2,
     title: "Qo‘shimcha",
     short: "Qo‘shimcha",
     note: "Qo‘shimcha imkoniyatlar",
+    description:
+      "Kichik detallar, katta taassurot. Faqat o‘zingizga kerakli imkoniyatlarni yoqing.",
   },
 ];
 
@@ -218,6 +231,11 @@ export function Studio({
   const [notice, setNotice] = useState("");
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
+  const [publishing, setPublishing] = useState(false);
+  const [publishIssues, setPublishIssues] = useState<PublicationIssue[]>([]);
+  const [publicUrl, setPublicUrl] = useState<string>();
+  const pendingAction = useRef<"save" | "publish">("save");
+  const operationInFlight = useRef(false);
   const [auth, setAuth] = useState<{
     loginUrl: string;
     requestId: string;
@@ -451,10 +469,7 @@ export function Studio({
                   a.position - b.position || a.name.localeCompare(b.name),
               ),
             );
-          if (!result.configured)
-            setCatalogNote(
-              "Dizaynlar qo‘shilgach, ular shu yerda ko‘rinadi. Ma’lumotlaringizni hozirdan qoralama sifatida saqlashingiz mumkin.",
-            );
+          setCatalogNote("");
         }
       })
       .catch(() => {
@@ -566,7 +581,9 @@ export function Studio({
               "Telegram foydalanuvchisi",
           });
           setAuthStatus(
-            "Telegram tasdiqladi. Hisobingizni tekshiring va davom eting.",
+            pendingAction.current === "publish"
+              ? "Davom etish uchun “Nashr qilishni yakunlash” tugmasini bosing. Taklifnomangiz shu hisobga saqlanadi va nashr qilinadi."
+              : "Davom etish uchun “Saqlashni yakunlash” tugmasini bosing. Taklifnomangiz shu hisobga saqlanadi.",
           );
           return;
         }
@@ -590,6 +607,13 @@ export function Studio({
       clearTimeout(timer);
     };
   }, [auth, authIdentity]);
+
+  useEffect(() => {
+    if (authIdentity)
+      dialogRef.current
+        ?.querySelector<HTMLButtonElement>("[data-auth-complete]")
+        ?.focus();
+  }, [authIdentity]);
 
   if (!invitation)
     return (
@@ -619,30 +643,30 @@ export function Studio({
     invitation.templateId === "nahor"
       ? "Mezbon yoki oila nomi"
       : invitation.eventType === "bitiruv"
-      ? "Bitiruvchining ismi"
-      : invitation.eventType === "korporativ" ||
-          invitation.templateId === "korporativ"
-        ? "Tashkilot yoki shaxs nomi"
-        : invitation.eventType === "yangi-uy" ||
-            invitation.templateId === "yangi-uy"
-          ? "Xonadon yoki oila nomi"
-          : invitation.templateId === "bitiruv"
-          ? "Nishonlanuvchi ismi"
-          : "Bola ismi";
+        ? "Bitiruvchining ismi"
+        : invitation.eventType === "korporativ" ||
+            invitation.templateId === "korporativ"
+          ? "Tashkilot yoki shaxs nomi"
+          : invitation.eventType === "yangi-uy" ||
+              invitation.templateId === "yangi-uy"
+            ? "Xonadon yoki oila nomi"
+            : invitation.templateId === "bitiruv"
+              ? "Nishonlanuvchi ismi"
+              : "Bola ismi";
   const singleCelebrantPlaceholder =
     invitation.templateId === "nahor"
       ? "Masalan, Rahmonovlar oilasi"
       : invitation.eventType === "bitiruv"
-      ? "Bitiruvchining ismi"
-      : invitation.eventType === "korporativ" ||
-          invitation.templateId === "korporativ"
-        ? "Tashkilot yoki shaxs nomi"
-        : invitation.eventType === "yangi-uy" ||
-            invitation.templateId === "yangi-uy"
-          ? "Masalan, Rahmonovlar xonadoni"
-          : invitation.templateId === "bitiruv"
-          ? "Nishonlanuvchining ismi"
-          : "Bolaning ismi";
+        ? "Bitiruvchining ismi"
+        : invitation.eventType === "korporativ" ||
+            invitation.templateId === "korporativ"
+          ? "Tashkilot yoki shaxs nomi"
+          : invitation.eventType === "yangi-uy" ||
+              invitation.templateId === "yangi-uy"
+            ? "Masalan, Rahmonovlar xonadoni"
+            : invitation.templateId === "bitiruv"
+              ? "Nishonlanuvchining ismi"
+              : "Bolaning ismi";
   const personFields =
     content.people.length > 0
       ? content.people
@@ -758,9 +782,27 @@ export function Studio({
     update({ program });
   }
   async function cloudSave() {
+    await saveOrPublish("save");
+  }
+  async function saveOrPublish(action: "save" | "publish") {
     const current = invitationRef.current;
-    if (!current) return;
+    if (!current || operationInFlight.current || uploading) return;
+    setPublishIssues([]);
+    if (action === "publish") {
+      const issues = publicationIssues(current);
+      if (issues.length) {
+        setPublishIssues(issues);
+        setNotice("");
+        setError("");
+        goToSection(issues[0].section);
+        if (issues[0].locale) setLocale(issues[0].locale);
+        return;
+      }
+    }
+    pendingAction.current = action;
+    operationInFlight.current = true;
     setBusy(true);
+    setPublishing(action === "publish");
     setError("");
     setNotice("");
     try {
@@ -821,12 +863,12 @@ export function Studio({
       });
       if (!response.ok) {
         const result = await response.json().catch(() => ({}));
-        if (response.status === 409)
+        if (result.error?.code === "STALE_REVISION")
           throw new Error(
             "Taklifnoma boshqa oynada o‘zgartirilgan. Sizning o‘zgartirishlaringiz shu brauzerda saqlandi. Sahifani qayta yuklashdan oldin qoralamangizni yuklab oling va yangilangan taklifnoma bilan solishtiring.",
           );
         throw new Error(
-          result.message ??
+          result.error?.message ??
             "Hisobingizga saqlanmadi. Qoralamangiz shu brauzerda saqlangan; qayta urinib ko‘ring.",
         );
       }
@@ -861,18 +903,83 @@ export function Studio({
           );
           return;
         }
+        // Reopening/reloading now loads the authoritative account record.
+        window.history.replaceState(
+          window.history.state,
+          "",
+          `/studio/${current.id}`,
+        );
+      }
+      if (action === "publish") {
+        const saved = invitationSchema.parse(result.invitation);
+        const publish = () =>
+          fetch(`/api/invitations/${saved.id}/publish`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ revision: saved.revision }),
+          });
+        // Retrying this endpoint is safe even if the first response was lost
+        // after commit. The server returns the original code and timestamps.
+        let publishedResponse: Response;
+        try {
+          publishedResponse = await publish();
+        } catch {
+          publishedResponse = await publish();
+        }
+        let published = await publishedResponse.json();
+        if (!publishedResponse.ok) {
+          // Another tab may already have published this same saved draft.
+          const latestResponse = await fetch(`/api/invitations/${saved.id}`, {
+            cache: "no-store",
+          });
+          const latest = latestResponse.ok ? await latestResponse.json() : null;
+          if (
+            latest?.invitation?.status === "published" &&
+            latest.invitation.slug
+          )
+            published = { invitation: latest.invitation };
+          else
+            throw new Error(
+              published.error?.message ??
+                "Nashr qilinmadi. Qayta urinib ko‘ring.",
+            );
+        }
+        const publishedInvitation = invitationSchema.parse(
+          published.invitation,
+        );
+        lastCloudSnapshot.current = JSON.stringify(publishedInvitation);
+        invitationRef.current = publishedInvitation;
+        setInvitation(publishedInvitation);
+        setPublicUrl(published.url);
+        try {
+          saveBrowserDraft(publishedInvitation, false, ownerId.current);
+        } catch {
+          /* Publication succeeded; the link remains visible. */
+        }
+        setNotice(
+          "Taklifnomangiz nashr qilindi. Havolani mehmonlaringiz bilan ulashing.",
+        );
+        setMobilePreview(false);
+        window.scrollTo({ top: 0, behavior: "instant" });
+        return;
       }
       setNotice(
         "Taklifnomangiz hisobingizga saqlandi. Uni “Taklifnomalarim” bo‘limidan topasiz.",
       );
     } catch (cause) {
       setError(
-        cause instanceof Error
-          ? cause.message
-          : "Saqlash vaqtincha ishlamadi. Qayta urinib ko‘ring.",
+        cause instanceof TypeError
+          ? "Ulanish uzildi. Qoralamangiz brauzerda saqlangan. Nashr holatini tekshirish uchun sahifani qayta oching."
+          : cause instanceof Error
+            ? cause.message
+            : "Saqlash vaqtincha ishlamadi. Qayta urinib ko‘ring.",
       );
+      setMobilePreview(false);
+      window.scrollTo({ top: 0, behavior: "instant" });
     } finally {
       setBusy(false);
+      setPublishing(false);
+      operationInFlight.current = false;
     }
   }
   async function completeLogin() {
@@ -890,7 +997,7 @@ export function Studio({
         );
       setAuth(null);
       setAuthIdentity(null);
-      await cloudSave();
+      await saveOrPublish(pendingAction.current);
     } catch (cause) {
       setAuthStatus(
         cause instanceof Error ? cause.message : "Qayta urinib ko‘ring.",
@@ -911,10 +1018,18 @@ export function Studio({
       png: "image/png",
       webp: "image/webp",
     };
-    const contentType =
+    const detectedType =
       file.type.split(";")[0] ||
       mimeFallback[file.name.split(".").pop()?.toLowerCase() ?? ""] ||
       "";
+    const contentType =
+      (
+        {
+          "audio/x-wav": "audio/wav",
+          "audio/wave": "audio/wav",
+          "audio/mp3": "audio/mpeg",
+        } as Record<string, string>
+      )[detectedType] || detectedType;
     if (
       (kind === "image" &&
         !["image/jpeg", "image/png", "image/webp"].includes(contentType)) ||
@@ -924,11 +1039,11 @@ export function Studio({
         ))
     ) {
       setError(
-        "Rasm uchun JPG, PNG yoki WebP; musiqa uchun MP3, WAV yoki M4A, ovozli tabrik uchun MP3, WAV, M4A yoki WebM tanlang.",
+        "Rasm uchun JPG, PNG yoki WebP; musiqa uchun MP3, WAV yoki M4A tanlang.",
       );
       return;
     }
-    if (file.size > 15 * 1024 * 1024) {
+    if (file.size < 16 || file.size > 15 * 1024 * 1024) {
       setError("Fayl 15 MB dan kichik bo‘lishi kerak.");
       return;
     }
@@ -952,7 +1067,10 @@ export function Studio({
       const prepared = await response.json();
       if (!response.ok || !prepared.upload?.url)
         throw new Error(
-          "Faylni yuklash hozircha mavjud emas. Hisobingizga kirganingizni tekshiring va qayta urinib ko‘ring.",
+          (response.status === 401
+            ? "Avval yuqoridagi Saqlash tugmasi orqali Telegram hisobingizga kiring, so‘ng faylni qayta tanlang."
+            : prepared.error?.message) ||
+            "Faylni yuklash hozircha mavjud emas. Hisobingizga kirganingizni tekshiring va qayta urinib ko‘ring.",
         );
       const uploaded = await fetch(prepared.upload.url, {
         method: "PUT",
@@ -969,7 +1087,8 @@ export function Studio({
       const result = await complete.json();
       if (!complete.ok || !result.asset?.url)
         throw new Error(
-          "Faylni tekshirish yakunlanmadi. Mos formatdagi fayl bilan qayta urinib ko‘ring.",
+          result.error?.message ||
+            "Faylni tekshirish yakunlanmadi. Mos formatdagi fayl bilan qayta urinib ko‘ring.",
         );
       const current = invitationRef.current;
       if (kind === "audio") {
@@ -1025,6 +1144,13 @@ export function Studio({
     setTimeout(() => URL.revokeObjectURL(url), 1000);
   }
 
+  function goToSection(next: number) {
+    setSection(next);
+    setMobilePreview(false);
+    // Avoid opening the next step halfway down a long form.
+    window.scrollTo({ top: 0, behavior: "instant" });
+  }
+
   return (
     <div className={styles.studio}>
       <header className={styles.topbar}>
@@ -1036,15 +1162,30 @@ export function Studio({
           <span className={styles.documentIcon}>
             <Heart size={17} />
           </span>
-          <span>Yangi taklifnoma</span>
+          <div>
+            <span className={styles.documentTitle}>
+              {content.people.filter((name) => name.trim()).join(" & ") ||
+                "Yangi taklifnoma"}
+            </span>
+            <small>
+              <span className={styles.statusDot} />
+              {invitation.status === "published"
+                ? "Nashr qilingan"
+                : "Shaxsiy qoralama"}
+            </small>
+          </div>
         </div>
         <button
           className={styles.saveButton}
           onClick={cloudSave}
-          disabled={busy}
+          disabled={busy || uploading || !!auth}
         >
           <Save size={16} />
-          {busy ? "Saqlanmoqda…" : "Saqlash"}
+          {busy
+            ? publishing
+              ? "Nashr qilinmoqda…"
+              : "Saqlanmoqda…"
+            : "Saqlash"}
         </button>
       </header>
       <div className={styles.mobileTabs}>
@@ -1070,170 +1211,238 @@ export function Studio({
           className={`${styles.sidebar} ${mobilePreview ? styles.mobileHidden : ""}`}
           aria-label="Tahrirlash bo‘limlari"
         >
-          <p className={styles.sidebarTitle}>Taklifnomani yarating</p>
+          <div className={styles.sidebarIntro}>
+            <Flower2 size={28} strokeWidth={1.1} aria-hidden="true" />
+            <p>Yaratish studiyasi</p>
+            <h2>
+              Mehr bilan
+              <br />
+              <em>yarating.</em>
+            </h2>
+          </div>
+          <p className={styles.sidebarTitle}>To‘rt oddiy qadam</p>
           <nav>
             {sections.map((item, index) => (
               <button
                 key={item.title}
                 className={`${styles.sectionButton} ${section === index ? styles.activeSection : ""}`}
-                onClick={() => setSection(index)}
+                onClick={() => goToSection(index)}
                 aria-current={section === index ? "step" : undefined}
               >
                 <span className={styles.sectionNumber}>{index + 1}</span>
                 <span>
-                  <strong>{item.title}</strong>
+                  <strong>
+                    <span className={styles.desktopStepTitle}>
+                      {item.title}
+                    </span>
+                    <span className={styles.mobileStepTitle}>{item.short}</span>
+                  </strong>
                   <small>{item.note}</small>
                 </span>
                 {section === index && <ChevronRight size={15} />}
               </button>
             ))}
           </nav>
+          {selectedTemplate && (
+            <button
+              className={styles.selectedDesign}
+              onClick={() => goToSection(0)}
+            >
+              <span className={styles.selectedDesignIcon}>
+                <LayoutTemplate size={21} strokeWidth={1.2} />
+              </span>
+              <span>
+                <small>Tanlangan dizayn</small>
+                <strong>{selectedTemplate.name}</strong>
+              </span>
+              <ChevronRight size={14} />
+            </button>
+          )}
+          <p className={styles.sidebarNote}>
+            <CheckCircle2 size={15} strokeWidth={1.3} />
+            <span>Qoralamangiz shu brauzerda avtomatik saqlanadi.</span>
+          </p>
         </aside>
         <main
           id="main"
           className={`${styles.editor} ${mobilePreview ? styles.mobileHidden : ""}`}
         >
-          <div className={styles.editorIntro}>
-            <span className={styles.step}>Qadam {section + 1} / 4</span>
-            <h1>{sections[section].title}</h1>
-            <p>
-              {
-                [
-                  "Eng chiroyli taklif o‘z so‘zlaringizdan boshlanadi.",
-                  "Mehmonlaringiz barcha kerakli ma’lumotni bir joyda topsin.",
-                  "Ma’lumotlaringiz o‘zgarmaydi. Faqat yangi ko‘rinish tanlang.",
-                  "Faqat o‘zingizga kerakli imkoniyatlarni yoqing.",
-                ][section]
-              }
-            </p>
-          </div>
-          <div aria-live="polite">
-            {notice && (
-              <div className={styles.notice}>
-                <CheckCircle2 size={18} />
-                <span>{notice}</span>
-                <button
-                  aria-label="Xabarni yopish"
-                  onClick={() => setNotice("")}
-                >
-                  <X size={16} />
-                </button>
-              </div>
+          <fieldset className={styles.editorFields} disabled={busy}>
+            {invitation.status === "published" && invitation.slug && (
+              <PublishedLink slug={invitation.slug} canonicalUrl={publicUrl} />
             )}
-            {error && (
-              <div className={styles.error} role="alert">
-                <span>{error}</span>
-                <button aria-label="Xatoni yopish" onClick={() => setError("")}>
-                  <X size={16} />
-                </button>
-              </div>
-            )}
-          </div>
-          {section !== 2 && (
-            <div className={styles.languages}>
-              <Globe2 size={16} />
-              <div className={styles.languageTabs}>
-                {invitation.enabledLocales.map((item) => (
-                  <span className={styles.languageItem} key={item}>
-                    <button
-                      className={locale === item ? styles.activeLanguage : ""}
-                      aria-pressed={locale === item}
-                      onClick={() => setLocale(item)}
-                    >
-                      {LANGUAGE_NAMES[item]}
-                      {item === invitation.defaultLocale && (
-                        <span
-                          className={styles.primaryDot}
-                          title="Asosiy til"
-                        />
-                      )}
-                    </button>
-                    {item !== invitation.defaultLocale && (
+            {publishIssues.length > 0 && (
+              <div className={styles.publicationErrors} role="alert">
+                <strong>Nashr qilishdan oldin to‘ldiring</strong>
+                <ul>
+                  {publishIssues.map((issue) => (
+                    <li key={issue.path}>
                       <button
                         type="button"
-                        className={styles.removeLanguage}
-                        aria-label={`${LANGUAGE_NAMES[item]} tilini olib tashlash`}
-                        title="Tilni olib tashlash"
                         onClick={() => {
-                          setInvitation(removeLanguage(invitation, item));
-                          if (locale === item)
-                            setLocale(invitation.defaultLocale);
+                          goToSection(issue.section);
+                          if (issue.locale) setLocale(issue.locale);
                         }}
                       >
-                        <X size={12} />
+                        {issue.message}
                       </button>
-                    )}
-                  </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            <div className={styles.editorIntro}>
+              <div className={styles.introTop}>
+                <span className={styles.step}>
+                  O‘z taklifnomangizni yarating
+                </span>
+                <span className={styles.stepCount}>
+                  0{section + 1} <span>/ 04</span>
+                </span>
+              </div>
+              <h1>{sections[section].title}</h1>
+              <p>{sections[section].description}</p>
+              <div className={styles.stepProgress} aria-hidden="true">
+                {sections.map((item, index) => (
+                  <span
+                    key={item.short}
+                    className={index <= section ? styles.reachedStep : ""}
+                  />
                 ))}
               </div>
-              {invitation.enabledLocales.length < 4 && (
-                <SoftSelect
-                  label="Til qo‘shish"
-                  value=""
-                  placeholder={placeholders.addLanguage}
-                  options={LOCALES.filter(
-                    (item) => !invitation.enabledLocales.includes(item),
-                  ).map((item) => ({
-                    value: item,
-                    label: LANGUAGE_NAMES[item],
-                  }))}
-                  onChange={(value) => {
-                    const next = value as Locale;
-                    setInvitation(addLanguage(invitation, next));
-                    setLocale(next);
-                  }}
-                />
-              )}
             </div>
-          )}
-
-          {section === 1 && (
-            <div className={styles.form}>
-              {invitation.enabledLocales.length > 1 && (
-                <div className={styles.languageHint}>
-                  <span>
-                    {LANGUAGE_NAMES[locale]} matnlarini kiriting. Sana, rasmlar
-                    va boshqa umumiy ma’lumotlar barcha tillarda bir xil.
-                  </span>
+            <div aria-live="polite">
+              {notice && (
+                <div className={styles.notice}>
+                  <CheckCircle2 size={18} />
+                  <span>{notice}</span>
                   <button
-                    onClick={() => update({ defaultLocale: locale })}
-                    disabled={locale === invitation.defaultLocale}
+                    aria-label="Xabarni yopish"
+                    onClick={() => setNotice("")}
                   >
-                    {locale === invitation.defaultLocale
-                      ? "Asosiy til"
-                      : "Asosiy til qilish"}
+                    <X size={16} />
                   </button>
                 </div>
               )}
-              <div className={styles.groupHeader}>
-                <h2>Kimning quvonchli kuni?</h2>
-                {!singleCelebrant && (
+              {error && (
+                <div className={styles.error} role="alert">
+                  <span>{error}</span>
                   <button
-                    className={styles.textButton}
-                    disabled={identityLocked || content.people.length >= 20}
-                    onClick={() =>
-                      updateContent({
-                        people: [...personFields, ""],
-                      })
-                    }
+                    aria-label="Xatoni yopish"
+                    onClick={() => setError("")}
                   >
-                    <Plus size={15} />
-                    Ism qo‘shish
+                    <X size={16} />
                   </button>
+                </div>
+              )}
+            </div>
+            {section !== 2 && (
+              <div className={styles.languages}>
+                <Globe2 size={16} />
+                <div className={styles.languageTabs}>
+                  {invitation.enabledLocales.map((item) => (
+                    <span className={styles.languageItem} key={item}>
+                      <button
+                        className={locale === item ? styles.activeLanguage : ""}
+                        aria-pressed={locale === item}
+                        onClick={() => setLocale(item)}
+                      >
+                        {LANGUAGE_NAMES[item]}
+                        {item === invitation.defaultLocale && (
+                          <span
+                            className={styles.primaryDot}
+                            title="Asosiy til"
+                          />
+                        )}
+                      </button>
+                      {item !== invitation.defaultLocale && !identityLocked && (
+                        <button
+                          type="button"
+                          className={styles.removeLanguage}
+                          aria-label={`${LANGUAGE_NAMES[item]} tilini olib tashlash`}
+                          title="Tilni olib tashlash"
+                          onClick={() => {
+                            setInvitation(removeLanguage(invitation, item));
+                            if (locale === item)
+                              setLocale(invitation.defaultLocale);
+                          }}
+                        >
+                          <X size={12} />
+                        </button>
+                      )}
+                    </span>
+                  ))}
+                </div>
+                {invitation.enabledLocales.length < 4 && !identityLocked && (
+                  <div className={styles.addLanguage}>
+                    <SoftSelect
+                      label="Til qo‘shish"
+                      value=""
+                      placeholder={placeholders.addLanguage}
+                      options={LOCALES.filter(
+                        (item) => !invitation.enabledLocales.includes(item),
+                      ).map((item) => ({
+                        value: item,
+                        label: LANGUAGE_NAMES[item],
+                      }))}
+                      onChange={(value) => {
+                        const next = value as Locale;
+                        setInvitation(addLanguage(invitation, next));
+                        setLocale(next);
+                      }}
+                    />
+                  </div>
                 )}
               </div>
-              <div className={styles.twoColumns}>
-                {personFields.map(
-                  (name, index) => (
+            )}
+
+            {section === 1 && (
+              <div className={styles.form}>
+                {invitation.enabledLocales.length > 1 && (
+                  <div className={styles.languageHint}>
+                    <span>
+                      {LANGUAGE_NAMES[locale]} matnlarini kiriting. Sana,
+                      rasmlar va boshqa umumiy ma’lumotlar barcha tillarda bir
+                      xil.
+                    </span>
+                    <button
+                      onClick={() => update({ defaultLocale: locale })}
+                      disabled={locale === invitation.defaultLocale}
+                    >
+                      {locale === invitation.defaultLocale
+                        ? "Asosiy til"
+                        : "Asosiy til qilish"}
+                    </button>
+                  </div>
+                )}
+                <div className={styles.groupHeader}>
+                  <h2>Kimning quvonchli kuni?</h2>
+                  {!singleCelebrant && (
+                    <button
+                      className={styles.textButton}
+                      disabled={identityLocked || content.people.length >= 20}
+                      onClick={() =>
+                        updateContent({
+                          people: [...personFields, ""],
+                        })
+                      }
+                    >
+                      <Plus size={15} />
+                      Ism qo‘shish
+                    </button>
+                  )}
+                </div>
+                <div className={styles.twoColumns}>
+                  {personFields.map((name, index) => (
                     <Field
                       label={
                         singleCelebrant && index === 0
-                              ? singleCelebrantLabel
-                              : invitation.eventType === "wedding" && index < 2
-                                ? index === 0
-                                  ? "Kuyov ismi"
-                                  : "Kelin ismi"
-                                : `${index + 1}-ism`
+                          ? singleCelebrantLabel
+                          : invitation.eventType === "wedding" && index < 2
+                            ? index === 0
+                              ? "Kuyov ismi"
+                              : "Kelin ismi"
+                            : `${index + 1}-ism`
                       }
                       key={index}
                     >
@@ -1272,97 +1481,286 @@ export function Studio({
                         )}
                       </div>
                     </Field>
-                  ),
+                  ))}
+                </div>
+                {identityLocked && (
+                  <p className={styles.help}>
+                    Nashrdan keyin asosiy ismlar va tadbir turi o‘zgarmaydi.
+                    Tuzatish uchun administratorga murojaat qiling.
+                  </p>
+                )}
+                <Field label="Oila yoki mezbonlar" hint="Ixtiyoriy">
+                  <input
+                    value={content.hosts}
+                    placeholder={placeholders.family}
+                    maxLength={300}
+                    disabled={identityLocked}
+                    onChange={(event) =>
+                      updateContent({ hosts: event.target.value })
+                    }
+                  />
+                </Field>
+                <div className={styles.divider} />
+                <Field
+                  label="Tadbir nomi"
+                  hint="Bu matn taklifnomada ko‘rinadi."
+                >
+                  <input
+                    value={
+                      content.eventLabel ||
+                      defaultEventLabel(invitation.eventType, locale)
+                    }
+                    maxLength={300}
+                    onChange={(event) =>
+                      updateContent({ eventLabel: event.target.value })
+                    }
+                  />
+                </Field>
+                <Field label="Mehmonlarga salomlashish">
+                  <input
+                    value={content.greeting}
+                    maxLength={300}
+                    onChange={(event) =>
+                      updateContent({ greeting: event.target.value })
+                    }
+                  />
+                </Field>
+                <Field label="Taklif matni">
+                  <textarea
+                    value={content.message}
+                    maxLength={10000}
+                    rows={5}
+                    onChange={(event) =>
+                      updateContent({ message: event.target.value })
+                    }
+                  />
+                </Field>
+                {(invitation.templateId === "muhabbat-kitobi" ||
+                  invitation.story.length > 0) && (
+                  <>
+                    <div className={styles.divider} />
+                    <div className={styles.groupHeader}>
+                      <div>
+                        <h2>Hikoya boblari</h2>
+                        <p className={styles.help}>
+                          Ixtiyoriy. Muhabbat Kitobi dizaynida ko‘rsatiladi. Har
+                          bir til uchun matnni alohida kiriting.
+                        </p>
+                      </div>
+                      <button
+                        className={styles.textButton}
+                        disabled={invitation.story.length >= 20}
+                        onClick={() =>
+                          update({
+                            story: [
+                              ...invitation.story,
+                              { id: crypto.randomUUID(), title: {}, text: {} },
+                            ],
+                          })
+                        }
+                      >
+                        <Plus size={15} />
+                        Bob qo‘shish
+                      </button>
+                    </div>
+                    {invitation.story.map((chapter, index) => (
+                      <div className={styles.storyItem} key={chapter.id}>
+                        <div className={styles.groupHeader}>
+                          <h3>{index + 1}-bob</h3>
+                          <button
+                            className={styles.iconButton}
+                            aria-label={`${index + 1}-bobni olib tashlash`}
+                            onClick={() =>
+                              update({
+                                story: invitation.story.filter(
+                                  (item) => item.id !== chapter.id,
+                                ),
+                              })
+                            }
+                          >
+                            <Trash2 size={14} />
+                          </button>
+                        </div>
+                        <Field label="Sarlavha">
+                          <input
+                            value={chapter.title[locale] ?? ""}
+                            maxLength={300}
+                            onChange={(event) =>
+                              update({
+                                story: invitation.story.map((item) =>
+                                  item.id === chapter.id
+                                    ? {
+                                        ...item,
+                                        title: {
+                                          ...item.title,
+                                          [locale]: event.target.value,
+                                        },
+                                      }
+                                    : item,
+                                ),
+                              })
+                            }
+                          />
+                        </Field>
+                        <Field label="Hikoya matni">
+                          <textarea
+                            value={chapter.text[locale] ?? ""}
+                            maxLength={10000}
+                            rows={5}
+                            onChange={(event) =>
+                              update({
+                                story: invitation.story.map((item) =>
+                                  item.id === chapter.id
+                                    ? {
+                                        ...item,
+                                        text: {
+                                          ...item.text,
+                                          [locale]: event.target.value,
+                                        },
+                                      }
+                                    : item,
+                                ),
+                              })
+                            }
+                          />
+                        </Field>
+                      </div>
+                    ))}
+                  </>
                 )}
               </div>
-              {identityLocked && (
-                <p className={styles.help}>
-                  Nashrdan keyin asosiy ismlar va tadbir turi o‘zgarmaydi.
-                  Tuzatish uchun administratorga murojaat qiling.
-                </p>
-              )}
-              <Field label="Oila yoki mezbonlar" hint="Ixtiyoriy">
-                <input
-                  value={content.hosts}
-                  placeholder={placeholders.family}
-                  maxLength={300}
-                  disabled={identityLocked}
-                  onChange={(event) =>
-                    updateContent({ hosts: event.target.value })
-                  }
-                />
-              </Field>
-              <div className={styles.divider} />
-              <Field label="Tadbir nomi" hint="Bu matn taklifnomada ko‘rinadi.">
-                <input
-                  value={
-                    content.eventLabel ||
-                    defaultEventLabel(invitation.eventType, locale)
-                  }
-                  maxLength={300}
-                  onChange={(event) =>
-                    updateContent({ eventLabel: event.target.value })
-                  }
-                />
-              </Field>
-              <Field label="Mehmonlarga salomlashish">
-                <input
-                  value={content.greeting}
-                  maxLength={300}
-                  onChange={(event) =>
-                    updateContent({ greeting: event.target.value })
-                  }
-                />
-              </Field>
-              <Field label="Taklif matni">
-                <textarea
-                  value={content.message}
-                  maxLength={10000}
-                  rows={5}
-                  onChange={(event) =>
-                    updateContent({ message: event.target.value })
-                  }
-                />
-              </Field>
-              {(invitation.templateId === "muhabbat-kitobi" ||
-                invitation.story.length > 0) && (
-                <>
-                  <div className={styles.divider} />
-                  <div className={styles.groupHeader}>
-                    <div>
-                      <h2>Hikoya boblari</h2>
-                      <p className={styles.help}>
-                        Ixtiyoriy. Muhabbat Kitobi dizaynida ko‘rsatiladi. Har
-                        bir til uchun matnni alohida kiriting.
-                      </p>
-                    </div>
-                    <button
-                      className={styles.textButton}
-                      disabled={invitation.story.length >= 20}
-                      onClick={() =>
-                        update({
-                          story: [
-                            ...invitation.story,
-                            { id: crypto.randomUUID(), title: {}, text: {} },
-                          ],
-                        })
-                      }
-                    >
-                      <Plus size={15} />
-                      Bob qo‘shish
-                    </button>
-                  </div>
-                  {invitation.story.map((chapter, index) => (
-                    <div className={styles.storyItem} key={chapter.id}>
-                      <div className={styles.groupHeader}>
-                        <h3>{index + 1}-bob</h3>
+            )}
+
+            {section === 2 && (
+              <div className={styles.form}>
+                <h2>Sana va vaqt</h2>
+                <Field label="Tadbir boshlanishi">
+                  <DateTimePicker
+                    value={invitation.startsAt}
+                    disabled={identityLocked}
+                    onChange={(startsAt) => update({ startsAt })}
+                  />
+                </Field>
+                {identityLocked && (
+                  <p className={styles.help}>
+                    Sanani ko‘chirish administrator tasdig‘i bilan amalga
+                    oshiriladi.
+                  </p>
+                )}
+                <div className={styles.divider} />
+                <h2>Manzil</h2>
+                <Field label="To‘yxona yoki joy nomi">
+                  <input
+                    value={content.venueName}
+                    maxLength={300}
+                    onChange={(event) =>
+                      updateContent({ venueName: event.target.value })
+                    }
+                    placeholder={placeholders.venueName}
+                  />
+                </Field>
+                <Field label="To‘liq manzil">
+                  <textarea
+                    value={content.address}
+                    rows={2}
+                    maxLength={1000}
+                    onChange={(event) =>
+                      updateContent({ address: event.target.value })
+                    }
+                  />
+                </Field>
+                <Field label="Mo‘ljal va qo‘shimcha yo‘l-yo‘riq">
+                  <textarea
+                    value={content.landmark}
+                    rows={2}
+                    maxLength={1000}
+                    onChange={(event) =>
+                      updateContent({ landmark: event.target.value })
+                    }
+                    placeholder={placeholders.optional}
+                  />
+                </Field>
+                <Field
+                  label="Xarita havolasi"
+                  hint="Google Maps yoki Yandex Maps havolasini kiriting."
+                >
+                  <input
+                    type="url"
+                    value={invitation.venue.mapUrl}
+                    maxLength={2048}
+                    onChange={(event) =>
+                      update({
+                        venue: {
+                          ...invitation.venue,
+                          mapUrl: event.target.value,
+                        },
+                      })
+                    }
+                    placeholder="https://…"
+                  />
+                </Field>
+                <div className={styles.divider} />
+                <Field label="Dastur sarlavhasi">
+                  <input
+                    value={content.programHeading}
+                    maxLength={300}
+                    onChange={(event) =>
+                      updateContent({ programHeading: event.target.value })
+                    }
+                  />
+                </Field>
+                <div className={styles.program}>
+                  {invitation.program.map((item, index) => (
+                    <div key={item.id} className={styles.programItem}>
+                      <span className={styles.timelineDot} />
+                      <Field label="Vaqt">
+                        <TimePicker
+                          value={item.time}
+                          onChange={(time) =>
+                            update({
+                              program: invitation.program.map((row) =>
+                                row.id === item.id ? { ...row, time } : row,
+                              ),
+                            })
+                          }
+                        />
+                      </Field>
+                      <Field label="Dastur bandi">
+                        <input
+                          value={content.programTitles[item.id] ?? ""}
+                          maxLength={300}
+                          onChange={(event) =>
+                            updateContent({
+                              programTitles: {
+                                ...content.programTitles,
+                                [item.id]: event.target.value,
+                              },
+                            })
+                          }
+                          placeholder={placeholders.programItem}
+                        />
+                      </Field>
+                      <div className={styles.rowActions}>
                         <button
-                          className={styles.iconButton}
-                          aria-label={`${index + 1}-bobni olib tashlash`}
+                          aria-label="Yuqoriga ko‘chirish"
+                          disabled={index === 0}
+                          onClick={() => moveProgram(index, -1)}
+                        >
+                          <ArrowUp size={14} />
+                        </button>
+                        <button
+                          aria-label="Pastga ko‘chirish"
+                          disabled={index === invitation.program.length - 1}
+                          onClick={() => moveProgram(index, 1)}
+                        >
+                          <ArrowDown size={14} />
+                        </button>
+                        <button
+                          aria-label="Dastur bandini o‘chirish"
                           onClick={() =>
                             update({
-                              story: invitation.story.filter(
-                                (item) => item.id !== chapter.id,
+                              program: invitation.program.filter(
+                                (row) => row.id !== item.id,
                               ),
                             })
                           }
@@ -1370,933 +1768,786 @@ export function Studio({
                           <Trash2 size={14} />
                         </button>
                       </div>
-                      <Field label="Sarlavha">
-                        <input
-                          value={chapter.title[locale] ?? ""}
-                          maxLength={300}
-                          onChange={(event) =>
-                            update({
-                              story: invitation.story.map((item) =>
-                                item.id === chapter.id
-                                  ? {
-                                      ...item,
-                                      title: {
-                                        ...item.title,
-                                        [locale]: event.target.value,
-                                      },
-                                    }
-                                  : item,
-                              ),
-                            })
-                          }
-                        />
-                      </Field>
-                      <Field label="Hikoya matni">
-                        <textarea
-                          value={chapter.text[locale] ?? ""}
-                          maxLength={10000}
-                          rows={5}
-                          onChange={(event) =>
-                            update({
-                              story: invitation.story.map((item) =>
-                                item.id === chapter.id
-                                  ? {
-                                      ...item,
-                                      text: {
-                                        ...item.text,
-                                        [locale]: event.target.value,
-                                      },
-                                    }
-                                  : item,
-                              ),
-                            })
-                          }
-                        />
-                      </Field>
                     </div>
                   ))}
-                </>
-              )}
-            </div>
-          )}
-
-          {section === 2 && (
-            <div className={styles.form}>
-              <h2>Sana va vaqt</h2>
-              <Field label="Tadbir boshlanishi">
-                <DateTimePicker
-                  value={invitation.startsAt}
-                  disabled={identityLocked}
-                  onChange={(startsAt) => update({ startsAt })}
-                />
-              </Field>
-              {identityLocked && (
-                <p className={styles.help}>
-                  Sanani ko‘chirish administrator tasdig‘i bilan amalga
-                  oshiriladi.
-                </p>
-              )}
-              <div className={styles.divider} />
-              <h2>Manzil</h2>
-              <Field label="To‘yxona yoki joy nomi">
-                <input
-                  value={content.venueName}
-                  maxLength={300}
-                  onChange={(event) =>
-                    updateContent({ venueName: event.target.value })
-                  }
-                  placeholder={placeholders.venueName}
-                />
-              </Field>
-              <Field label="To‘liq manzil">
-                <textarea
-                  value={content.address}
-                  rows={2}
-                  maxLength={1000}
-                  onChange={(event) =>
-                    updateContent({ address: event.target.value })
-                  }
-                />
-              </Field>
-              <Field label="Mo‘ljal va qo‘shimcha yo‘l-yo‘riq">
-                <textarea
-                  value={content.landmark}
-                  rows={2}
-                  maxLength={1000}
-                  onChange={(event) =>
-                    updateContent({ landmark: event.target.value })
-                  }
-                  placeholder={placeholders.optional}
-                />
-              </Field>
-              <Field
-                label="Xarita havolasi"
-                hint="Google Maps yoki Yandex Maps havolasini kiriting."
-              >
-                <input
-                  type="url"
-                  value={invitation.venue.mapUrl}
-                  maxLength={2048}
-                  onChange={(event) =>
+                </div>
+                <button
+                  className={styles.addButton}
+                  disabled={invitation.program.length >= 100}
+                  onClick={() =>
                     update({
-                      venue: {
-                        ...invitation.venue,
-                        mapUrl: event.target.value,
-                      },
+                      program: [
+                        ...invitation.program,
+                        { id: crypto.randomUUID(), time: "" },
+                      ],
                     })
                   }
-                  placeholder="https://…"
+                >
+                  <Plus size={17} />
+                  Dastur bandini qo‘shish
+                </button>
+                <div className={styles.divider} />
+                <Toggle
+                  title="Kiyinish uslubi"
+                  description="Taklifnomaga ixtiyoriy kiyinish uslubi va ranglar palitrasini qo‘shing."
+                  checked={invitation.dressCode.enabled}
+                  onChange={(enabled) => {
+                    if (!enabled) {
+                      updateDressCode({ enabled: false });
+                      return;
+                    }
+                    updateDressCode(
+                      fillDressCodeDefaults(invitation.dressCode),
+                    );
+                  }}
                 />
-              </Field>
-              <div className={styles.divider} />
-              <Field label="Dastur sarlavhasi">
-                <input
-                  value={content.programHeading}
-                  maxLength={300}
-                  onChange={(event) =>
-                    updateContent({ programHeading: event.target.value })
-                  }
-                />
-              </Field>
-              <div className={styles.program}>
-                {invitation.program.map((item, index) => (
-                  <div key={item.id} className={styles.programItem}>
-                    <span className={styles.timelineDot} />
-                    <Field label="Vaqt">
-                      <TimePicker
-                        value={item.time}
-                        onChange={(time) =>
-                          update({
-                            program: invitation.program.map((row) =>
-                              row.id === item.id ? { ...row, time } : row,
-                            ),
-                          })
-                        }
-                      />
-                    </Field>
-                    <Field label="Dastur bandi">
+                {invitation.dressCode.enabled && (
+                  <div className={styles.optionBody}>
+                    <Field label="Kiyinish uslubi">
                       <input
-                        value={content.programTitles[item.id] ?? ""}
+                        value={invitation.dressCode.style[locale] ?? ""}
                         maxLength={300}
                         onChange={(event) =>
-                          updateContent({
-                            programTitles: {
-                              ...content.programTitles,
-                              [item.id]: event.target.value,
-                            },
-                          })
+                          updateDressCodeText("style", event.target.value)
                         }
-                        placeholder={placeholders.programItem}
                       />
                     </Field>
-                    <div className={styles.rowActions}>
-                      <button
-                        aria-label="Yuqoriga ko‘chirish"
-                        disabled={index === 0}
-                        onClick={() => moveProgram(index, -1)}
-                      >
-                        <ArrowUp size={14} />
-                      </button>
-                      <button
-                        aria-label="Pastga ko‘chirish"
-                        disabled={index === invitation.program.length - 1}
-                        onClick={() => moveProgram(index, 1)}
-                      >
-                        <ArrowDown size={14} />
-                      </button>
-                      <button
-                        aria-label="Dastur bandini o‘chirish"
-                        onClick={() =>
-                          update({
-                            program: invitation.program.filter(
-                              (row) => row.id !== item.id,
-                            ),
-                          })
+                    <Field label="Mehmonlar uchun izoh">
+                      <textarea
+                        value={invitation.dressCode.text[locale] ?? ""}
+                        maxLength={10000}
+                        rows={3}
+                        onChange={(event) =>
+                          updateDressCodeText("text", event.target.value)
                         }
-                      >
-                        <Trash2 size={14} />
-                      </button>
+                      />
+                    </Field>
+                    <Field label="Qo‘shimcha eslatma" hint="Ixtiyoriy">
+                      <textarea
+                        value={invitation.dressCode.note[locale] ?? ""}
+                        maxLength={10000}
+                        rows={2}
+                        onChange={(event) =>
+                          updateDressCodeText("note", event.target.value)
+                        }
+                      />
+                    </Field>
+                    <div className={styles.sectionHeading}>
+                      <strong>Ranglar palitrasi</strong>
+                      <span>{invitation.dressCode.colors.length}/12</span>
                     </div>
-                  </div>
-                ))}
-              </div>
-              <button
-                className={styles.addButton}
-                disabled={invitation.program.length >= 100}
-                onClick={() =>
-                  update({
-                    program: [
-                      ...invitation.program,
-                      { id: crypto.randomUUID(), time: "" },
-                    ],
-                  })
-                }
-              >
-                <Plus size={17} />
-                Dastur bandini qo‘shish
-              </button>
-              <div className={styles.divider} />
-              <Toggle
-                title="Kiyinish uslubi"
-                description="Taklifnomaga ixtiyoriy kiyinish uslubi va ranglar palitrasini qo‘shing."
-                checked={invitation.dressCode.enabled}
-                onChange={(enabled) => {
-                  if (!enabled) {
-                    updateDressCode({ enabled: false });
-                    return;
-                  }
-                  updateDressCode(fillDressCodeDefaults(invitation.dressCode));
-                }}
-              />
-              {invitation.dressCode.enabled && (
-                <div className={styles.optionBody}>
-                  <Field label="Kiyinish uslubi">
-                    <input
-                      value={invitation.dressCode.style[locale] ?? ""}
-                      maxLength={300}
-                      onChange={(event) =>
-                        updateDressCodeText("style", event.target.value)
-                      }
-                    />
-                  </Field>
-                  <Field label="Mehmonlar uchun izoh">
-                    <textarea
-                      value={invitation.dressCode.text[locale] ?? ""}
-                      maxLength={10000}
-                      rows={3}
-                      onChange={(event) =>
-                        updateDressCodeText("text", event.target.value)
-                      }
-                    />
-                  </Field>
-                  <Field label="Qo‘shimcha eslatma" hint="Ixtiyoriy">
-                    <textarea
-                      value={invitation.dressCode.note[locale] ?? ""}
-                      maxLength={10000}
-                      rows={2}
-                      onChange={(event) =>
-                        updateDressCodeText("note", event.target.value)
-                      }
-                    />
-                  </Field>
-                  <div className={styles.sectionHeading}>
-                    <strong>Ranglar palitrasi</strong>
-                    <span>{invitation.dressCode.colors.length}/12</span>
-                  </div>
-                  {invitation.dressCode.colors.map((color, index) => (
-                    <div key={color.id} className={styles.twoColumns}>
-                      <Field label={`${index + 1}-rang nomi`}>
-                        <input
-                          value={color.name[locale] ?? ""}
-                          maxLength={300}
-                          onChange={(event) =>
+                    {invitation.dressCode.colors.map((color, index) => (
+                      <div key={color.id} className={styles.twoColumns}>
+                        <Field label={`${index + 1}-rang nomi`}>
+                          <input
+                            value={color.name[locale] ?? ""}
+                            maxLength={300}
+                            onChange={(event) =>
+                              updateDressCode({
+                                colors: invitation.dressCode.colors.map(
+                                  (item) =>
+                                    item.id === color.id
+                                      ? {
+                                          ...item,
+                                          name: {
+                                            ...item.name,
+                                            [locale]: event.target.value,
+                                          },
+                                        }
+                                      : item,
+                                ),
+                              })
+                            }
+                          />
+                        </Field>
+                        <Field label="Rang kodi">
+                          <input
+                            type="color"
+                            value={color.hex}
+                            onChange={(event) =>
+                              updateDressCode({
+                                colors: invitation.dressCode.colors.map(
+                                  (item) =>
+                                    item.id === color.id
+                                      ? { ...item, hex: event.target.value }
+                                      : item,
+                                ),
+                              })
+                            }
+                          />
+                        </Field>
+                        <button
+                          className={styles.textButton}
+                          type="button"
+                          onClick={() =>
                             updateDressCode({
-                              colors: invitation.dressCode.colors.map((item) =>
-                                item.id === color.id
-                                  ? {
-                                      ...item,
-                                      name: {
-                                        ...item.name,
-                                        [locale]: event.target.value,
-                                      },
-                                    }
-                                  : item,
+                              colors: invitation.dressCode.colors.filter(
+                                (item) => item.id !== color.id,
                               ),
                             })
                           }
-                        />
-                      </Field>
-                      <Field label="Rang kodi">
-                        <input
-                          type="color"
-                          value={color.hex}
-                          onChange={(event) =>
-                            updateDressCode({
-                              colors: invitation.dressCode.colors.map((item) =>
-                                item.id === color.id
-                                  ? { ...item, hex: event.target.value }
-                                  : item,
-                              ),
-                            })
-                          }
-                        />
-                      </Field>
-                      <button
-                        className={styles.textButton}
-                        type="button"
-                        onClick={() =>
-                          updateDressCode({
-                            colors: invitation.dressCode.colors.filter(
-                              (item) => item.id !== color.id,
-                            ),
-                          })
-                        }
-                      >
-                        <Trash2 size={14} /> Rangni olib tashlash
-                      </button>
-                    </div>
-                  ))}
-                  <button
-                    className={styles.addButton}
-                    type="button"
-                    disabled={invitation.dressCode.colors.length >= 12}
-                    onClick={() =>
-                      updateDressCode({
-                        colors: [
-                          ...invitation.dressCode.colors,
-                          {
-                            id: crypto.randomUUID(),
-                            name: { [locale]: "" },
-                            hex: "#c9a55c",
-                          },
-                        ],
-                      })
-                    }
-                  >
-                    <Plus size={17} /> Rang qo‘shish
-                  </button>
-                </div>
-              )}
-            </div>
-          )}
-
-          {section === 0 && (
-            <div className={styles.form}>
-              <Field label="Tadbir turi">
-                <SoftSelect
-                  label="Tadbir turi"
-                  value={invitation.eventType}
-                  disabled={identityLocked}
-                  options={EVENT_TYPE_OPTIONS.map((item) => ({
-                    value: item.id,
-                    label: item.name,
-                  }))}
-                  onChange={changeEventType}
-                />
-              </Field>
-              {catalogNote && <p className={styles.help}>{catalogNote}</p>}
-              {invitation.templateId &&
-                !templates.some(
-                  (item) =>
-                    item.id === invitation.templateId &&
-                    item.published &&
-                    item.supportedEventTypes.includes(invitation.eventType),
-                ) && (
-                  <div className={styles.notice}>
-                    Bu dizayn tanlangan tadbir turini qo‘llamaydi. Tadbir turini
-                    o‘zgartiring yoki mos dizaynni tanlang.
+                        >
+                          <Trash2 size={14} /> Rangni olib tashlash
+                        </button>
+                      </div>
+                    ))}
+                    <button
+                      className={styles.addButton}
+                      type="button"
+                      disabled={invitation.dressCode.colors.length >= 12}
+                      onClick={() =>
+                        updateDressCode({
+                          colors: [
+                            ...invitation.dressCode.colors,
+                            {
+                              id: crypto.randomUUID(),
+                              name: { [locale]: "" },
+                              hex: "#c9a55c",
+                            },
+                          ],
+                        })
+                      }
+                    >
+                      <Plus size={17} /> Rang qo‘shish
+                    </button>
                   </div>
                 )}
-              {compatibleTemplates.length === 0 && (
-                <div className={styles.designNotice}>
-                  <CheckCircle2 size={20} />
-                  <p>
-                    Hozircha tayyor dizaynlar qo‘shilmagan. Ma’lumotlaringizni
-                    qoralama sifatida saqlashingiz va dizaynlar paydo bo‘lgach
-                    tanlashingiz mumkin.
-                  </p>
-                </div>
-              )}
-              {compatibleTemplates.length > 0 && (
-                <div
-                  className={styles.categoryFilters}
-                  role="group"
-                  aria-label="Dizayn kategoriyalari"
-                >
-                  <button
-                    aria-pressed={activeCategoryFilter === "all"}
-                    className={
-                      activeCategoryFilter === "all"
-                        ? styles.selectedCategory
-                        : ""
-                    }
-                    onClick={() => setCategoryFilter("all")}
+              </div>
+            )}
+
+            {section === 0 && (
+              <div className={styles.form}>
+                <Field label="Tadbir turi">
+                  <SoftSelect
+                    label="Tadbir turi"
+                    value={invitation.eventType}
+                    disabled={identityLocked}
+                    options={EVENT_TYPE_OPTIONS.map((item) => ({
+                      value: item.id,
+                      label: item.name,
+                    }))}
+                    onChange={changeEventType}
+                  />
+                </Field>
+                {catalogNote && <p className={styles.help}>{catalogNote}</p>}
+                {invitation.templateId &&
+                  !templates.some(
+                    (item) =>
+                      item.id === invitation.templateId &&
+                      item.published &&
+                      item.supportedEventTypes.includes(invitation.eventType),
+                  ) && (
+                    <div className={styles.notice}>
+                      Bu dizayn tanlangan tadbir turini qo‘llamaydi. Tadbir
+                      turini o‘zgartiring yoki mos dizaynni tanlang.
+                    </div>
+                  )}
+                {compatibleTemplates.length === 0 && (
+                  <div className={styles.designNotice}>
+                    <CheckCircle2 size={20} />
+                    <p>
+                      Hozircha tayyor dizaynlar qo‘shilmagan. Ma’lumotlaringizni
+                      qoralama sifatida saqlashingiz va dizaynlar paydo bo‘lgach
+                      tanlashingiz mumkin.
+                    </p>
+                  </div>
+                )}
+                {compatibleTemplates.length > 0 && (
+                  <div
+                    className={styles.categoryFilters}
+                    role="group"
+                    aria-label="Dizayn kategoriyalari"
                   >
-                    Barchasi
-                    <span>{compatibleTemplates.length}</span>
-                  </button>
-                  {availableCategories.map((category) => (
                     <button
-                      key={category.id}
-                      aria-pressed={activeCategoryFilter === category.id}
+                      aria-pressed={activeCategoryFilter === "all"}
                       className={
-                        activeCategoryFilter === category.id
+                        activeCategoryFilter === "all"
                           ? styles.selectedCategory
                           : ""
                       }
-                      onClick={() => setCategoryFilter(category.id)}
+                      onClick={() => setCategoryFilter("all")}
                     >
-                      {category.name}
-                      <span>
-                        {
-                          compatibleTemplates.filter((template) =>
-                            template.categoryIds.includes(category.id),
-                          ).length
-                        }
-                      </span>
+                      Barchasi
+                      <span>{compatibleTemplates.length}</span>
                     </button>
-                  ))}
-                </div>
-              )}
-              <div className={styles.templateGrid}>
-                {compatibleTemplates
-                  .filter(
-                    (template) =>
-                      activeCategoryFilter === "all" ||
-                      template.categoryIds.includes(activeCategoryFilter),
-                  )
-                  .map((template) => (
-                    <div
-                      key={template.id}
-                      className={`${styles.templateCard} ${invitation.templateId === template.id ? styles.selectedTemplate : ""}`}
-                    >
+                    {availableCategories.map((category) => (
                       <button
-                        type="button"
-                        disabled={identityLocked}
-                        className={styles.templateSelect}
-                        aria-pressed={invitation.templateId === template.id}
-                        onClick={() =>
-                          setInvitation(switchTemplate(invitation, template.id))
+                        key={category.id}
+                        aria-pressed={activeCategoryFilter === category.id}
+                        className={
+                          activeCategoryFilter === category.id
+                            ? styles.selectedCategory
+                            : ""
                         }
+                        onClick={() => setCategoryFilter(category.id)}
                       >
-                        <div
-                          className={styles.templateArt}
-                          style={{
-                            backgroundImage: `url(${template.previewImage?.startsWith("/") ? template.previewImage : `/templates/${template.id}/${template.previewImage ?? "stage.webp"}`})`,
-                          }}
-                          aria-label={`${template.name} dizaynining birinchi sahifasi`}
-                        >
-                          {invitation.templateId === template.id && (
-                            <span className={styles.selectedCheck}>
-                              <Check size={17} />
-                            </span>
-                          )}
-                        </div>
-                        <div className={styles.templateMeta}>
-                          <strong>{template.name}</strong>
-                          <small>{template.description}</small>
-                          <span>{formatPrice(template.priceMinor)}</span>
-                        </div>
-                      </button>
-                      <Link
-                        className={styles.templateFullPreview}
-                        href={`/preview?template=${encodeURIComponent(template.id)}&draft=${encodeURIComponent(invitation.id)}`}
-                        onClick={() => {
-                          try {
-                            sessionStorage.setItem(
-                              `taklifnoma:full-preview:v1:${invitation.id}`,
-                              JSON.stringify(
-                                switchTemplate(invitation, template.id),
-                              ),
-                            );
-                          } catch {
-                            // The full preview can recover the last saved browser draft.
-                          }
-                        }}
-                      >
-                        <Eye size={15} /> To‘liq ko‘rish
-                      </Link>
-                    </div>
-                  ))}
-              </div>
-              {!compatibleTemplates.some(
-                (template) =>
-                  activeCategoryFilter === "all" ||
-                  template.categoryIds.includes(activeCategoryFilter),
-              ) && (
-                <div className={styles.categoryEmpty}>
-                  <LayoutTemplate size={24} />
-                  <p>Hozircha tanlash uchun dizayn yo‘q.</p>
-                  <small>
-                    Qoralamangiz saqlanadi va keyin dizayn tanlashingiz mumkin.
-                  </small>
-                </div>
-              )}
-              {identityLocked && (
-                <p className={styles.help}>
-                  Nashr qilingan taklifnomada dizaynni almashtirish hozircha
-                  mavjud emas.
-                </p>
-              )}
-              {selectedTemplate ? (
-                <div className={styles.priceNote}>
-                  <span>Tanlangan dizayn</span>
-                  <strong>{selectedTemplate.name}</strong>
-                  <b>{formatPrice(selectedTemplate.priceMinor)}</b>
-                  <small>
-                    To‘lovdan oldin hisobingizga kirish talab qilinadi.
-                  </small>
-                </div>
-              ) : (
-                <div className={styles.priceNote}>
-                  <span>Dizayn narxi</span>
-                  <strong>Hozircha belgilanmagan</strong>
-                  <small>Dizayn tanlanganidan keyin narx ko‘rsatiladi.</small>
-                </div>
-              )}
-            </div>
-          )}
-
-          {section === 3 && (
-            <div className={styles.form}>
-              <div className={styles.groupHeader}>
-                <h2>
-                  <ImagePlus size={20} />
-                  Xotiralaringiz
-                </h2>
-                <span className={styles.optional}>Ixtiyoriy</span>
-              </div>
-              <p className={styles.help}>
-                O‘zingiz uchun qadrli rasmlarni qo‘shing. Dizayn o‘zgarsa ham
-                ular saqlanadi.
-              </p>
-              <label className={styles.uploadBox}>
-                <ImagePlus size={25} />
-                <strong>{uploading ? "Yuklanmoqda…" : "Rasm yuklash"}</strong>
-                <span>JPG, PNG yoki WebP · 15 MB gacha</span>
-                <input
-                  type="file"
-                  accept="image/jpeg,image/png,image/webp"
-                  disabled={uploading || invitation.gallery.length >= 50}
-                  onChange={(event) => {
-                    const file = event.target.files?.[0];
-                    if (file) void upload(file, "image");
-                    event.target.value = "";
-                  }}
-                />
-              </label>
-              <details className={styles.details}>
-                <summary>Mavjud rasm havolasi orqali qo‘shish</summary>
-                <div className={styles.linkInput}>
-                  <input
-                    aria-label="Rasm havolasi"
-                    type="url"
-                    value={imageUrl}
-                    onChange={(event) => setImageUrl(event.target.value)}
-                    placeholder="https://…"
-                  />
-                  <button
-                    onClick={() => {
-                      if (!/^https?:\/\//i.test(imageUrl)) {
-                        setError("To‘liq https:// rasm havolasini kiriting.");
-                        return;
-                      }
-                      if (invitation.gallery.length >= 50) return;
-                      update({
-                        gallery: [
-                          ...invitation.gallery,
+                        {category.name}
+                        <span>
                           {
-                            id: crypto.randomUUID(),
-                            url: imageUrl,
-                            alt: "",
-                            caption: "",
-                          },
-                        ],
-                      });
-                      setImageUrl("");
-                    }}
-                  >
-                    <Plus size={17} />
-                    Qo‘shish
-                  </button>
+                            compatibleTemplates.filter((template) =>
+                              template.categoryIds.includes(category.id),
+                            ).length
+                          }
+                        </span>
+                      </button>
+                    ))}
+                  </div>
+                )}
+                <div className={styles.templateGrid}>
+                  {compatibleTemplates
+                    .filter(
+                      (template) =>
+                        activeCategoryFilter === "all" ||
+                        template.categoryIds.includes(activeCategoryFilter),
+                    )
+                    .map((template) => (
+                      <div
+                        key={template.id}
+                        className={`${styles.templateCard} ${invitation.templateId === template.id ? styles.selectedTemplate : ""}`}
+                      >
+                        <button
+                          type="button"
+                          disabled={identityLocked}
+                          className={styles.templateSelect}
+                          aria-pressed={invitation.templateId === template.id}
+                          onClick={() =>
+                            setInvitation(
+                              switchTemplate(invitation, template.id),
+                            )
+                          }
+                        >
+                          <div
+                            className={styles.templateArt}
+                            style={{
+                              backgroundImage: `url(${template.previewImage?.startsWith("/") ? template.previewImage : `/templates/${template.id}/${template.previewImage ?? "stage.webp"}`})`,
+                            }}
+                            aria-label={`${template.name} dizaynining birinchi sahifasi`}
+                          >
+                            {invitation.templateId === template.id && (
+                              <span className={styles.selectedCheck}>
+                                <Check size={17} />
+                              </span>
+                            )}
+                          </div>
+                          <div className={styles.templateMeta}>
+                            <strong>{template.name}</strong>
+                            <small>{template.description}</small>
+                            <span>{formatPrice(template.priceMinor)}</span>
+                          </div>
+                        </button>
+                        <Link
+                          className={styles.templateFullPreview}
+                          href={`/preview?template=${encodeURIComponent(template.id)}&draft=${encodeURIComponent(invitation.id)}`}
+                          onClick={() => {
+                            try {
+                              sessionStorage.setItem(
+                                `taklifnoma:full-preview:v1:${invitation.id}`,
+                                JSON.stringify(
+                                  switchTemplate(invitation, template.id),
+                                ),
+                              );
+                            } catch {
+                              // The full preview can recover the last saved browser draft.
+                            }
+                          }}
+                        >
+                          <Eye size={15} /> To‘liq ko‘rish
+                        </Link>
+                      </div>
+                    ))}
                 </div>
-              </details>
-              {invitation.gallery.map((image, index) => (
-                <div className={styles.galleryRow} key={image.id}>
-                  <div
-                    className={styles.imageThumb}
-                    style={{
-                      backgroundImage: `url(${JSON.stringify(image.url)})`,
+                {!compatibleTemplates.some(
+                  (template) =>
+                    activeCategoryFilter === "all" ||
+                    template.categoryIds.includes(activeCategoryFilter),
+                ) && (
+                  <div className={styles.categoryEmpty}>
+                    <LayoutTemplate size={24} />
+                    <p>Hozircha tanlash uchun dizayn yo‘q.</p>
+                    <small>
+                      Qoralamangiz saqlanadi va keyin dizayn tanlashingiz
+                      mumkin.
+                    </small>
+                  </div>
+                )}
+                {identityLocked && (
+                  <p className={styles.help}>
+                    Nashr qilingan taklifnomada dizaynni almashtirish hozircha
+                    mavjud emas.
+                  </p>
+                )}
+                {selectedTemplate ? (
+                  <div className={styles.priceNote}>
+                    <span>Tanlangan dizayn</span>
+                    <strong>{selectedTemplate.name}</strong>
+                    <b>{formatPrice(selectedTemplate.priceMinor)}</b>
+                    <small>
+                      Hozirgi bosqichda nashr qilish uchun to‘lov talab
+                      qilinmaydi.
+                    </small>
+                  </div>
+                ) : (
+                  <div className={styles.priceNote}>
+                    <span>Dizayn narxi</span>
+                    <strong>Hozircha belgilanmagan</strong>
+                    <small>Dizayn tanlanganidan keyin narx ko‘rsatiladi.</small>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {section === 3 && (
+              <div className={styles.form}>
+                <div className={styles.groupHeader}>
+                  <h2>
+                    <ImagePlus size={20} />
+                    Xotiralaringiz
+                  </h2>
+                  <span className={styles.optional}>Ixtiyoriy</span>
+                </div>
+                <p className={styles.help}>
+                  O‘zingiz uchun qadrli rasmlarni qo‘shing. Dizayn o‘zgarsa ham
+                  ular saqlanadi.
+                </p>
+                <label className={styles.uploadBox}>
+                  <ImagePlus size={25} />
+                  <strong>{uploading ? "Yuklanmoqda…" : "Rasm yuklash"}</strong>
+                  <span>JPG, PNG yoki WebP · 15 MB gacha</span>
+                  <input
+                    type="file"
+                    accept="image/jpeg,image/png,image/webp"
+                    disabled={uploading || invitation.gallery.length >= 50}
+                    onChange={(event) => {
+                      const file = event.target.files?.[0];
+                      if (file) void upload(file, "image");
+                      event.target.value = "";
                     }}
-                    role="img"
-                    aria-label={image.alt || `Rasm ${index + 1}`}
                   />
-                  <Field label={`Rasm ${index + 1} izohi`}>
+                </label>
+                <details className={styles.details}>
+                  <summary>Mavjud rasm havolasi orqali qo‘shish</summary>
+                  <div className={styles.linkInput}>
                     <input
-                      value={image.caption}
-                      maxLength={300}
-                      onChange={(event) =>
+                      aria-label="Rasm havolasi"
+                      type="url"
+                      value={imageUrl}
+                      onChange={(event) => setImageUrl(event.target.value)}
+                      placeholder="https://…"
+                    />
+                    <button
+                      onClick={() => {
+                        if (!/^https?:\/\//i.test(imageUrl)) {
+                          setError("To‘liq https:// rasm havolasini kiriting.");
+                          return;
+                        }
+                        if (invitation.gallery.length >= 50) return;
                         update({
-                          gallery: invitation.gallery.map((item) =>
-                            item.id === image.id
-                              ? {
-                                  ...item,
-                                  caption: event.target.value,
-                                  alt: event.target.value,
-                                }
-                              : item,
+                          gallery: [
+                            ...invitation.gallery,
+                            {
+                              id: crypto.randomUUID(),
+                              url: imageUrl,
+                              alt: "",
+                              caption: "",
+                            },
+                          ],
+                        });
+                        setImageUrl("");
+                      }}
+                    >
+                      <Plus size={17} />
+                      Qo‘shish
+                    </button>
+                  </div>
+                </details>
+                {invitation.gallery.map((image, index) => (
+                  <div className={styles.galleryRow} key={image.id}>
+                    <div
+                      className={styles.imageThumb}
+                      style={{
+                        backgroundImage: `url(${JSON.stringify(image.url)})`,
+                      }}
+                      role="img"
+                      aria-label={image.alt || `Rasm ${index + 1}`}
+                    />
+                    <Field label={`Rasm ${index + 1} izohi`}>
+                      <input
+                        value={image.caption}
+                        maxLength={300}
+                        onChange={(event) =>
+                          update({
+                            gallery: invitation.gallery.map((item) =>
+                              item.id === image.id
+                                ? {
+                                    ...item,
+                                    caption: event.target.value,
+                                    alt: event.target.value,
+                                  }
+                                : item,
+                            ),
+                          })
+                        }
+                      />
+                    </Field>
+                    <button
+                      className={styles.iconButton}
+                      aria-label="Rasmni olib tashlash"
+                      onClick={() =>
+                        update({
+                          gallery: invitation.gallery.filter(
+                            (item) => item.id !== image.id,
                           ),
                         })
                       }
-                    />
-                  </Field>
-                  <button
-                    className={styles.iconButton}
-                    aria-label="Rasmni olib tashlash"
-                    onClick={() =>
-                      update({
-                        gallery: invitation.gallery.filter(
-                          (item) => item.id !== image.id,
-                        ),
-                      })
-                    }
-                  >
-                    <Trash2 size={16} />
-                  </button>
-                </div>
-              ))}
-              <div className={styles.divider} />
-              <Toggle
-                title="Fon musiqasi"
-                description="Mehmon taklifnomani ochganda musiqa tinglashi mumkin."
-                checked={invitation.music.enabled}
-                onChange={(enabled) =>
-                  update({ music: { ...invitation.music, enabled } })
-                }
-              />
-              {invitation.music.enabled && (
-                <div className={styles.optionBody}>
-                  <Field label="Musiqa kutubxonasi">
-                    <SoftSelect
-                      label="Musiqa kutubxonasi"
-                      value={
-                        savedMusic.find((item) =>
-                          invitation.music.assetId
-                            ? item.assetId === invitation.music.assetId
-                            : item.url === invitation.music.url,
-                        )?.id ?? ""
-                      }
-                      disabled={musicLibraryLoading || savedMusic.length === 0}
-                      placeholder={
-                        musicLibraryLoading
-                          ? placeholders.musicLoading
-                          : savedMusic.length
-                            ? placeholders.chooseMusic
-                            : placeholders.noMusic
-                      }
-                      options={savedMusic.map((track) => ({
-                        value: track.id,
-                        label: track.filename,
-                      }))}
-                      onChange={(value) => {
-                        const track = savedMusic.find(
-                          (item) => item.id === value,
-                        );
-                        if (!track) return;
-                        setAudioPreview("");
-                        setAudioName("");
-                        update({
-                          music: {
-                            enabled: true,
-                            assetId: track.assetId,
-                            url: track.url,
-                            filename: track.filename,
-                          },
-                        });
-                      }}
-                    />
-                  </Field>
-                  <p className={styles.help}>
-                    Kutubxonadagi tayyor musiqani tanlang yoki o‘zingiznikini
-                    yuklang.
-                  </p>
-                  <label className={styles.audioUpload}>
-                    <Music2 size={20} />
-                    <span>
-                      {uploading ? "Yuklanmoqda…" : "Yangi musiqa yuklang"}
-                      <small>Audio fayl · 15 MB gacha</small>
-                    </span>
-                    <input
-                      type="file"
-                      accept="audio/mpeg,audio/wav,audio/mp4,audio/x-m4a"
-                      disabled={uploading}
-                      onChange={(event) => {
-                        const file = event.target.files?.[0];
-                        if (file) void upload(file, "audio");
-                        event.target.value = "";
-                      }}
-                    />
-                  </label>
-                  {(audioPreview || invitation.music.url) && (
-                    <>
-                      <p className={styles.help}>
-                        {audioPreview
-                          ? `${audioName} — faqat shu oynadagi sinov, hali yuklanmagan.`
-                          : invitation.music.filename}
-                      </p>
-                      <audio
-                        controls
-                        preload="none"
-                        src={audioPreview || invitation.music.url}
-                        className={styles.audio}
-                      />
-                      <button
-                        className={styles.textButton}
-                        onClick={() => {
-                          update({
-                            music: {
-                              ...invitation.music,
-                              assetId: null,
-                              url: "",
-                              filename: "",
-                            },
-                          });
+                    >
+                      <Trash2 size={16} />
+                    </button>
+                  </div>
+                ))}
+                <div className={styles.divider} />
+                <Toggle
+                  title="Fon musiqasi"
+                  description="Mehmon taklifnomani ochganda musiqa tinglashi mumkin."
+                  checked={invitation.music.enabled}
+                  onChange={(enabled) =>
+                    update({ music: { ...invitation.music, enabled } })
+                  }
+                />
+                {invitation.music.enabled && (
+                  <div className={styles.optionBody}>
+                    <Field label="Musiqa kutubxonasi">
+                      <SoftSelect
+                        label="Musiqa kutubxonasi"
+                        value={
+                          savedMusic.find((item) =>
+                            invitation.music.assetId
+                              ? item.assetId === invitation.music.assetId
+                              : item.url === invitation.music.url,
+                          )?.id ?? ""
+                        }
+                        disabled={
+                          musicLibraryLoading || savedMusic.length === 0
+                        }
+                        placeholder={
+                          musicLibraryLoading
+                            ? placeholders.musicLoading
+                            : savedMusic.length
+                              ? placeholders.chooseMusic
+                              : placeholders.noMusic
+                        }
+                        options={savedMusic.map((track) => ({
+                          value: track.id,
+                          label: track.filename,
+                        }))}
+                        onChange={(value) => {
+                          const track = savedMusic.find(
+                            (item) => item.id === value,
+                          );
+                          if (!track) return;
                           setAudioPreview("");
                           setAudioName("");
+                          update({
+                            music: {
+                              enabled: true,
+                              assetId: track.assetId,
+                              url: track.url,
+                              filename: track.filename,
+                            },
+                          });
                         }}
-                      >
-                        <Trash2 size={14} />
-                        Musiqani olib tashlash
-                      </button>
-                    </>
-                  )}
-                  <p className={styles.help}>
-                    Musiqa qo‘shish majburiy emas. Mehmon uni o‘zi bosib
-                    tinglaydi.
+                      />
+                    </Field>
+                    <p className={styles.help}>
+                      Kutubxonadagi tayyor musiqani tanlang yoki o‘zingiznikini
+                      yuklang.
+                    </p>
+                    <label className={styles.audioUpload}>
+                      <Music2 size={20} />
+                      <span>
+                        {uploading ? "Yuklanmoqda…" : "Yangi musiqa yuklang"}
+                        <small>Audio fayl · 15 MB gacha</small>
+                      </span>
+                      <input
+                        type="file"
+                        accept="audio/mpeg,audio/wav,audio/mp4,audio/x-m4a"
+                        disabled={uploading}
+                        onChange={(event) => {
+                          const file = event.target.files?.[0];
+                          if (file) void upload(file, "audio");
+                          event.target.value = "";
+                        }}
+                      />
+                    </label>
+                    {(audioPreview || invitation.music.url) && (
+                      <>
+                        <p className={styles.help}>
+                          {audioPreview
+                            ? `${audioName} — faqat shu oynadagi sinov, hali yuklanmagan.`
+                            : invitation.music.filename}
+                        </p>
+                        <audio
+                          controls
+                          preload="none"
+                          src={audioPreview || invitation.music.url}
+                          className={styles.audio}
+                        />
+                        <button
+                          className={styles.textButton}
+                          onClick={() => {
+                            update({
+                              music: {
+                                ...invitation.music,
+                                assetId: null,
+                                url: "",
+                                filename: "",
+                              },
+                            });
+                            setAudioPreview("");
+                            setAudioName("");
+                          }}
+                        >
+                          <Trash2 size={14} />
+                          Musiqani olib tashlash
+                        </button>
+                      </>
+                    )}
+                    <p className={styles.help}>
+                      Musiqa qo‘shish majburiy emas. Mehmon uni o‘zi bosib
+                      tinglaydi.
+                    </p>
+                  </div>
+                )}
+                <div className={styles.divider} />
+                <Toggle
+                  title="To‘yona kartasi"
+                  description="Istasangiz, mehmonlar uchun karta ma’lumotlarini ko‘rsating."
+                  checked={invitation.gift.enabled}
+                  onChange={(enabled) =>
+                    update({
+                      gift: {
+                        ...invitation.gift,
+                        enabled,
+                        receiptUploadEnabled:
+                          enabled && invitation.gift.receiptUploadEnabled,
+                      },
+                    })
+                  }
+                />
+                {invitation.gift.enabled && (
+                  <div className={styles.optionBody}>
+                    <Field label="Karta raqami">
+                      <input
+                        inputMode="numeric"
+                        value={invitation.gift.cardNumber}
+                        maxLength={30}
+                        onChange={(event) =>
+                          update({
+                            gift: {
+                              ...invitation.gift,
+                              cardNumber: event.target.value,
+                            },
+                          })
+                        }
+                      />
+                    </Field>
+                    <Field label="Karta egasining ismi">
+                      <input
+                        value={invitation.gift.cardHolder}
+                        maxLength={300}
+                        onChange={(event) =>
+                          update({
+                            gift: {
+                              ...invitation.gift,
+                              cardHolder: event.target.value,
+                            },
+                          })
+                        }
+                      />
+                    </Field>
+                    <Toggle
+                      title="Chek yuborishga ruxsat"
+                      description="Chek faqat sizga ko‘rinadi. AI tekshiruvi yo‘q; pul tushganini o‘zingiz tekshirasiz."
+                      checked={invitation.gift.receiptUploadEnabled}
+                      onChange={(receiptUploadEnabled) =>
+                        update({
+                          gift: { ...invitation.gift, receiptUploadEnabled },
+                        })
+                      }
+                    />
+                  </div>
+                )}
+                <div className={styles.divider} />
+                <Toggle
+                  title="Qatnashishni tasdiqlash"
+                  description="Mehmonlar kelishini oldindan bildirsin."
+                  checked={invitation.rsvp.enabled}
+                  onChange={(enabled) =>
+                    update({ rsvp: { ...invitation.rsvp, enabled } })
+                  }
+                />
+                {invitation.rsvp.enabled && (
+                  <div className={`${styles.optionBody} ${styles.twoColumns}`}>
+                    <Field label="Javob berish muddati">
+                      <input
+                        type="date"
+                        value={invitation.rsvp.deadline}
+                        onChange={(event) =>
+                          update({
+                            rsvp: {
+                              ...invitation.rsvp,
+                              deadline: event.target.value,
+                            },
+                          })
+                        }
+                      />
+                    </Field>
+                    <Field label="Bir javobdagi mehmonlar soni">
+                      <input
+                        type="number"
+                        min={1}
+                        max={100}
+                        value={invitation.rsvp.maxPartySize}
+                        onChange={(event) =>
+                          update({
+                            rsvp: {
+                              ...invitation.rsvp,
+                              maxPartySize: Math.min(
+                                100,
+                                Math.max(1, Number(event.target.value) || 1),
+                              ),
+                            },
+                          })
+                        }
+                      />
+                    </Field>
+                  </div>
+                )}
+                <div className={styles.divider} />
+                <Toggle
+                  title="Mehmonlar tilaklari"
+                  description="Tilaklar faqat siz tasdiqlaganingizdan keyin ko‘rinadi."
+                  checked={invitation.wishes.enabled}
+                  onChange={(enabled) =>
+                    update({ wishes: { ...invitation.wishes, enabled } })
+                  }
+                />
+                <div className={styles.divider} />
+                <div className={styles.groupHeader}>
+                  <h2>Bog‘lanish</h2>
+                </div>
+                <div className={styles.twoColumns}>
+                  <Field label="Telefon raqami">
+                    <input
+                      type="tel"
+                      autoComplete="tel"
+                      inputMode="tel"
+                      value={invitation.contacts.phoneNumber}
+                      maxLength={300}
+                      placeholder="+998 90 123 45 67"
+                      onChange={(event) =>
+                        update({
+                          contacts: {
+                            ...invitation.contacts,
+                            phoneNumber: event.target.value,
+                          },
+                        })
+                      }
+                    />
+                  </Field>
+                  <Field label="Telegram username">
+                    <input
+                      type="text"
+                      autoComplete="username"
+                      value={invitation.contacts.telegramUsername}
+                      maxLength={300}
+                      placeholder="@username"
+                      onChange={(event) =>
+                        update({
+                          contacts: {
+                            ...invitation.contacts,
+                            telegramUsername: event.target.value,
+                          },
+                        })
+                      }
+                    />
+                  </Field>
+                </div>
+              </div>
+            )}
+            <div className={styles.exportDraft}>
+              <button className={styles.textButton} onClick={exportDraft}>
+                Qoralamani yuklab olish
+              </button>
+            </div>
+            {invitation.status === "draft" && (
+              <section className={styles.publishPanel}>
+                <div>
+                  <span>MEHMONLARGA ULASHISH</span>
+                  <h2>Tayyor bo‘ldimi?</h2>
+                  <p>
+                    Hozir nashr qilish bepul. Nashrdan so‘ng ismlar, mezbon,
+                    tadbir turi, sana va dizayn qulflanadi. Matn, manzil va
+                    boshqa tafsilotlarni tadbir kuni tugaguncha yangilashingiz
+                    mumkin.
                   </p>
                 </div>
-              )}
-              <div className={styles.divider} />
-              <Toggle
-                title="To‘yona kartasi"
-                description="Istasangiz, mehmonlar uchun karta ma’lumotlarini ko‘rsating."
-                checked={invitation.gift.enabled}
-                onChange={(enabled) =>
-                  update({
-                    gift: {
-                      ...invitation.gift,
-                      enabled,
-                      receiptUploadEnabled:
-                        enabled && invitation.gift.receiptUploadEnabled,
-                    },
-                  })
-                }
-              />
-              {invitation.gift.enabled && (
-                <div className={styles.optionBody}>
-                  <Field label="Karta raqami">
-                    <input
-                      inputMode="numeric"
-                      value={invitation.gift.cardNumber}
-                      maxLength={30}
-                      onChange={(event) =>
-                        update({
-                          gift: {
-                            ...invitation.gift,
-                            cardNumber: event.target.value,
-                          },
-                        })
-                      }
-                    />
-                  </Field>
-                  <Field label="Karta egasining ismi">
-                    <input
-                      value={invitation.gift.cardHolder}
-                      maxLength={300}
-                      onChange={(event) =>
-                        update({
-                          gift: {
-                            ...invitation.gift,
-                            cardHolder: event.target.value,
-                          },
-                        })
-                      }
-                    />
-                  </Field>
-                  <Toggle
-                    title="Chek yuborishga ruxsat"
-                    description="Mehmonlar pul o‘tkazmasi chekini yuborishi mumkin."
-                    checked={invitation.gift.receiptUploadEnabled}
-                    onChange={(receiptUploadEnabled) =>
-                      update({
-                        gift: { ...invitation.gift, receiptUploadEnabled },
-                      })
-                    }
-                  />
-                </div>
-              )}
-              <div className={styles.divider} />
-              <Toggle
-                title="Qatnashishni tasdiqlash"
-                description="Mehmonlar kelishini oldindan bildirsin."
-                checked={invitation.rsvp.enabled}
-                onChange={(enabled) =>
-                  update({ rsvp: { ...invitation.rsvp, enabled } })
-                }
-              />
-              {invitation.rsvp.enabled && (
-                <div className={`${styles.optionBody} ${styles.twoColumns}`}>
-                  <Field label="Javob berish muddati">
-                    <input
-                      type="date"
-                      value={invitation.rsvp.deadline}
-                      onChange={(event) =>
-                        update({
-                          rsvp: {
-                            ...invitation.rsvp,
-                            deadline: event.target.value,
-                          },
-                        })
-                      }
-                    />
-                  </Field>
-                  <Field label="Bir javobdagi mehmonlar soni">
-                    <input
-                      type="number"
-                      min={1}
-                      max={100}
-                      value={invitation.rsvp.maxPartySize}
-                      onChange={(event) =>
-                        update({
-                          rsvp: {
-                            ...invitation.rsvp,
-                            maxPartySize: Math.min(
-                              100,
-                              Math.max(1, Number(event.target.value) || 1),
-                            ),
-                          },
-                        })
-                      }
-                    />
-                  </Field>
-                </div>
-              )}
-              <div className={styles.divider} />
-              <Toggle
-                title="Mehmonlar tilaklari"
-                description="Tilaklar faqat siz tasdiqlaganingizdan keyin ko‘rinadi."
-                checked={invitation.wishes.enabled}
-                onChange={(enabled) =>
-                  update({ wishes: { ...invitation.wishes, enabled } })
-                }
-              />
-              <div className={styles.divider} />
-              <div className={styles.groupHeader}>
-                <h2>Bog‘lanish</h2>
-              </div>
-              <div className={styles.twoColumns}>
-                <Field label="Telefon raqami">
-                  <input
-                    type="tel"
-                    autoComplete="tel"
-                    inputMode="tel"
-                    value={invitation.contacts.phoneNumber}
-                    maxLength={300}
-                    placeholder="+998 90 123 45 67"
-                    onChange={(event) =>
-                      update({
-                        contacts: {
-                          ...invitation.contacts,
-                          phoneNumber: event.target.value,
-                        },
-                      })
-                    }
-                  />
-                </Field>
-                <Field label="Telegram username">
-                  <input
-                    type="text"
-                    autoComplete="username"
-                    value={invitation.contacts.telegramUsername}
-                    maxLength={300}
-                    placeholder="@username"
-                    onChange={(event) =>
-                      update({
-                        contacts: {
-                          ...invitation.contacts,
-                          telegramUsername: event.target.value,
-                        },
-                      })
-                    }
-                  />
-                </Field>
-              </div>
-            </div>
-          )}
-          <div className={styles.exportDraft}>
-            <button className={styles.textButton} onClick={exportDraft}>
-              Qoralamani yuklab olish
-            </button>
-          </div>
-          <footer className={styles.editorFooter}>
-            <button
-              className={styles.secondaryButton}
-              onClick={() => setSection(Math.max(0, section - 1))}
-              disabled={section === 0}
-            >
-              <ArrowLeft size={16} />
-              Orqaga
-            </button>
-            {section < 3 ? (
-              <button
-                className={styles.saveButton}
-                onClick={() => setSection(section + 1)}
-              >
-                Davom etish
-                <ChevronRight size={16} />
-              </button>
-            ) : (
-              <button
-                className={styles.saveButton}
-                onClick={cloudSave}
-                disabled={busy}
-              >
-                <Save size={16} />
-                Saqlash
-              </button>
+                <button
+                  type="button"
+                  className={styles.saveButton}
+                  onClick={() => void saveOrPublish("publish")}
+                  disabled={busy || uploading || !!auth}
+                >
+                  <Send size={16} />
+                  {publishing ? "Nashr qilinmoqda…" : "Nashr qilish"}
+                </button>
+              </section>
             )}
-          </footer>
+            <footer className={styles.editorFooter}>
+              <button
+                className={styles.secondaryButton}
+                onClick={() => goToSection(Math.max(0, section - 1))}
+                disabled={section === 0}
+              >
+                <ArrowLeft size={16} />
+                Orqaga
+              </button>
+              {section < 3 ? (
+                <button
+                  className={styles.saveButton}
+                  onClick={() => goToSection(section + 1)}
+                >
+                  Davom etish
+                  <ChevronRight size={16} />
+                </button>
+              ) : (
+                <button
+                  className={styles.saveButton}
+                  onClick={cloudSave}
+                  disabled={busy || uploading || !!auth}
+                >
+                  <Save size={16} />
+                  Saqlash
+                </button>
+              )}
+            </footer>
+          </fieldset>
         </main>
         <aside
           className={`${styles.previewPanel} ${!mobilePreview ? styles.previewMobileHidden : ""}`}
           aria-label="Taklifnoma ko‘rinishi"
         >
           <div className={styles.previewHeading}>
-            <span>
-              <Smartphone size={16} />
-              Jonli ko‘rinish
+            <div className={styles.previewTitle}>
+              <span>
+                <span className={styles.statusDot} /> Jonli ko‘rinish
+              </span>
+              <strong>
+                {selectedTemplate?.name ?? "Sizning taklifnomangiz"}
+              </strong>
+            </div>
+            <span className={styles.previewLocale}>
+              {LANGUAGE_NAMES[locale]}
             </span>
-            <span>{LANGUAGE_NAMES[locale]}</span>
             {invitation.templateId &&
               (invitation.templateId === "anor" ||
                 isMarxabaTemplate(invitation.templateId)) && (
@@ -2381,22 +2632,54 @@ export function Studio({
               <X size={20} />
             </button>
             <span className={styles.telegramIcon}>
-              <Send size={28} />
+              {authIdentity ? <CheckCircle2 size={28} /> : <Send size={28} />}
             </span>
-            <h2 id="auth-title">Taklifnomani o‘z hisobingizga saqlang</h2>
-            <p>
-              Telegram orqali kiring. Kiritgan ma’lumotlaringiz shu yerda
-              qoladi.
-            </p>
+            <h2 id="auth-title">
+              {authIdentity
+                ? "Hisobingiz tasdiqlandi"
+                : pendingAction.current === "publish"
+                  ? "Nashr qilish uchun hisobingizga kiring"
+                  : "Taklifnomani o‘z hisobingizga saqlang"}
+            </h2>
+            {!authIdentity && (
+              <p>
+                Telegram orqali kiring. Kiritgan ma’lumotlaringiz shu yerda
+                qoladi.
+              </p>
+            )}
+            {authIdentity && (
+              <div className={styles.authAccount}>
+                <span>
+                  {authIdentity.displayName
+                    .trim()
+                    .charAt(0)
+                    .toLocaleUpperCase() || "T"}
+                </span>
+                <div>
+                  <small>Tasdiqlangan Telegram hisobi</small>
+                  <strong>{authIdentity.displayName}</strong>
+                </div>
+                <CheckCircle2 size={19} />
+              </div>
+            )}
             <p role="status">{authStatus}</p>
             {authIdentity ? (
               <button
                 className={styles.saveButton}
                 onClick={completeLogin}
                 disabled={busy}
+                data-auth-complete
               >
-                <Check size={17} />
-                {authIdentity.displayName} sifatida saqlash
+                {busy ? (
+                  <LoaderCircle size={17} className={styles.spinner} />
+                ) : (
+                  <Check size={17} />
+                )}
+                {busy
+                  ? "Yakunlanmoqda…"
+                  : pendingAction.current === "publish"
+                    ? "Nashr qilishni yakunlash"
+                    : "Saqlashni yakunlash"}
               </button>
             ) : (
               <a

@@ -50,26 +50,32 @@ export function TemplateGallery({
           >
             Barchasi <span>{templates.length}</span>
           </button>
-          {categories.map((category) => (
-            <button
-              type="button"
-              key={category.id}
-              aria-pressed={categoryId === category.id}
-              className={
-                categoryId === category.id ? styles.selectedFilter : ""
-              }
-              onClick={() => setCategoryId(category.id)}
-            >
-              {category.name}
-              <span>
-                {
-                  templates.filter((template) =>
-                    template.categoryIds.includes(category.id),
-                  ).length
+          {categories
+            .filter((category) =>
+              templates.some((template) =>
+                template.categoryIds.includes(category.id),
+              ),
+            )
+            .map((category) => (
+              <button
+                type="button"
+                key={category.id}
+                aria-pressed={categoryId === category.id}
+                className={
+                  categoryId === category.id ? styles.selectedFilter : ""
                 }
-              </span>
-            </button>
-          ))}
+                onClick={() => setCategoryId(category.id)}
+              >
+                {category.name}
+                <span>
+                  {
+                    templates.filter((template) =>
+                      template.categoryIds.includes(category.id),
+                    ).length
+                  }
+                </span>
+              </button>
+            ))}
         </div>
       )}
       {visibleTemplates.length === 0 ? (
@@ -86,11 +92,17 @@ export function TemplateGallery({
                 <Link
                   className={styles.templateArt}
                   href={previewUrl}
-                  aria-label={`${template.name}: to‘liq ko‘rinishini ochish`}
+                  aria-label={`${template.name}: to‘liq ko‘rinishini ochish${template.published ? `, ${formatPrice(template.priceMinor)}` : ""}`}
                   style={{
                     backgroundImage: `url(${template.previewImage?.startsWith("/") ? template.previewImage : `/templates/${template.id}/${template.previewImage ?? "stage.webp"}`})`,
                   }}
-                />
+                >
+                  {template.published && (
+                    <span className={styles.cardPrice}>
+                      {formatPrice(template.priceMinor)}
+                    </span>
+                  )}
+                </Link>
                 <div className={styles.templateInfo}>
                   <span>
                     {categories
@@ -101,9 +113,13 @@ export function TemplateGallery({
                       .join(" · ")}
                   </span>
                   <h3>{template.name}</h3>
-                  <p>{template.description}</p>
-                  <span>
-                    Mos keladi:{" "}
+                  <p
+                    className={styles.templateDescription}
+                    title={template.description}
+                  >
+                    {template.description}
+                  </p>
+                  <span className={styles.eventTypes}>
                     {template.supportedEventTypes
                       .map(
                         (id) =>
@@ -113,9 +129,7 @@ export function TemplateGallery({
                       )
                       .join(", ")}
                   </span>
-                  {template.published ? (
-                    <strong>{formatPrice(template.priceMinor)}</strong>
-                  ) : (
+                  {!template.published && (
                     <span className={styles.previewOnlyLabel}>
                       Faqat ko‘rib chiqish uchun
                     </span>

@@ -5,6 +5,19 @@ import {
   type TemplateCategory,
 } from "@taklifnoma/contracts";
 import { getDb } from "@taklifnoma/database";
+
+/** Anonymous aggregate only; never expose creator details or draft counts. */
+export async function getPublishedInvitationCount(): Promise<number | null> {
+  if (!process.env.DATABASE_URL) return null;
+  try {
+    const [row] =
+      await getDb()`SELECT count(*)::int AS total FROM invitations WHERE status='published'`;
+    return Number(row.total);
+  } catch {
+    return null;
+  }
+}
+
 export async function getCatalog(includeUnpublished = false): Promise<{
   templates: TemplateDefinition[];
   categories: TemplateCategory[];

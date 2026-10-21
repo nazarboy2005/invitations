@@ -7,6 +7,7 @@ import { eventInstant, eventWallDate, formatDate } from "../date-format";
 import styles from "./template.module.css";
 import { CATALOG_PREVIEW_MUSIC } from "@/modules/catalog/catalog-music";
 import { getTemplatePreviewWishes } from "@/modules/catalog/preview-sample";
+import { useInvitationExtras } from "../use-invitation-extras";
 
 type Props = {
   invitation: Invitation;
@@ -350,10 +351,18 @@ export function AnorInvitation({
 }: Props) {
   const frame = useRef<HTMLIFrameElement>(null);
   const [frameLocale, setFrameLocale] = useState(locale);
-  const [loadedLocale, setLoadedLocale] = useState<Locale | null>(null);
   const data = useMemo(
     () => makeLegacyData(invitation, frameLocale, guestName, sampleWishes),
     [invitation, frameLocale, guestName, sampleWishes],
+  );
+  const sendExtras = useInvitationExtras(
+    frame,
+    invitation,
+    data,
+    frameLocale,
+    invitationId,
+    guestToken,
+    preview,
   );
   const rendererData = useMemo(
     () =>
@@ -394,11 +403,14 @@ export function AnorInvitation({
   useEffect(() => setFrameLocale(locale), [locale]);
 
   const sendData = useCallback(() => {
-    if (loadedLocale !== frameLocale) return;
     frame.current?.contentWindow?.postMessage(payload, window.location.origin);
-  }, [frameLocale, loadedLocale, payload]);
+    sendExtras();
+  }, [payload, sendExtras]);
 
   useEffect(() => {
+    // On public SSR pages the iframe can load before hydration attaches onLoad.
+    // Sending on mount also initializes that already-loaded frame. If it is
+    // still loading, onLoad below delivers the same current authored content.
     sendData();
   }, [sendData]);
 
@@ -412,7 +424,6 @@ export function AnorInvitation({
         return;
       const next = event.data.locale as Locale;
       if (invitation.enabledLocales.includes(next)) {
-        setLoadedLocale(null);
         setFrameLocale(next);
       }
     };
@@ -435,7 +446,7 @@ export function AnorInvitation({
         ref={frame}
         title={`${data.title || data.eventType} invitation`}
         src={`/templates/anor/source/index.html?locale=${encodeURIComponent(frameLocale)}`}
-        onLoad={() => setLoadedLocale(frameLocale)}
+        onLoad={sendData}
         allow="autoplay; fullscreen"
         loading="eager"
       />

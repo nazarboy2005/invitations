@@ -371,7 +371,7 @@
   async function postJson(path, payload) {
     const response = await fetch(path, { method: "POST", credentials: "same-origin", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) });
     const body = await response.json().catch(() => ({}));
-    if (!response.ok) throw new Error(body.message || body.error || localized[config.locale].error);
+    if (!response.ok) throw new Error(body.error?.message || body.message || localized[config.locale].error);
     return body;
   }
 

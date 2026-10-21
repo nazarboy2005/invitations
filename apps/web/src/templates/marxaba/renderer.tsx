@@ -5,6 +5,7 @@ import type { Invitation, Locale } from "@taklifnoma/contracts";
 import { makeLegacyData } from "@/templates/anor/renderer";
 import styles from "./renderer.module.css";
 import { CATALOG_PREVIEW_MUSIC } from "@/modules/catalog/catalog-music";
+import { useInvitationExtras } from "../use-invitation-extras";
 
 type Props = {
   invitation: Invitation;
@@ -48,6 +49,15 @@ export function MarxabaInvitation({
   const sourceData = useMemo(
     () => makeLegacyData(invitation, frameLocale, guestName, sampleWishes),
     [invitation, frameLocale, guestName, sampleWishes],
+  );
+  const sendExtras = useInvitationExtras(
+    frame,
+    invitation,
+    sourceData,
+    frameLocale,
+    invitationId,
+    guestToken,
+    preview,
   );
   const enabledLanguages = invitation.enabledLocales.map(
     (item) => sourceLocale[item],
@@ -204,6 +214,7 @@ export function MarxabaInvitation({
         title={`${sourceData.title || sourceData.eventType} invitation`}
         src={initialFrameUrl.current}
         onLoad={() => {
+          sendExtras();
           frame.current?.contentWindow?.postMessage(
             { type: "marxaba:update", payload: latestMessage.current },
             window.location.origin,

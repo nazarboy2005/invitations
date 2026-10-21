@@ -1,86 +1,10 @@
 .dashboard {
-  min-height: 100vh;
+  --font-display: var(--font-home-display), Georgia, serif;
+  --font-body: var(--font-home-body), Arial, sans-serif;
+  font-family: var(--font-body);
+  min-height: calc(100vh - 96px);
   background: var(--bg);
   color: var(--ink);
-}
-.topbar {
-  height: 85px;
-  padding: 0 max(28px, calc((100vw - 1250px) / 2));
-  border-bottom: 1px solid var(--line);
-  background: var(--surface);
-  display: flex;
-  align-items: center;
-  gap: 60px;
-}
-.brand {
-  display: flex;
-  align-items: center;
-  font-size: 24px;
-  font-weight: 600;
-  letter-spacing: -1px;
-  color: var(--ink);
-  text-decoration: none;
-  white-space: nowrap;
-}
-.brand > span:first-child {
-  display: grid;
-  place-items: center;
-  color: var(--primary);
-  width: 35px;
-  height: 35px;
-  margin-right: 10px;
-  border: 1px solid #dac9b3;
-  border-radius: 9px 9px 18px 9px;
-}
-.brandDot {
-  color: var(--accent);
-}
-.topbar nav {
-  display: flex;
-  gap: 30px;
-  align-items: center;
-  height: 100%;
-}
-.topbar nav a {
-  height: 100%;
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  font-size: 12px;
-  text-decoration: none;
-  color: var(--muted);
-  border-bottom: 2px solid transparent;
-  padding-top: 2px;
-  box-sizing: border-box;
-  white-space: nowrap;
-}
-.topbar nav a[aria-current] {
-  color: var(--primary);
-  border-color: var(--primary);
-  font-weight: 600;
-}
-.profile {
-  display: flex;
-  gap: 8px;
-  font-size: 11px;
-  align-items: center;
-  margin-left: auto;
-  max-width: 180px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-.profile > span {
-  display: grid;
-  place-items: center;
-  flex-shrink: 0;
-  width: 31px;
-  height: 31px;
-  background: #f0e6d9;
-  color: var(--primary);
-  border: 3px solid #faf6ee;
-  border-radius: 50%;
-  font-size: 11px;
 }
 .main {
   max-width: 1250px;
@@ -113,7 +37,7 @@
 }
 .primaryButton {
   background: var(--primary);
-  color: #fff;
+  color: var(--surface);
   border: 0;
   border-radius: 7px;
   min-height: 44px;
@@ -130,14 +54,14 @@
   box-sizing: border-box;
 }
 .primaryButton:hover {
-  background: #755a40;
+  background: var(--primary-hover);
 }
 .accountNotice {
   display: flex;
   gap: 17px;
   align-items: center;
-  background: #f3ebdd;
-  border: 1px solid #e9ddcc;
+  background: var(--accent-soft);
+  border: 1px solid var(--line-strong);
   border-radius: 9px;
   padding: 23px 25px;
   margin-bottom: 36px;
@@ -217,7 +141,7 @@
 .listToolbar button > span {
   border-radius: 4px;
   padding: 1px 5px;
-  background: #ede3d4;
+  background: var(--accent-soft);
   color: var(--primary);
   font-size: 9px;
 }
@@ -232,81 +156,79 @@
 .cardGrid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 22px;
+  gap: 16px;
 }
 .invitationCard {
+  display: grid;
+  grid-template-columns: 132px minmax(0, 1fr);
   border: 1px solid var(--line);
-  border-radius: 10px;
+  border-radius: 14px;
   overflow: hidden;
   background: var(--surface);
   min-width: 0;
+  box-shadow: 0 4px 18px #6d572a06;
 }
 .cardArt {
-  min-height: 220px;
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  text-align: center;
-  padding: 38px 20px 26px;
-  box-sizing: border-box;
+  min-height: 235px;
   overflow: hidden;
-  background: #f4eee4;
-  color: #695b4c;
+  background: var(--surface-soft);
+  border-right: 1px solid var(--line);
+}
+.cardArt:focus-visible {
+  outline-offset: -4px !important;
 }
 .cardStatus {
-  position: absolute;
-  top: 12px;
-  left: 12px;
+  align-self: flex-start;
   font-size: 9px;
-  background: #ffffffed;
-  border-radius: 4px;
-  color: #745d43;
-  padding: 6px 8px;
-  z-index: 1;
+  line-height: 1.4;
+  background: var(--surface-soft);
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  color: var(--muted);
+  padding: 4px 6px;
 }
-.cardArt > div {
-  position: relative;
-  z-index: 1;
-}
-.cardArt > div > span {
-  font-size: 9px;
-}
-.cardArt h3 {
-  font-family: var(--font-display);
-  font-size: 29px;
-  line-height: 1.25;
-  font-weight: 400;
-  margin: 12px 0;
-  overflow-wrap: anywhere;
-}
-.cardArt p {
-  font-size: 9px;
-  line-height: 1.6;
-  max-width: 230px;
-  margin: 0 auto;
-}
-.cardArt > svg {
-  margin-top: 17px;
+.cardStatus[data-published="true"] {
+  background: var(--accent-soft);
+  border-color: var(--line-strong);
+  color: var(--primary);
 }
 .noTemplateLabel {
-  position: relative;
-  margin-top: 14px;
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
   color: var(--muted);
+  text-align: center;
+  padding: 14px;
   font-size: 11px;
 }
 .cardBody {
-  padding: 19px 20px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  min-width: 0;
+  padding: 15px 13px 12px;
+}
+.invitationName {
+  font-family: var(--font-display);
+  font-size: 24px;
+  line-height: 1.05;
+  font-weight: 500;
+  overflow-wrap: anywhere;
+  margin: 1px 0 0;
 }
 .cardName {
   display: flex;
-  justify-content: space-between;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 10px;
+  gap: 5px 8px;
 }
 .cardName strong {
-  font-size: 14px;
+  font-size: 10px;
   font-weight: 600;
 }
 .cardName > span {
@@ -317,35 +239,51 @@
   display: flex;
   align-items: center;
   gap: 6px;
-  font-size: 11px;
+  font-size: 10px;
   color: var(--muted);
-  margin: 12px 0 22px;
+  line-height: 1.5;
+  margin: 0;
+}
+.cardDate svg {
+  flex-shrink: 0;
+}
+.activityLink {
+  color: var(--primary);
+  font-size: 10px;
+  line-height: 1.6;
+  padding-block: 3px;
+}
+.activityLink:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 .cardActions {
+  margin-top: auto;
   border-top: 1px solid var(--line);
-  padding-top: 14px;
+  padding-top: 10px;
   display: flex;
-  justify-content: space-between;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 8px;
+  gap: 7px;
 }
 .cardActions > span {
-  font-size: 9px;
+  font-size: 8px;
   color: var(--muted);
 }
 .cardActions > a {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 5px;
   font-size: 11px;
-  font-weight: 500;
+  font-weight: 600;
   color: var(--primary);
-  text-decoration: none;
+  min-height: 28px;
+  margin-left: auto;
 }
 .empty {
   grid-column: 1/-1;
   background: var(--surface);
-  border: 1px dashed #ded0be;
+  border: 1px dashed var(--line-strong);
   border-radius: 10px;
   padding: 49px 25px;
   text-align: center;
@@ -369,7 +307,7 @@
   bottom: 5px;
   width: 25px;
   height: 25px;
-  background: #efe3d0;
+  background: var(--accent-soft);
   border: 3px solid white;
   border-radius: 50%;
 }
@@ -397,14 +335,14 @@
   padding-top: 0;
 }
 .guide {
-  background: #f0e6d6;
+  background: var(--accent-soft);
   border-radius: 10px 10px 42px 10px;
   padding: 25px 24px 29px;
   color: var(--primary);
 }
 .guideIcon {
   display: inline-flex;
-  border: 1px solid #d5c4ad;
+  border: 1px solid var(--line-strong);
   border-radius: 50%;
   width: 35px;
   height: 35px;
@@ -423,7 +361,7 @@
   font-size: 11px;
   line-height: 1.9;
   max-width: 190px;
-  color: #82705c;
+  color: var(--muted);
   margin-bottom: 21px;
 }
 .guide > a {
@@ -528,8 +466,8 @@
 }
 .confirmation {
   padding: 20px;
-  background: #fff6e6;
-  border: 1px solid #e5d3ae;
+  background: #fbf5e7;
+  border: 1px solid var(--line-strong);
   border-radius: 7px;
   margin-bottom: 24px;
   display: flex;
@@ -548,7 +486,7 @@
 }
 .confirmation a,
 .confirmation button {
-  border: 1px solid #cdb88f;
+  border: 1px solid var(--accent);
   border-radius: 5px;
   padding: 8px 10px;
   background: var(--surface);
@@ -568,17 +506,11 @@
   }
 }
 @media (max-width: 1050px) {
-  .topbar {
-    gap: 35px;
-  }
-  .topbar nav {
-    gap: 24px;
-  }
   .main {
     padding-top: 40px;
   }
   .contentLayout {
-    grid-template-columns: minmax(0, 1fr) 230px;
+    grid-template-columns: 1fr;
     gap: 24px;
   }
   .cardGrid {
@@ -587,40 +519,14 @@
   .guide {
     padding: 23px 20px;
   }
-  .cardArt h3 {
-    font-size: 25px;
-  }
-  .cardBody {
-    padding: 16px;
-  }
   .privateLabel {
     display: none;
   }
   .listToolbar > div {
     gap: 18px;
   }
-  .cardActions {
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-  .cardActions > a {
-    margin-left: auto;
-  }
 }
 @media (max-width: 800px) {
-  .topbar {
-    padding: 0 22px;
-    gap: 25px;
-  }
-  .topbar nav {
-    gap: 20px;
-  }
-  .brand {
-    font-size: 22px;
-  }
-  .profile {
-    max-width: 110px;
-  }
   .main {
     padding: 35px 22px;
   }
@@ -657,50 +563,8 @@
   .cardGrid {
     gap: 20px;
   }
-  .cardArt h3 {
-    font-size: 31px;
-  }
 }
 @media (max-width: 580px) {
-  .topbar {
-    height: 73px;
-    padding: 0 17px;
-    gap: 16px;
-    flex-wrap: wrap;
-  }
-  .brand {
-    font-size: 21px;
-  }
-  .brand > span:first-child {
-    width: 29px;
-    height: 29px;
-    border-radius: 7px 7px 14px 7px;
-    margin-right: 7px;
-  }
-  .topbar nav {
-    margin-left: auto;
-    gap: 16px;
-  }
-  .topbar nav a {
-    font-size: 10px;
-  }
-  .topbar nav a svg {
-    display: none;
-  }
-  .topbar nav a:first-child {
-    display: none;
-  }
-  .profile {
-    font-size: 0;
-    margin-left: 0;
-    max-width: 31px;
-    gap: 0;
-  }
-  .profile > span {
-    width: 27px;
-    height: 27px;
-    font-size: 10px;
-  }
   .main {
     padding: 30px 18px;
   }
@@ -759,36 +623,6 @@
   }
   .cardGrid {
     grid-template-columns: 1fr;
-  }
-  .cardArt {
-    min-height: 235px;
-  }
-  .cardArt h3 {
-    font-size: 34px;
-  }
-  .cardArt > div > span {
-    font-size: 10px;
-  }
-  .cardArt p {
-    font-size: 10px;
-  }
-  .cardBody {
-    padding: 21px;
-  }
-  .cardName strong {
-    font-size: 15px;
-  }
-  .cardName > span {
-    font-size: 10px;
-  }
-  .cardDate {
-    font-size: 12px;
-  }
-  .cardActions > span {
-    font-size: 10px;
-  }
-  .cardActions > a {
-    font-size: 12px;
   }
   .empty {
     padding: 39px 21px;
@@ -923,7 +757,7 @@
 .device strong > span {
   font-size: 9px;
   color: var(--primary);
-  background: #f4ecdf;
+  background: var(--accent-soft);
   border-radius: 4px;
   padding: 3px 5px;
 }
@@ -944,7 +778,7 @@
 }
 .logoutConfirm {
   padding: 15px;
-  background: #fff6e6;
+  background: #fbf5e7;
   border-radius: 6px;
   font-size: 11px;
   line-height: 1.8;
@@ -963,7 +797,7 @@
 }
 @media (max-width: 1050px) {
   .sessions {
-    max-width: calc(100% - 254px);
+    max-width: none;
   }
 }
 @media (max-width: 800px) {
@@ -998,5 +832,39 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 8px;
+  }
+}
+
+@media (max-width: 390px) {
+  .invitationCard {
+    grid-template-columns: 110px minmax(0, 1fr);
+  }
+  .invitationName {
+    font-size: 22px;
+  }
+  .cardBody {
+    padding-inline: 11px;
+  }
+}
+
+@media (min-width: 801px) and (max-width: 1050px) {
+  .helpSidebar {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .guide {
+    grid-row: 1 / 3;
+  }
+  .tip {
+    padding: 6px 0;
+  }
+  .helpFooter {
+    display: none;
+  }
+}
+@media (max-width: 650px) {
+  .cardGrid {
+    grid-template-columns: 1fr;
   }
 }

@@ -7,6 +7,7 @@ import {
 import { assertCreatorCanEdit } from "@taklifnoma/contracts/policies";
 import { ApiError } from "./api";
 import { getSessionUser } from "./auth";
+import { assertPublicMedia, assertPublishable } from "./publication";
 export async function authenticatedUser(): Promise<SessionUser> {
   const user = await getSessionUser();
   if (!user)
@@ -21,10 +22,15 @@ export async function getOwnedInvitation(
     await getDb()`SELECT data FROM invitations WHERE id=${id} AND owner_id=${userId}`;
   return rows[0] ? invitationSchema.parse(rows[0].data) : null;
 }
-export async function listInvitations(userId: string): Promise<Invitation[]> {
+export async function listInvitations(
+  userId: string,
+): Promise<Array<Invitation & { createdAt: string }>> {
   const rows =
-    await getDb()`SELECT data FROM invitations WHERE owner_id=${userId} ORDER BY updated_at DESC LIMIT 100`;
-  return rows.map((row) => invitationSchema.parse(row.data));
+    await getDb()`SELECT data,created_at FROM invitations WHERE owner_id=${userId} ORDER BY created_at DESC,id DESC LIMIT 100`;
+  return rows.map((row) => ({
+    ...invitationSchema.parse(row.data),
+    createdAt: new Date(row.created_at).toISOString(),
+  }));
 }
 export async function saveInvitation(
   invitation: Invitation,
@@ -76,7 +82,15 @@ export async function saveInvitation(
           "Bu o‘zgarish uchun administrator tasdig‘i kerak.",
         );
       }
-      saved = { ...invitation, revision: previous.revision + 1 };
+      if (rows[0].status === "published") {
+        assertPublishable(invitation);
+        await assertPublicMedia(tx, invitation, user.id);
+      }
+      saved = {
+        ...invitation,
+        slug: rows[0].slug ?? previous.slug,
+        revision: previous.revision + 1,
+      };
       await tx`UPDATE invitations SET data=${tx.json(saved)},template_id=${invitation.templateId || null},updated_at=now() WHERE id=${invitation.id} AND owner_id=${user.id}`;
     } else {
       if (invitation.status !== "draft")
@@ -85,7 +99,8 @@ export async function saveInvitation(
           "DRAFT_REQUIRED",
           "Yangi taklifnoma draft sifatida saqlanadi.",
         );
-      await tx`INSERT INTO invitations(id,owner_id,template_id,status,data) VALUES(${invitation.id},${user.id},${invitation.templateId || null},'draft',${tx.json(invitation)})`;
+      saved = { ...invitation, slug: undefined };
+      await tx`INSERT INTO invitations(id,owner_id,template_id,status,data) VALUES(${invitation.id},${user.id},${invitation.templateId || null},'draft',${tx.json(saved)})`;
     }
   });
   return saved;
