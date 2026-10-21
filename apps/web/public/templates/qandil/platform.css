@@ -1,4 +1,89 @@
-/* Qandil source has a gift-note slot; the shared invitation contract has none. */
+/* Qandil source has gift-note and bank-name slots; neither is in the shared contract. */
+/* The captured fixed backdrop extends beyond the viewport; clip that decoration
+   at the document edge so narrow screens do not gain a horizontal scrollbar. */
+html,
+body {
+  overflow-x: clip;
+}
+
 #toyona .gift__note:empty {
   display: none;
+}
+
+#toyona .gift__bank:empty {
+  display: none;
+}
+
+/* No approved venue-photo field: retain the frame for a live map or creator photo,
+   and collapse the generic icon when neither is available. */
+#venue .venue__photo.has-missing-photo,
+#venue .venue__photo:has(img.is-map):not(.has-venue-map) {
+  display: none;
+}
+
+/* The shared bridge renders the calendar as divs; the captured styles target a table. */
+.calendar {
+  display: flex;
+  width: 100%;
+  min-width: 0;
+  flex-direction: column;
+  gap: 7px;
+  line-height: 1.2;
+}
+
+.calendar-top {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: 7px;
+  color: #d8d0c5;
+  letter-spacing: 0.04em;
+}
+
+.calendar-year {
+  color: #c6a66f;
+  font-variant-numeric: tabular-nums;
+}
+
+.calendar-weekdays,
+.calendar-days {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  justify-items: center;
+  align-items: center;
+  text-align: center;
+}
+
+.calendar-weekdays {
+  color: #c6a66f;
+  font-size: 10px;
+}
+
+.calendar-weekdays span {
+  width: 100%;
+  min-width: 0;
+  white-space: nowrap;
+}
+
+.calendar-days {
+  row-gap: 3px;
+}
+
+.calendar-day {
+  display: grid;
+  width: 24px;
+  height: 24px;
+  place-items: center;
+  color: #d8d0c5;
+  font-variant-numeric: tabular-nums;
+}
+
+.calendar-day.is-empty {
+  visibility: hidden;
+}
+
+.calendar-day.is-event {
+  border-radius: 50%;
+  background: var(--amber);
+  color: #231a1c;
 }

@@ -140,8 +140,8 @@ test("Qandil catalog artwork has fixture and source-render provenance checksums"
   const digest = (value: Buffer) =>
     createHash("sha256").update(value).digest("hex");
   const preview = readFileSync(new URL("preview.webp", templateRoot));
-  const fixtureBytes = readFileSync(fixturePath);
-  const fixture = JSON.parse(fixtureBytes.toString("utf8"));
+  const fixtureText = readFileSync(fixturePath, "utf8");
+  const fixture = JSON.parse(fixtureText);
 
   assert.equal(provenance.artifact, "preview.webp");
   assert.match(
@@ -149,7 +149,11 @@ test("Qandil catalog artwork has fixture and source-render provenance checksums"
     /preview:\s*"preview\.webp"/,
   );
   assert.equal(provenance.artifactSha256, digest(preview));
-  assert.equal(provenance.fixtureSha256, digest(fixtureBytes));
+  assert.equal(
+    provenance.fixtureSha256,
+    digest(Buffer.from(fixtureText.replace(/\r\n/g, "\n"))),
+    "fixture provenance must match the normalized shared preview fixture",
+  );
   assert.equal(
     provenance.sourceCapture,
     "Invitations - this folder will be removed from production/Marxaba/Nikoh/templates/qandil",
@@ -251,6 +255,25 @@ test("Qandil static copy localizes and its typed wrapper fixes the source templa
   assert.match(
     readFileSync(new URL("platform.css", templateRoot), "utf8"),
     /#toyona \.gift__note:empty\s*\{\s*display:\s*none;/,
+  );
+  assert.match(
+    readFileSync(new URL("platform.css", templateRoot), "utf8"),
+    /#toyona \.gift__bank:empty\s*\{\s*display:\s*none;/,
+    "unsupported empty bank-name slot must not leave a blank line on the gift card",
+  );
+  assert.match(
+    readFileSync(new URL("platform.css", templateRoot), "utf8"),
+    /html\s*,\s*body\s*\{\s*overflow-x:\s*clip;/,
+    "the fixed decorative backdrop must not create horizontal page overflow",
+  );
+  const sharedRuntime = readFileSync(
+    new URL("../shared/nikoh/core.js", templateRoot),
+    "utf8",
+  );
+  assert.match(
+    sharedRuntime,
+    /controlRegion=track\.closest\('\[data-section="gallery"\]'\)\|\|region/,
+    "gallery arrows outside the scroll track must bind from their containing section",
   );
 
   const cyrillicDocument = { title };
@@ -369,4 +392,51 @@ test("Qandil uses the shared four-locale preview data for all supported sections
   assert.match(html, /data-slot="toyona\.cardHolder"/);
   assert.match(html, /data-slot="toyona\.note"/);
   assert.match(html, /data-slot="toyona\.bank"/);
+});
+
+test("Qandil styles the shared generated calendar as a spaced seven-column calendar", () => {
+  const css = readFileSync(new URL("platform.css", templateRoot), "utf8");
+  assert.match(css, /\.calendar-top\s*\{[^}]*display:\s*flex;[^}]*gap:\s*7px;/s);
+  assert.match(css, /\.calendar-weekdays,\s*\.calendar-days\s*\{[^}]*display:\s*grid;[^}]*grid-template-columns:\s*repeat\(7,\s*minmax\(0,\s*1fr\)\);/s);
+  assert.match(css, /\.calendar-day\.is-event\s*\{[^}]*border-radius:\s*50%;[^}]*background:\s*var\(--amber\);/s);
+  assert.match(
+    readFileSync(new URL("../shared/nikoh/core.js", templateRoot), "utf8"),
+    /calendar-weekdays.*calendar-days/,
+    "the shared bridge calendar markup must use the classes styled above",
+  );
+});
+
+test("Qandil hides its venue-photo frame without a creator photo or working map", () => {
+  const css = readFileSync(new URL("platform.css", templateRoot), "utf8");
+  assert.match(
+    css,
+    /#venue\s+\.venue__photo\.has-missing-photo\s*,\s*#venue\s+\.venue__photo:has\(img\.is-map\):not\(\.has-venue-map\)\s*\{\s*display:\s*none;/,
+    "the source placeholder should not appear when venue coordinates or photo are missing",
+  );
+});
+
+test("Qandil refits its captured SVG names when the platform payload arrives after source initialization", () => {
+  const html = readFileSync(new URL("index.html", templateRoot), "utf8");
+  const sourceScript = html.indexOf('src="template.js"');
+  const adapterScript = html.indexOf('src="platform-names.js"');
+  assert.ok(adapterScript >= 0 && adapterScript < sourceScript);
+
+  const adapter = readFileSync(new URL("platform-names.js", templateRoot), "utf8");
+  assert.match(adapter, /new MutationObserver\(scheduleFit\)/);
+  assert.match(adapter, /document\.fonts\.load/);
+  assert.match(adapter, /name\.getBBox\(\)\.width/);
+  assert.match(adapter, /width > 330/);
+  assert.match(adapter, /setAttribute\("textLength", "330"\)/);
+  assert.match(adapter, /setAttribute\("lengthAdjust", "spacingAndGlyphs"\)/);
+});
+
+test("Qandil is registered as published with matching event support", () => {
+  const registry = readFileSync(new URL("../packages/contracts/src/index.ts", import.meta.url), "utf8");
+  const registration = registry.match(/id: "qandil",[\s\S]*?published: (true|false),/);
+  assert.equal(registration?.[1], "true");
+  const migration = readFileSync(new URL("../packages/database/migrations/0049_publish_qandil.sql", import.meta.url), "utf8");
+  assert.match(migration, /VALUES \('qandil', 'Qandil', 15000000, 'UZS', true\)/);
+  assert.match(migration, /'qandil', 'fotiha'/);
+  assert.match(migration, /'qandil', 'qiz-uzatish'/);
+  assert.match(migration, /VALUES \('qandil', 'wedding'\)/);
 });

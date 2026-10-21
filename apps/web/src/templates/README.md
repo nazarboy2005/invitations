@@ -9,9 +9,11 @@ locale, opening, preview-content, program, and RSVP checks. Qog‘oz Turna is
 published at 150,000 UZS after its source, preview artwork, four-locale,
 opening, and invitation-section checks. Their additive migrations are
 `0022`–`0027`.
-External deployment and cloud-service
-verification remain pending; do not treat documented service limitations as
-completed integrations. Uchar Gilam is explicitly skipped by the user and
+Qandil is now published in the catalog at 150,000 UZS after source, preview,
+four-locale, responsive, gallery, venue, RSVP, and release checks. Its additive
+publication migration is `0049_publish_qandil.sql`. External application
+deployment and cloud-service verification remain pending; do not treat
+documented service limitations as completed integrations. Uchar Gilam is explicitly skipped by the user and
 must remain unpublished.
 
 Keep every future template in its own renderer, styles, assets, and motion

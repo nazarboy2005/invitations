@@ -5,7 +5,7 @@
   "renderedFrom": "index.html opening screen using the packaged Qandil template source",
   "previewRoute": "/preview?template=qandil&qaSilent=1",
   "fixture": "apps/web/src/modules/catalog/preview-sample.json",
-  "fixtureSha256": "4faa5157eb048e2d1ce4a47ae0ac4c45e8edcadc1debf9ece1287380ce7333e9",
+  "fixtureSha256": "cbb9acd109bae0b7840745c6023c8b99af837981c882b3ea75a40de4dc72bda9",
   "locale": "uz-Latn",
   "viewport": {
     "width": 720,
