@@ -4,7 +4,7 @@ Anor is the first Marxaba reference renderer. The next ten Marxaba nikoh
 references are also authorized for production integration and are tracked in
 `docs/templates/TEMPLATE_ROADMAP.md`. Anor and the ten-template batch remain
 unpublished and unselectable until their own documented completeness,
-integration, rights, and quality gates pass. Do not treat documented service
+integration and quality gates pass. Do not treat documented service
 limitations as completed integrations.
 
 Keep every future template in its own renderer, styles, assets, and motion
@@ -42,9 +42,7 @@ substituting an arbitrary crop of its opening-stage artwork. Anor's metadata
 points to `preview.webp`; that exact asset is packaged separately under
 `apps/web/public/templates/anor/preview.webp` because it was absent from the
 local capture. Show the first-page image at its full portrait ratio in the
-public catalog and creator template picker. Confirm upstream asset rights
-before commercial release.
-The reference requests Cormorant Garamond (400/500/600 normal and 400/500
+public catalog and creator template picker. The reference requests Cormorant Garamond (400/500/600 normal and 400/500
 italic) and Great Vibes. Serve those exact Google Fonts files locally with
 matching `@font-face` declarations so rendering does not depend on a third-party
 font request or silently fall back to system fonts.

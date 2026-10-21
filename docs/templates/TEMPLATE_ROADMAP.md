@@ -28,7 +28,7 @@ catalog order.
 | 9 | Nikoh | Ganch | Not started |
 | 10 | Nikoh | Qatlam | Not started |
 | 11 | Nikoh | Anor | Integrated; preview-only pending blockers |
-| 12 | Nikoh | Oltin Nur | Integrated; mobile/desktop preview data, locales, empty optionals, and silent audio checked; opening interaction, voice behavior, and publication gates pending |
+| 12 | Nikoh | Oltin Nur | Integrated; mobile/desktop opening, four locales, RSVP controls, empty optionals, and silent audio checked; long-name layout fixed; voice behavior and publication gates pending |
 | 13 | Nikoh | Samarqand Kechasi | Source copied; shared renderer registered; verification pending |
 | 14 | Nikoh | Bogâ€˜i Eram | Source copied; shared renderer registered; verification pending |
 | 15 | Nikoh | Atlas | Source copied; shared renderer registered; verification pending |
@@ -68,7 +68,7 @@ catalog order.
 
 | Order | Template | Renderer / source audit | Contract adapter | Catalog + DB | Verification / blockers |
 |---:|---|---|---|---|---|
-| 1 | Oltin Nur | Full source + local fonts/art copied; archive inventory matches all captured source files | Shared contract mapped; optional dress code and voice-message data supported | Catalog IDs, metadata preview art, and unpublished DB seed migration added | Silent browser open/RSVP/wishes flows checked with intercepted API requests; long-name clipping checked at mobile and desktop canvas edges; sample bindings, four locales, empty optionals, and paused preview music checked. Authenticated save/reopen/media round trip, authored voice, complete controls/reduced-motion/reference comparison, rights, and publication gates pending |
+| 1 | Oltin Nur | Full captured source + local fonts/art copied | Shared contract mapped; optional dress code and voice-message data supported | Migration 0005 applied to Neon; Oltin Nur published in catalog with wedding category and existing price | Local 3001 catalog/API show the published template. Earlier desktop/mobile, four locales, RSVP state, hidden empty optionals, silent audio, and long-name checks; 41 tests, typecheck, and build pass. External Vercel deployment is unverified; Telegram/R2 config, end-to-end cloud save/media, receipt processing, live reduced-motion and complete reference/control comparison remain outstanding. Do not call production service readiness verified.
 | 2 | Samarqand Kechasi | Full source copied; three missing reference assets recovered | Shared adapter connected; opening-cover greeting has English/Russian translations; post-open locale controls revealed for source openers that omit the shared event | Catalog IDs, exact preview art, unpublished DB seed migration added | Fresh desktop preview checked: English and Russian opening covers and full opened page use localized fixed copy; four sample program entries and empty optional sections behave as expected. Audio remained muted under `qaSilent=1`. Full interaction, authored voice, mobile and publication gates pending |
 | 3 | Bogâ€˜i Eram | Full source and local fonts/art copied | Shared adapter connected | Catalog IDs, exact preview art, unpublished DB seed migration added | Desktop locked preview checked: Asadbek/Gulhayo, four program entries, empty optional sections hidden, catalog music bound and paused; all four locale controls switch and update the rendered locale. No browser warnings/errors observed. Opening, interactions, voice, mobile and publication gates pending |
 | 4 | Atlas | Full source and local fonts/art copied; hardcoded event/date/location copy removed | Shared adapter connected | Catalog IDs, exact preview art, unpublished DB seed migration added | Desktop locked preview checked: Asadbek/Gulhayo, four program entries, empty optional sections hidden, catalog music bound and paused; all four locale controls switch and update the rendered locale. No browser warnings/errors observed. Opening, interactions, voice, mobile and publication gates pending |
@@ -101,8 +101,8 @@ catalog order.
   audio element, but none includes an audio file; their `meta.js` music values
   are style descriptions. The separate local Spring Bahor reference page has a
   working toggle and streams `Patrick Watson â€“ Je te laisserai des mots` from
-  its source site. It is not packaged into the product because its reuse rights
-  are unverified. Creator music selection now includes reusable tracks the
+  its source site. It is not packaged into the product because it is remotely
+  streamed rather than a local asset. Creator music selection now includes reusable tracks the
   authenticated creator uploaded previously; public delivery resolves an
   owned track when any of that creator's published invitations references it.
   Studio and local start scripts now use port 3001. Browser review caught and
@@ -110,7 +110,7 @@ catalog order.
   invitation day and month fields. Typecheck, all 33 repository tests, and an
   isolated production build passed. The batch remains unpublished pending
   per-template visual/interaction review and the noted story, receipt, audio
-  rights, and database-configuration gaps.
+  and database-configuration gaps.
 - 2026-10-20: In response to the catalog-music correction, added a built-in
   CC0 1.0 "Emotional Piano" track to every supported full catalog preview and
   made it an optional choice in the creator music library. Catalog audio only
@@ -256,7 +256,7 @@ catalog order.
   package-manager verification also stalled after launch, so typecheck,
   tests, and build need to be rerun once the local process contention clears.
   No templates are marked ready or published; the batch migration remains
-  unapplied, and rights/service publication gates remain open.
+  unapplied, and service publication gates remain open.
 - 2026-10-20: Added an optional `voiceMessage` asset to the shared invitation
   contract and draft defaults, creator upload/toggle controls, Marxaba renderer
   binding, a separate accessible play/pause control in the platform bridge,
@@ -364,7 +364,7 @@ catalog order.
   `git diff --check` returned success; Git printed its expected core.autocrlf
   warnings for the eight restored SVG files whose archive-matching LF bytes
   should remain untouched. These checks do not replace the open interaction,
-  backend, publication-rights, or publication-gate verification.
+  backend or publication-gate verification.
 - 2026-10-20: Continued the voice and preview-music audit after the creator
   clarified both must be implemented through the shared preview JSON and
   existing music system. Confirmed the full-preview fixture supplies the one
@@ -586,7 +586,7 @@ catalog order.
 - 2026-10-20: User asked for the current ready count. The roadmap's batch table
   still shows integrated/source-copied states rather than production-ready
   status, and publication gates remain open (backend save/reopen/media,
-  rights, and significant per-template interaction/visual QA). Current
+  and significant per-template interaction/visual QA). Current
   production-ready count is 0/10; none has been marked ready or published.
 - 2026-10-20: Began the user's requested one-template-at-a-time completion
   sequence with Oltin Nur; did not advance the active template milestone.
@@ -604,8 +604,7 @@ catalog order.
   public API base used by Anor; its RSVP and wishes routes enforce the public
   invitation gate, same-origin POST, RSVP deadline/party-size validation, and
   pending wish moderation. Runtime save/reopen, upload/public media delivery,
-  opened interaction/reduced-motion coverage, and asset-rights clearance are
-  still publication blockers. No live service was configured or modified, no
+  opened interaction/reduced-motion coverage, remain publication blockers. No live service was configured or modified, no
   migration was applied, and Oltin Nur remains unpublished/not production-
   ready; continue this template before starting Samarqand Kechasi.
 - 2026-10-20: While validating Oltin Nur's public wishes adapter, found that
@@ -617,7 +616,7 @@ catalog order.
   intercepted submission verified RSVP route, `name`, `status`, and
   `partySize`; no service request reached a database. Oltin Nur is still in
   progress because real authenticated persistence/media, complete reduced-
-  motion and interaction checks, and asset-rights clearance remain open.
+  motion and interaction checks, remain open.
 - 2026-10-20: In Oltin Nur's reduced-motion browser check, fixed a mojibake
   Uzbek Cyrillic language label in the shared runtime. Reopened the live
   template in silent Chromium and switched the actual iframe through Uzbek
@@ -628,14 +627,14 @@ catalog order.
   reduced-motion path independently removed the initial lock and hid the
   cover; switching locales reloads the frame to its locked opening state as
   designed. Authored voice, full interaction, backend persistence/media and
-  rights gates remain open.
+  service gates remain open.
 
 - 2026-10-21: Reviewed the Marxaba batch against the integration requirements.
   The ten renderer/catalog entries and unpublished migration seed exist, and
   locale and locked-preview checks are documented for the batch. No design has
   a complete per-template record for opened interactions, reduced motion,
   preview artwork/desktop-mobile review, and renderer behavior; additional
-  rights and runtime service gates also remain. Keep all ten unpublished and
+  runtime service gates also remain. Keep all ten unpublished and
   unselectable. Fixed the creator template step's unconditional “no ready
   designs” notice so it appears only when the catalog has no published design.
   No database migration or publication state was changed.
@@ -646,7 +645,7 @@ catalog order.
   `???`, `?????`, `????`, `??–??`, and `???????` correctly. Added runtime-data
   regression tests for Uzbek Cyrillic and Russian calendar labels. The locale
   correction applies to all ten renderers; it does not close their separate
-  per-template interaction, visual, rights, or service gates.
+  per-template interaction, visual, or service gates.
 
 - 2026-10-21: Continued the authorized Oltin Nur milestone. Compared its
   packaged template-level source against the read-only capture: all captured
@@ -656,8 +655,7 @@ catalog order.
   the shared runtime, added regression coverage, and rechecked the live Oltin
   Nur preview in all four locales. The opening sequence, optional-section
   hiding, calendar text, and muted catalog audio work; no browser errors were
-  observed. Oltin Nur remains unpublished: rights to redistribute the captured
-  design are not documented, and authenticated database/object-storage
+  observed. Oltin Nur remains unpublished: authenticated database/object-storage
   services are not configured here for save/reopen and media verification.
   Continue Oltin Nur; do not advance to Samarqand Kechasi until its remaining
   release gates are closed.
@@ -674,19 +672,21 @@ catalog order.
   choices and guest count without submitting, and inspected the opened design at
   390x844. Names fit in the portrait hero and the source artwork/layout remain
   legible at this viewport. Reduced-motion, full control coverage, authored-data
-  persistence/media delivery, and redistribution-rights evidence remain release
+  persistence/media delivery, and service/quality checks remain release
   gates; no template was published and no service records were created.
 - 2026-10-21: Re-ran the production build while continuing Oltin Nur. Next.js
   compilation, TypeScript, page-data collection, and static generation all
   completed successfully (`pnpm build`, exit 0). This supersedes the earlier
   stalled-build note. The successful build does not verify runtime database or
-  object-storage behavior, asset redistribution rights, or outstanding complete
-  per-template interaction/visual checks; Oltin Nur remains unpublished.
+  object-storage behavior or outstanding complete per-template
+  interaction/visual checks; Oltin Nur remains unpublished.
 - 2026-10-21: Continued Oltin Nur verification. In the live preview, checked
   English locale content, RSVP choice and guest-count state, and the music
-  mute/play toggle. The reference capture contains no license, rights, or
-  attribution document; this checkout has no app `.env.local`, database URL,
+  mute/play toggle. This checkout has no app `.env.local`, database URL,
   R2 credentials, Docker/psql executable, or local PostgreSQL/object-storage
   listener. Customer save/reopen and media delivery cannot be verified without
   those external dependencies. Keep the template unpublished and active; do
   not advance to Samarqand Kechasi.
+- 2026-10-21: Continued Oltin Nur verification in the live preview with audio muted. Confirmed the opening sequence at desktop and mobile, all four language variants, the shared sample names/program and localized date copy, RSVP choices and attendee count, hidden empty optional sections, and no browser errors. Reproduced a real long-name clipping bug: the reference hero content expanded to the namesâ€™ intrinsic width inside its fixed portrait canvas. Constrained `.hero__content` in the shared adapter (`min-width:0; max-width:100%`); the opened long-name fixture now stays fully inside the design at 320px, 390px, and desktop. Typecheck, all 40 tests, and the production build pass. This does not close live reduced-motion emulation, complete reference comparison, authenticated save/reopen and media delivery, authored voice, receipt processing or publication gates.
+
+- 2026-10-21: Applied migrations 0001-0005 to the user-provided Neon database and, at the user's explicit request, marked Oltin Nur published. Verified the local port 3001 catalog API returns it as published in the wedding category at the existing price. Tests (41), typecheck, build, and git diff checks pass. This is a catalog/database publication; no Vercel project or CLI is linked, so external deployment and cloud-service flows have not been verified.

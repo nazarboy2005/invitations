@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { createInvitation } from "@taklifnoma/contracts";
+import { createInvitation, invitationSchema } from "@taklifnoma/contracts";
 import {
   createLongNamePreview,
   createTemplatePreviewSample,
@@ -11,7 +11,9 @@ test("template samples are illustrative complete invitations", () => {
   const sample = createTemplatePreviewSample("anor");
   assert.deepEqual(sample.content["uz-Latn"].people, ["Asadbek", "Gulhayo"]);
   assert.deepEqual(sample.enabledLocales, ["uz-Latn", "uz-Cyrl", "en", "ru"]);
+  assert.deepEqual(sample.content["uz-Cyrl"].people, ["Асадбек", "Гулҳаё"]);
   assert.deepEqual(sample.content.en.people, ["Asadbek", "Gulhayo"]);
+  assert.deepEqual(sample.content.ru.people, ["Асадбек", "Гулхаё"]);
   assert.equal(sample.content.ru.greeting, "Ассалому алейкум, дорогой гость!");
   assert.equal(sample.content["uz-Cyrl"].eventLabel, "Никоҳ тўйи");
   assert.equal(sample.program.length, 4);
@@ -50,12 +52,23 @@ test("ephemeral draft previews keep the creator's selected language settings", (
 
   assert.equal(preview.defaultLocale, "ru");
   assert.deepEqual(preview.enabledLocales, ["ru", "en"]);
-  assert.equal(preview.content.ru.people[0], "Asadbek");
+  assert.equal(preview.content.ru.people[0], "Асадбек");
   assert.equal(preview.content.en.people[1], "Gulhayo");
 
   const catalogSample = createTemplatePreviewSample("sahifa");
   assert.equal(catalogSample.defaultLocale, "uz-Latn");
   assert.deepEqual(catalogSample.enabledLocales, ["uz-Latn", "uz-Cyrl", "en", "ru"]);
+});
+
+test("localized names are stored independently in each enabled language", () => {
+  const invitation = createTemplatePreviewSample("oltin-nur");
+  invitation.content.ru.people[0] = "Создатель";
+  const restored = invitationSchema.parse(JSON.parse(JSON.stringify(invitation)));
+
+  assert.deepEqual(restored.content["uz-Latn"].people, ["Asadbek", "Gulhayo"]);
+  assert.deepEqual(restored.content["uz-Cyrl"].people, ["Асадбек", "Гулҳаё"]);
+  assert.deepEqual(restored.content.en.people, ["Asadbek", "Gulhayo"]);
+  assert.deepEqual(restored.content.ru.people, ["Создатель", "Гулхаё"]);
 });
 
 test("long-name QA preview is isolated from the canonical catalog sample", () => {

@@ -13,7 +13,8 @@
     document.documentElement.classList.add("platform-lang-below-greeting");
   fitStyles.textContent = `
     .intro__content,
-    .intro__names {
+    .intro__names,
+    .hero__content {
       min-width: 0 !important;
       max-width: 100% !important;
     }
