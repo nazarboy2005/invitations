@@ -54,6 +54,7 @@ test("Suzani keeps its original markup, art, styles, and opening animation", () 
   assert.equal(normalize(body(html)), normalize(appBody));
   assert.match(html, /href="contract-adapter\.css"/);
   const adapter = readFileSync(new URL("contract-adapter.css", templateRoot), "utf8");
+  assert.match(adapter, /\.hero\s*>\s*\.hero__art\s*\{[^}]*position:\s*absolute;[^}]*z-index:\s*-1;/);
   assert.match(adapter, /\.venue__photo\.has-missing-photo:not\(\.has-venue-map\)/);
   assert.match(adapter, /\.gift__note:empty/);
   assert.match(adapter, /\.gift__details \[data-slot="toyona\.bank"\]/);

@@ -1,4 +1,9 @@
 /* The approved contract has no venue photo, gift note, or bank-name field. */
+.hero > .hero__art {
+  position: absolute;
+  z-index: -1;
+}
+
 .venue__photo.has-missing-photo:not(.has-venue-map),
 .gift__note:empty,
 .gift__details [data-slot="toyona.bank"] {
