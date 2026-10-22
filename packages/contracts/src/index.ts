@@ -831,7 +831,7 @@ export const TEMPLATES: TemplateDefinition[] = [
     priceMinor: 15000000,
     currency: "UZS",
     accent: "#c48b35",
-    published: false,
+    published: true,
   },
   {
     id: "konfetti",

@@ -122,6 +122,10 @@ const shirinBayramCompatibilityMigration = readFileSync(
   new URL("../packages/database/migrations/0068_shirin_bayram_birthday_only.sql", import.meta.url),
   "utf8",
 );
+const oltinYoshPublicationMigration = readFileSync(
+  new URL("../packages/database/migrations/0069_publish_oltin_yosh.sql", import.meta.url),
+  "utf8",
+);
 const konfettiPublicationMigration = readFileSync(
   new URL("../packages/database/migrations/0065_publish_konfetti.sql", import.meta.url),
   "utf8",
@@ -169,6 +173,7 @@ test("registered Marxaba designs reflect their release state and additive migrat
     "konfetti",
     "oltin-kuz",
     "shirin-bayram",
+    "oltin-yosh",
     "kozgu",
     "qandil",
   ]);
@@ -198,7 +203,7 @@ test("registered Marxaba designs reflect their release state and additive migrat
     "shirin-bayram": shirinBayramCompatibilityMigration,
     konfetti: konfettiPublicationMigration,
     "oltin-kuz": oltinKuzPublicationMigration,
-    "oltin-yosh": birthdayTemplatesMigration,
+    "oltin-yosh": oltinYoshPublicationMigration,
     nahor: nahorTemplatesMigration,
     "nahorgi-osh": nahorTemplatesMigration,
     hilol: hilolMigration,

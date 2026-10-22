@@ -4,3 +4,20 @@
 [data-slot="extras.age"]:empty {
   display: none;
 }
+
+.intro__copy.platform-name-fit--long {
+  padding-top: min(46vh, 350px);
+}
+
+.intro__name.platform-name-fit--long {
+  margin: 2px 0 8px;
+  font-size: clamp(40px, 9vw, 54px);
+  overflow-wrap: normal;
+  word-break: normal;
+}
+
+.hero__name.platform-name-fit--long {
+  font-size: clamp(42px, 9vw, 60px);
+  overflow-wrap: break-word;
+  word-break: normal;
+}

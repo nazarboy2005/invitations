@@ -13,6 +13,17 @@
     ['.intro__balloons','.hero__balloons','.rsvp__balloons'].forEach(selector=>{const host=$(selector);if(!host)return;host.replaceChildren();for(const digit of age){const img=document.createElement('img');img.src='art/digits/foil-digit-'+digit+'.webp';img.width=400;img.height=600;img.alt='';img.decoding='async';img.fetchPriority='high';host.append(img)}});
   }
   buildFoilDigits();
+  function fitLongNames(){
+    const value=$('.intro__name')?.textContent?.trim()||'';
+    const long=value.length>20;
+    $('.intro__copy')?.classList.toggle('platform-name-fit--long',long);
+    $('.hero')?.classList.toggle('platform-name-fit--long',long);
+  }
+  fitLongNames();
+  if(window.MutationObserver){
+    const nameObserver=new MutationObserver(fitLongNames);
+    $$('.intro__name,.hero__name').forEach(node=>nameObserver.observe(node,{childList:true,subtree:true,characterData:true}));
+  }
   let opened = false, finishing = false, dustRaf = 0, webglRaf = 0, particles = [], burstDots = [], width = 0, height = 0, dpr = 1;
   let renderer = null, scene = null, camera = null, objects = [], threeLoading = false, sceneObserver = null, digitScene = null, sceneRotation = 0, sceneLift = 0;
   const random = (a,b) => a + Math.random() * (b-a);
@@ -144,6 +155,6 @@
   }
   function celebrate(){const b=$('.rsvp__balloons');if(!b||reduce())return;rsvpConfetti();if(window.gsap)gsap.fromTo(b,{scale:1,opacity:1},{scale:1.42,opacity:0,duration:.58,ease:'power2.in'});else b.animate([{transform:'scale(1)',opacity:1},{transform:'scale(1.4)',opacity:0}],{duration:580,easing:'ease-in'})}
   window.Marhamat?.on?.('rsvp',answer=>{if(answer?.status==='yes')celebrate()});
-  window.Marhamat?.on?.('ready',()=>{localizeAttrs();setupScroll();setTimeout(()=>window.ScrollTrigger?.refresh?.(),250)});
-  window.addEventListener('load',()=>{localizeAttrs();setupScroll()},{once:true});
+  window.Marhamat?.on?.('ready',()=>{fitLongNames();localizeAttrs();setupScroll();setTimeout(()=>window.ScrollTrigger?.refresh?.(),250)});
+  window.addEventListener('load',()=>{fitLongNames();localizeAttrs();setupScroll()},{once:true});
 })();

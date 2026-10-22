@@ -108,6 +108,9 @@ test("Oltin Yosh retains its captured sections, controls, and responsive motion"
   assert.match(script, /three\.bundle\.min\.js/);
   assert.match(script, /if\(!age\)return;/);
   assert.doesNotMatch(script, /extras\?\.age\|\|'30'/);
+  assert.match(script, /function fitLongNames\(\)/);
+  assert.match(script, /value\.length>20/);
+  assert.match(script, /MutationObserver\(fitLongNames\)/);
 });
 
 test("all packaged references resolve locally and reference sample runtimes remain excluded", () => {
@@ -251,6 +254,9 @@ test("unsupported optional source-only slots are hidden by the scoped contract a
   assert.match(adapter, /#toyona \[data-slot="toyona\.note"\]:empty/);
   assert.match(adapter, /#toyona \[data-slot="toyona\.bank"\]:empty/);
   assert.match(adapter, /\[data-slot="extras\.age"\]:empty/);
+  assert.match(adapter, /\.intro__copy\.platform-name-fit--long/);
+  assert.match(adapter, /\.intro__name\.platform-name-fit--long/);
+  assert.match(adapter, /\.hero__name\.platform-name-fit--long/);
   assert.match(styles, /\.intro__age\{display:none\}/);
   assert.match(read("../../../src/templates/oltin-yosh/README.md"), /contract-adapter\.css/);
 });
@@ -310,5 +316,12 @@ test("the narrow adapter maps the first celebrant and source-only fields are doc
   for (const gap of ["extras.age", "venue.photo", "toyona.bank", "toyona.note"])
     assert.ok(notes.includes(gap), `${gap} is documented`);
   assert.match(notes, /birthday.*yubiley/s);
-  assert.match(notes, /parent catalog\/database integration/i);
+  assert.match(notes, /published at 150,000 UZS/i);
+  const migration = readFileSync(
+    new URL("../packages/database/migrations/0069_publish_oltin_yosh.sql", import.meta.url),
+    "utf8",
+  );
+  assert.match(migration, /published\s*=\s*TRUE/i);
+  assert.match(migration, /'oltin-yosh', 'birthday'/);
+  assert.match(migration, /'oltin-yosh', 'yubiley'/);
 });
