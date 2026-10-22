@@ -1,0 +1,9 @@
+# Golden Card source adaptations
+
+The archive package contains a single `preview-frame.html` file (SHA-256: `75ac0b6d0edd52500a4a24cc15ed001fa6a0230571ce461a33859703180cc888`). It is an HTML snapshot with the server-rendered template subtree, sample invitation values, utility classes, and references to shared Next.js styles. The archived snapshot is preserved byte-for-byte under `source/`. The archive does not contain standalone template JavaScript, CSS, or image assets.
+
+The package removes the captured Next runtime and sample names, date, and venue from the runnable document. It keeps the captured DOM structure, uses the original compiled Chorlove style bundles already shared by the app, and restores the page-specific Golden Card rules from the source page's loaded stylesheet. Source artwork and the available Great Vibes font are stored locally under `assets/`; the source page itself was inspected through the approved in-app browser.
+
+`bridge.js` maps the shared invitation payload to the captured greeting, title, couple, message, date/time, venue/address, map link, locale controls, and shared Emotional Piano preview track. Opening the card and the source sparkle behavior are adapted locally. A scoped column layout keeps the captured card full-size when shared Chorlove sections are appended after it. Shared Chorlove invitation extras continue to supply app-supported sections such as dress guidance. No captured Chorlove site runtime or external music service is used.
+
+The catalog image is a 335×469 crop from the canonical fixture rendering in the approved ChatGPT in-app browser at a 390px preview frame. The saved JPEG checksum, dimensions, fixture path, and browser checks are recorded in `preview.provenance.json`. The additive registration and publication migrations, four-locale persistence/public-render integration, focused source/catalog checks, typecheck, build, and browser checks passed before release.

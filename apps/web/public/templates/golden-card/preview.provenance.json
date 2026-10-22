@@ -1,0 +1,62 @@
+{
+  "templateId": "golden-card",
+  "source": {
+    "archiveFile": "Invitations - this folder will be removed from production/Chorlove/Web invitations/templates/golden-card/preview-frame.html",
+    "preservedFile": "source/preview-frame.html",
+    "sha256": "75ac0b6d0edd52500a4a24cc15ed001fa6a0230571ce461a33859703180cc888",
+    "bytes": 39134,
+    "captureType": "Next.js server-rendered HTML preview snapshot"
+  },
+  "preview": {
+    "file": "preview-browser-capture.jpg",
+    "status": "captured",
+    "requiredFixture": "apps/web/src/modules/catalog/preview-sample.json",
+    "browser": "ChatGPT in-app browser",
+    "renderedInBrowser": true,
+    "savedArtifact": true,
+    "sha256": "d43879e07c14b32fec48123445950f8b6de34d3a70e7bcdc94e81e23f6cf40b1",
+    "bytes": 40419,
+    "dimensions": "335x469",
+    "viewport": "390px iframe, cropped to canonical fixture invitation",
+    "fixture": "apps/web/src/modules/catalog/preview-sample.json"
+  },
+  "publication": "published-2026-10-22",
+  "browserVerification": {
+    "sourceAndApp": "Live source and adapted app opening/reveal states were inspected in the ChatGPT in-app browser.",
+    "mobileFrame": {
+      "width": 390,
+      "cardWidth": 335,
+      "documentScrollWidth": 390,
+      "horizontalOverflow": false
+    },
+    "reducedMotion": {
+      "previewFlag": true,
+      "templateClassApplied": true,
+      "revealAnimation": "none",
+      "coverTransition": "0s"
+    },
+    "localesChecked": [
+      "uz-Latn",
+      "uz-Cyrl",
+      "en"
+    ],
+    "consoleErrorsAndWarnings": 0
+  },
+  "publicationMigration": "0093_publish_golden_card.sql",
+  "releaseVerification": {
+    "configuredCatalog": {
+      "published": true,
+      "category": "wedding",
+      "supportedEventTypes": [
+        "wedding"
+      ]
+    },
+    "authenticatedSavePublishPublicRenderReopen": {
+      "configuredDatabase": "passed 1/1",
+      "isolatedLocalDatabase": "passed 1/1"
+    },
+    "focusedPackageChecks": "12/12",
+    "webTypecheck": "passed",
+    "productionBuild": "passed"
+  }
+}

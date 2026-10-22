@@ -928,7 +928,7 @@ The archive contains 28 captured preview snapshots. Each candidate is adapted fr
 | --- | --- | --- |
 | `cloud-castle` | Cloud Castle | Published |
 | `glass-pink` | Glass Pink | Published |
-| `golden-card` | Golden Card | Queued |
+| `golden-card` | Golden Card | Published through `0093_publish_golden_card.sql` |
 | `green-garden` | Green Garden | Queued |
 | `green-gold` | Green Gold | Queued |
 | `green-white` | Green White | Queued |
@@ -954,6 +954,8 @@ The archive contains 28 captured preview snapshots. Each candidate is adapted fr
 | `sunset` | Sunset | Queued |
 | `swan-garden` | Swan Garden | Queued |
 | `velvet-romance` | Velvet Romance | Queued |
+
+- 2026-10-22 Golden Card release: saved the approved in-app browser rendering of the canonical preview fixture as `apps/web/public/templates/golden-card/preview-browser-capture.jpg` (335x469; SHA-256 `d43879e07c14b32fec48123445950f8b6de34d3a70e7bcdc94e81e23f6cf40b1`). The original capture hash remains unchanged. Registration `0092_register_golden_card.sql` and publication `0093_publish_golden_card.sql` are applied; configured PostgreSQL and `/api/catalog` verify wedding category, wedding event support, and publication. Focused package checks pass 12/12, web typecheck and production build pass, and authenticated four-locale save/publish/public-render/reopen passes 1/1 against both the isolated local and configured databases. The approved in-app browser confirmed the canonical preview, cover opening, localized content, mobile fit, and reduced-motion behavior. The authorized Telegram release notice was delivered after verification. No external deployment was performed.
 
 - 2026-10-22 Cloud Castle release: applied additive migration `0088_publish_cloud_castle.sql`; configured PostgreSQL and the approved in-app `/api/catalog` confirm the published wedding entry at 150,000 UZS with its browser-captured preview image. The source snapshot remains unchanged; the app package keeps its original art/styles while removing captured site runtime and sample data. Mobile preview fits 319px without horizontal overflow, and the event date, countdown, calendar, shared Emotional Piano, locale switching, reduced-motion flag, gallery/story visibility, and preview-only controls were checked. Preview provenance SHA-256 is recorded. Focused checks pass 4/4, web typecheck and production build pass, and the authenticated four-locale save/publish/public-render/reopen suite passes 20/20 with test rows cleaned. The authorized Telegram notice was delivered after verification. No external deployment was performed.
 

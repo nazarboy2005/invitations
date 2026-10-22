@@ -950,6 +950,19 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
 
   {
+    id: "golden-card",
+    name: "Golden Card",
+    description: "Midnight blue and gold ornamental invitation with a folding-card reveal.",
+    previewImage: "/templates/golden-card/preview-browser-capture.jpg",
+    previewEventType: "wedding",
+    categoryIds: ["wedding"],
+    supportedEventTypes: ["wedding"],
+    priceMinor: 15000000,
+    currency: "UZS",
+    accent: "#b57729",
+    published: true,
+  },
+  {
     id: "glass-pink",
     name: "Glass Pink",
     description: "Nafis pushti gullar, nozik naqshlar va nafis taklifnoma.",
