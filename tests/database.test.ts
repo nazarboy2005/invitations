@@ -522,7 +522,7 @@ test("template migrations publish completed designs while keeping unfinished des
       ["chavandoz", true],
       ["doira", false],
       ["ganch", false],
-      ["hilol", false],
+      ["hilol", true],
       ["konfetti", true],
       ["kozgu", true],
       ["kuzgi-chinor", true],

@@ -250,10 +250,14 @@ test("the adapter remains narrow and documents source-only integration gaps", ()
     notes,
     /typed catalog and additive migration preserve that category and compatibility/i,
   );
-  assert.match(
-    notes,
-    /remains unpublished until its remaining release checks pass/i,
+  assert.match(notes, /published at 150,000 UZS/i);
+  const publication = readFileSync(
+    new URL("../packages/database/migrations/0072_publish_hilol.sql", import.meta.url),
+    "utf8",
   );
+  assert.match(publication, /published\s*=\s*true/i);
+  assert.match(publication, /'hilol', 'iftorlik'/);
+  assert.match(publication, /'hilol', 'osh'/);
 });
 
 test("Hilol keeps its captured decorative artwork byte-identical", () => {

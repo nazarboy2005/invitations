@@ -134,15 +134,12 @@ const nahorgiOshPublicationMigration = readFileSync(
   new URL("../packages/database/migrations/0071_publish_nahorgi_osh.sql", import.meta.url),
   "utf8",
 );
-const konfettiPublicationMigration = readFileSync(
-  new URL("../packages/database/migrations/0065_publish_konfetti.sql", import.meta.url),
+const hilolPublicationMigration = readFileSync(
+  new URL("../packages/database/migrations/0072_publish_hilol.sql", import.meta.url),
   "utf8",
 );
-const hilolMigration = readFileSync(
-  new URL(
-    "../packages/database/migrations/0045_add_hilol_template.sql",
-    import.meta.url,
-  ),
+const konfettiPublicationMigration = readFileSync(
+  new URL("../packages/database/migrations/0065_publish_konfetti.sql", import.meta.url),
   "utf8",
 );
 const yangiUyMigration = readFileSync(
@@ -177,6 +174,7 @@ test("registered Marxaba designs reflect their release state and additive migrat
     "oltin-yosh",
     "nahor",
     "nahorgi-osh",
+    "hilol",
     "kozgu",
     "qandil",
   ]);
@@ -209,7 +207,7 @@ test("registered Marxaba designs reflect their release state and additive migrat
     "oltin-yosh": oltinYoshPublicationMigration,
     nahor: nahorPublicationMigration,
     "nahorgi-osh": nahorgiOshPublicationMigration,
-    hilol: hilolMigration,
+    hilol: hilolPublicationMigration,
     "yangi-uy": yangiUyMigration,
   };
   for (const id of Object.keys(migrationById) as Array<
