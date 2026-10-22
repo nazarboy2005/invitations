@@ -137,6 +137,21 @@ const dispatch = readFileSync(
 );
 
 test("registered Marxaba designs reflect their release state and additive migrations", () => {
+  const published = new Set([
+    "nilufar",
+    "monogram",
+    "retro-kino",
+    "suzani",
+    "orik-guli",
+    "paxta",
+    "sahro-fonusi",
+    "lola",
+    "qiz-bazmi",
+    "shahzoda",
+    "chavandoz",
+    "kozgu",
+    "qandil",
+  ]);
   const migrationById: Record<string, string> = {
     nilufar: nilufarMigration,
     monogram: migration,
@@ -176,7 +191,7 @@ test("registered Marxaba designs reflect their release state and additive migrat
     assert.ok(definition, `${id} is registered in the shared typed catalog`);
     assert.equal(
       definition.published,
-      id === "kozgu" || id === "qandil",
+      published.has(id),
       `${id} publication state must match its completed release`,
     );
     const expectedCategories: Record<string, string[]> = {

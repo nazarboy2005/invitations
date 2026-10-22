@@ -110,19 +110,17 @@ test("Qandil runs without capture sample data or external font requests", () => 
   const preview = readFileSync(new URL("preview.webp", templateRoot));
   assert.equal(preview.toString("ascii", 0, 4), "RIFF");
   assert.equal(preview.toString("ascii", 8, 12), "WEBP");
-  assert.equal(preview.toString("ascii", 12, 16), "VP8L");
-  const width = 1 + preview[21] + ((preview[22] & 0x3f) << 8);
-  const height =
-    1 +
-    ((preview[22] >> 6) | (preview[23] << 2) | ((preview[24] & 0x0f) << 10));
+  assert.equal(preview.toString("ascii", 12, 16), "VP8 ");
+  const width = (preview[26] | (preview[27] << 8)) & 0x3fff;
+  const height = (preview[28] | (preview[29] << 8)) & 0x3fff;
   assert.deepEqual(
     [width, height],
-    [720, 1280],
-    "the source-rendered opener must preserve its portrait viewport ratio",
+    [300, 600],
+    "the captured source opening must retain its complete portrait render",
   );
 });
 
-test("Qandil catalog artwork has fixture and source-render provenance checksums", () => {
+test("Qandil catalog artwork has source-render provenance checksums", () => {
   const provenance = JSON.parse(
     readFileSync(new URL("preview.provenance.json", templateRoot), "utf8"),
   ) as {
@@ -130,19 +128,15 @@ test("Qandil catalog artwork has fixture and source-render provenance checksums"
     artifactSha256: string;
     sourceCapture: string;
     renderedFrom: string;
-    previewRoute: string;
-    fixture: string;
-    fixtureSha256: string;
     locale: string;
     viewport: { width: number; height: number; deviceScaleFactor: number };
+    artifactSize: { width: number; height: number };
+    referenceCapture: string;
     verified: string;
   };
   const digest = (value: Buffer) =>
     createHash("sha256").update(value).digest("hex");
   const preview = readFileSync(new URL("preview.webp", templateRoot));
-  const fixtureText = readFileSync(fixturePath, "utf8");
-  const fixture = JSON.parse(fixtureText);
-
   assert.equal(provenance.artifact, "preview.webp");
   assert.match(
     readFileSync(new URL("meta.js", templateRoot), "utf8"),
@@ -150,35 +144,25 @@ test("Qandil catalog artwork has fixture and source-render provenance checksums"
   );
   assert.equal(provenance.artifactSha256, digest(preview));
   assert.equal(
-    provenance.fixtureSha256,
-    digest(Buffer.from(fixtureText.replace(/\r\n/g, "\n"))),
-    "fixture provenance must match the normalized shared preview fixture",
-  );
-  assert.equal(
     provenance.sourceCapture,
     "Invitations - this folder will be removed from production/Marxaba/Nikoh/templates/qandil",
   );
   assert.equal(
     provenance.renderedFrom,
-    "index.html opening screen using the packaged Qandil template source",
+    "Original Qandil source index.html, initial #intro opening state rendered at 478x955 and resized to 300x600",
   );
-  assert.equal(provenance.previewRoute, "/preview?template=qandil&qaSilent=1");
   assert.equal(
-    provenance.fixture,
-    "apps/web/src/modules/catalog/preview-sample.json",
+    provenance.referenceCapture,
+    "Original source template rendered directly from index.html; no user-provided screenshot used",
   );
   assert.equal(provenance.locale, "uz-Latn");
   assert.deepEqual(provenance.viewport, {
-    width: 720,
-    height: 1280,
+    width: 478,
+    height: 955,
     deviceScaleFactor: 1,
   });
-  assert.deepEqual(fixture.content[provenance.locale].people, [
-    "Javohir",
-    "Madina",
-  ]);
-  assert.equal(fixture.startsAt, "2027-06-12T17:00");
-  assert.match(provenance.verified, /fresh local browser render/i);
+  assert.deepEqual(provenance.artifactSize, { width: 300, height: 600 });
+  assert.match(provenance.verified, /captured the source initial dark-room opening/i);
 
   for (const art of ["art/skyline-far.webp", "art/skyline-near.webp"]) {
     assert.notEqual(

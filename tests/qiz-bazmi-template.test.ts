@@ -81,10 +81,10 @@ test("Qiz Bazmi keeps captured body, scripts, styles, metadata, and source artwo
   assert.ok(!existsSync(new URL("sample-overrides.js", root)));
 });
 
-test("Qiz Bazmi catalog, category, event compatibility, and additive DB seed stay aligned and unpublished", () => {
+test("Qiz Bazmi catalog and release migrations stay aligned after publication", () => {
   const definition = templateById("qiz-bazmi");
   assert.ok(definition);
-  assert.equal(definition.published, false);
+  assert.equal(definition.published, true);
   assert.equal(definition.previewEventType, "qiz-uzatish");
   assert.deepEqual(definition.categoryIds, ["qiz-bazmi"]);
   assert.deepEqual(definition.supportedEventTypes, ["qiz-uzatish", "fotiha", "birthday"]);
@@ -92,6 +92,8 @@ test("Qiz Bazmi catalog, category, event compatibility, and additive DB seed sta
   assert.equal(definition.previewImage, "/templates/qiz-bazmi/preview.webp");
   const migration = readFileSync(new URL("../packages/database/migrations/0038_add_lola_qiz_bazmi_shahzoda_chavandoz.sql", import.meta.url), "utf8");
   assert.match(migration, /\('qiz-bazmi', 'Qiz Bazmi', 15000000, 'UZS', false\)/);
+  const publication = readFileSync(new URL("../packages/database/migrations/0060_publish_qiz_bazmi.sql", import.meta.url), "utf8");
+  assert.match(publication, /VALUES \('qiz-bazmi', 'Qiz Bazmi', 15000000, 'UZS', true\)/);
   assert.match(migration, /\('qiz-bazmi', 'qiz-bazmi'\)/);
   for (const eventType of ["qiz-uzatish", "fotiha", "birthday"])
     assert.ok(migration.includes(`('qiz-bazmi', '${eventType}')`), `migration supports ${eventType}`);
