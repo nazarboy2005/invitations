@@ -273,6 +273,17 @@ test("O‘rik Guli routes through the shared typed Marxaba invitation renderer",
   );
 });
 
+test("O‘rik Guli documents its contract and source-only visual adaptations", () => {
+  const adaptations = readFileSync(
+    new URL("../apps/web/public/templates/orik-guli/SOURCE_ADAPTATIONS.md", import.meta.url),
+    "utf8",
+  );
+  assert.match(adaptations, /empty gift-note\s+and bank-name slots/i);
+  assert.match(adaptations, /prefers-reduced-motion/i);
+  assert.match(adaptations, /venue\.photo/);
+  assert.match(adaptations, /preview-only/i);
+});
+
 test("O‘rik Guli maps the shared four-locale preview content to all invitation sections", async () => {
   const { makeLegacyData } = await import("../apps/web/src/templates/anor/renderer");
   const sample = createTemplatePreviewSample("orik-guli");
