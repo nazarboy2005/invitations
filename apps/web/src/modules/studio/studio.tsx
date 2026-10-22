@@ -55,6 +55,7 @@ import { DateTimePicker, TimePicker } from "@/components/date-time-picker";
 import { readBrowserDraft, saveBrowserDraft } from "./draft-storage";
 import { AnorInvitation } from "@/templates/anor";
 import { isMarxabaTemplate, MarxabaInvitation } from "@/templates/marxaba";
+import { isInvitateTemplate, InvitateInvitation } from "@/templates/invitate";
 import {
   createTemplatePreviewSample,
   hasAuthoredInvitationContent,
@@ -2621,6 +2622,7 @@ export function Studio({
             </span>
             {invitation.templateId &&
               (invitation.templateId === "anor" ||
+                isInvitateTemplate(invitation.templateId) ||
                 isMarxabaTemplate(invitation.templateId)) && (
                 <Link
                   className={styles.fullPreviewLink}
@@ -2648,6 +2650,16 @@ export function Studio({
                 locale={locale}
                 preview
                 fullPreview
+                sampleWishes={section === 0 && !authoredPreview}
+              />
+            ) : invitation.templateId && isInvitateTemplate(invitation.templateId) ? (
+              <InvitateInvitation
+                invitation={previewInvitation}
+                invitationId={invitation.id}
+                locale={locale}
+                preview
+                fullPreview
+                catalogMusic={section === 0 && !authoredPreview}
                 sampleWishes={section === 0 && !authoredPreview}
               />
             ) : invitation.templateId &&

@@ -361,6 +361,19 @@ export type TemplateDefinition = {
 };
 export const TEMPLATES: TemplateDefinition[] = [
   {
+    id: "evelina",
+    name: "Evelina",
+    description: "Nozik gul naqshlari, shaffof kristallar va romantik oqshom.",
+    previewImage: "/templates/evelina/preview.webp",
+    previewEventType: "wedding",
+    categoryIds: ["wedding"],
+    supportedEventTypes: ["wedding"],
+    priceMinor: 15000000,
+    currency: "UZS",
+    accent: "#a2865c",
+    published: true,
+  },
+  {
     id: "anor",
     name: "Anor",
     description: "Anor gullari va Rishton naqshlari uyg‘unligi.",

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="uz">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Taklifnoma</title>
+    <link rel="stylesheet" href="./assets/css/evelina.css">
+</head>
+
+<body class="is-locked">
+
+    <div class="preloader" id="preloader">
+        <div class="preloader-ring"></div>
+        <div class="preloader-text">Загрузка...</div>
+    </div>
+
+    <div class="device">
+
+        <div class="cover" id="coverScreen">
+            <img class="cover-img" src="./assets/previews/template/evelina/hero.png" alt="">
+            <div class="cover-names">
+                <div class="names"><span data-field="names"></span></div>
+                <div class="date"><span data-field="date"></span></div>
+            </div>
+        </div>
+
+        <div class="intro-video-wrap" id="introVideoWrap">
+            <video id="introVideo" src="./assets/previews/template/evelina/lock-cover.mp4" playsinline
+                preload="auto"></video>
+        </div>
+
+        <!-- HERO -->
+        <section class="hero" id="heroSection">
+            <video id="heroVideo" class="hero-video" src="./assets/previews/template/evelina/hero.mp4" autoplay muted loop
+                playsinline></video>
+            <div class="hero-content">
+                <div class="hero-label" data-copy="event"></div>
+                <div class="hero-names"><span data-field="names"></span></div>
+                <div class="hero-date"><span data-field="date"></span></div>
+            </div>
+        </section>
+
+        <!-- 2: DEAR GUESTS -->
+        <section class="sec">
+            <h2 class="title rv" data-copy="greeting"></h2>
+            <img class="border rv" src="./assets/previews/template/evelina/border.png" alt="">
+            <p class="desc rv rv-d1"><span data-copy="message"></span></p>
+            <div class="oval-wrap rv">
+                <div class="oval"><img data-field="photo" alt="" loading="lazy" decoding="async"><span
+                        class="oval-ring" aria-hidden="true"></span><button class="photo-nav photo-prev" id="photoPrev" type="button" hidden aria-label="Previous photo">‹</button><button class="photo-nav photo-next" id="photoNext" type="button" hidden aria-label="Next photo">›</button></div>
+            </div>
+            <div class="quote rv">
+                
+                <p data-copy="quote"></p>
+            </div>
+        </section>
+
+        <!-- 3: COUNTDOWN -->
+        <section class="sec" style="padding-bottom:30px">
+            <h2 class="title rv" data-copy="countdown"></h2>
+            <img class="border rv" src="./assets/previews/template/evelina/border.png" alt="">
+            <div class="cd rv rv-d1">
+                <div><b id="cdD">0</b><span data-copy="days"></span></div>
+                <div><b id="cdH">0</b><span data-copy="hours"></span></div>
+                <div><b id="cdM">0</b><span data-copy="minutes"></span></div>
+                <div><b id="cdS">0</b><span data-copy="seconds"></span></div>
+            </div>
+        </section>
+        <img class="gif" src="./assets/previews/template/evelina/crystals.webp" alt="">
+
+        <!-- PROGRAM -->
+        <section class="sec">
+            <h2 class="title rv" data-field="programHeading"></h2>
+            <img class="border rv" src="./assets/previews/template/evelina/border.png" alt="">
+            <p class="desc rv" data-copy="programIntro"></p>
+            <div class="times" id="programItems"></div>
+        </section>
+        <img class="gif" src="./assets/previews/template/evelina/inner-video.gif" alt="">
+
+        <!-- LOCATION -->
+        <section class="sec">
+            <h2 class="title rv" data-copy="location"></h2>
+            <img class="border rv" src="./assets/previews/template/evelina/border.png" alt="">
+            <div class="hall rv" id="venueName" data-field="venueName"></div>
+            <p class="desc rv rv-d1" id="address" data-field="address"></p>
+            <div class="frame rv"><img src="./assets/previews/template/evelina/location.png" alt=""></div>
+            <a class="map-link" id="mapLink" target="_blank" rel="noreferrer" hidden></a>
+        </section>
+
+        <!-- DRESSCODE -->
+        <section class="sec dress" style="padding-bottom:30px">
+            <h2 class="title rv" id="dressHeading" data-field="dressHeading"></h2>
+            <img class="border rv" src="./assets/previews/template/evelina/border.png" alt="">
+            <p class="desc rv" id="dressText" data-field="dressText"></p><p class="desc rv" id="dressNote" data-field="dressNote"></p>
+            <div class="sw rv rv-d1" id="dressColors"></div>
+        </section>
+        <img class="gif" src="./assets/previews/template/evelina/crystals.webp" alt="">
+
+        <!-- RSVP -->
+        <section class="rsvp">
+            <h2 class="title rv" data-copy="rsvp"></h2>
+            <img class="border rv" src="./assets/previews/template/evelina/border.png" alt="">
+            <p class="desc pretext rv" data-copy="rsvpIntro"></p>
+            <form id="rsvpForm" class="rv">
+                <input class="inp" id="rName" type="text" autocomplete="name" required>
+                <div class="radios" id="rsvpChoices"></div>
+                <textarea id="rWish" maxlength="360"></textarea>
+                <div class="err" id="rErr"></div>
+                <button class="btn" id="rBtn" type="submit" data-copy="send"></button>
+            </form>
+        </section>
+
+        <section class="closing">
+            <div class="c-label rv" data-copy="closing"></div>
+            <div class="c-date rv rv-d1"><span data-field="date"></span></div>
+            <img class="border rv rv-d1" src="./assets/previews/template/evelina/border.png" alt="">
+            <div class="c-names rv rv-d2"><span data-field="names"></span></div>
+            <p class="c-text rv rv-d3" data-copy="closingText"></p><div class="host-names" id="hosts" data-field="hosts"></div>
+        </section>
+
+        <footer>
+            <div class="soc" id="contacts"></div>
+            <p data-copy="footer"></p>
+        </footer>
+    </div>
+
+    <button class="music-btn" id="musicBtn" aria-label="Музыка">
+        <svg class="note" viewBox="0 0 24 24">
+            <path d="M12 3v10.6A4 4 0 1014 17V7h4V3z" />
+        </svg>
+        <div class="bars"><span></span><span></span><span></span><span></span></div>
+    </button>
+    <audio id="bgMusic" loop preload="none"></audio>
+
+    <div class="modal" id="thanks">
+        <div class="modal-box">
+            <h3 data-copy="thanks"></h3>
+            <p>Ваш ответ отправлен. Мы будем очень рады видеть вас на нашем празднике <span data-field="date"></span>.</p>
+            <button class="btn" id="thanksClose" data-copy="close"></button>
+        </div>
+    </div>
+    <script src="./assets/js/evelina.js" defer></script>
+</body>
+
+</html>

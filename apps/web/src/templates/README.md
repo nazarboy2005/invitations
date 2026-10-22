@@ -76,3 +76,9 @@ preview-only and is never sent to public invitation rendering.
 For ephemeral responsive-name stress checks on an empty preview, add
 `qaLongNames=1` to the preview URL. It replaces only the centralized fixture
 names, never authored creator content or saved invitations.
+
+Invitate templates have a dedicated renderer module under
+`apps/web/src/templates/invitate` and isolated public source packages under
+`apps/web/public/templates/<id>`. Their adapters use the shared invitation
+contract and renderer in creator preview and public display. See
+`docs/templates/INVITATE_ROADMAP.md` for the separate Invitate sequence.

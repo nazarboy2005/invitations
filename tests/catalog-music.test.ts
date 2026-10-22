@@ -20,9 +20,13 @@ test("every full-template preview uses the shared Emotional Piano default", () =
   );
   assert.equal(
     [...preview.matchAll(/catalogMusic=\{catalogPreview\}/g)].length,
-    2,
+    3,
     "both renderer branches must enable the shared catalog track",
   );
   assert.match(anorRenderer, /music:\s*\{\s*enabled:\s*true,\s*url:\s*CATALOG_PREVIEW_MUSIC\.url/);
   assert.match(marxabaRenderer, /catalogMusic\s*\?\s*CATALOG_PREVIEW_MUSIC\.url/);
+  assert.match(
+    read("apps/web/src/templates/invitate/renderer.tsx"),
+    /preview && catalogMusic[\s\S]*CATALOG_PREVIEW_MUSIC\.url/,
+  );
 });
