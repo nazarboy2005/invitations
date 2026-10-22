@@ -22,6 +22,7 @@
 - User requirement (2026-10-22): remove the creator-facing draft JSON download control and its export behavior.
 - User requirement (2026-10-22): make the invitation activity header match the studio's clean top bar: back control, invitation name, and edit/refresh actions aligned in one sticky header; use the studio's plain arrow treatment for back/refresh and filled primary treatment for edit; keep long names readable without pushing controls offscreen.
 - User requirement (2026-10-22): use the studio button pattern across the management dashboard and invitation activity page: shared sizing, rounded corners, typography, outlines, hover and focus states, with existing primary, destructive, and tab roles preserved.
+- User requirement (2026-10-22): full template demo previews show navigation controls only while scrolling upward. Use a translucent circular back control at the top left and a separate “Yaratish” pill at the top right for published templates. Back returns to the design list even when the preview was opened directly; creation preserves the selected template.
 
 ## Database publication authorization (2026-10-21)
 
