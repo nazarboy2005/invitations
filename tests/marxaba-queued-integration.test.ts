@@ -149,6 +149,7 @@ test("registered Marxaba designs reflect their release state and additive migrat
     "qiz-bazmi",
     "shahzoda",
     "chavandoz",
+    "beshik",
     "kozgu",
     "qandil",
   ]);

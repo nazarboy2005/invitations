@@ -516,7 +516,7 @@ test("template migrations publish completed designs while keeping unfinished des
     marxaba.rows.map((row) => [row.id, row.published]),
     [
       ["atlas", true],
-      ["beshik", false],
+      ["beshik", true],
       ["bogi-eram", true],
       ["bulbul", false],
       ["chavandoz", true],

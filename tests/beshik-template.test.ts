@@ -86,14 +86,16 @@ test("Beshik uses the local platform runtime and excludes reference fixture code
   assert.match(read(pkg, "SOURCE_ADAPTATIONS.md"), /beshik-toyi/);
 });
 
-test("Beshik compatibility and creator fields stay aligned with the one-celebrant source", () => {
+test("Beshik compatibility and creator fields stay aligned after release", () => {
   const entry = templateById("beshik");
   assert.ok(entry);
   assert.deepEqual(entry.supportedEventTypes, ["beshik-toyi", "birthday"]);
-  assert.equal(entry.published, false);
+  assert.equal(entry.published, true);
   const migration = readFileSync(path.join(root, "packages/database/migrations/0039_add_beshik_template.sql"), "utf8");
   assert.match(migration, /VALUES \('beshik', 'Beshik', 15000000, 'UZS', false\)/);
   assert.match(migration, /\('beshik', 'beshik-toyi'\)[\s\S]*\('beshik', 'birthday'\)/);
+  const publication = readFileSync(path.join(root, "packages/database/migrations/0064_publish_beshik.sql"), "utf8");
+  assert.match(publication, /VALUES \('beshik', 'Beshik', 15000000, 'UZS', true\)/);
   const editor = readFileSync(path.join(root, "apps/web/src/modules/studio/studio.tsx"), "utf8");
   assert.match(editor, /invitation\.templateId === "beshik"/);
   assert.match(editor, /const singleCelebrantLabel[\s\S]*?: "Bola ismi"/);
@@ -227,4 +229,7 @@ test("unsupported empty To‘yona bank and note slots are hidden by scoped CSS",
   const adapter = read(pkg, "contract-adapter.css");
   assert.match(adapter, /#toyona \[data-slot="toyona\.bank"\]:empty/);
   assert.match(adapter, /#toyona \[data-slot="toyona\.note"\]:empty/);
+  assert.match(adapter, /\.hero__name\[data-slot="groom"\]\.platform-name-fit--single-wrap/);
+  assert.match(adapter, /\.act-three \[data-slot="groom"\]\.platform-name-fit--single-wrap/);
+  assert.match(adapter, /overflow-wrap:\s*anywhere !important/);
 });

@@ -32,8 +32,16 @@ slots while leaving the captured stylesheet and body unchanged. The venue
 photo remains a contract/editor gap and receives no sample image.
 
 No captured files were modified. The canonical catalog fixture remains the
-only source of preview sample content; it is not saved or published. Beshik
-stays unpublished pending browser locale, mobile, reduced-motion, interaction,
-and service verification. Focused static checks cover all four fixture locales,
-the six-item program, dress palette, three preview wishes, To‘yona card/holder,
+only source of preview sample content; it is not saved or published. A scoped
+adapter rule allows the shared name-fit hook to wrap the animated Beshik hero
+and opening lockup when a long honoree name overflows, while normal names retain
+the captured type. Focused static checks cover all four fixture locales, the
+six-item program, dress palette, three preview wishes, To‘yona card/holder,
 phone/Telegram contacts, icon-only empty gallery, and blank-draft isolation.
+At 390×844, the captured opening and app renderer were compared, the long-name
+opening/hero fit without horizontal overflow, all four locales switched, and
+gallery wrap, gift disclosure, and RSVP count worked with clean console logs.
+Source JS/CSS support reduced motion; runtime emulation was unavailable. Beshik
+is published at 150,000 UZS through additive migration
+`0064_publish_beshik.sql`. Venue photo and gift bank/note remain unsupported by
+the contract and are not fabricated.
