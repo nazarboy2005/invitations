@@ -27,12 +27,12 @@
     const program = (data.program || []).filter(x => x.title || x.time);
     const dateMs = Date.parse(data.dateTime || "");
     const greeting = data.greeting || (data.guestName ? `${l.guest}, ${data.guestName}` : l.guest);
-    const weekDays = locale === "en" ? ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"] : locale === "ru" ? ["Пн","Вт","Ср","Чт","Пт","Сб","Вс"] : locale === "uz-Cyrl" ? ["Ду","Се","Чо","Па","Жу","Ша","Як"] : ["Du","Se","Ch","Pa","Ju","Sh","Ya"];
+    const weekDays = locale === "en" ? ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"] : locale === "ru" ? ["\u041f\u043d","\u0412\u0442","\u0421\u0440","\u0427\u0442","\u041f\u0442","\u0421\u0431","\u0412\u0441"] : locale === "uz-Cyrl" ? ["\u0414\u0443","\u0421\u0435","\u0427\u043e","\u041f\u0430","\u0416\u0443","\u0428\u0430","\u042f\u043a"] : ["Du","Se","Ch","Pa","Ju","Sh","Ya"];
     const calendar = data.date?.year && data.date?.monthNumber ? (() => { const year=Number(data.date.year), month=Number(data.date.monthNumber), days=new Date(Date.UTC(year,month,0)).getUTCDate(), offset=(new Date(Date.UTC(year,month-1,1)).getUTCDay()+6)%7; return `<div class="calendar-card__top"><span class="calendar-card__month">${esc(data.date.month)}</span><span class="calendar-card__year">${year}</span></div><div class="calendar-card__weekdays">${weekDays.map(day=>`<span class="calendar-card__weekday">${esc(day)}</span>`).join("")}</div><div class="calendar-card__days">${Array.from({length:offset},()=>`<span aria-hidden="true"></span>`).join("")}${Array.from({length:days},(_,i)=>`<span${i+1===Number(data.date.day)?' class="is-event-day" aria-current="date"':''}>${i+1}</span>`).join("")}</div>`; })() : "";
     const calendarRange = dateMs ? `${new Date(dateMs).toISOString().replace(/[-:]/g,"").replace(/\.\d{3}/,"")}/${new Date(dateMs+2*60*60*1000).toISOString().replace(/[-:]/g,"").replace(/\.\d{3}/,"")}` : "";
+    const venue = data.venue || {};
     const calendarHref = calendarRange ? `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(data.title || people.join(" & "))}&dates=${calendarRange}&details=${encodeURIComponent(data.message || "")}&location=${encodeURIComponent([venue.name,venue.address].filter(Boolean).join(" "))}` : "";
     const contacts = (data.contacts || []).filter(x => x.value && safeUrl(x.href));
-    const venue = data.venue || {};
     const coords = venue.lat != null && venue.lng != null ? `${venue.lat},${venue.lng}` : "";
     const mapHref = safeUrl(venue.mapUrl) || (coords ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(coords)}` : venue.address ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent([venue.name,venue.address].filter(Boolean).join(" "))}` : "");
     const gift = data.toyona || {};
