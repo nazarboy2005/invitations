@@ -574,17 +574,15 @@ export function Studio({
         const result = await response.json();
         if (cancelled) return;
         if (result.state === "confirmed") {
-          setAuthIdentity({
-            displayName:
-              result.user?.displayName ??
-              result.displayName ??
-              "Telegram foydalanuvchisi",
+          const complete = await fetch("/api/auth/telegram/complete", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ requestId: auth!.requestId }),
           });
-          setAuthStatus(
-            pendingAction.current === "publish"
-              ? "Davom etish uchun “Nashr qilishni yakunlash” tugmasini bosing. Taklifnomangiz shu hisobga saqlanadi va nashr qilinadi."
-              : "Davom etish uchun “Saqlashni yakunlash” tugmasini bosing. Taklifnomangiz shu hisobga saqlanadi.",
-          );
+          if (!complete.ok) throw new Error("Kirishni yakunlab bo‘lmadi.");
+          setAuth(null);
+          setAuthIdentity(null);
+          await saveOrPublish(pendingAction.current);
           return;
         }
         if (result.state === "expired") {
@@ -834,7 +832,7 @@ export function Studio({
         setAuth(result);
         setAuthIdentity(null);
         setAuthStatus(
-          "Botda kirishni tasdiqlang va o‘z telefon raqamingizni ulashing.",
+          "Telegram botida o‘z telefon raqamingizni ulashing. Keyin saytga qayting.",
         );
         return;
       }

@@ -82,9 +82,10 @@ async function request(
   body?: unknown,
   authenticated = true,
   requestOrigin = origin,
+  method?: string,
 ) {
   return fetch(`${origin}${path}`, {
-    method: body === undefined ? "GET" : "POST",
+    method: method ?? (body === undefined ? "GET" : "POST"),
     headers: {
       Origin: requestOrigin,
       "Content-Type": "application/json",
@@ -154,6 +155,62 @@ test("first publish is atomic, free, stable, concurrent-safe and uses event-loca
   } finally {
     process.env.PUBLISHING_MODE = mode;
   }
+});
+
+test("unpublishing archives the canonical and returned invitation state", async () => {
+  const invitation = await draft();
+  const published = await publishInvitation(invitation.id, 1, owner);
+  const response = await request(
+    `/api/invitations/${invitation.id}`,
+    { action: "unpublish" },
+    true,
+    origin,
+    "PATCH",
+  );
+  assert.equal(response.status, 200);
+
+  const listed = await request("/api/invitations");
+  const listedBody = await listed.json();
+  assert.equal(
+    listedBody.invitations.find((item: Invitation) => item.id === invitation.id)
+      ?.status,
+    "archived",
+  );
+  const owned = await request(`/api/invitations/${invitation.id}`);
+  const ownedBody = await owned.json();
+  assert.equal(ownedBody.invitation.status, "archived");
+  const publicRows = await sql`SELECT id FROM invitations WHERE id=${invitation.id} AND slug=${published.invitation.slug} AND status='published'`;
+  assert.equal(publicRows.length, 0);
+  const archivedRows = await sql`SELECT status,data->>'status' AS data_status FROM invitations WHERE id=${invitation.id}`;
+  assert.deepEqual(archivedRows[0], {
+    status: "archived",
+    data_status: "archived",
+  });
+});
+
+test("draft deletion is owner-scoped and removes only drafts", async () => {
+  const invitation = await draft();
+  const deleted = await request(
+    `/api/invitations/${invitation.id}`,
+    undefined,
+    true,
+    origin,
+    "DELETE",
+  );
+  assert.equal(deleted.status, 200);
+  const remaining = await sql`SELECT id FROM invitations WHERE id=${invitation.id}`;
+  assert.equal(remaining.length, 0);
+
+  const publishedInvitation = await draft();
+  await publishInvitation(publishedInvitation.id, 1, owner);
+  const protectedResponse = await request(
+    `/api/invitations/${publishedInvitation.id}`,
+    undefined,
+    true,
+    origin,
+    "DELETE",
+  );
+  assert.equal(protectedResponse.status, 409);
 });
 test("slug collisions retry through a savepoint and letter case stays distinct", async () => {
   const first = await draft(),

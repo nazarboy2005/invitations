@@ -19,16 +19,18 @@ export async function getOwnedInvitation(
   userId: string,
 ): Promise<Invitation | null> {
   const rows =
-    await getDb()`SELECT data FROM invitations WHERE id=${id} AND owner_id=${userId}`;
-  return rows[0] ? invitationSchema.parse(rows[0].data) : null;
+    await getDb()`SELECT data,status FROM invitations WHERE id=${id} AND owner_id=${userId}`;
+  return rows[0]
+    ? invitationSchema.parse({ ...rows[0].data, status: rows[0].status })
+    : null;
 }
 export async function listInvitations(
   userId: string,
 ): Promise<Array<Invitation & { createdAt: string }>> {
   const rows =
-    await getDb()`SELECT data,created_at FROM invitations WHERE owner_id=${userId} ORDER BY created_at DESC,id DESC LIMIT 100`;
+    await getDb()`SELECT data,status,created_at FROM invitations WHERE owner_id=${userId} ORDER BY created_at DESC,id DESC LIMIT 100`;
   return rows.map((row) => ({
-    ...invitationSchema.parse(row.data),
+    ...invitationSchema.parse({ ...row.data, status: row.status }),
     createdAt: new Date(row.created_at).toISOString(),
   }));
 }

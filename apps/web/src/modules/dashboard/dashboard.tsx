@@ -7,6 +7,8 @@ import {
   CalendarDays,
   CheckCircle2,
   CircleHelp,
+  EyeOff,
+  Trash2,
   FileHeart,
   Heart,
   LoaderCircle,
@@ -26,6 +28,7 @@ import {
 } from "@taklifnoma/contracts";
 import styles from "./dashboard.module.css";
 import {
+  deleteBrowserDraft,
   listBrowserDrafts,
   type BrowserDraft,
 } from "@/modules/studio/draft-storage";
@@ -68,10 +71,16 @@ function InvitationCard({
   invitation,
   local = false,
   accountSaved = !local,
+  onDelete,
+  onUnpublish,
+  busy = false,
 }: {
   invitation: Invitation;
   local?: boolean;
   accountSaved?: boolean;
+  onDelete?: () => void;
+  onUnpublish?: () => void;
+  busy?: boolean;
 }) {
   const content = getContent(invitation);
   const template = templateById(invitation.templateId);
@@ -153,6 +162,16 @@ function InvitationCard({
             {invitation.status === "published" ? "Tahrirlash" : "Davom etish"}
             <ArrowRight size={15} />
           </Link>
+          {invitation.status === "draft" && onDelete && (
+            <button className={styles.dangerAction} onClick={onDelete} disabled={busy}>
+              <Trash2 size={14} /> O‘chirish
+            </button>
+          )}
+          {invitation.status === "published" && onUnpublish && (
+            <button className={styles.secondaryAction} onClick={onUnpublish} disabled={busy}>
+              <EyeOff size={14} /> Nashrdan olish
+            </button>
+          )}
         </div>
       </div>
     </article>
@@ -178,6 +197,77 @@ export function Dashboard() {
   const [logoutConfirmation, setLogoutConfirmation] = useState(false);
   const [loginBusy, setLoginBusy] = useState(false);
   const [loginError, setLoginError] = useState("");
+  const [actionBusy, setActionBusy] = useState<string | null>(null);
+  const [actionError, setActionError] = useState("");
+
+  async function removeDraft(
+    invitation: Invitation,
+    local: boolean,
+    accountSaved: boolean,
+  ) {
+    if (
+      !window.confirm(
+        "Ushbu qoralamani butunlay o‘chirasizmi? Bu amalni qaytarib bo‘lmaydi.",
+      )
+    )
+      return;
+    setActionBusy(invitation.id);
+    setActionError("");
+    try {
+      if (accountSaved) {
+        const response = await fetch(
+          `/api/invitations/${encodeURIComponent(invitation.id)}`,
+          { method: "DELETE" },
+        );
+        if (!response.ok)
+          throw new Error("Qoralamani o‘chirib bo‘lmadi. Qayta urinib ko‘ring.");
+        setInvitations((items) => items.filter((item) => item.id !== invitation.id));
+      }
+      if (local) {
+        deleteBrowserDraft(invitation.id);
+        setBrowserDrafts(listBrowserDrafts(session?.user?.id ?? null));
+      }
+    } catch (cause) {
+      setActionError(cause instanceof Error ? cause.message : "Amal bajarilmadi.");
+    } finally {
+      setActionBusy(null);
+    }
+  }
+
+  async function unpublishInvitation(invitation: Invitation) {
+    if (
+      !window.confirm(
+        "Taklifnomani nashrdan olasizmi? Uning havolasi saqlanadi, ammo mehmonlar sahifani ko‘ra olmaydi.",
+      )
+    )
+      return;
+    setActionBusy(invitation.id);
+    setActionError("");
+    try {
+      const response = await fetch(
+        `/api/invitations/${encodeURIComponent(invitation.id)}`,
+        {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ action: "unpublish" }),
+        },
+      );
+      if (!response.ok)
+        throw new Error("Taklifnomani nashrdan olib bo‘lmadi. Qayta urinib ko‘ring.");
+      setInvitations((items) =>
+        items.map((item) =>
+          item.id === invitation.id ? { ...item, status: "archived" } : item,
+        ),
+      );
+      setBrowserDrafts((items) =>
+        items.filter((item) => item.invitation.id !== invitation.id),
+      );
+    } catch (cause) {
+      setActionError(cause instanceof Error ? cause.message : "Amal bajarilmadi.");
+    } finally {
+      setActionBusy(null);
+    }
+  }
 
   async function startLogin() {
     setLoginBusy(true);
@@ -458,6 +548,11 @@ export function Dashboard() {
                 </button>
               </div>
             )}
+            {actionError && (
+              <div className={styles.error} role="alert">
+                <p>{actionError}</p>
+              </div>
+            )}
             {loading ? (
               <div className={styles.loading} role="status">
                 <LoaderCircle size={23} />
@@ -470,6 +565,23 @@ export function Dashboard() {
                     invitation={invitation}
                     local={local}
                     accountSaved={cloudIds.has(invitation.id)}
+                    busy={actionBusy === invitation.id}
+                    onDelete={
+                      invitation.status === "draft"
+                        ? () =>
+                            void removeDraft(
+                              invitation,
+                              local,
+                              cloudIds.has(invitation.id),
+                            )
+                        : undefined
+                    }
+                    onUnpublish={
+                      invitation.status === "published" &&
+                      cloudIds.has(invitation.id)
+                        ? () => void unpublishInvitation(invitation)
+                        : undefined
+                    }
                     key={invitation.id}
                   />
                 ))}

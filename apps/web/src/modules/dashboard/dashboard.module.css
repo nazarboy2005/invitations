@@ -350,6 +350,31 @@
   padding: 25px 24px 29px;
   color: var(--primary);
 }
+.cardActions > button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  min-height: 30px;
+  padding: 4px 7px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--muted);
+  font: inherit;
+  font-size: 10px;
+  cursor: pointer;
+}
+.cardActions > button:disabled {
+  opacity: .55;
+  cursor: wait;
+}
+.cardActions > .dangerAction {
+  color: #91483e;
+}
+.cardActions > .secondaryAction {
+  color: var(--primary);
+}
 .guideIcon {
   display: inline-flex;
   border: 1px solid var(--line-strong);

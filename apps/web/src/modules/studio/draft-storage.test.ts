@@ -3,6 +3,7 @@ import { beforeEach, test } from "node:test";
 import { createInvitation } from "@taklifnoma/contracts";
 import {
   DRAFT_KEY,
+  deleteBrowserDraft,
   listBrowserDrafts,
   readBrowserDraft,
   saveBrowserDraft,
@@ -74,6 +75,22 @@ test("legacy browser drafts survive migration to per-document storage", () => {
   saveBrowserDraft(next, true);
   assert.equal(readBrowserDraft(legacy.id)?.invitation.id, legacy.id);
   assert.equal(listBrowserDrafts().length, 2);
+});
+
+test("deleting a draft removes its stored copy and only clears its own latest pointer", () => {
+  const first = createInvitation();
+  const latest = createInvitation();
+  saveBrowserDraft(first, true);
+  saveBrowserDraft(latest, true);
+
+  deleteBrowserDraft(first.id);
+  assert.equal(readBrowserDraft(first.id), null);
+  assert.equal(readBrowserDraft()?.invitation.id, latest.id);
+  assert.equal(listBrowserDrafts().length, 1);
+
+  deleteBrowserDraft(latest.id);
+  assert.equal(readBrowserDraft(), null);
+  assert.deepEqual(listBrowserDrafts(), []);
 });
 
 test("dirty state distinguishes recoverable edits from a cloud-saved snapshot", () => {

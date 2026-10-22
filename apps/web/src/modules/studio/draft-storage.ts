@@ -77,6 +77,22 @@ export function listBrowserDrafts(
   );
 }
 
+export function deleteBrowserDraft(id: string) {
+  localStorage.removeItem(prefix + id);
+  const legacyValue = localStorage.getItem(DRAFT_KEY);
+  const legacy = decode(legacyValue);
+  if (legacy?.invitation.id === id) {
+    localStorage.removeItem(DRAFT_KEY);
+    return;
+  }
+  try {
+    const pointer = JSON.parse(legacyValue ?? "null");
+    if (pointer?.id === id) localStorage.removeItem(DRAFT_KEY);
+  } catch {
+    /* Ignore unrelated or malformed legacy storage. */
+  }
+}
+
 export function saveBrowserDraft(
   invitation: Invitation,
   dirty: boolean,

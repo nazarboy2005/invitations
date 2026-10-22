@@ -82,29 +82,41 @@ const contactKeyboard = {
   resize_keyboard: true,
   one_time_keyboard: true,
 };
+function continueKeyboard() {
+  const url = process.env.APP_URL;
+  return url
+    ? {
+        inline_keyboard: [[{
+          text: "💌 Sayt / Mini Appga qaytish",
+          web_app: { url },
+        }]],
+      }
+    : undefined;
+}
 async function askContact(chatId: number) {
   await telegramCall("sendMessage", {
     chat_id: chatId,
     parse_mode: "HTML",
-    text: "📱 <b>Telefon raqamingizni tasdiqlang</b>\n\nDavom etish uchun shaxsiy Telegram raqamingizni quyidagi tugma orqali yuboring. Raqam akkauntingizni himoyalash va tiklash uchun ishlatiladi.",
-    reply_markup: contactKeyboard,
+    text: "📱 <b>Telefon raqamingizni tasdiqlang</b>\n\nDavom etish uchun shaxsiy Telegram raqamingizni quyidagi tugma orqali yuboring. Raqam akkauntingizni himoyalash va tiklash uchun ishlatiladi. So‘ng ishni sayt yoki Mini App’da davom ettirish uchun quyidagi havolani bosing.",
+    reply_markup: {
+      ...contactKeyboard,
+      ...(continueKeyboard() ? { inline_keyboard: continueKeyboard()!.inline_keyboard } : {}),
+    },
   });
 }
-async function askConfirm(chatId: number, requestId: string) {
-  const siteUrl = escapeHtml(new URL(process.env.APP_URL!).origin);
+async function confirmSiteLogin(
+  chatId: number,
+  requestId: string,
+  db: postgres.TransactionSql,
+) {
+  await db`UPDATE auth_requests a SET state='confirmed',confirmed_at=now() FROM users u WHERE a.id=${requestId} AND a.user_id=u.id AND u.phone_shared_at IS NOT NULL AND a.state='identified' AND a.expires_at>now() AND EXISTS(SELECT 1 FROM telegram_connections c WHERE c.user_id=u.id AND c.telegram_chat_id=${String(chatId)} AND c.status='active')`;
   await telegramCall("sendMessage", {
     chat_id: chatId,
     parse_mode: "HTML",
-    text: `🔐 <b>Kirishni tasdiqlash</b>\n\nBu so‘rovni o‘zingiz boshlagan bo‘lsangiz, tugmani bosing.\n🌐 ${siteUrl}`,
+    text: "✅ <b>Kirish tasdiqlandi</b>\n\nSayt yoki Mini App’ga qayting — ishni davom ettirishingiz mumkin.",
     reply_markup: {
-      inline_keyboard: [
-        [
-          {
-            text: "✅ Kirishni tasdiqlash",
-            callback_data: `auth_confirm:${requestId}`,
-          },
-        ],
-      ],
+      remove_keyboard: true,
+      ...(continueKeyboard() ? { inline_keyboard: continueKeyboard()!.inline_keyboard } : {}),
     },
   });
 }
@@ -155,7 +167,7 @@ async function processLocked(update: Update, db: postgres.TransactionSql) {
           text: "⌛ <b>Kirish havolasi eskirgan</b>\n\nSaytga qaytib, yangi kirish so‘rovini boshlang.",
         });
       else if (!user.phone_shared_at) await askContact(message.chat.id);
-      else await askConfirm(message.chat.id, auth.id);
+      else await confirmSiteLogin(message.chat.id, auth.id, db);
     } else if (message.contact) {
       if (
         !isOwnContact(
@@ -173,17 +185,21 @@ async function processLocked(update: Update, db: postgres.TransactionSql) {
         await telegramCall("sendMessage", {
           parse_mode: "HTML",
           chat_id: message.chat.id,
-          text: "✅ <b>Telefon raqamingiz qabul qilindi</b>\n\nEndi saytga qaytib davom etishingiz mumkin.",
-          reply_markup: { remove_keyboard: true },
+          text: "✅ <b>Telefon raqamingiz qabul qilindi</b>\n\nQuyidagi havola orqali sayt yoki Mini App’ga qaytib ishingizni davom ettiring.",
+          reply_markup: {
+            remove_keyboard: true,
+            ...(continueKeyboard() ? { inline_keyboard: continueKeyboard()!.inline_keyboard } : {}),
+          },
         });
         const [auth] =
           await db`SELECT * FROM auth_requests WHERE user_id=${user.id} AND state='identified' AND expires_at>now() ORDER BY created_at DESC LIMIT 1`;
-        if (auth) await askConfirm(message.chat.id, auth.id);
+        if (auth) await confirmSiteLogin(message.chat.id, auth.id, db);
         else
           await telegramCall("sendMessage", {
             chat_id: message.chat.id,
             parse_mode: "HTML",
-            text: "🎉 <b>Tayyor!</b>\n\nMini App yoki saytga qaytib davom eting.",
+            text: "🎉 <b>Tayyor!</b>\n\nQuyidagi havola orqali Mini App yoki saytga qaytib davom eting.",
+            reply_markup: continueKeyboard(),
           });
       }
     } else if (start) {
