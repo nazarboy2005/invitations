@@ -530,7 +530,7 @@ test("template migrations publish completed designs while keeping unfinished des
       ["monogram", true],
       ["muhabbat-kitobi", true],
       ["muhr", false],
-      ["nahor", false],
+      ["nahor", true],
       ["nahorgi-osh", false],
       ["nilufar", true],
       ["oltin-kuz", true],

@@ -36,14 +36,17 @@ test("Nahor has an isolated typed Osh renderer", () => {
   assert.match(read(renderer, "index.ts"), /NahorInvitation/);
 });
 
-test("Nahor stays unpublished, osh-compatible, and one-person in the creator", () => {
+test("Nahor is published, osh-compatible, and one-person in the creator", () => {
   const template = templateById("nahor");
   assert.ok(template);
   assert.deepEqual(template.supportedEventTypes, ["osh"]);
-  assert.equal(template.published, false);
+  assert.equal(template.published, true);
   const migration = readFileSync(path.join(root, "packages/database/migrations/0043_add_nahor_templates.sql"), "utf8");
   assert.match(migration, /\('nahor', 'Nahor', 15000000, 'UZS', false\)/);
   assert.match(migration, /\('nahor', 'osh'\)/);
+  const publication = readFileSync(path.join(root, "packages/database/migrations/0070_publish_nahor.sql"), "utf8");
+  assert.match(publication, /published\s*=\s*true/i);
+  assert.match(publication, /'nahor', 'osh'/);
   const studio = readFileSync(path.join(root, "apps/web/src/modules/studio/studio.tsx"), "utf8");
   assert.match(studio, /invitation\.templateId === "nahor"/);
   assert.match(studio, /invitation\.templateId === "nahor"\s*\? "Mezbon yoki oila nomi"/);
