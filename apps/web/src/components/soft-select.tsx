@@ -13,6 +13,7 @@ export function SoftSelect({
   label,
   placeholder = "Tanlang",
   disabled = false,
+  squareOptions = false,
 }: {
   value: string;
   options: SelectOption[];
@@ -20,6 +21,7 @@ export function SoftSelect({
   label: string;
   placeholder?: string;
   disabled?: boolean;
+  squareOptions?: boolean;
 }) {
   const id = useId();
   const root = useRef<HTMLDivElement>(null);
@@ -76,7 +78,7 @@ export function SoftSelect({
 
   return (
     <div
-      className={styles.root}
+      className={`${styles.root} ${squareOptions ? styles.squareOptions : ""}`}
       ref={root}
       onBlur={(event) => {
         if (!event.currentTarget.contains(event.relatedTarget as Node | null))

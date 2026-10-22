@@ -8,6 +8,8 @@ import {
   CheckCircle2,
   CircleHelp,
   EyeOff,
+  AlertTriangle,
+  X,
   Trash2,
   FileHeart,
   Heart,
@@ -36,37 +38,11 @@ import { formatDate } from "@/templates/date-format";
 import { InvitationThumbnail } from "./invitation-thumbnail";
 import { useRouter } from "next/navigation";
 import { PublishedLink } from "@/components/published-link";
-
-type DeviceSession = {
-  id: string;
-  userAgent: string;
-  createdAt: string;
-  lastSeenAt: string;
-  expiresAt: string;
-  current: boolean;
-};
-function deviceName(userAgent: string) {
-  const browser = /Edg\//.test(userAgent)
-    ? "Edge"
-    : /Firefox\//.test(userAgent)
-      ? "Firefox"
-      : /Chrome\//.test(userAgent)
-        ? "Chrome"
-        : /Safari\//.test(userAgent)
-          ? "Safari"
-          : "Brauzer";
-  const device = /iPhone|iPad/.test(userAgent)
-    ? "iOS"
-    : /Android/.test(userAgent)
-      ? "Android"
-      : /Windows/.test(userAgent)
-        ? "Windows"
-        : /Macintosh/.test(userAgent)
-          ? "Mac"
-          : "Qurilma";
-  return `${browser} / ${device}`;
-}
-
+type DashboardInvitation = Invitation & { createdAt?: string };
+let dashboardSnapshot: {
+  session: SessionResponse;
+  invitations: DashboardInvitation[];
+} | null = null;
 function InvitationCard({
   invitation,
   local = false,
@@ -74,6 +50,7 @@ function InvitationCard({
   onDelete,
   onUnpublish,
   busy = false,
+  onOpenActivity,
 }: {
   invitation: Invitation;
   local?: boolean;
@@ -81,6 +58,7 @@ function InvitationCard({
   onDelete?: () => void;
   onUnpublish?: () => void;
   busy?: boolean;
+  onOpenActivity?: () => void;
 }) {
   const content = getContent(invitation);
   const template = templateById(invitation.templateId);
@@ -95,12 +73,30 @@ function InvitationCard({
   const editUrl = local
     ? `/studio?draft=${encodeURIComponent(invitation.id)}`
     : `/studio/${encodeURIComponent(invitation.id)}`;
+  const activityUrl = `/dashboard/${encodeURIComponent(invitation.id)}/activity`;
   return (
-    <article className={styles.invitationCard}>
+    <article
+      className={styles.invitationCard}
+      data-clickable={!!onOpenActivity}
+      role={onOpenActivity ? "link" : undefined}
+      tabIndex={onOpenActivity ? 0 : undefined}
+      aria-label={onOpenActivity ? `${names}: javoblar, tilaklar va cheklar` : undefined}
+      onClick={(event) => {
+        if (!onOpenActivity) return;
+        if ((event.target as HTMLElement).closest("a,button,input,select,textarea")) return;
+        onOpenActivity();
+      }}
+      onKeyDown={(event) => {
+        if (onOpenActivity && event.currentTarget === event.target && event.key === "Enter") {
+          event.preventDefault();
+          onOpenActivity();
+        }
+      }}
+    >
       <Link
-        href={editUrl}
+        href={onOpenActivity ? activityUrl : editUrl}
         className={styles.cardArt}
-        aria-label={`${names}: taklifnomani tahrirlash`}
+        aria-label={onOpenActivity ? `${names}: javoblar, tilaklar va cheklar` : `${names}: taklifnomani tahrirlash`}
       >
         {template ? (
           <InvitationThumbnail invitation={invitation} />
@@ -112,6 +108,17 @@ function InvitationCard({
         )}
       </Link>
       <div className={styles.cardBody}>
+        {invitation.status === "draft" && onDelete && (
+          <button
+            className={styles.draftDeleteIcon}
+            onClick={onDelete}
+            disabled={busy}
+            aria-label="Qoralamani o‘chirish"
+            title="Qoralamani o‘chirish"
+          >
+            <Trash2 size={16} />
+          </button>
+        )}
         <span
           className={styles.cardStatus}
           data-published={invitation.status === "published"}
@@ -140,38 +147,28 @@ function InvitationCard({
           {date}
         </p>
         {invitation.status === "published" && invitation.slug && (
-          <PublishedLink slug={invitation.slug} compact />
+          <div onClick={(event) => event.stopPropagation()}>
+            <PublishedLink slug={invitation.slug} compact />
+          </div>
         )}
         {accountSaved && invitation.status === "published" && (
           <Link
             className={styles.activityLink}
-            href={`/dashboard/${encodeURIComponent(invitation.id)}/activity`}
+            href={activityUrl}
           >
             Javoblar, tilaklar va cheklar →
           </Link>
         )}
         <div className={styles.cardActions}>
-          <span>
-            {local
-              ? accountSaved
-                ? "Brauzerdagi o‘zgarishlar"
-                : "Hisobga saqlanmagan"
-              : "Hisobingizda saqlangan"}
-          </span>
-          <Link href={editUrl}>
-            {invitation.status === "published" ? "Tahrirlash" : "Davom etish"}
-            <ArrowRight size={15} />
-          </Link>
-          {invitation.status === "draft" && onDelete && (
-            <button className={styles.dangerAction} onClick={onDelete} disabled={busy}>
-              <Trash2 size={14} /> O‘chirish
-            </button>
-          )}
           {invitation.status === "published" && onUnpublish && (
             <button className={styles.secondaryAction} onClick={onUnpublish} disabled={busy}>
               <EyeOff size={14} /> Nashrdan olish
             </button>
           )}
+          <Link href={editUrl}>
+            {invitation.status === "published" ? "Tahrirlash" : "Davom etish"}
+            <ArrowRight size={15} />
+          </Link>
         </div>
       </div>
     </article>
@@ -180,37 +177,28 @@ function InvitationCard({
 
 export function Dashboard() {
   const router = useRouter();
-  const [session, setSession] = useState<SessionResponse | null>(null);
-  const [invitations, setInvitations] = useState<
-    Array<Invitation & { createdAt?: string }>
-  >([]);
+  const [session, setSession] = useState<SessionResponse | null>(dashboardSnapshot?.session ?? null);
+  const [invitations, setInvitations] = useState<DashboardInvitation[]>(dashboardSnapshot?.invitations ?? []);
   const [browserDrafts, setBrowserDrafts] = useState<BrowserDraft[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(!dashboardSnapshot);
   const [error, setError] = useState("");
   const [tab, setTab] = useState<"all" | "draft" | "published">("all");
   const [retry, setRetry] = useState(0);
-  const [devices, setDevices] = useState<DeviceSession[]>([]);
-  const [deviceError, setDeviceError] = useState("");
-  const [devicesLoading, setDevicesLoading] = useState(false);
-  const [sessionRefresh, setSessionRefresh] = useState(0);
-  const [revoking, setRevoking] = useState(false);
-  const [logoutConfirmation, setLogoutConfirmation] = useState(false);
   const [loginBusy, setLoginBusy] = useState(false);
   const [loginError, setLoginError] = useState("");
   const [actionBusy, setActionBusy] = useState<string | null>(null);
   const [actionError, setActionError] = useState("");
+  const [deleteTarget, setDeleteTarget] = useState<{
+    invitation: Invitation;
+    local: boolean;
+    accountSaved: boolean;
+  } | null>(null);
 
   async function removeDraft(
     invitation: Invitation,
     local: boolean,
     accountSaved: boolean,
   ) {
-    if (
-      !window.confirm(
-        "Ushbu qoralamani butunlay o‘chirasizmi? Bu amalni qaytarib bo‘lmaydi.",
-      )
-    )
-      return;
     setActionBusy(invitation.id);
     setActionError("");
     try {
@@ -221,7 +209,11 @@ export function Dashboard() {
         );
         if (!response.ok)
           throw new Error("Qoralamani o‘chirib bo‘lmadi. Qayta urinib ko‘ring.");
-        setInvitations((items) => items.filter((item) => item.id !== invitation.id));
+        setInvitations((items) => {
+          const next = items.filter((item) => item.id !== invitation.id);
+          if (dashboardSnapshot) dashboardSnapshot = { ...dashboardSnapshot, invitations: next };
+          return next;
+        });
       }
       if (local) {
         deleteBrowserDraft(invitation.id);
@@ -254,11 +246,13 @@ export function Dashboard() {
       );
       if (!response.ok)
         throw new Error("Taklifnomani nashrdan olib bo‘lmadi. Qayta urinib ko‘ring.");
-      setInvitations((items) =>
-        items.map((item) =>
-          item.id === invitation.id ? { ...item, status: "archived" } : item,
-        ),
-      );
+      setInvitations((items) => {
+        const next = items.map((item) =>
+          item.id === invitation.id ? { ...item, status: "archived" as const } : item,
+        );
+        if (dashboardSnapshot) dashboardSnapshot = { ...dashboardSnapshot, invitations: next };
+        return next;
+      });
       setBrowserDrafts((items) =>
         items.filter((item) => item.invitation.id !== invitation.id),
       );
@@ -303,7 +297,7 @@ export function Dashboard() {
     let alive = true;
 
     async function load() {
-      setLoading(true);
+      if (!dashboardSnapshot) setLoading(true);
       setError("");
       try {
         let response = await fetch("/api/auth/session", {
@@ -343,12 +337,16 @@ export function Dashboard() {
               "Taklifnomalaringiz yuklanmadi. Qayta urinib ko‘ring.",
             );
           const data = await list.json();
-          if (alive)
-            setInvitations(
-              (data.invitations ?? []).filter(
+          if (alive) {
+            const nextInvitations = (data.invitations ?? []).filter(
                 (item: unknown) => invitationSchema.safeParse(item).success,
-              ),
-            );
+              ) as DashboardInvitation[];
+            dashboardSnapshot = { session: result, invitations: nextInvitations };
+            setInvitations(nextInvitations);
+          }
+        } else {
+          dashboardSnapshot = { session: result, invitations: [] };
+          setInvitations([]);
         }
       } catch (cause) {
         if (alive)
@@ -366,63 +364,6 @@ export function Dashboard() {
       alive = false;
     };
   }, [retry]);
-
-  useEffect(() => {
-    if (!session?.user) return;
-    let alive = true;
-    setDevicesLoading(true);
-    setDeviceError("");
-    fetch("/api/auth/sessions", { cache: "no-store" })
-      .then((response) => {
-        if (!response.ok) throw new Error();
-        return response.json();
-      })
-      .then((result) => {
-        if (alive) setDevices(result.sessions ?? []);
-      })
-      .catch(() => {
-        if (alive) setDeviceError("Faol qurilmalarni yuklab bo‘lmadi.");
-      })
-      .finally(() => {
-        if (alive) setDevicesLoading(false);
-      });
-    return () => {
-      alive = false;
-    };
-  }, [session?.user?.id, sessionRefresh]);
-
-  async function revokeSession(id?: string) {
-    setRevoking(true);
-    setDeviceError("");
-    try {
-      const response = await fetch("/api/auth/sessions", {
-        method: "DELETE",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(id ? { sessionId: id } : {}),
-      });
-      if (!response.ok) throw new Error();
-      if (!id || devices.some((device) => device.id === id && device.current)) {
-        setSession((current) =>
-          current ? { ...current, user: null } : current,
-        );
-        setInvitations([]);
-        setDevices([]);
-        try {
-          setBrowserDrafts(listBrowserDrafts());
-        } catch {
-          setBrowserDrafts([]);
-        }
-      } else setSessionRefresh((value) => value + 1);
-      setLogoutConfirmation(false);
-      router.refresh();
-    } catch {
-      setDeviceError(
-        "Qurilmadan chiqish amalga oshmadi. Qayta urinib ko‘ring.",
-      );
-    } finally {
-      setRevoking(false);
-    }
-  }
 
   const cloudIds = new Set(invitations.map((item) => item.id));
   const localDrafts = browserDrafts.filter(
@@ -568,18 +509,22 @@ export function Dashboard() {
                     busy={actionBusy === invitation.id}
                     onDelete={
                       invitation.status === "draft"
-                        ? () =>
-                            void removeDraft(
-                              invitation,
-                              local,
-                              cloudIds.has(invitation.id),
-                            )
+                        ? () => setDeleteTarget({
+                            invitation,
+                            local,
+                            accountSaved: cloudIds.has(invitation.id),
+                          })
                         : undefined
                     }
                     onUnpublish={
                       invitation.status === "published" &&
                       cloudIds.has(invitation.id)
                         ? () => void unpublishInvitation(invitation)
+                        : undefined
+                    }
+                    onOpenActivity={
+                      invitation.status === "published" && cloudIds.has(invitation.id)
+                        ? () => router.push(`/dashboard/${encodeURIComponent(invitation.id)}/activity`)
                         : undefined
                     }
                     key={invitation.id}
@@ -662,74 +607,6 @@ export function Dashboard() {
             </div>
           </aside>
         </div>
-        {session?.user && (
-          <section className={styles.sessions} aria-label="Faol qurilmalar">
-            <div className={styles.sessionsHeading}>
-              <div>
-                <h2>
-                  <ShieldCheck size={18} />
-                  Faol qurilmalar
-                </h2>
-                <p>Hisobingizga kirilgan qurilmalarni boshqaring.</p>
-              </div>
-              <button
-                onClick={() => setLogoutConfirmation((value) => !value)}
-                disabled={revoking}
-              >
-                Barcha qurilmalardan chiqish
-              </button>
-            </div>
-            {devicesLoading ? (
-              <p className={styles.sessionHint}>Qurilmalar yuklanmoqda…</p>
-            ) : (
-              devices.map((device) => (
-                <div className={styles.device} key={device.id}>
-                  <Smartphone size={18} />
-                  <div>
-                    <strong>
-                      {deviceName(device.userAgent)}
-                      {device.current && <span>Shu qurilma</span>}
-                    </strong>
-                    <small>
-                      Oxirgi faollik:{" "}
-                      {new Date(device.lastSeenAt).toLocaleString("uz-UZ")}
-                    </small>
-                  </div>
-                  <button
-                    disabled={revoking}
-                    onClick={() => revokeSession(device.id)}
-                  >
-                    Chiqish
-                  </button>
-                </div>
-              ))
-            )}
-            {deviceError && (
-              <div className={styles.deviceError} role="alert">
-                <span>{deviceError}</span>
-                <button onClick={() => setSessionRefresh((value) => value + 1)}>
-                  Qayta urinish
-                </button>
-              </div>
-            )}
-            {logoutConfirmation && (
-              <div className={styles.logoutConfirm}>
-                <p>
-                  Barcha qurilmalarda, shu jumladan shu brauzerda ham hisobdan
-                  chiqasiz. Qoralamangiz shu brauzerda qoladi.
-                </p>
-                <button disabled={revoking} onClick={() => revokeSession()}>
-                  {revoking
-                    ? "Chiqilmoqda…"
-                    : "Ha, barcha qurilmalardan chiqish"}
-                </button>
-                <button onClick={() => setLogoutConfirmation(false)}>
-                  Bekor qilish
-                </button>
-              </div>
-            )}
-          </section>
-        )}
         <div className={styles.bottomNote}>
           <CheckCircle2 size={15} />
           <p>
@@ -739,6 +616,47 @@ export function Dashboard() {
           </p>
         </div>
       </main>
+      {deleteTarget && (
+        <div
+          className={styles.dialogBackdrop}
+          onMouseDown={(event) => {
+            if (event.target === event.currentTarget && !actionBusy)
+              setDeleteTarget(null);
+          }}
+        >
+          <section
+            className={styles.deleteDialog}
+            role="alertdialog"
+            aria-modal="true"
+            aria-labelledby="delete-draft-title"
+            aria-describedby="delete-draft-description"
+          >
+            <button className={styles.dialogClose} aria-label="Yopish" onClick={() => setDeleteTarget(null)} disabled={!!actionBusy}>
+              <X size={18} />
+            </button>
+            <span className={styles.dialogIcon}><AlertTriangle size={23} /></span>
+            <h2 id="delete-draft-title">Qoralamani o‘chirasizmi?</h2>
+            <p id="delete-draft-description">
+              “{getContent(deleteTarget.invitation).people.filter(Boolean).join(" & ") || "Yangi taklifnoma"}” qoralamasi butunlay o‘chiriladi. Bu amalni qaytarib bo‘lmaydi.
+            </p>
+            <div className={styles.dialogActions}>
+              <button onClick={() => setDeleteTarget(null)} disabled={!!actionBusy}>Bekor qilish</button>
+              <button
+                className={styles.confirmDelete}
+                disabled={!!actionBusy}
+                onClick={() => {
+                  const target = deleteTarget;
+                  if (!target) return;
+                  setDeleteTarget(null);
+                  void removeDraft(target.invitation, target.local, target.accountSaved);
+                }}
+              >
+                {actionBusy === deleteTarget.invitation.id ? "O‘chirilmoqda…" : <><Trash2 size={16} /> O‘chirish</>}
+              </button>
+            </div>
+          </section>
+        </div>
+      )}
     </div>
   );
 }

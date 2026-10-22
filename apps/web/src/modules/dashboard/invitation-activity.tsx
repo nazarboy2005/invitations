@@ -1,8 +1,11 @@
 "use client";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { ArrowLeft, Check, Clock3, MessageCircle, Pencil, RefreshCw, Trash2, UserRound } from "lucide-react";
 import { getContent, type Invitation } from "@taklifnoma/contracts";
 import styles from "./invitation-activity.module.css";
+import { formatDate } from "@/templates/date-format";
+import { SoftSelect } from "@/components/soft-select";
 type Activity = {
   responses: Array<{
     id: string;
@@ -23,16 +26,20 @@ type Activity = {
   totals: { responses: number; guests: number; pending: number };
   hasMore: boolean;
 };
+const activitySnapshots = new Map<string, Activity>();
 export function InvitationActivity({ invitation }: { invitation: Invitation }) {
-  const [data, setData] = useState<Activity | null>(null);
+  const cacheKey = `${invitation.id}:0`;
+  const [data, setData] = useState<Activity | null>(() => activitySnapshots.get(cacheKey) ?? null);
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
   const [refresh, setRefresh] = useState(0);
   const [page, setPage] = useState(0);
-  const [wishFilter, setWishFilter] = useState<"all" | "pending" | "approved" | "hidden">("all");
+  const [section, setSection] = useState<"responses" | "wishes" | "receipts">("responses");
+  const [wishFilter, setWishFilter] = useState<"all" | "pending" | "approved">("all");
   useEffect(() => {
     const controller = new AbortController();
-    setData(null);
+    const key = `${invitation.id}:${page}`;
+    setData(activitySnapshots.get(key) ?? null);
     setError("");
     fetch(`/api/invitations/${invitation.id}/activity?page=${page}`, {
       cache: "no-store",
@@ -42,6 +49,7 @@ export function InvitationActivity({ invitation }: { invitation: Invitation }) {
         const body = await response.json();
         if (!response.ok)
           throw new Error(body.error?.message || "Ma’lumotlar olinmadi.");
+        activitySnapshots.set(key, body);
         setData(body);
       })
       .catch((error) => {
@@ -51,7 +59,7 @@ export function InvitationActivity({ invitation }: { invitation: Invitation }) {
   }, [invitation.id, page, refresh]);
   async function moderate(
     id: string,
-    status: "approved" | "hidden" | "received" | "issue",
+    status: "approved" | "deleted" | "received" | "issue",
   ) {
     setBusy(true);
     setError("");
@@ -62,7 +70,7 @@ export function InvitationActivity({ invitation }: { invitation: Invitation }) {
           method: "PATCH",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(
-            status === "approved" || status === "hidden"
+            status === "approved" || status === "deleted"
               ? { wishId: id, status }
               : { receiptId: id, status },
           ),
@@ -80,35 +88,49 @@ export function InvitationActivity({ invitation }: { invitation: Invitation }) {
   }
   return (
     <main className={styles.page}>
-      <Link href="/dashboard">← Taklifnomalarim</Link>
-      <h1>
-        {getContent(invitation).people.filter(Boolean).join(" & ") ||
-          "Taklifnoma"}
-      </h1>
       <div className={styles.toolbar}>
-        <p>Mehmonlar faolligi va shaxsiy to‘yona cheklari. Tasdiqlangan tilaklar taklifnomada ko‘rinadi.</p>
-        <button type="button" onClick={() => setRefresh((value) => value + 1)} disabled={busy}>
-          Yangilash
-        </button>
+        <div className={styles.headingBlock}>
+          <div className={styles.titleRow}>
+            <Link href="/dashboard" className={styles.headerIconButton} aria-label="Taklifnomalarimga qaytish" title="Taklifnomalarimga qaytish">
+              <ArrowLeft size={19} />
+            </Link>
+            <h1>
+              {getContent(invitation).people.filter(Boolean).join(" & ") ||
+                "Taklifnoma"}
+            </h1>
+            <Link href={`/studio/${encodeURIComponent(invitation.id)}`} className={styles.headerIconButton} aria-label="Taklifnomani tahrirlash" title="Tahrirlash">
+              <Pencil size={17} />
+            </Link>
+            <button
+              className={styles.headerIconButton}
+              type="button"
+              onClick={() => setRefresh((value) => value + 1)}
+              disabled={busy}
+              aria-label="Faollikni yangilash"
+              title="Yangilash"
+            >
+              <RefreshCw size={18} />
+            </button>
+          </div>
+          <p>Mehmonlar faolligi va shaxsiy to‘yona cheklari. Tasdiqlangan tilaklar taklifnomada ko‘rinadi.</p>
+        </div>
       </div>
-      <TelegramHint />
       {error && <p role="alert">{error}</p>}
       {!data && !error && <p role="status">Yuklanmoqda…</p>}
       {data && (
         <>
-          <div className={styles.totals}>
-            <span>
-              Javoblar: <strong>{data.totals.responses}</strong>
-            </span>
-            <span>
-              Keladigan mehmonlar: <strong>{data.totals.guests}</strong>
-            </span>
-              <span className={data.totals.pending ? styles.pendingTotal : ""}>
-              Kutilayotgan tilaklar: <strong>{data.totals.pending}</strong>
-            </span>
-          </div>
-          <div className={styles.columns}>
-            <section>
+          <nav className={styles.sectionTabs} aria-label="Faollik bo‘limlari" role="tablist">
+            <button role="tab" aria-selected={section === "responses"} onClick={() => setSection("responses")}>
+              Javoblar <span>{data.totals.responses}</span>
+            </button>
+            <button role="tab" aria-selected={section === "wishes"} onClick={() => setSection("wishes")}>
+              Tilaklar <span>{data.wishes.length}</span>
+            </button>
+            <button role="tab" aria-selected={section === "receipts"} onClick={() => setSection("receipts")}>
+              To‘yona <span>{data.receipts.length}</span>
+            </button>
+          </nav>
+          {section === "responses" && <section className={styles.sectionPanel} role="tabpanel">
               <h2>Qatnashish javoblari <small>({data.totals.responses})</small></h2>
               {!data.responses.length && <p>Hozircha javob yo‘q.</p>}
               {data.responses.map((item) => (
@@ -126,62 +148,78 @@ export function InvitationActivity({ invitation }: { invitation: Invitation }) {
                   </p>
                 </article>
               ))}
-            </section>
-            <section>
+          </section>}
+          {section === "wishes" && <section className={styles.sectionPanel} role="tabpanel">
               <div className={styles.sectionHeading}>
                 <h2>Mehmonlar tilaklari <small>({data.wishes.length})</small></h2>
-                <label className={styles.filter}>Ko‘rsatish
-                  <select value={wishFilter} onChange={(event) => { setWishFilter(event.target.value as typeof wishFilter); setPage(0); }}>
-                    <option value="all">Barchasi</option>
-                    <option value="pending">Kutilmoqda</option>
-                    <option value="approved">Tasdiqlangan</option>
-                    <option value="hidden">Yashirilgan</option>
-                  </select>
-                </label>
+                <div className={styles.filter}>
+                  <span>Ko‘rsatish</span>
+                  <div className={styles.filterSelect}>
+                    <SoftSelect
+                      value={wishFilter}
+                      label="Tilaklarni ko‘rsatish"
+                      squareOptions
+                      options={[
+                        { value: "all", label: "Barchasi" },
+                        { value: "pending", label: "Kutilmoqda" },
+                        { value: "approved", label: "Tasdiqlangan" },
+                      ]}
+                      onChange={(value) => { setWishFilter(value as typeof wishFilter); setPage(0); }}
+                    />
+                  </div>
+                </div>
               </div>
               {!data.wishes.length && <p>Hozircha mehmonlardan tilak kelmadi. Yangi tilaklar shu yerda ko‘rinadi.</p>}
               {data.wishes.filter((item) => wishFilter === "all" || item.status === wishFilter).length === 0 && data.wishes.length > 0 && <p>Bu holatda tilaklar yo‘q.</p>}
               {data.wishes.filter((item) => wishFilter === "all" || item.status === wishFilter).map((item) => (
-                <article key={item.id}>
-                  <div className={styles.wishMeta}><strong>{item.name}</strong><time dateTime={item.createdAt}>{new Intl.DateTimeFormat("uz-UZ", { dateStyle: "medium", timeStyle: "short" }).format(new Date(item.createdAt))}</time></div>
-                  <p className={styles.message}>{item.message}</p>
-                  <small>
-                    {{
-                      pending: "Tasdiqlash kutilmoqda",
-                      approved: "Taklifnomada ko‘rinadi",
-                      hidden: "Yashirilgan",
-                    }[item.status as "pending"] || item.status}
-                  </small>
-                  <div className={styles.actions}>
+                <article className={styles.wishCard} key={item.id}>
+                  <header className={styles.wishHeader}>
+                  </header>
+                  <div className={styles.wishMessage}>
+                    <div className={styles.wishMessageHeading}>
+                      <span><UserRound size={15} /> {item.name}</span>
+                      <time dateTime={item.createdAt}><Clock3 size={14} />{formatDate(item.createdAt, "uz-Latn", invitation.timezone, { day: "numeric", month: "long", year: "numeric", hour: "2-digit", minute: "2-digit" })}</time>
+                    </div>
+                    <p className={styles.message}>{item.message}</p>
+                  </div>
+                  <div className={`${styles.wishActions} ${item.status === "pending" ? "" : styles.singleWishAction}`}>
                     {item.status === "pending" && (
                       <button
+                        className={styles.approveIcon}
                         disabled={busy}
                         onClick={() => void moderate(item.id, "approved")}
+                        aria-label="Tilakni tasdiqlash"
+                        title="Tasdiqlash"
                       >
-                        Tasdiqlash
+                        <Check size={18} />
                       </button>
                     )}
-                    {item.status !== "hidden" && (
+                    {item.status !== "deleted" && (
                       <button
+                        className={styles.deleteWishIcon}
                         disabled={busy}
-                        onClick={() => void moderate(item.id, "hidden")}
+                        onClick={() => {
+                          if (window.confirm("Ushbu mehmon tilagini butunlay o‘chirasizmi?"))
+                            void moderate(item.id, "deleted");
+                        }}
+                        aria-label="Tilakni o‘chirish"
+                        title="O‘chirish"
                       >
-                        Yashirish
+                        <Trash2 size={17} />
                       </button>
                     )}
                   </div>
                 </article>
               ))}
-            </section>
-          </div>
-          <section>
+          </section>}
+          {section === "receipts" && <section className={styles.sectionPanel} role="tabpanel">
             <h2>To‘yona cheklari · faqat sizga ko‘rinadi</h2>
             <p>
               AI va bank tekshiruvi yo‘q. Pul hisobingizga tushganini o‘zingiz
               tekshirib, belgi qo‘ying.
             </p>
             {!data.receipts.length && <p>Hozircha chek yo‘q.</p>}
-            <div className={styles.columns}>
+            <div className={styles.receiptGrid}>
               {data.receipts.map((item) => (
                 <article key={item.id}>
                   <strong>{item.giverNames}</strong>
@@ -223,7 +261,7 @@ export function InvitationActivity({ invitation }: { invitation: Invitation }) {
                 </article>
               ))}
             </div>
-          </section>
+          </section>}
           <nav aria-label="Javoblar sahifalari" className={styles.actions}>
             <button
               disabled={page === 0 || busy}
@@ -245,14 +283,3 @@ export function InvitationActivity({ invitation }: { invitation: Invitation }) {
   );
 }
 
-function TelegramHint() {
-  const [url, setUrl] = useState("");
-  useEffect(() => {
-    fetch("/api/telegram/info", { cache: "force-cache" })
-      .then((response) => response.ok ? response.json() : null)
-      .then((result) => { if (result?.botUrl) setUrl(result.botUrl); })
-      .catch(() => {});
-  }, []);
-  if (!url) return null;
-  return <p className={styles.telegramHint}>Yangi tilaklarni Telegram orqali ham olish uchun botni bir marta oching va “Start” tugmasini bosing. <a href={url} target="_blank" rel="noreferrer">Telegram botni ochish ↗</a></p>;
-}

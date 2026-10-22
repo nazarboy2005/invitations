@@ -95,6 +95,11 @@
   line-height: 1.4;
 }
 
+.squareOptions .option {
+  border: 0;
+  border-radius: 8px;
+}
+
 .option:hover,
 .option.active {
   background: var(--accent-soft);

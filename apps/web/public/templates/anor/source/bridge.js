@@ -46,8 +46,7 @@
       rsvpDeadline: (date) => `Iltimos, ${date}gacha javob bering`,
       preview: "Ko‘rish rejimida javob yuborilmaydi.",
       rsvpThanks: "Rahmat! Javobingiz saqlandi.",
-      wishThanks:
-        "Tilagingiz yuborildi. Taklifnoma egasi tasdiqlagach ko‘rinadi.",
+      wishThanks: "Tilagingiz yuborildi.",
       error: "Yuborishda xatolik. Qayta urinib ko‘ring.",
       musicOn: "Musiqani yoqish",
       musicOff: "Musiqani o‘chirish",
