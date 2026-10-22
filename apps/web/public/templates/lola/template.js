@@ -167,7 +167,7 @@
       gsap.to('.program-stem path', { strokeDashoffset: 0, ease: 'none', scrollTrigger: { trigger: '.program-section', start: 'top 72%', end: 'bottom 65%', scrub: .7 } });
       gsap.to('.hero__bouquet', { yPercent: 7, rotation: 1.6, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: .8 } });
       gsap.to('.stitch-frame path', { strokeDashoffset: 0, ease: 'none', scrollTrigger: { trigger: '.napkin', start: 'top 83%', end: 'bottom 55%', scrub: .65 } });
-      gsap.to('.footer:before', { opacity: .42, ease: 'none', scrollTrigger: { trigger: '.footer', start: 'top bottom', end: 'bottom bottom', scrub: .7 } });
+      gsap.to('.footer', { '--footer-glow-opacity': .42, ease: 'none', scrollTrigger: { trigger: '.footer', start: 'top bottom', end: 'bottom bottom', scrub: .7 } });
     } else {
       const observer = new IntersectionObserver(entries => entries.forEach(entry => {
         if (entry.isIntersecting) {

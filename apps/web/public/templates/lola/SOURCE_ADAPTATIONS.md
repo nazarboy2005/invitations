@@ -16,3 +16,9 @@ The stylesheet is loaded after the captured template styles. It does not alter
 the captured source files or the catalog-only preview fixture. The source
 package remains unpublished until browser, mobile, reduced-motion,
 save/reopen, and service checks pass.
+
+The packaged `template.js` and `template.css` also include a focused motion
+repair for a captured GSAP warning. GSAP cannot select the CSS pseudo-element
+`.footer:before` as a DOM target; the adapter animates the footer's
+`--footer-glow-opacity` custom property instead, and the pseudo-element reads
+that property. The scroll-linked glow is preserved and the warning is removed.

@@ -65,11 +65,34 @@ test("Lola retains the captured invitation body, template styles, scripts, metad
     "motion.js",
     "meta.js",
   ]) {
+    if (file === "template.js") {
+      assert.equal(
+        normalize(read(appRoot, file)).replace(
+          "gsap.to('.footer', { '--footer-glow-opacity': .42",
+          "gsap.to('.footer:before', { opacity: .42",
+        ),
+        normalize(read(captureRoot, file)),
+        "the platform animation targets the footer and its CSS custom property",
+      );
+      continue;
+    }
+    if (file === "template.css") {
+      assert.equal(
+        normalize(read(appRoot, file)).replace(
+          "opacity:var(--footer-glow-opacity,0)",
+          "opacity:0",
+        ),
+        normalize(read(captureRoot, file)),
+        "the platform footer glow reads the value animated on its DOM element",
+      );
+      continue;
+    }
     assert.equal(
       normalize(read(appRoot, file)),
       normalize(read(captureRoot, file)),
     );
   }
+  assert.match(read(appRoot, "template.js"), /gsap\.to\('\.footer', \{ '--footer-glow-opacity': \.42/);
   assert.match(html, /href="contract-adapter\.css"/);
   assert.match(
     read(appRoot, "contract-adapter.css"),
@@ -125,7 +148,13 @@ test("Lola restores the lid asset omitted from the immutable capture manifest", 
   );
   const sourceCss = read(captureRoot, "template.css");
   assert.match(sourceCss, /url\(['"]art\/sandiq-lid\.webp['"]\)/);
-  assert.equal(read(appRoot, "template.css"), sourceCss);
+  assert.equal(
+    read(appRoot, "template.css").replace(
+      "opacity:var(--footer-glow-opacity,0)",
+      "opacity:0",
+    ),
+    sourceCss,
+  );
 
   const lid = readFileSync(new URL("art/sandiq-lid.webp", appRoot));
   assert.equal(lid.toString("ascii", 0, 4), "RIFF");

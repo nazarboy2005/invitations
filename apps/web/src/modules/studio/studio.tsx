@@ -1204,7 +1204,7 @@ export function Studio({
           Ko‘rinishi
         </button>
       </div>
-      <div className={styles.workspace}>
+      <div className={`${styles.workspace} ${section === 0 && invitation.templateId ? styles.hasSelectionActions : ""}`}>
         <aside
           className={`${styles.sidebar} ${mobilePreview ? styles.mobileHidden : ""}`}
           aria-label="Tahrirlash bo‘limlari"
@@ -2608,6 +2608,20 @@ export function Studio({
           </p>
         </aside>
       </div>
+      {section === 0 && invitation.templateId && (
+        <div className={styles.mobileSelectionActions}>
+          <Link className={styles.secondaryButton} href="/dashboard">
+            <ArrowLeft size={16} /> Orqaga
+          </Link>
+          <button
+            type="button"
+            className={styles.saveButton}
+            onClick={() => goToSection(1)}
+          >
+            Davom etish <ChevronRight size={16} />
+          </button>
+        </div>
+      )}
       {auth && (
         <div
           className={styles.overlay}
