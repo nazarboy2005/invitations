@@ -110,6 +110,10 @@ const birthdayTemplatesMigration = readFileSync(
   ),
   "utf8",
 );
+const konfettiPublicationMigration = readFileSync(
+  new URL("../packages/database/migrations/0065_publish_konfetti.sql", import.meta.url),
+  "utf8",
+);
 const nahorTemplatesMigration = readFileSync(
   new URL(
     "../packages/database/migrations/0043_add_nahor_templates.sql",
@@ -150,6 +154,7 @@ test("registered Marxaba designs reflect their release state and additive migrat
     "shahzoda",
     "chavandoz",
     "beshik",
+    "konfetti",
     "kozgu",
     "qandil",
   ]);
@@ -177,7 +182,7 @@ test("registered Marxaba designs reflect their release state and additive migrat
     chavandoz: specialtyMigration,
     beshik: beshikMigration,
     "shirin-bayram": shirinMigration,
-    konfetti: birthdayTemplatesMigration,
+    konfetti: konfettiPublicationMigration,
     "oltin-kuz": birthdayTemplatesMigration,
     "oltin-yosh": birthdayTemplatesMigration,
     nahor: nahorTemplatesMigration,

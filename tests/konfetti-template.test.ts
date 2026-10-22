@@ -248,4 +248,10 @@ test("the adapter uses shared invitation data and documents source-only fields",
     assert.ok(notes.includes(gap), `${gap} is documented`);
   assert.match(notes, /preview-sample\.json/);
   assert.match(notes, /birthday.*yubiley/s);
+  const publication = readFileSync(
+    new URL("../packages/database/migrations/0065_publish_konfetti.sql", import.meta.url),
+    "utf8",
+  );
+  assert.match(publication, /VALUES \('konfetti', 'Konfetti', 15000000, 'UZS', true\)/);
+  assert.match(publication, /\('konfetti', 'birthday'\)[\s\S]*\('konfetti', 'yubiley'\)/);
 });
