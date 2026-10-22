@@ -1,0 +1,10 @@
+﻿import test from 'node:test';
+import assert from 'node:assert/strict';
+import {readFile} from 'node:fs/promises';
+import {createHash} from 'node:crypto';
+import {existsSync} from 'node:fs';
+const base='apps/web/public/templates/onlinetaklifnoma-andalus-darvozasi';
+test('Andalus source assets match recorded origin hashes',async()=>{const manifest=JSON.parse(await readFile(`${base}/source/assets-provenance.json`,'utf8'));assert.equal(manifest.sourcePageUrl,'https://onlinetaklifnoma.app/templates/andalus-darvozasi/full');assert.equal(manifest.assets.length,22);for(const asset of manifest.assets){const file=`${base}/source/${asset.local}`;assert.ok(existsSync(file),asset.local);const hash=createHash('sha256').update(await readFile(file)).digest('hex');assert.equal(hash,asset.sha256,asset.local);}});
+test('Andalus adapter binds dynamic data and only app submission endpoints',async()=>{const html=await readFile(`${base}/index.html`,'utf8'),bridge=await readFile(`${base}/bridge.js`,'utf8'),adapter=await readFile('apps/web/src/templates/onlinetaklifnoma/andalus-darvozasi/renderer.tsx','utf8'),contract=await readFile('packages/contracts/src/index.ts','utf8');for(const field of ['groom','bride','dateTime','venue','program','gallery','toyona','rsvp','wishes','music'])assert.match(bridge,new RegExp(field));assert.match(bridge,/data\.apiBase\+'\/wishes'/);assert.match(bridge,/data\.apiBase.*rsvp/);assert.match(bridge,/note:v\.get\('note'\)/);assert.match(adapter,/CATALOG_PREVIEW_MUSIC/);assert.match(contract,/id: "andalus-darvozasi"[\s\S]*?published: false/);assert.match(html,/0406c5e6b78ef68d\.mp4/);assert.doesNotMatch(bridge,/webhook|formspree|analytics|gtag\(/i);assert.doesNotMatch(html,/demo (?:name|venue)|sample@example/i);});
+test('gift card hides unless real enabled card fields exist',async()=>{const bridge=await readFile(`${base}/bridge.js`,'utf8');assert.match(bridge,/gift:data\.toyona\?\.enabled && data\.toyona\.cardNumber\?\.trim\(\) && data\.toyona\.cardHolder\?\.trim\(\)/);assert.match(bridge,/navigator\.clipboard\?\.writeText[\s\S]*navigator\.clipboard\.writeText\(number\)/);});
+

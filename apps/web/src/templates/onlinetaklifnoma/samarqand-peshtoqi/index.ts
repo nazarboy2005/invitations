@@ -1,0 +1,1 @@
+export { SamarqandPeshtoqInvitation } from "./renderer";

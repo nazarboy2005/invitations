@@ -1,0 +1,1 @@
+.public,.preview,.full{width:100%;overflow:hidden}.public{min-height:100dvh}.preview{height:100%;min-height:720px}.full{height:100dvh;min-height:660px}.public iframe,.preview iframe,.full iframe{display:block;width:100%;height:100%;min-height:inherit;border:0;background:#081736}.public iframe{min-height:100dvh}

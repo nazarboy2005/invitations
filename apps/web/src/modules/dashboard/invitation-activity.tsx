@@ -12,6 +12,7 @@ type Activity = {
     name: string;
     status: "yes" | "no" | "maybe";
     partySize: number;
+    note: string;
   }>;
   wishes: Array<{ id: string; name: string; message: string; status: string; createdAt: string }>;
   receipts: Array<{
@@ -144,6 +145,7 @@ export function InvitationActivity({ invitation }: { invitation: Invitation }) {
                     }
                     {item.status === "yes" ? ` · ${item.partySize} kishi` : ""}
                   </p>
+                  {item.note && <p className={styles.wishMessage}>{item.note}</p>}
                 </article>
               ))}
           </section>}

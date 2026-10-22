@@ -32,6 +32,7 @@ export async function POST(request: Request, { params }: Context) {
         name: z.string().trim().min(1).max(100),
         status: z.enum(["yes", "no", "maybe"]),
         partySize: z.number().int().min(0).max(100),
+        note: z.string().trim().max(1000).optional().default(""),
         guestToken: z.string().max(128).optional(),
       })
       .parse(await readJson(request, 5000));
@@ -63,7 +64,7 @@ export async function POST(request: Request, { params }: Context) {
         await tx`SELECT id FROM invitation_guests WHERE id=${guest.id} FOR UPDATE`;
         await tx`DELETE FROM rsvp_responses WHERE invitation_id=${invitationId} AND guest_id=${guest.id}`;
       }
-      await tx`INSERT INTO rsvp_responses(invitation_id,guest_id,name,status,party_size,response_token_hash) VALUES(${invitationId},${guest?.id ?? null},${input.name},${input.status},${party},${responseHash}) ON CONFLICT(response_token_hash) DO UPDATE SET name=EXCLUDED.name,status=EXCLUDED.status,party_size=EXCLUDED.party_size,created_at=now()`;
+      await tx`INSERT INTO rsvp_responses(invitation_id,guest_id,name,status,party_size,note,response_token_hash) VALUES(${invitationId},${guest?.id ?? null},${input.name},${input.status},${party},${input.note},${responseHash}) ON CONFLICT(response_token_hash) DO UPDATE SET name=EXCLUDED.name,status=EXCLUDED.status,party_size=EXCLUDED.party_size,note=EXCLUDED.note,created_at=now()`;
     });
     const response = NextResponse.json(
       { ok: true, message: "Javobingiz saqlandi. Rahmat!" },

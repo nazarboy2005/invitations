@@ -1,0 +1,8 @@
+# Ming bir kecha — source adaptations
+
+- Source ID: `ming-bir-kecha`. Full source: https://onlinetaklifnoma.app/templates/ming-bir-kecha/full. Product page: https://onlinetaklifnoma.app/templates/ming-bir-kecha.
+- The untouched capture is `Invitations - this folder will be removed from production/OnlineTaklifnoma/Web invitations/onlinetaklifnoma.app/templates/ming-bir-kecha/full/index.html`.
+- The source has a midnight-purple atmosphere, gold arch borders, floating firefly lights, script names, Cormorant Garamond body type, date/calendar lockup, venue/map, program, gallery, RSVP, wishes and footer. The captured page references one unique background image and source font CSS; the exact art and the two used type families were recovered from the live source URLs. URLs and SHA-256 values are listed in `source/assets-provenance.json`.
+- `index.html` and `template.css` implement this design independently. Its optional To‘yona card uses the design’s dark-violet panel, thin gold frame and source typography. The copied number is the creator’s real saved number. The card stays hidden unless gift data is enabled and both cardholder and number are present.
+- The iframe adapter reads the saved invitation model. It binds the guest greeting, event copy, date/countdown, venue/map, program, gallery, selected music, RSVP and wishes to the app APIs. Catalog preview uses Emotional Piano; sample wishes and gift data are preview-only.
+- Registration migration: `packages/database/migrations/0100_register_ming_bir_kecha.sql`; the template is inserted unpublished. Release checks and authenticated save/publish/public-render/reopen checks are tracked in `docs/templates/ONLINETAKLIFNOMA_ROADMAP.md`.

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="utf-8">
+<script>document.documentElement.className += " js";</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Taklifnoma</title>
+<meta name="description" content="">
+<meta property="og:title" content="Taklifnoma">
+<meta property="og:description" content="">
+
+
+<link href="/templates/taklifnomachi-12/fonts.css" rel="stylesheet">
+<link rel="stylesheet" href="/templates/taklifnomachi-12/source/templates/12/css/style.css">
+<link rel="stylesheet" href="/templates/taklifnomachi-12/adapter.css">
+</head>
+<body>
+
+<audio id="bg-audio" loop preload="auto"><source src="/templates/taklifnomachi-12/source/templates/12/audio/music.mp3" type="audio/mpeg"></audio>
+
+<!-- ===== INTRO (click seal to open) ===== -->
+<div class="intro" id="intro">
+  <div class="intro__bg"></div>
+  <div class="intro__inner">
+    <div class="intro__eyebrow">Taklifnoma</div>
+    <div class="intro__names"> <span>&amp;</span> </div>
+    <div class="intro__date"></div>
+    <button class="intro__seal" id="introEnvelope" aria-label="Ochish">
+      <span class="env" aria-hidden="true">
+        <span class="env__glow"></span>
+        <span class="env__paper">
+          <span class="env__flap"></span>
+          <span class="seal">
+            <span class="seal__ring"></span>
+            <span class="seal__heart">&#9829;</span>
+          </span>
+        </span>
+      </span>
+      <span class="intro__hint">Ochish uchun bosing</span>
+    </button>
+  </div>
+</div>
+
+<button class="music-btn" id="musicBtn" aria-label="Musiqa"><img src="/templates/taklifnomachi-12/source/templates/12/assets/music-note.png" alt=""><span class="music-btn__ring"></span></button>
+
+<!-- ===== DESIGN (pixel-faithful to Figma frame 12:1059, 490px column) ===== -->
+<div class="stage" id="stage">
+<main class="design" id="design">
+
+  <!-- ===== HERO ===== -->
+  <video class="el hero__video reveal" data-anim="zoom" style="left:25px;top:0;width:441px;height:784px"
+         src="/templates/taklifnomachi-12/source/templates/12/assets/0521.mp4" poster="/templates/taklifnomachi-12/source/templates/12/assets/hero.png" autoplay muted loop playsinline preload="auto"></video>
+  <div class="el grad-hero" style="left:25px;top:477px;width:441px;height:308px"></div>
+  <div class="el txt-c reveal" data-anim="fade" data-delay=".3" style="left:110px;top:108px;width:269px">
+    <div class="gv hero__event" style="font-size:40px;line-height:46px;color:#4a4a4a">Nikoh kuni</div>
+    <div class="annap hero__date" style="font-size:26px;line-height:34px;color:#4a4a4a;margin-top:2px"></div>
+  </div>
+  <div class="el gv txt-c reveal hero__names" data-anim="up" data-delay=".4"
+       style="left:110px;top:274px;width:269px;font-size:60px;line-height:48px;color:#3a3a3a">
+    <br><span style="font-size:.7em">&amp;</span><br>
+  </div>
+  <a class="el pill reveal" data-anim="fade" data-delay="1" href="#"
+     style="left:150px;top:599px;width:190px;height:48px">
+    <span>Pastga suring</span><span class="pill__arr">&#8595;</span>
+  </a>
+
+  <!-- ===== TOYIMIZ VAQTI ===== -->
+  <div id="sec-date" class="el gv txt-c reveal date-heading" data-anim="up" style="left:110px;top:794px;width:269px;font-size:41px;line-height:64px;color:#3a3a3a">Toyimiz vaqti</div>
+  <div class="el ruf txt-c reveal" data-anim="fade" data-delay=".2" style="left:90px;top:861px;width:310px;font-size:18px;line-height:21px;color:#7a9aaa">&#10022;&nbsp; Ko&rsquo;rish uchun ustiga bosing &nbsp;&#10022;</div>
+
+  <div class="el scard reveal" data-anim="up" data-delay=".1" style="left:33px;top:912px;width:133px;height:153px">
+    <span class="scard__val ruf"></span>
+    <canvas class="scard__cv" width="133" height="153"></canvas>
+  </div>
+  <div class="el lbl ruf txt-c reveal" data-anim="fade" data-delay=".15" style="left:83px;top:1076px;width:33px">Kun</div>
+
+  <div class="el scard reveal" data-anim="up" data-delay=".22" style="left:179px;top:912px;width:133px;height:153px">
+    <span class="scard__val ruf"></span>
+    <canvas class="scard__cv" width="133" height="153"></canvas>
+  </div>
+  <div class="el lbl ruf txt-c reveal" data-anim="fade" data-delay=".27" style="left:226px;top:1076px;width:40px">OY</div>
+
+  <div class="el scard reveal" data-anim="up" data-delay=".34" style="left:325px;top:912px;width:133px;height:153px">
+    <span class="scard__val ruf"></span>
+    <canvas class="scard__cv" width="133" height="153"></canvas>
+  </div>
+  <div class="el lbl ruf txt-c reveal" data-anim="fade" data-delay=".39" style="left:369px;top:1076px;width:40px">Yil</div>
+
+  <!-- ===== ASSALOMU ALAYKUM ===== -->
+  <img class="el" style="left:178px;top:1143px;width:108px;height:84px;z-index:6" src="/templates/taklifnomachi-12/source/templates/12/assets/heart-blue.png" alt="">
+  <img class="el" style="left:243px;top:1169px;width:69px;height:59px;z-index:6" src="/templates/taklifnomachi-12/source/templates/12/assets/heart-blue-sm.png" alt="">
+  <div class="el greet reveal" data-anim="zoom" data-delay=".15" style="left:0;top:1217px;width:490px;height:490px">
+    <img class="greet__back" src="/templates/taklifnomachi-12/source/templates/12/assets/env-back.png" alt="">
+    <div class="greet__card">
+      <div class="gv txt-c greet-title" style="font-size:33px;line-height:41px;color:#3a3a3a">Assalomu alaykum</div>
+      <p class="ruf txt-c invite-copy" style="font-size:18px;line-height:23px;color:#3a3a3a">Sizni hayotimizdagi eng baxtiyor kun — nikoh to&#39;yimizga bag&#39;ishlangan tantanali kechaning aziz mehmoni bo&#39;lishga taklif etamiz.</p>
+    </div>
+    <img class="greet__front" src="/templates/taklifnomachi-12/source/templates/12/assets/env-front.png" alt="">
+  </div>
+
+  <!-- ===== MANZIL ===== -->
+  <div class="el gv txt-c reveal venue-heading" data-anim="up" style="left:90px;top:1799px;width:310px;font-size:45px;line-height:41px;color:#3a3a3a">Manzil</div>
+  <div class="el venue reveal" data-anim="up" data-delay=".1" style="left:26px;top:1865px;width:440px;height:586px;z-index:2">
+    <img class="venue__photo" src="/templates/taklifnomachi-12/source/templates/12/assets/ceremony.png" alt="">
+    <div class="venue__grad"></div>
+    <img class="venue__pin" style="left:69px;top:51px;width:51px;height:51px" src="/templates/taklifnomachi-12/source/templates/12/assets/pin.png" alt="">
+    <div class="venue__name ruf" style="left:130px;top:54px"></div>
+    <div class="venue__city ruf" style="left:130px;top:78px"></div>
+  </div>
+  <img class="el cloud cloud--l" style="left:-380px;top:1983px;width:707px;height:350px" src="/templates/taklifnomachi-12/source/templates/12/assets/cloud-l.png" alt="">
+  <img class="el cloud cloud--r" style="left:160px;top:2158px;width:708px;height:266px" src="/templates/taklifnomachi-12/source/templates/12/assets/cloud-r.png" alt="">
+
+  <!-- ===== MEHMONLAR TILAKLARI ===== -->
+  <div class="el gv txt-c reveal wishes-title" data-anim="up" style="left:90px;top:2545px;width:310px;font-size:48px;line-height:64px;color:#3a3a3a">Mehmonlar tilaklari</div>
+  <div class="el ruf txt-c reveal wishes-hint" data-anim="fade" data-delay=".15" style="left:111px;top:2615px;width:268px;font-size:18px;line-height:23px;color:#4a4a4a">Samimiy tilaklaringizni bildirish<br>uchun pastdagi tugmani bosing</div>
+  <button class="el wbtn reveal" data-anim="up" data-delay=".3" id="openWish" style="left:140px;top:2700px;width:210px;height:41px">Tilak bildirish</button>
+
+  <!-- ===== TO'YIMIZGACHA ===== -->
+  <div class="el gv txt-c reveal countdown-title" data-anim="up" class="countdown-title" style="left:90px;top:2844px;width:310px;font-size:48px;line-height:60px;color:#3a3a3a">To&rsquo;yimizgacha</div>
+  <div id="sec-cd" data-target="" class="el anc cd-row reveal" data-anim="up" data-delay=".15" style="left:55px;top:2905px;width:382px;height:72px">
+    <span class="cd-num" data-cd="days">00</span><span class="cd-sep">:</span><span class="cd-num" data-cd="hours">00</span><span class="cd-sep">:</span><span class="cd-num" data-cd="minutes">00</span><span class="cd-sep">:</span><span class="cd-num" data-cd="seconds">00</span>
+  </div>
+  <div class="el anc cd-lbl txt-c reveal" data-anim="fade" data-delay=".2" style="left:68px;top:2987px;width:41px">Kun</div>
+  <div class="el anc cd-lbl txt-c reveal" data-anim="fade" data-delay=".28" style="left:171px;top:2987px;width:43px">Soat</div>
+  <div class="el anc cd-lbl txt-c reveal" data-anim="fade" data-delay=".36" style="left:264px;top:2988px;width:69px">Daqiqa</div>
+  <div class="el anc cd-lbl txt-c reveal" data-anim="fade" data-delay=".44" style="left:374px;top:2987px;width:66px">Soniya</div>
+  <img class="el reveal" data-anim="fade" data-delay=".3" style="left:231px;top:3057px;width:30px;height:30px" src="/templates/taklifnomachi-12/source/templates/12/assets/heart-line.png" alt="">
+
+</main>
+</div>
+
+<!-- ===== WISH MODAL ===== -->
+<div class="modal" id="wishModal">
+  <div class="modal__backdrop" data-close></div>
+  <div class="modal__box">
+    <button class="modal__x" data-close aria-label="Yopish">&times;</button>
+    <div class="gv modal__title">Tilak bildirish</div>
+    <form id="wishForm">
+      <label>Ismingiz<input type="text" name="name" required maxlength="40" placeholder="Ism familiya"></label>
+      <label>To&rsquo;yga kelasizmi?
+        <select name="attend" required>
+          <option value="">Tanlang...</option>
+          <option value="Ha, albatta kelaman">Ha, albatta kelaman</option>
+          <option value="Afsus, kela olmayman">Afsus, kela olmayman</option>
+          <option value="Keyinroq aniq aytaman">Keyinroq aniq aytaman</option>
+        </select>
+      </label>
+      <label>Tilagingiz<textarea name="wish" rows="3" maxlength="300" placeholder="Yosh kelin-kuyovga tilaklaringiz..."></textarea></label>
+      <div class="modal__error" role="alert" aria-live="polite"></div>
+      <button type="submit" class="wbtn">Yuborish</button>
+    </form>
+    <div class="modal__thanks" id="modalThanks">Tilagingiz uchun rahmat! &#9825;</div>
+  </div>
+</div>
+
+
+<script src="/templates/taklifnomachi-12/adapter.js"></script><script src="/templates/taklifnomachi-12/app.js"></script>
+
+</body>
+</html>

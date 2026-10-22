@@ -1,0 +1,1 @@
+Captured Vue module references `farewell-embroidered-arch.webp` and `quote-divider.webp`; neither exists in the original local capture. Each exact source asset URL returned 404 in the ChatGPT in-app browser. No substitute art is represented as original.

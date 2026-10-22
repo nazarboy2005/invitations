@@ -1,0 +1,1 @@
+Captured Monochrome module references `tear-edge-top-b-v4.png`; that file is missing from the original local capture. Its exact source URL returned HTTP 404 in the ChatGPT in-app browser. The source page capture is also saved at its loading state. No substitute artwork is passed off as the missing original.

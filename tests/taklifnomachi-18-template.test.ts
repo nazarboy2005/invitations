@@ -1,0 +1,5 @@
+﻿import {test} from 'node:test';import assert from 'node:assert/strict';import {readFileSync as read} from 'node:fs';
+const root='apps/web/public/templates/taklifnomachi-18/';
+test('demo 18 source art is packaged and production strips demo endpoints and names',()=>{const h=read(root+'index.html','utf8');assert.match(h,/source\/taklifnomachi\.uz\/templates-source\/18\/assets\/floral-timeline\.png/);for(const x of ['Azizbek','Gulsoraxon','BILLUR','demo-18','/api/rsvp','cloudflareinsights'])assert.ok(!h.includes(x),x)});
+test('demo 18 maps app content and service calls through its adapter',()=>{const a=read(root+'adapter.js','utf8');for(const x of ['d.groom','d.bride','d.message','d.dateTime','d.venue','d.program','d.music','d.toyona','/rsvp','/wishes'])assert.ok(a.includes(x),x)});
+test('demo 18 catalog contract starts unpublished',()=>{const c=read('packages/contracts/src/index.ts','utf8');const row=c.slice(c.indexOf('id: "taklifnomachi-18"'),c.indexOf('id: "taklifnomachi-18"')+800);assert.match(row,/published: false/)})

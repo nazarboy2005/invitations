@@ -1,0 +1,9 @@
+# Zarrin do‘ppi — source adaptations
+
+- Source ID: `zarrin-doppi`. Full source: https://onlinetaklifnoma.app/templates/zarrin-doppi/full. Product page: https://onlinetaklifnoma.app/templates/zarrin-doppi.
+- The untouched capture is `Invitations - this folder will be removed from production/OnlineTaklifnoma/Web invitations/onlinetaklifnoma.app/templates/zarrin-doppi/full/index.html`.
+- The capture’s exact deep-blue `#0e2554` texture is an inline SVG girih made from doppi embroidery motifs. It is extracted without alteration to `source/assets/doppi-girih.svg`; its source page and SHA-256 are recorded in `source/assets-provenance.json`. The source uses muted blue outlines, ivory text, gold `#d9b25f`, Great Vibes, and Cormorant Garamond. Local font files and source URLs/checksums are included in the same manifest.
+- Source-runtime review found fade, letter, word, rise, and handwrite text effects plus a stars particle layer. The package keeps the embroidered texture, arched navy frame, gold accents, source typefaces, star field, and reduced-motion support in its own HTML/CSS package.
+- The original design has no gift section. The optional To‘yona card uses a dark-blue enamel-like panel, source girih, narrow gold frame, and source type. It appears only with enabled, non-empty creator cardholder and card number values. Copy feedback is localized and only the saved number is copied.
+- The adapter uses the saved invitation data for the honoree, sunnat-toyi event label/copy, date/countdown, venue/map, program, gallery, creator-selected music, RSVP, and wishes. Catalog preview uses Emotional Piano and preview-only fixture data. Production forms submit only to the app’s RSVP and wishes APIs.
+- Migration `packages/database/migrations/0101_register_zarrin_doppi.sql` registers this design unpublished for `sunnat-toyi`.

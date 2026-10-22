@@ -47,6 +47,16 @@ export const MARXABA_TEMPLATE_IDS = [
   "korporativ",
   "yangi-uy",
   "taklifnomachi-1",
+  "taklifnomachi-12",
+  "taklifnomachi-13",
+  "taklifnomachi-15",
+  "taklifnomachi-16",
+  "taklifnomachi-17",
+  "taklifnomachi-18",
+  "taklifnomachi-19",
+  "taklifnomachi-17",
+  "taklifnomachi-18",
+  "taklifnomachi-19",
 ] as const;
 
 export function isMarxabaTemplate(id: string): boolean {

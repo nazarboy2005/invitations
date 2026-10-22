@@ -1,0 +1,42 @@
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url(/templates/monochrome-editorial-edition/source/reference/fonts/xn7_YHE41ni1AdIRqAuZuw1Bx9mbZk6jFO_F.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/templates/monochrome-editorial-edition/source/reference/fonts/xn7_YHE41ni1AdIRqAuZuw1Bx9mbZk79FO_F.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(/templates/monochrome-editorial-edition/source/reference/fonts/xn7_YHE41ni1AdIRqAuZuw1Bx9mbZk7PFO_F.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(/templates/monochrome-editorial-edition/source/reference/fonts/xn7_YHE41ni1AdIRqAuZuw1Bx9mbZk4jE-_F.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Marck Script';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/templates/monochrome-editorial-edition/source/reference/fonts/nwpTtK2oNgBA3Or78gapdwuCzw.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Prata';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/templates/monochrome-editorial-edition/source/reference/fonts/6xKhdSpbNNCT-vWI.ttf) format('truetype');
+}

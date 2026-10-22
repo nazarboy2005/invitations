@@ -9,6 +9,10 @@ import { VelvetRoyaleInvitation } from "@/templates/velvet-royale/renderer";
 import { OliveManorInvitation } from "@/templates/olive-manor/renderer";
 import { IslamicEditionInvitation } from "@/templates/islamic-edition/renderer";
 import { ManorInvitation } from "@/templates/manor-edition/renderer";
+import { OshEditionInvitation } from "@/templates/osh-edition-v1/renderer";
+import { MonochromeEditorialInvitation } from "@/templates/monochrome-editorial-edition/renderer";
+import { XatnaEditionInvitation } from "@/templates/xatna-edition/renderer";
+import { AmruMarufEditionInvitation } from "@/templates/amru-maruf-edition-v1/renderer";
 import styles from "./invitation-thumbnail.module.css";
 
 /** Reuse the real opening page, with authored content and no guest actions/audio. */
@@ -79,6 +83,14 @@ export function InvitationThumbnail({
             <IslamicEditionInvitation {...props} />
           ) : invitation.templateId === "manor-edition" ? (
             <ManorInvitation {...props} />
+          ) : invitation.templateId === "osh-edition-v1" ? (
+            <OshEditionInvitation {...props} silentPlayback />
+          ) : invitation.templateId === "monochrome-editorial-edition" ? (
+            <MonochromeEditorialInvitation {...props} silentPlayback />
+          ) : invitation.templateId === "amru-maruf-edition-v1" ? (
+            <AmruMarufEditionInvitation {...props} silentPlayback />
+          ) : invitation.templateId === "xatna-edition" ? (
+            <XatnaEditionInvitation {...props} silentPlayback />
           ) : isMarxabaTemplate(invitation.templateId) ? (
             <MarxabaInvitation
               {...props}

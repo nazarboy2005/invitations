@@ -9,7 +9,16 @@ import { VelvetRoyaleInvitation } from "@/templates/velvet-royale/renderer";
 import { OliveManorInvitation } from "@/templates/olive-manor/renderer";
 import { IslamicEditionInvitation } from "@/templates/islamic-edition/renderer";
 import { ManorInvitation } from "@/templates/manor-edition/renderer";
+import { OshEditionInvitation } from "@/templates/osh-edition-v1/renderer";
+import { MonochromeEditorialInvitation } from "@/templates/monochrome-editorial-edition/renderer";
+import { XatnaEditionInvitation } from "@/templates/xatna-edition/renderer";
+import { AmruMarufEditionInvitation } from "@/templates/amru-maruf-edition-v1/renderer";
 import { GulliDarvozaInvitation } from "@/templates/onlinetaklifnoma/gulli-darvoza";
+import { OltinDarvozaInvitation } from "@/templates/onlinetaklifnoma/oltin-darvoza-ortidagi-baxt";
+import { MingBirKechaInvitation } from "@/templates/onlinetaklifnoma/ming-bir-kecha";
+import { ZarrinDoppiInvitation } from "@/templates/onlinetaklifnoma/zarrin-doppi";
+import { AndalusDarvozasiInvitation } from "@/templates/onlinetaklifnoma/andalus-darvozasi";
+import { SamarqandPeshtoqInvitation } from "@/templates/onlinetaklifnoma/samarqand-peshtoqi";
 import { isChorloveTemplate, ChorloveInvitation } from "@/templates/chorlove";
 import { InvitationViewTracker } from "@/modules/catalog/invitation-view-tracker";
 export const dynamic = "force-dynamic";
@@ -45,6 +54,19 @@ export default async function InvitationPage({
       guestName = "";
     }
   }
+  if (invitation.templateId === "oltin-darvoza-ortidagi-baxt")
+    return (
+      <>
+        <InvitationViewTracker invitationId={result.id} />
+        <OltinDarvozaInvitation
+          invitation={invitation}
+          invitationId={result.id}
+          locale={locale}
+          guestName={guestName}
+          guestToken={query.g}
+        />
+      </>
+    );
   if (invitation.templateId === "gulli-darvoza")
     return (
       <>
@@ -56,6 +78,29 @@ export default async function InvitationPage({
           guestName={guestName}
           guestToken={query.g}
         />
+      </>
+    );
+  if (invitation.templateId === "ming-bir-kecha")
+    return (
+      <>
+        <InvitationViewTracker invitationId={result.id} />
+        <MingBirKechaInvitation invitation={invitation} invitationId={result.id} locale={locale} guestName={guestName} guestToken={query.g} />
+      </>
+    );
+  if (invitation.templateId === "samarqand-peshtoqi")
+    return <><InvitationViewTracker invitationId={result.id} /><SamarqandPeshtoqInvitation invitation={invitation} invitationId={result.id} locale={locale} guestName={guestName} guestToken={query.g} /></>;
+  if (invitation.templateId === "andalus-darvozasi")
+    return (
+      <>
+        <InvitationViewTracker invitationId={result.id} />
+        <AndalusDarvozasiInvitation invitation={invitation} invitationId={result.id} locale={locale} guestName={guestName} guestToken={query.g} />
+      </>
+    );
+  if (invitation.templateId === "zarrin-doppi")
+    return (
+      <>
+        <InvitationViewTracker invitationId={result.id} />
+        <ZarrinDoppiInvitation invitation={invitation} invitationId={result.id} locale={locale} guestName={guestName} guestToken={query.g} />
       </>
     );
   if (invitation.templateId === "anor")
@@ -164,6 +209,40 @@ export default async function InvitationPage({
           guestName={guestName}
           guestToken={query.g}
         />
+      </>
+    );
+  if (invitation.templateId === "osh-edition-v1")
+    return (
+      <>
+        <InvitationViewTracker invitationId={result.id} />
+        <OshEditionInvitation
+          invitation={invitation}
+          invitationId={result.id}
+          locale={locale}
+          guestName={guestName}
+          guestToken={query.g}
+        />
+      </>
+    );
+  if (invitation.templateId === "monochrome-editorial-edition")
+    return (
+      <>
+        <InvitationViewTracker invitationId={result.id} />
+        <MonochromeEditorialInvitation invitation={invitation} invitationId={result.id} locale={locale} guestName={guestName} guestToken={query.g} />
+      </>
+    );
+  if (invitation.templateId === "amru-maruf-edition-v1")
+    return (
+      <>
+        <InvitationViewTracker invitationId={result.id} />
+        <AmruMarufEditionInvitation invitation={invitation} invitationId={result.id} locale={locale} guestName={guestName} />
+      </>
+    );
+  if (invitation.templateId === "xatna-edition")
+    return (
+      <>
+        <InvitationViewTracker invitationId={result.id} />
+        <XatnaEditionInvitation invitation={invitation} invitationId={result.id} locale={locale} guestName={guestName} guestToken={query.g} />
       </>
     );
   notFound();

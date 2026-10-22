@@ -1,0 +1,71 @@
+{
+  "sourceId": "15",
+  "sourceUrl": "https://taklifnomachi.uz/demo/15",
+  "capturedFiles": [
+    {
+      "path": "taklifnomachi.uz/demo/15/index.html",
+      "sha256": "3d39a5e6679a69d189f1558e45f7f786c8d9c92e7de5cc4158e024ea27956a22",
+      "bytes": 17386
+    },
+    {
+      "path": "taklifnomachi.uz/templates/15/assets/countdown-bg.png",
+      "sha256": "1137b648f419c613deace33fd1357f483bf86543ad61d100cb39823046b5b793",
+      "bytes": 325675
+    },
+    {
+      "path": "taklifnomachi.uz/templates/15/assets/flower-greeting.svg",
+      "sha256": "cec6f911c76ce16ca28261d6344ae941afd4765c194171119ff4bd3ea64d3c0a",
+      "bytes": 50752
+    },
+    {
+      "path": "taklifnomachi.uz/templates/15/assets/leaf-l.svg",
+      "sha256": "bca1616bf302214e71fba80914076dd115edba3a3ad8ac1b3832625e1d91f163",
+      "bytes": 754
+    },
+    {
+      "path": "taklifnomachi.uz/templates/15/assets/leaf-tr.svg",
+      "sha256": "61cd0874576ca523b752b287f7d6181b0ee1f96616be90f70b4cc237f9d539a8",
+      "bytes": 755
+    },
+    {
+      "path": "taklifnomachi.uz/templates/15/assets/location-bg.png",
+      "sha256": "d5ec59a240778aef2607e60631ed4568c9a683e45ed12f70ba46ad1cccde5384",
+      "bytes": 97272
+    },
+    {
+      "path": "taklifnomachi.uz/templates/15/assets/main-bg.png",
+      "sha256": "3c18928c981df466dd5265d77c8ddf2a5a2f356db72f3256f8c2bdde02f165f0",
+      "bytes": 56509
+    },
+    {
+      "path": "taklifnomachi.uz/templates/15/assets/swipe-btn.svg",
+      "sha256": "fa8b45e8d1755cff63ac47f8531ede2367c3f1f9c902a5c2c7f39254f5380d03",
+      "bytes": 421
+    },
+    {
+      "path": "taklifnomachi.uz/templates/15/assets/swipe-end.svg",
+      "sha256": "e0c4c6f1be24bba493e98e7d4add4a20a3c351e3a217223ebc411c2fe8d17e95",
+      "bytes": 283
+    },
+    {
+      "path": "taklifnomachi.uz/templates/15/assets/video.mp4",
+      "sha256": "b97781b24e5441f10417463d77e76216582c2e444fad02dc9687d993cc96bd15",
+      "bytes": 10200983
+    },
+    {
+      "path": "taklifnomachi.uz/templates/15/audio/music.mp3",
+      "sha256": "e9ef8f19d92951a87cda10da25d066f1c08b341b70bf324d62c2dfbf03f6daeb",
+      "bytes": 2235288
+    },
+    {
+      "path": "taklifnomachi.uz/templates/15/css/style.css",
+      "sha256": "87edfef5b9c7652deb4506f94ab40f8a79823e927ed5e43228ce55fcc82f7f48",
+      "bytes": 5877
+    },
+    {
+      "path": "taklifnomachi.uz/templates/15/js/main.js",
+      "sha256": "62f821682941acc2b204a530eb68918abb025617a57f009ff5ccf4f79fc8d491",
+      "bytes": 7643
+    }
+  ]
+}

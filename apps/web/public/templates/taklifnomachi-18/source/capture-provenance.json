@@ -1,0 +1,111 @@
+{
+  "sourceId": "18",
+  "sourceUrl": "https://taklifnomachi.uz/demo/18",
+  "capturedFiles": [
+    {
+      "path": "taklifnomachi.uz/demo/18/index.html",
+      "sha256": "97f2e1e83355f9caeee9c01975cfa8e6982587a443a88318ad4876c56a9a3892",
+      "bytes": 29720
+    },
+    {
+      "path": "taklifnomachi.uz/templates-source/18/assets/bg.png",
+      "sha256": "1e51651e5272dea54204d32719b18d3600bf1fc31fb5c6ec24c61e09aefdd922",
+      "bytes": 1103972
+    },
+    {
+      "path": "taklifnomachi.uz/templates-source/18/assets/cal-icon.png",
+      "sha256": "3e1df01b5186799a42db769ce9b14948958c301d406b23f0721df9641c8abf31",
+      "bytes": 5680
+    },
+    {
+      "path": "taklifnomachi.uz/templates-source/18/assets/clock1.png",
+      "sha256": "0dc004199f586f25021d28435abed98abc3d5366cae33af6b72145bc1627c421",
+      "bytes": 8368
+    },
+    {
+      "path": "taklifnomachi.uz/templates-source/18/assets/clock2.png",
+      "sha256": "06d35597f14891a71f547849231df6fa8ef99072682a1fa39f7407458bcaaa94",
+      "bytes": 6018
+    },
+    {
+      "path": "taklifnomachi.uz/templates-source/18/assets/clock3.png",
+      "sha256": "d8774ab9094b59e53946ba4cca14d63eb1f215986a0683fa62470c438f2342da",
+      "bytes": 7021
+    },
+    {
+      "path": "taklifnomachi.uz/templates-source/18/assets/dress-icon1.png",
+      "sha256": "4941df91055114de5c3b91b55a7461b2818b82b31b3f0c7b12c34a430e8595df",
+      "bytes": 10131
+    },
+    {
+      "path": "taklifnomachi.uz/templates-source/18/assets/dress-icon2.png",
+      "sha256": "c43afe01f28d0b0872f2df8ad7312246060b54da6b8d3ea5ea10dd7d8c200d11",
+      "bytes": 9261
+    },
+    {
+      "path": "taklifnomachi.uz/templates-source/18/assets/floral-form.png",
+      "sha256": "1c48f92c0d49ad8221ff785ec14842312c58b976afceb2878898909c70e28353",
+      "bytes": 77053
+    },
+    {
+      "path": "taklifnomachi.uz/templates-source/18/assets/floral-left.png",
+      "sha256": "345171d84cdf3db62af330822bff19163002c0a1c005a497e90ff969e99f069d",
+      "bytes": 243855
+    },
+    {
+      "path": "taklifnomachi.uz/templates-source/18/assets/floral-manzil.png",
+      "sha256": "8bedb33bc4e9e2ad0026c987a18cdf51d2d9f0b13a145fcebd5de17f29704b29",
+      "bytes": 204283
+    },
+    {
+      "path": "taklifnomachi.uz/templates-source/18/assets/floral-survey.png",
+      "sha256": "69ed19dbb5fca6bdf3cf3240aa8c84bfa0f1be2a5ab02ed1ee18dad03b35a04e",
+      "bytes": 785669
+    },
+    {
+      "path": "taklifnomachi.uz/templates-source/18/assets/floral-timeline.png",
+      "sha256": "b92e1bb70b3ee5e558a1637d02e2d3051a5909ce2e5a689e0fe5459ca4c25f3b",
+      "bytes": 81049
+    },
+    {
+      "path": "taklifnomachi.uz/templates-source/18/assets/floral-tr.png",
+      "sha256": "8b72a8f84c12e8024528a869e17a37206f31cbff4adb6374960075467c42a33d",
+      "bytes": 228027
+    },
+    {
+      "path": "taklifnomachi.uz/templates-source/18/assets/floral-wish.png",
+      "sha256": "0bc006b59b132e8a11f74ca5ed8d8cb14a3c5234e4adb9696883a2c8541edc38",
+      "bytes": 16058
+    },
+    {
+      "path": "taklifnomachi.uz/templates-source/18/assets/footer.png",
+      "sha256": "03c865d1a01fc480cbd9777c93f53f91f9dc07c1031ef4a5bc22f552b28175dd",
+      "bytes": 414558
+    },
+    {
+      "path": "taklifnomachi.uz/templates-source/18/assets/hero-floral.png",
+      "sha256": "35c115625484863a0d123156b8da8d0b97863003b9e39ac2256c4d6f0442b371",
+      "bytes": 366116
+    },
+    {
+      "path": "taklifnomachi.uz/templates-source/18/assets/map-icon.png",
+      "sha256": "4f6c1d022949f4995a4ee401822f5f0c524d8deabbe7a5cad41eb841f3e4fcf4",
+      "bytes": 2844
+    },
+    {
+      "path": "taklifnomachi.uz/templates-source/18/assets/photo1.png",
+      "sha256": "7aa30a252e3d2aa76122d15ac1e53cd17dc30d9dcffe9bd17c0e6ce3ee36b4cd",
+      "bytes": 95765
+    },
+    {
+      "path": "taklifnomachi.uz/templates-source/18/assets/wish-icon1.png",
+      "sha256": "bc0283c7f42ba6cd81006ad49d13e178ac389f1ece09066d9759c6ebbef36f0c",
+      "bytes": 3530
+    },
+    {
+      "path": "taklifnomachi.uz/templates-source/18/assets/wish-icon2.png",
+      "sha256": "bc0283c7f42ba6cd81006ad49d13e178ac389f1ece09066d9759c6ebbef36f0c",
+      "bytes": 3530
+    }
+  ]
+}

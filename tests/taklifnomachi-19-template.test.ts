@@ -1,0 +1,5 @@
+﻿import {test} from 'node:test';import assert from 'node:assert/strict';import {readFileSync as read} from 'node:fs';
+const root='apps/web/public/templates/taklifnomachi-19/';
+test('demo 19 uses captured local botanical art and removes fixed demos and external RSVP',()=>{const h=read(root+'index.html','utf8');assert.match(h,/source\/taklifnomachi\.uz\/templates-source\/19\/assets\/hero\.png/);for(const x of ['Salimbek','Ozodaxon','Versal','Toshkent shahar','2026-08-29','demo-19','/api/rsvp','cloudflareinsights'])assert.ok(!h.includes(x),x)});
+test('demo 19 maps app data and RSVP/wishes to invitation APIs',()=>{const a=read(root+'adapter.js','utf8');for(const x of ['d.groom','d.bride','d.greeting','d.message','d.dateTime','d.venue','d.program','d.music','d.toyona','/rsvp','/wishes'])assert.ok(a.includes(x),x)});
+test('demo 19 is registered unpublished',()=>{const c=read('packages/contracts/src/index.ts','utf8');const row=c.slice(c.indexOf('id: "taklifnomachi-19"'),c.indexOf('id: "taklifnomachi-19"')+800);assert.match(row,/published: false/)})

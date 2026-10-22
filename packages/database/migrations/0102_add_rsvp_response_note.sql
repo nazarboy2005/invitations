@@ -1,0 +1,2 @@
+ALTER TABLE rsvp_responses
+ADD COLUMN IF NOT EXISTS note text NOT NULL DEFAULT '';

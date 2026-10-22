@@ -1,0 +1,76 @@
+{
+  "sourceId": "16",
+  "sourceUrl": "https://taklifnomachi.uz/demo/16",
+  "capturedFiles": [
+    {
+      "path": "taklifnomachi.uz/demo/16/index.html",
+      "sha256": "bf44ca26ae1109fff878a57823074d30dacc2336a50d7b86dcc5260c07ea1772",
+      "bytes": 14396
+    },
+    {
+      "path": "taklifnomachi.uz/templates/16/assets/couple-top.png",
+      "sha256": "e78b558b0b499aeab27fca8a622df0e48bddc857988909c3d2b117da35537c53",
+      "bytes": 712658
+    },
+    {
+      "path": "taklifnomachi.uz/templates/16/assets/envelope.png",
+      "sha256": "0b3690153de919b4443aeb8c587acd349f7995ff67481f76f9154b17cec9a930",
+      "bytes": 102357
+    },
+    {
+      "path": "taklifnomachi.uz/templates/16/assets/flower-bg2.jpg",
+      "sha256": "f49a9d8332240094d13c91eed27a28cd5d5f5fdc312b7fa520b4979ff8cd542f",
+      "bytes": 53131
+    },
+    {
+      "path": "taklifnomachi.uz/templates/16/assets/flower-big.png",
+      "sha256": "5a8ceef2777eae17a076a88c30c2d568a009c724d7142b40cbf307bec435867a",
+      "bytes": 807326
+    },
+    {
+      "path": "taklifnomachi.uz/templates/16/assets/flower-bottom.png",
+      "sha256": "750297cc6ece6f3f84d63882b35a65f7d83f2d532f512b1046b528a1f526bed7",
+      "bytes": 782594
+    },
+    {
+      "path": "taklifnomachi.uz/templates/16/assets/flower-c.png",
+      "sha256": "cb2397ed25151cdd68f0bde7bf5faae335c67b90932e6abe37b8083f095f0343",
+      "bytes": 136301
+    },
+    {
+      "path": "taklifnomachi.uz/templates/16/assets/flower-deco.png",
+      "sha256": "2d60e0884e99e5dc254a1a25c517b892ab4640af1caa67a33c3f03680a4a51b6",
+      "bytes": 15002
+    },
+    {
+      "path": "taklifnomachi.uz/templates/16/assets/paper-bg.jpg",
+      "sha256": "4ced247f47cd13b71a2391d33394851f0799bf9278997c09d3e04f19007111c0",
+      "bytes": 34874
+    },
+    {
+      "path": "taklifnomachi.uz/templates/16/assets/rings.svg",
+      "sha256": "66291f42b5a128c6ce6e058e7b95652d79c64603ec280d60ec10ff38f9709c24",
+      "bytes": 15829
+    },
+    {
+      "path": "taklifnomachi.uz/templates/16/assets/venue.png",
+      "sha256": "952d48375f759f07971efa93d583173c35f69950dd17c6f2745d28a4180af993",
+      "bytes": 1162498
+    },
+    {
+      "path": "taklifnomachi.uz/templates/16/assets/white-band.svg",
+      "sha256": "7222d061219328d36f17cb5ab111436fcebdb4c15e7b5471dd553257f5bcc2c6",
+      "bytes": 659
+    },
+    {
+      "path": "taklifnomachi.uz/templates/16/css/style.css",
+      "sha256": "06ca70d21667129f7919dfea65b3241a4c46facfc841fe11a677795ee216c40f",
+      "bytes": 4040
+    },
+    {
+      "path": "taklifnomachi.uz/templates/16/js/main__7e14b0c08128f41e.js",
+      "sha256": "fd40e449d5e8b206d4802193622c8093b9c5c67ed03fd8e36e030efb2e3d5a41",
+      "bytes": 5058
+    }
+  ]
+}

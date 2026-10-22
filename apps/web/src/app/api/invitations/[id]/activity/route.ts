@@ -21,7 +21,7 @@ export async function GET(request: Request, { params }: Context) {
       .parse(new URL(request.url).searchParams.get("page") ?? 0);
     const offset = page * 50;
     const [responses, wishes, receipts, [totals]] = await Promise.all([
-      getDb()`SELECT id,name,status,party_size AS "partySize",created_at AS "createdAt" FROM rsvp_responses WHERE invitation_id=${id} ORDER BY created_at DESC,id DESC LIMIT 51 OFFSET ${offset}`,
+      getDb()`SELECT id,name,status,party_size AS "partySize",note,created_at AS "createdAt" FROM rsvp_responses WHERE invitation_id=${id} ORDER BY created_at DESC,id DESC LIMIT 51 OFFSET ${offset}`,
       getDb()`SELECT id,name,message,CASE WHEN status='hidden' THEN 'pending' ELSE status END AS status,created_at AS "createdAt" FROM wishes WHERE invitation_id=${id} AND deleted_at IS NULL ORDER BY created_at DESC,id DESC LIMIT 51 OFFSET ${offset}`,
       getDb()`SELECT r.id,r.giver_names AS "giverNames",r.status,r.created_at AS "createdAt",r.destination->>'cardHolder' AS "cardHolder",right(regexp_replace(r.destination->>'cardNumber','[^0-9]','','g'),4) AS "cardLast4",a.url,a.filename FROM gift_receipts r JOIN media_assets a ON a.id=r.asset_id WHERE r.invitation_id=${id} ORDER BY r.created_at DESC,r.id DESC LIMIT 51 OFFSET ${offset}`,
       getDb()`SELECT (SELECT count(*)::int FROM rsvp_responses WHERE invitation_id=${id}) AS responses,(SELECT coalesce(sum(party_size),0)::int FROM rsvp_responses WHERE invitation_id=${id} AND status='yes') AS guests,(SELECT count(*)::int FROM wishes WHERE invitation_id=${id} AND status IN ('pending','hidden') AND deleted_at IS NULL) AS pending`,

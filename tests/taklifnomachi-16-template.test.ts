@@ -1,0 +1,5 @@
+﻿import {test} from 'node:test';import assert from 'node:assert/strict';import {readFileSync as read,createHash} from 'node:fs';
+const root='apps/web/public/templates/taklifnomachi-16/';
+test('demo 16 capture preserved and source-specific assets resolve locally',()=>{const src=read(root+'source/taklifnomachi.uz/demo/16/index.html');assert.ok(src.length>1000);const html=read(root+'index.html','utf8');assert.match(html,/source\/taklifnomachi\.uz\/templates\/16\/assets\/envelope\.png/);assert.doesNotMatch(html,/cloudflareinsights|SI_SLUG|Salohiddin|Mubinaxon|14\.07\.2026|Dildora Niyazova/)});
+test('demo 16 maps app contract to source-specific fields and app APIs',()=>{const js=read(root+'adapter.js','utf8');for(const x of ['d.groom','d.bride','d.greeting','d.message','d.dateTime','d.venue','d.music','/rsvp','/wishes','d.toyona'])assert.ok(js.includes(x),x)});
+test('demo 16 catalog entry starts unpublished',()=>{const c=read('packages/contracts/src/index.ts','utf8');const row=c.slice(c.indexOf('id: "taklifnomachi-16"'),c.indexOf('id: "taklifnomachi-16"')+800);assert.match(row,/published: false/)})

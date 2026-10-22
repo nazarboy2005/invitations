@@ -1,0 +1,134 @@
+[
+  {
+    "file": "source/google-fonts.css",
+    "url": "https://fonts.googleapis.com/css2?family=Amiri&family=Cinzel+Decorative&family=Italianno&family=Josefin+Sans:ital,wght@0,400;0,600;1,400&family=Marck+Script&family=Prata&display=swap",
+    "bytes": 10379,
+    "sha256": "bed9f2ae42c0209486b85c14a12d49234cdef5001d9e770335d8f6235e1cd9a2"
+  },
+  {
+    "file": "font-01.woff2",
+    "url": "https://fonts.gstatic.com/s/amiri/v30/J7aRnpd8CGxBHpUrtLMA7w.woff2",
+    "bytes": 108560,
+    "sha256": "9abf8a10b4a2f27b698740522c9beec9ded7728aeef0738ac0d6e175bf6249d7"
+  },
+  {
+    "file": "font-02.woff2",
+    "url": "https://fonts.gstatic.com/s/amiri/v30/J7aRnpd8CGxBHpUgtLMA7w.woff2",
+    "bytes": 10444,
+    "sha256": "199be132b6fbb2fef143b30bae2eb04c63268758d29c03ff057b52cbee91636e"
+  },
+  {
+    "file": "font-03.woff2",
+    "url": "https://fonts.gstatic.com/s/amiri/v30/J7aRnpd8CGxBHpUutLM.woff2",
+    "bytes": 19544,
+    "sha256": "d600850a2b0f3d862559d0bb040bca877e0f75cf9ee71a893bbd5089a224e3cd"
+  },
+  {
+    "file": "font-04.woff2",
+    "url": "https://fonts.gstatic.com/s/cinzeldecorative/v19/daaCSScvJGqLYhG8nNt8KPPswUAPni7dTMx7aA.woff2",
+    "bytes": 8024,
+    "sha256": "57d6cf9d284ab796528836ae25094b144107bc087111fe539b7404e5fc338812"
+  },
+  {
+    "file": "font-05.woff2",
+    "url": "https://fonts.gstatic.com/s/cinzeldecorative/v19/daaCSScvJGqLYhG8nNt8KPPswUAPni7TTMw.woff2",
+    "bytes": 14416,
+    "sha256": "97d28bf5a628c4f0305a6f837e85d5ae7dbf44485f04d2a4cada8d7810c9bb03"
+  },
+  {
+    "file": "font-06.woff2",
+    "url": "https://fonts.gstatic.com/s/italianno/v18/dg4n_p3sv6gCJkwzT6RXh5wocwM.woff2",
+    "bytes": 9612,
+    "sha256": "aa7e1c44428d7327ffe4cae593ffbe06a1ea7fc5aa07fed96eea80efd5ba2de1"
+  },
+  {
+    "file": "font-07.woff2",
+    "url": "https://fonts.gstatic.com/s/italianno/v18/dg4n_p3sv6gCJkwzT6RXhpwocwM.woff2",
+    "bytes": 17872,
+    "sha256": "d04a57cca66ff5a51551d562c57fc2848e043788a8957a7ad82320e5d5af4c41"
+  },
+  {
+    "file": "font-08.woff2",
+    "url": "https://fonts.gstatic.com/s/italianno/v18/dg4n_p3sv6gCJkwzT6RXiJwo.woff2",
+    "bytes": 36948,
+    "sha256": "518325fe367d195cd5e8e120a219f5d83440eddd4c9b6be9321a8c44f7450a9b"
+  },
+  {
+    "file": "font-09.woff2",
+    "url": "https://fonts.gstatic.com/s/josefinsans/v34/Qw3JZQNVED7rKGKxtqIqX5EUCGZ2dIn0FyA96fCTtIJRIizoYV0.woff2",
+    "bytes": 4852,
+    "sha256": "0d5039c5c96cefb4aa6bb17e8cc460b463fcac5eabac309f6ef6ee132a12cd41"
+  },
+  {
+    "file": "font-10.woff2",
+    "url": "https://fonts.gstatic.com/s/josefinsans/v34/Qw3JZQNVED7rKGKxtqIqX5EUCGZ2dIn0FyA96fCTtIJRIyzoYV0.woff2",
+    "bytes": 11280,
+    "sha256": "960f05f631f4e92a35ff5bdb9386e76c184f4228f8deba6af78b454039d17cfa"
+  },
+  {
+    "file": "font-11.woff2",
+    "url": "https://fonts.gstatic.com/s/josefinsans/v34/Qw3JZQNVED7rKGKxtqIqX5EUCGZ2dIn0FyA96fCTtIJRLSzo.woff2",
+    "bytes": 12992,
+    "sha256": "c63f65e35ef4d0144fd09560526de5ab8b4cbfe930f810d0902ae3a87562e6a7"
+  },
+  {
+    "file": "font-12.woff2",
+    "url": "https://fonts.gstatic.com/s/josefinsans/v34/Qw3aZQNVED7rKGKxtqIqX5EUAnx4RHw.woff2",
+    "bytes": 8584,
+    "sha256": "f4d19d0a120d5862597cc7607367962724b43720e198ac76c462b74370fe0cb2"
+  },
+  {
+    "file": "font-13.woff2",
+    "url": "https://fonts.gstatic.com/s/josefinsans/v34/Qw3aZQNVED7rKGKxtqIqX5EUA3x4RHw.woff2",
+    "bytes": 21292,
+    "sha256": "e9dfe6f6288f73d10e1b3c9ef920f74411f8cf442515b71fc5c2ed5517c14ff7"
+  },
+  {
+    "file": "font-14.woff2",
+    "url": "https://fonts.gstatic.com/s/josefinsans/v34/Qw3aZQNVED7rKGKxtqIqX5EUDXx4.woff2",
+    "bytes": 28528,
+    "sha256": "21efe1559a026f9ad7f880772917faa3a621186688e8e79e0568e4308c0bafa9"
+  },
+  {
+    "file": "font-15.woff2",
+    "url": "https://fonts.gstatic.com/s/marckscript/v22/nwpTtK2oNgBA3Or78gapdwuyzCg_WMM.woff2",
+    "bytes": 10528,
+    "sha256": "457f5ae9dd211fb276e605a4ce3ecb35cbe1aee8bb1a54698c81d7834873ed06"
+  },
+  {
+    "file": "font-16.woff2",
+    "url": "https://fonts.gstatic.com/s/marckscript/v22/nwpTtK2oNgBA3Or78gapdwuyxig_WMM.woff2",
+    "bytes": 8740,
+    "sha256": "0b81e24db3e626c58446fc2ea58dbeaa5d4edb219856afe36ad902c95248d18d"
+  },
+  {
+    "file": "font-17.woff2",
+    "url": "https://fonts.gstatic.com/s/marckscript/v22/nwpTtK2oNgBA3Or78gapdwuyyCg_.woff2",
+    "bytes": 13352,
+    "sha256": "b32acf77642711e18c14d57aabeefa02ee25664a7f40929ee5f72396557b6e76"
+  },
+  {
+    "file": "font-18.woff2",
+    "url": "https://fonts.gstatic.com/s/prata/v22/6xKhdSpbNNCT-sWCCm7JLQ.woff2",
+    "bytes": 12868,
+    "sha256": "1a71ca94e943aac8154d195f9ea21959d374ebf3a3a9420651d0dbb46253f897"
+  },
+  {
+    "file": "font-19.woff2",
+    "url": "https://fonts.gstatic.com/s/prata/v22/6xKhdSpbNNCT-sWLCm7JLQ.woff2",
+    "bytes": 13132,
+    "sha256": "3392de5a383deac60effcad2beb8b847f40eb0eb200ffd4888c3e13d6e40845f"
+  },
+  {
+    "file": "font-20.woff2",
+    "url": "https://fonts.gstatic.com/s/prata/v22/6xKhdSpbNNCT-sWACm7JLQ.woff2",
+    "bytes": 7396,
+    "sha256": "60aab7caa7ea16a76672583f1db7f2e7ea17ee205e00e1c1027a06cc548a6a9b"
+  },
+  {
+    "file": "font-21.woff2",
+    "url": "https://fonts.gstatic.com/s/prata/v22/6xKhdSpbNNCT-sWPCm4.woff2",
+    "bytes": 19224,
+    "sha256": "1b85a8c794709747c9f689b791984c430a2d9716a5cf9440d955bd7d20dad9d0"
+  }
+]

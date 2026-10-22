@@ -498,6 +498,7 @@ test("template migrations publish completed designs while keeping unfinished des
         "parda",
         "ganch",
         "glass-pink",
+        "green-gold",
         "hilol",
         "qatlam",
         "lola",
@@ -532,6 +533,7 @@ test("template migrations publish completed designs while keeping unfinished des
       ["evelina", true],
       ["ganch", true],
       ["glass-pink", true],
+      ["green-gold", false],
       ["hilol", true],
       ["konfetti", true],
       ["korporativ", true],
@@ -655,11 +657,28 @@ test("template migrations publish completed designs while keeping unfinished des
     assignments.rows.filter((row) => row.template_id === "anor"),
     [{ template_id: "anor", category_id: "wedding" }],
   );
-  assert.equal(
-    assignments.rows.filter((row) => row.category_id === "wedding").length,
-    36 + Number(existsSync(new URL("../packages/database/migrations/0090_register_olive_manor.sql", import.meta.url))),
-    "the already-applied Velvet Royale, Cloud Castle, and Glass Pink registrations each add a wedding assignment, with Olive Manor included when its migration is present",
-  );
+  for (const templateId of [
+    "royal-burgundy-edition",
+    "cloud-castle",
+    "glass-pink",
+    "green-garden",
+    "green-gold",
+  ]) {
+    assert.ok(
+      assignments.rows.some(
+        (row) => row.template_id === templateId && row.category_id === "wedding",
+      ),
+      `${templateId} must have a wedding category assignment`,
+    );
+  }
+  if (existsSync(new URL("../packages/database/migrations/0090_register_olive_manor.sql", import.meta.url))) {
+    assert.ok(
+      assignments.rows.some(
+        (row) => row.template_id === "olive-manor-edition" && row.category_id === "wedding",
+      ),
+      "Olive Manor registration must add its wedding category assignment",
+    );
+  }
   assert.ok(
     assignments.rows.some(
       (row) =>

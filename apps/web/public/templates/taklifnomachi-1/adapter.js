@@ -89,7 +89,7 @@
   function renderGift(data, locale) {
     const gift = data.toyona || {};
     let section = document.querySelector("[data-taklifnomachi-gift]");
-    const visible = gift.enabled && (gift.cardNumber || gift.cardHolder);
+    const visible = !data.catalogPreview && gift.enabled && Boolean(gift.cardNumber && gift.cardHolder);
     if (!visible) { section?.remove(); return; }
     if (!section) {
       section = document.createElement("section");
@@ -135,6 +135,34 @@
         else if (locale === "uz-Cyrl") node.textContent = toCyrillic(original);
       });
     }
+  }
+  let countdownTimer;
+  function renderCountdown(payload, locale) {
+    const section = document.getElementById("countdownContainer");
+    if (!section) return;
+    if (countdownTimer) window.clearInterval(countdownTimer);
+    const target = payload.dateTime ? new Date(payload.dateTime).getTime() : NaN;
+    if (!Number.isFinite(target)) { section.hidden = true; return; }
+    section.hidden = false;
+    const labelsByLocale = {
+      "uz-Latn": ["Kun", "Soat", "Daqiqa", "Soniya"],
+      "uz-Cyrl": ["???", "????", "??????", "?????"],
+      en: ["Days", "Hours", "Minutes", "Seconds"],
+      ru: ["???", "????", "??????", "???????"],
+    };
+    const update = () => {
+      const remaining = Math.max(0, target - Date.now());
+      const values = [Math.floor(remaining / 86400000), Math.floor(remaining / 3600000) % 24, Math.floor(remaining / 60000) % 60, Math.floor(remaining / 1000) % 60];
+      ["days", "hours", "minutes", "seconds"].forEach((id, index) => {
+        const node = document.getElementById(id);
+        if (node) node.textContent = String(values[index]).padStart(2, "0");
+        const block = node?.closest(".time-block");
+        const label = block?.querySelector(".label");
+        if (label) label.textContent = labelsByLocale[locale][index];
+      });
+    };
+    update();
+    countdownTimer = window.setInterval(update, 1000);
   }
   function render(payload) {
     const locale = locales[payload.defaultLang] || "uz-Latn";
@@ -191,6 +219,7 @@
     });
     sectionVisible("countdownContainer", Boolean(payload.dateTime));
     renderCalendar(payload, locale);
+    renderCountdown(payload, locale);
     const audio = document.getElementById("invitation-audio");
     if (audio) {
       const url = payload.music || "";

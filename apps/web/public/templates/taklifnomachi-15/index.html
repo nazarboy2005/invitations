@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="utf-8">
+<script>document.documentElement.className += " js";</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Taklifnoma</title>
+<meta name="description" content="Taklifnoma">
+
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Gilda+Display&family=Aboreto&family=Jost:wght@300;400;500&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/templates/taklifnomachi-15/source/taklifnomachi.uz/templates/15/css/style.css">
+<style id="si-t15-lang">
+body[data-lang="uz"] .lang-ru,
+body[data-lang="ru"] .lang-uz { display: none !important; }
+.lang-uz, .lang-ru { display: inline; }
+/* Gilda Display has no Cyrillic glyphs (confirmed: falls back to the browser
+   default when Cyrillic text is set) — swap RU text in it to PT Serif so it
+   doesn't silently degrade. Great Vibes DOES cover Cyrillic (confirmed via
+   canvas glyph-width test), so .gv text needs no override — same font, both
+   languages. */
+.gilda .lang-ru { font-family: 'PT Serif', Georgia, serif; font-style: normal; }
+/* Smooth cross-fade instead of an instant jump-cut when switching language. */
+#stage, #introDesign { transition: opacity .18s ease; }
+#stage.si-lang-fading, #introDesign.si-lang-fading { opacity: 0; }
+#si-lang-switcher {
+  position: fixed; top: 16px; right: 16px; z-index: 2147483646;
+  display: flex; gap: 0; border-radius: 999px; overflow: hidden;
+  background: rgba(22,22,22,.92); backdrop-filter: blur(6px);
+  box-shadow: 0 6px 18px rgba(0,0,0,.25);
+  font-family: "Jost", sans-serif;
+}
+#si-lang-switcher button {
+  border: 0; background: transparent; padding: 8px 13px;
+  font-size: 11px; font-weight: 500; letter-spacing: .12em;
+  color: #cfcfcf; cursor: pointer; text-transform: uppercase;
+  transition: background .15s, color .15s;
+}
+#si-lang-switcher button.active { background: #fff; color: #161616; }
+</style>
+</head>
+<body data-lang="uz">
+
+<!-- Language switcher -->
+<div id="si-lang-switcher">
+  <button type="button" data-set-lang="uz" class="active">UZ</button>
+  <button type="button" data-set-lang="ru">RU</button>
+</div>
+<script>(function () {
+  var KEY = 'si-lang';
+  var saved = sessionStorage.getItem(KEY) || 'uz';
+  function applyPlaceholders(lang) {
+    document.querySelectorAll('[data-plh-' + lang + ']').forEach(function (el) {
+      el.setAttribute('placeholder', el.getAttribute('data-plh-' + lang));
+    });
+  }
+  function setLang(l, animate) {
+    var fadeEls = animate ? document.querySelectorAll('#stage, #introDesign') : [];
+    fadeEls.forEach(function (el) { el.classList.add('si-lang-fading'); });
+    setTimeout(function () {
+      document.body.setAttribute('data-lang', l);
+      document.querySelectorAll('#si-lang-switcher button').forEach(function (b) {
+        b.classList.toggle('active', b.getAttribute('data-set-lang') === l);
+      });
+      applyPlaceholders(l);
+      sessionStorage.setItem(KEY, l);
+      fadeEls.forEach(function (el) { el.classList.remove('si-lang-fading'); });
+    }, animate ? 180 : 0);
+  }
+  function init() {
+    setLang(saved, false);
+    document.querySelectorAll('#si-lang-switcher button').forEach(function (b) {
+      b.addEventListener('click', function () { setLang(b.getAttribute('data-set-lang'), true); });
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
+})();</script>
+
+<!-- Background music (starts when the invitation is opened) -->
+<audio id="bg-audio" loop preload="auto"><source src="/templates/taklifnomachi-15/source/taklifnomachi.uz/templates/15/audio/music.mp3" type="audio/mpeg"></audio>
+
+<!-- Music toggle button -->
+<button class="music-btn" id="musicBtn" type="button" aria-label="Musiqa"><span class="music-note">&#9835;</span><span class="music-btn__ring"></span></button>
+
+<!-- ============================ MAIN SCREEN (Asosiy ekran) ============================ -->
+<div class="intro" id="intro">
+  <div class="intro-design" id="introDesign">
+    <video class="bg" id="bgVideo" src="/templates/taklifnomachi-15/source/taklifnomachi.uz/templates/15/assets/video.mp4" poster="/templates/taklifnomachi-15/source/taklifnomachi.uz/templates/15/assets/main-bg.png" autoplay muted loop playsinline preload="auto"></video>
+
+    <!-- Taklifnoma + date -->
+    <div class="el gv white" style="left:110px;top:97px;width:170px;font-size:45px;line-height:56.34px"><span class="lang-uz">Taklifnoma</span><span class="lang-ru">Приглашение</span></div>
+    <div class="el gilda white" style="left:133px;top:150px;width:124px;font-size:26px;line-height:30.6px"></div>
+
+    <!-- Kelin kuyov -->
+    <div class="el gv white txt-c" style="left:96px;top:344px;width:195px;font-size:70px;line-height:87.64px"></div>
+    <div class="el gv white txt-c" style="left:181px;top:419px;width:25px;font-size:40px;line-height:50.08px">&amp;</div>
+    <div class="el gv white txt-c" style="left:90px;top:452px;width:210px;font-size:70px;line-height:87.64px"></div>
+
+    <!-- Swap qiling -->
+    <div class="el gilroy white" style="left:147px;top:794px;width:110px;font-size:18px;line-height:20.75px;font-weight:300"><span class="lang-uz">Swap qiling</span><span class="lang-ru">Свайпните</span></div>
+
+    <!-- swap control -->
+    <div class="swap" id="swap" style="left:75px;top:730px;width:237px;height:50px">
+      <div class="swap__track" id="swapTrack"></div>
+      <img class="swap__end" src="/templates/taklifnomachi-15/source/taklifnomachi.uz/templates/15/assets/swipe-end.svg" alt="">
+      <img class="swap__btn" id="swapBtn" src="/templates/taklifnomachi-15/source/taklifnomachi.uz/templates/15/assets/swipe-btn.svg" alt="" draggable="false">
+    </div>
+  </div>
+</div>
+
+<!-- ============================ TAKLIFNOMA ============================ -->
+<div class="stage" id="stage">
+<main class="design" id="design" style="height:3012px">
+
+  <!-- ===== Assalomu alaykum ===== -->
+  <img class="el reveal" data-anim="fade" style="left:118px;top:62px;width:154px;height:118px" src="/templates/taklifnomachi-15/source/taklifnomachi.uz/templates/15/assets/flower-greeting.svg" alt="">
+  <img class="el reveal" data-anim="fade" data-delay=".1" style="left:289px;top:79px;width:34px;height:33px" src="/templates/taklifnomachi-15/source/taklifnomachi.uz/templates/15/assets/leaf-tr.svg" alt="">
+  <img class="el reveal" data-anim="fade" data-delay=".1" style="left:48px;top:433px;width:32px;height:30px" src="/templates/taklifnomachi-15/source/taklifnomachi.uz/templates/15/assets/leaf-l.svg" alt="">
+  <div class="el gv black txt-c reveal" data-anim="up" style="left:80px;top:219px;width:230px;font-size:40px;line-height:50.08px"><span class="lang-uz">Assalomu alaykum</span><span class="lang-ru">Здравствуйте</span></div>
+  <div class="el gilda black txt-c reveal" data-anim="up" data-delay=".1" style="left:73px;top:277px;width:244px;font-size:22px;line-height:25.89px"><span class="lang-uz">Sizni hayotimizdagi eng baxtiyor kun — nikoh to&#39;yimizga bag&#39;ishlangan tantanali kechaning aziz mehmoni bo&#39;lishga taklif etamiz.</span><span class="lang-ru">Приглашаем вас разделить с нами самый счастливый день в нашей жизни — торжественный вечер, посвящённый нашей свадьбе.</span></div>
+  <div class="el divider reveal" data-anim="fade" style="left:129px;top:501px;width:132px;height:1px;background:#bebebe"></div>
+
+  <!-- ===== Kalendar ===== -->
+  <div class="el gv black txt-c reveal" data-anim="up" style="left:109px;top:559px;width:171px;font-size:40px;line-height:36.31px;letter-spacing:-1.2px"><span class="lang-uz">To&rsquo;yimiz vaqti</span><span class="lang-ru">Дата</span></div>
+  <div class="el gilda black txt-c reveal" data-anim="up" data-delay=".1" style="left:80px;top:608px;width:230px;font-size:26px;line-height:23.6px;letter-spacing:-0.78px;white-space:nowrap"></div>
+  <div class="el reveal" data-anim="up" data-delay=".15" style="left:64px;top:700px;width:255px"><div style="text-align:center;font-family:'Gilda Display','Jost',serif">
+  <div style="font-family:'Great Vibes',cursive;font-size:30px;color:#161616;margin-bottom:10px"><span class="lang-uz"></span><span class="lang-ru"></span></div>
+  <div style="display:grid;grid-template-columns:repeat(7,1fr);align-items:center;gap:4px 0"><div style="font-size:11px;letter-spacing:.04em;color:#161616;opacity:.7;padding-bottom:8px"><span class="lang-uz">Du</span><span class="lang-ru">Пн</span></div><div style="font-size:11px;letter-spacing:.04em;color:#161616;opacity:.7;padding-bottom:8px"><span class="lang-uz">Se</span><span class="lang-ru">Вт</span></div><div style="font-size:11px;letter-spacing:.04em;color:#161616;opacity:.7;padding-bottom:8px"><span class="lang-uz">Chor</span><span class="lang-ru">Ср</span></div><div style="font-size:11px;letter-spacing:.04em;color:#161616;opacity:.7;padding-bottom:8px"><span class="lang-uz">Pay</span><span class="lang-ru">Чт</span></div><div style="font-size:11px;letter-spacing:.04em;color:#161616;opacity:.7;padding-bottom:8px"><span class="lang-uz">Ju</span><span class="lang-ru">Пт</span></div><div style="font-size:11px;letter-spacing:.04em;color:#161616;opacity:.7;padding-bottom:8px"><span class="lang-uz">Sha</span><span class="lang-ru">Сб</span></div><div style="font-size:11px;letter-spacing:.04em;color:#161616;opacity:.7;padding-bottom:8px"><span class="lang-uz">Ya</span><span class="lang-ru">Вс</span></div><div style="font-size:16px;color:#3a3a3a">22</div><div style="font-size:16px;color:#3a3a3a">23</div><div style="font-size:16px;color:#3a3a3a">24</div><div style="display:grid;place-items:center"><span style="display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:#161616;color:#fff;font-size:16px">25</span></div><div style="font-size:16px;color:#3a3a3a">26</div><div style="font-size:16px;color:#3a3a3a">27</div><div style="font-size:16px;color:#3a3a3a">28</div></div>
+</div></div>
+  <div class="el divider reveal" data-anim="fade" style="left:129px;top:944px;width:132px;height:1px;background:#d9d9d9"></div>
+
+  <!-- ===== Manzil / Location ===== -->
+  <img class="el" style="left:0;top:987px;width:389px;height:536px;object-fit:cover" src="/templates/taklifnomachi-15/source/taklifnomachi.uz/templates/15/assets/location-bg.png" alt="">
+  <div class="el aboreto txt-c loc-word reveal" data-anim="zoom" style="left:5px;top:1269px;width:371px;font-size:140px;line-height:127.08px;letter-spacing:-4.2px;color:#161616">Loca<br>tion</div>
+  <div class="el gv white txt-c reveal" data-anim="up" style="left:137px;top:1036px;width:116px;font-size:40px;line-height:36.31px;letter-spacing:-1.2px"><span class="lang-uz">Manzil:</span><span class="lang-ru">Адрес:</span></div>
+  <div class="el divider reveal" data-anim="fade" style="left:104px;top:1091px;width:182px;height:1px;background:#d9d9d9"></div>
+  <div class="el gv white txt-c reveal venue-name" data-anim="up" data-delay=".1" style="left:34px;top:1115px;width:320px;font-size:40px;line-height:36.31px;letter-spacing:-1.2px"></div>
+  <div class="el gilda white txt-c reveal venue-address" data-anim="up" data-delay=".15" style="left:69px;top:1198px;width:250px;font-size:24px;line-height:21.78px;letter-spacing:-0.72px"></div>
+  <div class="el" style="left:34px;top:1533px;width:320px"></div>
+
+  <!-- ===== Tilaklar / RSVP ===== -->
+  <form id="wishForm" class="rsvp">
+    <div class="el gv black txt-c reveal" data-anim="up" style="left:61px;top:1788px;width:267px;font-size:40px;line-height:39.2px;letter-spacing:-1.2px"><span class="lang-uz">Samimiy tilaklaringizni<br>bildiring</span><span class="lang-ru">Оставьте<br>пожелания</span></div>
+
+    <div class="el gilroy black txt-c reveal" data-anim="fade" style="left:35px;top:1905px;width:123px;font-size:18px;line-height:17.64px;letter-spacing:-0.54px"><span class="lang-uz">Ism, familyangiz</span><span class="lang-ru">Имя, фамилия</span></div>
+    <input class="el field reveal" data-anim="up" data-delay=".05" style="left:35px;top:1934px;width:320px;height:52px" type="text" name="name" maxlength="60" placeholder="Ismingiz" data-plh-uz="Ismingiz" data-plh-ru="Динара Ниязова">
+
+    <div class="el gilroy black reveal" data-anim="fade" data-delay=".1" style="left:35px;top:2025px;width:320px;font-size:18px;line-height:17.64px;letter-spacing:-0.54px;white-space:nowrap"><span class="lang-uz">To&rsquo;yimizga kelasizmi?</span><span class="lang-ru">Вы придёте на свадьбу?</span></div>
+    <label class="el radio reveal" data-anim="fade" data-delay=".12" style="left:35px;top:2060px;width:120px;height:12px">
+      <input type="radio" name="attend" value="Ha boraman"><span class="radio__dot" style="top:1px"></span>
+      <span class="gilroy" style="font-size:12px;line-height:11.76px;letter-spacing:-0.36px;left:18px"><span class="lang-uz">Ha boraman</span><span class="lang-ru">Да, приду</span></span>
+    </label>
+    <label class="el radio reveal" data-anim="fade" data-delay=".16" style="left:35px;top:2081px;width:160px;height:12px">
+      <input type="radio" name="attend" value="Afsus borolmayman"><span class="radio__dot" style="top:1px"></span>
+      <span class="gilroy" style="font-size:12px;line-height:11.76px;letter-spacing:-0.36px;left:18px"><span class="lang-uz">Afsus borolmayman</span><span class="lang-ru">К сожалению, нет</span></span>
+    </label>
+
+    <div class="el gilroy black txt-c reveal" data-anim="fade" data-delay=".2" style="left:35px;top:2132px;width:238px;font-size:18px;line-height:17.64px;letter-spacing:-0.54px"><span class="lang-uz">Samimiy Tilaklaringizni bildiring</span><span class="lang-ru">Оставьте искренние пожелания</span></div>
+    <textarea class="el field field--area reveal" data-anim="up" data-delay=".22" style="left:35px;top:2167px;width:320px;height:113px" name="wish" maxlength="400" placeholder="Bu yerga samimiy tilaklaringizni yozib qoldirishingiz mumkin." data-plh-uz="Bu yerga samimiy tilaklaringizni yozib qoldirishingiz mumkin." data-plh-ru="Здесь вы можете оставить свои искренние пожелания."></textarea>
+
+    <button type="submit" class="el submit reveal" data-anim="up" data-delay=".26" style="left:110px;top:2328px;width:170px;height:32px"><span class="lang-uz">Yuborish</span><span class="lang-ru">Отправить</span></button>
+    <div class="el rsvp__thanks gv" id="thanks" style="left:35px;top:2040px;width:320px;font-size:34px"><span class="lang-uz">Tilagingiz uchun rahmat! &#9825;</span><span class="lang-ru">Спасибо за пожелание! &#9825;</span></div>
+  </form>
+
+  <!-- ===== Schetchik / Countdown ===== -->
+  <img class="el" style="left:0;top:2428px;width:389px;height:584px;object-fit:cover" src="/templates/taklifnomachi-15/source/taklifnomachi.uz/templates/15/assets/countdown-bg.png" alt="">
+  <div class="el gv white txt-c reveal" data-anim="up" style="left:85px;top:2595px;width:212px;font-size:50px;line-height:44px;letter-spacing:-1.5px"><span class="lang-uz">Har soniyani</span><span class="lang-ru">Считаем</span></div>
+  <div class="el gilda white txt-c reveal" data-anim="up" data-delay=".1" style="left:113px;top:2640px;width:184px;font-size:36px;line-height:31.68px;letter-spacing:-1.08px"><span class="lang-uz">sanayapmiz</span><span class="lang-ru">секунды</span></div>
+
+  <div id="cd" data-target="" class="el gilda white txt-c cd-row reveal" data-anim="up" data-delay=".15" style="left:70px;top:2749px;width:241px;font-size:40px;line-height:35.2px;letter-spacing:-1.2px">
+    <span data-cd="days">00</span><span class="cd-sep">|</span><span data-cd="hours">00</span><span class="cd-sep">|</span><span data-cd="minutes">00</span><span class="cd-sep">|</span><span data-cd="seconds">00</span>
+  </div>
+  <div class="el gilda white txt-c reveal" data-anim="fade" data-delay=".2" style="left:78px;top:2810px;width:34px;font-size:18px;line-height:15.84px"><span class="lang-uz">Kun</span><span class="lang-ru">Дни</span></div>
+  <div class="el gilda white txt-c reveal" data-anim="fade" data-delay=".24" style="left:143px;top:2810px;width:33px;font-size:18px;line-height:15.84px"><span class="lang-uz">Soat</span><span class="lang-ru">Час</span></div>
+  <div class="el gilda white txt-c reveal" data-anim="fade" data-delay=".28" style="left:195px;top:2810px;width:56px;font-size:18px;line-height:15.84px"><span class="lang-uz">Daqiqa</span><span class="lang-ru">Мин.</span></div>
+  <div class="el gilda white txt-c reveal" data-anim="fade" data-delay=".32" style="left:267px;top:2810px;width:52px;font-size:18px;line-height:15.84px"><span class="lang-uz">Soniya</span><span class="lang-ru">Сек.</span></div>
+
+</main>
+</div>
+
+
+<script src="/templates/taklifnomachi-15/app.js"></script>
+<script src="/templates/taklifnomachi-15/adapter.js"></script>
+</body>
+</html>

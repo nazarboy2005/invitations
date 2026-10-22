@@ -15,7 +15,16 @@ import { VelvetRoyaleInvitation } from "@/templates/velvet-royale/renderer";
 import { OliveManorInvitation } from "@/templates/olive-manor/renderer";
 import { IslamicEditionInvitation } from "@/templates/islamic-edition/renderer";
 import { ManorInvitation } from "@/templates/manor-edition/renderer";
+import { OshEditionInvitation } from "@/templates/osh-edition-v1/renderer";
+import { MonochromeEditorialInvitation } from "@/templates/monochrome-editorial-edition/renderer";
+import { XatnaEditionInvitation } from "@/templates/xatna-edition/renderer";
+import { AmruMarufEditionInvitation } from "@/templates/amru-maruf-edition-v1/renderer";
 import { GulliDarvozaInvitation } from "@/templates/onlinetaklifnoma/gulli-darvoza";
+import { OltinDarvozaInvitation } from "@/templates/onlinetaklifnoma/oltin-darvoza-ortidagi-baxt";
+import { MingBirKechaInvitation } from "@/templates/onlinetaklifnoma/ming-bir-kecha";
+import { ZarrinDoppiInvitation } from "@/templates/onlinetaklifnoma/zarrin-doppi";
+import { AndalusDarvozasiInvitation } from "@/templates/onlinetaklifnoma/andalus-darvozasi";
+import { SamarqandPeshtoqInvitation } from "@/templates/onlinetaklifnoma/samarqand-peshtoqi";
 import { isChorloveTemplate, ChorloveInvitation } from "@/templates/chorlove";
 import { readBrowserDraft } from "@/modules/studio/draft-storage";
 import {
@@ -191,8 +200,18 @@ export function FullTemplatePreview({
       </nav>
       {!invitation ? (
         <div className={styles.loading}>Dizayn ochilmoqda…</div>
+      ) : template.id === "oltin-darvoza-ortidagi-baxt" ? (
+        <OltinDarvozaInvitation invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} sampleWishes={catalogPreview} silentPlayback={silentPlayback} />
       ) : template.id === "gulli-darvoza" ? (
         <GulliDarvozaInvitation invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} sampleWishes={catalogPreview} silentPlayback={silentPlayback} />
+      ) : template.id === "ming-bir-kecha" ? (
+        <MingBirKechaInvitation invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} sampleWishes={catalogPreview} silentPlayback={silentPlayback} />
+      ) : template.id === "samarqand-peshtoqi" ? (
+        <SamarqandPeshtoqInvitation invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} sampleWishes={catalogPreview} silentPlayback={silentPlayback} />
+      ) : template.id === "andalus-darvozasi" ? (
+        <AndalusDarvozasiInvitation invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} sampleWishes={catalogPreview} silentPlayback={silentPlayback} />
+      ) : template.id === "zarrin-doppi" ? (
+        <ZarrinDoppiInvitation invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} sampleWishes={catalogPreview} silentPlayback={silentPlayback} />
       ) : template.id === "anor" ? (
         <AnorInvitation
           invitation={invitation}
@@ -236,6 +255,14 @@ export function FullTemplatePreview({
           <IslamicEditionInvitation invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} sampleWishes={catalogPreview} silentPlayback={silentPlayback} qaReducedMotion={qaReducedMotion} qaMobile={qaMobile} />
       ) : template.id === "manor-edition" ? (
           <ManorInvitation invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} sampleWishes={catalogPreview} silentPlayback={silentPlayback} qaReducedMotion={qaReducedMotion} qaMobile={qaMobile} />
+      ) : template.id === "osh-edition-v1" ? (
+          <OshEditionInvitation invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} silentPlayback={silentPlayback} qaReducedMotion={qaReducedMotion} qaMobile={qaMobile} />
+      ) : template.id === "monochrome-editorial-edition" ? (
+          <MonochromeEditorialInvitation invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} silentPlayback={silentPlayback} qaReducedMotion={qaReducedMotion} qaMobile={qaMobile} />
+      ) : template.id === "amru-maruf-edition-v1" ? (
+        <AmruMarufEditionInvitation invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} silentPlayback={silentPlayback} qaReducedMotion={qaReducedMotion} qaMobile={qaMobile} />
+      ) : template.id === "xatna-edition" ? (
+        <XatnaEditionInvitation invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} silentPlayback={silentPlayback} qaReducedMotion={qaReducedMotion} qaMobile={qaMobile} />
       ) : isMarxabaTemplate(template.id) ? (
         <MarxabaInvitation
           invitation={invitation}

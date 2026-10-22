@@ -1,0 +1,1 @@
+export { MingBirKechaInvitation } from "./renderer";

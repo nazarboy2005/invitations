@@ -93,6 +93,7 @@ export function MarxabaInvitation({
       languages: enabledLanguages,
       languageSwitcher: true,
       silentPlayback: preview && silentPlayback,
+      catalogPreview: catalogMusic,
       i18n: Object.fromEntries(
         invitation.enabledLocales.map((enabledLocale) => {
           const localized = makeLegacyData(

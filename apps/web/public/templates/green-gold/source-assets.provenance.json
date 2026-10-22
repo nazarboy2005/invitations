@@ -47,10 +47,8 @@
     "images/templates/orchid-amplop/gallery-5.webp",
     "images/templates/orchid-amplop/gallery-6.webp"
   ],
-  "status": "source HTML, five available design assets, and two captured stylesheet dependencies preserved; adapter integration not started",
-  "missingSourceAssets": [
-    "images/green-gold/vertical-line.png is referenced by the captured snapshot but absent from the archive"
-  ],
+  "status": "Source snapshot and archive artwork preserved; missing optimized divider rendition and Cyrillic font subset recovered from observed Chorlove source assets; adapter integration and release verification in progress.",
+  "missingSourceAssets": [],
   "capturedStylesheets": [
     {
       "file": "source/styles/00sc_9lpb3zcn.css",
@@ -63,6 +61,22 @@
       "archiveFile": "Chorlove/Web invitations/_next/static/chunks/0.u3j0~_2ygfx.css",
       "bytes": 11626,
       "sha256": "12141a5ec71f317d0e27589c92869d213b339f86451ee2a75b4612c5f1e05991"
+    }
+  ],
+  "sourceAssetsFromLive": [
+    {
+      "file": "assets/vertical-line.webp",
+      "bytes": 29432,
+      "sha256": "6ade2000f94353d5d7442da880a64b444982242fd012fa2a8098a21f964b5080",
+      "sourceUrl": "https://chorlove.uz/_next/image?url=%2Fimages%2Fgreen-gold%2Fvertical-line.png&w=1920&q=75",
+      "transformation": "Observed Next.js optimized WebP rendition (w=1920, q=75); original PNG was absent from archive."
+    },
+    {
+      "file": "../chorlove/shared/_next/static/media/65c558afe41e89d6-s.113htgw8u-emy.woff2",
+      "bytes": 21144,
+      "sha256": "d7f9db9b1034978ebebdf7312aa4aee55dff3ef6039e7ff71413780bd4a05558",
+      "sourceUrl": "https://chorlove.uz/_next/static/media/65c558afe41e89d6-s.113htgw8u-emy.woff2",
+      "transformation": "Copied exact observed source font subset for Russian Playfair Display; shared Chorlove static media."
     }
   ]
 }

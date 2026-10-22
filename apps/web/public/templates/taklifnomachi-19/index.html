@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<!-- Taklifnomachi.uz template 19 "Verdant" — pixel-faithful (scaled artboard) from Figma "Dizayn 2" (Openner + Frame 2) -->
+<html lang="uz">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+<title>Taklifnoma</title>
+
+
+
+<style>
+  /* Exact design fonts (downloaded, self-hosted) */
+  @font-face{font-family:'Anticva';src:url('/templates/taklifnomachi-19/source/taklifnomachi.uz/templates-source/19/assets/fonts/anticva.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap;}
+  @font-face{font-family:'Francy Tiguan';src:url('/templates/taklifnomachi-19/source/taklifnomachi.uz/templates-source/19/assets/fonts/francy-tiguan.otf') format('opentype');font-weight:400;font-style:normal;font-display:swap;}
+  *{box-sizing:border-box;-webkit-font-smoothing:antialiased;}
+  html,body{margin:0;padding:0;background:#fbfbf9;}
+  body{overflow-x:hidden;}
+  #si-viewport{position:relative;width:100%;overflow:hidden;}
+  #si-artboard{position:relative;width:390px;height:4887px;transform-origin:top left;background:#fbfbf9;}
+  .ab{position:absolute;}
+  .ab.t{white-space:pre-wrap;}
+  #si-artboard input.fi{outline:none;}
+  #si-artboard input.fi::placeholder{color:#b2b2b2;}
+  #si-artboard select.fi{outline:none;}
+  #si-send:hover{filter:brightness(.94);}
+  /* Opener overlay */
+  #si-opener{position:fixed;inset:0;z-index:9999;background:#fbfbf9;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:opacity .6s ease;}
+  #si-opener img{width:min(100vw,420px);height:auto;display:block;}
+  #si-opener.gone{opacity:0;pointer-events:none;}
+  body[data-lang="uz"] .lang-ru,
+  body[data-lang="ru"] .lang-uz { display: none !important; }
+  .lang-uz, .lang-ru { display: inline; }
+  /* Anticva / Francy Tiguan have no Cyrillic glyphs — Roboto Serif does. */
+  .anticva-ru-fallback .lang-ru { font-family: 'PT Serif', Georgia, serif !important; }
+  .francy-ru-fallback .lang-ru { font-family: 'PT Serif', Georgia, serif !important; font-style: italic; }
+  #si-lang-switcher {
+    position: fixed; top: 16px; right: 16px; z-index: 2147483646;
+    display: flex; gap: 0; border-radius: 999px; overflow: hidden;
+    background: rgba(121,136,102,.92); backdrop-filter: blur(6px);
+    box-shadow: 0 6px 18px rgba(0,0,0,.25);
+    font-family: "Roboto Serif", serif;
+  }
+  #si-lang-switcher button {
+    border: 0; background: transparent; padding: 8px 13px;
+    font-size: 11px; font-weight: 400; letter-spacing: .1em;
+    color: #eef1ea; cursor: pointer; text-transform: uppercase;
+    transition: background .15s, color .15s;
+  }
+  #si-lang-switcher button.active { background: #fff; color: #798866; }
+</style>
+</head>
+<body data-lang="uz">
+<!-- Language switcher -->
+<div id="si-lang-switcher">
+  <button type="button" data-set-lang="uz" class="active">UZ</button>
+  <button type="button" data-set-lang="ru">RU</button>
+</div>
+<script>(function () {
+  var KEY = 'si-lang';
+  var saved = sessionStorage.getItem(KEY) || 'uz';
+  function setLang(l) {
+    document.body.setAttribute('data-lang', l);
+    document.querySelectorAll('#si-lang-switcher button').forEach(function (b) {
+      b.classList.toggle('active', b.getAttribute('data-set-lang') === l);
+    });
+    sessionStorage.setItem(KEY, l);
+    if (window.__si19Render) window.__si19Render();
+  }
+  function init() {
+    setLang(saved);
+    document.querySelectorAll('#si-lang-switcher button').forEach(function (b) {
+      b.addEventListener('click', function () { setLang(b.getAttribute('data-set-lang')); });
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
+})();</script>
+<div id="si-opener" title="Ochish">
+  <img src="/templates/taklifnomachi-19/source/taklifnomachi.uz/templates-source/19/assets/opener.png" alt="Sizga taklifnoma keldi">
+</div>
+<div id="si-viewport">
+  <div id="si-artboard" data-dateiso="" data-time="">
+<form id="si-rsvp" autocomplete="off"><div class="ab t anticva-ru-fallback" id="hd2" style="left:139px;top:32px;width:114px;height:28px;font-family:'Anticva',serif;font-weight:400;font-size:20px;line-height:28px;letter-spacing:0.0px;color:#798866;text-align:center;"></div>
+<img class="ab" src="/templates/taklifnomachi-19/source/taklifnomachi.uz/templates-source/19/assets/hero.png" style="left:24px;top:306px;width:344px;height:427px;object-fit:cover;">
+<div class="ab t francy-ru-fallback" style="left:10px;top:246px;width:283px;height:81px;font-family:'Francy Tiguan',cursive;font-weight:400;font-size:38px;line-height:28px;letter-spacing:0.0px;color:#798866;text-align:center;"><span class="lang-uz">Bizning to&rsquo;yimiz kuni!</span><span class="lang-ru">День нашей свадьбы!</span></div>
+<img class="ab" src="/templates/taklifnomachi-19/source/taklifnomachi.uz/templates-source/19/assets/floral-hero.png" style="left:-49px;top:274px;width:488px;height:491px;">
+<div class="ab t francy-ru-fallback" style="left:140px;top:906px;width:183px;height:28px;font-family:'Francy Tiguan',cursive;font-weight:400;font-size:32px;line-height:28px;letter-spacing:0.0px;color:#798866;text-align:center;"><span class="lang-uz">Taklif etamiz</span><span class="lang-ru">Приглашаем</span></div>
+<div class="ab t anticva-ru-fallback" style="left:69px;top:800px;width:254px;height:98px;font-family:'Anticva',serif;font-weight:400;font-size:38px;line-height:49px;letter-spacing:0.0px;color:#000000;text-align:center;"><span class="lang-uz">Qadrli<br>mehmonim!</span><span class="lang-ru">Дорогой<br>гость!</span></div>
+<img class="ab" src="/templates/taklifnomachi-19/source/taklifnomachi.uz/templates-source/19/assets/floral-greeting.png" style="left:-75px;top:875px;width:645px;height:208px;">
+<img class="ab" src="/templates/taklifnomachi-19/source/taklifnomachi.uz/templates-source/19/assets/greeting.png" style="left:-15px;top:920px;width:422px;height:402px;object-fit:cover;">
+<div class="ab t" style="left:74px;top:1105px;width:243px;height:114px;font-family:'Roboto Serif',serif;font-weight:300;font-size:18px;line-height:19px;letter-spacing:0.0px;color:#000000;text-align:center;"><span class="lang-uz">Sizni hayotimizdagi eng baxtiyor kun — nikoh to&#x27;yimizga bag&#x27;ishlangan tantanali kechaning aziz mehmoni bo&#x27;lishga taklif etamiz.</span><span class="lang-ru">Приглашаем вас разделить с нами самый счастливый день в нашей жизни — торжественный вечер, посвящённый нашей свадьбе.</span></div>
+<div class="ab" style="left:126px;top:1357px;width:1px;height:249px;background:#000;"></div>
+<div class="ab" style="left:287px;top:1357px;width:1px;height:249px;background:#000;"></div>
+<svg class="ab" width="179" height="227" viewBox="0 0 179 227" style="left:105px;top:1345px;overflow:visible;"><path d="M126 44 C 44 24, 8 92, 30 156 C 48 208, 140 214, 156 150 C 168 100, 138 50, 74 44 C 96 92, 108 134, 92 168" fill="none" stroke="#7c8b6c" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+<div class="ab" style="left:-21px;top:1356px;width:427px;height:1px;background:#000;"></div>
+<div class="ab" style="left:-21px;top:1399px;width:427px;height:1px;background:#000;"></div>
+<div class="ab" style="left:-21px;top:1605px;width:427px;height:1px;background:#000;"></div>
+<div class="ab t" id="wd0" style="left:-16px;top:1370px;width:130px;height:16px;font-family:'Anticva',serif;font-weight:400;font-size:16px;line-height:16px;color:#000000;text-align:center;">Chorshanba</div>
+<div class="ab t" id="wd1" style="left:141px;top:1370px;width:130px;height:16px;font-family:'Anticva',serif;font-weight:400;font-size:16px;line-height:16px;color:#000000;text-align:center;">Payshanba</div>
+<div class="ab t" id="wd2" style="left:284px;top:1370px;width:130px;height:16px;font-family:'Anticva',serif;font-weight:400;font-size:16px;line-height:16px;color:#000000;text-align:center;">Juma</div>
+<div class="ab t" id="dn0" style="left:2px;top:1412px;width:80px;height:47px;font-family:'Anticva',serif;font-weight:400;font-size:42px;line-height:64px;color:#000000;text-align:center;">28</div>
+<div class="ab t" id="dn1" style="left:133px;top:1412px;width:80px;height:47px;font-family:'Anticva',serif;font-weight:400;font-size:42px;line-height:64px;color:#000000;text-align:center;">29</div>
+<div class="ab t" id="dn2" style="left:291px;top:1412px;width:80px;height:47px;font-family:'Anticva',serif;font-weight:400;font-size:42px;line-height:64px;color:#000000;text-align:center;">30</div>
+<div class="ab t anticva-ru-fallback" id="cal-mon" style="left:116px;top:1624px;width:160px;height:43px;font-family:'Anticva',serif;font-weight:400;font-size:26px;line-height:30px;color:#000000;text-align:center;">Avgust</div><div class="ab t anticva-ru-fallback" style="left:104px;top:1726px;width:184px;height:96px;font-family:'Anticva',serif;font-weight:400;font-size:38px;line-height:48px;letter-spacing:0.0px;color:#000000;text-align:center;"><span class="lang-uz">To&rsquo;yimiz<br>manzili</span><span class="lang-ru">Место<br>свадьбы</span></div>
+<div class="ab t francy-ru-fallback" style="left:145px;top:1822px;width:197px;height:48px;font-family:'Francy Tiguan',cursive;font-weight:400;font-size:32px;line-height:48px;letter-spacing:0.0px;color:#798866;text-align:center;"><span class="lang-uz">Manzilni belgilab qo&rsquo;ying!</span><span class="lang-ru">Сохраните место!</span></div>
+<div class="ab" style="left:1px;top:2097px;width:390px;height:355px;background:#798866;"></div>
+<img class="ab" src="/templates/taklifnomachi-19/source/taklifnomachi.uz/templates-source/19/assets/venue.png" style="left:12px;top:1870px;width:368px;height:523px;object-fit:cover;">
+<div class="ab t anticva-ru-fallback" style="left:107px;top:2081px;width:178px;height:70px;font-family:'Anticva',serif;font-weight:400;font-size:28px;line-height:35px;color:#000000;text-align:center;"></div>
+<div class="ab t" style="left:129px;top:2146px;width:134px;height:35px;font-family:'Roboto Serif',serif;font-weight:400;font-size:16px;line-height:35px;color:#000000;text-align:center;"></div>
+<a class="ab t" id="mapbtn" href="" target="_blank" rel="noopener noreferrer" style="left:127px;top:2181px;width:138px;height:35px;font-family:'Roboto Serif',serif;font-weight:400;font-size:16px;line-height:35px;color:#798866;text-align:center;text-decoration:none;"><span class="lang-uz">Xaritadan ko&rsquo;rish</span><span class="lang-ru">Смотреть на карте</span></a>
+<div class="ab" style="left:1px;top:2452px;width:390px;height:737px;background:#798866;"></div>
+<img class="ab" src="/templates/taklifnomachi-19/source/taklifnomachi.uz/templates-source/19/assets/floral-day.png" style="left:-31px;top:2615px;width:446px;height:573px;">
+<div class="ab t anticva-ru-fallback" style="left:50px;top:2519px;width:291px;height:48px;font-family:'Anticva',serif;font-weight:400;font-size:38px;line-height:48px;letter-spacing:0.0px;color:#ffffff;text-align:center;white-space:nowrap;"><span class="lang-uz">To&rsquo;yimiz</span><span class="lang-ru">Наша свадьба</span></div>
+<div class="ab t francy-ru-fallback" style="left:226px;top:2567px;width:127px;height:48px;font-family:'Francy Tiguan',cursive;font-weight:400;font-size:38px;line-height:48px;letter-spacing:0.0px;color:#ffffff;text-align:center;"><span class="lang-uz">kuni</span><span class="lang-ru">сегодня</span></div>
+<div class="ab t anticva-ru-fallback" style="left:150px;top:2649px;width:92px;height:48px;font-family:'Anticva',serif;font-weight:400;font-size:36px;line-height:48px;color:#ffffff;text-align:center;">16:00</div>
+<div class="ab t" style="left:90px;top:2706px;width:210px;height:22px;font-family:'Roboto Serif',serif;font-weight:200;font-size:18px;line-height:22px;letter-spacing:0.0px;color:#ffffff;text-align:center;"><span class="lang-uz">Mehmonlarni kutib olish</span><span class="lang-ru">Встреча гостей</span></div>
+<div class="ab t anticva-ru-fallback" style="left:152px;top:2774px;width:89px;height:48px;font-family:'Anticva',serif;font-weight:400;font-size:36px;line-height:48px;color:#ffffff;text-align:center;">17:00</div>
+<div class="ab t" style="left:127px;top:2831px;width:136px;height:22px;font-family:'Roboto Serif',serif;font-weight:200;font-size:18px;line-height:22px;letter-spacing:0.0px;color:#ffffff;text-align:center;"><span class="lang-uz">Nikoh marosimi</span><span class="lang-ru">Церемония</span></div>
+<div class="ab t anticva-ru-fallback" style="left:149px;top:2899px;width:94px;height:48px;font-family:'Anticva',serif;font-weight:400;font-size:36px;line-height:48px;color:#ffffff;text-align:center;">18:00</div>
+<div class="ab t" style="left:118px;top:2956px;width:155px;height:22px;font-family:'Roboto Serif',serif;font-weight:200;font-size:18px;line-height:22px;letter-spacing:0.0px;color:#ffffff;text-align:center;"><span class="lang-uz">Ochilish marosimi</span><span class="lang-ru">Открытие</span></div>
+<div class="ab t anticva-ru-fallback" style="left:141px;top:3024px;width:110px;height:48px;font-family:'Anticva',serif;font-weight:400;font-size:36px;line-height:48px;color:#ffffff;text-align:center;">20:00</div>
+<div class="ab t" style="left:161px;top:3081px;width:68px;height:22px;font-family:'Roboto Serif',serif;font-weight:200;font-size:18px;line-height:22px;letter-spacing:0.0px;color:#ffffff;text-align:center;"><span class="lang-uz">Tugashi</span><span class="lang-ru">Завершение</span></div>
+<div class="ab t anticva-ru-fallback" style="left:63px;top:3285px;width:266px;height:22px;font-family:'Anticva',serif;font-weight:400;font-size:38px;line-height:22px;letter-spacing:0.0px;color:#000000;text-align:center;"><span class="lang-uz">So&rsquo;rovnoma</span><span class="lang-ru">Анкета</span></div>
+<div class="ab t" style="left:34px;top:3394px;width:192px;height:22px;font-family:'Roboto Serif',serif;font-weight:300;font-size:16px;line-height:22px;letter-spacing:0.0px;color:#000000;text-align:center;"><span class="lang-uz">Sizning ism, familyangiz</span><span class="lang-ru">Ваше имя и фамилия</span></div>
+<div class="ab" style="left:34px;top:3478px;width:324px;height:1px;background:#0f0f0f;"></div>
+<div class="ab t" style="left:32px;top:3549px;width:171px;height:22px;font-family:'Roboto Serif',serif;font-weight:300;font-size:16px;line-height:22px;letter-spacing:0.0px;color:#000000;text-align:center;"><span class="lang-uz">To&rsquo;yimizga kelasizmi?</span><span class="lang-ru">Придёте?</span></div>
+<div class="ab" style="left:34px;top:3633px;width:324px;height:1px;background:#0f0f0f;"></div>
+<button type="submit" id="si-send" class="ab" style="left:34px;top:3721px;width:324px;height:63px;background:#798866;border:0;border-radius:20px;color:#fff;font-family:'Roboto Serif',serif;font-size:18px;cursor:pointer;"><span class="lang-uz">Yuborish</span><span class="lang-ru">Отправить</span></button>
+<div class="ab" style="left:0px;top:3851px;width:390px;height:603px;background:#798866;"></div>
+<div class="ab t anticva-ru-fallback" style="left:94px;top:3939px;width:201px;height:22px;font-family:'Anticva',serif;font-weight:400;font-size:38px;line-height:22px;letter-spacing:0.0px;color:#ffffff;text-align:center;"><span class="lang-uz">Tilaklar</span><span class="lang-ru">Пожелания</span></div>
+<img class="ab" src="/templates/taklifnomachi-19/source/taklifnomachi.uz/templates-source/19/assets/wish-icon2.png" style="left:183px;top:4251px;width:24px;height:24px;object-fit:cover;">
+<div class="ab t" style="left:36px;top:4108px;width:317px;height:115px;font-family:'Roboto Serif',serif;font-weight:200;font-size:12px;line-height:23px;letter-spacing:0.0px;color:#ffffff;text-align:center;"><span class="lang-uz">Bilamizki, to‘ylarda gul sovg‘a qilish go‘zal an&#x27;ana. Ammo gul o‘rniga o‘zingiz tanlagan yoqimli sovg‘ani va unga atalgan samimiy tilakni hadya qilsangiz, bundan juda mamnun bo‘lamiz.</span><span class="lang-ru">Мы знаем, что дарить цветы на свадьбе — красивая традиция. Но вместо цветов нам будет очень приятно, если вы выберете небольшой подарок по своему вкусу вместе с искренним пожеланием.</span></div>
+<img class="ab" src="/templates/taklifnomachi-19/source/taklifnomachi.uz/templates-source/19/assets/wish-icon1.png" style="left:183px;top:4081px;width:24px;height:24px;object-fit:cover;">
+<img class="ab" src="/templates/taklifnomachi-19/source/taklifnomachi.uz/templates-source/19/assets/cd-band.png" style="left:0px;top:3938px;width:393px;height:198px;object-fit:cover;">
+<div class="ab t" style="left:38px;top:4278px;width:318px;height:115px;font-family:'Roboto Serif',serif;font-weight:200;font-size:12px;line-height:23px;letter-spacing:0.0px;color:#ffffff;text-align:center;"><span class="lang-uz">To‘yimizda qat&#x27;iy dress-kod mavjud emas. Ammo xonimlar pastel ranglardagi nafis liboslarda, janoblar esa klassik kostyumda tashrif buyursalar, bundan juda mamnun bo‘lamiz.</span><span class="lang-ru">На нашей свадьбе нет строгого дресс-кода. Но мы будем рады, если дамы придут в элегантных платьях пастельных тонов, а мужчины — в классических костюмах.</span></div>
+<div class="ab t anticva-ru-fallback" style="left:55px;top:4510px;width:280px;height:46px;font-family:'Anticva',serif;font-weight:400;font-size:38px;line-height:46px;letter-spacing:0.0px;color:#000000;text-align:center;white-space:nowrap;"><span class="lang-uz">Har Soniyani</span><span class="lang-ru">Считаем</span></div>
+<div class="ab t francy-ru-fallback" style="left:177px;top:4547px;width:158px;height:46px;font-family:'Francy Tiguan',cursive;font-weight:400;font-size:38px;line-height:46px;letter-spacing:0.0px;color:#798866;text-align:center;"><span class="lang-uz">sanayabmiz</span><span class="lang-ru">har lahzani</span></div>
+<div class="ab" style="left:18px;top:4649px;width:353px;height:155px;background:#798866;border-radius:123px;"></div>
+<div class="ab t" id="cd2" style="left:18px;top:4686px;width:353px;height:46px;font-family:'Anticva',serif;font-weight:400;font-size:36px;line-height:46px;letter-spacing:0.0px;color:#ffffff;text-align:center;white-space:nowrap;">89 : 23 : 38 : 12</div>
+<div class="ab t" style="left:65px;top:4722px;width:30px;height:46px;font-family:'Roboto Serif',serif;font-weight:400;font-size:12px;line-height:46px;letter-spacing:0.0px;color:#ffffff;text-align:center;"><span class="lang-uz">Kun</span><span class="lang-ru">Дни</span></div>
+<div class="ab t" style="left:143px;top:4722px;width:35px;height:46px;font-family:'Roboto Serif',serif;font-weight:400;font-size:12px;line-height:46px;letter-spacing:0.0px;color:#ffffff;text-align:center;"><span class="lang-uz">Soat</span><span class="lang-ru">Час</span></div>
+<div class="ab t" style="left:210px;top:4722px;width:51px;height:46px;font-family:'Roboto Serif',serif;font-weight:400;font-size:12px;line-height:46px;letter-spacing:0.0px;color:#ffffff;text-align:center;"><span class="lang-uz">daqiqa</span><span class="lang-ru">мин</span></div>
+<div class="ab t" style="left:281px;top:4722px;width:50px;height:46px;font-family:'Roboto Serif',serif;font-weight:400;font-size:12px;line-height:46px;letter-spacing:0.0px;color:#ffffff;text-align:center;"><span class="lang-uz">soniya</span><span class="lang-ru">сек</span></div>
+<div class="ab t anticva-ru-fallback" style="left:0;top:117px;width:390px;text-align:center;font-family:'Anticva',serif;font-weight:400;font-size:40px;line-height:28px;color:#000000;"></div>
+<div class="ab t anticva-ru-fallback" style="left:0;top:184px;width:390px;text-align:center;font-family:'Anticva',serif;font-weight:400;font-size:40px;line-height:28px;color:#000000;"></div>
+<div class="ab t francy-ru-fallback" style="left:183px;top:150px;width:26px;height:28px;text-align:center;font-family:'Francy Tiguan',cursive;font-size:30px;color:#798866;line-height:28px;">&amp;</div>
+<input class="ab fi" name="guestName" maxlength="60" placeholder="Ism familiya" data-plh-uz="Ism familiya" data-plh-ru="Имя и фамилия" required style="left:34px;top:3439px;width:324px;height:34px;background:transparent;border:0;font-family:'Roboto Serif',serif;font-weight:300;font-size:16px;color:#000;">
+<select class="ab fi" name="attending" style="left:34px;top:3593px;width:324px;height:34px;background:transparent;border:0;font-family:'Roboto Serif',serif;font-weight:300;font-size:16px;color:#798866;-webkit-appearance:none;appearance:none;"><option value="yes" data-uz="Ha, albatta boraman" data-ru="Да, обязательно приду">Ha, albatta boraman</option><option value="no" data-uz="Afsuski borolmayman" data-ru="К сожалению, не смогу">Afsuski borolmayman</option><option value="later" data-uz="Keyinroq javob beraman" data-ru="Отвечу позже">Keyinroq javob beraman</option></select>
+<div class="ab" id="si-err" style="left:34px;top:3641px;width:324px;text-align:center;color:#b3261e;font-size:13px;"></div>
+<div class="ab" id="si-thanks" style="left:20px;top:3300px;width:350px;height:520px;display:none;background:rgba(243,243,241,.96);text-align:center;z-index:20;"><div style="font-family:'Francy Tiguan',cursive;font-size:48px;color:#798866;margin-top:140px;"><span class="lang-uz">Rahmat!</span><span class="lang-ru" style="font-family:'PT Serif',Georgia,serif;font-style:italic">Спасибо!</span></div><div style="font-family:'Roboto Serif',serif;font-size:16px;color:#000;margin-top:12px;padding:0 30px;"><span class="lang-uz">Javobingiz qabul qilindi. Sizni to'yimizda ko'rishdan mamnunmiz!</span><span class="lang-ru">Ваш ответ принят. Будем рады видеть вас на нашей свадьбе!</span></div></div></form>
+  </div>
+</div>
+<script>
+(function(){
+  var AB=document.getElementById('si-artboard'),VP=document.getElementById('si-viewport');
+  var W=390,H=4887;
+  function scale(){
+    var vw=document.documentElement.clientWidth||window.innerWidth;
+    var disp=Math.min(vw,480);
+    var s=disp/W;var ox=Math.max(0,(vw-W*s)/2);
+    AB.style.transform='translateX('+ox+'px) scale('+s+')';
+    VP.style.height=(H*s)+'px';
+  }
+  scale();window.addEventListener('resize',scale);
+
+  // Opener: tap to reveal
+  var op=document.getElementById('si-opener');
+  if(op){
+    if(/[?&]noopener/.test(location.search)){op.style.display='none';}
+    op.addEventListener('click',function(){op.classList.add('gone');setTimeout(function(){op.style.display='none';},650);});
+  }
+
+  var iso=(AB.getAttribute('data-dateiso')||'').trim();
+  var time=(AB.getAttribute('data-time')||'18:00').trim();
+  var MONTHS_UZ=['Yanvar','Fevral','Mart','Aprel','May','Iyun','Iyul','Avgust','Sentyabr','Oktyabr','Noyabr','Dekabr'];
+  var MONTHS_RU=['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
+  var WD_UZ=['Yakshanba','Dushanba','Seshanba','Chorshanba','Payshanba','Juma','Shanba'];
+  var WD_RU=['Воскресенье','Понедельник','Вторник','Среда','Четверг','Пятница','Суббота'];
+  function pad(n){return n<10?'0'+n:''+n;}
+  var m=iso.match(/^(\d{4})-(\d{2})-(\d{2})$/),Y,Mo,D,base,prev,next;
+  function setT(id,v){var el=document.getElementById(id);if(el)el.textContent=v;}
+  function render(){
+    var ru=(document.body.getAttribute('data-lang')==='ru');
+    var MONTHS=ru?MONTHS_RU:MONTHS_UZ, WD=ru?WD_RU:WD_UZ;
+    if(m){
+      setT('wd0',WD[prev.getDay()]);setT('wd1',WD[base.getDay()]);setT('wd2',WD[next.getDay()]);
+      setT('cal-mon',MONTHS[Mo-1]);
+    }
+    var _p=document.querySelector('input[data-plh-uz]');
+    if(_p)_p.placeholder=_p.getAttribute(ru?'data-plh-ru':'data-plh-uz');
+    var _os=document.querySelectorAll('option[data-uz]');
+    for(var _i=0;_i<_os.length;_i++)_os[_i].textContent=_os[_i].getAttribute(ru?'data-ru':'data-uz');
+  }
+  window.__si19Render=render;
+  if(m){
+    Y=+m[1];Mo=+m[2];D=+m[3];base=new Date(Y,Mo-1,D);
+    setT('hd2',pad(D)+' | '+pad(Mo)+' | '+String(Y).slice(-2));
+    prev=new Date(Y,Mo-1,D-1);next=new Date(Y,Mo-1,D+1);
+    setT('dn0',prev.getDate());setT('dn1',D);setT('dn2',next.getDate());
+    render();
+  }
+  var mb=document.getElementById('mapbtn');
+  if(mb){var href=mb.getAttribute('href');if(!href||href.charAt(0)==='{'||!/^https?:\/\//i.test(href))mb.style.display='none';}
+
+  var target=m?new Date(Y,Mo-1,D,+(time.split(':')[0]||18),+(time.split(':')[1]||0),0).getTime():0;
+  function tick(){
+    if(!target)return;
+    var diff=Math.max(0,target-Date.now()),s=Math.floor(diff/1000);
+    var d=Math.floor(s/86400);s-=d*86400;var h=Math.floor(s/3600);s-=h*3600;var mi=Math.floor(s/60);s-=mi*60;
+    setT('cd2',pad(d)+' : '+pad(h)+' : '+pad(mi)+' : '+pad(s));
+  }
+  tick();setInterval(tick,1000);
+
+  // App adapter sends RSVP and wishes through invitation APIs.
+})();
+</script>
+<style id="si-anim">
+  #si-artboard .si-rv{opacity:0;transform:translateY(30px);transition:opacity .9s ease,transform 1s cubic-bezier(.16,1,.3,1);}
+  #si-artboard .si-rv.si-in{opacity:1;transform:translateY(0);}
+  @media (prefers-reduced-motion:reduce){#si-artboard .si-rv{opacity:1!important;transform:none!important;transition:none!important;}}
+</style>
+<script>(function(){
+  var ab=document.getElementById('si-artboard');if(!ab)return;
+  var els=[].slice.call(ab.querySelectorAll('.ab'));
+  els.forEach(function(el){el.classList.add('si-rv');});
+  if(!('IntersectionObserver' in window)){els.forEach(function(el){el.classList.add('si-in');});return;}
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('si-in');io.unobserve(e.target);}});},{rootMargin:'0px 0px -6% 0px',threshold:0.04});
+  function start(){els.forEach(function(el){io.observe(el);});}
+  // Start revealing after the envelope opener is dismissed, so the hero animates on open.
+  var op=document.getElementById('si-opener');
+  if(!op || /[?&]noopener/.test(location.search)){ start(); }
+  else { op.addEventListener('click',function(){ setTimeout(start,180); }); }
+})();</script>
+
+<audio id="si-bg-music" loop preload="none"></audio>
+<button id="si-music-btn" type="button" aria-label="Musiqa: ijro etish uchun bosing"
+  style="position:fixed;right:16px;top:16px;z-index:2147483645;display:flex;align-items:center;gap:6px;height:38px;padding:0 14px;border:0;border-radius:19px;background:#1c1c1c;color:#fff;font:600 12px/1 -apple-system,system-ui,sans-serif;cursor:pointer;box-shadow:0 8px 24px -8px rgba(0,0,0,.5);white-space:nowrap;animation:si-music-pulse 1.8s ease-in-out infinite">
+  <span style="font-size:15px;line-height:1">&#9835;</span><span>Musiqa</span>
+</button>
+<style>@keyframes si-music-pulse{0%,100%{box-shadow:0 8px 24px -8px rgba(0,0,0,.5)}50%{box-shadow:0 8px 26px -4px rgba(201,162,77,.9)}}</style>
+<script>(function(){
+  var a=document.getElementById('si-bg-music'),b=document.getElementById('si-music-btn');
+  if(!a||!b)return;a.volume=0.6;
+  
+  function stopPulse(){b.style.animation='none';}
+  function play(){var p=a.play();if(p&&p.then){p.then(stopPulse).catch(function(){});}}
+  b.addEventListener('click',function(){if(a.paused){play();}else{a.pause();}});
+  // Start on the first interaction ANYWHERE ELSE on the page (autoplay policies) —
+  // skip clicks on the button itself, it already toggles play/pause above. Without
+  // this guard, a tap directly on the button fires BOTH handlers on the same click:
+  // this one starts playback (paused flips to false synchronously), then the
+  // button's own handler immediately sees paused=false and pauses it right back —
+  // net effect: silent instant start-then-stop, no error, nothing audible.
+  document.addEventListener('click',function once(e){document.removeEventListener('click',once,true);if(b.contains(e.target))return;if(a.paused){play();}},true);
+})();</script>
+<script src="/templates/taklifnomachi-19/adapter.js"></script>
+</body>
+</html>
