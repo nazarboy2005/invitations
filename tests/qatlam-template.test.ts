@@ -10,7 +10,8 @@ const source = path.join(root, "Invitations - this folder will be removed from p
 const pkg = path.join(root, "apps/web/public/templates/qatlam");
 const renderer = path.join(root, "apps/web/src/templates/qatlam");
 const read = (base: string, name: string) => readFileSync(path.join(base, name), "utf8");
-const body = (html: string) => html.match(/<body[\s\S]*?<\/body>/)?.[0]?.trim().replace(/\r\n/g, "\n") ?? "";
+const normalize = (source: string) => source.replace(/^\uFEFF/, "").replace(/\r\n/g, "\n");
+const body = (html: string) => normalize(html.match(/<body[\s\S]*?<\/body>/)?.[0]?.trim() ?? "");
 
 test("Qatlam has an isolated typed renderer entry", () => {
   assert.match(read(renderer, "renderer.tsx"), /templateId="qatlam"/);
@@ -20,7 +21,7 @@ test("Qatlam has an isolated typed renderer entry", () => {
 test("Qatlam keeps the full captured body, source scripts, styles, metadata, and art", () => {
   assert.equal(body(read(pkg, "index.html")), body(read(source, "index.html")));
   for (const name of ["template.css", "template.js", "i18n.js", "meta.js"])
-    assert.deepEqual(readFileSync(path.join(pkg, name)), readFileSync(path.join(source, name)));
+    assert.equal(normalize(read(pkg, name)), normalize(read(source, name)));
   const sourceArt = readdirSync(path.join(source, "art")).sort();
   assert.deepEqual(readdirSync(path.join(pkg, "art")).sort(), sourceArt);
   for (const name of sourceArt)

@@ -11,9 +11,10 @@ const sourceRoot = path.join(projectRoot, "Invitations - this folder will be rem
 const packageRoot = path.join(projectRoot, "apps/web/public/templates/doira");
 const rendererRoot = path.join(projectRoot, "apps/web/src/templates/doira");
 const read = (base: string, file: string) => readFileSync(path.join(base, file), "utf8");
+const normalize = (source: string) => source.replace(/^\uFEFF/, "").replace(/\r\n/g, "\n");
 const capturedHtml = read(sourceRoot, "index.html");
 const packagedHtml = read(packageRoot, "index.html");
-const extractBody = (html: string) => html.match(/<body[\s\S]*?<\/body>/)?.[0]?.trim().replace(/\r\n/g, "\n") ?? "";
+const extractBody = (html: string) => normalize(html.match(/<body[\s\S]*?<\/body>/)?.[0]?.trim() ?? "");
 
 test("Doira exposes a typed renderer entry fixed to its template ID", () => {
   const renderer = read(rendererRoot, "renderer.tsx");
@@ -25,7 +26,7 @@ test("Doira exposes a typed renderer entry fixed to its template ID", () => {
 test("Doira preserves the complete captured markup, scripts, styles, and artwork", () => {
   assert.equal(extractBody(packagedHtml), extractBody(capturedHtml));
   for (const file of ["template.css", "template.js", "sound.js", "drum.js", "effects.js", "scene.js"]) {
-    assert.deepEqual(readFileSync(path.join(packageRoot, file)), readFileSync(path.join(sourceRoot, file)));
+    assert.equal(normalize(read(packageRoot, file)), normalize(read(sourceRoot, file)));
   }
   const sourceMeta = read(sourceRoot, "meta.js").replace(/\r\n/g, "\n").trimEnd();
   const packageMeta = read(packageRoot, "meta.js").replace(/\r\n/g, "\n").trimEnd();

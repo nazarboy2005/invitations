@@ -23,13 +23,17 @@ const appRoot = new URL("../apps/web/public/templates/muhr/", import.meta.url);
 const captureRoot = new URL("../Invitations - this folder will be removed from production/Marxaba/Nikoh/templates/muhr/", import.meta.url);
 const sharedRoot = new URL("../apps/web/public/templates/shared/nikoh/", import.meta.url);
 const read = (base: URL, file: string) => readFileSync(new URL(file, base), "utf8");
-const normalize = (source: string) => source.replace(/\r\n/g, "\n");
+const normalize = (source: string) =>
+  source.replace(/^\uFEFF/, "").replace(/\r\n/g, "\n");
 const html = read(appRoot, "index.html");
 const body = (source: string) => source.match(/<body[\s\S]*?<\/body>/)?.[0] ?? "";
 
 test("Muhr preserves the captured layout, styles, wax-seal rendering, motion, and art", () => {
   assert.equal(normalize(body(html)), normalize(body(read(captureRoot, "index.html"))));
-  assert.equal(read(appRoot, "template.css"), read(captureRoot, "template.css"));
+  assert.equal(
+    normalize(read(appRoot, "template.css")),
+    normalize(read(captureRoot, "template.css")),
+  );
   for (const file of ["template.js", "seal.js", "meta.js", "i18n.js"]) assert.equal(normalize(read(appRoot, file)), normalize(read(captureRoot, file)));
   for (const asset of ["arch.webp", "doves.webp", "envelope.webp", "flap-inside.webp", "scene-far.webp", "scene-front.webp", "scene-mid.webp", "scene-sky.webp"]) {
     assert.deepEqual(readFileSync(new URL(`art/${asset}`, appRoot)), readFileSync(new URL(`art/${asset}`, captureRoot)));

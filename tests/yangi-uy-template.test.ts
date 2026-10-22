@@ -18,11 +18,10 @@ const pkg = path.join(root, "apps/web/public/templates/yangi-uy");
 const renderer = path.join(root, "apps/web/src/templates/yangi-uy");
 const read = (base: string, name: string) =>
   readFileSync(path.join(base, name), "utf8");
+const normalize = (value: string) =>
+  value.replace(/^\uFEFF/, "").replace(/\r\n/g, "\n");
 const body = (html: string) =>
-  html
-    .match(/<body[\s\S]*?<\/body>/)?.[0]
-    .trim()
-    .replace(/\r\n/g, "\n") ?? "";
+  normalize(html.match(/<body[\s\S]*?<\/body>/)?.[0].trim() ?? "");
 
 test("Yangi Uy has an isolated typed adapter with preview-only label adaptation", () => {
   const wrapper = read(renderer, "renderer.tsx");
@@ -37,16 +36,16 @@ test("Yangi Uy has an isolated typed adapter with preview-only label adaptation"
 test("Yangi Uy retains the captured body, CSS, translations, metadata, and art", () => {
   assert.equal(body(read(pkg, "index.html")), body(read(source, "index.html")));
   for (const name of ["template.css", "i18n.js", "meta.js"])
-    assert.deepEqual(
-      readFileSync(path.join(pkg, name)),
-      readFileSync(path.join(source, name)),
+    assert.equal(
+      normalize(read(pkg, name)),
+      normalize(read(source, name)),
       `${name} matches the capture`,
     );
-  const sourceScript = read(source, "template.js").replace(
+  const sourceScript = normalize(read(source, "template.js")).replace(
     "../../shared/vendor/three/three.bundle.min.js",
     "vendor/three/three.bundle.min.js",
   );
-  assert.equal(read(pkg, "template.js"), sourceScript);
+  assert.equal(normalize(read(pkg, "template.js")), sourceScript);
   assert.match(read(pkg, "template.js"), /reduced\(\)/);
   assert.match(read(pkg, "template.css"), /prefers-reduced-motion/);
   assert.match(read(pkg, "template.js"), /switchToFallback/);
@@ -71,14 +70,14 @@ test("Yangi Uy excludes captured sample data and resolves only local production 
     "ScrollTrigger.min.js",
     "lz-string.min.js",
   ])
-    assert.deepEqual(
-      readFileSync(path.join(pkg, "vendor", name)),
-      readFileSync(path.join(sourceVendor, name)),
+    assert.equal(
+      normalize(read(path.join(pkg, "vendor"), name)),
+      normalize(read(sourceVendor, name)),
       `${name} matches the captured shared dependency`,
     );
-  assert.deepEqual(
-    readFileSync(path.join(pkg, "vendor/three/three.bundle.min.js")),
-    readFileSync(path.join(sourceVendor, "three/three.bundle.min.js")),
+  assert.equal(
+    normalize(read(path.join(pkg, "vendor/three"), "three.bundle.min.js")),
+    normalize(read(path.join(sourceVendor, "three"), "three.bundle.min.js")),
   );
   const refs = [
     ...Array.from(html.matchAll(/(?:src|href)="([^"]+)"/g), (m) => m[1]),

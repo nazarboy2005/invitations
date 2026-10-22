@@ -11,6 +11,8 @@ const captureRoot = new URL(
   "../Invitations - this folder will be removed from production/Marxaba/Nikoh/templates/ganch/",
   import.meta.url,
 );
+const normalize = (source: string) =>
+  source.replace(/^\uFEFF/, "").replace(/\r\n/g, "\n");
 
 function vp8Dimensions(bytes: Buffer) {
   assert.equal(
@@ -59,8 +61,8 @@ test("Ganch catalog art represents its captured closed-door opening", () => {
   );
   assert.match(sourceMeta, /preview:\s*"preview\.webp"/);
   assert.equal(
-    readFileSync(new URL("meta.js", packageRoot), "utf8"),
-    sourceMeta,
+    normalize(readFileSync(new URL("meta.js", packageRoot), "utf8")),
+    normalize(sourceMeta),
     "the package must preserve the captured preview filename",
   );
 

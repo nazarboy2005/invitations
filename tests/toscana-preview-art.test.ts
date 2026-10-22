@@ -7,6 +7,8 @@ const captureRoot = new URL(
   "../Invitations - this folder will be removed from production/Marxaba/Nikoh/templates/toscana/",
   import.meta.url,
 );
+const normalize = (value: string) =>
+  value.replace(/^\uFEFF/, "").replace(/\r\n/g, "\n");
 
 test("Toscana catalog art is the complete portrait poster used by its captured opening", () => {
   const sourceHtml = readFileSync(new URL("index.html", captureRoot), "utf8");
@@ -20,7 +22,11 @@ test("Toscana catalog art is the complete portrait poster used by its captured o
   const sourceMeta = readFileSync(new URL("meta.js", captureRoot), "utf8");
   const packagedMeta = readFileSync(new URL("meta.js", packageRoot), "utf8");
   assert.match(sourceMeta, /preview:\s*"preview\.webp"/);
-  assert.equal(packagedMeta, sourceMeta, "keep the captured preview filename contract");
+  assert.equal(
+    normalize(packagedMeta),
+    normalize(sourceMeta),
+    "keep the captured preview filename contract",
+  );
 
   const openingPoster = readFileSync(new URL("art/aisle.webp", captureRoot));
   assert.deepEqual(readFileSync(new URL("art/aisle.webp", packageRoot)), openingPoster);

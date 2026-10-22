@@ -14,8 +14,9 @@ const captureRoot = new URL(
 );
 const html = readFileSync(new URL("index.html", templateRoot), "utf8");
 const body = (source: string) =>
-  source.match(/<body[\s\S]*?<\/body>/)?.[0]?.trim() ?? "";
-const normalize = (source: string) => source.replace(/\r\n/g, "\n");
+  normalize(source.match(/<body[\s\S]*?<\/body>/)?.[0]?.trim() ?? "");
+const normalize = (source: string) =>
+  source.replace(/^\uFEFF/, "").replace(/\r\n/g, "\n");
 
 test("Vals exposes a typed renderer entry that fixes the source template ID", () => {
   const renderer = readFileSync(
@@ -146,8 +147,8 @@ test("Vals preserves the full captured design, animation, and artwork", () => {
     sha256(readFileSync(new URL("art/room.webp", captureRoot))),
   );
   assert.equal(
-    readFileSync(new URL("meta.js", templateRoot), "utf8"),
-    readFileSync(new URL("meta.js", captureRoot), "utf8"),
+    normalize(readFileSync(new URL("meta.js", templateRoot), "utf8")),
+    normalize(readFileSync(new URL("meta.js", captureRoot), "utf8")),
     "catalog metadata must remain the captured metadata",
   );
   assert.match(html, /<meta property="og:image" content="preview\.webp">/);

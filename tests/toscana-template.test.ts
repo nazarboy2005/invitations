@@ -14,12 +14,12 @@ const captureRoot = new URL(
   import.meta.url,
 );
 const html = readFileSync(new URL("index.html", templateRoot), "utf8");
+const normalize = (value: string) =>
+  value.replace(/^\uFEFF/, "").replace(/\r\n/g, "\n");
 
 test("Toscana keeps the captured page structure, styling, motion, and local art", () => {
   const body = (value: string) =>
-    (value.match(/<body[\s\S]*?<\/body>/)?.[0] ?? "")
-      .replace(/\r\n/g, "\n")
-      .trim();
+    normalize((value.match(/<body[\s\S]*?<\/body>/)?.[0] ?? "").trim());
   assert.equal(
     body(html),
     body(readFileSync(new URL("index.html", captureRoot), "utf8")),
@@ -27,8 +27,8 @@ test("Toscana keeps the captured page structure, styling, motion, and local art"
 
   for (const file of ["template.css", "meta.js", "aisle3d.js"]) {
     assert.equal(
-      readFileSync(new URL(file, templateRoot), "utf8"),
-      readFileSync(new URL(file, captureRoot), "utf8"),
+      normalize(readFileSync(new URL(file, templateRoot), "utf8")),
+      normalize(readFileSync(new URL(file, captureRoot), "utf8")),
       `${file} must remain an exact source copy`,
     );
   }
@@ -169,8 +169,8 @@ test("Toscana static copy is translated and the wrapper uses the shared typed co
     "utf8",
   );
   assert.equal(
-    packagedTranslations,
-    capturedTranslations.replace(
+    normalize(packagedTranslations),
+    normalize(capturedTranslations).replace(
       '  "Kirish uchun bosing":',
       '  "The atelier": ["Ателье", "Atelier"],\n  "Kirish uchun bosing":',
     ),

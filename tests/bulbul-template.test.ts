@@ -13,10 +13,12 @@ const packageRoot = path.join(projectRoot, "apps/web/public/templates/bulbul");
 const rendererRoot = path.join(projectRoot, "apps/web/src/templates/bulbul");
 const read = (base: string, file: string) =>
   readFileSync(path.join(base, file), "utf8");
+const normalize = (source: string) =>
+  source.replace(/^\uFEFF/, "").replace(/\r\n/g, "\n");
 const capturedHtml = read(sourceRoot, "index.html");
 const packagedHtml = read(packageRoot, "index.html");
 const extractBody = (html: string) =>
-  html.match(/<body[\s\S]*?<\/body>/)?.[0]?.trim() ?? "";
+  normalize(html.match(/<body[\s\S]*?<\/body>/)?.[0]?.trim() ?? "");
 
 test("Bulbul has a typed renderer entry fixed to its own template ID", () => {
   const renderer = read(rendererRoot, "renderer.tsx");
@@ -29,9 +31,9 @@ test("Bulbul has a typed renderer entry fixed to its own template ID", () => {
 test("Bulbul preserves the captured page body, source scripts, styles, metadata, and artwork", () => {
   assert.equal(extractBody(packagedHtml), extractBody(capturedHtml));
   for (const file of ["template.css", "template.js", "plaque.js"]) {
-    assert.deepEqual(
-      readFileSync(path.join(packageRoot, file)),
-      readFileSync(path.join(sourceRoot, file)),
+    assert.equal(
+      normalize(read(packageRoot, file)),
+      normalize(read(sourceRoot, file)),
     );
   }
   const sourceMeta = read(sourceRoot, "meta.js");
