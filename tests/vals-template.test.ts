@@ -18,6 +18,20 @@ const body = (source: string) =>
 const normalize = (source: string) =>
   source.replace(/^\uFEFF/, "").replace(/\r\n/g, "\n");
 
+test("Vals is registered for publication at the verified release gate", () => {
+  const registry = readFileSync(
+    new URL("../packages/contracts/src/index.ts", import.meta.url),
+    "utf8",
+  );
+  const migration = readFileSync(
+    new URL("../packages/database/migrations/0075_publish_vals.sql", import.meta.url),
+    "utf8",
+  );
+  assert.match(registry, /id: "vals",[\s\S]*?published: true/);
+  assert.match(migration, /VALUES \('vals', 'Vals', 15000000, 'UZS', true\)/);
+  assert.match(migration, /\('vals', 'wedding'\), \('vals', 'fotiha'\)/);
+});
+
 test("Vals exposes a typed renderer entry that fixes the source template ID", () => {
   const renderer = readFileSync(
     new URL("../apps/web/src/templates/vals/renderer.tsx", import.meta.url),

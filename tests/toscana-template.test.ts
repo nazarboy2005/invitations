@@ -17,6 +17,20 @@ const html = readFileSync(new URL("index.html", templateRoot), "utf8");
 const normalize = (value: string) =>
   value.replace(/^\uFEFF/, "").replace(/\r\n/g, "\n");
 
+test("Toscana is registered for publication at the verified release gate", () => {
+  const registry = readFileSync(
+    new URL("../packages/contracts/src/index.ts", import.meta.url),
+    "utf8",
+  );
+  const migration = readFileSync(
+    new URL("../packages/database/migrations/0076_publish_toscana.sql", import.meta.url),
+    "utf8",
+  );
+  assert.match(registry, /id: "toscana",[\s\S]*?published: true/);
+  assert.match(migration, /VALUES \('toscana', 'Toscana', 15000000, 'UZS', true\)/);
+  assert.match(migration, /\('toscana', 'wedding'\), \('toscana', 'fotiha'\)/);
+});
+
 test("Toscana keeps the captured page structure, styling, motion, and local art", () => {
   const body = (value: string) =>
     normalize((value.match(/<body[\s\S]*?<\/body>/)?.[0] ?? "").trim());

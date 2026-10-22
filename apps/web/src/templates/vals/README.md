@@ -21,7 +21,8 @@ but the approved invitation contract and editor intentionally have no venue-phot
 field. Do not populate it with sample media; it remains an explicit content gap.
 The source also has a bank-name slot, while the approved gift contract has no
 bank-name field and the user asked to remove that field; it remains blank by
-design. RSVP and wishes are preview-only during this review. Live service,
-database, and external deployment verification remain outside this release QA.
-Keep the template unpublished until the project-wide integration and service
-gates pass.
+design. RSVP and wishes were preview-only during the original visual review.
+Migration `0075_publish_vals.sql` publishes Vals at 150,000 UZS with
+wedding/fotiha compatibility. The authenticated four-locale save, publish,
+public-render, and reopen integration passes for Vals. External deployment and
+live payment activation remain separate from this local release verification.

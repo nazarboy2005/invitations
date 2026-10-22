@@ -153,7 +153,8 @@ test("first publish is atomic, free, stable, concurrent-safe and uses event-loca
       results[0].url,
     );
   } finally {
-    process.env.PUBLISHING_MODE = mode;
+    if (mode === undefined) delete process.env.PUBLISHING_MODE;
+    else process.env.PUBLISHING_MODE = mode;
   }
 });
 
@@ -296,7 +297,8 @@ test("incomplete content, unsupported/retired templates, past days and paid mode
       "PUBLISHING_UNAVAILABLE",
     );
   } finally {
-    process.env.PUBLISHING_MODE = mode;
+    if (mode === undefined) delete process.env.PUBLISHING_MODE;
+    else process.env.PUBLISHING_MODE = mode;
   }
 });
 test("unready or foreign media cannot become public", async () => {
@@ -636,7 +638,7 @@ test("RSVP limits and wish moderation reach the owner and approved public list",
       .message,
     "A real test wish",
   );
-  assert.equal((await moderate("hidden")).status, 200);
+  assert.equal((await moderate("deleted")).status, 200);
   assert.equal(
     (await (await request(`${base}/wishes`, undefined, false)).json()).wishes
       .length,

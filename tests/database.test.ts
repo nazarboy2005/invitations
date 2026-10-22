@@ -68,11 +68,11 @@ test("Bitiruv event compatibility is additive and published", async () => {
     /check constraint/i,
   );
 });
-test("Korporativ event compatibility is additive and remains unpublished", async () => {
+test("Korporativ event compatibility is additive and published", async () => {
   const template = await db.query<{ published: boolean }>(
     "SELECT published FROM templates WHERE id='korporativ'",
   );
-  assert.deepEqual(template.rows, [{ published: false }]);
+  assert.deepEqual(template.rows, [{ published: true }]);
   const categories = await db.query<{ category_id: string }>(
     "SELECT category_id FROM template_category_assignments WHERE template_id='korporativ'",
   );
@@ -527,7 +527,7 @@ test("template migrations publish completed designs while keeping unfinished des
       ["ganch", false],
       ["hilol", true],
       ["konfetti", true],
-      ["korporativ", false],
+      ["korporativ", true],
       ["kozgu", true],
       ["kuzgi-chinor", true],
       ["lola", true],
@@ -558,9 +558,9 @@ test("template migrations publish completed designs while keeping unfinished des
       ["shirin-bayram", true],
       ["somon-yoli", true],
       ["suzani", true],
-      ["toscana", false],
+      ["toscana", true],
       ["uchar-gilam", false],
-      ["vals", false],
+      ["vals", true],
     ],
   );
   const kozguEvents = await db.query<{ event_type: string }>(

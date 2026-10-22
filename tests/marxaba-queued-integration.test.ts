@@ -25,9 +25,16 @@ const nilufarMigration = readFileSync(
   ),
   "utf8",
 );
-const valsMigration = readFileSync(
+const valsPublicationMigration = readFileSync(
   new URL(
-    "../packages/database/migrations/0031_add_vals_template.sql",
+    "../packages/database/migrations/0075_publish_vals.sql",
+    import.meta.url,
+  ),
+  "utf8",
+);
+const toscanaPublicationMigration = readFileSync(
+  new URL(
+    "../packages/database/migrations/0076_publish_toscana.sql",
     import.meta.url,
   ),
   "utf8",
@@ -182,6 +189,8 @@ test("registered Marxaba designs reflect their release state and additive migrat
     "bitiruv",
     "kozgu",
     "qandil",
+    "vals",
+    "toscana",
   ]);
   const migrationById: Record<string, string> = {
     nilufar: nilufarMigration,
@@ -191,8 +200,8 @@ test("registered Marxaba designs reflect their release state and additive migrat
     "orik-guli": nextMigration,
     paxta: nextMigration,
     "sahro-fonusi": nextMigration,
-    vals: valsMigration,
-    toscana: sourceBatchMigration,
+    vals: valsPublicationMigration,
+    toscana: toscanaPublicationMigration,
     muhr: sourceBatchMigration,
     bulbul: nextBatchMigration,
     kozgu: kozguPublicationMigration,
