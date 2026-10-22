@@ -176,6 +176,38 @@ export function Dashboard() {
   const [sessionRefresh, setSessionRefresh] = useState(0);
   const [revoking, setRevoking] = useState(false);
   const [logoutConfirmation, setLogoutConfirmation] = useState(false);
+  const [loginBusy, setLoginBusy] = useState(false);
+  const [loginError, setLoginError] = useState("");
+
+  async function startLogin() {
+    setLoginBusy(true);
+    setLoginError("");
+    try {
+      const response = await fetch("/api/auth/telegram/start", { method: "POST" });
+      const result = await response.json();
+      if (!response.ok || !result.loginUrl || !result.requestId) throw new Error();
+      const telegramWindow = window.open(result.loginUrl, "_blank", "noopener,noreferrer");
+      if (!telegramWindow) window.location.assign(result.loginUrl);
+      const deadline = Date.now() + 5 * 60_000;
+      while (Date.now() < deadline) {
+        await new Promise((resolve) => window.setTimeout(resolve, 2000));
+        const status = await fetch(`/api/auth/telegram/status?requestId=${encodeURIComponent(result.requestId)}`, { cache: "no-store" });
+        if (!status.ok) throw new Error();
+        const state = await status.json();
+        if (state.state === "confirmed") {
+          const complete = await fetch("/api/auth/telegram/complete", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ requestId: result.requestId }) });
+          if (!complete.ok) throw new Error();
+          window.location.reload();
+          return;
+        }
+        if (state.state === "expired") throw new Error();
+      }
+      throw new Error();
+    } catch {
+      setLoginError("Telegram orqali kirish boshlanmadi yoki vaqt tugadi. Qayta urinib ko‘ring.");
+      setLoginBusy(false);
+    }
+  }
 
   useEffect(() => {
     let alive = true;
@@ -362,10 +394,11 @@ export function Dashboard() {
                 saqlang. Keyingi safar shu yerdan davom etasiz.
               </p>
             </div>
-            <Link href="/#templates">
-              Davom etish
-              <ArrowRight size={16} />
-            </Link>
+            <button onClick={startLogin} disabled={loginBusy}>
+              {loginBusy ? "Telegramni kutyapmiz…" : "Telegram orqali kirish"}
+              {loginBusy ? <LoaderCircle size={16} /> : <ArrowRight size={16} />}
+            </button>
+            {loginError && <p role="alert">{loginError}</p>}
           </div>
         )}
         <div className={styles.contentLayout}>

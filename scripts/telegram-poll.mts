@@ -12,10 +12,13 @@ async function main() {
   const origin = process.env.APP_URL;
   const token = process.env.TELEGRAM_BOT_TOKEN;
   const secret = process.env.TELEGRAM_WEBHOOK_SECRET;
+  const deliverWishNotifications =
+    process.argv.includes("--deliver-wishes") ||
+    process.argv.includes("--with-wish-notifications");
   if (
     !origin ||
     !token ||
-    !secret ||
+    (!secret && !deliverWishNotifications) ||
     !["127.0.0.1", "localhost"].includes(new URL(origin).hostname)
   )
     throw new DeliveryError(
@@ -59,11 +62,15 @@ async function main() {
       "A webhook is already configured. Polling will not replace it.",
     );
   console.log(
-    "Local Telegram delivery is running. Keep pnpm dev running; Ctrl+C to stop. Run only one polling process per bot.",
+    `Local Telegram delivery${deliverWishNotifications ? " and wish notifications" : ""} is running. Keep pnpm dev running; Ctrl+C to stop. Run only one polling process per bot.`,
   );
   let offset = 0;
+  const { processWishNotifications } = deliverWishNotifications
+    ? await import("../apps/web/src/server/jobs/wish-notification.ts")
+    : { processWishNotifications: null };
   for (;;) {
     try {
+      if (processWishNotifications) await processWishNotifications();
       const updates = await telegram("getUpdates", {
         offset,
         timeout: 20,

@@ -10,7 +10,7 @@ type Activity = {
     status: "yes" | "no" | "maybe";
     partySize: number;
   }>;
-  wishes: Array<{ id: string; name: string; message: string; status: string }>;
+  wishes: Array<{ id: string; name: string; message: string; status: string; createdAt: string }>;
   receipts: Array<{
     id: string;
     giverNames: string;
@@ -29,6 +29,7 @@ export function InvitationActivity({ invitation }: { invitation: Invitation }) {
   const [busy, setBusy] = useState(false);
   const [refresh, setRefresh] = useState(0);
   const [page, setPage] = useState(0);
+  const [wishFilter, setWishFilter] = useState<"all" | "pending" | "approved" | "hidden">("all");
   useEffect(() => {
     const controller = new AbortController();
     setData(null);
@@ -84,17 +85,13 @@ export function InvitationActivity({ invitation }: { invitation: Invitation }) {
         {getContent(invitation).people.filter(Boolean).join(" & ") ||
           "Taklifnoma"}
       </h1>
-      <p>
-        Mehmonlar javoblari, tilaklar va shaxsiy cheklar. Tasdiqlangan tilaklar
-        taklifnomada ko‘rinadi.
-      </p>
-      <button
-        type="button"
-        onClick={() => setRefresh((value) => value + 1)}
-        disabled={busy}
-      >
-        Yangilash
-      </button>
+      <div className={styles.toolbar}>
+        <p>Mehmonlar faolligi va shaxsiy to‘yona cheklari. Tasdiqlangan tilaklar taklifnomada ko‘rinadi.</p>
+        <button type="button" onClick={() => setRefresh((value) => value + 1)} disabled={busy}>
+          Yangilash
+        </button>
+      </div>
+      <TelegramHint />
       {error && <p role="alert">{error}</p>}
       {!data && !error && <p role="status">Yuklanmoqda…</p>}
       {data && (
@@ -106,13 +103,13 @@ export function InvitationActivity({ invitation }: { invitation: Invitation }) {
             <span>
               Keladigan mehmonlar: <strong>{data.totals.guests}</strong>
             </span>
-            <span>
+              <span className={data.totals.pending ? styles.pendingTotal : ""}>
               Kutilayotgan tilaklar: <strong>{data.totals.pending}</strong>
             </span>
           </div>
           <div className={styles.columns}>
             <section>
-              <h2>Qatnashish javoblari</h2>
+              <h2>Qatnashish javoblari <small>({data.totals.responses})</small></h2>
               {!data.responses.length && <p>Hozircha javob yo‘q.</p>}
               {data.responses.map((item) => (
                 <article key={item.id}>
@@ -131,11 +128,22 @@ export function InvitationActivity({ invitation }: { invitation: Invitation }) {
               ))}
             </section>
             <section>
-              <h2>Mehmonlar tilaklari</h2>
-              {!data.wishes.length && <p>Hozircha tilak yo‘q.</p>}
-              {data.wishes.map((item) => (
+              <div className={styles.sectionHeading}>
+                <h2>Mehmonlar tilaklari <small>({data.wishes.length})</small></h2>
+                <label className={styles.filter}>Ko‘rsatish
+                  <select value={wishFilter} onChange={(event) => { setWishFilter(event.target.value as typeof wishFilter); setPage(0); }}>
+                    <option value="all">Barchasi</option>
+                    <option value="pending">Kutilmoqda</option>
+                    <option value="approved">Tasdiqlangan</option>
+                    <option value="hidden">Yashirilgan</option>
+                  </select>
+                </label>
+              </div>
+              {!data.wishes.length && <p>Hozircha mehmonlardan tilak kelmadi. Yangi tilaklar shu yerda ko‘rinadi.</p>}
+              {data.wishes.filter((item) => wishFilter === "all" || item.status === wishFilter).length === 0 && data.wishes.length > 0 && <p>Bu holatda tilaklar yo‘q.</p>}
+              {data.wishes.filter((item) => wishFilter === "all" || item.status === wishFilter).map((item) => (
                 <article key={item.id}>
-                  <strong>{item.name}</strong>
+                  <div className={styles.wishMeta}><strong>{item.name}</strong><time dateTime={item.createdAt}>{new Intl.DateTimeFormat("uz-UZ", { dateStyle: "medium", timeStyle: "short" }).format(new Date(item.createdAt))}</time></div>
                   <p className={styles.message}>{item.message}</p>
                   <small>
                     {{
@@ -145,7 +153,7 @@ export function InvitationActivity({ invitation }: { invitation: Invitation }) {
                     }[item.status as "pending"] || item.status}
                   </small>
                   <div className={styles.actions}>
-                    {item.status !== "approved" && (
+                    {item.status === "pending" && (
                       <button
                         disabled={busy}
                         onClick={() => void moderate(item.id, "approved")}
@@ -235,4 +243,16 @@ export function InvitationActivity({ invitation }: { invitation: Invitation }) {
       )}
     </main>
   );
+}
+
+function TelegramHint() {
+  const [url, setUrl] = useState("");
+  useEffect(() => {
+    fetch("/api/telegram/info", { cache: "force-cache" })
+      .then((response) => response.ok ? response.json() : null)
+      .then((result) => { if (result?.botUrl) setUrl(result.botUrl); })
+      .catch(() => {});
+  }, []);
+  if (!url) return null;
+  return <p className={styles.telegramHint}>Yangi tilaklarni Telegram orqali ham olish uchun botni bir marta oching va “Start” tugmasini bosing. <a href={url} target="_blank" rel="noreferrer">Telegram botni ochish ↗</a></p>;
 }

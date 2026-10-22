@@ -1,5 +1,14 @@
 # Implementation decisions
 
+## Guest activity and Telegram wish notifications (2026-10-22)
+
+- User request: improve the invitation activity page and notify the invitation owner through Telegram when a guest submits a new wish. Wishes remain pending until the owner approves them; notification does not publish guest content.
+- Implementation choice: deliver Telegram notifications from the durable `jobs` queue with retries, and provide approve/hide buttons in Telegram plus a link to the owner's activity page. The owner must have opened the bot at least once so Telegram can deliver a private message; activity UI should explain how to connect if delivery is unavailable. Production must run a worker or scheduled queue processor; the local combined Telegram poller can process updates and wishes together.
+- User-reported issue: the studio/publication flow can claim a future date has passed, even after correcting/reselecting it. Compare the stored local event time in the invitation's timezone to the current instant without relying on server/browser timezone conversion.
+- Implementation choice: activity page gains wish status filters, submission times, and clearer pending counts/empty states while preserving existing RSVP, moderation, and private receipt functions.
+- User request: make Telegram bot messages more attractive with improved formatting and stickers.
+- Implementation choice: use Telegram HTML formatting with escaped user-provided values, concise Uzbek copy, and contextual emoji. Send optional welcome, onboarding-success, and new-wish stickers only when corresponding bot file ID environment values are configured; missing or invalid decorative stickers never block bot flows. Do not bundle a sticker ID from another bot or chat.
+
 ## Database publication authorization (2026-10-21)
 
 - User requirement: template tasks may apply the required additive migrations to the configured database and publish templates through the existing catalog mechanism once their release gates pass. An external/live database is not itself a blocker. Inspect current state, apply only required migrations, verify catalog publication, and commit the publication locally.

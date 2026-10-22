@@ -43,6 +43,23 @@ export async function telegramCall(
       503,
     );
 }
+function escapeHtml(value: string) {
+  return value.replace(/[&<>"']/g, (character) => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;",
+  })[character]!);
+}
+async function sendSticker(chatId: number, stickerId: string | undefined) {
+  if (!stickerId) return;
+  try {
+    await telegramCall("sendSticker", { chat_id: chatId, sticker: stickerId });
+  } catch {
+    // Stickers are optional decoration; they must not block login or onboarding.
+  }
+}
 async function identify(
   identity: TelegramIdentity,
   chatId: number,
@@ -68,19 +85,22 @@ const contactKeyboard = {
 async function askContact(chatId: number) {
   await telegramCall("sendMessage", {
     chat_id: chatId,
-    text: "Davom etish uchun o‘zingizning Telegram telefon raqamingizni quyidagi tugma orqali yuboring.",
+    parse_mode: "HTML",
+    text: "📱 <b>Telefon raqamingizni tasdiqlang</b>\n\nDavom etish uchun shaxsiy Telegram raqamingizni quyidagi tugma orqali yuboring. Raqam akkauntingizni himoyalash va tiklash uchun ishlatiladi.",
     reply_markup: contactKeyboard,
   });
 }
 async function askConfirm(chatId: number, requestId: string) {
+  const siteUrl = escapeHtml(new URL(process.env.APP_URL!).origin);
   await telegramCall("sendMessage", {
     chat_id: chatId,
-    text: `Saytga kirishni tasdiqlang. Bu so‘rovni o‘zingiz boshlagan bo‘lsangiz, quyidagi tugmani bosing.\nSayt: ${new URL(process.env.APP_URL!).origin}`,
+    parse_mode: "HTML",
+    text: `🔐 <b>Kirishni tasdiqlash</b>\n\nBu so‘rovni o‘zingiz boshlagan bo‘lsangiz, tugmani bosing.\n🌐 ${siteUrl}`,
     reply_markup: {
       inline_keyboard: [
         [
           {
-            text: "Saytga kirishni tasdiqlash",
+            text: "✅ Kirishni tasdiqlash",
             callback_data: `auth_confirm:${requestId}`,
           },
         ],
@@ -130,8 +150,9 @@ async function processLocked(update: Update, db: postgres.TransactionSql) {
         : [];
       if (!auth)
         await telegramCall("sendMessage", {
+          parse_mode: "HTML",
           chat_id: message.chat.id,
-          text: "Kirish havolasi eskirgan yoki ishlatilgan. Saytdan yangisini oching.",
+          text: "⌛ <b>Kirish havolasi eskirgan</b>\n\nSaytga qaytib, yangi kirish so‘rovini boshlang.",
         });
       else if (!user.phone_shared_at) await askContact(message.chat.id);
       else await askConfirm(message.chat.id, auth.id);
@@ -148,9 +169,11 @@ async function processLocked(update: Update, db: postgres.TransactionSql) {
         const normalized =
           "+" + message.contact.phone_number!.replace(/\D/g, "");
         await db`UPDATE users SET phone_number=${normalized},phone_source='telegram_contact',phone_shared_at=now(),updated_at=now() WHERE id=${user.id}`;
+        await sendSticker(message.chat.id, process.env.TELEGRAM_SUCCESS_STICKER_ID);
         await telegramCall("sendMessage", {
+          parse_mode: "HTML",
           chat_id: message.chat.id,
-          text: "Telefon raqamingiz qabul qilindi.",
+          text: "✅ <b>Telefon raqamingiz qabul qilindi</b>\n\nEndi saytga qaytib davom etishingiz mumkin.",
           reply_markup: { remove_keyboard: true },
         });
         const [auth] =
@@ -159,20 +182,23 @@ async function processLocked(update: Update, db: postgres.TransactionSql) {
         else
           await telegramCall("sendMessage", {
             chat_id: message.chat.id,
-            text: "Mini App yoki saytga qaytib davom eting.",
+            parse_mode: "HTML",
+            text: "🎉 <b>Tayyor!</b>\n\nMini App yoki saytga qaytib davom eting.",
           });
       }
     } else if (start) {
       if (!user.phone_shared_at) await askContact(message.chat.id);
       else
+        await sendSticker(message.chat.id, process.env.TELEGRAM_WELCOME_STICKER_ID);
         await telegramCall("sendMessage", {
+          parse_mode: "HTML",
           chat_id: message.chat.id,
-          text: "Taklifnomani yaratish uchun saytimizga o‘ting.",
+          text: `✨ <b>Taklifnoma</b>\n\nSalom, ${escapeHtml(identity.first_name)}!\n\nYaqinlaringiz uchun chiroyli taklifnoma yarating, mehmonlar javobi va tilaklarini bir joyda kuzating. 💌`,
           reply_markup: {
             inline_keyboard: [
               [
                 {
-                  text: "Taklifnoma yaratish",
+                  text: "💌 Taklifnoma yaratish",
                   web_app: { url: process.env.APP_URL },
                 },
               ],
@@ -228,6 +254,18 @@ async function processLocked(update: Update, db: postgres.TransactionSql) {
         if (canChange) {
           await db`UPDATE wishes SET status=${status},moderated_by=${wish.actor_id},moderated_at=now(),deleted_at=${status === "deleted" ? new Date() : null} WHERE id=${wish.id}`;
           await db`INSERT INTO invitation_audit_log(invitation_id,actor_id,action,previous_values,new_values) VALUES(${wish.invitation_id},${wish.actor_id},${"wish_" + moderation[1]},${db.json({ wishId: wish.id, status: wish.status })},${db.json({ wishId: wish.id, status })})`;
+          if (callback.message?.message_id) {
+            await telegramCall("editMessageReplyMarkup", {
+              chat_id: callback.message.chat.id,
+              message_id: callback.message.message_id,
+              reply_markup: { inline_keyboard: [] },
+            });
+            await telegramCall("sendMessage", {
+              parse_mode: "HTML",
+              chat_id: callback.message.chat.id,
+              text: status === "approved" ? "🌟 <b>Tilak tasdiqlandi</b>\nEndi u taklifnomada ko‘rinadi." : "🙈 <b>Tilak yashirildi</b>\nU taklifnomada ko‘rinmaydi.",
+            });
+          }
         }
         await telegramCall("answerCallbackQuery", {
           callback_query_id: callback.id,

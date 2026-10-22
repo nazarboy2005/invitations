@@ -136,9 +136,12 @@ export async function publishInvitation(
       );
     assertPublishable(previous);
     await assertPublicMedia(tx, previous, user.id);
+    // Treat startsAt as a wall-clock value in the invitation's own timezone.
+    // Compare the resulting instants in PostgreSQL, without relying on the
+    // database session's timezone or JS coercion of a timezone-less string.
     const [event] =
-      await tx`SELECT ((${previous.startsAt}::timestamp)::date + 1)::timestamp AT TIME ZONE ${previous.timezone} AS deadline, now() AS published_at`;
-    if (new Date(event.deadline) <= new Date(event.published_at))
+      await tx`SELECT (((${previous.startsAt}::timestamp)::date + 1)::timestamp AT TIME ZONE ${previous.timezone}) <= now() AS ended, now() AS published_at, ((${previous.startsAt}::timestamp)::date + 1)::timestamp AT TIME ZONE ${previous.timezone} AS deadline`;
+    if (event.ended)
       throw new ApiError(
         400,
         "EVENT_ENDED",
