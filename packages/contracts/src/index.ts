@@ -408,7 +408,7 @@ export const TEMPLATES: TemplateDefinition[] = [
     priceMinor: 15000000,
     currency: "UZS",
     accent: "#c6a45b",
-    published: false,
+    published: true,
   },
   {
     id: "samarqand-kechasi",
@@ -939,7 +939,7 @@ export const TEMPLATES: TemplateDefinition[] = [
     id: "yangi-uy",
     name: "Yangi Uy",
     description: "Yangi xonadon quvonchini yaqinlaringiz bilan nishonlang.",
-    previewImage: "/templates/yangi-uy/preview.webp",
+    previewImage: "/templates/yangi-uy/preview-browser-capture.jpg",
     previewEventType: "yangi-uy",
     categoryIds: ["yangi-uy"],
     supportedEventTypes: ["yangi-uy", "osh"],

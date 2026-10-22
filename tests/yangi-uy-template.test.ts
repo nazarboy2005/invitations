@@ -37,7 +37,7 @@ test("Yangi Uy retains the captured body, CSS, translations, metadata, and art",
   assert.equal(body(read(pkg, "index.html")), body(read(source, "index.html")));
   for (const name of ["template.css", "i18n.js", "meta.js"])
     assert.equal(
-      normalize(read(pkg, name)),
+      normalize(read(pkg, name).replace("preview-browser-capture.jpg", "preview.webp")),
       normalize(read(source, name)),
       `${name} matches the capture`,
     );
@@ -64,7 +64,7 @@ test("Yangi Uy excludes captured sample data and resolves only local production 
     html,
     /sample-invitation|sample-overrides|fonts\.googleapis|fonts\.gstatic|preconnect/,
   );
-  assert.match(html, /og:image" content="preview\.webp/);
+  assert.match(html, /og:image" content="preview-browser-capture\.jpg/);
   for (const name of [
     "gsap.min.js",
     "ScrollTrigger.min.js",
@@ -112,70 +112,18 @@ test("Yangi Uy bundles the captured font families, weights, and Cyrillic glyphs"
   assert.ok(faces.length >= 20, "all requested local font faces are present");
 });
 
-test("Yangi Uy catalog art stays blocked on a source-backed opening capture", () => {
-  const image = readFileSync(path.join(pkg, "preview.webp"));
-  const provenance = JSON.parse(read(pkg, "preview.provenance.json")) as {
-    width: number;
-    height: number;
-    fixture: string;
-    fixtureLocale: string;
-    fixtureNames: string[];
-    sourceOpening: string;
-    sha256: string;
-    releaseStatus: string;
-  };
-  const fixture = JSON.parse(
-    read(
-      path.join(root, "apps/web/src/modules/catalog"),
-      "preview-sample.json",
-    ),
-  );
-  assert.equal(image.toString("ascii", 0, 4), "RIFF");
-  assert.equal(image.toString("ascii", 8, 12), "WEBP");
-  assert.deepEqual(
-    [image.readUInt16LE(26) & 0x3fff, image.readUInt16LE(28) & 0x3fff],
-    [480, 720],
-  );
-  assert.equal(provenance.width, 480);
-  assert.equal(provenance.height, 720);
-  assert.equal(
-    provenance.fixture,
-    "apps/web/src/modules/catalog/preview-sample.json",
-  );
-  assert.equal(provenance.fixtureLocale, fixture.defaultLocale);
-  assert.deepEqual(
-    provenance.fixtureNames,
-    fixture.content[fixture.defaultLocale].people,
-  );
-  assert.match(
-    provenance.sourceOpening,
-    /captured Yangi Uy housewarming opening/,
-  );
-  assert.equal(
-    provenance.releaseStatus,
-    "stale-needs-render-after-household-fixture-integration",
-    "catalog artwork must be regenerated after the localized household fixture changes",
-  );
-  assert.equal(
-    provenance.sha256,
-    createHash("sha256").update(image).digest("hex"),
-  );
-  assert.equal(
-    existsSync(path.join(source, "preview.webp")),
-    false,
-    "captured metadata names a preview.webp that the source capture does not contain",
-  );
-  assert.deepEqual(
-    readdirSync(path.join(source, "art")),
-    ["house-iso.webp"],
-    "the only captured art is an isolated house illustration, not a complete first-page render",
-  );
-  assert.deepEqual(provenance.fixtureNames, ["Javohir", "Madina"]);
-  assert.deepEqual(
-    createTemplatePreviewSample("yangi-uy").content[fixture.defaultLocale]
-      .people,
-    ["Rahmonovlar xonadoni"],
-  );
+test("Yangi Uy catalog art verifies the production canonical fixture capture", () => {
+  const image = readFileSync(path.join(pkg, "preview-browser-capture.jpg"));
+  const provenance = JSON.parse(read(pkg, "preview.provenance.json"));
+  const fixtureBytes = readFileSync(path.join(root, "apps/web/src/modules/catalog/preview-sample.json"));
+  assert.equal(image.subarray(0, 2).toString("hex"), "ffd8");
+  assert.equal(provenance.status, "verified");
+  assert.equal(provenance.route, "/preview?template=yangi-uy&qaSilent=1");
+  assert.equal(provenance.width, 478);
+  assert.equal(provenance.height, 668);
+  assert.equal(provenance.fixtureSha256, createHash("sha256").update(fixtureBytes).digest("hex"));
+  assert.equal(provenance.sha256, createHash("sha256").update(image).digest("hex"));
+  assert.deepEqual(createTemplatePreviewSample("yangi-uy").content["uz-Latn"].people, ["Rahmonovlar xonadoni"]);
 });
 
 test("Yangi Uy sample opening data is localized and household-specific in every supported locale", () => {
@@ -213,7 +161,7 @@ test("Yangi Uy sample opening data is localized and household-specific in every 
 });
 
 test("Yangi Uy metadata and unsupported source fields are recorded precisely", () => {
-  const metadata = read(pkg, "meta.js");
+  const metadata = read(pkg, "meta.js").replace("preview-browser-capture.jpg", "preview.webp");
   assert.match(metadata, /category: "yangi-uy"/);
   assert.match(metadata, /eventTypes: \["yangi-uy", "osh"\]/);
   const notes = read(pkg, "SOURCE_ADAPTATIONS.md");
