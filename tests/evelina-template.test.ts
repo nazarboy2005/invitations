@@ -57,9 +57,12 @@ test("frame is localized and uses contract-backed fields and APIs", () => {
   assert.match(script, /guestToken/);
   assert.match(script, /prefers-reduced-motion/);
   assert.match(html, /id="toyonaSection"/);
+  assert.match(html, /id="toyonaCardFront"/);
+  assert.match(html, /id="toyonaCardBack" aria-hidden="true"/);
   assert.match(script, /giftSection.hidden=\!\(gift.enabled&&gift.cardNumber\)/);
   assert.match(script, /navigator.clipboard.writeText\(number\)/);
-  for (const text of ["Картани нусхалаш", "Copy card number", "Скопировать номер карты"]) assert.ok(script.includes(text));
+  assert.match(script, /card\?\.classList\.toggle\("is-revealed",revealed\)/);
+  for (const text of ["Рақамни нусхалаш", "Reveal transfer details", "Показать данные для перевода"]) assert.ok(script.includes(text));
   assert.match(adapter, /makeLegacyData/);
   assert.match(adapter, /\$\{templateId\}:update/);
   assert.match(adapter, /catalogMusic/);

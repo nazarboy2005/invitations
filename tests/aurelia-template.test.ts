@@ -70,7 +70,8 @@ test("Aurelia maps authored fields to APIs and excludes captured demo content", 
   assert.match(adapter, /galleryPhoto\.src = featureImage\?\.src \|\| "\.\/assets\/images\/0310\/1\.png"/);
   assert.match(adapter, /giftSection\.hidden=\!\(gift\.enabled&&gift\.cardNumber\)/);
   assert.match(adapter, /navigator\.clipboard\.writeText\(number\)/);
-  for (const text of ["Картани нусхалаш", "Copy card number", "Скопировать номер карты"]) assert.ok(adapter.includes(text));
+  assert.match(adapter, /card\?\.classList\.toggle\("is-revealed",revealed\)/);
+  for (const text of ["Рақамни нусхалаш", "Reveal transfer details", "Показать данные для перевода"]) assert.ok(adapter.includes(text));
 });
 
 test("Aurelia preview sample stays ephemeral and uses the shared renderer", () => {

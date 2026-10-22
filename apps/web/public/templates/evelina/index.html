@@ -100,8 +100,23 @@
         <section class="sec evelina-toyona" id="toyonaSection" hidden>
             <h2 class="title" data-copy="toyonaTitle"></h2>
             <img class="border" src="./assets/previews/template/evelina/border.png" alt="">
-            <p class="toyona-holder" id="toyonaHolder"></p>
-            <button class="toyona-copy" id="toyonaCopy" type="button"><span id="toyonaNumber"></span><span id="toyonaCopyLabel" data-copy="copyCard"></span></button>
+            <div class="toyona-card" id="toyonaCard">
+                <div class="toyona-card-inner" id="toyonaCardInner">
+                    <div class="toyona-card-front" id="toyonaCardFront">
+                        <span class="toyona-card-ornament" aria-hidden="true">✧</span>
+                        <span class="toyona-card-cover" aria-hidden="true">•••• •••• •••• ••••</span>
+                        <button class="toyona-reveal" id="toyonaReveal" type="button" aria-expanded="false" aria-controls="toyonaCardBack" data-copy="revealCard"></button>
+                    </div>
+                    <div class="toyona-card-back" id="toyonaCardBack" aria-hidden="true">
+                        <span class="toyona-detail-label" data-copy="cardHolderLabel"></span>
+                        <p class="toyona-holder" id="toyonaHolder"></p>
+                        <span class="toyona-detail-label" data-copy="cardNumberLabel"></span>
+                        <p class="toyona-number" id="toyonaNumber"></p>
+                        <button class="toyona-copy" id="toyonaCopy" type="button" tabindex="-1" data-copy="copyCard"></button>
+                        <button class="toyona-hide" id="toyonaHide" type="button" tabindex="-1" data-copy="hideCard"></button>
+                    </div>
+                </div>
+            </div>
             <span class="toyona-status" id="toyonaStatus" role="status" aria-live="polite"></span>
         </section>
 

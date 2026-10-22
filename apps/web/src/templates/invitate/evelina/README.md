@@ -19,7 +19,7 @@ label; timezone-aware date, countdown, and program entries; venue, address, and
 map directions; optional portrait gallery photo, dress code, contacts, music,
 RSVP, and moderated wishes. The captured design has one portrait photo slot and
 no full gallery or story section. Its oval photo frame cycles through
-creator gallery images when more than one is supplied. An optional To‘yona block uses the shared card number and cardholder fields, with a localized copy action. The shared preview's
+creator gallery images when more than one is supplied. An optional, design-matched To‘yona card flips to reveal the shared card number and cardholder, with a localized copy action. The shared preview's
 empty gallery entries and sample invitation content remain ephemeral.
 
 The typed catalog and additive migrations register and publish wedding

@@ -13,7 +13,7 @@ celebration image and Yakkasaroy venue photo remain as replaceable visual defaul
 creator gallery photo replaces the celebration image, and the second replaces
 the restaurant image; when either upload is absent, its captured default stays
 visible. These defaults are template assets and are never written into the
-invitation content. A design-matched optional To‘yona section uses the shared card number and cardholder fields and provides a localized copy action. The shared preview fixture supplies catalog and
+invitation content. A design-matched optional To‘yona card flips to reveal the shared card number and cardholder fields and provides localized copy and hide actions. The shared preview fixture supplies catalog and
 initial-selection examples only; those values are never saved.
 
 The four supported locales are Uzbek Latin, Uzbek Cyrillic, English, and
