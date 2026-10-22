@@ -1855,29 +1855,43 @@
     font-size: 8px;
   }
   .templateInfo h3 {
-    font-size: 31px;
+    font-size: 21px;
   }
   .catalogGrid {
-    grid-template-columns: minmax(0, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px 10px;
   }
   .templateCard {
-    padding: 8px;
+    padding: 5px;
   }
   .templateInfo {
-    padding: 15px 7px 7px;
+    padding: 11px 3px 3px;
+    gap: 6px;
+  }
+  .templateArt {
+    height: 205px;
   }
   .templateInfo p {
-    font-size: 13px;
+    font-size: 10px;
+    line-height: 1.5;
     min-height: 0;
   }
   .templateInfo > span {
-    font-size: 11px;
+    font-size: 9px;
   }
   .templateInfo strong {
-    font-size: 14px;
+    font-size: 11px;
   }
   .templateInfo .templateActions a {
-    font-size: 12px;
+    font-size: 9px;
+    min-height: 36px;
+  }
+  .templateActions {
+    grid-template-columns: 1fr 1.2fr;
+    gap: 4px;
+  }
+  .templateActions svg {
+    width: 11px;
   }
 }
 @media (prefers-reduced-motion: no-preference) {
