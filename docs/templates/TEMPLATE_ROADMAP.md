@@ -918,3 +918,41 @@ Vals is packaged and registered but remains unpublished pending release review. 
 ## E-invitation release
 
 - 2026-10-22 Velvet Royale (`royal-burgundy-edition`) is published at 150,000 UZS after source, renderer, catalog, backend, visual, and authenticated save/publish/public-render/reopen checks passed. Focused checks pass 6/6; typecheck and production build pass. The authorized Telegram notice was sent. Guest table assignment remains unsupported by the shared invitation contract.
+
+
+## Chorlove source-backed release progress
+
+The archive contains 28 captured preview snapshots. Each candidate is adapted from its preserved capture and released only after its own contract, backend/catalog, browser-art provenance, visual, and publishing integration checks pass.
+
+| Archive ID | Design | Status |
+| --- | --- | --- |
+| `cloud-castle` | Cloud Castle | Published |
+| `glass-pink` | Glass Pink | Queued |
+| `golden-card` | Golden Card | Queued |
+| `green-garden` | Green Garden | Queued |
+| `green-gold` | Green Gold | Queued |
+| `green-white` | Green White | Queued |
+| `ivory-love` | Ivory Love | Queued |
+| `jasmine-white` | Jasmine White | Queued |
+| `lace` | Lace | Queued |
+| `love-sakura` | Love Sakura | Queued |
+| `luxury-gold` | Luxury Gold | Queued |
+| `modern-floral` | Modern Floral | Queued |
+| `orchid-amplop` | Orchid Amplop | Queued |
+| `osh` | Osh | Queued |
+| `palace-rose` | Palace Rose | Queued |
+| `palov` | Palov | Queued |
+| `pink-lotus` | Pink Lotus | Queued |
+| `purple-flower` | Purple Flower | Queued |
+| `red-rose-card` | Red Rose Card | Queued |
+| `royal-blue` | Royal Blue | Queued |
+| `royal-green` | Royal Green | Queued |
+| `royal-purple` | Royal Purple | Queued |
+| `royal-red` | Royal Red | Queued |
+| `spring-bahor` | Spring Bahor | Queued |
+| `stained-glass` | Stained Glass | Queued |
+| `sunset` | Sunset | Queued |
+| `swan-garden` | Swan Garden | Queued |
+| `velvet-romance` | Velvet Romance | Queued |
+
+- 2026-10-22 Cloud Castle release: applied additive migration `0088_publish_cloud_castle.sql`; configured PostgreSQL and the approved in-app `/api/catalog` confirm the published wedding entry at 150,000 UZS with its browser-captured preview image. The source snapshot remains unchanged; the app package keeps its original art/styles while removing captured site runtime and sample data. Mobile preview fits 319px without horizontal overflow, and the event date, countdown, calendar, shared Emotional Piano, locale switching, reduced-motion flag, gallery/story visibility, and preview-only controls were checked. Preview provenance SHA-256 is recorded. Focused checks pass 4/4, web typecheck and production build pass, and the authenticated four-locale save/publish/public-render/reopen suite passes 20/20 with test rows cleaned. The authorized Telegram notice was delivered after verification. No external deployment was performed.

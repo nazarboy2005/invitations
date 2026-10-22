@@ -12,6 +12,7 @@ import { AnorInvitation } from "@/templates/anor";
 import { isMarxabaTemplate, MarxabaInvitation } from "@/templates/marxaba";
 import { isInvitateTemplate, InvitateInvitation } from "@/templates/invitate";
 import { VelvetRoyaleInvitation } from "@/templates/velvet-royale/renderer";
+import { isChorloveTemplate, ChorloveInvitation } from "@/templates/chorlove";
 import { readBrowserDraft } from "@/modules/studio/draft-storage";
 import {
   createTemplatePreviewSample,
@@ -206,6 +207,20 @@ export function FullTemplatePreview({
           catalogMusic={catalogPreview}
           sampleWishes={catalogPreview}
           silentPlayback={silentPlayback}
+        />
+      ) : isChorloveTemplate(template.id) ? (
+        <ChorloveInvitation
+          invitation={invitation}
+          invitationId={invitation.id}
+          locale={invitation.defaultLocale}
+          templateId={template.id}
+          preview
+          fullPreview
+          catalogMusic={catalogPreview}
+          sampleWishes={catalogPreview}
+          silentPlayback={silentPlayback}
+          qaReducedMotion={qaReducedMotion}
+          qaMobile={qaMobile}
         />
       ) : template.id === "royal-burgundy-edition" ? (
           <VelvetRoyaleInvitation invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} sampleWishes={catalogPreview} silentPlayback={silentPlayback} qaReducedMotion={qaReducedMotion} qaMobile={qaMobile} />

@@ -1,0 +1,19 @@
+{
+  "sourceCapture": "templates/cloud-castle/preview-frame.html",
+  "sourceSha256": "b5c3324d0bd44c0a925a873a671f8a643f1e3cde10b870a6a5ffd699dcf476a7",
+  "capturedMarkupExtracted": "div#S:0",
+  "nextRuntimeCopied": false,
+  "snapshotExampleDataIncluded": false,
+  "sharedStyles": [
+    "_next/static/chunks/0.u3j0~_2ygfx.css",
+    "_next/static/chunks/00sc_9lpb3zcn.css"
+  ],
+  "note": "The captured preview is a server-rendered snapshot. Chorlove template source assets and styling are retained; its website runtime, external music, owner contact values, sample wishes, and hard-coded preview data are excluded.",
+  "previewBrowserCapture": {
+    "file": "../preview-browser-capture.jpg",
+    "sha256": "6aa119732ec5ce1730bffed6880876ebe587adc736ff9367df7408520f24b6aa",
+    "source": "ChatGPT in-app browser rendering of the app preview with the canonical fixture",
+    "locale": "uz-Latn",
+    "viewport": "319x668"
+  }
+}

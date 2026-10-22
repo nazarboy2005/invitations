@@ -950,6 +950,19 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
 
   {
+    id: "cloud-castle",
+    name: "Cloud Castle",
+    description: "Oq bulutlar, nozik gul bezaklari va nafis saroyona taklifnoma.",
+    previewImage: "/templates/cloud-castle/preview-browser-capture.jpg",
+    previewEventType: "wedding",
+    categoryIds: ["wedding"],
+    supportedEventTypes: ["wedding"],
+    priceMinor: 15000000,
+    currency: "UZS",
+    accent: "#123467",
+    published: true,
+  },
+  {
     id: "royal-burgundy-edition",
     name: "Velvet Royale",
     description: "Bordo baxmal pardalar, zarhal bezaklar va nafis saroyona uslub.",

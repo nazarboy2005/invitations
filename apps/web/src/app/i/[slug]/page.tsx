@@ -6,6 +6,7 @@ import { AnorInvitation } from "@/templates/anor";
 import { isMarxabaTemplate, MarxabaInvitation } from "@/templates/marxaba";
 import { isInvitateTemplate, InvitateInvitation } from "@/templates/invitate";
 import { VelvetRoyaleInvitation } from "@/templates/velvet-royale/renderer";
+import { isChorloveTemplate, ChorloveInvitation } from "@/templates/chorlove";
 import { InvitationViewTracker } from "@/modules/catalog/invitation-view-tracker";
 export const dynamic = "force-dynamic";
 export const metadata = {
@@ -75,6 +76,21 @@ export default async function InvitationPage({
           invitation={invitation}
           invitationId={result.id}
           locale={locale}
+          guestName={guestName}
+          guestToken={query.g}
+        />
+      </>
+    );
+
+  if (isChorloveTemplate(invitation.templateId))
+    return (
+      <>
+        <InvitationViewTracker invitationId={result.id} />
+        <ChorloveInvitation
+          invitation={invitation}
+          invitationId={result.id}
+          locale={locale}
+          templateId={invitation.templateId}
           guestName={guestName}
           guestToken={query.g}
         />

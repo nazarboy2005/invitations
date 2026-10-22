@@ -57,6 +57,7 @@ import { AnorInvitation } from "@/templates/anor";
 import { isMarxabaTemplate, MarxabaInvitation } from "@/templates/marxaba";
 import { isInvitateTemplate, InvitateInvitation } from "@/templates/invitate";
 import { VelvetRoyaleInvitation } from "@/templates/velvet-royale/renderer";
+import { isChorloveTemplate, ChorloveInvitation } from "@/templates/chorlove";
 import {
   createTemplatePreviewSample,
   hasAuthoredInvitationContent,
@@ -2655,6 +2656,17 @@ export function Studio({
               />
             ) : invitation.templateId === "royal-burgundy-edition" ? (
               <VelvetRoyaleInvitation invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview catalogMusic={section === 0 && !authoredPreview} sampleWishes={section === 0 && !authoredPreview} />
+            ) : invitation.templateId && isChorloveTemplate(invitation.templateId) ? (
+              <ChorloveInvitation
+                invitation={previewInvitation}
+                invitationId={invitation.id}
+                locale={locale}
+                templateId={invitation.templateId}
+                preview
+                fullPreview
+                catalogMusic={section === 0 && !authoredPreview}
+                sampleWishes={section === 0 && !authoredPreview}
+              />
             ) : invitation.templateId && isInvitateTemplate(invitation.templateId) ? (
               <InvitateInvitation
                 invitation={previewInvitation}
