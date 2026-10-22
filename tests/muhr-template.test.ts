@@ -113,7 +113,8 @@ test("Muhr documents the source-only venue and unsupported gift fields", () => {
   const docs = read(appRoot, "SOURCE_ADAPTATIONS.md");
   assert.match(docs, /`venue\.photo`/);
   assert.match(docs, /`toyona\.note`/);
-  assert.match(docs, /Keep Muhr unpublished/);
+  assert.match(docs, /venue\.photo/);
+  assert.match(docs, /Muhr is published/);
   const contract = readFileSync(new URL("../packages/contracts/src/index.ts", import.meta.url), "utf8");
   const venueSchema = contract.match(/venue:\s*z\.object\(\{([\s\S]*?)\}\)/)?.[1] ?? "";
   assert.doesNotMatch(venueSchema, /photo/);

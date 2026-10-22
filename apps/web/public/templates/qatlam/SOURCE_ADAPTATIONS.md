@@ -5,3 +5,5 @@ The package preserves the captured page body, `template.css`, `template.js`, `i1
 The source includes `venue.photo`, `toyona.bank`, and `toyona.note` slots. Venue photos and gift notes are not part of the approved invitation contract, and the bank-name field was removed by user requirement, so platform integration must not supply these values. Keep source markup/styles intact for fidelity while treating all three fields as unsupported data. The supported gift card number and cardholder remain available through the shared contract.
 
 Source metadata declares `Nikoh to‘yi`, `Qiz bazmi`, and `Fotiha`. These represent wedding, qiz-bazmi, and fotiha compatibility respectively; catalog categories remain independently assigned.
+
+Qatlam is published at 150,000 UZS through additive migration `0079_publish_qatlam.sql`. Browser QA was skipped under the user's release instruction while the browser transport was unavailable; authenticated save/publish/render/reopen verification covers this catalog template.

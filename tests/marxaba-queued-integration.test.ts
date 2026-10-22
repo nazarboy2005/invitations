@@ -39,9 +39,23 @@ const toscanaPublicationMigration = readFileSync(
   ),
   "utf8",
 );
-const sourceBatchMigration = readFileSync(
+const qatlamPublicationMigration = readFileSync(
   new URL(
-    "../packages/database/migrations/0032_add_toscana_muhr_templates.sql",
+    "../packages/database/migrations/0079_publish_qatlam.sql",
+    import.meta.url,
+  ),
+  "utf8",
+);
+const muhrPublicationMigration = readFileSync(
+  new URL(
+    "../packages/database/migrations/0077_publish_muhr.sql",
+    import.meta.url,
+  ),
+  "utf8",
+);
+const doiraPublicationMigration = readFileSync(
+  new URL(
+    "../packages/database/migrations/0078_publish_doira.sql",
     import.meta.url,
   ),
   "utf8",
@@ -49,13 +63,6 @@ const sourceBatchMigration = readFileSync(
 const nextBatchMigration = readFileSync(
   new URL(
     "../packages/database/migrations/0033_add_bulbul_kozgu_templates.sql",
-    import.meta.url,
-  ),
-  "utf8",
-);
-const doiraMigration = readFileSync(
-  new URL(
-    "../packages/database/migrations/0035_add_doira_template.sql",
     import.meta.url,
   ),
   "utf8",
@@ -73,13 +80,6 @@ const kozguPublicationMigration = readFileSync(
 );
 const qandilPublicationMigration = readFileSync(
   new URL("../packages/database/migrations/0049_publish_qandil.sql", import.meta.url),
-  "utf8",
-);
-const qatlamMigration = readFileSync(
-  new URL(
-    "../packages/database/migrations/0037_add_qatlam_template.sql",
-    import.meta.url,
-  ),
   "utf8",
 );
 const specialtyMigration = readFileSync(
@@ -191,6 +191,9 @@ test("registered Marxaba designs reflect their release state and additive migrat
     "qandil",
     "vals",
     "toscana",
+    "muhr",
+    "doira",
+    "qatlam",
   ]);
   const migrationById: Record<string, string> = {
     nilufar: nilufarMigration,
@@ -202,14 +205,14 @@ test("registered Marxaba designs reflect their release state and additive migrat
     "sahro-fonusi": nextMigration,
     vals: valsPublicationMigration,
     toscana: toscanaPublicationMigration,
-    muhr: sourceBatchMigration,
+    muhr: muhrPublicationMigration,
     bulbul: nextBatchMigration,
     kozgu: kozguPublicationMigration,
-    doira: doiraMigration,
+    doira: doiraPublicationMigration,
     qandil: qandilPublicationMigration,
     parda: nextSourceBatchMigration,
     ganch: nextSourceBatchMigration,
-    qatlam: qatlamMigration,
+    qatlam: qatlamPublicationMigration,
     lola: specialtyMigration,
     "qiz-bazmi": specialtyMigration,
     shahzoda: specialtyMigration,
