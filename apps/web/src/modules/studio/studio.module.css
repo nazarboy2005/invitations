@@ -441,17 +441,17 @@
 .program {
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 10px;
 }
 .programItem {
   position: relative;
   display: grid;
-  grid-template-columns: 102px minmax(0, 1fr);
-  gap: 13px;
-  padding: 17px 15px 14px 23px;
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  background: var(--bg);
+  grid-template-columns: minmax(180px, 0.95fr) minmax(0, 1.25fr);
+  gap: 9px 12px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
 }
 .storyItem {
   display: grid;
@@ -476,17 +476,129 @@
   height: 5px;
   border-radius: 50%;
 }
+.programItem > .timelineDot {
+  display: none;
+}
 .programItem .field input {
   padding: 11px 9px;
 }
-.rowActions {
-  grid-column: 1/-1;
-  display: flex;
-  gap: 7px;
-  justify-content: flex-end;
+.programPreview {
+  grid-column: 1 / -1;
+  display: grid;
+  gap: 5px;
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--accent-soft);
 }
-.rowActions button,
-.iconButton {
+.programPreviewLabel {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 10px;
+}
+.programPreviewLine {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-width: 0;
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 600;
+}
+.programTitleCount {
+  display: block;
+  margin-top: 3px;
+  color: var(--muted);
+  font-size: 9px;
+  line-height: 1.2;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+.programSectionPreview {
+  display: grid;
+  gap: 9px;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: 11px;
+  background: var(--surface);
+}
+.programSectionPreviewEyebrow {
+  color: var(--primary);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+.programSectionPreview h3 {
+  margin: 0;
+  color: var(--ink);
+  font: 500 20px/1.2 var(--font-display);
+}
+.programSectionPreview ol {
+  display: grid;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.programSectionPreview li {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr);
+  gap: 10px;
+  padding: 7px 0;
+  border-top: 1px solid var(--line);
+  color: var(--ink);
+  font-size: 12px;
+  line-height: 1.45;
+}
+.programSectionPreview li time {
+  color: var(--primary);
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+}
+.programSectionPreview li span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.programSectionPreview > p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+.programPreviewInput {
+  flex: 1 1 auto;
+  min-width: 0;
+  width: 100%;
+  padding: 5px 4px;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+}
+.programPreviewInput::placeholder {
+  color: var(--muted);
+  font-weight: 400;
+}
+.programPreviewInput:focus-visible {
+  border-color: var(--line-strong);
+  outline: 2px solid color-mix(in srgb, var(--primary) 28%, transparent);
+  outline-offset: 1px;
+  background: var(--surface);
+}
+.programPreviewInput:focus:not(:focus-visible) {
+  border-color: var(--line);
+  background: var(--surface);
+}
+.programPreviewInput:not(:focus) {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.iconButton,
+.programDeleteButton {
   min-width: 34px;
   min-height: 34px;
   border: 1px solid var(--line);
@@ -496,6 +608,10 @@
   cursor: pointer;
   display: grid;
   place-items: center;
+}
+.programDeleteButton {
+  flex: 0 0 34px;
+  padding: 0;
 }
 .addButton {
   border: 1px dashed var(--line-strong);
@@ -1267,15 +1383,6 @@
   margin: 0;
   line-height: 1.8;
 }
-.exportDraft {
-  margin-top: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-}
-.exportDraft + .editorFooter {
-  margin-top: 12px;
-}
 .categoryFilters {
   display: flex;
   flex-wrap: wrap;
@@ -1612,6 +1719,22 @@
     padding: 25px 22px;
     border-radius: 15px;
   }
+  .programItem {
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.2fr);
+    gap: 9px 10px;
+  }
+  .programItem .field input {
+    font-size: 16px;
+  }
+  .programItem > .field:first-of-type .timeOnly {
+    grid-template-columns: 16px minmax(0, 1fr) auto minmax(0, 1fr);
+    gap: 5px;
+  }
+  .programItem > .field:first-of-type .timeOnly > div > button {
+    gap: 4px;
+    padding-inline: 6px;
+    font-size: 11px;
+  }
   .editor h1 {
     font-size: 38px;
     margin-top: 19px;
@@ -1691,15 +1814,14 @@
     gap: 13px;
   }
   .programItem {
-    grid-template-columns: 87px minmax(0, 1fr);
-    padding: 15px 12px 12px 18px;
-    gap: 10px;
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.2fr);
+    gap: 9px 10px;
   }
   .programItem .field input {
     font-size: 16px;
   }
   .timelineDot {
-    left: 6px;
+    left: 7px;
   }
   .optionBody {
     padding: 16px;
@@ -1776,7 +1898,20 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
   .programItem {
-    grid-template-columns: 80px minmax(0, 1fr);
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+    gap: 8px;
+  }
+  .programItem > .field:first-of-type .timeOnly {
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    gap: 4px;
+  }
+  .programItem > .field:first-of-type .timeOnly > svg {
+    display: none;
+  }
+  .programItem > .field:first-of-type .timeOnly > div > button {
+    gap: 4px;
+    padding-inline: 6px;
+    font-size: 10px;
   }
   .groupHeader {
     flex-wrap: wrap;

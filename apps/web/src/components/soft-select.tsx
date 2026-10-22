@@ -14,6 +14,9 @@ export function SoftSelect({
   placeholder = "Tanlang",
   disabled = false,
   squareOptions = false,
+  menuPlacement = "default",
+  showSelectedCheck = true,
+  showChevron = true,
 }: {
   value: string;
   options: SelectOption[];
@@ -22,6 +25,9 @@ export function SoftSelect({
   placeholder?: string;
   disabled?: boolean;
   squareOptions?: boolean;
+  menuPlacement?: "default" | "aboveOnMobile";
+  showSelectedCheck?: boolean;
+  showChevron?: boolean;
 }) {
   const id = useId();
   const root = useRef<HTMLDivElement>(null);
@@ -111,15 +117,22 @@ export function SoftSelect({
         <span className={selected ? "" : styles.placeholder}>
           {selected?.label ?? placeholder}
         </span>
-        <ChevronDown
-          size={17}
-          strokeWidth={1.8}
-          className={`${styles.chevron} ${open ? styles.chevronOpen : ""}`}
-          aria-hidden="true"
-        />
+        {showChevron && (
+          <ChevronDown
+            size={17}
+            strokeWidth={1.8}
+            className={`${styles.chevron} ${open ? styles.chevronOpen : ""}`}
+            aria-hidden="true"
+          />
+        )}
       </button>
       {open && (
-        <div className={styles.menu} id={id} role="listbox" aria-label={label}>
+        <div
+          className={`${styles.menu} ${menuPlacement === "aboveOnMobile" ? styles.menuAboveOnMobile : ""}`}
+          id={id}
+          role="listbox"
+          aria-label={label}
+        >
           {options.map((option, index) => (
             <button
               ref={(element) => {
@@ -152,7 +165,9 @@ export function SoftSelect({
               }}
             >
               <span>{option.label}</span>
-              {option.value === value && <Check size={16} aria-hidden="true" />}
+              {showSelectedCheck && option.value === value && (
+                <Check size={16} aria-hidden="true" />
+              )}
             </button>
           ))}
         </div>

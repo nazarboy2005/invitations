@@ -108,18 +108,24 @@ test("Nahorgi Osh fixture schedule and invitation copy map in all four locales",
   assert.equal(blank.contacts.length, 0);
 });
 
-test("Nahorgi Osh compatibility remains separate from category and unpublished", () => {
+test("Nahorgi Osh compatibility remains separate from category and is published", () => {
   const template = templateById("nahorgi-osh");
   assert.ok(template);
   assert.deepEqual(template.categoryIds, ["osh"]);
   assert.deepEqual(template.supportedEventTypes, ["osh", "sunnat-toyi", "wedding"]);
   assert.equal(template.previewEventType, "osh");
-  assert.equal(template.published, false);
+  assert.equal(template.previewImage, "/templates/nahorgi-osh/preview.webp");
+  assert.equal(template.published, true);
   const migration = readFileSync(path.join(root, "packages/database/migrations/0043_add_nahor_templates.sql"), "utf8");
   assert.match(migration, /\('nahorgi-osh', 'osh'\)/);
   assert.match(migration, /\('nahorgi-osh', 'sunnat-toyi'\)/);
   assert.match(migration, /\('nahorgi-osh', 'wedding'\)/);
   assert.match(migration, /\('nahorgi-osh', 'Nahorgi Osh', 15000000, 'UZS', false\)/);
+  const publication = readFileSync(path.join(root, "packages/database/migrations/0071_publish_nahorgi_osh.sql"), "utf8");
+  assert.match(publication, /published\s*=\s*true/i);
+  assert.match(publication, /'nahorgi-osh', 'osh'/);
+  assert.match(publication, /'nahorgi-osh', 'sunnat-toyi'/);
+  assert.match(publication, /'nahorgi-osh', 'wedding'/);
 });
 
 test("Nahorgi Osh documents and isolates source-only opening and venue fields", () => {

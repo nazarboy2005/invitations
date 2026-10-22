@@ -130,15 +130,12 @@ const nahorPublicationMigration = readFileSync(
   new URL("../packages/database/migrations/0070_publish_nahor.sql", import.meta.url),
   "utf8",
 );
-const konfettiPublicationMigration = readFileSync(
-  new URL("../packages/database/migrations/0065_publish_konfetti.sql", import.meta.url),
+const nahorgiOshPublicationMigration = readFileSync(
+  new URL("../packages/database/migrations/0071_publish_nahorgi_osh.sql", import.meta.url),
   "utf8",
 );
-const nahorTemplatesMigration = readFileSync(
-  new URL(
-    "../packages/database/migrations/0043_add_nahor_templates.sql",
-    import.meta.url,
-  ),
+const konfettiPublicationMigration = readFileSync(
+  new URL("../packages/database/migrations/0065_publish_konfetti.sql", import.meta.url),
   "utf8",
 );
 const hilolMigration = readFileSync(
@@ -179,6 +176,7 @@ test("registered Marxaba designs reflect their release state and additive migrat
     "shirin-bayram",
     "oltin-yosh",
     "nahor",
+    "nahorgi-osh",
     "kozgu",
     "qandil",
   ]);
@@ -210,7 +208,7 @@ test("registered Marxaba designs reflect their release state and additive migrat
     "oltin-kuz": oltinKuzPublicationMigration,
     "oltin-yosh": oltinYoshPublicationMigration,
     nahor: nahorPublicationMigration,
-    "nahorgi-osh": nahorTemplatesMigration,
+    "nahorgi-osh": nahorgiOshPublicationMigration,
     hilol: hilolMigration,
     "yangi-uy": yangiUyMigration,
   };
@@ -320,6 +318,7 @@ test("registered Marxaba designs reflect their release state and additive migrat
     "oltin-kuz",
     "oltin-yosh",
     "nahor",
+    "nahorgi-osh",
     "hilol",
     "yangi-uy",
   ])
@@ -346,12 +345,16 @@ test("registered Marxaba designs reflect their release state and additive migrat
   assert.ok(existsSync(new URL("oltin-kuz/preview.webp", templatesRoot)));
   assert.ok(existsSync(new URL("oltin-yosh/preview.webp", templatesRoot)));
   assert.ok(existsSync(new URL("nahor/preview.webp", templatesRoot)));
+  assert.ok(existsSync(new URL("nahorgi-osh/preview.webp", templatesRoot)));
   assert.ok(existsSync(new URL("hilol/preview.webp", templatesRoot)));
   assert.equal(
     templateById("yangi-uy")?.previewImage,
     "/templates/yangi-uy/preview.webp",
   );
   assert.ok(existsSync(new URL("yangi-uy/preview.webp", templatesRoot)));
-  assert.equal(templateById("nahorgi-osh")?.previewImage, undefined);
+  assert.equal(
+    templateById("nahorgi-osh")?.previewImage,
+    "/templates/nahorgi-osh/preview.webp",
+  );
   assert.match(jubileeMigration, /'yubiley'/);
 });

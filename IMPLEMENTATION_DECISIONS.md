@@ -12,7 +12,16 @@
 - User requirement (2026-10-22): show invitation view counts. Count at most one view per anonymous browser per invitation in each rolling 24-hour period using an HttpOnly random cookie, store only a one-way hash for deduplication, and display the aggregate count on published dashboard cards. Do not collect IP addresses or retain a per-view event log.
 - User requirement (2026-10-22): new invitation creation defaults the event type to Nikoh to‘yi. Keep the public catalog and creator design picker at two equal columns on mobile and provide design search in both places; search narrows the currently category- and event-compatible designs.
 - User request (2026-10-22): improve mobile date/time selection so the time controls and confirmation action are not pushed far below the calendar; use a viewport-bounded picker that keeps the entire date and time task accessible.
-- User correction (2026-10-22): stack each program item's time and title fields on mobile so the time controls do not overlap the title input.
+- User correction (2026-10-22): keep each program item's time and title side by side on mobile, with enough room for the hour and minute controls; each row should read as “time, program name” before the next row.
+- User requirement (2026-10-22): new invitations and newly added program rows start with a localized, editable example entry (“Mehmonlarni kutib olish”); creators can change or remove it like any other row. When adding a language, carry this example over in that locale only while it remains unchanged in an existing locale.
+- User requirement (2026-10-22): program time choices must be scrollable; hour choices use whole hours and minute choices use five-minute intervals while retaining any existing non-five-minute value until changed. Give program names more room and show a live preview of each time/name row below its editor fields.
+- User requirement (2026-10-22): program entries should use compact cards. Remove both drag behavior/handle and move-up/down buttons; keep the delete action.
+- User requirement (2026-10-22): let creators set each program time directly in its invitation preview row.
+- User correction (2026-10-22): keep “Taklifnomada ko‘rinishi” as a separate read-only schedule preview; edit the heading, times, and item names in the program editor above it.
+- User correction (2026-10-22): keep the existing 300-character limit for program item titles and show their current character count.
+- User requirement (2026-10-22): remove the creator-facing draft JSON download control and its export behavior.
+- User requirement (2026-10-22): make the invitation activity header match the studio's clean top bar: back control, invitation name, and edit/refresh actions aligned in one sticky header; use the studio's plain arrow treatment for back/refresh and filled primary treatment for edit; keep long names readable without pushing controls offscreen.
+- User requirement (2026-10-22): use the studio button pattern across the management dashboard and invitation activity page: shared sizing, rounded corners, typography, outlines, hover and focus states, with existing primary, destructive, and tab roles preserved.
 
 ## Database publication authorization (2026-10-21)
 

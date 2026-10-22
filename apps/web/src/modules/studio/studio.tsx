@@ -3,9 +3,7 @@
 import { isValidElement, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import {
-  ArrowDown,
   ArrowLeft,
-  ArrowUp,
   Check,
   CheckCircle2,
   ChevronRight,
@@ -161,6 +159,62 @@ const placeholders = {
   chooseMusic: "Musiqani tanlang",
   noMusic: "Hozircha yuklangan musiqa yo‘q",
 };
+const PROGRAM_TITLE_MAX_LENGTH = 300;
+
+const defaultProgramItemTitles: Record<Locale, string> = {
+  "uz-Latn": "Mehmonlarni kutib olish",
+  "uz-Cyrl": "Меҳмонларни кутиб олиш",
+  en: "Welcoming guests",
+  ru: "Встреча гостей",
+};
+
+function addStarterProgramItem(invitation: Invitation): Invitation {
+  const id = crypto.randomUUID();
+  const content = { ...invitation.content };
+  for (const locale of invitation.enabledLocales) {
+    content[locale] = {
+      ...getContent(invitation, locale),
+      programTitles: {
+        ...getContent(invitation, locale).programTitles,
+        [id]: defaultProgramItemTitles[locale],
+      },
+    };
+  }
+  return {
+    ...invitation,
+    content,
+    program: [...invitation.program, { id, time: "" }],
+  };
+}
+
+function addInvitationLanguage(invitation: Invitation, locale: Locale) {
+  const localized = addLanguage(invitation, locale);
+  if (localized === invitation) return invitation;
+  const seededProgramTitles = Object.fromEntries(
+    invitation.program.flatMap((item) =>
+      invitation.enabledLocales.some(
+        (existingLocale) =>
+          getContent(invitation, existingLocale).programTitles[item.id] ===
+          defaultProgramItemTitles[existingLocale],
+      )
+        ? [[item.id, defaultProgramItemTitles[locale]]]
+        : [],
+    ),
+  );
+  return {
+    ...localized,
+    content: {
+      ...localized.content,
+      [locale]: {
+        ...getContent(localized, locale),
+        programTitles: {
+          ...getContent(localized, locale).programTitles,
+          ...seededProgramTitles,
+        },
+      },
+    },
+  };
+}
 
 function Field({
   label,
@@ -431,15 +485,16 @@ export function Studio({
         created.content[created.defaultLocale] =
           defaultLocalizedInvitationContent("wedding", created.defaultLocale);
       }
-      setInvitation(created);
+      const invitationWithStarterProgram = addStarterProgramItem(created);
+      setInvitation(invitationWithStarterProgram);
       try {
-        saveBrowserDraft(created, true, ownerId.current);
+        saveBrowserDraft(invitationWithStarterProgram, true, ownerId.current);
       } catch {
         setError(
           "Brauzerga saqlash imkoni yo‘q. Zaxira uchun qoralamangizni yuklab oling.",
         );
       }
-      bindDraftUrl(created.id);
+      bindDraftUrl(invitationWithStarterProgram.id);
     }
     void recover();
     return () => {
@@ -778,13 +833,6 @@ export function Studio({
     const people = [...personFields];
     people[index] = value;
     updateContent({ people });
-  }
-  function moveProgram(index: number, direction: number) {
-    const program = [...invitation!.program];
-    const target = index + direction;
-    if (target < 0 || target >= program.length) return;
-    [program[index], program[target]] = [program[target], program[index]];
-    update({ program });
   }
   async function cloudSave() {
     await saveOrPublish("save");
@@ -1134,21 +1182,6 @@ export function Studio({
       setUploading(false);
     }
   }
-  function exportDraft() {
-    const current = invitationRef.current;
-    if (!current) return;
-    const url = URL.createObjectURL(
-      new Blob([JSON.stringify(current, null, 2)], {
-        type: "application/json",
-      }),
-    );
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = `taklifnoma-${current.id}.json`;
-    link.click();
-    setTimeout(() => URL.revokeObjectURL(url), 1000);
-  }
-
   function goToSection(next: number) {
     setSection(next);
     setMobilePreview(false);
@@ -1392,7 +1425,7 @@ export function Studio({
                       }))}
                       onChange={(value) => {
                         const next = value as Locale;
-                        setInvitation(addLanguage(invitation, next));
+                        setInvitation(addInvitationLanguage(invitation, next));
                         setLocale(next);
                       }}
                     />
@@ -1715,63 +1748,56 @@ export function Studio({
                   />
                 </Field>
                 <div className={styles.program}>
-                  {invitation.program.map((item, index) => (
+                  {invitation.program.map((item) => (
                     <div key={item.id} className={styles.programItem}>
                       <span className={styles.timelineDot} />
-                      <Field label="Vaqt">
-                        <TimePicker
-                          value={item.time}
-                          onChange={(time) =>
-                            update({
-                              program: invitation.program.map((row) =>
-                                row.id === item.id ? { ...row, time } : row,
-                              ),
-                            })
-                          }
-                        />
-                      </Field>
-                      <Field label="Dastur bandi">
-                        <input
-                          value={content.programTitles[item.id] ?? ""}
-                          maxLength={300}
-                          onChange={(event) =>
-                            updateContent({
-                              programTitles: {
-                                ...content.programTitles,
-                                [item.id]: event.target.value,
-                              },
-                            })
-                          }
-                          placeholder={placeholders.programItem}
-                        />
-                      </Field>
-                      <div className={styles.rowActions}>
-                        <button
-                          aria-label="Yuqoriga ko‘chirish"
-                          disabled={index === 0}
-                          onClick={() => moveProgram(index, -1)}
-                        >
-                          <ArrowUp size={14} />
-                        </button>
-                        <button
-                          aria-label="Pastga ko‘chirish"
-                          disabled={index === invitation.program.length - 1}
-                          onClick={() => moveProgram(index, 1)}
-                        >
-                          <ArrowDown size={14} />
-                        </button>
-                        <button
-                          aria-label="Dastur bandini o‘chirish"
-                          onClick={() =>
-                            update({
-                              program: invitation.program.filter(
-                                (row) => row.id !== item.id,
-                              ),
-                            })
-                          }
-                        >
-                          <Trash2 size={14} />
-                        </button>
+                      <div className={styles.programPreview}>
+                        <div className={styles.programPreviewLine}>
+                          <TimePicker
+                            compact
+                            value={item.time}
+                            onChange={(time) =>
+                              update({
+                                program: invitation.program.map((row) =>
+                                  row.id === item.id ? { ...row, time } : row,
+                                ),
+                              })
+                            }
+                          />
+                          <input
+                            className={styles.programPreviewInput}
+                            aria-label="Dastur bandi nomi"
+                            value={content.programTitles[item.id] ?? ""}
+                            maxLength={PROGRAM_TITLE_MAX_LENGTH}
+                            onChange={(event) =>
+                              updateContent({
+                                programTitles: {
+                                  ...content.programTitles,
+                                  [item.id]: event.target.value,
+                                },
+                              })
+                            }
+                            placeholder={placeholders.programItem}
+                          />
+                          <button
+                            type="button"
+                            className={styles.programDeleteButton}
+                            aria-label="Dastur bandini o‘chirish"
+                            onClick={() =>
+                              update({
+                                program: invitation.program.filter(
+                                  (row) => row.id !== item.id,
+                                ),
+                              })
+                            }
+                          >
+                            <Trash2 size={14} />
+                          </button>
+                        </div>
+                        <span className={styles.programTitleCount}>
+                          {(content.programTitles[item.id] ?? "").length}/
+                          {PROGRAM_TITLE_MAX_LENGTH}
+                        </span>
                       </div>
                     </div>
                   ))}
@@ -1780,17 +1806,36 @@ export function Studio({
                   className={styles.addButton}
                   disabled={invitation.program.length >= 100}
                   onClick={() =>
-                    update({
-                      program: [
-                        ...invitation.program,
-                        { id: crypto.randomUUID(), time: "" },
-                      ],
-                    })
+                    setInvitation(addStarterProgramItem(invitation))
                   }
                 >
                   <Plus size={17} />
                   Dastur bandini qo‘shish
                 </button>
+                <section
+                  className={styles.programSectionPreview}
+                  aria-label="Taklifnomadagi dastur ko‘rinishi"
+                >
+                  <span className={styles.programSectionPreviewEyebrow}>
+                    Taklifnomada ko‘rinishi
+                  </span>
+                  <h3>{content.programHeading || "To‘y dasturi"}</h3>
+                  {invitation.program.length ? (
+                    <ol>
+                      {invitation.program.map((item) => (
+                        <li key={item.id}>
+                          <time>{item.time || "--:--"}</time>
+                          <span>
+                            {content.programTitles[item.id]?.trim() ||
+                              placeholders.programItem}
+                          </span>
+                        </li>
+                      ))}
+                    </ol>
+                  ) : (
+                    <p>Dastur bandlari shu yerda ko‘rinadi.</p>
+                  )}
+                </section>
                 <div className={styles.divider} />
                 <Toggle
                   title="Kiyinish uslubi"
@@ -2505,11 +2550,6 @@ export function Studio({
                 </div>
               </div>
             )}
-            <div className={styles.exportDraft}>
-              <button className={styles.textButton} onClick={exportDraft}>
-                Qoralamani yuklab olish
-              </button>
-            </div>
             {invitation.status === "draft" && (
               <section className={styles.publishPanel}>
                 <div>

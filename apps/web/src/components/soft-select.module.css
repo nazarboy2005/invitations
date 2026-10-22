@@ -76,6 +76,16 @@
     0 2px 7px rgb(63 57 50 / 5%);
   animation: menu-in 130ms ease-out both;
 }
+.menuAboveOnMobile {
+  bottom: calc(100% + 7px);
+  inset-block-start: auto;
+}
+@media (min-width: 541px) {
+  .menuAboveOnMobile {
+    bottom: auto;
+    inset-block-start: calc(100% + 7px);
+  }
+}
 
 .option {
   width: 100%;

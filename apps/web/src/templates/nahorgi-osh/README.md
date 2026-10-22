@@ -41,10 +41,18 @@ historical checksum is not expected to match the current fixture file.
 
 The typed registry and additive migration register this template under the
 `osh` catalog category with `osh`, `sunnat-toyi`, and `wedding` event support;
-these compatibility values are separate from category membership. The
-database row remains unpublished. `tests/nahorgi-osh-template.test.ts` checks
+these compatibility values are separate from category membership. It is
+published at 150,000 UZS through `0071_publish_nahorgi_osh.sql`.
+`tests/nahorgi-osh-template.test.ts` checks
 source fidelity, local assets/fonts, fixture and adapter mapping in all four
 locales, morning schedule values, clothing, wishes, To‘yona/contact data, empty
-optional-field adaptation, blank-draft isolation, unpublished registration,
-and the documented source-only venue-photo field. Browser release verification
-remains pending.
+optional-field adaptation, blank-draft isolation, published registration,
+and the documented source-only venue-photo field. The full 402-test suite,
+typecheck, production build, and catalog-wide four-locale save/publish/public-
+render/reopen integration pass. Desktop browser review compared the capture
+and app opening and checked the qozon-lid reveal, four locales, gallery
+movement/lightbox, To‘yona disclosure, RSVP count and choice, and clean console
+output. Narrow viewport and reduced-motion browser emulation were unavailable;
+the packaged CSS/JS retain their responsive and reduced-motion paths. Venue
+photography and empty gift note/bank/cardholder slots remain unsupported and
+stay empty.

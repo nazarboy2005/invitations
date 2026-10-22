@@ -89,32 +89,30 @@ export function InvitationActivity({ invitation }: { invitation: Invitation }) {
   return (
     <main className={styles.page}>
       <div className={styles.toolbar}>
-        <div className={styles.headingBlock}>
-          <div className={styles.titleRow}>
-            <Link href="/dashboard" className={styles.headerIconButton} aria-label="Taklifnomalarimga qaytish" title="Taklifnomalarimga qaytish">
-              <ArrowLeft size={19} />
-            </Link>
-            <h1>
-              {getContent(invitation).people.filter(Boolean).join(" & ") ||
-                "Taklifnoma"}
-            </h1>
-            <Link href={`/studio/${encodeURIComponent(invitation.id)}`} className={styles.headerIconButton} aria-label="Taklifnomani tahrirlash" title="Tahrirlash">
-              <Pencil size={17} />
-            </Link>
-            <button
-              className={styles.headerIconButton}
-              type="button"
-              onClick={() => setRefresh((value) => value + 1)}
-              disabled={busy}
-              aria-label="Faollikni yangilash"
-              title="Yangilash"
-            >
-              <RefreshCw size={18} />
-            </button>
-          </div>
-          <p>Mehmonlar faolligi va shaxsiy to‘yona cheklari. Tasdiqlangan tilaklar taklifnomada ko‘rinadi.</p>
+        <div className={styles.titleRow}>
+          <Link href="/dashboard" className={styles.headerIconButton} aria-label="Taklifnomalarimga qaytish" title="Taklifnomalarimga qaytish">
+            <ArrowLeft size={19} />
+          </Link>
+          <h1>
+            {getContent(invitation).people.filter(Boolean).join(" & ") ||
+              "Taklifnoma"}
+          </h1>
+          <Link href={`/studio/${encodeURIComponent(invitation.id)}`} className={styles.headerEditButton} aria-label="Taklifnomani tahrirlash" title="Tahrirlash">
+            <Pencil size={17} />
+          </Link>
+          <button
+            className={styles.headerIconButton}
+            type="button"
+            onClick={() => setRefresh((value) => value + 1)}
+            disabled={busy}
+            aria-label="Faollikni yangilash"
+            title="Yangilash"
+          >
+            <RefreshCw size={18} />
+          </button>
         </div>
       </div>
+      <p className={styles.description}>Mehmonlar faolligi va shaxsiy to‘yona cheklari. Tasdiqlangan tilaklar taklifnomada ko‘rinadi.</p>
       {error && <p role="alert">{error}</p>}
       {!data && !error && <p role="status">Yuklanmoqda…</p>}
       {data && (

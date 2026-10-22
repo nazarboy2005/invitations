@@ -28,11 +28,11 @@ const months = [
 const weekdays = ["Du", "Se", "Ch", "Pa", "Ju", "Sh", "Ya"];
 const hours = Array.from({ length: 24 }, (_, hour) => ({
   value: String(hour).padStart(2, "0"),
-  label: `${String(hour).padStart(2, "0")}:00`,
+  label: String(hour).padStart(2, "0"),
 }));
-const minutes = Array.from({ length: 60 }, (_, minute) => ({
-  value: String(minute).padStart(2, "0"),
-  label: String(minute).padStart(2, "0"),
+const minutes = Array.from({ length: 12 }, (_, index) => ({
+  value: String(index * 5).padStart(2, "0"),
+  label: String(index * 5).padStart(2, "0"),
 }));
 const pad = (value: number) => String(value).padStart(2, "0");
 const toDateValue = (date: Date) =>
@@ -220,6 +220,7 @@ export function DateTimePicker({
                 value={hour}
                 placeholder="Soat"
                 options={hours}
+                menuPlacement="aboveOnMobile"
                 onChange={setHour}
               />
               <span className={styles.timeSeparator}>:</span>
@@ -228,6 +229,7 @@ export function DateTimePicker({
                 value={minute}
                 placeholder="Daqiqa"
                 options={minutes}
+                menuPlacement="aboveOnMobile"
                 onChange={setMinute}
               />
             </div>
@@ -260,10 +262,12 @@ export function TimePicker({
   value,
   onChange,
   disabled = false,
+  compact = false,
 }: {
   value: string;
   onChange: (value: string) => void;
   disabled?: boolean;
+  compact?: boolean;
 }) {
   const [hour, setHour] = useState(value.slice(0, 2));
   const [minute, setMinute] = useState(value.slice(3, 5));
@@ -273,14 +277,22 @@ export function TimePicker({
     setMinute(value.slice(3, 5));
   }, [value]);
 
+  const minuteOptions = useMemo(() => {
+    if (!minute || minutes.some((option) => option.value === minute))
+      return minutes;
+    return [{ value: minute, label: minute }, ...minutes];
+  }, [minute]);
+
   return (
-    <div className={styles.timeOnly}>
-      <Clock3 size={16} aria-hidden="true" />
+    <div className={`${styles.timeOnly}${compact ? ` ${styles.timeOnlyCompact}` : ""}`}>
+      {!compact && <Clock3 size={16} aria-hidden="true" />}
       <SoftSelect
         label="Soat"
         value={hour}
         placeholder="Soat"
         disabled={disabled}
+        showSelectedCheck={false}
+        showChevron={!compact}
         options={hours.map(({ value: optionValue }) => ({
           value: optionValue,
           label: optionValue,
@@ -296,7 +308,9 @@ export function TimePicker({
         value={minute}
         placeholder="Daqiqa"
         disabled={disabled}
-        options={minutes}
+        showSelectedCheck={false}
+        showChevron={!compact}
+        options={minuteOptions}
         onChange={(nextMinute) => {
           setMinute(nextMinute);
           onChange(`${hour || "00"}:${nextMinute}`);

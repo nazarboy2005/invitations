@@ -172,6 +172,62 @@
 .timeOnly > div {
   min-width: 0;
 }
+.timeOnly > div > button {
+  min-height: 46px;
+  gap: 6px;
+  padding-inline: 9px;
+  font-size: 12px;
+}
+.timeOnlyCompact {
+  flex: 0 0 132px;
+  grid-template-columns: minmax(0, 0.85fr) auto minmax(0, 1.15fr);
+  gap: 4px;
+}
+.timeOnlyCompact > div > button {
+  min-height: 30px;
+  gap: 3px;
+  padding-inline: 3px;
+  font-size: 10px;
+}
+.timeOnlyCompact [role="combobox"] {
+  justify-content: center;
+  padding-inline: 3px;
+  text-align: center;
+}
+.timeOnlyCompact [role="combobox"] > span:first-child {
+  flex: 1 1 auto;
+  text-align: center;
+}
+.timeOnly [role="listbox"] {
+  max-height: min(260px, 42dvh);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: var(--line-strong) transparent;
+}
+.timeOnly [role="listbox"] > button {
+  justify-content: center;
+  padding-right: 17px;
+  padding-left: 11px;
+  text-align: center;
+}
+.timeOnly [role="listbox"]::-webkit-scrollbar {
+  width: 6px;
+}
+.timeOnly [role="listbox"]::-webkit-scrollbar-track {
+  background: transparent;
+}
+.timeOnly [role="listbox"]::-webkit-scrollbar-thumb {
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background: var(--line-strong);
+  background-clip: padding-box;
+}
+.timeOnly [role="listbox"]::-webkit-scrollbar-button {
+  display: none;
+  width: 0;
+  height: 0;
+}
 .timeSeparator {
   color: var(--primary);
   font-size: 17px;
@@ -221,8 +277,42 @@
 }
 @media (max-width: 540px) {
   .popover {
-    width: min(100%, 360px);
+    position: fixed;
+    z-index: 100;
+    top: 50%;
+    left: 50%;
+    width: min(390px, calc(100vw - 24px));
+    min-width: 0;
+    max-height: calc(100dvh - 24px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    transform: translate(-50%, -50%);
     padding: 12px;
+    animation: none;
+  }
+  .calendarHeader {
+    margin-bottom: 8px;
+  }
+  .calendarGrid {
+    gap: 2px;
+  }
+  .weekday {
+    height: 26px;
+  }
+  .emptyDay,
+  .day {
+    height: 36px;
+  }
+  .timeSection {
+    margin-top: 10px;
+    padding-top: 10px;
+  }
+  .timeTitle {
+    margin-bottom: 6px;
+  }
+  .footer {
+    margin-top: 10px;
+    padding-top: 10px;
   }
 }
 @media (prefers-reduced-motion: reduce) {
