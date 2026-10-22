@@ -1,15 +1,13 @@
 {
-  "status": "verified",
-  "file": "preview-browser-capture.jpg",
-  "sha256": "77275f444421c8351380e4763ba95aec7689582fbd541edefd29d1c46cd18fd5",
-  "format": "JPEG",
-  "width": 478,
-  "height": 668,
-  "route": "/preview?template=yangi-uy&qaSilent=1",
+  "width": 480,
+  "height": 720,
   "fixture": "apps/web/src/modules/catalog/preview-sample.json",
-  "fixtureSha256": "a88ccb99419b87f60e86f7470366f8badaa912db74ab67ad1f757aeeaf6d29c2",
-  "captureMethod": "ChatGPT in-app browser, production build",
-  "capturedAt": "2026-10-22",
-  "sourceTemplate": "Invitations - this folder will be removed from production/Marxaba/Nikoh/templates/yangi-uy",
-  "scope": "first viewport of canonical localized opening; production preview with QA audio silenced"
+  "fixtureLocale": "uz-Latn",
+  "fixtureNames": [
+    "Javohir",
+    "Madina"
+  ],
+  "sourceOpening": "captured Yangi Uy housewarming opening with the house illustration, localized source event label, and the pre-integration two-person sample",
+  "releaseStatus": "stale-needs-render-after-household-fixture-integration",
+  "sha256": "d2d85ee39cdcc3ee0adb07a074f081a5b01479c2a2408b178eafbdd48a2af2f8"
 }

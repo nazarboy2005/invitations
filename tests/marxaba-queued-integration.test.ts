@@ -191,7 +191,6 @@ test("registered Marxaba designs reflect their release state and additive migrat
     "bulbul",
     "parda",
     "ganch",
-    "yangi-uy",
     "kozgu",
     "qandil",
     "vals",
@@ -327,15 +326,12 @@ test("registered Marxaba designs reflect their release state and additive migrat
     "bulbul",
     "parda",
     "ganch",
-    "yangi-uy",
     "kozgu",
     "doira",
     "qandil",
     "parda",
     "ganch",
-    "yangi-uy",
     "ganch",
-    "yangi-uy",
     "qatlam",
     "lola",
     "qiz-bazmi",
@@ -391,7 +387,7 @@ test("registered Marxaba designs reflect their release state and additive migrat
     const image = readFileSync(new URL(`${id}/preview-browser-capture.jpg`, templatesRoot));
     const provenance = JSON.parse(readFileSync(new URL(`${id}/preview.provenance.json`, templatesRoot), "utf8"));
     assert.equal(definition?.previewImage, `/templates/${id}/preview-browser-capture.jpg`);
-    assert.equal(definition?.published, id === "bulbul" || id === "parda" || id === "ganch" || id === "yangi-uy", `${id} reflects its current release state`);
+    assert.equal(definition?.published, id === "bulbul" || id === "parda" || id === "ganch", `${id} reflects its current release state`);
     assert.equal(provenance.status, "verified");
     assert.equal(provenance.route, `/preview?template=${id}&qaSilent=1`);
     assert.equal(provenance.fixtureSha256, createHash("sha256").update(fixtureBytes).digest("hex"));
