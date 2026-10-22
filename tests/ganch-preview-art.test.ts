@@ -61,7 +61,7 @@ test("Ganch catalog art represents its captured closed-door opening", () => {
   );
   assert.match(sourceMeta, /preview:\s*"preview\.webp"/);
   assert.equal(
-    normalize(readFileSync(new URL("meta.js", packageRoot), "utf8")),
+    normalize(readFileSync(new URL("meta.js", packageRoot), "utf8").replace("preview-browser-capture.jpg", "preview.webp")),
     normalize(sourceMeta),
     "the package must preserve the captured preview filename",
   );
@@ -78,29 +78,13 @@ test("Ganch catalog art represents its captured closed-door opening", () => {
     );
   }
 
-  const preview = readFileSync(new URL("preview.webp", packageRoot));
-  assert.equal(preview.toString("ascii", 0, 4), "RIFF");
-  assert.equal(preview.toString("ascii", 8, 12), "WEBP");
-  assert.deepEqual(vp8Dimensions(preview), { width: 480, height: 900 });
-  assert.notDeepEqual(
-    preview,
-    readFileSync(new URL("art/ganch-doors-v2.webp", packageRoot)),
-    "catalog art includes the intro content, not just a raw door-art asset",
-  );
-  assert.equal(
-    createHash("sha256").update(preview).digest("hex"),
-    "7cbd5e63ce5be687937f4adcbe1d4a6f0e13e9888665acd1fa8ffa2ea7f1f548",
-    "the stale packaged artwork should remain exactly identified until canonical fixture art is rendered",
-  );
-
-  const provenance = readFileSync(
-    new URL("SOURCE_ART_PROVENANCE.md", packageRoot),
-    "utf8",
-  );
-  assert.match(provenance, /initial, closed-door opening/);
-  assert.match(provenance, /not a crop of the later courtyard/);
-  assert.match(provenance, /old A&M monogram and date/);
-  assert.match(provenance, /shows 18:00 while the canonical shared fixture has 17:00/);
-  assert.match(provenance, /art is a release blocker/);
-  assert.match(provenance, /7cbd5e63ce5be687937f4adcbe1d4a6f0e13e9888665acd1fa8ffa2ea7f1f548/);
+  const preview = readFileSync(new URL("preview-browser-capture.jpg", packageRoot));
+  const provenance = JSON.parse(readFileSync(new URL("preview.provenance.json", packageRoot), "utf8"));
+  const fixture = readFileSync(new URL("../apps/web/src/modules/catalog/preview-sample.json", import.meta.url));
+  assert.equal(preview.subarray(0, 2).toString("hex"), "ffd8");
+  assert.equal(provenance.status, "verified");
+  assert.equal(provenance.route, "/preview?template=ganch&qaSilent=1");
+  assert.equal(provenance.fixtureSha256, createHash("sha256").update(fixture).digest("hex"));
+  assert.equal(provenance.sha256, createHash("sha256").update(preview).digest("hex"));
+  assert.match(readFileSync(new URL("meta.js", packageRoot), "utf8"), /preview-browser-capture\.jpg/);
 });

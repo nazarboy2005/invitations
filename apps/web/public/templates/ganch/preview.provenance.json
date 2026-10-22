@@ -1,0 +1,15 @@
+{
+  "status": "verified",
+  "file": "preview-browser-capture.jpg",
+  "sha256": "e2615f75f766f2d09e1ce10363dff7717c68a9feb6a8a64c5f60e43322e1f705",
+  "format": "JPEG",
+  "width": 478,
+  "height": 668,
+  "route": "/preview?template=ganch&qaSilent=1",
+  "fixture": "apps/web/src/modules/catalog/preview-sample.json",
+  "fixtureSha256": "a88ccb99419b87f60e86f7470366f8badaa912db74ab67ad1f757aeeaf6d29c2",
+  "captureMethod": "ChatGPT in-app browser, production build",
+  "capturedAt": "2026-10-22",
+  "sourceTemplate": "Invitations - this folder will be removed from production/Marxaba/Nikoh/templates/ganch",
+  "scope": "first viewport of canonical localized opening; production preview with QA audio silenced"
+}

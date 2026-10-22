@@ -28,12 +28,7 @@ runtime is displaying a map, and hides the empty note and unsupported bank
 slot. None of these slots receive invented or sample creator data. Program
 speaker labels are not present in the captured Ganch markup.
 
-The packaged `preview.webp` has the correct closed-door opening composition,
-but visibly contains the old `A&M` monogram and old sample date baked into the
-pixels. It does not match the central catalog fixture (Javohir and Madina).
-Regenerate this source-rendered portrait from the canonical fixture and record
-a checksum before treating catalog artwork as complete; the present image is
-a release blocker, not verified canonical-fixture artwork.
+The current catalog image is the production browser capture, not the previous stale `preview.webp` with its baked-in A&M monogram and 18:00 sample time. The verified screenshot shows the shared fixture data and is pinned by `preview.provenance.json`. The captured source body, styles, scripts, and art remain unchanged.
 
 Ganch is registered in the typed catalog and additive database migration as
 unpublished. Keep it unavailable for selection until full browser and service

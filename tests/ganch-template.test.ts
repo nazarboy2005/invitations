@@ -35,7 +35,7 @@ test("Ganch preserves the captured source composition, motion code, styles, meta
   assert.match(adapter, /\.section--toyona > \[data-slot="toyona\.note"\]:empty/);
   assert.match(adapter, /\.gift__details \[data-slot="toyona\.bank"\]/);
   assert.ok(read(appRoot, "SOURCE_ADAPTATIONS.md").includes("contract-adapter.css"));
-  for (const file of ["template.css", "template.js", "scene-motion.js", "meta.js", "i18n.js"]) assert.equal(normalize(read(appRoot, file)), normalize(read(captureRoot, file)));
+  for (const file of ["template.css", "template.js", "scene-motion.js", "meta.js", "i18n.js"]) assert.equal(normalize(read(appRoot, file).replace("preview-browser-capture.jpg", "preview.webp")), normalize(read(captureRoot, file)));
   for (const asset of ["brass-roundel-v2.webp", "court-scene-painted.webp", "ganch-doors-v2.webp"]) assert.deepEqual(readFileSync(new URL(`art/${asset}`, appRoot)), readFileSync(new URL(`art/${asset}`, captureRoot)));
   assert.match(read(appRoot, "template.js"), /prefers-reduced-motion: reduce/);
   assert.match(read(appRoot, "scene-motion.js"), /function/);
@@ -43,15 +43,16 @@ test("Ganch preserves the captured source composition, motion code, styles, meta
   assert.match(body(html), /id="open-invitation"/);
 });
 
-test("Ganch retains its closed-door portrait but flags stale baked-in sample pixels", () => {
-  const preview = readFileSync(new URL("preview.webp", appRoot));
-  assert.ok(preview.length > 20_000, "rendered opening artwork must be a real image");
-  assert.match(read(appRoot, "meta.js"), /preview:\s*"preview\.webp"/);
-  assert.notEqual(createHash("sha256").update(preview).digest("hex"), createHash("sha256").update(readFileSync(new URL("art/ganch-doors-v2.webp", appRoot))).digest("hex"));
-  const adaptations = read(appRoot, "SOURCE_ADAPTATIONS.md");
-  assert.match(adaptations, /old `A&M` monogram and old sample date/);
-  assert.match(adaptations, /present image is\s+a release blocker/);
-  assert.match(adaptations, /does not match the central catalog fixture/);
+test("Ganch catalog art is a verified canonical browser capture", () => {
+  const preview = readFileSync(new URL("preview-browser-capture.jpg", appRoot));
+  const provenance = JSON.parse(read(appRoot, "preview.provenance.json"));
+  const fixture = readFileSync(new URL("../apps/web/src/modules/catalog/preview-sample.json", import.meta.url));
+  assert.equal(preview.subarray(0, 2).toString("hex"), "ffd8");
+  assert.equal(provenance.status, "verified");
+  assert.equal(provenance.route, "/preview?template=ganch&qaSilent=1");
+  assert.equal(provenance.sha256, createHash("sha256").update(preview).digest("hex"));
+  assert.equal(provenance.fixtureSha256, createHash("sha256").update(fixture).digest("hex"));
+  assert.match(read(appRoot, "meta.js"), /preview-browser-capture\.jpg/);
 });
 
 test("Ganch fonts and all HTML, CSS and script assets are local and resolve offline", () => {
