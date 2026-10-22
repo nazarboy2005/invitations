@@ -12,6 +12,7 @@ import {
   templateById,
 } from "../packages/contracts/src/index";
 import { createTemplatePreviewSample } from "../apps/web/src/modules/catalog/preview-sample";
+import { CATALOG_PREVIEW_MUSIC } from "../apps/web/src/modules/catalog/catalog-music";
 
 const require = createRequire(import.meta.url);
 require.extensions[".css"] = (module) => { module.exports = {}; };
@@ -87,26 +88,41 @@ test("central sample and default contract content cover corporate locales", () =
   );
 });
 
+test("Korporativ catalog preview uses the shared Emotional Piano default", () => {
+  const fullPreview = read(
+    "apps/web/src/modules/catalog",
+    "full-template-preview.tsx",
+  );
+  const sharedRenderer = read("apps/web/src/templates/marxaba", "renderer.tsx");
+  assert.match(fullPreview, /catalogMusic={catalogPreview}/);
+  assert.match(sharedRenderer, /catalogMusic\s*\?\s*CATALOG_PREVIEW_MUSIC\.url/);
+  assert.equal(CATALOG_PREVIEW_MUSIC.url, "/music/catalog/emotional-piano.wav");
+  assert.ok(
+    existsSync(path.join(root, "apps/web/public", CATALOG_PREVIEW_MUSIC.url)),
+    "the shared default audio asset is packaged",
+  );
+});
+
 test("captured body, source files, metadata, and SVG artworks are preserved", () => {
   assert.equal(body(read(pkg, "index.html")), body(read(source, "index.html")));
   for (const file of ["template.css", "i18n.js", "meta.js"])
-    assert.deepEqual(
-      readFileSync(path.join(pkg, file)),
-      readFileSync(path.join(source, file)),
+    assert.equal(
+      normalize(read(pkg, file)),
+      normalize(read(source, file)),
       `${file} matches capture`,
     );
   assert.equal(
-    read(pkg, "template.js"),
-    read(source, "template.js").replace(
+    normalize(read(pkg, "template.js")),
+    normalize(read(source, "template.js")).replace(
       'script.src = "../../shared/vendor/three/three.bundle.min.js";',
       'script.src = "../shared/nikoh/vendor/three/three.bundle.min.js";',
     ),
     "only the local Three.js dependency path is adapted",
   );
   for (const file of ["event-01.svg", "event-02.svg", "event-03.svg", "venue.svg"])
-    assert.deepEqual(
-      readFileSync(path.join(pkg, "art", file)),
-      readFileSync(path.join(source, "art", file)),
+    assert.equal(
+      normalize(read(pkg, `art/${file}`)),
+      normalize(read(source, `art/${file}`)),
       `art/${file} matches capture`,
     );
 

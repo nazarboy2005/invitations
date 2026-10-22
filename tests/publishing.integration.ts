@@ -649,10 +649,19 @@ test("every published template preserves every editor field across four-language
     await request("/api/catalog", undefined, false)
   ).json();
   assert.ok(catalog.templates.length >= 15);
+  const selectedTemplates = catalog.templates.filter(
+    (template: { id: string }) =>
+      !process.env.PUBLISHING_TEMPLATE_ID ||
+      template.id === process.env.PUBLISHING_TEMPLATE_ID,
+  );
+  assert.ok(
+    selectedTemplates.length > 0,
+    `No published template matched PUBLISHING_TEMPLATE_ID=${process.env.PUBLISHING_TEMPLATE_ID ?? "(all)"}`,
+  );
   const mediaDraft = await draft();
   const photo = await uploadFile(mediaDraft.id, png, "image", "image/png");
   const results = await Promise.allSettled(
-    catalog.templates.map(
+    selectedTemplates.map(
       async (template: {
         id: string;
         supportedEventTypes: Invitation["eventType"][];
