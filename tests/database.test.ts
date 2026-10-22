@@ -551,7 +551,7 @@ test("template migrations publish completed designs while keeping unfinished des
       ["sahro-fonusi", true],
       ["samarqand-kechasi", true],
       ["shahzoda", true],
-      ["shirin-bayram", false],
+      ["shirin-bayram", true],
       ["somon-yoli", true],
       ["suzani", true],
       ["toscana", false],
@@ -574,6 +574,10 @@ test("template migrations publish completed designs while keeping unfinished des
     { event_type: "sunnat-toyi" },
     { event_type: "wedding" },
   ]);
+  const shirinBayramEvents = await db.query<{ event_type: string }>(
+    "SELECT event_type FROM template_supported_event_types WHERE template_id='shirin-bayram' ORDER BY event_type",
+  );
+  assert.deepEqual(shirinBayramEvents.rows, [{ event_type: "birthday" }]);
   const ganchEvents = await db.query<{ event_type: string }>(
     "SELECT event_type FROM template_supported_event_types WHERE template_id='ganch' ORDER BY event_type",
   );

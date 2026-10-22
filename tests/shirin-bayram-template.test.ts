@@ -55,12 +55,28 @@ test("Shirin Bayram compatibility follows its birthday-only source metadata", ()
     path.join(root, "packages/database/migrations"),
     "0040_add_shirin_bayram_template.sql",
   );
+  const publication = read(
+    path.join(root, "packages/database/migrations"),
+    "0067_publish_shirin_bayram.sql",
+  );
+  const compatibilityFix = read(
+    path.join(root, "packages/database/migrations"),
+    "0068_shirin_bayram_birthday_only.sql",
+  );
   assert.match(metadata, /category:"tugilgan-kun",eventTypes:\["tugilgan-kun"\]/);
   assert.match(contracts, /id: "shirin-bayram"[\s\S]*?supportedEventTypes: \["birthday"\]/);
   assert.match(migration, /VALUES \('shirin-bayram', 'birthday'\)/);
+  assert.match(publication, /VALUES \('shirin-bayram', 'Shirin Bayram', 15000000, 'UZS', true\)/);
+  assert.match(publication, /\('shirin-bayram', 'birthday'\)/);
+  assert.match(compatibilityFix, /event_type <> 'birthday'/);
+  assert.match(compatibilityFix, /VALUES \('shirin-bayram', 'birthday'\)/);
+  assert.match(
+    contracts.match(/id: "shirin-bayram"[\s\S]*?\n  },/)?.[0] ?? "",
+    /published: true/,
+  );
   assert.doesNotMatch(metadata, /yubiley/);
   assert.doesNotMatch(
-    contracts.match(/id: "shirin-bayram"[\s\S]*?published: false,[\s\S]*?\n  },/)?.[0] ?? "",
+    contracts.match(/id: "shirin-bayram"[\s\S]*?\n  },/)?.[0] ?? "",
     /yubiley/,
   );
 });
@@ -233,6 +249,9 @@ test("Shirin Bayram uses the platform runtime without source samples or remote f
   const contractAdapter = read(pkg, "contract-adapter.css");
   assert.match(contractAdapter, /\[data-slot="toyona\.bank"\]:empty/);
   assert.match(contractAdapter, /\[data-slot="toyona\.note"\]:empty/);
+  assert.match(contractAdapter, /\.intro__name,[\s\S]*?\.hero__name/);
+  assert.match(contractAdapter, /overflow-wrap:\s*normal/);
+  assert.match(contractAdapter, /word-break:\s*normal/);
 });
 
 test("Shirin Bayram packages local Latin/Cyrillic fonts and all runtime assets", () => {

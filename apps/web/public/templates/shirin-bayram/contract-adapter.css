@@ -3,3 +3,11 @@
 .section--gift [data-slot="toyona.note"]:empty {
   display: none;
 }
+
+/* Keep Cyrillic and long celebrant names inside the rounded source lockup. */
+.intro__name,
+.hero__name {
+  font-size: clamp(42px, 12vw, 64px);
+  overflow-wrap: normal;
+  word-break: normal;
+}

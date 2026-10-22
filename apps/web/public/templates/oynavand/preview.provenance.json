@@ -5,7 +5,7 @@
   "renderedFrom": "/preview?template=oynavand&qaSilent=1, captured after the actual source opening and shared preview fixture loaded",
   "previewRoute": "/preview?template=oynavand&qaSilent=1",
   "fixture": "apps/web/src/modules/catalog/preview-sample.json",
-  "fixtureSha256": "cbb9acd109bae0b7840745c6023c8b99af837981c882b3ea75a40de4dc72bda9",
+  "fixtureSha256": "54017a292d4a5235593d93a5e2f8bca1fe3bab89433182fac912c5d948878871",
   "locale": "uz-Latn",
   "viewport": {
     "width": 640,

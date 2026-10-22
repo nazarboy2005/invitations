@@ -24,12 +24,20 @@ venue and map data. RSVP, wishes, program, gallery, optional dress code, gift,
 contacts, music, greeting, hosts, venue, and localized dates flow through the
 shared Marxaba adapter. A separate `contract-adapter.css` hides the captured
 gift bank-name and note slots while those unsupported values are empty; it
-does not alter the captured `template.css`.
+does not alter the captured `template.css`. The scoped adapter also limits the
+large intro and hero name size and restores normal word boundaries: the source's
+`overflow-wrap:anywhere` split short Cyrillic names inside a word, and wider
+Cyrillic glyphs made its headline overflow its lockup.
 
 The canonical catalog fixture is the only source of preview names and dates;
 the temporary browser harness used during capture was removed. The fixture is
-never persisted in drafts or passed to a public invitation. The template is
-registered in the typed catalog and by additive migration `0040` as
-unpublished. Desktop Uzbek preview and static package checks are recorded in
-the template roadmap; mobile, other-locale browser, reduced-motion, and live
-service checks remain release gates.
+never persisted in drafts or passed to a public invitation. Shirin Bayram is
+published at 150,000 UZS through additive migration
+`0067_publish_shirin_bayram.sql`, under category `birthday` with birthday-only
+event compatibility. Desktop browser review covers the animated opening, all
+four locales, long-name fit, gallery wrap, gift disclosure, RSVP counter, and
+clean console; the catalog-wide four-locale save/publish/public-render/reopen
+integration passes. The in-app viewport override did not take effect, so narrow
+viewport runtime review remains unverified; captured breakpoints and the
+scoped name-fit adapter are present. Reduced-motion runtime emulation is
+unavailable; captured source CSS and JavaScript honor the preference.

@@ -22,7 +22,8 @@ test("template samples are illustrative complete invitations", () => {
   assert.deepEqual(sample.content["uz-Cyrl"].people, ["Жавохир", "Мадина"]);
   assert.deepEqual(sample.content.en.people, ["Javohir", "Madina"]);
   assert.deepEqual(sample.content.ru.people, ["Жавохир", "Мадина"]);
-  assert.equal(sample.content.ru.greeting, "Ассалому алейкум, дорогой гость!");
+  assert.equal(sample.content.ru.greeting, "Здравствуйте, дорогой гость!");
+  assert.equal(sample.content.ru.personalGreeting, "Здравствуйте, {name}!");
   assert.equal(sample.dressCode.enabled, true);
   assert.equal(sample.dressCode.colors.length, 5);
   assert.deepEqual(sample.gift, {
@@ -74,7 +75,7 @@ test("template samples are illustrative complete invitations", () => {
   assert.equal(hasAuthoredInvitationContent(sample), true);
   assert.equal(sample.content["uz-Latn"].message.includes("ko‘rishdan"), true);
   assert.equal(sample.content["uz-Cyrl"].eventLabel, "Никоҳ тўйи");
-  assert.equal(sample.content.ru.greeting, "Ассалому алейкум, дорогой гость!");
+  assert.equal(sample.content.ru.greeting, "Здравствуйте, дорогой гость!");
 });
 
 test("catalog fixtures use an event type supported by each selected design", () => {
