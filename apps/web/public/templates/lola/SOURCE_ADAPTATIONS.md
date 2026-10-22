@@ -13,9 +13,10 @@ approved invitation contract does not currently provide:
   unsupported bank line are hidden without adding fields or sample data.
 
 The stylesheet is loaded after the captured template styles. It does not alter
-the captured source files or the catalog-only preview fixture. The source
-package remains unpublished until browser, mobile, reduced-motion,
-save/reopen, and service checks pass.
+the captured source files or the catalog-only preview fixture. Lola is published
+after desktop/mobile, four-locale, interaction, source-contract, build, and
+save/reopen checks passed. Browser reduced-motion emulation remains unavailable;
+captured and platform CSS paths are covered by source checks.
 
 The packaged `template.js` and `template.css` also include a focused motion
 repair for a captured GSAP warning. GSAP cannot select the CSS pseudo-element
