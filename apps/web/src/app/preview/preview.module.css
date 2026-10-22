@@ -1,7 +1,7 @@
 .galleryPage {
   width: min(1220px, calc(100% - 48px));
   margin: 0 auto;
-  padding: 52px 0 90px;
+  padding: 24px 0 90px;
 }
 
 .galleryHeader {
@@ -44,6 +44,6 @@
 @media (max-width: 560px) {
   .galleryPage {
     width: min(100% - 32px, 1220px);
-    padding-top: 32px;
+    padding-top: 18px;
   }
 }

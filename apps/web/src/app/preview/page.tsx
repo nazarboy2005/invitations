@@ -44,6 +44,7 @@ export default async function PreviewPage({
       <FullTemplatePreview
         template={template}
         canSelect={catalog.templates.some((item) => item.id === template.id)}
+        canCreate={catalog.templates.some((item) => item.id === template.id && item.published)}
         draftId={draftId}
         demo={demoParam === "1"}
         silentPlayback={qaSilentParam === "1"}

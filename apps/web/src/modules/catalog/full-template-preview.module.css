@@ -7,6 +7,86 @@
   background: #140b08;
 }
 
+.previewControls {
+  position: fixed;
+  z-index: 20;
+  top: max(16px, env(safe-area-inset-top));
+  right: max(16px, env(safe-area-inset-right));
+  left: max(16px, env(safe-area-inset-left));
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 180ms ease, visibility 180ms ease;
+}
+
+.controlsVisible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.backButton,
+.createButton {
+  position: absolute;
+  top: 0;
+  display: inline-flex;
+  min-height: 46px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  color: #fffaf1;
+  text-decoration: none;
+  box-shadow: 0 6px 22px rgb(23 13 8 / 24%);
+  backdrop-filter: blur(14px);
+  pointer-events: auto;
+  transition: background-color 160ms ease, border-color 160ms ease, transform 160ms ease;
+}
+
+.backButton {
+  left: 0;
+  width: 46px;
+  border: 1px solid rgb(255 255 255 / 45%);
+  background: rgb(255 253 248 / 78%);
+  color: #443a31;
+}
+
+.createButton {
+  right: 0;
+  gap: 8px;
+  padding: 0 18px;
+  border: 1px solid rgb(255 250 241 / 24%);
+  background: rgb(63 51 40 / 86%);
+  font-size: 14px;
+  font-weight: 650;
+}
+
+.backButton:hover {
+  border-color: #fff;
+  background-color: #fffdf8;
+}
+
+.createButton:hover {
+  background-color: #765417;
+}
+
+.backButton:active,
+.createButton:active {
+  transform: scale(0.97);
+}
+
+.backButton:focus-visible,
+.createButton:focus-visible {
+  outline: 3px solid #f1d28d;
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .previewControls,
+  .backButton,
+  .createButton {
+    transition: none;
+  }
+}
+
 .loading,
 .unsupported {
   position: absolute;
