@@ -4,6 +4,7 @@ import { getSessionUser } from "@/server/auth";
 import styles from "./site-header.module.css";
 import { ScrollHeader } from "./scroll-header";
 import { sans } from "@/app/platform-fonts";
+import { AccountLinkLabel } from "@/components/account-link-label";
 export async function SiteHeader({
   compact = false,
   dashboard = false,
@@ -50,7 +51,7 @@ export async function SiteHeader({
             className={styles.account}
             aria-current={dashboard ? "page" : undefined}
           >
-            {user ? "Taklifnomalarim" : "Kirish"}
+            <AccountLinkLabel signedIn={Boolean(user)} />
           </Link>
           <Link href="/studio" className={styles.create} aria-label="Yaratish">
             <span>Yaratish</span> <ArrowUpRight size={16} />

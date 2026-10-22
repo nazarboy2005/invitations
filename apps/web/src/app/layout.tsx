@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import "./globals.css";
 export const metadata: Metadata = {
   title: {
@@ -15,6 +16,7 @@ export default function RootLayout({
   return (
     <html lang="uz-Latn">
       <body>
+        <Script src="https://telegram.org/js/telegram-web-app.js" strategy="beforeInteractive" />
         <a className="skip-link" href="#main">
           Asosiy sahifaga o‘tish
         </a>

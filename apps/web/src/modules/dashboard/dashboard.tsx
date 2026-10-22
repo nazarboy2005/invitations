@@ -42,6 +42,11 @@ type DeviceSession = {
   expiresAt: string;
   current: boolean;
 };
+declare global {
+  interface Window {
+    Telegram?: { WebApp?: { initData?: string; ready?: () => void; expand?: () => void } };
+  }
+}
 function deviceName(userAgent: string) {
   const browser = /Edg\//.test(userAgent)
     ? "Edge"
@@ -216,14 +221,29 @@ export function Dashboard() {
       setLoading(true);
       setError("");
       try {
-        const response = await fetch("/api/auth/session", {
+        let response = await fetch("/api/auth/session", {
           cache: "no-store",
         });
-        if (!response.ok)
-          throw new Error(
-            "Hisobingizni tekshirib bo‘lmadi. Ulanishni tekshirib, qayta urinib ko‘ring.",
-          );
-        const result: SessionResponse = await response.json();
+        if (!response.ok) throw new Error("Hisobingizni tekshirib bo‘lmadi. Ulanishni tekshirib, qayta urinib ko‘ring.");
+        let result: SessionResponse = await response.json();
+        const initData = window.Telegram?.WebApp?.initData;
+        if (!result.user && initData) {
+          window.Telegram?.WebApp?.ready?.();
+          window.Telegram?.WebApp?.expand?.();
+          const exchange = await fetch("/api/auth/telegram/mini-app", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ initData }),
+            cache: "no-store",
+          });
+          if (exchange.ok) {
+            response = await fetch("/api/auth/session", { cache: "no-store" });
+            if (!response.ok) throw new Error();
+            result = await response.json();
+          } else if (exchange.status !== 403) {
+            throw new Error("Telegram hisobingizni tekshirib bo‘lmadi. Mini App’ni qayta oching.");
+          }
+        }
         if (!alive) return;
         setSession(result);
         try {
