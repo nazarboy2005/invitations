@@ -19,6 +19,7 @@ import {
   MapPin,
   Music2,
   Plus,
+  Search,
   Save,
   Send,
   Settings2,
@@ -61,6 +62,7 @@ import {
   hasAuthoredInvitationContent,
 } from "@/modules/catalog/preview-sample";
 import { CATALOG_PREVIEW_MUSIC } from "@/modules/catalog/catalog-music";
+import { matchesTemplateSearch } from "@/modules/catalog/template-search";
 import { PublishedLink } from "@/components/published-link";
 import {
   publicationIssues,
@@ -256,6 +258,7 @@ export function Studio({
   const [categories, setCategories] =
     useState<TemplateCategory[]>(TEMPLATE_CATEGORIES);
   const [categoryFilter, setCategoryFilter] = useState("all");
+  const [templateSearch, setTemplateSearch] = useState("");
   const [catalogNote, setCatalogNote] = useState("");
   const invitationRef = useRef(invitation);
   const lastCloudSnapshot = useRef(
@@ -423,6 +426,10 @@ export function Studio({
             );
         }
         setSection(1);
+      } else {
+        created.eventType = "wedding";
+        created.content[created.defaultLocale] =
+          defaultLocalizedInvitationContent("wedding", created.defaultLocale);
       }
       setInvitation(created);
       try {
@@ -1928,6 +1935,20 @@ export function Studio({
                   />
                 </Field>
                 {catalogNote && <p className={styles.help}>{catalogNote}</p>}
+                {compatibleTemplates.length > 0 && (
+                  <label className={styles.templateSearch}>
+                    <Search size={16} aria-hidden="true" />
+                    <input
+                      type="search"
+                      value={templateSearch}
+                      onChange={(event) =>
+                        setTemplateSearch(event.target.value)
+                      }
+                      placeholder="Dizayn qidirish"
+                      aria-label="Dizayn qidirish"
+                    />
+                  </label>
+                )}
                 {invitation.templateId &&
                   !templates.some(
                     (item) =>
@@ -1995,8 +2016,15 @@ export function Studio({
                   {compatibleTemplates
                     .filter(
                       (template) =>
-                        activeCategoryFilter === "all" ||
-                        template.categoryIds.includes(activeCategoryFilter),
+                        (activeCategoryFilter === "all" ||
+                          template.categoryIds.includes(
+                            activeCategoryFilter,
+                          )) &&
+                        matchesTemplateSearch(
+                          template,
+                          categories,
+                          templateSearch,
+                        ),
                     )
                     .map((template) => (
                       <div
@@ -2056,12 +2084,17 @@ export function Studio({
                 </div>
                 {!compatibleTemplates.some(
                   (template) =>
-                    activeCategoryFilter === "all" ||
-                    template.categoryIds.includes(activeCategoryFilter),
+                    (activeCategoryFilter === "all" ||
+                      template.categoryIds.includes(activeCategoryFilter)) &&
+                    matchesTemplateSearch(template, categories, templateSearch),
                 ) && (
                   <div className={styles.categoryEmpty}>
                     <LayoutTemplate size={24} />
-                    <p>Hozircha tanlash uchun dizayn yo‘q.</p>
+                    <p>
+                      {templateSearch.trim()
+                        ? "Qidiruv bo‘yicha dizayn topilmadi."
+                        : "Hozircha tanlash uchun dizayn yo‘q."}
+                    </p>
                     <small>
                       Qoralamangiz saqlanadi va keyin dizayn tanlashingiz
                       mumkin.

@@ -539,7 +539,7 @@ export const TEMPLATES: TemplateDefinition[] = [
     currency: "UZS",
     accent: "#7fa99b",
     previewEventType: "fotiha",
-    published: false,
+    published: true,
   },
   {
     id: "monogram",
@@ -551,7 +551,7 @@ export const TEMPLATES: TemplateDefinition[] = [
     priceMinor: 15000000,
     currency: "UZS",
     accent: "#c9b183",
-    published: false,
+    published: true,
   },
   {
     id: "retro-kino",
@@ -563,7 +563,7 @@ export const TEMPLATES: TemplateDefinition[] = [
     priceMinor: 15000000,
     currency: "UZS",
     accent: "#b3262e",
-    published: false,
+    published: true,
   },
   {
     id: "suzani",
@@ -575,7 +575,7 @@ export const TEMPLATES: TemplateDefinition[] = [
     priceMinor: 15000000,
     currency: "UZS",
     accent: "#a8262b",
-    published: false,
+    published: true,
   },
   {
     id: "orik-guli",
@@ -587,7 +587,7 @@ export const TEMPLATES: TemplateDefinition[] = [
     priceMinor: 15000000,
     currency: "UZS",
     accent: "#c06478",
-    published: false,
+    published: true,
   },
   {
     id: "paxta",
@@ -599,7 +599,7 @@ export const TEMPLATES: TemplateDefinition[] = [
     priceMinor: 15000000,
     currency: "UZS",
     accent: "#d9c7ae",
-    published: false,
+    published: true,
   },
   {
     id: "sahro-fonusi",
@@ -611,7 +611,7 @@ export const TEMPLATES: TemplateDefinition[] = [
     priceMinor: 15000000,
     currency: "UZS",
     accent: "#e8743b",
-    published: false,
+    published: true,
   },
   {
     id: "vals",
@@ -745,7 +745,7 @@ export const TEMPLATES: TemplateDefinition[] = [
     priceMinor: 15000000,
     currency: "UZS",
     accent: "#e07a5f",
-    published: false,
+    published: true,
   },
   {
     id: "qiz-bazmi",
@@ -758,7 +758,7 @@ export const TEMPLATES: TemplateDefinition[] = [
     priceMinor: 15000000,
     currency: "UZS",
     accent: "#7a3b1e",
-    published: false,
+    published: true,
   },
   {
     id: "shahzoda",
@@ -770,7 +770,7 @@ export const TEMPLATES: TemplateDefinition[] = [
     priceMinor: 15000000,
     currency: "UZS",
     accent: "#14213d",
-    published: false,
+    published: true,
   },
   {
     id: "chavandoz",
@@ -782,7 +782,7 @@ export const TEMPLATES: TemplateDefinition[] = [
     priceMinor: 15000000,
     currency: "UZS",
     accent: "#1d3a8a",
-    published: false,
+    published: true,
   },
   {
     id: "beshik",

@@ -2,13 +2,14 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
-import { ArrowUpRight, Eye, LayoutTemplate } from "lucide-react";
+import { ArrowUpRight, Eye, LayoutTemplate, Search } from "lucide-react";
 import type {
   TemplateCategory,
   TemplateDefinition,
 } from "@taklifnoma/contracts";
 import { EVENT_TYPE_OPTIONS, formatPrice } from "@taklifnoma/contracts";
 import styles from "@/app/home.module.css";
+import { matchesTemplateSearch } from "./template-search";
 
 export function TemplateGallery({
   templates,
@@ -18,13 +19,18 @@ export function TemplateGallery({
   categories: TemplateCategory[];
 }) {
   const [categoryId, setCategoryId] = useState("all");
+  const [searchQuery, setSearchQuery] = useState("");
   const visibleTemplates = useMemo(
     () =>
-      templates.filter(
-        (template) =>
-          categoryId === "all" || template.categoryIds.includes(categoryId),
-      ),
-    [categoryId, templates],
+      templates
+        .filter(
+          (template) =>
+            categoryId === "all" || template.categoryIds.includes(categoryId),
+        )
+        .filter((template) =>
+          matchesTemplateSearch(template, categories, searchQuery),
+        ),
+    [categoryId, categories, searchQuery, templates],
   );
 
   if (templates.length === 0)
@@ -37,6 +43,16 @@ export function TemplateGallery({
 
   return (
     <>
+      <label className={styles.catalogSearch}>
+        <Search size={17} aria-hidden="true" />
+        <input
+          type="search"
+          value={searchQuery}
+          onChange={(event) => setSearchQuery(event.target.value)}
+          placeholder="Dizayn qidirish"
+          aria-label="Dizayn qidirish"
+        />
+      </label>
       {categories.length > 0 && (
         <div
           className={styles.categoryFilters}
@@ -81,7 +97,11 @@ export function TemplateGallery({
       {visibleTemplates.length === 0 ? (
         <div className={styles.catalogEmpty}>
           <LayoutTemplate size={25} strokeWidth={1.5} />
-          <p>Bu kategoriyada hozircha dizayn yo‘q.</p>
+          <p>
+            {searchQuery.trim()
+              ? "Qidiruv bo‘yicha dizayn topilmadi."
+              : "Bu kategoriyada hozircha dizayn yo‘q."}
+          </p>
         </div>
       ) : (
         <div className={styles.catalogGrid}>
