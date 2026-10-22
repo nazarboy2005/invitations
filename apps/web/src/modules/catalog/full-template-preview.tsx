@@ -11,6 +11,7 @@ import {
 import { AnorInvitation } from "@/templates/anor";
 import { isMarxabaTemplate, MarxabaInvitation } from "@/templates/marxaba";
 import { isInvitateTemplate, InvitateInvitation } from "@/templates/invitate";
+import { VelvetRoyaleInvitation } from "@/templates/velvet-royale/renderer";
 import { readBrowserDraft } from "@/modules/studio/draft-storage";
 import {
   createTemplatePreviewSample,
@@ -32,6 +33,7 @@ export function FullTemplatePreview({
   silentPlayback = false,
   longNames = false,
   qaReducedMotion = false,
+  qaMobile = false,
 }: {
   template: TemplateDefinition;
   canSelect: boolean;
@@ -41,6 +43,7 @@ export function FullTemplatePreview({
   silentPlayback?: boolean;
   longNames?: boolean;
   qaReducedMotion?: boolean;
+  qaMobile?: boolean;
 }) {
   const [invitation, setInvitation] = useState<Invitation | null>(null);
   const [catalogPreview, setCatalogPreview] = useState(true);
@@ -204,6 +207,8 @@ export function FullTemplatePreview({
           sampleWishes={catalogPreview}
           silentPlayback={silentPlayback}
         />
+      ) : template.id === "royal-burgundy-edition" ? (
+          <VelvetRoyaleInvitation invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} sampleWishes={catalogPreview} silentPlayback={silentPlayback} qaReducedMotion={qaReducedMotion} qaMobile={qaMobile} />
       ) : isMarxabaTemplate(template.id) ? (
         <MarxabaInvitation
           invitation={invitation}

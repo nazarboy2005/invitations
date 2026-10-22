@@ -948,6 +948,21 @@ export const TEMPLATES: TemplateDefinition[] = [
     accent: "#c96f4a",
     published: false,
   },
+
+  {
+    id: "royal-burgundy-edition",
+    name: "Velvet Royale",
+    description: "Bordo baxmal pardalar, zarhal bezaklar va nafis saroyona uslub.",
+    previewImage:
+      "/templates/velvet-royale/source/reference/intro-v4-20261014-blank-poster-c521108180.webp",
+    previewEventType: "wedding",
+    categoryIds: ["wedding"],
+    supportedEventTypes: ["wedding"],
+    priceMinor: 15000000,
+    currency: "UZS",
+    accent: "#710510",
+    published: true,
+  },
 ];
 export const templateById = (id: string) =>
   TEMPLATES.find((item) => item.id === id);

@@ -5,6 +5,7 @@ import type { Invitation } from "@taklifnoma/contracts";
 import { AnorInvitation } from "@/templates/anor";
 import { isMarxabaTemplate, MarxabaInvitation } from "@/templates/marxaba";
 import { isInvitateTemplate, InvitateInvitation } from "@/templates/invitate";
+import { VelvetRoyaleInvitation } from "@/templates/velvet-royale/renderer";
 import styles from "./invitation-thumbnail.module.css";
 
 /** Reuse the real opening page, with authored content and no guest actions/audio. */
@@ -67,6 +68,8 @@ export function InvitationThumbnail({
             <AnorInvitation {...props} />
           ) : isInvitateTemplate(invitation.templateId) ? (
             <InvitateInvitation {...props} />
+          ) : invitation.templateId === "royal-burgundy-edition" ? (
+            <VelvetRoyaleInvitation {...props} />
           ) : isMarxabaTemplate(invitation.templateId) ? (
             <MarxabaInvitation
               {...props}

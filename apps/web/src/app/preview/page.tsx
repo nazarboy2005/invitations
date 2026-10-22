@@ -23,6 +23,7 @@ export default async function PreviewPage({
     qaSilent?: string | string[];
     qaLongNames?: string | string[];
     qaReducedMotion?: string | string[];
+    qaMobile?: string | string[];
   }>;
 }) {
   const params = await searchParams;
@@ -40,6 +41,9 @@ export default async function PreviewPage({
   const qaReducedMotionParam = Array.isArray(params.qaReducedMotion)
     ? params.qaReducedMotion[0]
     : params.qaReducedMotion;
+  const qaMobileParam = Array.isArray(params.qaMobile)
+    ? params.qaMobile[0]
+    : params.qaMobile;
   const template = templateId ? templateById(templateId) : undefined;
 
   if (template) {
@@ -54,6 +58,7 @@ export default async function PreviewPage({
         silentPlayback={qaSilentParam === "1"}
         longNames={qaLongNamesParam === "1"}
         qaReducedMotion={qaReducedMotionParam === "1"}
+        qaMobile={qaMobileParam === "1"}
       />
     );
   }

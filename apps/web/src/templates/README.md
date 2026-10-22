@@ -90,3 +90,5 @@ passes this flag into the source runtime before its template scripts initialize
 and applies the same motion suppression used by the captured templates' reduced
 motion styles. The flag is only propagated from the preview route, never to a
 public invitation.
+
+The E-invitation design Velvet Royale uses exact catalog ID `royal-burgundy-edition` and its own adapter at `apps/web/src/templates/velvet-royale`; it is separate from Invitate and Chorlove. See its source adaptations note and the template roadmap for supported fields and release details.

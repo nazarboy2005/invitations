@@ -914,3 +914,7 @@ Vals is packaged and registered but remains unpublished pending release review. 
 - 2026-10-22 Ganch release: applied `0085_publish_ganch.sql`; configured catalog and approved in-app preview confirm the published row, canonical art, expected event support, mobile fit, English locale, and reduced-motion rendering. Authenticated save/publish/public-render/reopen integration passed 1/1 and test users were cleaned up. Telegram notice delivered after verification.
 
 - 2026-10-22 Yangi Uy release: applied `0086_publish_yangi_uy.sql`; configured catalog and approved in-app preview verify the published row, canonical art, housewarming event support, mobile fit, English locale, and reduced-motion rendering. Authenticated save/publish/public-render/reopen integration passed 1/1; test users were cleaned up. Telegram notice delivered after verification.
+
+## E-invitation release
+
+- 2026-10-22 Velvet Royale (`royal-burgundy-edition`) is published at 150,000 UZS after source, renderer, catalog, backend, visual, and authenticated save/publish/public-render/reopen checks passed. Focused checks pass 6/6; typecheck and production build pass. The authorized Telegram notice was sent. Guest table assignment remains unsupported by the shared invitation contract.

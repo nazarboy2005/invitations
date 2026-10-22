@@ -5,6 +5,7 @@ import { resolveGuest } from "@/server/public";
 import { AnorInvitation } from "@/templates/anor";
 import { isMarxabaTemplate, MarxabaInvitation } from "@/templates/marxaba";
 import { isInvitateTemplate, InvitateInvitation } from "@/templates/invitate";
+import { VelvetRoyaleInvitation } from "@/templates/velvet-royale/renderer";
 import { InvitationViewTracker } from "@/modules/catalog/invitation-view-tracker";
 export const dynamic = "force-dynamic";
 export const metadata = {
@@ -71,6 +72,20 @@ export default async function InvitationPage({
       <>
         <InvitationViewTracker invitationId={result.id} />
         <InvitateInvitation
+          invitation={invitation}
+          invitationId={result.id}
+          locale={locale}
+          guestName={guestName}
+          guestToken={query.g}
+        />
+      </>
+    );
+
+  if (invitation.templateId === "royal-burgundy-edition")
+    return (
+      <>
+        <InvitationViewTracker invitationId={result.id} />
+        <VelvetRoyaleInvitation
           invitation={invitation}
           invitationId={result.id}
           locale={locale}
