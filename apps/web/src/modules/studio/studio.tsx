@@ -57,6 +57,10 @@ import { AnorInvitation } from "@/templates/anor";
 import { isMarxabaTemplate, MarxabaInvitation } from "@/templates/marxaba";
 import { isInvitateTemplate, InvitateInvitation } from "@/templates/invitate";
 import { VelvetRoyaleInvitation } from "@/templates/velvet-royale/renderer";
+import { OliveManorInvitation } from "@/templates/olive-manor/renderer";
+import { IslamicEditionInvitation } from "@/templates/islamic-edition/renderer";
+import { ManorInvitation } from "@/templates/manor-edition/renderer";
+import { GulliDarvozaInvitation } from "@/templates/onlinetaklifnoma/gulli-darvoza";
 import { isChorloveTemplate, ChorloveInvitation } from "@/templates/chorlove";
 import {
   createTemplatePreviewSample,
@@ -2624,6 +2628,9 @@ export function Studio({
             </span>
             {invitation.templateId &&
               (invitation.templateId === "anor" ||
+                invitation.templateId === "olive-manor-edition" ||
+                invitation.templateId === "islamic-edition" ||
+                invitation.templateId === "manor-edition" ||
                 isInvitateTemplate(invitation.templateId) ||
                 isMarxabaTemplate(invitation.templateId)) && (
                 <Link
@@ -2645,7 +2652,9 @@ export function Studio({
               )}
           </div>
           <div className={styles.realPreview}>
-            {invitation.templateId === "anor" ? (
+            {invitation.templateId === "gulli-darvoza" ? (
+              <GulliDarvozaInvitation invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview catalogMusic={section === 0 && !authoredPreview} sampleWishes={section === 0 && !authoredPreview} />
+            ) : invitation.templateId === "anor" ? (
               <AnorInvitation
                 invitation={previewInvitation}
                 invitationId={invitation.id}
@@ -2656,6 +2665,12 @@ export function Studio({
               />
             ) : invitation.templateId === "royal-burgundy-edition" ? (
               <VelvetRoyaleInvitation invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview catalogMusic={section === 0 && !authoredPreview} sampleWishes={section === 0 && !authoredPreview} />
+            ) : invitation.templateId === "olive-manor-edition" ? (
+              <OliveManorInvitation invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview catalogMusic={section === 0 && !authoredPreview} sampleWishes={section === 0 && !authoredPreview} />
+            ) : invitation.templateId === "islamic-edition" ? (
+              <IslamicEditionInvitation invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview catalogMusic={section === 0 && !authoredPreview} sampleWishes={section === 0 && !authoredPreview} />
+            ) : invitation.templateId === "manor-edition" ? (
+              <ManorInvitation invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview catalogMusic={section === 0 && !authoredPreview} sampleWishes={section === 0 && !authoredPreview} />
             ) : invitation.templateId && isChorloveTemplate(invitation.templateId) ? (
               <ChorloveInvitation
                 invitation={previewInvitation}

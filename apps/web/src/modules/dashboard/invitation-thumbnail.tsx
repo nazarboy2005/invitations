@@ -6,6 +6,9 @@ import { AnorInvitation } from "@/templates/anor";
 import { isMarxabaTemplate, MarxabaInvitation } from "@/templates/marxaba";
 import { isInvitateTemplate, InvitateInvitation } from "@/templates/invitate";
 import { VelvetRoyaleInvitation } from "@/templates/velvet-royale/renderer";
+import { OliveManorInvitation } from "@/templates/olive-manor/renderer";
+import { IslamicEditionInvitation } from "@/templates/islamic-edition/renderer";
+import { ManorInvitation } from "@/templates/manor-edition/renderer";
 import styles from "./invitation-thumbnail.module.css";
 
 /** Reuse the real opening page, with authored content and no guest actions/audio. */
@@ -70,6 +73,12 @@ export function InvitationThumbnail({
             <InvitateInvitation {...props} />
           ) : invitation.templateId === "royal-burgundy-edition" ? (
             <VelvetRoyaleInvitation {...props} />
+          ) : invitation.templateId === "olive-manor-edition" ? (
+            <OliveManorInvitation {...props} />
+          ) : invitation.templateId === "islamic-edition" ? (
+            <IslamicEditionInvitation {...props} />
+          ) : invitation.templateId === "manor-edition" ? (
+            <ManorInvitation {...props} />
           ) : isMarxabaTemplate(invitation.templateId) ? (
             <MarxabaInvitation
               {...props}

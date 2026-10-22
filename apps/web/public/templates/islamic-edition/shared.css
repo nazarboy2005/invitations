@@ -1,0 +1,14 @@
+* { box-sizing: border-box; }
+html, body { margin: 0; min-height: 100%; background: #07101e; color: #f7f0e4; }
+body { font-family: "Cormorant Garamond", Georgia, serif; }
+button, input, textarea, select { font: inherit; }
+button { color: inherit; }
+img, video { display: block; max-width: 100%; }
+.invitation-edition { --invitation-canvas-width: 480px; margin: 0 auto; min-height: 100vh; max-width: var(--invitation-canvas-width); overflow: hidden; position: relative; background: #07101e; }
+.invitation-edition__content { position: relative; z-index: 2; }
+.section-shell { margin: 0 auto; max-width: 480px; padding: 4.5rem 2rem; position: relative; text-align: center; }
+.section-ornament { color: #d4b56e; letter-spacing: .35em; }
+.section-title { color: #ead6a6; font-size: clamp(2rem, 8vw, 3.3rem); font-weight: 400; line-height: 1.1; margin: 0 0 1.5rem; }
+.section-copy { color: #e5d9c2; font-size: 1.2rem; line-height: 1.7; }
+.reveal { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; scroll-behavior: auto !important; transition-duration: .01ms !important; } }

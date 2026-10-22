@@ -1,0 +1,39 @@
+.section-intro { background: #070e19; cursor: pointer; inset: 0; min-height: 100svh; position: relative; }
+.section-intro__poster, .section-intro__video { height: 100%; inset: 0; object-fit: cover; position: absolute; width: 100%; }
+.section-intro__veil { background: linear-gradient(180deg,#06101a3d,#06101acc); inset: 0; position: absolute; }
+.section-intro__content { align-items: center; color: #f4e7c8; display: flex; flex-direction: column; inset: 0; justify-content: center; padding: 2rem; position: absolute; text-align: center; z-index: 1; }
+.section-intro__arabic { font-family: Amiri,serif; font-size: 2.3rem; }
+.section-intro__cta, .section-rsvp__submit, .section-card__copy { background: #c9aa61; border: 0; color: #101725; cursor: pointer; letter-spacing: .12em; padding: .85rem 1.25rem; text-transform: uppercase; }
+.section-hero { align-items: center; background: #081423; display: flex; flex-direction: column; justify-content: center; min-height: 95svh; overflow: hidden; padding: 4rem 1.5rem; position: relative; text-align: center; }
+.section-hero__media { inset: 0; position: absolute; }
+.section-hero__bg { height: 100%; inset: 0; object-fit: cover; opacity: .45; position: absolute; width: 100%; }
+.section-hero__content { position: relative; z-index: 1; }
+.section-hero__guest-name { color: #e3c980; font-size: 1.15rem; }
+.section-hero__name { color: #f6e7c2; font-family: 'Cormorant Garamond',serif; font-size: clamp(3rem,13vw,5rem); font-weight: 400; line-height: .95; }
+.section-names { align-items: center; display: flex; flex-direction: column; gap: .35rem; }
+.section-names__amp { color: #caaa5e; font-size: 1.4rem; }
+.section-couple, .section-datetime, .section-calendar, .section-family, .section-venue, .section-contact, .section-card, .section-table, .section-gallery, .section-rsvp, .section-countdown { background: #0b1727; color: #f1e7d6; }
+.quote-block { background: #0d1a2b; border: 1px solid #aa8d53; color: #f4e8d2; margin: 2rem auto; max-width: 34rem; padding: 2rem 1.4rem; position: relative; }
+.quote-block__arabic { color: #dfc47f; font-family: Amiri,serif; font-size: 2rem; }
+.section-countdown { background: #07111f url('/templates/islamic-edition/source/reference/assets/nighty-bg.webp') center/cover; }
+.section-countdown__units { display: flex; gap: .6rem; justify-content: center; }
+.section-countdown__unit { border: 1px solid #d0b36d; min-width: 4.2rem; padding: .8rem .4rem; }
+.section-countdown__number { color: #ecd79e; display: block; font-size: 2rem; }
+.section-animation { height: 35rem; overflow: hidden; position: relative; }
+.section-animation__video { height: 100%; inset: 0; object-fit: cover; position: absolute; width: 100%; }
+.section-map iframe { border: 0; height: 15rem; width: 100%; }
+.section-gallery__track { display: flex; gap: 1rem; overflow-x: auto; scroll-snap-type: x mandatory; }
+.section-gallery__image { flex: 0 0 82%; height: 25rem; object-fit: cover; scroll-snap-align: center; }
+.section-rsvp form { display: grid; gap: .9rem; text-align: left; }
+.section-rsvp input, .section-rsvp textarea, .section-rsvp select { background: #101d2d; border: 1px solid #826d43; color: white; padding: .8rem; width: 100%; }
+.section-rsvp__status { min-height: 1.5em; }
+.section-closing { background: #07101e; min-height: 30rem; overflow: hidden; padding: 5rem 2rem; position: relative; text-align: center; }
+.section-closing__moon { margin: 0 auto 1rem; width: 8rem; }
+.music-player { background: #c9aa61; border: 1px solid #f4e4b9; border-radius: 50%; bottom: 1.25rem; color: #101725; cursor: pointer; height: 3rem; position: fixed; right: max(1rem,calc((100vw - 480px)/2 + 1rem)); width: 3rem; z-index: 10; }
+.section-contacts__link { color: #e5ce91; display: inline-block; margin: .4rem; }
+.section-card__number { overflow-wrap: anywhere; }
+.section-gallery__controls { display: flex; justify-content: center; gap: 1rem; margin: 1rem; }
+.section-gallery__controls button { background: transparent; border: 1px solid #b99b5b; cursor: pointer; padding: .5rem 1rem; }
+.section-wishes__item { border-bottom: 1px solid #796746; margin: 1rem 0; padding: 1rem 0; text-align: left; }
+.section-languages { display: flex; gap: .5rem; justify-content: center; margin-bottom: 1.25rem; }
+.section-languages button { background: #101c2b; border: 1px solid #9a804c; border-radius: 2rem; cursor: pointer; padding: .35rem .7rem; }

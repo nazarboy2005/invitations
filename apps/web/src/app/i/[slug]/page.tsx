@@ -6,6 +6,10 @@ import { AnorInvitation } from "@/templates/anor";
 import { isMarxabaTemplate, MarxabaInvitation } from "@/templates/marxaba";
 import { isInvitateTemplate, InvitateInvitation } from "@/templates/invitate";
 import { VelvetRoyaleInvitation } from "@/templates/velvet-royale/renderer";
+import { OliveManorInvitation } from "@/templates/olive-manor/renderer";
+import { IslamicEditionInvitation } from "@/templates/islamic-edition/renderer";
+import { ManorInvitation } from "@/templates/manor-edition/renderer";
+import { GulliDarvozaInvitation } from "@/templates/onlinetaklifnoma/gulli-darvoza";
 import { isChorloveTemplate, ChorloveInvitation } from "@/templates/chorlove";
 import { InvitationViewTracker } from "@/modules/catalog/invitation-view-tracker";
 export const dynamic = "force-dynamic";
@@ -41,6 +45,19 @@ export default async function InvitationPage({
       guestName = "";
     }
   }
+  if (invitation.templateId === "gulli-darvoza")
+    return (
+      <>
+        <InvitationViewTracker invitationId={result.id} />
+        <GulliDarvozaInvitation
+          invitation={invitation}
+          invitationId={result.id}
+          locale={locale}
+          guestName={guestName}
+          guestToken={query.g}
+        />
+      </>
+    );
   if (invitation.templateId === "anor")
     return (
       <>
@@ -102,6 +119,45 @@ export default async function InvitationPage({
       <>
         <InvitationViewTracker invitationId={result.id} />
         <VelvetRoyaleInvitation
+          invitation={invitation}
+          invitationId={result.id}
+          locale={locale}
+          guestName={guestName}
+          guestToken={query.g}
+        />
+      </>
+    );
+  if (invitation.templateId === "olive-manor-edition")
+    return (
+      <>
+        <InvitationViewTracker invitationId={result.id} />
+        <OliveManorInvitation
+          invitation={invitation}
+          invitationId={result.id}
+          locale={locale}
+          guestName={guestName}
+          guestToken={query.g}
+        />
+      </>
+    );
+  if (invitation.templateId === "islamic-edition")
+    return (
+      <>
+        <InvitationViewTracker invitationId={result.id} />
+        <IslamicEditionInvitation
+          invitation={invitation}
+          invitationId={result.id}
+          locale={locale}
+          guestName={guestName}
+          guestToken={query.g}
+        />
+      </>
+    );
+  if (invitation.templateId === "manor-edition")
+    return (
+      <>
+        <InvitationViewTracker invitationId={result.id} />
+        <ManorInvitation
           invitation={invitation}
           invitationId={result.id}
           locale={locale}

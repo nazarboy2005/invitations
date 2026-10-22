@@ -46,6 +46,7 @@ export const MARXABA_TEMPLATE_IDS = [
   "bitiruv",
   "korporativ",
   "yangi-uy",
+  "taklifnomachi-1",
 ] as const;
 
 export function isMarxabaTemplate(id: string): boolean {

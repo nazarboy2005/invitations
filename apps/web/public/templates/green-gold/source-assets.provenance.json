@@ -1,0 +1,68 @@
+{
+  "templateId": "green-gold",
+  "source": {
+    "archiveFile": "Chorlove/Web invitations/templates/green-gold/preview-frame.html",
+    "preservedFile": "source/preview-frame.html",
+    "bytes": 118248,
+    "sha256": "a6523928a6950455b34ceca7ecfb74a2f8635cb3b6b7f085402301b992e9aa61",
+    "captureType": "Next.js server-rendered HTML preview snapshot"
+  },
+  "copiedDesignAssets": [
+    {
+      "file": "assets/arabic-words.png",
+      "bytes": 98368,
+      "sha256": "c56a3979ab7e502cc259a447d871e4f089ee9d56ff7d391b813dc941c6e36c7d",
+      "archiveFile": "Chorlove/Web invitations/images/green-gold/arabic-words.png"
+    },
+    {
+      "file": "assets/bg.webp",
+      "bytes": 41152,
+      "sha256": "840a501718eb4f65d2d5ef2bde6489c4c050d2dc65b8110d3f9338dd9614bb0a",
+      "archiveFile": "Chorlove/Web invitations/images/green-gold/bg.webp"
+    },
+    {
+      "file": "assets/corner.png",
+      "bytes": 82074,
+      "sha256": "0697670f81c67dd6383e84a084cb74eae74e5e7d5ca94132a5cd01c4358d4a7f",
+      "archiveFile": "Chorlove/Web invitations/images/green-gold/corner.png"
+    },
+    {
+      "file": "assets/horizontal-line.png",
+      "bytes": 77270,
+      "sha256": "fc63c3652470b7a80ca82fea6d4f8a4bcc27246b36890b4a4515d4fce282101e",
+      "archiveFile": "Chorlove/Web invitations/images/green-gold/horizontal-line.png"
+    },
+    {
+      "file": "assets/naqsh.png",
+      "bytes": 377001,
+      "sha256": "6e76b7eb4e24d28df2f20bbbb3ca7efb4a68848c20d4cc2abcd19f1efebcde8b",
+      "archiveFile": "Chorlove/Web invitations/images/green-gold/naqsh.png"
+    }
+  ],
+  "excludedSnapshotAssets": [
+    "images/templates/orchid-amplop/gallery-1.webp",
+    "images/templates/orchid-amplop/gallery-2.webp",
+    "images/templates/orchid-amplop/gallery-3.webp",
+    "images/templates/orchid-amplop/gallery-4.webp",
+    "images/templates/orchid-amplop/gallery-5.webp",
+    "images/templates/orchid-amplop/gallery-6.webp"
+  ],
+  "status": "source HTML, five available design assets, and two captured stylesheet dependencies preserved; adapter integration not started",
+  "missingSourceAssets": [
+    "images/green-gold/vertical-line.png is referenced by the captured snapshot but absent from the archive"
+  ],
+  "capturedStylesheets": [
+    {
+      "file": "source/styles/00sc_9lpb3zcn.css",
+      "archiveFile": "Chorlove/Web invitations/_next/static/chunks/00sc_9lpb3zcn.css",
+      "bytes": 360488,
+      "sha256": "9295d64fad91822e7e7ab0d110764ac973d5414829a5bf40bb69e99531762910"
+    },
+    {
+      "file": "source/styles/0.u3j0~_2ygfx.css",
+      "archiveFile": "Chorlove/Web invitations/_next/static/chunks/0.u3j0~_2ygfx.css",
+      "bytes": 11626,
+      "sha256": "12141a5ec71f317d0e27589c92869d213b339f86451ee2a75b4612c5f1e05991"
+    }
+  ]
+}

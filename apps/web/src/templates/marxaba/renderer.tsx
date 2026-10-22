@@ -85,6 +85,8 @@ export function MarxabaInvitation({
         : {}),
       music: musicUrl,
       slug: preview ? "" : invitationId,
+      rsvpDetails: invitation.rsvp,
+      wishesEnabled: invitation.wishes.enabled,
       guestToken,
       name: guestName,
       defaultLang: sourceLocale[frameLocale],

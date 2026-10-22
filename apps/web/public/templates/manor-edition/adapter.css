@@ -1,0 +1,29 @@
+.manor-intro { align-items: center; background: #eee4d3; display: flex; inset: 0; justify-content: center; min-height: 100svh; overflow: hidden; position: fixed; z-index: 20; }
+.manor-intro__media,.manor-intro__veil { height: 100%; inset: 0; position: absolute; width: 100%; }
+.manor-intro__media img,.manor-intro__media video { height: 100%; object-fit: cover; width: 100%; }
+.manor-intro__veil { background: linear-gradient(180deg,#2e251330,#2e2513a0); }
+.manor-intro__content { color: #fff9ed; position: relative; text-align: center; z-index: 1; }
+.manor-intro__open { background: #f4ead8; border: 1px solid #9d8057; color: #594731; cursor: pointer; letter-spacing: .12em; margin-top: 1rem; padding: .9rem 1.4rem; text-transform: uppercase; }
+.manor-intro--opening { animation: manor-reveal .9s ease forwards; pointer-events: none; }
+@keyframes manor-reveal { to { opacity: 0; visibility: hidden; } }
+.section-hero__media { inset: 0; position: absolute; }
+.section-hero__bg { height: 100%; inset: 0; object-fit: cover; position: absolute; width: 100%; }
+.section-hero__overlay { background: linear-gradient(180deg,#20190d20,#20190d70); inset: 0; position: absolute; }
+.section-hero__content { color: #fff9ed; position: relative; z-index: 1; }
+.section-hero__title { align-items: center; display: flex; flex-direction: column; margin-inline: auto; max-width: 100%; width: 100%; }
+.section-names__one,.section-names__two { color: #f8f0e2; display: block; font-family: "Great Vibes", cursive; font-size: clamp(2.25rem,10vw,3.6rem); font-weight: 400; line-height: 1; max-width: 100%; overflow-wrap: anywhere; text-align: center; }
+.section-divider__line { background: #a98b63; display: inline-block; height: 1px; width: 4rem; }
+.section-gallery__viewport { overflow: hidden; }
+.section-gallery__track { display: flex; gap: 1rem; overflow-x: auto; scroll-snap-type: x mandatory; }
+.section-gallery__slide { flex: 0 0 85%; scroll-snap-align: center; }
+.section-gallery__photo { height: 27rem; object-fit: cover; width: 100%; }
+.section-venue__action,.section-card__copy,.section-rsvp__submit { background: #775f41; border: 0; color: #fff9ed; cursor: pointer; padding: .8rem 1.2rem; }
+.section-venue__map iframe { border: 0; height: 15rem; width: 100%; }
+.section-contact__value { color: #6f563b; }
+.section-rsvp__field input,.section-rsvp__field textarea { background: #fffaf1; border: 1px solid #c6b397; color: #42392f; padding: .8rem; width: 100%; }
+.section-rsvp__form { display: grid; gap: 1rem; }
+.section-closing { min-height: 30rem; position: relative; text-align: center; }
+.section-closing__heart { color: #997853; }
+.music-player { background: #eee3d0; border: 1px solid #a98b63; border-radius: 50%; bottom: 1.25rem; color: #5c4932; cursor: pointer; height: 3rem; position: fixed; right: max(1rem,calc((100vw - 480px)/2 + 1rem)); width: 3rem; z-index: 10; }
+.section-languages { display: flex; gap: .5rem; justify-content: center; margin: 1rem; }
+.section-languages button { background: #f6eedf; border: 1px solid #a98b63; border-radius: 2rem; color: #504434; cursor: pointer; padding: .35rem .7rem; }

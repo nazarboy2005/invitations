@@ -77,13 +77,6 @@ For ephemeral responsive-name stress checks on an empty preview, add
 `qaLongNames=1` to the preview URL. It replaces only the centralized fixture
 names, never authored creator content or saved invitations.
 
-Invitate templates have a dedicated renderer module under
-`apps/web/src/templates/invitate` and isolated public source packages under
-`apps/web/public/templates/<id>`. Their adapters use the shared invitation
-contract and renderer in creator preview and public display. See
-`docs/templates/INVITATE_ROADMAP.md` for the separate Invitate sequence.
-
-
 To verify reduced-motion behavior in the Marxaba preview without changing the
 browser or operating-system preference, add `qaReducedMotion=1`. The preview
 passes this flag into the source runtime before its template scripts initialize
@@ -91,4 +84,14 @@ and applies the same motion suppression used by the captured templates' reduced
 motion styles. The flag is only propagated from the preview route, never to a
 public invitation.
 
-The E-invitation design Velvet Royale uses exact catalog ID `royal-burgundy-edition` and its own adapter at `apps/web/src/templates/velvet-royale`; it is separate from Invitate and Chorlove. See its source adaptations note and the template roadmap for supported fields and release details.
+Invitate templates have a dedicated renderer module under
+`apps/web/src/templates/invitate` and isolated public source packages under
+`apps/web/public/templates/<id>`. Their adapters use the shared invitation
+contract and renderer in creator preview and public display. See
+`docs/templates/INVITATE_ROADMAP.md` for the separate Invitate sequence.
+
+The E-invitation design Velvet Royale uses exact catalog ID
+`royal-burgundy-edition` and its own adapter at
+`apps/web/src/templates/velvet-royale`; it is separate from Invitate and
+Chorlove. See its source adaptations note and the template roadmap for source
+transformations, supported fields, and release gates.

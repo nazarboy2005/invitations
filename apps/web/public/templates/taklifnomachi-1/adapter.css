@@ -1,0 +1,18 @@
+.tm-gift{box-sizing:border-box;max-width:660px;margin:38px auto;padding:32px 20px 28px;background:#67031f;color:#fff8ef;border:1px solid #c8a568;outline:1px solid rgba(200,165,104,.4);outline-offset:-7px;text-align:center;font-family:'Ovo',Georgia,serif;}
+.tm-gift-kicker{margin:0;font:clamp(28px,7vw,42px)/1.2 'Great Vibes',cursive;color:#f6e5c1;}
+.tm-gift-rule{margin:12px auto;color:#d3b276;font-size:18px;}
+.tm-gift-number{margin:0;font-size:clamp(19px,5vw,26px);letter-spacing:.08em;color:#fffaf5;}
+.tm-gift-holder{margin:8px 0 18px;color:#e8d8ba;font-size:15px;}
+.tm-gift-copy{border:1px solid #d2b476;border-radius:999px;padding:10px 18px;background:transparent;color:#fff8ef;font:14px 'Ovo',Georgia,serif;cursor:pointer;}
+.tm-gift-copy:hover,.tm-gift-copy:focus-visible{background:#d2b476;color:#4e071e;outline:2px solid #fff8ef;outline-offset:2px;}
+.tm-contacts{display:flex;flex-wrap:wrap;gap:10px 18px;justify-content:center;padding:8px 12px;}
+.tm-contacts a,.tm-map-link{color:inherit;text-decoration:underline;text-underline-offset:3px;}
+.tm-map-link{display:block;text-align:center;margin:8px auto 18px;font:16px 'Ovo',Georgia,serif;}
+.tm-program-extra{display:grid;grid-template-columns:minmax(70px,1fr) 2fr;gap:14px;max-width:520px;margin:0 auto;padding:8px 18px;color:#fff7ed;font:16px 'Ovo',Georgia,serif;}
+.tm-gallery-extra{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:18px;max-width:570px;margin:16px auto;padding:0 14px;}
+.tm-gallery-extra figure{margin:0;padding:7px;background:#d4bd92;box-shadow:0 2px 8px #220b13;}
+.tm-gallery-extra img{display:block;width:100%;height:auto;object-fit:cover;}
+[data-taklifnomachi-gift][hidden],#rec2003451831[hidden],#si-wishes-section[hidden]{display:none!important;}
+@media(max-width:600px){.tm-gift{margin:26px 14px;padding:28px 16px}.tm-program-extra{font-size:14px}}
+@media(prefers-reduced-motion:reduce){html:focus-within{scroll-behavior:auto!important}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+html[data-reduced-motion="true"] *,html[data-reduced-motion="true"] *::before,html[data-reduced-motion="true"] *::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}

@@ -1,0 +1,98 @@
+[
+  {
+    "file": "cormorant-latin.woff2",
+    "url": "https://onlinetaklifnoma.app/_next/static/media/01e4147cff8141ee-s.3huc2loe0ie8a.woff2",
+    "sha256": "5d618c462b7a5b74f442e1548880086af71764d9cc7d35c16ab45353da934621",
+    "bytes": 37776
+  },
+  {
+    "file": "cormorant-cyrillic.woff2",
+    "url": "https://onlinetaklifnoma.app/_next/static/media/591574edbe85c69b-s.2cu8l7zf4s4ec.woff2",
+    "sha256": "3170a883f1968a2d1135259e40fd88508da70c20337e491f171f9405d0749053",
+    "bytes": 21264
+  },
+  {
+    "file": "cormorant-uzbek.woff2",
+    "url": "https://onlinetaklifnoma.app/_next/static/media/acf349172f10b359-s.0gv8q2vqi14yg.woff2",
+    "sha256": "3512ad3b4ddd21fa75ab44296867da1f82948350ffba678a04afbb511015cb08",
+    "bytes": 11556
+  },
+  {
+    "file": "cormorant-latin-medium.woff2",
+    "url": "https://onlinetaklifnoma.app/_next/static/media/8bd76523131fa0fc-s.1pvupmngxrt5z.woff2",
+    "sha256": "e6d6d1d73858aa9b66f3a3539f9dec22faab2276e61ad1d813bc04dd59c9c122",
+    "bytes": 39304
+  },
+  {
+    "file": "cormorant-cyrillic-medium.woff2",
+    "url": "https://onlinetaklifnoma.app/_next/static/media/b0947914c9718a1e-s.1xjn85gt7t6qs.woff2",
+    "sha256": "d81372bae1f872f1418c0b7eb412f8a92a156a950fda8d2383701c75d38969df",
+    "bytes": 21132
+  },
+  {
+    "file": "cormorant-uzbek-medium.woff2",
+    "url": "https://onlinetaklifnoma.app/_next/static/media/d0b60be57f16ee32-s.1xtu7gopqv2u0.woff2",
+    "sha256": "826f73ca737feec0eb1004808629973d6b611fddc2bd2a689b5fe331f6be6427",
+    "bytes": 11264
+  },
+  {
+    "file": "great-vibes-latin.woff2",
+    "url": "https://onlinetaklifnoma.app/_next/static/media/f48d461c03e0a8ec-s.3rqg0w444aekk.woff2",
+    "sha256": "0237c8316409c1e4c267156adcc6b17a1d5573320efa45b707fe39989ac3874b",
+    "bytes": 29596
+  },
+  {
+    "file": "great-vibes-cyrillic.woff2",
+    "url": "https://onlinetaklifnoma.app/_next/static/media/2efc0c479abd2474-s.02-h3o5cqnryq.woff2",
+    "sha256": "7d8e55f33a5a625f5a6b8e39def8de8b7c1e3427931edd5cecf037aaea04aa9f",
+    "bytes": 28504
+  },
+  {
+    "file": "great-vibes-uzbek.woff2",
+    "url": "https://onlinetaklifnoma.app/_next/static/media/9a146d0fd3ff96e4-s.3pzgmnk57caz1.woff2",
+    "sha256": "93e47792ff812a0776ac0b3c4dd88b608d96524342706e40b074a9368179e8b3",
+    "bytes": 7652
+  },
+  {
+    "file": "forum-latin.woff2",
+    "url": "https://onlinetaklifnoma.app/_next/static/media/ec6b5b74cff4b0c1-s.2hcl1-0_mkckx.woff2",
+    "sha256": "678331fb318a613e6f7e4db9e608545b7ab57c192d215882caee23d4d787264d",
+    "bytes": 13684
+  },
+  {
+    "file": "forum-cyrillic.woff2",
+    "url": "https://onlinetaklifnoma.app/_next/static/media/8584ff62a7ee42f1-s.3xss6aleo1rvh.woff2",
+    "sha256": "46084df3df38e3d465573b0c5c1cd28dd33da60963ca8642057de8ef801eb9f4",
+    "bytes": 10176
+  },
+  {
+    "file": "forum-uzbek.woff2",
+    "url": "https://onlinetaklifnoma.app/_next/static/media/5edfed1a0b153978-s.3w7ylegi4x5rg.woff2",
+    "sha256": "ccd544ba0ae2edc1f9fbc7d9b71453d9c76717b876277237b586ded76307c81d",
+    "bytes": 9892
+  },
+  {
+    "file": "couple.webp",
+    "url": "https://media.onlinetaklifnoma.app/templates/gulli-darvoza/couple.111a542d8e184a8e.webp",
+    "sha256": "111a542d8e184a8eaed6576f6060f5519094157b5d928b67b93dbdc1c5508872",
+    "bytes": 93586
+  },
+  {
+    "file": "gate.webp",
+    "url": "https://media.onlinetaklifnoma.app/templates/gulli-darvoza/gate.e17e258b158c4868.webp",
+    "sha256": "e17e258b158c48683348c7af765b9e9c658949f2ab7f0db63d295be4f89811c2",
+    "bytes": 354832
+  },
+  {
+    "file": "gate-thumb.webp",
+    "url": "https://media.onlinetaklifnoma.app/templates/gulli-darvoza/gate-thumb.9f58b5de5c3183f2.webp",
+    "sha256": "9f58b5de5c3183f23bb8d8499ad52cc4c54e04cab265a71f5b2ef85e9be198bb",
+    "bytes": 86574
+  },
+  {
+    "file": "intro.mp4",
+    "url": "https://media.onlinetaklifnoma.app/templates/gulli-darvoza/intro.e6ace35778eb28ea.mp4",
+    "sha256": "e6ace35778eb28ea1b13fdd8f6d83812d1b0def79a913213954f0d77b75c9d4b",
+    "bytes": 1976574
+  }
+]
