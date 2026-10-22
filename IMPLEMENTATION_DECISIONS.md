@@ -451,6 +451,13 @@ Development agents are distinct from production queue workers. The running app w
   documented release gates pass. The current roadmap identifies Nilufar as the
   active next design; its existing publication authorization remains subject
   to those gates.
+- Follow-up (2026-10-22): Nilufar is now catalog-published at 150,000 UZS with
+  wedding and fotiha compatibility. Migration `0052_publish_nilufar.sql` was
+  applied and the public catalog API, 390px layout, and authenticated
+  four-locale save/publish/reopen flow were verified. Reduced-motion runtime
+  emulation was unavailable; source guards and focused assertions pass.
+  External deployment and live payment activation were not performed. Continue
+  with the next design in the approved conversion sequence.
 - User selected Samarqand Kechasi as the next template and requested publication
   through the same catalog mechanism and existing 150,000 UZS price after its
   template checks pass. This authorizes its additive catalog publication
