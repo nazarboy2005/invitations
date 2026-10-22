@@ -533,7 +533,7 @@ test("template migrations publish completed designs while keeping unfinished des
       ["nahor", false],
       ["nahorgi-osh", false],
       ["nilufar", true],
-      ["oltin-kuz", false],
+      ["oltin-kuz", true],
       ["oltin-nur", false],
       ["oltin-uzuk", true],
       ["oltin-yosh", false],

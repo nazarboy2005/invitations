@@ -49,13 +49,34 @@ test("Oltin Kuz keeps the captured invitation body, styles, motion, and artwork"
 
   assert.ok(sourceBody, "captured source body exists");
   assert.equal(appBody, sourceBody, "only the app shell head is adapted");
-  for (const path of ["template.css", "template.js", "meta.js"]) {
+  for (const path of ["template.css", "meta.js"]) {
     assert.deepEqual(
       readFileSync(new URL(path, packageRoot)),
       readFileSync(new URL(path, sourceRoot)),
       `${path} remains byte-for-byte identical to the capture`,
     );
   }
+
+  let expectedScript = read(sourceRoot, "template.js");
+  const replaceOnce = (before: string, after: string) => {
+    assert.equal(expectedScript.split(before).length - 1, 1);
+    expectedScript = expectedScript.replace(before, () => after);
+  };
+  const splitNames =
+    "function splitIntroNames(){Array.from(document.querySelectorAll('.intro h1 [data-slot]')).forEach(el=>{if(el.querySelector('.intro-letter'))return;const value=el.textContent||'';if(!value)return;el.classList.toggle('platform-name-fit--long',value.trim().length>24);el.replaceChildren(...Array.from(value,char=>char===' '?document.createTextNode(' '):Object.assign(document.createElement('span'),{className:'intro-letter',textContent:char})));});}";
+  replaceOnce(
+    "function startLeaves(){if(!reduced&&!raf&&!document.hidden)raf=requestAnimationFrame(draw)}",
+    `function startLeaves(){if(!reduced&&!raf&&!document.hidden)raf=requestAnimationFrame(draw)}${splitNames}`,
+  );
+  replaceOnce(
+    "if(window.gsap&&!reduced)gsap.fromTo('.intro h1 .intro-letter'",
+    "splitIntroNames();const introLetters=Array.from(document.querySelectorAll('.intro h1 .intro-letter'));if(window.gsap&&!reduced&&introLetters.length)gsap.fromTo(introLetters",
+  );
+  replaceOnce(
+    "$$('.intro h1 [data-slot]').forEach(el=>{const value=el.textContent;el.replaceChildren(...Array.from(value,char=>char===' '?document.createTextNode(' '):Object.assign(document.createElement('span'),{className:'intro-letter',textContent:char})));});",
+    "splitIntroNames();",
+  );
+  assert.equal(read(packageRoot, "template.js"), expectedScript);
 
   for (const path of [
     "art/chinar.webp",
@@ -103,6 +124,10 @@ test("Oltin Kuz uses only local runtime/font assets and keeps sample data out", 
   assert.ok(!existsSync(new URL("sample-overrides.js", packageRoot)));
   assert.match(read(packageRoot, "template.js"), /prefers-reduced-motion/);
   assert.match(read(packageRoot, "template.css"), /prefers-reduced-motion/);
+  assert.match(
+    read(packageRoot, "contract-adapter.css"),
+    /\.intro h1 \[data-slot="extras\.celebrant"\]\.platform-name-fit--long/,
+  );
   assert.match(notes, /extras\.age/);
   assert.match(notes, /venue\.photo/);
   assert.match(notes, /toyona\.bank/);
@@ -216,6 +241,12 @@ test("Oltin Kuz supports both declared events and keeps the preview fixture out 
   );
   assert.match(migration, /\('oltin-kuz', 'birthday'\)/);
   assert.match(migration, /\('oltin-kuz', 'yubiley'\)/);
+  const publication = readFileSync(
+    new URL("../packages/database/migrations/0066_publish_oltin_kuz.sql", import.meta.url),
+    "utf8",
+  );
+  assert.match(publication, /VALUES \('oltin-kuz', 'Oltin Kuz', 15000000, 'UZS', true\)/);
+  assert.match(publication, /\('oltin-kuz', 'yubiley'\)[\s\S]*\('oltin-kuz', 'birthday'\)/);
 
   const blank = createInvitation("oltin-kuz");
   const sample = createTemplatePreviewSample("oltin-kuz");

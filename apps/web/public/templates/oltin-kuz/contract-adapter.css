@@ -15,3 +15,11 @@
 .gallery__year:empty {
   display: none;
 }
+
+/* Keep unusually long creator names at a readable size and break at natural
+   word/hyphen boundaries in the source opening. */
+.intro h1 [data-slot="extras.celebrant"].platform-name-fit--long {
+  font-size: clamp(42px, 15vw, 76px);
+  overflow-wrap: normal !important;
+  word-break: normal !important;
+}
