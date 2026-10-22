@@ -70,3 +70,5 @@ tests or production build were run for this UI refinement.
 
 
 - 2026-10-22 Cloud Castle (Chorlove) release: additive migration `0088_publish_cloud_castle.sql` is applied; configured PostgreSQL and the approved in-app catalog verify its published wedding mapping and browser-captured artwork. Focused checks pass 4/4, typecheck and production build pass, and the authenticated four-locale save/publish/public-render/reopen integration passes 20/20. Telegram notice delivered after verification; no external deployment.
+
+- 2026-10-22 Glass Pink release: registration `0089_register_glass_pink.sql` and publication `0091_publish_glass_pink.sql` are applied. The configured catalog and authenticated save/publish/public-render/reopen flow verify the release. Focused package and database checks, web typecheck, and production build pass. The authorized Telegram notice was delivered after verification; no external deployment.

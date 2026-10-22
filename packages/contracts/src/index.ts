@@ -950,6 +950,19 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
 
   {
+    id: "glass-pink",
+    name: "Glass Pink",
+    description: "Nafis pushti gullar, nozik naqshlar va nafis taklifnoma.",
+    previewImage: "/templates/glass-pink/preview-browser-capture.jpg",
+    previewEventType: "wedding",
+    categoryIds: ["wedding"],
+    supportedEventTypes: ["wedding"],
+    priceMinor: 15000000,
+    currency: "UZS",
+    accent: "#cb5d6c",
+    published: true,
+  },
+  {
     id: "cloud-castle",
     name: "Cloud Castle",
     description: "Oq bulutlar, nozik gul bezaklari va nafis saroyona taklifnoma.",

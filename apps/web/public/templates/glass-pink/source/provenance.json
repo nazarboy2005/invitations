@@ -1,0 +1,21 @@
+{
+  "sourceCapture": "Chorlove/Web invitations/templates/glass-pink/preview-frame.html",
+  "sourceSha256": "dcb16406f91a3fb12241f75a97fc0fa5eca95c0aba0a6bc9e0d95953cce806f2",
+  "capturedMarkupExtracted": "div#S:0",
+  "nextRuntimeCopied": false,
+  "snapshotExampleDataIncluded": false,
+  "sharedStyles": [
+    "_next/static/chunks/0.u3j0~_2ygfx.css",
+    "_next/static/chunks/00sc_9lpb3zcn.css"
+  ],
+  "note": "The captured preview is a server-rendered snapshot. Chorlove template source assets and styling are retained; the website runtime, external music, captured guest names, fixed venue/contact details, sample wishes, and unrelated gallery photos are excluded.",
+  "previewBrowserCapture": {
+    "file": "../preview-browser-capture.jpg",
+    "sha256": "02391e83d507f4f1651f6d0687c118386988a3e7822f3859ceee8eb36a58b27f",
+    "source": "ChatGPT in-app browser rendering of the app preview with the canonical wedding preview fixture",
+    "locale": "uz-Latn",
+    "viewport": "392x720",
+    "captureUrl": "http://127.0.0.1:3002/preview?template=glass-pink&qaSilent=1&qaReducedMotion=1&qaMobile=1",
+    "croppedFrom": "1280x720 in-app browser screenshot, invitation iframe bounds x=444..836, y=0..720"
+  }
+}

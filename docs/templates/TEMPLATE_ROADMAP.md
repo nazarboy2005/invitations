@@ -927,7 +927,7 @@ The archive contains 28 captured preview snapshots. Each candidate is adapted fr
 | Archive ID | Design | Status |
 | --- | --- | --- |
 | `cloud-castle` | Cloud Castle | Published |
-| `glass-pink` | Glass Pink | Queued |
+| `glass-pink` | Glass Pink | Published |
 | `golden-card` | Golden Card | Queued |
 | `green-garden` | Green Garden | Queued |
 | `green-gold` | Green Gold | Queued |
@@ -956,3 +956,6 @@ The archive contains 28 captured preview snapshots. Each candidate is adapted fr
 | `velvet-romance` | Velvet Romance | Queued |
 
 - 2026-10-22 Cloud Castle release: applied additive migration `0088_publish_cloud_castle.sql`; configured PostgreSQL and the approved in-app `/api/catalog` confirm the published wedding entry at 150,000 UZS with its browser-captured preview image. The source snapshot remains unchanged; the app package keeps its original art/styles while removing captured site runtime and sample data. Mobile preview fits 319px without horizontal overflow, and the event date, countdown, calendar, shared Emotional Piano, locale switching, reduced-motion flag, gallery/story visibility, and preview-only controls were checked. Preview provenance SHA-256 is recorded. Focused checks pass 4/4, web typecheck and production build pass, and the authenticated four-locale save/publish/public-render/reopen suite passes 20/20 with test rows cleaned. The authorized Telegram notice was delivered after verification. No external deployment was performed.
+
+
+- 2026-10-22 Glass Pink release: registration `0089_register_glass_pink.sql` and publication `0091_publish_glass_pink.sql` are applied. The configured catalog confirms the wedding entry and canonical preview. Source, four-locale controls, mobile fit, reduced motion, authenticated save/publish/public-render/reopen, typecheck, production build, and focused package checks pass. The authorized Telegram notice was delivered after verification; no external deployment.

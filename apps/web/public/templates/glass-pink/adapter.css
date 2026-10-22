@@ -1,0 +1,37 @@
+.glass-pink-page { position: relative; isolation: isolate; }
+.cc-language-picker, .cc-music-toggle { position: fixed; z-index: 150; display: flex; align-items: center; gap: 4px; border: 1px solid rgb(203 93 108 / 18%); border-radius: 999px; background: rgb(255 255 255 / 90%); padding: 5px; box-shadow: 0 8px 28px rgb(203 93 108 / 12%); backdrop-filter: blur(12px); }
+.cc-language-picker { top: 12px; right: 12px; }
+.cc-language-picker button { min-width: 30px; border: 0; border-radius: 999px; padding: 6px 7px; color: rgb(203 93 108); background: transparent; font-family: inherit; font-size: 11px; font-weight: 600; line-height: 1.2; cursor: pointer; }
+.cc-language-picker button[aria-pressed="true"] { color: #fff; background: rgb(203 93 108); }
+.cc-music-toggle { right: 20px; bottom: 20px; width: 48px; height: 48px; justify-content: center; color: rgb(203 93 108); cursor: pointer; }
+.cc-music-toggle[hidden] { display: none; }
+.cc-gallery-empty { background: linear-gradient(145deg, #f8f5ef, #e8e0d2); }
+.cc-gallery-empty::after { content: ""; position: absolute; inset: 0; border: 1px solid rgb(203 93 108 / 8%); pointer-events: none; }
+.cc-story-copy { display: grid; grid-template-columns: repeat(auto-fit,minmax(min(100%,220px),1fr)); gap: 14px; width: min(100%,760px); margin: 28px auto; text-align: left; }
+.cc-story-copy article { padding: 18px; border: 1px solid rgb(203 93 108 / 16%); border-radius: 18px; background: rgb(255 255 255 / 70%); }
+.cc-story-copy h3 { margin: 0 0 8px; color: rgb(203 93 108); font: 600 20px/1.35 var(--font-cormorant-garamond),serif; }
+.cc-story-copy p { margin: 0; white-space: pre-wrap; color: #334155; font: 14px/1.7 var(--font-inter),sans-serif; }
+.cc-extra-links { display: grid; gap: 10px; width: min(100%,360px); margin: 16px auto; }
+.cc-extra-links a { display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 42px; padding: 9px 14px; border: 1px solid rgb(203 93 108 / 18%); border-radius: 999px; color: rgb(203 93 108); text-decoration: none; overflow-wrap: anywhere; }
+.cc-status { min-height: 1.4em; text-align: center; }
+.cc-party-size { display: grid; gap: 6px; margin-top: 14px; }
+.cc-party-size select { width: 100%; padding: 10px 12px; border: 1px solid rgb(203 93 108 / 24%); border-radius: 10px; color: rgb(203 93 108); background: #fff; font: inherit; }
+.cc-gift-details { display: none; margin: 14px auto 0; width: min(100%,400px); padding: 16px; border: 1px solid rgb(203 93 108 / 20%); border-radius: 16px; background: #fff; color: rgb(203 93 108); text-align: center; overflow-wrap: anywhere; }
+.cc-gift-details[data-open="true"] { display: block; }
+.cc-gift-details p { margin: 6px 0; }
+.cc-gallery-lightbox { position: fixed; inset: 0; z-index: 180; display: grid; place-items: center; padding: 24px; background: rgb(10 20 36 / 88%); }
+.cc-gallery-lightbox[hidden] { display: none; }
+.cc-gallery-lightbox img { max-width: min(100%,900px); max-height: 88vh; object-fit: contain; }
+.cc-gallery-lightbox button { position: absolute; top: 18px; right: 18px; border: 1px solid #fff; border-radius: 50%; width: 42px; height: 42px; color: #fff; background: transparent; font: inherit; cursor: pointer; }
+[data-chorlove-reveal] { animation: cc-source-reveal 760ms cubic-bezier(.2,.7,.2,1) both; }
+@keyframes cc-source-reveal { from { opacity: 0; transform: var(--cc-from-transform,translateY(10px)); } to { opacity: 1; transform: none; } }
+[data-chorlove-calendar-cell][data-event-day="true"] [data-chorlove-calendar-number] { display: grid; place-items: center; width: 26px; height: 24px; border-radius: 999px; color: #fff !important; background: rgb(203 93 108); }
+@media (max-width: 420px) { .cc-language-picker { top: 8px; right: 8px; } .cc-music-toggle { right: 12px; bottom: 12px; } }
+@media (prefers-reduced-motion: reduce) { *,*::before,*::after { scroll-behavior: auto !important; animation: none !important; transition-duration: .01ms !important; } }
+.cc-reduced-motion *, .cc-reduced-motion *::before, .cc-reduced-motion *::after { scroll-behavior: auto !important; animation: none !important; transition-duration: .01ms !important; }
+
+.glass-pink-page{position:relative;isolation:isolate}
+.glass-pink-page .cc-language-picker,.glass-pink-page .cc-music-toggle{border-color:rgb(203 93 108 / 20%);box-shadow:0 8px 28px rgb(203 93 108 / 12%)}
+.glass-pink-page .cc-language-picker button{color:rgb(147 56 69)}
+.glass-pink-page .cc-language-picker button[aria-pressed="true"]{color:#fff;background:rgb(203 93 108)}
+.glass-pink-page .cc-music-toggle{color:rgb(147 56 69)}

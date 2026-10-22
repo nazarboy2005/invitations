@@ -1,5 +1,6 @@
 import test, { after, before } from "node:test";
 import assert from "node:assert/strict";
+import { existsSync } from "node:fs";
 import { readFile, readdir } from "node:fs/promises";
 import { randomUUID } from "node:crypto";
 import { PGlite } from "@electric-sql/pglite";
@@ -496,6 +497,7 @@ test("template migrations publish completed designs while keeping unfinished des
         "qandil",
         "parda",
         "ganch",
+        "glass-pink",
         "hilol",
         "qatlam",
         "lola",
@@ -524,11 +526,12 @@ test("template migrations publish completed designs while keeping unfinished des
       ["beshik", true],
       ["bitiruv", true],
       ["bogi-eram", true],
-      ["bulbul", false],
+      ["bulbul", true],
       ["chavandoz", true],
       ["doira", true],
       ["evelina", true],
-      ["ganch", false],
+      ["ganch", true],
+      ["glass-pink", true],
       ["hilol", true],
       ["konfetti", true],
       ["korporativ", true],
@@ -548,7 +551,7 @@ test("template migrations publish completed designs while keeping unfinished des
       ["oq-kabutar", true],
       ["orik-guli", true],
       ["oynavand", true],
-      ["parda", false],
+      ["parda", true],
       ["paxta", true],
       ["qandil", true],
       ["qatlam", true],
@@ -654,8 +657,20 @@ test("template migrations publish completed designs while keeping unfinished des
   );
   assert.equal(
     assignments.rows.filter((row) => row.category_id === "wedding").length,
-    33,
+    36 + Number(existsSync(new URL("../packages/database/migrations/0090_register_olive_manor.sql", import.meta.url))),
+    "the already-applied Velvet Royale, Cloud Castle, and Glass Pink registrations each add a wedding assignment, with Olive Manor included when its migration is present",
   );
+  assert.ok(
+    assignments.rows.some(
+      (row) =>
+        row.template_id === "royal-burgundy-edition" &&
+        row.category_id === "wedding",
+    ),
+  );
+  const royalBurgundy = await db.query<{ published: boolean }>(
+    "SELECT published FROM templates WHERE id='royal-burgundy-edition'",
+  );
+  assert.deepEqual(royalBurgundy.rows, [{ published: true }]);
 });
 test("template event compatibility is constrained and independently assignable", async () => {
   const existing = await db.query<{ event_type: string }>(
