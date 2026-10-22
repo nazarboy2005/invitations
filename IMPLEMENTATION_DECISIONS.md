@@ -446,6 +446,11 @@ Development agents are distinct from production queue workers. The running app w
   design. If any required release gate is still open, stay on that design and
   leave it unpublished; do not count implementation progress as publication
   readiness.
+- User follow-up (2026-10-22): continue with the next design already in the
+  conversion sequence and publish it through the existing catalog once its
+  documented release gates pass. The current roadmap identifies Nilufar as the
+  active next design; its existing publication authorization remains subject
+  to those gates.
 - User selected Samarqand Kechasi as the next template and requested publication
   through the same catalog mechanism and existing 150,000 UZS price after its
   template checks pass. This authorizes its additive catalog publication
