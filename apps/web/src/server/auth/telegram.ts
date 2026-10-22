@@ -263,7 +263,7 @@ async function processLocked(update: Update, db: postgres.TransactionSql) {
             await telegramCall("sendMessage", {
               parse_mode: "HTML",
               chat_id: callback.message.chat.id,
-              text: status === "approved" ? "🌟 <b>Tilak tasdiqlandi</b>\nEndi u taklifnomada ko‘rinadi." : "🙈 <b>Tilak yashirildi</b>\nU taklifnomada ko‘rinmaydi.",
+              text: status === "approved" ? "🌟 <b>Tilak tasdiqlandi</b>\nEndi u ommaviy taklifnomada ko‘rinadi." : "🗑️ <b>Tilak rad etildi va o‘chirildi</b>\nU ommaviy taklifnomada ko‘rinmaydi.",
             });
           }
         }
@@ -273,7 +273,7 @@ async function processLocked(update: Update, db: postgres.TransactionSql) {
             ? "Bu xabar allaqachon ko‘rib chiqilgan."
             : status === "approved"
               ? "Tilak taklifnomada e’lon qilindi."
-              : "Tilak o‘chirildi.",
+              : "Tilak rad etildi va o‘chirildi.",
         });
       }
     }

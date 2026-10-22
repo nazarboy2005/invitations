@@ -8,6 +8,7 @@
 - Implementation choice: activity page gains wish status filters, submission times, and clearer pending counts/empty states while preserving existing RSVP, moderation, and private receipt functions.
 - User request: make Telegram bot messages more attractive with improved formatting and stickers.
 - Implementation choice: use Telegram HTML formatting with escaped user-provided values, concise Uzbek copy, and contextual emoji. Send optional welcome, onboarding-success, and new-wish stickers only when corresponding bot file ID environment values are configured; missing or invalid decorative stickers never block bot flows. Do not bundle a sticker ID from another bot or chat.
+- User clarification (2026-10-22): guest wishes must reach the owner through the Telegram bot with approve and reject controls. Approved wishes appear publicly on the invitation; rejected wishes are deleted and never appear publicly. The bot's reject action uses the existing deleted status and soft-delete timestamp; public reads include only approved, non-deleted wishes.
 
 ## Database publication authorization (2026-10-21)
 

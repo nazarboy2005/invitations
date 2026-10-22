@@ -44,7 +44,7 @@ export async function sendWishNotification(input: WishNotification) {
         inline_keyboard: [
           [
             { text: "Tasdiqlash", callback_data: `wish_approve:${input.wishId}` },
-            { text: "Yashirish", callback_data: `wish_delete:${input.wishId}` },
+            { text: "❌ Rad etish va o‘chirish", callback_data: `wish_delete:${input.wishId}` },
           ],
           [{
             text: "Faollik sahifasi",
