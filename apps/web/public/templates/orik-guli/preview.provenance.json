@@ -1,0 +1,9 @@
+{
+  "asset": "preview.webp",
+  "sourceAsset": "art/view-0.webp",
+  "sha256": "fc5eca76198999588239aa7f530ea4a10d22fa5a5a053be9269d71724b4e4244",
+  "width": 780,
+  "height": 1170,
+  "sourcePackage": "Invitations - this folder will be removed from production/Marxaba/Nikoh/templates/orik-guli",
+  "captureNote": "The capture metadata points to preview.webp, but the capture has no root preview.webp. The catalog artwork is an exact copy of the captured first-page art/view-0.webp at its full portrait ratio."
+}

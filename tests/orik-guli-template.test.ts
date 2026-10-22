@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
 import { createRequire } from "node:module";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -241,6 +242,14 @@ test("O‘rik Guli retains the captured page, animation code, and original art",
   )) {
     assert.ok(existsSync(new URL(asset, templateRoot)), `${asset} is missing`);
   }
+  const provenance = JSON.parse(
+    readFileSync(new URL("preview.provenance.json", templateRoot), "utf8"),
+  ) as { asset: string; sourceAsset: string; sha256: string; width: number; height: number };
+  const preview = readFileSync(new URL(provenance.asset, templateRoot));
+  assert.equal(provenance.sourceAsset, "art/view-0.webp");
+  assert.deepEqual(preview, readFileSync(new URL(provenance.sourceAsset, captureRoot)));
+  assert.equal(createHash("sha256").update(preview).digest("hex"), provenance.sha256);
+  assert.deepEqual([provenance.width, provenance.height], [780, 1170]);
   for (const [, asset] of html.matchAll(/(?:src|href)="([^"]+)"/g)) {
     if (/^(?:#|https?:|mailto:|tel:|data:|javascript:)/i.test(asset)) continue;
     assert.ok(
