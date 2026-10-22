@@ -1,0 +1,113 @@
+{
+  "templateId": "green-garden",
+  "archiveFile": "Invitations - this folder will be removed from production/Chorlove/Web invitations/templates/green-garden/preview-frame.html",
+  "preservedCapture": {
+    "file": "source/preview-frame.html",
+    "bytes": 90075,
+    "sha256": "d7ba584a7aa9cee59f786191e8c4be0cf57796edbe285fcc35ba890a4be204a8",
+    "type": "Next.js server-rendered preview snapshot"
+  },
+  "assetOrigin": "Observed in the approved ChatGPT in-app browser on https://chorlove.uz/templates/green-garden; selected design ornaments and exact template fonts only. Gallery sample photos, external sample venue photography, site JavaScript, and music were excluded.",
+  "assets": [
+    {
+      "file": "assets/baroque_gold.webp",
+      "bytes": 5260,
+      "sha256": "31a8b40d8d3b55cc9c2ebc7f07cd989166833bf9c0a8fbcbb4d5a2a4c8455c97"
+    },
+    {
+      "file": "assets/boho_floral_pink.webp",
+      "bytes": 4904,
+      "sha256": "1174ca9ea33e2cc0c8f9799b49f930e8ded1f4eeee2170853a35d05276cff201"
+    },
+    {
+      "file": "assets/brocade_flower_red.webp",
+      "bytes": 6556,
+      "sha256": "1098410745710bbaefb7fab7c9895bd324d6fd1ab0bf70fb8d75c03626401e73"
+    },
+    {
+      "file": "assets/calendar-heart.webp",
+      "bytes": 4182,
+      "sha256": "c80f585007b5438757dca034d63d67ba33df713109bd1c5addff32d369fbbbe3"
+    },
+    {
+      "file": "assets/dish.webp",
+      "bytes": 223172,
+      "sha256": "f230b71e33f045610bf268e5c6aee5f65caedd2823d0dd0597fa67e7a491a4e3"
+    },
+    {
+      "file": "assets/floral-background.webp",
+      "bytes": 281332,
+      "sha256": "ee00755d579c2d584712bb49ff965d3bafd71d904f671a02e86c0900a6bfbfdc"
+    },
+    {
+      "file": "assets/flower1-decoration.webp",
+      "bytes": 395060,
+      "sha256": "98224b4e61e2202263460ad62322176c3e4dde7ab8b2a7d53a6b1667fc702a2a"
+    },
+    {
+      "file": "assets/flower2-decoration.webp",
+      "bytes": 373694,
+      "sha256": "2096aab754eae60b47daacc89027e24421cacdb457e30ee4b661ed92fcda7013"
+    },
+    {
+      "file": "assets/flower3-decoration.webp",
+      "bytes": 274778,
+      "sha256": "9e38c15f3b53a043d3f281b603517b581b30cf5c366e1d5c4872ab1dffd03e33"
+    },
+    {
+      "file": "assets/flower4-decoration.webp",
+      "bytes": 392526,
+      "sha256": "235529f2c243094867cc2cd1186f9e378febd026256c89d6bb9c935c08633394"
+    },
+    {
+      "file": "assets/flower5-bottom.webp",
+      "bytes": 440580,
+      "sha256": "ab1e928aca0e8bcf3f54d0ead63199a3f1632334cf4dc86d329ea008f5002839"
+    },
+    {
+      "file": "assets/fonts/CormorantGaramond-Regular.ttf",
+      "bytes": 666632,
+      "sha256": "7b99138ffa3baab8616d8491dc6d75961c5ae568b206c5031fbc7bb127385428"
+    },
+    {
+      "file": "assets/fonts/Qellia.otf",
+      "bytes": 20180,
+      "sha256": "98c0d340d2ba414001b9210aa20df2516c8dcdd18c09aa822b34f9718bb45776"
+    },
+    {
+      "file": "assets/fonts/TheNautigal-Regular.ttf",
+      "bytes": 161852,
+      "sha256": "00e79428e3715ee28f9919be8c3bb4f468197b99ae419ae750b19f3a379b4222"
+    },
+    {
+      "file": "assets/glass_garden_green.webp",
+      "bytes": 55108,
+      "sha256": "a83df1e30647de4841d15fdec7014758bc931512fe1d156e782721281d52348d"
+    },
+    {
+      "file": "assets/jasmine_white.webp",
+      "bytes": 4900,
+      "sha256": "6c5408315fd62f8aa413860c8a7738cec8c56aa2621a32b7a4235facfa79cfc2"
+    },
+    {
+      "file": "assets/minimalism_brown.webp",
+      "bytes": 4336,
+      "sha256": "cb9fbba25f80eb3da720972527b202642086944a12a48f2a87cdb9c06df274e5"
+    },
+    {
+      "file": "assets/spring_garden_blue.webp",
+      "bytes": 4068,
+      "sha256": "40cd2b069b4acbd99d5eb9598ae4bfe355002beb82454e2735516e7350c14ccc"
+    },
+    {
+      "file": "assets/spring_garden_green.webp",
+      "bytes": 3694,
+      "sha256": "844ed055b2671691bcf4b5f4838324abdc48878eadedbb9a9d6338c166e4434a"
+    }
+  ],
+  "sourceReferencedMissingAsset": {
+    "file": "/images/green-garden/leaf1-bloom.webp",
+    "result": "HTTP 404 in the approved source page asset inventory; intentionally not substituted."
+  },
+  "integrationStatus": "published-through-0095_publish_green_garden.sql; configured-catalog-and-authenticated-integration-verified"
+}

@@ -1,0 +1,32 @@
+﻿@font-face{font-family:"Cormorant Garamond";src:url("/templates/green-garden/assets/fonts/CormorantGaramond-Regular.ttf") format("truetype");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"Fz Qellia";src:url("/templates/green-garden/assets/fonts/Qellia.otf") format("opentype");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"The Nautigal";src:url("/templates/green-garden/assets/fonts/TheNautigal-Regular.ttf") format("truetype");font-weight:400;font-style:normal;font-display:swap}
+html,body{margin:0;min-height:100%;background:#eef3e8;font-family:"Cormorant Garamond",serif}
+[data-gg-root]{isolation:isolate;overflow-x:clip}
+[data-gg-root] img{max-width:100%}
+[data-gg-language-picker]{position:fixed;z-index:120;top:12px;right:12px;display:flex;gap:4px;padding:5px;border:1px solid rgba(71,97,62,.36);border-radius:999px;background:rgba(255,255,255,.84);backdrop-filter:blur(10px)}
+[data-gg-language-picker] button{border:0;border-radius:999px;background:transparent;color:#35452f;padding:6px 8px;font:600 12px/1 "Cormorant Garamond",serif;cursor:pointer}
+[data-gg-language-picker] button[aria-pressed=true]{background:#47613e;color:white}
+[data-gg-root] [data-gg-status]{min-height:1.4em;margin-top:8px;font-size:14px;text-align:center}
+[data-gg-root] [data-gg-rsvp-choice][aria-pressed=true]{background:#47613e!important;color:white!important}
+[data-gg-root] [data-gg-gallery-item][hidden],[data-gg-program-item][hidden]{display:none!important}
+[data-gg-root] [data-gg-gallery-item]{cursor:pointer}
+[data-gg-root] [data-gg-gallery-item].gg-gallery-empty{display:grid;place-items:center;background-image:radial-gradient(circle at 50% 42%,rgba(255,255,255,.85),rgba(236,243,230,.78));border:1px solid rgba(71,97,62,.22)}
+[data-gg-root] [data-gg-gallery-item].gg-gallery-empty::before{content:"❦";color:rgba(71,97,62,.52);font:48px/1 "Cormorant Garamond",serif}
+[data-gg-root] .gg-selected-day{border-radius:50%;background:#47613e;color:#fff!important;font-weight:700}
+[data-gg-root] .gg-gift-details{max-width:320px;margin:14px auto 0;padding:14px;border:1px solid rgba(71,97,62,.28);border-radius:14px;background:rgba(255,255,255,.68);text-align:center;overflow-wrap:anywhere}
+[data-gg-root] [data-gg-gift-details][hidden]{display:none!important}
+[data-gg-root] .gg-map-link{display:inline-flex;margin-top:12px;padding:8px 18px;border:1px solid rgba(71,97,62,.45);border-radius:999px;color:#35452f;text-decoration:none}
+[data-gg-root] .gg-music-toggle{position:fixed;z-index:120;right:14px;bottom:14px;width:46px;height:46px;border:1px solid rgba(71,97,62,.25);border-radius:50%;background:rgba(255,255,255,.85);color:#47613e;font-size:20px;cursor:pointer;backdrop-filter:blur(8px)}
+[data-gg-root] .gg-reveal{opacity:0;transform:translateY(18px);transition:opacity .75s ease,transform .75s ease}
+[data-gg-root] .gg-reveal.gg-visible{opacity:1;transform:none}
+[data-gg-root] .gg-reveal.gg-cover{transition-duration:1s}
+[data-gg-root].gg-reduced-motion .gg-reveal,[data-gg-root].gg-reduced-motion *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+[data-gg-root].gg-reduced-motion .gg-reveal{opacity:1!important;transform:none!important}
+@media(max-width:420px){[data-gg-root] [data-gg-gallery-item]{min-width:0}}
+
+[data-gg-root] [hidden]{display:none!important}
+.gg-lightbox{position:fixed;inset:0;max-width:min(92vw,900px);max-height:92vh;padding:48px 16px 16px;border:0;border-radius:18px;background:rgba(20,24,19,.96);color:white}
+.gg-lightbox::backdrop{background:rgba(12,18,12,.78)}
+.gg-lightbox img{display:block;max-width:100%;max-height:78vh;margin:auto;object-fit:contain}
+.gg-lightbox [data-gg-lightbox-close]{position:absolute;top:8px;right:12px;border:0;background:transparent;color:white;font-size:32px;cursor:pointer}

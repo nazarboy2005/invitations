@@ -800,6 +800,8 @@ test("every published template preserves every editor field across four-language
 });
 test("HTTP save → publish → public render → reopen and allowed edits preserves URL and locks", async () => {
   const invitation = completeInvitation();
+  if (process.env.PUBLISHING_TEMPLATE_ID)
+    invitation.templateId = process.env.PUBLISHING_TEMPLATE_ID;
   invitation.slug = "spoof1";
   let response = await request("/api/invitations", { invitation });
   assert.equal(response.status, 201);
