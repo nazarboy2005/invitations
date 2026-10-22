@@ -10,8 +10,3 @@ export function AccountLinkLabel({ signedIn }: { signedIn: boolean }) {
   return signedIn || miniApp ? "Taklifnomalarim" : "Kirish";
 }
 
-declare global {
-  interface Window {
-    Telegram?: { WebApp?: { initData?: string } };
-  }
-}

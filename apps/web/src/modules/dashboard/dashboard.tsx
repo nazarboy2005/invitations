@@ -42,11 +42,6 @@ type DeviceSession = {
   expiresAt: string;
   current: boolean;
 };
-declare global {
-  interface Window {
-    Telegram?: { WebApp?: { initData?: string; ready?: () => void; expand?: () => void } };
-  }
-}
 function deviceName(userAgent: string) {
   const browser = /Edg\//.test(userAgent)
     ? "Edge"
