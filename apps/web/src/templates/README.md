@@ -82,3 +82,11 @@ Invitate templates have a dedicated renderer module under
 `apps/web/public/templates/<id>`. Their adapters use the shared invitation
 contract and renderer in creator preview and public display. See
 `docs/templates/INVITATE_ROADMAP.md` for the separate Invitate sequence.
+
+
+To verify reduced-motion behavior in the Marxaba preview without changing the
+browser or operating-system preference, add `qaReducedMotion=1`. The preview
+passes this flag into the source runtime before its template scripts initialize
+and applies the same motion suppression used by the captured templates' reduced
+motion styles. The flag is only propagated from the preview route, never to a
+public invitation.

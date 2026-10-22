@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
 import { existsSync, readFileSync } from "node:fs";
 import test from "node:test";
 import { templateById } from "@taklifnoma/contracts";
@@ -187,6 +188,7 @@ test("registered Marxaba designs reflect their release state and additive migrat
     "nahorgi-osh",
     "hilol",
     "bitiruv",
+    "bulbul",
     "kozgu",
     "qandil",
     "vals",
@@ -346,12 +348,12 @@ test("registered Marxaba designs reflect their release state and additive migrat
     );
   assert.ok(existsSync(new URL("toscana/art/aisle.webp", templatesRoot)));
   assert.ok(existsSync(new URL("muhr/preview.webp", templatesRoot)));
-  assert.ok(existsSync(new URL("bulbul/preview.png", templatesRoot)));
+  assert.ok(existsSync(new URL("bulbul/preview-browser-capture.jpg", templatesRoot)));
   assert.ok(existsSync(new URL("kozgu/preview.webp", templatesRoot)));
   assert.ok(existsSync(new URL("doira/preview.png", templatesRoot)));
   assert.ok(existsSync(new URL("qandil/preview.webp", templatesRoot)));
-  assert.ok(existsSync(new URL("parda/preview.webp", templatesRoot)));
-  assert.ok(existsSync(new URL("ganch/preview.webp", templatesRoot)));
+  assert.ok(existsSync(new URL("parda/preview-browser-capture.jpg", templatesRoot)));
+  assert.ok(existsSync(new URL("ganch/preview-browser-capture.jpg", templatesRoot)));
   assert.ok(existsSync(new URL("qatlam/preview.webp", templatesRoot)));
   assert.ok(existsSync(new URL("lola/preview.webp", templatesRoot)));
   assert.ok(existsSync(new URL("qiz-bazmi/preview.webp", templatesRoot)));
@@ -367,12 +369,24 @@ test("registered Marxaba designs reflect their release state and additive migrat
   assert.ok(existsSync(new URL("hilol/preview.webp", templatesRoot)));
   assert.equal(
     templateById("yangi-uy")?.previewImage,
-    "/templates/yangi-uy/preview.webp",
+    "/templates/yangi-uy/preview-browser-capture.jpg",
   );
-  assert.ok(existsSync(new URL("yangi-uy/preview.webp", templatesRoot)));
+  assert.ok(existsSync(new URL("yangi-uy/preview-browser-capture.jpg", templatesRoot)));
   assert.equal(
     templateById("nahorgi-osh")?.previewImage,
     "/templates/nahorgi-osh/preview.webp",
   );
+  const fixtureBytes = readFileSync(new URL("../apps/web/src/modules/catalog/preview-sample.json", import.meta.url));
+  for (const id of ["bulbul", "parda", "ganch", "yangi-uy"]) {
+    const definition = templateById(id);
+    const image = readFileSync(new URL(`${id}/preview-browser-capture.jpg`, templatesRoot));
+    const provenance = JSON.parse(readFileSync(new URL(`${id}/preview.provenance.json`, templatesRoot), "utf8"));
+    assert.equal(definition?.previewImage, `/templates/${id}/preview-browser-capture.jpg`);
+    assert.equal(definition?.published, id === "bulbul", `${id} reflects its current release state`);
+    assert.equal(provenance.status, "verified");
+    assert.equal(provenance.route, `/preview?template=${id}&qaSilent=1`);
+    assert.equal(provenance.fixtureSha256, createHash("sha256").update(fixtureBytes).digest("hex"));
+    assert.equal(provenance.sha256, createHash("sha256").update(image).digest("hex"));
+  }
   assert.match(jubileeMigration, /'yubiley'/);
 });

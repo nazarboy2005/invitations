@@ -22,6 +22,7 @@ export default async function PreviewPage({
     demo?: string | string[];
     qaSilent?: string | string[];
     qaLongNames?: string | string[];
+    qaReducedMotion?: string | string[];
   }>;
 }) {
   const params = await searchParams;
@@ -36,6 +37,9 @@ export default async function PreviewPage({
   const qaLongNamesParam = Array.isArray(params.qaLongNames)
     ? params.qaLongNames[0]
     : params.qaLongNames;
+  const qaReducedMotionParam = Array.isArray(params.qaReducedMotion)
+    ? params.qaReducedMotion[0]
+    : params.qaReducedMotion;
   const template = templateId ? templateById(templateId) : undefined;
 
   if (template) {
@@ -49,6 +53,7 @@ export default async function PreviewPage({
         demo={demoParam === "1"}
         silentPlayback={qaSilentParam === "1"}
         longNames={qaLongNamesParam === "1"}
+        qaReducedMotion={qaReducedMotionParam === "1"}
       />
     );
   }

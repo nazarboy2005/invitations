@@ -31,6 +31,7 @@ export function FullTemplatePreview({
   demo = false,
   silentPlayback = false,
   longNames = false,
+  qaReducedMotion = false,
 }: {
   template: TemplateDefinition;
   canSelect: boolean;
@@ -39,6 +40,7 @@ export function FullTemplatePreview({
   demo?: boolean;
   silentPlayback?: boolean;
   longNames?: boolean;
+  qaReducedMotion?: boolean;
 }) {
   const [invitation, setInvitation] = useState<Invitation | null>(null);
   const [catalogPreview, setCatalogPreview] = useState(true);
@@ -213,6 +215,7 @@ export function FullTemplatePreview({
           catalogMusic={catalogPreview}
           silentPlayback={silentPlayback}
           sampleWishes={catalogPreview}
+          qaReducedMotion={qaReducedMotion}
         />
       ) : (
         <div className={styles.unsupported}>

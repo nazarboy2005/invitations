@@ -7,6 +7,6 @@ window.TEMPLATE_META = {
   eventTypes: ["nikoh", "toy", "fotiha", "qiz uzatish"],
   palette: ["#FBF5EC", "#EFCFCD", "#C19A57", "#2A7F7B", "#4A2F23"],
   music: "gentle Uzbek instrumental at dawn: rubab or dutor with soft strings and distant birdsong",
-  preview: "preview.png"
+  preview: "preview-browser-capture.jpg"
 };
 

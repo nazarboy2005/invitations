@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
 import { readFileSync, readdirSync, statSync } from "node:fs";
 import path from "node:path";
 import test from "node:test";
@@ -40,7 +41,7 @@ test("Bulbul preserves the captured page body, source scripts, styles, metadata,
   const packageMeta = read(packageRoot, "meta.js");
   assert.equal(
     packageMeta
-      .replace('preview: "preview.png"', 'preview: "preview.webp"')
+      .replace('preview: "preview-browser-capture.jpg"', 'preview: "preview.webp"')
       .replace(/\r\n/g, "\n")
       .trimEnd(),
     sourceMeta.replace(/\r\n/g, "\n").trimEnd(),
@@ -91,6 +92,36 @@ test("Bulbul exposes the captured sections and contract hooks", () => {
   assert.ok(!extractBody(packagedHtml).includes('data-slot="program.note"'));
 });
 
+test("Bulbul declares keyboard-capable button semantics for its interactive controls", () => {
+  const html = readFileSync(
+    new URL("../apps/web/public/templates/bulbul/index.html", import.meta.url),
+    "utf8",
+  );
+  const buttons = Array.from(html.matchAll(/<button\b[^>]*>/gi), ([tag]) => tag);
+  assert.ok(buttons.length >= 16, "captured interactive controls remain buttons");
+  for (const button of buttons)
+    assert.match(button, /\btype=["'](?:button|submit)["']/i);
+
+  for (const selector of [
+    /id=["']open-invitation["']/i,
+    /data-gallery-prev/i,
+    /data-gallery-next/i,
+    /class=["']gallery__item["']/i,
+    /data-rsvp-minus/i,
+    /data-rsvp-plus/i,
+    /data-music-toggle/i,
+  ]) {
+    const button = buttons.find((tag) => selector.test(tag));
+    assert.ok(button, `control ${selector} remains a button`);
+    assert.match(button, /aria-label=["'][^"']+[^"']/i);
+  }
+  assert.doesNotMatch(
+    html,
+    /<(?:div|span)\b[^>]*(?:onclick=|role=["']button["'])/i,
+    "custom clickable containers do not replace native controls",
+  );
+});
+
 test("Bulbul uses local source fonts and its actual portrait opening artwork", () => {
   const fontCss = read(packageRoot, "fonts.css");
   assert.match(fontCss, /font-family: 'Cormorant Garamond'/);
@@ -102,20 +133,18 @@ test("Bulbul uses local source fonts and its actual portrait opening artwork", (
       `missing ${match[1]}`,
     );
   }
-  const image = readFileSync(path.join(packageRoot, "preview.png"));
-  const capturedOpening = readFileSync(
-    path.join(packageRoot, "preview-350.png"),
-  );
-  assert.deepEqual(
-    image,
-    capturedOpening,
-    "catalog artwork must show the captured closed-cage opening",
-  );
-  assert.equal(image.toString("hex", 0, 8), "89504e470d0a1a0a");
-  assert.equal(image.readUInt32BE(16), 430);
-  assert.equal(image.readUInt32BE(20), 932);
-  assert.match(packagedHtml, /og:image" content="preview\.png"/);
-  assert.match(read(packageRoot, "meta.js"), /preview: "preview\.png"/);
+  const image = readFileSync(path.join(packageRoot, "preview-browser-capture.jpg"));
+  const provenance = JSON.parse(read(packageRoot, "preview.provenance.json"));
+  const fixture = readFileSync(path.join(projectRoot, "apps/web/src/modules/catalog/preview-sample.json"));
+  assert.equal(image.subarray(0, 2).toString("hex"), "ffd8");
+  assert.equal(provenance.status, "verified");
+  assert.equal(provenance.width, 478);
+  assert.equal(provenance.height, 668);
+  assert.equal(provenance.route, "/preview?template=bulbul&qaSilent=1");
+  assert.equal(provenance.fixtureSha256, createHash("sha256").update(fixture).digest("hex"));
+  assert.equal(provenance.sha256, createHash("sha256").update(image).digest("hex"));
+  assert.match(packagedHtml, /og:image" content="preview-browser-capture\.jpg"/);
+  assert.match(read(packageRoot, "meta.js"), /preview: "preview-browser-capture\.jpg"/);
 });
 
 test("Bulbul keeps the lightbox close control clear of the shared language picker", () => {

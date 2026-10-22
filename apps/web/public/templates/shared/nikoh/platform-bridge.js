@@ -1,6 +1,10 @@
 (() => {
   "use strict";
 
+  if (new URLSearchParams(location.search).get("qaReducedMotion") === "1") {
+    window.Marhamat = { ...(window.Marhamat || {}), reducedMotion: true };
+  }
+
   // Keep the reference typography at its authored size whenever it fits. Some
   // name lockups are a single flex row, though, and longer real names can be
   // clipped by their source container. Only those overflowing lockups receive

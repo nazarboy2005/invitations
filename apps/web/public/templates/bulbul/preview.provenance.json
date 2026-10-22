@@ -1,0 +1,15 @@
+{
+  "status": "verified",
+  "file": "preview-browser-capture.jpg",
+  "sha256": "88f2c63bc4101fa01cb2713ffaade4ffdc01a0fcbc419f8d48599a5e04d2719f",
+  "format": "JPEG",
+  "width": 478,
+  "height": 668,
+  "route": "/preview?template=bulbul&qaSilent=1",
+  "fixture": "apps/web/src/modules/catalog/preview-sample.json",
+  "fixtureSha256": "a88ccb99419b87f60e86f7470366f8badaa912db74ab67ad1f757aeeaf6d29c2",
+  "captureMethod": "ChatGPT in-app browser, production build",
+  "capturedAt": "2026-10-22",
+  "sourceTemplate": "Invitations - this folder will be removed from production/Marxaba/Nikoh/templates/bulbul",
+  "scope": "first viewport of canonical localized opening; production preview with QA audio silenced"
+}

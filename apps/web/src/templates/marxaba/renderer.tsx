@@ -19,6 +19,7 @@ type Props = {
   catalogMusic?: boolean;
   sampleWishes?: boolean;
   silentPlayback?: boolean;
+  qaReducedMotion?: boolean;
 };
 
 const sourceLocale: Record<Locale, string> = {
@@ -39,6 +40,7 @@ export function MarxabaInvitation({
   fullPreview = false,
   catalogMusic = false,
   silentPlayback = false,
+  qaReducedMotion = false,
   sampleWishes = false,
 }: Props) {
   const frame = useRef<HTMLIFrameElement>(null);
@@ -138,7 +140,7 @@ export function MarxabaInvitation({
   ]);
   const latestMessage = useRef(message);
   latestMessage.current = message;
-  const frameUrl = `/templates/${encodeURIComponent(templateId)}/index.html?lang=${sourceLocale[frameLocale]}`;
+  const frameUrl = `/templates/${encodeURIComponent(templateId)}/index.html?lang=${sourceLocale[frameLocale]}${preview && qaReducedMotion ? "&qaReducedMotion=1" : ""}`;
   const currentStructure = JSON.stringify({
     frameUrl,
     start: invitation.startsAt,
