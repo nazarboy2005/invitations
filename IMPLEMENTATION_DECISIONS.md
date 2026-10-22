@@ -15,6 +15,10 @@
 - User requirement: template tasks may apply the required additive migrations to the configured database and publish templates through the existing catalog mechanism once their release gates pass. An external/live database is not itself a blocker. Inspect current state, apply only required migrations, verify catalog publication, and commit the publication locally.
 - External application deployment and live payment activation remain outside this authorization.
 
+## Continuing template releases (2026-10-22)
+
+- User request: proceed to each next source-backed template in the roadmap in sequence, continue through the remaining inventory, fix issues found, and publish completed templates so users can select them. Apply the established per-template source, contract, verification, migration, and local commit rules. Pause only for a concrete blocker that cannot be resolved in the project.
+
 Recorded on 2026-10-19 from the user's explicit approval. These are product requirements for future implementation, not implemented features.
 
 ## Maintaining this record
@@ -45,7 +49,7 @@ Confirmed requirements:
 - In the creator’s template picker, show only category filters that contain at least one published template compatible with the selected event type. “Barchasi” counts and displays the complete compatible template set.
 - User requirement (2026-10-21): make template selection the first creator step. Keep event type selection in that first step so the available templates and category filters can be constrained immediately. Follow with invitation details, date/location/program, and photos/options.
 - Current correction: remove every provisional/dummy template from the application. The Suzani and Ivory Love starter designs are not approved final templates and must not appear as selectable, previewable, or public invitation designs. The user's later instruction to complete every remaining source-backed Marxaba design explicitly includes Shirin Bayram; that authentic captured design supersedes the earlier exclusion of the starter entry with the same name. Keep it unpublished until its individual release gates pass.
-- Use the exact designs in the existing local `Invitations - this folder will be removed from production` reference collection later. Leave those captures untouched; do not convert another one until the user explicitly resumes template integration.
+- Use exact designs from the existing local `Invitations - this folder will be removed from production` reference collection. Leave captures untouched. Template integration has resumed under the user's 2026-10-22 request to continue sequentially through the remaining designs.
 - Do not show dummy designs. Template-selection lists contain only real published designs. A full preview uses the real renderer.
 - User request (2026-10-20): show the ready Anor design on the homepage and public catalog so people can inspect it. This was initially preview-only. User later explicitly requested that Anor have the same creation action as published templates; that supersedes the preview-only restriction for Anor. Publish it at its existing catalog price and keep other unpublished templates out of selection.
 - User correction (2026-10-21): label catalog preview actions “Ko‘rish” and creation actions “Yaratish”. Place them in one row, with the creation button using a 1.5fr column and Ko‘rish using 1fr.
