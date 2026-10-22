@@ -650,7 +650,7 @@ test("template migrations publish completed designs while keeping unfinished des
   );
   assert.equal(
     assignments.rows.filter((row) => row.category_id === "wedding").length,
-    31,
+    32,
   );
 });
 test("template event compatibility is constrained and independently assignable", async () => {

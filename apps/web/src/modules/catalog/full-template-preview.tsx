@@ -10,6 +10,7 @@ import {
 } from "@taklifnoma/contracts";
 import { AnorInvitation } from "@/templates/anor";
 import { isMarxabaTemplate, MarxabaInvitation } from "@/templates/marxaba";
+import { isInvitateTemplate, InvitateInvitation } from "@/templates/invitate";
 import { readBrowserDraft } from "@/modules/studio/draft-storage";
 import {
   createTemplatePreviewSample,
@@ -189,6 +190,17 @@ export function FullTemplatePreview({
           fullPreview
           catalogMusic={catalogPreview}
           sampleWishes={catalogPreview}
+        />
+      ) : isInvitateTemplate(template.id) ? (
+        <InvitateInvitation
+          invitation={invitation}
+          invitationId={invitation.id}
+          locale={invitation.defaultLocale}
+          preview
+          fullPreview
+          catalogMusic={catalogPreview}
+          sampleWishes={catalogPreview}
+          silentPlayback={silentPlayback}
         />
       ) : isMarxabaTemplate(template.id) ? (
         <MarxabaInvitation

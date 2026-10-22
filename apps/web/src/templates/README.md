@@ -1,10 +1,10 @@
 # Invitation templates
 
-This directory contains 32 template renderer folders at different stages of
+This directory contains 34 template renderer folders at different stages of
 integration and review. Static assets and captured source packages are also
 stored under `apps/web/public/templates`; their presence does not make a design
 available in the catalog. Without `DATABASE_URL`, the local typed fallback
-catalog currently exposes 35 published templates. A configured database can
+catalog currently exposes 37 published templates. A configured database can
 have a different catalog state. Check the typed catalog and applied migrations
 for current publication status, and see `docs/templates/TEMPLATE_ROADMAP.md`
 for template-by-template integration and release notes. External deployment
@@ -76,3 +76,9 @@ preview-only and is never sent to public invitation rendering.
 For ephemeral responsive-name stress checks on an empty preview, add
 `qaLongNames=1` to the preview URL. It replaces only the centralized fixture
 names, never authored creator content or saved invitations.
+
+Invitate templates have a dedicated renderer module under
+`apps/web/src/templates/invitate` and isolated public source packages under
+`apps/web/public/templates/<id>`. Their adapters use the shared invitation
+contract and renderer in creator preview and public display. See
+`docs/templates/INVITATE_ROADMAP.md` for the separate Invitate sequence.

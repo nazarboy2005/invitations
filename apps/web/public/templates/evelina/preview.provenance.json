@@ -1,0 +1,12 @@
+{
+  "captureDate": "2026-10-22",
+  "viewport": {
+    "width": 480,
+    "height": 900
+  },
+  "route": "/preview?template=evelina&qaSilent=1",
+  "fixture": "apps/web/src/modules/catalog/preview-sample.json",
+  "screenshotSha256": "20d0ff9db0d2e14b9c05989c3f0de43be8d556c02c4e13f566e1574aa588be5f",
+  "previewSha256": "bb36ff0bc59c3593ca96ccc3e68c37fd60030a6ed1e4cbb5a99d33a5ab4c3d8e",
+  "sourceArtwork": "apps/web/public/templates/evelina/assets/images/hero.png"
+}

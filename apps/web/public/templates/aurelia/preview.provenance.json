@@ -1,0 +1,13 @@
+{
+  "captureDate": "2026-10-22",
+  "viewport": {
+    "width": 480,
+    "height": 900
+  },
+  "route": "/templates/aurelia/capture.html",
+  "fixture": "apps/web/src/modules/catalog/preview-sample.json",
+  "captureMethod": "Headless Edge screenshot of the packaged source page with preview fixture names injected through window.name; preloader and opening-only animation timing disabled for a stable capture.",
+  "screenshotSha256": "bbb99ccdc7e3cab0278fa3c492fd2004807b0409891c1961ee30d71e60332c18",
+  "previewSha256": "bbb99ccdc7e3cab0278fa3c492fd2004807b0409891c1961ee30d71e60332c18",
+  "sourceArtwork": "apps/web/public/templates/aurelia/assets/previews/template/aurelia/hands.mp4"
+}

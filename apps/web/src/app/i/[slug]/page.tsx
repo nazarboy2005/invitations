@@ -4,6 +4,7 @@ import { getPublishedInvitation } from "@/server/invitations";
 import { resolveGuest } from "@/server/public";
 import { AnorInvitation } from "@/templates/anor";
 import { isMarxabaTemplate, MarxabaInvitation } from "@/templates/marxaba";
+import { isInvitateTemplate, InvitateInvitation } from "@/templates/invitate";
 import { InvitationViewTracker } from "@/modules/catalog/invitation-view-tracker";
 export const dynamic = "force-dynamic";
 export const metadata = {
@@ -60,6 +61,19 @@ export default async function InvitationPage({
           invitationId={result.id}
           locale={locale}
           templateId={invitation.templateId}
+          guestName={guestName}
+          guestToken={query.g}
+        />
+      </>
+    );
+  if (isInvitateTemplate(invitation.templateId))
+    return (
+      <>
+        <InvitationViewTracker invitationId={result.id} />
+        <InvitateInvitation
+          invitation={invitation}
+          invitationId={result.id}
+          locale={locale}
           guestName={guestName}
           guestToken={query.g}
         />
