@@ -1,0 +1,806 @@
+@font-face {
+  font-family: "Trajan Pro Bold";
+  src: url("../fonts/TrajanPro-Bold.otf")
+    format("opentype");
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Trajan Pro Regular";
+  src: url("../fonts/TrajanPro-Regular.ttf")
+    format("opentype");
+  font-weight: 400;
+  font-display: swap;
+}
+
+:root {
+  --gold: #000;
+  --gold-soft: #333;
+  --ink: #1a1a1a;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  background: #000;
+}
+
+.device {
+  width: 100%;
+  max-width: 480px;
+  background: #000;
+  overflow: hidden;
+  position: relative;
+}
+
+/* ================= HERO ================= */
+.hero {
+  position: relative;
+  z-index: 6;
+  width: 100%;
+  height: 100vh;
+  overflow: visible;
+  background: #000;
+}
+
+.hero-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+  /* REPLACE with your own video */
+}
+
+/* ---- cloud decoration: top ---- */
+.cloud-top {
+  position: absolute;
+  top: -450px;
+  left: -10%;
+  width: 250%;
+  transform: translateY(-10%);
+  z-index: 3;
+  pointer-events: none;
+  animation: cloudSwayTop 16s ease-in-out infinite;
+}
+
+.cloud-top img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+@keyframes cloudSwayTop {
+  0%,
+  100% {
+    transform: translateY(-10%) translateX(0);
+  }
+
+  25% {
+    transform: translateY(-10%) translateX(30px);
+  }
+
+  75% {
+    transform: translateY(-10%) translateX(-30px);
+  }
+}
+
+/* ---- cloud decoration: bottom, bleeds down into section 2 ---- */
+.cloud-bottom {
+  position: absolute;
+  bottom: 0;
+  left: -10%;
+  width: 150%;
+  transform: translateY(45%);
+  z-index: 3;
+  pointer-events: none;
+  animation: cloudSwayBottom 20s ease-in-out infinite;
+}
+
+.cloud-bottom img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+@keyframes cloudSwayBottom {
+  0%,
+  100% {
+    transform: translateY(45%) translateX(0);
+  }
+
+  30% {
+    transform: translateY(45%) translateX(-30px);
+  }
+
+  70% {
+    transform: translateY(45%) translateX(30px);
+  }
+}
+
+.hero-content {
+  position: relative;
+  z-index: 4;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0 10px;
+  justify-content: space-around;
+}
+
+.hero-name {
+  font-family: "Trajan Pro Bold", "Playfair Display", Georgia, serif;
+  font-weight: 700;
+  font-size: 48px;
+  color: var(--gold);
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  animation: nameIn 2.2s ease-out forwards;
+}
+
+.hero-name.n1 {
+  animation-delay: 0.8s;
+}
+
+.hero-name.n2 {
+  animation-delay: 2.2s;
+}
+
+.hero-amp {
+  font-family: "Trajan Pro Regular", Georgia, serif;
+  font-weight: 400;
+  font-style: italic;
+  font-size: 56px;
+  letter-spacing: 0.3em;
+  color: var(--gold-soft);
+  opacity: 0;
+  animation: nameIn 2.2s ease-out forwards;
+  animation-delay: 1.5s;
+}
+
+.hero-scroll {
+  font-family: "Trajan Pro Regular", Georgia, serif;
+  font-size: 12px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold-soft);
+  opacity: 0;
+  animation: nameIn 2s ease-out forwards;
+  animation-delay: 2.8s;
+}
+
+@keyframes nameIn {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.96);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ================= SECTION 2: WELCOME ================= */
+.welcome {
+  position: relative;
+  z-index: 5;
+  background: #fff;
+  padding: 190px 16px 80px;
+  text-align: center;
+  overflow: visible;
+}
+
+.welcome-title {
+  font-family: "Trajan Pro Bold", "Playfair Display", Georgia, serif;
+  font-weight: 700;
+  font-size: 30px;
+  letter-spacing: 0.06em;
+  color: var(--gold);
+  text-transform: uppercase;
+}
+
+.welcome-text {
+  margin-top: 16px;
+  font-family: Georgia, "Cormorant Garamond", serif;
+  font-style: italic;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #000;
+}
+
+.welcome-rule {
+  display: block;
+  width: 120px;
+  height: 1px;
+  background: var(--gold);
+  opacity: 0.6;
+  margin: 16px auto;
+}
+
+.welcome-names {
+  font-family: "Trajan Pro Bold", "Playfair Display", Georgia, serif;
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: 0.1em;
+  color: var(--gold);
+}
+
+.welcome-amp {
+  font-family: "Trajan Pro Regular", Georgia, serif;
+  font-style: italic;
+  font-size: 15px;
+  letter-spacing: 0.3em;
+  color: var(--gold-soft);
+  display: block;
+  margin: 8px 0;
+}
+
+/* ---- welcome's own bottom cloud, bleeding into section 3 ---- */
+.welcome-cloud-bottom {
+  position: absolute;
+  bottom: -56px;
+  left: -10%;
+  width: 125%;
+  transform: translateY(45%);
+  z-index: 10;
+  pointer-events: none;
+  animation: cloudSwayBottom 20s ease-in-out infinite;
+}
+
+.welcome-cloud-bottom img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ================= SECTION 3: RESTORAN / VENUE ================= */
+.venue {
+  position: relative;
+  z-index: 4;
+  background: #fff;
+  color: var(--ink);
+  padding: 180px 10px 40px;
+  text-align: center;
+}
+
+.venue-title {
+  font-family: "Trajan Pro Bold", "Playfair Display", Georgia, serif;
+  font-weight: 700;
+  font-size: 32px;
+  letter-spacing: 0.06em;
+  color: var(--ink);
+  margin-top: 10px;
+}
+
+.venue-name {
+  margin-top: 24px;
+  font-family: Georgia, "Cormorant Garamond", serif;
+  font-weight: 700;
+  font-size: 19px;
+  color: var(--gold);
+}
+
+.venue-adress {
+  margin-top: 10px;
+  font-family: Georgia, "Cormorant Garamond", serif;
+  font-style: italic;
+  font-size: 19px;
+  color: var(--gold);
+}
+
+.venue-row {
+  margin-top: 36px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  text-align: left;
+}
+
+.venue-date {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  width: 40%;
+}
+
+.venue-date span {
+  font-family: "Trajan Pro Bold", "Playfair Display", Georgia, serif;
+  font-weight: 700;
+  font-size: 72px;
+  line-height: 1;
+  color: var(--gold);
+}
+
+.venue-date .dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--gold);
+}
+
+.venue-photo {
+  flex: 1;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.venue-photo img {
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+  display: block;
+}
+
+.venue-map-btn {
+  display: inline-block;
+  margin-top: 34px;
+  font-family: "Trajan Pro Regular", Georgia, serif;
+  font-size: 14px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #fff;
+  text-decoration: none;
+  background: #000;
+  padding: 16px 24px;
+  border-radius: 32px;
+}
+
+/* ================= SECTION 4: TIMING ================= */
+.timing {
+  position: relative;
+  z-index: 3;
+  background: #fff;
+  padding: 30px 28px 270px;
+  text-align: center;
+  overflow: visible;
+}
+
+.timing-title {
+  font-family: "Trajan Pro Bold", "Playfair Display", Georgia, serif;
+  font-weight: 700;
+  font-size: 40px;
+  letter-spacing: 0.1em;
+  color: var(--gold);
+  text-transform: uppercase;
+}
+
+.timing-list {
+  margin-top: 34px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  text-align: left;
+}
+
+.timing-row {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+}
+
+.timing-row strong {
+  font-family: "Trajan Pro Bold", "Playfair Display", Georgia, serif;
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--gold);
+  min-width: 78px;
+}
+
+.timing-row span {
+  font-family: Georgia, "Cormorant Garamond", serif;
+  font-style: italic;
+  font-size: 20px;
+  color: var(--gold);
+}
+
+.timing-cloud-bottom {
+  position: absolute;
+  bottom: 0;
+  left: -10%;
+  width: 190%;
+  transform: translateY(45%);
+  z-index: 10;
+  pointer-events: none;
+  animation: cloudSwayBottom 20s ease-in-out infinite;
+}
+
+.timing-cloud-bottom img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.photo-block {
+  position: relative;
+  z-index: 2;
+  background: #fff;
+  padding: 0;
+  margin-top: 80px;
+}
+
+.photo-block img {
+  width: 100%;
+  height: 720px;
+  object-fit: cover;
+  display: block;
+}
+
+/* ================= SECTION 5: COUNTDOWN ================= */
+.countdown {
+  position: relative;
+  z-index: 2;
+  background: #fff;
+  color: var(--ink);
+  padding: 60px 24px 60px;
+  text-align: center;
+}
+
+.countdown-title {
+  font-family: "Trajan Pro Bold", "Playfair Display", Georgia, serif;
+  font-weight: 700;
+  font-size: 26px;
+  text-transform: uppercase;
+}
+
+.countdown-grid {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.countdown-grid div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  min-width: 80px;
+}
+
+.countdown-grid strong {
+  font-family: "Trajan Pro Bold", "Playfair Display", Georgia, serif;
+  font-weight: 700;
+  font-size: 26px;
+  border: 1px solid var(--gold);
+  border-radius: 4px;
+  padding: 16px 8px;
+  width: 100%;
+  text-align: center;
+}
+
+.countdown-grid span {
+  font-size: 14px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  opacity: 0.85;
+}
+
+/* ================= SECTION 6: TASDIQLASH / RSVP ================= */
+.rsvp {
+  position: relative;
+  z-index: 1;
+  background: #000;
+  padding: 60px 26px 60px;
+  text-align: center;
+}
+
+.rsvp-title {
+  font-family: "Trajan Pro Bold", "Playfair Display", Georgia, serif;
+  font-weight: 700;
+  font-size: 30px;
+  letter-spacing: 0.08em;
+  color: #fff;
+  text-transform: uppercase;
+}
+
+.rsvp-form {
+  margin-top: 30px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.rsvp-field label {
+  display: block;
+  font-family: "Trajan Pro Regular", Georgia, serif;
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #fff;
+  margin-bottom: 16px;
+}
+
+.rsvp-field input[type="text"],
+.rsvp-field textarea {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid #fff;
+  background: transparent;
+  padding: 8px 2px;
+  font-family: Georgia, "Cormorant Garamond", serif;
+  font-size: 15px;
+  color: #fff;
+  outline: none;
+}
+
+.rsvp-field textarea {
+  resize: none;
+  min-height: 60px;
+  border: 1px solid #fff;
+  border-radius: 6px;
+  padding: 10px;
+}
+
+.rsvp-radios {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.rsvp-radio {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: Georgia, "Cormorant Garamond", serif;
+  font-size: 15px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.rsvp-radio input {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--gold);
+}
+
+.rsvp-submit {
+  width: 100%;
+  min-height: 52px;
+  background: #fff;
+  color: #000;
+  border: none;
+  border-radius: 4px;
+  font-family: "Trajan Pro Regular", Georgia, serif;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.rsvp-error {
+  display: none;
+  font-size: 14px;
+  font-style: italic;
+  color: #d97b6c;
+}
+
+#rsvpSent {
+  display: none;
+  margin-top: 24px;
+  text-align: center;
+}
+
+#rsvpSent h3 {
+  font-family: "Trajan Pro Bold", Georgia, serif;
+  font-size: 20px;
+  color: var(--gold);
+}
+
+#rsvpSent p {
+  margin-top: 8px;
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.rsvp-again {
+  margin-top: 14px;
+  background: none;
+  border: none;
+  text-decoration: underline;
+  color: var(--gold-soft);
+  font-family: Georgia, serif;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* ================= FOOTER ================= */
+.site-footer {
+  background: #000;
+  text-align: center;
+  padding: 20px 10px 20px;
+}
+
+.footer-icons {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+.footer-icons a {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.footer-icons svg {
+  width: 18px;
+  height: 18px;
+  stroke: #fff;
+  fill: none;
+  stroke-width: 1.6;
+}
+
+.footer-rights {
+  margin-top: 22px;
+  font-family: "Trajan Pro Regular", Georgia, serif;
+  font-size: 10px;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+/* ================= PRELOADER ================= */
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    opacity 1s ease,
+    visibility 1s ease;
+}
+
+.preloader.hide {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.preloader-heart {
+  width: 70px;
+  height: 70px;
+  overflow: visible;
+}
+
+.preloader-heart .heart-fill {
+  fill: #fff;
+  transform-origin: center;
+  animation: heartPulse 1s ease-in-out infinite;
+}
+
+.preloader-heart .heart-outline {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.6);
+  stroke-width: 1.1;
+}
+
+@keyframes heartPulse {
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: scale(0.88);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.08);
+    filter: drop-shadow(0 0 14px rgba(255, 255, 255, 0.8));
+  }
+}
+
+/* ================= MUSIC BUTTON ================= */
+.music-btn {
+  position: fixed;
+  right: max(16px, calc(50% - 240px + 16px));
+  bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  z-index: 900;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid #fff;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.music-icon-note {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: #fff;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.music-bars {
+  display: none;
+  align-items: flex-end;
+  gap: 3px;
+  height: 18px;
+}
+
+.music-bars i {
+  width: 3px;
+  height: 100%;
+  background: #fff;
+  border-radius: 2px;
+  transform-origin: bottom;
+  animation: musicBar 1s ease-in-out infinite;
+}
+
+.music-bars i:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.music-bars i:nth-child(3) {
+  animation-delay: 0.4s;
+}
+.music-bars i:nth-child(4) {
+  animation-delay: 0.6s;
+}
+
+@keyframes musicBar {
+  0%,
+  100% {
+    transform: scaleY(0.3);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+
+.music-btn.playing .music-icon-note {
+  display: none;
+}
+.music-btn.playing .music-bars {
+  display: flex;
+}
+
+/* App-bound controls keep Aurelia's reference palette and spacing. */
+[hidden]{display:none!important}
+.rsvp-question{display:block;font-family:"Trajan Pro Regular",Georgia,serif;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#fff;margin-bottom:8px}
+.invitate-languages{position:fixed;top:calc(env(safe-area-inset-top,0px) + 12px);right:12px;z-index:2147483000;display:flex;gap:2px;padding:3px;border:1px solid rgba(164,130,69,.25);border-radius:999px;background:rgba(255,255,255,.8);box-shadow:0 4px 18px rgba(0,0,0,.12);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);font:600 11px/1 Arial,sans-serif;letter-spacing:.05em}
+.invitate-languages button{min-width:34px;min-height:30px;padding:0 9px;border:0;border-radius:999px;background:transparent;color:#4a3b21;font:inherit;cursor:pointer}
+.invitate-languages button.is-active{background:#a48245;color:#fff}
+.invitate-languages button:focus-visible{outline:2px solid #a48245;outline-offset:2px}
+.venue-address{margin:10px auto 0;max-width:90%;color:#555;font:14px/1.6 Georgia,serif}
+@media(prefers-reduced-motion:reduce){.hero-video{display:none!important}.preloader-heart,.cloud-top img,.cloud-bottom img,.welcome-cloud-bottom img,.timing-cloud-bottom img{animation:none!important;transition:none!important}}
+
+/* Template-matched optional To‘yona card details. */
+.aurelia-toyona{padding:54px 24px 48px;background:#fff;text-align:center;color:#111}
+.aurelia-toyona .toyona-title{font:16px/1.7 "Trajan Pro Regular",Georgia,serif;letter-spacing:.2em;text-transform:uppercase}
+.aurelia-toyona .welcome-rule{display:block;margin:18px auto 20px}
+.aurelia-toyona .toyona-holder{margin:0 0 14px;font:italic 18px/1.5 Georgia,serif}
+.aurelia-toyona .toyona-copy{display:flex;flex-direction:column;align-items:center;gap:8px;margin:0 auto;padding:14px 22px;border:1px solid var(--gold,#a48245);background:#fff;color:#111;font:18px/1.5 Georgia,serif;cursor:pointer}
+.aurelia-toyona .toyona-copy span:last-child{color:#806b46;font:10px/1.4 "Trajan Pro Regular",Georgia,serif;letter-spacing:.14em;text-transform:uppercase}
+.aurelia-toyona .toyona-copy:focus-visible{outline:2px solid var(--gold,#a48245);outline-offset:3px}
+.aurelia-toyona .toyona-status{display:block;min-height:1.5em;margin-top:8px;color:#555;font:13px Georgia,serif}

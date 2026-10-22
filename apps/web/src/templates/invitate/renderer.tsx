@@ -39,7 +39,7 @@ export function InvitateInvitation({
   silentPlayback = false,
 }: Props) {
   const frame = useRef<HTMLIFrameElement>(null);
-  const initialized = useRef(false);
+  const initialized = useRef<string | null>(null);
   const [frameLocale, setFrameLocale] = useState(locale);
   useEffect(() => setFrameLocale(locale), [locale]);
 
@@ -76,15 +76,15 @@ export function InvitateInvitation({
   ]);
   const latest = useRef(message);
   latest.current = message;
-  const frameUrl = `/templates/evelina/index.html?lang=${sourceLocale[frameLocale]}`;
-  const initialFrameUrl = useRef(frameUrl);
+  const templateId = invitation.templateId;
+  const frameUrl = `/templates/${templateId}/index.html?lang=${sourceLocale[locale]}`;
 
   useEffect(() => {
     const onMessage = (event: MessageEvent) => {
       if (
         event.origin !== window.location.origin ||
         event.source !== frame.current?.contentWindow ||
-        event.data?.type !== "evelina:language"
+        event.data?.type !== `${templateId}:language`
       ) return;
       const next = invitation.enabledLocales.find(
         (enabled) => sourceLocale[enabled] === event.data.locale,
@@ -93,33 +93,34 @@ export function InvitateInvitation({
     };
     window.addEventListener("message", onMessage);
     return () => window.removeEventListener("message", onMessage);
-  }, [invitation.enabledLocales]);
+  }, [invitation.enabledLocales, templateId]);
 
   useEffect(() => {
     const target = frame.current?.contentWindow;
     if (!target) return;
-    target.postMessage({ type: "evelina:update", payload: latest.current }, window.location.origin);
-  }, [message]);
+    target.postMessage({ type: `${templateId}:update`, payload: latest.current }, window.location.origin);
+  }, [message, templateId]);
 
   const classes = fullPreview ? styles.full : preview ? styles.preview : styles.public;
   return (
     <div className={classes}>
       <iframe
+        key={templateId}
         ref={frame}
         title={`${message.groom} & ${message.bride} invitation`}
-        src={initialFrameUrl.current}
+        src={frameUrl}
         onLoad={() => {
           const target = frame.current?.contentWindow;
           if (!target) return;
-          if (!initialized.current) {
+          if (initialized.current !== templateId) {
             target.name = JSON.stringify(latest.current);
             target.location.replace(frameUrl);
-            initialized.current = true;
+            initialized.current = templateId;
           } else {
-            target.postMessage({ type: "evelina:update", payload: latest.current }, window.location.origin);
+            target.postMessage({ type: `${templateId}:update`, payload: latest.current }, window.location.origin);
           }
         }}
-        allow="autoplay; fullscreen"
+        allow="autoplay; fullscreen; clipboard-write"
         loading="eager"
       />
     </div>

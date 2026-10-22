@@ -755,3 +755,11 @@ footer p {
 .soc { flex-direction:column; align-items:center; gap:10px; }
 .soc a { width:auto; height:auto; border:0; border-radius:0; display:inline; text-decoration:underline; }
 .host-names { margin-top:18px; font-family:"Bikham",serif; font-size:30px; color:var(--gold); }
+
+/* Template-matched optional To‘yona card details. */
+.evelina-toyona .toyona-holder{margin:0 0 12px;color:#9d7c4e;font:italic 20px/1.5 standart,Georgia,serif}
+.evelina-toyona .toyona-copy{display:flex;flex-direction:column;align-items:center;gap:8px;margin:0 auto;padding:14px 22px;border:1px solid #b08b59;border-radius:2px;background:rgba(255,255,255,.38);color:#987545;font:18px/1.5 Georgia,serif;cursor:pointer}
+.evelina-toyona .toyona-copy span:first-child{font-size:20px;letter-spacing:.08em}
+.evelina-toyona .toyona-copy span:last-child{font:12px/1.4 Georgia,serif;letter-spacing:.12em;text-transform:uppercase}
+.evelina-toyona .toyona-copy:focus-visible{outline:2px solid #987545;outline-offset:3px}
+.evelina-toyona .toyona-status{display:block;min-height:1.5em;margin-top:8px;color:#806541;font:14px Georgia,serif}

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="uz">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Taklifnoma</title>
+
+
+
+</head>
+<link rel="stylesheet" href="./assets/css/aurelia.css">
+
+<body>
+    <div class="preloader" id="preloader">
+        <svg class="preloader-heart" viewBox="0 0 32 29" xmlns="http://www.w3.org/2000/svg">
+            <path class="heart-outline"
+                d="M16 27.5C16 27.5 2 19.2 2 9.6C2 5.4 5.2 2 9.1 2C11.9 2 14.3 3.7 16 6.2C17.7 3.7 20.1 2 22.9 2C26.8 2 30 5.4 30 9.6C30 19.2 16 27.5 16 27.5Z" />
+            <path class="heart-fill"
+                d="M16 27.5C16 27.5 2 19.2 2 9.6C2 5.4 5.2 2 9.1 2C11.9 2 14.3 3.7 16 6.2C17.7 3.7 20.1 2 22.9 2C26.8 2 30 5.4 30 9.6C30 19.2 16 27.5 16 27.5Z" />
+        </svg>
+    </div>
+    <div class="device">
+
+        <!-- ============ HERO ============ -->
+        <section class="hero">
+            <video class="hero-video" src="./assets/previews/template/aurelia/hands.mp4" autoplay muted loop
+                playsinline></video>
+
+            <div class="cloud-top">
+                <img src="./assets/previews/template/aurelia/top.svg" alt="">
+            </div>
+
+            <div class="cloud-bottom">
+                <img src="./assets/previews/template/aurelia/top.svg" alt="">
+            </div>
+
+            <div class="hero-content">
+                <div>
+                    <div class="hero-name n1" data-field="groom"></div>
+                    <div class="hero-amp">&amp;</div>
+                    <div class="hero-name n2" data-field="bride"></div>
+                </div>
+                <div class="hero-scroll" data-copy="scroll"></div>
+            </div>
+        </section>
+        <!-- ============ /HERO ============ -->
+
+        <!-- ============ SECTION 2: WELCOME ============ -->
+        <section class="welcome">
+            <div class="welcome-title" data-field="greeting"></div>
+            <p class="welcome-text" data-field="message"></p>
+            <span class="welcome-rule"></span>
+            <div class="welcome-names" data-field="couple"></div>
+
+            <div class="welcome-cloud-bottom">
+                <img src="./assets/previews/template/aurelia/center.svg" alt="">
+            </div>
+        </section>
+        <!-- ============ /SECTION 2 ============ -->
+
+        <!-- ============ SECTION 3: RESTORAN / VENUE ============ -->
+        <section class="venue">
+            <div class="venue-name" data-copy="venueLabel"></div>
+            <div class="venue-title" data-field="venueName"></div>
+
+            <p class="venue-address" id="venueAddress" data-field="venueAddress"></p>
+            <div class="venue-row">
+                <div class="venue-date">
+                    <span data-field="day"></span>
+                    <span class="dot"></span>
+                    <span data-field="month"></span>
+                    <span class="dot"></span>
+                    <span data-field="year"></span>
+                </div>
+                <div class="venue-photo">
+                    <img data-field="venuePhoto" alt="" loading="lazy" decoding="async">
+                </div>
+            </div>
+
+            <a class="venue-map-btn" id="venueMap" target="_blank" rel="noopener" data-copy="map" hidden></a>
+        </section>
+        <!-- ============ /SECTION 3 ============ -->
+
+        <!-- ============ SECTION 4: TIMING ============ -->
+        <section class="timing">
+            <div class="timing-title" data-field="programHeading"></div>
+            <span class="welcome-rule"></span>
+            <div class="timing-list" id="timingList"></div>
+
+            <div class="timing-cloud-bottom">
+                <img src="./assets/previews/template/aurelia/top.svg" alt="">
+            </div>
+        </section>
+        <!-- ============ /SECTION 4 ============ -->
+
+        <!-- ============ PHOTO BLOCK ============ -->
+        <section class="photo-block">
+            <img data-field="galleryPhoto" alt="" loading="lazy" decoding="async">
+        </section>
+        <!-- ============ /PHOTO BLOCK ============ -->
+
+
+        <!-- ============ SECTION 5: COUNTDOWN ============ -->
+        <section class="countdown">
+            <div class="countdown-title" data-copy="countdown"></div>
+            <div class="countdown-grid">
+                <div><strong id="cd-days">00</strong><span data-copy="days"></span></div>
+                <div><strong id="cd-hours">00</strong><span data-copy="hours"></span></div>
+                <div><strong id="cd-mins">00</strong><span data-copy="minutes"></span></div>
+                <div><strong id="cd-secs">00</strong><span data-copy="seconds"></span></div>
+            </div>
+        </section>
+        <!-- ============ /SECTION 5 ============ -->
+
+        <section class="aurelia-toyona" id="toyonaSection" hidden>
+            <div class="toyona-title" data-copy="toyonaTitle"></div>
+            <span class="welcome-rule"></span>
+            <div class="toyona-holder" id="toyonaHolder"></div>
+            <button class="toyona-copy" id="toyonaCopy" type="button"><span id="toyonaNumber"></span><span id="toyonaCopyLabel" data-copy="copyCard"></span></button>
+            <span class="toyona-status" id="toyonaStatus" role="status" aria-live="polite"></span>
+        </section>
+
+        <!-- ============ SECTION 6: TASDIQLASH / RSVP ============ -->
+        <section class="rsvp">
+            <div class="rsvp-title" data-copy="rsvp"></div>
+
+            <form class="rsvp-form" id="rsvpForm">
+                <div class="rsvp-field">
+                    <label for="rsvpName" data-copy="nameLabel"></label>
+                    <input id="rsvpName" type="text" placeholder="" data-copy-placeholder="name" autocomplete="name">
+                </div>
+
+                <div>
+                    <label class="rsvp-question" data-copy="question"></label>
+                    <div class="rsvp-radios">
+                        <label class="rsvp-radio"><input type="radio" name="attendance" value="yes" id="rsvpYes"><span data-copy="yes"></span></label>
+                        <label class="rsvp-radio"><input type="radio" name="attendance" value="no" id="rsvpNo"><span data-copy="no"></span></label>
+                    </div>
+                </div>
+
+                <div class="rsvp-field">
+                    <label for="rsvpWish" data-copy="wishLabel"></label>
+                    <textarea id="rsvpWish" placeholder="" data-copy-placeholder="wish"></textarea>
+                </div>
+
+                <p class="rsvp-error" id="rsvpError" data-copy="error"></p>
+
+                <button type="button" class="rsvp-submit" id="rsvpSubmit" data-copy="send"></button>
+            </form>
+
+            <div id="rsvpSent">
+                <h3><span data-copy="thanks"></span> <span id="rsvpGuestName"></span>!</h3>
+                <p id="rsvpMsgYes" style="display:none" data-copy="thanksYes"></p>
+                <p id="rsvpMsgNo" style="display:none" data-copy="thanksNo"></p>
+                <button type="button" class="rsvp-again" id="rsvpReset" data-copy="editResponse"></button>
+            </div>
+        </section>
+        <!-- ============ /SECTION 6 ============ -->
+
+        <!-- ============ FOOTER ============ -->
+        <footer class="site-footer">
+            <div class="footer-icons">
+                <a data-contact="telegram" target="_blank" rel="noopener" aria-label="Telegram" hidden>
+                    <svg viewBox="0 0 24 24">
+                        <path d="m21 3-4 18-6-6-4 3v-6L3 9l18-6Z" />
+                    </svg>
+                </a>
+                <a data-contact="website" aria-label="Veb-sayt" hidden>
+                    <svg viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="10" />
+                        <path d="M2 12h20M12 2a15 15 0 010 20 15 15 0 010-20" />
+                    </svg>
+                </a>
+                <a data-contact="instagram" aria-label="Instagram" hidden>
+                    <svg viewBox="0 0 24 24">
+                        <rect x="3" y="3" width="18" height="18" rx="5" />
+                        <circle cx="12" cy="12" r="4" />
+                        <circle cx="17.5" cy="6.5" r=".8" fill="var(--gold)" stroke="none" />
+                    </svg>
+                </a>
+                <a data-contact="phone" aria-label="Aloqa" hidden>
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                    </svg>
+                </a>
+            </div>
+            <div class="footer-rights"><span data-copy="rights"></span></div>
+        </footer>
+        <!-- ============ /FOOTER ============ -->
+
+    </div>
+    <script src="./assets/js/aurelia-adapter.js"></script>
+    <script src="./assets/js/aurelia.js"></script>
+</body>
+
+</html>

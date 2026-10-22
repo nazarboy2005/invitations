@@ -361,6 +361,19 @@ export type TemplateDefinition = {
 };
 export const TEMPLATES: TemplateDefinition[] = [
   {
+    id: "aurelia",
+    name: "Aurelia",
+    description: "Tillarang bezaklar va nafis bulutlar orasidagi to‘y taklifnomasi.",
+    previewImage: "/templates/aurelia/preview.png",
+    previewEventType: "wedding",
+    categoryIds: ["wedding"],
+    supportedEventTypes: ["wedding"],
+    priceMinor: 15000000,
+    currency: "UZS",
+    accent: "#b99a65",
+    published: true,
+  },
+  {
     id: "evelina",
     name: "Evelina",
     description: "Nozik gul naqshlari, shaffof kristallar va romantik oqshom.",

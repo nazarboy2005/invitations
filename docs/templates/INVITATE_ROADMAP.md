@@ -8,7 +8,7 @@ and use additive migrations for registration and publication.
 
 | Catalog order among captured designs | Template | State |
 |---:|---|---|
-| 1 | Aurelia | Next; captured source and assets exist locally. |
+| 1 | Aurelia | Published at 150,000 UZS; wedding compatibility confirmed; both captured default photos remain replaceable by creator uploads. |
 | 2 | Swan | Captured source and assets exist locally. |
 | 3 | Whiteless | Captured source and assets exist locally. |
 | 4 | Velvet | Captured source and assets exist locally. |
