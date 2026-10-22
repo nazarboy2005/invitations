@@ -1,25 +1,15 @@
 {
-  "status": "unverified",
-  "packagedFile": "preview.webp",
-  "sourceMetadataReference": "preview.webp",
-  "sourceFilePresent": false,
-  "dimensions": {
-    "width": 480,
-    "height": 853
-  },
-  "sha256": "d9873e54c170edb61f67274408d732f9f645aadee41e469577e05e10afae1e9b",
-  "remoteDeclaredAsset": {
-    "url": "https://www.marxaba.uz/templates/parda/preview.webp",
-    "retrievedAt": "2026-10-21",
-    "sha256": "f30879816bb88309d12ec23fa8d645b356a179800e58055c3b754cb1e18eabf6",
-    "dimensions": {
-      "width": 720,
-      "height": 1280
-    },
-    "sampleNames": ["Javohir", "Madina"],
-    "sampleDate": "2026-11-14",
-    "sampleTime": "18:00",
-    "matchesCanonicalFixture": false
-  },
-  "note": "The captured meta.js names preview.webp, but the untouched Parda source folder does not contain that file. The official remote asset was retrieved and its checksum verified; it is a genuine source preview with matching Javohir/Madina names, but it shows 2026-11-14 at 18:00 while the canonical fixture is 2027-06-12 at 17:00. The packaged image remains unchanged and the catalog-art blocker stays open until the opening is captured with canonical fixture data."
+  "status": "verified",
+  "file": "preview-browser-capture.jpg",
+  "sha256": "d268cada5a95e09c9b398ec7390c2907c82223202e863dfe60d5e1b60eb4362a",
+  "format": "JPEG",
+  "width": 478,
+  "height": 668,
+  "route": "/preview?template=parda&qaSilent=1",
+  "fixture": "apps/web/src/modules/catalog/preview-sample.json",
+  "fixtureSha256": "a88ccb99419b87f60e86f7470366f8badaa912db74ab67ad1f757aeeaf6d29c2",
+  "captureMethod": "ChatGPT in-app browser, production build",
+  "capturedAt": "2026-10-22",
+  "sourceTemplate": "Invitations - this folder will be removed from production/Marxaba/Nikoh/templates/parda",
+  "scope": "first viewport of canonical localized opening; production preview with QA audio silenced"
 }

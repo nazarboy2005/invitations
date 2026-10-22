@@ -40,7 +40,7 @@ test("Parda retains the complete captured source and embroidered artwork", () =>
     const appSource = readFileSync(new URL(file, templateRoot), "utf8").replace(
       /\r\n/g,
       "\n",
-    );
+    ).replace("preview-browser-capture.jpg", "preview.webp");
     assert.equal(
       file === "template.css"
         ? appSource
@@ -113,57 +113,22 @@ test("Parda uses local runtime dependencies and bundled fonts only", () => {
   assert.match(fonts, /font-family:\s*'Cormorant Garamond'/);
   assert.match(fonts, /font-family:\s*'Great Vibes'/);
   assert.ok(existsSync(new URL("art/suzani.webp", templateRoot)));
-  const preview = readFileSync(new URL("preview.webp", templateRoot));
-  assert.equal(preview.toString("ascii", 0, 4), "RIFF");
-  assert.equal(preview.toString("ascii", 8, 12), "WEBP");
-  const width = 1 + preview[21] + ((preview[22] & 0x3f) << 8);
-  const height =
-    1 +
-    ((preview[22] >> 6) | (preview[23] << 2) | ((preview[24] & 0x0f) << 10));
-  assert.deepEqual(
-    [width, height],
-    [480, 853],
-    "the existing Parda opening candidate is portrait-shaped",
-  );
+  const preview = readFileSync(new URL("preview-browser-capture.jpg", templateRoot));
+  assert.equal(preview.subarray(0, 2).toString("hex"), "ffd8");
+  const dimensions = preview.indexOf(Buffer.from([0xff, 0xc0]));
+  assert.ok(dimensions > 0);
+  assert.deepEqual([preview.readUInt16BE(dimensions + 7), preview.readUInt16BE(dimensions + 5)], [478, 668]);
+  assert.match(readFileSync(new URL("meta.js", templateRoot), "utf8"), /preview-browser-capture\.jpg/);
 });
 
-test("Parda preview provenance is explicit and remains a release blocker", () => {
-  const provenance = JSON.parse(
-    readFileSync(new URL("preview.provenance.json", templateRoot), "utf8"),
-  );
-  const preview = readFileSync(new URL("preview.webp", templateRoot));
-  const sourceMeta = readFileSync(new URL("meta.js", captureRoot), "utf8");
-  const sourcePreview = new URL("preview.webp", captureRoot);
-  const adaptations = readFileSync(
-    new URL("SOURCE_ADAPTATIONS.md", templateRoot),
-    "utf8",
-  );
-  assert.match(sourceMeta, /preview:\s*["']preview\.webp["']/);
-  assert.equal(existsSync(sourcePreview), false);
-  assert.equal(provenance.status, "unverified");
-  assert.equal(provenance.sourceFilePresent, false);
-  assert.equal(provenance.sourceMetadataReference, "preview.webp");
-  assert.equal(
-    provenance.remoteDeclaredAsset.url,
-    "https://www.marxaba.uz/templates/parda/preview.webp",
-  );
-  assert.equal(
-    provenance.remoteDeclaredAsset.sha256,
-    "f30879816bb88309d12ec23fa8d645b356a179800e58055c3b754cb1e18eabf6",
-  );
-  assert.deepEqual(provenance.remoteDeclaredAsset.dimensions, {
-    width: 720,
-    height: 1280,
-  });
-  assert.equal(provenance.remoteDeclaredAsset.matchesCanonicalFixture, false);
-  assert.equal(provenance.remoteDeclaredAsset.sampleTime, "18:00");
-  assert.equal(
-    provenance.sha256,
-    createHash("sha256").update(preview).digest("hex"),
-  );
-  assert.match(adaptations, /no verifiable capture record/);
-  assert.match(adaptations, /2026-11-14 at 18:00/);
-  assert.match(adaptations, /catalog-art release blocker/);
+test("Parda preview provenance verifies the production fixture capture", () => {
+  const provenance = JSON.parse(readFileSync(new URL("preview.provenance.json", templateRoot), "utf8"));
+  const preview = readFileSync(new URL("preview-browser-capture.jpg", templateRoot));
+  const fixture = readFileSync(new URL("../apps/web/src/modules/catalog/preview-sample.json", import.meta.url));
+  assert.equal(provenance.status, "verified");
+  assert.equal(provenance.route, "/preview?template=parda&qaSilent=1");
+  assert.equal(provenance.fixtureSha256, createHash("sha256").update(fixture).digest("hex"));
+  assert.equal(provenance.sha256, createHash("sha256").update(preview).digest("hex"));
 });
 
 test("Parda leaves unsupported To‘yona bank and note values empty", () => {

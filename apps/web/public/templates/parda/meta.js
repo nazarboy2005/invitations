@@ -6,5 +6,5 @@ window.TEMPLATE_META = {
   eventTypes: ["nikoh", "toy", "fotiha", "qiz uzatish"],
   palette: ["#f3e6cb", "#a5262a", "#2c3c63", "#d4a03a", "#567642"],
   music: "Dutor, sokin marosimiy kuy",
-  preview: "preview.webp"
+  preview: "preview-browser-capture.jpg"
 };
