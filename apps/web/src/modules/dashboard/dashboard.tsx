@@ -15,6 +15,7 @@ import {
   Heart,
   LoaderCircle,
   Clock3,
+  Eye,
   Plus,
   Send,
   ShieldCheck,
@@ -38,7 +39,10 @@ import { formatDate } from "@/templates/date-format";
 import { InvitationThumbnail } from "./invitation-thumbnail";
 import { useRouter } from "next/navigation";
 import { PublishedLink } from "@/components/published-link";
-type DashboardInvitation = Invitation & { createdAt?: string };
+type DashboardInvitation = Invitation & {
+  createdAt?: string;
+  viewCount?: number;
+};
 let dashboardSnapshot: {
   session: SessionResponse;
   invitations: DashboardInvitation[];
@@ -51,6 +55,7 @@ function InvitationCard({
   onUnpublish,
   busy = false,
   onOpenActivity,
+  viewCount,
 }: {
   invitation: Invitation;
   local?: boolean;
@@ -59,6 +64,7 @@ function InvitationCard({
   onUnpublish?: () => void;
   busy?: boolean;
   onOpenActivity?: () => void;
+  viewCount?: number;
 }) {
   const content = getContent(invitation);
   const template = templateById(invitation.templateId);
@@ -80,14 +86,25 @@ function InvitationCard({
       data-clickable={!!onOpenActivity}
       role={onOpenActivity ? "link" : undefined}
       tabIndex={onOpenActivity ? 0 : undefined}
-      aria-label={onOpenActivity ? `${names}: javoblar, tilaklar va cheklar` : undefined}
+      aria-label={
+        onOpenActivity ? `${names}: javoblar, tilaklar va cheklar` : undefined
+      }
       onClick={(event) => {
         if (!onOpenActivity) return;
-        if ((event.target as HTMLElement).closest("a,button,input,select,textarea")) return;
+        if (
+          (event.target as HTMLElement).closest(
+            "a,button,input,select,textarea",
+          )
+        )
+          return;
         onOpenActivity();
       }}
       onKeyDown={(event) => {
-        if (onOpenActivity && event.currentTarget === event.target && event.key === "Enter") {
+        if (
+          onOpenActivity &&
+          event.currentTarget === event.target &&
+          event.key === "Enter"
+        ) {
           event.preventDefault();
           onOpenActivity();
         }
@@ -96,7 +113,11 @@ function InvitationCard({
       <Link
         href={onOpenActivity ? activityUrl : editUrl}
         className={styles.cardArt}
-        aria-label={onOpenActivity ? `${names}: javoblar, tilaklar va cheklar` : `${names}: taklifnomani tahrirlash`}
+        aria-label={
+          onOpenActivity
+            ? `${names}: javoblar, tilaklar va cheklar`
+            : `${names}: taklifnomani tahrirlash`
+        }
       >
         {template ? (
           <InvitationThumbnail invitation={invitation} />
@@ -146,22 +167,32 @@ function InvitationCard({
           <CalendarDays size={14} />
           {date}
         </p>
+        {invitation.status === "published" && viewCount !== undefined && (
+          <p
+            className={styles.cardViews}
+            aria-label={`Ko‘rishlar: ${viewCount}`}
+          >
+            <Eye size={14} />
+            {new Intl.NumberFormat("uz-UZ").format(viewCount)} ko‘rish
+          </p>
+        )}
         {invitation.status === "published" && invitation.slug && (
           <div onClick={(event) => event.stopPropagation()}>
             <PublishedLink slug={invitation.slug} compact />
           </div>
         )}
         {accountSaved && invitation.status === "published" && (
-          <Link
-            className={styles.activityLink}
-            href={activityUrl}
-          >
+          <Link className={styles.activityLink} href={activityUrl}>
             Javoblar, tilaklar va cheklar →
           </Link>
         )}
         <div className={styles.cardActions}>
           {invitation.status === "published" && onUnpublish && (
-            <button className={styles.secondaryAction} onClick={onUnpublish} disabled={busy}>
+            <button
+              className={styles.secondaryAction}
+              onClick={onUnpublish}
+              disabled={busy}
+            >
               <EyeOff size={14} /> Nashrdan olish
             </button>
           )}
@@ -177,8 +208,12 @@ function InvitationCard({
 
 export function Dashboard() {
   const router = useRouter();
-  const [session, setSession] = useState<SessionResponse | null>(dashboardSnapshot?.session ?? null);
-  const [invitations, setInvitations] = useState<DashboardInvitation[]>(dashboardSnapshot?.invitations ?? []);
+  const [session, setSession] = useState<SessionResponse | null>(
+    dashboardSnapshot?.session ?? null,
+  );
+  const [invitations, setInvitations] = useState<DashboardInvitation[]>(
+    dashboardSnapshot?.invitations ?? [],
+  );
   const [browserDrafts, setBrowserDrafts] = useState<BrowserDraft[]>([]);
   const [loading, setLoading] = useState(!dashboardSnapshot);
   const [error, setError] = useState("");
@@ -208,10 +243,13 @@ export function Dashboard() {
           { method: "DELETE" },
         );
         if (!response.ok)
-          throw new Error("Qoralamani o‘chirib bo‘lmadi. Qayta urinib ko‘ring.");
+          throw new Error(
+            "Qoralamani o‘chirib bo‘lmadi. Qayta urinib ko‘ring.",
+          );
         setInvitations((items) => {
           const next = items.filter((item) => item.id !== invitation.id);
-          if (dashboardSnapshot) dashboardSnapshot = { ...dashboardSnapshot, invitations: next };
+          if (dashboardSnapshot)
+            dashboardSnapshot = { ...dashboardSnapshot, invitations: next };
           return next;
         });
       }
@@ -220,7 +258,9 @@ export function Dashboard() {
         setBrowserDrafts(listBrowserDrafts(session?.user?.id ?? null));
       }
     } catch (cause) {
-      setActionError(cause instanceof Error ? cause.message : "Amal bajarilmadi.");
+      setActionError(
+        cause instanceof Error ? cause.message : "Amal bajarilmadi.",
+      );
     } finally {
       setActionBusy(null);
     }
@@ -245,19 +285,26 @@ export function Dashboard() {
         },
       );
       if (!response.ok)
-        throw new Error("Taklifnomani nashrdan olib bo‘lmadi. Qayta urinib ko‘ring.");
+        throw new Error(
+          "Taklifnomani nashrdan olib bo‘lmadi. Qayta urinib ko‘ring.",
+        );
       setInvitations((items) => {
         const next = items.map((item) =>
-          item.id === invitation.id ? { ...item, status: "archived" as const } : item,
+          item.id === invitation.id
+            ? { ...item, status: "archived" as const }
+            : item,
         );
-        if (dashboardSnapshot) dashboardSnapshot = { ...dashboardSnapshot, invitations: next };
+        if (dashboardSnapshot)
+          dashboardSnapshot = { ...dashboardSnapshot, invitations: next };
         return next;
       });
       setBrowserDrafts((items) =>
         items.filter((item) => item.invitation.id !== invitation.id),
       );
     } catch (cause) {
-      setActionError(cause instanceof Error ? cause.message : "Amal bajarilmadi.");
+      setActionError(
+        cause instanceof Error ? cause.message : "Amal bajarilmadi.",
+      );
     } finally {
       setActionBusy(null);
     }
@@ -267,19 +314,33 @@ export function Dashboard() {
     setLoginBusy(true);
     setLoginError("");
     try {
-      const response = await fetch("/api/auth/telegram/start", { method: "POST" });
+      const response = await fetch("/api/auth/telegram/start", {
+        method: "POST",
+      });
       const result = await response.json();
-      if (!response.ok || !result.loginUrl || !result.requestId) throw new Error();
-      const telegramWindow = window.open(result.loginUrl, "_blank", "noopener,noreferrer");
+      if (!response.ok || !result.loginUrl || !result.requestId)
+        throw new Error();
+      const telegramWindow = window.open(
+        result.loginUrl,
+        "_blank",
+        "noopener,noreferrer",
+      );
       if (!telegramWindow) window.location.assign(result.loginUrl);
       const deadline = Date.now() + 5 * 60_000;
       while (Date.now() < deadline) {
         await new Promise((resolve) => window.setTimeout(resolve, 2000));
-        const status = await fetch(`/api/auth/telegram/status?requestId=${encodeURIComponent(result.requestId)}`, { cache: "no-store" });
+        const status = await fetch(
+          `/api/auth/telegram/status?requestId=${encodeURIComponent(result.requestId)}`,
+          { cache: "no-store" },
+        );
         if (!status.ok) throw new Error();
         const state = await status.json();
         if (state.state === "confirmed") {
-          const complete = await fetch("/api/auth/telegram/complete", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ requestId: result.requestId }) });
+          const complete = await fetch("/api/auth/telegram/complete", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ requestId: result.requestId }),
+          });
           if (!complete.ok) throw new Error();
           window.location.reload();
           return;
@@ -288,7 +349,9 @@ export function Dashboard() {
       }
       throw new Error();
     } catch {
-      setLoginError("Telegram orqali kirish boshlanmadi yoki vaqt tugadi. Qayta urinib ko‘ring.");
+      setLoginError(
+        "Telegram orqali kirish boshlanmadi yoki vaqt tugadi. Qayta urinib ko‘ring.",
+      );
       setLoginBusy(false);
     }
   }
@@ -303,7 +366,10 @@ export function Dashboard() {
         let response = await fetch("/api/auth/session", {
           cache: "no-store",
         });
-        if (!response.ok) throw new Error("Hisobingizni tekshirib bo‘lmadi. Ulanishni tekshirib, qayta urinib ko‘ring.");
+        if (!response.ok)
+          throw new Error(
+            "Hisobingizni tekshirib bo‘lmadi. Ulanishni tekshirib, qayta urinib ko‘ring.",
+          );
         let result: SessionResponse = await response.json();
         const initData = window.Telegram?.WebApp?.initData;
         if (!result.user && initData) {
@@ -320,7 +386,9 @@ export function Dashboard() {
             if (!response.ok) throw new Error();
             result = await response.json();
           } else if (exchange.status !== 403) {
-            throw new Error("Telegram hisobingizni tekshirib bo‘lmadi. Mini App’ni qayta oching.");
+            throw new Error(
+              "Telegram hisobingizni tekshirib bo‘lmadi. Mini App’ni qayta oching.",
+            );
           }
         }
         if (!alive) return;
@@ -339,9 +407,12 @@ export function Dashboard() {
           const data = await list.json();
           if (alive) {
             const nextInvitations = (data.invitations ?? []).filter(
-                (item: unknown) => invitationSchema.safeParse(item).success,
-              ) as DashboardInvitation[];
-            dashboardSnapshot = { session: result, invitations: nextInvitations };
+              (item: unknown) => invitationSchema.safeParse(item).success,
+            ) as DashboardInvitation[];
+            dashboardSnapshot = {
+              session: result,
+              invitations: nextInvitations,
+            };
             setInvitations(nextInvitations);
           }
         } else {
@@ -380,6 +451,7 @@ export function Dashboard() {
         slug: invitation.slug,
       },
       local: localById.has(invitation.id),
+      viewCount: invitation.viewCount,
       createdAt:
         invitation.createdAt ?? localById.get(invitation.id)?.createdAt ?? "",
     })),
@@ -388,6 +460,7 @@ export function Dashboard() {
       .map((draft) => ({
         invitation: draft.invitation,
         local: true,
+        viewCount: undefined,
         createdAt: draft.createdAt || draft.savedAt,
       })),
   ]
@@ -442,7 +515,11 @@ export function Dashboard() {
             </div>
             <button onClick={startLogin} disabled={loginBusy}>
               {loginBusy ? "Telegramni kutyapmiz…" : "Telegram orqali kirish"}
-              {loginBusy ? <LoaderCircle size={16} /> : <ArrowRight size={16} />}
+              {loginBusy ? (
+                <LoaderCircle size={16} />
+              ) : (
+                <ArrowRight size={16} />
+              )}
             </button>
             {loginError && <p role="alert">{loginError}</p>}
           </div>
@@ -501,19 +578,21 @@ export function Dashboard() {
               </div>
             ) : (
               <div className={styles.cardGrid}>
-                {entries.map(({ invitation, local }) => (
+                {entries.map(({ invitation, local, viewCount }) => (
                   <InvitationCard
                     invitation={invitation}
                     local={local}
+                    viewCount={viewCount}
                     accountSaved={cloudIds.has(invitation.id)}
                     busy={actionBusy === invitation.id}
                     onDelete={
                       invitation.status === "draft"
-                        ? () => setDeleteTarget({
-                            invitation,
-                            local,
-                            accountSaved: cloudIds.has(invitation.id),
-                          })
+                        ? () =>
+                            setDeleteTarget({
+                              invitation,
+                              local,
+                              accountSaved: cloudIds.has(invitation.id),
+                            })
                         : undefined
                     }
                     onUnpublish={
@@ -523,8 +602,12 @@ export function Dashboard() {
                         : undefined
                     }
                     onOpenActivity={
-                      invitation.status === "published" && cloudIds.has(invitation.id)
-                        ? () => router.push(`/dashboard/${encodeURIComponent(invitation.id)}/activity`)
+                      invitation.status === "published" &&
+                      cloudIds.has(invitation.id)
+                        ? () =>
+                            router.push(
+                              `/dashboard/${encodeURIComponent(invitation.id)}/activity`,
+                            )
                         : undefined
                     }
                     key={invitation.id}
@@ -631,16 +714,32 @@ export function Dashboard() {
             aria-labelledby="delete-draft-title"
             aria-describedby="delete-draft-description"
           >
-            <button className={styles.dialogClose} aria-label="Yopish" onClick={() => setDeleteTarget(null)} disabled={!!actionBusy}>
+            <button
+              className={styles.dialogClose}
+              aria-label="Yopish"
+              onClick={() => setDeleteTarget(null)}
+              disabled={!!actionBusy}
+            >
               <X size={18} />
             </button>
-            <span className={styles.dialogIcon}><AlertTriangle size={23} /></span>
+            <span className={styles.dialogIcon}>
+              <AlertTriangle size={23} />
+            </span>
             <h2 id="delete-draft-title">Qoralamani o‘chirasizmi?</h2>
             <p id="delete-draft-description">
-              “{getContent(deleteTarget.invitation).people.filter(Boolean).join(" & ") || "Yangi taklifnoma"}” qoralamasi butunlay o‘chiriladi. Bu amalni qaytarib bo‘lmaydi.
+              “
+              {getContent(deleteTarget.invitation)
+                .people.filter(Boolean)
+                .join(" & ") || "Yangi taklifnoma"}
+              ” qoralamasi butunlay o‘chiriladi. Bu amalni qaytarib bo‘lmaydi.
             </p>
             <div className={styles.dialogActions}>
-              <button onClick={() => setDeleteTarget(null)} disabled={!!actionBusy}>Bekor qilish</button>
+              <button
+                onClick={() => setDeleteTarget(null)}
+                disabled={!!actionBusy}
+              >
+                Bekor qilish
+              </button>
               <button
                 className={styles.confirmDelete}
                 disabled={!!actionBusy}
@@ -648,10 +747,20 @@ export function Dashboard() {
                   const target = deleteTarget;
                   if (!target) return;
                   setDeleteTarget(null);
-                  void removeDraft(target.invitation, target.local, target.accountSaved);
+                  void removeDraft(
+                    target.invitation,
+                    target.local,
+                    target.accountSaved,
+                  );
                 }}
               >
-                {actionBusy === deleteTarget.invitation.id ? "O‘chirilmoqda…" : <><Trash2 size={16} /> O‘chirish</>}
+                {actionBusy === deleteTarget.invitation.id ? (
+                  "O‘chirilmoqda…"
+                ) : (
+                  <>
+                    <Trash2 size={16} /> O‘chirish
+                  </>
+                )}
               </button>
             </div>
           </section>

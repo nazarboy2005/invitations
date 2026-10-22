@@ -73,6 +73,15 @@ test("Shahzoda packages no captured sample loader or remote fonts", () => {
   assert.match(html, /data-dresscode/);
   assert.match(read(pkg, "locale-copy.js"), /Шахзода · Приглашение/);
   assert.match(read(pkg, "SOURCE_ADAPTATIONS.md"), /labels the field “Bola ismi”/);
+  assert.match(read(pkg, "index.html"), /href="contract-adapter\.css"/);
+  assert.match(
+    read(pkg, "contract-adapter.css"),
+    /\.plaque h1 \[data-slot="groom"\]\.platform-name-fit--single-wrap\s*\{\s*display:\s*block !important;[\s\S]*white-space:\s*normal !important;[\s\S]*overflow-wrap:\s*anywhere !important/,
+  );
+  assert.match(
+    read(pkg, "contract-adapter.css"),
+    /\.hero__name\[data-slot="groom"\]\.platform-name-fit--single-wrap\s*\{[\s\S]*white-space:\s*normal !important;[\s\S]*overflow-wrap:\s*anywhere !important/,
+  );
 });
 
 test("Shahzoda uses the shared single-honoree creator field for Sunnat", () => {

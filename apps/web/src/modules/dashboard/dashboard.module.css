@@ -106,8 +106,14 @@
   cursor: pointer;
   font: inherit;
 }
-.accountNotice > button:disabled { opacity: .65; cursor: wait; }
-.accountNotice > [role="alert"] { flex-basis: 100%; color: #9b3c30; }
+.accountNotice > button:disabled {
+  opacity: 0.65;
+  cursor: wait;
+}
+.accountNotice > [role="alert"] {
+  flex-basis: 100%;
+  color: #9b3c30;
+}
 .contentLayout {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 260px;
@@ -178,9 +184,17 @@
   min-width: 0;
   box-shadow: 0 4px 18px #6d572a06;
 }
-.invitationCard[data-clickable="true"] { cursor: pointer; }
-.invitationCard[data-clickable="true"]:hover { box-shadow: 0 8px 26px #6d572a12; border-color: var(--line-strong); }
-.invitationCard[data-clickable="true"]:focus-visible { outline: 2px solid var(--primary); outline-offset: 3px; }
+.invitationCard[data-clickable="true"] {
+  cursor: pointer;
+}
+.invitationCard[data-clickable="true"]:hover {
+  box-shadow: 0 8px 26px #6d572a12;
+  border-color: var(--line-strong);
+}
+.invitationCard[data-clickable="true"]:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 3px;
+}
 .cardArt {
   position: relative;
   min-height: 235px;
@@ -251,7 +265,7 @@
   outline-offset: 2px;
 }
 .draftDeleteIcon:disabled {
-  opacity: .55;
+  opacity: 0.55;
   cursor: wait;
 }
 .invitationName {
@@ -286,6 +300,18 @@
   margin: 0;
 }
 .cardDate svg {
+  flex-shrink: 0;
+}
+.cardViews {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: -3px 0 0;
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.5;
+}
+.cardViews svg {
   flex-shrink: 0;
 }
 .activityLink {
@@ -403,7 +429,7 @@
   cursor: pointer;
 }
 .cardActions > button:disabled {
-  opacity: .55;
+  opacity: 0.55;
   cursor: wait;
 }
 .cardActions > .dangerAction {
@@ -434,8 +460,14 @@
   animation: deleteDialogIn 150ms ease-out both;
 }
 @keyframes deleteDialogIn {
-  from { opacity: 0; transform: translateY(8px) scale(.98); }
-  to { opacity: 1; transform: translateY(0) scale(1); }
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 .dialogClose {
   position: absolute;
@@ -498,7 +530,11 @@
   background: #a65345;
   color: #fffdf8;
 }
-.dialogActions button:disabled, .dialogClose:disabled { opacity: .6; cursor: wait; }
+.dialogActions button:disabled,
+.dialogClose:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
 .guideIcon {
   display: inline-flex;
   border: 1px solid var(--line-strong);

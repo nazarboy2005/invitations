@@ -7,3 +7,9 @@ The captured Shahzoda HTML body, `template.css`, `template.js`, `meta.js`, and e
 Contract gaps: the source has an optional venue photo slot (`venue.photo`) unsupported by the current contract, a `toyona.bank` slot removed by user requirement, and a `toyona.note` slot without a contract field. These remain blank and are not populated. The creator treats `sunnat-toyi` as a single-celebrant event and labels the field “Bola ismi”; this matches the source's one-name celebrant slot. The package maps the first person to the source celebrant without changing the shared schema.
 
 The opening uses source artwork and the original animation. The captured script already respects `prefers-reduced-motion`. Fixed template copy relies on the shared Marxaba locale dictionary and Uzbek Cyrillic transliteration; page title and metadata are localized in `locale-copy.js`.
+
+`contract-adapter.css` adds an app-owned responsive correction to both the
+opening plaque and hero: long honoree names can wrap anywhere instead of
+clipping after a hyphen or overflowing the page. It applies only when the
+shared runtime detects an overflowing long name; ordinary names and the
+captured typography remain unchanged.

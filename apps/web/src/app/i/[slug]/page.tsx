@@ -4,6 +4,7 @@ import { getPublishedInvitation } from "@/server/invitations";
 import { resolveGuest } from "@/server/public";
 import { AnorInvitation } from "@/templates/anor";
 import { isMarxabaTemplate, MarxabaInvitation } from "@/templates/marxaba";
+import { InvitationViewTracker } from "@/modules/catalog/invitation-view-tracker";
 export const dynamic = "force-dynamic";
 export const metadata = {
   title: "Sizga taklifnoma",
@@ -39,24 +40,30 @@ export default async function InvitationPage({
   }
   if (invitation.templateId === "anor")
     return (
-      <AnorInvitation
-        invitation={invitation}
-        invitationId={result.id}
-        locale={locale}
-        guestName={guestName}
-        guestToken={query.g}
-      />
+      <>
+        <InvitationViewTracker invitationId={result.id} />
+        <AnorInvitation
+          invitation={invitation}
+          invitationId={result.id}
+          locale={locale}
+          guestName={guestName}
+          guestToken={query.g}
+        />
+      </>
     );
   if (isMarxabaTemplate(invitation.templateId))
     return (
-      <MarxabaInvitation
-        invitation={invitation}
-        invitationId={result.id}
-        locale={locale}
-        templateId={invitation.templateId}
-        guestName={guestName}
-        guestToken={query.g}
-      />
+      <>
+        <InvitationViewTracker invitationId={result.id} />
+        <MarxabaInvitation
+          invitation={invitation}
+          invitationId={result.id}
+          locale={locale}
+          templateId={invitation.templateId}
+          guestName={guestName}
+          guestToken={query.g}
+        />
+      </>
     );
   notFound();
 }

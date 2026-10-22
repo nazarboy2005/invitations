@@ -1,0 +1,20 @@
+/* The captured plaque needs an anywhere break for long, hyphenated honoree names. */
+.plaque h1 [data-slot="groom"].platform-name-fit--single-wrap {
+  display: block !important;
+  min-width: 0 !important;
+  max-width: var(--platform-name-fit-width, 100%) !important;
+  white-space: normal !important;
+  overflow-wrap: anywhere !important;
+  word-break: normal !important;
+}
+
+.hero__name[data-slot="groom"].platform-name-fit--single-wrap {
+  display: block !important;
+  min-width: 0 !important;
+  max-width: var(--platform-name-fit-width, 100%) !important;
+  width: 100% !important;
+  margin-inline: auto !important;
+  white-space: normal !important;
+  overflow-wrap: anywhere !important;
+  text-align: center !important;
+}

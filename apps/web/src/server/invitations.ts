@@ -26,12 +26,13 @@ export async function getOwnedInvitation(
 }
 export async function listInvitations(
   userId: string,
-): Promise<Array<Invitation & { createdAt: string }>> {
+): Promise<Array<Invitation & { createdAt: string; viewCount: number }>> {
   const rows =
-    await getDb()`SELECT data,status,created_at FROM invitations WHERE owner_id=${userId} ORDER BY created_at DESC,id DESC LIMIT 100`;
+    await getDb()`SELECT data,status,created_at,view_count FROM invitations WHERE owner_id=${userId} ORDER BY created_at DESC,id DESC LIMIT 100`;
   return rows.map((row) => ({
     ...invitationSchema.parse({ ...row.data, status: row.status }),
     createdAt: new Date(row.created_at).toISOString(),
+    viewCount: Number(row.view_count ?? 0),
   }));
 }
 export async function saveInvitation(
