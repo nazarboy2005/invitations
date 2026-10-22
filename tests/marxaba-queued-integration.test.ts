@@ -138,6 +138,10 @@ const hilolPublicationMigration = readFileSync(
   new URL("../packages/database/migrations/0072_publish_hilol.sql", import.meta.url),
   "utf8",
 );
+const bitiruvPublicationMigration = readFileSync(
+  new URL("../packages/database/migrations/0073_publish_bitiruv.sql", import.meta.url),
+  "utf8",
+);
 const konfettiPublicationMigration = readFileSync(
   new URL("../packages/database/migrations/0065_publish_konfetti.sql", import.meta.url),
   "utf8",
@@ -175,6 +179,7 @@ test("registered Marxaba designs reflect their release state and additive migrat
     "nahor",
     "nahorgi-osh",
     "hilol",
+    "bitiruv",
     "kozgu",
     "qandil",
   ]);
@@ -208,6 +213,7 @@ test("registered Marxaba designs reflect their release state and additive migrat
     nahor: nahorPublicationMigration,
     "nahorgi-osh": nahorgiOshPublicationMigration,
     hilol: hilolPublicationMigration,
+    bitiruv: bitiruvPublicationMigration,
     "yangi-uy": yangiUyMigration,
   };
   for (const id of Object.keys(migrationById) as Array<
@@ -233,6 +239,7 @@ test("registered Marxaba designs reflect their release state and additive migrat
       nahor: ["osh"],
       "nahorgi-osh": ["osh"],
       hilol: ["iftorlik"],
+      bitiruv: ["other"],
       "yangi-uy": ["yangi-uy"],
     };
     assert.deepEqual(
@@ -269,6 +276,7 @@ test("registered Marxaba designs reflect their release state and additive migrat
       nahor: ["osh"],
       "nahorgi-osh": ["osh", "sunnat-toyi", "wedding"],
       hilol: ["iftorlik", "osh"],
+      bitiruv: ["bitiruv", "birthday", "korporativ"],
       "yangi-uy": ["yangi-uy", "osh"],
     };
     assert.deepEqual(definition.supportedEventTypes, expectedSupport[id]);

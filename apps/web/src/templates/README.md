@@ -4,7 +4,7 @@ This directory contains 32 template renderer folders at different stages of
 integration and review. Static assets and captured source packages are also
 stored under `apps/web/public/templates`; their presence does not make a design
 available in the catalog. Without `DATABASE_URL`, the local typed fallback
-catalog currently exposes 29 published templates. A configured database can
+catalog currently exposes 30 published templates. A configured database can
 have a different catalog state. Check the typed catalog and applied migrations
 for current publication status, and see `docs/templates/TEMPLATE_ROADMAP.md`
 for template-by-template integration and release notes. External deployment

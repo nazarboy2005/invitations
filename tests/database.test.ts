@@ -45,11 +45,11 @@ test("login requests rely on the opaque Telegram start token, not a numeric code
   assert.ok(columns.rows.some((column) => column.column_name === "token_hash"));
   assert.ok(!columns.rows.some((column) => column.column_name === "code"));
 });
-test("Bitiruv event compatibility is additive and remains unpublished", async () => {
+test("Bitiruv event compatibility is additive and published", async () => {
   const template = await db.query<{ published: boolean }>(
     "SELECT published FROM templates WHERE id='bitiruv'",
   );
-  assert.deepEqual(template.rows, [{ published: false }]);
+  assert.deepEqual(template.rows, [{ published: true }]);
   const categories = await db.query<{ category_id: string }>(
     "SELECT category_id FROM template_category_assignments WHERE template_id='bitiruv'",
   );
@@ -509,6 +509,8 @@ test("template migrations publish completed designs while keeping unfinished des
         "oltin-yosh",
         "nahor",
         "nahorgi-osh",
+        "bitiruv",
+        "korporativ",
       ],
     ],
   );
@@ -517,6 +519,7 @@ test("template migrations publish completed designs while keeping unfinished des
     [
       ["atlas", true],
       ["beshik", true],
+      ["bitiruv", true],
       ["bogi-eram", true],
       ["bulbul", false],
       ["chavandoz", true],
@@ -524,6 +527,7 @@ test("template migrations publish completed designs while keeping unfinished des
       ["ganch", false],
       ["hilol", true],
       ["konfetti", true],
+      ["korporativ", false],
       ["kozgu", true],
       ["kuzgi-chinor", true],
       ["lola", true],

@@ -31,7 +31,7 @@ const body = (html: string) =>
     .trim()
     .replace(/\r\n/g, "\n") ?? "";
 
-test("Bitiruv is integrated as an unpublished template with the exact supported events", () => {
+test("Bitiruv is published with the exact supported events", () => {
   assert.match(read(renderer, "renderer.tsx"), /templateId="bitiruv"/);
   assert.match(read(renderer, "index.ts"), /BitiruvInvitation/);
   assert.doesNotMatch(
@@ -40,7 +40,7 @@ test("Bitiruv is integrated as an unpublished template with the exact supported 
   );
   const definition = templateById("bitiruv");
   assert.ok(definition);
-  assert.equal(definition.published, false);
+  assert.equal(definition.published, true);
   assert.equal(definition.previewEventType, "bitiruv");
   assert.deepEqual(definition.supportedEventTypes, [
     "bitiruv",
@@ -111,18 +111,25 @@ test("Bitiruv maps only one person's initial and hides unsupported venue photogr
 test("Bitiruv retains the captured structure, styling, translations, metadata, and artwork", () => {
   assert.equal(body(read(pkg, "index.html")), body(read(source, "index.html")));
   for (const name of ["template.css", "i18n.js", "meta.js"])
-    assert.deepEqual(
-      readFileSync(path.join(pkg, name)),
-      readFileSync(path.join(source, name)),
-      `${name} matches the capture`,
+    assert.equal(
+      read(pkg, name).replace(/\r\n/g, "\n"),
+      read(source, name).replace(/\r\n/g, "\n"),
+      `${name} matches the capture independent of checkout line endings`,
     );
   const sourceScript = read(source, "template.js").replace(
     "../../shared/vendor/three/three.bundle.min.js",
     "vendor/three/three.bundle.min.js",
+  ).replace(
+    "const resize=()=>{let w=canvas.clientWidth||innerWidth,h=canvas.clientHeight||innerHeight;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix()};",
+    "const resize=()=>{if(!renderer||!camera)return;let w=canvas.clientWidth||innerWidth,h=canvas.clientHeight||innerHeight;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix()};",
   );
-  assert.equal(read(pkg, "template.js"), sourceScript);
+  assert.equal(
+    read(pkg, "template.js").replace(/\r\n/g, "\n"),
+    sourceScript.replace(/\r\n/g, "\n"),
+  );
   assert.match(read(pkg, "template.js"), /prefers-reduced-motion/);
   assert.match(read(pkg, "template.js"), /ScrollTrigger/);
+  assert.match(read(pkg, "template.js"), /if\(!renderer\|\|!camera\)return/);
   assert.deepEqual(
     readFileSync(path.join(pkg, "art/graduation-scene.webp")),
     readFileSync(path.join(source, "art/graduation-scene.webp")),
@@ -174,14 +181,18 @@ test("Bitiruv uses local source animation dependencies and no captured sample pa
     "ScrollTrigger.min.js",
     "lz-string.min.js",
   ])
-    assert.deepEqual(
-      readFileSync(path.join(pkg, "vendor", name)),
-      readFileSync(path.join(sourceVendor, name)),
-      `${name} matches the captured shared dependency`,
+    assert.equal(
+      readFileSync(path.join(pkg, "vendor", name)).toString("utf8").replace(/\r\n/g, "\n"),
+      readFileSync(path.join(sourceVendor, name)).toString("utf8").replace(/\r\n/g, "\n"),
+      `${name} matches the captured shared dependency independent of checkout line endings`,
     );
-  assert.deepEqual(
-    readFileSync(path.join(pkg, "vendor/three/three.bundle.min.js")),
-    readFileSync(path.join(sourceVendor, "three/three.bundle.min.js")),
+  assert.equal(
+    readFileSync(path.join(pkg, "vendor/three/three.bundle.min.js"))
+      .toString("utf8")
+      .replace(/\r\n/g, "\n"),
+    readFileSync(path.join(sourceVendor, "three/three.bundle.min.js"))
+      .toString("utf8")
+      .replace(/\r\n/g, "\n"),
   );
   const references = [
     ...Array.from(html.matchAll(/(?:src|href)="([^"]+)"/g), (m) => m[1]),
@@ -201,6 +212,92 @@ test("Bitiruv uses local source animation dependencies and no captured sample pa
     );
   assert.ok(existsSync(path.join(pkg, "vendor/three/three.bundle.min.js")));
   assert.ok(existsSync(path.join(pkg, "preview.webp")));
+});
+
+test("Bitiruv reduced-motion mode skips WebGL and opener choreography", () => {
+  const rootClasses = new Set(["is-locked"]);
+  const bodyClasses = new Set<string>();
+  const listeners: Array<(event?: { stopPropagation(): void }) => void> = [];
+  let opened = 0;
+  let animationCalls = 0;
+  let scriptElements = 0;
+  const classList = (classes: Set<string>) => ({
+    add: (name: string) => classes.add(name),
+    remove: (name: string) => classes.delete(name),
+    toggle: (name: string, force?: boolean) => {
+      if (force ?? !classes.has(name)) classes.add(name);
+      else classes.delete(name);
+    },
+  });
+  const makeElement = () => ({
+    hidden: false,
+    classList: classList(new Set<string>()),
+    addEventListener: (name: string, callback: (event?: { stopPropagation(): void }) => void) => {
+      if (name === "click") listeners.push(callback);
+    },
+    setAttribute: () => {},
+    scrollIntoView: () => {},
+  });
+  const intro = makeElement();
+  const hero = makeElement();
+  const openButton = makeElement();
+  const heading = makeElement();
+  const document = {
+    readyState: "complete",
+    hidden: false,
+    body: { classList: classList(bodyClasses) },
+    documentElement: { classList: classList(rootClasses) },
+    querySelector: (selector: string) =>
+      ({
+        "#intro": intro,
+        "#hero": hero,
+        "#open-invitation": openButton,
+        "#hero h1": heading,
+      })[selector] ?? null,
+    querySelectorAll: () => [],
+    addEventListener: () => {},
+    createElement: () => {
+      scriptElements++;
+      return {};
+    },
+  };
+  const gsap = {
+    timeline: () => { animationCalls++; return { to: () => ({ to() { return this; } }) }; },
+    fromTo: () => { animationCalls++; },
+    to: () => { animationCalls++; },
+    registerPlugin: () => { animationCalls++; },
+  };
+  const window = {
+    Marhamat: {
+      reducedMotion: false,
+      tier: "full",
+      open: () => { opened++; },
+      on: () => {},
+    },
+    gsap,
+    ScrollTrigger: {},
+    addEventListener: () => {},
+  };
+
+  runInNewContext(read(pkg, "template.js"), {
+    document,
+    window,
+    gsap,
+    matchMedia: () => ({ matches: true }),
+    IntersectionObserver: class { observe() {} },
+    setTimeout: (callback: () => void) => { callback(); return 0; },
+    requestAnimationFrame: () => 1,
+    cancelAnimationFrame: () => {},
+  });
+  listeners[0]?.({ stopPropagation() {} });
+
+  assert.equal(opened, 1);
+  assert.equal(animationCalls, 0);
+  assert.equal(scriptElements, 0);
+  assert.equal(intro.hidden, true);
+  assert.equal(rootClasses.has("is-locked"), false);
+  assert.equal(rootClasses.has("is-fallback"), true);
+  assert.equal(bodyClasses.has("is-open"), true);
 });
 
 test("Bitiruv bundles each exact requested font family and supported glyph subsets", () => {
