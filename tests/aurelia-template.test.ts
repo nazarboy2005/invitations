@@ -89,14 +89,14 @@ test("Aurelia preview sample stays ephemeral and uses the shared renderer", () =
 });
 
 test("Aurelia migration registers the wedding category and event compatibility", () => {
-  const migration = read("packages/database/migrations", "0082_add_aurelia_template.sql");
+  const migration = read("packages/database/migrations", "0080_add_aurelia_template.sql");
   assert.match(migration, /VALUES \('aurelia', 'Aurelia', 15000000, 'UZS', false\)/);
   assert.match(migration, /'aurelia', 'wedding'/);
   assert.match(migration, /ON CONFLICT/);
 });
 
 test("Aurelia publication migration enables catalog selection", () => {
-  const migration = read("packages/database/migrations", "0083_publish_aurelia.sql");
+  const migration = read("packages/database/migrations", "0081_publish_aurelia.sql");
   assert.match(migration, /VALUES \('aurelia', 'Aurelia', 15000000, 'UZS', true\)/);
   assert.match(migration, /published = true/);
 });

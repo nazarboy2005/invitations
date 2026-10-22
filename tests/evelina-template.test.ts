@@ -92,14 +92,14 @@ test("all supported sample locales flow through the shared preview fixture", () 
 });
 
 test("additive Evelina migration registers the approved category and event type", () => {
-  const migration = read("packages/database/migrations", "0080_add_evelina_template.sql");
+  const migration = read("packages/database/migrations", "0077_add_evelina_template.sql");
   assert.match(migration, /VALUES \('evelina', 'Evelina', 15000000, 'UZS', false\)/);
   assert.match(migration, /'evelina', 'wedding'/);
   assert.match(migration, /ON CONFLICT/);
 });
 
 test("additive Evelina publication migration enables catalog selection", () => {
-  const migration = read("packages/database/migrations", "0081_publish_evelina.sql");
+  const migration = read("packages/database/migrations", "0078_publish_evelina.sql");
   assert.match(migration, /VALUES \('evelina', 'Evelina', 15000000, 'UZS', true\)/);
   assert.match(migration, /published = true/);
 });

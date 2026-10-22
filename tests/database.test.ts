@@ -511,6 +511,8 @@ test("template migrations publish completed designs while keeping unfinished des
         "nahorgi-osh",
         "bitiruv",
         "korporativ",
+        "evelina",
+        "aurelia",
       ],
     ],
   );
@@ -518,12 +520,14 @@ test("template migrations publish completed designs while keeping unfinished des
     marxaba.rows.map((row) => [row.id, row.published]),
     [
       ["atlas", true],
+      ["aurelia", true],
       ["beshik", true],
       ["bitiruv", true],
       ["bogi-eram", true],
       ["bulbul", false],
       ["chavandoz", true],
       ["doira", true],
+      ["evelina", true],
       ["ganch", false],
       ["hilol", true],
       ["konfetti", true],
@@ -650,7 +654,7 @@ test("template migrations publish completed designs while keeping unfinished des
   );
   assert.equal(
     assignments.rows.filter((row) => row.category_id === "wedding").length,
-    32,
+    33,
   );
 });
 test("template event compatibility is constrained and independently assignable", async () => {
