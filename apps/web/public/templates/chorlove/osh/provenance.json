@@ -1,0 +1,42 @@
+{
+  "sourceCapture": {
+    "path": "Chorlove/Web invitations/templates/osh/preview-frame.html",
+    "sha256": "fe1edb279c7dc4dc9d8fac9e7f1d01b9fc002c526662ffff966ed187f9df8ffd"
+  },
+  "sourceChunk": {
+    "path": "Chorlove/Web invitations/_next/static/chunks/0r~7st8t0.ow1.js",
+    "module": "753736",
+    "sha256": "cb8ae766f2858c4f2ecfe220dbe4819e701e9356615585ab33d58b41910efb8b"
+  },
+  "assets": [
+    {
+      "source": "Chorlove/Web invitations/images/palov/palov.png",
+      "packaged": "palov.png",
+      "sha256": "6ff6955eb9f53d994f4f9052f3c000201a2e0a364a16c295990f5224399f8077"
+    },
+    {
+      "source": "Chorlove/Web invitations/fonts/CormorantGaramond-Regular.ttf",
+      "packaged": "CormorantGaramond-Regular.ttf",
+      "sha256": "7b99138ffa3baab8616d8491dc6d75961c5ae568b206c5031fbc7bb127385428"
+    },
+    {
+      "source": "https://fonts.gstatic.com/s/forum/v19/6aey4Ky-Vb8Ew_IW.ttf",
+      "packaged": "Forum-Regular.ttf",
+      "sha256": "0ae21f320a7bae60712908271b15e8bd21f24347a903e246cae8ac5d75a476fc"
+    }
+  ],
+  "status": "internal unpublished integration; preview, synthetic public route, RSVP, creator draft save/reopen, matching 1280x720 source/package normal and reduced-motion opening review, RSVP party-size interaction, typecheck, and build verified; successful publish/public-render/reopen cycle requires catalog release",
+  "fidelityNotes": [
+    "Source CSS and isolated .osh-sheet composition are retained; Framer Motion viewport reveals are adapted with equivalent opacity, 28px vertical offset, 0.7s ease-out, once at 0.2 viewport visibility.",
+    "Source music toggle maps creator/catalog direct-audio URLs and source YouTube watch, short, and embed URLs to opt-in playback with fade. The new YouTube adapter path awaits a local browser rerun.",
+    "Exact source Osh markup and component expose no To'yona/card/gift section; none is invented for this source template.",
+    "Provider wrapper, sample soundtrack, watermark and Instagram contact are omitted; the shared contact contract supports Telegram and phone only."
+  ],
+  "catalogArtwork": {
+    "sourceUrl": "https://payment.chorlove.uz/media-assets/694fbff5-73dc-44eb-9283-539e9eb2a26e/file",
+    "packaged": "preview.jpg",
+    "width": 778,
+    "height": 1686,
+    "sha256": "aaaf7ef3b198309a808e0b935ca4bd2f5fba805e8592f047f5606e276d234fbe"
+  }
+}

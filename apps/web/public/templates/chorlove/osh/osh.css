@@ -1,0 +1,586 @@
+
+
+
+.osh-page {
+  --wine: #6E1F2B;
+  --wine-deep: #4A121C;
+  --ivory: #FBF3E4;
+  --paper: #FFFDF8;
+  --sand: #EADFC8;
+  --brass: #C89B4A;
+  --brass-light: #E9CF96;
+  --text: #3B2A20;
+  --serif: 'Cormorant Garamond', Georgia, serif;
+  --display: 'Forum', Georgia, serif;
+  background: var(--sand);
+  font-family: var(--serif);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+.osh-page *, .osh-page *::before, .osh-page *::after { box-sizing: border-box; }
+.osh-page :where(h1, h2, h3, p) { margin: 0; }
+.osh-page svg { display: block; }
+
+.osh-sheet {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  min-height: 100dvh;
+  margin: 0 auto;
+  background: var(--ivory);
+  overflow: hidden;
+  box-shadow: 0 0 60px rgba(74, 18, 28, .2);
+}
+
+@keyframes oshRiseIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes oshBloom {
+  from { opacity: 0; transform: scale(.4) rotate(-40deg); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes oshNudge {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(6px); }
+}
+@keyframes oshRotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.osh-in { animation: oshRiseIn 1s ease-out backwards; }
+.osh-bloom { animation: oshBloom 1.2s cubic-bezier(.2, .8, .2, 1) backwards; }
+.osh-nudge { animation: oshNudge 2.2s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .osh-page { scroll-behavior: auto; }
+  .osh-in, .osh-bloom, .osh-nudge, .osh-sun-petals, .osh-sun img { animation: none !important; }
+}
+
+.osh-bg-pattern {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.osh-zigzag { position: absolute; left: 0; width: 100%; height: 14px; }
+.osh-zigzag.is-top { top: -1px; transform: scaleY(-1); }
+.osh-zigzag.is-bottom { bottom: -1px; }
+.osh-divider { width: 160px; height: 18px; margin: 0 auto; }
+.osh-label {
+  padding-left: .32em;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: .32em;
+  text-transform: uppercase;
+  color: var(--brass);
+}
+
+/* Ikki qavat hoshiyali qog'oz karta (matn va RSVP uchun) */
+.osh-card {
+  position: relative;
+  background: var(--paper);
+  border: 1px solid var(--brass);
+  border-radius: 6px;
+  outline: 1px solid rgba(200, 155, 74, .5);
+  outline-offset: -9px;
+  box-shadow: 0 18px 36px -24px rgba(74, 18, 28, .55);
+  text-align: center;
+}
+.osh-card-badge {
+  position: absolute;
+  left: 50%;
+  top: -27px;
+  width: 54px;
+  height: 54px;
+  margin-left: -27px;
+  padding: 6px;
+  border-radius: 50%;
+  background: var(--ivory);
+}
+
+
+.osh-hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: calc(40px + env(safe-area-inset-top, 0px)) 30px 58px;
+  background: radial-gradient(120% 70% at 50% 0%, #8A2B3B, var(--wine) 55%, var(--wine-deep));
+  color: var(--ivory);
+  text-align: center;
+  overflow: hidden;
+}
+/* Tepa qismi yarim aylana bo'lgan ikki qavat hoshiya */
+.osh-hero-frame {
+  position: absolute;
+  inset: 12px 12px 26px;
+  border: 1px solid rgba(233, 207, 150, .6);
+  border-radius: 50% 50% 6px 6px / 24% 24% 6px 6px;
+  pointer-events: none;
+}
+.osh-hero-frame::after {
+  content: "";
+  position: absolute;
+  inset: 7px;
+  border: 1px solid rgba(233, 207, 150, .28);
+  border-radius: inherit;
+}
+.osh-hero-roundel { position: relative; width: 78px; height: 78px; flex: none; }
+.osh-hero-main {
+  position: relative;
+  width: min(100%, 360px);
+  container-type: inline-size;
+}
+.osh-kicker {
+  padding-left: .4em;
+  font-size: 4.4cqw;
+  font-weight: 700;
+  letter-spacing: .4em;
+  text-transform: uppercase;
+  color: var(--brass-light);
+}
+.osh-hero h1 {
+  margin-top: 4.5cqw;
+  font-family: var(--display);
+  font-weight: 400;
+  line-height: 1.04;
+}
+.osh-h1-big { display: block; color: var(--brass-light); overflow-wrap: anywhere; }
+.osh-h1-sub {
+  display: block;
+  margin-top: 2.4cqw;
+  font-family: var(--serif);
+  font-size: 7.4cqw;
+  font-style: italic;
+  font-weight: 500;
+  color: var(--ivory);
+}
+.osh-hero-divider { width: 44cqw; height: auto; margin: 6cqw auto 0; }
+
+.osh-hero-foot { position: relative; width: 100%; }
+.osh-couple-label {
+  padding-left: .3em;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: var(--brass-light);
+}
+.osh-couple-names {
+  margin-top: 6px;
+  font-family: var(--display);
+  font-size: clamp(25px, 7.6vw, 31px);
+  line-height: 1.15;
+  overflow-wrap: anywhere;
+}
+.osh-couple-names .osh-amp { color: var(--brass); font-style: italic; }
+.osh-hero-date {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 16px;
+  padding: 8px 20px;
+  border: 1px solid rgba(233, 207, 150, .65);
+  border-radius: 999px;
+  font-size: clamp(18px, 5.4vw, 21px);
+  font-weight: 600;
+}
+.osh-hero-date i {
+  width: 5px;
+  height: 5px;
+  background: var(--brass);
+  transform: rotate(45deg);
+}
+.osh-scroll-hint {
+  margin-top: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--brass-light);
+}
+
+
+/* ---------- Matn ---------- */
+.osh-intro { padding: 66px 22px 12px; }
+.osh-intro .osh-card { padding: 50px 26px 40px; }
+.osh-intro-title {
+  font-family: var(--display);
+  font-size: clamp(32px, 9.6vw, 39px);
+  font-weight: 400;
+  line-height: 1.1;
+  color: var(--wine);
+}
+.osh-intro-text {
+  margin-top: 20px;
+  font-size: 21px;
+  font-weight: 500;
+  line-height: 1.5;
+  text-wrap: pretty;
+  white-space: pre-line;
+}
+.osh-intro-sign-pre { margin-top: 24px; font-size: 19px; font-style: italic; font-weight: 500; }
+.osh-intro-sign {
+  margin-top: 2px;
+  font-family: var(--display);
+  font-size: clamp(22px, 6.6vw, 26px);
+  color: var(--wine);
+}
+
+/* ---------- Sana qatori va taymer ---------- */
+.osh-when { padding: 44px 20px 18px; text-align: center; }
+.osh-date-row {
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  gap: 12px;
+}
+.osh-date-side {
+  padding: 10px 2px;
+  border-top: 1px solid var(--brass);
+  border-bottom: 1px solid var(--brass);
+  font-size: clamp(15px, 4.4vw, 18px);
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  overflow-wrap: anywhere;
+}
+.osh-date-day {
+  font-family: var(--display);
+  font-size: clamp(64px, 20vw, 84px);
+  line-height: .95;
+  color: var(--wine);
+}
+.osh-date-month {
+  margin-top: 2px;
+  font-size: clamp(18px, 5.4vw, 22px);
+  font-style: italic;
+  font-weight: 600;
+}
+.osh-cd {
+  margin-top: 30px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+.osh-cd-item { padding: 2px 4px; border-left: 1px solid rgba(200, 155, 74, .6); }
+.osh-cd-item:first-child { border-left: 0; }
+.osh-cd-num {
+  display: block;
+  font-family: var(--display);
+  font-size: clamp(30px, 9vw, 40px);
+  line-height: 1;
+  color: var(--wine);
+  font-variant-numeric: tabular-nums;
+}
+.osh-cd-cap {
+  display: block;
+  margin-top: 4px;
+  font-size: clamp(14px, 4vw, 16px);
+  font-style: italic;
+  font-weight: 600;
+  text-transform: lowercase;
+}
+.osh-cd-done {
+  margin-top: 26px;
+  font-family: var(--display);
+  font-size: clamp(22px, 6.4vw, 26px);
+  color: var(--wine);
+}
+
+/* ---------- Rasm ("quyosh" ichida) ---------- */
+.osh-photo { padding: 34px 24px 60px; text-align: center; }
+.osh-sun { position: relative; width: min(100%, 300px); aspect-ratio: 1; margin: 0 auto; }
+.osh-sun-petals {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  animation: oshRotate 120s linear infinite;
+}
+.osh-sun-img {
+  position: absolute;
+  inset: 17%;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--sand);
+  box-shadow: 0 0 0 5px var(--ivory), 0 0 0 6.5px var(--brass);
+}
+.osh-sun img { width: 100%; height: 100%; object-fit: cover; }
+.osh-sun img.is-spinning { animation: oshRotate 28s linear infinite reverse; }
+.osh-photo-caption {
+  margin-top: 22px;
+  font-size: clamp(23px, 7vw, 27px);
+  font-style: italic;
+  font-weight: 500;
+  line-height: 1.25;
+  color: var(--wine);
+}
+
+/* ---------- Manzil ---------- */
+.osh-venue {
+  position: relative;
+  padding: 66px 24px 70px;
+  background: linear-gradient(180deg, var(--wine), var(--wine-deep));
+  color: var(--ivory);
+  text-align: center;
+}
+.osh-venue-inner { position: relative; }
+.osh-venue .osh-label { color: var(--brass-light); }
+.osh-venue-name {
+  margin-top: 14px;
+  font-family: var(--display);
+  font-size: clamp(28px, 8.6vw, 35px);
+  line-height: 1.15;
+  color: var(--brass-light);
+}
+.osh-venue-addr { margin-top: 10px; font-size: 21px; font-weight: 500; line-height: 1.35; }
+.osh-map-btn {
+  margin-top: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 56px;
+  padding: 0 28px;
+  border: 1.5px solid var(--brass-light);
+  border-radius: 999px;
+  color: var(--ivory);
+  font-size: 20px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background .2s, color .2s;
+}
+.osh-map-btn svg { flex: none; }
+.osh-map-btn:hover { background: var(--brass-light); color: var(--wine-deep); }
+.osh-map-btn:focus-visible { outline: 3px solid var(--brass); outline-offset: 3px; }
+
+
+.osh-rsvp { padding: 76px 22px 64px; }
+.osh-rsvp .osh-card { padding: 46px 24px 34px; }
+.osh-rsvp-title {
+  margin-top: 10px;
+  font-family: var(--display);
+  font-size: clamp(32px, 9.6vw, 39px);
+  font-weight: 400;
+  line-height: 1.1;
+  color: var(--wine);
+}
+.osh-rsvp-lead { margin-top: 8px; font-size: 20px; font-weight: 500; line-height: 1.4; }
+.osh-form {
+  margin-top: 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  text-align: left;
+}
+.osh-field { display: flex; flex-direction: column; }
+.osh-field label, .osh-form legend {
+  padding: 0;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--wine);
+}
+.osh-form fieldset { margin: 0; padding: 0; border: 0; min-width: 0; }
+.osh-form legend { margin: 0 0 10px; }
+.osh-input {
+  width: 100%;
+  height: 54px;
+  padding: 0 2px;
+  background: transparent;
+  border: 0;
+  border-bottom: 1.5px solid var(--brass);
+  border-radius: 0;
+  font-family: var(--serif);
+  font-size: 23px;
+  font-weight: 600;
+  color: var(--text);
+}
+.osh-input::placeholder { color: rgba(59, 42, 32, .5); opacity: 1; }
+.osh-input:focus { outline: 0; border-bottom: 2.5px solid var(--wine); }
+.osh-opts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.osh-opt { position: relative; display: block; }
+.osh-radio { position: absolute; opacity: 0; width: 1px; height: 1px; margin: 0; }
+.osh-opt-b {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 56px;
+  padding: 8px 10px;
+  border: 1.5px solid var(--wine);
+  border-radius: 999px;
+  color: var(--wine);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.15;
+  cursor: pointer;
+  transition: background .2s, color .2s, border-color .2s;
+}
+.osh-radio:checked + .osh-opt-b.is-yes { background: var(--wine); color: var(--ivory); }
+.osh-radio:checked + .osh-opt-b.is-no {
+  background: var(--brass);
+  border-color: var(--brass);
+  color: var(--wine-deep);
+}
+.osh-radio:focus-visible + .osh-opt-b { outline: 3px solid var(--brass); outline-offset: 2px; }
+.osh-input:read-only { border-bottom-style: dashed; color: var(--wine); }
+.osh-count { display: flex; align-items: center; justify-content: space-between; gap: 14px; }
+.osh-count > span { font-size: 18px; font-weight: 700; line-height: 1.25; color: var(--wine); }
+.osh-stepper { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+.osh-stepper button {
+  width: 48px;
+  height: 48px;
+  background: transparent;
+  border: 1.5px solid var(--wine);
+  border-radius: 50%;
+  color: var(--wine);
+  font-family: var(--serif);
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 1;
+  cursor: pointer;
+}
+.osh-stepper button:disabled { opacity: .35; cursor: not-allowed; }
+.osh-stepper button:focus-visible { outline: 3px solid var(--brass); outline-offset: 2px; }
+.osh-stepper output {
+  min-width: 36px;
+  text-align: center;
+  font-size: 24px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+}
+.osh-form-error { font-size: 18px; font-weight: 600; font-style: italic; line-height: 1.3; color: #B3261E; }
+.osh-send-btn {
+  width: 100%;
+  min-height: 58px;
+  background: var(--wine);
+  color: var(--ivory);
+  border: 0;
+  border-radius: 999px;
+  font-family: var(--serif);
+  font-size: 21px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background .2s;
+}
+.osh-send-btn:hover { background: var(--wine-deep); }
+.osh-send-btn:disabled { opacity: .7; cursor: not-allowed; }
+.osh-send-btn:focus-visible, .osh-again:focus-visible { outline: 3px solid var(--brass); outline-offset: 3px; }
+.osh-thanks { margin-top: 24px; color: var(--wine); }
+.osh-thanks svg { margin: 0 auto; }
+.osh-thanks h3 {
+  margin-top: 14px;
+  font-family: var(--display);
+  font-size: clamp(26px, 8vw, 31px);
+  font-weight: 400;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+.osh-thanks p { margin-top: 8px; font-size: 21px; font-weight: 500; line-height: 1.4; color: var(--text); }
+.osh-again {
+  margin-top: 10px;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  min-height: 48px;
+  padding: 0 12px;
+  font-family: var(--serif);
+  font-size: 19px;
+  font-weight: 600;
+  color: var(--wine);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+
+.osh-footer {
+  position: relative;
+  padding: 70px 24px calc(40px + env(safe-area-inset-bottom, 0px));
+  background: linear-gradient(180deg, var(--wine), var(--wine-deep));
+  color: var(--ivory);
+  text-align: center;
+}
+.osh-footer-inner { position: relative; }
+.osh-footer-roundel { width: 60px; height: 60px; margin: 0 auto; }
+.osh-footer .osh-label { margin-top: 22px; color: var(--brass-light); }
+.osh-footer-name {
+  margin-top: 10px;
+  font-family: var(--display);
+  font-size: clamp(29px, 9vw, 36px);
+  line-height: 1.15;
+  color: var(--brass-light);
+}
+.osh-footer-date { margin-top: 6px; font-size: 21px; font-style: italic; font-weight: 500; }
+.osh-socials { margin-top: 28px; display: flex; justify-content: center; gap: 14px; }
+.osh-soc {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 54px;
+  height: 54px;
+  border: 1.5px solid var(--brass-light);
+  border-radius: 50%;
+  color: var(--brass-light);
+  text-decoration: none;
+  transition: background .2s, color .2s;
+}
+.osh-soc svg { flex: none; }
+.osh-soc:hover { background: var(--brass-light); color: var(--wine-deep); }
+.osh-soc:focus-visible { outline: 3px solid var(--brass); outline-offset: 3px; }
+.osh-watermark {
+  margin-top: 34px;
+  padding-top: 18px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border-top: 1px solid rgba(233, 207, 150, .3);
+  font-size: 16px;
+  font-weight: 500;
+  color: rgba(251, 243, 228, .75);
+  text-decoration: none;
+}
+.osh-watermark b { font-weight: 700; color: var(--brass-light); }
+.osh-watermark:hover b { text-decoration: underline; }
+
+@media (max-width: 340px) {
+  .osh-hero { padding-left: 22px; padding-right: 22px; }
+  .osh-intro, .osh-rsvp { padding-left: 14px; padding-right: 14px; }
+  .osh-intro .osh-card, .osh-rsvp .osh-card { padding-left: 18px; padding-right: 18px; }
+  .osh-opt-b { font-size: 16px; }
+}
+
+.osh-reduced-motion *, .osh-reduced-motion *::before, .osh-reduced-motion *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; }
+
+
+.osh-reveal-pending{opacity:0;transform:translateY(28px)}
+@keyframes oshViewportReveal {
+  from { opacity: 0; transform: translateY(28px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.osh-reveal{animation:oshViewportReveal .7s ease-out both}
+.osh-reduced-motion .osh-reveal-pending{opacity:1;transform:none}
+.osh-reduced-motion .osh-reveal{animation:none}
+@media(prefers-reduced-motion:reduce){.osh-reveal-pending{opacity:1;transform:none}.osh-reveal{animation:none}}
+
+.osh-music-control{position:fixed;right:32px;bottom:32px;z-index:110}
+.osh-music-button{width:56px;height:56px;border:1.5px solid var(--brass);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--wine);background:rgba(251,243,228,.95);box-shadow:0 20px 25px -5px rgba(74,18,28,.18),0 8px 10px -6px rgba(74,18,28,.18);backdrop-filter:blur(12px);cursor:pointer;transition:transform .2s ease}
+.osh-music-button:hover{transform:scale(1.1)}
+.osh-music-button:active{transform:scale(.9)}
+.osh-music-button:focus-visible{outline:3px solid var(--brass);outline-offset:3px}
+.osh-reduced-motion .osh-music-button{transition:none}
+@media(prefers-reduced-motion:reduce){.osh-music-button{transition:none}}
+.osh-youtube-host{position:fixed;left:-2px;top:-2px;width:1px;height:1px;overflow:hidden;opacity:0;pointer-events:none}
+
