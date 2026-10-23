@@ -11,6 +11,21 @@
   let countdownTimer = 0;
   let currentLocale = "uz-Latn";
   let musicStarted = false;
+  let rsvpSent = false;
+  let rsvpAnswer = "";
+  function syncRsvpState() {
+    const enabled = !!data?.rsvp?.enabled;
+    const sending = $("[data-if='notSent']");
+    const sent = $("[data-if='sent']");
+    const error = $("[data-if='error']");
+    const yes = $("[data-if='yes']");
+    const no = $("[data-if='no']");
+    if (sending) sending.hidden = !enabled || rsvpSent;
+    if (sent) sent.hidden = !rsvpSent;
+    if (yes) yes.hidden = !rsvpSent || rsvpAnswer !== "yes";
+    if (no) no.hidden = !rsvpSent || rsvpAnswer !== "no";
+    if (error) error.hidden = error.dataset.active !== "true";
+  }
   const localeTag = (locale) => ({"uz-Latn":"uz-Latn-UZ", "uz-Cyrl":"uz-Cyrl-UZ", en:"en-US", ru:"ru-RU"})[locale] || "uz-Latn-UZ";
   function set(el, value) { if (el) el.textContent = value || ""; }
   function updateCountdown() {
@@ -57,7 +72,7 @@
     const socials=$(".socials");
     if(socials){const anchors=[...socials.querySelectorAll("a")];anchors.forEach((anchor)=>{const contact=(payload.contacts||[]).find((item)=>item.type==="phone"?anchor.getAttribute("aria-label")?.includes("Qo"):anchor.getAttribute("aria-label")==="Telegram");anchor.hidden=!contact;if(contact){anchor.href=contact.href;anchor.setAttribute("aria-label",contact.label);}});socials.hidden=!(payload.contacts||[]).length;}
     const rsvpSection=$(".rsvp");if(rsvpSection)rsvpSection.hidden=!payload.rsvp?.enabled;
-    const notSent=$("[data-if='notSent']");if(notSent)notSent.hidden=!payload.rsvp?.enabled;
+    syncRsvpState();
     const audio=$("#bgm");const music=$("#music");if(audio&&music){audio.src=typeof payload.music==="string"?payload.music:"";music.hidden=!audio.src;music.setAttribute("aria-label",musicStarted?l.musicOff:l.musicOn);}
     const input=$("#ism");if(input)input.placeholder=l.name;
     updateCountdown(); if(countdownTimer)clearInterval(countdownTimer);countdownTimer=setInterval(updateCountdown,1000);
@@ -68,18 +83,20 @@
     const button=event.target.closest("button");if(!button)return;
     if(button.id==="send"){
       const name=$("#ism").value.trim(),answer=$("input[name='javob']:checked")?.value;
-      const error=$("[data-if='error']");if(!name||!answer){if(error)error.hidden=false;return;}
+      const error=$("[data-if='error']");if(!name||!answer){if(error){error.dataset.active="true";syncRsvpState();}return;}
       if(data?.preview){if(error){error.hidden=false;error.textContent=currentLocale==="ru"?"В предварительном просмотре ответы не отправляются.":currentLocale==="en"?"Responses are disabled in preview.":currentLocale==="uz-Cyrl"?"Кўриб чиқишда жавоб юборилмайди.":"Ko‘rib chiqishda javob yuborilmaydi.";}return;}
       if(!data?.apiBase)return;
       button.disabled=true;
       try{const response=await fetch(`${data.apiBase}/rsvp`,{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({name,status:answer,partySize:answer==="yes"?1:0,guestToken:data.guestToken||undefined})});if(!response.ok)throw new Error("RSVP request failed");
-        const groups=document.querySelectorAll("[data-if]");groups.forEach((el)=>{const key=el.getAttribute("data-if");el.hidden=key==="sent"?false:key==="notSent"||key==="error"||key==="yes"||key==="no"?true:el.hidden;});const selected=$(`[data-if='${answer}']`);if(selected)selected.hidden=false;set($("#guest"),name);
-      }catch{if(error){error.hidden=false;error.textContent=currentLocale==="ru"?"Не удалось отправить ответ. Попробуйте ещё раз.":currentLocale==="en"?"Could not send your response. Please try again.":currentLocale==="uz-Cyrl"?"Жавоб юборилмади. Қайта уриниб кўринг.":"Javob yuborilmadi. Qayta urinib ko‘ring.";}}
+        rsvpSent=true;rsvpAnswer=answer;set($("#guest"),name);if(error)error.dataset.active="false";syncRsvpState();
+      }catch{if(error){error.dataset.active="true";error.textContent=currentLocale==="ru"?"Не удалось отправить ответ. Попробуйте ещё раз.":currentLocale==="en"?"Could not send your response. Please try again.":currentLocale==="uz-Cyrl"?"Жавоб юборилмади. Қайта уриниб кўринг.":"Javob yuborilmadi. Qayta urinib ko‘ring.";syncRsvpState();}}
       finally{button.disabled=false;}
     }
-    if(button.id==="again"){document.querySelectorAll("[data-if]").forEach(el=>el.hidden=el.getAttribute("data-if")!=="notSent");$("#ism").value="";document.querySelectorAll("input[name='javob']").forEach(el=>el.checked=false);}
+    if(button.id==="again"){rsvpSent=false;rsvpAnswer="";const error=$("[data-if='error']");if(error){error.dataset.active="false";error.textContent=labels[currentLocale].error;}$("#ism").value="";document.querySelectorAll("input[name='javob']").forEach(el=>el.checked=false);syncRsvpState();}
     if(button.id==="music"){const audio=$("#bgm");if(!audio)return;if(audio.paused){audio.play().then(()=>{musicStarted=true;button.setAttribute("aria-pressed","true");button.setAttribute("aria-label",labels[currentLocale].musicOff);}).catch(()=>{});}else{audio.pause();musicStarted=false;button.setAttribute("aria-pressed","false");button.setAttribute("aria-label",labels[currentLocale].musicOn);}}
   });
+  document.addEventListener("input",(event)=>{if(event.target?.id==="ism"){const error=$("[data-if='error']");if(error){error.dataset.active="false";error.textContent=labels[currentLocale].error;syncRsvpState();}}});
+  document.addEventListener("change",(event)=>{if(event.target?.name==="javob"){const error=$("[data-if='error']");if(error){error.dataset.active="false";error.textContent=labels[currentLocale].error;syncRsvpState();}}});
   const reveal=document.querySelectorAll(".rv");
   if("IntersectionObserver" in window){const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add("is-visible");observer.unobserve(entry.target);}}),{threshold:.2});reveal.forEach(node=>observer.observe(node));}else reveal.forEach(node=>node.classList.add("is-visible"));
   start();

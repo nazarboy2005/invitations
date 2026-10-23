@@ -34,7 +34,8 @@ test("Palov adapter maps all approved locales and uses live invitation APIs", ()
   assert.match(adapter, /data\.dateTime/);
   assert.match(adapter, /payload\.gallery/);
   assert.match(adapter, /payload\.music/);
-  assert.match(adapter, /notSent\.hidden=!payload\.rsvp\?\.enabled/);
+  assert.match(adapter, /syncRsvpState\(\)/);
+  assert.match(adapter, /document\.addEventListener\("input"/);
   assert.match(adapter, /\$\{data\.apiBase\}\/rsvp/);
   assert.match(read("index.html"), /prefers-reduced-motion: reduce/); // retained from the source page
   assert.doesNotMatch(adapter, /state\.sent = true|simulate|mock/i);
@@ -43,6 +44,13 @@ test("Palov adapter maps all approved locales and uses live invitation APIs", ()
 test("Palov local font stylesheet has no remote font requests", () => {
   const css = read("assets/css/palov-fonts.css");
   assert.doesNotMatch(css, /https?:\/\//);
+  const capturedFontCss = readFileSync(path.join(root, "Invitations - this folder will be removed from production/Invitate/Web invitations/fonts.googleapis.com/css2__8254095ff41b2a53"), "utf8");
+  const normalizedCapturedCss = capturedFontCss.replace(/url\((https:\/\/fonts\.gstatic\.com\/[^)]+)\)/g, (_match, url: string) => {
+    const filename = path.basename(new URL(url).pathname);
+    assert.ok(existsSync(path.join(template, "assets/fonts", filename)), `${filename} is packaged`);
+    return `url(../fonts/${filename})`;
+  });
+  assert.equal(css, normalizedCapturedCss, "the captured font CSS is preserved with only font URLs rewritten locally");
   const files = [...css.matchAll(/url\(\"?\.\.\/fonts\/([^\)\"']+)/g)].map((match) => match[1]);
   assert.ok(files.length > 0);
   for (const file of files) assert.ok(existsSync(path.join(template, "assets/fonts", file)), `${file} exists`);
