@@ -32,8 +32,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 4275,
-      "sha256": "204b51396be442826a097d370ffa07dedb94751f3dc2313cff4e28638e98fcaf"
+      "bytes": 4800,
+      "sha256": "b7f35e4f2719ae85a0070248a215acc54e4c0c6559c41d356322e949d3ab37c9"
     },
     {
       "path": "preview.webp",
@@ -168,19 +168,9 @@
     "description": "Actual packaged renderer opening page; preview-only locale toolbar hidden for capture."
   },
   "archiveGap": {
-    "notFoundAnywhereInArchive": [
-      "double_dragon_green.webp",
-      "glass_garden_pink.webp",
-      "hoa_kho_orange.webp",
-      "mahal_gold.webp",
-      "royal_red.webp"
-    ],
-    "finding": "The exact Palace Rose manifest contains 17 artwork assets. No other template images are copied into its package.",
-    "foundOnlyUnderOtherTemplate": [
-      "chateau_green.webp",
-      "dragon_phoenix_v2.webp",
-      "dragon_phoenix.webp"
-    ],
+    "providerArchive": "Invitations - this folder will be removed from production",
+    "captureManifestsSearched": 13,
+    "rendererSource": "Web invitations/_next/static/chunks/0dg.9_70mpb0j.js, module 99664",
     "componentReferencedGiftImages": [
       "chateau_green.webp",
       "double_dragon_green.webp",
@@ -190,14 +180,65 @@
       "hoa_kho_orange.webp",
       "mahal_gold.webp",
       "royal_red.webp"
-    ]
+    ],
+    "palaceRoseManifestArtworkCount": 17,
+    "sourceExpectedPaths": [
+      "Web invitations/images/palace-rose/double_dragon_green.webp",
+      "Web invitations/images/palace-rose/glass_garden_pink.webp",
+      "Web invitations/images/palace-rose/hoa_kho_orange.webp",
+      "Web invitations/images/palace-rose/mahal_gold.webp",
+      "Web invitations/images/palace-rose/royal_red.webp"
+    ],
+    "sameBasenameFoundOnlyOutsidePalaceRose": [
+      {
+        "name": "double_dragon_green.webp",
+        "path": "Chorlove/Web invitations/images/cloud-castle/gift/double_dragon_green.webp",
+        "bytes": 4124,
+        "sha256": "3dff9dbc6cdcc531a7023b9ef48aabac4f36c7a4016fab6a2af7a3315c23fbe5",
+        "captureManifestUrl": "https://chorlove.uz/images/cloud-castle/gift/double_dragon_green.webp"
+      },
+      {
+        "name": "glass_garden_pink.webp",
+        "path": "Chorlove/Web invitations/images/glass-pink/glass_garden_pink.webp",
+        "bytes": 61172,
+        "sha256": "0bf50ded6b5c60d06e37df73492c9c9314a4a58748bb0791b2457bd22ed8612f",
+        "captureManifestUrl": "https://chorlove.uz/images/glass-pink/glass_garden_pink.webp"
+      },
+      {
+        "name": "chateau_green.webp",
+        "path": "Chorlove/Web invitations/images/royal-red/chateau_green.webp",
+        "bytes": 6464,
+        "sha256": "bccf35463ab607353cef96e13d109847ca06c8cd6e38223699c8297fe8b8dcaf"
+      },
+      {
+        "name": "dragon_phoenix_v2.webp",
+        "path": "Chorlove/Web invitations/images/royal-red/dragon_phoenix_v2.webp",
+        "bytes": 6128,
+        "sha256": "44454b1b194bf9dd6e65c0fa58ced1dbe7881e5d4e6f4cb3e2ee4716ed3698e7"
+      },
+      {
+        "name": "dragon_phoenix.webp",
+        "paths": [
+          "Chorlove/Web invitations/images/glass-pink/dragon_phoenix.webp",
+          "Chorlove/Web invitations/images/royal-red/dragon_phoenix.webp"
+        ],
+        "bytes": 4226,
+        "sha256": "40ae1a05e63cc0f7af7f65351a280f861b2f613cf624e744021d67236098d2e7"
+      }
+    ],
+    "notFoundByExactBasenameAnywhere": [
+      "hoa_kho_orange.webp",
+      "mahal_gold.webp",
+      "royal_red.webp"
+    ],
+    "finding": "The archive captures only 17 canonical Palace Rose artwork assets. None of the 8 Toeyona gift-box decoration images is packaged: five exact basenames occur only under other template paths (including two corresponding capture-manifest URLs), and three exact basenames are absent across all provider archives. No cross-template art is copied or substituted. Keep Palace Rose unpublished and unselectable until exact Palace Rose source assets are recovered."
   },
   "checks": {
     "productionBuild": "passed (Next.js optimized build completed)",
     "motion": "12 SVG petals on normal opening; source-derived placements and timings",
     "localePreview": "uz-Latn, uz-Cyrl, en, ru verified",
     "publication": "unpublished",
-    "focusedTests": "4/4 passed",
+    "focusedTests": "4/4 passed after archive-gap regression assertions",
     "javascriptSyntax": "passed",
     "typecheck": "passed",
     "reducedMotion": "opening verified without petals",

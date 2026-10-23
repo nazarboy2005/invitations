@@ -54,6 +54,17 @@ test("isolated page packages the captured Palace Rose DOM and only its source ar
   assert.ok(assetUrls.length > 0);
   for (const file of new Set(assetUrls)) assert.ok(existsSync(join(base, "assets", file)), file);
   const packagedAssets = readdirSync(join(base, "assets")).sort();
+  const archiveGap = JSON.parse(read(`${base}/source/provenance.json`)).archiveGap;
+  assert.equal(archiveGap.captureManifestsSearched, 13);
+  assert.deepEqual(archiveGap.notFoundByExactBasenameAnywhere, [
+    "hoa_kho_orange.webp",
+    "mahal_gold.webp",
+    "royal_red.webp",
+  ]);
+  for (const candidate of archiveGap.sameBasenameFoundOnlyOutsidePalaceRose) {
+    assert.ok(!packagedAssets.includes(candidate.name), candidate.name);
+    assert.ok(!manifest.resources[`https://chorlove.uz/images/palace-rose/${candidate.name}`]);
+  }
   const manifestAssets = Object.values(manifest.resources)
     .map((resource: { file?: string }) => resource.file)
     .filter((file): file is string => Boolean(file?.startsWith("Web invitations/images/palace-rose/")))
