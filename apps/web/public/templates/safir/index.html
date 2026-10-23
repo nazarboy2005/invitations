@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover" />
+    <title>Safir Invitation</title>
+    <link rel="stylesheet" href="./assets/css/safir.css?v=2" />
+</head>
+
+<body>
+
+    <!-- Фоновая музыка: замените assets/audio/music.mp3 на свой файл -->
+    <audio id="bgMusic" loop preload="none"></audio>
+    <button id="soundToggle" class="sound-toggle" aria-label="Включить/выключить музыку" title="Музыка">
+        <svg id="soundIconOn" width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 9v6h4l5 5V4L8 9H4z" fill="currentColor" />
+            <path d="M16.5 8.5a5 5 0 010 7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+            <path d="M18.7 6a8 8 0 010 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
+                opacity="0.6" />
+        </svg>
+        <svg id="soundIconOff" width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+            style="display:none">
+            <path d="M4 9v6h4l5 5V4L8 9H4z" fill="currentColor" />
+            <path d="M16 9l5 6M21 9l-5 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+        </svg>
+    </button>
+
+    <!-- 1. HERO SECTION (100vh, bg image, изображение по центру) -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <img src="./assets/images/safir/heartbackground.png" alt="Главное изображение"
+                class="hero-center-img animate-zoom" />
+            <div class="hero-text animate-up">
+                <h1 class="hero-title">Wedding Day</h1>
+                <div class="hero-divider">
+                    <span class="hero-divider-line"></span>
+                    <span class="hero-divider-diamond"></span>
+                    <span class="hero-divider-line"></span>
+                </div>
+                <h2 class="hero-subtitle"></h2>
+                <p class="hero-desctitle"></p>
+
+            </div>
+        </div>
+
+    </section>
+
+    <!-- 2. БЕЛЫЙ БЛОК -->
+    <section class="white-card-block">
+        <img src="./assets/images/safir/top.png" alt="Цветочный декор" class="flower-decor flower-top animate-fade" />
+
+        <div class="card-img-wrap animate-up">
+            <img src="./assets/images/safir/image.png" alt="Пара" class="card-main-img" />
+        </div>
+
+        <h1 class="name-title animate-up"></h1>
+        <p class="subtitle animate-up"></p>
+
+        <h2 class="main-title animate-up" data-label="save-date">Save the date</h2>
+        <p class="date-subtitle animate-up"></p>
+        </p>
+
+        <img src="./assets/images/safir/bottom.png" alt="Цветочный декор"
+            class="flower-decor flower-bottom animate-fade" />
+    </section>
+
+    <!-- 3. ДЕТАЛИ И ЛОКАЦИЯ -->
+    <section class="info-block">
+        <h2 class="block-title animate-up"></h2>
+        <p class="block-subtitle animate-up"></p>
+        <p class="block-desc animate-up"></p>
+
+        <div class="location-box animate-up">
+            <img src="./assets/images/safir/loca.svg" alt="Локация" class="location-img" />
+            <a href="#" target="_blank" rel="noreferrer" class="map-btn"></a>
+        </div>
+    </section>
+
+    <!-- 4. ПРОГРАММА -->
+    <section class="time-card-block">
+        <img src="./assets/images/safir/top.png" alt="Цветочный декор" class="flower-decor flower-top animate-fade" />
+
+        <h2 class="main-title animate-up"></h2>
+
+        <div class="timing-wrapper">
+            <div class="timing-item animate-up">
+                <img src="./assets/images/safir/guest.svg" alt="Часы" class="timing-icon" />
+                <span class="timing-time"></span>
+                <h3 class="timing-title"></h3>
+                <p class="timing-desc"></p>
+            </div>
+
+            <div class="timing-item animate-up">
+                <img src="./assets/images/safir/banquet.svg" alt="Часы" class="timing-icon" />
+                <span class="timing-time"></span>
+                <h3 class="timing-title"></h3>
+                <p class="timing-desc"></p>
+            </div>
+
+            <div class="timing-item animate-up">
+                <img src="./assets/images/safir/tort.svg" alt="Часы" class="timing-icon" />
+                <span class="timing-time"></span>
+                <h3 class="timing-title"></h3>
+                <p class="timing-desc"></p>
+            </div>
+
+            <div class="timing-item animate-up">
+                <img src="./assets/images/safir/zav.svg" alt="Часы" class="timing-icon" />
+                <span class="timing-time"></span>
+                <h3 class="timing-title"></h3>
+                <p class="timing-desc"></p>
+            </div>
+        </div>
+
+        <img src="./assets/images/safir/bottom.png" alt="Цветочный декор"
+            class="flower-decor flower-bottom animate-fade" />
+    </section>
+
+    <!-- 5. DRESS CODE -->
+    <section class="dresscode-block animate-up">
+        <img src="./assets/images/safir/left.svg" alt="Цветок слева" class="side-flower flower-left" />
+        <img src="./assets/images/safir/right.svg" alt="Цветок справа" class="side-flower flower-right" />
+
+        <div class="dresscode-content">
+            <h2 class="main-title"></h2>
+            <p class="subtitle"></p>
+
+            <p class="subtitle"></p>
+
+            <div class="dresscode-palette">
+                <span class="color-circle" style="background:#000"></span>
+                <span class="color-circle" style="background:#333"></span>
+                <span class="color-circle" style="background:#e8c9a3"></span>
+                <span class="color-circle" style="background:#c98b6b"></span>
+                <span class="color-circle" style="background:#ffd6c2"></span>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. ЧАТ И АНКЕТА -->
+    <section class="time-card-block">
+        <img src="./assets/images/safir/top.png" alt="Цветочный декор" class="flower-decor flower-top animate-fade" />
+
+        <p class="main-title animate-up"></p>
+        <p class="block-desc animate-up"></p>
+
+        <div class="contact-subblock animate-up">
+            <h2 class="main-title"></h2>
+            <p class="block-desc"></p>
+            <a href="#" class="ctc-btn"></a>
+        </div>
+
+        <div class="form-subblock animate-up">
+            <h2 class="main-title"></h2>
+            <p class="subtitle"></p>
+            <button id="openRsvpBtn" class="rsvp-btn"></button>
+        </div>
+
+        <img src="./assets/images/safir/bottom.png" alt="Цветочный декор"
+            class="flower-decor flower-bottom animate-fade" />
+    </section>
+
+    <!-- 7. FINAL HERO SECTION -->
+    <section class="final-hero-section">
+        <div class="final-hero-content animate-up">
+            <p class="final-title"></p>
+            <p class="final-text"></p>
+        </div>
+    </section>
+
+    <!-- ─── RSVP MODAL (Анкета) ─── -->
+    <div id="rsvpOverlay" class="rsvp-overlay">
+        <div class="rsvp-modal">
+            <button id="closeRsvpBtn" class="rsvp-close" aria-label="Закрыть">&times;</button>
+
+            <div id="rsvpFormView">
+                <h2 class="rsvp-title"></h2>
+                <p class="rsvp-subtitle"></p>
+
+                <form id="rsvpForm" novalidate>
+                    <label class="rsvp-label" for="rsvpName"></label>
+                    <input type="text" id="rsvpName" name="name" class="rsvp-input" placeholder=""
+                        required />
+
+                    <span class="rsvp-label"></span>
+                    <div class="rsvp-radio-group">
+                        <label class="rsvp-radio">
+                            <input type="radio" name="attend" value="yes" required />
+                            <span></span>
+                        </label>
+                        <label class="rsvp-radio">
+                            <input type="radio" name="attend" value="no" required />
+                            <span></span>
+                        </label>
+                    </div>
+
+                    <label class="rsvp-label" for="rsvpWishes"></label>
+                    <textarea id="rsvpWishes" name="wishes" class="rsvp-textarea" rows="3"
+                        placeholder=""></textarea>
+
+                    <p id="rsvpError" class="rsvp-error"></p>
+
+                    <button type="submit" id="rsvpSubmitBtn" class="rsvp-submit"></button>
+                </form>
+            </div>
+
+            <div id="rsvpSuccessView" class="rsvp-success-view">
+                <div class="rsvp-success-icon">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="12" cy="12" r="11" stroke="currentColor" stroke-width="1.6" />
+                        <path d="M7 12.5l3 3 7-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                </div>
+                <h2 class="rsvp-title"></h2>
+                <p class="rsvp-subtitle"></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="./bridge.js?v=4"></script>
+</body>
+
+</html>
+

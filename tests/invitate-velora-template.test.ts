@@ -1,0 +1,159 @@
+import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
+import { existsSync, readFileSync } from "node:fs";
+import path from "node:path";
+import test from "node:test";
+import { templateById } from "../packages/contracts/src/index";
+import { createTemplatePreviewSample } from "../apps/web/src/modules/catalog/preview-sample";
+
+const root = process.cwd();
+const packageRoot = path.join(root, "apps/web/public/templates/velora");
+const captureRoot = path.join(
+  root,
+  "Invitations - this folder will be removed from production/Invitate/Web invitations/invitate.uz",
+);
+const readPackage = (relative: string) =>
+  readFileSync(path.join(packageRoot, relative), "utf8");
+
+test("Velora is a private wedding design in the shared typed catalog", () => {
+  const template = templateById("velora");
+  assert.ok(template);
+  assert.equal(template.name, "Velora");
+  assert.equal(template.published, false);
+  assert.equal(template.previewEventType, "wedding");
+  assert.deepEqual(template.categoryIds, ["wedding"]);
+  assert.deepEqual(template.supportedEventTypes, ["wedding"]);
+  assert.equal(template.priceMinor, 15_000_000);
+  assert.equal(template.previewImage, "/templates/velora/preview.png");
+  assert.ok(existsSync(path.join(packageRoot, "preview.png")));
+});
+
+test("Velora packages its source page, local fonts and controls without sample/runtime data", () => {
+  const html = readPackage("index.html");
+  const adapter = readPackage("assets/js/velora-adapter.js");
+  const motion = readPackage("assets/js/velora.js");
+  const css = readPackage("assets/css/velora.css");
+  const fontCss = readPackage("assets/vendor/ibm-plex-serif.css");
+  const fontProvenance = JSON.parse(readPackage("assets/provenance.json")).fonts;
+
+  for (const asset of [
+    "source/velora.html",
+    "source/assets/css/velora.css",
+    "source/assets/js/velora.js",
+    "source/assets/previews/template/velora/back.png",
+    "source/assets/previews/template/velora/desktop.png",
+    "source/assets/previews/template/velora/frame-01.svg",
+    "assets/vendor/aos.css",
+    "assets/vendor/aos.js",
+    "assets/fonts/RWmMoKWR9v4ksMfaWd_JN9XFiaQ.woff2",
+    "assets/images/music-off2.png",
+  ]) assert.ok(existsSync(path.join(packageRoot, asset)), `${asset} exists`);
+
+  assert.match(html, /assets\/js\/velora-adapter\.js/);
+  assert.doesNotMatch(html, /stats\.tolipov|fonts\.googleapis|fonts\.gstatic|unpkg\.com|Ибрагим|Мафтуна|2027-09-03|0341\.aac/);
+  assert.doesNotMatch(`${adapter}\n${motion}`, /stats\.tolipov|telegram\.org\/bot|bexruz0510\.php/);
+  assert.match(adapter, /uz-Cyrl/);
+  assert.match(adapter, /\b(en|ru):/);
+  assert.match(adapter, /\$\{data\.apiBase\}\/rsvp/);
+  assert.match(adapter, /input\[name="transfer"\]/);
+  assert.match(adapter, /data\.venue\?\.mapUrl/);
+  assert.match(adapter, /data\.program/);
+  assert.match(adapter, /data\.gallery/);
+  assert.match(adapter, /item\.alt/);
+  assert.match(adapter, /item\.caption/);
+  assert.match(html, /id="dresscode-foto-woman"/);
+  assert.doesNotMatch(html, /wow-card\.ru|1103-[1-5]\.jpg/);
+  assert.match(html, /data-off-icon="\/templates\/velora\/assets\/images\/music-off2\.png"/);
+  assert.match(css, /prefers-reduced-motion:\s*reduce/);
+  assert.match(motion, /prefers-reduced-motion/);
+  assert.match(fontCss, /Great Vibes/);
+  assert.match(fontCss, /IBM Plex Serif/);
+  assert.equal((fontCss.match(/@font-face/g) ?? []).length, 76);
+  assert.doesNotMatch(fontCss, /https?:\/\//);
+  assert.equal(fontProvenance.localFontFiles, 76);
+  assert.equal(fontProvenance.sourceSha256, createHash("sha256").update(readPackage("source/assets/fonts/ibm-plex-serif.css")).digest("hex"));
+  for (const [, font] of fontCss.matchAll(/url\([^/]*\/templates\/velora\/assets\/fonts\/([^\)]+)\)/g))
+    assert.ok(existsSync(path.join(packageRoot, "assets/fonts", font)), `${font} exists`);
+});
+
+test("Velora opening image is the authentic portrait renderer capture with recorded provenance", () => {
+  const cover = readFileSync(path.join(packageRoot, "preview.png"));
+  const provenance = JSON.parse(readPackage("preview.provenance.json"));
+  assert.equal(cover.toString("ascii", 1, 4), "PNG");
+  assert.equal(cover.readUInt32BE(16), 480);
+  assert.equal(cover.readUInt32BE(20), 860);
+  assert.equal(createHash("sha256").update(cover).digest("hex"), provenance.sha256);
+  assert.equal(provenance.renderedArtifact, "preview.png");
+  assert.equal(provenance.capture.fixture, "apps/web/src/modules/catalog/preview-sample.json");
+  assert.match(provenance.source, /Invitate\/Web invitations\/invitate\.uz\/velora\.html/);
+});
+
+test("Velora keeps its captured HTML, CSS and JavaScript untouched in source/", () => {
+  for (const [captured, copied] of [
+    ["velora.html", "source/velora.html"],
+    ["assets/css/velora.css", "source/assets/css/velora.css"],
+    ["assets/js/velora.js", "source/assets/js/velora.js"],
+  ]) {
+    const capturedBytes = readFileSync(path.join(captureRoot, captured));
+    const copiedBytes = readFileSync(path.join(packageRoot, copied));
+    assert.equal(
+      createHash("sha256").update(copiedBytes).digest("hex"),
+      createHash("sha256").update(capturedBytes).digest("hex"),
+      `${captured} matches its preserved capture`,
+    );
+  }
+});
+
+test("Velora uses the shared ephemeral wedding preview across all approved locales", () => {
+  const sample = createTemplatePreviewSample("velora");
+  assert.equal(sample.eventType, "wedding");
+  for (const locale of ["uz-Latn", "uz-Cyrl", "en", "ru"] as const) {
+    assert.ok(sample.content[locale].people.length >= 2);
+    assert.ok(sample.content[locale].greeting);
+    assert.ok(sample.content[locale].message);
+  }
+  const renderer = readFileSync(
+    path.join(root, "apps/web/src/templates/invitate/renderer.tsx"),
+    "utf8",
+  );
+  const registry = readFileSync(
+    path.join(root, "apps/web/src/templates/invitate/index.ts"),
+    "utf8",
+  );
+  const publicPage = readFileSync(
+    path.join(root, "apps/web/src/app/i/[slug]/page.tsx"),
+    "utf8",
+  );
+  assert.match(renderer, /templateId === "velora"/);
+  assert.match(renderer, /veloraMessage/);
+  assert.match(renderer, /templates\/\$\{templateId\}\/index\.html/);
+  assert.match(registry, /"velora"/);
+  assert.match(publicPage, /isInvitateTemplate\(invitation\.templateId\)/);
+  assert.match(publicPage, /<InvitateInvitation[\s\S]*?guestToken=\{query\.g\}/);
+});
+
+test("Velora RSVP adapter matches the public RSVP request contract", () => {
+  const adapter = readPackage("assets/js/velora-adapter.js");
+  const route = readFileSync(
+    path.join(root, "apps/web/src/app/api/public/invitations/[id]/rsvp/route.ts"),
+    "utf8",
+  );
+  assert.match(adapter, /\$\{data\.apiBase\}\/rsvp/);
+  assert.match(adapter, /status:answer\.value/);
+  assert.match(adapter, /partySize:1/);
+  assert.match(adapter, /guestToken:data\.guestToken/);
+  assert.match(route, /status: z\.enum\(\["yes", "no", "maybe"\]\)/);
+  assert.match(route, /partySize: z\.number\(\)/);
+  assert.match(route, /publicInvitation\(id\)/);
+});
+
+test("Velora migration registers only the private wedding row", () => {
+  const migration = readFileSync(
+    path.join(root, "packages/database/migrations/0124_register_velora_template.sql"),
+    "utf8",
+  );
+  assert.match(migration, /VALUES \('velora', 'Velora', 15000000, 'UZS', false\)/);
+  assert.match(migration, /VALUES \('velora', 'wedding'\)/);
+  assert.match(migration, /template_supported_event_types[\s\S]*VALUES \('velora', 'wedding'\)/);
+  assert.doesNotMatch(migration, /published\s*=\s*true/i);
+});

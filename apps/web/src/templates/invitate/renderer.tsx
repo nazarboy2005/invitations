@@ -3,9 +3,18 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { Invitation, Locale } from "@taklifnoma/contracts";
 import { makeLegacyData } from "@/templates/anor/renderer";
-import { makeNahorgiOshData } from "./nahorgi-osh-adapter";
+import { getContent } from "@taklifnoma/contracts";
+import { getTemplatePreviewWishes } from "@/modules/catalog/preview-sample";
+import { eventInstant, formatDate } from "../date-format";
 import { CATALOG_PREVIEW_MUSIC } from "@/modules/catalog/catalog-music";
+import { makeNahorgiOshData } from "./nahorgi-osh-adapter";
 import styles from "./renderer.module.css";
+import { makeBloomData } from "./bloom-adapter";
+import { makeVelvetData } from "./velvet-adapter";
+import { makeWeddingData } from "./wedding-adapter";
+import { makeGoldenHourData } from "./golden-hour/adapter";
+import { useInvitationExtras } from "@/templates/use-invitation-extras";
+import { SafirInvitation } from "./safir-renderer";
 
 type Props = {
   invitation: Invitation;
@@ -18,6 +27,7 @@ type Props = {
   catalogMusic?: boolean;
   sampleWishes?: boolean;
   silentPlayback?: boolean;
+  qaReducedMotion?: boolean;
 };
 
 const sourceLocale: Record<Locale, string> = {
@@ -38,6 +48,7 @@ export function InvitateInvitation({
   catalogMusic = false,
   sampleWishes = false,
   silentPlayback = false,
+  qaReducedMotion = false,
 }: Props) {
   const frame = useRef<HTMLIFrameElement>(null);
   const initialized = useRef<string | null>(null);
@@ -70,7 +81,16 @@ export function InvitateInvitation({
         },
       ];
     }
-
+    if (preview && sampleWishes && !hasCreatorPhotos && templateId === "swan") {
+      source.gallery = [
+        {
+          id: "swan-source-preview",
+          src: "/templates/swan/assets/images/0310/1.png",
+          alt: "Swan source preview photo",
+          caption: "Swan source preview photo",
+        },
+      ];
+    }
     const languages = invitation.enabledLocales.map(
       (item) => sourceLocale[item],
     );
@@ -81,6 +101,7 @@ export function InvitateInvitation({
         : "";
     return {
       ...source,
+      platformPreview: preview,
       catalogPreview: preview && sampleWishes,
       locale: sourceLocale[frameLocale],
       defaultLang: sourceLocale[frameLocale],
@@ -103,6 +124,166 @@ export function InvitateInvitation({
     sampleWishes,
     silentPlayback,
   ]);
+  const estelleMessage = useMemo(() => {
+    const source = makeLegacyData(
+      invitation,
+      frameLocale,
+      guestName,
+      sampleWishes,
+    );
+    const content = getContent(invitation, frameLocale);
+    const when = eventInstant(invitation.startsAt, invitation.timezone);
+    const date = when
+      ? formatDate(invitation.startsAt, frameLocale, invitation.timezone, {
+          day: "numeric",
+          month: "long",
+          year: "numeric",
+        })
+      : "";
+    return {
+      ...source,
+      eventType: content.eventLabel,
+      greeting: guestName
+        ? content.personalGreeting.replaceAll("{name}", guestName) ||
+          content.greeting
+        : content.greeting,
+      dateTime: when?.toISOString() ?? "",
+      timezone: invitation.timezone,
+      date: { short: date },
+      venue: {
+        ...source.venue,
+        name: content.venueName,
+        address: content.address,
+        landmark: content.landmark,
+        lat: invitation.venue.latitude,
+        lng: invitation.venue.longitude,
+        mapUrl: invitation.venue.mapUrl,
+      },
+      programHeading: content.programHeading,
+      program: invitation.program.map((entry) => ({
+        id: entry.id,
+        time: entry.time,
+        title: content.programTitles[entry.id] ?? "",
+      })),
+      dressCode: {
+        enabled: invitation.dressCode.enabled,
+        style: invitation.dressCode.style[frameLocale] ?? "",
+        text: invitation.dressCode.text[frameLocale] ?? "",
+        note: invitation.dressCode.note[frameLocale] ?? "",
+        colors: invitation.dressCode.colors.map((color) => ({
+          hex: color.hex,
+          name: color.name[frameLocale] ?? "",
+        })),
+      },
+      wishesEnabled: invitation.wishes.enabled,
+      rsvpIntro: content.message,
+      rsvp: invitation.rsvp,
+      hosts: content.hosts,
+      gift: invitation.gift,
+      preview: preview && sampleWishes,
+      locale: sourceLocale[frameLocale],
+      languages: invitation.enabledLocales.map((item) => sourceLocale[item]),
+      guestName,
+      guestToken,
+      music: invitation.music.enabled
+        ? invitation.music.url
+        : preview && catalogMusic
+          ? CATALOG_PREVIEW_MUSIC.url
+          : "",
+      apiBase: `/api/public/invitations/${encodeURIComponent(invitationId)}`,
+      contacts: source.contacts,
+    };
+  }, [
+    catalogMusic,
+    frameLocale,
+    guestName,
+    guestToken,
+    invitation,
+    invitationId,
+    preview,
+    sampleWishes,
+  ]);
+  const veloraMessage = useMemo(() => {
+    const source = makeLegacyData(
+      invitation,
+      frameLocale,
+      guestName,
+      sampleWishes,
+    );
+    const content = getContent(invitation, frameLocale);
+    const when = eventInstant(invitation.startsAt, invitation.timezone);
+    return {
+      ...source,
+      locale: sourceLocale[frameLocale],
+      languages: invitation.enabledLocales.map((item) => sourceLocale[item]),
+      eventType: content.eventLabel,
+      greeting: guestName
+        ? content.personalGreeting.replaceAll("{name}", guestName) ||
+          content.greeting
+        : content.greeting,
+      invitationText: content.message,
+      welcome: content.greeting,
+      dateTime: when?.toISOString() ?? "",
+      timezone: invitation.timezone,
+      venue: {
+        ...source.venue,
+        name: content.venueName,
+        address: content.address,
+        landmark: content.landmark,
+        lat: invitation.venue.latitude,
+        lng: invitation.venue.longitude,
+        mapUrl: invitation.venue.mapUrl,
+      },
+      programHeading: content.programHeading,
+      program: invitation.program.map((entry) => ({
+        id: entry.id,
+        time: entry.time,
+        title: content.programTitles[entry.id] ?? "",
+      })),
+      dressCode: {
+        enabled: invitation.dressCode.enabled,
+        style: invitation.dressCode.style[frameLocale] ?? "",
+        text: invitation.dressCode.text[frameLocale] ?? "",
+        note: invitation.dressCode.note[frameLocale] ?? "",
+        colors: invitation.dressCode.colors.map((color) => ({
+          hex: color.hex,
+          name: color.name[frameLocale] ?? "",
+        })),
+      },
+      rsvp: invitation.rsvp,
+      music: invitation.music.enabled
+        ? invitation.music.url
+        : preview && catalogMusic
+          ? CATALOG_PREVIEW_MUSIC.url
+          : "",
+      guestName,
+      guestToken,
+      apiBase: `/api/public/invitations/${encodeURIComponent(invitationId)}`,
+      contacts: source.contacts,
+      preview: preview && sampleWishes,
+    };
+  }, [
+    catalogMusic,
+    frameLocale,
+    guestName,
+    guestToken,
+    invitation,
+    invitationId,
+    preview,
+    sampleWishes,
+  ]);
+  const velvetMessage = useMemo(
+    () =>
+      makeVelvetData(
+        invitation,
+        frameLocale,
+        guestName,
+        guestToken,
+        invitationId,
+        preview,
+      ),
+    [frameLocale, guestName, guestToken, invitation, invitationId, preview],
+  );
   const nahorgiOshMessage = useMemo(
     () =>
       makeNahorgiOshData(
@@ -114,10 +295,191 @@ export function InvitateInvitation({
         preview,
         sampleWishes,
       ),
-    [frameLocale, guestName, guestToken, invitation, invitationId, preview, sampleWishes],
+    [
+      frameLocale,
+      guestName,
+      guestToken,
+      invitation,
+      invitationId,
+      preview,
+      sampleWishes,
+    ],
+  );
+  const goldenHourMessage = useMemo(() => {
+    const message = makeGoldenHourData(
+      invitation,
+      frameLocale,
+      guestName,
+      guestToken,
+      invitationId,
+      preview,
+      preview && sampleWishes,
+    );
+    if (!message.music.enabled && preview && catalogMusic)
+      message.music = { enabled: true, url: CATALOG_PREVIEW_MUSIC.url };
+    return message;
+  }, [
+    catalogMusic,
+    frameLocale,
+    guestName,
+    guestToken,
+    invitation,
+    invitationId,
+    preview,
+    sampleWishes,
+  ]);
+  const whitelessMessage = useMemo(() => {
+    const source = makeLegacyData(
+      invitation,
+      frameLocale,
+      guestName,
+      preview && sampleWishes,
+    );
+    const content = getContent(invitation, frameLocale);
+    const when = eventInstant(invitation.startsAt, invitation.timezone);
+    return {
+      ...source,
+      locale: sourceLocale[frameLocale],
+      languages: invitation.enabledLocales.map((item) => sourceLocale[item]),
+      title: content.title,
+      eventType: content.eventLabel,
+      message: content.message,
+      dateTime: when?.toISOString() ?? "",
+      timezone: invitation.timezone,
+      venue: {
+        ...source.venue,
+        name: content.venueName,
+        address: [content.address, content.landmark].filter(Boolean).join(", "),
+        mapUrl: invitation.venue.mapUrl,
+      },
+      rsvp: invitation.rsvp,
+      rsvpEnabled: invitation.rsvp.enabled,
+      wishesEnabled: invitation.wishes.enabled,
+      receiptUploadEnabled:
+        invitation.gift.enabled && invitation.gift.receiptUploadEnabled,
+      gallery: invitation.gallery
+        .filter((item) => item.url.trim())
+        .map((item) => ({
+          id: item.id,
+          src: item.url,
+          alt: item.alt || item.caption,
+          caption: item.caption,
+        })),
+      music: invitation.music.enabled ? invitation.music.url : "",
+      guestToken,
+      preview,
+      apiBase: `/api/public/invitations/${encodeURIComponent(invitationId)}`,
+    };
+  }, [
+    frameLocale,
+    guestName,
+    guestToken,
+    invitation,
+    invitationId,
+    preview,
+    sampleWishes,
+  ]);
+  const sendGoldenHourExtras = useInvitationExtras(
+    frame,
+    invitation,
+    goldenHourMessage,
+    frameLocale,
+    invitationId,
+    guestToken,
+    preview,
+    templateId === "golden-hour",
+  );
+  const bloomMessage = useMemo(
+    () =>
+      makeBloomData(
+        invitation,
+        frameLocale,
+        guestName,
+        guestToken,
+        invitationId,
+        preview,
+        catalogMusic,
+        silentPlayback,
+      ),
+    [
+      catalogMusic,
+      frameLocale,
+      guestName,
+      guestToken,
+      invitation,
+      invitationId,
+      preview,
+      silentPlayback,
+    ],
+  );
+  const weddingMessage = useMemo(
+    () =>
+      makeWeddingData(
+        invitation,
+        frameLocale,
+        guestName,
+        guestToken,
+        invitationId,
+        preview && sampleWishes,
+        qaReducedMotion,
+      ),
+    [
+      frameLocale,
+      guestName,
+      guestToken,
+      invitation,
+      invitationId,
+      preview,
+      qaReducedMotion,
+      sampleWishes,
+    ],
   );
   const activeMessage =
-    templateId === "invitate-nahorgi-osh" ? nahorgiOshMessage : message;
+    templateId === "girlsparty"
+      ? {
+          ...message,
+          wishes:
+            preview && sampleWishes
+              ? getTemplatePreviewWishes(frameLocale).map((item) => ({
+                  name: item.name,
+                  text: item.text,
+                }))
+              : [],
+          title: getContent(invitation, frameLocale).title,
+          greeting: guestName
+            ? getContent(invitation, frameLocale).personalGreeting.replaceAll(
+                "{name}",
+                guestName,
+              ) || getContent(invitation, frameLocale).greeting
+            : getContent(invitation, frameLocale).greeting,
+          message: getContent(invitation, frameLocale).message,
+          dateTime:
+            eventInstant(
+              invitation.startsAt,
+              invitation.timezone,
+            )?.toISOString() ?? "",
+          timezone: invitation.timezone,
+          preview,
+          rsvp: invitation.rsvp,
+          wishesEnabled: invitation.wishes.enabled,
+        }
+      : templateId === "invitate-wedding"
+        ? weddingMessage
+        : templateId === "bloom"
+          ? bloomMessage
+          : templateId === "estelle"
+            ? estelleMessage
+            : templateId === "velora"
+              ? veloraMessage
+              : templateId === "velvet"
+                ? velvetMessage
+                : templateId === "invitate-nahorgi-osh"
+                  ? nahorgiOshMessage
+                  : templateId === "golden-hour"
+                    ? goldenHourMessage
+                    : templateId === "whiteless"
+                      ? whitelessMessage
+                      : message;
   const latest = useRef(activeMessage);
   latest.current = activeMessage;
   const frameUrl = `/templates/${templateId}/index.html?lang=${sourceLocale[locale]}`;
@@ -148,6 +510,22 @@ export function InvitateInvitation({
     );
   }, [activeMessage, templateId]);
 
+  if (templateId === "safir")
+    return (
+      <SafirInvitation
+        invitation={invitation}
+        invitationId={invitationId}
+        locale={locale}
+        guestName={guestName}
+        guestToken={guestToken}
+        preview={preview}
+        fullPreview={fullPreview}
+        catalogMusic={catalogMusic}
+        sampleWishes={sampleWishes}
+        silentPlayback={silentPlayback}
+      />
+    );
+
   const classes = fullPreview
     ? styles.full
     : preview
@@ -158,7 +536,11 @@ export function InvitateInvitation({
       <iframe
         key={templateId}
         ref={frame}
-        title={`${activeMessage.groom} & ${activeMessage.bride} invitation`}
+        title={
+          templateId === "golden-hour"
+            ? `${activeMessage.title || activeMessage.eventType} invitation`
+            : `${activeMessage.groom} & ${activeMessage.bride} invitation`
+        }
         src={frameUrl}
         onLoad={() => {
           const target = frame.current?.contentWindow;
@@ -173,6 +555,7 @@ export function InvitateInvitation({
               window.location.origin,
             );
           }
+          if (templateId === "golden-hour") sendGoldenHourExtras();
         }}
         allow="autoplay; fullscreen; clipboard-write"
         loading="eager"

@@ -10,19 +10,19 @@ for registration and publication.
 |---:|---|---|
 | 1 | Aurelia | Published at 150,000 UZS; wedding compatibility confirmed; both captured default photos remain replaceable by creator uploads. |
 | 2 | Swan | Captured source and assets exist locally. |
-| 3 | Whiteless | Captured source and assets exist locally. |
-| 4 | Velvet | Captured source and assets exist locally. |
+| 3 | Whiteless | Full captured source package, four-locale contract adapter, and source-rendered portrait opening artwork are staged. Focused package checks and web typecheck pass. Unpublished pending integrated browser/runtime verification and migration application; `0133_register_whiteless_template.sql` is the currently unique registration ID. |
+| 4 | Velvet | Source package, four-locale typed adapter, platform RSVP bridge, reduced-motion support, and portrait source-opening artwork are staged. Typed/DB registration remains unpublished; browser interaction, public save/reopen, and final release checks are pending. |
 | 5 | Estelle | Captured source and assets exist locally. |
 | 6 | Palov | Captured source and assets exist locally. |
 | 7 | Nahorgi osh | Integrated from the exact Invitate capture under `invitate-nahorgi-osh`; published for `osh` with a source-rendered portrait cover, localized typed adapter, and API-backed RSVP. |
 | 8 | Fairy | Captured source and assets exist locally. |
-| 9 | Bloom | Captured source and assets exist locally. |
+| 9 | Bloom | Integrated from the captured Invitate source; privately registered as birthday-only. Renderer, source package, localized bridge, and source-authentic portrait opening are present. Keep unpublished and unselectable until full release verification passes. |
 | 10 | Golden Hour | Captured source and assets exist locally. |
-| 11 | Wedding | Captured source and assets exist locally. |
+| 11 | Wedding | `invitate-wedding` is privately registered with the captured source package, four-locale adapter, and RSVP API bridge. Full Invitate archive search confirmed the strip photo and location video are absent; the captured source itself reports the location video unavailable. Source/package openings were compared at desktop and 390×844 mobile viewports, and normal/reduced-motion states were inspected. Typecheck and production build pass. Keep private pending authentic catalog opening art, public/save-reopen checks, and a product decision for the unsupported artist lineup. |
 | 12 | Velora | Captured source and assets exist locally. |
 | 13 | Girls Party | Captured source and assets exist locally. |
 | 14 | Butterfly | Captured source and assets exist locally. |
-| 15 | Safir | Captured source and assets exist locally. |
+| 15 | Safir | Isolated package preserves captured `safir.js` and `safir.css` byte-for-byte and adapts platform data/API behavior through the bridge; four locale handoffs and clean 430×931 source-opening catalog artwork are staged with provenance hashes. Typed catalog and database registration are complete via additive migration `0136_register_safir_template.sql`. Remains unpublished/unselectable pending matching viewport source/package comparisons in normal and reduced motion, production preview, public save/reopen, mobile/desktop, and final release checks. The actual React renderer passed section rendering, RSVP-modal display, and preview no-send behavior in a temporary local route; it has been removed. Browser comparison could not run in the resumption session because local browser automation was disabled. |
 | — | Evelina | Published at 150,000 UZS; wedding compatibility confirmed. |
 
 This ordering follows the currently visible live catalog sequence intersected

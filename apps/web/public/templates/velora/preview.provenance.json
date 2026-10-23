@@ -1,0 +1,27 @@
+{
+  "kind": "rendered-opening-preview",
+  "source": "Invitations - this folder will be removed from production/Invitate/Web invitations/invitate.uz/velora.html",
+  "sourceAssets": [
+    "source/assets/css/velora.css",
+    "source/assets/previews/template/velora/back.png",
+    "source/assets/previews/template/velora/desktop.png",
+    "source/assets/previews/template/velora/frame-01.svg"
+  ],
+  "renderedArtifact": "preview.png",
+  "sha256": "06b130e49dc6ace39e845be2fbd27c4e0c3309f1a1370d84615b7d8da46d4623",
+  "dimensions": {
+    "width": 480,
+    "height": 860
+  },
+  "capture": {
+    "browser": "Microsoft Edge 155.0.4283.62 headless",
+    "viewport": "480x860",
+    "state": "initial Velora opening, rendered by the packaged source page and adapter",
+    "fixture": "apps/web/src/modules/catalog/preview-sample.json",
+    "fixtureUse": "ephemeral catalog artwork only; no invitation data was saved or published"
+  },
+  "notes": [
+    "The preview shows the source floral background, frame, typography, names, invitation label, and localized event date from the actual renderer.",
+    "The source capture remains untouched. No provider site runtime or analytics are used."
+  ]
+}

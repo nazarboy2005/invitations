@@ -1,0 +1,17 @@
+-- Keep Invitate Velora private until its source adapter and release checks are complete.
+INSERT INTO templates (id, name, price_minor, currency, published)
+VALUES ('velora', 'Velora', 15000000, 'UZS', false)
+ON CONFLICT (id) DO UPDATE SET
+  name = EXCLUDED.name,
+  price_minor = EXCLUDED.price_minor,
+  currency = EXCLUDED.currency,
+  published = false,
+  updated_at = now();
+
+INSERT INTO template_category_assignments (template_id, category_id)
+VALUES ('velora', 'wedding')
+ON CONFLICT DO NOTHING;
+
+INSERT INTO template_supported_event_types (template_id, event_type)
+VALUES ('velora', 'wedding')
+ON CONFLICT DO NOTHING;

@@ -1,0 +1,49 @@
+{
+  "template": "safir",
+  "provider": "Invitate",
+  "referenceManifest": "Invitations - this folder will be removed from production/Invitate/capture-manifest.json",
+  "referenceHtml": "Invitations - this folder will be removed from production/Invitate/Web invitations/invitate.uz/safir.html",
+  "sourceSha256": {
+    "html": "4A81334C8A37B0C99DD3D571C5F3A077AF2EAE2AC1C58595227BBD9155408081",
+    "css": "8A622BE64A6935C9A0B52A8E76F9DA68D5C19B41B6E8FB45C7D11CC679AC3C79",
+    "javascript": "402D4D2560E9AC3F5A291EA6E47D7896033FA2DBF375D1DBBB2AA36BEAE57DE4"
+  },
+  "artwork": {
+    "file": "catalog-cover-opening.png",
+    "dimensions": [
+      430,
+      931
+    ],
+    "format": "PNG",
+    "sha256": "8d350a64c686e1faad55881d34a64d4ad1860d8d2cd191a224a6f4f2ce7a3288",
+    "sourceOpening": "Captured Safir closed-envelope hero before scrolling or guest interaction",
+    "renderer": "Packaged /templates/safir/index.html and bridge.js",
+    "route": "/templates/safir/index.html?lang=uz&qaCapture=1",
+    "fixture": null,
+    "captureMethod": "ChatGPT in-app browser at 430×932 CSS viewport after document.fonts.ready and refreshed local CSS/assets",
+    "captureOnlyExclusions": [
+      "fixed language selector",
+      "music toggle",
+      "browser scrollbar"
+    ],
+    "capturedAt": "2026-10-23"
+  },
+  "sourceAssets": [
+    {
+      "file": "assets/images/0310/1.png",
+      "sha256": "74ad75e8daf167e4216aebe5fb6d0a429d49070a1c60a06d102f67d6c63ef174"
+    },
+    {
+      "file": "assets/images/0310/3.png",
+      "sha256": "66eab8f2ee4947097322e543bf40ef926e9d61d4b89e61af9988c39faa4f4c8e"
+    }
+  ],
+  "sourcePackage": {
+    "preservedOriginals": [
+      "source/safir.css",
+      "source/safir.js"
+    ],
+    "adaptedRuntime": "bridge.js",
+    "sourceRuntimeAdaptation": "Scroll reveals and invitation controls adapted to platform contract and APIs; reference analytics, sample data, external audio and safir.php transport excluded."
+  }
+}

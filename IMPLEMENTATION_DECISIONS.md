@@ -1,5 +1,59 @@
 # Implementation decisions
 
+## Invitate Wedding registration and source gaps (2026-10-23)
+
+- User requirement: reserve catalog ID `invitate-wedding` and additive migration
+  `0128_register_invitate_wedding_template.sql`; support wedding events and keep
+  the entry private/unselectable until the release checks pass.
+- The manifest points to `Invitate/Web invitations/invitate.uz/wedding.html`.
+  The source HTML/CSS/JavaScript, locally captured assets, and captured fonts
+  are packaged under the isolated template folder. The application adapter maps
+  contract names, date/countdown, message, venue/map, program, gallery,
+  dress-code, RSVP, music, guest greeting, and four approved locales.
+- Confirmed release gaps: the manifest omits the referenced location-night
+  video and one strip image; the celebrity lineup has no shared contract field
+  and is hidden. The local portrait catalog art is cropped from the hero
+  background and does not show the text overlay. These remain fidelity gates;
+  do not publish until a complete opening capture and missing-source decisions
+  are resolved and normal/reduced-motion, RSVP, and public-render checks pass.
+- Fidelity follow-up (2026-10-23): the exact missing asset URLs were searched
+  across the full Invitate capture manifest/tree and captured script text. No
+  matching local resource or separate Wedding runtime chunk exists; the
+  captured source itself reports the location video as unavailable. The source
+  and app were compared in-browser at matching desktop and 390×844 mobile
+  viewports. Their hero composition uses the same original template source.
+  The app frame showed the reduced-motion class and zero autoplay videos in
+  QA mode, versus two autoplay videos in normal mode. Typecheck, production
+  build, source script syntax, and preview RSVP guard checks pass. Authentic
+  catalog opening art, public-route parity, save/reopen, and the unsupported
+  artist-lineup gap remain release gates. The full-preview route forwards its
+  reduced-motion QA flag. See the package README for comparison notes.
+
+## Invitate Safir implementation status (2026-10-23)
+
+- User request: implement only Safir from the exact Invitate manifest path
+  `Web invitations/invitate.uz/safir.html`; its paired CSS, JavaScript, fonts,
+  and image assets are in the same Invitate capture tree. Preserve the capture.
+- Coordination: catalog ID `safir` is reserved. The database has no existing
+  Safir row; migrations `0131` through `0135` are assigned, so use the unique
+  next migration `0136_register_safir_template.sql`. Register it additively and
+  keep it private until the remaining release checks pass.
+- Safir is a wedding-only design. Its isolated source package adapts the
+  captured floral invitation to the shared renderer, including localized
+  content, venue/map, repeatable programme, dress-code palette, optional
+  music, contact, RSVP, and moderated wish submission. The clean portrait
+  opening art and a local React-renderer check (all four locale handoffs and
+  preview no-send) are complete. Captured `safir.js` and `safir.css` are
+  preserved byte-for-byte in `source/`; the adapted production bridge handles
+  platform data and API calls. Provenance records the original JS hash and
+  opening-art hash. It is registered in the typed catalog and database by
+  migration `0136_register_safir_template.sql`. It remains unpublished and
+  unselectable pending matching viewport source/package comparison under
+  normal and reduced motion, production preview, public save/reopen,
+  mobile/desktop, and final release checks. Browser verification could not run
+  in the resumption session because local browser automation is disabled;
+  catalog/package hashes and typecheck pass, but visual parity is not claimed.
+
 ## Remaining source-template coordination (2026-10-23)
 
 - User requirement: implement every eligible complete captured source template
@@ -17,17 +71,128 @@
   marked for source-completeness review rather than approximated from a static
   page.
 
+## Chorlove Palov registration (2026-10-23)
+
+- User requirement: implement Chorlove's Palov source under the existing `palov`
+  ID, distinct from Invitate Palov (`invitate-palov`), and support `osh` only.
+- The isolated package keeps the captured Chorlove component styling, local
+  Lora/Playfair fonts and Palov illustration, with the shared-contract bridge
+  and canonical 480×1040 fixture-based catalog opening. Its focused suite passes
+  4/4, the bridge syntax check passes, and web typecheck passes.
+- Additive migration `0135_register_chorlove_palov.sql` was applied directly
+  under the migration advisory lock after confirming no existing `palov` row
+  and tracker state through `0134`. The database confirms 15,000,000 UZS,
+  category/event `osh`/`osh`, and `published=false`. Keep it private until
+  creator save/publish/reopen and public route/API integration checks pass.
+
+## Invitate Nahorgi Osh source registration (2026-10-23)
+
+- User requirement: implement the exact Invitate manifest page
+  `Web invitations/invitate.uz/nahorgi-osh.html`; it is distinct from the
+  adjacent `palov.html` Peshtoq page. The existing `nahorgi-osh` ID belongs to
+  another provider's Marxaba template, so this Invitate design uses the unique
+  ID `invitate-nahorgi-osh`.
+- Source review: the captured design is morning-osh specific. Assign catalog
+  category `osh` and event support `osh` only. Release condition was to keep it
+  unpublished until its renderer, authentic opening artwork, and verification
+  gates passed; that condition is now satisfied.
+- Completed: the exact captured HTML/CSS/JavaScript, local fonts and image are
+  isolated under `apps/web/public/templates/invitate-nahorgi-osh`; the shared
+  renderer maps the four supported locales and API-backed RSVP. The catalog
+  portrait is a 780×1688 render of the captured opening with blank invitation
+  fields, so fixture content is not stored in the image.
+- The configured database has the unique row registered by migration `0131`
+  and published by additive migration `0134`; its `osh` category and `osh`
+  event support are verified. The focused suite passes 4/4, typecheck and
+  production build pass, and preview and RSVP guard behavior were checked
+  locally. No external deployment or live payment activation is included.
+
+## Chorlove Orchid Amplop implementation update (2026-10-23)
+
+- The exact component module and embedded stylesheet are isolated in
+  `apps/web/public/templates/chorlove/orchid-amplop`. The existing Chorlove
+  iframe renderer routes the template ID to this package; its typed adapter
+  maps shared invitation content, preview-only source gallery images, and
+  creator fields without loading Chorlove runtime code or sample names.
+- Added an unpublished wedding-only typed catalog row and additive migration
+  `0132_register_orchid_amplop.sql`; creator selection remains gated on the
+  database/catalog `published` flag. Full preview routing is wired.
+- The capture archive has no separate portrait catalog image and omits six
+  component-referenced design assets (divider, portrait frame, two portraits,
+  and two story photos). No cross-template replacements are used; optional
+  authored portrait frames stay empty. A full archive search confirmed none of
+  the six filenames exist. The snapshot's structured metadata points to a
+  778×1686 portrait opening image, SHA-256
+  `1e01875e35ba0f4dd739fa7fcb9f3494375476e1b60c0a3658dcc86723f84f9a`; it
+  contains fixed source couple names and the provider's floating dev badge, so
+  it is not packaged or used as catalog art. A local 390×844 renderer capture
+  from the canonical shared preview fixture was inspected; it still includes
+  the Next development badge and is not used as catalog art.
+- Migration `0132_register_orchid_amplop.sql` is applied. The configured DB
+  confirms the row is unpublished at 150,000 UZS, category `wedding`, supported
+  event type `wedding`. The public catalog API omits Orchid (53 other published
+  rows). There are no Orchid invitations in the DB, so public invitation/API
+  submission checks cannot be exercised without creating data. Reduced-motion
+  preview confirms the localized opening and populated invitation sections.
+  Save/reopen, RSVP/wish submission, public invitation rendering, normal-motion
+  QA, and a clean portrait catalog cover remain pending; keep unpublished and
+  unselectable.
+
+## Invitate Velvet source preflight (2026-10-23)
+
+- User request: implement exactly one Invitate template, Velvet, from the path
+  resolved in its capture manifest (`Web invitations/invitate.uz/velvet.html`).
+  The manifest also supplies its dedicated CSS/JS, two videos, image, music,
+  and a shared curtain background image. These assets are separate from the
+  existing Velvet Royale template.
+- Velvet's typed registration and additive database migration are set to the
+  wedding category and wedding event type, at 150,000 UZS, unpublished. Its
+  source package, localized typed adapter, iframe bridge, and portrait opening
+  artwork are staged. Do not publish until browser/service/database release
+  verification passes. Migration numbering remains subject to coordinator
+  sequencing; do not apply or rename it before that coordination.
+- The app package binds creator names, localized greeting/message, date,
+  venue/map, repeatable program, dress code, gift details, photos, and RSVP to
+  the shared contract and public RSVP API. The captured sample fields, webhook,
+  prompt, remote icons, font requests, and animation stylesheet were removed or
+  replaced with app-local resources; the original capture remains unchanged.
+  RSVP note carries the source song request. Reduced motion and all four
+  approved locales are implemented. Browser, public route, persistence, and
+  database release verification remain pending.
+
+## Invitate Velvet fidelity verification update (2026-10-23)
+
+- The manifest and full Invitate archive confirm the captured Velvet source
+  set: its HTML, `velvet.css`, `velvet.js`, two videos, source music,
+  `image1.png`, `look.png`, and shared curtain image. A whole-archive text
+  search found no additional Velvet component or JavaScript chunk.
+- App-source changes affecting source behavior are identified: the captured
+  sample webhook RSVP is replaced with the platform RSVP API; the hard-coded
+  sample date/countdown and calendar date are bound to invitation data; and the
+  source Enter-key calendar-date prompt is removed in favor of the invitation
+  date highlight. Source-only analytics, remote icon requests, and sample data
+  are excluded. The portrait cover depicts the same captured opening hero and
+  slider scene.
+- Matched-browser source/app comparison and reduced-motion review remain
+  unverified. The local preview server responds in the workspace, but the
+  in-app browser could not load the preview and browser policy rejected the
+  loopback URL used for the isolated source page. Do not mark complete or
+  publish until real-browser visual, motion, interaction, save/reopen, public
+  route, and RSVP checks pass; record remaining differences after comparison.
+
 ## Palace Rose registration (2026-10-23)
 
-- The exact Chorlove source manifest path is `Web invitations/templates/palace-rose/preview-frame.html`; its local source folder contains only a rendered frame, not a standalone stylesheet or template script. Its frame includes site runtime references, baked sample copy, and unrelated gallery/gift asset references. The 17 manifest-listed Palace Rose artwork assets are packaged unchanged under `apps/web/public/templates/palace-rose/assets`; original captures remain untouched.
-- Palace Rose is registered as unpublished, wedding-category, wedding-event-only at 150,000 UZS. It remains unselectable until an isolated renderer replaces the captured sample data and maps the full invitation contract and interactions, reduced motion/locales are verified, and portrait opening artwork is available. These are implementation gates, not rights checks.
+- Full-archive audit: the original React component and motion declarations are present in shared compiled chunk `Web invitations/_next/static/chunks/0dg.9_70mpb0j.js` (module 99664), although no standalone Palace Rose script or stylesheet is captured. Its portable source depends on Chorlove app modules and providers, so the isolated renderer retains the captured template DOM/shared CSS and maps the shared invitation contract in a separate adapter. The component references eight additional gift-box images: three exist only under another template and are excluded; five are absent from the complete archive. Provenance records the bundle hash and this exact gap.
+- Palace Rose is registered as unpublished, wedding-category, wedding-event-only at 150,000 UZS. Migration `0119_register_palace_rose.sql` is applied; the configured database confirms `published=false`. The 17 exact manifest artwork files are byte-identical in the package; only its opening art uses the actual renderer and canonical preview values at 450×800 portrait. The fresh app preview maps six program rows, calendar/countdown, venue, wishes, RSVP, To‘yona, contacts, and locales. Focused source/contract tests (3/3), JavaScript syntax check, web typecheck, and production build pass. A browser check confirms all four locale controls and six program rows; reduced-motion opening has no petal animation and no console errors. Source-to-app motion comparison, public/preview parity, and full service interaction QA remain. Keep it unpublished until those checks pass. These are implementation gates, not rights checks.
 
-## Chorlove Osh source preflight (2026-10-23)
+## Chorlove Osh source recovery and implementation (2026-10-23)
 
 - User request: implement exactly one Chorlove template, `osh`, from the exact folder identified by `Invitations - this folder will be removed from production/Chorlove/capture-manifest.json`, and publish only after all release checks pass.
-- The manifest points to `Web invitations/templates/osh/preview-frame.html`. That 60 KB file is a captured server-rendered Chorlove/Next.js preview shell. Its `osh-page` fragment exposes the six-section visual markup and inline stylesheet, but the archive has no `osh` template folder, no `osh` JavaScript, no standalone cover art, and no captured Google font files for its Cormorant Garamond/Forum imports. The single source image reference `/images/palov/palov.png` is not verified in the manifest's local files. The snapshot hard-codes names, date, venue, family signature, map, social links and a Chorlove watermark; it contains no reusable source behavior for those fields or RSVP.
-- This partial server snapshot does not satisfy the project's required complete-source-package method. Do not turn its captured sample data into runtime data or its appearance into a fabricated renderer, migration, catalog entry or publication. `osh` remains internal/unpublished and unselectable pending a complete source package (original JS/assets/fonts and authentic portrait opening art), followed by contract binding, functional RSVP/data adaptation, focused verification and migration/publication checks.
-- The existing Chorlove registry already includes `osh`; that entry alone does not register a product template. No application or database registration/publication was made in this preflight.
+- User correction: search the complete provider archive and recover the original source beyond the preview-frame snapshot.
+- Recovered the exact component/CSS chunk from `Invitations - this folder will be removed from production/Chorlove/Web invitations/_next/static/chunks/0r~7st8t0.ow1.js` (module 753736), the exact palov art from `Web invitations/images/palov/palov.png`, and Cormorant Garamond from `Web invitations/fonts/CormorantGaramond-Regular.ttf`. The chunk declares Forum through Google Fonts; the matching TTF was packaged locally. The complete archive still has no authentic local catalog portrait; the snapshot metadata points to a remote payment media image.
+- Osh now has an isolated source package under `apps/web/public/templates/chorlove/osh`, shared-contract renderer routing through catalog, creator and public views, and a typed `osh`-category/`osh`-event registry entry. Migration `0119_register_chorlove_osh.sql` was applied alone under the migration advisory lock because unrelated Swan and Velvet migrations were pending. Database confirms `published=false`, 150,000 UZS, category `osh`, and event support `osh`.
+- The Osh source frame uses local art/fonts and a dedicated shared-contract bridge for localized content, venue/map, contacts, reduced motion, preview-only fixture rendering and the real RSVP endpoint. Its authentic 778×1686 portrait catalog opening was recovered from the exact metadata media URL and packaged as `preview.jpg`. Browser review confirms the source-styled opening, venue/map, RSVP and closing sections render; `qaReducedMotion=1` opens without the animated entrance. A synthetic local published-invitation fixture verified the public route returns 200 with the Osh iframe and bound fixture names, and the RSVP API returns 201 and stores one response; its temporary data and rate-limit entry were deleted. A disposable creator session also verified draft save (201), reopen (200), updated content and incremented revision. Publish correctly returned 409 `TEMPLATE_UNAVAILABLE` while `templates.published=false`; the disposable draft, session and account were cleaned up. The catalog API omits Osh. `node --check`, web typecheck, and production build pass; the packaged HTML contains no captured sample names. Keep Osh unpublished. A successful authenticated publish → public render → reopen cycle depends on enabling the catalog row first; no user account or credential was required for the checks completed. See `apps/web/public/templates/chorlove/osh/SOURCE_ADAPTATIONS.md` for mappings and remaining gates.
+- Source-fidelity follow-up (2026-10-23): the exact chunk stylesheet and isolated `.osh-sheet` were compared with the app package at matching 1280×720 viewports in normal and reduced-motion modes. The original CSS design, source SVG/section composition, local fonts and assets are retained; Framer Motion viewport reveals are adapted with equivalent opacity/y=28, .7s ease-out and .2 visibility threshold. Normal/reduced opening renders were visually reviewed. Browser interaction verified the source RSVP yes-only party-size stepper and its increment/decrement state; its hidden state is also marked aria-hidden. The source's success/change-answer view is included. Music uses the app's opt-in direct-audio URL with source-style control and fade; the source YouTube IFrame API path is unsupported because the shared music contract provides direct audio only. Provider sample music and host wrapper are excluded. Instagram is omitted because the shared contact contract has no Instagram field. See `SOURCE_ADAPTATIONS.md`; keep unpublished.
 
 ## Published-template source-fidelity audit, batches 1–4 (2026-10-23)
 
@@ -104,7 +269,7 @@
 - Read-only configured-DB verification confirms Shirin Bayram, Somon Yo‘li, and Suzani are the next three published IDs after Shahzoda, all at 150,000 UZS. Category and supported-event mappings are in `docs/templates/SOURCE_FIDELITY_AUDIT_BATCH_16.md`.
 - Searched all 13 provider capture manifests and each capture folder. Marxaba is the only provider with complete sources for these designs; E-invitation has no capture manifest or exact-ID match. Original captures remain untouched.
 - Shirin Bayram and Somon Yo‘li catalog openings match their documented design/cover choices. Suzani's `meta.js` names a `preview.webp` absent from its source folder; the panel-based cover was repaired by the separate task `01a166d5-36c1-7813-8e25-4c793a1288f3`, which captured the packaged renderer's locked opening at 450×800 with fixture/provenance hashes. Its focused test passes 5/5; original captures and publication state remain untouched.
-- The combined focused checks pass 21/21 after fixing the stale Shirin Bayram `extras.celebrant` assertion (the expected mapping was present; the regex had not allowed a trailing comma). Batch 16 browser follow-up reached the opened state for Shirin Bayram and Suzani in normal and reduced-motion runs, and Somon Yo‘li in normal mode. In Somon Yo‘li reduced mode the opener remained visible after the first click; completion remains unverified. All reduced runs had zero computed CSS animations; no uncaught browser errors or completed HTTP error responses occurred. One generic console 404 in normal Shirin Bayram had no corresponding completed response; shared editor-sections requests were aborted at navigation. Full media behavior remains unverified; details are in the batch report. Suzani's opening-cover repair is recorded in `apps/web/public/templates/suzani/preview.provenance.json`.
+- The combined focused checks pass 21/21 after fixing the stale Shirin Bayram `extras.celebrant` assertion (the expected mapping was present; the regex had not allowed a trailing comma). Batch 16 browser follow-up reached the opened state for Shirin Bayram and Suzani in normal and reduced-motion runs. A resumed Chrome preview also confirmed Somon Yo‘li reaches `body.is-open` with the intro hidden after one activation in both normal and reduced-motion modes; details are in the batch report. No uncaught page errors or completed HTTP error responses occurred in the recorded runs. One generic console 404 in normal Shirin Bayram had no corresponding completed response; shared editor-sections requests were aborted at navigation. Gallery and venue media behavior remains unverified. Suzani's opening-cover repair is recorded in `apps/web/public/templates/suzani/preview.provenance.json`.
 - No source/template, database/publication, deployment, or payment changes were made.
 
 ## Oltin Nur catalog cover repair (2026-10-23)
@@ -243,24 +408,36 @@
 - The configured database has 51 published templates; the next sorted IDs after Green Garden are Hilol, Konfetti, and Korporativ. Their publication/category/event compatibility and migrations 0072, 0065, and 0074 were verified against PostgreSQL.
 - The source captures for all three exist only in `Marxaba/capture-manifest.json`. Source parity, local typography, reduced-motion code, shared interaction wiring, To‘yona/wishes mapping, and portrait cover dimensions were checked; detailed evidence is in `docs/templates/SOURCE_FIDELITY_AUDIT_BATCH_6.md`.
 - Confirmed repair items: Hilol and Konfetti cover captures include the app-injected language bar and omit source-gallery preview images recorded by their original sample overrides. Korporativ omits its captured source-gallery preview images and its typed fallback/test/package notes say unpublished while PostgreSQL says published.
-- The focused suite passes 22/22 under `pnpm exec tsx --test ...`; Korporativ's test currently passes by asserting the stale unpublished value. Separate project repair tasks are open for Hilol (`01a166a6-344f-7d61-a4e3-480c9fa2fdaf`), Konfetti (`01a166a6-3ae5-75c3-8eb3-866543f3f077`), and Korporativ (`01a166a6-417c-78b1-9c4a-071cbcf8a6e6`). Keep source captures untouched and preview images ephemeral.
+- The preview repairs for Hilol, Konfetti, and Korporativ are complete. Their combined focused suite passes 26/26. Korporativ's 450×800 live preview opens in normal and reduced-motion modes; its four preview SVGs load, gallery navigation advances, and RSVP choices update without submitting. The preview uses the lite CSS fallback, so the full-tier Three.js scene remains unverified. Locale switching, additional responsive sizes, and RSVP save/reopen are also unverified; see Batch 6.
 - Korporativ correction: migration `0074_publish_korporativ.sql` is already applied and PostgreSQL/public catalog verify it published at 150,000 UZS. The typed fallback and package notes must reflect that state; no database change is part of the repair. Its four captured gallery SVGs belong only in catalog/initial-selection preview payloads, with creator uploads taking precedence and public empty galleries hidden.
 
 ## Glass Pink catalog cover correction (2026-10-23)
 
 - User requirement: compare the published cover with the exact Chorlove source opening; keep the capture untouched and use the packaged source renderer to make clean portrait artwork without UI chrome.
 - Located the canonical source at `Chorlove/Web invitations/templates/glass-pink/preview-frame.html`, listed in `Chorlove/capture-manifest.json`. Its SHA-256 remains `dcb16406f91a3fb12241f75a97fc0fa5eca95c0aba0a6bc9e0d95953cce806f2`. The capture is server-rendered HTML plus assets; the original template JavaScript runtime is absent.
-- Replaced the catalog mapping from the 392×720 app-preview screenshot to `apps/web/public/templates/glass-pink/catalog-cover-opening.png`, a 432×768 local HTTP render of the packaged source opening envelope. The initial capture's lower-right white arc was the packaged music-toggle control; the clean recapture hides the toggle during screenshot capture only. Current cover SHA-256: `6afd7cf6ec81d85f7878c6e6d80940fe7cf7f5ef6641900c32f75ca3a2ad26cd`. The screenshot excludes the language selector, music toggle, and browser scrollbar. Earlier screenshots remain QA evidence. Animation-transition fidelity cannot be established from the available snapshot/runtime.
-- Focused Glass Pink test passes all seven checks, including catalog mapping, exact cover dimensions/hash, source preservation, preview-only gallery handling, publication, runtime and assets. No migration or publication state changed.
+- Replaced the catalog mapping from the 392×720 app-preview screenshot with a 432×768 local render of the packaged source opening envelope. The first cover was rejected for overlapping lettering and its control arc. Central audit commit `cfeded0` supersedes that image with the settled, font-ready renderer capture at SHA-256 `66b58de5fab291089494816422ef67547c258d5cc3787a9e607f57c6984bb00b`; it uses the canonical preview fixture and excludes the injected language picker, music toggle, Next.js badge, and scrollbar. Visual inspection confirms one title and one opening action without overlap. `source/provenance.json` marks the cover eligible. The raw source snapshot remains byte-identical; the archive lacks the original template JavaScript, so original animation timing parity is not claimed.
+- The Glass Pink focused test and bridge syntax checks pass; batch 5 passes 18/18. No migration, publication, database, deployment, or payment state changed.
 
 - Follow-up (2026-10-23): restored Golden Card's staged `source/preview-frame.html` byte-for-byte from the canonical Chorlove capture (39,134 bytes; SHA-256 `75ac0b6d0edd52500a4a24cc15ed001fa6a0230571ce461a33859703180cc888`). Provenance now records matching archive and preserved-copy hashes/lengths, and the focused test guards both. The 335×469 catalog art remains unchanged. The complete provider-manifest search found only three Golden Card source images (corner, mandala, navy texture), all packaged byte-identically and used by the real renderer; the capture includes no gallery/photo images or gallery section. Empty-selection preview gallery entries remain ephemeral with blank URLs, while a new Golden Card draft starts with an empty gallery. The focused Golden Card checks pass 4/4 and `node --check` passes.
 - User requirement (2026-10-23): source photos may appear in catalog/blank previews only when the reference actually includes them; those samples remain ephemeral, creator uploads replace preview samples, and public invitations hide optional creator-photo sections when no creator image exists. Golden Card has no source gallery/photo imagery or optional gallery section, so its captured renderer artwork remains the only displayed imagery; creator gallery content is not injected into this reference renderer.
 - User correction: use authentic image assets from each original template in catalog and initial template previews wherever those assets belong to that template. Preview-only images are ephemeral and must never be saved to creator drafts or published invitation content; creator-uploaded images replace preview imagery. Public creator-photo galleries stay hidden until at least one creator image exists. Template-owned opening and decorative artwork remains visible independently of gallery content. Do not use unrelated cross-template/site sample photos as if they were original template assets.
+- Follow-up (2026-10-23): Glass Pink, Golden Card, and Green Garden source-fidelity repairs and their 18/18 focused checks were committed as `616783a4` (`Restore Chorlove template source fidelity`). Green Garden's two archive-referenced leaf ornaments remain unavailable in the captured archive; the package records that gap without substituting unrelated art.
+- Further Glass Pink motion follow-up (2026-10-23): restored the source's 450 ms opener pause, 600 ms fade, card/flower exit choreography, and valid Web Animations easing. Normal/reduced-motion browser checks and focused 9/9 checks pass; commit `a9a41c7c` records the scoped fix. The original capture is unchanged.
+- Golden Card motion follow-up (2026-10-23): restored the captured 200 ms invitation delay, original Lobster font subsets, 34 sparkle loops, child transitions, and close/reopen/reduced-motion states. Normal/reduced-motion browser and focused 5/5 checks pass; commit `d9935c34` contains the scoped repair.
+- Green Garden motion follow-up (2026-10-23): restored valid easing, source opener/hero/flower timing, seven To'yona ornament loops, and the captured schedule illustrations. Focused 6/6 checks pass in commit `5ae89fd2`; browser verification after these edits remains unavailable, and `leaf1-bloom.webp` is absent from the archive. Do not claim full motion parity until final browser review is possible.
+- Modern Floral catalog-art correction (2026-10-23): exact source-declared opening is packaged as `apps/web/public/templates/modern-floral/catalog-opening.jpg`; 810×1754 JPEG, 58,677 bytes, SHA-256 `6c4de03a01ba15e3b462a519f34f3ad90a87b34851372a4f868aa0381e2052dc`, source URL `https://payment.chorlove.uz/media-assets/958746e5-dc6c-4540-ad17-2c6e692d2212/file`. Visual review confirms the authentic floral heart opener. The typed `previewImage` and public catalog metadata point to this path; the owner is still restoring source motion, so the template remains unpublished.
+- Green Gold source-motion follow-up (2026-10-23): commit `66c21afd` restores the five-part opening, section/date/countdown/gallery reveals, ornament rotations, starbursts, wishes loop, reduced motion and source gallery lightbox from route module 995238 (`09cpm7sbnsw7i.js`, SHA-256 `cc9472f5f183b8f7fcbfe281f0cbdeaa573b774cc594e56446736694bfe09b75`). The focused motion test, both JavaScript syntax checks and scoped diff check pass. The broader existing suite still fails on an unavailable archived absolute path and shared CSS byte-count expectations; do not claim it passes. Green Gold remains unpublished pending authentic portrait art and release checks.
+- Green White source-motion follow-up (2026-10-23): commit `fb07ddef` restores the source two-curtain opener, label/name-card and hero timeline, 42-star loops, cloud loops, source-specific reveals and reduced motion from route chunk `12pjntsqxzj70.js` (SHA-256 `8f9857bd0e9308808c0d876bed05168962a61e988afa1c8936a5c37689317c9f`). Focused checks pass 5/5; JavaScript syntax and scoped diff checks pass. The package has no authentic catalog-opening asset, so Green White remains incomplete and unpublished until source art is captured.
+- Lace source-motion follow-up (2026-10-23): commit `862e8d7b` restores the captured poster fade and opener timing, 2-second overlay exit, hero-name delay, section reveals and program-row stagger/thresholds, and reduced-motion behavior from `0j~ix342hy.sg.js` (SHA-256 `f8f02fc84097ac74933c62abdbf3f3ef676621bdc450f0686ac106fea836ed69`). Normal/reduced-motion browser checks and focused 3/3 tests pass; the source capture/module is unchanged.
+- Love Sakura and Luxury Gold source-motion follow-up (2026-10-23): mixed commit `32fe08c6` contains only those two template packages and tests. Love Sakura restores its RSVP fade/rise, source music-button motion, API wiring and locale-safe rerender; focused 3/3, syntax and clean browser preview pass. Luxury Gold restores its source opening, 14-section reveal timeline, hero zoom, calendar/decorative loops, gallery/lightbox and reduced motion; focused 3/3, syntax/diff and source-opening preview pass. Neither template has its dedicated authentic catalog cover yet; keep both private.
+- Modern Floral source-motion follow-up (2026-10-23): commit `633e4f0d` restores the source curtain/greeting/fade, petal fall, source viewport/stagger reveals, decorative loops, lightbox/control feedback and reduced motion; focused 3/3, syntax and HTTP 200 checks pass. The authentic 810×1754 source opening is committed with provenance. The shared typed `previewImage` pointer is present in the working tree but not in that commit; browser visual comparison timed out. Keep the template unpublished until the typed pointer is separately committed and visual parity/release checks pass.
+- Jasmine White source-motion follow-up (2026-10-23): commit `c862128b` restores the captured opener/card/flower exits, ambient/burst petals, heart/sheens, hero/reveal timing and seven gift-flower loops, plus gift-modal enter/exit. Browser checked hero/petals and modal open/close; syntax, provenance JSON and scoped diff pass. TypeScript timed out and is not a passing result. No authentic catalog opening exists yet; keep the template private.
 
 ## Cloud Castle catalog cover correction (2026-10-23)
 
 - User requirement: replace the published Cloud Castle cover that showed a narrow browser screenshot with clean portrait artwork showing the captured opening page, using its exact local source style and assets. Keep the source capture untouched and search every provider manifest/package before concluding alternate source is absent.
-- Audit result: the Chorlove archive contains only a server-rendered snapshot and its referenced assets; no independent cover or original component/runtime handlers were found. The catalog now uses a 720×1280 capture of the packaged snapshot renderer's post-envelope hero, without language/music controls or scrollbar. Record the artwork hash and viewport. The source archive cannot establish original interaction or animation parity; do not claim it.
+- Audit result: the captured Cloud Castle page is a server-rendered snapshot; a later full chunk-archive search recovered its original route module `14t58uni224ve.js`, module 909129 (SHA-256 `81f9356f44be09216be952fd5a90739b0796f8825c9c7c398479b3d8205cee6b`). The catalog uses clean 720×1280 portrait opening art without language/music controls or scrollbar; the original capture remains unchanged.
+- Follow-up (2026-10-23): commit `e3a9f28c` (`Restore Cloud Castle source motion`) restores source opening, hero, parallax and gift animation behavior. Normal/reduced-motion browser checks and `node --check` pass; focused checks pass 5/5.
 
 ## Marxaba source-fidelity correction (2026-10-23)
 
@@ -663,35 +840,8 @@ Suggested schema extensions (pending final migration design):
 - Guests can upload a JPG/PNG/WebP image or PDF with the names of the givers when the creator enables receipt uploads. Keep files private to the invitation owner; uploads never prove receipt of money.
 - The owner reviews receipts in the website dashboard and explicitly marks received/problem after checking their account. Show the absence of AI/bank verification to guests and owners. Do not report successful Telegram delivery when none occurred.
 - Associate a verified personalized guest token when supplied, rate-limit uploads, and deduplicate identical files per invitation. Disabling uploads preserves existing private receipts.
-
-## Invitate Palov event compatibility (2026-10-23)
-
-- The Invitate manifest resolves this design to `Web invitations/invitate.uz/palov.html`. Its explicit “Nahorgi osh” content and Palov artwork establish event support `osh` only and category `osh`; category assignment does not imply event support. Its app ID is `invitate-palov`, distinct from Chorlove’s existing `palov`.
-- The complete captured page, local font files, and API-backed adapter are packaged under `apps/web/public/templates/invitate-palov`. The catalog image is a 480×860 capture of the actual adapted opening rendered with `createTemplatePreviewSample("invitate-palov")`; its hash and capture method are recorded in `source-provenance.json`. Catalog preview and public invitation dispatch both use the shared `InvitateInvitation` renderer.
-- Focused checks pass 5/5, the production build passes, browser preview and RSVP validation were verified, and the public catalog API returns the image with HTTP 200. Additive migration `0132_publish_invitate_palov.sql` was applied alone under the migration lock; the database and catalog API confirm the template published with `osh` category/event support at 150,000 UZS. No external deployment or live payment activation is included.
 - User request: audit every editor input and make publication work locally without unavailable R2 setup. Implementation choice: private local storage for local development, retaining R2 for deployment. Store bytes outside public/, keep credentials/settings in ignored .env.local, and preserve ownership/readiness checks. Refuse local disk on Vercel; production self-hosting must explicitly configure persistent storage and backups.
 - Owner RSVP responses and wish approval/hiding must be available through the website. Do not leave the wish-approval promise dependent on an absent notification worker.
-
-## Invitate Nahorgi Osh source registration (2026-10-23)
-
-- User requirement: implement the exact Invitate manifest page
-  `Web invitations/invitate.uz/nahorgi-osh.html`; it is distinct from the
-  adjacent `palov.html` Peshtoq page. The existing `nahorgi-osh` ID belongs to
-  another provider's Marxaba template, so this Invitate design uses the unique
-  ID `invitate-nahorgi-osh`.
-- Source review established the osh-specific source's `osh` category and
-  `osh` event support. The release gate required complete renderer, authentic
-  opening artwork and verification before publication; those checks passed.
-- The exact captured HTML/CSS/JavaScript, local fonts and image are isolated
-  under `apps/web/public/templates/invitate-nahorgi-osh`; the shared renderer
-  maps four locales and API-backed RSVP. The catalog portrait is a 780×1688
-  render of the captured opening with blank invitation fields, so fixture
-  content is not stored in the image.
-- Migrations `0131` (registration) and `0134` (publication) are applied to
-  the configured database. The `osh` category and event support are verified.
-  Focused checks pass 4/4, typecheck and production build pass, and preview and
-  RSVP guard behavior were checked locally. No external deployment or live
-  payment activation is included.
 
 ## Other established requirements and stack choices
 
@@ -878,14 +1028,153 @@ Development agents are distinct from production queue workers. The running app w
 
 - Follow-up (2026-10-23): Bulbul's published catalog cover now uses a verified 430×932 direct render of the packaged source's closed-cage #intro opening. The previous 478×668 app-preview capture remains preserved as QA evidence, not catalog artwork. Its provenance and package adaptation note identify the render and source manifest.
 
-- Source-fidelity follow-up (2026-10-23): Glass Pink's preserved and packaged opening markup contains one title and one open-button label; the adapters replace text nodes instead of appending duplicates. The captured CSS requested seven original fonts from site-root `/fonts/` paths that were absent in the isolated package; those exact files are now packaged under Glass Pink assets and remapped in its scoped adapter CSS. The Chorlove manifest has the source HTML and 15 decorative image assets, but no standalone intro/catalog artwork. Its metadata points to a payment media URL with no local manifest entry. The available Chorlove PNGs are different full-page compositions. The current cover remains rejected (`catalogEligible: false`); the supported CUA inventory has no targetable app or browser tabs, and alternate export routes are disallowed. Keep the cover unchanged until a settled, font-ready source render or exact original artwork asset is available.
+- Source-fidelity follow-up (2026-10-23): Glass Pink's preserved and packaged opening markup contains one title and one open-button label; the adapters replace text nodes instead of appending duplicates. The original seven fonts were missing at the captured CSS's site-root paths and are now packaged under Glass Pink assets with template-scoped URL mappings. No standalone source cover asset was present locally, so central audit commit `cfeded0` captured the actual packaged renderer after the three opening fonts loaded and finite reveal animations finished. The inspected 432×768 cover has no overlap and `catalogEligible` is true. The archived HTML still lacks its original template JavaScript; animation timing parity remains unverified.
 
 ## Latest repair status for published-template audit (2026-10-23)
 
 - Independently rechecked repaired reports and focused suites: batch 4 is 22/22; batch 5 is 18/18 with Glass Pink's settled catalog opening now approved; batch 6 is 26/26; batch 7 is 20/20; batch 9 is 25/25; batch 10 is 20/20; Oltin Yosh is 8/8. Batch 11's Oq Kabutar current 450×800 intro artifact was visually checked and its focused localization/contract suite passes 6/6.
-- Resolved catalog/image findings: Anor, Bog‘i Eram, Evelina, Ganch, Hilol, Konfetti, Korporativ's typed publication metadata and preview gallery, Lola, Nahor, Oltin Kuz preview photos, Oltin Nur, Oltin Yosh, Oq Kabutar, Qog‘oz Turna, Retro Kino, Sahifa, Golden Card, Green Garden, and Yangi Uy. Anor/Bog‘i Eram/Sahifa are verified against their canonical Marxaba preview URLs; Qog‘oz Turna and Retro Kino package the exact source-declared preview bytes. Oltin Uzuk is still being corrected to include the captured hand-and-ring scene. Their batch reports now contain follow-up status where verified.
+- Resolved catalog/image findings: Anor, Bog‘i Eram, Evelina, Ganch, Hilol, Konfetti, Korporativ's typed publication metadata and preview gallery, Lola, Nahor, Oltin Kuz preview photos, Oltin Nur, Oltin Yosh, Oq Kabutar, Oltin Uzuk, Qog‘oz Turna, Retro Kino, Sahifa, Golden Card, Green Garden, and Yangi Uy. Anor/Bog‘i Eram/Sahifa are verified against their canonical Marxaba preview URLs; Qog‘oz Turna and Retro Kino package the exact source-declared preview bytes. Oltin Uzuk's repaired hand-and-ring opening cover passes its focused checks; its repair thread reports 7/7. Their batch reports now contain follow-up status where verified.
 - Source-cover verification correction (2026-10-23): compare catalog imagery against the original site's own catalog asset as well as the invitation's runtime opening. For Marxaba templates, where `meta.js` declares `preview.webp`, the exact asset served from the canonical template URL is authoritative catalog-art evidence; do not classify an official post-opening preview as a mismatch solely because runtime `#intro` is a different state. Anor and Bog‘i Eram local covers are byte-identical to their official source previews; Bog‘i Eram's two sprite files also match their exact canonical source URLs. Sahifa's canonical source-path `preview.webp` is byte-identical to the local cover although its `meta.js` does not declare that property. Retro Kino and Qog‘oz Turna local covers differed from their source-declared previews, so those exact original files have replaced them. The combined Batch 14 focused suite now passes 22/22.
-- Still open: O‘rik Guli's catalog image depicts the true opening composition and passes 5/5 focused checks; live timed particle visibility is still unverified. Yangi Uy’s cover follow-up is verified: a full `.intro` render uses the canonical fixture at 478×668, has corrected source provenance, and its focused test passes 8/8. Other reported runtime checks that remain unverified are recorded per batch. Glass Pink's catalog overlap is resolved by a settled, font-ready source-render capture; its original snapshot still does not include source JavaScript for an animation-by-animation comparison.
+- O‘rik Guli's catalog opening cover passes 5/5 focused checks. A fresh Chrome preview confirms its delayed intro petals appear in normal motion (536 non-transparent canvas pixels during the transition) and stay absent in reduced motion; see the Batch 11 report. Yangi Uy’s cover follow-up is verified: a full `.intro` render uses the canonical fixture at 478×668, has corrected source provenance, and its focused test passes 8/8. Other reported runtime checks that remain unverified are recorded per batch. Glass Pink's catalog overlap is resolved by a settled, font-ready source-render capture; its original snapshot still does not include source JavaScript for an animation-by-animation comparison.
 - Batch 1 runtime follow-up: Anor's normal opening completed its authored ~11-second sequence and reduced-motion mode opened directly; Atlas reached its open state in normal and reduced modes. Aurelia exposed a `templateId` temporal-dead-zone error in the shared Invitate renderer; the separate Aurelia repair task moved the declaration before the memo, and both Aurelia/Evelina focused checks pass 15/15. Aurelia now loads in both modes and pauses its hero video for reduced motion. Details are in `docs/templates/SOURCE_FIDELITY_AUDIT_BATCH_1.md`.
 - Every published ID through the final batch has an audit report; all 51 DB entries were grouped in batches of three. Each confirmed repair finding has a template-specific project chat. Continue coordinating the remaining owners from this central thread and update the relevant batch record with concrete evidence.
 - Aurelia runtime repair (2026-10-23): the shared Invitate renderer read `templateId` inside its memoized payload before the `const` initialization below the hook, causing the published Aurelia preview to throw before mounting its source iframe. Moved the initialization above the memo and added a focused source-order regression assertion. A fresh local bundle now initializes `templateId` before the callback, and normal/reduced-motion Aurelia previews both mount cleanly with fixture names and no page or resource errors. The source hero video plays in normal mode and pauses for reduced motion. Aurelia and Evelina focused tests pass 15/15.
+
+## Invitate Palov event compatibility (2026-10-23)
+
+- The Invitate manifest resolves this design to `Web invitations/invitate.uz/palov.html`. Its explicit “Nahorgi osh” content and Palov artwork establish event support `osh` only and category `osh`; category assignment does not imply event support. Its app ID is `invitate-palov`, distinct from Chorlove’s existing `palov`.
+- The complete captured page, local font files, and API-backed adapter are packaged under `apps/web/public/templates/invitate-palov`. The catalog image is a 480×860 capture of the actual adapted opening rendered with `createTemplatePreviewSample("invitate-palov")`; its hash and capture method are recorded in `source-provenance.json`. Catalog preview and public invitation dispatch both use the shared `InvitateInvitation` renderer.
+- Focused checks pass 5/5, the production build passes, browser preview and RSVP validation were verified, and the public catalog API returns the image with HTTP 200. Additive migration `0132_publish_invitate_palov.sql` was applied alone under the migration lock; the database and catalog API confirm the template published with `osh` category/event support at 150,000 UZS. No external deployment or live payment activation is included.
+
+## Invitate Estelle implementation status (2026-10-23)
+
+- User-assigned task: implement only Estelle from the exact Invitate capture
+  paths `Web invitations/invitate.uz/estelle.html`, `assets/css/estelle.css`,
+  `assets/js/estelle.js`, locally captured font files, and the page's referenced
+  `assets/previews/template/adelina` art/video. Captures remain untouched.
+- The isolated package is under `apps/web/public/templates/estelle`; the typed
+  renderer adapter uses the shared contract and central preview fixture. The
+  captured intro/video, scratch-to-reveal, section composition, and motion code
+  are carried over; site tracking, reference RSVP endpoint, native alerts, map
+  embed, and captured invitation copy are excluded/replaced. `estelle` is typed
+  as wedding-only, wedding-category, 150,000 UZS and unpublished.
+- Release remains pending: clean portrait opening artwork/provenance, focused
+  end-to-end validation of scratch/reduced-motion, locale/date rendering and
+  RSVP/wishes APIs, and central assignment of a unique additive migration
+  sequence. Do not select or publish before these checks pass.
+
+## Invitate Velora registration reservation (2026-10-23)
+
+- The exact source is `Invitate/Web invitations/invitate.uz/velora.html` as
+  resolved from its capture manifest. Coordinator reservation: unique typed
+  catalog ID `velora`, wedding category and wedding-only event compatibility,
+  migration filename `0124_register_velora_template.sql`.
+- The initial configured-database check found no Velora row. The reserved
+  additive migration was subsequently applied alone under the migration lock;
+  it registers `velora` at 150,000 UZS in wedding category/event with
+  `published=false`. Keep it unselectable until the source adapter, authentic
+  portrait opening artwork, integration, and verification gates pass. Do not
+  deploy externally or enable live payments.
+- The packaged renderer was exercised in headless Edge at a 480×860 viewport
+  with a fixture payload: six ordered agenda rows, three story entries, five
+  dress palette colors, localized date/calendar, map link, and empty RSVP
+  validation rendered as expected. A second run confirmed reduced-motion
+  preference detection; all requested source artwork/font resources returned
+  HTTP 200. The focused Velora suite passes 4/4; typecheck, production build,
+  both packaged JS syntax checks, and `git diff --check` passed. Public-route/API
+  submission/save-reopen checks are still pending, so keep the catalog and
+  database row unpublished.
+
+## Invitate Girls Party source mapping (2026-10-23)
+
+- User-assigned source: Invitate `Web invitations/invitate.uz/girlsparty.html`
+  and its captured `girls.css`, `girls.js`, video, image, and font resources.
+  Register compatibility for the existing `qiz-bazmi` event type only; its
+  category is separate from event compatibility. Use ID `girlsparty` and
+  migration `0125_register_girlsparty_template.sql`; the migration is applied
+  and the verified database row remains unpublished at 150,000 UZS with
+  `qiz-bazmi` category and event support.
+- The source's dietary restriction and favorite-song form fields have no
+  approved shared contract/storage mapping and are excluded. Its fixed gift
+  advice is invitation-specific sample content without a creator field and is
+  excluded. The isolated source package is connected to the shared Invitate
+  renderer, including localized contract data, countdown date and preview RSVP
+  guard. The authentic 450×800 opening is captured from the shared renderer;
+  provenance is in the template package. Matching viewport source/package
+  browser captures were reviewed in normal and reduced motion. Four locales,
+  fresh reduced motion, fixture binding and the preview RSVP no-fetch guard
+  pass. The source timeline also has a step label and description that the
+  shared program contract cannot represent; these remain hidden and are a
+  fidelity gap. The fixed gift-advice sample copy is excluded, and its source
+  card layout displays catalog-only fixture wishes or approved public wishes
+  through the existing moderation service. Keep private/unselectable until
+  the timeline gap is resolved, public-route parity and real RSVP/wish
+  persistence are verified.
+
+## Invitate Golden Hour source mapping (2026-10-23)
+
+- Exact source: Invitate `Web invitations/invitate.uz/golden-hour.html` and its
+  manifest-matched CSS, JavaScript, five images and local font faces. A search
+  of the full Invitate archive found the referenced `assets/audio/lanadel.mp3`
+  (9,386,537 bytes) and no additional Golden Hour HTML/JS chunks. The audio is
+  intentionally not copied as creator media. The referenced `golden-hour.php`
+  endpoint is absent and replaced by the shared RSVP API adapter. Use ID
+  `golden-hour`, birthday category, and birthday-only event compatibility.
+- Package behavior now adapts the captured countdown, reveal observer, and
+  music toggle from the original script in `golden-hour-source.js`; the narrow
+  app adapter maps typed data and replaces the missing PHP RSVP endpoint with
+  shared RSVP/wishes APIs. Autoplay/first-click playback is removed for the
+  established user-interaction-only music rule.
+- Migration `0127_register_golden_hour_template.sql` is applied to the
+  configured database. The row remains private at 150,000 UZS. The catalog and
+  shared Invitate renderer use the same localized contract adapter and
+  ephemeral `preview-sample.json` values.
+- The captured age `20` and tagline are source sample content, and the shared
+  Invitation contract has no age field. The app copy omits both instead of
+  displaying or saving sample age data. The catalog artwork uses the exact
+  portrait hero image supplied by the source capture.
+- RSVP and wishes use the public invitation APIs; gift details use approved
+  card fields and receipt uploads use the shared private receipt flow. Local
+  browser checks passed at desktop and 390×844, including long names and
+  preview RSVP blocking. Focused Golden Hour checks and web typecheck pass. A
+  matched-viewport browser comparison of the
+  original capture and app copy, including reduced-motion parity, remains
+  unverified: browser policy blocked the captured `file:` URL and disallowed
+  reaching that file through an alternate serving path. The full repository
+  suite has failures in unrelated concurrent template tests. Keep Golden Hour
+  unpublished until source fidelity and remaining release checks are verified.
+
+## Invitate Butterfly implementation status (2026-10-23)
+
+- User assignment: implement only Butterfly from the manifest-resolved
+  `Invitate/Web invitations/invitate.uz/butterfly.html` source and its paired
+  template assets. Use ID `butterfly`, wedding category/event compatibility,
+  and reserved migration `0129_register_butterfly_template.sql`. Preserve the
+  capture; rights research is out of scope.
+- The isolated source, shared-contract adapter/renderer, catalog/creator/public
+  routes, and portrait opening preview are present. Migration 0129 is already
+  applied to the configured database; its row is verified at 15,000,000 UZS,
+  wedding category/event, `published=false`. Keep the typed entry private.
+- The source has no program, RSVP, gift/to'yona, dress-code, contact, or guest
+  wishes UI. Whether to add shared sections or accept these omissions remains
+  unresolved. Do not publish or make selectable until this product decision
+  and the remaining browser, persistence, and typecheck gates are resolved.
+
+## Invitate Fairy implementation status (2026-10-23)
+
+- Exact source is Invitate `Web invitations/invitate.uz/fairy.html` with its
+  manifest-referenced CSS, JavaScript, image, font, and audio assets. Use ID
+  `fairy`, wedding category/event compatibility, 150,000 UZS, and reserved
+  additive migration 0123; keep it private pending release gates.
+- The isolated source package is integrated through the shared Invitate
+  renderer for preview and public routes. It maps names, greetings, date,
+  program, venue/map, dress code, music, contacts, RSVP, and wishes in the four
+  supported locales. The captured page has no gallery or family/host fields;
+  an optional localized To‘yona section is added per the established Invitate
+  requirement and stays hidden unless enabled with a card number.
+- Source-authentic portrait opening art uses ephemeral shared preview fixture
+  data; original captures are untouched. Local checks cover all four locales,
+  long names, preview RSVP blocking, source-handler removal, and typed wedding
+  registration. Keep private: reduced-motion preference emulation and DB
+  migration application remain pending. Migration sequencing has conflicting
+  existing files, and `DATABASE_URL` is not configured in this checkout.

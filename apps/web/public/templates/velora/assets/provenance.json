@@ -1,0 +1,18 @@
+{
+  "template": "velora",
+  "kind": "source-referenced-interaction-asset",
+  "sourcePage": "Invitations - this folder will be removed from production/Invitate/Web invitations/invitate.uz/velora.html",
+  "referenceUrl": "https://invitate.uz/assets/previews/template/velora/music-off2.png",
+  "sourceAttribute": "#playButton[data-off-icon]",
+  "localFile": "assets/images/music-off2.png",
+  "sha256": "b7e73424702d27d9ccf0772aeef935671254ec5f5c8293fdbda59e2eb7497781",
+  "captureManifestStatus": "Referenced by the page but not captured because the asset loads only after the music control is activated.",
+  "fonts": {
+    "sourceFile": "source/assets/fonts/ibm-plex-serif.css",
+    "sourceSha256": "89455a1d140af4da90be1c89b30b98373b62a596b65e9cbd8616bd9455b9b8d1",
+    "sourceStylesheetUrl": "https://fonts.googleapis.com/css2?family=Great+Vibes&family=IBM+Plex+Serif:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap",
+    "runtimeStylesheet": "assets/vendor/ibm-plex-serif.css",
+    "localFontFiles": 76,
+    "localFontDirectory": "assets/fonts/vendor/"
+  }
+}

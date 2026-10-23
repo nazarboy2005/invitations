@@ -1,0 +1,897 @@
+#sad {
+  --background-color: #fbfbf0;
+  --header-color: #45607f;
+  --text-color: #45607f;
+  --main-font: "IBM Plex Serif", serif;
+  /* Основной шрифт */
+  --beauty-font: "Great Vibes", cursive;
+  /* Шрифт для заголовков */
+}
+
+.header-block-up {
+  color: var(--header-color);
+}
+
+.rsvp-popup-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(69, 96, 127, 0.55);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.rsvp-popup-overlay.is-open {
+  display: flex;
+  opacity: 1;
+}
+
+.rsvp-popup {
+  background: var(--background-color, #fbfbf0);
+  border: 1px solid var(--header-color, #45607f);
+  border-radius: 20px;
+  max-width: 360px;
+  width: 100%;
+  padding: 40px 25px;
+  text-align: center;
+  transform: scale(0.85);
+  transition: transform 0.3s ease;
+}
+
+.rsvp-popup-overlay.is-open .rsvp-popup {
+  transform: scale(1);
+}
+
+.rsvp-popup__icon {
+  font-size: 40px;
+  margin-bottom: 10px;
+}
+
+.rsvp-popup__title {
+  font-family: var(--beauty-font, "Great Vibes", cursive);
+  font-size: 42px;
+  color: var(--header-color, #45607f);
+  margin: 0 0 12px;
+}
+
+.rsvp-popup__text {
+  font-family: var(--main-font, "IBM Plex Serif", serif);
+  font-size: 16px;
+  line-height: 140%;
+  color: var(--header-color, #45607f);
+  margin: 0 0 25px;
+}
+
+.rsvp-popup__close {
+  background: var(--header-color, #45607f);
+  color: var(--background-color, #fbfbf0);
+  text-transform: uppercase;
+  font-size: 14px;
+  border: none;
+  border-radius: 30px;
+  padding: 12px 30px;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.rsvp-popup__close:hover {
+  opacity: 0.85;
+}
+
+#sad {
+  font-family: var(--main-font);
+  font-size: 18px;
+  line-height: 120%;
+  color: #fff;
+  text-align: center;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+#sad .bg-img {
+  margin: 0;
+  background-image: url("/templates/velora/source/assets/previews/template/velora/desktop.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  z-index: -10;
+}
+
+#sad .all-section {
+  overflow: hidden;
+}
+
+#sad p {
+  margin: 0;
+}
+
+#sad .title_text {
+  font-family: var(--beauty-font);
+  font-size: 52px;
+  padding-bottom: 20px;
+  line-height: 120%;
+  color: var(--text-color);
+  margin: 0;
+  font-weight: 200;
+}
+
+#sad .descr_text {
+  font-family: var(--main-font);
+  font-size: 18px;
+  line-height: 120%;
+  color: var(--text-color);
+}
+
+#sad .header {
+  height: 100vh;
+  display: flex;
+  align-content: center;
+  align-items: center;
+}
+
+#sad .footer-info {
+  display: flex;
+  padding-top: 50px;
+  gap: 10px;
+  flex-direction: column;
+}
+
+#sad .header-blocks {
+  position: relative;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  box-sizing: border-box;
+  z-index: 2;
+  background-image: url("/templates/velora/source/assets/previews/template/velora/frame-01.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  margin: auto;
+  justify-content: center;
+  padding: 120px 0 100px;
+}
+
+#sad .names {
+  font-family: var(--beauty-font);
+  font-size: 72px;
+  line-height: 120%;
+}
+
+#sad .and-block {
+  font-family: var(--beauty-font);
+  font-size: 48px;
+  line-height: 120%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin: 10px 0;
+}
+
+#sad .line-header {
+  height: 1px;
+  width: 60px;
+  background-color: var(--header-color);
+}
+
+#sad .header-blocks-label {
+  text-transform: uppercase;
+  font-size: 16px;
+}
+
+#sad .date-main-small {
+  text-transform: uppercase;
+  font-size: 24px;
+  line-height: 120%;
+}
+
+#sad #music img {
+  max-width: 150px;
+  margin: auto;
+  cursor: pointer;
+  background: var(--background-color);
+  padding: 25px;
+  border-radius: 1000px;
+}
+
+#sad .info-date,
+#sad #plan,
+#sad .details,
+#sad #linkblock {
+  background: var(--header-color);
+  padding: 3%;
+  max-width: 600px;
+  width: 90%;
+  margin: 50px auto;
+  border-radius: 25px;
+}
+
+#sad .info-invitation,
+#sad #plan .info-date__place,
+#sad .details-block,
+#sad .linkblock__bloks {
+  background: var(--header-color);
+  padding: 50px 5%;
+  border: 1px solid var(--background-color);
+  border-radius: 15px;
+}
+
+.timetable__block-texts {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+#sad .text-white .title_text {
+  color: var(--background-color);
+}
+
+#sad .text-white .descr_text {
+  color: var(--background-color);
+}
+
+#sad .welcome_descr_text {
+  padding-bottom: 50px;
+}
+
+#sad h3 {
+  font-family: var(--beauty-font);
+  font-size: 42px;
+  padding-bottom: 10px;
+  margin: 16px 0;
+}
+
+#sad .info-date table {
+  margin: auto;
+  color: #fff;
+}
+
+#sad table th {
+  text-transform: uppercase;
+  font-weight: 100;
+}
+
+#sad tbody,
+#sad td,
+#sad tfoot,
+#sad th,
+#sad thead,
+#sad tr {
+  border-width: 0;
+  padding: 10px 12px;
+  font-size: 14px;
+}
+
+#sad .wedding-day {
+  position: relative;
+  z-index: 2;
+}
+
+#sad label {
+  color: var(--text-color);
+}
+
+#sad .wedding-day::before {
+  content: "";
+  position: absolute;
+  top: 40%;
+  left: 46%;
+  transform: translate(-58%, -42%);
+  width: 45px;
+  height: 40px;
+  background-image: url(/templates/velora/source/assets/previews/template/velora/heart-empty-white.svg);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: -1;
+}
+
+#sad .timetable__block-name {
+  font-family: var(--beauty-font);
+  font-size: 32px;
+  padding-bottom: 10px;
+}
+
+#sad .timetable__block-time {
+  font-family: var(--beauty-font);
+  font-size: 48px;
+  padding: 10px 0;
+}
+
+#sad .timetable__block-line {
+  border-left: 1px solid var(--background-color);
+  height: 30px;
+  margin: 20px 0;
+}
+
+#sad .timetable__block-stroke {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#sad #details-container img {
+  width: 25px;
+  margin: auto;
+  padding: 30px 0;
+}
+
+#sad .details__text {
+  line-height: 120%;
+}
+
+#sad .places,
+#sad .dresscode,
+#sad #questions {
+  background: var(--background-color);
+  border: 1px solid var(--header-color);
+  border-radius: 20px;
+  padding: 70px 5%;
+  margin: 50px auto;
+}
+
+#sad .registration_title_text,
+#sad .banquet_title_text {
+  font-size: 18px;
+  text-transform: uppercase;
+  font-family: var(--main-font);
+}
+
+#sad .info-place__text:nth-child(1) {
+  text-transform: uppercase;
+  font-size: 24px;
+  font-weight: 600;
+  margin: 16px 0;
+}
+
+#sad .info-place__text {
+  text-transform: uppercase;
+  font-size: 16px;
+  margin: 16px 0;
+}
+
+#sad #registration-time,
+#sad #banquet-time {
+  font-size: 24px;
+  line-height: 120%;
+}
+
+#sad .info-place-img {
+  border: 2px solid var(--header-color);
+  border-radius: 20px;
+}
+
+#sad .info-place-img img {
+  border-radius: 20px;
+  width: 100%;
+}
+
+#sad .dresscode__color {
+  aspect-ratio: 1 / 2.5;
+  border-radius: 100px;
+}
+
+#sad .dresscode__wrap {
+  padding-top: 20px;
+}
+
+#sad .question__text-mini {
+  font-size: 16px;
+  padding: 10px 0 15px;
+  color: var(--text-color);
+}
+
+#sad #question {
+  display: flex;
+  text-align: left;
+  flex-direction: column;
+  gap: 6px;
+}
+
+#sad .question__label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 0px;
+}
+
+#sad .question__string {
+  margin-bottom: 10px;
+  border: none;
+  margin: 4px 0;
+  padding: 0;
+}
+
+#sad .question__unvisible {
+  display: none;
+}
+
+#sad .question__visible-radio {
+  position: relative;
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  vertical-align: middle;
+  box-sizing: border-box;
+  border: 1px solid var(--header-color);
+  border-radius: 50%;
+}
+
+#sad .question__unvisible:checked + .question__visible-radio::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 12px;
+  height: 12px;
+  background-color: var(--header-color);
+  border-radius: 50%;
+}
+
+#sad .question__visible-checkbox {
+  position: relative;
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  vertical-align: middle;
+  box-sizing: border-box;
+  border: 1px solid var(--header-color);
+}
+
+#sad .question__textarea {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: var(--background-color);
+  border: 1px solid var(--header-color);
+  border-radius: 10px;
+  font-family: var(--main-font);
+  font-size: 14px;
+  color: var(--header-color);
+  padding: 12px !important;
+  resize: vertical;
+  margin-top: 5px;
+}
+
+#sad .question__textarea::placeholder {
+  color: var(--header-color);
+  opacity: 0.6;
+}
+
+#sad .question__unvisible:checked + .question__visible-checkbox::before {
+  content: "\2714";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 12px;
+  color: var(--header-color);
+}
+
+#sad .question__string input[type="text"] {
+  border: 0;
+  background-color: var(--background-color);
+  border-bottom: 1px solid var(--header-color);
+  border-radius: 0;
+  font-size: 14px;
+  text-transform: uppercase;
+  padding: 10px 0 !important;
+  width: 100%;
+}
+
+#sad .rsvp__button {
+  background: var(--header-color);
+  text-transform: uppercase;
+  font-size: 18px;
+  line-height: 100%;
+  color: var(--background-color);
+  padding: 15px 20px 10px;
+  min-width: 200px;
+  margin: 10px 0;
+  border: none;
+  cursor: pointer;
+}
+
+#sad #linkblock_btn_text {
+  color: var(--header-color);
+  background: var(--background-color);
+  margin: 20px auto 0;
+}
+
+#sad .dresscode__row {
+  justify-content: center;
+}
+
+#sad .dresscode_descr_text {
+  font-size: 18px;
+  line-height: 120%;
+}
+
+/* Кнопка музыки */
+#sad .music-wrapper {
+  position: relative;
+  width: 220px;
+  height: 220px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+}
+
+#sad .rotating-text {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  animation: rotateCircle 10s linear infinite;
+  pointer-events: none;
+}
+
+#sad .rotating-text.is-paused {
+  animation-play-state: paused;
+}
+
+#sad .rotating-text text {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 16px;
+  fill: var(--header-color);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+@keyframes rotateCircle {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+#sad #playButton {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  cursor: pointer;
+  background: var(--background-color, #fff);
+  padding: 20px;
+  border-radius: 50%;
+  z-index: 5;
+  transition: transform 0.3s ease;
+}
+
+#sad #playButton:hover {
+  transform: scale(1.1);
+}
+
+#sad .counter {
+  background: var(--background-color);
+  border: 1px solid var(--header-color);
+  border-radius: 20px;
+  padding: 70px 5%;
+  margin: 50px 0;
+}
+
+#sad .timer-title {
+  font-size: 42px;
+  padding-bottom: 20px;
+}
+
+.timer__bloks {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+#sad .timer__block {
+  line-height: 32px;
+  font-size: 32px;
+  margin-bottom: 8px;
+  color: var(--background-color);
+}
+
+#sad .timer__text {
+  color: var(--background-color);
+  font-size: 16px;
+}
+
+#sad .timer__block-info {
+  display: flex;
+  gap: 4px;
+  flex-direction: column;
+  align-items: center;
+  background: var(--header-color);
+  border-radius: 10px;
+  height: 72px;
+  width: 72px;
+  padding: 12px 4px;
+}
+
+#sad .footer {
+  background: var(--header-color);
+  padding: 3%;
+  max-width: 600px;
+  margin: 50px auto;
+  width: 90%;
+  border-radius: 25px;
+}
+
+#sad .footer__container {
+  background: var(--header-color);
+  padding: 50px 5%;
+  border: 1px solid var(--background-color);
+  border-radius: 15px;
+}
+
+#sad .footer__text {
+  font-family: var(--main-font);
+  text-transform: uppercase;
+  font-size: 24px;
+}
+
+.sp-footer {
+  background-color: #fff;
+  border-radius: 24px 24px 0 0;
+  border-top: 2px solid #45607f;
+}
+
+#sp-footer .sp-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 20px 0;
+}
+
+#sp-footer .sp-social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+}
+
+#sp-footer .sp-social-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background-color: transparent;
+  color: #45607f;
+  border: 1px solid #45607f;
+  transition:
+    transform 0.25s ease,
+    background-color 0.25s ease,
+    color 0.25s ease;
+}
+
+#sp-footer .sp-social-icon:hover {
+  background-color: #45607f;
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+#sp-footer .sp-copyright {
+  font-family: "IBM Plex Serif", serif;
+  font-size: 13px;
+  color: #45607f;
+  opacity: 0.7;
+}
+
+#sad .places #place_img-separate img {
+  width: 30px;
+  margin: auto;
+  padding: 8px 0;
+}
+
+#sad .question__bloks {
+  max-width: 600px;
+  margin: auto;
+}
+
+#sad .names-footer {
+  font-family: var(--beauty-font);
+  font-size: 32px;
+  line-height: 120%;
+}
+
+@media screen and (max-width: 800px) {
+  #sad .bg-img {
+    margin: 0;
+    background-image: url("/templates/velora/source/assets/previews/template/velora/back.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    z-index: -10;
+  }
+
+  #sad .slide-arrow {
+    width: 30px;
+    height: 30px;
+    font-size: 14px;
+    opacity: 0.7;
+    display: none;
+  }
+}
+
+/* Слайдер дресс-кода */
+#sad .dresscode-foto {
+  display: flex !important;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  gap: 15px;
+  padding: 10px 20px 30px;
+  scrollbar-width: none;
+}
+
+#sad .dresscode-foto::-webkit-scrollbar {
+  display: none;
+}
+
+#sad .dresscode-foto img {
+  flex: 0 0 75%;
+  max-width: 230px;
+  height: auto;
+  object-fit: cover;
+  border-radius: 8px;
+  scroll-snap-align: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+@media screen and (min-width: 801px) {
+  #sad .dresscode-foto {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    justify-content: center;
+    overflow-x: auto;
+    padding: 20px 0;
+  }
+
+  #sad .dresscode-foto img {
+    width: 250px !important;
+    min-width: 250px !important;
+    max-width: 250px !important;
+    height: 350px !important;
+    object-fit: cover;
+    flex-shrink: 0 !important;
+    margin-bottom: 0 !important;
+    scroll-snap-align: start;
+  }
+}
+
+#sad .dresscode_woman,
+#sad .dresscode_man {
+  width: 100%;
+  overflow: hidden;
+}
+
+#sad .slider-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+#sad .slide-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.8);
+  color: #000;
+  border: 1px solid #000;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  transition: all 0.3s ease;
+  padding: 0;
+}
+
+#sad .slide-arrow:hover {
+  background: #000;
+  color: #fff;
+}
+
+#sad .slide-arrow.prev {
+  left: 10px;
+}
+
+#sad .slide-arrow.next {
+  right: 10px;
+}
+
+.dresscode__wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.dresscode__row {
+  display: flex;
+  gap: 8px;
+}
+
+.dresscode__color {
+  flex: 1 1 auto;
+  max-width: 60px;
+}
+
+.dresscode__header {
+  margin-bottom: 24px;
+}
+
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; } [data-aos] { opacity: 1 !important; transform: none !important; } }
+
+#sad .dresscode-foto .velora-gallery-card {
+  box-sizing: border-box;
+  display: flex;
+  flex: 0 0 75%;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 230px;
+  margin: 0;
+  scroll-snap-align: center;
+}
+
+#sad .dresscode-foto .velora-gallery-card img {
+  width: 100%;
+  max-width: 100%;
+  flex: 1 1 auto;
+  object-fit: cover;
+}
+
+#sad .dresscode-foto .velora-gallery-card figcaption {
+  font-size: 12px;
+  line-height: 1.4;
+  text-align: center;
+}
+
+@media screen and (min-width: 801px) {
+  #sad .dresscode-foto .velora-gallery-card {
+    flex: 0 0 250px;
+    width: 250px;
+    min-width: 250px;
+    max-width: 250px;
+    height: 350px;
+    scroll-snap-align: start;
+  }
+
+  #sad .dresscode-foto .velora-gallery-card img {
+    width: 100% !important;
+    min-width: 100% !important;
+    max-width: 100% !important;
+    height: 100% !important;
+    margin: 0 !important;
+  }
+}
