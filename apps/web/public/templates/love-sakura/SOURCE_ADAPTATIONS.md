@@ -11,13 +11,22 @@
 
 - `bridge.js` binds invitation data, locale, optional sections, RSVP, wishes, music, calendar, and contact links to the shared platform contract and APIs.
 - The captured RSVP section is retained and wired to the public RSVP API. Its source heading/form reveal is restored at the captured 20% intersection threshold, 600 ms ease-out, 15 px vertical offset. Reduced motion makes it visible immediately.
-- Music hover/tap scaling and the source playing pulse are restored. Platform preview suppresses playback as configured.
+- The captured fixed music button is reused and hidden when the invitation has no track. Its source mute/unmute SVG icons, muted-first toggle, 1.5-second volume ramp, hover/tap scale, and two-second playing pulse are bound to the invitation music URL. Platform silent preview suppresses the control and playback.
 - Original captures and source assets are not modified. The app bridge and adapter styles stay separate from the captured page.
+- When the catalog fixture has no gallery image URLs, hide the entire gallery and each empty card; this avoids blank image tiles. Submitted gallery images retain the captured card grid and styling.
+
+## Source comparison milestone
+
+- The captured source and package each contain ten top-level sections in the same order. Their section classes match one-to-one; the attendance section keeps its source class and inline font style (attribute order and quote encoding differ only semantically).
+- All 35 static source image references have the same filename multiset in the packaged page. Asset bytes are checked separately against the provenance hashes.
+- The captured opening CSS chunk is byte-identical after CRLF normalization. The captured global CSS chunk is byte-identical after local font URL mapping and CSS-equivalent quote normalization. No selector or declaration changes were required in those source bundles.
+- Full-page browser captures of the archived source markup and packaged static markup were pixel-identical at both 450 px and 390 px CSS widths (0 differing RGB channels at 2x output). The comparison used the original captured stylesheets and local source/package image files; it validates static template markup, before dynamic invitation fields and platform adapters run.
+- The focused test checks the captured RSVP motion parameters, restored adapter motion, all original asset hashes, and gallery suppression when no images are supplied.
 
 ## Release gate status
 
 - **Source page and image asset integrity:** verified by focused source checksum test.
-- **Opening artwork:** generated at 900x1444 from the archived opening and verified visually; catalog pointer still needs the coordinator to set `previewImage` to `/templates/love-sakura/catalog-opening.png`.
+- **Opening artwork:** generated at 900x1444 from the archived opening and verified visually; the coordinator has set `previewImage` to `/templates/love-sakura/catalog-opening.png`.
 - **RSVP and music motion:** source parameter checks and adapter implementation are covered by the focused source test; preview confirms the restored RSVP section appears. Submission has not been exercised against a real invitation/API in this preview.
-- **Whole-page source parity:** not yet approved. Do not publish until each original section, responsive layout, fonts, animations, and interactive state has been compared against the preserved capture and all differences outside shared data/API/locale/reduced-motion adaptation are resolved.
+- **Whole-page source parity:** static source markup/style comparison passes at 450 px and 390 px. Runtime platform integration still needs browser review with dynamic fields and a real invitation/API interaction run. Do not publish until those remaining integration checks pass and any differences outside shared data/API/locale/reduced-motion adaptation are resolved.
 - **Catalog/database state:** template remains unpublished and unselectable until the preceding gates pass. No shared catalog or migration state was changed in this audit.

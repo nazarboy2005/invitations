@@ -30,9 +30,11 @@ test("Love Sakura restores the captured RSVP and music motion",()=>{
  assert.match(adapter,/\.ls-music:hover\{transform:scale\(1\.1\)\}/);
  assert.match(adapter,/\.ls-music:active\{transform:scale\(\.9\)\}/);
  assert.match(adapter,/animation:ls-source-pulse 2s cubic-bezier\(\.4,0,\.6,1\) infinite/);
+ assert.match(bridge,/q\('button\[aria-label="Toggle music"\]'\)/);assert.match(bridge,/lucide-volume-2/);assert.match(bridge,/audio\.muted=true/);assert.match(bridge,/onpointerenter=/);assert.match(bridge,/onpointerdown=/);
 });
 test("Love Sakura package removes sample site runtime and binds the shared contract",()=>{
  assert.match(html,/data-chorlove-template="love-sakura" hidden/);assert.doesNotMatch(html,/_next\/image|_next\/static\/chunks\/[\w~.-]+\.js/);
+ assert.match(bridge,/hide\(sections\[6\],!gallery\.length\)/);assert.match(bridge,/hide\(card,true\)/);
  assert.doesNotMatch(html,/chorlove\.uz\/music|Patrick Watson|_next\/static\/chunks\/[0-9a-z~.-]+\.js|<script[^>]+src="https?:/i);
  for(const field of ["groom","bride","dateTime","venue","program","story","gallery","wishes","rsvp","toyona","contacts","enabledLocales","reducedMotion","music"])assert.ok(bridge.includes(field),`missing shared field ${field}`);
  assert.match(bridge,/api\/public\/invitations/);
