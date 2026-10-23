@@ -59,8 +59,8 @@
       "packagedPath": "../chorlove/shared/_next/static/chunks/00sc_9lpb3zcn.css",
       "sourceBytes": 360488,
       "sourceSha256": "9295d64fad91822e7e7ab0d110764ac973d5414829a5bf40bb69e99531762910",
-      "packagedBytes": 360902,
-      "packagedSha256": "7d0ca76b9f0b4901eb4d13539e028381dd751145a83a11a1db7b9b5c3e30bf5a",
+      "packagedBytes": 360901,
+      "packagedSha256": "95ca4d88bf35129d1265d95749cecc361a72f460201c7564a3cc8784e24edc40",
       "difference": "CSS declarations match after normalizing only url(...) targets and line endings; package targets are local."
     }
   ]
