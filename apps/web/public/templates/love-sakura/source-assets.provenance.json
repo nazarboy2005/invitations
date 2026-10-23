@@ -13,6 +13,24 @@
       "Music playing icon: two-second pulsing opacity animation in the source shared component."
     ]
   },
+  "catalogArtwork": {
+    "file": "catalog-opening.png",
+    "source": "First section extracted without layout edits from the archived Love Sakura preview-frame.html; rendered using the captured 0.u3j0~_2ygfx.css and 00sc_9lpb3zcn.css plus original local fonts and images.",
+    "stylesheets": [
+      {
+        "path": "..\\Invitations - this folder will be removed from production\\Chorlove\\Web invitations\\_next\\static\\chunks\\0.u3j0~_2ygfx.css",
+        "sha256": "12141a5ec71f317d0e27589c92869d213b339f86451ee2a75b4612c5f1e05991"
+      },
+      {
+        "path": "..\\Invitations - this folder will be removed from production\\Chorlove\\Web invitations\\_next\\static\\chunks\\00sc_9lpb3zcn.css",
+        "sha256": "9295d64fad91822e7e7ab0d110764ac973d5414829a5bf40bb69e99531762910"
+      }
+    ],
+    "fixture": "Shared catalog preview sample (uz-Latn names and wedding date); ephemeral fixture, not invitation data.",
+    "render": "Headless Chrome, 450x722 CSS pixels at device scale factor 2; opening section only, no browser chrome.",
+    "dimensions": "900x1444",
+    "sha256": "0a8afa6d3be43aaab350fcc6785503cbb90a037c94140bb7abd2fda2e7075721"
+  },
   "assets": [
     {
       "file": "bride.webp",

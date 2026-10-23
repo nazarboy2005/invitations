@@ -222,24 +222,6 @@ section:first-of-type {
   -webkit-text-stroke: 1px #999;
   text-stroke: 1px #999;
 }
-.heart-day-dialog {
-  width: min(390px, calc(100vw - 36px));
-  padding: 0;
-  border: 1px solid #ead9dc;
-  border-radius: 16px;
-  color: #3d3034;
-  background: #fffaf9;
-  box-shadow: 0 24px 80px rgb(45 25 32 / 25%);
-  font-family: "Open Sans", sans-serif;
-}
-.heart-day-dialog::backdrop { background: rgb(30 20 24 / 55%); }
-.heart-day-form { display: grid; gap: 12px; padding: 24px; }
-.heart-day-form h2 { margin: 0 0 4px; font: 400 25px "Cormorant", serif; }
-.heart-day-form label { font-size: 13px; }
-.heart-day-form input { min-height: 44px; padding: 9px 11px; border: 1px solid #d9c5ca; border-radius: 8px; font: inherit; }
-.heart-day-actions { display: flex; justify-content: flex-end; gap: 9px; margin-top: 8px; }
-.heart-day-actions button { min-height: 42px; padding: 9px 13px; border: 1px solid #d9c5ca; border-radius: 8px; color: #3d3034; background: #fff; font: inherit; cursor: pointer; }
-.heart-day-actions button[type="submit"] { border-color: #80505e; color: white; background: #80505e; }
 @keyframes pulse {
   0%,
   100% {
@@ -590,3 +572,5 @@ a[style*="border:2px solid #000;"]:hover {
   position: relative;
   top: 30px;
 }
+
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: 0.01ms !important; } }

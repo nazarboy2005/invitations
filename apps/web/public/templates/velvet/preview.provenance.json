@@ -1,0 +1,18 @@
+{
+  "template": "velvet",
+  "sourceManifest": "Invitations - this folder will be removed from production\\Invitate\\capture-manifest.json",
+  "sourcePage": "Web invitations/invitate.uz/velvet.html",
+  "capture": "Local Chrome headless viewport capture of the packaged original Velvet opening overlay with its source video and slider; no application/browser chrome.",
+  "viewport": {
+    "width": 450,
+    "height": 800
+  },
+  "artwork": "/templates/velvet/preview.webp",
+  "sourceHashes": {
+    "manifestSha256": "244484046e61c36b032cce2fa1a3ab311499a69ec0f133bf5e29048cc7fdd9a3",
+    "pageSha256": "817708aba2a85a32eb2621bfce24b0bad77d85ea615ac9d0846759d280ad8946",
+    "openingVideoSha256": "bc2be975c038b34b7a637fb060ffd8c1a40f9167c48ed279f85c6077183993c3"
+  },
+  "artworkSha256": "4f6b7f5a056eb871c399770855534efd636ec4cabc40953561279157052bf70a",
+  "fixture": "None: captures only the source opening overlay, before invitation details."
+}

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Свадебное приглашение</title>
+    <!-- Google Fonts: элегантные шрифты -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/safir.css" />
+    <meta name="keywords"
+        content="цифровые приглашения, свадебные приглашения, день рождения, юбилей, онлайн приглашения" />
+    <meta name="author" content="Invitate" />
+    <meta property="og:title" content="Бахром &amp; Зарнигор" />
+    <meta property="og:description"
+        content="Судьба соединила наши сердца и привела нас и наши семьи к важному событию - нашей свадьбе. До встречи 18.09.2026" />
+    <meta property=" og:image" content="./assets/images/safir/seo.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://Invitate.uz/" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <meta property="og:image:width" content="1920" />
+    <meta property="og:image:height" content="1080" />
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="./assets/images/logo.png" />
+<script defer src="https://stats.tolipov.uz/stats.js" data-website-id="a6062941-d00a-4c8f-ab4f-f35053014a90"></script></head>
+
+<body>
+
+    <!-- Фоновая музыка: замените assets/audio/music.mp3 на свой файл -->
+    <audio id="bgMusic" src="./assets/audio/perfect.mp3" loop preload="auto"></audio>
+    <button id="soundToggle" class="sound-toggle" aria-label="Включить/выключить музыку" title="Музыка">
+        <svg id="soundIconOn" width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 9v6h4l5 5V4L8 9H4z" fill="currentColor" />
+            <path d="M16.5 8.5a5 5 0 010 7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+            <path d="M18.7 6a8 8 0 010 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
+                opacity="0.6" />
+        </svg>
+        <svg id="soundIconOff" width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+            style="display:none">
+            <path d="M4 9v6h4l5 5V4L8 9H4z" fill="currentColor" />
+            <path d="M16 9l5 6M21 9l-5 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+        </svg>
+    </button>
+
+    <!-- 1. HERO SECTION (100vh, bg image, изображение по центру) -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <img src="./assets/images/safir/heartbackground.png" alt="Главное изображение"
+                class="hero-center-img animate-zoom" />
+            <div class="hero-text animate-up">
+                <h1 class="hero-title">Wedding Day</h1>
+                <div class="hero-divider">
+                    <span class="hero-divider-line"></span>
+                    <span class="hero-divider-diamond"></span>
+                    <span class="hero-divider-line"></span>
+                </div>
+                <h2 class="hero-subtitle">Бахром &amp; Зарнигор</h2>
+                <p class="hero-desctitle">18.09.2026</p>
+
+            </div>
+        </div>
+
+    </section>
+
+    <!-- 2. БЕЛЫЙ БЛОК -->
+    <section class="white-card-block">
+        <img src="./assets/images/safir/top.png" alt="Цветочный декор" class="flower-decor flower-top animate-fade" />
+
+        <div class="card-img-wrap animate-up">
+            <img src="./assets/images/safir/image.png" alt="Пара" class="card-main-img" />
+        </div>
+
+        <h1 class="name-title animate-up">Дорогие родные и друзья!</h1>
+        <p class="subtitle animate-up">
+            В нашей жизни предстоят счастливые перемены!<br><br>
+            Мы хотим, чтобы в этот день рядом с нами были самые
+            близкие и дорогие для нас люди.
+            Будем рады разделить с вами чудесный праздник в день нашей свадьбы.
+        </p>
+
+        <h2 class="main-title animate-up">Save the date</h2>
+        <p class="date-subtitle animate-up">18 | Сентября | 2026</p>
+        </p>
+
+        <img src="./assets/images/safir/bottom.png" alt="Цветочный декор"
+            class="flower-decor flower-bottom animate-fade" />
+    </section>
+
+    <!-- 3. ДЕТАЛИ И ЛОКАЦИЯ -->
+    <section class="info-block">
+        <h2 class="block-title animate-up">Место проведения</h2>
+        <p class="block-subtitle animate-up">Вас ждёт уютная атмосфера, приятный вечер и незабываемый праздник в
+            ресторане</p>
+        <p class="block-desc animate-up"> Yakkasaroy</p>
+
+        <div class="location-box animate-up">
+            <img src="./assets/images/safir/loca.svg" alt="Локация" class="location-img" />
+            <a href="https://yandex.uz/maps/-/CTT2JMyK" target="_blank" class="map-btn">Посмотреть на карте</a>
+        </div>
+    </section>
+
+    <!-- 4. ПРОГРАММА -->
+    <section class="time-card-block">
+        <img src="./assets/images/safir/top.png" alt="Цветочный декор" class="flower-decor flower-top animate-fade" />
+
+        <h2 class="main-title animate-up">Программа дня</h2>
+
+        <div class="timing-wrapper">
+            <div class="timing-item animate-up">
+                <img src="./assets/images/safir/guest.svg" alt="Часы" class="timing-icon" />
+                <span class="timing-time">18:00</span>
+                <h3 class="timing-title">Встреча гостей</h3>
+                <p class="timing-desc">Пожалуйста, приходите с хорошим<br> настроением и улыбкой.</p>
+            </div>
+
+            <div class="timing-item animate-up">
+                <img src="./assets/images/safir/banquet.svg" alt="Часы" class="timing-icon" />
+                <span class="timing-time">19:00</span>
+                <h3 class="timing-title">Банкет</h3>
+                <p class="timing-desc"> Отметим это прекрасное событие в <br>кругу самых близких для нас людей </p>
+            </div>
+
+            <div class="timing-item animate-up">
+                <img src="./assets/images/safir/tort.svg" alt="Часы" class="timing-icon" />
+                <span class="timing-time">20:00</span>
+                <h3 class="timing-title">Торт</h3>
+                <p class="timing-desc">Сладкая традиция, которую <br>мы не можем обойти стороной
+                </p>
+            </div>
+
+            <div class="timing-item animate-up">
+                <img src="./assets/images/safir/zav.svg" alt="Часы" class="timing-icon" />
+                <span class="timing-time">23:00</span>
+                <h3 class="timing-title">Завершение</h3>
+                <p class="timing-desc">Мы соберем множество ярких <br>впечатлений о прошедшем торжестве </p>
+            </div>
+        </div>
+
+        <img src="./assets/images/safir/bottom.png" alt="Цветочный декор"
+            class="flower-decor flower-bottom animate-fade" />
+    </section>
+
+    <!-- 5. DRESS CODE -->
+    <section class="dresscode-block animate-up">
+        <img src="./assets/images/safir/left.svg" alt="Цветок слева" class="side-flower flower-left" />
+        <img src="./assets/images/safir/right.svg" alt="Цветок справа" class="side-flower flower-right" />
+
+        <div class="dresscode-content">
+            <h2 class="main-title">Дресс-код</h2>
+            <p class="subtitle">
+                Мы очень ждём и с удовольствием готовимся к нашему незабываемому дню! </p>
+
+            <p class="subtitle">Поддержите нас
+                вашими улыбками и объятиями, а также красивыми нарядами в палитре торжества:</p>
+
+            <div class="dresscode-palette">
+                <span class="color-circle" style="background:#000"></span>
+                <span class="color-circle" style="background:#333"></span>
+                <span class="color-circle" style="background:#e8c9a3"></span>
+                <span class="color-circle" style="background:#c98b6b"></span>
+                <span class="color-circle" style="background:#ffd6c2"></span>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. ЧАТ И АНКЕТА -->
+    <section class="time-card-block">
+        <img src="./assets/images/safir/top.png" alt="Цветочный декор" class="flower-decor flower-top animate-fade" />
+
+        <p class="main-title animate-up"> Атмосфера</p>
+        <p class="block-desc animate-up">
+            Пожалуйста, поддерживайте позитивное настроение. Ваша открытость поможет нам создать
+            незабываемые воспоминания об этом дне.</p>
+
+        <div class="contact-subblock animate-up">
+            <h2 class="main-title">Для связи</h2>
+            <p class="block-desc">
+                Если Вы подготовили для нас сюрприз, а так же в случае возникновения любых вопросов, вы
+                можете обратиться к нашему организатору</p>
+            <a href="tel:+998983330033" class="ctc-btn">Связаться</a>
+        </div>
+
+        <div class="form-subblock animate-up">
+            <h2 class="main-title">Анкета</h2>
+            <p class="subtitle">Пожалуйста, заполните небольшую анкету, чтобы мы могли подготовиться и сделать праздник
+                ещё более уютным и незабываемым.</p>
+            <button id="openRsvpBtn" class="rsvp-btn">Подтвердить присутствие</button>
+        </div>
+
+        <img src="./assets/images/safir/bottom.png" alt="Цветочный декор"
+            class="flower-decor flower-bottom animate-fade" />
+    </section>
+
+    <!-- 7. FINAL HERO SECTION -->
+    <section class="final-hero-section">
+        <div class="final-hero-content animate-up">
+            <p class="final-title">
+                Вы не просто так получили это приглашение! В особенный для нас день мы очень хотим, чтобы вы
+                были рядом!</p>
+            <p class="final-text">Ждём вас!</p>
+        </div>
+    </section>
+
+    <!-- ─── RSVP MODAL (Анкета) ─── -->
+    <div id="rsvpOverlay" class="rsvp-overlay">
+        <div class="rsvp-modal">
+            <button id="closeRsvpBtn" class="rsvp-close" aria-label="Закрыть">&times;</button>
+
+            <div id="rsvpFormView">
+                <h2 class="rsvp-title">Анкета гостя</h2>
+                <p class="rsvp-subtitle">Пожалуйста, заполните форму ниже</p>
+
+                <form id="rsvpForm" novalidate>
+                    <label class="rsvp-label" for="rsvpName">Ваше имя</label>
+                    <input type="text" id="rsvpName" name="name" class="rsvp-input" placeholder="Введите ваше имя"
+                        required />
+
+                    <span class="rsvp-label">Вы придёте?</span>
+                    <div class="rsvp-radio-group">
+                        <label class="rsvp-radio">
+                            <input type="radio" name="attend" value="yes" required />
+                            <span>Да, приду</span>
+                        </label>
+                        <label class="rsvp-radio">
+                            <input type="radio" name="attend" value="no" required />
+                            <span>Не смогу</span>
+                        </label>
+                    </div>
+
+                    <label class="rsvp-label" for="rsvpWishes">Пожелания</label>
+                    <textarea id="rsvpWishes" name="wishes" class="rsvp-textarea" rows="3"
+                        placeholder="Ваши пожелания молодожёнам (необязательно)"></textarea>
+
+                    <p id="rsvpError" class="rsvp-error"></p>
+
+                    <button type="submit" id="rsvpSubmitBtn" class="rsvp-submit">Отправить</button>
+                </form>
+            </div>
+
+            <div id="rsvpSuccessView" class="rsvp-success-view">
+                <div class="rsvp-success-icon">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="12" cy="12" r="11" stroke="currentColor" stroke-width="1.6" />
+                        <path d="M7 12.5l3 3 7-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                </div>
+                <h2 class="rsvp-title">Отправлено!</h2>
+                <p class="rsvp-subtitle">Спасибо, ваш ответ получен</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/js/safir.js"></script>
+</body>
+
+</html>

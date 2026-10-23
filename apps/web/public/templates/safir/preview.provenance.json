@@ -40,6 +40,7 @@
   ],
   "sourcePackage": {
     "preservedOriginals": [
+      "source/safir.html",
       "source/safir.css",
       "source/safir.js"
     ],

@@ -1,60 +1,5 @@
-(function () {
-  const form = document.getElementById("rsvp-form");
-  const container = document.getElementById("rsvp-container");
-
-  form.addEventListener("submit", function (event) {
-    event.preventDefault();
-    container.innerHTML =
-      '<p style="text-align:center; font-size:20px; color:#4B4B4B;">Ваши ответы отправлены</p>';
-
-    const formData = new FormData(form);
-    const data = {};
-    formData.forEach((value, key) => {
-      if (data[key]) {
-        if (Array.isArray(data[key])) {
-          data[key].push(value);
-        } else {
-          data[key] = [data[key], value];
-        }
-      } else {
-        data[key] = value;
-      }
-    });
-
-    data["telegram_id"] = "818996511";
-
-    fetch("https://n8n.tim-0fficial.ru/webhook/taplinkzayavka", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    }).catch((error) => console.error("Webhook error:", error));
-  });
-})();
-
-// Countdown Timer
-function pad(num) {
-  return num.toString().padStart(2, "0");
-}
-function updateCountdown() {
-  const now = new Date();
-  const target = new Date("2026-10-20T18:00:00+05:00");
-  let diff = target - now;
-  if (diff < 0) diff = 0;
-  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-  const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-  const minutes = Math.floor((diff / (1000 * 60)) % 60);
-  const seconds = Math.floor((diff / 1000) % 60);
-  if (document.getElementById("days"))
-    document.getElementById("days").textContent = pad(days);
-  if (document.getElementById("hours"))
-    document.getElementById("hours").textContent = pad(hours);
-  if (document.getElementById("minutes"))
-    document.getElementById("minutes").textContent = pad(minutes);
-  if (document.getElementById("seconds"))
-    document.getElementById("seconds").textContent = pad(seconds);
-}
-updateCountdown();
-setInterval(updateCountdown, 1000);
+// RSVP is bound to the platform adapter before this source script is enabled.
+// The captured webhook and source-specific sample payload are not copied.
 
 document.addEventListener("DOMContentLoaded", function () {
   // Set --vh for mobile
@@ -66,6 +11,15 @@ document.addEventListener("DOMContentLoaded", function () {
   };
   window.addEventListener("resize", setVh);
   setVh();
+  const motionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const syncVideoMotion = () => {
+    document.querySelectorAll("video[autoplay]").forEach((video) => {
+      if (motionPreference.matches) video.pause();
+      else video.play().catch(() => {});
+    });
+  };
+  syncVideoMotion();
+  motionPreference.addEventListener?.("change", syncVideoMotion);
 
   // Slider unlock logic
   const sliderHandle = document.querySelector(".slider-handle");
@@ -112,7 +66,7 @@ document.addEventListener("DOMContentLoaded", function () {
     startAudioPlayback();
     setTimeout(function () {
       loadingScreen.remove();
-    }, 1200);
+    }, motionPreference.matches ? 0 : 1200);
   }
   sliderHandle.addEventListener("mousedown", startDrag);
   document.addEventListener("mousemove", drag);
@@ -132,7 +86,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const muteIcon = document.querySelector(".mute-icon");
   let audioStarted = false;
   async function startAudioPlayback() {
-    if (audioStarted) return;
+    if (audioStarted || !audio?.getAttribute("src")) return;
     try {
       await audio.play();
       audioStarted = true;
@@ -151,9 +105,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
   muteBtn.addEventListener("click", function () {
     audio.muted = !audio.muted;
-    muteIcon.src = audio.muted
-      ? "https://img.icons8.com/?size=100&id=7913&format=png&color=FFFFFF"
-      : "https://img.icons8.com/?size=100&id=vI9d0s6ZRxxX&format=png&color=FFFFFF";
+    muteIcon.textContent = audio.muted ? "♪̸" : "♪";
   });
 });
 
@@ -173,8 +125,11 @@ const monthNames = [
   "Декабрь",
 ];
 function renderCalendar(month, year) {
+  const locale = window.velvetLocale || "ru";
   document.querySelector(".calendar-title").textContent =
-    `${monthNames[month]} ${year}`;
+    new Intl.DateTimeFormat(locale, { month: "long", year: "numeric" }).format(
+      new Date(year, month, 1),
+    );
   calendar.querySelectorAll(".calendar-date").forEach((e) => e.remove());
   const firstDay = new Date(year, month, 1).getDay();
   const startOffset = (firstDay + 6) % 7;
@@ -193,7 +148,12 @@ function renderCalendar(month, year) {
     calendar.appendChild(cell);
   }
 }
-renderCalendar(9, 2026);
+window.renderVelvetCalendar = (month, year, day) => {
+  renderCalendar(month, year);
+  if (day) placeHeart(day);
+};
+const initialCalendar = window.velvetDate || { month: 9, year: 2026, day: 0 };
+renderCalendar(initialCalendar.month, initialCalendar.year);
 
 // --- Сердце в календаре ---
 let heartEl = document.createElement("div");
@@ -216,39 +176,33 @@ function placeHeart(day) {
     }
   });
 }
-// По умолчанию ставим на 24
-placeHeart(28);
-
-// Обработчик нажатия Enter: открываем интерфейс выбора дня.
-document.addEventListener("keydown", function (e) {
-  if (e.key !== "Enter" || e.target.closest("input, textarea, select, button, a")) return;
-  let dialog = document.getElementById("heart-day-dialog");
-  if (!dialog) {
-    dialog = document.createElement("dialog");
-    dialog.id = "heart-day-dialog";
-    dialog.className = "heart-day-dialog";
-    dialog.innerHTML = `
-      <form method="dialog" class="heart-day-form">
-        <h2>Выберите день месяца</h2>
-        <label for="heart-day-input">День (1–30)</label>
-        <input id="heart-day-input" name="day" type="number" min="1" max="30" value="28" required>
-        <div class="heart-day-actions">
-          <button type="button" data-cancel>Отмена</button>
-          <button type="submit">Переместить сердце</button>
-        </div>
-      </form>`;
-    document.body.appendChild(dialog);
-    dialog.querySelector("[data-cancel]").addEventListener("click", () => dialog.close());
-    dialog.querySelector("form").addEventListener("submit", (event) => {
-      event.preventDefault();
-      const day = Number(dialog.querySelector("input").value);
-      if (day < 1 || day > 30) return;
-      placeHeart(day);
-      dialog.close();
-    });
-  }
-  dialog.showModal();
-  dialog.querySelector("input").focus();
+// The event date, when present, is the source calendar highlight.
+if (initialCalendar.day) placeHeart(initialCalendar.day);
+document.addEventListener("velvet:date", () => {
+  window.velvetDate &&
+    window.renderVelvetCalendar(
+      window.velvetDate.month,
+      window.velvetDate.year,
+      window.velvetDate.day,
+    );
+});
+document.addEventListener("keydown", (event) => {
+  if (
+    event.key !== "Enter" ||
+    event.target.closest("input, textarea, select, button, a")
+  )
+    return;
+  const promptText = window.velvetUi?.calendarPrompt ||
+    "Choose a day of the month for the heart:";
+  const day = Number(window.prompt(promptText));
+  const month = window.velvetDate?.month;
+  const year = window.velvetDate?.year;
+  if (
+    Number.isInteger(day) &&
+    day >= 1 &&
+    day <= new Date(year, month + 1, 0).getDate()
+  )
+    placeHeart(day);
 });
 
 document.addEventListener("DOMContentLoaded", function () {
