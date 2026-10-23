@@ -30,3 +30,21 @@ html,body{margin:0;min-height:100%;background:#eef3e8;font-family:"Cormorant Gar
 .gg-lightbox::backdrop{background:rgba(12,18,12,.78)}
 .gg-lightbox img{display:block;max-width:100%;max-height:78vh;margin:auto;object-fit:contain}
 .gg-lightbox [data-gg-lightbox-close]{position:absolute;top:8px;right:12px;border:0;background:transparent;color:white;font-size:32px;cursor:pointer}
+
+/* Source opening envelope extracted from Chorlove's server-rendered capture. */
+[data-gg-source-opening]{z-index:50;transition:opacity .6s ease .45s}
+[data-gg-source-opening] [data-gg-opening-card]{transform:translateY(0) scale(1);opacity:1;transition:transform .8s cubic-bezier(.22,1,.36,1),opacity .8s ease}
+[data-gg-source-opening].gg-opening-exit{opacity:0;transition-delay:.45s;pointer-events:none}
+[data-gg-source-opening].gg-opening-exit [data-gg-opening-card]{transform:translateY(-35px) scale(1.08);opacity:0}
+[data-gg-opening-heart] svg{animation:gg-heart-pulse 2s ease-in-out infinite}
+[data-gg-opening-open]>div{animation:gg-opening-sheen 3s ease-in-out infinite}
+.gg-opening-petal{position:absolute;z-index:1;pointer-events:none;top:-30px;will-change:transform,opacity}
+[data-gg-source-hero] [style*="opacity:0"]{opacity:0}
+[data-gg-source-hero].gg-source-hero-ready img[style*="opacity:0"]{opacity:1;transform:scale(1);transition:opacity 1s ease,transform 1s ease}
+[data-gg-source-hero].gg-source-hero-ready > div > div[style*="opacity:0"]{opacity:1;transform:none;transition:opacity .9s cubic-bezier(.22,1,.36,1),transform .9s cubic-bezier(.22,1,.36,1);transition-delay:.25s}
+[data-gg-source-hero].gg-source-hero-ready > div > div > div[style*="opacity:0"]{opacity:1;transform:none;transition:opacity .7s ease,transform .7s ease}
+[data-gg-source-hero].gg-source-hero-ready > div > div > span[style*="opacity:0"]{opacity:.9;transform:scale(1);transition:opacity .7s ease,transform .7s ease;transition-delay:.55s}
+[data-gg-source-hero].gg-source-hero-ready > div > img[style*="opacity:0"]{opacity:1;transform:scale(1);transition:opacity .9s ease,transform .9s ease;transition-delay:.55s}
+@keyframes gg-heart-pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.12)}}
+@keyframes gg-opening-sheen{0%{transform:translateX(-100px)}100%{transform:translateX(260px)}}
+@media(prefers-reduced-motion:reduce){[data-gg-source-opening],[data-gg-source-opening] *{animation:none!important;transition:none!important}[data-gg-source-opening].gg-opening-exit{display:none}[data-gg-source-hero] [style*="opacity:0"]{opacity:1!important;transform:none!important}}

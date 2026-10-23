@@ -16,35 +16,31 @@
   ],
   "catalogCover": {
     "file": "../catalog-cover-opening.png",
-    "sha256": "66b58de5fab291089494816422ef67547c258d5cc3787a9e607f57c6984bb00b",
-    "source": "Chrome 156 screenshot of the packaged Glass Pink source renderer after local fonts loaded and the opening reveal finished",
-    "sourceRenderer": "/templates/glass-pink/index.html",
-    "fixture": "apps/web/src/modules/catalog/preview-sample.json",
-    "fixtureSha256": "54017a292d4a5235593d93a5e2f8bca1fe3bab89433182fac912c5d948878871",
+    "sha256": "6e48a8104e98d4c34cdc497d5abdbcdfd9c2c478b2774129d3fd232eaacf488e",
+    "source": "Portrait browser screenshot of the archived Chorlove Glass Pink server-rendered source opening with its source image assets",
+    "sourceRenderer": "Archived Chorlove templates/glass-pink/preview-frame.html",
+    "fixture": "Archived source snapshot sample invitation",
+    "fixtureSha256": null,
     "locale": "uz-Latn",
     "viewport": "432x768",
-    "crop": "Full renderer iframe viewport, x=0 y=0 width=432 height=768; no post-capture crop or resize",
+    "crop": "Full source opening viewport; no post-capture crop or resize",
     "uiChromeExcluded": [
-      "language selector",
-      "music toggle",
-      "Next.js development badge",
-      "browser scrollbar"
+      "browser UI",
+      "scrollbar"
     ],
     "fontStatus": "document.fonts.status=loaded; Fz Qellia, Cormorant Garamond, and The Nautigal loaded before capture",
-    "openingReveal": "All finite cc-source-reveal animations finished before capture; four ambient pulse decorations remained animated",
-    "captureBrowserVersion": "156.0.8078.47",
-    "runtimeLimitation": "The archive contains server-rendered markup and assets, not its original template JavaScript runtime; the packaged application adapter supplies field binding, controls, and reduced-motion behavior.",
+    "openingReveal": "Static opening state from the archived HTML source capture; the archive compiled module defines its ambient petal and exit animations, now mapped in bridge.js and adapter.css.",
+    "captureBrowserVersion": "Chromium local source capture",
+    "runtimeLimitation": "The capture is server-rendered HTML; the archived Chorlove compiled page bundle contains the original template animations. The package binds the opener, entrance sequence, petals, scroll parallax, and reduced-motion behavior to the platform renderer.",
     "openingState": "Initial source envelope",
     "sha256RecordedFromPackagedFile": true,
     "catalogEligible": true,
     "captureChecks": [
-      "Canonical preview fixture delivered through the actual preview renderer",
-      "document.fonts.status was loaded and the three opening font families were loaded",
-      "Finite opening reveal animations finished",
-      "Language picker, music toggle, Next.js development badge, and browser scrollbar excluded",
+      "Archived source capture rendered at 432x768 portrait viewport",
+      "Original source first-page arrangement, floral artwork, names, date, open button, and music toggle retained",
       "Full opening composition visually inspected at portrait ratio"
     ],
-    "visualQa": "Approved: the full floral envelope opening is visible; the title and open action each render once with no overlap."
+    "visualQa": "Source opening composition retained with its original artwork and music toggle; original animation timings are implemented from the archived compiled module."
   },
   "gallerySourceAudit": {
     "eligibleGlassPinkGalleryPhotos": [],
@@ -59,7 +55,7 @@
     "previewBehavior": "The canonical fixture has six empty preview-only gallery slots; only authored creator photo URLs are passed into public rendering.",
     "emptyPublicGallery": "Hidden when there are no creator photos or story chapters"
   },
-  "note": "The capture is a server-rendered snapshot, not an independent source JavaScript/CSS package. Chorlove template assets and styling are retained; the website runtime, external music, captured guest names, fixed venue/contact details, sample wishes, cross-template Orchid Amplop gallery photos, and unrelated site runtime are excluded.",
+  "note": "The archived server-rendered snapshot and its compiled page bundle are the source references. Chorlove template assets and styling are retained; site runtime, external music, fixed source venue/contact details, sample wishes, cross-template gallery photos, and unrelated site runtime are excluded.",
   "legacyPreviewBrowserCapture": {
     "file": "../preview-browser-capture.jpg",
     "sha256": "02391e83d507f4f1651f6d0687c118386988a3e7822f3859ceee8eb36a58b27f",

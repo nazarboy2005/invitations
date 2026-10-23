@@ -19,25 +19,26 @@ test("Green Garden keeps its original capture byte-for-byte", async () => {
 });
 
 test("Green Garden preview capture matches its canonical fixture provenance", async () => {
-  const image = await readFile(new URL("preview-browser-capture.jpg", root));
+  const image = await readFile(new URL("catalog-cover-opening.png", root));
   const provenance = JSON.parse(await readFile(new URL("preview.provenance.json", root), "utf8"));
   const sourceManifest = JSON.parse(await readFile(new URL("source-assets.provenance.json", root), "utf8"));
-  const fixture = await readFile(new URL("../apps/web/src/modules/catalog/preview-sample.json", import.meta.url));
   const contracts = await readFile(new URL("../packages/contracts/src/index.ts", import.meta.url), "utf8");
   assert.equal(createHash("sha256").update(image).digest("hex"), provenance.sha256);
-  assert.equal(createHash("sha256").update(fixture).digest("hex"), provenance.fixtureSha256);
+  assert.equal(provenance.file, "catalog-cover-opening.png");
+  assert.equal(provenance.fixture, "source snapshot sample invitation");
+  assert.equal(provenance.fixtureSha256, null);
   assert.equal(provenance.sourceCaptureSha256, sourceManifest.preservedCapture.sha256);
-  assert.equal(provenance.width, 390);
-  assert.equal(provenance.height, 720);
+  assert.equal(provenance.width, 432);
+  assert.equal(provenance.height, 768);
   assert.deepEqual(provenance.crop, {
     x: 0,
     y: 0,
-    width: 390,
-    height: 720,
-    operation: "none; full iframe viewport preserved",
+    width: 432,
+    height: 768,
+    operation: "none; full source opening viewport preserved",
   });
-  assert.match(provenance.captureMethod, /browser\/app UI, language selector, scrollbar, and development portal excluded/);
-  assert.match(contracts, /id: "green-garden",\s+name: "Green Garden",\s+description:[^\n]+\s+previewImage: "preview-browser-capture\.jpg"/);
+  assert.match(provenance.captureMethod, /archived Chorlove Green Garden server-rendered source opening/);
+  assert.match(contracts, /id: "green-garden",\s+name: "Green Garden",\s+description:[^\n]+\s+previewImage: "\/templates\/green-garden\/catalog-cover-opening\.png"/);
 });
 
 test("Green Garden gallery photos stay ephemeral and authored photos replace placeholders", async () => {
@@ -56,13 +57,16 @@ test("Green Garden gallery photos stay ephemeral and authored photos replace pla
 
 test("Green Garden app page excludes reference sample content and runtime", async () => {
   const html = await readFile(new URL("index.html", root), "utf8");
-  for (const sample of ["Muhammad", "Xadicha", "Abdurahmonovlar", "Azizbek", "orchid-amplop", "unsplash.com", "chorlove.uz", "leaf1-bloom.webp", "welcome.webp", "cake.webp"]) {
+  for (const sample of ["Muhammad", "Xadicha", "Abdurahmonovlar", "Azizbek", "orchid-amplop", "unsplash.com", "chorlove.uz", "welcome.webp", "cake.webp"]) {
     assert.equal(html.toLowerCase().includes(sample.toLowerCase()), false, `unexpected source content: ${sample}`);
   }
   assert.match(html, /data-chorlove-template="green-garden"/);
   assert.match(html, /data-gg-rsvp-form/);
   assert.match(html, /data-gg-wish-form/);
   assert.match(html, /data-gg-program-item/);
+  assert.equal((html.match(/src="\/images\/green-garden\/leaf1-bloom\.webp"/g) || []).length, 2);
+  assert.match(html, /data-gg-field="groom"/);
+  assert.match(html, /data-gg-field="bride"/);
   assert.match(html, /bridge\.js/);
   assert.doesNotMatch(html, /<script[^>]+src="\/_next\//);
 });

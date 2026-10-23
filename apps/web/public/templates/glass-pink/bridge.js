@@ -223,9 +223,105 @@
         }
       }
     }, { threshold: 0.08 });
-    root.querySelectorAll('[style*="opacity:0"], [style*="opacity: 0"]').forEach((element) => observer.observe(element));
+    root.querySelectorAll('[style*="opacity:0"], [style*="opacity: 0"]').forEach((element) => { if (!element.closest("[data-gp-source-hero]")) observer.observe(element); });
   }
 
+  let openingBound = false;
+  let heroMotionStarted = false;
+  let heroParallaxBound = false;
+  const sourcePetals = [
+    ["91.44%","#eab8c2","14.7px",8.2,.98],["39.10%","#eab8c2","15.1px",12.9,1.68],
+    ["62.76%","#eab8c2","15.3px",11.4,1.18],["90.66%","#f5d6dc","22.4px",11.4,.42],
+    ["75.20%","#eab8c2","21.5px",9.1,1.95],["89.88%","#ffffff","21.4px",9.8,2],
+    ["15.71%","#eab8c2","17.8px",12.1,1.18],["80.13%","#ffffff","23px",9.2,2.28],
+    ["29.75%","#eab8c2","15.2px",11.6,1.86],["65.05%","#f5d6dc","18.5px",10.1,.84],
+    ["75.37%","#f5d6dc","21.5px",11.6,2],["25.90%","#f7e3e8","12.7px",10.4,2.33],
+  ];
+  function sourceOpening(payload) {
+    const envelope = root.querySelector('[data-landing-screenshot-id="invite-envelope"]');
+    if (!envelope) return;
+    const card = envelope.querySelector('[style*="z-index:10"]');
+    const content = card?.querySelector('.relative.rounded-lg .relative.z-10.text-center');
+    const headings = content?.querySelectorAll("h1") || [];
+    const greeting = content?.querySelector("p span[dir]");
+    const nameNodes = headings[1]?.querySelectorAll("span") || [];
+    const date = content?.querySelector(".flex.flex-col.items-center span[dir]");
+    const button = envelope.querySelector("button");
+    const heart = card?.querySelector('.rounded-full[style*="top:50px"]');
+    if (payload?.data) {
+      text(greeting, payload.data.greeting || localCopy().openingGreeting);
+      text(headings[0], payload.data.title || localCopy().invitationTitle);
+      text(nameNodes[0], payload.data.groom);
+      text(nameNodes[2], payload.data.bride);
+      const d = payload.data.date || {};
+      text(date, d.long || [d.month,d.day,d.year].filter(Boolean).join(" "));
+    }
+    if (button) { text(button.querySelector("span"), localCopy().openInvitation); button.setAttribute("aria-label", localCopy().openInvitation); }
+    if (!openingBound) {
+      const reduced = Boolean(payload?.reducedMotion) || matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const petalLayer = envelope.children[1];
+      for (const [left,color,size,duration,delay] of sourcePetals) {
+        const petal = document.createElement("span"); petal.className = "cc-source-petal";
+        petal.style.left=left; petal.style.color=color; petal.style.fontSize=size;
+        petal.style.setProperty("--cc-petal-duration",`${duration}s`); petal.style.setProperty("--cc-petal-delay",`${delay}s`);
+        petal.setAttribute("aria-hidden","true");
+        petal.innerHTML='<svg viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em"><g><ellipse cx="12" cy="5" rx="2.2" ry="4.5"/><ellipse cx="12" cy="5" rx="2.2" ry="4.5" transform="rotate(60 12 12)"/><ellipse cx="12" cy="5" rx="2.2" ry="4.5" transform="rotate(120 12 12)"/><ellipse cx="12" cy="5" rx="2.2" ry="4.5" transform="rotate(180 12 12)"/><ellipse cx="12" cy="5" rx="2.2" ry="4.5" transform="rotate(240 12 12)"/><ellipse cx="12" cy="5" rx="2.2" ry="4.5" transform="rotate(300 12 12)"/></g><circle cx="12" cy="12" r="1.8" fill-opacity=".45"/></svg>';
+        if (!reduced) {
+          petalLayer?.append(petal);
+          petal.animate([{ translate: "0 -10vh" }, { translate: "0 110vh" }], { duration: duration * 1000, delay: delay * 1000, iterations: Infinity, easing: "linear" });
+          petal.animate([{ opacity: 0 }, { opacity: .8, offset: .14, easing: "ease-in-out" }, { opacity: .8, offset: .78 }, { opacity: 0 }], { duration: duration * 1000, delay: delay * 1000, iterations: Infinity, easing: "ease-in-out" });
+          petal.animate([{ rotate: "0deg" }, { rotate: "360deg" }], { duration: duration * 1200, delay: delay * 1000, iterations: Infinity, easing: "linear" });
+        }
+      }
+      if (heart) { heart.setAttribute("role","button"); heart.tabIndex=0; heart.setAttribute("aria-label",localCopy().openInvitation); }
+      const close = () => {
+        if (envelope.classList.contains("cc-source-closing")) return;
+        envelope.classList.add("cc-source-closing");
+        envelope.querySelectorAll(".cc-source-petal").forEach(petal => {
+          const opacity = getComputedStyle(petal).opacity;
+          petal.getAnimations().forEach(animation => animation.cancel());
+          petal.animate([
+            { translate: "0 0px", scale: "1" },
+            { translate: "0 150px", scale: "2" },
+            { translate: "0 300px", scale: "0" },
+          ], { duration: 850, easing: "ease-out", fill: "forwards" });
+          petal.animate([{ opacity }, { opacity: 0 }], { duration: 850, easing: "ease-out", fill: "forwards" });
+        });
+        window.setTimeout(() => { envelope.hidden=true; }, 1100);
+      };
+      button?.addEventListener("click", close);
+      heart?.addEventListener("click", close);
+      heart?.addEventListener("keydown", event=>{if(event.key==="Enter"||event.key===" "){event.preventDefault();close();}});
+      openingBound=true;
+    }
+  }
+  function animateSourceHero(reduced) {
+    if (heroMotionStarted) return;
+    const hero = root.querySelector("section");
+    if (!hero) return;
+    hero.dataset.gpSourceHero="";
+    heroMotionStarted=true;
+    const leaves=hero.querySelectorAll('img[style*="opacity:0"]');
+    const card=hero.querySelector('div[style*="opacity:0"]');
+    const run=(node,frames,duration,delay,easing="easeOut")=>{
+      if(!node)return;
+      if(reduced){const last=frames.at(-1);node.style.opacity=String(last.opacity);node.style.transform=last.transform||`translateY(${last.y||0}px) scale(${last.scale||1})`;return;}
+      node.animate(frames,{duration:duration*1000,delay:delay*1000,easing,fill:"both"});
+    };
+    run(leaves[0],[{opacity:0,transform:"scale(.8)"},{opacity:.9,transform:"scale(1)"}],1,.2);
+    run(leaves[1],[{opacity:0,transform:"scale(.8)"},{opacity:.9,transform:"scale(1)"}],1,.35);
+    run(card,[{opacity:0,transform:"translateY(30px) scale(.85)"},{opacity:1,transform:"translateY(0) scale(1)"}],.9,.25,"cubic-bezier(.22,1,.36,1)");
+    const names=card?.children||[];
+    run(names[0],[{opacity:0,transform:"translateY(15px)"},{opacity:1,transform:"translateY(0)"}],.7,.8);
+    run(names[1],[{opacity:0,transform:"scale(.5)"},{opacity:.9,transform:"scale(1)"}],.7,.65);
+    run(names[2],[{opacity:0,transform:"translateY(15px)"},{opacity:1,transform:"translateY(0)"}],.7,.5);
+    run(leaves[2],[{opacity:0,transform:"scale(.7)"},{opacity:1,transform:"scale(1)"}],.9,.55);
+    if(!reduced&&!heroParallaxBound&&leaves.length>=3){
+      let scroller=window;for(let node=hero;node;node=node.parentElement){if(/(auto|scroll)/.test(getComputedStyle(node).overflowY)){scroller=node;break;}}
+      const sync=()=>{const amount=Math.max(0,Math.min(1,(scroller===window?window.scrollY:scroller.scrollTop)/600));[-180,-140,-40].forEach((distance,i)=>{leaves[i].style.translate=`0 ${distance*amount}px`;});};
+      if(scroller!==window)scroller.addEventListener("scroll",sync,{passive:true});window.addEventListener("scroll",sync,{passive:true});window.addEventListener("resize",sync);sync();heroParallaxBound=true;
+    }
+  }
   function localCopy() { return copy[state?.locale] || copy["uz-Latn"]; }
   function bindField(data, key, value) {
     for (const node of root.querySelectorAll(`[data-chorlove-field="${key}"]`)) text(node, value);
@@ -681,6 +777,8 @@
   function render(payload) {
     if (!payload?.data || payload.templateId !== templateId) return;
     state = { ...payload, apiBase: `/api/public/invitations/${encodeURIComponent(payload.invitationId || "")}` };
+    sourceOpening(payload);
+    animateSourceHero(Boolean(payload.reducedMotion) || matchMedia("(prefers-reduced-motion: reduce)").matches);
     document.documentElement.lang = payload.locale || "uz-Latn";
     setVisibleFields(payload.data);
     renderCalendar(payload.data);

@@ -33,6 +33,18 @@
 .cc-gallery-lightbox[hidden] { display: none; }
 .cc-gallery-lightbox img { max-width: min(100%,900px); max-height: 88vh; object-fit: contain; }
 .cc-gallery-lightbox button { position: absolute; top: 18px; right: 18px; border: 1px solid #fff; border-radius: 50%; width: 42px; height: 42px; color: #fff; background: transparent; font: inherit; cursor: pointer; }
+[data-landing-screenshot-id="invite-envelope"] { transition: opacity .6s ease .45s; }
+[data-landing-screenshot-id="invite-envelope"] [style*="z-index:10"] { transform: translateY(0) scale(1); opacity: 1; transition: transform .8s cubic-bezier(.22,1,.36,1), opacity .8s ease; }
+[data-landing-screenshot-id="invite-envelope"].cc-source-closing { opacity: 0; pointer-events: none; }
+[data-landing-screenshot-id="invite-envelope"].cc-source-closing [style*="z-index:10"] { transform: translateY(-35px) scale(1.08); opacity: 0; }
+[data-landing-screenshot-id="invite-envelope"].cc-source-closing img[src*="flower4-decoration"] { transform: scale(2.5); opacity: 0; transition: transform .8s ease-out, opacity .8s ease-out; }
+[data-landing-screenshot-id="invite-envelope"] [style*="top:50px"] > div { animation: cc-source-heart 2s ease-in-out infinite; }
+[data-landing-screenshot-id="invite-envelope"] button > div { animation: cc-source-sheen 3s ease-in-out infinite; }
+.cc-source-petal { position: absolute; z-index: 1; top: -30px; pointer-events: none; will-change: transform, opacity; }
+@keyframes cc-source-heart { 0%,100% { transform: scale(1); } 50% { transform: scale(1.12); } }
+@keyframes cc-source-sheen { from { transform: translateX(-100px); } to { transform: translateX(260px); } }
+[data-gp-source-hero] [style*="opacity:0"] { opacity: 0; }
+[data-gp-source-hero] img[style*="opacity:0"] { transition: none; }
 [data-chorlove-reveal] { animation: cc-source-reveal 760ms cubic-bezier(.2,.7,.2,1) both; }
 @keyframes cc-source-reveal { from { opacity: 0; transform: var(--cc-from-transform,translateY(10px)); } to { opacity: 1; transform: none; } }
 [data-chorlove-calendar-cell][data-event-day="true"] [data-chorlove-calendar-number] { display: grid; place-items: center; width: 26px; height: 24px; border-radius: 999px; color: #fff !important; background: rgb(203 93 108); }

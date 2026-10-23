@@ -3,6 +3,101 @@
   const id = "green-garden";
   const root = document.querySelector('[data-chorlove-template="green-garden"]');
   if (!root) return;
+  const opening = document.querySelector('[data-gg-source-opening]');
+  const hero = root.querySelector('[data-gg-source-hero]');
+  let openingBound = false;
+  let heroAnimated = false;
+  let heroParallaxBound = false;
+  function bindSourceOpening(payload, data, words) {
+    if (!opening) return;
+    const localize = {"uz-Latn":"Taklifnoma","uz-Cyrl":"Таклифнома",en:"Invitation",ru:"Приглашение"};
+    txt(opening.querySelector('[data-gg-opening-greeting]'), data.greeting || words.greeting || "Assalomu alaykum, aziz mehmon");
+    txt(opening.querySelector('[data-gg-opening-title]'), localize[payload.locale] || localize["uz-Latn"]);
+    txt(opening.querySelector('[data-gg-opening-groom]'), data.groom || "");
+    txt(opening.querySelector('[data-gg-opening-bride]'), data.bride || "");
+    txt(opening.querySelector('[data-gg-opening-date]'), data.date?.long || dateValue(data));
+    const openButton = opening.querySelector('[data-gg-opening-open]');
+    if (openButton) { txt(openButton.querySelector('span'), words.open); openButton.setAttribute("aria-label", words.open); }
+    const heart = opening.querySelector('[data-gg-opening-heart]');
+    if (heart) heart.setAttribute("aria-label", words.open);
+    if (!openingBound) {
+      const close = () => {
+        if (opening.classList.contains("gg-opening-exit")) return;
+        opening.classList.add("gg-opening-exit", "gg-leaves-leaving");
+        opening.querySelectorAll(".gg-opening-petal").forEach(petal => {
+          const opacity = getComputedStyle(petal).opacity;
+          petal.getAnimations().forEach(animation => animation.cancel());
+          petal.animate([
+            { translate: "0 0px", scale: "1" },
+            { translate: "0 150px", scale: "2" },
+            { translate: "0 300px", scale: "0" },
+          ], { duration: 850, easing: "ease-out", fill: "forwards" });
+          petal.animate([{ opacity }, { opacity: 0 }], { duration: 850, easing: "ease-out", fill: "forwards" });
+        });
+        window.setTimeout(() => { opening.hidden = true; }, 1050);
+      };
+      openButton?.addEventListener("click", close);
+      heart?.addEventListener("click", close);
+      heart?.addEventListener("keydown", event => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); close(); } });
+      const petals = [
+        ["18.42%","#e7eede","10.9px",12.2,.24],["26.67%","#ffffff","19px",12.4,1.93],
+        ["82.40%","#e7eede","20.7px",10.1,2.32],["30.79%","#e7eede","15.8px",10.2,2.35],
+        ["62.95%","#e7eede","18px",10.6,1.25],["68.27%","#dbe6d0","12.4px",9.8,1.72],
+        ["81.03%","#dbe6d0","18.7px",8.4,.36],["50.03%","#c4d4b3","15.1px",10.5,.73],
+        ["87.25%","#c4d4b3","17px",9.2,2.5],["87.94%","#c4d4b3","22.2px",11.7,2.48],
+        ["7.02%","#dbe6d0","13.5px",8.7,.23],["40.78%","#e7eede","17.9px",9.3,2.5],
+      ];
+      const petalLayer = opening.querySelector('[data-gg-petal-layer]');
+      if (petalLayer) for (const [left,color,size,duration,delay] of petals) {
+        const petal = document.createElement("span"); petal.className = "gg-opening-petal";
+        petal.style.left = left; petal.style.color = color; petal.style.fontSize = size;
+        petal.style.setProperty("--gg-duration", `${duration}s`); petal.style.setProperty("--gg-delay", `${delay}s`);
+        petal.setAttribute("aria-hidden", "true");
+        petal.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em"><g><ellipse cx="12" cy="5" rx="2.2" ry="4.5"/><ellipse cx="12" cy="5" rx="2.2" ry="4.5" transform="rotate(60 12 12)"/><ellipse cx="12" cy="5" rx="2.2" ry="4.5" transform="rotate(120 12 12)"/><ellipse cx="12" cy="5" rx="2.2" ry="4.5" transform="rotate(180 12 12)"/><ellipse cx="12" cy="5" rx="2.2" ry="4.5" transform="rotate(240 12 12)"/><ellipse cx="12" cy="5" rx="2.2" ry="4.5" transform="rotate(300 12 12)"/></g><circle cx="12" cy="12" r="1.8" fill-opacity=".45"/></svg>';
+        petalLayer?.append(petal);
+        if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
+          petal.animate([{ translate: "0 -10vh" }, { translate: "0 110vh" }], { duration: duration * 1000, delay: delay * 1000, iterations: Infinity, easing: "linear" });
+          petal.animate([{ opacity: 0 }, { opacity: .8, offset: .14, easing: "ease-in-out" }, { opacity: .8, offset: .78 }, { opacity: 0 }], { duration: duration * 1000, delay: delay * 1000, iterations: Infinity, easing: "ease-in-out" });
+          petal.animate([{ rotate: "0deg" }, { rotate: "360deg" }], { duration: duration * 1200, delay: delay * 1000, iterations: Infinity, easing: "linear" });
+        }
+      }
+      openingBound = true;
+    }
+  }
+  function animateSourceHero(reduced) {
+    if (!hero || heroAnimated) return;
+    heroAnimated = true;
+    const leaves = hero.querySelectorAll(':scope > div > img');
+    const card = hero.querySelector(':scope > div > div[style*="opacity:0"]');
+    const reveal = (node, frames, duration, delay, easing="easeOut") => {
+      if (!node) return;
+      if (reduced) { const last = frames[frames.length - 1]; for (const [key,value] of Object.entries(last)) node.style[key] = typeof value === "number" && key === "opacity" ? String(value) : typeof value === "number" ? `${value}px` : value; return; }
+      node.animate(frames, { duration: duration * 1000, delay: delay * 1000, easing, fill: "both" });
+    };
+    reveal(leaves[0],[{opacity:0,transform:"scale(.8)"},{opacity:.9,transform:"scale(1)"}],1,.2);
+    reveal(leaves[1],[{opacity:0,transform:"scale(.8)"},{opacity:.9,transform:"scale(1)"}],1,.35);
+    reveal(card,[{opacity:0,transform:"translateY(30px) scale(.85)"},{opacity:1,transform:"translateY(0) scale(1)"}],.9,.25,"cubic-bezier(.22,1,.36,1)");
+    const names = card?.children || [];
+    reveal(names[0],[{opacity:0,transform:"translateY(15px)"},{opacity:1,transform:"translateY(0)"}],.8,.8);
+    reveal(names[1],[{opacity:0,transform:"scale(.5)"},{opacity:.9,transform:"scale(1)"}],.65,.65);
+    reveal(names[2],[{opacity:0,transform:"translateY(15px)"},{opacity:1,transform:"translateY(0)"}],.5,.5);
+    reveal(leaves[2],[{opacity:0,transform:"scale(.7)"},{opacity:1,transform:"scale(1)"}],.9,.55);
+    if (!reduced && !heroParallaxBound && leaves.length >= 3) {
+      let scroller = window;
+      for (let node = hero; node; node = node.parentElement) {
+        if (/(auto|scroll)/.test(getComputedStyle(node).overflowY)) { scroller = node; break; }
+      }
+      const sync = () => {
+        const amount = Math.max(0, Math.min(1, (scroller === window ? window.scrollY : scroller.scrollTop) / 600));
+        [ -180, -140, -40 ].forEach((distance, index) => { leaves[index].style.translate = `0 ${distance * amount}px`; });
+      };
+      if (scroller !== window) scroller.addEventListener("scroll", sync, { passive: true });
+      window.addEventListener("scroll", sync, { passive: true });
+      window.addEventListener("resize", sync);
+      sync();
+      heroParallaxBound = true;
+    }
+  }
   const locales = ["uz-Latn", "uz-Cyrl", "en", "ru"];
   const copy = {"uz-Latn":{"title":"Tilni tanlang","open":"Taklifnomani ochish","guest":"Ismingiz","wish":"Tilagingiz","send":"Yuborish","yes":"Kelaman","no":"Kela olmayman","wishes":"Mehmonlar tilaklari","response":"Javobingiz saqlandi. Rahmat!","sent":"Tilagingiz taklifnoma egasiga yuborildi.","error":"Yuborilmadi. Qayta urinib ko?ring.","preview":"Ko'rish rejimida yuborish o?chiq.","weekdays":["Du","Se","Cho","Pa","Ju","Sha","Ya"],"months":["Yanvar","Fevral","Mart","Aprel","May","Iyun","Iyul","Avgust","Sentabr","Oktabr","Noyabr","Dekabr"],"calendarTitle":"Sanamizni eslab qoling","calendarAction":"Kalendariga qo'shish","coupleLabel":"Kuyov va kelin","timeLabel":"Vaqt","hostsLabel":"Hurmat bilan:","countdownTitle":"Eng baxtli kungacha","daysUnit":"Kun","hoursUnit":"Soat","minutesUnit":"Daqiqa","secondsUnit":"Soniya","wishesPrompt":"To'y egalariga ezgu tilaklaringizni qoldiring","wishSubmit":"Tilak yuborish","rsvpTitle":"Kelasizmi?","rsvpPrompt":"Iltimos, javobingizni bildiring.","rsvpSubmit":"Yuborish","giftOpenHint":"Ochish uchun bosing","contactsTitle":"Bog'lanish uchun","contactsPrompt":"Savol va tabriklar uchun biz bilan bog'laning.","phoneLabel":"Telefon raqam","phonePrompt":"Savollar uchun qo'ng'iroq qiling","footerNote":"Tashrifingiz biz uchun katta baxt.","footerTagline":"Abadiy baxtli hayot boshlanishi","map":"Xaritada ko'rish","galleryTitle":"Foto galereya","giftTitle":"Sovg'a yuborish","programNote":"To'y kuni tartibi","party":"Mehmonlar soni","galleryPrev":"Oldingi surat","galleryNext":"Keyingi surat","telegramLabel":"Telegram","telegramPrompt":"Telegram orqali yozing","responseLabel":"Javobingiz","venueTitle":"To'y manzili"},"uz-Cyrl":{"title":"\u0422\u0438\u043b\u043d\u0438 \u0442\u0430\u043d\u043b\u0430\u043d\u0433","open":"\u0422\u0430\u043a\u043b\u0438\u0444\u043d\u043e\u043c\u0430\u043d\u0438 \u043e\u0447\u0438\u0448","guest":"\u0418\u0441\u043c\u0438\u043d\u0433\u0438\u0437","wish":"\u0422\u0438\u043b\u0430\u0433\u0438\u043d\u0433\u0438\u0437","send":"\u042e\u0431\u043e\u0440\u0438\u0448","yes":"\u041a\u0435\u043b\u0430\u043c\u0430\u043d","no":"\u041a\u0435\u043b\u0430 \u043e\u043b\u043c\u0430\u0439\u043c\u0430\u043d","wishes":"\u041c\u0435\u04b3\u043c\u043e\u043d\u043b\u0430\u0440 \u0442\u0438\u043b\u0430\u043a\u043b\u0430\u0440\u0438","response":"\u0416\u0430\u0432\u043e\u0431\u0438\u043d\u0433\u0438\u0437 \u0441\u0430\u049b\u043b\u0430\u043d\u0434\u0438. \u0420\u0430\u04b3\u043c\u0430\u0442!","sent":"\u0422\u0438\u043b\u0430\u0433\u0438\u043d\u0433\u0438\u0437 \u0442\u0430\u043a\u043b\u0438\u0444\u043d\u043e\u043c\u0430 \u044d\u0433\u0430\u0441\u0438\u0433\u0430 \u044e\u0431\u043e\u0440\u0438\u043b\u0434\u0438.","error":"\u042e\u0431\u043e\u0440\u0438\u043b\u043c\u0430\u0434\u0438. \u049a\u0430\u0439\u0442\u0430 \u0443\u0440\u0438\u043d\u0438\u0431 \u043a\u045e\u0440\u0438\u043d\u0433.","preview":"\u041a\u045e\u0440\u0438\u0448 \u0440\u0435\u0436\u0438\u043c\u0438\u0434\u0430 \u044e\u0431\u043e\u0440\u0438\u0448 \u045e\u0447\u0438\u049b.","weekdays":["\u0414\u0443","\u0421\u0435","\u0427\u043e","\u041f\u0430","\u0416\u0443","\u0428\u0430","\u042f\u043a"],"months":["\u042f\u043d\u0432\u0430\u0440","\u0424\u0435\u0432\u0440\u0430\u043b","\u041c\u0430\u0440\u0442","\u0410\u043f\u0440\u0435\u043b","\u041c\u0430\u0439","\u0418\u044e\u043d","\u0418\u044e\u043b","\u0410\u0432\u0433\u0443\u0441\u0442","\u0421\u0435\u043d\u0442\u044f\u0431\u0440","\u041e\u043a\u0442\u044f\u0431\u0440","\u041d\u043e\u044f\u0431\u0440","\u0414\u0435\u043a\u0430\u0431\u0440"],"calendarTitle":"\u0421\u0430\u043d\u0430\u043c\u0438\u0437\u043d\u0438 \u044d\u0441\u043b\u0430\u0431 \u049b\u043e\u043b\u0438\u043d\u0433","calendarAction":"\u0422\u0430\u049b\u0432\u0438\u043c\u0433\u0430 \u049b\u045e\u0448\u0438\u0448","coupleLabel":"\u041a\u0443\u0451\u0432 \u0432\u0430 \u043a\u0435\u043b\u0438\u043d","timeLabel":"\u0412\u0430\u049b\u0442","hostsLabel":"\u04b2\u0443\u0440\u043c\u0430\u0442 \u0431\u0438\u043b\u0430\u043d:","countdownTitle":"\u042d\u043d\u0433 \u0431\u0430\u0445\u0442\u043b\u0438 \u043a\u0443\u043d\u0433\u0430\u0447\u0430","daysUnit":"\u041a\u0443\u043d","hoursUnit":"\u0421\u043e\u0430\u0442","minutesUnit":"\u0414\u0430\u049b\u0438\u049b\u0430","secondsUnit":"\u0421\u043e\u043d\u0438\u044f","wishesPrompt":"\u0422\u045e\u0439 \u044d\u0433\u0430\u043b\u0430\u0440\u0438\u0433\u0430 \u044d\u0437\u0433\u0443 \u0442\u0438\u043b\u0430\u043a\u043b\u0430\u0440\u0438\u043d\u0433\u0438\u0437\u043d\u0438 \u049b\u043e\u043b\u0434\u0438\u0440\u0438\u043d\u0433","wishSubmit":"\u0422\u0438\u043b\u0430\u043a \u044e\u0431\u043e\u0440\u0438\u0448","rsvpTitle":"\u041a\u0435\u043b\u0430\u0441\u0438\u0437\u043c\u0438?","rsvpPrompt":"\u0418\u043b\u0442\u0438\u043c\u043e\u0441, \u0436\u0430\u0432\u043e\u0431\u0438\u043d\u0433\u0438\u0437\u043d\u0438 \u0431\u0438\u043b\u0434\u0438\u0440\u0438\u043d\u0433.","rsvpSubmit":"\u042e\u0431\u043e\u0440\u0438\u0448","giftOpenHint":"\u041e\u0447\u0438\u0448 \u0443\u0447\u0443\u043d \u0431\u043e\u0441\u0438\u043d\u0433","contactsTitle":"\u0411\u043e\u0493\u043b\u0430\u043d\u0438\u0448 \u0443\u0447\u0443\u043d","contactsPrompt":"\u0421\u0430\u0432\u043e\u043b \u0432\u0430 \u0442\u0430\u0431\u0440\u0438\u043a\u043b\u0430\u0440 \u0443\u0447\u0443\u043d \u0431\u0438\u0437 \u0431\u0438\u043b\u0430\u043d \u0431\u043e\u0493\u043b\u0430\u043d\u0438\u043d\u0433.","phoneLabel":"\u0422\u0435\u043b\u0435\u0444\u043e\u043d \u0440\u0430\u049b\u0430\u043c\u0438","phonePrompt":"\u0421\u0430\u0432\u043e\u043b\u043b\u0430\u0440 \u0443\u0447\u0443\u043d \u049b\u045e\u043d\u0493\u0438\u0440\u043e\u049b \u049b\u0438\u043b\u0438\u043d\u0433","footerNote":"\u0422\u0430\u0448\u0440\u0438\u0444\u0438\u043d\u0433\u0438\u0437 \u0431\u0438\u0437 \u0443\u0447\u0443\u043d \u043a\u0430\u0442\u0442\u0430 \u0431\u0430\u0445\u0442.","footerTagline":"\u0410\u0431\u0430\u0434\u0438\u0439 \u0431\u0430\u0445\u0442\u043b\u0438 \u04b3\u0430\u0451\u0442 \u0431\u043e\u0448\u043b\u0430\u043d\u0438\u0448\u0438","map":"\u0425\u0430\u0440\u0438\u0442\u0430\u0434\u0430 \u043a\u045e\u0440\u0438\u0448","galleryTitle":"\u0424\u043e\u0442\u043e \u0433\u0430\u043b\u0435\u0440\u0435\u044f","giftTitle":"\u0421\u043e\u0432\u0493\u0430 \u044e\u0431\u043e\u0440\u0438\u0448","programNote":"\u0422\u045e\u0439 \u043a\u0443\u043d\u0438 \u0442\u0430\u0440\u0442\u0438\u0431\u0438","party":"\u041c\u0435\u04b3\u043c\u043e\u043d\u043b\u0430\u0440 \u0441\u043e\u043d\u0438","galleryPrev":"\u041e\u043b\u0434\u0438\u043d\u0433\u0438 \u0441\u0443\u0440\u0430\u0442","galleryNext":"\u041a\u0435\u0439\u0438\u043d\u0433\u0438 \u0441\u0443\u0440\u0430\u0442","telegramLabel":"Telegram","telegramPrompt":"Telegram \u043e\u0440\u049b\u0430\u043b\u0438 \u0451\u0437\u0438\u043d\u0433","responseLabel":"\u0416\u0430\u0432\u043e\u0431\u0438\u043d\u0433\u0438\u0437","venueTitle":"\u0422\u045e\u0439 \u043c\u0430\u043d\u0437\u0438\u043b\u0438"},"en":{"title":"Choose language","open":"Open invitation","guest":"Your name","wish":"Your message","send":"Submit","yes":"I'll attend","no":"I can't attend","wishes":"Guest wishes","response":"Your response was saved. Thank you!","sent":"Your wish was sent to the invitation owner.","error":"Could not submit. Please try again.","preview":"Submissions are disabled in preview.","weekdays":["Mo","Tu","We","Th","Fr","Sa","Su"],"months":["January","February","March","April","May","June","July","August","September","October","November","December"],"calendarTitle":"Save our date","calendarAction":"Add to calendar","coupleLabel":"The couple","timeLabel":"Time","hostsLabel":"With love from:","countdownTitle":"Counting down to our day","daysUnit":"Days","hoursUnit":"Hours","minutesUnit":"Minutes","secondsUnit":"Seconds","wishesPrompt":"Leave a kind wish for the couple","wishSubmit":"Send a wish","rsvpTitle":"Will you join us?","rsvpPrompt":"Please let us know if you can attend.","rsvpSubmit":"Submit","giftOpenHint":"Tap to open","contactsTitle":"Contact us","contactsPrompt":"Contact us with any questions or congratulations.","phoneLabel":"Phone number","phonePrompt":"Call us with your questions","footerNote":"Your presence would mean so much to us.","footerTagline":"The beginning of a happy life together","map":"Open map","galleryTitle":"Photo gallery","giftTitle":"Send a gift","programNote":"Order of the day","party":"Number of guests","galleryPrev":"Previous photo","galleryNext":"Next photo","telegramLabel":"Telegram","telegramPrompt":"Message us on Telegram","responseLabel":"Your response","venueTitle":"Venue"},"ru":{"title":"\u0412\u044b\u0431\u0435\u0440\u0438\u0442\u0435 \u044f\u0437\u044b\u043a","open":"\u041e\u0442\u043a\u0440\u044b\u0442\u044c \u043f\u0440\u0438\u0433\u043b\u0430\u0448\u0435\u043d\u0438\u0435","guest":"\u0412\u0430\u0448\u0435 \u0438\u043c\u044f","wish":"\u0412\u0430\u0448\u0435 \u043f\u043e\u0436\u0435\u043b\u0430\u043d\u0438\u0435","send":"\u041e\u0442\u043f\u0440\u0430\u0432\u0438\u0442\u044c","yes":"\u041f\u0440\u0438\u0434\u0443","no":"\u041d\u0435 \u0441\u043c\u043e\u0433\u0443 \u043f\u0440\u0438\u0439\u0442\u0438","wishes":"\u041f\u043e\u0436\u0435\u043b\u0430\u043d\u0438\u044f \u0433\u043e\u0441\u0442\u0435\u0439","response":"\u0412\u0430\u0448 \u043e\u0442\u0432\u0435\u0442 \u0441\u043e\u0445\u0440\u0430\u043d\u0451\u043d. \u0421\u043f\u0430\u0441\u0438\u0431\u043e!","sent":"\u0412\u0430\u0448\u0435 \u043f\u043e\u0436\u0435\u043b\u0430\u043d\u0438\u0435 \u043e\u0442\u043f\u0440\u0430\u0432\u043b\u0435\u043d\u043e \u0432\u043b\u0430\u0434\u0435\u043b\u044c\u0446\u0443 \u043f\u0440\u0438\u0433\u043b\u0430\u0448\u0435\u043d\u0438\u044f.","error":"\u041d\u0435 \u0443\u0434\u0430\u043b\u043e\u0441\u044c \u043e\u0442\u043f\u0440\u0430\u0432\u0438\u0442\u044c. \u041f\u043e\u043f\u0440\u043e\u0431\u0443\u0439\u0442\u0435 \u0435\u0449\u0451 \u0440\u0430\u0437.","preview":"\u041e\u0442\u043f\u0440\u0430\u0432\u043a\u0430 \u0432 \u0440\u0435\u0436\u0438\u043c\u0435 \u043f\u0440\u043e\u0441\u043c\u043e\u0442\u0440\u0430 \u043e\u0442\u043a\u043b\u044e\u0447\u0435\u043d\u0430.","weekdays":["\u041f\u043d","\u0412\u0442","\u0421\u0440","\u0427\u0442","\u041f\u0442","\u0421\u0431","\u0412\u0441"],"months":["\u042f\u043d\u0432\u0430\u0440\u044c","\u0424\u0435\u0432\u0440\u0430\u043b\u044c","\u041c\u0430\u0440\u0442","\u0410\u043f\u0440\u0435\u043b\u044c","\u041c\u0430\u0439","\u0418\u044e\u043d\u044c","\u0418\u044e\u043b\u044c","\u0410\u0432\u0433\u0443\u0441\u0442","\u0421\u0435\u043d\u0442\u044f\u0431\u0440\u044c","\u041e\u043a\u0442\u044f\u0431\u0440\u044c","\u041d\u043e\u044f\u0431\u0440\u044c","\u0414\u0435\u043a\u0430\u0431\u0440\u044c"],"calendarTitle":"\u0417\u0430\u043f\u043e\u043c\u043d\u0438\u0442\u0435 \u044d\u0442\u0443 \u0434\u0430\u0442\u0443","calendarAction":"\u0414\u043e\u0431\u0430\u0432\u0438\u0442\u044c \u0432 \u043a\u0430\u043b\u0435\u043d\u0434\u0430\u0440\u044c","coupleLabel":"\u0416\u0435\u043d\u0438\u0445 \u0438 \u043d\u0435\u0432\u0435\u0441\u0442\u0430","timeLabel":"\u0412\u0440\u0435\u043c\u044f","hostsLabel":"\u0421 \u0443\u0432\u0430\u0436\u0435\u043d\u0438\u0435\u043c:","countdownTitle":"\u0414\u043e \u0441\u0430\u043c\u043e\u0433\u043e \u0441\u0447\u0430\u0441\u0442\u043b\u0438\u0432\u043e\u0433\u043e \u0434\u043d\u044f","daysUnit":"\u0414\u043d\u0435\u0439","hoursUnit":"\u0427\u0430\u0441\u043e\u0432","minutesUnit":"\u041c\u0438\u043d\u0443\u0442","secondsUnit":"\u0421\u0435\u043a\u0443\u043d\u0434","wishesPrompt":"\u041e\u0441\u0442\u0430\u0432\u044c\u0442\u0435 \u043f\u043e\u0436\u0435\u043b\u0430\u043d\u0438\u0435 \u043c\u043e\u043b\u043e\u0434\u043e\u0436\u0451\u043d\u0430\u043c","wishSubmit":"\u041e\u0442\u043f\u0440\u0430\u0432\u0438\u0442\u044c \u043f\u043e\u0436\u0435\u043b\u0430\u043d\u0438\u0435","rsvpTitle":"\u0412\u044b \u043f\u0440\u0438\u0434\u0451\u0442\u0435?","rsvpPrompt":"\u041f\u043e\u0436\u0430\u043b\u0443\u0439\u0441\u0442\u0430, \u0441\u043e\u043e\u0431\u0449\u0438\u0442\u0435, \u0441\u043c\u043e\u0436\u0435\u0442\u0435 \u043b\u0438 \u0432\u044b \u043f\u0440\u0438\u0439\u0442\u0438.","rsvpSubmit":"\u041e\u0442\u043f\u0440\u0430\u0432\u0438\u0442\u044c","giftOpenHint":"\u041d\u0430\u0436\u043c\u0438\u0442\u0435, \u0447\u0442\u043e\u0431\u044b \u043e\u0442\u043a\u0440\u044b\u0442\u044c","contactsTitle":"\u0421\u0432\u044f\u0437\u0430\u0442\u044c\u0441\u044f \u0441 \u043d\u0430\u043c\u0438","contactsPrompt":"\u0421\u0432\u044f\u0436\u0438\u0442\u0435\u0441\u044c \u0441 \u043d\u0430\u043c\u0438 \u043f\u043e \u0432\u043e\u043f\u0440\u043e\u0441\u0430\u043c \u0438 \u043f\u043e\u0437\u0434\u0440\u0430\u0432\u043b\u0435\u043d\u0438\u044f\u043c.","phoneLabel":"\u041d\u043e\u043c\u0435\u0440 \u0442\u0435\u043b\u0435\u0444\u043e\u043d\u0430","phonePrompt":"\u041f\u043e\u0437\u0432\u043e\u043d\u0438\u0442\u0435 \u043d\u0430\u043c \u0441 \u0432\u043e\u043f\u0440\u043e\u0441\u0430\u043c\u0438","footerNote":"\u0412\u0430\u0448\u0435 \u043f\u0440\u0438\u0441\u0443\u0442\u0441\u0442\u0432\u0438\u0435 \u0441\u0442\u0430\u043d\u0435\u0442 \u0434\u043b\u044f \u043d\u0430\u0441 \u0431\u043e\u043b\u044c\u0448\u043e\u0439 \u0440\u0430\u0434\u043e\u0441\u0442\u044c\u044e.","footerTagline":"\u041d\u0430\u0447\u0430\u043b\u043e \u0441\u0447\u0430\u0441\u0442\u043b\u0438\u0432\u043e\u0439 \u0441\u043e\u0432\u043c\u0435\u0441\u0442\u043d\u043e\u0439 \u0436\u0438\u0437\u043d\u0438","map":"\u041e\u0442\u043a\u0440\u044b\u0442\u044c \u043a\u0430\u0440\u0442\u0443","galleryTitle":"\u0424\u043e\u0442\u043e\u0433\u0430\u043b\u0435\u0440\u0435\u044f","giftTitle":"\u041e\u0442\u043f\u0440\u0430\u0432\u0438\u0442\u044c \u043f\u043e\u0434\u0430\u0440\u043e\u043a","programNote":"\u041f\u043b\u0430\u043d \u0442\u043e\u0440\u0436\u0435\u0441\u0442\u0432\u0430","party":"\u041a\u043e\u043b\u0438\u0447\u0435\u0441\u0442\u0432\u043e \u0433\u043e\u0441\u0442\u0435\u0439","galleryPrev":"\u041f\u0440\u0435\u0434\u044b\u0434\u0443\u0449\u0435\u0435 \u0444\u043e\u0442\u043e","galleryNext":"\u0421\u043b\u0435\u0434\u0443\u044e\u0449\u0435\u0435 \u0444\u043e\u0442\u043e","telegramLabel":"Telegram","telegramPrompt":"\u041d\u0430\u043f\u0438\u0448\u0438\u0442\u0435 \u043d\u0430\u043c \u0432 Telegram","responseLabel":"\u0412\u0430\u0448 \u043e\u0442\u0432\u0435\u0442","venueTitle":"\u041c\u0435\u0441\u0442\u043e \u043f\u0440\u043e\u0432\u0435\u0434\u0435\u043d\u0438\u044f"}};
   let state;
@@ -49,6 +144,8 @@
     state=payload; const d=payload.data, c=copy[payload.locale] || copy["uz-Latn"];
     document.documentElement.lang=payload.locale || "uz-Latn";
     const fields={groom:d.groom,bride:d.bride,eventLabel:d.eventType,dateTime:d.date?.long || dateValue(d),message:d.message,hosts:d.hosts,venueName:d.venue?.name,venueAddress:d.venue?.address,weekday:d.date?.weekday,day:d.date?.day,monthYear:[d.date?.month,d.date?.year].filter(Boolean).join(" "),time:d.date?.time,greeting:d.greeting,programTitle:d.programHeading,calendarTitle:c.calendarTitle,rsvpTitle:c.rsvpTitle,contactsTitle:c.contactsTitle,venueTitle:c.venueTitle,mapLabel:c.map,galleryTitle:c.galleryTitle,wishesTitle:c.wishes,giftTitle:c.giftTitle};
+    bindSourceOpening(payload,d,c);
+    animateSourceHero(Boolean(payload.reducedMotion)||matchMedia("(prefers-reduced-motion: reduce)").matches);
     for(const [key,value] of Object.entries(fields)) $$(`[data-gg-field="${key}"]`).forEach(n=>txt(n,value));
     for(const node of $$('[data-gg-copy]')) txt(node,c[node.dataset.ggCopy] || node.textContent);
     const contactsPrompt=$("[data-gg-contacts-prompt]");if(contactsPrompt)txt(contactsPrompt,c.contactsPrompt);
@@ -78,7 +175,7 @@
     root.classList.toggle("gg-reduced-motion",Boolean(payload.reducedMotion)||matchMedia("(prefers-reduced-motion: reduce)").matches);
     const reduced=Boolean(payload.reducedMotion)||matchMedia("(prefers-reduced-motion: reduce)").matches;
     const reveal=node=>{node.style.opacity="";node.style.transform="";node.classList.add("gg-visible");};
-    const revealTargets=$$('[style*="opacity:0"], [style*="opacity: 0"]');
+    const revealTargets=$$('[style*="opacity:0"], [style*="opacity: 0"]').filter(node=>!node.closest('[data-gg-source-hero]'));
     if(reduced||!window.IntersectionObserver)revealTargets.forEach(reveal);
     else{const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){reveal(entry.target);observer.unobserve(entry.target);}}),{threshold:.08});revealTargets.forEach(node=>{node.classList.add("gg-reveal");observer.observe(node);});}
   }

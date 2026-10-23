@@ -1,29 +1,29 @@
 {
   "status": "verified",
-  "file": "preview-browser-capture.jpg",
-  "sha256": "e6c8c3a04ed2dfa0c6045e6e5fd4da1d15ec1a1094257527857831e478156346",
-  "format": "JPEG",
-  "width": 390,
-  "height": 720,
-  "route": "/preview?template=green-garden&qaMobile=1&qaSilent=1",
-  "fixture": "apps/web/src/modules/catalog/preview-sample.json",
-  "fixtureSha256": "54017a292d4a5235593d93a5e2f8bca1fe3bab89433182fac912c5d948878871",
-  "captureMethod": "Packaged Green Garden iframe renderer and local source assets; 390×720 Chromium viewport capture of the iframe; browser/app UI, language selector, scrollbar, and development portal excluded; no crop or resize.",
+  "file": "catalog-cover-opening.png",
+  "sha256": "5f87cee9d7efba25b614008054aa1965c5df7f611e6e0c5f68367745c1d22b11",
+  "format": "PNG",
+  "width": 432,
+  "height": 768,
+  "route": "Chorlove archived source snapshot: templates/green-garden/preview-frame.html",
+  "fixture": "source snapshot sample invitation",
+  "fixtureSha256": null,
+  "captureMethod": "Portrait browser screenshot of the archived Chorlove Green Garden server-rendered source opening with its original local floral assets; full 432x768 viewport, no crop or resize.",
   "capturedAt": "2026-10-23",
   "sourceTemplate": "Chorlove/Web invitations/templates/green-garden",
-  "scope": "Full first-page floral opening rendered from the canonical shared fixture.",
+  "scope": "Original first-page invitation opening, including the glass card, flower ornaments, source names and date, opening action, and music toggle.",
   "sourceCaptureSha256": "d7ba584a7aa9cee59f786191e8c4be0cf57796edbe285fcc35ba890a4be204a8",
   "viewport": {
-    "width": 390,
-    "height": 720,
+    "width": 432,
+    "height": 768,
     "deviceScaleFactor": 1
   },
   "crop": {
     "x": 0,
     "y": 0,
-    "width": 390,
-    "height": 720,
-    "operation": "none; full iframe viewport preserved"
+    "width": 432,
+    "height": 768,
+    "operation": "none; full source opening viewport preserved"
   },
-  "galleryPreview": "Canonical fixture contributes six empty gallery placeholders; cross-template Orchid Amplop sample photos remain excluded."
+  "galleryPreview": "Not part of the cover image."
 }
