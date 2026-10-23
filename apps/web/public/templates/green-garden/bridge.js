@@ -76,7 +76,7 @@
       hero.getAnimations({subtree:true}).forEach(animation=>animation.cancel());
       const leaves=hero.querySelectorAll(':scope > div > img');
       const card=hero.querySelector(':scope > div > div[style*="opacity:0"]');
-      [leaves[0],leaves[1],card?.children?.[0],card?.children?.[1],card?.children?.[2],leaves[2]].forEach((node,index)=>{if(!node)return;node.style.opacity=index===0||index===1||index===5?".9":"1";node.style.transform="none";});
+      [leaves[0],leaves[1],card,card?.children?.[0],card?.children?.[1],card?.children?.[2],leaves[2]].forEach((node,index)=>{if(!node)return;node.style.opacity=index===0||index===1||index===6?".9":"1";node.style.transform="none";});
       heroAnimated=true;
       return;
     }

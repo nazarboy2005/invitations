@@ -119,6 +119,7 @@ test("Green Garden restores available source motion and schedule assets", async 
   assert.match(bridge, /\.6,index\*\.15,\.3\)/);
   assert.match(bridge, /\.4,index\*\.05,\.2\)/);
   assert.match(bridge, /gg-reduced-motion/);
+  assert.match(bridge, /\[leaves\[0\],leaves\[1\],card,card\?\.children\?\.\[0\]/);
   assert.match(html, /data-gg-program-icon[^>]+assets\/welcome\.webp/);
   assert.match(html, /data-gg-program-icon[^>]+assets\/cake\.webp/);
   assert.deepEqual(

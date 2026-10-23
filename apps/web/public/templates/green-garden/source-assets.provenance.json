@@ -117,7 +117,26 @@
   ],
   "sourceReferencedMissingAsset": {
     "file": "/images/green-garden/leaf1-bloom.webp",
-    "result": "HTTP 404 in the approved source page asset inventory; intentionally not substituted."
+    "archiveResult": "Absent from the complete archived Chorlove/provider tree. Exact-name search found only the visually different Glass Pink leaf artwork.",
+    "liveHttpStatus": 404,
+    "result": "Unrecoverable from the provided source archive and current source URL; kept documented without substitution."
   },
-  "integrationStatus": "published-through-0095_publish_green_garden.sql; configured-catalog-and-authenticated-integration-verified"
+  "integrationStatus": "published-through-0095_publish_green_garden.sql; configured-catalog-and-authenticated-integration-verified",
+  "sourceArchiveAudit": {
+    "folder": "Invitations - this folder will be removed from production/Chorlove/Web invitations/images/green-garden",
+    "matchedFiles": 15,
+    "hashComparison": "All 15 archived image files match their packaged copies byte-for-byte by SHA-256.",
+    "remoteOnlyAssets": [
+      {
+        "file": "assets/welcome.webp",
+        "sourceUrl": "https://chorlove.uz/images/green-garden/welcome.webp",
+        "httpStatus": 200
+      },
+      {
+        "file": "assets/cake.webp",
+        "sourceUrl": "https://chorlove.uz/images/green-garden/cake.webp",
+        "httpStatus": 200
+      }
+    ]
+  }
 }
