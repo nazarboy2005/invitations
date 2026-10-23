@@ -9,6 +9,7 @@ import {
 } from "@taklifnoma/contracts";
 import Link from "next/link";
 import { SoftSelect } from "@/components/soft-select";
+import { ConfirmationDialog } from "@/components/confirmation-dialog";
 
 const inputStyle: CSSProperties = {
   padding: "11px 12px",
@@ -38,6 +39,8 @@ export function AdminTemplates() {
   const [loading, setLoading] = useState(true);
   const [newCategoryId, setNewCategoryId] = useState("");
   const [newCategoryName, setNewCategoryName] = useState("");
+  const [hideTarget, setHideTarget] = useState<TemplateDefinition | null>(null);
+  const [hideReplacement, setHideReplacement] = useState("");
 
   async function load() {
     const response = await fetch("/api/admin/templates", { cache: "no-store" });
@@ -272,6 +275,10 @@ export function AdminTemplates() {
             templates={templates}
             categories={categories}
             busy={unavailable}
+            onHideRequest={(replacementId) => {
+              setHideTarget(template);
+              setHideReplacement(replacementId);
+            }}
             onUpdate={(id, body) =>
               mutate(
                 `/api/admin/templates/${encodeURIComponent(id)}`,
@@ -285,6 +292,30 @@ export function AdminTemplates() {
       </div>
       {!loading && templates.length === 0 && !error && (
         <p className="inline-note">Hozircha dizaynlar yo‘q.</p>
+      )}
+      {hideTarget && (
+        <ConfirmationDialog
+          title="Dizaynni yashirasizmi?"
+          description="Dizayn unga tegishli taklifnomalar bilan tanlangan dizaynga almashtiriladi."
+          confirmLabel="Yashirish va almashtirish"
+          onCancel={() => setHideTarget(null)}
+          onConfirm={async () => {
+            const target = hideTarget;
+            await mutate(
+              `/api/admin/templates/${encodeURIComponent(target.id)}`,
+              "PATCH",
+              {
+                published: false,
+                ...(hideReplacement
+                  ? { replacementTemplateId: hideReplacement }
+                  : {}),
+              },
+              "Dizayn yashirildi.",
+            );
+            setHideTarget(null);
+          }}
+          busy={busy}
+        />
       )}
     </main>
   );
@@ -346,12 +377,14 @@ function TemplateRow({
   categories,
   busy,
   onUpdate,
+  onHideRequest,
 }: {
   template: TemplateDefinition;
   templates: TemplateDefinition[];
   categories: TemplateCategory[];
   busy: boolean;
   onUpdate: (id: string, body: Record<string, unknown>) => Promise<boolean>;
+  onHideRequest: (replacementId: string) => void;
 }) {
   const [price, setPrice] = useState(String(template.priceMinor / 100));
   const [replacement, setReplacement] = useState("");
@@ -468,13 +501,10 @@ function TemplateRow({
             className="button secondary"
             disabled={busy}
             onClick={() => {
-              if (
-                template.published &&
-                !window.confirm(
-                  "Dizaynni yashirish va unga tegishli taklifnomalarni tanlangan dizaynga o‘tkazishni tasdiqlaysizmi?",
-                )
-              )
+              if (template.published) {
+                onHideRequest(replacement);
                 return;
+              }
               void onUpdate(template.id, {
                 published: !template.published,
                 ...(replacement ? { replacementTemplateId: replacement } : {}),

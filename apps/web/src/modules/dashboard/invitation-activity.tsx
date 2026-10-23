@@ -6,6 +6,7 @@ import { getContent, type Invitation } from "@taklifnoma/contracts";
 import styles from "./invitation-activity.module.css";
 import { formatDate } from "@/templates/date-format";
 import { SoftSelect } from "@/components/soft-select";
+import { ConfirmationDialog } from "@/components/confirmation-dialog";
 type Activity = {
   responses: Array<{
     id: string;
@@ -37,6 +38,7 @@ export function InvitationActivity({ invitation }: { invitation: Invitation }) {
   const [page, setPage] = useState(0);
   const [section, setSection] = useState<"responses" | "wishes" | "receipts">("responses");
   const [wishFilter, setWishFilter] = useState<"all" | "pending" | "approved">("all");
+  const [deleteWishId, setDeleteWishId] = useState<string | null>(null);
   useEffect(() => {
     const controller = new AbortController();
     const key = `${invitation.id}:${page}`;
@@ -198,10 +200,7 @@ export function InvitationActivity({ invitation }: { invitation: Invitation }) {
                       <button
                         className={styles.deleteWishIcon}
                         disabled={busy}
-                        onClick={() => {
-                          if (window.confirm("Ushbu mehmon tilagini butunlay o‘chirasizmi?"))
-                            void moderate(item.id, "deleted");
-                        }}
+                        onClick={() => setDeleteWishId(item.id)}
                         aria-label="Tilakni o‘chirish"
                         title="O‘chirish"
                       >
@@ -278,6 +277,20 @@ export function InvitationActivity({ invitation }: { invitation: Invitation }) {
             </button>
           </nav>
         </>
+      )}
+      {deleteWishId && (
+        <ConfirmationDialog
+          title="Mehmon tilagini o‘chirasizmi?"
+          description="Bu tilak butunlay o‘chiriladi va taklifnomada ko‘rinmaydi."
+          confirmLabel="O‘chirish"
+          onCancel={() => setDeleteWishId(null)}
+          onConfirm={() => {
+            const id = deleteWishId;
+            setDeleteWishId(null);
+            void moderate(id, "deleted");
+          }}
+          busy={busy}
+        />
       )}
     </main>
   );

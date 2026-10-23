@@ -1,5 +1,10 @@
 # Implementation decisions
 
+## Native browser prompts (2026-10-23)
+
+- User requirement: the website must never ask through native browser `prompt()`, `confirm()`, or `alert()` dialogs. Use in-page modal dialogs for input and confirmation throughout the dashboard, admin tools, guest moderation, and invitation templates.
+- The dashboard unpublish action, template hiding, wish deletion, and Velvet calendar day selection use modal interfaces. Continue replacing any native browser prompt APIs found in future work.
+
 ## Guest activity and Telegram wish notifications (2026-10-22)
 
 - User request: improve the invitation activity page and notify the invitation owner through Telegram when a guest submits a new wish. Wishes remain pending until the owner approves them; notification does not publish guest content.

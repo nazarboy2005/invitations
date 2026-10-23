@@ -219,12 +219,36 @@ function placeHeart(day) {
 // По умолчанию ставим на 24
 placeHeart(28);
 
-// Обработчик нажатия Enter: спрашиваем число и перемещаем сердце
+// Обработчик нажатия Enter: открываем интерфейс выбора дня.
 document.addEventListener("keydown", function (e) {
-  if (e.key === "Enter") {
-    const newDay = prompt("Введите число месяца, куда поставить сердце:");
-    if (newDay) placeHeart(parseInt(newDay));
+  if (e.key !== "Enter" || e.target.closest("input, textarea, select, button, a")) return;
+  let dialog = document.getElementById("heart-day-dialog");
+  if (!dialog) {
+    dialog = document.createElement("dialog");
+    dialog.id = "heart-day-dialog";
+    dialog.className = "heart-day-dialog";
+    dialog.innerHTML = `
+      <form method="dialog" class="heart-day-form">
+        <h2>Выберите день месяца</h2>
+        <label for="heart-day-input">День (1–30)</label>
+        <input id="heart-day-input" name="day" type="number" min="1" max="30" value="28" required>
+        <div class="heart-day-actions">
+          <button type="button" data-cancel>Отмена</button>
+          <button type="submit">Переместить сердце</button>
+        </div>
+      </form>`;
+    document.body.appendChild(dialog);
+    dialog.querySelector("[data-cancel]").addEventListener("click", () => dialog.close());
+    dialog.querySelector("form").addEventListener("submit", (event) => {
+      event.preventDefault();
+      const day = Number(dialog.querySelector("input").value);
+      if (day < 1 || day > 30) return;
+      placeHeart(day);
+      dialog.close();
+    });
   }
+  dialog.showModal();
+  dialog.querySelector("input").focus();
 });
 
 document.addEventListener("DOMContentLoaded", function () {

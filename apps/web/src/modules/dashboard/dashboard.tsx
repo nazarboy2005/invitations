@@ -39,6 +39,7 @@ import { formatDate } from "@/templates/date-format";
 import { InvitationThumbnail } from "./invitation-thumbnail";
 import { useRouter } from "next/navigation";
 import { PublishedLink } from "@/components/published-link";
+import { ConfirmationDialog } from "@/components/confirmation-dialog";
 type DashboardInvitation = Invitation & {
   createdAt?: string;
   viewCount?: number;
@@ -228,6 +229,7 @@ export function Dashboard() {
     local: boolean;
     accountSaved: boolean;
   } | null>(null);
+  const [unpublishTarget, setUnpublishTarget] = useState<Invitation | null>(null);
 
   async function removeDraft(
     invitation: Invitation,
@@ -267,12 +269,6 @@ export function Dashboard() {
   }
 
   async function unpublishInvitation(invitation: Invitation) {
-    if (
-      !window.confirm(
-        "Taklifnomani nashrdan olasizmi? Uning havolasi saqlanadi, ammo mehmonlar sahifani ko‘ra olmaydi.",
-      )
-    )
-      return;
     setActionBusy(invitation.id);
     setActionError("");
     try {
@@ -598,7 +594,7 @@ export function Dashboard() {
                     onUnpublish={
                       invitation.status === "published" &&
                       cloudIds.has(invitation.id)
-                        ? () => void unpublishInvitation(invitation)
+                        ? () => setUnpublishTarget(invitation)
                         : undefined
                     }
                     onOpenActivity={
@@ -765,6 +761,20 @@ export function Dashboard() {
             </div>
           </section>
         </div>
+      )}
+      {unpublishTarget && (
+        <ConfirmationDialog
+          title="Taklifnomani nashrdan olasizmi?"
+          description="Uning havolasi saqlanadi, ammo mehmonlar sahifani ko‘ra olmaydi."
+          confirmLabel="Nashrdan olish"
+          onCancel={() => setUnpublishTarget(null)}
+          onConfirm={() => {
+            const target = unpublishTarget;
+            setUnpublishTarget(null);
+            void unpublishInvitation(target);
+          }}
+          busy={actionBusy === unpublishTarget.id}
+        />
       )}
     </div>
   );

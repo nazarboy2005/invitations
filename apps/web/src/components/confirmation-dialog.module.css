@@ -1,0 +1,58 @@
+.backdrop {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: none;
+  max-height: none;
+  padding: 20px;
+  border: 0;
+  overflow: visible;
+  background: transparent;
+}
+.backdrop::backdrop {
+  background: rgb(24 21 17 / 55%);
+}
+.dialog {
+  margin: 0 auto;
+  width: min(100%, 440px);
+  padding: 28px;
+  border: 1px solid var(--line, #e8e1d5);
+  border-radius: 16px;
+  background: var(--surface, #fffdf8);
+  color: var(--ink, #29251f);
+  box-shadow: 0 24px 80px rgb(0 0 0 / 22%);
+}
+.dialog h2 {
+  margin: 0 32px 10px 0;
+  font: 400 26px/1.2 var(--font-display, Georgia, serif);
+}
+.dialog p {
+  margin: 0;
+  color: var(--muted, #716a60);
+  font-size: 14px;
+  line-height: 1.7;
+}
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 24px;
+}
+.actions button {
+  min-height: 42px;
+  padding: 9px 16px;
+  border: 1px solid var(--line, #e8e1d5);
+  border-radius: 9px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+.actions .confirm {
+  border-color: var(--primary, #805b18);
+  background: var(--primary, #805b18);
+  color: white;
+}
+.actions button:disabled {
+  opacity: .6;
+  cursor: wait;
+}
