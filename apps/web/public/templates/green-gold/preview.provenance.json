@@ -1,0 +1,31 @@
+{
+  "status": "verified",
+  "file": "catalog-cover-opening.png",
+  "sha256": "1d5db7e9237fc6d775e64cbd608084069a3cf98889b9c8bb1e38f965eaedf52a",
+  "format": "PNG",
+  "bytes": 230928,
+  "width": 432,
+  "height": 768,
+  "route": "Chorlove archived source snapshot: templates/green-gold/preview-frame.html",
+  "fixture": "Shared catalog sample: content.uz-Latn.greeting",
+  "fixtureSha256": "0f8ee2d23927b3b038144cc7150a117dec480c0e8f763f7dae93f9dfa506d8ed",
+  "captureMethod": "Headless Chrome screenshot of the preserved Chorlove source page using original source CSS, route JavaScript, and local image assets. Only the opening greeting was bound from the shared preview fixture at runtime. Full 432x768 viewport, no crop, resize, compositing, or redesign.",
+  "capturedAt": "2026-10-23",
+  "sourceTemplate": "Chorlove/Web invitations/templates/green-gold",
+  "scope": "Original first-page invitation opening with source ornaments, Arabic calligraphy, greeting, invitation title, and source music toggle.",
+  "sourceCaptureSha256": "a6523928a6950455b34ceca7ecfb74a2f8635cb3b6b7f085402301b992e9aa61",
+  "viewport": {
+    "width": 432,
+    "height": 768,
+    "deviceScaleFactor": 1
+  },
+  "crop": {
+    "x": 0,
+    "y": 0,
+    "width": 432,
+    "height": 768,
+    "operation": "none; full source opening viewport preserved"
+  },
+  "sourceAssets": "Original Chorlove Web invitations/images/green-gold artwork. All eight first-page image requests loaded from the local capture tree.",
+  "sampleContent": "The preview fixture remains ephemeral and is used only for the cover greeting; no sample data was stored in the template or published."
+}

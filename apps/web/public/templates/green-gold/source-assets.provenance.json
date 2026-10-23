@@ -102,5 +102,44 @@
       "wishTicker": "if more than three wishes, translate y 0% to -50%, linear loop with max(2.2s per item, 16s)",
       "reducedMotion": "application preference support added without site runtime"
     }
+  },
+  "catalogArtwork": {
+    "file": "catalog-cover-opening.png",
+    "format": "PNG",
+    "width": 432,
+    "height": 768,
+    "bytes": 230928,
+    "sha256": "1d5db7e9237fc6d775e64cbd608084069a3cf98889b9c8bb1e38f965eaedf52a",
+    "sourceCapture": {
+      "file": "source/preview-frame.html",
+      "sha256": "a6523928a6950455b34ceca7ecfb74a2f8635cb3b6b7f085402301b992e9aa61"
+    },
+    "sourceAssetFolder": "Chorlove/Web invitations/images/green-gold",
+    "captureMethod": "Headless Chrome portrait viewport capture of the preserved Chorlove original Green Gold server-rendered page. The original HTML, original CSS chunks, local source images, and original route JavaScript were served from the local capture tree; only the opening greeting was bound at runtime to the shared catalog preview sample. No crop, resize, compositing, or redesign.",
+    "fixture": {
+      "file": "apps/web/src/modules/catalog/preview-sample.json",
+      "sha256": "0f8ee2d23927b3b038144cc7150a117dec480c0e8f763f7dae93f9dfa506d8ed",
+      "locale": "uz-Latn",
+      "field": "content.uz-Latn.greeting",
+      "value": "Assalomu alaykum, aziz mehmon!"
+    },
+    "viewport": {
+      "width": 432,
+      "height": 768,
+      "deviceScaleFactor": 1
+    },
+    "crop": {
+      "x": 0,
+      "y": 0,
+      "width": 432,
+      "height": 768,
+      "operation": "none; full source opening viewport"
+    },
+    "capturedAt": "2026-10-23",
+    "verification": {
+      "fontStatus": "loaded",
+      "firstPageImagesLoaded": 8,
+      "consoleIssues": "captured page references external runtime/site endpoints blocked by offline local capture; no screenshot UI chrome"
+    }
   }
 }

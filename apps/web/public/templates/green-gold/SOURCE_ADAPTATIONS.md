@@ -32,15 +32,19 @@ gallery overlay were replaced with the source animation and full-screen dark
 lightbox treatment. Detailed chunk, element, and timing provenance is recorded
 in `source-assets.provenance.json`.
 
-The typed catalog and additive migration `0100_register_green_gold.sql`
-register this wedding design as unpublished; the configured database also
-confirms it remains unpublished. No authentic portrait catalog artwork is
-currently packaged, and none is present in the local Chorlove template folder
-or asset manifest. The captured page and first-page artwork are in the right
-proportion for a clean portrait capture, but the catalog cover still needs to
-be captured and verified before publication. Browser comparison of source and
-package timing, gallery art behavior, and public/creator integration remain
-release checks.
+The archive capture manifest and full Chorlove image-cache manifest contain no
+separate Green Gold catalog portrait or cover metadata; they list the captured
+preview page and the five template artwork assets. A source-faithful cover is
+now captured as `catalog-cover-opening.png` at 432x768 (9:16) from the preserved
+original page, original CSS and route JavaScript, and local original assets. The
+only runtime content binding is the shared preview fixture's Uzbek greeting;
+the fixture remains ephemeral. No crop, compositing, or redraw was used.
+`preview.provenance.json` and the `catalogArtwork` entry in
+`source-assets.provenance.json` record the capture, source and fixture hashes,
+viewport, and loaded image/font checks. The typed catalog preview path still
+needs to point at this artwork. Green Gold remains unpublished; browser
+comparison of source and package timing, gallery art behavior, and
+public/creator integration remain release checks.
 
 ## Shared contract adapter
 
