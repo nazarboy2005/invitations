@@ -8,7 +8,9 @@ production/Invitate/Web invitations/invitate.uz`, resolved from
 `assets/css/butterfly.css`, `assets/js/butterfly.js`, the referenced
 `assets/images/rasm1.png`, `assets/images/afina/image2.png` and
 `assets/images/afina/image3.png`, the captured `assets/audio/music.mp3`, and
-font files listed in the captured Google Fonts stylesheet.
+font files listed in the captured Google Fonts stylesheet. `afina/image.png`
+and `afina/image4.png` are also packaged from the provider's template asset
+folder but are not referenced by the selected `butterfly.html` page.
 
 `font-reference.css` is the untouched Google Fonts response captured in the
 provider archive and is retained as source evidence only; the application
@@ -18,7 +20,9 @@ motion while replacing the reference-site runtime dependencies. The captured
 statistics script, injected browser-extension markup, external font requests,
 fixed names/date/venue/map, and automatic audio-start/retry logic are removed.
 Source music is included as an asset but only a creator-selected music URL is
-bound; playback starts from the template's explicit music control. Captured
+bound; playback starts from the template's explicit music control. The source's
+global pointer and visibility handlers that retried autoplay are removed, while
+the control's fade, pause, and replay behavior is retained. Captured
 opening and source gallery images are packaged under `assets/images` and used
 for the ephemeral catalog/empty-selection preview gallery only.
 

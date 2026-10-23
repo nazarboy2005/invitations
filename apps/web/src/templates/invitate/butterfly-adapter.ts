@@ -47,7 +47,9 @@ export function makeButterflyData(
     guestToken,
     groom: content.people[0] || "",
     bride: content.people[1] || "",
-    greeting: guestName ? content.personalGreeting.replaceAll("{name}", guestName) : content.greeting,
+    greeting: guestName
+      ? content.personalGreeting.replaceAll("{name}", guestName) || content.greeting
+      : content.greeting,
     message: content.message,
     hosts: content.hosts,
     eventType: content.eventLabel || data.eventType,

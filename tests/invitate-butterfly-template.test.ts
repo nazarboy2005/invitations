@@ -29,6 +29,7 @@ test("Butterfly adapter maps authored content and keeps preview-only gallery ass
   );
   assert.match(adapter, /getContent\(invitation, locale\)/);
   assert.match(adapter, /content\.personalGreeting\.replaceAll\("\{name\}"/);
+  assert.match(adapter, /content\.personalGreeting\.replaceAll\("\{name\}", guestName\) \|\| content\.greeting/);
   assert.match(adapter, /eventInstant\(invitation\.startsAt, invitation\.timezone\)/);
   assert.match(adapter, /content\.venueName/);
   assert.match(adapter, /content\.landmark/);
@@ -59,6 +60,8 @@ test("Butterfly opening artwork and source package are present and locally bound
   assert.doesNotMatch(`${html}\n${script}`, /fonts\.googleapis|stats\.tolipov|cz-shortcut-listen/);
   assert.match(script, /prefers-reduced-motion/);
   assert.match(script, /gallery\.addEventListener\("click"/);
+  assert.match(script, /userStartedMusic && !invitationData\.preview\) return/);
+  assert.match(script, /weddingAudio\.addEventListener\("ended"/);
   assert.ok(image.size > 10_000);
   assert.equal(provenance.sample, "apps/web/src/modules/catalog/preview-sample.json");
   assert.deepEqual(provenance.output, { width: 357, height: 719 });
