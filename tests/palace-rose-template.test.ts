@@ -54,23 +54,24 @@ test("isolated page packages the captured Palace Rose DOM and only its source ar
   assert.ok(assetUrls.length > 0);
   for (const file of new Set(assetUrls)) assert.ok(existsSync(join(base, "assets", file)), file);
   const packagedAssets = readdirSync(join(base, "assets")).sort();
-  const archiveGap = JSON.parse(read(`${base}/source/provenance.json`)).archiveGap;
-  assert.equal(archiveGap.captureManifestsSearched, 13);
-  assert.deepEqual(archiveGap.notFoundByExactBasenameAnywhere, [
-    "hoa_kho_orange.webp",
-    "mahal_gold.webp",
-    "royal_red.webp",
-  ]);
-  for (const candidate of archiveGap.sameBasenameFoundOnlyOutsidePalaceRose) {
-    assert.ok(!packagedAssets.includes(candidate.name), candidate.name);
-    assert.ok(!manifest.resources[`https://chorlove.uz/images/palace-rose/${candidate.name}`]);
+  const sourceRecovery = JSON.parse(read(`${base}/source/provenance.json`)).sourceAssetRecovery;
+  assert.equal(sourceRecovery.assets.length, 8);
+  assert.equal(sourceRecovery.sourceHost, "https://chorlove.uz");
+  for (const asset of sourceRecovery.assets) {
+    assert.equal(asset.status, 200, asset.name);
+    assert.equal(asset.contentType, "image/webp", asset.name);
+    assert.equal(asset.url, `https://chorlove.uz/images/palace-rose/${asset.name}`);
+    assert.ok(packagedAssets.includes(asset.name), asset.name);
+    const copy = readFileSync(join(base, "assets", asset.name));
+    assert.equal(copy.length, asset.bytes, asset.name);
+    assert.equal(sha256(copy), asset.sha256, asset.name);
   }
   const manifestAssets = Object.values(manifest.resources)
     .map((resource: { file?: string }) => resource.file)
     .filter((file): file is string => Boolean(file?.startsWith("Web invitations/images/palace-rose/")))
     .map((file) => file.split("/").at(-1)!)
     .sort();
-  assert.equal(packagedAssets.length, 23);
+  assert.equal(packagedAssets.length, 31);
   assert.ok(manifestAssets.every((name) => packagedAssets.includes(name)));
   for (const name of manifestAssets) {
     const reference = readFileSync(join("Invitations - this folder will be removed from production/Chorlove/Web invitations/images/palace-rose", name));
@@ -90,6 +91,14 @@ test("Palace Rose bridge binds creator fields, service actions, locales, and red
   assert.match(bridge, /:language/);
   assert.match(bridge, /prefers-reduced-motion/);
   assert.match(bridge, /Clipboard|clipboard/);
+  for (const asset of ["hoa_kho_orange.webp", "royal_red.webp", "dragon_phoenix.webp", "dragon_phoenix_v2.webp", "mahal_gold.webp", "glass_garden_pink.webp", "chateau_green.webp", "double_dragon_green.webp"]) {
+    assert.ok(bridge.includes(asset), asset);
+  }
+  assert.match(bridge, /data-pr-gift-dialog/);
+  assert.match(bridge, /aria-modal/);
+  assert.match(bridge, /toyona\.note/);
+  assert.match(bridge, /prefers-reduced-motion/);
+  assert.match(bridge, /img\.src=`\/templates\/\$\{id\}\/assets\/\$\{filename\}`/);
 });
 
 test("Palace Rose packages its captured styles and source motion timings locally", () => {

@@ -22,8 +22,8 @@
     },
     {
       "path": "bridge.js",
-      "bytes": 36715,
-      "sha256": "7c4492543981a939bc5886bafffd0c89a4e5782e44bbf455c2d16028882c32d6"
+      "bytes": 43197,
+      "sha256": "7ec5094c0a5e0431f26fe389e8064232e060661a7c0399601dc33dde0f344a76"
     },
     {
       "path": "source/design.html",
@@ -32,8 +32,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 4800,
-      "sha256": "b7f35e4f2719ae85a0070248a215acc54e4c0c6559c41d356322e949d3ab37c9"
+      "bytes": 4831,
+      "sha256": "fcfe6fa333415424f8fafa1af6bbf38a1027bfb84e384540e09e0b3ec38addba"
     },
     {
       "path": "preview.webp",
@@ -156,6 +156,54 @@
       "path": "TheNautigal_Regular-s.p.0vn.0-.5o~f4t.ttf",
       "bytes": 161852,
       "sha256": "00e79428e3715ee28f9919be8c3bb4f468197b99ae419ae750b19f3a379b4222"
+    },
+    {
+      "path": "chateau_green.webp",
+      "bytes": 6464,
+      "sha256": "bccf35463ab607353cef96e13d109847ca06c8cd6e38223699c8297fe8b8dcaf",
+      "sourceUrl": "https://chorlove.uz/images/palace-rose/chateau_green.webp"
+    },
+    {
+      "path": "double_dragon_green.webp",
+      "bytes": 4124,
+      "sha256": "3dff9dbc6cdcc531a7023b9ef48aabac4f36c7a4016fab6a2af7a3315c23fbe5",
+      "sourceUrl": "https://chorlove.uz/images/palace-rose/double_dragon_green.webp"
+    },
+    {
+      "path": "dragon_phoenix_v2.webp",
+      "bytes": 6128,
+      "sha256": "44454b1b194bf9dd6e65c0fa58ced1dbe7881e5d4e6f4cb3e2ee4716ed3698e7",
+      "sourceUrl": "https://chorlove.uz/images/palace-rose/dragon_phoenix_v2.webp"
+    },
+    {
+      "path": "dragon_phoenix.webp",
+      "bytes": 4226,
+      "sha256": "40ae1a05e63cc0f7af7f65351a280f861b2f613cf624e744021d67236098d2e7",
+      "sourceUrl": "https://chorlove.uz/images/palace-rose/dragon_phoenix.webp"
+    },
+    {
+      "path": "glass_garden_pink.webp",
+      "bytes": 6608,
+      "sha256": "089d5764bb97af2652c8f7860408cc1f33f7a2e27d58ceca7e43e3b9af348803",
+      "sourceUrl": "https://chorlove.uz/images/palace-rose/glass_garden_pink.webp"
+    },
+    {
+      "path": "hoa_kho_orange.webp",
+      "bytes": 5690,
+      "sha256": "9e47d692dae1a2daa5f754bf593d37ba03b62bf27bb679d5f2c0018e0f7de7f1",
+      "sourceUrl": "https://chorlove.uz/images/palace-rose/hoa_kho_orange.webp"
+    },
+    {
+      "path": "mahal_gold.webp",
+      "bytes": 50980,
+      "sha256": "204d9295d9726830839a91336828b69152994878dda420d9938762b5d4ac5b11",
+      "sourceUrl": "https://chorlove.uz/images/palace-rose/mahal_gold.webp"
+    },
+    {
+      "path": "royal_red.webp",
+      "bytes": 5298,
+      "sha256": "e2d564bd85c03c4ef4a8fe87032f56f5e4e2eadd879dc8a922f92657a1a2e160",
+      "sourceUrl": "https://chorlove.uz/images/palace-rose/royal_red.webp"
     }
   ],
   "catalogPreview": {
@@ -182,67 +230,62 @@
       "royal_red.webp"
     ],
     "palaceRoseManifestArtworkCount": 17,
-    "sourceExpectedPaths": [
+    "archiveFinding": "The provider archive lacks these eight files under the Palace Rose asset path. Five basenames are present only in unrelated template folders, and three basenames are absent across the archive. The Chorlove capture manifest has no resource entries for the Palace Rose gift URLs.",
+    "liveSourceRecovery": "All eight exact Palace Rose source URLs returned HTTP 200 and were fetched from those URLs; no files were copied from other-template paths.",
+    "providerArchiveMissingPalaceRosePaths": [
+      "Web invitations/images/palace-rose/chateau_green.webp",
       "Web invitations/images/palace-rose/double_dragon_green.webp",
+      "Web invitations/images/palace-rose/dragon_phoenix_v2.webp",
+      "Web invitations/images/palace-rose/dragon_phoenix.webp",
       "Web invitations/images/palace-rose/glass_garden_pink.webp",
       "Web invitations/images/palace-rose/hoa_kho_orange.webp",
       "Web invitations/images/palace-rose/mahal_gold.webp",
       "Web invitations/images/palace-rose/royal_red.webp"
     ],
-    "sameBasenameFoundOnlyOutsidePalaceRose": [
+    "exactBasenameMissingAnywhere": [
+      "hoa_kho_orange.webp",
+      "mahal_gold.webp",
+      "royal_red.webp"
+    ],
+    "exactBasenameFoundOnlyUnderOtherTemplates": [
       {
         "name": "double_dragon_green.webp",
-        "path": "Chorlove/Web invitations/images/cloud-castle/gift/double_dragon_green.webp",
-        "bytes": 4124,
-        "sha256": "3dff9dbc6cdcc531a7023b9ef48aabac4f36c7a4016fab6a2af7a3315c23fbe5",
-        "captureManifestUrl": "https://chorlove.uz/images/cloud-castle/gift/double_dragon_green.webp"
+        "path": "Chorlove/Web invitations/images/cloud-castle/gift/double_dragon_green.webp"
       },
       {
         "name": "glass_garden_pink.webp",
-        "path": "Chorlove/Web invitations/images/glass-pink/glass_garden_pink.webp",
-        "bytes": 61172,
-        "sha256": "0bf50ded6b5c60d06e37df73492c9c9314a4a58748bb0791b2457bd22ed8612f",
-        "captureManifestUrl": "https://chorlove.uz/images/glass-pink/glass_garden_pink.webp"
+        "path": "Chorlove/Web invitations/images/glass-pink/glass_garden_pink.webp"
       },
       {
         "name": "chateau_green.webp",
-        "path": "Chorlove/Web invitations/images/royal-red/chateau_green.webp",
-        "bytes": 6464,
-        "sha256": "bccf35463ab607353cef96e13d109847ca06c8cd6e38223699c8297fe8b8dcaf"
+        "path": "Chorlove/Web invitations/images/royal-red/chateau_green.webp"
       },
       {
         "name": "dragon_phoenix_v2.webp",
-        "path": "Chorlove/Web invitations/images/royal-red/dragon_phoenix_v2.webp",
-        "bytes": 6128,
-        "sha256": "44454b1b194bf9dd6e65c0fa58ced1dbe7881e5d4e6f4cb3e2ee4716ed3698e7"
+        "path": "Chorlove/Web invitations/images/royal-red/dragon_phoenix_v2.webp"
       },
       {
         "name": "dragon_phoenix.webp",
         "paths": [
           "Chorlove/Web invitations/images/glass-pink/dragon_phoenix.webp",
           "Chorlove/Web invitations/images/royal-red/dragon_phoenix.webp"
-        ],
-        "bytes": 4226,
-        "sha256": "40ae1a05e63cc0f7af7f65351a280f861b2f613cf624e744021d67236098d2e7"
+        ]
       }
     ],
-    "notFoundByExactBasenameAnywhere": [
-      "hoa_kho_orange.webp",
-      "mahal_gold.webp",
-      "royal_red.webp"
-    ],
-    "finding": "The archive captures only 17 canonical Palace Rose artwork assets. None of the 8 Toeyona gift-box decoration images is packaged: five exact basenames occur only under other template paths (including two corresponding capture-manifest URLs), and three exact basenames are absent across all provider archives. No cross-template art is copied or substituted. Keep Palace Rose unpublished and unselectable until exact Palace Rose source assets are recovered."
+    "finding": "All eight gift-decoration files were absent from the canonical Palace Rose archive path. Their exact Palace Rose URLs declared by the recovered renderer are live and have been fetched directly. Identical basenames elsewhere were not used as sources."
   },
   "checks": {
     "productionBuild": "passed (Next.js optimized build completed)",
     "motion": "12 SVG petals on normal opening; source-derived placements and timings",
     "localePreview": "uz-Latn, uz-Cyrl, en, ru verified",
     "publication": "unpublished",
-    "focusedTests": "4/4 passed after archive-gap regression assertions",
+    "focusedTests": "4/4 passed after exact source asset recovery",
     "javascriptSyntax": "passed",
     "typecheck": "passed",
     "reducedMotion": "opening verified without petals",
-    "browserFidelity": "Existing normal-motion browser screenshot inspected at 450x800; latest scroll/reduced-motion behavior not rechecked because browser safety policy blocked localhost authority."
+    "browserFidelity": "Existing normal-motion browser screenshot inspected at 450x800; latest scroll/reduced-motion behavior not rechecked because browser safety policy blocked localhost authority.",
+    "sourceAssets": "8/8 exact Palace Rose URLs returned 200 image/webp; byte sizes and SHA-256 verified",
+    "toyonaInteraction": "Source-style modal renders card details/copy or creator note; opens/closes with Escape/backdrop; respects reduced motion"
   },
   "sourceStylesheets": [
     {
@@ -337,5 +380,84 @@
       "bytes": 161852,
       "sha256": "00e79428e3715ee28f9919be8c3bb4f468197b99ae419ae750b19f3a379b4222"
     }
-  ]
+  ],
+  "sourceAssetRecovery": {
+    "sourceHost": "https://chorlove.uz",
+    "retrievedAt": "2026-10-23",
+    "method": "GET exact URL declared by recovered Palace Rose renderer module",
+    "assets": [
+      {
+        "name": "chateau_green.webp",
+        "path": "assets/chateau_green.webp",
+        "url": "https://chorlove.uz/images/palace-rose/chateau_green.webp",
+        "status": 200,
+        "contentType": "image/webp",
+        "bytes": 6464,
+        "sha256": "bccf35463ab607353cef96e13d109847ca06c8cd6e38223699c8297fe8b8dcaf"
+      },
+      {
+        "name": "double_dragon_green.webp",
+        "path": "assets/double_dragon_green.webp",
+        "url": "https://chorlove.uz/images/palace-rose/double_dragon_green.webp",
+        "status": 200,
+        "contentType": "image/webp",
+        "bytes": 4124,
+        "sha256": "3dff9dbc6cdcc531a7023b9ef48aabac4f36c7a4016fab6a2af7a3315c23fbe5"
+      },
+      {
+        "name": "dragon_phoenix_v2.webp",
+        "path": "assets/dragon_phoenix_v2.webp",
+        "url": "https://chorlove.uz/images/palace-rose/dragon_phoenix_v2.webp",
+        "status": 200,
+        "contentType": "image/webp",
+        "bytes": 6128,
+        "sha256": "44454b1b194bf9dd6e65c0fa58ced1dbe7881e5d4e6f4cb3e2ee4716ed3698e7"
+      },
+      {
+        "name": "dragon_phoenix.webp",
+        "path": "assets/dragon_phoenix.webp",
+        "url": "https://chorlove.uz/images/palace-rose/dragon_phoenix.webp",
+        "status": 200,
+        "contentType": "image/webp",
+        "bytes": 4226,
+        "sha256": "40ae1a05e63cc0f7af7f65351a280f861b2f613cf624e744021d67236098d2e7"
+      },
+      {
+        "name": "glass_garden_pink.webp",
+        "path": "assets/glass_garden_pink.webp",
+        "url": "https://chorlove.uz/images/palace-rose/glass_garden_pink.webp",
+        "status": 200,
+        "contentType": "image/webp",
+        "bytes": 6608,
+        "sha256": "089d5764bb97af2652c8f7860408cc1f33f7a2e27d58ceca7e43e3b9af348803"
+      },
+      {
+        "name": "hoa_kho_orange.webp",
+        "path": "assets/hoa_kho_orange.webp",
+        "url": "https://chorlove.uz/images/palace-rose/hoa_kho_orange.webp",
+        "status": 200,
+        "contentType": "image/webp",
+        "bytes": 5690,
+        "sha256": "9e47d692dae1a2daa5f754bf593d37ba03b62bf27bb679d5f2c0018e0f7de7f1"
+      },
+      {
+        "name": "mahal_gold.webp",
+        "path": "assets/mahal_gold.webp",
+        "url": "https://chorlove.uz/images/palace-rose/mahal_gold.webp",
+        "status": 200,
+        "contentType": "image/webp",
+        "bytes": 50980,
+        "sha256": "204d9295d9726830839a91336828b69152994878dda420d9938762b5d4ac5b11"
+      },
+      {
+        "name": "royal_red.webp",
+        "path": "assets/royal_red.webp",
+        "url": "https://chorlove.uz/images/palace-rose/royal_red.webp",
+        "status": 200,
+        "contentType": "image/webp",
+        "bytes": 5298,
+        "sha256": "e2d564bd85c03c4ef4a8fe87032f56f5e4e2eadd879dc8a922f92657a1a2e160"
+      }
+    ]
+  }
 }

@@ -229,7 +229,111 @@
   }
 
   function bindGiftAndContacts() {
-    const gift=sections[8];if(gift){set(q("h2",gift),text().gift);const button=q("button",gift);if(button){set(q("p",button)||button,text().openGift);const imgs=all("img",button);imgs.forEach((img)=>{img.removeAttribute("src");hide(img);});button.onclick=()=>{let info=q("[data-pr-gift]",gift);if(!info){info=document.createElement("div");info.dataset.prGift="";info.className="rounded-xl border border-[#ab7a45]/40 bg-white/70 p-4 text-center space-y-2";const holder=document.createElement("p"),number=document.createElement("p"),copy=document.createElement("button");holder.dataset.holder="";number.dataset.number="";copy.type="button";copy.className="rounded-full border border-[#ab7a45] px-4 py-2";copy.textContent=({"uz-Latn":"Kartani nusxalash","uz-Cyrl":"Карта рақамини нусхалаш",en:"Copy card number",ru:"Скопировать номер карты"})[payload?.locale]||"Copy card number";copy.onclick=async()=>{try{await navigator.clipboard.writeText(data().toyona?.cardNumber||"");copy.textContent=text().copied;}catch{number.focus?.();}};info.append(holder,number,copy);button.after(info);}set(q("[data-holder]",info),data().toyona?.cardHolder);set(q("[data-number]",info),data().toyona?.cardNumber);hide(info,!info.hidden);};}hide(gift,!data().toyona?.enabled);}
+    const gift=sections[8];
+    if(gift){
+      set(q("h2",gift),text().gift);
+      const button=q("button",gift);
+      if(button){
+        set(q("p",button)||button,text().openGift);
+        const giftArt=["hoa_kho_orange.webp","royal_red.webp","dragon_phoenix.webp","dragon_phoenix_v2.webp","mahal_gold.webp","glass_garden_pink.webp","chateau_green.webp","double_dragon_green.webp"];
+        all("img",button).forEach((img,index)=>{
+          const filename=giftArt[index];
+          if(filename){img.src=`/templates/${id}/assets/${filename}`;img.loading="lazy";img.decoding="async";}
+        });
+        button.onclick=()=>{
+          if(q("[data-pr-gift-dialog]"))return;
+          const language=payload?.locale||"uz-Latn";
+          const words={
+            "uz-Latn":{title:"To‘yona",bank:"Bank kartasi",copy:"Karta raqamini nusxalash",fallback:"Tashrifingiz biz uchun eng katta sovg‘a."},
+            "uz-Cyrl":{title:"Тўёна",bank:"Банк картаси",copy:"Карта рақамини нусхалаш",fallback:"Ташрифингиз биз учун энг катта совға."},
+            en:{title:"Gift Box",bank:"Bank Card",copy:"Copy Card Number",fallback:"Your presence is the greatest gift for us."},
+            ru:{title:"Подарок",bank:"Банковская карта",copy:"Скопировать номер карты",fallback:"Ваше присутствие — самый ценный подарок для нас."},
+          }[language]||{title:"Gift Box",bank:"Bank Card",copy:"Copy Card Number",fallback:"Your presence is the greatest gift for us."};
+          const toyona=data().toyona||{};
+          const overlay=document.createElement("div");
+          overlay.dataset.prGiftDialog="";
+          overlay.className="fixed inset-0 z-[2000] flex items-center justify-center bg-black/75 backdrop-blur-md p-4 select-none";
+          overlay.setAttribute("role","presentation");
+          overlay.style.opacity="0";
+          const reduceMotion=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+          const duration=reduceMotion?0:250;
+          overlay.style.transition=`opacity ${duration}ms ease`;
+          const panel=document.createElement("div");
+          panel.className="relative w-full max-w-md rounded-2xl p-0 shadow-2xl overflow-hidden text-[#640e1b] border border-[#ab7a45]/40";
+          panel.style.backgroundColor="rgb(247, 227, 205)";
+          panel.style.opacity="0";
+          panel.style.transform="translateY(20px) scale(.92)";
+          panel.style.transition=`opacity ${duration}ms ease, transform ${duration}ms ease`;
+          panel.setAttribute("role","dialog");
+          panel.setAttribute("aria-modal","true");
+          panel.setAttribute("aria-labelledby","pr-gift-dialog-title");
+          const header=document.createElement("div");
+          header.className="relative px-6 pt-6 pb-4 text-center";
+          header.style.backgroundColor="rgb(100, 14, 27)";
+          const close=document.createElement("button");
+          close.type="button";
+          close.className="absolute right-3 top-3 p-1.5 rounded-full text-white/80 hover:text-white hover:bg-white/20 transition-colors z-10";
+          close.setAttribute("aria-label",language==="ru"?"Закрыть":language==="en"?"Close":language==="uz-Cyrl"?"Ёпиш":"Yopish");
+          close.innerHTML='<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m18 6-12 12M6 6l12 12"></path></svg>';
+          const title=document.createElement("h2");
+          title.id="pr-gift-dialog-title";
+          title.className="uppercase text-[20px] md:text-[24px] font-bold tracking-[0.04em] text-white";
+          title.style.fontFamily='"Times New Roman", Times, "Baskerville", serif';
+          title.style.textShadow="rgba(0, 0, 0, 0.2) 1px 1px 2px";
+          title.textContent=words.title;
+          header.append(close,title);
+          const content=document.createElement("div");
+          content.className="p-6 flex flex-col items-center gap-4 text-center";
+          if(toyona.cardNumber?.trim()){
+            const card=document.createElement("div");
+            card.className="w-full rounded-xl bg-white/80 p-5 shadow-sm flex flex-col items-center gap-2";
+            card.style.border="1.5px solid rgba(100, 14, 27, 0.15)";
+            const cardLabel=document.createElement("div");
+            cardLabel.className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[rgb(100,14,27)]";
+            cardLabel.innerHTML='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"></rect><path d="M2 10h20"></path></svg>';
+            const bankLabel=document.createElement("span");bankLabel.textContent=words.bank;cardLabel.append(bankLabel);
+            const number=document.createElement("div");
+            number.className="font-mono text-lg md:text-xl font-bold tracking-widest text-[rgb(100,14,27)] my-1";
+            number.textContent=toyona.cardNumber;
+            card.append(cardLabel,number);
+            if(toyona.cardHolder){const holder=document.createElement("div");holder.className="text-xs font-medium opacity-80 text-[rgb(100,14,27)] uppercase tracking-wide";holder.style.fontFamily='Baskerville, "Libre Baskerville", "Times New Roman", serif';holder.textContent=toyona.cardHolder;card.append(holder);}
+            const copy=document.createElement("button");
+            copy.type="button";
+            copy.className="mt-3 inline-flex items-center gap-2 rounded-full px-6 py-2 text-xs font-semibold text-white transition-all hover:scale-105 active:scale-95 shadow-sm";
+            copy.style.backgroundColor="rgb(100, 14, 27)";
+            copy.style.fontFamily='"Times New Roman", Times, "Baskerville", serif';
+            copy.textContent=words.copy;
+            copy.addEventListener("click",async()=>{try{await navigator.clipboard.writeText(toyona.cardNumber);copy.textContent=text().copied;}catch{copy.focus();}});
+            card.append(copy);
+            content.append(card);
+          }else{
+            const note=document.createElement("div");
+            note.className="w-full rounded-xl bg-white/80 p-5 shadow-sm text-sm leading-relaxed text-[rgb(100,14,27)]";
+            note.style.border="1.5px solid rgba(100, 14, 27, 0.15)";
+            note.style.fontFamily='Baskerville, "Libre Baskerville", "Times New Roman", serif';
+            note.textContent=toyona.note?.trim()||words.fallback;
+            content.append(note);
+          }
+          panel.append(header,content);
+          overlay.append(panel);
+          const closeDialog=()=>{
+            if(!overlay.isConnected)return;
+            document.removeEventListener("keydown",onKeyDown);
+            overlay.style.opacity="0";panel.style.opacity="0";panel.style.transform="translateY(20px) scale(.92)";
+            window.setTimeout(()=>{overlay.remove();button.focus();},duration);
+          };
+          const onKeyDown=(event)=>{if(event.key==="Escape")closeDialog();};
+          close.addEventListener("click",closeDialog);
+          overlay.addEventListener("click",(event)=>{if(event.target===overlay)closeDialog();});
+          panel.addEventListener("click",(event)=>event.stopPropagation());
+          document.addEventListener("keydown",onKeyDown);
+          document.body.append(overlay);
+          close.focus();
+          requestAnimationFrame(()=>{overlay.style.opacity="1";panel.style.opacity="1";panel.style.transform="translateY(0) scale(1)";});
+        };
+      }
+      hide(gift,!data().toyona?.enabled);
+    }
     const contact=sections[9];if(!contact)return;set(q("h2",contact),text().contacts);const intro=all("p",contact)[0];if(intro)set(intro,({"uz-Latn":"Savol yoki tabrik bo‘lsa, biz bilan bog‘laning.","uz-Cyrl":"Савол ёки табрик бўлса, биз билан боғланинг.",en:"Contact us with any questions or warm wishes.",ru:"Свяжитесь с нами по любым вопросам или с добрыми пожеланиями."})[payload?.locale]||"");const anchors=all("a",contact),values=data().contacts||[];
     anchors.forEach((anchor,i)=>{const entry=values[i];if(!entry){hide(anchor);return;}hide(anchor,false);anchor.href=entry.href||"#";anchor.target="_blank";anchor.rel="noopener noreferrer";const ps=all("p",anchor);if(ps[0])set(ps[0],entry.label|| (entry.type==="phone"?text().phone:text().telegram));if(ps[1])set(ps[1],entry.value);if(ps[2])set(ps[2],"");});hide(contact,!values.length);
   }
