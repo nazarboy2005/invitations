@@ -15,7 +15,7 @@
       wish: "Kelin-kuyovga tilagingiz...", guest: "Ismingiz", wishSend: "Tilak yuborish", rsvp: "Kelasizmi?",
       rsvpHint: "Iltimos, javobingizni bildiring.", yes: "Kelaman", no: "Kela olmayman", send: "Yuborish",
       partySize: "Mehmonlar soni", gift: "Sovg'a yuborish", openGift: "Ochish uchun bosing", closeGift: "Yopish",
-      cardHolder: "Karta egasi", copyCard: "Nusxa olish", copied: "Karta raqami nusxalandi.", copyError: "Nusxa olib bo'lmadi.",
+      bankCard: "Bank kartasi", cardHolder: "Karta egasi", giftMessage: "Tashrifingiz biz uchun eng katta sovg'a.", copyCard: "Nusxa olish", copied: "Karta raqami nusxalandi.", copyError: "Nusxa olib bo'lmadi.",
       contact: "Bog'lanish uchun", phone: "Telefon", telegram: "Telegram", photo: "Surat", close: "Yopish",
       previous: "Oldingi", next: "Keyingi", guestRequired: "Ismingizni kiriting.", wishRequired: "Tilagingizni yozing.",
       chooseResponse: "Javobingizni tanlang.", saved: "Javobingiz saqlandi. Rahmat!", submitted: "Tilagingiz yuborildi.",
@@ -32,7 +32,7 @@
       wish: "Келин-куёвга тилагингиз...", guest: "Исмингиз", wishSend: "Тилак юбориш", rsvp: "Келасизми?",
       rsvpHint: "Илтимос, жавобингизни билдиринг.", yes: "Келаман", no: "Кела олмайман", send: "Юбориш",
       partySize: "Меҳмонлар сони", gift: "Совға юбориш", openGift: "Очиш учун босинг", closeGift: "Ёпиш",
-      cardHolder: "Карта эгаси", copyCard: "Нусха олиш", copied: "Карта рақами нусхаланди.", copyError: "Нусха олиб бўлмади.",
+      bankCard: "Банк картаси", cardHolder: "Карта эгаси", giftMessage: "Ташрифингиз биз учун энг катта совға.", copyCard: "Нусха олиш", copied: "Карта рақами нусхаланди.", copyError: "Нусха олиб бўлмади.",
       contact: "Боғланиш учун", phone: "Телефон", telegram: "Telegram", photo: "Сурат", close: "Ёпиш",
       previous: "Олдинги", next: "Кейинги", guestRequired: "Исмингизни киритинг.", wishRequired: "Тилагингизни ёзинг.",
       chooseResponse: "Жавобингизни танланг.", saved: "Жавобингиз сақланди. Раҳмат!", submitted: "Тилагингиз юборилди.",
@@ -49,6 +49,7 @@
       yes: "I'll attend", no: "Can't attend", send: "Submit", partySize: "Number of guests", gift: "Send a gift",
       openGift: "Tap to open", closeGift: "Close", cardHolder: "Card holder", copyCard: "Copy number",
       copied: "Card number copied.", copyError: "Could not copy the card number.", contact: "Contact us", phone: "Phone",
+      bankCard: "Bank Card", giftMessage: "Your presence is the greatest gift for us.",
       telegram: "Telegram", photo: "Photo", close: "Close", previous: "Previous", next: "Next", guestRequired: "Enter your name.",
       wishRequired: "Write your wish.", chooseResponse: "Choose your response.", saved: "Your response was saved. Thank you!",
       submitted: "Your wish was sent.", error: "Could not send. Please try again.", preview: "Submission is disabled in preview.",
@@ -65,6 +66,7 @@
       partySize: "Количество гостей", gift: "Подарок", openGift: "Нажмите, чтобы открыть", closeGift: "Закрыть",
       cardHolder: "Владелец карты", copyCard: "Скопировать номер", copied: "Номер карты скопирован.", copyError: "Не удалось скопировать номер карты.",
       contact: "Связаться с нами", phone: "Телефон", telegram: "Telegram", photo: "Фото", close: "Закрыть",
+      bankCard: "Банковская карта", giftMessage: "Ваше присутствие — лучший подарок для нас.",
       previous: "Назад", next: "Далее", guestRequired: "Введите ваше имя.", wishRequired: "Напишите пожелание.",
       chooseResponse: "Выберите ваш ответ.", saved: "Ваш ответ сохранён. Спасибо!", submitted: "Ваше пожелание отправлено.",
       error: "Не удалось отправить. Попробуйте ещё раз.", preview: "Отправка в режиме просмотра отключена.",
@@ -74,23 +76,124 @@
 
   let payload;
   let timer;
+  const sourcePetals = [
+    { left: "54.71%", color: "#eef4d0", size: "13.2px", sway: 3, duration: 10.7, delay: 1.51 },
+    { left: "47.86%", color: "#ffffff", size: "23.5px", sway: 24.1, duration: 10.1, delay: 0.07 },
+    { left: "16.77%", color: "#d4e4a0", size: "20.2px", sway: 28, duration: 12.7, delay: 0.98 },
+    { left: "56.77%", color: "#d4e4a0", size: "19.6px", sway: 11.2, duration: 10.3, delay: 2.3 },
+    { left: "90.04%", color: "#eef4d0", size: "21.4px", sway: -15, duration: 10.2, delay: 1.76 },
+    { left: "55.55%", color: "#ffffff", size: "16.4px", sway: -18.7, duration: 11.1, delay: 0.77 },
+    { left: "36.06%", color: "#eef4d0", size: "18.3px", sway: -11.3, duration: 10.7, delay: 1.94 },
+    { left: "84.13%", color: "#c8d88a", size: "10.3px", sway: -8.6, duration: 8.7, delay: 1.01 },
+    { left: "31.61%", color: "#ffffff", size: "20.8px", sway: 22.2, duration: 8.5, delay: 0.75 },
+    { left: "49.19%", color: "#d4e4a0", size: "11px", sway: -23.8, duration: 8.8, delay: 1.65 },
+    { left: "28.57%", color: "#d4e4a0", size: "19.2px", sway: -12.4, duration: 9.4, delay: 0.71 },
+    { left: "80.28%", color: "#d4e4a0", size: "16.3px", sway: 16.2, duration: 9.2, delay: 0.07 },
+  ];
+  const sourceGiftFlowers = [
+    ["jasmine_white.webp", 6, -22, -18, 3200, 0],
+    ["spring_garden_green.webp", 7, 20, 24, 3600, 300],
+    ["boho_floral_pink.webp", 5, -18, -14, 2900, 600],
+    ["brocade_flower_red.webp", 6, 14, 18, 3400, 200],
+    ["baroque_gold.webp", 5, 8, 12, 3100, 400],
+    ["minimalism_brown.webp", 6, -10, -6, 3500, 700],
+    ["spring_garden_blue.webp", 5, -14, -10, 3300, 100],
+  ];
+  const sourceRevealProfiles = [
+    [
+      [600, 0, 0.3], [600, 100, 0.3], [700, 180, 0.3], [500, 260, 0.3],
+      [700, 320, 0.3], [600, 420, 0.3], [500, 500, 0.3], [700, 580, 0.3],
+      [500, 660, 0.3], [600, 740, 0.3],
+    ],
+    [[600, 0, 0.3], [700, 150, 0.2]],
+    [
+      [600, 0, 0.25], [600, 100, 0.25], [700, 180, 0.25], [700, 280, 0.25],
+      [600, 360, 0.25], [700, 440, 0.25],
+    ],
+    [[600, 0, 0.25], [600, 100, 0.25], [700, 160, 0.25], [700, 220, 0.25], [700, 300, 0.25]],
+    [[600, 0, 0.25], [700, 180, 0.25], [400, 50, 0.2]],
+    [[600, 0, 0.25], [700, 180, 0.25]],
+    [[600, 0, 0.25], [600, 150, 0.25]],
+    [[600, 0, 0.25], [700, 120, 0.25]],
+    [[600, 0, 0.25], [600, 100, 0.25]],
+  ];
+  const sourceGiftModal = `
+    <div class="jw-gift-backdrop" data-jw-gift-backdrop hidden>
+      <div class="jw-gift-modal" role="dialog" aria-modal="true" aria-labelledby="jw-gift-title">
+        <button type="button" class="jw-gift-close" aria-label="Close modal">×</button>
+        <div class="jw-gift-modal-heading"><img src="/images/green-garden/glass_garden_green.webp" alt=""><h3 id="jw-gift-title"></h3></div>
+        <div class="jw-gift-modal-content"></div>
+      </div>
+    </div>`;
   const q = (selector, base = root) => base.querySelector(selector);
   const tx = (node, value) => { if (node) node.textContent = value == null ? "" : String(value); };
   const hide = (node, value) => { if (node) node.hidden = Boolean(value); };
   const setButtonText = (button, value) => {
     if (!button) return;
+    const labeled = button.querySelector('[dir="auto"]');
+    if (labeled) { tx(labeled, value); return; }
     const text = [...button.childNodes].find((node) => node.nodeType === Node.TEXT_NODE && node.textContent.trim());
     if (text) text.textContent = value;
     else button.append(document.createTextNode(value));
   };
   const validDate = (data) => Number.isFinite(Date.parse(data?.dateTime || ""));
 
-  function removeCapturedRevealStyles() {
-    for (const node of root.querySelectorAll('[style*="opacity:0"], [style*="opacity: 0"], [style*="translateY("]')) {
-      const declarations = (node.getAttribute("style") || "").split(";").filter(Boolean);
-      const keep = declarations.filter((item) => !/^\s*opacity\s*:\s*0(?:\.0+)?\s*$/i.test(item) && !/^\s*transform\s*:\s*translateY\(/i.test(item));
-      if (keep.length) node.setAttribute("style", keep.join(";")); else node.removeAttribute("style");
-      node.dataset.jwReveal = "";
+  function profileFor(sectionIndex, node, nodeIndex, sectionNodes) {
+    const initial = node.dataset.jwMotionFrom || "";
+    const section = sections[sectionIndex];
+    if (sectionIndex === 2 && nodeIndex >= 6) return [500, 100 * (nodeIndex - 6), 0.3];
+    if (sectionIndex === 4) {
+      if (node.tagName === "IMG") return [600, 150 * sectionNodes.filter((item, index) => index < nodeIndex && item.tagName === "IMG").length, 0.3];
+      const row = node.closest("li");
+      if (row) {
+        const rows = [...section.querySelectorAll("li")];
+        const rowIndex = Math.max(0, rows.indexOf(row));
+        if (/scale\(0\)/.test(initial)) return [400, 80 * rowIndex, 0.5];
+        if (/translateX\(-16px\)/.test(initial)) return [500, 80 * rowIndex, 0.5];
+        if (/translateX\(16px\)/.test(initial)) return [500, 80 * rowIndex, 0.5];
+      }
+    }
+    if (sectionIndex === 5 && nodeIndex >= 2) return [400, 50 * (nodeIndex - 2), 0.2];
+    if (sectionIndex === 8 && node.tagName === "A") {
+      return [500, 100 * sectionNodes.filter((item, index) => index < nodeIndex && item.tagName === "A").length, 0.2];
+    }
+    if (sectionIndex === 8 && node.tagName === "H2") return [600, 0, 0.25];
+    if (sectionIndex === 8 && node.tagName === "P") return [600, 100, 0.25];
+    if (sectionIndex === 5 && node.matches(".text-center")) return [600, 0, 0.25];
+    if (sectionIndex === 5 && node.tagName === "FORM") return [700, 180, 0.25];
+    if (sectionIndex === 1 && node.matches("h2")) return [600, 0, 0.3];
+    if (sectionIndex === 1 && node.matches(".w-full.max-w-\\[432px\\]")) return [700, 150, 0.2];
+    if (sectionIndex === 7 && node.matches("button")) return [700, 120, 0.25];
+    return sourceRevealProfiles[sectionIndex]?.[nodeIndex] || [600, 0, 0.25];
+  }
+
+  function removeCapturedRevealStyles(reduced) {
+    const heroEntrance = sections[0]?.querySelector("header .relative.flex.items-center.justify-center");
+    sections.forEach((section, sectionIndex) => {
+      const nodes = [...section.querySelectorAll("[style]")].filter((node) => {
+        if (node.dataset.jwReveal !== undefined) return false;
+        return node.style.opacity === "0" && Boolean(node.style.transform);
+      });
+      const revealNodes = nodes.filter((node) => node !== heroEntrance);
+      revealNodes.forEach((node, nodeIndex) => {
+        const from = node.style.transform;
+        const [duration, delay, threshold] = profileFor(sectionIndex, node, nodeIndex, nodes);
+        node.dataset.jwReveal = "";
+        node.dataset.jwMotionFrom = from;
+        node.dataset.jwThreshold = String(threshold);
+        node.style.setProperty("--jw-motion-from", from);
+        node.style.setProperty("--jw-motion-duration", `${duration}ms`);
+        node.style.setProperty("--jw-motion-delay", `${delay}ms`);
+        node.style.removeProperty("opacity");
+        node.style.removeProperty("transform");
+      });
+    });
+    if (heroEntrance) {
+      heroEntrance.dataset.jwHeroEntrance = "";
+      if (reduced) {
+        heroEntrance.style.removeProperty("opacity");
+        heroEntrance.style.removeProperty("transform");
+      }
     }
   }
 
@@ -101,12 +204,88 @@
       return;
     }
     const observer = new IntersectionObserver((entries) => {
-      for (const entry of entries) if (entry.isIntersecting) {
-        entry.target.classList.add("jw-revealed");
-        observer.unobserve(entry.target);
+      for (const entry of entries) {
+        const threshold = Number(entry.target.dataset.jwThreshold || 0.25);
+        if (entry.isIntersecting && entry.intersectionRatio >= threshold) entry.target.classList.add("jw-revealed");
+        else entry.target.classList.remove("jw-revealed");
       }
-    }, { root, threshold: 0.08 });
+    }, { root, threshold: [0, 0.2, 0.25, 0.3, 0.5] });
     nodes.forEach((node) => observer.observe(node));
+  }
+
+  function setupSourceOpeningMotion(reduced) {
+    const intro = q(".fixed.inset-0.z-50");
+    if (!intro || intro.dataset.jwSourceMotion === "true") return;
+    intro.dataset.jwSourceMotion = "true";
+    if (reduced) return;
+    const particleHost = intro.querySelector(".absolute.inset-0.pointer-events-none.overflow-hidden");
+    if (particleHost && !particleHost.dataset.jwPetals) {
+      particleHost.dataset.jwPetals = "true";
+      sourcePetals.forEach((petal) => {
+        const outer = document.createElement("div");
+        outer.className = "jw-source-petal absolute pointer-events-none select-none";
+        outer.style.left = petal.left;
+        outer.style.top = "-30px";
+        outer.style.color = petal.color;
+        outer.style.fontSize = petal.size;
+        outer.setAttribute("aria-hidden", "true");
+        const glyph = document.createElement("span");
+        glyph.className = "jw-source-petal-glyph";
+        glyph.textContent = "🌸";
+        outer.append(glyph);
+        particleHost.append(outer);
+        outer.animate([{ translate: "0 -10vh" }, { translate: "0 110vh" }], {
+          duration: petal.duration * 1000, delay: petal.delay * 1000, iterations: Infinity, easing: "linear",
+        });
+        glyph.animate([{ translate: "0 0" }, { translate: `${petal.sway}px 0` }, { translate: "0 0" }], {
+          duration: petal.duration * 500, iterations: Infinity, easing: "ease-in-out",
+        });
+        glyph.animate([{ rotate: "0deg" }, { rotate: "360deg" }], {
+          duration: petal.duration * 1200, delay: petal.delay * 1000, iterations: Infinity, easing: "linear",
+        });
+        outer.animate([{ opacity: 0 }, { opacity: 0.85, offset: 0.28 }, { opacity: 0.85, offset: 0.7 }, { opacity: 0 }], {
+          duration: petal.duration * 1000, delay: petal.delay * 1000, iterations: Infinity, easing: "ease-in-out",
+        });
+      });
+    }
+    const heart = intro.querySelector('[style*="top:50px"] > .flex.items-center.justify-center');
+    heart?.animate([{ scale: 1 }, { scale: 1.12 }, { scale: 1 }], {
+      duration: 2000, iterations: Infinity, easing: "ease-in-out",
+    });
+    const sheen = intro.querySelector("button > .absolute.top-0.h-full.w-8");
+    sheen?.animate([{ translate: "-100px 0" }, { translate: "260px 0" }], {
+      duration: 3000, iterations: Infinity, easing: "ease-in-out",
+    });
+  }
+
+  function animateSourceHeroEntrance(reduced) {
+    const hero = sections[0]?.querySelector("header .relative.flex.items-center.justify-center");
+    if (!hero) return;
+    hero.getAnimations().forEach((animation) => animation.cancel());
+    if (reduced) {
+      hero.style.opacity = "1";
+      hero.style.transform = "none";
+      return;
+    }
+    hero.animate([
+      { opacity: 0, transform: "translateY(25px) scale(.92)" },
+      { opacity: 1, transform: "translateY(0) scale(1)" },
+    ], { duration: 900, delay: 200, easing: "cubic-bezier(.22,1,.36,1)", fill: "both" });
+  }
+
+  function animateGiftFlowers(reduced) {
+    const giftSection = sections[7];
+    if (!giftSection || giftSection.dataset.jwFlowerMotion === "true") return;
+    giftSection.dataset.jwFlowerMotion = "true";
+    if (reduced) return;
+    for (const [file, lift, start, peak, duration, delay] of sourceGiftFlowers) {
+      const flower = giftSection.querySelector(`img[src$="/${file}"]`);
+      flower?.animate([
+        { translate: `0 0`, rotate: `${start}deg` },
+        { translate: `0 -${lift}px`, rotate: `${peak}deg` },
+        { translate: `0 0`, rotate: `${start}deg` },
+      ], { duration, delay, iterations: Infinity, easing: "ease-in-out" });
+    }
   }
 
   function render(p) {
@@ -132,9 +311,12 @@
     installMusic(d, p, c);
     root.style.visibility = "visible";
     root.removeAttribute("aria-busy");
-    root.classList.toggle("jw-reduced-motion", Boolean(p.reducedMotion) || matchMedia("(prefers-reduced-motion: reduce)").matches);
-    removeCapturedRevealStyles();
-    observeSections(Boolean(p.reducedMotion) || matchMedia("(prefers-reduced-motion: reduce)").matches);
+    const reduced = Boolean(p.reducedMotion) || matchMedia("(prefers-reduced-motion: reduce)").matches;
+    root.classList.toggle("jw-reduced-motion", reduced);
+    removeCapturedRevealStyles(reduced);
+    observeSections(reduced);
+    setupSourceOpeningMotion(reduced);
+    animateGiftFlowers(reduced);
   }
 
   function renderOpening(d, c, couple) {
@@ -148,12 +330,48 @@
     const button = intro.querySelector("button");
     if (button) {
       setButtonText(button, c.open);
-      button.onclick = () => {
-        intro.classList.add("jw-opening-exit");
-        root.scrollTo({ top: 0, behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth" });
+      const reduced = Boolean(payload?.reducedMotion) || matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const open = () => {
+        if (intro.dataset.jwOpening) return;
+        intro.dataset.jwOpening = "true";
+        animateSourceHeroEntrance(reduced);
+        root.scrollTo({ top: 0, behavior: reduced ? "instant" : "smooth" });
         q("[data-jasmine-audio]")?.play().catch(() => {});
-        setTimeout(() => intro.remove(), 800);
+        if (reduced) {
+          intro.remove();
+          return;
+        }
+        intro.classList.add("jw-opening-exit");
+        intro.animate([{ opacity: 1 }, { opacity: 0 }], {
+          duration: 600, delay: 450, easing: "ease-in-out", fill: "forwards",
+        });
+        const envelope = [...intro.children].find((child) => child.style.zIndex === "10");
+        envelope?.animate([
+          { transform: "translateY(0) scale(1)", opacity: 1 },
+          { transform: "translateY(-35px) scale(1.08)", opacity: 0 },
+        ], { duration: 800, easing: "cubic-bezier(.22,1,.36,1)", fill: "forwards" });
+        intro.querySelectorAll('img[src$="/hoa.webp"]').forEach((flower) => flower.animate([
+          { scale: 1, opacity: 0.75 }, { scale: 1.5, opacity: 0 },
+        ], { duration: 800, easing: "ease-out", fill: "forwards" }));
+        for (const petal of intro.querySelectorAll(".jw-source-petal")) {
+          const glyph = petal.querySelector(".jw-source-petal-glyph");
+          petal.getAnimations().forEach((animation) => animation.cancel());
+          glyph?.getAnimations().forEach((animation) => animation.cancel());
+          petal.animate([{ translate: "0 0" }, { translate: "0 300px" }], {
+            duration: 850, easing: "ease-out", fill: "forwards",
+          });
+          glyph?.animate([{ scale: 1 }, { scale: 2.2, offset: 0.5 }, { scale: 0 }], {
+            duration: 850, easing: "ease-out", fill: "forwards",
+          });
+          petal.animate([{ opacity: 0.85 }, { opacity: 1, offset: 0.5 }, { opacity: 0 }], {
+            duration: 850, easing: "ease-out", fill: "forwards",
+          });
+        }
+        setTimeout(() => intro.remove(), 1050);
       };
+      button.onclick = open;
+      const heart = intro.querySelector('[style*="top:50px"]');
+      if (heart) heart.onclick = open;
     }
   }
 
@@ -341,17 +559,39 @@
     tx(node.querySelector("h2"), c.gift); hide(node, !gift.enabled);
     setButtonText(button, c.openGift); button.setAttribute("aria-expanded", "false");
     const hint = node.querySelector("p"); if (hint) tx(hint, c.openGift);
-    let details = node.querySelector("[data-jw-gift-details]");
-    if (!details) { details = document.createElement("div"); details.dataset.jwGiftDetails = ""; details.className = "jw-gift-details"; details.hidden = true; button.after(details); }
-    details.replaceChildren();
+    let backdrop = node.querySelector("[data-jw-gift-backdrop]");
+    if (!backdrop) {
+      const template = document.createElement("template"); template.innerHTML = sourceGiftModal;
+      backdrop = template.content.firstElementChild; node.append(backdrop);
+    }
+    const modal = backdrop.querySelector(".jw-gift-modal"), content = backdrop.querySelector(".jw-gift-modal-content");
+    tx(backdrop.querySelector("#jw-gift-title"), c.gift);
+    content.replaceChildren();
     if (gift.cardNumber) {
-      const label = document.createElement("p"), holder = document.createElement("p"), number = document.createElement("p"), copyButton = document.createElement("button"), status = document.createElement("p");
-      label.textContent = c.cardHolder; holder.textContent = gift.cardHolder || ""; number.className = "jw-gift-card-number"; number.textContent = gift.cardNumber;
+      const card = document.createElement("div"), label = document.createElement("p"), holder = document.createElement("p"), number = document.createElement("p"), copyButton = document.createElement("button"), status = document.createElement("p");
+      card.className = "jw-gift-card"; label.textContent = c.bankCard; holder.textContent = gift.cardHolder || ""; number.className = "jw-gift-card-number"; number.textContent = gift.cardNumber;
       copyButton.type = "button"; copyButton.className = "jw-copy"; copyButton.textContent = c.copyCard; status.className = "jw-status"; status.setAttribute("role", "status"); status.setAttribute("aria-live", "polite");
       copyButton.onclick = async () => { try { await navigator.clipboard.writeText(String(gift.cardNumber)); tx(status, c.copied); } catch { tx(status, c.copyError); } };
-      details.append(label, holder, number, copyButton, status);
+      card.append(label, number); if (gift.cardHolder) card.append(holder); card.append(copyButton, status); content.append(card);
+    } else {
+      const message = document.createElement("p"); message.className = "jw-gift-empty"; message.textContent = c.giftMessage; content.append(message);
     }
-    button.onclick = () => { const open = details.hidden; details.hidden = !open; button.setAttribute("aria-expanded", String(open)); setButtonText(button, open ? c.closeGift : c.openGift); node.classList.toggle("jw-gift-open", open); };
+    const close = () => {
+      if (backdrop.hidden) return;
+      backdrop.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 250, easing: "ease-in", fill: "forwards" });
+      modal.animate([{ opacity: 1, transform: "scale(1) translateY(0)" }, { opacity: 0, transform: "scale(.92) translateY(20px)" }], { duration: 250, easing: "ease-in", fill: "forwards" });
+      window.setTimeout(() => { backdrop.hidden = true; button.focus(); }, 250);
+    };
+    backdrop.onclick = (event) => { if (event.target === backdrop) close(); };
+    backdrop.querySelector(".jw-gift-close").onclick = close;
+    modal.onclick = (event) => event.stopPropagation();
+    button.setAttribute("aria-expanded", String(!backdrop.hidden));
+    button.onclick = () => {
+      if (!backdrop.hidden) return;
+      backdrop.hidden = false; backdrop.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 250, fill: "both" });
+      modal.animate([{ opacity: 0, transform: "scale(.92) translateY(20px)" }, { opacity: 1, transform: "scale(1) translateY(0)" }], { duration: 250, fill: "both" });
+      button.setAttribute("aria-expanded", "true"); backdrop.querySelector(".jw-gift-close").focus();
+    };
   }
 
   function renderContacts(contacts, c) {

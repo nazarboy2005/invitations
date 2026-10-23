@@ -6,6 +6,12 @@
     "bytes": 83191,
     "sha256": "f6ec79f1ddf31027b303cb003424558355cdf1cb5da720dd2d492bc5c7e957c3"
   },
+  "sourceMotion": {
+    "file": "../../../../Invitations - this folder will be removed from production/Chorlove/Web invitations/_next/static/chunks/0ziyt946s2g41.js",
+    "bytes": 60835,
+    "sha256": "C126D27D5F78DA03D1EF1C4FC5320247D00DC18F697CD3EF0CE2E250AE1335C4",
+    "adaptedIn": "bridge.js"
+  },
   "capturedStylesheets": [
     {
       "file": "source/styles/0.u3j0~_2ygfx.css",
