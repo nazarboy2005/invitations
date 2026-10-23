@@ -79,40 +79,39 @@ decorations.
 ### `cloud-castle`
 
 - Source: `Invitations - this folder will be removed from production/Chorlove/Web invitations/templates/cloud-castle/preview-frame.html`, with assets under `Chorlove/Web invitations/images/cloud-castle`.
-- The available reference is a Next.js server-rendered preview snapshot, not
-  template-level HTML/CSS/JavaScript source. Its recorded SHA-256 matches the
-  package provenance record. The package extracts the captured subtree and
-  retains the source styles/fonts/art while excluding the app runtime and
-  sample data; platform behavior is rebound by `bridge.js`.
+- The capture is a Next.js server-rendered preview snapshot. Its matching
+  original page module is also present in the Chorlove chunk archive:
+  `_next/static/chunks/14t58uni224ve.js` (module 909129; 58,812 bytes; SHA-256
+  `81f9356f44be09216be952fd5a90739b0796f8825c9c7c398479b3d8205cee6b`). The
+  module contains the source envelope, particle system, hero entrances,
+  cloud/castle scroll values, and section motion variants. The isolated package
+  retains captured markup/styles/assets while excluding the site runtime and
+  sample invitation data.
 - The previous catalog image `preview-browser-capture.jpg` was 319×668 (ratio
   0.478) and showed the language selector, music button, and scrollbar. It has
   been replaced by `preview-opening.png`, a clean 720×1280 (9:16) capture of
   the post-envelope opening hero from the packaged snapshot renderer using the
   canonical preview names. The capture has no browser or catalog controls and
   its SHA-256 and viewport are recorded in `source/provenance.json`.
-- The all-provider manifest and asset search found no alternate metadata cover
-  or separate Cloud Castle source package. The available reference remains a
-  server-rendered snapshot. Its markup/styles/assets substantiate the captured
-  opening composition and portrait crop, but do not include the original
-  component/runtime handlers. Interaction and animation parity remain
-  unverifiable from this archive; the cover does not claim that parity.
-- Exact opening animation sequence and original interaction handlers cannot be
-  audited from this capture because the snapshot does not contain the original
-  component/runtime event code. `SOURCE_ADAPTATIONS.md` documents the adapter
-  behavior and the unrepresented-control release-gate question. This is a
-  source-archive limitation, not evidence that the adapter reproduces the
-  original runtime.
-- The adapter checks the operating-system reduced-motion preference and a
-  preview QA flag, then suppresses its adapted entrance reveal. This verifies
-  the adapter's own path only; it cannot establish how the missing source
-  runtime handled motion.
+- The all-provider manifest and asset search found no alternate metadata cover.
+  The current opening cover is a clean 720×1280 capture of the source-styled
+  post-envelope hero. Its full choreography is verified against the compiled
+  page module, with values recorded in `SOURCE_ADAPTATIONS.md` and
+  `source/provenance.json`.
+- The bridge reproduces the source envelope's 32 deterministic particles,
+  ambient fall/sway/rotation, burst, heart pulse, button sheen, card/flower
+  exits, and delayed overlay fade. It restores the original hero entrances and
+  the source scroll ranges for the three clouds, castle, and decorative
+  flowers. The platform reduced-motion path skips those animations and opens
+  immediately.
 - The bridge filters gallery data to entries with creator image URLs, hides
   empty image slots, and hides the story/gallery container when it has neither
   authored chapters nor photos. Template-owned opening artwork remains in the
   snapshot and is independent of creator gallery content.
-- To‘yona and contact data are adapted through the shared invitation contract;
-  no static source evidence in this audit establishes every interaction or
-  reduced-motion state.
+- To‘yona and contact data are adapted through the shared invitation contract.
+  The compiled source module also defines the original To‘yona decorative
+  object animations; they remain a distinct follow-up if full interaction-level
+  parity is required beyond the opener, hero, and page reveal behaviors.
 
 ## Follow-up IDs
 

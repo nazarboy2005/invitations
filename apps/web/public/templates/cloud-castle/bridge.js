@@ -204,26 +204,214 @@
   let countdownTimer = 0;
   const text = (node, value) => { if (node) node.textContent = value == null ? "" : String(value); };
   const hide = (node, hidden) => { if (node) node.hidden = Boolean(hidden); };
+  let sourceOpeningBound = false;
+  let sourceHeroBound = false;
+  let sourceGiftMotionBound = false;
+  let sourcePageOpened = false;
+  let sourceRevealBound = false;
+
+  function sourceReducedMotion() {
+    return Boolean(state?.reducedMotion) || matchMedia("(prefers-reduced-motion: reduce)").matches || new URLSearchParams(location.search).get("qaReducedMotion") === "1";
+  }
+
+  function bindSourceOpening() {
+    if (sourceOpeningBound) return;
+    const opening = document.querySelector('[data-landing-screenshot-id="invite-envelope"]');
+    if (!opening) return;
+    sourceOpeningBound = true;
+    const page = root.querySelector("main");
+    if (page) page.style.visibility = "hidden";
+    const card = opening.querySelector(".z-10.relative");
+    const heart = opening.querySelector('[class*="left-1/2"][class*="top-0"]');
+    const floralEdges = [...opening.querySelectorAll('img[src*="/assets/hoa.webp"]')];
+    const button = opening.querySelector("[data-chorlove-open]");
+    const sheen = button?.querySelector(".absolute.top-0.h-full.w-8");
+    const particleLayer = opening.querySelector(".absolute.inset-0.pointer-events-none.overflow-hidden");
+    let opened = false;
+    const particles = [];
+    const fraction = (value) => value - Math.floor(value);
+    for (let index = 0; index < 32; index += 1) {
+      const random = (seed) => fraction(43758.5453 * Math.sin(12.9898 * (17 * index + seed)));
+      const angle = index / 32 * 2 * Math.PI + (random(1) - 0.5) * 0.4;
+      const radius = 250 + 350 * random(2);
+      const item = {
+        left: `${index / 32 * 100 + (6 * random(3) - 3)}%`,
+        initialY: 120 * random(4) - 20,
+        size: Math.floor(14 + 18 * random(5)),
+        duration: 7 + 7 * random(6),
+        delay: 5 * random(7),
+        sway: 60 * random(8) - 30,
+        burstX: Math.cos(angle) * radius,
+        burstY: Math.sin(angle) * radius,
+        opacity: 0.35 + 0.45 * random(9),
+      };
+      const outer = document.createElement("span");
+      const inner = document.createElement("span");
+      outer.className = "cc-source-petal";
+      outer.style.left = item.left;
+      outer.style.top = `${item.initialY}vh`;
+      outer.style.fontSize = `${item.size}px`;
+      outer.setAttribute("aria-hidden", "true");
+      inner.className = "cc-source-petal-inner";
+      inner.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em"><g><ellipse cx="12" cy="5" rx="2.2" ry="4.5"></ellipse><ellipse cx="12" cy="5" rx="2.2" ry="4.5" transform="rotate(60 12 12)"></ellipse><ellipse cx="12" cy="5" rx="2.2" ry="4.5" transform="rotate(120 12 12)"></ellipse><ellipse cx="12" cy="5" rx="2.2" ry="4.5" transform="rotate(180 12 12)"></ellipse><ellipse cx="12" cy="5" rx="2.2" ry="4.5" transform="rotate(240 12 12)"></ellipse><ellipse cx="12" cy="5" rx="2.2" ry="4.5" transform="rotate(300 12 12)"></ellipse></g><circle cx="12" cy="12" r="1.8" fill-opacity=".45"></circle></svg>';
+      outer.append(inner);
+      particleLayer?.append(outer);
+      particles.push({ ...item, outer, inner });
+    }
+    const reduced = sourceReducedMotion();
+    if (!reduced) {
+      for (const particle of particles) {
+        const { outer, inner, duration, delay, sway, opacity } = particle;
+        outer.animate([{ translate: "0 0" }, { translate: "0 110vh" }], { duration: duration * 1000, delay: delay * 1000, iterations: Infinity, easing: "linear" });
+        inner.animate([{ translate: "0 0" }, { translate: `${sway}px 0` }, { translate: "0 0" }], { duration: duration * 500, delay: delay * 1000, iterations: Infinity, easing: "ease-in-out" });
+        inner.animate([{ rotate: "0deg" }, { rotate: "360deg" }], { duration: duration * 1000, delay: delay * 1000, iterations: Infinity, easing: "linear" });
+        inner.animate([{ opacity }, { opacity: 0.8 * opacity }, { opacity }], { duration: duration * 1000, delay: delay * 1000, iterations: Infinity, easing: "linear" });
+      }
+      heart?.animate([{ scale: 1 }, { scale: 1.12 }, { scale: 1 }], { duration: 2000, iterations: Infinity, easing: "ease-in-out" });
+      sheen?.animate([{ translate: "-100px 0" }, { translate: "260px 0" }], { duration: 3000, iterations: Infinity, easing: "ease-in-out" });
+    }
+    const open = (event) => {
+      if (opened) return;
+      if (event?.target === button || button?.contains(event?.target)) event.stopPropagation();
+      opened = true;
+      sourcePageOpened = true;
+      if (page) page.style.visibility = "";
+      window.scrollTo({ top: 0, behavior: reduced ? "auto" : "smooth" });
+      const audio = root.querySelector("audio[data-chorlove-audio]");
+      if (audio && state?.data.music?.url && !state.silentPlayback) audio.play().catch(() => {});
+      if (reduced) {
+        opening.hidden = true;
+        bindSourceHeroMotion();
+        restoreCapturedMotion();
+        return;
+      }
+      for (const particle of particles) {
+        const { outer, inner, burstX, burstY, sway, opacity } = particle;
+        outer.getAnimations().forEach((animation) => animation.cancel());
+        inner.getAnimations().forEach((animation) => animation.cancel());
+        outer.animate([{ translate: "0 0" }, { translate: `${burstX}px ${burstY}px` }], { duration: 850, easing: "ease-out", fill: "forwards" });
+        inner.animate([{ scale: 1, offset: 0 }, { scale: 2.2, offset: 0.5 }, { scale: 0, offset: 1 }], { duration: 850, easing: "ease-out", fill: "forwards" });
+        inner.animate([{ opacity }, { opacity: 1, offset: 0.5 }, { opacity: 0 }], { duration: 850, easing: "ease-out", fill: "forwards" });
+        inner.animate([{ rotate: "0deg" }, { rotate: `${12 * sway}deg` }], { duration: 850, easing: "ease-out", fill: "forwards" });
+      }
+      card?.animate([{ transform: "translateY(0) scale(1)", opacity: 1 }, { transform: "translateY(-35px) scale(1.08)", opacity: 0 }], { duration: 800, easing: "cubic-bezier(.22,1,.36,1)", fill: "forwards" });
+      for (const flower of floralEdges) flower.animate([{ scale: 1, opacity: 0.18 }, { scale: 3.2, opacity: 0 }], { duration: 800, easing: "ease-out", fill: "forwards" });
+      opening.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 600, delay: 450, easing: "ease-in-out", fill: "forwards" });
+      window.setTimeout(() => { opening.hidden = true; }, 1050);
+      bindSourceHeroMotion();
+      restoreCapturedMotion();
+    };
+    opening.addEventListener("click", open);
+    button?.addEventListener("click", open);
+  }
+
+  function bindSourceHeroMotion() {
+    if (sourceHeroBound) return;
+    sourceHeroBound = true;
+    const hero = root.querySelector("[data-cloud-castle-hero]");
+    if (!hero) return;
+    const header = hero.querySelector("header");
+    const logo = header?.querySelector('img[src*="asset-2.webp"]');
+    const greeting = header?.children[1];
+    const names = header?.children[2];
+    const page = root.querySelector("main");
+    const reveal = (element, duration, delay, initial, targetOpacity = 1, amount = 0.5) => {
+      if (!element) return;
+      const observer = new IntersectionObserver((entries) => {
+        for (const entry of entries) {
+          if (sourceReducedMotion()) { element.style.opacity = String(targetOpacity); element.style.transform = "none"; continue; }
+          if (entry.isIntersecting) element.animate([{ opacity: 0, transform: initial }, { opacity: targetOpacity, transform: "none" }], { duration: duration * 1000, delay: delay * 1000, easing: "ease-out", fill: "both" });
+          else element.getAnimations().forEach((animation) => animation.cancel());
+        }
+      }, { threshold: amount });
+      observer.observe(element);
+    };
+    const reduced = sourceReducedMotion();
+    if (reduced) {
+      [logo, greeting, names].forEach((element, index) => { if (element) { element.style.opacity = index === 0 ? ".95" : "1"; element.style.transform = "none"; } });
+      return;
+    }
+    reveal(logo, 0.75, 0, "translateY(-24px) scale(.9)", 0.95, 0.5);
+    reveal(greeting, 0.75, 0.08, "translateY(24px)", 1, 0.5);
+    reveal(names, 0.9, 0.14, "translateY(38px) scale(.92)", 1, 0.35);
+    bindSourceGiftMotion();
+    const clouds = [...hero.querySelectorAll('img[src*="/assets/cloud-"]')];
+    const castle = hero.querySelector('img[src*="/assets/home.webp"]');
+    const ornaments = [...(page?.querySelectorAll('img[src*="/assets/hoa.webp"]') || [])];
+    let frame = 0;
+    const sync = () => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => {
+        const rect = hero.getBoundingClientRect();
+        const progress = Math.max(0, Math.min(1, -rect.top / Math.max(rect.height, 1)));
+        if (castle) { castle.style.translate = `0 ${90 * progress}px`; castle.style.scale = String(0.8 + 0.7 * progress); }
+        [-90 + 330 * progress, 145 - 405 * progress, -320 + 510 * progress].forEach((x, index) => { if (clouds[index]) clouds[index].style.translate = `${x}px 0`; });
+        const viewport = window.innerHeight;
+        ornaments.forEach((ornament, index) => {
+          const box = ornament.getBoundingClientRect();
+          const priorOffset = Number(ornament.dataset.ccParallaxY || 0);
+          const p = Math.max(0, Math.min(1, (viewport - (box.top - priorOffset)) / (viewport + Math.max(box.height, 1))));
+          const nextOffset = -80 + 260 * p;
+          ornament.style.translate = `0 ${nextOffset}px`;
+          ornament.dataset.ccParallaxY = String(nextOffset);
+        });
+      });
+    };
+    window.addEventListener("scroll", sync, { passive: true, capture: true });
+    window.addEventListener("resize", sync);
+    sync();
+  }
+
+  function bindSourceGiftMotion() {
+    if (sourceGiftMotionBound || sourceReducedMotion()) return;
+    sourceGiftMotionBound = true;
+    const motion = {
+      "qasr_green.webp": [6, -22, -18, 3.2, 0],
+      "brocade_flower_red.webp": [7, 20, 24, 3.6, 0.3],
+      "double_dragon_green.webp": [5, -18, -14, 2.9, 0.6],
+      "chibi_red.webp": [6, 14, 18, 3.4, 0.2],
+      "boho_floral_green.webp": [5, 8, 12, 3.1, 0.4],
+      "silk_flora_brown.webp": [6, -10, -6, 3.5, 0.7],
+      "spring_garden_red.webp": [5, -14, -10, 3.3, 0.1],
+    };
+    for (const image of root.querySelectorAll('img[src*="/assets/gift/"]')) {
+      const file = image.getAttribute("src")?.split("/").pop();
+      const config = motion[file];
+      if (!config) continue;
+      const [lift, startAngle, endAngle, duration, delay] = config;
+      image.animate([
+        { translate: "0 0", rotate: `${startAngle}deg` },
+        { translate: `0 ${-lift}px`, rotate: `${endAngle}deg` },
+        { translate: "0 0", rotate: `${startAngle}deg` },
+      ], { duration: duration * 1000, delay: delay * 1000, iterations: Infinity, easing: "ease-in-out" });
+    }
+  }
 
   function restoreCapturedMotion() {
-    const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches || new URLSearchParams(location.search).get("qaReducedMotion") === "1";
+    const reduce = sourceReducedMotion();
+    document.documentElement.classList.toggle("cc-reduced-motion", reduce);
+    if (!sourcePageOpened || sourceRevealBound) return;
+    sourceRevealBound = true;
+    const hero = root.querySelector("[data-cloud-castle-hero]");
     let sequence = 0;
     const observer = new IntersectionObserver((entries) => {
       for (const entry of entries) {
-        if (!entry.isIntersecting) continue;
         const element = entry.target;
-        observer.unobserve(element);
-        if (reduce) { element.style.opacity = ""; element.style.transform = ""; }
-        else {
-          element.style.setProperty("--cc-from-transform", element.style.transform || "translateY(10px)");
-          element.style.opacity = "";
-          element.style.transform = "";
-          element.style.animationDelay = `${Math.min(sequence++ * 30, 360)}ms`;
-          element.dataset.chorloveReveal = "";
-        }
+        if (reduce) { element.style.opacity = ""; element.style.transform = ""; continue; }
+        if (entry.isIntersecting) {
+          const initialTransform = element.dataset.ccInitialTransform || "translateY(10px)";
+          const initialOpacity = Number(element.dataset.ccInitialOpacity || 0);
+          const delay = Number(element.dataset.ccRevealDelay || Math.min(sequence++ * 30, 360));
+          element.animate([{ opacity: initialOpacity, transform: initialTransform }, { opacity: 1, transform: "none" }], { duration: 480, delay, easing: "cubic-bezier(.22,1,.36,1)", fill: "both" });
+        } else element.getAnimations().forEach((animation) => animation.cancel());
       }
-    }, { threshold: 0.08 });
-    root.querySelectorAll('[style*="opacity:0"], [style*="opacity: 0"]').forEach((element) => observer.observe(element));
+    }, { threshold: 0.16 });
+    root.querySelectorAll('[style*="opacity:0"], [style*="opacity: 0"]').forEach((element) => {
+      if (hero?.contains(element)) return;
+      element.dataset.ccInitialTransform = element.style.transform || "translateY(10px)";
+      element.dataset.ccInitialOpacity = element.style.opacity || "0";
+      observer.observe(element);
+    });
   }
 
   function localCopy() { return copy[state?.locale] || copy["uz-Latn"]; }
@@ -689,15 +877,7 @@
     restoreCapturedMotion();
   }
 
-  root.querySelectorAll("[data-chorlove-open]").forEach((button) => {
-    button.addEventListener("click", () => {
-      const panel = button.closest(".fixed") || button.parentElement?.parentElement;
-      if (panel) panel.hidden = true;
-      window.scrollTo({ top: 0, behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
-      const audio = root.querySelector("audio[data-chorlove-audio]");
-      if (audio && state?.data.music?.url && !state.silentPlayback) audio.play().catch(() => {});
-    });
-  });
+  bindSourceOpening();
 
   const initial = (() => { try { return JSON.parse(window.name); } catch { return null; } })();
   restoreCapturedMotion();

@@ -8,7 +8,7 @@
     "_next/static/chunks/0.u3j0~_2ygfx.css",
     "_next/static/chunks/00sc_9lpb3zcn.css"
   ],
-  "note": "The captured preview is a server-rendered snapshot. Chorlove template source assets and styling are retained; its website runtime, external music, owner contact values, sample wishes, and hard-coded preview data are excluded.",
+  "note": "The archived server-rendered preview is accompanied by the compiled Cloud Castle page component and captured style/assets. The isolated adapter implements its source opening and parallax behavior without copying the Chorlove Next.js site runtime, external music, owner contact values, sample wishes, or hard-coded invitation data.",
   "previewBrowserCapture": {
     "file": "../preview-browser-capture.jpg",
     "sha256": "6aa119732ec5ce1730bffed6880876ebe587adc736ff9367df7408520f24b6aa",
@@ -29,6 +29,107 @@
       "music control",
       "browser scrollbar"
     ],
-    "provenanceLimit": "The archive contains server-rendered markup and styles but no original component/runtime handlers. This image verifies the captured opening composition only, not interaction or animation parity."
+    "provenanceLimit": "The clean image verifies the captured opening artwork and crop. The archived compiled page component is recorded separately and provides the original interaction and animation source used by the adapter."
+  },
+  "pageModule": {
+    "file": "Chorlove/Web invitations/_next/static/chunks/14t58uni224ve.js",
+    "moduleId": 909129,
+    "bytes": 58812,
+    "sha256": "81f9356f44be09216be952fd5a90739b0796f8825c9c7c398479b3d8205cee6b",
+    "captureStatus": "present in the archived Chorlove chunk tree",
+    "packagedAsSiteRuntime": false
+  },
+  "sourceBehavior": {
+    "opening": {
+      "ambientParticles": 32,
+      "particleMotion": "deterministic source positions/sizes/sways/durations/delays with continuous fall, sway and rotation",
+      "burstDurationMs": 850,
+      "heartPulseMs": 2000,
+      "buttonSheenMs": 3000,
+      "cardExitMs": 800,
+      "flowerExitMs": 800,
+      "overlayFadeMs": 600,
+      "overlayFadeDelayMs": 450,
+      "overlayDismissDelayMs": 1050
+    },
+    "hero": {
+      "logoMs": 750,
+      "greetingMs": 750,
+      "greetingDelayMs": 80,
+      "coupleMs": 900,
+      "coupleDelayMs": 140,
+      "castleScale": [
+        0.8,
+        1.5
+      ],
+      "castleY": [
+        0,
+        90
+      ],
+      "leftCloudX": [
+        -90,
+        240
+      ],
+      "rightCloudX": [
+        145,
+        -260
+      ],
+      "farLeftCloudX": [
+        -320,
+        190
+      ]
+    },
+    "giftDecorations": {
+      "qasr_green.webp": [
+        6,
+        -22,
+        -18,
+        3.2,
+        0
+      ],
+      "brocade_flower_red.webp": [
+        7,
+        20,
+        24,
+        3.6,
+        0.3
+      ],
+      "double_dragon_green.webp": [
+        5,
+        -18,
+        -14,
+        2.9,
+        0.6
+      ],
+      "chibi_red.webp": [
+        6,
+        14,
+        18,
+        3.4,
+        0.2
+      ],
+      "boho_floral_green.webp": [
+        5,
+        8,
+        12,
+        3.1,
+        0.4
+      ],
+      "silk_flora_brown.webp": [
+        6,
+        -10,
+        -6,
+        3.5,
+        0.7
+      ],
+      "spring_garden_red.webp": [
+        5,
+        -14,
+        -10,
+        3.3,
+        0.1
+      ]
+    },
+    "reducedMotion": "The adapter suppresses source ambient/entrance motion and opens immediately."
   }
 }

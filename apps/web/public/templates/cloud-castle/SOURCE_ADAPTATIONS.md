@@ -1,27 +1,11 @@
 # Cloud Castle source adaptations
 
-The source archive provides `preview-frame.html`, a Next.js server-rendered
-preview snapshot rather than a standalone template package. The app package
-keeps the captured page subtree, its utility styling, local font files, and
-Cloud Castle artwork. It excludes the Next.js runtime, page scripts, external
-music, fixed Chorlove contact details, and snapshot guest names, date, venue,
-gallery photos, and wishes. The source capture remains unchanged.
+The archived source includes the server-rendered `preview-frame.html` and the compiled Cloud Castle page module `Chorlove/Web invitations/_next/static/chunks/14t58uni224ve.js` (module 909129; 58,812 bytes; SHA-256 `81f9356f44be09216be952fd5a90739b0796f8825c9c7c398479b3d8205cee6b`). The module contains the original component, envelope interaction, particle system, hero motion, scroll transforms, and section reveal behavior. The app package keeps the captured page subtree, utility styling, local font files, and artwork, and adapts those source behaviors without copying the Chorlove Next.js site runtime. External music, fixed Chorlove contact details, and snapshot guest names, date, venue, gallery photos, and wishes are excluded. The original capture and compiled source remain unchanged.
 
-`bridge.js` maps the shared invitation through `makeLegacyData` and rebinds the
-captured nodes for the couple, event, date, program, venue, gallery, story,
-contacts, gift, RSVP, guest wishes, and language. The creator preview and public
-route use the same renderer. RSVP and wish submissions use the existing public
-API routes; preview submissions are disabled. Music uses the shared Emotional
-Piano only in catalog/selection preview and otherwise uses the creator's
-selected track after opening the invitation. OS and preview reduced-motion
-settings suppress the adapted entrance reveal.
+`bridge.js` maps the shared invitation through `makeLegacyData` and rebinds the captured nodes for the couple, event, date, program, venue, gallery, story, contacts, gift, RSVP, guest wishes, and language. The creator preview and public route use the same renderer. RSVP and wish submissions use existing public API routes; preview submissions are disabled. Music uses the shared Emotional Piano only in catalog/selection preview and otherwise uses the creator-selected track after opening the invitation.
 
-The snapshot contains its final DOM and inline reveal starting styles but not
-the source component or original event handlers. The adapter preserves the
-captured layout and visual assets while reconnecting the supported controls.
-Unrepresented source controls remain a release-gate review item until browser
-inspection confirms the complete interaction inventory.
+The adapter reproduces the source's 32 deterministic flower particles, two-second heart pulse, three-second button sheen, 0.8-second envelope-card exit, 0.8-second floral-edge scale/fade, 0.85-second particle burst, and 0.6-second delayed overlay fade. It also applies the source hero entrance values: logo 0.75 seconds; greeting 0.75 seconds after 0.08 seconds; couple 0.9 seconds after 0.14 seconds. Cloud/castle scroll transforms follow source ranges: castle scale 0.8–1.5 and y 0–90px; left cloud -90–240px, far-left cloud -320–190px, right cloud 145–-260px. The seven gift-box ornaments use their original float/rotate loops, durations, and delays. Other captured reveal elements use the source component's common 0.48-second transition. OS and preview reduced-motion settings open immediately and suppress ambient and entrance motion. Exact source parameters are listed in `source/provenance.json`.
 
 ## Catalog artwork
 
-`preview-opening.png` is a clean 720×1280 (9:16) capture of the packaged snapshot renderer's post-envelope opening hero. It uses the canonical catalog preview fixture names and the captured Cloud Castle page markup, styles, fonts, and artwork. The language selector, music control, and browser scrollbar are absent. The former `preview-browser-capture.jpg` was a narrow application screenshot and is retained only as superseded provenance; it is no longer used by the catalog. The source archive contains a server-rendered snapshot, so this image verifies the opening composition and its crop only. The archive does not provide the original component/runtime handlers, and this artwork does not establish interaction or animation parity.
+`preview-opening.png` is a clean 720×1280 (9:16) capture of the packaged renderer's post-envelope opening hero. It uses canonical catalog preview fixture names and captured Cloud Castle markup, styles, fonts, and artwork. The language selector, music control, and browser scrollbar are absent. The former `preview-browser-capture.jpg` is retained only as superseded QA provenance and is not used by the catalog. The cover records source markup and artwork; compiled animation/interaction provenance is recorded above and in `source/provenance.json`.
