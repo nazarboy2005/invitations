@@ -12,6 +12,8 @@
   };
   let payload;
   let timer;
+  let motionPrepared = false;
+  let openingStarted = false;
   const $ = (selector, base = root) => base.querySelector(selector);
   const tx = (node, value) => { if (node) node.textContent = value == null ? "" : String(value); };
   const hide = (node, value) => { if (node) node.hidden = Boolean(value); };
@@ -24,35 +26,272 @@
   };
   const section = (index) => sections[index];
 
-  function prepareMotion() {
-    const intro = root.querySelector(":scope > div.fixed.inset-0.z-50");
-    intro?.remove();
-    for (const node of root.querySelectorAll('[style*="opacity:0"]')) {
-      const declarations = (node.getAttribute("style") || "").split(";").filter(Boolean);
-      const keep = declarations.filter((item) => !/^\s*(opacity|filter|transform)\s*:/i.test(item));
-      if (keep.length) node.setAttribute("style", keep.join(";")); else node.removeAttribute("style");
-      node.dataset.gwReveal = "";
+  function clearMotionStyle(node) {
+    const initial = {
+      opacity: node.style.opacity,
+      filter: node.style.filter,
+      transform: node.style.transform,
+    };
+    node.style.removeProperty("opacity");
+    node.style.removeProperty("filter");
+    node.style.removeProperty("transform");
+    const base = getComputedStyle(node);
+    return {
+      ...initial,
+      baseTransform: base.transform === "none" ? "" : base.transform,
+      baseFilter: base.filter === "none" ? "" : base.filter,
+    };
+  }
+
+  function animateSourceElement(node, options = {}) {
+    if (!node || typeof node.animate !== "function") return;
+    const initial = clearMotionStyle(node);
+    const startTransform = [initial.transform, initial.baseTransform].filter(Boolean).join(" ") || "none";
+    const endTransform = initial.baseTransform || "none";
+    const frames = [{
+      ...(initial.opacity ? { opacity: initial.opacity } : {}),
+      ...(initial.filter ? { filter: initial.filter } : {}),
+      ...(options.fromTransform ? { transform: [options.fromTransform, initial.baseTransform].filter(Boolean).join(" ") || "none" } : { transform: startTransform }),
+    }, {
+      ...(options.toOpacity != null ? { opacity: options.toOpacity } : initial.opacity ? { opacity: 1 } : {}),
+      ...(initial.filter ? { filter: initial.baseFilter || "none" } : {}),
+      transform: options.toTransform || endTransform,
+    }];
+    const animation = node.animate(frames, {
+      duration: options.duration ?? 900,
+      delay: options.delay ?? 0,
+      easing: options.easing || "ease-out",
+      fill: "both",
+    });
+    animation.onfinish = () => {
+      animation.cancel();
+      if (initial.opacity) node.style.opacity = String(options.toOpacity ?? 1);
+      if (initial.filter) node.style.filter = initial.baseFilter;
+    };
+    return animation;
+  }
+
+  function appendOpening(p, c) {
+    const overlay = document.createElement("div");
+    overlay.className = "fixed inset-0 z-50 pointer-events-none flex items-center justify-center bg-[#2d321b] gw-source-opening";
+    overlay.dataset.gwSourceOpening = "";
+    overlay.style.backgroundColor = "#2d321b";
+    overlay.style.opacity = "1";
+
+    const top = document.createElement("div");
+    top.className = "absolute inset-0 origin-top bg-white";
+    top.style.backgroundColor = "#fff";
+    top.style.transformOrigin = "top";
+    top.style.transform = "scaleY(1)";
+    const bottom = document.createElement("div");
+    bottom.className = "absolute inset-0 origin-bottom bg-[#666947]";
+    bottom.style.backgroundColor = "#666947";
+    bottom.style.transformOrigin = "bottom";
+    bottom.style.transform = "scaleY(1)";
+
+    const title = document.createElement("div");
+    title.className = "relative z-10 text-center text-white px-8 gw-opening-copy";
+    title.style.opacity = "0";
+    title.style.transform = "translateY(20px) scale(.86)";
+    const icon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    icon.setAttribute("viewBox", "0 0 24 24");
+    icon.setAttribute("width", "28");
+    icon.setAttribute("height", "28");
+    icon.setAttribute("fill", "none");
+    icon.setAttribute("stroke", "currentColor");
+    icon.setAttribute("stroke-width", "2");
+    icon.setAttribute("stroke-linecap", "round");
+    icon.setAttribute("stroke-linejoin", "round");
+    icon.setAttribute("aria-hidden", "true");
+    icon.classList.add("mx-auto", "mb-5", "text-green-100");
+    icon.classList.add("gw-opening-sparkles");
+    const rays = document.createElementNS(icon.namespaceURI, "path");
+    rays.setAttribute("d", "M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z");
+    const shine = document.createElementNS(icon.namespaceURI, "path");
+    shine.setAttribute("d", "M20 2v4M22 4h-4");
+    const dot = document.createElementNS(icon.namespaceURI, "circle");
+    dot.setAttribute("cx", "4"); dot.setAttribute("cy", "20"); dot.setAttribute("r", "2");
+    icon.append(rays, shine, dot);
+    const label = document.createElement("p");
+    label.className = "text-[10px] uppercase tracking-[0.45em] text-green-100/80";
+    label.dataset.gwOpeningLabel = "";
+    const names = document.createElement("h2");
+    names.className = "mt-5 text-4xl italic leading-tight";
+    names.dataset.gwOpeningNames = "";
+    title.append(icon, label, names);
+    overlay.append(top, bottom, title);
+    document.body.append(overlay);
+    updateOpeningCopy(p, c);
+    return { overlay, top, bottom, title };
+  }
+
+  function updateOpeningCopy(p, c) {
+    const label = document.querySelector("[data-gw-opening-label]");
+    const names = document.querySelector("[data-gw-opening-names]");
+    tx(label, c.title);
+    if (!names) return;
+    names.replaceChildren();
+    names.append(document.createTextNode(p.data?.groom || ""), document.createTextNode(" "));
+    const ampersand = document.createElement("span");
+    ampersand.className = "text-green-100";
+    ampersand.textContent = "&";
+    names.append(ampersand, document.createTextNode(" "), document.createTextNode(p.data?.bride || ""));
+  }
+
+  function playOpening(p, c, reduced) {
+    if (openingStarted) { updateOpeningCopy(p, c); return; }
+    openingStarted = true;
+    const opening = appendOpening(p, c);
+    if (reduced) { opening.overlay.remove(); return; }
+    const easing = "cubic-bezier(.83,0,.17,1)";
+    opening.top.animate([{ transform: "scaleY(1)" }, { transform: "scaleY(0)" }], { duration: 1000, delay: 1450, easing, fill: "forwards" });
+    opening.bottom.animate([{ transform: "scaleY(1)" }, { transform: "scaleY(0)" }], { duration: 1000, delay: 1650, easing, fill: "forwards" });
+    opening.title.animate([
+      { opacity: 0, transform: "translateY(20px) scale(.86)" },
+      { opacity: 1, transform: "translateY(0) scale(1)" },
+      { opacity: 1, transform: "translateY(0) scale(1)" },
+      { opacity: 0, transform: "translateY(-18px) scale(1.08)" },
+    ], { duration: 2000, easing: "ease-out", fill: "forwards" });
+    opening.overlay.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 800, delay: 2150, easing: "ease-in-out", fill: "forwards" });
+    window.setTimeout(() => opening.overlay.remove(), 3000);
+  }
+
+  function revealOptions(node, initialTransform) {
+    if (initialTransform.includes("scale(0.78) rotate(-8deg)")) return { duration: 1000, easing: "cubic-bezier(.22,1,.36,1)" };
+    if (initialTransform.includes("translateY(56px) scale(0.94)")) return { duration: 950, easing: "cubic-bezier(.22,1,.36,1)" };
+    if (initialTransform.includes("translateY(54px) scale(0.94)")) return { duration: 950, easing: "cubic-bezier(.22,1,.36,1)" };
+    if (initialTransform.includes("translateY(-35px) scale(0.9)") || initialTransform.includes("translateY(35px) scale(0.9)")) return { duration: 800, delay: 250, easing: "ease" };
+    if (initialTransform.includes("translateY(24px)")) return { duration: 700, delay: node.tagName === "LI" ? [...node.parentElement.children].indexOf(node) * 120 : 0, easing: "ease-out" };
+    if (initialTransform.includes("translateY(30px)")) return { duration: 700, delay: node.tagName === "BUTTON" ? ([...node.parentElement.children].indexOf(node) % 2) * 120 : 0, easing: "ease-out" };
+    if (initialTransform.includes("translateY(18px) scale(0.6)")) return { duration: 550, delay: [...node.parentElement.children].indexOf(node) * 90, easing: "ease-out" };
+    if (initialTransform.includes("translateY(18px) scale(0.9)")) return { duration: 550, delay: [...node.parentElement.children].indexOf(node) * 90, easing: "ease-out" };
+    if (initialTransform.includes("translateY(40px) rotate(-4deg)")) return { duration: 1000, easing: "cubic-bezier(.22,1,.36,1)" };
+    if (initialTransform.includes("translateX(24px)") || initialTransform.includes("translateX(-24px)")) return { duration: 600, easing: "ease-out" };
+    if (node.style.filter.includes("blur(8px)")) {
+      const peers = [...(node.parentElement?.children || [])].filter((peer) => peer.style.opacity === "0" && peer.style.filter.includes("blur(8px)"));
+      const index = peers.indexOf(node);
+      return { duration: 900, delay: peers.length > 1 ? 100 + index * 140 : 0, easing: "ease-out" };
     }
-    const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    return { duration: 900, easing: "ease-out" };
+  }
+
+  function playHeroMotion(reduced) {
+    const hero = section(0);
+    if (!hero) return;
+    const find = (includes) => [...hero.querySelectorAll("div")].find((node) => String(node.className).includes(includes));
+    const background = find("h-[43vh]");
+    const artwork = find("top-[22vh]");
+    const flowers = find("bottom-8 left-0");
+    if (reduced) {
+      for (const node of [background, artwork, flowers, ...hero.querySelectorAll('[style*="translateX(-105%)"]'), ...hero.querySelectorAll(".pt-5.text-green-950\\/70")]) {
+        if (!node) continue;
+        node.style.removeProperty("opacity"); node.style.removeProperty("transform");
+      }
+      return;
+    }
+    animateSourceElement(background, { duration: 1400, easing: "cubic-bezier(.22,1,.36,1)" });
+    animateSourceElement(artwork, { duration: 1350, delay: 350, easing: "cubic-bezier(.22,1,.36,1)" });
+    animateSourceElement(flowers, { duration: 1000, delay: 1000, easing: "ease" });
+    const divider = hero.querySelector('[style*="translateX(-105%)"]');
+    if (divider) animateSourceElement(divider, { fromTransform: "translateX(-105%)", toOpacity: null, duration: 900, delay: 1250, easing: "cubic-bezier(.22,1,.36,1)" });
+    const chevron = hero.querySelector(".pt-5.text-green-950\\/70");
+    if (chevron) {
+      chevron.style.removeProperty("opacity"); chevron.style.removeProperty("transform");
+      chevron.animate([{ opacity: 0, translate: "0 -8px" }, { opacity: 1, translate: "0 0" }], { duration: 350, delay: 2400, easing: "ease-out", fill: "forwards" });
+      chevron.animate([{ translate: "0 0" }, { translate: "0 8px" }, { translate: "0 0" }], { duration: 1800, delay: 2400, easing: "ease-in-out", iterations: Infinity });
+    }
+    if (artwork?.firstElementChild) artwork.firstElementChild.animate([{ translate: "0 0" }, { translate: "0 -10px" }, { translate: "0 0" }], { duration: 6000, easing: "ease-in-out", iterations: Infinity });
+    if (flowers) {
+      flowers.children[0]?.animate([{ rotate: "0deg" }, { rotate: "-2deg" }, { rotate: "0deg" }], { duration: 5000, easing: "ease-in-out", iterations: Infinity });
+      flowers.children[1]?.animate([{ rotate: "0deg" }, { rotate: "2deg" }, { rotate: "0deg" }], { duration: 5500, easing: "ease-in-out", iterations: Infinity });
+    }
+    const ring = hero.querySelector('img[src$="/rings.webp"]');
+    if (ring?.parentElement) ring.parentElement.animate([{ scale: 1, rotate: "0deg" }, { scale: 1.08, rotate: "-6deg" }, { scale: 1, rotate: "6deg" }, { scale: 1, rotate: "0deg" }], { duration: 3800, easing: "ease-in-out", iterations: Infinity });
+  }
+
+  function playSourceDecorations(reduced) {
+    if (reduced) return;
+    const stars = [...root.querySelectorAll('div[style*="left:"][style*="top:"]')].filter((node) => node.style.left.endsWith("%") && node.style.top.endsWith("%") && node.querySelector("svg"));
+    stars.forEach((star, index) => {
+      const delay = (index % 12) * 450, duration = 3600 + (index % 7) * 550, drift = 8 + (index % 4) * 5;
+      star.style.removeProperty("opacity"); star.style.removeProperty("transform");
+      star.animate([{ opacity: 0, scale: 0.35, rotate: "-25deg" }, { opacity: 0.9, scale: 1.25, rotate: "10deg" }, { opacity: 0.35, scale: 0.72, rotate: "35deg" }, { opacity: 1, scale: 1, rotate: "0deg" }, { opacity: 0, scale: 0.35, rotate: "-25deg" }], { duration, delay, easing: "ease-in-out", iterations: Infinity });
+      star.animate([{ translate: "0 0" }, { translate: `0 -${drift}px` }, { translate: "0 0" }], { duration, delay, easing: "ease-in-out", iterations: Infinity });
+    });
+    for (const sectionNode of sections) {
+      for (const side of ["-left-44", "-right-44"]) {
+        const cloud = [...sectionNode.querySelectorAll("div")].find((node) => String(node.className).includes(side));
+        const moving = cloud?.firstElementChild;
+        if (!moving) continue;
+        const values = side === "-left-44" ? ["-14px -5px", "16px 8px", "-14px -5px"] : ["14px 8px", "-16px -5px", "14px 8px"];
+        moving.animate(values.map((translate) => ({ translate })), { duration: side === "-left-44" ? 11000 : 13000, easing: "ease-in-out", iterations: Infinity });
+      }
+    }
+  }
+
+  function prepareMotion(p, c) {
+    if (motionPrepared) return;
+    motionPrepared = true;
+    const reduced = Boolean(p.reducedMotion) || matchMedia("(prefers-reduced-motion: reduce)").matches || new URLSearchParams(location.search).get("qaReducedMotion") === "1";
+    playOpening(p, c, reduced);
+    playHeroMotion(reduced);
+    playSourceDecorations(reduced);
+    const hero = section(0);
+    const reveals = [];
+    for (const node of root.querySelectorAll('[style*="opacity:0"]')) {
+      if (node.style.left.endsWith("%") && node.style.top.endsWith("%") && node.querySelector("svg")) continue;
+      if (hero?.contains(node) && (String(node.className).includes("h-[43vh]") || String(node.className).includes("top-[22vh]") || String(node.className).includes("bottom-8 left-0"))) continue;
+      const initialTransform = node.style.transform || "";
+      const initialFilter = node.style.filter || "";
+      if (reduced) {
+        node.style.removeProperty("opacity"); node.style.removeProperty("filter"); node.style.removeProperty("transform");
+        continue;
+      }
+      const options = revealOptions(node, initialTransform);
+      const state = clearMotionStyle(node);
+      node.dataset.gwSourceReveal = "";
+      reveals.push({ node, options, state });
+    }
+    const springs = [...root.querySelectorAll('[style*="scale(0.55)"]')].map((node) => ({ node, state: clearMotionStyle(node) }));
+    if (reduced) springs.forEach(({ node }) => { node.style.removeProperty("transform"); });
+    const animateReveal = ({ node, options, state }) => {
+      const baselineTransform = state.baseTransform || "none";
+      const initialTransform = [state.transform, state.baseTransform].filter(Boolean).join(" ") || baselineTransform;
+      const animation = node.animate([
+        { opacity: 0, ...(state.filter ? { filter: state.filter } : {}), transform: initialTransform },
+        { opacity: 1, ...(state.filter ? { filter: state.baseFilter || "none" } : {}), transform: baselineTransform },
+      ], { duration: options.duration, delay: options.delay, easing: options.easing, fill: "both" });
+      animation.onfinish = () => { animation.cancel(); node.style.opacity = "1"; if (state.filter) node.style.filter = state.baseFilter; };
+    };
     if (reduced || !("IntersectionObserver" in window)) {
-      root.querySelectorAll("[data-gw-reveal]").forEach((node) => node.classList.add("gw-revealed"));
+      reveals.forEach(animateReveal);
+      root.querySelectorAll('[style*="scale(0.55)"]').forEach((node) => { node.style.removeProperty("transform"); });
       return;
     }
     const observer = new IntersectionObserver((entries) => {
       for (const entry of entries) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("gw-revealed");
-          observer.unobserve(entry.target);
+        if (!entry.isIntersecting) continue;
+        const reveal = reveals.find((item) => item.node === entry.target);
+        if (reveal) animateReveal(reveal);
+        const spring = springs.find((item) => item.node === entry.target);
+        if (spring) {
+          const baseline = spring.state.baseTransform || "none";
+          const start = [spring.state.transform, spring.state.baseTransform].filter(Boolean).join(" ") || baseline;
+          const animation = spring.node.animate([{ transform: start }, { transform: baseline }], { duration: 700, easing: "cubic-bezier(.34,1.56,.64,1)", fill: "both" });
+          animation.onfinish = () => animation.cancel();
         }
+        observer.unobserve(entry.target);
       }
-    }, { root, threshold: 0.08 });
-    root.querySelectorAll("[data-gw-reveal]").forEach((node) => observer.observe(node));
+    }, { root, threshold: 0.35 });
+    reveals.forEach(({ node }) => observer.observe(node));
+    springs.forEach(({ node }) => observer.observe(node));
   }
 
   function render(p) {
     payload = p;
     const d = p.data || {};
     const c = copy[p.locale] || copy["uz-Latn"];
+    prepareMotion(p, c);
     document.documentElement.lang = p.locale === "uz-Latn" ? "uz" : p.locale;
     tx(section(0)?.querySelector("p.text-xs"), d.greeting || c.welcome);
     tx(section(0)?.querySelector("h1"), d.title || c.title);
@@ -292,6 +531,5 @@
   }
 
   addEventListener("message", (event) => { if (event.source === parent && event.origin === location.origin && event.data?.type === `${id}:update`) render(event.data.payload); });
-  prepareMotion();
   try { const initial = JSON.parse(window.name); if (initial?.type === `${id}:update`) render(initial.payload); } catch {}
 })();

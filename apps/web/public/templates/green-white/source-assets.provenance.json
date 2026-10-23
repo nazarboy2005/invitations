@@ -71,6 +71,20 @@
       "archiveFile": "Chorlove/Web invitations/_next/static/chunks/0ly1y_qxlqlf..css"
     }
   ],
+  "motionSource": {
+    "archiveFile": "Chorlove/Web invitations/_next/static/chunks/12pjntsqxzj70.js",
+    "sha256": "8f9857bd0e9308808c0d876bed05168962a61e988afa1c8936a5c37689317c9f",
+    "component": "Green White page module",
+    "restoredBehaviors": [
+      "two-curtain opening with the source's 1.45s/1.65s delays and 1s cubic easing",
+      "2s invitation-label and couple-name reveal followed by the source 0.8s overlay fade",
+      "42 continuously drifting and rotating star particles with source stagger, durations and drift distances",
+      "11s and 13s opposing cloud loops",
+      "1.4s hero background, 1.35s rising cover illustration, delayed lower floral entrance, illustration float, paired flower sway, divider slide and chevron loop",
+      "source-specific once-only scroll reveals, flower/card/list/gallery/swatches timings, and the timeline spring"
+    ],
+    "platformAdaptation": "Reduced motion skips the opening and loops and clears source hidden states; reveal timing retains the source choreography for normal motion."
+  },
   "excludedSnapshotAssets": [
     "images/templates/orchid-amplop/gallery-1.webp",
     "images/templates/orchid-amplop/gallery-2.webp",

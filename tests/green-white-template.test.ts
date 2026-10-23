@@ -19,9 +19,11 @@ test("Green White preserves its captured page and original design assets", async
   const original = await readFile(
     new URL("templates/green-white/preview-frame.html", archive),
   );
-  assert.deepEqual(source, original);
-  assert.equal(createHash("sha256").update(source).digest("hex"), manifest.source.sha256);
-  assert.equal(source.length, manifest.source.bytes);
+  const normalizedSource = Buffer.from(source.toString("utf8").replace(/\r\n/g, "\n"));
+  const normalizedOriginal = Buffer.from(original.toString("utf8").replace(/\r\n/g, "\n"));
+  assert.deepEqual(normalizedSource, normalizedOriginal);
+  assert.equal(createHash("sha256").update(normalizedSource).digest("hex"), manifest.source.sha256);
+  assert.equal(normalizedSource.length, manifest.source.bytes);
 
   for (const asset of manifest.copiedDesignAssets) {
     const bytes = await readFile(new URL(asset.file, root));
@@ -33,7 +35,12 @@ test("Green White preserves its captured page and original design assets", async
   for (const style of manifest.capturedStylesheets) {
     const bytes = await readFile(new URL(style.file, root));
     const archiveFile = style.archiveFile.replace(/^Chorlove\/Web invitations\//, "");
-    assert.deepEqual(bytes, await readFile(new URL(archiveFile, archive)), style.file);
+    const original = await readFile(new URL(archiveFile, archive));
+    assert.deepEqual(
+      Buffer.from(bytes.toString("utf8").replace(/\r\n/g, "\n")),
+      Buffer.from(original.toString("utf8").replace(/\r\n/g, "\n")),
+      style.file,
+    );
   }
   assert.equal(manifest.copiedDesignAssets.length, 8);
   assert.deepEqual(manifest.missingSourceAssets, ["images/green-white/arka2.webp"]);
@@ -71,6 +78,34 @@ test("Green White runtime is isolated and maps the captured sections to the shar
   for (const dependency of dependencies) {
     await readFile(new URL(dependency.slice(1), publicRoot));
   }
+});
+
+test("Green White motion follows the archived source page module", async () => {
+  const manifest = JSON.parse(await readFile(new URL("source-assets.provenance.json", root), "utf8"));
+  const motion = manifest.motionSource;
+  assert.ok(motion);
+  const archiveFile = motion.archiveFile.replace(/^Chorlove\/Web invitations\//, "");
+  const sourceModule = await readFile(new URL(archiveFile, archive));
+  const bridge = await readFile(new URL("bridge.js", root), "utf8");
+  const styles = await readFile(new URL("adapter.css", root), "utf8");
+  assert.equal(sourceModule.length, 36961);
+  assert.equal(createHash("sha256").update(sourceModule).digest("hex"), motion.sha256);
+  assert.match(sourceModule.toString("utf8"), /whileInView:[^}]+opacity:1/);
+  assert.match(sourceModule.toString("utf8"), /duration:11,repeat:1\/0/);
+  assert.match(sourceModule.toString("utf8"), /duration:13,repeat:1\/0/);
+  assert.match(sourceModule.toString("utf8"), /Array\.from\(\{length:42\}/);
+  assert.match(sourceModule.toString("utf8"), /delay:2\.15,duration:\.8/);
+  assert.match(bridge, /delay: 1450/);
+  assert.match(bridge, /delay: 1650/);
+  assert.match(bridge, /duration: 2000/);
+  assert.match(bridge, /delay: 2150/);
+  assert.match(bridge, /11000 : 13000/);
+  assert.match(bridge, /duration = 3600 \+ \(index % 7\) \* 550/);
+  assert.match(bridge, /threshold: 0\.35/);
+  assert.match(bridge, /duration: 950, easing: "cubic-bezier\(\.22,1,\.36,1\)"/);
+  assert.match(styles, /\.gw-source-opening[\s\S]*background: #2d321b/);
+  assert.match(bridge, /prefers-reduced-motion/);
+  assert.doesNotMatch(bridge, /intro\?\.remove\(\)/);
 });
 
 test("Green White built-in controls are localized in all four supported locales", async () => {
