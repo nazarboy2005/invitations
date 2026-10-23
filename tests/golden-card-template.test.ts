@@ -58,7 +58,10 @@ test("Golden Card bridge maps authored invitation data and honors reduced motion
   assert.match(bridge, /\$\{templateId\}:language/);
   assert.match(html, /data-golden="groom"/);
   assert.match(html, /data-golden="bride"/);
+  assert.match(html, /data-golden="invocation"/);
   assert.match(html, /data-golden-map/);
+  assert.match(bridge, /Mehribon va rahmli Alloh nomi bilan\./);
+  assert.match(bridge, /data\.message \|\| words\.defaultMessage/);
   assert.doesNotMatch(html, /<script[^>]+src=["']https?:/i);
 });
 

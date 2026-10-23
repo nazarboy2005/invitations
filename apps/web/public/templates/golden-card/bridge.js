@@ -5,6 +5,8 @@
   const copy = {
     "uz-Latn": {
       greeting: "Assalomu alaykum, aziz mehmon",
+      invocation: "Mehribon va rahmli Alloh nomi bilan.",
+      defaultMessage: "Sizni hayotimizdagi eng baxtli kun — to'yimizga taklif qilamiz",
       open: "Ochish uchun bosing",
       map: "Xaritada ko\u02bbrish",
       musicOn: "Musiqani o\u02bbchirish",
@@ -13,6 +15,8 @@
     },
     "uz-Cyrl": {
       greeting: "\u0410\u0441\u0441\u0430\u043b\u043e\u043c\u0443 \u0430\u043b\u0430\u0439\u043a\u0443\u043c, \u0430\u0437\u0438\u0437 \u043c\u0435\u04b3\u043c\u043e\u043d",
+      invocation: "\u041c\u0435\u04b3\u0440\u0438\u0431\u043e\u043d \u0432\u0430 \u0440\u0430\u04b3\u043c\u043b\u0438 \u0410\u043b\u043b\u043e\u04b3 \u043d\u043e\u043c\u0438 \u0431\u0438\u043b\u0430\u043d.",
+      defaultMessage: "\u0421\u0438\u0437\u043d\u0438 \u04b3\u0430\u0451\u0442\u0438\u043c\u0438\u0437\u0434\u0430\u0433\u0438 \u044d\u043d\u0433 \u0431\u0430\u0445\u0442\u043b\u0438 \u043a\u0443\u043d \u2014 \u0442\u045e\u0439\u0438\u043c\u0438\u0437\u0433\u0430 \u0442\u0430\u043a\u043b\u0438\u0444 \u049b\u0438\u043b\u0430\u043c\u0438\u0437",
       open: "\u041e\u0447\u0438\u0448 \u0443\u0447\u0443\u043d \u0431\u043e\u0441\u0438\u043d\u0433",
       map: "\u04b2\u0430\u0440\u0438\u0442\u0430\u0434\u0430 \u043a\u045e\u0440\u0438\u0448",
       musicOn: "\u041c\u0443\u0441\u0438\u049b\u0430\u043d\u0438 \u045e\u0447\u0438\u0440\u0438\u0448",
@@ -21,6 +25,8 @@
     },
     en: {
       greeting: "Welcome, dear guest",
+      invocation: "In the Name of Allah, the most Gracious, the most Merciful.",
+      defaultMessage: "We would be delighted with your attendance at the wedding of",
       open: "Tap to open",
       map: "View on map",
       musicOn: "Turn music off",
@@ -29,6 +35,8 @@
     },
     ru: {
       greeting: "\u0417\u0434\u0440\u0430\u0432\u0441\u0442\u0432\u0443\u0439\u0442\u0435, \u0434\u043e\u0440\u043e\u0433\u043e\u0439 \u0433\u043e\u0441\u0442\u044c",
+      invocation: "\u0418\u043c\u0435\u043d\u0435\u043c \u0410\u043b\u043b\u0430\u0445\u0430, \u041c\u0438\u043b\u043e\u0441\u0442\u0438\u0432\u043e\u0433\u043e \u0438 \u041c\u0438\u043b\u043e\u0441\u0435\u0440\u0434\u043d\u043e\u0433\u043e.",
+      defaultMessage: "\u0411\u0443\u0434\u0435\u043c \u0440\u0430\u0434\u044b \u0432\u0430\u0448\u0435\u043c\u0443 \u043f\u0440\u0438\u0441\u0443\u0442\u0441\u0442\u0432\u0438\u044e \u043d\u0430 \u043d\u0430\u0448\u0435\u0439 \u0441\u0432\u0430\u0434\u044c\u0431\u0435",
       open: "\u041d\u0430\u0436\u043c\u0438\u0442\u0435, \u0447\u0442\u043e\u0431\u044b \u043e\u0442\u043a\u0440\u044b\u0442\u044c",
       map: "\u041f\u043e\u0441\u043c\u043e\u0442\u0440\u0435\u0442\u044c \u043d\u0430 \u043a\u0430\u0440\u0442\u0435",
       musicOn: "\u0412\u044b\u043a\u043b\u044e\u0447\u0438\u0442\u044c \u043c\u0443\u0437\u044b\u043a\u0443",
@@ -79,7 +87,8 @@
     text('[data-golden="open"]', words.open);
     text('[data-golden="groom"]', data.groom || "");
     text('[data-golden="bride"]', data.bride || "");
-    text('[data-golden="message"]', data.message || "");
+    text('[data-golden="invocation"]', words.invocation);
+    text('[data-golden="message"]', data.message || words.defaultMessage);
 
     const dateText = data.date?.long
       ? `${data.date.long}${data.date.time ? `, ${data.date.time}` : ""}`
@@ -95,7 +104,7 @@
     if (address) address.hidden = !addressText;
 
     const message = root.querySelector('[data-golden="message"]');
-    if (message) message.closest("p").hidden = !data.message;
+    if (message) message.closest("p").hidden = false;
 
     const map = root.querySelector("[data-golden-map]");
     const mapUrl = data.venue?.mapUrl ?? "";
