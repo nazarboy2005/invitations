@@ -1485,6 +1485,20 @@ export const TEMPLATES: TemplateDefinition[] = [
     accent: "#798866",
     published: false,
   },
+  {
+    id: "invitate-palov",
+    name: "Invitate Palov",
+    description:
+      "Peshtoq naqshlari, palov bezagi va nahorgi osh uchun taklifnoma.",
+    previewEventType: "osh",
+    categoryIds: ["osh"],
+    supportedEventTypes: ["osh"],
+    priceMinor: 15000000,
+    currency: "UZS",
+    accent: "#2d4a34",
+    previewImage: "/templates/invitate-palov/preview.png",
+    published: true,
+  },
 ];
 export const templateById = (id: string) =>
   TEMPLATES.find((item) => item.id === id);

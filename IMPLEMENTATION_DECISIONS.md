@@ -663,6 +663,12 @@ Suggested schema extensions (pending final migration design):
 - Guests can upload a JPG/PNG/WebP image or PDF with the names of the givers when the creator enables receipt uploads. Keep files private to the invitation owner; uploads never prove receipt of money.
 - The owner reviews receipts in the website dashboard and explicitly marks received/problem after checking their account. Show the absence of AI/bank verification to guests and owners. Do not report successful Telegram delivery when none occurred.
 - Associate a verified personalized guest token when supplied, rate-limit uploads, and deduplicate identical files per invitation. Disabling uploads preserves existing private receipts.
+
+## Invitate Palov event compatibility (2026-10-23)
+
+- The Invitate manifest resolves this design to `Web invitations/invitate.uz/palov.html`. Its explicit “Nahorgi osh” content and Palov artwork establish event support `osh` only and category `osh`; category assignment does not imply event support. Its app ID is `invitate-palov`, distinct from Chorlove’s existing `palov`.
+- The complete captured page, local font files, and API-backed adapter are packaged under `apps/web/public/templates/invitate-palov`. The catalog image is a 480×860 capture of the actual adapted opening rendered with `createTemplatePreviewSample("invitate-palov")`; its hash and capture method are recorded in `source-provenance.json`. Catalog preview and public invitation dispatch both use the shared `InvitateInvitation` renderer.
+- Focused checks pass 5/5, the production build passes, browser preview and RSVP validation were verified, and the public catalog API returns the image with HTTP 200. Additive migration `0132_publish_invitate_palov.sql` was applied alone under the migration lock; the database and catalog API confirm the template published with `osh` category/event support at 150,000 UZS. No external deployment or live payment activation is included.
 - User request: audit every editor input and make publication work locally without unavailable R2 setup. Implementation choice: private local storage for local development, retaining R2 for deployment. Store bytes outside public/, keep credentials/settings in ignored .env.local, and preserve ownership/readiness checks. Refuse local disk on Vercel; production self-hosting must explicitly configure persistent storage and backups.
 - Owner RSVP responses and wish approval/hiding must be available through the website. Do not leave the wish-approval promise dependent on an absent notification worker.
 

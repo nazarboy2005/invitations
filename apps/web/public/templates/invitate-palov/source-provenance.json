@@ -1,0 +1,37 @@
+{
+  "provider": "Invitate",
+  "manifest": "Invitate/capture-manifest.json",
+  "page": "https://invitate.uz/palov.html",
+  "manifestFile": "Web invitations/invitate.uz/palov.html",
+  "sourceCaptureUntouched": true,
+  "captureFiles": [
+    {
+      "path": "Web invitations/invitate.uz/palov.html",
+      "sha256": "06d19f3d4871f2d3604a3b90db970c5c5190929e288f76c97c0be7ce910ba2fd"
+    },
+    {
+      "path": "Web invitations/invitate.uz/assets/images/palov.png",
+      "sha256": "6ff6955eb9f53d994f4f9052f3c000201a2e0a364a16c295990f5224399f8077"
+    },
+    {
+      "path": "Web invitations/fonts.googleapis.com/css2__8254095ff41b2a53",
+      "sha256": "587935020f49fba9909419cd614e5d7781e4a3de0d29b39d248bd19d6bfbdffc"
+    }
+  ],
+  "localAdaptations": [
+    "Inline source page and SVG artwork retained in index.html; sample content, analytics, and simulated RSVP behavior removed.",
+    "Captured Google Fonts CSS copied with font paths rewritten to local files; all requested font subsets bundled.",
+    "Contract-bound data, localized controls, countdown, API RSVP, and user-initiated music implemented in assets/js/palov-adapter.js."
+  ],
+  "localFontCssSource": "Web invitations/fonts.googleapis.com/css2__8254095ff41b2a53",
+  "fontStylesheetUrl": "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Marcellus&display=swap",
+  "previewCapture": {
+    "asset": "preview.png",
+    "sha256": "17B8250BFCD4545D82F0AF77D30D043BB5ECB3E9E198601D21365B362447A62A",
+    "dimensions": "480x860",
+    "capturedAt": "2026-10-23",
+    "renderer": "invitate-palov/index.html with palov-adapter.js",
+    "fixture": "createTemplatePreviewSample(\"invitate-palov\") from apps/web/src/modules/catalog/preview-sample.ts",
+    "method": "Local Edge headless screenshot of the actual iframe page with the canonical preview payload; fixture remains ephemeral."
+  }
+}
