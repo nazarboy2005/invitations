@@ -29,7 +29,7 @@
     "fixture": "Shared catalog preview sample (uz-Latn names and wedding date); ephemeral fixture, not invitation data.",
     "render": "Headless Chrome, 450x722 CSS pixels at device scale factor 2; opening section only, no browser chrome.",
     "dimensions": "900x1444",
-    "sha256": "0a8afa6d3be43aaab350fcc6785503cbb90a037c94140bb7abd2fda2e7075721"
+    "sha256": "d4f7e885e2a137c3c3316893d73f4c3681dc525e297814f223fe134ec0e142f4"
   },
   "assets": [
     {
