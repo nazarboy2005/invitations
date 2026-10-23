@@ -263,7 +263,7 @@
       for (const particle of particles) {
         const { outer, inner, duration, delay, sway, opacity } = particle;
         outer.animate([{ translate: "0 0" }, { translate: "0 110vh" }], { duration: duration * 1000, delay: delay * 1000, iterations: Infinity, easing: "linear" });
-        inner.animate([{ translate: "0 0" }, { translate: `${sway}px 0` }, { translate: "0 0" }], { duration: duration * 500, delay: delay * 1000, iterations: Infinity, easing: "ease-in-out" });
+        inner.animate([{ translate: "0 0" }, { translate: `${sway}px 0` }, { translate: "0 0" }], { duration: duration * 1000, delay: delay * 1000, iterations: Infinity, easing: "ease-in-out" });
         inner.animate([{ rotate: "0deg" }, { rotate: "360deg" }], { duration: duration * 1000, delay: delay * 1000, iterations: Infinity, easing: "linear" });
         inner.animate([{ opacity }, { opacity: 0.8 * opacity }, { opacity }], { duration: duration * 1000, delay: delay * 1000, iterations: Infinity, easing: "linear" });
       }
