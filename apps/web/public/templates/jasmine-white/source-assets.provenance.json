@@ -252,6 +252,34 @@
       "sourceType": "archive",
       "bytes": 445300,
       "sha256": "8671b4332bff26a2ca32c7388a2929320e0ade036e460bd76cd1a22abbd4d5b4"
+    },
+    {
+      "file": "assets/fonts/TheNautigal_Regular-s.p.0vn.0-.5o~f4t.ttf",
+      "source": "_next/static/media/TheNautigal_Regular-s.p.0vn.0-.5o~f4t.ttf",
+      "sourceType": "archive",
+      "bytes": 161852,
+      "sha256": "00e79428e3715ee28f9919be8c3bb4f468197b99ae419ae750b19f3a379b4222"
+    },
+    {
+      "file": "assets/fonts/Fraunces_VariableFont_SOFT,WONK,opsz,wght-s.p.0g87.hb0o.d8x.ttf",
+      "source": "_next/static/media/Fraunces_VariableFont_SOFT,WONK,opsz,wght-s.p.0g87.hb0o.d8x.ttf",
+      "sourceType": "archive",
+      "bytes": 357632,
+      "sha256": "99b365ece2cccd7d7baf879cc141f1fa9f2d20690fe025bc3003b01dff098f05"
+    },
+    {
+      "file": "assets/fonts/Jost_VariableFont_wght-s.p.0vv2r-0fdeyux.ttf",
+      "source": "_next/static/media/Jost_VariableFont_wght-s.p.0vv2r-0fdeyux.ttf",
+      "sourceType": "archive",
+      "bytes": 134476,
+      "sha256": "8d3141b6b4793c691c3647c602372c836577bf0c48a6b66674bbd558a95c1b57"
+    },
+    {
+      "file": "assets/fonts/Marcellus_Regular-s.p.0s04k8a2jokc9.ttf",
+      "source": "_next/static/media/Marcellus_Regular-s.p.0s04k8a2jokc9.ttf",
+      "sourceType": "archive",
+      "bytes": 43988,
+      "sha256": "5746c575e2d6bf9c57d388f04a2c9782a93ac83abb09ecf3e898c0b4399d79f9"
     }
   ],
   "fontFamilies": [
@@ -259,7 +287,11 @@
     "greatvibes",
     "inter",
     "playfair display",
-    "qellia"
+    "qellia",
+    "theNautigal",
+    "fraunces",
+    "jost",
+    "marcellus"
   ],
   "catalogArtworkSearch": {
     "sourceUrl": "https://payment.chorlove.uz/media-assets/e1f26015-2790-461a-8329-9d1c85c55e77/file",

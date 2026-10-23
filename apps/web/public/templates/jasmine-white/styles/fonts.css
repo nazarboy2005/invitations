@@ -17,3 +17,7 @@
 .inter_fe8b9d92-module__LINzvG__variable{--font-inter:"Inter", "Inter Fallback"}
 .playfair_display_fa003182-module__E_H7JW__variable{--font-playfair:"Playfair Display", "Playfair Display Fallback"}
 .greatvibes_9a4628fd-module__Zab9Yq__variable{--font-great-vibes:"greatVibes", "greatVibes Fallback"}
+@font-face{font-family:theNautigal;src:url(/templates/jasmine-white/assets/fonts/TheNautigal_Regular-s.p.0vn.0-.5o~f4t.ttf)format("truetype");font-display:swap}
+@font-face{font-family:Fraunces;src:url(/templates/jasmine-white/assets/fonts/Fraunces_VariableFont_SOFT,WONK,opsz,wght-s.p.0g87.hb0o.d8x.ttf)format("truetype");font-weight:100 900;font-display:swap}
+@font-face{font-family:Jost;src:url(/templates/jasmine-white/assets/fonts/Jost_VariableFont_wght-s.p.0vv2r-0fdeyux.ttf)format("truetype");font-weight:100 900;font-display:swap}
+@font-face{font-family:Marcellus;src:url(/templates/jasmine-white/assets/fonts/Marcellus_Regular-s.p.0s04k8a2jokc9.ttf)format("truetype");font-weight:400;font-display:swap}

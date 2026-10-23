@@ -121,7 +121,7 @@
     <div class="jw-gift-backdrop" data-jw-gift-backdrop hidden>
       <div class="jw-gift-modal" role="dialog" aria-modal="true" aria-labelledby="jw-gift-title">
         <button type="button" class="jw-gift-close" aria-label="Close modal">×</button>
-        <div class="jw-gift-modal-heading"><img src="/images/green-garden/glass_garden_green.webp" alt=""><h3 id="jw-gift-title"></h3></div>
+        <div class="jw-gift-modal-heading"><img src="/templates/jasmine-white/assets/glass_garden_green.webp" alt=""><h3 id="jw-gift-title"></h3></div>
         <div class="jw-gift-modal-content"></div>
       </div>
     </div>`;

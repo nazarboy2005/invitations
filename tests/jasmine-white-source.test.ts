@@ -42,7 +42,7 @@ test("Jasmine White preserves its captured page, stylesheets, and design artwork
   assert.equal(manifest.capturedStylesheets.length, 2);
   assert.equal(manifest.copiedDesignAssets.length, 14);
   assert.equal(manifest.recoveredSourceAssets.length, 3);
-  assert.equal(manifest.runtimeFontAssets.length, 14);
+  assert.equal(manifest.runtimeFontAssets.length, 18);
   for (const record of manifest.runtimeFontAssets) {
     const bytes = await readFile(new URL(record.file, root));
     assert.equal(bytes.length, record.bytes, record.file);
@@ -64,11 +64,14 @@ test("Jasmine White preserves its captured page, stylesheets, and design artwork
 
   const runtimeHtml = await readFile(new URL("index.html", root), "utf8");
   const bridge = await readFile(new URL("bridge.js", root), "utf8");
+  assert.match(runtimeHtml, /source\/styles\/0\.u3j0~_2ygfx\.css/);
+  assert.match(runtimeHtml, /source\/styles\/00sc_9lpb3zcn\.css/);
   assert.match(runtimeHtml, /src="\/templates\/jasmine-white\/bridge\.js"/);
   assert.doesNotMatch(runtimeHtml, /<script[^>]+src="(?:https?:)?\/\/_next\//i);
   assert.match(bridge, /d\.eventType \|\| c\.event/);
   assert.match(bridge, /partySize: answer \? 0 : Number\(party\.value \|\| 1\)/);
   assert.match(bridge, /d\.music\?\.url/);
+  assert.match(bridge, /src="\/templates\/jasmine-white\/assets\/glass_garden_green\.webp"/);
   assert.match(bridge, /links\.slice\(values\.length\)\.forEach\(\(link\) => hide\(link, true\)\)/);
   assert.match(bridge, /Таклифнома/);
   assert.doesNotMatch(bridge, /Ð|Ñ„|â€”/);
