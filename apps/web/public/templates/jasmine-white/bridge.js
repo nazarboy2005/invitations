@@ -237,20 +237,33 @@
         outer.animate([{ translate: "0 -10vh" }, { translate: "0 110vh" }], {
           duration: petal.duration * 1000, delay: petal.delay * 1000, iterations: Infinity, easing: "linear",
         });
-        glyph.animate([{ translate: "0 0" }, { translate: `${petal.sway}px 0` }, { translate: "0 0" }], {
-          duration: petal.duration * 500, iterations: Infinity, easing: "ease-in-out",
+        glyph.animate([
+          { translate: "0 0", easing: "ease-in-out" },
+          { translate: `${petal.sway}px 0`, easing: "ease-in-out" },
+          { translate: "0 0" },
+        ], {
+          duration: petal.duration * 500, iterations: Infinity, easing: "linear",
         });
         glyph.animate([{ rotate: "0deg" }, { rotate: "360deg" }], {
           duration: petal.duration * 1200, delay: petal.delay * 1000, iterations: Infinity, easing: "linear",
         });
-        outer.animate([{ opacity: 0 }, { opacity: 0.85, offset: 0.28 }, { opacity: 0.85, offset: 0.7 }, { opacity: 0 }], {
-          duration: petal.duration * 1000, delay: petal.delay * 1000, iterations: Infinity, easing: "ease-in-out",
+        outer.animate([
+          { opacity: 0, easing: "ease-in-out" },
+          { opacity: 0.85, offset: 1 / 3, easing: "ease-in-out" },
+          { opacity: 0.85, offset: 2 / 3, easing: "ease-in-out" },
+          { opacity: 0 },
+        ], {
+          duration: petal.duration * 1000, delay: petal.delay * 1000, iterations: Infinity, easing: "linear",
         });
       });
     }
     const heart = intro.querySelector('[style*="top:50px"] > .flex.items-center.justify-center');
-    heart?.animate([{ scale: 1 }, { scale: 1.12 }, { scale: 1 }], {
-      duration: 2000, iterations: Infinity, easing: "ease-in-out",
+    heart?.animate([
+      { scale: 1, easing: "ease-in-out" },
+      { scale: 1.12, easing: "ease-in-out" },
+      { scale: 1 },
+    ], {
+      duration: 2000, iterations: Infinity, easing: "linear",
     });
     const sheen = intro.querySelector("button > .absolute.top-0.h-full.w-8");
     sheen?.animate([{ translate: "-100px 0" }, { translate: "260px 0" }], {
@@ -281,10 +294,10 @@
     for (const [file, lift, start, peak, duration, delay] of sourceGiftFlowers) {
       const flower = giftSection.querySelector(`img[src$="/${file}"]`);
       flower?.animate([
+        { translate: `0 0`, rotate: `${start}deg`, easing: "ease-in-out" },
+        { translate: `0 -${lift}px`, rotate: `${peak}deg`, easing: "ease-in-out" },
         { translate: `0 0`, rotate: `${start}deg` },
-        { translate: `0 -${lift}px`, rotate: `${peak}deg` },
-        { translate: `0 0`, rotate: `${start}deg` },
-      ], { duration, delay, iterations: Infinity, easing: "ease-in-out" });
+      ], { duration, delay, iterations: Infinity, easing: "linear" });
     }
   }
 
@@ -355,15 +368,20 @@
         ], { duration: 800, easing: "ease-out", fill: "forwards" }));
         for (const petal of intro.querySelectorAll(".jw-source-petal")) {
           const glyph = petal.querySelector(".jw-source-petal-glyph");
+          const opacity = Number.parseFloat(getComputedStyle(petal).opacity);
           petal.getAnimations().forEach((animation) => animation.cancel());
           glyph?.getAnimations().forEach((animation) => animation.cancel());
           petal.animate([{ translate: "0 0" }, { translate: "0 300px" }], {
             duration: 850, easing: "ease-out", fill: "forwards",
           });
-          glyph?.animate([{ scale: 1 }, { scale: 2, offset: 0.5 }, { scale: 0 }], {
-            duration: 850, easing: "ease-out", fill: "forwards",
+          glyph?.animate([
+            { scale: 1, easing: "ease-out" },
+            { scale: 2, offset: 0.5, easing: "ease-out" },
+            { scale: 0 },
+          ], {
+            duration: 850, easing: "linear", fill: "forwards",
           });
-          petal.animate([{ opacity: 0.85 }, { opacity: 1, offset: 0.5 }, { opacity: 0 }], {
+          petal.animate([{ opacity: Number.isFinite(opacity) ? opacity : 0 }, { opacity: 0 }], {
             duration: 850, easing: "ease-out", fill: "forwards",
           });
         }

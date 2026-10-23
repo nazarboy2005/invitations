@@ -88,9 +88,19 @@ test("Jasmine White preserves its captured page, stylesheets, and design artwork
     manifest.sourceMotion.sha256.toLowerCase(),
   );
   assert.match(sourceMotion, /scale:\[1,2,0\]/);
+  assert.match(sourceMotion, /opacity:\[0,\.85,\.85,0\]/);
   assert.match(
     bridge,
-    /glyph\?\.animate\(\[\{ scale: 1 \}, \{ scale: 2, offset: 0\.5 \}, \{ scale: 0 \}\]/,
+    /\{ scale: 1, easing: "ease-out" \},\s*\{ scale: 2, offset: 0\.5, easing: "ease-out" \},\s*\{ scale: 0 \}/,
+  );
+  assert.match(
+    bridge,
+    /\{ opacity: 0\.85, offset: 1 \/ 3, easing: "ease-in-out" \},\s*\{ opacity: 0\.85, offset: 2 \/ 3, easing: "ease-in-out" \}/,
+  );
+  assert.match(bridge, /const opacity = Number\.parseFloat\(getComputedStyle\(petal\)\.opacity\)/);
+  assert.match(
+    bridge,
+    /petal\.animate\(\[\{ opacity: Number\.isFinite\(opacity\) \? opacity : 0 \}, \{ opacity: 0 \}\]/,
   );
   assert.match(runtimeHtml, /source\/styles\/0\.u3j0~_2ygfx\.css/);
   assert.match(runtimeHtml, /source\/styles\/00sc_9lpb3zcn\.css/);

@@ -34,15 +34,15 @@
       "Javohir",
       "Madina"
     ],
-    "sourceState": "Post-open first hero page from the captured template markup",
-    "method": "Rendered packaged source HTML with captured CSS, local fonts, and original images. The envelope and platform controls were omitted from the catalog view; only the source-bound names were substituted with the catalog preview fixture. No artwork was redrawn or cropped."
+    "sourceState": "Unopened source envelope, first invitation page",
+    "method": "Rendered the packaged original HTML at 432×768 with the exact captured CSS, local source fonts and floral assets. Captured the unopened envelope and its opening control directly from the source renderer; hid only the source music control and platform language overlay for catalog artwork. Substituted the source-bound couple names with catalog preview fixture names. No artwork was redrawn, reconstructed, or cropped."
   },
   "artwork": {
     "file": "preview.png",
     "mimeType": "image/png",
-    "bytes": 159293,
+    "bytes": 120818,
     "dimensions": "432x768",
-    "sha256": "247f9e8cabc4b13f2ac103c290649c6cec1fae36ffaf5b4eb05bd8c954f0e031"
+    "sha256": "a515cd3c628c920667a781f78ef4e37b0eefa5b86dd730a4dfd66c2dd35d08df"
   },
   "catalogPointerPending": "Central coordinator must set the typed catalog previewImage to /templates/jasmine-white/preview.png."
 }
