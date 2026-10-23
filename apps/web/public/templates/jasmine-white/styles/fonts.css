@@ -40,3 +40,7 @@
 @font-face{font-family:jost Fallback;src:local(Arial);ascent-override:112.02%;descent-override:39.26%;line-gap-override:0.0%;size-adjust:95.51%}
 @font-face{font-family:marcellus;src:url("/templates/jasmine-white/assets/fonts/Marcellus_Regular-s.p.0s04k8a2jokc9.ttf")format("truetype");font-display:swap}
 @font-face{font-family:marcellus Fallback;src:local(Arial);ascent-override:95.27%;descent-override:27.36%;line-gap-override:0.0%;size-adjust:102.25%}
+@font-face{font-family:"Fz Qellia";src:url("/templates/jasmine-white/assets/fonts/Qellia.otf")format("opentype");font-display:swap}
+@font-face{font-family:"Cormorant Garamond";src:url("/templates/jasmine-white/assets/fonts/CormorantGaramond-Regular.ttf")format("truetype");font-display:swap}
+@font-face{font-family:"The Nautigal";src:url("/templates/jasmine-white/assets/fonts/TheNautigal-Regular.ttf")format("truetype");font-display:swap}
+@font-face{font-family:"Great Vibes";src:url("/templates/jasmine-white/assets/fonts/GreatVibes-Regular.ttf")format("truetype");font-display:swap}

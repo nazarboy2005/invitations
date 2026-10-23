@@ -360,7 +360,7 @@
           petal.animate([{ translate: "0 0" }, { translate: "0 300px" }], {
             duration: 850, easing: "ease-out", fill: "forwards",
           });
-          glyph?.animate([{ scale: 1 }, { scale: 2.2, offset: 0.5 }, { scale: 0 }], {
+          glyph?.animate([{ scale: 1 }, { scale: 2, offset: 0.5 }, { scale: 0 }], {
             duration: 850, easing: "ease-out", fill: "forwards",
           });
           petal.animate([{ opacity: 0.85 }, { opacity: 1, offset: 0.5 }, { opacity: 0 }], {

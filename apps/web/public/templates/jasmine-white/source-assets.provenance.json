@@ -7,7 +7,7 @@
     "sha256": "f6ec79f1ddf31027b303cb003424558355cdf1cb5da720dd2d492bc5c7e957c3"
   },
   "sourceMotion": {
-    "file": "../../../../Invitations - this folder will be removed from production/Chorlove/Web invitations/_next/static/chunks/0ziyt946s2g41.js",
+    "file": "../../../../../Invitations - this folder will be removed from production/Chorlove/Web invitations/_next/static/chunks/0ziyt946s2g41.js",
     "bytes": 60835,
     "sha256": "C126D27D5F78DA03D1EF1C4FC5320247D00DC18F697CD3EF0CE2E250AE1335C4",
     "adaptedIn": "bridge.js"
@@ -388,6 +388,34 @@
       "bytes": 26464,
       "sha256": "03828cd012694b3762601728e78c8d5c37b3d688fb62e5378395d151efaa8a74",
       "sourceType": "exact-provider-url"
+    },
+    {
+      "file": "assets/fonts/Qellia.otf",
+      "source": "Chorlove/Web invitations/fonts/Qellia.otf",
+      "sourceType": "archive",
+      "bytes": 20180,
+      "sha256": "98c0d340d2ba414001b9210aa20df2516c8dcdd18c09aa822b34f9718bb45776"
+    },
+    {
+      "file": "assets/fonts/CormorantGaramond-Regular.ttf",
+      "source": "Chorlove/Web invitations/fonts/CormorantGaramond-Regular.ttf",
+      "sourceType": "archive",
+      "bytes": 666632,
+      "sha256": "7b99138ffa3baab8616d8491dc6d75961c5ae568b206c5031fbc7bb127385428"
+    },
+    {
+      "file": "assets/fonts/TheNautigal-Regular.ttf",
+      "source": "Chorlove/Web invitations/fonts/TheNautigal-Regular.ttf",
+      "sourceType": "archive",
+      "bytes": 161852,
+      "sha256": "00e79428e3715ee28f9919be8c3bb4f468197b99ae419ae750b19f3a379b4222"
+    },
+    {
+      "file": "assets/fonts/GreatVibes-Regular.ttf",
+      "source": "Chorlove/Web invitations/fonts/GreatVibes-Regular.ttf",
+      "sourceType": "archive",
+      "bytes": 445300,
+      "sha256": "8671b4332bff26a2ca32c7388a2929320e0ade036e460bd76cd1a22abbd4d5b4"
     }
   ],
   "fontFamilies": [
@@ -402,7 +430,11 @@
     "Allura",
     "fraunces",
     "jost",
-    "marcellus"
+    "marcellus",
+    "Fz Qellia",
+    "Cormorant Garamond",
+    "The Nautigal",
+    "Great Vibes"
   ],
   "catalogArtworkSearch": {
     "sourceUrl": "https://payment.chorlove.uz/media-assets/e1f26015-2790-461a-8329-9d1c85c55e77/file",

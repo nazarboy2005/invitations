@@ -1,0 +1,48 @@
+{
+  "templateId": "jasmine-white",
+  "catalogImage": "/templates/jasmine-white/preview.png",
+  "source": {
+    "page": "apps/web/public/templates/jasmine-white/index.html",
+    "pageSha256": "7f87e5f43a5bcb7a6dc1591925f3e21812213e91c6223b6ccab94be0ea5fd875",
+    "archivedCapture": "source/preview-frame.html",
+    "archivedCaptureSha256": "f6ec79f1ddf31027b303cb003424558355cdf1cb5da720dd2d492bc5c7e957c3",
+    "componentChunk": "Invitations - this folder will be removed from production/Chorlove/Web invitations/_next/static/chunks/0ziyt946s2g41.js",
+    "componentChunkSha256": "C126D27D5F78DA03D1EF1C4FC5320247D00DC18F697CD3EF0CE2E250AE1335C4",
+    "stylesheets": [
+      {
+        "file": "source/styles/0.u3j0~_2ygfx.css",
+        "sha256": "12141a5ec71f317d0e27589c92869d213b339f86451ee2a75b4612c5f1e05991"
+      },
+      {
+        "file": "source/styles/00sc_9lpb3zcn.css",
+        "sha256": "9295d64fad91822e7e7ab0d110764ac973d5414829a5bf40bb69e99531762910"
+      }
+    ],
+    "fonts": "styles/fonts.css",
+    "fontsSha256": "165df6bcf2372b0fd017221c38ed783a00ff52a0beb7475764505a848ec6f9bc"
+  },
+  "capture": {
+    "browser": "Chrome headless 156.0.8078.47",
+    "viewport": {
+      "width": 432,
+      "height": 768
+    },
+    "locale": "uz-Latn",
+    "fixture": "apps/web/src/modules/catalog/preview-sample.json",
+    "fixtureSha256": "0f8ee2d23927b3b038144cc7150a117dec480c0e8f763f7dae93f9dfa506d8ed",
+    "sampleNames": [
+      "Javohir",
+      "Madina"
+    ],
+    "sourceState": "Post-open first hero page from the captured template markup",
+    "method": "Rendered packaged source HTML with captured CSS, local fonts, and original images. The envelope and platform controls were omitted from the catalog view; only the source-bound names were substituted with the catalog preview fixture. No artwork was redrawn or cropped."
+  },
+  "artwork": {
+    "file": "preview.png",
+    "mimeType": "image/png",
+    "bytes": 159293,
+    "dimensions": "432x768",
+    "sha256": "247f9e8cabc4b13f2ac103c290649c6cec1fae36ffaf5b4eb05bd8c954f0e031"
+  },
+  "catalogPointerPending": "Central coordinator must set the typed catalog previewImage to /templates/jasmine-white/preview.png."
+}

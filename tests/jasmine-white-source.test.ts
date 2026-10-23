@@ -13,6 +13,20 @@ test("Jasmine White preserves its captured page, stylesheets, and design artwork
   const manifest = JSON.parse(
     await readFile(new URL("source-assets.provenance.json", root), "utf8"),
   );
+  const previewManifest = JSON.parse(
+    await readFile(new URL("preview.provenance.json", root), "utf8"),
+  );
+  const preview = await readFile(new URL(previewManifest.artwork.file, root));
+  assert.equal(preview.length, previewManifest.artwork.bytes);
+  assert.equal(
+    createHash("sha256").update(preview).digest("hex"),
+    previewManifest.artwork.sha256,
+  );
+  assert.equal(previewManifest.artwork.dimensions, "432x768");
+  assert.equal(
+    previewManifest.catalogImage,
+    "/templates/jasmine-white/preview.png",
+  );
   const source = await readFile(new URL("source/preview-frame.html", root));
   const original = await readFile(
     new URL("templates/jasmine-white/preview-frame.html", archive),
@@ -42,7 +56,7 @@ test("Jasmine White preserves its captured page, stylesheets, and design artwork
   assert.equal(manifest.capturedStylesheets.length, 2);
   assert.equal(manifest.copiedDesignAssets.length, 14);
   assert.equal(manifest.recoveredSourceAssets.length, 3);
-  assert.equal(manifest.runtimeFontAssets.length, 30);
+  assert.equal(manifest.runtimeFontAssets.length, 34);
   for (const record of manifest.runtimeFontAssets) {
     const bytes = await readFile(new URL(record.file, root));
     assert.equal(bytes.length, record.bytes, record.file);
@@ -64,6 +78,20 @@ test("Jasmine White preserves its captured page, stylesheets, and design artwork
 
   const runtimeHtml = await readFile(new URL("index.html", root), "utf8");
   const bridge = await readFile(new URL("bridge.js", root), "utf8");
+  const sourceMotion = await readFile(
+    new URL(manifest.sourceMotion.file, root),
+    "utf8",
+  );
+  assert.equal(Buffer.byteLength(sourceMotion, "utf8"), manifest.sourceMotion.bytes);
+  assert.equal(
+    createHash("sha256").update(sourceMotion).digest("hex"),
+    manifest.sourceMotion.sha256.toLowerCase(),
+  );
+  assert.match(sourceMotion, /scale:\[1,2,0\]/);
+  assert.match(
+    bridge,
+    /glyph\?\.animate\(\[\{ scale: 1 \}, \{ scale: 2, offset: 0\.5 \}, \{ scale: 0 \}\]/,
+  );
   assert.match(runtimeHtml, /source\/styles\/0\.u3j0~_2ygfx\.css/);
   assert.match(runtimeHtml, /source\/styles\/00sc_9lpb3zcn\.css/);
   assert.match(runtimeHtml, /src="\/templates\/jasmine-white\/bridge\.js"/);
