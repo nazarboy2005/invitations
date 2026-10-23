@@ -10,6 +10,9 @@
   let heroParallaxBound = false;
   function bindSourceOpening(payload, data, words) {
     if (!opening) return;
+    const openingReduced=Boolean(payload.reducedMotion)||matchMedia("(prefers-reduced-motion: reduce)").matches;
+    opening.classList.toggle("gg-reduced-motion",openingReduced);
+    if(openingReduced)opening.getAnimations({subtree:true}).forEach(animation=>animation.cancel());
     const localize = {"uz-Latn":"Taklifnoma","uz-Cyrl":"Таклифнома",en:"Invitation",ru:"Приглашение"};
     txt(opening.querySelector('[data-gg-opening-greeting]'), data.greeting || words.greeting || "Assalomu alaykum, aziz mehmon");
     txt(opening.querySelector('[data-gg-opening-title]'), localize[payload.locale] || localize["uz-Latn"]);
@@ -23,10 +26,11 @@
     if (!openingBound) {
       const close = () => {
         if (opening.classList.contains("gg-opening-exit")) return;
-        animateSourceHero(Boolean(state?.reducedMotion)||matchMedia("(prefers-reduced-motion: reduce)").matches);
-        opening.querySelectorAll('img[src*="flower2-decoration"], img[src*="flower5-bottom"]').forEach(image => { if (!state?.reducedMotion && !matchMedia("(prefers-reduced-motion: reduce)").matches) image.animate([{ transform: getComputedStyle(image).transform, opacity: .9 }, { transform: "scale(2.5)", opacity: 0 }], { duration: 800, easing: "ease-out", fill: "forwards" }); });
+        const reduced=Boolean(state?.reducedMotion)||matchMedia("(prefers-reduced-motion: reduce)").matches;
+        animateSourceHero(reduced);
+        if(!reduced)opening.querySelectorAll('img[src*="flower2-decoration"], img[src*="flower5-bottom"]').forEach(image => image.animate([{ transform: getComputedStyle(image).transform, opacity: .9 }, { transform: "scale(2.5)", opacity: 0 }], { duration: 800, easing: "ease-out", fill: "forwards" }));
         opening.classList.add("gg-opening-exit", "gg-leaves-leaving");
-        opening.querySelectorAll(".gg-opening-petal").forEach(petal => {
+        if(!reduced)opening.querySelectorAll(".gg-opening-petal").forEach(petal => {
           const opacity = getComputedStyle(petal).opacity;
           petal.getAnimations().forEach(animation => animation.cancel());
           petal.animate([
@@ -36,7 +40,7 @@
           ], { duration: 850, easing: "ease-out", fill: "forwards" });
           petal.animate([{ opacity }, { opacity: 0 }], { duration: 850, easing: "ease-out", fill: "forwards" });
         });
-        window.setTimeout(() => { opening.hidden = true; }, 1050);
+        window.setTimeout(() => { opening.hidden = true; }, reduced?0:1050);
       };
       openButton?.addEventListener("click", close);
       heart?.addEventListener("click", close);
@@ -67,7 +71,16 @@
     }
   }
   function animateSourceHero(reduced) {
-    if (!hero || heroAnimated) return;
+    if (!hero) return;
+    if(reduced){
+      hero.getAnimations({subtree:true}).forEach(animation=>animation.cancel());
+      const leaves=hero.querySelectorAll(':scope > div > img');
+      const card=hero.querySelector(':scope > div > div[style*="opacity:0"]');
+      [leaves[0],leaves[1],card?.children?.[0],card?.children?.[1],card?.children?.[2],leaves[2]].forEach((node,index)=>{if(!node)return;node.style.opacity=index===0||index===1||index===5?".9":"1";node.style.transform="none";});
+      heroAnimated=true;
+      return;
+    }
+    if(heroAnimated)return;
     heroAnimated = true;
     const leaves = hero.querySelectorAll(':scope > div > img');
     const card = hero.querySelector(':scope > div > div[style*="opacity:0"]');
@@ -174,15 +187,21 @@
     const gift=$("[data-gg-gift-section]");if(gift)hide(gift,!d.toyona?.enabled);let details=$("[data-gg-gift-details]");const giftToggle=$("[data-gg-gift-toggle]");if(gift&&!details){details=document.createElement("div");details.dataset.ggGiftDetails="";details.className="gg-gift-details";const number=document.createElement("strong"),holder=document.createElement("p");number.textContent=d.toyona?.cardNumber||"";holder.textContent=d.toyona?.cardHolder||"";details.append(number,holder);gift.append(details);}if(details){hide(details,true);txt($("strong",details),d.toyona?.cardNumber);txt($("p",details),d.toyona?.cardHolder);}if(giftToggle){giftToggle.setAttribute("aria-label",c.giftOpenHint);giftToggle.setAttribute("aria-expanded","false");giftToggle.onclick=()=>{if(details){const open=details.hidden;hide(details,!open);giftToggle.setAttribute("aria-expanded",String(open));}};}
     const section=$("[data-gg-calendar]")?.closest("section");if(section){const cards=$$(".mt-12 > .mt-5 > div",section).slice(0,4);cards.forEach((card,i)=>{const number=card.querySelector("span");if(number)number.dataset.ggCountdown=String(i);});}renderCountdown(d);
     const reduced=Boolean(payload.reducedMotion)||matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if(reduced&&heroAnimated)animateSourceHero(true);
     renderMusic(d);
     if(!reduced){const giftMotion=[["jasmine_white",-6,-22,3.2,0],["spring_garden_green",-7,20,3.6,.3],["boho_floral_pink",-5,-18,2.9,.6],["brocade_flower_red",-6,14,3.4,.2],["baroque_gold",-5,8,3.1,.4],["minimalism_brown",-6,-10,3.5,.7],["spring_garden_blue",-5,-14,3.3,.1]];for(const [asset,y,rotation,duration,delay] of giftMotion){const image=$(`[data-gg-gift-section] img[src$="/${asset}.webp"]`);if(image&&!image.dataset.ggMotionBound){image.dataset.ggMotionBound="1";image.animate([{transform:`translateY(0px) rotate(${rotation}deg)`},{transform:`translateY(${y}px) rotate(${rotation+4}deg)`},{transform:`translateY(0px) rotate(${rotation}deg)`}],{duration:duration*1000,delay:delay*1000,iterations:Infinity,easing:"ease-in-out"});}}}
     root.classList.toggle("gg-reduced-motion",Boolean(payload.reducedMotion)||matchMedia("(prefers-reduced-motion: reduce)").matches);
-    const reveal=node=>{node.style.opacity="";node.style.transform="";node.classList.add("gg-visible");};
-    const revealTargets=$$('[style*="opacity:0"], [style*="opacity: 0"]').filter(node=>!node.closest('[data-gg-source-hero]')&&!node.matches('[data-gg-program-icon]'));
-    if(reduced||!window.IntersectionObserver)revealTargets.forEach(reveal);
-    const animateProgramIcon=(icon,index)=>{if(icon.dataset.ggIconMotionBound)return;icon.dataset.ggIconMotionBound="1";if(reduced){icon.style.opacity=".9";icon.style.transform="scale(1)";return;}icon.animate([{opacity:0,transform:"scale(.8)"},{opacity:.9,transform:"scale(1)"}],{duration:600,delay:index*150,easing:"ease-out",fill:"both"});};
-    if(reduced||!window.IntersectionObserver)programIcons.forEach(animateProgramIcon);else{const iconObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){animateProgramIcon(entry.target,programIcons.indexOf(entry.target));iconObserver.unobserve(entry.target);}}),{threshold:.3});programIcons.forEach(icon=>iconObserver.observe(icon));}
-    if(!reduced&&window.IntersectionObserver){const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){reveal(entry.target);observer.unobserve(entry.target);}}),{threshold:.25});revealTargets.forEach(node=>{node.classList.add("gg-reveal");observer.observe(node);});}
+    const reveal=(node,frames,duration=.3,delay=0)=>{if(reduced){node.style.opacity="1";node.style.transform="none";return;}node.animate(frames,{duration:duration*1000,delay:delay*1000,easing:"ease-out",fill:"both"});};
+    const revealTargets=$$('[style*="opacity:0"], [style*="opacity: 0"]').filter(node=>!node.closest('[data-gg-source-hero]')&&!node.matches('[data-gg-program-icon],[data-gg-contact-link],[data-gg-countdown],[data-gg-gallery-heading]')&&!node.closest('[data-gg-program-item]')&&!node.querySelector('[data-gg-countdown]'));
+    const observeMotion=(node,frames,duration,delay,threshold)=>{if(node.dataset.ggMotionBound)return;node.dataset.ggMotionBound="1";if(reduced||!window.IntersectionObserver){reveal(node,frames,duration,delay);return;}const observer=new IntersectionObserver(entries=>{if(entries.some(entry=>entry.isIntersecting)){reveal(node,frames,duration,delay);observer.disconnect();}},{threshold});observer.observe(node);};
+    revealTargets.forEach(node=>observeMotion(node,[{opacity:0,transform:"translateY(20px)"},{opacity:1,transform:"translateY(0px)"}],.3,0,.25));
+    const animateProgramIcon=(icon,index)=>{if(icon.dataset.ggIconMotionBound)return;icon.dataset.ggIconMotionBound="1";reveal(icon,[{opacity:0,transform:"scale(.8)"},{opacity:.9,transform:"scale(1)"}],.6,index*.15);};
+    programIcons.forEach((icon,index)=>observeMotion(icon,[{opacity:0,transform:"scale(.8)"},{opacity:.9,transform:"scale(1)"}],.6,index*.15,.3));
+    items.forEach((row,index)=>{if(!rows[index]||row.dataset.ggMotionBound)return;row.dataset.ggMotionBound="1";const time=$("[data-gg-program-time]",row),marker=row.children[1],dot=marker?.querySelector("[data-gg-program-dot]"),line=marker?.querySelector("[data-gg-program-line]"),title=row.children[2];if(line)line.className=`absolute left-1/2 -translate-x-1/2 w-px ${index===0?"top-1/2 -bottom-8 md:-bottom-10":index===rows.length-1?"-top-8 md:-top-10 bottom-1/2":"-top-8 md:-top-10 -bottom-8 md:-bottom-10"}`;const run=()=>{const delay=index*.08;reveal(time,[{opacity:0,transform:"translateX(-20px)"},{opacity:1,transform:"translateX(0px)"}],.5,delay);reveal(dot,[{transform:"scale(0)"},{transform:"scale(1)"}],.4,delay);reveal(title,[{opacity:0,transform:"translateX(20px)"},{opacity:1,transform:"translateX(0px)"}],.5,delay);};if(reduced||!window.IntersectionObserver)run();else{const observer=new IntersectionObserver(entries=>{if(entries.some(entry=>entry.isIntersecting)){run();observer.disconnect();}},{threshold:.5});observer.observe(row);}});
+    $$('[data-gg-wishes-list] article').forEach((card,index)=>observeMotion(card,[{opacity:0,transform:"translateY(15px)"},{opacity:1,transform:"translateY(0px)"}],.4,index*.05,.2));
+    $$('[data-gg-contact-link]').forEach((link,index)=>observeMotion(link,[{opacity:0,transform:"translateY(20px)"},{opacity:1,transform:"translateY(0px)"}],.5,index*.1,.2));
+    $$('[data-gg-countdown]').forEach((number,index)=>observeMotion(number.parentElement,[{opacity:0,transform:"translateY(16px)"},{opacity:1,transform:"translateY(0px)"}],.5,index*.1,.3));
+    $$('[data-gg-gallery-heading]').forEach(node=>observeMotion(node,[{opacity:0,transform:"translateY(20px)"},{opacity:1,transform:"translateY(0px)"}],.6,0,.3));
   }
   window.addEventListener("message",e=>{if(e.origin===location.origin&&e.data?.type===`${id}:update`)void render(e.data.payload);});
   try{const initial=JSON.parse(window.name);if(initial?.type===`${id}:update`)void render(initial.payload);}catch{}

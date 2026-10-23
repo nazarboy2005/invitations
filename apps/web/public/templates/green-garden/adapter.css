@@ -36,6 +36,8 @@ html,body{margin:0;min-height:100%;background:#eef3e8;font-family:"Cormorant Gar
 [data-gg-source-opening] [data-gg-opening-card]{transform:translateY(0) scale(1);opacity:1;transition:transform .8s cubic-bezier(.22,1,.36,1),opacity .8s ease}
 [data-gg-source-opening].gg-opening-exit{opacity:0;transition-delay:.45s;pointer-events:none}
 [data-gg-source-opening].gg-opening-exit [data-gg-opening-card]{transform:translateY(-35px) scale(1.08);opacity:0}
+[data-gg-source-opening].gg-reduced-motion,[data-gg-source-opening].gg-reduced-motion *{animation:none!important;transition:none!important}
+[data-gg-source-opening].gg-reduced-motion.gg-opening-exit{display:none}
 [data-gg-opening-heart] svg{animation:gg-heart-pulse 2s ease-in-out infinite}
 [data-gg-opening-open]>div{animation:gg-opening-sheen 3s ease-in-out infinite}
 .gg-opening-petal{position:absolute;z-index:1;pointer-events:none;top:-30px;will-change:transform,opacity}

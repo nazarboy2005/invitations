@@ -105,3 +105,44 @@ test("Green Garden local asset references resolve within its package", async () 
     assert.ok(files.includes(relative) || relative.startsWith(`assets${path.sep}`), `missing package reference ${ref}`);
   }
 });
+
+test("Green Garden restores available source motion and schedule assets", async () => {
+  const bridge = await readFile(new URL("bridge.js", root), "utf8");
+  const html = await readFile(new URL("index.html", root), "utf8");
+  const manifest = JSON.parse(await readFile(new URL("source-assets.provenance.json", root), "utf8"));
+  assert.match(bridge, /easing="ease-out"/);
+  assert.match(bridge, /reveal\(names\[0\].*?\.7,\.4\)/);
+  assert.match(bridge, /reveal\(names\[1\].*?\.7,\.55\)/);
+  assert.match(bridge, /reveal\(names\[2\].*?\.7,\.7\)/);
+  assert.match(bridge, /duration:duration\*1000,delay:delay\*1000,iterations:Infinity,easing:"ease-in-out"/);
+  assert.match(bridge, /\},\{threshold:\.5\}\)/);
+  assert.match(bridge, /\.6,index\*\.15,\.3\)/);
+  assert.match(bridge, /\.4,index\*\.05,\.2\)/);
+  assert.match(bridge, /gg-reduced-motion/);
+  assert.match(html, /data-gg-program-icon[^>]+assets\/welcome\.webp/);
+  assert.match(html, /data-gg-program-icon[^>]+assets\/cake\.webp/);
+  assert.deepEqual(
+    manifest.assets
+      .filter((asset: { file: string }) => ["assets/welcome.webp", "assets/cake.webp"].includes(asset.file))
+      .map((asset: { file: string }) => asset.file)
+      .sort(),
+    ["assets/cake.webp", "assets/welcome.webp"],
+  );
+  assert.equal(manifest.sourceReferencedMissingAsset.file, "/images/green-garden/leaf1-bloom.webp");
+  assert.equal(manifest.sourceReferencedMissingAsset.liveHttpStatus, 404);
+});
+
+test("Green Garden packaged artwork matches the full local source image folder", async () => {
+  const manifest = JSON.parse(await readFile(new URL("source-assets.provenance.json", root), "utf8"));
+  const sourceImages = new URL(
+    "../Invitations - this folder will be removed from production/Chorlove/Web invitations/images/green-garden/",
+    import.meta.url,
+  );
+  const sourceFiles = (await readdir(sourceImages)).filter((file) => /\.(?:png|jpe?g|webp|svg)$/i.test(file));
+  assert.equal(sourceFiles.length, manifest.sourceArchiveAudit.matchedFiles);
+  for (const file of sourceFiles) {
+    const archived = await readFile(new URL(file, sourceImages));
+    const packaged = await readFile(new URL(`assets/${file}`, root));
+    assert.equal(createHash("sha256").update(packaged).digest("hex"), createHash("sha256").update(archived).digest("hex"), `${file} differs from the source archive`);
+  }
+});
