@@ -14,7 +14,7 @@ for registration and publication.
 | 4 | Velvet | Captured source and assets exist locally. |
 | 5 | Estelle | Captured source and assets exist locally. |
 | 6 | Palov | Captured source and assets exist locally. |
-| 7 | Nahorgi osh | Captured source and assets exist locally. |
+| 7 | Nahorgi osh | Integrated from the exact Invitate capture under `invitate-nahorgi-osh`; published for `osh` with a source-rendered portrait cover, localized typed adapter, and API-backed RSVP. |
 | 8 | Fairy | Captured source and assets exist locally. |
 | 9 | Bloom | Captured source and assets exist locally. |
 | 10 | Golden Hour | Captured source and assets exist locally. |

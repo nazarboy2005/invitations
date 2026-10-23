@@ -1499,6 +1499,20 @@ export const TEMPLATES: TemplateDefinition[] = [
     previewImage: "/templates/invitate-palov/preview.png",
     published: true,
   },
+  {
+    id: "invitate-nahorgi-osh",
+    name: "Invitate Nahorgi Osh",
+    description:
+      "Yashil girih naqshlari, tillarang bezaklar va nahorgi osh uchun taklifnoma.",
+    previewEventType: "osh",
+    categoryIds: ["osh"],
+    supportedEventTypes: ["osh"],
+    previewImage: "/templates/invitate-nahorgi-osh/preview.png",
+    priceMinor: 15000000,
+    currency: "UZS",
+    accent: "#2d4a34",
+    published: true,
+  },
 ];
 export const templateById = (id: string) =>
   TEMPLATES.find((item) => item.id === id);

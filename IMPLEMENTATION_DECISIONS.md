@@ -672,6 +672,27 @@ Suggested schema extensions (pending final migration design):
 - User request: audit every editor input and make publication work locally without unavailable R2 setup. Implementation choice: private local storage for local development, retaining R2 for deployment. Store bytes outside public/, keep credentials/settings in ignored .env.local, and preserve ownership/readiness checks. Refuse local disk on Vercel; production self-hosting must explicitly configure persistent storage and backups.
 - Owner RSVP responses and wish approval/hiding must be available through the website. Do not leave the wish-approval promise dependent on an absent notification worker.
 
+## Invitate Nahorgi Osh source registration (2026-10-23)
+
+- User requirement: implement the exact Invitate manifest page
+  `Web invitations/invitate.uz/nahorgi-osh.html`; it is distinct from the
+  adjacent `palov.html` Peshtoq page. The existing `nahorgi-osh` ID belongs to
+  another provider's Marxaba template, so this Invitate design uses the unique
+  ID `invitate-nahorgi-osh`.
+- Source review established the osh-specific source's `osh` category and
+  `osh` event support. The release gate required complete renderer, authentic
+  opening artwork and verification before publication; those checks passed.
+- The exact captured HTML/CSS/JavaScript, local fonts and image are isolated
+  under `apps/web/public/templates/invitate-nahorgi-osh`; the shared renderer
+  maps four locales and API-backed RSVP. The catalog portrait is a 780×1688
+  render of the captured opening with blank invitation fields, so fixture
+  content is not stored in the image.
+- Migrations `0131` (registration) and `0134` (publication) are applied to
+  the configured database. The `osh` category and event support are verified.
+  Focused checks pass 4/4, typecheck and production build pass, and preview and
+  RSVP guard behavior were checked locally. No external deployment or live
+  payment activation is included.
+
 ## Other established requirements and stack choices
 
 - Structure the project modularly.

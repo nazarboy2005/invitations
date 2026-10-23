@@ -1,0 +1,43 @@
+{
+  "provider": "Invitate",
+  "manifest": "Invitate/capture-manifest.json",
+  "page": "https://invitate.uz/nahorgi-osh.html",
+  "manifestFile": "Web invitations/invitate.uz/nahorgi-osh.html",
+  "captureFiles": [
+    {
+      "path": "Web invitations/invitate.uz/nahorgi-osh.html",
+      "sha256": "4585dc3c222dbe9a2b2f19bf030ef2ba1885033a386be4606606b2071fa73a7e"
+    },
+    {
+      "path": "Web invitations/invitate.uz/assets/css/palov.css",
+      "sha256": "86261ea7169e5500d15467d6bcb7d5219787406fb3bb4af9720a296c5f25c422"
+    },
+    {
+      "path": "Web invitations/invitate.uz/assets/js/palov.js",
+      "sha256": "98a16dc78f3e5112f5311b1f03713cc401d014f2de627168e347dc2511725c72"
+    },
+    {
+      "path": "Web invitations/invitate.uz/assets/images/palov.png",
+      "sha256": "6ff6955eb9f53d994f4f9052f3c000201a2e0a364a16c295990f5224399f8077"
+    },
+    {
+      "path": "Web invitations/fonts.googleapis.com/css2__3cf01d28671864f1",
+      "sha256": "83c450b89f273c98210615591b26a058eeee1c26a0a5f6754f1b3069ebe7e909"
+    }
+  ],
+  "sourceCaptureUntouched": true,
+  "localAdaptations": [
+    "Retained the exact captured page's structure, inline artwork and styling; replaced the reference site tracker and fixed invitation data with platform data binding.",
+    "Removed the captured local-only RSVP success simulation and connected RSVP submission to the public invitation API.",
+    "Kept scroll-reveal behavior and captured reduced-motion handling in the isolated local package.",
+    "Rewrote captured font URLs to local packaged WOFF2 files; no third-party font requests remain.",
+    "Catalog portrait artwork is rendered from the captured opening at its public portrait size with blank invitation fields, so no fixture content is stored in the image."
+  ],
+  "catalogArtwork": {
+    "status": "complete",
+    "path": "preview.png",
+    "dimensions": "780x1688",
+    "sha256": "b0dd07c4ef78a84acc4f65119e2493ce664c75aacfa9b8125136fb7418b57489",
+    "capture": "The local captured HTML rendered at 390x844 CSS pixels with its template-owned artwork and blank invitation fields; no fixture or authored content is stored."
+  }
+}

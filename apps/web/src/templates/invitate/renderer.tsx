@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { Invitation, Locale } from "@taklifnoma/contracts";
 import { makeLegacyData } from "@/templates/anor/renderer";
+import { makeNahorgiOshData } from "./nahorgi-osh-adapter";
 import { CATALOG_PREVIEW_MUSIC } from "@/modules/catalog/catalog-music";
 import styles from "./renderer.module.css";
 
@@ -102,8 +103,23 @@ export function InvitateInvitation({
     sampleWishes,
     silentPlayback,
   ]);
-  const latest = useRef(message);
-  latest.current = message;
+  const nahorgiOshMessage = useMemo(
+    () =>
+      makeNahorgiOshData(
+        invitation,
+        frameLocale,
+        guestName,
+        guestToken,
+        invitationId,
+        preview,
+        sampleWishes,
+      ),
+    [frameLocale, guestName, guestToken, invitation, invitationId, preview, sampleWishes],
+  );
+  const activeMessage =
+    templateId === "invitate-nahorgi-osh" ? nahorgiOshMessage : message;
+  const latest = useRef(activeMessage);
+  latest.current = activeMessage;
   const frameUrl = `/templates/${templateId}/index.html?lang=${sourceLocale[locale]}`;
 
   useEffect(() => {
@@ -130,7 +146,7 @@ export function InvitateInvitation({
       { type: `${templateId}:update`, payload: latest.current },
       window.location.origin,
     );
-  }, [message, templateId]);
+  }, [activeMessage, templateId]);
 
   const classes = fullPreview
     ? styles.full
@@ -142,7 +158,7 @@ export function InvitateInvitation({
       <iframe
         key={templateId}
         ref={frame}
-        title={`${message.groom} & ${message.bride} invitation`}
+        title={`${activeMessage.groom} & ${activeMessage.bride} invitation`}
         src={frameUrl}
         onLoad={() => {
           const target = frame.current?.contentWindow;
