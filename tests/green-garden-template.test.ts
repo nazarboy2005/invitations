@@ -57,13 +57,15 @@ test("Green Garden gallery photos stay ephemeral and authored photos replace pla
 
 test("Green Garden app page excludes reference sample content and runtime", async () => {
   const html = await readFile(new URL("index.html", root), "utf8");
-  for (const sample of ["Muhammad", "Xadicha", "Abdurahmonovlar", "Azizbek", "orchid-amplop", "unsplash.com", "chorlove.uz", "welcome.webp", "cake.webp"]) {
+  for (const sample of ["Muhammad", "Xadicha", "Abdurahmonovlar", "Azizbek", "orchid-amplop", "unsplash.com", "chorlove.uz"]) {
     assert.equal(html.toLowerCase().includes(sample.toLowerCase()), false, `unexpected source content: ${sample}`);
   }
   assert.match(html, /data-chorlove-template="green-garden"/);
   assert.match(html, /data-gg-rsvp-form/);
   assert.match(html, /data-gg-wish-form/);
   assert.match(html, /data-gg-program-item/);
+  assert.match(html, /assets\/welcome\.webp/);
+  assert.match(html, /assets\/cake\.webp/);
   assert.equal((html.match(/src="\/images\/green-garden\/leaf1-bloom\.webp"/g) || []).length, 2);
   assert.match(html, /data-gg-field="groom"/);
   assert.match(html, /data-gg-field="bride"/);

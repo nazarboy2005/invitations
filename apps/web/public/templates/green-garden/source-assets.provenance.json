@@ -103,6 +103,16 @@
       "file": "assets/spring_garden_green.webp",
       "bytes": 3694,
       "sha256": "844ed055b2671691bcf4b5f4838324abdc48878eadedbb9a9d6338c166e4434a"
+    },
+    {
+      "file": "assets/welcome.webp",
+      "bytes": 293264,
+      "sha256": "bc395c178bc83e79492106686a3aa134118fd53d5b98727d0683936a29a38608"
+    },
+    {
+      "file": "assets/cake.webp",
+      "bytes": 178308,
+      "sha256": "539a8e04ab73c6ef3b3ca3fe23fd1d9375f299a2d12d918434ae0a147120e300"
     }
   ],
   "sourceReferencedMissingAsset": {
