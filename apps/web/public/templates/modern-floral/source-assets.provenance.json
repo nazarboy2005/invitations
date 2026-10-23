@@ -1,6 +1,6 @@
 {
   "sourceSnapshot": {
-    "path": "..\\Invitations - this folder will be removed from production\\Chorlove\\Web invitations\\templates\\modern-floral\\preview-frame.html",
+    "path": "../../../../Invitations - this folder will be removed from production/Chorlove/Web invitations/templates/modern-floral/preview-frame.html",
     "bytes": 146505,
     "sha256": "fd18fb85d8eb7d4af1a3ef044ac78b6dfe778a1942913169a4daf4ef2d46cbf1"
   },
@@ -41,5 +41,27 @@
     "bytes": 58677,
     "sha256": "6c4de03a01ba15e3b462a519f34f3ad90a87b34851372a4f868aa0381e2052dc",
     "note": "Exact source catalog opening image. It contains no sample couple names."
-  }
+  },
+  "sourceStylesheets": [
+    {
+      "name": "0.u3j0~_2ygfx.css",
+      "sourcePath": "../../../../Invitations - this folder will be removed from production/Chorlove/Web invitations/_next/static/chunks/0.u3j0~_2ygfx.css",
+      "packagedPath": "../chorlove/shared/_next/static/chunks/0.u3j0~_2ygfx.css",
+      "sourceBytes": 11626,
+      "sourceSha256": "12141a5ec71f317d0e27589c92869d213b339f86451ee2a75b4612c5f1e05991",
+      "packagedBytes": 11638,
+      "packagedSha256": "53715060316bd39b16d79d7b2bea5601bdca96181cead198a548f18f4fec809b",
+      "difference": "CSS declarations match after normalizing only url(...) targets and line endings; package targets are local."
+    },
+    {
+      "name": "00sc_9lpb3zcn.css",
+      "sourcePath": "../../../../Invitations - this folder will be removed from production/Chorlove/Web invitations/_next/static/chunks/00sc_9lpb3zcn.css",
+      "packagedPath": "../chorlove/shared/_next/static/chunks/00sc_9lpb3zcn.css",
+      "sourceBytes": 360488,
+      "sourceSha256": "9295d64fad91822e7e7ab0d110764ac973d5414829a5bf40bb69e99531762910",
+      "packagedBytes": 360902,
+      "packagedSha256": "7d0ca76b9f0b4901eb4d13539e028381dd751145a83a11a1db7b9b5c3e30bf5a",
+      "difference": "CSS declarations match after normalizing only url(...) targets and line endings; package targets are local."
+    }
+  ]
 }

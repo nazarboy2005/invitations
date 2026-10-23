@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
-import { readFile } from "node:fs/promises";
+import { readFile, readdir } from "node:fs/promises";
 import { test } from "node:test";
 
 const root = new URL("../apps/web/public/templates/modern-floral/", import.meta.url);
@@ -11,6 +11,12 @@ const bridgeUrl = new URL("bridge.js", root);
 const provenanceUrl = new URL("source-assets.provenance.json", root);
 const coverUrl = new URL("catalog-opening.jpg", root);
 const sourceChunkUrl = new URL("../Invitations - this folder will be removed from production/Chorlove/Web invitations/_next/static/chunks/0umiwyco9-jdx.js", import.meta.url);
+const sourceCaptureUrl = new URL("../Invitations - this folder will be removed from production/Chorlove/Web invitations/templates/modern-floral/preview-frame.html", import.meta.url);
+const packagedCaptureUrl = new URL("../apps/web/public/templates/modern-floral/source/preview-frame.html", import.meta.url);
+const sourceStylesDir = new URL("../Invitations - this folder will be removed from production/Chorlove/Web invitations/_next/static/chunks/", import.meta.url);
+const packagedStylesDir = new URL("../apps/web/public/templates/chorlove/shared/_next/static/chunks/", import.meta.url);
+const sourceMediaDir = new URL("../Invitations - this folder will be removed from production/Chorlove/Web invitations/_next/static/media/", import.meta.url);
+const packagedMediaDir = new URL("../apps/web/public/templates/chorlove/shared/_next/static/media/", import.meta.url);
 
 test("Modern Floral motion port is tied to the captured route module", async () => {
   const provenance = JSON.parse(await readFile(provenanceUrl, "utf8"));
@@ -46,4 +52,52 @@ test("Modern Floral catalog artwork has the source image hash and portrait dimen
   assert.equal(provenance.catalogArtwork.sha256, createHash("sha256").update(cover).digest("hex"));
   assert.deepEqual(provenance.catalogArtwork.dimensions, [810, 1754]);
   assert.equal(provenance.catalogArtwork.file, "catalog-opening.jpg");
+});
+
+test("Modern Floral preserved capture and Chorlove CSS retain source markup and styles", async () => {
+  const sourceCaptureBytes = await readFile(sourceCaptureUrl);
+  const original = sourceCaptureBytes.toString("utf8").replace(/\r\n?/g, "\n");
+  const preserved = (await readFile(packagedCaptureUrl, "utf8")).replace(/\r\n?/g, "\n");
+  assert.equal(preserved, original);
+  const provenance = JSON.parse(await readFile(provenanceUrl, "utf8"));
+  assert.equal(provenance.sourceSnapshot.bytes, sourceCaptureBytes.length);
+  assert.equal(provenance.sourceSnapshot.sha256, createHash("sha256").update(sourceCaptureBytes).digest("hex"));
+
+  for (const file of ["0.u3j0~_2ygfx.css", "00sc_9lpb3zcn.css"]) {
+    const sourceBytes = await readFile(new URL(file, sourceStylesDir));
+    const packageBytes = await readFile(new URL(file, packagedStylesDir));
+    const record = provenance.sourceStylesheets.find((item: { name: string }) => item.name === file);
+    assert.ok(record, `missing ${file} provenance`);
+    assert.equal(record.sourceSha256, createHash("sha256").update(sourceBytes).digest("hex"));
+    assert.equal(record.packagedSha256, createHash("sha256").update(packageBytes).digest("hex"));
+    const sourceCss = sourceBytes.toString("utf8")
+      .replace(/\r\n?/g, "\n")
+      .replace(/url\([^)]*\)/g, "url(__asset__)");
+    const packageCss = packageBytes.toString("utf8")
+      .replace(/\r\n?/g, "\n")
+      .replace(/url\([^)]*\)/g, "url(__asset__)");
+    assert.equal(packageCss, sourceCss, `${file} declarations differ from source`);
+  }
+
+  const sourceEntries = await readdir(sourceMediaDir, { withFileTypes: true });
+  const packagedEntries = await readdir(packagedMediaDir, { withFileTypes: true });
+  const packagedNames = new Set(packagedEntries.filter((entry) => entry.isFile()).map((entry) => entry.name));
+  for (const entry of sourceEntries.filter((item) => item.isFile())) {
+    assert.ok(packagedNames.has(entry.name), `missing source media asset ${entry.name}`);
+    const sourceBytes = await readFile(new URL(entry.name, sourceMediaDir));
+    const packagedBytes = await readFile(new URL(entry.name, packagedMediaDir));
+    assert.deepEqual(packagedBytes, sourceBytes, `source media asset differs: ${entry.name}`);
+  }
+
+  for (const file of ["0.u3j0~_2ygfx.css", "00sc_9lpb3zcn.css"]) {
+    const css = await readFile(new URL(file, packagedStylesDir), "utf8");
+    const urls = [...css.matchAll(/url\(([^)]*)\)/g)].map((match) => match[1].replace(/["']/g, ""));
+    for (const url of urls) {
+      if (url.startsWith("data:") || url === "#default#VML") continue;
+      const asset = url.startsWith("/")
+        ? new URL(`../apps/web/public${url}`, import.meta.url)
+        : new URL(url, packagedStylesDir);
+      await readFile(asset);
+    }
+  }
 });
