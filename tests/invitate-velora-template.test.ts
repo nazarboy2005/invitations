@@ -147,6 +147,13 @@ test("Velora RSVP adapter matches the public RSVP request contract", () => {
   assert.match(route, /publicInvitation\(id\)/);
 });
 
+test("Velora refreshes keep guest music playback stable unless its URL changes", () => {
+  const adapter = readPackage("assets/js/velora-adapter.js");
+  assert.match(adapter, /audio\.getAttribute\("src"\)\|\|""\)!==music/);
+  assert.match(adapter, /audio\.pause\(\);if\(music\)audio\.src=music;else audio\.removeAttribute\("src"\);audio\.load\(\)/);
+  assert.match(adapter, /button\.dataset\.onIcon\)button\.src=button\.dataset\.onIcon/);
+});
+
 test("Velora migration registers only the private wedding row", () => {
   const migration = readFileSync(
     path.join(root, "packages/database/migrations/0124_register_velora_template.sql"),
