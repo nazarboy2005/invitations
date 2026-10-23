@@ -12,6 +12,8 @@
   };
   let payload;
   let timer;
+  let sourceMotion;
+  let sourceMotionInitialized = false;
   const $ = (selector, base = root) => base.querySelector(selector);
   const tx = (node, value) => { if (node) node.textContent = value == null ? "" : String(value); };
   const hide = (node, value) => { if (node) node.hidden = Boolean(value); };
@@ -97,6 +99,7 @@
     const footerCta=sections[12]?.querySelectorAll("a")[1];if(footerCta){footerCta.href="/";tx(footerCta,p.locale==="en"?"Create your invitation":p.locale==="ru"?"Создать приглашение":p.locale==="uz-Cyrl"?"Таклифнома яратинг":"O'z taklifnomangizni yarating");}
     renderGallery(sections[9],d.gallery||[],p.preview,c);
     await renderWishes(sections[10],d.wishes||[],p);
+    root.dispatchEvent(new Event("gg:wishes-updated"));
     tx(sections[10]?.querySelector("p"),c.wishes);
     tx(sections[9]?.querySelector("p"),c.gallery);
     tx(sections[11]?.querySelector("h2"),c.rsvp);
@@ -107,6 +110,13 @@
     installMusic(d,p);
     installLocales(p,c);
     root.classList.toggle("gg-reduced-motion",Boolean(p.reducedMotion)||matchMedia("(prefers-reduced-motion: reduce)").matches);
+    if (!sourceMotionInitialized && window.GreenGoldSourceMotion) {
+      sourceMotion = window.GreenGoldSourceMotion.install(root, p);
+      sourceMotionInitialized = true;
+    } else {
+      root.dispatchEvent(new Event("gg:reduced-motion-updated"));
+      sourceMotion?.updateWishes();
+    }
   }
   function renderGallery(section, gallery, preview, c) {
     if (!section) return;
@@ -130,9 +140,12 @@
           button.append(img);
           button.setAttribute("aria-label", alt);
           button.onclick = () => {
-            const dialog = document.createElement("dialog");
+            const dialog = document.createElement("div");
             dialog.className = "gg-lightbox";
             dialog.setAttribute("aria-label", alt);
+            dialog.setAttribute("role", "dialog");
+            dialog.setAttribute("aria-modal", "true");
+            dialog.tabIndex = -1;
             dialog.innerHTML = '<button type="button" data-gg-close></button><img alt="">';
             const dialogImage = dialog.querySelector("img");
             dialogImage.src = item.src;
@@ -140,13 +153,29 @@
             const close = dialog.querySelector("[data-gg-close]");
             close.textContent = c.close;
             close.setAttribute("aria-label", c.close);
-            close.onclick = () => dialog.close();
+            let closing = false;
+            const finish = () => {
+              document.removeEventListener("keydown", onKeydown);
+              dialog.remove();
+              button.focus();
+            };
+            const closeDialog = () => {
+              if (closing) return;
+              closing = true;
+              if (sourceMotion) sourceMotion.closeGallery(dialog, finish);
+              else finish();
+            };
+            const onKeydown = (event) => {
+              if (event.key === "Escape") { event.preventDefault(); closeDialog(); }
+            };
+            close.onclick = closeDialog;
             dialog.addEventListener("click", (event) => {
-              if (event.target === dialog) dialog.close();
+              if (event.target === dialog) closeDialog();
             });
+            document.addEventListener("keydown", onKeydown);
             document.body.append(dialog);
-            dialog.showModal();
-            dialog.addEventListener("close", () => dialog.remove(), { once: true });
+            dialog.focus();
+            sourceMotion?.animateGallery(dialog, dialogImage);
           };
         } else if (item && preview) {
           button.textContent = "\u2022";

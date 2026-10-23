@@ -221,6 +221,37 @@ test("Green Gold runnable adapter isolates the source sections from site runtime
   assert.match(css, /scroll-snap-type:y mandatory/);
 });
 
+test("Green Gold restores source opening, scroll, ornament, sparkle, wishes, and gallery motion", async () => {
+  const html = await readFile(new URL("index.html", root), "utf8");
+  const bridge = await readFile(new URL("bridge.js", root), "utf8");
+  const motion = await readFile(new URL("source-motion.js", root), "utf8");
+  const css = await readFile(new URL("adapter.css", root), "utf8");
+  const original = await readFile(new URL("source/preview-frame.html", root), "utf8");
+  const manifest = JSON.parse(
+    await readFile(new URL("source-assets.provenance.json", root), "utf8"),
+  );
+  assert.match(manifest.sourceMotion.sha256, /^[a-f0-9]{64}$/);
+  assert.equal((original.match(/opacity:0/g) ?? []).length, 58);
+  assert.equal(manifest.sourceMotion.observedSourceMotion.rotatingOrnaments, 18);
+  assert.equal(manifest.sourceMotion.observedSourceMotion.revealTransitions, 11);
+  assert.match(html, /templates\/green-gold\/source-motion\.js/);
+  assert.match(motion, /duration: 1500, delay: 1000/);
+  assert.match(motion, /translateY\(-20px\)/);
+  assert.match(motion, /translateY\(20px\)/);
+  assert.match(motion, /duration: 2000, iterations: Infinity/);
+  assert.match(motion, /scale\(\.96\)/);
+  assert.match(motion, /delay: index \* \(desktop \? 50 : 40\)/);
+  assert.match(motion, /duration: Math\.max\(2\.2 \* list\.children\.length, 16\) \* 1000/);
+  assert.match(motion, /IntersectionObserver/);
+  assert.match(motion, /prefers-reduced-motion/);
+  assert.match(bridge, /GreenGoldSourceMotion\.install/);
+  assert.match(bridge, /gg:wishes-updated/);
+  assert.match(bridge, /animateGallery/);
+  assert.match(bridge, /closeGallery/);
+  assert.doesNotMatch(css, /gg-sparkle|@keyframes/);
+  assert.match(css, /background:rgba\(0,0,0,\.88\)/);
+});
+
 test("Green Gold localized control copy decodes in all four locales", async () => {
   const bridge = await readFile(new URL("bridge.js", root), "utf8");
   const match = bridge.match(/const copy = (\{[\s\S]*?\n  \});/);

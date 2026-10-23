@@ -1,16 +1,54 @@
-# Green Gold source integration — in progress
+# Green Gold source integration
 
-This staging package preserves the captured `preview-frame.html` byte-for-byte and keeps the five available `images/green-gold/` artwork files separate under `assets/`. The source references a sixth file, `vertical-line.png`, which is absent from the archive. Its exact observed Next.js optimized WebP rendition is staged as `assets/vertical-line.webp`; the original PNG remains unavailable. The observed Cyrillic Playfair Display subset is also included in shared Chorlove media. `source-assets.provenance.json` records each source URL, transformation, and hash. Both captured source CSS chunks are preserved under `source/styles/` for fidelity review; they are not loaded as global application styles.
+The original `preview-frame.html` snapshot is preserved byte-for-byte at
+`source/preview-frame.html`. The extracted runnable page keeps its 13 source
+sections, localizes the template-owned assets, removes captured invitation
+sample values and unrelated Orchid Amplop gallery photos, and does not load the
+captured Next.js or Chorlove site runtime. Source CSS chunks remain preserved
+under `source/styles/` for fidelity review. Five source artwork files are
+byte-identical in `assets/`; the source's `vertical-line.png` is absent, so its
+observed optimized WebP rendition is packaged with that limitation recorded in
+`source-assets.provenance.json`. A Cyrillic Playfair Display subset and shared
+CSS dependencies are served from local Chorlove media.
 
-The runnable `index.html` extracts the source's 13 invitation sections without the captured Next.js runtime. It retains the authentic layout and exact packaged artwork, rewrites local image paths, removes Orchid Amplop gallery photos and source invitation values, and leaves the original preview snapshot and source CSS unchanged. `bridge.js` maps names, greeting, invitation text, localized calendar/countdown, venue/map, contacts/hosts, gift card, gallery, wishes, RSVP, locale switching, reduced motion, and click-to-play music to the shared Chorlove payload and public APIs. Catalog preview music is supplied by the shared renderer (Emotional Piano).
+## Recovered source motion
 
-The package is not yet release-ready. The archive's original `vertical-line.png` is unavailable, so the captured optimized WebP rendition is used with that limitation recorded; one observed Cyrillic Playfair subset was added to shared media. Browser layout and interaction review, authentic fixture artwork/provenance, and all publication gates are still pending. The typed catalog and migration `0100_register_green_gold.sql` now register Green Gold as unpublished for preview and internal integration; the registration migration is applied to the configured Neon database and the row remains unpublished. Publication remains gated on IAB visual review, authentic fixture artwork/provenance, and the save/publish/public-render/reopen integration.
+The full Chorlove archive includes route chunk
+`Web invitations/_next/static/chunks/09cpm7sbnsw7i.js`, module `995238`, with
+SHA-256 `cc9472f5f183b8f7fcbfe281f0cbdeaa573b774cc594e56446736694bfe09b75`.
+The captured page snapshot encodes 58 initial hidden opacity/transform states,
+but the extracted package had stripped them and did not include this module's
+motion handlers. That left the opening static and removed section reveals.
 
+`source-motion.js` adapts the original template-only choreography without the
+source app runtime: the five-step staggered cover entrance; source-specific
+section, date, countdown, and responsive gallery reveals; 18 rotating naqsh
+ornaments with their captured directions and periods; 30 source-style random
+starbursts; the looping wishes ticker; and the gallery lightbox's fade/scale
+entrance and exit. `bridge.js` continues to own shared-contract binding and
+service APIs, and only starts the motion adapter and signals updated data or
+reduced-motion preferences. The former generic sparkle keyframes and green
+gallery overlay were replaced with the source animation and full-screen dark
+lightbox treatment. Detailed chunk, element, and timing provenance is recorded
+in `source-assets.provenance.json`.
 
-Accessibility hardening re-enables captured disabled guest/wish controls, adds localized programmatic labels, required-field feedback with focus movement and live announcements, keyboard navigation for RSVP radio choices, descriptive gallery/lightbox labels, 28px language targets, and visible focus rings. Automated checks cover these contracts; browser and assistive-technology verification remain pending because IAB policy rejects the localhost preview URL.
+The typed catalog and additive migration `0100_register_green_gold.sql`
+register this wedding design as unpublished; the configured database also
+confirms it remains unpublished. No authentic portrait catalog artwork is
+currently packaged, and none is present in the local Chorlove template folder
+or asset manifest. The captured page and first-page artwork are in the right
+proportion for a clean portrait capture, but the catalog cover still needs to
+be captured and verified before publication. Browser comparison of source and
+package timing, gallery art behavior, and public/creator integration remain
+release checks.
 
-The shared captured Chorlove stylesheet expected seven font files under the source site's `/fonts/` root, which is absent from the application. Its packaged shared copy now resolves those faces to byte-identical files in `templates/chorlove/shared/_next/static/media/`; the exact original CSS and fonts remain preserved in their source/provenance records. This fixes the shared font dependency for Chorlove packages using this stylesheet without altering the captured snapshot.
+## Shared contract adapter
 
-The added RSVP/wish accessibility labels now decode as real Uzbek Cyrillic and Russian text; runtime evaluation verifies these labels alongside the English and Uzbek Latin entries.
-
-A full local URL audit found 17 WOFF2 subsets and three Leaflet-control PNGs referenced by the shared CSS but absent from the archive. Those exact files were recovered from the absolute media URLs in that stylesheet and recorded with response type and SHA-256 in `templates/chorlove/shared/shared-assets.provenance.json`. Tests now resolve all HTML and CSS local dependencies against packaged files.
+`bridge.js` maps names and greetings, invitation text, localized calendar and
+countdown, venue/map, contacts and hosts, To'yona card, gallery, wishes, RSVP,
+locales, reduced motion, and click-to-play music to the shared Chorlove payload
+and platform APIs. Preview-only content remains ephemeral. Accessibility
+support includes localized form labels and validation, keyboard RSVP controls,
+live status messages, gallery labels, and visible focus indicators. Empty
+creator-photo galleries remain hidden in public invitations; the template's
+opening art and ornaments remain visible.

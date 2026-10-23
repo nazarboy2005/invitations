@@ -80,5 +80,27 @@
       "sourceUrl": "https://chorlove.uz/_next/static/media/65c558afe41e89d6-s.113htgw8u-emy.woff2",
       "transformation": "Copied exact observed source font subset for Russian Playfair Display; shared Chorlove static media."
     }
-  ]
+  ],
+  "sourceMotion": {
+    "archiveFile": "Chorlove/Web invitations/_next/static/chunks/09cpm7sbnsw7i.js",
+    "moduleId": "995238",
+    "sha256": "cc9472f5f183b8f7fcbfe281f0cbdeaa573b774cc594e56446736694bfe09b75",
+    "observedSourceMotion": {
+      "sectionCount": 13,
+      "hiddenInitialMotionElements": 58,
+      "revealTransitions": 11,
+      "rotatingOrnaments": 18,
+      "randomizedSparkles": 30,
+      "openingSequence": [
+        "Arabic wordmark fades/slides from y=-20 over 1s",
+        "greeting scales from .8 after .5s over 1s",
+        "ornamental rule grows from 0 to 80% after 1s over 1.5s",
+        "title rises from y=20 after 1.2s over 1s",
+        "down indicator floats y=0,10,0 over 2s"
+      ],
+      "galleryTiles": "source stagger: mobile y=18 with .04s/item delay; desktop scale=.96 with .05s/item delay; once at 35% intersection",
+      "wishTicker": "if more than three wishes, translate y 0% to -50%, linear loop with max(2.2s per item, 16s)",
+      "reducedMotion": "application preference support added without site runtime"
+    }
+  }
 }
