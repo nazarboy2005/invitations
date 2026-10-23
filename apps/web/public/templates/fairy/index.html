@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Приглашение на свадьбу</title>
+    <link rel="stylesheet" href="./assets/fonts/fairy-google.css">
+    <link rel="stylesheet" href="./assets/fonts/fairy-captured-subsets.css">
+    <link rel="stylesheet" href="./assets/css/fairy.css">
+</head>
+
+<body>
+
+    <div class="preloader" id="preloader">
+        <svg class="preloader-heart heart-svg" viewBox="0 0 32 29" xmlns="http://www.w3.org/2000/svg">
+            <path class="heart-outline"
+                d="M16 27.5C16 27.5 2 19.2 2 9.6C2 5.4 5.2 2 9.1 2C11.9 2 14.3 3.7 16 6.2C17.7 3.7 20.1 2 22.9 2C26.8 2 30 5.4 30 9.6C30 19.2 16 27.5 16 27.5Z" />
+            <path class="heart-fill"
+                d="M16 27.5C16 27.5 2 19.2 2 9.6C2 5.4 5.2 2 9.1 2C11.9 2 14.3 3.7 16 6.2C17.7 3.7 20.1 2 22.9 2C26.8 2 30 5.4 30 9.6C30 19.2 16 27.5 16 27.5Z" />
+        </svg>
+    </div>
+
+    <div class="device">
+
+        <!-- ============ HERO ============ -->
+        <section class="hero">
+            <img class="hero-photo" src="./assets/images/fairy/heroback.png" alt="">
+            <div class="hero-overlay"></div>
+
+            <img class="hero-content-bg" src="./assets/images/fairy/heroram.png" alt="">
+
+            <div class="hero-content">
+                <svg class="hero-heart heart-svg" viewBox="0 0 32 29" xmlns="http://www.w3.org/2000/svg">
+                    <path class="heart-outline"
+                        d="M16 27.5C16 27.5 2 19.2 2 9.6C2 5.4 5.2 2 9.1 2C11.9 2 14.3 3.7 16 6.2C17.7 3.7 20.1 2 22.9 2C26.8 2 30 5.4 30 9.6C30 19.2 16 27.5 16 27.5Z" />
+                    <path class="heart-fill"
+                        d="M16 27.5C16 27.5 2 19.2 2 9.6C2 5.4 5.2 2 9.1 2C11.9 2 14.3 3.7 16 6.2C17.7 3.7 20.1 2 22.9 2C26.8 2 30 5.4 30 9.6C30 19.2 16 27.5 16 27.5Z" />
+                </svg>
+
+                <div class="hero-eyebrow reveal reveal-delay-1"></div>
+                <div class="hero-names reveal-scale reveal-delay-2"><span class="hero-groom"></span><br>&amp;<br><span class="hero-bride"></span></div>
+                <div class="hero-date reveal reveal-delay-3"></div>
+            </div>
+        </section>
+        <!-- ============ /HERO ============ -->
+
+        <!-- ============ DEAR FRIENDS ============ -->
+        <section class="friends-section">
+            <img class="friends-top-img reveal-scale" src="./assets/images/fairy/couple.png" alt="">
+
+            <div class="friends-title reveal-scale"></div>
+            <p class="friends-desc reveal reveal-delay-1"></p>
+
+            <img class="friends-border" src="./assets/images/fairy/border.png" alt="">
+
+            <div class="calendar-title reveal-scale"></div>
+
+            <div class="calendar-widget reveal reveal-delay-1">
+            </div>
+        </section>
+        <!-- ============ /DEAR FRIENDS ============ -->
+
+        <!-- ============ COUNTDOWN OVER PHOTO ============ -->
+        <section class="countdown-section">
+            <img class="countdown-bg" src="./assets/images/fairy/circleback.png" alt="">
+
+            <div class="countdown-content">
+                <div class="countdown-title reveal-scale"></div>
+                <p class="countdown-desc reveal reveal-delay-1"></p>
+
+                <div class="countdown-boxes reveal reveal-delay-2">
+                    <div class="countdown-item">
+                        <div class="countdown-value" id="cd-days">00</div>
+                        <div class="countdown-label"></div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-value" id="cd-hours">00</div>
+                        <div class="countdown-label"></div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-value" id="cd-mins">00</div>
+                        <div class="countdown-label"></div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-value" id="cd-secs">00</div>
+                        <div class="countdown-label"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- ============ /COUNTDOWN OVER PHOTO ============ -->
+
+        <!-- ============ CHANDELIER ============ -->
+        <section class="chandelier-section">
+            <img class="chandelier-img" src="./assets/images/fairy/qandil.png" alt="">
+        </section>
+        <!-- ============ /CHANDELIER ============ -->
+
+        <!-- ============ PROGRAM OF THE DAY ============ -->
+        <section class="program-section">
+            <img class="program-bg" src="./assets/images/fairy/programm.png" alt="">
+            <div class="program-overlay"></div>
+
+            <div class="program-content">
+                <div class="program-title reveal-scale"></div>
+                <div class="program-list"></div>
+            </div>
+        </section>
+        <!-- ============ /PROGRAM OF THE DAY ============ -->
+
+        <!-- ============ LOCATION ============ -->
+        <section class="location-section">
+            <div class="location-title reveal-scale"></div>
+            <p class="location-address reveal reveal-delay-1"></p>
+            <a href="https://maps.google.com" target="_blank" rel="noopener" class="location-btn reveal reveal-delay-2">
+            </a>
+            <div class="location-photo reveal-scale reveal-delay-3">
+                <img src="./assets/images/fairy/location.png" alt="Venue">
+            </div>
+        </section>
+        <!-- ============ /LOCATION ============ -->
+
+        <!-- ============ TO'YONA ============ -->
+        <section class="toyona-section" hidden>
+            <h2 class="toyona-title reveal-scale"></h2>
+            <div class="toyona-card reveal reveal-delay-1">
+                <div class="toyona-holder-label"></div>
+                <p class="toyona-holder"></p>
+                <div class="toyona-number-label"></div>
+                <p class="toyona-number"></p>
+                <button type="button" class="toyona-copy"></button>
+                <p class="toyona-status" aria-live="polite"></p>
+            </div>
+        </section>
+        <!-- ============ /TO'YONA ============ -->
+
+        <!-- ============ DRESS CODE ============ -->
+        <section class="dresscode-section">
+            <div class="dresscode-title reveal-scale"></div>
+            <p class="dresscode-desc reveal reveal-delay-1"></p>
+            <div class="dresscode-blobs reveal-scale reveal-delay-2">
+                <span class="blob blob1"></span>
+                <span class="blob blob2"></span>
+                <span class="blob blob3"></span>
+                <span class="blob blob4"></span>
+                <span class="blob blob5"></span>
+            </div>
+            <img class="dresscode-photo" src="./assets/images/fairy/dresscode.png" alt="">
+        </section>
+        <!-- ============ /DRESS CODE ============ -->
+
+        <!-- ============ WE AWAIT YOU ============ -->
+        <section class="await-section">
+            <img class="await-bg" src="./assets/images/fairy/heart.png" alt="">
+            <div class="await-text reveal"></div>
+        </section>
+        <!-- ============ /WE AWAIT YOU ============ -->
+
+        <!-- ============ ANKETA / RSVP ============ -->
+        <section class="anketa-section">
+            <div class="anketa-title reveal-scale"></div>
+            <p class="anketa-desc reveal reveal-delay-1"></p>
+
+            <form class="anketa-form reveal reveal-delay-2">
+                <div class="anketa-field">
+                    <label for="fullname"></label>
+                    <input type="text" id="fullname" name="fullname">
+                </div>
+
+                <div class="anketa-field">
+                    <label>Вы придёте?</label>
+                    <div class="anketa-radios">
+                        <label class="anketa-radio">
+                            <input type="radio" name="attending" value="yes">
+
+                        </label>
+                        <label class="anketa-radio">
+                            <input type="radio" name="attending" value="no">
+
+                        </label>
+                    </div>
+                </div>
+
+                <div class="anketa-field">
+                    <label for="wishes"></label>
+                    <textarea id="wishes" name="wishes"></textarea>
+                </div>
+
+                <button type="button" class="anketa-submit" id="anketaSubmit"></button>
+            </form>
+        </section>
+        <!-- ============ /ANKETA / RSVP ============ -->
+
+        <!-- ============ FOOTER ============ -->
+        <footer class="site-footer reveal">
+            <div class="footer-icons">
+                <a href="#" aria-label="Website" target="_blank" rel="noopener">
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M12 2a10 10 0 100 20 10 10 0 000-20zm7.94 9h-3.1a15.6 15.6 0 00-1.3-5.6A8.03 8.03 0 0119.94 11zM12 4.06c.9 1.2 1.9 3.2 2.16 6.94H9.84C10.1 7.26 11.1 5.26 12 4.06zM9.84 13h4.32c-.26 3.74-1.26 5.74-2.16 6.94-.9-1.2-1.9-3.2-2.16-6.94zM8.46 5.4A15.6 15.6 0 007.16 11h-3.1a8.03 8.03 0 014.4-5.6zM4.06 13h3.1a15.6 15.6 0 001.3 5.6 8.03 8.03 0 01-4.4-5.6zm11.48 5.6a15.6 15.6 0 001.3-5.6h3.1a8.03 8.03 0 01-4.4 5.6z" />
+                    </svg>
+                </a>
+                <a href="#" aria-label="Facebook" target="_blank" rel="noopener">
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M13.5 21v-7.5h2.5l.4-3h-2.9V8.4c0-.87.24-1.46 1.5-1.46h1.6V4.3C16.3 4.2 15.4 4 14.4 4c-2.3 0-3.9 1.4-3.9 4v2.5H8v3h2.5V21h3z" />
+                    </svg>
+                </a>
+                <a href="#" aria-label="Instagram" target="_blank" rel="noopener">
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M12 2.2c2.7 0 3 0 4 .05 1 .05 1.7.2 2.3.45a4.6 4.6 0 011.7 1.1 4.6 4.6 0 011.1 1.7c.25.6.4 1.3.45 2.3.05 1 .05 1.3.05 4s0 3-.05 4c-.05 1-.2 1.7-.45 2.3a4.6 4.6 0 01-1.1 1.7 4.6 4.6 0 01-1.7 1.1c-.6.25-1.3.4-2.3.45-1 .05-1.3.05-4 .05s-3 0-4-.05c-1-.05-1.7-.2-2.3-.45a4.6 4.6 0 01-1.7-1.1 4.6 4.6 0 01-1.1-1.7c-.25-.6-.4-1.3-.45-2.3-.05-1-.05-1.3-.05-4s0-3 .05-4c.05-1 .2-1.7.45-2.3a4.6 4.6 0 011.1-1.7 4.6 4.6 0 011.7-1.1c.6-.25 1.3-.4 2.3-.45 1-.05 1.3-.05 4-.05zM12 7a5 5 0 100 10 5 5 0 000-10zm0 8.2a3.2 3.2 0 110-6.4 3.2 3.2 0 010 6.4zm5.2-8.4a1.17 1.17 0 110-2.34 1.17 1.17 0 010 2.34z" />
+                    </svg>
+                </a>
+                <a href="#" aria-label="Telegram" target="_blank" rel="noopener">
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M21.9 4.3c.3-1.1-.8-2-1.9-1.6L2.4 9.8c-1.2.5-1.2 2.1.1 2.5l4.5 1.4 1.7 5.5c.3.9 1.4 1.1 2.1.5l2.5-2.3 4.4 3.3c.9.7 2.2.2 2.4-.9l3.8-15.5zM8.7 13.3l9-6.7c.2-.2.5.1.3.3l-7.3 7.2c-.3.3-.5.7-.5 1.1l-.2 2.5-1.3-4.4z" />
+                    </svg>
+                </a>
+            </div>
+            <div class="footer-rights"></div>
+        </footer>
+        <!-- ============ /FOOTER ============ -->
+
+    </div>
+
+    <button class="music-toggle" id="musicToggle" aria-label="Toggle music">
+        <svg viewBox="0 0 24 24">
+            <path d="M9 18V5l12-2v13" />
+            <circle cx="6" cy="18" r="3" />
+            <circle cx="18" cy="16" r="3" />
+        </svg>
+    </button>
+
+    <audio id="bgMusic" loop preload="none"></audio>
+
+    <script src="./assets/js/fairy.js"></script>
+    <script src="./assets/js/fairy-adapter.js"></script>
+</body>
+
+</html>
