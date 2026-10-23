@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { readFile, readdir } from "node:fs/promises";
 import { test } from "node:test";
+import { templateById } from "@taklifnoma/contracts";
 
 const root = new URL("../apps/web/public/templates/modern-floral/", import.meta.url);
 const htmlUrl = new URL("index.html", root);
@@ -22,7 +23,17 @@ test("Modern Floral motion port is tied to the captured route module", async () 
   const provenance = JSON.parse(await readFile(provenanceUrl, "utf8"));
   const sourceChunk = await readFile(sourceChunkUrl);
   const motion = await readFile(motionUrl, "utf8");
+  const source = sourceChunk.toString("utf8");
   assert.equal(provenance.sourceMotionModule.sha256, createHash("sha256").update(sourceChunk).digest("hex"));
+  assert.match(source, /transition:\{delay:1\.45,duration:1,ease:\[\.83,0,\.17,1\]\}/);
+  assert.match(source, /animate:\{opacity:\[0,1,1,0\],scale:\[\.84,1,1,1\.05\],y:\[24,0,0,-18\]\},transition:\{duration:2\.1,ease:"easeOut"\}/);
+  assert.match(source, /transition:\{delay:2\.25,duration:\.75,ease:"easeInOut"\}/);
+  assert.match(source, /Array\.from\(\{length:34\}\).*left:37\*t%100,delay:t%16\*\.8,duration:12\+t%9\*1\.8,rotate:53\*t%360,size:18\+t%5\*5,drift:8\+t%5\*5/);
+  assert.match(source, /initial:\{opacity:0,y:15\},whileInView:\{opacity:1,y:0\},viewport:\{amount:\.2\},transition:\{duration:\.6\}/);
+  assert.match(source, /staggerChildren:\.14,delayChildren:\.12/);
+  assert.match(source, /staggerChildren:\.14,delayChildren:2\.75/);
+  assert.match(source, /animate:\{y:\[0,-8,0\],rotate:\[0,a\?-2:2,0\]\},transition:\{duration:6\+s,repeat:1\/0,ease:"easeInOut"\}/);
+  assert.match(source, /transition:\{duration:Math\.max\(2\.2\*E\.length,16\),ease:"linear",repeat:1\/0\}/);
   assert.match(motion, /delay: 1450, duration: 1000, easing: "cubic-bezier\(\.83,0,\.17,1\)"/);
   assert.match(motion, /delay: 2250, duration: 750/);
   assert.match(motion, /setTimeout\(\(\) => \{ if \(opening\.isConnected\) opening\.hidden = true; \}, 3000\)/);
@@ -30,6 +41,10 @@ test("Modern Floral motion port is tied to the captured route module", async () 
   assert.match(motion, /\(index % 16\) \* 800/);
   assert.match(motion, /\(12 \+ \(index % 9\) \* 1\.8\) \* 1000/);
   assert.match(motion, /\(53 \* index\) % 360/);
+  assert.match(motion, /offset: 1 \/ 3/);
+  assert.match(motion, /offset: 2 \/ 3/);
+  assert.match(motion, /duration: \(6 \+ delay\) \* 1000, iterations: Infinity, easing: "ease-in-out"/);
+  assert.doesNotMatch(motion, /duration: \(6 \+ delay\) \* 1000, delay:/);
   assert.match(motion, /duration: 10000, iterations: Infinity/);
   assert.match(motion, /duration: 2000, iterations: Infinity/);
   assert.match(motion, /prefers-reduced-motion/);
@@ -43,12 +58,14 @@ test("Modern Floral page loads its source motion runner and preserves source rev
   assert.match(html, /data-chorlove-template="modern-floral"/);
   assert.doesNotMatch(css, /section \[style\*="opacity:0"\][^{]*\{[^}]*opacity:1!important/s);
   assert.match(html, /style="opacity:0;transform:translateY\(24px\) scale\(0\.84\)"/);
+  assert.equal([...html.matchAll(/style="width:\d+px;height:\d+px;top:-10%;left:/g)].length, 34);
   assert.doesNotMatch(bridge, /hide\(root\.firstElementChild\)/);
 });
 
 test("Modern Floral catalog artwork has the source image hash and portrait dimensions", async () => {
   const cover = await readFile(coverUrl);
   const provenance = JSON.parse(await readFile(provenanceUrl, "utf8"));
+  assert.equal(templateById("modern-floral")?.previewImage, "/templates/modern-floral/catalog-opening.jpg");
   assert.equal(provenance.catalogArtwork.sha256, createHash("sha256").update(cover).digest("hex"));
   assert.deepEqual(provenance.catalogArtwork.dimensions, [810, 1754]);
   assert.equal(provenance.catalogArtwork.file, "catalog-opening.jpg");

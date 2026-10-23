@@ -115,8 +115,8 @@
     });
     greeting?.animate([
       { opacity: 0, transform: "translateY(24px) scale(.84)", offset: 0 },
-      { opacity: 1, transform: "translateY(0px) scale(1)", offset: 0.5 },
-      { opacity: 1, transform: "translateY(0px) scale(1)", offset: 0.78 },
+      { opacity: 1, transform: "translateY(0px) scale(1)", offset: 1 / 3 },
+      { opacity: 1, transform: "translateY(0px) scale(1)", offset: 2 / 3 },
       { opacity: 0, transform: "translateY(-18px) scale(1.05)", offset: 1 },
     ], { duration: 2100, easing: "ease-out", fill: "forwards" });
     opening.animate([{ opacity: 1 }, { opacity: 0 }], {
@@ -139,8 +139,8 @@
       const rotate = (degrees) => `rotate(${degrees}deg)`;
       petal.animate([
         { top: "-10%", left: `${left}%`, transform: rotate(rotation), opacity: 0, offset: 0 },
-        { top: "30%", left: `${left + drift}%`, transform: rotate(rotation + 240), opacity: 0.3, offset: 0.333 },
-        { top: "70%", left: `${left - drift}%`, transform: rotate(rotation + 480), opacity: 0.3, offset: 0.667 },
+        { top: "30%", left: `${left + drift}%`, transform: rotate(rotation + 240), opacity: 0.3, offset: 1 / 3 },
+        { top: "70%", left: `${left - drift}%`, transform: rotate(rotation + 480), opacity: 0.3, offset: 2 / 3 },
         { top: "110%", left: `${left}%`, transform: rotate(rotation + 720), opacity: 0, offset: 1 },
       ], { duration, delay, iterations: Infinity, easing: "linear" });
     });
@@ -159,7 +159,7 @@
         { transform: "translateY(0px) rotate(0deg)" },
         { transform: `translateY(-8px) rotate(${mirrored ? -2 : 2}deg)` },
         { transform: "translateY(0px) rotate(0deg)" },
-      ], { duration: (6 + delay) * 1000, delay: delay * 1000, iterations: Infinity, easing: "ease-in-out" });
+      ], { duration: (6 + delay) * 1000, iterations: Infinity, easing: "ease-in-out" });
     });
     const heart = root.querySelector("section:first-of-type .relative.py-4 > .absolute.inset-0");
     if (heart && !heart.dataset.mfLoopMotion) {
