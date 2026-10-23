@@ -49,6 +49,7 @@
   const musicButton = root.querySelector('[aria-label="Toggle music"]');
   let currentLocale = "uz-Latn";
   let musicEnabled = false;
+  let starsReducedMotion = null;
 
   const text = (selector, value) => {
     const node = root.querySelector(selector);
@@ -114,12 +115,15 @@
       audio.pause();
       audio.currentTime = 0;
     }
+    const wasReduced = root.classList.contains("golden-reduced-motion");
     if (payload?.reducedMotion || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       root.classList.add("golden-reduced-motion");
+      if (!wasReduced) settleReducedMotion();
     } else {
       root.classList.remove("golden-reduced-motion");
     }
     syncMusicLabel();
+    animateStars();
   }
 
   function syncMusicLabel() {
@@ -130,17 +134,74 @@
   }
 
   function animateStars() {
-    if (root.classList.contains("golden-reduced-motion")) return;
+    const reduce = root.classList.contains("golden-reduced-motion") || window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (starsReducedMotion === reduce) return;
+    starsReducedMotion = reduce;
     root.querySelectorAll(".golden-sparkle-star").forEach((star, index) => {
-      star.animate(
-        [
-          { opacity: 0, transform: "scale(.3) rotate(-25deg)" },
-          { opacity: 0.8, transform: "scale(1) rotate(0deg)", offset: 0.3 },
-          { opacity: 0.25, transform: "scale(.72) rotate(18deg)" },
-        ],
-        { duration: 2200 + (index % 5) * 240, delay: index * 55, iterations: Infinity, direction: "alternate", easing: "ease-in-out" },
-      );
+      star.getAnimations().forEach(animation => animation.cancel());
+      if (reduce) { star.style.opacity = ".38"; star.style.transform = "scale(.72) rotate(35deg)"; return; }
+      star.style.opacity = ""; star.style.transform = "";
+      const drift = 7 + (index % 4) * 4;
+      const frame = (opacity, scale, rotation, y, offset) => ({ opacity, transform: `translateY(${y}px) scale(${scale}) rotate(${rotation}deg)`, offset });
+      star.animate([
+        frame(0,.35,-25,0,0), frame(.95,1.25,10,-drift/2,.25), frame(.38,.72,35,-drift,.5),
+        frame(1,1,0,-drift/2,.75), frame(0,.35,-25,0,1),
+      ], { duration: 3400 + (index % 7) * 500, delay: (index % 12) * 420, iterations: Infinity, easing: "ease-in-out" });
     });
+  }
+
+  function animateCoverEntrance() {
+    if (root.classList.contains("golden-reduced-motion") || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    card.animate([
+      {opacity:0, transform:"translateY(42px) scale(.9)", filter:"blur(12px)"},
+      {opacity:1, transform:"translateY(0) scale(1)", filter:"blur(0px)"},
+    ], {duration:1050, easing:"cubic-bezier(.16,1,.3,1)", fill:"both"});
+    root.querySelector(".golden-cover-greeting")?.animate(
+      [{opacity:0,transform:"translateY(-18px)"},{opacity:1,transform:"translateY(0)"}],
+      {delay:450,duration:700,easing:"ease-out",fill:"both"});
+    root.querySelector(".golden-cover-heading")?.animate(
+      [{opacity:0,transform:"translateY(12px) scale(.86)"},{opacity:1,transform:"translateY(0) scale(1)"}],
+      {delay:650,duration:850,easing:"cubic-bezier(.16,1,.3,1)",fill:"both"});
+    root.querySelector(".golden-open-button")?.animate(
+      [{opacity:0,transform:"translateY(18px)"},{opacity:1,transform:"translateY(0)"}],
+      {delay:950,duration:650,easing:"ease-out",fill:"both"});
+  }
+
+  function revealInvitation() {
+    const reduced = root.classList.contains("golden-reduced-motion") || window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const invite = root.querySelector(".golden-invite");
+    if (!invite || reduced) return;
+    invite.animate([{opacity:0},{opacity:1}], {delay:700,duration:300,easing:"ease-out",fill:"both"});
+    invite.querySelectorAll("[data-reveal]").forEach((node,index) => node.animate(
+      [{opacity:0,filter:"blur(6px)",transform:"translateY(14px)"},{opacity:1,filter:"blur(0px)",transform:"translateY(0)"}],
+      {delay:700+index*120,duration:550,easing:"cubic-bezier(.16,1,.3,1)",fill:"both"}));
+  }
+
+  function concealInvitation() {
+    const invite = root.querySelector(".golden-invite");
+    if (!invite) return;
+    const revealItems = [...invite.querySelectorAll("[data-reveal]")];
+    for (const node of [invite, ...revealItems]) node.getAnimations().forEach(animation => animation.cancel());
+    if (root.classList.contains("golden-reduced-motion") || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      invite.style.opacity = "0";
+      for (const node of revealItems) { node.style.opacity = "0"; node.style.transform = "translateY(14px)"; node.style.filter = "blur(6px)"; }
+      return;
+    }
+    invite.animate([{opacity:1},{opacity:0}], {duration:300,easing:"ease-out",fill:"forwards"});
+    for (const node of revealItems) node.animate(
+      [{opacity:1,filter:"blur(0px)",transform:"translateY(0)"},{opacity:0,filter:"blur(6px)",transform:"translateY(14px)"}],
+      {duration:300,easing:"ease-out",fill:"forwards"});
+  }
+
+  function settleReducedMotion() {
+    root.getAnimations({subtree:true}).forEach(animation => animation.cancel());
+    card.style.opacity="1"; card.style.transform="none"; card.style.filter="none";
+    for (const selector of [".golden-cover-greeting", ".golden-cover-heading", ".golden-open-button"]) {
+      const node=root.querySelector(selector); if(node){node.style.opacity="1";node.style.transform="none";node.style.filter="none";}
+    }
+    if(card.classList.contains("is-open")){
+      const invite=root.querySelector(".golden-invite"); if(invite){invite.style.opacity="1";invite.querySelectorAll("[data-reveal]").forEach(node=>{node.style.opacity="1";node.style.transform="none";node.style.filter="none";});}
+    }
   }
 
   async function tryPlay() {
@@ -163,13 +224,23 @@
       syncMusicLabel();
       return;
     }
+    if (event.target.closest(".golden-container")) {
+      if (event.target.closest("a")) return;
+      card.classList.remove("is-open");
+      root.querySelector(".golden-container")?.setAttribute("aria-hidden", "true");
+      concealInvitation();
+      return;
+    }
     if (event.target.closest(".golden-cover")) {
       card.classList.add("is-open");
       root.querySelector(".golden-container")?.setAttribute("aria-hidden", "false");
-      animateStars();
+      if (root.classList.contains("golden-reduced-motion") || window.matchMedia("(prefers-reduced-motion: reduce)").matches) settleReducedMotion();
+      else revealInvitation();
       void tryPlay();
     }
   });
+
+  root.classList.toggle("golden-reduced-motion", new URLSearchParams(window.location.search).get("qaReducedMotion") === "1");
 
   window.addEventListener("message", (event) => {
     if (event.origin !== window.location.origin || event.data?.type !== `${templateId}:update`) return;
@@ -180,5 +251,7 @@
     const initial = JSON.parse(window.name);
     if (initial?.type === `${templateId}:update`) update(initial.payload);
   } catch { /* The host sends the invitation after the frame loads. */ }
+  animateStars();
+  if (!root.classList.contains("golden-reduced-motion") && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) animateCoverEntrance();
 })();
 

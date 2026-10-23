@@ -44,6 +44,34 @@
     ],
     "consoleErrorsAndWarnings": 0
   },
+  "sourceFidelityAudit": {
+    "date": "2026-10-23",
+    "componentChunk": "Invitations - this folder will be removed from production/Chorlove/Web invitations/_next/static/chunks/00phb3uac959r.js",
+    "componentChunkSha256": "f054bd58d6153468c79967a1906e68bb69171b61e76f4e45f914cd1ad627b653",
+    "sourceCss": "Extracted from the route chunk; only the Lobster remote import was localized and image URLs were remapped to packaged assets.",
+    "lobsterGoogleFontsV32": {
+      "latin": "AED68C73817364906FF95D97BE87246D106BD38D5E4397E4866EC831EE22F7BA",
+      "latinExt": "51A1F5B28CBDC742ECAEEABF5FED74D0446B0B1CEBDD6BBF6CD93ECC36B16629",
+      "cyrillic": "738FD39C3BD07649E0BCEB56A847CE07C736799E7212C6570C3644D68188012B",
+      "cyrillicExt": "B306FF4A03B57D52960C21B0E741620417368794B61E358713FC86CFCA41A55D"
+    },
+    "normalMotionBrowserCheck": {
+      "sourceOpeningAndInviteStates": "passed",
+      "coverTransition": "1.5s transform",
+      "sparkleCount": 34,
+      "lobsterAndGreatVibesFontsLoaded": true,
+      "sourceImagesLoaded": true,
+      "closeAndReopen": "passed"
+    },
+    "reducedMotionBrowserCheck": {
+      "previewFlag": true,
+      "templateClassApplied": true,
+      "coverTransition": "none",
+      "sparkleAnimation": "none",
+      "openingAndInviteVisible": true,
+      "localFontsAndImagesLoaded": true
+    }
+  },
   "publicationMigration": "0093_publish_golden_card.sql",
   "releaseVerification": {
     "configuredCatalog": {

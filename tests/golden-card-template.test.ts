@@ -62,6 +62,50 @@ test("Golden Card bridge maps authored invitation data and honors reduced motion
   assert.doesNotMatch(html, /<script[^>]+src=["']https?:/i);
 });
 
+test("Golden Card preserves the captured page CSS and opening choreography", async () => {
+  const sourceChunk = await readFile(
+    new URL(
+      "../Invitations - this folder will be removed from production/Chorlove/Web invitations/_next/static/chunks/00phb3uac959r.js",
+      import.meta.url,
+    ),
+  );
+  assert.equal(
+    createHash("sha256").update(sourceChunk).digest("hex"),
+    "f054bd58d6153468c79967a1906e68bb69171b61e76f4e45f914cd1ad627b653",
+  );
+  const chunk = sourceChunk.toString("utf8");
+  const cssStart = chunk.indexOf("children:'@import") + "children:'".length;
+  const cssEnd = chunk.indexOf("'})]})", cssStart);
+  assert.ok(cssStart > "children:'".length && cssEnd > cssStart);
+  const sourceCss = chunk
+    .slice(cssStart, cssEnd)
+    .replace('@import "https://fonts.googleapis.com/css2?family=Lobster&display=swap";', "")
+    .replaceAll("url(/images/templates/golden-card/", "url(/templates/golden-card/assets/");
+  const packagedCss = (await read("adapter.css")).toString("utf8");
+  assert.ok(packagedCss.includes(sourceCss));
+  assert.doesNotMatch(packagedCss, /fonts\.googleapis\.com|fonts\.gstatic\.com/);
+
+  const lobsterFiles = [
+    ["lobster-latin.woff2", "aed68c73817364906ff95d97be87246d106bd38d5e4397e4866ec831ee22f7ba"],
+    ["lobster-latin-ext.woff2", "51a1f5b28cbdc742ecaeeabf5fed74d0446b0b1cebdd6bbf6cd93ecc36b16629"],
+    ["lobster-cyrillic.woff2", "738fd39c3bd07649e0bceb56a847ce07c736799e7212c6570c3644d68188012b"],
+    ["lobster-cyrillic-ext.woff2", "b306ff4a03b57d52960c21b0e741620417368794b61e358713fc86cfca41a55d"],
+  ];
+  for (const [file, expectedHash] of lobsterFiles) {
+    assert.equal(createHash("sha256").update(await read(`assets/fonts/${file}`)).digest("hex"), expectedHash);
+  }
+
+  const bridge = (await read("bridge.js")).toString("utf8");
+  const html = (await read("index.html")).toString("utf8");
+  assert.match(chunk, /delay:t%12\*\.42,duration:3\.4\+t%7\*\.5/);
+  assert.match(chunk, /staggerChildren:\.12/);
+  assert.match(chunk, /transition:\{duration:\.55,ease:\[\.16,1,\.3,1\]\}/);
+  assert.match(bridge, /duration: 3400 \+ \(index % 7\) \* 500, delay: \(index % 12\) \* 420/);
+  assert.match(bridge, /delay:700\+index\*120,duration:550/);
+  assert.match(bridge, /delay:700,duration:300/);
+  assert.equal((html.match(/class="golden-sparkle-star"/g) ?? []).length, 34);
+});
+
 test("Golden Card keeps source artwork in the renderer and preview gallery data out of drafts", async () => {
   const html = (await read("index.html")).toString("utf8");
   const styles = (await read("adapter.css")).toString("utf8");
