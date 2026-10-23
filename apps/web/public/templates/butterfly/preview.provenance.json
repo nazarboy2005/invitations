@@ -1,0 +1,9 @@
+{
+  "capture": "Local browser render of the real Butterfly opening section",
+  "route": "/preview?template=butterfly&demo=1&qaSilent=1",
+  "selector": ".opening-scene",
+  "viewport": { "width": 390, "height": 844 },
+  "sample": "apps/web/src/modules/catalog/preview-sample.json",
+  "output": { "width": 357, "height": 719 },
+  "capturedAt": "2026-10-23"
+}
