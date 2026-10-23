@@ -273,10 +273,51 @@
           petal.animate([{ rotate: "0deg" }, { rotate: "360deg" }], { duration: duration * 1200, delay: delay * 1000, iterations: Infinity, easing: "linear" });
         }
       }
+      if (!reduced) {
+        heart?.firstElementChild?.animate(
+          [{ scale: 1 }, { scale: 1.12 }, { scale: 1 }],
+          { duration: 2000, iterations: Infinity, easing: "ease-in-out" },
+        );
+        const sheen = button?.querySelector("div.absolute.top-0.h-full.w-8");
+        sheen?.animate(
+          [{ transform: "translateX(-100px)" }, { transform: "translateX(260px)" }],
+          { duration: 3000, iterations: Infinity, easing: "ease-in-out" },
+        );
+      }
       if (heart) { heart.setAttribute("role","button"); heart.tabIndex=0; heart.setAttribute("aria-label",localCopy().openInvitation); }
       const close = () => {
         if (envelope.classList.contains("cc-source-closing")) return;
+        const reduced = Boolean(state?.reducedMotion)
+          || matchMedia("(prefers-reduced-motion: reduce)").matches
+          || new URLSearchParams(location.search).get("qaReducedMotion") === "1";
+        const audio = root.querySelector("audio[data-chorlove-audio]");
+        if (audio && state?.data.music?.url && !state.silentPlayback) audio.play().catch(() => {});
+        if (reduced) {
+          envelope.hidden = true;
+          window.scrollTo({ top: 0, behavior: "auto" });
+          return;
+        }
         envelope.classList.add("cc-source-closing");
+        if (button) button.disabled = true;
+        envelope.animate([{ opacity: 1 }, { opacity: 0 }], {
+          duration: 600,
+          delay: 450,
+          easing: "ease-in-out",
+          fill: "forwards",
+        });
+        card?.animate(
+          [
+            { transform: "translateY(0px) scale(1)", opacity: 1 },
+            { transform: "translateY(-35px) scale(1.08)", opacity: 0 },
+          ],
+          { duration: 800, easing: "cubic-bezier(.22,1,.36,1)", fill: "forwards" },
+        );
+        envelope.querySelectorAll('img[src*="flower4-decoration"], img[src*="flower5-bottom"]').forEach((flower) => {
+          flower.animate(
+            [{ scale: 1, opacity: 0.9 }, { scale: 2.5, opacity: 0 }],
+            { duration: 800, easing: "ease-out", fill: "forwards" },
+          );
+        });
         envelope.querySelectorAll(".cc-source-petal").forEach(petal => {
           const opacity = getComputedStyle(petal).opacity;
           petal.getAnimations().forEach(animation => animation.cancel());
@@ -287,7 +328,7 @@
           ], { duration: 850, easing: "ease-out", fill: "forwards" });
           petal.animate([{ opacity }, { opacity: 0 }], { duration: 850, easing: "ease-out", fill: "forwards" });
         });
-        window.setTimeout(() => { envelope.hidden=true; }, 1100);
+        window.setTimeout(() => { envelope.hidden=true; }, 1050);
       };
       button?.addEventListener("click", close);
       heart?.addEventListener("click", close);
@@ -303,7 +344,7 @@
     heroMotionStarted=true;
     const leaves=hero.querySelectorAll('img[style*="opacity:0"]');
     const card=hero.querySelector('div[style*="opacity:0"]');
-    const run=(node,frames,duration,delay,easing="easeOut")=>{
+    const run=(node,frames,duration,delay,easing="ease-out")=>{
       if(!node)return;
       if(reduced){const last=frames.at(-1);node.style.opacity=String(last.opacity);node.style.transform=last.transform||`translateY(${last.y||0}px) scale(${last.scale||1})`;return;}
       node.animate(frames,{duration:duration*1000,delay:delay*1000,easing,fill:"both"});
@@ -798,6 +839,9 @@
   }
 
   root.querySelectorAll("[data-chorlove-open]").forEach((button) => {
+    // Glass Pink has its own source-timed opener. Hiding it here would skip
+    // the 450 ms pause, envelope exit, flower burst, and overlay fade.
+    if (templateId === "glass-pink") return;
     button.addEventListener("click", () => {
       const panel = button.closest(".fixed") || button.parentElement?.parentElement;
       if (panel) panel.hidden = true;

@@ -14,6 +14,32 @@
     "_next/static/chunks/0.u3j0~_2ygfx.css",
     "_next/static/chunks/00sc_9lpb3zcn.css"
   ],
+  "sourceMotion": {
+    "file": "Chorlove/Web invitations/_next/static/chunks/0wvjbn--75n3p.js",
+    "sha256": "e79d2091c5d38ac1ba100340f43b62cf994b2b6b79668dd0d274b8ec784fc36e",
+    "opening": {
+      "ambientPetals": 12,
+      "heartPulseMs": 2000,
+      "buttonSheenMs": 3000,
+      "overlayFadeDelayMs": 450,
+      "overlayFadeMs": 600,
+      "cardExitMs": 800,
+      "cardExitY": -35,
+      "cardExitScale": 1.08,
+      "flowerExitMs": 800,
+      "petalBurstMs": 850,
+      "removeOverlayAfterMs": 1050
+    },
+    "pageMotion": {
+      "heroReveal": "Source transforms and delays retained; browser easing token normalized from Framer `easeOut` to Web Animations `ease-out`.",
+      "scrollParallaxPxAt600": [-180, -140, -40]
+    },
+    "adapterCorrections": [
+      "The generic open handler no longer hides the source envelope before its exit sequence.",
+      "All three source envelope flowers now take part in the exit animation.",
+      "Reduced motion opens immediately and omits ambient and exit animations."
+    ]
+  },
   "catalogCover": {
     "file": "../catalog-cover-opening.png",
     "sha256": "6e48a8104e98d4c34cdc497d5abdbcdfd9c2c478b2774129d3fd232eaacf488e",

@@ -138,6 +138,28 @@ test("Glass Pink runtime binds all four locales and reduced motion", () => {
   assert.match(html, /source-adapter\.js/);
 });
 
+test("Glass Pink opener keeps the original timed exit instead of hiding on click", () => {
+  const sourceModule = readFileSync(resolve(root, "Invitations - this folder will be removed from production/Chorlove/Web invitations/_next/static/chunks/0wvjbn--75n3p.js"), "utf8");
+  const provenance = JSON.parse(readFileSync(provenancePath, "utf8"));
+  const genericOpenHandler = bridge.slice(bridge.indexOf('root.querySelectorAll("[data-chorlove-open]")'));
+
+  assert.equal(provenance.sourceMotion.sha256, createHash("sha256").update(sourceModule).digest("hex"));
+  assert.equal(provenance.sourceMotion.opening.ambientPetals, 12);
+  assert.match(sourceModule, /duration:\.6,delay:\.45\*!!r/);
+  assert.match(sourceModule, /y:-35,scale:1\.08,opacity:0/);
+  assert.match(sourceModule, /scale:\[1,1\.12,1\].{0,80}duration:2,repeat:1\/0/);
+  assert.match(sourceModule, /x:\[-100,260\].{0,80}duration:3,repeat:1\/0/);
+  assert.match(bridge, /duration: 600,[\s\S]{0,80}delay: 450,[\s\S]{0,80}easing: "ease-in-out"/);
+  assert.match(bridge, /translateY\(-35px\) scale\(1\.08\)/);
+  assert.match(bridge, /img\[src\*="flower4-decoration"\], img\[src\*="flower5-bottom"\]/);
+  assert.match(bridge, /duration: 2000, iterations: Infinity, easing: "ease-in-out"/);
+  assert.match(bridge, /duration: 3000, iterations: Infinity, easing: "ease-in-out"/);
+  assert.match(bridge, /delay,easing="ease-out"/);
+  assert.doesNotMatch(bridge, /easing="easeOut"/);
+  assert.match(bridge, /window\.setTimeout\(\(\) => \{ envelope\.hidden=true; \}, 1050\)/);
+  assert.match(genericOpenHandler, /if \(templateId === "glass-pink"\) return;/);
+});
+
 test("Glass Pink has no missing packaged image requests", () => {
   const imagePaths = [...html.matchAll(/<img\b[^>]*\bsrc="([^"]+)"|url\(["']?([^"')]+)["']?\)/g)]
     .map((match) => match[1] ?? match[2])
