@@ -260,5 +260,16 @@
     "inter",
     "playfair display",
     "qellia"
-  ]
+  ],
+  "catalogArtworkSearch": {
+    "sourceUrl": "https://payment.chorlove.uz/media-assets/e1f26015-2790-461a-8329-9d1c85c55e77/file",
+    "archiveEvidence": "source/preview-frame.html JSON-LD CreativeWork image",
+    "httpStatus": 200,
+    "mimeType": "image/jpeg",
+    "bytes": 82985,
+    "dimensions": "684x1482",
+    "sha256": "D5A023C2FE8FF986A0963B563D4BBB314848406516D2B994D59E7D0929575578",
+    "result": "Inspected, not packaged or used as previewImage",
+    "reason": "Original provider portrait contains baked sample couple names and visible Next.js/audio controls. Do not expose it as a catalog image. The clean source floral-frame artwork is packaged as assets/khung-hoa.webp (sha256 70fc4d1036fa0ffa9ba32b7d6bd404037d0304edcfc75cdaf04b59ad99ae73b4), but it is only a decorative transparent frame, not the complete composed cover."
+  }
 }
