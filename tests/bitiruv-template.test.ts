@@ -64,8 +64,14 @@ test("event labels, default copy, and sample content cover every locale", () => 
       assert.equal(localized.eventLabel, defaultEventLabel(eventType, locale));
       assert.ok(localized.programHeading);
       assert.ok(defaultInvitationMessage(eventType, locale));
-      assert.equal(fixture.eventSamples[eventType].personName[locale].length > 0, true);
-      assert.equal(fixture.eventSamples[eventType].programTitles[locale].length, 6);
+      assert.equal(
+        fixture.eventSamples[eventType].personName[locale].length > 0,
+        true,
+      );
+      assert.equal(
+        fixture.eventSamples[eventType].programTitles[locale].length,
+        6,
+      );
       labelSet.add(defaultEventLabel(eventType, locale));
       const sample = createTemplatePreviewSample("bitiruv", {
         defaultLocale: locale,
@@ -86,16 +92,34 @@ test("Bitiruv maps only one person's initial and hides unsupported venue photogr
     path.join(root, "apps/web/src/templates/marxaba"),
     "renderer.tsx",
   );
-  assert.match(adapter, /templateId === "bitiruv"[\s\S]*?monogram: \(sourceData\.groom \|\| sourceData\.bride\)\.trim\(\)\.charAt\(0\)/);
-  assert.match(adapter, /templateId === "bitiruv"[\s\S]*?monogram: \(localized\.groom \|\| localized\.bride\)[\s\S]*?\.charAt\(0\)/);
+  assert.match(
+    adapter,
+    /templateId === "bitiruv"[\s\S]*?monogram: \(sourceData\.groom \|\| sourceData\.bride\)\.trim\(\)\.charAt\(0\)/,
+  );
+  assert.match(
+    adapter,
+    /templateId === "bitiruv"[\s\S]*?monogram: \(localized\.groom \|\| localized\.bride\)[\s\S]*?\.charAt\(0\)/,
+  );
   const html = read(pkg, "index.html");
   assert.match(html, /href="contract-adapter\.css"/);
   const contractAdapter = read(pkg, "contract-adapter.css");
+  assert.match(
+    contractAdapter,
+    /\[data-section="gallery"\]:has\(\[data-list="gallery"\]:empty\)/,
+  );
   assert.match(contractAdapter, /#venue \.venue__photo\s*\{\s*display:\s*none/);
   for (const slot of ["toyona.note", "toyona.bank", "toyona.cardHolder"])
     assert.ok(contractAdapter.includes(`[data-slot="${slot}"]:empty`));
   assert.match(html, /data-photo="venue\.photo"/);
-  assert.ok(!/venuePhoto|venue\.photo\s*:/i.test(adapter));
+  const venuePreviewAdapter = adapter.slice(
+    adapter.indexOf("export function mapMarxabaPreviewVenuePhoto"),
+    adapter.indexOf("export function MarxabaInvitation"),
+  );
+  assert.match(
+    venuePreviewAdapter,
+    /if \(templateId !== "oltin-kuz" \|\| !preview \|\| !samplePreview \|\| hasCreatorPhotos\)\s+return undefined;/,
+  );
+  assert.doesNotMatch(venuePreviewAdapter, /bitiruv/);
   const editor = read(
     path.join(root, "apps/web/src/modules/studio"),
     "studio.tsx",
@@ -116,13 +140,15 @@ test("Bitiruv retains the captured structure, styling, translations, metadata, a
       read(source, name).replace(/\r\n/g, "\n"),
       `${name} matches the capture independent of checkout line endings`,
     );
-  const sourceScript = read(source, "template.js").replace(
-    "../../shared/vendor/three/three.bundle.min.js",
-    "vendor/three/three.bundle.min.js",
-  ).replace(
-    "const resize=()=>{let w=canvas.clientWidth||innerWidth,h=canvas.clientHeight||innerHeight;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix()};",
-    "const resize=()=>{if(!renderer||!camera)return;let w=canvas.clientWidth||innerWidth,h=canvas.clientHeight||innerHeight;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix()};",
-  );
+  const sourceScript = read(source, "template.js")
+    .replace(
+      "../../shared/vendor/three/three.bundle.min.js",
+      "vendor/three/three.bundle.min.js",
+    )
+    .replace(
+      "const resize=()=>{let w=canvas.clientWidth||innerWidth,h=canvas.clientHeight||innerHeight;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix()};",
+      "const resize=()=>{if(!renderer||!camera)return;let w=canvas.clientWidth||innerWidth,h=canvas.clientHeight||innerHeight;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix()};",
+    );
   assert.equal(
     read(pkg, "template.js").replace(/\r\n/g, "\n"),
     sourceScript.replace(/\r\n/g, "\n"),
@@ -135,8 +161,19 @@ test("Bitiruv retains the captured structure, styling, translations, metadata, a
     readFileSync(path.join(source, "art/graduation-scene.webp")),
   );
   for (const section of [
-    "intro", "hero", "invitation-text", "date", "program", "venue",
-    "dresscode", "gallery", "rsvp", "wishes", "toyona", "contacts", "footer",
+    "intro",
+    "hero",
+    "invitation-text",
+    "date",
+    "program",
+    "venue",
+    "dresscode",
+    "gallery",
+    "rsvp",
+    "wishes",
+    "toyona",
+    "contacts",
+    "footer",
   ])
     assert.match(
       read(pkg, "index.html"),
@@ -148,12 +185,16 @@ test("Bitiruv retains the captured structure, styling, translations, metadata, a
 test("all fixed copy and accessible labels have Russian and English translations", () => {
   const window: { MARHAMAT_I18N?: Record<string, [string, string]> } = {};
   runInNewContext(
-    readFileSync(path.join(root, "apps/web/public/templates/shared/nikoh/i18n.js"), "utf8"),
+    readFileSync(
+      path.join(root, "apps/web/public/templates/shared/nikoh/i18n.js"),
+      "utf8",
+    ),
     { window },
   );
   runInNewContext(read(pkg, "i18n.js"), { window });
   const translations = window.MARHAMAT_I18N!;
-  const sourceBody = read(pkg, "index.html").match(/<body[\s\S]*?<\/body>/)?.[0] ?? "";
+  const sourceBody =
+    read(pkg, "index.html").match(/<body[\s\S]*?<\/body>/)?.[0] ?? "";
   const ignored = new Set(["00", "&", "✦", "◈", "↗", "×", "?", "−", "+"]);
   const visible = Array.from(sourceBody.matchAll(/>([^<>]+)</g), (match) =>
     match[1].replace(/&amp;/g, "&").replace(/\s+/g, " ").trim(),
@@ -182,8 +223,12 @@ test("Bitiruv uses local source animation dependencies and no captured sample pa
     "lz-string.min.js",
   ])
     assert.equal(
-      readFileSync(path.join(pkg, "vendor", name)).toString("utf8").replace(/\r\n/g, "\n"),
-      readFileSync(path.join(sourceVendor, name)).toString("utf8").replace(/\r\n/g, "\n"),
+      readFileSync(path.join(pkg, "vendor", name))
+        .toString("utf8")
+        .replace(/\r\n/g, "\n"),
+      readFileSync(path.join(sourceVendor, name))
+        .toString("utf8")
+        .replace(/\r\n/g, "\n"),
       `${name} matches the captured shared dependency independent of checkout line endings`,
     );
   assert.equal(
@@ -232,7 +277,10 @@ test("Bitiruv reduced-motion mode skips WebGL and opener choreography", () => {
   const makeElement = () => ({
     hidden: false,
     classList: classList(new Set<string>()),
-    addEventListener: (name: string, callback: (event?: { stopPropagation(): void }) => void) => {
+    addEventListener: (
+      name: string,
+      callback: (event?: { stopPropagation(): void }) => void,
+    ) => {
       if (name === "click") listeners.push(callback);
     },
     setAttribute: () => {},
@@ -262,16 +310,33 @@ test("Bitiruv reduced-motion mode skips WebGL and opener choreography", () => {
     },
   };
   const gsap = {
-    timeline: () => { animationCalls++; return { to: () => ({ to() { return this; } }) }; },
-    fromTo: () => { animationCalls++; },
-    to: () => { animationCalls++; },
-    registerPlugin: () => { animationCalls++; },
+    timeline: () => {
+      animationCalls++;
+      return {
+        to: () => ({
+          to() {
+            return this;
+          },
+        }),
+      };
+    },
+    fromTo: () => {
+      animationCalls++;
+    },
+    to: () => {
+      animationCalls++;
+    },
+    registerPlugin: () => {
+      animationCalls++;
+    },
   };
   const window = {
     Marhamat: {
       reducedMotion: false,
       tier: "full",
-      open: () => { opened++; },
+      open: () => {
+        opened++;
+      },
       on: () => {},
     },
     gsap,
@@ -284,8 +349,13 @@ test("Bitiruv reduced-motion mode skips WebGL and opener choreography", () => {
     window,
     gsap,
     matchMedia: () => ({ matches: true }),
-    IntersectionObserver: class { observe() {} },
-    setTimeout: (callback: () => void) => { callback(); return 0; },
+    IntersectionObserver: class {
+      observe() {}
+    },
+    setTimeout: (callback: () => void) => {
+      callback();
+      return 0;
+    },
     requestAnimationFrame: () => 1,
     cancelAnimationFrame: () => {},
   });

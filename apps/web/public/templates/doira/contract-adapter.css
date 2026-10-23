@@ -3,3 +3,9 @@
 .gift__details > [data-slot="toyona.bank"]:empty {
   display: none;
 }
+
+/* Captured venue and decorative art remain in place; uploaded creator photos
+   alone populate the optional Lahzalar gallery on public invitations. */
+body [data-section="gallery"]:has([data-list="gallery"]:empty) {
+  display: none;
+}

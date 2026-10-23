@@ -10,17 +10,20 @@
   <meta property="og:image" content="preview.webp">
   <meta property="og:image:width" content="720">
   <meta property="og:image:height" content="1280">
-  <title>Atlas · Taklifnoma</title>
-  
-  
+  <title>Atlas taklifnomasi</title>
   <link rel="stylesheet" href="fonts.css">
   <link rel="stylesheet" href="../shared/nikoh/base.css">
   <link rel="stylesheet" href="template.css">
   <link rel="stylesheet" href="contract-adapter.css">
   <script src="../shared/nikoh/vendor/gsap.min.js" defer></script>
   <script src="../shared/nikoh/vendor/ScrollTrigger.min.js" defer></script>
-  <script src="../shared/nikoh/vendor/lz-string.min.js" defer></script><script src="../shared/nikoh/invite-codec.js" defer></script><script src="../shared/nikoh/i18n.js" defer></script><script src="../shared/nikoh/platform-bridge.js" defer></script><script src="../shared/nikoh/core.js" defer></script>
+  <script src="../shared/nikoh/vendor/lz-string.min.js" defer></script>
+  <script src="../shared/nikoh/invite-codec.js" defer></script>
+  <script src="../shared/nikoh/i18n.js" defer></script>
+  <script src="../shared/nikoh/platform-bridge.js" defer></script>
+  <script src="../shared/nikoh/core.js" defer></script>
   <script src="meta.js" defer></script>
+  <script src="platform-adapter.js" defer></script>
   <script src="template.js" defer></script>
 </head>
 <body>
@@ -38,7 +41,7 @@
       <p class="intro__date" data-slot="date.long"></p>
       <button class="button intro__button" id="open-invitation" type="button">Taklifnomani ochish <span aria-hidden="true">↗</span></button>
     </article>
-    <span class="intro__side-note">ATLAS · <span data-slot="venue.name"></span> · <span data-slot="date.year"></span></span>
+    <span class="intro__side-note">ATLAS · TOSHKENT · 2026</span>
   </section>
 
   <main class="page" id="page">
@@ -56,8 +59,8 @@
         <p class="hero__date" data-slot="date.long"></p>
         <a class="text-link" href="#invitation-text">Taklifnomani ko‘rish <span aria-hidden="true">↓</span></a>
       </div>
-      <div class="hero__side" aria-hidden="true"><span data-slot="venue.address"></span></div>
-      <div class="marquee" aria-label="To‘y sanasi"><div class="marquee__track"><span><span data-slot="eventType"></span> <i>✳</i> <span data-slot="date.long"></span> <i>✳</i> <span data-slot="venue.name"></span> <i>✳</i> </span><span aria-hidden="true"><span data-slot="eventType"></span> <i>✳</i> <span data-slot="date.long"></span> <i>✳</i> <span data-slot="venue.name"></span> <i>✳</i> </span></div></div>
+      <div class="hero__side" aria-hidden="true">TOSHKENT · O‘ZBEKISTON</div>
+      <div class="marquee" aria-label="To‘y sanasi"><div class="marquee__track"><span>NIKOH TO‘YI <i>✳</i> 14-NOYABR 2026 <i>✳</i> TOSHKENT <i>✳</i> </span><span aria-hidden="true">NIKOH TO‘YI <i>✳</i> 14-NOYABR 2026 <i>✳</i> TOSHKENT <i>✳</i> </span></div></div>
       <canvas class="silk-dust" aria-hidden="true"></canvas>
     </header>
     <section class="panel section invitation-section" id="invitation-text" data-section="invitation-text">
@@ -80,7 +83,7 @@
     </section>
     <section class="panel section venue-section" id="venue" data-section="venue">
       <p class="eyebrow">05 — Uchrashuv joyi</p><h2 class="section__title">To‘y manzili</h2>
-      <div class="venue__photo"><img data-photo="venue.photo" alt="To‘y manzili" width="800" height="600" loading="lazy" decoding="async"><span class="venue__stamp"><span data-slot="venue.name"></span><br>✳<br><span data-slot="date.year"></span></span></div>
+      <div class="venue__photo"><img data-photo="venue.photo" alt="To‘y manzili" width="800" height="600" loading="lazy" decoding="async"><span class="venue__stamp">TOSHKENT<br>✳<br>2026</span></div>
       <h3 data-slot="venue.name"></h3><p class="muted" data-slot="venue.address"></p>
       <div class="button-row"><a class="button button--outline" data-map="yandex" target="_blank" rel="noopener noreferrer">Yandex xaritada ↗</a><a class="button button--outline" data-map="google" target="_blank" rel="noopener noreferrer">Google xaritada ↗</a></div>
     </section>
@@ -117,4 +120,3 @@
   <button class="music-toggle" type="button" data-music-toggle hidden aria-label="Musiqani yoqish">♫</button><audio data-music loop preload="none" hidden></audio><div class="toast" data-toast role="status" aria-live="polite"></div>
 </body>
 </html>
-

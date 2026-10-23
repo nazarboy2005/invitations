@@ -11,7 +11,7 @@
     "Javohir",
     "Madina"
   ],
-  "sha256": "d0ff503898014aa73a8c8d416dee81637acceb13d5b5a31b771dd056c6c0f59a",
+  "sha256": "948ace08aa935791dfdd5c1617de13cfdadafe9952d0e8fdef4caa18cd1c1775",
   "captureSource": {
     "folder": "Invitations - this folder will be removed from production/Marxaba/Nikoh/templates/paxta",
     "indexHtmlSha256": "0d8ca4a90a8f650df52a3eb5f836300b1e0a53629164b890d4fb88f85ef2029f",
@@ -19,5 +19,13 @@
     "templateJsSha256": "0ab0e8cea6b83f35b64b91bb6db02a7bb8f57e0de4dfd747a102d572f14ad919",
     "cottonBranchSha256": "1a513e7692cfcc98ce59e36ad757153c1898bc4f3cc03c3a277b7ba8b6662200",
     "linenSha256": "31aa9bba3910079757d86eca1e8f6f5ec3e1d9388a4dd3208634c2eb29545d81"
-  }
+  },
+  "fixtureSha256": "54017a292d4a5235593d93a5e2f8bca1fe3bab89433182fac912c5d948878871",
+  "fixtureStartsAt": "2027-06-12T17:00",
+  "renderedIntroDate": "Shanba, 12 iyun 2027",
+  "renderedDateSlot": "date.long",
+  "captureExcludes": [
+    ".mh-lang app language switcher",
+    "nextjs-portal development badge"
+  ]
 }

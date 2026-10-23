@@ -9,5 +9,25 @@
   ],
   "sourceOpening": "closed Nahor qozon invitation with localized greeting, lid interaction, and dawn artwork",
   "motion": "captured with reduced motion enabled for a stable catalog still",
-  "sha256": "62c7c8b73629a0e77706f3a7876e0b72ac4f42d1330217fb5c9df98525e463cc"
+  "captureMethod": "Packaged Nahor renderer loaded from the local /preview route in headless Chrome through the bundled Playwright runtime. Viewport 480×720 at DPR 1; waited for the closed intro and local fonts. Capture-only styling hides the injected .mh-lang control inside the same-origin iframe, and the outer page's <nextjs-portal> host is removed before screenshot. Motion is reduced and playback is silent. The untouched source template and local runtime are used.",
+  "route": "/preview?template=nahor&qaSilent=1&qaReducedMotion=1",
+  "viewport": { "width": 480, "height": 720, "deviceScaleFactor": 1 },
+  "excludedPlatformControl": ".mh-lang",
+  "capture": {
+    "artifact": "preview-capture.png",
+    "format": "PNG",
+    "width": 480,
+    "height": 720,
+    "sha256": "900a5665998e3d9385e96db70914a2692b30cbeb8408de4ecb846296181e271d"
+  },
+  "sourceCapture": {
+    "html": "Invitations - this folder will be removed from production/Marxaba/Osh va iftorlik/templates/nahor/index.html",
+    "htmlSha256": "99732783ba8797d2355b9b2254f3e578ee20bfebc9955909b7f339ac2161949d",
+    "openingArtwork": "Invitations - this folder will be removed from production/Marxaba/Osh va iftorlik/templates/nahor/art/dawn-0.webp",
+    "openingArtworkSha256": "1d0477ca83d976e0f54409e10af1c22aa13c80ef434e834a77da206a808f69cc",
+    "stylesheet": "Invitations - this folder will be removed from production/Marxaba/Osh va iftorlik/templates/nahor/template.css",
+    "stylesheetSha256": "cd4ad8a8436565946745a557f94338a091e5eea9c3ab1416dca14dfdb655aabe"
+  },
+  "fixtureSha256": "54017a292d4a5235593d93a5e2f8bca1fe3bab89433182fac912c5d948878871",
+  "sha256": "1fc13abfeaf84cf6c58771ea8e12e1b914e73f081b5c5dbcbaf1dba0a4a28198"
 }

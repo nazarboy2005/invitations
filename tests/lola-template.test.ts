@@ -404,16 +404,19 @@ test("Lola catalog artwork is a portrait render of its opening, separate from th
     artifact: string;
     artifactSha256: string;
     format: string;
+    encoding: string;
     width: number;
     height: number;
     sourceCapture: string;
     renderedFrom: string;
     previewRoute: string;
     fixture: string;
+    fixtureSha256: string;
     locale: string;
     viewport: { width: number; height: number; deviceScaleFactor: number };
+    captureCleanup: string;
     verificationNote: string;
-    sourceGap: string;
+    sourceNote: string;
   };
   assert.ok(
     preview.length > 20_000,
@@ -421,9 +424,14 @@ test("Lola catalog artwork is a portrait render of its opening, separate from th
   );
   assert.equal(preview.subarray(0, 4).toString("ascii"), "RIFF");
   assert.equal(preview.toString("ascii", 8, 12), "WEBP");
-  assert.equal(preview.toString("ascii", 12, 16), "VP8 ");
+  assert.equal(preview.toString("ascii", 12, 16), "VP8L");
+  assert.equal(provenance.encoding, "lossless");
+  assert.equal(preview[20], 0x2f, "lossless WebP signature byte");
   assert.deepEqual(
-    [preview.readUInt16LE(26) & 0x3fff, preview.readUInt16LE(28) & 0x3fff],
+    [
+      (preview.readUInt32LE(21) & 0x3fff) + 1,
+      ((preview.readUInt32LE(21) >>> 14) & 0x3fff) + 1,
+    ],
     [480, 900],
     "catalog artwork preserves the full 8:15 opening portrait",
   );
@@ -435,9 +443,18 @@ test("Lola catalog artwork is a portrait render of its opening, separate from th
   assert.equal(provenance.renderedFrom, "captured Lola opening after opening motion settles");
   assert.equal(provenance.previewRoute, "/preview?template=lola&qaSilent=1");
   assert.equal(provenance.fixture, "apps/web/src/modules/catalog/preview-sample.json");
+  assert.equal(
+    provenance.fixtureSha256,
+    createHash("sha256")
+      .update(readFileSync(new URL("../apps/web/src/modules/catalog/preview-sample.json", import.meta.url)))
+      .digest("hex"),
+    "preview provenance pins the exact shared fixture used for the render",
+  );
   assert.equal(provenance.locale, "uz-Latn");
   assert.deepEqual(provenance.viewport, { width: 480, height: 900, deviceScaleFactor: 1 });
-  assert.match(provenance.verificationNote, /not independently repeated/);
+  assert.match(provenance.captureCleanup, /\.mh-lang/);
+  assert.match(provenance.captureCleanup, /x=320, y=0, width=160, height=70/);
+  assert.match(provenance.verificationNote, /hidden before capture/);
   assert.match(provenance.sourceNote, /omitted from the capture manifest/);
   assert.match(provenance.sourceNote, /recovered byte-for-byte from the same deployed Lola template/);
   assert.match(provenance.sourceNote, /no approximation was used/);

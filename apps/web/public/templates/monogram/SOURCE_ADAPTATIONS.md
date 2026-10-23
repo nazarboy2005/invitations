@@ -18,8 +18,13 @@ of a later scene or a redesigned composite. Reduced motion was enabled so the
 source's own animated seal appears in its settled state. The original capture
 remains untouched.
 
-The catalog definition points to `/templates/monogram/preview.webp`. This adds
-catalog artwork only; Monogram remains unpublished.
+The catalog definition points to `/templates/monogram/preview.webp` as its
+portrait catalog cover. Monogram is published in the configured catalog at
+150,000 UZS (15,000,000 minor units), in the wedding category, with wedding and
+fotiha event support. The additive release migration is
+`0056_publish_monogram.sql`. The cover image supplies the catalog's opening
+artwork; this note documents the packaged preview asset and does not change
+catalog publication state.
 
 The source includes `venue.photo` and `toyona.bank` slots. `venue.photo` is not
 in the approved invitation contract; `toyona.bank` was explicitly removed from

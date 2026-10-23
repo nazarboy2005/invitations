@@ -1,11 +1,45 @@
 {
   "artifact": "preview.webp",
-  "artifactSha256": "530975d5885c8f6b10c681c40c7a33e03b2b80e9151d9012b15c5544c5cb4b35",
+  "artifactSha256": "dc8eb7631a053e5206cc4a87be206217cf2fc3c926b705f6d98b280892b1f258",
   "format": "image/webp",
-  "width": 540,
-  "height": 960,
+  "width": 720,
+  "height": 1280,
+  "aspectRatio": "9:16",
+  "status": "captured-source-opening",
   "sourceCapture": "Invitations - this folder will be removed from production/Marxaba/Nikoh/templates/sahro-fonusi",
-  "sourceArtwork": "art/desert-panorama.webp",
-  "sourceArtworkSha256": "6dc66a6a16cc4f39e9160f47a3a095de4959c47d2b46b206920eb3e94afcc54f",
-  "status": "derived-from-source-opening-artwork"
+  "sourceHashes": {
+    "index.html": "5dd7ddcd8e6a7dbbc5a4df26018aed6b614dbc6c05e7ff9e697e7233665a8c6a",
+    "template.css": "e3914ec885b28383283cf5548e68692bc52ac3c2b2f8f4f139efbd07e3de58d1",
+    "template.js": "6c85794fe45339af96c0590feb2eb91607f0cf40eeda458193de42db5c798e84",
+    "art/desert-panorama.webp": "6dc66a6a16cc4f39e9160f47a3a095de4959c47d2b46b206920eb3e94afcc54f"
+  },
+  "route": "/preview?template=sahro-fonusi&qaSilent=1",
+  "renderedFrom": "Packaged Sahro Fonusi #intro opening in the local preview route",
+  "fixture": "apps/web/src/modules/catalog/preview-sample.json",
+  "fixtureSha256": "54017a292d4a5235593d93a5e2f8bca1fe3bab89433182fac912c5d948878871",
+  "fixtureLocale": "uz-Latn",
+  "fixtureNames": [
+    "Javohir",
+    "Madina"
+  ],
+  "fixtureStart": "2027-06-12T17:00",
+  "rawCapture": "preview-capture.png",
+  "rawCaptureSha256": "5f9194f8a528e88109faabc6f1c6f109e2f0e9632da4d189d855644662761fe2",
+  "captureViewport": {
+    "width": 720,
+    "height": 1280,
+    "deviceScaleFactor": 1
+  },
+  "sourceLayout": {
+    "sourceArtResolution": "2560×1440",
+    "posterBackgroundSize": "auto 100%",
+    "posterTransform": "scale(1.035)",
+    "posterBoundsAtCapture": "x -12.6, y -22.4, width 745.2, height 1324.8; intentional 1.035× overscan on 720×1280 viewport"
+  },
+  "captureMethod": "Packaged Sahro Fonusi renderer captured from the local preview route in headless Chrome at 720×1280 and DPR 1 using the canonical fixture. Browser reduced-motion emulation was used instead of the preview-only qaReducedMotion flag because the shared QA flag injects a generic translate(-50%,-50%) transform that conflicts with Sahro Fonusi’s full-inset poster. Capture-session-only CSS hid .mh-lang inside the same-origin renderer iframe; the outer preview page nextjs-portal custom-element host was removed before taking the iframe screenshot. Waited for populated fixture copy and local font readiness. Neither the template, shared runtime, nor invitation UI was changed.",
+  "captureExcludes": [
+    ".mh-lang injected language control",
+    "nextjs-portal development badge host"
+  ],
+  "browserPageErrors": []
 }

@@ -2,7 +2,8 @@ import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
 import { test } from "node:test";
-import { templateById } from "@taklifnoma/contracts";
+import { createInvitation, templateById } from "@taklifnoma/contracts";
+import { createTemplatePreviewSample } from "../apps/web/src/modules/catalog/preview-sample";
 
 const root = new URL("../apps/web/public/templates/golden-card/", import.meta.url);
 const read = (file: string) => readFile(new URL(file, root));
@@ -37,6 +38,9 @@ test("Golden Card preview artifact and preserved source match their checksums", 
     "75ac0b6d0edd52500a4a24cc15ed001fa6a0230571ce461a33859703180cc888",
   );
   assert.equal(provenance.source.sha256, createHash("sha256").update(capture).digest("hex"));
+  assert.equal(provenance.source.bytes, capture.byteLength);
+  assert.equal(provenance.source.preservedSha256, provenance.source.sha256);
+  assert.equal(provenance.source.preservedBytes, provenance.source.bytes);
   assert.equal(provenance.preview.status, "captured");
   assert.equal(provenance.preview.savedArtifact, true);
   assert.equal(provenance.preview.sha256, createHash("sha256").update(preview).digest("hex"));
@@ -56,4 +60,44 @@ test("Golden Card bridge maps authored invitation data and honors reduced motion
   assert.match(html, /data-golden="bride"/);
   assert.match(html, /data-golden-map/);
   assert.doesNotMatch(html, /<script[^>]+src=["']https?:/i);
+});
+
+test("Golden Card keeps source artwork in the renderer and preview gallery data out of drafts", async () => {
+  const html = (await read("index.html")).toString("utf8");
+  const styles = (await read("adapter.css")).toString("utf8");
+  const renderer = `${html}\n${styles}`;
+  const manifest = JSON.parse(
+    await readFile(
+      new URL(
+        "../Invitations - this folder will be removed from production/Chorlove/capture-manifest.json",
+        import.meta.url,
+      ),
+      "utf8",
+    ),
+  );
+  const sourceImages = Object.entries(manifest.resources)
+    .filter(([url]) => /images\/templates\/golden-card\//.test(url))
+    .map(([url]) => url.split("/").at(-1));
+  assert.deepEqual(sourceImages.sort(), ["corner.png", "mandala.png", "navy-texture.jpg"]);
+  for (const image of sourceImages) {
+    assert.ok(renderer.includes(`/templates/golden-card/assets/${image}`));
+    const archived = await readFile(
+      new URL(
+        `../Invitations - this folder will be removed from production/Chorlove/Web invitations/images/templates/golden-card/${image}`,
+        import.meta.url,
+      ),
+    );
+    const packaged = await read(`assets/${image}`);
+    assert.equal(
+      createHash("sha256").update(packaged).digest("hex"),
+      createHash("sha256").update(archived).digest("hex"),
+    );
+  }
+
+  const preview = createTemplatePreviewSample("golden-card");
+  const draft = createInvitation("golden-card");
+  assert.ok(preview.gallery.length > 0);
+  assert.ok(preview.gallery.every((item) => item.url === ""));
+  assert.deepEqual(draft.gallery, []);
+  assert.doesNotMatch(html, /gallery|photo-grid/i);
 });

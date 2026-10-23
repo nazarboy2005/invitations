@@ -23,3 +23,13 @@ repair for a captured GSAP warning. GSAP cannot select the CSS pseudo-element
 `.footer:before` as a DOM target; the adapter animates the footer's
 `--footer-glow-opacity` custom property instead, and the pseudo-element reads
 that property. The scroll-linked glow is preserved and the warning is removed.
+
+The catalog artwork retains the existing captured opening and its 480 × 900
+fixture presentation. Its previous screenshot included the shared runtime's
+injected `.mh-lang` switcher in the otherwise empty top-right margin. The
+artwork was cleaned by replacing only that margin with a fresh capture of the
+same local preview route after hiding `.mh-lang` and the Next.js development
+badge; all pixels outside the 160 × 70 cleanup patch are preserved losslessly.
+The original reference capture and fixture remain unchanged. See
+`preview.provenance.json` for the route, viewport, fixture checksum, and patch
+bounds.

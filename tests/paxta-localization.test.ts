@@ -278,6 +278,11 @@ test("Paxta catalog artwork is a portrait capture of the source opening with pro
     fixtureLocale: string;
     fixtureNames: string[];
     sha256: string;
+    fixtureSha256: string;
+    fixtureStartsAt: string;
+    renderedIntroDate: string;
+    renderedDateSlot: string;
+    captureExcludes: string[];
     captureSource: Record<string, string>;
   };
   const sha256 = (value: Buffer) => createHash("sha256").update(value).digest("hex");
@@ -290,10 +295,21 @@ test("Paxta catalog artwork is a portrait capture of the source opening with pro
   assert.deepEqual(provenance.fixtureNames, ["Javohir", "Madina"]);
   assert.equal(provenance.sha256, sha256(preview));
 
-  const fixture = JSON.parse(readFileSync(new URL("../apps/web/src/modules/catalog/preview-sample.json", import.meta.url), "utf8"));
+  const fixtureBytes = readFileSync(new URL("../apps/web/src/modules/catalog/preview-sample.json", import.meta.url));
+  const fixture = JSON.parse(fixtureBytes.toString("utf8"));
   assert.equal(fixture.eventType, "wedding");
   assert.deepEqual(fixture.content[provenance.fixtureLocale].people, provenance.fixtureNames);
-  assert.equal(fixture.startsAt, "2027-06-12T17:00");
+  assert.equal(provenance.fixtureSha256, sha256(fixtureBytes));
+  assert.equal(provenance.fixtureStartsAt, fixture.startsAt);
+  assert.equal(provenance.fixtureStartsAt, "2027-06-12T17:00");
+  assert.equal(provenance.renderedDateSlot, "date.long");
+  assert.equal(provenance.renderedIntroDate, "Shanba, 12 iyun 2027");
+  assert.deepEqual(provenance.captureExcludes, [
+    ".mh-lang app language switcher",
+    "nextjs-portal development badge",
+  ]);
+  const packagedHtml = readFileSync(new URL("../apps/web/public/templates/paxta/index.html", import.meta.url), "utf8");
+  assert.match(packagedHtml, /class="intro__date" data-slot="date\.long"|class="intro__date"[^>]*data-slot="date\.long"/);
   const captureFiles = {
     indexHtmlSha256: "index.html",
     templateCssSha256: "template.css",

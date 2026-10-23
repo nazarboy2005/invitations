@@ -1,6 +1,21 @@
 (function(){
   'use strict';
   const $=(s,c=document)=>c.querySelector(s), $$=(s,c=document)=>Array.from(c.querySelectorAll(s));
+  function drawStory(){
+    const host=$('.chapters'), rows=window.Marhamat?.data?.extras?.story||[];
+    if(!host)return;
+    rows.forEach((row,i)=>{
+      const item=document.createElement('article'); item.className='chapter page-sheet';
+      item.innerHTML=`<span class="chapter-no">${String(i+1).padStart(2,'0')} · HIKOYA</span><h3></h3><p></p><svg class="chapter-art draw" viewBox="0 0 300 150" aria-hidden="true"></svg><span class="chapter-page">— ${i+2} —</span>`;
+      $('h3',item).textContent=row.title; $('p',item).textContent=row.text;
+      const svg=$('svg',item);
+      const art=[
+        '<path d="M91 82c0-20 14-32 37-32s38 12 38 32v26H91zm75-22 27 12-26 14m-76-8-19-8-16 20 24 7m53-57c-8-11 8-12 0-23m14 23c-8-11 8-12 0-23m-47 88h87m-56-64c-5 9-6 18-4 28m21-28c5 9 6 18 4 28"/><path d="M199 93c0 11-9 19-19 19s-19-8-19-19z"/>',
+        '<path d="M37 112c38-60 70-61 110-10 38 48 75 48 116-18M37 112c37-22 73-28 110-10m-65-37 12 5-8 11m111 28 13 5-8 11M55 126h190"/><path d="M145 104c-3-23 0-44 11-65m0 0 17 22m-17-22-18 20"/>',
+        '<circle cx="123" cy="77" r="33"/><circle cx="174" cy="77" r="33"/><path d="M108 80c0-19 30-19 30 0m22 0c0-19 30-19 30 0M95 119c18-9 27-9 39 0s22 9 39 0 23-9 34 0"/>'
+      ]; svg.innerHTML=art[i%3]; host.append(item);
+    });
+  }
   function intro(){
     const root=$('#intro'), button=$('#open-invitation'), book=$('#book'); if(!root||!button)return;
     let opened=false, timer=0;
@@ -9,7 +24,7 @@
       if(opened){finish();return} opened=true;
       window.Marhamat?.open?.();root.classList.add('is-turning');
       const pages=document.createElement('div');pages.className='turn-pages';book.append(pages);
-      const stories=window.Marhamat?.data?.story||[];
+      const stories=window.Marhamat?.data?.extras?.story||[];
       stories.forEach((story,i)=>{const p=document.createElement('article');p.className='turn-page';p.innerHTML='<h3></h3><p></p>';p.querySelector('h3').textContent=story.title;p.querySelector('p').textContent=story.text;pages.append(p);setTimeout(()=>p.classList.add('turning'),250+i*310);});
       const leaf=document.createElement('div');leaf.className='title-leaf';leaf.innerHTML='<span>Bir bor ekan...</span><strong></strong><svg viewBox="0 0 40 40"><path d="M20 34S4 25 5 14C6 5 17 5 20 13 24 4 36 6 35 16 34 25 20 34 20 34z"/></svg>';leaf.querySelector('strong').textContent=`${window.Marhamat?.data?.groom||''} & ${window.Marhamat?.data?.bride||''}`;book.append(leaf);
       setTimeout(()=>leaf.classList.add('is-visible'),1150);
@@ -45,6 +60,6 @@
     function frame(){if(!active||document.hidden)return;ctx.clearRect(0,0,w,h);dots.forEach(p=>{p.y-=p.s*16;if(p.y<-.02)p.y=1.02;ctx.globalAlpha=p.a;ctx.fillStyle='#e2c98c';ctx.beginPath();ctx.arc(p.x*w,p.y*h,p.r,0,Math.PI*2);ctx.fill()});ctx.globalAlpha=1;raf=requestAnimationFrame(frame)}
     size();frame();window.Marhamat?.on('open',()=>{active=false;cancelAnimationFrame(raf)});window.addEventListener('resize',size,{passive:true});new IntersectionObserver(es=>{active=es[0].isIntersecting;if(active&&!document.hidden)frame();else cancelAnimationFrame(raf)}).observe($('#intro'));document.addEventListener('visibilitychange',()=>{if(!document.hidden&&active)frame();else cancelAnimationFrame(raf)});
   }
-  function init(){circleDate();intro();scrollMotion();ambient();window.Marhamat?.on('rsvp',answer=>{if(answer?.status==='yes'){$('.ink-hearts')?.animate([{transform:'scale(.7)',opacity:.3},{transform:'scale(1.2)',opacity:1},{transform:'scale(1)',opacity:1}],{duration:700})}});}
+  function init(){drawStory();circleDate();intro();scrollMotion();ambient();window.Marhamat?.on('rsvp',answer=>{if(answer?.status==='yes'){$('.ink-hearts')?.animate([{transform:'scale(.7)',opacity:.3},{transform:'scale(1.2)',opacity:1},{transform:'scale(1)',opacity:1}],{duration:700})}});}
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();

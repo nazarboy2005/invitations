@@ -39,7 +39,9 @@ test("Anor React adapter adds sample wishes only in preview and recomputes when 
 
   const renderer = readFileSync(new URL("../apps/web/src/templates/anor/renderer.tsx", import.meta.url), "utf8");
   assert.match(renderer, /makeLegacyData\(invitation, frameLocale, guestName, sampleWishes\)/);
-  assert.match(renderer, /\[invitation, frameLocale, guestName, sampleWishes\]/);
+  assert.match(renderer, /\[invitation, frameLocale, guestName, preview, sampleWishes\]/);
+  assert.match(renderer, /preview && sampleWishes && !hasCreatorPhotos/);
+  assert.match(renderer, /\/templates\/anor\/source\/art\/\$\{file\}/);
 });
 
 test("Anor wishes section and list hooks match its public API bridge", () => {

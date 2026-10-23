@@ -131,7 +131,7 @@ test("Suzani keeps its original markup, art, styles, and opening animation", () 
   ]) assert.ok(templateBody.includes(binding), `Missing contract binding ${binding}`);
 });
 
-test("Suzani packages local fonts and the real portrait artwork", () => {
+test("Suzani packages local fonts and a provenance-checked portrait opening cover", () => {
   const fonts = readFileSync(new URL("fonts.css", templateRoot), "utf8");
   assert.match(fonts, /font-family: 'Cormorant Garamond'/);
   assert.match(fonts, /font-family: 'Manrope'/);
@@ -140,22 +140,54 @@ test("Suzani packages local fonts and the real portrait artwork", () => {
     assert.ok(existsSync(new URL(asset, templateRoot)), `${asset} is missing`);
   }
 
-  const panel = readFileSync(new URL("art/panel.webp", templateRoot));
+  const capture = readFileSync(new URL("preview-capture.png", templateRoot));
   const preview = readFileSync(new URL("preview.webp", templateRoot));
+  const meta = readFileSync(new URL("meta.js", templateRoot), "utf8");
+  const capturedPreview = new URL("preview.webp", captureRoot);
+  const fixture = readFileSync(new URL("../apps/web/src/modules/catalog/preview-sample.json", import.meta.url));
+  const captureManifest = readFileSync(new URL("../Invitations - this folder will be removed from production/Marxaba/capture-manifest.json", import.meta.url));
   const provenance = JSON.parse(
     readFileSync(new URL("preview.provenance.json", templateRoot), "utf8"),
-  ) as { asset: string; sourceAsset: string; sha256: string; width: number; height: number };
-  assert.equal(
-    createHash("sha256").update(preview).digest("hex"),
-    createHash("sha256").update(panel).digest("hex"),
-    "Catalog artwork must use the original full-page portrait panel asset",
   );
-  assert.equal(provenance.asset, "preview.webp");
-  assert.equal(provenance.sourceAsset, "art/panel.webp");
-  assert.equal(provenance.sha256, createHash("sha256").update(preview).digest("hex"));
-  assert.equal(provenance.width, 640);
-  assert.equal(provenance.height, 1138);
+  assert.match(meta, /preview:\s*"preview\.webp"/);
+  assert.equal(existsSync(capturedPreview), false, "the captured metadata's preview.webp is absent");
+  assert.deepEqual([capture.readUInt32BE(16), capture.readUInt32BE(20)], [450, 800]);
+  assert.equal(capture.toString("ascii", 1, 4), "PNG");
+  assert.equal(preview.toString("ascii", 0, 4), "RIFF");
   assert.equal(preview.toString("ascii", 8, 12), "WEBP");
+  assert.equal(preview.toString("ascii", 12, 15), "VP8");
+  assert.deepEqual([preview.readUInt16LE(26) & 0x3fff, preview.readUInt16LE(28) & 0x3fff], [450, 800]);
+  assert.notEqual(
+    createHash("sha256").update(preview).digest("hex"),
+    createHash("sha256").update(readFileSync(new URL("art/panel.webp", templateRoot))).digest("hex"),
+    "Catalog artwork must be the renderer's opening capture, not the later panel artwork",
+  );
+  assert.equal(provenance.templateId, "suzani");
+  assert.equal(provenance.catalogAsset, "preview.webp");
+  assert.equal(provenance.source.declaredPreviewPresentInCapture, false);
+  assert.equal(provenance.source.providerManifestSearch.manifestsSearched, 13);
+  assert.equal(provenance.source.providerManifestSearch.exactSuzaniTemplateSourceCount, 1);
+  assert.equal(provenance.source.providerManifestSearch.manifests.find((item: { provider: string }) => item.provider === "Marxaba").exactSuzaniTemplate, true);
+  assert.match(captureManifest.toString("utf8"), /Nikoh\/templates\/suzani\/index\.html/);
+  assert.equal(provenance.fixture.path, "apps/web/src/modules/catalog/preview-sample.json");
+  assert.equal(provenance.fixture.sha256, createHash("sha256").update(fixture).digest("hex"));
+  assert.equal(provenance.render.pageSelector, "#intro");
+  assert.deepEqual(provenance.render.viewport, { width: 450, height: 800, deviceScaleFactor: 1 });
+  assert.deepEqual(provenance.render.crop, { x: 0, y: 0, width: 450, height: 800, scope: "full portrait opening viewport; no interior crop" });
+  assert.deepEqual(provenance.render.excluded, [
+    ".mh-lang injected language control",
+    "nextjs-portal development badge",
+    "browser and app chrome",
+    "scrollbars",
+  ]);
+  assert.equal(provenance.artifacts.capture.path, "preview-capture.png");
+  assert.equal(provenance.artifacts.capture.width, 450);
+  assert.equal(provenance.artifacts.capture.height, 800);
+  assert.equal(provenance.artifacts.capture.sha256, createHash("sha256").update(capture).digest("hex"));
+  assert.equal(provenance.artifacts.catalog.path, "preview.webp");
+  assert.equal(provenance.artifacts.catalog.width, 450);
+  assert.equal(provenance.artifacts.catalog.height, 800);
+  assert.equal(provenance.artifacts.catalog.sha256, createHash("sha256").update(preview).digest("hex"));
   assert.ok(body(html).includes('id="toyona" data-section="toyona"'));
   assert.ok(body(html).includes('data-slot="toyona.cardNumber"'));
   assert.ok(body(html).includes('data-slot="toyona.cardHolder"'));

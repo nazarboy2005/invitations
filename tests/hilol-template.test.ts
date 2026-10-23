@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
 import { createRequire } from "node:module";
 import { fileURLToPath } from "node:url";
 import { existsSync, readFileSync } from "node:fs";
@@ -228,6 +229,31 @@ test("the metadata-named artwork is an authentic portrait WebP browser capture",
       ? [1 + preview.readUIntLE(24, 3), 1 + preview.readUIntLE(27, 3)]
       : [preview.readUInt16LE(26) & 0x3fff, preview.readUInt16LE(28) & 0x3fff];
   assert.deepEqual(dimensions, [450, 800]);
+  const provenance = JSON.parse(read("preview.provenance.json"));
+  assert.equal(
+    provenance.rendererUrl,
+    "/preview?template=hilol&qaSilent=1&qaReducedMotion=1",
+  );
+  assert.deepEqual(provenance.viewport, {
+    width: 450,
+    height: 800,
+    deviceScaleFactor: 1,
+  });
+  assert.deepEqual(provenance.excludedUi, [".mh-lang", "nextjs-portal"]);
+  assert.equal(
+    provenance.fixtureSha256,
+    createHash("sha256")
+      .update(
+        readFileSync(
+          new URL("../../../src/modules/catalog/preview-sample.json", root),
+        ),
+      )
+      .digest("hex"),
+  );
+  assert.equal(
+    provenance.artifactSha256,
+    createHash("sha256").update(preview).digest("hex"),
+  );
   assert.match(metadata, /slug:\s*"hilol"/);
   assert.match(metadata, /preview:\s*"preview\.webp"/);
   assert.match(metadata, /category:\s*"iftorlik"/);
@@ -377,4 +403,112 @@ test("Hilol adapter maps the shared fixture and keeps its content out of blank d
   assert.equal(blank.toyona.enabled, false);
   assert.equal(blank.dressCode.enabled, false);
   assert.deepEqual(blank.contacts, []);
+});
+
+test("Hilol source gallery art is localized and stays ephemeral around creator uploads", () => {
+  const { makeLegacyData } =
+    require("../apps/web/src/templates/anor/renderer") as typeof import("../apps/web/src/templates/anor/renderer");
+  const { mapMarxabaPreviewGallery } = require(
+    "../apps/web/src/templates/marxaba/renderer",
+  ) as typeof import("../apps/web/src/templates/marxaba/renderer");
+  const sample = createTemplatePreviewSample("hilol");
+  const locales = ["uz-Latn", "uz-Cyrl", "en", "ru"] as const;
+  const expectedFiles = [
+    "still-life.svg",
+    "girih-tile.svg",
+    "city-silhouette.svg",
+  ];
+  const expectedAlts = {
+    "uz-Latn": [
+      "Iftor dasturxoni va chiroq",
+      "Hilol naqshli girih bezagi",
+      "Shom paytidagi shahar manzarasi",
+    ],
+    "uz-Cyrl": [
+      "Ифтор дастурхони ва чироқ",
+      "Ҳилол нақшли гирих безаги",
+      "Шом пайтидаги шаҳар манзараси",
+    ],
+    en: [
+      "Iftar table and lantern",
+      "Crescent and girih ornament",
+      "City skyline at dusk",
+    ],
+    ru: [
+      "Стол для ифтара и фонарь",
+      "Орнамент гирих с полумесяцем",
+      "Городской силуэт в сумерках",
+    ],
+  };
+
+  for (const locale of locales) {
+    const sourceGallery = makeLegacyData(sample, locale, "", true).gallery;
+    const previewGallery = mapMarxabaPreviewGallery(
+      "hilol",
+      sample.gallery,
+      sourceGallery,
+      locale,
+      true,
+      true,
+    );
+    assert.deepEqual(
+      previewGallery.map(({ src }) => src),
+      expectedFiles.map((file) => `/templates/hilol/art/${file}`),
+    );
+    assert.deepEqual(
+      previewGallery.map(({ alt }) => alt),
+      expectedAlts[locale],
+    );
+    assert.ok(previewGallery.every(({ alt, caption }) => alt && caption === alt));
+    assert.ok(previewGallery.every(({ id }) => id.startsWith("hilol-source-preview-")));
+  }
+
+  assert.ok(sample.gallery.every(({ url, alt, caption }) => !url && !alt && !caption));
+
+  const creator = createTemplatePreviewSample("hilol");
+  creator.gallery[0] = {
+    id: "creator-photo",
+    url: "/uploads/creator-photo.jpg",
+    alt: "Creator photo",
+    caption: "Creator caption",
+  };
+  const creatorSourceGallery = makeLegacyData(
+    creator,
+    "uz-Latn",
+    "",
+    false,
+  ).gallery;
+  assert.deepEqual(
+    mapMarxabaPreviewGallery(
+      "hilol",
+      creator.gallery,
+      creatorSourceGallery,
+      "uz-Latn",
+      true,
+      true,
+    ),
+    creatorSourceGallery,
+  );
+
+  const blank = createInvitation("hilol");
+  const blankSourceGallery = makeLegacyData(blank, "uz-Latn", "", false).gallery;
+  assert.deepEqual(
+    mapMarxabaPreviewGallery(
+      "hilol",
+      blank.gallery,
+      blankSourceGallery,
+      "uz-Latn",
+      false,
+      false,
+    ),
+    [],
+  );
+});
+
+test("the shared public renderer hides creator-photo galleries with no uploads", () => {
+  const sharedRuntime = read("../shared/nikoh/core.js");
+  assert.match(
+    sharedRuntime,
+    /hideIf\('gallery',!\(Array\.isArray\(data\.gallery\)&&data\.gallery\.some\(item=>plain\(item\)&&typeof item\.src==='string'&&item\.src\.trim\(\)\)\)\)/,
+  );
 });

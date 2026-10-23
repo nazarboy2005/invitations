@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "templateId": "hilol",
+  "rendererUrl": "/preview?template=hilol&qaSilent=1&qaReducedMotion=1",
+  "captureMethod": "Chrome headless CDP screenshot of the running app preview route and its actual Hilol renderer iframe",
+  "browser": "Google Chrome 155.0.8059.85 (headless)",
+  "viewport": {
+    "width": 450,
+    "height": 800,
+    "deviceScaleFactor": 1
+  },
+  "locale": "uz-Latn",
+  "eventType": "iftorlik",
+  "previewState": "closed-intro",
+  "reducedMotion": true,
+  "excludedUi": [
+    ".mh-lang",
+    "nextjs-portal"
+  ],
+  "fixturePath": "apps/web/src/modules/catalog/preview-sample.json",
+  "fixtureSha256": "54017a292d4a5235593d93a5e2f8bca1fe3bab89433182fac912c5d948878871",
+  "artifactPath": "apps/web/public/templates/hilol/preview.webp",
+  "artifactFormat": "WebP",
+  "artifactSha256": "ec2bd1ccaad8d27054e260be12c7ace9f2b540fa1db9be27e688e90cfa7979b0"
+}

@@ -1,38 +1,122 @@
 ﻿import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
-import { readFileSync } from "node:fs";
+import { readdirSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { test } from "node:test";
 import { TEMPLATES } from "@taklifnoma/contracts";
+import { createTemplatePreviewSample } from "../apps/web/src/modules/catalog/preview-sample";
 
 const root = resolve(process.cwd());
 const htmlPath = resolve(root, "apps/web/public/templates/glass-pink/index.html");
 const html = readFileSync(htmlPath, "utf8");
 const bridge = readFileSync(resolve(root, "apps/web/public/templates/glass-pink/bridge.js"), "utf8");
 const adapter = readFileSync(resolve(root, "apps/web/public/templates/glass-pink/source-adapter.js"), "utf8");
-const previewPath = resolve(root, "apps/web/public/templates/glass-pink/preview-browser-capture.jpg");
+const previewPath = resolve(root, "apps/web/public/templates/glass-pink/catalog-cover-opening.png");
 const provenancePath = resolve(root, "apps/web/public/templates/glass-pink/source/provenance.json");
+const sourceSnapshotPath = resolve(root, "apps/web/public/templates/glass-pink/source/preserved-preview-frame.html");
+const archivedSourcePath = resolve(root, "Invitations - this folder will be removed from production/Chorlove/Web invitations/templates/glass-pink/preview-frame.html");
 
 test("Glass Pink is published with its additive release migration", () => {
   const entry = TEMPLATES.find((template) => template.id === "glass-pink");
   assert.ok(entry);
   assert.equal(entry.published, true);
-  assert.equal(entry.previewImage, "/templates/glass-pink/preview-browser-capture.jpg");
+  assert.equal(entry.previewImage, "/templates/glass-pink/catalog-cover-opening.png");
   assert.deepEqual(entry.categoryIds, ["wedding"]);
   assert.deepEqual(entry.supportedEventTypes, ["wedding"]);
   const publication = readFileSync(resolve(root, "packages/database/migrations/0091_publish_glass_pink.sql"), "utf8");
   assert.match(publication, /SET published = true[\s\S]*WHERE id = 'glass-pink'/);
 });
 
-test("Glass Pink preview artwork matches its in-app browser capture provenance", () => {
+test("Glass Pink rejected cover capture is clearly marked pending recapture", () => {
   const preview = readFileSync(previewPath);
   const provenance = JSON.parse(readFileSync(provenancePath, "utf8"));
-  assert.equal(provenance.previewBrowserCapture.file, "../preview-browser-capture.jpg");
-  assert.equal(
-    provenance.previewBrowserCapture.source,
-    "ChatGPT in-app browser rendering of the app preview with the canonical wedding preview fixture",
-  );
-  assert.equal(provenance.previewBrowserCapture.sha256, createHash("sha256").update(preview).digest("hex"));
+  assert.equal(provenance.catalogCover.file, "../catalog-cover-opening.png");
+  assert.match(provenance.catalogCover.source, /^Rejected Chrome headless screenshot/);
+  assert.equal(provenance.catalogCover.viewport, "432x768");
+  assert.equal(provenance.catalogCover.fixtureSha256, createHash("sha256").update(readFileSync(resolve(root, "apps/web/src/modules/catalog/preview-sample.json"))).digest("hex"));
+  assert.ok(provenance.catalogCover.crop);
+  assert.deepEqual(provenance.catalogCover.uiChromeExcluded, ["language selector", "music toggle", "browser scrollbar"]);
+  assert.equal(provenance.catalogCover.catalogEligible, false);
+  assert.deepEqual(provenance.catalogCover.captureRequirements, [
+    "Wait for document.fonts.ready",
+    "Wait for the source intro animation to settle",
+    "Capture the renderer iframe with app-injected UI hidden",
+  ]);
+  assert.match(provenance.catalogCover.visualQa, /Rejected: visible opening lettering is duplicated\/overlapped/);
+  assert.match(provenance.catalogCover.runtimeLimitation, /server-rendered markup and assets/);
+  assert.equal(provenance.catalogCover.sha256, createHash("sha256").update(preview).digest("hex"));
+  assert.equal(preview.readUInt32BE(16), 432);
+  assert.equal(preview.readUInt32BE(20), 768);
+  assert.equal(preview.toString("ascii", 12, 16), "IHDR");
+});
+
+test("Glass Pink source fonts resolve from its isolated asset package", () => {
+  const sourceFonts = resolve(root, "Invitations - this folder will be removed from production/Chorlove/Web invitations/fonts");
+  const assetFonts = resolve(root, "apps/web/public/templates/glass-pink/assets");
+  const css = readFileSync(resolve(root, "apps/web/public/templates/glass-pink/adapter.css"), "utf8");
+  const names = [
+    "Qellia.otf",
+    "CormorantGaramond-Regular.ttf",
+    "TheNautigal-Regular.ttf",
+    "GreatVibes-Regular.ttf",
+    "Fraunces-VariableFont_SOFT,WONK,opsz,wght.ttf",
+    "Jost-VariableFont_wght.ttf",
+    "Marcellus-Regular.ttf",
+  ];
+  for (const name of names) {
+    const source = readFileSync(resolve(sourceFonts, name));
+    const packaged = readFileSync(resolve(assetFonts, name));
+    assert.deepEqual(packaged, source, `${name} must match the original source font`);
+    assert.ok(css.includes(`./assets/${name}`), `${name} must be loaded from the isolated template package`);
+  }
+  assert.equal((html.match(/>Taklifnoma<\/h1>/g) || []).length, 1);
+  assert.equal((html.match(/Taklifnomani ochish/g) || []).length, 1);
+});
+
+test("Glass Pink preserves its canonical source snapshot byte-for-byte", () => {
+  const archived = readFileSync(archivedSourcePath);
+  const preserved = readFileSync(sourceSnapshotPath);
+  const provenance = JSON.parse(readFileSync(provenancePath, "utf8"));
+  assert.deepEqual(preserved, archived);
+  assert.equal(provenance.preservedRawSourceSnapshot.file, "preserved-preview-frame.html");
+  assert.equal(provenance.preservedRawSourceSnapshot.byteIdenticalToArchive, true);
+  assert.equal(provenance.preservedRawSourceSnapshot.sha256, createHash("sha256").update(preserved).digest("hex"));
+  assert.equal(provenance.sourceSha256, createHash("sha256").update(archived).digest("hex"));
+});
+
+test("Glass Pink uses only its own artwork and keeps sample gallery content ephemeral", () => {
+  const archiveRoot = resolve(root, "Invitations - this folder will be removed from production");
+  const providers = readdirSync(archiveRoot, { withFileTypes: true })
+    .filter((entry) => entry.isDirectory())
+    .map((entry) => entry.name);
+  const canonicalProviders = providers.filter((provider) => {
+    const manifestPath = resolve(archiveRoot, provider, "capture-manifest.json");
+    try {
+      const manifest = JSON.parse(readFileSync(manifestPath, "utf8"));
+      return manifest.pages?.some((page: { title?: string; file?: string }) => page.title === "Glass Pink" || page.file?.includes("glass-pink"));
+    } catch {
+      return false;
+    }
+  });
+  assert.deepEqual(canonicalProviders, ["Chorlove"]);
+
+  const provenance = JSON.parse(readFileSync(provenancePath, "utf8"));
+  const fixture = JSON.parse(readFileSync(resolve(root, "apps/web/src/modules/catalog/preview-sample.json"), "utf8"));
+  assert.equal(fixture.gallery.length, 6);
+  assert.ok(fixture.gallery.every((item: { url: string; alt: string; caption: string }) => !item.url && !item.alt && !item.caption));
+  const previewInvitation = createTemplatePreviewSample("glass-pink");
+  assert.equal(previewInvitation.templateId, "glass-pink");
+  assert.ok(previewInvitation.gallery.every((item) => !item.url && !item.alt && !item.caption));
+  assert.deepEqual(provenance.gallerySourceAudit.eligibleGlassPinkGalleryPhotos, []);
+  assert.equal(provenance.gallerySourceAudit.excludedCrossTemplateGalleryPhotos.length, 6);
+  const renderer = readFileSync(resolve(root, "apps/web/src/templates/anor/renderer.tsx"), "utf8");
+  assert.match(renderer, /gallery:\s*invitation\.gallery\.map/);
+  assert.match(renderer, /src:\s*item\.url/);
+  assert.doesNotMatch(renderer, /orchid-amplop|gallery-[1-6]\.webp/);
+  assert.doesNotMatch(html, /orchid-amplop|gallery-[1-6]\.webp/);
+  assert.match(bridge, /const usableGallery = gallery\.filter\(\(item\) => item\?\.src\)/);
+  assert.match(bridge, /hide\(storySection, !chapters\.length && !showGallery\)/);
+  assert.match(adapter, /window\.__glassPinkPayload\?\.data\?\.gallery/);
 });
 
 test("Glass Pink ships its captured page without the Chorlove site runtime", () => {

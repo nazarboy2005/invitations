@@ -17,3 +17,11 @@ Catalog and first-step samples are ephemeral display data. They are passed
 through the preview renderer only and never written through save/publication
 paths. Mobile interaction, reduced-motion browser emulation, and save/reopen
 service checks remain release limitations.
+
+The catalog cover is a 720×1280 capture of the canonical Marxaba renderer's
+settled `#intro` screen. Capture provenance and SHA-256 values are recorded in
+`preview.provenance.json`; the raw PNG is retained as `preview-capture.png`.
+The capture hides the shared `.mh-lang` control and excludes browser/app chrome
+and scrollbars. The source CSS intentionally hides the names/date on the initial
+cover and reveals them during the seal-opening sequence, so the cover preserves
+that behavior rather than exposing those slots early.

@@ -1,15 +1,26 @@
 {
   "status": "verified",
-  "file": "preview-browser-capture.jpg",
-  "sha256": "77275f444421c8351380e4763ba95aec7689582fbd541edefd29d1c46cd18fd5",
-  "format": "JPEG",
+  "file": "catalog-cover-opening.png",
+  "sha256": "879b6caaedf4488dc810f9ede03e5acc244c3faa6017a3cd00abaeef3e1077ee",
+  "format": "PNG",
   "width": 478,
   "height": 668,
   "route": "/preview?template=yangi-uy&qaSilent=1",
   "fixture": "apps/web/src/modules/catalog/preview-sample.json",
-  "fixtureSha256": "a88ccb99419b87f60e86f7470366f8badaa912db74ab67ad1f757aeeaf6d29c2",
-  "captureMethod": "ChatGPT in-app browser, production build",
-  "capturedAt": "2026-10-22",
-  "sourceTemplate": "Invitations - this folder will be removed from production/Marxaba/Nikoh/templates/yangi-uy",
-  "scope": "first viewport of canonical localized opening; production preview with QA audio silenced"
+  "fixtureSha256": "54017a292d4a5235593d93a5e2f8bca1fe3bab89433182fac912c5d948878871",
+  "captureMethod": "Packaged source renderer, iframe viewport capture",
+  "capturedAt": "2026-10-23",
+  "sourceTemplate": "Invitations - this folder will be removed from production/Marxaba/Boshqa tadbirlar/templates/yangi-uy",
+  "scope": "complete canonical .intro opening; browser/app UI excluded",
+  "captureViewport": {
+    "width": 478,
+    "height": 668
+  },
+  "outputCrop": {
+    "x": 0,
+    "y": 0,
+    "width": 478,
+    "height": 668
+  },
+  "previewPayload": "Canonical preview fixture mapped through shared Marxaba contract adapter; ephemeral only"
 }

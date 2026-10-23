@@ -1,6 +1,8 @@
 # Bulbul package notes
 
-The public package preserves the captured `<body>`, `template.css`, `template.js`, `plaque.js`, and source artwork. Package `meta.js` changes only its preview filename. `preview-browser-capture.jpg` is a ChatGPT in-app-browser production render of `/preview?template=bulbul&qaSilent=1` using the canonical shared fixture. Its dimensions and SHA-256, plus the fixture checksum, are recorded in `preview.provenance.json`. It is a 478 by 668 first-viewport capture; it is not a full-page image. The untouched capture has no preview image.
+The public package preserves the captured `<body>`, `template.css`, `template.js`, `plaque.js`, and source artwork. Package `meta.js` changes only its preview filename. `catalog-cover-opening.png` is a direct 430 by 932 portrait render of the packaged source page at the untouched `#intro` state, before opening. The capture shows the full golden cage opening and complete language selector. Its SHA-256, capture method, source package, and reference manifest are recorded in `preview.provenance.json`. The Marxaba capture manifest records the intro HTML and artwork layers but no preview image, so this source render supplies the catalog artwork without reconstructing the design.
+
+`preview-browser-capture.jpg` remains an untouched 478 by 668 first-viewport capture of the production preview route; it is QA evidence only and is no longer the catalog cover. Existing `preview.png` and `preview-350/550/750.png` files are retained untouched and are not used as catalog art because their render provenance was undocumented.
 
 The application head uses local shared Marxaba runtime files and locally bundled Cormorant Garamond and Great Vibes fonts. It intentionally omits the reference's sample-invitation script; preview content is injected by the shared typed adapter. `i18n.js` contains only Bulbul page copy translations and excludes the reference helper that mutates/filters sample invitation data.
 

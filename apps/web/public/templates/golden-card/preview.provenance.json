@@ -5,7 +5,9 @@
     "preservedFile": "source/preview-frame.html",
     "sha256": "75ac0b6d0edd52500a4a24cc15ed001fa6a0230571ce461a33859703180cc888",
     "bytes": 39134,
-    "captureType": "Next.js server-rendered HTML preview snapshot"
+    "captureType": "Next.js server-rendered HTML preview snapshot",
+    "preservedSha256": "75ac0b6d0edd52500a4a24cc15ed001fa6a0230571ce461a33859703180cc888",
+    "preservedBytes": 39134
   },
   "preview": {
     "file": "preview-browser-capture.jpg",

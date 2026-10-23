@@ -2,7 +2,7 @@
   "format": "image/webp",
   "width": 720,
   "height": 1280,
-  "sourcePage": "/templates/shahzoda/index.html?lang=uz",
+  "sourcePage": "/preview?template=shahzoda&qaSilent=1&qaReducedMotion=1",
   "sourceOpening": "intro curtain and plaque",
   "fixture": "apps/web/src/modules/catalog/preview-sample.json",
   "fixtureLocale": "uz-Latn",
@@ -14,5 +14,9 @@
     "height": 1280,
     "deviceScaleFactor": 1
   },
-  "sha256": "bf0bd8e1754a1987059858f50a6882fc339ce2142315659b3896c599f7d5b516"
+  "captureMethod": "Packaged Shahzoda renderer captured from the local preview route in headless Chrome at 720×1280 and DPR 1. Capture-session-only CSS hid the shared runtime's .mh-lang control inside the same-origin renderer iframe; the outer preview's injected <nextjs-portal> custom-element host was removed from the capture page before taking the iframe screenshot because its dev badge is rendered inside a shadow root. Neither template, shared runtime, nor real invitation UI was changed. Waited for the canonical Uzbek Latin fixture payload and local fonts. Reduced motion and silent playback are preview-only.",
+  "excludedPlatformControl": ".mh-lang",
+  "excludedCaptureChrome": ["<nextjs-portal>", "#next-logo (shadow DOM)"],
+  "fixtureSha256": "54017a292d4a5235593d93a5e2f8bca1fe3bab89433182fac912c5d948878871",
+  "sha256": "56f6098caced4d42ec8cb8add9720a19bfc74ae5e596e99715c3e2e0f4a45dba"
 }

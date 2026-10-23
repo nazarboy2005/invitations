@@ -352,8 +352,28 @@ export function AnorInvitation({
   const frame = useRef<HTMLIFrameElement>(null);
   const [frameLocale, setFrameLocale] = useState(locale);
   const data = useMemo(
-    () => makeLegacyData(invitation, frameLocale, guestName, sampleWishes),
-    [invitation, frameLocale, guestName, sampleWishes],
+    () => {
+      const mapped = makeLegacyData(invitation, frameLocale, guestName, sampleWishes);
+      const hasCreatorPhotos = invitation.gallery.some((photo) => photo.url.trim());
+      if (preview && sampleWishes && !hasCreatorPhotos) {
+        const sourceImages = [
+          ["stage.webp", "Nikoh sahnasi"],
+          ["hero-sky.webp", "Osmon manzarasi"],
+          ["hero-front.webp", "Gul bezaklari"],
+          ["hero-branches.webp", "Shox va gullar"],
+          ["finale.webp", "Yakuniy gul bezagi"],
+          ["fruit.webp", "Anor bezagi"],
+        ] as const;
+        mapped.gallery = sourceImages.map(([file, alt], index) => ({
+          id: `anor-source-preview-${index + 1}`,
+          src: `/templates/anor/source/art/${file}`,
+          alt,
+          caption: alt,
+        }));
+      }
+      return mapped;
+    },
+    [invitation, frameLocale, guestName, preview, sampleWishes],
   );
   const sendExtras = useInvitationExtras(
     frame,

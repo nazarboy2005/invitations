@@ -21,3 +21,7 @@ the source component or original event handlers. The adapter preserves the
 captured layout and visual assets while reconnecting the supported controls.
 Unrepresented source controls remain a release-gate review item until browser
 inspection confirms the complete interaction inventory.
+
+## Catalog artwork
+
+`preview-opening.png` is a clean 720×1280 (9:16) capture of the packaged snapshot renderer's post-envelope opening hero. It uses the canonical catalog preview fixture names and the captured Cloud Castle page markup, styles, fonts, and artwork. The language selector, music control, and browser scrollbar are absent. The former `preview-browser-capture.jpg` was a narrow application screenshot and is retained only as superseded provenance; it is no longer used by the catalog. The source archive contains a server-rendered snapshot, so this image verifies the opening composition and its crop only. The archive does not provide the original component/runtime handlers, and this artwork does not establish interaction or animation parity.

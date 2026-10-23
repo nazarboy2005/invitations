@@ -1,19 +1,22 @@
 {
   "artifact": "preview.webp",
-  "artifactSha256": "c99682bb44b7839e4ca192aa9edf81a47bba8e0f1fcb316d82088908e84583d8",
+  "artifactSha256": "2c24a22d6c3c7923286ef6384e92f4daf8efef06978233f5ff61e276addc7cb2",
   "format": "image/webp",
+  "encoding": "lossless",
   "width": 480,
   "height": 900,
   "sourceCapture": "Invitations - this folder will be removed from production/Marxaba/Qiz uzatish/templates/lola",
   "renderedFrom": "captured Lola opening after opening motion settles",
   "previewRoute": "/preview?template=lola&qaSilent=1",
   "fixture": "apps/web/src/modules/catalog/preview-sample.json",
+  "fixtureSha256": "54017a292d4a5235593d93a5e2f8bca1fe3bab89433182fac912c5d948878871",
   "locale": "uz-Latn",
   "viewport": {
     "width": 480,
     "height": 900,
     "deviceScaleFactor": 1
   },
-  "verificationNote": "Prior browser-render provenance recorded in SOURCE_PROVENANCE.md; browser render was not independently repeated in the current audit.",
+  "captureCleanup": "Replaced only the empty top-right background patch (x=320, y=0, width=160, height=70) with a fresh render of the same preview route after hiding the injected .mh-lang language switcher and Next.js development badge. The existing opening pixels outside this patch are retained.",
+  "verificationNote": "Re-rendered locally at the recorded viewport; verified the injected language switcher and development badge were hidden before capture. The cleaned WebP preserves the prior image pixels losslessly outside the background patch.",
   "sourceNote": "art/sandiq-lid.webp is referenced by captured CSS but omitted from the capture manifest. The packaged asset was recovered byte-for-byte from the same deployed Lola template and is checksum-verified; no approximation was used."
 }

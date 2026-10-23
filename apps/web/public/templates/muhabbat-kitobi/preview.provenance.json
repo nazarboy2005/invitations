@@ -1,0 +1,36 @@
+{
+  "artifact": "preview.webp",
+  "sha256": "fbe885f5a642ce2f5aad934cf9c7e9c86175170d54dabf99bdf7446cf48d903d",
+  "format": "image/webp",
+  "width": 430,
+  "height": 932,
+  "sourceCapture": "Invitations - this folder will be removed from production/Marxaba/Nikoh/templates/muhabbat-kitobi",
+  "sourceMetadataPreview": "preview-source.svg (named in meta.js; absent from the capture manifest and local capture/package folders)",
+  "renderedFrom": "Packaged Muhabbat Kitobi renderer and its original local table/book assets; locked #intro opening state",
+  "route": "/__muhabbat-capture/index.html (temporary same-origin capture frame, removed after capture)",
+  "fixture": "apps/web/src/modules/catalog/preview-sample.json",
+  "fixtureSha256": "54017a292d4a5235593d93a5e2f8bca1fe3bab89433182fac912c5d948878871",
+  "locale": "uz-Latn",
+  "viewport": {
+    "width": 430,
+    "height": 932,
+    "deviceScaleFactor": 1
+  },
+  "state": "initial locked intro before Kitobni ochish is activated",
+  "visibleOpeningElements": [
+    "still-life table background",
+    "closed green book cover",
+    "J & M sample monogram",
+    "ribbon greeting",
+    "Kitobni ochish action",
+    "Bir bor ekan… intro hint"
+  ],
+  "captureSettings": {
+    "reducedMotion": true,
+    "crop": "none",
+    "resize": "none",
+    "applicationLanguageControl": "excluded through single-locale preview payload",
+    "browserChrome": "excluded"
+  },
+  "sampleContent": "Ephemeral catalog-preview data only; never saved to creator content or public invitations"
+}

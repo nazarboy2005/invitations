@@ -34,12 +34,16 @@ size, available from both the catalog and editor. During creation, show the same
 real renderer and opening behavior at the available viewport size without a
 decorative phone frame that clips template controls or content.
 
-Anor's captured `index.html`, `template.css`, `template.js`, and `seeds.js` are
-packaged under `apps/web/public/templates/anor/source` and run in an isolated
-same-origin frame. The original template renderer and animation engine are
-reused directly; `bridge.js` maps the typed invitation contract and connects
-the original controls to this application's APIs. Marxaba's sample invitation
-and general site runtime are excluded. Keep the source capture untouched.
+Anor's captured `template.css`, `template.js`, `seeds.js`, `i18n.js`, and
+`meta.js` are copied byte-for-byte under `apps/web/public/templates/anor/source`
+and run in an isolated same-origin frame. The app-hosted `index.html` keeps
+the captured page structure and adds local runtime links plus a program-heading
+binding hook. The original renderer, styles, and animation engine are reused
+directly; `bridge.js` maps the typed invitation contract and connects the
+original controls to this application's APIs. The captured dress-code section
+and palette are retained and bound from the shared contract. Marxaba's sample
+invitation and general site runtime are excluded. Keep the source capture
+untouched.
 For catalog art, honor the template's `meta.js` preview asset instead of
 substituting an arbitrary crop of its opening-stage artwork. Anor's metadata
 points to `preview.webp`; that exact asset is packaged separately under
@@ -52,12 +56,26 @@ font request or silently fall back to system fonts.
 
 Keep each template's complete captured Lahzalar/gallery section as authored,
 including its layout, empty-state decoration (when present), and interactions.
-In catalog and blank creator previews, the shared fixture supplies six
-icon-only gallery entries with empty image URLs. This lets the captured
-template list renderer show its own decorative empty-photo cards and controls;
-do not substitute photographs or hand-build a parallel gallery. These entries
-remain preview-only, and public invitations hide the gallery until the creator
-adds photos.
+The shared preview fixture supplies six empty gallery slots. In catalog and
+initial template-selection previews, a template may map authentic image assets
+from its own captured source into those preview-only slots wherever such images
+are available. Do not use unrelated site or cross-template sample photos. Keep
+these preview images ephemeral: never write them to creator drafts or published
+invitation data, and replace them with creator-authored uploads as soon as
+those exist. Public invitations hide creator-photo galleries and optional
+creator-photo slots while there are no uploaded images. Template-owned opening
+artwork, backgrounds, and decorative images remain visible whether or not the
+creator has uploaded gallery photos. Anor and Atlas implement this source-art
+mapping in their renderer adapters; the shared fixture remains empty.
+
+Atlas keeps byte-identical copies of its captured `template.css`,
+`template.js`, `meta.js`, and textile artwork under
+`apps/web/public/templates/atlas`. Its app-hosted `index.html` retains the
+captured body and swaps the site runtime and sample invitation for the shared
+typed bridge. `platform-adapter.js` maps only the standalone sample labels that
+the original page hard-codes. Its catalog artwork is a 720×1280 screenshot of
+the captured renderer's initial opening page; the captured metadata points to
+a `preview.webp` that is absent from the local capture.
 
 The next ten Marxaba nikoh designs are packaged directly under
 `apps/web/public/templates/<template-id>` and use the same-origin

@@ -1,15 +1,15 @@
 {
   "status": "verified",
   "file": "preview-browser-capture.jpg",
-  "sha256": "e2615f75f766f2d09e1ce10363dff7717c68a9feb6a8a64c5f60e43322e1f705",
+  "sha256": "1b2d8c11198fac8fde5bf77cbea27131bd45be660942d1e4a2ffef1a15d29b9d",
   "format": "JPEG",
-  "width": 478,
-  "height": 668,
+  "width": 430,
+  "height": 932,
   "route": "/preview?template=ganch&qaSilent=1",
   "fixture": "apps/web/src/modules/catalog/preview-sample.json",
-  "fixtureSha256": "a88ccb99419b87f60e86f7470366f8badaa912db74ab67ad1f757aeeaf6d29c2",
-  "captureMethod": "ChatGPT in-app browser, production build",
-  "capturedAt": "2026-10-22",
+  "fixtureSha256": "54017a292d4a5235593d93a5e2f8bca1fe3bab89433182fac912c5d948878871",
+  "captureMethod": "Chromium screenshot of the production preview route; renderer frame only, with the platform locale overlay hidden for capture",
+  "capturedAt": "2026-10-23",
   "sourceTemplate": "Invitations - this folder will be removed from production/Marxaba/Nikoh/templates/ganch",
-  "scope": "first viewport of canonical localized opening; production preview with QA audio silenced"
+  "scope": "first viewport of the canonical Uzbek opening, captured with the current shared preview fixture; closed doors visible, without app chrome"
 }

@@ -6,7 +6,7 @@ import { templateById } from "@taklifnoma/contracts";
 
 const source = new URL("../apps/web/public/templates/cloud-castle/index.html", import.meta.url);
 const bridge = new URL("../apps/web/public/templates/cloud-castle/bridge.js", import.meta.url);
-const preview = new URL("../apps/web/public/templates/cloud-castle/preview-browser-capture.jpg", import.meta.url);
+const preview = new URL("../apps/web/public/templates/cloud-castle/preview-opening.png", import.meta.url);
 const provenance = new URL("../apps/web/public/templates/cloud-castle/source/provenance.json", import.meta.url);
 
 test("Cloud Castle is published for weddings independently of category", () => {
@@ -14,14 +14,18 @@ test("Cloud Castle is published for weddings independently of category", () => {
   assert.equal(template?.published, true);
   assert.deepEqual(template?.categoryIds, ["wedding"]);
   assert.deepEqual(template?.supportedEventTypes, ["wedding"]);
-  assert.equal(template?.previewImage, "/templates/cloud-castle/preview-browser-capture.jpg");
+  assert.equal(template?.previewImage, "/templates/cloud-castle/preview-opening.png");
 });
 
-test("Cloud Castle preview artwork matches its browser capture provenance", async () => {
+test("Cloud Castle catalog artwork is a clean portrait capture with recorded provenance", async () => {
   const image = await readFile(preview);
   const details = JSON.parse(await readFile(provenance, "utf8"));
-  assert.equal(details.previewBrowserCapture.sha256, createHash("sha256").update(image).digest("hex"));
-  assert.equal(details.previewBrowserCapture.file, "../preview-browser-capture.jpg");
+  assert.equal(details.catalogArtwork.sha256, createHash("sha256").update(image).digest("hex"));
+  assert.equal(details.catalogArtwork.file, "../preview-opening.png");
+  assert.equal(details.catalogArtwork.dimensions, "720x1280");
+  assert.equal(details.catalogArtwork.aspectRatio, "9:16");
+  assert.deepEqual(details.catalogArtwork.uiChromeRemoved, ["language selector", "music control", "browser scrollbar"]);
+  assert.match(details.catalogArtwork.provenanceLimit, /no original component\/runtime handlers/);
 });
 
 test("Cloud Castle package contains only sanitized markup and no captured website runtime", async () => {

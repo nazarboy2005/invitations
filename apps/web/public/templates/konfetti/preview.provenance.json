@@ -7,6 +7,13 @@
   "fixtureEventType": "birthday",
   "fixtureNames": ["Javohir"],
   "sourceOpening": "Captured Konfetti candle opener, still locked before user interaction; the candle flame and source decorations are visible.",
-  "captureMethod": "Packaged source loaded in headless Chrome at 450x800 DPR 1; window.name injected through platform bridge; waited for document.fonts.ready plus 2 seconds; captured opener to PNG then encoded as WebP in Chrome canvas at quality 0.94.",
-  "sha256": "2b11a3ced8283cd94928094934181b29e8b7f50426952e8e0e8c0aea987a673a"
+  "captureMethod": "Packaged Konfetti source rendered over local HTTP in headless Edge at a 450x800 CSS-pixel viewport and DPR 1. The uz-Latn birthday fixture name and greeting were passed through window.name and the packaged platform bridge. qaReducedMotion=1 holds the candle flame in its source-rendered static state. A capture-only same-origin parent style hides the shared runtime's injected .mh-lang control; no template or runtime source was changed. After document.fonts.ready and a 5000ms headless capture timeout, the locked opener was saved as preview-capture.png and encoded to WebP with Pillow at quality 94, method 6.",
+  "capture": {
+    "path": "apps/web/public/templates/konfetti/preview-capture.png",
+    "format": "png",
+    "width": 450,
+    "height": 800,
+    "sha256": "15932edc4cb2dfa6b21aa44ddf1038f23c83a29a985ac08730f2e94bd7645a23"
+  },
+  "sha256": "07afdeb1ea3b4b52754bdbf59a8cce90eb81f1dc9dbf3d8e35ed8ecebd6a2fbb"
 }

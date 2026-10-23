@@ -14,6 +14,21 @@
     "sha256": "6aa119732ec5ce1730bffed6880876ebe587adc736ff9367df7408520f24b6aa",
     "source": "ChatGPT in-app browser rendering of the app preview with the canonical fixture",
     "locale": "uz-Latn",
-    "viewport": "319x668"
+    "viewport": "319x668",
+    "superseded": true
+  },
+  "catalogArtwork": {
+    "file": "../preview-opening.png",
+    "sha256": "3d9344e4fdb3fe49628fbe08302043a3911ea8c506fa651136548b91cbce3843",
+    "dimensions": "720x1280",
+    "aspectRatio": "9:16",
+    "source": "Clean capture of the packaged Cloud Castle snapshot renderer, showing the post-envelope opening hero at 720x1280; capture harness removed before delivery",
+    "locale": "uz-Latn",
+    "uiChromeRemoved": [
+      "language selector",
+      "music control",
+      "browser scrollbar"
+    ],
+    "provenanceLimit": "The archive contains server-rendered markup and styles but no original component/runtime handlers. This image verifies the captured opening composition only, not interaction or animation parity."
   }
 }

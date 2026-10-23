@@ -261,6 +261,10 @@ img {
   padding-top: 40px;
 }
 
+body:not(.catalog-preview) .oval-wrap:has(.oval img[src=""]) {
+  display: none;
+}
+
 .oval {
   position: relative;
   aspect-ratio: 3 / 4;

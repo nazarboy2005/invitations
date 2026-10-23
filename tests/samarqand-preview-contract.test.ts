@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
+import { createHash } from "node:crypto";
+import { existsSync, readFileSync } from "node:fs";
 import { createRequire } from "node:module";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -93,4 +94,32 @@ test("Samarqand Kechasi hides unsupported empty To‘yona note and bank hooks", 
   assert.match(adapter, /\.plaque \[data-slot="toyona\.bank"\]:empty/);
   assert.ok(html.includes('data-slot="toyona.cardNumber"'));
   assert.ok(html.includes('data-slot="toyona.cardHolder"'));
+});
+
+test("Samarqand Kechasi footer no longer depends on the uncaptured door-leaf asset", () => {
+  const css = read("template.css");
+  assert.doesNotMatch(css, /art\/door-leaf\.webp/);
+  assert.match(css, /\.footer__portal\{[^}]*background:radial-gradient/);
+  assert.equal(existsSync(new URL("../apps/web/public/templates/samarqand-kechasi/art/door-leaf.webp", import.meta.url)), false);
+});
+
+test("Samarqand Kechasi catalog art is a clean, fixture-backed portrait capture of its locked intro", () => {
+  const packageRoot = new URL("../apps/web/public/templates/samarqand-kechasi/", import.meta.url);
+  const readBytes = (file: string) => readFileSync(new URL(file, packageRoot));
+  const sha256 = (bytes: Buffer) => createHash("sha256").update(bytes).digest("hex");
+  const provenance = JSON.parse(readBytes("preview.provenance.json").toString("utf8"));
+  const capture = readBytes("preview-capture.png");
+  const preview = readBytes("preview.webp");
+  const fixture = readFileSync(new URL("../apps/web/src/modules/catalog/preview-sample.json", import.meta.url));
+
+  assert.equal(capture.toString("ascii", 12, 16), "IHDR");
+  assert.equal(capture.readUInt32BE(16), 560);
+  assert.equal(capture.readUInt32BE(20), 1280);
+  assert.equal(provenance.fixture.startsAt, "2026-11-14T18:30");
+  assert.equal(provenance.fixture.sha256, sha256(fixture));
+  assert.equal(provenance.artwork["preview-capture.png"], sha256(capture));
+  assert.equal(provenance.artwork["preview.webp"], sha256(preview));
+  assert.deepEqual(provenance.capture.excluded, ["outer page background", "Next.js dev badge", "app language switcher", "browser/app chrome"]);
+  assert.match(read("index.html"), /id="intro"[\s\S]*?class="intro__scene"[\s\S]*?registan-reveal\.webp[\s\S]*?lantern-hd\.webp/);
+  assert.match(read("index.html"), /id="open-invitation"/);
 });

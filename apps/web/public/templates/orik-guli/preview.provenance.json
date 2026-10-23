@@ -1,9 +1,45 @@
 {
-  "asset": "preview.webp",
-  "sourceAsset": "art/view-0.webp",
-  "sha256": "fc5eca76198999588239aa7f530ea4a10d22fa5a5a053be9269d71724b4e4244",
-  "width": 780,
-  "height": 1170,
+  "artifact": "preview.webp",
+  "sha256": "23088c0a7314b5d0ab762210d73ff7a65d12689dc9118cdc7db1a9d6003fd3b2",
+  "format": "image/webp",
+  "width": 480,
+  "height": 720,
   "sourcePackage": "Invitations - this folder will be removed from production/Marxaba/Nikoh/templates/orik-guli",
-  "captureNote": "The capture metadata points to preview.webp, but the capture has no root preview.webp. The catalog artwork is an exact copy of the captured first-page art/view-0.webp at its full portrait ratio."
+  "referenceCaptureAsset": "art/view-0.webp",
+  "referenceCaptureSha256": "fc5eca76198999588239aa7f530ea4a10d22fa5a5a053be9269d71724b4e4244",
+  "renderedFrom": "Packaged O‘rik Guli source renderer (index.html, template.css, template.js, fx.js, fog.js, and local art); the opening stays locked before any guest action.",
+  "route": "/preview?template=orik-guli&qaSilent=1",
+  "fixture": "apps/web/src/modules/catalog/preview-sample.json",
+  "fixtureSha256": "54017a292d4a5235593d93a5e2f8bca1fe3bab89433182fac912c5d948878871",
+  "locale": "uz-Latn",
+  "viewport": {
+    "width": 1000,
+    "height": 720,
+    "deviceScaleFactor": 1
+  },
+  "crop": {
+    "x": 260,
+    "y": 0,
+    "width": 480,
+    "height": 720,
+    "operation": "Capture the complete 480×720 source iframe; exclude the preview language selector, surrounding blur, development portal, and browser chrome."
+  },
+  "state": "Initial locked intro after arrival motion settles; glass remains closed.",
+  "reducedMotion": false,
+  "visibleOpeningElements": [
+    "source paintings",
+    "window overlay",
+    "fog and traced initials",
+    "greeting",
+    "petal canvas",
+    "opening bands",
+    "glass wipe hint and action"
+  ],
+  "renderInput": {
+    "format": "image/jpeg",
+    "sha256": "c69ac2eb618b8fc186bdc42fcdeb40eecddd1c260afeae9055adb640b339963c",
+    "width": 480,
+    "height": 720
+  },
+  "sampleContent": "Ephemeral catalog-preview data only; never saved to creator content or public invitations."
 }

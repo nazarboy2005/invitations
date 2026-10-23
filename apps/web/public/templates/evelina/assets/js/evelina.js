@@ -10,6 +10,7 @@
   };
   const readInitial = () => { try { return JSON.parse(window.name || "{}"); } catch { return {}; } };
   let data = readInitial();
+  document.body.classList.toggle("catalog-preview", Boolean(data.preview && data.catalogPreview));
   let opened = false;
   bindToyona();
   let photoIndex = 0;
@@ -17,6 +18,7 @@
   const clear = (node) => { while (node.firstChild) node.removeChild(node.firstChild); };
   function render(payload) {
     data = payload || data;
+    document.body.classList.toggle("catalog-preview", Boolean(data.preview && data.catalogPreview));
     const lang = localeBySource[data.locale] || data.defaultLang || "uz";
     const t = copy[lang] || copy.uz;
     document.documentElement.lang = lang;

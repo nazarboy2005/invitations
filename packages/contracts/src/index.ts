@@ -363,8 +363,10 @@ export const TEMPLATES: TemplateDefinition[] = [
   {
     id: "oltin-darvoza-ortidagi-baxt",
     name: "Oltin darvoza ortidagi baxt",
-    description: "Oltin naqshli darvoza, gullar va kinematik ochilish bilan bezatilgan taklifnoma.",
-    previewImage: "/templates/onlinetaklifnoma-oltin-darvoza-ortidagi-baxt/source/assets/dd2fe7c942f5a910.webp",
+    description:
+      "Oltin naqshli darvoza, gullar va kinematik ochilish bilan bezatilgan taklifnoma.",
+    previewImage:
+      "/templates/onlinetaklifnoma-oltin-darvoza-ortidagi-baxt/source/assets/dd2fe7c942f5a910.webp",
     previewEventType: "wedding",
     categoryIds: ["wedding"],
     supportedEventTypes: ["wedding"],
@@ -376,8 +378,10 @@ export const TEMPLATES: TemplateDefinition[] = [
   {
     id: "gulli-darvoza",
     name: "Gulli darvoza",
-    description: "Gulli darvoza va romantik video ochilishiga ega to‘y taklifnomasi.",
-    previewImage: "/templates/onlinetaklifnoma-gulli-darvoza/source/assets/gate-thumb.webp",
+    description:
+      "Gulli darvoza va romantik video ochilishiga ega to‘y taklifnomasi.",
+    previewImage:
+      "/templates/onlinetaklifnoma-gulli-darvoza/source/assets/gate-thumb.webp",
     previewEventType: "wedding",
     categoryIds: ["wedding"],
     supportedEventTypes: ["wedding"],
@@ -389,8 +393,10 @@ export const TEMPLATES: TemplateDefinition[] = [
   {
     id: "ming-bir-kecha",
     name: "Ming bir kecha",
-    description: "Tungi binafsha ranglar, oltin yoysimon naqsh va yulduzlar ostidagi taklifnoma.",
-    previewImage: "/templates/onlinetaklifnoma-ming-bir-kecha/source/assets/71a55bb0516b6064.webp",
+    description:
+      "Tungi binafsha ranglar, oltin yoysimon naqsh va yulduzlar ostidagi taklifnoma.",
+    previewImage:
+      "/templates/onlinetaklifnoma-ming-bir-kecha/source/assets/71a55bb0516b6064.webp",
     previewEventType: "wedding",
     categoryIds: ["wedding"],
     supportedEventTypes: ["wedding"],
@@ -403,7 +409,8 @@ export const TEMPLATES: TemplateDefinition[] = [
     id: "andalus-darvozasi",
     name: "Andalus darvozasi",
     description: "A source-faithful Andalusian doorway wedding invitation.",
-    previewImage: "/templates/onlinetaklifnoma-andalus-darvozasi/source/assets/1d10c6e525d2c33c.webp",
+    previewImage:
+      "/templates/onlinetaklifnoma-andalus-darvozasi/source/assets/1d10c6e525d2c33c.webp",
     previewEventType: "wedding",
     categoryIds: ["wedding"],
     supportedEventTypes: ["wedding"],
@@ -416,7 +423,8 @@ export const TEMPLATES: TemplateDefinition[] = [
     id: "samarqand-peshtoqi",
     name: "Samarqand peshtoqi",
     description: "A source-faithful Registan portal wedding invitation.",
-    previewImage: "/templates/onlinetaklifnoma-samarqand-peshtoqi/source/assets/portal.8f988e1a927420cc.webp",
+    previewImage:
+      "/templates/onlinetaklifnoma-samarqand-peshtoqi/source/assets/portal.8f988e1a927420cc.webp",
     previewEventType: "wedding",
     categoryIds: ["wedding"],
     supportedEventTypes: ["wedding"],
@@ -428,8 +436,10 @@ export const TEMPLATES: TemplateDefinition[] = [
   {
     id: "shisha-bog",
     name: "Shisha bogʻ",
-    description: "A source-faithful candlelit glass conservatory wedding invitation.",
-    previewImage: "/templates/onlinetaklifnoma-shisha-bog/source/assets/portal.5a918f2300357ece.webp",
+    description:
+      "A source-faithful candlelit glass conservatory wedding invitation.",
+    previewImage:
+      "/templates/onlinetaklifnoma-shisha-bog/source/assets/portal.5a918f2300357ece.webp",
     previewEventType: "wedding",
     categoryIds: ["wedding"],
     supportedEventTypes: ["wedding"],
@@ -441,8 +451,10 @@ export const TEMPLATES: TemplateDefinition[] = [
   {
     id: "kapadokiya-tongi",
     name: "Kapadokiya tongi",
-    description: "A source-faithful rose-and-burgundy Cappadocia sunrise invitation.",
-    previewImage: "/templates/onlinetaklifnoma-kapadokiya-tongi/source/assets/e924b6a0555070ae.webp",
+    description:
+      "A source-faithful rose-and-burgundy Cappadocia sunrise invitation.",
+    previewImage:
+      "/templates/onlinetaklifnoma-kapadokiya-tongi/source/assets/e924b6a0555070ae.webp",
     previewEventType: "wedding",
     categoryIds: ["wedding"],
     supportedEventTypes: ["wedding"],
@@ -454,8 +466,10 @@ export const TEMPLATES: TemplateDefinition[] = [
   {
     id: "buxoro-ravoq",
     name: "Buxoro ravoq",
-    description: "A source-faithful Bukhara blue-and-gold portal wedding invitation.",
-    previewImage: "/templates/onlinetaklifnoma-buxoro-ravoq/source/assets/portal-thumb.0e723b5657296b74.webp",
+    description:
+      "A source-faithful Bukhara blue-and-gold portal wedding invitation.",
+    previewImage:
+      "/templates/onlinetaklifnoma-buxoro-ravoq/source/assets/portal-thumb.0e723b5657296b74.webp",
     previewEventType: "wedding",
     categoryIds: ["wedding"],
     supportedEventTypes: ["wedding"],
@@ -468,7 +482,8 @@ export const TEMPLATES: TemplateDefinition[] = [
     id: "jannat-bogi",
     name: "Jannat bogʻi",
     description: "A source-faithful floral paradise gate wedding invitation.",
-    previewImage: "/templates/onlinetaklifnoma-jannat-bogi/source/assets/e32742ca7893c3a2.webp",
+    previewImage:
+      "/templates/onlinetaklifnoma-jannat-bogi/source/assets/e32742ca7893c3a2.webp",
     previewEventType: "wedding",
     categoryIds: ["wedding"],
     supportedEventTypes: ["wedding"],
@@ -480,8 +495,10 @@ export const TEMPLATES: TemplateDefinition[] = [
   {
     id: "tojmahal-oltin-darvozasi",
     name: "Tojmahal oltin darvozasi",
-    description: "A source-faithful Taj Mahal gate invitation in midnight blue and pale gold.",
-    previewImage: "/templates/onlinetaklifnoma-tojmahal-oltin-darvozasi/source/assets/247f19e46f38efab.webp",
+    description:
+      "A source-faithful Taj Mahal gate invitation in midnight blue and pale gold.",
+    previewImage:
+      "/templates/onlinetaklifnoma-tojmahal-oltin-darvozasi/source/assets/247f19e46f38efab.webp",
     previewEventType: "wedding",
     categoryIds: ["wedding"],
     supportedEventTypes: ["wedding"],
@@ -493,8 +510,10 @@ export const TEMPLATES: TemplateDefinition[] = [
   {
     id: "zarrin-doppi",
     name: "Zarrin do‘ppi",
-    description: "To‘q ko‘k doppi girihi, yulduzlar va tillarang naqshlar bilan sunnat to‘yi taklifnomasi.",
-    previewImage: "/templates/onlinetaklifnoma-zarrin-doppi/source/assets/doppi-girih.svg",
+    description:
+      "To‘q ko‘k doppi girihi, yulduzlar va tillarang naqshlar bilan sunnat to‘yi taklifnomasi.",
+    previewImage:
+      "/templates/onlinetaklifnoma-zarrin-doppi/source/assets/doppi-girih.svg",
     previewEventType: "sunnat-toyi",
     categoryIds: ["other"],
     supportedEventTypes: ["sunnat-toyi"],
@@ -506,7 +525,8 @@ export const TEMPLATES: TemplateDefinition[] = [
   {
     id: "aurelia",
     name: "Aurelia",
-    description: "Tillarang bezaklar va nafis bulutlar orasidagi to‘y taklifnomasi.",
+    description:
+      "Tillarang bezaklar va nafis bulutlar orasidagi to‘y taklifnomasi.",
     previewImage: "/templates/aurelia/preview.png",
     previewEventType: "wedding",
     categoryIds: ["wedding"],
@@ -605,7 +625,7 @@ export const TEMPLATES: TemplateDefinition[] = [
     id: "oq-kabutar",
     name: "Oq Kabutar",
     description: "Oq kabutarlar va ipak lenta.",
-    previewImage: "/templates/oq-kabutar/preview.webp",
+    previewImage: "/templates/oq-kabutar/preview-opening.png",
     categoryIds: ["wedding"],
     supportedEventTypes: ["wedding"],
     priceMinor: 15000000,
@@ -653,7 +673,7 @@ export const TEMPLATES: TemplateDefinition[] = [
     id: "oltin-uzuk",
     name: "Oltin Uzuk",
     description: "Haqiqiy 3D oltin uzuklar.",
-    previewImage: "/templates/oltin-uzuk/preview.webp",
+    previewImage: "/templates/oltin-uzuk/catalog-cover-opening.png",
     categoryIds: ["wedding"],
     supportedEventTypes: ["wedding"],
     priceMinor: 15000000,
@@ -822,7 +842,7 @@ export const TEMPLATES: TemplateDefinition[] = [
     id: "bulbul",
     name: "Bulbul",
     description: "Tonggi bulbul va oltin qafas gullagan bog‘ga yo‘l ochadi.",
-    previewImage: "/templates/bulbul/preview-browser-capture.jpg",
+    previewImage: "/templates/bulbul/catalog-cover-opening.png",
     categoryIds: ["wedding"],
     supportedEventTypes: ["wedding", "fotiha", "qiz-uzatish"],
     priceMinor: 15000000,
@@ -1076,13 +1096,13 @@ export const TEMPLATES: TemplateDefinition[] = [
     priceMinor: 15000000,
     currency: "UZS",
     accent: "#4f7cff",
-    published: false,
+    published: true,
   },
   {
     id: "yangi-uy",
     name: "Yangi Uy",
     description: "Yangi xonadon quvonchini yaqinlaringiz bilan nishonlang.",
-    previewImage: "/templates/yangi-uy/preview-browser-capture.jpg",
+    previewImage: "/templates/yangi-uy/catalog-cover-opening.png",
     previewEventType: "yangi-uy",
     categoryIds: ["yangi-uy"],
     supportedEventTypes: ["yangi-uy", "osh"],
@@ -1094,7 +1114,8 @@ export const TEMPLATES: TemplateDefinition[] = [
   {
     id: "golden-card",
     name: "Golden Card",
-    description: "Midnight blue and gold ornamental invitation with a folding-card reveal.",
+    description:
+      "Midnight blue and gold ornamental invitation with a folding-card reveal.",
     previewImage: "/templates/golden-card/preview-browser-capture.jpg",
     previewEventType: "wedding",
     categoryIds: ["wedding"],
@@ -1108,6 +1129,7 @@ export const TEMPLATES: TemplateDefinition[] = [
     id: "green-garden",
     name: "Green Garden",
     description: "Shisha bog‘, nafis gullar va yashil ranglardagi taklifnoma.",
+    previewImage: "preview-browser-capture.jpg",
     previewEventType: "wedding",
     categoryIds: ["wedding"],
     supportedEventTypes: ["wedding"],
@@ -1119,7 +1141,8 @@ export const TEMPLATES: TemplateDefinition[] = [
   {
     id: "green-gold",
     name: "Green Gold",
-    description: "Gold ornaments and deep green tones for a wedding invitation.",
+    description:
+      "Gold ornaments and deep green tones for a wedding invitation.",
     previewEventType: "wedding",
     categoryIds: ["wedding"],
     supportedEventTypes: ["wedding"],
@@ -1131,7 +1154,8 @@ export const TEMPLATES: TemplateDefinition[] = [
   {
     id: "green-white",
     name: "Green White",
-    description: "A botanical white-and-green wedding invitation with a dress-code palette.",
+    description:
+      "A botanical white-and-green wedding invitation with a dress-code palette.",
     previewEventType: "wedding",
     categoryIds: ["wedding"],
     supportedEventTypes: ["wedding"],
@@ -1143,7 +1167,8 @@ export const TEMPLATES: TemplateDefinition[] = [
   {
     id: "jasmine-white",
     name: "Jasmine White",
-    description: "An ivory and botanical wedding invitation with jasmine ornaments.",
+    description:
+      "An ivory and botanical wedding invitation with jasmine ornaments.",
     previewEventType: "wedding",
     categoryIds: ["wedding"],
     supportedEventTypes: ["wedding"],
@@ -1155,7 +1180,8 @@ export const TEMPLATES: TemplateDefinition[] = [
   {
     id: "lace",
     name: "Lace",
-    description: "A burgundy lace wedding invitation with pearl details and an animated cover.",
+    description:
+      "A burgundy lace wedding invitation with pearl details and an animated cover.",
     previewEventType: "wedding",
     categoryIds: ["wedding"],
     supportedEventTypes: ["wedding"],
@@ -1179,7 +1205,8 @@ export const TEMPLATES: TemplateDefinition[] = [
   {
     id: "luxury-gold",
     name: "Luxury Gold",
-    description: "A dark, gold-accented wedding invitation with a refined layout.",
+    description:
+      "A dark, gold-accented wedding invitation with a refined layout.",
     previewEventType: "wedding",
     categoryIds: ["wedding"],
     supportedEventTypes: ["wedding"],
@@ -1191,7 +1218,8 @@ export const TEMPLATES: TemplateDefinition[] = [
   {
     id: "modern-floral",
     name: "Modern Floral",
-    description: "A soft floral wedding invitation with a modern botanical style.",
+    description:
+      "A soft floral wedding invitation with a modern botanical style.",
     previewEventType: "wedding",
     categoryIds: ["wedding"],
     supportedEventTypes: ["wedding"],
@@ -1204,7 +1232,7 @@ export const TEMPLATES: TemplateDefinition[] = [
     id: "glass-pink",
     name: "Glass Pink",
     description: "Nafis pushti gullar, nozik naqshlar va nafis taklifnoma.",
-    previewImage: "/templates/glass-pink/preview-browser-capture.jpg",
+    previewImage: "/templates/glass-pink/catalog-cover-opening.png",
     previewEventType: "wedding",
     categoryIds: ["wedding"],
     supportedEventTypes: ["wedding"],
@@ -1216,8 +1244,10 @@ export const TEMPLATES: TemplateDefinition[] = [
   {
     id: "manor-edition",
     name: "Manor",
-    description: "Qo‘lda chizilgan gullar, xalqalar va romantik manor bezaklari.",
-    previewImage: "/templates/manor-edition/source/reference/assets/intro-poster.jpg",
+    description:
+      "Qo‘lda chizilgan gullar, xalqalar va romantik manor bezaklari.",
+    previewImage:
+      "/templates/manor-edition/source/reference/assets/intro-poster.jpg",
     previewEventType: "wedding",
     categoryIds: ["wedding"],
     supportedEventTypes: ["wedding"],
@@ -1243,7 +1273,8 @@ export const TEMPLATES: TemplateDefinition[] = [
   {
     id: "islamic-edition",
     name: "Islamic Edition",
-    description: "Tungi ko‘k ranglar, islomiy naqshlar va sokin hilol bezaklari.",
+    description:
+      "Tungi ko‘k ranglar, islomiy naqshlar va sokin hilol bezaklari.",
     previewImage:
       "/templates/islamic-edition/source/reference/assets/video-start.jpg",
     previewEventType: "wedding",
@@ -1258,7 +1289,8 @@ export const TEMPLATES: TemplateDefinition[] = [
     id: "osh-edition-v1",
     name: "Osh Edition",
     description: "Iliq naqshlar, nafis xat va anʼanaviy osh dasturxoni.",
-    previewImage: "/templates/osh-edition-v1/source/reference/assets/intro-osh-premium.webp",
+    previewImage:
+      "/templates/osh-edition-v1/source/reference/assets/intro-osh-premium.webp",
     previewEventType: "osh",
     categoryIds: ["osh"],
     supportedEventTypes: ["osh"],
@@ -1270,7 +1302,8 @@ export const TEMPLATES: TemplateDefinition[] = [
   {
     id: "amru-maruf-edition-v1",
     name: "Amru Maruf Edition",
-    description: "Chuqur zumrad ranglar, islomiy ravoq va tillarang bezakli nikoh taklifnomasi.",
+    description:
+      "Chuqur zumrad ranglar, islomiy ravoq va tillarang bezakli nikoh taklifnomasi.",
     previewImage: "/templates/amru-maruf-edition-v1/preview.svg",
     previewEventType: "wedding",
     categoryIds: ["wedding"],
@@ -1283,8 +1316,10 @@ export const TEMPLATES: TemplateDefinition[] = [
   {
     id: "monochrome-editorial-edition",
     name: "Monochrome Editorial",
-    description: "Qora-oq fotografiya, yirtilgan qog‘oz chetlari va nafis tipografika.",
-    previewImage: "/templates/monochrome-editorial-edition/source/reference/assets/hero-hands.webp",
+    description:
+      "Qora-oq fotografiya, yirtilgan qog‘oz chetlari va nafis tipografika.",
+    previewImage:
+      "/templates/monochrome-editorial-edition/source/reference/assets/hero-hands.webp",
     previewEventType: "wedding",
     categoryIds: ["wedding"],
     supportedEventTypes: ["wedding"],
@@ -1296,8 +1331,10 @@ export const TEMPLATES: TemplateDefinition[] = [
   {
     id: "xatna-edition",
     name: "Xatna Edition",
-    description: "Samarqand hovlisi, islimiy naqsh va nafis oq-yashil bezaklar.",
-    previewImage: "/templates/xatna-edition/source/reference/assets/intro-ivory-doors.webp",
+    description:
+      "Samarqand hovlisi, islimiy naqsh va nafis oq-yashil bezaklar.",
+    previewImage:
+      "/templates/xatna-edition/source/reference/assets/intro-ivory-doors.webp",
     previewEventType: "sunnat-toyi",
     categoryIds: ["other"],
     supportedEventTypes: ["sunnat-toyi"],
@@ -1309,8 +1346,9 @@ export const TEMPLATES: TemplateDefinition[] = [
   {
     id: "cloud-castle",
     name: "Cloud Castle",
-    description: "Oq bulutlar, nozik gul bezaklari va nafis saroyona taklifnoma.",
-    previewImage: "/templates/cloud-castle/preview-browser-capture.jpg",
+    description:
+      "Oq bulutlar, nozik gul bezaklari va nafis saroyona taklifnoma.",
+    previewImage: "/templates/cloud-castle/preview-opening.png",
     previewEventType: "wedding",
     categoryIds: ["wedding"],
     supportedEventTypes: ["wedding"],
@@ -1322,7 +1360,8 @@ export const TEMPLATES: TemplateDefinition[] = [
   {
     id: "royal-burgundy-edition",
     name: "Velvet Royale",
-    description: "Bordo baxmal pardalar, zarhal bezaklar va nafis saroyona uslub.",
+    description:
+      "Bordo baxmal pardalar, zarhal bezaklar va nafis saroyona uslub.",
     previewImage:
       "/templates/velvet-royale/source/reference/intro-v4-20261014-blank-poster-c521108180.webp",
     previewEventType: "wedding",
@@ -1350,7 +1389,8 @@ export const TEMPLATES: TemplateDefinition[] = [
     id: "taklifnomachi-12",
     name: "Taklifnomachi · Moviy osmon",
     description: "Moviy bulutlar, nafis muhr va ochiladigan taklifnoma.",
-    previewImage: "/templates/taklifnomachi-12/source/templates/12/assets/hero.png",
+    previewImage:
+      "/templates/taklifnomachi-12/source/templates/12/assets/hero.png",
     previewEventType: "wedding",
     categoryIds: ["wedding"],
     supportedEventTypes: ["wedding"],
@@ -1363,7 +1403,8 @@ export const TEMPLATES: TemplateDefinition[] = [
     id: "taklifnomachi-13",
     name: "Taklifnomachi - Oltin atirgul",
     description: "Golden silk, botanical details, and a rose calendar.",
-    previewImage: "/templates/taklifnomachi-13/source/taklifnomachi.uz/templates/13/assets/p2/intro-golden.png",
+    previewImage:
+      "/templates/taklifnomachi-13/source/taklifnomachi.uz/templates/13/assets/p2/intro-golden.png",
     previewEventType: "wedding",
     categoryIds: ["wedding"],
     supportedEventTypes: ["wedding"],
@@ -1376,7 +1417,8 @@ export const TEMPLATES: TemplateDefinition[] = [
     id: "taklifnomachi-15",
     name: "Taklifnomachi - Monoxrom swap",
     description: "A cinematic charcoal invitation with a swipe-to-open reveal.",
-    previewImage: "/templates/taklifnomachi-15/source/taklifnomachi.uz/templates/15/assets/main-bg.png",
+    previewImage:
+      "/templates/taklifnomachi-15/source/taklifnomachi.uz/templates/15/assets/main-bg.png",
     previewEventType: "wedding",
     categoryIds: ["wedding"],
     supportedEventTypes: ["wedding"],
@@ -1389,7 +1431,8 @@ export const TEMPLATES: TemplateDefinition[] = [
     id: "taklifnomachi-16",
     name: "Taklifnomachi - Zaytun guli",
     description: "An ivory envelope opens into an olive floral invitation.",
-    previewImage: "/templates/taklifnomachi-16/source/taklifnomachi.uz/templates/16/assets/couple-top.png",
+    previewImage:
+      "/templates/taklifnomachi-16/source/taklifnomachi.uz/templates/16/assets/couple-top.png",
     previewEventType: "wedding",
     categoryIds: ["wedding"],
     supportedEventTypes: ["wedding"],
@@ -1402,7 +1445,8 @@ export const TEMPLATES: TemplateDefinition[] = [
     id: "taklifnomachi-17",
     name: "Taklifnomachi - Atlas va atlas ipak",
     description: "A walnut-toned floral invitation framed by flowing satin.",
-    previewImage: "/templates/taklifnomachi-17/source/taklifnomachi.uz/templates/17/assets/main-bg.jpg",
+    previewImage:
+      "/templates/taklifnomachi-17/source/taklifnomachi.uz/templates/17/assets/main-bg.jpg",
     previewEventType: "wedding",
     categoryIds: ["wedding"],
     supportedEventTypes: ["wedding"],
@@ -1414,18 +1458,32 @@ export const TEMPLATES: TemplateDefinition[] = [
   {
     id: "taklifnomachi-18",
     name: "Taklifnomachi - Gul naqshli marosim",
-    description: "A wide floral artboard with a detailed program and soft sage accents.",
-    previewImage: "/templates/taklifnomachi-18/source/taklifnomachi.uz/templates-source/18/assets/bg.png",
-    previewEventType: "wedding", categoryIds: ["wedding"], supportedEventTypes: ["wedding"],
-    priceMinor: 15000000, currency: "UZS", accent: "#536d67", published: false,
+    description:
+      "A wide floral artboard with a detailed program and soft sage accents.",
+    previewImage:
+      "/templates/taklifnomachi-18/source/taklifnomachi.uz/templates-source/18/assets/bg.png",
+    previewEventType: "wedding",
+    categoryIds: ["wedding"],
+    supportedEventTypes: ["wedding"],
+    priceMinor: 15000000,
+    currency: "UZS",
+    accent: "#536d67",
+    published: false,
   },
   {
     id: "taklifnomachi-19",
     name: "Taklifnomachi - Zaytun bogi",
-    description: "A sage botanical invitation with an illustrated three-day calendar.",
-    previewImage: "/templates/taklifnomachi-19/source/taklifnomachi.uz/templates-source/19/assets/hero.png",
-    previewEventType: "wedding", categoryIds: ["wedding"], supportedEventTypes: ["wedding"],
-    priceMinor: 15000000, currency: "UZS", accent: "#798866", published: false,
+    description:
+      "A sage botanical invitation with an illustrated three-day calendar.",
+    previewImage:
+      "/templates/taklifnomachi-19/source/taklifnomachi.uz/templates-source/19/assets/hero.png",
+    previewEventType: "wedding",
+    categoryIds: ["wedding"],
+    supportedEventTypes: ["wedding"],
+    priceMinor: 15000000,
+    currency: "UZS",
+    accent: "#798866",
+    published: false,
   },
 ];
 export const templateById = (id: string) =>

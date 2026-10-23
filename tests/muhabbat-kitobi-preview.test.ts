@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
+import { createHash } from "node:crypto";
+import { existsSync, readFileSync } from "node:fs";
 import test from "node:test";
 import { createInvitation } from "@taklifnoma/contracts";
 import {
@@ -15,6 +16,62 @@ const core = readFileSync(
   "utf8",
 );
 const templateScript = readFileSync(new URL("template.js", root), "utf8");
+const captureRoot = new URL(
+  "../Invitations - this folder will be removed from production/Marxaba/Nikoh/templates/muhabbat-kitobi/",
+  import.meta.url,
+);
+
+test("Muhabbat Kitobi catalog art captures the clean initial book opening", () => {
+  const preview = readFileSync(new URL("preview.webp", root));
+  const provenance = JSON.parse(
+    readFileSync(new URL("preview.provenance.json", root), "utf8"),
+  ) as {
+    artifact: string;
+    sha256: string;
+    format: string;
+    width: number;
+    height: number;
+    sourceMetadataPreview: string;
+    renderedFrom: string;
+    state: string;
+    visibleOpeningElements: string[];
+    captureSettings: {
+      reducedMotion: boolean;
+      crop: string;
+      resize: string;
+      applicationLanguageControl: string;
+      browserChrome: string;
+    };
+    sampleContent: string;
+  };
+  const webpWidth = preview.readUInt16LE(26) & 0x3fff;
+  const webpHeight = preview.readUInt16LE(28) & 0x3fff;
+  const digest = createHash("sha256").update(preview).digest("hex");
+
+  assert.equal(preview.toString("ascii", 0, 4), "RIFF");
+  assert.equal(preview.toString("ascii", 8, 12), "WEBP");
+  assert.equal(provenance.artifact, "preview.webp");
+  assert.equal(provenance.sha256, digest);
+  assert.equal(provenance.format, "image/webp");
+  assert.deepEqual([provenance.width, provenance.height], [webpWidth, webpHeight]);
+  assert.ok(webpHeight > webpWidth, "catalog art must retain a portrait crop");
+  assert.match(provenance.renderedFrom, /packaged Muhabbat Kitobi renderer/i);
+  assert.match(provenance.state, /initial locked intro/i);
+  assert.ok(provenance.visibleOpeningElements.includes("closed green book cover"));
+  assert.ok(provenance.visibleOpeningElements.includes("ribbon greeting"));
+  assert.ok(provenance.visibleOpeningElements.includes("Kitobni ochish action"));
+  assert.equal(provenance.captureSettings.crop, "none");
+  assert.equal(provenance.captureSettings.resize, "none");
+  assert.equal(provenance.captureSettings.reducedMotion, true);
+  assert.match(provenance.captureSettings.applicationLanguageControl, /excluded/i);
+  assert.equal(provenance.captureSettings.browserChrome, "excluded");
+  assert.match(provenance.sampleContent, /ephemeral/i);
+  assert.match(provenance.sourceMetadataPreview, /preview-source\.svg/);
+  assert.equal(existsSync(new URL("preview-source.svg", root)), false);
+  assert.equal(existsSync(new URL("preview-source.svg", captureRoot)), false);
+  assert.ok(html.includes('id="intro" class') || html.includes('class="intro" id="intro"'));
+  assert.ok(html.includes('id="open-invitation"'));
+});
 
 test("Muhabbat Kitobi preview uses the complete four-locale shared sample", () => {
   const sample = createTemplatePreviewSample("muhabbat-kitobi");

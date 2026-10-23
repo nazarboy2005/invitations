@@ -38,7 +38,7 @@ const normalize = (value: string) =>
 const body = (html: string) =>
   normalize(html).match(/<body[\s\S]*?<\/body>/)?.[0].trim() ?? "";
 
-test("Korporativ is registered unpublished with exact source event compatibility", () => {
+test("Korporativ is registered published with exact source event compatibility", () => {
   const wrapper = read(renderer, "renderer.tsx");
   assert.match(wrapper, /templateId="korporativ"/);
   assert.match(read(renderer, "index.ts"), /KorporativInvitation/);
@@ -46,10 +46,10 @@ test("Korporativ is registered unpublished with exact source event compatibility
   assert.match(notes, /program\[\]\.speaker/);
   assert.match(notes, /extras\.parking/);
   assert.match(notes, /venue\.photo/);
-  assert.match(notes, /registered but remains unpublished/);
+  assert.match(notes, /published through the configured catalog/);
   const definition = templateById("korporativ");
   assert.ok(definition);
-  assert.equal(definition.published, false);
+  assert.equal(definition.published, true);
   assert.equal(definition.previewEventType, "korporativ");
   assert.deepEqual(definition.supportedEventTypes, [
     "korporativ",
@@ -292,6 +292,43 @@ test("Korporativ adapts a single honoree and every preview-only sample field acr
   assert.equal(blank.toyona.enabled, false);
   assert.equal(blank.contacts.length, 0);
   assert.equal(blank.dressCode.enabled, false);
+});
+
+test("Korporativ source gallery art is ephemeral preview content and creator photos take precedence", async () => {
+  const { mapMarxabaPreviewGallery } = await import("../apps/web/src/templates/marxaba/renderer");
+  const sample = createTemplatePreviewSample("korporativ");
+  const blankSourceGallery: Array<{ id: string; src: string; alt: string; caption: string }> = [];
+  const expectedFiles = ["event-01.svg", "event-02.svg", "event-03.svg", "venue.svg"];
+
+  for (const locale of ["uz-Latn", "uz-Cyrl", "en", "ru"] as const) {
+    const previewGallery = mapMarxabaPreviewGallery(
+      "korporativ", sample.gallery, blankSourceGallery, locale, true, true,
+    );
+    assert.deepEqual(previewGallery.map((item) => item.src), expectedFiles.map((file) => `/templates/korporativ/art/${file}`));
+    assert.ok(previewGallery.every((item) => item.alt && item.caption));
+    for (const file of expectedFiles) assert.ok(existsSync(path.join(pkg, "art", file)));
+  }
+
+  assert.ok(sample.gallery.every((photo) => !photo.url && !photo.alt && !photo.caption));
+  const uploadedGallery = sample.gallery.map((photo, index) => ({
+    ...photo,
+    url: index === 0 ? "https://uploads.example/creator-photo.jpg" : photo.url,
+  }));
+  assert.equal(
+    mapMarxabaPreviewGallery("korporativ", uploadedGallery, blankSourceGallery, "en", true, true),
+    blankSourceGallery,
+    "creator uploads suppress source preview artwork",
+  );
+  assert.equal(
+    mapMarxabaPreviewGallery("korporativ", [], blankSourceGallery, "en", false, false).length,
+    0,
+    "public empty galleries remain hidden",
+  );
+  assert.equal(
+    mapMarxabaPreviewGallery("korporativ", [], blankSourceGallery, "en", false, true).length,
+    0,
+    "source preview art is never added to public renderer data",
+  );
 });
 
 test("captured scripts retain motion behavior and local font coverage", () => {

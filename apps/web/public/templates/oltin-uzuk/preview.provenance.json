@@ -1,0 +1,40 @@
+{
+  "artifact": {
+    "path": "catalog-cover-opening.png",
+    "sha256": "b1b62c6146b939154d6fda638079bcd0399c09036a9d91cf05fd2bc23588aad1"
+  },
+  "sourceOpening": "The captured #intro opening, with its ring artwork, greeting, invitation label, couple names, date, and open action.",
+  "renderer": {
+    "route": "/preview?template=oltin-uzuk&qaSilent=1",
+    "browser": "Google Chrome with Playwright",
+    "locale": "uz-Latn",
+    "captureDelayAfterArtworkReadyMs": 4500,
+    "excludedUi": [
+      "Next.js development portal (outer preview page)",
+      "Locale selector .mh-lang (renderer iframe)"
+    ]
+  },
+  "viewport": {
+    "width": 450,
+    "height": 800,
+    "deviceScaleFactor": 1
+  },
+  "fixture": {
+    "path": "apps/web/src/modules/catalog/preview-sample.json",
+    "sha256": "54017a292d4a5235593d93a5e2f8bca1fe3bab89433182fac912c5d948878871",
+    "locale": "uz-Latn",
+    "names": [
+      "Javohir",
+      "Madina"
+    ]
+  },
+  "sourceCapture": {
+    "path": "Invitations - this folder will be removed from production/Marxaba/Nikoh/templates/oltin-uzuk",
+    "files": {
+      "index.html": "e3e33b7812d8e2fe8959ca3d23e7caa0922a70236e0aecd58311658f002b5796",
+      "template.css": "246c831d6d02c4827c631b774803034c4f0535379fe6fa488909688ab0617c84",
+      "template.js": "1aee20f4171cd92f21846ed316b41e58b14828db2498dd914bf140ef80d20bad",
+      "rings.js": "3ced5025cb0e5a4698f1b1a97a35ddeff44f43fc1864402629cb0b70cfbb9f71"
+    }
+  }
+}

@@ -10,5 +10,5 @@ window.TEMPLATE_META = {
   motion: "3d",
   palette: ["#C96F4A", "#FFF7EC", "#2F6F73", "#7AA95C", "#FFD27A"],
   music: "Dutor va chang ohanglari, doira bilan yengil uy bayrami",
-  preview: "preview-browser-capture.jpg"
+  preview: "catalog-cover-opening.png"
 };

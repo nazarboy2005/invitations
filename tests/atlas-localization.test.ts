@@ -8,7 +8,7 @@ const templateRoot = new URL(
   import.meta.url,
 );
 const html = readFileSync(new URL("index.html", templateRoot), "utf8");
-const template = readFileSync(new URL("template.js", templateRoot), "utf8");
+const adapter = readFileSync(new URL("platform-adapter.js", templateRoot), "utf8");
 const translationsSource = readFileSync(
   new URL("../apps/web/public/templates/shared/nikoh/i18n.js", import.meta.url),
   "utf8",
@@ -31,7 +31,7 @@ test("Atlas translates its static invitation copy and metadata", () => {
     html.matchAll(/<meta\s+[^>]*?(?:name="description"|property="og:(?:title|description)")[^>]*?content="([^"]+)"/g),
     (match) => match[1].replace(/\s+/g, " ").trim(),
   );
-  const brandCopy = new Set(["A / 26", "ATLAS ·", "— 01 / 26"]);
+  const brandCopy = new Set(["A / 26", "— 01 / 26", "2026"]);
   assert.deepEqual(
     [...textNodes, ...attributes, ...metadata].filter(
       (text) => !brandCopy.has(text) && !translations[text],
@@ -47,9 +47,11 @@ test("Atlas translates its static invitation copy and metadata", () => {
     "Atlas invitation",
     "A wedding invitation inspired by the vivid colours of Uzbek atlas and adras silk.",
   ]) {
-    assert.ok(template.includes(value), `${value} metadata translation is missing`);
+    assert.ok(adapter.includes(value), `${value} metadata translation is missing`);
   }
-  assert.match(template, /document\.title = `\$\{couple\}\$\{metadata\.title\}`/);
+  assert.match(adapter, /document\.title = `\$\{couple\}\$\{copy\.title\}`/);
+  assert.match(adapter, /\.intro__side-note/);
+  assert.match(adapter, /\.marquee__track > span/);
 });
 
 test("Atlas packages its cover, hero, gallery textures and local fonts", () => {

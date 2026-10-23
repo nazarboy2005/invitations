@@ -4,6 +4,7 @@ import test from "node:test";
 
 const root = new URL("../", import.meta.url);
 const sourceRoot = new URL("apps/web/public/templates/anor/source/", root);
+const bridgePath = new URL("bridge.js", sourceRoot);
 
 test("Anor adapter maps contract data while keeping sample wishes preview-only", () => {
   const renderer = readFileSync(
@@ -59,11 +60,13 @@ test("Anor adapter maps contract data while keeping sample wishes preview-only",
   });
 });
 
-test("Anor preview preserves source opening, program, wishes and gift/contact hooks", () => {
+test("Anor preview preserves source opening, dress code, program, wishes and gift/contact hooks", () => {
   const html = readFileSync(new URL("index.html", sourceRoot), "utf8");
   for (const fragment of [
     'id="intro"',
     'data-list="program"',
+    'data-section="dresscode"',
+    'data-list="dresscode"',
     'data-list="wishes"',
     'id="toyona"',
     'data-slot="toyona.cardNumber"',
@@ -73,9 +76,9 @@ test("Anor preview preserves source opening, program, wishes and gift/contact ho
   ])
     assert.ok(html.includes(fragment), `missing source hook ${fragment}`);
 
-  // The captured Anor reference has no clothing section, although its typed
-  // invitation adapter receives the shared dress-code data.
-  assert.doesNotMatch(html, /dresscode|dress-code/i);
+  assert.match(html, /data-slot="dressCode\.style"/);
+  assert.match(html, /data-slot="dressCode\.text"/);
+  assert.match(html, /data-slot="dressCode\.note"/);
   const renderer = readFileSync(
     new URL("apps/web/src/templates/anor/renderer.tsx", root),
     "utf8",
@@ -85,4 +88,7 @@ test("Anor preview preserves source opening, program, wishes and gift/contact ho
   const bridgeCss = readFileSync(new URL("bridge.css", sourceRoot), "utf8");
   assert.match(bridgeCss, /#toyona\s+\[data-slot="toyona\.bank"\]:empty/);
   assert.match(bridgeCss, /#toyona\s+\[data-slot="toyona\.note"\]:empty/);
+  const bridge = readFileSync(bridgePath, "utf8");
+  assert.match(bridge, /renderList\("dresscode"/);
+  assert.match(bridge, /dresscode:\s*data\.dressCode\?\.enabled/);
 });

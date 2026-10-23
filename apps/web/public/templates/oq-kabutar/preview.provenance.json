@@ -1,0 +1,30 @@
+{
+  "catalogCover": {
+    "file": "preview-opening.png",
+    "mimeType": "image/png",
+    "sha256": "6bd0499597f079332f7f95c3277257b6ee12759a34d99379679f73a617d49a86",
+    "width": 450,
+    "height": 800,
+    "aspectRatio": "9:16",
+    "renderedFrom": "The captured closed Oq Kabutar intro with cloudy sky, arriving doves, ribbon greeting, invitation names/date, and open button.",
+    "route": "/preview?template=oq-kabutar&qaSilent=1&qaReducedMotion=1",
+    "sharedPreviewFixture": {
+      "file": "apps/web/src/modules/catalog/preview-sample.json",
+      "sha256": "54017a292d4a5235593d93a5e2f8bca1fe3bab89433182fac912c5d948878871"
+    },
+    "sourceOpening": {
+      "file": "Invitations - this folder will be removed from production/Marxaba/Nikoh/templates/oq-kabutar/index.html",
+      "sha256": "60303e9c0f97a741e77044424805eca402df951b9d20f904e98f84b97902a5c6"
+    },
+    "captureExcludes": [
+      ".mh-lang app language switcher",
+      "nextjs-portal development badge"
+    ],
+    "browserPageErrors": []
+  },
+  "supersededCatalogImage": {
+    "file": "preview.webp",
+    "sha256": "7c208f908c05b4f09b7cad6a2d0e94988cc7a1f3996981d3ae26bf8d5b87744b",
+    "reason": "Shows the post-opening hero rather than the captured intro."
+  }
+}

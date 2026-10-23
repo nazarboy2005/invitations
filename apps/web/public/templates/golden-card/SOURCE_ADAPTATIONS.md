@@ -1,6 +1,6 @@
 # Golden Card source adaptations
 
-The archive package contains a single `preview-frame.html` file (SHA-256: `75ac0b6d0edd52500a4a24cc15ed001fa6a0230571ce461a33859703180cc888`). It is an HTML snapshot with the server-rendered template subtree, sample invitation values, utility classes, and references to shared Next.js styles. The archived snapshot is preserved byte-for-byte under `source/`. The archive does not contain standalone template JavaScript, CSS, or image assets.
+The archive package contains a single `preview-frame.html` file (SHA-256: `75ac0b6d0edd52500a4a24cc15ed001fa6a0230571ce461a33859703180cc888`). It is an HTML snapshot with the server-rendered template subtree, sample invitation values, utility classes, and references to shared Next.js styles. The archived snapshot is preserved byte-for-byte under `source/` (both archive and staged copy: 39,134 bytes; SHA-256 `75ac0b6d0edd52500a4a24cc15ed001fa6a0230571ce461a33859703180cc888`). The archive does not contain standalone template JavaScript, CSS, or image assets.
 
 The package removes the captured Next runtime and sample names, date, and venue from the runnable document. It keeps the captured DOM structure, uses the original compiled Chorlove style bundles already shared by the app, and restores the page-specific Golden Card rules from the source page's loaded stylesheet. Source artwork and the available Great Vibes font are stored locally under `assets/`; the source page itself was inspected through the approved in-app browser.
 

@@ -162,15 +162,27 @@ test("all packaged references resolve locally and reference sample runtimes rema
 test("the metadata-named preview is an authentic portrait WebP capture", () => {
   const preview = readFileSync(new URL("preview.webp", root));
   assert.equal(preview.toString("ascii", 8, 12), "WEBP");
-  assert.equal(preview.toString("ascii", 12, 16), "VP8X");
-  const width = 1 + preview.readUIntLE(24, 3);
-  const height = 1 + preview.readUIntLE(27, 3);
+  const webpChunk = preview.toString("ascii", 12, 16);
+  assert.ok(["VP8 ", "VP8X"].includes(webpChunk));
+  const width = webpChunk === "VP8X"
+    ? 1 + preview.readUIntLE(24, 3)
+    : preview.readUInt16LE(26) & 0x3fff;
+  const height = webpChunk === "VP8X"
+    ? 1 + preview.readUIntLE(27, 3)
+    : preview.readUInt16LE(28) & 0x3fff;
   assert.equal(width, 450);
   assert.equal(height, 800);
   assert.equal(
     createHash("sha256").update(preview).digest("hex"),
-    "313d4fc7544c2ca59636794df948dcef6268362a819cf0cea596cbbdfd6de84d",
+    "63b3f6c0571a7f00e69634ba976df8ae4dd1947217e4fcef2c3384611ddecf4f",
   );
+  const provenance = JSON.parse(read("preview.provenance.json"));
+  assert.equal(provenance.output.sha256, "63b3f6c0571a7f00e69634ba976df8ae4dd1947217e4fcef2c3384611ddecf4f");
+  assert.equal(provenance.output.width, 450);
+  assert.equal(provenance.output.height, 800);
+  assert.equal(provenance.fixture.sha256, "54017a292d4a5235593d93a5e2f8bca1fe3bab89433182fac912c5d948878871");
+  assert.equal(provenance.capture.browserChromeExcluded, true);
+  assert.equal(provenance.capture.localeSelectorExcluded, true);
   assert.match(metadata, /slug:\s*"oltin-yosh"/);
   assert.match(metadata, /preview:\s*"preview\.webp"/);
   assert.match(metadata, /category:\s*"tugilgan-kun"/);
@@ -306,7 +318,7 @@ test("the narrow adapter maps the first celebrant and source-only fields are doc
   const notes = read("../../../src/templates/oltin-yosh/README.md");
   assert.match(notes, /centralized birthday preview fixture/i);
   assert.match(notes, /450×800 \/ DPR 1/);
-  assert.match(notes, /313d4fc7544c2ca59636794df948dcef6268362a819cf0cea596cbbdfd6de84d/);
+  assert.match(notes, /preview\.provenance\.json/);
   assert.match(renderer, /MarxabaInvitation/);
   assert.match(renderer, /templateId="oltin-yosh"/);
   assert.match(

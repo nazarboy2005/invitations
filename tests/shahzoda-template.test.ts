@@ -177,6 +177,10 @@ test("Shahzoda preview is an authentic portrait opening capture of the canonical
     height: number;
     sourcePage: string;
     sourceOpening: string;
+    captureMethod: string;
+    excludedPlatformControl: string;
+    excludedCaptureChrome: string[];
+    fixtureSha256: string;
     fixture: string;
     fixtureLocale: string;
     fixtureNames: string[];
@@ -208,13 +212,28 @@ test("Shahzoda preview is an authentic portrait opening capture of the canonical
     height: 1280,
     deviceScaleFactor: 1,
   });
-  assert.equal(provenance.sourcePage, "/templates/shahzoda/index.html?lang=uz");
+  assert.equal(
+    provenance.sourcePage,
+    "/preview?template=shahzoda&qaSilent=1&qaReducedMotion=1",
+  );
   assert.equal(provenance.sourceOpening, "intro curtain and plaque");
+  assert.equal(provenance.excludedPlatformControl, ".mh-lang");
+  assert.deepEqual(provenance.excludedCaptureChrome, ["<nextjs-portal>", "#next-logo (shadow DOM)"]);
+  assert.match(provenance.captureMethod, /Capture-session-only CSS hid .* same-origin renderer iframe/);
+  assert.match(provenance.captureMethod, /<nextjs-portal> custom-element host was removed/);
+  assert.match(provenance.captureMethod, /shadow root/);
+  assert.match(provenance.captureMethod, /Neither template, shared runtime, nor real invitation UI was changed/);
   assert.equal(
     provenance.fixture,
     "apps/web/src/modules/catalog/preview-sample.json",
   );
   assert.equal(provenance.fixtureLocale, fixture.defaultLocale);
+  assert.equal(
+    provenance.fixtureSha256,
+    createHash("sha256")
+      .update(readFileSync(path.join(root, provenance.fixture)))
+      .digest("hex"),
+  );
   const sample = createTemplatePreviewSample("shahzoda");
   assert.deepEqual(
     provenance.fixtureNames,

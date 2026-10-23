@@ -1,0 +1,111 @@
+{
+  "templateId": "oltin-nur",
+  "catalogAsset": "preview.webp",
+  "source": {
+    "manifest": "Invitations - this folder will be removed from production/Marxaba/capture-manifest.json",
+    "url": "https://www.marxaba.uz/templates/oltin-nur/index.html",
+    "dependencies": [
+      {
+        "path": "capture-manifest.json",
+        "bytes": 99549,
+        "sha256": "0a179590b4c21fcae5aed7b37edcfa513dde51aacf8794647e5a0ce8bd449879"
+      },
+      {
+        "path": "Nikoh/templates/oltin-nur/index.html",
+        "bytes": 13862,
+        "sha256": "c7830a6e60871f6f6fb610661d22429bdd3fedf48c359703983cb7a7d1490d79"
+      },
+      {
+        "path": "Nikoh/templates/oltin-nur/template.css",
+        "bytes": 22324,
+        "sha256": "73e9702cd3dfd88c0fa60d655049ce3f9f4f4c4d035bc87c18660ef27a836727"
+      },
+      {
+        "path": "Nikoh/templates/oltin-nur/template.js",
+        "bytes": 17684,
+        "sha256": "79eee3ad7e1a6c7c0adb53a4f75bad2fbd06e6f88d5ee91badf80dc9e2daaab9"
+      },
+      {
+        "path": "Nikoh/templates/oltin-nur/entrance.js",
+        "bytes": 8939,
+        "sha256": "a0870312f059bc08bb25db7b6453d17127fb5f5ec98f63ae5627a0559e29fed1"
+      },
+      {
+        "path": "Nikoh/templates/oltin-nur/meta.js",
+        "bytes": 336,
+        "sha256": "43438f58432975e00505423691ab8be6fbe4c0ee5c241c9c1ba911c7a1e8b874"
+      },
+      {
+        "path": "Nikoh/templates/oltin-nur/art/gold-dust.png",
+        "bytes": 64765,
+        "sha256": "5cc6f9e202d70e547552d4cfa4968eacfd50970ab66af8bd80502b536b14d451"
+      },
+      {
+        "path": "Nikoh/templates/oltin-nur/art/light-beam.png",
+        "bytes": 108409,
+        "sha256": "ff43b4673a14fd13424ca3d0e688668e7d8e6ac8618b5855397c32e0cdb8289f"
+      },
+      {
+        "path": "Nikoh/templates/oltin-nur/art/velvet-bg.webp",
+        "bytes": 26502,
+        "sha256": "27836f5561e031e89d39ed1d72868fe8d9639ed1e40adfde66a3d9c8252514dc"
+      },
+      {
+        "path": "Nikoh/shared/base.css",
+        "bytes": 8801,
+        "sha256": "aeb5724d6db8cbd48304e9e6fc5ca185188c4857c426ae864cad32ebc6df8858"
+      },
+      {
+        "path": "Nikoh/shared/core.js",
+        "bytes": 40898,
+        "sha256": "36492ce001c57b174991bb28e431bdb628daac082f11350d0d110e693cb72f9f"
+      },
+      {
+        "path": "Nikoh/templates/oltin-nur/art/gift-box.webp",
+        "bytes": 38826,
+        "sha256": "e8cf6c563bd1813585951f7c1933d873630bdd520b8e28a9d8729078d70d2936"
+      },
+      {
+        "path": "Nikoh/templates/oltin-nur/art/gift-lid.webp",
+        "bytes": 14748,
+        "sha256": "a9b7eb391a619dd633f8cb0d5c813d22fd5a23dba844b07588687b1eecf690cb"
+      }
+    ],
+    "fonts": "The captured HTML links the original Cormorant Garamond and Great Vibes Google Fonts stylesheet."
+  },
+  "render": {
+    "captureUrl": "http://127.0.0.1:8765/Nikoh/templates/oltin-nur/index.html",
+    "browser": "Google Chrome 155.0.4283.62",
+    "viewport": {
+      "width": 720,
+      "height": 1280,
+      "deviceScaleFactor": 1
+    },
+    "pageSelector": "#intro",
+    "state": "Initial source intro after its greeting, title, and seal entrance animation settles.",
+    "excluded": [
+      ".mh-lang language switcher",
+      "browser and app chrome",
+      "scrollbars"
+    ],
+    "sourceBehavior": "The captured CSS comment states names stay secret on the cover and hides .intro__name-lockup and .intro__date until the seal opens. This source behavior is preserved."
+  },
+  "artifacts": {
+    "capture": {
+      "path": "preview-capture.png",
+      "format": "png",
+      "width": 720,
+      "height": 1280,
+      "bytes": 199066,
+      "sha256": "111af214b75b656a69cc50133496ef9559d20e4149ab377ab9de7880d370d8c5"
+    },
+    "catalog": {
+      "path": "preview.webp",
+      "format": "webp",
+      "width": 720,
+      "height": 1280,
+      "bytes": 31872,
+      "sha256": "efb96d10a6150479759f761cf4d201553aec6a81be8384fdfe2c407fca8e72bc"
+    }
+  }
+}

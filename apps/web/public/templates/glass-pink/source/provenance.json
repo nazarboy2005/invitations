@@ -1,6 +1,12 @@
 {
   "sourceCapture": "Chorlove/Web invitations/templates/glass-pink/preview-frame.html",
+  "sourceManifest": "Chorlove/capture-manifest.json",
   "sourceSha256": "dcb16406f91a3fb12241f75a97fc0fa5eca95c0aba0a6bc9e0d95953cce806f2",
+  "preservedRawSourceSnapshot": {
+    "file": "preserved-preview-frame.html",
+    "sha256": "dcb16406f91a3fb12241f75a97fc0fa5eca95c0aba0a6bc9e0d95953cce806f2",
+    "byteIdenticalToArchive": true
+  },
   "capturedMarkupExtracted": "div#S:0",
   "nextRuntimeCopied": false,
   "snapshotExampleDataIncluded": false,
@@ -8,14 +14,55 @@
     "_next/static/chunks/0.u3j0~_2ygfx.css",
     "_next/static/chunks/00sc_9lpb3zcn.css"
   ],
-  "note": "The captured preview is a server-rendered snapshot. Chorlove template source assets and styling are retained; the website runtime, external music, captured guest names, fixed venue/contact details, sample wishes, and unrelated gallery photos are excluded.",
-  "previewBrowserCapture": {
+  "catalogCover": {
+    "file": "../catalog-cover-opening.png",
+    "sha256": "6afd7cf6ec81d85f7878c6e6d80940fe7cf7f5ef6641900c32f75ca3a2ad26cd",
+    "source": "Rejected Chrome headless screenshot of the packaged Glass Pink source renderer served locally over HTTP",
+    "sourceRenderer": "/templates/glass-pink/index.html",
+    "fixture": "apps/web/src/modules/catalog/preview-sample.json",
+    "fixtureSha256": "54017a292d4a5235593d93a5e2f8bca1fe3bab89433182fac912c5d948878871",
+    "locale": "uz-Latn",
+    "viewport": "432x768",
+    "crop": "Full portrait viewport, x=0 y=0 width=432 height=768; no post-capture crop or resize",
+    "uiChromeExcluded": [
+      "language selector",
+      "music toggle",
+      "browser scrollbar"
+    ],
+    "runtimeLimitation": "The archive contains server-rendered markup and assets, not its original template JavaScript runtime; the packaged application adapter supplies field binding, controls, and reduced-motion behavior.",
+    "openingState": "Initial source envelope",
+    "sha256RecordedFromPackagedFile": true,
+    "catalogEligible": false,
+    "captureRequirements": [
+      "Wait for document.fonts.ready",
+      "Wait for the source intro animation to settle",
+      "Capture the renderer iframe with app-injected UI hidden"
+    ],
+    "visualQa": "Rejected: visible opening lettering is duplicated/overlapped. The file is retained for diagnosis only and must not be treated as approved catalog artwork. Re-capture only after fonts are ready and the intro has settled."
+  },
+  "gallerySourceAudit": {
+    "eligibleGlassPinkGalleryPhotos": [],
+    "excludedCrossTemplateGalleryPhotos": [
+      "/images/templates/orchid-amplop/gallery-1.webp",
+      "/images/templates/orchid-amplop/gallery-2.webp",
+      "/images/templates/orchid-amplop/gallery-3.webp",
+      "/images/templates/orchid-amplop/gallery-4.webp",
+      "/images/templates/orchid-amplop/gallery-5.webp",
+      "/images/templates/orchid-amplop/gallery-6.webp"
+    ],
+    "previewBehavior": "The canonical fixture has six empty preview-only gallery slots; only authored creator photo URLs are passed into public rendering.",
+    "emptyPublicGallery": "Hidden when there are no creator photos or story chapters"
+  },
+  "note": "The capture is a server-rendered snapshot, not an independent source JavaScript/CSS package. Chorlove template assets and styling are retained; the website runtime, external music, captured guest names, fixed venue/contact details, sample wishes, cross-template Orchid Amplop gallery photos, and unrelated site runtime are excluded.",
+  "legacyPreviewBrowserCapture": {
     "file": "../preview-browser-capture.jpg",
     "sha256": "02391e83d507f4f1651f6d0687c118386988a3e7822f3859ceee8eb36a58b27f",
     "source": "ChatGPT in-app browser rendering of the app preview with the canonical wedding preview fixture",
     "locale": "uz-Latn",
     "viewport": "392x720",
     "captureUrl": "http://127.0.0.1:3002/preview?template=glass-pink&qaSilent=1&qaReducedMotion=1&qaMobile=1",
-    "croppedFrom": "1280x720 in-app browser screenshot, invitation iframe bounds x=444..836, y=0..720"
+    "croppedFrom": "1280x720 in-app browser screenshot, invitation iframe bounds x=444..836, y=0..720",
+    "catalogEligible": false,
+    "issue": "Superseded app-preview image with language selector, scrollbar, and music control embedded. Retained as QA evidence only."
   }
 }

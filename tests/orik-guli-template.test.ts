@@ -83,13 +83,22 @@ test("O‘rik Guli localizes its visible copy and page metadata", () => {
   assert.ok(translations["O‘rik Guli — Marxaba raqamli taklifnomasi"]);
 });
 
-test("O‘rik Guli retains the captured page, animation code, and original art", () => {
+test("O‘rik Guli retains captured source and uses renderer-generated opening art", () => {
   const normalize = (value: string) => value.replace(/\r\n/g, "\n");
   const sourceHtml = readFileSync(new URL("index.html", captureRoot), "utf8");
   const body = (source: string) =>
     source.match(/<body[\s\S]*?<\/body>/)?.[0] ?? "";
   for (const marker of [
     'id="intro"',
+    'class="intro__view"',
+    'class="intro__petals"',
+    'class="intro__fog"',
+    'class="intro__band intro__band--top"',
+    'class="intro__window"',
+    'class="intro__band intro__band--bottom"',
+    'class="intro__copy"',
+    'class="intro__hint"',
+    'id="open-invitation"',
     'id="hero"',
     'id="dresscode"',
     'id="wishes"',
@@ -207,7 +216,6 @@ test("O‘rik Guli retains the captured page, animation code, and original art",
   assert.match(sharedCore, /placeholder\.textContent='✦'/);
 
   for (const asset of [
-    "preview.webp",
     "art/view-0.webp",
     "art/view-1.webp",
     "art/view-2.webp",
@@ -244,12 +252,57 @@ test("O‘rik Guli retains the captured page, animation code, and original art",
   }
   const provenance = JSON.parse(
     readFileSync(new URL("preview.provenance.json", templateRoot), "utf8"),
-  ) as { asset: string; sourceAsset: string; sha256: string; width: number; height: number };
-  const preview = readFileSync(new URL(provenance.asset, templateRoot));
-  assert.equal(provenance.sourceAsset, "art/view-0.webp");
-  assert.deepEqual(preview, readFileSync(new URL(provenance.sourceAsset, captureRoot)));
+  ) as {
+    artifact: string;
+    sha256: string;
+    referenceCaptureSha256: string;
+    width: number;
+    height: number;
+    renderedFrom: string;
+    fixture: string;
+    fixtureSha256: string;
+    crop: { x: number; y: number; width: number; height: number };
+    visibleOpeningElements: string[];
+  };
+  assert.ok(existsSync(new URL("preview.webp", templateRoot)), "preview.webp is missing");
+  assert.equal(provenance.artifact, "preview.webp");
+  const preview = readFileSync(new URL(provenance.artifact, templateRoot));
+  assert.notDeepEqual(
+    preview,
+    readFileSync(new URL("art/view-0.webp", captureRoot)),
+    "catalog art must be a renderer capture, not the raw painting",
+  );
+  assert.equal(
+    createHash("sha256")
+      .update(readFileSync(new URL("art/view-0.webp", captureRoot)))
+      .digest("hex"),
+    provenance.referenceCaptureSha256,
+  );
   assert.equal(createHash("sha256").update(preview).digest("hex"), provenance.sha256);
-  assert.deepEqual([provenance.width, provenance.height], [780, 1170]);
+  assert.deepEqual([provenance.width, provenance.height], [480, 720]);
+  assert.match(provenance.renderedFrom, /packaged O‘rik Guli source renderer/i);
+  assert.equal(provenance.fixture, "apps/web/src/modules/catalog/preview-sample.json");
+  assert.equal(
+    createHash("sha256")
+      .update(readFileSync(new URL("../apps/web/src/modules/catalog/preview-sample.json", import.meta.url)))
+      .digest("hex"),
+    provenance.fixtureSha256,
+  );
+  assert.deepEqual(
+    [provenance.crop.x, provenance.crop.y, provenance.crop.width, provenance.crop.height],
+    [260, 0, 480, 720],
+  );
+  for (const visibleElement of [
+    "source paintings",
+    "window overlay",
+    "fog and traced initials",
+    "greeting",
+    "petal canvas",
+    "opening bands",
+    "glass wipe hint and action",
+  ]) {
+    assert.ok(provenance.visibleOpeningElements.includes(visibleElement), visibleElement);
+  }
   for (const [, asset] of html.matchAll(/(?:src|href)="([^"]+)"/g)) {
     if (/^(?:#|https?:|mailto:|tel:|data:|javascript:)/i.test(asset)) continue;
     assert.ok(

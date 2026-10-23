@@ -7,7 +7,7 @@
   "height": 668,
   "route": "/preview?template=parda&qaSilent=1",
   "fixture": "apps/web/src/modules/catalog/preview-sample.json",
-  "fixtureSha256": "a88ccb99419b87f60e86f7470366f8badaa912db74ab67ad1f757aeeaf6d29c2",
+  "fixtureSha256": "54017a292d4a5235593d93a5e2f8bca1fe3bab89433182fac912c5d948878871",
   "captureMethod": "ChatGPT in-app browser, production build",
   "capturedAt": "2026-10-22",
   "sourceTemplate": "Invitations - this folder will be removed from production/Marxaba/Nikoh/templates/parda",

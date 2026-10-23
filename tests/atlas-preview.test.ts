@@ -82,3 +82,16 @@ test("Atlas preview samples stay out of blank drafts and empty To‘yona slots c
   assert.match(adapter, /#toyona \[data-slot="toyona\.note"\]:empty/);
   assert.match(adapter, /#toyona \[data-slot="toyona\.bank"\]:empty/);
 });
+
+test("Atlas source photos are injected only into empty catalog and selection previews", () => {
+  const renderer = readFileSync(new URL("../apps/web/src/templates/marxaba/renderer.tsx", import.meta.url), "utf8");
+  assert.match(renderer, /atlas:\s*\[\s*\["silk-swatch-1\.webp"/);
+  assert.match(
+    renderer,
+    /export function mapMarxabaPreviewGallery\([\s\S]*?if \(!preview \|\| !samplePreview \|\| hasCreatorPhotos \|\| !previewGallery\)\s+return sourceGallery;/,
+  );
+  assert.match(renderer, /const hasCreatorPhotos = invitationGallery\.some\(\(photo\) => photo\.url\.trim\(\)\)/);
+  assert.match(renderer, /\/templates\/\$\{encodeURIComponent\(templateId\)\}\/art\/\$\{file\}/);
+  assert.match(renderer, /const gallery = mapMarxabaPreviewGallery\([\s\S]*?sampleWishes,[\s\S]*?\n\s*\);/);
+  assert.match(renderer, /\n\s*gallery,/);
+});

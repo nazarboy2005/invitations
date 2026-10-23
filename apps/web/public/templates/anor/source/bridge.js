@@ -307,6 +307,7 @@
   function hideEmptySections(data) {
     const has = {
       program: data.program?.length,
+      dresscode: data.dressCode?.enabled && Boolean(data.dressCode.style || data.dressCode.text || data.dressCode.note || data.dressCode.colors?.length),
       gallery: config.preview || data.gallery?.length,
       contacts: data.contacts?.length,
       wishes: data.wishesEnabled,
@@ -666,6 +667,13 @@
     app.reducedMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
     fillSlots(data);
     renderList("program", data.program);
+    renderList("dresscode", (data.dressCode?.colors || []).map((color) => {
+      const hex = safeText(color.hex);
+      return {
+        ...color,
+        style: /^#[\da-f]{3,8}$/i.test(hex) ? `background-color:${hex}` : "",
+      };
+    }));
     renderList("gallery", data.gallery);
     renderList("contacts", data.contacts);
     renderList("wishes", data.wishes || []);

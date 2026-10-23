@@ -160,6 +160,7 @@ test("Konfetti resolves all packaged source dependencies locally and excludes ca
 
 test("Konfetti packages its metadata-named authentic portrait WebP preview", () => {
   const preview = readFileSync(new URL("preview.webp", root));
+  const capture = readFileSync(new URL("preview-capture.png", root));
   assert.equal(preview.toString("ascii", 8, 12), "WEBP");
   const provenance = JSON.parse(read("preview.provenance.json")) as {
     width: number;
@@ -169,18 +170,39 @@ test("Konfetti packages its metadata-named authentic portrait WebP preview", () 
     fixtureEventType: string;
     fixtureNames: string[];
     sha256: string;
+    capture: { path: string; format: string; width: number; height: number; sha256: string };
+    captureMethod: string;
   };
-  assert.equal(preview.toString("ascii", 12, 16), "VP8X");
-  assert.deepEqual(
-    [preview.readUIntLE(24, 3) + 1, preview.readUIntLE(27, 3) + 1],
-    [450, 800],
-  );
+  const chunkType = preview.toString("ascii", 12, 16);
+  assert.ok(["VP8 ", "VP8X"].includes(chunkType));
+  const webpDimensions =
+    chunkType === "VP8X"
+      ? [preview.readUIntLE(24, 3) + 1, preview.readUIntLE(27, 3) + 1]
+      : [preview.readUInt16LE(26) & 0x3fff, preview.readUInt16LE(28) & 0x3fff];
+  assert.deepEqual(webpDimensions, [450, 800]);
   assert.deepEqual([provenance.width, provenance.height], [450, 800]);
   assert.equal(provenance.fixture, "apps/web/src/modules/catalog/preview-sample.json");
   assert.equal(provenance.fixtureLocale, "uz-Latn");
   assert.equal(provenance.fixtureEventType, "birthday");
   assert.deepEqual(provenance.fixtureNames, ["Javohir"]);
   assert.equal(provenance.sha256, createHash("sha256").update(preview).digest("hex"));
+  assert.equal(capture.toString("ascii", 1, 4), "PNG");
+  assert.deepEqual(
+    [capture.readUInt32BE(16), capture.readUInt32BE(20)],
+    [450, 800],
+  );
+  assert.equal(
+    provenance.capture.path,
+    "apps/web/public/templates/konfetti/preview-capture.png",
+  );
+  assert.equal(provenance.capture.format, "png");
+  assert.deepEqual([provenance.capture.width, provenance.capture.height], [450, 800]);
+  assert.equal(
+    provenance.capture.sha256,
+    createHash("sha256").update(capture).digest("hex"),
+  );
+  assert.match(provenance.captureMethod, /qaReducedMotion=1/);
+  assert.match(provenance.captureMethod, /\.mh-lang control/);
   assert.equal(createTemplatePreviewSample("konfetti").eventType, "birthday");
   assert.match(metadata, /slug:\s*"konfetti"/);
   assert.match(metadata, /preview:\s*"preview\.webp"/);
@@ -254,4 +276,44 @@ test("the adapter uses shared invitation data and documents source-only fields",
   );
   assert.match(publication, /VALUES \('konfetti', 'Konfetti', 15000000, 'UZS', true\)/);
   assert.match(publication, /\('konfetti', 'birthday'\)[\s\S]*\('konfetti', 'yubiley'\)/);
+});
+
+test("Konfetti source gallery art is localized and preview-only", () => {
+  const renderer = readFileSync(
+    new URL("../../../src/templates/marxaba/renderer.tsx", root),
+    "utf8",
+  );
+  const gallery = renderer.match(/konfetti:\s*\[([\s\S]*?)\n  \],\n};/)?.[1];
+  assert.ok(gallery, "Konfetti has a source-gallery preview mapping");
+  for (const image of [
+    "gallery-1.webp",
+    "gallery-2.webp",
+    "gallery-3.webp",
+    "gallery-4.webp",
+  ]) {
+    assert.ok(gallery.includes(image), `${image} is used in the preview`);
+    assert.ok(existsSync(new URL(`art/${image}`, root)), `${image} is packaged`);
+  }
+  for (const locale of ['"uz-Latn"', '"uz-Cyrl"', "en:", "ru:"])
+    assert.ok(gallery.includes(locale), `${locale} alt text is present`);
+  assert.match(
+    renderer,
+    /if \(!preview \|\| !samplePreview \|\| hasCreatorPhotos \|\| !previewGallery\)/,
+    "source art only appears in sample previews when the creator has no photos",
+  );
+  assert.match(
+    renderer,
+    /const hasCreatorPhotos = invitationGallery\.some\(\(photo\) => photo\.url\.trim\(\)\)/,
+  );
+  assert.match(renderer, /caption: localizedAlt/);
+  assert.match(renderer, /\.\.\.sourceData,\n      gallery,\n      \/\//);
+  const sharedRuntime = readFileSync(
+    new URL("../shared/nikoh/core.js", root),
+    "utf8",
+  );
+  assert.match(
+    sharedRuntime,
+    /hideIf\('gallery',!\(Array\.isArray\(data\.gallery\)&&data\.gallery\.some\(item=>plain\(item\)&&typeof item\.src==='string'&&item\.src\.trim\(\)\)\)\)/,
+    "public creator-photo galleries stay hidden without uploaded image URLs",
+  );
 });

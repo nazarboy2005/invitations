@@ -44,8 +44,33 @@ export function InvitateInvitation({
   useEffect(() => setFrameLocale(locale), [locale]);
 
   const message = useMemo(() => {
-    const source = makeLegacyData(invitation, frameLocale, guestName, sampleWishes);
-    const languages = invitation.enabledLocales.map((item) => sourceLocale[item]);
+    const source = makeLegacyData(
+      invitation,
+      frameLocale,
+      guestName,
+      sampleWishes,
+    );
+    const hasCreatorPhotos = invitation.gallery.some((photo) =>
+      photo.url.trim(),
+    );
+    if (
+      preview &&
+      sampleWishes &&
+      !hasCreatorPhotos &&
+      templateId === "evelina"
+    ) {
+      source.gallery = [
+        {
+          id: "evelina-source-preview",
+          src: "/templates/evelina/assets/previews/template/evelina/hero.png",
+          alt: "Evelina manba fotosurati",
+          caption: "Evelina manba fotosurati",
+        },
+      ];
+    }
+    const languages = invitation.enabledLocales.map(
+      (item) => sourceLocale[item],
+    );
     const music = source.music.enabled
       ? source.music.url
       : preview && catalogMusic
@@ -53,6 +78,7 @@ export function InvitateInvitation({
         : "";
     return {
       ...source,
+      catalogPreview: preview && sampleWishes,
       locale: sourceLocale[frameLocale],
       defaultLang: sourceLocale[frameLocale],
       languages,
@@ -85,7 +111,8 @@ export function InvitateInvitation({
         event.origin !== window.location.origin ||
         event.source !== frame.current?.contentWindow ||
         event.data?.type !== `${templateId}:language`
-      ) return;
+      )
+        return;
       const next = invitation.enabledLocales.find(
         (enabled) => sourceLocale[enabled] === event.data.locale,
       );
@@ -98,10 +125,17 @@ export function InvitateInvitation({
   useEffect(() => {
     const target = frame.current?.contentWindow;
     if (!target) return;
-    target.postMessage({ type: `${templateId}:update`, payload: latest.current }, window.location.origin);
+    target.postMessage(
+      { type: `${templateId}:update`, payload: latest.current },
+      window.location.origin,
+    );
   }, [message, templateId]);
 
-  const classes = fullPreview ? styles.full : preview ? styles.preview : styles.public;
+  const classes = fullPreview
+    ? styles.full
+    : preview
+      ? styles.preview
+      : styles.public;
   return (
     <div className={classes}>
       <iframe
@@ -117,7 +151,10 @@ export function InvitateInvitation({
             target.location.replace(frameUrl);
             initialized.current = templateId;
           } else {
-            target.postMessage({ type: `${templateId}:update`, payload: latest.current }, window.location.origin);
+            target.postMessage(
+              { type: `${templateId}:update`, payload: latest.current },
+              window.location.origin,
+            );
           }
         }}
         allow="autoplay; fullscreen; clipboard-write"

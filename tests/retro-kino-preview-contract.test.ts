@@ -75,7 +75,7 @@ test("Retro Kino blank invitations do not inherit preview sample content", () =>
   assert.equal(blank.contacts.length, 0);
 });
 
-test("Retro Kino optional unsupported fields collapse while blank gallery cards keep the shared icon fallback", () => {
+test("Retro Kino hides empty galleries and collapses unsupported empty fields", () => {
   const adapter = readFileSync(new URL("contract-adapter.css", root), "utf8");
   assert.match(source, /href="contract-adapter\.css"/);
   assert.match(adapter, /\.venue__photo\.has-missing-photo\s*\{\s*display:\s*none/);
@@ -84,24 +84,43 @@ test("Retro Kino optional unsupported fields collapse while blank gallery cards 
   const core = readFileSync(new URL("../shared/nikoh/core.js", root), "utf8");
   const sharedStyles = readFileSync(new URL("../shared/nikoh/base.css", root), "utf8");
   assert.match(core, /placeholder\.textContent='✦'/);
-  assert.match(core, /hideIf\('gallery',!\(Array\.isArray\(data\.gallery\)&&data\.gallery\.length\)&&!data\.preview\)/);
+  assert.match(core, /hideIf\('gallery',!\(Array\.isArray\(data\.gallery\)&&data\.gallery\.some\(item=>plain\(item\)&&typeof item\.src==='string'&&item\.src\.trim\(\)\)\)\)/);
   assert.match(sharedStyles, /\.photo-placeholder\{/);
   assert.match(source, /data-slot="toyona\.note"/);
   assert.match(source, /data-slot="toyona\.bank"/);
 });
 
-test("Retro Kino catalog artwork provenance matches the actual source poster", () => {
+test("Retro Kino catalog artwork is a portrait capture of the packaged opening", () => {
   const preview = readFileSync(new URL("preview.webp", root));
-  const poster = readFileSync(new URL("art/poster.webp", root));
+  const html = readFileSync(new URL("index.html", root), "utf8");
+  const templateCss = readFileSync(new URL("template.css", root), "utf8");
+  const templateJs = readFileSync(new URL("template.js", root), "utf8");
   const provenance = JSON.parse(readFileSync(new URL("preview.provenance.json", root), "utf8")) as {
-    artifact: string; sha256: string; format: string; width: number; height: number; source: string; sourceCapture: string;
+    artifact: string; sha256: string; format: string; width: number; height: number;
+    source: string; sourceCapture: string; fixture: string; fixtureSha256: string;
+    rendererSha256: string; capturedSelector: string; excluded: string[];
   };
-  assert.deepEqual(preview, poster);
+  const dimensions = readFileSync(new URL("preview.webp", root)).subarray(0, 30);
+  assert.equal(dimensions.toString("ascii", 0, 4), "RIFF");
+  assert.equal(dimensions.toString("ascii", 8, 12), "WEBP");
+  assert.notEqual(createHash("sha256").update(preview).digest("hex"), createHash("sha256").update(readFileSync(new URL("art/poster.webp", root))).digest("hex"));
   assert.equal(provenance.artifact, "preview.webp");
   assert.equal(provenance.sha256, createHash("sha256").update(preview).digest("hex"));
   assert.equal(provenance.format, "image/webp");
-  assert.deepEqual([provenance.width, provenance.height], [941, 1672]);
-  assert.equal(provenance.source, "art/poster.webp");
+  assert.ok(provenance.width > 0 && provenance.height > provenance.width);
+  assert.equal(provenance.source, "index.html #intro via packaged preview renderer");
   assert.match(provenance.sourceCapture, /Marxaba\/Nikoh\/templates\/retro-kino$/);
-  assert.ok(existsSync(new URL(provenance.source, root)));
+  assert.equal(provenance.capturedSelector, "#intro");
+  assert.equal(provenance.fixture, "apps/web/src/modules/catalog/preview-sample.json");
+  assert.match(provenance.fixtureSha256, /^[a-f0-9]{64}$/);
+  assert.match(provenance.rendererSha256, /^[a-f0-9]{64}$/);
+  assert.ok(provenance.excluded.includes("preview language controls"));
+  assert.match(html, /<section class="intro" id="intro"/);
+  assert.match(html, /data-slot="groom"/);
+  assert.match(html, /data-slot="bride"/);
+  assert.match(html, /data-slot="date\.long"/);
+  assert.match(html, /id="open-invitation"/);
+  assert.match(templateCss, /\.intro\{/);
+  assert.match(templateJs, /introTitle\(\)/);
+  assert.ok(existsSync(new URL("art/poster.webp", root)));
 });

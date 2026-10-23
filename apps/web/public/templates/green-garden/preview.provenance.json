@@ -1,16 +1,29 @@
 {
-    "status":  "verified",
-    "file":  "preview-browser-capture.jpg",
-    "sha256":  "73fc11b9f89ddc0203a1fddacfd82920b8e508e9d401823ccc34dcc64ad3b11d",
-    "format":  "JPEG",
-    "width":  390,
-    "height":  720,
-    "route":  "/preview?template=green-garden\u0026qaMobile=1\u0026qaSilent=1",
-    "fixture":  "apps/web/src/modules/catalog/preview-sample.json",
-    "fixtureSha256":  "a88ccb99419b87f60e86f7470366f8badaa912db74ab67ad1f757aeeaf6d29c2",
-    "captureMethod":  "ChatGPT in-app browser; iframe invitation frame cropped to its measured 390x720 bounds",
-    "capturedAt":  "2026-10-23",
-    "sourceTemplate":  "Chorlove/Web invitations/templates/green-garden",
-    "scope":  "first viewport of canonical fixture invitation opening",
-    "sourceCaptureSha256":  "d7ba584a7aa9cee59f786191e8c4be0cf57796edbe285fcc35ba890a4be204a8"
+  "status": "verified",
+  "file": "preview-browser-capture.jpg",
+  "sha256": "e6c8c3a04ed2dfa0c6045e6e5fd4da1d15ec1a1094257527857831e478156346",
+  "format": "JPEG",
+  "width": 390,
+  "height": 720,
+  "route": "/preview?template=green-garden&qaMobile=1&qaSilent=1",
+  "fixture": "apps/web/src/modules/catalog/preview-sample.json",
+  "fixtureSha256": "54017a292d4a5235593d93a5e2f8bca1fe3bab89433182fac912c5d948878871",
+  "captureMethod": "Packaged Green Garden iframe renderer and local source assets; 390×720 Chromium viewport capture of the iframe; browser/app UI, language selector, scrollbar, and development portal excluded; no crop or resize.",
+  "capturedAt": "2026-10-23",
+  "sourceTemplate": "Chorlove/Web invitations/templates/green-garden",
+  "scope": "Full first-page floral opening rendered from the canonical shared fixture.",
+  "sourceCaptureSha256": "d7ba584a7aa9cee59f786191e8c4be0cf57796edbe285fcc35ba890a4be204a8",
+  "viewport": {
+    "width": 390,
+    "height": 720,
+    "deviceScaleFactor": 1
+  },
+  "crop": {
+    "x": 0,
+    "y": 0,
+    "width": 390,
+    "height": 720,
+    "operation": "none; full iframe viewport preserved"
+  },
+  "galleryPreview": "Canonical fixture contributes six empty gallery placeholders; cross-template Orchid Amplop sample photos remain excluded."
 }

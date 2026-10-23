@@ -1,9 +1,217 @@
 {
-  "asset": "preview.webp",
-  "sourceAsset": "art/panel.webp",
-  "sha256": "3306fd41420f4abdb6c073698e86b67a1abf53f63c0730bec81a6f269b93cae2",
-  "width": 640,
-  "height": 1138,
-  "sourcePackage": "Invitations - this folder will be removed from production/Marxaba/Nikoh/templates/suzani",
-  "captureNote": "The capture metadata names preview.webp but that file is absent. The packaged catalog image is an exact copy of the captured portrait art/panel.webp."
+  "templateId": "suzani",
+  "catalogAsset": "preview.webp",
+  "source": {
+    "sourcePackage": "Invitations - this folder will be removed from production/Marxaba/Nikoh/templates/suzani",
+    "declaredPreview": "preview.webp",
+    "declaredPreviewPresentInCapture": false,
+    "exactTemplateSource": "Marxaba/Nikoh/templates/suzani",
+    "providerManifestSearch": {
+      "manifestsSearched": 13,
+      "manifests": [
+        {
+          "provider": "Chorlove",
+          "manifest": "Invitations - this folder will be removed from production/Chorlove/capture-manifest.json",
+          "sha256": "672881ff4896e4b746a98bc4db9977207db80dd3202b8743beab79ff1d95b0dd",
+          "exactSuzaniTemplate": false
+        },
+        {
+          "provider": "Invitate",
+          "manifest": "Invitations - this folder will be removed from production/Invitate/capture-manifest.json",
+          "sha256": "244484046e61c36b032cce2fa1a3ab311499a69ec0f133bf5e29048cc7fdd9a3",
+          "exactSuzaniTemplate": false
+        },
+        {
+          "provider": "Invitio",
+          "manifest": "Invitations - this folder will be removed from production/Invitio/capture-manifest.json",
+          "sha256": "0b92945698512a00da60cddeb9e28285c3d9e83ad76453ba34facf1803b61129",
+          "exactSuzaniTemplate": false
+        },
+        {
+          "provider": "Marxaba",
+          "manifest": "Invitations - this folder will be removed from production/Marxaba/capture-manifest.json",
+          "sha256": "0a179590b4c21fcae5aed7b37edcfa513dde51aacf8794647e5a0ce8bd449879",
+          "exactSuzaniTemplate": true
+        },
+        {
+          "provider": "Mytaklif",
+          "manifest": "Invitations - this folder will be removed from production/Mytaklif/capture-manifest.json",
+          "sha256": "454136f5811c7e24fc2c1dcf38139bdfdd2743bc9c49609cb34ca2a590eb876e",
+          "exactSuzaniTemplate": false
+        },
+        {
+          "provider": "OnlineTaklifnoma",
+          "manifest": "Invitations - this folder will be removed from production/OnlineTaklifnoma/capture-manifest.json",
+          "sha256": "84ecf1636a1c49136f5de3967e58eab57ae01b8021a34820b491ddb3bc64ee7f",
+          "exactSuzaniTemplate": false
+        },
+        {
+          "provider": "Taklifiy",
+          "manifest": "Invitations - this folder will be removed from production/Taklifiy/capture-manifest.json",
+          "sha256": "8ea0310a43a5156a04cb188e8ee8c33b57a5b584f9b432dd47853ed5a809f8d8",
+          "exactSuzaniTemplate": false
+        },
+        {
+          "provider": "Taklifla",
+          "manifest": "Invitations - this folder will be removed from production/Taklifla/capture-manifest.json",
+          "sha256": "fbbae2e521f547ea865252a76c9c776e81d0df95a5875abf58088b1fab6c125e",
+          "exactSuzaniTemplate": false
+        },
+        {
+          "provider": "Taklifnomachi",
+          "manifest": "Invitations - this folder will be removed from production/Taklifnomachi/capture-manifest.json",
+          "sha256": "9c2894bedbcbc7c15947e2414c559bf3737b53ece3c6f68456f3d1341f90f235",
+          "exactSuzaniTemplate": false
+        },
+        {
+          "provider": "Wedivo",
+          "manifest": "Invitations - this folder will be removed from production/Wedivo/capture-manifest.json",
+          "sha256": "0c6d46a410c230516c49e2025331298d31fb5891e2283cb1faabb64cdebf3ee4",
+          "exactSuzaniTemplate": false
+        },
+        {
+          "provider": "Wedvitation",
+          "manifest": "Invitations - this folder will be removed from production/Wedvitation/capture-manifest.json",
+          "sha256": "742264bb544483c8f403179bb8d0a7b41caf7218b15e90a12cf03c24370fba41",
+          "exactSuzaniTemplate": false
+        },
+        {
+          "provider": "Yoryor",
+          "manifest": "Invitations - this folder will be removed from production/Yoryor/capture-manifest.json",
+          "sha256": "1817f1c00b449d53c0e9774d134bf13f25e2e1707e1c9bb65933d49d65bce864",
+          "exactSuzaniTemplate": false
+        },
+        {
+          "provider": "Yumevite",
+          "manifest": "Invitations - this folder will be removed from production/Yumevite/capture-manifest.json",
+          "sha256": "983ceddc8d70246d8ac68695790423c1f31ac1264a7103cca97214b26f78adad",
+          "exactSuzaniTemplate": false
+        }
+      ],
+      "exactSuzaniTemplateSourceCount": 1
+    },
+    "dependencies": [
+      {
+        "path": "index.html",
+        "bytes": 12500,
+        "sha256": "83600997640ef46cc996c2cfd4da22cdf89ef9bde6144ecda86875ff66c8e79d"
+      },
+      {
+        "path": "template.css",
+        "bytes": 16935,
+        "sha256": "637e6f6cb9f72773c2a4fadf4a8754ac9a1cf2ed0b465d16267ab36476a883f3"
+      },
+      {
+        "path": "template.js",
+        "bytes": 9702,
+        "sha256": "ca285c90d3647f48da0b4bd3c6db6efd69a8296d10e3f1f26b8df050fee03009"
+      },
+      {
+        "path": "meta.js",
+        "bytes": 458,
+        "sha256": "014d9e5323891715d8383371f601b58aa2bd1f2231b82589d985369d6c8e1b63"
+      },
+      {
+        "path": "art/hoop.webp",
+        "bytes": 96502,
+        "sha256": "de9f818957463c5e9b064446ce647fca3aa26f56e7772269283f370d39edbdb4"
+      },
+      {
+        "path": "art/linen.webp",
+        "bytes": 57730,
+        "sha256": "42691950bdf79ab7f3d54ed4a9b86db5fd3dac8495b6997beb56168966efe1d4"
+      },
+      {
+        "path": "art/panel.webp",
+        "bytes": 199510,
+        "sha256": "3306fd41420f4abdb6c073698e86b67a1abf53f63c0730bec81a6f269b93cae2"
+      }
+    ]
+  },
+  "fixture": {
+    "path": "apps/web/src/modules/catalog/preview-sample.json",
+    "sha256": "54017a292d4a5235593d93a5e2f8bca1fe3bab89433182fac912c5d948878871",
+    "use": "Catalog preview only; supplied through the real typed renderer and not persisted."
+  },
+  "render": {
+    "captureUrl": "http://127.0.0.1:3001/preview?template=suzani&qaSilent=1",
+    "browser": "Google Chrome 156.0.8078.47",
+    "viewport": {
+      "width": 450,
+      "height": 800,
+      "deviceScaleFactor": 1
+    },
+    "pageSelector": "#intro",
+    "sourceFrame": "same-origin iframe rendered by the packaged Suzani adapter",
+    "state": "Initial locked invitation opening after entrance animation settles; open control not activated.",
+    "crop": {
+      "x": 0,
+      "y": 0,
+      "width": 450,
+      "height": 800,
+      "scope": "full portrait opening viewport; no interior crop"
+    },
+    "excluded": [
+      ".mh-lang injected language control",
+      "nextjs-portal development badge",
+      "browser and app chrome",
+      "scrollbars"
+    ],
+    "cleanup": "Capture-session-only CSS hid .mh-lang in the same-origin renderer frame and hid the nextjs-portal host. No application or template files were changed for capture."
+  },
+  "rendererDependencies": [
+    {
+      "path": "index.html",
+      "bytes": 12373,
+      "sha256": "4fbc1ac250ebfe44bcca948d16dd6984363d24bdeacae6bca2cf943ca20cce4a"
+    },
+    {
+      "path": "template.css",
+      "bytes": 16922,
+      "sha256": "ae6c34752c78928dca241c46a95e0479b5b575799cb3abf7087a75782758806a"
+    },
+    {
+      "path": "template.js",
+      "bytes": 9700,
+      "sha256": "5fe7f3ecb3b2b14847ac1640c0f2493ea1bf1e5bfece24a662d4c0f009525f91"
+    },
+    {
+      "path": "meta.js",
+      "bytes": 458,
+      "sha256": "014d9e5323891715d8383371f601b58aa2bd1f2231b82589d985369d6c8e1b63"
+    },
+    {
+      "path": "contract-adapter.css",
+      "bytes": 331,
+      "sha256": "98ff98e7b5925bd29f7327408882ca5088389dc1757e12108e5777ffd11641a9"
+    },
+    {
+      "path": "../shared/nikoh/base.css",
+      "bytes": 8878,
+      "sha256": "414b559ac31769e2deb24054fd06b0476bde6e09219c95e5ea25258579360b07"
+    },
+    {
+      "path": "../shared/nikoh/core.js",
+      "bytes": 49955,
+      "sha256": "ccfc41542397cb3ac0d509ff55a6b1f776e14214a9decfd08b85cde7d4d40c11"
+    }
+  ],
+  "artifacts": {
+    "capture": {
+      "path": "preview-capture.png",
+      "format": "png",
+      "width": 450,
+      "height": 800,
+      "bytes": 587410,
+      "sha256": "75aa1fd5b1c4d656cde2be28d20e944cb4f5290ca456cfe35d7bd98135bd5c40"
+    },
+    "catalog": {
+      "path": "preview.webp",
+      "format": "webp",
+      "width": 450,
+      "height": 800,
+      "bytes": 106624,
+      "sha256": "b349056eefd868513b6fb2c8c860419387f0dcad892171973b94a24318d81f82"
+    }
+  }
 }

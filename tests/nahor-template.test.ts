@@ -211,6 +211,7 @@ test("Nahor bundles exact Latin/Cyrillic font faces for each captured family", (
 
 test("Nahor opening artwork is a checksummed portrait capture of the central fixture", () => {
   const image = readFileSync(path.join(pkg, "preview.webp"));
+  const capture = readFileSync(path.join(pkg, "preview-capture.png"));
   const provenance = JSON.parse(read(pkg, "preview.provenance.json")) as {
     width: number;
     height: number;
@@ -218,6 +219,26 @@ test("Nahor opening artwork is a checksummed portrait capture of the central fix
     fixtureLocale: string;
     fixtureNames: string[];
     sourceOpening: string;
+    captureMethod: string;
+    route: string;
+    viewport: { width: number; height: number; deviceScaleFactor: number };
+    excludedPlatformControl: string;
+    fixtureSha256: string;
+    capture: {
+      artifact: string;
+      format: string;
+      width: number;
+      height: number;
+      sha256: string;
+    };
+    sourceCapture: {
+      html: string;
+      htmlSha256: string;
+      openingArtwork: string;
+      openingArtworkSha256: string;
+      stylesheet: string;
+      stylesheetSha256: string;
+    };
     sha256: string;
   };
   const fixture = JSON.parse(
@@ -237,5 +258,26 @@ test("Nahor opening artwork is a checksummed portrait capture of the central fix
     provenance.sourceOpening,
     "closed Nahor qozon invitation with localized greeting, lid interaction, and dawn artwork",
   );
+  assert.equal(provenance.route, "/preview?template=nahor&qaSilent=1&qaReducedMotion=1");
+  assert.deepEqual(provenance.viewport, { width: 480, height: 720, deviceScaleFactor: 1 });
+  assert.equal(provenance.excludedPlatformControl, ".mh-lang");
+  assert.match(provenance.captureMethod, /bundled Playwright/);
+  assert.match(provenance.captureMethod, /Capture-only styling hides the injected \.mh-lang/);
+  assert.match(provenance.captureMethod, /outer page's <nextjs-portal> host is removed before screenshot/);
+  assert.equal(provenance.fixtureSha256, createHash("sha256").update(readFileSync(path.join(root, provenance.fixture))).digest("hex"));
+  assert.equal(capture.toString("ascii", 1, 4), "PNG");
+  assert.deepEqual([capture.readUInt32BE(16), capture.readUInt32BE(20)], [480, 720]);
+  assert.deepEqual(provenance.capture, {
+    artifact: "preview-capture.png",
+    format: "PNG",
+    width: 480,
+    height: 720,
+    sha256: createHash("sha256").update(capture).digest("hex"),
+  });
+  assert.equal(provenance.sourceCapture.htmlSha256, createHash("sha256").update(readFileSync(path.join(root, provenance.sourceCapture.html))).digest("hex"));
+  assert.equal(provenance.sourceCapture.openingArtworkSha256, createHash("sha256").update(readFileSync(path.join(root, provenance.sourceCapture.openingArtwork))).digest("hex"));
+  assert.equal(provenance.sourceCapture.stylesheetSha256, createHash("sha256").update(readFileSync(path.join(root, provenance.sourceCapture.stylesheet))).digest("hex"));
+  assert.deepEqual(readFileSync(path.join(source, "template.css")), readFileSync(path.join(pkg, "template.css")));
+  assert.deepEqual(readFileSync(path.join(source, "art", "dawn-0.webp")), readFileSync(path.join(pkg, "art", "dawn-0.webp")));
   assert.equal(provenance.sha256, createHash("sha256").update(image).digest("hex"));
 });

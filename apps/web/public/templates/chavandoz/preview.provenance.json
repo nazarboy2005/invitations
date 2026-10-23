@@ -1,0 +1,29 @@
+{
+  "format": "image/webp",
+  "catalogPreview": {
+    "path": "/templates/chavandoz/preview.webp",
+    "width": 450,
+    "height": 800,
+    "sha256": "3d808aa28f6d5df0685d99f260a7de0319bd7f4b1c1851c0a1a7987571bb73f9",
+    "captureMethod": "Authentic browser capture of the packaged Chavandoz source opening with the centralized catalog preview fixture.",
+    "fixture": "apps/web/src/modules/catalog/preview-sample.json",
+    "openingState": "Night carousel scene, greeting, language control, and source open-invitation action."
+  },
+  "declaredSourcePreview": {
+    "sourcePage": "https://www.marxaba.uz/templates/chavandoz/index.html",
+    "declaredPath": "preview.webp",
+    "retrievedUrl": "https://www.marxaba.uz/templates/chavandoz/preview.webp",
+    "httpStatus": 200,
+    "contentType": "image/webp",
+    "path": "/templates/chavandoz/source-preview.webp",
+    "width": 720,
+    "height": 1280,
+    "sha256": "dae64947a37574f1be8ae08e17ad17809a937fbcb9b6490c054e38dff3bfadd4",
+    "notes": "Exact declared source asset, absent from the local capture manifest/tree. Contains a concrete sample invitation and a different crop; preserved for provenance, not used as the app catalog preview."
+  },
+  "comparison": {
+    "byteIdentical": false,
+    "decision": "Retain the authentic renderer capture as catalog art; do not expose the recovered source sample invitation as catalog fixture content."
+  },
+  "sourceCaptureModified": false
+}

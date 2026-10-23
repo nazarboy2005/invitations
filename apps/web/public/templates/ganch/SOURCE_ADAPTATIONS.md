@@ -28,8 +28,7 @@ runtime is displaying a map, and hides the empty note and unsupported bank
 slot. None of these slots receive invented or sample creator data. Program
 speaker labels are not present in the captured Ganch markup.
 
-The current catalog image is the production browser capture, not the previous stale `preview.webp` with its baked-in A&M monogram and 18:00 sample time. The verified screenshot shows the shared fixture data and is pinned by `preview.provenance.json`. The captured source body, styles, scripts, and art remain unchanged.
+The current catalog image is a 430 × 932 screenshot of the closed-door opening rendered through the production `/preview?template=ganch&qaSilent=1` route with the shared fixture. The renderer frame was captured without the platform locale overlay or app chrome. Its fixture and image hashes are pinned by `preview.provenance.json`. The captured source body, styles, scripts, and art remain unchanged.
 
-Ganch is registered in the typed catalog and additive database migration as
-unpublished. Keep it unavailable for selection until full browser and service
-release verification passes.
+Ganch is published through additive migration `0085_publish_ganch.sql`. Its
+catalog publication state is unchanged by the artwork refresh.

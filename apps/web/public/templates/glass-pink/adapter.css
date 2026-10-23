@@ -1,3 +1,13 @@
+/* The captured Chorlove CSS points these faces at site-root /fonts URLs.
+   Keep the source fonts inside this template package and remap only its renderer. */
+@font-face { font-family: "Fz Qellia"; src: url("./assets/Qellia.otf") format("opentype"); font-display: swap; }
+@font-face { font-family: "Cormorant Garamond"; src: url("./assets/CormorantGaramond-Regular.ttf") format("truetype"); font-display: swap; }
+@font-face { font-family: "The Nautigal"; src: url("./assets/TheNautigal-Regular.ttf") format("truetype"); font-display: swap; }
+@font-face { font-family: "Great Vibes"; src: url("./assets/GreatVibes-Regular.ttf") format("truetype"); font-display: swap; }
+@font-face { font-family: "Fraunces"; src: url("./assets/Fraunces-VariableFont_SOFT,WONK,opsz,wght.ttf") format("truetype"); font-weight: 100 900; font-display: swap; }
+@font-face { font-family: "Jost"; src: url("./assets/Jost-VariableFont_wght.ttf") format("truetype"); font-weight: 100 900; font-display: swap; }
+@font-face { font-family: "Marcellus"; src: url("./assets/Marcellus-Regular.ttf") format("truetype"); font-weight: 400; font-display: swap; }
+
 .glass-pink-page { position: relative; isolation: isolate; }
 .cc-language-picker, .cc-music-toggle { position: fixed; z-index: 150; display: flex; align-items: center; gap: 4px; border: 1px solid rgb(203 93 108 / 18%); border-radius: 999px; background: rgb(255 255 255 / 90%); padding: 5px; box-shadow: 0 8px 28px rgb(203 93 108 / 12%); backdrop-filter: blur(12px); }
 .cc-language-picker { top: 12px; right: 12px; }

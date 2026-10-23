@@ -11,3 +11,8 @@
 #toyona .gift > div > [data-slot="toyona.cardHolder"]:empty {
   display: none;
 }
+
+/* The yearbook is an optional creator-photo gallery. */
+body [data-section="gallery"]:has([data-list="gallery"]:empty) {
+  display: none;
+}

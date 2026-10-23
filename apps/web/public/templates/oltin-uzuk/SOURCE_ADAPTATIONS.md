@@ -19,3 +19,10 @@ invitation contract into the captured slots and owns the gallery controls.
   changing the captured `template.css`.
 - Visual browser checks and live save/reopen behavior require the app and its
   services; these static checks do not substitute for those release gates.
+
+The catalog now uses `catalog-cover-opening.png`, a 450×800 browser capture of
+the packaged renderer's initial `#intro` page using the shared catalog fixture.
+The older `preview.webp` remains in the package but is no longer the catalog
+image. Capture viewport, locale, excluded UI, source and fixture hashes, and the
+artwork hash are pinned in `preview.provenance.json`; the original capture tree
+is unchanged.

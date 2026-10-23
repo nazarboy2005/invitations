@@ -36,43 +36,96 @@ test("Sahro Fonusi keeps its captured source composition, styling, behavior, and
   for (const file of ["i18n.js", "meta.js"]) assert.equal(normalize(read(appRoot, file)), normalize(read(captureRoot, file)));
   assert.deepEqual(readFileSync(new URL("art/desert-panorama.webp", appRoot)), readFileSync(new URL("art/desert-panorama.webp", captureRoot)));
   assert.match(read(appRoot, "SOURCE_ADAPTATIONS.md"), /removes its sample-invitation script/);
-  assert.match(read(appRoot, "SOURCE_ADAPTATIONS.md"), /does not claim a fresh browser capture/);
+  assert.match(read(appRoot, "SOURCE_ADAPTATIONS.md"), /preview-capture\.png` preserves the raw screenshot/);
   assert.match(read(appRoot, "template.js"), /function buildThree\(\)/);
   assert.match(read(appRoot, "template.js"), /function beginOpen\(\)/);
   assert.match(read(appRoot, "template.js"), /prefers-reduced-motion:\s*reduce/);
   assert.match(read(appRoot, "template.css"), /prefers-reduced-motion:\s*reduce/);
 });
 
-test("Sahro Fonusi catalog artwork is an actual portrait crop of its opening panorama", () => {
+test("Sahro Fonusi catalog artwork is a fixture-rendered portrait opening", () => {
   const digest = (bytes: Buffer) => createHash("sha256").update(bytes).digest("hex");
   const preview = readFileSync(new URL("preview.webp", appRoot));
   const openingArt = readFileSync(new URL("art/desert-panorama.webp", appRoot));
+  const fixture = readFileSync(new URL("../apps/web/src/modules/catalog/preview-sample.json", import.meta.url));
+  const sourceHtml = read(captureRoot, "index.html");
+  const intro = sourceHtml.match(/<section class="intro" id="intro"[\s\S]*?<\/section>/)?.[0];
+  assert.ok(intro, "captured source has an opening section");
+  for (const selector of [
+    "intro__poster",
+    "scene-canvas",
+    "lantern-fallback",
+    "brass-fanous",
+    "intro__greeting",
+    "intro__names",
+    "intro__date",
+    "open-invitation",
+    "intro__frame--top",
+    "intro__frame--bottom",
+  ]) assert.ok(intro.includes(selector), `source opening includes ${selector}`);
   const provenance = JSON.parse(read(appRoot, "preview.provenance.json")) as {
     artifact: string;
     artifactSha256: string;
     sourceCapture: string;
-    sourceArtwork: string;
-    sourceArtworkSha256: string;
+    sourceHashes: Record<string, string>;
+    fixture: string;
+    fixtureSha256: string;
+    route: string;
+    captureMethod: string;
+    captureExcludes: string[];
+    browserPageErrors: string[];
+    rawCapture: string;
+    sourceLayout: {
+      sourceArtResolution: string;
+      posterBackgroundSize: string;
+      posterTransform: string;
+      posterBoundsAtCapture: string;
+    };
     width: number;
     height: number;
     format: string;
     status: string;
   };
-  assert.notEqual(digest(preview), digest(openingArt), "portrait crop has its own catalog asset");
+  const capture = readFileSync(new URL(provenance.rawCapture, appRoot));
+  const imageDimensions = {
+    width: capture.readUInt32BE(16),
+    height: capture.readUInt32BE(20),
+  };
+  assert.notEqual(digest(preview), digest(openingArt), "catalog cover is a renderer capture, not the raw panorama");
   assert.match(read(appRoot, "meta.js"), /preview:\s*"preview\.webp"/);
   assert.match(read(appRoot, "template.css"), /url\('art\/desert-panorama\.webp'\)/);
   assert.equal(preview.toString("ascii", 0, 4), "RIFF");
   assert.equal(preview.toString("ascii", 8, 12), "WEBP");
-  assert.equal(preview.toString("ascii", 12, 16), "VP8 ");
-  assert.deepEqual([preview.readUInt16LE(26) & 0x3fff, preview.readUInt16LE(28) & 0x3fff], [540, 960]);
+  assert.match(preview.toString("ascii", 12, 16), /^VP8/);
+  assert.deepEqual(imageDimensions, { width: 720, height: 1280 });
   assert.equal(provenance.artifact, "preview.webp");
   assert.equal(provenance.artifactSha256, digest(preview));
   assert.equal(provenance.sourceCapture, "Invitations - this folder will be removed from production/Marxaba/Nikoh/templates/sahro-fonusi");
-  assert.equal(provenance.sourceArtwork, "art/desert-panorama.webp");
-  assert.equal(provenance.sourceArtworkSha256, digest(openingArt));
-  assert.deepEqual([provenance.width, provenance.height], [540, 960]);
+  assert.deepEqual(provenance.sourceHashes, {
+    "index.html": digest(readFileSync(new URL("index.html", captureRoot))),
+    "template.css": digest(readFileSync(new URL("template.css", captureRoot))),
+    "template.js": digest(readFileSync(new URL("template.js", captureRoot))),
+    "art/desert-panorama.webp": digest(openingArt),
+  });
+  assert.equal(provenance.fixture, "apps/web/src/modules/catalog/preview-sample.json");
+  assert.equal(provenance.fixtureSha256, digest(fixture));
+  assert.equal(provenance.route, "/preview?template=sahro-fonusi&qaSilent=1");
+  assert.match(provenance.captureMethod, /Browser reduced-motion emulation/);
+  assert.match(provenance.captureMethod, /translate\(-50%,-50%\).*conflicts with Sahro Fonusi/);
+  assert.deepEqual(provenance.sourceLayout, {
+    sourceArtResolution: "2560×1440",
+    posterBackgroundSize: "auto 100%",
+    posterTransform: "scale(1.035)",
+    posterBoundsAtCapture: "x -12.6, y -22.4, width 745.2, height 1324.8; intentional 1.035× overscan on 720×1280 viewport",
+  });
+  assert.deepEqual(provenance.captureExcludes, [
+    ".mh-lang injected language control",
+    "nextjs-portal development badge host",
+  ]);
+  assert.deepEqual(provenance.browserPageErrors, []);
+  assert.deepEqual([provenance.width, provenance.height], [720, 1280]);
   assert.equal(provenance.format, "image/webp");
-  assert.equal(provenance.status, "derived-from-source-opening-artwork");
+  assert.equal(provenance.status, "captured-source-opening");
 });
 
 test("Sahro Fonusi has local fonts and resolves every local asset without captured sample data", () => {

@@ -1,0 +1,35 @@
+{
+  "template": "samarqand-kechasi",
+  "source": "Marxaba/Nikoh/templates/samarqand-kechasi",
+  "route": "/preview?template=samarqand-kechasi&qaReducedMotion=1&qaSilent=1",
+  "state": "locked initial .intro; no opening action was triggered",
+  "fixture": {
+    "path": "apps/web/src/modules/catalog/preview-sample.json",
+    "sha256": "54017a292d4a5235593d93a5e2f8bca1fe3bab89433182fac912c5d948878871",
+    "eventType": "korporativ",
+    "startsAt": "2026-11-14T18:30",
+    "usage": "ephemeral preview only"
+  },
+  "capture": {
+    "viewport": { "width": 1280, "height": 1280, "deviceScaleFactor": 1 },
+    "crop": { "left": 360, "top": 0, "width": 560, "height": 1280 },
+    "output": { "width": 560, "height": 1280, "aspectRatio": "7:16" },
+    "excluded": ["outer page background", "Next.js dev badge", "app language switcher", "browser/app chrome"],
+    "captureOnlyCss": ".mh-lang, nextjs-portal{display:none!important}",
+    "reducedMotion": true,
+    "silentPlayback": true
+  },
+  "artwork": {
+    "preview.webp": "2aa0e338fcb1f8cae113475533f9952792719bde75a486d1bf5bcc6a04d104d1",
+    "preview-capture.png": "0a9796b7df7388c28a6aa4a6abec278b3e949372a7ec1808320c23edd54fe247"
+  },
+  "sourceDependencies": {
+    "index.html": "1774802987c738a6680c9c6b0da22c08cffa1cb4a835f80f6cf4e327bb788ec9",
+    "template.css": "03ae99df96b1bc62914f9c75e0a498d6e6802c2d42f814499fd0846d917dc0ec",
+    "template.js": "1fedd1a3f7e5687e4be2221a51b58d2bae54ada4b2e0fa74aba6bb05b3d5355b",
+    "motion.css": "c2ac4d02a2dc80904363a2a7a7a9e7055390410438a144be3d114ea9e86e2c02",
+    "motion.js": "b1fa329d93954568c0c9296836780a05df3b7e9f26e875f48cbcd4b71540190f",
+    "art/registan-reveal.webp": "498d1716c901e793783aae315b69e85f6c532575b75fa5a2f89dd062214127ec",
+    "art/lantern-hd.webp": "9a9722a94930549fa5ee891e9647a44a5169a1adad047edab6351e8eff6e9106"
+  }
+}

@@ -45,3 +45,21 @@ Source JS/CSS support reduced motion; runtime emulation was unavailable. Beshik
 is published at 150,000 UZS through additive migration
 `0064_publish_beshik.sql`. Venue photo and gift bank/note remain unsupported by
 the contract and are not fabricated.
+
+## 2026-10-23 source-fidelity audit
+
+`Marxaba/capture-manifest.json` maps the source to
+`Marxaba/Beshik to'yi/templates/beshik`. The all-provider search found no
+alternate Beshik capture. `template.css`, `meta.js`, and both captured cradle
+and venue WebP assets are byte-identical to the capture. In the body, only the
+single-celebrant slots change from `extras.celebrant` to `groom`, and the
+program heading is bound to `programHeading`. The matching JavaScript reveal
+callback maps that same person to `groom`; the local page head replaces remote
+fonts/site runtime with bundled Fredoka/Nunito and the shared invitation
+runtime. `i18n.js` adds the calendar accessibility-label translation. The
+opening animation and captured body design remain in place.
+
+The catalog cover's provenance records the rendered source opening at
+720×1280 (9:16). It shows the greeting, “Taklifnomani ochish” action, and
+cradle artwork together. Catalog presentation fits the complete portrait art;
+the distinctive first page is visible without cropping.

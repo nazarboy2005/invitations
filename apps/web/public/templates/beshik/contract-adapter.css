@@ -4,6 +4,12 @@
   display: none;
 }
 
+/* Gallery photos belong to the creator. The cradle illustration stays visible
+   as opening art, while the optional photo section waits for an upload. */
+body [data-section="gallery"]:has([data-list="gallery"]:empty) {
+  display: none;
+}
+
 /* Keep the captured honoree typeface, but let the shared name-fit hook wrap long names. */
 .hero__name[data-slot="groom"].platform-name-fit--single-wrap {
   max-width: var(--platform-name-fit-width, 100%) !important;

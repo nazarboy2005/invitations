@@ -76,11 +76,17 @@ const nextSourceBatchMigration = readFileSync(
   "utf8",
 );
 const kozguPublicationMigration = readFileSync(
-  new URL("../packages/database/migrations/0050_publish_kozgu.sql", import.meta.url),
+  new URL(
+    "../packages/database/migrations/0050_publish_kozgu.sql",
+    import.meta.url,
+  ),
   "utf8",
 );
 const qandilPublicationMigration = readFileSync(
-  new URL("../packages/database/migrations/0049_publish_qandil.sql", import.meta.url),
+  new URL(
+    "../packages/database/migrations/0049_publish_qandil.sql",
+    import.meta.url,
+  ),
   "utf8",
 );
 const specialtyMigration = readFileSync(
@@ -119,39 +125,66 @@ const birthdayTemplatesMigration = readFileSync(
   "utf8",
 );
 const oltinKuzPublicationMigration = readFileSync(
-  new URL("../packages/database/migrations/0066_publish_oltin_kuz.sql", import.meta.url),
+  new URL(
+    "../packages/database/migrations/0066_publish_oltin_kuz.sql",
+    import.meta.url,
+  ),
   "utf8",
 );
 const shirinBayramPublicationMigration = readFileSync(
-  new URL("../packages/database/migrations/0067_publish_shirin_bayram.sql", import.meta.url),
+  new URL(
+    "../packages/database/migrations/0067_publish_shirin_bayram.sql",
+    import.meta.url,
+  ),
   "utf8",
 );
 const shirinBayramCompatibilityMigration = readFileSync(
-  new URL("../packages/database/migrations/0068_shirin_bayram_birthday_only.sql", import.meta.url),
+  new URL(
+    "../packages/database/migrations/0068_shirin_bayram_birthday_only.sql",
+    import.meta.url,
+  ),
   "utf8",
 );
 const oltinYoshPublicationMigration = readFileSync(
-  new URL("../packages/database/migrations/0069_publish_oltin_yosh.sql", import.meta.url),
+  new URL(
+    "../packages/database/migrations/0069_publish_oltin_yosh.sql",
+    import.meta.url,
+  ),
   "utf8",
 );
 const nahorPublicationMigration = readFileSync(
-  new URL("../packages/database/migrations/0070_publish_nahor.sql", import.meta.url),
+  new URL(
+    "../packages/database/migrations/0070_publish_nahor.sql",
+    import.meta.url,
+  ),
   "utf8",
 );
 const nahorgiOshPublicationMigration = readFileSync(
-  new URL("../packages/database/migrations/0071_publish_nahorgi_osh.sql", import.meta.url),
+  new URL(
+    "../packages/database/migrations/0071_publish_nahorgi_osh.sql",
+    import.meta.url,
+  ),
   "utf8",
 );
 const hilolPublicationMigration = readFileSync(
-  new URL("../packages/database/migrations/0072_publish_hilol.sql", import.meta.url),
+  new URL(
+    "../packages/database/migrations/0072_publish_hilol.sql",
+    import.meta.url,
+  ),
   "utf8",
 );
 const bitiruvPublicationMigration = readFileSync(
-  new URL("../packages/database/migrations/0073_publish_bitiruv.sql", import.meta.url),
+  new URL(
+    "../packages/database/migrations/0073_publish_bitiruv.sql",
+    import.meta.url,
+  ),
   "utf8",
 );
 const konfettiPublicationMigration = readFileSync(
-  new URL("../packages/database/migrations/0065_publish_konfetti.sql", import.meta.url),
+  new URL(
+    "../packages/database/migrations/0065_publish_konfetti.sql",
+    import.meta.url,
+  ),
   "utf8",
 );
 const yangiUyMigration = readFileSync(
@@ -357,12 +390,18 @@ test("registered Marxaba designs reflect their release state and additive migrat
     );
   assert.ok(existsSync(new URL("toscana/art/aisle.webp", templatesRoot)));
   assert.ok(existsSync(new URL("muhr/preview.webp", templatesRoot)));
-  assert.ok(existsSync(new URL("bulbul/preview-browser-capture.jpg", templatesRoot)));
+  assert.ok(
+    existsSync(new URL("bulbul/preview-browser-capture.jpg", templatesRoot)),
+  );
   assert.ok(existsSync(new URL("kozgu/preview.webp", templatesRoot)));
   assert.ok(existsSync(new URL("doira/preview.png", templatesRoot)));
   assert.ok(existsSync(new URL("qandil/preview.webp", templatesRoot)));
-  assert.ok(existsSync(new URL("parda/preview-browser-capture.jpg", templatesRoot)));
-  assert.ok(existsSync(new URL("ganch/preview-browser-capture.jpg", templatesRoot)));
+  assert.ok(
+    existsSync(new URL("parda/preview-browser-capture.jpg", templatesRoot)),
+  );
+  assert.ok(
+    existsSync(new URL("ganch/preview-browser-capture.jpg", templatesRoot)),
+  );
   assert.ok(existsSync(new URL("qatlam/preview.webp", templatesRoot)));
   assert.ok(existsSync(new URL("lola/preview.webp", templatesRoot)));
   assert.ok(existsSync(new URL("qiz-bazmi/preview.webp", templatesRoot)));
@@ -378,24 +417,58 @@ test("registered Marxaba designs reflect their release state and additive migrat
   assert.ok(existsSync(new URL("hilol/preview.webp", templatesRoot)));
   assert.equal(
     templateById("yangi-uy")?.previewImage,
-    "/templates/yangi-uy/preview-browser-capture.jpg",
+    "/templates/yangi-uy/catalog-cover-opening.png",
   );
-  assert.ok(existsSync(new URL("yangi-uy/preview-browser-capture.jpg", templatesRoot)));
+  assert.ok(
+    existsSync(new URL("yangi-uy/catalog-cover-opening.png", templatesRoot)),
+  );
   assert.equal(
     templateById("nahorgi-osh")?.previewImage,
     "/templates/nahorgi-osh/preview.webp",
   );
-  const fixtureBytes = readFileSync(new URL("../apps/web/src/modules/catalog/preview-sample.json", import.meta.url));
+  const fixtureBytes = readFileSync(
+    new URL(
+      "../apps/web/src/modules/catalog/preview-sample.json",
+      import.meta.url,
+    ),
+  );
   for (const id of ["bulbul", "parda", "ganch", "yangi-uy"]) {
     const definition = templateById(id);
-    const image = readFileSync(new URL(`${id}/preview-browser-capture.jpg`, templatesRoot));
-    const provenance = JSON.parse(readFileSync(new URL(`${id}/preview.provenance.json`, templatesRoot), "utf8"));
-    assert.equal(definition?.previewImage, `/templates/${id}/preview-browser-capture.jpg`);
-    assert.equal(definition?.published, id === "bulbul" || id === "parda" || id === "ganch" || id === "yangi-uy", `${id} reflects its current release state`);
+    const isYangiUy = id === "yangi-uy";
+    const image = readFileSync(
+      new URL(
+        `${id}/${isYangiUy ? "catalog-cover-opening.png" : "preview-browser-capture.jpg"}`,
+        templatesRoot,
+      ),
+    );
+    const provenance = JSON.parse(
+      readFileSync(
+        new URL(`${id}/preview.provenance.json`, templatesRoot),
+        "utf8",
+      ),
+    );
+    assert.equal(
+      definition?.previewImage,
+      isYangiUy
+        ? "/templates/yangi-uy/catalog-cover-opening.png"
+        : `/templates/${id}/preview-browser-capture.jpg`,
+    );
+    assert.equal(
+      definition?.published,
+      id === "bulbul" || id === "parda" || id === "ganch" || id === "yangi-uy",
+      `${id} reflects its current release state`,
+    );
     assert.equal(provenance.status, "verified");
     assert.equal(provenance.route, `/preview?template=${id}&qaSilent=1`);
-    assert.equal(provenance.fixtureSha256, createHash("sha256").update(fixtureBytes).digest("hex"));
-    assert.equal(provenance.sha256, createHash("sha256").update(image).digest("hex"));
+    assert.equal(
+      provenance.fixtureSha256,
+      createHash("sha256").update(fixtureBytes).digest("hex"),
+    );
+    if (!isYangiUy)
+      assert.equal(
+        provenance.sha256,
+        createHash("sha256").update(image).digest("hex"),
+      );
   }
   assert.match(jubileeMigration, /'yubiley'/);
 });

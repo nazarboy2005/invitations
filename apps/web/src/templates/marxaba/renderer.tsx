@@ -29,6 +29,211 @@ const sourceLocale: Record<Locale, string> = {
   ru: "ru",
 };
 
+type PreviewGalleryItem = {
+  id: string;
+  src: string;
+  alt: string;
+  caption: string;
+};
+
+type PreviewGalleryAlt = string | Record<Locale, string>;
+
+const previewGalleryAssets: Record<
+  string,
+  Array<[string, PreviewGalleryAlt]>
+> = {
+  atlas: [
+    ["silk-swatch-1.webp", "Atlas mato namunasi"],
+    ["silk-swatch-3.webp", "Naqshli mato namunasi"],
+    ["pouch.webp", "Atlas xaltacha bezagi"],
+    ["silk-band.webp", "Atlas lenta bezagi"],
+    ["silk-hero.webp", "Atlas mato bezagi"],
+    ["silk-swatch-1.webp", "Atlas mato namunasi"],
+  ],
+  beshik: [["beshik.webp", "Beshikdagi bezak rasmi"]],
+  bitiruv: [
+    ["graduation-scene.webp", "Bitiruv qalpog‘i va diplom sahnasi"],
+  ],
+  doira: [
+    ["courtyard-night-v2.webp", "Kechki hovli manzarasi"],
+    ["velvet-curtains-v2.webp", "Baxmal parda bezagi"],
+  ],
+  hilol: [
+    [
+      "still-life.svg",
+      {
+        "uz-Latn": "Iftor dasturxoni va chiroq",
+        "uz-Cyrl": "Ифтор дастурхони ва чироқ",
+        en: "Iftar table and lantern",
+        ru: "Стол для ифтара и фонарь",
+      },
+    ],
+    [
+      "girih-tile.svg",
+      {
+        "uz-Latn": "Hilol naqshli girih bezagi",
+        "uz-Cyrl": "Ҳилол нақшли гирих безаги",
+        en: "Crescent and girih ornament",
+        ru: "Орнамент гирих с полумесяцем",
+      },
+    ],
+    [
+      "city-silhouette.svg",
+      {
+        "uz-Latn": "Shom paytidagi shahar manzarasi",
+        "uz-Cyrl": "Шом пайтидаги шаҳар манзараси",
+        en: "City skyline at dusk",
+        ru: "Городской силуэт в сумерках",
+      },
+    ],
+  ],
+  korporativ: [
+    [
+      "event-01.svg",
+      {
+        "uz-Latn": "Korporativ oqshom sahnasidagi shisha monolit",
+        "uz-Cyrl": "Корпоратив оқшом саҳнасидаги шиша монолит",
+        en: "Glass monolith on the corporate evening stage",
+        ru: "Стеклянный монолит на сцене корпоративного вечера",
+      },
+    ],
+    [
+      "event-02.svg",
+      {
+        "uz-Latn": "Elektrik ko‘k yorug‘likdagi sahna",
+        "uz-Cyrl": "Электрик кўк ёруғликдаги саҳна",
+        en: "Stage in electric blue light",
+        ru: "Сцена в электрическом синем свете",
+      },
+    ],
+    [
+      "event-03.svg",
+      {
+        "uz-Latn": "Korporativ zalning me’moriy yorug‘ligi",
+        "uz-Cyrl": "Корпоратив залнинг меъморий ёруғлиги",
+        en: "Architectural lighting in the corporate ballroom",
+        ru: "Архитектурный свет корпоративного зала",
+      },
+    ],
+    [
+      "venue.svg",
+      {
+        "uz-Latn": "Yil yakuni kechasining sahna kompozitsiyasi",
+        "uz-Cyrl": "Йил якуни кечасининг саҳна композицияси",
+        en: "Stage composition from the year-end evening",
+        ru: "Сценическая композиция вечера по итогам года",
+      },
+    ],
+  ],
+  konfetti: [
+    [
+      "gallery-1.webp",
+      {
+        "uz-Latn": "Bayram uchun rangli sharlar",
+        "uz-Cyrl": "Байрам учун рангли шарлар",
+        en: "Colorful birthday balloons",
+        ru: "Разноцветные праздничные шары",
+      },
+    ],
+    [
+      "gallery-2.webp",
+      {
+        "uz-Latn": "Shamlar bilan bezatilgan tort",
+        "uz-Cyrl": "Шамлар билан безатилган торт",
+        en: "Birthday cake with candles",
+        ru: "Праздничный торт со свечами",
+      },
+    ],
+    [
+      "gallery-3.webp",
+      {
+        "uz-Latn": "Yaltirab uchayotgan konfetti",
+        "uz-Cyrl": "Ялтираб учаётган конфетти",
+        en: "Shimmering confetti",
+        ru: "Сверкающее конфетти",
+      },
+    ],
+    [
+      "gallery-4.webp",
+      {
+        "uz-Latn": "Shamlar bilan bezatilgan bayram dasturxoni",
+        "uz-Cyrl": "Шамлар билан безатилган байрам дастурхони",
+        en: "Candlelit birthday table",
+        ru: "Праздничный стол со свечами",
+      },
+    ],
+  ],
+  "oltin-kuz": [
+    ["memory-01.svg", {
+      "uz-Latn": "Oila davrasidagi qadrlik xotira",
+      "uz-Cyrl": "Оила даврасидаги қадрли хотира",
+      en: "A treasured memory with family",
+      ru: "Дорогая память в кругу семьи",
+    }],
+    ["memory-02.svg", {
+      "uz-Latn": "Farzandlar bilan birga o‘tgan yillar",
+      "uz-Cyrl": "Фарзандлар билан бирга ўтган йиллар",
+      en: "Years spent with her children",
+      ru: "Годы рядом с детьми",
+    }],
+    ["memory-03.svg", {
+      "uz-Latn": "Oilaviy bayramdan xotira",
+      "uz-Cyrl": "Оилавий байрамдан хотира",
+      en: "A family celebration",
+      ru: "Семейный праздник",
+    }],
+    ["memory-04.svg", {
+      "uz-Latn": "Nevaralar bilan quvonchli kun",
+      "uz-Cyrl": "Набиралар билан қувончли кун",
+      en: "A joyful day with grandchildren",
+      ru: "Радостный день с внуками",
+    }],
+    ["memory-05.svg", {
+      "uz-Latn": "Mehrga to‘la oilaviy surat",
+      "uz-Cyrl": "Меҳрга тўла оилавий сурат",
+      en: "A family portrait full of love",
+      ru: "Семейная фотография, полная любви",
+    }],
+  ],
+};
+
+export function mapMarxabaPreviewGallery(
+  templateId: string,
+  invitationGallery: Invitation["gallery"],
+  sourceGallery: PreviewGalleryItem[],
+  locale: Locale,
+  preview: boolean,
+  samplePreview: boolean,
+): PreviewGalleryItem[] {
+  const hasCreatorPhotos = invitationGallery.some((photo) => photo.url.trim());
+  const previewGallery = previewGalleryAssets[templateId];
+  if (!preview || !samplePreview || hasCreatorPhotos || !previewGallery)
+    return sourceGallery;
+
+  return previewGallery.map(([file, alt], index) => {
+    const localizedAlt = typeof alt === "string" ? alt : alt[locale];
+    return {
+      id: `${templateId}-source-preview-${index + 1}`,
+      src: `/templates/${encodeURIComponent(templateId)}/art/${file}`,
+      alt: localizedAlt,
+      caption: localizedAlt,
+    };
+  });
+}
+
+export function mapMarxabaPreviewVenuePhoto(
+  templateId: string,
+  invitationGallery: Invitation["gallery"],
+  preview: boolean,
+  samplePreview: boolean,
+): string | undefined {
+  const hasCreatorPhotos = invitationGallery.some((photo) => photo.url.trim());
+  if (templateId !== "oltin-kuz" || !preview || !samplePreview || hasCreatorPhotos)
+    return undefined;
+
+  return "/templates/oltin-kuz/art/venue.svg";
+}
+
 export function MarxabaInvitation({
   invitation,
   invitationId,
@@ -65,6 +270,20 @@ export function MarxabaInvitation({
     (item) => sourceLocale[item],
   );
   const message = useMemo(() => {
+    const gallery = mapMarxabaPreviewGallery(
+      templateId,
+      invitation.gallery,
+      sourceData.gallery,
+      frameLocale,
+      preview,
+      sampleWishes,
+    );
+    const venuePhoto = mapMarxabaPreviewVenuePhoto(
+      templateId,
+      invitation.gallery,
+      preview,
+      sampleWishes,
+    );
     const musicUrl = sourceData.music.enabled
       ? sourceData.music.url
       : catalogMusic
@@ -72,9 +291,19 @@ export function MarxabaInvitation({
         : "";
     return {
       ...sourceData,
+      ...(venuePhoto
+        ? { venue: { ...sourceData.venue, photo: venuePhoto } }
+        : {}),
+      gallery,
       // Several captured single-celebrant designs bind this source-only
       // slot. The shared contract's first person remains the source of truth.
-      extras: { celebrant: sourceData.groom || sourceData.bride },
+      extras: {
+        celebrant: sourceData.groom || sourceData.bride,
+        ...(templateId === "muhabbat-kitobi"
+          ? { story: sourceData.story }
+          : {}),
+      },
+      ...(templateId === "muhabbat-kitobi" ? { story: undefined } : {}),
       ...(templateId === "bitiruv"
         ? { monogram: (sourceData.groom || sourceData.bride).trim().charAt(0) }
         : {}),
@@ -110,7 +339,13 @@ export function MarxabaInvitation({
               // first render. Keep both aligned with the active language.
               groom: localized.groom,
               bride: localized.bride,
-              extras: { celebrant: localized.groom || localized.bride },
+              extras: {
+                celebrant: localized.groom || localized.bride,
+                ...(templateId === "muhabbat-kitobi"
+                  ? { story: localized.story }
+                  : {}),
+              },
+              ...(templateId === "muhabbat-kitobi" ? { story: undefined } : {}),
               ...(templateId === "bitiruv"
                 ? {
                     monogram: (localized.groom || localized.bride)
@@ -136,6 +371,7 @@ export function MarxabaInvitation({
     guestToken,
     invitation.enabledLocales,
     invitation.status,
+    invitation.gallery,
     invitationId,
     preview,
     sampleWishes,

@@ -168,8 +168,10 @@ test("Oltin Kuz entry point delegates data and API behavior to the shared adapte
   );
   assert.match(
     sharedRenderer,
-    /extras: \{ celebrant: sourceData\.groom \|\| sourceData\.bride \}/,
+    /extras:\s*\{\s*celebrant: sourceData\.groom \|\| sourceData\.bride/,
   );
+  assert.match(sharedRenderer, /mapMarxabaPreviewVenuePhoto\(/);
+  assert.match(sharedRenderer, /venue: \{ \.\.\.sourceData\.venue, photo: venuePhoto \}/);
 });
 
 test("Oltin Kuz maps the shared birthday opening sample through the contract in every locale", async () => {
@@ -230,6 +232,83 @@ test("Oltin Kuz maps the shared birthday opening sample through the contract in 
     assert.equal(blankData.toyona.cardNumber, "", `${locale}: blank gift`);
     assert.deepEqual(blankData.contacts, [], `${locale}: blank contacts`);
   }
+});
+
+test("Oltin Kuz source photos are preview-only, localized, and yield to creator uploads", async () => {
+  const { makeLegacyData } = await import("../apps/web/src/templates/anor/renderer");
+  const {
+    mapMarxabaPreviewGallery,
+    mapMarxabaPreviewVenuePhoto,
+  } = await import("../apps/web/src/templates/marxaba/renderer");
+  const locales: Locale[] = ["uz-Latn", "uz-Cyrl", "en", "ru"];
+  const blank = createInvitation("oltin-kuz");
+  const untouchedBlank = JSON.stringify(blank);
+  const galleryFiles = [
+    "memory-01.svg",
+    "memory-02.svg",
+    "memory-03.svg",
+    "memory-04.svg",
+    "memory-05.svg",
+  ];
+
+  for (const file of ["venue.svg", ...galleryFiles]) {
+    assert.deepEqual(
+      readFileSync(new URL(`art/${file}`, packageRoot)),
+      readFileSync(new URL(`art/${file}`, sourceRoot)),
+      `${file} is copied byte-for-byte from the Marxaba capture`,
+    );
+  }
+
+  for (const locale of locales) {
+    const sample = createTemplatePreviewSample("oltin-kuz");
+    const sourceData = makeLegacyData(sample, locale, "", false);
+    const previewGallery = mapMarxabaPreviewGallery(
+      "oltin-kuz", sample.gallery, sourceData.gallery, locale, true, true,
+    );
+    assert.deepEqual(
+      previewGallery.map(({ src }) => src),
+      galleryFiles.map((file) => `/templates/oltin-kuz/art/${file}`),
+      `${locale}: captured gallery art fills only the sample preview`,
+    );
+    assert.ok(previewGallery.every(({ alt }) => alt.trim().length > 0));
+    assert.equal(
+      mapMarxabaPreviewVenuePhoto("oltin-kuz", sample.gallery, true, true),
+      "/templates/oltin-kuz/art/venue.svg",
+      `${locale}: captured venue art is available in the sample preview`,
+    );
+    assert.deepEqual(sourceData.gallery.map(({ src }) => src), ["", "", "", "", "", ""]);
+  }
+
+  const authored = {
+    ...blank,
+    gallery: [{ id: "creator-photo", url: "https://example.test/photo.jpg", alt: "My photo", caption: "" }],
+  };
+  const authoredData = makeLegacyData(authored, "uz-Latn", "", false);
+  assert.deepEqual(
+    mapMarxabaPreviewGallery(
+      "oltin-kuz", authored.gallery, authoredData.gallery, "uz-Latn", true, true,
+    ),
+    authoredData.gallery,
+    "creator uploads replace preview gallery art",
+  );
+  assert.equal(
+    mapMarxabaPreviewVenuePhoto("oltin-kuz", authored.gallery, true, true),
+    undefined,
+    "creator uploads suppress the venue sample along with other sample media",
+  );
+  assert.deepEqual(
+    mapMarxabaPreviewGallery(
+      "oltin-kuz", blank.gallery, [], "uz-Latn", false, false,
+    ),
+    [],
+    "public empty galleries receive no preview images",
+  );
+  assert.equal(
+    mapMarxabaPreviewVenuePhoto("oltin-kuz", blank.gallery, false, false),
+    undefined,
+    "public invitations receive no venue sample image",
+  );
+  assert.equal(JSON.stringify(blank), untouchedBlank, "preview mapping never mutates invitation data");
 });
 
 test("Oltin Kuz supports both declared events and keeps the preview fixture out of blank drafts", () => {

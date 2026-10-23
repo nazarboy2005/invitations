@@ -1,0 +1,32 @@
+{
+  "source": {
+    "captureManifest": "Invitations - this folder will be removed from production/Marxaba/capture-manifest.json",
+    "templatePath": "Tug'ilgan kun va Yubiley/templates/oltin-yosh",
+    "declaredPreview": "preview.webp (not present in the local capture)",
+    "indexHtmlSha256": "1e66dc95e9a79b2a805fff6fbb46a70ed943b612aee461ce6bb3aee51d38a974"
+  },
+  "fixture": {
+    "path": "apps/web/src/modules/catalog/preview-sample.json",
+    "sha256": "54017a292d4a5235593d93a5e2f8bca1fe3bab89433182fac912c5d948878871"
+  },
+  "capture": {
+    "route": "/preview?template=oltin-yosh&qaSilent=1",
+    "viewport": { "width": 450, "height": 800, "deviceScaleFactor": 1 },
+    "state": "closed invitation opening",
+    "localeSelectorExcluded": true,
+    "browserChromeExcluded": true,
+    "temporaryCaptureCss": [
+      "app preview document: nextjs-portal{display:none!important}",
+      "template renderer document: .mh-lang{display:none!important}"
+    ],
+    "cssWasNotAddedToSource": true
+  },
+  "output": {
+    "path": "apps/web/public/templates/oltin-yosh/preview.webp",
+    "format": "webp",
+    "width": 450,
+    "height": 800,
+    "quality": 94,
+    "sha256": "63b3f6c0571a7f00e69634ba976df8ae4dd1947217e4fcef2c3384611ddecf4f"
+  }
+}

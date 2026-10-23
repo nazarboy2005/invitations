@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
 import test from "node:test";
 import {
@@ -16,6 +17,89 @@ const core = readFileSync(
   new URL("../apps/web/public/templates/shared/nikoh/core.js", import.meta.url),
   "utf8",
 );
+const coverPng = readFileSync(
+  new URL("../apps/web/public/templates/oltin-nur/preview-capture.png", import.meta.url),
+);
+const coverWebp = readFileSync(
+  new URL("../apps/web/public/templates/oltin-nur/preview.webp", import.meta.url),
+);
+const coverProvenance = JSON.parse(
+  readFileSync(
+    new URL("../apps/web/public/templates/oltin-nur/preview.provenance.json", import.meta.url),
+    "utf8",
+  ),
+);
+const capturedIndex = readFileSync(
+  new URL(
+    "../Invitations - this folder will be removed from production/Marxaba/Nikoh/templates/oltin-nur/index.html",
+    import.meta.url,
+  ),
+);
+const captureManifest = readFileSync(
+  new URL(
+    "../Invitations - this folder will be removed from production/Marxaba/capture-manifest.json",
+    import.meta.url,
+  ),
+);
+const capturedStyles = readFileSync(
+  new URL(
+    "../Invitations - this folder will be removed from production/Marxaba/Nikoh/templates/oltin-nur/template.css",
+    import.meta.url,
+  ),
+  "utf8",
+);
+const meta = readFileSync(
+  new URL("../apps/web/public/templates/oltin-nur/meta.js", import.meta.url),
+  "utf8",
+);
+
+function sha256(bytes: Buffer) {
+  return createHash("sha256").update(bytes).digest("hex");
+}
+
+test("Oltin Nur catalog cover is the clean, portrait source intro with pinned provenance", () => {
+  assert.match(meta, /preview: "preview\.webp"/);
+  assert.deepEqual([coverPng.readUInt32BE(16), coverPng.readUInt32BE(20)], [720, 1280]);
+  assert.equal(coverPng.subarray(1, 4).toString("ascii"), "PNG");
+  assert.equal(coverWebp.subarray(0, 4).toString("ascii"), "RIFF");
+  assert.equal(coverWebp.subarray(8, 12).toString("ascii"), "WEBP");
+  assert.equal(coverProvenance.render.viewport.width, 720);
+  assert.equal(coverProvenance.render.viewport.height, 1280);
+  assert.equal(coverProvenance.render.pageSelector, "#intro");
+  assert.deepEqual(coverProvenance.render.excluded, [
+    ".mh-lang language switcher",
+    "browser and app chrome",
+    "scrollbars",
+  ]);
+  assert.equal(
+    coverProvenance.artifacts.capture.sha256,
+    sha256(coverPng),
+  );
+  assert.equal(coverProvenance.artifacts.catalog.sha256, sha256(coverWebp));
+  assert.equal(coverProvenance.artifacts.catalog.width, 720);
+  assert.equal(coverProvenance.artifacts.catalog.height, 1280);
+  assert.equal(
+    coverProvenance.source.dependencies.find(
+      (dependency: { path: string }) => dependency.path === "capture-manifest.json",
+    ).sha256,
+    sha256(captureManifest),
+  );
+  assert.match(captureManifest.toString("utf8"), /Nikoh\/templates\/oltin-nur\/index\.html/);
+  assert.equal(
+    coverProvenance.source.dependencies.find(
+      (dependency: { path: string }) => dependency.path.endsWith("/index.html"),
+    ).sha256,
+    sha256(capturedIndex),
+  );
+  assert.equal(
+    coverProvenance.source.dependencies.find(
+      (dependency: { path: string }) => dependency.path.endsWith("/template.css"),
+    ).sha256,
+    sha256(Buffer.from(capturedStyles)),
+  );
+  assert.match(capturedStyles, /names stay a secret on the cover/);
+  assert.match(capturedStyles, /\.intro__name-lockup,\.intro__date,\.beam-title\{display:none\}/);
+});
 
 test("Oltin Nur's ephemeral sample covers its clothing, six-item program, wishes, gifts, and contacts", () => {
   const sample = createTemplatePreviewSample("oltin-nur");

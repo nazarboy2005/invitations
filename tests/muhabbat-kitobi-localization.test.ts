@@ -69,8 +69,8 @@ test("Muhabbat Kitobi keeps its captured layout, motion, and art assets", () => 
   }
   assert.match(
     readFileSync(new URL("template.js", templateRoot), "utf8"),
-    /data\?\.story\s*\|\|\s*\[\]/,
-    "the opening should only add authored story chapters",
+    /data\?\.extras\?\.story\s*\|\|\s*\[\]/,
+    "the source renderer should consume localized chapters through its native extras.story slot",
   );
 
   for (const asset of [

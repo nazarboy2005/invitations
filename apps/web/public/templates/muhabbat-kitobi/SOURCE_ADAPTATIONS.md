@@ -16,3 +16,5 @@ fields to the captured template slots.
   these empty slots while retaining the captured layout and styles.
 - Browser interaction, reduced-motion visual behavior, and live save/reopen
   checks remain runtime/service release gates.
+
+The captured story chapter section, page-turn opening, opening CSS, and four still-life SVG assets are retained. `index.html` preserves the captured body exactly. `template.js` remains source-native and reads `data.extras.story`; the Marxaba contract adapter maps the approved top-level `Invitation.story` chapters into that legacy slot for this template and omits the duplicate top-level list from the frame payload. The shared runtime then renders the captured story list once, while the source script uses the same localized chapters in its page-turn sequence. The adapter uses the approved contract fields and does not alter the canonical capture.

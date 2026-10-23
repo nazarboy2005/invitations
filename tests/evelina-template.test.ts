@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import { existsSync, readFileSync } from "node:fs";
+import { createHash } from "node:crypto";
 import path from "node:path";
 import test from "node:test";
 import { templateById } from "../packages/contracts/src/index";
@@ -7,8 +8,45 @@ import { createTemplatePreviewSample } from "../apps/web/src/modules/catalog/pre
 
 const root = process.cwd();
 const pub = path.join(root, "apps/web/public/templates/evelina");
-const source = path.join(root, "Invitations - this folder will be removed from production/Invitate/Web invitations/invitate.uz");
-const read = (base: string, file: string) => readFileSync(path.join(base, file), "utf8");
+const source = path.join(
+  root,
+  "Invitations - this folder will be removed from production/Invitate/Web invitations/invitate.uz",
+);
+const read = (base: string, file: string) =>
+  readFileSync(path.join(base, file), "utf8");
+
+test("Evelina preview provenance points to packaged files and matching artwork hashes", () => {
+  const provenance = JSON.parse(read(pub, "preview.provenance.json")) as {
+    artifact: string;
+    fixture: string;
+    previewSha256: string;
+    screenshotSha256: string;
+    sourceArtwork: string;
+    sourceArtworkSha256: string;
+    viewport: { width: number; height: number };
+  };
+  for (const file of [
+    provenance.artifact,
+    provenance.fixture,
+    provenance.sourceArtwork,
+  ]) {
+    assert.ok(
+      existsSync(path.join(root, file)),
+      `provenance path exists: ${file}`,
+    );
+  }
+  const sha256 = (file: string) =>
+    createHash("sha256")
+      .update(readFileSync(path.join(root, file)))
+      .digest("hex");
+  assert.equal(sha256(provenance.artifact), provenance.previewSha256);
+  assert.equal(
+    sha256(provenance.sourceArtwork),
+    provenance.sourceArtworkSha256,
+  );
+  assert.deepEqual(provenance.viewport, { width: 480, height: 900 });
+  assert.match(provenance.screenshotSha256, /^[a-f0-9]{64}$/);
+});
 
 test("Evelina is a published wedding-only catalog template", () => {
   const template = templateById("evelina");
@@ -33,7 +71,8 @@ test("the adapted frame retains source artwork, videos, and local font files", (
     "assets/previews/template/evelina/location.png",
     "assets/fonts/BIKHAM.TTF",
     "assets/fonts/standart.otf",
-  ]) assert.ok(existsSync(path.join(pub, file)), `${file} is packaged`);
+  ])
+    assert.ok(existsSync(path.join(pub, file)), `${file} is packaged`);
   assert.match(html, /id="coverScreen"/);
   assert.match(html, /id="introVideo"/);
   assert.match(html, /id="heroSection"/);
@@ -48,10 +87,19 @@ test("frame is localized and uses contract-backed fields and APIs", () => {
   const html = read(pub, "index.html");
   const script = read(pub, "assets/js/evelina.js");
   const adapter = read("apps/web/src/templates/invitate", "renderer.tsx");
-  for (const selector of ["data-field=\"names\"", "data-field=\"date\"", "data-field=\"venueName\"", "data-field=\"address\"", "data-field=\"dressHeading\"", "id=\"programItems\"", "id=\"rsvpForm\""]) {
+  for (const selector of [
+    'data-field="names"',
+    'data-field="date"',
+    'data-field="venueName"',
+    'data-field="address"',
+    'data-field="dressHeading"',
+    'id="programItems"',
+    'id="rsvpForm"',
+  ]) {
     assert.ok(html.includes(selector), `${selector} is bound in source markup`);
   }
-  for (const locale of ['uz: {', '"uz-Cyrl": {', 'en: {', 'ru: {']) assert.ok(script.includes(locale));
+  for (const locale of ["uz: {", '"uz-Cyrl": {', "en: {", "ru: {"])
+    assert.ok(script.includes(locale));
   assert.match(script, /\/rsvp/);
   assert.match(script, /\/wishes/);
   assert.match(script, /guestToken/);
@@ -59,18 +107,42 @@ test("frame is localized and uses contract-backed fields and APIs", () => {
   assert.match(html, /id="toyonaSection"/);
   assert.match(html, /id="toyonaCardFront"/);
   assert.match(html, /id="toyonaCardBack" aria-hidden="true"/);
-  assert.match(script, /giftSection.hidden=\!\(gift.enabled&&gift.cardNumber\)/);
+  assert.match(
+    script,
+    /giftSection.hidden=\!\(gift.enabled&&gift.cardNumber\)/,
+  );
   assert.match(script, /navigator.clipboard.writeText\(number\)/);
   assert.match(script, /card\?\.classList\.toggle\("is-revealed",revealed\)/);
-  for (const text of ["Рақамни нусхалаш", "Reveal transfer details", "Показать данные для перевода"]) assert.ok(script.includes(text));
+  for (const text of [
+    "Рақамни нусхалаш",
+    "Reveal transfer details",
+    "Показать данные для перевода",
+  ])
+    assert.ok(script.includes(text));
   assert.match(adapter, /makeLegacyData/);
   assert.match(adapter, /\$\{templateId\}:update/);
   assert.match(adapter, /catalogMusic/);
-  assert.doesNotMatch(html + script, /Davron|Sabina|12\.12\.2026|Yakkasaroy|send\.php|stats\.tolipov|Ordinary\.mp3|afina\/000/);
+  assert.match(
+    adapter,
+    /templates\/evelina\/assets\/previews\/template\/evelina\/hero\.png/,
+  );
+  assert.match(adapter, /catalogPreview: preview && sampleWishes/);
+  assert.match(script, /catalog-preview/);
+  assert.match(
+    read(pub, "assets/css/evelina.css"),
+    /oval-wrap:has\(\.oval img\[src=""\]\)/,
+  );
+  assert.doesNotMatch(
+    html + script,
+    /Davron|Sabina|12\.12\.2026|Yakkasaroy|send\.php|stats\.tolipov|Ordinary\.mp3|afina\/000/,
+  );
 });
 
 test("Cyrillic lookalike glyphs keep Evelina calligraphy while accessible text stays correct", () => {
-  const script = read("apps/web/public/templates/evelina/assets/js", "evelina.js");
+  const script = read(
+    "apps/web/public/templates/evelina/assets/js",
+    "evelina.js",
+  );
   assert.match(script, /"Ҳ":"Х","ҳ":"х","Қ":"К","қ":"к"/);
   assert.match(script, /node\.setAttribute\("aria-label",text\)/);
   assert.match(script, /visual\.setAttribute\("aria-hidden","true"\)/);
@@ -87,19 +159,37 @@ test("all supported sample locales flow through the shared preview fixture", () 
     assert.equal(sample.program.length, 6);
   }
   assert.ok(sample.gallery.every((item) => item.url === ""));
-  assert.match(read("apps/web/src/modules/catalog", "full-template-preview.tsx"), /InvitateInvitation/);
-  assert.match(read("apps/web/src/app/i/[slug]", "page.tsx"), /InvitateInvitation/);
+  assert.match(
+    read("apps/web/src/modules/catalog", "full-template-preview.tsx"),
+    /InvitateInvitation/,
+  );
+  assert.match(
+    read("apps/web/src/app/i/[slug]", "page.tsx"),
+    /InvitateInvitation/,
+  );
 });
 
 test("additive Evelina migration registers the approved category and event type", () => {
-  const migration = read("packages/database/migrations", "0077_add_evelina_template.sql");
-  assert.match(migration, /VALUES \('evelina', 'Evelina', 15000000, 'UZS', false\)/);
+  const migration = read(
+    "packages/database/migrations",
+    "0077_add_evelina_template.sql",
+  );
+  assert.match(
+    migration,
+    /VALUES \('evelina', 'Evelina', 15000000, 'UZS', false\)/,
+  );
   assert.match(migration, /'evelina', 'wedding'/);
   assert.match(migration, /ON CONFLICT/);
 });
 
 test("additive Evelina publication migration enables catalog selection", () => {
-  const migration = read("packages/database/migrations", "0078_publish_evelina.sql");
-  assert.match(migration, /VALUES \('evelina', 'Evelina', 15000000, 'UZS', true\)/);
+  const migration = read(
+    "packages/database/migrations",
+    "0078_publish_evelina.sql",
+  );
+  assert.match(
+    migration,
+    /VALUES \('evelina', 'Evelina', 15000000, 'UZS', true\)/,
+  );
   assert.match(migration, /published = true/);
 });

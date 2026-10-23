@@ -20,42 +20,4 @@
         updateCountdown();
         setInterval(updateCountdown, 1000);
 
-        /* ---------- RSVP ---------- */
-        const rsvpName = document.getElementById('rsvpName');
-        const rsvpYes = document.getElementById('rsvpYes');
-        const rsvpNo = document.getElementById('rsvpNo');
-        const rsvpError = document.getElementById('rsvpError');
-        const rsvpForm = document.getElementById('rsvpForm');
-        const rsvpSent = document.getElementById('rsvpSent');
-        const rsvpGuestName = document.getElementById('rsvpGuestName');
-        const rsvpMsgYes = document.getElementById('rsvpMsgYes');
-        const rsvpMsgNo = document.getElementById('rsvpMsgNo');
-
-        [rsvpName, rsvpYes, rsvpNo].forEach(el => {
-            el.addEventListener('input', () => rsvpError.style.display = 'none');
-            el.addEventListener('change', () => rsvpError.style.display = 'none');
-        });
-
-        document.getElementById('rsvpSubmit').addEventListener('click', () => {
-            const name = rsvpName.value.trim();
-            const answer = rsvpYes.checked ? 'yes' : (rsvpNo.checked ? 'no' : '');
-            if (!name || !answer) {
-                rsvpError.style.display = 'block';
-                return;
-            }
-            rsvpGuestName.textContent = name;
-            rsvpMsgYes.style.display = answer === 'yes' ? 'block' : 'none';
-            rsvpMsgNo.style.display = answer === 'no' ? 'block' : 'none';
-            rsvpForm.style.display = 'none';
-            rsvpSent.style.display = 'block';
-        });
-
-        document.getElementById('rsvpReset').addEventListener('click', () => {
-            rsvpName.value = '';
-            rsvpYes.checked = false;
-            rsvpNo.checked = false;
-            document.getElementById('rsvpWish').value = '';
-            rsvpError.style.display = 'none';
-            rsvpSent.style.display = 'none';
-            rsvpForm.style.display = 'flex';
-        });
+        // RSVP and wishes are bound by aurelia-adapter.js to the platform APIs.

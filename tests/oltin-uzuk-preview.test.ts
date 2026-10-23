@@ -1,7 +1,8 @@
 import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
 import test from "node:test";
-import { createInvitation } from "@taklifnoma/contracts";
+import { createInvitation, templateById } from "@taklifnoma/contracts";
 import {
   createTemplatePreviewSample,
   getTemplatePreviewWishes,
@@ -68,6 +69,57 @@ test("Oltin Uzuk retains its captured opening and invitation sections", () => {
   assert.match(html, /data-list="wishes"/);
   assert.match(html, /data-list="contacts"/);
   assert.match(html, /href="contract-adapter\.css"/);
+});
+
+test("Oltin Uzuk catalog cover captures the clean source opening with pinned provenance", () => {
+  const provenance = JSON.parse(
+    readFileSync(new URL("preview.provenance.json", root), "utf8"),
+  ) as {
+    artifact: { path: string; sha256: string };
+    fixture: { path: string; sha256: string; names: string[] };
+    renderer: { route: string; locale: string; excludedUi: string[] };
+    sourceCapture: { path: string; files: Record<string, string> };
+    viewport: { width: number; height: number; deviceScaleFactor: number };
+  };
+  const digest = (bytes: Buffer) =>
+    createHash("sha256").update(bytes).digest("hex");
+  const cover = readFileSync(new URL(provenance.artifact.path, root));
+  const fixture = readFileSync(
+    new URL(`../../../../../${provenance.fixture.path}`, root),
+  );
+
+  assert.equal(
+    templateById("oltin-uzuk")?.previewImage,
+    "/templates/oltin-uzuk/catalog-cover-opening.png",
+  );
+  assert.equal(provenance.artifact.path, "catalog-cover-opening.png");
+  assert.equal(digest(cover), provenance.artifact.sha256);
+  assert.equal(cover.toString("ascii", 1, 4), "PNG");
+  assert.equal(cover.readUInt32BE(16), 450);
+  assert.equal(cover.readUInt32BE(20), 800);
+  assert.deepEqual(provenance.viewport, {
+    width: 450,
+    height: 800,
+    deviceScaleFactor: 1,
+  });
+  assert.deepEqual(provenance.fixture.names, ["Javohir", "Madina"]);
+  assert.equal(digest(fixture), provenance.fixture.sha256);
+  assert.equal(provenance.renderer.route, "/preview?template=oltin-uzuk&qaSilent=1");
+  assert.equal(provenance.renderer.locale, "uz-Latn");
+  assert.deepEqual(provenance.renderer.excludedUi, [
+    "Next.js development portal (outer preview page)",
+    "Locale selector .mh-lang (renderer iframe)",
+  ]);
+  assert.equal(
+    provenance.sourceCapture.path,
+    "Invitations - this folder will be removed from production/Marxaba/Nikoh/templates/oltin-uzuk",
+  );
+
+  const captured = readFileSync(new URL("index.html", captureRoot));
+  assert.match(captured.toString("utf8"), /class="intro__copy"/);
+  for (const [file, expectedHash] of Object.entries(provenance.sourceCapture.files)) {
+    assert.equal(digest(readFileSync(new URL(file, captureRoot))), expectedHash, `${file} source hash`);
+  }
 });
 
 test("empty Lahzalar photos stay icon-only and shared controls wrap smoothly", () => {
