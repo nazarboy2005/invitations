@@ -6,7 +6,7 @@ The runnable package keeps the archived Chorlove Lace page capture and captured 
 
 - The cover retains the captured Bellagio poster and opening video. The poster fades after video time passes 0.05 seconds; the hero background video begins when the opening has less than 1.8 seconds remaining; hero names fade in 0.8 seconds after the hero begins; the cover fades with a 2-second ease-in-out transition once less than 1 second remains, then is removed.
 - Source section wrappers reveal once at 15% visibility with a `0px 0px -60px 0px` viewport margin. Their source motion is opacity 0 / y 40px to opacity 1 / y 0 over 0.9 seconds with cubic-bezier `(.22, 1, .36, 1)` and a zero-second delay (the source helper default).
-- Source program rows reveal once at 40% visibility over 0.6 seconds, with a 0.05-second stagger.
+- Source program rows reveal once at 40% visibility over 0.6 seconds, with the source runtime's default `ease-out` easing and a 0.05-second stagger.
 - Captured inline SVG animations and source artwork remain in the captured page. The package bridge maps the same source motion to the isolated static page without bringing in Chorlove's app or Framer runtime.
 
 ## Platform adapter

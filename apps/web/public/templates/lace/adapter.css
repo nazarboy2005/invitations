@@ -4,7 +4,7 @@ html,body{width:100%;min-height:100%;margin:0;background:#fbf8f5}
 [data-lace-opening]{transition:opacity 2s ease-in-out;will-change:opacity}
 [data-lace-reveal]{opacity:0;transform:translateY(40px);transition:opacity .9s cubic-bezier(.22,1,.36,1),transform .9s cubic-bezier(.22,1,.36,1)}
 [data-lace-reveal].lace-revealed{opacity:1;transform:translateY(0)}
-[data-lace-program-row]{opacity:0;transform:translateY(20px);transition:opacity .6s cubic-bezier(.25,.1,.25,1),transform .6s cubic-bezier(.25,.1,.25,1);transition-delay:var(--lace-motion-delay,0s)}
+[data-lace-program-row]{opacity:0;transform:translateY(20px);transition:opacity .6s ease-out,transform .6s ease-out;transition-delay:var(--lace-motion-delay,0s)}
 [data-lace-program-row].lace-revealed{opacity:1;transform:translateY(0)}
 .lace-languages{position:fixed;z-index:120;top:.75rem;right:max(.75rem,calc((100vw - 480px)/2 + .75rem));display:flex;gap:.2rem;padding:.25rem;border:1px solid #633f4d55;border-radius:999px;background:#fbf8f5e8;box-shadow:0 4px 16px #3e213022;backdrop-filter:blur(10px)}
 .lace-languages button{min-width:2.25rem;min-height:2.25rem;border:0;border-radius:999px;background:transparent;color:#3e2130;font:600 .7rem/1 Jost,sans-serif;cursor:pointer}

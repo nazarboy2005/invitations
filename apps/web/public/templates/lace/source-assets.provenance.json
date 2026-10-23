@@ -381,7 +381,7 @@
     "bytes": 55432,
     "sha256": "f8f02fc84097ac74933c62abdbf3f3ef676621bdc450f0686ac106fea836ed69",
     "sourceOpening": "The invitation video cross-fades over its poster; poster removal follows the first video time update after 0.05s. The hero background starts when video time remaining is below 1.8s, its names fade in after 0.8s, and the cover begins a 2s ease-in-out fade when 1s remains. The cover is removed after that opacity transition completes.",
-    "sourceReveals": "Section wrappers use initial opacity 0 and y 40px, once at 15% visibility with a -60px bottom viewport margin, 0.9s cubic-bezier(.22,1,.36,1). Program rows use initial y 20px, once at 40% visibility, 0.6s with 0.05s stagger.",
+    "sourceReveals": "Section wrappers use initial opacity 0 and y 40px, once at 15% visibility with a -60px bottom viewport margin, 0.9s cubic-bezier(.22,1,.36,1). Program rows use initial y 20px, once at 40% visibility, 0.6s ease-out with 0.05s stagger (the Chorlove motion runtime default).",
     "adaptation": "The source page module depends on the Chorlove React/Framer Motion runtime. These exact template-level timings and thresholds are adapted in the isolated bridge and CSS; captured page markup, CSS, assets, and SVG motion remain unchanged. Reduced motion opens immediately, reveals the hero, pauses video/SVG motion, and removes transitions."
   },
   "notes": [

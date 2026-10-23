@@ -5,9 +5,13 @@ import test from "node:test";
 
 const sourceRoot = "Invitations - this folder will be removed from production/Chorlove/Web invitations";
 const packageRoot = "apps/web/public/templates/lace";
+const provenance = JSON.parse(readFileSync(`${packageRoot}/source-assets.provenance.json`, "utf8")) as {
+  copiedDesignAssets: Array<{ archiveFile: string; file: string; sha256: string }>;
+};
 const sha256 = (bytes: Buffer) => createHash("sha256").update(bytes).digest("hex");
 const moduleBytes = readFileSync(`${sourceRoot}/_next/static/chunks/0j~ix342hy.sg.js`);
 const sourceModule = moduleBytes.toString("utf8");
+const motionRuntime = readFileSync(`${sourceRoot}/_next/static/chunks/0ceoe4zwq362f.js`, "utf8");
 const sourceCapture = readFileSync(`${sourceRoot}/templates/lace/preview-frame.html`);
 const packedCapture = readFileSync(`${packageRoot}/source/preview-frame.html`);
 const bridge = readFileSync(`${packageRoot}/bridge.js`, "utf8");
@@ -24,6 +28,8 @@ test("Lace package mirrors source opening and reveal choreography", () => {
   assert.match(sourceModule, /duration:\.9,ease:\[\.22,1,\.36,1\]/);
   assert.match(sourceModule, /amount:\.4/);
   assert.match(sourceModule, /duration:\.6,delay:\.05\*l/);
+  assert.match(motionRuntime, /e\.ease\?\?\(e\.ease="easeOut"\)/);
+  assert.match(motionRuntime, /easeOut:"ease-out"/);
   assert.match(sourceModule, /duration:2,ease:"easeInOut"/);
   assert.match(bridge, /video\.currentTime>0\.05/);
   assert.match(bridge, /remaining<1\.8/);
@@ -32,7 +38,7 @@ test("Lace package mirrors source opening and reveal choreography", () => {
   assert.match(bridge, /threshold: 0\.4/);
   assert.match(bridge, /threshold: 0\.15, rootMargin: "0px 0px -60px 0px"/);
   assert.match(css, /opacity \.9s cubic-bezier\(\.22,1,\.36,1\)/);
-  assert.match(css, /transition:opacity \.6s cubic-bezier\(\.25,\.1,\.25,1\)/);
+  assert.match(css, /transition:opacity \.6s ease-out,transform \.6s ease-out/);
   assert.match(css, /\[data-lace-opening\]\{transition:opacity 2s ease-in-out/);
 });
 
@@ -43,5 +49,14 @@ test("catalog cover is the original portrait opening poster", () => {
   const laceRecord = contracts.match(/id: "lace",[\s\S]{0,700}?\n  },/);
   assert.ok(laceRecord, "Lace remains registered in the typed catalog");
   assert.match(laceRecord[0], /previewImage: "\/templates\/lace\/assets\/bellagio-2-poster\.jpg"/);
+});
+
+test("every archive-sourced design asset is byte-identical to its captured original", () => {
+  for (const asset of provenance.copiedDesignAssets) {
+    const original = readFileSync(`${sourceRoot}/${asset.archiveFile}`);
+    const packaged = readFileSync(`${packageRoot}/${asset.file}`);
+    assert.equal(sha256(original), asset.sha256, `${asset.archiveFile} source hash`);
+    assert.deepEqual(packaged, original, `${asset.file} differs from the captured asset`);
+  }
 });
 
