@@ -79,6 +79,23 @@
         190
       ]
     },
+  "scrollReveals": {
+    "sourceDeclarationCount": 12,
+    "sourceViewportOnce": false,
+    "profiles": {
+      "heroLogo": "opacity 0/y -24/scale .9 to opacity .95/y 0/scale 1; threshold .5; 750ms easeOut",
+      "heroGreeting": "opacity 0/y 24 to opacity 1/y 0; threshold .5; 750ms with 80ms delay easeOut",
+      "heroNames": "opacity 0/y 38/scale .92 to opacity 1/y 0/scale 1; threshold .35; 900ms with 140ms delay easeOut",
+      "scheduleRows": "opacity 0/scale .86/y 10 to opacity 1/scale 1/y 0; threshold .2; 450ms with 90ms per row cubic-bezier(.22,1,.36,1)",
+      "galleryItems": "opacity 0/scale .86/y 10 to opacity 1/scale 1/y 0; threshold .2; 450ms with source delays .06/.14/.22/.30/.38 seconds",
+      "galleryHeading": "opacity 0/y 24 to opacity 1/y 0; threshold .2; 750ms easeOut",
+      "giftContent": "opacity 0/scale .88/y 10 to opacity 1/scale 1/y 0; threshold .5; 1000ms",
+      "contactLinks": "opacity 0/y 18/scale .96 to opacity 1/y 0/scale 1; threshold .3; 550ms with 120ms initial delay and 100ms per link",
+      "generalContent": "opacity 0/scale .88/y 10 to opacity 1/scale 1/y 0; threshold .5; 480ms cubic-bezier(.22,1,.36,1)",
+      "decorativeDividers": "opacity 0/y 20 to opacity 1/y 0; threshold .2; 750ms easeOut",
+      "guestbook": "opacity 0/scale .88/y 10 to opacity 1/scale 1/y 0; threshold .5; 480ms; heading/form/list stagger follows source .08/.14s spacing"
+    }
+  },
     "giftDecorations": {
       "qasr_green.webp": [
         6,

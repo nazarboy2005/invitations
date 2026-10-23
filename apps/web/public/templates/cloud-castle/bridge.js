@@ -387,25 +387,68 @@
     }
   }
 
+  function sourceRevealProfile(element) {
+    const transform = (element.dataset.ccInitialTransform || "").replace(/\s+/g, "").toLowerCase();
+    const section = element.closest("[data-chorlove-gallery], [data-chorlove-wishes], [data-chorlove-rsvp], [data-chorlove-gift], [data-landing-screenshot-id]");
+    if (/translatey\(18px\)scale\(0\.96\)/.test(transform)) {
+      const links = [...(element.parentElement?.querySelectorAll("a") || [])];
+      return { duration: 0.55, threshold: 0.3, delay: 0.12 + 0.1 * Math.max(0, links.indexOf(element)), easing: "ease-out" };
+    }
+    if (/translatey\(20px\)/.test(transform)) return { duration: 0.75, threshold: 0.2, delay: 0, easing: "ease-out" };
+    if (/scale\(0\.86\)/.test(transform)) {
+      const field = element.matches('[data-chorlove-field^="program"]') ? element : element.querySelector('[data-chorlove-field^="program"]');
+      const programIndex = Number(field?.dataset.chorloveField?.match(/^program(\d+)/)?.[1]);
+      if (field && Number.isFinite(programIndex)) return { duration: 0.45, threshold: 0.2, delay: 0.09 * Math.max(0, programIndex - 1), easing: "cubic-bezier(.22,1,.36,1)" };
+      const galleryItem = element.matches("[data-chorlove-gallery-item]") ? element : element.querySelector("[data-chorlove-gallery-item]");
+      if (galleryItem) {
+        const items = [...root.querySelectorAll("[data-chorlove-gallery-item]")];
+        return { duration: 0.45, threshold: 0.2, delay: [0.06, 0.14, 0.22, 0.3, 0.38][Math.max(0, items.indexOf(galleryItem))] || 0, easing: "cubic-bezier(.22,1,.36,1)" };
+      }
+      return { duration: 0.45, threshold: 0.2, delay: 0, easing: "cubic-bezier(.22,1,.36,1)" };
+    }
+    if (/translatey\(24px\)/.test(transform)) return { duration: 0.75, threshold: 0.2, delay: 0, easing: "ease-out" };
+    if (/scale\(0\.88\)/.test(transform) && element.closest("[data-chorlove-gift]")) {
+      return { duration: 1, threshold: 0.5, delay: 0, easing: "cubic-bezier(.22,1,.36,1)" };
+    }
+    if (element.closest("[data-cc-contact-group]")) {
+      if (element.querySelector('[data-chorlove-i18n="contactsTitle"]')) return { duration: 0.48, threshold: 0.5, delay: 0.08, easing: "cubic-bezier(.22,1,.36,1)" };
+      if (element.querySelector('[data-chorlove-i18n="footerNote"]')) return { duration: 0.48, threshold: 0.5, delay: 0.1, easing: "cubic-bezier(.22,1,.36,1)" };
+      if (element.classList.contains("py-4")) return { duration: 0.48, threshold: 0.5, delay: 0.12, easing: "cubic-bezier(.22,1,.36,1)" };
+      return { duration: 0.48, threshold: 0.5, delay: 0, easing: "cubic-bezier(.22,1,.36,1)" };
+    }
+    if (element.closest("[data-chorlove-wishes]")) {
+      const revealNodes = [...element.closest("[data-chorlove-wishes]").querySelectorAll('[style*="opacity:0"], [style*="opacity: 0"]')];
+      const index = revealNodes.indexOf(element);
+      return { duration: 0.48, threshold: 0.5, delay: index === 0 ? 0 : index === 1 ? 0.08 : 0.14 + Math.max(0, index - 2) * 0.08, easing: "cubic-bezier(.22,1,.36,1)" };
+    }
+    if (section?.getAttribute("data-landing-screenshot-id") === "invite-map") return { duration: 0.48, threshold: 0.5, delay: 0, easing: "cubic-bezier(.22,1,.36,1)" };
+    if ((element.matches('img[src$="/hoa-ngang.webp"]') || element.querySelector('img[src$="/hoa-ngang.webp"]')) && element.classList.contains("py-2")) {
+      return { duration: 0.48, threshold: 0.2, delay: 0.18, easing: "cubic-bezier(.22,1,.36,1)" };
+    }
+    if (element.querySelector("[data-chorlove-gallery-item]")) return { duration: 0.48, threshold: 0.2, delay: 0.18, easing: "cubic-bezier(.22,1,.36,1)" };
+    if (element.closest("[data-chorlove-gift]")) return { duration: 1, threshold: 0.5, delay: 0, easing: "cubic-bezier(.22,1,.36,1)" };
+    return { duration: 0.48, threshold: 0.5, delay: 0, easing: "cubic-bezier(.22,1,.36,1)" };
+  }
+
   function restoreCapturedMotion() {
     const reduce = sourceReducedMotion();
     document.documentElement.classList.toggle("cc-reduced-motion", reduce);
     if (!sourcePageOpened || sourceRevealBound) return;
     sourceRevealBound = true;
     const hero = root.querySelector("[data-cloud-castle-hero]");
-    let sequence = 0;
+    root.querySelector('img[src$="/chim.webp"]')?.closest(".relative.flex.flex-col.items-center.overflow-hidden")?.setAttribute("data-cc-contact-group", "");
     const observer = new IntersectionObserver((entries) => {
       for (const entry of entries) {
         const element = entry.target;
         if (reduce) { element.style.opacity = ""; element.style.transform = ""; continue; }
-        if (entry.isIntersecting) {
+        const profile = sourceRevealProfile(element);
+        if (entry.isIntersecting && entry.intersectionRatio >= profile.threshold) {
           const initialTransform = element.dataset.ccInitialTransform || "translateY(10px)";
           const initialOpacity = Number(element.dataset.ccInitialOpacity || 0);
-          const delay = Number(element.dataset.ccRevealDelay || Math.min(sequence++ * 30, 360));
-          element.animate([{ opacity: initialOpacity, transform: initialTransform }, { opacity: 1, transform: "none" }], { duration: 480, delay, easing: "cubic-bezier(.22,1,.36,1)", fill: "both" });
+          element.animate([{ opacity: initialOpacity, transform: initialTransform }, { opacity: 1, transform: "none" }], { duration: profile.duration * 1000, delay: profile.delay * 1000, easing: profile.easing, fill: "both" });
         } else element.getAnimations().forEach((animation) => animation.cancel());
       }
-    }, { threshold: 0.16 });
+    }, { threshold: [0.2, 0.3, 0.5] });
     root.querySelectorAll('[style*="opacity:0"], [style*="opacity: 0"]').forEach((element) => {
       if (hero?.contains(element)) return;
       element.dataset.ccInitialTransform = element.style.transform || "translateY(10px)";
