@@ -85,6 +85,49 @@
     ],
     "platformAdaptation": "Reduced motion skips the opening and loops and clears source hidden states; reveal timing retains the source choreography for normal motion."
   },
+  "catalogArtwork": {
+    "file": "preview-opening.png",
+    "bytes": 199652,
+    "sha256": "965dde52046783c3d4abfee90a6b3f91104ce63a8bcd1b7f92a7e8986596f2b5",
+    "width": 430,
+    "height": 573,
+    "format": "PNG",
+    "captureMethod": "Headless Chromium capture of an ephemeral fixture built from the archived Green White server-rendered HTML, its original compiled CSS, and original source images at a 430x573 portrait viewport.",
+    "fixtureOnlyChanges": [
+      "removed Next.js streaming and site runtime scripts and the server's unrelated suspense shell",
+      "removed the animated curtain overlay to capture the fully opened first invitation page as a static catalog cover",
+      "mapped optimized image URLs to the exact archived original image files and local font URLs to exact archived font files",
+      "replaced archived sample couple names with neutral fixture names",
+      "resolved source animation initial states to their visible destination for the static capture and hid the floating music control"
+    ],
+    "sourceFiles": [
+      {
+        "archiveFile": "Chorlove/Web invitations/templates/green-white/preview-frame.html",
+        "sha256": "6cf2ae9fa22c28a85391ceff427a553079cd2d58e61fb85cec8b0bf09af9ac7d"
+      },
+      {
+        "archiveFile": "Chorlove/Web invitations/_next/static/chunks/0.u3j0~_2ygfx.css",
+        "sha256": "12141a5ec71f317d0e27589c92869d213b339f86451ee2a75b4612c5f1e05991"
+      },
+      {
+        "archiveFile": "Chorlove/Web invitations/_next/static/chunks/00sc_9lpb3zcn.css",
+        "sha256": "9295d64fad91822e7e7ab0d110764ac973d5414829a5bf40bb69e99531762910"
+      },
+      {
+        "archiveFile": "Chorlove/Web invitations/_next/static/chunks/0ly1y_qxlqlf..css",
+        "sha256": "3fcd5d40feb11ed6c2f58cfcf069d01f27a1bbf95a51b75d9c9e02c63e3d3f81"
+      },
+      {
+        "archiveFile": "Chorlove/Web invitations/_next/static/chunks/054~-i6~6lmrd.css",
+        "sha256": "13599ddc9e6faa903f0966c4adeec12e47ecaa6382056e2cb71bdc68b93bd3fa"
+      },
+      {
+        "archiveFile": "Chorlove/Web invitations/images/green-white/header-pic.webp",
+        "sha256": "398f4f26dddc088a5f43f115331e668de88a3d461c87c3c9df0d4db22a0b6f7a"
+      }
+    ],
+    "registryPreviewImage": "/templates/green-white/preview-opening.png"
+  },
   "excludedSnapshotAssets": [
     "images/templates/orchid-amplop/gallery-1.webp",
     "images/templates/orchid-amplop/gallery-2.webp",

@@ -108,6 +108,29 @@ test("Green White motion follows the archived source page module", async () => {
   assert.doesNotMatch(bridge, /intro\?\.remove\(\)/);
 });
 
+test("Green White catalog cover is a source-rendered portrait with recorded provenance", async () => {
+  const manifest = JSON.parse(await readFile(new URL("source-assets.provenance.json", root), "utf8"));
+  const cover = manifest.catalogArtwork;
+  assert.ok(cover);
+  assert.equal(cover.file, "preview-opening.png");
+  assert.equal(cover.registryPreviewImage, "/templates/green-white/preview-opening.png");
+  const bytes = await readFile(new URL(cover.file, root));
+  assert.equal(bytes.length, cover.bytes);
+  assert.equal(createHash("sha256").update(bytes).digest("hex"), cover.sha256);
+  assert.deepEqual(bytes.subarray(0, 8), Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]));
+  assert.equal(bytes.readUInt32BE(16), 430);
+  assert.equal(bytes.readUInt32BE(20), 573);
+  assert.equal(cover.format, "PNG");
+  assert.equal(cover.sourceFiles.length, 6);
+  assert.ok(cover.fixtureOnlyChanges.some((change: string) => change.includes("fully opened first invitation page")));
+  assert.ok(cover.fixtureOnlyChanges.some((change: string) => change.includes("replaced archived sample couple names")));
+  for (const source of cover.sourceFiles) {
+    const archiveFile = source.archiveFile.replace(/^Chorlove\/Web invitations\//, "");
+    const original = await readFile(new URL(archiveFile, archive));
+    assert.equal(createHash("sha256").update(original).digest("hex"), source.sha256, archiveFile);
+  }
+});
+
 test("Green White built-in controls are localized in all four supported locales", async () => {
   const bridge = await readFile(new URL("bridge.js", root), "utf8");
   const match = bridge.match(/const copy = (\{[\s\S]*?\n  \});/);
