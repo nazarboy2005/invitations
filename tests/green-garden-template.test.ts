@@ -66,7 +66,10 @@ test("Green Garden app page excludes reference sample content and runtime", asyn
   assert.match(html, /data-gg-program-item/);
   assert.match(html, /assets\/welcome\.webp/);
   assert.match(html, /assets\/cake\.webp/);
-  assert.equal((html.match(/src="\/images\/green-garden\/leaf1-bloom\.webp"/g) || []).length, 2);
+  assert.equal((html.match(/src="\/images\/green-garden\/leaf1-bloom\.webp"/g) || []).length, 5);
+  assert.match(html, /top-\[calc\(-2%\+330px\)\].*src="\/images\/green-garden\/leaf1-bloom\.webp"/);
+  assert.match(html, /top-\[1180px\].*src="\/images\/green-garden\/leaf1-bloom\.webp"/);
+  assert.match(html, /top-\[3420px\].*src="\/images\/green-garden\/leaf1-bloom\.webp"/);
   assert.match(html, /data-gg-field="groom"/);
   assert.match(html, /data-gg-field="bride"/);
   assert.match(html, /bridge\.js/);
@@ -109,7 +112,9 @@ test("Green Garden local asset references resolve within its package", async () 
 test("Green Garden restores available source motion and schedule assets", async () => {
   const bridge = await readFile(new URL("bridge.js", root), "utf8");
   const html = await readFile(new URL("index.html", root), "utf8");
+  const css = await readFile(new URL("adapter.css", root), "utf8");
   const manifest = JSON.parse(await readFile(new URL("source-assets.provenance.json", root), "utf8"));
+  assert.ok(css.includes('[data-gg-root] img:not([class~="max-w-none"]){max-width:100%}'));
   assert.match(bridge, /easing="ease-out"/);
   assert.match(bridge, /reveal\(names\[0\].*?\.7,\.4\)/);
   assert.match(bridge, /reveal\(names\[1\].*?\.7,\.55\)/);
@@ -124,13 +129,25 @@ test("Green Garden restores available source motion and schedule assets", async 
   assert.match(html, /data-gg-program-icon[^>]+assets\/cake\.webp/);
   assert.deepEqual(
     manifest.assets
-      .filter((asset: { file: string }) => ["assets/welcome.webp", "assets/cake.webp"].includes(asset.file))
+      .filter((asset: { file: string }) => ["assets/welcome.webp", "assets/cake.webp", "assets/dish.webp"].includes(asset.file))
       .map((asset: { file: string }) => asset.file)
       .sort(),
-    ["assets/cake.webp", "assets/welcome.webp"],
+    ["assets/cake.webp", "assets/dish.webp", "assets/welcome.webp"],
   );
+  for (const file of ["assets/welcome.webp", "assets/cake.webp", "assets/dish.webp"]) {
+    const source = manifest.sourceArchiveAudit.remoteOnlyAssets.find((asset: { file: string }) => asset.file === file);
+    const packaged = manifest.assets.find((asset: { file: string }) => asset.file === file);
+    assert.deepEqual({ bytes: source?.bytes, sha256: source?.sha256 }, { bytes: packaged?.bytes, sha256: packaged?.sha256 });
+  }
   assert.equal(manifest.sourceReferencedMissingAsset.file, "/images/green-garden/leaf1-bloom.webp");
   assert.equal(manifest.sourceReferencedMissingAsset.liveHttpStatus, 404);
+  assert.equal(manifest.sourceReferencedMissingAsset.packageResolution.referenceCount, 5);
+  assert.equal(manifest.sourceReferencedMissingAsset.packageResolution.resolvedPublicPathExists, false);
+  assert.equal(manifest.sourceReferencedMissingAsset.packageResolution.templateAssetExists, false);
+  assert.equal(
+    manifest.sourceArchiveAudit.remoteOnlyAssets.find((asset: { file: string }) => asset.file === "assets/dish.webp")?.sha256,
+    "f230b71e33f045610bf268e5c6aee5f65caedd2823d0dd0597fa67e7a491a4e3",
+  );
 });
 
 test("Green Garden packaged artwork matches the full local source image folder", async () => {

@@ -3,7 +3,7 @@
 @font-face{font-family:"The Nautigal";src:url("/templates/green-garden/assets/fonts/TheNautigal-Regular.ttf") format("truetype");font-weight:400;font-style:normal;font-display:swap}
 html,body{margin:0;min-height:100%;background:#eef3e8;font-family:"Cormorant Garamond",serif}
 [data-gg-root]{isolation:isolate;overflow-x:clip}
-[data-gg-root] img{max-width:100%}
+[data-gg-root] img:not([class~="max-w-none"]){max-width:100%}
 [data-gg-language-picker]{position:fixed;z-index:120;top:12px;right:12px;display:flex;gap:4px;padding:5px;border:1px solid rgba(71,97,62,.36);border-radius:999px;background:rgba(255,255,255,.84);backdrop-filter:blur(10px)}
 [data-gg-language-picker] button{border:0;border-radius:999px;background:transparent;color:#35452f;padding:6px 8px;font:600 12px/1 "Cormorant Garamond",serif;cursor:pointer}
 [data-gg-language-picker] button[aria-pressed=true]{background:#47613e;color:white}

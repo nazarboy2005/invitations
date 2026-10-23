@@ -119,7 +119,32 @@
     "file": "/images/green-garden/leaf1-bloom.webp",
     "archiveResult": "Absent from the complete archived Chorlove/provider tree. Exact-name search found only the visually different Glass Pink leaf artwork.",
     "liveHttpStatus": 404,
-    "result": "Unrecoverable from the provided source archive and current source URL; kept documented without substitution."
+    "packageResolution": {
+      "markupFile": "index.html",
+      "referenceCount": 5,
+      "placements": [
+        {
+          "region": "hero",
+          "count": 2
+        },
+        {
+          "region": "long-page floral ornaments",
+          "count": 3
+        }
+      ],
+      "resolvedPublicPath": "apps/web/public/images/green-garden/leaf1-bloom.webp",
+      "resolvedPublicPathExists": false,
+      "templateAssetPath": "apps/web/public/templates/green-garden/assets/leaf1-bloom.webp",
+      "templateAssetExists": false,
+      "renderedResult": "All five original references remain in the adapted markup, but the local URL returns 404 and no image is rendered. The package has no substitute or fallback.",
+      "unrelatedSameNameAsset": {
+        "file": "apps/web/public/templates/glass-pink/assets/leaf1-bloom.webp",
+        "bytes": 311360,
+        "sha256": "435c4b9a37ad765fb6b40b0333ba49518155e9839254d910a20fa5830a49db57",
+        "provenance": "Glass Pink artwork; visually different and not used by Green Garden."
+      }
+    },
+    "result": "Unrecoverable from the provided source archive and current source URL. The two source references remain broken; no replacement is packaged."
   },
   "integrationStatus": "published-through-0095_publish_green_garden.sql; configured-catalog-and-authenticated-integration-verified",
   "sourceArchiveAudit": {
@@ -130,12 +155,23 @@
       {
         "file": "assets/welcome.webp",
         "sourceUrl": "https://chorlove.uz/images/green-garden/welcome.webp",
-        "httpStatus": 200
+        "httpStatus": 200,
+        "bytes": 293264,
+        "sha256": "bc395c178bc83e79492106686a3aa134118fd53d5b98727d0683936a29a38608"
       },
       {
         "file": "assets/cake.webp",
         "sourceUrl": "https://chorlove.uz/images/green-garden/cake.webp",
-        "httpStatus": 200
+        "httpStatus": 200,
+        "bytes": 178308,
+        "sha256": "539a8e04ab73c6ef3b3ca3fe23fd1d9375f299a2d12d918434ae0a147120e300"
+      },
+      {
+        "file": "assets/dish.webp",
+        "sourceUrl": "https://chorlove.uz/images/green-garden/dish.webp",
+        "httpStatus": 200,
+        "bytes": 223172,
+        "sha256": "f230b71e33f045610bf268e5c6aee5f65caedd2823d0dd0597fa67e7a491a4e3"
       }
     ]
   }
