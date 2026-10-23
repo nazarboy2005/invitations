@@ -27,11 +27,10 @@ capture. Reference captures remain untouched.
   adapters provide localization, platform wiring, and contract mapping. Two
   animation sprite assets were absent from the local capture archives and were
   retrieved from the exact manifest-declared URLs, then verified by SHA-256,
-  MIME type, and dimensions. This supports the packaged animation but is not a
-  byte comparison against an archived copy. Confirmed cover mismatch: the
-  current image shows the later post-gate garden scene; the captured opening is
-  a closed layered gate with greeting and tap prompt. A separate cover repair
-  task is already tracking this finding.
+  MIME type, and dimensions. The later canonical-URL check below verified both
+  against the source site. The initial cover comparison treated the closed-gate
+  runtime opening as the only valid catalog image; the source's official
+  garden-scene preview is verified below and supersedes that finding.
 
 ## Preview and verification
 
@@ -46,7 +45,7 @@ database, publication, deployment, or payment state changed.
 
 ## Repair follow-up (2026-10-23)
 
-Bog‘i Eram's source-parity chat confirmed the capture manifest lacks the two dove sprite entries and no exact aliases exist in any local provider tree. `template.js` does use those sheets, so they represent captured source effects, but the packaged bytes remain unverified against the original. The cover chat confirmed the preview still shows the post-opening garden; the permitted browser surface can display the true closed-gate intro but cannot save an isolated iframe image into the workspace. No substitute art was created. Keep both sprite provenance and the catalog opening cover explicitly unresolved; the exact source behavior/art must not be called fully verified. Focused source-parity checks previously passed 6/6.
+The initial repair follow-up considered the omitted sprite files and catalog cover unresolved. The official source-asset follow-up below supersedes both conclusions with canonical URL and SHA-256 evidence.
 
 ## Official source-asset follow-up (2026-10-23)
 
