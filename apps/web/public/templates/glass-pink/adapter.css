@@ -46,8 +46,6 @@
 .cc-source-petal { position: absolute; z-index: 1; top: -30px; pointer-events: none; will-change: transform, opacity; }
 [data-gp-source-hero] [style*="opacity:0"] { opacity: 0; }
 [data-gp-source-hero] img[style*="opacity:0"] { transition: none; }
-[data-chorlove-reveal] { animation: cc-source-reveal 760ms cubic-bezier(.2,.7,.2,1) both; }
-@keyframes cc-source-reveal { from { opacity: 0; transform: var(--cc-from-transform,translateY(10px)); } to { opacity: 1; transform: none; } }
 [data-chorlove-calendar-cell][data-event-day="true"] [data-chorlove-calendar-number] { display: grid; place-items: center; width: 26px; height: 24px; border-radius: 999px; color: #fff !important; background: rgb(203 93 108); }
 @media (max-width: 420px) { .cc-language-picker { top: 8px; right: 8px; } .cc-music-toggle { right: 12px; bottom: 12px; } }
 @media (prefers-reduced-motion: reduce) { *,*::before,*::after { scroll-behavior: auto !important; animation: none !important; transition-duration: .01ms !important; } }

@@ -11,6 +11,7 @@ const htmlPath = resolve(root, "apps/web/public/templates/glass-pink/index.html"
 const html = readFileSync(htmlPath, "utf8");
 const bridge = readFileSync(resolve(root, "apps/web/public/templates/glass-pink/bridge.js"), "utf8");
 const adapter = readFileSync(resolve(root, "apps/web/public/templates/glass-pink/source-adapter.js"), "utf8");
+const adapterCss = readFileSync(resolve(root, "apps/web/public/templates/glass-pink/adapter.css"), "utf8");
 const previewPath = resolve(root, "apps/web/public/templates/glass-pink/catalog-cover-opening.png");
 const provenancePath = resolve(root, "apps/web/public/templates/glass-pink/source/provenance.json");
 const sourceSnapshotPath = resolve(root, "apps/web/public/templates/glass-pink/source/preserved-preview-frame.html");
@@ -179,6 +180,34 @@ test("Glass Pink restores source carousel and floating To'yona ornament motion",
   assert.match(bridge, /"saraya_gold\.webp", -6, -22, -18, 3\.2, 0/);
   assert.match(bridge, /"porcelain_blue\.webp", -6, -10, -6, 3\.5, 700/);
   assert.doesNotMatch(adapter, /function display\(index\)/);
+});
+
+test("Glass Pink section reveals retain the source transforms, delays, durations, and viewport thresholds", () => {
+  const sourceModule = readFileSync(resolve(root, "Invitations - this folder will be removed from production/Chorlove/Web invitations/_next/static/chunks/0wvjbn--75n3p.js"), "utf8");
+  assert.match(sourceModule, /initial:\{opacity:0,y:20\},whileInView:\{opacity:1,y:0\},viewport:\{amount:\.3\}/);
+  assert.match(sourceModule, /initial:\{opacity:0,scale:\.8\},whileInView:\{opacity:\.9,scale:1\},viewport:\{amount:\.3\},transition:\{duration:\.6,delay:\.15\}/);
+  assert.match(sourceModule, /initial:\{opacity:0,x:-20\},whileInView:\{opacity:1,x:0\},viewport:\{amount:\.5\},transition:\{duration:\.5,delay:\.08\*r\}/);
+  assert.match(sourceModule, /initial:\{scale:0\},whileInView:\{scale:1\},viewport:\{amount:\.5\},transition:\{duration:\.4,delay:\.08\*r\}/);
+  assert.match(sourceModule, /initial:\{opacity:0,y:15\},whileInView:\{opacity:1,y:0\},viewport:\{amount:\.2\},transition:\{duration:\.4,delay:\.05\*a\}/);
+  assert.match(sourceModule, /viewport:\{amount:\.2\},transition:\{duration:\.5,delay:\.1\*a\}/);
+  assert.match(sourceModule, /transition:\{duration:\.7,delay:\.18\}/);
+  assert.match(sourceModule, /transition:\{duration:\.7,delay:\.28\}/);
+  assert.match(sourceModule, /transition:\{duration:\.7,delay:\.44\}/);
+  assert.match(sourceModule, /transition:\{duration:\.7,delay:\.22\}/);
+  assert.match(sourceModule, /transition:\{duration:\.7,delay:\.3\}/);
+  assert.match(sourceModule, /transition:\{duration:\.7,delay:\.12\}/);
+  assert.match(bridge, /const introTimings = \[\s*\[600, 0\], \[600, 100\], \[700, 180\]/);
+  assert.match(bridge, /\[600, 0\], \[600, 100\], \[700, 180\], \[700, 280\], \[600, 360\], \[700, 440\]/);
+  assert.match(bridge, /\[600, 0\], \[600, 100\], \[600, 160\], \[700, 220\], \[700, 300\]/);
+  assert.match(bridge, /duration: 500, delay: index \* 80, amount: 0\.5/);
+  assert.match(bridge, /duration: 400, delay: index \* 80, amount: 0\.5/);
+  assert.match(bridge, /duration: 500, delay: index \* 100, amount: 0\.3/);
+  assert.match(bridge, /duration: 400, delay: index \* 50, amount: 0\.2/);
+  assert.match(bridge, /duration: 500, delay: index \* 100, amount: 0\.2/);
+  assert.match(bridge, /rounded-3xl border border-white\/40 bg-white\/30 p-4 md:p-5 backdrop-blur-md/);
+  assert.match(bridge, /text-xs md:text-sm text-\[rgb\(147,56,69\)\]\/75 italic/);
+  assert.match(bridge, /rounded-2xl border border-white\/40 bg-white\/30 p-4 md:p-5 backdrop-blur-md/);
+  assert.doesNotMatch(adapterCss, /760ms cubic-bezier|cc-source-reveal/);
 });
 
 test("Glass Pink has no missing packaged image requests", () => {

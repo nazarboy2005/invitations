@@ -12,6 +12,8 @@ The source capture is server-rendered HTML, and the Chorlove archive also contai
 
 Local source-art audit (2026-10-23): Chorlove's capture manifest maps the Glass Pink preview-frame HTML and 15 Glass Pink image files, all original floral/decorative components. All 22 packaged artwork/font files compared against the archive have exact byte matches. The archived compiled page module supplies the original opener and animation behavior; the source snapshot supplies the first-page artwork. The preserved page's JSON-LD references `https://payment.chorlove.uz/media-assets/dfe335c1-c1d0-4b69-9ed8-998d277ac34f/file`, but that media URL has no local manifest entry or captured file. The local `01/02/03-chorlove-preview-frame.png` artifacts are full-page screenshots with different compositions; the catalog uses the portrait source opening capture rather than those full-page images.
 
+Provider-wide follow-up: all available provider capture manifests, capture titles/slugs, and text references were searched for Glass Pink; the only matching page is Chorlove's `templates/glass-pink/preview-frame.html`. A SHA-256 scan of the full non-production archive confirms every packaged image/font has a byte-identical Chorlove source. Three ornaments are intentionally reused in other Chorlove templates; no Glass Pink page or artwork was found under a different provider.
+
 The Chorlove manifest maps all six captured Glass Pink gallery slots to Orchid Amplop photos; these cross-template sample images remain excluded. The shared preview fixture's six gallery entries are empty and preview-only. The contract adapter passes through creator-uploaded photo URLs, and the public renderer hides the gallery when no creator photos or story chapters exist. No own-source Glass Pink gallery photographs were found; the package's original floral and decorative assets remain visible in the template opening.
 
 ## Source-motion repair (2026-10-23)
@@ -27,3 +29,23 @@ Fresh local-browser checks after the repair show the normal opener fading and mo
 The archived route module renders the photo gallery as a perspective carousel. The adapter now uses the captured wraparound offsets, 55% horizontal spacing capped at 120%, -140px depth steps, 35-degree Y rotations, 0.15 scale steps (minimum 0.65), source opacity levels (1, 0.75, 0.45, then hidden), and depth-based z-order. Previous/next controls, page dots, active-card selection, the fullscreen counter/arrows, and the source 200ms image entrance/exit are wired to creator-uploaded photos. Cards are generated for every supplied photo; empty gallery entries do not reveal the section. The second script no longer installs a competing single-image carousel handler.
 
 The source To’yona card floats seven decorative image assets with their original vertical and rotation keyframes, durations, delays, and ease-in-out loops. Those loops now run only while the feature is enabled and are cancelled for reduced-motion users. The gift box’s captured hover scale remains in its original markup and CSS. No Orchid Amplop gallery sample photos are included.
+
+## Source section reveal repair (2026-10-23)
+
+The first source-fidelity pass had applied one 760 ms vertical reveal at a
+0.08 viewport threshold to every initially transparent node. That erased the
+compiled route module's per-component transforms, delays, durations, and
+viewport amounts, and it did not return `whileInView` content to its initial
+state when it left the viewport. The adapter now maps those reveals to the
+captured route module's original choreography and repeats the transitions on
+leave/re-entry: the introduction's ten staggered blocks; gallery heading;
+countdown and calendar cards; venue content; schedule headings, three icons,
+and each time/marker/title row; gift heading/card; wish cards; and contact
+cards. In particular, the program rows retain horizontal motion for times and
+titles, the marker scales from zero, and each row uses its source `0.08 * row`
+delay and `0.5` visibility threshold. Reduced motion clears the hidden start
+states and leaves each node at its final visible state. Contact cards now use
+the captured source card container and card styling, and wish cards use the
+source's rounded, translucent card styling. The focused package checks pass;
+local browser visual verification is still pending, so no new rendered-parity
+claim is made here.

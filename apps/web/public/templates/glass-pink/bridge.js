@@ -197,6 +197,12 @@
     },
   };
   const locales = ["uz-Latn", "uz-Cyrl", "en", "ru"];
+  const contactNotes = {
+    "uz-Latn": { phone: "Savollaringiz bo‘lsa, qo‘ng‘iroq qiling", telegram: "Tezkor javob uchun yozing", instagram: "Suratlarimizni kuzatib boring" },
+    "uz-Cyrl": { phone: "Саволларингиз бўлса, қўнғироқ қилинг", telegram: "Тезкор жавоб учун ёзинг", instagram: "Суратларимиздан хабардор бўлиб боринг" },
+    en: { phone: "Call us for any questions", telegram: "Message us for a quick response", instagram: "Follow along for photos" },
+    ru: { phone: "Позвоните нам, если у вас есть вопросы", telegram: "Напишите нам для быстрого ответа", instagram: "Следите за нашими фотографиями" },
+  };
   const root = document.querySelector('[data-chorlove-template="glass-pink"]');
   if (!root) return;
 
@@ -204,28 +210,153 @@
   let countdownTimer = 0;
   let galleryIndex = 0;
   const giftAnimations = new WeakMap();
+  const revealSpecs = new WeakMap();
+  const revealObserved = new WeakSet();
+  const revealVisibility = new WeakMap();
+  const revealAnimations = new Map();
+  const revealObservers = new Map();
   const text = (node, value) => { if (node) node.textContent = value == null ? "" : String(value); };
   const hide = (node, hidden) => { if (node) node.hidden = Boolean(hidden); };
 
   function restoreCapturedMotion() {
-    const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches || new URLSearchParams(location.search).get("qaReducedMotion") === "1";
-    let sequence = 0;
-    const observer = new IntersectionObserver((entries) => {
-      for (const entry of entries) {
-        if (!entry.isIntersecting) continue;
-        const element = entry.target;
-        observer.unobserve(element);
-        if (reduce) { element.style.opacity = ""; element.style.transform = ""; }
-        else {
-          element.style.setProperty("--cc-from-transform", element.style.transform || "translateY(10px)");
-          element.style.opacity = "";
-          element.style.transform = "";
-          element.style.animationDelay = `${Math.min(sequence++ * 30, 360)}ms`;
-          element.dataset.chorloveReveal = "";
-        }
+    const reduce = Boolean(state?.reducedMotion) || matchMedia("(prefers-reduced-motion: reduce)").matches || new URLSearchParams(location.search).get("qaReducedMotion") === "1";
+    const setSpec = (element, spec) => {
+      if (!element) return;
+      const previous = revealSpecs.get(element);
+      revealSpecs.set(element, {
+        fromOpacity: spec.fromOpacity ?? previous?.fromOpacity ?? (element.style.opacity === "" ? 0 : Number.parseFloat(element.style.opacity) || 0),
+        fromTransform: spec.fromTransform || previous?.fromTransform || element.style.transform || "translateY(20px)",
+        ...spec,
+      });
+    };
+    const sourceOpener = root.querySelector("section");
+    if (sourceOpener) sourceOpener.dataset.gpSourceHero = "";
+
+    // The archived page gives each invitation-introduction text block its own source delay.
+    const introSection = root.querySelector('[data-chorlove-field="eventLabel"]')?.closest("section");
+    const introContent = introSection?.querySelector(".relative.z-10.flex.flex-col.items-center.text-center");
+    const introTimings = [
+      [600, 0], [600, 100], [700, 180], [500, 260], [700, 320],
+      [600, 420], [500, 500], [700, 580], [500, 660], [600, 740],
+    ];
+    const introReveals = [...(introContent?.children || [])].filter((element) => element.style.opacity === "0");
+    introReveals.forEach((element, index) => {
+      const [duration, delay] = introTimings[index] || [600, Math.min(index * 80, 740)];
+      setSpec(element, { duration, delay, amount: 0.3, toOpacity: 1, toTransform: "translateY(0px)" });
+    });
+
+    setSpec(root.querySelector('[data-chorlove-i18n="storyTitle"]'), { duration: 600, delay: 0, amount: 0.3, toOpacity: 1, toTransform: "translateY(0px)" });
+    const hiddenTargets = (section) => [...(section?.querySelectorAll("[style]") || [])].filter((element) => element.style.opacity === "0");
+    const setOrdered = (elements, timings, amount = 0.25) => elements.forEach((element, index) => {
+      const [duration, delay] = timings[index] || timings.at(-1) || [300, 0];
+      setSpec(element, { duration, delay, amount, toOpacity: 1, toTransform: "translateY(0px)" });
+    });
+
+    const calendarSection = root.querySelector("[data-chorlove-calendar]");
+    const countdownCards = [...root.querySelectorAll('[style*="translateY(16px)"]')]
+      .filter((element) => String(element.className).includes("min-w-[64px]"));
+    setOrdered(
+      hiddenTargets(calendarSection).filter((element) => !countdownCards.includes(element)),
+      [[600, 0], [600, 100], [700, 180], [700, 280], [600, 360], [700, 440]],
+    );
+
+    const venueSection = root.querySelector('[data-chorlove-i18n="venueTitle"]')?.closest("section");
+    setOrdered(hiddenTargets(venueSection), [[600, 0], [600, 100], [600, 160], [700, 220], [700, 300]]);
+    const programSection = root.querySelector("[data-chorlove-program]")?.closest("section");
+    setSpec(programSection?.querySelector('[data-chorlove-i18n="programTitle"]'), { duration: 600, delay: 0, amount: 0.25, toOpacity: 1, toTransform: "translateY(0px)" });
+    setSpec(programSection?.querySelector('[data-chorlove-field="programHeading"]'), { duration: 600, delay: 100, amount: 0.25, toOpacity: 1, toTransform: "translateY(0px)" });
+
+    const wishesSection = root.querySelector("[data-chorlove-wishes]");
+    setSpec(wishesSection?.querySelector('[data-chorlove-i18n="wishesTitle"]'), { duration: 600, delay: 0, amount: 0.25, toOpacity: 1, toTransform: "translateY(0px)" });
+    setSpec(wishesSection?.querySelector("form"), { duration: 700, delay: 180, amount: 0.25, toOpacity: 1, toTransform: "translateY(0px)" });
+
+    const giftSection = root.querySelector("[data-chorlove-gift]");
+    setSpec(giftSection?.querySelector('[data-chorlove-i18n="giftTitle"]'), { duration: 600, delay: 0, amount: 0.25, toOpacity: 1, toTransform: "translateY(0px)" });
+    setOrdered(hiddenTargets(giftSection).filter((element) => element !== giftSection.querySelector('[data-chorlove-i18n="giftTitle"]')), [[700, 120]]);
+
+    const contactsSection = root.querySelector("[data-chorlove-contacts]");
+    setSpec(contactsSection?.querySelector('[data-chorlove-i18n="contactsTitle"]'), { duration: 600, delay: 0, amount: 0.25, toOpacity: 1, toTransform: "translateY(0px)" });
+    setSpec(contactsSection?.querySelector("p"), { duration: 600, delay: 100, amount: 0.25, toOpacity: 1, toTransform: "translateY(0px)" });
+
+    // Countdown cards, calendar icons, and schedule rows have distinct source choreography.
+    countdownCards.forEach((element, index) => setSpec(element, { duration: 500, delay: index * 100, amount: 0.3, toOpacity: 1, toTransform: "translateY(0px)" }));
+
+    const scheduleIcons = [...root.querySelectorAll('img[src$="/coming.webp"], img[src$="/cake.webp"], img[src$="/water.webp"]')];
+    scheduleIcons.forEach((element, index) => setSpec(element, { duration: 600, delay: [0, 150, 300][index] || 0, amount: 0.3, toOpacity: 0.9, toTransform: "scale(1)" }));
+
+    root.querySelectorAll("[data-glass-program-row]").forEach((row, index) => {
+      setSpec(row.querySelector("[data-glass-program-time]"), { duration: 500, delay: index * 80, amount: 0.5, toOpacity: 1, toTransform: "translateX(0px)" });
+      setSpec(row.querySelector("[data-glass-program-title]"), { duration: 500, delay: index * 80, amount: 0.5, toOpacity: 1, toTransform: "translateX(0px)" });
+      const marker = row.querySelector(".relative.block.h-3.w-3.rounded-full");
+      if (marker?.style.transform.includes("scale(0)")) {
+        marker.dataset.gpSourceProgramMarker = "";
+        setSpec(marker, { duration: 400, delay: index * 80, amount: 0.5, fromOpacity: 1, fromTransform: "scale(0)", toOpacity: 1, toTransform: "scale(1)" });
       }
-    }, { threshold: 0.08 });
-    root.querySelectorAll('[style*="opacity:0"], [style*="opacity: 0"]').forEach((element) => { if (!element.closest("[data-gp-source-hero]")) observer.observe(element); });
+    });
+
+    root.querySelectorAll("[data-gp-source-wish-card]").forEach((element, index) => setSpec(element, { duration: 400, delay: index * 50, amount: 0.2, toOpacity: 1, toTransform: "translateY(0px)" }));
+    root.querySelectorAll("[data-gp-source-contact]").forEach((element, index) => setSpec(element, { duration: 500, delay: index * 100, amount: 0.2, toOpacity: 1, toTransform: "translateY(0px)" }));
+
+    const candidates = [...new Set([
+      ...[...root.querySelectorAll("[style]")].filter((element) => element.style.opacity === "0"),
+      ...root.querySelectorAll("[data-gp-source-program-marker]"),
+      ...revealAnimations.keys(),
+    ])];
+    const applyReducedMotion = (element, spec) => {
+      revealAnimations.get(element)?.cancel();
+      revealAnimations.delete(element);
+      element.style.opacity = spec.toOpacity === 1 ? "" : String(spec.toOpacity);
+      element.style.transform = spec.toTransform === "none" ? "" : spec.toTransform;
+      revealVisibility.set(element, true);
+      revealObserved.add(element);
+    };
+    if (reduce || typeof IntersectionObserver === "undefined") {
+      for (const element of candidates) {
+        if (element.closest("[data-gp-source-hero]") && !revealSpecs.has(element)) continue;
+        const spec = revealSpecs.get(element) || { toOpacity: 1, toTransform: "none" };
+        applyReducedMotion(element, spec);
+      }
+      for (const observer of revealObservers.values()) observer.disconnect();
+      revealObservers.clear();
+      return;
+    }
+
+    for (const element of candidates) {
+      if (element.closest("[data-gp-source-hero]") && !revealSpecs.has(element)) continue;
+      if (revealObserved.has(element)) continue;
+      const spec = revealSpecs.get(element) || { duration: 300, delay: 0, amount: 0.25, fromOpacity: 0, fromTransform: element.style.transform || "translateY(20px)", toOpacity: 1, toTransform: "none" };
+      if (!revealSpecs.has(element)) setSpec(element, spec);
+      if (!revealObservers.has(spec.amount)) {
+        const observer = new IntersectionObserver((entries) => {
+          for (const entry of entries) {
+            const target = entry.target;
+            const visible = entry.isIntersecting;
+            const wasVisible = revealVisibility.get(target) === true;
+            if (visible === wasVisible) continue;
+            revealVisibility.set(target, visible);
+            const motion = revealSpecs.get(target) || { duration: 300, delay: 0, amount: 0.25, toOpacity: 1, toTransform: "none" };
+            if (matchMedia("(prefers-reduced-motion: reduce)").matches || state?.reducedMotion) { applyReducedMotion(target, motion); continue; }
+            const fromTransform = motion.fromTransform || target.style.transform || "translateY(20px)";
+            const toTransform = motion.toTransform !== undefined ? motion.toTransform : fromTransform.replace(/translateY\([^)]*\)/, "translateY(0px)").replace(/translateX\([^)]*\)/, "translateX(0px)").replace(/scale\([^)]*\)/, "scale(1)");
+            const fromOpacity = motion.fromOpacity ?? (target.style.opacity === "" ? 0 : Number.parseFloat(target.style.opacity) || 0);
+            target.style.opacity = "";
+            target.style.transform = "";
+            revealAnimations.get(target)?.cancel();
+            const animation = target.animate(
+              visible
+                ? [{ opacity: fromOpacity, transform: fromTransform }, { opacity: motion.toOpacity ?? 1, transform: toTransform }]
+                : [{ opacity: motion.toOpacity ?? 1, transform: toTransform }, { opacity: fromOpacity, transform: fromTransform }],
+              { duration: motion.duration ?? 300, delay: motion.delay ?? 0, easing: motion.easing || "ease-out", fill: "both" },
+            );
+            revealAnimations.set(target, animation);
+          }
+        }, { threshold: spec.amount });
+        revealObservers.set(spec.amount, observer);
+      }
+      revealObserved.add(element);
+      revealObservers.get(spec.amount).observe(element);
+    }
+
   }
 
   let openingBound = false;
@@ -697,19 +828,47 @@
   function renderContacts(data) {
     const section = root.querySelector("[data-chorlove-contacts]");
     if (!section) return;
-    section.querySelectorAll(".cc-extra-links").forEach((node) => node.remove());
     const contacts = data.contacts || [];
     hide(section, contacts.length === 0);
-    if (!contacts.length) return;
-    const links = document.createElement("div");
-    links.className = "cc-extra-links";
-    for (const contact of contacts) {
+    const links = section.querySelector('[class*="max-w-[432px]"][class*="gap-3.5"]') || document.createElement("div");
+    links.className = "mt-6 w-full max-w-[432px] md:max-w-[600px] flex flex-col gap-3.5";
+    links.replaceChildren();
+    const appendIcon = (host, type, arrow = false) => {
+      const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+      svg.setAttribute("viewBox", "0 0 24 24"); svg.setAttribute("width", arrow ? "18" : "20"); svg.setAttribute("height", arrow ? "18" : "20");
+      svg.setAttribute("fill", "none"); svg.setAttribute("stroke", "currentColor"); svg.setAttribute("stroke-width", "1.5"); svg.setAttribute("stroke-linecap", "round"); svg.setAttribute("stroke-linejoin", "round");
+      if (arrow) {
+        const path = document.createElementNS(svg.namespaceURI, "path"); path.setAttribute("d", "M7 17 17 7M7 7h10v10"); svg.append(path);
+      } else if (type === "phone") {
+        const path = document.createElementNS(svg.namespaceURI, "path"); path.setAttribute("d", "M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.2 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.33 1.78.63 2.63a2 2 0 0 1-.45 2.11L8 9.77a16 16 0 0 0 6 6l1.31-1.29a2 2 0 0 1 2.11-.45c.85.3 1.73.51 2.63.63A2 2 0 0 1 22 16.92Z"); svg.append(path);
+      } else if (type === "instagram") {
+        const body = document.createElementNS(svg.namespaceURI, "path"); body.setAttribute("d", "M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3z"); svg.append(body);
+        const lens = document.createElementNS(svg.namespaceURI, "circle"); lens.setAttribute("cx", "12"); lens.setAttribute("cy", "13"); lens.setAttribute("r", "3"); svg.append(lens);
+      } else {
+        const path = document.createElementNS(svg.namespaceURI, "path"); path.setAttribute("d", "m22 2-7 20-4-9-9-4Z"); svg.append(path);
+        const line = document.createElementNS(svg.namespaceURI, "path"); line.setAttribute("d", "M22 2 11 13"); svg.append(line);
+      }
+      host.append(svg);
+    };
+    for (const [index, contact] of contacts.entries()) {
       const a = document.createElement("a");
       a.href = contact.href;
-      a.textContent = `${contact.label}: ${contact.value}`;
+      if (/^https?:/i.test(contact.href || "")) { a.target = "_blank"; a.rel = "noreferrer"; }
+      a.className = "group flex items-center gap-4 md:gap-5 rounded-3xl border border-white/40 bg-white/30 p-4 md:p-5 backdrop-blur-md shadow-sm transition-all hover:border-[rgb(203,93,108)]/50 text-left";
+      a.style.opacity = "0"; a.style.transform = "translateY(20px)"; a.dataset.gpSourceContact = String(index);
+      const icon = document.createElement("span");
+      icon.className = "flex h-11 w-11 md:h-12 md:w-12 shrink-0 items-center justify-center rounded-2xl bg-white/60 text-[rgb(203,93,108)] transition-colors group-hover:bg-[rgb(203,93,108)] group-hover:text-white shadow-sm";
+      appendIcon(icon, contact.type);
+      const details = document.createElement("div"); details.className = "min-w-0 flex-1";
+      const label = document.createElement("p"); label.className = "tracking-[0.2em] uppercase text-[10px] md:text-xs text-[rgb(203,93,108)] font-semibold"; label.style.fontFamily = '"Cormorant Garamond", serif'; text(label, contact.label);
+      const value = document.createElement("p"); value.className = "mt-0.5 truncate text-sm md:text-base font-bold text-[rgb(147,56,69)]"; value.style.fontFamily = '"Cormorant Garamond", serif'; text(value, contact.value);
+      const note = document.createElement("p"); note.className = "mt-0.5 truncate text-xs md:text-sm text-[rgb(147,56,69)]/75 italic"; note.style.fontFamily = '"Cormorant Garamond", serif'; text(note, contactNotes[state?.locale]?.[contact.type] || contactNotes.en[contact.type] || "");
+      details.append(label, value, note);
+      const arrow = document.createElement("span"); arrow.className = "shrink-0 text-[rgb(203,93,108)]/70 transition-transform group-hover:text-[rgb(203,93,108)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5"; appendIcon(arrow, contact.type, true);
+      a.append(icon, details, arrow);
       links.append(a);
     }
-    section.append(links);
+    if (!links.isConnected) section.querySelector(":scope > div")?.append(links);
   }
 
   async function renderWishes(data) {
@@ -734,9 +893,10 @@
           .then((body) => body.wishes || [])
           .catch(() => []);
     list.replaceChildren();
-    for (const wish of wishes) {
+    for (const [index, wish] of wishes.entries()) {
       const card = document.createElement("article");
-      card.className = "rounded-xl border p-4 text-sm shadow-sm";
+      card.className = "rounded-2xl border border-white/40 bg-white/30 p-4 md:p-5 backdrop-blur-md text-left shadow-sm transition-all hover:scale-[1.01]";
+      card.style.opacity = "0"; card.style.transform = "translateY(15px)"; card.dataset.gpSourceWishCard = String(index);
       const name = document.createElement("strong");
       name.textContent = wish.name;
       const message = document.createElement("p");
@@ -744,6 +904,7 @@
       card.append(name, message);
       list.append(card);
     }
+    restoreCapturedMotion();
     if (form) {
       const submit = form.querySelector('button[type="submit"]');
       if (submit) text(submit, localCopy().sendWish);
