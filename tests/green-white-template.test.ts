@@ -72,6 +72,12 @@ test("Green White runtime is isolated and maps the captured sections to the shar
   assert.match(bridge, /prefers-reduced-motion/);
   assert.match(bridge, /Math\.min\(Number\(payload\.data\.rsvp\?\.maxPartySize\) \|\| 1, 100\)/);
   assert.match(bridge, /\$\{id\}:language/);
+  assert.match(bridge, /button\.onclick = \(\) => \{ const active = gallery\.filter\(\(photo\) => photo\.src\); showLightbox\(active, active\.indexOf\(item\), c\); \};/);
+  assert.match(bridge, /dialog\.className = "gw-lightbox"/);
+  assert.match(bridge, /previous\.onclick = \(\) => \{ index = \(index - 1 \+ items\.length\) % items\.length; show\(\); \};/);
+  assert.match(bridge, /next\.onclick = \(\) => \{ index = \(index \+ 1\) % items\.length; show\(\); \};/);
+  assert.match(bridge, /close\.onclick = \(\) => dialog\.close\(\)/);
+  assert.match(bridge, /button\.onclick = \(\) => parent\.postMessage\(\{ type: `\$\{id\}:language`, locale \}, location\.origin\)/);
   assert.match(bridge, /\$\{id\}:update/);
   const publicRoot = new URL("../apps/web/public/", import.meta.url);
   const dependencies = [...html.matchAll(/(?:src|href)="(\/templates\/[^"#]+)"/g)].map((match) => match[1]);
@@ -103,6 +109,8 @@ test("Green White motion follows the archived source page module", async () => {
   assert.match(bridge, /duration = 3600 \+ \(index % 7\) \* 550/);
   assert.match(bridge, /threshold: 0\.35/);
   assert.match(bridge, /duration: 950, easing: "cubic-bezier\(\.22,1,\.36,1\)"/);
+  assert.match(bridge, /new Date\(Date\.UTC\(year, month - 1, 1\)\)\.getUTCDay\(\)/);
+  assert.doesNotMatch(bridge, /Date\.UTC\(year, month - 1, 1\)\.getUTCDay\(\)/);
   assert.match(styles, /\.gw-source-opening[\s\S]*background: #2d321b/);
   assert.match(bridge, /prefers-reduced-motion/);
   assert.doesNotMatch(bridge, /intro\?\.remove\(\)/);

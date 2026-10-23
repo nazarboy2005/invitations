@@ -336,7 +336,7 @@
     const grid = grids[1];
     const month = Number(date.monthNumber), year = Number(date.year), day = Number(date.day);
     if (grid && month >= 1 && month <= 12 && year) {
-      const offset = (new Date(Date.UTC(year, month - 1, 1).getUTCDay() + 6)) % 7;
+      const offset = (new Date(Date.UTC(year, month - 1, 1)).getUTCDay() + 6) % 7;
       const count = new Date(Date.UTC(year, month, 0)).getUTCDate();
       grid.replaceChildren(...Array.from({ length: Math.ceil((offset + count) / 7) * 7 }, (_, i) => {
         const cell = document.createElement("span");
