@@ -23,17 +23,34 @@
 
   function revealContent(reduced) {
     const intro = query('.fixed.inset-0.z-50[role="button"]');
-    for (const node of all('[style*="opacity:0"], [style*="opacity: 0"], [style*="translateY("]')) {
-      if (intro?.contains(node)) continue;
+    const programRows = new Set(all(".space-y-10 > *", sections[4]));
+    for (const [index, node] of [...programRows].entries()) {
       const styles = (node.getAttribute("style") || "").split(";").filter(Boolean);
-      const keep = styles.filter((item) => !/^\s*opacity\s*:\s*0(?:\.0+)?\s*$/i.test(item) && !/^\s*transform\s*:\s*translateY\(/i.test(item));
+      const keep = styles.filter((item) => !/^\s*opacity\s*:\s*0(?:\.0+)?\s*$/i.test(item) && !/^\s*transform\s*:\s*translateY\(\s*20px\s*\)\s*$/i.test(item));
+      if (keep.length) node.setAttribute("style", keep.join(";")); else node.removeAttribute("style");
+      node.dataset.laceProgramRow = "";
+      node.style.setProperty("--lace-motion-delay", `${index * 0.05}s`);
+    }
+    for (const node of all('[style*="opacity:0"], [style*="opacity: 0"], [style*="translateY("]')) {
+      if (intro?.contains(node) || node === sections[0]?.querySelector(".lace-hero-copy") || programRows.has(node)) continue;
+      const styles = (node.getAttribute("style") || "").split(";").filter(Boolean);
+      const keep = styles.filter((item) => !/^\s*opacity\s*:\s*0(?:\.0+)?\s*$/i.test(item) && !/^\s*transform\s*:\s*translateY\(\s*(?:20|40)px\s*\)\s*$/i.test(item));
       if (keep.length) node.setAttribute("style", keep.join(";")); else node.removeAttribute("style");
       node.dataset.laceReveal = "";
     }
-    const nodes = all("[data-lace-reveal]");
-    if (reduced || !("IntersectionObserver" in window)) { nodes.forEach((n) => n.classList.add("lace-revealed")); return; }
-    const observer = new IntersectionObserver((entries) => entries.forEach((entry) => { if (entry.isIntersecting) { entry.target.classList.add("lace-revealed"); observer.unobserve(entry.target); } }), { root, threshold: 0.08 });
-    nodes.forEach((n) => observer.observe(n));
+    const reveal = (nodes) => {
+      if (reduced || !("IntersectionObserver" in window)) { nodes.forEach((node) => node.classList.add("lace-revealed")); return; }
+      const observer = new IntersectionObserver((entries) => entries.forEach((entry) => {
+        if (entry.isIntersecting) { entry.target.classList.add("lace-revealed"); observer.unobserve(entry.target); }
+      }), nodes[0]?.matches("[data-lace-program-row]") ? { threshold: 0.4 } : { threshold: 0.15, rootMargin: "0px 0px -60px 0px" });
+      nodes.forEach((node) => observer.observe(node));
+    };
+    reveal(all("[data-lace-reveal]"));
+    reveal(all("[data-lace-program-row]"));
+    if (reduced) {
+      all("svg").forEach((svg) => { try { svg.setCurrentTime?.(0); svg.pauseAnimations?.(); } catch {} });
+      all("video").forEach((video) => { video.pause(); try { video.currentTime = 0; } catch {} });
+    }
   }
 
   function render(p) {
@@ -209,15 +226,49 @@
     const intro=query('.fixed.inset-0.z-50[role="button"]');if(!intro)return;
     const label=intro.querySelector("p"),video=intro.querySelector("video"),poster=intro.querySelector("img"),audio=query("audio");
     put(label,p.locale==="en"?"Tap to open":p.locale==="ru"?"Нажмите, чтобы открыть":p.locale==="uz-Cyrl"?"Очиш учун босинг":"Ochish uchun bosing");
-    let opened=false;
-    const finish=()=>{if(opened)return;opened=true;intro.style.opacity="0";intro.style.pointerEvents="none";root.scrollTo({top:0,behavior:p.reducedMotion?"auto":"smooth"});setTimeout(()=>intro.remove(),p.reducedMotion?0:750);};
+    intro.dataset.laceOpening = "";
+    const reduced = Boolean(p.reducedMotion) || matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const hero = sections[0];
+    const heroVideo = hero?.querySelector("video");
+    const heroCopy = hero?.querySelector("div.opacity-0");
+    if (heroCopy) heroCopy.classList.add("lace-hero-copy");
+    let opened=false, fading=false, heroStarted=false;
+    const startHero=()=>{
+      if(heroStarted)return;heroStarted=true;
+      if(heroVideo){
+        if(reduced){heroVideo.pause();try{heroVideo.currentTime=0;}catch{}}
+        else heroVideo.play().catch(()=>{});
+      }
+      if(heroCopy){
+        const show=()=>{heroCopy.classList.remove("opacity-0");heroCopy.classList.add("opacity-100");};
+        if(reduced)show();else window.setTimeout(show,800);
+      }
+    };
+    const fadeIntro=()=>{
+      if(fading)return;fading=true;intro.style.pointerEvents="none";intro.style.opacity="0";
+      if(reduced){intro.remove();return;}
+      const remove=()=>intro.remove();
+      intro.addEventListener("transitionend",(event)=>{if(event.target===intro&&event.propertyName==="opacity")remove();});
+      window.setTimeout(remove,2100);
+    };
+    const onTimeUpdate=()=>{
+      if(!video)return;
+      if(video.currentTime>0.05&&poster)poster.style.opacity="0";
+      if(!Number.isFinite(video.duration)||video.duration<=0)return;
+      const remaining=video.duration-video.currentTime;
+      if(remaining<1.8)startHero();
+      if(remaining<1)fadeIntro();
+    };
     const open=async()=>{
       if(opened)return;
-      if(p.reducedMotion||matchMedia("(prefers-reduced-motion: reduce)").matches||!video){finish();return;}
+      opened=true;if(label)label.hidden=true;
       if(!p.silentPlayback&&d.music?.url)audio?.play().catch(()=>{});
-      video.currentTime=0;video.style.opacity="1";if(poster)poster.style.opacity="0";
-      try{await video.play();}catch{finish();return;}
-      video.addEventListener("ended",finish,{once:true});setTimeout(finish,5600);
+      if(reduced||!video){startHero();fadeIntro();return;}
+      video.currentTime=0;video.style.opacity="1";if(poster)poster.style.opacity="1";
+      video.addEventListener("timeupdate",onTimeUpdate);
+      video.addEventListener("ended",()=>{startHero();fadeIntro();},{once:true});
+      video.addEventListener("error",()=>{startHero();fadeIntro();},{once:true});
+      try{await video.play();}catch{startHero();fadeIntro();}
     };
     intro.onclick=open;intro.onkeydown=(event)=>{if(event.key==="Enter"||event.key===" "){event.preventDefault();void open();}};
   }
