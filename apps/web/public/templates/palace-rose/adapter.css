@@ -1,0 +1,56 @@
+@font-face{font-family:"Palace Marcellus";src:url("/templates/palace-rose/assets/Marcellus_Regular-s.p.0s04k8a2jokc9.ttf") format("truetype");font-display:swap}
+@font-face{font-family:"Palace Cormorant";src:url("/templates/palace-rose/assets/CormorantGaramond_Regular-s.p.05iajzwz.gtv8.ttf") format("truetype");font-display:swap}
+@font-face{font-family:"Fz Qellia";src:url("/templates/palace-rose/assets/Qellia-s.p.0l1a3-80k4-g1.otf") format("opentype");font-display:swap}
+@font-face{font-family:"The Nautigal";src:url("/templates/palace-rose/assets/TheNautigal_Regular-s.p.0vn.0-.5o~f4t.ttf") format("truetype");font-display:swap}
+@font-face{font-family:"Great Vibes";src:url("/templates/palace-rose/assets/GreatVibes_Regular-s.p.0au6u0v_syb0z.ttf") format("truetype");font-display:swap}
+body{margin:0;background:#f7e3cd;color:#640e1b;font-family:"Palace Marcellus","Times New Roman",serif}
+#palace-rose-root{position:relative;width:100%;max-width:900px;margin:0 auto;background:#f7e3cd;overflow-x:hidden;overflow-y:auto;scroll-behavior:smooth}
+#palace-rose-root[hidden],[hidden]{display:none!important}
+#palace-rose-root section{scroll-margin-top:1rem}
+.pr-reveal{transition:opacity var(--pr-reveal-duration,.6s) ease,transform var(--pr-reveal-duration,.6s) cubic-bezier(.22,1,.36,1);transition-delay:var(--pr-reveal-delay,0s)}
+.pr-reveal:not(.pr-visible){opacity:0!important}
+.pr-reveal.pr-visible{opacity:1!important;transform:none!important}
+.pr-petal{position:absolute;top:-30px;pointer-events:none;opacity:0;transform:translateY(-10vh);animation:pr-petal-fall var(--pr-petal-duration,21s) linear var(--pr-petal-delay,0s) infinite backwards}
+.pr-petal svg{animation:pr-petal-spin var(--pr-petal-spin-duration,25.2s) linear var(--pr-petal-delay,0s) infinite}
+.pr-petal.pr-petal-exit{animation:pr-petal-exit .85s ease-out both!important}
+@keyframes pr-petal-fall{0%{transform:translateY(-10vh);opacity:0}33%,66%{opacity:.85}100%{transform:translateY(110vh);opacity:0}}
+@keyframes pr-petal-spin{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}
+@keyframes pr-petal-exit{0%{transform:translateY(0) scale(1);opacity:0}50%{transform:translateY(150px) scale(2);opacity:0}100%{transform:translateY(300px) scale(0);opacity:0}}
+.pr-envelope-card{transition:transform .8s cubic-bezier(.22,1,.36,1),opacity .8s cubic-bezier(.22,1,.36,1)}
+.pr-envelope-card.pr-envelope-exit{transform:translateY(-35px) scale(1.08);opacity:0}
+.pr-envelope.pr-envelope-exit{transition:opacity .6s cubic-bezier(.42,0,.58,1) .45s;opacity:0}
+.pr-motion-bells{animation:pr-bells-sway 4.2s ease-in-out infinite}
+.pr-motion-hero-flower{animation:pr-hero-flower 5.8s ease-in-out infinite}
+.pr-motion-envelope-flower-a{animation:pr-envelope-flower-a 5.5s ease-in-out infinite;transform-origin:20% 20%}
+.pr-motion-envelope-flower-b{animation:pr-envelope-flower-b 6.2s ease-in-out .7s infinite;transform-origin:80% 80%}
+.pr-motion-seal{animation:pr-seal-pulse 2s ease-in-out infinite}
+.pr-motion-shine{animation:pr-button-shine 3s ease-in-out infinite}
+.pr-motion-hero-flower-left,.pr-motion-hero-flower-right{animation:pr-hero-blossom 5s ease-in-out infinite;transform-origin:50% 90%}
+.pr-motion-hero-flower-right{animation-name:pr-hero-blossom-mirror}
+.pr-motion-details-flower{animation:pr-details-flower 6.4s ease-in-out .6s infinite;transform-origin:80% 90%}
+.pr-motion-countdown-flower{animation:pr-countdown-flower 6s ease-in-out infinite;transform-origin:20% 90%}
+.pr-motion-program-flower{animation:pr-program-flower 6s ease-in-out infinite;transform-origin:50% 50%}
+.pr-motion-hero-title{animation:pr-hero-title .8s ease-out both}
+@keyframes pr-bells-sway{0%,100%{rotate:-3.8deg}50%{rotate:3.8deg}}
+@keyframes pr-hero-flower{0%,100%{rotate:0deg;scale:1}25%{rotate:2.2deg;scale:1.015}50%{rotate:-1.8deg;scale:.995}75%{rotate:1.2deg;scale:1.01}}
+@keyframes pr-envelope-flower-a{0%,100%{rotate:0deg}25%{rotate:2.8deg}50%{rotate:-2.2deg}75%{rotate:1.4deg}}
+@keyframes pr-envelope-flower-b{0%,100%{rotate:0deg}25%{rotate:-2.8deg}50%{rotate:2.2deg}75%{rotate:-1.4deg}}
+@keyframes pr-seal-pulse{0%,100%{scale:1}50%{scale:1.12}}
+@keyframes pr-button-shine{0%,100%{translate:-100px 0}50%{translate:260px 0}}
+@keyframes pr-hero-blossom{0%,100%{rotate:0deg}25%{rotate:2.8deg}50%{rotate:-2.2deg}75%{rotate:1.5deg}}
+@keyframes pr-hero-blossom-mirror{0%,100%{rotate:0deg}25%{rotate:-2.8deg}50%{rotate:2.2deg}75%{rotate:-1.5deg}}
+@keyframes pr-details-flower{0%,100%{rotate:0deg}25%{rotate:-2.8deg}50%{rotate:2.2deg}75%{rotate:-1.4deg}}
+@keyframes pr-countdown-flower{0%,100%{rotate:0deg}25%{rotate:2.5deg}50%{rotate:-2deg}75%{rotate:1.2deg}}
+@keyframes pr-program-flower{0%,100%{rotate:-2.5deg}50%{rotate:3deg}}
+@keyframes pr-hero-title{from{opacity:0;scale:.96}to{opacity:1;scale:1}}
+.pr-languages{position:fixed;z-index:120;top:.5rem;left:50%;transform:translateX(-50%);display:flex;gap:.3rem;padding:.3rem;border:1px solid #ab7a4566;border-radius:999px;background:#f7e3cde8;backdrop-filter:blur(8px)}
+.pr-languages button,.pr-music{border:1px solid #ab7a45;border-radius:999px;background:#f7e3cd;color:#640e1b;padding:.38rem .62rem;font:600 12px/1.2 "Marcellus",serif;cursor:pointer}
+.pr-languages button[aria-current=true]{background:#640e1b;color:#fff}
+.pr-music{position:fixed;right:max(10px,calc((100vw - 900px)/2 + 12px));bottom:12px;z-index:120;width:44px;height:44px;font-size:18px}
+.pr-status{min-height:1.4em;margin:.5rem auto;text-align:center;font-size:.875rem;color:#640e1b}
+.pr-empty{display:grid;place-items:center;min-height:150px;border:1px dashed #ab7a4580;color:#8b735f;font:italic 14px/1.5 serif}
+.pr-lightbox{position:fixed;inset:0;z-index:140;display:flex;align-items:center;justify-content:center;gap:1rem;padding:1rem;background:#210e10ed;color:white}
+.pr-lightbox[hidden]{display:none!important}.pr-lightbox img{max-width:min(88vw,900px);max-height:84vh;object-fit:contain}.pr-lightbox button{min-width:44px;min-height:44px;border:1px solid #fff8;border-radius:50%;background:#ffffff1a;color:white;font-size:1.5rem;cursor:pointer}
+#palace-rose-root.pr-reduced,#palace-rose-root.pr-reduced *{scroll-behavior:auto!important;animation:none!important;transition:none!important;scroll-timeline:none!important}
+@media(prefers-reduced-motion:reduce){#palace-rose-root,#palace-rose-root *{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}}
+@media(max-width:560px){#palace-rose-root{max-width:100%}.pr-music{right:10px}}

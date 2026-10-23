@@ -1,0 +1,300 @@
+{
+  "capture": {
+    "path": "Web invitations/templates/palace-rose/preview-frame.html",
+    "sha256": "a0adfef8355a20c0b3a2e4eddb9b5b04ea46525ae993dd6a3ced8ab157fd513f"
+  },
+  "recoveredCompiledSource": {
+    "sha256": "bce4ad772ba8e154f6f2135f51e5ad4a522e53134b13ccce2509fe7781a5c363",
+    "moduleId": 99664,
+    "finding": "Contains the Palace Rose React renderer and motion component in a shared application chunk; not a standalone template package.",
+    "path": "Web invitations/_next/static/chunks/0dg.9_70mpb0j.js"
+  },
+  "isolatedFiles": [
+    {
+      "path": "index.html",
+      "bytes": 69975,
+      "sha256": "5773ab87c870733e45a32405bc59de730ea23b25bc174573b8a68a69e6349bb1"
+    },
+    {
+      "path": "adapter.css",
+      "bytes": 6457,
+      "sha256": "addf68b0be765c4d9f0df152763dadd60da66ca622c8c7fe4b9f2dba60b3dc4e"
+    },
+    {
+      "path": "bridge.js",
+      "bytes": 36715,
+      "sha256": "7c4492543981a939bc5886bafffd0c89a4e5782e44bbf455c2d16028882c32d6"
+    },
+    {
+      "path": "source/design.html",
+      "bytes": 69322,
+      "sha256": "6dcfd44e5d639cebaf1b2e434cc0563476f17c78e6f92af4cbb111e83f722cb4"
+    },
+    {
+      "path": "README.md",
+      "bytes": 4275,
+      "sha256": "204b51396be442826a097d370ffa07dedb94751f3dc2313cff4e28638e98fcaf"
+    },
+    {
+      "path": "preview.webp",
+      "bytes": 380016,
+      "sha256": "dc71e062390451e9561712d1ac6fd43a1060afaea1fe2c641baba9f84826cada"
+    }
+  ],
+  "assets": [
+    {
+      "path": "arch-frame.webp",
+      "bytes": 38580,
+      "sha256": "58007a5041e4b731ba44f8976eb6b4f84e1b4b7261b8ee87cf3bccb513241bae"
+    },
+    {
+      "path": "bells.webp",
+      "bytes": 43552,
+      "sha256": "33ec9689bcbb1297a9fd0d350ef143af6c7eaa0b7b798d42a85315369d44d007"
+    },
+    {
+      "path": "calendar-frame.webp",
+      "bytes": 80126,
+      "sha256": "53314e70ac0ae2f4c18320ee49aba0f0ec2c229f17db9d4302b4f3959e43550f"
+    },
+    {
+      "path": "castle.webp",
+      "bytes": 328888,
+      "sha256": "14eecabc5264d6ba0470d088682ba9e894a63d2581bafc15b9f4bef9eac5144b"
+    },
+    {
+      "path": "castle2.webp",
+      "bytes": 182626,
+      "sha256": "d9cab2b00bd3a98d1035dff8a2d9f123733cc66a6af16453080b7aaf7c1400d3"
+    },
+    {
+      "path": "CormorantGaramond_Regular-s.p.05iajzwz.gtv8.ttf",
+      "bytes": 666632,
+      "sha256": "7b99138ffa3baab8616d8491dc6d75961c5ae568b206c5031fbc7bb127385428"
+    },
+    {
+      "path": "fence.webp",
+      "bytes": 130176,
+      "sha256": "666276986264ace203cb3192a088c7c0238e63e26db1abc8db42016a4e4f723d"
+    },
+    {
+      "path": "flower1.webp",
+      "bytes": 320062,
+      "sha256": "011a4905510eefd8046b52db938a121cd93d711ffffcd330f61252821986cb84"
+    },
+    {
+      "path": "flower2.webp",
+      "bytes": 271480,
+      "sha256": "578d5de8019dfd5dc03addba975b664ccffd83cb7ad780d93881fd54ba1321a9"
+    },
+    {
+      "path": "flower3-decoration.webp",
+      "bytes": 279222,
+      "sha256": "c8e82ea23eb2bb50577ff69e7755f77cda4f52b703894631ffa884f13a65b7f3"
+    },
+    {
+      "path": "Fraunces_VariableFont_SOFT,WONK,opsz,wght-s.p.0g87.hb0o.d8x.ttf",
+      "bytes": 357632,
+      "sha256": "99b365ece2cccd7d7baf879cc141f1fa9f2d20690fe025bc3003b01dff098f05"
+    },
+    {
+      "path": "gold-line.webp",
+      "bytes": 18622,
+      "sha256": "d81755679d77b9e1e84ff00ebf2899acaf794536c6a7f0b582dc85605afdfcef"
+    },
+    {
+      "path": "GreatVibes_Regular-s.p.0au6u0v_syb0z.ttf",
+      "bytes": 445300,
+      "sha256": "8671b4332bff26a2ca32c7388a2929320e0ade036e460bd76cd1a22abbd4d5b4"
+    },
+    {
+      "path": "Marcellus_Regular-s.p.0s04k8a2jokc9.ttf",
+      "bytes": 43988,
+      "sha256": "5746c575e2d6bf9c57d388f04a2c9782a93ac83abb09ecf3e898c0b4399d79f9"
+    },
+    {
+      "path": "medallion-cake.webp",
+      "bytes": 32302,
+      "sha256": "1401c306b23d134486757407063699d43ee51ceb678bae3fdbbb1a624da57841"
+    },
+    {
+      "path": "medallion-coming.webp",
+      "bytes": 36620,
+      "sha256": "3b2b7891fa5cde2548f9bc90b630c16f9ad00f332f39bd73c15b69f4607e0772"
+    },
+    {
+      "path": "medallion-gift.webp",
+      "bytes": 28056,
+      "sha256": "06b873442ca4c3c60b86766996e5a5f65e76be3ed7368ab7d46400844d5a36be"
+    },
+    {
+      "path": "paper.webp",
+      "bytes": 114664,
+      "sha256": "33bd2c2169928c88608d3b8556a59c78f8932df5bb2a2f8d90f1dd38da20c44a"
+    },
+    {
+      "path": "pattern.webp",
+      "bytes": 52248,
+      "sha256": "ea48c5d1e3dbb7ad5be734b450387b880fed2a6f1aaaecfdba8626829697f137"
+    },
+    {
+      "path": "Qellia-s.p.0l1a3-80k4-g1.otf",
+      "bytes": 20180,
+      "sha256": "98c0d340d2ba414001b9210aa20df2516c8dcdd18c09aa822b34f9718bb45776"
+    },
+    {
+      "path": "sandstone-flower.webp",
+      "bytes": 219848,
+      "sha256": "128d166cba8d539bd740866cb34a5f36b6a89ed67bd615cfc58faa172830e4c6"
+    },
+    {
+      "path": "sandstone.webp",
+      "bytes": 136782,
+      "sha256": "3ce96dd2c5e51db79d8f9a157bf2faabd0713913d035507af90fae3c3e471217"
+    },
+    {
+      "path": "TheNautigal_Regular-s.p.0vn.0-.5o~f4t.ttf",
+      "bytes": 161852,
+      "sha256": "00e79428e3715ee28f9919be8c3bb4f468197b99ae419ae750b19f3a379b4222"
+    }
+  ],
+  "catalogPreview": {
+    "path": "preview.webp",
+    "locale": "uz-Latn",
+    "viewport": "450x800",
+    "deviceScaleFactor": 1,
+    "fixture": "apps/web/src/modules/catalog/preview-sample.json",
+    "route": "/templates/palace-rose/index.html?lang=uz-Latn&qaReducedMotion=1",
+    "description": "Actual packaged renderer opening page; preview-only locale toolbar hidden for capture."
+  },
+  "archiveGap": {
+    "notFoundAnywhereInArchive": [
+      "double_dragon_green.webp",
+      "glass_garden_pink.webp",
+      "hoa_kho_orange.webp",
+      "mahal_gold.webp",
+      "royal_red.webp"
+    ],
+    "finding": "The exact Palace Rose manifest contains 17 artwork assets. No other template images are copied into its package.",
+    "foundOnlyUnderOtherTemplate": [
+      "chateau_green.webp",
+      "dragon_phoenix_v2.webp",
+      "dragon_phoenix.webp"
+    ],
+    "componentReferencedGiftImages": [
+      "chateau_green.webp",
+      "double_dragon_green.webp",
+      "dragon_phoenix_v2.webp",
+      "dragon_phoenix.webp",
+      "glass_garden_pink.webp",
+      "hoa_kho_orange.webp",
+      "mahal_gold.webp",
+      "royal_red.webp"
+    ]
+  },
+  "checks": {
+    "productionBuild": "passed (Next.js optimized build completed)",
+    "motion": "12 SVG petals on normal opening; source-derived placements and timings",
+    "localePreview": "uz-Latn, uz-Cyrl, en, ru verified",
+    "publication": "unpublished",
+    "focusedTests": "4/4 passed",
+    "javascriptSyntax": "passed",
+    "typecheck": "passed",
+    "reducedMotion": "opening verified without petals",
+    "browserFidelity": "Existing normal-motion browser screenshot inspected at 450x800; latest scroll/reduced-motion behavior not rechecked because browser safety policy blocked localhost authority."
+  },
+  "sourceStylesheets": [
+    {
+      "path": "source/css/0.u3j0~_2ygfx.css",
+      "bytes": 4556,
+      "sha256": "bfbcf7905c5a55c2bfa48a3553d7750660a214148ff838d4c32cd7ab91e80982"
+    },
+    {
+      "path": "source/css/00sc_9lpb3zcn.css",
+      "bytes": 360792,
+      "sha256": "7400c02e01d65757f4035706750358a690e13283280c739d1de2105639f4b820"
+    },
+    {
+      "path": "source/css/054~-i6~6lmrd.css",
+      "bytes": 3859,
+      "sha256": "13599ddc9e6faa903f0966c4adeec12e47ecaa6382056e2cb71bdc68b93bd3fa"
+    },
+    {
+      "path": "source/css/0ly1y_qxlqlf..css",
+      "bytes": 6140,
+      "sha256": "3fcd5d40feb11ed6c2f58cfcf069d01f27a1bbf95a51b75d9c9e02c63e3d3f81"
+    }
+  ],
+  "capturedFontFiles": [
+    {
+      "path": "source/media/CormorantGaramond_Regular-s.p.05iajzwz.gtv8.ttf",
+      "bytes": 666632,
+      "sha256": "7b99138ffa3baab8616d8491dc6d75961c5ae568b206c5031fbc7bb127385428"
+    },
+    {
+      "path": "source/media/CormorantGaramond-Regular.ttf",
+      "bytes": 666632,
+      "sha256": "7b99138ffa3baab8616d8491dc6d75961c5ae568b206c5031fbc7bb127385428"
+    },
+    {
+      "path": "source/media/Fraunces_VariableFont_SOFT,WONK,opsz,wght-s.p.0g87.hb0o.d8x.ttf",
+      "bytes": 357632,
+      "sha256": "99b365ece2cccd7d7baf879cc141f1fa9f2d20690fe025bc3003b01dff098f05"
+    },
+    {
+      "path": "source/media/Fraunces-VariableFont_SOFT,WONK,opsz,wght.ttf",
+      "bytes": 357632,
+      "sha256": "99b365ece2cccd7d7baf879cc141f1fa9f2d20690fe025bc3003b01dff098f05"
+    },
+    {
+      "path": "source/media/GreatVibes_Regular-s.p.0au6u0v_syb0z.ttf",
+      "bytes": 445300,
+      "sha256": "8671b4332bff26a2ca32c7388a2929320e0ade036e460bd76cd1a22abbd4d5b4"
+    },
+    {
+      "path": "source/media/GreatVibes-Regular.ttf",
+      "bytes": 445300,
+      "sha256": "8671b4332bff26a2ca32c7388a2929320e0ade036e460bd76cd1a22abbd4d5b4"
+    },
+    {
+      "path": "source/media/Jost_VariableFont_wght-s.p.0vv2r-0fdeyux.ttf",
+      "bytes": 134476,
+      "sha256": "8d3141b6b4793c691c3647c602372c836577bf0c48a6b66674bbd558a95c1b57"
+    },
+    {
+      "path": "source/media/Jost-VariableFont_wght.ttf",
+      "bytes": 134476,
+      "sha256": "8d3141b6b4793c691c3647c602372c836577bf0c48a6b66674bbd558a95c1b57"
+    },
+    {
+      "path": "source/media/Marcellus_Regular-s.p.0s04k8a2jokc9.ttf",
+      "bytes": 43988,
+      "sha256": "5746c575e2d6bf9c57d388f04a2c9782a93ac83abb09ecf3e898c0b4399d79f9"
+    },
+    {
+      "path": "source/media/Marcellus-Regular.ttf",
+      "bytes": 43988,
+      "sha256": "5746c575e2d6bf9c57d388f04a2c9782a93ac83abb09ecf3e898c0b4399d79f9"
+    },
+    {
+      "path": "source/media/Qellia-s.p.0l1a3-80k4-g1.otf",
+      "bytes": 20180,
+      "sha256": "98c0d340d2ba414001b9210aa20df2516c8dcdd18c09aa822b34f9718bb45776"
+    },
+    {
+      "path": "source/media/Qellia.otf",
+      "bytes": 20180,
+      "sha256": "98c0d340d2ba414001b9210aa20df2516c8dcdd18c09aa822b34f9718bb45776"
+    },
+    {
+      "path": "source/media/TheNautigal_Regular-s.p.0vn.0-.5o~f4t.ttf",
+      "bytes": 161852,
+      "sha256": "00e79428e3715ee28f9919be8c3bb4f468197b99ae419ae750b19f3a379b4222"
+    },
+    {
+      "path": "source/media/TheNautigal-Regular.ttf",
+      "bytes": 161852,
+      "sha256": "00e79428e3715ee28f9919be8c3bb4f468197b99ae419ae750b19f3a379b4222"
+    }
+  ]
+}
