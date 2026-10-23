@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="uz-Latn">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="light" />
+    <title>Orchid Amplop</title>
+    <link rel="stylesheet" href="/templates/chorlove/orchid-amplop/source/orchid.css" />
+    <link rel="stylesheet" href="/templates/chorlove/orchid-amplop/source/fonts.css" />
+    <link rel="stylesheet" href="/templates/chorlove/orchid-amplop/source/platform.css" />
+  </head>
+  <body>
+    <div class="orchid-template" data-template="orchid-amplop">
+      <div class="orchid-gate" data-orchid-gate>
+        <div class="gate-forest"><img data-orchid-hero src="/templates/chorlove/orchid-amplop/assets/hero-forest.webp" alt="" /><div class="gate-overlay"></div></div>
+        <div class="gate-shell">
+          <div class="gate-circle-pulse"><img class="gate-circle" src="/templates/chorlove/orchid-amplop/assets/circle.svg" alt="" /></div>
+          <div class="gate-circle-content">
+            <p class="gate-hello" data-copy="guestGreeting"></p>
+            <p class="gate-invite" data-copy="inviteIntro"></p>
+            <h1 class="gate-names" data-orchid-couple></h1>
+          </div>
+        </div>
+        <div class="gate-envelope"></div>
+        <div class="gate-open-row">
+          <span class="gate-arrow gate-arrow-left" aria-hidden="true"><svg width="27" height="27" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m11 17-5-5 5-5"></path><path d="m18 17-5-5 5-5"></path></svg></span>
+          <button class="gate-open" type="button" data-orchid-open aria-label="Open invitation"><svg class="gate-open-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"></path><rect x="2" y="4" width="20" height="16" rx="2"></rect></svg><span data-copy="openInvitation"></span></button>
+          <span class="gate-arrow gate-arrow-right" aria-hidden="true"><svg width="27" height="27" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m6 17 5-5-5-5"></path><path d="m13 17 5-5-5-5"></path></svg></span>
+        </div>
+      </div>
+
+      <button class="orchid-music" type="button" data-orchid-music aria-label="Play music" aria-pressed="false" hidden>♫</button>
+      <audio data-orchid-audio loop preload="none"></audio>
+      <main class="orchid-main" data-orchid-main hidden>
+        <section class="orchid-hero" data-section="hero">
+          <img data-orchid-hero src="/templates/chorlove/orchid-amplop/assets/hero-forest.webp" alt="" />
+          <div class="hero-overlay"></div>
+          <div class="hero-content">
+            <div class="orchid-reveal" style="--orchid-reveal-delay:.05s"><p class="hero-prayer" data-copy="prayer"></p><p class="hero-blessing" data-copy="blessing"></p></div>
+            <p class="hero-kicker orchid-reveal" data-copy="weddingOf" style="--orchid-reveal-delay:.12s"></p>
+            <h1 class="orchid-reveal" data-orchid-couple style="--orchid-reveal-delay:.18s"></h1>
+            <div class="hero-date orchid-reveal" style="--orchid-reveal-delay:.24s"><i class="hero-date-dot"></i><span data-orchid-date></span><i class="hero-date-dot"></i></div>
+            <a class="hero-down" href="#orchid-married" aria-label="Scroll down">⌄</a>
+          </div>
+        </section>
+        <section class="couple-card-section" data-section="couple">
+          <div class="couple-card orchid-reveal">
+            <h2 class="section-title" data-copy="coupleTitle"></h2>
+            <p class="section-copy couple-copy" data-copy="coupleText"></p>
+            <div class="people-grid">
+              <article class="person-profile orchid-reveal"><div class="person-photo-frame" hidden><div class="person-photo"><img data-orchid-groom-image alt="" /></div></div><h3 data-orchid-groom></h3></article>
+              <article class="person-profile orchid-reveal"><div class="person-photo-frame" hidden><div class="person-photo"><img data-orchid-bride-image alt="" /></div></div><h3 data-orchid-bride></h3></article>
+            </div>
+            <a class="orchid-button story-link-button" href="#orchid-story" data-copy="ourStory"></a>
+          </div>
+        </section>
+        <div class="orchid-divider orchid-reveal" aria-hidden="true" style="--orchid-reveal-delay:.02s"></div>
+        <section class="orchid-section married-section" id="orchid-married" data-section="date">
+          <h2 class="section-title orchid-reveal" data-copy="gettingMarried"></h2>
+          <p class="salam-text orchid-reveal" data-copy="blessingArabic"></p>
+          <p class="section-copy married-copy orchid-reveal" data-orchid-message></p>
+          <p class="long-date orchid-reveal" data-orchid-long-date></p>
+          <div class="countdown-grid orchid-reveal" data-orchid-countdown style="--orchid-reveal-delay:.08s"></div>
+          <button class="orchid-button calendar-button orchid-reveal" type="button" data-orchid-calendar style="--orchid-reveal-delay:.12s"></button>
+          <div class="event-map-grid orchid-reveal" style="--orchid-reveal-delay:.16s">
+            <div class="event-program" data-orchid-program></div>
+            <div class="map-card"><iframe class="map-frame" data-orchid-map-frame title="Event map" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe><a class="map-empty" data-orchid-map href="#" target="_blank" rel="noopener noreferrer" hidden></a><p class="map-empty-text" data-copy="mapUnavailable"></p></div>
+          </div>
+          <p class="section-copy map-copy orchid-reveal" data-copy="mapBlessing"></p>
+        </section>
+        <section class="orchid-section story-section" id="orchid-story" data-section="story" hidden>
+          <h2 class="section-title orchid-reveal" data-copy="ourStory"></h2>
+          <div class="story-grid" data-orchid-story></div>
+        </section>
+        <section class="orchid-section gallery-section" data-section="gallery" hidden>
+          <h2 class="section-title orchid-reveal" data-copy="gallery"></h2>
+          <div class="gallery-grid gallery-grid-mobile" data-orchid-gallery-mobile></div>
+          <div class="gallery-grid gallery-grid-desktop" data-orchid-gallery-desktop></div>
+          <div class="quran-verse orchid-reveal"><p class="quran-arabic" aria-hidden="true">وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا</p><p data-copy="verse"></p><span>Ar-Rum 30:21</span></div>
+        </section>
+        <section class="orchid-section gift-section" data-section="gift" hidden>
+          <h2 class="section-title orchid-reveal" data-copy="giveGift"></h2>
+          <button class="orchid-button gift-toggle-row orchid-reveal" type="button" data-orchid-gift-toggle aria-controls="orchid-gift-card" aria-expanded="false" style="--orchid-reveal-delay:.08s"></button>
+          <div class="gift-cards" id="orchid-gift-card" data-orchid-gift hidden><article class="gift-card"><h3 data-copy="digitalWallet"></h3><p data-orchid-holder></p><div class="gift-account"><span data-orchid-card></span><button type="button" data-orchid-copy aria-label="Copy card number">⧉</button></div><p data-orchid-gift-note></p></article></div>
+        </section>
+        <section class="orchid-section wishes-section" data-section="wishes" hidden>
+          <h2 class="section-title orchid-reveal" data-copy="wishesTitle"></h2>
+          <form class="wish-form orchid-reveal" data-orchid-wishes-form><h2 class="section-title" data-copy="wishesTitle"></h2><div class="wish-fields"><label><span data-copy="name"></span><input name="name" autocomplete="name" maxlength="60" required /></label><label><span data-copy="message"></span><textarea name="text" rows="5" maxlength="360" required></textarea></label></div><button class="orchid-button send-wish-button" type="submit" data-copy="send"></button><p data-orchid-wishes-feedback role="status" aria-live="polite"></p></form>
+          <div class="wish-list orchid-reveal"><div class="wish-list-head"><strong data-copy="wishesTitle"></strong><span data-orchid-wishes-count></span></div><div class="wish-scroll" data-orchid-wishes></div></div>
+        </section>
+        <section class="orchid-section rsvp-section" data-section="rsvp" hidden><h2 class="section-title orchid-reveal" data-copy="rsvpTitle"></h2><p class="section-copy orchid-reveal" data-copy="rsvpIntro"></p><form class="wish-form orchid-reveal" data-orchid-rsvp><div class="wish-fields"><label><span data-copy="name"></span><input name="name" autocomplete="name" maxlength="100" required /></label><label><span data-copy="answer"></span><select name="status" required><option value="" data-copy="choose"></option><option value="yes" data-copy="attending"></option><option value="no" data-copy="declining"></option></select></label></div><button class="orchid-button send-wish-button" type="submit" data-copy="send"></button><p data-orchid-rsvp-feedback role="status" aria-live="polite"></p></form></section>
+        <footer class="orchid-footer" data-section="footer"><img data-orchid-hero src="/templates/chorlove/orchid-amplop/assets/hero-forest.webp" alt=""/><div class="footer-overlay"></div><div class="footer-content"><button class="footer-top-button orchid-reveal" type="button" data-orchid-top aria-label="Back to top">↑</button><p class="footer-love-label orchid-reveal" data-copy="withLove" style="--orchid-reveal-delay:.04s"></p><div class="footer-names orchid-reveal" style="--orchid-reveal-delay:.08s"><div data-orchid-groom></div><span>&amp;</span><div data-orchid-bride></div></div><p class="footer-date" data-orchid-date></p><p class="footer-hosts" data-orchid-hosts></p><nav class="orchid-contacts" data-orchid-contacts aria-label="Contacts"></nav><div class="footer-made"><span data-copy="madeWithLove"></span></div></div></footer>
+      </main>
+      <div class="gallery-preview" data-orchid-lightbox role="dialog" aria-modal="true" aria-label="Gallery image" aria-hidden="true" tabindex="-1" hidden><button class="gallery-preview-close" type="button" data-orchid-lightbox-close aria-label="Close">×</button><img data-orchid-lightbox-image alt="" /></div>
+    </div>
+    <script src="/templates/chorlove/orchid-amplop/bridge.js" defer></script>
+  </body>
+</html>

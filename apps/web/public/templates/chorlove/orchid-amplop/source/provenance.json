@@ -1,0 +1,128 @@
+{
+  "templateId": "orchid-amplop",
+  "manifestSource": "Invitations - this folder will be removed from production/Chorlove/capture-manifest.json",
+  "htmlSnapshot": "Web invitations/templates/orchid-amplop/preview-frame.html (opening state only; left untouched)",
+  "componentSource": "Web invitations/_next/static/chunks/0v0-3ulc~exde.js, Turbopack module 482485",
+  "cssSource": "Extracted verbatim from the component module CSS-in-JS literal; surrounding Chorlove runtime omitted.",
+  "assetSource": "Web invitations/images/templates/orchid-amplop/",
+  "cssSha256": "8b68fc378689d76f5e6e05acc5fc64cf1d7342ab4a33a41686f7146778403a3e",
+  "assets": [
+    {
+      "path": "circle.svg",
+      "bytes": 8032,
+      "sha256": "5b864d817c352eb20d41c259868f8fe92926f74783c9c8bdae9b52783edb8da8"
+    },
+    {
+      "path": "gallery-1.webp",
+      "bytes": 47468,
+      "sha256": "8578f6d5f3c2ddc1759c5116dfb4b68cd47f86ea700bfa3777a75fb916734a0b"
+    },
+    {
+      "path": "gallery-2.webp",
+      "bytes": 108104,
+      "sha256": "bcfd6989e53e220164e8d39368a848eed1185c07af73f934c81181af2a690d45"
+    },
+    {
+      "path": "gallery-3.webp",
+      "bytes": 82790,
+      "sha256": "c747d5f2c007ec78d46196fcbf157da871fd4bebd9f0a07863087e9a5787e320"
+    },
+    {
+      "path": "gallery-4.webp",
+      "bytes": 117998,
+      "sha256": "c3d590110524cb7b0148c08aa1543d569f16f54b4672d802bebcf778776df558"
+    },
+    {
+      "path": "gallery-5.webp",
+      "bytes": 211568,
+      "sha256": "bb3c25700cc2aa81a40c46bb20c22cd13403d3e9bcf196c175a94fb7b49c8a2e"
+    },
+    {
+      "path": "gallery-6.webp",
+      "bytes": 67596,
+      "sha256": "35c81b38de8fb85f182b1c1c6149bf9926b2a55c10e845f617fc87605ec63e11"
+    },
+    {
+      "path": "hero-forest.webp",
+      "bytes": 544716,
+      "sha256": "bd564fec93401f9ae5ea037e8905a5374be74afa37e88882fbdc994a6dff9640"
+    }
+  ],
+  "status": "source package and preview routing implemented; migration applied; unpublished and unselectable",
+  "notes": [
+    "Component module 482485 supplies the exact template section/component tree, authored opening transition, original CSS literal, and design image references. App-owned frame, loaders, analytics, auth, and provider APIs are excluded.",
+    "The stylesheet in source/orchid.css is the unchanged CSS literal extracted from the component module; fonts.css maps the exact local Comfortaa and Allura font subsets to the source CSS variables.",
+    "The archive contains the seven original Orchid artwork files plus circle.svg; all are packaged unchanged. Gallery images appear only as ephemeral preview fixture media and never as authored/public data.",
+    "The shared contract does not include groom/bride/story image fields. Those optional portrait/photo areas are omitted from runtime when there is no creator-authored media; no substitute artwork is used.",
+    "Typed catalog integration is wedding-only and unpublished; full preview uses the shared Chorlove iframe renderer and ephemeral preview fixture. Migration 0132_register_orchid_amplop.sql is applied; the configured database confirms published=false, wedding category, and wedding event support.",
+    "Browser checks at 390x844 and 1280x800 compared live-source and package openers. Package normal-motion opener/exit, gallery lightbox open/close, gift expansion/collapse, and reduced-motion QA were exercised. Gate timings, per-section reveal timings, icon paths, chevrons, and music stacking were adapted from captured component declarations. The lightbox fade/scale is implemented with Web Animations rather than Framer Motion spring, so the transition is not exactly source-identical. Browser-level OS reduced-motion emulation on the source page remains outstanding.",
+    "The local source archive has no standalone clean portrait cover. The metadata-referenced 778x1686 opening image contains fixed sample couple names and a provider UI badge, so it is excluded. Local renderer captures still include the Next dev badge and are not catalog art.",
+    "Full Chorlove archive re-search found none of the component fallback references divider.svg, bride-groom-circle.svg, groom.png, bride.png, story-groom.jpg, or story-bride.jpg. No cross-template images are substituted.",
+    "Migration 0132_register_orchid_amplop.sql is applied. Direct DB query confirmed unpublished=true is false: published=false, wedding category/event and 15,000,000 UZS. Public catalog omits Orchid. No Orchid invitations exist, so save/reopen, public route, RSVP and wish service submission remain unverified."
+  ],
+  "database": {
+    "migration": "0132_register_orchid_amplop.sql",
+    "applied": true,
+    "published": false,
+    "priceMinor": 15000000,
+    "currency": "UZS",
+    "categoryIds": [
+      "wedding"
+    ],
+    "supportedEventTypes": [
+      "wedding"
+    ],
+    "verifiedAt": "2026-10-23"
+  },
+  "excludedMetadataArtwork": {
+    "url": "https://payment.chorlove.uz/media-assets/29bf2366-73f5-4828-b91c-19835015c8d6/file",
+    "width": 778,
+    "height": 1686,
+    "bytes": 273715,
+    "sha256": "1e01875e35ba0f4dd739fa7fcb9f3494375476e1b60c0a3658dcc86723f84f9a",
+    "reason": "Contains fixed source couple names and a provider UI badge; excluded from app catalog artwork."
+  },
+  "componentModule": {
+    "path": "Web invitations/_next/static/chunks/0v0-3ulc~exde.js",
+    "module": "482485",
+    "sha256": "3a1df8e76cbfab4af72698ca0505ffec0db05a9ff498e8b448e981821751a5d9"
+  },
+  "fontAssets": [
+    {
+      "path": "assets/fonts/09fd331868a74310-s.p.0h2ih7r_nhr70.woff2",
+      "sha256": "03828cd012694b3762601728e78c8d5c37b3d688fb62e5378395d151efaa8a74"
+    },
+    {
+      "path": "assets/fonts/2a3a498894ba15cf-s.11iqgigq9aua8.woff2",
+      "sha256": "07f0c0e2ff679caef1767481720c3b62bf29fac8f18b0510be87fb75fbc96f0b"
+    },
+    {
+      "path": "assets/fonts/60598ce2a46fbffb-s.06p0h2yk_ifjq.woff2",
+      "sha256": "0a874efa0b70bdc0262dc09f2b7dacee9b959d35710c9ae05e16f3addb6eed5f"
+    },
+    {
+      "path": "assets/fonts/6e0722da56363036-s.02tkln9iv~mx_.woff2",
+      "sha256": "4f0c349f31531a4c3bb2ed1424560db82daa2078cc066e9758ea1a2e990c58b8"
+    },
+    {
+      "path": "assets/fonts/7f20430e44eb7422-s.p.0-3dheja74wss.woff2",
+      "sha256": "4c53d8e2a813441bf080c4c50f68d5d104f211063f16994cc79df3d40bce50b5"
+    },
+    {
+      "path": "assets/fonts/bc3cdba7557578e9-s.0iw1eayfxe5dw.woff2",
+      "sha256": "d25b972fdb600857176eb321e855057f703f211455ee5788baac77e1ceb1e5e8"
+    },
+    {
+      "path": "assets/fonts/ca59e9eae7934b24-s.0mnjxgm0dflcj.woff2",
+      "sha256": "5a3bb5428735adafca22951f9742624b481ee7493e347a258bbf9c703b48b769"
+    },
+    {
+      "path": "assets/fonts/d4d7dfbfbdcfb829-s.0gq5x..r-ww79.woff2",
+      "sha256": "76a4cd4b55c1bb349afa78b9728682f86cf0aa822afd0f417ed71f6dc69f4778"
+    },
+    {
+      "path": "assets/fonts/e3dfc854017cd189-s.07o01p01pl9vd.woff2",
+      "sha256": "5728051d191c10f4a6e28bd1b13fd03dc35d1ef3267fd2ba58db64d6b0ffd0f7"
+    }
+  ]
+}
