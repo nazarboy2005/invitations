@@ -14,3 +14,7 @@ The packaged page keeps the captured Modern Floral HTML structure and its shared
 The captured first-page catalog artwork is packaged as `catalog-opening.jpg`; its original URL, dimensions, and SHA-256 are recorded in `source-assets.provenance.json`. The six unrelated Orchid Amplop gallery images referenced in the captured sample are not included as Modern Floral assets. Creator gallery content continues to come from the invitation data adapter.
 
 The source route chunk is not loaded as an application runtime. Its template-level animation behavior is implemented in the isolated motion runner; invitation data, RSVP, wishes, language, and platform services remain in the bridge.
+
+## Verification status
+
+The source-module checksum and motion-port assertions pass in `tests/modern-floral-template.test.ts`, and `node --check` passes for the bridge and motion runner. The preview route returned HTTP 200 from the workspace process. Rendered browser comparison is still open: the in-app browser returned `ERR_CONNECTION_REFUSED` for workspace localhost ports 3001 and 3002, `host.docker.internal` failed DNS resolution, and the local headless Edge capture stalled without producing an image. A direct local source-file browser attempt also did not return a browser state. Therefore animation appearance and timing have not been visually confirmed against the original capture; keep Modern Floral unpublished until a rendered source/package comparison is completed.
