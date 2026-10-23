@@ -16,29 +16,35 @@
   ],
   "catalogCover": {
     "file": "../catalog-cover-opening.png",
-    "sha256": "6afd7cf6ec81d85f7878c6e6d80940fe7cf7f5ef6641900c32f75ca3a2ad26cd",
-    "source": "Rejected Chrome headless screenshot of the packaged Glass Pink source renderer served locally over HTTP",
+    "sha256": "66b58de5fab291089494816422ef67547c258d5cc3787a9e607f57c6984bb00b",
+    "source": "Chrome 156 screenshot of the packaged Glass Pink source renderer after local fonts loaded and the opening reveal finished",
     "sourceRenderer": "/templates/glass-pink/index.html",
     "fixture": "apps/web/src/modules/catalog/preview-sample.json",
     "fixtureSha256": "54017a292d4a5235593d93a5e2f8bca1fe3bab89433182fac912c5d948878871",
     "locale": "uz-Latn",
     "viewport": "432x768",
-    "crop": "Full portrait viewport, x=0 y=0 width=432 height=768; no post-capture crop or resize",
+    "crop": "Full renderer iframe viewport, x=0 y=0 width=432 height=768; no post-capture crop or resize",
     "uiChromeExcluded": [
       "language selector",
       "music toggle",
+      "Next.js development badge",
       "browser scrollbar"
     ],
+    "fontStatus": "document.fonts.status=loaded; Fz Qellia, Cormorant Garamond, and The Nautigal loaded before capture",
+    "openingReveal": "All finite cc-source-reveal animations finished before capture; four ambient pulse decorations remained animated",
+    "captureBrowserVersion": "156.0.8078.47",
     "runtimeLimitation": "The archive contains server-rendered markup and assets, not its original template JavaScript runtime; the packaged application adapter supplies field binding, controls, and reduced-motion behavior.",
     "openingState": "Initial source envelope",
     "sha256RecordedFromPackagedFile": true,
-    "catalogEligible": false,
-    "captureRequirements": [
-      "Wait for document.fonts.ready",
-      "Wait for the source intro animation to settle",
-      "Capture the renderer iframe with app-injected UI hidden"
+    "catalogEligible": true,
+    "captureChecks": [
+      "Canonical preview fixture delivered through the actual preview renderer",
+      "document.fonts.status was loaded and the three opening font families were loaded",
+      "Finite opening reveal animations finished",
+      "Language picker, music toggle, Next.js development badge, and browser scrollbar excluded",
+      "Full opening composition visually inspected at portrait ratio"
     ],
-    "visualQa": "Rejected: visible opening lettering is duplicated/overlapped. The file is retained for diagnosis only and must not be treated as approved catalog artwork. Re-capture only after fonts are ready and the intro has settled."
+    "visualQa": "Approved: the full floral envelope opening is visible; the title and open action each render once with no overlap."
   },
   "gallerySourceAudit": {
     "eligibleGlassPinkGalleryPhotos": [],

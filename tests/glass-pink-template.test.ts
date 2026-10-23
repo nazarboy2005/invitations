@@ -27,22 +27,21 @@ test("Glass Pink is published with its additive release migration", () => {
   assert.match(publication, /SET published = true[\s\S]*WHERE id = 'glass-pink'/);
 });
 
-test("Glass Pink rejected cover capture is clearly marked pending recapture", () => {
+test("Glass Pink catalog cover is a settled, clean source opening capture", () => {
   const preview = readFileSync(previewPath);
   const provenance = JSON.parse(readFileSync(provenancePath, "utf8"));
   assert.equal(provenance.catalogCover.file, "../catalog-cover-opening.png");
-  assert.match(provenance.catalogCover.source, /^Rejected Chrome headless screenshot/);
+  assert.match(provenance.catalogCover.source, /^Chrome 156 screenshot/);
   assert.equal(provenance.catalogCover.viewport, "432x768");
   assert.equal(provenance.catalogCover.fixtureSha256, createHash("sha256").update(readFileSync(resolve(root, "apps/web/src/modules/catalog/preview-sample.json"))).digest("hex"));
   assert.ok(provenance.catalogCover.crop);
-  assert.deepEqual(provenance.catalogCover.uiChromeExcluded, ["language selector", "music toggle", "browser scrollbar"]);
-  assert.equal(provenance.catalogCover.catalogEligible, false);
-  assert.deepEqual(provenance.catalogCover.captureRequirements, [
-    "Wait for document.fonts.ready",
-    "Wait for the source intro animation to settle",
-    "Capture the renderer iframe with app-injected UI hidden",
-  ]);
-  assert.match(provenance.catalogCover.visualQa, /Rejected: visible opening lettering is duplicated\/overlapped/);
+  assert.deepEqual(provenance.catalogCover.uiChromeExcluded, ["language selector", "music toggle", "Next.js development badge", "browser scrollbar"]);
+  assert.equal(provenance.catalogCover.fontStatus, "document.fonts.status=loaded; Fz Qellia, Cormorant Garamond, and The Nautigal loaded before capture");
+  assert.match(provenance.catalogCover.openingReveal, /All finite cc-source-reveal animations finished/);
+  assert.equal(provenance.catalogCover.captureBrowserVersion, "156.0.8078.47");
+  assert.equal(provenance.catalogCover.catalogEligible, true);
+  assert.equal(provenance.catalogCover.captureChecks.length, 5);
+  assert.match(provenance.catalogCover.visualQa, /Approved:.*title and open action each render once with no overlap/);
   assert.match(provenance.catalogCover.runtimeLimitation, /server-rendered markup and assets/);
   assert.equal(provenance.catalogCover.sha256, createHash("sha256").update(preview).digest("hex"));
   assert.equal(preview.readUInt32BE(16), 432);
