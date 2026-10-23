@@ -95,6 +95,37 @@
     if (current?.preview && current?.sampleGallery) return Array.from({ length: 6 }, (_, i) => ({ src: BASE + `gallery-${i + 1}.webp`, alt: "" }));
     return [];
   }
+  // Framer Motion's implicit transition for these source motion values is its
+  // default physical spring: stiffness 100, damping 10, mass 1, zero velocity.
+  // Generate the same under-damped oscillator curve for WAAPI, ending when
+  // both displacement and velocity reach Framer Motion's default rest range.
+  function sourceSpring(from, to) {
+    const stiffness = 100, damping = 10, mass = 1;
+    const omega0 = Math.sqrt(stiffness / mass);
+    const zeta = damping / (2 * Math.sqrt(stiffness * mass));
+    const omegaD = omega0 * Math.sqrt(1 - zeta * zeta);
+    const delta = from - to;
+    const step = 1 / 60;
+    const frames = [];
+    let t = 0;
+    do {
+      const decay = Math.exp(-zeta * omega0 * t);
+      const cosine = Math.cos(omegaD * t);
+      const sine = Math.sin(omegaD * t);
+      const displacement = delta * decay * (cosine + (zeta * omega0 / omegaD) * sine);
+      const velocity = -delta * decay * (omega0 * omega0 / omegaD) * sine;
+      frames.push({ value: to + displacement, offset: frames.length ? undefined : 0 });
+      if (t > 0 && Math.abs(displacement) < 0.01 && Math.abs(velocity) < 0.01) break;
+      t += step;
+    } while (t < 5);
+    frames[frames.length - 1].offset = 1;
+    return { frames, duration: Math.round(t * 1000) };
+  }
+  function animateSourceSpring(element, from, to, property, makeValue) {
+    const spring = sourceSpring(from, to);
+    const keyframes = spring.frames.map(({ value, offset }) => ({ [property]: makeValue(value), ...(offset === undefined ? {} : { offset }) }));
+    return element.animate(keyframes, { duration: spring.duration, easing: "linear", fill: "both" });
+  }
   function openLightbox(item, trigger) {
     const box = $("[data-orchid-lightbox]");
     const image = $("[data-orchid-lightbox-image]");
@@ -108,8 +139,9 @@
     box.hidden = false;
     box.setAttribute("aria-hidden", "false");
     if (!document.documentElement.classList.contains("orchid-reduced-motion")) {
-      box.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 300, easing: "ease-out", fill: "both" });
-      image.animate([{ opacity: 0, transform: "scale(.96)" }, { opacity: 1, transform: "scale(1)" }], { duration: 300, easing: "ease-out", fill: "both" });
+      animateSourceSpring(box, 0, 1, "opacity", (value) => value);
+      animateSourceSpring(image, 0.8, 1, "transform", (value) => `scale(${value})`);
+      animateSourceSpring(image, 0, 1, "opacity", (value) => value);
     }
     close.focus();
   }
@@ -124,9 +156,10 @@
       galleryTrigger?.focus();
       return;
     }
-    const backdrop = box.animate([{ opacity: getComputedStyle(box).opacity || 1 }, { opacity: 0 }], { duration: 220, easing: "ease-in", fill: "both" });
-    const portrait = image.animate([{ opacity: 1, transform: "scale(1)" }, { opacity: 0, transform: "scale(.96)" }], { duration: 220, easing: "ease-in", fill: "both" });
-    Promise.all([backdrop.finished, portrait.finished].map((finished) => finished.catch(() => {}))).then(() => {
+    const backdrop = animateSourceSpring(box, 1, 0, "opacity", (value) => value);
+    const portraitScale = animateSourceSpring(image, 1, 0.8, "transform", (value) => `scale(${value})`);
+    const portraitOpacity = animateSourceSpring(image, 1, 0, "opacity", (value) => value);
+    Promise.all([backdrop.finished, portraitScale.finished, portraitOpacity.finished].map((finished) => finished.catch(() => {}))).then(() => {
       if (sequence !== lightboxSequence) return;
       box.hidden = true;
       box.setAttribute("aria-hidden", "true");
