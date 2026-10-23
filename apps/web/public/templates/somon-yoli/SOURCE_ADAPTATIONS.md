@@ -18,3 +18,11 @@ when guests first open an invitation. The cover capture uses the unchanged
 source HTML, CSS, and astrolabe artwork with only canonical preview fixture
 values; its portrait framing and checksum are recorded in
 `preview.provenance.json`.
+
+The source opener's reduced-motion behavior is retained: the first activation
+starts a 1.2-second warp, a second tap on the intro during that transition
+finishes immediately, and the timer also completes it. The packaged script
+differs from the capture here only in the local Three.js path and removal of
+hard-coded sample couple-name fallbacks. Browser verification of the timed and
+second-tap paths remains outstanding; the previous browser run captured the
+opening before the 1.2-second transition had finished.

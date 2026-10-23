@@ -48,4 +48,16 @@ Catalog images were opened and visually inspected in a side-by-side portrait con
 
 Used the local production preview route in headless Chrome at 450×800, with normal mode and browser `prefers-reduced-motion: reduce` emulation plus the preview-only reduced-motion flag. All six template documents loaded with their full section sets and opening artwork loaded. The open interaction reached the hidden-intro/open state for Shirin Bayram and Suzani in both modes, and Somon Yo‘li in normal mode. In Somon Yo‘li reduced mode, the opening remained visible after the first click; source has an intro-wide click handler to finish the opening, but that second interaction was not successfully verified. Computed CSS animation count was zero in all reduced runs. No uncaught page errors or completed HTTP error responses occurred. One generic console 404 appeared in normal Shirin Bayram, without a corresponding completed failing response. `/templates/shared/editor-sections.js` requests were aborted during navigation in each run; one preview RSC request also aborted in Shirin's reduced run. No missing template asset was confirmed. Reduced-mode opening completion for Somon Yo‘li and live gallery/venue media behavior remain unverified. Captures and results are in `C:\Users\user\AppData\Local\Temp\taklifnoma-batch15-browser`; temporary QA evidence only, not source or application artwork.
 
-The Suzani repair changed only its packaged preview image, provenance, adaptation note, focused test, and decision record; original reference captures and database/publication/deployment/payment state remain unchanged. Somon Yo‘li reduced-motion opening completion after the source's intro-wide second click and live gallery/venue media behavior remain unverified.
+Somon Yo‘li source review clarifies the reduced-motion interaction: its first
+activation starts a 1.2-second warp, tapping the intro again while that warp is
+active calls the same finish path immediately, and the timer also completes
+the opening. The packaged script retains this source logic; its only script
+changes are the local Three.js URL and removal of hard-coded couple-name
+fallbacks. This explains the earlier capture taken before the timer completed,
+but does not establish fresh browser behavior. Reduced-motion opening
+completion and live gallery/venue media behavior remain unverified. Details
+are in `apps/web/public/templates/somon-yoli/SOURCE_ADAPTATIONS.md`.
+
+The Suzani repair changed only its packaged preview image, provenance,
+adaptation note, focused test, and decision record; original reference captures
+and database/publication/deployment/payment state remain unchanged.
