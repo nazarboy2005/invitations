@@ -26,6 +26,9 @@ test("Velvet package has source opening art and isolated local renderer assets",
     path.join(packageRoot, "assets/js/velvet.js"),
     "utf8",
   );
+  const fontStyles = ["great-vibes.css", "merriweather-open-sans.css", "playfair.css"]
+    .map((file) => readFileSync(path.join(packageRoot, "assets/fonts", file), "utf8"))
+    .join("\n");
   const cover = statSync(path.join(packageRoot, "preview.webp"));
   const provenance = JSON.parse(
     readFileSync(path.join(packageRoot, "preview.provenance.json"), "utf8"),
@@ -39,9 +42,12 @@ test("Velvet package has source opening art and isolated local renderer assets",
   assert.match(html, /data-velvet="venue-name"/);
   assert.match(bridge, /\/rsvp`/);
   assert.match(bridge, /uz-Cyrl/);
+  assert.match(bridge, /audio\.removeAttribute\("src"\)/);
+  assert.match(sourceJs, /prefers-reduced-motion: reduce/);
   assert.match(sourceJs, /window\.prompt\(promptText\)/);
   assert.match(bridge, /calendarPrompt:/);
   assert.doesNotMatch(`${html}\n${bridge}\n${sourceJs}`, /n8n\.tim-0fficial|stats\.tolipov|img\.icons8|fonts\.googleapis|cdnjs\.cloudflare/);
+  assert.doesNotMatch(fontStyles, /https?:\/\//);
   assert.ok(cover.size > 10_000);
   assert.deepEqual(provenance.viewport, { width: 450, height: 800 });
   assert.equal(provenance.artwork, "/templates/velvet/preview.webp");
