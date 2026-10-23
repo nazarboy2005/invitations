@@ -24,14 +24,20 @@
     {
       "file": "source/styles/0ly1y_qxlqlf..css",
       "sourcePath": "..\\Invitations - this folder will be removed from production\\Chorlove\\Web invitations\\_next\\static\\chunks\\0ly1y_qxlqlf..css",
-      "bytes": 6140,
-      "sha256": "3fcd5d40feb11ed6c2f58cfcf069d01f27a1bbf95a51b75d9c9e02c63e3d3f81"
+      "bytes": 6142,
+      "sha256": "90d0d5787eb6c78730c5177a957d5ae6bd7d9f213f3767b343f290483254dff4",
+      "sourceBytes": 6140,
+      "sourceSha256": "3fcd5d40feb11ed6c2f58cfcf069d01f27a1bbf95a51b75d9c9e02c63e3d3f81",
+      "lineEndingNormalizedMatch": true
     },
     {
       "file": "source/styles/054~-i6~6lmrd.css",
       "sourcePath": "..\\Invitations - this folder will be removed from production\\Chorlove\\Web invitations\\_next\\static\\chunks\\054~-i6~6lmrd.css",
-      "bytes": 3859,
-      "sha256": "13599ddc9e6faa903f0966c4adeec12e47ecaa6382056e2cb71bdc68b93bd3fa"
+      "bytes": 3860,
+      "sha256": "5d325b9dfa0d5c254702aae71a3bc22dc3380f7037b99deb083aeddc78009078",
+      "sourceBytes": 3859,
+      "sourceSha256": "13599ddc9e6faa903f0966c4adeec12e47ecaa6382056e2cb71bdc68b93bd3fa",
+      "lineEndingNormalizedMatch": true
     }
   ],
   "excludedCapturedGallery": [
@@ -41,5 +47,22 @@
     "/images/templates/orchid-amplop/gallery-4.webp",
     "/images/templates/orchid-amplop/gallery-5.webp",
     "/images/templates/orchid-amplop/gallery-6.webp"
-  ]
+  ],
+  "sourcePageModule": {
+    "path": "..\\Invitations - this folder will be removed from production\\Chorlove\\Web invitations\\_next\\static\\chunks\\0io3rqik.2n_m.js",
+    "bytes": 55032,
+    "sha256": "0693fc8a88c7a71faa8ff3205ffd3e436b6dfcf410602bbb2f2a72517fe65ecc"
+  },
+  "sourceMotion": {
+    "viewport": "once; section intersection ratio 0.35",
+    "sectionReveal": "opacity 0, y 34px, blur 8px to visible; 0.9s ease-out; grouped children stagger 0.13s with 0.12s group delay",
+    "opening": "overlay fade after 2.45s for 0.75s; curtains scaleX to zero at 1.55s and 1.7s over 1.05s; title timeline 2.25s",
+    "special": "corner ornaments scale reveal; hero image 1.16 to 1 over 10s; selected calendar day spring reveal; countdown heart pulse; gift card shine; divider sheen; gold sparkle canvas; gallery, wish, contact, palette, and map interactions",
+    "adaptation": "Implemented as local Web Animations API and canvas behaviors in bridge.js; source CSS chunks remain packaged unchanged. Reduced motion reveals content without running looping motion."
+  },
+  "catalogCover": {
+    "status": "no dedicated source preview image in the captured Luxury Gold package",
+    "review": "The source-authentic first page was visually checked in the local shared renderer; the opening greeting, corners, sparkle field, divider, ornament, and scroll cue are visible.",
+    "publication": "Template remains unpublished; no catalog artwork or publication metadata was changed in this repair."
+  }
 }

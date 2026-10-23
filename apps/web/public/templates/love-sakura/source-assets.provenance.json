@@ -4,6 +4,15 @@
     "bytes": 55773,
     "sha256": "90f59b13d4350d6421b7b7cac853b49a40754d2e2d103d31f380bb33e43f40ba"
   },
+  "sourceMotion": {
+    "path": "..\\Invitations - this folder will be removed from production\\Chorlove\\Web invitations\\_next\\static\\chunks\\0hdebqnzl-9~n.js",
+    "sha256": "25137a4496253f2099597f67eb94fbb67aac07e025559f71990157cfab8bdb4f",
+    "behaviors": [
+      "RSVP heading and form groups: opacity 0/y 15px to opacity 1/y 0 when 20% visible, 600ms ease-out; return to initial state out of view.",
+      "Music control: scale 1.1 on hover and scale 0.9 while pressed.",
+      "Music playing icon: two-second pulsing opacity animation in the source shared component."
+    ]
+  },
   "assets": [
     {
       "file": "bride.webp",
