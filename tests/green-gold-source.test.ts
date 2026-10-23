@@ -279,6 +279,10 @@ test("Green Gold is internally registered but remains unpublished", async () => 
   const definition = templateById("green-gold");
   assert.ok(definition);
   assert.equal(definition.published, false);
+  assert.equal(
+    definition.previewImage,
+    "/templates/green-gold/catalog-cover-opening.png",
+  );
   assert.equal(definition.previewEventType, "wedding");
   assert.deepEqual(definition.categoryIds, ["wedding"]);
   const fixture = createTemplatePreviewSample("green-gold");
