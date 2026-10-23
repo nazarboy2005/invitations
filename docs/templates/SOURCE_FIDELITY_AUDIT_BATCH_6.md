@@ -54,3 +54,10 @@ Opened one Taklifnoma project task per affected template:
 Each task is instructed to inspect active edits and the current diff before
 touching the shared Marxaba preview adapter, and to stop rather than overwrite
 concurrent work.
+
+## Repair follow-up (2026-10-23)
+
+- Hilol's 450×800 cover now shows the genuine closed iftar opening without app/development chrome. Its authentic source gallery art is localized and limited to ephemeral preview data; creator uploads take precedence. Focused Hilol checks pass 9/9.
+- Konfetti's candle opener remains a clean 450×800 cover; its four captured gallery images now map to preview-only data with localized alt text and creator-upload precedence. Focused Konfetti checks pass 7/7.
+- Korporativ's typed catalog fallback and package notes now match the already-published database state; source event gallery SVGs are preview-only. Focused Korporativ checks pass 10/10.
+- Combined current focused suite passes 26/26. No database or publication changes were made. Korporativ's browser motion/interaction QA remains unverified as noted above.

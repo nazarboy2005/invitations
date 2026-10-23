@@ -229,18 +229,8 @@ test("O‘rik Guli retains captured source and uses renderer-generated opening a
   ]) {
     assert.ok(existsSync(new URL(asset, templateRoot)), `${asset} is missing`);
     assert.deepEqual(
-      readFileSync(
-        new URL(
-          asset.startsWith("preview.") ? `art/view-0.webp` : asset,
-          templateRoot,
-        ),
-      ),
-      readFileSync(
-        new URL(
-          asset.startsWith("preview.") ? `art/view-0.webp` : asset,
-          captureRoot,
-        ),
-      ),
+      readFileSync(new URL(asset, templateRoot)),
+      readFileSync(new URL(asset, captureRoot)),
       `${asset} must preserve the exact captured bytes`,
     );
   }

@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "templateId": "sahifa",
+  "catalogAsset": "preview.webp",
+  "artifactSha256": "8aa4b7ddf5ae2c865a4ace209ff3c8e455144e5e851508e495658a64f8b2743e",
+  "format": "image/webp",
+  "width": 720,
+  "height": 1280,
+  "bytes": 29880,
+  "sourceManifest": "Invitations - this folder will be removed from production/Marxaba/capture-manifest.json",
+  "sourceCapture": "Invitations - this folder will be removed from production/Marxaba/Nikoh/templates/sahifa",
+  "sourceMetaUrl": "https://www.marxaba.uz/templates/sahifa/meta.js",
+  "sourceMetaSha256": "3fa7e78e1a0025628a715c2772d97ca34db019b178ef77c4c82e6fe650cfec11",
+  "metaDeclaresPreview": false,
+  "sourcePreviewUrl": "https://www.marxaba.uz/templates/sahifa/preview.webp",
+  "sourcePreviewSha256": "8aa4b7ddf5ae2c865a4ace209ff3c8e455144e5e851508e495658a64f8b2743e",
+  "verification": "Downloaded from the canonical template path on marxaba.uz; SHA-256 and byte length exactly match the packaged catalog image. The captured meta.js is byte-identical to the same source meta.js."
+}

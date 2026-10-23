@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "templateId": "bogi-eram",
+  "catalogAsset": "preview.webp",
+  "artifactSha256": "c913cd2495b72e39c6a98d3bc767e18ea4e1a07c85bde9e5a348c95a0869d8dc",
+  "format": "image/webp",
+  "width": 720,
+  "height": 1280,
+  "bytes": 105350,
+  "sourceManifest": "Invitations - this folder will be removed from production/Marxaba/capture-manifest.json",
+  "sourceCapture": "Invitations - this folder will be removed from production/Marxaba/Nikoh/templates/bogi-eram",
+  "sourceMetaUrl": "https://www.marxaba.uz/templates/bogi-eram/meta.js",
+  "sourceMetaSha256": "5f0e2a260e6b859a8f51bb6240e6d4e2ad8277ce15c35f30acb7a043579db310",
+  "metaDeclaresPreview": true,
+  "sourcePreviewUrl": "https://www.marxaba.uz/templates/bogi-eram/preview.webp",
+  "sourcePreviewSha256": "c913cd2495b72e39c6a98d3bc767e18ea4e1a07c85bde9e5a348c95a0869d8dc",
+  "verification": "Downloaded from the canonical template path on marxaba.uz; SHA-256 and byte length exactly match the packaged catalog image. The captured meta.js is byte-identical to the same source meta.js."
+}

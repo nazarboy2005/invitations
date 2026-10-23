@@ -160,7 +160,7 @@ test("Shirin Bayram maps the shared birthday fixture and keeps blank drafts empt
   }
   assert.match(
     read(path.join(root, "apps/web/src/templates/marxaba"), "renderer.tsx"),
-    /extras:\s*\{\s*celebrant:\s*sourceData\.groom\s*\|\|\s*sourceData\.bride\s*\}/,
+    /extras:\s*\{\s*celebrant:\s*sourceData\.groom\s*\|\|\s*sourceData\.bride\s*,/,
   );
 });
 

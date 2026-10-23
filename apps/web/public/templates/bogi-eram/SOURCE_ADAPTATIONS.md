@@ -49,12 +49,18 @@ so these source animations now have verified original binaries and provenance.
 The local font sheet bundles the captured Cormorant Garamond, Great Vibes, and
 Lora families for the supported scripts.
 
-Catalog-cover finding: the previous 720×1280 (9:16) `preview.webp` showed the
-post-opening garden and skipped the distinctive closed carved gate, greeting,
+Catalog-cover finding (open): the current 720×1280 (9:16) `preview.webp` shows
+the post-opening garden and skips the distinctive closed carved gate, greeting,
 and “tap to open” prompt. The source renderer opens on the gate, layered from
 the captured gate/door artwork and HTML overlays. The source metadata names
-`preview.webp`, but that file is absent from the local capture. The catalog
-cover correction is being handled alongside this audit; it must be a portrait
-capture of the real first opening render, with platform-only preview controls
-excluded. Do not substitute a hand-built composite or modify the source
-capture.
+`preview.webp`, but that file is absent from the local capture. The integrated
+browser preview renders the authentic opening, but the available browser tool
+returns screenshots for display and provides no permitted way to export those
+pixels to the project file. Therefore the cover has not been replaced; its
+current hash is `C913CD2495B72E39C6A98D3BC767E18EA4E1A07C85BDE9E5A348C95A0869D8DC`.
+The visible capture route is `/preview?template=bogi-eram&qaSilent=1`; capture
+must use the 450×800 iframe content and exclude the platform language switcher
+and Next development badge. Do not reconstruct a composite, bypass browser
+settings, or modify the source capture.
+
+Catalog-art correction (2026-10-23): the captured `meta.js` names `preview.webp`; the metadata itself matches the canonical Marxaba file byte-for-byte. The original source's official `https://www.marxaba.uz/templates/bogi-eram/preview.webp` is 720×1280, 105,350 bytes, SHA-256 `c913cd24…9d8dc`, exactly matching the packaged catalog image. The source's own catalog art is the garden scene after the gate opens, so the earlier post-opening cover finding is not a mismatch. The closed gate remains the invitation's actual runtime opening. No cover replacement is required. See `preview.provenance.json`.

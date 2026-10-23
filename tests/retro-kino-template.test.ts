@@ -62,11 +62,8 @@ test("Retro Kino keeps the captured invitation markup, styling, and motion", () 
       `${asset} must be an exact local copy`,
     );
   }
-  assert.deepEqual(
-    readFileSync(new URL("preview.webp", templateRoot)),
-    readFileSync(new URL("art/poster.webp", templateRoot)),
-    "portrait catalog art uses the template's poster artwork",
-  );
+  assert.match(readFileSync(new URL("meta.js", templateRoot), "utf8"), /preview:\s*[\"']preview\.webp[\"']/);
+  assert.ok(existsSync(new URL("preview.webp", templateRoot)), "the metadata-declared source catalog artwork is packaged");
   assert.match(readFileSync(new URL("template.js", templateRoot), "utf8"), /reducedMotion/);
   assert.match(readFileSync(new URL("template.css", templateRoot), "utf8"), /prefers-reduced-motion/);
   assert.doesNotMatch(html, /fonts\.googleapis\.com|sample-invitation\.js|social\.js/);

@@ -306,7 +306,11 @@ test("Konfetti source gallery art is localized and preview-only", () => {
     /const hasCreatorPhotos = invitationGallery\.some\(\(photo\) => photo\.url\.trim\(\)\)/,
   );
   assert.match(renderer, /caption: localizedAlt/);
-  assert.match(renderer, /\.\.\.sourceData,\n      gallery,\n      \/\//);
+  assert.match(
+    renderer,
+    /const gallery = mapMarxabaPreviewGallery\([\s\S]*?\);[\s\S]*?return \{\s*\.\.\.sourceData,[\s\S]{0,500}\bgallery,/,
+    "the mapped gallery is sent only in the renderer message, without changing source data",
+  );
   const sharedRuntime = readFileSync(
     new URL("../shared/nikoh/core.js", root),
     "utf8",

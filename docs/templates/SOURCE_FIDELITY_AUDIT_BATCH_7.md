@@ -52,3 +52,7 @@ renderer hides empty creator-photo galleries.
 
 No template source, shared renderer, capture, database, or publication state
 was modified in this audit.
+
+## Repair follow-up (2026-10-23)
+
+Lola's current 480×900 catalog cover has been recaptured without the injected language selector; visual inspection confirms the floral opening and portrait composition remain intact. Its focused test is included in the 20/20 batch suite. This clears the earlier Lola cover finding. No new source mismatch was found in this follow-up.

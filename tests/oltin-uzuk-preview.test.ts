@@ -77,7 +77,15 @@ test("Oltin Uzuk catalog cover captures the clean source opening with pinned pro
   ) as {
     artifact: { path: string; sha256: string };
     fixture: { path: string; sha256: string; names: string[] };
-    renderer: { route: string; locale: string; excludedUi: string[] };
+    renderer: {
+      route: string;
+      locale: string;
+      browserSettings: string;
+      fixtureAdapter: string;
+      captureState: string;
+      captureOverrides: string[];
+      excludedUi: string[];
+    };
     sourceCapture: { path: string; files: Record<string, string> };
     viewport: { width: number; height: number; deviceScaleFactor: number };
   };
@@ -104,10 +112,22 @@ test("Oltin Uzuk catalog cover captures the clean source opening with pinned pro
   });
   assert.deepEqual(provenance.fixture.names, ["Javohir", "Madina"]);
   assert.equal(digest(fixture), provenance.fixture.sha256);
-  assert.equal(provenance.renderer.route, "/preview?template=oltin-uzuk&qaSilent=1");
+  assert.match(provenance.renderer.route, /local loopback capture wrapper/i);
   assert.equal(provenance.renderer.locale, "uz-Latn");
+  assert.match(provenance.renderer.browserSettings, /Chrome defaults/);
+  assert.match(provenance.renderer.browserSettings, /no proxy.*settings changed/);
+  assert.match(provenance.renderer.fixtureAdapter, /createTemplatePreviewSample.*makeLegacyData/);
+  assert.match(provenance.sourceCapture.files["index.html"], /^[a-f0-9]{64}$/);
+  assert.match(provenance.sourceCapture.files["template.css"], /^[a-f0-9]{64}$/);
+  assert.match(provenance.sourceCapture.files["template.js"], /^[a-f0-9]{64}$/);
+  assert.match(provenance.renderer.captureState, /hand\/ring fallback/);
+  assert.match(provenance.sourceOpening, /\.intro__fallback-scene/);
+  assert.match(provenance.sourceOpening, /\.hero is excluded/);
+  assert.deepEqual(provenance.renderer.captureOverrides, [
+    "Show the source .intro__fallback-scene CSS art and hide the competing .rx--intro photo rig for this static opening capture only.",
+    "Hide the shared locale selector .mh-lang for this static capture only.",
+  ]);
   assert.deepEqual(provenance.renderer.excludedUi, [
-    "Next.js development portal (outer preview page)",
     "Locale selector .mh-lang (renderer iframe)",
   ]);
   assert.equal(
@@ -117,6 +137,9 @@ test("Oltin Uzuk catalog cover captures the clean source opening with pinned pro
 
   const captured = readFileSync(new URL("index.html", captureRoot));
   assert.match(captured.toString("utf8"), /class="intro__copy"/);
+  assert.match(captured.toString("utf8"), /class="intro__fallback-scene"/);
+  assert.match(readFileSync(new URL("template.css", captureRoot), "utf8"), /\.fallback__palm/);
+  assert.match(readFileSync(new URL("template.css", captureRoot), "utf8"), /\.fallback__ring/);
   for (const [file, expectedHash] of Object.entries(provenance.sourceCapture.files)) {
     assert.equal(digest(readFileSync(new URL(file, captureRoot))), expectedHash, `${file} source hash`);
   }

@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "templateId": "anor",
+  "catalogAsset": "preview.webp",
+  "artifactSha256": "2a17a48b2b0295dd9d6d9de4cfa904fd3d1e92c6427c9f6f4b18da5e5b25bdfc",
+  "format": "image/webp",
+  "width": 720,
+  "height": 1280,
+  "bytes": 133366,
+  "sourceManifest": "Invitations - this folder will be removed from production/Marxaba/capture-manifest.json",
+  "sourceCapture": "Invitations - this folder will be removed from production/Marxaba/Nikoh/templates/anor",
+  "sourceMetaUrl": "https://www.marxaba.uz/templates/anor/meta.js",
+  "sourceMetaSha256": "3844ba957a44c761dbce3c26a1c2fc0d47a6a9f43f973dca3498663dcf80bfe8",
+  "metaDeclaresPreview": true,
+  "sourcePreviewUrl": "https://www.marxaba.uz/templates/anor/preview.webp",
+  "sourcePreviewSha256": "2a17a48b2b0295dd9d6d9de4cfa904fd3d1e92c6427c9f6f4b18da5e5b25bdfc",
+  "verification": "Downloaded from the canonical template path on marxaba.uz; SHA-256 and byte length exactly match the packaged catalog image. The captured meta.js is byte-identical to the same source meta.js."
+}

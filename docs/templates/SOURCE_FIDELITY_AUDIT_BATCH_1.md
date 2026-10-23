@@ -51,5 +51,12 @@ condition. They now guard the shared renderer's preview-only gate, creator
 upload precedence, and template-scoped venue sample behavior. Fresh browser
 animation and interaction runs were not performed in this audit.
 
-Anor's opening-cover mismatch needs a separate scoped repair. No database,
-publication, deployment, or payment state changed.
+Anor's separate repair task (`01a166ef-0ccd-7f41-a136-ffa150ca0bcd`) attempted
+the cover capture but could not save a clean isolated renderer image through
+the available browser surface. It left the cover unchanged and verified its
+focused checks at 2/2. The repair remains open. No database, publication,
+deployment, or payment state changed.
+
+## Catalog source-image follow-up (2026-10-23)
+
+The captured Anor `meta.js` and canonical `https://www.marxaba.uz/templates/anor/meta.js` have the same SHA-256. The original source's declared `https://www.marxaba.uz/templates/anor/preview.webp` is 720×1280 and byte-identical to the packaged catalog image (133,366 bytes; SHA-256 `2a17a48b…5bdfc`). Its post-opening composition is the original site's own catalog cover, so the earlier claim that this cover was mismatched because runtime `#intro` is a closed pomegranate is superseded. No opening screenshot replacement is required; provenance is recorded in the template package.

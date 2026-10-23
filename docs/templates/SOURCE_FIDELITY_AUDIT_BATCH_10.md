@@ -48,6 +48,13 @@ Result: 16 passed, 1 failed. The failing assertion is the Oltin Kuz shared-adapt
 
 Static inspection confirmed source and app reduced-motion code paths. This audit did not run fresh browser interaction or reduced-motion emulation, save/reopen, or live RSVP/wish submissions.
 
-## Repair follow-up
+## Initial handoff at audit time (historical)
 
-Three separate project repair tasks were requested: Oltin Kuz preview source imagery, Oltin Nur opening cover, and Oltin Uzuk opening cover. The Codex `create_thread` tool returned `create_thread received invalid arguments` on repeated attempts for the Taklifnoma project. No fixes were implemented in this audit. See `IMPLEMENTATION_DECISIONS.md` for the batch summary.
+Three separate project repair tasks were requested: Oltin Kuz preview source imagery, Oltin Nur opening cover, and Oltin Uzuk opening cover. The Codex `create_thread` tool initially returned `create_thread received invalid arguments`; the owner checks and repairs were subsequently completed in separate project tasks, as recorded below.
+
+## Repair follow-up (2026-10-23)
+
+- Oltin Kuz's five captured memory illustrations and venue artwork are now included only in localized catalog/initial-selection preview payloads. Creator uploads replace samples; public empty galleries remain hidden and samples do not mutate invitations. Focused checks pass 8/8.
+- Oltin Nur's catalog mapping now points to a clean 720×1280 render of the actual `#intro`, preserving the source behavior that hides names/date until the seal opens. Provenance pins the source and fixture inputs; focused checks pass 5/5.
+- Oltin Uzuk's catalog mapping points to `catalog-cover-opening.png`, a clean 450×800 captured `#intro` showing the source-defined hand-and-ring fallback scene, greeting, names/date, and open action; its former `preview.webp` is a later hero and is not the catalog image. A capture-only override reveals the fallback and hides the competing photo rig and locale selector; packaged source files remain unchanged. Focused preview/localization checks pass 7/7.
+- All three findings are resolved. Owner checks report focused results of 8/8 (Kuz), 5/5 (Nur), and 7/7 (Uzuk). No remaining blockers were reported, and no database or publication state changed.

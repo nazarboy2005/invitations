@@ -18,3 +18,7 @@ Focused command: `pnpm exec tsx --test tests/doira-template.test.ts tests/ganch-
 - Combined: 19 passed, 2 failed. The Ganch failure is the confirmed issue assigned to a separate task.
 
 The database's next three published IDs after Ganch are `glass-pink`, `golden-card`, and `green-garden`.
+
+## Repair follow-up (2026-10-23)
+
+The previously listed catalog-art provenance issues have been corrected. Evelina provenance now resolves to the captured hero path and exact source hash. Ganch now has a 430×932 portrait render of its closed-door opening, and its provenance records the current shared preview-fixture and image hashes. The current focused command above passes 22/22; the earlier 19/2 result is historical and no longer describes the current tree. Doira remains unchanged. No publication state changed.

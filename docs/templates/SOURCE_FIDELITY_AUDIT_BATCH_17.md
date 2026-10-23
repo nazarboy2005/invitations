@@ -69,3 +69,7 @@ The local preview route loaded successfully (HTTP 200 per the active local sessi
 ## Repair ownership
 
 Checked existing audit records and task list; no repair owner was found for the Yangi Uy catalog artifact/provenance findings. A separate repair task was opened for its source-path provenance and portrait complete-opening artwork. No repair task is needed for the stale test hash alone unless the user wants that test corrected; no template files were changed during this audit.
+
+## Repair follow-up (2026-10-23)
+
+Yangi Uy now uses a clean renderer capture of the complete canonical `.intro`, including the courtyard, localized opening copy, names/date, and open control, with browser/app UI excluded. The image shows the current shared preview fixture and preserves the source composition at 478×668. Provenance points to the correct `Boshqa tadbirlar/templates/yangi-uy` source folder and records the fixture/artifact hashes. Visual inspection confirms the full opening; the focused Yangi Uy suite passes 8/8. The prior 22/23 batch result is historical: the stale fixture assertion has been corrected. No database or publication state changed.

@@ -82,26 +82,32 @@ test("Qog‘oz Turna uses local fonts and only the app invitation runtime", () =
   assert.ok(preview.length > 10000, "the full portrait opening artwork should be packaged");
 });
 
-test("Qog‘oz Turna catalog cover shows its captured opening page", () => {
+test("Qog‘oz Turna catalog cover matches the original metadata-declared source artwork", () => {
   const preview = readFileSync(new URL("preview.webp", templateRoot));
   const provenance = JSON.parse(read(templateRoot, "preview.provenance.json")) as {
     format: string;
     width: number;
     height: number;
-    sourcePage: string;
-    sourceOpening: string;
-    fixture: string;
-    captureViewport: { width: number; height: number; deviceScaleFactor: number };
+    bytes: number;
+    sourceUrl: string;
+    sourceMetaSha256: string;
+    sourcePreviewSha256: string;
     sha256: string;
   };
+  const sourceMeta = readFileSync(new URL("meta.js", captureRoot));
+  const sourceMetaSha256 = createHash("sha256").update(sourceMeta).digest("hex");
+  const sourcePreviewSha256 = "0d8ca8a0310a4acd577af13a7637e244e3f9e75226e07112d9ba83c7722aa35d";
 
   assert.equal(provenance.format, "image/webp");
   assert.equal(provenance.width, 720);
   assert.equal(provenance.height, 1280);
-  assert.equal(provenance.sourcePage, "/templates/qogoz-turna/index.html?lang=uz");
-  assert.match(provenance.sourceOpening, /#intro.*origami/i);
-  assert.equal(provenance.fixture, "apps/web/src/modules/catalog/preview-sample.json");
-  assert.deepEqual(provenance.captureViewport, { width: 720, height: 1280, deviceScaleFactor: 1 });
+  assert.equal(provenance.bytes, 20308);
+  assert.equal(provenance.sourceUrl, "https://www.marxaba.uz/templates/qogoz-turna/preview.webp");
+  assert.equal(provenance.sourceMetaSha256, sourceMetaSha256);
+  assert.equal(sourceMetaSha256, "af463ed195ab443810c64ad664a9f81b547c426073f9942eeae8635a4fa757cc");
+  assert.equal(provenance.sourcePreviewSha256, sourcePreviewSha256);
+  assert.match(sourceMeta.toString("utf8"), /preview:\s*[\"']preview\.webp[\"']/);
+  assert.equal(createHash("sha256").update(preview).digest("hex"), sourcePreviewSha256);
   assert.equal(createHash("sha256").update(preview).digest("hex"), provenance.sha256);
 });
 

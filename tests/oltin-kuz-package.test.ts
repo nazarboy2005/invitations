@@ -351,6 +351,11 @@ test("Oltin Kuz empty Lahzalar is icon-only with shared wrap navigation and clea
   assert.match(html, /href="contract-adapter\.css"/);
   assert.match(html, /data-list="gallery"/);
   assert.match(core, /if\(!source\)image\.setAttribute\('aria-hidden','true'\)/);
+  assert.match(
+    core,
+    /hideIf\('gallery',!\(Array\.isArray\(data\.gallery\)&&data\.gallery\.some\(item=>plain\(item\)&&typeof item\.src==='string'&&item\.src\.trim\(\)\)\)\)/,
+    "the public renderer hides the optional gallery when no creator photo URL exists",
+  );
   assert.match(core, /placeholder\.textContent='✦'/);
   assert.match(gallery, /index=\(number\+state\.items\.length\) % state\.items\.length/);
   assert.match(gallery, /behavior: reducedMotion\?'instant':'smooth'/);

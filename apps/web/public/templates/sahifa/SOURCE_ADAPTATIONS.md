@@ -18,3 +18,5 @@ hooks while preserving the original card number and cardholder fields.
 Migration `0020_publish_sahifa.sql` publishes Sahifa at 150,000 UZS. The typed
 catalog also marks it published, so fallback catalog and creator selection
 agree with the database registration.
+
+Catalog-art verification (2026-10-23): the canonical `https://www.marxaba.uz/templates/sahifa/preview.webp` is available even though captured `meta.js` has no `preview` property. It is 720×1280, 29,880 bytes, and SHA-256 `8aa4b7dd…2743e`; the packaged `preview.webp` is byte-identical. The source cover is therefore retained as supplied by the original template site; no browser recapture is required. See `preview.provenance.json`.

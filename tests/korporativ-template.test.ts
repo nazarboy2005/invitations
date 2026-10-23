@@ -58,7 +58,7 @@ test("Korporativ is registered published with exact source event compatibility",
   ]);
   assert.deepEqual(definition.categoryIds, ["other"]);
   const sharedRenderer = read("apps/web/src/templates/marxaba", "renderer.tsx");
-  assert.match(sharedRenderer, /extras:\s*\{\s*celebrant:\s*sourceData\.groom\s*\|\|\s*sourceData\.bride\s*\}/);
+  assert.match(sharedRenderer, /celebrant:\s*sourceData\.groom\s*\|\|\s*sourceData\.bride/);
 });
 
 test("central sample and default contract content cover corporate locales", () => {

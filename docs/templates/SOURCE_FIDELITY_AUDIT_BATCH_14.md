@@ -72,20 +72,19 @@ pnpm exec tsx --test tests/qogoz-turna-template.test.ts tests/retro-kino-templat
 
 The initial focused run reported 21/22 because Retro Kino's old empty-gallery
 assertion contradicted the shared public hide-empty-photo rule. After correcting
-that stale assertion, the focused run passed 22/22. The separate Retro Kino
-cover follow-up then tightened the cover test to require genuine `#intro`
-capture provenance; the current poster-copy image correctly fails that new
-gate. The current focused result is therefore 21/22, with the sole failure
-tracking the unresolved confirmed cover defect. The other source-parity checks
+that stale assertion, the focused run passed 22/22. The subsequent cover
+assertions were also updated after checking canonical source image URLs; the
+current combined focused suite passes 22/22. The other source-parity checks
 inspect HTML/CSS/JavaScript, local fonts, motion/reduced-motion code, preview
-fixtures, and existing cover provenance. Catalog images were visually
-inspected. Fresh browser animation/interaction runs were not performed in this
-audit because local browser control is disabled in Work settings.
+fixtures, and source-cover provenance. Fresh browser animation/interaction runs
+were not performed in this audit because local browser control is disabled in
+Work settings.
 
-Separate repair tasks were created for the three confirmed catalog findings.
-Qog‘oz Turna's permitted screenshot interface did not expose a savable rendered
-image. Retro Kino and Sahifa can be viewed through their supported browser
-surfaces, but those surfaces cannot save a clean iframe-only portrait capture;
-an alternate automation export was not used. All three original covers remain
-unchanged and require a permitted capture path. No source capture, database,
-publication, deployment, or payment state changed.
+Earlier cover repair tasks were based on treating runtime `#intro` as the only
+valid catalog image. They are superseded by the canonical-source verification
+below. No source capture, database, publication, deployment, or payment state
+changed.
+
+## Canonical source-cover follow-up (2026-10-23)
+
+The first-pass comparison incorrectly treated the runtime `#intro` as the only valid catalog image. The exact source's metadata-declared `preview.webp` files are available at their canonical Marxaba URLs. Qog‘oz Turna's captured `meta.js` hash matches the canonical source file; the official `preview.webp` is 720×1280, 20,308 bytes, SHA-256 `0d8ca8a0…22aa35d`, and now replaces the non-source local render. Retro Kino's captured `meta.js` also matches the canonical source; its official `preview.webp` is 720×1280, 46,086 bytes, SHA-256 `10d391f6…fc95291`, and now replaces the local poster-only copy. Sahifa's canonical source-path `preview.webp` is 720×1280, 29,880 bytes, SHA-256 `8aa4b7dd…2743e`, already byte-identical to its packaged cover (although its captured `meta.js` has no preview property). Provenance for all three is recorded in the template packages. The current combined focused suite passes 22/22. The screenshot-export blocker no longer applies to these covers; no source capture or publication state changed.

@@ -34,3 +34,10 @@ New image rule from the user: use authentic, template-owned source images in cat
 ## Repair tasks
 
 Created separate Taklifnoma project tasks for Glass Pink, Golden Card, and Green Garden. Each task must preserve the archived source capture untouched, make the smallest source/art correction, update provenance and focused checks, and avoid changing publication state, event compatibility, deployment, or payments.
+
+## Repair follow-up (2026-10-23)
+
+- Golden Card's preserved `source/preview-frame.html` now matches the archive byte-for-byte; its full closed-card portrait remains appropriate.
+- Green Garden's preserved snapshot and fixture provenance were corrected. Its current portrait cover is a clean render of the floral opening without app/browser controls.
+- Glass Pink's fonts are now packaged locally and its canonical snapshot is preserved. Its current candidate cover is **not approved**: visual inspection shows duplicated/overlapped opening lettering, and provenance explicitly records `catalogEligible: false`. The exact opening capture remains unresolved; do not treat test success as visual approval.
+- Focused command `pnpm exec tsx --test tests/glass-pink-template.test.ts tests/golden-card-template.test.ts tests/green-garden-template.test.ts` passes 18/18. This guards source and contract behavior, but does not clear Glass Pink's visual blocker or establish animation timing from the static capture.

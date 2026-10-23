@@ -90,31 +90,35 @@ test("Retro Kino hides empty galleries and collapses unsupported empty fields", 
   assert.match(source, /data-slot="toyona\.bank"/);
 });
 
-test("Retro Kino catalog artwork is a portrait capture of the packaged opening", () => {
+test("Retro Kino catalog artwork matches the original metadata-declared source cover", () => {
   const preview = readFileSync(new URL("preview.webp", root));
   const html = readFileSync(new URL("index.html", root), "utf8");
   const templateCss = readFileSync(new URL("template.css", root), "utf8");
   const templateJs = readFileSync(new URL("template.js", root), "utf8");
+  const sourceMetaPath = new URL("../Invitations - this folder will be removed from production/Marxaba/Nikoh/templates/retro-kino/meta.js", import.meta.url);
+  const sourceMeta = readFileSync(sourceMetaPath);
   const provenance = JSON.parse(readFileSync(new URL("preview.provenance.json", root), "utf8")) as {
-    artifact: string; sha256: string; format: string; width: number; height: number;
-    source: string; sourceCapture: string; fixture: string; fixtureSha256: string;
-    rendererSha256: string; capturedSelector: string; excluded: string[];
+    artifact: string; sha256: string; format: string; width: number; height: number; bytes: number;
+    sourceUrl: string; sourceMetaSha256: string; sourcePreviewSha256: string; sourceCapture: string;
   };
   const dimensions = readFileSync(new URL("preview.webp", root)).subarray(0, 30);
   assert.equal(dimensions.toString("ascii", 0, 4), "RIFF");
   assert.equal(dimensions.toString("ascii", 8, 12), "WEBP");
-  assert.notEqual(createHash("sha256").update(preview).digest("hex"), createHash("sha256").update(readFileSync(new URL("art/poster.webp", root))).digest("hex"));
+  const artifactSha256 = createHash("sha256").update(preview).digest("hex");
+  const sourceMetaSha256 = createHash("sha256").update(sourceMeta).digest("hex");
   assert.equal(provenance.artifact, "preview.webp");
-  assert.equal(provenance.sha256, createHash("sha256").update(preview).digest("hex"));
+  assert.equal(provenance.sha256, artifactSha256);
   assert.equal(provenance.format, "image/webp");
-  assert.ok(provenance.width > 0 && provenance.height > provenance.width);
-  assert.equal(provenance.source, "index.html #intro via packaged preview renderer");
+  assert.equal(provenance.width, 720);
+  assert.equal(provenance.height, 1280);
+  assert.equal(provenance.bytes, 46086);
+  assert.equal(artifactSha256, "10d391f6474ce4f325c82745a648941c3a789c53ab64f44f7b810d35afc95291");
+  assert.equal(provenance.sourcePreviewSha256, artifactSha256);
+  assert.equal(provenance.sourceUrl, "https://www.marxaba.uz/templates/retro-kino/preview.webp");
+  assert.equal(provenance.sourceMetaSha256, sourceMetaSha256);
+  assert.equal(sourceMetaSha256, "4e0d5fd416451afd81017650cb842e9790d074a2c6e32418d2d692418b7f75bb");
+  assert.match(sourceMeta.toString("utf8"), /preview:\s*[\"']preview\.webp[\"']/);
   assert.match(provenance.sourceCapture, /Marxaba\/Nikoh\/templates\/retro-kino$/);
-  assert.equal(provenance.capturedSelector, "#intro");
-  assert.equal(provenance.fixture, "apps/web/src/modules/catalog/preview-sample.json");
-  assert.match(provenance.fixtureSha256, /^[a-f0-9]{64}$/);
-  assert.match(provenance.rendererSha256, /^[a-f0-9]{64}$/);
-  assert.ok(provenance.excluded.includes("preview language controls"));
   assert.match(html, /<section class="intro" id="intro"/);
   assert.match(html, /data-slot="groom"/);
   assert.match(html, /data-slot="bride"/);

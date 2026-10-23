@@ -22,7 +22,7 @@ The focused tests compare captured body markup, authored CSS/JS/localization/met
 
 ## Visual catalog-art review
 
-- **Nahor:** `apps/web/public/templates/nahor/preview.webp` is a 480×720 portrait of the correct closed qozon opening. The app-injected locale selector is visibly embedded at the upper-right. This is a confirmed catalog-art discrepancy. The captured source and opening interaction stay unchanged; separate repair task `01a166b8-375e-7680-a746-abcda7e8de0f` will recapture clean art from the packaged renderer and update its provenance/assertions.
+- **Nahor:** At audit time, `preview.webp` showed the correct closed qozon opening but had an app-injected locale selector. This was repaired: the current 480×720 portrait is captured from the packaged renderer with injected controls excluded. The separate task is `01a166b8-375e-7680-a746-abcda7e8de0f`.
 - **Nahorgi Osh:** `apps/web/public/templates/nahorgi-osh/preview.webp` is a 720×1280 portrait render of the source `.intro`, with the surrounding source background. Provenance states that the platform locale control is excluded. The full distinctive opening is visible without injected controls.
 - **Nilufar:** `apps/web/public/templates/nilufar/preview.webp` is 1080×1920 and byte-identical to the captured `art/poster-pond.webp`, the actual opening background named by provenance. It is source artwork, without app or browser chrome.
 
@@ -36,4 +36,4 @@ Checked source and packaged To‘yona fields, RSVP, moderated-wishes wiring, dat
 
 Command: `pnpm exec tsx --test tests/nahor-template.test.ts tests/nahorgi-osh-template.test.ts tests/nilufar-template.test.ts`
 
-Result: 25 passed, 0 failed. It includes source parity and preview mapping assertions for the three templates. Local cover files were also opened and visually inspected. Nahor's cover defect is the only confirmed discrepancy in this batch.
+Result: 25 passed, 0 failed. It includes source parity and preview mapping assertions for the three templates. Local cover files were also opened and visually inspected. The Nahor cover discrepancy is resolved; no confirmed source or catalog-art discrepancy remains in this batch.

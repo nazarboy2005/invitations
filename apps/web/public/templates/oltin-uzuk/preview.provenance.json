@@ -1,16 +1,22 @@
 {
   "artifact": {
     "path": "catalog-cover-opening.png",
-    "sha256": "b1b62c6146b939154d6fda638079bcd0399c09036a9d91cf05fd2bc23588aad1"
+    "sha256": "b72ac903b717945da7571709f6f13061afd92601849b14c94904de59b7220314"
   },
-  "sourceOpening": "The captured #intro opening, with its ring artwork, greeting, invitation label, couple names, date, and open action.",
+  "sourceOpening": "The captured #intro CSS fallback scene (.intro__fallback-scene) with hand and ring, greeting, invitation label, couple names, date, and open action; the following .hero is excluded.",
   "renderer": {
-    "route": "/preview?template=oltin-uzuk&qaSilent=1",
+    "route": "Local loopback capture wrapper with the packaged /templates/oltin-uzuk/index.html renderer",
     "browser": "Google Chrome with Playwright",
+    "browserSettings": "Chrome defaults; no proxy, reduced-motion, or policy settings changed.",
     "locale": "uz-Latn",
+    "fixtureAdapter": "createTemplatePreviewSample('oltin-uzuk') -> makeLegacyData(..., 'uz-Latn', '', true)",
     "captureDelayAfterArtworkReadyMs": 4500,
+    "captureState": "Source-defined CSS hand/ring fallback scene shown inside the captured #intro opening.",
+    "captureOverrides": [
+      "Show the source .intro__fallback-scene CSS art and hide the competing .rx--intro photo rig for this static opening capture only.",
+      "Hide the shared locale selector .mh-lang for this static capture only."
+    ],
     "excludedUi": [
-      "Next.js development portal (outer preview page)",
       "Locale selector .mh-lang (renderer iframe)"
     ]
   },

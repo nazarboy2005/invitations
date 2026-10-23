@@ -8,4 +8,6 @@ The package uses the exact Glass Pink server-rendered template subtree and the t
 
 Visual inspection of the current catalog image shows duplicated/overlapped lettering. Source inspection found no duplicated opening text in the packaged or preserved markup, and no adapter path that appends it. The confirmed font-path mismatch is fixed. The remaining visual check is a settled screenshot after the bundled fonts have loaded; preserve the raw source snapshot unchanged.
 
+Recapture status (2026-10-23): the supported CUA inventory returned no targetable apps and only empty ChatGPT in-app browser and Codex MCP Apps tabs. No permitted local browser surface is currently available. Keep `catalogEligible` false and the existing cover unchanged; do not use a separate headless-browser export route while the browser-use surface is unavailable.
+
 The Chorlove manifest maps all six captured Glass Pink gallery slots to Orchid Amplop photos; these cross-template sample images remain excluded. The shared preview fixture's six gallery entries are empty and preview-only. The contract adapter passes through creator-uploaded photo URLs, and the public renderer hides the gallery when no creator photos or story chapters exist. No own-source Glass Pink gallery photographs were found; the package's original floral and decorative assets remain visible in the template opening.

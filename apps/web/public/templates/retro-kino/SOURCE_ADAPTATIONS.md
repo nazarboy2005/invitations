@@ -21,9 +21,10 @@
   section structure and design remain intact. Venue photos and gift notes are
   not part of the approved shared contract; bank-name entry is intentionally
   absent from the editor.
-- `preview.webp` is a byte-for-byte copy of the template's own `art/poster.webp`
-  at its original 941×1672 portrait dimensions. `preview.provenance.json`
-  records its SHA-256 checksum and source path.
+- `preview.webp` is the exact original source catalog image served from the
+  canonical Marxaba template URL and declared by the captured `meta.js`.
+  `preview.provenance.json` records the source URL, metadata, dimensions, and
+  matching SHA-256 checksums.
 
 The captured `index.html` body, `template.css` styling, `template.js` motion,
 `meta.js` metadata, and artwork remain preserved as tested against the

@@ -21,8 +21,13 @@ and are never saved with creator data.
 
 The capture manifest identifies the source as
 `Marxaba/Nikoh/templates/anor`. Its local capture does not contain the
-`preview.webp` named by `meta.js`; the existing packaged catalog image is kept
-as that separately supplied metadata artwork. It depicts the opened hero
-scene, while the captured renderer's initial page is the closed pomegranate
-opening. The opening was rendered from the capture for comparison; catalog art
-continues to follow the metadata asset.
+`preview.webp` named by `meta.js`; Yoryor's matching Anor image is a standalone
+asset, not a full template source. The existing packaged catalog image depicts
+the opened hero scene, while the captured renderer's initial page is the closed
+pomegranate opening with greeting and “Anorni ochish” action. A clean portrait
+capture of that opening remains pending: the available browser UI can display
+the real renderer but does not provide a permitted way to save an isolated
+iframe screenshot into the workspace. No substitute artwork was made, and the
+existing preview and all original captures remain unchanged.
+
+Catalog-art verification (2026-10-23): the captured `meta.js` declares `preview.webp`, and its SHA-256 matches the canonical Marxaba `meta.js` at `https://www.marxaba.uz/templates/anor/meta.js` (`3844ba95…80bfe8`). The source's official `https://www.marxaba.uz/templates/anor/preview.webp` is 720×1280, 133,366 bytes, SHA-256 `2a17a48b…5bdfc`; the packaged `preview.webp` is byte-identical. This official source catalog cover depicts the post-opening hero; that is source-authentic catalog art. The earlier finding that treated the closed `#intro` as the only acceptable cover is superseded. No replacement capture is needed. See `preview.provenance.json`.

@@ -1,20 +1,17 @@
 {
+  "schemaVersion": 1,
+  "templateId": "qogoz-turna",
+  "artifact": "preview.webp",
+  "sha256": "0d8ca8a0310a4acd577af13a7637e244e3f9e75226e07112d9ba83c7722aa35d",
   "format": "image/webp",
   "width": 720,
   "height": 1280,
-  "sourcePage": "/templates/qogoz-turna/index.html?lang=uz",
-  "sourceOpening": "Settled #intro origami invitation opening with greeting, names, date, and open button",
-  "fixture": "apps/web/src/modules/catalog/preview-sample.json",
-  "fixtureLocale": "uz-Latn",
-  "fixtureNames": [
-    "Javohir",
-    "Madina"
-  ],
-  "captureViewport": {
-    "width": 720,
-    "height": 1280,
-    "deviceScaleFactor": 1
-  },
-  "captureMethod": "Captured from the unchanged source index.html and template.css, with its authored arrival animation frozen at the end state",
-  "sha256": "6f8425776a015ff8088e2e038427db85b707b958c14b40077d843bd18f0f0a90"
+  "bytes": 20308,
+  "sourceManifest": "Invitations - this folder will be removed from production/Marxaba/capture-manifest.json",
+  "sourceCapture": "Invitations - this folder will be removed from production/Marxaba/Nikoh/templates/qogoz-turna",
+  "sourceMetaUrl": "https://www.marxaba.uz/templates/qogoz-turna/meta.js",
+  "sourceMetaSha256": "af463ed195ab443810c64ad664a9f81b547c426073f9942eeae8635a4fa757cc",
+  "sourceUrl": "https://www.marxaba.uz/templates/qogoz-turna/preview.webp",
+  "sourcePreviewSha256": "0d8ca8a0310a4acd577af13a7637e244e3f9e75226e07112d9ba83c7722aa35d",
+  "verification": "Exact byte-for-byte match to the canonical metadata-declared preview at the source URL. The archived meta.js is byte-identical to the source meta.js. The earlier local capture was not the original catalog artwork."
 }

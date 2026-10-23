@@ -1,10 +1,17 @@
 {
+  "schemaVersion": 1,
+  "templateId": "retro-kino",
   "artifact": "preview.webp",
-  "sha256": "2516ce705a68b6dac4654c3d6a5db9380b9af6623cdd51be130d4a37fe375c89",
+  "sha256": "10d391f6474ce4f325c82745a648941c3a789c53ab64f44f7b810d35afc95291",
   "format": "image/webp",
-  "width": 941,
-  "height": 1672,
-  "source": "art/poster.webp",
+  "width": 720,
+  "height": 1280,
+  "bytes": 46086,
+  "sourceManifest": "Invitations - this folder will be removed from production/Marxaba/capture-manifest.json",
   "sourceCapture": "Invitations - this folder will be removed from production/Marxaba/Nikoh/templates/retro-kino",
-  "verification": "The catalog image is an exact byte-for-byte copy of the template's poster artwork and retains its portrait aspect ratio."
+  "sourceMetaUrl": "https://www.marxaba.uz/templates/retro-kino/meta.js",
+  "sourceMetaSha256": "4e0d5fd416451afd81017650cb842e9790d074a2c6e32418d2d692418b7f75bb",
+  "sourceUrl": "https://www.marxaba.uz/templates/retro-kino/preview.webp",
+  "sourcePreviewSha256": "10d391f6474ce4f325c82745a648941c3a789c53ab64f44f7b810d35afc95291",
+  "verification": "Exact byte-for-byte match to the canonical metadata-declared preview at the source URL. The archived meta.js is byte-identical to the source meta.js. The earlier local poster copy did not match the original catalog artwork."
 }
