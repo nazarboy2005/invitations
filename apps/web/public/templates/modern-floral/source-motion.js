@@ -1,0 +1,287 @@
+(() => {
+  "use strict";
+
+  const root = document.querySelector('[data-chorlove-template="modern-floral"]');
+  if (!root) return;
+
+  const registered = new WeakSet();
+  const running = new WeakMap();
+  let observer;
+  let initialized = false;
+  let reduced = false;
+  const flowerDelays = [0, 0.15, 0, 0.15, 0, 0.1, 0, 0, 0];
+  const motionReduced = (payload) => Boolean(payload?.reducedMotion) ||
+    Boolean(window.matchMedia?.("(prefers-reduced-motion: reduce)").matches);
+
+  function targetFor(node) {
+    const inline = node.getAttribute("style") || "";
+    const transform = node.style.transform || "";
+    const target = { opacity: 1 };
+    if (inline.includes("filter:blur(8px)")) target.filter = "blur(0px)";
+    if (node.matches("section:nth-of-type(2) > div.absolute.inset-0")) target.opacity = 0.03;
+    if (transform.includes("translateX(-20px)")) target.transform = "translateX(0px)";
+    else if (transform.includes("translateY(5px)")) target.transform = "translateY(0px)";
+    else if (transform.includes("scale(0)")) target.transform = "scale(1)";
+    else if (transform.includes("scale(0.9)")) target.transform = "scale(1)";
+    else if (transform.includes("scale(0.95)")) target.transform = "scale(1)";
+    else if (transform.includes("scale(0.96)")) target.transform = "scale(1)";
+    else if (transform.includes("translateY(18px)")) target.transform = "translateY(0px)";
+    else if (transform.includes("translateY(20px)")) target.transform = "translateY(0px)";
+    else if (transform.includes("translateY(24px)")) target.transform = "translateY(0px)";
+    else if (transform.includes("translateY(28px)")) target.transform = "translateY(0px) scale(1) rotate(0deg)";
+    else if (transform.includes("translateY(30px)")) target.transform = "translateY(0px)";
+    else if (transform.includes("translateY(32px)")) target.transform = "translateY(0px)";
+    else if (transform.includes("translateY(15px)")) target.transform = "translateY(0px)";
+    return target;
+  }
+
+  function configFor(node, index) {
+    const inline = node.getAttribute("style") || "";
+    const transform = node.style.transform || "";
+    if (transform.includes("translateY(15px)")) return { duration: 600, amount: 0.2, once: false };
+    if (transform.includes("translateY(18px)")) return { duration: 300, delay: index * 40, amount: 0.35, once: true };
+    if (transform.includes("scale(0.96)")) return { duration: 300, delay: index * 50, amount: 0.35, once: true };
+    if (transform.includes("scale(0.9)") && node.matches(".relative.aspect-square")) return { duration: 800, delay: index * 100, amount: 0.35, once: false };
+    if (transform.includes("translateX(-20px)")) return { duration: 300, delay: index * 100, amount: 0.35, once: false };
+    if (inline.includes("filter:blur(8px)")) return { duration: 900, amount: 0.35, once: true };
+    if (transform.includes("translateY(30px)")) return { duration: 1200, amount: 0.35, once: false };
+    if (transform.includes("translateY(20px)")) return { duration: 1000, amount: 0.35, once: false };
+    if (transform.includes("translateY(28px)") || transform.includes("translateY(24px)")) return { duration: 900, amount: 0.35, once: true };
+    if (transform.includes("scale(0.78)")) return { duration: 900, amount: 0.35, once: true };
+    return { duration: 600, amount: 0.2, once: false };
+  }
+
+  function animateReveal(node, config) {
+    if (reduced || node.hidden || !node.isConnected) return;
+    running.get(node)?.cancel();
+    const initial = {
+      opacity: node.style.opacity || "1",
+      transform: node.style.transform || "none",
+    };
+    if ((node.getAttribute("style") || "").includes("filter:blur(8px)")) initial.filter = "blur(8px)";
+    running.set(node, node.animate([initial, targetFor(node)], {
+      duration: config.duration,
+      delay: config.delay || 0,
+      easing: "ease-out",
+      fill: "both",
+    }));
+  }
+
+  function registerReveals() {
+    const nodes = root.querySelectorAll('section [style*="opacity:0"], section [style*="scale(0)"]');
+    for (const node of nodes) {
+      if (registered.has(node) || node.closest("[hidden]")) continue;
+      registered.add(node);
+      const section = node.closest("section");
+      const transform = node.style.transform || "";
+      let peers = [...section.querySelectorAll(':scope [style*="opacity:0"], :scope [style*="scale(0)"]')];
+      if (transform.includes("translateY(18px)") || transform.includes("scale(0.96)")) {
+        peers = [...node.parentElement.querySelectorAll(':scope > div[style*="opacity:0"]')];
+      } else if (transform.includes("scale(0.9)") && node.matches(".relative.aspect-square")) {
+        peers = [...section.querySelectorAll(".relative.aspect-square")];
+      } else if (transform.includes("translateX(-20px)")) {
+        peers = [...section.querySelectorAll('a[style*="opacity:0"]')];
+      }
+      const index = Math.max(0, peers.indexOf(node));
+      const config = configFor(node, index);
+      if (transform.includes("scale(0.78)")) {
+        const ornaments = [...root.querySelectorAll('section [style*="scale(0.78)"]')];
+        config.delay = (flowerDelays[ornaments.indexOf(node)] || 0) * 1000;
+      }
+      if (section === root.querySelector("section")) {
+        const group = node.closest(".space-y-4, .relative.py-4");
+        if (group) {
+          const groupNodes = [...group.querySelectorAll(':scope [style*="opacity:0"], :scope [style*="scale(0)"]')];
+          config.delay = 2750 + (group.classList.contains("relative") ? 140 : 0) + Math.max(0, groupNodes.indexOf(node)) * 140;
+          config.once = true;
+        }
+      }
+      node.dataset.mfMotionConfig = JSON.stringify(config);
+      observer.observe(node);
+    }
+  }
+
+  function animateOpening() {
+    const opening = root.firstElementChild;
+    if (!opening || opening.dataset.mfOpeningStarted) return;
+    opening.dataset.mfOpeningStarted = "true";
+    if (reduced) {
+      opening.hidden = true;
+      return;
+    }
+    const [curtain, greeting] = opening.children;
+    curtain?.animate([{ transform: "scaleY(1)" }, { transform: "scaleY(0)" }], {
+      delay: 1450, duration: 1000, easing: "cubic-bezier(.83,0,.17,1)", fill: "forwards",
+    });
+    greeting?.animate([
+      { opacity: 0, transform: "translateY(24px) scale(.84)", offset: 0 },
+      { opacity: 1, transform: "translateY(0px) scale(1)", offset: 0.5 },
+      { opacity: 1, transform: "translateY(0px) scale(1)", offset: 0.78 },
+      { opacity: 0, transform: "translateY(-18px) scale(1.05)", offset: 1 },
+    ], { duration: 2100, easing: "ease-out", fill: "forwards" });
+    opening.animate([{ opacity: 1 }, { opacity: 0 }], {
+      delay: 2250, duration: 750, easing: "ease-in-out", fill: "forwards",
+    });
+    window.setTimeout(() => { if (opening.isConnected) opening.hidden = true; }, 3000);
+  }
+
+  function animatePetals() {
+    const layer = root.children[2];
+    if (!layer || layer.dataset.mfPetalsStarted || reduced) return;
+    layer.dataset.mfPetalsStarted = "true";
+    [...layer.children].forEach((petal, index) => {
+      // These values are the captured page's deterministic 34-petal sequence.
+      const left = (37 * index) % 100;
+      const delay = (index % 16) * 800;
+      const duration = (12 + (index % 9) * 1.8) * 1000;
+      const rotation = (53 * index) % 360;
+      const drift = 8 + (index % 5) * 5;
+      const rotate = (degrees) => `rotate(${degrees}deg)`;
+      petal.animate([
+        { top: "-10%", left: `${left}%`, transform: rotate(rotation), opacity: 0, offset: 0 },
+        { top: "30%", left: `${left + drift}%`, transform: rotate(rotation + 240), opacity: 0.3, offset: 0.333 },
+        { top: "70%", left: `${left - drift}%`, transform: rotate(rotation + 480), opacity: 0.3, offset: 0.667 },
+        { top: "110%", left: `${left}%`, transform: rotate(rotation + 720), opacity: 0, offset: 1 },
+      ], { duration, delay, iterations: Infinity, easing: "linear" });
+    });
+  }
+
+  function startContinuousMotion() {
+    if (reduced) return;
+    root.querySelectorAll("section .w-56").forEach((flower) => {
+      if (flower.dataset.mfFloatMotion) return;
+      flower.dataset.mfFloatMotion = "true";
+      const mirrored = flower.classList.contains("scale-x-[-1]");
+      const ornament = flower.parentElement;
+      const ornaments = [...root.querySelectorAll('section [style*="scale(0.78)"]')];
+      const delay = flowerDelays[ornaments.indexOf(ornament)] || 0;
+      flower.animate([
+        { transform: "translateY(0px) rotate(0deg)" },
+        { transform: `translateY(-8px) rotate(${mirrored ? -2 : 2}deg)` },
+        { transform: "translateY(0px) rotate(0deg)" },
+      ], { duration: (6 + delay) * 1000, delay: delay * 1000, iterations: Infinity, easing: "ease-in-out" });
+    });
+    const heart = root.querySelector("section:first-of-type .relative.py-4 > .absolute.inset-0");
+    if (heart && !heart.dataset.mfLoopMotion) {
+      heart.dataset.mfLoopMotion = "true";
+      heart.animate([
+        { transform: "scale(1) rotate(0deg)" }, { transform: "scale(1.05) rotate(5deg)" },
+        { transform: "scale(1) rotate(-5deg)" }, { transform: "scale(1) rotate(0deg)" },
+      ], { duration: 10000, iterations: Infinity, easing: "ease-in-out" });
+    }
+    const scrollCue = root.querySelector("section:first-of-type .w-4.h-7");
+    if (scrollCue && !scrollCue.dataset.mfLoopMotion) {
+      scrollCue.dataset.mfLoopMotion = "true";
+      scrollCue.animate([{ transform: "translateY(0px)" }, { transform: "translateY(8px)" }, { transform: "translateY(0px)" }], { duration: 2000, iterations: Infinity });
+    }
+    const calendarHeart = root.querySelector("section:nth-of-type(8) .relative.py-4 .text-\\[\\#FFB6C1\\]");
+    if (calendarHeart && !calendarHeart.dataset.mfLoopMotion) {
+      calendarHeart.dataset.mfLoopMotion = "true";
+      calendarHeart.animate([{ transform: "scale(1)" }, { transform: "scale(1.15)" }, { transform: "scale(1)" }], { duration: 2000, iterations: Infinity, easing: "ease-in-out" });
+    }
+    const wishes = root.querySelector("section:nth-of-type(11) .space-y-3.py-1");
+    const wishCount = wishes?.children.length || 0;
+    if (wishes && wishCount > 3 && !wishes.dataset.mfWishLoop) {
+      wishes.dataset.mfWishLoop = "true";
+      wishes.animate([{ transform: "translateY(0%)" }, { transform: "translateY(-50%)" }], {
+        duration: Math.max(2200 * wishCount, 16000), iterations: Infinity, easing: "linear",
+      });
+    }
+  }
+
+  function animateSourceControls() {
+    if (reduced) return;
+    const music = root.querySelector(".mf-music");
+    if (music && !music.dataset.mfMotionBound) {
+      music.dataset.mfMotionBound = "true";
+      music.addEventListener("pointerenter", () => music.animate([{ transform: "scale(1)" }, { transform: "scale(1.1)" }], { duration: 150, fill: "forwards" }));
+      music.addEventListener("pointerleave", () => music.animate([{ transform: "scale(1.1)" }, { transform: "scale(1)" }], { duration: 150, fill: "forwards" }));
+      music.addEventListener("pointerdown", () => music.animate([{ transform: "scale(1)" }, { transform: "scale(.9)" }], { duration: 100, fill: "forwards" }));
+      music.addEventListener("pointerup", () => music.animate([{ transform: "scale(.9)" }, { transform: "scale(1)" }], { duration: 100, fill: "forwards" }));
+    }
+    root.querySelectorAll("section:nth-of-type(6) a").forEach((link) => {
+      if (link.dataset.mfMotionBound) return;
+      link.dataset.mfMotionBound = "true";
+      link.addEventListener("pointerenter", () => link.animate([{ transform: "scale(1)" }, { transform: "scale(1.02)" }], { duration: 150, fill: "forwards" }));
+      link.addEventListener("pointerleave", () => link.animate([{ transform: "scale(1.02)" }, { transform: "scale(1)" }], { duration: 150, fill: "forwards" }));
+      link.addEventListener("pointerdown", () => link.animate([{ transform: "scale(1)" }, { transform: "scale(.98)" }], { duration: 100, fill: "forwards" }));
+      link.addEventListener("pointerup", () => link.animate([{ transform: "scale(.98)" }, { transform: "scale(1)" }], { duration: 100, fill: "forwards" }));
+    });
+  }
+
+  function finishWithoutMotion() {
+    observer?.disconnect();
+    root.classList.add("mf-reduced");
+    root.querySelectorAll('section [style*="opacity:0"], section [style*="scale(0)"]').forEach((node) => {
+      const target = targetFor(node);
+      if (target.opacity != null) node.style.opacity = String(target.opacity);
+      if (target.transform) node.style.transform = target.transform;
+      if (target.filter) node.style.filter = target.filter;
+    });
+    if (root.children[2]) root.children[2].hidden = true;
+    if (root.firstElementChild) root.firstElementChild.hidden = true;
+  }
+
+  function openLightbox(layer) {
+    if (reduced) return;
+    const image = layer.querySelector("img");
+    layer.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 300, easing: "ease-out", fill: "both" });
+    image?.animate([{ opacity: 0, transform: "scale(.96)" }, { opacity: 1, transform: "scale(1)" }], {
+      duration: 300, easing: "ease-out", fill: "both",
+    });
+  }
+
+  function closeLightbox(layer, onFinish) {
+    if (reduced) {
+      onFinish?.();
+      return;
+    }
+    const image = layer.querySelector("img");
+    image?.animate([{ opacity: 1, transform: "scale(1)" }, { opacity: 0, transform: "scale(.96)" }], {
+      duration: 200, easing: "ease-in", fill: "forwards",
+    });
+    const fade = layer.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 200, easing: "ease-in", fill: "forwards" });
+    fade.onfinish = () => {
+      fade.cancel();
+      onFinish?.();
+    };
+  }
+
+  function start(payload = {}) {
+    reduced = motionReduced(payload);
+    if (reduced) {
+      finishWithoutMotion();
+      return;
+    }
+    root.classList.remove("mf-reduced");
+    if (!initialized) {
+      initialized = true;
+      observer = new IntersectionObserver((entries) => {
+        for (const entry of entries) {
+          const node = entry.target;
+          const config = JSON.parse(node.dataset.mfMotionConfig || "{}");
+          const reached = entry.isIntersecting && entry.intersectionRatio >= config.amount;
+          if (reached) {
+            animateReveal(node, config);
+            if (config.once) observer.unobserve(node);
+          } else if (!config.once) running.get(node)?.cancel();
+        }
+      }, { root, threshold: [0, 0.2, 0.35] });
+      animateOpening();
+      animatePetals();
+    }
+    registerReveals();
+    startContinuousMotion();
+    animateSourceControls();
+  }
+
+  window.ModernFloralSourceMotion = { start, openLightbox, closeLightbox };
+  window.addEventListener("message", (event) => {
+    if (event.source !== parent || event.origin !== location.origin || event.data?.type !== "modern-floral:update") return;
+    window.setTimeout(() => start(event.data.payload), 0);
+  });
+  try {
+    const initial = JSON.parse(window.name);
+    if (initial?.type === "modern-floral:update") window.setTimeout(() => start(initial.payload), 0);
+  } catch {}
+})();

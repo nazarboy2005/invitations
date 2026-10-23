@@ -21,5 +21,25 @@
     "/images/templates/orchid-amplop/gallery-4.webp",
     "/images/templates/orchid-amplop/gallery-5.webp",
     "/images/templates/orchid-amplop/gallery-6.webp"
-  ]
+  ],
+  "sourceMotionModule": {
+    "path": "..\\..\\..\\..\\Invitations - this folder will be removed from production\\Chorlove\\Web invitations\\_next\\static\\chunks\\0umiwyco9-jdx.js",
+    "sha256": "eaed95def4d91f8382ad0ed45938909c017b20403850fdbd631a2c5b26435f45",
+    "behavior": "Original route module for Modern Floral; source choreography is ported into source-motion.js for the isolated static page."
+  },
+  "catalogArtwork": {
+    "file": "catalog-opening.jpg",
+    "sourceUrl": "https://payment.chorlove.uz/media-assets/958746e5-dc6c-4540-ad17-2c6e692d2212/file",
+    "sourceDeclaredIn": "CreativeWork image in the original Modern Floral preview-frame capture",
+    "httpStatus": 200,
+    "contentType": "application/octet-stream",
+    "decodedFormat": "JPEG",
+    "dimensions": [
+      810,
+      1754
+    ],
+    "bytes": 58677,
+    "sha256": "6c4de03a01ba15e3b462a519f34f3ad90a87b34851372a4f868aa0381e2052dc",
+    "note": "Exact source catalog opening image. It contains no sample couple names."
+  }
 }
