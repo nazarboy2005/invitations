@@ -32,12 +32,146 @@
     },
     "pageMotion": {
       "heroReveal": "Source transforms and delays retained; browser easing token normalized from Framer `easeOut` to Web Animations `ease-out`.",
-      "scrollParallaxPxAt600": [-180, -140, -40]
+      "scrollParallaxPxAt600": [
+        -180,
+        -140,
+        -40
+      ]
     },
     "adapterCorrections": [
       "The generic open handler no longer hides the source envelope before its exit sequence.",
       "All three source envelope flowers now take part in the exit animation.",
-      "Reduced motion opens immediately and omits ambient and exit animations."
+      "Reduced motion opens immediately and omits ambient and exit animations.",
+      "The source 3D gallery state machine and seven looping To’yona ornament animations are restored; reduced motion cancels the loops."
+    ],
+    "gallery": {
+      "perspectivePx": 1000,
+      "horizontalStepPercent": 55,
+      "horizontalLimitPercent": 120,
+      "depthStepPx": 140,
+      "rotationStepDegrees": 35,
+      "scaleStep": 0.15,
+      "minimumScale": 0.65,
+      "opacityByDistance": [
+        1,
+        0.75,
+        0.45,
+        0
+      ],
+      "zIndexBase": 100,
+      "lightboxTransitionMs": 200,
+      "adapterCorrections": [
+        "Creator-uploaded photos now use the captured perspective carousel and wraparound index math.",
+        "Lightbox controls reproduce the source counter, previous/next navigation, background, blur, and image entrance.",
+        "The duplicate single-photo handler in source-adapter.js was removed so it cannot override carousel state."
+      ]
+    },
+    "giftOrnaments": [
+      {
+        "asset": "saraya_gold.webp",
+        "yPx": [
+          0,
+          -6,
+          0
+        ],
+        "rotateDegrees": [
+          -22,
+          -18,
+          -22
+        ],
+        "durationMs": 3200,
+        "delayMs": 0
+      },
+      {
+        "asset": "baroque_gold.webp",
+        "yPx": [
+          0,
+          -7,
+          0
+        ],
+        "rotateDegrees": [
+          20,
+          24,
+          20
+        ],
+        "durationMs": 3600,
+        "delayMs": 300
+      },
+      {
+        "asset": "elegant_leaf_green.webp",
+        "yPx": [
+          0,
+          -5,
+          0
+        ],
+        "rotateDegrees": [
+          -18,
+          -14,
+          -18
+        ],
+        "durationMs": 2900,
+        "delayMs": 600
+      },
+      {
+        "asset": "dragon_phoenix_v3.webp",
+        "yPx": [
+          0,
+          -6,
+          0
+        ],
+        "rotateDegrees": [
+          14,
+          18,
+          14
+        ],
+        "durationMs": 3400,
+        "delayMs": 200
+      },
+      {
+        "asset": "silk_flora_brown.webp",
+        "yPx": [
+          0,
+          -5,
+          0
+        ],
+        "rotateDegrees": [
+          8,
+          12,
+          8
+        ],
+        "durationMs": 3100,
+        "delayMs": 400
+      },
+      {
+        "asset": "porcelain_blue.webp",
+        "yPx": [
+          0,
+          -6,
+          0
+        ],
+        "rotateDegrees": [
+          -10,
+          -6,
+          -10
+        ],
+        "durationMs": 3500,
+        "delayMs": 700
+      },
+      {
+        "asset": "dragon_phoenix.webp",
+        "yPx": [
+          0,
+          -5,
+          0
+        ],
+        "rotateDegrees": [
+          -14,
+          -10,
+          -14
+        ],
+        "durationMs": 3300,
+        "delayMs": 100
+      }
     ]
   },
   "catalogCover": {

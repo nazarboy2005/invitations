@@ -7,9 +7,6 @@
     en: {openInvitation:"Open invitation",languageLabel:"Choose language",musicToggleLabel:"Toggle music",coupleLabel:"The couple",hostsLabel:"With love from:",calendarAction:"Add to calendar",storyTitle:"Our story",countdownTitle:"Save the date",venueTitle:"Venue",programTitle:"Event schedule",wishesTitle:"Wishes",rsvpTitle:"Will you attend?",rsvpPrompt:"Please let us know if you can join us.",giftTitle:"Send a gift",contactsTitle:"Contact",giftOpenHint:"Tap to open",rsvpYes:"I will attend",rsvpNo:"I cannot attend",submit:"Send",sendWish:"Send a wish",name:"Your name",wish:"Your wishes for the couple",dateTimeLabel:"Time",calendarPrompt:"Save this date on your calendar - we look forward to seeing you.",venueSectionTitle:"Venue",wishesPrompt:"Leave your best wishes for the couple.",map:"View map"},
     ru: {openInvitation:"\u041e\u0442\u043a\u0440\u044b\u0442\u044c \u043f\u0440\u0438\u0433\u043b\u0430\u0448\u0435\u043d\u0438\u0435",languageLabel:"\u0412\u044b\u0431\u0440\u0430\u0442\u044c \u044f\u0437\u044b\u043a",musicToggleLabel:"\u0412\u043a\u043b\u044e\u0447\u0438\u0442\u044c \u0438\u043b\u0438 \u0432\u044b\u043a\u043b\u044e\u0447\u0438\u0442\u044c \u043c\u0443\u0437\u044b\u043a\u0443",coupleLabel:"\u0416\u0435\u043d\u0438\u0445 \u0438 \u043d\u0435\u0432\u0435\u0441\u0442\u0430",hostsLabel:"\u0421 \u0443\u0432\u0430\u0436\u0435\u043d\u0438\u0435\u043c:",calendarAction:"\u0414\u043e\u0431\u0430\u0432\u0438\u0442\u044c \u0432 \u043a\u0430\u043b\u0435\u043d\u0434\u0430\u0440\u044c",storyTitle:"\u041d\u0430\u0448\u0430 \u0438\u0441\u0442\u043e\u0440\u0438\u044f",countdownTitle:"\u0414\u043e \u043d\u0430\u0448\u0435\u0433\u043e \u0434\u043d\u044f",venueTitle:"\u041c\u0435\u0441\u0442\u043e \u0442\u043e\u0440\u0436\u0435\u0441\u0442\u0432\u0430",programTitle:"\u041f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u0430",wishesTitle:"\u041f\u043e\u0436\u0435\u043b\u0430\u043d\u0438\u044f",rsvpTitle:"\u0412\u044b \u043f\u0440\u0438\u0434\u0451\u0442\u0435?",rsvpPrompt:"\u041f\u043e\u0436\u0430\u043b\u0443\u0439\u0441\u0442\u0430, \u0441\u043e\u043e\u0431\u0449\u0438\u0442\u0435, \u043f\u0440\u0438\u0434\u0451\u0442\u0435 \u043b\u0438 \u0432\u044b.",giftTitle:"\u041f\u043e\u0434\u0430\u0440\u043e\u043a",contactsTitle:"\u041a\u043e\u043d\u0442\u0430\u043a\u0442\u044b",giftOpenHint:"\u041d\u0430\u0436\u043c\u0438\u0442\u0435, \u0447\u0442\u043e\u0431\u044b \u043e\u0442\u043a\u0440\u044b\u0442\u044c",rsvpYes:"\u0411\u0443\u0434\u0443",rsvpNo:"\u041d\u0435 \u0441\u043c\u043e\u0433\u0443 \u043f\u0440\u0438\u0439\u0442\u0438",submit:"\u041e\u0442\u043f\u0440\u0430\u0432\u0438\u0442\u044c",sendWish:"\u041e\u0442\u043f\u0440\u0430\u0432\u0438\u0442\u044c \u043f\u043e\u0436\u0435\u043b\u0430\u043d\u0438\u0435",name:"\u0418\u043c\u044f",wish:"\u041f\u043e\u0436\u0435\u043b\u0430\u043d\u0438\u0435 \u043c\u043e\u043b\u043e\u0434\u043e\u0436\u0451\u043d\u0430\u043c",dateTimeLabel:"\u0412\u0440\u0435\u043c\u044f",calendarPrompt:"\u041e\u0442\u043c\u0435\u0442\u044c\u0442\u0435 \u044d\u0442\u0443 \u0434\u0430\u0442\u0443 \u0432 \u043a\u0430\u043b\u0435\u043d\u0434\u0430\u0440\u0435 - \u0431\u0443\u0434\u0435\u043c \u0436\u0434\u0430\u0442\u044c \u0432\u0430\u0441.",venueSectionTitle:"\u041c\u0435\u0441\u0442\u043e \u043f\u0440\u043e\u0432\u0435\u0434\u0435\u043d\u0438\u044f",wishesPrompt:"\u041e\u0441\u0442\u0430\u0432\u044c\u0442\u0435 \u0434\u043e\u0431\u0440\u044b\u0435 \u043f\u043e\u0436\u0435\u043b\u0430\u043d\u0438\u044f \u043c\u043e\u043b\u043e\u0434\u043e\u0436\u0451\u043d\u0430\u043c.",map:"\u041f\u043e\u0441\u043c\u043e\u0442\u0440\u0435\u0442\u044c \u043a\u0430\u0440\u0442\u0443"}
   };
-  let active = 0;
-  const images = [...root.querySelectorAll('[data-glass-carousel-image]')];
-  const dots = [...root.querySelectorAll('[data-glass-gallery-dot]')];
   function localize(p) {
     const copy = labels[p.locale] || labels["uz-Latn"];
     root.querySelectorAll('[data-gp-i18n], [data-chorlove-i18n]').forEach(node => {
@@ -34,23 +31,8 @@
     }
     const picker = root.querySelector('.cc-language-picker'); if (picker) picker.setAttribute('aria-label', copy.languageLabel);
   }
-  function display(index) {
-    if (!images.length) return;
-    active = (index + images.length) % images.length;
-    const items = (window.__glassPinkPayload?.data?.gallery || []).filter(item => item?.url || item?.src);
-    images.forEach((image, i) => {
-      const item = items[i];
-      image.hidden = !item || i !== active;
-      if (item) image.src = item.url || item.src;
-    });
-    dots.forEach((button, i) => {
-      button.hidden = i >= items.length;
-      button.setAttribute('aria-current', String(i === active));
-    });
-  }
   function apply(payload) {
     if (!payload?.data || payload.templateId !== "glass-pink") return;
-    window.__glassPinkPayload = payload;
     const data = payload.data;
     const date = data.date || {};
     root.querySelectorAll('[data-gp-date]').forEach(node => node.textContent = date.short || "");
@@ -79,10 +61,7 @@
       if (names[2]) names[2].textContent = data.bride || "";
     }
     localize(payload);
-    display(0);
   }
-  root.querySelectorAll('[data-glass-gallery-dot]').forEach(button => button.addEventListener('click', () => display(Number(button.dataset.glassGalleryDot) - 1)));
-  root.querySelectorAll('[data-glass-gallery-nav]').forEach(button => button.addEventListener('click', () => display(active + (button.dataset.glassGalleryNav === 'Keyingi' ? 1 : -1))));
   const initial = (() => { try { return JSON.parse(window.name); } catch { return null; } })();
   if (initial?.type === "glass-pink:update") apply(initial.payload);
   addEventListener('message', event => {

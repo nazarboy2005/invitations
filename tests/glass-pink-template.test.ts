@@ -115,7 +115,7 @@ test("Glass Pink uses only its own artwork and keeps sample gallery content ephe
   assert.doesNotMatch(html, /orchid-amplop|gallery-[1-6]\.webp/);
   assert.match(bridge, /const usableGallery = gallery\.filter\(\(item\) => item\?\.src\)/);
   assert.match(bridge, /hide\(storySection, !chapters\.length && !showGallery\)/);
-  assert.match(adapter, /window\.__glassPinkPayload\?\.data\?\.gallery/);
+  assert.doesNotMatch(adapter, /data-glass-gallery-dot|data-glass-gallery-nav/);
 });
 
 test("Glass Pink ships its captured page without the Chorlove site runtime", () => {
@@ -158,6 +158,27 @@ test("Glass Pink opener keeps the original timed exit instead of hiding on click
   assert.doesNotMatch(bridge, /easing="easeOut"/);
   assert.match(bridge, /window\.setTimeout\(\(\) => \{ envelope\.hidden=true; \}, 1050\)/);
   assert.match(genericOpenHandler, /if \(templateId === "glass-pink"\) return;/);
+});
+
+test("Glass Pink restores source carousel and floating To'yona ornament motion", () => {
+  const sourceModule = readFileSync(resolve(root, "Invitations - this folder will be removed from production/Chorlove/Web invitations/_next/static/chunks/0wvjbn--75n3p.js"), "utf8");
+  for (const source of [
+    'aria-label":r("Previous")',
+    'aria-label":r("Next")',
+    'style:{perspective:"1000px"}',
+    'm=55*r',
+    'transform:`translateX(${m}%) translateZ(${x}px) rotateY(${p}deg) scale(${u})`',
+    'src:"/images/glass-pink/saraya_gold.webp",animate:{y:[0,-6,0],rotate:[-22,-18,-22]}',
+    'src:"/images/glass-pink/porcelain_blue.webp",animate:{y:[0,-6,0],rotate:[-10,-6,-10]}',
+  ]) assert.ok(sourceModule.includes(source), `captured source must retain ${source}`);
+  assert.match(bridge, /function galleryPosition\(index, activeIndex, total\)/);
+  assert.match(bridge, /translateX\(\$\{x\}%\) translateZ\(\$\{-140 \* distance\}px\) rotateY\(\$\{35 \* offset\}deg\)/);
+  assert.match(bridge, /function setGalleryIndex\(index, focusActive\)/);
+  assert.match(bridge, /previous\.dataset\.ccGalleryPrev/);
+  assert.match(bridge, /function updateGalleryLightbox\(dialog, opening = false\)/);
+  assert.match(bridge, /"saraya_gold\.webp", -6, -22, -18, 3\.2, 0/);
+  assert.match(bridge, /"porcelain_blue\.webp", -6, -10, -6, 3\.5, 700/);
+  assert.doesNotMatch(adapter, /function display\(index\)/);
 });
 
 test("Glass Pink has no missing packaged image requests", () => {

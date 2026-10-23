@@ -202,6 +202,8 @@
 
   let state = null;
   let countdownTimer = 0;
+  let galleryIndex = 0;
+  const giftAnimations = new WeakMap();
   const text = (node, value) => { if (node) node.textContent = value == null ? "" : String(value); };
   const hide = (node, hidden) => { if (node) node.hidden = Boolean(hidden); };
 
@@ -503,9 +505,21 @@
       }
       storySection.append(copyHost);
     }
-    const slots = [...storySection.querySelectorAll("[data-chorlove-gallery-item]")];
     const gallery = data.gallery || [];
     const usableGallery = gallery.filter((item) => item?.src);
+    const initialSlots = [...storySection.querySelectorAll("[data-chorlove-gallery-item]")];
+    const cardTemplate = initialSlots[0]?.parentElement;
+    const track = cardTemplate?.parentElement;
+    if (track && cardTemplate) {
+      track.querySelectorAll("[data-cc-gallery-clone]").forEach((node) => node.remove());
+      for (let index = initialSlots.length; index < usableGallery.length; index++) {
+        const clone = cardTemplate.cloneNode(true);
+        clone.dataset.ccGalleryClone = "";
+        clone.querySelector("[data-chorlove-gallery-item]")?.removeAttribute("src");
+        track.append(clone);
+      }
+    }
+    const slots = [...storySection.querySelectorAll("[data-chorlove-gallery-item]")];
     slots.forEach((image, index) => {
       const item = usableGallery[index];
       if (item?.src) {
@@ -519,8 +533,20 @@
         image.classList.add("cc-gallery-empty");
         image.removeAttribute("data-gallery-lightbox");
       }
-      hide(image.parentElement || image, !item);
+      const card = image.parentElement || image;
+      hide(card, !item);
+      if (item) {
+        card.style.display = "block";
+        card.setAttribute("role", "button");
+        card.setAttribute("aria-label", `Gallery photo ${index + 1}`);
+        card.onclick = () => {
+          if (index === galleryIndex) openGalleryImage(index);
+          else setGalleryIndex(index, true);
+        };
+      } else card.onclick = null;
     });
+    galleryIndex = usableGallery.length ? Math.min(galleryIndex, usableGallery.length - 1) : 0;
+    renderGalleryCarousel(usableGallery.length, slots);
     const more = storySection.querySelector("[data-chorlove-gallery-more]");
     if (more) {
       const remaining = Math.max(0, usableGallery.length - slots.length);
@@ -532,6 +558,140 @@
     }
     const showGallery = usableGallery.length > 0;
     hide(storySection, !chapters.length && !showGallery);
+  }
+
+  function galleryPosition(index, activeIndex, total) {
+    let offset = index - activeIndex;
+    if (offset > total / 2) offset -= total;
+    if (offset < -total / 2) offset += total;
+    let x = 55 * offset;
+    if (offset > 0) x = Math.min(x, 120);
+    if (offset < 0) x = Math.max(x, -120);
+    const distance = Math.abs(offset);
+    return {
+      offset,
+      transform: `translateX(${x}%) translateZ(${-140 * distance}px) rotateY(${35 * offset}deg) scale(${Math.max(.65, 1 - .15 * distance)})`,
+      opacity: offset === 0 ? 1 : distance === 1 ? .75 : distance === 2 ? .45 : 0,
+      zIndex: 100 - distance,
+    };
+  }
+
+  function renderGalleryCarousel(total, suppliedSlots) {
+    const section = root.querySelector("[data-chorlove-story]");
+    if (!section) return;
+    const slots = suppliedSlots || [...section.querySelectorAll("[data-chorlove-gallery-item]")];
+    const cards = slots.map((image) => image.parentElement || image);
+    cards.forEach((card, index) => {
+      const position = galleryPosition(index, galleryIndex, total || cards.length);
+      card.style.transform = position.transform;
+      card.style.opacity = String(position.opacity);
+      card.style.zIndex = String(position.zIndex);
+      card.style.display = index < total && position.opacity > 0 ? "block" : "none";
+      card.setAttribute("aria-current", String(index === galleryIndex));
+      card.tabIndex = index === galleryIndex ? 0 : -1;
+    });
+    const dots = [...section.querySelectorAll("[data-glass-gallery-dot]")];
+    const dotHost = dots[0]?.parentElement;
+    if (dotHost && dots.length && total > dots.length) {
+      const template = dots[0];
+      for (let index = dots.length; index < total; index++) {
+        const dot = template.cloneNode(true);
+        dot.dataset.glassGalleryDot = String(index + 1);
+        dotHost.append(dot);
+      }
+    }
+    [...section.querySelectorAll("[data-glass-gallery-dot]")].forEach((dot, index) => {
+      const visible = index < total;
+      hide(dot, !visible);
+      if (!visible) return;
+      dot.setAttribute("aria-label", `Go to photo ${index + 1}`);
+      dot.setAttribute("aria-current", String(index === galleryIndex));
+      dot.setAttribute("aria-pressed", String(index === galleryIndex));
+      dot.onclick = () => setGalleryIndex(index, true);
+      dot.classList.toggle("w-6", index === galleryIndex);
+      dot.classList.toggle("h-2", index === galleryIndex);
+      dot.classList.toggle("w-2", index !== galleryIndex);
+      dot.classList.toggle("bg-[rgb(203,93,108)]", index === galleryIndex);
+      dot.classList.toggle("bg-[rgb(203,93,108)]/30", index !== galleryIndex);
+    });
+    section.querySelectorAll("[data-glass-gallery-nav]").forEach((button) => {
+      const visible = total > 1;
+      hide(button, !visible);
+      button.onclick = () => setGalleryIndex((galleryIndex + (button.dataset.glassGalleryNav === "Oldingi" ? -1 : 1) + total) % total, true);
+    });
+    section.dataset.ccGalleryCount = String(total);
+  }
+
+  function setGalleryIndex(index, focusActive) {
+    const section = root.querySelector("[data-chorlove-story]");
+    const total = Number(section?.dataset.ccGalleryCount || 0);
+    if (!total) return;
+    galleryIndex = (index + total) % total;
+    renderGalleryCarousel(total);
+    if (focusActive) section?.querySelectorAll("[data-chorlove-gallery-item]")[galleryIndex]?.parentElement?.focus({ preventScroll: true });
+  }
+
+  function openGalleryImage(index) {
+    const dialog = root.querySelector(".cc-gallery-lightbox");
+    const image = (state?.data?.gallery || []).filter((item) => item?.src)[index];
+    if (!dialog || !image?.src) return;
+    dialog.dataset.index = String(index);
+    updateGalleryLightbox(dialog, true);
+  }
+
+  function updateGalleryLightbox(dialog, opening = false) {
+    const images = (state?.data?.gallery || []).filter((item) => item?.src);
+    if (!images.length) return;
+    const index = Math.min(Number(dialog.dataset.index || 0), images.length - 1);
+    const image = images[index];
+    const img = dialog.querySelector("img");
+    img.src = image.src;
+    img.alt = image.alt || image.caption || `Gallery photo ${index + 1}`;
+    text(dialog.querySelector("[data-cc-gallery-count]"), `${index + 1} / ${images.length}`);
+    const hasMany = images.length > 1;
+    hide(dialog.querySelector("[data-cc-gallery-prev]"), !hasMany);
+    hide(dialog.querySelector("[data-cc-gallery-next]"), !hasMany);
+    if (dialog.hidden) {
+      dialog.hidden = false;
+      const reduced = Boolean(state?.reducedMotion) || matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (!reduced) {
+        dialog.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 200, easing: "ease-out" });
+        img.animate([{ opacity: 0, transform: "scale(.92)" }, { opacity: 1, transform: "scale(1)" }], { duration: 200, easing: "ease-out" });
+      }
+    } else if (opening) {
+      const reduced = Boolean(state?.reducedMotion) || matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (!reduced) img.animate([{ opacity: 0, transform: "scale(.92)" }, { opacity: 1, transform: "scale(1)" }], { duration: 200, easing: "ease-out" });
+    }
+  }
+
+  function stepGalleryLightbox(dialog, direction) {
+    const images = (state?.data?.gallery || []).filter((item) => item?.src);
+    if (images.length < 2) return;
+    const image = dialog.querySelector("img");
+    const bounds = image.getBoundingClientRect();
+    const exiting = image.cloneNode(true);
+    exiting.className = "cc-gallery-exiting-image";
+    exiting.style.left = `${bounds.left}px`;
+    exiting.style.top = `${bounds.top}px`;
+    exiting.style.width = `${bounds.width}px`;
+    exiting.style.height = `${bounds.height}px`;
+    dialog.append(exiting);
+    const reduced = Boolean(state?.reducedMotion) || matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduced) exiting.remove();
+    else {
+      exiting.animate([{ opacity: 1, transform: "scale(1)" }, { opacity: 0, transform: "scale(.92)" }], { duration: 200, easing: "ease-out" }).finished.then(() => exiting.remove()).catch(() => exiting.remove());
+    }
+    dialog.dataset.index = String((Number(dialog.dataset.index || 0) + direction + images.length) % images.length);
+    updateGalleryLightbox(dialog, true);
+  }
+
+  function closeGalleryLightbox(dialog) {
+    if (!dialog || dialog.hidden) return;
+    const reduced = Boolean(state?.reducedMotion) || matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduced) { dialog.hidden = true; return; }
+    const animation = dialog.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 200, easing: "ease-out" });
+    dialog.querySelector("img")?.animate([{ opacity: 1, transform: "scale(1)" }, { opacity: 0, transform: "scale(.92)" }], { duration: 200, easing: "ease-out" });
+    animation.finished.then(() => { dialog.hidden = true; }).catch(() => {});
   }
 
   function renderContacts(data) {
@@ -679,6 +839,35 @@
     const section = root.querySelector("[data-chorlove-gift]");
     if (!section) return;
     hide(section, !data.toyona?.enabled);
+    const reduced = Boolean(state?.reducedMotion) || matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const floaters = [
+      ["saraya_gold.webp", -6, -22, -18, 3.2, 0],
+      ["baroque_gold.webp", -7, 20, 24, 3.6, 300],
+      ["elegant_leaf_green.webp", -5, -18, -14, 2.9, 600],
+      ["dragon_phoenix_v3.webp", -6, 14, 18, 3.4, 200],
+      ["silk_flora_brown.webp", -5, 8, 12, 3.1, 400],
+      ["porcelain_blue.webp", -6, -10, -6, 3.5, 700],
+      ["dragon_phoenix.webp", -5, -14, -10, 3.3, 100],
+    ];
+    for (const [file, lift, fromRotation, toRotation, seconds, delay] of floaters) {
+      const image = section.querySelector(`img[src*="${file}"]`);
+      if (!image) continue;
+      const current = giftAnimations.get(image);
+      if (!data.toyona?.enabled || reduced) {
+        current?.cancel();
+        giftAnimations.delete(image);
+      } else if (!current) {
+        const animation = image.animate(
+          [
+            { transform: `translateY(0px) rotate(${fromRotation}deg)` },
+            { transform: `translateY(${lift}px) rotate(${toRotation}deg)` },
+            { transform: `translateY(0px) rotate(${fromRotation}deg)` },
+          ],
+          { duration: seconds * 1000, delay, iterations: Infinity, easing: "ease-in-out" },
+        );
+        giftAnimations.set(image, animation);
+      }
+    }
     if (!data.toyona?.enabled) return;
     let details = section.querySelector(".cc-gift-details");
     if (!details) {
@@ -792,14 +981,27 @@
   function ensureGalleryLightbox() {
     let dialog = root.querySelector(".cc-gallery-lightbox");
     if (!dialog) {
-      dialog = document.createElement("div"); dialog.className = "cc-gallery-lightbox"; dialog.hidden = true;
+      dialog = document.createElement("div"); dialog.className = "cc-gallery-lightbox"; dialog.hidden = true; dialog.setAttribute("role", "dialog"); dialog.setAttribute("aria-modal", "true"); dialog.setAttribute("aria-label", "Photo gallery");
+      const close = document.createElement("button"); close.type = "button"; close.className = "cc-gallery-close"; close.innerHTML = '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>'; close.setAttribute("aria-label", "Close gallery");
+      const count = document.createElement("div"); count.className = "cc-gallery-count"; count.dataset.ccGalleryCount = "";
+      const previous = document.createElement("button"); previous.type = "button"; previous.className = "cc-gallery-arrow cc-gallery-previous"; previous.dataset.ccGalleryPrev = ""; previous.innerHTML = '<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>'; previous.setAttribute("aria-label", "Previous image");
+      const next = document.createElement("button"); next.type = "button"; next.className = "cc-gallery-arrow cc-gallery-next"; next.dataset.ccGalleryNext = ""; next.innerHTML = '<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>'; next.setAttribute("aria-label", "Next image");
       const image = document.createElement("img"); image.alt = "";
-      const close = document.createElement("button"); close.type = "button"; close.textContent = "×"; close.setAttribute("aria-label", "Close image");
-      close.onclick = () => { dialog.hidden = true; };
-      dialog.onclick = (event) => { if (event.target === dialog) dialog.hidden = true; };
-      dialog.append(image, close); root.append(dialog);
+      close.onclick = () => closeGalleryLightbox(dialog);
+      previous.onclick = (event) => { event.stopPropagation(); stepGalleryLightbox(dialog, -1); };
+      next.onclick = (event) => { event.stopPropagation(); stepGalleryLightbox(dialog, 1); };
+      dialog.onclick = (event) => { if (event.target === dialog) closeGalleryLightbox(dialog); };
+      image.onclick = (event) => event.stopPropagation();
+      dialog.append(close, count, previous, image, next); root.append(dialog);
+      dialog.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") { closeGalleryLightbox(dialog); }
+        else if (event.key === "ArrowLeft") stepGalleryLightbox(dialog, -1);
+        else if (event.key === "ArrowRight") stepGalleryLightbox(dialog, 1);
+      });
     }
-    root.querySelectorAll("[data-gallery-lightbox]").forEach((image) => { image.onclick = () => { dialog.querySelector("img").src = image.src; dialog.hidden = false; }; });
+    // The source opens the active center card on click; off-center cards move
+    // into the center first. The card handlers installed by the carousel keep
+    // that distinction intact.
     root.querySelectorAll("[data-chorlove-gallery-more]").forEach((more) => {
       const openNext = () => {
         const images = (state?.data?.gallery || []).filter((item) => item?.src);
