@@ -70,6 +70,11 @@ import { MingBirKechaInvitation } from "@/templates/onlinetaklifnoma/ming-bir-ke
 import { ZarrinDoppiInvitation } from "@/templates/onlinetaklifnoma/zarrin-doppi";
 import { AndalusDarvozasiInvitation } from "@/templates/onlinetaklifnoma/andalus-darvozasi";
 import { SamarqandPeshtoqInvitation } from "@/templates/onlinetaklifnoma/samarqand-peshtoqi";
+import { ShishaBogInvitation } from "@/templates/onlinetaklifnoma/shisha-bog";
+import { KapadokiyaTongiInvitation } from "@/templates/onlinetaklifnoma/kapadokiya-tongi";
+import { BuxoroRavoqInvitation } from "@/templates/onlinetaklifnoma/buxoro-ravoq";
+import { JannatBogiInvitation } from "@/templates/onlinetaklifnoma/jannat-bogi";
+import { TojmahalOltinDarvozasiInvitation } from "@/templates/onlinetaklifnoma/tojmahal-oltin-darvozasi";
 import { isChorloveTemplate, ChorloveInvitation } from "@/templates/chorlove";
 import {
   createTemplatePreviewSample,
@@ -2669,6 +2674,16 @@ export function Studio({
               <MingBirKechaInvitation invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview catalogMusic={section === 0 && !authoredPreview} sampleWishes={section === 0 && !authoredPreview} />
             ) : invitation.templateId === "samarqand-peshtoqi" ? (
               <SamarqandPeshtoqInvitation invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview catalogMusic={section === 0 && !authoredPreview} sampleWishes={section === 0 && !authoredPreview} />
+            ) : invitation.templateId === "shisha-bog" ? (
+              <ShishaBogInvitation invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview catalogMusic={section === 0 && !authoredPreview} sampleWishes={section === 0 && !authoredPreview} />
+            ) : invitation.templateId === "kapadokiya-tongi" ? (
+              <KapadokiyaTongiInvitation invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview catalogMusic={section === 0 && !authoredPreview} sampleWishes={section === 0 && !authoredPreview} />
+            ) : invitation.templateId === "buxoro-ravoq" ? (
+              <BuxoroRavoqInvitation invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview catalogMusic={section === 0 && !authoredPreview} sampleWishes={section === 0 && !authoredPreview} />
+            ) : invitation.templateId === "jannat-bogi" ? (
+              <JannatBogiInvitation invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview catalogMusic={section === 0 && !authoredPreview} sampleWishes={section === 0 && !authoredPreview} />
+            ) : invitation.templateId === "tojmahal-oltin-darvozasi" ? (
+              <TojmahalOltinDarvozasiInvitation invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview catalogMusic={section === 0 && !authoredPreview} sampleWishes={section === 0 && !authoredPreview} />
             ) : invitation.templateId === "andalus-darvozasi" ? (
               <AndalusDarvozasiInvitation invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview catalogMusic={section === 0 && !authoredPreview} sampleWishes={section === 0 && !authoredPreview} />
             ) : invitation.templateId === "zarrin-doppi" ? (

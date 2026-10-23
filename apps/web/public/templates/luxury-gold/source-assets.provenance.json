@@ -1,0 +1,45 @@
+{
+  "sourceSnapshot": {
+    "path": "..\\Invitations - this folder will be removed from production\\Chorlove\\Web invitations\\templates\\luxury-gold\\preview-frame.html",
+    "bytes": 153333,
+    "sha256": "8acc8ba90f0cf525e0bdb742ab6aec39437e342f055bd7d759fd46c9564ae017"
+  },
+  "assets": [
+    {
+      "file": "assets/corner.png",
+      "sourceUrl": "https://chorlove.uz/images/luxury-gold/corner.png",
+      "httpStatus": 200,
+      "contentType": "image/png",
+      "bytes": 82074,
+      "sha256": "0697670f81c67dd6383e84a084cb74eae74e5e7d5ca94132a5cd01c4358d4a7f"
+    },
+    {
+      "file": "assets/bride-groom.jpg",
+      "sourceUrl": "https://chorlove.uz/images/luxury-gold/bride-groom.jpg",
+      "httpStatus": 200,
+      "contentType": "image/jpeg",
+      "bytes": 658786,
+      "sha256": "be586ac05157d13a39c87dbaffe1d095592fd2ecf5579e724dcffbe232ce2470"
+    },
+    {
+      "file": "source/styles/0ly1y_qxlqlf..css",
+      "sourcePath": "..\\Invitations - this folder will be removed from production\\Chorlove\\Web invitations\\_next\\static\\chunks\\0ly1y_qxlqlf..css",
+      "bytes": 6140,
+      "sha256": "3fcd5d40feb11ed6c2f58cfcf069d01f27a1bbf95a51b75d9c9e02c63e3d3f81"
+    },
+    {
+      "file": "source/styles/054~-i6~6lmrd.css",
+      "sourcePath": "..\\Invitations - this folder will be removed from production\\Chorlove\\Web invitations\\_next\\static\\chunks\\054~-i6~6lmrd.css",
+      "bytes": 3859,
+      "sha256": "13599ddc9e6faa903f0966c4adeec12e47ecaa6382056e2cb71bdc68b93bd3fa"
+    }
+  ],
+  "excludedCapturedGallery": [
+    "/images/templates/orchid-amplop/gallery-1.webp",
+    "/images/templates/orchid-amplop/gallery-2.webp",
+    "/images/templates/orchid-amplop/gallery-3.webp",
+    "/images/templates/orchid-amplop/gallery-4.webp",
+    "/images/templates/orchid-amplop/gallery-5.webp",
+    "/images/templates/orchid-amplop/gallery-6.webp"
+  ]
+}

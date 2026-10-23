@@ -8,3 +8,9 @@ The package is not yet release-ready. The archive's original `vertical-line.png`
 
 
 Accessibility hardening re-enables captured disabled guest/wish controls, adds localized programmatic labels, required-field feedback with focus movement and live announcements, keyboard navigation for RSVP radio choices, descriptive gallery/lightbox labels, 28px language targets, and visible focus rings. Automated checks cover these contracts; browser and assistive-technology verification remain pending because IAB policy rejects the localhost preview URL.
+
+The shared captured Chorlove stylesheet expected seven font files under the source site's `/fonts/` root, which is absent from the application. Its packaged shared copy now resolves those faces to byte-identical files in `templates/chorlove/shared/_next/static/media/`; the exact original CSS and fonts remain preserved in their source/provenance records. This fixes the shared font dependency for Chorlove packages using this stylesheet without altering the captured snapshot.
+
+The added RSVP/wish accessibility labels now decode as real Uzbek Cyrillic and Russian text; runtime evaluation verifies these labels alongside the English and Uzbek Latin entries.
+
+A full local URL audit found 17 WOFF2 subsets and three Leaflet-control PNGs referenced by the shared CSS but absent from the archive. Those exact files were recovered from the absolute media URLs in that stylesheet and recorded with response type and SHA-256 in `templates/chorlove/shared/shared-assets.provenance.json`. Tests now resolve all HTML and CSS local dependencies against packaged files.

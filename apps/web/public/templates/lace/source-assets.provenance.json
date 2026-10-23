@@ -1,0 +1,386 @@
+{
+  "templateId": "lace",
+  "source": {
+    "file": "source/preview-frame.html",
+    "archiveFile": "templates/lace/preview-frame.html",
+    "bytes": 59527,
+    "sha256": "5a73d67ed902928ebc6837d90dca7a97dfc2562985512279b47678022c0791db"
+  },
+  "capturedStylesheets": [
+    {
+      "file": "source/styles/0ly1y_qxlqlf..css",
+      "bytes": 6140,
+      "sha256": "3fcd5d40feb11ed6c2f58cfcf069d01f27a1bbf95a51b75d9c9e02c63e3d3f81",
+      "archiveFile": "_next/static/chunks/0ly1y_qxlqlf..css"
+    },
+    {
+      "file": "source/styles/054~-i6~6lmrd.css",
+      "bytes": 3859,
+      "sha256": "13599ddc9e6faa903f0966c4adeec12e47ecaa6382056e2cb71bdc68b93bd3fa",
+      "archiveFile": "_next/static/chunks/054~-i6~6lmrd.css"
+    },
+    {
+      "file": "source/styles/lace-inline.css",
+      "bytes": 1631,
+      "sha256": "c6687f3a8027f8e3c6f695bcdcdd29e913b1598986334a6352aa09ed2c7a7416",
+      "archiveFile": "templates/lace/preview-frame.html#style-0"
+    }
+  ],
+  "remoteSourceStylesheet": {
+    "file": "source/styles/google-fonts.css",
+    "sourceUrl": "https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Monsieur+La+Doulaise&display=swap",
+    "statusCode": 200,
+    "mimeType": "text/css",
+    "bytes": 2714,
+    "sha256": "c677bf683b9efccab346f024c517101af103a6291c62824cdc8f0f67c770c2b6"
+  },
+  "copiedDesignAssets": [
+    {
+      "file": "assets/ballet-clean.woff2",
+      "sourcePath": "/images/lace/ballet-clean.woff2",
+      "bytes": 41772,
+      "sha256": "893b1fc5a82afe8c27b3d671693e0f0700e4d22453afe351794a32d5f6669fa1",
+      "archiveFile": "images/lace/ballet-clean.woff2"
+    },
+    {
+      "file": "assets/banquet-table.png",
+      "sourcePath": "/images/lace/banquet-table.png",
+      "bytes": 105372,
+      "sha256": "503556c73abda64f828a3ad7e827310b5d76d668c4d87f0d41a4cd3e69a7cfad",
+      "archiveFile": "images/lace/banquet-table.png"
+    },
+    {
+      "file": "assets/countdown-bows-ivory.png",
+      "sourcePath": "/images/lace/countdown-bows-ivory.png",
+      "bytes": 377102,
+      "sha256": "7811a332a7d240e1be1489016fdd51ac695ae5425efb7c1c8b7299c4a3179f67",
+      "archiveFile": "images/lace/countdown-bows-ivory.png"
+    },
+    {
+      "file": "assets/dress-code-frame.png",
+      "sourcePath": "/images/lace/dress-code-frame.png",
+      "bytes": 1170089,
+      "sha256": "9e6a90c7e454c0024b1b602a003c33283b8d1606342d79aa9deec7be9508ef35",
+      "archiveFile": "images/lace/dress-code-frame.png"
+    },
+    {
+      "file": "assets/dresscode-couple-new-still.png",
+      "sourcePath": "/images/lace/dresscode-couple-new-still.png",
+      "bytes": 131799,
+      "sha256": "7d5aefb2bc7053165f4ef1700850dc12f1043e8de9476e9b0d698e3dc014206f",
+      "archiveFile": "images/lace/dresscode-couple-new-still.png"
+    },
+    {
+      "file": "assets/event-ceremony.png",
+      "sourcePath": "/images/lace/event-ceremony.png",
+      "bytes": 513298,
+      "sha256": "3d2f310198dacd021e428274a04b9865ab5041b69f42342e2c6da66ce56d2b86",
+      "archiveFile": "images/lace/event-ceremony.png"
+    },
+    {
+      "file": "assets/event-cocktail.png",
+      "sourcePath": "/images/lace/event-cocktail.png",
+      "bytes": 333850,
+      "sha256": "f1a17a310ccd395d2781b26ab02281fa2a62f630213bb145a77f364c9f5c051a",
+      "archiveFile": "images/lace/event-cocktail.png"
+    },
+    {
+      "file": "assets/event-welcome.png",
+      "sourcePath": "/images/lace/event-welcome.png",
+      "bytes": 525979,
+      "sha256": "1572cc031f4239c0c924509094b2c2162f62e6e05803b5402f97ee32e4fa2757",
+      "archiveFile": "images/lace/event-welcome.png"
+    },
+    {
+      "file": "assets/hero-bg.mp4",
+      "sourcePath": "/images/lace/hero-bg.mp4",
+      "bytes": 584229,
+      "sha256": "89b2e44cc0683850cf3f279645af01b20fcf045f25aaab9017a7f61ef5150669",
+      "archiveFile": "images/lace/hero-bg.mp4"
+    },
+    {
+      "file": "assets/lace-border-white.webp",
+      "sourcePath": "/images/lace/lace-border-white.webp",
+      "bytes": 163278,
+      "sha256": "a3165e8829b23a531d6ce0d1bf70fa7d455fc452529f20b13bb4367519d21925",
+      "archiveFile": "images/lace/lace-border-white.webp"
+    },
+    {
+      "file": "assets/pearl-garland-2-base.png",
+      "sourcePath": "/images/lace/pearl-garland-2-base.png",
+      "bytes": 326635,
+      "sha256": "30a9c6792c94875a4077c6a741999e4e6ce51ca93697e5074064fd82312a17e7",
+      "archiveFile": "images/lace/pearl-garland-2-base.png"
+    },
+    {
+      "file": "assets/pearl-garland-2-strand-0.png",
+      "sourcePath": "/images/lace/pearl-garland-2-strand-0.png",
+      "bytes": 90735,
+      "sha256": "ad0743cbefabf220ff2d06efb6663f306b87c5289e807abed0322e64af9efc01",
+      "archiveFile": "images/lace/pearl-garland-2-strand-0.png"
+    },
+    {
+      "file": "assets/pearl-garland-2-strand-1.png",
+      "sourcePath": "/images/lace/pearl-garland-2-strand-1.png",
+      "bytes": 72553,
+      "sha256": "bde4d8ea7b40a43a3e33eb011466de1eaf691bdf47f223b3a4a7016eb12c147d",
+      "archiveFile": "images/lace/pearl-garland-2-strand-1.png"
+    },
+    {
+      "file": "assets/pearl-garland-2-strand-2.png",
+      "sourcePath": "/images/lace/pearl-garland-2-strand-2.png",
+      "bytes": 54650,
+      "sha256": "16960575996c9bdf28e66ad701f37515188cffa4675206632f8e69649c873f16",
+      "archiveFile": "images/lace/pearl-garland-2-strand-2.png"
+    },
+    {
+      "file": "assets/pearl-garland-2-strand-3.png",
+      "sourcePath": "/images/lace/pearl-garland-2-strand-3.png",
+      "bytes": 73120,
+      "sha256": "9a8644dc2d997212c18d40cc2b780a846f3b6cd2326fe2d1505e948f39954aa1",
+      "archiveFile": "images/lace/pearl-garland-2-strand-3.png"
+    },
+    {
+      "file": "assets/pearl-garland-2-strand-4.png",
+      "sourcePath": "/images/lace/pearl-garland-2-strand-4.png",
+      "bytes": 90738,
+      "sha256": "e3f436bac78f70fa71ce24df01bee4010b79d3d332d9ad653a626f44bfb0aca2",
+      "archiveFile": "images/lace/pearl-garland-2-strand-4.png"
+    },
+    {
+      "file": "assets/pearl-strip.png",
+      "sourcePath": "/images/lace/pearl-strip.png",
+      "bytes": 98353,
+      "sha256": "6f23be5b80fd1edbdd48d775ad16a1127b016b2d80537a30385c586f838469a0",
+      "archiveFile": "images/lace/pearl-strip.png"
+    },
+    {
+      "file": "assets/swans.svg",
+      "sourcePath": "/images/lace/swans.svg",
+      "bytes": 8776,
+      "sha256": "6c59cb3b1c45fba80dded87138548f559b9bd0bdeeb858bc86db348ae78c2e09",
+      "archiveFile": "images/lace/swans.svg"
+    },
+    {
+      "file": "assets/transport-lace-oval.webp",
+      "sourcePath": "/images/lace/transport-lace-oval.webp",
+      "bytes": 588806,
+      "sha256": "734f2b0b468a55db621148649dbf2cc54ae1cf8d5c029ef420b095a2e121011e",
+      "archiveFile": "images/lace/transport-lace-oval.webp"
+    },
+    {
+      "file": "assets/tulle-texture-burgundy.webp",
+      "sourcePath": "/images/lace/tulle-texture-burgundy.webp",
+      "bytes": 32000,
+      "sha256": "f81b60fbbf487cd7076c228553372d993a5220a4e520014530d14954775c71e0",
+      "archiveFile": "images/lace/tulle-texture-burgundy.webp"
+    },
+    {
+      "file": "assets/villa-illustration-thick.svg",
+      "sourcePath": "/images/lace/villa-illustration-thick.svg",
+      "bytes": 108282,
+      "sha256": "9ad39710d0ea1784862c9bd540ce71e9ba59f0ab187184434dfd5611ba1f762b",
+      "archiveFile": "images/lace/villa-illustration-thick.svg"
+    },
+    {
+      "file": "assets/gallery-1.webp",
+      "sourcePath": "/images/templates/orchid-amplop/gallery-1.webp",
+      "bytes": 47468,
+      "sha256": "8578f6d5f3c2ddc1759c5116dfb4b68cd47f86ea700bfa3777a75fb916734a0b",
+      "archiveFile": "images/templates/orchid-amplop/gallery-1.webp"
+    },
+    {
+      "file": "assets/gallery-2.webp",
+      "sourcePath": "/images/templates/orchid-amplop/gallery-2.webp",
+      "bytes": 108104,
+      "sha256": "bcfd6989e53e220164e8d39368a848eed1185c07af73f934c81181af2a690d45",
+      "archiveFile": "images/templates/orchid-amplop/gallery-2.webp"
+    },
+    {
+      "file": "assets/gallery-3.webp",
+      "sourcePath": "/images/templates/orchid-amplop/gallery-3.webp",
+      "bytes": 82790,
+      "sha256": "c747d5f2c007ec78d46196fcbf157da871fd4bebd9f0a07863087e9a5787e320",
+      "archiveFile": "images/templates/orchid-amplop/gallery-3.webp"
+    },
+    {
+      "file": "assets/gallery-4.webp",
+      "sourcePath": "/images/templates/orchid-amplop/gallery-4.webp",
+      "bytes": 117998,
+      "sha256": "c3d590110524cb7b0148c08aa1543d569f16f54b4672d802bebcf778776df558",
+      "archiveFile": "images/templates/orchid-amplop/gallery-4.webp"
+    },
+    {
+      "file": "assets/gallery-5.webp",
+      "sourcePath": "/images/templates/orchid-amplop/gallery-5.webp",
+      "bytes": 211568,
+      "sha256": "bb3c25700cc2aa81a40c46bb20c22cd13403d3e9bcf196c175a94fb7b49c8a2e",
+      "archiveFile": "images/templates/orchid-amplop/gallery-5.webp"
+    },
+    {
+      "file": "assets/gallery-6.webp",
+      "sourcePath": "/images/templates/orchid-amplop/gallery-6.webp",
+      "bytes": 67596,
+      "sha256": "35c81b38de8fb85f182b1c1c6149bf9926b2a55c10e845f617fc87605ec63e11",
+      "archiveFile": "images/templates/orchid-amplop/gallery-6.webp"
+    },
+    {
+      "file": "assets/bellagio-2-poster.jpg",
+      "archiveFile": "images/lace/bellagio-2-poster.jpg",
+      "sourcePath": "/images/lace/bellagio-2-poster.jpg",
+      "bytes": 298332,
+      "sha256": "9918bd098acc3620586090b3e6f1eb44dc8876de487849f23c0e272154f5ffff"
+    },
+    {
+      "file": "assets/bellagio-2-opt.mp4",
+      "archiveFile": "images/lace/bellagio-2-opt.mp4",
+      "sourcePath": "/images/lace/bellagio-2-opt.mp4",
+      "bytes": 1910353,
+      "sha256": "c3106fda6371e352e80322b8ad8773337598db30025f12e369316c23827be3b1"
+    }
+  ],
+  "recoveredSourceAssets": [
+    {
+      "file": "assets/footer-mark.svg",
+      "sourcePath": "/images/lace/footer-mark.svg",
+      "bytes": 6097,
+      "sha256": "3c4d364fbe714b6712b40cab56d9ae2dcbfae56c87b680b41702ed196ec818ac",
+      "sourceUrl": "https://chorlove.uz/images/lace/footer-mark.svg",
+      "statusCode": 200,
+      "mimeType": "image/svg+xml",
+      "transformation": "None; exact original asset URL"
+    },
+    {
+      "file": "assets/hotel-ornament.png",
+      "sourcePath": "/images/lace/hotel-ornament.png",
+      "bytes": 331049,
+      "sha256": "649a269e652929d8326c4e56c92dc33478b85514c0001d289b82f6dd1dcc4f48",
+      "sourceUrl": "https://chorlove.uz/images/lace/hotel-ornament.png",
+      "statusCode": 200,
+      "mimeType": "image/png",
+      "transformation": "None; exact original asset URL"
+    },
+    {
+      "file": "assets/lace-bow-prev.webp",
+      "sourcePath": "/images/lace/lace-bow-prev.webp",
+      "bytes": 541848,
+      "sha256": "ced88704dcb74dd2e5a250197ed8be94af1095f0e26054db1c9e1b865b407d4e",
+      "sourceUrl": "https://chorlove.uz/images/lace/lace-bow-prev.webp",
+      "statusCode": 200,
+      "mimeType": "image/webp",
+      "transformation": "None; exact original asset URL"
+    },
+    {
+      "file": "assets/lace-bow.webp",
+      "sourcePath": "/images/lace/lace-bow.webp",
+      "bytes": 381074,
+      "sha256": "5196e2f886bddf3f5d9b6406f95b855d04edb1885c22305c98f0c23de9e3b3c6",
+      "sourceUrl": "https://chorlove.uz/images/lace/lace-bow.webp",
+      "statusCode": 200,
+      "mimeType": "image/webp",
+      "transformation": "None; exact original asset URL"
+    },
+    {
+      "file": "assets/lace-corner-swag.webp",
+      "sourcePath": "/images/lace/lace-corner-swag.webp",
+      "bytes": 166170,
+      "sha256": "db163eb35696b921d9ac65f72cb400d3342f2699d13972ea15da532fb913bf05",
+      "sourceUrl": "https://chorlove.uz/images/lace/lace-corner-swag.webp",
+      "statusCode": 200,
+      "mimeType": "image/webp",
+      "transformation": "None; exact original asset URL"
+    },
+    {
+      "file": "assets/lace-square-white-2.webp",
+      "sourcePath": "/images/lace/lace-square-white-2.webp",
+      "bytes": 205400,
+      "sha256": "348cfa2094e365650dc28992ff3d3470ad114f29119f315cfe5acc6ab740eaaf",
+      "sourceUrl": "https://chorlove.uz/images/lace/lace-square-white-2.webp",
+      "statusCode": 200,
+      "mimeType": "image/webp",
+      "transformation": "None; exact original asset URL"
+    },
+    {
+      "file": "assets/rsvp-heart.svg",
+      "sourcePath": "/images/lace/rsvp-heart.svg",
+      "bytes": 12986,
+      "sha256": "65b7dc5c15906f6ee0bae7edd714e9170de21eec03c40084448c09e7df4fe4f9",
+      "sourceUrl": "https://chorlove.uz/images/lace/rsvp-heart.svg",
+      "statusCode": 200,
+      "mimeType": "image/svg+xml",
+      "transformation": "None; exact original asset URL"
+    }
+  ],
+  "runtimeFontAssets": [
+    {
+      "file": "assets/instrument-serif-italic-latin-ext.woff2",
+      "bytes": 12384,
+      "sha256": "d0014821252a8a770bf7551641572f239a8ede83d75652d84fef0c3627751baf",
+      "sourceUrl": "https://fonts.gstatic.com/s/instrumentserif/v5/jizHRFtNs2ka5fXjeivQ4LroWlx-6zAjgn7MsNo.woff2",
+      "statusCode": 200,
+      "mimeType": "font/woff2",
+      "sourceType": "Google Fonts exact file"
+    },
+    {
+      "file": "assets/instrument-serif-italic-latin.woff2",
+      "bytes": 22128,
+      "sha256": "5a51946dfffa82972bc98745359c46761515641fda557c25116459a9f83da4a7",
+      "sourceUrl": "https://fonts.gstatic.com/s/instrumentserif/v5/jizHRFtNs2ka5fXjeivQ4LroWlx-6zAjjH7M.woff2",
+      "statusCode": 200,
+      "mimeType": "font/woff2",
+      "sourceType": "Google Fonts exact file"
+    },
+    {
+      "file": "assets/instrument-serif-regular-latin-ext.woff2",
+      "bytes": 11604,
+      "sha256": "290e6267dd833bf5f899eba4c29ad0a9b09dbe53f6075b18af38057159e1ff20",
+      "sourceUrl": "https://fonts.gstatic.com/s/instrumentserif/v5/jizBRFtNs2ka5fXjeivQ4LroWlx-6zsTjmbI.woff2",
+      "statusCode": 200,
+      "mimeType": "font/woff2",
+      "sourceType": "Google Fonts exact file"
+    },
+    {
+      "file": "assets/instrument-serif-regular-latin.woff2",
+      "bytes": 21032,
+      "sha256": "5eb09b5ac0e28b67c2f041c8ba6d244604ca0c0980d65912ab2d47fed84ddc31",
+      "sourceUrl": "https://fonts.gstatic.com/s/instrumentserif/v5/jizBRFtNs2ka5fXjeivQ4LroWlx-6zUTjg.woff2",
+      "statusCode": 200,
+      "mimeType": "font/woff2",
+      "sourceType": "Google Fonts exact file"
+    },
+    {
+      "file": "assets/monsieur-la-doulaise-latin-ext.woff2",
+      "bytes": 2332,
+      "sha256": "a94ad41ef9c07665c1297051cc268ecb1827ead317bc575eda499ea15fe9aebf",
+      "sourceUrl": "https://fonts.gstatic.com/s/monsieurladoulaise/v20/_Xmz-GY4rjmCbQfc-aPRaa4pqV340p7EZm5XyEAk4A.woff2",
+      "statusCode": 200,
+      "mimeType": "font/woff2",
+      "sourceType": "Google Fonts exact file"
+    },
+    {
+      "file": "assets/monsieur-la-doulaise-latin.woff2",
+      "bytes": 18856,
+      "sha256": "bd48779d8c8911e8a8dc7895871fafad4c33858ebb2bb23daa80e859a179e209",
+      "sourceUrl": "https://fonts.gstatic.com/s/monsieurladoulaise/v20/_Xmz-GY4rjmCbQfc-aPRaa4pqV340p7EZm5ZyEA.woff2",
+      "statusCode": 200,
+      "mimeType": "font/woff2",
+      "sourceType": "Google Fonts exact file"
+    },
+    {
+      "file": "assets/ballet-clean.woff2",
+      "bytes": 41772,
+      "sha256": "893b1fc5a82afe8c27b3d671693e0f0700e4d22453afe351794a32d5f6669fa1",
+      "sourceUrl": "https://chorlove.uz/images/lace/ballet-clean.woff2",
+      "statusCode": 200,
+      "mimeType": "font/woff2",
+      "sourceType": "archive"
+    }
+  ],
+  "notes": [
+    "The archive preview snapshot is preserved byte-for-byte. The isolated runnable page retains all 12 captured sections and removes captured Next.js/site scripts.",
+    "All referenced images and video are packaged locally. Seven absent archive images were recovered from their exact Chorlove URLs.",
+    "Captured Lace typography references Instrument Serif, Monsieur La Doulaise, and Ballet Clean. Google Fonts CSS and WOFF2 files are retained with source provenance and served locally.",
+    "The six original gallery pictures are preserved as captured assets; runtime replaces them with shared-contract gallery entries or empty preview placeholders.",
+    "The captured Bellagio cover overlay and its five-second video are retained and wired as the invitation opening interaction."
+  ]
+}

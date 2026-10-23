@@ -1,0 +1,221 @@
+{
+  "sourcePageUrl": "https://onlinetaklifnoma.app/templates/kapadokiya-tongi/full",
+  "sourceCssHashes": [
+    {
+      "url": "https://onlinetaklifnoma.app/_next/static/chunks/24u8yja0n8no_.css",
+      "sha256": "7fbd4efbe08b070fc12e63d865a27960c1912456f9b1fc3362fb07cedb6c1806"
+    },
+    {
+      "url": "https://onlinetaklifnoma.app/_next/static/chunks/0i04smhvgu890.css",
+      "sha256": "680482b23f1467fb55c9469b43c72f26734fb634a4fc4d2cd4a825a58f101e24"
+    },
+    {
+      "url": "https://onlinetaklifnoma.app/_next/static/chunks/0v1omwwm2r3bo.css",
+      "sha256": "6f4b65f4cbd5ca4327b4f0266a4874a6b2eed996f32bec5f059e3d77f925f191"
+    }
+  ],
+  "assets": [
+    {
+      "local": "assets/e924b6a0555070ae.webp",
+      "sourceUrl": "https://media.onlinetaklifnoma.app/template-assets/e924b6a0555070ae.webp",
+      "sha256": "e924b6a0555070ae40b45f45589a4b9e0bfc398e05f2d11c92fa39e6f5a0288e",
+      "bytes": 124124
+    },
+    {
+      "local": "assets/6ab2a48da7e608b2.webp",
+      "sourceUrl": "https://media.onlinetaklifnoma.app/template-assets/6ab2a48da7e608b2.webp",
+      "sha256": "6ab2a48da7e608b25a04a391500d96125c0b70689df624890d6f7b484b588384",
+      "bytes": 51944
+    },
+    {
+      "local": "assets/97296127a2ca46ee.mp4",
+      "sourceUrl": "https://media.onlinetaklifnoma.app/template-assets/97296127a2ca46ee.mp4",
+      "sha256": "97296127a2ca46ee6b2a8051d4517ab2113017e9ffc9f6a52d14002edc4e5b1b",
+      "bytes": 3253667
+    },
+    {
+      "family": "Amiri",
+      "local": "fonts/01-arabic.woff2",
+      "sourceUrl": "https://fonts.gstatic.com/s/amiri/v30/J7aRnpd8CGxBHpUrtLMA7w.woff2",
+      "sha256": "9abf8a10b4a2f27b698740522c9beec9ded7728aeef0738ac0d6e175bf6249d7",
+      "bytes": 108560
+    },
+    {
+      "family": "Amiri",
+      "local": "fonts/02-latin-ext.woff2",
+      "sourceUrl": "https://fonts.gstatic.com/s/amiri/v30/J7aRnpd8CGxBHpUgtLMA7w.woff2",
+      "sha256": "199be132b6fbb2fef143b30bae2eb04c63268758d29c03ff057b52cbee91636e",
+      "bytes": 10444
+    },
+    {
+      "family": "Amiri",
+      "local": "fonts/03-latin.woff2",
+      "sourceUrl": "https://fonts.gstatic.com/s/amiri/v30/J7aRnpd8CGxBHpUutLM.woff2",
+      "sha256": "d600850a2b0f3d862559d0bb040bca877e0f75cf9ee71a893bbd5089a224e3cd",
+      "bytes": 19544
+    },
+    {
+      "family": "Cinzel Decorative",
+      "local": "fonts/04-latin-ext.woff2",
+      "sourceUrl": "https://fonts.gstatic.com/s/cinzeldecorative/v19/daaCSScvJGqLYhG8nNt8KPPswUAPni7dTMx7aA.woff2",
+      "sha256": "57d6cf9d284ab796528836ae25094b144107bc087111fe539b7404e5fc338812",
+      "bytes": 8024
+    },
+    {
+      "family": "Cinzel Decorative",
+      "local": "fonts/05-latin.woff2",
+      "sourceUrl": "https://fonts.gstatic.com/s/cinzeldecorative/v19/daaCSScvJGqLYhG8nNt8KPPswUAPni7TTMw.woff2",
+      "sha256": "97d28bf5a628c4f0305a6f837e85d5ae7dbf44485f04d2a4cada8d7810c9bb03",
+      "bytes": 14416
+    },
+    {
+      "family": "EB Garamond",
+      "local": "fonts/06-cyrillic-ext.woff2",
+      "sourceUrl": "https://fonts.gstatic.com/s/ebgaramond/v33/SlGFmQSNjdsmc35JDF1K5GRwUjcdlttVFm-rI7e8QL9wU6ingQ.woff2",
+      "sha256": "69762e1dda54fb65b871792ec3a42c182bf10ab68e8045c27ec3b0be2737dd24",
+      "bytes": 17952
+    },
+    {
+      "family": "EB Garamond",
+      "local": "fonts/07-cyrillic.woff2",
+      "sourceUrl": "https://fonts.gstatic.com/s/ebgaramond/v33/SlGFmQSNjdsmc35JDF1K5GRwUjcdlttVFm-rI7e8QL95U6ingQ.woff2",
+      "sha256": "2471084322da28cd71b77972fe5261495bd923b41edbfe1c1b7220959e274185",
+      "bytes": 13572
+    },
+    {
+      "family": "EB Garamond",
+      "local": "fonts/08-greek-ext.woff2",
+      "sourceUrl": "https://fonts.gstatic.com/s/ebgaramond/v33/SlGFmQSNjdsmc35JDF1K5GRwUjcdlttVFm-rI7e8QL9xU6ingQ.woff2",
+      "sha256": "0fbbfca37bdd1b4f99f7c38ad25918e25a620aabc4bbc13e78f9319cb0a5a718",
+      "bytes": 6608
+    },
+    {
+      "family": "EB Garamond",
+      "local": "fonts/09-greek.woff2",
+      "sourceUrl": "https://fonts.gstatic.com/s/ebgaramond/v33/SlGFmQSNjdsmc35JDF1K5GRwUjcdlttVFm-rI7e8QL9-U6ingQ.woff2",
+      "sha256": "9a9f37128dd79d5a77aa61c0c91b8ce9957bf202c35721b13430a157819f53e3",
+      "bytes": 10500
+    },
+    {
+      "family": "EB Garamond",
+      "local": "fonts/10-vietnamese.woff2",
+      "sourceUrl": "https://fonts.gstatic.com/s/ebgaramond/v33/SlGFmQSNjdsmc35JDF1K5GRwUjcdlttVFm-rI7e8QL9yU6ingQ.woff2",
+      "sha256": "7b8ef3e70791929569af845b202150cdf8165f2a6a50ffef49cf897bde9b8c7a",
+      "bytes": 6268
+    },
+    {
+      "family": "EB Garamond",
+      "local": "fonts/11-latin-ext.woff2",
+      "sourceUrl": "https://fonts.gstatic.com/s/ebgaramond/v33/SlGFmQSNjdsmc35JDF1K5GRwUjcdlttVFm-rI7e8QL9zU6ingQ.woff2",
+      "sha256": "a7aad7b598be80caf14221e4b3066676537a2010bb51c1609e6b68973adb01d7",
+      "bytes": 45468
+    },
+    {
+      "family": "EB Garamond",
+      "local": "fonts/12-latin.woff2",
+      "sourceUrl": "https://fonts.gstatic.com/s/ebgaramond/v33/SlGFmQSNjdsmc35JDF1K5GRwUjcdlttVFm-rI7e8QL99U6g.woff2",
+      "sha256": "fc5851c4466e73bec048bb62d65f8abadf70d602816687e6d364214e35fa8abb",
+      "bytes": 25388
+    },
+    {
+      "family": "EB Garamond",
+      "local": "fonts/13-cyrillic-ext.woff2",
+      "sourceUrl": "https://fonts.gstatic.com/s/ebgaramond/v33/SlGUmQSNjdsmc35JDF1K5GR4SDktYw.woff2",
+      "sha256": "7738b6004721f3d23e4e284b1055120f0ac1fd96fd01e5786b58b3042998876c",
+      "bytes": 33948
+    },
+    {
+      "family": "EB Garamond",
+      "local": "fonts/14-cyrillic.woff2",
+      "sourceUrl": "https://fonts.gstatic.com/s/ebgaramond/v33/SlGUmQSNjdsmc35JDF1K5GRxSDktYw.woff2",
+      "sha256": "197ed98b8524dd8664aefb5d5ef4ca515d2df1ef90d3f771e19cb0893b95cc2b",
+      "bytes": 26024
+    },
+    {
+      "family": "EB Garamond",
+      "local": "fonts/15-greek-ext.woff2",
+      "sourceUrl": "https://fonts.gstatic.com/s/ebgaramond/v33/SlGUmQSNjdsmc35JDF1K5GR5SDktYw.woff2",
+      "sha256": "3cd432d0dc2b756e69eea4325fd40f3515a31753445238f7fb5d349588192511",
+      "bytes": 11484
+    },
+    {
+      "family": "EB Garamond",
+      "local": "fonts/16-greek.woff2",
+      "sourceUrl": "https://fonts.gstatic.com/s/ebgaramond/v33/SlGUmQSNjdsmc35JDF1K5GR2SDktYw.woff2",
+      "sha256": "f6475b2f7530f248b5d3a0237d97dc2e1987665153dcb888fbeea3b0f9019b56",
+      "bytes": 19868
+    },
+    {
+      "family": "EB Garamond",
+      "local": "fonts/17-vietnamese.woff2",
+      "sourceUrl": "https://fonts.gstatic.com/s/ebgaramond/v33/SlGUmQSNjdsmc35JDF1K5GR6SDktYw.woff2",
+      "sha256": "af68d0b256558e0fecffabca6696d47c78902249db6bc7e1ac9964980a610a77",
+      "bytes": 10952
+    },
+    {
+      "family": "EB Garamond",
+      "local": "fonts/18-latin-ext.woff2",
+      "sourceUrl": "https://fonts.gstatic.com/s/ebgaramond/v33/SlGUmQSNjdsmc35JDF1K5GR7SDktYw.woff2",
+      "sha256": "f8d3fa06e20989a938972165406a1b731cdc7fe33ff2b0b6798c75aa63709901",
+      "bytes": 113928
+    },
+    {
+      "family": "EB Garamond",
+      "local": "fonts/19-latin.woff2",
+      "sourceUrl": "https://fonts.gstatic.com/s/ebgaramond/v33/SlGUmQSNjdsmc35JDF1K5GR1SDk.woff2",
+      "sha256": "88603384163d301aebd5bd769832a8bfe3c9004ec24178417b9817f0ad32c63b",
+      "bytes": 44336
+    },
+    {
+      "family": "cyrillic-ext",
+      "local": "fonts/20-cyrillic-ext.woff2",
+      "sourceUrl": "https://fonts.gstatic.com/s/ebgaramond/v33/SlGUmQSNjdsmc35JDF1K5GR4SDktYw.woff2",
+      "sha256": "7738b6004721f3d23e4e284b1055120f0ac1fd96fd01e5786b58b3042998876c",
+      "bytes": 33948
+    },
+    {
+      "family": "cyrillic",
+      "local": "fonts/21-cyrillic.woff2",
+      "sourceUrl": "https://fonts.gstatic.com/s/ebgaramond/v33/SlGUmQSNjdsmc35JDF1K5GRxSDktYw.woff2",
+      "sha256": "197ed98b8524dd8664aefb5d5ef4ca515d2df1ef90d3f771e19cb0893b95cc2b",
+      "bytes": 26024
+    },
+    {
+      "family": "greek-ext",
+      "local": "fonts/22-greek-ext.woff2",
+      "sourceUrl": "https://fonts.gstatic.com/s/ebgaramond/v33/SlGUmQSNjdsmc35JDF1K5GR5SDktYw.woff2",
+      "sha256": "3cd432d0dc2b756e69eea4325fd40f3515a31753445238f7fb5d349588192511",
+      "bytes": 11484
+    },
+    {
+      "family": "greek",
+      "local": "fonts/23-greek.woff2",
+      "sourceUrl": "https://fonts.gstatic.com/s/ebgaramond/v33/SlGUmQSNjdsmc35JDF1K5GR2SDktYw.woff2",
+      "sha256": "f6475b2f7530f248b5d3a0237d97dc2e1987665153dcb888fbeea3b0f9019b56",
+      "bytes": 19868
+    },
+    {
+      "family": "vietnamese",
+      "local": "fonts/24-vietnamese.woff2",
+      "sourceUrl": "https://fonts.gstatic.com/s/ebgaramond/v33/SlGUmQSNjdsmc35JDF1K5GR6SDktYw.woff2",
+      "sha256": "af68d0b256558e0fecffabca6696d47c78902249db6bc7e1ac9964980a610a77",
+      "bytes": 10952
+    },
+    {
+      "family": "latin-ext",
+      "local": "fonts/25-latin-ext.woff2",
+      "sourceUrl": "https://fonts.gstatic.com/s/ebgaramond/v33/SlGUmQSNjdsmc35JDF1K5GR7SDktYw.woff2",
+      "sha256": "f8d3fa06e20989a938972165406a1b731cdc7fe33ff2b0b6798c75aa63709901",
+      "bytes": 113928
+    },
+    {
+      "family": "latin",
+      "local": "fonts/26-latin.woff2",
+      "sourceUrl": "https://fonts.gstatic.com/s/ebgaramond/v33/SlGUmQSNjdsmc35JDF1K5GR1SDk.woff2",
+      "sha256": "88603384163d301aebd5bd769832a8bfe3c9004ec24178417b9817f0ad32c63b",
+      "bytes": 44336
+    }
+  ],
+  "fontStylesheetUrl": "https://fonts.googleapis.com/css2?family=Amiri&family=Cinzel+Decorative&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap",
+  "fontStylesheetSha256": "060a515706c539da09ac77533d2001c3dea9f8f776a373c761db1e72d3c65530"
+}

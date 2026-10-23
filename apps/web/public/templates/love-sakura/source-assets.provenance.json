@@ -1,0 +1,81 @@
+{
+  "sourceSnapshot": {
+    "path": "..\\Invitations - this folder will be removed from production\\Chorlove\\Web invitations\\templates\\love-sakura\\preview-frame.html",
+    "bytes": 55773,
+    "sha256": "90f59b13d4350d6421b7b7cac853b49a40754d2e2d103d31f380bb33e43f40ba"
+  },
+  "assets": [
+    {
+      "file": "bride.webp",
+      "sourceUrl": "https://chorlove.uz/images/love-sakura/bride.webp",
+      "httpStatus": 200,
+      "contentType": "image/webp",
+      "bytes": 27629,
+      "sha256": "7fbece3cc4f429ebe2a79230544f7a2ade0131b29255c089fc3dce70b02640d0"
+    },
+    {
+      "file": "cherry-1.png",
+      "sourceUrl": "https://chorlove.uz/images/love-sakura/cherry-1.png",
+      "httpStatus": 200,
+      "contentType": "image/png",
+      "bytes": 47590,
+      "sha256": "3029d6b5caa8749ceeb9acc76bb5b832d2d41b4c58896f13910d5f4c0c233703"
+    },
+    {
+      "file": "cherry-2.png",
+      "sourceUrl": "https://chorlove.uz/images/love-sakura/cherry-2.png",
+      "httpStatus": 200,
+      "contentType": "image/png",
+      "bytes": 22625,
+      "sha256": "5cf3ecf3bc378f87f6bdeb89a28a85467dbf2f448ddcbcd91ce7c97379a414e9"
+    },
+    {
+      "file": "cherry-3.png",
+      "sourceUrl": "https://chorlove.uz/images/love-sakura/cherry-3.png",
+      "httpStatus": 200,
+      "contentType": "image/png",
+      "bytes": 51391,
+      "sha256": "fbe678783d24e0d4b11c50e50fd9d3e6921c6e0a19f4d9d8c7105fc8173b7c51"
+    },
+    {
+      "file": "cherry-7.png",
+      "sourceUrl": "https://chorlove.uz/images/love-sakura/cherry-7.png",
+      "httpStatus": 200,
+      "contentType": "image/png",
+      "bytes": 203666,
+      "sha256": "3c82a50a8beed978c3cdb3e27d02b1016f191b8324541a1da1b6012764658a36"
+    },
+    {
+      "file": "groom.webp",
+      "sourceUrl": "https://chorlove.uz/images/love-sakura/groom.webp",
+      "httpStatus": 200,
+      "contentType": "image/webp",
+      "bytes": 30317,
+      "sha256": "889d30e43e93ff687af24909d639e514baac2f23589b3304a99d3578c2136cdd"
+    },
+    {
+      "file": "hero-couple.webp",
+      "sourceUrl": "https://chorlove.uz/images/love-sakura/hero-couple.webp",
+      "httpStatus": 200,
+      "contentType": "image/webp",
+      "bytes": 38400,
+      "sha256": "8e459de64eff08fb9d56db6ff8d1fbb06a93ac28e09848d3ed45f45c6d5e88dc"
+    },
+    {
+      "file": "pngwing-medium.png",
+      "sourceUrl": "https://chorlove.uz/images/love-sakura/pngwing-medium.png",
+      "httpStatus": 200,
+      "contentType": "image/png",
+      "bytes": 234613,
+      "sha256": "bc2b945bac9aab5fa377c89c0f83a190f4ef745940e6889f44981765bdf4f403"
+    },
+    {
+      "file": "temples.png",
+      "sourceUrl": "https://chorlove.uz/images/love-sakura/temples.png",
+      "httpStatus": 200,
+      "contentType": "image/png",
+      "bytes": 135630,
+      "sha256": "353a817f9deb5d5f135f29d8df5150b85657007c7ec7e16673bbef8f7e1d89bd"
+    }
+  ]
+}

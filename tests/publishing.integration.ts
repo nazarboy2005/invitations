@@ -646,6 +646,24 @@ test("RSVP limits and wish moderation reach the owner and approved public list",
   );
 });
 
+test("unpublished Modern Floral draft saves and reopens while staying out of the public catalog", async () => {
+  const invitation = completeInvitation();
+  invitation.templateId = "modern-floral";
+  await sql`INSERT INTO invitations(id,owner_id,template_id,status,data) VALUES(${invitation.id},${owner.id},${invitation.templateId},'draft',${sql.json(invitation)})`;
+  const savedResponse = await request("/api/invitations", { invitation });
+  assert.equal(savedResponse.status, 201, await savedResponse.clone().text());
+  const saved = (await savedResponse.json()).invitation as Invitation;
+  assert.equal(saved.templateId, "modern-floral");
+  const reopenedResponse = await request(`/api/invitations/${invitation.id}`);
+  assert.equal(reopenedResponse.status, 200);
+  const reopened = (await reopenedResponse.json()).invitation as Invitation;
+  for (const key of ["templateId", "content", "enabledLocales", "startsAt", "timezone", "venue", "program", "gallery", "music", "gift", "contacts", "rsvp", "wishes"] as const)
+    assert.deepEqual(reopened[key], saved[key], key);
+  const catalog = await (await request("/api/catalog", undefined, false)).json();
+  assert.ok(!catalog.templates.some((template: { id: string }) => template.id === "modern-floral"));
+  assert.equal((await fetch(`${origin}/i/${invitation.id}`)).status, 404);
+});
+
 test("every published template preserves every editor field across four-language save, publish and reopen", async () => {
   const catalog = await (
     await request("/api/catalog", undefined, false)
@@ -853,7 +871,8 @@ test("HTTP save → publish → public render → reopen and allowed edits prese
     ).status,
     403,
   );
-  await sql`UPDATE invitations SET edit_deadline_at=now()-interval '1 second' WHERE id=${saved.id}`;
+  // Leave a generous margin for clock skew between PostgreSQL and the app process.
+  await sql`UPDATE invitations SET edit_deadline_at=now()-interval '1 minute' WHERE id=${saved.id}`;
   assert.equal(
     (await request("/api/invitations", { invitation: saved })).status,
     403,

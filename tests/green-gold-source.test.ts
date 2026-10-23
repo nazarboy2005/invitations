@@ -3,6 +3,7 @@ import { createHash } from "node:crypto";
 import { readFile, readdir } from "node:fs/promises";
 import path from "node:path";
 import { test } from "node:test";
+import { runInNewContext } from "node:vm";
 import { templateById } from "../packages/contracts/src/index";
 import { createTemplatePreviewSample } from "../apps/web/src/modules/catalog/preview-sample";
 
@@ -49,7 +50,7 @@ test("Green Gold stages exact design assets and excludes sample gallery images",
     const original = await readFile(new URL(relativeArchiveFile, archive));
     assert.deepEqual(bytes, original, asset.file);
   }
-  assert.deepEqual(manifest.missingSourceAssets, []);
+  assert.deepEqual(manifest.missingSourceAssets, ["images/green-gold/vertical-line.png"]);
   const recovered = manifest.sourceAssetsFromLive.find((asset: { file: string }) =>
     asset.file === "assets/vertical-line.webp",
   );
@@ -101,6 +102,83 @@ test("Green Gold keeps the captured stylesheet dependencies for source fidelity 
   }
 });
 
+test("shared Chorlove stylesheet dependencies resolve to exact local assets", async () => {
+  const shared = new URL("../chorlove/shared/", root);
+  const manifest = JSON.parse(
+    await readFile(new URL("shared-assets.provenance.json", shared), "utf8"),
+  );
+  const servedCss = await readFile(
+    new URL(manifest.servedStylesheet.file, shared),
+  );
+  assert.equal(servedCss.length, manifest.servedStylesheet.bytes);
+  assert.equal(
+    createHash("sha256").update(servedCss).digest("hex"),
+    manifest.servedStylesheet.sha256,
+  );
+  assert.doesNotMatch(servedCss.toString("utf8"), /url\(\/fonts\//);
+  const sourceManifest = JSON.parse(
+    await readFile(new URL("source-assets.provenance.json", root), "utf8"),
+  );
+  assert.equal(
+    sourceManifest.capturedStylesheets.find((sheet: { file: string }) =>
+      sheet.file.endsWith("00sc_9lpb3zcn.css"),
+    ).sha256,
+    manifest.sourceStylesheet.sha256BeforeRewrite,
+  );
+  for (const font of manifest.fonts) {
+    const bytes = await readFile(
+      new URL(`../chorlove/shared/${font.servedFile}`, root),
+    );
+    const original = await readFile(
+      new URL(
+        font.archiveFile.replace(/^Chorlove\/Web invitations\//, ""),
+        archive,
+      ),
+    );
+    assert.deepEqual(bytes, original, font.servedFile);
+    assert.equal(bytes.length, font.bytes, font.servedFile);
+    assert.equal(
+      createHash("sha256").update(bytes).digest("hex"),
+      font.sha256,
+      font.servedFile,
+    );
+  }
+  for (const asset of manifest.recoveredAssets) {
+    const bytes = await readFile(new URL(`../chorlove/shared/${asset.file}`, root));
+    assert.equal(bytes.length, asset.bytes, asset.file);
+    assert.equal(
+      createHash("sha256").update(bytes).digest("hex"),
+      asset.sha256,
+      asset.file,
+    );
+    assert.match(asset.sourceUrl, /^https:\/\/chorlove\.uz\/_next\/static\/media\//);
+    assert.ok(asset.contentType.startsWith(asset.file.endsWith(".png") ? "image/png" : "font/woff2"));
+  }
+  const html = await readFile(new URL("index.html", root), "utf8");
+  const linkedStylesheets = [...html.matchAll(/href="(\/templates\/[^\"]+\.css)"/g)]
+    .map((match) => match[1]);
+  const assetChecks = [
+    ...[...html.matchAll(/(?:src|href)="(\/[^\"?#]+)"/g)].map((match) => [match[1], root] as const),
+  ];
+  for (const stylesheet of linkedStylesheets) {
+    const stylesheetUrl = stylesheet.startsWith("/templates/green-gold/")
+      ? new URL(stylesheet.slice("/templates/green-gold/".length), root)
+      : new URL(`../${stylesheet.slice("/templates/".length)}`, root);
+    const css = await readFile(stylesheetUrl, "utf8");
+    for (const [, resource] of css.matchAll(/url\([\"']?([^\)\"']+)/g)) {
+      if (/^(?:data:|https?:|#)/.test(resource)) continue;
+      assetChecks.push([resource, stylesheetUrl]);
+    }
+  }
+  for (const [resource, base] of assetChecks) {
+    if (resource === "/") continue;
+    const target = resource.startsWith("/")
+      ? new URL(`../../${resource.slice(1)}`, root)
+      : new URL(resource, base);
+    await readFile(target);
+  }
+});
+
 test("Green Gold runnable adapter isolates the source sections from site runtime and sample data", async () => {
   const html = await readFile(new URL("index.html", root), "utf8");
   const bridge = await readFile(new URL("bridge.js", root), "utf8");
@@ -141,6 +219,28 @@ test("Green Gold runnable adapter isolates the source sections from site runtime
   assert.doesNotMatch(bridge, /p\.locale==="ru"\?"Send gift"/);
   assert.match(css, /prefers-reduced-motion/);
   assert.match(css, /scroll-snap-type:y mandatory/);
+});
+
+test("Green Gold localized control copy decodes in all four locales", async () => {
+  const bridge = await readFile(new URL("bridge.js", root), "utf8");
+  const match = bridge.match(/const copy = (\{[\s\S]*?\n  \});/);
+  assert.ok(match);
+  const copy = runInNewContext(`(${match[1]})`);
+  for (const locale of ["uz-Latn", "uz-Cyrl", "en", "ru"]) {
+    for (const field of [
+      "responseLabel",
+      "guestRequired",
+      "wishRequired",
+      "chooseResponse",
+      "photo",
+      "close",
+    ])
+      assert.equal(typeof copy[locale][field], "string", `${locale}.${field}`);
+  }
+  assert.equal(copy["uz-Cyrl"].responseLabel, "\u0416\u0430\u0432\u043e\u0431\u0438\u043d\u0433\u0438\u0437");
+  assert.equal(copy.ru.responseLabel, "\u0412\u0430\u0448 \u043e\u0442\u0432\u0435\u0442");
+  assert.equal(copy["uz-Cyrl"].guestRequired, "\u0418\u0441\u043c\u0438\u043d\u0433\u0438\u0437\u043d\u0438 \u043a\u0438\u0440\u0438\u0442\u0438\u043d\u0433.");
+  assert.equal(copy.ru.photo, "\u0424\u043e\u0442\u043e");
 });
 
 

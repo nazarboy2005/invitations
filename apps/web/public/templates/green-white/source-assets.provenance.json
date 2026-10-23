@@ -1,0 +1,96 @@
+{
+  "templateId": "green-white",
+  "source": {
+    "archiveFile": "Chorlove/Web invitations/templates/green-white/preview-frame.html",
+    "preservedFile": "source/preview-frame.html",
+    "bytes": 109794,
+    "sha256": "6cf2ae9fa22c28a85391ceff427a553079cd2d58e61fb85cec8b0bf09af9ac7d",
+    "captureType": "Next.js server-rendered HTML preview snapshot"
+  },
+  "copiedDesignAssets": [
+    {
+      "file": "assets/arka.webp",
+      "bytes": 19268,
+      "sha256": "a5b473b685fa74ae987ffaf17eea15c12a9f61916caa886c80d4519fc738fa9a",
+      "archiveFile": "Chorlove/Web invitations/images/green-white/arka.webp"
+    },
+    {
+      "file": "assets/bottom-divider.webp",
+      "bytes": 8572,
+      "sha256": "c10b7a269ad8aa47aba8c19630d97c8c703045a7e7a1e64d6787bc7f78198daf",
+      "archiveFile": "Chorlove/Web invitations/images/green-white/bottom-divider.webp"
+    },
+    {
+      "file": "assets/cloud.webp",
+      "bytes": 160374,
+      "sha256": "0feb20e7b9ada93a2f24bbf8970280d8e535fcc464c087b226e0489a38e8e72f",
+      "archiveFile": "Chorlove/Web invitations/images/green-white/cloud.webp"
+    },
+    {
+      "file": "assets/divider.webp",
+      "bytes": 8262,
+      "sha256": "cafe0d3af3799c56df4452367bbdd3e23ea4ad8858b5cf079c89f8e207364df1",
+      "archiveFile": "Chorlove/Web invitations/images/green-white/divider.webp"
+    },
+    {
+      "file": "assets/flower.webp",
+      "bytes": 134392,
+      "sha256": "72d5b3403d05548352ef7ae5dfe3181e0933b24fb3e283fd5e78f160fc6e887f",
+      "archiveFile": "Chorlove/Web invitations/images/green-white/flower.webp"
+    },
+    {
+      "file": "assets/header-pic.webp",
+      "bytes": 348244,
+      "sha256": "398f4f26dddc088a5f43f115331e668de88a3d461c87c3c9df0d4db22a0b6f7a",
+      "archiveFile": "Chorlove/Web invitations/images/green-white/header-pic.webp"
+    },
+    {
+      "file": "assets/header-pic2.webp",
+      "bytes": 30848,
+      "sha256": "1e57ec55bb822cdd53d9b80a5efdf336c92bf365a57c68647fbf70e45172232f",
+      "archiveFile": "Chorlove/Web invitations/images/green-white/header-pic2.webp"
+    },
+    {
+      "file": "assets/rings.webp",
+      "bytes": 19170,
+      "sha256": "2ff7ca22ee2afbbb810fa89992b7a24271c37ed78925c5fd11f2afa72d437b52",
+      "archiveFile": "Chorlove/Web invitations/images/green-white/rings.webp"
+    }
+  ],
+  "capturedStylesheets": [
+    {
+      "file": "source/styles/054~-i6~6lmrd.css",
+      "bytes": 3859,
+      "sha256": "13599ddc9e6faa903f0966c4adeec12e47ecaa6382056e2cb71bdc68b93bd3fa",
+      "archiveFile": "Chorlove/Web invitations/_next/static/chunks/054~-i6~6lmrd.css"
+    },
+    {
+      "file": "source/styles/0ly1y_qxlqlf..css",
+      "bytes": 6140,
+      "sha256": "3fcd5d40feb11ed6c2f58cfcf069d01f27a1bbf95a51b75d9c9e02c63e3d3f81",
+      "archiveFile": "Chorlove/Web invitations/_next/static/chunks/0ly1y_qxlqlf..css"
+    }
+  ],
+  "excludedSnapshotAssets": [
+    "images/templates/orchid-amplop/gallery-1.webp",
+    "images/templates/orchid-amplop/gallery-2.webp",
+    "images/templates/orchid-amplop/gallery-3.webp",
+    "images/templates/orchid-amplop/gallery-4.webp",
+    "images/templates/orchid-amplop/gallery-5.webp",
+    "images/templates/orchid-amplop/gallery-6.webp"
+  ],
+  "missingSourceAssets": [
+    "images/green-white/arka2.webp"
+  ],
+  "status": "Source snapshot and eight archived artwork assets are preserved; the missing arka2.webp is represented by its explicitly documented observed JPEG rendition. The isolated page and adapter remain unpublished pending visual and release checks.",
+  "sourceAssetsFromLive": [
+    {
+      "file": "assets/arka2.jpg",
+      "bytes": 10752,
+      "sha256": "980fad29313c9894f54bcc22aefbcf69eadbecee2b8e947a0f612b3f30897c3f",
+      "mimeType": "image/jpeg",
+      "sourceUrl": "https://chorlove.uz/_next/image?url=%2Fimages%2Fgreen-white%2Farka2.webp&w=1200&q=75",
+      "transformation": "Observed Next.js optimized JPEG rendition (w=1200, q=75); original arka2.webp was absent from the archive."
+    }
+  ]
+}

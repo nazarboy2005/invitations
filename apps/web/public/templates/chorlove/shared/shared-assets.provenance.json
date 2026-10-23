@@ -1,0 +1,199 @@
+{
+  "purpose": "Resolve shared captured Chorlove font URLs inside the isolated local package.",
+  "sourceStylesheet": {
+    "file": "_next/static/chunks/00sc_9lpb3zcn.css",
+    "sha256BeforeRewrite": "9295d64fad91822e7e7ab0d110764ac973d5414829a5bf40bb69e99531762910"
+  },
+  "servedStylesheet": {
+    "file": "_next/static/chunks/00sc_9lpb3zcn.css",
+    "bytes": 360901,
+    "sha256": "95ca4d88bf35129d1265d95749cecc361a72f460201c7564a3cc8784e24edc40"
+  },
+  "transformation": "Rewrote only seven /fonts/* font-face URLs to the exact hash-matched files already packaged in shared _next/static/media. The unchanged captured stylesheet is preserved per-template under source/styles/.",
+  "fonts": [
+    {
+      "archiveFile": "Chorlove/Web invitations/fonts/CormorantGaramond-Regular.ttf",
+      "servedFile": "_next/static/media/CormorantGaramond_Regular-s.p.05iajzwz.gtv8.ttf",
+      "bytes": 666632,
+      "sha256": "7b99138ffa3baab8616d8491dc6d75961c5ae568b206c5031fbc7bb127385428"
+    },
+    {
+      "archiveFile": "Chorlove/Web invitations/fonts/Fraunces-VariableFont_SOFT,WONK,opsz,wght.ttf",
+      "servedFile": "_next/static/media/Fraunces_VariableFont_SOFT,WONK,opsz,wght-s.p.0g87.hb0o.d8x.ttf",
+      "bytes": 357632,
+      "sha256": "99b365ece2cccd7d7baf879cc141f1fa9f2d20690fe025bc3003b01dff098f05"
+    },
+    {
+      "archiveFile": "Chorlove/Web invitations/fonts/GreatVibes-Regular.ttf",
+      "servedFile": "_next/static/media/GreatVibes_Regular-s.p.0au6u0v_syb0z.ttf",
+      "bytes": 445300,
+      "sha256": "8671b4332bff26a2ca32c7388a2929320e0ade036e460bd76cd1a22abbd4d5b4"
+    },
+    {
+      "archiveFile": "Chorlove/Web invitations/fonts/Jost-VariableFont_wght.ttf",
+      "servedFile": "_next/static/media/Jost_VariableFont_wght-s.p.0vv2r-0fdeyux.ttf",
+      "bytes": 134476,
+      "sha256": "8d3141b6b4793c691c3647c602372c836577bf0c48a6b66674bbd558a95c1b57"
+    },
+    {
+      "archiveFile": "Chorlove/Web invitations/fonts/Marcellus-Regular.ttf",
+      "servedFile": "_next/static/media/Marcellus_Regular-s.p.0s04k8a2jokc9.ttf",
+      "bytes": 43988,
+      "sha256": "5746c575e2d6bf9c57d388f04a2c9782a93ac83abb09ecf3e898c0b4399d79f9"
+    },
+    {
+      "archiveFile": "Chorlove/Web invitations/fonts/Qellia.otf",
+      "servedFile": "_next/static/media/Qellia-s.p.0l1a3-80k4-g1.otf",
+      "bytes": 20180,
+      "sha256": "98c0d340d2ba414001b9210aa20df2516c8dcdd18c09aa822b34f9718bb45776"
+    },
+    {
+      "archiveFile": "Chorlove/Web invitations/fonts/TheNautigal-Regular.ttf",
+      "servedFile": "_next/static/media/TheNautigal_Regular-s.p.0vn.0-.5o~f4t.ttf",
+      "bytes": 161852,
+      "sha256": "00e79428e3715ee28f9919be8c3bb4f468197b99ae419ae750b19f3a379b4222"
+    }
+  ],
+  "recoveredAssets": [
+    {
+      "file": "_next/static/media/2c55a0e60120577a-s.0bjc5tiuqdqro.woff2",
+      "bytes": 25844,
+      "sha256": "fccca918fea40089dacadc7045861314d1a6bc91f1f323cc1eeb22ebcdb321b5",
+      "sourceUrl": "https://chorlove.uz/_next/static/media/2c55a0e60120577a-s.0bjc5tiuqdqro.woff2",
+      "contentType": "font/woff2"
+    },
+    {
+      "file": "_next/static/media/9c72aa0f40e4eef8-s.0m6w47a4e5dy9.woff2",
+      "bytes": 18744,
+      "sha256": "aebf2ab4a4ce6810d73c1ac7be7cafb4e5ec4cee2d6db5fb3e09691747ec4bd6",
+      "sourceUrl": "https://chorlove.uz/_next/static/media/9c72aa0f40e4eef8-s.0m6w47a4e5dy9.woff2",
+      "contentType": "font/woff2"
+    },
+    {
+      "file": "_next/static/media/ad66f9afd8947f86-s.11u06r12fd6v_.woff2",
+      "bytes": 11272,
+      "sha256": "a2e2c783ca6f9c20486e81e72a279203e86730bbf8f01ff6a5ee9dbd09e1c271",
+      "sourceUrl": "https://chorlove.uz/_next/static/media/ad66f9afd8947f86-s.11u06r12fd6v_.woff2",
+      "contentType": "font/woff2"
+    },
+    {
+      "file": "_next/static/media/5476f68d60460930-s.0wxq9webf.ew4.woff2",
+      "bytes": 19044,
+      "sha256": "46dd4cdca58c26ae87cc6927657bf83b2e8abfc39ffd0ab176e301a8d28d22bf",
+      "sourceUrl": "https://chorlove.uz/_next/static/media/5476f68d60460930-s.0wxq9webf.ew4.woff2",
+      "contentType": "font/woff2"
+    },
+    {
+      "file": "_next/static/media/2bbe8d2671613f1f-s.067x_6k0k23tk.woff2",
+      "bytes": 10280,
+      "sha256": "8db00ff46c67b22cda8bed865acf7077651cac8d2841d5b40980556b48961931",
+      "sourceUrl": "https://chorlove.uz/_next/static/media/2bbe8d2671613f1f-s.067x_6k0k23tk.woff2",
+      "contentType": "font/woff2"
+    },
+    {
+      "file": "_next/static/media/1bffadaabf893a1e-s.16ipb6fqu393i.woff2",
+      "bytes": 85272,
+      "sha256": "a28eb6d3ccb534ae0c94ca999371df024aab60b08c3c8a5720ee9e32fa0faaa2",
+      "sourceUrl": "https://chorlove.uz/_next/static/media/1bffadaabf893a1e-s.16ipb6fqu393i.woff2",
+      "contentType": "font/woff2"
+    },
+    {
+      "file": "_next/static/media/14e23f9b59180572-s.08.c8psu~gif9.woff2",
+      "bytes": 9056,
+      "sha256": "8fa67d5f0ab2a1d0b924729a0411a069b384d7a236edd96a6767ef342a6d048f",
+      "sourceUrl": "https://chorlove.uz/_next/static/media/14e23f9b59180572-s.08.c8psu~gif9.woff2",
+      "contentType": "font/woff2"
+    },
+    {
+      "file": "_next/static/media/b49b0d9b851e4899-s.0yfy_qj1.2qn0.woff2",
+      "bytes": 20980,
+      "sha256": "5628567856d60d714e7a35bcac9e3de08b336d63b12138f61b970990a1ee9547",
+      "sourceUrl": "https://chorlove.uz/_next/static/media/b49b0d9b851e4899-s.0yfy_qj1.2qn0.woff2",
+      "contentType": "font/woff2"
+    },
+    {
+      "file": "_next/static/media/3da3ed81b60dad72-s.0letko3.bi7dv.woff2",
+      "bytes": 8036,
+      "sha256": "e3b06e0e5437d6d6a60776417fd3ba5f0b249f6937090e9f212ba96b5d20feb7",
+      "sourceUrl": "https://chorlove.uz/_next/static/media/3da3ed81b60dad72-s.0letko3.bi7dv.woff2",
+      "contentType": "font/woff2"
+    },
+    {
+      "file": "_next/static/media/eeeaa291c8845473-s.0ejcw_avclj~7.woff2",
+      "bytes": 21876,
+      "sha256": "e01d351d0e20f61106f923302e0725161a382c09251a650ba04fd325d6fa45fc",
+      "sourceUrl": "https://chorlove.uz/_next/static/media/eeeaa291c8845473-s.0ejcw_avclj~7.woff2",
+      "contentType": "font/woff2"
+    },
+    {
+      "file": "_next/static/media/e3dfc854017cd189-s.07o01p01pl9vd.woff2",
+      "bytes": 15452,
+      "sha256": "5728051d191c10f4a6e28bd1b13fd03dc35d1ef3267fd2ba58db64d6b0ffd0f7",
+      "sourceUrl": "https://chorlove.uz/_next/static/media/e3dfc854017cd189-s.07o01p01pl9vd.woff2",
+      "contentType": "font/woff2"
+    },
+    {
+      "file": "_next/static/media/ca59e9eae7934b24-s.0mnjxgm0dflcj.woff2",
+      "bytes": 18472,
+      "sha256": "5a3bb5428735adafca22951f9742624b481ee7493e347a258bbf9c703b48b769",
+      "sourceUrl": "https://chorlove.uz/_next/static/media/ca59e9eae7934b24-s.0mnjxgm0dflcj.woff2",
+      "contentType": "font/woff2"
+    },
+    {
+      "file": "_next/static/media/d4d7dfbfbdcfb829-s.0gq5x..r-ww79.woff2",
+      "bytes": 13152,
+      "sha256": "76a4cd4b55c1bb349afa78b9728682f86cf0aa822afd0f417ed71f6dc69f4778",
+      "sourceUrl": "https://chorlove.uz/_next/static/media/d4d7dfbfbdcfb829-s.0gq5x..r-ww79.woff2",
+      "contentType": "font/woff2"
+    },
+    {
+      "file": "_next/static/media/60598ce2a46fbffb-s.06p0h2yk_ifjq.woff2",
+      "bytes": 9720,
+      "sha256": "0a874efa0b70bdc0262dc09f2b7dacee9b959d35710c9ae05e16f3addb6eed5f",
+      "sourceUrl": "https://chorlove.uz/_next/static/media/60598ce2a46fbffb-s.06p0h2yk_ifjq.woff2",
+      "contentType": "font/woff2"
+    },
+    {
+      "file": "_next/static/media/2a3a498894ba15cf-s.11iqgigq9aua8.woff2",
+      "bytes": 24576,
+      "sha256": "07f0c0e2ff679caef1767481720c3b62bf29fac8f18b0510be87fb75fbc96f0b",
+      "sourceUrl": "https://chorlove.uz/_next/static/media/2a3a498894ba15cf-s.11iqgigq9aua8.woff2",
+      "contentType": "font/woff2"
+    },
+    {
+      "file": "_next/static/media/bc3cdba7557578e9-s.0iw1eayfxe5dw.woff2",
+      "bytes": 6792,
+      "sha256": "d25b972fdb600857176eb321e855057f703f211455ee5788baac77e1ceb1e5e8",
+      "sourceUrl": "https://chorlove.uz/_next/static/media/bc3cdba7557578e9-s.0iw1eayfxe5dw.woff2",
+      "contentType": "font/woff2"
+    },
+    {
+      "file": "_next/static/media/6e0722da56363036-s.02tkln9iv~mx_.woff2",
+      "bytes": 21472,
+      "sha256": "4f0c349f31531a4c3bb2ed1424560db82daa2078cc066e9758ea1a2e990c58b8",
+      "sourceUrl": "https://chorlove.uz/_next/static/media/6e0722da56363036-s.02tkln9iv~mx_.woff2",
+      "contentType": "font/woff2"
+    },
+    {
+      "file": "_next/static/media/layers.1220hx8ja1.sy.png",
+      "bytes": 696,
+      "sha256": "1dbbe9d028e292f36fcba8f8b3a28d5e8932754fc2215b9ac69e4cdecf5107c6",
+      "sourceUrl": "https://chorlove.uz/_next/static/media/layers.1220hx8ja1.sy.png",
+      "contentType": "image/png"
+    },
+    {
+      "file": "_next/static/media/layers-2x.0olxl6i2vnf_c.png",
+      "bytes": 1259,
+      "sha256": "066daca850d8ffbef007af00b06eac0015728dee279c51f3cb6c716df7c42edf",
+      "sourceUrl": "https://chorlove.uz/_next/static/media/layers-2x.0olxl6i2vnf_c.png",
+      "contentType": "image/png"
+    },
+    {
+      "file": "_next/static/media/marker-icon.0i9~u_difxrfa.png",
+      "bytes": 1466,
+      "sha256": "574c3a5cca85f4114085b6841596d62f00d7c892c7b03f28cbfa301deb1dc437",
+      "sourceUrl": "https://chorlove.uz/_next/static/media/marker-icon.0i9~u_difxrfa.png",
+      "contentType": "image/png"
+    }
+  ]
+}

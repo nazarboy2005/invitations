@@ -1,0 +1,88 @@
+{
+  "sourcePageUrl": "https://onlinetaklifnoma.app/templates/tojmahal-oltin-darvozasi/full",
+  "fontStylesheetUrl": "https://fonts.googleapis.com/css2?family=Marck+Script&family=Prata&display=swap",
+  "fontStylesheetSha256": "195ce983fcf495ce80fe71270860e2a04372c0bb64b51d97e143dc1194042f77",
+  "sourceCssHashes": [
+    {
+      "url": "https://onlinetaklifnoma.app/_next/static/chunks/24u8yja0n8no_.css",
+      "sha256": "7fbd4efbe08b070fc12e63d865a27960c1912456f9b1fc3362fb07cedb6c1806"
+    },
+    {
+      "url": "https://onlinetaklifnoma.app/_next/static/chunks/0i04smhvgu890.css",
+      "sha256": "680482b23f1467fb55c9469b43c72f26734fb634a4fc4d2cd4a825a58f101e24"
+    },
+    {
+      "url": "https://onlinetaklifnoma.app/_next/static/chunks/0v1omwwm2r3bo.css",
+      "sha256": "6f4b65f4cbd5ca4327b4f0266a4874a6b2eed996f32bec5f059e3d77f925f191"
+    }
+  ],
+  "assets": [
+    {
+      "local": "assets/b5f8df5b9f0a1a26.mp4",
+      "sourceUrl": "https://media.onlinetaklifnoma.app/template-assets/b5f8df5b9f0a1a26.mp4",
+      "sha256": "b5f8df5b9f0a1a26357c7d58bea092b4640c948228511f4efc6e8817d4044254",
+      "bytes": 3586267
+    },
+    {
+      "local": "assets/247f19e46f38efab.webp",
+      "sourceUrl": "https://media.onlinetaklifnoma.app/template-assets/247f19e46f38efab.webp",
+      "sha256": "247f19e46f38efabd6534ec5c829500e724b32979c2bd67372d246163836c832",
+      "bytes": 96346
+    },
+    {
+      "local": "assets/4249201962cd0fe9.webp",
+      "sourceUrl": "https://media.onlinetaklifnoma.app/template-assets/4249201962cd0fe9.webp",
+      "sha256": "4249201962cd0fe9a65ce820afc9519e6c152165147ce97d79a6e8b2f0194eb4",
+      "bytes": 40976
+    },
+    {
+      "family": "Marck Script",
+      "local": "fonts/01-marck-script.woff2",
+      "sourceUrl": "https://fonts.gstatic.com/s/marckscript/v22/nwpTtK2oNgBA3Or78gapdwuyzCg_WMM.woff2",
+      "sha256": "457f5ae9dd211fb276e605a4ce3ecb35cbe1aee8bb1a54698c81d7834873ed06",
+      "bytes": 10528
+    },
+    {
+      "family": "Marck Script",
+      "local": "fonts/02-marck-script.woff2",
+      "sourceUrl": "https://fonts.gstatic.com/s/marckscript/v22/nwpTtK2oNgBA3Or78gapdwuyxig_WMM.woff2",
+      "sha256": "0b81e24db3e626c58446fc2ea58dbeaa5d4edb219856afe36ad902c95248d18d",
+      "bytes": 8740
+    },
+    {
+      "family": "Marck Script",
+      "local": "fonts/03-marck-script.woff2",
+      "sourceUrl": "https://fonts.gstatic.com/s/marckscript/v22/nwpTtK2oNgBA3Or78gapdwuyyCg_.woff2",
+      "sha256": "b32acf77642711e18c14d57aabeefa02ee25664a7f40929ee5f72396557b6e76",
+      "bytes": 13352
+    },
+    {
+      "family": "Marck Script",
+      "local": "fonts/04-marck-script.woff2",
+      "sourceUrl": "https://fonts.gstatic.com/s/prata/v22/6xKhdSpbNNCT-sWCCm7JLQ.woff2",
+      "sha256": "1a71ca94e943aac8154d195f9ea21959d374ebf3a3a9420651d0dbb46253f897",
+      "bytes": 12868
+    },
+    {
+      "family": "Prata",
+      "local": "fonts/05-prata.woff2",
+      "sourceUrl": "https://fonts.gstatic.com/s/prata/v22/6xKhdSpbNNCT-sWLCm7JLQ.woff2",
+      "sha256": "3392de5a383deac60effcad2beb8b847f40eb0eb200ffd4888c3e13d6e40845f",
+      "bytes": 13132
+    },
+    {
+      "family": "Prata",
+      "local": "fonts/06-prata.woff2",
+      "sourceUrl": "https://fonts.gstatic.com/s/prata/v22/6xKhdSpbNNCT-sWACm7JLQ.woff2",
+      "sha256": "60aab7caa7ea16a76672583f1db7f2e7ea17ee205e00e1c1027a06cc548a6a9b",
+      "bytes": 7396
+    },
+    {
+      "family": "Prata",
+      "local": "fonts/07-prata.woff2",
+      "sourceUrl": "https://fonts.gstatic.com/s/prata/v22/6xKhdSpbNNCT-sWPCm4.woff2",
+      "sha256": "1b85a8c794709747c9f689b791984c430a2d9716a5cf9440d955bd7d20dad9d0",
+      "bytes": 19224
+    }
+  ]
+}

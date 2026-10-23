@@ -48,7 +48,9 @@
     "images/templates/orchid-amplop/gallery-6.webp"
   ],
   "status": "Source snapshot and archive artwork preserved; missing optimized divider rendition and Cyrillic font subset recovered from observed Chorlove source assets; adapter integration and release verification in progress.",
-  "missingSourceAssets": [],
+  "missingSourceAssets": [
+    "images/green-gold/vertical-line.png"
+  ],
   "capturedStylesheets": [
     {
       "file": "source/styles/00sc_9lpb3zcn.css",

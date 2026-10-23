@@ -1,0 +1,1 @@
+export { ShishaBogInvitation } from "./renderer";

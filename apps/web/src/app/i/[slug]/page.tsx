@@ -19,6 +19,11 @@ import { MingBirKechaInvitation } from "@/templates/onlinetaklifnoma/ming-bir-ke
 import { ZarrinDoppiInvitation } from "@/templates/onlinetaklifnoma/zarrin-doppi";
 import { AndalusDarvozasiInvitation } from "@/templates/onlinetaklifnoma/andalus-darvozasi";
 import { SamarqandPeshtoqInvitation } from "@/templates/onlinetaklifnoma/samarqand-peshtoqi";
+import { ShishaBogInvitation } from "@/templates/onlinetaklifnoma/shisha-bog";
+import { KapadokiyaTongiInvitation } from "@/templates/onlinetaklifnoma/kapadokiya-tongi";
+import { BuxoroRavoqInvitation } from "@/templates/onlinetaklifnoma/buxoro-ravoq";
+import { JannatBogiInvitation } from "@/templates/onlinetaklifnoma/jannat-bogi";
+import { TojmahalOltinDarvozasiInvitation } from "@/templates/onlinetaklifnoma/tojmahal-oltin-darvozasi";
 import { isChorloveTemplate, ChorloveInvitation } from "@/templates/chorlove";
 import { InvitationViewTracker } from "@/modules/catalog/invitation-view-tracker";
 export const dynamic = "force-dynamic";
@@ -87,6 +92,16 @@ export default async function InvitationPage({
         <MingBirKechaInvitation invitation={invitation} invitationId={result.id} locale={locale} guestName={guestName} guestToken={query.g} />
       </>
     );
+  if (invitation.templateId === "shisha-bog")
+    return <><InvitationViewTracker invitationId={result.id} /><ShishaBogInvitation invitation={invitation} invitationId={result.id} locale={locale} guestName={guestName} guestToken={query.g} /></>;
+  if (invitation.templateId === "kapadokiya-tongi")
+    return <><InvitationViewTracker invitationId={result.id} /><KapadokiyaTongiInvitation invitation={invitation} invitationId={result.id} locale={locale} guestName={guestName} guestToken={query.g} /></>;
+  if (invitation.templateId === "buxoro-ravoq")
+    return <><InvitationViewTracker invitationId={result.id} /><BuxoroRavoqInvitation invitation={invitation} invitationId={result.id} locale={locale} guestName={guestName} guestToken={query.g} /></>;
+  if (invitation.templateId === "jannat-bogi")
+    return <><InvitationViewTracker invitationId={result.id} /><JannatBogiInvitation invitation={invitation} invitationId={result.id} locale={locale} guestName={guestName} guestToken={query.g} /></>;
+  if (invitation.templateId === "tojmahal-oltin-darvozasi")
+    return <><InvitationViewTracker invitationId={result.id} /><TojmahalOltinDarvozasiInvitation invitation={invitation} invitationId={result.id} locale={locale} guestName={guestName} guestToken={query.g} /></>;
   if (invitation.templateId === "samarqand-peshtoqi")
     return <><InvitationViewTracker invitationId={result.id} /><SamarqandPeshtoqInvitation invitation={invitation} invitationId={result.id} locale={locale} guestName={guestName} guestToken={query.g} /></>;
   if (invitation.templateId === "andalus-darvozasi")

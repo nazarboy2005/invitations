@@ -1,0 +1,258 @@
+{
+  "templateId": "jasmine-white",
+  "source": {
+    "file": "source/preview-frame.html",
+    "archiveFile": "templates/jasmine-white/preview-frame.html",
+    "bytes": 83191,
+    "sha256": "f6ec79f1ddf31027b303cb003424558355cdf1cb5da720dd2d492bc5c7e957c3"
+  },
+  "capturedStylesheets": [
+    {
+      "file": "source/styles/0.u3j0~_2ygfx.css",
+      "archiveFile": "_next/static/chunks/0.u3j0~_2ygfx.css",
+      "bytes": 11626,
+      "sha256": "12141a5ec71f317d0e27589c92869d213b339f86451ee2a75b4612c5f1e05991"
+    },
+    {
+      "file": "source/styles/00sc_9lpb3zcn.css",
+      "archiveFile": "_next/static/chunks/00sc_9lpb3zcn.css",
+      "bytes": 360488,
+      "sha256": "9295d64fad91822e7e7ab0d110764ac973d5414829a5bf40bb69e99531762910"
+    }
+  ],
+  "copiedDesignAssets": [
+    {
+      "file": "assets/90085094-65d3-45d4-82da-de8d127a859c.webp",
+      "archiveFile": "images/jasmine-white/90085094-65d3-45d4-82da-de8d127a859c.webp",
+      "bytes": 221524,
+      "sha256": "3b33ebf1bf56ed927a45d774a269656b771b130d025caede51fe6208c276104b"
+    },
+    {
+      "file": "assets/d0db2a4e-83f8-4b84-a46d-fc2fefe45cfa.webp",
+      "archiveFile": "images/jasmine-white/d0db2a4e-83f8-4b84-a46d-fc2fefe45cfa.webp",
+      "bytes": 253014,
+      "sha256": "6f9aafa9f9c80dcc1ed43c3bd74f26fff461fc483fa2db9204a1e2947d9b7ff2"
+    },
+    {
+      "file": "assets/d1c749b4-edb3-4312-84b6-414459c3d89c.webp",
+      "archiveFile": "images/jasmine-white/d1c749b4-edb3-4312-84b6-414459c3d89c.webp",
+      "bytes": 143464,
+      "sha256": "0f92f49c3bd67e40bb9e317c42f468c19053cbeb4f932a4b10a467eb4784cb94"
+    },
+    {
+      "file": "assets/fcd26341-5041-40ad-9cc9-d69a47422378.webp",
+      "archiveFile": "images/jasmine-white/fcd26341-5041-40ad-9cc9-d69a47422378.webp",
+      "bytes": 285398,
+      "sha256": "1736d4de4ff6ad04bd58ff919140dce062120802d3384866ae3005f1d6b30370"
+    },
+    {
+      "file": "assets/hoa.webp",
+      "archiveFile": "images/jasmine-white/hoa.webp",
+      "bytes": 100752,
+      "sha256": "1d6cca1048b1a31ddb8158d0bcf674bb0e86fd47cf784a6f2d35cb8f0815bd9c"
+    },
+    {
+      "file": "assets/khung-hoa.webp",
+      "archiveFile": "images/jasmine-white/khung-hoa.webp",
+      "bytes": 121022,
+      "sha256": "70fc4d1036fa0ffa9ba32b7d6bd404037d0304edcfc75cdaf04b59ad99ae73b4"
+    },
+    {
+      "file": "assets/baroque_gold.webp",
+      "archiveFile": "images/green-garden/baroque_gold.webp",
+      "bytes": 5260,
+      "sha256": "31a8b40d8d3b55cc9c2ebc7f07cd989166833bf9c0a8fbcbb4d5a2a4c8455c97"
+    },
+    {
+      "file": "assets/boho_floral_pink.webp",
+      "archiveFile": "images/green-garden/boho_floral_pink.webp",
+      "bytes": 4904,
+      "sha256": "1174ca9ea33e2cc0c8f9799b49f930e8ded1f4eeee2170853a35d05276cff201"
+    },
+    {
+      "file": "assets/brocade_flower_red.webp",
+      "archiveFile": "images/green-garden/brocade_flower_red.webp",
+      "bytes": 6556,
+      "sha256": "1098410745710bbaefb7fab7c9895bd324d6fd1ab0bf70fb8d75c03626401e73"
+    },
+    {
+      "file": "assets/glass_garden_green.webp",
+      "archiveFile": "images/green-garden/glass_garden_green.webp",
+      "bytes": 55108,
+      "sha256": "a83df1e30647de4841d15fdec7014758bc931512fe1d156e782721281d52348d"
+    },
+    {
+      "file": "assets/jasmine_white.webp",
+      "archiveFile": "images/green-garden/jasmine_white.webp",
+      "bytes": 4900,
+      "sha256": "6c5408315fd62f8aa413860c8a7738cec8c56aa2621a32b7a4235facfa79cfc2"
+    },
+    {
+      "file": "assets/minimalism_brown.webp",
+      "archiveFile": "images/green-garden/minimalism_brown.webp",
+      "bytes": 4336,
+      "sha256": "cb9fbba25f80eb3da720972527b202642086944a12a48f2a87cdb9c06df274e5"
+    },
+    {
+      "file": "assets/spring_garden_blue.webp",
+      "archiveFile": "images/green-garden/spring_garden_blue.webp",
+      "bytes": 4068,
+      "sha256": "40cd2b069b4acbd99d5eb9598ae4bfe355002beb82454e2735516e7350c14ccc"
+    },
+    {
+      "file": "assets/spring_garden_green.webp",
+      "archiveFile": "images/green-garden/spring_garden_green.webp",
+      "bytes": 3694,
+      "sha256": "844ed055b2671691bcf4b5f4838324abdc48878eadedbb9a9d6338c166e4434a"
+    }
+  ],
+  "notes": [
+    "Archive page is a captured Next.js snapshot; do not load its scripts in production.",
+    "Eleven Green Garden paths are referenced as Jasmine White schedule and gift-box artwork; three original images were missing from the archive and have recorded source provenance. Seven other Green Garden image files are not referenced and are excluded."
+  ],
+  "recoveredSourceAssets": [
+    {
+      "file": "assets/cake.webp",
+      "sourceUrl": "https://chorlove.uz/images/green-garden/cake.webp",
+      "statusCode": 200,
+      "mimeType": "image/webp",
+      "bytes": 178308,
+      "sha256": "539a8e04ab73c6ef3b3ca3fe23fd1d9375f299a2d12d918434ae0a147120e300",
+      "transformation": "None; exact original asset URL"
+    },
+    {
+      "file": "assets/welcome.webp",
+      "sourceUrl": "https://chorlove.uz/images/green-garden/welcome.webp",
+      "statusCode": 200,
+      "mimeType": "image/webp",
+      "bytes": 293264,
+      "sha256": "bc395c178bc83e79492106686a3aa134118fd53d5b98727d0683936a29a38608",
+      "transformation": "None; exact original asset URL"
+    },
+    {
+      "file": "assets/dish.webp",
+      "sourceUrl": "https://chorlove.uz/images/green-garden/dish.webp",
+      "statusCode": 200,
+      "mimeType": "image/webp",
+      "bytes": 223172,
+      "sha256": "f230b71e33f045610bf268e5c6aee5f65caedd2823d0dd0597fa67e7a491a4e3",
+      "transformation": "Reused exact byte-matched image already captured in the Green Garden package"
+    }
+  ],
+  "excludedRelatedTemplateAssets": [
+    "images/green-garden/calendar-heart.webp",
+    "images/green-garden/floral-background.webp",
+    "images/green-garden/flower1-decoration.webp",
+    "images/green-garden/flower2-decoration.webp",
+    "images/green-garden/flower3-decoration.webp",
+    "images/green-garden/flower4-decoration.webp",
+    "images/green-garden/flower5-bottom.webp"
+  ],
+  "runtimeFontAssets": [
+    {
+      "file": "assets/fonts/Qellia-s.p.0l1a3-80k4-g1.otf",
+      "source": "_next/static/media/Qellia-s.p.0l1a3-80k4-g1.otf",
+      "sourceType": "archive",
+      "bytes": 20180,
+      "sha256": "98c0d340d2ba414001b9210aa20df2516c8dcdd18c09aa822b34f9718bb45776"
+    },
+    {
+      "file": "assets/fonts/CormorantGaramond_Regular-s.p.05iajzwz.gtv8.ttf",
+      "source": "_next/static/media/CormorantGaramond_Regular-s.p.05iajzwz.gtv8.ttf",
+      "sourceType": "archive",
+      "bytes": 666632,
+      "sha256": "7b99138ffa3baab8616d8491dc6d75961c5ae568b206c5031fbc7bb127385428"
+    },
+    {
+      "file": "assets/fonts/2c55a0e60120577a-s.0bjc5tiuqdqro.woff2",
+      "source": "/templates/chorlove/shared/_next/static/media/2c55a0e60120577a-s.0bjc5tiuqdqro.woff2",
+      "sourceType": "shared-chunk",
+      "bytes": 25844,
+      "sha256": "fccca918fea40089dacadc7045861314d1a6bc91f1f323cc1eeb22ebcdb321b5"
+    },
+    {
+      "file": "assets/fonts/9c72aa0f40e4eef8-s.0m6w47a4e5dy9.woff2",
+      "source": "/templates/chorlove/shared/_next/static/media/9c72aa0f40e4eef8-s.0m6w47a4e5dy9.woff2",
+      "sourceType": "shared-chunk",
+      "bytes": 18744,
+      "sha256": "aebf2ab4a4ce6810d73c1ac7be7cafb4e5ec4cee2d6db5fb3e09691747ec4bd6"
+    },
+    {
+      "file": "assets/fonts/ad66f9afd8947f86-s.11u06r12fd6v_.woff2",
+      "source": "/templates/chorlove/shared/_next/static/media/ad66f9afd8947f86-s.11u06r12fd6v_.woff2",
+      "sourceType": "shared-chunk",
+      "bytes": 11272,
+      "sha256": "a2e2c783ca6f9c20486e81e72a279203e86730bbf8f01ff6a5ee9dbd09e1c271"
+    },
+    {
+      "file": "assets/fonts/5476f68d60460930-s.0wxq9webf.ew4.woff2",
+      "source": "/templates/chorlove/shared/_next/static/media/5476f68d60460930-s.0wxq9webf.ew4.woff2",
+      "sourceType": "shared-chunk",
+      "bytes": 19044,
+      "sha256": "46dd4cdca58c26ae87cc6927657bf83b2e8abfc39ffd0ab176e301a8d28d22bf"
+    },
+    {
+      "file": "assets/fonts/2bbe8d2671613f1f-s.067x_6k0k23tk.woff2",
+      "source": "/templates/chorlove/shared/_next/static/media/2bbe8d2671613f1f-s.067x_6k0k23tk.woff2",
+      "sourceType": "shared-chunk",
+      "bytes": 10280,
+      "sha256": "8db00ff46c67b22cda8bed865acf7077651cac8d2841d5b40980556b48961931"
+    },
+    {
+      "file": "assets/fonts/1bffadaabf893a1e-s.16ipb6fqu393i.woff2",
+      "source": "/templates/chorlove/shared/_next/static/media/1bffadaabf893a1e-s.16ipb6fqu393i.woff2",
+      "sourceType": "shared-chunk",
+      "bytes": 85272,
+      "sha256": "a28eb6d3ccb534ae0c94ca999371df024aab60b08c3c8a5720ee9e32fa0faaa2"
+    },
+    {
+      "file": "assets/fonts/83afe278b6a6bb3c-s.p.0q-301v4kxxnr.woff2",
+      "source": "_next/static/media/83afe278b6a6bb3c-s.p.0q-301v4kxxnr.woff2",
+      "sourceType": "archive",
+      "bytes": 48432,
+      "sha256": "c940764593d0fe5d596be327ca7558855e018039fb78509aa21921fd3644c3e4"
+    },
+    {
+      "file": "assets/fonts/65c558afe41e89d6-s.113htgw8u-emy.woff2",
+      "source": "/templates/chorlove/shared/_next/static/media/65c558afe41e89d6-s.113htgw8u-emy.woff2",
+      "sourceType": "shared-chunk",
+      "bytes": 21144,
+      "sha256": "d7f9db9b1034978ebebdf7312aa4aee55dff3ef6039e7ff71413780bd4a05558"
+    },
+    {
+      "file": "assets/fonts/14e23f9b59180572-s.08.c8psu~gif9.woff2",
+      "source": "/templates/chorlove/shared/_next/static/media/14e23f9b59180572-s.08.c8psu~gif9.woff2",
+      "sourceType": "shared-chunk",
+      "bytes": 9056,
+      "sha256": "8fa67d5f0ab2a1d0b924729a0411a069b384d7a236edd96a6767ef342a6d048f"
+    },
+    {
+      "file": "assets/fonts/b49b0d9b851e4899-s.0yfy_qj1.2qn0.woff2",
+      "source": "/templates/chorlove/shared/_next/static/media/b49b0d9b851e4899-s.0yfy_qj1.2qn0.woff2",
+      "sourceType": "shared-chunk",
+      "bytes": 20980,
+      "sha256": "5628567856d60d714e7a35bcac9e3de08b336d63b12138f61b970990a1ee9547"
+    },
+    {
+      "file": "assets/fonts/2a65768255d6b625-s.p.14by5b4al-y~f.woff2",
+      "source": "_next/static/media/2a65768255d6b625-s.p.14by5b4al-y~f.woff2",
+      "sourceType": "archive",
+      "bytes": 38460,
+      "sha256": "5d91eb5d522a03081946c44c8ca17c902230dfed5f0f9b5014262135d47b15b2"
+    },
+    {
+      "file": "assets/fonts/GreatVibes_Regular-s.p.0au6u0v_syb0z.ttf",
+      "source": "_next/static/media/GreatVibes_Regular-s.p.0au6u0v_syb0z.ttf",
+      "sourceType": "archive",
+      "bytes": 445300,
+      "sha256": "8671b4332bff26a2ca32c7388a2929320e0ade036e460bd76cd1a22abbd4d5b4"
+    }
+  ],
+  "fontFamilies": [
+    "cormorantgaramond",
+    "greatvibes",
+    "inter",
+    "playfair display",
+    "qellia"
+  ]
+}

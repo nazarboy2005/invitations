@@ -1,0 +1,35 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Monsieur+La+Doulaise&display=swap');
+
+@font-face {
+  font-family: 'Ballet Clean';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/images/lace/ballet-clean.woff2') format('woff2');
+}
+
+.lace-template {
+  --lace-countdown: #6f2a3b;
+  --lace-cream: #f5f0e8;
+  background-color: var(--color-lace-paper);
+  color: var(--color-lace-ink);
+  font-family: var(--font-cormorant-garamond), Georgia, serif;
+  font-size: 17px;
+  line-height: 1.55;
+}
+.lace-sheet {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+  background-size: 200px;
+}
+.lace-display { font-family: 'Instrument Serif', var(--font-cormorant-garamond), Georgia, serif; font-weight: 400; }
+.lace-ballet {
+  font-family: 'Ballet Clean', 'Monsieur La Doulaise', var(--font-great-vibes), cursive;
+  font-weight: 400;
+  -webkit-text-stroke: .25px currentColor;
+  paint-order: stroke fill;
+}
+.lace-doulaise { font-family: 'Monsieur La Doulaise', var(--font-great-vibes), cursive; font-weight: 400; }
+.lace-body { font-family: var(--font-cormorant-garamond), Georgia, serif; }
+.lace-sans { font-family: var(--font-inter), 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 300; }
+.lace-field::placeholder { color: color-mix(in srgb, var(--color-lace-paper) 40%, transparent); }

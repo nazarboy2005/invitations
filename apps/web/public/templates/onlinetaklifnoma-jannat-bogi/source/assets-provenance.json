@@ -1,0 +1,207 @@
+{
+  "sourcePageUrl": "https://onlinetaklifnoma.app/templates/jannat-bogi/full",
+  "fontStylesheetUrl": "https://fonts.googleapis.com/css2?family=Imperial+Script&family=Noto+Serif+Display:ital,wght@0,400;0,600;1,400&display=swap",
+  "fontStylesheetSha256": "21e2d780317374d6ab4b5788e2e800d05b9ce7c487fafb2760bbd47912f0a777",
+  "sourceCssHashes": [
+    {
+      "url": "https://onlinetaklifnoma.app/_next/static/chunks/24u8yja0n8no_.css",
+      "sha256": "7fbd4efbe08b070fc12e63d865a27960c1912456f9b1fc3362fb07cedb6c1806"
+    },
+    {
+      "url": "https://onlinetaklifnoma.app/_next/static/chunks/0i04smhvgu890.css",
+      "sha256": "680482b23f1467fb55c9469b43c72f26734fb634a4fc4d2cd4a825a58f101e24"
+    },
+    {
+      "url": "https://onlinetaklifnoma.app/_next/static/chunks/0v1omwwm2r3bo.css",
+      "sha256": "6f4b65f4cbd5ca4327b4f0266a4874a6b2eed996f32bec5f059e3d77f925f191"
+    }
+  ],
+  "assets": [
+    {
+      "local": "assets/bfe5519451ae0076.mp4",
+      "sourceUrl": "https://media.onlinetaklifnoma.app/template-assets/bfe5519451ae0076.mp4",
+      "sha256": "bfe5519451ae0076043928637567b4a8e817efe0aa47ace88a1279c6b5c9df9d",
+      "bytes": 2384478
+    },
+    {
+      "local": "assets/e32742ca7893c3a2.webp",
+      "sourceUrl": "https://media.onlinetaklifnoma.app/template-assets/e32742ca7893c3a2.webp",
+      "sha256": "e32742ca7893c3a2bf504162e684a7e59cd0398bdfa7f94f8fca003dabe7033d",
+      "bytes": 167492
+    },
+    {
+      "local": "assets/8791c73ad8c6e6e6.webp",
+      "sourceUrl": "https://media.onlinetaklifnoma.app/template-assets/8791c73ad8c6e6e6.webp",
+      "sha256": "8791c73ad8c6e6e66fb877ac819cdc8a9ffc851891cde1430c6a443c62bea9bd",
+      "bytes": 45132
+    },
+    {
+      "family": "Imperial Script",
+      "local": "fonts/01-imperial-script.woff2",
+      "sourceUrl": "https://fonts.gstatic.com/s/imperialscript/v8/5DCPAKrpzy_H98IV2ISnZBbGrVNfNePkjts.woff2",
+      "sha256": "6645a24333f6e6631b06bf8a28b81b02510d8e601407e826b80388598486cb20",
+      "bytes": 10444
+    },
+    {
+      "family": "Imperial Script",
+      "local": "fonts/02-imperial-script.woff2",
+      "sourceUrl": "https://fonts.gstatic.com/s/imperialscript/v8/5DCPAKrpzy_H98IV2ISnZBbGrVNfNOPkjts.woff2",
+      "sha256": "de86720c993ed8923b88784933c274687c15332d543b48dbc7a0f7d35c19649d",
+      "bytes": 32372
+    },
+    {
+      "family": "Imperial Script",
+      "local": "fonts/03-imperial-script.woff2",
+      "sourceUrl": "https://fonts.gstatic.com/s/imperialscript/v8/5DCPAKrpzy_H98IV2ISnZBbGrVNfOuPk.woff2",
+      "sha256": "a7efc19b6f513e909bf2413ccabc2748e5461f89deaba5b6e6bfe2d11096918f",
+      "bytes": 36100
+    },
+    {
+      "family": "Imperial Script",
+      "local": "fonts/04-imperial-script.woff2",
+      "sourceUrl": "https://fonts.gstatic.com/s/notoserifdisplay/v29/buEPppa9f8_vkXaZLAgP0G5Wi6QmA1QwcLRCOrN8uo7t6FBJOJTQit-N33sQOk-VoTBJUjsVgtzC.woff2",
+      "sha256": "1bb76c8bfdc2d6c9613ea393d3d5242b473138cdd39abc371c50afffa9fe5223",
+      "bytes": 27888
+    },
+    {
+      "family": "Noto Serif Display",
+      "local": "fonts/05-noto-serif-display.woff2",
+      "sourceUrl": "https://fonts.gstatic.com/s/notoserifdisplay/v29/buEPppa9f8_vkXaZLAgP0G5Wi6QmA1QwcLRCOrN8uo7t6FBJOJTQit-N33sQOk-VoTBJUjIVgtzC.woff2",
+      "sha256": "00d1316f2b45f6c8596a90ad9b651f9d7e7927bc8587dbf3072d89aa1a6cbc33",
+      "bytes": 10488
+    },
+    {
+      "family": "Noto Serif Display",
+      "local": "fonts/06-noto-serif-display.woff2",
+      "sourceUrl": "https://fonts.gstatic.com/s/notoserifdisplay/v29/buEPppa9f8_vkXaZLAgP0G5Wi6QmA1QwcLRCOrN8uo7t6FBJOJTQit-N33sQOk-VoTBJUjoVgtzC.woff2",
+      "sha256": "d0449e9c29a518458196bf3db48c371901d92972bb924998e4b70bf961c35783",
+      "bytes": 5804
+    },
+    {
+      "family": "Noto Serif Display",
+      "local": "fonts/07-noto-serif-display.woff2",
+      "sourceUrl": "https://fonts.gstatic.com/s/notoserifdisplay/v29/buEPppa9f8_vkXaZLAgP0G5Wi6QmA1QwcLRCOrN8uo7t6FBJOJTQit-N33sQOk-VoTBJUjUVgtzC.woff2",
+      "sha256": "e0bb6bd95a9ebb1f6f1f768b562d9949b39e57aed6a80204da790eebd5b0f105",
+      "bytes": 10496
+    },
+    {
+      "family": "Noto Serif Display",
+      "local": "fonts/08-noto-serif-display.woff2",
+      "sourceUrl": "https://fonts.gstatic.com/s/notoserifdisplay/v29/buEPppa9f8_vkXaZLAgP0G5Wi6QmA1QwcLRCOrN8uo7t6FBJOJTQit-N33sQOk-VoTBJUjkVgtzC.woff2",
+      "sha256": "e66382b730a9716b5f12646be9f6e87962f8179ad27e5d7ebea78259b613ee86",
+      "bytes": 5796
+    },
+    {
+      "family": "Noto Serif Display",
+      "local": "fonts/09-noto-serif-display.woff2",
+      "sourceUrl": "https://fonts.gstatic.com/s/notoserifdisplay/v29/buEPppa9f8_vkXaZLAgP0G5Wi6QmA1QwcLRCOrN8uo7t6FBJOJTQit-N33sQOk-VoTBJUjgVgtzC.woff2",
+      "sha256": "17c1e9b7b0c5e46e463a6129ef8e153d9cb954452d2903a1b827ebef316978d8",
+      "bytes": 61092
+    },
+    {
+      "family": "Noto Serif Display",
+      "local": "fonts/10-noto-serif-display.woff2",
+      "sourceUrl": "https://fonts.gstatic.com/s/notoserifdisplay/v29/buEPppa9f8_vkXaZLAgP0G5Wi6QmA1QwcLRCOrN8uo7t6FBJOJTQit-N33sQOk-VoTBJUjYVgg.woff2",
+      "sha256": "1fff3599e152c3401a0d0672dae1a107546823cf08b91d96404bde50eafc2363",
+      "bytes": 16028
+    },
+    {
+      "family": "Noto Serif Display",
+      "local": "fonts/11-noto-serif-display.woff2",
+      "sourceUrl": "https://fonts.gstatic.com/s/notoserifdisplay/v29/buEeppa9f8_vkXaZLAgP0G5Wi6QmA1QaeYah2sovLCDq_ZgL4NzKhO94.woff2",
+      "sha256": "4ac5a9f6df7d1047be3cc63e2ad1f4d4ed3d06425832582363879056a86005af",
+      "bytes": 85116
+    },
+    {
+      "family": "Noto Serif Display",
+      "local": "fonts/12-noto-serif-display.woff2",
+      "sourceUrl": "https://fonts.gstatic.com/s/notoserifdisplay/v29/buEeppa9f8_vkXaZLAgP0G5Wi6QmA1QaeYah2sovLCDq_ZgL4NXKhO94.woff2",
+      "sha256": "69afe38c1984c114c8ca9bc3bf3d59cf0fe87f18b4e38bdb0755f21aa3279a27",
+      "bytes": 27572
+    },
+    {
+      "family": "Noto Serif Display",
+      "local": "fonts/13-noto-serif-display.woff2",
+      "sourceUrl": "https://fonts.gstatic.com/s/notoserifdisplay/v29/buEeppa9f8_vkXaZLAgP0G5Wi6QmA1QaeYah2sovLCDq_ZgL4N3KhO94.woff2",
+      "sha256": "8e2bc4039418a4d328869243e3fde5d94295d8dd5d7c72df2c4e2925a0ce3d4e",
+      "bytes": 14136
+    },
+    {
+      "family": "Noto Serif Display",
+      "local": "fonts/14-noto-serif-display.woff2",
+      "sourceUrl": "https://fonts.gstatic.com/s/notoserifdisplay/v29/buEeppa9f8_vkXaZLAgP0G5Wi6QmA1QaeYah2sovLCDq_ZgL4NLKhO94.woff2",
+      "sha256": "0c19f35e296293706c3ef2437539ff1da9be689c0c8556784acf14f7ba7c7163",
+      "bytes": 30004
+    },
+    {
+      "family": "Noto Serif Display",
+      "local": "fonts/15-noto-serif-display.woff2",
+      "sourceUrl": "https://fonts.gstatic.com/s/notoserifdisplay/v29/buEeppa9f8_vkXaZLAgP0G5Wi6QmA1QaeYah2sovLCDq_ZgL4N7KhO94.woff2",
+      "sha256": "41b2bbcc405f712833661781a4a60f78ddf59caade5d3e24a005eb3f90beeb90",
+      "bytes": 16228
+    },
+    {
+      "family": "Noto Serif Display",
+      "local": "fonts/16-noto-serif-display.woff2",
+      "sourceUrl": "https://fonts.gstatic.com/s/notoserifdisplay/v29/buEeppa9f8_vkXaZLAgP0G5Wi6QmA1QaeYah2sovLCDq_ZgL4N_KhO94.woff2",
+      "sha256": "a907f11d5c7c71ab350c46ba518935da6860866dec0325ba85e824f1d6fe9a06",
+      "bytes": 174044
+    },
+    {
+      "family": "Noto Serif Display",
+      "local": "fonts/17-noto-serif-display.woff2",
+      "sourceUrl": "https://fonts.gstatic.com/s/notoserifdisplay/v29/buEeppa9f8_vkXaZLAgP0G5Wi6QmA1QaeYah2sovLCDq_ZgL4NHKhA.woff2",
+      "sha256": "5343443b8fd91607b1b610a5a5a68ed74b682c28825d2c19a9f0ee6f04b36a60",
+      "bytes": 41232
+    },
+    {
+      "family": "Noto Serif Display",
+      "local": "fonts/18-noto-serif-display.woff2",
+      "sourceUrl": "https://fonts.gstatic.com/s/notoserifdisplay/v29/buEeppa9f8_vkXaZLAgP0G5Wi6QmA1QaeYah2sovLCDq_ZgL4NzKhO94.woff2",
+      "sha256": "4ac5a9f6df7d1047be3cc63e2ad1f4d4ed3d06425832582363879056a86005af",
+      "bytes": 85116
+    },
+    {
+      "family": "Noto Serif Display",
+      "local": "fonts/19-noto-serif-display.woff2",
+      "sourceUrl": "https://fonts.gstatic.com/s/notoserifdisplay/v29/buEeppa9f8_vkXaZLAgP0G5Wi6QmA1QaeYah2sovLCDq_ZgL4NXKhO94.woff2",
+      "sha256": "69afe38c1984c114c8ca9bc3bf3d59cf0fe87f18b4e38bdb0755f21aa3279a27",
+      "bytes": 27572
+    },
+    {
+      "family": "Noto Serif Display",
+      "local": "fonts/20-noto-serif-display.woff2",
+      "sourceUrl": "https://fonts.gstatic.com/s/notoserifdisplay/v29/buEeppa9f8_vkXaZLAgP0G5Wi6QmA1QaeYah2sovLCDq_ZgL4N3KhO94.woff2",
+      "sha256": "8e2bc4039418a4d328869243e3fde5d94295d8dd5d7c72df2c4e2925a0ce3d4e",
+      "bytes": 14136
+    },
+    {
+      "family": "Noto Serif Display",
+      "local": "fonts/21-noto-serif-display.woff2",
+      "sourceUrl": "https://fonts.gstatic.com/s/notoserifdisplay/v29/buEeppa9f8_vkXaZLAgP0G5Wi6QmA1QaeYah2sovLCDq_ZgL4NLKhO94.woff2",
+      "sha256": "0c19f35e296293706c3ef2437539ff1da9be689c0c8556784acf14f7ba7c7163",
+      "bytes": 30004
+    },
+    {
+      "family": "Noto Serif Display",
+      "local": "fonts/22-noto-serif-display.woff2",
+      "sourceUrl": "https://fonts.gstatic.com/s/notoserifdisplay/v29/buEeppa9f8_vkXaZLAgP0G5Wi6QmA1QaeYah2sovLCDq_ZgL4N7KhO94.woff2",
+      "sha256": "41b2bbcc405f712833661781a4a60f78ddf59caade5d3e24a005eb3f90beeb90",
+      "bytes": 16228
+    },
+    {
+      "family": "Noto Serif Display",
+      "local": "fonts/23-noto-serif-display.woff2",
+      "sourceUrl": "https://fonts.gstatic.com/s/notoserifdisplay/v29/buEeppa9f8_vkXaZLAgP0G5Wi6QmA1QaeYah2sovLCDq_ZgL4N_KhO94.woff2",
+      "sha256": "a907f11d5c7c71ab350c46ba518935da6860866dec0325ba85e824f1d6fe9a06",
+      "bytes": 174044
+    },
+    {
+      "family": "Noto Serif Display",
+      "local": "fonts/24-noto-serif-display.woff2",
+      "sourceUrl": "https://fonts.gstatic.com/s/notoserifdisplay/v29/buEeppa9f8_vkXaZLAgP0G5Wi6QmA1QaeYah2sovLCDq_ZgL4NHKhA.woff2",
+      "sha256": "5343443b8fd91607b1b610a5a5a68ed74b682c28825d2c19a9f0ee6f04b36a60",
+      "bytes": 41232
+    }
+  ]
+}

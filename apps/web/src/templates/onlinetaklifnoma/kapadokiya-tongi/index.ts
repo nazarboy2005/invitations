@@ -1,0 +1,1 @@
+export { KapadokiyaTongiInvitation } from "./renderer";

@@ -1,0 +1,1 @@
+export { TojmahalOltinDarvozasiInvitation } from "./renderer";

@@ -1,0 +1,25 @@
+{
+  "sourceSnapshot": {
+    "path": "..\\Invitations - this folder will be removed from production\\Chorlove\\Web invitations\\templates\\modern-floral\\preview-frame.html",
+    "bytes": 146505,
+    "sha256": "fd18fb85d8eb7d4af1a3ef044ac78b6dfe778a1942913169a4daf4ef2d46cbf1"
+  },
+  "assets": [
+    {
+      "file": "assets/flower.png",
+      "sourceUrl": "https://chorlove.uz/images/modern-floral/flower.png",
+      "httpStatus": 200,
+      "contentType": "image/png",
+      "bytes": 117434,
+      "sha256": "8966ae466465cc0bbfb7a6633a3e0a8476d118a4689feb3fbbe4da31dd5fbd9a"
+    }
+  ],
+  "excludedCapturedGallery": [
+    "/images/templates/orchid-amplop/gallery-1.webp",
+    "/images/templates/orchid-amplop/gallery-2.webp",
+    "/images/templates/orchid-amplop/gallery-3.webp",
+    "/images/templates/orchid-amplop/gallery-4.webp",
+    "/images/templates/orchid-amplop/gallery-5.webp",
+    "/images/templates/orchid-amplop/gallery-6.webp"
+  ]
+}

@@ -1,0 +1,176 @@
+{
+  "sourcePageUrl": "https://onlinetaklifnoma.app/templates/shisha-bog/full",
+  "sourceCssHashes": [
+    {
+      "url": "https://onlinetaklifnoma.app/_next/static/chunks/24u8yja0n8no_.css",
+      "sha256": "7fbd4efbe08b070fc12e63d865a27960c1912456f9b1fc3362fb07cedb6c1806"
+    },
+    {
+      "url": "https://onlinetaklifnoma.app/_next/static/chunks/0i04smhvgu890.css",
+      "sha256": "680482b23f1467fb55c9469b43c72f26734fb634a4fc4d2cd4a825a58f101e24"
+    },
+    {
+      "url": "https://onlinetaklifnoma.app/_next/static/chunks/0v1omwwm2r3bo.css",
+      "sha256": "6f4b65f4cbd5ca4327b4f0266a4874a6b2eed996f32bec5f059e3d77f925f191"
+    }
+  ],
+  "assets": [
+    {
+      "local": "assets/portal.5a918f2300357ece.webp",
+      "sourceUrl": "https://media.onlinetaklifnoma.app/templates/shisha-bog/portal.5a918f2300357ece.webp",
+      "sha256": "5a918f2300357ecef90fd4ffcd0bef0463718a8489bb6d3b70c90bac9a956f3f",
+      "bytes": 416730
+    },
+    {
+      "local": "assets/portal-thumb.bff6f75e52201ebe.webp",
+      "sourceUrl": "https://media.onlinetaklifnoma.app/templates/shisha-bog/portal-thumb.bff6f75e52201ebe.webp",
+      "sha256": "bff6f75e52201ebe68f97d856cd8619dc438702fc32294978347f33f318a00c3",
+      "bytes": 109144
+    },
+    {
+      "local": "assets/couple.5c4fd4e6b6ee8260.webp",
+      "sourceUrl": "https://media.onlinetaklifnoma.app/templates/shisha-bog/couple.5c4fd4e6b6ee8260.webp",
+      "sha256": "5c4fd4e6b6ee82603cb98fc2d2e702f1a12763f83a82d420706f8bcff5aa5029",
+      "bytes": 80706
+    },
+    {
+      "local": "assets/intro.6c98810bdf1fe6f4.mp4",
+      "sourceUrl": "https://media.onlinetaklifnoma.app/templates/shisha-bog/intro.6c98810bdf1fe6f4.mp4",
+      "sha256": "6c98810bdf1fe6f402d005ef0233522326662ad0c6f9f1a3c529b86bace76454",
+      "bytes": 2369932
+    },
+    {
+      "family": "Great Vibes",
+      "local": "fonts/a1e5f881e1ca6a9a-s.3r71i8beaaw7i.woff2",
+      "sourceUrl": "https://onlinetaklifnoma.app/_next/static/media/a1e5f881e1ca6a9a-s.3r71i8beaaw7i.woff2",
+      "sha256": "bad8bd8b77395c78e79cf5dd883b07c180632828b1e712088f19d771df994283",
+      "bytes": 1940
+    },
+    {
+      "family": "Great Vibes",
+      "local": "fonts/2efc0c479abd2474-s.02-h3o5cqnryq.woff2",
+      "sourceUrl": "https://onlinetaklifnoma.app/_next/static/media/2efc0c479abd2474-s.02-h3o5cqnryq.woff2",
+      "sha256": "7d8e55f33a5a625f5a6b8e39def8de8b7c1e3427931edd5cecf037aaea04aa9f",
+      "bytes": 28504
+    },
+    {
+      "family": "Great Vibes",
+      "local": "fonts/70963ccca14000df-s.3dxjtj6-bs-2c.woff2",
+      "sourceUrl": "https://onlinetaklifnoma.app/_next/static/media/70963ccca14000df-s.3dxjtj6-bs-2c.woff2",
+      "sha256": "258135d94cae32ef5544db62669f0ca21fd86cc696ba846a2cfa6c292e143c68",
+      "bytes": 1116
+    },
+    {
+      "family": "Great Vibes",
+      "local": "fonts/9a146d0fd3ff96e4-s.3pzgmnk57caz1.woff2",
+      "sourceUrl": "https://onlinetaklifnoma.app/_next/static/media/9a146d0fd3ff96e4-s.3pzgmnk57caz1.woff2",
+      "sha256": "93e47792ff812a0776ac0b3c4dd88b608d96524342706e40b074a9368179e8b3",
+      "bytes": 7652
+    },
+    {
+      "family": "Great Vibes",
+      "local": "fonts/0474ff9f7224a0da-s.0_mk8de7o781e.woff2",
+      "sourceUrl": "https://onlinetaklifnoma.app/_next/static/media/0474ff9f7224a0da-s.0_mk8de7o781e.woff2",
+      "sha256": "9db6e80f3c2cda14250c3ee41e5bf1b68280b95c00a54d994a42e845fb0da7ba",
+      "bytes": 46188
+    },
+    {
+      "family": "Great Vibes",
+      "local": "fonts/f48d461c03e0a8ec-s.3rqg0w444aekk.woff2",
+      "sourceUrl": "https://onlinetaklifnoma.app/_next/static/media/f48d461c03e0a8ec-s.3rqg0w444aekk.woff2",
+      "sha256": "0237c8316409c1e4c267156adcc6b17a1d5573320efa45b707fe39989ac3874b",
+      "bytes": 29596
+    },
+    {
+      "family": "Cormorant Garamond",
+      "local": "fonts/d8cddd76dbfeaef0-s.1mblz1wog092a.woff2",
+      "sourceUrl": "https://onlinetaklifnoma.app/_next/static/media/d8cddd76dbfeaef0-s.1mblz1wog092a.woff2",
+      "sha256": "919a7720ae1671f06ebdd4f65bb9c2f0d619f81f805d85aec025c89139536292",
+      "bytes": 25196
+    },
+    {
+      "family": "Cormorant Garamond",
+      "local": "fonts/591574edbe85c69b-s.2cu8l7zf4s4ec.woff2",
+      "sourceUrl": "https://onlinetaklifnoma.app/_next/static/media/591574edbe85c69b-s.2cu8l7zf4s4ec.woff2",
+      "sha256": "3170a883f1968a2d1135259e40fd88508da70c20337e491f171f9405d0749053",
+      "bytes": 21264
+    },
+    {
+      "family": "Cormorant Garamond",
+      "local": "fonts/acf349172f10b359-s.0gv8q2vqi14yg.woff2",
+      "sourceUrl": "https://onlinetaklifnoma.app/_next/static/media/acf349172f10b359-s.0gv8q2vqi14yg.woff2",
+      "sha256": "3512ad3b4ddd21fa75ab44296867da1f82948350ffba678a04afbb511015cb08",
+      "bytes": 11556
+    },
+    {
+      "family": "Cormorant Garamond",
+      "local": "fonts/0926c12c4384550f-s.1-qpv3jvnkkyl.woff2",
+      "sourceUrl": "https://onlinetaklifnoma.app/_next/static/media/0926c12c4384550f-s.1-qpv3jvnkkyl.woff2",
+      "sha256": "06bc9a8c179afaf7dd5d3b4987ad2f4a82ca85a542c9e498b18bf32ad0257d8e",
+      "bytes": 34444
+    },
+    {
+      "family": "Cormorant Garamond",
+      "local": "fonts/8bd76523131fa0fc-s.1pvupmngxrt5z.woff2",
+      "sourceUrl": "https://onlinetaklifnoma.app/_next/static/media/8bd76523131fa0fc-s.1pvupmngxrt5z.woff2",
+      "sha256": "e6d6d1d73858aa9b66f3a3539f9dec22faab2276e61ad1d813bc04dd59c9c122",
+      "bytes": 39304
+    },
+    {
+      "family": "Cormorant Garamond",
+      "local": "fonts/9cc5c0547f229dea-s.00y8kskkn0hyx.woff2",
+      "sourceUrl": "https://onlinetaklifnoma.app/_next/static/media/9cc5c0547f229dea-s.00y8kskkn0hyx.woff2",
+      "sha256": "d04439363ec805132dc6c6e6a925f76efe17646f9811af8e10e218ea3dba5335",
+      "bytes": 23408
+    },
+    {
+      "family": "Cormorant Garamond",
+      "local": "fonts/b0947914c9718a1e-s.1xjn85gt7t6qs.woff2",
+      "sourceUrl": "https://onlinetaklifnoma.app/_next/static/media/b0947914c9718a1e-s.1xjn85gt7t6qs.woff2",
+      "sha256": "d81372bae1f872f1418c0b7eb412f8a92a156a950fda8d2383701c75d38969df",
+      "bytes": 21132
+    },
+    {
+      "family": "Cormorant Garamond",
+      "local": "fonts/d0b60be57f16ee32-s.1xtu7gopqv2u0.woff2",
+      "sourceUrl": "https://onlinetaklifnoma.app/_next/static/media/d0b60be57f16ee32-s.1xtu7gopqv2u0.woff2",
+      "sha256": "826f73ca737feec0eb1004808629973d6b611fddc2bd2a689b5fe331f6be6427",
+      "bytes": 11264
+    },
+    {
+      "family": "Cormorant Garamond",
+      "local": "fonts/1f9e983605289f29-s.3aak_kra40y8r.woff2",
+      "sourceUrl": "https://onlinetaklifnoma.app/_next/static/media/1f9e983605289f29-s.3aak_kra40y8r.woff2",
+      "sha256": "9dc38267bdee93a653200ef3c1e8060e3f1399073432c415c683b419d3b50464",
+      "bytes": 33740
+    },
+    {
+      "family": "Cormorant Garamond",
+      "local": "fonts/01e4147cff8141ee-s.3huc2loe0ie8a.woff2",
+      "sourceUrl": "https://onlinetaklifnoma.app/_next/static/media/01e4147cff8141ee-s.3huc2loe0ie8a.woff2",
+      "sha256": "5d618c462b7a5b74f442e1548880086af71764d9cc7d35c16ab45353da934621",
+      "bytes": 37776
+    },
+    {
+      "family": "Amiri",
+      "local": "fonts/amiri-18.woff2",
+      "sourceUrl": "https://fonts.gstatic.com/s/amiri/v30/J7aRnpd8CGxBHpUrtLMA7w.woff2",
+      "sha256": "9abf8a10b4a2f27b698740522c9beec9ded7728aeef0738ac0d6e175bf6249d7",
+      "bytes": 108560
+    },
+    {
+      "family": "Amiri",
+      "local": "fonts/amiri-19.woff2",
+      "sourceUrl": "https://fonts.gstatic.com/s/amiri/v30/J7aRnpd8CGxBHpUgtLMA7w.woff2",
+      "sha256": "199be132b6fbb2fef143b30bae2eb04c63268758d29c03ff057b52cbee91636e",
+      "bytes": 10444
+    },
+    {
+      "family": "Amiri",
+      "local": "fonts/amiri-20.woff2",
+      "sourceUrl": "https://fonts.gstatic.com/s/amiri/v30/J7aRnpd8CGxBHpUutLM.woff2",
+      "sha256": "d600850a2b0f3d862559d0bb040bca877e0f75cf9ee71a893bbd5089a224e3cd",
+      "bytes": 19544
+    }
+  ]
+}
