@@ -280,15 +280,126 @@
       "sourceType": "archive",
       "bytes": 43988,
       "sha256": "5746c575e2d6bf9c57d388f04a2c9782a93ac83abb09ecf3e898c0b4399d79f9"
+    },
+    {
+      "file": "assets/fonts/3da3ed81b60dad72-s.0letko3.bi7dv.woff2",
+      "sourceUrl": "https://chorlove.uz/_next/static/media/3da3ed81b60dad72-s.0letko3.bi7dv.woff2",
+      "statusCode": 200,
+      "mimeType": "font/woff2",
+      "bytes": 8036,
+      "sha256": "e3b06e0e5437d6d6a60776417fd3ba5f0b249f6937090e9f212ba96b5d20feb7",
+      "sourceType": "exact-provider-url"
+    },
+    {
+      "file": "assets/fonts/eeeaa291c8845473-s.0ejcw_avclj~7.woff2",
+      "sourceUrl": "https://chorlove.uz/_next/static/media/eeeaa291c8845473-s.0ejcw_avclj~7.woff2",
+      "statusCode": 200,
+      "mimeType": "font/woff2",
+      "bytes": 21876,
+      "sha256": "e01d351d0e20f61106f923302e0725161a382c09251a650ba04fd325d6fa45fc",
+      "sourceType": "exact-provider-url"
+    },
+    {
+      "file": "assets/fonts/a96d22a1a42ff5e8-s.p.05qt.kjr2z9yv.woff2",
+      "sourceUrl": "https://chorlove.uz/_next/static/media/a96d22a1a42ff5e8-s.p.05qt.kjr2z9yv.woff2",
+      "statusCode": 200,
+      "mimeType": "font/woff2",
+      "bytes": 24880,
+      "sha256": "e937d166f1158da31a3e9004c8f86f94183b69bf39159c3274de3d3e1cb0bbe1",
+      "sourceType": "exact-provider-url"
+    },
+    {
+      "file": "assets/fonts/e3dfc854017cd189-s.07o01p01pl9vd.woff2",
+      "sourceUrl": "https://chorlove.uz/_next/static/media/e3dfc854017cd189-s.07o01p01pl9vd.woff2",
+      "statusCode": 200,
+      "mimeType": "font/woff2",
+      "bytes": 15452,
+      "sha256": "5728051d191c10f4a6e28bd1b13fd03dc35d1ef3267fd2ba58db64d6b0ffd0f7",
+      "sourceType": "exact-provider-url"
+    },
+    {
+      "file": "assets/fonts/ca59e9eae7934b24-s.0mnjxgm0dflcj.woff2",
+      "sourceUrl": "https://chorlove.uz/_next/static/media/ca59e9eae7934b24-s.0mnjxgm0dflcj.woff2",
+      "statusCode": 200,
+      "mimeType": "font/woff2",
+      "bytes": 18472,
+      "sha256": "5a3bb5428735adafca22951f9742624b481ee7493e347a258bbf9c703b48b769",
+      "sourceType": "exact-provider-url"
+    },
+    {
+      "file": "assets/fonts/d4d7dfbfbdcfb829-s.0gq5x..r-ww79.woff2",
+      "sourceUrl": "https://chorlove.uz/_next/static/media/d4d7dfbfbdcfb829-s.0gq5x..r-ww79.woff2",
+      "statusCode": 200,
+      "mimeType": "font/woff2",
+      "bytes": 13152,
+      "sha256": "76a4cd4b55c1bb349afa78b9728682f86cf0aa822afd0f417ed71f6dc69f4778",
+      "sourceType": "exact-provider-url"
+    },
+    {
+      "file": "assets/fonts/60598ce2a46fbffb-s.06p0h2yk_ifjq.woff2",
+      "sourceUrl": "https://chorlove.uz/_next/static/media/60598ce2a46fbffb-s.06p0h2yk_ifjq.woff2",
+      "statusCode": 200,
+      "mimeType": "font/woff2",
+      "bytes": 9720,
+      "sha256": "0a874efa0b70bdc0262dc09f2b7dacee9b959d35710c9ae05e16f3addb6eed5f",
+      "sourceType": "exact-provider-url"
+    },
+    {
+      "file": "assets/fonts/2a3a498894ba15cf-s.11iqgigq9aua8.woff2",
+      "sourceUrl": "https://chorlove.uz/_next/static/media/2a3a498894ba15cf-s.11iqgigq9aua8.woff2",
+      "statusCode": 200,
+      "mimeType": "font/woff2",
+      "bytes": 24576,
+      "sha256": "07f0c0e2ff679caef1767481720c3b62bf29fac8f18b0510be87fb75fbc96f0b",
+      "sourceType": "exact-provider-url"
+    },
+    {
+      "file": "assets/fonts/7f20430e44eb7422-s.p.0-3dheja74wss.woff2",
+      "sourceUrl": "https://chorlove.uz/_next/static/media/7f20430e44eb7422-s.p.0-3dheja74wss.woff2",
+      "statusCode": 200,
+      "mimeType": "font/woff2",
+      "bytes": 30912,
+      "sha256": "4c53d8e2a813441bf080c4c50f68d5d104f211063f16994cc79df3d40bce50b5",
+      "sourceType": "exact-provider-url"
+    },
+    {
+      "file": "assets/fonts/bc3cdba7557578e9-s.0iw1eayfxe5dw.woff2",
+      "sourceUrl": "https://chorlove.uz/_next/static/media/bc3cdba7557578e9-s.0iw1eayfxe5dw.woff2",
+      "statusCode": 200,
+      "mimeType": "font/woff2",
+      "bytes": 6792,
+      "sha256": "d25b972fdb600857176eb321e855057f703f211455ee5788baac77e1ceb1e5e8",
+      "sourceType": "exact-provider-url"
+    },
+    {
+      "file": "assets/fonts/6e0722da56363036-s.02tkln9iv~mx_.woff2",
+      "sourceUrl": "https://chorlove.uz/_next/static/media/6e0722da56363036-s.02tkln9iv~mx_.woff2",
+      "statusCode": 200,
+      "mimeType": "font/woff2",
+      "bytes": 21472,
+      "sha256": "4f0c349f31531a4c3bb2ed1424560db82daa2078cc066e9758ea1a2e990c58b8",
+      "sourceType": "exact-provider-url"
+    },
+    {
+      "file": "assets/fonts/09fd331868a74310-s.p.0h2ih7r_nhr70.woff2",
+      "sourceUrl": "https://chorlove.uz/_next/static/media/09fd331868a74310-s.p.0h2ih7r_nhr70.woff2",
+      "statusCode": 200,
+      "mimeType": "font/woff2",
+      "bytes": 26464,
+      "sha256": "03828cd012694b3762601728e78c8d5c37b3d688fb62e5378395d151efaa8a74",
+      "sourceType": "exact-provider-url"
     }
   ],
   "fontFamilies": [
-    "cormorantgaramond",
-    "greatvibes",
-    "inter",
-    "playfair display",
     "qellia",
+    "cormorantGaramond",
     "theNautigal",
+    "Inter",
+    "Playfair Display",
+    "greatVibes",
+    "Luxurious Script",
+    "Comfortaa",
+    "Allura",
     "fraunces",
     "jost",
     "marcellus"

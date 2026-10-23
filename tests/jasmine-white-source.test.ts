@@ -42,7 +42,7 @@ test("Jasmine White preserves its captured page, stylesheets, and design artwork
   assert.equal(manifest.capturedStylesheets.length, 2);
   assert.equal(manifest.copiedDesignAssets.length, 14);
   assert.equal(manifest.recoveredSourceAssets.length, 3);
-  assert.equal(manifest.runtimeFontAssets.length, 18);
+  assert.equal(manifest.runtimeFontAssets.length, 30);
   for (const record of manifest.runtimeFontAssets) {
     const bytes = await readFile(new URL(record.file, root));
     assert.equal(bytes.length, record.bytes, record.file);
