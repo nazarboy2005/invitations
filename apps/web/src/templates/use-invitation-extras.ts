@@ -12,6 +12,7 @@ export function useInvitationExtras(
   invitationId: string,
   guestToken: string,
   preview: boolean,
+  enabled = true,
 ) {
   const serialized = JSON.stringify({
     data,
@@ -26,6 +27,7 @@ export function useInvitationExtras(
       .filter((name) => name.trim()),
   });
   const send = useCallback(() => {
+    if (!enabled) return;
     const target = frame.current?.contentWindow;
     const document = frame.current?.contentDocument;
     if (!target || !document?.body) return;
@@ -42,7 +44,7 @@ export function useInvitationExtras(
       { type: "taklifnoma:editor-sections", payload },
       window.location.origin,
     );
-  }, [frame, serialized]);
+  }, [enabled, frame, serialized]);
   useEffect(send, [send]);
   return send;
 }
