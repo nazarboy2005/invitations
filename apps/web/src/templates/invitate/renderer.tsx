@@ -41,6 +41,7 @@ export function InvitateInvitation({
   const frame = useRef<HTMLIFrameElement>(null);
   const initialized = useRef<string | null>(null);
   const [frameLocale, setFrameLocale] = useState(locale);
+  const templateId = invitation.templateId;
   useEffect(() => setFrameLocale(locale), [locale]);
 
   const message = useMemo(() => {
@@ -68,6 +69,7 @@ export function InvitateInvitation({
         },
       ];
     }
+
     const languages = invitation.enabledLocales.map(
       (item) => sourceLocale[item],
     );
@@ -102,7 +104,6 @@ export function InvitateInvitation({
   ]);
   const latest = useRef(message);
   latest.current = message;
-  const templateId = invitation.templateId;
   const frameUrl = `/templates/${templateId}/index.html?lang=${sourceLocale[locale]}`;
 
   useEffect(() => {

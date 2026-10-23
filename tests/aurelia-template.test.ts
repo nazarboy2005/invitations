@@ -84,6 +84,11 @@ test("Aurelia preview sample stays ephemeral and uses the shared renderer", () =
   }
   assert.ok(sample.gallery.every((item) => item.url === ""));
   const sharedRenderer = read("apps/web/src/templates/invitate", "renderer.tsx");
+  assert.ok(
+    sharedRenderer.indexOf("const templateId = invitation.templateId;") <
+      sharedRenderer.indexOf("const message = useMemo("),
+    "templateId must be initialized before the memoized preview message reads it",
+  );
   assert.match(sharedRenderer, /templates\/\$\{templateId\}\/index\.html/);
   assert.match(sharedRenderer, /key=\{templateId\}/);
 });
