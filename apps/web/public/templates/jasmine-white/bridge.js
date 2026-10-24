@@ -272,7 +272,7 @@
   }
 
   function animateSourceHeroEntrance(reduced) {
-    const hero = sections[0]?.querySelector("header .relative.flex.items-center.justify-center");
+    const hero = root.querySelector("header .relative.flex.items-center.justify-center");
     if (!hero) return;
     hero.getAnimations().forEach((animation) => animation.cancel());
     if (reduced) {

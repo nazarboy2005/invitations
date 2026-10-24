@@ -44,5 +44,5 @@
     "dimensions": "432x768",
     "sha256": "a515cd3c628c920667a781f78ef4e37b0eefa5b86dd730a4dfd66c2dd35d08df"
   },
-  "catalogPointerPending": "Central coordinator must set the typed catalog previewImage to /templates/jasmine-white/preview.png."
+  "catalogPointer": "/templates/jasmine-white/preview.png"
 }
