@@ -87,6 +87,10 @@ test("Cloud Castle opening and hero motion follow the captured page module", asy
   assert.match(source, /duration:\.55,delay:\.12\+\.1\*a,ease:"easeOut"/);
   assert.match(source, /duration:1,delay:e,ease:\[\.22,1,\.36,1\]/);
   assert.match(js, /function sourceRevealProfile\(element\)/);
+  assert.match(js, /threshold: \[0\.2, 0\.3, 0\.35, 0\.5\]/);
+  assert.match(js, /function animateSourceReveal\(element, inView, initialOpacity, initialTransform, targetOpacity, duration, delay, easing\)/);
+  assert.match(js, /: \{ opacity: initialOpacity, transform: initialTransform \}/);
+  assert.match(js, /element\.dataset\.ccRevealVisible = String\(inView\)/);
   assert.match(js, /duration: 0\.45, threshold: 0\.2/);
   assert.match(js, /duration: 0\.55, threshold: 0\.3/);
   assert.match(js, /duration: 1, threshold: 0\.5/);
@@ -96,7 +100,7 @@ test("Cloud Castle opening and hero motion follow the captured page module", asy
   assert.match(js, /data-cc-contact-group/);
   assert.match(js, /data-chorlove-i18n="contactsTitle"/);
   assert.match(js, /hoa-ngang\.webp.*py-2/);
-  assert.match(js, /threshold: \[0\.2, 0\.3, 0\.5\]/);
+  assert.doesNotMatch(js, /threshold: \[0\.2, 0\.3, 0\.5\]/);
   assert.doesNotMatch(js, /Math\.min\(sequence\+\+ \* 30, 360\)/);
   assert.doesNotMatch(js, /\{ threshold: 0\.16 \}/);
   assert.match(js, /prefers-reduced-motion/);

@@ -319,9 +319,11 @@
       if (!element) return;
       const observer = new IntersectionObserver((entries) => {
         for (const entry of entries) {
-          if (sourceReducedMotion()) { element.style.opacity = String(targetOpacity); element.style.transform = "none"; continue; }
-          if (entry.isIntersecting) element.animate([{ opacity: 0, transform: initial }, { opacity: targetOpacity, transform: "none" }], { duration: duration * 1000, delay: delay * 1000, easing: "ease-out", fill: "both" });
-          else element.getAnimations().forEach((animation) => animation.cancel());
+          const inView = entry.isIntersecting && entry.intersectionRatio >= amount;
+          if (inView === (element.dataset.ccRevealVisible === "true")) continue;
+          element.dataset.ccRevealVisible = String(inView);
+          if (sourceReducedMotion()) { element.style.opacity = String(inView ? targetOpacity : 0); element.style.transform = inView ? "none" : initial; continue; }
+          animateSourceReveal(element, inView, 0, initial, targetOpacity, duration, delay, "ease-out");
         }
       }, { threshold: amount });
       observer.observe(element);
@@ -360,6 +362,16 @@
     window.addEventListener("scroll", sync, { passive: true, capture: true });
     window.addEventListener("resize", sync);
     sync();
+  }
+
+  function animateSourceReveal(element, inView, initialOpacity, initialTransform, targetOpacity, duration, delay, easing) {
+    const current = getComputedStyle(element);
+    const from = { opacity: Number(current.opacity), transform: current.transform };
+    const to = inView
+      ? { opacity: targetOpacity, transform: "none" }
+      : { opacity: initialOpacity, transform: initialTransform };
+    element.getAnimations().forEach((animation) => animation.cancel());
+    element.animate([from, to], { duration: duration * 1000, delay: delay * 1000, easing, fill: "both" });
   }
 
   function bindSourceGiftMotion() {
@@ -442,13 +454,14 @@
         const element = entry.target;
         if (reduce) { element.style.opacity = ""; element.style.transform = ""; continue; }
         const profile = sourceRevealProfile(element);
-        if (entry.isIntersecting && entry.intersectionRatio >= profile.threshold) {
-          const initialTransform = element.dataset.ccInitialTransform || "translateY(10px)";
-          const initialOpacity = Number(element.dataset.ccInitialOpacity || 0);
-          element.animate([{ opacity: initialOpacity, transform: initialTransform }, { opacity: 1, transform: "none" }], { duration: profile.duration * 1000, delay: profile.delay * 1000, easing: profile.easing, fill: "both" });
-        } else element.getAnimations().forEach((animation) => animation.cancel());
+        const inView = entry.isIntersecting && entry.intersectionRatio >= profile.threshold;
+        if (inView === (element.dataset.ccRevealVisible === "true")) continue;
+        element.dataset.ccRevealVisible = String(inView);
+        const initialTransform = element.dataset.ccInitialTransform || "translateY(10px)";
+        const initialOpacity = Number(element.dataset.ccInitialOpacity || 0);
+        animateSourceReveal(element, inView, initialOpacity, initialTransform, 1, profile.duration, profile.delay, profile.easing);
       }
-    }, { threshold: [0.2, 0.3, 0.5] });
+    }, { threshold: [0.2, 0.3, 0.35, 0.5] });
     root.querySelectorAll('[style*="opacity:0"], [style*="opacity: 0"]').forEach((element) => {
       if (hero?.contains(element)) return;
       element.dataset.ccInitialTransform = element.style.transform || "translateY(10px)";
