@@ -21,6 +21,13 @@ test("Love Sakura preserves its full captured page and source asset checksums",(
  assert.doesNotMatch(html,/\/images\/love-sakura\/bg-texture\.png/);
  const texture=readFileSync(join(root,"assets/bg-texture.png"));
  assert.equal(texture.subarray(0,4).toString("hex"),"ffd8ffee");
+ const textureProvenance=manifest.assets.find((asset:any)=>asset.file==="bg-texture.png");
+ assert.deepEqual([textureProvenance.bytes,textureProvenance.sha256,textureProvenance.contentType,textureProvenance.detectedMimeType],[119188,"0a315a7e13dcbede9dfc8829a6c3eedf02e540264f8f37223ab2c2a2957dc30a","image/png","image/jpeg"]);
+ const catalog=readFileSync("packages/contracts/src/index.ts","utf8");
+ assert.match(catalog,/id: "love-sakura"[\s\S]*?previewImage: "\/templates\/love-sakura\/catalog-opening\.png"/);
+ const opening=readFileSync(join(root,"catalog-opening.png"));
+ assert.deepEqual([opening.readUInt32BE(16),opening.readUInt32BE(20)],[900,1444]);
+ assert.equal(createHash("sha256").update(opening).digest("hex"),manifest.catalogArtwork.sha256);
 });
 test("Love Sakura restores the captured RSVP and music motion",()=>{
  const routeModule=readFileSync("Invitations - this folder will be removed from production/Chorlove/Web invitations/_next/static/chunks/0hdebqnzl-9~n.js","utf8");
