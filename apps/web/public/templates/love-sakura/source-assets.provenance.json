@@ -33,6 +33,17 @@
   },
   "assets": [
     {
+      "file": "bg-texture.png",
+      "sourceArchivePath": "..\\Invitations - this folder will be removed from production\\Chorlove\\Web invitations\\images\\love-sakura\\bg-texture.png",
+      "sourceUrl": "https://chorlove.uz/images/love-sakura/bg-texture.png",
+      "httpStatus": 200,
+      "contentType": "image/png",
+      "detectedSignature": "JPEG (FF D8 FF EE)",
+      "detectedMimeType": "image/jpeg",
+      "bytes": 119188,
+      "sha256": "0a315a7e13dcbede9dfc8829a6c3eedf02e540264f8f37223ab2c2a2957dc30a"
+    },
+    {
       "file": "bride.webp",
       "sourceUrl": "https://chorlove.uz/images/love-sakura/bride.webp",
       "httpStatus": 200,

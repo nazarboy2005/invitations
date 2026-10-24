@@ -15,7 +15,12 @@ test("Love Sakura preserves its full captured page and source asset checksums",(
  assert.equal(packagedSource.toString("utf8").replaceAll("\r\n","\n"),source.toString("utf8"));
  assert.equal((html.match(/<section\b/g)||[]).length,10);
  for(const asset of manifest.assets){const bytes=readFileSync(join(root,"assets",asset.file));assert.equal(bytes.length,asset.bytes);assert.equal(createHash("sha256").update(bytes).digest("hex"),asset.sha256);assert.match(html,new RegExp(`/templates/love-sakura/assets/${asset.file.replaceAll(".","\\.")}`));}
- assert.equal(manifest.assets.length,9);
+ assert.equal(manifest.assets.length,10);
+ const textureRefs=html.match(/url\('\/templates\/love-sakura\/assets\/bg-texture\.png'\)/g)||[];
+ assert.equal(textureRefs.length,10);
+ assert.doesNotMatch(html,/\/images\/love-sakura\/bg-texture\.png/);
+ const texture=readFileSync(join(root,"assets/bg-texture.png"));
+ assert.equal(texture.subarray(0,4).toString("hex"),"ffd8ffee");
 });
 test("Love Sakura restores the captured RSVP and music motion",()=>{
  const routeModule=readFileSync("Invitations - this folder will be removed from production/Chorlove/Web invitations/_next/static/chunks/0hdebqnzl-9~n.js","utf8");
