@@ -1,0 +1,12 @@
+{
+  "source": "Invitate/Web invitations/invitate.uz/wedding.html",
+  "sourceManifest": "Invitate/capture-manifest.json",
+  "output": "preview.jpg",
+  "dimensions": { "width": 450, "height": 850 },
+  "captureRoute": "http://127.0.0.1:3001/preview?template=invitate-wedding&qaReducedMotion=1",
+  "dataSource": "apps/web/src/modules/catalog/preview-sample.json",
+  "renderer": "Shared Invitate renderer with the isolated Invitate Wedding source package",
+  "captureOnlyCss": "nextjs-portal{display:none!important}",
+  "sha256": "64c11af188bfa5d3ab9d18a2099d78a93132b24397d45de8abb03e4b2c7af31c",
+  "description": "Portrait screenshot of the fully rendered first page, including the sample-fixture names, date, venue, source hero image, typography, and frame. Captured with reduced motion so the staggered source animation is settled."
+}
