@@ -38,11 +38,11 @@
     } catch { return ""; }
   };
   const couple = (data) => [data.groom, data.bride].filter(Boolean).join(" & ");
-  function setImages(data) {
+  function setImages(data, preview) {
     const banner = safeUrl(data.bannerImage) || BASE + "hero-forest.webp";
     $$('[data-orchid-hero]').forEach((node) => { node.src = banner; });
-    const groomImage = safeUrl(data.groomImage);
-    const brideImage = safeUrl(data.brideImage);
+    const groomImage = safeUrl(data.groomImage) || (preview ? BASE + "groom.png" : "");
+    const brideImage = safeUrl(data.brideImage) || (preview ? BASE + "bride.png" : "");
     const groom = $('[data-orchid-groom-image]');
     const bride = $('[data-orchid-bride-image]');
     if (groomImage) groom.src = groomImage;
@@ -181,12 +181,12 @@
       });
     }
   }
-  function renderStory(data) {
+  function renderStory(data, preview) {
     const chapters = (data.story || []).filter((item) => item.title || item.text);
     const section = show('[data-section="story"]', chapters.length > 0);
     const host = $(`[data-orchid-story]`); host.replaceChildren();
     chapters.forEach((chapter, index) => {
-      const authoredPhoto = safeUrl(index % 2 ? data.brideImage : data.groomImage);
+      const authoredPhoto = safeUrl(index % 2 ? data.brideImage : data.groomImage) || (preview ? BASE + (index % 2 ? "story-bride.jpg" : "story-groom.jpg") : "");
       const card = document.createElement("article"); card.className = `orchid-reveal story-text-card story-${index ? "second" : "first"}-text`;
       card.style.setProperty("--orchid-reveal-delay", index ? ".08s" : ".06s");
       if (chapter.title) { const heading = document.createElement("h3"); heading.textContent = chapter.title; card.append(heading); }
@@ -239,14 +239,14 @@
     $("[data-orchid-lightbox-close]").setAttribute("aria-label", text("close"));
     const coupleSection = show('[data-section="couple"]', !!(data.groom || data.bride));
     if (coupleSection) {
-      const images = [safeUrl(data.groomImage), safeUrl(data.brideImage)];
+        const images = [safeUrl(data.groomImage) || (envelope.preview ? BASE + "groom.png" : ""), safeUrl(data.brideImage) || (envelope.preview ? BASE + "bride.png" : "")];
       $$(".person-profile").forEach((card, i) => {
         card.hidden = !(i ? data.bride : data.groom);
         show(".person-photo-frame", !!images[i], card);
         if (images[i]) $(".person-photo-frame img", card).src = images[i];
       });
     }
-    setImages(data); renderCountdown(data); renderProgram(data); renderGallery(data); renderStory(data); renderWishes(data);
+    setImages(data, envelope.preview); renderCountdown(data); renderProgram(data); renderGallery(data); renderStory(data, envelope.preview); renderWishes(data);
     if (!envelope.preview && data.wishesEnabled && envelope.invitationId && wishesFor !== envelope.invitationId) {
       wishesFor = envelope.invitationId;
       fetch(`/api/public/invitations/${encodeURIComponent(envelope.invitationId)}/wishes`, { credentials: "same-origin" })

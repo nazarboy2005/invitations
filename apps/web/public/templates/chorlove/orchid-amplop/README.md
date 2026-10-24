@@ -11,6 +11,11 @@ complete renderer component and its embedded stylesheet were recovered from
 `Chorlove/Web invitations/_next/static/chunks/0v0-3ulc~exde.js`. Reference
 captures remain unchanged. The route chunk's framework module loader,
 authentication/analytics, and site-level data/services are not packaged.
+The preview frame references 16 local JavaScript chunks; module `482485` in
+`0v0-3ulc~exde.js` is the template component and module `437202` in
+`0d2h69c7a3snv.js` supplies the default preview gallery. A source graph audit
+covered all 16 referenced chunks and searched all 55 captured Chorlove chunk
+files for the missing image paths.
 
 ## Contract mapping
 
@@ -42,16 +47,19 @@ behind the z-120 gate at z-110; the package now follows that stacking.
 
 Browser checks covered the live source opening and hero, the package opener and completed open transition in normal motion, gallery lightbox open/close, gift-card expand/collapse, and package reduced-motion QA. The opener layouts align closely at mobile and desktop widths. Package reduced motion is an accessibility adaptation that shows opener copy immediately; captured CSS explicitly disables only the hero down-arrow animation. Browser-level source reduced-motion emulation remains pending.
 
-The source lightbox uses Framer Motion's implicit physical spring (stiffness 100, damping 10, mass 1). The package now generates that under-damped curve analytically at 60 Hz and plays the sampled opacity/scale values through WAAPI, stopping at the source spring rest tolerances. This keeps the standalone package free of the provider runtime while matching its spring parameters and visible interpolation. Browser re-verification of the updated lightbox is pending because the connected browser transport is currently unavailable. Gift-card expansion uses the captured 0.5s duration, easing, blur, scale, and offsets. Section reveal viewport threshold, margin, duration, easing, and recorded delays match. No clean catalog cover exists: metadata art includes fixed names/provider UI. Six component-referenced images remain absent. Therefore source fidelity and publication gates remain open.
+The source lightbox uses Framer Motion's implicit physical spring (stiffness 100, damping 10, mass 1). The package now generates that under-damped curve analytically at 60 Hz and plays the sampled opacity/scale values through WAAPI, stopping at the source spring rest tolerances. This keeps the standalone package free of the provider runtime while matching its spring parameters and visible interpolation. Browser re-verification of the updated lightbox is pending because the connected browser transport is currently unavailable. Gift-card expansion uses the captured 0.5s duration, easing, blur, scale, and offsets. Section reveal viewport threshold, margin, duration, easing, and recorded delays match. The metadata art includes fixed names/provider UI and remains excluded. The seven missing archive assets have been recovered from their exact source URLs and packaged. A 450×800 capture of the isolated opener using the canonical catalog fixture is now the catalog art. Source-level reduced-motion comparison, updated spring verification, and invitation lifecycle/service checks remain open.
 
 ## Current release state
 
 The page package is not a publication approval. The source capture manifest has
-no standalone thumbnail or portrait opening art, and the component's additional
-references to `divider.svg`, `bride-groom-circle.svg`, groom/bride portraits,
-and story photos are absent from the exact Orchid asset directory. No unrelated
-template images are substituted. The package currently uses the existing circle
-asset for the circular frame and leaves optional authored portraits empty.
+no standalone thumbnail or portrait opening art. Its 55 captured script chunks
+and local asset tree also omitted seven referenced images; all seven exact
+source URLs returned HTTP 200 and the original response bodies are now packaged
+with SHA-256 provenance. No unrelated template images are substituted. Exact
+source person-frame, divider, and footer-divider artwork is restored. Preview
+mode uses the exact source portraits/story photos only as ephemeral fallbacks;
+creator images take precedence, and public invitations do not receive source
+demo photos.
 The shared typed registry and full-preview route now expose the template for
 preview only, with wedding-only compatibility. The reduced-motion browser pass
 confirmed the opening and populated sections. Migration
@@ -60,9 +68,10 @@ the wedding row is unpublished. The database has no Orchid invitations, and
 the public catalog API excludes the row.
 
 The capture's structured metadata points to an authentic 778×1686 opening
-image, but it includes fixed source couple names and a provider UI badge. The
-renderer capture made with the canonical shared preview fixture is portrait,
-but currently includes the Next.js development badge. Neither image is used as
-catalog art. The archive also lacks the six images referenced by the component.
-Save/reopen, public invitation rendering, RSVP/wish submission, browser-level source reduced-motion comparison, and a clean portrait catalog cover remain release checks. Keep the template
+image, but it includes fixed source couple names and a provider UI badge and
+remains excluded. The catalog uses a clean 450×800 screenshot of the isolated
+template opener with the canonical shared preview fixture, without application
+chrome. The original missing assets are recovered and local. Save/reopen, public
+invitation rendering, RSVP/wish submission, browser-level source reduced-motion
+comparison, and updated spring verification remain release checks. Keep the template
 unpublished and unselectable until those checks pass.

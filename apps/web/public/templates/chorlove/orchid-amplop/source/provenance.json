@@ -8,56 +8,109 @@
   "cssSha256": "8b68fc378689d76f5e6e05acc5fc64cf1d7342ab4a33a41686f7146778403a3e",
   "assets": [
     {
-      "path": "circle.svg",
+      "path": "assets/circle.svg",
       "bytes": 8032,
       "sha256": "5b864d817c352eb20d41c259868f8fe92926f74783c9c8bdae9b52783edb8da8"
     },
     {
-      "path": "gallery-1.webp",
+      "path": "assets/gallery-1.webp",
       "bytes": 47468,
       "sha256": "8578f6d5f3c2ddc1759c5116dfb4b68cd47f86ea700bfa3777a75fb916734a0b"
     },
     {
-      "path": "gallery-2.webp",
+      "path": "assets/gallery-2.webp",
       "bytes": 108104,
       "sha256": "bcfd6989e53e220164e8d39368a848eed1185c07af73f934c81181af2a690d45"
     },
     {
-      "path": "gallery-3.webp",
+      "path": "assets/gallery-3.webp",
       "bytes": 82790,
       "sha256": "c747d5f2c007ec78d46196fcbf157da871fd4bebd9f0a07863087e9a5787e320"
     },
     {
-      "path": "gallery-4.webp",
+      "path": "assets/gallery-4.webp",
       "bytes": 117998,
       "sha256": "c3d590110524cb7b0148c08aa1543d569f16f54b4672d802bebcf778776df558"
     },
     {
-      "path": "gallery-5.webp",
+      "path": "assets/gallery-5.webp",
       "bytes": 211568,
       "sha256": "bb3c25700cc2aa81a40c46bb20c22cd13403d3e9bcf196c175a94fb7b49c8a2e"
     },
     {
-      "path": "gallery-6.webp",
+      "path": "assets/gallery-6.webp",
       "bytes": 67596,
       "sha256": "35c81b38de8fb85f182b1c1c6149bf9926b2a55c10e845f617fc87605ec63e11"
     },
     {
-      "path": "hero-forest.webp",
+      "path": "assets/hero-forest.webp",
       "bytes": 544716,
       "sha256": "bd564fec93401f9ae5ea037e8905a5374be74afa37e88882fbdc994a6dff9640"
+    },
+    {
+      "path": "assets/divider.svg",
+      "bytes": 3711,
+      "sha256": "d1bacc6f8b1bf09c4354d32268615915fa910ea4f143be7e83b503b0e64d2317",
+      "sourceUrl": "https://chorlove.uz/images/templates/orchid-amplop/divider.svg"
+    },
+    {
+      "path": "assets/white-divider.svg",
+      "bytes": 3739,
+      "sha256": "669e51be8b4fcf973b2f365611d062e17ad95811773f4202d7028c0bf6604133",
+      "sourceUrl": "https://chorlove.uz/images/templates/orchid-amplop/white-divider.svg"
+    },
+    {
+      "path": "assets/bride-groom-circle.svg",
+      "bytes": 6255,
+      "sha256": "d63d926fca380248633d8598fcacc4850fa02e32687280e8b477287a579f8a12",
+      "sourceUrl": "https://chorlove.uz/images/templates/orchid-amplop/bride-groom-circle.svg"
+    },
+    {
+      "path": "assets/groom.png",
+      "bytes": 15167,
+      "sha256": "eb3c897aa53a47ad6996cf9e0d2541bdfe7e460cd3bdc3d414225670e32bf9a6",
+      "sourceUrl": "https://chorlove.uz/images/templates/orchid-amplop/groom.png",
+      "detectedFormat": "AVIF"
+    },
+    {
+      "path": "assets/bride.png",
+      "bytes": 62569,
+      "sha256": "4ad11551676f31305a578f86fdf2abeb31cc08e7da1a7a23b8e01389a5f2ecd2",
+      "sourceUrl": "https://chorlove.uz/images/templates/orchid-amplop/bride.png",
+      "detectedFormat": "JPEG"
+    },
+    {
+      "path": "assets/story-groom.jpg",
+      "bytes": 77456,
+      "sha256": "7a2d1040e66f308775547f807621fa9fd14144da59f783579aef976ef36cb8d6",
+      "sourceUrl": "https://chorlove.uz/images/templates/orchid-amplop/story-groom.jpg",
+      "detectedFormat": "JPEG"
+    },
+    {
+      "path": "assets/story-bride.jpg",
+      "bytes": 64893,
+      "sha256": "0622ddb48f5a74fb213793dc96eb1188a24fe20bf780b6fc2eedcc56d27944c1",
+      "sourceUrl": "https://chorlove.uz/images/templates/orchid-amplop/story-bride.jpg",
+      "detectedFormat": "JPEG"
+    },
+    {
+      "path": "assets/catalog-opening.png",
+      "bytes": 603628,
+      "sha256": "ec69f727d078423cb0788299025925d3bf21532d6911d27ed62a65a9aba43c29",
+      "dimensions": "450x800",
+      "source": "Real isolated template opener capture using the canonical shared catalog preview fixture; no app chrome."
     }
   ],
   "status": "source package and preview routing implemented; migration applied; unpublished and unselectable",
   "notes": [
     "Component module 482485 supplies the exact template section/component tree, authored opening transition, original CSS literal, and design image references. App-owned frame, loaders, analytics, auth, and provider APIs are excluded.",
     "The stylesheet in source/orchid.css is the unchanged CSS literal extracted from the component module; fonts.css maps the exact local Comfortaa and Allura font subsets to the source CSS variables.",
-    "The archive contains the seven original Orchid artwork files plus circle.svg; all are packaged unchanged. Gallery images appear only as ephemeral preview fixture media and never as authored/public data.",
-    "The shared contract does not include groom/bride/story image fields. Those optional portrait/photo areas are omitted from runtime when there is no creator-authored media; no substitute artwork is used.",
+    "The captured archive contains eight Orchid assets; the seven additional image paths were recovered byte-for-byte from their exact chorlove.uz source URLs. The groom.png response body is AVIF and bride.png is JPEG despite their source filenames; both source filenames and original bytes are preserved. Gallery images appear only as ephemeral preview fixture media and never as authored/public data.",
+    "The shared contract does not include groom/bride/story image fields. Exact source portrait/story artwork is used only as an ephemeral preview fallback when no creator image is supplied; creator images take precedence. Public invitations never receive these source demo photos.",
     "Typed catalog integration is wedding-only and unpublished; full preview uses the shared Chorlove iframe renderer and ephemeral preview fixture. Migration 0132_register_orchid_amplop.sql is applied; the configured database confirms published=false, wedding category, and wedding event support.",
     "Browser checks at 390x844 and 1280x800 compared live-source and package openers. Package normal-motion opener/exit, gallery lightbox open/close, gift expansion/collapse, and reduced-motion QA were exercised. Gate timings, per-section reveal timings, icon paths, chevrons, and music stacking were adapted from captured component declarations. Lightbox uses a sampled analytic spring with Framer Motion's default stiffness 100, damping 10, mass 1, and rest thresholds; the updated transition awaits browser re-verification because the connected browser transport is unavailable. Browser-level OS reduced-motion emulation on the source page remains outstanding.",
     "The local source archive has no standalone clean portrait cover. The metadata-referenced 778x1686 opening image contains fixed sample couple names and a provider UI badge, so it is excluded. Local renderer captures still include the Next dev badge and are not catalog art.",
-    "Full Chorlove archive re-search found none of the component fallback references divider.svg, bride-groom-circle.svg, groom.png, bride.png, story-groom.jpg, or story-bride.jpg. No cross-template images are substituted.",
+    "A search across all 55 captured Chorlove JavaScript chunks and supplied invitation asset trees found no copies of divider.svg, white-divider.svg, bride-groom-circle.svg, groom.png, bride.png, story-groom.jpg, or story-bride.jpg. All seven exact source URLs subsequently returned HTTP 200 and the original response bodies are now packaged and hashed. No cross-template images are substituted.",
     "Migration 0132_register_orchid_amplop.sql is applied. Direct DB query confirmed unpublished=true is false: published=false, wedding category/event and 15,000,000 UZS. Public catalog omits Orchid. No Orchid invitations exist, so save/reopen, public route, RSVP and wish service submission remain unverified."
   ],
   "database": {
@@ -86,6 +139,47 @@
     "path": "Web invitations/_next/static/chunks/0v0-3ulc~exde.js",
     "module": "482485",
     "sha256": "3a1df8e76cbfab4af72698ca0505ffec0db05a9ff498e8b448e981821751a5d9"
+  },
+  "sourceGraph": {
+    "previewFrame": "Web invitations/templates/orchid-amplop/preview-frame.html",
+    "referencedJavaScriptChunks": [
+      "10k389pk~-_32.js",
+      "16ksa~32zaksw.js",
+      "0956.uguclzfz.js",
+      "128aahewwf1we.js",
+      "turbopack-03jk7ny6053z3.js",
+      "0i.l9589uvx0j.js",
+      "0.o-pv5nbmdgw.js",
+      "0854eo01pna52.js",
+      "0ceoe4zwq362f.js",
+      "04ebwjou5tb-9.js",
+      "0w.~80oduw1yx.js",
+      "0d2h69c7a3snv.js",
+      "03~yq9q893hmn.js",
+      "0m97bbjp.vgzu.js",
+      "0aexcrombk~7o.js",
+      "0v0-3ulc~exde.js"
+    ],
+    "templateComponent": "0v0-3ulc~exde.js module 482485",
+    "entryShim": "0v0-3ulc~exde.js module 838250",
+    "defaultPreviewGallery": "0d2h69c7a3snv.js module 437202",
+    "archiveSearch": "All 55 captured Chorlove _next/static/chunks/*.js files and supplied Web invitations assets searched; the seven original image files were absent locally and recovered from the exact source URLs.",
+    "missingImages": [],
+    "recoveredImages": [
+      "divider.svg",
+      "white-divider.svg",
+      "bride-groom-circle.svg",
+      "groom.png",
+      "bride.png",
+      "story-groom.jpg",
+      "story-bride.jpg"
+    ]
+  },
+  "catalogArtwork": {
+    "path": "assets/catalog-opening.png",
+    "dimensions": "450x800",
+    "fixture": "apps/web/src/modules/catalog/preview-sample.json (uz-Latn couple names and greeting)",
+    "capture": "The package's real opener rendered in a standalone local frame, with no application chrome. This is preview artwork only; the fixture is not invitation data."
   },
   "fontAssets": [
     {
