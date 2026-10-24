@@ -75,8 +75,7 @@ test("Cloud Castle opening and hero motion follow the captured page module", asy
   assert.match(js, /Array\.from|index < 32/);
   assert.match(js, /duration: 2000, iterations: Infinity/);
   assert.match(js, /duration: 3000, iterations: Infinity/);
-  assert.match(js, /duration: duration \* 1000, delay: delay \* 1000, iterations: Infinity, easing: "ease-in-out"/);
-  assert.doesNotMatch(js, /duration: duration \* 500, delay: delay \* 1000, iterations: Infinity/);
+  assert.match(js, /inner\.animate\(\[\{ translate: "0 0" \}, \{ translate: `\$\{sway\}px 0` \}, \{ translate: "0 0" \}\], \{ duration: duration \* 500, delay: delay \* 1000, iterations: Infinity, easing: "ease-in-out" \}\)/);
   assert.match(js, /duration: 800, easing: "cubic-bezier\(\.22,1,\.36,1\)"/);
   assert.match(js, /duration: 600, delay: 450/);
   assert.match(js, /-90 \+ 330 \* progress/);
