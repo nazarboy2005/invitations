@@ -1230,6 +1230,7 @@ export const TEMPLATES: TemplateDefinition[] = [
     name: "Green Gold",
     description:
       "Gold ornaments and deep green tones for a wedding invitation.",
+    previewImage: "/templates/green-gold/catalog-cover-opening.png",
     previewEventType: "wedding",
     categoryIds: ["wedding"],
     supportedEventTypes: ["wedding"],
@@ -1262,6 +1263,7 @@ export const TEMPLATES: TemplateDefinition[] = [
     priceMinor: 15000000,
     currency: "UZS",
     accent: "#404a1d",
+    previewImage: "/templates/jasmine-white/preview.png",
     published: false,
   },
   {
@@ -1288,6 +1290,7 @@ export const TEMPLATES: TemplateDefinition[] = [
     priceMinor: 15000000,
     currency: "UZS",
     accent: "#df9c9b",
+    previewImage: "/templates/love-sakura/catalog-opening.png",
     published: false,
   },
   {
