@@ -1298,6 +1298,7 @@ export const TEMPLATES: TemplateDefinition[] = [
     name: "Luxury Gold",
     description:
       "A dark, gold-accented wedding invitation with a refined layout.",
+    previewImage: "/templates/luxury-gold/catalog-opening.png",
     previewEventType: "wedding",
     categoryIds: ["wedding"],
     supportedEventTypes: ["wedding"],
