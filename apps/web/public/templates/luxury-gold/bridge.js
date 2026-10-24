@@ -908,37 +908,115 @@
   }
   function openGallery(items, initialIndex) {
     let index = initialIndex;
+    let zoom = 1;
+    let slideshow = 0;
+    let pointerStart = null;
     const overlay = document.createElement("div");
     overlay.className = "lg-gallery-overlay";
     overlay.setAttribute("role", "dialog");
     overlay.setAttribute("aria-modal", "true");
     overlay.setAttribute("aria-label", c().gallery);
     const image = document.createElement("img");
-    const close = document.createElement("button");
-    const previous = document.createElement("button");
-    const next = document.createElement("button");
-    close.className = "lg-gallery-close";
-    close.type = previous.type = next.type = "button";
-    close.textContent = "×";
-    previous.className = "lg-gallery-previous";
-    previous.textContent = "‹";
-    next.className = "lg-gallery-next";
-    next.textContent = "›";
-    close.setAttribute("aria-label", "Close");
-    previous.setAttribute("aria-label", "Previous image");
-    next.setAttribute("aria-label", "Next image");
-    const show = () => { image.src = items[index].src; image.alt = items[index].alt || items[index].caption || c().gallery; };
-    const dismiss = () => { overlay.remove(); document.removeEventListener("keydown", onKey); };
+    const counter = document.createElement("div");
+    counter.className = "lg-gallery-counter";
+    const toolbar = document.createElement("div");
+    toolbar.className = "lg-gallery-toolbar";
+    const makeButton = (label, glyph, className = "") => {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = className;
+      button.textContent = glyph;
+      button.setAttribute("aria-label", label);
+      button.title = label;
+      return button;
+    };
+    const close = makeButton("Close", "×", "lg-gallery-close");
+    const play = makeButton("Play", "▶");
+    const zoomIn = makeButton("Zoom in", "⌕+");
+    const zoomOut = makeButton("Zoom out", "⌕−");
+    const previous = makeButton("Previous", "‹", "lg-gallery-previous");
+    const next = makeButton("Next", "›", "lg-gallery-next");
+    const thumbnails = document.createElement("div");
+    thumbnails.className = "lg-gallery-thumbnails";
+    const thumbnailButtons = items.map((item, itemIndex) => {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.setAttribute("aria-label", `${itemIndex + 1} of ${items.length}`);
+      button.title = `${itemIndex + 1} of ${items.length}`;
+      const thumbnail = document.createElement("img");
+      thumbnail.src = item.src;
+      thumbnail.alt = "";
+      button.append(thumbnail);
+      button.onclick = () => { index = itemIndex; zoom = 1; show(); };
+      thumbnails.append(button);
+      return button;
+    });
+    const stopSlideshow = () => {
+      window.clearInterval(slideshow);
+      slideshow = 0;
+      play.textContent = "▶";
+      play.setAttribute("aria-label", "Play");
+      play.title = "Play";
+    };
+    const show = (direction = 0) => {
+      const item = items[index];
+      image.src = item.src;
+      image.alt = item.alt || item.caption || c().gallery;
+      image.style.transform = `scale(${zoom})`;
+      counter.textContent = `${index + 1} / ${items.length}`;
+      thumbnailButtons.forEach((button, itemIndex) => {
+        button.setAttribute("aria-current", String(itemIndex === index));
+      });
+      zoomOut.disabled = zoom <= 1;
+      zoomIn.disabled = zoom >= 4;
+      if (direction) {
+        const startX = direction > 0 ? 18 : -18;
+        animateNode(image, [
+          { opacity: 0.72, transform: `translateX(${startX}px) scale(${zoom})` },
+          { opacity: 1, transform: `translateX(0) scale(${zoom})` },
+        ], { duration: 250, easing: "ease-out" });
+      }
+    };
+    const dismiss = () => {
+      stopSlideshow();
+      overlay.remove();
+      document.removeEventListener("keydown", onKey);
+    };
+    const step = (offset) => {
+      index = (index + offset + items.length) % items.length;
+      zoom = 1;
+      show(offset);
+    };
     const onKey = (event) => {
       if (event.key === "Escape") dismiss();
-      if (event.key === "ArrowLeft") { index = (index - 1 + items.length) % items.length; show(); }
-      if (event.key === "ArrowRight") { index = (index + 1) % items.length; show(); }
+      if (event.key === "ArrowLeft") step(-1);
+      if (event.key === "ArrowRight") step(1);
     };
-    previous.onclick = () => { index = (index - 1 + items.length) % items.length; show(); };
-    next.onclick = () => { index = (index + 1) % items.length; show(); };
+    previous.onclick = () => step(-1);
+    next.onclick = () => step(1);
     close.onclick = dismiss;
+    play.onclick = () => {
+      if (slideshow) {
+        stopSlideshow();
+      } else {
+        play.textContent = "Ⅱ";
+        play.setAttribute("aria-label", "Pause");
+        play.title = "Pause";
+        slideshow = window.setInterval(() => step(1), 1500);
+      }
+    };
+    zoomIn.onclick = () => { zoom = Math.min(4, zoom + 0.5); show(); };
+    zoomOut.onclick = () => { zoom = Math.max(1, zoom - 0.5); show(); };
+    image.addEventListener("pointerdown", (event) => { pointerStart = event.clientX; });
+    image.addEventListener("pointerup", (event) => {
+      if (pointerStart == null) return;
+      const delta = event.clientX - pointerStart;
+      pointerStart = null;
+      if (Math.abs(delta) > 45) step(delta < 0 ? 1 : -1);
+    });
     overlay.addEventListener("click", (event) => { if (event.target === overlay) dismiss(); });
-    overlay.append(previous, image, next, close);
+    toolbar.append(play, zoomIn, zoomOut, close);
+    overlay.append(counter, previous, image, next, thumbnails, toolbar);
     root.append(overlay);
     show();
     document.addEventListener("keydown", onKey);

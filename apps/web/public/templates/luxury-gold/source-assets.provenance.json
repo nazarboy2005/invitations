@@ -4,6 +4,25 @@
     "bytes": 153333,
     "sha256": "8acc8ba90f0cf525e0bdb742ab6aec39437e342f055bd7d759fd46c9564ae017"
   },
+  "providerArchiveSearch": {
+    "root": "..\\Invitations - this folder will be removed from production",
+    "filenameSearch": "luxury-gold",
+    "contentSearch": "luxury gold / luxury-gold / luxury_gold across HTML, CSS, JavaScript, JSON, and text files",
+    "directTemplateFiles": [
+      "Chorlove/Web invitations/templates/luxury-gold/preview-frame.html",
+      "Chorlove/Web invitations/images/luxury-gold/corner.png",
+      "Chorlove/Web invitations/images/luxury-gold/bride-groom.jpg"
+    ],
+    "supportingReferences": [
+      "Chorlove/capture-manifest.json",
+      "Chorlove/capture-all.js",
+      "reports/new-sites/chorlove-marxaba-opening-check.json",
+      "tools/build-chorlove-marxaba-manifests.js",
+      "Chorlove/Web invitations/_next/static/chunks/0io3rqik.2n_m.js"
+    ],
+    "otherProviderTemplateCopy": false,
+    "dedicatedCatalogCoverFound": false
+  },
   "assets": [
     {
       "file": "assets/corner.png",
@@ -24,22 +43,47 @@
     {
       "file": "source/styles/0ly1y_qxlqlf..css",
       "sourcePath": "..\\Invitations - this folder will be removed from production\\Chorlove\\Web invitations\\_next\\static\\chunks\\0ly1y_qxlqlf..css",
-      "bytes": 6142,
-      "sha256": "90d0d5787eb6c78730c5177a957d5ae6bd7d9f213f3767b343f290483254dff4",
       "sourceBytes": 6140,
       "sourceSha256": "3fcd5d40feb11ed6c2f58cfcf069d01f27a1bbf95a51b75d9c9e02c63e3d3f81",
+      "normalizedSha256": "3fcd5d40feb11ed6c2f58cfcf069d01f27a1bbf95a51b75d9c9e02c63e3d3f81",
       "lineEndingNormalizedMatch": true
     },
     {
       "file": "source/styles/054~-i6~6lmrd.css",
       "sourcePath": "..\\Invitations - this folder will be removed from production\\Chorlove\\Web invitations\\_next\\static\\chunks\\054~-i6~6lmrd.css",
-      "bytes": 3860,
-      "sha256": "5d325b9dfa0d5c254702aae71a3bc22dc3380f7037b99deb083aeddc78009078",
       "sourceBytes": 3859,
       "sourceSha256": "13599ddc9e6faa903f0966c4adeec12e47ecaa6382056e2cb71bdc68b93bd3fa",
+      "normalizedSha256": "13599ddc9e6faa903f0966c4adeec12e47ecaa6382056e2cb71bdc68b93bd3fa",
       "lineEndingNormalizedMatch": true
     }
   ],
+  "sourceFonts": {
+    "stylesheet": {
+      "sourcePath": "..\\Invitations - this folder will be removed from production\\Chorlove\\Web invitations\\_next\\static\\chunks\\0.u3j0~_2ygfx.css",
+      "packagedPath": "apps/web/public/templates/chorlove/shared/_next/static/chunks/0.u3j0~_2ygfx.css",
+      "sourceSha256": "12141a5ec71f317d0e27589c92869d213b339f86451ee2a75b4612c5f1e05991",
+      "packagedLineEndingNormalizedMatch": true,
+      "usedFamilies": ["Inter", "Playfair Display"],
+      "templateRootVariableClasses": [
+        "inter_fe8b9d92-module__LINzvG__variable",
+        "playfair_display_fa003182-module__E_H7JW__variable"
+      ]
+    },
+    "assets": [
+      {
+        "family": "Inter",
+        "file": "83afe278b6a6bb3c-s.p.0q-301v4kxxnr.woff2",
+        "bytes": 48432,
+        "sha256": "c940764593d0fe5d596be327ca7558855e018039fb78509aa21921fd3644c3e4"
+      },
+      {
+        "family": "Playfair Display",
+        "file": "2a65768255d6b625-s.p.14by5b4al-y~f.woff2",
+        "bytes": 38460,
+        "sha256": "5d91eb5d522a03081946c44c8ca17c902230dfed5f0f9b5014262135d47b15b2"
+      }
+    ]
+  },
   "excludedCapturedGallery": [
     "/images/templates/orchid-amplop/gallery-1.webp",
     "/images/templates/orchid-amplop/gallery-2.webp",
@@ -50,7 +94,7 @@
   ],
   "sourcePageModule": {
     "path": "..\\Invitations - this folder will be removed from production\\Chorlove\\Web invitations\\_next\\static\\chunks\\0io3rqik.2n_m.js",
-    "bytes": 55032,
+    "bytes": 55070,
     "sha256": "0693fc8a88c7a71faa8ff3205ffd3e436b6dfcf410602bbb2f2a72517fe65ecc"
   },
   "sourceMotion": {
@@ -58,11 +102,50 @@
     "sectionReveal": "opacity 0, y 34px, blur 8px to visible; 0.9s ease-out; grouped children stagger 0.13s with 0.12s group delay",
     "opening": "overlay fade after 2.45s for 0.75s; curtains scaleX to zero at 1.55s and 1.7s over 1.05s; title timeline 2.25s",
     "special": "corner ornaments scale reveal; hero image 1.16 to 1 over 10s; selected calendar day spring reveal; countdown heart pulse; gift card shine; divider sheen; gold sparkle canvas; gallery, wish, contact, palette, and map interactions",
-    "adaptation": "Implemented as local Web Animations API and canvas behaviors in bridge.js; source CSS chunks remain packaged unchanged. Reduced motion reveals content without running looping motion."
+    "adaptation": "The source component chunk is audited and its motion timings are mapped in bridge.js using the local Web Animations API and canvas; source CSS chunks are verified after line-ending normalization. Reduced motion reveals content immediately and skips opening and loops."
+  },
+  "sourceGallery": {
+    "pageModule": "_next/static/chunks/0io3rqik.2n_m.js",
+    "lightboxRuntimeChunk": "_next/static/chunks/0jsw~n6ojplnf.js",
+    "component": "PhotoSwipe-style lightbox with slideshow, thumbnails, zoom, swipe, keyboard navigation, backdrop close, and a slide counter",
+    "settings": {
+      "autoplayOnOpen": false,
+      "slideshowDelayMs": 1500,
+      "thumbnailPosition": "bottom",
+      "thumbnailSize": "84x56",
+      "thumbnailBorderRadiusPx": 8,
+      "thumbnailGapPx": 8,
+      "swipeAnimationMs": 250,
+      "closeOnBackdropClick": true
+    },
+    "adaptation": "The Chorlove component is coupled to its bundled app runtime, so bridge.js implements these source-visible controls and settings against creator gallery images. Gallery items remain creator-provided; unrelated captured Orchid Amplop sample images are excluded."
   },
   "catalogCover": {
-    "status": "no dedicated source preview image in the captured Luxury Gold package",
-    "review": "The source-authentic first page was visually checked in the local shared renderer; the opening greeting, corners, sparkle field, divider, ornament, and scroll cue are visible.",
-    "publication": "Template remains unpublished; no catalog artwork or publication metadata was changed in this repair."
+    "status": "Captured the original source-rendered opening as a local portrait catalog artifact.",
+    "artifact": {
+      "path": "catalog-opening.png",
+      "bytes": 102210,
+      "sha256": "135fa3ae0b552eee35f5754cc60ab2eb39d0015750e7a5ac8637ac293d231df2",
+      "width": 480,
+      "height": 720
+    },
+    "capture": {
+      "sourceHtml": "templates/luxury-gold/preview-frame.html",
+      "sourceHtmlSha256": "8acc8ba90f0cf525e0bdb742ab6aec39437e342f055bd7d759fd46c9564ae017",
+      "sourcePageModuleSha256": "0693fc8a88c7a71faa8ff3205ffd3e436b6dfcf410602bbb2f2a72517fe65ecc",
+      "localUrlPath": "/templates/luxury-gold/preview-frame.html",
+      "viewport": { "width": 480, "height": 720, "deviceScaleFactor": 1 },
+      "browser": "Chrome 156.0.8078.47",
+      "automation": "Playwright 1.64.1",
+      "capturedAtUtc": "2026-10-24T08:16:29.071Z",
+      "network": "Only the local archive server was allowed; remote requests were blocked."
+    },
+    "review": "The saved PNG was visually inspected. It shows the source opening with all four original corner ornaments, gold sparkle field, greeting, divider, serif invitation title, ornament, and scroll cue. Local font files load and the title computes to Playfair Display at 30px in the 480x720 source viewport.",
+    "publication": "The cover artifact is ready. Luxury Gold remains unpublished; the typed catalog previewImage pointer is pending the central exact-path queue."
+  },
+  "sourcePackageSnapshot": {
+    "file": "source/preview-frame.html",
+    "normalizedSha256": "8acc8ba90f0cf525e0bdb742ab6aec39437e342f055bd7d759fd46c9564ae017",
+    "lineEndingNormalizedMatch": true
   }
 }
