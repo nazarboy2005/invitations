@@ -60,6 +60,7 @@ test("Modern Floral page loads its source motion runner and preserves source rev
   assert.match(html, /style="opacity:0;transform:translateY\(24px\) scale\(0\.84\)"/);
   assert.equal([...html.matchAll(/style="width:\d+px;height:\d+px;top:-10%;left:/g)].length, 34);
   assert.doesNotMatch(bridge, /hide\(root\.firstElementChild\)/);
+  assert.match(bridge, /nameNodes=all\("h2",sec\[1\]\);put\(nameNodes\[0\],z\.groom/);
 });
 
 test("Modern Floral catalog artwork has the source image hash and portrait dimensions", async () => {
@@ -76,6 +77,12 @@ test("Modern Floral preserved capture and Chorlove CSS retain source markup and 
   const original = sourceCaptureBytes.toString("utf8").replace(/\r\n?/g, "\n");
   const preserved = (await readFile(packagedCaptureUrl, "utf8")).replace(/\r\n?/g, "\n");
   assert.equal(preserved, original);
+  const packagePage = await readFile(htmlUrl, "utf8");
+  const sourceBodyClasses = original.match(/<body class="([^"]+)"/)?.[1]?.split(/\s+/) ?? [];
+  const packageBodyClasses = packagePage.match(/<body class="([^"]+)"/)?.[1]?.split(/\s+/) ?? [];
+  for (const fontClass of sourceBodyClasses.filter((className) => className.endsWith("__variable"))) {
+    assert.ok(packageBodyClasses.includes(fontClass), `missing source font variable ${fontClass}`);
+  }
   const provenance = JSON.parse(await readFile(provenanceUrl, "utf8"));
   assert.equal(provenance.sourceSnapshot.bytes, sourceCaptureBytes.length);
   assert.equal(provenance.sourceSnapshot.sha256, createHash("sha256").update(sourceCaptureBytes).digest("hex"));
