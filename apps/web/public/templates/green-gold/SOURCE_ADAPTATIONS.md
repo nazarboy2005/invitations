@@ -3,9 +3,11 @@
 The original `preview-frame.html` snapshot is preserved byte-for-byte at
 `source/preview-frame.html`. The extracted runnable page keeps its 13 source
 sections, localizes the template-owned assets, removes captured invitation
-sample values and unrelated Orchid Amplop gallery photos, and does not load the
-captured Next.js or Chorlove site runtime. Source CSS chunks remain preserved
-under `source/styles/` for fidelity review. Five source artwork files are
+sample values, and does not load the captured Next.js or Chorlove site runtime.
+The source component's six default gallery photos are shown only as ephemeral
+preview fallbacks when no creator photos exist; creator uploads replace them,
+and public invitations never receive these sample photos. Source CSS chunks
+remain preserved under `source/styles/` for fidelity review. Five source artwork files are
 byte-identical in `assets/`; the source's `vertical-line.png` is absent, so its
 observed optimized WebP rendition is packaged with that limitation recorded in
 `source-assets.provenance.json`. A Cyrillic Playfair Display subset and shared
@@ -25,7 +27,12 @@ source app runtime: the five-step staggered cover entrance; source-specific
 section, date, countdown, and responsive gallery reveals; 18 rotating naqsh
 ornaments with their captured directions and periods; 30 source-style random
 starbursts; the looping wishes ticker; and the gallery lightbox's fade/scale
-entrance and exit. `bridge.js` continues to own shared-contract binding and
+entrance and exit. Browser comparison exposed that the wrapper around the
+thirteen sections prevented the original section lookup from matching, and
+that the reveal observer was initialized before reveal targets existed; both
+were corrected. Completed finite Web Animations now commit their final styles
+so the snapshot's inline initial states do not re-hide content after the
+animation ends. `bridge.js` continues to own shared-contract binding and
 service APIs, and only starts the motion adapter and signals updated data or
 reduced-motion preferences. The former generic sparkle keyframes and green
 gallery overlay were replaced with the source animation and full-screen dark
@@ -41,10 +48,16 @@ only runtime content binding is the shared preview fixture's Uzbek greeting;
 the fixture remains ephemeral. No crop, compositing, or redraw was used.
 `preview.provenance.json` and the `catalogArtwork` entry in
 `source-assets.provenance.json` record the capture, source and fixture hashes,
-viewport, and loaded image/font checks. The typed catalog preview path still
-needs to point at this artwork. Green Gold remains unpublished; browser
-comparison of source and package timing, gallery art behavior, and
-public/creator integration remain release checks.
+viewport, and loaded image/font checks. The typed catalog entry points to this
+artwork. Green Gold remains unpublished. Browser verification at matching
+390x844 viewports confirms source/package opening composition, cover-rule
+finish, section reveal on scroll, and reduced-motion state without runtime
+errors. The exact source default gallery order is restored in previews using
+the captured shared gallery image files; creator uploads take precedence and an
+empty public gallery stays hidden. Complete public/creator integration remains
+an open release check. The source archive does not contain `vertical-line.png`;
+the observed optimized WebP rendition is packaged and recorded as a source
+gap.
 
 ## Shared contract adapter
 

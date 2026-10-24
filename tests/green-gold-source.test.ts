@@ -9,7 +9,7 @@ import { createTemplatePreviewSample } from "../apps/web/src/modules/catalog/pre
 
 const root = new URL("../apps/web/public/templates/green-gold/", import.meta.url);
 const archive = new URL(
-  "../../Invitations - this folder will be removed from production/Chorlove/Web invitations/",
+  "../Invitations - this folder will be removed from production/Chorlove/Web invitations/",
   import.meta.url,
 );
 
@@ -29,7 +29,7 @@ test("Green Gold preserves the captured snapshot byte-for-byte", async () => {
   assert.equal(preserved.length, manifest.source.bytes);
 });
 
-test("Green Gold stages exact design assets and excludes sample gallery images", async () => {
+test("Green Gold stages exact design assets and keeps source gallery photos preview-only", async () => {
   const manifest = JSON.parse(
     await readFile(new URL("source-assets.provenance.json", root), "utf8"),
   );
@@ -75,6 +75,30 @@ test("Green Gold stages exact design assets and excludes sample gallery images",
     false,
   );
   assert.equal(manifest.excludedSnapshotAssets.length, 6);
+  const gallery = manifest.previewOnlySourceGallery;
+  assert.equal(gallery.sourceModule.moduleId, "437202");
+  assert.deepEqual(gallery.archiveFiles.map((file: string) => file.split("/").at(-1)), [
+    "gallery-2.webp", "gallery-1.webp", "gallery-3.webp",
+    "gallery-6.webp", "gallery-4.webp", "gallery-5.webp",
+  ]);
+  const orchidAssets = new URL("../chorlove/orchid-amplop/assets/", root);
+  for (const [index, imageNumber] of [2, 1, 3, 6, 4, 5].entries()) {
+    const servedFile = `gallery-${imageNumber}.webp`;
+    const bytes = await readFile(new URL(servedFile, orchidAssets));
+    const original = await readFile(
+      new URL(`images/templates/orchid-amplop/${servedFile}`, archive),
+    );
+    assert.deepEqual(bytes, original, servedFile);
+    assert.equal(
+      createHash("sha256").update(bytes).digest("hex"),
+      gallery.sha256[index],
+      servedFile,
+    );
+    assert.equal(
+      gallery.servedFiles[index],
+      `/templates/chorlove/orchid-amplop/assets/${servedFile}`,
+    );
+  }
 });
 
 test("Green Gold keeps the captured stylesheet dependencies for source fidelity review", async () => {
@@ -213,6 +237,10 @@ test("Green Gold runnable adapter isolates the source sections from site runtime
   assert.match(bridge, /role", alert \? "alert" : "status"/);
   assert.match(bridge, /ArrowRight/);
   assert.match(bridge, /aria-label", alt/);
+  assert.match(bridge, /const sourcePreviewGallery = \[2, 1, 3, 6, 4, 5\]/);
+  assert.match(bridge, /const hasCreatorImages = gallery\.some\(\(item\) => item\?\.src\)/);
+  assert.match(bridge, /preview && !hasCreatorImages/);
+  assert.match(bridge, /hide\(section, !preview && !hasCreatorImages\)/);
   assert.match(css, /:focus-visible/);
   assert.match(css, /min-width:28px;min-height:28px/);
   assert.match(bridge, /"uz-Cyrl":"\\u040e\\u0437"/);
@@ -235,6 +263,9 @@ test("Green Gold restores source opening, scroll, ornament, sparkle, wishes, and
   assert.equal(manifest.sourceMotion.observedSourceMotion.rotatingOrnaments, 18);
   assert.equal(manifest.sourceMotion.observedSourceMotion.revealTransitions, 11);
   assert.match(html, /templates\/green-gold\/source-motion\.js/);
+  assert.match(motion, /root\.querySelectorAll\("section"\)/);
+  assert.doesNotMatch(motion, /:scope > section/);
+  assert.ok(motion.indexOf('const observed = [...revealTargets]') > motion.indexOf('reveal(rsvp?.querySelector(".text-center")'));
   assert.match(motion, /duration: 1500, delay: 1000/);
   assert.match(motion, /translateY\(-20px\)/);
   assert.match(motion, /translateY\(20px\)/);
@@ -242,12 +273,20 @@ test("Green Gold restores source opening, scroll, ornament, sparkle, wishes, and
   assert.match(motion, /scale\(\.96\)/);
   assert.match(motion, /delay: index \* \(desktop \? 50 : 40\)/);
   assert.match(motion, /duration: Math\.max\(2\.2 \* list\.children\.length, 16\) \* 1000/);
+  assert.match(motion, /sections\[2\]\?\.querySelector\("div\.relative\.z-20"\)/);
+  assert.doesNotMatch(motion, /reveal\(rsvp\?\.querySelector\("\.mt-6"\)/);
+  assert.match(motion, /frames: \[\{ rotate: "0deg" \}, \{ rotate:/);
+  assert.match(motion, /function setReducedMotion\(value\)/);
+  assert.match(motion, /fill: "none"/);
   assert.match(motion, /IntersectionObserver/);
   assert.match(motion, /prefers-reduced-motion/);
   assert.match(bridge, /GreenGoldSourceMotion\.install/);
   assert.match(bridge, /gg:wishes-updated/);
   assert.match(bridge, /animateGallery/);
   assert.match(bridge, /closeGallery/);
+  assert.match(bridge, /\.space-y-3\.py-1/);
+  assert.match(bridge, /values\.length >= 4 \? \[\.\.\.values, \.\.\.values\]/);
+  assert.match(bridge, /transition duration-500 hover:scale-105/);
   assert.doesNotMatch(css, /gg-sparkle|@keyframes/);
   assert.match(css, /background:rgba\(0,0,0,\.88\)/);
 });

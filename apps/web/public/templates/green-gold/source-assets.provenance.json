@@ -47,6 +47,38 @@
     "images/templates/orchid-amplop/gallery-5.webp",
     "images/templates/orchid-amplop/gallery-6.webp"
   ],
+  "previewOnlySourceGallery": {
+    "sourceModule": {
+      "archiveFile": "Chorlove/Web invitations/_next/static/chunks/0d2h69c7a3snv.js",
+      "moduleId": "437202",
+      "export": "DEFAULT_PREVIEW_GALLERY_IMAGES"
+    },
+    "archiveFiles": [
+      "Chorlove/Web invitations/images/templates/orchid-amplop/gallery-2.webp",
+      "Chorlove/Web invitations/images/templates/orchid-amplop/gallery-1.webp",
+      "Chorlove/Web invitations/images/templates/orchid-amplop/gallery-3.webp",
+      "Chorlove/Web invitations/images/templates/orchid-amplop/gallery-6.webp",
+      "Chorlove/Web invitations/images/templates/orchid-amplop/gallery-4.webp",
+      "Chorlove/Web invitations/images/templates/orchid-amplop/gallery-5.webp"
+    ],
+    "servedFiles": [
+      "/templates/chorlove/orchid-amplop/assets/gallery-2.webp",
+      "/templates/chorlove/orchid-amplop/assets/gallery-1.webp",
+      "/templates/chorlove/orchid-amplop/assets/gallery-3.webp",
+      "/templates/chorlove/orchid-amplop/assets/gallery-6.webp",
+      "/templates/chorlove/orchid-amplop/assets/gallery-4.webp",
+      "/templates/chorlove/orchid-amplop/assets/gallery-5.webp"
+    ],
+    "behavior": "Use only in preview when no creator gallery photos exist; creator photos take precedence and public invitations never receive these source sample images.",
+    "sha256": [
+      "bcfd6989e53e220164e8d39368a848eed1185c07af73f934c81181af2a690d45",
+      "8578f6d5f3c2ddc1759c5116dfb4b68cd47f86ea700bfa3777a75fb916734a0b",
+      "c747d5f2c007ec78d46196fcbf157da871fd4bebd9f0a07863087e9a5787e320",
+      "35c81b38de8fb85f182b1c1c6149bf9926b2a55c10e845f617fc87605ec63e11",
+      "c3d590110524cb7b0148c08aa1543d569f16f54b4672d802bebcf778776df558",
+      "bb3c25700cc2aa81a40c46bb20c22cd13403d3e9bcf196c175a94fb7b49c8a2e"
+    ]
+  },
   "status": "Source snapshot and archive artwork preserved; missing optimized divider rendition and Cyrillic font subset recovered from observed Chorlove source assets; adapter integration and release verification in progress.",
   "missingSourceAssets": [
     "images/green-gold/vertical-line.png"

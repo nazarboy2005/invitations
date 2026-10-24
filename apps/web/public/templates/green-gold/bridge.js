@@ -14,6 +14,9 @@
   let timer;
   let sourceMotion;
   let sourceMotionInitialized = false;
+  const sourcePreviewGallery = [2, 1, 3, 6, 4, 5].map((number) => ({
+    src: `/templates/chorlove/orchid-amplop/assets/gallery-${number}.webp`,
+  }));
   const $ = (selector, base = root) => base.querySelector(selector);
   const tx = (node, value) => { if (node) node.textContent = value == null ? "" : String(value); };
   const hide = (node, value) => { if (node) node.hidden = Boolean(value); };
@@ -41,7 +44,7 @@
     tx(monthYear, [date.month, date.year].filter(Boolean).join(" "));
     const dayGrid = grids[1];
     if (dayGrid && Number(date.monthNumber) >= 1 && Number(date.monthNumber) <= 12 && Number(date.year)) {
-      const y = Number(date.year), m = Number(date.monthNumber) - 1, offset = (new Date(Date.UTC(y,m,1).getUTCDay()+6)) % 7, count = new Date(Date.UTC(y,m+1,0)).getUTCDate();
+      const y = Number(date.year), m = Number(date.monthNumber) - 1, offset = (new Date(Date.UTC(y,m,1)).getUTCDay()+6) % 7, count = new Date(Date.UTC(y,m+1,0)).getUTCDate();
       dayGrid.replaceChildren(...Array.from({length: Math.ceil((offset+count)/7)*7}, (_,i) => {
         const cell = document.createElement("div"); cell.className = "relative flex justify-center items-center h-4 text-xs";
         const day = i-offset+1;
@@ -114,17 +117,21 @@
       sourceMotion = window.GreenGoldSourceMotion.install(root, p);
       sourceMotionInitialized = true;
     } else {
-      root.dispatchEvent(new Event("gg:reduced-motion-updated"));
+      sourceMotion?.setReducedMotion(Boolean(p.reducedMotion));
       sourceMotion?.updateWishes();
     }
   }
   function renderGallery(section, gallery, preview, c) {
     if (!section) return;
+    const hasCreatorImages = gallery.some((item) => item?.src);
+    const visibleGallery = preview && !hasCreatorImages
+      ? sourcePreviewGallery.map((item, index) => ({ ...item, alt: `${c.photo} ${index + 1}` }))
+      : gallery;
     const grids = [...section.querySelectorAll(".grid")];
     if (!grids.length) return;
     grids.forEach((grid) => {
       [...grid.querySelectorAll("button")].forEach((button, index) => {
-        const item = gallery[index];
+        const item = visibleGallery[index];
         button.replaceChildren();
         button.classList.remove("gg-gallery-empty");
         button.disabled = false;
@@ -136,7 +143,7 @@
           const img = document.createElement("img");
           img.src = item.src;
           img.alt = alt;
-          img.className = "h-full w-full object-cover";
+          img.className = "h-full w-full object-cover transition duration-500 hover:scale-105";
           button.append(img);
           button.setAttribute("aria-label", alt);
           button.onclick = () => {
@@ -146,12 +153,12 @@
             dialog.setAttribute("role", "dialog");
             dialog.setAttribute("aria-modal", "true");
             dialog.tabIndex = -1;
-            dialog.innerHTML = '<button type="button" data-gg-close></button><img alt="">';
+            dialog.innerHTML = '<button class="gg-lightbox-close" type="button" data-gg-close><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 6-12 12"></path><path d="m6 6 12 12"></path></svg></button><img alt="">';
             const dialogImage = dialog.querySelector("img");
             dialogImage.src = item.src;
             dialogImage.alt = alt;
+            dialogImage.className = "max-h-[88dvh] max-w-[94vw] rounded-2xl object-contain shadow-2xl";
             const close = dialog.querySelector("[data-gg-close]");
-            close.textContent = c.close;
             close.setAttribute("aria-label", c.close);
             let closing = false;
             const finish = () => {
@@ -185,15 +192,44 @@
         }
       });
     });
-    hide(section, !preview && !gallery.some((item) => item.src));
+    hide(section, !preview && !hasCreatorImages);
   }
-  async function renderWishes(section,wishes,p){
-    if(!section)return;const title=section.querySelector("h2");if(title)title.textContent=(copy[p.locale]||copy["uz-Latn"]).wish;
-    const cards=section.querySelectorAll(".flex.items-start.gap-3");cards.forEach(n=>n.remove());
-    const list=section.querySelector(".h-\\[42dvh\\]");if(!list)return;
-    const values=p.preview?wishes:await fetch(`/api/public/invitations/${encodeURIComponent(p.invitationId||"")}/wishes`,{cache:"no-store"}).then(r=>r.ok?r.json():{wishes:[]}).then(r=>r.wishes||[]).catch(()=>[]);
-    values.forEach(w=>{const card=document.createElement("div");card.className="flex items-start gap-3 text-slate-900";const initial=document.createElement("span"),text=document.createElement("div"),name=document.createElement("strong"),message=document.createElement("p");initial.className="rounded-full border p-2";initial.textContent=(w.name||" ").slice(0,1);name.textContent=w.name||"";message.textContent=w.text||w.message||"";text.append(name,message);card.append(initial,text);list.append(card);});
-    hide(section,!p.preview&&!p.data?.wishesEnabled);
+  async function renderWishes(section, wishes, p) {
+    if (!section) return;
+    const title = section.querySelector("h2");
+    if (title) title.textContent = (copy[p.locale] || copy["uz-Latn"]).wish;
+    section.querySelectorAll(".flex.items-start.gap-3").forEach((node) => node.remove());
+    const list = section.querySelector(".space-y-3.py-1");
+    if (!list) return;
+    const values = p.preview
+      ? wishes
+      : await fetch(`/api/public/invitations/${encodeURIComponent(p.invitationId || "")}/wishes`, { cache: "no-store" })
+          .then((response) => response.ok ? response.json() : { wishes: [] })
+          .then((result) => result.wishes || [])
+          .catch(() => []);
+    const visibleWishes = values.length >= 4 ? [...values, ...values] : values;
+    for (const wish of visibleWishes) {
+      const card = document.createElement("div");
+      card.className = "jsx-2453727969 flex items-start gap-3";
+      const initial = document.createElement("div");
+      initial.className = "jsx-2453727969 mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full border text-[11px] font-black uppercase";
+      initial.style.cssText = "background-color:rgba(212, 175, 55, 0.12);border-color:rgba(212, 175, 55, 0.22);color:#d4af37";
+      initial.textContent = (wish.name || " ").slice(0, 1);
+      const content = document.createElement("div");
+      content.className = "jsx-2453727969 min-w-0 flex-1";
+      const name = document.createElement("p");
+      name.className = "jsx-2453727969 wrap-break-word text-[12px] font-black";
+      name.style.color = "#d4af37";
+      name.textContent = wish.name || "";
+      const message = document.createElement("p");
+      message.className = "jsx-2453727969 wrap-break-word mt-0 text-[11px] leading-4";
+      message.style.color = "#475569";
+      message.textContent = wish.text || wish.message || "";
+      content.append(name, message);
+      card.append(initial, content);
+      list.append(card);
+    }
+    hide(section, !p.preview && !p.data?.wishesEnabled);
   }
   function installLocales(p,c){let nav=$("[data-gg-languages]");if(!nav){nav=document.createElement("nav");nav.dataset.ggLanguages="";nav.className="gg-language-picker";root.append(nav);}nav.setAttribute("aria-label",c.language);nav.replaceChildren();for(const locale of p.enabledLocales||["uz-Latn","uz-Cyrl","en","ru"]){const button=document.createElement("button");button.type="button";button.textContent=({"uz-Latn":"Uz","uz-Cyrl":"\u040e\u0437",en:"En",ru:"Ru"})[locale]||locale;button.setAttribute("aria-pressed",String(locale===p.locale));button.onclick=()=>parent.postMessage({type:`${id}:language`,locale},location.origin);nav.append(button);}}
   function wireForm(section, kind) {
