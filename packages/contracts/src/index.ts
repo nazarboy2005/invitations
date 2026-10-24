@@ -1416,7 +1416,7 @@ export const TEMPLATES: TemplateDefinition[] = [
     name: "Orchid Amplop",
     description:
       "O‘rmon manzarasi, nafis gul ramzi va ochiladigan konvertli nikoh taklifnomasi.",
-    previewImage: "/templates/chorlove/orchid-amplop/assets/hero-forest.webp",
+    previewImage: "/templates/chorlove/orchid-amplop/assets/catalog-opening.png",
     previewEventType: "wedding",
     categoryIds: ["wedding"],
     supportedEventTypes: ["wedding"],
@@ -1586,7 +1586,7 @@ export const TEMPLATES: TemplateDefinition[] = [
     name: "Orchid Amplop",
     description:
       "O‘rmon manzarasi, nafis gul ramzi va ochiladigan konvertli nikoh taklifnomasi.",
-    previewImage: "/templates/chorlove/orchid-amplop/assets/hero-forest.webp",
+    previewImage: "/templates/chorlove/orchid-amplop/assets/catalog-opening.png",
     previewEventType: "wedding",
     categoryIds: ["wedding"],
     supportedEventTypes: ["wedding"],
