@@ -77,13 +77,30 @@
   ID, distinct from Invitate Palov (`invitate-palov`), and support `osh` only.
 - The isolated package keeps the captured Chorlove component styling, local
   Lora/Playfair fonts and Palov illustration, with the shared-contract bridge
-  and canonical 480×1040 fixture-based catalog opening. Its focused suite passes
-  4/4, the bridge syntax check passes, and web typecheck passes.
+  and canonical 480×1040 fixture-based catalog opening. Browser captures of the
+  source and package opening were compared at mobile and desktop sizes, including
+  normal and reduced motion; the cover was refreshed after the Osh title fixture
+  was added. Its focused suite passes 4/4, bridge syntax and web typecheck pass.
 - Additive migration `0135_register_chorlove_palov.sql` was applied directly
   under the migration advisory lock after confirming no existing `palov` row
   and tracker state through `0134`. The database confirms 15,000,000 UZS,
   category/event `osh`/`osh`, and `published=false`. Keep it private until
-  creator save/publish/reopen and public route/API integration checks pass.
+  the coordinated publication step. The local integration suite verifies
+  creator draft save/reopen, the private publish guard, and public route/view/RSVP
+  behavior with a disposable invitation. The
+  source's optional Instagram contact link maps through the backwards-compatible
+  optional `contacts.instagramUrl` field and creator input. Old invitations parse
+  with an empty Instagram value. The source has no native to'yona section; when
+  enabled, the shared gift receipt-upload adapter renders its platform section
+  before the footer rather than inserting into a source panel.
+- Local integration check (2026-10-23): `/api/catalog` returns 200 and omits
+  private `palov`; the package renderer and 480×1040 cover both return 200.
+  The opt-in Palov integration test creates a temporary creator session, saves
+  and reopens an existing private draft, confirms publish returns
+  `TEMPLATE_UNAVAILABLE`, then marks only its disposable invitation row
+  published to exercise the public page, view endpoint and RSVP endpoint on
+  localhost. Teardown removes the test invitation, session and user; the
+  catalog template row remains unpublished.
 
 ## Invitate Nahorgi Osh source registration (2026-10-23)
 

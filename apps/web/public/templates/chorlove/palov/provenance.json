@@ -1,0 +1,162 @@
+{
+  "templateId": "palov",
+  "provider": "Chorlove",
+  "capture": "Invitations - this folder will be removed from production/Chorlove/Web invitations/templates/palov/preview-frame.html",
+  "captureSha256": "c10ef41d93f785d81fe8176d6040160bfbf832b7d01f082224932183bd920ee6",
+  "componentChunk": "Invitations - this folder will be removed from production/Chorlove/Web invitations/_next/static/chunks/11~zi79p5fltu.js",
+  "componentChunkSha256": "05765da53e7ff4363f684be2ebcc35b671df705136339e985e297ff91ff458df",
+  "componentModule": "924687",
+  "defaultsChunk": "Invitations - this folder will be removed from production/Chorlove/Web invitations/_next/static/chunks/0d2h69c7a3snv.js",
+  "defaultDataModule": "71986",
+  "designStylesSha256": "09c287841b1ef87f6e62629ac3e325532ac2779897c2c1685eaa58e933dcbea8",
+  "designAsset": {
+    "source": "Web invitations/images/palov/palov.png",
+    "package": "assets/palov.png",
+    "bytes": 344148,
+    "sha256": "6ff6955eb9f53d994f4f9052f3c000201a2e0a364a16c295990f5224399f8077"
+  },
+  "catalogArtworkSource": {
+    "url": "https://payment.chorlove.uz/media-assets/88595b77-9428-4695-aff7-0f31eedf5fe7/file",
+    "bytes": 175021,
+    "sha256": "89A8DC1AA17CD8CCF69B1EF9D1046C09AC5CB1ED4427DE53CD3CDDB62852939D",
+    "format": "JPEG",
+    "dimensions": [
+      778,
+      1686
+    ],
+    "packaged": false,
+    "reason": "This official opening render contains captured demo names and event details; the production catalog art must be rendered by the isolated template with the canonical preview fixture."
+  },
+  "catalogOpening": {
+    "file": "catalog-opening.png",
+    "dimensions": "480x1040",
+    "bytes": 170695,
+    "sha256": "E357099DDF3AD0DF4124BBAE17D80C0F98F5F6376A9895D677F019BDB558A96A",
+    "renderer": "apps/web/public/templates/chorlove/palov/index.html",
+    "fixture": "apps/web/src/modules/catalog/preview-sample.json",
+    "eventType": "osh"
+  },
+  "fonts": {
+    "sourceImport": "Lora 500/600/700 and italic 500/600; Playfair Display 500/600/700 and italic 500",
+    "localFiles": [
+      {
+        "file": "font-01.woff2",
+        "bytes": 27348,
+        "sha256": "b67b0f50d1d03fc36a1b3ded113de24a0ab71b838cc27e493d4f62cea00be99b"
+      },
+      {
+        "file": "font-02.woff2",
+        "bytes": 22972,
+        "sha256": "405b30a5bea8b70446e08e40e5d70b7bf5262ef3c4a9e4f3e4672e079a01a4cd"
+      },
+      {
+        "file": "font-03.woff2",
+        "bytes": 31364,
+        "sha256": "49e796554ee2343f0d7a7f111d5dbc64fc5da47ad7168734e9a2d1f302ef3245"
+      },
+      {
+        "file": "font-04.woff2",
+        "bytes": 18892,
+        "sha256": "db2a8b067f0fd836ae1e5155575a1afdb93e7ebc07b4680c4c2438e69e37515f"
+      },
+      {
+        "file": "font-05.woff2",
+        "bytes": 9344,
+        "sha256": "3acfc1db6992c092405884cf12763e512e21229cc040a1eea94549869006736a"
+      },
+      {
+        "file": "font-06.woff2",
+        "bytes": 21128,
+        "sha256": "45f989df83f3a9f40007d2ecdea98bff248c8767a1a0bbe60e94fb37b605ecee"
+      },
+      {
+        "file": "font-07.woff2",
+        "bytes": 40772,
+        "sha256": "d824d807d4d832d12c87932d0b8ec1314dcfd502157a56dee6bb04cf8a3768ae"
+      },
+      {
+        "file": "font-08.woff2",
+        "bytes": 23636,
+        "sha256": "0e523e4bc3c6308f002a3208ea2990cb4f64282d4fbb67c12f5726d13b66eef6"
+      },
+      {
+        "file": "font-09.woff2",
+        "bytes": 21232,
+        "sha256": "c57d9ca3bd42e6bc093badc7744dd2059a78f66a3a4dc6ca40574480c870f553"
+      },
+      {
+        "file": "font-10.woff2",
+        "bytes": 29240,
+        "sha256": "a8c4cb778ab6202d22bdea2ccc8d7e7caf802cfe0a7ce37df7b212f82341468f"
+      },
+      {
+        "file": "font-11.woff2",
+        "bytes": 17248,
+        "sha256": "2df52199eac56e2ec7a735e609bb151bdab79422c3e73948f4b6580c66bb5a50"
+      },
+      {
+        "file": "font-12.woff2",
+        "bytes": 8992,
+        "sha256": "98c22de85f6e83bcd6ae1a443e12e256fbc8de7142bec4f76b059f8ff9c2797e"
+      },
+      {
+        "file": "font-13.woff2",
+        "bytes": 20088,
+        "sha256": "2a2d9c22c9863086a23f5013fede1428585321812b25f2662542c39d02967c5e"
+      },
+      {
+        "file": "font-14.woff2",
+        "bytes": 37788,
+        "sha256": "ddb8c66035104e233fc024669183aad3738b6daa16deee2ebb1241bd0f98ace1"
+      },
+      {
+        "file": "font-15.woff2",
+        "bytes": 13308,
+        "sha256": "279ea0009907db2bb7c690a94b67fc3a1e535ea78c54b6869f3128113956e11f"
+      },
+      {
+        "file": "font-16.woff2",
+        "bytes": 5948,
+        "sha256": "6194a692d041c481a33b57fa633eaa519b7bdb15f25d3b4fbcfe7fe17b81891f"
+      },
+      {
+        "file": "font-17.woff2",
+        "bytes": 14028,
+        "sha256": "224ec72e732a9ccf564a90d056fc637fc29ac0be8209b0fa1a16730430d6cf02"
+      },
+      {
+        "file": "font-18.woff2",
+        "bytes": 23076,
+        "sha256": "8f074624e50ab805878b26ab5f3e0fa360043d546c35b043947e96a5c7071970"
+      },
+      {
+        "file": "font-19.woff2",
+        "bytes": 21152,
+        "sha256": "c108681cba6a9820bff52f4a1a4a1d9edf356b347bd79b7c61e916028e8a8b54"
+      },
+      {
+        "file": "font-20.woff2",
+        "bytes": 9112,
+        "sha256": "ef6446229b59773e671021650ef3882cf35806dae723ce047de87c0a6633039a"
+      },
+      {
+        "file": "font-21.woff2",
+        "bytes": 21140,
+        "sha256": "42898ad49a6b23f32b109243e1df596edf831015ed685f429e4dafbb181d599d"
+      },
+      {
+        "file": "font-22.woff2",
+        "bytes": 38404,
+        "sha256": "e0c764a8e9e1cce92163c55bac4b2ad6cd4cf8c696ce2289ab5c41565e65b7e2"
+      }
+    ]
+  },
+  "runtimeExclusions": [
+    "Chorlove Next/Turbopack runtime",
+    "site-wide analytics and telemetry",
+    "provider app React hooks and API clients",
+    "captured music URL",
+    "captured invitation names, date, venue, contacts and message",
+    "provider watermark"
+  ]
+}

@@ -220,7 +220,7 @@ export const invitationSchema = z
     contacts: z.preprocess(
       (value) => {
         if (!Array.isArray(value)) return value;
-        const firstValue = (type: "phone" | "telegram") =>
+        const firstValue = (type: "phone" | "telegram" | "instagram") =>
           value.find(
             (contact) =>
               typeof contact?.value === "string" &&
@@ -230,9 +230,14 @@ export const invitationSchema = z
         return {
           phoneNumber: firstValue("phone"),
           telegramUsername: firstValue("telegram"),
+          instagramUrl: firstValue("instagram"),
         };
       },
-      z.object({ phoneNumber: short, telegramUsername: short }),
+      z.object({
+        phoneNumber: short,
+        telegramUsername: short,
+        instagramUrl: short.default(""),
+      }),
     ),
     rsvp: z.object({
       enabled: z.boolean(),
@@ -1946,7 +1951,7 @@ export function createInvitation(
       cardNumber: "",
       cardHolder: "",
     },
-    contacts: { phoneNumber: "", telegramUsername: "" },
+    contacts: { phoneNumber: "", telegramUsername: "", instagramUrl: "" },
     rsvp: { enabled: true, deadline: "", maxPartySize: 5 },
     wishes: { enabled: true, requireApproval: true },
     dressCode: {

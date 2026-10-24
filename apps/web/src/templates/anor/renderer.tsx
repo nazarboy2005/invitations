@@ -60,7 +60,7 @@ export type LegacyData = {
   contacts: Array<{
     label: string;
     value: string;
-    type: "phone" | "telegram";
+    type: "phone" | "telegram" | "instagram";
     href: string;
   }>;
   rsvp: Invitation["rsvp"];
@@ -298,6 +298,18 @@ export function makeLegacyData(
                 : `@${invitation.contacts.telegramUsername.trim()}`,
               type: "telegram" as const,
               href: `https://t.me/${invitation.contacts.telegramUsername.trim().replace(/^@/, "")}`,
+            },
+          ]
+        : []),
+      ...(invitation.contacts.instagramUrl.trim()
+        ? [
+            {
+              label: "Instagram",
+              value: invitation.contacts.instagramUrl.trim(),
+              type: "instagram" as const,
+              href: /^https?:\/\//i.test(invitation.contacts.instagramUrl.trim())
+                ? invitation.contacts.instagramUrl.trim()
+                : `https://www.instagram.com/${encodeURIComponent(invitation.contacts.instagramUrl.trim().replace(/^@/, ""))}/`,
             },
           ]
         : []),

@@ -851,6 +851,12 @@
     },
     "osh": {
       "personIndex": 0,
+      "title": {
+        "uz-Latn": "Nahorgi osh",
+        "uz-Cyrl": "Наҳорги ош",
+        "en": "Morning osh",
+        "ru": "Утренний ош"
+      },
       "eventLabel": {
         "uz-Latn": "Nahorgi osh",
         "uz-Cyrl": "Наҳорги ош",

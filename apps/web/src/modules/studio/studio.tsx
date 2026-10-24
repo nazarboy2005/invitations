@@ -2570,6 +2570,23 @@ export function Studio({
                       }
                     />
                   </Field>
+                  <Field label="Instagram">
+                    <input
+                      type="text"
+                      autoComplete="url"
+                      value={invitation.contacts.instagramUrl}
+                      maxLength={300}
+                      placeholder="@username yoki instagram.com/username"
+                      onChange={(event) =>
+                        update({
+                          contacts: {
+                            ...invitation.contacts,
+                            instagramUrl: event.target.value,
+                          },
+                        })
+                      }
+                    />
+                  </Field>
                 </div>
               </div>
             )}
