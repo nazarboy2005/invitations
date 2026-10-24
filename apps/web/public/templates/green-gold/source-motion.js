@@ -16,27 +16,40 @@
     if (!root || root.dataset.ggMotionInstalled === "true") return;
     root.dataset.ggMotionInstalled = "true";
 
-    const sections = [...root.querySelectorAll(":scope > section")];
+    const sections = [...root.querySelectorAll("section")];
     const reducedQuery = matchMedia("(prefers-reduced-motion: reduce)");
+    let reducedMotionPreference = Boolean(payload?.reducedMotion);
     const animations = new Set();
     const revealTargets = new Set();
     let observer;
 
-    const reduced = () => Boolean(payload?.reducedMotion || reducedQuery.matches);
+    const reduced = () => Boolean(reducedMotionPreference || reducedQuery.matches);
     const track = (element, animation) => {
       if (!element || reduced()) return null;
       const handle = element.animate(animation.frames, {
         duration: animation.duration,
         delay: animation.delay || 0,
         easing: animation.easing || "ease-out",
-        fill: "both",
+        fill: animation.fill ?? "both",
         iterations: animation.iterations || 1,
       });
       animations.add(handle);
       handle.onfinish = () => {
         if (animation.iterations === Infinity) return;
+        try {
+          handle.commitStyles();
+        } catch {
+          const finalFrame = animation.frames[animation.frames.length - 1] || {};
+          for (const [property, value] of Object.entries(finalFrame)) {
+            if (property !== "offset" && property !== "easing" && property !== "composite") {
+              element.style[property] = String(value);
+            }
+          }
+        }
+        handle.cancel();
         animations.delete(handle);
       };
+      handle.oncancel = () => animations.delete(handle);
       return handle;
     };
 
@@ -78,27 +91,6 @@
       }
     }
 
-    const observed = [...revealTargets];
-    if (!reduced() && observed.length && "IntersectionObserver" in window) {
-      observer = new IntersectionObserver((entries) => {
-        for (const entry of entries) {
-          const state = [...revealTargets].find((item) => item.element === entry.target);
-          if (!state) continue;
-          const visible = entry.isIntersecting && entry.intersectionRatio >= state.amount;
-          if (visible !== state.entered) show(state, visible);
-        }
-      }, {
-        root,
-        threshold: [...new Set([0, ...observed.map((item) => item.amount)])].sort((a, b) => a - b),
-      });
-      for (const state of revealTargets) observer.observe(state.element);
-    } else {
-      for (const state of revealTargets) {
-        state.element.style.opacity = "1";
-        state.element.style.transform = "none";
-      }
-    }
-
     // The cover's staggered entrance and pulsing down indicator.
     const intro = sections[0]?.querySelector(".relative.z-20.flex.flex-col.items-center.text-center.space-y-8");
     const introParts = intro ? [...intro.children] : [];
@@ -121,14 +113,13 @@
       track(introArrow, { frames: [{ transform: "translateY(0px)" }, { transform: "translateY(10px)" }, { transform: "translateY(0px)" }], duration: 2000, iterations: Infinity, easing: "ease-in-out" });
     }
 
-    // Source whileInView declarations for the named couple, story and date sections.
+    // Source whileInView declarations for the named couple, verse, story and date sections.
     const coupleContent = sections[1]?.querySelector(".relative.z-10.text-center.px-8.space-y-8");
     if (coupleContent) {
       reveal(coupleContent.children[0], "translateY(10px)");
       reveal(coupleContent.children[1], "scale(.95)", { duration: 800, delay: 300 });
     }
-    const storyCopy = sections[2]?.querySelector(".relative.z-20.text-center.space-y-10.max-w-sm");
-    reveal(storyCopy?.querySelector("p"), "scale(.9)", { duration: 800 });
+    reveal(sections[2]?.querySelector("div.relative.z-20"), "scale(.9)", { duration: 1000 });
     reveal(sections[3]?.querySelector("p"), "scale(.9)", { duration: 800 });
 
     const dateContent = sections[4]?.querySelector(".relative.z-10.flex.flex-col.items-center.text-center.space-y-4.px-6");
@@ -162,23 +153,45 @@
 
     const rsvp = sections[11];
     reveal(rsvp?.querySelector(".text-center"), "translateY(15px)", { duration: 600, amount: 0.2 });
-    reveal(rsvp?.querySelector(".mt-6"), "translateY(15px)", { duration: 600, amount: 0.2 });
+
+    const observed = [...revealTargets];
+    if (!reduced() && observed.length && "IntersectionObserver" in window) {
+      observer = new IntersectionObserver((entries) => {
+        for (const entry of entries) {
+          const state = [...revealTargets].find((item) => item.element === entry.target);
+          if (!state) continue;
+          const visible = entry.isIntersecting && entry.intersectionRatio >= state.amount;
+          if (visible !== state.entered) show(state, visible);
+        }
+      }, {
+        root,
+        threshold: [...new Set([0, ...observed.map((item) => item.amount)])].sort((a, b) => a - b),
+      });
+      for (const state of revealTargets) observer.observe(state.element);
+    } else {
+      for (const state of revealTargets) {
+        state.element.style.opacity = "1";
+        state.element.style.transform = "none";
+      }
+    }
 
     // The source creates 30 randomized starbursts with these exact ranges/keyframes.
     const stars = root.firstElementChild?.children || [];
     for (const star of stars) {
       const random = Math.random;
+      const delay = 10 * random();
+      const duration = 3 + 4 * random();
+      const size = 8 + 12 * random();
       star.style.left = `${100 * random()}%`;
       star.style.top = `${100 * random()}%`;
-      const size = 8 + 12 * random();
       star.style.width = `${size}px`;
       star.style.height = `${size}px`;
       if (reduced()) {
         star.style.opacity = "0";
         star.style.transform = "scale(0)";
       } else {
-        const delay = 10 * random();
-        const duration = 3 + 4 * random();
+        star.style.opacity = "0";
+        star.style.transform = "scale(0)";
         track(star, {
           frames: [
             { opacity: 0, transform: "scale(.5)" },
@@ -191,6 +204,7 @@
           delay: delay * 1000,
           iterations: Infinity,
           easing: "ease-in-out",
+          fill: "none",
         });
       }
     }
@@ -201,7 +215,8 @@
       const [direction, seconds] = rotations[index] || [1, 40];
       const target = image.parentElement;
       track(target, {
-        frames: [{ transform: "rotate(0deg)" }, { transform: `rotate(${direction * 360}deg)` }],
+        // Animate the individual rotate property so source centering transforms remain intact.
+        frames: [{ rotate: "0deg" }, { rotate: `${direction * 360}deg` }],
         duration: seconds * 1000,
         iterations: Infinity,
         easing: "linear",
@@ -211,7 +226,10 @@
     function updateWishes() {
       const list = sections[10]?.querySelector(".space-y-3.py-1");
       if (!list) return;
-      list.getAnimations().forEach((animation) => animation.cancel());
+      list.getAnimations().forEach((animation) => {
+        animation.cancel();
+        animations.delete(animation);
+      });
       if (reduced() || list.children.length <= 3) {
         list.style.transform = "none";
         return;
@@ -245,6 +263,11 @@
       }
     }
 
+    function setReducedMotion(value) {
+      reducedMotionPreference = Boolean(value);
+      updateReducedMotion();
+    }
+
     reducedQuery.addEventListener?.("change", updateReducedMotion);
     root.addEventListener("gg:wishes-updated", updateWishes);
     root.addEventListener("gg:reduced-motion-updated", updateReducedMotion);
@@ -253,15 +276,16 @@
     return {
       reveal,
       updateWishes,
+      setReducedMotion,
       animateGallery(dialog, image) {
         if (reduced()) return;
-        track(dialog, { frames: [{ opacity: 0 }, { opacity: 1 }], duration: 200, easing: "ease-out" });
-        track(image, { frames: [{ opacity: 0, transform: "scale(.96)" }, { opacity: 1, transform: "scale(1)" }], duration: 250, easing: "ease-out" });
+        track(dialog, { frames: [{ opacity: 0 }, { opacity: 1 }], duration: 300, easing: "ease-out" });
+        track(image, { frames: [{ opacity: 0, transform: "scale(.96)" }, { opacity: 1, transform: "scale(1)" }], duration: 300, easing: "ease-out" });
       },
       closeGallery(dialog, onFinish) {
         if (reduced()) { onFinish(); return; }
-        const animation = track(dialog, { frames: [{ opacity: 1 }, { opacity: 0 }], duration: 180, easing: "ease-in" });
-        if (animation) animation.onfinish = onFinish;
+        const animation = track(dialog, { frames: [{ opacity: 1 }, { opacity: 0 }], duration: 300, easing: "ease-in" });
+        if (animation) animation.onfinish = () => { animations.delete(animation); onFinish(); };
         else onFinish();
       },
     };
