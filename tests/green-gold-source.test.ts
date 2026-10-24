@@ -50,16 +50,16 @@ test("Green Gold stages exact design assets and keeps source gallery photos prev
     const original = await readFile(new URL(relativeArchiveFile, archive));
     assert.deepEqual(bytes, original, asset.file);
   }
-  assert.deepEqual(manifest.missingSourceAssets, ["images/green-gold/vertical-line.png"]);
+  assert.deepEqual(manifest.missingSourceAssets, []);
   const recovered = manifest.sourceAssetsFromLive.find((asset: { file: string }) =>
-    asset.file === "assets/vertical-line.webp",
+    asset.file === "assets/vertical-line.png",
   );
   assert.ok(recovered);
   const recoveredBytes = await readFile(new URL(recovered.file, root));
   assert.equal(recoveredBytes.length, recovered.bytes);
   assert.equal(createHash("sha256").update(recoveredBytes).digest("hex"), recovered.sha256);
-  assert.match(recovered.sourceUrl, /_next\/image/);
-  assert.equal(recovered.transformation.includes("original PNG was absent from archive"), true);
+  assert.equal(recovered.sourceUrl, "https://chorlove.uz/images/green-gold/vertical-line.png");
+  assert.match(recovered.transformation, /exact original PNG response/);
   for (const observed of manifest.sourceAssetsFromLive) {
     const bytes = await readFile(new URL(observed.file, root));
     assert.equal(bytes.length, observed.bytes, observed.file);
@@ -209,7 +209,7 @@ test("Green Gold runnable adapter isolates the source sections from site runtime
   const css = await readFile(new URL("adapter.css", root), "utf8");
   assert.equal((html.match(/<section\b/g) ?? []).length, 13);
   assert.match(html, /data-chorlove-template="green-gold"/);
-  assert.match(html, /assets\/vertical-line\.webp/);
+  assert.match(html, /assets\/vertical-line\.png/);
   assert.match(html, /background-image:url\(\/templates\/green-gold\/assets\/bg\.webp\)/);
   assert.doesNotMatch(html, /url\(\/images\/green-gold\//);
   assert.doesNotMatch(html, /0m97bbjp\.vgzu\.js|__next_f|chorlove\.uz|@chorlove|Xadicha|Abdurahmonovlar|Toshkent viloyati|Azizbek/);

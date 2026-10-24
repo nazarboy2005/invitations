@@ -8,9 +8,8 @@ The source component's six default gallery photos are shown only as ephemeral
 preview fallbacks when no creator photos exist; creator uploads replace them,
 and public invitations never receive these sample photos. Source CSS chunks
 remain preserved under `source/styles/` for fidelity review. Five source artwork files are
-byte-identical in `assets/`; the source's `vertical-line.png` is absent, so its
-observed optimized WebP rendition is packaged with that limitation recorded in
-`source-assets.provenance.json`. A Cyrillic Playfair Display subset and shared
+byte-identical in `assets/`; the exact original `vertical-line.png` was recovered
+from its source URL and is recorded in `source-assets.provenance.json`. A Cyrillic Playfair Display subset and shared
 CSS dependencies are served from local Chorlove media.
 
 ## Recovered source motion
@@ -55,9 +54,8 @@ finish, section reveal on scroll, and reduced-motion state without runtime
 errors. The exact source default gallery order is restored in previews using
 the captured shared gallery image files; creator uploads take precedence and an
 empty public gallery stays hidden. Complete public/creator integration remains
-an open release check. The source archive does not contain `vertical-line.png`;
-the observed optimized WebP rendition is packaged and recorded as a source
-gap.
+an open release check. The archive omitted `vertical-line.png`; the exact
+original PNG has been recovered from Chorlove and packaged without conversion.
 
 ## Shared contract adapter
 

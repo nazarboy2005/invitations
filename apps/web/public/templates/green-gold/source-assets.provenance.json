@@ -79,10 +79,8 @@
       "bb3c25700cc2aa81a40c46bb20c22cd13403d3e9bcf196c175a94fb7b49c8a2e"
     ]
   },
-  "status": "Source snapshot and archive artwork preserved; missing optimized divider rendition and Cyrillic font subset recovered from observed Chorlove source assets; adapter integration and release verification in progress.",
-  "missingSourceAssets": [
-    "images/green-gold/vertical-line.png"
-  ],
+  "status": "Source snapshot, exact original artwork, and Cyrillic font subset are packaged; adapter integration and release verification in progress.",
+  "missingSourceAssets": [],
   "capturedStylesheets": [
     {
       "file": "source/styles/00sc_9lpb3zcn.css",
@@ -99,11 +97,11 @@
   ],
   "sourceAssetsFromLive": [
     {
-      "file": "assets/vertical-line.webp",
-      "bytes": 29432,
-      "sha256": "6ade2000f94353d5d7442da880a64b444982242fd012fa2a8098a21f964b5080",
-      "sourceUrl": "https://chorlove.uz/_next/image?url=%2Fimages%2Fgreen-gold%2Fvertical-line.png&w=1920&q=75",
-      "transformation": "Observed Next.js optimized WebP rendition (w=1920, q=75); original PNG was absent from archive."
+      "file": "assets/vertical-line.png",
+      "bytes": 79831,
+      "sha256": "77e2b4b35472df0d3496f4ef90c0820fe60fcb7c352658df9748fb36653e3efe",
+      "sourceUrl": "https://chorlove.uz/images/green-gold/vertical-line.png",
+      "transformation": "None; exact original PNG response. The archive capture omitted this referenced image."
     },
     {
       "file": "../chorlove/shared/_next/static/media/65c558afe41e89d6-s.113htgw8u-emy.woff2",
