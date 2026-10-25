@@ -1,0 +1,3 @@
+module.exports=[95591,a=>{"use strict";var b=a.i(3872);a.s(["default",0,function({reset:a}){return(0,b.jsxs)("main",{id:"main",className:"page-error",children:[(0,b.jsx)("h1",{children:"Sahifani ochib bo‘lmadi"}),(0,b.jsx)("p",{children:"Aloqani tekshiring va qayta urinib ko‘ring. Brauzerda saqlangan draft o‘chirilmaydi."}),(0,b.jsx)("button",{className:"button",onClick:a,children:"Qayta urinish"})]})}])}];
+
+//# sourceMappingURL=apps_web_src_app_error_tsx_1dn8_l6eb8tzs._.js.map

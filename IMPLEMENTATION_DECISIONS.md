@@ -1,5 +1,70 @@
 # Implementation decisions
 
+## Catalog navigation and curated covers (2026-10-25)
+
+- Match `/templates` to the homepage Visol brand, navigation links, mobile menu
+  and hide-down/reappear-up scroll behavior. Keep its background transparent,
+  including while scrolling, like the homepage; retain readable link/account colors.
+- Homepage shows only these published designs, in order: Anor, Bog‘i Eram,
+  Cloud Castle, Ganch, Kuzgi Chinor, Nahor, Yangi Uy, Shirin Bayram. Omit an
+  unavailable selection instead of substituting an unrequested design.
+- User authorized choosing better static covers from actual rendered template
+  scenes. Keep strong existing covers; replace weaker openings with settled
+  scenes, preserving source captures and original artwork. Shared cover selection
+  applies to home, catalog, detail-dialog posters and studio template choices.
+- Add preview-only `poster=1` capture mode: canonical sample content, one locale,
+  muted music and no app preview controls. Ignore draft input in this mode.
+  No saved/public invitation data or template animation changes are required.
+- Bog‘i Eram's selected cover must show the opened garden with both people's
+  names fully visible and opaque, after the name reveal completes.
+
+## Homepage occasions orbit (2026-10-25)
+
+- User approved replacing the occasion strip immediately after the hero with
+  the proposed scroll-driven drop/release/orbit section, before featured designs.
+- Follow-up approved: a drop falls into a visible light/champagne water surface,
+  makes ripples, rebounds on a liquid neck, separates and rounds into the central
+  pomegranate orb. Then release Nikoh to‘yi, Tug‘ilgan kun, Oilaviy tantana and
+  Unutilmas lahzalar, orbiting through a quarter turn while staying upright.
+  No extra category or video asset required.
+- Begin the sequence after the section fills the screen. Allow 1.6 extra viewports
+  for the water sequence and orbit, fully reversible, with no automatic spinning or scroll lock.
+  Phones use a tall oval and two-line labels; reduced motion/no JavaScript shows
+  the complete static arrangement, and short landscape screens use a compact grid.
+- Preserve the existing cinematic features and their timing.
+- Remove the reply phone and all its sample contents from “Eng yaqin insonlar /
+  Eng yaqinlaringiz bilan, birga.” Keep its copy, position and scroll timing unchanged.
+- User explicitly requires keeping the site fast. Use a deferred, dependency-free
+  single-pass WebGL effect with capped pixel budgets, no perpetual render loop,
+  no offscreen/background-tab drawing, and no GPU drawing after the HTML orbit
+  takes over. Keep a CSS fallback for unavailable/lost WebGL and skip the renderer
+  for reduced motion and short landscape layouts.
+- Latest approved refinement: replace the plain labels-only orbit with the user's
+  supplied photographic reference direction: four silk-framed scenes (bouquet/rings,
+  birthday cake, family table, sealed envelope), numbered serif captions, pearl
+  details, soft petals, fine layered orbit and a reflective burgundy centre.
+  Use “Tadbirlar / Unutilmas lahzalar” with the reference's short two-line copy,
+  superseding the earlier central “Bir taklif.” text. Preserve the water sequence.
+- Keep captions as real HTML and use four small transparent WebP cutouts.
+- Latest motion correction: desktop captions must follow each photograph's current
+  side, smoothly crossing around the image instead of jumping between fixed anchors.
+  Keep one readable caption throughout; fade its number/rule briefly at the poles
+  and subtly scale the photo when needed to clear the central jewel.
+- Phones must complete the same quarter-turn and occupy the next image's place,
+  superseding the earlier 20-degree limit. Keep phone captions below photographs.
+  Remove the “Scroll qiling” cue and its icon entirely.
+
+## Homepage three-step section (2026-10-25)
+
+- User approved replacing the standalone process block with a photographic
+  invitation scene inspired by their supplied reference: left-aligned serif
+  heading, pomegranate action, and three translucent numbered cards. Retain
+  “Katta kun sari. Uch kichik qadam.” and use a stacked phone layout.
+- Join this section directly to the cinematic features as its closing section.
+  Remove the intervening “Ezgu niyatga qulay bir yo‘l” to‘yona promotion and
+  sample/disclaimer text. This removes homepage copy only, not product features.
+- Preserve the existing cinematic scroll timing and light campaign direction.
+
 ## Cinematic homepage sequence (2026-10-25)
 
 - User wants the scroll transitions shown in their Bugatti Chiron recording:
@@ -10,8 +75,7 @@
   featured designs with four photographic chapters covering design, personal
   details, venue navigation, and guest replies/wishes. Use one coherent sample
   invitation and retain the platform's approved visual direction. Retain the
-  centered section introduction and put optional to‘yona information beneath
-  the sequence. Keep native touch scrolling and support reduced motion.
+  centered section introduction. Keep native touch scrolling and support reduced motion.
 - Pacing correction: incoming photographs must fill the viewport quickly,
   then hold while their copy travels from the lower portion to above the top.
   Only then may the next photograph rise over them. The earlier implementation
@@ -58,8 +122,9 @@
   playback, and animated detail dialogs. Navigation and full-preview return
   links point there; legacy `/preview` list visits redirect there. Individual
   `/preview?template=…` routes and source packages stay unchanged.
-- Approved order: hero → featured designs → visual Why us → how it works → FAQ
-  → final create/discovery invitation. Update the old FAQ “View button” wording.
+- Approved order: hero → occasion orbit → featured designs → visual Why us →
+  how it works → FAQ → final create/discovery invitation. Update the old FAQ
+  “View button” wording.
 - Why us explains personal design/photos/music, Google Maps navigation, guest
   replies, moderated wishes and optional to‘yona card details/receipt uploads.
   Language support remains elsewhere in the product; do not imply automatic
@@ -494,7 +559,6 @@
 
 - User requirement: remove the app locale switcher baked into Nahor's catalog cover by capturing the authentic opening from the packaged renderer; preserve the reference capture and update provenance and focused tests.
 - The corrected 480×720 WebP is captured from `/preview?template=nahor&qaSilent=1&qaReducedMotion=1` with bundled Playwright and headless Chrome at DPR 1. Capture-only styling hides the injected `.mh-lang` control inside the iframe and removes the outer Next.js `<nextjs-portal>` host, which contained the shadow-root dev mark. Source HTML, CSS, artwork, and runtime remain unchanged. Keep `preview-capture.png` as PNG render evidence and record both checksums in provenance. Visual inspection confirms no injected controls; the focused Nahor suite passes 8/8.
-
 
 ## Published-template fidelity audit, batch 8 correction (2026-10-23)
 

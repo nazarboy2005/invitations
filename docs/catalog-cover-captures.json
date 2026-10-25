@@ -1,0 +1,162 @@
+{
+  "captured": "2026-10-25",
+  "source": "Local production real-renderer browser screenshots; shared preview fixture",
+  "encoding": "WebP quality 88, effort 6; no image synthesis",
+  "covers": [
+    {
+      "id": "atlas",
+      "route": "/preview?template=atlas&card=1&poster=1",
+      "scene": "settled opened hero",
+      "viewport": {
+        "width": 480,
+        "height": 800
+      },
+      "file": "apps/web/public/images/catalog/atlas-cover.webp",
+      "bytes": 37786,
+      "sha256": "b21a506301e12efaffac96c5f317015235e2f44629d048245c622885c22bee55",
+      "captureSha256": "94990be83332798c5853de31c6c625ef3679c8273ab582b05c6c905f8eff11de",
+      "action": "catalog opening control"
+    },
+    {
+      "id": "doira",
+      "route": "/preview?template=doira&card=1&poster=1",
+      "scene": "settled opened hero",
+      "viewport": {
+        "width": 480,
+        "height": 800
+      },
+      "file": "apps/web/public/images/catalog/doira-cover.webp",
+      "bytes": 95822,
+      "sha256": "2c31da2531f7ecc9484b492be4523d74117b2ab68dd4b8c3a9ad768803d43b41",
+      "captureSha256": "1daca9bb7397fc3f71768451a1de1195850d01f0224d8355158df10dea11644b",
+      "action": "catalog opening control"
+    },
+    {
+      "id": "ganch",
+      "route": "/preview?template=ganch&card=1&poster=1",
+      "scene": "settled opened hero",
+      "viewport": {
+        "width": 480,
+        "height": 800
+      },
+      "file": "apps/web/public/images/catalog/ganch-cover.webp",
+      "bytes": 76406,
+      "sha256": "eb553cbd6b03246e9cbaddbeab140d64d0ff310e1f87bdb274bd572056c5d3fe",
+      "captureSha256": "5c9029ded924becf9620f5c3c07d7aa160a10e4e59ef2025fed812431f671b51",
+      "action": "catalog opening control"
+    },
+    {
+      "id": "monogram",
+      "route": "/preview?template=monogram&card=1&poster=1",
+      "scene": "settled opened hero",
+      "viewport": {
+        "width": 480,
+        "height": 800
+      },
+      "file": "apps/web/public/images/catalog/monogram-cover.webp",
+      "bytes": 10898,
+      "sha256": "56c7518d3740d1307d83634afd3192f017baef5f0e24a598daa21e15dab2eea6",
+      "captureSha256": "4d927a948dffb37284b90c03e15df8985d4b9145bc775091aff7fba69085d944",
+      "action": "catalog opening control"
+    },
+    {
+      "id": "muhr",
+      "route": "/preview?template=muhr&card=1&poster=1",
+      "scene": "settled opened hero",
+      "viewport": {
+        "width": 480,
+        "height": 800
+      },
+      "file": "apps/web/public/images/catalog/muhr-cover.webp",
+      "bytes": 96430,
+      "sha256": "bbf69f05ddd4d6f3005b54b415037220c8f8e49906b3dfe03a968d2898d366e1",
+      "captureSha256": "9f7ba799d5bb4850e7a8896ed6bc5794eb45e9e15d4ea307f2b6f1b7b24cda74",
+      "action": "catalog opening control"
+    },
+    {
+      "id": "nahor",
+      "route": "/preview?template=nahor&card=1&poster=1",
+      "scene": "settled opened hero",
+      "viewport": {
+        "width": 480,
+        "height": 800
+      },
+      "file": "apps/web/public/images/catalog/nahor-cover.webp",
+      "bytes": 69100,
+      "sha256": "8ae10aeb5f22ceaebfe6b9391542d552fab8c64bb03c4fb72447b5446ebb6d44",
+      "captureSha256": "3a6fe22cb5c4b8edde079824921fe8757ef6a88688b46119d7f4c3a65b962536",
+      "action": "click pot lid"
+    },
+    {
+      "id": "orik-guli",
+      "route": "/preview?template=orik-guli&card=1&poster=1",
+      "scene": "settled opened hero",
+      "viewport": {
+        "width": 480,
+        "height": 800
+      },
+      "file": "apps/web/public/images/catalog/orik-guli-cover.webp",
+      "bytes": 112928,
+      "sha256": "f6ba395dcd1c369c21eb5005cc6b5dbef495d9b9da5518a62492cf2418e6ce65",
+      "captureSha256": "e126f0a5c8e53bbdc927b9cb851ac05370825b163f8472e16beba50f0890c452",
+      "action": "catalog opening control"
+    },
+    {
+      "id": "parda",
+      "route": "/preview?template=parda&card=1&poster=1",
+      "scene": "settled opened hero",
+      "viewport": {
+        "width": 480,
+        "height": 800
+      },
+      "file": "apps/web/public/images/catalog/parda-cover.webp",
+      "bytes": 83882,
+      "sha256": "2b6b694a4436ed237727bff3ff47eb855348042a23e9e6c361bcbd5072fa6c8c",
+      "captureSha256": "b04a1adf5cfbf8dcb285c1edaddd28baa4318c1494f5095e38d63a1359222ea3",
+      "action": "catalog opening control"
+    },
+    {
+      "id": "qatlam",
+      "route": "/preview?template=qatlam&card=1&poster=1",
+      "scene": "settled opened hero",
+      "viewport": {
+        "width": 480,
+        "height": 800
+      },
+      "file": "apps/web/public/images/catalog/qatlam-cover.webp",
+      "bytes": 43940,
+      "sha256": "b247d93551c92b6ab8c885a24889b7121b0743cd2632bc1c26830f06803b1613",
+      "captureSha256": "4b1d70e2f6e092a6d6cd3ca7f57c37c105d6c39b2fc6df96e0cdf256cd4d66cc",
+      "action": "drag book down"
+    },
+    {
+      "id": "yangi-uy",
+      "route": "/preview?template=yangi-uy&card=1&poster=1",
+      "scene": "settled opened hero",
+      "viewport": {
+        "width": 480,
+        "height": 800
+      },
+      "file": "apps/web/public/images/catalog/yangi-uy-cover.webp",
+      "bytes": 55384,
+      "sha256": "7b3b7a075931995e2ebc51e63925cda0711aa28932bca34cd2b86890d9dc2818",
+      "captureSha256": "751ab03abc56c53dc26184483e1ffde6943e2c68862fac529c992e934f390a74",
+      "action": "catalog opening control"
+    },
+    {
+      "id": "bogi-eram",
+      "route": "/preview?template=bogi-eram&card=1&poster=1",
+      "scene": "opened garden; Javohir and Madina fully revealed",
+      "viewport": {
+        "width": 480,
+        "height": 800
+      },
+      "file": "apps/web/public/images/catalog/bogi-eram-cover.webp",
+      "bytes": 115848,
+      "sha256": "d06d321262ef5eabe8ec0eb93233a88874474dc83903a76e4c224d03ed06b50b",
+      "captureSha256": "91bcaf26fa48497de2f1341674e54920e26438cc20fdcd680aa868c2a1c21815",
+      "action": "click garden gate; verify name spans and parent opacity 1, no remaining name transforms",
+      "quality": 86
+    }
+  ]
+}

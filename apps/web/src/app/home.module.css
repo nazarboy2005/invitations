@@ -490,26 +490,6 @@
   transition: transform 200ms;
 }
 
-.occasionStrip {
-  border-block: 1px solid var(--line);
-  background: var(--surface);
-}
-.occasionInner {
-  min-height: 73px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-}
-.occasionInner span {
-  font-family: var(--font-display);
-  font-size: 24px;
-}
-.occasionInner svg {
-  color: var(--gold);
-  width: 19px;
-  stroke-width: 1;
-}
 .templates {
   padding-block: 106px 24px;
   scroll-margin-top: 30px;
@@ -526,7 +506,6 @@
   margin-bottom: 18px;
 }
 .sectionHeading h2,
-.processHeading h2,
 .detailCopy h2,
 .faq h2 {
   margin: 0;
@@ -535,7 +514,6 @@
   line-height: 1.02;
 }
 .sectionHeading h2 em,
-.processHeading em,
 .detailCopy em,
 .faq em {
   font-style: italic;
@@ -841,65 +819,6 @@
 }
 .collectionLink:hover {
   background: var(--primary-hover);
-}
-.process {
-  padding: 80px 0 84px;
-  background: var(--surface-soft);
-  border-bottom: 1px solid var(--line);
-  scroll-margin-top: 20px;
-}
-.processHeading {
-  text-align: center;
-}
-.processHeading .eyebrow {
-  justify-content: center;
-  margin: 0 0 20px;
-}
-.processHeading > p:last-child {
-  color: var(--muted);
-  font-size: 14px;
-  line-height: 1.8;
-  margin-top: 23px;
-}
-.steps {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  list-style: none;
-  padding: 0;
-  margin: 54px 0 0;
-}
-.steps li {
-  border: 1px solid var(--line);
-  border-radius: 20px;
-  background: var(--surface);
-  padding: 26px;
-  box-shadow: 0 8px 24px rgb(var(--shadow-color) / 4%);
-}
-.stepTop {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  color: var(--primary);
-}
-.stepTop span {
-  font-family: var(--font-display);
-  font-size: 43px;
-  line-height: 1;
-  color: var(--accent);
-}
-.steps h3 {
-  font-size: 29px;
-  line-height: 1.05;
-  letter-spacing: -0.5px;
-  margin: 28px 0 15px;
-}
-.steps p {
-  max-width: 290px;
-  color: var(--muted);
-  font-size: 14px;
-  line-height: 1.9;
-  margin: 0;
 }
 .detailsSection {
   display: grid;
@@ -1340,9 +1259,6 @@
   .floatingDetail {
     right: -15px;
   }
-  .steps {
-    gap: 20px;
-  }
   .faq {
     gap: 55px;
   }
@@ -1466,12 +1382,6 @@
   .heroBottom {
     margin-top: 10px;
   }
-  .occasionInner span {
-    font-size: 20px;
-  }
-  .occasionInner svg {
-    width: 16px;
-  }
   .templates {
     padding-top: 75px;
   }
@@ -1486,12 +1396,6 @@
   }
   .templateInfo > span {
     font-size: 10px;
-  }
-  .steps {
-    gap: 16px;
-  }
-  .steps h3 {
-    font-size: 26px;
   }
   .detailsSection {
     gap: 35px;
@@ -1694,23 +1598,6 @@
   .heroBottom a {
     gap: 7px;
   }
-  .occasionInner {
-    min-height: 100px;
-    display: grid;
-    grid-template-columns: 1fr 20px 1fr;
-    gap: 15px;
-    padding-block: 19px;
-    text-align: center;
-  }
-  .occasionInner span {
-    font-size: 21px;
-  }
-  .occasionInner svg {
-    justify-self: center;
-  }
-  .occasionInner svg:nth-of-type(2) {
-    display: none;
-  }
   .templates {
     padding-block: 60px 22px;
   }
@@ -1726,7 +1613,6 @@
     margin-bottom: 16px;
   }
   .sectionHeading h2,
-  .processHeading h2,
   .detailCopy h2,
   .faq h2 {
     font-size: 45px;
@@ -1802,28 +1688,6 @@
   }
   .collectionNote svg {
     margin-top: 2px;
-  }
-  .process {
-    padding-block: 55px;
-  }
-  .steps {
-    grid-template-columns: 1fr;
-    margin-top: 36px;
-    gap: 29px;
-  }
-  .stepTop span {
-    font-size: 34px;
-  }
-  .steps h3 {
-    font-size: 30px;
-    margin: 20px 0 11px;
-  }
-  .steps p {
-    max-width: none;
-    font-size: 12px;
-  }
-  .steps li {
-    padding-top: 20px;
   }
   .detailsSection {
     grid-template-columns: 1fr;
@@ -2059,7 +1923,6 @@
   .heroTitle,
   .script,
   .sectionHeading h2 em,
-  .processHeading em,
   .detailCopy em,
   .faq em,
   .manifesto h2 span {

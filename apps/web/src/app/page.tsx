@@ -4,7 +4,6 @@ import {
   ArrowUpRight,
   Flower2,
   Heart,
-  Mail,
   Plus,
   Sparkles,
 } from "lucide-react";
@@ -15,26 +14,9 @@ import styles from "./home.module.css";
 import { display, script, sans } from "./platform-fonts";
 import { SmoothScroll } from "@/components/smooth-scroll";
 import { LandingHero } from "@/components/landing-hero";
+import { OccasionOrbit } from "@/components/occasion-orbit";
 import { WhyUs } from "@/components/why-us";
 import { selectFeaturedTemplates } from "@/modules/catalog/featured-templates";
-
-const steps = [
-  {
-    title: "Ko‘nglingizga mosini tanlang",
-    text: "Milliy naqshlardan nafis minimalizmgacha. Dizaynni ochib, har bir tafsilotini ko‘ring.",
-    icon: Sparkles,
-  },
-  {
-    title: "O‘z hikoyangizni qo‘shing",
-    text: "Ismlar, sana, manzil va samimiy so‘zlaringiz. Taklifnomani o‘zingizga xos qiling.",
-    icon: Heart,
-  },
-  {
-    title: "Yaqinlaringizni chorlang",
-    text: "Tayyor taklifnomangiz havolasini ulashing. Quvonchli kuningizga birga hozirlik ko‘ring.",
-    icon: Mail,
-  },
-];
 
 const questions = [
   {
@@ -84,20 +66,7 @@ export default async function Home() {
       <main id="main">
         <LandingHero />
 
-        <div
-          className={styles.occasionStrip}
-          aria-label="Quvonchli kunlaringiz uchun"
-        >
-          <div className={`container ${styles.occasionInner}`}>
-            <span>Nikoh to‘yi</span>
-            <Flower2 aria-hidden="true" />
-            <span>Tug‘ilgan kun</span>
-            <Flower2 aria-hidden="true" />
-            <span>Oilaviy tantana</span>
-            <Flower2 aria-hidden="true" />
-            <span>Unutilmas lahzalar</span>
-          </div>
-        </div>
+        <OccasionOrbit />
 
         <section
           id="templates"
@@ -137,40 +106,6 @@ export default async function Home() {
         <WhyUs
           previewImage={heroTemplate ? artwork(heroTemplate) : undefined}
         />
-
-        <section
-          id="how-it-works"
-          className={styles.process}
-          aria-labelledby="process-title"
-        >
-          <div className="container">
-            <div className={styles.processHeading}>
-              <p className={styles.eyebrow}>03 / Juda oddiy</p>
-              <h2 id="process-title">
-                Katta kun sari.
-                <br />
-                <em>Uch kichik qadam.</em>
-              </h2>
-              <p>
-                Chiroyli taklifnoma yaratish ham
-                <br />
-                yoqimli bir lahzaga aylansin.
-              </p>
-            </div>
-            <ol className={styles.steps}>
-              {steps.map(({ title, text, icon: Icon }, index) => (
-                <li key={title}>
-                  <div className={styles.stepTop}>
-                    <span>0{index + 1}</span>
-                    <Icon size={28} strokeWidth={1.1} />
-                  </div>
-                  <h3>{title}</h3>
-                  <p>{text}</p>
-                </li>
-              ))}
-            </ol>
-          </div>
-        </section>
 
         <section
           id="questions"

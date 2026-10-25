@@ -10,16 +10,18 @@ export async function SiteHeader({
   compact = false,
   dashboard = false,
   hero = false,
+  catalog = false,
 }: {
   compact?: boolean;
   dashboard?: boolean;
   hero?: boolean;
+  catalog?: boolean;
 }) {
   const user = await getSessionUser().catch(() => null);
-  if (hero) {
+  if (hero || catalog) {
     return (
       <ScrollHeader
-        className={`${styles.header} ${styles.heroHeader} ${sans.className}`}
+        className={`${styles.header} ${styles.heroHeader} ${catalog ? styles.catalogHeader : ""} ${sans.className}`}
         followScroll
       >
         <div className={styles.heroInner}>

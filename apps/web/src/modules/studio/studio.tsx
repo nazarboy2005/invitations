@@ -82,6 +82,7 @@ import {
 } from "@/modules/catalog/preview-sample";
 import { CATALOG_PREVIEW_MUSIC } from "@/modules/catalog/catalog-music";
 import { matchesTemplateSearch } from "@/modules/catalog/template-search";
+import { templatePoster } from "@/modules/catalog/template-poster";
 import { PublishedLink } from "@/components/published-link";
 import {
   publicationIssues,
@@ -2113,7 +2114,7 @@ export function Studio({
                           <div
                             className={styles.templateArt}
                             style={{
-                              backgroundImage: `url(${template.previewImage?.startsWith("/") ? template.previewImage : `/templates/${template.id}/${template.previewImage ?? "stage.webp"}`})`,
+                              backgroundImage: `url(${templatePoster(template)})`,
                             }}
                             aria-label={`${template.name} dizaynining birinchi sahifasi`}
                           >

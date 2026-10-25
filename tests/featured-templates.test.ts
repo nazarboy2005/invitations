@@ -3,7 +3,18 @@ import test from "node:test";
 import { TEMPLATES } from "@taklifnoma/contracts";
 import { selectFeaturedTemplates } from "../apps/web/src/modules/catalog/featured-templates";
 
-test("homepage features eight published designs across different occasions", () => {
+const requested = [
+  "anor",
+  "bogi-eram",
+  "cloud-castle",
+  "ganch",
+  "kuzgi-chinor",
+  "nahor",
+  "yangi-uy",
+  "shirin-bayram",
+];
+
+test("homepage features exactly the owner's eight designs in the requested order", () => {
   const templates = TEMPLATES.map((template) => ({
     ...template,
     published: true,
@@ -11,19 +22,22 @@ test("homepage features eight published designs across different occasions", () 
   const selected = selectFeaturedTemplates(templates);
   assert.equal(selected.length, 8);
   assert.equal(new Set(selected.map((template) => template.id)).size, 8);
-  assert.equal(selected[0].id, "anor");
-  assert.ok(
-    new Set(selected.flatMap((template) => template.categoryIds)).size >= 4,
+  assert.deepEqual(
+    selected.map((template) => template.id),
+    requested,
   );
 });
 
-test("unpublished featured designs stay hidden and other published designs fill the selection", () => {
+test("unpublished featured designs stay hidden without unwanted substitutions", () => {
   const templates = TEMPLATES.map((template) => ({
     ...template,
     published: template.id !== "anor",
   }));
   const selected = selectFeaturedTemplates(templates);
-  assert.equal(selected.length, 8);
+  assert.deepEqual(
+    selected.map((template) => template.id),
+    requested.slice(1),
+  );
   assert.ok(
     selected.every((template) => template.published && template.id !== "anor"),
   );
@@ -31,6 +45,9 @@ test("unpublished featured designs stay hidden and other published designs fill 
 
 test("a small or empty catalog is shown honestly without duplicates or invented entries", () => {
   assert.deepEqual(selectFeaturedTemplates([]), []);
-  const one = { ...TEMPLATES[0], published: true };
+  const one = {
+    ...TEMPLATES.find((template) => template.id === "anor")!,
+    published: true,
+  };
   assert.deepEqual(selectFeaturedTemplates([one, one]), [one]);
 });

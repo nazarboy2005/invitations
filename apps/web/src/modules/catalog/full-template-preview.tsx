@@ -62,6 +62,7 @@ export function FullTemplatePreview({
   qaReducedMotion = false,
   qaMobile = false,
   cardPreview = false,
+  posterCapture = false,
 }: {
   template: TemplateDefinition;
   canSelect: boolean;
@@ -73,6 +74,7 @@ export function FullTemplatePreview({
   qaReducedMotion?: boolean;
   qaMobile?: boolean;
   cardPreview?: boolean;
+  posterCapture?: boolean;
 }) {
   const [invitation, setInvitation] = useState<Invitation | null>(null);
   const [catalogPreview, setCatalogPreview] = useState(true);
@@ -83,7 +85,7 @@ export function FullTemplatePreview({
     let active = true;
     async function load() {
       let candidate: Invitation | null = null;
-      if (draftId) {
+      if (draftId && !posterCapture) {
         try {
           const stored = sessionStorage.getItem(previewDraftKey(draftId));
           if (stored) {
@@ -116,15 +118,19 @@ export function FullTemplatePreview({
         candidate && (!demo || candidateHasContent)
           ? { ...candidate, templateId: template.id }
           : createTemplatePreviewSample(template.id, candidate ?? undefined);
-      setCatalogPreview(!candidateHasContent && !cardPreview);
+      setCatalogPreview(!candidateHasContent && !cardPreview && !posterCapture);
       const result = longNames && !candidateHasContent ? createLongNamePreview(resolved) : resolved;
-      setInvitation(cardPreview ? { ...result, music: { ...result.music, enabled: false, url: "" } } : result);
+      setInvitation({
+        ...result,
+        ...(posterCapture ? { enabledLocales: [result.defaultLocale] } : {}),
+        ...((cardPreview || posterCapture) ? { music: { ...result.music, enabled: false, url: "" } } : {}),
+      });
     }
     void load();
     return () => {
       active = false;
     };
-  }, [cardPreview, demo, draftId, longNames, template.id]);
+  }, [cardPreview, demo, draftId, longNames, posterCapture, template.id]);
 
   useEffect(() => {
     if (!cardPreview || !invitation || !previewRef.current) return;
@@ -252,7 +258,7 @@ export function FullTemplatePreview({
 
   return (
     <main className={styles.fullPreview} ref={previewRef} data-card-preview={cardPreview || undefined}>
-      {!cardPreview && <nav
+      {!cardPreview && !posterCapture && <nav
         className={`${styles.previewControls} ${showControls ? styles.controlsVisible : ""}`}
         aria-label="Dizayn amallari"
         aria-hidden={!showControls}

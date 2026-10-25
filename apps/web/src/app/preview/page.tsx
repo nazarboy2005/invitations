@@ -21,6 +21,7 @@ export default async function PreviewPage({
     qaReducedMotion?: string | string[];
     qaMobile?: string | string[];
     card?: string | string[];
+    poster?: string | string[];
   }>;
 }) {
   const params = await searchParams;
@@ -50,6 +51,7 @@ export default async function PreviewPage({
       <FullTemplatePreview
         template={template}
         cardPreview={cardPreview}
+        posterCapture={params.poster === "1"}
         canSelect={catalog.templates.some((item) => item.id === template.id)}
         canCreate={catalog.templates.some(
           (item) => item.id === template.id && item.published,

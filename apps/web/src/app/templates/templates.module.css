@@ -4,7 +4,7 @@
   font-family: var(--font-body);
 }
 .main {
-  padding-block: 32px 60px;
+  padding-block: 148px 60px;
 }
 .back {
   display: inline-flex;
@@ -102,7 +102,12 @@
     margin-top: 12px;
   }
   .main {
-    padding-top: 24px;
+    padding-top: calc(clamp(74px, 14.6vw, 132px) + 24px);
+  }
+}
+@media (min-width: 701px) and (max-width: 900px) {
+  .main {
+    padding-top: calc(clamp(74px, 14.6vw, 132px) + 32px);
   }
 }
 @media (max-width: 360px) {

@@ -27,7 +27,7 @@ export default async function TemplatesPage({
     : "all";
   return (
     <div className={`${styles.page} ${display.variable} ${sans.variable}`}>
-      <SiteHeader />
+      <SiteHeader catalog />
       <main id="main" className={`container ${styles.main}`}>
         <Link href="/#templates" className={styles.back}>
           <ArrowLeft size={15} /> Bosh sahifaga

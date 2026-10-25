@@ -1,15 +1,15 @@
 import type { TemplateDefinition } from "@taklifnoma/contracts";
 
-// Editorial selection: a mix of visual styles and occasions, not a popularity claim.
+// Owner-selected order. Unavailable designs are omitted, never substituted.
 const FEATURED_TEMPLATE_IDS = [
   "anor",
-  "atlas",
-  "bulbul",
-  "toscana",
-  "konfetti",
-  "lola",
-  "nahorgi-osh",
+  "bogi-eram",
+  "cloud-castle",
+  "ganch",
+  "kuzgi-chinor",
+  "nahor",
   "yangi-uy",
+  "shirin-bayram",
 ];
 
 export function selectFeaturedTemplates(templates: TemplateDefinition[]) {
@@ -23,6 +23,5 @@ export function selectFeaturedTemplates(templates: TemplateDefinition[]) {
     const template = published.get(id);
     if (template) ordered.set(id, template);
   }
-  for (const [id, template] of published) ordered.set(id, template);
-  return [...ordered.values()].slice(0, 8);
+  return [...ordered.values()];
 }

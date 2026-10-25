@@ -1,0 +1,61 @@
+{
+  "app": {
+    "[project]/apps/web/src/app/admin/page": [
+      "static/media/cormorant_garamond_latin-s.p.0jvcp-grhfvvq.woff2",
+      "static/media/great_vibes_latin-s.p.3sgi49med5vai.woff2",
+      "static/media/manrope_latin-s.p.1p_a2k8qd5zhp.woff2",
+      "static/media/nautigal_regular-s.p.2quttri5b877q.ttf"
+    ],
+    "[project]/apps/web/src/app/dashboard/[id]/activity/page": [
+      "static/media/cormorant_garamond_latin-s.p.0jvcp-grhfvvq.woff2",
+      "static/media/great_vibes_latin-s.p.3sgi49med5vai.woff2",
+      "static/media/manrope_latin-s.p.1p_a2k8qd5zhp.woff2",
+      "static/media/nautigal_regular-s.p.2quttri5b877q.ttf"
+    ],
+    "[project]/apps/web/src/app/dashboard/page": [
+      "static/media/cormorant_garamond_latin-s.p.0jvcp-grhfvvq.woff2",
+      "static/media/great_vibes_latin-s.p.3sgi49med5vai.woff2",
+      "static/media/manrope_latin-s.p.1p_a2k8qd5zhp.woff2",
+      "static/media/nautigal_regular-s.p.2quttri5b877q.ttf"
+    ],
+    "[project]/apps/web/src/app/i/[slug]/page": [
+      "static/media/cormorant_garamond_latin-s.p.0jvcp-grhfvvq.woff2",
+      "static/media/great_vibes_latin-s.p.3sgi49med5vai.woff2",
+      "static/media/manrope_latin-s.p.1p_a2k8qd5zhp.woff2",
+      "static/media/nautigal_regular-s.p.2quttri5b877q.ttf"
+    ],
+    "[project]/apps/web/src/app/page": [
+      "static/media/cormorant_garamond_latin-s.p.0jvcp-grhfvvq.woff2",
+      "static/media/great_vibes_latin-s.p.3sgi49med5vai.woff2",
+      "static/media/manrope_latin-s.p.1p_a2k8qd5zhp.woff2",
+      "static/media/nautigal_regular-s.p.2quttri5b877q.ttf"
+    ],
+    "[project]/apps/web/src/app/preview/page": [
+      "static/media/cormorant_garamond_latin-s.p.0jvcp-grhfvvq.woff2",
+      "static/media/great_vibes_latin-s.p.3sgi49med5vai.woff2",
+      "static/media/manrope_latin-s.p.1p_a2k8qd5zhp.woff2",
+      "static/media/nautigal_regular-s.p.2quttri5b877q.ttf"
+    ],
+    "[project]/apps/web/src/app/studio/[id]/page": [
+      "static/media/cormorant_garamond_latin-s.p.0jvcp-grhfvvq.woff2",
+      "static/media/great_vibes_latin-s.p.3sgi49med5vai.woff2",
+      "static/media/manrope_latin-s.p.1p_a2k8qd5zhp.woff2",
+      "static/media/nautigal_regular-s.p.2quttri5b877q.ttf"
+    ],
+    "[project]/apps/web/src/app/studio/page": [
+      "static/media/cormorant_garamond_latin-s.p.0jvcp-grhfvvq.woff2",
+      "static/media/great_vibes_latin-s.p.3sgi49med5vai.woff2",
+      "static/media/manrope_latin-s.p.1p_a2k8qd5zhp.woff2",
+      "static/media/nautigal_regular-s.p.2quttri5b877q.ttf"
+    ],
+    "[project]/apps/web/src/app/templates/page": [
+      "static/media/cormorant_garamond_latin-s.p.0jvcp-grhfvvq.woff2",
+      "static/media/great_vibes_latin-s.p.3sgi49med5vai.woff2",
+      "static/media/manrope_latin-s.p.1p_a2k8qd5zhp.woff2",
+      "static/media/nautigal_regular-s.p.2quttri5b877q.ttf"
+    ]
+  },
+  "appUsingSizeAdjust": true,
+  "pages": {},
+  "pagesUsingSizeAdjust": false
+}

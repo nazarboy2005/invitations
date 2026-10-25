@@ -227,6 +227,20 @@
   align-items: center;
   gap: 20px;
 }
+.header.catalogHeader,
+.header.catalogHeader[data-scrolled="true"] {
+  background: transparent;
+  backdrop-filter: none;
+}
+.catalogHeader .heroAccount,
+.catalogHeader[data-scrolled="true"] .heroAccount {
+  color: #76253b;
+  border-color: #e4d7da;
+  background: transparent;
+}
+.catalogHeader .heroAccount:hover {
+  background: #fff1f3;
+}
 .brand {
   display: flex;
   align-items: center;

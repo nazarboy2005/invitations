@@ -2,15 +2,13 @@ import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowUpRight,
-  Check,
   Flower2,
-  Gift,
-  Heart,
   MapPin,
   Music2,
   Navigation,
 } from "lucide-react";
 import { CinematicScroll } from "./cinematic-scroll";
+import { InvitationSteps } from "./invitation-steps";
 import styles from "./why-us.module.css";
 
 const chapters = [
@@ -187,32 +185,7 @@ function SceneDetail({
         </div>
       </div>
     );
-  return (
-    <div
-      className={`${styles.detail} ${styles.togetherDetail}`}
-      aria-hidden="true"
-    >
-      <div className={styles.replyPhone}>
-        <span className={styles.cardEyebrow}>JAVOHIR & MADINA</span>
-        <Flower2 size={30} strokeWidth={0.8} />
-        <h4>Birga bo‘lamizmi?</h4>
-        <p>Sizni kutib qolamiz.</p>
-        <div className={styles.reply}>
-          <Check size={17} /> Albatta, kelaman!
-        </div>
-        <div className={styles.wish}>
-          <Heart size={17} strokeWidth={1.1} />
-          <blockquote>
-            Baxtingiz bir umr
-            <br />
-            butun bo‘lsin!
-          </blockquote>
-          <span>Yaqinlaringizdan, mehr bilan.</span>
-        </div>
-      </div>
-      <span className={styles.detailNote}>Yaxshi kunlar birga.</span>
-    </div>
-  );
+  return null;
 }
 
 export function WhyUs({
@@ -282,25 +255,7 @@ export function WhyUs({
           </article>
         ))}
       </CinematicScroll>
-      <footer className={`container ${styles.support}`}>
-        <div>
-          <span className={styles.giftIcon}>
-            <Gift size={24} strokeWidth={1.2} />
-          </span>
-          <div>
-            <h3>Ezgu niyatga qulay bir yo‘l.</h3>
-            <p>
-              To‘yona uchun karta ma’lumotlarini ulashing. Ixtiyoriy yuklangan
-              cheklarni o‘zingiz tekshirasiz.
-            </p>
-          </div>
-        </div>
-        <p className={styles.sampleNote}>
-          Tasvirlar va javoblar namuna sifatida ko‘rsatilgan.
-          <br />
-          Qo‘shimcha bo‘limlar tanlangan dizaynga qarab mavjud.
-        </p>
-      </footer>
+      <InvitationSteps />
     </section>
   );
 }
