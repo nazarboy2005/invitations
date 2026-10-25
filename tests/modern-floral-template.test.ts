@@ -253,6 +253,9 @@ test("Modern Floral RSVP has fixed party size and exposes only source-backed opt
   assert.match(giftBridge, /g\.cardNumber/);
   assert.match(giftBridge, /body\.dataset\.mfGiftOriginal/);
   assert.match(giftBridge, /navigator\.clipboard\.writeText\(number\)/);
+  assert.ok(giftBridge.includes('M20 6 9 17l-5-5'));
+  assert.match(giftBridge, /giftCopyTimer=window\.setTimeout/);
+  assert.match(giftBridge, /},1800\)/);
   assert.match(giftBridge, /copy\.disabled=!number/);
   assert.doesNotMatch(giftBridge, /g\.note|data-mf-gift/);
   if (sourceChunkBytes) {
@@ -267,6 +270,8 @@ test("Modern Floral RSVP has fixed party size and exposes only source-backed opt
     assert.match(giftModule, /Card number/);
     assert.match(giftModule, /Copy card number/);
     assert.match(giftModule, /onClick:\(\)=>m\(!0\)/);
+    assert.match(giftModule, /F\.Check/);
+    assert.match(giftModule, /setTimeout\(\(\)=>o\(!1\),1800\)/);
   }
   assert.match(bridge, /hide\(section,!preview&&!publicItems\.length\)/);
   assert.ok(bridge.includes("const grids=all('.grid, .md\\\\:grid',section)"));
