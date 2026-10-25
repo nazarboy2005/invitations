@@ -261,8 +261,11 @@ test("Green Gold runnable adapter isolates the source sections from site runtime
   assert.match(bridge, /ArrowRight/);
   assert.match(bridge, /aria-label", alt/);
   assert.match(bridge, /const sourcePreviewGallery = \[2, 1, 3, 6, 4, 5\]/);
+  assert.match(bridge, /const galleryButtons = \[\.\.\.section\.querySelectorAll\("button"\)\]/);
+  assert.match(bridge, /galleryButtons\.forEach/);
   assert.match(bridge, /const hasCreatorImages = gallery\.some\(\(item\) => item\?\.src\)/);
   assert.match(bridge, /preview && !hasCreatorImages/);
+  assert.match(bridge, /visibleGallery\[index % visibleGallery\.length\]/);
   assert.match(bridge, /hide\(section, !preview && !hasCreatorImages\)/);
   assert.match(css, /:focus-visible/);
   assert.match(css, /min-width:28px;min-height:28px/);
@@ -317,6 +320,11 @@ test("Green Gold restores source opening, scroll, ornament, sparkle, wishes, and
   assert.equal(recoveredVerticalLine.verifiedBytes, recoveredVerticalLine.packagedBytes);
   assert.equal(imageReconciliation.sourceReferencedPreviewGallery.sourcePaths.length, 6);
   assert.match(imageReconciliation.sourceReferencedPreviewGallery.result, /not substitute artwork/);
+  assert.equal(
+    (original.match(/\/images\/templates\/orchid-amplop\/gallery-[1-6]\.webp/g) ?? []).length,
+    12,
+    "the original page renders the six source preview photos in both responsive gallery copies",
+  );
   assert.equal(
     createHash("sha256").update(sourceRoute).digest("hex"),
     manifest.sourceMotion.sha256,

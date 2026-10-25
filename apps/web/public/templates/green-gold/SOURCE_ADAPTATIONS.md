@@ -79,9 +79,12 @@ finish, section reveal on scroll, and package reduced-motion state. The source
 capture reports React hydration error #418 while its external site services are
 blocked in the local harness; the package frame has no uncaught JavaScript
 errors. The exact source default gallery order is restored in previews using
-the captured shared gallery image files; creator uploads take precedence and an
-empty public gallery stays hidden. Complete public/creator integration remains
-an open release check. The archive omitted `vertical-line.png`; the exact
+the captured shared gallery image files; the source page contains two
+responsive copies of those six photos. The adapter now binds both copies, so
+the active layout shows the same images and each opens the source-matched
+lightbox. Creator uploads take precedence and an empty public gallery stays
+hidden. Complete public/creator integration remains an open release check. The
+archive omitted `vertical-line.png`; the exact
 original PNG has been recovered from Chorlove and packaged without conversion.
 
 ## Shared contract adapter

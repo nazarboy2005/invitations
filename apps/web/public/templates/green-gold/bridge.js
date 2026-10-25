@@ -203,70 +203,68 @@
     const visibleGallery = preview && !hasCreatorImages
       ? sourcePreviewGallery.map((item, index) => ({ ...item, alt: `${c.photo} ${index + 1}` }))
       : gallery;
-    const grids = [...section.querySelectorAll(".grid")];
-    if (!grids.length) return;
-    grids.forEach((grid) => {
-      [...grid.querySelectorAll("button")].forEach((button, index) => {
-        const item = visibleGallery[index];
-        button.replaceChildren();
-        button.classList.remove("gg-gallery-empty");
-        button.disabled = false;
-        button.removeAttribute("aria-hidden");
-        button.onclick = null;
-        hide(button.closest("div.relative"), !item || (!preview && !item.src));
-        if (item?.src) {
-          const alt = item.alt || item.caption || `${c.photo} ${index + 1}`;
-          const img = document.createElement("img");
-          img.src = item.src;
-          img.alt = alt;
-          img.className = "h-full w-full object-cover transition duration-500 hover:scale-105";
-          button.append(img);
-          button.setAttribute("aria-label", alt);
-          button.onclick = () => {
-            const dialog = document.createElement("div");
-            dialog.className = "gg-lightbox";
-            dialog.setAttribute("aria-label", alt);
-            dialog.setAttribute("role", "dialog");
-            dialog.setAttribute("aria-modal", "true");
-            dialog.tabIndex = -1;
-            dialog.innerHTML = '<button class="gg-lightbox-close" type="button" data-gg-close><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 6-12 12"></path><path d="m6 6 12 12"></path></svg></button><img alt="">';
-            const dialogImage = dialog.querySelector("img");
-            dialogImage.src = item.src;
-            dialogImage.alt = alt;
-            dialogImage.className = "max-h-[88dvh] max-w-[94vw] rounded-2xl object-contain shadow-2xl";
-            const close = dialog.querySelector("[data-gg-close]");
-            close.setAttribute("aria-label", c.close);
-            let closing = false;
-            const finish = () => {
-              document.removeEventListener("keydown", onKeydown);
-              dialog.remove();
-              button.focus();
-            };
-            const closeDialog = () => {
-              if (closing) return;
-              closing = true;
-              if (sourceMotion) sourceMotion.closeGallery(dialog, dialogImage, finish);
-              else finish();
-            };
-            const onKeydown = (event) => {
-              if (event.key === "Escape") { event.preventDefault(); closeDialog(); }
-            };
-            close.onclick = closeDialog;
-            dialog.addEventListener("click", (event) => {
-              if (event.target === dialog) closeDialog();
-            });
-            document.addEventListener("keydown", onKeydown);
-            document.body.append(dialog);
-            dialog.focus();
-            sourceMotion?.animateGallery(dialog, dialogImage);
+    const galleryButtons = [...section.querySelectorAll("button")];
+    if (!galleryButtons.length) return;
+    galleryButtons.forEach((button, index) => {
+      const item = visibleGallery.length ? visibleGallery[index % visibleGallery.length] : undefined;
+      button.replaceChildren();
+      button.classList.remove("gg-gallery-empty");
+      button.disabled = false;
+      button.removeAttribute("aria-hidden");
+      button.onclick = null;
+      hide(button.closest("div.relative"), !item || (!preview && !item.src));
+      if (item?.src) {
+        const alt = item.alt || item.caption || `${c.photo} ${index % visibleGallery.length + 1}`;
+        const img = document.createElement("img");
+        img.src = item.src;
+        img.alt = alt;
+        img.className = "h-full w-full object-cover transition duration-500 hover:scale-105";
+        button.append(img);
+        button.setAttribute("aria-label", alt);
+        button.onclick = () => {
+          const dialog = document.createElement("div");
+          dialog.className = "gg-lightbox";
+          dialog.setAttribute("aria-label", alt);
+          dialog.setAttribute("role", "dialog");
+          dialog.setAttribute("aria-modal", "true");
+          dialog.tabIndex = -1;
+          dialog.innerHTML = '<button class="gg-lightbox-close" type="button" data-gg-close><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 6-12 12"></path><path d="m6 6 12 12"></path></svg></button><img alt="">';
+          const dialogImage = dialog.querySelector("img");
+          dialogImage.src = item.src;
+          dialogImage.alt = alt;
+          dialogImage.className = "max-h-[88dvh] max-w-[94vw] rounded-2xl object-contain shadow-2xl";
+          const close = dialog.querySelector("[data-gg-close]");
+          close.setAttribute("aria-label", c.close);
+          let closing = false;
+          const finish = () => {
+            document.removeEventListener("keydown", onKeydown);
+            dialog.remove();
+            button.focus();
           };
-        } else if (item && preview) {
-          button.textContent = "\u2022";
-          button.classList.add("gg-gallery-empty");
-          button.disabled = true;
-          button.setAttribute("aria-label", `${c.photo} ${index + 1}`);
-        }
-      });
+          const closeDialog = () => {
+            if (closing) return;
+            closing = true;
+            if (sourceMotion) sourceMotion.closeGallery(dialog, dialogImage, finish);
+            else finish();
+          };
+          const onKeydown = (event) => {
+            if (event.key === "Escape") { event.preventDefault(); closeDialog(); }
+          };
+          close.onclick = closeDialog;
+          dialog.addEventListener("click", (event) => {
+            if (event.target === dialog) closeDialog();
+          });
+          document.addEventListener("keydown", onKeydown);
+          document.body.append(dialog);
+          dialog.focus();
+          sourceMotion?.animateGallery(dialog, dialogImage);
+        };
+      } else if (item && preview) {
+        button.textContent = "\u2022";
+        button.classList.add("gg-gallery-empty");
+        button.disabled = true;
+        button.setAttribute("aria-label", `${c.photo} ${index % visibleGallery.length + 1}`);
+      }
     });
     hide(section, !preview && !hasCreatorImages);
   }
