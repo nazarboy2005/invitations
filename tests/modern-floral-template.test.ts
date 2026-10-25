@@ -159,7 +159,8 @@ test("Modern Floral page loads its source motion runner and preserves source rev
   assert.match(bridge, /audio\.muted=true/);
   assert.match(bridge, /m\.dataset\.playing=String\(!audio\.muted&&!audio\.paused\)/);
   assert.match(bridge, /m\.onclick=\(\)=>\{audio\.muted=!audio\.muted/);
-  assert.match(css, /mf-reduced \*\{scroll-behavior:auto!important;animation-duration:\.01ms!important;transition-duration:\.01ms!important\}/);
+  assert.match(css, /#modern-floral-root\.mf-reduced,#modern-floral-root\.mf-reduced \*\{scroll-behavior:auto!important;animation-duration:\.01ms!important;transition-duration:\.01ms!important\}/);
+  assert.match(css, /@media\(prefers-reduced-motion:reduce\)\{#modern-floral-root,#modern-floral-root \*\{scroll-behavior:auto!important;animation-duration:\.01ms!important;transition-duration:\.01ms!important\}\}/);
   assert.match(html, /src="\/templates\/modern-floral\/source-motion\.js"/);
   assert.match(html, /data-chorlove-template="modern-floral"/);
   assert.doesNotMatch(css, /section \[style\*="opacity:0"\][^{]*\{[^}]*opacity:1!important/s);
