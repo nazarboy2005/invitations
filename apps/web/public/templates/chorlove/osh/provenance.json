@@ -25,13 +25,14 @@
       "sha256": "0ae21f320a7bae60712908271b15e8bd21f24347a903e246cae8ac5d75a476fc"
     }
   ],
-  "status": "internal unpublished integration; source fidelity, four-locale labels, user-required omission of guest headcount, Instagram mapping, reduced motion, Osh-specific full-preview routing, disabled generic extras, and focused checks verified; successful publish/public-render/reopen cycle requires catalog release",
+  "status": "internal unpublished integration; source SVG pattern restored after matched browser audit; source typography/animation and real Osh renderer checked; user-required no-headcount behavior and API party-size mapping verified; Osh-specific routing and generic-extras guard retained; release lifecycle remains catalog-gated",
   "fidelityNotes": [
     "Source CSS and isolated .osh-sheet composition are retained; Framer Motion viewport reveals are adapted with equivalent opacity, 28px vertical offset, 0.7s ease-out, once at 0.2 viewport visibility.",
     "Source music toggle maps creator/catalog direct-audio URLs and source YouTube watch, short, and embed URLs to opt-in playback with fade; prior local browser checks verified direct audio and YouTube player/toggle behavior.",
     "The source component includes guest headcount; the user-approved shared guest-facing rule removes the question and stepper from the package. RSVP yes maps to partySize 1 and no maps to 0.",
     "Exact source Osh markup and component expose no To’yona/card/gift section; none is invented for this source template.",
-    "Telegram, Instagram, and phone source footer links are mapped to the available shared contact values."
+    "Telegram, Instagram, and phone source footer links are mapped to the available shared contact values.",
+    "Matched local browser audit at 1280×720 found the packaged page had referenced osh-suzani without the source SVG pattern definition; the exact definition is restored in the isolated source page. Source/package typography and opening entrance timings match, and normal/reduced-motion previews were checked through the real renderer."
   ],
   "catalogArtwork": {
     "sourceUrl": "https://payment.chorlove.uz/media-assets/694fbff5-73dc-44eb-9283-539e9eb2a26e/file",

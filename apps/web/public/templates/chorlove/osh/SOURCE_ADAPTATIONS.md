@@ -16,3 +16,6 @@ Locale browser check (2026-10-24): the canonical full preview route `/preview?te
 
 Full-preview integration check (2026-10-25): the shared Chorlove renderer now resolves Osh to `/templates/chorlove/osh/index.html` and disables generic platform extras for this source ID. The live preview showed the Osh source opening, venue/map, RSVP and footer, with no injected dress-code panel; its RSVP showed only name, yes/no choice, and submit controls. The focused Osh suite covers the route and extras guard.
 
+
+
+Matched source/package browser audit (2026-10-25): at 1280×720, the source and package opening have matching layout, typography, palette, and entrance animation durations/delays. The source uses an SVG `osh-suzani` pattern definition referenced by its hero, venue, and footer; the package had kept those references but omitted the shared definition, leaving the opening flat. The exact source-owned hidden SVG pattern definition is now included in `index.html`. The real `/preview?template=osh` renderer supplies the central preview fixture, retains the source composition, and shows no guest-count prompt; normal and reduced-motion states were compared. The yes RSVP API payload uses partySize 1 and the no payload uses 0.

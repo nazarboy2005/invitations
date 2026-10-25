@@ -18,6 +18,7 @@ test("Chorlove Osh package retains source sections and omits guest headcount", (
   const css = readPackage("osh.css");
 
   assert.doesNotMatch(html, /osh-count|osh-stepper|How many people/);
+  assert.match(html, /<pattern id="osh-suzani"/);
   assert.doesNotMatch(bridge, /osh-count|osh-stepper|How many people|Fewer people|More people/);
   assert.doesNotMatch(css, /\.osh-count|\.osh-stepper/);
   assert.match(bridge, /partySize:\s*answer === "yes" \? 1 : 0/);
