@@ -320,7 +320,9 @@ test("Modern Floral RSVP has fixed party size and exposes only source-backed opt
   assert.match(giftBridge, /g\.cardNumber/);
   assert.match(giftBridge, /body\.dataset\.mfGiftOriginal/);
   assert.match(giftBridge, /caption\.style\.color=accent\.replace\(\/\^rgb\\\(\(\.\+\)\\\)\$\/,"rgba\(\$1, 0\.88\)"\)/);
-  assert.match(giftBridge, /numberGroup\.className="space-y-3"/);
+  assert.match(giftBridge, /group\.className="space-y-1"/);
+  assert.ok(giftBridge.includes('const numberGroup=document.createElement("div");numberGroup.className="space-y-3";numberGroup.append(field(giftText("number"),cardNumber,"break-all text-base font-semibold tracking-[0.12em]"));'));
+  assert.ok(giftBridge.includes('numberGroup.append(copy);details.append(numberGroup);'));
   const initialCopyStyles = giftBridge.slice(giftBridge.indexOf("copy.style.backgroundColor=open.style.backgroundColor"), giftBridge.indexOf('copy.setAttribute("aria-label",giftText("copy"))'));
   assert.doesNotMatch(initialCopyStyles, /borderColor/);
   assert.match(giftBridge, /navigator\.clipboard\.writeText\(number\)/);
@@ -331,7 +333,7 @@ test("Modern Floral RSVP has fixed party size and exposes only source-backed opt
   assert.doesNotMatch(giftBridge, /g\.note|data-mf-gift/);
   if (sourceChunkBytes) {
     const sourceChunk = sourceChunkBytes.toString("utf8");
-    const giftModuleStart = sourceChunk.indexOf(",253045,e=>");
+    const giftModuleStart = sourceChunk.lastIndexOf('e.s(["default",0,function', sourceChunk.indexOf("giftCardNumber"));
     const giftModuleEnd = sourceChunk.indexOf("}],253045)", giftModuleStart);
     assert.ok(giftModuleStart >= 0 && giftModuleEnd > giftModuleStart, "captured gift component module is present");
     const giftModule = sourceChunk.slice(giftModuleStart, giftModuleEnd);
@@ -339,6 +341,7 @@ test("Modern Floral RSVP has fixed party size and exposes only source-backed opt
     assert.match(giftModule, /giftCardOwner/);
     assert.match(giftModule, /Card owner/);
     assert.match(giftModule, /Card number/);
+    assert.match(giftModule, /className:"space-y-3",children:\[\(0,t\.jsxs\)\("div",\{className:"space-y-1"/);
     assert.match(giftModule, /Copy card number/);
     assert.match(giftModule, /onClick:\(\)=>m\(!0\)/);
     assert.match(giftModule, /style:n\?p\.copiedStyle:p\.buttonStyle/);
