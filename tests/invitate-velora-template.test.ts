@@ -9,10 +9,6 @@ import { createTemplatePreviewSample } from "../apps/web/src/modules/catalog/pre
 
 const root = process.cwd();
 const packageRoot = path.join(root, "apps/web/public/templates/velora");
-const captureRoot = path.join(
-  root,
-  "Invitations - this folder will be removed from production/Invitate/Web invitations/invitate.uz",
-);
 const readPackage = (relative: string) =>
   readFileSync(path.join(packageRoot, relative), "utf8");
 
@@ -89,20 +85,21 @@ test("Velora opening image is the authentic portrait renderer capture with recor
   assert.match(provenance.source, /Invitate\/Web invitations\/invitate\.uz\/velora\.html/);
 });
 
-test("Velora keeps its captured HTML, CSS and JavaScript untouched in source/", () => {
-  for (const [captured, copied] of [
-    ["velora.html", "source/velora.html"],
-    ["assets/css/velora.css", "source/assets/css/velora.css"],
-    ["assets/js/velora.js", "source/assets/js/velora.js"],
-  ]) {
-    const capturedBytes = readFileSync(path.join(captureRoot, captured));
-    const copiedBytes = readFileSync(path.join(packageRoot, copied));
+test("Velora preserves its captured HTML, CSS and JavaScript with recorded hashes", () => {
+  const { sourceFiles } = JSON.parse(readPackage("assets/provenance.json"));
+  for (const [relative, expectedHash] of Object.entries(sourceFiles) as [string, string][]) {
+    const copiedBytes = readFileSync(path.join(packageRoot, relative));
     assert.equal(
       createHash("sha256").update(copiedBytes).digest("hex"),
-      createHash("sha256").update(capturedBytes).digest("hex"),
-      `${captured} matches its preserved capture`,
+      expectedHash,
+      `${relative} matches its recorded source hash`,
     );
   }
+  assert.deepEqual(Object.keys(sourceFiles).sort(), [
+    "source/assets/css/velora.css",
+    "source/assets/js/velora.js",
+    "source/velora.html",
+  ]);
 });
 
 test("Velora uses the shared ephemeral wedding preview across all approved locales", () => {

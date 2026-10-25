@@ -2,6 +2,11 @@
   "template": "velora",
   "kind": "source-referenced-interaction-asset",
   "sourcePage": "Invitations - this folder will be removed from production/Invitate/Web invitations/invitate.uz/velora.html",
+  "sourceFiles": {
+    "source/velora.html": "72e405b9206fe8ea90f012884f64de959695999962eee064ed33ccaedb954154",
+    "source/assets/css/velora.css": "f98f313e21604024233c673fd84dd345a1b2e5b45b014b602079a13a7a670fa2",
+    "source/assets/js/velora.js": "1be07e1f4b7b9a862076b38b252eb7249ca72263495757254883852d418132ff"
+  },
   "referenceUrl": "https://invitate.uz/assets/previews/template/velora/music-off2.png",
   "sourceAttribute": "#playButton[data-off-icon]",
   "localFile": "assets/images/music-off2.png",
