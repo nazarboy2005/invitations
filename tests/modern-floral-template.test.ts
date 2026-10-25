@@ -1,6 +1,7 @@
 import { readFile } from "./helpers/source-files";
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
+import { runInNewContext } from "node:vm";
 import { resolve, sep } from "node:path";
 import { pathToFileURL } from "node:url";
 import { readdir } from "node:fs/promises";
@@ -163,6 +164,68 @@ test("Modern Floral page loads its source motion runner and preserves source rev
   assert.equal([...html.matchAll(/style="width:\d+px;height:\d+px;top:-10%;left:/g)].length, 34);
   assert.doesNotMatch(bridge, /hide\(root\.firstElementChild\)/);
   assert.match(bridge, /nameNodes=all\("h2",sec\[1\]\);put\(nameNodes\[0\],z\.groom/);
+});
+
+test("Modern Floral reacts to live reduced-motion preference changes", async () => {
+  const motion = await readFile(motionUrl, "utf8");
+  let mediaChange: (() => void) | undefined;
+  let animationCancelCount = 0;
+  let openingAnimationCount = 0;
+  let lightboxAnimationCancelCount = 0;
+  const media = { matches: false, addEventListener: (_type: string, listener: () => void) => { mediaChange = listener; } };
+  const classes = new Set<string>();
+  const opening = { dataset: {} as Record<string, string>, hidden: false, isConnected: true, children: [], animate: () => { openingAnimationCount += 1; return {}; } };
+  const petals = { dataset: {} as Record<string, string>, hidden: false, children: [] };
+  const root = {
+    classList: { add: (name: string) => classes.add(name), remove: (name: string) => classes.delete(name) },
+    children: [opening, {}, petals],
+    firstElementChild: opening,
+    querySelector: () => null,
+    querySelectorAll: () => [],
+    getAnimations: () => [{ cancel: () => { animationCancelCount += 1; } }],
+  };
+  const lightbox = {
+    removed: false,
+    getAnimations: () => [{ cancel: () => { lightboxAnimationCancelCount += 1; } }],
+    remove() { this.removed = true; },
+  };
+  const windowMock = {
+    name: JSON.stringify({ type: "modern-floral:update", payload: { reducedMotion: false } }),
+    location: { origin: "http://localhost" },
+    matchMedia: () => media,
+    addEventListener: () => {},
+    setTimeout: (callback: () => void) => { callback(); return 1; },
+  };
+  const documentMock = {
+    querySelector: () => root,
+    querySelectorAll: (selector: string) => selector === "[data-mf-lightbox]" ? [lightbox] : [],
+  };
+  runInNewContext(motion, {
+    document: documentMock,
+    window: windowMock,
+    location: windowMock.location,
+    parent: {},
+    IntersectionObserver: class { disconnect() {} observe() {} unobserve() {} },
+  });
+
+  assert.ok(mediaChange, "the runner subscribes to OS reduced-motion changes");
+  assert.equal(classes.has("mf-reduced"), false);
+  assert.equal(opening.hidden, true, "the normal opening completes once");
+  const completedOpeningAnimations = openingAnimationCount;
+
+  media.matches = true;
+  mediaChange();
+  assert.equal(classes.has("mf-reduced"), true);
+  assert.equal(animationCancelCount, 1);
+  assert.equal(lightboxAnimationCancelCount, 1);
+  assert.equal(lightbox.removed, true);
+  assert.equal(petals.hidden, true);
+
+  media.matches = false;
+  mediaChange();
+  assert.equal(classes.has("mf-reduced"), false);
+  assert.equal(opening.hidden, true);
+  assert.equal(openingAnimationCount, completedOpeningAnimations, "returning to normal does not replay the opening");
 });
 
 test("Modern Floral catalog artwork has the source image hash and portrait dimensions", async () => {
