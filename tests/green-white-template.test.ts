@@ -81,6 +81,11 @@ test("Green White runtime is isolated and maps the captured sections to the shar
   assert.match(bridge, /dialog\.className = "yarl__portal yarl__portal_open gw-source-lightbox"/);
   assert.match(bridge, /index = \(nextIndex \+ items\.length\) % items\.length/);
   assert.match(bridge, /button\.className = "yarl__thumbnails_thumbnail"/);
+  assert.match(bridge, /sidePadding = Math\.max\(0, \(thumbnailWrapper\.clientWidth - activeThumbnail\.offsetWidth\) \/ 2\)/);
+  assert.match(bridge, /new DOMMatrixReadOnly\(transform\)\.m41/);
+  assert.match(bridge, /thumb\.left \+ thumb\.width \/ 2 - \(viewport\.left \+ viewport\.width \/ 2\)/);
+  assert.match(bridge, /thumbnailTrack\.style\.transform = `translateX\(\$\{currentX - centerDelta\}px\)`/);
+  assert.match(bridge, /requestAnimationFrame\(\(\) => show\(start\)\)/);
   assert.match(bridge, /duration: 250/);
   assert.match(bridge, /event\.key === "ArrowLeft"/);
   assert.match(bridge, /event\.key === "ArrowRight"/);
@@ -124,6 +129,7 @@ test("Green White motion follows the archived source page module", async () => {
   assert.match(bridge, /new Date\(Date\.UTC\(year, month - 1, 1\)\)\.getUTCDay\(\)/);
   assert.doesNotMatch(bridge, /Date\.UTC\(year, month - 1, 1\)\.getUTCDay\(\)/);
   assert.match(styles, /\.gw-source-opening[\s\S]*background: #2d321b/);
+  assert.match(styles, /\.gw-source-lightbox \.yarl__thumbnails_wrapper \{[\s\S]*overflow: hidden/);
   assert.match(sourceModule.toString("utf8"), /plugins:\[M\.default,D\.default,A\.default,R\.default\]/);
   assert.match(sourceModule.toString("utf8"), /width:84,height:56,border:1,borderRadius:8,padding:0,gap:8/);
   assert.match(sourceModule.toString("utf8"), /swipe:250/);

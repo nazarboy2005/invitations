@@ -170,6 +170,7 @@
 
 .gw-source-lightbox .yarl__thumbnails_wrapper {
   height: 100%;
+  overflow: hidden;
 }
 
 .gw-source-lightbox .yarl__thumbnails_track {
@@ -177,7 +178,7 @@
   width: max-content;
   height: 100%;
   align-items: center;
-  overflow-x: auto;
+  box-sizing: content-box;
 }
 
 .gw-source-lightbox .yarl__thumbnails_thumbnail {

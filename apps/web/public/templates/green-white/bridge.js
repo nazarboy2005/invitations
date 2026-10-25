@@ -488,10 +488,12 @@
     thumbnailContainer.className = "yarl__thumbnails_container yarl__thumbnails_bottom";
     const thumbnailWrapper = document.createElement("div");
     thumbnailWrapper.className = "yarl__thumbnails_wrapper";
+    thumbnailWrapper.style.overflow = "hidden";
     const thumbnailTrack = document.createElement("div");
     thumbnailTrack.className = "yarl__thumbnails_track";
     thumbnailTrack.tabIndex = 0;
     thumbnailTrack.setAttribute("role", "listbox");
+    thumbnailTrack.style.transition = "transform 250ms ease";
     const thumbnails = items.map((item, i) => {
       const button = document.createElement("button");
       button.type = "button";
@@ -520,7 +522,17 @@
         button.classList.toggle("yarl__thumbnails_thumbnail_active", i === index);
         button.setAttribute("aria-selected", String(i === index));
       });
-      thumbnails[index]?.scrollIntoView({ block: "nearest", inline: "nearest" });
+      const activeThumbnail = thumbnails[index];
+      if (activeThumbnail && thumbnailWrapper.clientWidth) {
+        const sidePadding = Math.max(0, (thumbnailWrapper.clientWidth - activeThumbnail.offsetWidth) / 2);
+        thumbnailTrack.style.paddingInline = `${sidePadding}px`;
+        const viewport = thumbnailWrapper.getBoundingClientRect();
+        const thumb = activeThumbnail.getBoundingClientRect();
+        const transform = getComputedStyle(thumbnailTrack).transform;
+        const currentX = transform === "none" ? 0 : new DOMMatrixReadOnly(transform).m41;
+        const centerDelta = thumb.left + thumb.width / 2 - (viewport.left + viewport.width / 2);
+        thumbnailTrack.style.transform = `translateX(${currentX - centerDelta}px)`;
+      }
       if (direction) {
         image.animate([{ translate: `${direction * 28}px 0` }, { translate: "0 0" }], { duration: 250, easing: "ease-out" });
       }
@@ -570,8 +582,8 @@
     container.append(counter, toolbar, previous, slide, next, thumbnailBar);
     dialog.append(container);
     root.append(dialog);
-    show(start);
     dialog.showModal();
+    requestAnimationFrame(() => show(start));
     container.focus();
   }
 
