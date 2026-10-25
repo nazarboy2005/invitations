@@ -631,6 +631,21 @@
     if (!node || reducedMotion || typeof node.animate !== "function") return null;
     return node.animate(keyframes, { fill: "both", ...options });
   }
+  function sourceSpringScaleFrames(from, to, stiffness, damping, steps = 24) {
+    const mass = 1;
+    const omega0 = Math.sqrt(stiffness / mass);
+    const zeta = damping / (2 * Math.sqrt(stiffness * mass));
+    const omegaD = omega0 * Math.sqrt(1 - zeta * zeta);
+    const alpha = zeta / Math.sqrt(1 - zeta * zeta);
+    return Array.from({ length: steps + 1 }, (_, index) => {
+      const offset = index / steps;
+      const time = offset * 0.4;
+      const decay = Math.exp(-zeta * omega0 * time);
+      const response = 1 - decay * (Math.cos(omegaD * time) + alpha * Math.sin(omegaD * time));
+      const scale = index === steps ? to : from + (to - from) * response;
+      return { transform: `scale(${scale})`, offset };
+    });
+  }
   function revealSection(section, sectionIndex, initialDelay = 0) {
     if (!section || section.hidden) return;
     section.dataset.lgMotionSeen = "true";
@@ -697,10 +712,9 @@
       );
       if (selectedDay && !selectedDay.dataset.lgMotionReady) {
         selectedDay.dataset.lgMotionReady = "true";
-        animateNode(selectedDay, [{ transform: "scale(0)" }, { transform: "scale(1)" }], {
-          duration: 520,
-          easing: "cubic-bezier(.34,1.56,.64,1)",
-          delay: 180,
+        animateNode(selectedDay, sourceSpringScaleFrames(0, 1, 220, 15), {
+          duration: 400,
+          easing: "linear",
         });
       }
     }
@@ -793,12 +807,15 @@
     const cardSheen = all("div").find(
       (node) => typeof node.className === "string" && node.className.includes("-skew-x-12"),
     );
-    animateNode(cardSheen, [{ translate: "-120% 0" }, { translate: "220% 0" }], {
-      duration: 3600,
+    animateNode(cardSheen, [
+      { translate: "-120% 0", offset: 0, easing: "ease-in-out" },
+      { translate: "220% 0", offset: 0.6 },
+      { translate: "220% 0", offset: 1 },
+    ], {
+      duration: 6000,
       iterations: Infinity,
       delay: 0,
-      direction: "normal",
-      easing: "ease-in-out",
+      easing: "linear",
     });
     const introStar = all("span").find(
       (node) => node.textContent.trim() === "✦" && node.className.includes("mt-5"),

@@ -60,15 +60,49 @@ test("Luxury Gold preserves captured layout, source styles and original assets w
     assert.equal(galleryRuntime.length, manifest.sourceGallery.browserReview.sourceRuntimeChunkBytes);
     assert.equal(createHash("sha256").update(galleryRuntime).digest("hex"), manifest.sourceGallery.browserReview.sourceRuntimeChunkSha256);
   }
+  const sourceText = sourceModule?.toString("utf8") || "";
   if (sourceModule) {
-    const sourceText = sourceModule.toString("utf8");
     for (const sourceSetting of [
       'slideshow:{autoplay:!1,delay:1500}',
       'thumbnails:{position:"bottom",width:84,height:56,border:1,borderRadius:8,padding:0,gap:8}',
       'animation:{swipe:250}',
       'closeOnBackdropClick:!0',
     ]) assert.ok(sourceText.includes(sourceSetting), `source gallery setting missing: ${sourceSetting}`);
+    for (const sourceMotion of [
+      'm={once:!0,amount:.35}',
+      'duration:.9,ease:"easeOut"',
+      'duration:1,ease:"easeOut"',
+      'staggerChildren:.13,delayChildren:.12',
+      'staggerChildren:.13,delayChildren:3.25',
+      'duration:.8,ease:"easeOut"',
+      'duration:2.8,repeat:1/0,repeatType:"reverse"',
+      'duration:4,repeat:1/0,ease:"easeInOut"',
+      'duration:3.5,repeat:1/0,ease:"easeInOut"',
+      'duration:8,repeat:1/0,ease:"linear"',
+      'duration:3.6,repeat:1/0,repeatDelay:2.4,ease:"easeInOut"',
+      'transition:{type:"spring",stiffness:220,damping:15}',
+      'duration:.7,delay:.12*a',
+      'delay:.09*a,duration:.55',
+      'duration:.6}',
+      'duration:10,ease:"easeOut"',
+    ]) assert.ok(sourceText.includes(sourceMotion), `source motion setting missing: ${sourceMotion}`);
   }
+  assert.match(bridge, /threshold: \[0\.35\]/);
+  assert.match(bridge, /duration = isScaleVariant \? 1000 : 900/);
+  assert.match(bridge, /duration = 800;\s*delay = \(index % 3\) \* 100/);
+  assert.match(bridge, /duration = 700;\s*delay = index \* 120/);
+  assert.match(bridge, /duration = 550;\s*delay = index \* 90/);
+  assert.match(bridge, /duration = 600;\s*delay = 0/);
+  assert.match(bridge, /duration: 10000/);
+  assert.match(bridge, /duration: 2800,[\s\S]*?direction: "alternate"/);
+  assert.match(bridge, /duration: 3500, iterations: Infinity, easing: "ease-in-out"/);
+  assert.match(bridge, /duration: 4000, iterations: Infinity, easing: "ease-in-out"/);
+  assert.match(bridge, /function sourceSpringScaleFrames\(from, to, stiffness, damping, steps = 24\)/);
+  assert.match(bridge, /sourceSpringScaleFrames\(0, 1, 220, 15\)/);
+  assert.match(bridge, /duration: 400,\s*easing: "linear"/);
+  assert.match(bridge, /duration: 6000,[\s\S]*?easing: "linear"/);
+  assert.match(bridge, /offset: 0\.6/);
+  assert.match(bridge, /offset: 1/);
   assert.equal(manifest.sourceGallery.settings.slideshowDelayMs, 1500);
   assert.match(bridge, /setInterval\(\(\) => step\(1\), 1500\)/);
   assert.match(bridge, /show = \(direction = 0\)/);
@@ -121,7 +155,7 @@ test("Luxury Gold restores the source opening, section motion, loops and reduced
   assert.ok(bridge.includes("threshold: [0.35]"));
   assert.ok(bridge.includes("duration: 10000"));
   assert.ok(bridge.includes("duration: 2800"));
-  assert.ok(bridge.includes("duration: 3600"));
+  assert.ok(bridge.includes("duration: 6000"));
   assert.ok(bridge.includes("function paintSparkleCanvas"));
   assert.ok(bridge.includes("function makeSparkle"));
   assert.ok(bridge.includes("prefers-reduced-motion"));

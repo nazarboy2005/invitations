@@ -101,7 +101,18 @@
     "viewport": "once; section intersection ratio 0.35",
     "sectionReveal": "opacity 0, y 34px, blur 8px to visible; 0.9s ease-out; grouped children stagger 0.13s with 0.12s group delay",
     "opening": "overlay fade after 2.45s for 0.75s; curtains scaleX to zero at 1.55s and 1.7s over 1.05s; title timeline 2.25s",
-    "special": "corner ornaments scale reveal; hero image 1.16 to 1 over 10s; selected calendar day spring reveal; countdown heart pulse; gift card shine; divider sheen; gold sparkle canvas; gallery, wish, contact, palette, and map interactions",
+    "sourceMappings": {
+      "entranceVariants": "Source page module defines opacity/y/blur and scale entrances, once-only visibility threshold 0.35, grouped child stagger 0.13s with 0.12s delay, and a second group delay of 3.25s. bridge.js maps the source entrance variants to 900ms default, 1000ms scale, 800ms gallery, 700ms contact, 600ms wish, and 550ms palette entrances.",
+      "cornerOrnaments": "Source corner ornaments reveal with scale and opacity; bridge uses 800ms ease-out to 0.85 opacity.",
+      "heroImage": "Source scale 1.16 to 1 over 10s with ease-out.",
+      "calendarDay": "Source Framer spring specifies stiffness 220 and damping 15. bridge.js samples the unit-mass damped response into 24 Web Animations keyframe intervals over 400ms.",
+      "giftCard": "Source 3D card entrance is retained; source sheen translates from -120% to 220% over 3.6s with ease-in-out, then holds 2.4s before repeating. bridge.js represents the hold as a keyframe plateau in a 6s cycle.",
+      "divider": "Source sheen translates -110% to 110% over 2.8s, repeats infinitely in reverse with ease-in-out.",
+      "openingOrnament": "Source rotates the star over 8s linearly and pulses the floral ornament over 3.5s ease-in-out.",
+      "countdownHeart": "Source heart pulse scales 1 to 1.2 to 1 and changes opacity over 4s ease-in-out.",
+      "openingAndScrollCue": "Opening overlay, curtain and title timings are mapped above; scroll cue fades in after 3.45s and bobs on an 1.8s loop.",
+      "galleryAndLists": "Source entrance timings are mapped for gallery images, wishes, contacts, and palette swatches; gallery interaction settings are recorded under sourceGallery."
+    },
     "adaptation": "The source component chunk is audited and its motion timings are mapped in bridge.js using the local Web Animations API and canvas; source CSS chunks are verified after line-ending normalization. Reduced motion reveals content immediately and skips opening and loops."
   },
   "sourceGallery": {
