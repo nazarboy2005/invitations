@@ -131,7 +131,11 @@ test("Modern Floral page loads its source motion runner and preserves source rev
   const bridge = await readFile(bridgeUrl, "utf8");
   assert.match(css, /right:2rem;bottom:2rem;z-index:110;display:flex;width:3\.5rem;height:3\.5rem/);
   assert.match(css, /background:rgba\(255,255,255,\.9\);color:#A69689/);
+  assert.match(css, /\.mf-music svg,\[data-mf-music\] svg/);
   assert.match(bridge, /m\.setAttribute\("aria-label","Toggle music"\)/);
+  assert.match(bridge, /let m=q\("\[data-mf-music\]"\)\|\|q\('button\[aria-label="Toggle music"\]'\)/);
+  assert.match(bridge, /m\.dataset\.mfMusic=""/);
+  assert.match(html, /button aria-label="Toggle music" class="w-14 h-14 rounded-full shadow-2xl flex items-center justify-center bg-white\/90 border border-\[#E5E0D8\] text-\[#A69689\] backdrop-blur-md"/);
   assert.match(bridge, /audio\.muted=true/);
   assert.match(bridge, /m\.dataset\.playing=String\(!audio\.muted&&!audio\.paused\)/);
   assert.match(bridge, /m\.onclick=\(\)=>\{audio\.muted=!audio\.muted/);
