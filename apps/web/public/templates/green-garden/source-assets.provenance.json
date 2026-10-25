@@ -131,7 +131,7 @@
   ],
   "sourceReferencedMissingAsset": {
     "file": "/images/green-garden/leaf1-bloom.webp",
-    "archiveResult": "Absent from the recovered complete Chorlove and Marxaba provider trees. Exact-name recursive search found only Chorlove/Web invitations/images/glass-pink/leaf1-bloom.webp, a different Glass Pink ornament.",
+    "archiveResult": "Exact-name recursive search across both source archives found only the different Chorlove Glass Pink ornament. Alternate-name audit visually reviewed 184 unique transparent botanical raster candidates across both archives and all provider trees; no candidate could be identified as the missing Green Garden artwork.",
     "liveHttpStatus": 404,
     "canonicalSourceResponse": {
       "url": "https://chorlove.uz/images/green-garden/leaf1-bloom.webp",
@@ -166,11 +166,25 @@
         "bytes": 311360,
         "sha256": "435c4b9a37ad765fb6b40b0333ba49518155e9839254d910a20fa5830a49db57",
         "archiveFile": "Chorlove/Web invitations/images/glass-pink/leaf1-bloom.webp",
-        "providerSearch": "Exact-name recursive search across recovered Chorlove and Marxaba source trees; sole hit",
+        "providerSearch": "Exact-name recursive search across D:/Projects/Invitations and D:/Projects/Taklifnoma/Invitations - this folder will be removed from production; sole hit across both archives",
         "provenance": "Glass Pink artwork; visually different and not used by Green Garden."
       }
     },
-    "result": "Rechecked 2026-10-26: the canonical source URL returned HTTP 404 with no redirect. All five captured source references still point to it. Exact-name recursive search across the recovered Chorlove and Marxaba provider trees found only the different Glass Pink ornament. The reference remains broken in source and package; no replacement is packaged."
+    "alternateNameAudit": {
+      "checkedAt": "2026-10-26",
+      "sourceRoots": [
+        "D:/Projects/Invitations",
+        "D:/Projects/Taklifnoma/Invitations - this folder will be removed from production"
+      ],
+      "providers": ["Chorlove", "E-invitation", "Invitate", "Marxaba", "Mytaklif", "OnlineTaklifnoma", "Taklifiy", "Taklifla", "Taklifnomachi", "Yoryor", "Yumevite", "Wedvitation"],
+      "method": "Recursive filename-keyword scan for leaf, bloom, flower, floral, vine, foliage, sprig, ornament, decoration, decor, garden, branch, rose, petal, plant, and botanical; reviewed contact sheets of unique raster candidates with transparency. Duplicate archive copies were deduplicated by SHA-256.",
+      "uniqueRasterCandidatesVisuallyReviewed": 184,
+      "exactNameMatches": 1,
+      "exactNameMatchIsDifferentGlassPinkAsset": true,
+      "sourceIdenticalOrConfidentEquivalentFound": false,
+      "conclusion": "The reviewed candidates are other compositions or styles; none is source-identical or confidently identifiable as leaf1-bloom. Similar flowers or foliage are not a reliable replacement for the original artwork."
+    },
+    "result": "Rechecked 2026-10-26: the canonical source URL returned HTTP 404 with no redirect. All five captured source references still point to it. Exact-name recursive search across D:/Projects/Invitations and D:/Projects/Taklifnoma/Invitations - this folder will be removed from production found only the different Glass Pink ornament. The alternate-name audit visually reviewed 184 unique transparent botanical raster candidates across the provider trees and found no source-identical or confidently equivalent artwork. The source reference remains broken and no substitute is packaged."
   },
   "integrationStatus": "published-through-0095_publish_green_garden.sql; configured-catalog-and-authenticated-integration-verified",
   "sourceArchiveAudit": {

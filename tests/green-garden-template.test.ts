@@ -172,7 +172,15 @@ test("Green Garden restores available source motion and schedule assets", async 
   });
   assert.match(manifest.sourceReferencedMissingAsset.result, /All five captured source references still point to it/);
   assert.equal(manifest.sourceReferencedMissingAsset.packageResolution.unrelatedSameNameAsset.sha256, "435c4b9a37ad765fb6b40b0333ba49518155e9839254d910a20fa5830a49db57");
-  assert.match(manifest.sourceReferencedMissingAsset.archiveResult, /recovered complete Chorlove and Marxaba provider trees/);
+  assert.match(manifest.sourceReferencedMissingAsset.archiveResult, /184 unique transparent botanical raster candidates/);
+  assert.deepEqual(manifest.sourceReferencedMissingAsset.alternateNameAudit.sourceRoots, [
+    "D:/Projects/Invitations",
+    "D:/Projects/Taklifnoma/Invitations - this folder will be removed from production",
+  ]);
+  assert.equal(manifest.sourceReferencedMissingAsset.alternateNameAudit.uniqueRasterCandidatesVisuallyReviewed, 184);
+  assert.equal(manifest.sourceReferencedMissingAsset.alternateNameAudit.exactNameMatches, 1);
+  assert.equal(manifest.sourceReferencedMissingAsset.alternateNameAudit.sourceIdenticalOrConfidentEquivalentFound, false);
+  assert.match(manifest.sourceReferencedMissingAsset.alternateNameAudit.conclusion, /not a reliable replacement/);
   assert.deepEqual(manifest.sourceHydrationRecheck, {
     checkedAt: "2026-10-26",
     url: "http://localhost:3003/templates/green-garden/preview-frame.html",
