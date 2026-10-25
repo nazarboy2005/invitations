@@ -55,6 +55,11 @@ test("Luxury Gold preserves captured layout, source styles and original assets w
     assert.equal(createHash("sha256").update(sourceModule).digest("hex"), manifest.sourcePageModule.sha256);
   }
   assert.equal(manifest.sourcePageModule.sha256, "0693fc8a88c7a71faa8ff3205ffd3e436b6dfcf410602bbb2f2a72517fe65ecc");
+  if (sourceRoot) {
+    const galleryRuntime = readFileSync(join(sourceRoot, "_next/static/chunks/0jsw~n6ojplnf.js"));
+    assert.equal(galleryRuntime.length, manifest.sourceGallery.browserReview.sourceRuntimeChunkBytes);
+    assert.equal(createHash("sha256").update(galleryRuntime).digest("hex"), manifest.sourceGallery.browserReview.sourceRuntimeChunkSha256);
+  }
   if (sourceModule) {
     const sourceText = sourceModule.toString("utf8");
     for (const sourceSetting of [
@@ -69,12 +74,21 @@ test("Luxury Gold preserves captured layout, source styles and original assets w
   assert.match(bridge, /show = \(direction = 0\)/);
   assert.match(bridge, /\{ duration: 250, easing: "ease-out" \}/);
   assert.match(bridge, /setAttribute\("aria-current", String\(itemIndex === index\)\)/);
+  assert.match(bridge, /scrollIntoView\(\{ block: "nearest", inline: "center" \}\)/);
   for (const label of ["Zoom in", "Zoom out", "Play", "Pause", "Previous", "Next"]) {
     assert.ok(bridge.includes(`"${label}"`), `gallery control missing: ${label}`);
   }
+  for (const sourceIconPath of [
+    "M12 10h-2v2H9v-2H7V9h2V7h1v2h2v1z",
+    "M7 9h5v1H7z",
+    "M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z",
+    "M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z",
+  ]) assert.ok(bridge.includes(sourceIconPath), `source lightbox icon path missing: ${sourceIconPath}`);
   const adapterStyles = readFileSync(join(root, "adapter.css"), "utf8");
   assert.match(adapterStyles, /flex:0 0 84px;width:84px;height:56px/);
   assert.match(adapterStyles, /border-radius:8px/);
+  assert.match(adapterStyles, /\.lg-gallery-overlay button\{position:absolute;z-index:2/);
+  assert.match(adapterStyles, /padding:0 calc\(50% - 42px\)/);
   const packagedFontCss = readFileSync("apps/web/public/templates/chorlove/shared/_next/static/chunks/0.u3j0~_2ygfx.css");
   assert.equal(createHash("sha256").update(normalizeLines(packagedFontCss)).digest("hex"), manifest.sourceFonts.stylesheet.sourceSha256);
   if (sourceRoot) {

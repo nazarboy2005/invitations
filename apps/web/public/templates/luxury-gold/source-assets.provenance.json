@@ -118,7 +118,13 @@
       "swipeAnimationMs": 250,
       "closeOnBackdropClick": true
     },
-    "adaptation": "The Chorlove component is coupled to its bundled app runtime, so bridge.js implements these source-visible controls and settings against creator gallery images. Gallery items remain creator-provided; unrelated captured Orchid Amplop sample images are excluded."
+    "adaptation": "The Chorlove component is coupled to its bundled app runtime, so bridge.js implements these source-visible controls and settings against creator gallery images. Gallery items remain creator-provided; unrelated captured Orchid Amplop sample images are excluded.",
+    "browserReview": {
+      "source": "At 480x720, the captured six-photo gallery opened its Chorlove lightbox; Next advanced 1/6 to 2/6, Play advanced on the 1500ms interval, thumbnail selection changed to 1/6, and Close dismissed it.",
+      "package": "Chrome interaction check passed with creator-only fixture images: open, next, previous, zoom, start/pause slideshow, select thumbnail, keyboard navigation, and Escape close. The active thumbnail remained centered at the first and second slides.",
+      "sourceRuntimeChunkBytes": 44254,
+      "sourceRuntimeChunkSha256": "fa0c331b8fad639b1375e517b27b7e1eff0e424807a711b4bae9fc9145f661f8"
+    }
   },
   "catalogCover": {
     "status": "Captured the original source-rendered opening as a local portrait catalog artifact.",
@@ -141,7 +147,7 @@
       "network": "Only the local archive server was allowed; remote requests were blocked."
     },
     "review": "The saved PNG was visually inspected. It shows the source opening with all four original corner ornaments, gold sparkle field, greeting, divider, serif invitation title, ornament, and scroll cue. Local font files load and the title computes to Playfair Display at 30px in the 480x720 source viewport.",
-    "publication": "The cover artifact is ready. Luxury Gold remains unpublished; the typed catalog previewImage pointer is pending the central exact-path queue."
+    "publication": "The typed catalog points to /templates/luxury-gold/catalog-opening.png. Luxury Gold remains unpublished in the typed catalog and migration."
   },
   "sourcePackageSnapshot": {
     "file": "source/preview-frame.html",
