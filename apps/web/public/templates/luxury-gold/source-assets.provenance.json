@@ -147,6 +147,18 @@
       "network": "Only the local archive server was allowed; remote requests were blocked."
     },
     "review": "The saved PNG was visually inspected. It shows the source opening with all four original corner ornaments, gold sparkle field, greeting, divider, serif invitation title, ornament, and scroll cue. Local font files load and the title computes to Playfair Display at 30px in the 480x720 source viewport.",
+    "packageComparison": {
+      "viewport": { "width": 480, "height": 720, "deviceScaleFactor": 1 },
+      "packageRendererScreenshot": {
+        "disposition": "ephemeral QA capture outside the repository",
+        "bytes": 102581,
+        "sha256": "92a27c2839218f13361b2e14bebb6a22ee64de460e7a986027af5427b82934d5"
+      },
+      "matchedOpeningContent": ["greeting", "invitation title", "ornament", "scroll cue", "four corner flourishes"],
+      "meanAbsoluteRgbDifferencePerChannel": 1.8673,
+      "pixelsWithRgbDifferenceOver25Percent": 0.9141,
+      "review": "Source cover and settled package renderer have matching opening geometry and typography. The small pixel delta is localized to time-varying sparkles and fine ornament edges captured at different animation frames."
+    },
     "publication": "The typed catalog points to /templates/luxury-gold/catalog-opening.png. Luxury Gold remains unpublished in the typed catalog and migration."
   },
   "sourcePackageSnapshot": {
