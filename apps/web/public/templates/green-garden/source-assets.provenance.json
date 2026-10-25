@@ -14,6 +14,8 @@
     "verifiedAgainst": "Recovered Chorlove/Web invitations archive",
     "reviewedBehavior": [
       "Green Garden opening and hero reveal/parallax",
+      "Gallery 3.5-second autoplay, 500ms 3D carousel positioning, and lightbox pause/resume",
+      "Repeatable viewport-triggered reveals and source thresholds",
       "To'yona floating ornaments and gift-details modal",
       "RSVP name/yes-no/submit fields",
       "guestbook card and date presentation"

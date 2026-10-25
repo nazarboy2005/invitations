@@ -137,7 +137,7 @@ test("Green Garden restores available source motion and schedule assets", async 
   assert.match(css, /backdrop-filter:blur\(12px\)/);
   assert.match(css, /border-radius:24px;background:#fbfdf8;backdrop-filter:blur\(24px\)/);
   assert.match(css, /border-radius:16px;background:rgba\(255,255,255,\.8\);box-shadow/);
-  assert.match(bridge, /\},\{threshold:\.5\}\)/);
+  assert.match(bridge, /observeMotion\(time,.*?\.5,delay,\.5\)/s);
   assert.match(bridge, /\.6,index\*\.15,\.3\)/);
   assert.match(bridge, /\.4,index\*\.05,\.2\)/);
   assert.match(bridge, /gg-reduced-motion/);
@@ -189,6 +189,27 @@ test("Green Garden packaged assets match the recorded source hashes", async () =
   }
 });
 
+test("Green Garden matches source gallery autoplay and repeatable viewport reveals", async () => {
+  const bridge = await readFile(new URL("bridge.js", root), "utf8");
+  const html = await readFile(new URL("index.html", root), "utf8");
+  assert.match(bridge, /window\.setInterval\(\(\)\s*=>\s*galleryAutoAdvance\(\),\s*3500\)/);
+  assert.match(bridge, /galleryAutoEnabled=!galleryReduced/);
+  assert.match(bridge, /gallery\.length>1&&!galleryReduced/);
+  assert.match(bridge, /positionX=Math\.max\(-140,Math\.min\(140,60\*relative\)\)/);
+  assert.match(bridge, /depth=-150\*Math\.abs\(relative\),rotation=45\*relative/);
+  assert.match(bridge, /galleryAutoAdvance=\(\)=>rotate\(1\)/);
+  assert.match(bridge, /lightbox\.addEventListener\("close",startGalleryTimer\)/);
+  assert.match(bridge, /!entry\.isIntersecting&&visible/);
+  assert.match(bridge, /resetReveal\(node,frames\)/);
+  assert.match(bridge, /observeMotion\(time,/);
+  assert.match(bridge, /observeMotion\(dot,/);
+  assert.match(bridge, /observeMotion\(title,/);
+  assert.doesNotMatch(bridge, /observer\.disconnect\(\)/);
+  assert.match(html, /style="perspective:1000px"/);
+  assert.equal((html.match(/data-gg-gallery-item=/g) || []).length, 6);
+  assert.match(html, /duration-500 ease-out/);
+});
+
 test("Green Garden source runtime and fonts have recovered archive provenance", async () => {
   const manifest = JSON.parse(await readFile(new URL("source-assets.provenance.json", root), "utf8"));
   assert.deepEqual(manifest.sourceRuntimeModule, {
@@ -198,6 +219,8 @@ test("Green Garden source runtime and fonts have recovered archive provenance", 
     verifiedAgainst: "Recovered Chorlove/Web invitations archive",
     reviewedBehavior: [
       "Green Garden opening and hero reveal/parallax",
+      "Gallery 3.5-second autoplay, 500ms 3D carousel positioning, and lightbox pause/resume",
+      "Repeatable viewport-triggered reveals and source thresholds",
       "To'yona floating ornaments and gift-details modal",
       "RSVP name/yes-no/submit fields",
       "guestbook card and date presentation",
