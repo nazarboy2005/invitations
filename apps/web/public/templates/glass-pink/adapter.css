@@ -26,9 +26,29 @@
 .cc-status { min-height: 1.4em; text-align: center; }
 .cc-party-size { display: grid; gap: 6px; margin-top: 14px; }
 .cc-party-size select { width: 100%; padding: 10px 12px; border: 1px solid rgb(203 93 108 / 24%); border-radius: 10px; color: rgb(203 93 108); background: #fff; font: inherit; }
-.cc-gift-details { display: none; margin: 14px auto 0; width: min(100%,400px); padding: 16px; border: 1px solid rgb(203 93 108 / 20%); border-radius: 16px; background: #fff; color: rgb(203 93 108); text-align: center; overflow-wrap: anywhere; }
-.cc-gift-details[data-open="true"] { display: block; }
-.cc-gift-details p { margin: 6px 0; }
+.cc-gift-modal { position: fixed; inset: 0; z-index: 2000; display: flex; align-items: center; justify-content: center; padding: 16px; color: rgb(147 56 69); background: rgb(0 0 0 / 75%); backdrop-filter: blur(12px); user-select: none; opacity: 0; transition: opacity 300ms ease; }
+.cc-gift-modal[data-open="true"] { opacity: 1; }
+.cc-gift-modal[data-closing="true"] { opacity: 0; pointer-events: none; }
+.cc-gift-modal-card { position: relative; width: 100%; max-width: 448px; overflow: hidden; padding: 24px; border: 1px solid rgb(255 255 255 / 50%); border-radius: 24px; color: rgb(147 56 69); background: rgb(255 255 255 / 90%); backdrop-filter: blur(24px); box-shadow: 0 25px 50px -12px rgb(0 0 0 / 25%); text-align: center; opacity: 0; transform: scale(.92) translateY(20px); transition: opacity 250ms ease, transform 250ms ease; }
+.cc-gift-modal[data-open="true"] .cc-gift-modal-card { opacity: 1; transform: scale(1) translateY(0); }
+.cc-gift-modal-close { position: absolute; z-index: 10; top: 16px; right: 16px; display: grid; place-items: center; padding: 8px; border: 0; border-radius: 999px; color: rgb(203 93 108); background: transparent; cursor: pointer; transition: background-color 150ms ease; }
+.cc-gift-modal-close:hover { background: rgb(203 93 108 / 15%); }
+.cc-gift-modal-header { display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 8px 0 16px; border-bottom: 1px solid rgb(203 93 108 / 20%); }
+.cc-gift-modal-header img { width: 64px; height: 64px; object-fit: contain; filter: drop-shadow(0 4px 4px rgb(0 0 0 / 25%)); }
+.cc-gift-modal-header h3 { margin: 0; color: rgb(203 93 108); font: 700 18px/1.4 "Cormorant Garamond", serif; letter-spacing: .05em; text-transform: uppercase; }
+@media (min-width: 768px) { .cc-gift-modal-header h3 { font-size: 20px; } }
+.cc-gift-modal-content { display: flex; flex-direction: column; align-items: center; gap: 16px; padding: 24px 0; }
+.cc-gift-card-panel { display: flex; width: 100%; flex-direction: column; align-items: center; gap: 8px; padding: 20px; border: 1px solid rgb(203 93 108 / 30%); border-radius: 16px; background: rgb(255 255 255 / 60%); box-shadow: 0 1px 3px rgb(0 0 0 / 10%); overflow-wrap: anywhere; }
+.cc-gift-bank-label { display: flex; align-items: center; gap: 8px; color: rgb(203 93 108); font-size: 12px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; }
+.cc-gift-card-number { margin: 4px 0; color: rgb(203 93 108); font: 700 clamp(16px, 5vw, 20px)/1.4 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .1em; }
+.cc-gift-card-holder { color: rgb(147 56 69); font: 500 12px/16px "Cormorant Garamond", serif; }
+.cc-gift-copy { display: inline-flex; align-items: center; gap: 8px; margin-top: 12px; padding: 8px 20px; border: 0; border-radius: 999px; color: #fff; background: rgb(203 93 108); box-shadow: 0 1px 3px rgb(0 0 0 / 10%); font: 600 12px/16px "Cormorant Garamond", serif; cursor: pointer; transition: transform 150ms ease, background-color 150ms ease; }
+.cc-gift-copy:hover { transform: scale(1.05); }
+.cc-gift-copy:active { transform: scale(.95); }
+.cc-gift-presence-note { margin: 0; padding: 0 16px; color: rgb(147 56 69); font: italic 14px/20px "Cormorant Garamond", serif; }
+@media (prefers-reduced-motion: reduce) { .cc-gift-modal, .cc-gift-modal-card, .cc-gift-copy, .cc-gift-modal-close { transition: none !important; } }
+.cc-reduced-motion .cc-gift-modal, .cc-reduced-motion .cc-gift-modal-card, .cc-reduced-motion .cc-gift-copy, .cc-reduced-motion .cc-gift-modal-close { transition: none !important; }
+.cc-gift-modal[data-reduced-motion="true"], .cc-gift-modal[data-reduced-motion="true"] .cc-gift-modal-card, .cc-gift-modal[data-reduced-motion="true"] .cc-gift-copy, .cc-gift-modal[data-reduced-motion="true"] .cc-gift-modal-close { transition: none !important; }
 .cc-gallery-lightbox { position: fixed; inset: 0; z-index: 2000; display: flex; align-items: center; justify-content: center; padding: 16px; color: #fff; background: rgb(0 0 0 / 85%); backdrop-filter: blur(12px); user-select: none; }
 .cc-gallery-lightbox[hidden] { display: none; }
 .cc-gallery-lightbox img { max-width: 100%; max-height: 85vh; border-radius: 16px; object-fit: contain; box-shadow: 0 25px 60px rgb(0 0 0 / 35%); }

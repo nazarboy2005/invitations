@@ -16,7 +16,10 @@ const adapterCss = readFileSync(resolve(root, "apps/web/public/templates/glass-p
 const previewPath = resolve(root, "apps/web/public/templates/glass-pink/catalog-cover-opening.png");
 const provenancePath = resolve(root, "apps/web/public/templates/glass-pink/source/provenance.json");
 const sourceSnapshotPath = resolve(root, "apps/web/public/templates/glass-pink/source/preserved-preview-frame.html");
-const archivedSourcePath = resolve(root, "Invitations - this folder will be removed from production/Chorlove/Web invitations/templates/glass-pink/preview-frame.html");
+const sourceArchiveRoot = resolve(root, "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production");
+const chorloveSourceRoot = resolve(sourceArchiveRoot, "Chorlove");
+const archivedSourcePath = resolve(chorloveSourceRoot, "Web invitations/templates/glass-pink/preview-frame.html");
+const sourcePageModulePath = resolve(chorloveSourceRoot, "Web invitations/_next/static/chunks/0wvjbn--75n3p.js");
 
 test("Glass Pink is published with its additive release migration", () => {
   const entry = TEMPLATES.find((template) => template.id === "glass-pink");
@@ -86,12 +89,11 @@ test("Glass Pink preserves its canonical source snapshot byte-for-byte", () => {
 });
 
 test("Glass Pink uses only its own artwork and keeps sample gallery content ephemeral", () => {
-  const archiveRoot = resolve(root, "Invitations - this folder will be removed from production");
-  const providers = readdirSync(archiveRoot, { withFileTypes: true })
+  const providers = readdirSync(sourceArchiveRoot, { withFileTypes: true })
     .filter((entry) => entry.isDirectory())
     .map((entry) => entry.name);
   const canonicalProviders = providers.filter((provider) => {
-    const manifestPath = resolve(archiveRoot, provider, "capture-manifest.json");
+    const manifestPath = resolve(sourceArchiveRoot, provider, "capture-manifest.json");
     try {
       const manifest = JSON.parse(readFileSync(manifestPath, "utf8"));
       return manifest.pages?.some((page: { title?: string; file?: string }) => page.title === "Glass Pink" || page.file?.includes("glass-pink"));
@@ -180,6 +182,63 @@ test("Glass Pink retains its source gift-box section without adding dress code",
   assert.doesNotMatch(source, /dress.?code|attire|kiyim.?uslubi/i);
   assert.doesNotMatch(html, /data-chorlove-dress|data-gp-dress/);
   assert.match(bridge, /hide\(section, !data\.toyona\?\.enabled\)/);
+});
+
+test("Glass Pink gift box opens the source body-portal modal instead of inline details", () => {
+  const sourceModule = readFileSync(sourcePageModulePath);
+  const provenance = JSON.parse(readFileSync(provenancePath, "utf8"));
+  assert.equal(provenance.pageModule.file, "Chorlove/Web invitations/_next/static/chunks/0wvjbn--75n3p.js");
+  assert.equal(provenance.pageModule.moduleId, 875662);
+  assert.equal(sourceModule.length, provenance.pageModule.bytes);
+  assert.equal(createHash("sha256").update(sourceModule).digest("hex"), provenance.pageModule.sha256);
+  assert.match(sourceModule.toString("utf8"), /document\.currentScript:void 0,875662,e=>/);
+  assert.match(sourceModule.toString("utf8"), /max-w-md rounded-3xl p-6 shadow-2xl text-center border border-white\/50 bg-white\/90 backdrop-blur-xl/);
+  assert.match(sourceModule.toString("utf8"), /duration:\.25/);
+  assert.match(sourceModule.toString("utf8"), /Your presence is the greatest gift for us\./);
+  assert.match(sourceModule.toString("utf8"), /Copy Card Number/);
+  assert.match(sourceModule.toString("utf8"), /setTimeout\(\(\)=>o\(!1\),2500\)/);
+  assert.match(sourceModule.toString("utf8"), /document\.body\)\]\}\)\}/);
+  assert.match(bridge, /function showGiftModal\(toyona\)/);
+  assert.match(bridge, /if \(reducedMotion\) overlay\.dataset\.reducedMotion = "true"/);
+  assert.match(bridge, /const sourceButton = hint \|\| section\.querySelector\('button\[aria-label="Open gift box"\]'/);
+  assert.match(bridge, /card\.onclick = \(\) => showGiftModal\(data\.toyona\)/);
+  assert.match(bridge, /document\.body\.append\(overlay\)/);
+  assert.match(bridge, /overlay\.setAttribute\("role", "dialog"\)/);
+  assert.match(bridge, /overlay\.onclick = \(event\) => \{ if \(event\.target === overlay\) closeGiftModal\(\); \}/);
+  assert.match(bridge, /event\.key === "Escape"/);
+  assert.match(bridge, /navigator\.clipboard\.writeText\(cardNumber\.replaceAll\(" ", ""\)\)/);
+  assert.match(bridge, /labels\.giftPresenceNote/);
+  assert.doesNotMatch(bridge, /cc-gift-details/);
+  assert.match(adapterCss, /\.cc-gift-modal \{ position: fixed; inset: 0; z-index: 2000/);
+  assert.match(adapterCss, /background: rgb\(0 0 0 \/ 75%\); backdrop-filter: blur\(12px\)/);
+  assert.match(adapterCss, /max-width: 448px;[^}]*border-radius: 24px/);
+  assert.match(adapterCss, /transition: opacity 250ms ease, transform 250ms ease/);
+  assert.match(adapterCss, /scale\(\.92\) translateY\(20px\)/);
+  assert.match(adapterCss, /@media \(prefers-reduced-motion: reduce\) \{ \.cc-gift-modal/);
+  assert.match(adapterCss, /\.cc-gift-modal\[data-reduced-motion="true"\].*transition: none !important/);
+  assert.doesNotMatch(adapterCss, /\.cc-gift-details/);
+});
+
+test("Glass Pink schedule retains the original illustrated timeline markers", () => {
+  const source = readFileSync(sourceSnapshotPath, "utf8");
+  const sourceModule = readFileSync(sourcePageModulePath, "utf8");
+  const provenance = JSON.parse(readFileSync(provenancePath, "utf8"));
+  const assets = provenance.recoveredSourceAssets as Array<{ file: string; originalReference: string; sourceUrl: string; bytes: number; sha256: string }>;
+  for (const file of ["coming.webp", "cake.webp", "water.webp"]) {
+    const asset = assets.find((item) => item.file === file);
+    assert.ok(asset, `${file} must have source provenance`);
+    assert.ok(source.includes(`src=\"${asset.originalReference}\"`), `${file} is referenced by the original page`);
+    assert.ok(html.includes(`src=\"/templates/glass-pink/assets/${file}\"`), `${file} is wired into the packaged timeline`);
+    const bytes = readFileSync(resolve(root, "apps/web/public/templates/glass-pink/assets", file));
+    assert.equal(bytes.length, asset.bytes);
+    assert.equal(createHash("sha256").update(bytes).digest("hex"), asset.sha256);
+    assert.match(asset.sourceUrl, new RegExp(`/images/glass-pink/${file.replace(".", "\\.")}$`));
+  }
+  assert.match(sourceModule, /initial:\{opacity:0,scale:\.8\},whileInView:\{opacity:\.9,scale:1\},viewport:\{amount:\.3\},transition:\{duration:\.6\}/);
+  assert.match(sourceModule, /transition:\{duration:\.6,delay:\.15\}/);
+  assert.match(sourceModule, /transition:\{duration:\.6,delay:\.3\}/);
+  assert.match(bridge, /duration: 600, delay: \[0, 150, 300\]\[index\] \|\| 0, amount: 0\.3, toOpacity: 0\.9, toTransform: "scale\(1\)"/);
+  assert.match(html, /pointer-events-none absolute left-0 top-2 bottom-2 flex flex-col justify-around items-center z-10/);
 });
 
 test("Glass Pink opener keeps the original timed exit instead of hiding on click", () => {

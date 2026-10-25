@@ -14,6 +14,35 @@
     "_next/static/chunks/0.u3j0~_2ygfx.css",
     "_next/static/chunks/00sc_9lpb3zcn.css"
   ],
+  "pageModule": {
+    "file": "Chorlove/Web invitations/_next/static/chunks/0wvjbn--75n3p.js",
+    "moduleId": 875662,
+    "bytes": 68749,
+    "sha256": "e79d2091c5d38ac1ba100340f43b62cf994b2b6b79668dd0d274b8ec784fc36e"
+  },
+  "recoveredSourceAssets": [
+    {
+      "file": "coming.webp",
+      "originalReference": "/images/glass-pink/coming.webp",
+      "sourceUrl": "https://chorlove.uz/images/glass-pink/coming.webp",
+      "bytes": 115484,
+      "sha256": "174056110520161f448a1e957fd7244edba53628b5d8fe905eb805f656419105"
+    },
+    {
+      "file": "cake.webp",
+      "originalReference": "/images/glass-pink/cake.webp",
+      "sourceUrl": "https://chorlove.uz/images/glass-pink/cake.webp",
+      "bytes": 86992,
+      "sha256": "4fe93138526b2a8495971a96869c48ccd0a8d70a0cb88e72b8a8a8dc09f61299"
+    },
+    {
+      "file": "water.webp",
+      "originalReference": "/images/glass-pink/water.webp",
+      "sourceUrl": "https://chorlove.uz/images/glass-pink/water.webp",
+      "bytes": 125916,
+      "sha256": "dc55e9c7f67fbde2f9c8edb6bcf65cb816d1f90e0a7520dee42dd0ee1463f314"
+    }
+  ],
   "sourceMotion": {
     "file": "Chorlove/Web invitations/_next/static/chunks/0wvjbn--75n3p.js",
     "sha256": "e79d2091c5d38ac1ba100340f43b62cf994b2b6b79668dd0d274b8ec784fc36e",
@@ -172,7 +201,16 @@
         "durationMs": 3300,
         "delayMs": 100
       }
-    ]
+    ],
+    "giftModal": {
+      "portal": "document.body",
+      "overlay": "fixed inset, z-index 2000, black/75 backdrop, 12px blur, opacity fade",
+      "card": "max-width 448px, white/90 translucent surface, 24px radius, 250ms opacity/scale(.92)/translateY(20px) entrance and reverse exit",
+      "content": "64px gift-box artwork, localized title, bank-card label, card number, optional holder, copy action; source fallback message when no card number is provided",
+      "dismissal": "close button, backdrop click, or Escape; card click does not dismiss",
+      "copy": "strip spaces from card number; copied state resets after 2500ms",
+      "reducedMotion": "show and remove immediately without transitions"
+    }
   },
   "catalogCover": {
     "file": "../catalog-cover-opening.png",

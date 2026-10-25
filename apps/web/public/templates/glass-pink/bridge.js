@@ -43,6 +43,11 @@
       map: "Xaritada ko‘rish",
       giftNumber: "Karta raqami",
       giftHolder: "Karta egasi",
+      giftCardLabel: "Bank kartasi",
+      giftCopyNumber: "Karta raqamini nusxalash",
+      giftCopied: "Nusxalandi!",
+      giftPresenceNote: "Biz uchun tashrifingiz eng katta sovg‘a.",
+      close: "Yopish",
       wishSent: "Tilagingiz taklifnoma egasiga yuborildi.",
       rsvpSent: "Javobingiz saqlandi. Rahmat!",
       previewOnly: "Ko‘rish rejimida yuborish o‘chiq.",
@@ -91,6 +96,11 @@
       map: "Харитада кўриш",
       giftNumber: "Карта рақами",
       giftHolder: "Карта эгаси",
+      giftCardLabel: "Банк картаси",
+      giftCopyNumber: "Карта рақамини нусхалаш",
+      giftCopied: "Нусхаланди!",
+      giftPresenceNote: "Биз учун ташрифингиз энг катта совға.",
+      close: "Ёпиш",
       wishSent: "Тилагингиз таклифнома эгасига юборилди.",
       rsvpSent: "Жавобингиз сақланди. Раҳмат!",
       previewOnly: "Кўриш режимида юбориш ўчиқ.",
@@ -139,6 +149,11 @@
       map: "Open map",
       giftNumber: "Card number",
       giftHolder: "Cardholder",
+      giftCardLabel: "Bank Card",
+      giftCopyNumber: "Copy Card Number",
+      giftCopied: "Copied!",
+      giftPresenceNote: "Your presence is the greatest gift for us.",
+      close: "Close",
       wishSent: "Your wish was sent to the invitation owner.",
       rsvpSent: "Your response was saved. Thank you!",
       previewOnly: "Submissions are disabled in preview.",
@@ -187,6 +202,11 @@
       map: "Открыть карту",
       giftNumber: "Номер карты",
       giftHolder: "Владелец карты",
+      giftCardLabel: "Банковская карта",
+      giftCopyNumber: "Скопировать номер карты",
+      giftCopied: "Скопировано!",
+      giftPresenceNote: "Ваше присутствие — лучший подарок для нас.",
+      close: "Закрыть",
       wishSent: "Ваше пожелание отправлено владельцу приглашения.",
       rsvpSent: "Ваш ответ сохранён. Спасибо!",
       previewOnly: "Отправка в режиме просмотра отключена.",
@@ -218,6 +238,7 @@
   let state = null;
   let countdownTimer = 0;
   let galleryIndex = 0;
+  let activeGiftModal = null;
   const giftAnimations = new WeakMap();
   const revealSpecs = new WeakMap();
   const revealObserved = new WeakSet();
@@ -1012,6 +1033,7 @@
   function renderGift(data) {
     const section = root.querySelector("[data-chorlove-gift]");
     if (!section) return;
+    if (activeGiftModal) closeGiftModal();
     hide(section, !data.toyona?.enabled);
     const reduced = Boolean(state?.reducedMotion) || matchMedia("(prefers-reduced-motion: reduce)").matches;
     const floaters = [
@@ -1043,28 +1065,133 @@
       }
     }
     if (!data.toyona?.enabled) return;
-    let details = section.querySelector(".cc-gift-details");
-    if (!details) {
-      details = document.createElement("div");
-      details.className = "cc-gift-details";
-      const label = document.createElement("p"); label.textContent = localCopy().giftNumber;
-      const number = document.createElement("strong"); number.dataset.giftNumber = "";
-      const holder = document.createElement("p"); holder.dataset.giftHolder = "";
-      const note = document.createElement("p"); note.dataset.giftNote = "";
-      details.append(label, number, holder, note);
-      section.append(details);
-    }
-    text(details.querySelector("[data-gift-number]"), data.toyona.cardNumber);
-    text(details.querySelector("[data-gift-holder]"), data.toyona.cardHolder ? `${localCopy().giftHolder}: ${data.toyona.cardHolder}` : "");
-    text(details.querySelector("[data-gift-note]"), data.toyona.note);
     const hint = section.querySelector('[data-chorlove-i18n="giftOpenHint"]');
-    const card = hint?.closest(".cursor-pointer") || hint?.parentElement;
+    const sourceButton = hint || section.querySelector('button[aria-label="Open gift box"]');
+    const card = sourceButton?.closest(".cursor-pointer") || (sourceButton?.matches("button") ? sourceButton : sourceButton?.parentElement);
     if (card) {
       card.tabIndex = 0;
       card.setAttribute("role", "button");
       card.setAttribute("aria-label", localCopy().giftOpenHint);
-      card.onclick = () => { details.dataset.open = details.dataset.open !== "true"; };
+      card.onclick = () => showGiftModal(data.toyona);
       card.onkeydown = (event) => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); card.click(); } };
+    }
+  }
+
+  function closeGiftModal() {
+    const active = activeGiftModal;
+    if (!active) return;
+    activeGiftModal = null;
+    const { overlay, card, reducedMotion, onKeyDown } = active;
+    window.removeEventListener("keydown", onKeyDown);
+    if (reducedMotion) { overlay.remove(); return; }
+    overlay.dataset.closing = "true";
+    overlay.dataset.open = "false";
+    card.dataset.open = "false";
+    window.setTimeout(() => overlay.remove(), 300);
+  }
+
+  function showGiftModal(toyona) {
+    closeGiftModal();
+    const labels = localCopy();
+    const reducedMotion = Boolean(state?.reducedMotion) || matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const overlay = document.createElement("div");
+    overlay.className = "cc-gift-modal";
+    if (reducedMotion) overlay.dataset.reducedMotion = "true";
+    overlay.setAttribute("role", "dialog");
+    overlay.setAttribute("aria-modal", "true");
+    overlay.setAttribute("aria-label", labels.giftTitle);
+
+    const card = document.createElement("div");
+    card.className = "cc-gift-modal-card";
+    const close = document.createElement("button");
+    close.type = "button";
+    close.className = "cc-gift-modal-close";
+    close.setAttribute("aria-label", labels.close);
+    close.innerHTML = '<svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"></path></svg>';
+    close.onclick = closeGiftModal;
+
+    const header = document.createElement("div");
+    header.className = "cc-gift-modal-header";
+    const image = document.createElement("img");
+    image.src = "/templates/glass-pink/assets/glass_garden_pink.webp";
+    image.alt = "Gift box";
+    const heading = document.createElement("h3");
+    heading.textContent = labels.giftTitle;
+    header.append(image, heading);
+
+    const content = document.createElement("div");
+    content.className = "cc-gift-modal-content";
+    const cardNumber = String(toyona?.cardNumber || "");
+    if (cardNumber) {
+      const panel = document.createElement("div");
+      panel.className = "cc-gift-card-panel";
+      const bank = document.createElement("div");
+      bank.className = "cc-gift-bank-label";
+      bank.innerHTML = '<svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"></rect><path d="M2 10h20"></path></svg>';
+      const bankText = document.createElement("span");
+      bankText.textContent = labels.giftCardLabel;
+      bank.append(bankText);
+      const number = document.createElement("div");
+      number.className = "cc-gift-card-number";
+      number.textContent = cardNumber;
+      panel.append(bank, number);
+
+      if (toyona?.cardHolder) {
+        const holder = document.createElement("div");
+        holder.className = "cc-gift-card-holder";
+        holder.textContent = toyona.cardHolder;
+        panel.append(holder);
+      }
+
+      const copyButton = document.createElement("button");
+      copyButton.type = "button";
+      copyButton.className = "cc-gift-copy";
+      copyButton.innerHTML = '<svg class="cc-gift-copy-icon" aria-hidden="true" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg><span></span>';
+      const copyLabel = copyButton.querySelector("span");
+      copyLabel.textContent = labels.giftCopyNumber;
+      copyButton.setAttribute("aria-label", labels.giftCopyNumber);
+      copyButton.onclick = async () => {
+        try {
+          if (!navigator.clipboard?.writeText) return;
+          await navigator.clipboard.writeText(cardNumber.replaceAll(" ", ""));
+          copyButton.querySelector("svg").innerHTML = '<path d="M20 6 9 17l-5-5"></path>';
+          copyLabel.textContent = labels.giftCopied;
+          copyButton.setAttribute("aria-label", labels.giftCopied);
+          window.setTimeout(() => {
+            if (!copyButton.isConnected) return;
+            copyButton.querySelector("svg").innerHTML = '<rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path>';
+            copyLabel.textContent = labels.giftCopyNumber;
+            copyButton.setAttribute("aria-label", labels.giftCopyNumber);
+          }, 2500);
+        } catch {}
+      };
+      panel.append(copyButton);
+      content.append(panel);
+    } else {
+      const note = document.createElement("p");
+      note.className = "cc-gift-presence-note";
+      note.textContent = labels.giftPresenceNote;
+      content.append(note);
+    }
+
+    card.append(close, header, content);
+    overlay.append(card);
+    overlay.onclick = (event) => { if (event.target === overlay) closeGiftModal(); };
+    const onKeyDown = (event) => { if (event.key === "Escape") closeGiftModal(); };
+    window.addEventListener("keydown", onKeyDown);
+    document.body.append(overlay);
+    activeGiftModal = { overlay, card, reducedMotion, onKeyDown };
+    if (reducedMotion) {
+      overlay.dataset.open = "true";
+      card.dataset.open = "true";
+      close.focus({ preventScroll: true });
+    } else {
+      requestAnimationFrame(() => {
+        if (activeGiftModal?.overlay !== overlay) return;
+        overlay.dataset.open = "true";
+        card.dataset.open = "true";
+        close.focus({ preventScroll: true });
+      });
     }
   }
 
