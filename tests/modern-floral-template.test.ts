@@ -252,6 +252,7 @@ test("Modern Floral RSVP has fixed party size and exposes only source-backed opt
   assert.match(giftBridge, /g\.cardHolder/);
   assert.match(giftBridge, /g\.cardNumber/);
   assert.match(giftBridge, /body\.dataset\.mfGiftOriginal/);
+  assert.match(giftBridge, /caption\.style\.color=accent\.replace\(\/\^rgb\\\(\(\.\+\)\\\)\$\/,"rgba\(\$1, 0\.88\)"\)/);
   assert.match(giftBridge, /navigator\.clipboard\.writeText\(number\)/);
   assert.ok(giftBridge.includes('M20 6 9 17l-5-5'));
   assert.match(giftBridge, /giftCopyTimer=window\.setTimeout/);
