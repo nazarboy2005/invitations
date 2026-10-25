@@ -27,6 +27,12 @@
     "sha256": "eaed95def4d91f8382ad0ed45938909c017b20403850fdbd631a2c5b26435f45",
     "behavior": "Original route module for Modern Floral; source choreography is ported into source-motion.js for the isolated static page."
   },
+  "sourceGalleryModule": {
+    "path": "..\\..\\..\\..\\Invitations - this folder will be removed from production\\Chorlove\\Web invitations\\_next\\static\\chunks\\09cpm7sbnsw7i.js",
+    "bytes": 76269,
+    "sha256": "cc9472f5f183b8f7fcbfe281f0cbdeaa573b774cc594e56446736694bfe09b75",
+    "behavior": "Original Modern Floral gallery component, including its source backdrop, close button, image transition, and no next/previous controls."
+  },
   "catalogArtwork": {
     "file": "catalog-opening.jpg",
     "sourceUrl": "https://payment.chorlove.uz/media-assets/958746e5-dc6c-4540-ad17-2c6e692d2212/file",

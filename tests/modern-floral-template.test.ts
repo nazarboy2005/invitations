@@ -18,6 +18,7 @@ const bridgeUrl = new URL("bridge.js", root);
 const provenanceUrl = new URL("source-assets.provenance.json", root);
 const coverUrl = new URL("catalog-opening.jpg", root);
 const sourceChunkUrl = new URL("_next/static/chunks/0umiwyco9-jdx.js", sourceRoot);
+const sourceGalleryChunkUrl = new URL("_next/static/chunks/09cpm7sbnsw7i.js", sourceRoot);
 const sourceCaptureUrl = new URL("templates/modern-floral/preview-frame.html", sourceRoot);
 const packagedCaptureUrl = new URL("../apps/web/public/templates/modern-floral/source/preview-frame.html", import.meta.url);
 const sourceStylesDir = new URL("_next/static/chunks/", sourceRoot);
@@ -37,8 +38,19 @@ async function readIfPresent(path: URL) {
 test("Modern Floral motion port is tied to the captured route module", async () => {
   const provenance = JSON.parse(await readFile(provenanceUrl, "utf8"));
   const sourceChunk = await readIfPresent(sourceChunkUrl);
+  const sourceGalleryChunk = await readIfPresent(sourceGalleryChunkUrl);
   const motion = await readFile(motionUrl, "utf8");
   assert.match(provenance.sourceMotionModule.sha256, /^[a-f\d]{64}$/);
+  assert.equal(provenance.sourceGalleryModule.bytes, 76269);
+  assert.match(provenance.sourceGalleryModule.sha256, /^[a-f\d]{64}$/);
+  if (sourceGalleryChunk) {
+    const gallery = sourceGalleryChunk.toString("utf8");
+    assert.equal(provenance.sourceGalleryModule.bytes, sourceGalleryChunk.length);
+    assert.equal(provenance.sourceGalleryModule.sha256, createHash("sha256").update(sourceGalleryChunk).digest("hex"));
+    assert.match(gallery, /initial:\{opacity:0\},animate:\{opacity:1\},exit:\{opacity:0\},className:"fixed inset-0 z-\[3000\] flex items-center justify-center bg-black\/88 p-4 backdrop-blur-md"/);
+    assert.match(gallery, /initial:\{scale:\.96,opacity:0\},animate:\{scale:1,opacity:1\},exit:\{scale:\.96,opacity:0\}/);
+    assert.doesNotMatch(gallery, /data-prev|data-next|ArrowLeft|ArrowRight/);
+  }
   if (sourceChunk) {
     const source = sourceChunk.toString("utf8");
     assert.equal(provenance.sourceMotionModule.sha256, createHash("sha256").update(sourceChunk).digest("hex"));
@@ -47,6 +59,9 @@ test("Modern Floral motion port is tied to the captured route module", async () 
     assert.match(source, /transition:\{delay:2\.25,duration:\.75,ease:"easeInOut"\}/);
     assert.match(source, /Array\.from\(\{length:34\}\).*left:37\*t%100,delay:t%16\*\.8,duration:12\+t%9\*1\.8,rotate:53\*t%360,size:18\+t%5\*5,drift:8\+t%5\*5/);
     assert.match(source, /initial:\{opacity:0,y:15\},whileInView:\{opacity:1,y:0\},viewport:\{amount:\.2\},transition:\{duration:\.6\}/);
+    assert.match(source, /initial:\{y:5,opacity:0\},animate:\{y:0,opacity:1\}/);
+    assert.match(source, /initial:\{opacity:0\},whileInView:\{opacity:\.03\},transition:\{duration:2\}/);
+    assert.match(source, /initial:\{opacity:0,scale:\.95\},whileInView:\{opacity:1,scale:1\},transition:\{duration:1\.2\}/);
     assert.match(source, /staggerChildren:\.14,delayChildren:\.12/);
     assert.match(source, /staggerChildren:\.14,delayChildren:2\.75/);
     assert.match(source, /animate:\{y:\[0,-8,0\],rotate:\[0,a\?-2:2,0\]\},transition:\{duration:6\+s,repeat:1\/0,ease:"easeInOut"\}/);
@@ -76,6 +91,21 @@ test("Modern Floral motion port is tied to the captured route module", async () 
   assert.match(motion, /duration: 20000, iterations: Infinity, easing: "linear"/);
   assert.match(motion, /duration: 3000, iterations: Infinity/);
   assert.match(motion, /prefers-reduced-motion/);
+  assert.match(motion, /node\.matches\("section:nth-of-type\(2\) > div\.absolute\.inset-0"\)\) return \{ duration: 2000, amount: 0, once: false \}/);
+  assert.match(motion, /sectionIndex === 1 && node\.matches\("\.relative\.h-16"\)\) return \{ spring: true, delay: 500, amount: 0, once: false \}/);
+  assert.match(motion, /sectionIndex === 3 && node\.matches\("\.absolute\.w-9\.h-9"\)\) return \{ spring: true, stiffness: 200, delay: 400, amount: 0, once: false \}/);
+  assert.match(motion, /transform\.includes\("scale\(0\.9\)"\).*amount: 0, once: false/);
+  assert.match(motion, /transform\.includes\("scale\(0\.95\)"\)\) return \{ duration: 1200, amount: 0, once: false \}/);
+  assert.match(motion, /transform\.includes\("translateY\(5px\)"\)\) return \{ spring: true, mount: true \}/);
+  assert.match(motion, /if \(config\.mount\) animateReveal\(node, config\);\s*else observer\.observe\(node\)/);
+  assert.match(motion, /const spring = springFrames\(\{ transform: `scale\(\$\{start\}\)` \}, \{ transform: `scale\(\$\{target\}\)` \}\)/);
+  assert.match(motion, /bindStates\(music, 1\.1, 0\.9\)/);
+  assert.match(motion, /bindStates\(link, 1\.02, 0\.98\)/);
+  assert.doesNotMatch(motion, /amount: 0\.5/);
+  assert.doesNotMatch(motion, /duration: 150, fill: "forwards"/);
+  assert.match(motion, /image\?\.animate\(\[\{ opacity: 0 \}, \{ opacity: 1 \}\], \{ duration: 300, easing: "ease-out", fill: "both" \}\)/);
+  assert.match(motion, /springFrames\(\{ transform: "scale\(\.96\)" \}, \{ transform: "scale\(1\)" \}\)/);
+  assert.match(motion, /const fade = layer\.animate\(\[\{ opacity: 1 \}, \{ opacity: 0 \}\], \{ duration: 300, easing: "ease-out", fill: "forwards" \}\)/);
 });
 
 test("Modern Floral page loads its source motion runner and preserves source reveal states", async () => {
@@ -178,7 +208,15 @@ test("Modern Floral RSVP has fixed party size and exposes only source-backed opt
   assert.match(bridge, /hide\(s,!values\.some\(a=>\["phone","telegram"\]/);
   assert.match(bridge, /if\(!g\.enabled\)\{hide\(s\);return;\}/);
   assert.match(bridge, /hide\(section,!preview&&!publicItems\.length\)/);
+  assert.ok(bridge.includes("const grids=all('.grid, .md\\\\:grid',section)"));
+  const galleryHandler = bridge.slice(bridge.indexOf("function openGallery"), bridge.indexOf("async function renderWishes"));
+  assert.match(galleryHandler, /fixed inset-0 z-\[3000\] flex items-center justify-center bg-black\/88 p-4 backdrop-blur-md/);
+  assert.match(galleryHandler, /max-h-\[88dvh\] max-w-\[94vw\] rounded-2xl object-contain shadow-2xl/);
+  assert.match(galleryHandler, /document\.body\.append\(lightbox\)/);
+  assert.match(galleryHandler, /if\(event\.target===lightbox\)close\(\)/);
+  assert.doesNotMatch(galleryHandler, /data-prev|data-next|ArrowLeft|ArrowRight|event\.key==='Escape'/);
   assert.match(bridge, /if\(x\.preview\)values=d\(\)\.wishes\|\|\[\];else if\(d\(\)\.wishesEnabled\)/);
+  assert.match(bridge, /stack\.dataset\.mfSourceWishCount=String\(values\.length\)/);
   assert.doesNotMatch(bridge, /\bdata\s*\(\s*\)/);
   assert.match(bridge, /hide\(s,!x\.preview&&!d\(\)\.wishesEnabled\)/);
   assert.match(bridge, /hide\(s,!d\(\)\.rsvp\?\.enabled&&!x\.preview\)/);

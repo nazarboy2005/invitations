@@ -6,6 +6,7 @@
 
   const registered = new WeakSet();
   const running = new WeakMap();
+  const controlAnimations = new WeakMap();
   let observer;
   let initialized = false;
   let reduced = false;
@@ -43,25 +44,26 @@
     if (transform.includes("translateY(-24px)")) return { duration: 900, amount: 0.35, once: true };
     if (transform.includes("translateY(18px)")) return { spring: true, delay: index * 40, amount: 0.35, once: true };
     if (transform.includes("scale(0.96)")) return { spring: true, delay: index * 50, amount: 0.35, once: true };
+    if (node.matches("section:nth-of-type(2) > div.absolute.inset-0")) return { duration: 2000, amount: 0, once: false };
     if (transform.includes("scale(0)")) {
       const sectionIndex = [...root.querySelectorAll("section")].indexOf(node.closest("section"));
-      if (sectionIndex === 1 && node.matches(".relative.h-16")) return { spring: true, delay: 500, amount: 0.35, once: true };
-      if (sectionIndex === 3 && node.matches(".absolute.w-9.h-9")) return { spring: true, stiffness: 200, delay: 400, amount: 0.5, once: false };
-      if (sectionIndex === 6 && node.matches(".flex.items-center.justify-center.gap-4")) return { spring: true, delay: 500, amount: 0.5, once: false };
+      if (sectionIndex === 1 && node.matches(".relative.h-16")) return { spring: true, delay: 500, amount: 0, once: false };
+      if (sectionIndex === 3 && node.matches(".absolute.w-9.h-9")) return { spring: true, stiffness: 200, delay: 400, amount: 0, once: false };
+      if (sectionIndex === 6 && node.matches(".flex.items-center.justify-center.gap-4")) return { spring: true, delay: 500, amount: 0, once: false };
     }
-    if (transform.includes("scale(0.9)") && node.matches(".relative.aspect-square")) return { duration: 800, delay: index * 100, amount: 0.35, once: false };
-    if (transform.includes("translateX(-20px)")) return { spring: true, delay: index * 100, amount: 0.35, once: false };
-    if (transform.includes("scale(0.95)")) return { duration: 1200, amount: 0.5, once: false };
+    if (transform.includes("scale(0.9)") && node.matches(".relative.aspect-square")) return { duration: 800, delay: index * 100, amount: 0, once: false };
+    if (transform.includes("translateX(-20px)")) return { spring: true, delay: index * 100, amount: 0, once: false };
+    if (transform.includes("scale(0.95)")) return { duration: 1200, amount: 0, once: false };
     if (inline.includes("filter:blur(8px)")) return { duration: 900, amount: 0.35, once: true };
     if (transform.includes("translateY(30px)")) {
       const sectionIndex = [...root.querySelectorAll("section")].indexOf(node.closest("section"));
-      return { duration: sectionIndex === 6 ? 1500 : 1200, amount: 0.35, once: false };
+      return { duration: sectionIndex === 6 ? 1500 : 1200, amount: 0, once: false };
     }
-    if (transform.includes("translateY(20px)")) return { duration: 1000, amount: 0.35, once: false };
+    if (transform.includes("translateY(20px)")) return { duration: 1000, amount: 0, once: false };
     if (transform.includes("translateY(28px)") || transform.includes("translateY(24px)")) return { duration: 900, amount: 0.35, once: true };
     if (transform.includes("scale(0.78)")) return { duration: 900, amount: 0.35, once: true };
-    if (transform.includes("translateY(5px)")) return { spring: true, amount: 0.5, once: false };
-    return { duration: 600, amount: 0.2, once: false };
+    if (transform.includes("translateY(5px)")) return { spring: true, mount: true };
+    return { duration: 600, amount: 0, once: false };
   }
 
   function springProgress(time, stiffness) {
@@ -176,7 +178,8 @@
         }
       }
       node.dataset.mfMotionConfig = JSON.stringify(config);
-      observer.observe(node);
+      if (config.mount) animateReveal(node, config);
+      else observer.observe(node);
     }
   }
 
@@ -270,7 +273,7 @@
       countdownHeart.animate([{ transform: "scale(1)" }, { transform: "scale(1.1)" }, { transform: "scale(1)" }], { duration: 3000, iterations: Infinity });
     }
     const wishes = root.querySelector("section:nth-of-type(11) .space-y-3.py-1");
-    const wishCount = wishes?.children.length || 0;
+    const wishCount = Number(wishes?.dataset.mfSourceWishCount) || wishes?.children.length || 0;
     if (wishes && wishCount > 3 && !wishes.dataset.mfWishLoop) {
       wishes.dataset.mfWishLoop = "true";
       wishes.animate([{ transform: "translateY(0%)" }, { transform: "translateY(-50%)" }], {
@@ -281,22 +284,31 @@
 
   function animateSourceControls() {
     if (reduced) return;
+    const animateScale = (node, target) => {
+      const matrix = window.getComputedStyle(node).transform;
+      const values = matrix.match(/^matrix\(([-\d.]+),\s*([-\d.]+)/);
+      const start = values ? Math.hypot(Number(values[1]), Number(values[2])) : 1;
+      controlAnimations.get(node)?.cancel();
+      const spring = springFrames({ transform: `scale(${start})` }, { transform: `scale(${target})` });
+      controlAnimations.set(node, node.animate(spring.frames, {
+        duration: spring.duration * 1000, easing: "linear", fill: "forwards",
+      }));
+    };
+    const bindStates = (node, hover, tap) => {
+      if (node.dataset.mfMotionBound) return;
+      node.dataset.mfMotionBound = "true";
+      let hovering = false;
+      let pressing = false;
+      const update = () => animateScale(node, pressing ? tap : hovering ? hover : 1);
+      node.addEventListener("pointerenter", () => { hovering = true; update(); });
+      node.addEventListener("pointerleave", () => { hovering = false; pressing = false; update(); });
+      node.addEventListener("pointerdown", () => { pressing = true; update(); });
+      node.addEventListener("pointerup", () => { pressing = false; update(); });
+      node.addEventListener("pointercancel", () => { pressing = false; update(); });
+    };
     const music = root.querySelector(".mf-music");
-    if (music && !music.dataset.mfMotionBound) {
-      music.dataset.mfMotionBound = "true";
-      music.addEventListener("pointerenter", () => music.animate([{ transform: "scale(1)" }, { transform: "scale(1.1)" }], { duration: 150, fill: "forwards" }));
-      music.addEventListener("pointerleave", () => music.animate([{ transform: "scale(1.1)" }, { transform: "scale(1)" }], { duration: 150, fill: "forwards" }));
-      music.addEventListener("pointerdown", () => music.animate([{ transform: "scale(1)" }, { transform: "scale(.9)" }], { duration: 100, fill: "forwards" }));
-      music.addEventListener("pointerup", () => music.animate([{ transform: "scale(.9)" }, { transform: "scale(1)" }], { duration: 100, fill: "forwards" }));
-    }
-    root.querySelectorAll("section:nth-of-type(6) a").forEach((link) => {
-      if (link.dataset.mfMotionBound) return;
-      link.dataset.mfMotionBound = "true";
-      link.addEventListener("pointerenter", () => link.animate([{ transform: "scale(1)" }, { transform: "scale(1.02)" }], { duration: 150, fill: "forwards" }));
-      link.addEventListener("pointerleave", () => link.animate([{ transform: "scale(1.02)" }, { transform: "scale(1)" }], { duration: 150, fill: "forwards" }));
-      link.addEventListener("pointerdown", () => link.animate([{ transform: "scale(1)" }, { transform: "scale(.98)" }], { duration: 100, fill: "forwards" }));
-      link.addEventListener("pointerup", () => link.animate([{ transform: "scale(.98)" }, { transform: "scale(1)" }], { duration: 100, fill: "forwards" }));
-    });
+    if (music) bindStates(music, 1.1, 0.9);
+    root.querySelectorAll("section:nth-of-type(6) a").forEach((link) => bindStates(link, 1.02, 0.98));
   }
 
   function finishWithoutMotion() {
@@ -316,9 +328,9 @@
     if (reduced) return;
     const image = layer.querySelector("img");
     layer.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 300, easing: "ease-out", fill: "both" });
-    image?.animate([{ opacity: 0, transform: "scale(.96)" }, { opacity: 1, transform: "scale(1)" }], {
-      duration: 300, easing: "ease-out", fill: "both",
-    });
+    image?.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 300, easing: "ease-out", fill: "both" });
+    const spring = springFrames({ transform: "scale(.96)" }, { transform: "scale(1)" });
+    image?.animate(spring.frames, { duration: spring.duration * 1000, easing: "linear", fill: "both" });
   }
 
   function closeLightbox(layer, onFinish) {
@@ -327,10 +339,10 @@
       return;
     }
     const image = layer.querySelector("img");
-    image?.animate([{ opacity: 1, transform: "scale(1)" }, { opacity: 0, transform: "scale(.96)" }], {
-      duration: 200, easing: "ease-in", fill: "forwards",
-    });
-    const fade = layer.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 200, easing: "ease-in", fill: "forwards" });
+    image?.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 300, easing: "ease-out", fill: "forwards" });
+    const spring = springFrames({ transform: "scale(1)" }, { transform: "scale(.96)" });
+    image?.animate(spring.frames, { duration: spring.duration * 1000, easing: "linear", fill: "forwards" });
+    const fade = layer.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 300, easing: "ease-out", fill: "forwards" });
     fade.onfinish = () => {
       fade.cancel();
       onFinish?.();
