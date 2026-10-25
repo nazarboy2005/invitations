@@ -46,6 +46,69 @@
         { "id": "modern-floral-source-preview-6", "url": "/templates/chorlove/orchid-amplop/assets/gallery-5.webp", "alt": "", "caption": "" }
       ]
     },
+    "orchid-amplop": {
+      "venuePhoto": "/templates/chorlove/orchid-amplop/assets/gallery-5.webp",
+      "gallery": [
+        {
+          "id": "orchid-amplop-source-preview-1",
+          "url": "/templates/chorlove/orchid-amplop/assets/gallery-2.webp",
+          "alt": "",
+          "caption": ""
+        },
+        {
+          "id": "orchid-amplop-source-preview-2",
+          "url": "/templates/chorlove/orchid-amplop/assets/gallery-1.webp",
+          "alt": "",
+          "caption": ""
+        },
+        {
+          "id": "orchid-amplop-source-preview-3",
+          "url": "/templates/chorlove/orchid-amplop/assets/gallery-3.webp",
+          "alt": "",
+          "caption": ""
+        },
+        {
+          "id": "orchid-amplop-source-preview-4",
+          "url": "/templates/chorlove/orchid-amplop/assets/gallery-6.webp",
+          "alt": "",
+          "caption": ""
+        },
+        {
+          "id": "orchid-amplop-source-preview-5",
+          "url": "/templates/chorlove/orchid-amplop/assets/gallery-4.webp",
+          "alt": "",
+          "caption": ""
+        },
+        {
+          "id": "orchid-amplop-source-preview-6",
+          "url": "/templates/chorlove/orchid-amplop/assets/gallery-5.webp",
+          "alt": "",
+          "caption": ""
+        }
+      ],
+      "story": [
+        {
+          "id": "orchid-amplop-preview-story-1",
+          "title": {},
+          "text": {
+            "uz-Latn": "Birgalikdagi hikoyamiz yangi sahifasini boshlamoqda.",
+            "uz-Cyrl": "Биргаликдаги ҳикоямиз янги саҳифасини бошламоқда.",
+            "en": "Our story is beginning a new chapter together.",
+            "ru": "Наша общая история начинает новую главу."
+          }
+        },
+        {
+          "id": "orchid-amplop-preview-story-2",
+          "title": {},
+          "text": {
+            "uz-Latn": "Quvonchli kunimizni siz bilan baham ko‘rishni kutamiz.",
+            "uz-Cyrl": "Қувончли кунимизни сиз билан баҳам кўришни кутамиз.",
+            "en": "We look forward to sharing our joyful day with you.",
+            "ru": "Мы с радостью разделим этот день вместе с вами."
+          }
+        }
+      ]
+    },
     "invitate-wedding": {
       "program": [
         {

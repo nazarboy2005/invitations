@@ -47,6 +47,7 @@ type TemplateSample = {
     imageAssetId?: string | null;
   }>;
   gallery?: Invitation["gallery"];
+  story?: Invitation["story"];
 };
 
 const EVENT_SAMPLES = previewSample.eventSamples as Partial<
@@ -175,6 +176,7 @@ export function createTemplatePreviewSample(
     program,
     artistLineup: useTemplateSample ? templateSample?.artists ?? [] : [],
     gallery: structuredClone(templateSample?.gallery ?? previewSample.gallery),
+    story: structuredClone(templateSample?.story ?? createInvitation(templateId).story),
     content,
     dressCode,
     rsvp: { ...createInvitation(templateId).rsvp, enabled: true },

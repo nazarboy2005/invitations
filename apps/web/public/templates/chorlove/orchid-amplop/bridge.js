@@ -44,11 +44,11 @@
     } catch { return ""; }
   };
   const couple = (data) => [data.groom, data.bride].filter(Boolean).join(" & ");
-  function setImages(data, preview) {
+  function setImages(data, previewSample) {
     const banner = safeUrl(data.bannerImage) || BASE + "hero-forest.webp";
     $$('[data-orchid-hero]').forEach((node) => { node.src = banner; });
-    const groomImage = safeUrl(data.groomImage) || (preview ? BASE + "groom.png" : "");
-    const brideImage = safeUrl(data.brideImage) || (preview ? BASE + "bride.png" : "");
+    const groomImage = safeUrl(data.groomImage) || (previewSample ? BASE + "groom.png" : "");
+    const brideImage = safeUrl(data.brideImage) || (previewSample ? BASE + "bride.png" : "");
     const groom = $('[data-orchid-groom-image]');
     const bride = $('[data-orchid-bride-image]');
     if (groomImage) groom.src = groomImage;
@@ -79,10 +79,15 @@
     host.replaceChildren();
     const items = (data.program || []).filter((item) => item && (item.title || item.time));
     const entries = items.length ? items : [{ id: "event", title: text("weddingParty"), time: data.date?.time, place: data.venue?.name, address: data.venue?.address, mapUrl: data.venue?.mapUrl }];
+    const previewSample = current?.preview && current?.sampleGallery;
+    const sampleGallery = (data.gallery || []).map((item) => safeUrl(item.src)).filter(Boolean);
     entries.forEach((entry, index) => {
       const card = document.createElement("article"); card.className = "event-card";
-      const image = document.createElement("img"); image.src = BASE + `gallery-${index % 6 + 1}.webp`; image.alt = "";
-      const overlay = document.createElement("div"); overlay.className = "event-card-overlay";
+      const venuePhoto = index === 0 ? safeUrl(data.venue?.photo) : sampleGallery[index % sampleGallery.length];
+      const image = previewSample && venuePhoto ? document.createElement("img") : null;
+      if (image) { image.src = venuePhoto; image.alt = ""; }
+      const overlay = previewSample ? document.createElement("div") : null;
+      if (overlay) overlay.className = "event-card-overlay";
       const content = document.createElement("div"); content.className = "event-card-content";
       const icon = document.createElement("span"); icon.className = "event-card-icon"; icon.setAttribute("aria-hidden", "true"); icon.textContent = "♡";
       const title = document.createElement("h3"); title.textContent = entry.title || text("weddingParty");
@@ -92,14 +97,12 @@
       }
       const map = safeUrl(entry.mapUrl || data.venue?.mapUrl);
       if (map) { const link = document.createElement("a"); link.href = map; link.target = "_blank"; link.rel = "noopener noreferrer"; link.textContent = text("openMap"); content.append(link); }
-      card.append(image, overlay, content); host.append(card);
+      if (image && overlay) card.append(image, overlay);
+      card.append(content); host.append(card);
     });
   }
   function galleryImages(data) {
-    const uploaded = (data.gallery || []).filter((item) => safeUrl(item.src)).map((item) => ({ src: safeUrl(item.src), alt: item.alt || item.caption || "" }));
-    if (uploaded.length) return uploaded;
-    if (current?.preview && current?.sampleGallery) return ["gallery-2.webp", "gallery-1.webp", "gallery-3.webp", "gallery-6.webp", "gallery-4.webp", "gallery-5.webp"].map((file) => ({ src: BASE + file, alt: "" }));
-    return [];
+    return (data.gallery || []).filter((item) => safeUrl(item.src)).map((item) => ({ src: safeUrl(item.src), alt: item.alt || item.caption || "" }));
   }
   // Framer Motion's implicit transition for these source motion values is its
   // default physical spring: stiffness 100, damping 10, mass 1, zero velocity.
@@ -208,12 +211,12 @@
       host.hidden = !(name && socialLinks.length > 0);
     }
   }
-  function renderStory(data, preview) {
+  function renderStory(data, previewSample) {
     const chapters = (data.story || []).filter((item) => item.title || item.text);
     const section = show('[data-section="story"]', chapters.length > 0);
     const host = $(`[data-orchid-story]`); host.replaceChildren();
     chapters.forEach((chapter, index) => {
-      const authoredPhoto = safeUrl(index % 2 ? data.brideImage : data.groomImage) || (preview ? BASE + (index % 2 ? "story-bride.jpg" : "story-groom.jpg") : "");
+      const authoredPhoto = safeUrl(index % 2 ? data.brideImage : data.groomImage) || (previewSample ? BASE + (index % 2 ? "story-bride.jpg" : "story-groom.jpg") : "");
       const card = document.createElement("article"); card.className = `orchid-reveal story-text-card story-${index ? "second" : "first"}-text`;
       card.style.setProperty("--orchid-reveal-delay", index ? ".08s" : ".06s");
       if (chapter.text) { const paragraph = document.createElement("p"); paragraph.textContent = chapter.text; card.append(paragraph); }
@@ -273,7 +276,8 @@
       });
     }
     renderPersonSocials(data);
-    setImages(data, envelope.preview); renderCountdown(data); renderProgram(data); renderGallery(data); renderStory(data, envelope.preview); renderWishes(data);
+    const previewSample = envelope.preview && envelope.sampleGallery;
+    setImages(data, previewSample); renderCountdown(data); renderProgram(data); renderGallery(data); renderStory(data, previewSample); renderWishes(data);
     if (!envelope.preview && data.wishesEnabled && envelope.invitationId && wishesFor !== envelope.invitationId) {
       wishesFor = envelope.invitationId;
       fetch(`/api/public/invitations/${encodeURIComponent(envelope.invitationId)}/wishes`, { credentials: "same-origin" })

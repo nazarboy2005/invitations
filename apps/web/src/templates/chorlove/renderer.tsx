@@ -62,22 +62,10 @@ export function ChorloveInvitation({
       if (venuePhoto) mapped.venueImage = venuePhoto;
     }
     if (templateId === "orchid-amplop") {
-      const hasCreatorPhotos = invitation.gallery.some((photo) => photo.url.trim());
-      if (preview && sampleWishes && !hasCreatorPhotos) {
-        mapped.gallery = [
-          "gallery-2.webp",
-          "gallery-1.webp",
-          "gallery-3.webp",
-          "gallery-6.webp",
-          "gallery-4.webp",
-          "gallery-5.webp",
-        ].map((file, index) => ({
-          id: `orchid-preview-${index + 1}`,
-          src: `/templates/chorlove/orchid-amplop/assets/${file}`,
-          alt: "",
-          caption: "",
-        }));
-      }
+      const venuePhoto = preview && sampleWishes
+        ? getTemplatePreviewVenuePhoto(templateId)
+        : undefined;
+      if (venuePhoto) Object.assign(mapped.venue, { photo: venuePhoto });
     } else if (templateId === "lace") {
       const hasCreatorPhotos = invitation.gallery.some((photo) => photo.url.trim());
       if (preview && sampleWishes && !hasCreatorPhotos) {
