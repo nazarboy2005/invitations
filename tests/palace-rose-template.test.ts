@@ -63,6 +63,13 @@ test("isolated page packages the captured Palace Rose DOM and only its source ar
     assert.equal(copy.length, asset.bytes, asset.path);
     assert.equal(sha256(copy), asset.sha256, asset.path);
   }
+  assert.equal(provenance.archiveAudit.fonts.length, 6);
+  assert.ok(provenance.archiveAudit.fonts.every((font: { matchesPackaged: boolean }) => font.matchesPackaged));
+  assert.equal(provenance.archiveAudit.giftArtwork.filter((asset: { exactCopyFound: boolean }) => asset.exactCopyFound).length, 4);
+  const glassPink = provenance.archiveAudit.giftArtwork.find((asset: { name: string }) => asset.name === "glass_garden_pink.webp");
+  assert.ok(glassPink);
+  assert.equal(glassPink.exactCopyFound, false);
+  assert.ok(glassPink.sameNameArchiveFiles.some((file: { matchesExpected: boolean }) => !file.matchesExpected));
 });
 
 test("Palace Rose bridge binds creator fields, service actions, locales, and reduced motion", () => {

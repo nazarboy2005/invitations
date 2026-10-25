@@ -32,8 +32,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 4933,
-      "sha256": "0c146bfcd3840432b23ebe211029d49819da25dc0cab830f1ace944976ec0249"
+      "bytes": 5089,
+      "sha256": "ed419be60e1cb0d95bfa88b7e70313d555a2336081b892b1bdc4a2dbbef01eb1"
     },
     {
       "path": "preview.webp",
@@ -460,5 +460,152 @@
       }
     ]
   },
-  "focusedTests": "passed: node --check bridge.js; tsx tests/palace-rose-template.test.ts (4/4); pnpm --filter @taklifnoma/web typecheck"
+  "focusedTests": "passed: node --check bridge.js; tsx tests/palace-rose-template.test.ts (4/4); pnpm --filter @taklifnoma/web typecheck",
+  "archiveAudit": {
+    "searchScope": [
+      "_next/static/media/",
+      "images/ recursive file-name and SHA-256 search"
+    ],
+    "archive": "Chorlove/Web invitations (recovered provider archive)",
+    "conclusion": "All six font files match byte-for-byte. Four gift artwork hashes were found in archive image folders; four expected hashes were absent. glass_garden_pink.webp exists under images/glass-pink with different bytes. Exact Palace Rose URL retrieval records remain in sourceAssetRecovery.",
+    "fonts": [
+      {
+        "sha256": "7b99138ffa3baab8616d8491dc6d75961c5ae568b206c5031fbc7bb127385428",
+        "name": "CormorantGaramond_Regular-s.p.05iajzwz.gtv8.ttf",
+        "matchesPackaged": true,
+        "archivePath": "_next/static/media/CormorantGaramond_Regular-s.p.05iajzwz.gtv8.ttf"
+      },
+      {
+        "sha256": "99b365ece2cccd7d7baf879cc141f1fa9f2d20690fe025bc3003b01dff098f05",
+        "name": "Fraunces_VariableFont_SOFT,WONK,opsz,wght-s.p.0g87.hb0o.d8x.ttf",
+        "matchesPackaged": true,
+        "archivePath": "_next/static/media/Fraunces_VariableFont_SOFT,WONK,opsz,wght-s.p.0g87.hb0o.d8x.ttf"
+      },
+      {
+        "sha256": "8671b4332bff26a2ca32c7388a2929320e0ade036e460bd76cd1a22abbd4d5b4",
+        "name": "GreatVibes_Regular-s.p.0au6u0v_syb0z.ttf",
+        "matchesPackaged": true,
+        "archivePath": "_next/static/media/GreatVibes_Regular-s.p.0au6u0v_syb0z.ttf"
+      },
+      {
+        "sha256": "5746c575e2d6bf9c57d388f04a2c9782a93ac83abb09ecf3e898c0b4399d79f9",
+        "name": "Marcellus_Regular-s.p.0s04k8a2jokc9.ttf",
+        "matchesPackaged": true,
+        "archivePath": "_next/static/media/Marcellus_Regular-s.p.0s04k8a2jokc9.ttf"
+      },
+      {
+        "sha256": "98c0d340d2ba414001b9210aa20df2516c8dcdd18c09aa822b34f9718bb45776",
+        "name": "Qellia-s.p.0l1a3-80k4-g1.otf",
+        "matchesPackaged": true,
+        "archivePath": "_next/static/media/Qellia-s.p.0l1a3-80k4-g1.otf"
+      },
+      {
+        "sha256": "00e79428e3715ee28f9919be8c3bb4f468197b99ae419ae750b19f3a379b4222",
+        "name": "TheNautigal_Regular-s.p.0vn.0-.5o~f4t.ttf",
+        "matchesPackaged": true,
+        "archivePath": "_next/static/media/TheNautigal_Regular-s.p.0vn.0-.5o~f4t.ttf"
+      }
+    ],
+    "giftArtwork": [
+      {
+        "url": "https://chorlove.uz/images/palace-rose/chateau_green.webp",
+        "expectedSha256": "bccf35463ab607353cef96e13d109847ca06c8cd6e38223699c8297fe8b8dcaf",
+        "exactArchivePath": "images/royal-red/chateau_green.webp",
+        "name": "chateau_green.webp",
+        "exactCopyFound": true,
+        "sameNameArchiveFiles": [
+          {
+            "sha256": "bccf35463ab607353cef96e13d109847ca06c8cd6e38223699c8297fe8b8dcaf",
+            "archivePath": "images/royal-red/chateau_green.webp",
+            "matchesExpected": true
+          }
+        ]
+      },
+      {
+        "url": "https://chorlove.uz/images/palace-rose/double_dragon_green.webp",
+        "expectedSha256": "3dff9dbc6cdcc531a7023b9ef48aabac4f36c7a4016fab6a2af7a3315c23fbe5",
+        "exactArchivePath": "images/cloud-castle/gift/double_dragon_green.webp",
+        "name": "double_dragon_green.webp",
+        "exactCopyFound": true,
+        "sameNameArchiveFiles": [
+          {
+            "sha256": "3dff9dbc6cdcc531a7023b9ef48aabac4f36c7a4016fab6a2af7a3315c23fbe5",
+            "archivePath": "images/cloud-castle/gift/double_dragon_green.webp",
+            "matchesExpected": true
+          }
+        ]
+      },
+      {
+        "url": "https://chorlove.uz/images/palace-rose/dragon_phoenix_v2.webp",
+        "expectedSha256": "44454b1b194bf9dd6e65c0fa58ced1dbe7881e5d4e6f4cb3e2ee4716ed3698e7",
+        "exactArchivePath": "images/royal-red/dragon_phoenix_v2.webp",
+        "name": "dragon_phoenix_v2.webp",
+        "exactCopyFound": true,
+        "sameNameArchiveFiles": [
+          {
+            "sha256": "44454b1b194bf9dd6e65c0fa58ced1dbe7881e5d4e6f4cb3e2ee4716ed3698e7",
+            "archivePath": "images/royal-red/dragon_phoenix_v2.webp",
+            "matchesExpected": true
+          }
+        ]
+      },
+      {
+        "url": "https://chorlove.uz/images/palace-rose/dragon_phoenix.webp",
+        "expectedSha256": "40ae1a05e63cc0f7af7f65351a280f861b2f613cf624e744021d67236098d2e7",
+        "exactArchivePath": "images/royal-red/dragon_phoenix.webp",
+        "name": "dragon_phoenix.webp",
+        "exactCopyFound": true,
+        "sameNameArchiveFiles": [
+          {
+            "sha256": "40ae1a05e63cc0f7af7f65351a280f861b2f613cf624e744021d67236098d2e7",
+            "archivePath": "images/glass-pink/dragon_phoenix.webp",
+            "matchesExpected": true
+          },
+          {
+            "sha256": "40ae1a05e63cc0f7af7f65351a280f861b2f613cf624e744021d67236098d2e7",
+            "archivePath": "images/royal-red/dragon_phoenix.webp",
+            "matchesExpected": true
+          }
+        ]
+      },
+      {
+        "url": "https://chorlove.uz/images/palace-rose/glass_garden_pink.webp",
+        "expectedSha256": "089d5764bb97af2652c8f7860408cc1f33f7a2e27d58ceca7e43e3b9af348803",
+        "exactArchivePath": null,
+        "name": "glass_garden_pink.webp",
+        "exactCopyFound": false,
+        "sameNameArchiveFiles": [
+          {
+            "sha256": "0bf50ded6b5c60d06e37df73492c9c9314a4a58748bb0791b2457bd22ed8612f",
+            "archivePath": "images/glass-pink/glass_garden_pink.webp",
+            "matchesExpected": false
+          }
+        ]
+      },
+      {
+        "url": "https://chorlove.uz/images/palace-rose/hoa_kho_orange.webp",
+        "expectedSha256": "9e47d692dae1a2daa5f754bf593d37ba03b62bf27bb679d5f2c0018e0f7de7f1",
+        "exactArchivePath": null,
+        "name": "hoa_kho_orange.webp",
+        "exactCopyFound": false,
+        "sameNameArchiveFiles": []
+      },
+      {
+        "url": "https://chorlove.uz/images/palace-rose/mahal_gold.webp",
+        "expectedSha256": "204d9295d9726830839a91336828b69152994878dda420d9938762b5d4ac5b11",
+        "exactArchivePath": null,
+        "name": "mahal_gold.webp",
+        "exactCopyFound": false,
+        "sameNameArchiveFiles": []
+      },
+      {
+        "url": "https://chorlove.uz/images/palace-rose/royal_red.webp",
+        "expectedSha256": "e2d564bd85c03c4ef4a8fe87032f56f5e4e2eadd879dc8a922f92657a1a2e160",
+        "exactArchivePath": null,
+        "name": "royal_red.webp",
+        "exactCopyFound": false,
+        "sameNameArchiveFiles": []
+      }
+    ]
+  }
 }
