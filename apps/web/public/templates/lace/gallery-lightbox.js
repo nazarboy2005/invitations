@@ -109,6 +109,7 @@
     let pointerMode = "";
     let pinchStart = null;
     let previousTap = 0;
+    let backdropTarget = null;
     const activePointers = new Map();
     const sourceSiblings = [];
 
@@ -234,6 +235,7 @@
       if (closing) return;
       closing = true;
       window.clearInterval(slideshow);
+      document.removeEventListener("keydown", onDocumentKeydown, true);
       portal.classList.remove("yarl__portal_open");
       document.body.classList.remove("yarl__no_scroll");
       templateRoot?.classList.remove("lace-lightbox-open");
@@ -311,10 +313,6 @@
     zoomOut.onclick = () => setZoom(zoom / options.zoomInMultiplier);
 
     const pointerPosition = (event) => [event.clientX, event.clientY];
-    container.addEventListener("click", (event) => {
-      const target = event.target;
-      if (target instanceof HTMLElement && target.closest(".yarl__slide_wrapper")) finishClose();
-    });
     container.addEventListener("dblclick", (event) => {
       if (event.target instanceof HTMLImageElement) {
         const [x, y] = imageOffset(event);
@@ -323,6 +321,7 @@
     });
     container.addEventListener("pointerdown", (event) => {
       if (event.target instanceof Element && event.target.closest("button")) return;
+      backdropTarget = event.target;
       activePointers.set(event.pointerId, pointerPosition(event));
       if (activePointers.size === 1) {
         pointerStart = { x: event.clientX, y: event.clientY, time: event.timeStamp };
@@ -364,6 +363,14 @@
       }
     });
     const endPointer = (event) => {
+      const hitTarget = document.elementFromPoint(event.clientX, event.clientY);
+      if (backdropTarget === hitTarget && hitTarget instanceof HTMLElement && (hitTarget.classList.contains("yarl__slide") || hitTarget.classList.contains("yarl__slide_wrapper"))) {
+        backdropTarget = null;
+        activePointers.delete(event.pointerId);
+        finishClose();
+        return;
+      }
+      if (event.type === "pointerup") backdropTarget = null;
       const start = pointerStart;
       const end = activePointers.get(event.pointerId);
       activePointers.delete(event.pointerId);
@@ -397,6 +404,15 @@
         moveOffsets(-event.deltaX / zoom, -event.deltaY / zoom, false);
       }
     }, { passive: true });
+    const onDocumentKeydown = (event) => {
+      if (event.key === "Tab" && document.activeElement === document.body) {
+        event.preventDefault();
+        const focusables = [...portal.querySelectorAll("button:not(:disabled):not([tabindex=\"-1\"])")];
+        (event.shiftKey ? focusables.at(-1) : focusables[0])?.focus({ preventScroll: true });
+        return;
+      }
+    };
+    document.addEventListener("keydown", onDocumentKeydown, true);
     portal.addEventListener("keydown", (event) => {
       const pan = options.keyboardMoveDistance;
       if (zoom > options.minZoom && event.key.startsWith("Arrow")) {
