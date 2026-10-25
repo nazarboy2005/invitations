@@ -56,6 +56,12 @@ titles, the marker scales from zero, and each row uses its source `0.08 * row`
 delay and `0.5` visibility threshold. Reduced motion clears the hidden start
 states and leaves each node at its final visible state. Contact cards now use
 the captured source card container and card styling, and wish cards use the
-source's rounded, translucent card styling. The focused package checks pass;
-local browser visual verification is still pending, so no new rendered-parity
-claim is made here.
+source's rounded, translucent card styling. The current local browser check
+opens the packaged gift portal from the gift-box button and confirms the
+source-sized 448×402px modal, card content, close button, Escape dismissal, and
+immediate open/close under the reduced-motion preview. The packaged timeline
+shows the three restored schedule images in the original left-side icon rail;
+all three image requests load. The source route module and asset hashes are
+asserted by the focused test suite. Full-page scroll/re-entry timing has not
+been freshly browser-compared in this repair, so this check does not claim new
+visual verification for every section reveal.
