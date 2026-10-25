@@ -262,7 +262,11 @@
     });
     show("[data-orchid-contacts]", contacts.childElementCount > 0);
     show('[data-section="gift"]', !!data.toyona?.enabled && !!data.toyona?.cardNumber);
-    put("[data-orchid-card]", data.toyona?.cardNumber || ""); put("[data-orchid-holder]", data.toyona?.cardHolder || ""); put("[data-orchid-gift-note]", data.toyona?.note || "");
+    put("[data-orchid-card]", data.toyona?.cardNumber || "");
+    put("[data-orchid-holder]", data.toyona?.cardHolder || couple(data));
+    const giftNote = (data.toyona?.note || "").trim();
+    put("[data-orchid-gift-note]", giftNote);
+    show("[data-orchid-gift-note]", !!giftNote);
     show('[data-section="rsvp"]', !!data.rsvp?.enabled);
     put("[data-orchid-calendar]", text("addCalendar"));
     const rsvpName = $("[name=name]", $("[data-orchid-rsvp]")); if (rsvpName && envelope.guestName) { rsvpName.value = envelope.guestName; rsvpName.readOnly = true; }
