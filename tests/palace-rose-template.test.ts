@@ -125,6 +125,7 @@ test("Palace Rose limits shared extras to its native To'yona modal", () => {
 
 test("Palace Rose packages its captured styles and source motion timings locally", () => {
   const html = read(`${base}/index.html`);
+  const design = read(`${base}/source/design.html`);
   const bridge = read(`${base}/bridge.js`);
   const adapterCss = read(`${base}/adapter.css`);
   const stylesheets = [
@@ -167,6 +168,18 @@ test("Palace Rose packages its captured styles and source motion timings locally
   assert.match(bridge, /event\.stopPropagation\(\)/);
   assert.match(bridge, /navigator\.clipboard\.writeText\(toyona\.cardNumber\)/);
   assert.match(bridge, /toyona\.note\?\.trim\(\)/);
+  assert.equal((design.match(/transform:scale\(0\)/g) || []).length, 5);
+  assert.match(bridge, /style\*="scale\(0\)"/);
+  assert.match(bridge, /pr-scale-reveal/);
+  assert.match(adapterCss, /pr-scale-reveal:not\(\.pr-visible\)\{opacity:1!important\}/);
+  assert.match(bridge, /else if\(!once\)node\.classList\.remove\("pr-visible"\)/);
+  assert.match(bridge, /node\.dataset\.prRevealOnce="true"/);
+  assert.match(bridge, /openingBodyScrollLocked/);
+  assert.match(bridge, /heroFence=byAsset\(hero,"fence\.webp"\)\[0\]/);
+  assert.match(bridge, /heroFence\.style\.scale=String\(lerp\(1,1\.38,heroProgress\)\)/);
+  assert.match(bridge, /footerMotionWrap=footerCastle\?\.parentElement/);
+  assert.match(bridge, /footerMotionWrap\.getBoundingClientRect\(\)/);
+  assert.match(bridge, /scrollTop\+scrollHost\.clientHeight>=scrollHost\.scrollHeight-30/);
   assert.match(adapterCss, /pr-petal-exit\{animation:pr-petal-exit \.85s ease-out both/);
   assert.match(adapterCss, /pr-bells-sway 4\.2s/);
   assert.match(adapterCss, /pr-envelope-flower-a 5\.5s/);

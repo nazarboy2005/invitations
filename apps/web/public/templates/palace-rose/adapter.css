@@ -9,6 +9,7 @@ body{margin:0;background:#f7e3cd;color:#640e1b;font-family:"Palace Marcellus","T
 #palace-rose-root section{scroll-margin-top:1rem}
 .pr-reveal{transition:opacity var(--pr-reveal-duration,.6s) ease,transform var(--pr-reveal-duration,.6s) cubic-bezier(.22,1,.36,1);transition-delay:var(--pr-reveal-delay,0s)}
 .pr-reveal:not(.pr-visible){opacity:0!important}
+.pr-scale-reveal:not(.pr-visible){opacity:1!important}
 .pr-reveal.pr-visible{opacity:1!important;transform:none!important}
 .pr-petal{position:absolute;top:-30px;pointer-events:none;opacity:0;transform:translateY(-10vh);animation:pr-petal-fall var(--pr-petal-duration,21s) linear var(--pr-petal-delay,0s) infinite backwards}
 .pr-petal svg{animation:pr-petal-spin var(--pr-petal-spin-duration,25.2s) linear var(--pr-petal-delay,0s) infinite}

@@ -17,13 +17,13 @@
     },
     {
       "path": "adapter.css",
-      "bytes": 6895,
-      "sha256": "59eede02ac4140508e833ffc9f8262f3c87cfdc98c2b6b8a2d5fbb57342715f2"
+      "bytes": 6950,
+      "sha256": "f2073f4025daaa35b02d3021470b66c4860f427dd42023d828191a0da613bd50"
     },
     {
       "path": "bridge.js",
-      "bytes": 43306,
-      "sha256": "d023eb78f87546857129ba61cea23d89e2cc940dd086ebb44ec7edb8db675760"
+      "bytes": 44862,
+      "sha256": "cf509beb35cc8e239ea4a80e2323278d7eb333940b48de58d18f76088680af1f"
     },
     {
       "path": "source/design.html",
@@ -293,11 +293,11 @@
     "motion": "12 SVG petals on normal opening; source-derived placements and timings",
     "localePreview": "uz-Latn, uz-Cyrl, en, ru verified",
     "publication": "unpublished",
-    "focusedTests": "5/5 passed after source-absent sections and native receipt-host integration",
-    "javascriptSyntax": "passed after receipt-host integration",
-    "typecheck": "passed after Palace Rose scoped renderer policy",
+    "focusedTests": "5/5 passed after source-motion alignment updates",
+    "javascriptSyntax": "passed after source-motion alignment updates",
+    "typecheck": "passed after source-motion alignment updates",
     "reducedMotion": "opening verified without petals",
-    "browserFidelity": "Existing normal-motion browser screenshot inspected at 450x800; latest scroll/reduced-motion behavior not rechecked because browser safety policy blocked localhost authority.",
+    "browserFidelity": "Static source-to-package audit corrected missing fence parallax, footer wrapper progress, scale-only timeline markers, replayable reveals, contact-card once behavior, footer stagger, and opening body scroll lock. Fresh browser check remains unavailable because local browser authority is blocked.",
     "sourceAssets": "8/8 exact Palace Rose URLs returned 200 image/webp; byte sizes and SHA-256 verified",
     "toyonaInteraction": "Source-style modal renders card details/copy or creator note; opens/closes with Escape/backdrop; respects reduced motion",
     "nonRsvpReleaseBlockers": [
@@ -478,7 +478,7 @@
       }
     ]
   },
-  "focusedTests": "passed: node --check bridge.js; tsx tests/palace-rose-template.test.ts (4/4); pnpm --filter @taklifnoma/web typecheck",
+  "focusedTests": "passed: node --check bridge.js; pnpm exec tsx --test tests/palace-rose-template.test.ts (5/5); pnpm --filter @taklifnoma/web typecheck",
   "archiveAudit": {
     "searchScope": [
       "_next/static/media/",
