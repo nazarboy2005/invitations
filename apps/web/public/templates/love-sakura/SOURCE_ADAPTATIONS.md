@@ -9,9 +9,12 @@
 
 ## Adaptations
 
-- `bridge.js` binds invitation data, locale, optional sections, RSVP, wishes, music, calendar, and contact links to the shared platform contract and APIs.
+- `bridge.js` binds invitation data, locale, source optional sections, RSVP, wishes, music, and calendar to the shared platform contract and APIs.
 - The captured RSVP section is retained and wired to the public RSVP API. Its source heading/form reveal is restored at the captured 20% intersection threshold, 600 ms ease-out, 15 px vertical offset. Reduced motion makes it visible immediately.
 - The captured fixed music button is reused and hidden when the invitation has no track. Its source mute/unmute SVG icons, muted-first toggle, 1.5-second volume ramp, hover/tap scale, and two-second playing pulse are bound to the invitation music URL. Platform silent preview suppresses the control and playback.
+- The captured four-tile countdown and single “Save The Date” button are updated in place. Calendar action keeps the source button; no extra link or countdown text is appended.
+- The captured guest-wishes section follows the invitation wishes setting. The separate source attendance section keeps only its name and yes/no controls; RSVP submissions use the approved party size of 1 for attending and 0 for declining.
+- The captured gift card remains visible in its source layout and its original button copies the configured card number, showing source-style feedback for 2.5 seconds. It no longer toggles a newly created detail panel.
 - Original captures and source assets are not modified. The app bridge and adapter styles stay separate from the captured page.
 - When the catalog fixture has no gallery image URLs, hide the entire gallery and each empty card; this avoids blank image tiles. Submitted gallery images retain the captured card grid and styling.
 
@@ -23,11 +26,12 @@
 - The captured opening CSS chunk is byte-identical after CRLF normalization. The captured global CSS chunk is byte-identical after local font URL mapping and CSS-equivalent quote normalization. No selector or declaration changes were required in those source bundles.
 - Full-page browser captures of the archived source markup and packaged static markup were pixel-identical at both 450 px and 390 px CSS widths (0 differing RGB channels at 2x output). The comparison used the original captured stylesheets and local source/package image files; it validates static template markup, before dynamic invitation fields and platform adapters run.
 - The focused test checks the captured RSVP motion parameters, restored adapter motion, all original asset hashes, and gallery suppression when no images are supplied.
+- The archived route chunk at `0hdebqnzl-9~n.js` was rechecked directly; its SHA-256 matches the provenance record (`25137a4496253f2099597f67eb94fbb67aac07e025559f71990157cfab8bdb4f`). The chunk confirms the source reveal, music hover/tap, copy feedback, and source RSVP stepper. The platform adapter removes the stepper to meet the approved fixed 1/0 RSVP contract.
 
 ## Release gate status
 
 - **Source page and image asset integrity:** verified by focused source checksum test.
 - **Opening artwork:** generated at 900x1444 from the archived opening and verified visually; the coordinator has set `previewImage` to `/templates/love-sakura/catalog-opening.png`.
-- **RSVP and music motion:** source parameter checks and adapter implementation are covered by the focused source test; preview confirms the restored RSVP section appears. Submission has not been exercised against a real invitation/API in this preview.
+- **RSVP and music motion:** source parameter checks and adapter implementation are covered by the focused source test. Submission has not been exercised against a real invitation/API in this preview.
 - **Whole-page source parity:** static source markup/style comparison passes at 450 px and 390 px. Runtime platform integration still needs browser review with dynamic fields and a real invitation/API interaction run. Do not publish until those remaining integration checks pass and any differences outside shared data/API/locale/reduced-motion adaptation are resolved.
 - **Catalog/database state:** template remains unpublished and unselectable until the preceding gates pass. No shared catalog or migration state was changed in this audit.
