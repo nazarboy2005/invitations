@@ -67,3 +67,12 @@ support includes localized form labels and validation, keyboard RSVP controls,
 live status messages, gallery labels, and visible focus indicators. Empty
 creator-photo galleries remain hidden in public invitations; the template's
 opening art and ornaments remain visible.
+
+The captured RSVP form has no guest-count control. Following the approved
+product requirement, the adapter sends a fixed party size of 1 for attending
+and 0 for declining, and hides its empty live-status paragraph until feedback
+is needed. The captured To'yona HTML preserves the original gift-card button,
+but has no client click handler; the original route chunk is not present in this
+checkout, so exact source click behavior remains unverified. The current
+adapter reveals invitation card details within the source section when the
+button is activated.

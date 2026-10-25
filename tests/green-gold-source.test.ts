@@ -1,9 +1,11 @@
 import { readFile } from "./helpers/source-files";
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
+import { existsSync } from "node:fs";
 import { readdir } from "node:fs/promises";
 import path from "node:path";
 import { test } from "node:test";
+import { fileURLToPath } from "node:url";
 import { runInNewContext } from "node:vm";
 import { templateById } from "../packages/contracts/src/index";
 import { createTemplatePreviewSample } from "../apps/web/src/modules/catalog/preview-sample";
@@ -13,16 +15,19 @@ const archive = new URL(
   "../Invitations - this folder will be removed from production/Chorlove/Web invitations/",
   import.meta.url,
 );
+const hasOriginalArchive = existsSync(fileURLToPath(archive));
 
 test("Green Gold preserves the captured snapshot byte-for-byte", async () => {
   const preserved = await readFile(new URL("source/preview-frame.html", root));
-  const original = await readFile(
-    new URL("templates/green-gold/preview-frame.html", archive),
-  );
   const manifest = JSON.parse(
     await readFile(new URL("source-assets.provenance.json", root), "utf8"),
   );
-  assert.deepEqual(preserved, original);
+  if (hasOriginalArchive) {
+    assert.deepEqual(
+      preserved,
+      await readFile(new URL("templates/green-gold/preview-frame.html", archive)),
+    );
+  }
   assert.equal(
     createHash("sha256").update(preserved).digest("hex"),
     manifest.source.sha256,
@@ -44,12 +49,14 @@ test("Green Gold stages exact design assets and keeps source gallery photos prev
       asset.sha256,
       asset.file,
     );
-    const relativeArchiveFile = asset.archiveFile.replace(
-      /^Chorlove\/Web invitations\//,
-      "",
-    );
-    const original = await readFile(new URL(relativeArchiveFile, archive));
-    assert.deepEqual(bytes, original, asset.file);
+    if (hasOriginalArchive) {
+      const relativeArchiveFile = asset.archiveFile.replace(
+        /^Chorlove\/Web invitations\//,
+        "",
+      );
+      const original = await readFile(new URL(relativeArchiveFile, archive));
+      assert.deepEqual(bytes, original, asset.file);
+    }
   }
   assert.deepEqual(manifest.missingSourceAssets, []);
   const recovered = manifest.sourceAssetsFromLive.find((asset: { file: string }) =>
@@ -86,10 +93,12 @@ test("Green Gold stages exact design assets and keeps source gallery photos prev
   for (const [index, imageNumber] of [2, 1, 3, 6, 4, 5].entries()) {
     const servedFile = `gallery-${imageNumber}.webp`;
     const bytes = await readFile(new URL(servedFile, orchidAssets));
-    const original = await readFile(
-      new URL(`images/templates/orchid-amplop/${servedFile}`, archive),
-    );
-    assert.deepEqual(bytes, original, servedFile);
+    if (hasOriginalArchive) {
+      const original = await readFile(
+        new URL(`images/templates/orchid-amplop/${servedFile}`, archive),
+      );
+      assert.deepEqual(bytes, original, servedFile);
+    }
     assert.equal(
       createHash("sha256").update(bytes).digest("hex"),
       gallery.sha256[index],
@@ -115,15 +124,17 @@ test("Green Gold keeps the captured stylesheet dependencies for source fidelity 
       sheet.sha256,
       sheet.file,
     );
-    const relativeArchiveFile = sheet.archiveFile.replace(
-      /^Chorlove\/Web invitations\//,
-      "",
-    );
-    assert.deepEqual(
-      bytes,
-      await readFile(new URL(relativeArchiveFile, archive)),
-      sheet.file,
-    );
+    if (hasOriginalArchive) {
+      const relativeArchiveFile = sheet.archiveFile.replace(
+        /^Chorlove\/Web invitations\//,
+        "",
+      );
+      assert.deepEqual(
+        bytes,
+        await readFile(new URL(relativeArchiveFile, archive)),
+        sheet.file,
+      );
+    }
   }
 });
 
@@ -154,13 +165,15 @@ test("shared Chorlove stylesheet dependencies resolve to exact local assets", as
     const bytes = await readFile(
       new URL(`../chorlove/shared/${font.servedFile}`, root),
     );
-    const original = await readFile(
-      new URL(
-        font.archiveFile.replace(/^Chorlove\/Web invitations\//, ""),
-        archive,
-      ),
-    );
-    assert.deepEqual(bytes, original, font.servedFile);
+    if (hasOriginalArchive) {
+      const original = await readFile(
+        new URL(
+          font.archiveFile.replace(/^Chorlove\/Web invitations\//, ""),
+          archive,
+        ),
+      );
+      assert.deepEqual(bytes, original, font.servedFile);
+    }
     assert.equal(bytes.length, font.bytes, font.servedFile);
     assert.equal(
       createHash("sha256").update(bytes).digest("hex"),
@@ -226,10 +239,10 @@ test("Green Gold runnable adapter isolates the source sections from site runtime
   assert.match(bridge, /reducedMotion/);
   assert.match(bridge, /Number\.isFinite\(Date\.parse\(d\.dateTime/);
   assert.match(bridge, /c\.giftCta/);
-  assert.match(bridge, /c\.partySize/);
   assert.match(bridge, /c\.playMusic/);
   assert.match(bridge, /ggGuestInitialized/);
-  assert.match(bridge, /party\.replaceChildren/);
+  assert.doesNotMatch(bridge, /createElement\("select"\)|partySize:.*\.value/);
+  assert.match(bridge, /partySize: choice === buttons\[1\] \? 0 : 1/);
   assert.match(bridge, /guestRequired/);
   assert.match(bridge, /wishRequired/);
   assert.match(bridge, /chooseResponse/);
@@ -248,6 +261,7 @@ test("Green Gold runnable adapter isolates the source sections from site runtime
   assert.doesNotMatch(bridge, /p\.locale==="ru"\?"Send gift"/);
   assert.match(css, /prefers-reduced-motion/);
   assert.match(css, /scroll-snap-type:y mandatory/);
+  assert.match(css, /form \[data-gg-status\]:empty\{display:none\}/);
 });
 
 test("Green Gold restores source opening, scroll, ornament, sparkle, wishes, and gallery motion", async () => {
