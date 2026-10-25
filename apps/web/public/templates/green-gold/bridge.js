@@ -10,6 +10,12 @@
     en: { invite: "You are invited to the happiest day of our lives", welcome: "Welcome", title: "Invitation", couple: "The couple", date: "Wedding date", time: "Start time", countdown: "Until our happy day...", venue: "Venue", map: "Open map", contacts: "Contact us", hosts: "With love from", gallery: "Our moments", wishes: "Guest wishes", wish: "Leave a wish", rsvp: "Will you join us?", rsvpPrompt: "Please let us know if you can attend.", yes: "I'll attend", no: "I can't attend", send: "Submit", guest: "Your name", wishPlaceholder: "Your wish", saved: "Your response was saved. Thank you!", submitted: "Your wish was sent.", error: "Could not submit. Please try again.", preview: "Submissions are disabled in preview.", days: "Days", hours: "Hours", minutes: "Min", seconds: "Sec", guestRequired: "Enter your name.", wishRequired: "Write a wish.", chooseResponse: "Choose your RSVP response.", responseLabel: "Your response", photo: "Photo", close: "Close", gift: "Gift / card", giftHeading: "For your gift", giftCta: "Send a gift", playMusic: "Play music", pauseMusic: "Pause music", musicUnavailable: "Music unavailable", language: "Language" },
     ru: { invite: "Приглашаем вас на самый счастливый день нашей жизни", welcome: "Добро пожаловать", title: "Приглашение", couple: "Жених и невеста", date: "Дата свадьбы", time: "Время начала", countdown: "До нашего счастливого дня...", venue: "Место проведения", map: "Открыть карту", contacts: "Связаться с нами", hosts: "С уважением", gallery: "Наши моменты", wishes: "Пожелания гостей", wish: "Оставьте пожелание", rsvp: "Вы придёте?", rsvpPrompt: "Пожалуйста, сообщите, сможете ли вы прийти.", yes: "Приду", no: "Не смогу прийти", send: "Отправить", guest: "Ваше имя", wishPlaceholder: "Ваше пожелание", saved: "Ваш ответ сохранён. Спасибо!", submitted: "Ваше пожелание отправлено.", error: "Не удалось отправить. Попробуйте ещё раз.", preview: "Отправка в режиме просмотра отключена.", days: "Дней", hours: "Часов", minutes: "Мин", seconds: "Сек", guestRequired: "\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0432\u0430\u0448\u0435 \u0438\u043c\u044f.", wishRequired: "\u041d\u0430\u043f\u0438\u0448\u0438\u0442\u0435 \u043f\u043e\u0436\u0435\u043b\u0430\u043d\u0438\u0435.", chooseResponse: "\u0412\u044b\u0431\u0435\u0440\u0438\u0442\u0435 \u0432\u0430\u0448 \u043e\u0442\u0432\u0435\u0442.", responseLabel: "\u0412\u0430\u0448 \u043e\u0442\u0432\u0435\u0442", photo: "\u0424\u043e\u0442\u043e", close: "\u0417\u0430\u043a\u0440\u044b\u0442\u044c", gift: "\u041f\u043e\u0434\u0430\u0440\u043e\u043a / \u043a\u0430\u0440\u0442\u0430", giftHeading: "\u0414\u043b\u044f \u043f\u043e\u0434\u0430\u0440\u043a\u0430", giftCta: "\u041e\u0442\u043f\u0440\u0430\u0432\u0438\u0442\u044c \u043f\u043e\u0434\u0430\u0440\u043e\u043a", playMusic: "\u0412\u043a\u043b\u044e\u0447\u0438\u0442\u044c \u043c\u0443\u0437\u044b\u043a\u0443", pauseMusic: "\u0412\u044b\u043a\u043b\u044e\u0447\u0438\u0442\u044c \u043c\u0443\u0437\u044b\u043a\u0443", musicUnavailable: "\u041c\u0443\u0437\u044b\u043a\u0430 \u043d\u0435\u0434\u043e\u0441\u0442\u0443\u043f\u043d\u0430", language: "\u042f\u0437\u044b\u043a" },
   };
+  const cardCopy = {
+    "uz-Latn": { owner: "Karta egasi", number: "Karta raqami", copy: "Karta raqamini nusxalash", copied: "Nusxalandi" },
+    "uz-Cyrl": { owner: "Карта эгаси", number: "Карта рақами", copy: "Карта рақамини нусхалаш", copied: "Нусхаланди" },
+    en: { owner: "Card owner", number: "Card number", copy: "Copy card number", copied: "Copied" },
+    ru: { owner: "Владелец карты", number: "Номер карты", copy: "Скопировать номер карты", copied: "Скопировано" },
+  };
   let payload;
   let timer;
   let sourceMotion;
@@ -20,6 +26,76 @@
   const $ = (selector, base = root) => base.querySelector(selector);
   const tx = (node, value) => { if (node) node.textContent = value == null ? "" : String(value); };
   const hide = (node, value) => { if (node) node.hidden = Boolean(value); };
+  const giftText = (parent, value, className, color) => {
+    const node = document.createElement("p");
+    node.className = className;
+    node.style.color = color;
+    node.textContent = value;
+    parent.append(node);
+    return node;
+  };
+  const giftIcon = (kind) => {
+    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.setAttribute("width", "16");
+    svg.setAttribute("height", "16");
+    svg.setAttribute("viewBox", "0 0 24 24");
+    svg.setAttribute("fill", "none");
+    svg.setAttribute("stroke", "currentColor");
+    svg.setAttribute("stroke-width", "2");
+    svg.setAttribute("stroke-linecap", "round");
+    svg.setAttribute("stroke-linejoin", "round");
+    const shapes = kind === "check"
+      ? [["path", { d: "M20 6 9 17l-5-5" }]]
+      : [["rect", { x: "8", y: "8", width: "14", height: "14", rx: "2" }], ["path", { d: "M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10" }]];
+    for (const [tag, attrs] of shapes) {
+      const shape = document.createElementNS("http://www.w3.org/2000/svg", tag);
+      for (const [name, value] of Object.entries(attrs)) shape.setAttribute(name, value);
+      svg.append(shape);
+    }
+    return svg;
+  };
+  function showGiftCardDetails(content, data, locale) {
+    const t = cardCopy[locale] || cardCopy["uz-Latn"];
+    const color = "#d4af37";
+    const owner = String(data.cardHolder || "").trim() || "---- ---- ---- -----";
+    const number = String(data.cardNumber || "").trim() || "---- ---- ---- -----";
+    const hasNumber = Boolean(String(data.cardNumber || "").trim());
+    const ownerGroup = document.createElement("div");
+    ownerGroup.className = "space-y-1";
+    giftText(ownerGroup, t.owner, "text-[8px] font-black uppercase tracking-[0.22em]", "rgba(212, 175, 55, 0.88)");
+    giftText(ownerGroup, owner, "text-base font-semibold", color);
+    const divider = document.createElement("div");
+    divider.className = "h-px w-full";
+    divider.style.backgroundColor = "rgba(212, 175, 55, 0.12)";
+    const numberGroup = document.createElement("div");
+    numberGroup.className = "space-y-1";
+    giftText(numberGroup, t.number, "text-[8px] font-black uppercase tracking-[0.22em]", "rgba(212, 175, 55, 0.88)");
+    giftText(numberGroup, number, "break-all text-base font-semibold tracking-[0.12em]", color);
+    const copyButton = document.createElement("button");
+    copyButton.type = "button";
+    copyButton.disabled = !hasNumber;
+    copyButton.className = "flex w-full items-center justify-center gap-2 rounded-2xl border px-4 py-3 text-[9px] font-black uppercase tracking-[0.18em] transition hover:brightness-110 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-55";
+    const renderCopyButton = (copied) => {
+      copyButton.replaceChildren(giftIcon(copied ? "check" : "copy"), document.createTextNode(copied ? t.copied : t.copy));
+      copyButton.style.backgroundColor = copied ? "rgba(212, 175, 55, 0.12)" : color;
+      copyButton.style.color = copied ? color : "#0f172a";
+      copyButton.style.borderColor = copied ? "rgba(212, 175, 55, 0.22)" : "#0f172a";
+    };
+    renderCopyButton(false);
+    let copiedTimer;
+    copyButton.onclick = async () => {
+      if (!hasNumber) return;
+      try {
+        await navigator.clipboard.writeText(String(data.cardNumber).trim());
+        renderCopyButton(true);
+        clearTimeout(copiedTimer);
+        copiedTimer = window.setTimeout(() => renderCopyButton(false), 1800);
+      } catch (error) {
+        console.error("Error copying card number:", error);
+      }
+    };
+    content.replaceChildren(ownerGroup, divider, numberGroup, copyButton);
+  }
   async function render(p) {
     payload = p;
     const d = p.data || {};
@@ -96,7 +172,7 @@
     const gift=sections[8];hide(gift,!d.toyona?.enabled);
     tx(gift?.querySelector("p"), c.gift);
     tx(gift?.querySelector("h2"), c.giftHeading);
-    const giftButton=gift?.querySelector("button");if(giftButton){let details=$("[data-gg-card]",gift);if(!details){details=document.createElement("p");details.dataset.ggCard="";details.className="text-center text-white";details.hidden=true;giftButton.after(details);}tx(details,[d.toyona?.cardNumber,d.toyona?.cardHolder].filter(Boolean).join(" · "));giftButton.onclick=()=>hide(details,!details.hidden);}
+    const giftButton=gift?.querySelector("button");if(giftButton){giftButton.onclick=()=>showGiftCardDetails(giftButton.parentElement,d.toyona||{},p.locale);}
     if(giftButton)tx(giftButton,c.giftCta);
     const footerLink=sections[12]?.querySelector("a");if(footerLink){footerLink.href="/";tx(footerLink,"Taklifnoma");}
     const footerCta=sections[12]?.querySelectorAll("a")[1];if(footerCta){footerCta.href="/";tx(footerCta,p.locale==="en"?"Create your invitation":p.locale==="ru"?"Создать приглашение":p.locale==="uz-Cyrl"?"Таклифнома яратинг":"O'z taklifnomangizni yarating");}

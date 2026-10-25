@@ -239,6 +239,12 @@ test("Green Gold runnable adapter isolates the source sections from site runtime
   assert.match(bridge, /reducedMotion/);
   assert.match(bridge, /Number\.isFinite\(Date\.parse\(d\.dateTime/);
   assert.match(bridge, /c\.giftCta/);
+  assert.match(bridge, /showGiftCardDetails/);
+  assert.match(bridge, /data\.cardHolder/);
+  assert.match(bridge, /data\.cardNumber/);
+  assert.match(bridge, /navigator\.clipboard\.writeText/);
+  assert.match(bridge, /renderCopyButton\(false\)/);
+  assert.match(bridge, /1800/);
   assert.match(bridge, /c\.playMusic/);
   assert.match(bridge, /ggGuestInitialized/);
   assert.doesNotMatch(bridge, /createElement\("select"\)|partySize:.*\.value/);
@@ -274,6 +280,9 @@ test("Green Gold restores source opening, scroll, ornament, sparkle, wishes, and
     await readFile(new URL("source-assets.provenance.json", root), "utf8"),
   );
   assert.match(manifest.sourceMotion.sha256, /^[a-f0-9]{64}$/);
+  assert.equal(manifest.sourceGiftInteraction.moduleId, "557752");
+  assert.equal(manifest.sourceGiftInteraction.routeModuleId, "995238");
+  assert.equal(manifest.sourceGiftInteraction.sha256, manifest.sourceMotion.sha256);
   assert.equal((original.match(/opacity:0/g) ?? []).length, 58);
   assert.equal(manifest.sourceMotion.observedSourceMotion.rotatingOrnaments, 18);
   assert.equal(manifest.sourceMotion.observedSourceMotion.revealTransitions, 11);

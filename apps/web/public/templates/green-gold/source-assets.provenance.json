@@ -133,6 +133,19 @@
       "reducedMotion": "application preference support added without site runtime"
     }
   },
+  "sourceGiftInteraction": {
+    "archiveFile": "Chorlove/Web invitations/_next/static/chunks/09cpm7sbnsw7i.js",
+    "moduleId": "557752",
+    "routeModuleId": "995238",
+    "sha256": "cc9472f5f183b8f7fcbfe281f0cbdeaa573b774cc594e56446736694bfe09b75",
+    "states": [
+      "Initial source button displays Send gift.",
+      "Activation replaces the button inside the same card with Card owner, Card number, and a copy control.",
+      "Card values use the source placeholder when unset; copy is disabled when no card number is configured.",
+      "Copy writes the trimmed card number to the clipboard and displays Copied for 1800ms."
+    ],
+    "packageAdapter": "bridge.js showGiftCardDetails"
+  },
   "catalogArtwork": {
     "file": "catalog-cover-opening.png",
     "format": "PNG",

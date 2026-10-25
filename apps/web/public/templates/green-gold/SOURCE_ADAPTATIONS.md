@@ -71,8 +71,11 @@ opening art and ornaments remain visible.
 The captured RSVP form has no guest-count control. Following the approved
 product requirement, the adapter sends a fixed party size of 1 for attending
 and 0 for declining, and hides its empty live-status paragraph until feedback
-is needed. The captured To'yona HTML preserves the original gift-card button,
-but has no client click handler; the original route chunk is not present in this
-checkout, so exact source click behavior remains unverified. The current
-adapter reveals invitation card details within the source section when the
-button is activated.
+is needed. The source route module in the recovered Chorlove archive confirms
+the exact To'yona interaction: the “Send gift” button reveals owner and number
+labels inside the existing card, using the source placeholder when a value is
+empty. Its copy button is disabled without a number and writes the trimmed
+number to the clipboard; the label changes to “Copied” for 1.8 seconds. The
+adapter reproduces those states and source card layout in
+`showGiftCardDetails`; module path, ID, hash, and observed states are recorded
+in `source-assets.provenance.json`.
