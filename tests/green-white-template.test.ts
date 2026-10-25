@@ -225,6 +225,69 @@ test("Green White slideshow starts manually, advances at the source delay, pause
   assert.equal(reduced.timers.size, 0);
 });
 
+test("Green White gallery swipe, wraparound, and thumbnails execute their source-matched adapter behavior", async () => {
+  const bridge = await readFile(new URL("bridge.js", root), "utf8");
+  const swipeStart = bridge.indexOf('    slide.addEventListener("pointerdown"');
+  const swipeEnd = bridge.indexOf('    container.addEventListener("wheel"', swipeStart);
+  const thumbnailStart = bridge.indexOf("    const thumbnails = items.map((item, i) => {");
+  const thumbnailEnd = bridge.indexOf("    thumbnailWrapper.append(thumbnailTrack);", thumbnailStart);
+  assert.ok(swipeStart >= 0 && swipeEnd > swipeStart);
+  assert.ok(thumbnailStart >= 0 && thumbnailEnd > thumbnailStart);
+
+  const swipeHandlers = bridge.slice(swipeStart, swipeEnd);
+  const swipe = runInNewContext(`(() => {
+    const listeners = new Map(), actions = [];
+    let pointerX = null;
+    const slide = { addEventListener: (name, handler) => listeners.set(name, handler), setPointerCapture: () => {} };
+    const previous = { click: () => actions.push("previous") };
+    const next = { click: () => actions.push("next") };
+    ${swipeHandlers}
+    return { listeners, actions };
+  })()`);
+  const pointerEvent = (clientX: number) => ({ clientX, pointerId: 1, target: { closest: () => ({}) } });
+  swipe.listeners.get("pointerdown")(pointerEvent(100));
+  swipe.listeners.get("pointerup")(pointerEvent(40));
+  assert.equal(swipe.actions[0], "next");
+  swipe.listeners.get("pointerdown")(pointerEvent(40));
+  swipe.listeners.get("pointerup")(pointerEvent(100));
+  assert.equal(swipe.actions[1], "previous");
+  swipe.listeners.get("pointerdown")(pointerEvent(100));
+  swipe.listeners.get("pointerup")(pointerEvent(70));
+  assert.equal(swipe.actions.length, 2);
+  swipe.listeners.get("pointerdown")(pointerEvent(100));
+  swipe.listeners.get("pointercancel")();
+  swipe.listeners.get("pointerup")(pointerEvent(20));
+  assert.equal(swipe.actions.length, 2);
+
+  const wrapExpression = bridge.match(/index = \(nextIndex \+ items\.length\) % items\.length;/);
+  assert.ok(wrapExpression);
+  const normalizeIndex = new Function("nextIndex", "items", `let index; ${wrapExpression[0]}; return index;`);
+  assert.equal(normalizeIndex(-1, Array(6)), 5);
+  assert.equal(normalizeIndex(6, Array(6)), 0);
+
+  const thumbnailSetup = bridge.slice(thumbnailStart, thumbnailEnd);
+  const thumbnails = runInNewContext(`(() => {
+    const created = [], calls = [], items = Array.from({ length: 6 }, (_, i) => ({ src: "photo-" + i + ".webp" }));
+    const c = { photo: "Photo" }, index = 2, thumbnailTrack = { append: () => {} };
+    const document = { createElement: () => { const button = { style: {}, attrs: {}, setAttribute(name, value) { this.attrs[name] = value; } }; created.push(button); return button; } };
+    const show = (...args) => calls.push(args);
+    ${thumbnailSetup}
+    return { thumbnails, calls };
+  })()`);
+  assert.equal(thumbnails.thumbnails.length, 6);
+  assert.equal(thumbnails.thumbnails[3].attrs["aria-label"], "Photo 4");
+  assert.match(thumbnails.thumbnails[3].style.backgroundImage, /photo-3\.webp/);
+  thumbnails.thumbnails[0].onclick();
+  thumbnails.thumbnails[2].onclick();
+  thumbnails.thumbnails[5].onclick();
+  assert.equal(thumbnails.calls.length, 3);
+  assert.equal(thumbnails.calls[0][0], 0);
+  assert.equal(thumbnails.calls[0][1], 1);
+  assert.equal(thumbnails.calls[1][1], 0);
+  assert.equal(thumbnails.calls[2][0], 5);
+  assert.equal(thumbnails.calls[2][1], -1);
+});
+
 test("Green White catalog cover is a source-rendered portrait with recorded provenance", async () => {
   const manifest = JSON.parse(await readFile(new URL("source-assets.provenance.json", root), "utf8"));
   const cover = manifest.catalogArtwork;
