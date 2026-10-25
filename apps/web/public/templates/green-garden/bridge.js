@@ -63,7 +63,7 @@
         petalLayer?.append(petal);
         if (!payload.reducedMotion && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
           petal.animate([{ translate: "0 -10vh" }, { translate: "0 110vh" }], { duration: duration * 1000, delay: delay * 1000, iterations: Infinity, easing: "linear" });
-          petal.animate([{ opacity: 0 }, { opacity: .8, offset: .14, easing: "ease-in-out" }, { opacity: .8, offset: .78 }, { opacity: 0 }], { duration: duration * 1000, delay: delay * 1000, iterations: Infinity, easing: "ease-in-out" });
+          petal.animate([{ opacity: 0 }, { opacity: .8, offset: 1 / 3 }, { opacity: .8, offset: 2 / 3 }, { opacity: 0 }], { duration: duration * 1000, delay: delay * 1000, iterations: Infinity, easing: "ease-in-out" });
           petal.animate([{ rotate: "0deg" }, { rotate: "360deg" }], { duration: duration * 1200, delay: delay * 1000, iterations: Infinity, easing: "linear" });
         }
       }
