@@ -131,14 +131,17 @@
   ],
   "sourceReferencedMissingAsset": {
     "file": "/images/green-garden/leaf1-bloom.webp",
-    "archiveResult": "Absent from the recovered complete Chorlove/Web invitations provider tree. Exact-name search found only images/glass-pink/leaf1-bloom.webp, a visually different Glass Pink asset.",
+    "archiveResult": "Absent from the recovered complete Chorlove and Marxaba provider trees. Exact-name recursive search found only Chorlove/Web invitations/images/glass-pink/leaf1-bloom.webp, a different Glass Pink ornament.",
     "liveHttpStatus": 404,
     "canonicalSourceResponse": {
       "url": "https://chorlove.uz/images/green-garden/leaf1-bloom.webp",
       "method": "GET",
       "status": 404,
-      "checkedAt": "2026-10-25",
-      "redirected": false
+      "checkedAt": "2026-10-26",
+      "redirected": false,
+      "redirectCount": 0,
+      "contentType": "text/html; charset=utf-8",
+      "responseBytes": 39311
     },
     "packageResolution": {
       "markupFile": "index.html",
@@ -162,10 +165,12 @@
         "file": "apps/web/public/templates/glass-pink/assets/leaf1-bloom.webp",
         "bytes": 311360,
         "sha256": "435c4b9a37ad765fb6b40b0333ba49518155e9839254d910a20fa5830a49db57",
+        "archiveFile": "Chorlove/Web invitations/images/glass-pink/leaf1-bloom.webp",
+        "providerSearch": "Exact-name recursive search across recovered Chorlove and Marxaba source trees; sole hit",
         "provenance": "Glass Pink artwork; visually different and not used by Green Garden."
       }
     },
-    "result": "Unrecoverable from the recovered source archive and canonical source response. All five source references resolve to the same URL, which returned HTTP 404 on 2026-10-25; all five remain broken in source and package, with no replacement packaged."
+    "result": "Rechecked 2026-10-26: the canonical source URL returned HTTP 404 with no redirect. All five captured source references still point to it. Exact-name recursive search across the recovered Chorlove and Marxaba provider trees found only the different Glass Pink ornament. The reference remains broken in source and package; no replacement is packaged."
   },
   "integrationStatus": "published-through-0095_publish_green_garden.sql; configured-catalog-and-authenticated-integration-verified",
   "sourceArchiveAudit": {
@@ -216,5 +221,17 @@
         "sha256": "00e79428e3715ee28f9919be8c3bb4f468197b99ae419ae750b19f3a379b4222"
       }
     ]
+  },
+  "sourceHydrationRecheck": {
+    "checkedAt": "2026-10-26",
+    "url": "http://localhost:3003/templates/green-garden/preview-frame.html",
+    "httpStatus": 200,
+    "captureSha256": "d7ba584a7aa9cee59f786191e8c4be0cf57796edbe285fcc35ba890a4be204a8",
+    "waitAfterDomContentLoadedMs": 2500,
+    "pageErrors": [
+      "Minified React error #418"
+    ],
+    "serverRenderedInvitationTextStillPresent": true,
+    "conclusion": "Archived SSR markup is available, but client hydration fails. Do not claim live hydrated source interaction or screenshot parity."
   }
 }

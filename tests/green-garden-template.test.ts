@@ -164,11 +164,25 @@ test("Green Garden restores available source motion and schedule assets", async 
     url: "https://chorlove.uz/images/green-garden/leaf1-bloom.webp",
     method: "GET",
     status: 404,
-    checkedAt: "2026-10-25",
+    checkedAt: "2026-10-26",
     redirected: false,
+    redirectCount: 0,
+    contentType: "text/html; charset=utf-8",
+    responseBytes: 39311,
   });
-  assert.match(manifest.sourceReferencedMissingAsset.result, /All five source references resolve to the same URL/);
-  assert.match(manifest.sourceReferencedMissingAsset.result, /all five remain broken in source and package/);
+  assert.match(manifest.sourceReferencedMissingAsset.result, /All five captured source references still point to it/);
+  assert.equal(manifest.sourceReferencedMissingAsset.packageResolution.unrelatedSameNameAsset.sha256, "435c4b9a37ad765fb6b40b0333ba49518155e9839254d910a20fa5830a49db57");
+  assert.match(manifest.sourceReferencedMissingAsset.archiveResult, /recovered complete Chorlove and Marxaba provider trees/);
+  assert.deepEqual(manifest.sourceHydrationRecheck, {
+    checkedAt: "2026-10-26",
+    url: "http://localhost:3003/templates/green-garden/preview-frame.html",
+    httpStatus: 200,
+    captureSha256: "d7ba584a7aa9cee59f786191e8c4be0cf57796edbe285fcc35ba890a4be204a8",
+    waitAfterDomContentLoadedMs: 2500,
+    pageErrors: ["Minified React error #418"],
+    serverRenderedInvitationTextStillPresent: true,
+    conclusion: "Archived SSR markup is available, but client hydration fails. Do not claim live hydrated source interaction or screenshot parity.",
+  });
   assert.equal(manifest.sourceReferencedMissingAsset.packageResolution.referenceCount, 5);
   assert.equal(manifest.sourceReferencedMissingAsset.packageResolution.resolvedPublicPathExists, false);
   assert.equal(manifest.sourceReferencedMissingAsset.packageResolution.templateAssetExists, false);
