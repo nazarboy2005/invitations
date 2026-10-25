@@ -92,7 +92,7 @@
   function galleryImages(data) {
     const uploaded = (data.gallery || []).filter((item) => safeUrl(item.src)).map((item) => ({ src: safeUrl(item.src), alt: item.alt || item.caption || "" }));
     if (uploaded.length) return uploaded;
-    if (current?.preview && current?.sampleGallery) return Array.from({ length: 6 }, (_, i) => ({ src: BASE + `gallery-${i + 1}.webp`, alt: "" }));
+    if (current?.preview && current?.sampleGallery) return ["gallery-2.webp", "gallery-1.webp", "gallery-3.webp", "gallery-6.webp", "gallery-4.webp", "gallery-5.webp"].map((file) => ({ src: BASE + file, alt: "" }));
     return [];
   }
   // Framer Motion's implicit transition for these source motion values is its

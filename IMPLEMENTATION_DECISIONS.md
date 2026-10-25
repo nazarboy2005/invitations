@@ -340,9 +340,11 @@
 ## Chorlove Orchid Amplop implementation update (2026-10-23; verified 2026-10-25)
 
 - Orchid uses the isolated original component module 482485, embedded source CSS,
-  local fonts/assets, and a shared typed adapter. The captured component chunk's
-  served SHA-256 matches provenance. All seven initially absent image paths are
-  recovered; the 16-chunk source graph, asset/font hashes, and CSS hash validate.
+  local fonts/assets, and a shared typed adapter. The captured component chunk's served SHA-256 matches provenance. The restored
+  source image directory's eight files are byte-identical to the package; a full
+  tree filename search confirms the seven other component paths are absent and
+  were recovered from exact source URLs. The 16-chunk graph and all asset/font/CSS
+  hashes validate.
 - Source-designed guest sections are hero/opener, couple, date/program, story,
   gallery, gift, wishes, RSVP, and footer contacts. Source has no dress-code or
   extra-family-people section. Orchid integration suppresses those generic
@@ -350,8 +352,9 @@
   source gift-card reveal; card number/cardholder remain in source-designed
   layout. No RSVP guest-count prompt is shown; existing API receives partySize
   1 for attending and 0 for not attending.
-- The canonical preview-only gallery uses the six original Orchid images;
-  creator uploads replace them and no source demo photo is included publicly.
+- The canonical preview-only gallery uses the six original Orchid images in source
+  order: gallery-2, gallery-1, gallery-3, gallery-6, gallery-4, gallery-5. Creator
+  uploads replace them; no source demo photo is included publicly.
   Both typed registry entries use the real 450x800 opening capture built from
   the shared fixture. The source metadata image stays excluded because it has
   baked sample names and provider UI.
