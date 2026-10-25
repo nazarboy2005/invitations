@@ -70,7 +70,8 @@ test("Green White runtime is isolated and maps the captured sections to the shar
   assert.match(bridge, /\/api\/public\/invitations\/.*\/\$\{kind\}/);
   assert.match(bridge, /encodeURIComponent\(payload\.invitationId/);
   assert.match(bridge, /prefers-reduced-motion/);
-  assert.match(bridge, /Math\.min\(Number\(payload\.data\.rsvp\?\.maxPartySize\) \|\| 1, 100\)/);
+  assert.doesNotMatch(bridge, /createElement\("select"\).*partySize|\[name="partySize"\]/);
+  assert.match(bridge, /partySize: choice \? 0 : 1/);
   assert.match(bridge, /\$\{id\}:language/);
   assert.match(bridge, /button\.onclick = \(\) => \{ const active = gallery\.filter\(\(photo\) => photo\.src\); showLightbox\(active, active\.indexOf\(item\), c\); \};/);
   assert.match(bridge, /dialog\.className = "gw-lightbox"/);
@@ -149,7 +150,7 @@ test("Green White built-in controls are localized in all four supported locales"
     "venue", "map", "gift", "giftHeading", "cardHolder", "copy", "copied", "copyError",
     "gallery", "dressCode", "dressIntro", "wishes", "wishIntro", "wish", "rsvp", "rsvpPrompt",
     "yes", "no", "send", "guest", "guestFull", "saved", "submitted", "error", "preview",
-    "guestRequired", "wishRequired", "chooseResponse", "responseLabel", "partySize", "days",
+    "guestRequired", "wishRequired", "chooseResponse", "responseLabel", "days",
     "hours", "minutes", "seconds", "photo", "close", "next", "previous", "hosts", "contact",
     "language", "playMusic", "pauseMusic", "musicUnavailable", "footer",
   ];
@@ -158,6 +159,16 @@ test("Green White built-in controls are localized in all four supported locales"
   }
   assert.equal(copy["uz-Cyrl"].rsvp, "\u041a\u0435\u043b\u0430\u0441\u0438\u0437\u043c\u0438?");
   assert.equal(copy.ru.rsvp, "\u0412\u044b \u043f\u0440\u0438\u0434\u0451\u0442\u0435?");
+});
+
+test("Green White RSVP follows the source without asking for guest count", async () => {
+  const bridge = await readFile(new URL("bridge.js", root), "utf8");
+  const source = await readFile(new URL("source/preview-frame.html", root), "utf8");
+  assert.doesNotMatch(source, /partySize|Mehmonlar soni|guest count/i);
+  assert.doesNotMatch(bridge, /createElement\("select"\).*partySize|\[name="partySize"\]/);
+  assert.match(bridge, /partySize: choice \? 0 : 1/);
+  assert.match(source, /Dress-kod/);
+  assert.match(source, /Qanday kiyinish kerak/);
 });
 
 test("Green White is registered for internal wedding preview and remains unpublished", async () => {
