@@ -155,7 +155,7 @@ test("Green Garden restores available source motion and schedule assets", async 
   );
 });
 
-test("Green Garden packaged artwork matches the full local source image folder", async () => {
+test("Green Garden packaged assets match the recorded source hashes", async () => {
   const manifest = JSON.parse(await readFile(new URL("source-assets.provenance.json", root), "utf8"));
   const sourceAssets = manifest.assets.filter((asset: { file: string }) => asset.file.startsWith("assets/"));
   assert.equal(sourceAssets.length, manifest.sourceArchiveAudit.matchedFiles + 6);
@@ -163,6 +163,27 @@ test("Green Garden packaged artwork matches the full local source image folder",
     const packaged = await readFile(new URL(asset.file, root));
     assert.equal(packaged.length, asset.bytes, `${asset.file} byte length differs from source provenance`);
     assert.equal(createHash("sha256").update(packaged).digest("hex"), asset.sha256, `${asset.file} differs from recorded source hash`);
+  }
+});
+
+test("Green Garden source runtime and fonts have recovered archive provenance", async () => {
+  const manifest = JSON.parse(await readFile(new URL("source-assets.provenance.json", root), "utf8"));
+  assert.deepEqual(manifest.sourceRuntimeModule, {
+    file: "_next/static/chunks/0hs8-cen4~3dx.js",
+    bytes: 69437,
+    sha256: "2c9968ae8a5d482044e5595df02cb26da2181d1e307f6a3c444e137ae0789e76",
+    verifiedAgainst: "Recovered Chorlove/Web invitations archive",
+    reviewedBehavior: [
+      "Green Garden opening and hero reveal/parallax",
+      "To'yona floating ornaments and gift-details modal",
+      "RSVP name/yes-no/submit fields",
+      "guestbook card and date presentation",
+    ],
+  });
+  assert.equal(manifest.sourceFontAudit.files.length, 3);
+  for (const font of manifest.sourceFontAudit.files) {
+    assert.ok(manifest.assets.some((asset: { file: string; bytes: number; sha256: string }) =>
+      asset.file === font.file && asset.bytes === font.bytes && asset.sha256 === font.sha256));
   }
 });
 

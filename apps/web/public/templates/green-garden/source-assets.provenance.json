@@ -7,6 +7,18 @@
     "sha256": "d7ba584a7aa9cee59f786191e8c4be0cf57796edbe285fcc35ba890a4be204a8",
     "type": "Next.js server-rendered preview snapshot"
   },
+  "sourceRuntimeModule": {
+    "file": "_next/static/chunks/0hs8-cen4~3dx.js",
+    "bytes": 69437,
+    "sha256": "2c9968ae8a5d482044e5595df02cb26da2181d1e307f6a3c444e137ae0789e76",
+    "verifiedAgainst": "Recovered Chorlove/Web invitations archive",
+    "reviewedBehavior": [
+      "Green Garden opening and hero reveal/parallax",
+      "To'yona floating ornaments and gift-details modal",
+      "RSVP name/yes-no/submit fields",
+      "guestbook card and date presentation"
+    ]
+  },
   "assetOrigin": "Observed in the approved ChatGPT in-app browser on https://chorlove.uz/templates/green-garden; selected design ornaments and exact template fonts only. Gallery sample photos, external sample venue photography, site JavaScript, and music were excluded.",
   "assets": [
     {
@@ -172,6 +184,27 @@
         "httpStatus": 200,
         "bytes": 223172,
         "sha256": "f230b71e33f045610bf268e5c6aee5f65caedd2823d0dd0597fa67e7a491a4e3"
+      }
+    ]
+  },
+  "sourceFontAudit": {
+    "folder": "Invitations - this folder will be removed from production/Chorlove/Web invitations/fonts",
+    "hashComparison": "All 3 Green Garden fonts match the recovered source archive byte-for-byte by SHA-256.",
+    "files": [
+      {
+        "file": "assets/fonts/CormorantGaramond-Regular.ttf",
+        "bytes": 666632,
+        "sha256": "7b99138ffa3baab8616d8491dc6d75961c5ae568b206c5031fbc7bb127385428"
+      },
+      {
+        "file": "assets/fonts/Qellia.otf",
+        "bytes": 20180,
+        "sha256": "98c0d340d2ba414001b9210aa20df2516c8dcdd18c09aa822b34f9718bb45776"
+      },
+      {
+        "file": "assets/fonts/TheNautigal-Regular.ttf",
+        "bytes": 161852,
+        "sha256": "00e79428e3715ee28f9919be8c3bb4f468197b99ae419ae750b19f3a379b4222"
       }
     ]
   }
