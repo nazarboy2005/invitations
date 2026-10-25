@@ -1259,6 +1259,7 @@ export const TEMPLATES: TemplateDefinition[] = [
     priceMinor: 15000000,
     currency: "UZS",
     accent: "#667248",
+    previewImage: "/templates/green-white/preview-opening.png",
     published: false,
   },
   {
