@@ -100,10 +100,13 @@
       const p = all("p", details), h = all("h2", details);
       set(p[0], (data().eventType || text().event).toLocaleUpperCase(dateFormatterLocale())); set(p[1], text().couple);
       set(h[0], data().groom); set(h[1], data().bride);
-      set(p[2], data().date?.long ? `${text().time}: ${data().date.long} · ${data().date.time}` : "");
-      set(p[3], data().message);
-      set(p[4], data().hosts ? data().hostsLabel : ""); set(p[5], data().hosts);
-      hide(p[6]);
+      const hostLabel=({"uz-Latn":"Hurmat bilan:","uz-Cyrl":"Ҳурмат билан:",en:"With respect:",ru:"С уважением:"})[payload?.locale]||"";
+      const eventDate=[data().date?.weekday?.toLocaleUpperCase(dateFormatterLocale()),[data().date?.day,data().date?.month,data().date?.year].filter(Boolean).join(" "),data().date?.time].filter(Boolean).join(" • ");
+      set(p[3], data().dateTime ? text().time.toLocaleUpperCase(dateFormatterLocale()) : "");
+      set(p[4], data().dateTime ? eventDate : "");
+      set(p[5], data().message);
+      set(p[6], data().hosts ? hostLabel : ""); set(p[7], data().hosts);
+      hide(p[6], !data().hosts); hide(p[7], !data().hosts);
       hide(details, ![data().groom, data().bride, data().message, data().hosts].some(Boolean));
     }
     const footer = q("footer", root);
@@ -111,7 +114,6 @@
       const footerLead=all("p",footer)[0];set(footerLead,({"uz-Latn":"Abadiy baxtli hayot boshlanishi","uz-Cyrl":"Абадий бахтли ҳаёт бошланиши",en:"The beginning of a happy life together",ru:"Начало счастливой жизни вместе"})[payload?.locale]||"");
       const h = q("h2", footer); if (h) { const names = all("span", h); if (names.length > 0) set(names[0], data().groom); if (names.length > 2) set(names.at(-1), data().bride); }
       const ps = all("p", footer); if (ps.length > 1) set(ps[1], data().date?.long || ""); if (ps.length > 2) set(ps[2], data().hosts);
-      hide(q("a[href*='chorlove']", footer));
     }
   }
 
@@ -187,7 +189,7 @@
     set(q("h2", section), text().gallery);
     const grid = q(".grid", section) || section;
     const images = all("img", grid), source = (data().gallery || []).filter((item) => item.src || item.url);
-    const items = payload?.preview ? (data().gallery || []) : source;
+    const items = source;
     const cards = images.map((img) => img.closest(".embla__slide__card")?.parentElement || img.parentElement);
     const next = all("button", section).find((b) => /next/i.test(b.getAttribute("aria-label") || ""));
     const prev = all("button", section).find((b) => /previous/i.test(b.getAttribute("aria-label") || ""));
@@ -204,7 +206,7 @@
     };
     if (next) { next.disabled = false; next.onclick = () => { if(items.length){galleryPosition=(galleryPosition+1)%items.length;paint();} }; }
     if (prev) { prev.disabled = false; prev.onclick = () => { if(items.length){galleryPosition=(galleryPosition+items.length-1)%items.length;paint();} }; }
-    paint(); hide(section, !items.length && !payload?.preview);
+    paint(); hide(section, !items.length);
   }
   function showImage(items,index) {
     const dialog=document.createElement("div"); dialog.className="pr-lightbox"; dialog.setAttribute("role","dialog"); dialog.setAttribute("aria-modal","true"); dialog.setAttribute("aria-label",text().gallery);

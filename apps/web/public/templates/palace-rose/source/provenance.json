@@ -22,8 +22,8 @@
     },
     {
       "path": "bridge.js",
-      "bytes": 44862,
-      "sha256": "cf509beb35cc8e239ea4a80e2323278d7eb333940b48de58d18f76088680af1f"
+      "bytes": 45204,
+      "sha256": "877c95b1ebe2d26aab64091b82a910a22e3e26e7619b557818d160af686452dd"
     },
     {
       "path": "source/design.html",
@@ -32,8 +32,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 6011,
-      "sha256": "c36f18be5c4e476850bb5dd4e14cb6289833da00ebce957d7dd6966c34d11934"
+      "bytes": 7149,
+      "sha256": "d85d5e023718b12fbe597538c1c4f7837460925a91c7e32842cc9aeb65d583f0"
     },
     {
       "path": "preview.webp",
@@ -293,16 +293,17 @@
     "motion": "12 SVG petals on normal opening; source-derived placements and timings",
     "localePreview": "uz-Latn, uz-Cyrl, en, ru verified",
     "publication": "unpublished",
-    "focusedTests": "5/5 passed after source-motion alignment updates",
-    "javascriptSyntax": "passed after source-motion alignment updates",
-    "typecheck": "passed after source-motion alignment updates",
-    "reducedMotion": "opening verified without petals",
-    "browserFidelity": "Static source-to-package audit corrected missing fence parallax, footer wrapper progress, scale-only timeline markers, replayable reveals, contact-card once behavior, footer stagger, and opening body scroll lock. Fresh browser check remains unavailable because local browser authority is blocked.",
+    "focusedTests": "5/5 passed after source-to-adapter binding corrections",
+    "javascriptSyntax": "passed after source-to-adapter binding corrections",
+    "typecheck": "passed after source-to-adapter binding corrections",
+    "reducedMotion": "Browser preview qaReducedMotion=1 verified: no opening petals and immediate envelope dismissal; source media-query emulation unavailable.",
+    "browserFidelity": "Matched source and app browser review at 1280x720 covered opening, parallax bridge, detail date/name layout, empty-gallery policy, gift modal, and footer. Date binding now preserves the source ampersand/time-label rows and source date separators; source footer attribution is retained.",
     "sourceAssets": "8/8 exact Palace Rose URLs returned 200 image/webp; byte sizes and SHA-256 verified",
-    "toyonaInteraction": "Source-style modal renders card details/copy or creator note; opens/closes with Escape/backdrop; respects reduced motion",
+    "toyonaInteraction": "Normal-motion source/package gift modals visually compared at 1280x720; source-style card details and copy controls render. Keyboard/backdrop and optional receipt behavior remain covered statically, not exercised in this browser pass.",
     "nonRsvpReleaseBlockers": [
-      "Fresh browser verification of scroll, reveal, parallax, reduced motion, and optional receipt visibility within the open gift modal remains outstanding because local browser authority is blocked.",
-      "Creator-preview versus public-renderer visual and interaction parity has not been verified in-browser."
+      "Source-side prefers-reduced-motion behavior could not be emulated in the available browser controls; only the package qaReducedMotion=1 path was verified.",
+      "Actual public-invitation route parity remains unverified because DATABASE_URL is not configured locally; preview and public routes statically share ChorloveInvitation.",
+      "Optional receipt-host placement in a creator draft remains unverified in-browser; the shared preview fixture does not enable a receipt."
     ]
   },
   "sourceStylesheets": [
@@ -478,7 +479,7 @@
       }
     ]
   },
-  "focusedTests": "passed: node --check bridge.js; pnpm exec tsx --test tests/palace-rose-template.test.ts (5/5); pnpm --filter @taklifnoma/web typecheck",
+  "focusedTests": "passed: node --check apps/web/public/templates/palace-rose/bridge.js; pnpm exec tsx --test tests/palace-rose-template.test.ts (5/5); pnpm --filter @taklifnoma/web typecheck",
   "archiveAudit": {
     "searchScope": [
       "_next/static/media/",

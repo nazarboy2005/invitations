@@ -168,6 +168,12 @@ test("Palace Rose packages its captured styles and source motion timings locally
   assert.match(bridge, /event\.stopPropagation\(\)/);
   assert.match(bridge, /navigator\.clipboard\.writeText\(toyona\.cardNumber\)/);
   assert.match(bridge, /toyona\.note\?\.trim\(\)/);
+  assert.match(bridge, /set\(p\[3\], data\(\)\.dateTime \? text\(\)\.time/);
+  assert.match(bridge, /set\(p\[4\], data\(\)\.dateTime \? eventDate/);
+  assert.match(bridge, /\[data\(\)\.date\?\.weekday\?\.toLocaleUpperCase\(dateFormatterLocale\(\)\),\[data\(\)\.date\?\.day,data\(\)\.date\?\.month,data\(\)\.date\?\.year\]\.filter\(Boolean\)\.join\(" "\),data\(\)\.date\?\.time\]\.filter\(Boolean\)\.join\(" • "\)/);
+  assert.match(bridge, /set\(p\[6\], data\(\)\.hosts \? hostLabel/);
+  assert.match(bridge, /const items = source/);
+  assert.match(bridge, /paint\(\); hide\(section, !items\.length\)/);
   assert.equal((design.match(/transform:scale\(0\)/g) || []).length, 5);
   assert.match(bridge, /style\*="scale\(0\)"/);
   assert.match(bridge, /pr-scale-reveal/);
