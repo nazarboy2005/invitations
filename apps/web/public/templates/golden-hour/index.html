@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en" class="golden-hour-loading">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Golden Hour</title>
+    <link rel="stylesheet" href="./assets/css/fonts.css">
+    <link rel="stylesheet" href="./assets/css/golden-hour.css">
+    <link rel="stylesheet" href="./assets/css/contract-adapter.css">
+</head>
+
+<body>
+
+    <div class="device">
+
+        <!-- ============ HERO ============ -->
+        <section class="hero">
+            <img class="hero-photo" alt="">
+            <div class="hero-overlay"></div>
+
+            <div class="hero-content">
+
+                <div class="hero-masthead reveal-scale">
+                    <div class="title"></div>
+                    <div class="subtitle"></div>
+                </div>
+
+                <div class="hero-signature reveal reveal-delay-3">
+                    <div class="name-line"></div>
+                    <div class="rule"></div>
+                </div>
+                <p class="hero-photo-caption" hidden></p>
+
+            </div>
+        </section>
+        <!-- ============ /HERO ============ -->
+
+        <!-- ============ GUESTS ============ -->
+        <section class="guests">
+            <div class="dear reveal"></div>
+            <div class="guests-row">
+                <div class="guests-col">
+                    <div class="guests-title reveal">Guests!</div>
+                    <p class="guests-text reveal reveal-delay-1">
+                        
+                    </p>
+                </div>
+                <div class="guests-photos reveal-scale reveal-delay-2">
+                    <img alt="">
+                    <img alt="">
+                </div>
+            </div>
+        </section>
+        <!-- ============ /GUESTS ============ -->
+
+        <!-- ============ DATE ============ -->
+        <section class="date-section" hidden>
+            <div class="date-big reveal-scale"></div>
+            <div class="party-label reveal-scale"></div>
+        </section>
+        <!-- ============ /DATE ============ -->
+
+        <!-- ============ COUNTDOWN ============ -->
+        <section class="countdown-section">
+            <div class="countdown-item reveal">
+                <div class="countdown-value" id="cd-days">00</div>
+                <div class="countdown-label">days</div>
+            </div>
+            <div class="countdown-item reveal reveal-delay-1">
+                <div class="countdown-value" id="cd-hours">00</div>
+                <div class="countdown-label">hours</div>
+            </div>
+            <div class="countdown-item reveal reveal-delay-2">
+                <div class="countdown-value" id="cd-mins">00</div>
+                <div class="countdown-label">mins</div>
+            </div>
+            <div class="countdown-item reveal reveal-delay-3">
+                <div class="countdown-value" id="cd-secs">00</div>
+                <div class="countdown-label">secs</div>
+            </div>
+        </section>
+        <!-- ============ /COUNTDOWN ============ -->
+
+        <!-- ============ TIMING OF THE DAY ============ -->
+        <section class="timing" hidden>
+            <div class="timing-header">
+                <span class="timing-title reveal-scale">Timing</span>
+                <div class="timing-subtitle reveal reveal-delay-1">
+                    <span>of</span><span>the</span><span>day</span>
+                </div>
+            </div>
+
+            <p class="timing-intro reveal">
+                Every hour of this celebration has been planned with love —
+                from the first hello to the last dance, here is how our
+                evening will unfold.
+            </p>
+
+            <div class="timeline">
+
+                <div class="timeline-featured reveal-scale">
+                    <div class="feature-time">6:00<span class="ampm">p.m.</span></div>
+                    <div class="feature-title"></div>
+                    <p class="feature-desc">
+                    
+                    </p>
+                </div>
+
+                <div class="timeline-connector">
+                    <span class="connector-line"></span>
+                    <span class="connector-time"></span>
+                </div>
+                <div class="timeline-item"></div>
+
+                <div class="timeline-connector">
+                    <span class="connector-line"></span>
+                    <span class="connector-time"></span>
+                </div>
+                <div class="timeline-item"></div>
+
+                <div class="timeline-connector">
+                    <span class="connector-line"></span>
+                    <span class="connector-time"></span>
+                </div>
+                <div class="timeline-item"></div>
+
+                <div class="timeline-connector">
+                    <span class="connector-line"></span>
+                    <span class="connector-time"></span>
+                </div>
+                <div class="timeline-item"></div>
+
+            </div>
+
+
+        </section>
+        <!-- ============ /TIMING OF THE DAY ============ -->
+
+        <!-- ============ LOCATION ============ -->
+        <section class="location" hidden>
+            <div class="location-title reveal-scale">Location</div>
+            <p class="location-desc reveal reveal-delay-1">Where the celebration takes place</p>
+
+            <div class="location-photo reveal-scale reveal-delay-2">
+                <img alt="">
+                <!-- REPLACE the src above with a map screenshot or venue photo -->
+            </div>
+            <p class="location-photo-caption" hidden></p>
+
+            <p class="location-address reveal reveal-delay-1"></p>
+
+            <a target="_blank" rel="noopener" class="location-btn reveal" hidden></a>
+        </section>
+        <!-- ============ /LOCATION ============ -->
+
+        <!-- ============ DRESS CODE ============ -->
+        <section class="dresscode" data-section="dresscode" hidden>
+            <div class="dress-title reveal-scale">DRESS<br>CODE</div>
+            <p class="dress-desc reveal reveal-delay-1">
+                
+            </p>
+            <div class="dress-swatches reveal-scale reveal-delay-2">
+                <span class="swatch c1"></span>
+                <span class="swatch c2"></span>
+                <span class="swatch c3"></span>
+                <span class="swatch c4"></span>
+                <span class="swatch c5"></span>
+            </div>
+        </section>
+        <!-- ============ /DRESS CODE ============ -->
+
+        <section class="gift-section" hidden>
+            <div class="gift-title"></div>
+            <div class="gift-holder"></div>
+            <div class="gift-number-row">
+                <span class="gift-number"></span>
+                <button class="gift-copy" type="button"></button>
+            </div>
+            <p class="gift-status" role="status" aria-live="polite"></p>
+        </section>
+
+        <!-- ============ RSVP / ANKETA ============ -->
+        <section class="rsvp" hidden>
+            <svg class="rsvp-heart heart-svg" viewBox="0 0 32 29" xmlns="http://www.w3.org/2000/svg">
+                <path class="heart-outline"
+                    d="M16 27.5C16 27.5 2 19.2 2 9.6C2 5.4 5.2 2 9.1 2C11.9 2 14.3 3.7 16 6.2C17.7 3.7 20.1 2 22.9 2C26.8 2 30 5.4 30 9.6C30 19.2 16 27.5 16 27.5Z" />
+                <path class="heart-fill"
+                    d="M16 27.5C16 27.5 2 19.2 2 9.6C2 5.4 5.2 2 9.1 2C11.9 2 14.3 3.7 16 6.2C17.7 3.7 20.1 2 22.9 2C26.8 2 30 5.4 30 9.6C30 19.2 16 27.5 16 27.5Z" />
+            </svg>
+
+            <div class="rsvp-title reveal-scale">Confirm <span class="line2">Attendance</span></div>
+            <p class="rsvp-desc reveal reveal-delay-1">
+                
+            </p>
+
+            <form class="rsvp-form reveal reveal-delay-2">
+                <div class="rsvp-field">
+                    <label for="fullname"></label>
+                    <input type="text" id="fullname" name="fullname" autocomplete="name">
+                </div>
+
+                <div class="rsvp-field">
+                    <label></label>
+                    <div class="rsvp-radios">
+                        <label class="rsvp-radio">
+                            <input type="radio" name="attending" value="yes">
+                            
+                        </label>
+                        <label class="rsvp-radio">
+                            <input type="radio" name="attending" value="no">
+                            
+                        </label>
+                    </div>
+                </div>
+
+                <div class="rsvp-field">
+                    <label for="wishlist"></label>
+                    <textarea id="wishlist" name="wishlist"></textarea>
+                </div>
+
+                <button type="submit" class="rsvp-submit"></button>
+            </form>
+        </section>
+        <!-- ============ /RSVP / ANKETA ============ -->
+
+        <!-- ============ CLOSING ============ -->
+        <section class="closing">
+            <p class="closing-text reveal"></p>
+            <div class="closing-photo-wrap reveal-scale">
+                <img alt="">
+                <span class="closing-photo-caption" hidden></span>
+                <!-- REPLACE the src above with your own tall photo -->
+            </div>
+        </section>
+        <!-- ============ /CLOSING ============ -->
+
+        <!-- ============ FOOTER ============ -->
+        <footer class="site-footer">
+            <div class="footer-brand"></div>
+            <div class="footer-rights">All rights reserved</div>
+            <div class="footer-icons">
+                <a aria-label="Website" target="_blank" rel="noopener" hidden>
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M12 2a10 10 0 100 20 10 10 0 000-20zm7.94 9h-3.1a15.6 15.6 0 00-1.3-5.6A8.03 8.03 0 0119.94 11zM12 4.06c.9 1.2 1.9 3.2 2.16 6.94H9.84C10.1 7.26 11.1 5.26 12 4.06zM9.84 13h4.32c-.26 3.74-1.26 5.74-2.16 6.94-.9-1.2-1.9-3.2-2.16-6.94zM8.46 5.4A15.6 15.6 0 007.16 11h-3.1a8.03 8.03 0 014.4-5.6zM4.06 13h3.1a15.6 15.6 0 001.3 5.6 8.03 8.03 0 01-4.4-5.6zm11.48 5.6a15.6 15.6 0 001.3-5.6h3.1a8.03 8.03 0 01-4.4 5.6z" />
+                    </svg>
+                </a>
+                <a aria-label="Telegram" target="_blank" rel="noopener" hidden>
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M21.9 4.3c.3-1.1-.8-2-1.9-1.6L2.4 9.8c-1.2.5-1.2 2.1.1 2.5l4.5 1.4 1.7 5.5c.3.9 1.4 1.1 2.1.5l2.5-2.3 4.4 3.3c.9.7 2.2.2 2.4-.9l3.8-15.5zM8.7 13.3l9-6.7c.2-.2.5.1.3.3l-7.3 7.2c-.3.3-.5.7-.5 1.1l-.2 2.5-1.3-4.4z" />
+                    </svg>
+                </a>
+                <a aria-label="Instagram" target="_blank" rel="noopener" hidden>
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M12 2.2c2.7 0 3 0 4 .05 1 .05 1.7.2 2.3.45a4.6 4.6 0 011.7 1.1 4.6 4.6 0 011.1 1.7c.25.6.4 1.3.45 2.3.05 1 .05 1.3.05 4s0 3-.05 4c-.05 1-.2 1.7-.45 2.3a4.6 4.6 0 01-1.1 1.7 4.6 4.6 0 01-1.7 1.1c-.6.25-1.3.4-2.3.45-1 .05-1.3.05-4 .05s-3 0-4-.05c-1-.05-1.7-.2-2.3-.45a4.6 4.6 0 01-1.7-1.1 4.6 4.6 0 01-1.1-1.7c-.25-.6-.4-1.3-.45-2.3-.05-1-.05-1.3-.05-4s0-3 .05-4c.05-1 .2-1.7.45-2.3a4.6 4.6 0 011.1-1.7 4.6 4.6 0 011.7-1.1c.6-.25 1.3-.4 2.3-.45 1-.05 1.3-.05 4-.05zM12 7a5 5 0 100 10 5 5 0 000-10zm0 8.2a3.2 3.2 0 110-6.4 3.2 3.2 0 010 6.4zm5.2-8.4a1.17 1.17 0 110-2.34 1.17 1.17 0 010 2.34z" />
+                    </svg>
+                </a>
+                <a aria-label="Facebook" target="_blank" rel="noopener" hidden>
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M13.5 21v-7.5h2.5l.4-3h-2.9V8.4c0-.87.24-1.46 1.5-1.46h1.6V4.3C16.3 4.2 15.4 4 14.4 4c-2.3 0-3.9 1.4-3.9 4v2.5H8v3h2.5V21h3z" />
+                    </svg>
+                </a>
+            </div>
+        </footer>
+        <!-- ============ /FOOTER ============ -->
+
+    </div>
+
+    <!-- Music toggle -->
+    <button class="music-toggle" id="musicToggle" aria-label="Toggle music">
+        <svg viewBox="0 0 24 24">
+            <path d="M9 18V5l12-2v13" />
+            <circle cx="6" cy="18" r="3" />
+            <circle cx="18" cy="16" r="3" />
+        </svg>
+    </button>
+    <audio id="bgMusic" loop preload="none"></audio>
+    <!-- RSVP thank-you popup -->
+    <div class="rsvp-popup-overlay" id="rsvpPopup">
+        <div class="rsvp-popup">
+            <svg class="rsvp-popup-heart heart-svg" viewBox="0 0 32 29" xmlns="http://www.w3.org/2000/svg">
+                <path class="heart-outline"
+                    d="M16 27.5C16 27.5 2 19.2 2 9.6C2 5.4 5.2 2 9.1 2C11.9 2 14.3 3.7 16 6.2C17.7 3.7 20.1 2 22.9 2C26.8 2 30 5.4 30 9.6C30 19.2 16 27.5 16 27.5Z" />
+                <path class="heart-fill"
+                    d="M16 27.5C16 27.5 2 19.2 2 9.6C2 5.4 5.2 2 9.1 2C11.9 2 14.3 3.7 16 6.2C17.7 3.7 20.1 2 22.9 2C26.8 2 30 5.4 30 9.6C30 19.2 16 27.5 16 27.5Z" />
+            </svg>
+            <div class="rsvp-popup-title"></div>
+            <p class="rsvp-popup-text"></p>
+            <button class="rsvp-popup-close" id="rsvpPopupClose"></button>
+        </div>
+    </div>
+    <script src="./assets/js/golden-hour-source.js"></script>
+    <script src="./assets/js/golden-hour-adapter.js"></script>
+</body>
+
+</html>

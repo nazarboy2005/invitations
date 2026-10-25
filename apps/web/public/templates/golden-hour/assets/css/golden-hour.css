@@ -1,0 +1,1132 @@
+:root {
+  --ink: #4a2c30;
+  --cream: #faf1f0;
+  --gold: #c97b86;
+  --gold-soft: #e3b8bb;
+  --overlay-top: rgba(74, 44, 48, 0.32);
+  --overlay-bottom: rgba(50, 28, 32, 0.94);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #f9e3e6;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+}
+
+/* ---- Responsive width: full width on phones, capped on larger screens ---- */
+.device {
+  width: 100%;
+  max-width: 480px;
+  overflow: hidden;
+}
+
+/* ================= HERO SECTION ================= */
+.hero-content .reveal,
+.hero-content .reveal-scale {
+  transition-duration: 1.6s;
+}
+
+.hero-content .reveal-delay-1 {
+  transition-delay: 0.5s;
+}
+.hero-content .reveal-delay-2 {
+  transition-delay: 1s;
+}
+.hero-content .reveal-delay-3 {
+  transition-delay: 1.5s;
+}
+
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  color: var(--cream);
+}
+
+.hero-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 25%;
+  /* REPLACE the src below with Aziza's own photo */
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    var(--overlay-top) 0%,
+    rgba(15, 10, 8, 0.3) 35%,
+    rgba(12, 8, 6, 0.64) 68%,
+    var(--overlay-bottom) 100%
+  );
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 16px 10px 16px;
+}
+
+/* ---- top: BIRTHDAY / party, right aligned ---- */
+.hero-masthead {
+  align-self: stretch;
+  text-align: right;
+  margin: 0 -28px 0 -28px;
+  padding: 0 24px;
+}
+
+.hero-masthead .title {
+  display: block;
+  font-family: "Bodoni Moda", serif;
+  font-weight: 600;
+  font-size: 72px;
+  line-height: 0.86;
+  letter-spacing: -2px;
+  color: var(--cream);
+  white-space: nowrap;
+  text-transform: uppercase;
+}
+
+.hero-masthead .subtitle {
+  margin-top: 8px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-size: 24px;
+  letter-spacing: 6px;
+  color: #ff8999;
+  text-transform: uppercase;
+}
+
+/* ---- middle: age block (left) + best year yet (right) ---- */
+.hero-middle {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.age-block {
+  display: flex;
+  flex-direction: column;
+}
+
+.age-block .age-row {
+  display: flex;
+  align-items: flex-end;
+  line-height: 1;
+}
+
+.age-block .age-num {
+  font-family: "Bodoni Moda", serif;
+  font-weight: 700;
+  font-size: 118px;
+  line-height: 0.82;
+  color: var(--cream);
+}
+
+.age-block .age-suffix {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 17px;
+  letter-spacing: 1px;
+  color: var(--gold);
+  margin-left: 4px;
+  margin-bottom: 8px;
+}
+
+.age-block .age-label {
+  margin-top: 4px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  letter-spacing: 4px;
+  color: var(--cream);
+  opacity: 0.85;
+  text-transform: uppercase;
+}
+
+.tagline {
+  text-align: right;
+  font-family: "Bodoni Moda", serif;
+  font-style: italic;
+  font-weight: 500;
+  line-height: 1.08;
+  text-transform: uppercase;
+}
+
+.tagline span {
+  display: block;
+  font-size: 26px;
+}
+
+.tagline span:nth-child(1) {
+  color: var(--gold-soft);
+}
+
+.tagline span:nth-child(2) {
+  color: var(--cream);
+}
+
+.tagline span:nth-child(3) {
+  color: var(--cream);
+}
+
+/* ---- bottom: signature line ---- */
+.hero-signature {
+  text-align: center;
+}
+
+.hero-signature .name-line {
+  font-family: "Bodoni Moda", serif;
+  font-style: italic;
+  font-weight: 500;
+  font-size: 24px;
+  color: var(--cream);
+}
+
+.hero-signature .name-line .amp {
+  color: var(--gold);
+}
+
+.hero-signature .rule {
+  width: 56px;
+  height: 1px;
+  background: var(--gold);
+  margin: 10px auto 0;
+  opacity: 0.8;
+}
+
+/* ================= GUESTS SECTION ================= */
+.guests {
+  background: var(--cream);
+  color: var(--ink);
+  padding: 56px 28px 48px;
+}
+
+.guests .dear {
+  font-family: "Bodoni Moda", serif;
+
+  font-weight: 500;
+  font-size: 76px;
+  letter-spacing: 1px;
+  color: var(--ink);
+  margin-bottom: 2px;
+  text-transform: uppercase;
+  line-height: 68px;
+}
+
+.guests-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.guests-col {
+  flex: 1;
+  min-width: 0;
+}
+
+.guests-title {
+  font-family: "Bodoni Moda", serif;
+  font-weight: 700;
+  font-size: 38px;
+  line-height: 0.92;
+  color: var(--ink);
+  margin-bottom: 16px;
+  text-transform: uppercase;
+  font-style: italic;
+}
+
+.guests-text {
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--ink);
+  opacity: 0.72;
+  max-width: 190px;
+}
+
+.guests-photos {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 140px;
+  flex-shrink: 0;
+}
+
+.guests-photos img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 3px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+  /* REPLACE these with your own photos */
+}
+
+/* ================= DATE SECTION ================= */
+.date-section {
+  position: relative;
+  background: var(--gold-soft);
+  text-align: center;
+  padding: 64px 16px 8px;
+  overflow: hidden;
+}
+
+.date-big {
+  font-family: "Bodoni Moda", serif;
+  font-weight: 700;
+  font-size: 66px;
+  letter-spacing: -1px;
+  line-height: 1;
+  color: var(--cream);
+  opacity: 0.5;
+  white-space: nowrap;
+}
+
+.party-label {
+  margin-top: -12px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  letter-spacing: 9px;
+  text-transform: uppercase;
+  color: #fff;
+  position: relative;
+  z-index: 2;
+}
+
+/* ================= COUNTDOWN SECTION ================= */
+.countdown-section {
+  background: var(--gold-soft);
+  padding: 36px 20px 72px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.countdown-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.countdown-value {
+  font-family: "Bodoni Moda", serif;
+  font-weight: 600;
+  font-size: 40px;
+  color: var(--cream);
+  border: 1px solid rgb(255, 255, 255);
+  border-radius: 10px;
+  padding: 14px 8px;
+  min-width: 72px;
+  text-align: center;
+}
+
+.countdown-label {
+  margin-top: 9px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #fff;
+  opacity: 0.85;
+}
+
+/* ================= RSVP THANK-YOU POPUP ================= */
+.rsvp-popup-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(74, 44, 48, 0.55);
+  backdrop-filter: blur(3px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  z-index: 100;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+}
+.rsvp-popup-overlay.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+.rsvp-popup {
+  background: var(--blush, #f6e3e2);
+  border-radius: 22px;
+  padding: 40px 30px 34px;
+  max-width: 320px;
+  width: 100%;
+  text-align: center;
+  transform: scale(0.9) translateY(10px);
+  transition: transform 0.35s cubic-bezier(0.22, 0.68, 0, 1);
+}
+.rsvp-popup-overlay.is-open .rsvp-popup {
+  transform: scale(1) translateY(0);
+}
+.rsvp-popup-heart {
+  width: 40px;
+  height: 40px;
+  margin: 0 auto 18px;
+}
+.rsvp-popup-heart .heart-fill {
+  fill: var(--rose, #c97b86);
+  animation: heartGlow 2.4s ease-in-out infinite;
+}
+.rsvp-popup-heart .heart-outline {
+  stroke: var(--rose-deep, #a85763);
+}
+.rsvp-popup-title {
+  font-family: "Bodoni Moda", serif;
+  font-style: italic;
+  font-weight: 600;
+  font-size: 30px;
+  color: var(--rose-deep, #a85763);
+}
+.rsvp-popup-text {
+  margin-top: 12px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+  font-size: 13.5px;
+  line-height: 1.7;
+  color: var(--plum, #4a2c30);
+  opacity: 0.85;
+}
+.rsvp-popup-close {
+  margin-top: 24px;
+  padding: 12px 30px;
+  border: none;
+  border-radius: 30px;
+  background: var(--rose-deep, #a85763);
+  color: var(--blush, #f6e3e2);
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+/* ================= LOCATION SECTION ================= */
+.location {
+  background: var(--cream);
+  color: var(--ink);
+  text-align: center;
+  padding: 70px 28px 74px;
+}
+.location-title {
+  font-family: "Bodoni Moda", serif;
+  font-weight: 700;
+  font-size: 64px;
+  line-height: 0.9;
+  color: var(--ink);
+  text-transform: uppercase;
+}
+.location-desc {
+  margin-top: 20px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+  color: var(--ink);
+  opacity: 0.65;
+}
+.location-photo {
+  margin-top: 34px;
+  width: 100%;
+  height: 220px;
+  border-radius: 16px;
+  overflow: hidden;
+}
+.location-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.location-address {
+  margin-top: 22px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  color: var(--ink);
+}
+.location-btn {
+  display: inline-block;
+  margin-top: 26px;
+  padding: 14px 34px;
+  border-radius: 30px;
+  background: var(--gold);
+  color: var(--cream);
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+.location-btn:hover {
+  opacity: 0.88;
+}
+
+/* ================= TIMING SECTION ================= */
+.timing {
+  background: var(--cream);
+  color: var(--ink);
+  padding: 64px 0;
+}
+
+.timing-header {
+  padding: 0 12px;
+  margin-bottom: 34px;
+}
+
+.timing-title {
+  display: block;
+  font-family: "Anton", sans-serif;
+  font-weight: 400;
+  font-size: 88px;
+  line-height: 0.85;
+  letter-spacing: 6px;
+  color: var(--ink);
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.timing-subtitle {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  margin-top: 10px;
+  padding: 0 30px;
+  font-family: "Bodoni Moda", serif;
+  font-style: italic;
+  font-weight: 500;
+  font-size: 30px;
+  color: var(--gold);
+  text-transform: uppercase;
+}
+
+.timing-intro {
+  padding: 0 30px;
+  margin-bottom: 48px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+  font-size: 13.5px;
+  line-height: 1.85;
+  text-align: center;
+  color: var(--ink);
+  opacity: 0.7;
+}
+
+.timeline {
+  padding: 0 28px 10px;
+}
+
+.timeline-featured {
+  text-align: center;
+  margin-bottom: 6px;
+}
+
+.feature-time {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  font-family: "Bodoni Moda", serif;
+  font-weight: 700;
+  font-size: 64px;
+  line-height: 0.85;
+  color: var(--ink);
+}
+
+.feature-time .ampm {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  letter-spacing: 1px;
+  color: var(--gold);
+  margin-left: 6px;
+  margin-bottom: 8px;
+  text-transform: lowercase;
+}
+
+.feature-title {
+  margin-top: 16px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.feature-desc {
+  margin: 14px auto 0;
+  max-width: 230px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+  font-size: 12.5px;
+  line-height: 1.8;
+  color: var(--ink);
+  opacity: 0.65;
+}
+
+.timeline-connector {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 18px 0 10px;
+}
+
+.connector-line {
+  width: 2px;
+  height: 100px;
+  background: linear-gradient(
+    to bottom,
+    rgba(201, 161, 90, 0) 0%,
+    var(--gold) 50%,
+    rgba(201, 161, 90, 0) 100%
+  );
+}
+
+.connector-time {
+  margin-top: 10px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  font-family: "Bodoni Moda", serif;
+  font-weight: 700;
+  font-size: 52px;
+  line-height: 0.85;
+  color: var(--ink);
+}
+
+.connector-time .ampm {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 1px;
+  color: var(--gold);
+  margin-left: 5px;
+  margin-bottom: 6px;
+  text-transform: lowercase;
+}
+
+.timeline-item {
+  text-align: center;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 1px;
+  color: var(--ink);
+}
+
+/* ================= HEART CLOSING ================= */
+.heart-section {
+  background: var(--ink);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 64px 20px 74px;
+  margin-top: 52px;
+}
+
+.heart-svg {
+  width: 58px;
+  height: 58px;
+  overflow: visible;
+}
+
+.heart-fill {
+  fill: var(--gold);
+  transform-origin: center;
+  animation: heartGlow 2.6s ease-in-out infinite;
+}
+
+.heart-outline {
+  fill: none;
+  stroke: var(--gold-soft);
+  stroke-width: 1.1;
+}
+
+@keyframes heartGlow {
+  0%,
+  100% {
+    opacity: 0.22;
+    transform: scale(0.94);
+    filter: drop-shadow(0 0 2px rgba(201, 161, 90, 0.25));
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.06);
+    filter: drop-shadow(0 0 16px rgba(201, 161, 90, 0.95));
+  }
+}
+
+/* ================= DRESS CODE SECTION ================= */
+.dresscode {
+  background: var(--gold-soft);
+  color: var(--cream);
+  text-align: center;
+  padding: 70px 16px 74px;
+}
+
+.dress-title {
+  font-family: "Bodoni Moda", serif;
+  font-weight: 700;
+  font-size: 58px;
+  line-height: 0.9;
+  letter-spacing: 2px;
+  color: var(--cream);
+}
+
+.dress-desc {
+  max-width: 250px;
+  margin: 22px auto 0;
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+  font-size: 13px;
+  line-height: 1.85;
+  color: var(--cream);
+  opacity: 0.7;
+}
+
+.dress-swatches {
+  display: flex;
+  justify-content: center;
+  margin-top: 38px;
+}
+
+.dress-swatches .swatch {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  margin-left: -14px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
+  border: 1px solid var(--cream);
+}
+
+.dress-swatches .swatch:first-child {
+  margin-left: 0;
+}
+
+.swatch.c1 {
+  background: #c97b86;
+  z-index: 5;
+}
+
+.swatch.c2 {
+  background: #e3b8bb;
+  z-index: 4;
+}
+
+.swatch.c3 {
+  background: #f2d9d6;
+  z-index: 3;
+}
+
+.swatch.c4 {
+  background: #4a2c30;
+  z-index: 2;
+}
+
+.swatch.c5 {
+  background: #faf1f0;
+  z-index: 1;
+}
+
+/* ================= RSVP / ANKETA SECTION ================= */
+.rsvp {
+  --rose: #c97b86;
+  --rose-deep: #a85763;
+  --blush: #f6e3e2;
+  --plum: #4a2c30;
+  background: var(--blush);
+  color: var(--plum);
+  padding: 66px 30px 20px;
+  text-align: center;
+}
+
+.rsvp-heart {
+  width: 34px;
+  height: 34px;
+  margin: 0 auto 26px;
+}
+
+.rsvp-heart .heart-fill {
+  fill: var(--rose);
+  animation: heartGlow 2.6s ease-in-out infinite;
+}
+
+.rsvp-heart .heart-outline {
+  stroke: var(--rose-deep);
+}
+
+.rsvp-title {
+  font-family: "Bodoni Moda", serif;
+  font-weight: 700;
+  font-size: 46px;
+  line-height: 0.95;
+  color: var(--rose-deep);
+}
+
+.rsvp-title .line2 {
+  display: block;
+  font-style: italic;
+  font-weight: 500;
+  color: var(--plum);
+}
+
+.rsvp-desc {
+  max-width: 250px;
+  margin: 20px auto 0;
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+  font-size: 13px;
+  line-height: 1.8;
+  color: var(--plum);
+  opacity: 0.8;
+}
+
+.rsvp-form {
+  margin-top: 36px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.rsvp-field label {
+  display: block;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--rose-deep);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.rsvp-field input[type="text"],
+.rsvp-field textarea {
+  width: 100%;
+  border: none;
+  border-bottom: 1.5px solid var(--rose);
+  background: transparent;
+  padding: 10px 2px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  color: var(--plum);
+  outline: none;
+}
+
+.rsvp-field textarea {
+  resize: none;
+  min-height: 60px;
+  border: 1.5px solid var(--rose);
+  border-radius: 12px;
+  padding: 12px;
+}
+
+.rsvp-field input::placeholder,
+.rsvp-field textarea::placeholder {
+  color: var(--rose-deep);
+  opacity: 0.45;
+}
+
+.rsvp-radios {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.rsvp-radio {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: "Poppins", sans-serif;
+  font-size: 13px;
+  color: var(--plum);
+  cursor: pointer;
+}
+
+.rsvp-radio input {
+  appearance: none;
+  width: 17px;
+  height: 17px;
+  border: 1.5px solid var(--rose-deep);
+  border-radius: 50%;
+  display: grid;
+  place-content: center;
+  margin: 0;
+  cursor: pointer;
+}
+
+.rsvp-radio input::before {
+  content: "";
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--rose-deep);
+  transform: scale(0);
+  transition: transform 0.15s ease;
+}
+
+.rsvp-radio input:checked::before {
+  transform: scale(1);
+}
+
+.rsvp-submit {
+  margin-top: 6px;
+  width: 100%;
+  padding: 16px;
+  border: none;
+  border-radius: 30px;
+  background: var(--rose-deep);
+  color: var(--blush);
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 13px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.rsvp-submit:hover {
+  opacity: 0.88;
+}
+
+/* ================= CLOSING TEXT + IMAGE ================= */
+.closing {
+  background: var(--blush, #f6e3e2);
+  padding: 0 0 0;
+}
+
+.closing-text {
+  text-align: center;
+  padding: 56px 34px 44px;
+  font-family: "Bodoni Moda", serif;
+  font-style: italic;
+  font-weight: 500;
+  font-size: 26px;
+  line-height: 1.35;
+  color: #a85763;
+}
+
+.closing-photo-wrap {
+  position: relative;
+  width: 100%;
+  height: 480px;
+  overflow: hidden;
+}
+
+.closing-photo-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* REPLACE with your own tall photo */
+}
+
+.closing-photo-wrap::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    #f6e3e2 0%,
+    rgba(246, 227, 226, 0.55) 14%,
+    rgba(0, 0, 0, 0) 38%,
+    rgba(0, 0, 0, 0.15) 100%
+  );
+  z-index: 2;
+}
+
+/* ================= FOOTER ================= */
+.site-footer {
+  background: #3d2226;
+  color: #f0d9d7;
+  text-align: center;
+  padding: 46px 28px 40px;
+}
+
+.footer-brand {
+  font-family: "Bodoni Moda", serif;
+  font-style: italic;
+  font-weight: 500;
+  font-size: 20px;
+  letter-spacing: 0.5px;
+  color: #f0d9d7;
+}
+
+.footer-rights {
+  margin-top: 6px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #e3b8bb;
+  opacity: 0.85;
+}
+
+.footer-icons {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  margin-top: 26px;
+}
+
+.footer-icons a {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid rgba(240, 217, 215, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.footer-icons a:hover {
+  background: rgba(240, 217, 215, 0.12);
+  transform: translateY(-2px);
+}
+
+.footer-icons svg {
+  width: 16px;
+  height: 16px;
+  fill: #f0d9d7;
+}
+
+/* ================= MUSIC TOGGLE ================= */
+.music-toggle {
+  position: fixed;
+  top: 13%;
+  left: calc(50% - 195px + 0px);
+  transform: translateY(-50%);
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgb(247 160 192 / 55%);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(247, 241, 230, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 50;
+}
+
+.music-toggle svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: #f7f1e6;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.music-toggle.playing svg {
+  animation: musicSpin 3.2s linear infinite;
+}
+
+@keyframes musicSpin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 420px) {
+  .music-toggle {
+    left: 16px;
+  }
+}
+
+/* ================= SCROLL REVEAL ANIMATIONS ================= */
+.reveal {
+  opacity: 0;
+  transform: translateY(26px);
+  transition:
+    opacity 0.9s cubic-bezier(0.22, 0.68, 0, 1),
+    transform 0.9s cubic-bezier(0.22, 0.68, 0, 1);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.92);
+  transition:
+    opacity 0.8s ease,
+    transform 0.8s cubic-bezier(0.22, 0.68, 0, 1);
+}
+
+.reveal-scale.is-visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.reveal-delay-1 {
+  transition-delay: 0.1s;
+}
+
+.reveal-delay-2 {
+  transition-delay: 0.2s;
+}
+
+.reveal-delay-3 {
+  transition-delay: 0.32s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal-scale {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .heart-fill,
+  .music-toggle.playing svg {
+    animation: none !important;
+  }
+}
