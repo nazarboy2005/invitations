@@ -120,6 +120,10 @@ test("Modern Floral motion port is tied to the captured route module", async () 
   assert.match(motion, /duration: 3000, iterations: Infinity/);
   assert.match(motion, /wishes\.animate\(\[\{ transform: "translateY\(0%\)" \}, \{ transform: "translateY\(-50%\)" \}\], \{\s*duration: Math\.max\(2200 \* wishCount, 16000\), iterations: Infinity, easing: "linear",/);
   assert.match(motion, /prefers-reduced-motion/);
+  assert.match(motion, /motionPreference\?\.addEventListener\?\.\("change", \(\) => \{\s*if \(latestPayload\) start\(latestPayload\);\s*\}\)/);
+  assert.match(motion, /root\.getAnimations\?\.\(\{ subtree: true \}\)\.forEach\(\(animation\) => animation\.cancel\(\)\)/);
+  assert.match(motion, /document\.querySelectorAll\("\[data-mf-lightbox\]"\)[\s\S]*?layer\.remove\(\)/);
+  assert.match(motion, /const wasReduced = reduced;[\s\S]*?if \(wasReduced\) \{\s*initialized = true;[\s\S]*?startContinuousMotion\(\);/);
   assert.match(motion, /node\.matches\("section:nth-of-type\(2\) > div\.absolute\.inset-0"\)\) return \{ duration: 2000, amount: 0, once: false \}/);
   assert.match(motion, /sectionIndex === 1 && node\.matches\("\.relative\.h-16"\)\) return \{ spring: true, delay: 500, amount: 0, once: false \}/);
   assert.match(motion, /sectionIndex === 3 && node\.matches\("\.absolute\.w-9\.h-9"\)\) return \{ spring: true, stiffness: 200, delay: 400, amount: 0, once: false \}/);

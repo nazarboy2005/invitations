@@ -10,6 +10,7 @@
   let observer;
   let initialized = false;
   let reduced = false;
+  let latestPayload;
   const flowerDelays = [0, 0.15, 0, 0.15, 0, 0.1, 0, 0, 0];
   const motionReduced = (payload) => Boolean(payload?.reducedMotion) ||
     Boolean(window.matchMedia?.("(prefers-reduced-motion: reduce)").matches);
@@ -313,7 +314,13 @@
 
   function finishWithoutMotion() {
     observer?.disconnect();
+    observer = undefined;
     root.classList.add("mf-reduced");
+    root.getAnimations?.({ subtree: true }).forEach((animation) => animation.cancel());
+    document.querySelectorAll("[data-mf-lightbox]").forEach((layer) => {
+      layer.getAnimations?.({ subtree: true }).forEach((animation) => animation.cancel());
+      layer.remove();
+    });
     root.querySelectorAll('section [style*="opacity:0"], section [style*="scale(0)"]').forEach((node) => {
       const target = targetFor(node);
       if (target.opacity != null) node.style.opacity = String(target.opacity);
@@ -321,7 +328,10 @@
       if (target.filter) node.style.filter = target.filter;
     });
     if (root.children[2]) root.children[2].hidden = true;
-    if (root.firstElementChild) root.firstElementChild.hidden = true;
+    if (root.firstElementChild) {
+      root.firstElementChild.dataset.mfOpeningStarted = "true";
+      root.firstElementChild.hidden = true;
+    }
   }
 
   function openLightbox(layer) {
@@ -350,12 +360,20 @@
   }
 
   function start(payload = {}) {
+    const wasReduced = reduced;
+    latestPayload = payload;
     reduced = motionReduced(payload);
     if (reduced) {
       finishWithoutMotion();
       return;
     }
     root.classList.remove("mf-reduced");
+    if (wasReduced) {
+      initialized = true;
+      startContinuousMotion();
+      animateSourceControls();
+      return;
+    }
     if (!initialized) {
       initialized = true;
       observer = new IntersectionObserver((entries) => {
@@ -381,6 +399,10 @@
   window.addEventListener("message", (event) => {
     if (event.source !== parent || event.origin !== location.origin || event.data?.type !== "modern-floral:update") return;
     window.setTimeout(() => start(event.data.payload), 0);
+  });
+  const motionPreference = window.matchMedia?.("(prefers-reduced-motion: reduce)");
+  motionPreference?.addEventListener?.("change", () => {
+    if (latestPayload) start(latestPayload);
   });
   try {
     const initial = JSON.parse(window.name);
