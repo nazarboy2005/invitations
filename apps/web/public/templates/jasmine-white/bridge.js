@@ -7,7 +7,7 @@
   const copy = {
     "uz-Latn": {
       title: "Taklifnoma", welcome: "Assalomu alaykum, aziz mehmon", couple: "Kuyov & Kelin",
-      event: "Nikoh to'yi", date: "To'y sanasi", invite: "Sizni hayotimizdagi eng baxtli kun — to'yimizga taklif qilamiz",
+      event: "Nikoh to'yi", date: "To'y sanasi", time: "Vaqt", invite: "Sizni hayotimizdagi eng baxtli kun — to'yimizga taklif qilamiz",
       hosts: "Hurmat bilan:", open: "Taklifnomani ochish", story: "Bizning hikoyamiz", calendar: "Sanamizni eslab qoling",
       calendarHint: "Bu kunni kalendaringizda belgilab qo'ying — sizni kutamiz.", addCalendar: "Kalendariga qo'shish",
       countdown: "Eng baxtli kungacha", venue: "To'y manzili", map: "Xaritada ko'rish", program: "To'y dasturi",
@@ -24,7 +24,7 @@
     },
     "uz-Cyrl": {
       title: "Таклифнома", welcome: "Ассалому алайкум, азиз меҳмон", couple: "Куёв & Келин",
-      event: "Никоҳ тўйи", date: "Тўй санаси", invite: "Сизни ҳаётимиздаги энг бахтли кун — тўйимизга таклиф қиламиз",
+      event: "Никоҳ тўйи", date: "Тўй санаси", time: "Вақт", invite: "Сизни ҳаётимиздаги энг бахтли кун — тўйимизга таклиф қиламиз",
       hosts: "Ҳурмат билан:", open: "Таклифномани очиш", story: "Бизнинг ҳикоямиз", calendar: "Санамизни эслаб қолинг",
       calendarHint: "Бу кунни тақвимингизда белгилаб қўйинг — сизни кутамиз.", addCalendar: "Тақвимга қўшиш",
       countdown: "Энг бахтли кунгача", venue: "Тўй манзили", map: "Харитада кўриш", program: "Тўй дастури",
@@ -45,7 +45,7 @@
       story: "Our story", calendar: "Save our date", calendarHint: "Mark this day in your calendar — we look forward to seeing you.",
       addCalendar: "Add to calendar", countdown: "Until our happiest day", venue: "Venue", map: "View map", program: "Wedding program",
       programHint: "Schedule for the day", wishes: "Guest wishes", wishHint: "Leave a wish for the couple", wish: "Your wish for the couple...",
-      guest: "Your name", wishSend: "Send wish", rsvp: "Will you attend?", rsvpHint: "Please let us know your response.",
+      guest: "Your name", wishSend: "Send wish", rsvp: "Will you attend?", rsvpHint: "Please let us know your response.", time: "Time",
       yes: "I'll attend", no: "Can't attend", send: "Submit", gift: "Send a gift",
       openGift: "Tap to open", closeGift: "Close", cardHolder: "Card holder", copyCard: "Copy number",
       copied: "Card number copied.", copyError: "Could not copy the card number.", contact: "Contact us", phone: "Phone",
@@ -62,7 +62,7 @@
       addCalendar: "Добавить в календарь", countdown: "До нашего счастливого дня", venue: "Место проведения", map: "Посмотреть карту",
       program: "Программа свадьбы", programHint: "Расписание дня", wishes: "Пожелания гостей", wishHint: "Оставьте пожелание молодожёнам",
       wish: "Ваше пожелание молодожёнам...", guest: "Ваше имя", wishSend: "Отправить пожелание", rsvp: "Вы придёте?",
-      rsvpHint: "Пожалуйста, сообщите, сможете ли вы прийти.", yes: "Приду", no: "Не смогу прийти", send: "Отправить",
+      rsvpHint: "Пожалуйста, сообщите, сможете ли вы прийти.", yes: "Приду", no: "Не смогу прийти", send: "Отправить", time: "Время",
       gift: "Подарок", openGift: "Нажмите, чтобы открыть", closeGift: "Закрыть",
       cardHolder: "Владелец карты", copyCard: "Скопировать номер", copied: "Номер карты скопирован.", copyError: "Не удалось скопировать номер карты.",
       contact: "Связаться с нами", phone: "Телефон", telegram: "Telegram", photo: "Фото", close: "Закрыть",
@@ -398,10 +398,12 @@
     const paragraphs = [...node.querySelectorAll("p")], names = [...node.querySelectorAll("h2")];
     tx(paragraphs[0], d.eventType || c.event); tx(paragraphs[1], c.couple);
     tx(names[0], groom); tx(names[1], bride);
-    tx(paragraphs[2], c.date);
-    tx(paragraphs[3], d.date?.long ? `${d.date.weekday ? `${d.date.weekday} • ` : ""}${d.date.long}${d.date.time ? ` • ${d.date.time}` : ""}` : "");
-    tx(paragraphs[4], d.message || c.invite);
-    tx(paragraphs[5], c.hosts); tx(paragraphs[6], d.hosts || "");
+    tx(paragraphs[3], c.time);
+    const date = d.date || {};
+    const dateLine = [date.weekday, [date.day, date.month, date.year].filter(Boolean).join(" "), date.time].filter(Boolean).join(" • ");
+    tx(paragraphs[4], dateLine.toLocaleUpperCase(payload?.locale || "uz-Latn"));
+    tx(paragraphs[5], d.message || c.invite);
+    tx(paragraphs[6], c.hosts); tx(paragraphs[7], d.hosts || "");
   }
 
   function renderGallery(gallery, p, c) {

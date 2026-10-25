@@ -162,6 +162,13 @@ test("Jasmine White preserves its captured page, stylesheets, and design artwork
   assert.match(runtimeHtml, /src="\/templates\/jasmine-white\/bridge\.js"/);
   assert.doesNotMatch(runtimeHtml, /<script[^>]+src="(?:https?:)?\/\/_next\//i);
   assert.match(bridge, /d\.eventType \|\| c\.event/);
+  assert.match(bridge, /tx\(paragraphs\[3\], c\.time\)/);
+  assert.match(bridge, /const dateLine = \[/);
+  assert.match(bridge, /tx\(paragraphs\[4\], dateLine\.toLocaleUpperCase/);
+  assert.match(
+    bridge,
+    /tx\(paragraphs\[6\], c\.hosts\); tx\(paragraphs\[7\], d\.hosts \|\| ""\)/,
+  );
   assert.match(bridge, /partySize: answer \? 0 : 1/);
   assert.doesNotMatch(bridge, /partySize:\s*["']/);
   assert.doesNotMatch(bridge, /createElement\("select"\)/);
