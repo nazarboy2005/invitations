@@ -5,11 +5,18 @@ import { createHash } from "node:crypto";
 
 import { test } from "node:test";
 
-const root = new URL("../apps/web/public/templates/jasmine-white/", import.meta.url);
-const archive = new URL(
-  "../Invitations - this folder will be removed from production/Chorlove/Web invitations/",
+const root = new URL(
+  "../apps/web/public/templates/jasmine-white/",
   import.meta.url,
 );
+const archive = process.env.CHORLOVE_SOURCE_ROOT
+  ? new URL(
+      `file:///${process.env.CHORLOVE_SOURCE_ROOT.replace(/\\/g, "/").replace(/^\//, "")}/`,
+    )
+  : new URL(
+      "../Invitations - this folder will be removed from production/Chorlove/Web invitations/",
+      import.meta.url,
+    );
 
 test("Jasmine White preserves its captured page, stylesheets, and design artwork", async () => {
   const manifest = JSON.parse(
@@ -30,8 +37,14 @@ test("Jasmine White preserves its captured page, stylesheets, and design artwork
     "/templates/jasmine-white/preview.png",
   );
   const source = await readFile(new URL("source/preview-frame.html", root));
-  const sourceArchiveRoot = new URL("templates/jasmine-white/preview-frame.html", archive);
-  const archiveAvailable = await stat(archive).then(() => true, () => false);
+  const sourceArchiveRoot = new URL(
+    "templates/jasmine-white/preview-frame.html",
+    archive,
+  );
+  const archiveAvailable = await stat(archive).then(
+    () => true,
+    () => false,
+  );
   if (archiveAvailable) {
     const original = await readCanonicalText(sourceArchiveRoot);
     assert.deepEqual(source, original);
@@ -42,7 +55,10 @@ test("Jasmine White preserves its captured page, stylesheets, and design artwork
     manifest.source.sha256,
   );
 
-  for (const record of [...manifest.capturedStylesheets, ...manifest.copiedDesignAssets]) {
+  for (const record of [
+    ...manifest.capturedStylesheets,
+    ...manifest.copiedDesignAssets,
+  ]) {
     const bytes = await readFile(new URL(record.file, root));
     if (archiveAvailable) {
       assert.deepEqual(
@@ -83,14 +99,20 @@ test("Jasmine White preserves its captured page, stylesheets, and design artwork
   }
 
   const runtimeHtml = await readFile(new URL("index.html", root), "utf8");
-  const sourceHtml = await readFile(new URL("source/preview-frame.html", root), "utf8");
+  const sourceHtml = await readFile(
+    new URL("source/preview-frame.html", root),
+    "utf8",
+  );
   const bridge = await readFile(new URL("bridge.js", root), "utf8");
   const renderer = await readFile(
     new URL("../apps/web/src/templates/chorlove/renderer.tsx", import.meta.url),
     "utf8",
   );
   const optionalSections = await readFile(
-    new URL("../apps/web/public/templates/shared/editor-sections.js", import.meta.url),
+    new URL(
+      "../apps/web/public/templates/shared/editor-sections.js",
+      import.meta.url,
+    ),
     "utf8",
   );
   if (archiveAvailable) {
@@ -98,7 +120,10 @@ test("Jasmine White preserves its captured page, stylesheets, and design artwork
       new URL("_next/static/chunks/0ziyt946s2g41.js", archive),
       "utf8",
     );
-    assert.equal(Buffer.byteLength(sourceMotion, "utf8"), manifest.sourceMotion.bytes);
+    assert.equal(
+      Buffer.byteLength(sourceMotion, "utf8"),
+      manifest.sourceMotion.bytes,
+    );
     assert.equal(
       createHash("sha256").update(sourceMotion).digest("hex"),
       manifest.sourceMotion.sha256.toLowerCase(),
@@ -106,7 +131,10 @@ test("Jasmine White preserves its captured page, stylesheets, and design artwork
     assert.match(sourceMotion, /scale:\[1,2,0\]/);
     assert.match(sourceMotion, /opacity:\[0,\.85,\.85,0\]/);
     assert.match(sourceMotion, /duration:\.85,ease:"easeOut"/);
-    assert.match(sourceMotion, /transition:\{duration:\.8,ease:\[\.22,1,\.36,1\]\}/);
+    assert.match(
+      sourceMotion,
+      /transition:\{duration:\.8,ease:\[\.22,1,\.36,1\]\}/,
+    );
     assert.match(sourceMotion, /duration:3\.2,ease:"easeInOut"/);
     assert.equal((bridge.match(/left: "[\d.]+%"/g) || []).length, 12);
   } else {
@@ -121,7 +149,10 @@ test("Jasmine White preserves its captured page, stylesheets, and design artwork
     bridge,
     /\{ opacity: 0\.85, offset: 1 \/ 3, easing: "ease-in-out" \},\s*\{ opacity: 0\.85, offset: 2 \/ 3, easing: "ease-in-out" \}/,
   );
-  assert.match(bridge, /const opacity = Number\.parseFloat\(getComputedStyle\(petal\)\.opacity\)/);
+  assert.match(
+    bridge,
+    /const opacity = Number\.parseFloat\(getComputedStyle\(petal\)\.opacity\)/,
+  );
   assert.match(
     bridge,
     /petal\.animate\(\[\{ opacity: Number\.isFinite\(opacity\) \? opacity : 0 \}, \{ opacity: 0 \}\]/,
@@ -134,8 +165,14 @@ test("Jasmine White preserves its captured page, stylesheets, and design artwork
   assert.match(bridge, /partySize: answer \? 0 : 1/);
   assert.doesNotMatch(bridge, /partySize:\s*["']/);
   assert.doesNotMatch(bridge, /createElement\("select"\)/);
-  assert.doesNotMatch(sourceHtml, /partySize|number of guests|mehmonlar soni|количество гостей/i);
-  assert.doesNotMatch(runtimeHtml, /name="partySize"|Mehmonlar soni|Number of guests|Количество гостей/i);
+  assert.doesNotMatch(
+    sourceHtml,
+    /partySize|number of guests|mehmonlar soni|количество гостей/i,
+  );
+  assert.doesNotMatch(
+    runtimeHtml,
+    /name="partySize"|Mehmonlar soni|Number of guests|Количество гостей/i,
+  );
   assert.doesNotMatch(sourceHtml, /Kiyinish uslubi|Dress code|Дресс-код/i);
   assert.doesNotMatch(runtimeHtml, /Kiyinish uslubi|Dress code|Дресс-код/i);
   assert.match(
@@ -144,8 +181,14 @@ test("Jasmine White preserves its captured page, stylesheets, and design artwork
   );
   assert.match(optionalSections, /current\.sectionPolicy\?\.story !== false/);
   assert.match(bridge, /d\.music\?\.url/);
-  assert.match(bridge, /src="\/templates\/jasmine-white\/assets\/glass_garden_green\.webp"/);
-  assert.match(bridge, /links\.slice\(values\.length\)\.forEach\(\(link\) => hide\(link, true\)\)/);
+  assert.match(
+    bridge,
+    /src="\/templates\/jasmine-white\/assets\/glass_garden_green\.webp"/,
+  );
+  assert.match(
+    bridge,
+    /links\.slice\(values\.length\)\.forEach\(\(link\) => hide\(link, true\)\)/,
+  );
   assert.match(bridge, /Таклифнома/);
   assert.doesNotMatch(bridge, /Ð|Ñ„|â€”/);
 
@@ -159,7 +202,10 @@ test("Jasmine White preserves its captured page, stylesheets, and design artwork
     );
     assert.equal(record.statusCode, 200, record.file);
     assert.equal(record.mimeType, "image/webp", record.file);
-    assert.match(record.sourceUrl, /^https:\/\/chorlove\.uz\/images\/green-garden\//);
+    assert.match(
+      record.sourceUrl,
+      /^https:\/\/chorlove\.uz\/images\/green-garden\//,
+    );
   }
   assert.deepEqual(
     await readFile(new URL("assets/dish.webp", root)),
