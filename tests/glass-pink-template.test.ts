@@ -140,6 +140,48 @@ test("Glass Pink runtime binds all four locales and reduced motion", () => {
   assert.match(html, /source-adapter\.js/);
 });
 
+test("Glass Pink RSVP keeps source yes/no controls and submits a fixed party size", () => {
+  const source = readFileSync(sourceSnapshotPath, "utf8");
+  assert.doesNotMatch(source, /name="partySize"|cc-party-size|Mehmonlar soni/);
+  assert.match(source, /role="radiogroup"/);
+  assert.match(source, /<button[^>]*role="radio"[^>]*>[\s\S]*?Kelaman/);
+  assert.match(source, /<button[^>]*role="radio"[^>]*>[\s\S]*?Kela olmayman/);
+  assert.doesNotMatch(bridge, /maxPartySize|select\.name = "partySize"|party\.className = "cc-party-size"/);
+  assert.match(bridge, /partySize: selected\.dataset\.chorloveRsvp === "yes" \? 1 : 0/);
+});
+
+test("Glass Pink wish cards retain the captured layout, timestamp, and wand interaction", () => {
+  const source = readFileSync(sourceSnapshotPath, "utf8");
+  assert.match(source, /max-h-\[460px\] space-y-3 overflow-y-auto pr-1/);
+  assert.match(source, /rounded-2xl border border-white\/40 bg-white\/30 p-4 md:p-5 backdrop-blur-md text-left shadow-sm transition-all hover:scale-\[1\.01\]/);
+  assert.match(source, /flex items-start justify-between/);
+  assert.match(source, /font-semibold text-\[15px\] md:text-\[17px\]/);
+  assert.match(source, /text-xs text-\[rgb\(147,56,69\)\]\/70/);
+  assert.match(source, /mt-2 text-sm md:text-base leading-relaxed text-\[rgb\(147,56,69\)\]/);
+  assert.match(source, /title="AI yordamida tilak yaratish"/);
+  assert.match(bridge, /list\.className = "mt-8 w-full max-w-\[432px\] md:max-w-\[600px\] max-h-\[460px\] space-y-3 overflow-y-auto pr-1"/);
+  assert.match(bridge, /wish\.submittedAt \|\| wish\.createdAt/);
+  assert.match(bridge, /header\.append\(name, date\)/);
+  assert.match(bridge, /card\.append\(header, message\)/);
+  assert.match(bridge, /duration: 400, delay: index \* 50, amount: 0\.2, toOpacity: 1, toTransform: "translateY\(0px\)"/);
+  assert.match(bridge, /magicButton\.onclick = \(\) =>/);
+  assert.match(bridge, /const magicButton = form\?\.querySelector\('button\[type="button"\]'\)/);
+  assert.doesNotMatch(bridge, /magicButton\.hidden = true/);
+  assert.doesNotMatch(bridge, /DEFAULT_PREVIEW_WISHES/);
+});
+
+test("Glass Pink retains its source gift-box section without adding dress code", () => {
+  const source = readFileSync(sourceSnapshotPath, "utf8");
+  assert.match(source, /aria-label="Open gift box"/);
+  assert.match(source, /glass_garden_pink\.webp/);
+  assert.match(source, /hover:scale-\[1\.03\]/);
+  assert.match(source, /saraya_gold\.webp/);
+  assert.match(source, /dragon_phoenix\.webp/);
+  assert.doesNotMatch(source, /dress.?code|attire|kiyim.?uslubi/i);
+  assert.doesNotMatch(html, /data-chorlove-dress|data-gp-dress/);
+  assert.match(bridge, /hide\(section, !data\.toyona\?\.enabled\)/);
+});
+
 test("Glass Pink opener keeps the original timed exit instead of hiding on click", () => {
   const sourceModule = readFileSync(resolve(root, "Invitations - this folder will be removed from production/Chorlove/Web invitations/_next/static/chunks/0wvjbn--75n3p.js"), "utf8");
   const provenance = JSON.parse(readFileSync(provenancePath, "utf8"));

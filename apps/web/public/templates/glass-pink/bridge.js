@@ -206,6 +206,15 @@
   const root = document.querySelector('[data-chorlove-template="glass-pink"]');
   if (!root) return;
 
+  const sourceWishSuggestions = [
+    "Baxtingiz abadiy, oilangiz doimo mehr va quvonchga to'la bo'lsin!",
+    "Nikoh to'yingiz muborak! Bir umr ahil va baxtli yashanglar.",
+    "Yangi hayotingiz sevgi, hurmat va unutilmas lahzalarga boy bo'lsin!",
+    "Sizlarga uzoq umr, mustahkam oila va cheksiz baxt tilayman!",
+    "Muhabbatingiz yillar o'tgan sayin yanada mustahkam bo'lsin!",
+    "To'yingiz muborak! Xonadoningizdan fayz, baraka va quvonch arimasin.",
+  ];
+
   let state = null;
   let countdownTimer = 0;
   let galleryIndex = 0;
@@ -876,10 +885,22 @@
     if (!section) return;
     const list = section.querySelector("[data-chorlove-wish-list]") || document.createElement("div");
     list.dataset.chorloveWishList = "";
+    list.className = "mt-8 w-full max-w-[432px] md:max-w-[600px] max-h-[460px] space-y-3 overflow-y-auto pr-1";
     if (!list.isConnected) section.append(list);
     const form = section.querySelector("form");
-    const magicButton = section.querySelector('button[title*="Generate wish"], button[aria-label*="Generate wish"]');
-    if (magicButton) { magicButton.hidden = true; magicButton.tabIndex = -1; }
+    const magicButton = form?.querySelector('button[type="button"]');
+    if (magicButton) {
+      magicButton.hidden = false;
+      magicButton.tabIndex = 0;
+      magicButton.type = "button";
+      magicButton.onclick = () => {
+        const textarea = form?.querySelector("textarea");
+        if (!textarea) return;
+        const suggestion = sourceWishSuggestions[Math.floor(Math.random() * sourceWishSuggestions.length)];
+        textarea.value = suggestion;
+        textarea.dispatchEvent(new Event("input", { bubbles: true }));
+      };
+    }
     if (form) form.dataset.chorloveWishForm = "";
     const status = section.querySelector(".cc-status") || document.createElement("p");
     status.className = "cc-status";
@@ -887,21 +908,32 @@
     hide(section, !data.wishesEnabled);
     if (!data.wishesEnabled) return;
     const wishes = state.preview
-      ? (data.wishes || []).map((wish) => ({ name: wish.name, message: wish.text }))
+      ? (data.wishes || []).map((wish) => ({ name: wish.name, message: wish.text, createdAt: wish.submittedAt || wish.createdAt }))
       : await fetch(`${state.apiBase}/wishes`, { cache: "no-store" })
           .then((response) => response.ok ? response.json() : { wishes: [] })
-          .then((body) => body.wishes || [])
+          .then((body) => (body.wishes || []).map((wish) => ({ ...wish, createdAt: wish.submittedAt || wish.createdAt })))
           .catch(() => []);
     list.replaceChildren();
     for (const [index, wish] of wishes.entries()) {
       const card = document.createElement("article");
       card.className = "rounded-2xl border border-white/40 bg-white/30 p-4 md:p-5 backdrop-blur-md text-left shadow-sm transition-all hover:scale-[1.01]";
       card.style.opacity = "0"; card.style.transform = "translateY(15px)"; card.dataset.gpSourceWishCard = String(index);
-      const name = document.createElement("strong");
+      const header = document.createElement("div");
+      header.className = "flex items-start justify-between";
+      const name = document.createElement("span");
+      name.className = "font-semibold text-[15px] md:text-[17px]";
+      name.style.color = "rgb(203, 93, 108)";
+      name.style.fontFamily = '"Cormorant Garamond", serif';
       name.textContent = wish.name;
+      const date = document.createElement("span");
+      date.className = "text-xs text-[rgb(147,56,69)]/70";
+      date.textContent = typeof wish.createdAt === "string" ? wish.createdAt.split("T")[0] : "";
+      header.append(name, date);
       const message = document.createElement("p");
+      message.className = "mt-2 text-sm md:text-base leading-relaxed text-[rgb(147,56,69)]";
+      message.style.fontFamily = '"Cormorant Garamond", serif';
       message.textContent = wish.message;
-      card.append(name, message);
+      card.append(header, message);
       list.append(card);
     }
     restoreCapturedMotion();
@@ -939,8 +971,6 @@
     if (!data.rsvp?.enabled) return;
     const form = section.querySelector("form");
     const name = form?.querySelector("input");
-    const magicButton = section.querySelector('button[title*="Generate wish"], button[aria-label*="Generate wish"]');
-    if (magicButton) magicButton.hidden = true;
     const submit = section.querySelector("[data-chorlove-submit-rsvp]");
     const responseGroup = section.querySelector('[role="radiogroup"]');
     if (responseGroup) responseGroup.setAttribute("aria-label", localCopy().responseLabel);
@@ -958,24 +988,7 @@
         });
       };
     }
-    let party = form?.querySelector(".cc-party-size");
-    if (form && !party) {
-      party = document.createElement("label");
-      party.className = "cc-party-size";
-      party.append(document.createTextNode(localCopy().party));
-      const select = document.createElement("select");
-      select.name = "partySize";
-      for (let n = 1; n <= Math.min(Number(data.rsvp.maxPartySize) || 1, 20); n += 1) {
-        const option = document.createElement("option"); option.value = String(n); option.textContent = String(n); select.append(option);
-      }
-      party.append(select);
-      form.append(party);
-    }
-    if (party) {
-      if (party.firstChild?.nodeType === Node.TEXT_NODE) party.firstChild.textContent = localCopy().party;
-      const select = party.querySelector("select");
-      if (select) select.setAttribute("aria-label", localCopy().party);
-    }
+    form?.querySelectorAll(".cc-party-size, [name='partySize']").forEach((control) => control.remove());
     if (submit) text(submit, localCopy().submit);
     if (form) form.onsubmit = async (event) => {
       event.preventDefault();
@@ -987,7 +1000,7 @@
         const response = await fetch(`${state.apiBase}/rsvp`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ name: name?.value || state.guestName || "Guest", status: selected.dataset.chorloveRsvp, partySize: selected.dataset.chorloveRsvp === "yes" ? Number(form.querySelector('[name="partySize"]')?.value || 1) : 0, guestToken: state.guestToken || undefined }),
+          body: JSON.stringify({ name: name?.value || state.guestName || "Guest", status: selected.dataset.chorloveRsvp, partySize: selected.dataset.chorloveRsvp === "yes" ? 1 : 0, guestToken: state.guestToken || undefined }),
         });
         if (!response.ok) throw new Error("rsvp submission failed");
         text(status, localCopy().rsvpSent);
