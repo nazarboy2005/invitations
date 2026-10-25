@@ -108,6 +108,7 @@ test("Jasmine White preserves its captured page, stylesheets, and design artwork
     "utf8",
   );
   const bridge = await readFile(new URL("bridge.js", root), "utf8");
+  const adapterCss = await readFile(new URL("adapter.css", root), "utf8");
   const renderer = await readFile(
     new URL("../apps/web/src/templates/chorlove/renderer.tsx", import.meta.url),
     "utf8",
@@ -141,6 +142,42 @@ test("Jasmine White preserves its captured page, stylesheets, and design artwork
     );
     assert.match(sourceMotion, /duration:3\.2,ease:"easeInOut"/);
     assert.equal((bridge.match(/left: "[\d.]+%"/g) || []).length, 12);
+    const sourcePetals = sourceMotion.match(
+      /let d=(\[[\s\S]*?\]),m=\(\{data:e,isOpening/,
+    );
+    const packagedPetals = bridge.match(
+      /const sourcePetals = \[([\s\S]*?)\n  \];/,
+    );
+    assert.ok(sourcePetals, "source falling-petal table is present");
+    assert.ok(packagedPetals, "packaged falling-petal table is present");
+    const petalPattern =
+      /\{\s*left:\s*"([^"]+)",\s*color:\s*"([^"]+)",\s*size:\s*"([^"]+)",\s*sway:\s*(-?[\d.]+),\s*duration:\s*([\d.]+),\s*delay:\s*([\d.]+),?\s*\}/g;
+    const readPetals = (table: string) =>
+      [...table.matchAll(petalPattern)].map((match) => ({
+        left: match[1],
+        color: match[2],
+        size: Number.parseFloat(match[3]),
+        sway: Number(match[4]),
+        duration: Number(match[5]),
+        delay: Number(match[6]),
+      }));
+    assert.deepEqual(
+      readPetals(sourcePetals[1]),
+      readPetals(packagedPetals[1]),
+    );
+    assert.match(sourceMotion, /initial:\{y:"-10vh",opacity:0\}/);
+    assert.match(
+      sourceMotion,
+      /y:\["-10vh","110vh"\],x:\[0,e\.sway,0\],opacity:\[0,\.85,\.85,0\],rotate:\[0,360\]/,
+    );
+    assert.match(
+      sourceMotion,
+      /x:\{duration:e\.duration\/2,repeat:1\/0,repeatType:"reverse",ease:"easeInOut"\}/,
+    );
+    assert.match(
+      sourceMotion,
+      /rotate:\{duration:1\.2\*e\.duration,repeat:1\/0,ease:"linear",delay:e\.delay\}/,
+    );
   } else {
     assert.match(manifest.sourceMotion.sha256, /^[a-f0-9]{64}$/i);
     assert.equal(manifest.sourceMotion.bytes, 60835);
@@ -151,7 +188,11 @@ test("Jasmine White preserves its captured page, stylesheets, and design artwork
   );
   assert.match(
     bridge,
-    /\{ opacity: 0\.85, offset: 1 \/ 3, easing: "ease-in-out" \},\s*\{ opacity: 0\.85, offset: 2 \/ 3, easing: "ease-in-out" \}/,
+    /\{ opacity: 0\.85, offset: 1 \/ 3, easing: "linear" \},\s*\{ opacity: 0\.85, offset: 2 \/ 3, easing: "linear" \}/,
+  );
+  assert.match(
+    bridge,
+    /duration: petal\.duration \* 1000,\s*delay: petal\.delay \* 1000,\s*iterations: Infinity,\s*easing: "ease-in-out"/,
   );
   assert.match(
     bridge,
@@ -159,13 +200,34 @@ test("Jasmine White preserves its captured page, stylesheets, and design artwork
   );
   assert.match(
     bridge,
-    /petal\.animate\(\[\{ opacity: Number\.isFinite\(opacity\) \? opacity : 0 \}, \{ opacity: 0 \}\]/,
+    /petal\.animate\([\s\S]{0,180}\{ opacity: Number\.isFinite\(opacity\) \? opacity : 0 \},\s*\{ opacity: 0 \}/,
   );
   assert.match(runtimeHtml, /source\/styles\/0\.u3j0~_2ygfx\.css/);
   assert.match(runtimeHtml, /source\/styles\/00sc_9lpb3zcn\.css/);
   assert.match(runtimeHtml, /src="\/templates\/jasmine-white\/bridge\.js"/);
   assert.doesNotMatch(runtimeHtml, /<script[^>]+src="(?:https?:)?\/\/_next\//i);
   assert.match(bridge, /d\.eventType \|\| c\.event/);
+  assert.match(bridge, /outer\.style\.opacity = "0"/);
+  assert.match(bridge, /outer\.style\.translate = "0 -10vh"/);
+  assert.match(bridge, /outer\.style\.top = "-30px"/);
+  assert.match(bridge, /translate: "0 110vh"/);
+  assert.match(
+    bridge,
+    /const photos = p\.preview \? gallery : gallery\.filter\(\(item\) => item\.src\)/,
+  );
+  assert.match(bridge, /hide\(node, !p\.preview && photos\.length === 0\)/);
+  assert.match(bridge, /const previewPhoto = preview && venueImage \? venueImage : ""/);
+  assert.match(bridge, /hide\(imageFrame, !previewPhoto\)/);
+  assert.match(
+    bridge,
+    /duration: petal\.duration \* 500,\s*iterations: Infinity,\s*easing: "linear"/,
+  );
+  assert.match(
+    bridge,
+    /duration: petal\.duration \* 1200,\s*delay: petal\.delay \* 1000,\s*iterations: Infinity,\s*easing: "linear"/,
+  );
+  const petalCss = adapterCss.match(/\.jw-source-petal \{([^}]+)\}/)?.[1] || "";
+  assert.doesNotMatch(petalCss, /z-index|line-height/);
   assert.match(
     bridge,
     /intro\.querySelector\("\.mb-5\.flex\.flex-col\.items-center span"\)/,
@@ -196,6 +258,10 @@ test("Jasmine White preserves its captured page, stylesheets, and design artwork
     /templateId === "jasmine-white"[\s\S]{0,300}story: false,[\s\S]*dressCode: false,[\s\S]*extraPeople: false/,
   );
   assert.match(optionalSections, /current\.sectionPolicy\?\.story !== false/);
+  assert.match(
+    renderer,
+    /if \(templateId === "jasmine-white" && preview && sampleWishes\)[\s\S]{0,180}mapped\.venueImage = venuePhoto/,
+  );
   assert.match(bridge, /d\.music\?\.url/);
   assert.match(
     bridge,

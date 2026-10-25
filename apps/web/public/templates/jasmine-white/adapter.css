@@ -211,16 +211,13 @@ body {
 }
 
 .jw-source-petal {
-  z-index: 2;
   width: max-content;
-  line-height: 1;
   pointer-events: none;
   will-change: translate, opacity;
 }
 
 .jw-source-petal-glyph {
   display: block;
-  line-height: 1;
   will-change: translate, rotate, scale;
 }
 

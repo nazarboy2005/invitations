@@ -228,6 +228,8 @@
         outer.style.top = "-30px";
         outer.style.color = petal.color;
         outer.style.fontSize = petal.size;
+        outer.style.opacity = "0";
+        outer.style.translate = "0 -10vh";
         outer.setAttribute("aria-hidden", "true");
         const glyph = document.createElement("span");
         glyph.className = "jw-source-petal-glyph";
@@ -248,12 +250,12 @@
           duration: petal.duration * 1200, delay: petal.delay * 1000, iterations: Infinity, easing: "linear",
         });
         outer.animate([
-          { opacity: 0, easing: "ease-in-out" },
-          { opacity: 0.85, offset: 1 / 3, easing: "ease-in-out" },
-          { opacity: 0.85, offset: 2 / 3, easing: "ease-in-out" },
-          { opacity: 0 },
+          { opacity: 0, easing: "linear" },
+          { opacity: 0.85, offset: 1 / 3, easing: "linear" },
+          { opacity: 0.85, offset: 2 / 3, easing: "linear" },
+          { opacity: 0, easing: "linear" },
         ], {
-          duration: petal.duration * 1000, delay: petal.delay * 1000, iterations: Infinity, easing: "linear",
+          duration: petal.duration * 1000, delay: petal.delay * 1000, iterations: Infinity, easing: "ease-in-out",
         });
       });
     }
@@ -313,7 +315,7 @@
     renderHero(d, c, groom, bride);
     renderGallery(d.gallery || [], p, c);
     renderDate(d, c, couple);
-    renderVenue(d.venue || {}, c);
+    renderVenue(d.venue || {}, c, p.preview, d.venueImage);
     renderProgram(d.program || [], c);
     renderWishes(d.wishes || [], p, c);
     wireRsvp(c);
@@ -468,13 +470,19 @@
     hide(node, !valid);
   }
 
-  function renderVenue(venue, c) {
+  function renderVenue(venue, c, preview, venueImage) {
     const node = sections[3]; if (!node) return;
     const heading = node.querySelector("h2"), name = node.querySelector("h3");
     const paragraphs = [...node.querySelectorAll("p")];
     const image = node.querySelector("[data-jasmine-venue-photo]");
     const imageFrame = image?.parentElement;
-    if (imageFrame) hide(imageFrame, true);
+    const previewPhoto = preview && venueImage ? venueImage : "";
+    if (image) {
+      if (previewPhoto) image.src = previewPhoto;
+      else image.removeAttribute("src");
+      hide(image, !previewPhoto);
+    }
+    if (imageFrame) hide(imageFrame, !previewPhoto);
     tx(heading, c.venue); tx(name, venue.name || "");
     tx(paragraphs[1], venue.address || "");
     const link = node.querySelector("a");
