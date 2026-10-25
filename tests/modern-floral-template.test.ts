@@ -83,6 +83,7 @@ test("Modern Floral motion port is tied to the captured route module", async () 
     assert.match(source, /whileHover:\{scale:1\.1\},whileTap:\{scale:\.9\},onClick:p,"aria-label":"Toggle music",className:`w-14 h-14 rounded-full shadow-2xl flex items-center justify-center \$\{l\}`/);
     assert.match(source, /buttonClassName:l="bg-white\/90 border border-\[#E5E0D8\] text-\[#A69689\] backdrop-blur-md",activeIconClassName:c="animate-pulse text-\[#FFB6C1\]"/);
     assert.match(source, /whileHover:\{scale:1\.02\},whileTap:\{scale:\.98\},className:"flex items-center justify-center gap-3 bg-white border border-\[#E5E0D8\] text-\[#849685\] px-8 py-4 rounded-2xl/);
+    assert.match(source, /h=\{initial:\{opacity:0,y:15\},whileInView:\{opacity:1,y:0\},viewport:\{amount:\.2\},transition:\{duration:\.6\}\}/);
   }
   assert.match(motion, /delay: 1450, duration: 1000, easing: "cubic-bezier\(\.83,0,\.17,1\)"/);
   assert.match(motion, /delay: 2250, duration: 750/);
@@ -98,6 +99,7 @@ test("Modern Floral motion port is tied to the captured route module", async () 
   assert.match(motion, /duration: 10000, iterations: Infinity/);
   assert.match(motion, /duration: 2000, iterations: Infinity/);
   assert.match(motion, /translateY\(-24px\).*duration: 900, amount: 0\.35, once: true/s);
+  assert.match(motion, /if \(transform\.includes\("translateY\(15px\)"\)\) return \{ duration: 600, amount: 0\.2, once: false \}/);
   assert.match(motion, /function springFrames\(/);
   assert.match(motion, /function interpolateTransform\(/);
   assert.match(motion, /staggered\.indexOf\(node\);\s*if \(staggerIndex >= 0\) \{\s*config\.delay = 120 \+ staggerIndex \* 140/s);
@@ -133,6 +135,7 @@ test("Modern Floral page loads its source motion runner and preserves source rev
   assert.match(bridge, /audio\.muted=true/);
   assert.match(bridge, /m\.dataset\.playing=String\(!audio\.muted&&!audio\.paused\)/);
   assert.match(bridge, /m\.onclick=\(\)=>\{audio\.muted=!audio\.muted/);
+  assert.match(css, /mf-reduced \*\{scroll-behavior:auto!important;animation-duration:\.01ms!important;transition-duration:\.01ms!important\}/);
   assert.match(html, /src="\/templates\/modern-floral\/source-motion\.js"/);
   assert.match(html, /data-chorlove-template="modern-floral"/);
   assert.doesNotMatch(css, /section \[style\*="opacity:0"\][^{]*\{[^}]*opacity:1!important/s);
