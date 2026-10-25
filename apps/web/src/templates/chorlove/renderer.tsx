@@ -95,7 +95,13 @@ export function ChorloveInvitation({
     guestToken,
     preview,
     true,
-    templateId === "orchid-amplop"
+    templateId === "palov"
+      ? {
+          story: false,
+          dressCode: false,
+          extraPeople: false,
+        }
+      : templateId === "orchid-amplop"
       ? {
           dressCode: false,
           extraPeople: false,

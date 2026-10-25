@@ -72,6 +72,14 @@ test("Chorlove Palov adapter maps approved locales, RSVP, and reduced motion", (
   );
   assert.match(sharedExtras, /key === "receipt" && document\.querySelector\('\[data-section="toyona"\]'\)/);
   assert.match(sharedExtras, /footer\.before\(element\)/);
+  const chorloveRenderer = readFileSync(
+    path.join(root, "apps/web/src/templates/chorlove/renderer.tsx"),
+    "utf8",
+  );
+  assert.match(
+    chorloveRenderer,
+    /templateId === "palov"\s*\?\s*\{\s*story: false,\s*dressCode: false,\s*extraPeople: false,/s,
+  );
   const renderer = readFileSync(path.join(root, "apps/web/src/templates/anor/renderer.tsx"), "utf8");
   assert.match(renderer, /invitation\.contacts\.instagramUrl/);
   const legacyInvitation = invitationSchema.parse({
