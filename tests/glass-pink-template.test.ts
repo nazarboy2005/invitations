@@ -175,6 +175,9 @@ test("Glass Pink wish cards retain the captured layout, timestamp, and wand inte
 test("Glass Pink retains its source gift-box section without adding dress code", () => {
   const source = readFileSync(sourceSnapshotPath, "utf8");
   assert.match(source, /aria-label="Open gift box"/);
+  assert.equal(source.split(">✦</span>").length - 1, 4, "source gift box has four source sparkle glyphs");
+  assert.equal(html.split(">✦</span>").length - 1, 4, "package preserves all four source sparkle glyphs");
+  assert.doesNotMatch(html, /âœ¦/);
   assert.match(source, /glass_garden_pink\.webp/);
   assert.match(source, /hover:scale-\[1\.03\]/);
   assert.match(source, /saraya_gold\.webp/);
