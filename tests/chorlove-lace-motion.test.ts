@@ -1,14 +1,23 @@
+import { existsSync } from "node:fs";
 import { readFileSync } from "./helpers/source-files";
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 
 import test from "node:test";
 
-const sourceRoot = "Invitations - this folder will be removed from production/Chorlove/Web invitations";
+const sourceRoot = [
+  process.env.CHORLOVE_LACE_SOURCE_ROOT,
+  "Invitations - this folder will be removed from production/Chorlove/Web invitations",
+  String.raw`D:\$RECYCLE.BIN\S-1-5-21-3366971363-407715079-3029606043-1001\$R4OL8GR\Chorlove\Web invitations`,
+].find((candidate) => candidate && existsSync(`${candidate}/_next/static/chunks/0j~ix342hy.sg.js`));
+if (!sourceRoot) throw new Error("Set CHORLOVE_LACE_SOURCE_ROOT to the recovered Chorlove/Web invitations archive.");
 const packageRoot = "apps/web/public/templates/lace";
 const provenance = JSON.parse(readFileSync(`${packageRoot}/source-assets.provenance.json`, "utf8")) as {
   copiedDesignAssets: Array<{ archiveFile: string; file: string; sha256: string }>;
   capturedStylesheets: Array<{ archiveFile: string; file: string; sha256: string }>;
+  recoveredSourceAssets: Array<{ file: string; sha256: string }>;
+  runtimeFontAssets: Array<{ file: string; sha256: string }>;
+  remoteSourceStylesheet: { file: string; sha256: string };
 };
 const sha256 = (bytes: Buffer) => createHash("sha256").update(bytes).digest("hex");
 const moduleBytes = readFileSync(`${sourceRoot}/_next/static/chunks/0j~ix342hy.sg.js`);
@@ -45,6 +54,24 @@ test("Lace package mirrors source opening and reveal choreography", () => {
   assert.match(css, /\[data-lace-opening\]\{transition:opacity 2s ease-in-out/);
 });
 
+test("Lace RSVP uses fixed attendance counts without asking guests for a headcount", () => {
+  const rsvp = bridge.slice(bridge.indexOf("function renderRsvp"), bridge.indexOf("function renderGift"));
+  assert.match(rsvp, /partySize:answer\?0:1/);
+  assert.doesNotMatch(rsvp, /maxPartySize|name=["']partySize|party\?\.value/);
+});
+
+test("Lace keeps the captured sections and hides optional features when unconfigured", () => {
+  assert.equal([...sourceCapture.toString("utf8").matchAll(/<section\b/g)].length, 12);
+  assert.doesNotMatch(bridge, /createElement\(["']section/);
+  assert.match(bridge, /hide\(section,!venue\.name&&!venue\.address&&!url\)/);
+  assert.match(bridge, /hide\(section,program\.length===0\)/);
+  assert.match(bridge, /hide\(section,!dress\.enabled\)/);
+  assert.match(bridge, /hide\(section,!p\.preview&&entries\.length===0\)/);
+  assert.match(bridge, /hide\(section,!p\.preview&&!p\.data\?\.wishesEnabled\)/);
+  assert.match(bridge, /hide\(section,!gift\.enabled\)/);
+  assert.match(bridge, /hide\(section,!values\.some\(Boolean\)\)/);
+});
+
 test("catalog cover is the original portrait opening poster", () => {
   const poster = readFileSync(`${packageRoot}/assets/bellagio-2-poster.jpg`);
   assert.equal(sha256(poster), "9918bd098acc3620586090b3e6f1eb44dc8876de487849f23c0e272154f5ffff");
@@ -61,6 +88,15 @@ test("every archive-sourced design asset is byte-identical to its captured origi
     assert.equal(sha256(original), asset.sha256, `${asset.archiveFile} source hash`);
     assert.deepEqual(packaged, original, `${asset.file} differs from the captured asset`);
   }
+});
+
+test("recovered source images and local fonts match their recorded source hashes", () => {
+  for (const asset of [...provenance.recoveredSourceAssets, ...provenance.runtimeFontAssets]) {
+    const packaged = readFileSync(`${packageRoot}/${asset.file}`);
+    assert.equal(sha256(packaged), asset.sha256, `${asset.file} provenance hash`);
+  }
+  const fontStylesheet = readFileSync(`${packageRoot}/${provenance.remoteSourceStylesheet.file}`);
+  assert.equal(sha256(fontStylesheet), provenance.remoteSourceStylesheet.sha256, "downloaded Google Fonts CSS provenance hash");
 });
 
 test("captured CSS files match archived bytes modulo Git line-ending conversion", () => {
