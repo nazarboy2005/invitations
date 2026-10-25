@@ -81,6 +81,58 @@
   },
   "status": "Source snapshot, exact original artwork, and Cyrillic font subset are packaged; adapter integration and release verification in progress.",
   "missingSourceAssets": [],
+  "sourceImageReconciliation": {
+    "checkedOn": "2026-10-26",
+    "completeSourceRootsChecked": [
+      {
+        "root": "D:\\Projects\\Taklifnoma\\Invitations - this folder will be removed from production",
+        "sourceFolder": "Invitations - this folder will be removed from production/Chorlove/Web invitations/images/green-gold",
+        "result": "All five named Green Gold assets in copiedDesignAssets are present in the nested complete source tree and hash-match the package. The shallower Chorlove/Web invitations/images/green-gold capture folder has bg.webp only."
+      },
+      {
+        "root": "D:\\Projects\\Invitations",
+        "providerRootsChecked": [
+          "Chorlove",
+          "E-invitation",
+          "Invitate",
+          "Marxaba",
+          "Mytaklif",
+          "OnlineTaklifnoma",
+          "Taklifiy",
+          "Taklifla",
+          "Taklifnomachi",
+          "Yoryor"
+        ],
+        "sourceFolder": "Chorlove/Web invitations/images/green-gold",
+        "result": "All five named Green Gold assets in copiedDesignAssets are present and hash-match the package."
+      }
+    ],
+    "archiveOmissionRecoveredFromSourceUrl": {
+      "file": "images/green-gold/vertical-line.png",
+      "absentFromBothCompleteSourceFolders": true,
+      "sourceUrl": "https://chorlove.uz/images/green-gold/vertical-line.png",
+      "verifiedHttpStatus": 200,
+      "verifiedContentType": "image/png",
+      "verifiedBytes": 79831,
+      "verifiedSha256": "77e2b4b35472df0d3496f4ef90c0820fe60fcb7c352658df9748fb36653e3efe",
+      "packagedFile": "assets/vertical-line.png",
+      "packagedBytes": 79831,
+      "packagedSha256": "77e2b4b35472df0d3496f4ef90c0820fe60fcb7c352658df9748fb36653e3efe",
+      "exactOriginalBytesRecoverable": true
+    },
+    "sourceReferencedPreviewGallery": {
+      "sourcePaths": [
+        "images/templates/orchid-amplop/gallery-2.webp",
+        "images/templates/orchid-amplop/gallery-1.webp",
+        "images/templates/orchid-amplop/gallery-3.webp",
+        "images/templates/orchid-amplop/gallery-6.webp",
+        "images/templates/orchid-amplop/gallery-4.webp",
+        "images/templates/orchid-amplop/gallery-5.webp"
+      ],
+      "result": "The Green Gold source route explicitly references these six source-preview images. Every file exists under Chorlove in both complete source roots and in the shared Orchid Amplop package, with SHA-256 matching previewOnlySourceGallery. They are the original preview samples, not substitute artwork."
+    },
+    "unresolvedSourceImageBytes": []
+  },
   "capturedStylesheets": [
     {
       "file": "source/styles/00sc_9lpb3zcn.css",

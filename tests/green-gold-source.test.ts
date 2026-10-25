@@ -283,6 +283,7 @@ test("Green Gold restores source opening, scroll, ornament, sparkle, wishes, and
     await readFile(new URL("source-assets.provenance.json", root), "utf8"),
   );
   const lightboxMotion = manifest.sourceMotion.observedSourceMotion.galleryLightbox;
+  const imageReconciliation = manifest.sourceImageReconciliation;
   const sourceMotionRuntimePath = lightboxMotion.motionRuntimeArchiveFile
     .replace(/^Chorlove\/Web invitations\//, "");
   const sourceRoute = await readFile(
@@ -292,6 +293,30 @@ test("Green Gold restores source opening, scroll, ornament, sparkle, wishes, and
     new URL(sourceMotionRuntimePath, archive),
   );
   assert.match(manifest.sourceMotion.sha256, /^[a-f0-9]{64}$/);
+  assert.deepEqual(imageReconciliation.unresolvedSourceImageBytes, []);
+  assert.equal(imageReconciliation.completeSourceRootsChecked.length, 2);
+  assert.deepEqual(
+    imageReconciliation.completeSourceRootsChecked[1].providerRootsChecked,
+    [
+      "Chorlove",
+      "E-invitation",
+      "Invitate",
+      "Marxaba",
+      "Mytaklif",
+      "OnlineTaklifnoma",
+      "Taklifiy",
+      "Taklifla",
+      "Taklifnomachi",
+      "Yoryor",
+    ],
+  );
+  const recoveredVerticalLine = imageReconciliation.archiveOmissionRecoveredFromSourceUrl;
+  assert.equal(recoveredVerticalLine.verifiedHttpStatus, 200);
+  assert.equal(recoveredVerticalLine.exactOriginalBytesRecoverable, true);
+  assert.equal(recoveredVerticalLine.verifiedSha256, recoveredVerticalLine.packagedSha256);
+  assert.equal(recoveredVerticalLine.verifiedBytes, recoveredVerticalLine.packagedBytes);
+  assert.equal(imageReconciliation.sourceReferencedPreviewGallery.sourcePaths.length, 6);
+  assert.match(imageReconciliation.sourceReferencedPreviewGallery.result, /not substitute artwork/);
   assert.equal(
     createHash("sha256").update(sourceRoute).digest("hex"),
     manifest.sourceMotion.sha256,
