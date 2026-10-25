@@ -51,6 +51,7 @@ test("Modern Floral motion port is tied to the captured route module", async () 
     const gallery = sourceGalleryChunk.toString("utf8");
     assert.equal(provenance.sourceGalleryModule.bytes, sourceGalleryChunk.length);
     assert.equal(provenance.sourceGalleryModule.sha256, createHash("sha256").update(sourceGalleryChunk).digest("hex"));
+    assert.match(gallery, /initial:\{opacity:0,y:18\},whileInView:\{opacity:1,y:0\},viewport:\{once:!0,amount:\.35\}/);
     assert.match(gallery, /initial:\{opacity:0\},animate:\{opacity:1\},exit:\{opacity:0\},className:"fixed inset-0 z-\[3000\] flex items-center justify-center bg-black\/88 p-4 backdrop-blur-md"/);
     assert.match(gallery, /initial:\{scale:\.96,opacity:0\},animate:\{scale:1,opacity:1\},exit:\{scale:\.96,opacity:0\}/);
     assert.doesNotMatch(gallery, /data-prev|data-next|ArrowLeft|ArrowRight/);
@@ -65,6 +66,13 @@ test("Modern Floral motion port is tied to the captured route module", async () 
   if (sourceChunk) {
     const source = sourceChunk.toString("utf8");
     assert.equal(provenance.sourceMotionModule.sha256, createHash("sha256").update(sourceChunk).digest("hex"));
+    assert.ok(source.includes('let C={once:!0,amount:.35},S={hidden:{opacity:0,y:32,filter:"blur(8px)"},visible:{opacity:1,y:0,filter:"blur(0px)",transition:{duration:.9,ease:"easeOut"}}}'));
+    assert.match(source, /variants:F,initial:"hidden",whileInView:"visible",viewport:C/);
+    assert.match(source, /initial:\{opacity:0,y:30\},whileInView:\{opacity:1,y:0\},transition:\{duration:1\.2\}/);
+    assert.match(source, /initial:\{opacity:0,y:20\},whileInView:\{opacity:1,y:0\},transition:\{duration:1\}/);
+    assert.match(source, /initial:\{opacity:0,x:-20\},whileInView:\{opacity:1,x:0\},transition:\{delay:\.1\*a\}/);
+    assert.match(source, /initial:\{opacity:0,scale:\.9\},whileInView:\{opacity:1,scale:1\},transition:\{delay:\.1\*a,duration:\.8\}/);
+    assert.match(source, /initial:\{opacity:0,y:30\},whileInView:\{opacity:1,y:0\},transition:\{duration:1\.5\}/);
     assert.match(source, /transition:\{delay:1\.45,duration:1,ease:\[\.83,0,\.17,1\]\}/);
     assert.match(source, /animate:\{opacity:\[0,1,1,0\],scale:\[\.84,1,1,1\.05\],y:\[24,0,0,-18\]\},transition:\{duration:2\.1,ease:"easeOut"\}/);
     assert.match(source, /transition:\{delay:2\.25,duration:\.75,ease:"easeInOut"\}/);
@@ -99,6 +107,10 @@ test("Modern Floral motion port is tied to the captured route module", async () 
   assert.match(motion, /duration: 10000, iterations: Infinity/);
   assert.match(motion, /duration: 2000, iterations: Infinity/);
   assert.match(motion, /translateY\(-24px\).*duration: 900, amount: 0\.35, once: true/s);
+  assert.match(motion, /inline\.includes\("filter:blur\(8px\)"\).*duration: 900, amount: 0\.35, once: true/s);
+  assert.match(motion, /transform\.includes\("translateY\(20px\)"\).*duration: 1000, amount: 0, once: false/s);
+  assert.match(motion, /transform\.includes\("translateY\(30px\)"\).*duration: sectionIndex === 6 \? 1500 : 1200, amount: 0, once: false/s);
+  assert.match(motion, /transform\.includes\("translateX\(-20px\)"\).*delay: index \* 100, amount: 0, once: false/s);
   assert.match(motion, /if \(transform\.includes\("translateY\(15px\)"\)\) return \{ duration: 600, amount: 0\.2, once: false \}/);
   assert.match(motion, /function springFrames\(/);
   assert.match(motion, /function interpolateTransform\(/);
