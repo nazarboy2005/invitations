@@ -977,7 +977,7 @@
   }
 
   function renderVenue(data) {
-    const section = root.querySelector('[data-chorlove-field="venueName"]')?.closest("section");
+    const section = root.querySelector('[data-landing-screenshot-id="invite-map"]') || root.querySelector('[data-chorlove-field="address"]')?.closest("section");
     if (!section) return;
     const venue = data.venue || {};
     const present = Boolean(venue.name || venue.address);
