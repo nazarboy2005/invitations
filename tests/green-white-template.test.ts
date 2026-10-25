@@ -3,7 +3,8 @@ import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
 import { test } from "node:test";
 import { runInNewContext } from "node:vm";
-import { templateById } from "../packages/contracts/src/index";
+import { createInvitation, templateById } from "../packages/contracts/src/index";
+import { createTemplatePreviewSample } from "../apps/web/src/modules/catalog/preview-sample";
 
 const root = new URL("../apps/web/public/templates/green-white/", import.meta.url);
 
@@ -53,6 +54,34 @@ test("Green White preserves its captured page and original design assets", async
   const motion = await readFile(new URL("source/12pjntsqxzj70.js", root));
   assert.equal(motion.length, manifest.motionSource.pageModuleBytes);
   assert.equal(createHash("sha256").update(motion).digest("hex"), manifest.motionSource.sha256);
+});
+
+test("Green White source gallery photos are preview-only and byte-identical to the capture", async () => {
+  const sourceTemplate = new URL(
+    "../Invitations - this folder will be removed from production/Chorlove/Web invitations/templates/green-white/preview-frame.html",
+    import.meta.url,
+  );
+  const sourceHtml = await readFile(sourceTemplate, "utf8");
+  const galleryStart = sourceHtml.indexOf("Galereya");
+  const galleryEnd = sourceHtml.indexOf("</section>", galleryStart);
+  assert.ok(galleryStart >= 0 && galleryEnd > galleryStart);
+  const capturedGallery = sourceHtml.slice(galleryStart, galleryEnd);
+  const capturedFiles = [...capturedGallery.matchAll(/\/images\/templates\/orchid-amplop\/(gallery-[1-6]\.webp)/g)].map((match) => match[1]);
+  assert.deepEqual(capturedFiles, ["gallery-2.webp", "gallery-1.webp", "gallery-3.webp", "gallery-6.webp", "gallery-4.webp", "gallery-5.webp"]);
+
+  const preview = createTemplatePreviewSample("green-white");
+  assert.deepEqual(preview.gallery.map((photo) => photo.url), capturedFiles.map((file) => `/templates/chorlove/orchid-amplop/assets/${file}`));
+  const sourceAssets = new URL("../Invitations - this folder will be removed from production/Chorlove/Web invitations/images/templates/orchid-amplop/", import.meta.url);
+  const packageAssets = new URL("../apps/web/public/templates/chorlove/orchid-amplop/assets/", import.meta.url);
+  for (const file of [...new Set(capturedFiles)]) {
+    const sourceBytes = await readFile(new URL(file, sourceAssets));
+    const packageBytes = await readFile(new URL(file, packageAssets));
+    assert.deepEqual(packageBytes, sourceBytes, file);
+  }
+  assert.deepEqual(createInvitation("green-white").gallery, []);
+  const bridge = await readFile(new URL("bridge.js", root), "utf8");
+  assert.match(bridge, /const photos = gallery\.filter\(\(photo\) => photo\?\.src\)/);
+  assert.match(bridge, /hide\(node, !photos\.length\)/);
 });
 
 test("Green White runtime is isolated and maps the captured sections to the shared contract", async () => {

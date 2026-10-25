@@ -5,6 +5,16 @@
   "startsAt": "2027-06-12T17:00",
   "timezone": "Asia/Tashkent",
   "templateSamples": {
+    "green-white": {
+      "gallery": [
+        { "id": "green-white-source-preview-1", "url": "/templates/chorlove/orchid-amplop/assets/gallery-2.webp", "alt": "", "caption": "" },
+        { "id": "green-white-source-preview-2", "url": "/templates/chorlove/orchid-amplop/assets/gallery-1.webp", "alt": "", "caption": "" },
+        { "id": "green-white-source-preview-3", "url": "/templates/chorlove/orchid-amplop/assets/gallery-3.webp", "alt": "", "caption": "" },
+        { "id": "green-white-source-preview-4", "url": "/templates/chorlove/orchid-amplop/assets/gallery-6.webp", "alt": "", "caption": "" },
+        { "id": "green-white-source-preview-5", "url": "/templates/chorlove/orchid-amplop/assets/gallery-4.webp", "alt": "", "caption": "" },
+        { "id": "green-white-source-preview-6", "url": "/templates/chorlove/orchid-amplop/assets/gallery-5.webp", "alt": "", "caption": "" }
+      ]
+    },
     "modern-floral": {
       "gallery": [
         { "id": "modern-floral-source-preview-1", "url": "/templates/chorlove/orchid-amplop/assets/gallery-2.webp", "alt": "", "caption": "" },
