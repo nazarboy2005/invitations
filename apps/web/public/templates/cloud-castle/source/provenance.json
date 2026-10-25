@@ -8,6 +8,27 @@
     "_next/static/chunks/0.u3j0~_2ygfx.css",
     "_next/static/chunks/00sc_9lpb3zcn.css"
   ],
+  "galleryPreviewSamples": {
+    "sourceAssets": [
+      "images/templates/orchid-amplop/gallery-2.webp",
+      "images/templates/orchid-amplop/gallery-1.webp",
+      "images/templates/orchid-amplop/gallery-3.webp",
+      "images/templates/orchid-amplop/gallery-6.webp",
+      "images/templates/orchid-amplop/gallery-4.webp"
+    ],
+    "packageAssetDirectory": "../assets/gallery/",
+    "usage": "Catalog and initial template-selection previews only; creator uploads replace the set; public empty galleries stay hidden"
+  },
+  "visualParityAudit": {
+    "viewports": [
+      "1280x720",
+      "390x844"
+    ],
+    "galleryLayout": "The five source image slot rectangles match the packaged preview at both viewports after aligning the scroll position; each captured slot uses its byte-identical source image.",
+    "sharedStyles": "Both captured shared CSS chunks match after normalizing line endings and rebasing source font URLs to local paths. All 12 files in the captured Next media directory and all seven /fonts files referenced by the CSS have matching packaged font binaries.",
+    "cloudCastleArtwork": "All 21 files under the captured images/cloud-castle directory have byte-identical package copies.",
+    "contactRows": "The phone and Telegram rows use captured source icon paths, styling, and reveal behavior with invitation contact values. The preview fixture supplies demo values; fixed Chorlove owner contact values are omitted."
+  },
   "note": "The archived server-rendered preview is accompanied by the compiled Cloud Castle page component and captured style/assets. The isolated adapter implements its source opening and parallax behavior without copying the Chorlove Next.js site runtime, external music, owner contact values, sample wishes, or hard-coded invitation data.",
   "previewBrowserCapture": {
     "file": "../preview-browser-capture.jpg",

@@ -15,3 +15,14 @@ The bridge fills the captured page from the shared invitation contract and conne
 
 The catalog cover uses the exact captured opening poster at `/templates/lace/assets/bellagio-2-poster.jpg` (1080 x 1920; SHA-256 `9918bd098acc3620586090b3e6f1eb44dc8876de487849f23c0e272154f5ffff`).
 
+
+
+## Source gallery and preview images
+
+The original route (`_next/static/chunks/0j~ix342hy.sg.js`, SHA-256 `f8f02fc84097ac74933c62abdbf3f3ef676621bdc450f0686ac106fea836ed69`) feeds the six gallery images in this order: `gallery-2.webp`, `gallery-1.webp`, `gallery-3.webp`, `gallery-6.webp`, `gallery-4.webp`, `gallery-5.webp`. The source URLs resolve below `/images/templates/orchid-amplop/`; the packaged URLs resolve below `/templates/lace/assets/`. Each packaged gallery file is byte-identical to the Chorlove archive files recorded at `images/templates/orchid-amplop/gallery-{1..6}.webp` (per-file SHA-256 checks are in the focused Lace regression test). The same bytes are present in the checked Chorlove source trees; no matching image bytes were found in the other provider trees. Both source and package use local same-origin image URLs, so these images do not require cross-origin access.
+
+The catalog and empty template-selection preview use those six source images through the Lace-only branch in `apps/web/src/templates/chorlove/renderer.tsx`. It selects that fallback only when preview mode is active, sample wishes are enabled, and the invitation has no uploaded gallery URLs. Creator photos replace the sample set; persisted/public invitation rendering does not receive sample gallery data. The captured source gallery section and the adapted gallery section are both hidden when their image list is empty. The catalog cover remains the original portrait opening poster recorded above.
+
+## Gallery lightbox source behavior
+
+The route config sets YARL slideshow off initially with a 1500 ms interval when started, 250 ms swipe motion, a five-slide non-finite carousel, 84 x 56 thumbnails with 1 px border, 8 px radius and gap, no inner thumbnail padding, and backdrop close. The archived YARL chunks are `_next/static/chunks/0jsw~n6ojplnf.js` (SHA-256 `fa0c331b8fad639b1375e517b27b7e1eff0e424807a711b4bae9fc9145f661f8`) and `_next/static/chunks/0axwbwbrzg9nc.js` (SHA-256 `e3a11d3a41fa9ade4ada7476287ce5ec01d81d0716a4dbbc1ae1d44b2e24da8c`). The isolated `gallery-lightbox.js` adapter implements the source zoom multiplier (2), anchored zoom and pan, keyboard pan/navigation, touch swipe/pinch, source thumbnail labels/active state and track motion, focus initialization/return, inert background siblings, and pointer-up backdrop behavior. It uses the captured YARL styles already loaded by `index.html`; it does not bundle the Chorlove application runtime or vendor React bundle. API wiring and invitation data remain in `bridge.js`.

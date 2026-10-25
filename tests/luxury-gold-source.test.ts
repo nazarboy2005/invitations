@@ -8,6 +8,7 @@ const root = resolve("apps/web/public/templates/luxury-gold");
 const html = readFileSync(join(root, "index.html"), "utf8");
 const bridge = readFileSync(join(root, "bridge.js"), "utf8");
 const manifest = JSON.parse(readFileSync(join(root, "source-assets.provenance.json"), "utf8"));
+const previewSample = JSON.parse(readFileSync(resolve("apps/web/src/modules/catalog/preview-sample.json"), "utf8"));
 
 test("Luxury Gold preserves captured layout, source styles and original assets with provenance", () => {
   const source = readFileSync(join(root, "source/preview-frame.html"));
@@ -47,6 +48,32 @@ test("Luxury Gold preserves captured layout, source styles and original assets w
   }
   assert.equal(manifest.assets.length, 4);
   assert.equal(manifest.excludedCapturedGallery.length, 6);
+  assert.equal(manifest.excludedCapturedGalleryEvidence.assets.length, 6);
+  assert.deepEqual(
+    manifest.excludedCapturedGalleryEvidence.assets.map((asset: { path: string }) => asset.path),
+    manifest.excludedCapturedGallery,
+  );
+  for (const asset of manifest.excludedCapturedGalleryEvidence.assets) {
+    assert.equal(asset.sourceUrl, `https://chorlove.uz${asset.path}`);
+    assert.ok(!manifest.assets.some((packaged: { file: string }) => packaged.file.endsWith(asset.path.split("/").at(-1)!)));
+    if (sourceRoot) {
+      const capturedAsset = readFileSync(join(sourceRoot, asset.archivePath));
+      assert.equal(capturedAsset.length, asset.bytes);
+      assert.equal(createHash("sha256").update(capturedAsset).digest("hex"), asset.sha256);
+    }
+  }
+  const previewGallery = previewSample.templateSamples["luxury-gold"].gallery;
+  assert.deepEqual(
+    previewGallery.map((item: { url: string }) => item.url),
+    [2, 1, 3, 6, 4, 5].map((index) => `/templates/chorlove/orchid-amplop/assets/gallery-${index}.webp`),
+  );
+  for (const asset of manifest.excludedCapturedGalleryEvidence.assets) {
+    const packagedPreviewPath = resolve("apps/web/public", `.${previewGallery.find((item: { url: string }) => item.url.endsWith(asset.path.split("/").at(-1)!)).url}`);
+    const packagedPreview = readFileSync(packagedPreviewPath);
+    assert.equal(packagedPreview.length, asset.bytes);
+    assert.equal(createHash("sha256").update(packagedPreview).digest("hex"), asset.sha256);
+  }
+  assert.match(bridge, /hide\(s, !items\.some\(\(i\) => i\.src\)\)/, "empty creator galleries must stay hidden");
   const sourceModule = sourceRoot
     ? readFileSync(join(sourceRoot, "_next/static/chunks/0io3rqik.2n_m.js"))
     : null;
@@ -89,7 +116,7 @@ test("Luxury Gold preserves captured layout, source styles and original assets w
   }
   assert.match(bridge, /threshold: \[0\.35\]/);
   assert.match(bridge, /duration = isScaleVariant \? 1000 : 900/);
-  assert.match(bridge, /duration = 800;\s*delay = \(index % 3\) \* 100/);
+  assert.match(bridge, /duration = 800;\s*delay = \(galleryIndex % 3\) \* 100/);
   assert.match(bridge, /duration = 700;\s*delay = index \* 120/);
   assert.match(bridge, /duration = 550;\s*delay = index \* 90/);
   assert.match(bridge, /duration = 600;\s*delay = 0/);
@@ -150,6 +177,14 @@ test("Luxury Gold preserves captured layout, source styles and original assets w
 });
 
 test("Luxury Gold restores the source opening, section motion, loops and reduced-motion behavior", () => {
+  assert.match(bridge, /corners\.forEach\(\(corner\)\s*=>\s*revealElement\(corner,\s*\{\s*duration:\s*800,\s*opacity:\s*0\.85,\s*easing:\s*"ease-out"\s*\}\)/);
+  assert.ok(bridge.includes("all(\"[style*='opacity']\", section)"));
+  assert.ok(bridge.includes('getComputedStyle(node).opacity === "0"'));
+  assert.ok(bridge.includes("card.dataset.lgGalleryIndex = String(index)"));
+  assert.ok(bridge.includes("delay = (galleryIndex % 3) * 100"));
+  assert.ok(bridge.includes("galleryObserver = new IntersectionObserver"));
+  assert.ok(bridge.includes("all(\"button.cursor-zoom-in\").forEach((card) => galleryObserver.observe(card))"));
+  assert.ok(bridge.includes("galleryObserver.unobserve(entry.target)"));
   assert.ok(bridge.includes("duration: 750"));
   assert.ok(bridge.includes("delay: 2450"));
   assert.ok(bridge.includes("threshold: [0.35]"));

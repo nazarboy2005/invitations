@@ -8,6 +8,7 @@
     timer = 0,
     motionStarted = false,
     motionObserver = null,
+    galleryObserver = null,
     scrollRoot = null,
     reducedMotion = false;
   const q = (s, b = root) => b.querySelector(s),
@@ -281,6 +282,7 @@
       const card = document.createElement("button");
       card.type = "button";
       card.className = `group block cursor-zoom-in border border-[#C9A646]/35 p-1 ${index % 3 === 0 ? "col-span-2" : ""}`;
+      card.dataset.lgGalleryIndex = String(index);
       card.setAttribute("aria-label", `${c().gallery} ${index + 1}`);
       card.style.cssText = "opacity:0;filter:blur(6px);transform:translateY(30px)";
       const frame = document.createElement("span");
@@ -589,6 +591,23 @@
         { root: scrollRoot || null, threshold: [0.35] },
       );
       sections.slice(1).forEach((section) => motionObserver.observe(section));
+      galleryObserver = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (entry.isIntersecting && entry.intersectionRatio >= 0.35) {
+              const index = Number(entry.target.dataset.lgGalleryIndex);
+              revealElement(entry.target, {
+                duration: 800,
+                delay: (index % 3) * 100,
+                easing: "ease-out",
+              });
+              galleryObserver.unobserve(entry.target);
+            }
+          }
+        },
+        { root: scrollRoot || null, threshold: [0.35] },
+      );
+      all("button.cursor-zoom-in").forEach((card) => galleryObserver.observe(card));
     } else {
       sections.slice(1).forEach((section, index) => revealSection(section, index + 1, 0));
     }
@@ -654,13 +673,15 @@
       node.className.includes("w-24") &&
       node.className.includes("pointer-events-none"),
     );
-    corners.forEach((corner, index) =>
-      revealElement(corner, { duration: 800, delay: index * 20, opacity: 0.85, easing: "ease-out" }),
+    corners.forEach((corner) =>
+      revealElement(corner, { duration: 800, opacity: 0.85, easing: "ease-out" }),
     );
 
-    const candidates = all("[style*='opacity:0']", section).filter(
+    const candidates = all("[style*='opacity']", section).filter(
       (node) =>
         !corners.includes(node) &&
+        !(sectionIndex === 8 && node.matches("button.cursor-zoom-in") && !reducedMotion && "IntersectionObserver" in window) &&
+        getComputedStyle(node).opacity === "0" &&
         !node.className?.toString().includes("bottom-10") &&
         !node.closest("[hidden]") &&
         !node.dataset.lgMotionReady,
@@ -671,6 +692,7 @@
       const isWish = node.tagName === "LI" && sectionIndex === 10;
       const isContact = node.tagName === "LI" && sectionIndex === 12;
       const isPalette = node.tagName === "SPAN" && sectionIndex === 9;
+      const galleryIndex = Number(node.dataset.lgGalleryIndex);
       const isGiftCard = inline.includes("rotateX(18deg)");
       const isScaleVariant = inline.includes("scale(0.92)");
       let duration = isScaleVariant ? 1000 : 900;
@@ -678,7 +700,7 @@
       let easing = "ease-out";
       if (sectionIndex === 8 && isGalleryItem) {
         duration = 800;
-        delay = (index % 3) * 100;
+        delay = (galleryIndex % 3) * 100;
       } else if (isWish) {
         duration = 600;
         delay = 0;
@@ -1064,7 +1086,10 @@
     close.focus();
     animateNode(overlay, [{ opacity: 0 }, { opacity: 1 }], { duration: 180, easing: "ease-out" });
   }
-  window.addEventListener("pagehide", () => motionObserver?.disconnect(), { once: true });
+  window.addEventListener("pagehide", () => {
+    motionObserver?.disconnect();
+    galleryObserver?.disconnect();
+  }, { once: true });
   addEventListener("message", (e) => {
     if (
       e.source === parent &&

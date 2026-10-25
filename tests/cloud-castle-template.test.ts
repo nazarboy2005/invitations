@@ -13,6 +13,8 @@ const motionRuntime = new URL("../Invitations - this folder will be removed from
 const sourceCapture = new URL("../Invitations - this folder will be removed from production/Chorlove/Web invitations/templates/cloud-castle/preview-frame.html", import.meta.url);
 const sourceGift = new URL("../Invitations - this folder will be removed from production/Chorlove/Web invitations/images/cloud-castle/gift/gift.webp", import.meta.url);
 const packagedGift = new URL("../apps/web/public/templates/cloud-castle/assets/gift/gift.webp", import.meta.url);
+const sourceGallery = new URL("../Invitations - this folder will be removed from production/Chorlove/Web invitations/images/templates/orchid-amplop/", import.meta.url);
+const packagedGallery = new URL("../apps/web/public/templates/cloud-castle/assets/gallery/", import.meta.url);
 const optionalSourceText = async (url: URL) => readFile(url, "utf8").catch((error: NodeJS.ErrnoException) => error.code === "ENOENT" ? null : Promise.reject(error));
 
 test("Cloud Castle is published for weddings independently of category", () => {
@@ -65,9 +67,48 @@ test("Cloud Castle bridge maps the shared data and existing RSVP/wish services",
   assert.match(js, /\/wishes/);
   assert.match(js, /\/rsvp/);
   assert.match(js, /usableGallery/);
+  assert.match(js, /hide\(storySection, !chapters\.length && !showGallery\)/);
   assert.match(js, /musicToggleLabel/);
   assert.match(js, /languageLabel/);
   assert.match(js, /prefers-reduced-motion/);
+});
+
+test("Cloud Castle preview uses only gallery artwork referenced by its captured source", async () => {
+  const renderer = await readFile(new URL("../apps/web/src/templates/chorlove/renderer.tsx", import.meta.url), "utf8");
+  const details = JSON.parse(await readFile(provenance, "utf8"));
+  const files = ["gallery-2.webp", "gallery-1.webp", "gallery-3.webp", "gallery-6.webp", "gallery-4.webp"];
+  assert.deepEqual(details.galleryPreviewSamples.sourceAssets, files.map((file) => `images/templates/orchid-amplop/${file}`));
+  assert.equal(details.galleryPreviewSamples.packageAssetDirectory, "../assets/gallery/");
+  assert.match(renderer, /templateId === "cloud-castle"/);
+  assert.match(renderer, /preview && sampleWishes && !hasCreatorPhotos/);
+  for (const file of files) {
+    const [original, packaged] = await Promise.all([
+      readFile(new URL(file, sourceGallery)),
+      readFile(new URL(file, packagedGallery)),
+    ]);
+    assert.deepEqual(packaged, original, `${file} should be copied byte for byte from the captured source`);
+    assert.match(renderer, new RegExp(file.replaceAll(".", "\\.")));
+  }
+});
+
+test("Cloud Castle contact cards keep captured styling and use the shared preview fixture", async () => {
+  const [original, packaged, js] = await Promise.all([
+    optionalSourceText(sourceCapture),
+    readFile(source, "utf8"),
+    readFile(bridge, "utf8"),
+  ]);
+  if (original) {
+    assert.match(original, /w-full flex items-center gap-3 px-4 py-2\.5 rounded-xl border transition-shadow duration-200 hover:shadow-md/);
+    assert.match(original, /@chorlove_uz/);
+  }
+  assert.match(packaged, /data-chorlove-contacts=""/);
+  assert.match(packaged, /data-chorlove-contact-links=""/);
+  assert.match(js, /const contacts = data\.contacts \|\| \[\]/);
+  assert.match(js, /w-full flex items-center gap-3 px-4 py-2\.5 rounded-xl border transition-shadow duration-200 hover:shadow-md/);
+  assert.match(js, /value\.textContent = contact\.value/);
+  assert.match(js, /phone: '<svg/);
+  assert.match(js, /telegram: '<svg/);
+  assert.doesNotMatch(packaged + js, /chorlove_uz|chorlove\.uz/);
 });
 
 test("Cloud Castle guestbook retains the source scroll pane, wish control and card metadata", async () => {

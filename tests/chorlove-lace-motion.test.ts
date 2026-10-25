@@ -26,6 +26,9 @@ const motionRuntime = readFileSync(`${sourceRoot}/_next/static/chunks/0ceoe4zwq3
 const sourceCapture = readFileSync(`${sourceRoot}/templates/lace/preview-frame.html`);
 const packedCapture = readFileSync(`${packageRoot}/source/preview-frame.html`);
 const bridge = readFileSync(`${packageRoot}/bridge.js`, "utf8");
+const lightbox = readFileSync(`${packageRoot}/gallery-lightbox.js`, "utf8");
+const zoomVendor = readFileSync(`${sourceRoot}/_next/static/chunks/0jsw~n6ojplnf.js`, "utf8");
+const thumbnailVendor = readFileSync(`${sourceRoot}/_next/static/chunks/0axwbwbrzg9nc.js`, "utf8");
 const css = readFileSync(`${packageRoot}/adapter.css`, "utf8");
 const chorloveRenderer = readFileSync("apps/web/src/templates/chorlove/renderer.tsx", "utf8");
 const normalizeLines = (value: string) => value.replace(/\r\n/g, "\n");
@@ -60,14 +63,42 @@ test("Lace gallery preserves the source lightbox controls and motion settings", 
   assert.match(sourceModule, /thumbnails:\{position:"bottom",width:84,height:56,border:1,borderRadius:8,padding:0,gap:8\}/);
   assert.match(sourceModule, /carousel:\{finite:!1\}/);
   assert.match(sourceModule, /controller:\{closeOnBackdropClick:!0\}/);
-  assert.match(bridge, /yarl__root yarl__portal yarl__no_scroll_padding/);
-  assert.match(bridge, /yarl__thumbnails_thumbnail_active/);
-  assert.match(bridge, /container\.clientWidth\*1\.3/);
-  assert.match(bridge, /transform 250ms ease/);
-  assert.match(bridge, /setInterval\(\(\)=>move\(1\),1500\)/);
-  assert.match(bridge, /event\.key==="ArrowRight"/);
-  assert.match(bridge, /event\.key==="ArrowLeft"/);
+  assert.match(bridge, /window\.LaceGalleryLightbox\.open\(entries,index,card\)/);
+  assert.match(lightbox, /zoomInMultiplier: 2/);
+  assert.match(lightbox, /keyboardMoveDistance: 50/);
+  assert.match(lightbox, /container\.tabIndex = -1/);
+  assert.match(lightbox, /sibling\.setAttribute\("inert"/);
+  assert.match(lightbox, /aria-current/);
+  assert.match(lightbox, /translateX\(\$\{-delta \* step\}px\)/);
+  assert.match(lightbox, /250 \* Math\.abs\(delta\)/);
+  assert.match(lightbox, /target\.closest\("\.yarl__slide_wrapper"\)/);
+  assert.match(lightbox, /setInterval\(slideshowTick, 1500\)/);
+  assert.match(lightbox, /event\.key === "ArrowRight"/);
+  assert.match(lightbox, /event\.key === "ArrowLeft"/);
+  assert.match(zoomVendor, /zoomInMultiplier:2/);
+  assert.match(zoomVendor, /keyboardMoveDistance:50/);
+  assert.match(thumbnailVendor, /tabIndex:-1/);
+  assert.match(thumbnailVendor, /count:r-v/);
   assert.match(bridge, /hide\(section,entries\.length===0\)/);
+});
+
+test("Lace gallery photo files match the exact source image bytes and active order", () => {
+  const expected = [
+    "8578f6d5f3c2ddc1759c5116dfb4b68cd47f86ea700bfa3777a75fb916734a0b",
+    "bcfd6989e53e220164e8d39368a848eed1185c07af73f934c81181af2a690d45",
+    "c747d5f2c007ec78d46196fcbf157da871fd4bebd9f0a07863087e9a5787e320",
+    "c3d590110524cb7b0148c08aa1543d569f16f54b4672d802bebcf778776df558",
+    "bb3c25700cc2aa81a40c46bb20c22cd13403d3e9bcf196c175a94fb7b49c8a2e",
+    "35c81b38de8fb85f182b1c1c6149bf9926b2a55c10e845f617fc87605ec63e11",
+  ];
+  for (const [index, expectedHash] of expected.entries()) {
+    const file = `images/templates/orchid-amplop/gallery-${index + 1}.webp`;
+    const archived = readFileSync(`${sourceRoot}/${file}`);
+    const packaged = readFileSync(`${packageRoot}/assets/gallery-${index + 1}.webp`);
+    assert.equal(sha256(archived), expectedHash, `${file} source hash`);
+    assert.equal(sha256(packaged), expectedHash, `${file} package hash`);
+  }
+  assert.match(chorloveRenderer, /gallery-2\.webp.*gallery-1\.webp.*gallery-3\.webp.*gallery-6\.webp.*gallery-4\.webp.*gallery-5\.webp/s);
 });
 
 test("Lace initial selection preview uses the source sample gallery and creator photos replace it", () => {

@@ -92,6 +92,29 @@
     "/images/templates/orchid-amplop/gallery-5.webp",
     "/images/templates/orchid-amplop/gallery-6.webp"
   ],
+  "excludedCapturedGalleryEvidence": {
+    "classification": "Cross-template Orchid Amplop sample media present in captured Luxury Gold demo data; not Luxury Gold artwork and not packaged.",
+    "searchedRoots": [
+      "D:/Projects/Taklifnoma/Invitations - this folder will be removed from production",
+      "D:/Projects/Invitations (all ten provider folders)"
+    ],
+    "search": {
+      "imageFilesHashed": 6237,
+      "bytesHashed": 1548744124,
+      "exactSourceCopiesPerImage": 3,
+      "exactMatchesOutsideChorlove": 0,
+      "checkedAt": "2026-10-26"
+    },
+    "directSourceUrls": "All six URLs returned HTTP 200 on 2026-10-26; each response byte count and SHA-256 matched the source archive and all matching copies. Direct local archive image URLs also returned HTTP 200. Other captured app-runtime requests may still log separate 404/CORS errors; none of the six direct gallery image references is missing.",
+    "assets": [
+      { "path": "/images/templates/orchid-amplop/gallery-1.webp", "archivePath": "images/templates/orchid-amplop/gallery-1.webp", "sourceUrl": "https://chorlove.uz/images/templates/orchid-amplop/gallery-1.webp", "bytes": 47468, "sha256": "8578f6d5f3c2ddc1759c5116dfb4b68cd47f86ea700bfa3777a75fb916734a0b" },
+      { "path": "/images/templates/orchid-amplop/gallery-2.webp", "archivePath": "images/templates/orchid-amplop/gallery-2.webp", "sourceUrl": "https://chorlove.uz/images/templates/orchid-amplop/gallery-2.webp", "bytes": 108104, "sha256": "bcfd6989e53e220164e8d39368a848eed1185c07af73f934c81181af2a690d45" },
+      { "path": "/images/templates/orchid-amplop/gallery-3.webp", "archivePath": "images/templates/orchid-amplop/gallery-3.webp", "sourceUrl": "https://chorlove.uz/images/templates/orchid-amplop/gallery-3.webp", "bytes": 82790, "sha256": "c747d5f2c007ec78d46196fcbf157da871fd4bebd9f0a07863087e9a5787e320" },
+      { "path": "/images/templates/orchid-amplop/gallery-4.webp", "archivePath": "images/templates/orchid-amplop/gallery-4.webp", "sourceUrl": "https://chorlove.uz/images/templates/orchid-amplop/gallery-4.webp", "bytes": 117998, "sha256": "c3d590110524cb7b0148c08aa1543d569f16f54b4672d802bebcf778776df558" },
+      { "path": "/images/templates/orchid-amplop/gallery-5.webp", "archivePath": "images/templates/orchid-amplop/gallery-5.webp", "sourceUrl": "https://chorlove.uz/images/templates/orchid-amplop/gallery-5.webp", "bytes": 211568, "sha256": "bb3c25700cc2aa81a40c46bb20c22cd13403d3e9bcf196c175a94fb7b49c8a2e" },
+      { "path": "/images/templates/orchid-amplop/gallery-6.webp", "archivePath": "images/templates/orchid-amplop/gallery-6.webp", "sourceUrl": "https://chorlove.uz/images/templates/orchid-amplop/gallery-6.webp", "bytes": 67596, "sha256": "35c81b38de8fb85f182b1c1c6149bf9926b2a55c10e845f617fc87605ec63e11" }
+    ]
+  },
   "sourcePageModule": {
     "path": "..\\Invitations - this folder will be removed from production\\Chorlove\\Web invitations\\_next\\static\\chunks\\0io3rqik.2n_m.js",
     "bytes": 55070,
