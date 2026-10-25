@@ -8,6 +8,7 @@ const root=resolve("apps/web/public/templates/modern-floral");
 const html=readFileSync(join(root,"index.html"),"utf8");
 const bridge=readFileSync(join(root,"bridge.js"),"utf8");
 const manifest=JSON.parse(readFileSync(join(root,"source-assets.provenance.json"),"utf8"));
+const previewSample=JSON.parse(readFileSync(resolve("apps/web/src/modules/catalog/preview-sample.json"),"utf8"));
 test("Modern Floral preserves the captured page and exact floral artwork",()=>{
  const source=readFileSync(join(root,"source/preview-frame.html"));
  const original=readFileSync(resolve("Invitations - this folder will be removed from production/Chorlove/Web invitations/templates/modern-floral/preview-frame.html"));
@@ -18,14 +19,19 @@ test("Modern Floral preserves the captured page and exact floral artwork",()=>{
  assert.equal((html.match(/<section\b/g)||[]).length,13);
  assert.equal(createHash("sha256").update(asset).digest("hex"),manifest.assets[0].sha256);
  assert.equal(asset.length,manifest.assets[0].bytes);
- assert.equal(manifest.excludedCapturedGallery.length,6);
+ const previewGallery=previewSample.templateSamples["modern-floral"].gallery;
+ assert.equal(manifest.previewSampleGallery.previewOnly,true);
+ assert.equal(previewGallery.length,6);
+ assert.deepEqual(previewGallery.map(item=>item.url),manifest.previewSampleGallery.images.map(image=>image.packagedPath.replace("../chorlove/orchid-amplop/assets","/templates/chorlove/orchid-amplop/assets")));
  assert.equal((html.match(/aria-label="Ko\'rish"/g)||[]).length,12);
 });
 test("Modern Floral removes Next/site samples and maps the shared invitation services",()=>{
  assert.match(html,/data-chorlove-template="modern-floral" hidden/);
  assert.doesNotMatch(html,/Muhammad|Xadicha|Abdurahmonovlar oilasi/);
  assert.doesNotMatch(html,/orchid-amplop|gallery-[1-6]\.webp|Patrick Watson|_next\/image|_next\/static\/chunks\/[\w~.-]+\.js/);
- for(const field of ["groom","bride","dateTime","timezone","venue","toyona","gallery","wishes","wishesEnabled","rsvp","maxPartySize","contacts","enabledLocales","reducedMotion","music","calendar","openGallery"])assert.ok(bridge.includes(field),`missing ${field}`);
+ for(const field of ["groom","bride","dateTime","timezone","venue","toyona","gallery","wishes","wishesEnabled","rsvp","contacts","enabledLocales","reducedMotion","music","calendar","openGallery"])assert.ok(bridge.includes(field),`missing ${field}`);
+ assert.match(bridge,/partySize:yes\?1:0/);
+ assert.doesNotMatch(bridge,/maxPartySize|partyCount|guestCount/);
  assert.match(bridge,/root\.hidden=false;root\.lang=/);
  assert.match(html,/source-motion\.js/);
  assert.match(bridge,/function renderStaticCopy\(\)/);assert.match(bridge,/renderFooter\(z\);renderStaticCopy\(\);installControls\(x\)/);
@@ -37,16 +43,18 @@ test("Modern Floral removes Next/site samples and maps the shared invitation ser
  assert.match(bridge,/"uz-Cyrl":\["\\u0414\\u0443","\\u0421\\u0435","\\u0427\\u043e","\\u041f\\u0430","\\u0416\\u0443","\\u0428\\u0430","\\u042f\\u043a"\]/);
  assert.match(bridge,/ru:\["\\u0412\\u0441","\\u041f\\u043d","\\u0412\\u0442","\\u0421\\u0440","\\u0427\\u0442","\\u041f\\u0442","\\u0421\\u0431"\]/);
  assert.doesNotMatch(bridge,/party:"\?{3,}|choose:"\?{3,}|rsvpHint:"\?{3,}|(?:uz-Cyrl|ru):\["\?{2}"/);
- const css=readFileSync(join(root,"adapter.css"),"utf8");assert.match(css,/\.mf-lightbox/);assert.match(css,/\.mf-calendar/);
+ const css=readFileSync(join(root,"adapter.css"),"utf8");assert.match(css,/\[data-mf-lightbox\]/);assert.match(css,/\.mf-calendar/);
  // Reveal timing belongs to source-motion.js; a blanket opacity override would disable it.
  assert.doesNotMatch(css,/section \[style\*="opacity:0"\]\{opacity:1!important;filter:none!important;transform:none!important\}/);
  assert.match(bridge,/d\(\)\.venue\?\.name\|\|d\(\)\.venueName/);
- assert.match(bridge,/entries=preview&&!items\.length\?cards\.map/);
+ assert.match(bridge,/publicItems=items\.filter\(item=>item\.url\|\|item\.src\),slots=publicItems/);
+ assert.match(bridge,/const entries=slots/);
+ assert.match(bridge,/hide\(section,!publicItems\.length\)/);
  assert.match(bridge,/openingName=all\("h2",root\)\.find/);assert.match(bridge,/put\(q\("h3",sec\[6\]\),z\.hosts/);
  assert.match(bridge,/hostParagraphs=all\("p",sec\[6\]\)/);
- assert.match(bridge,/data-close>&times;/);
- assert.match(bridge,/wishRequired/);assert.match(bridge,/setAttribute\("aria-label",c\(\)\.music/);
- assert.match(bridge,/setAttribute\(['"]aria-modal['"],['"]true['"]\)/);assert.match(bridge,/event\.key==='Escape'/);assert.match(bridge,/event\.key==='Tab'/);assert.match(bridge,/trigger\?\.isConnected/);
+ assert.match(bridge,/closeButton\.setAttribute\('aria-label',c\(\)\.closeImage\)/);
+ assert.match(bridge,/wishRequired/);assert.match(bridge,/setAttribute\("aria-label","Toggle music"\)/);
+ assert.match(bridge,/setAttribute\(['"]aria-modal['"],['"]true['"]\)/);assert.match(bridge,/lightbox\.onclick=event=>\{if\(event\.target===lightbox\)close\(\);\}/);assert.match(bridge,/closeButton\.onclick=close/);
  const dictionarySource=bridge.match(/const dict=(\{[\s\S]*?\});const c=/)?.[1];assert.ok(dictionarySource);
  const dictionary=Function(`return (${dictionarySource})`)();
  assert.equal(dictionary["uz-Cyrl"].wishRequired,"\u0422\u0438\u043b\u0430\u043a \u043c\u0430\u0442\u043d\u0438\u043d\u0438 \u043a\u0438\u0440\u0438\u0442\u0438\u043d\u0433.");
