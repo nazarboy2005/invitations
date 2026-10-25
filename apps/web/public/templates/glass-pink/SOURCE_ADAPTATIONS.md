@@ -30,7 +30,7 @@ Local source-art audit (2026-10-23): Chorlove's capture manifest maps the Glass 
 
 Provider-wide follow-up: all available provider capture manifests, capture titles/slugs, and text references were searched for Glass Pink; the only matching page is Chorlove's `templates/glass-pink/preview-frame.html`. A SHA-256 scan of the full non-production archive confirms every packaged image/font has a byte-identical Chorlove source. Three ornaments are intentionally reused in other Chorlove templates; no Glass Pink page or artwork was found under a different provider.
 
-The Chorlove manifest maps all six captured Glass Pink gallery slots to Orchid Amplop photos; these cross-template sample images remain excluded. The shared preview fixture's six gallery entries are empty and preview-only. The contract adapter passes through creator-uploaded photo URLs, and the public renderer hides the gallery when no creator photos or story chapters exist. No own-source Glass Pink gallery photographs were found; the package's original floral and decorative assets remain visible in the template opening.
+The Chorlove manifest maps all six captured Glass Pink gallery slots to Orchid Amplop photos. The six exact source images appear in Glass Pink's `templateSamples` entry for catalog and initial-selection previews only; they are never copied into a creator draft or public invitation. The contract adapter passes through creator-uploaded photo URLs, and the public renderer hides the gallery when no creator photos or story chapters exist. No Glass Pink-owned gallery photographs were found; the package's original floral and decorative assets remain visible in the template opening.
 
 ## Source-motion repair (2026-10-23)
 

@@ -260,10 +260,17 @@
       "/images/templates/orchid-amplop/gallery-5.webp",
       "/images/templates/orchid-amplop/gallery-6.webp"
     ],
-    "previewBehavior": "The canonical fixture has six empty preview-only gallery slots; only authored creator photo URLs are passed into public rendering.",
-    "emptyPublicGallery": "Hidden when there are no creator photos or story chapters"
+    "previewBehavior": "Six exact source gallery images are shown in the Glass Pink catalog and initial-selection templateSamples preview only; they are never saved to creator data. Public rendering receives authored creator photo URLs only.",
+    "previewSampleGallery": [
+      { "order": 1, "sourceRef": "/images/templates/orchid-amplop/gallery-2.webp", "archiveSource": "Chorlove/Web invitations/images/templates/orchid-amplop/gallery-2.webp", "packageUrl": "/templates/chorlove/orchid-amplop/assets/gallery-2.webp", "bytes": 108104, "sha256": "bcfd6989e53e220164e8d39368a848eed1185c07af73f934c81181af2a690d45", "alt": "Gallery photo 1" },
+      { "order": 2, "sourceRef": "/images/templates/orchid-amplop/gallery-1.webp", "archiveSource": "Chorlove/Web invitations/images/templates/orchid-amplop/gallery-1.webp", "packageUrl": "/templates/chorlove/orchid-amplop/assets/gallery-1.webp", "bytes": 47468, "sha256": "8578f6d5f3c2ddc1759c5116dfb4b68cd47f86ea700bfa3777a75fb916734a0b", "alt": "Gallery photo 2" },
+      { "order": 3, "sourceRef": "/images/templates/orchid-amplop/gallery-3.webp", "archiveSource": "Chorlove/Web invitations/images/templates/orchid-amplop/gallery-3.webp", "packageUrl": "/templates/chorlove/orchid-amplop/assets/gallery-3.webp", "bytes": 82790, "sha256": "c747d5f2c007ec78d46196fcbf157da871fd4bebd9f0a07863087e9a5787e320", "alt": "Gallery photo 3" },
+      { "order": 4, "sourceRef": "/images/templates/orchid-amplop/gallery-6.webp", "archiveSource": "Chorlove/Web invitations/images/templates/orchid-amplop/gallery-6.webp", "packageUrl": "/templates/chorlove/orchid-amplop/assets/gallery-6.webp", "bytes": 67596, "sha256": "35c81b38de8fb85f182b1c1c6149bf9926b2a55c10e845f617fc87605ec63e11", "alt": "Gallery photo 4" },
+      { "order": 5, "sourceRef": "/images/templates/orchid-amplop/gallery-4.webp", "archiveSource": "Chorlove/Web invitations/images/templates/orchid-amplop/gallery-4.webp", "packageUrl": "/templates/chorlove/orchid-amplop/assets/gallery-4.webp", "bytes": 117998, "sha256": "c3d590110524cb7b0148c08aa1543d569f16f54b4672d802bebcf778776df558", "alt": "Gallery photo 5" },
+      { "order": 6, "sourceRef": "/images/templates/orchid-amplop/gallery-5.webp", "archiveSource": "Chorlove/Web invitations/images/templates/orchid-amplop/gallery-5.webp", "packageUrl": "/templates/chorlove/orchid-amplop/assets/gallery-5.webp", "bytes": 211568, "sha256": "bb3c25700cc2aa81a40c46bb20c22cd13403d3e9bcf196c175a94fb7b49c8a2e", "alt": "Gallery photo 6" }
+    ],    "emptyPublicGallery": "Hidden when there are no creator photos or story chapters"
   },
-  "note": "The archived server-rendered snapshot and its compiled page bundle are the source references. Chorlove template assets and styling are retained; site runtime, external music, fixed source venue/contact details, sample wishes, cross-template gallery photos, and unrelated site runtime are excluded.",
+  "note": "The archived server-rendered snapshot and its compiled page bundle are the source references. Chorlove template assets and styling are retained; site runtime, external music, fixed source venue/contact details, sample wishes, cross-template gallery photos from saved/public invitation data, and unrelated site runtime are excluded; source gallery photos are preview-sample-only.",
   "legacyPreviewBrowserCapture": {
     "file": "../preview-browser-capture.jpg",
     "sha256": "02391e83d507f4f1651f6d0687c118386988a3e7822f3859ceee8eb36a58b27f",
