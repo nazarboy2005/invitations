@@ -41,6 +41,16 @@
       "sourceUrl": "https://chorlove.uz/images/glass-pink/water.webp",
       "bytes": 125916,
       "sha256": "dc55e9c7f67fbde2f9c8edb6bcf65cb816d1f90e0a7520dee42dd0ee1463f314"
+    },
+    {
+      "file": "venue-photo.webp",
+      "originalReference": "https://images.unsplash.com/photo-1712314947761-a8d718bd8c32?w=1400&h=1000&fit=crop&auto=format&q=80",
+      "sourceUrl": "https://images.unsplash.com/photo-1712314947761-a8d718bd8c32?w=1400&h=1000&fit=crop&auto=format&q=80",
+      "responseAccept": "image/webp",
+      "bytes": 403296,
+      "width": 1400,
+      "height": 1000,
+      "sha256": "cc3578f0a3a77d36105adfea76064185a60b2efeec787b68569d204122a3972c"
     }
   ],
   "sourceMotion": {

@@ -154,6 +154,12 @@ test("Glass Pink RSVP keeps source yes/no controls and submits a fixed party siz
 
 test("Glass Pink wish cards retain the captured layout, timestamp, and wand interaction", () => {
   const source = readFileSync(sourceSnapshotPath, "utf8");
+  assert.match(source, /<h2[^>]*>\s*<span dir="auto">Tilaklar<\/span><\/h2>/);
+  assert.match(source, /To&#x27;y egaslariga o&#x27;z ezgu tilaklaringizni qoldiring/);
+  assert.match(source, /<form class="mt-6 mx-auto w-full max-w-\[432px\] md:max-w-\[600px\] rounded-3xl border border-white\/40 bg-white\/30 p-5 md:p-7 backdrop-blur-md shadow-sm"/);
+  assert.match(html, /<section[^>]*data-chorlove-wishes=""[^>]*>[\s\S]*data-chorlove-i18n="wishesTitle"[\s\S]*data-chorlove-i18n="wishesPrompt"[\s\S]*<form class="mt-6 mx-auto w-full max-w-\[432px\] md:max-w-\[600px\] rounded-3xl border border-white\/40 bg-white\/30 p-5 md:p-7 backdrop-blur-md shadow-sm"[\s\S]*data-chorlove-wish-list=""/);
+  assert.match(adapter, /wishesPrompt:"To'y egaslariga o'z ezgu tilaklaringizni qoldiring"/);
+  assert.doesNotMatch(html, />Azizbek<\/span>/, "source example wishes remain data, not packaged content");
   assert.match(source, /max-h-\[460px\] space-y-3 overflow-y-auto pr-1/);
   assert.match(source, /rounded-2xl border border-white\/40 bg-white\/30 p-4 md:p-5 backdrop-blur-md text-left shadow-sm transition-all hover:scale-\[1\.01\]/);
   assert.match(source, /flex items-start justify-between/);
@@ -170,6 +176,23 @@ test("Glass Pink wish cards retain the captured layout, timestamp, and wand inte
   assert.match(bridge, /const magicButton = form\?\.querySelector\('button\[type="button"\]'\)/);
   assert.doesNotMatch(bridge, /magicButton\.hidden = true/);
   assert.doesNotMatch(bridge, /DEFAULT_PREVIEW_WISHES/);
+});
+
+test("Glass Pink restores its captured venue image and source-styled map action", () => {
+  const source = readFileSync(sourceSnapshotPath, "utf8");
+  const provenance = JSON.parse(readFileSync(provenancePath, "utf8"));
+  const venue = readFileSync(resolve(root, "apps/web/public/templates/glass-pink/assets/venue-photo.webp"));
+  const record = provenance.recoveredSourceAssets.find((asset: { file: string }) => asset.file === "venue-photo.webp");
+  assert.ok(source.includes("photo-1712314947761-a8d718bd8c32"));
+  assert.ok(record);
+  assert.equal(record.originalReference, "https://images.unsplash.com/photo-1712314947761-a8d718bd8c32?w=1400&h=1000&fit=crop&auto=format&q=80");
+  assert.equal(record.width, 1400);
+  assert.equal(record.height, 1000);
+  assert.equal(record.sha256, createHash("sha256").update(venue).digest("hex"));
+  assert.match(html, /data-venue-image="true" src="\/templates\/glass-pink\/assets\/venue-photo\.webp"/);
+  assert.match(html, /data-gp-map-link=""[\s\S]*inline-flex items-center gap-2 rounded-full border border-\[rgb\(203,93,108\)\]\/40 bg-white\/50 px-6 py-2\.5/);
+  assert.match(bridge, /const map = section\.querySelector\("\[data-gp-map-link\]"\)/);
+  assert.match(bridge, /if \(map && href\) \{ map\.href = href; map\.hidden = false;/);
 });
 
 test("Glass Pink retains its source gift-box section without adding dress code", () => {

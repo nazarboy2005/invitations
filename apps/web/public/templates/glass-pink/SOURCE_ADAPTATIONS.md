@@ -69,6 +69,53 @@ The reduced-motion preview shows those icons immediately in their final state.
 The packaged gift portal also matches its 448×402px source modal, card content,
 close button, Escape dismissal, and immediate open/close under reduced motion.
 The focused suite asserts the source route module, asset hashes, icon start
-styles and subtitle binding. This browser check covers the schedule reveal and
-re-entry; it does not claim fresh browser verification of every other section
-reveal.
+styles and subtitle binding. A later full-page browser pass covers visible
+section-heading reveal and re-entry for introduction, countdown, venue,
+schedule, guestbook, RSVP, To’yona, and contacts; it does not claim every child
+and card animation was sampled individually.
+
+## Full-page reveal and guestbook correction (2026-10-25)
+
+At 1280×720, the source and packaged preview were opened side by side. The
+introduction, countdown, venue, schedule, guestbook, RSVP, To’yona, and contacts
+headings were each brought into view, scrolled away, and brought back; the
+headings settled visible in both after re-entry. Source/package section top
+positions aligned within 1px on sampled passes. The gallery section remained
+hidden in the package because the preview fixture has no creator-uploaded Glass
+Pink photos or story chapters, matching the conditional empty-section behavior.
+
+That pass found the packaged guestbook section was empty at render time except
+for platform-provided wish cards. It lacked the source title, introduction, and
+form. The package now uses the captured source section's title/form classes and
+input/button arrangement, localizes its title and prompt, and keeps an empty
+source-styled list container for creator/API wishes instead of copied sample
+wishes. Browser inspection confirms the form, source magic-suggestion control,
+localized heading/prompt, and three ephemeral preview-fixture cards render. The
+source capture contains more example wishes, which remain excluded from product
+data. At the same browser size, the source guestbook section is 939px tall and
+the package is 829px with its shorter preview wish list; the outer layout and
+content-dependent height differ for that reason.
+
+Catalog verification in the local catalog detail confirms both the card and
+detail preview load `/templates/glass-pink/catalog-cover-opening.png` at its
+original 432×768 dimensions. This is the authentic source opening capture
+recorded in provenance.
+
+## Venue source media and map action (2026-10-25)
+
+The browser audit found the source venue card's 1400×1000 Unsplash hero image
+was omitted from the isolated package: its `<img src>` was empty and the browser
+resolved it to `index.html`. The captured source points to
+`photo-1712314947761-a8d718bd8c32` with its original 1400×1000 crop parameters.
+The matching WebP response is now packaged at
+`assets/venue-photo.webp`; its SHA-256 and source URL/response format are in
+`source/provenance.json`. The static template uses that local source image.
+
+The captured map CTA was also absent from the source-matched venue card. The
+package now includes the captured button's location, icon, classes, font and
+hover styles in the card's original `mt-6` slot. The existing adapter reveals it
+and binds the locale label when the invitation has a user-supplied map URL or
+coordinates; with neither, it stays hidden rather than linking to an invented
+location. The local preview fixture has no map URL/coordinates, so this pass
+verified the hidden empty state; a configured venue link will render in the
+captured slot.

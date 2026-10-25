@@ -15,6 +15,7 @@
       venueTitle: "To‘y manzili",
       programTitle: "To‘y kuni dasturi",
       wishesTitle: "Tilaklar",
+      wishesPrompt: "To'y egaslariga o'z ezgu tilaklaringizni qoldiring",
       rsvpTitle: "Kelasizmi?",
       rsvpPrompt: "Iltimos, javobingizni bildiring.",
       giftTitle: "Sovg‘a yuborish",
@@ -68,6 +69,7 @@
       venueTitle: "Тўй манзили",
       programTitle: "Тўй куни дастури",
       wishesTitle: "Тилаклар",
+      wishesPrompt: "Оставьте молодожёнам свои добрые пожелания",
       rsvpTitle: "Келасизми?",
       rsvpPrompt: "Илтимос, жавобингизни билдиринг.",
       giftTitle: "Совға юбориш",
@@ -121,6 +123,7 @@
       venueTitle: "Venue",
       programTitle: "Event program",
       wishesTitle: "Wishes",
+      wishesPrompt: "Leave your kind wishes for the couple",
       rsvpTitle: "Will you attend?",
       rsvpPrompt: "Please let us know if you can join us.",
       giftTitle: "Send a gift",
@@ -174,6 +177,7 @@
       venueTitle: "Место проведения",
       programTitle: "Программа дня",
       wishesTitle: "Пожелания",
+      wishesPrompt: "Оставьте молодожёнам свои добрые пожелания",
       rsvpTitle: "Вы придёте?",
       rsvpPrompt: "Пожалуйста, сообщите, сможете ли вы прийти.",
       giftTitle: "Отправить подарок",
@@ -1202,12 +1206,10 @@
     const present = Boolean(venue.name || venue.address);
     hide(section, !present);
     if (!present) return;
-    let map = section.querySelector(".cc-map-link");
+    const map = section.querySelector("[data-gp-map-link]");
     const href = venue.mapUrl || (venue.lat != null && venue.lng != null ? `https://maps.google.com/?q=${venue.lat},${venue.lng}` : "");
-    if (href) {
-      if (!map) { map = document.createElement("a"); map.className = "cc-map-link inline-flex items-center justify-center mt-4 rounded-full border px-5 py-2 text-sm"; section.append(map); }
-      map.href = href; map.target = "_blank"; map.rel = "noreferrer"; text(map, localCopy().map);
-    } else if (map) map.remove();
+    if (map && href) { map.href = href; map.hidden = false; text(map.querySelector("[data-gp-map-label]"), localCopy().map); }
+    else if (map) { map.hidden = true; map.removeAttribute("href"); }
   }
 
   function renderCalendarLink(data) {
