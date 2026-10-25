@@ -6,52 +6,53 @@ import { runInNewContext } from "node:vm";
 import { templateById } from "../packages/contracts/src/index";
 
 const root = new URL("../apps/web/public/templates/green-white/", import.meta.url);
-const archive = new URL(
-  "../Invitations - this folder will be removed from production/Chorlove/Web invitations/",
-  import.meta.url,
-);
+
+function packagedSourceFile(archiveFile: string) {
+  const file = archiveFile.replace(/^Chorlove\/Web invitations\//, "");
+  if (file === "templates/green-white/preview-frame.html") return new URL("source/preview-frame.html", root);
+  if (file.startsWith("images/green-white/")) return new URL(`assets/${file.split("/").at(-1)}`, root);
+  if (file.startsWith("_next/static/chunks/")) return new URL(`source/styles/${file.split("/").at(-1)}`, root);
+  throw new Error(`No packaged source mapping for ${archiveFile}`);
+}
 
 test("Green White preserves its captured page and original design assets", async () => {
   const manifest = JSON.parse(
     await readFile(new URL("source-assets.provenance.json", root), "utf8"),
   );
   const source = await readFile(new URL("source/preview-frame.html", root));
-  const original = await readFile(
-    new URL("templates/green-white/preview-frame.html", archive),
-  );
   const normalizedSource = Buffer.from(source.toString("utf8").replace(/\r\n/g, "\n"));
-  const normalizedOriginal = Buffer.from(original.toString("utf8").replace(/\r\n/g, "\n"));
-  assert.deepEqual(normalizedSource, normalizedOriginal);
   assert.equal(createHash("sha256").update(normalizedSource).digest("hex"), manifest.source.sha256);
   assert.equal(normalizedSource.length, manifest.source.bytes);
 
   for (const asset of manifest.copiedDesignAssets) {
     const bytes = await readFile(new URL(asset.file, root));
-    const archiveFile = asset.archiveFile.replace(/^Chorlove\/Web invitations\//, "");
-    assert.deepEqual(bytes, await readFile(new URL(archiveFile, archive)), asset.file);
     assert.equal(bytes.length, asset.bytes, asset.file);
     assert.equal(createHash("sha256").update(bytes).digest("hex"), asset.sha256, asset.file);
   }
   for (const style of manifest.capturedStylesheets) {
     const bytes = await readFile(new URL(style.file, root));
-    const archiveFile = style.archiveFile.replace(/^Chorlove\/Web invitations\//, "");
-    const original = await readFile(new URL(archiveFile, archive));
-    assert.deepEqual(
-      Buffer.from(bytes.toString("utf8").replace(/\r\n/g, "\n")),
-      Buffer.from(original.toString("utf8").replace(/\r\n/g, "\n")),
-      style.file,
-    );
+    const normalized = Buffer.from(bytes.toString("utf8").replace(/\r\n/g, "\n"));
+    assert.equal(normalized.length, style.bytes, style.file);
+    assert.equal(createHash("sha256").update(normalized).digest("hex"), style.sha256, style.file);
   }
-  assert.equal(manifest.copiedDesignAssets.length, 8);
-  assert.deepEqual(manifest.missingSourceAssets, ["images/green-white/arka2.webp"]);
-  const recovered = manifest.sourceAssetsFromLive.find((asset: { file: string }) => asset.file === "assets/arka2.jpg");
+  assert.equal(manifest.copiedDesignAssets.length, 9);
+  assert.deepEqual(manifest.missingSourceAssets, []);
+  assert.deepEqual(manifest.archiveMissingAssets, ["images/green-white/arka2.webp"]);
+  const recovered = manifest.sourceAssetsFromLive.find((asset: { file: string }) => asset.file === "assets/arka2.webp");
   assert.ok(recovered);
   const recoveredBytes = await readFile(new URL(recovered.file, root));
   assert.equal(recoveredBytes.length, recovered.bytes);
   assert.equal(createHash("sha256").update(recoveredBytes).digest("hex"), recovered.sha256);
-  assert.equal(recovered.mimeType, "image/jpeg");
-  assert.match(recovered.sourceUrl, /green-white%2Farka2\.webp&w=1200&q=75/);
-  await assert.rejects(readFile(new URL("images/green-white/arka2.webp", archive)));
+  assert.equal(recovered.mimeType, "image/webp");
+  assert.match(recovered.sourceUrl, /chorlove\.uz\/images\/green-white\/arka2\.webp$/);
+  for (const font of manifest.capturedFonts) {
+    const bytes = await readFile(new URL(font.file.slice(1), new URL("../../", root)));
+    assert.equal(bytes.length, font.bytes, font.file);
+    assert.equal(createHash("sha256").update(bytes).digest("hex"), font.sha256, font.file);
+  }
+  const motion = await readFile(new URL("source/12pjntsqxzj70.js", root));
+  assert.equal(motion.length, manifest.motionSource.pageModuleBytes);
+  assert.equal(createHash("sha256").update(motion).digest("hex"), manifest.motionSource.sha256);
 });
 
 test("Green White runtime is isolated and maps the captured sections to the shared contract", async () => {
@@ -64,7 +65,9 @@ test("Green White runtime is isolated and maps the captured sections to the shar
   assert.doesNotMatch(html, /<script[^>]+_next\/static|googletagmanager|telegram\.org\/js|Patrick Watson/i);
   assert.doesNotMatch(html, /orchid-amplop|gallery-[1-6]\.webp|chorlove\.uz|Muhammad|Xadicha|5614/);
   assert.equal((html.match(/src="\/templates\/green-white\/assets\//g) || []).length, 58);
-  assert.match(html, /src="\/templates\/green-white\/assets\/arka2\.jpg"/);
+  assert.match(html, /src="\/templates\/green-white\/assets\/arka2\.webp"/);
+  assert.match(html, /source\/styles\/0ly1y_qxlqlf\.\.css/);
+  assert.match(html, /source\/styles\/054~-i6~6lmrd\.css/);
   assert.match(bridge, /dressCode/);
   assert.match(bridge, /navigator\.clipboard\.writeText/);
   assert.match(bridge, /\/api\/public\/invitations\/.*\/\$\{kind\}/);
@@ -73,11 +76,17 @@ test("Green White runtime is isolated and maps the captured sections to the shar
   assert.doesNotMatch(bridge, /createElement\("select"\).*partySize|\[name="partySize"\]/);
   assert.match(bridge, /partySize: choice \? 0 : 1/);
   assert.match(bridge, /\$\{id\}:language/);
-  assert.match(bridge, /button\.onclick = \(\) => \{ const active = gallery\.filter\(\(photo\) => photo\.src\); showLightbox\(active, active\.indexOf\(item\), c\); \};/);
-  assert.match(bridge, /dialog\.className = "gw-lightbox"/);
-  assert.match(bridge, /previous\.onclick = \(\) => \{ index = \(index - 1 \+ items\.length\) % items\.length; show\(\); \};/);
-  assert.match(bridge, /next\.onclick = \(\) => \{ index = \(index \+ 1\) % items\.length; show\(\); \};/);
-  assert.match(bridge, /close\.onclick = \(\) => dialog\.close\(\)/);
+  assert.match(bridge, /const photos = gallery\.filter\(\(photo\) => photo\?\.src\)/);
+  assert.match(bridge, /hide\(node, !photos\.length\)/);
+  assert.match(bridge, /dialog\.className = "yarl__portal yarl__portal_open gw-source-lightbox"/);
+  assert.match(bridge, /index = \(nextIndex \+ items\.length\) % items\.length/);
+  assert.match(bridge, /button\.className = "yarl__thumbnails_thumbnail"/);
+  assert.match(bridge, /duration: 250/);
+  assert.match(bridge, /event\.key === "ArrowLeft"/);
+  assert.match(bridge, /event\.key === "ArrowRight"/);
+  assert.match(bridge, /event\.key === "Home"/);
+  assert.match(bridge, /fullscreen\.onclick = async/);
+  assert.match(bridge, /dialog\.addEventListener\("click".*dialog\.close\(\)/);
   assert.match(bridge, /button\.onclick = \(\) => parent\.postMessage\(\{ type: `\$\{id\}:language`, locale \}, location\.origin\)/);
   assert.match(bridge, /\$\{id\}:update/);
   const publicRoot = new URL("../apps/web/public/", import.meta.url);
@@ -91,8 +100,7 @@ test("Green White motion follows the archived source page module", async () => {
   const manifest = JSON.parse(await readFile(new URL("source-assets.provenance.json", root), "utf8"));
   const motion = manifest.motionSource;
   assert.ok(motion);
-  const archiveFile = motion.archiveFile.replace(/^Chorlove\/Web invitations\//, "");
-  const sourceModule = await readFile(new URL(archiveFile, archive));
+  const sourceModule = await readFile(new URL(motion.preservedFile, root));
   const bridge = await readFile(new URL("bridge.js", root), "utf8");
   const styles = await readFile(new URL("adapter.css", root), "utf8");
   assert.equal(sourceModule.length, 36961);
@@ -110,9 +118,18 @@ test("Green White motion follows the archived source page module", async () => {
   assert.match(bridge, /duration = 3600 \+ \(index % 7\) \* 550/);
   assert.match(bridge, /threshold: 0\.35/);
   assert.match(bridge, /duration: 950, easing: "cubic-bezier\(\.22,1,\.36,1\)"/);
+  assert.match(bridge, /duration: 800, delay: 250, easing: "ease-out"/);
+  assert.match(bridge, /duration: 600, easing: "ease-out"/);
+  assert.match(bridge, /observeDynamicSourceReveal\(item, \{ duration: 600, easing: "ease-out" \}\)/);
   assert.match(bridge, /new Date\(Date\.UTC\(year, month - 1, 1\)\)\.getUTCDay\(\)/);
   assert.doesNotMatch(bridge, /Date\.UTC\(year, month - 1, 1\)\.getUTCDay\(\)/);
   assert.match(styles, /\.gw-source-opening[\s\S]*background: #2d321b/);
+  assert.match(sourceModule.toString("utf8"), /plugins:\[M\.default,D\.default,A\.default,R\.default\]/);
+  assert.match(sourceModule.toString("utf8"), /width:84,height:56,border:1,borderRadius:8,padding:0,gap:8/);
+  assert.match(sourceModule.toString("utf8"), /swipe:250/);
+  assert.match(sourceModule.toString("utf8"), /finite:!1/);
+  assert.match(sourceModule.toString("utf8"), /closeOnBackdropClick:!0/);
+  assert.match(sourceModule.toString("utf8"), /How many people will come\?/);
   assert.match(bridge, /prefers-reduced-motion/);
   assert.doesNotMatch(bridge, /intro\?\.remove\(\)/);
 });
@@ -134,9 +151,12 @@ test("Green White catalog cover is a source-rendered portrait with recorded prov
   assert.ok(cover.fixtureOnlyChanges.some((change: string) => change.includes("fully opened first invitation page")));
   assert.ok(cover.fixtureOnlyChanges.some((change: string) => change.includes("replaced archived sample couple names")));
   for (const source of cover.sourceFiles) {
-    const archiveFile = source.archiveFile.replace(/^Chorlove\/Web invitations\//, "");
-    const original = await readFile(new URL(archiveFile, archive));
-    assert.equal(createHash("sha256").update(original).digest("hex"), source.sha256, archiveFile);
+    const packaged = packagedSourceFile(source.archiveFile);
+    const original = await readFile(packaged);
+    const bytes = /\.(?:html|css|js)$/.test(source.archiveFile)
+      ? Buffer.from(original.toString("utf8").replace(/\r\n/g, "\n"))
+      : original;
+    assert.equal(createHash("sha256").update(bytes).digest("hex"), source.sha256, source.archiveFile);
   }
 });
 
@@ -161,10 +181,12 @@ test("Green White built-in controls are localized in all four supported locales"
   assert.equal(copy.ru.rsvp, "\u0412\u044b \u043f\u0440\u0438\u0434\u0451\u0442\u0435?");
 });
 
-test("Green White RSVP follows the source without asking for guest count", async () => {
+test("Green White RSVP honors the fixed party-size platform rule over the source stepper", async () => {
   const bridge = await readFile(new URL("bridge.js", root), "utf8");
   const source = await readFile(new URL("source/preview-frame.html", root), "utf8");
-  assert.doesNotMatch(source, /partySize|Mehmonlar soni|guest count/i);
+  const sourceModule = await readFile(new URL("source/12pjntsqxzj70.js", root), "utf8");
+  assert.match(sourceModule, /How many people will come\?/);
+  assert.match(sourceModule, /setCount\(s\.count\+1\)/);
   assert.doesNotMatch(bridge, /createElement\("select"\).*partySize|\[name="partySize"\]/);
   assert.match(bridge, /partySize: choice \? 0 : 1/);
   assert.match(source, /Dress-kod/);

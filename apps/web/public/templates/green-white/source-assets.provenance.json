@@ -55,6 +55,14 @@
       "bytes": 19170,
       "sha256": "2ff7ca22ee2afbbb810fa89992b7a24271c37ed78925c5fd11f2afa72d437b52",
       "archiveFile": "Chorlove/Web invitations/images/green-white/rings.webp"
+    },
+    {
+      "file": "assets/arka2.webp",
+      "bytes": 30144,
+      "sha256": "632b51046c1878abd9e69430a5d47ed6da07e532cec4b88eac9ac7788f8b7cdb",
+      "mimeType": "image/webp",
+      "sourceUrl": "https://chorlove.uz/images/green-white/arka2.webp",
+      "captureMethod": "Downloaded original source image after verifying the original asset URL returned image/webp; replaces the previously packaged optimized JPEG rendition."
     }
   ],
   "capturedStylesheets": [
@@ -69,6 +77,18 @@
       "bytes": 6140,
       "sha256": "3fcd5d40feb11ed6c2f58cfcf069d01f27a1bbf95a51b75d9c9e02c63e3d3f81",
       "archiveFile": "Chorlove/Web invitations/_next/static/chunks/0ly1y_qxlqlf..css"
+    },
+    {
+      "file": "source/styles/0.u3j0~_2ygfx.css",
+      "bytes": 11626,
+      "sha256": "12141a5ec71f317d0e27589c92869d213b339f86451ee2a75b4612c5f1e05991",
+      "archiveFile": "Chorlove/Web invitations/_next/static/chunks/0.u3j0~_2ygfx.css"
+    },
+    {
+      "file": "source/styles/00sc_9lpb3zcn.css",
+      "bytes": 360488,
+      "sha256": "9295d64fad91822e7e7ab0d110764ac973d5414829a5bf40bb69e99531762910",
+      "archiveFile": "Chorlove/Web invitations/_next/static/chunks/00sc_9lpb3zcn.css"
     }
   ],
   "motionSource": {
@@ -83,7 +103,9 @@
       "1.4s hero background, 1.35s rising cover illustration, delayed lower floral entrance, illustration float, paired flower sway, divider slide and chevron loop",
       "source-specific once-only scroll reveals, flower/card/list/gallery/swatches timings, and the timeline spring"
     ],
-    "platformAdaptation": "Reduced motion skips the opening and loops and clears source hidden states; reveal timing retains the source choreography for normal motion."
+    "platformAdaptation": "Reduced motion skips the opening and loops and clears source hidden states; reveal timing retains the source choreography for normal motion.",
+    "preservedFile": "source/12pjntsqxzj70.js",
+    "pageModuleBytes": 36961
   },
   "catalogArtwork": {
     "file": "preview-opening.png",
@@ -136,18 +158,83 @@
     "images/templates/orchid-amplop/gallery-5.webp",
     "images/templates/orchid-amplop/gallery-6.webp"
   ],
-  "missingSourceAssets": [
-    "images/green-white/arka2.webp"
-  ],
-  "status": "Source snapshot and eight archived artwork assets are preserved; the missing arka2.webp is represented by its explicitly documented observed JPEG rendition. The isolated page and adapter remain unpublished pending visual and release checks.",
+  "missingSourceAssets": [],
+  "status": "All nine original Green White design images are now packaged. The recovered archive omitted arka2.webp, so the exact original WebP was fetched from its source URL and hash-verified; the optimized JPEG fallback was removed. Source capture, source motion module, page-specific lightbox stylesheets, and shared source fonts are preserved or hash-matched. Green White remains unpublished pending visual and release checks.",
   "sourceAssetsFromLive": [
     {
-      "file": "assets/arka2.jpg",
-      "bytes": 10752,
-      "sha256": "980fad29313c9894f54bcc22aefbcf69eadbecee2b8e947a0f612b3f30897c3f",
-      "mimeType": "image/jpeg",
-      "sourceUrl": "https://chorlove.uz/_next/image?url=%2Fimages%2Fgreen-white%2Farka2.webp&w=1200&q=75",
-      "transformation": "Observed Next.js optimized JPEG rendition (w=1200, q=75); original arka2.webp was absent from the archive."
+      "file": "assets/arka2.webp",
+      "bytes": 30144,
+      "sha256": "632b51046c1878abd9e69430a5d47ed6da07e532cec4b88eac9ac7788f8b7cdb",
+      "mimeType": "image/webp",
+      "sourceUrl": "https://chorlove.uz/images/green-white/arka2.webp",
+      "captureMethod": "Downloaded original source image after verifying the original asset URL returned image/webp; replaces the previously packaged optimized JPEG rendition."
     }
-  ]
+  ],
+  "archiveMissingAssets": [
+    "images/green-white/arka2.webp"
+  ],
+  "runtimeStylesheets": [
+    {
+      "file": "/templates/chorlove/shared/_next/static/chunks/0.u3j0~_2ygfx.css",
+      "archiveFile": "Chorlove/Web invitations/_next/static/chunks/0.u3j0~_2ygfx.css",
+      "sha256": "12141a5ec71f317d0e27589c92869d213b339f86451ee2a75b4612c5f1e05991"
+    },
+    {
+      "file": "/templates/chorlove/shared/_next/static/chunks/00sc_9lpb3zcn.css",
+      "archiveFile": "Chorlove/Web invitations/_next/static/chunks/00sc_9lpb3zcn.css",
+      "sha256": "9295d64fad91822e7e7ab0d110764ac973d5414829a5bf40bb69e99531762910"
+    }
+  ],
+  "capturedFonts": [
+    {
+      "archiveFile": "Chorlove/Web invitations/fonts/CormorantGaramond-Regular.ttf",
+      "file": "/templates/chorlove/shared/_next/static/media/CormorantGaramond_Regular-s.p.05iajzwz.gtv8.ttf",
+      "bytes": 666632,
+      "sha256": "7b99138ffa3baab8616d8491dc6d75961c5ae568b206c5031fbc7bb127385428"
+    },
+    {
+      "archiveFile": "Chorlove/Web invitations/fonts/Fraunces-VariableFont_SOFT,WONK,opsz,wght.ttf",
+      "file": "/templates/chorlove/shared/_next/static/media/Fraunces_VariableFont_SOFT,WONK,opsz,wght-s.p.0g87.hb0o.d8x.ttf",
+      "bytes": 357632,
+      "sha256": "99b365ece2cccd7d7baf879cc141f1fa9f2d20690fe025bc3003b01dff098f05"
+    },
+    {
+      "archiveFile": "Chorlove/Web invitations/fonts/GreatVibes-Regular.ttf",
+      "file": "/templates/chorlove/shared/_next/static/media/GreatVibes_Regular-s.p.0au6u0v_syb0z.ttf",
+      "bytes": 445300,
+      "sha256": "8671b4332bff26a2ca32c7388a2929320e0ade036e460bd76cd1a22abbd4d5b4"
+    },
+    {
+      "archiveFile": "Chorlove/Web invitations/fonts/Jost-VariableFont_wght.ttf",
+      "file": "/templates/chorlove/shared/_next/static/media/Jost_VariableFont_wght-s.p.0vv2r-0fdeyux.ttf",
+      "bytes": 134476,
+      "sha256": "8d3141b6b4793c691c3647c602372c836577bf0c48a6b66674bbd558a95c1b57"
+    },
+    {
+      "archiveFile": "Chorlove/Web invitations/fonts/Marcellus-Regular.ttf",
+      "file": "/templates/chorlove/shared/_next/static/media/Marcellus_Regular-s.p.0s04k8a2jokc9.ttf",
+      "bytes": 43988,
+      "sha256": "5746c575e2d6bf9c57d388f04a2c9782a93ac83abb09ecf3e898c0b4399d79f9"
+    },
+    {
+      "archiveFile": "Chorlove/Web invitations/fonts/Qellia.otf",
+      "file": "/templates/chorlove/shared/_next/static/media/Qellia-s.p.0l1a3-80k4-g1.otf",
+      "bytes": 20180,
+      "sha256": "98c0d340d2ba414001b9210aa20df2516c8dcdd18c09aa822b34f9718bb45776"
+    },
+    {
+      "archiveFile": "Chorlove/Web invitations/fonts/TheNautigal-Regular.ttf",
+      "file": "/templates/chorlove/shared/_next/static/media/TheNautigal_Regular-s.p.0vn.0-.5o~f4t.ttf",
+      "bytes": 161852,
+      "sha256": "00e79428e3715ee28f9919be8c3bb4f468197b99ae419ae750b19f3a379b4222"
+    }
+  ],
+  "sourceAudit": {
+    "sourceCapture": "The archived HTML capture hash matches its checked-in Git blob. The Windows worktree applies CRLF conversion; normalized content and the recorded LF SHA-256 match the archive.",
+    "gallery": "The source component imports yet-another-react-lightbox with zoom, counter, thumbnails, and fullscreen plugins; it configures a 250ms swipe, looping carousel, 84x56 thumbnails (1px border, 8px radius, zero padding, 8px gap), no autoplay, and backdrop close. The package now reproduces these controls and behaviors with the archived YARL stylesheets and an isolated DOM adapter.",
+    "localeControls": "The source uses the app translation context and has no visible locale picker. The package adds a localized host-level picker because the shared invitation contract supports locale variants.",
+    "optionalSections": "Source gallery returns null when no images exist; source To’yona returns null without a card number; source contacts return null when none are configured. The package hides empty gallery, gift, and contacts sections. Dress code is always present in the source but follows the approved creator toggle in the platform.",
+    "rsvp": "The compiled source contains a yes-only guest-count stepper. The approved platform decision omits that prompt and submits fixed partySize 1/0 for yes/no.",
+    "reducedMotion": "The captured source module has no reduced-motion branch. The package adds the required reduced-motion behavior by removing the opening and infinite loops and showing hidden content immediately."
+  }
 }

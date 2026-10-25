@@ -5,15 +5,17 @@
   if (!root) return;
   const sections = [...root.querySelectorAll("section")];
   const copy = {
-    "uz-Latn": { welcome: "Assalomu alaykum", title: "Taklifnoma", couple: "Kelin & Kuyov", invite: "Sizni hayotimizdagi eng baxtli kunimizga taklif qilamiz", date: "To'y sanasi", countdown: "Baxtli onlargacha...", countdownCaption: "Soniya sayin yaqinlashmoqdamiz", venue: "To'y manzili", map: "Xaritada ko'rish", gift: "Sovg'a o'rniga karta orqali tabriklashingiz mumkin", giftHeading: "To'yona", cardHolder: "Karta egasi", copy: "Nusxa olish", copied: "Karta raqami nusxalandi.", copyError: "Nusxa olib bo'lmadi.", gallery: "Galereya", dressCode: "Dress-kod", dressIntro: "Qanday kiyinish kerak", wishes: "Tilaklar", wishIntro: "To'y egalariga o'z ezgu tilaklaringizni qoldiring", wish: "Kelin-kuyovga tilagingiz...", rsvp: "Kelasizmi?", rsvpPrompt: "Iltimos, javobingizni bildiring.", yes: "Kelaman", no: "Kela olmayman", send: "Yuborish", guest: "Ismingiz", guestFull: "Ism va familiyangiz", saved: "Javobingiz saqlandi. Rahmat!", submitted: "Tilagingiz yuborildi.", error: "Yuborilmadi. Qayta urinib ko'ring.", preview: "Ko'rish rejimida yuborish o'chiq.", guestRequired: "Ismingizni kiriting.", wishRequired: "Tilagingizni yozing.", chooseResponse: "Javobingizni tanlang.", responseLabel: "Javobingiz", days: "Kun", hours: "Soat", minutes: "Daq", seconds: "Son", photo: "Surat", close: "Yopish", next: "Keyingi", previous: "Oldingi", hosts: "Hurmat bilan", contact: "Bog'lanish uchun", language: "Til", playMusic: "Musiqani yoqish", pauseMusic: "Musiqani to'xtatish", musicUnavailable: "Musiqa mavjud emas", footer: "Taklifnoma" },
-    "uz-Cyrl": { welcome: "Ассалому алайкум", title: "Таклифнома", couple: "Келин & Куёв", invite: "Сизни ҳаётимиздаги энг бахтли кунимизга таклиф қиламиз", date: "Тўй санаси", countdown: "Бахтли онларгача...", countdownCaption: "Сония сайин яқинлашмоқдамиз", venue: "Тўй манзили", map: "Харитада кўриш", gift: "Совға ўрнига карта орқали табриклашингиз мумкин", giftHeading: "Тўёна", cardHolder: "Карта эгаси", copy: "Нусха олиш", copied: "Карта рақами нусхаланди.", copyError: "Копиялашнинг иложи бўлмади.", gallery: "Галерея", dressCode: "Dress-kod", dressIntro: "Қандай кийиниш керак", wishes: "Тилаклар", wishIntro: "Тўй эгаларига эзгу тилакларингизни қолдиринг", wish: "Келин-куёвга тилагингиз...", rsvp: "Келасизми?", rsvpPrompt: "Илтимос, жавобингизни билдиринг.", yes: "Келаман", no: "Кела олмайман", send: "Юбориш", guest: "Исмигиз", guestFull: "Исм ва фамилиянгиз", saved: "Жавобингиз сақланди. Раҳмат!", submitted: "Тилагингиз юборилди.", error: "Юборилмади. Қайта уриниб кўринг.", preview: "Кўриш режимида юбориш ўчиқ.", guestRequired: "Исмигизни киритинг.", wishRequired: "Тилагингизни ёзинг.", chooseResponse: "Жавобингизни танланг.", responseLabel: "Жавобингиз", days: "Кун", hours: "Соат", minutes: "Дақ", seconds: "Сон", photo: "Сурат", close: "Ёпиш", next: "Кейинги", previous: "Олдинги", hosts: "Ҳурмат билан", contact: "Боғланиш учун", language: "Тил", playMusic: "Мусиқани ёқиш", pauseMusic: "Мусиқани тўхтатиш", musicUnavailable: "Мусиқа мавжуд эмас", footer: "Таклифнома" },
-    en: { welcome: "Welcome", title: "Invitation", couple: "The couple", invite: "You are invited to the happiest day of our lives", date: "Wedding date", countdown: "Until our happy day...", countdownCaption: "Every second brings us closer", venue: "Venue", map: "Open map", gift: "You can send your congratulations by card", giftHeading: "Wedding gift", cardHolder: "Card holder", copy: "Copy card number", copied: "Card number copied.", copyError: "Could not copy the card number.", gallery: "Gallery", dressCode: "Dress code", dressIntro: "What to wear", wishes: "Wishes", wishIntro: "Leave your wishes for the couple", wish: "Your wish...", rsvp: "Will you join us?", rsvpPrompt: "Please let us know if you can attend.", yes: "I'll attend", no: "I can't attend", send: "Submit", guest: "Your name", guestFull: "Your full name", saved: "Your response was saved. Thank you!", submitted: "Your wish was sent.", error: "Could not submit. Please try again.", preview: "Submissions are disabled in preview.", guestRequired: "Enter your name.", wishRequired: "Write a wish.", chooseResponse: "Choose your RSVP response.", responseLabel: "Your response", days: "Days", hours: "Hours", minutes: "Min", seconds: "Sec", photo: "Photo", close: "Close", next: "Next", previous: "Previous", hosts: "With love from", contact: "Contact us", language: "Language", playMusic: "Play music", pauseMusic: "Pause music", musicUnavailable: "Music unavailable", footer: "Invitation" },
-    ru: { welcome: "Добро пожаловать", title: "Приглашение", couple: "Жених и невеста", invite: "Приглашаем вас на самый счастливый день нашей жизни", date: "Дата свадьбы", countdown: "До нашего счастливого дня...", countdownCaption: "С каждой секундой мы ближе", venue: "Место проведения", map: "Открыть карту", gift: "Вы можете отправить поздравление на карту", giftHeading: "Подарок", cardHolder: "Держатель карты", copy: "Скопировать номер", copied: "Номер карты скопирован.", copyError: "Не удалось скопировать номер карты.", gallery: "Галерея", dressCode: "Дресс-код", dressIntro: "Как одеться", wishes: "Пожелания", wishIntro: "Оставьте пожелания молодожёнам", wish: "Ваше пожелание...", rsvp: "Вы придёте?", rsvpPrompt: "Пожалуйста, сообщите, сможете ли вы прийти.", yes: "Приду", no: "Не смогу прийти", send: "Отправить", guest: "Ваше имя", guestFull: "Ваши имя и фамилия", saved: "Ваш ответ сохранён. Спасибо!", submitted: "Ваше пожелание отправлено.", error: "Не удалось отправить. Попробуйте ещё раз.", preview: "Отправка в режиме просмотра отключена.", guestRequired: "Введите ваше имя.", wishRequired: "Напишите пожелание.", chooseResponse: "Выберите ваш ответ.", responseLabel: "Ваш ответ", days: "Дней", hours: "Часов", minutes: "Мин", seconds: "Сек", photo: "Фото", close: "Закрыть", next: "Далее", previous: "Назад", hosts: "С уважением", contact: "Связаться с нами", language: "Язык", playMusic: "Включить музыку", pauseMusic: "Выключить музыку", musicUnavailable: "Музыка недоступна", footer: "Приглашение" },
+    "uz-Latn": { welcome: "Assalomu alaykum", title: "Taklifnoma", couple: "Kelin & Kuyov", invite: "Sizni hayotimizdagi eng baxtli kunimizga taklif qilamiz", date: "To'y sanasi", countdown: "Baxtli onlargacha...", countdownCaption: "Soniya sayin yaqinlashmoqdamiz", venue: "To'y manzili", map: "Xaritada ko'rish", gift: "Sovg'a o'rniga karta orqali tabriklashingiz mumkin", giftHeading: "To'yona", cardHolder: "Karta egasi", copy: "Nusxa olish", copied: "Karta raqami nusxalandi.", copyError: "Nusxa olib bo'lmadi.", gallery: "Galereya", dressCode: "Dress-kod", dressIntro: "Qanday kiyinish kerak", wishes: "Tilaklar", wishIntro: "To'y egalariga o'z ezgu tilaklaringizni qoldiring", wish: "Kelin-kuyovga tilagingiz...", rsvp: "Kelasizmi?", rsvpPrompt: "Iltimos, javobingizni bildiring.", yes: "Kelaman", no: "Kela olmayman", send: "Yuborish", guest: "Ismingiz", guestFull: "Ism va familiyangiz", saved: "Javobingiz saqlandi. Rahmat!", submitted: "Tilagingiz yuborildi.", error: "Yuborilmadi. Qayta urinib ko'ring.", preview: "Ko'rish rejimida yuborish o'chiq.", guestRequired: "Ismingizni kiriting.", wishRequired: "Tilagingizni yozing.", chooseResponse: "Javobingizni tanlang.", responseLabel: "Javobingiz", days: "Kun", hours: "Soat", minutes: "Daq", seconds: "Son", photo: "Surat", close: "Yopish", next: "Keyingi", previous: "Oldingi", zoomIn: "Kattalashtirish", zoomOut: "Kichraytirish", fullscreen: "To'liq ekran", hosts: "Hurmat bilan", contact: "Bog'lanish uchun", language: "Til", playMusic: "Musiqani yoqish", pauseMusic: "Musiqani to'xtatish", musicUnavailable: "Musiqa mavjud emas", footer: "Taklifnoma" },
+    "uz-Cyrl": { welcome: "Ассалому алайкум", title: "Таклифнома", couple: "Келин & Куёв", invite: "Сизни ҳаётимиздаги энг бахтли кунимизга таклиф қиламиз", date: "Тўй санаси", countdown: "Бахтли онларгача...", countdownCaption: "Сония сайин яқинлашмоқдамиз", venue: "Тўй манзили", map: "Харитада кўриш", gift: "Совға ўрнига карта орқали табриклашингиз мумкин", giftHeading: "Тўёна", cardHolder: "Карта эгаси", copy: "Нусха олиш", copied: "Карта рақами нусхаланди.", copyError: "Копиялашнинг иложи бўлмади.", gallery: "Галерея", dressCode: "Dress-kod", dressIntro: "Қандай кийиниш керак", wishes: "Тилаклар", wishIntro: "Тўй эгаларига эзгу тилакларингизни қолдиринг", wish: "Келин-куёвга тилагингиз...", rsvp: "Келасизми?", rsvpPrompt: "Илтимос, жавобингизни билдиринг.", yes: "Келаман", no: "Кела олмайман", send: "Юбориш", guest: "Исмигиз", guestFull: "Исм ва фамилиянгиз", saved: "Жавобингиз сақланди. Раҳмат!", submitted: "Тилагингиз юборилди.", error: "Юборилмади. Қайта уриниб кўринг.", preview: "Кўриш режимида юбориш ўчиқ.", guestRequired: "Исмигизни киритинг.", wishRequired: "Тилагингизни ёзинг.", chooseResponse: "Жавобингизни танланг.", responseLabel: "Жавобингиз", days: "Кун", hours: "Соат", minutes: "Дақ", seconds: "Сон", photo: "Сурат", close: "Ёпиш", next: "Кейинги", previous: "Олдинги", zoomIn: "Катталаштириш", zoomOut: "Кичрайтириш", fullscreen: "Тўлиқ экран", hosts: "Ҳурмат билан", contact: "Боғланиш учун", language: "Тил", playMusic: "Мусиқани ёқиш", pauseMusic: "Мусиқани тўхтатиш", musicUnavailable: "Мусиқа мавжуд эмас", footer: "Таклифнома" },
+    en: { welcome: "Welcome", title: "Invitation", couple: "The couple", invite: "You are invited to the happiest day of our lives", date: "Wedding date", countdown: "Until our happy day...", countdownCaption: "Every second brings us closer", venue: "Venue", map: "Open map", gift: "You can send your congratulations by card", giftHeading: "Wedding gift", cardHolder: "Card holder", copy: "Copy card number", copied: "Card number copied.", copyError: "Could not copy the card number.", gallery: "Gallery", dressCode: "Dress code", dressIntro: "What to wear", wishes: "Wishes", wishIntro: "Leave your wishes for the couple", wish: "Your wish...", rsvp: "Will you join us?", rsvpPrompt: "Please let us know if you can attend.", yes: "I'll attend", no: "I can't attend", send: "Submit", guest: "Your name", guestFull: "Your full name", saved: "Your response was saved. Thank you!", submitted: "Your wish was sent.", error: "Could not submit. Please try again.", preview: "Submissions are disabled in preview.", guestRequired: "Enter your name.", wishRequired: "Write a wish.", chooseResponse: "Choose your RSVP response.", responseLabel: "Your response", days: "Days", hours: "Hours", minutes: "Min", seconds: "Sec", photo: "Photo", close: "Close", next: "Next", previous: "Previous", zoomIn: "Zoom in", zoomOut: "Zoom out", fullscreen: "Toggle full screen", hosts: "With love from", contact: "Contact us", language: "Language", playMusic: "Play music", pauseMusic: "Pause music", musicUnavailable: "Music unavailable", footer: "Invitation" },
+    ru: { welcome: "Добро пожаловать", title: "Приглашение", couple: "Жених и невеста", invite: "Приглашаем вас на самый счастливый день нашей жизни", date: "Дата свадьбы", countdown: "До нашего счастливого дня...", countdownCaption: "С каждой секундой мы ближе", venue: "Место проведения", map: "Открыть карту", gift: "Вы можете отправить поздравление на карту", giftHeading: "Подарок", cardHolder: "Держатель карты", copy: "Скопировать номер", copied: "Номер карты скопирован.", copyError: "Не удалось скопировать номер карты.", gallery: "Галерея", dressCode: "Дресс-код", dressIntro: "Как одеться", wishes: "Пожелания", wishIntro: "Оставьте пожелания молодожёнам", wish: "Ваше пожелание...", rsvp: "Вы придёте?", rsvpPrompt: "Пожалуйста, сообщите, сможете ли вы прийти.", yes: "Приду", no: "Не смогу прийти", send: "Отправить", guest: "Ваше имя", guestFull: "Ваши имя и фамилия", saved: "Ваш ответ сохранён. Спасибо!", submitted: "Ваше пожелание отправлено.", error: "Не удалось отправить. Попробуйте ещё раз.", preview: "Отправка в режиме просмотра отключена.", guestRequired: "Введите ваше имя.", wishRequired: "Напишите пожелание.", chooseResponse: "Выберите ваш ответ.", responseLabel: "Ваш ответ", days: "Дней", hours: "Часов", minutes: "Мин", seconds: "Сек", photo: "Фото", close: "Закрыть", next: "Далее", previous: "Назад", zoomIn: "Увеличить", zoomOut: "Уменьшить", fullscreen: "Полный экран", hosts: "С уважением", contact: "Связаться с нами", language: "Язык", playMusic: "Включить музыку", pauseMusic: "Выключить музыку", musicUnavailable: "Музыка недоступна", footer: "Приглашение" },
   };
   let payload;
   let timer;
   let motionPrepared = false;
   let openingStarted = false;
+  let motionReduced = false;
+  let sourceObserver = null;
   const $ = (selector, base = root) => base.querySelector(selector);
   const tx = (node, value) => { if (node) node.textContent = value == null ? "" : String(value); };
   const hide = (node, value) => { if (node) node.hidden = Boolean(value); };
@@ -160,11 +162,11 @@
     if (initialTransform.includes("scale(0.78) rotate(-8deg)")) return { duration: 1000, easing: "cubic-bezier(.22,1,.36,1)" };
     if (initialTransform.includes("translateY(56px) scale(0.94)")) return { duration: 950, easing: "cubic-bezier(.22,1,.36,1)" };
     if (initialTransform.includes("translateY(54px) scale(0.94)")) return { duration: 950, easing: "cubic-bezier(.22,1,.36,1)" };
-    if (initialTransform.includes("translateY(-35px) scale(0.9)") || initialTransform.includes("translateY(35px) scale(0.9)")) return { duration: 800, delay: 250, easing: "ease" };
+    if (initialTransform.includes("translateY(-35px) scale(0.9)") || initialTransform.includes("translateY(35px) scale(0.9)")) return { duration: 800, delay: 250, easing: "ease-out" };
     if (initialTransform.includes("translateY(24px)")) return { duration: 700, delay: node.tagName === "LI" ? [...node.parentElement.children].indexOf(node) * 120 : 0, easing: "ease-out" };
     if (initialTransform.includes("translateY(30px)")) return { duration: 700, delay: node.tagName === "BUTTON" ? ([...node.parentElement.children].indexOf(node) % 2) * 120 : 0, easing: "ease-out" };
     if (initialTransform.includes("translateY(18px) scale(0.6)")) return { duration: 550, delay: [...node.parentElement.children].indexOf(node) * 90, easing: "ease-out" };
-    if (initialTransform.includes("translateY(18px) scale(0.9)")) return { duration: 550, delay: [...node.parentElement.children].indexOf(node) * 90, easing: "ease-out" };
+    if (initialTransform.includes("translateY(18px) scale(0.9)")) return { duration: 600, easing: "ease-out" };
     if (initialTransform.includes("translateY(40px) rotate(-4deg)")) return { duration: 1000, easing: "cubic-bezier(.22,1,.36,1)" };
     if (initialTransform.includes("translateX(24px)") || initialTransform.includes("translateX(-24px)")) return { duration: 600, easing: "ease-out" };
     if (node.style.filter.includes("blur(8px)")) {
@@ -232,10 +234,10 @@
   function prepareMotion(p, c) {
     if (motionPrepared) return;
     motionPrepared = true;
-    const reduced = Boolean(p.reducedMotion) || matchMedia("(prefers-reduced-motion: reduce)").matches || new URLSearchParams(location.search).get("qaReducedMotion") === "1";
-    playOpening(p, c, reduced);
-    playHeroMotion(reduced);
-    playSourceDecorations(reduced);
+    motionReduced = Boolean(p.reducedMotion) || matchMedia("(prefers-reduced-motion: reduce)").matches || new URLSearchParams(location.search).get("qaReducedMotion") === "1";
+    playOpening(p, c, motionReduced);
+    playHeroMotion(motionReduced);
+    playSourceDecorations(motionReduced);
     const hero = section(0);
     const reveals = [];
     for (const node of root.querySelectorAll('[style*="opacity:0"]')) {
@@ -243,7 +245,7 @@
       if (hero?.contains(node) && (String(node.className).includes("h-[43vh]") || String(node.className).includes("top-[22vh]") || String(node.className).includes("bottom-8 left-0"))) continue;
       const initialTransform = node.style.transform || "";
       const initialFilter = node.style.filter || "";
-      if (reduced) {
+      if (motionReduced) {
         node.style.removeProperty("opacity"); node.style.removeProperty("filter"); node.style.removeProperty("transform");
         continue;
       }
@@ -253,7 +255,7 @@
       reveals.push({ node, options, state });
     }
     const springs = [...root.querySelectorAll('[style*="scale(0.55)"]')].map((node) => ({ node, state: clearMotionStyle(node) }));
-    if (reduced) springs.forEach(({ node }) => { node.style.removeProperty("transform"); });
+    if (motionReduced) springs.forEach(({ node }) => { node.style.removeProperty("transform"); });
     const animateReveal = ({ node, options, state }) => {
       const baselineTransform = state.baseTransform || "none";
       const initialTransform = [state.transform, state.baseTransform].filter(Boolean).join(" ") || baselineTransform;
@@ -263,14 +265,21 @@
       ], { duration: options.duration, delay: options.delay, easing: options.easing, fill: "both" });
       animation.onfinish = () => { animation.cancel(); node.style.opacity = "1"; if (state.filter) node.style.filter = state.baseFilter; };
     };
-    if (reduced || !("IntersectionObserver" in window)) {
+    if (motionReduced || !("IntersectionObserver" in window)) {
       reveals.forEach(animateReveal);
       root.querySelectorAll('[style*="scale(0.55)"]').forEach((node) => { node.style.removeProperty("transform"); });
       return;
     }
-    const observer = new IntersectionObserver((entries) => {
+    sourceObserver = new IntersectionObserver((entries) => {
       for (const entry of entries) {
         if (!entry.isIntersecting) continue;
+        const dynamicOptions = entry.target.dataset.gwDynamicSourceReveal;
+        if (dynamicOptions) {
+          delete entry.target.dataset.gwDynamicSourceReveal;
+          animateSourceElement(entry.target, JSON.parse(dynamicOptions));
+          sourceObserver.unobserve(entry.target);
+          continue;
+        }
         const reveal = reveals.find((item) => item.node === entry.target);
         if (reveal) animateReveal(reveal);
         const spring = springs.find((item) => item.node === entry.target);
@@ -280,18 +289,32 @@
           const animation = spring.node.animate([{ transform: start }, { transform: baseline }], { duration: 700, easing: "cubic-bezier(.34,1.56,.64,1)", fill: "both" });
           animation.onfinish = () => animation.cancel();
         }
-        observer.unobserve(entry.target);
+        sourceObserver.unobserve(entry.target);
       }
     }, { root, threshold: 0.35 });
-    reveals.forEach(({ node }) => observer.observe(node));
-    springs.forEach(({ node }) => observer.observe(node));
+    reveals.forEach(({ node }) => sourceObserver.observe(node));
+    springs.forEach(({ node }) => sourceObserver.observe(node));
+  }
+
+  function observeDynamicSourceReveal(node, options) {
+    if (motionReduced) {
+      node.style.removeProperty("opacity");
+      node.style.removeProperty("filter");
+      node.style.removeProperty("transform");
+      return;
+    }
+    if (!sourceObserver) {
+      animateSourceElement(node, options);
+      return;
+    }
+    node.dataset.gwDynamicSourceReveal = JSON.stringify(options);
+    sourceObserver.observe(node);
   }
 
   function render(p) {
     payload = p;
     const d = p.data || {};
     const c = copy[p.locale] || copy["uz-Latn"];
-    prepareMotion(p, c);
     document.documentElement.lang = p.locale === "uz-Latn" ? "uz" : p.locale;
     tx(section(0)?.querySelector("p.text-xs"), d.greeting || c.welcome);
     tx(section(0)?.querySelector("h1"), d.title || c.title);
@@ -308,6 +331,7 @@
     renderWishes(d.wishes || [], p, c);
     renderContacts(d.contacts || [], c);
     renderFooter(d, c);
+    prepareMotion(p, c);
     tx(section(5)?.querySelector("p"), c.countdownCaption);
     tx(section(8)?.querySelector("h2"), c.gallery);
     tx(section(11)?.querySelector(".relative.z-20.text-center h2"), c.rsvp);
@@ -397,37 +421,158 @@
   }
 
   function renderGallery(gallery, p, c) {
-    const node = section(8), buttons = [...(node?.querySelectorAll("button") || [])];
-    buttons.forEach((button, i) => {
-      const item = gallery[i];
-      button.replaceChildren(); button.disabled = !item?.src; button.onclick = null;
-      hide(button, !item?.src && !p.preview);
-      if (!item?.src) return;
-      const alt = item.alt || item.caption || `${c.photo} ${i + 1}`;
-      const img = document.createElement("img"); img.src = item.src; img.alt = alt; img.className = "h-full w-full object-cover"; button.append(img);
-      button.setAttribute("aria-label", alt); button.disabled = false;
-      button.onclick = () => { const active = gallery.filter((photo) => photo.src); showLightbox(active, active.indexOf(item), c); };
+    const node = section(8), grid = node?.querySelector(".grid.grid-cols-2");
+    if (!node || !grid) return;
+    const photos = gallery.filter((photo) => photo?.src);
+    grid.replaceChildren();
+    photos.forEach((item, i) => {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = `block cursor-zoom-in overflow-hidden rounded-t-full bg-white p-1.5 shadow-[0_20px_40px_rgba(0,0,0,0.25)] ${i % 2 ? "mt-10" : ""}`;
+      button.setAttribute("aria-label", `${c.gallery} ${i + 1}`);
+      button.style.opacity = "0";
+      button.style.transform = "translateY(30px)";
+      const image = document.createElement("img");
+      image.src = item.src;
+      image.alt = "";
+      image.loading = "lazy";
+      image.className = "aspect-[3/4] w-full rounded-t-full object-cover";
+      button.append(image);
+      button.onclick = () => showLightbox(photos, i, c, button);
+      grid.append(button);
+      if (motionPrepared) observeDynamicSourceReveal(button, { duration: 700, delay: (i % 2) * 120, easing: "ease-out" });
     });
-    hide(node, !gallery.some((item) => item.src));
+    hide(node, !photos.length);
   }
 
-  function showLightbox(items, start, c) {
-    const dialog = document.createElement("dialog"); dialog.className = "gw-lightbox"; dialog.setAttribute("aria-label", c.gallery);
-    const image = document.createElement("img"), controls = document.createElement("div"); controls.className = "gw-lightbox-controls";
-    const previous = document.createElement("button"), close = document.createElement("button"), next = document.createElement("button");
-    previous.type = close.type = next.type = "button"; previous.textContent = c.previous; close.textContent = c.close; next.textContent = c.next;
-    previous.setAttribute("aria-label", c.previous); close.setAttribute("aria-label", c.close); next.setAttribute("aria-label", c.next);
-    let index = start;
-    const show = () => { image.src = items[index].src; image.alt = items[index].alt || items[index].caption || `${c.photo} ${index + 1}`; };
-    previous.onclick = () => { index = (index - 1 + items.length) % items.length; show(); };
-    next.onclick = () => { index = (index + 1) % items.length; show(); };
+  function showLightbox(items, start, c, opener) {
+    if (!items.length) return;
+    const dialog = document.createElement("dialog");
+    dialog.className = "yarl__portal yarl__portal_open gw-source-lightbox";
+    dialog.setAttribute("aria-label", c.gallery);
+    dialog.setAttribute("aria-modal", "true");
+    const container = document.createElement("div");
+    container.className = "yarl__container";
+    container.tabIndex = -1;
+    const toolbar = document.createElement("div");
+    toolbar.className = "yarl__toolbar";
+    const counter = document.createElement("div");
+    counter.className = "yarl__counter";
+    counter.setAttribute("aria-live", "polite");
+    const slide = document.createElement("div");
+    slide.className = "yarl__slide yarl__flex_center";
+    const image = document.createElement("img");
+    image.className = "yarl__slide_image";
+    image.alt = "";
+    image.draggable = false;
+    slide.append(image);
+    const makeButton = (label, icon, className = "") => {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = `yarl__button ${className}`.trim();
+      button.setAttribute("aria-label", label);
+      button.title = label;
+      button.innerHTML = `<svg class="yarl__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${icon}</svg>`;
+      return button;
+    };
+    const close = makeButton(c.close, '<path d="m18 6-12 12M6 6l12 12"/>');
+    const zoom = makeButton(c.zoomIn, '<circle cx="11" cy="11" r="7"/><path d="m20 20-4-4M11 8v6M8 11h6"/>');
+    const fullscreen = makeButton(c.fullscreen, '<path d="M8 3H5a2 2 0 0 0-2 2v3m13-5h3a2 2 0 0 1 2 2v3M3 16v3a2 2 0 0 0 2 2h3m13-5v3a2 2 0 0 1-2 2h-3"/>');
+    const previous = makeButton(c.previous, '<path d="m15 18-6-6 6-6"/>', "yarl__navigation_prev");
+    const next = makeButton(c.next, '<path d="m9 18 6-6-6-6"/>', "yarl__navigation_next");
+    toolbar.append(zoom, fullscreen, close);
+    const thumbnailBar = document.createElement("div");
+    thumbnailBar.className = "yarl__thumbnails yarl__thumbnails_bottom";
+    thumbnailBar.style.cssText = "height:72px;--yarl__thumbnails_container_padding:8px;--yarl__thumbnails_thumbnail_width:84px;--yarl__thumbnails_thumbnail_height:56px;--yarl__thumbnails_thumbnail_border:1px;--yarl__thumbnails_thumbnail_border_radius:8px;--yarl__thumbnails_thumbnail_padding:0px;--yarl__thumbnails_thumbnail_gap:8px";
+    const thumbnailContainer = document.createElement("div");
+    thumbnailContainer.className = "yarl__thumbnails_container yarl__thumbnails_bottom";
+    const thumbnailWrapper = document.createElement("div");
+    thumbnailWrapper.className = "yarl__thumbnails_wrapper";
+    const thumbnailTrack = document.createElement("div");
+    thumbnailTrack.className = "yarl__thumbnails_track";
+    thumbnailTrack.tabIndex = 0;
+    thumbnailTrack.setAttribute("role", "listbox");
+    const thumbnails = items.map((item, i) => {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "yarl__thumbnails_thumbnail";
+      button.setAttribute("role", "option");
+      button.setAttribute("aria-label", `${c.photo} ${i + 1}`);
+      button.style.backgroundImage = `url("${String(item.src).replaceAll('"', "%22")}")`;
+      button.style.backgroundPosition = "center";
+      button.style.backgroundSize = "cover";
+      button.onclick = () => show(i, 0);
+      thumbnailTrack.append(button);
+      return button;
+    });
+    thumbnailWrapper.append(thumbnailTrack);
+    thumbnailContainer.append(thumbnailWrapper);
+    thumbnailBar.append(thumbnailContainer);
+    let index = start, zoomed = false, pointerX = null;
+    const show = (nextIndex, direction = 0) => {
+      index = (nextIndex + items.length) % items.length;
+      image.src = items[index].src;
+      image.alt = items[index].alt || items[index].caption || "";
+      image.style.transform = "scale(1)";
+      zoomed = false;
+      counter.textContent = `${index + 1} / ${items.length}`;
+      thumbnails.forEach((button, i) => {
+        button.classList.toggle("yarl__thumbnails_thumbnail_active", i === index);
+        button.setAttribute("aria-selected", String(i === index));
+      });
+      thumbnails[index]?.scrollIntoView({ block: "nearest", inline: "nearest" });
+      if (direction) {
+        image.animate([{ translate: `${direction * 28}px 0` }, { translate: "0 0" }], { duration: 250, easing: "ease-out" });
+      }
+    };
+    previous.onclick = () => show(index - 1, 1);
+    next.onclick = () => show(index + 1, -1);
+    close.onclick = () => dialog.close();
+    zoom.onclick = () => {
+      zoomed = !zoomed;
+      image.style.transform = zoomed ? "scale(2)" : "scale(1)";
+      zoom.setAttribute("aria-label", zoomed ? c.zoomOut : c.zoomIn);
+      zoom.title = zoomed ? c.zoomOut : c.zoomIn;
+    };
+    fullscreen.onclick = async () => {
+      try {
+        if (document.fullscreenElement) await document.exitFullscreen();
+        else await dialog.requestFullscreen();
+      } catch { /* Fullscreen can be unavailable in an embedded preview. */ }
+    };
+    image.addEventListener("dblclick", zoom.onclick);
+    image.addEventListener("pointerdown", (event) => { pointerX = event.clientX; });
+    image.addEventListener("pointerup", (event) => {
+      if (pointerX == null) return;
+      const delta = event.clientX - pointerX;
+      pointerX = null;
+      if (Math.abs(delta) < 40) return;
+      if (delta > 0) previous.click(); else next.click();
+    });
+    container.addEventListener("wheel", (event) => {
+      if (!event.ctrlKey && !event.metaKey) return;
+      event.preventDefault();
+      zoomed = event.deltaY < 0;
+      image.style.transform = zoomed ? "scale(2)" : "scale(1)";
+    }, { passive: false });
     dialog.addEventListener("keydown", (event) => {
       if (event.key === "ArrowLeft") { event.preventDefault(); previous.click(); }
       else if (event.key === "ArrowRight") { event.preventDefault(); next.click(); }
+      else if (event.key === "Home") { event.preventDefault(); show(0); }
+      else if (event.key === "End") { event.preventDefault(); show(items.length - 1); }
     });
-    close.onclick = () => dialog.close(); controls.append(previous, close, next); dialog.append(image, controls);
-    dialog.addEventListener("click", (event) => { if (event.target === dialog) dialog.close(); });
-    root.append(dialog); show(); dialog.showModal(); dialog.addEventListener("close", () => dialog.remove(), { once: true });
+    dialog.addEventListener("click", (event) => { if (event.target === dialog || event.target === container) dialog.close(); });
+    dialog.addEventListener("close", () => {
+      if (document.fullscreenElement === dialog) document.exitFullscreen().catch(() => {});
+      dialog.remove();
+      opener?.focus();
+    }, { once: true });
+    container.append(counter, toolbar, previous, slide, next, thumbnailBar);
+    dialog.append(container);
+    root.append(dialog);
+    show(start);
+    dialog.showModal();
+    container.focus();
   }
 
   function renderDressCode(dress, c) {
@@ -448,7 +593,9 @@
     const values = p.preview ? wishes : await fetch(`/api/public/invitations/${encodeURIComponent(p.invitationId || "")}/wishes`, { cache: "no-store" }).then((r) => r.ok ? r.json() : { wishes: [] }).then((r) => r.wishes || []).catch(() => []);
     values.forEach((wish, i) => {
       const item = document.createElement("li"); item.className = "max-w-[88%] rounded-3xl border border-white/15 bg-white/10 px-4 py-3 backdrop-blur-sm"; item.classList.add(i % 2 ? "ml-auto" : "rounded-bl-md", ...(i % 2 ? ["rounded-br-md"] : []));
+      item.style.opacity = "0"; item.style.transform = "translateY(18px) scale(0.9)";
       const name = document.createElement("p"), message = document.createElement("p"); name.className = "font-serif text-sm italic text-green-100 [overflow-wrap:anywhere]"; message.className = "mt-1 text-xs leading-relaxed text-white/85 [overflow-wrap:anywhere]"; name.textContent = wish.name || ""; message.textContent = wish.text || wish.message || ""; item.append(name, message); list.append(item);
+      if (motionPrepared) observeDynamicSourceReveal(item, { duration: 600, easing: "ease-out" });
     });
     hide(node, !p.preview && !p.data?.wishesEnabled);
   }
