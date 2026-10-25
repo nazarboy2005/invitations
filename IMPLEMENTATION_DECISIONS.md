@@ -92,6 +92,19 @@
   the route/pin and use a smoked plum glass panel behind city/date/navigation,
   rather than restoring the previous pale paper card. Recheck on laptop/phone.
 
+## RSVP guest count and source-absent sections (2026-10-25)
+
+- Confirmed user requirement: published guest-facing RSVP forms must not ask
+  how many people a guest is bringing. Keep the existing response API contract
+  by submitting a fixed party size of 1 for attending and 0 for not attending.
+- For Chorlove designs, render optional sections such as dress code only when
+  that exact original design includes the section. Do not inject a generic
+  section into designs whose source has no such UI. Apply the same source-
+  presence check to other providers during fidelity work.
+- Gift/to'yona and wishes interactions in Chorlove packages must follow the
+  original design's layout and opening/animation behavior, with invitation
+  data mapped through the platform adapter.
+
 ## Platform color refresh (2026-10-25)
 
 - User approved applying the reviewed pomegranate, white, and charcoal direction
@@ -283,6 +296,16 @@
   with an empty Instagram value. The source has no native to'yona section; when
   enabled, the shared gift receipt-upload adapter renders its platform section
   before the footer rather than inserting into a source panel.
+- Publication follow-up (2026-10-25): user authorized catalog publication after
+  release checks. Additive migration `0139_publish_chorlove_palov.sql` was
+  applied under the migration advisory lock; the database verifies published,
+  `osh` category/event and 15,000,000 UZS. `/api/catalog` returns Palov with its
+  distinct `invitate-palov` peer. The local creator API integration now checks
+  draft save/reopen, publish, public page, view and RSVP using disposable rows.
+  The guest-facing RSVP no longer asks party size and submits fixed count one
+  for attendance, following the confirmed platform-wide requirement. Keep
+  publication local to this configured catalog; no external deployment or
+  payment activation was performed.
 - Local integration check (2026-10-23): `/api/catalog` returns 200 and omits
   private `palov`; the package renderer and 480×1040 cover both return 200.
   The opt-in Palov integration test creates a temporary creator session, saves
@@ -314,36 +337,34 @@
   production build pass, and preview and RSVP guard behavior were checked
   locally. No external deployment or live payment activation is included.
 
-## Chorlove Orchid Amplop implementation update (2026-10-23)
+## Chorlove Orchid Amplop implementation update (2026-10-23; verified 2026-10-25)
 
-- The exact component module and embedded stylesheet are isolated in
-  `apps/web/public/templates/chorlove/orchid-amplop`. The existing Chorlove
-  iframe renderer routes the template ID to this package; its typed adapter
-  maps shared invitation content, preview-only source gallery images, and
-  creator fields without loading Chorlove runtime code or sample names.
-- Added an unpublished wedding-only typed catalog row and additive migration
-  `0132_register_orchid_amplop.sql`; creator selection remains gated on the
-  database/catalog `published` flag. Full preview routing is wired.
-- The capture archive has no separate portrait catalog image and omits six
-  component-referenced design assets (divider, portrait frame, two portraits,
-  and two story photos). No cross-template replacements are used; optional
-  authored portrait frames stay empty. A full archive search confirmed none of
-  the six filenames exist. The snapshot's structured metadata points to a
-  778×1686 portrait opening image, SHA-256
-  `1e01875e35ba0f4dd739fa7fcb9f3494375476e1b60c0a3658dcc86723f84f9a`; it
-  contains fixed source couple names and the provider's floating dev badge, so
-  it is not packaged or used as catalog art. A local 390×844 renderer capture
-  from the canonical shared preview fixture was inspected; it still includes
-  the Next development badge and is not used as catalog art.
-- Migration `0132_register_orchid_amplop.sql` is applied. The configured DB
-  confirms the row is unpublished at 150,000 UZS, category `wedding`, supported
-  event type `wedding`. The public catalog API omits Orchid (53 other published
-  rows). There are no Orchid invitations in the DB, so public invitation/API
-  submission checks cannot be exercised without creating data. Reduced-motion
-  preview confirms the localized opening and populated invitation sections.
-  Save/reopen, RSVP/wish submission, public invitation rendering, normal-motion
-  QA, and a clean portrait catalog cover remain pending; keep unpublished and
-  unselectable.
+- Orchid uses the isolated original component module 482485, embedded source CSS,
+  local fonts/assets, and a shared typed adapter. The captured component chunk's
+  served SHA-256 matches provenance. All seven initially absent image paths are
+  recovered; the 16-chunk source graph, asset/font hashes, and CSS hash validate.
+- Source-designed guest sections are hero/opener, couple, date/program, story,
+  gallery, gift, wishes, RSVP, and footer contacts. Source has no dress-code or
+  extra-family-people section. Orchid integration suppresses those generic
+  injections. The optional platform receipt-upload form is nested within the
+  source gift-card reveal; card number/cardholder remain in source-designed
+  layout. No RSVP guest-count prompt is shown; existing API receives partySize
+  1 for attending and 0 for not attending.
+- The canonical preview-only gallery uses the six original Orchid images;
+  creator uploads replace them and no source demo photo is included publicly.
+  Both typed registry entries use the real 450x800 opening capture built from
+  the shared fixture. The source metadata image stays excluded because it has
+  baked sample names and provider UI.
+- Commit 1ef04587 corrected four Uzbek Latin opener strings to source text.
+  Browser checks at 390x844 cover source/package opening, gallery and gift
+  interactions, spring/lightbox normal motion, and reduced-motion adaptation.
+  Source continues animating under reduced motion; the app intentionally removes
+  opener/reveal/lightbox movement. Four locales are supported. RSVP and wishes
+  verification alone is not a publication blocker per the current user decision.
+- Migration 0132 is applied; recorded DB evidence confirms wedding-only,
+  unpublished. The public catalog excluded Orchid. No Orchid invitation exists,
+  so saved-draft reopen and public invitation lifecycle checks remain open.
+  Keep unpublished until the remaining non-RSVP integration gates pass.
 
 ## Invitate Velvet source preflight (2026-10-23)
 
