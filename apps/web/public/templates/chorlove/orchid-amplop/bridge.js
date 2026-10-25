@@ -5,6 +5,12 @@
   const BASE = "/templates/chorlove/orchid-amplop/assets/";
   const $ = (selector, scope = document) => scope.querySelector(selector);
   const $$ = (selector, scope = document) => [...scope.querySelectorAll(selector)];
+  const templateScroller = $(".orchid-template");
+  const scrollTemplateToTop = (event) => {
+    event?.currentTarget?.blur();
+    if (document.documentElement.classList.contains("orchid-reduced-motion")) templateScroller.scrollTop = 0;
+    else templateScroller.scrollTo({ top: 0, behavior: "smooth" });
+  };
   const copy = {
     "uz-Latn": { guestGreeting: "Assalomu alaykum, aziz mehmon", inviteIntro: "Sizni to'yimizga taklif qilamiz", openInvitation: "Taklifnomani ochish", prayer: "Ey mehribon Alloh", blessing: "Marhamating bilan bizni muqaddas nikoh rishtalarida birlashtirding", weddingOf: "NIKOH TO'YI", coupleTitle: "Baxtli juftlik bilan tanishing", coupleText: "Juft qilib yaratgan Allohga hamd bo‘lsin. Allohim, bizni birga baxtli qilsin.", ourStory: "Bizning hikoyamiz", gettingMarried: "Nikoh to‘yimiz", blessingArabic: "Assalomu alaykum va rahmatullohi va barokatuh", days: "Kun", hours: "Soat", minutes: "Daqiqa", seconds: "Soniya", addCalendar: "Kalendarimga qo‘shish", weddingParty: "To‘y bazmi", openMap: "Xaritada ko‘rish", mapUnavailable: "Manzil xaritasi mavjud emas", mapBlessing: "To‘yimizga tashrif buyurib, kelin-kuyovga duo qilsangiz, biz uchun katta sharaf bo‘ladi.", gallery: "Galereya", verse: "Uning oyatlaridan biri — sizlar taskin topishingiz uchun o‘zlaringizdan juftlar yaratganidir.", giveGift: "Sovg‘a berish", sendGift: "Sovg‘a yuborish", digitalWallet: "Bank kartasi", wishesTitle: "Tilak bildiring", name: "Ismingiz", message: "Tilagingiz", send: "Yuborish", rsvpTitle: "Kelasizmi?", rsvpIntro: "Iltimos, javobingizni bildiring.", answer: "Javobingiz", choose: "Tanlang", attending: "Kelaman", declining: "Kela olmayman", withLove: "Mehr bilan", madeWithLove: "Muhabbat bilan yaratilgan", backTop: "Yuqoriga", previewOnly: "Ko‘rish rejimida yuborib bo‘lmaydi.", sent: "Javobingiz yuborildi. Rahmat!", failed: "Yuborilmadi. Qayta urinib ko‘ring.", musicOn: "Musiqani yoqish", musicOff: "Musiqani o‘chirish", close: "Yopish", copied: "Nusxalandi" },
     "uz-Cyrl": { guestGreeting: "Ассалому алайкум, азиз меҳмон", inviteIntro: "Сизни тўйимизга таклиф қиламиз", openInvitation: "Таклифномани очиш", prayer: "Ё Аллоҳ, меҳрибон Зот", blessing: "Сизнинг марҳаматингиз билан бизни муқаддас никоҳ ришталари бирлаштирди", weddingOf: "НИКОҲ ТЎЙИ", coupleTitle: "Бахтли жуфтлик билан танишинг", coupleText: "Жуфт қилиб яратган Аллоҳга ҳамд бўлсин. Аллоҳим, бизни бирга бахтли қилсин.", ourStory: "Бизнинг ҳикоямиз", gettingMarried: "Никоҳ тўйимиз", blessingArabic: "Ассалому алайкум ва раҳматуллоҳи ва барокатуҳ", days: "Кун", hours: "Соат", minutes: "Дақиқа", seconds: "Сония", addCalendar: "Тақвимга қўшиш", weddingParty: "Тўй базми", openMap: "Харитада кўриш", mapUnavailable: "Манзил харитаси мавжуд эмас", mapBlessing: "Тўйимизга ташриф буюриб, келин-куёвга дуо қилсангиз, биз учун катта шараф бўлади.", gallery: "Галерея", verse: "Унинг оятларидан бири — сизлар таскин топишингиз учун ўзларингиздан жуфтлар яратганидир.", giveGift: "Совға бериш", sendGift: "Совға юбориш", digitalWallet: "Банк картаси", wishesTitle: "Тилак билдиринг", name: "Исмингиз", message: "Тилагингиз", send: "Юбориш", rsvpTitle: "Келасизми?", rsvpIntro: "Илтимос, жавобингизни билдиринг.", answer: "Жавобингиз", choose: "Танланг", attending: "Келаман", declining: "Кела олмайман", withLove: "Меҳр билан", madeWithLove: "Муҳаббат билан яратилган", backTop: "Юқорига", previewOnly: "Кўриш режимида юбориб бўлмайди.", sent: "Жавобингиз юборилди. Раҳмат!", failed: "Юборилмади. Қайта уриниб кўринг.", musicOn: "Мусиқани ёқиш", musicOff: "Мусиқани ўчириш", close: "Ёпиш", copied: "Нусхаланди" },
@@ -181,6 +187,27 @@
       });
     }
   }
+  function renderPersonSocials(data) {
+    const socialLinks = (data.contacts || []).filter((contact) => ["instagram", "telegram"].includes(contact?.type) && safeUrl(contact?.href));
+    const icons = {
+      instagram: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="5" stroke="currentColor" stroke-width="1.8"></rect><circle cx="12" cy="12" r="3.7" stroke="currentColor" stroke-width="1.8"></circle><circle cx="17" cy="7" r="1.2" fill="currentColor"></circle></svg>',
+      telegram: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20.6 4.6 3.9 11.1c-1.1.4-1.1 1.1-.2 1.4l4.2 1.3 1.6 5c.2.7.5.9 1 .9.5 0 .8-.2 1.2-.6l2.3-2.2 4.8 3.5c.9.5 1.5.3 1.7-.8l3-14.1c.3-1.2-.4-1.7-1.5-1.3Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"></path><path d="m8 13.8 10-6.2-7.7 8.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"></path></svg>',
+    };
+    for (const [person, name] of [["groom", data.groom], ["bride", data.bride]]) {
+      const host = $(`[data-orchid-socials="${person}"]`);
+      host.replaceChildren();
+      socialLinks.forEach((contact) => {
+        const link = document.createElement("a");
+        link.href = safeUrl(contact.href);
+        link.target = "_blank";
+        link.rel = "noreferrer";
+        link.setAttribute("aria-label", `${name || text(person)} ${contact.type === "instagram" ? "Instagram" : "Telegram"}`);
+        link.innerHTML = icons[contact.type];
+        host.append(link);
+      });
+      host.hidden = !(name && socialLinks.length > 0);
+    }
+  }
   function renderStory(data, preview) {
     const chapters = (data.story || []).filter((item) => item.title || item.text);
     const section = show('[data-section="story"]', chapters.length > 0);
@@ -246,6 +273,7 @@
         if (images[i]) $(".person-photo-frame img", card).src = images[i];
       });
     }
+    renderPersonSocials(data);
     setImages(data, envelope.preview); renderCountdown(data); renderProgram(data); renderGallery(data); renderStory(data, envelope.preview); renderWishes(data);
     if (!envelope.preview && data.wishesEnabled && envelope.invitationId && wishesFor !== envelope.invitationId) {
       wishesFor = envelope.invitationId;
@@ -269,12 +297,16 @@
     show("[data-orchid-gift-note]", !!giftNote);
     show('[data-section="rsvp"]', !!data.rsvp?.enabled);
     put("[data-orchid-calendar]", text("addCalendar"));
-    const rsvpName = $("[name=name]", $("[data-orchid-rsvp]")); if (rsvpName && envelope.guestName) { rsvpName.value = envelope.guestName; rsvpName.readOnly = true; }
+    const rsvpForm = $("[data-orchid-rsvp]");
+    const rsvpName = $("[name=name]", rsvpForm);
+    if (rsvpName) { rsvpName.placeholder = `${text("name")}*`; rsvpName.setAttribute("aria-label", text("name")); }
+    $(".rsvp-options", rsvpForm).setAttribute("aria-label", text("answer"));
+    if (rsvpName && envelope.guestName) { rsvpName.value = envelope.guestName; rsvpName.readOnly = true; }
     if (envelope.reducedMotion || matchMedia("(prefers-reduced-motion: reduce)").matches) document.documentElement.classList.add("orchid-reduced-motion"); else document.documentElement.classList.remove("orchid-reduced-motion");
     document.documentElement.classList.add("orchid-ready");
     const audio = $("[data-orchid-audio]"); audio.src = safeUrl(data.music?.url) || ""; show("[data-orchid-music]", !!audio.src);
     const sampleOnly = !!envelope.preview;
-    $$('[data-orchid-rsvp] input,[data-orchid-rsvp] select,[data-orchid-rsvp] button[type="submit"],[data-orchid-wishes-form] input,[data-orchid-wishes-form] textarea,[data-orchid-wishes-form] button[type="submit"]').forEach((el) => { el.disabled = sampleOnly; });
+    $$('[data-orchid-rsvp] input,[data-orchid-rsvp] select,[data-orchid-rsvp] button[type="submit"],[data-orchid-rsvp-choice],[data-orchid-wishes-form] input,[data-orchid-wishes-form] textarea,[data-orchid-wishes-form] button[type="submit"]').forEach((el) => { el.disabled = sampleOnly; });
     show("[data-orchid-main]", opened);
   }
   const revealer = new IntersectionObserver((entries) => entries.forEach((entry) => { entry.target.classList.toggle("orchid-visible", entry.isIntersecting); }), { threshold: 0.34, rootMargin: "0px 0px -10% 0px" });
@@ -283,7 +315,7 @@
     const gate = $("[data-orchid-gate]"); document.documentElement.classList.remove("orchid-ready"); gate.classList.add("orchid-gate-opening");
     if (current?.data?.music?.url && !current?.silentPlayback) { const audio = $("[data-orchid-audio]"); try { await audio.play(); } catch { /* Music remains opt-in after a rejected play request. */ } }
     // The source AnimatePresence waits for its longest child exit: envelope 0.9s + 0.22s delay.
-    window.setTimeout(() => { opened = true; gate.hidden = true; show("[data-orchid-main]", true); window.scrollTo({ top: 0, behavior: document.documentElement.classList.contains("orchid-reduced-motion") ? "instant" : "smooth" }); }, document.documentElement.classList.contains("orchid-reduced-motion") ? 0 : 1120);
+    window.setTimeout(() => { opened = true; gate.hidden = true; show("[data-orchid-main]", true); scrollTemplateToTop(); }, document.documentElement.classList.contains("orchid-reduced-motion") ? 0 : 1120);
   });
   $("[data-orchid-music]").addEventListener("click", async (event) => { const audio = $("[data-orchid-audio]"); if (audio.paused) { try { await audio.play(); audioStarted = true; } catch {} } else audio.pause(); const button = event.currentTarget; button.setAttribute("aria-pressed", String(!audio.paused)); button.setAttribute("aria-label", text(audio.paused ? "musicOn" : "musicOff")); });
   $("[data-orchid-calendar]").addEventListener("click", () => {
@@ -294,7 +326,7 @@
     window.open(`https://calendar.google.com/calendar/render?${params}`, "_blank", "noopener,noreferrer");
   });
   $("[data-orchid-calendar]").textContent = text("addCalendar");
-  $("[data-orchid-top]").addEventListener("click", () => window.scrollTo({ top: 0, behavior: document.documentElement.classList.contains("orchid-reduced-motion") ? "instant" : "smooth" }));
+  $("[data-orchid-top]").addEventListener("click", scrollTemplateToTop);
   $("[data-orchid-gift-toggle]").addEventListener("click", () => {
     const trigger = $("[data-orchid-gift-toggle]");
     const panel = $("[data-orchid-gift]");
@@ -322,10 +354,17 @@
   $("[data-orchid-lightbox-close]").addEventListener("click", closeLightbox);
   $("[data-orchid-lightbox]").addEventListener("click", (event) => { if (event.target === event.currentTarget) closeLightbox(); });
   document.addEventListener("keydown", (event) => { if (event.key === "Escape") closeLightbox(); });
+  $$("[data-orchid-rsvp-choice]").forEach((choice) => choice.addEventListener("click", () => {
+    const form = choice.closest("[data-orchid-rsvp]");
+    $("[data-orchid-rsvp-status]", form).value = choice.dataset.orchidRsvpChoice;
+    $$("[data-orchid-rsvp-choice]", form).forEach((option) => option.setAttribute("aria-checked", String(option === choice)));
+  }));
   $("[data-orchid-rsvp]").addEventListener("submit", async (event) => {
     event.preventDefault(); const form = event.currentTarget; const feedback = $("[data-orchid-rsvp-feedback]");
     if (current?.preview) { feedback.textContent = text("previewOnly"); return; }
-    const body = new FormData(form); const submit = $("[type=submit]", form); submit.disabled = true;
+    const body = new FormData(form); const status = body.get("status");
+    if (!status) { feedback.textContent = text("choose"); $("[data-orchid-rsvp-choice]", form).focus(); return; }
+    const submit = $("[type=submit]", form); submit.disabled = true;
     try { const response = await fetch(`/api/public/invitations/${encodeURIComponent(current.invitationId)}/rsvp`, { method: "POST", credentials: "same-origin", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ name: body.get("name"), status: body.get("status"), partySize: body.get("status") === "yes" ? 1 : 0, ...(current.guestToken ? { guestToken: current.guestToken } : {}) }) }); if (!response.ok) throw new Error(); feedback.textContent = text("sent"); }
     catch { feedback.textContent = text("failed"); } finally { submit.disabled = false; }
   });

@@ -1,7 +1,14 @@
 [hidden]{display:none!important}
 html,body{margin:0;min-height:100%;padding:0}
 *,*::before,*::after{box-sizing:border-box}
-.orchid-template{position:relative;margin:0 auto;max-width:100%;isolation:isolate}
+button,input,select,textarea{margin:0;font:inherit;letter-spacing:inherit;color:inherit}
+button,select{text-transform:none}
+button{background:transparent;background-image:none}
+h1,h2,h3,h4,h5,h6{margin:0;font-size:inherit;font-weight:inherit}
+p{margin:0}
+a{color:inherit;text-decoration:inherit}
+.orchid-template{position:relative;margin:0 auto;width:100vw;height:100vh;min-height:0;max-width:100vw;overflow-x:hidden;overflow-y:auto;scrollbar-width:none;isolation:isolate}
+.orchid-template::-webkit-scrollbar{display:none}
 .orchid-main{overflow:hidden}
 .orchid-reveal{opacity:0;transform:translateY(28px);filter:blur(6px);transition:opacity .95s cubic-bezier(.16,1,.3,1),transform .95s cubic-bezier(.16,1,.3,1),filter .95s cubic-bezier(.16,1,.3,1);transition-delay:var(--orchid-reveal-delay,0s)}
 .orchid-reveal.orchid-visible{opacity:1;transform:none;filter:none}
@@ -13,8 +20,8 @@ html,body{margin:0;min-height:100%;padding:0}
 .gate-open span{margin-top:3px}
 .gate-open:hover{transform:scale(1.035)}
 .orchid-hero{position:relative;overflow:hidden}
-.hero-content{position:relative;z-index:2;text-align:center;color:white}
-.hero-down{display:block;width:36px;height:36px;margin-inline:auto;color:inherit;text-decoration:none;font-size:36px;line-height:1}
+.hero-content{position:relative;z-index:1;text-align:center;color:#fff}
+.hero-down{display:block;width:36px;height:36px;margin-inline:auto;color:#fff;text-decoration:none;font-size:36px;line-height:1}
 .person-profile[hidden],.person-photo[hidden]{display:none!important}
 .person-profile{min-width:0}
 .person-photo img{object-fit:cover;width:100%;height:100%;border-radius:50%}
@@ -22,26 +29,46 @@ html,body{margin:0;min-height:100%;padding:0}
 .map-card{position:relative;overflow:hidden}
 .map-frame{width:100%;height:100%;border:0}
 .map-empty{display:grid;place-items:center;min-height:180px;padding:24px;text-align:center;color:#7c6b75}
-.event-card-content{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;text-align:center;color:white}
+.event-card-content{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:22px 25px;text-align:center;color:#fff}
 .event-card-content a{color:inherit}
-.story-grid{display:grid;gap:18px}
+.story-grid{display:grid;gap:16px}
 .story-text-card h3{margin:0 0 12px;font:inherit;font-size:1.15em}
-.gallery-cell button{width:100%;height:100%;padding:0;border:0;background:transparent}
+.gallery-cell button{cursor:zoom-in;width:100%;height:100%;padding:0;border:0;background:0 0;display:block}
 .gallery-cell img{width:100%;height:100%;object-fit:cover}
-.gallery-preview{position:fixed;z-index:200;inset:0;display:grid;place-items:center;padding:24px;background:#170f18e8}
+.gallery-preview{z-index:3000;-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);background:#000000e0;justify-content:center;align-items:center;padding:16px;display:flex;position:fixed;inset:0}
 .gallery-preview[hidden]{display:none!important}
-.gallery-preview img{max-width:min(100%,900px);max-height:90dvh;object-fit:contain}
-.gallery-preview-close{position:absolute;top:18px;right:18px;width:44px;height:44px;border:0;border-radius:50%;background:white;color:#4c3446;font-size:28px}
+.gallery-preview img{object-fit:contain;border-radius:18px;max-width:min(94vw,1100px);max-height:88dvh;box-shadow:0 26px 80px #0000006b}
+.gallery-preview-close{z-index:1;color:#fff;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);background:#ffffff24;border:0;border-radius:999px;justify-content:center;align-items:center;width:46px;height:46px;display:inline-flex;position:absolute;top:16px;right:16px}
 .gift-cards[hidden]{display:none!important}
 .wish-fields label{display:grid;gap:8px}
-.wish-fields input,.wish-fields textarea,.wish-fields select{box-sizing:border-box;width:100%;font:inherit;color:inherit;background:#ffffffb8;border:1px solid #a69689;border-radius:10px;padding:12px}
+.wish-fields input,.wish-fields textarea,.wish-fields select{box-sizing:border-box;width:100%;font-family:var(--font-comfortaa);color:#5f5f5f;background:#f8f7f7;border:1px solid #e6e6e6;border-radius:10px;outline:none;font-size:13px}
+.wish-fields select{height:40px;padding:0 14px}
 .wish-list-head{display:flex;justify-content:space-between;align-items:center}
 .wish-item{padding:12px 0;border-bottom:1px solid #e5d9e1}
 .wish-name{font-weight:700}
 .wish-message{white-space:pre-wrap;overflow-wrap:anywhere}
-.rsvp-section,.wish-form{text-align:center}
-.rsvp-section .wish-form,.wishes-section .wish-form{max-width:640px;margin:28px auto}
-.rsvp-section [role=status],.wish-form [role=status]{min-height:1.5em}
+.wishes-section{display:grid}
+.rsvp-section{text-align:center}
+.wishes-section .wish-form{max-width:640px}
+.rsvp-container{width:100%;max-width:600px;margin:0 auto}
+.rsvp-heading h2{font-size:25px;line-height:1.2}
+.rsvp-heading p{color:gray;max-width:448px;margin:8px auto 0;font-size:13px;font-style:italic;line-height:1.5}
+.rsvp-card{background:#fff;border:1px solid rgba(231,103,103,.15);border-radius:16px;margin-top:24px;padding:20px}
+.rsvp-form{text-align:left}
+.rsvp-form input[name=name]{color:#5f5f5f;background:#f8f7f7;border:1px solid #e6e6e6;border-radius:8px;outline:none;width:100%;padding:12px 16px;font-size:14px;line-height:20px;transition:border-color .18s}
+.rsvp-form input[name=name]::placeholder{color:currentColor;opacity:.6}
+.rsvp-form input[name=name]:focus{border-color:#b70b9d}
+.rsvp-options{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:16px;display:grid}
+.rsvp-choice{color:#b70b9d;min-height:46px;background:transparent;border:1px solid #e6e6e6;border-radius:999px;padding:8px 12px;font-size:14px;font-weight:600;line-height:20px;transition:color .18s,background-color .18s,border-color .18s}
+.rsvp-choice:hover{background:#b70b9d0d}
+.rsvp-choice[aria-checked=true]{color:#fff;background:#b70b9d;border-color:#b70b9d}
+.rsvp-choice:focus-visible,.rsvp-submit:focus-visible{outline:2px solid #b70b9d;outline-offset:2px}
+.rsvp-submit-row{justify-content:center;margin-top:20px;display:flex}
+.rsvp-submit{color:#fff;background:#b70b9d;border:0;border-radius:999px;padding:8px 32px;font-size:14px;font-weight:600;line-height:20px;transition:transform .18s;box-shadow:0 1px 2px #0000001a}
+.rsvp-submit:hover{transform:scale(1.05)}
+.rsvp-submit:disabled{cursor:not-allowed;opacity:.6}
+.rsvp-form [role=status]{text-align:center}
+.wish-form [role=status]{min-height:1.5em}
 .footer-date,.footer-hosts{margin:.6em auto}
 html.orchid-reduced-motion *,html.orchid-reduced-motion *::before,html.orchid-reduced-motion *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
 html.orchid-reduced-motion .orchid-reveal{opacity:1;transform:none;filter:none}
@@ -84,3 +111,4 @@ html.orchid-reduced-motion.orchid-ready .gate-circle-content>*{opacity:1}
 .orchid-reduced-motion .orchid-reveal,.orchid-reduced-motion .orchid-gate-opening,.orchid-reduced-motion .gate-forest,.orchid-reduced-motion .gate-shell,.orchid-reduced-motion .gate-envelope,.orchid-reduced-motion .gate-open-row,.orchid-reduced-motion .gate-circle-pulse,.orchid-reduced-motion .gate-circle-content>*,.orchid-reduced-motion .gate-arrow,.orchid-reduced-motion .gate-open,.orchid-reduced-motion .orchid-button,.orchid-reduced-motion .gallery-cell img,.orchid-reduced-motion .orchid-main:not([hidden]){transition:none!important;animation:none!important}
 .orchid-reduced-motion .gate-circle-content>*{opacity:1!important;transform:none!important;filter:none!important}
 .orchid-reduced-motion .gate-open:hover,.orchid-reduced-motion .gate-open:active,.orchid-reduced-motion .orchid-button:hover,.orchid-reduced-motion .orchid-button:active,.orchid-reduced-motion .gallery-cell:hover img{transform:none!important}
+@media(min-width:768px){.rsvp-card{padding:24px}.rsvp-heading p{font-size:15px}}
