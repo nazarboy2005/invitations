@@ -128,6 +128,9 @@ test("Palace Rose packages its captured styles and source motion timings locally
   const design = read(`${base}/source/design.html`);
   const bridge = read(`${base}/bridge.js`);
   const adapterCss = read(`${base}/adapter.css`);
+  assert.match(adapterCss, /html,body\{height:100%\}/);
+  assert.match(adapterCss, /#palace-rose-root\{[^}]*height:100%;max-width:none[^}]*overflow-y:auto/);
+  assert.match(adapterCss, /\[data-pr-gift-dialog-panel\] \.pr-gift-receipt-host:empty\{display:none\}/);
   const stylesheets = [
     "0.u3j0~_2ygfx.css",
     "00sc_9lpb3zcn.css",
@@ -175,7 +178,11 @@ test("Palace Rose packages its captured styles and source motion timings locally
   assert.match(bridge, /const items = source/);
   assert.match(bridge, /paint\(\); hide\(section, !items\.length\)/);
   assert.equal((design.match(/transform:scale\(0\)/g) || []).length, 5);
-  assert.match(bridge, /style\*="scale\(0\)"/);
+  assert.match(bridge, /style\*="opacity: 0;"/);
+  assert.match(bridge, /style\*="opacity:0;"/);
+  assert.match(bridge, /style\*="scale\(0\);"/);
+  assert.match(bridge, /\[\.6,\.1\],\[\.7,\.18\],\[\.5,\.26\],\[\.7,\.32\]/);
+  assert.match(bridge, /\[\.7,\.18\],\[\.7,\.28\],\[\.6,\.36\],\[\.7,\.44\]/);
   assert.match(bridge, /pr-scale-reveal/);
   assert.match(adapterCss, /pr-scale-reveal:not\(\.pr-visible\)\{opacity:1!important\}/);
   assert.match(bridge, /else if\(!once\)node\.classList\.remove\("pr-visible"\)/);

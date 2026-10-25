@@ -414,7 +414,8 @@
   }
   function installRevealMotion(){
     revealObserver?.disconnect();
-    const nodes=all('[style*="opacity:0"], [style*="opacity: 0"], [style*="scale(0)"]');
+    const revealSelector='[style*="opacity: 0;"], [style*="opacity:0;"], [style$="opacity: 0"], [style$="opacity:0"], [style*="scale(0);"], [style$="scale(0)"]';
+    const nodes=all(revealSelector);
     const reduce=Boolean(payload?.reducedMotion||matchMedia("(prefers-reduced-motion: reduce)").matches);
     if(reduce){nodes.forEach((node)=>{node.classList.add("pr-visible");node.style.opacity="1";node.style.transform="none";});return;}
     const thresholds=[.2,.25,.3,.5];
@@ -429,12 +430,33 @@
       const inlineStyle=node.getAttribute("style")||"",scaleOnly=/scale\(0\)/.test(inlineStyle)&&!/opacity:\s*0/.test(inlineStyle);
       if(scaleOnly)node.classList.add("pr-scale-reveal");
       const sectionIndex=sections.indexOf(node.closest("section"));
+      const sectionNodes=sectionIndex>=0?all(revealSelector,sections[sectionIndex]):[];
+      const nodeIndex=sectionNodes.indexOf(node);
       let threshold=.25,duration=.6,delay=0;
       if(sectionIndex===2){threshold=.2;duration=.5;}
-      if(sectionIndex===3){threshold=.3;duration=.5;const siblings=all(".rounded-xl",sections[3]);const i=siblings.indexOf(node);if(i>=0)delay=.1*i;}
-      if(sectionIndex===5){threshold=.5;const row=node.closest("li.contents"),rowIndex=row?all(":scope > li",sections[5].querySelector("ol")).indexOf(row):0;duration=.5;delay=.07*Math.max(0,rowIndex);}
+      if(sectionIndex===1){
+        const revealTiming=[[.6,0],[.6,.1],[.7,.18],[.5,.26],[.7,.32],[.6,.42],[.5,.5],[.7,.58],[.5,.66],[.6,.74]][nodeIndex];
+        if(revealTiming)[duration,delay]=revealTiming;
+      }
+      if(sectionIndex===3){
+        const timings=[[.6,0],[.6,.1],[.7,.18],[.7,.28],[.6,.36],[.7,.44]];
+        if(nodeIndex<timings.length)[duration,delay]=timings[nodeIndex];
+        else{threshold=.3;duration=.5;delay=.1*(nodeIndex-timings.length);}
+      }
+      if(sectionIndex===4){
+        threshold=.2;
+        const timings=[[.6,0],[.6,.08],[.6,.14],[.7,.2],[.7,.26],[.6,.32]];
+        if(timings[nodeIndex])[duration,delay]=timings[nodeIndex];
+      }
+      if(sectionIndex===5){
+        const row=node.closest("li.contents"),rowIndex=row?all(":scope > li",sections[5].querySelector("ol")).indexOf(row):-1;
+        if(rowIndex>=0){threshold=.5;duration=scaleOnly?.4:.5;delay=.07*rowIndex;}
+      }
       if(sectionIndex===6||sectionIndex===7){threshold=.2;duration=.6;}
-      if(sectionIndex===8){duration=.7;delay=.12;}
+      if(sectionIndex===6&&node.classList.contains("rounded-md")){
+        const cards=all(".rounded-md",sections[6]);duration=.4;delay=.04*Math.max(0,cards.indexOf(node));
+      }
+      if(sectionIndex===8){duration=node.matches("h2")?.6:.7;delay=node.matches("h2")?0:.12;}
       if(sectionIndex===9){
         const contactCard=node.matches("section > div");
         threshold=contactCard ? .5 : .2;duration=contactCard ? .8 : .6;

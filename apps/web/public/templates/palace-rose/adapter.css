@@ -3,8 +3,9 @@
 @font-face{font-family:"Fz Qellia";src:url("/templates/palace-rose/assets/Qellia-s.p.0l1a3-80k4-g1.otf") format("opentype");font-display:swap}
 @font-face{font-family:"The Nautigal";src:url("/templates/palace-rose/assets/TheNautigal_Regular-s.p.0vn.0-.5o~f4t.ttf") format("truetype");font-display:swap}
 @font-face{font-family:"Great Vibes";src:url("/templates/palace-rose/assets/GreatVibes_Regular-s.p.0au6u0v_syb0z.ttf") format("truetype");font-display:swap}
-body{margin:0;background:#f7e3cd;color:#640e1b;font-family:"Palace Marcellus","Times New Roman",serif}
-#palace-rose-root{position:relative;width:100%;max-width:900px;margin:0 auto;background:#f7e3cd;overflow-x:hidden;overflow-y:auto;scroll-behavior:smooth}
+html,body{height:100%}
+body{margin:0;background:#fff;color:#640e1b;font-family:"Palace Marcellus","Times New Roman",serif}
+#palace-rose-root{position:relative;width:100%;height:100%;max-width:none;margin:0 auto;background:transparent;overflow-x:hidden;overflow-y:auto;scroll-behavior:smooth}
 #palace-rose-root[hidden],[hidden]{display:none!important}
 #palace-rose-root section{scroll-margin-top:1rem}
 .pr-reveal{transition:opacity var(--pr-reveal-duration,.6s) ease,transform var(--pr-reveal-duration,.6s) cubic-bezier(.22,1,.36,1);transition-delay:var(--pr-reveal-delay,0s)}
@@ -58,3 +59,4 @@ body{margin:0;background:#f7e3cd;color:#640e1b;font-family:"Palace Marcellus","T
 [data-pr-gift-dialog-panel] .pr-gift-receipt-host [data-platform-extra="receipt"]{max-width:none;margin:0;padding:1rem 0 0;border-top:1px solid rgba(100,14,27,.15);text-align:left}
 [data-pr-gift-dialog-panel] .pr-gift-receipt-host [data-platform-extra="receipt"] h2{margin:0 0 .75rem;font:600 15px/1.4 "Marcellus",serif;text-align:center}
 [data-pr-gift-dialog-panel] .pr-gift-receipt-host [data-platform-extra="receipt"] form{gap:.75rem}
+[data-pr-gift-dialog-panel] .pr-gift-receipt-host:empty{display:none}
