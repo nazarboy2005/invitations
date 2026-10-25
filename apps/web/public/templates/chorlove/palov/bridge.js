@@ -23,8 +23,7 @@
       time: "Vaqt", starts: "boshlanadi", address: "Manzil", map: "Xaritada ko‘rish",
       confirmation: "Tasdiqlash", willCome: "Kelasizmi?", rsvpLead: "Iltimos, javobingizni bildiring.",
       yourName: "Ismingiz", fullName: "Ism va familiyangiz", yourAnswer: "Javobingiz",
-      yes: "Kelaman", no: "Kela olmayman", partySize: "Necha kishi kelasiz?",
-      fewer: "Kamaytirish", more: "Ko‘paytirish", send: "Yuborish", sending: "Yuborilmoqda…",
+      yes: "Kelaman", no: "Kela olmayman", send: "Yuborish", sending: "Yuborilmoqda…",
       thankYou: "Rahmat", lookForward: "Sizni kutib qolamiz.", thankAnswer: "Javobingiz uchun rahmat.",
       change: "Javobni o‘zgartirish", ourTable: "Dasturxonimiz sizni kutmoqda",
       phone: "Telefon raqam", play: "Musiqani yoqish", pause: "Musiqani o‘chirish",
@@ -39,8 +38,7 @@
       time: "Вақт", starts: "бошланади", address: "Манзил", map: "Харитада кўриш",
       confirmation: "Тасдиқлаш", willCome: "Келасизми?", rsvpLead: "Илтимос, жавобингизни билдиринг.",
       yourName: "Исмингиз", fullName: "Исм ва фамилиянгиз", yourAnswer: "Жавобингиз",
-      yes: "Келаман", no: "Кела олмайман", partySize: "Неча киши келасиз?",
-      fewer: "Камайтириш", more: "Кўпайтириш", send: "Юбориш", sending: "Юборилмоқда…",
+      yes: "Келаман", no: "Кела олмайман", send: "Юбориш", sending: "Юборилмоқда…",
       thankYou: "Раҳмат", lookForward: "Сизни кутиб қоламиз.", thankAnswer: "Жавобингиз учун раҳмат.",
       change: "Жавобни ўзгартириш", ourTable: "Дастурхонимиз сизни кутмоқда",
       phone: "Телефон рақами", play: "Мусиқани ёқиш", pause: "Мусиқани ўчириш",
@@ -55,8 +53,7 @@
       time: "Time", starts: "starts", address: "Address", map: "View on map",
       confirmation: "Confirmation", willCome: "Will you come?", rsvpLead: "Please let us know your answer.",
       yourName: "Your name", fullName: "Your full name", yourAnswer: "Your answer",
-      yes: "I will come", no: "I can’t come", partySize: "How many people will come?",
-      fewer: "Fewer people", more: "More people", send: "Send", sending: "Sending…",
+      yes: "I will come", no: "I can’t come", send: "Send", sending: "Sending…",
       thankYou: "Thank you", lookForward: "We look forward to seeing you.", thankAnswer: "Thank you for your answer.",
       change: "Change answer", ourTable: "Our table awaits you",
       phone: "Phone number", play: "Play music", pause: "Pause music",
@@ -71,8 +68,7 @@
       time: "Время", starts: "начало", address: "Адрес", map: "Посмотреть на карте",
       confirmation: "Подтверждение", willCome: "Вы придёте?", rsvpLead: "Пожалуйста, сообщите ваш ответ.",
       yourName: "Ваше имя", fullName: "Имя и фамилия", yourAnswer: "Ваш ответ",
-      yes: "Приду", no: "Не смогу прийти", partySize: "Сколько человек придёт?",
-      fewer: "Меньше", more: "Больше", send: "Отправить", sending: "Отправка…",
+      yes: "Приду", no: "Не смогу прийти", send: "Отправить", sending: "Отправка…",
       thankYou: "Спасибо", lookForward: "Будем ждать вас.", thankAnswer: "Спасибо за ваш ответ.",
       change: "Изменить ответ", ourTable: "Наш стол ждёт вас",
       phone: "Телефон", play: "Включить музыку", pause: "Выключить музыку",
@@ -83,13 +79,11 @@
 
   let state = null;
   let answer = "";
-  let partySize = 1;
   let countdownTimer = 0;
   let sent = false;
   let sending = false;
   let revealObserver = null;
   let statusNode;
-  let countNode;
   let thanksNode;
 
   const text = (key) => (translations[state?.locale] ?? translations["uz-Latn"])[key] ?? key;
@@ -109,20 +103,6 @@
     statusNode.setAttribute("aria-live", "polite");
     statusNode.hidden = true;
     form.append(statusNode);
-
-    countNode = document.createElement("div");
-    countNode.className = "palov-count";
-    countNode.hidden = true;
-    countNode.innerHTML = '<span id="palov-count-label"></span><div class="palov-stepper" role="group" aria-labelledby="palov-count-label"><button type="button" aria-label="" data-step="down">−</button><output aria-live="polite">1</output><button type="button" aria-label="" data-step="up">+</button></div>';
-    const fieldset = one("fieldset", form);
-    fieldset?.after(countNode);
-    countNode.addEventListener("click", (event) => {
-      const button = event.target.closest("button[data-step]");
-      if (!button) return;
-      const max = Math.max(1, Number(state?.data?.rsvp?.maxPartySize) || 10);
-      partySize = Math.max(1, Math.min(max, partySize + (button.dataset.step === "up" ? 1 : -1)));
-      updateCount();
-    });
 
     const thanks = document.createElement("div");
     thanks.className = "palov-thanks";
@@ -148,25 +128,12 @@
     });
   }
 
-  function updateCount() {
-    if (!countNode) return;
-    const output = one("output", countNode);
-    const buttons = all("button", countNode);
-    if (output) output.textContent = String(partySize);
-    if (buttons[0]) buttons[0].disabled = partySize <= 1;
-    if (buttons[1]) buttons[1].disabled = partySize >= Math.max(1, Number(state?.data?.rsvp?.maxPartySize) || 10);
-    setText("#palov-count-label", text("partySize"), countNode);
-    buttons[0]?.setAttribute("aria-label", text("fewer"));
-    buttons[1]?.setAttribute("aria-label", text("more"));
-  }
-
   function syncRsvpState() {
     const form = one(".palov-form");
     const send = one(".palov-send-btn", form);
     const input = one("#palov-guest-name", form);
     hide(form, sent);
     hide(thanksNode, !sent);
-    hide(countNode, answer !== "yes" || sent);
     if (send) {
       send.disabled = sending;
       send.textContent = sending ? text("sending") : text("send");
@@ -177,7 +144,6 @@
       setText("p", answer === "yes" ? text("lookForward") : text("thankAnswer"), thanksNode);
       setText(".palov-again", text("change"), thanksNode);
     }
-    updateCount();
   }
 
   async function submitRsvp() {
@@ -204,7 +170,7 @@
         body: JSON.stringify({
           name,
           status: answer,
-          partySize: answer === "yes" ? partySize : 0,
+          partySize: answer === "yes" ? 1 : 0,
           guestToken: state.guestToken || undefined,
         }),
       });

@@ -60,6 +60,12 @@ before(async () => {
 
   invitation = createInvitation("palov");
   invitation.eventType = "osh";
+  invitation.startsAt = "2027-12-20T10:00";
+  invitation.content["uz-Latn"].people = ["Palov integration test"];
+  invitation.content["uz-Latn"].eventLabel = "Nahorgi osh";
+  invitation.content["uz-Latn"].message = "Test taklifnoma";
+  invitation.content["uz-Latn"].venueName = "Test venue";
+  invitation.content["uz-Latn"].address = "Test address";
   invitation.contacts.instagramUrl = "@palov.integration.test";
   await sql`
     INSERT INTO invitations(id,owner_id,template_id,status,data)
@@ -91,7 +97,7 @@ after(async () => {
   await closeDb();
 });
 
-test("private Palov drafts save and reopen, while publication stays blocked", async () => {
+test("published Palov drafts save, publish, and render publicly", async () => {
   assert.ok(invitation);
   const opened = await request(`/api/invitations/${invitation.id}`);
   assert.equal(opened.status, 200);
@@ -128,25 +134,10 @@ test("private Palov drafts save and reopen, while publication stays blocked", as
     `/api/invitations/${invitation.id}/publish`,
     { revision: 2 },
   );
-  assert.equal(publish.status, 409);
-  assert.equal((await publish.json()).error.code, "TEMPLATE_UNAVAILABLE");
-
-  // The catalog entry stays private. Publish only this generated row directly
-  // so the localhost smoke can exercise the public renderer and API dispatch.
-  do {
-    publicSlug = randomUUID().replaceAll("-", "").slice(0, 6);
-  } while ((await sql`SELECT id FROM invitations WHERE slug=${publicSlug}`).length);
-  const publicInvitation: Invitation = {
-    ...reopenedBody.invitation,
-    status: "published",
-    slug: publicSlug,
-    revision: 3,
-  };
-  await sql`
-    UPDATE invitations SET status='published',slug=${publicSlug},data=${sql.json(publicInvitation)},
-      first_published_at=now(),identity_locked_at=now(),edit_deadline_at=now()+interval '1 day'
-    WHERE id=${invitation.id} AND owner_id=${owner.id}
-  `;
+  assert.equal(publish.status, 200, await publish.clone().text());
+  const published = await publish.json();
+  publicSlug = published.invitation.slug;
+  assert.ok(publicSlug);
   const publicPage = await fetch(`${origin}/i/${publicSlug}`);
   assert.equal(publicPage.status, 200);
   assert.match(await publicPage.text(), /templates\/chorlove\/palov\/index\.html/);
@@ -155,7 +146,7 @@ test("private Palov drafts save and reopen, while publication stays blocked", as
   const rsvp = await request(`/api/public/invitations/${invitation.id}/rsvp`, {
     name: "Palov integration guest",
     status: "yes",
-    partySize: 2,
+    partySize: 1,
   });
   assert.equal(rsvp.status, 201);
   assert.equal((await rsvp.json()).ok, true);

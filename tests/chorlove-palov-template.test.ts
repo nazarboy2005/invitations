@@ -59,6 +59,8 @@ test("Chorlove Palov adapter maps approved locales, RSVP, and reduced motion", (
   assert.match(bridge, /root:\s*scroller/);
   assert.match(bridge, /visibleRatio\s*>=\s*0\.2/);
   assert.match(bridge, /\/api\/public\/invitations/);
+  assert.doesNotMatch(bridge, /palov-stepper|partySize:\s*"/);
+  assert.match(bridge, /partySize:\s*answer === "yes" \? 1 : 0/);
   assert.doesNotMatch(bridge, /payment\.chorlove\.uz|Chorlove\.API|stats\.tolipov/i);
   assert.match(bridge, /contacts\.find\(\(contact\) => contact\.type === "instagram"\)/);
   assert.match(bridge, /setContact\(socialLinks\[1\], instagram, "Instagram"\)/);
@@ -94,13 +96,13 @@ test("Chorlove route keeps Palov in its provider namespace", () => {
   assert.doesNotMatch(renderer, /\/templates\/invitate-palov/);
 });
 
-test("Chorlove Palov is registered privately for nahorgi osh", () => {
+test("Chorlove Palov is published for nahorgi osh", () => {
   const entry = TEMPLATES.find((item) => item.id === "palov");
   assert.ok(entry);
   assert.equal(entry.name, "Chorlove Palov");
   assert.deepEqual(entry.categoryIds, ["osh"]);
   assert.deepEqual(entry.supportedEventTypes, ["osh"]);
-  assert.equal(entry.published, false);
+  assert.equal(entry.published, true);
   assert.equal(entry.previewImage, "/templates/chorlove/palov/catalog-opening.png");
   assert.equal(createTemplatePreviewSample("palov").content["uz-Latn"].title, "Nahorgi osh");
 
@@ -110,4 +112,11 @@ test("Chorlove Palov is registered privately for nahorgi osh", () => {
   );
   assert.match(migration, /VALUES \('palov', 'osh'\)/);
   assert.match(migration, /VALUES \('palov', 'Chorlove Palov', 15000000, 'UZS', false\)/);
+
+  const publication = readFileSync(
+    path.join(root, "packages/database/migrations/0139_publish_chorlove_palov.sql"),
+    "utf8",
+  );
+  assert.match(publication, /SET published\s*=\s*true/);
+  assert.match(publication, /WHERE id\s*=\s*'palov'/);
 });

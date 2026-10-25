@@ -1418,7 +1418,7 @@ export const TEMPLATES: TemplateDefinition[] = [
     priceMinor: 15000000,
     currency: "UZS",
     accent: "#1e3557",
-    published: false,
+    published: true,
   },
   {
     id: "orchid-amplop",
