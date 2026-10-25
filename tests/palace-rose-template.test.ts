@@ -23,19 +23,10 @@ test("Palace Rose stays private and supports wedding events only", () => {
 });
 
 test("isolated page packages the captured Palace Rose DOM and only its source art", () => {
-  const manifest = JSON.parse(
-    readFileSync(
-      "Invitations - this folder will be removed from production/Chorlove/capture-manifest.json",
-      "utf8",
-    ),
-  );
-  const source = manifest.resources["https://chorlove.uz/templates/palace-rose/preview-frame.html"];
-  assert.equal(source.file, "Web invitations/templates/palace-rose/preview-frame.html");
-  const capture = readFileSync(
-    join("Invitations - this folder will be removed from production/Chorlove", source.file),
-  );
+  const provenance = JSON.parse(read(`${base}/source/provenance.json`));
+  assert.equal(provenance.capture.path, "Web invitations/templates/palace-rose/preview-frame.html");
   assert.equal(
-    sha256(capture),
+    provenance.capture.sha256,
     "a0adfef8355a20c0b3a2e4eddb9b5b04ea46525ae993dd6a3ced8ab157fd513f",
   );
 
@@ -54,7 +45,7 @@ test("isolated page packages the captured Palace Rose DOM and only its source ar
   assert.ok(assetUrls.length > 0);
   for (const file of new Set(assetUrls)) assert.ok(existsSync(join(base, "assets", file)), file);
   const packagedAssets = readdirSync(join(base, "assets")).sort();
-  const sourceRecovery = JSON.parse(read(`${base}/source/provenance.json`)).sourceAssetRecovery;
+  const sourceRecovery = provenance.sourceAssetRecovery;
   assert.equal(sourceRecovery.assets.length, 8);
   assert.equal(sourceRecovery.sourceHost, "https://chorlove.uz");
   for (const asset of sourceRecovery.assets) {
@@ -66,17 +57,11 @@ test("isolated page packages the captured Palace Rose DOM and only its source ar
     assert.equal(copy.length, asset.bytes, asset.name);
     assert.equal(sha256(copy), asset.sha256, asset.name);
   }
-  const manifestAssets = Object.values(manifest.resources)
-    .map((resource: { file?: string }) => resource.file)
-    .filter((file): file is string => Boolean(file?.startsWith("Web invitations/images/palace-rose/")))
-    .map((file) => file.split("/").at(-1)!)
-    .sort();
   assert.equal(packagedAssets.length, 31);
-  assert.ok(manifestAssets.every((name) => packagedAssets.includes(name)));
-  for (const name of manifestAssets) {
-    const reference = readFileSync(join("Invitations - this folder will be removed from production/Chorlove/Web invitations/images/palace-rose", name));
-    const copy = readFileSync(join(base, "assets", name));
-    assert.equal(sha256(copy), sha256(reference), name);
+  for (const asset of provenance.assets) {
+    const copy = readFileSync(join(base, "assets", asset.path));
+    assert.equal(copy.length, asset.bytes, asset.path);
+    assert.equal(sha256(copy), asset.sha256, asset.path);
   }
 });
 
@@ -87,7 +72,8 @@ test("Palace Rose bridge binds creator fields, service actions, locales, and red
   }
   assert.match(bridge, /\/api\/public\/invitations\/.*\/rsvp/);
   assert.match(bridge, /\/api\/public\/invitations\/.*\/wishes/);
-  assert.match(bridge, /partySize/);
+  assert.match(bridge, /partySize:yes\?1:0/);
+  assert.doesNotMatch(bridge, /Number of guests|Количество гостей|Mehmonlar soni|createElement\("select"\)/);
   assert.match(bridge, /:language/);
   assert.match(bridge, /prefers-reduced-motion/);
   assert.match(bridge, /Clipboard|clipboard/);

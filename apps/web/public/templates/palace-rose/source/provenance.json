@@ -22,8 +22,8 @@
     },
     {
       "path": "bridge.js",
-      "bytes": 43197,
-      "sha256": "7ec5094c0a5e0431f26fe389e8064232e060661a7c0399601dc33dde0f344a76"
+      "bytes": 42833,
+      "sha256": "c657e82558fc49edadf908509a516db3146d81ecb15e5af04afd104500e57eb7"
     },
     {
       "path": "source/design.html",
@@ -32,8 +32,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 4831,
-      "sha256": "fcfe6fa333415424f8fafa1af6bbf38a1027bfb84e384540e09e0b3ec38addba"
+      "bytes": 4933,
+      "sha256": "0c146bfcd3840432b23ebe211029d49819da25dc0cab830f1ace944976ec0249"
     },
     {
       "path": "preview.webp",
@@ -459,5 +459,6 @@
         "sha256": "e2d564bd85c03c4ef4a8fe87032f56f5e4e2eadd879dc8a922f92657a1a2e160"
       }
     ]
-  }
+  },
+  "focusedTests": "passed: node --check bridge.js; tsx tests/palace-rose-template.test.ts (4/4); pnpm --filter @taklifnoma/web typecheck"
 }
