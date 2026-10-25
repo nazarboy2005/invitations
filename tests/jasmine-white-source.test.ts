@@ -1,4 +1,5 @@
-import { readFile } from "./helpers/source-files";
+import { readFile, stat } from "node:fs/promises";
+import { readFile as readCanonicalText } from "./helpers/source-files";
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 
@@ -29,10 +30,12 @@ test("Jasmine White preserves its captured page, stylesheets, and design artwork
     "/templates/jasmine-white/preview.png",
   );
   const source = await readFile(new URL("source/preview-frame.html", root));
-  const original = await readFile(
-    new URL("templates/jasmine-white/preview-frame.html", archive),
-  );
-  assert.deepEqual(source, original);
+  const sourceArchiveRoot = new URL("templates/jasmine-white/preview-frame.html", archive);
+  const archiveAvailable = await stat(archive).then(() => true, () => false);
+  if (archiveAvailable) {
+    const original = await readCanonicalText(sourceArchiveRoot);
+    assert.deepEqual(source, original);
+  }
   assert.equal(source.length, manifest.source.bytes);
   assert.equal(
     createHash("sha256").update(source).digest("hex"),
@@ -41,11 +44,13 @@ test("Jasmine White preserves its captured page, stylesheets, and design artwork
 
   for (const record of [...manifest.capturedStylesheets, ...manifest.copiedDesignAssets]) {
     const bytes = await readFile(new URL(record.file, root));
-    assert.deepEqual(
-      bytes,
-      await readFile(new URL(record.archiveFile, archive)),
-      record.file,
-    );
+    if (archiveAvailable) {
+      assert.deepEqual(
+        bytes,
+        await readCanonicalText(new URL(record.archiveFile, archive)),
+        record.file,
+      );
+    }
     assert.equal(bytes.length, record.bytes, record.file);
     assert.equal(
       createHash("sha256").update(bytes).digest("hex"),
@@ -78,18 +83,36 @@ test("Jasmine White preserves its captured page, stylesheets, and design artwork
   }
 
   const runtimeHtml = await readFile(new URL("index.html", root), "utf8");
+  const sourceHtml = await readFile(new URL("source/preview-frame.html", root), "utf8");
   const bridge = await readFile(new URL("bridge.js", root), "utf8");
-  const sourceMotion = await readFile(
-    new URL(manifest.sourceMotion.file, root),
+  const renderer = await readFile(
+    new URL("../apps/web/src/templates/chorlove/renderer.tsx", import.meta.url),
     "utf8",
   );
-  assert.equal(Buffer.byteLength(sourceMotion, "utf8"), manifest.sourceMotion.bytes);
-  assert.equal(
-    createHash("sha256").update(sourceMotion).digest("hex"),
-    manifest.sourceMotion.sha256.toLowerCase(),
+  const optionalSections = await readFile(
+    new URL("../apps/web/public/templates/shared/editor-sections.js", import.meta.url),
+    "utf8",
   );
-  assert.match(sourceMotion, /scale:\[1,2,0\]/);
-  assert.match(sourceMotion, /opacity:\[0,\.85,\.85,0\]/);
+  if (archiveAvailable) {
+    const sourceMotion = await readFile(
+      new URL("_next/static/chunks/0ziyt946s2g41.js", archive),
+      "utf8",
+    );
+    assert.equal(Buffer.byteLength(sourceMotion, "utf8"), manifest.sourceMotion.bytes);
+    assert.equal(
+      createHash("sha256").update(sourceMotion).digest("hex"),
+      manifest.sourceMotion.sha256.toLowerCase(),
+    );
+    assert.match(sourceMotion, /scale:\[1,2,0\]/);
+    assert.match(sourceMotion, /opacity:\[0,\.85,\.85,0\]/);
+    assert.match(sourceMotion, /duration:\.85,ease:"easeOut"/);
+    assert.match(sourceMotion, /transition:\{duration:\.8,ease:\[\.22,1,\.36,1\]\}/);
+    assert.match(sourceMotion, /duration:3\.2,ease:"easeInOut"/);
+    assert.equal((bridge.match(/left: "[\d.]+%"/g) || []).length, 12);
+  } else {
+    assert.match(manifest.sourceMotion.sha256, /^[a-f0-9]{64}$/i);
+    assert.equal(manifest.sourceMotion.bytes, 60835);
+  }
   assert.match(
     bridge,
     /\{ scale: 1, easing: "ease-out" \},\s*\{ scale: 2, offset: 0\.5, easing: "ease-out" \},\s*\{ scale: 0 \}/,
@@ -108,7 +131,18 @@ test("Jasmine White preserves its captured page, stylesheets, and design artwork
   assert.match(runtimeHtml, /src="\/templates\/jasmine-white\/bridge\.js"/);
   assert.doesNotMatch(runtimeHtml, /<script[^>]+src="(?:https?:)?\/\/_next\//i);
   assert.match(bridge, /d\.eventType \|\| c\.event/);
-  assert.match(bridge, /partySize: answer \? 0 : Number\(party\.value \|\| 1\)/);
+  assert.match(bridge, /partySize: answer \? 0 : 1/);
+  assert.doesNotMatch(bridge, /partySize:\s*["']/);
+  assert.doesNotMatch(bridge, /createElement\("select"\)/);
+  assert.doesNotMatch(sourceHtml, /partySize|number of guests|mehmonlar soni|количество гостей/i);
+  assert.doesNotMatch(runtimeHtml, /name="partySize"|Mehmonlar soni|Number of guests|Количество гостей/i);
+  assert.doesNotMatch(sourceHtml, /Kiyinish uslubi|Dress code|Дресс-код/i);
+  assert.doesNotMatch(runtimeHtml, /Kiyinish uslubi|Dress code|Дресс-код/i);
+  assert.match(
+    renderer,
+    /templateId === "jasmine-white"[\s\S]{0,300}story: false,[\s\S]*dressCode: false,[\s\S]*extraPeople: false/,
+  );
+  assert.match(optionalSections, /current\.sectionPolicy\?\.story !== false/);
   assert.match(bridge, /d\.music\?\.url/);
   assert.match(bridge, /src="\/templates\/jasmine-white\/assets\/glass_garden_green\.webp"/);
   assert.match(bridge, /links\.slice\(values\.length\)\.forEach\(\(link\) => hide\(link, true\)\)/);

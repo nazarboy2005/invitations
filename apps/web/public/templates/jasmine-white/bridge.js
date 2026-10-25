@@ -14,7 +14,7 @@
       programHint: "To'y kuni tartibi", wishes: "Mehmonlar tilaklari", wishHint: "Kelin-kuyovga tilagingizni qoldiring",
       wish: "Kelin-kuyovga tilagingiz...", guest: "Ismingiz", wishSend: "Tilak yuborish", rsvp: "Kelasizmi?",
       rsvpHint: "Iltimos, javobingizni bildiring.", yes: "Kelaman", no: "Kela olmayman", send: "Yuborish",
-      partySize: "Mehmonlar soni", gift: "Sovg'a yuborish", openGift: "Ochish uchun bosing", closeGift: "Yopish",
+      gift: "Sovg'a yuborish", openGift: "Ochish uchun bosing", closeGift: "Yopish",
       bankCard: "Bank kartasi", cardHolder: "Karta egasi", giftMessage: "Tashrifingiz biz uchun eng katta sovg'a.", copyCard: "Nusxa olish", copied: "Karta raqami nusxalandi.", copyError: "Nusxa olib bo'lmadi.",
       contact: "Bog'lanish uchun", phone: "Telefon", telegram: "Telegram", photo: "Surat", close: "Yopish",
       previous: "Oldingi", next: "Keyingi", guestRequired: "Ismingizni kiriting.", wishRequired: "Tilagingizni yozing.",
@@ -31,7 +31,7 @@
       programHint: "Тўй куни тартиби", wishes: "Меҳмонлар тилаклари", wishHint: "Келин-куёвга тилагингизни қолдиринг",
       wish: "Келин-куёвга тилагингиз...", guest: "Исмингиз", wishSend: "Тилак юбориш", rsvp: "Келасизми?",
       rsvpHint: "Илтимос, жавобингизни билдиринг.", yes: "Келаман", no: "Кела олмайман", send: "Юбориш",
-      partySize: "Меҳмонлар сони", gift: "Совға юбориш", openGift: "Очиш учун босинг", closeGift: "Ёпиш",
+      gift: "Совға юбориш", openGift: "Очиш учун босинг", closeGift: "Ёпиш",
       bankCard: "Банк картаси", cardHolder: "Карта эгаси", giftMessage: "Ташрифингиз биз учун энг катта совға.", copyCard: "Нусха олиш", copied: "Карта рақами нусхаланди.", copyError: "Нусха олиб бўлмади.",
       contact: "Боғланиш учун", phone: "Телефон", telegram: "Telegram", photo: "Сурат", close: "Ёпиш",
       previous: "Олдинги", next: "Кейинги", guestRequired: "Исмингизни киритинг.", wishRequired: "Тилагингизни ёзинг.",
@@ -46,7 +46,7 @@
       addCalendar: "Add to calendar", countdown: "Until our happiest day", venue: "Venue", map: "View map", program: "Wedding program",
       programHint: "Schedule for the day", wishes: "Guest wishes", wishHint: "Leave a wish for the couple", wish: "Your wish for the couple...",
       guest: "Your name", wishSend: "Send wish", rsvp: "Will you attend?", rsvpHint: "Please let us know your response.",
-      yes: "I'll attend", no: "Can't attend", send: "Submit", partySize: "Number of guests", gift: "Send a gift",
+      yes: "I'll attend", no: "Can't attend", send: "Submit", gift: "Send a gift",
       openGift: "Tap to open", closeGift: "Close", cardHolder: "Card holder", copyCard: "Copy number",
       copied: "Card number copied.", copyError: "Could not copy the card number.", contact: "Contact us", phone: "Phone",
       bankCard: "Bank Card", giftMessage: "Your presence is the greatest gift for us.",
@@ -63,7 +63,7 @@
       program: "Программа свадьбы", programHint: "Расписание дня", wishes: "Пожелания гостей", wishHint: "Оставьте пожелание молодожёнам",
       wish: "Ваше пожелание молодожёнам...", guest: "Ваше имя", wishSend: "Отправить пожелание", rsvp: "Вы придёте?",
       rsvpHint: "Пожалуйста, сообщите, сможете ли вы прийти.", yes: "Приду", no: "Не смогу прийти", send: "Отправить",
-      partySize: "Количество гостей", gift: "Подарок", openGift: "Нажмите, чтобы открыть", closeGift: "Закрыть",
+      gift: "Подарок", openGift: "Нажмите, чтобы открыть", closeGift: "Закрыть",
       cardHolder: "Владелец карты", copyCard: "Скопировать номер", copied: "Номер карты скопирован.", copyError: "Не удалось скопировать номер карты.",
       contact: "Связаться с нами", phone: "Телефон", telegram: "Telegram", photo: "Фото", close: "Закрыть",
       bankCard: "Банковская карта", giftMessage: "Ваше присутствие — лучший подарок для нас.",
@@ -549,11 +549,11 @@
     const choices = [...form.querySelectorAll('button[role="radio"]')];
     choices.forEach((button, i) => { button.type = "button"; button.setAttribute("aria-checked", "false"); button.setAttribute("aria-label", i ? c.no : c.yes); tx(button.querySelector("span") || button, i ? c.no : c.yes); button.onclick = () => select(i); });
     const select = (index) => choices.forEach((button, i) => { button.setAttribute("aria-checked", String(i === index)); });
-    let party = form.querySelector('[name="partySize"]');
-    if (!party) { party = document.createElement("select"); party.name = "partySize"; party.className = "mt-4 w-full rounded-lg border px-4 py-3 text-sm"; submit?.parentElement?.insertBefore(party, submit); }
-    const max = Math.max(1, Math.min(Number(payload.data.rsvp?.maxPartySize) || 1, 100));
-    party.replaceChildren(...Array.from({ length: max }, (_, i) => { const option = document.createElement("option"); option.value = String(i + 1); option.textContent = String(i + 1); return option; }));
-    party.setAttribute("aria-label", c.partySize); hide(party, false);
+    form.querySelectorAll('[name="partySize"]').forEach((control) => {
+      const label = control.closest("label");
+      if (label) label.remove();
+      else control.remove();
+    });
     if (submit) { submit.disabled = false; setButtonText(submit, c.send); }
     let status = form.querySelector("[data-jw-status]");
     if (!status) { status = document.createElement("p"); status.dataset.jwStatus = ""; status.className = "jw-status"; status.setAttribute("role", "status"); status.setAttribute("aria-live", "polite"); form.append(status); }
@@ -564,7 +564,7 @@
       if (answer < 0) { tx(status, c.chooseResponse); choices[0]?.focus(); return; }
       if (submit) submit.disabled = true;
       try {
-        const response = await fetch(`/api/public/invitations/${encodeURIComponent(payload.invitationId || "")}/rsvp`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ name, status: answer ? "no" : "yes", partySize: answer ? 0 : Number(party.value || 1), guestToken: payload.guestToken || undefined }) });
+        const response = await fetch(`/api/public/invitations/${encodeURIComponent(payload.invitationId || "")}/rsvp`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ name, status: answer ? "no" : "yes", partySize: answer ? 0 : 1, guestToken: payload.guestToken || undefined }) });
         if (!response.ok) throw new Error("RSVP request failed");
         tx(status, c.saved); form.reset(); input?.setAttribute("aria-invalid", "false"); select(-1);
       } catch { tx(status, c.error); }
