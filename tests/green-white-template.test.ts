@@ -87,13 +87,16 @@ test("Green White runtime is isolated and maps the captured sections to the shar
   assert.match(bridge, /thumb\.left \+ thumb\.width \/ 2 - \(viewport\.left \+ viewport\.width \/ 2\)/);
   assert.match(bridge, /thumbnailTrack\.style\.transform = `translateX\(\$\{currentX - centerDelta\}px\)`/);
   assert.match(bridge, /requestAnimationFrame\(\(\) => \{[\s\S]*show\(start\)/);
-  assert.match(bridge, /duration: 250/);
+  assert.match(bridge, /: 250/);
   assert.match(bridge, /event\.key === "ArrowLeft"/);
   assert.match(bridge, /event\.key === "ArrowRight"/);
   assert.match(bridge, /event\.key === "Home"/);
   assert.match(bridge, /const slideshow = makeButton\("Play"/);
   assert.match(bridge, /slideshow\.onclick = \(\) => setSlideshowPlaying\(!slideshowPlaying\)/);
   assert.match(bridge, /slideshowTimer = window\.setTimeout\([\s\S]*?1500/);
+  assert.match(bridge, /slide\.addEventListener\("pointermove"/);
+  assert.match(bridge, /slide\.style\.setProperty\("--yarl__carousel_padding_px", "16"\)/);
+  assert.match(bridge, /const spacing = width \* 0\.3/);
   assert.doesNotMatch(bridge, /requestFullscreen|fullscreen\.onclick|document\.fullscreenElement/);
   assert.match(bridge, /dialog\.addEventListener\("click".*closeLightbox\(\)/);
   assert.match(bridge, /dialog\.addEventListener\("cancel".*closeLightbox\(\)/);
@@ -120,10 +123,27 @@ test("Green White motion follows the archived source page module", async () => {
   assert.equal(gallerySource.fullscreenPluginIncluded, false);
   assert.deepEqual(gallerySource.slideshow, { autoplay: false, delayMs: 1500 });
   const sourceModule = await readFile(new URL(motion.preservedFile, root));
+  const galleryChunk = await readFile(new URL(gallerySource.preservedFile, root));
   const bridge = await readFile(new URL("bridge.js", root), "utf8");
   const styles = await readFile(new URL("adapter.css", root), "utf8");
   assert.equal(sourceModule.length, 36961);
   assert.equal(createHash("sha256").update(sourceModule).digest("hex"), motion.sha256);
+  assert.equal(galleryChunk.length, gallerySource.bytes);
+  assert.equal(createHash("sha256").update(galleryChunk).digest("hex"), gallerySource.sha256);
+  assert.deepEqual(gallerySource.carouselDefaults, { paddingPx: 16, spacingPercent: 30, touchAction: "none" });
+  assert.deepEqual(gallerySource.swipe, {
+    startDistancePx: 30,
+    advanceDistanceRatio: 0.3,
+    quickFlickDistancePx: 5,
+    quickFlickMaxDurationMs: 250,
+    animationMs: 250,
+    tracksPointerMovement: true,
+  });
+  assert.match(galleryChunk.toString("utf8"), /padding:"16px",spacing:"30%"/);
+  assert.match(galleryChunk.toString("utf8"), /touchAction:"none"/);
+  assert.match(galleryChunk.toString("utf8"), /Math\.abs\(a\)>Math\.abs\(o\)&&Math\.abs\(a\)>30/);
+  assert.match(galleryChunk.toString("utf8"), /Math\.abs\(t\)>\.3\*a/);
+  assert.match(galleryChunk.toString("utf8"), /Math\.abs\(t\)>5&&e<o/);
   assert.match(sourceModule.toString("utf8"), /whileInView:[^}]+opacity:1/);
   assert.match(sourceModule.toString("utf8"), /duration:11,repeat:1\/0/);
   assert.match(sourceModule.toString("utf8"), /duration:13,repeat:1\/0/);
@@ -134,11 +154,20 @@ test("Green White motion follows the archived source page module", async () => {
   assert.match(bridge, /duration: 2000/);
   assert.match(bridge, /delay: 2150/);
   assert.match(bridge, /useSlideTransition = Boolean\(direction\) && !motionReduced && items\.length > 1/);
-  assert.match(bridge, /duration: 250, easing: "ease-out"/);
+  assert.match(bridge, /const duration = gesture \? getSourceSwipeDuration\(gesture\.offset, gesture\.elapsed, width\) : 250/);
+  assert.match(bridge, /const easing = gesture \? "ease-out" : "ease-in-out"/);
+  assert.match(bridge, /duration: 125, easing: "ease-out"/);
   assert.match(bridge, /i > index \? -1 : 1/);
   assert.match(bridge, /fadeDuration = motionReduced \? 0 : 250/);
   assert.match(bridge, /dialog\.classList\.remove\("yarl__portal_open"\)/);
   assert.match(bridge, /dialog\.classList\.add\("yarl__portal_open"\)/);
+  const durationStart = bridge.indexOf("  function getSourceSwipeDuration(");
+  const durationEnd = bridge.indexOf("\n  function showLightbox", durationStart);
+  assert.ok(durationStart >= 0 && durationEnd > durationStart);
+  const durationFunction = bridge.slice(durationStart, durationEnd);
+  const durations = runInNewContext(`${durationFunction}; [getSourceSwipeDuration(400, 50, 1000), getSourceSwipeDuration(40, 50, 1000)]`);
+  assert.equal(durations[0], 125);
+  assert.equal(durations[1], 240);
   assert.match(bridge, /height:74px/);
   assert.doesNotMatch(bridge, /direction \* 28px/);
   assert.match(bridge, /11000 : 13000/);
@@ -170,7 +199,7 @@ test("Green White motion follows the archived source page module", async () => {
 test("Green White slideshow starts manually, advances at the source delay, pauses, and respects reduced motion", async () => {
   const bridge = await readFile(new URL("bridge.js", root), "utf8");
   const setupStart = bridge.indexOf("    let slideshowPlaying = false, slideshowTimer = null;");
-  const setupEnd = bridge.indexOf("    const show = (nextIndex, direction = 0) => {", setupStart);
+  const setupEnd = bridge.indexOf("    const show = (nextIndex, direction = 0, gesture = null) => {", setupStart);
   assert.ok(setupStart >= 0 && setupEnd > setupStart);
   const slideshowSetup = bridge.slice(setupStart, setupEnd);
   const makeRuntime = (reducedMotion: boolean) => runInNewContext(`(() => {
@@ -227,7 +256,7 @@ test("Green White slideshow starts manually, advances at the source delay, pause
 
 test("Green White gallery swipe, wraparound, and thumbnails execute their source-matched adapter behavior", async () => {
   const bridge = await readFile(new URL("bridge.js", root), "utf8");
-  const swipeStart = bridge.indexOf('    slide.addEventListener("pointerdown"');
+  const swipeStart = bridge.indexOf("    const resetSwipe = () => {");
   const swipeEnd = bridge.indexOf('    container.addEventListener("wheel"', swipeStart);
   const thumbnailStart = bridge.indexOf("    const thumbnails = items.map((item, i) => {");
   const thumbnailEnd = bridge.indexOf("    thumbnailWrapper.append(thumbnailTrack);", thumbnailStart);
@@ -235,29 +264,76 @@ test("Green White gallery swipe, wraparound, and thumbnails execute their source
   assert.ok(thumbnailStart >= 0 && thumbnailEnd > thumbnailStart);
 
   const swipeHandlers = bridge.slice(swipeStart, swipeEnd);
-  const swipe = runInNewContext(`(() => {
-    const listeners = new Map(), actions = [];
-    let pointerX = null;
-    const slide = { addEventListener: (name, handler) => listeners.set(name, handler), setPointerCapture: () => {} };
-    const previous = { click: () => actions.push("previous") };
-    const next = { click: () => actions.push("next") };
+  const makeSwipeRuntime = () => runInNewContext(`(() => {
+    const listeners = new Map(), calls = [], children = [];
+    let pointerX = null, pointerY = null, pointerId = null, swipeStartedAt = 0;
+    let swipeOffset = 0, swipeStep = 0, swipePreview = null, transitioning = false;
+    let zoomed = false, motionReduced = false, index = 2, now = 0;
+    const performance = { now: () => now };
+    const Promise = { all: () => ({ then(callback) { callback(); return { catch() {} }; } }) };
+    const createImage = () => ({
+      src: "photo-2.webp", alt: "", style: { translate: "0px 0px" }, removed: false,
+      cloneNode: () => createImage(),
+      animate(frames, options) { calls.push({ animationFrames: frames, duration: options.duration }); return { finished: {}, cancel() {} }; },
+      remove() { this.removed = true; },
+    });
+    const image = createImage();
+    const items = Array.from({ length: 6 }, (_, i) => ({ src: "photo-" + i + ".webp", alt: "Photo " + i }));
+    const slide = { clientWidth: 1000, addEventListener: (name, handler) => listeners.set(name, handler), setPointerCapture() {}, append: (child) => children.push(child) };
+    const document = { documentElement: { clientWidth: 1000 } };
+    const slideMetrics = () => ({ width: slide.clientWidth, distance: slide.clientWidth * 1.3 });
+    const show = (nextIndex, direction, gesture) => calls.push({ nextIndex, direction, gesture });
     ${swipeHandlers}
-    return { listeners, actions };
+    const event = (clientX, clientY = 0) => ({ clientX, clientY, pointerId: 1, isPrimary: true, pointerType: "touch", button: 0, target: { closest: () => ({}) }, preventDefault() {} });
+    return { listeners, calls, children, image, event, setNow: (value) => { now = value; } };
   })()`);
-  const pointerEvent = (clientX: number) => ({ clientX, pointerId: 1, target: { closest: () => ({}) } });
-  swipe.listeners.get("pointerdown")(pointerEvent(100));
-  swipe.listeners.get("pointerup")(pointerEvent(40));
-  assert.equal(swipe.actions[0], "next");
-  swipe.listeners.get("pointerdown")(pointerEvent(40));
-  swipe.listeners.get("pointerup")(pointerEvent(100));
-  assert.equal(swipe.actions[1], "previous");
-  swipe.listeners.get("pointerdown")(pointerEvent(100));
-  swipe.listeners.get("pointerup")(pointerEvent(70));
-  assert.equal(swipe.actions.length, 2);
-  swipe.listeners.get("pointerdown")(pointerEvent(100));
-  swipe.listeners.get("pointercancel")();
-  swipe.listeners.get("pointerup")(pointerEvent(20));
-  assert.equal(swipe.actions.length, 2);
+  const leftSwipe = makeSwipeRuntime() as any;
+  leftSwipe.listeners.get("pointerdown")(leftSwipe.event(100));
+  leftSwipe.setNow(50);
+  leftSwipe.listeners.get("pointermove")(leftSwipe.event(60, 4));
+  assert.equal(leftSwipe.image.style.translate, "-40px 0px");
+  assert.equal(leftSwipe.children[0].src, "photo-3.webp");
+  assert.equal(leftSwipe.children[0].style.translate, "1260px 0px");
+  leftSwipe.setNow(100);
+  leftSwipe.listeners.get("pointerup")(leftSwipe.event(60, 4));
+  assert.equal(leftSwipe.calls[0].nextIndex, 3);
+  assert.equal(leftSwipe.calls[0].direction, -1);
+  assert.equal(leftSwipe.calls[0].gesture.offset, -40);
+  assert.equal(leftSwipe.calls[0].gesture.elapsed, 50);
+
+  const rightSwipe = makeSwipeRuntime() as any;
+  rightSwipe.listeners.get("pointerdown")(rightSwipe.event(100));
+  rightSwipe.setNow(20);
+  rightSwipe.listeners.get("pointermove")(rightSwipe.event(140));
+  rightSwipe.setNow(80);
+  rightSwipe.listeners.get("pointerup")(rightSwipe.event(140));
+  assert.equal(rightSwipe.calls[0].nextIndex, 1);
+  assert.equal(rightSwipe.calls[0].direction, 1);
+
+  const slowShortDrag = makeSwipeRuntime() as any;
+  slowShortDrag.listeners.get("pointerdown")(slowShortDrag.event(100));
+  slowShortDrag.setNow(50);
+  slowShortDrag.listeners.get("pointermove")(slowShortDrag.event(140));
+  slowShortDrag.setNow(400);
+  slowShortDrag.listeners.get("pointerup")(slowShortDrag.event(140));
+  assert.equal(slowShortDrag.calls.some((call: any) => "nextIndex" in call), false);
+  assert.equal(slowShortDrag.image.style.translate, "0px 0px");
+  assert.equal(slowShortDrag.children[0].removed, true);
+
+  const canceledDrag = makeSwipeRuntime() as any;
+  canceledDrag.listeners.get("pointerdown")(canceledDrag.event(100));
+  canceledDrag.listeners.get("pointermove")(canceledDrag.event(40));
+  canceledDrag.listeners.get("pointercancel")();
+  assert.equal(canceledDrag.calls.some((call: any) => "nextIndex" in call), false);
+  assert.equal(canceledDrag.image.style.translate, "0px 0px");
+  assert.equal(canceledDrag.children[0].removed, true);
+
+  const subthreshold = makeSwipeRuntime() as any;
+  subthreshold.listeners.get("pointerdown")(subthreshold.event(100));
+  subthreshold.listeners.get("pointermove")(subthreshold.event(70));
+  subthreshold.listeners.get("pointerup")(subthreshold.event(70));
+  assert.equal(subthreshold.children.length, 0);
+  assert.equal(subthreshold.calls.some((call: any) => "nextIndex" in call), false);
 
   const wrapExpression = bridge.match(/index = \(nextIndex \+ items\.length\) % items\.length;/);
   assert.ok(wrapExpression);

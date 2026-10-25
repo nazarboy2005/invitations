@@ -445,6 +445,15 @@
     hide(node, !photos.length);
   }
 
+  function getSourceSwipeDuration(offset, elapsed, width) {
+    const swipeDuration = 250;
+    const projectedDuration = width ? swipeDuration / width * Math.abs(offset) : swipeDuration;
+    const duration = elapsed < projectedDuration
+      ? swipeDuration / projectedDuration * Math.max(elapsed, projectedDuration / 5)
+      : width ? swipeDuration / width * (width - Math.abs(offset)) : swipeDuration / 2;
+    return Math.round(duration);
+  }
+
   function showLightbox(items, start, c, opener) {
     if (!items.length) return;
     const dialog = document.createElement("dialog");
@@ -471,6 +480,8 @@
     counter.setAttribute("aria-live", "polite");
     const slide = document.createElement("div");
     slide.className = "yarl__slide yarl__flex_center";
+    slide.style.setProperty("--yarl__carousel_padding_px", "16");
+    slide.style.setProperty("--yarl__carousel_spacing_percent", "30");
     let image = document.createElement("img");
     image.className = "yarl__slide_image";
     image.alt = "";
@@ -528,7 +539,8 @@
     thumbnailWrapper.append(thumbnailTrack);
     thumbnailContainer.append(thumbnailWrapper);
     thumbnailBar.append(thumbnailContainer);
-    let index = start, zoomed = false, pointerX = null, transitioning = false;
+    let index = start, zoomed = false, pointerX = null, pointerY = null, pointerId = null;
+    let swipeStartedAt = 0, swipeOffset = 0, swipeStep = 0, swipePreview = null, transitioning = false;
     let slideshowPlaying = false, slideshowTimer = null;
     const scheduleSlideshow = () => {
       window.clearTimeout(slideshowTimer);
@@ -546,29 +558,41 @@
       else window.clearTimeout(slideshowTimer);
     };
     slideshow.disabled = motionReduced;
-    const show = (nextIndex, direction = 0) => {
+    const slideMetrics = () => {
+      const width = slide.clientWidth || document.documentElement.clientWidth;
+      const spacing = width * 0.3;
+      return { width, distance: width + spacing };
+    };
+    const show = (nextIndex, direction = 0, gesture = null) => {
       if (transitioning) return;
       const previousImage = image;
+      const dragPreview = swipePreview && pointerX == null && direction
+        ? { image: swipePreview, offset: swipeOffset }
+        : null;
       index = (nextIndex + items.length) % items.length;
       const slideItem = items[index];
       const useSlideTransition = Boolean(direction) && !motionReduced && items.length > 1;
       if (useSlideTransition) {
-        const incoming = previousImage.cloneNode(false);
+        const incoming = dragPreview?.image || previousImage.cloneNode(false);
         incoming.src = slideItem.src;
         incoming.alt = slideItem.alt || slideItem.caption || "";
         incoming.style.transform = "translate(-50%, -50%) scale(1)";
-        const width = slide.clientWidth || document.documentElement.clientWidth;
-        incoming.style.translate = `${-direction * width}px 0`;
+        const { width, distance } = slideMetrics();
+        const duration = gesture ? getSourceSwipeDuration(gesture.offset, gesture.elapsed, width) : 250;
+        const easing = gesture ? "ease-out" : "ease-in-out";
+        const incomingStart = -direction * distance + (dragPreview?.offset || 0);
+        incoming.style.translate = `${incomingStart}px 0`;
         previousImage.style.transform = "translate(-50%, -50%) scale(1)";
+        if (dragPreview) previousImage.style.translate = `${dragPreview.offset}px 0`;
         slide.append(incoming);
         transitioning = true;
         const incomingMotion = incoming.animate(
-          [{ translate: `${-direction * width}px 0` }, { translate: "0px 0px" }],
-          { duration: 250, easing: "ease-out" },
+          [{ translate: `${incomingStart}px 0` }, { translate: "0px 0px" }],
+          { duration, easing },
         );
         const outgoingMotion = previousImage.animate(
-          [{ translate: "0px 0px" }, { translate: `${direction * width}px 0px` }],
-          { duration: 250, easing: "ease-out" },
+          [{ translate: `${dragPreview?.offset || 0}px 0px` }, { translate: `${direction * distance}px 0px` }],
+          { duration, easing },
         );
         Promise.all([incomingMotion.finished, outgoingMotion.finished]).then(() => {
           incoming.style.translate = "0px 0px";
@@ -576,8 +600,20 @@
           outgoingMotion.cancel();
           previousImage.remove();
           image = incoming;
+          swipePreview = null;
+          swipeOffset = 0;
+          swipeStep = 0;
           transitioning = false;
-        }).catch(() => { transitioning = false; });
+        }).catch(() => {
+          if (dragPreview) {
+            dragPreview.image.remove();
+            previousImage.style.translate = "0px 0px";
+            swipePreview = null;
+            swipeOffset = 0;
+            swipeStep = 0;
+          }
+          transitioning = false;
+        });
       } else {
         image.src = slideItem.src;
         image.alt = slideItem.alt || slideItem.caption || "";
@@ -616,19 +652,87 @@
     slide.addEventListener("dblclick", (event) => {
       if (event.target.closest(".yarl__slide_image")) zoom.onclick();
     });
+    const resetSwipe = () => {
+      const preview = swipePreview;
+      const offset = swipeOffset;
+      const step = swipeStep;
+      pointerX = pointerY = pointerId = null;
+      if (!preview) return;
+      const { distance } = slideMetrics();
+      const restingOffset = step > 0 ? distance : -distance;
+      if (motionReduced) {
+        image.style.translate = "0px 0px";
+        preview.remove();
+        swipePreview = null;
+        swipeOffset = swipeStep = 0;
+        return;
+      }
+      transitioning = true;
+      const imageMotion = image.animate(
+        [{ translate: `${offset}px 0px` }, { translate: "0px 0px" }],
+        { duration: 125, easing: "ease-out" },
+      );
+      const previewMotion = preview.animate(
+        [{ translate: `${restingOffset + offset}px 0px` }, { translate: `${restingOffset}px 0px` }],
+        { duration: 125, easing: "ease-out" },
+      );
+      Promise.all([imageMotion.finished, previewMotion.finished]).then(() => {
+        image.style.translate = "0px 0px";
+        previewMotion.cancel();
+        imageMotion.cancel();
+        preview.remove();
+        swipePreview = null;
+        swipeOffset = swipeStep = 0;
+        transitioning = false;
+      }).catch(() => { transitioning = false; });
+    };
     slide.addEventListener("pointerdown", (event) => {
+      if (transitioning || zoomed || event.isPrimary === false) return;
+      if (event.pointerType === "mouse" && event.button !== 0) return;
       if (!event.target.closest(".yarl__slide_image")) return;
       pointerX = event.clientX;
+      pointerY = event.clientY;
+      pointerId = event.pointerId;
       try { slide.setPointerCapture(event.pointerId); } catch { /* Pointer capture may be unavailable. */ }
     });
-    slide.addEventListener("pointerup", (event) => {
-      if (pointerX == null) return;
-      const delta = event.clientX - pointerX;
-      pointerX = null;
-      if (Math.abs(delta) < 40) return;
-      if (delta > 0) previous.click(); else next.click();
+    slide.addEventListener("pointermove", (event) => {
+      if (pointerX == null || event.pointerId !== pointerId || transitioning) return;
+      const deltaX = event.clientX - pointerX;
+      const deltaY = event.clientY - pointerY;
+      if (!swipePreview && (Math.abs(deltaX) <= 30 || Math.abs(deltaX) <= Math.abs(deltaY))) return;
+      const step = deltaX < 0 ? 1 : -1;
+      if (!swipePreview || step !== swipeStep) {
+        swipePreview?.remove();
+        swipeStep = step;
+        const nextIndex = (index + step + items.length) % items.length;
+        const item = items[nextIndex];
+        swipePreview = image.cloneNode(false);
+        swipePreview.src = item.src;
+        swipePreview.alt = item.alt || item.caption || "";
+        swipePreview.style.transform = "translate(-50%, -50%) scale(1)";
+        swipeStartedAt = performance.now();
+        slide.append(swipePreview);
+      }
+      const { width, distance } = slideMetrics();
+      swipeOffset = Math.round(Math.min(Math.abs(deltaX), width) * Math.sign(deltaX));
+      image.style.translate = `${swipeOffset}px 0px`;
+      swipePreview.style.translate = `${(step > 0 ? distance : -distance) + swipeOffset}px 0px`;
+      event.preventDefault();
     });
-    slide.addEventListener("pointercancel", () => { pointerX = null; });
+    slide.addEventListener("pointerup", (event) => {
+      if (pointerX == null || event.pointerId !== pointerId) return;
+      const { width } = slideMetrics();
+      const elapsed = performance.now() - swipeStartedAt;
+      const shouldAdvance = swipePreview && (
+        Math.abs(swipeOffset) > width * 0.3 || Math.abs(swipeOffset) > 5 && elapsed < 250
+      );
+      const step = swipeStep;
+      if (shouldAdvance) {
+        pointerX = pointerY = pointerId = null;
+        show(index + step, step > 0 ? -1 : 1, { offset: swipeOffset, elapsed });
+      } else resetSwipe();
+    });
+    slide.addEventListener("pointercancel", resetSwipe);
     container.addEventListener("wheel", (event) => {
       if (!event.ctrlKey && !event.metaKey) return;
       event.preventDefault();

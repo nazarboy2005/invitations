@@ -109,6 +109,7 @@
   },
   "gallerySource": {
     "archiveFile": "Chorlove/Web invitations/_next/static/chunks/0jsw~n6ojplnf.js",
+    "preservedFile": "source/0jsw~n6ojplnf.js",
     "bytes": 44254,
     "sha256": "fa0c331b8fad639b1375e517b27b7e1eff0e424807a711b4bae9fc9145f661f8",
     "pluginModuleIds": {
@@ -118,6 +119,19 @@
       "thumbnails": 99388
     },
     "fullscreenPluginIncluded": false,
+    "carouselDefaults": {
+      "paddingPx": 16,
+      "spacingPercent": 30,
+      "touchAction": "none"
+    },
+    "swipe": {
+      "startDistancePx": 30,
+      "advanceDistanceRatio": 0.3,
+      "quickFlickDistancePx": 5,
+      "quickFlickMaxDurationMs": 250,
+      "animationMs": 250,
+      "tracksPointerMovement": true
+    },
     "slideshow": {
       "autoplay": false,
       "delayMs": 1500
@@ -247,7 +261,7 @@
   ],
   "sourceAudit": {
     "sourceCapture": "The archived HTML capture hash matches its checked-in Git blob. The Windows worktree applies CRLF conversion; normalized content and the recorded LF SHA-256 match the archive.",
-    "gallery": "The original compiled page module imports Yet Another React Lightbox plugins Zoom, Counter, Slideshow, and Thumbnails (module IDs recorded in gallerySource); it does not import Fullscreen. It configures slideshow autoplay off with a 1500ms manual-start delay, 250ms swipe, looping carousel, 84x56 thumbnails (1px border, 8px radius, zero padding, 8px gap), and backdrop close. The adapter reproduces these controls and behaviors with the archived YARL stylesheets and an isolated DOM adapter.",
+    "gallery": "The original compiled page module imports Yet Another React Lightbox plugins Zoom, Counter, Slideshow, and Thumbnails (module IDs recorded in gallerySource); it does not import Fullscreen. The preserved gallery/core chunk records 16px carousel padding, 30% slide spacing, touch-action none, live horizontal pointer drag with a 30px direction lock, advancement at 30% width or a 5px flick within 250ms, 250ms swipe animation, and looping by default. The route configures autoplay off with a 1500ms manual-start delay, 84x56 thumbnails (1px border, 8px radius, zero padding, 8px gap), and backdrop close. The isolated adapter maps these settings into the shared preview renderer.",
     "localeControls": "The source uses the app translation context and has no visible locale picker. The package adds a localized host-level picker because the shared invitation contract supports locale variants.",
     "optionalSections": "Source gallery returns null when no images exist; source To’yona returns null without a card number; source contacts return null when none are configured. The package hides empty gallery, gift, and contacts sections. Dress code is always present in the source but follows the approved creator toggle in the platform.",
     "rsvp": "The compiled source contains a yes-only guest-count stepper. The approved platform decision omits that prompt and submits fixed partySize 1/0 for yes/no.",
