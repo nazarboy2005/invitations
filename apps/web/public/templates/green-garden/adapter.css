@@ -16,6 +16,25 @@ html,body{margin:0;min-height:100%;background:#eef3e8;font-family:"Cormorant Gar
 [data-gg-root] .gg-selected-day{border-radius:50%;background:#47613e;color:#fff!important;font-weight:700}
 [data-gg-root] .gg-gift-details{max-width:320px;margin:14px auto 0;padding:14px;border:1px solid rgba(71,97,62,.28);border-radius:14px;background:rgba(255,255,255,.68);text-align:center;overflow-wrap:anywhere}
 [data-gg-root] [data-gg-gift-details][hidden]{display:none!important}
+.gg-source-gift-modal{position:fixed;inset:0;z-index:2000;width:100%;max-width:none;height:100%;max-height:none;margin:0;padding:16px;border:0;background:rgba(0,0,0,.75);backdrop-filter:blur(8px);color:rgb(53,69,47);overflow:auto;place-items:center}
+.gg-source-gift-modal[open]{display:grid;animation:gg-source-gift-backdrop .25s ease both}
+.gg-source-gift-modal::backdrop{background:transparent}
+.gg-source-gift-panel{position:relative;width:min(100%,448px);padding:24px;border:1px solid rgba(53,69,47,.3);border-radius:24px;background:rgba(251,253,248,.98);box-shadow:0 24px 70px rgba(0,0,0,.32);text-align:center;animation:gg-source-gift-panel .25s ease both}
+.gg-source-gift-close{position:absolute;top:12px;right:12px;z-index:1;width:40px;height:40px;border:0;border-radius:50%;background:transparent;color:rgb(71,97,62);font-size:28px;line-height:1;cursor:pointer}
+.gg-source-gift-close:hover{background:rgba(71,97,62,.15)}
+.gg-source-gift-header{display:flex;flex-direction:column;align-items:center;gap:8px;padding:8px 0 16px;border-bottom:1px solid rgba(71,97,62,.2)}
+.gg-source-gift-header img{width:64px;height:64px;object-fit:contain;filter:drop-shadow(0 4px 5px rgba(0,0,0,.16))}
+.gg-source-gift-header h3{margin:0;color:rgb(71,97,62);font-family:"Fz Qellia","Cormorant Garamond",serif;font-size:20px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.gg-source-gift-content{display:flex;flex-direction:column;align-items:center;gap:16px;padding:24px 0}
+.gg-source-gift-card{display:flex;width:100%;flex-direction:column;align-items:center;gap:8px;padding:20px;border:1px solid rgba(71,97,62,.3);border-radius:16px;background:rgba(255,255,255,.8);box-shadow:0 1px 4px rgba(0,0,0,.1)}
+.gg-source-gift-card-label{display:flex;align-items:center;gap:8px;color:rgb(71,97,62);font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+.gg-source-gift-number{margin:4px 0;color:rgb(71,97,62);font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:clamp(18px,5vw,22px);font-weight:700;letter-spacing:.12em;overflow-wrap:anywhere}
+.gg-source-gift-holder,.gg-source-gift-note{color:rgb(53,69,47);font-family:Baskerville,"Cormorant Garamond",serif;font-size:14px}
+.gg-source-gift-copy{display:inline-flex;align-items:center;justify-content:center;margin-top:12px;padding:8px 20px;border:0;border-radius:999px;background:rgb(71,97,62);color:#fff;font-family:Baskerville,"Cormorant Garamond",serif;font-size:12px;font-weight:600;cursor:pointer;box-shadow:0 2px 6px rgba(0,0,0,.12);transition:transform .2s ease}
+.gg-source-gift-copy:hover{transform:scale(1.05)}
+@keyframes gg-source-gift-backdrop{from{opacity:0}to{opacity:1}}
+@keyframes gg-source-gift-panel{from{opacity:0;transform:translateY(20px) scale(.92)}to{opacity:1;transform:translateY(0) scale(1)}}
+@media(prefers-reduced-motion:reduce){.gg-source-gift-modal[open],.gg-source-gift-panel{animation:none!important}.gg-source-gift-copy{transition:none}}
 [data-gg-root] .gg-map-link{display:inline-flex;margin-top:12px;padding:8px 18px;border:1px solid rgba(71,97,62,.45);border-radius:999px;color:#35452f;text-decoration:none}
 [data-gg-root] .gg-music-toggle{position:fixed;z-index:120;right:14px;bottom:14px;width:46px;height:46px;border:1px solid rgba(71,97,62,.25);border-radius:50%;background:rgba(255,255,255,.85);color:#47613e;font-size:20px;cursor:pointer;backdrop-filter:blur(8px)}
 [data-gg-root] .gg-reveal{opacity:0;transform:translateY(18px);transition:opacity .75s ease,transform .75s ease}

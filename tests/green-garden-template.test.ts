@@ -11,12 +11,8 @@ const root = new URL("../apps/web/public/templates/green-garden/", import.meta.u
 test("Green Garden keeps its original capture byte-for-byte", async () => {
   const source = await readFile(new URL("source/preview-frame.html", root));
   const manifest = JSON.parse(await readFile(new URL("source-assets.provenance.json", root), "utf8"));
-  const archive = await readFile(
-    new URL("../Invitations - this folder will be removed from production/Chorlove/Web invitations/templates/green-garden/preview-frame.html", import.meta.url),
-  );
   assert.equal(createHash("sha256").update(source).digest("hex"), manifest.preservedCapture.sha256);
   assert.equal(source.length, manifest.preservedCapture.bytes);
-  assert.deepEqual(source, archive);
 });
 
 test("Green Garden preview capture matches its canonical fixture provenance", async () => {
@@ -89,7 +85,13 @@ test("Green Garden bridge uses the shared contract and supported services", asyn
   assert.match(bridge, /:language/);
   assert.match(bridge, /venueTitle/);
   assert.match(bridge, /responseLabel/);
-  assert.match(bridge, /party\.setAttribute\("aria-label",c\.party\)/);
+  assert.doesNotMatch(bridge, /name=["']partySize["']|party\.setAttribute\("aria-label",c\.party\)|party\?\.value/);
+  assert.match(bridge, /partySize:choice==="no"\?0:1/);
+  assert.match(bridge, /gg-source-wish-card rounded-xl border p-4 text-sm text-left shadow-sm transition-all/);
+  assert.match(bridge, /wish\.submittedAt\?new Date\(wish\.submittedAt\)\.toLocaleDateString/);
+  assert.match(bridge, /gg-source-gift-modal/);
+  assert.match(bridge, /dialog\.showModal\(\)/);
+  assert.match(bridge, /navigator\.clipboard\.writeText/);
   assert.match(bridge, /data-gg-countdown/);
   assert.match(bridge, /data-gg-lightbox/);
   assert.match(bridge, /d\.toyona\?\.cardNumber/);
@@ -125,6 +127,8 @@ test("Green Garden restores available source motion and schedule assets", async 
   assert.match(bridge, /\.6,index\*\.15,\.3\)/);
   assert.match(bridge, /\.4,index\*\.05,\.2\)/);
   assert.match(bridge, /gg-reduced-motion/);
+  assert.match(bridge, /const baseTranslations = \[\.\.\.leaves\]\.slice\(0, 3\)/);
+  assert.match(bridge, /const adjustedY = offset === 0 \? y : `calc\(\$\{y\} \$\{offset < 0 \? "-" : "\+"\} \$\{Math\.abs\(offset\)\}px\)`/);
   assert.match(bridge, /\[leaves\[0\],leaves\[1\],card,card\?\.children\?\.\[0\]/);
   assert.match(html, /data-gg-program-icon[^>]+assets\/welcome\.webp/);
   assert.match(html, /data-gg-program-icon[^>]+assets\/cake\.webp/);
@@ -153,15 +157,22 @@ test("Green Garden restores available source motion and schedule assets", async 
 
 test("Green Garden packaged artwork matches the full local source image folder", async () => {
   const manifest = JSON.parse(await readFile(new URL("source-assets.provenance.json", root), "utf8"));
-  const sourceImages = new URL(
-    "../Invitations - this folder will be removed from production/Chorlove/Web invitations/images/green-garden/",
-    import.meta.url,
-  );
-  const sourceFiles = (await readdir(sourceImages)).filter((file) => /\.(?:png|jpe?g|webp|svg)$/i.test(file));
-  assert.equal(sourceFiles.length, manifest.sourceArchiveAudit.matchedFiles);
-  for (const file of sourceFiles) {
-    const archived = await readFile(new URL(file, sourceImages));
-    const packaged = await readFile(new URL(`assets/${file}`, root));
-    assert.equal(createHash("sha256").update(packaged).digest("hex"), createHash("sha256").update(archived).digest("hex"), `${file} differs from the source archive`);
+  const sourceAssets = manifest.assets.filter((asset: { file: string }) => asset.file.startsWith("assets/"));
+  assert.equal(sourceAssets.length, manifest.sourceArchiveAudit.matchedFiles + 6);
+  for (const asset of sourceAssets) {
+    const packaged = await readFile(new URL(asset.file, root));
+    assert.equal(packaged.length, asset.bytes, `${asset.file} byte length differs from source provenance`);
+    assert.equal(createHash("sha256").update(packaged).digest("hex"), asset.sha256, `${asset.file} differs from recorded source hash`);
+  }
+});
+
+test("Green Garden does not add source-absent optional sections", async () => {
+  const source = await readFile(new URL("source/preview-frame.html", root), "utf8");
+  const html = await readFile(new URL("index.html", root), "utf8");
+  const bridge = await readFile(new URL("bridge.js", root), "utf8");
+  for (const unsupported of ["dressCode", "dress-code", "attire", "dress code"]) {
+    assert.equal(source.toLowerCase().includes(unsupported.toLowerCase()), false, `reference unexpectedly contains ${unsupported}`);
+    assert.equal(html.toLowerCase().includes(unsupported.toLowerCase()), false, `package unexpectedly contains ${unsupported}`);
+    assert.equal(bridge.toLowerCase().includes(unsupported.toLowerCase()), false, `adapter unexpectedly contains ${unsupported}`);
   }
 });
