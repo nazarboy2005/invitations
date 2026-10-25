@@ -16,11 +16,12 @@
     "browser": "ChatGPT in-app browser",
     "renderedInBrowser": true,
     "savedArtifact": true,
-    "sha256": "d43879e07c14b32fec48123445950f8b6de34d3a70e7bcdc94e81e23f6cf40b1",
-    "bytes": 40419,
+    "sha256": "9c65c2a0a06e0d2cb2d8a1da195a60323dde99fdaddaad946da1b90df4e33561",
+    "bytes": 51128,
     "dimensions": "335x469",
-    "viewport": "390px iframe, cropped to canonical fixture invitation",
-    "fixture": "apps/web/src/modules/catalog/preview-sample.json"
+    "viewport": "1280x720 integrated preview iframe; source-authentic cover card crop 420x589, resized to the catalog aspect ratio 335x469",
+    "fixture": "apps/web/src/modules/catalog/preview-sample.json",
+    "coverFit": "Canonical preview title rendered on one line inside the 48% source clear-band width; ornaments and gold frame remain unobstructed."
   },
   "publication": "published-2026-10-22",
   "browserVerification": {
@@ -89,7 +90,8 @@
       "sparkleAnimation": "none",
       "openingAndInviteVisible": true,
       "localFontsAndImagesLoaded": true
-    }
+    },
+    "catalogCoverVisual": "Re-captured from the live shared renderer using the canonical preview fixture. Compared with the source opening at 1280x720; the entire card and CTA are visible and the long title clears both side ornaments."
   },
   "publicationMigration": "0093_publish_golden_card.sql",
   "releaseVerification": {
