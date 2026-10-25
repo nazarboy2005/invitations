@@ -97,7 +97,7 @@
 .gw-opening-copy > h2 {
   margin: 1.25rem 0 0;
   color: #fff;
-  font-size: clamp(28px, 9vw, 36px);
+  font-size: 36px;
   font-style: italic;
   font-weight: 400;
   line-height: 1.25;
@@ -128,16 +128,13 @@
   --yarl__color_button_active: #fff;
 }
 
-.gw-source-lightbox .yarl__slide {
-  min-height: 0;
-  padding: 48px 24px 88px;
-}
-
 .gw-source-lightbox .yarl__slide_image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
-  transition: transform 250ms ease;
 }
 
 .gw-source-lightbox .yarl__counter {
@@ -164,7 +161,7 @@
 
 .gw-source-lightbox .yarl__thumbnails_container {
   width: 100%;
-  height: 72px;
+  height: 74px;
   box-sizing: border-box;
 }
 

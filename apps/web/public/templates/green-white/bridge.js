@@ -432,7 +432,7 @@
       button.setAttribute("aria-label", `${c.gallery} ${i + 1}`);
       button.style.opacity = "0";
       button.style.transform = "translateY(30px)";
-      const image = document.createElement("img");
+      let image = document.createElement("img");
       image.src = item.src;
       image.alt = "";
       image.loading = "lazy";
@@ -448,9 +448,18 @@
   function showLightbox(items, start, c, opener) {
     if (!items.length) return;
     const dialog = document.createElement("dialog");
-    dialog.className = "yarl__portal yarl__portal_open gw-source-lightbox";
+    dialog.className = "yarl__portal gw-source-lightbox";
     dialog.setAttribute("aria-label", c.gallery);
     dialog.setAttribute("aria-modal", "true");
+    const fadeDuration = motionReduced ? 0 : 250;
+    dialog.style.setProperty("--yarl__fade_animation_duration", `${fadeDuration}ms`);
+    let closing = false;
+    const closeLightbox = () => {
+      if (closing) return;
+      closing = true;
+      dialog.classList.remove("yarl__portal_open");
+      window.setTimeout(() => { if (dialog.open) dialog.close(); }, fadeDuration);
+    };
     const container = document.createElement("div");
     container.className = "yarl__container";
     container.tabIndex = -1;
@@ -483,7 +492,7 @@
     toolbar.append(zoom, fullscreen, close);
     const thumbnailBar = document.createElement("div");
     thumbnailBar.className = "yarl__thumbnails yarl__thumbnails_bottom";
-    thumbnailBar.style.cssText = "height:72px;--yarl__thumbnails_container_padding:8px;--yarl__thumbnails_thumbnail_width:84px;--yarl__thumbnails_thumbnail_height:56px;--yarl__thumbnails_thumbnail_border:1px;--yarl__thumbnails_thumbnail_border_radius:8px;--yarl__thumbnails_thumbnail_padding:0px;--yarl__thumbnails_thumbnail_gap:8px";
+    thumbnailBar.style.cssText = "height:74px;--yarl__thumbnails_container_padding:8px;--yarl__thumbnails_thumbnail_width:84px;--yarl__thumbnails_thumbnail_height:56px;--yarl__thumbnails_thumbnail_border:1px;--yarl__thumbnails_thumbnail_border_radius:8px;--yarl__thumbnails_thumbnail_padding:0px;--yarl__thumbnails_thumbnail_gap:8px";
     const thumbnailContainer = document.createElement("div");
     thumbnailContainer.className = "yarl__thumbnails_container yarl__thumbnails_bottom";
     const thumbnailWrapper = document.createElement("div");
@@ -503,19 +512,52 @@
       button.style.backgroundImage = `url("${String(item.src).replaceAll('"', "%22")}")`;
       button.style.backgroundPosition = "center";
       button.style.backgroundSize = "cover";
-      button.onclick = () => show(i, 0);
+      button.onclick = () => show(i, i === index ? 0 : i > index ? -1 : 1);
       thumbnailTrack.append(button);
       return button;
     });
     thumbnailWrapper.append(thumbnailTrack);
     thumbnailContainer.append(thumbnailWrapper);
     thumbnailBar.append(thumbnailContainer);
-    let index = start, zoomed = false, pointerX = null;
+    let index = start, zoomed = false, pointerX = null, transitioning = false;
     const show = (nextIndex, direction = 0) => {
+      if (transitioning) return;
+      const previousImage = image;
       index = (nextIndex + items.length) % items.length;
-      image.src = items[index].src;
-      image.alt = items[index].alt || items[index].caption || "";
-      image.style.transform = "scale(1)";
+      const slideItem = items[index];
+      const useSlideTransition = Boolean(direction) && !motionReduced && items.length > 1;
+      if (useSlideTransition) {
+        const incoming = previousImage.cloneNode(false);
+        incoming.src = slideItem.src;
+        incoming.alt = slideItem.alt || slideItem.caption || "";
+        incoming.style.transform = "translate(-50%, -50%) scale(1)";
+        const width = slide.clientWidth || document.documentElement.clientWidth;
+        incoming.style.translate = `${-direction * width}px 0`;
+        previousImage.style.transform = "translate(-50%, -50%) scale(1)";
+        slide.append(incoming);
+        transitioning = true;
+        const incomingMotion = incoming.animate(
+          [{ translate: `${-direction * width}px 0` }, { translate: "0px 0px" }],
+          { duration: 250, easing: "ease-out" },
+        );
+        const outgoingMotion = previousImage.animate(
+          [{ translate: "0px 0px" }, { translate: `${direction * width}px 0px` }],
+          { duration: 250, easing: "ease-out" },
+        );
+        Promise.all([incomingMotion.finished, outgoingMotion.finished]).then(() => {
+          incoming.style.translate = "0px 0px";
+          incomingMotion.cancel();
+          outgoingMotion.cancel();
+          previousImage.remove();
+          image = incoming;
+          transitioning = false;
+        }).catch(() => { transitioning = false; });
+      } else {
+        image.src = slideItem.src;
+        image.alt = slideItem.alt || slideItem.caption || "";
+        image.style.transform = "translate(-50%, -50%) scale(1)";
+        image.style.translate = "0px 0px";
+      }
       zoomed = false;
       counter.textContent = `${index + 1} / ${items.length}`;
       thumbnails.forEach((button, i) => {
@@ -533,16 +575,13 @@
         const centerDelta = thumb.left + thumb.width / 2 - (viewport.left + viewport.width / 2);
         thumbnailTrack.style.transform = `translateX(${currentX - centerDelta}px)`;
       }
-      if (direction) {
-        image.animate([{ translate: `${direction * 28}px 0` }, { translate: "0 0" }], { duration: 250, easing: "ease-out" });
-      }
     };
     previous.onclick = () => show(index - 1, 1);
     next.onclick = () => show(index + 1, -1);
-    close.onclick = () => dialog.close();
+    close.onclick = closeLightbox;
     zoom.onclick = () => {
       zoomed = !zoomed;
-      image.style.transform = zoomed ? "scale(2)" : "scale(1)";
+      image.style.transform = `translate(-50%, -50%) scale(${zoomed ? 2 : 1})`;
       zoom.setAttribute("aria-label", zoomed ? c.zoomOut : c.zoomIn);
       zoom.title = zoomed ? c.zoomOut : c.zoomIn;
     };
@@ -552,20 +591,27 @@
         else await dialog.requestFullscreen();
       } catch { /* Fullscreen can be unavailable in an embedded preview. */ }
     };
-    image.addEventListener("dblclick", zoom.onclick);
-    image.addEventListener("pointerdown", (event) => { pointerX = event.clientX; });
-    image.addEventListener("pointerup", (event) => {
+    slide.addEventListener("dblclick", (event) => {
+      if (event.target.closest(".yarl__slide_image")) zoom.onclick();
+    });
+    slide.addEventListener("pointerdown", (event) => {
+      if (!event.target.closest(".yarl__slide_image")) return;
+      pointerX = event.clientX;
+      try { slide.setPointerCapture(event.pointerId); } catch { /* Pointer capture may be unavailable. */ }
+    });
+    slide.addEventListener("pointerup", (event) => {
       if (pointerX == null) return;
       const delta = event.clientX - pointerX;
       pointerX = null;
       if (Math.abs(delta) < 40) return;
       if (delta > 0) previous.click(); else next.click();
     });
+    slide.addEventListener("pointercancel", () => { pointerX = null; });
     container.addEventListener("wheel", (event) => {
       if (!event.ctrlKey && !event.metaKey) return;
       event.preventDefault();
       zoomed = event.deltaY < 0;
-      image.style.transform = zoomed ? "scale(2)" : "scale(1)";
+      image.style.transform = `translate(-50%, -50%) scale(${zoomed ? 2 : 1})`;
     }, { passive: false });
     dialog.addEventListener("keydown", (event) => {
       if (event.key === "ArrowLeft") { event.preventDefault(); previous.click(); }
@@ -573,7 +619,8 @@
       else if (event.key === "Home") { event.preventDefault(); show(0); }
       else if (event.key === "End") { event.preventDefault(); show(items.length - 1); }
     });
-    dialog.addEventListener("click", (event) => { if (event.target === dialog || event.target === container) dialog.close(); });
+    dialog.addEventListener("click", (event) => { if (event.target === dialog || event.target === container) closeLightbox(); });
+    dialog.addEventListener("cancel", (event) => { event.preventDefault(); closeLightbox(); });
     dialog.addEventListener("close", () => {
       if (document.fullscreenElement === dialog) document.exitFullscreen().catch(() => {});
       dialog.remove();
@@ -583,7 +630,10 @@
     dialog.append(container);
     root.append(dialog);
     dialog.showModal();
-    requestAnimationFrame(() => show(start));
+    requestAnimationFrame(() => {
+      dialog.classList.add("yarl__portal_open");
+      show(start);
+      });
     container.focus();
   }
 
