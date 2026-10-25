@@ -91,7 +91,10 @@ test("Green White runtime is isolated and maps the captured sections to the shar
   assert.match(bridge, /event\.key === "ArrowLeft"/);
   assert.match(bridge, /event\.key === "ArrowRight"/);
   assert.match(bridge, /event\.key === "Home"/);
-  assert.match(bridge, /fullscreen\.onclick = async/);
+  assert.match(bridge, /const slideshow = makeButton\("Play"/);
+  assert.match(bridge, /slideshow\.onclick = \(\) => setSlideshowPlaying\(!slideshowPlaying\)/);
+  assert.match(bridge, /slideshowTimer = window\.setTimeout\([\s\S]*?1500/);
+  assert.doesNotMatch(bridge, /requestFullscreen|fullscreen\.onclick|document\.fullscreenElement/);
   assert.match(bridge, /dialog\.addEventListener\("click".*closeLightbox\(\)/);
   assert.match(bridge, /dialog\.addEventListener\("cancel".*closeLightbox\(\)/);
   assert.match(bridge, /button\.onclick = \(\) => parent\.postMessage\(\{ type: `\$\{id\}:language`, locale \}, location\.origin\)/);
@@ -106,7 +109,16 @@ test("Green White runtime is isolated and maps the captured sections to the shar
 test("Green White motion follows the archived source page module", async () => {
   const manifest = JSON.parse(await readFile(new URL("source-assets.provenance.json", root), "utf8"));
   const motion = manifest.motionSource;
+  const gallerySource = manifest.gallerySource;
   assert.ok(motion);
+  assert.deepEqual(gallerySource.pluginModuleIds, {
+    zoom: 126187,
+    counter: 403118,
+    slideshow: 282955,
+    thumbnails: 99388,
+  });
+  assert.equal(gallerySource.fullscreenPluginIncluded, false);
+  assert.deepEqual(gallerySource.slideshow, { autoplay: false, delayMs: 1500 });
   const sourceModule = await readFile(new URL(motion.preservedFile, root));
   const bridge = await readFile(new URL("bridge.js", root), "utf8");
   const styles = await readFile(new URL("adapter.css", root), "utf8");
@@ -144,6 +156,8 @@ test("Green White motion follows the archived source page module", async () => {
   assert.match(styles, /\.gw-source-lightbox \.yarl__thumbnails_wrapper \{[\s\S]*overflow: hidden/);
   assert.match(styles, /\.gw-source-lightbox \.yarl__thumbnails_container \{[\s\S]*height: 74px/);
   assert.match(sourceModule.toString("utf8"), /plugins:\[M\.default,D\.default,A\.default,R\.default\]/);
+  assert.match(sourceModule.toString("utf8"), /slideshow:\{autoplay:!1,delay:1500\}/);
+  assert.doesNotMatch(sourceModule.toString("utf8"), /plugins:\[[^\]]*fullscreen/i);
   assert.match(sourceModule.toString("utf8"), /width:84,height:56,border:1,borderRadius:8,padding:0,gap:8/);
   assert.match(sourceModule.toString("utf8"), /swipe:250/);
   assert.match(sourceModule.toString("utf8"), /finite:!1/);

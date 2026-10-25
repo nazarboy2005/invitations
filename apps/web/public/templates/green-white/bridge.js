@@ -457,6 +457,7 @@
     const closeLightbox = () => {
       if (closing) return;
       closing = true;
+      window.clearTimeout(slideshowTimer);
       dialog.classList.remove("yarl__portal_open");
       window.setTimeout(() => { if (dialog.open) dialog.close(); }, fadeDuration);
     };
@@ -486,10 +487,18 @@
     };
     const close = makeButton(c.close, '<path d="m18 6-12 12M6 6l12 12"/>');
     const zoom = makeButton(c.zoomIn, '<circle cx="11" cy="11" r="7"/><path d="m20 20-4-4M11 8v6M8 11h6"/>');
-    const fullscreen = makeButton(c.fullscreen, '<path d="M8 3H5a2 2 0 0 0-2 2v3m13-5h3a2 2 0 0 1 2 2v3M3 16v3a2 2 0 0 0 2 2h3m13-5v3a2 2 0 0 1-2 2h-3"/>');
+    const slideshow = makeButton("Play", '<path d="M8 5v14l11-7z"/>');
+    const setSlideshowIcon = (playing) => {
+      const label = playing ? "Pause" : "Play";
+      slideshow.setAttribute("aria-label", label);
+      slideshow.title = label;
+      slideshow.innerHTML = playing
+        ? '<svg class="yarl__icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>'
+        : '<svg class="yarl__icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>';
+    };
     const previous = makeButton(c.previous, '<path d="m15 18-6-6 6-6"/>', "yarl__navigation_prev");
     const next = makeButton(c.next, '<path d="m9 18 6-6-6-6"/>', "yarl__navigation_next");
-    toolbar.append(zoom, fullscreen, close);
+    toolbar.append(zoom, slideshow, close);
     const thumbnailBar = document.createElement("div");
     thumbnailBar.className = "yarl__thumbnails yarl__thumbnails_bottom";
     thumbnailBar.style.cssText = "height:74px;--yarl__thumbnails_container_padding:8px;--yarl__thumbnails_thumbnail_width:84px;--yarl__thumbnails_thumbnail_height:56px;--yarl__thumbnails_thumbnail_border:1px;--yarl__thumbnails_thumbnail_border_radius:8px;--yarl__thumbnails_thumbnail_padding:0px;--yarl__thumbnails_thumbnail_gap:8px";
@@ -520,6 +529,23 @@
     thumbnailContainer.append(thumbnailWrapper);
     thumbnailBar.append(thumbnailContainer);
     let index = start, zoomed = false, pointerX = null, transitioning = false;
+    let slideshowPlaying = false, slideshowTimer = null;
+    const scheduleSlideshow = () => {
+      window.clearTimeout(slideshowTimer);
+      if (!slideshowPlaying || closing) return;
+      slideshowTimer = window.setTimeout(() => {
+        slideshowTimer = null;
+        if (transitioning) { scheduleSlideshow(); return; }
+        show(index + 1, -1);
+      }, 1500);
+    };
+    const setSlideshowPlaying = (playing) => {
+      slideshowPlaying = Boolean(playing) && !motionReduced;
+      setSlideshowIcon(slideshowPlaying);
+      if (slideshowPlaying) scheduleSlideshow();
+      else window.clearTimeout(slideshowTimer);
+    };
+    slideshow.disabled = motionReduced;
     const show = (nextIndex, direction = 0) => {
       if (transitioning) return;
       const previousImage = image;
@@ -575,21 +601,17 @@
         const centerDelta = thumb.left + thumb.width / 2 - (viewport.left + viewport.width / 2);
         thumbnailTrack.style.transform = `translateX(${currentX - centerDelta}px)`;
       }
+      scheduleSlideshow();
     };
     previous.onclick = () => show(index - 1, 1);
     next.onclick = () => show(index + 1, -1);
     close.onclick = closeLightbox;
+    slideshow.onclick = () => setSlideshowPlaying(!slideshowPlaying);
     zoom.onclick = () => {
       zoomed = !zoomed;
       image.style.transform = `translate(-50%, -50%) scale(${zoomed ? 2 : 1})`;
       zoom.setAttribute("aria-label", zoomed ? c.zoomOut : c.zoomIn);
       zoom.title = zoomed ? c.zoomOut : c.zoomIn;
-    };
-    fullscreen.onclick = async () => {
-      try {
-        if (document.fullscreenElement) await document.exitFullscreen();
-        else await dialog.requestFullscreen();
-      } catch { /* Fullscreen can be unavailable in an embedded preview. */ }
     };
     slide.addEventListener("dblclick", (event) => {
       if (event.target.closest(".yarl__slide_image")) zoom.onclick();
@@ -622,7 +644,7 @@
     dialog.addEventListener("click", (event) => { if (event.target === dialog || event.target === container) closeLightbox(); });
     dialog.addEventListener("cancel", (event) => { event.preventDefault(); closeLightbox(); });
     dialog.addEventListener("close", () => {
-      if (document.fullscreenElement === dialog) document.exitFullscreen().catch(() => {});
+      window.clearTimeout(slideshowTimer);
       dialog.remove();
       opener?.focus();
     }, { once: true });
