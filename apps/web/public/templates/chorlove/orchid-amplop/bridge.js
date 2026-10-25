@@ -216,7 +216,6 @@
       const authoredPhoto = safeUrl(index % 2 ? data.brideImage : data.groomImage) || (preview ? BASE + (index % 2 ? "story-bride.jpg" : "story-groom.jpg") : "");
       const card = document.createElement("article"); card.className = `orchid-reveal story-text-card story-${index ? "second" : "first"}-text`;
       card.style.setProperty("--orchid-reveal-delay", index ? ".08s" : ".06s");
-      if (chapter.title) { const heading = document.createElement("h3"); heading.textContent = chapter.title; card.append(heading); }
       if (chapter.text) { const paragraph = document.createElement("p"); paragraph.textContent = chapter.text; card.append(paragraph); }
       if (authoredPhoto) {
         const image = document.createElement("div"); image.className = `orchid-reveal story-image-wrap story-${index % 2 ? "bride" : "groom"}`;
