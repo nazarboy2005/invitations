@@ -32,8 +32,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 5089,
-      "sha256": "ed419be60e1cb0d95bfa88b7e70313d555a2336081b892b1bdc4a2dbbef01eb1"
+      "bytes": 5943,
+      "sha256": "b80c493e53398ea9dd1ecfeab304020445552ab3f7f9210c0b3859565a277732"
     },
     {
       "path": "preview.webp",
@@ -213,7 +213,9 @@
     "deviceScaleFactor": 1,
     "fixture": "apps/web/src/modules/catalog/preview-sample.json",
     "route": "/templates/palace-rose/index.html?lang=uz-Latn&qaReducedMotion=1",
-    "description": "Actual packaged renderer opening page; preview-only locale toolbar hidden for capture."
+    "description": "Actual packaged renderer opening page; preview-only locale toolbar hidden for capture.",
+    "contractPreviewImage": "/templates/palace-rose/preview.webp",
+    "posterResolution": "No Palace Rose CATALOG_COVERS override; templatePoster falls through to contract previewImage."
   },
   "archiveGap": {
     "providerArchive": "Invitations - this folder will be removed from production",
@@ -230,7 +232,7 @@
       "royal_red.webp"
     ],
     "palaceRoseManifestArtworkCount": 17,
-    "archiveFinding": "The provider archive lacks these eight files under the Palace Rose asset path. Five basenames are present only in unrelated template folders, and three basenames are absent across the archive. The Chorlove capture manifest has no resource entries for the Palace Rose gift URLs.",
+    "archiveFinding": "All 17 files under images/palace-rose match packaged artwork byte-for-byte. The eight gift images are absent from that canonical folder. Archive-wide SHA-256 search found four expected gift hashes in other template image folders; four expected gift hashes were absent. The same-named Glass Pink glass_garden_pink.webp has different bytes. The capture manifest has no entries for the Palace Rose gift URLs.",
     "liveSourceRecovery": "All eight exact Palace Rose source URLs returned HTTP 200 and were fetched from those URLs; no files were copied from other-template paths.",
     "providerArchiveMissingPalaceRosePaths": [
       "Web invitations/images/palace-rose/chateau_green.webp",
@@ -272,7 +274,19 @@
         ]
       }
     ],
-    "finding": "All eight gift-decoration files were absent from the canonical Palace Rose archive path. Their exact Palace Rose URLs declared by the recovered renderer are live and have been fetched directly. Identical basenames elsewhere were not used as sources."
+    "finding": "All eight gift images in the package were fetched from the exact Palace Rose URLs declared by the recovered renderer. Other-template files were not used as package sources. Archive basename and expected-hash findings are separately listed in archiveAudit.",
+    "exactHashFoundElsewhere": [
+      "chateau_green.webp",
+      "double_dragon_green.webp",
+      "dragon_phoenix_v2.webp",
+      "dragon_phoenix.webp"
+    ],
+    "exactHashAbsentFromArchive": [
+      "glass_garden_pink.webp",
+      "hoa_kho_orange.webp",
+      "mahal_gold.webp",
+      "royal_red.webp"
+    ]
   },
   "checks": {
     "productionBuild": "passed (Next.js optimized build completed)",
@@ -285,7 +299,12 @@
     "reducedMotion": "opening verified without petals",
     "browserFidelity": "Existing normal-motion browser screenshot inspected at 450x800; latest scroll/reduced-motion behavior not rechecked because browser safety policy blocked localhost authority.",
     "sourceAssets": "8/8 exact Palace Rose URLs returned 200 image/webp; byte sizes and SHA-256 verified",
-    "toyonaInteraction": "Source-style modal renders card details/copy or creator note; opens/closes with Escape/backdrop; respects reduced motion"
+    "toyonaInteraction": "Source-style modal renders card details/copy or creator note; opens/closes with Escape/backdrop; respects reduced motion",
+    "nonRsvpReleaseBlockers": [
+      "Fresh browser QA of scroll, reveal, parallax, motion, and gift modal interactions is outstanding because local browser authority is currently blocked.",
+      "Creator-preview versus public-renderer visual and interaction parity has not been verified in-browser.",
+      "The current shared ChorloveInvitation enables generic editor-sections injection for Palace Rose (story, dress, extra people, and receipt); verify it does not add unsupported sections or collide with the native gift flow, or suppress it for this template."
+    ]
   },
   "sourceStylesheets": [
     {
@@ -606,6 +625,114 @@
         "exactCopyFound": false,
         "sameNameArchiveFiles": []
       }
-    ]
+    ],
+    "manifestArtwork": [
+      {
+        "archivePath": "images/palace-rose/arch-frame.webp",
+        "matchesPackaged": true,
+        "name": "arch-frame.webp",
+        "sha256": "58007a5041e4b731ba44f8976eb6b4f84e1b4b7261b8ee87cf3bccb513241bae"
+      },
+      {
+        "archivePath": "images/palace-rose/bells.webp",
+        "matchesPackaged": true,
+        "name": "bells.webp",
+        "sha256": "33ec9689bcbb1297a9fd0d350ef143af6c7eaa0b7b798d42a85315369d44d007"
+      },
+      {
+        "archivePath": "images/palace-rose/calendar-frame.webp",
+        "matchesPackaged": true,
+        "name": "calendar-frame.webp",
+        "sha256": "53314e70ac0ae2f4c18320ee49aba0f0ec2c229f17db9d4302b4f3959e43550f"
+      },
+      {
+        "archivePath": "images/palace-rose/castle.webp",
+        "matchesPackaged": true,
+        "name": "castle.webp",
+        "sha256": "14eecabc5264d6ba0470d088682ba9e894a63d2581bafc15b9f4bef9eac5144b"
+      },
+      {
+        "archivePath": "images/palace-rose/castle2.webp",
+        "matchesPackaged": true,
+        "name": "castle2.webp",
+        "sha256": "d9cab2b00bd3a98d1035dff8a2d9f123733cc66a6af16453080b7aaf7c1400d3"
+      },
+      {
+        "archivePath": "images/palace-rose/fence.webp",
+        "matchesPackaged": true,
+        "name": "fence.webp",
+        "sha256": "666276986264ace203cb3192a088c7c0238e63e26db1abc8db42016a4e4f723d"
+      },
+      {
+        "archivePath": "images/palace-rose/flower1.webp",
+        "matchesPackaged": true,
+        "name": "flower1.webp",
+        "sha256": "011a4905510eefd8046b52db938a121cd93d711ffffcd330f61252821986cb84"
+      },
+      {
+        "archivePath": "images/palace-rose/flower2.webp",
+        "matchesPackaged": true,
+        "name": "flower2.webp",
+        "sha256": "578d5de8019dfd5dc03addba975b664ccffd83cb7ad780d93881fd54ba1321a9"
+      },
+      {
+        "archivePath": "images/palace-rose/flower3-decoration.webp",
+        "matchesPackaged": true,
+        "name": "flower3-decoration.webp",
+        "sha256": "c8e82ea23eb2bb50577ff69e7755f77cda4f52b703894631ffa884f13a65b7f3"
+      },
+      {
+        "archivePath": "images/palace-rose/gold-line.webp",
+        "matchesPackaged": true,
+        "name": "gold-line.webp",
+        "sha256": "d81755679d77b9e1e84ff00ebf2899acaf794536c6a7f0b582dc85605afdfcef"
+      },
+      {
+        "archivePath": "images/palace-rose/medallion-cake.webp",
+        "matchesPackaged": true,
+        "name": "medallion-cake.webp",
+        "sha256": "1401c306b23d134486757407063699d43ee51ceb678bae3fdbbb1a624da57841"
+      },
+      {
+        "archivePath": "images/palace-rose/medallion-coming.webp",
+        "matchesPackaged": true,
+        "name": "medallion-coming.webp",
+        "sha256": "3b2b7891fa5cde2548f9bc90b630c16f9ad00f332f39bd73c15b69f4607e0772"
+      },
+      {
+        "archivePath": "images/palace-rose/medallion-gift.webp",
+        "matchesPackaged": true,
+        "name": "medallion-gift.webp",
+        "sha256": "06b873442ca4c3c60b86766996e5a5f65e76be3ed7368ab7d46400844d5a36be"
+      },
+      {
+        "archivePath": "images/palace-rose/paper.webp",
+        "matchesPackaged": true,
+        "name": "paper.webp",
+        "sha256": "33bd2c2169928c88608d3b8556a59c78f8932df5bb2a2f8d90f1dd38da20c44a"
+      },
+      {
+        "archivePath": "images/palace-rose/pattern.webp",
+        "matchesPackaged": true,
+        "name": "pattern.webp",
+        "sha256": "ea48c5d1e3dbb7ad5be734b450387b880fed2a6f1aaaecfdba8626829697f137"
+      },
+      {
+        "archivePath": "images/palace-rose/sandstone-flower.webp",
+        "matchesPackaged": true,
+        "name": "sandstone-flower.webp",
+        "sha256": "128d166cba8d539bd740866cb34a5f36b6a89ed67bd615cfc58faa172830e4c6"
+      },
+      {
+        "archivePath": "images/palace-rose/sandstone.webp",
+        "matchesPackaged": true,
+        "name": "sandstone.webp",
+        "sha256": "3ce96dd2c5e51db79d8f9a157bf2faabd0713913d035507af90fae3c3e471217"
+      }
+    ],
+    "manifestArtworkSummary": {
+      "matchingCount": 17,
+      "archiveCount": 17
+    }
   }
 }

@@ -12,6 +12,8 @@ The adapter maps names, personalized greeting, event label, hosts/message, event
 
 Catalog/database registration is private (`published=false`) and wedding-only. Keep it unpublished until all interactions, four locales, reduced motion, source-motion comparison, creator/public preview parity, and focused release checks pass.
 
+Current non-RSVP release blockers are recorded in `source/provenance.json`: fresh browser checks of scroll/motion and the gift modal, creator-preview versus public-renderer parity, and review of the shared `editor-sections.js` injection. The shared Chorlove renderer currently enables that injection for Palace Rose; verify that it does not add sections absent from the captured design or conflict with its native gift flow, or disable it for Palace Rose before publication. The local-browser authority restriction prevents completing the browser-dependent checks in this task.
+
 ## Provenance
 
 - Capture manifest: `Invitations - this folder will be removed from production/Chorlove/capture-manifest.json`
