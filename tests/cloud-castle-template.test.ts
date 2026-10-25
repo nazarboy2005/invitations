@@ -114,6 +114,10 @@ test("Cloud Castle gift modal matches source interaction, card styling and image
   assert.match(js, /navigator\.clipboard\?\.writeText/);
   assert.match(js, /aria-modal/);
   assert.match(js, /className = "fixed inset-0 z-\[130\] flex items-center justify-center bg-black\/75 backdrop-blur-sm p-4 select-none"/);
+  assert.match(js, /overlay\.style\.width = "100vw"/);
+  assert.match(js, /dialog\.tabIndex = -1/);
+  assert.match(js, /dialog\.focus\(\)/);
+  assert.doesNotMatch(js, /close\.focus\(\)/);
 });
 
 test("Cloud Castle opening and hero motion follow the captured page module", async () => {

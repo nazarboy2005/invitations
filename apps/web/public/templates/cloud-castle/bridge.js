@@ -785,6 +785,10 @@
     const overlay = document.createElement("div");
     overlay.dataset.ccGiftDialog = "";
     overlay.className = "fixed inset-0 z-[130] flex items-center justify-center bg-black/75 backdrop-blur-sm p-4 select-none";
+    // The source dialog is fixed to the viewport. `inset-0` alone resolves to
+    // the document's scrollbar-reduced width in the app renderer; use the
+    // viewport width so its 16px gutters and max-width match the source.
+    overlay.style.width = "100vw";
     overlay.style.opacity = "0";
     overlay.style.transition = reduced ? "none" : "opacity 250ms ease";
     const dialog = document.createElement("div");
@@ -792,6 +796,8 @@
     dialog.setAttribute("role", "dialog");
     dialog.setAttribute("aria-modal", "true");
     dialog.setAttribute("aria-labelledby", "cc-gift-dialog-title");
+    dialog.tabIndex = -1;
+    dialog.style.outline = "none";
     dialog.style.color = "rgb(18, 52, 103)";
     dialog.style.opacity = "0";
     dialog.style.transform = "scale(.92) translateY(20px)";
@@ -877,7 +883,7 @@
     close.onclick = dismiss;
     document.addEventListener("keydown", keydown);
     requestAnimationFrame(() => { overlay.style.opacity = "1"; dialog.style.opacity = "1"; dialog.style.transform = "scale(1) translateY(0)"; });
-    close.focus();
+    dialog.focus();
   }
 
   function renderVenue(data) {
