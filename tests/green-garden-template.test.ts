@@ -92,6 +92,8 @@ test("Green Garden bridge uses the shared contract and supported services", asyn
   assert.match(bridge, /gg-source-gift-modal/);
   assert.match(bridge, /dialog\.showModal\(\)/);
   assert.match(bridge, /navigator\.clipboard\.writeText/);
+  assert.match(bridge, /svgIcon\(\[\["rect",\{width:"20",height:"14",x:"2",y:"5",rx:"2"\}\]/);
+  assert.match(bridge, /if\(d\.toyona\?\.cardHolder\)/);
   assert.match(bridge, /data-gg-countdown/);
   assert.match(bridge, /data-gg-lightbox/);
   assert.match(bridge, /d\.toyona\?\.cardNumber/);
@@ -123,6 +125,18 @@ test("Green Garden restores available source motion and schedule assets", async 
   assert.match(bridge, /reveal\(names\[1\].*?\.7,\.55\)/);
   assert.match(bridge, /reveal\(names\[2\].*?\.7,\.7\)/);
   assert.match(bridge, /duration:duration\*1000,delay:delay\*1000,iterations:Infinity,easing:"ease-in-out"/);
+  for (const ornamentMotion of [
+    '["jasmine_white",-6,-22,3.2,0]',
+    '["spring_garden_green",-7,20,3.6,.3]',
+    '["boho_floral_pink",-5,-18,2.9,.6]',
+    '["brocade_flower_red",-6,14,3.4,.2]',
+    '["baroque_gold",-5,8,3.1,.4]',
+    '["minimalism_brown",-6,-10,3.5,.7]',
+    '["spring_garden_blue",-5,-14,3.3,.1]',
+  ]) assert.ok(bridge.includes(ornamentMotion), `source To'yona motion differs: ${ornamentMotion}`);
+  assert.match(css, /backdrop-filter:blur\(12px\)/);
+  assert.match(css, /border-radius:24px;background:#fbfdf8;backdrop-filter:blur\(24px\)/);
+  assert.match(css, /border-radius:16px;background:rgba\(255,255,255,\.8\);box-shadow/);
   assert.match(bridge, /\},\{threshold:\.5\}\)/);
   assert.match(bridge, /\.6,index\*\.15,\.3\)/);
   assert.match(bridge, /\.4,index\*\.05,\.2\)/);
