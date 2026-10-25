@@ -129,5 +129,12 @@ The exact archived route chunk sets each guest wish card to enter from opacity
 threshold. `bridge.js` uses those same values and the matching ease-out curve.
 The archived gift overlay defaults to a 300ms ease-out fade; its card uses a
 250ms ease-out entrance/exit from opacity 0, scale .92, and y=20px. The package
-now matches both curves and timings. Focused tests assert the source chunk
+now matches both curves and timings. A fresh paired browser check of the source archive
+and packaged preview at 1280×720 opened both modals. Each settled card measured
+448×402px at y=159px and was centered in its usable viewport; the package iframe
+reserves scrollbar width, accounting for its slightly narrower center. Both
+cards showed the same source content and close action. Close-to-detach observations
+were about 433ms for source and 458ms for package, including browser interaction
+and rendering overhead; the code-defined durations are 300ms for the overlay and
+250ms for the card. No source mismatch was found. Focused tests assert the source chunk
 settings and package rules.
