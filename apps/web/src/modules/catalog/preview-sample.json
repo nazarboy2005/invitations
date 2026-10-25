@@ -15,16 +15,6 @@
         { "id": "luxury-gold-source-preview-6", "url": "/templates/chorlove/orchid-amplop/assets/gallery-5.webp", "alt": "", "caption": "" }
       ]
     },
-    "luxury-gold": {
-      "gallery": [
-        { "id": "luxury-gold-source-preview-1", "url": "/templates/chorlove/orchid-amplop/assets/gallery-2.webp", "alt": "", "caption": "" },
-        { "id": "luxury-gold-source-preview-2", "url": "/templates/chorlove/orchid-amplop/assets/gallery-1.webp", "alt": "", "caption": "" },
-        { "id": "luxury-gold-source-preview-3", "url": "/templates/chorlove/orchid-amplop/assets/gallery-3.webp", "alt": "", "caption": "" },
-        { "id": "luxury-gold-source-preview-4", "url": "/templates/chorlove/orchid-amplop/assets/gallery-6.webp", "alt": "", "caption": "" },
-        { "id": "luxury-gold-source-preview-5", "url": "/templates/chorlove/orchid-amplop/assets/gallery-4.webp", "alt": "", "caption": "" },
-        { "id": "luxury-gold-source-preview-6", "url": "/templates/chorlove/orchid-amplop/assets/gallery-5.webp", "alt": "", "caption": "" }
-      ]
-    },
     "green-white": {
       "gallery": [
         { "id": "green-white-source-preview-1", "url": "/templates/chorlove/orchid-amplop/assets/gallery-2.webp", "alt": "", "caption": "" },

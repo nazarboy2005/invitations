@@ -95,6 +95,16 @@ test("Modern Floral preview uses its captured gallery images only in its preview
   );
   assert.ok(otherTemplate.gallery.every((item) => !item.url));
 });
+test("Luxury Gold uses the captured demo gallery only in catalog preview samples", () => {
+  const preview = createTemplatePreviewSample("luxury-gold");
+  const creatorInvitation = createInvitation("luxury-gold");
+  assert.deepEqual(
+    preview.gallery.map((item) => item.url),
+    [2, 1, 3, 6, 4, 5].map((index) => `/templates/chorlove/orchid-amplop/assets/gallery-${index}.webp`),
+  );
+  assert.ok(creatorInvitation.gallery.every((item) => !item.url));
+});
+
 
 test("catalog fixtures use an event type supported by each selected design", () => {
   for (const id of ["lola", "qiz-bazmi", "shahzoda", "chavandoz", "hilol", "yangi-uy"] as const) {
