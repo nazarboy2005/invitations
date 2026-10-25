@@ -178,6 +178,8 @@ test("Modern Floral RSVP has fixed party size and exposes only source-backed opt
   assert.match(bridge, /hide\(s,!values\.some\(a=>\["phone","telegram"\]/);
   assert.match(bridge, /if\(!g\.enabled\)\{hide\(s\);return;\}/);
   assert.match(bridge, /hide\(section,!preview&&!publicItems\.length\)/);
-  assert.match(bridge, /hide\(s,!x\.preview&&!data\(\)\.wishesEnabled\)/);
+  assert.match(bridge, /if\(x\.preview\)values=d\(\)\.wishes\|\|\[\];else if\(d\(\)\.wishesEnabled\)/);
+  assert.doesNotMatch(bridge, /\bdata\s*\(\s*\)/);
+  assert.match(bridge, /hide\(s,!x\.preview&&!d\(\)\.wishesEnabled\)/);
   assert.match(bridge, /hide\(s,!d\(\)\.rsvp\?\.enabled&&!x\.preview\)/);
 });
