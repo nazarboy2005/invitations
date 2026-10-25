@@ -19,6 +19,7 @@ const bridgeUrl = new URL("bridge.js", root);
 const provenanceUrl = new URL("source-assets.provenance.json", root);
 const coverUrl = new URL("catalog-opening.jpg", root);
 const sourceChunkUrl = new URL("_next/static/chunks/0umiwyco9-jdx.js", sourceRoot);
+const sourceMotionRuntimeUrl = new URL("_next/static/chunks/0ceoe4zwq362f.js", sourceRoot);
 const sourcePreviewDataUrl = new URL("_next/static/chunks/0d2h69c7a3snv.js", sourceRoot);
 const sourceGalleryChunkUrl = new URL("_next/static/chunks/09cpm7sbnsw7i.js", sourceRoot);
 const sourceWishesChunkUrl = new URL("_next/static/chunks/0q0gfl1vec0ef.js", sourceRoot);
@@ -45,6 +46,7 @@ test("Modern Floral motion port is tied to the captured route module", async () 
   const sourceChunk = await readIfPresent(sourceChunkUrl);
   const sourceGalleryChunk = await readIfPresent(sourceGalleryChunkUrl);
   const sourceWishesChunk = await readIfPresent(sourceWishesChunkUrl);
+  const sourceMotionRuntime = await readIfPresent(sourceMotionRuntimeUrl);
   const motion = await readFile(motionUrl, "utf8");
   assert.match(provenance.sourceMotionModule.sha256, /^[a-f\d]{64}$/);
   assert.equal(provenance.sourceGalleryModule.bytes, 76269);
@@ -59,6 +61,14 @@ test("Modern Floral motion port is tied to the captured route module", async () 
     assert.match(gallery, /initial:\{opacity:0\},animate:\{opacity:1\},exit:\{opacity:0\},className:"fixed inset-0 z-\[3000\] flex items-center justify-center bg-black\/88 p-4 backdrop-blur-md"/);
     assert.match(gallery, /initial:\{scale:\.96,opacity:0\},animate:\{scale:1,opacity:1\},exit:\{scale:\.96,opacity:0\}/);
     assert.doesNotMatch(gallery, /data-prev|data-next|ArrowLeft|ArrowRight/);
+  }
+  if (sourceMotionRuntime) {
+    const runtime = sourceMotionRuntime.toString("utf8");
+    assert.equal(provenance.sourceMotionRuntime.bytes, sourceMotionRuntime.length);
+    assert.equal(provenance.sourceMotionRuntime.sha256, createHash("sha256").update(sourceMotionRuntime).digest("hex"));
+    assert.match(runtime, /te=\{type:"spring",stiffness:500,damping:25,restSpeed:10\}/);
+    assert.match(runtime, /t\.startsWith\("scale"\)\?\{type:"spring",stiffness:550,damping:0===e\[1\]\?2\*Math\.sqrt\(550\):30,restSpeed:10\}:te/);
+    assert.match(runtime, /ts=\{type:"keyframes",ease:\[\.25,\.1,\.35,1\],duration:\.3\}/);
   }
   if (sourceWishesChunk) {
     const wishes = sourceWishesChunk.toString("utf8");
@@ -118,6 +128,10 @@ test("Modern Floral motion port is tied to the captured route module", async () 
   assert.match(motion, /if \(transform\.includes\("translateY\(15px\)"\)\) return \{ duration: 600, amount: 0\.2, once: false \}/);
   assert.match(motion, /function springFrames\(/);
   assert.match(motion, /function interpolateTransform\(/);
+  assert.match(motion, /const stiffness = explicitStiffness \? options\.stiffness : isScale \? 550 : 500/);
+  assert.match(motion, /const damping = Number\.isFinite\(options\.damping\)[\s\S]*?isScale[\s\S]*?: 25/);
+  assert.match(motion, /shortSpring \? 0\.01 : 2/);
+  assert.match(motion, /duration: 300, delay: config\.delay \|\| 0, easing: "cubic-bezier\(\.25,\.1,\.35,1\)"/);
   assert.match(motion, /staggered\.indexOf\(node\);\s*if \(staggerIndex >= 0\) \{\s*config\.delay = 120 \+ staggerIndex \* 140/s);
   assert.match(motion, /section:nth-of-type\(2\) \.relative\.h-16 > \.z-10/);
   assert.match(motion, /duration: 20000, iterations: Infinity, easing: "linear"/);
@@ -138,11 +152,45 @@ test("Modern Floral motion port is tied to the captured route module", async () 
   assert.match(motion, /const spring = springFrames\(\{ transform: `scale\(\$\{start\}\)` \}, \{ transform: `scale\(\$\{target\}\)` \}\)/);
   assert.match(motion, /bindStates\(music, 1\.1, 0\.9\)/);
   assert.match(motion, /bindStates\(link, 1\.02, 0\.98\)/);
+  assert.match(motion, /node\.addEventListener\("keydown", \(event\) => \{\s*if \(event\.key !== "Enter" \|\| event\.repeat \|\| keyboardPressing\) return;/);
   assert.doesNotMatch(motion, /amount: 0\.5/);
   assert.doesNotMatch(motion, /duration: 150, fill: "forwards"/);
-  assert.match(motion, /image\?\.animate\(\[\{ opacity: 0 \}, \{ opacity: 1 \}\], \{ duration: 300, easing: "ease-out", fill: "both" \}\)/);
+  assert.match(motion, /image\?\.animate\(\[\{ opacity: 0 \}, \{ opacity: 1 \}\], \{ duration: 300, easing: "cubic-bezier\(\.25,\.1,\.35,1\)", fill: "both" \}\)/);
   assert.match(motion, /springFrames\(\{ transform: "scale\(\.96\)" \}, \{ transform: "scale\(1\)" \}\)/);
-  assert.match(motion, /const fade = layer\.animate\(\[\{ opacity: 1 \}, \{ opacity: 0 \}\], \{ duration: 300, easing: "ease-out", fill: "forwards" \}\)/);
+  assert.match(motion, /const fade = layer\.animate\(\[\{ opacity: 1 \}, \{ opacity: 0 \}\], \{ duration: 300, easing: "cubic-bezier\(\.25,\.1,\.35,1\)", fill: "forwards" \}\)/);
+});
+
+test("Modern Floral spring frame generation handles source scale, transform, and explicit springs", async () => {
+  const motion = await readFile(motionUrl, "utf8");
+  const marker = "window.ModernFloralSourceMotion = { start, openLightbox, closeLightbox };";
+  const instrumented = motion.replace(marker, "window.ModernFloralSourceMotion = { start, openLightbox, closeLightbox, springFrames };");
+  assert.notEqual(instrumented, motion, "the source motion test hook is present");
+  const window = {
+    name: "",
+    addEventListener() {},
+    matchMedia: () => ({ matches: false, addEventListener() {} }),
+  };
+  runInNewContext(instrumented, {
+    document: { querySelector: () => ({}) },
+    window,
+    parent: {},
+    location: { origin: "http://localhost" },
+  });
+  const springFrames = window.ModernFloralSourceMotion.springFrames;
+  const sourceScale = springFrames({ transform: "scale(1)" }, { transform: "scale(1.1)" });
+  const sourceTransform = springFrames({ transform: "translateY(18px)" }, { transform: "translateY(0px)" });
+  const explicitSpring = springFrames({ transform: "scale(0)" }, { transform: "scale(1)" }, { stiffness: 200 });
+  for (const profile of [sourceScale, sourceTransform, explicitSpring]) {
+    assert.ok(profile.duration > 0 && profile.duration < 2);
+    assert.ok(profile.frames.length > 1);
+    assert.equal(profile.frames.at(-1)?.offset, 1);
+  }
+  assert.equal(sourceScale.frames[0]?.transform, "scale(1)");
+  assert.equal(sourceScale.frames.at(-1)?.transform, "scale(1.1)");
+  assert.equal(sourceTransform.frames[0]?.transform, "translateY(18px)");
+  assert.equal(sourceTransform.frames.at(-1)?.transform, "translateY(0px)");
+  assert.equal(explicitSpring.frames[0]?.transform, "scale(0)");
+  assert.equal(explicitSpring.frames.at(-1)?.transform, "scale(1)");
 });
 
 test("Modern Floral page loads its source motion runner and preserves source reveal states", async () => {

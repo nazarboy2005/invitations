@@ -19,6 +19,17 @@
     "sha256": "eaed95def4d91f8382ad0ed45938909c017b20403850fdbd631a2c5b26435f45",
     "behavior": "Original route module for Modern Floral; source choreography is ported into source-motion.js for the isolated static page."
   },
+  "sourceMotionRuntime": {
+    "path": "../../../../Invitations - this folder will be removed from production/Chorlove/Web invitations/_next/static/chunks/0ceoe4zwq362f.js",
+    "bytes": 140967,
+    "sha256": "5dd7d6dc70babc6b0507d8940a534b916c15ae8ede6a63ebb140f07aaf60836d",
+    "defaults": {
+      "transformSpring": { "stiffness": 500, "damping": 25, "restSpeed": 10 },
+      "scaleSpring": { "stiffness": 550, "damping": 30, "restSpeed": 10 },
+      "opacityTransition": { "durationSeconds": 0.3, "ease": [0.25, 0.1, 0.35, 1] }
+    },
+    "behavior": "Captured Framer Motion runtime defaults used by Modern Floral's implicit transform, scale, and opacity transitions."
+  },
   "sourceGalleryModule": {
     "path": "..\\..\\..\\..\\Invitations - this folder will be removed from production\\Chorlove\\Web invitations\\_next\\static\\chunks\\09cpm7sbnsw7i.js",
     "bytes": 76269,

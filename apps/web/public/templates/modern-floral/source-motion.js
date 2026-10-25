@@ -67,18 +67,6 @@
     return { duration: 600, amount: 0, once: false };
   }
 
-  function springProgress(time, stiffness) {
-    const mass = 1;
-    const damping = 10;
-    const omega = Math.sqrt(stiffness / mass);
-    const decay = damping / (2 * mass);
-    const frequency = Math.sqrt(Math.max(0, omega * omega - decay * decay));
-    const envelope = Math.exp(-decay * time);
-    const progress = 1 - envelope * (Math.cos(frequency * time) + (decay / frequency) * Math.sin(frequency * time));
-    const velocity = envelope * (omega * omega / frequency) * Math.sin(frequency * time);
-    return { progress, velocity };
-  }
-
   function interpolateTransform(from, to, progress) {
     const start = [...from.matchAll(/([a-zA-Z0-9]+)\((-?[\d.]+)([a-z%]*)\)/g)];
     const end = [...to.matchAll(/([a-zA-Z0-9]+)\((-?[\d.]+)([a-z%]*)\)/g)];
@@ -91,36 +79,103 @@
     }).join(" ");
   }
 
-  function springFrames(initial, target, stiffness = 100) {
-    let duration = 0;
-    for (let time = 1 / 120; time < 2.5; time += 1 / 120) {
-      const state = springProgress(time, stiffness);
-      if (Math.abs(1 - state.progress) < 0.01 && Math.abs(state.velocity) < 0.01) {
-        duration = time;
+  function springFrames(initial, target, options = {}) {
+    const fromTransform = initial.transform || "none";
+    const toTransform = target.transform || "none";
+    const fromMatch = fromTransform.match(/scale\((-?[\d.]+)/) || fromTransform.match(/translate(?:X|Y)?\((-?[\d.]+)/);
+    const toMatch = toTransform.match(/scale\((-?[\d.]+)/) || toTransform.match(/translate(?:X|Y)?\((-?[\d.]+)/);
+    const from = Number(fromMatch?.[1] ?? 1);
+    const to = Number(toMatch?.[1] ?? 1);
+    const isScale = /scale\(/.test(fromTransform) || /scale\(/.test(toTransform);
+    const explicitStiffness = Number.isFinite(options.stiffness);
+    const stiffness = explicitStiffness ? options.stiffness : isScale ? 550 : 500;
+    const damping = Number.isFinite(options.damping)
+      ? options.damping
+      : explicitStiffness
+        ? 10
+        : isScale
+          ? (to === 0 ? 2 * Math.sqrt(550) : 30)
+          : 25;
+    const delta = to - from;
+    const shortSpring = Math.abs(delta) < 5;
+    const restSpeed = Number.isFinite(options.restSpeed)
+      ? options.restSpeed
+      : explicitStiffness
+        ? shortSpring ? 0.01 : 2
+        : 10;
+    const restDelta = Number.isFinite(options.restDelta) ? options.restDelta : shortSpring ? 0.005 : 0.5;
+    const mass = options.mass || 1;
+    const dampingRatio = damping / (2 * Math.sqrt(stiffness * mass));
+    const omega = Math.sqrt(stiffness / mass) / 1000;
+    const initialVelocity = Number(options.velocity) || 0;
+
+    const stateAt = (time) => {
+      const envelope = Math.exp(-dampingRatio * omega * time);
+      if (dampingRatio < 1) {
+        const frequency = omega * Math.sqrt(1 - dampingRatio * dampingRatio);
+        const x = (initialVelocity + dampingRatio * omega * delta) / frequency;
+        const sin = Math.sin(frequency * time);
+        const cos = Math.cos(frequency * time);
+        const value = to - envelope * (x * sin + delta * cos);
+        const velocity = envelope * (
+          (dampingRatio * omega * x + delta * frequency) * sin +
+          (dampingRatio * omega * delta - x * frequency) * cos
+        );
+        return { value, velocity };
+      }
+      if (dampingRatio === 1) {
+        const value = to - envelope * (delta + (initialVelocity + omega * delta) * time);
+        const velocity = envelope * (omega * (initialVelocity + omega * delta) * time - initialVelocity);
+        return { value, velocity };
+      }
+      const frequency = omega * Math.sqrt(dampingRatio * dampingRatio - 1);
+      const argument = Math.min(frequency * time, 300);
+      const value = to - envelope * (
+        (initialVelocity + dampingRatio * omega * delta) * Math.sinh(argument) +
+        frequency * delta * Math.cosh(argument)
+      ) / frequency;
+      const x = (initialVelocity + dampingRatio * omega * delta) / frequency;
+      const sinCoefficient = dampingRatio * omega * x - delta * frequency;
+      const cosCoefficient = dampingRatio * omega * delta - x * frequency;
+      const velocity = envelope * (
+        sinCoefficient * Math.sinh(argument) + cosCoefficient * Math.cosh(argument)
+      );
+      return { value, velocity };
+    };
+
+    let durationMs = 0;
+    for (let time = 0; time < 20000; time += 50) {
+      const state = stateAt(time);
+      if (Math.abs(state.velocity * 1000) <= restSpeed && Math.abs(to - state.value) <= restDelta) {
+        durationMs = time;
         break;
       }
     }
-    if (!duration) duration = 2.5;
-    const startOpacity = Number(initial.opacity ?? 1);
-    const endOpacity = Number(target.opacity ?? 1);
+    if (!durationMs && delta !== 0) durationMs = 20000;
+
     const frames = [];
-    const count = Math.ceil(duration * 60);
-    for (let index = 0; index <= count; index += 1) {
-      const time = Math.min(duration, index / 60);
-      const progress = springProgress(time, stiffness).progress;
-      const frame = {
-        transform: interpolateTransform(initial.transform, target.transform, progress),
-        offset: time / duration,
-      };
-      if (startOpacity !== endOpacity) frame.opacity = startOpacity + (endOpacity - startOpacity) * progress;
-      frames.push(frame);
+    const frameCount = Math.max(1, Math.ceil(durationMs / (1000 / 60)));
+    for (let index = 0; index <= frameCount; index += 1) {
+      const time = Math.min(durationMs, index * (1000 / 60));
+      const progress = delta === 0 ? 1 : (stateAt(time).value - from) / delta;
+      frames.push({
+        transform: index === frameCount ? toTransform : interpolateTransform(fromTransform, toTransform, progress),
+        offset: durationMs === 0 ? 1 : time / durationMs,
+      });
     }
-    return { frames, duration };
+    return { frames, duration: durationMs / 1000 };
+  }
+
+  function cancelRunning(node) {
+    const active = running.get(node);
+    if (!active) return;
+    for (const animation of Array.isArray(active) ? active : [active]) animation.cancel();
+    running.delete(node);
   }
 
   function animateReveal(node, config) {
     if (reduced || node.hidden || !node.isConnected) return;
-    running.get(node)?.cancel();
+    cancelRunning(node);
     const initial = {
       opacity: node.style.opacity || "1",
       transform: node.style.transform || "none",
@@ -128,8 +183,17 @@
     if ((node.getAttribute("style") || "").includes("filter:blur(8px)")) initial.filter = "blur(8px)";
     const target = targetFor(node);
     if (config.spring) {
-      const spring = springFrames(initial, target, config.stiffness || 100);
-      running.set(node, node.animate(spring.frames, { duration: spring.duration * 1000, delay: config.delay || 0, easing: "linear", fill: "both" }));
+      const spring = springFrames(initial, target, config);
+      const animations = [];
+      if (initial.transform !== target.transform) {
+        animations.push(node.animate(spring.frames, { duration: spring.duration * 1000, delay: config.delay || 0, easing: "linear", fill: "both" }));
+      }
+      if (Number(initial.opacity) !== Number(target.opacity)) {
+        animations.push(node.animate([{ opacity: Number(initial.opacity) }, { opacity: Number(target.opacity) }], {
+          duration: 300, delay: config.delay || 0, easing: "cubic-bezier(.25,.1,.35,1)", fill: "both",
+        }));
+      }
+      running.set(node, animations);
       return;
     }
     running.set(node, node.animate([initial, targetFor(node)], {
@@ -299,13 +363,28 @@
       if (node.dataset.mfMotionBound) return;
       node.dataset.mfMotionBound = "true";
       let hovering = false;
-      let pressing = false;
-      const update = () => animateScale(node, pressing ? tap : hovering ? hover : 1);
+      let pointerPressing = false;
+      let keyboardPressing = false;
+      const update = () => animateScale(node, pointerPressing || keyboardPressing ? tap : hovering ? hover : 1);
       node.addEventListener("pointerenter", () => { hovering = true; update(); });
-      node.addEventListener("pointerleave", () => { hovering = false; pressing = false; update(); });
-      node.addEventListener("pointerdown", () => { pressing = true; update(); });
-      node.addEventListener("pointerup", () => { pressing = false; update(); });
-      node.addEventListener("pointercancel", () => { pressing = false; update(); });
+      node.addEventListener("pointerleave", () => { hovering = false; pointerPressing = false; update(); });
+      node.addEventListener("pointerdown", () => { pointerPressing = true; update(); });
+      node.addEventListener("pointerup", () => { pointerPressing = false; update(); });
+      node.addEventListener("pointercancel", () => { pointerPressing = false; update(); });
+      node.addEventListener("keydown", (event) => {
+        if (event.key !== "Enter" || event.repeat || keyboardPressing) return;
+        keyboardPressing = true;
+        update();
+      });
+      node.addEventListener("keyup", (event) => {
+        if (event.key !== "Enter" || !keyboardPressing) return;
+        keyboardPressing = false;
+        update();
+      });
+      node.addEventListener("blur", () => {
+        keyboardPressing = false;
+        update();
+      });
     };
     const music = root.querySelector(".mf-music");
     if (music) bindStates(music, 1.1, 0.9);
@@ -337,8 +416,8 @@
   function openLightbox(layer) {
     if (reduced) return;
     const image = layer.querySelector("img");
-    layer.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 300, easing: "ease-out", fill: "both" });
-    image?.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 300, easing: "ease-out", fill: "both" });
+    layer.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 300, easing: "cubic-bezier(.25,.1,.35,1)", fill: "both" });
+    image?.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 300, easing: "cubic-bezier(.25,.1,.35,1)", fill: "both" });
     const spring = springFrames({ transform: "scale(.96)" }, { transform: "scale(1)" });
     image?.animate(spring.frames, { duration: spring.duration * 1000, easing: "linear", fill: "both" });
   }
@@ -349,10 +428,10 @@
       return;
     }
     const image = layer.querySelector("img");
-    image?.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 300, easing: "ease-out", fill: "forwards" });
+    image?.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 300, easing: "cubic-bezier(.25,.1,.35,1)", fill: "forwards" });
     const spring = springFrames({ transform: "scale(1)" }, { transform: "scale(.96)" });
     image?.animate(spring.frames, { duration: spring.duration * 1000, easing: "linear", fill: "forwards" });
-    const fade = layer.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 300, easing: "ease-out", fill: "forwards" });
+    const fade = layer.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 300, easing: "cubic-bezier(.25,.1,.35,1)", fill: "forwards" });
     fade.onfinish = () => {
       fade.cancel();
       onFinish?.();
@@ -384,7 +463,7 @@
           if (reached) {
             animateReveal(node, config);
             if (config.once) observer.unobserve(node);
-          } else if (!config.once) running.get(node)?.cancel();
+          } else if (!config.once) cancelRunning(node);
         }
       }, { root, threshold: [0, 0.2, 0.35] });
       animateOpening();
