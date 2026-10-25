@@ -132,7 +132,9 @@ test("Cloud Castle opening and hero motion follow the captured page module", asy
   assert.match(js, /duration: 3000, iterations: Infinity/);
   assert.match(js, /inner\.animate\(\[\{ translate: "0 0" \}, \{ translate: `\$\{sway\}px 0` \}, \{ translate: "0 0" \}\], \{ duration: duration \* 500, direction: "alternate", iterations: Infinity, easing: "ease-in-out" \}\)/);
   assert.match(js, /inner\.animate\(\[\{ rotate: "0deg" \}, \{ rotate: "360deg" \}\], \{ duration: duration \* 1000, iterations: Infinity, easing: "linear" \}\)/);
-  assert.match(js, /inner\.animate\(\[\{ opacity \}, \{ opacity: 0\.8 \* opacity \}, \{ opacity \}\], \{ duration: duration \* 1000, iterations: Infinity, easing: "linear" \}\)/);
+  assert.match(js, /outer\.style\.opacity = String\(item\.opacity\)/);
+  assert.doesNotMatch(js, /inner\.animate\(\[\{ opacity \}, \{ opacity: 0\.8 \* opacity \}, \{ opacity \}\]/);
+  assert.match(js, /outer\.animate\(\[\{ opacity \}, \{ opacity: 1, offset: 0\.5 \}, \{ opacity: 0 \}\], \{ duration: 850, easing: "ease-out", fill: "forwards" \}\)/);
   assert.match(js, /duration: 800, easing: "cubic-bezier\(\.22,1,\.36,1\)"/);
   assert.match(js, /clouds\.forEach\(\(cloud\) => \{ cloud\.style\.transform = "none"; \}\)/);
   assert.match(js, /if \(castle\) castle\.style\.transform = "none"/);

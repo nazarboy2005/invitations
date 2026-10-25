@@ -254,6 +254,7 @@
       outer.style.left = item.left;
       outer.style.top = `${item.initialY}vh`;
       outer.style.fontSize = `${item.size}px`;
+      outer.style.opacity = String(item.opacity);
       outer.setAttribute("aria-hidden", "true");
       inner.className = "cc-source-petal-inner";
       inner.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em"><g><ellipse cx="12" cy="5" rx="2.2" ry="4.5"></ellipse><ellipse cx="12" cy="5" rx="2.2" ry="4.5" transform="rotate(60 12 12)"></ellipse><ellipse cx="12" cy="5" rx="2.2" ry="4.5" transform="rotate(120 12 12)"></ellipse><ellipse cx="12" cy="5" rx="2.2" ry="4.5" transform="rotate(180 12 12)"></ellipse><ellipse cx="12" cy="5" rx="2.2" ry="4.5" transform="rotate(240 12 12)"></ellipse><ellipse cx="12" cy="5" rx="2.2" ry="4.5" transform="rotate(300 12 12)"></ellipse></g><circle cx="12" cy="12" r="1.8" fill-opacity=".45"></circle></svg>';
@@ -268,7 +269,6 @@
         outer.animate([{ translate: "0 0" }, { translate: "0 110vh" }], { duration: duration * 1000, delay: delay * 1000, iterations: Infinity, easing: "linear" });
         inner.animate([{ translate: "0 0" }, { translate: `${sway}px 0` }, { translate: "0 0" }], { duration: duration * 500, direction: "alternate", iterations: Infinity, easing: "ease-in-out" });
         inner.animate([{ rotate: "0deg" }, { rotate: "360deg" }], { duration: duration * 1000, iterations: Infinity, easing: "linear" });
-        inner.animate([{ opacity }, { opacity: 0.8 * opacity }, { opacity }], { duration: duration * 1000, iterations: Infinity, easing: "linear" });
       }
       heart?.animate([{ scale: 1 }, { scale: 1.12 }, { scale: 1 }], { duration: 2000, iterations: Infinity, easing: "ease-in-out" });
       sheen?.animate([{ translate: "-100px 0" }, { translate: "260px 0" }], { duration: 3000, iterations: Infinity, easing: "ease-in-out" });
@@ -293,8 +293,8 @@
         outer.getAnimations().forEach((animation) => animation.cancel());
         inner.getAnimations().forEach((animation) => animation.cancel());
         outer.animate([{ translate: "0 0" }, { translate: `${burstX}px ${burstY}px` }], { duration: 850, easing: "ease-out", fill: "forwards" });
+        outer.animate([{ opacity }, { opacity: 1, offset: 0.5 }, { opacity: 0 }], { duration: 850, easing: "ease-out", fill: "forwards" });
         inner.animate([{ scale: 1, offset: 0 }, { scale: 2.2, offset: 0.5 }, { scale: 0, offset: 1 }], { duration: 850, easing: "ease-out", fill: "forwards" });
-        inner.animate([{ opacity }, { opacity: 1, offset: 0.5 }, { opacity: 0 }], { duration: 850, easing: "ease-out", fill: "forwards" });
         inner.animate([{ rotate: "0deg" }, { rotate: `${12 * sway}deg` }], { duration: 850, easing: "ease-out", fill: "forwards" });
       }
       card?.animate([{ transform: "translateY(0) scale(1)", opacity: 1 }, { transform: "translateY(-35px) scale(1.08)", opacity: 0 }], { duration: 800, easing: "cubic-bezier(.22,1,.36,1)", fill: "forwards" });
