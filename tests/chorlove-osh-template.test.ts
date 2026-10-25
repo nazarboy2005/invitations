@@ -3,6 +3,7 @@ import { readFileSync } from "node:fs";
 import path from "node:path";
 import test from "node:test";
 import { TEMPLATES } from "../packages/contracts/src/index";
+import { createTemplatePreviewSample } from "../apps/web/src/modules/catalog/preview-sample";
 
 const root = process.cwd();
 const packageRoot = path.join(root, "apps/web/public/templates/chorlove/osh");
@@ -35,6 +36,7 @@ test("Chorlove Osh remains a distinct unpublished Osh template", () => {
   assert.ok(osh);
   assert.deepEqual(osh.categoryIds, ["osh"]);
   assert.deepEqual(osh.supportedEventTypes, ["osh"]);
+  assert.equal(osh.previewImage, "/templates/chorlove/osh/preview.jpg");
   assert.equal(osh.published, false);
   assert.notEqual(osh.id, "palov");
   assert.notEqual(osh.id, "invitate-palov");
@@ -44,4 +46,15 @@ test("Chorlove Osh uses its namespaced source renderer without platform extras",
   assert.match(chorloveRenderer, /templateId !== "osh"/);
   assert.match(chorloveRenderer, /templateId === "osh"/);
   assert.match(chorloveRenderer, /`\/templates\/chorlove\/\$\{templateId\}\/index\.html\?\$\{query\}`/);
+});
+
+test("Osh preview keeps its source-owned Palov art without sample gallery or story photos", () => {
+  const sample = createTemplatePreviewSample("osh");
+  const html = readPackage("index.html");
+  const bridge = readPackage("bridge.js");
+
+  assert.ok(sample.gallery.every((photo) => !photo.url.trim()));
+  assert.equal(sample.story.length, 0);
+  assert.match(html, /class=["']osh-photo["']/);
+  assert.match(bridge, /image\.src = "\/templates\/chorlove\/osh\/palov\.png"/);
 });
