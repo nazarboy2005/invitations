@@ -22,6 +22,38 @@ test("Palace Rose stays private and supports wedding events only", () => {
   assert.match(read("packages/database/migrations/0119_register_palace_rose.sql"), /published\)\s*\nVALUES \('palace-rose',[^\n]+false\)/);
 });
 
+test("Palace Rose preview media matches its archived photos and stays preview-only", () => {
+  const sample = JSON.parse(read("apps/web/src/modules/catalog/preview-sample.json"));
+  const gallery = sample.templateSamples["palace-rose"].gallery;
+  const files = [
+    "gallery-2.webp",
+    "gallery-1.webp",
+    "gallery-3.webp",
+    "gallery-6.webp",
+    "gallery-4.webp",
+    "gallery-5.webp",
+  ];
+  assert.deepEqual(gallery.map((item: { url: string }) => item.url), files.map(
+    (file) => `/templates/chorlove/orchid-amplop/assets/${file}`,
+  ));
+  assert.equal(
+    sample.templateSamples["palace-rose"].venuePhoto,
+    "https://images.unsplash.com/photo-1712314947761-a8d718bd8c32?w=1400&h=1000&fit=crop&auto=format&q=80",
+  );
+  const archiveRoot = "Invitations - this folder will be removed from production/Chorlove/Web invitations";
+  for (const file of files) {
+    const sourcePath = `${archiveRoot}/images/templates/orchid-amplop/${file}`;
+    const packagePath = `apps/web/public/templates/chorlove/orchid-amplop/assets/${file}`;
+    assert.equal(sha256(readFileSync(sourcePath)), sha256(readFileSync(packagePath)), file);
+  }
+  const renderer = read("apps/web/src/templates/chorlove/renderer.tsx");
+  assert.match(renderer, /templateId === "palace-rose"[\s\S]*?preview && sampleWishes[\s\S]*?mapped\.venueImage = venuePhoto/);
+  const bridge = read(`${base}/bridge.js`);
+  assert.match(bridge, /const photoUrl = typeof data\(\)\.venueImage === "string" \? data\(\)\.venueImage\.trim\(\) : ""/);
+  assert.match(bridge, /photoFrame\.replaceChildren\(\);\s*hide\(photoFrame,true\)/);
+  assert.match(bridge, /paint\(\); hide\(section, !items\.length\)/);
+});
+
 test("isolated page packages the captured Palace Rose DOM and only its source art", () => {
   const provenance = JSON.parse(read(`${base}/source/provenance.json`));
   assert.equal(provenance.capture.path, "Web invitations/templates/palace-rose/preview-frame.html");
@@ -131,6 +163,8 @@ test("Palace Rose packages its captured styles and source motion timings locally
   assert.match(adapterCss, /html,body\{height:100%\}/);
   assert.match(adapterCss, /#palace-rose-root\{[^}]*height:100%;max-width:none[^}]*overflow-y:auto/);
   assert.match(adapterCss, /\[data-pr-gift-dialog-panel\] \.pr-gift-receipt-host:empty\{display:none\}/);
+  assert.match(adapterCss, /\[data-pr-gift-dialog-panel\]\{max-height:calc\(100vh - 1rem\);display:flex;flex-direction:column\}/);
+  assert.match(adapterCss, /\[data-pr-gift-dialog-panel\]>.p-6\{min-height:0;overflow-y:auto;overscroll-behavior:contain\}/);
   const stylesheets = [
     "0.u3j0~_2ygfx.css",
     "00sc_9lpb3zcn.css",

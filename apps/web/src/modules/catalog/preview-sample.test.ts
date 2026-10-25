@@ -11,6 +11,7 @@ import {
 import {
   createLongNamePreview,
   createTemplatePreviewSample,
+  getTemplatePreviewVenuePhoto,
   getTemplatePreviewWishes,
   hasAuthoredInvitationContent,
 } from "./preview-sample";
@@ -77,6 +78,15 @@ test("template samples are illustrative complete invitations", () => {
   assert.equal(sample.content["uz-Latn"].message.includes("ko‘rishdan"), true);
   assert.equal(sample.content["uz-Cyrl"].eventLabel, "Никоҳ тўйи");
   assert.equal(sample.content.ru.greeting, "Здравствуйте, дорогой гость!");
+});
+
+test("Palace Rose source photos are confined to catalog and initial-selection previews", () => {
+  const preview = createTemplatePreviewSample("palace-rose");
+  const creatorDraft = createInvitation("palace-rose");
+  const galleryFiles = ["gallery-2.webp", "gallery-1.webp", "gallery-3.webp", "gallery-6.webp", "gallery-4.webp", "gallery-5.webp"];
+  assert.deepEqual(preview.gallery.map(({ url, alt }) => [url, alt]), galleryFiles.map((file, index) => [`/templates/chorlove/orchid-amplop/assets/${file}`, `Wedding photo ${index + 1}`]));
+  assert.equal(getTemplatePreviewVenuePhoto("palace-rose"), "https://images.unsplash.com/photo-1712314947761-a8d718bd8c32?w=1400&h=1000&fit=crop&auto=format&q=80");
+  assert.ok(creatorDraft.gallery.every((photo) => !photo.url && !photo.alt && !photo.caption));
 });
 
 test("Modern Floral preview uses its captured gallery images only in its preview sample", () => {

@@ -60,3 +60,6 @@ body{margin:0;background:#fff;color:#640e1b;font-family:"Palace Marcellus","Time
 [data-pr-gift-dialog-panel] .pr-gift-receipt-host [data-platform-extra="receipt"] h2{margin:0 0 .75rem;font:600 15px/1.4 "Marcellus",serif;text-align:center}
 [data-pr-gift-dialog-panel] .pr-gift-receipt-host [data-platform-extra="receipt"] form{gap:.75rem}
 [data-pr-gift-dialog-panel] .pr-gift-receipt-host:empty{display:none}
+[data-pr-gift-dialog-panel]{max-height:calc(100vh - 1rem);display:flex;flex-direction:column}
+[data-pr-gift-dialog-panel]>.relative.px-6.pt-6.pb-4{flex:none}
+[data-pr-gift-dialog-panel]>.p-6{min-height:0;overflow-y:auto;overscroll-behavior:contain}

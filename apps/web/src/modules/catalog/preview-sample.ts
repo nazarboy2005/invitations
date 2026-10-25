@@ -31,6 +31,8 @@ type EventSample = {
 };
 
 type TemplateSample = {
+  /** Preview-only source venue photo, never part of invitation data. */
+  venuePhoto?: string;
   program?: Array<{
     id: string;
     time: string;
@@ -53,6 +55,11 @@ const EVENT_SAMPLES = previewSample.eventSamples as Partial<
 const TEMPLATE_SAMPLES = previewSample.templateSamples as Partial<
   Record<string, TemplateSample>
 >;
+
+/** Source-only template media for catalog and blank template-selection previews. */
+export function getTemplatePreviewVenuePhoto(templateId: string): string | undefined {
+  return TEMPLATE_SAMPLES[templateId]?.venuePhoto;
+}
 /**
  * A presentation-only fixture for catalog and empty template-selection previews.
  * Never persist this value as a creator's invitation.

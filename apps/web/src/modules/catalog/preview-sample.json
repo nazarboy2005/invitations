@@ -5,6 +5,17 @@
   "startsAt": "2027-06-12T17:00",
   "timezone": "Asia/Tashkent",
   "templateSamples": {
+    "palace-rose": {
+      "venuePhoto": "https://images.unsplash.com/photo-1712314947761-a8d718bd8c32?w=1400&h=1000&fit=crop&auto=format&q=80",
+      "gallery": [
+        { "id": "palace-rose-source-preview-1", "url": "/templates/chorlove/orchid-amplop/assets/gallery-2.webp", "alt": "Wedding photo 1", "caption": "" },
+        { "id": "palace-rose-source-preview-2", "url": "/templates/chorlove/orchid-amplop/assets/gallery-1.webp", "alt": "Wedding photo 2", "caption": "" },
+        { "id": "palace-rose-source-preview-3", "url": "/templates/chorlove/orchid-amplop/assets/gallery-3.webp", "alt": "Wedding photo 3", "caption": "" },
+        { "id": "palace-rose-source-preview-4", "url": "/templates/chorlove/orchid-amplop/assets/gallery-6.webp", "alt": "Wedding photo 4", "caption": "" },
+        { "id": "palace-rose-source-preview-5", "url": "/templates/chorlove/orchid-amplop/assets/gallery-4.webp", "alt": "Wedding photo 5", "caption": "" },
+        { "id": "palace-rose-source-preview-6", "url": "/templates/chorlove/orchid-amplop/assets/gallery-5.webp", "alt": "Wedding photo 6", "caption": "" }
+      ]
+    },
     "luxury-gold": {
       "gallery": [
         { "id": "luxury-gold-source-preview-1", "url": "/templates/chorlove/orchid-amplop/assets/gallery-2.webp", "alt": "", "caption": "" },

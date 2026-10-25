@@ -157,6 +157,24 @@
   function bindVenue() {
     const section = sections[4]; if (!section) return;
     const name = data().venue?.name || "", address = data().venue?.address || "";
+    const photoFrame = all("div",section).find((node) =>
+      node.classList.contains("overflow-hidden") &&
+      node.classList.contains("rounded-[15px]") &&
+      [...node.classList].some((name) => name.startsWith("max-h-[")),
+    );
+    if (photoFrame) {
+      const photoUrl = typeof data().venueImage === "string" ? data().venueImage.trim() : "";
+      if (photoUrl) {
+        let photo = q("img",photoFrame);
+        if (!photo) { photo=document.createElement("img");photo.className="h-full w-full object-cover transition-transform duration-700 hover:scale-105";photo.loading="lazy";photo.decoding="async";photoFrame.replaceChildren(photo); }
+        if (photo.src !== photoUrl) photo.src=photoUrl;
+        photo.alt=`${name} — wedding venue`;
+        hide(photoFrame,false);
+      } else {
+        photoFrame.replaceChildren();
+        hide(photoFrame,true);
+      }
+    }
     const heading = q("h3", section); set(heading, name);
     set(all("p",section)[0],text().venue);
     const localeVenue=payload?.locale==="en"?"Venue":payload?.locale==="ru"?"Место свадьбы":payload?.locale==="uz-Cyrl"?"Тўйхона":"To‘yxona";

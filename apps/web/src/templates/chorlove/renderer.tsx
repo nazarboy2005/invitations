@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import type { Invitation, Locale } from "@taklifnoma/contracts";
 import { makeLegacyData } from "@/templates/anor/renderer";
 import { useInvitationExtras } from "@/templates/use-invitation-extras";
+import { getTemplatePreviewVenuePhoto } from "@/modules/catalog/preview-sample";
 import { CATALOG_PREVIEW_MUSIC } from "@/modules/catalog/catalog-music";
 import { isChorloveTemplate } from "./registry";
 import styles from "./renderer.module.css";
@@ -56,6 +57,10 @@ export function ChorloveInvitation({
 
   const data = useMemo(() => {
     const mapped = makeLegacyData(invitation, frameLocale, guestName, sampleWishes);
+    if (templateId === "palace-rose" && preview && sampleWishes) {
+      const venuePhoto = getTemplatePreviewVenuePhoto(templateId);
+      if (venuePhoto) mapped.venueImage = venuePhoto;
+    }
     if (templateId === "orchid-amplop") {
       const hasCreatorPhotos = invitation.gallery.some((photo) => photo.url.trim());
       if (preview && sampleWishes && !hasCreatorPhotos) {
