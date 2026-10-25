@@ -191,12 +191,9 @@
       "Your answer": "Javobingiz",
       "I will come": "Kelaman",
       "I can't come": "Kela olmayman",
-      "How many people will come?": "Necha kishi kelasiz?",
       "Preview only": "Faqat ko‘rib chiqish uchun",
       "Please enter your name and choose an answer.": "Ismingizni kiriting va javobni tanlang.",
       "Could not send. Please try again.": "Yuborilmadi. Qayta urinib ko‘ring.",
-      "Fewer people": "Kamaytirish",
-      "More people": "Ko‘paytirish",
       Send: "Yuborish",
       "Sending...": "Yuborilmoqda...",
       "Thank you": "Rahmat",
@@ -232,12 +229,9 @@
       "Your answer": "Жавобингиз",
       "I will come": "Келаман",
       "I can't come": "Кела олмайман",
-      "How many people will come?": "Неча киши келасиз?",
       "Preview only": "Фақат кўриб чиқиш учун",
       "Please enter your name and choose an answer.": "Исмингизни киритинг ва жавобни танланг.",
       "Could not send. Please try again.": "Юборилмади. Қайта уриниб кўринг.",
-      "Fewer people": "Камайтириш",
-      "More people": "Кўпайтириш",
       Send: "Юбориш",
       "Sending...": "Юборилмоқда...",
       "Thank you": "Раҳмат",
@@ -276,12 +270,9 @@
     "Your answer": "Your answer",
     "I will come": "I will come",
     "I can't come": "I can't come",
-    "How many people will come?": "How many people will come?",
     "Preview only": "Preview only",
     "Please enter your name and choose an answer.": "Please enter your name and choose an answer.",
     "Could not send. Please try again.": "Could not send. Please try again.",
-    "Fewer people": "Fewer people",
-    "More people": "More people",
     Send: "Send",
     "Sending...": "Sending...",
     "Thank you": "Thank you",
@@ -318,12 +309,9 @@
     "Your answer": "Ваш ответ",
     "I will come": "Приду",
     "I can't come": "Не смогу прийти",
-    "How many people will come?": "Сколько человек придёт?",
     "Preview only": "Только предварительный просмотр",
     "Please enter your name and choose an answer.": "Введите имя и выберите ответ.",
     "Could not send. Please try again.": "Не удалось отправить. Попробуйте ещё раз.",
-    "Fewer people": "Меньше",
-    "More people": "Больше",
     Send: "Отправить",
     "Sending...": "Отправка...",
     "Thank you": "Спасибо",
@@ -454,10 +442,11 @@
     const links = all(".osh-soc"),
       contacts = d.contacts || [],
       telegram = contacts.find((c) => c.type === "telegram"),
+      instagram = contacts.find((c) => c.type === "instagram"),
       phone = contacts.find((c) => c.type === "phone");
     [
       [links[0], telegram],
-      [links[1], null],
+      [links[1], instagram],
       [links[2], phone],
     ].forEach(([a, c]) => {
       if (!a) return;
@@ -469,7 +458,7 @@
       a.setAttribute("aria-label", c.label);
       hide(a, false);
     });
-    hide(q(".osh-socials"), !telegram && !phone);
+    hide(q(".osh-socials"), !telegram && !instagram && !phone);
     const watermark = q(".osh-watermark");
     if (watermark) watermark.remove();
     const form = q(".osh-form"),
@@ -485,21 +474,10 @@
     hide(q(".osh-rsvp"), !d.rsvp?.enabled);
     put(q(".osh-rsvp .osh-label"), t("Confirmation"));
     put(q(".osh-form legend"), t("Your answer"));
-    hide(q(".osh-count"), answer !== "yes");
-    q(".osh-count")?.setAttribute("aria-hidden", String(answer !== "yes"));
     all(".osh-opt-b").forEach((n, i) =>
       put(n, t(i ? "I can't come" : "I will come")),
     );
-    put(q(".osh-count > span"), t("How many people will come?"));
     put(q(".osh-again"), t("Change answer"));
-    put(output, count);
-    if (buttons.length > 1) {
-      buttons[0].disabled = count <= 1;
-      buttons[1].disabled = count >= (d.rsvp?.maxPartySize || 10);
-    }
-    all(".osh-stepper button").forEach((b, i) => {
-      b.setAttribute("aria-label", t(i ? "More people" : "Fewer people"));
-    });
     put(send, t("Send"));
     if (x.reducedMotion)
       document.documentElement.classList.add("osh-reduced-motion");
@@ -507,53 +485,24 @@
   const form = q(".osh-form"),
     input = q("#osh-guest-name"),
     send = q(".osh-send-btn"),
-    countSection = q(".osh-count"),
     thank = q(".osh-thanks"),
     status = document.createElement("p");
   status.className = "osh-form-error";
   status.setAttribute("role", "status");
   status.setAttribute("aria-live", "polite");
   form?.append(status);
-  let answer = "",
-    count = 1;
+  let answer = "";
   all(".osh-radio").forEach((r) =>
     r.addEventListener("change", () => {
       answer = r.value;
-      hide(countSection, answer !== "yes");
-      countSection?.setAttribute("aria-hidden", String(answer !== "yes"));
     }),
   );
-  const buttons = all(".osh-stepper button");
-  let output = q(".osh-stepper output");
-  buttons.forEach((b, i) =>
-    b.addEventListener("click", () => {
-      count = Math.max(
-        1,
-        Math.min(p?.data?.rsvp?.maxPartySize || 10, count + (i ? 1 : -1)),
-      );
-      put(output, count);
-      buttons[0].disabled = count <= 1;
-      buttons[1].disabled = count >= (p?.data?.rsvp?.maxPartySize || 10);
-    }),
-  );
-  if (buttons.length > 1) {
-    buttons[0].disabled = count <= 1;
-    buttons[1].disabled = count >= (p?.data?.rsvp?.maxPartySize || 10);
-  }
   q(".osh-again")?.addEventListener("click", () => {
     answer = "";
-    count = 1;
     all(".osh-radio").forEach((radio) => (radio.checked = false));
-    put(output, count);
-    if (buttons.length > 1) {
-      buttons[0].disabled = true;
-      buttons[1].disabled = count >= (p?.data?.rsvp?.maxPartySize || 10);
-    }
     status.textContent = "";
     hide(thank);
     hide(form, false);
-    hide(countSection);
-    countSection?.setAttribute("aria-hidden", "true");
   });
   send?.addEventListener("click", async () => {
     status.textContent = "";
@@ -576,7 +525,7 @@
           body: JSON.stringify({
             name: input.value.trim(),
             status: answer,
-            partySize: answer === "yes" ? count : 0,
+            partySize: answer === "yes" ? 1 : 0,
             guestToken: p.guestToken || undefined,
           }),
         },

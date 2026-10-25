@@ -25,12 +25,13 @@
       "sha256": "0ae21f320a7bae60712908271b15e8bd21f24347a903e246cae8ac5d75a476fc"
     }
   ],
-  "status": "internal unpublished integration; preview, synthetic public route, RSVP, creator draft save/reopen, matching 1280x720 source/package normal and reduced-motion opening review, RSVP party-size interaction, typecheck, and build verified; successful publish/public-render/reopen cycle requires catalog release",
+  "status": "internal unpublished integration; source fidelity, four-locale labels, user-required omission of guest headcount, Instagram mapping, reduced motion, Osh-specific full-preview routing, disabled generic extras, and focused checks verified; successful publish/public-render/reopen cycle requires catalog release",
   "fidelityNotes": [
     "Source CSS and isolated .osh-sheet composition are retained; Framer Motion viewport reveals are adapted with equivalent opacity, 28px vertical offset, 0.7s ease-out, once at 0.2 viewport visibility.",
-    "Source music toggle maps creator/catalog direct-audio URLs and source YouTube watch, short, and embed URLs to opt-in playback with fade. The new YouTube adapter path awaits a local browser rerun.",
-    "Exact source Osh markup and component expose no To'yona/card/gift section; none is invented for this source template.",
-    "Provider wrapper, sample soundtrack, watermark and Instagram contact are omitted; the shared contact contract supports Telegram and phone only."
+    "Source music toggle maps creator/catalog direct-audio URLs and source YouTube watch, short, and embed URLs to opt-in playback with fade; prior local browser checks verified direct audio and YouTube player/toggle behavior.",
+    "The source component includes guest headcount; the user-approved shared guest-facing rule removes the question and stepper from the package. RSVP yes maps to partySize 1 and no maps to 0.",
+    "Exact source Osh markup and component expose no To’yona/card/gift section; none is invented for this source template.",
+    "Telegram, Instagram, and phone source footer links are mapped to the available shared contact values."
   ],
   "catalogArtwork": {
     "sourceUrl": "https://payment.chorlove.uz/media-assets/694fbff5-73dc-44eb-9283-539e9eb2a26e/file",
