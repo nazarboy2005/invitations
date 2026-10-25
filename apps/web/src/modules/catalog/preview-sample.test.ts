@@ -79,6 +79,23 @@ test("template samples are illustrative complete invitations", () => {
   assert.equal(sample.content.ru.greeting, "Здравствуйте, дорогой гость!");
 });
 
+test("Modern Floral preview uses its captured gallery images only in its preview sample", () => {
+  const modernFloral = createTemplatePreviewSample("modern-floral");
+  const otherTemplate = createTemplatePreviewSample("anor");
+  assert.deepEqual(
+    modernFloral.gallery.map((item) => item.url),
+    [
+      "/templates/chorlove/orchid-amplop/assets/gallery-2.webp",
+      "/templates/chorlove/orchid-amplop/assets/gallery-1.webp",
+      "/templates/chorlove/orchid-amplop/assets/gallery-3.webp",
+      "/templates/chorlove/orchid-amplop/assets/gallery-6.webp",
+      "/templates/chorlove/orchid-amplop/assets/gallery-4.webp",
+      "/templates/chorlove/orchid-amplop/assets/gallery-5.webp",
+    ],
+  );
+  assert.ok(otherTemplate.gallery.every((item) => !item.url));
+});
+
 test("catalog fixtures use an event type supported by each selected design", () => {
   for (const id of ["lola", "qiz-bazmi", "shahzoda", "chavandoz", "hilol", "yangi-uy"] as const) {
     const template = templateById(id);

@@ -19,6 +19,7 @@ const bridgeUrl = new URL("bridge.js", root);
 const provenanceUrl = new URL("source-assets.provenance.json", root);
 const coverUrl = new URL("catalog-opening.jpg", root);
 const sourceChunkUrl = new URL("_next/static/chunks/0umiwyco9-jdx.js", sourceRoot);
+const sourcePreviewDataUrl = new URL("_next/static/chunks/0d2h69c7a3snv.js", sourceRoot);
 const sourceGalleryChunkUrl = new URL("_next/static/chunks/09cpm7sbnsw7i.js", sourceRoot);
 const sourceWishesChunkUrl = new URL("_next/static/chunks/0q0gfl1vec0ef.js", sourceRoot);
 const sourceCaptureUrl = new URL("templates/modern-floral/preview-frame.html", sourceRoot);
@@ -27,6 +28,8 @@ const sourceStylesDir = new URL("_next/static/chunks/", sourceRoot);
 const packagedStylesDir = new URL("../apps/web/public/templates/chorlove/shared/_next/static/chunks/", import.meta.url);
 const sourceMediaDir = new URL("_next/static/media/", sourceRoot);
 const packagedMediaDir = new URL("../apps/web/public/templates/chorlove/shared/_next/static/media/", import.meta.url);
+const sourceDefaultGalleryDir = new URL("images/templates/orchid-amplop/", sourceRoot);
+const packagedPreviewGalleryDir = new URL("../chorlove/orchid-amplop/assets/", root);
 
 async function readIfPresent(path: URL) {
   try {
@@ -237,6 +240,24 @@ test("Modern Floral catalog artwork has the source image hash and portrait dimen
   assert.equal(provenance.catalogArtwork.file, "catalog-opening.jpg");
 });
 
+test("Modern Floral preview sample packages the captured default gallery images", async () => {
+  const provenance = JSON.parse(await readFile(provenanceUrl, "utf8"));
+  const sourceData = await readFile(sourcePreviewDataUrl);
+  const sourceModule = sourceData.toString("utf8");
+  const order = ["gallery-2.webp", "gallery-1.webp", "gallery-3.webp", "gallery-6.webp", "gallery-4.webp", "gallery-5.webp"];
+  assert.ok(sourceModule.includes(`"DEFAULT_PREVIEW_GALLERY_IMAGES",0,[${order.map((file) => `"/images/templates/orchid-amplop/${file}"`).join(",")}]`));
+  assert.equal(provenance.sourceDefaultGalleryData.sha256, createHash("sha256").update(sourceData).digest("hex"));
+  assert.deepEqual(provenance.previewSampleGallery.images.map((item: { packagedPath: string }) => item.packagedPath), order.map((file) => `../chorlove/orchid-amplop/assets/${file}`));
+  for (const file of order) {
+    const source = await readFile(new URL(file, sourceDefaultGalleryDir));
+    const packaged = await readFile(new URL(file, packagedPreviewGalleryDir));
+    const record = provenance.previewSampleGallery.images.find((item: { packagedPath: string }) => item.packagedPath === `../chorlove/orchid-amplop/assets/${file}`);
+    assert.deepEqual(packaged, source, `${file} differs from the captured shared Chorlove image`);
+    assert.equal(record.bytes, packaged.length);
+    assert.equal(record.sha256, createHash("sha256").update(packaged).digest("hex"));
+  }
+});
+
 test("Modern Floral preserved capture and Chorlove CSS retain source markup and styles", async () => {
   const sourceCaptureBytes = await readIfPresent(sourceCaptureUrl);
   const original = sourceCaptureBytes?.toString("utf8").replace(/\r\n?/g, "\n");
@@ -349,7 +370,9 @@ test("Modern Floral RSVP has fixed party size and exposes only source-backed opt
     assert.match(giftModule, /F\.Check/);
     assert.match(giftModule, /setTimeout\(\(\)=>o\(!1\),1800\)/);
   }
-  assert.match(bridge, /hide\(section,!preview&&!publicItems\.length\)/);
+  assert.match(bridge, /const entries=slots;/);
+  assert.match(bridge, /hide\(section,!publicItems\.length\)/);
+  assert.doesNotMatch(bridge, /preview&&!items\.length/);
   assert.ok(bridge.includes("const grids=all('.grid, .md\\\\:grid',section)"));
   const galleryHandler = bridge.slice(bridge.indexOf("function openGallery"), bridge.indexOf("async function renderWishes"));
   assert.match(galleryHandler, /fixed inset-0 z-\[3000\] flex items-center justify-center bg-black\/88 p-4 backdrop-blur-md/);
