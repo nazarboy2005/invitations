@@ -1,6 +1,7 @@
+import { readFileSync } from "./helpers/source-files";
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync } from "node:fs";
 import test from "node:test";
 import { templateById } from "@taklifnoma/contracts";
 
@@ -195,7 +196,7 @@ const yangiUyMigration = readFileSync(
   "utf8",
 );
 const dispatch = readFileSync(
-  new URL("../apps/web/src/templates/marxaba/index.ts", import.meta.url),
+  new URL("../apps/web/src/templates/marxaba/registry.ts", import.meta.url),
   "utf8",
 );
 
@@ -428,16 +429,17 @@ test("registered Marxaba designs reflect their release state and additive migrat
   );
   const fixtureBytes = readFileSync(
     new URL(
-      "../apps/web/src/modules/catalog/preview-sample.json",
+      "./fixtures/catalog-preview-2026-10-23.json",
       import.meta.url,
     ),
   );
   for (const id of ["bulbul", "parda", "ganch", "yangi-uy"]) {
     const definition = templateById(id);
-    const isYangiUy = id === "yangi-uy";
+    const isSourceCover = id === "bulbul";
+    const isPng = id === "yangi-uy" || isSourceCover;
     const image = readFileSync(
       new URL(
-        `${id}/${isYangiUy ? "catalog-cover-opening.png" : "preview-browser-capture.jpg"}`,
+        `${id}/${isPng ? "catalog-cover-opening.png" : "preview-browser-capture.jpg"}`,
         templatesRoot,
       ),
     );
@@ -449,8 +451,8 @@ test("registered Marxaba designs reflect their release state and additive migrat
     );
     assert.equal(
       definition?.previewImage,
-      isYangiUy
-        ? "/templates/yangi-uy/catalog-cover-opening.png"
+      isPng
+        ? `/templates/${id}/catalog-cover-opening.png`
         : `/templates/${id}/preview-browser-capture.jpg`,
     );
     assert.equal(
@@ -459,16 +461,14 @@ test("registered Marxaba designs reflect their release state and additive migrat
       `${id} reflects its current release state`,
     );
     assert.equal(provenance.status, "verified");
-    assert.equal(provenance.route, `/preview?template=${id}&qaSilent=1`);
-    assert.equal(
-      provenance.fixtureSha256,
-      createHash("sha256").update(fixtureBytes).digest("hex"),
-    );
-    if (!isYangiUy)
-      assert.equal(
-        provenance.sha256,
-        createHash("sha256").update(image).digest("hex"),
-      );
+    if (isSourceCover) {
+      assert.equal(provenance.fixture, null);
+      assert.match(provenance.sourceOpening, /#intro/);
+    } else {
+      assert.equal(provenance.route, `/preview?template=${id}&qaSilent=1`);
+      assert.equal(provenance.fixtureSha256, createHash("sha256").update(fixtureBytes).digest("hex"));
+    }
+    assert.equal(provenance.sha256, createHash("sha256").update(image).digest("hex"));
   }
   assert.match(jubileeMigration, /'yubiley'/);
 });

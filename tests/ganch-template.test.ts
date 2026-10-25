@@ -1,6 +1,7 @@
+import { readFileSync } from "./helpers/source-files";
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync } from "node:fs";
 import { createRequire } from "node:module";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -46,7 +47,7 @@ test("Ganch preserves the captured source composition, motion code, styles, meta
 test("Ganch catalog art is a verified canonical browser capture", () => {
   const preview = readFileSync(new URL("preview-browser-capture.jpg", appRoot));
   const provenance = JSON.parse(read(appRoot, "preview.provenance.json"));
-  const fixture = readFileSync(new URL("../apps/web/src/modules/catalog/preview-sample.json", import.meta.url));
+  const fixture = readFileSync(new URL("./fixtures/catalog-preview-2026-10-23.json", import.meta.url));
   assert.equal(preview.subarray(0, 2).toString("hex"), "ffd8");
   assert.equal(provenance.status, "verified");
   assert.equal(provenance.route, "/preview?template=ganch&qaSilent=1");

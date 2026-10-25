@@ -1,5 +1,43 @@
 # Implementation decisions
 
+## Catalog cards, playback, and scrolling (2026-10-25)
+
+- User requirement: taller, fully clickable template cards. Put the name and
+  description over a dark bottom gradient; remove the separate information
+  panel and View/Create buttons. Use full-width 3:5 portrait windows with the
+  same poster/live-preview bounds and no neutral side gutters.
+- Clicking opens a detail dialog with price, a phone mockup containing the real
+  silent template opening, and full-preview/create actions. On phones use an
+  animated bottom sheet below 90% of viewport height, with a visible backdrop,
+  safe-area padding, internal scrolling, and reduced-motion fallback. Preserve
+  keyboard focus, Escape dismissal, background scroll lock, and focus return.
+- User follow-up: enter from below and slide slowly back down on X, backdrop,
+  or Escape dismissal. Keep the modal mounted and background locked through
+  the exit; reduced motion dismisses immediately. Size the live frame to the
+  measured inner phone screen so no poster strip is visible at the bottom.
+- Opening stability: focus the stationary dialog before the moving close
+  button, preserve page width when locking scroll, clip entrance overflow, and
+  defer live-renderer mounting until the entrance finishes. Keep closing intact.
+- Show category badges at the top left only in All. Hide them after selecting
+  a category. Keep published-template eligibility and selected-template URLs.
+- Play one real opening on desktop hover/focus; on touch choose one mostly
+  visible card near the viewport center once scrolling settles. Stop the old
+  renderer on switching, scrolling, hiding the page, or opening the dialog.
+  Respect reduced-motion and data-saving preferences, including the dialog.
+  Hide scrollbar chrome only inside catalog embeds; full previews stay usable.
+- User correction: the site feels slow and scrolling jumps. Supersedes the
+  previous request for touch weighting: restore native phone/tablet momentum,
+  use lighter desktop wheel smoothing, lazy-load cover images and the selected
+  renderer, and avoid per-card route prefetch. Do not load new live previews
+  during active scrolling. Physical swipe feel still needs a device check.
+- Category changes retain the brief exit fade and 200ms/6px entrance,
+  immediate selection feedback, cancellation of stale transitions, and reduced
+  motion. Remove animation of the entire multi-row result height to avoid
+  repeated layout work and interference with scrolling.
+- Test maintenance: validate historical catalog captures against the archived
+  fixture from `7d7d1e3`; normalize text line endings but keep binary assets
+  byte-exact. Preserve original capture files and provenance.
+
 ## Invitate Wedding registration and source gaps (2026-10-23)
 
 - User requirement: reserve catalog ID `invitate-wedding` and additive migration

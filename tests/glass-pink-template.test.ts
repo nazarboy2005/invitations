@@ -1,6 +1,7 @@
+import { readFileSync } from "./helpers/source-files";
 ﻿import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
-import { readdirSync, readFileSync } from "node:fs";
+import { readdirSync } from "node:fs";
 import { resolve } from "node:path";
 import { test } from "node:test";
 import { TEMPLATES } from "@taklifnoma/contracts";

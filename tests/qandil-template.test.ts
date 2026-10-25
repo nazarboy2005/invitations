@@ -1,6 +1,7 @@
+import { readFileSync } from "./helpers/source-files";
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
-import { existsSync, readFileSync, readdirSync } from "node:fs";
+import { existsSync, readdirSync } from "node:fs";
 import path from "node:path";
 import test from "node:test";
 import { runInNewContext } from "node:vm";
@@ -339,6 +340,7 @@ test("Qandil uses the shared four-locale preview data for all supported sections
   assert.deepEqual(sample.contacts, {
     phoneNumber: "+998 90 123 45 67",
     telegramUsername: "@demo",
+    instagramUrl: "",
   });
 
   const blank = createInvitation("qandil");
@@ -350,6 +352,7 @@ test("Qandil uses the shared four-locale preview data for all supported sections
   assert.deepEqual(blank.contacts, {
     phoneNumber: "",
     telegramUsername: "",
+    instagramUrl: "",
   });
 
   const html = readFileSync(new URL("index.html", templateRoot), "utf8");

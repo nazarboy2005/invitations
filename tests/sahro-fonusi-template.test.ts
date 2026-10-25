@@ -1,6 +1,7 @@
+import { readFileSync } from "./helpers/source-files";
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync } from "node:fs";
 import { createRequire } from "node:module";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -47,7 +48,7 @@ test("Sahro Fonusi catalog artwork is a fixture-rendered portrait opening", () =
   const digest = (bytes: Buffer) => createHash("sha256").update(bytes).digest("hex");
   const preview = readFileSync(new URL("preview.webp", appRoot));
   const openingArt = readFileSync(new URL("art/desert-panorama.webp", appRoot));
-  const fixture = readFileSync(new URL("../apps/web/src/modules/catalog/preview-sample.json", import.meta.url));
+  const fixture = readFileSync(new URL("./fixtures/catalog-preview-2026-10-23.json", import.meta.url));
   const sourceHtml = read(captureRoot, "index.html");
   const intro = sourceHtml.match(/<section class="intro" id="intro"[\s\S]*?<\/section>/)?.[0];
   assert.ok(intro, "captured source has an opening section");

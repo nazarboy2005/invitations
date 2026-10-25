@@ -1,6 +1,7 @@
+import { readFileSync } from "./helpers/source-files";
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync } from "node:fs";
 import { createRequire } from "node:module";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -153,7 +154,7 @@ test("Nilufar localizes its visible fixed copy in Russian and English", () => {
 test("Nilufar maps the shared four-locale invitation fixture to every visible dynamic section", async () => {
   const { makeLegacyData } = await import("../apps/web/src/templates/anor/renderer");
   assert.match(
-    read(new URL("../apps/web/src/templates/marxaba/", import.meta.url), "index.ts"),
+    read(new URL("../apps/web/src/templates/marxaba/", import.meta.url), "registry.ts"),
     /"nilufar"/,
     "the existing typed Marxaba dispatcher must recognize Nilufar",
   );

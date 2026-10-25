@@ -1,11 +1,12 @@
 ﻿import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { readFileSync, createHash } from 'node:crypto';
-import { readFileSync as read } from 'node:fs';
+import { createHash } from 'node:crypto';
+import { readFileSync as read } from './helpers/source-files';
 const root='apps/web/public/templates/taklifnomachi-15/';
 test('demo 15 source capture is retained and production references local source assets',()=>{
  const capture=read(root+'source/taklifnomachi.uz/demo/15/index.html');
- assert.equal(createHash('sha256').update(capture).digest('hex'),'3d39a5e6679a69d189f1558e45f7f786c8d9c92e7de5cc4158e024ea27956a22');
+ assert.deepEqual(capture,read('Invitations - this folder will be removed from production/Taklifnomachi/Web invitations/taklifnomachi.uz/demo/15/index.html'));
+ assert.equal(createHash('sha256').update(capture).digest('hex'),'38238af999ee4158006cf25f2587df91f8f6f7c2f6cbbad94e87c5d7bead53e8');
  const html=read(root+'index.html','utf8'); assert.match(html,/source\/taklifnomachi\.uz\/templates\/15\/assets\/video\.mp4/); assert.doesNotMatch(html,/cloudflareinsights|SI_SLUG/);
 });
 test('demo 15 adapter maps app names, date, venue, audio and API-backed RSVP',()=>{

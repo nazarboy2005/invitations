@@ -1,6 +1,7 @@
+import { readFileSync } from "./helpers/source-files";
 import test from "node:test";
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
+
 import { createHash } from "node:crypto";
 import { resolve, join } from "node:path";
 const root=resolve("apps/web/public/templates/modern-floral");
@@ -9,7 +10,7 @@ const bridge=readFileSync(join(root,"bridge.js"),"utf8");
 const manifest=JSON.parse(readFileSync(join(root,"source-assets.provenance.json"),"utf8"));
 test("Modern Floral preserves the captured page and exact floral artwork",()=>{
  const source=readFileSync(join(root,"source/preview-frame.html"));
- const original=readFileSync(resolve(manifest.sourceSnapshot.path));
+ const original=readFileSync(resolve("Invitations - this folder will be removed from production/Chorlove/Web invitations/templates/modern-floral/preview-frame.html"));
  const asset=readFileSync(join(root,"assets/flower.png"));
  assert.equal(source.length,manifest.sourceSnapshot.bytes);
  assert.equal(createHash("sha256").update(source).digest("hex"),manifest.sourceSnapshot.sha256);
@@ -25,7 +26,8 @@ test("Modern Floral removes Next/site samples and maps the shared invitation ser
  assert.doesNotMatch(html,/Muhammad|Xadicha|Abdurahmonovlar oilasi/);
  assert.doesNotMatch(html,/orchid-amplop|gallery-[1-6]\.webp|Patrick Watson|_next\/image|_next\/static\/chunks\/[\w~.-]+\.js/);
  for(const field of ["groom","bride","dateTime","timezone","venue","toyona","gallery","wishes","wishesEnabled","rsvp","maxPartySize","contacts","enabledLocales","reducedMotion","music","calendar","openGallery"])assert.ok(bridge.includes(field),`missing ${field}`);
- assert.match(bridge,/root\.hidden=false;hide\(root\.firstElementChild\)/);
+ assert.match(bridge,/root\.hidden=false;root\.lang=/);
+ assert.match(html,/source-motion\.js/);
  assert.match(bridge,/function renderStaticCopy\(\)/);assert.match(bridge,/renderFooter\(z\);renderStaticCopy\(\);installControls\(x\)/);
  assert.match(bridge,/fixedCopy=.*intro:"Assalomu alaykum"/);
  assert.match(bridge,/input\.disabled=false/);assert.match(bridge,/api\/public\/invitations/);
@@ -35,7 +37,9 @@ test("Modern Floral removes Next/site samples and maps the shared invitation ser
  assert.match(bridge,/"uz-Cyrl":\["\\u0414\\u0443","\\u0421\\u0435","\\u0427\\u043e","\\u041f\\u0430","\\u0416\\u0443","\\u0428\\u0430","\\u042f\\u043a"\]/);
  assert.match(bridge,/ru:\["\\u0412\\u0441","\\u041f\\u043d","\\u0412\\u0442","\\u0421\\u0440","\\u0427\\u0442","\\u041f\\u0442","\\u0421\\u0431"\]/);
  assert.doesNotMatch(bridge,/party:"\?{3,}|choose:"\?{3,}|rsvpHint:"\?{3,}|(?:uz-Cyrl|ru):\["\?{2}"/);
- const css=readFileSync(join(root,"adapter.css"),"utf8");assert.match(css,/\.mf-lightbox/);assert.match(css,/\.mf-calendar/);assert.match(css,/section \[style\*="opacity:0"\]\{opacity:1!important;filter:none!important;transform:none!important\}/);
+ const css=readFileSync(join(root,"adapter.css"),"utf8");assert.match(css,/\.mf-lightbox/);assert.match(css,/\.mf-calendar/);
+ // Reveal timing belongs to source-motion.js; a blanket opacity override would disable it.
+ assert.doesNotMatch(css,/section \[style\*="opacity:0"\]\{opacity:1!important;filter:none!important;transform:none!important\}/);
  assert.match(bridge,/d\(\)\.venue\?\.name\|\|d\(\)\.venueName/);
  assert.match(bridge,/entries=preview&&!items\.length\?cards\.map/);
  assert.match(bridge,/openingName=all\("h2",root\)\.find/);assert.match(bridge,/put\(q\("h3",sec\[6\]\),z\.hosts/);

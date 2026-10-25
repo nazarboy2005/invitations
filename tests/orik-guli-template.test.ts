@@ -1,9 +1,10 @@
+import { readFileSync } from "./helpers/source-files";
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { createRequire } from "node:module";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync } from "node:fs";
 import test from "node:test";
 import { runInNewContext } from "node:vm";
 import { createInvitation, type Locale } from "@taklifnoma/contracts";
@@ -274,7 +275,7 @@ test("O‘rik Guli retains captured source and uses renderer-generated opening a
   assert.equal(provenance.fixture, "apps/web/src/modules/catalog/preview-sample.json");
   assert.equal(
     createHash("sha256")
-      .update(readFileSync(new URL("../apps/web/src/modules/catalog/preview-sample.json", import.meta.url)))
+      .update(readFileSync(new URL("./fixtures/catalog-preview-2026-10-23.json", import.meta.url)))
       .digest("hex"),
     provenance.fixtureSha256,
   );
@@ -304,7 +305,7 @@ test("O‘rik Guli retains captured source and uses renderer-generated opening a
 
 test("O‘rik Guli routes through the shared typed Marxaba invitation renderer", () => {
   const marxabaIndex = readFileSync(
-    new URL("../apps/web/src/templates/marxaba/index.ts", import.meta.url),
+    new URL("../apps/web/src/templates/marxaba/registry.ts", import.meta.url),
     "utf8",
   );
   const adapter = readFileSync(

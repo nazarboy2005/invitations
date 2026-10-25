@@ -1,6 +1,7 @@
+import { readFileSync } from "./helpers/source-files";
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync } from "node:fs";
 import { createRequire } from "node:module";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -446,7 +447,7 @@ test("Lola catalog artwork is a portrait render of its opening, separate from th
   assert.equal(
     provenance.fixtureSha256,
     createHash("sha256")
-      .update(readFileSync(new URL("../apps/web/src/modules/catalog/preview-sample.json", import.meta.url)))
+      .update(readFileSync(new URL("./fixtures/catalog-preview-2026-10-23.json", import.meta.url)))
       .digest("hex"),
     "preview provenance pins the exact shared fixture used for the render",
   );

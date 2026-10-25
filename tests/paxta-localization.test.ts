@@ -1,8 +1,9 @@
+import { readFileSync } from "./helpers/source-files";
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { createRequire } from "node:module";
 import path from "node:path";
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import test from "node:test";
 import { runInNewContext } from "node:vm";
@@ -295,7 +296,7 @@ test("Paxta catalog artwork is a portrait capture of the source opening with pro
   assert.deepEqual(provenance.fixtureNames, ["Javohir", "Madina"]);
   assert.equal(provenance.sha256, sha256(preview));
 
-  const fixtureBytes = readFileSync(new URL("../apps/web/src/modules/catalog/preview-sample.json", import.meta.url));
+  const fixtureBytes = readFileSync(new URL("./fixtures/catalog-preview-2026-10-23.json", import.meta.url));
   const fixture = JSON.parse(fixtureBytes.toString("utf8"));
   assert.equal(fixture.eventType, "wedding");
   assert.deepEqual(fixture.content[provenance.fixtureLocale].people, provenance.fixtureNames);

@@ -1,6 +1,7 @@
+import { readFileSync } from "./helpers/source-files";
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync } from "node:fs";
 import test from "node:test";
 import { runInNewContext } from "node:vm";
 import { createInvitation } from "@taklifnoma/contracts";
@@ -182,7 +183,7 @@ test("Qog‘oz Turna blank invitations exclude catalog-only sample content", () 
 
   assert.equal(blank.gift.cardNumber, "");
   assert.equal(blank.gift.cardHolder, "");
-  assert.deepEqual(blank.contacts, { phoneNumber: "", telegramUsername: "" });
+  assert.deepEqual(blank.contacts, { phoneNumber: "", telegramUsername: "", instagramUrl: "" });
   assert.equal(blank.program.length, 0);
   assert.equal(blank.gallery.length, 0);
   assert.equal("sampleWishes" in sample, false);

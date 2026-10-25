@@ -1,7 +1,8 @@
+import { readFileSync } from "./helpers/source-files";
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { createRequire } from "node:module";
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync } from "node:fs";
 import path from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
@@ -72,7 +73,7 @@ test("Monogram blank drafts receive no fixture names, date, program, gallery, wi
 test("Monogram preview provenance records its checksum-backed source opening", () => {
   const preview = readFileSync(new URL("preview.webp", root));
   const fixture = Buffer.from(
-    readFileSync(new URL("../apps/web/src/modules/catalog/preview-sample.json", import.meta.url), "utf8").replace(/\r\n/g, "\n"),
+    readFileSync(new URL("./fixtures/catalog-preview-2026-10-23.json", import.meta.url), "utf8").replace(/\r\n/g, "\n"),
   );
   const provenance = JSON.parse(readFileSync(new URL("preview.provenance.json", root), "utf8")) as {
     artifact: string; sha256: string; format: string; width: number; height: number;

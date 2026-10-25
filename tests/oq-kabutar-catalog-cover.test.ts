@@ -1,6 +1,7 @@
+import { readFileSync } from "./helpers/source-files";
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
-import { readFileSync } from "node:fs";
+
 import test from "node:test";
 import { TEMPLATES } from "@taklifnoma/contracts";
 
@@ -40,7 +41,7 @@ test("Oq Kabutar catalog art is the fixture-rendered portrait opening", () => {
   };
   const fixture = readFileSync(
     new URL(
-      "../apps/web/src/modules/catalog/preview-sample.json",
+      "./fixtures/catalog-preview-2026-10-23.json",
       import.meta.url,
     ),
   );

@@ -7,6 +7,12 @@
   background: #140b08;
 }
 
+.fullPreview[data-card-preview] {
+  min-height: 0;
+  scrollbar-width: none;
+}
+.fullPreview[data-card-preview]::-webkit-scrollbar { display: none; }
+
 .previewControls {
   position: fixed;
   z-index: 20;

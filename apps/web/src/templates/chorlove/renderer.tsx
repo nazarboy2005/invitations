@@ -112,7 +112,10 @@ export function ChorloveInvitation({
 
   const query = new URLSearchParams({ lang: sourceLocale[frameLocale] });
   if (preview && qaReducedMotion) query.set("qaReducedMotion", "1");
-  const frameUrl = `/templates/${templateId}/index.html?${query}`;
+  const namespaced = templateId === "palov" || templateId === "orchid-amplop";
+  const frameUrl = namespaced
+    ? `/templates/chorlove/${templateId}/index.html?${query}`
+    : `/templates/${templateId}/index.html?${query}`;
 
   useEffect(() => {
     const onMessage = (event: MessageEvent) => {

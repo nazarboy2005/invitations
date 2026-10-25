@@ -1,6 +1,7 @@
+import { readFileSync } from "./helpers/source-files";
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync } from "node:fs";
 import test from "node:test";
 
 const packageRoot = new URL(
@@ -80,7 +81,7 @@ test("Ganch catalog art represents its captured closed-door opening", () => {
 
   const preview = readFileSync(new URL("preview-browser-capture.jpg", packageRoot));
   const provenance = JSON.parse(readFileSync(new URL("preview.provenance.json", packageRoot), "utf8"));
-  const fixture = readFileSync(new URL("../apps/web/src/modules/catalog/preview-sample.json", import.meta.url));
+  const fixture = readFileSync(new URL("./fixtures/catalog-preview-2026-10-23.json", import.meta.url));
   assert.equal(preview.subarray(0, 2).toString("hex"), "ffd8");
   assert.equal(provenance.status, "verified");
   assert.equal(provenance.route, "/preview?template=ganch&qaSilent=1");

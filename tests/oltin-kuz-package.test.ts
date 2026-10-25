@@ -1,8 +1,9 @@
+import { readFileSync } from "./helpers/source-files";
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { createRequire } from "node:module";
 import path from "node:path";
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { test } from "node:test";
 import { runInNewContext } from "node:vm";
@@ -334,7 +335,7 @@ test("Oltin Kuz supports both declared events and keeps the preview fixture out 
   assert.equal(blank.program.length, 0);
   assert.equal(blank.gallery.length, 0);
   assert.equal(blank.gift.cardNumber, "");
-  assert.deepEqual(blank.contacts, { phoneNumber: "", telegramUsername: "" });
+  assert.deepEqual(blank.contacts, { phoneNumber: "", telegramUsername: "", instagramUrl: "" });
   assert.doesNotMatch(JSON.stringify(blank), /Javohir|Madina|8600 1234|Dilnoza opa/);
   assert.notDeepEqual(blank.content, sample.content);
 });

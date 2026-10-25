@@ -1,6 +1,7 @@
+import { readFileSync } from "./helpers/source-files";
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
-import { readFileSync } from "node:fs";
+
 import test from "node:test";
 
 const sourceRoot = "Invitations - this folder will be removed from production/Chorlove/Web invitations";

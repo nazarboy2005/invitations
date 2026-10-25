@@ -1,6 +1,7 @@
+import { readFileSync } from "./helpers/source-files";
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync } from "node:fs";
 import test from "node:test";
 import { runInNewContext } from "node:vm";
 
@@ -122,10 +123,7 @@ test("Vals preserves the full captured design, animation, and artwork", () => {
     sha256(
       Buffer.from(
         readFileSync(
-          new URL(
-            "../apps/web/src/modules/catalog/preview-sample.json",
-            import.meta.url,
-          ),
+          new URL("./fixtures/catalog-preview-2026-10-23.json", import.meta.url),
           "utf8",
         ).replace(/\r\n/g, "\n"),
       ),

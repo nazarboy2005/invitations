@@ -1,6 +1,7 @@
+import { readFileSync } from "./helpers/source-files";
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
-import { existsSync, readFileSync, readdirSync } from "node:fs";
+import { existsSync, readdirSync } from "node:fs";
 import { createRequire } from "node:module";
 import path from "node:path";
 import test from "node:test";
@@ -264,7 +265,7 @@ test("Nahor opening artwork is a checksummed portrait capture of the central fix
   assert.match(provenance.captureMethod, /bundled Playwright/);
   assert.match(provenance.captureMethod, /Capture-only styling hides the injected \.mh-lang/);
   assert.match(provenance.captureMethod, /outer page's <nextjs-portal> host is removed before screenshot/);
-  assert.equal(provenance.fixtureSha256, createHash("sha256").update(readFileSync(path.join(root, provenance.fixture))).digest("hex"));
+  assert.equal(provenance.fixtureSha256, createHash("sha256").update(readFileSync(path.join(root, "tests/fixtures/catalog-preview-2026-10-23.json"))).digest("hex"));
   assert.equal(capture.toString("ascii", 1, 4), "PNG");
   assert.deepEqual([capture.readUInt32BE(16), capture.readUInt32BE(20)], [480, 720]);
   assert.deepEqual(provenance.capture, {

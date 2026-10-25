@@ -1,15 +1,26 @@
 "use client";
 
-import { useMemo, useState } from "react";
-import Link from "next/link";
-import { ArrowUpRight, Eye, LayoutTemplate, Search } from "lucide-react";
+import { useMemo, useRef, useState } from "react";
+import dynamic from "next/dynamic";
+import { LayoutTemplate, Search } from "lucide-react";
 import type {
   TemplateCategory,
   TemplateDefinition,
 } from "@taklifnoma/contracts";
-import { EVENT_TYPE_OPTIONS, formatPrice } from "@taklifnoma/contracts";
+
 import styles from "@/app/home.module.css";
+import cardStyles from "./template-cards.module.css";
+import { templatePoster } from "./template-poster";
 import { matchesTemplateSearch } from "./template-search";
+import { TemplateCardPreview } from "./template-card-preview";
+import { useCardPlayback } from "./use-card-playback";
+import { useCategoryTransition } from "./use-category-transition";
+
+const TemplateDetailDialog = dynamic(() =>
+  import("./template-detail-dialog").then(
+    (module) => module.TemplateDetailDialog,
+  ),
+);
 
 export function TemplateGallery({
   templates,
@@ -18,19 +29,31 @@ export function TemplateGallery({
   templates: TemplateDefinition[];
   categories: TemplateCategory[];
 }) {
-  const [categoryId, setCategoryId] = useState("all");
+  const results = useRef<HTMLDivElement>(null);
+  const { categoryId, renderedCategoryId, selectCategory } =
+    useCategoryTransition(results);
   const [searchQuery, setSearchQuery] = useState("");
+  const grid = useRef<HTMLDivElement>(null);
+  const selectedTrigger = useRef<HTMLButtonElement>(null);
+  const [selectedTemplate, setSelectedTemplate] =
+    useState<TemplateDefinition | null>(null);
   const visibleTemplates = useMemo(
     () =>
       templates
         .filter(
           (template) =>
-            categoryId === "all" || template.categoryIds.includes(categoryId),
+            renderedCategoryId === "all" ||
+            template.categoryIds.includes(renderedCategoryId),
         )
         .filter((template) =>
           matchesTemplateSearch(template, categories, searchQuery),
         ),
-    [categoryId, categories, searchQuery, templates],
+    [renderedCategoryId, categories, searchQuery, templates],
+  );
+  const playback = useCardPlayback(
+    grid,
+    visibleTemplates.map((template) => template.id),
+    selectedTemplate !== null || categoryId !== renderedCategoryId,
   );
 
   if (templates.length === 0)
@@ -62,7 +85,7 @@ export function TemplateGallery({
             type="button"
             aria-pressed={categoryId === "all"}
             className={categoryId === "all" ? styles.selectedFilter : ""}
-            onClick={() => setCategoryId("all")}
+            onClick={() => selectCategory("all")}
           >
             Barchasi <span>{templates.length}</span>
           </button>
@@ -80,7 +103,7 @@ export function TemplateGallery({
                 className={
                   categoryId === category.id ? styles.selectedFilter : ""
                 }
-                onClick={() => setCategoryId(category.id)}
+                onClick={() => selectCategory(category.id)}
               >
                 {category.name}
                 <span>
@@ -94,84 +117,94 @@ export function TemplateGallery({
             ))}
         </div>
       )}
-      {visibleTemplates.length === 0 ? (
-        <div className={styles.catalogEmpty}>
-          <LayoutTemplate size={25} strokeWidth={1.5} />
-          <p>
-            {searchQuery.trim()
-              ? "Qidiruv bo‘yicha dizayn topilmadi."
-              : "Bu kategoriyada hozircha dizayn yo‘q."}
-          </p>
-        </div>
-      ) : (
-        <div className={styles.catalogGrid}>
-          {visibleTemplates.map((template) => {
-            const previewUrl = `/preview?template=${encodeURIComponent(template.id)}`;
-            return (
-              <article className={styles.templateCard} key={template.id}>
-                <Link
-                  className={styles.templateArt}
-                  href={previewUrl}
-                  aria-label={`${template.name}: to‘liq ko‘rinishini ochish${template.published ? `, ${formatPrice(template.priceMinor)}` : ""}`}
-                  style={{
-                    backgroundImage: `url(${template.previewImage?.startsWith("/") ? template.previewImage : `/templates/${template.id}/${template.previewImage ?? "stage.webp"}`})`,
-                  }}
+      <div
+        className={styles.catalogResults}
+        ref={results}
+        data-catalog-results
+        aria-busy={categoryId !== renderedCategoryId}
+      >
+        {visibleTemplates.length === 0 ? (
+          <div className={styles.catalogEmpty}>
+            <LayoutTemplate size={25} strokeWidth={1.5} />
+            <p>
+              {searchQuery.trim()
+                ? "Qidiruv bo‘yicha dizayn topilmadi."
+                : "Bu kategoriyada hozircha dizayn yo‘q."}
+            </p>
+          </div>
+        ) : (
+          <div className={styles.catalogGrid} ref={grid}>
+            {visibleTemplates.map((template) => (
+              <article
+                className={cardStyles.card}
+                key={template.id}
+                data-template-id={template.id}
+                onPointerEnter={(event) => {
+                  if (event.pointerType !== "touch")
+                    playback.start(template.id);
+                }}
+                onPointerLeave={(event) => {
+                  if (event.pointerType !== "touch") playback.stop(template.id);
+                }}
+                onFocus={() => playback.start(template.id)}
+                onBlur={(event) => {
+                  if (!event.currentTarget.contains(event.relatedTarget))
+                    playback.stop(template.id);
+                }}
+              >
+                <button
+                  type="button"
+                  className={cardStyles.art}
+                  data-card-art
+                  aria-label={`${template.name}: batafsil ko‘rish`}
+                  aria-haspopup="dialog"
+                    onClick={(event) => {
+                      selectedTrigger.current = event.currentTarget;
+                      setSelectedTemplate(template);
+                    }}
                 >
-                  {template.published && (
-                    <span className={styles.cardPrice}>
-                      {formatPrice(template.priceMinor)}
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    className={cardStyles.poster}
+                    src={templatePoster(template)}
+                    alt=""
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  {playback.activeId === template.id && (
+                    <TemplateCardPreview
+                      key={template.id}
+                      templateId={template.id}
+                    />
+                  )}
+                  {renderedCategoryId === "all" && (
+                    <span className={cardStyles.category}>
+                      {categories
+                        .filter((category) =>
+                          template.categoryIds.includes(category.id),
+                        )
+                        .map((category) => category.name)
+                        .join(" · ")}
                     </span>
                   )}
-                </Link>
-                <div className={styles.templateInfo}>
-                  <span>
-                    {categories
-                      .filter((category) =>
-                        template.categoryIds.includes(category.id),
-                      )
-                      .map((category) => category.name)
-                      .join(" · ")}
-                  </span>
-                  <h3>{template.name}</h3>
-                  <p
-                    className={styles.templateDescription}
-                    title={template.description}
-                  >
-                    {template.description}
-                  </p>
-                  <span className={styles.eventTypes}>
-                    {template.supportedEventTypes
-                      .map(
-                        (id) =>
-                          EVENT_TYPE_OPTIONS.find(
-                            (eventType) => eventType.id === id,
-                          )?.name ?? id,
-                      )
-                      .join(", ")}
-                  </span>
-                  {!template.published && (
-                    <span className={styles.previewOnlyLabel}>
-                      Faqat ko‘rib chiqish uchun
+                  <span className={cardStyles.caption}>
+                    <span className={cardStyles.name}>{template.name}</span>
+                    <span className={cardStyles.description}>
+                      {template.description}
                     </span>
-                  )}
-                  <div className={styles.templateActions}>
-                    <Link className="button secondary" href={previewUrl}>
-                      <Eye size={14} /> Ko‘rish
-                    </Link>
-                    {template.published && (
-                      <Link
-                        className={styles.createAction}
-                        href={`/studio?new=1&template=${encodeURIComponent(template.id)}`}
-                      >
-                        Yaratish <ArrowUpRight size={16} />
-                      </Link>
-                    )}
-                  </div>
-                </div>
+                  </span>
+                </button>
               </article>
-            );
-          })}
-        </div>
+            ))}
+          </div>
+        )}
+      </div>
+      {selectedTemplate && (
+        <TemplateDetailDialog
+          template={selectedTemplate}
+          returnFocus={selectedTrigger.current}
+          onClose={() => setSelectedTemplate(null)}
+        />
       )}
     </>
   );

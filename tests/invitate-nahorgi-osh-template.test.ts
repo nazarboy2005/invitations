@@ -1,6 +1,7 @@
+import { readFileSync } from "./helpers/source-files";
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync } from "node:fs";
 import { createRequire } from "node:module";
 import path from "node:path";
 import test from "node:test";
@@ -47,7 +48,7 @@ test("Nahorgi Osh renderer maps the shared fixture and four locales", () => {
   assert.equal(fixture.startsAt, "2027-06-12T07:00");
   const adapter = readFileSync(path.join(root, "apps/web/src/templates/invitate/nahorgi-osh-adapter.ts"), "utf8");
   const renderer = readFileSync(path.join(root, "apps/web/src/templates/invitate/renderer.tsx"), "utf8");
-  const registry = readFileSync(path.join(root, "apps/web/src/templates/invitate/index.ts"), "utf8");
+  const registry = readFileSync(path.join(root, "apps/web/src/templates/invitate/registry.ts"), "utf8");
   const runtime = read("assets/js/nahorgi-osh-adapter.js");
   assert.match(renderer, /makeNahorgiOshData/);
   assert.match(registry, /invitate-nahorgi-osh/);

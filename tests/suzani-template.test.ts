@@ -1,6 +1,7 @@
+import { readFileSync } from "./helpers/source-files";
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync } from "node:fs";
 import { createRequire } from "node:module";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -144,7 +145,7 @@ test("Suzani packages local fonts and a provenance-checked portrait opening cove
   const preview = readFileSync(new URL("preview.webp", templateRoot));
   const meta = readFileSync(new URL("meta.js", templateRoot), "utf8");
   const capturedPreview = new URL("preview.webp", captureRoot);
-  const fixture = readFileSync(new URL("../apps/web/src/modules/catalog/preview-sample.json", import.meta.url));
+  const fixture = readFileSync(new URL("./fixtures/catalog-preview-2026-10-23.json", import.meta.url));
   const captureManifest = readFileSync(new URL("../Invitations - this folder will be removed from production/Marxaba/capture-manifest.json", import.meta.url));
   const provenance = JSON.parse(
     readFileSync(new URL("preview.provenance.json", templateRoot), "utf8"),

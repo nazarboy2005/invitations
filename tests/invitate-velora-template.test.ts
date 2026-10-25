@@ -1,6 +1,7 @@
+import { readFileSync } from "./helpers/source-files";
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync } from "node:fs";
 import path from "node:path";
 import test from "node:test";
 import { templateById } from "../packages/contracts/src/index";
@@ -117,7 +118,7 @@ test("Velora uses the shared ephemeral wedding preview across all approved local
     "utf8",
   );
   const registry = readFileSync(
-    path.join(root, "apps/web/src/templates/invitate/index.ts"),
+    path.join(root, "apps/web/src/templates/invitate/registry.ts"),
     "utf8",
   );
   const publicPage = readFileSync(

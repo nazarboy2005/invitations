@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import {
@@ -8,29 +9,11 @@ import {
   type Invitation,
   type TemplateDefinition,
 } from "@taklifnoma/contracts";
-import { AnorInvitation } from "@/templates/anor";
-import { isMarxabaTemplate, MarxabaInvitation } from "@/templates/marxaba";
-import { isInvitateTemplate, InvitateInvitation } from "@/templates/invitate";
-import { VelvetRoyaleInvitation } from "@/templates/velvet-royale/renderer";
-import { OliveManorInvitation } from "@/templates/olive-manor/renderer";
-import { IslamicEditionInvitation } from "@/templates/islamic-edition/renderer";
-import { ManorInvitation } from "@/templates/manor-edition/renderer";
-import { OshEditionInvitation } from "@/templates/osh-edition-v1/renderer";
-import { MonochromeEditorialInvitation } from "@/templates/monochrome-editorial-edition/renderer";
-import { XatnaEditionInvitation } from "@/templates/xatna-edition/renderer";
-import { AmruMarufEditionInvitation } from "@/templates/amru-maruf-edition-v1/renderer";
-import { GulliDarvozaInvitation } from "@/templates/onlinetaklifnoma/gulli-darvoza";
-import { OltinDarvozaInvitation } from "@/templates/onlinetaklifnoma/oltin-darvoza-ortidagi-baxt";
-import { MingBirKechaInvitation } from "@/templates/onlinetaklifnoma/ming-bir-kecha";
-import { ZarrinDoppiInvitation } from "@/templates/onlinetaklifnoma/zarrin-doppi";
-import { AndalusDarvozasiInvitation } from "@/templates/onlinetaklifnoma/andalus-darvozasi";
-import { SamarqandPeshtoqInvitation } from "@/templates/onlinetaklifnoma/samarqand-peshtoqi";
-import { ShishaBogInvitation } from "@/templates/onlinetaklifnoma/shisha-bog";
-import { KapadokiyaTongiInvitation } from "@/templates/onlinetaklifnoma/kapadokiya-tongi";
-import { BuxoroRavoqInvitation } from "@/templates/onlinetaklifnoma/buxoro-ravoq";
-import { JannatBogiInvitation } from "@/templates/onlinetaklifnoma/jannat-bogi";
-import { TojmahalOltinDarvozasiInvitation } from "@/templates/onlinetaklifnoma/tojmahal-oltin-darvozasi";
-import { isChorloveTemplate, ChorloveInvitation } from "@/templates/chorlove";
+
+import { isMarxabaTemplate } from "@/templates/marxaba/registry";
+import { isInvitateTemplate } from "@/templates/invitate/registry";
+
+import { isChorloveTemplate } from "@/templates/chorlove/registry";
 import { readBrowserDraft } from "@/modules/studio/draft-storage";
 import {
   createTemplatePreviewSample,
@@ -38,6 +21,31 @@ import {
   hasAuthoredInvitationContent,
 } from "./preview-sample";
 import styles from "./full-template-preview.module.css";
+
+// Load only the renderer selected by this preview, rather than every design.
+const AnorInvitation = dynamic(() => import("@/templates/anor/renderer").then((module) => module.AnorInvitation));
+const MarxabaInvitation = dynamic(() => import("@/templates/marxaba/renderer").then((module) => module.MarxabaInvitation));
+const InvitateInvitation = dynamic(() => import("@/templates/invitate/renderer").then((module) => module.InvitateInvitation));
+const VelvetRoyaleInvitation = dynamic(() => import("@/templates/velvet-royale/renderer").then((module) => module.VelvetRoyaleInvitation));
+const OliveManorInvitation = dynamic(() => import("@/templates/olive-manor/renderer").then((module) => module.OliveManorInvitation));
+const IslamicEditionInvitation = dynamic(() => import("@/templates/islamic-edition/renderer").then((module) => module.IslamicEditionInvitation));
+const ManorInvitation = dynamic(() => import("@/templates/manor-edition/renderer").then((module) => module.ManorInvitation));
+const OshEditionInvitation = dynamic(() => import("@/templates/osh-edition-v1/renderer").then((module) => module.OshEditionInvitation));
+const MonochromeEditorialInvitation = dynamic(() => import("@/templates/monochrome-editorial-edition/renderer").then((module) => module.MonochromeEditorialInvitation));
+const XatnaEditionInvitation = dynamic(() => import("@/templates/xatna-edition/renderer").then((module) => module.XatnaEditionInvitation));
+const AmruMarufEditionInvitation = dynamic(() => import("@/templates/amru-maruf-edition-v1/renderer").then((module) => module.AmruMarufEditionInvitation));
+const GulliDarvozaInvitation = dynamic(() => import("@/templates/onlinetaklifnoma/gulli-darvoza").then((module) => module.GulliDarvozaInvitation));
+const OltinDarvozaInvitation = dynamic(() => import("@/templates/onlinetaklifnoma/oltin-darvoza-ortidagi-baxt").then((module) => module.OltinDarvozaInvitation));
+const MingBirKechaInvitation = dynamic(() => import("@/templates/onlinetaklifnoma/ming-bir-kecha").then((module) => module.MingBirKechaInvitation));
+const ZarrinDoppiInvitation = dynamic(() => import("@/templates/onlinetaklifnoma/zarrin-doppi").then((module) => module.ZarrinDoppiInvitation));
+const AndalusDarvozasiInvitation = dynamic(() => import("@/templates/onlinetaklifnoma/andalus-darvozasi").then((module) => module.AndalusDarvozasiInvitation));
+const SamarqandPeshtoqInvitation = dynamic(() => import("@/templates/onlinetaklifnoma/samarqand-peshtoqi").then((module) => module.SamarqandPeshtoqInvitation));
+const ShishaBogInvitation = dynamic(() => import("@/templates/onlinetaklifnoma/shisha-bog").then((module) => module.ShishaBogInvitation));
+const KapadokiyaTongiInvitation = dynamic(() => import("@/templates/onlinetaklifnoma/kapadokiya-tongi").then((module) => module.KapadokiyaTongiInvitation));
+const BuxoroRavoqInvitation = dynamic(() => import("@/templates/onlinetaklifnoma/buxoro-ravoq").then((module) => module.BuxoroRavoqInvitation));
+const JannatBogiInvitation = dynamic(() => import("@/templates/onlinetaklifnoma/jannat-bogi").then((module) => module.JannatBogiInvitation));
+const TojmahalOltinDarvozasiInvitation = dynamic(() => import("@/templates/onlinetaklifnoma/tojmahal-oltin-darvozasi").then((module) => module.TojmahalOltinDarvozasiInvitation));
+const ChorloveInvitation = dynamic(() => import("@/templates/chorlove/renderer").then((module) => module.ChorloveInvitation));
 
 function previewDraftKey(id: string) {
   return `taklifnoma:full-preview:v1:${id}`;
@@ -53,6 +61,7 @@ export function FullTemplatePreview({
   longNames = false,
   qaReducedMotion = false,
   qaMobile = false,
+  cardPreview = false,
 }: {
   template: TemplateDefinition;
   canSelect: boolean;
@@ -63,6 +72,7 @@ export function FullTemplatePreview({
   longNames?: boolean;
   qaReducedMotion?: boolean;
   qaMobile?: boolean;
+  cardPreview?: boolean;
 }) {
   const [invitation, setInvitation] = useState<Invitation | null>(null);
   const [catalogPreview, setCatalogPreview] = useState(true);
@@ -106,19 +116,73 @@ export function FullTemplatePreview({
         candidate && (!demo || candidateHasContent)
           ? { ...candidate, templateId: template.id }
           : createTemplatePreviewSample(template.id, candidate ?? undefined);
-      setCatalogPreview(!candidateHasContent);
-      setInvitation(longNames && !candidateHasContent ? createLongNamePreview(resolved) : resolved);
+      setCatalogPreview(!candidateHasContent && !cardPreview);
+      const result = longNames && !candidateHasContent ? createLongNamePreview(resolved) : resolved;
+      setInvitation(cardPreview ? { ...result, music: { ...result.music, enabled: false, url: "" } } : result);
     }
     void load();
     return () => {
       active = false;
     };
-  }, [demo, draftId, longNames, template.id]);
+  }, [cardPreview, demo, draftId, longNames, template.id]);
 
   useEffect(() => {
+    if (!cardPreview || !invitation || !previewRef.current) return;
+    const timers: ReturnType<typeof setTimeout>[] = [];
+    const cleanups: Array<() => void> = [];
+    const opened = new WeakSet<Document>();
+    function start(frame: HTMLIFrameElement) {
+      timers.push(setTimeout(() => {
+        const doc = frame.contentDocument;
+        if (!doc || !doc.URL.startsWith(`${window.location.origin}/templates/`) || doc.readyState !== "complete" || opened.has(doc)) return;
+        opened.add(doc);
+        // Only catalog embeds hide scrollbar chrome; full previews remain scrollable.
+        const scrollbarStyle = doc.createElement("style");
+        scrollbarStyle.textContent = "html, body, * { scrollbar-width: none !important; } ::-webkit-scrollbar { display: none !important; width: 0 !important; height: 0 !important; }";
+        doc.head.append(scrollbarStyle);
+        const mute = () => doc.querySelectorAll<HTMLMediaElement>("audio, video").forEach((media) => {
+          if (!media.muted) media.muted = true;
+          if (media.volume !== 0) media.volume = 0;
+        });
+        mute();
+        doc.addEventListener("volumechange", mute, true);
+        const observer = new MutationObserver(mute);
+        observer.observe(doc.documentElement, { childList: true, subtree: true });
+        cleanups.push(() => { observer.disconnect(); doc.removeEventListener("volumechange", mute, true); });
+        // Only invitation-opening controls; never submit RSVP, wishes, or links.
+        const opener = doc.querySelector<HTMLElement>("#open-invitation, #open-prompt, #open-btn, #openBtn, #openEnvelope, #si-opener, [data-open], [data-gg-source-opening], [data-landing-screenshot-id='invite-envelope']");
+        opener?.click();
+        window.parent.postMessage({ type: "catalog-preview:ready" }, window.location.origin);
+        if (template.id === "doira") {
+          timers.push(setTimeout(() => opener?.click(), 450));
+          timers.push(setTimeout(() => opener?.click(), 900));
+        }
+      }, 350));
+    }
+    const host = previewRef.current;
+    const subscribed = new WeakSet<HTMLIFrameElement>();
+    function attachFrames() {
+      host?.querySelectorAll<HTMLIFrameElement>("iframe").forEach((frame) => {
+        if (subscribed.has(frame)) return;
+        subscribed.add(frame);
+        const onLoad = () => start(frame);
+        frame.addEventListener("load", onLoad);
+        start(frame);
+        cleanups.push(() => frame.removeEventListener("load", onLoad));
+      });
+    }
+    attachFrames();
+    // Lazy renderers mount their source frame after this effect has started.
+    const framesObserver = new MutationObserver(attachFrames);
+    framesObserver.observe(host, { childList: true, subtree: true });
+    return () => { framesObserver.disconnect(); timers.forEach(clearTimeout); cleanups.forEach((cleanup) => cleanup()); };
+  }, [cardPreview, invitation, template.id]);
+
+  useEffect(() => {
+    if (cardPreview) return;
     const host = previewRef.current;
     if (!host) return;
-    const frames = Array.from(host.querySelectorAll("iframe"));
+    const subscribed = new WeakSet<HTMLIFrameElement>();
     const cleanups: Array<() => void> = [];
     const frameOffsets = new WeakMap<HTMLIFrameElement, number>();
     const pointerOffsets = new WeakMap<HTMLIFrameElement, number>();
@@ -167,20 +231,28 @@ export function FullTemplatePreview({
       }
     };
 
-    for (const frame of frames) {
-      subscribeToFrame(frame);
-      const onLoad = () => subscribeToFrame(frame);
-      frame.addEventListener("load", onLoad);
-      cleanups.push(() => frame.removeEventListener("load", onLoad));
+    function attachFrames() {
+      for (const frame of host!.querySelectorAll("iframe")) {
+        if (subscribed.has(frame)) continue;
+        subscribed.add(frame);
+        subscribeToFrame(frame);
+        const onLoad = () => subscribeToFrame(frame);
+        frame.addEventListener("load", onLoad);
+        cleanups.push(() => frame.removeEventListener("load", onLoad));
+      }
     }
+    attachFrames();
+    const framesObserver = new MutationObserver(attachFrames);
+    framesObserver.observe(host, { childList: true, subtree: true });
     return () => {
+      framesObserver.disconnect();
       cleanups.forEach((cleanup) => cleanup());
     };
-  }, [invitation]);
+  }, [cardPreview, invitation]);
 
   return (
-    <main className={styles.fullPreview} ref={previewRef}>
-      <nav
+    <main className={styles.fullPreview} ref={previewRef} data-card-preview={cardPreview || undefined}>
+      {!cardPreview && <nav
         className={`${styles.previewControls} ${showControls ? styles.controlsVisible : ""}`}
         aria-label="Dizayn amallari"
         aria-hidden={!showControls}
@@ -202,7 +274,7 @@ export function FullTemplatePreview({
             Yaratish <ArrowUpRight size={16} aria-hidden="true" />
           </Link>
         )}
-      </nav>
+      </nav>}
       {!invitation ? (
         <div className={styles.loading}>Dizayn ochilmoqda…</div>
       ) : template.id === "oltin-darvoza-ortidagi-baxt" ? (

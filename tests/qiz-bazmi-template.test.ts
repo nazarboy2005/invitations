@@ -1,7 +1,8 @@
+import { readFileSync } from "./helpers/source-files";
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { createRequire } from "node:module";
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync } from "node:fs";
 import path from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
@@ -66,7 +67,7 @@ test("Qiz Bazmi keeps empty preview memories icon-only and collapses unsupported
   const sharedCore = readFileSync(new URL("../shared/nikoh/core.js", root), "utf8");
   assert.match(sharedCore, /image\.alt=source\?alt:'';if\(!source\)image\.setAttribute\('aria-hidden','true'\)/);
   assert.match(sharedCore, /placeholder\.textContent='✦'/);
-  assert.match(sharedCore, /hideIf\('gallery',!\(Array\.isArray\(data\.gallery\)&&data\.gallery\.length\)&&!data\.preview\)/);
+  assert.match(sharedCore, /hideIf\('gallery',!\(Array\.isArray\(data\.gallery\)&&data\.gallery\.some\(item=>plain\(item\)&&typeof item\.src==='string'&&item\.src\.trim\(\)\)\)\)/);
 });
 
 test("Qiz Bazmi keeps captured body, scripts, styles, metadata, and source artwork intact", () => {
@@ -124,7 +125,7 @@ test("Qiz Bazmi maps the canonical qiz-uzatish sample into all four locales", ()
   assert.equal(blank.program.length, 0);
   assert.equal(blank.gallery.length, 0);
   assert.equal(blank.gift.cardNumber, "");
-  assert.deepEqual(blank.contacts, { phoneNumber: "", telegramUsername: "" });
+  assert.deepEqual(blank.contacts, { phoneNumber: "", telegramUsername: "", instagramUrl: "" });
 });
 
 test("Qiz Bazmi renderer adapter maps every locale and leaves blank drafts empty", () => {

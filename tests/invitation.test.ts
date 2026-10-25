@@ -169,7 +169,7 @@ test("Anor is a first-class template and a round trip preserves all shared event
     cardNumber: "8600 0000 0000 0000",
     cardHolder: "Test Owner",
   };
-  original.contacts = { phoneNumber: "", telegramUsername: "@example" };
+  original.contacts = { phoneNumber: "", telegramUsername: "@example", instagramUrl: "" };
   const switched = invitationSchema.parse(
     JSON.parse(JSON.stringify(switchTemplate(original, "anor"))),
   );

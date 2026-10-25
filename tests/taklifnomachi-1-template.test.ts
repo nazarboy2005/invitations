@@ -16,7 +16,7 @@ test("Taklifnomachi demo 1 is registered as an unpublished Marxaba source adapte
   assert.equal(template.published, false);
   assert.deepEqual(template.supportedEventTypes, ["wedding"]);
   assert.equal(template.previewImage, "/templates/taklifnomachi-1/preview.png");
-  const registry = readFileSync(path.join(root, "apps/web/src/templates/marxaba/index.ts"), "utf8");
+  const registry = readFileSync(path.join(root, "apps/web/src/templates/marxaba/registry.ts"), "utf8");
   assert.match(registry, /"taklifnomachi-1"/);
   assert.ok(existsSync(path.join(templateRoot, "preview.png")));
 });

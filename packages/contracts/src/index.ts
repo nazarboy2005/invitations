@@ -1488,7 +1488,7 @@ export const TEMPLATES: TemplateDefinition[] = [
     priceMinor: 15000000,
     currency: "UZS",
     accent: "#2d4a34",
-    published: false,
+    published: true,
   },
   {
     id: "invitate-wedding",

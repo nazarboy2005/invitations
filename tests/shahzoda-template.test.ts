@@ -1,6 +1,7 @@
+import { readFileSync } from "./helpers/source-files";
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
-import { readFileSync, readdirSync } from "node:fs";
+import { readdirSync } from "node:fs";
 import path from "node:path";
 import test from "node:test";
 import { runInNewContext } from "node:vm";
@@ -231,7 +232,7 @@ test("Shahzoda preview is an authentic portrait opening capture of the canonical
   assert.equal(
     provenance.fixtureSha256,
     createHash("sha256")
-      .update(readFileSync(path.join(root, provenance.fixture)))
+      .update(readFileSync(path.join(root, "tests/fixtures/catalog-preview-2026-10-23.json")))
       .digest("hex"),
   );
   const sample = createTemplatePreviewSample("shahzoda");

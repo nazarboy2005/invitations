@@ -1,6 +1,7 @@
+import { readFileSync } from "./helpers/source-files";
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync } from "node:fs";
 import { createRequire } from "node:module";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -110,7 +111,7 @@ test("Samarqand Kechasi catalog art is a clean, fixture-backed portrait capture 
   const provenance = JSON.parse(readBytes("preview.provenance.json").toString("utf8"));
   const capture = readBytes("preview-capture.png");
   const preview = readBytes("preview.webp");
-  const fixture = readFileSync(new URL("../apps/web/src/modules/catalog/preview-sample.json", import.meta.url));
+  const fixture = readFileSync(new URL("./fixtures/catalog-preview-2026-10-23.json", import.meta.url));
 
   assert.equal(capture.toString("ascii", 12, 16), "IHDR");
   assert.equal(capture.readUInt32BE(16), 560);

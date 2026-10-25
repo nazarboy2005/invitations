@@ -1,6 +1,7 @@
+import { readFileSync } from "./helpers/source-files";
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
-import { readFileSync } from "node:fs";
+
 import test from "node:test";
 import { templateById } from "@taklifnoma/contracts";
 
@@ -13,10 +14,10 @@ test("Fairy is an unpublished wedding-only Invitate source package", () => {
   assert.equal(template.published, false);
   assert.equal(template.previewImage, "/templates/fairy/preview.png");
 
-  const index = readFileSync("apps/web/src/templates/invitate/index.ts", "utf8");
+  const index = readFileSync("apps/web/src/templates/invitate/registry.ts", "utf8");
   assert.match(index, /"fairy"/);
   const migration = readFileSync(
-    "packages/database/migrations/0123_register_fairy_template.sql",
+    "packages/database/migrations/0137_register_fairy_template.sql",
     "utf8",
   );
   assert.match(migration, /'fairy', 'Fairy', 15000000, 'UZS', false/);

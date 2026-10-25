@@ -1,0 +1,1228 @@
+{
+  "defaultLocale": "uz-Latn",
+  "enabledLocales": ["uz-Latn", "uz-Cyrl", "en", "ru"],
+  "eventType": "wedding",
+  "startsAt": "2027-06-12T17:00",
+  "timezone": "Asia/Tashkent",
+  "gift": {
+    "enabled": true,
+    "receiptUploadEnabled": false,
+    "cardNumber": "8600 1234 5678 9012",
+    "cardHolder": "AZIZ AZIZOV"
+  },
+  "contacts": {
+    "phoneNumber": "+998 90 123 45 67",
+    "telegramUsername": "@demo"
+  },
+  "program": [
+    {
+      "id": "sample-arrival",
+      "time": "17:30"
+    },
+    {
+      "id": "sample-entrance",
+      "time": "18:00"
+    },
+    {
+      "id": "sample-meal",
+      "time": "18:30"
+    },
+    {
+      "id": "sample-music",
+      "time": "20:00"
+    },
+    {
+      "id": "sample-cake",
+      "time": "21:30"
+    },
+    {
+      "id": "sample-farewell",
+      "time": "22:30"
+    }
+  ],
+  "gallery": [
+    {
+      "id": "sample-memory-1",
+      "url": "",
+      "alt": "",
+      "caption": ""
+    },
+    {
+      "id": "sample-memory-2",
+      "url": "",
+      "alt": "",
+      "caption": ""
+    },
+    {
+      "id": "sample-memory-3",
+      "url": "",
+      "alt": "",
+      "caption": ""
+    },
+    {
+      "id": "sample-memory-4",
+      "url": "",
+      "alt": "",
+      "caption": ""
+    },
+    {
+      "id": "sample-memory-5",
+      "url": "",
+      "alt": "",
+      "caption": ""
+    },
+    {
+      "id": "sample-memory-6",
+      "url": "",
+      "alt": "",
+      "caption": ""
+    }
+  ],
+  "dressCode": {
+    "enabled": true,
+    "style": {
+      "uz-Latn": "Kechki libos",
+      "uz-Cyrl": "Кечки либос",
+      "en": "Evening attire",
+      "ru": "Вечерний наряд"
+    },
+    "text": {
+      "uz-Latn": "Ayollar uchun uzun kechki ko‘ylak, erkaklar uchun klassik kostyum. Quyidagi ranglardan tanlasangiz, suratlar yanada chiroyli chiqadi.",
+      "uz-Cyrl": "Аёллар учун узун кечки кўйлак, эркаклар учун классик костюм. Қуйидаги ранглардан танласангиз, суратлар янада чиройли чиқади.",
+      "en": "Women: long evening dresses. Men: classic suits. Choosing from the colors below will make the photos look even more beautiful.",
+      "ru": "Для женщин — длинные вечерние платья, для мужчин — классические костюмы. Выбирайте цвета из палитры ниже, чтобы фотографии получились ещё красивее."
+    },
+    "note": {
+      "uz-Latn": "Iltimos, oq libosdan saqlaning — bu kun oq rang kelinniki.",
+      "uz-Cyrl": "Илтимос, оқ либосдан сақланинг — бу кун оқ ранг келинники.",
+      "en": "Please avoid wearing white — white belongs to the bride on this day.",
+      "ru": "Пожалуйста, не надевайте белое — в этот день белый цвет принадлежит невесте."
+    },
+    "colors": [
+      {
+        "id": "sample-dress-champagne",
+        "name": {
+          "uz-Latn": "Shampan",
+          "uz-Cyrl": "Шампан",
+          "en": "Champagne",
+          "ru": "Шампань"
+        },
+        "hex": "#ead7b7"
+      },
+      {
+        "id": "sample-dress-powder",
+        "name": {
+          "uz-Latn": "Pudra",
+          "uz-Cyrl": "Пудра",
+          "en": "Powder",
+          "ru": "Пудровый"
+        },
+        "hex": "#d7a7ad"
+      },
+      {
+        "id": "sample-dress-olive",
+        "name": {
+          "uz-Latn": "Zaytun",
+          "uz-Cyrl": "Зайтун",
+          "en": "Olive",
+          "ru": "Оливковый"
+        },
+        "hex": "#78805b"
+      },
+      {
+        "id": "sample-dress-navy",
+        "name": {
+          "uz-Latn": "To‘q ko‘k",
+          "uz-Cyrl": "Тўқ кўк",
+          "en": "Navy",
+          "ru": "Тёмно-синий"
+        },
+        "hex": "#243d5a"
+      },
+      {
+        "id": "sample-dress-burgundy",
+        "name": {
+          "uz-Latn": "Bordo",
+          "uz-Cyrl": "Бордо",
+          "en": "Burgundy",
+          "ru": "Бордовый"
+        },
+        "hex": "#783645"
+      }
+    ]
+  },
+  "wishes": {
+    "uz-Latn": [
+      {
+        "name": "Dilnoza opa",
+        "text": "Baxtingiz abadiy bo‘lsin! Bir umr bir-biringizni qadrlab yashang."
+      },
+      {
+        "name": "Sardor",
+        "text": "Jasur, do‘stim, tabriklayman! Oilangiz mustahkam bo‘lsin."
+      },
+      {
+        "name": "Nilufar",
+        "text": "Malikajon, sizga eng go‘zal kunlar tilayman!"
+      }
+    ],
+    "uz-Cyrl": [
+      {
+        "name": "Дилноза опа",
+        "text": "Бахтингиз абадий бўлсин! Бир умр бир-бирингизни қадрлаб яшанг."
+      },
+      {
+        "name": "Сардор",
+        "text": "Жасур, дўстим, табриклайман! Оилангиз мустаҳкам бўлсин."
+      },
+      {
+        "name": "Нилуфар",
+        "text": "Маликажон, сизга энг гўзал кунлар тилайман!"
+      }
+    ],
+    "en": [
+      {
+        "name": "Dilnoza",
+        "text": "May your happiness last forever! Treasure each other throughout your life."
+      },
+      {
+        "name": "Sardor",
+        "text": "Congratulations, Jasur, my friend! May your family stay strong."
+      },
+      {
+        "name": "Nilufar",
+        "text": "Malika, wishing you the most beautiful days!"
+      }
+    ],
+    "ru": [
+      {
+        "name": "Дилноза опа",
+        "text": "Пусть ваше счастье будет вечным! Всю жизнь цените друг друга."
+      },
+      {
+        "name": "Сардор",
+        "text": "Жасур, друг, поздравляю! Пусть ваша семья будет крепкой."
+      },
+      {
+        "name": "Нилуфар",
+        "text": "Малика, желаю вам самых прекрасных дней!"
+      }
+    ]
+  },
+  "content": {
+    "uz-Latn": {
+      "title": "Bizning unutilmas kunimiz",
+      "people": ["Javohir", "Madina"],
+      "hosts": "Javohir va Madina oilalari",
+      "greeting": "Assalomu alaykum, aziz mehmon!",
+      "personalGreeting": "Assalomu alaykum, {name}!",
+      "message": "Hayotimizdagi quvonchli kunimizda sizni yonimizda ko‘rishdan mamnun bo‘lamiz.",
+      "eventLabel": "Nikoh to‘yi",
+      "venueName": "Zarafshon tantanalar saroyi",
+      "address": "Toshkent shahri, Yunusobod tumani",
+      "landmark": "Amir Temur xiyoboni yaqinida",
+      "programHeading": "To‘y dasturi",
+      "programTitles": {
+        "sample-arrival": "Mehmonlarni kutib olish",
+        "sample-entrance": "Kelin-kuyovning kirib kelishi",
+        "sample-meal": "Tabriklar va dasturxon",
+        "sample-music": "Raqs va kuy-qo‘shiqlar",
+        "sample-cake": "To‘y torti",
+        "sample-farewell": "Yakuniy so‘z"
+      }
+    },
+    "uz-Cyrl": {
+      "title": "Бизнинг унутилмас кунимиз",
+      "people": ["Жавохир", "Мадина"],
+      "hosts": "Жавохир ва Мадинанинг оилалари",
+      "greeting": "Ассалому алайкум, азиз меҳмон!",
+      "personalGreeting": "Ассалому алайкум, {name}!",
+      "message": "Ҳаётимиздаги қувончли кунимизда сизни ёнимизда кўришдан мамнун бўламиз.",
+      "eventLabel": "Никоҳ тўйи",
+      "venueName": "Зарафшон тантаналар саройи",
+      "address": "Тошкент шаҳри, Юнусобод тумани",
+      "landmark": "Амир Темур хиёбони яқинида",
+      "programHeading": "Тўй дастури",
+      "programTitles": {
+        "sample-arrival": "Меҳмонларни кутиб олиш",
+        "sample-entrance": "Келин-куёвнинг кириб келиши",
+        "sample-meal": "Табриклар ва дастурхон",
+        "sample-music": "Рақс ва куй-қўшиқлар",
+        "sample-cake": "Тўй торти",
+        "sample-farewell": "Якуний сўз"
+      }
+    },
+    "en": {
+      "title": "Our Unforgettable Day",
+      "people": ["Javohir", "Madina"],
+      "hosts": "Javohir and Madina's families",
+      "greeting": "Hello, dear guest!",
+      "personalGreeting": "Hello, {name}!",
+      "message": "We would be delighted to celebrate this joyful day with you.",
+      "eventLabel": "Wedding celebration",
+      "venueName": "Zarafshon Celebration Palace",
+      "address": "Yunusabad district, Tashkent",
+      "landmark": "Near Amir Temur Square",
+      "programHeading": "Wedding program",
+      "programTitles": {
+        "sample-arrival": "Welcome and reception",
+        "sample-entrance": "The bride and groom make their entrance",
+        "sample-meal": "Toasts and dinner",
+        "sample-music": "Music and dancing",
+        "sample-cake": "Wedding cake",
+        "sample-farewell": "Farewell"
+      }
+    },
+    "ru": {
+      "title": "Наш незабываемый день",
+      "people": ["Жавохир", "Мадина"],
+      "hosts": "Семьи Жавохира и Мадины",
+      "greeting": "Здравствуйте, дорогой гость!",
+      "personalGreeting": "Здравствуйте, {name}!",
+      "message": "Будем рады видеть вас рядом с нами в этот радостный день.",
+      "eventLabel": "Свадебное торжество",
+      "venueName": "Дворец торжеств «Зарафшон»",
+      "address": "Юнусабадский район, Ташкент",
+      "landmark": "Рядом с площадью Амира Темура",
+      "programHeading": "Программа свадьбы",
+      "programTitles": {
+        "sample-arrival": "Встреча гостей",
+        "sample-entrance": "Выход жениха и невесты",
+        "sample-meal": "Поздравления и ужин",
+        "sample-music": "Музыка и танцы",
+        "sample-cake": "Свадебный торт",
+        "sample-farewell": "Заключительное слово"
+      }
+    }
+  },
+  "eventSamples": {
+    "yangi-uy": {
+      "personIndex": 0,
+      "personName": {
+        "uz-Latn": "Rahmonovlar xonadoni",
+        "uz-Cyrl": "Раҳмоновлар хонадони",
+        "en": "The Rahmonov family home",
+        "ru": "Дом семьи Рахмоновых"
+      },
+      "eventLabel": {
+        "uz-Latn": "Yangi uy to‘yi",
+        "uz-Cyrl": "Янги уй тўйи",
+        "en": "Housewarming celebration",
+        "ru": "Новоселье"
+      },
+      "title": {
+        "uz-Latn": "Yangi xonadonimiz",
+        "uz-Cyrl": "Янги хонадонимиз",
+        "en": "Our new home",
+        "ru": "Наш новый дом"
+      },
+      "hosts": {
+        "uz-Latn": "Rahmonovlar oilasi",
+        "uz-Cyrl": "Раҳмоновлар оиласи",
+        "en": "The Rahmonov family",
+        "ru": "Семья Рахмоновых"
+      },
+      "message": {
+        "uz-Latn": "Yangi xonadonimizdagi quvonchni siz bilan baham ko‘rishga taklif qilamiz.",
+        "uz-Cyrl": "Янги хонадонимиздаги қувончни сиз билан баҳам кўришга таклиф қиламиз.",
+        "en": "Join us as we celebrate the joy of our new home.",
+        "ru": "Приглашаем вас разделить с нами радость новоселья."
+      },
+      "venueName": {
+        "uz-Latn": "Rahmonovlar yangi xonadoni",
+        "uz-Cyrl": "Раҳмоновларнинг янги хонадони",
+        "en": "The Rahmonovs’ new home",
+        "ru": "Новый дом семьи Рахмоновых"
+      },
+      "address": {
+        "uz-Latn": "Toshkent shahri, Yunusobod tumani",
+        "uz-Cyrl": "Тошкент шаҳри, Юнусобод тумани",
+        "en": "Yunusabad district, Tashkent",
+        "ru": "Юнусабадский район, Ташкент"
+      },
+      "startsAt": "2027-06-12T17:00",
+      "programTimes": ["16:30", "17:00", "17:30", "18:30", "19:30", "20:00"],
+      "programHeading": {
+        "uz-Latn": "Yangi uy to‘yi dasturi",
+        "uz-Cyrl": "Янги уй тўйи дастури",
+        "en": "Housewarming program",
+        "ru": "Программа новоселья"
+      },
+      "programTitles": {
+        "uz-Latn": ["Mehmonlarni kutib olish", "Yangi xonadon bilan tanishuv", "Uy bo‘ylab sayohat", "Dasturxon va suhbat", "Ezgu tilaklar", "Yakuniy so‘z"],
+        "uz-Cyrl": ["Меҳмонларни кутиб олиш", "Янги хонадон билан танишув", "Уй бўйлаб саёҳат", "Дастурхон ва суҳбат", "Эзгу тилаклар", "Якуний сўз"],
+        "en": ["Welcoming guests", "Welcome to our new home", "A tour of the house", "Food and conversation", "Warm wishes", "Closing words"],
+        "ru": ["Встреча гостей", "Знакомство с новым домом", "Экскурсия по дому", "Угощение и беседа", "Добрые пожелания", "Заключительное слово"]
+      },
+      "dressCode": {
+        "style": {
+          "uz-Latn": "Bayramona libos",
+          "uz-Cyrl": "Байрамона либос",
+          "en": "Festive attire",
+          "ru": "Праздничный наряд"
+        },
+        "text": {
+          "uz-Latn": "Yangi uyimizdagi bayramga qulay va ozoda libosda keling.",
+          "uz-Cyrl": "Янги уйимиздаги байрамга қулай ва озода либосда келинг.",
+          "en": "Join our housewarming in comfortable, festive attire.",
+          "ru": "Приходите на новоселье в удобной и праздничной одежде."
+        },
+        "note": {
+          "uz-Latn": "Uy ichida qulaylik uchun oyoq kiyimingizni almashtirishingiz mumkin.",
+          "uz-Cyrl": "Уй ичида қулайлик учун оёқ кийимингизни алмаштиришингиз мумкин.",
+          "en": "Feel free to change shoes for comfort indoors.",
+          "ru": "Для удобства в доме можно переобуться."
+        },
+        "colors": [
+          { "hex": "#c96f4a", "name": { "uz-Latn": "Terrakota", "uz-Cyrl": "Терракота", "en": "Terracotta", "ru": "Терракотовый" } },
+          { "hex": "#f4dfb1", "name": { "uz-Latn": "Qaymoqrang", "uz-Cyrl": "Қаймоқранг", "en": "Cream", "ru": "Кремовый" } },
+          { "hex": "#2f6f73", "name": { "uz-Latn": "Ko‘kimtir yashil", "uz-Cyrl": "Кўкимтир яшил", "en": "Teal", "ru": "Бирюзовый" } },
+          { "hex": "#7aa95c", "name": { "uz-Latn": "Zaytun", "uz-Cyrl": "Зайтун", "en": "Olive", "ru": "Оливковый" } },
+          { "hex": "#ffd27a", "name": { "uz-Latn": "Oltin", "uz-Cyrl": "Олтин", "en": "Golden", "ru": "Золотистый" } }
+        ]
+      }
+    },
+    "birthday": {
+      "personIndex": 0,
+      "eventLabel": {
+        "uz-Latn": "Tug‘ilgan kun",
+        "uz-Cyrl": "Туғилган кун",
+        "en": "Birthday celebration",
+        "ru": "День рождения"
+      },
+      "hosts": {
+        "uz-Latn": "Javohirning oilasi",
+        "uz-Cyrl": "Жавохирнинг оиласи",
+        "en": "Javohir’s family",
+        "ru": "Семья Жавохира"
+      },
+      "message": {
+        "uz-Latn": "Quvonchli kunimizni birga nishonlash uchun sizni kutamiz!",
+        "uz-Cyrl": "Қувончли кунимизни бирга нишонлаш учун сизни кутамиз!",
+        "en": "Join us as we celebrate this joyful day together!",
+        "ru": "Будем рады отметить этот радостный день вместе с вами!"
+      },
+      "venueName": {
+        "uz-Latn": "Bayram zali",
+        "uz-Cyrl": "Байрам зали",
+        "en": "Celebration hall",
+        "ru": "Праздничный зал"
+      },
+      "address": {
+        "uz-Latn": "Toshkent shahri",
+        "uz-Cyrl": "Тошкент шаҳри",
+        "en": "Tashkent",
+        "ru": "Ташкент"
+      },
+      "programHeading": {
+        "uz-Latn": "Tug‘ilgan kun dasturi",
+        "uz-Cyrl": "Туғилган кун дастури",
+        "en": "Birthday program",
+        "ru": "Программа дня рождения"
+      },
+      "programTitles": {
+        "uz-Latn": [
+          "Mehmonlarni kutib olish",
+          "Bayram sohibining kirib kelishi",
+          "Tabriklar va dasturxon",
+          "Raqs va kuy-qo‘shiqlar",
+          "Bayram torti",
+          "Yakuniy tilaklar"
+        ],
+        "uz-Cyrl": [
+          "Меҳмонларни кутиб олиш",
+          "Байрам соҳибининг кириб келиши",
+          "Табриклар ва дастурхон",
+          "Рақс ва куй-қўшиқлар",
+          "Байрам торти",
+          "Якуний тилаклар"
+        ],
+        "en": [
+          "Welcoming guests",
+          "The guest of honor arrives",
+          "Greetings and treats",
+          "Music and dancing",
+          "Birthday cake",
+          "Closing wishes"
+        ],
+        "ru": [
+          "Встреча гостей",
+          "Выход именинника",
+          "Поздравления и угощение",
+          "Музыка и танцы",
+          "Праздничный торт",
+          "Заключительные пожелания"
+        ]
+      },
+      "dressCode": {
+        "style": {
+          "uz-Latn": "Bayramona libos",
+          "uz-Cyrl": "Байрамона либос",
+          "en": "Party attire",
+          "ru": "Праздничный наряд"
+        },
+        "text": {
+          "uz-Latn": "Qulay va quvnoq libos tanlang. Quyidagi ranglar bayram suratlariga chiroy qo‘shadi.",
+          "uz-Cyrl": "Қулай ва қувноқ либос танланг. Қуйидаги ранглар байрам суратларига чирой қўшади.",
+          "en": "Choose comfortable, cheerful clothes. These colors will look lovely in the party photos.",
+          "ru": "Выбирайте удобную и яркую одежду. Эти цвета красиво будут смотреться на праздничных фотографиях."
+        },
+        "note": {
+          "uz-Latn": "Bolalar bemalol o‘ynashi uchun qulaylikni hisobga oling.",
+          "uz-Cyrl": "Болалар бемалол ўйнаши учун қулайликни ҳисобга олинг.",
+          "en": "Please keep comfort in mind so the children can play freely.",
+          "ru": "Пожалуйста, учитывайте комфорт детей, чтобы они могли свободно играть."
+        },
+        "colors": [
+          {
+            "hex": "#ff8fb1",
+            "name": {
+              "uz-Latn": "Pushti",
+              "uz-Cyrl": "Пушти",
+              "en": "Pink",
+              "ru": "Розовый"
+            }
+          },
+          {
+            "hex": "#7cc6ff",
+            "name": {
+              "uz-Latn": "Havorang",
+              "uz-Cyrl": "Ҳаворанг",
+              "en": "Sky blue",
+              "ru": "Голубой"
+            }
+          },
+          {
+            "hex": "#ffd45c",
+            "name": {
+              "uz-Latn": "Sariq",
+              "uz-Cyrl": "Сариқ",
+              "en": "Yellow",
+              "ru": "Жёлтый"
+            }
+          },
+          {
+            "hex": "#7fdcb5",
+            "name": {
+              "uz-Latn": "Yalpiz rang",
+              "uz-Cyrl": "Ялпиз ранг",
+              "en": "Mint",
+              "ru": "Мятный"
+            }
+          },
+          {
+            "hex": "#5b3a2e",
+            "name": {
+              "uz-Latn": "Shokolad",
+              "uz-Cyrl": "Шоколад",
+              "en": "Chocolate",
+              "ru": "Шоколадный"
+            }
+          }
+        ]
+      }
+    },
+    "qiz-uzatish": {
+      "personIndex": 1,
+      "hosts": {
+        "uz-Latn": "Madina oilasi",
+        "uz-Cyrl": "Мадина оиласи",
+        "en": "Madina's family",
+        "ru": "Семья Мадины"
+      },
+      "programHeading": {
+        "uz-Latn": "Qiz uzatish dasturi",
+        "uz-Cyrl": "Қиз узатиш дастури",
+        "en": "Bride send-off program",
+        "ru": "Программа проводов невесты"
+      },
+      "programTitles": {
+        "uz-Latn": [
+          "Mehmonlarni kutib olish",
+          "Kelinning bazmga kirib kelishi",
+          "Kelin salom va tabriklar",
+          "Kuy-qo‘shiqlar va raqs",
+          "Shirinliklar tortilishi",
+          "Yakuniy tilaklar"
+        ],
+        "uz-Cyrl": [
+          "Меҳмонларни кутиб олиш",
+          "Келиннинг базмга кириб келиши",
+          "Келин салом ва табриклар",
+          "Куй-қўшиқлар ва рақс",
+          "Ширинликлар тортилиши",
+          "Якуний тилаклар"
+        ],
+        "en": [
+          "Welcoming guests",
+          "The bride’s entrance",
+          "Greetings for the bride",
+          "Music and dancing",
+          "Dessert is served",
+          "Closing wishes"
+        ],
+        "ru": [
+          "Встреча гостей",
+          "Выход невесты",
+          "Поздравления невесте",
+          "Музыка и танцы",
+          "Подача десерта",
+          "Заключительные пожелания"
+        ]
+      }
+    },
+    "sunnat-toyi": {
+      "personIndex": 0,
+      "hosts": {
+        "uz-Latn": "Javohir oilasi",
+        "uz-Cyrl": "Жавохир оиласи",
+        "en": "Javohir's family",
+        "ru": "Семья Жавохира"
+      },
+      "programHeading": {
+        "uz-Latn": "Sunnat to‘yi dasturi",
+        "uz-Cyrl": "Суннат тўйи дастури",
+        "en": "Celebration program",
+        "ru": "Программа суннат-тоя"
+      },
+      "programTitles": {
+        "uz-Latn": [
+          "Mehmonlarni kutib olish",
+          "Bayram sohibining kirib kelishi",
+          "Tabriklar va dasturxon",
+          "Raqs va kuy-qo‘shiqlar",
+          "Bayram torti",
+          "Yakuniy so‘z"
+        ],
+        "uz-Cyrl": [
+          "Меҳмонларни кутиб олиш",
+          "Байрам соҳибининг кириб келиши",
+          "Табриклар ва дастурхон",
+          "Рақс ва куй-қўшиқлар",
+          "Байрам торти",
+          "Якуний сўз"
+        ],
+        "en": [
+          "Welcoming guests",
+          "The guest of honor arrives",
+          "Greetings and dinner",
+          "Music and dancing",
+          "Celebration cake",
+          "Closing words"
+        ],
+        "ru": [
+          "Встреча гостей",
+          "Выход виновника торжества",
+          "Поздравления и угощение",
+          "Музыка и танцы",
+          "Праздничный торт",
+          "Заключительное слово"
+        ]
+      },
+      "dressCode": {
+        "style": {
+          "uz-Latn": "Bayramona libos",
+          "uz-Cyrl": "Байрамона либос",
+          "en": "Festive attire",
+          "ru": "Праздничный наряд"
+        },
+        "text": {
+          "uz-Latn": "Ozoda va qulay bayramona libos tanlang. Quyidagi ranglar suratlarda chiroyli uyg‘unlashadi.",
+          "uz-Cyrl": "Озода ва қулай байрамона либос танланг. Қуйидаги ранглар суратларда чиройли уйғунлашади.",
+          "en": "Choose neat, comfortable festive clothing. The colors below will look lovely together in photos.",
+          "ru": "Выбирайте аккуратную и удобную праздничную одежду. Цвета ниже красиво сочетаются на фотографиях."
+        },
+        "note": {
+          "uz-Latn": "Bolalar bilan o‘tkaziladigan bayram uchun qulaylikni ham hisobga oling.",
+          "uz-Cyrl": "Болалар билан ўтказиладиган байрамда қулайликни ҳам ҳисобга олинг.",
+          "en": "For a celebration with children, please consider comfort as well.",
+          "ru": "Пожалуйста, учитывайте комфорт детей на празднике."
+        }
+      }
+    },
+    "beshik-toyi": {
+      "personIndex": 0,
+      "hosts": {
+        "uz-Latn": "Rahmonovlar oilasi",
+        "uz-Cyrl": "Раҳмоновлар оиласи",
+        "en": "The Rahmonov family",
+        "ru": "Семья Рахмоновых"
+      },
+      "programHeading": {
+        "uz-Latn": "Beshik to‘yi dasturi",
+        "uz-Cyrl": "Бешик тўйи дастури",
+        "en": "Cradle celebration program",
+        "ru": "Программа праздника в честь колыбели"
+      },
+      "programTitles": {
+        "uz-Latn": [
+          "Mehmonlarni kutib olish",
+          "Chaqaloqning beshik marosimi",
+          "Ota-onaga ezgu tilaklar",
+          "Dasturxon va suhbat",
+          "Alla va kuy-qo‘shiqlar",
+          "Yakuniy tilaklar"
+        ],
+        "uz-Cyrl": [
+          "Меҳмонларни кутиб олиш",
+          "Чақалоқнинг бешик маросими",
+          "Ота-онага эзгу тилаклар",
+          "Дастурхон ва суҳбат",
+          "Алла ва куй-қўшиқлар",
+          "Якуний тилаклар"
+        ],
+        "en": [
+          "Welcoming guests",
+          "The baby's cradle ceremony",
+          "Wishes for the parents",
+          "Dinner and conversation",
+          "Lullabies and music",
+          "Closing wishes"
+        ],
+        "ru": [
+          "Встреча гостей",
+          "Обряд укладывания малыша в колыбель",
+          "Пожелания родителям",
+          "Угощение и беседа",
+          "Колыбельные и музыка",
+          "Заключительные пожелания"
+        ]
+      },
+      "dressCode": {
+        "style": {
+          "uz-Latn": "Oilaviy bayramona libos",
+          "uz-Cyrl": "Оилавий байрамона либос",
+          "en": "Family celebration attire",
+          "ru": "Наряд для семейного праздника"
+        },
+        "text": {
+          "uz-Latn": "Oilaviy bayram uchun ozoda va qulay libos tanlang. Quyidagi ranglar suratlarda chiroyli uyg‘unlashadi.",
+          "uz-Cyrl": "Оилавий байрам учун озода ва қулай либос танланг. Қуйидаги ранглар суратларда чиройли уйғунлашади.",
+          "en": "Choose neat, comfortable clothing for a family celebration. The colors below will look lovely together in photos.",
+          "ru": "Выбирайте аккуратную и удобную одежду для семейного праздника. Цвета ниже красиво сочетаются на фотографиях."
+        },
+        "note": {
+          "uz-Latn": "Chaqaloq va bolalar uchun qulaylikni ham hisobga oling.",
+          "uz-Cyrl": "Чақалоқ ва болалар учун қулайликни ҳам ҳисобга олинг.",
+          "en": "Please keep comfort in mind for the baby and children.",
+          "ru": "Пожалуйста, учитывайте комфорт малыша и детей."
+        }
+      }
+    },
+    "yubiley": {
+      "personIndex": 0,
+      "eventLabel": {
+        "uz-Latn": "Yubiley",
+        "uz-Cyrl": "Юбилей",
+        "en": "Anniversary",
+        "ru": "Юбилей"
+      },
+      "hosts": {
+        "uz-Latn": "Rahimovlar oilasi",
+        "uz-Cyrl": "Раҳимовлар оиласи",
+        "en": "The Rahimov family",
+        "ru": "Семья Рахимовых"
+      },
+      "message": {
+        "uz-Latn": "Quvonchli kunimizni birga nishonlash uchun sizni kutamiz!",
+        "uz-Cyrl": "Қувончли кунимизни бирга нишонлаш учун сизни кутамиз!",
+        "en": "Join us as we celebrate this joyful day together!",
+        "ru": "Будем рады отметить этот радостный день вместе с вами!"
+      },
+      "venueName": {
+        "uz-Latn": "Bayram zali",
+        "uz-Cyrl": "Байрам зали",
+        "en": "Celebration hall",
+        "ru": "Праздничный зал"
+      },
+      "address": {
+        "uz-Latn": "Toshkent shahri",
+        "uz-Cyrl": "Тошкент шаҳри",
+        "en": "Tashkent",
+        "ru": "Ташкент"
+      },
+      "programHeading": {
+        "uz-Latn": "Yubiley dasturi",
+        "uz-Cyrl": "Юбилей дастури",
+        "en": "Anniversary program",
+        "ru": "Программа юбилея"
+      },
+      "programTitles": {
+        "uz-Latn": [
+          "Mehmonlarni kutib olish",
+          "Yubilyarning kirib kelishi",
+          "Ezgu tilaklar va tabriklar",
+          "Dasturxon va suhbat",
+          "Musiqa va raqs",
+          "Yakuniy so‘z"
+        ],
+        "uz-Cyrl": [
+          "Меҳмонларни кутиб олиш",
+          "Юбилярнинг кириб келиши",
+          "Эзгу тилаклар ва табриклар",
+          "Дастурхон ва суҳбат",
+          "Мусиқа ва рақс",
+          "Якуний сўз"
+        ],
+        "en": [
+          "Welcoming guests",
+          "The honoree’s entrance",
+          "Wishes and congratulations",
+          "Dinner and conversation",
+          "Music and dancing",
+          "Closing words"
+        ],
+        "ru": [
+          "Встреча гостей",
+          "Выход юбиляра",
+          "Пожелания и поздравления",
+          "Угощение и беседа",
+          "Музыка и танцы",
+          "Заключительное слово"
+        ]
+      },
+      "dressCode": {
+        "style": {
+          "uz-Latn": "Bayramona libos",
+          "uz-Cyrl": "Байрамона либос",
+          "en": "Celebration attire",
+          "ru": "Праздничный наряд"
+        },
+        "text": {
+          "uz-Latn": "Yubiley oqshomi uchun nafis va qulay libos tanlang. Quyidagi ranglar bayramona suratlarda chiroyli ko‘rinadi.",
+          "uz-Cyrl": "Юбилей оқшоми учун нафис ва қулай либос танланг. Қуйидаги ранглар байрам суратларида чиройли кўринади.",
+          "en": "Choose elegant, comfortable attire for the anniversary celebration. These colors will look lovely in the photos.",
+          "ru": "Выбирайте элегантную и удобную одежду для юбилейного вечера. Эти цвета красиво будут смотреться на фотографиях."
+        },
+        "note": {
+          "uz-Latn": "Bayramona ranglar palitrasidan foydalanishingiz mumkin.",
+          "uz-Cyrl": "Байрамона ранглар палитрасидан фойдаланишингиз мумкин.",
+          "en": "Feel free to choose from the celebration palette.",
+          "ru": "Можно выбрать один из праздничных оттенков."
+        },
+        "colors": [
+          {
+            "hex": "#c49a45",
+            "name": {
+              "uz-Latn": "Oltin",
+              "uz-Cyrl": "Олтин",
+              "en": "Gold",
+              "ru": "Золотой"
+            }
+          },
+          {
+            "hex": "#17243c",
+            "name": {
+              "uz-Latn": "To‘q ko‘k",
+              "uz-Cyrl": "Тўқ кўк",
+              "en": "Navy",
+              "ru": "Тёмно-синий"
+            }
+          },
+          {
+            "hex": "#7d3c52",
+            "name": {
+              "uz-Latn": "Bordo",
+              "uz-Cyrl": "Бордо",
+              "en": "Burgundy",
+              "ru": "Бордовый"
+            }
+          },
+          {
+            "hex": "#d8bba0",
+            "name": {
+              "uz-Latn": "Shampan",
+              "uz-Cyrl": "Шампань",
+              "en": "Champagne",
+              "ru": "Шампань"
+            }
+          },
+          {
+            "hex": "#667260",
+            "name": {
+              "uz-Latn": "Zaytun",
+              "uz-Cyrl": "Зайтун",
+              "en": "Olive",
+              "ru": "Оливковый"
+            }
+          }
+        ]
+      }
+    },
+    "osh": {
+      "personIndex": 0,
+      "eventLabel": {
+        "uz-Latn": "Nahorgi osh",
+        "uz-Cyrl": "Наҳорги ош",
+        "en": "Morning osh",
+        "ru": "Утренний ош"
+      },
+      "hosts": {
+        "uz-Latn": "Raxmonovlar oilasi",
+        "uz-Cyrl": "Рахмоновлар оиласи",
+        "en": "The Rakhmonov family",
+        "ru": "Семья Рахмоновых"
+      },
+      "message": {
+        "uz-Latn": "Tonggi davramiz va dasturxonimizga aziz mehmonimiz bo‘ling.",
+        "uz-Cyrl": "Тонгги даврамиз ва дастурхонимизга азиз меҳмонимиз бўлинг.",
+        "en": "Join us for a warm morning gathering and a festive table.",
+        "ru": "Будем рады видеть вас на утренней встрече за праздничным столом."
+      },
+      "venueName": {
+        "uz-Latn": "Mahalla oshxonasi",
+        "uz-Cyrl": "Маҳалла ошхонаси",
+        "en": "Neighborhood gathering hall",
+        "ru": "Районный банкетный зал"
+      },
+      "address": {
+        "uz-Latn": "Toshkent shahri",
+        "uz-Cyrl": "Тошкент шаҳри",
+        "en": "Tashkent",
+        "ru": "Ташкент"
+      },
+      "programHeading": {
+        "uz-Latn": "Nahorgi osh dasturi",
+        "uz-Cyrl": "Наҳорги ош дастури",
+        "en": "Morning osh program",
+        "ru": "Программа утреннего оша"
+      },
+      "programTitles": {
+        "uz-Latn": [
+          "Mehmonlarni kutib olish",
+          "Osh tortilishi",
+          "Ezgu tilaklar",
+          "Dasturxon atrofida suhbat",
+          "Kuy-qo‘shiqlar",
+          "Yakuniy so‘z"
+        ],
+        "uz-Cyrl": [
+          "Меҳмонларни кутиб олиш",
+          "Ош тортилиши",
+          "Эзгу тилаклар",
+          "Дастурхон атрофида суҳбат",
+          "Куй-қўшиқлар",
+          "Якуний сўз"
+        ],
+        "en": [
+          "Welcoming guests",
+          "Serving the osh",
+          "Warm wishes",
+          "Conversation around the table",
+          "Music and songs",
+          "Closing words"
+        ],
+        "ru": [
+          "Встреча гостей",
+          "Подача оша",
+          "Добрые пожелания",
+          "Беседа за столом",
+          "Музыка и песни",
+          "Заключительное слово"
+        ]
+      },
+      "dressCode": {
+        "style": {
+          "uz-Latn": "Milliy bayramona libos",
+          "uz-Cyrl": "Миллий байрамона либос",
+          "en": "Festive traditional attire",
+          "ru": "Праздничный национальный наряд"
+        },
+        "text": {
+          "uz-Latn": "Tonggi osh davrasi uchun ozoda va qulay libos tanlang.",
+          "uz-Cyrl": "Тонгги ош давраси учун озода ва қулай либос танланг.",
+          "en": "Choose neat, comfortable attire for a morning gathering.",
+          "ru": "Выбирайте аккуратную и удобную одежду для утреннего застолья."
+        },
+        "note": {
+          "uz-Latn": "Milliy naqsh va iliq ranglar davramizga mos tushadi.",
+          "uz-Cyrl": "Миллий нақш ва илиқ ранглар даврамизга мос тушади.",
+          "en": "Traditional patterns and warm colors suit the occasion.",
+          "ru": "Национальные узоры и тёплые оттенки подойдут к этому событию."
+        },
+        "colors": [
+          {
+            "hex": "#a75c2a",
+            "name": {
+              "uz-Latn": "Mis rang",
+              "uz-Cyrl": "Мис ранг",
+              "en": "Copper",
+              "ru": "Медный"
+            }
+          },
+          {
+            "hex": "#e5ad48",
+            "name": {
+              "uz-Latn": "Oltin",
+              "uz-Cyrl": "Олтин",
+              "en": "Gold",
+              "ru": "Золотой"
+            }
+          },
+          {
+            "hex": "#315d4a",
+            "name": {
+              "uz-Latn": "Yashil",
+              "uz-Cyrl": "Яшил",
+              "en": "Green",
+              "ru": "Зелёный"
+            }
+          },
+          {
+            "hex": "#7f2e31",
+            "name": {
+              "uz-Latn": "Anor",
+              "uz-Cyrl": "Анор",
+              "en": "Pomegranate",
+              "ru": "Гранатовый"
+            }
+          },
+          {
+            "hex": "#e9d7b8",
+            "name": {
+              "uz-Latn": "Qaymoqrang",
+              "uz-Cyrl": "Қаймоқранг",
+              "en": "Cream",
+              "ru": "Кремовый"
+            }
+          }
+        ]
+      },
+      "startsAt": "2027-06-12T07:00",
+      "programTimes": ["06:30", "07:00", "08:00", "08:30", "10:00", "11:00"]
+    },
+    "iftorlik": {
+      "personIndex": 0,
+      "eventLabel": {
+        "uz-Latn": "Iftorlik",
+        "uz-Cyrl": "Ифторлик",
+        "en": "Iftar gathering",
+        "ru": "Ифтар"
+      },
+      "hosts": {
+        "uz-Latn": "Rahmonovlar oilasi",
+        "uz-Cyrl": "Раҳмоновлар оиласи",
+        "en": "The Rahmonov family",
+        "ru": "Семья Рахмоновых"
+      },
+      "message": {
+        "uz-Latn": "Iftorlik dasturxonimizga va samimiy suhbatimizga taklif qilamiz.",
+        "uz-Cyrl": "Ифторлик дастурхонимизга ва самимий суҳбатимизга таклиф қиламиз.",
+        "en": "Join us for iftar, a shared meal, and a warm evening together.",
+        "ru": "Приглашаем вас разделить с нами ифтар и провести вечер в тёплой атмосфере."
+      },
+      "venueName": {
+        "uz-Latn": "Hilol majmuasi",
+        "uz-Cyrl": "Ҳилол мажмуаси",
+        "en": "Hilol gathering hall",
+        "ru": "Банкетный зал «Хилол»"
+      },
+      "address": {
+        "uz-Latn": "Toshkent shahri",
+        "uz-Cyrl": "Тошкент шаҳри",
+        "en": "Tashkent",
+        "ru": "Ташкент"
+      },
+      "programHeading": {
+        "uz-Latn": "Iftorlik dasturi",
+        "uz-Cyrl": "Ифторлик дастури",
+        "en": "Iftar program",
+        "ru": "Программа ифтара"
+      },
+      "programTitles": {
+        "uz-Latn": [
+          "Mehmonlarni kutib olish",
+          "Iftorlik dasturxoniga taklif",
+          "Duo va ezgu tilaklar",
+          "Suhbat va iftorlik",
+          "Choy va shirinliklar",
+          "Yakuniy so‘z"
+        ],
+        "uz-Cyrl": [
+          "Меҳмонларни кутиб олиш",
+          "Ифторлик дастурхонига таклиф",
+          "Дуо ва эзгу тилаклар",
+          "Суҳбат ва ифторлик",
+          "Чой ва ширинликлар",
+          "Якуний сўз"
+        ],
+        "en": [
+          "Welcoming guests",
+          "Gathering for iftar",
+          "Prayer and kind wishes",
+          "Iftar and conversation",
+          "Tea and sweets",
+          "Closing words"
+        ],
+        "ru": [
+          "Встреча гостей",
+          "Приглашение к ифтару",
+          "Молитва и добрые пожелания",
+          "Ифтар и беседа",
+          "Чай и сладости",
+          "Заключительное слово"
+        ]
+      },
+      "startsAt": "2027-02-12T18:00",
+      "programTimes": ["17:30", "18:00", "18:15", "19:00", "20:00", "21:00"]
+    },
+    "bitiruv": {
+      "personIndex": 0,
+      "personName": {
+        "uz-Latn": "Javohir",
+        "uz-Cyrl": "Жавоҳир",
+        "en": "Javohir",
+        "ru": "Жавохир"
+      },
+      "eventLabel": {
+        "uz-Latn": "Bitiruv kechasi",
+        "uz-Cyrl": "Битирув кечаси",
+        "en": "Graduation celebration",
+        "ru": "Выпускной вечер"
+      },
+      "hosts": {
+        "uz-Latn": "Sinfdoshlari va ustozlari",
+        "uz-Cyrl": "Синфдошлари ва устозлари",
+        "en": "Classmates and teachers",
+        "ru": "Одноклассники и учителя"
+      },
+      "message": {
+        "uz-Latn": "Yangi yo‘l boshlanayotgan ushbu quvonchli oqshomda sizni kutamiz.",
+        "uz-Cyrl": "Янги йўл бошланаётган ушбу қувончли оқшомда сизни кутамиз.",
+        "en": "Join us for this joyful evening as a new chapter begins.",
+        "ru": "Ждём вас в этот радостный вечер, когда начинается новый путь."
+      },
+      "venueName": {
+        "uz-Latn": "Bitiruvchilar saroyi",
+        "uz-Cyrl": "Битирувчилар саройи",
+        "en": "Graduates’ hall",
+        "ru": "Зал выпускников"
+      },
+      "address": {
+        "uz-Latn": "Toshkent shahri",
+        "uz-Cyrl": "Тошкент шаҳри",
+        "en": "Tashkent",
+        "ru": "Ташкент"
+      },
+      "programHeading": {
+        "uz-Latn": "Bitiruv kechasi dasturi",
+        "uz-Cyrl": "Битирув кечаси дастури",
+        "en": "Graduation evening program",
+        "ru": "Программа выпускного вечера"
+      },
+      "programTitles": {
+        "uz-Latn": ["Mehmonlarni kutib olish", "Bitiruvchilarning kirib kelishi", "Ustozlar tabrigi", "Xotiralar va chiqishlar", "Raqs va kuy-qo‘shiqlar", "Yakuniy so‘z"],
+        "uz-Cyrl": ["Меҳмонларни кутиб олиш", "Битирувчиларнинг кириб келиши", "Устозлар табриги", "Хотиралар ва чиқишлар", "Рақс ва куй-қўшиқлар", "Якуний сўз"],
+        "en": ["Welcoming guests", "Graduates’ entrance", "Teachers’ congratulations", "Memories and performances", "Music and dancing", "Closing words"],
+        "ru": ["Встреча гостей", "Выход выпускников", "Поздравления учителей", "Воспоминания и выступления", "Музыка и танцы", "Заключительное слово"]
+      },
+      "dressCode": {
+        "style": {
+          "uz-Latn": "Bayramona libos",
+          "uz-Cyrl": "Байрамона либос",
+          "en": "Celebration attire",
+          "ru": "Праздничный наряд"
+        },
+        "text": {
+          "uz-Latn": "Bitiruv oqshomiga mos nafis va qulay libos tanlang.",
+          "uz-Cyrl": "Битирув оқшомига мос нафис ва қулай либос танланг.",
+          "en": "Choose polished, comfortable attire for the graduation evening.",
+          "ru": "Выберите элегантный и удобный наряд для выпускного вечера."
+        },
+        "note": {
+          "uz-Latn": "Ranglar palitrasidan tanlasangiz, umumiy suratlar uyg‘un chiqadi.",
+          "uz-Cyrl": "Ранглар палитрасидан танласангиз, умумий суратлар уйғун чиқади.",
+          "en": "Choosing from the color palette will make group photos feel coordinated.",
+          "ru": "Выбор оттенков из палитры поможет сделать общие фотографии гармоничными."
+        },
+        "colors": [
+          { "hex": "#14213D", "name": { "uz-Latn": "To‘q ko‘k", "uz-Cyrl": "Тўқ кўк", "en": "Navy", "ru": "Тёмно-синий" } },
+          { "hex": "#C8A86B", "name": { "uz-Latn": "Oltin", "uz-Cyrl": "Олтин", "en": "Gold", "ru": "Золотой" } },
+          { "hex": "#E9EEF5", "name": { "uz-Latn": "Kumushrang", "uz-Cyrl": "Кумушранг", "en": "Silver", "ru": "Серебристый" } },
+          { "hex": "#D62828", "name": { "uz-Latn": "Qizil", "uz-Cyrl": "Қизил", "en": "Red", "ru": "Красный" } }
+        ]
+      },
+      "startsAt": "2027-06-12T17:00",
+      "programTimes": ["17:00", "18:00", "18:30", "19:00", "20:00", "22:00"]
+    },
+    "korporativ": {
+      "personIndex": 0,
+      "personName": {
+        "uz-Latn": "Marxaba Tech",
+        "uz-Cyrl": "Marxaba Tech",
+        "en": "Marxaba Tech",
+        "ru": "Marxaba Tech"
+      },
+      "eventLabel": {
+        "uz-Latn": "Yil yakuni kechasi",
+        "uz-Cyrl": "Йил якуни кечаси",
+        "en": "Year-end celebration",
+        "ru": "Вечер по итогам года"
+      },
+      "hosts": {
+        "uz-Latn": "Marxaba Tech",
+        "uz-Cyrl": "Marxaba Tech",
+        "en": "Marxaba Tech",
+        "ru": "Marxaba Tech"
+      },
+      "message": {
+        "uz-Latn": "Birgalikdagi yutuqlarimizni samimiy davrada nishonlaymiz.",
+        "uz-Cyrl": "Биргаликдаги ютуқларимизни самимий даврада нишонлаймиз.",
+        "en": "Let’s celebrate our shared achievements together.",
+        "ru": "Давайте вместе отметим наши общие достижения."
+      },
+      "venueName": {
+        "uz-Latn": "Tadbirlar zali",
+        "uz-Cyrl": "Тадбирлар зали",
+        "en": "Event hall",
+        "ru": "Зал для мероприятий"
+      },
+      "address": {
+        "uz-Latn": "Toshkent shahri",
+        "uz-Cyrl": "Тошкент шаҳри",
+        "en": "Tashkent",
+        "ru": "Ташкент"
+      },
+      "programHeading": {
+        "uz-Latn": "Korporativ tadbir dasturi",
+        "uz-Cyrl": "Корпоратив тадбир дастури",
+        "en": "Corporate event program",
+        "ru": "Программа корпоративного мероприятия"
+      },
+      "programTitles": {
+        "uz-Latn": ["Mehmonlarni kutib olish", "Rahbariyat tabrigi", "Yil sarhisobi", "Tushlik va suhbat", "Jamoaviy o‘yinlar", "Yakuniy so‘z"],
+        "uz-Cyrl": ["Меҳмонларни кутиб олиш", "Раҳбарият табриги", "Йил сарҳисоби", "Тушлик ва суҳбат", "Жамоавий ўйинлар", "Якуний сўз"],
+        "en": ["Welcoming guests", "Welcome from leadership", "Year in review", "Dinner and conversation", "Team activities", "Closing words"],
+        "ru": ["Встреча гостей", "Приветствие руководства", "Итоги года", "Ужин и общение", "Командные игры", "Заключительное слово"]
+      },
+      "dressCode": {
+        "style": {
+          "uz-Latn": "Biznes uslub",
+          "uz-Cyrl": "Бизнес услуб",
+          "en": "Business formal",
+          "ru": "Деловой стиль"
+        },
+        "text": {
+          "uz-Latn": "Kechki tadbir uchun rasmiy va ozoda libos tavsiya etiladi.",
+          "uz-Cyrl": "Кечки тадбир учун расмий ва озода либос тавсия этилади.",
+          "en": "Formal, polished attire is recommended for the evening event.",
+          "ru": "Для вечернего мероприятия рекомендуется официальный и аккуратный наряд."
+        },
+        "note": {
+          "uz-Latn": "Klassik ranglardan foydalanishingiz mumkin.",
+          "uz-Cyrl": "Классик ранглардан фойдаланишингиз мумкин.",
+          "en": "Classic colors are welcome.",
+          "ru": "Можно выбрать классические оттенки."
+        },
+        "colors": [
+          { "hex": "#0E0F12", "name": { "uz-Latn": "Qora", "uz-Cyrl": "Қора", "en": "Black", "ru": "Чёрный" } },
+          { "hex": "#E9EEF5", "name": { "uz-Latn": "Kumushrang", "uz-Cyrl": "Кумушранг", "en": "Silver", "ru": "Серебристый" } },
+          { "hex": "#4F7CFF", "name": { "uz-Latn": "Ko‘k", "uz-Cyrl": "Кўк", "en": "Blue", "ru": "Синий" } },
+          { "hex": "#C8A86B", "name": { "uz-Latn": "Oltin", "uz-Cyrl": "Олтин", "en": "Gold", "ru": "Золотой" } }
+        ]
+      },
+      "startsAt": "2026-11-14T18:30",
+      "programTimes": ["17:30", "18:00", "18:30", "19:00", "20:00", "21:30"]
+    }
+  }
+}

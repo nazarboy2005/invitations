@@ -35,6 +35,7 @@ test("template samples are illustrative complete invitations", () => {
   assert.deepEqual(sample.contacts, {
     phoneNumber: "+998 90 123 45 67",
     telegramUsername: "@demo",
+    instagramUrl: "",
   });
   for (const locale of sample.enabledLocales) {
     assert.ok(sample.dressCode.style[locale]);
@@ -404,7 +405,7 @@ test("only empty template-selection previews may fall back to sample content", (
   assert.equal(hasAuthoredInvitationContent(blank), false);
   assert.equal(blank.gift.enabled, false);
   assert.equal(blank.gift.cardNumber, "");
-  assert.deepEqual(blank.contacts, { phoneNumber: "", telegramUsername: "" });
+  assert.deepEqual(blank.contacts, { phoneNumber: "", telegramUsername: "", instagramUrl: "" });
 
   blank.eventType = "wedding";
   assert.equal(hasAuthoredInvitationContent(blank), true);
@@ -455,5 +456,6 @@ test("legacy contact cards migrate to optional phone and Telegram fields", () =>
   assert.deepEqual(parsed.contacts, {
     phoneNumber: "+998 90 123 45 67",
     telegramUsername: "@taklifnoma",
+    instagramUrl: "",
   });
 });

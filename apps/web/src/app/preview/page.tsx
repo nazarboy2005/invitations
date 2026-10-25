@@ -24,6 +24,7 @@ export default async function PreviewPage({
     qaLongNames?: string | string[];
     qaReducedMotion?: string | string[];
     qaMobile?: string | string[];
+    card?: string | string[];
   }>;
 }) {
   const params = await searchParams;
@@ -47,10 +48,12 @@ export default async function PreviewPage({
   const template = templateId ? templateById(templateId) : undefined;
 
   if (template) {
-    const catalog = await getCatalog();
+    const cardPreview = params.card === "1";
+    const catalog = cardPreview ? { templates: [] } : await getCatalog();
     return (
       <FullTemplatePreview
         template={template}
+        cardPreview={cardPreview}
         canSelect={catalog.templates.some((item) => item.id === template.id)}
         canCreate={catalog.templates.some((item) => item.id === template.id && item.published)}
         draftId={draftId}

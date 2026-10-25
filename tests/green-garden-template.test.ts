@@ -1,6 +1,7 @@
+import { readFile } from "./helpers/source-files";
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
-import { readFile, readdir } from "node:fs/promises";
+import { readdir } from "node:fs/promises";
 import path from "node:path";
 import { test } from "node:test";
 import { createTemplatePreviewSample } from "../apps/web/src/modules/catalog/preview-sample.ts";

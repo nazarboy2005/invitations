@@ -1,7 +1,8 @@
+import { readFileSync } from "./helpers/source-files";
 import assert from "node:assert/strict";
 import { createInvitation, invitationSchema, TEMPLATES } from "../packages/contracts/src/index";
 import { createTemplatePreviewSample } from "../apps/web/src/modules/catalog/preview-sample";
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync } from "node:fs";
 import path from "node:path";
 import test from "node:test";
 
@@ -73,7 +74,8 @@ test("Chorlove Palov adapter maps approved locales, RSVP, and reduced motion", (
   assert.match(renderer, /invitation\.contacts\.instagramUrl/);
   const legacyInvitation = invitationSchema.parse({
     ...createInvitation("palov"),
-    contacts: { phoneNumber: "", telegramUsername: "" },
+    contacts: { phoneNumber: "", telegramUsername: "", instagramUrl: "" },
+    instagramUrl: "",
   });
   assert.equal(legacyInvitation.contacts.instagramUrl, "");
   const css = read("palov.css");
@@ -88,7 +90,7 @@ test("Chorlove route keeps Palov in its provider namespace", () => {
   assert.match(registry, /"palov"/);
   assert.match(renderer, /templateId === "palov"/);
   assert.match(renderer, /templateId === "palov" \|\| templateId === "orchid-amplop"/);
-  assert.match(renderer, /`\/templates\/chorlove\/\$\{templateId\}\/index\.html`/);
+  assert.match(renderer, /`\/templates\/chorlove\/\$\{templateId\}\/index\.html\?\$\{query\}`/);
   assert.doesNotMatch(renderer, /\/templates\/invitate-palov/);
 });
 

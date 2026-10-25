@@ -563,6 +563,10 @@
 .catalogEmpty p {
   margin: 0;
 }
+.catalogResults {
+  min-width: 0;
+  overflow-anchor: none;
+}
 .catalogGrid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -670,6 +674,7 @@
 }
 .cardPrice {
   position: absolute;
+  z-index: 1;
   top: 9px;
   left: 9px;
   padding: 6px 9px;
@@ -681,6 +686,26 @@
   font-size: 9px;
   font-weight: 600;
   box-shadow: 0 2px 6px #55411a0d;
+}
+.templatePlayback {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  border-radius: inherit;
+  contain: layout paint;
+}
+.templatePlaybackFrame {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 390px;
+  height: 844px;
+  border: 0;
+  border-radius: 0;
+  transform-origin: top left;
+  background: #fcf8ef;
+  transition: opacity 180ms ease;
 }
 .templateCard:hover .templateArt {
   background-color: #e8deca;

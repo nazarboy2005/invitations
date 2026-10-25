@@ -1,6 +1,7 @@
+import { readFileSync } from "./helpers/source-files";
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync } from "node:fs";
 import path from "node:path";
 import test from "node:test";
 import { TEMPLATES } from "@taklifnoma/contracts";
@@ -17,14 +18,15 @@ test("demo 13 is unpublished and registered as a Marxaba template", () => {
   assert.ok(template);
   assert.equal(template.published, false);
   assert.equal(template.previewImage, "/templates/taklifnomachi-13/source/taklifnomachi.uz/templates/13/assets/p2/intro-golden.png");
-  assert.ok(readFileSync(path.join(root, "apps/web/src/templates/marxaba/index.ts"), "utf8").includes('"taklifnomachi-13"'));
+  assert.ok(readFileSync(path.join(root, "apps/web/src/templates/marxaba/registry.ts"), "utf8").includes('"taklifnomachi-13"'));
   const migration = readFileSync(path.join(root, "packages/database/migrations/0101_register_taklifnomachi_13.sql"), "utf8");
   assert.ok(migration.includes("taklifnomachi-13"));
   assert.ok(migration.includes("false"));
 });
 
 test("the capture is intact and production uses captured local resources", () => {
-  assert.equal(createHash("sha256").update(source).digest("hex"), "adc731ac16a7aa9665521162bf361aa11747165691a2f23a076c08e4afd92dd1");
+  assert.deepEqual(source, readFileSync(path.join(root, "Invitations - this folder will be removed from production/Taklifnomachi/Web invitations/taklifnomachi.uz/demo/13/index.html")));
+  assert.equal(createHash("sha256").update(source).digest("hex"), "e6da74a63bca83632b3cf709d216874544ba9c8fcc68475fc1b68a9e61dbaa32");
   for (const file of [
     "source/taklifnomachi.uz/templates/13/assets/p2/0522.mp4",
     "source/taklifnomachi.uz/templates/13/assets/p2/intro-golden.png",

@@ -750,6 +750,7 @@ test("every published template preserves every editor field across four-language
         invitation.contacts = {
           phoneNumber: "+998 90 123 45 67",
           telegramUsername: "@audit_owner",
+          instagramUrl: "",
         };
         invitation.rsvp = {
           enabled: true,

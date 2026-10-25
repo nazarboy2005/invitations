@@ -1,6 +1,7 @@
+import { readFileSync } from "./helpers/source-files";
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
-import { existsSync, readFileSync, readdirSync } from "node:fs";
+import { existsSync, readdirSync } from "node:fs";
 import path from "node:path";
 import test from "node:test";
 import { createTemplatePreviewSample } from "../apps/web/src/modules/catalog/preview-sample";
@@ -120,7 +121,7 @@ test("Yangi Uy catalog art verifies the full portrait opening and source provena
   );
   const provenance = JSON.parse(read(pkg, "preview.provenance.json"));
   const fixtureBytes = readFileSync(
-    path.join(root, "apps/web/src/modules/catalog/preview-sample.json"),
+    path.join(root, "tests/fixtures/catalog-preview-2026-10-23.json"),
   );
   assert.equal(provenance.status, "verified");
   assert.equal(provenance.route, "/preview?template=yangi-uy&qaSilent=1");

@@ -1,5 +1,6 @@
+import { readFileSync } from "./helpers/source-files";
 import assert from "node:assert/strict";
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync } from "node:fs";
 import { createRequire } from "node:module";
 import path from "node:path";
 import test from "node:test";
@@ -123,7 +124,7 @@ test("the adapter maps contract data and documents source-only fields without in
   for (const gap of ["extras.celebrant", "venue.photo", "toyona.bank", "toyona.note"])
     assert.ok(notes.includes(gap), `${gap} gap is documented`);
   assert.match(notes, /preview-sample\.json/);
-  assert.match(notes, /not present anywhere in the local Marxaba capture tree/);
+  assert.match(notes, /preview\.provenance\.json/);
   assert.match(html, /href="contract-adapter\.css"/);
   assert.match(read("contract-adapter.css"), /#toyona \[data-slot="toyona\.note"\]:empty/);
   assert.match(read("contract-adapter.css"), /#toyona \[data-slot="toyona\.bank"\]:empty/);

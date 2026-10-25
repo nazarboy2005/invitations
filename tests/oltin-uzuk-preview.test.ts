@@ -1,6 +1,7 @@
+import { readFileSync } from "./helpers/source-files";
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
-import { readFileSync } from "node:fs";
+
 import test from "node:test";
 import { createInvitation, templateById } from "@taklifnoma/contracts";
 import {
@@ -93,7 +94,7 @@ test("Oltin Uzuk catalog cover captures the clean source opening with pinned pro
     createHash("sha256").update(bytes).digest("hex");
   const cover = readFileSync(new URL(provenance.artifact.path, root));
   const fixture = readFileSync(
-    new URL(`../../../../../${provenance.fixture.path}`, root),
+    new URL("./fixtures/catalog-preview-2026-10-23.json", import.meta.url),
   );
 
   assert.equal(

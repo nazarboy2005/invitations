@@ -1,6 +1,7 @@
+import { readFileSync } from "./helpers/source-files";
 import { TEMPLATES } from "../packages/contracts/src/index";
 import assert from "node:assert/strict";
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync } from "node:fs";
 import path from "node:path";
 import test from "node:test";
 
@@ -70,7 +71,7 @@ test("Invitate Palov registration publishes only for morning osh compatibility",
 });
 
 test("Palov is wired through the shared catalog preview and public invitation renderer", () => {
-  const invitateEntry = readFileSync(path.join(root, "apps/web/src/templates/invitate/index.ts"), "utf8");
+  const invitateEntry = readFileSync(path.join(root, "apps/web/src/templates/invitate/registry.ts"), "utf8");
   const catalogPreview = readFileSync(path.join(root, "apps/web/src/modules/catalog/full-template-preview.tsx"), "utf8");
   const publicPage = readFileSync(path.join(root, "apps/web/src/app/i/[slug]/page.tsx"), "utf8");
   assert.match(invitateEntry, /"invitate-palov"/);

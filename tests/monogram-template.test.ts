@@ -1,5 +1,6 @@
+import { readFileSync } from "./helpers/source-files";
 import assert from "node:assert/strict";
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync } from "node:fs";
 import test from "node:test";
 import { runInNewContext } from "node:vm";
 
@@ -159,7 +160,7 @@ test("Monogram static text and accessibility labels have Uzbek, Russian, and Eng
 test("Monogram routes through the shared typed Marxaba invitation renderer", () => {
   const marxabaIndex = text(
     new URL("../apps/web/src/templates/marxaba/", import.meta.url),
-    "index.ts",
+    "registry.ts",
   );
   assert.match(marxabaIndex, /"monogram"/);
   const adapter = text(

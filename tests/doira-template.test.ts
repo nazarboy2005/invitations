@@ -1,5 +1,6 @@
+import { readFileSync } from "./helpers/source-files";
 import assert from "node:assert/strict";
-import { existsSync, readFileSync, readdirSync, statSync } from "node:fs";
+import { existsSync, readdirSync, statSync } from "node:fs";
 import path from "node:path";
 import test from "node:test";
 import { runInNewContext } from "node:vm";
@@ -159,7 +160,7 @@ test("Doira's shared preview fixture has complete localized sections and stays o
   assert.deepEqual(blank.content["uz-Latn"].people, []);
   assert.deepEqual(blank.program, []);
   assert.deepEqual(blank.gallery, []);
-  assert.deepEqual(blank.contacts, { phoneNumber: "", telegramUsername: "" });
+  assert.deepEqual(blank.contacts, { phoneNumber: "", telegramUsername: "", instagramUrl: "" });
   assert.equal(blank.gift.cardNumber, "");
   assert.equal(blank.dressCode.enabled, false);
 });

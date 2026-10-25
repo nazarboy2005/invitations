@@ -15,7 +15,7 @@ test('demo 12 stays unpublished and joins the Marxaba renderer', () => {
   assert.ok(template);
   assert.equal(template.published, false);
   assert.equal(template.previewImage, '/templates/taklifnomachi-12/source/templates/12/assets/hero.png');
-  assert.match(readFileSync(path.join(root, 'apps/web/src/templates/marxaba/index.ts'), 'utf8'), /"taklifnomachi-12"/);
+  assert.match(readFileSync(path.join(root, 'apps/web/src/templates/marxaba/registry.ts'), 'utf8'), /"taklifnomachi-12"/);
   assert.match(readFileSync(path.join(root, 'packages/database/migrations/0099_register_taklifnomachi_12.sql'), 'utf8'), /published\)\s*VALUES\s*\([^\n]+false/i);
 });
 

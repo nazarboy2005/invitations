@@ -1,6 +1,7 @@
+import { readFileSync } from "./helpers/source-files";
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
-import { existsSync, readFileSync, readdirSync } from "node:fs";
+import { existsSync, readdirSync } from "node:fs";
 import path from "node:path";
 import test from "node:test";
 import { runInNewContext } from "node:vm";
@@ -124,7 +125,7 @@ test("Parda uses local runtime dependencies and bundled fonts only", () => {
 test("Parda preview provenance verifies the production fixture capture", () => {
   const provenance = JSON.parse(readFileSync(new URL("preview.provenance.json", templateRoot), "utf8"));
   const preview = readFileSync(new URL("preview-browser-capture.jpg", templateRoot));
-  const fixture = readFileSync(new URL("../apps/web/src/modules/catalog/preview-sample.json", import.meta.url));
+  const fixture = readFileSync(new URL("./fixtures/catalog-preview-2026-10-23.json", import.meta.url));
   assert.equal(provenance.status, "verified");
   assert.equal(provenance.route, "/preview?template=parda&qaSilent=1");
   assert.equal(provenance.fixtureSha256, createHash("sha256").update(fixture).digest("hex"));

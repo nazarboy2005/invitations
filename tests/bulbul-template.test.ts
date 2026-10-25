@@ -1,6 +1,7 @@
+import { readFileSync } from "./helpers/source-files";
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
-import { readFileSync, readdirSync, statSync } from "node:fs";
+import { readdirSync, statSync } from "node:fs";
 import path from "node:path";
 import test from "node:test";
 import { runInNewContext } from "node:vm";
@@ -41,7 +42,7 @@ test("Bulbul preserves the captured page body, source scripts, styles, metadata,
   const packageMeta = read(packageRoot, "meta.js");
   assert.equal(
     packageMeta
-      .replace('preview: "preview-browser-capture.jpg"', 'preview: "preview.webp"')
+      .replace('preview: "catalog-cover-opening.png"', 'preview: "preview.webp"')
       .replace(/\r\n/g, "\n")
       .trimEnd(),
     sourceMeta.replace(/\r\n/g, "\n").trimEnd(),
@@ -133,18 +134,18 @@ test("Bulbul uses local source fonts and its actual portrait opening artwork", (
       `missing ${match[1]}`,
     );
   }
-  const image = readFileSync(path.join(packageRoot, "preview-browser-capture.jpg"));
+  const image = readFileSync(path.join(packageRoot, "catalog-cover-opening.png"));
   const provenance = JSON.parse(read(packageRoot, "preview.provenance.json"));
-  const fixture = readFileSync(path.join(projectRoot, "apps/web/src/modules/catalog/preview-sample.json"));
-  assert.equal(image.subarray(0, 2).toString("hex"), "ffd8");
+  assert.equal(image.subarray(0, 8).toString("hex"), "89504e470d0a1a0a");
   assert.equal(provenance.status, "verified");
-  assert.equal(provenance.width, 478);
-  assert.equal(provenance.height, 668);
-  assert.equal(provenance.route, "/preview?template=bulbul&qaSilent=1");
-  assert.equal(provenance.fixtureSha256, createHash("sha256").update(fixture).digest("hex"));
+  assert.equal(provenance.width, 430);
+  assert.equal(provenance.height, 932);
+  assert.deepEqual([image.readUInt32BE(16), image.readUInt32BE(20)], [430, 932]);
+  assert.equal(provenance.fixture, null);
+  assert.equal(provenance.sourceOpening, "#intro (closed golden cage, before the opening interaction)");
   assert.equal(provenance.sha256, createHash("sha256").update(image).digest("hex"));
-  assert.match(packagedHtml, /og:image" content="preview-browser-capture\.jpg"/);
-  assert.match(read(packageRoot, "meta.js"), /preview: "preview-browser-capture\.jpg"/);
+  assert.match(packagedHtml, /og:image" content="catalog-cover-opening\.png"/);
+  assert.match(read(packageRoot, "meta.js"), /preview: "catalog-cover-opening\.png"/);
 });
 
 test("Bulbul keeps the lightbox close control clear of the shared language picker", () => {

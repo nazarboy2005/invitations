@@ -1,8 +1,9 @@
+import { readFileSync } from "./helpers/source-files";
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { createRequire } from "node:module";
 import { fileURLToPath } from "node:url";
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync } from "node:fs";
 import path from "node:path";
 import test from "node:test";
 import { createInvitation } from "@taklifnoma/contracts";
@@ -245,7 +246,7 @@ test("the metadata-named artwork is an authentic portrait WebP browser capture",
     createHash("sha256")
       .update(
         readFileSync(
-          new URL("../../../src/modules/catalog/preview-sample.json", root),
+          new URL("./fixtures/catalog-preview-2026-10-23.json", import.meta.url),
         ),
       )
       .digest("hex"),
