@@ -21,7 +21,7 @@
       "guestbook card and date presentation"
     ]
   },
-  "assetOrigin": "Observed in the approved ChatGPT in-app browser on https://chorlove.uz/templates/green-garden; selected design ornaments and exact template fonts only. Gallery sample photos, external sample venue photography, site JavaScript, and music were excluded.",
+  "assetOrigin": "Observed in the approved ChatGPT in-app browser on https://chorlove.uz/templates/green-garden; selected design ornaments and exact template fonts. Source gallery and venue sample photos are separately recorded as preview-only media; site JavaScript and music were excluded.",
   "assets": [
     {
       "file": "assets/baroque_gold.webp",
@@ -47,6 +47,11 @@
       "file": "assets/dish.webp",
       "bytes": 223172,
       "sha256": "f230b71e33f045610bf268e5c6aee5f65caedd2823d0dd0597fa67e7a491a4e3"
+    },
+    {
+      "file": "assets/preview-venue.jpg",
+      "bytes": 355870,
+      "sha256": "ef71550b3110fe9d17b3c49c7deccb7ff93a34c9fe0e79d6079fe34e140b1a55"
     },
     {
       "file": "assets/floral-background.webp",
@@ -235,6 +240,28 @@
         "sha256": "00e79428e3715ee28f9919be8c3bb4f468197b99ae419ae750b19f3a379b4222"
       }
     ]
+  },
+  "previewOnlySourceMedia": {
+    "scope": "Catalog and blank initial template-selection previews only. This data is kept out of invitation schema/storage/publication. Authored gallery uploads replace the fixture; an empty creator/public gallery is hidden.",
+    "gallerySource": "The captured Green Garden page references the Orchid Amplop sample gallery in this exact order.",
+    "gallery": [
+      { "sourceUrl": "/images/templates/orchid-amplop/gallery-2.webp", "archiveFile": "Chorlove/Web invitations/images/templates/orchid-amplop/gallery-2.webp", "packageFile": "apps/web/public/templates/chorlove/orchid-amplop/assets/gallery-2.webp", "bytes": 108104, "sha256": "bcfd6989e53e220164e8d39368a848eed1185c07af73f934c81181af2a690d45" },
+      { "sourceUrl": "/images/templates/orchid-amplop/gallery-1.webp", "archiveFile": "Chorlove/Web invitations/images/templates/orchid-amplop/gallery-1.webp", "packageFile": "apps/web/public/templates/chorlove/orchid-amplop/assets/gallery-1.webp", "bytes": 47468, "sha256": "8578f6d5f3c2ddc1759c5116dfb4b68cd47f86ea700bfa3777a75fb916734a0b" },
+      { "sourceUrl": "/images/templates/orchid-amplop/gallery-3.webp", "archiveFile": "Chorlove/Web invitations/images/templates/orchid-amplop/gallery-3.webp", "packageFile": "apps/web/public/templates/chorlove/orchid-amplop/assets/gallery-3.webp", "bytes": 82790, "sha256": "c747d5f2c007ec78d46196fcbf157da871fd4bebd9f0a07863087e9a5787e320" },
+      { "sourceUrl": "/images/templates/orchid-amplop/gallery-6.webp", "archiveFile": "Chorlove/Web invitations/images/templates/orchid-amplop/gallery-6.webp", "packageFile": "apps/web/public/templates/chorlove/orchid-amplop/assets/gallery-6.webp", "bytes": 67596, "sha256": "35c81b38de8fb85f182b1c1c6149bf9926b2a55c10e845f617fc87605ec63e11" },
+      { "sourceUrl": "/images/templates/orchid-amplop/gallery-4.webp", "archiveFile": "Chorlove/Web invitations/images/templates/orchid-amplop/gallery-4.webp", "packageFile": "apps/web/public/templates/chorlove/orchid-amplop/assets/gallery-4.webp", "bytes": 117998, "sha256": "c3d590110524cb7b0148c08aa1543d569f16f54b4672d802bebcf778776df558" },
+      { "sourceUrl": "/images/templates/orchid-amplop/gallery-5.webp", "archiveFile": "Chorlove/Web invitations/images/templates/orchid-amplop/gallery-5.webp", "packageFile": "apps/web/public/templates/chorlove/orchid-amplop/assets/gallery-5.webp", "bytes": 211568, "sha256": "bb3c25700cc2aa81a40c46bb20c22cd13403d3e9bcf196c175a94fb7b49c8a2e" }
+    ],
+    "venuePhoto": {
+      "sourceUrl": "https://images.unsplash.com/photo-1712314947761-a8d718bd8c32?w=1400&h=1000&fit=crop&auto=format&q=80",
+      "sourceAlt": "Navro'z To'yxonasi — wedding venue",
+      "retrievedAt": "2026-10-26",
+      "httpStatus": 200,
+      "contentType": "image/jpeg",
+      "bytes": 355870,
+      "sha256": "ef71550b3110fe9d17b3c49c7deccb7ff93a34c9fe0e79d6079fe34e140b1a55",
+      "packageFile": "apps/web/public/templates/green-garden/assets/preview-venue.jpg"
+    }
   },
   "sourceHydrationRecheck": {
     "checkedAt": "2026-10-26",

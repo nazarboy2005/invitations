@@ -41,13 +41,13 @@ test("Green Garden preview capture matches its canonical fixture provenance", as
 test("Green Garden gallery photos stay ephemeral and authored photos replace placeholders", async () => {
   const invitation = createTemplatePreviewSample("green-garden");
   assert.equal(invitation.gallery.length, 6);
-  assert.equal(invitation.gallery.some((item) => item.url), false);
 
   const bridge = await readFile(new URL("bridge.js", root), "utf8");
   const html = await readFile(new URL("index.html", root), "utf8");
   assert.match(bridge, /showEmpty=payload\.preview&&Boolean\(item\)/);
   assert.match(bridge, /if\(item\?\.src\).*?img\.src=item\.src/s);
-  assert.match(bridge, /hide\(gallerySection,!payload\.preview&&!gallery\.some\(item=>item\?\.src\)\)/);
+  assert.match(bridge, /hide\(gallerySection,!gallery\.some\(item=>item\?\.src\)\)/);
+  assert.doesNotMatch(bridge, /hide\(gallerySection,!payload\.preview/);
   assert.doesNotMatch(html, /orchid-amplop\/gallery-[1-6]\.webp/);
   assert.doesNotMatch(bridge, /orchid-amplop\/gallery-[1-6]\.webp/);
 });
@@ -198,12 +198,23 @@ test("Green Garden restores available source motion and schedule assets", async 
     manifest.sourceArchiveAudit.remoteOnlyAssets.find((asset: { file: string }) => asset.file === "assets/dish.webp")?.sha256,
     "f230b71e33f045610bf268e5c6aee5f65caedd2823d0dd0597fa67e7a491a4e3",
   );
+  assert.equal(manifest.previewOnlySourceMedia.gallery.length, 6);
+  assert.equal(manifest.previewOnlySourceMedia.venuePhoto.sourceUrl, "https://images.unsplash.com/photo-1712314947761-a8d718bd8c32?w=1400&h=1000&fit=crop&auto=format&q=80");
+  assert.equal(manifest.previewOnlySourceMedia.venuePhoto.sha256, "ef71550b3110fe9d17b3c49c7deccb7ff93a34c9fe0e79d6079fe34e140b1a55");
+  for (const media of manifest.previewOnlySourceMedia.gallery) {
+    assert.deepEqual(
+      { bytes: (await readFile(new URL(media.packageFile.replace("apps/web/public/templates/", "../"), root))).length,
+        sha256: createHash("sha256").update(await readFile(new URL(media.packageFile.replace("apps/web/public/templates/", "../"), root))).digest("hex") },
+      { bytes: media.bytes, sha256: media.sha256 },
+      media.packageFile,
+    );
+  }
 });
 
 test("Green Garden packaged assets match the recorded source hashes", async () => {
   const manifest = JSON.parse(await readFile(new URL("source-assets.provenance.json", root), "utf8"));
   const sourceAssets = manifest.assets.filter((asset: { file: string }) => asset.file.startsWith("assets/"));
-  assert.equal(sourceAssets.length, manifest.sourceArchiveAudit.matchedFiles + 6);
+  assert.equal(sourceAssets.length, manifest.sourceArchiveAudit.matchedFiles + manifest.sourceFontAudit.files.length + manifest.sourceArchiveAudit.remoteOnlyAssets.length + 1);
   for (const asset of sourceAssets) {
     const packaged = await readFile(new URL(asset.file, root));
     assert.equal(packaged.length, asset.bytes, `${asset.file} byte length differs from source provenance`);
