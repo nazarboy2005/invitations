@@ -21,6 +21,7 @@
     if (node.matches("section:nth-of-type(2) > div.absolute.inset-0")) target.opacity = 0.03;
     if (transform.includes("translateX(-20px)")) target.transform = "translateX(0px)";
     else if (transform.includes("translateY(5px)")) target.transform = "translateY(0px)";
+    else if (transform.includes("translateY(-24px)")) target.transform = "translateY(0px)";
     else if (transform.includes("scale(0)")) target.transform = "scale(1)";
     else if (transform.includes("scale(0.9)")) target.transform = "scale(1)";
     else if (transform.includes("scale(0.95)")) target.transform = "scale(1)";
@@ -39,16 +40,79 @@
     const inline = node.getAttribute("style") || "";
     const transform = node.style.transform || "";
     if (transform.includes("translateY(15px)")) return { duration: 600, amount: 0.2, once: false };
-    if (transform.includes("translateY(18px)")) return { duration: 300, delay: index * 40, amount: 0.35, once: true };
-    if (transform.includes("scale(0.96)")) return { duration: 300, delay: index * 50, amount: 0.35, once: true };
+    if (transform.includes("translateY(-24px)")) return { duration: 900, amount: 0.35, once: true };
+    if (transform.includes("translateY(18px)")) return { spring: true, delay: index * 40, amount: 0.35, once: true };
+    if (transform.includes("scale(0.96)")) return { spring: true, delay: index * 50, amount: 0.35, once: true };
+    if (transform.includes("scale(0)")) {
+      const sectionIndex = [...root.querySelectorAll("section")].indexOf(node.closest("section"));
+      if (sectionIndex === 1 && node.matches(".relative.h-16")) return { spring: true, delay: 500, amount: 0.35, once: true };
+      if (sectionIndex === 3 && node.matches(".absolute.w-9.h-9")) return { spring: true, stiffness: 200, delay: 400, amount: 0.5, once: false };
+      if (sectionIndex === 6 && node.matches(".flex.items-center.justify-center.gap-4")) return { spring: true, delay: 500, amount: 0.5, once: false };
+    }
     if (transform.includes("scale(0.9)") && node.matches(".relative.aspect-square")) return { duration: 800, delay: index * 100, amount: 0.35, once: false };
-    if (transform.includes("translateX(-20px)")) return { duration: 300, delay: index * 100, amount: 0.35, once: false };
+    if (transform.includes("translateX(-20px)")) return { spring: true, delay: index * 100, amount: 0.35, once: false };
+    if (transform.includes("scale(0.95)")) return { duration: 1200, amount: 0.5, once: false };
     if (inline.includes("filter:blur(8px)")) return { duration: 900, amount: 0.35, once: true };
-    if (transform.includes("translateY(30px)")) return { duration: 1200, amount: 0.35, once: false };
+    if (transform.includes("translateY(30px)")) {
+      const sectionIndex = [...root.querySelectorAll("section")].indexOf(node.closest("section"));
+      return { duration: sectionIndex === 6 ? 1500 : 1200, amount: 0.35, once: false };
+    }
     if (transform.includes("translateY(20px)")) return { duration: 1000, amount: 0.35, once: false };
     if (transform.includes("translateY(28px)") || transform.includes("translateY(24px)")) return { duration: 900, amount: 0.35, once: true };
     if (transform.includes("scale(0.78)")) return { duration: 900, amount: 0.35, once: true };
+    if (transform.includes("translateY(5px)")) return { spring: true, amount: 0.5, once: false };
     return { duration: 600, amount: 0.2, once: false };
+  }
+
+  function springProgress(time, stiffness) {
+    const mass = 1;
+    const damping = 10;
+    const omega = Math.sqrt(stiffness / mass);
+    const decay = damping / (2 * mass);
+    const frequency = Math.sqrt(Math.max(0, omega * omega - decay * decay));
+    const envelope = Math.exp(-decay * time);
+    const progress = 1 - envelope * (Math.cos(frequency * time) + (decay / frequency) * Math.sin(frequency * time));
+    const velocity = envelope * (omega * omega / frequency) * Math.sin(frequency * time);
+    return { progress, velocity };
+  }
+
+  function interpolateTransform(from, to, progress) {
+    const start = [...from.matchAll(/([a-zA-Z0-9]+)\((-?[\d.]+)([a-z%]*)\)/g)];
+    const end = [...to.matchAll(/([a-zA-Z0-9]+)\((-?[\d.]+)([a-z%]*)\)/g)];
+    if (!start.length || start.length !== end.length || start.some((part, index) => part[1] !== end[index][1])) {
+      return progress < 1 ? from : to;
+    }
+    return start.map((part, index) => {
+      const value = Number(part[2]) + (Number(end[index][2]) - Number(part[2])) * progress;
+      return `${part[1]}(${value}${part[3]})`;
+    }).join(" ");
+  }
+
+  function springFrames(initial, target, stiffness = 100) {
+    let duration = 0;
+    for (let time = 1 / 120; time < 2.5; time += 1 / 120) {
+      const state = springProgress(time, stiffness);
+      if (Math.abs(1 - state.progress) < 0.01 && Math.abs(state.velocity) < 0.01) {
+        duration = time;
+        break;
+      }
+    }
+    if (!duration) duration = 2.5;
+    const startOpacity = Number(initial.opacity ?? 1);
+    const endOpacity = Number(target.opacity ?? 1);
+    const frames = [];
+    const count = Math.ceil(duration * 60);
+    for (let index = 0; index <= count; index += 1) {
+      const time = Math.min(duration, index / 60);
+      const progress = springProgress(time, stiffness).progress;
+      const frame = {
+        transform: interpolateTransform(initial.transform, target.transform, progress),
+        offset: time / duration,
+      };
+      if (startOpacity !== endOpacity) frame.opacity = startOpacity + (endOpacity - startOpacity) * progress;
+      frames.push(frame);
+    }
+    return { frames, duration };
   }
 
   function animateReveal(node, config) {
@@ -59,6 +123,12 @@
       transform: node.style.transform || "none",
     };
     if ((node.getAttribute("style") || "").includes("filter:blur(8px)")) initial.filter = "blur(8px)";
+    const target = targetFor(node);
+    if (config.spring) {
+      const spring = springFrames(initial, target, config.stiffness || 100);
+      running.set(node, node.animate(spring.frames, { duration: spring.duration * 1000, delay: config.delay || 0, easing: "linear", fill: "both" }));
+      return;
+    }
     running.set(node, node.animate([initial, targetFor(node)], {
       duration: config.duration,
       delay: config.delay || 0,
@@ -93,6 +163,15 @@
         if (group) {
           const groupNodes = [...group.querySelectorAll(':scope [style*="opacity:0"], :scope [style*="scale(0)"]')];
           config.delay = 2750 + (group.classList.contains("relative") ? 140 : 0) + Math.max(0, groupNodes.indexOf(node)) * 140;
+          config.once = true;
+        }
+      }
+      if (section === root.querySelectorAll("section")[1]) {
+        const group = section.querySelector(".text-center.z-10.w-full.space-y-12");
+        const staggered = group ? [...group.querySelectorAll('[style*="filter:blur(8px)"]')] : [];
+        const staggerIndex = staggered.indexOf(node);
+        if (staggerIndex >= 0) {
+          config.delay = 120 + staggerIndex * 140;
           config.once = true;
         }
       }
@@ -174,10 +253,21 @@
       scrollCue.dataset.mfLoopMotion = "true";
       scrollCue.animate([{ transform: "translateY(0px)" }, { transform: "translateY(8px)" }, { transform: "translateY(0px)" }], { duration: 2000, iterations: Infinity });
     }
-    const calendarHeart = root.querySelector("section:nth-of-type(8) .relative.py-4 .text-\\[\\#FFB6C1\\]");
-    if (calendarHeart && !calendarHeart.dataset.mfLoopMotion) {
-      calendarHeart.dataset.mfLoopMotion = "true";
-      calendarHeart.animate([{ transform: "scale(1)" }, { transform: "scale(1.15)" }, { transform: "scale(1)" }], { duration: 2000, iterations: Infinity, easing: "ease-in-out" });
+    const openingHalo = root.querySelector("section:first-of-type .text-center.space-y-6 > .w-12.h-12");
+    if (openingHalo && !openingHalo.dataset.mfLoopMotion) {
+      openingHalo.dataset.mfLoopMotion = "true";
+      openingHalo.animate([{ transform: "rotate(0deg)" }, { transform: "rotate(360deg)" }], { duration: 20000, iterations: Infinity, easing: "linear" });
+    }
+    const coupleHeart = root.querySelector("section:nth-of-type(2) .relative.h-16 > .z-10");
+    if (coupleHeart && !coupleHeart.dataset.mfLoopMotion) {
+      coupleHeart.dataset.mfLoopMotion = "true";
+      coupleHeart.animate([{ transform: "scale(1)" }, { transform: "scale(1.15)" }, { transform: "scale(1)" }], { duration: 2000, iterations: Infinity, easing: "ease-in-out" });
+    }
+    const countdownHeart = [...root.querySelectorAll("section:nth-of-type(5) div")].find((node) =>
+      node.classList.contains("text-[#FFB6C1]") && node.classList.contains("opacity-40") && node.querySelector(":scope > .lucide-heart"));
+    if (countdownHeart && !countdownHeart.dataset.mfLoopMotion) {
+      countdownHeart.dataset.mfLoopMotion = "true";
+      countdownHeart.animate([{ transform: "scale(1)" }, { transform: "scale(1.1)" }, { transform: "scale(1)" }], { duration: 3000, iterations: Infinity });
     }
     const wishes = root.querySelector("section:nth-of-type(11) .space-y-3.py-1");
     const wishCount = wishes?.children.length || 0;

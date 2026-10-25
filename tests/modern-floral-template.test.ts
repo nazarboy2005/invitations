@@ -1,40 +1,60 @@
 import { readFile } from "./helpers/source-files";
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
+import { resolve, sep } from "node:path";
+import { pathToFileURL } from "node:url";
 import { readdir } from "node:fs/promises";
 import { test } from "node:test";
 import { templateById } from "@taklifnoma/contracts";
 
 const root = new URL("../apps/web/public/templates/modern-floral/", import.meta.url);
+const sourceRoot = process.env.MODERN_FLORAL_SOURCE_ROOT
+  ? pathToFileURL(`${resolve(process.env.MODERN_FLORAL_SOURCE_ROOT)}${sep}`)
+  : new URL("../Invitations - this folder will be removed from production/Chorlove/Web invitations/", import.meta.url);
 const htmlUrl = new URL("index.html", root);
 const cssUrl = new URL("adapter.css", root);
 const motionUrl = new URL("source-motion.js", root);
 const bridgeUrl = new URL("bridge.js", root);
 const provenanceUrl = new URL("source-assets.provenance.json", root);
 const coverUrl = new URL("catalog-opening.jpg", root);
-const sourceChunkUrl = new URL("../Invitations - this folder will be removed from production/Chorlove/Web invitations/_next/static/chunks/0umiwyco9-jdx.js", import.meta.url);
-const sourceCaptureUrl = new URL("../Invitations - this folder will be removed from production/Chorlove/Web invitations/templates/modern-floral/preview-frame.html", import.meta.url);
+const sourceChunkUrl = new URL("_next/static/chunks/0umiwyco9-jdx.js", sourceRoot);
+const sourceCaptureUrl = new URL("templates/modern-floral/preview-frame.html", sourceRoot);
 const packagedCaptureUrl = new URL("../apps/web/public/templates/modern-floral/source/preview-frame.html", import.meta.url);
-const sourceStylesDir = new URL("../Invitations - this folder will be removed from production/Chorlove/Web invitations/_next/static/chunks/", import.meta.url);
+const sourceStylesDir = new URL("_next/static/chunks/", sourceRoot);
 const packagedStylesDir = new URL("../apps/web/public/templates/chorlove/shared/_next/static/chunks/", import.meta.url);
-const sourceMediaDir = new URL("../Invitations - this folder will be removed from production/Chorlove/Web invitations/_next/static/media/", import.meta.url);
+const sourceMediaDir = new URL("_next/static/media/", sourceRoot);
 const packagedMediaDir = new URL("../apps/web/public/templates/chorlove/shared/_next/static/media/", import.meta.url);
+
+async function readIfPresent(path: URL) {
+  try {
+    return await readFile(path);
+  } catch (error) {
+    if ((error as NodeJS.ErrnoException).code === "ENOENT") return undefined;
+    throw error;
+  }
+}
 
 test("Modern Floral motion port is tied to the captured route module", async () => {
   const provenance = JSON.parse(await readFile(provenanceUrl, "utf8"));
-  const sourceChunk = await readFile(sourceChunkUrl);
+  const sourceChunk = await readIfPresent(sourceChunkUrl);
   const motion = await readFile(motionUrl, "utf8");
-  const source = sourceChunk.toString("utf8");
-  assert.equal(provenance.sourceMotionModule.sha256, createHash("sha256").update(sourceChunk).digest("hex"));
-  assert.match(source, /transition:\{delay:1\.45,duration:1,ease:\[\.83,0,\.17,1\]\}/);
-  assert.match(source, /animate:\{opacity:\[0,1,1,0\],scale:\[\.84,1,1,1\.05\],y:\[24,0,0,-18\]\},transition:\{duration:2\.1,ease:"easeOut"\}/);
-  assert.match(source, /transition:\{delay:2\.25,duration:\.75,ease:"easeInOut"\}/);
-  assert.match(source, /Array\.from\(\{length:34\}\).*left:37\*t%100,delay:t%16\*\.8,duration:12\+t%9\*1\.8,rotate:53\*t%360,size:18\+t%5\*5,drift:8\+t%5\*5/);
-  assert.match(source, /initial:\{opacity:0,y:15\},whileInView:\{opacity:1,y:0\},viewport:\{amount:\.2\},transition:\{duration:\.6\}/);
-  assert.match(source, /staggerChildren:\.14,delayChildren:\.12/);
-  assert.match(source, /staggerChildren:\.14,delayChildren:2\.75/);
-  assert.match(source, /animate:\{y:\[0,-8,0\],rotate:\[0,a\?-2:2,0\]\},transition:\{duration:6\+s,repeat:1\/0,ease:"easeInOut"\}/);
-  assert.match(source, /transition:\{duration:Math\.max\(2\.2\*E\.length,16\),ease:"linear",repeat:1\/0\}/);
+  assert.match(provenance.sourceMotionModule.sha256, /^[a-f\d]{64}$/);
+  if (sourceChunk) {
+    const source = sourceChunk.toString("utf8");
+    assert.equal(provenance.sourceMotionModule.sha256, createHash("sha256").update(sourceChunk).digest("hex"));
+    assert.match(source, /transition:\{delay:1\.45,duration:1,ease:\[\.83,0,\.17,1\]\}/);
+    assert.match(source, /animate:\{opacity:\[0,1,1,0\],scale:\[\.84,1,1,1\.05\],y:\[24,0,0,-18\]\},transition:\{duration:2\.1,ease:"easeOut"\}/);
+    assert.match(source, /transition:\{delay:2\.25,duration:\.75,ease:"easeInOut"\}/);
+    assert.match(source, /Array\.from\(\{length:34\}\).*left:37\*t%100,delay:t%16\*\.8,duration:12\+t%9\*1\.8,rotate:53\*t%360,size:18\+t%5\*5,drift:8\+t%5\*5/);
+    assert.match(source, /initial:\{opacity:0,y:15\},whileInView:\{opacity:1,y:0\},viewport:\{amount:\.2\},transition:\{duration:\.6\}/);
+    assert.match(source, /staggerChildren:\.14,delayChildren:\.12/);
+    assert.match(source, /staggerChildren:\.14,delayChildren:2\.75/);
+    assert.match(source, /animate:\{y:\[0,-8,0\],rotate:\[0,a\?-2:2,0\]\},transition:\{duration:6\+s,repeat:1\/0,ease:"easeInOut"\}/);
+    assert.match(source, /initial:\{opacity:0,y:e\?24:-24\},whileInView:\{opacity:1,y:0\},viewport:C,transition:\{duration:\.9,ease:"easeOut"\}/);
+    assert.match(source, /animate:\{rotate:360\},transition:\{duration:20,repeat:1\/0,ease:"linear"\}/);
+    assert.match(source, /animate:\{scale:\[1,1\.1,1\]\},transition:\{repeat:1\/0,duration:3\}/);
+    assert.match(source, /transition:\{duration:Math\.max\(2\.2\*E\.length,16\),ease:"linear",repeat:1\/0\}/);
+  }
   assert.match(motion, /delay: 1450, duration: 1000, easing: "cubic-bezier\(\.83,0,\.17,1\)"/);
   assert.match(motion, /delay: 2250, duration: 750/);
   assert.match(motion, /setTimeout\(\(\) => \{ if \(opening\.isConnected\) opening\.hidden = true; \}, 3000\)/);
@@ -48,6 +68,13 @@ test("Modern Floral motion port is tied to the captured route module", async () 
   assert.doesNotMatch(motion, /duration: \(6 \+ delay\) \* 1000, delay:/);
   assert.match(motion, /duration: 10000, iterations: Infinity/);
   assert.match(motion, /duration: 2000, iterations: Infinity/);
+  assert.match(motion, /translateY\(-24px\).*duration: 900, amount: 0\.35, once: true/s);
+  assert.match(motion, /function springFrames\(/);
+  assert.match(motion, /function interpolateTransform\(/);
+  assert.match(motion, /staggered\.indexOf\(node\);\s*if \(staggerIndex >= 0\) \{\s*config\.delay = 120 \+ staggerIndex \* 140/s);
+  assert.match(motion, /section:nth-of-type\(2\) \.relative\.h-16 > \.z-10/);
+  assert.match(motion, /duration: 20000, iterations: Infinity, easing: "linear"/);
+  assert.match(motion, /duration: 3000, iterations: Infinity/);
   assert.match(motion, /prefers-reduced-motion/);
 });
 
@@ -74,40 +101,52 @@ test("Modern Floral catalog artwork has the source image hash and portrait dimen
 });
 
 test("Modern Floral preserved capture and Chorlove CSS retain source markup and styles", async () => {
-  const sourceCaptureBytes = await readFile(sourceCaptureUrl);
-  const original = sourceCaptureBytes.toString("utf8").replace(/\r\n?/g, "\n");
+  const sourceCaptureBytes = await readIfPresent(sourceCaptureUrl);
+  const original = sourceCaptureBytes?.toString("utf8").replace(/\r\n?/g, "\n");
   const preserved = (await readFile(packagedCaptureUrl, "utf8")).replace(/\r\n?/g, "\n");
-  assert.equal(preserved, original);
+  if (original) assert.equal(preserved, original);
   const packagePage = await readFile(htmlUrl, "utf8");
-  const sourceBodyClasses = original.match(/<body class="([^"]+)"/)?.[1]?.split(/\s+/) ?? [];
+  const sourceBodyClasses = (original || preserved).match(/<body class="([^"]+)"/)?.[1]?.split(/\s+/) ?? [];
   const packageBodyClasses = packagePage.match(/<body class="([^"]+)"/)?.[1]?.split(/\s+/) ?? [];
   for (const fontClass of sourceBodyClasses.filter((className) => className.endsWith("__variable"))) {
     assert.ok(packageBodyClasses.includes(fontClass), `missing source font variable ${fontClass}`);
   }
   const provenance = JSON.parse(await readFile(provenanceUrl, "utf8"));
-  assert.equal(provenance.sourceSnapshot.bytes, sourceCaptureBytes.length);
-  assert.equal(provenance.sourceSnapshot.sha256, createHash("sha256").update(sourceCaptureBytes).digest("hex"));
+  assert.ok(provenance.sourceSnapshot.bytes > 0);
+  assert.match(provenance.sourceSnapshot.sha256, /^[a-f\d]{64}$/);
+  if (sourceCaptureBytes) {
+    assert.equal(provenance.sourceSnapshot.bytes, sourceCaptureBytes.length);
+    assert.equal(provenance.sourceSnapshot.sha256, createHash("sha256").update(sourceCaptureBytes).digest("hex"));
+  }
 
   for (const file of ["0.u3j0~_2ygfx.css", "00sc_9lpb3zcn.css"]) {
-    const sourceBytes = await readFile(new URL(file, sourceStylesDir));
+    const sourceBytes = await readIfPresent(new URL(file, sourceStylesDir));
     const packageBytes = await readFile(new URL(file, packagedStylesDir));
     const record = provenance.sourceStylesheets.find((item: { name: string }) => item.name === file);
     assert.ok(record, `missing ${file} provenance`);
-    assert.equal(record.sourceSha256, createHash("sha256").update(sourceBytes).digest("hex"));
     assert.equal(record.packagedSha256, createHash("sha256").update(packageBytes).digest("hex"));
-    const sourceCss = sourceBytes.toString("utf8")
-      .replace(/\r\n?/g, "\n")
-      .replace(/url\([^)]*\)/g, "url(__asset__)");
-    const packageCss = packageBytes.toString("utf8")
-      .replace(/\r\n?/g, "\n")
-      .replace(/url\([^)]*\)/g, "url(__asset__)");
-    assert.equal(packageCss, sourceCss, `${file} declarations differ from source`);
+    assert.match(record.sourceSha256, /^[a-f\d]{64}$/);
+    if (sourceBytes) {
+      assert.equal(record.sourceSha256, createHash("sha256").update(sourceBytes).digest("hex"));
+      const sourceCss = sourceBytes.toString("utf8")
+        .replace(/\r\n?/g, "\n")
+        .replace(/url\([^)]*\)/g, "url(__asset__)");
+      const packageCss = packageBytes.toString("utf8")
+        .replace(/\r\n?/g, "\n")
+        .replace(/url\([^)]*\)/g, "url(__asset__)");
+      assert.equal(packageCss, sourceCss, `${file} declarations differ from source`);
+    }
   }
 
-  const sourceEntries = await readdir(sourceMediaDir, { withFileTypes: true });
+  let sourceEntries;
+  try {
+    sourceEntries = await readdir(sourceMediaDir, { withFileTypes: true });
+  } catch (error) {
+    if ((error as NodeJS.ErrnoException).code !== "ENOENT") throw error;
+  }
   const packagedEntries = await readdir(packagedMediaDir, { withFileTypes: true });
   const packagedNames = new Set(packagedEntries.filter((entry) => entry.isFile()).map((entry) => entry.name));
-  for (const entry of sourceEntries.filter((item) => item.isFile())) {
+  for (const entry of (sourceEntries || []).filter((item) => item.isFile())) {
     assert.ok(packagedNames.has(entry.name), `missing source media asset ${entry.name}`);
     const sourceBytes = await readFile(new URL(entry.name, sourceMediaDir));
     const packagedBytes = await readFile(new URL(entry.name, packagedMediaDir));
@@ -125,4 +164,20 @@ test("Modern Floral preserved capture and Chorlove CSS retain source markup and 
       await readFile(asset);
     }
   }
+});
+
+test("Modern Floral RSVP has fixed party size and exposes only source-backed optionals", async () => {
+  const bridge = await readFile(bridgeUrl, "utf8");
+  const source = (await readFile(packagedCaptureUrl, "utf8")).replace(/\r\n?/g, "\n");
+  assert.equal([...source.matchAll(/<section\b/g)].length, 13);
+  assert.doesNotMatch(source, /dress[ -]?code|kiyim kodi|libos kodi/i);
+  assert.match(bridge, /form\.querySelector\('\[name="partySize"\]'\)\?\.remove\(\)/);
+  assert.match(bridge, /partySize:yes\?1:0/);
+  assert.doesNotMatch(bridge, /createElement\(['"]select['"]\).*partySize/s);
+  assert.match(bridge, /hide\(sec\[6\],!z\.hosts\)/);
+  assert.match(bridge, /hide\(s,!values\.some\(a=>\["phone","telegram"\]/);
+  assert.match(bridge, /if\(!g\.enabled\)\{hide\(s\);return;\}/);
+  assert.match(bridge, /hide\(section,!preview&&!publicItems\.length\)/);
+  assert.match(bridge, /hide\(s,!x\.preview&&!data\(\)\.wishesEnabled\)/);
+  assert.match(bridge, /hide\(s,!d\(\)\.rsvp\?\.enabled&&!x\.preview\)/);
 });
