@@ -239,6 +239,7 @@ test("Modern Floral preserved capture and Chorlove CSS retain source markup and 
 test("Modern Floral RSVP has fixed party size and exposes only source-backed optionals", async () => {
   const bridge = await readFile(bridgeUrl, "utf8");
   const source = (await readFile(packagedCaptureUrl, "utf8")).replace(/\r\n?/g, "\n");
+  const sourceChunkBytes = await readIfPresent(sourceChunkUrl);
   assert.equal([...source.matchAll(/<section\b/g)].length, 13);
   assert.doesNotMatch(source, /dress[ -]?code|kiyim kodi|libos kodi/i);
   assert.match(bridge, /form\.querySelector\('\[name="partySize"\]'\)\?\.remove\(\)/);
@@ -246,7 +247,27 @@ test("Modern Floral RSVP has fixed party size and exposes only source-backed opt
   assert.doesNotMatch(bridge, /createElement\(['"]select['"]\).*partySize/s);
   assert.match(bridge, /hide\(sec\[6\],!z\.hosts\)/);
   assert.match(bridge, /hide\(s,!values\.some\(a=>\["phone","telegram"\]/);
-  assert.match(bridge, /if\(!g\.enabled\)\{hide\(s\);return;\}/);
+  assert.match(bridge, /if\(!g\.enabled\|\|!btn\|\|!body\)\{hide\(s\);return;\}/);
+  const giftBridge = bridge.slice(bridge.indexOf("function giftText"), bridge.indexOf("function renderGallery"));
+  assert.match(giftBridge, /g\.cardHolder/);
+  assert.match(giftBridge, /g\.cardNumber/);
+  assert.match(giftBridge, /body\.dataset\.mfGiftOriginal/);
+  assert.match(giftBridge, /navigator\.clipboard\.writeText\(number\)/);
+  assert.match(giftBridge, /copy\.disabled=!number/);
+  assert.doesNotMatch(giftBridge, /g\.note|data-mf-gift/);
+  if (sourceChunkBytes) {
+    const sourceChunk = sourceChunkBytes.toString("utf8");
+    const giftModuleStart = sourceChunk.indexOf(",253045,e=>");
+    const giftModuleEnd = sourceChunk.indexOf("}],253045)", giftModuleStart);
+    assert.ok(giftModuleStart >= 0 && giftModuleEnd > giftModuleStart, "captured gift component module is present");
+    const giftModule = sourceChunk.slice(giftModuleStart, giftModuleEnd);
+    assert.match(giftModule, /giftCardNumber/);
+    assert.match(giftModule, /giftCardOwner/);
+    assert.match(giftModule, /Card owner/);
+    assert.match(giftModule, /Card number/);
+    assert.match(giftModule, /Copy card number/);
+    assert.match(giftModule, /onClick:\(\)=>m\(!0\)/);
+  }
   assert.match(bridge, /hide\(section,!preview&&!publicItems\.length\)/);
   assert.ok(bridge.includes("const grids=all('.grid, .md\\\\:grid',section)"));
   const galleryHandler = bridge.slice(bridge.indexOf("function openGallery"), bridge.indexOf("async function renderWishes"));
