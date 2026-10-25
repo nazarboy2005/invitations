@@ -199,6 +199,9 @@
   const locales = ["uz-Latn", "uz-Cyrl", "en", "ru"];
   const root = document.querySelector('[data-chorlove-template="cloud-castle"]');
   if (!root) return;
+  const hideUnsupportedDressCode = () => document.querySelectorAll('[data-platform-extra="dress"]').forEach((section) => { section.hidden = true; });
+  new MutationObserver(hideUnsupportedDressCode).observe(document.body, { childList: true, subtree: true });
+  hideUnsupportedDressCode();
 
   let state = null;
   let countdownTimer = 0;
@@ -339,6 +342,8 @@
     bindSourceGiftMotion();
     const clouds = [...hero.querySelectorAll('img[src*="/assets/cloud-"]')];
     const castle = hero.querySelector('img[src*="/assets/home.webp"]');
+    clouds.forEach((cloud) => { cloud.style.transform = "none"; });
+    if (castle) castle.style.transform = "none";
     const ornaments = [...(page?.querySelectorAll('img[src*="/assets/hoa.webp"]') || [])];
     let frame = 0;
     const sync = () => {
@@ -656,8 +661,6 @@
     list.dataset.chorloveWishList = "";
     if (!list.isConnected) section.append(list);
     const form = section.querySelector("form");
-    const magicButton = section.querySelector('button[title*="Generate wish"], button[aria-label*="Generate wish"]');
-    if (magicButton) { magicButton.hidden = true; magicButton.tabIndex = -1; }
     if (form) form.dataset.chorloveWishForm = "";
     const status = section.querySelector(".cc-status") || document.createElement("p");
     status.className = "cc-status";
@@ -665,7 +668,7 @@
     hide(section, !data.wishesEnabled);
     if (!data.wishesEnabled) return;
     const wishes = state.preview
-      ? (data.wishes || []).map((wish) => ({ name: wish.name, message: wish.text }))
+      ? (data.wishes || []).map((wish) => ({ name: wish.name, message: wish.text, submittedAt: wish.submittedAt || wish.createdAt || wish.date }))
       : await fetch(`${state.apiBase}/wishes`, { cache: "no-store" })
           .then((response) => response.ok ? response.json() : { wishes: [] })
           .then((body) => body.wishes || [])
@@ -673,12 +676,25 @@
     list.replaceChildren();
     for (const wish of wishes) {
       const card = document.createElement("article");
-      card.className = "rounded-xl border p-4 text-sm shadow-sm";
-      const name = document.createElement("strong");
+      card.className = "rounded-xl border p-4 text-sm shadow-sm transition-all hover:border-[#123467]/40";
+      card.style.borderColor = "rgba(18, 52, 103, 0.2)";
+      card.style.backgroundColor = "rgba(255, 255, 255, 0.45)";
+      const header = document.createElement("div");
+      header.className = "flex items-start justify-between";
+      const name = document.createElement("span");
+      name.className = "font-semibold text-base";
+      name.style.color = "rgb(18, 52, 103)";
       name.textContent = wish.name;
+      const date = document.createElement("span");
+      date.className = "text-xs opacity-65";
+      const submittedAt = wish.submittedAt || wish.createdAt || wish.date;
+      const submittedDate = submittedAt ? new Date(submittedAt) : null;
+      date.textContent = submittedDate && !Number.isNaN(submittedDate.getTime()) ? submittedDate.toLocaleDateString() : "";
+      header.append(name, date);
       const message = document.createElement("p");
+      message.className = "mt-2 text-sm leading-relaxed text-[#123467]";
       message.textContent = wish.message;
-      card.append(name, message);
+      card.append(header, message);
       list.append(card);
     }
     if (form) {
@@ -715,8 +731,6 @@
     if (!data.rsvp?.enabled) return;
     const form = section.querySelector("form");
     const name = form?.querySelector("input");
-    const magicButton = section.querySelector('button[title*="Generate wish"], button[aria-label*="Generate wish"]');
-    if (magicButton) magicButton.hidden = true;
     const submit = section.querySelector("[data-chorlove-submit-rsvp]");
     const responseGroup = section.querySelector('[role="radiogroup"]');
     if (responseGroup) responseGroup.setAttribute("aria-label", localCopy().responseLabel);
@@ -734,24 +748,7 @@
         });
       };
     }
-    let party = form?.querySelector(".cc-party-size");
-    if (form && !party) {
-      party = document.createElement("label");
-      party.className = "cc-party-size";
-      party.append(document.createTextNode(localCopy().party));
-      const select = document.createElement("select");
-      select.name = "partySize";
-      for (let n = 1; n <= Math.min(Number(data.rsvp.maxPartySize) || 1, 20); n += 1) {
-        const option = document.createElement("option"); option.value = String(n); option.textContent = String(n); select.append(option);
-      }
-      party.append(select);
-      form.append(party);
-    }
-    if (party) {
-      if (party.firstChild?.nodeType === Node.TEXT_NODE) party.firstChild.textContent = localCopy().party;
-      const select = party.querySelector("select");
-      if (select) select.setAttribute("aria-label", localCopy().party);
-    }
+    form?.querySelectorAll(".cc-party-size, [name='partySize']").forEach((node) => node.closest("label")?.remove() || node.remove());
     if (submit) text(submit, localCopy().submit);
     if (form) form.onsubmit = async (event) => {
       event.preventDefault();
@@ -763,7 +760,7 @@
         const response = await fetch(`${state.apiBase}/rsvp`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ name: name?.value || state.guestName || "Guest", status: selected.dataset.chorloveRsvp, partySize: selected.dataset.chorloveRsvp === "yes" ? Number(form.querySelector('[name="partySize"]')?.value || 1) : 0, guestToken: state.guestToken || undefined }),
+          body: JSON.stringify({ name: name?.value || state.guestName || "Guest", status: selected.dataset.chorloveRsvp, partySize: selected.dataset.chorloveRsvp === "yes" ? 1 : 0, guestToken: state.guestToken || undefined }),
         });
         if (!response.ok) throw new Error("rsvp submission failed");
         text(status, localCopy().rsvpSent);
@@ -777,29 +774,110 @@
     if (!section) return;
     hide(section, !data.toyona?.enabled);
     if (!data.toyona?.enabled) return;
-    let details = section.querySelector(".cc-gift-details");
-    if (!details) {
-      details = document.createElement("div");
-      details.className = "cc-gift-details";
-      const label = document.createElement("p"); label.textContent = localCopy().giftNumber;
-      const number = document.createElement("strong"); number.dataset.giftNumber = "";
-      const holder = document.createElement("p"); holder.dataset.giftHolder = "";
-      const note = document.createElement("p"); note.dataset.giftNote = "";
-      details.append(label, number, holder, note);
-      section.append(details);
-    }
-    text(details.querySelector("[data-gift-number]"), data.toyona.cardNumber);
-    text(details.querySelector("[data-gift-holder]"), data.toyona.cardHolder ? `${localCopy().giftHolder}: ${data.toyona.cardHolder}` : "");
-    text(details.querySelector("[data-gift-note]"), data.toyona.note);
     const hint = section.querySelector('[data-chorlove-i18n="giftOpenHint"]');
-    const card = hint?.closest(".cursor-pointer") || hint?.parentElement;
-    if (card) {
-      card.tabIndex = 0;
-      card.setAttribute("role", "button");
-      card.setAttribute("aria-label", localCopy().giftOpenHint);
-      card.onclick = () => { details.dataset.open = details.dataset.open !== "true"; };
-      card.onkeydown = (event) => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); card.click(); } };
+    const trigger = hint?.closest("button") || section.querySelector('button[aria-label="Open gift box"]');
+    if (trigger) trigger.onclick = () => openGiftDialog(trigger, data.toyona);
+  }
+
+  function openGiftDialog(trigger, gift) {
+    if (document.querySelector("[data-cc-gift-dialog]")) return;
+    const reduced = Boolean(state?.reducedMotion || document.documentElement.classList.contains("cc-reduced-motion") || window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+    const overlay = document.createElement("div");
+    overlay.dataset.ccGiftDialog = "";
+    overlay.className = "fixed inset-0 z-[130] flex items-center justify-center bg-black/75 backdrop-blur-sm p-4 select-none";
+    overlay.style.opacity = "0";
+    overlay.style.transition = reduced ? "none" : "opacity 250ms ease";
+    const dialog = document.createElement("div");
+    dialog.className = "relative w-full max-w-md rounded-2xl bg-[#FFF7F3] p-6 shadow-2xl text-center border border-[#123467]/20 overflow-hidden";
+    dialog.setAttribute("role", "dialog");
+    dialog.setAttribute("aria-modal", "true");
+    dialog.setAttribute("aria-labelledby", "cc-gift-dialog-title");
+    dialog.style.color = "rgb(18, 52, 103)";
+    dialog.style.opacity = "0";
+    dialog.style.transform = "scale(.92) translateY(20px)";
+    dialog.style.transition = reduced ? "none" : "opacity 250ms ease, transform 250ms ease";
+    const close = document.createElement("button");
+    close.type = "button";
+    close.className = "absolute right-3.5 top-3.5 p-1.5 rounded-full text-[#123467]/70 hover:text-[#123467] hover:bg-[#123467]/10 transition-colors z-10";
+    close.setAttribute("aria-label", "Close gift details");
+    close.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>';
+    const heading = document.createElement("div");
+    heading.className = "flex flex-col items-center gap-2 pt-2 pb-4 border-b border-[#123467]/15";
+    const image = document.createElement("img");
+    image.alt = "Gift box";
+    image.src = "/templates/cloud-castle/assets/gift/gift.webp";
+    image.className = "w-16 h-16 object-contain drop-shadow-md";
+    const title = document.createElement("h3");
+    title.id = "cc-gift-dialog-title";
+    title.className = "uppercase font-bold text-lg md:text-xl tracking-wide";
+    title.style.fontFamily = '"Times New Roman", serif';
+    title.textContent = localCopy().giftTitle;
+    heading.append(image, title);
+    const content = document.createElement("div");
+    content.className = "py-6 flex flex-col items-center gap-4";
+    if (gift.cardNumber) {
+      const card = document.createElement("div");
+      card.className = "w-full rounded-xl border border-[#123467]/20 bg-white/70 p-4 shadow-sm flex flex-col items-center gap-2";
+      const kind = document.createElement("div");
+      kind.className = "flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#123467]/80";
+      kind.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="14" x="2" y="5" rx="2"></rect><line x1="2" x2="22" y1="10" y2="10"></line><path d="M6 14h2"></path></svg><span>Bank Card</span>';
+      const number = document.createElement("div");
+      number.className = "font-mono text-lg md:text-xl font-bold tracking-widest text-[#123467] my-1";
+      number.textContent = gift.cardNumber;
+      const holder = document.createElement("div");
+      holder.className = "text-xs font-medium text-[#123467]/80";
+      holder.textContent = gift.cardHolder || "";
+      holder.hidden = !gift.cardHolder;
+      const copy = document.createElement("button");
+      copy.type = "button";
+      copy.className = "mt-2 inline-flex items-center gap-2 rounded-full px-5 py-2 text-xs font-semibold text-white transition-all hover:scale-105 active:scale-95 shadow-md";
+      copy.style.backgroundColor = "rgb(18, 52, 103)";
+      const icon = document.createElement("span");
+      icon.setAttribute("aria-hidden", "true");
+      icon.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg>';
+      const copyText = document.createElement("span");
+      copyText.textContent = "Copy Card Number";
+      copy.append(icon, copyText);
+      copy.onclick = async () => {
+        try {
+          if (!navigator.clipboard?.writeText) return;
+          await navigator.clipboard.writeText(String(gift.cardNumber).replaceAll(" ", ""));
+          icon.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m20 6-11 11-5-5"></path></svg>';
+          copyText.textContent = "Copied!";
+          window.setTimeout(() => {
+            icon.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg>';
+            copyText.textContent = "Copy Card Number";
+          }, 2500);
+        } catch { /* Match source behavior when clipboard access is unavailable. */ }
+      };
+      card.append(kind, number, holder, copy);
+      content.append(card);
+    } else {
+      const fallback = document.createElement("div");
+      fallback.className = "text-sm text-[#123467]/80 italic px-4";
+      fallback.textContent = gift.note || "Your presence is the greatest gift for us.";
+      content.append(fallback);
     }
+    dialog.append(close, heading, content);
+    overlay.append(dialog);
+    document.body.append(overlay);
+    let closing = false;
+    const dismiss = () => {
+      if (closing) return;
+      closing = true;
+      document.removeEventListener("keydown", keydown);
+      overlay.style.opacity = "0";
+      dialog.style.opacity = "0";
+      dialog.style.transform = "scale(.92) translateY(20px)";
+      window.setTimeout(() => { overlay.remove(); trigger.focus(); }, reduced ? 0 : 250);
+    };
+    const keydown = (event) => { if (event.key === "Escape") dismiss(); };
+    overlay.onclick = (event) => { if (event.target === overlay) dismiss(); };
+    dialog.onclick = (event) => event.stopPropagation();
+    close.onclick = dismiss;
+    document.addEventListener("keydown", keydown);
+    requestAnimationFrame(() => { overlay.style.opacity = "1"; dialog.style.opacity = "1"; dialog.style.transform = "scale(1) translateY(0)"; });
+    close.focus();
   }
 
   function renderVenue(data) {

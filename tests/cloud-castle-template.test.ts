@@ -9,6 +9,10 @@ const bridge = new URL("../apps/web/public/templates/cloud-castle/bridge.js", im
 const preview = new URL("../apps/web/public/templates/cloud-castle/preview-opening.png", import.meta.url);
 const provenance = new URL("../apps/web/public/templates/cloud-castle/source/provenance.json", import.meta.url);
 const pageModule = new URL("../Invitations - this folder will be removed from production/Chorlove/Web invitations/_next/static/chunks/14t58uni224ve.js", import.meta.url);
+const sourceCapture = new URL("../Invitations - this folder will be removed from production/Chorlove/Web invitations/templates/cloud-castle/preview-frame.html", import.meta.url);
+const sourceGift = new URL("../Invitations - this folder will be removed from production/Chorlove/Web invitations/images/cloud-castle/gift/gift.webp", import.meta.url);
+const packagedGift = new URL("../apps/web/public/templates/cloud-castle/assets/gift/gift.webp", import.meta.url);
+const optionalSourceText = async (url: URL) => readFile(url, "utf8").catch((error: NodeJS.ErrnoException) => error.code === "ENOENT" ? null : Promise.reject(error));
 
 test("Cloud Castle is published for weddings independently of category", () => {
   const template = templateById("cloud-castle");
@@ -27,9 +31,11 @@ test("Cloud Castle catalog artwork is a clean portrait capture with recorded pro
   assert.equal(details.catalogArtwork.aspectRatio, "9:16");
   assert.deepEqual(details.catalogArtwork.uiChromeRemoved, ["language selector", "music control", "browser scrollbar"]);
   assert.match(details.catalogArtwork.provenanceLimit, /compiled page component/);
-  const compiledModule = await readFile(pageModule);
-  assert.equal(details.pageModule.bytes, compiledModule.length);
-  assert.equal(details.pageModule.sha256, createHash("sha256").update(compiledModule).digest("hex"));
+  const compiledModule = await readFile(pageModule).catch((error: NodeJS.ErrnoException) => error.code === "ENOENT" ? null : Promise.reject(error));
+  if (compiledModule) {
+    assert.equal(details.pageModule.bytes, compiledModule.length);
+    assert.equal(details.pageModule.sha256, createHash("sha256").update(compiledModule).digest("hex"));
+  }
   assert.equal(details.pageModule.moduleId, 909129);
   assert.equal(details.pageModule.packagedAsSiteRuntime, false);
 });
@@ -63,9 +69,57 @@ test("Cloud Castle bridge maps the shared data and existing RSVP/wish services",
   assert.match(js, /prefers-reduced-motion/);
 });
 
+test("Cloud Castle guestbook retains the source scroll pane, wish control and card metadata", async () => {
+  const [original, packaged, js] = await Promise.all([optionalSourceText(sourceCapture), readFile(source, "utf8"), readFile(bridge, "utf8")]);
+  if (original) {
+    assert.match(original, /mt-8 w-full max-h-\[500px\] space-y-3 overflow-y-auto pr-2 mx-auto max-w-full md:max-w-\[600px\]/);
+    assert.match(original, /rounded-xl border p-4 text-sm shadow-sm transition-all hover:border-\[#123467\]\/40/);
+    assert.match(original, /title="Generate wish with AI"/);
+  }
+  assert.match(packaged, /max-h-\[500px\] space-y-3 overflow-y-auto pr-2 mx-auto max-w-full md:max-w-\[600px\]" data-chorlove-wish-list=""/);
+  assert.match(js, /wish\.submittedAt \|\| wish\.createdAt \|\| wish\.date/);
+  assert.match(js, /text-xs opacity-65/);
+  assert.match(js, /mt-2 text-sm leading-relaxed text-\[#123467\]/);
+  assert.doesNotMatch(js, /magicButton\.hidden/);
+});
+
+test("Cloud Castle RSVP omits party count and sends fixed party size", async () => {
+  const [original, js] = await Promise.all([optionalSourceText(sourceCapture), readFile(bridge, "utf8")]);
+  if (original) assert.doesNotMatch(original, /partySize|Kiyinish uslubi/i);
+  assert.doesNotMatch(js, /className = "cc-party-size"|select\.name = "partySize"/);
+  assert.match(js, /partySize: selected\.dataset\.chorloveRsvp === "yes" \? 1 : 0/);
+  assert.match(js, /data-platform-extra="dress"/);
+});
+
+test("Cloud Castle gift modal matches source interaction, card styling and image", async () => {
+  const [original, packaged, js, compiled, packageArt, provenanceText] = await Promise.all([
+    optionalSourceText(sourceCapture), readFile(source, "utf8"), readFile(bridge, "utf8"), optionalSourceText(pageModule), readFile(packagedGift), readFile(provenance, "utf8"),
+  ]);
+  const details = JSON.parse(provenanceText);
+  assert.equal(createHash("sha256").update(packageArt).digest("hex"), details.sourceBehavior.giftDisclosure.imageSha256);
+  if (compiled && original) {
+    const sourceGiftBytes = await readFile(sourceGift);
+    assert.equal(createHash("sha256").update(packageArt).digest("hex"), createHash("sha256").update(sourceGiftBytes).digest("hex"));
+    assert.match(original, /data-chorlove-gift/);
+    assert.match(compiled, /bg-black\/75 backdrop-blur-sm p-4 select-none/);
+    assert.match(compiled, /initial:\{opacity:0,scale:\.92,y:20\},animate:\{opacity:1,scale:1,y:0\},exit:\{opacity:0,scale:\.92,y:20\},transition:\{duration:\.25\}/);
+    assert.match(compiled, /Copy Card Number/);
+    assert.match(compiled, /\/images\/cloud-castle\/gift\/gift\.webp/);
+  }
+  assert.match(packaged, /data-chorlove-gift/);
+  assert.match(js, /Bank Card/);
+  assert.match(js, /Copy Card Number/);
+  assert.match(js, /data-cc-gift-dialog/);
+  assert.match(js, /scale\(\.92\) translateY\(20px\)/);
+  assert.match(js, /navigator\.clipboard\?\.writeText/);
+  assert.match(js, /aria-modal/);
+  assert.match(js, /className = "fixed inset-0 z-\[130\] flex items-center justify-center bg-black\/75 backdrop-blur-sm p-4 select-none"/);
+});
+
 test("Cloud Castle opening and hero motion follow the captured page module", async () => {
   const js = await readFile(bridge, "utf8");
-  const source = await readFile(pageModule, "utf8");
+  const source = await optionalSourceText(pageModule);
+  if (source) {
   assert.match(source, /duration:\.6,delay:\.45\*!!i/);
   assert.match(source, /duration:2,repeat:1\/0,ease:"easeInOut"/);
   assert.match(source, /duration:3,repeat:1\/0,ease:"easeInOut"/);
@@ -77,6 +131,8 @@ test("Cloud Castle opening and hero motion follow the captured page module", asy
   assert.match(js, /duration: 3000, iterations: Infinity/);
   assert.match(js, /inner\.animate\(\[\{ translate: "0 0" \}, \{ translate: `\$\{sway\}px 0` \}, \{ translate: "0 0" \}\], \{ duration: duration \* 500, delay: delay \* 1000, iterations: Infinity, easing: "ease-in-out" \}\)/);
   assert.match(js, /duration: 800, easing: "cubic-bezier\(\.22,1,\.36,1\)"/);
+  assert.match(js, /clouds\.forEach\(\(cloud\) => \{ cloud\.style\.transform = "none"; \}\)/);
+  assert.match(js, /if \(castle\) castle\.style\.transform = "none"/);
   assert.match(js, /duration: 600, delay: 450/);
   assert.match(js, /-90 \+ 330 \* progress/);
   assert.match(js, /145 - 405 \* progress/);
@@ -86,6 +142,7 @@ test("Cloud Castle opening and hero motion follow the captured page module", asy
   assert.match(source, /duration:\.45,delay:\.09\*i,ease:\[\.22,1,\.36,1\]/);
   assert.match(source, /duration:\.55,delay:\.12\+\.1\*a,ease:"easeOut"/);
   assert.match(source, /duration:1,delay:e,ease:\[\.22,1,\.36,1\]/);
+  }
   assert.match(js, /function sourceRevealProfile\(element\)/);
   assert.match(js, /threshold: \[0\.2, 0\.3, 0\.35, 0\.5\]/);
   assert.match(js, /function animateSourceReveal\(element, inView, initialOpacity, initialTransform, targetOpacity, duration, delay, easing\)/);
