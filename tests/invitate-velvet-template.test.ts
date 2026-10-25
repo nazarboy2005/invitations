@@ -41,6 +41,9 @@ test("Velvet package has source opening art and isolated local renderer assets",
   assert.match(html, /data-velvet="person-0"/);
   assert.match(html, /data-velvet="venue-name"/);
   assert.match(bridge, /\/rsvp`/);
+  assert.match(bridge, /map\.textContent = d\.ui\?\.map \|\| t\.map/);
+  assert.match(bridge, /window\.velvetReducedMotion = !!d\.qaReducedMotion/);
+  assert.match(bridge, /velvet-reduced-motion/);
   assert.match(bridge, /uz-Cyrl/);
   assert.match(bridge, /audio\.removeAttribute\("src"\)/);
   assert.match(sourceJs, /prefers-reduced-motion: reduce/);

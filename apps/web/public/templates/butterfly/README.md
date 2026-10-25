@@ -47,9 +47,11 @@ are mapped, and the source stylesheet has reduced-motion overrides.
 
 The captured source contains no program, RSVP form, gift/to'yona, dress-code,
 contact, or guest-wish sections or behavior. The shared contracts support
-several of these features, but this reference has no corresponding template UI;
-those gaps must be resolved or explicitly accepted in a reviewed product
-decision before publication.
+several of these features, but this reference has no corresponding template UI.
+User decision (2026-10-25): preserve the reference and do not add those absent
+sections; treat their absence as expected source behavior, not a publication
+blocker. Unsupported optional sections remain hidden. RSVP verification is
+deferred.
 
 `preview.png` is a portrait browser capture of the real `.opening-scene` rendered
 through `/preview?template=butterfly` with the shared

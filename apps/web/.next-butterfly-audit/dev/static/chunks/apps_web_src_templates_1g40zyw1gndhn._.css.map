@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["file:///D:/Projects/Taklifnoma/apps/web/src/templates/anor/template.module.css"],"sourcesContent":[".sourcePreview,\n.sourcePublic {\n  width: 100%;\n  overflow: hidden;\n  background: #140b08;\n}\n\n.sourcePreview {\n  height: 640px;\n}\n\n.sourcePublic {\n  height: 100dvh;\n  min-height: 560px;\n}\n\n.sourceFullPreview {\n  position: relative;\n  width: 100%;\n  height: 100%;\n  min-height: 560px;\n  overflow: hidden;\n  background: #140b08;\n}\n\n.sourcePreview iframe,\n.sourcePublic iframe,\n.sourceFullPreview iframe {\n  display: block;\n  width: 100%;\n  height: 100%;\n  border: 0;\n  background: #140b08;\n}\n"],"names":[],"mappings":"AAAA;;;;;;AAOA;;;;AAIA;;;;;AAKA;;;;;;;;;AASA"}},
+    {"offset": {"line": 34, "column": 0}, "map": {"version":3,"sources":["file:///D:/Projects/Taklifnoma/apps/web/src/templates/manor-edition/renderer.module.css"],"sourcesContent":[".preview,.public,.full{width:100%;overflow:hidden;background:#f4efe4}.preview{height:640px}.public{height:100dvh;min-height:560px}.full{position:relative;height:100%;min-height:560px}.preview iframe,.public iframe,.full iframe{display:block;width:100%;height:100%;border:0;background:#f4efe4}.qaMobile{width:min(100%,390px);max-width:390px;margin-inline:auto}\r\n"],"names":[],"mappings":"AAAA;;;;;;AAAqE;;;;AAAsB;;;;;AAAuC;;;;;;AAAqD;;;;;;;;AAA6G"}}]
+}

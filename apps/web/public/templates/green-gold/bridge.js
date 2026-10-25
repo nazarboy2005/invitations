@@ -20,9 +20,6 @@
   let timer;
   let sourceMotion;
   let sourceMotionInitialized = false;
-  const sourcePreviewGallery = [2, 1, 3, 6, 4, 5].map((number) => ({
-    src: `/templates/chorlove/orchid-amplop/assets/gallery-${number}.webp`,
-  }));
   const $ = (selector, base = root) => base.querySelector(selector);
   const tx = (node, value) => { if (node) node.textContent = value == null ? "" : String(value); };
   const hide = (node, value) => { if (node) node.hidden = Boolean(value); };
@@ -176,7 +173,7 @@
     if(giftButton)tx(giftButton,c.giftCta);
     const footerLink=sections[12]?.querySelector("a");if(footerLink){footerLink.href="/";tx(footerLink,"Taklifnoma");}
     const footerCta=sections[12]?.querySelectorAll("a")[1];if(footerCta){footerCta.href="/";tx(footerCta,p.locale==="en"?"Create your invitation":p.locale==="ru"?"Создать приглашение":p.locale==="uz-Cyrl"?"Таклифнома яратинг":"O'z taklifnomangizni yarating");}
-    renderGallery(sections[9],d.gallery||[],p.preview,c);
+    renderGallery(sections[9],d.gallery||[],p.preview,p.sampleGallery,c);
     await renderWishes(sections[10],d.wishes||[],p);
     root.dispatchEvent(new Event("gg:wishes-updated"));
     tx(sections[10]?.querySelector("p"),c.wishes);
@@ -197,12 +194,13 @@
       sourceMotion?.updateWishes();
     }
   }
-  function renderGallery(section, gallery, preview, c) {
+  function renderGallery(section, gallery, preview, sampleGallery, c) {
     if (!section) return;
-    const hasCreatorImages = gallery.some((item) => item?.src);
-    const visibleGallery = preview && !hasCreatorImages
-      ? sourcePreviewGallery.map((item, index) => ({ ...item, alt: `${c.photo} ${index + 1}` }))
-      : gallery;
+    const visibleGallery = gallery.filter((item) => {
+      if (!item?.src) return false;
+      const isSourceSample = String(item.id || "").startsWith("green-gold-source-preview-");
+      return !isSourceSample || Boolean(preview && sampleGallery);
+    });
     const galleryButtons = [...section.querySelectorAll("button")];
     if (!galleryButtons.length) return;
     galleryButtons.forEach((button, index) => {
@@ -212,7 +210,7 @@
       button.disabled = false;
       button.removeAttribute("aria-hidden");
       button.onclick = null;
-      hide(button.closest("div.relative"), !item || (!preview && !item.src));
+      hide(button.closest("div.relative"), !item?.src);
       if (item?.src) {
         const alt = item.alt || item.caption || `${c.photo} ${index % visibleGallery.length + 1}`;
         const img = document.createElement("img");
@@ -259,14 +257,9 @@
           dialog.focus();
           sourceMotion?.animateGallery(dialog, dialogImage);
         };
-      } else if (item && preview) {
-        button.textContent = "\u2022";
-        button.classList.add("gg-gallery-empty");
-        button.disabled = true;
-        button.setAttribute("aria-label", `${c.photo} ${index % visibleGallery.length + 1}`);
       }
     });
-    hide(section, !preview && !hasCreatorImages);
+    hide(section, visibleGallery.length === 0);
   }
   async function renderWishes(section, wishes, p) {
     if (!section) return;

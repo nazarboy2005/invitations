@@ -129,7 +129,7 @@
         "images/templates/orchid-amplop/gallery-4.webp",
         "images/templates/orchid-amplop/gallery-5.webp"
       ],
-      "result": "The Green Gold source route explicitly references these six source-preview images twice, as two responsive gallery copies. Every file exists under Chorlove in both complete source roots and in the shared Orchid Amplop package, with SHA-256 matching previewOnlySourceGallery. They are the original preview samples, not substitute artwork. bridge.js now binds all twelve source buttons to this exact six-image order so the visible responsive copy is populated."
+      "result": "The Green Gold source route explicitly references these six source-preview images twice, as two responsive gallery copies. Every file exists under Chorlove in both complete source roots and in the shared Orchid Amplop package, with SHA-256 matching previewOnlySourceGallery. They are the original preview samples, not substitute artwork. preview-sample.json carries the six exact URLs; the renderer marks catalog/initial-selection samples, and bridge.js binds all twelve source buttons while rejecting sample-tagged photos outside that preview route."
     },
     "unresolvedSourceImageBytes": []
   },

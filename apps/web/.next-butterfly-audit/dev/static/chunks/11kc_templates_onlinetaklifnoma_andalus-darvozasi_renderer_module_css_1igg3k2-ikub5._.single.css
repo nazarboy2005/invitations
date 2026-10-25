@@ -1,0 +1,34 @@
+/* [project]/apps/web/src/templates/onlinetaklifnoma/andalus-darvozasi/renderer.module.css [app-client] (css) */
+.renderer-module__hkuTWW__public, .renderer-module__hkuTWW__preview, .renderer-module__hkuTWW__full {
+  width: 100%;
+  overflow: hidden;
+}
+
+.renderer-module__hkuTWW__public {
+  min-height: 100dvh;
+}
+
+.renderer-module__hkuTWW__preview {
+  height: 100%;
+  min-height: 720px;
+}
+
+.renderer-module__hkuTWW__full {
+  height: 100dvh;
+  min-height: 660px;
+}
+
+.renderer-module__hkuTWW__public iframe, .renderer-module__hkuTWW__preview iframe, .renderer-module__hkuTWW__full iframe {
+  width: 100%;
+  height: 100%;
+  min-height: inherit;
+  background: #0c2b27;
+  border: 0;
+  display: block;
+}
+
+.renderer-module__hkuTWW__public iframe {
+  min-height: 100dvh;
+}
+
+/*# sourceMappingURL=11kc_templates_onlinetaklifnoma_andalus-darvozasi_renderer_module_css_1igg3k2-ikub5._.single.css.map*/

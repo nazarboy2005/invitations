@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack:///[project]/apps/web/src/templates/marxaba/renderer.module.css"],"sourcesContent":[".preview,\n.public,\n.full {\n  width: 100%;\n  overflow: hidden;\n  background: #100d0b;\n}\n\n.preview { height: 640px; }\n.public { height: 100dvh; min-height: 560px; }\n.full { position: relative; height: 100%; min-height: 560px; }\n\n.preview iframe,\n.public iframe,\n.full iframe {\n  display: block;\n  width: 100%;\n  height: 100%;\n  border: 0;\n  background: #100d0b;\n}\n"],"names":[],"mappings":"AAAA;;;;;;AAQA;;;;AACA;;;;;AACA;;;;;;AAEA"}}]
+}

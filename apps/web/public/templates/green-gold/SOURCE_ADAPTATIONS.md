@@ -78,12 +78,14 @@ artwork. Green Gold remains unpublished. Browser verification at matching
 finish, section reveal on scroll, and package reduced-motion state. The source
 capture reports React hydration error #418 while its external site services are
 blocked in the local harness; the package frame has no uncaught JavaScript
-errors. The exact source default gallery order is restored in previews using
-the captured shared gallery image files; the source page contains two
-responsive copies of those six photos. The adapter now binds both copies, so
-the active layout shows the same images and each opens the source-matched
-lightbox. Creator uploads take precedence and an empty public gallery stays
-hidden. Complete public/creator integration remains an open release check. The
+errors. The exact source default gallery order is supplied by the shared
+preview-only sample fixture using the captured gallery files; the source page
+contains two responsive copies of those six photos. The adapter binds both
+copies and accepts `green-gold-source-preview-*` items only when the renderer
+marks a catalog or initial template-selection preview. Creator uploads take
+precedence, blank creator/public galleries remain hidden, and the adapter does
+not inject sample photos. Complete public/creator integration remains an open
+release check. The
 archive omitted `vertical-line.png`; the exact
 original PNG has been recovered from Chorlove and packaged without conversion.
 

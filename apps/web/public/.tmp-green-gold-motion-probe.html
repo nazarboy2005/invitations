@@ -1,0 +1,51 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Green Gold source/package lightbox timing probe</title>
+<style>html,body{margin:0;width:100%;height:100%;overflow:hidden}iframe{display:block;width:100vw;height:100vh;border:0}#report{position:fixed;left:0;right:0;bottom:0;max-height:28vh;overflow:auto;margin:0;padding:8px;background:#111;color:#fff;z-index:999999;font:11px/1.35 monospace;white-space:pre-wrap;pointer-events:none}</style>
+<iframe title="Green Gold template"></iframe><pre id="report" aria-live="polite">Waiting for the gallery click.</pre>
+<script>
+(() => {
+  const packageSide = location.search.includes("package=1");
+  const frame = document.querySelector("iframe");
+  const report = document.querySelector("#report");
+  frame.src = packageSide ? "/templates/green-gold/lightbox-probe.html?lang=uz-Latn" : "/templates/green-gold/preview-frame.html";
+  frame.addEventListener("load", () => {
+    const view = frame.contentWindow;
+    const doc = view.document;
+    if (packageSide) {
+      const update = {type:"green-gold:update",payload:{data:{greeting:"Assalomu alaykum, aziz mehmon!",groom:"Muhammad",bride:"Xadicha",message:"Sizni eng baxtli kunimizga taklif qilamiz",gallery:[],wishes:[],contacts:[],dateTime:"",venue:{},toyona:{enabled:false},rsvp:{enabled:false},music:{enabled:false}},templateId:"green-gold",locale:"uz-Latn",preview:true,enabledLocales:["uz-Latn"],invitationId:"",guestName:"",guestToken:"",catalogMusic:false,silentPlayback:true,reducedMotion:false,mobile:false}};
+      view.name = JSON.stringify(update);
+      view.postMessage(update, location.origin);
+    }
+    const modalFor = () => packageSide ? doc.querySelector(".gg-lightbox") : [...doc.querySelectorAll("div")].find((el) => String(el.className).includes("fixed inset-0") && String(el.className).includes("z-[3000]"));
+    const snapshot = (label, elapsed) => {
+      const dialog = modalFor();
+      const image = dialog?.querySelector("img");
+      const anim = (node) => node ? node.getAnimations().map((a) => ({currentTime:Number(a.currentTime)||0,startTime:Number(a.startTime)||0,duration:a.effect?.getTiming().duration,easing:a.effect?.getTiming().easing})) : [];
+      return {label,ms:+elapsed.toFixed(2),dialog:dialog?{opacity:+view.getComputedStyle(dialog).opacity,background:view.getComputedStyle(dialog).backgroundColor,backdropFilter:view.getComputedStyle(dialog).backdropFilter,rect:[dialog.getBoundingClientRect().width,dialog.getBoundingClientRect().height].map(v=>+v.toFixed(2)),animations:anim(dialog)}:null,image:image?{opacity:+view.getComputedStyle(image).opacity,transform:view.getComputedStyle(image).transform,rect:[image.getBoundingClientRect().width,image.getBoundingClientRect().height].map(v=>+v.toFixed(2)),animations:anim(image)}:null};
+    };
+    doc.addEventListener("click", (event) => {
+      const button=event.target.closest?.("button");
+      const section=button?.closest("section");
+      const galleryClick=Boolean(section?.querySelector("h2")?.textContent.includes("Bizning lahzalarimiz"));
+      const closeClick=button?.matches('[aria-label="Close"],[data-gg-close]');
+      if (!galleryClick && !closeClick) return;
+      const start=view.performance.now();
+      const result={side:packageSide?"package":"source",action:galleryClick?"open":"close",viewport:[view.innerWidth,view.innerHeight],eventElapsedAnchor:"capture-phase click timestamp",targetButton:{disabled:button.disabled,handlerType:typeof button.onclick,html:button.outerHTML.slice(0,350)},immediate:null,frames:[]};
+      queueMicrotask(()=>{result.immediate=snapshot("post-click microtask",view.performance.now()-start);});
+      const sample=(timestamp)=>{
+        const elapsed=view.performance.now()-start; result.frames.push(snapshot("raf",elapsed));
+        if(elapsed<480) view.requestAnimationFrame(sample);
+        else report.textContent=JSON.stringify(result,null,2);
+      };
+      view.requestAnimationFrame(sample);
+    },true);
+    setTimeout(()=>{const root=doc.querySelector("[data-gg-root]");const sections=[...(root?.querySelectorAll("section")||[])].map((section,index)=>({index,title:section.querySelector("h2")?.textContent?.trim(),grids:section.querySelectorAll(".grid").length,buttons:section.querySelectorAll("button").length,images:section.querySelectorAll("img").length}));report.textContent=(packageSide?"Package":"Source")+" ready: "+JSON.stringify({sections,imageSources:[...doc.querySelectorAll("section")[9]?.querySelectorAll("img")||[]].map(image=>({src:image.currentSrc,complete:image.complete,naturalWidth:image.naturalWidth})),galleryButtons:[...doc.querySelectorAll("section")[9]?.querySelectorAll("button")||[]].map((button,index)=>({index,label:button.getAttribute("aria-label"),handler:typeof button.onclick,disabled:button.disabled,hidden:button.closest("div.relative")?.hidden,display:view.getComputedStyle(button).display,opacity:view.getComputedStyle(button).opacity,rect:[button.getBoundingClientRect().x,button.getBoundingClientRect().y,button.getBoundingClientRect().width,button.getBoundingClientRect().height].map(value=>+value.toFixed(1)),html:button.outerHTML.slice(0,180)}))});},1200);
+  },{once:true});
+})();
+</script>
+
+
+
+

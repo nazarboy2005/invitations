@@ -1,5 +1,29 @@
 # Implementation decisions
 
+## Multi-provider source reconciliation (2026-10-25)
+
+- User requested scanning Chorlove and Marxaba first, then the listed providers,
+  comparing actual reference captures with the app and avoiding duplicate
+  designs under another name. A newly identified distinct design should be
+  reported in this chat before continuing. Implement only when complete
+  template-level source is available; keep source captures unchanged and follow
+  existing per-template verification, private-until-ready and publish/commit
+  gates.
+- The Chorlove archive manifest lists 28 slugs. Thirteen currently absent from
+  the typed Chorlove registry/package set are Bahor Navosi (`spring-bahor`),
+  Purple Flower, Royal Red, Royal Blue, Royal Green, Red Rose Card, Ivory Love,
+  Velvet Romance, Royal Purple, Pink Lotus, Swan Garden, Sunset, and Stained
+  Glass. The capture has only isolated `preview-frame.html` snapshots for these
+  designs, without their template CSS, JavaScript, fonts, or art. Do not
+  implement them from screenshots or the snapshot alone.
+- Marxaba's 46 listed template IDs are already represented in the typed
+  Marxaba registry. The OnlineTaklifnoma 11 designs and Taklifnomachi 8 demos
+  are likewise already represented by existing renderers/packages. Other
+  provider archive pages are invitations/demos, not confirmed distinct
+  template-level source; continue checking actual catalog/template inventory
+  before assigning or registering any candidate. No new template was
+  registered, migrated, published, or committed during this source audit.
+
 ## Catalog navigation and curated covers (2026-10-25)
 
 - Match `/templates` to the homepage Visol brand, navigation links, mobile menu
@@ -222,15 +246,32 @@
 - Fidelity follow-up (2026-10-23): the exact missing asset URLs were searched
   across the full Invitate capture manifest/tree and captured script text. No
   matching local resource or separate Wedding runtime chunk exists; the
-  captured source itself reports the location video as unavailable. The source
-  and app were compared in-browser at matching desktop and 390×844 mobile
-  viewports. Their hero composition uses the same original template source.
-  The app frame showed the reduced-motion class and zero autoplay videos in
-  QA mode, versus two autoplay videos in normal mode. Typecheck, production
-  build, source script syntax, and preview RSVP guard checks pass. Authentic
-  catalog opening art, public-route parity, save/reopen, and the unsupported
-  artist-lineup gap remain release gates. The full-preview route forwards its
-  reduced-motion QA flag. See the package README for comparison notes.
+  captured source itself reports the location video as unavailable. Browser
+  comparison at desktop and 390×844 confirmed the same source hero composition.
+  QA reduced-motion showed the reduced-motion class and no autoplay video; the
+  full-preview route forwards its reduced-motion flag. See the package README
+  for the later verification record.
+- Follow-up (2026-10-24): the disposable creator integration test verified
+  draft save/reopen and a test-only public render; normal invitation
+  publication correctly rejected the still-private template. This did not
+  verify creator-initiated publication. Missing garden-strip, program
+  background, and location video media, plus absent artist-lineup and
+  per-program-description contract fields, remained release blockers.
+- Follow-up (2026-10-25): the referenced capture archive is not present under
+  `D:\Projects` in this checkout. A recycle-bin ZIP of that archive was found
+  and inspected in place without restoring or modifying it. The source confirms
+  eight artist cards (portrait, role, name) and four program descriptions; no
+  copies of the three missing remote media files were present. The shared
+  contract, studio editor, invitation save/reopen shape, and Wedding adapter now
+  support localized artist lineup and per-program descriptions. Source examples
+  are held only in the canonical preview fixture; new invitations start empty.
+  Direct retries of the three referenced media URLs again returned HTTP 404,
+  404, and 403.
+  Focused contract/fixture/adapter tests pass 5/5 and web typecheck passes.
+  The configured integration test could not be rerun because
+  `apps/web/.env.local`, `DATABASE_URL`, `APP_URL`, and a local app server are
+  absent. Missing garden-strip, program-background, and location-video assets
+  remain publication blockers; RSVP verification is deferred for this pass.
 
 ## Invitate Safir implementation status (2026-10-23)
 
@@ -368,6 +409,20 @@
   unpublished. The public catalog excluded Orchid. No Orchid invitation exists,
   so saved-draft reopen and public invitation lifecycle checks remain open.
   Keep unpublished until the remaining non-RSVP integration gates pass.
+- Source comparison follow-up (2026-10-26): the untouched recovered source frame
+  and package were compared at 1280×720 after the reveal settled. The hero's
+  text, local fonts, and element positions match; an earlier apparent vertical
+  offset was a transient animation frame. The isolated platform stylesheet now
+  matches source hero, event-card, story-grid, wish-field, and lightbox styling.
+  The package also uses the source's viewport-sized inner scroller and reserved
+  scrollbar width (1265px content width in a 1280px viewport); opening and
+  back-to-top now scroll that container. All nine section starts and heights,
+  plus total scroll height (7850px), match with source-matched content and the
+  seven missing source image URLs fulfilled using the exact verified package
+  bytes. The recovered
+  archive frame enabled this comparison even though the current public
+  source-preview URL returns 404. Reduced-motion differences remain an
+  intentional accessibility adaptation.
 
 ## Invitate Velvet source preflight (2026-10-23)
 
@@ -416,7 +471,9 @@
 - Full-archive audit: the original React component and motion declarations are present in shared compiled chunk `Web invitations/_next/static/chunks/0dg.9_70mpb0j.js` (module 99664), although no standalone Palace Rose script or stylesheet is captured. Its portable source depends on Chorlove app modules and providers, so the isolated renderer retains the captured template DOM/shared CSS and maps the shared invitation contract in a separate adapter. The component references eight additional gift-box images: three exist only under another template and are excluded; five are absent from the complete archive. Provenance records the bundle hash and this exact gap.
 - Palace Rose is registered as unpublished, wedding-category, wedding-event-only at 150,000 UZS. Migration `0119_register_palace_rose.sql` is applied; the configured database confirms `published=false`. The 17 exact manifest artwork files are byte-identical in the package; only its opening art uses the actual renderer and canonical preview values at 450×800 portrait. The fresh app preview maps six program rows, calendar/countdown, venue, wishes, RSVP, To‘yona, contacts, and locales. Focused source/contract tests (3/3), JavaScript syntax check, web typecheck, and production build pass. A browser check confirms all four locale controls and six program rows; reduced-motion opening has no petal animation and no console errors. Source-to-app motion comparison, public/preview parity, and full service interaction QA remain. Keep it unpublished until those checks pass. These are implementation gates, not rights checks.
 
-- Preview-media and receipt follow-up (2026-10-26): the canonical shared fixture now maps Palace Rose's six source demo gallery photos and venue photo only into catalog/initial-selection previews. Exact source/package gallery bytes and hashes are recorded in `apps/web/public/templates/palace-rose/source/provenance.json`; the Palace poster is the actual 450x800 renderer opening image. Empty creator/public photo gallery and venue slots remain hidden. Temporary QA-only dummy receipt content was never submitted or saved; source/package modal controls match at 1280x678 and 390x678, and both fit 390x500 with scrollable inner content and visible close control. File selection shows its name without a thumbnail. Database-backed public route and actual editor receipt lifecycle remain unverified; keep Palace Rose unpublished.
+- Matched browser follow-up (2026-10-26): the earlier date/host binding and empty-gallery findings remain as recorded. Compared the archived capture running its original compiled module (port 3004) and packaged renderer at 1280×720. The template root now matches the source's full-width, 720px internal scroller and white outer gutters; total scroll heights differ with the source-demo versus shared-preview fixture content. Reveal selection no longer mistakes `opacity:0.7` ornaments for hidden nodes. Detail, calendar, venue, program-row, wishes, and gift reveal timings/thresholds follow the recovered component; opening still uses 12 petals. To‘yona has the source backdrop/panel/card geometry after the empty receipt host is removed from the flex flow; backdrop, close, Escape, and copy interactions remain. Reduced-motion source/code evidence remains as recorded: the captured CSS disables its motion classes for the native preference, while package `qaReducedMotion=1` removes petals, reveals content immediately, and opens without transition. Browser controls cannot toggle the native preference. Focused Palace Rose tests (5/5), JavaScript syntax, and web typecheck pass. Public DB and editor-draft/receipt lifecycle checks remain separate; Palace Rose stays unpublished.
+
+- Preview-media and receipt follow-up (2026-10-26): the canonical shared fixture now maps Palace Rose's six source demo gallery photos and the venue photo only into catalog/initial-selection previews. Exact source/package gallery bytes and hashes are recorded in `apps/web/public/templates/palace-rose/source/provenance.json`; the Palace poster is the actual 450×800 renderer opening image. Empty creator/public photo gallery and venue slots remain hidden. Temporary QA-only dummy receipt content was never submitted or saved; source/package modal controls match at 1280×678 and 390×678, and both fit 390×500 with scrollable inner content and visible close control. File selection shows its name without a thumbnail. Database-backed public route and actual editor receipt lifecycle remain unverified; keep Palace Rose unpublished.
 
 ## Chorlove Osh source recovery and implementation (2026-10-23)
 
@@ -425,7 +482,7 @@
 - Recovered the exact component/CSS chunk from `Invitations - this folder will be removed from production/Chorlove/Web invitations/_next/static/chunks/0r~7st8t0.ow1.js` (module 753736), the exact palov art from `Web invitations/images/palov/palov.png`, and Cormorant Garamond from `Web invitations/fonts/CormorantGaramond-Regular.ttf`. The chunk declares Forum through Google Fonts; the matching TTF was packaged locally. The complete archive still has no authentic local catalog portrait; the snapshot metadata points to a remote payment media image.
 - Osh now has an isolated source package under `apps/web/public/templates/chorlove/osh`, shared-contract renderer routing through catalog, creator and public views, and a typed `osh`-category/`osh`-event registry entry. Migration `0119_register_chorlove_osh.sql` was applied alone under the migration advisory lock because unrelated Swan and Velvet migrations were pending. Database confirms `published=false`, 150,000 UZS, category `osh`, and event support `osh`.
 - The Osh source frame uses local art/fonts and a dedicated shared-contract bridge for localized content, venue/map, contacts, reduced motion, preview-only fixture rendering and the real RSVP endpoint. Its authentic 778×1686 portrait catalog opening was recovered from the exact metadata media URL and packaged as `preview.jpg`. Browser review confirms the source-styled opening, venue/map, RSVP and closing sections render; `qaReducedMotion=1` opens without the animated entrance. A synthetic local published-invitation fixture verified the public route returns 200 with the Osh iframe and bound fixture names, and the RSVP API returns 201 and stores one response; its temporary data and rate-limit entry were deleted. A disposable creator session also verified draft save (201), reopen (200), updated content and incremented revision. Publish correctly returned 409 `TEMPLATE_UNAVAILABLE` while `templates.published=false`; the disposable draft, session and account were cleaned up. The catalog API omits Osh. `node --check`, web typecheck, and production build pass; the packaged HTML contains no captured sample names. Keep Osh unpublished. A successful authenticated publish → public render → reopen cycle depends on enabling the catalog row first; no user account or credential was required for the checks completed. See `apps/web/public/templates/chorlove/osh/SOURCE_ADAPTATIONS.md` for mappings and remaining gates.
-- Source-fidelity follow-up (2026-10-23): the exact chunk stylesheet and isolated `.osh-sheet` were compared with the app package at matching 1280×720 viewports in normal and reduced-motion modes. The original CSS design, source SVG/section composition, local fonts and assets are retained; Framer Motion viewport reveals are adapted with equivalent opacity/y=28, .7s ease-out and .2 visibility threshold. Normal/reduced opening renders were visually reviewed. Browser interaction verified the source RSVP yes-only party-size stepper and its increment/decrement state; its hidden state is also marked aria-hidden. The source's success/change-answer view is included. Music uses the app's opt-in direct-audio URL with source-style control and fade; the source YouTube IFrame API path is unsupported because the shared music contract provides direct audio only. Provider sample music and host wrapper are excluded. Instagram is omitted because the shared contact contract has no Instagram field. See `SOURCE_ADAPTATIONS.md`; keep unpublished.
+- Matched source/package follow-up (2026-10-25): the archived preview frame and source chunk were compared with the real `/preview?template=osh` renderer at 1280×720. The audit found that the package referenced `osh-suzani` but omitted the source's hidden SVG pattern definition; the exact source block is restored, and the woven opening now matches. Source palette, composition, typography, opening animation timing, and viewport reveal behavior match; `qaReducedMotion=1` suppresses entrance/reveal motion. The isolated package uses source Palov artwork and local Cormorant/Forum fonts; metadata's exact 778×1686 first-page cover is `preview.jpg`, with hashes in provenance. The real renderer supplies preview/creator data and exposes only RSVP name, yes/no, and submit. The user-approved no-headcount rule overrides the source stepper: yes submits `partySize=1`, no submits `0`, both accepted by the API contract. Template music remains opt-in and supports creator direct audio plus source YouTube URL forms; provider sample audio/runtime is excluded. Telegram, Instagram, and phone map to typed contacts; source has no schedule, To’yona/gift/card, or wishes section. No further source-backed opening/style/motion gap was found. The focused suite passes 3/3. Osh remains unpublished pending the documented creator-publish → public-render → reopen lifecycle; RSVP service checks are not a blocker, and no deployment or live payment activation is included.
 
 ## Published-template source-fidelity audit, batches 1–4 (2026-10-23)
 
@@ -623,7 +680,7 @@
 
 - Restored `source/preview-frame.html` byte-for-byte from the sole canonical entry in `Chorlove/capture-manifest.json` (90,075 bytes; SHA-256 `d7ba584a…204a8`). Refreshed the shared fixture hash to `54017a29…8871`.
 - Replaced the UI-contaminated cover with a 390×720 full-viewport capture of the packaged renderer's floral opening. It has no crop or resize; browser/app UI, language selector, scrollbar, and development portal are excluded. Provenance records source, fixture, and artifact checksums.
-- Green Garden's own floral artwork remains available in previews. The captured gallery URLs point to Orchid Amplop sample photos, so those cross-template photos remain excluded. Six empty shared-fixture gallery slots are preview-only; authored creator images replace them, and public invitations hide the optional gallery until an authored image exists.
+- User correction (2026-10-26): Green Garden's captured source preview directly uses six Orchid Amplop gallery photos in a fixed sequence and a venue sample photograph. Use these exact source media in the catalog and blank initial-selection previews only; keep them out of invitation storage/publication. Creator uploads replace preview photos, and hide the gallery in creator/public views when no creator image is present. This template-specific source use supersedes the earlier exclusion of these six photos for Green Garden; it does not authorize unrelated sample imagery.
 - Focused Green Garden checks pass 6/6 and `node --check` passes. Publication, price, and event compatibility are unchanged; To'yona card details remain contract-bound.
 
 ### Glass Pink raw source and preview-media repair (2026-10-23)
@@ -1369,15 +1426,22 @@ Development agents are distinct from production queue workers. The running app w
   displaying or saving sample age data. The catalog artwork uses the exact
   portrait hero image supplied by the source capture.
 - RSVP and wishes use the public invitation APIs; gift details use approved
-  card fields and receipt uploads use the shared private receipt flow. Local
-  browser checks passed at desktop and 390×844, including long names and
-  preview RSVP blocking. Focused Golden Hour checks and web typecheck pass. A
-  matched-viewport browser comparison of the
-  original capture and app copy, including reduced-motion parity, remains
-  unverified: browser policy blocked the captured `file:` URL and disallowed
-  reaching that file through an alternate serving path. The full repository
-  suite has failures in unrelated concurrent template tests. Keep Golden Hour
-  unpublished until source fidelity and remaining release checks are verified.
+  card fields and receipt uploads use the shared private receipt flow. A
+  normal-motion comparison against the live source and app preview is complete
+  at 390×844 and 1280×720. Hero image/crop, centered desktop column,
+  typography, location, and dress-code styling match. Contract-driven preview
+  copy omits source demo age/tagline/signature; the shared birthday fixture
+  swatches differ from the source demo palette. Both pages had no browser
+  console errors. The browser reports reduced motion as false and this session
+  cannot emulate it, so runtime parity under that preference is unverified;
+  CSS reduction rules and focused source checks are present.
+- A disposable draft row passed `saveInvitation` and `getOwnedInvitation`
+  reload at revision 2 and was deleted afterward. Creator UI save/reopen and
+  public route/API checks remain incomplete while private. The local catalog
+  endpoint excludes Golden Hour and reports `configured: false`; the current
+  shell has no `DATABASE_URL`. Current web typecheck is blocked by unrelated
+  Invitate Wedding fields in the shared preview fixture. Keep Golden Hour
+  unpublished until reduced-motion runtime and creator/public route checks pass.
 
 ## Invitate Butterfly implementation status (2026-10-23)
 
@@ -1391,25 +1455,47 @@ Development agents are distinct from production queue workers. The running app w
   applied to the configured database; its row is verified at 15,000,000 UZS,
   wedding category/event, `published=false`. Keep the typed entry private.
 - The source has no program, RSVP, gift/to'yona, dress-code, contact, or guest
-  wishes UI. Whether to add shared sections or accept these omissions remains
-  unresolved. Do not publish or make selectable until this product decision
-  and the remaining browser, persistence, and typecheck gates are resolved.
+  wishes UI. User decision (2026-10-25): preserve the reference and do not add
+  these absent sections; treat them as source-absent optional content, not a
+  product blocker. Map supported fields and keep unsupported optional content
+  hidden. RSVP verification is explicitly deferred.
+- Follow-up (2026-10-25): full web `tsc --noEmit` passes; focused Butterfly
+  tests pass 3/3, `node --check` passes, and scoped `git diff --check` passes.
+  The 2026-10-24 local app run returned HTTP 200 for the real preview route,
+  packaged source page, and authentic portrait cover. No app listener or
+  browser tab was available today, and `DATABASE_URL` is unset, so no fresh
+  route or database/catalog check was possible. The source-absence decision is
+  resolved above. Authenticated save/reopen and fresh DB/catalog verification
+  remain unavailable because `DATABASE_URL` and the local app server are
+  absent; keep the template unpublished until those checks pass.
 
 ## Invitate Fairy implementation status (2026-10-23)
 
 - Exact source is Invitate `Web invitations/invitate.uz/fairy.html` with its
   manifest-referenced CSS, JavaScript, image, font, and audio assets. Use ID
-  `fairy`, wedding category/event compatibility, 150,000 UZS, and reserved
-  additive migration 0123; keep it private pending release gates.
+  `fairy`, wedding category/event compatibility, 150,000 UZS, and additive
+  migration `0123_register_fairy_template.sql`. Prior read-only DB inspection
+  confirmed the migration is applied and the row is unpublished. The current
+  checkout's app environment is separate and has no configured database.
 - The isolated source package is integrated through the shared Invitate
   renderer for preview and public routes. It maps names, greetings, date,
   program, venue/map, dress code, music, contacts, RSVP, and wishes in the four
   supported locales. The captured page has no gallery or family/host fields;
   an optional localized To‘yona section is added per the established Invitate
   requirement and stays hidden unless enabled with a card number.
-- Source-authentic portrait opening art uses ephemeral shared preview fixture
-  data; original captures are untouched. Local checks cover all four locales,
-  long names, preview RSVP blocking, source-handler removal, and typed wedding
-  registration. Keep private: reduced-motion preference emulation and DB
-  migration application remain pending. Migration sequencing has conflicting
-  existing files, and `DATABASE_URL` is not configured in this checkout.
+- Source-authentic 480×850 portrait opening art uses ephemeral shared preview
+  fixture data; original captures are untouched. Local checks cover all four
+  locales, long names, To‘yona, preview RSVP failure handling, source-handler
+  removal, and typed wedding registration. The isolated package is committed
+  as `eda7db21`; the shared renderer/doc edits remain unstaged.
+- Follow-up (2026-10-25): a disposable browser-local creator draft with names
+  `Fairy QA` / `Malika QA` survived reload, and the full
+  `/preview?template=fairy&draft=…` route rendered those names through the
+  shared Fairy frame. This confirms browser-local draft recovery and preview
+  rendering only. The local `/api/auth/session` reports `configured:false` and
+  missing `DATABASE_URL`, `APP_URL`, `SESSION_SECRET`, and Telegram settings;
+  clicking Save also displayed that Telegram saving is not configured and the
+  draft stays in this browser. No DB-backed invitation save/reopen or actual
+  `/i/[slug]` public route was possible. Keep Fairy unpublished until those
+  non-RSVP checks can pass. Per user decision, RSVP/wishes verification may be
+  deferred and handled later; do not claim it is verified.

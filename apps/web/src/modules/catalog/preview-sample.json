@@ -5,15 +5,24 @@
   "startsAt": "2027-06-12T17:00",
   "timezone": "Asia/Tashkent",
   "templateSamples": {
-    "palace-rose": {
-      "venuePhoto": "https://images.unsplash.com/photo-1712314947761-a8d718bd8c32?w=1400&h=1000&fit=crop&auto=format&q=80",
+    "lace": {
       "gallery": [
-        { "id": "palace-rose-source-preview-1", "url": "/templates/chorlove/orchid-amplop/assets/gallery-2.webp", "alt": "Wedding photo 1", "caption": "" },
-        { "id": "palace-rose-source-preview-2", "url": "/templates/chorlove/orchid-amplop/assets/gallery-1.webp", "alt": "Wedding photo 2", "caption": "" },
-        { "id": "palace-rose-source-preview-3", "url": "/templates/chorlove/orchid-amplop/assets/gallery-3.webp", "alt": "Wedding photo 3", "caption": "" },
-        { "id": "palace-rose-source-preview-4", "url": "/templates/chorlove/orchid-amplop/assets/gallery-6.webp", "alt": "Wedding photo 4", "caption": "" },
-        { "id": "palace-rose-source-preview-5", "url": "/templates/chorlove/orchid-amplop/assets/gallery-4.webp", "alt": "Wedding photo 5", "caption": "" },
-        { "id": "palace-rose-source-preview-6", "url": "/templates/chorlove/orchid-amplop/assets/gallery-5.webp", "alt": "Wedding photo 6", "caption": "" }
+        { "id": "lace-source-preview-1", "url": "/templates/lace/assets/gallery-2.webp", "alt": "", "caption": "" },
+        { "id": "lace-source-preview-2", "url": "/templates/lace/assets/gallery-1.webp", "alt": "", "caption": "" },
+        { "id": "lace-source-preview-3", "url": "/templates/lace/assets/gallery-3.webp", "alt": "", "caption": "" },
+        { "id": "lace-source-preview-4", "url": "/templates/lace/assets/gallery-6.webp", "alt": "", "caption": "" },
+        { "id": "lace-source-preview-5", "url": "/templates/lace/assets/gallery-4.webp", "alt": "", "caption": "" },
+        { "id": "lace-source-preview-6", "url": "/templates/lace/assets/gallery-5.webp", "alt": "", "caption": "" }
+      ]
+    },
+    "green-gold": {
+      "gallery": [
+        { "id": "green-gold-source-preview-1", "url": "/templates/chorlove/orchid-amplop/assets/gallery-2.webp", "alt": "", "caption": "" },
+        { "id": "green-gold-source-preview-2", "url": "/templates/chorlove/orchid-amplop/assets/gallery-1.webp", "alt": "", "caption": "" },
+        { "id": "green-gold-source-preview-3", "url": "/templates/chorlove/orchid-amplop/assets/gallery-3.webp", "alt": "", "caption": "" },
+        { "id": "green-gold-source-preview-4", "url": "/templates/chorlove/orchid-amplop/assets/gallery-6.webp", "alt": "", "caption": "" },
+        { "id": "green-gold-source-preview-5", "url": "/templates/chorlove/orchid-amplop/assets/gallery-4.webp", "alt": "", "caption": "" },
+        { "id": "green-gold-source-preview-6", "url": "/templates/chorlove/orchid-amplop/assets/gallery-5.webp", "alt": "", "caption": "" }
       ]
     },
     "luxury-gold": {
@@ -26,6 +35,17 @@
         { "id": "luxury-gold-source-preview-6", "url": "/templates/chorlove/orchid-amplop/assets/gallery-5.webp", "alt": "", "caption": "" }
       ]
     },
+    "palace-rose": {
+      "venuePhoto": "https://images.unsplash.com/photo-1712314947761-a8d718bd8c32?w=1400&h=1000&fit=crop&auto=format&q=80",
+      "gallery": [
+        { "id": "palace-rose-source-preview-1", "url": "/templates/chorlove/orchid-amplop/assets/gallery-2.webp", "alt": "Wedding photo 1", "caption": "" },
+        { "id": "palace-rose-source-preview-2", "url": "/templates/chorlove/orchid-amplop/assets/gallery-1.webp", "alt": "Wedding photo 2", "caption": "" },
+        { "id": "palace-rose-source-preview-3", "url": "/templates/chorlove/orchid-amplop/assets/gallery-3.webp", "alt": "Wedding photo 3", "caption": "" },
+        { "id": "palace-rose-source-preview-4", "url": "/templates/chorlove/orchid-amplop/assets/gallery-6.webp", "alt": "Wedding photo 4", "caption": "" },
+        { "id": "palace-rose-source-preview-5", "url": "/templates/chorlove/orchid-amplop/assets/gallery-4.webp", "alt": "Wedding photo 5", "caption": "" },
+        { "id": "palace-rose-source-preview-6", "url": "/templates/chorlove/orchid-amplop/assets/gallery-5.webp", "alt": "Wedding photo 6", "caption": "" }
+      ]
+    },
     "green-white": {
       "gallery": [
         { "id": "green-white-source-preview-1", "url": "/templates/chorlove/orchid-amplop/assets/gallery-2.webp", "alt": "", "caption": "" },
@@ -34,6 +54,26 @@
         { "id": "green-white-source-preview-4", "url": "/templates/chorlove/orchid-amplop/assets/gallery-6.webp", "alt": "", "caption": "" },
         { "id": "green-white-source-preview-5", "url": "/templates/chorlove/orchid-amplop/assets/gallery-4.webp", "alt": "", "caption": "" },
         { "id": "green-white-source-preview-6", "url": "/templates/chorlove/orchid-amplop/assets/gallery-5.webp", "alt": "", "caption": "" }
+      ]
+    },
+    "green-garden": {
+      "gallery": [
+        { "id": "green-garden-source-preview-1", "url": "/templates/chorlove/orchid-amplop/assets/gallery-2.webp", "alt": "", "caption": "" },
+        { "id": "green-garden-source-preview-2", "url": "/templates/chorlove/orchid-amplop/assets/gallery-1.webp", "alt": "", "caption": "" },
+        { "id": "green-garden-source-preview-3", "url": "/templates/chorlove/orchid-amplop/assets/gallery-3.webp", "alt": "", "caption": "" },
+        { "id": "green-garden-source-preview-4", "url": "/templates/chorlove/orchid-amplop/assets/gallery-6.webp", "alt": "", "caption": "" },
+        { "id": "green-garden-source-preview-5", "url": "/templates/chorlove/orchid-amplop/assets/gallery-4.webp", "alt": "", "caption": "" },
+        { "id": "green-garden-source-preview-6", "url": "/templates/chorlove/orchid-amplop/assets/gallery-5.webp", "alt": "", "caption": "" }
+      ],
+      "venuePhoto": "/templates/green-garden/assets/preview-venue.jpg"
+    },
+    "cloud-castle": {
+      "gallery": [
+        { "id": "cloud-castle-source-preview-1", "url": "/templates/cloud-castle/assets/gallery/gallery-2.webp", "alt": "", "caption": "" },
+        { "id": "cloud-castle-source-preview-2", "url": "/templates/cloud-castle/assets/gallery/gallery-1.webp", "alt": "", "caption": "" },
+        { "id": "cloud-castle-source-preview-3", "url": "/templates/cloud-castle/assets/gallery/gallery-3.webp", "alt": "", "caption": "" },
+        { "id": "cloud-castle-source-preview-4", "url": "/templates/cloud-castle/assets/gallery/gallery-6.webp", "alt": "", "caption": "" },
+        { "id": "cloud-castle-source-preview-5", "url": "/templates/cloud-castle/assets/gallery/gallery-4.webp", "alt": "", "caption": "" }
       ]
     },
     "modern-floral": {
@@ -49,42 +89,12 @@
     "orchid-amplop": {
       "venuePhoto": "/templates/chorlove/orchid-amplop/assets/gallery-5.webp",
       "gallery": [
-        {
-          "id": "orchid-amplop-source-preview-1",
-          "url": "/templates/chorlove/orchid-amplop/assets/gallery-2.webp",
-          "alt": "",
-          "caption": ""
-        },
-        {
-          "id": "orchid-amplop-source-preview-2",
-          "url": "/templates/chorlove/orchid-amplop/assets/gallery-1.webp",
-          "alt": "",
-          "caption": ""
-        },
-        {
-          "id": "orchid-amplop-source-preview-3",
-          "url": "/templates/chorlove/orchid-amplop/assets/gallery-3.webp",
-          "alt": "",
-          "caption": ""
-        },
-        {
-          "id": "orchid-amplop-source-preview-4",
-          "url": "/templates/chorlove/orchid-amplop/assets/gallery-6.webp",
-          "alt": "",
-          "caption": ""
-        },
-        {
-          "id": "orchid-amplop-source-preview-5",
-          "url": "/templates/chorlove/orchid-amplop/assets/gallery-4.webp",
-          "alt": "",
-          "caption": ""
-        },
-        {
-          "id": "orchid-amplop-source-preview-6",
-          "url": "/templates/chorlove/orchid-amplop/assets/gallery-5.webp",
-          "alt": "",
-          "caption": ""
-        }
+        { "id": "orchid-amplop-source-preview-1", "url": "/templates/chorlove/orchid-amplop/assets/gallery-2.webp", "alt": "", "caption": "" },
+        { "id": "orchid-amplop-source-preview-2", "url": "/templates/chorlove/orchid-amplop/assets/gallery-1.webp", "alt": "", "caption": "" },
+        { "id": "orchid-amplop-source-preview-3", "url": "/templates/chorlove/orchid-amplop/assets/gallery-3.webp", "alt": "", "caption": "" },
+        { "id": "orchid-amplop-source-preview-4", "url": "/templates/chorlove/orchid-amplop/assets/gallery-6.webp", "alt": "", "caption": "" },
+        { "id": "orchid-amplop-source-preview-5", "url": "/templates/chorlove/orchid-amplop/assets/gallery-4.webp", "alt": "", "caption": "" },
+        { "id": "orchid-amplop-source-preview-6", "url": "/templates/chorlove/orchid-amplop/assets/gallery-5.webp", "alt": "", "caption": "" }
       ],
       "story": [
         {
@@ -108,6 +118,25 @@
           }
         }
       ]
+    },
+    "love-sakura": {
+      "gallery": [
+        { "id": "love-sakura-source-preview-1", "url": "/templates/love-sakura/assets/hero-couple.webp", "alt": "", "caption": "" },
+        { "id": "love-sakura-source-preview-2", "url": "/templates/love-sakura/assets/bride.webp", "alt": "", "caption": "" },
+        { "id": "love-sakura-source-preview-3", "url": "/templates/love-sakura/assets/groom.webp", "alt": "", "caption": "" },
+        { "id": "love-sakura-source-preview-4", "url": "/templates/love-sakura/assets/hero-couple.webp", "alt": "", "caption": "" },
+        { "id": "love-sakura-source-preview-5", "url": "/templates/love-sakura/assets/bride.webp", "alt": "", "caption": "" },
+        { "id": "love-sakura-source-preview-6", "url": "/templates/love-sakura/assets/groom.webp", "alt": "", "caption": "" }
+      ]
+    },
+    "jasmine-white": {
+      "gallery": [
+        { "id": "jasmine-white-source-preview-1", "url": "/templates/jasmine-white/assets/fcd26341-5041-40ad-9cc9-d69a47422378.webp", "alt": "Wedding photo 1", "caption": "" },
+        { "id": "jasmine-white-source-preview-2", "url": "/templates/jasmine-white/assets/d1c749b4-edb3-4312-84b6-414459c3d89c.webp", "alt": "Wedding photo 2", "caption": "" },
+        { "id": "jasmine-white-source-preview-3", "url": "/templates/jasmine-white/assets/90085094-65d3-45d4-82da-de8d127a859c.webp", "alt": "Wedding photo 3", "caption": "" },
+        { "id": "jasmine-white-source-preview-4", "url": "/templates/jasmine-white/assets/d0db2a4e-83f8-4b84-a46d-fc2fefe45cfa.webp", "alt": "Wedding photo 4", "caption": "" }
+      ],
+      "venuePhoto": "https://images.unsplash.com/photo-1712314947761-a8d718bd8c32?w=1400&h=1000&fit=crop&auto=format&q=80"
     },
     "invitate-wedding": {
       "program": [
@@ -145,6 +174,16 @@
         { "id": "sample-artist-jahongir", "name": { "uz-Latn": "Jahongir Otajonov", "uz-Cyrl": "Жаҳонгир Отажонов", "en": "Jahongir Otajonov", "ru": "Жаҳонгир Отажонов" }, "role": { "uz-Latn": "Jonli ijro qiroli", "uz-Cyrl": "Жонли ижро қироли", "en": "Live music performer", "ru": "Исполнитель живой музыки" }, "imageUrl": "/templates/invitate-wedding/assets/images/wedding/jahongir.png" },
         { "id": "sample-artist-sevara", "name": { "uz-Latn": "Sevara Nazarxon", "uz-Cyrl": "Севара Назархон", "en": "Sevara Nazarxon", "ru": "Севара Назархон" }, "role": { "uz-Latn": "Jozibali san’atkor", "uz-Cyrl": "Жозибали санъаткор", "en": "Singer", "ru": "Певица" }, "imageUrl": "/templates/invitate-wedding/assets/images/wedding/sevar.png" },
         { "id": "sample-artist-munisa", "name": { "uz-Latn": "Munisa Rizayeva", "uz-Cyrl": "Муниса Ризаева", "en": "Munisa Rizayeva", "ru": "Муниса Ризаева" }, "role": { "uz-Latn": "Go‘zal va betakror san’atkor", "uz-Cyrl": "Гўзал ва бетакрор санъаткор", "en": "Singer", "ru": "Певица" }, "imageUrl": "/templates/invitate-wedding/assets/images/wedding/munisa.png" }
+      ]
+    },
+    "glass-pink": {
+      "gallery": [
+        { "id": "glass-pink-source-preview-1", "url": "/templates/chorlove/orchid-amplop/assets/gallery-2.webp", "alt": "Gallery photo 1", "caption": "" },
+        { "id": "glass-pink-source-preview-2", "url": "/templates/chorlove/orchid-amplop/assets/gallery-1.webp", "alt": "Gallery photo 2", "caption": "" },
+        { "id": "glass-pink-source-preview-3", "url": "/templates/chorlove/orchid-amplop/assets/gallery-3.webp", "alt": "Gallery photo 3", "caption": "" },
+        { "id": "glass-pink-source-preview-4", "url": "/templates/chorlove/orchid-amplop/assets/gallery-6.webp", "alt": "Gallery photo 4", "caption": "" },
+        { "id": "glass-pink-source-preview-5", "url": "/templates/chorlove/orchid-amplop/assets/gallery-4.webp", "alt": "Gallery photo 5", "caption": "" },
+        { "id": "glass-pink-source-preview-6", "url": "/templates/chorlove/orchid-amplop/assets/gallery-5.webp", "alt": "Gallery photo 6", "caption": "" }
       ]
     }
   },

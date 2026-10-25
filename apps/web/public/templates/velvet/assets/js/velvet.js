@@ -12,14 +12,17 @@ document.addEventListener("DOMContentLoaded", function () {
   window.addEventListener("resize", setVh);
   setVh();
   const motionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const shouldReduceMotion = () =>
+    motionPreference.matches || !!window.velvetReducedMotion;
   const syncVideoMotion = () => {
     document.querySelectorAll("video[autoplay]").forEach((video) => {
-      if (motionPreference.matches) video.pause();
+      if (shouldReduceMotion()) video.pause();
       else video.play().catch(() => {});
     });
   };
   syncVideoMotion();
   motionPreference.addEventListener?.("change", syncVideoMotion);
+  document.addEventListener("velvet:motion", syncVideoMotion);
 
   // Slider unlock logic
   const sliderHandle = document.querySelector(".slider-handle");
@@ -66,7 +69,7 @@ document.addEventListener("DOMContentLoaded", function () {
     startAudioPlayback();
     setTimeout(function () {
       loadingScreen.remove();
-    }, motionPreference.matches ? 0 : 1200);
+    }, shouldReduceMotion() ? 0 : 1200);
   }
   sliderHandle.addEventListener("mousedown", startDrag);
   document.addEventListener("mousemove", drag);

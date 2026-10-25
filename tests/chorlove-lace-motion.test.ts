@@ -31,6 +31,7 @@ const zoomVendor = readFileSync(`${sourceRoot}/_next/static/chunks/0jsw~n6ojplnf
 const thumbnailVendor = readFileSync(`${sourceRoot}/_next/static/chunks/0axwbwbrzg9nc.js`, "utf8");
 const css = readFileSync(`${packageRoot}/adapter.css`, "utf8");
 const chorloveRenderer = readFileSync("apps/web/src/templates/chorlove/renderer.tsx", "utf8");
+const previewSample = JSON.parse(readFileSync("apps/web/src/modules/catalog/preview-sample.json", "utf8")) as { templateSamples: Record<string, { gallery?: Array<{ url: string }> }> };
 const normalizeLines = (value: string) => value.replace(/\r\n/g, "\n");
 
 test("Lace source capture and motion module remain tied to the archived originals", () => {
@@ -98,15 +99,27 @@ test("Lace gallery photo files match the exact source image bytes and active ord
     assert.equal(sha256(archived), expectedHash, `${file} source hash`);
     assert.equal(sha256(packaged), expectedHash, `${file} package hash`);
   }
-  assert.match(chorloveRenderer, /gallery-2\.webp.*gallery-1\.webp.*gallery-3\.webp.*gallery-6\.webp.*gallery-4\.webp.*gallery-5\.webp/s);
+  assert.deepEqual(previewSample.templateSamples.lace?.gallery?.map(({ url }) => url), [
+    "/templates/lace/assets/gallery-2.webp",
+    "/templates/lace/assets/gallery-1.webp",
+    "/templates/lace/assets/gallery-3.webp",
+    "/templates/lace/assets/gallery-6.webp",
+    "/templates/lace/assets/gallery-4.webp",
+    "/templates/lace/assets/gallery-5.webp",
+  ]);
 });
 
 test("Lace initial selection preview uses the source sample gallery and creator photos replace it", () => {
-  assert.match(chorloveRenderer, /templateId === "lace"/);
-  assert.match(chorloveRenderer, /preview && sampleWishes && !hasCreatorPhotos/);
-  for (const file of ["gallery-2.webp", "gallery-1.webp", "gallery-3.webp", "gallery-6.webp", "gallery-4.webp", "gallery-5.webp"]) {
-    assert.ok(chorloveRenderer.includes(file), `missing source preview gallery image ${file}`);
-  }
+  assert.deepEqual(previewSample.templateSamples.lace?.gallery?.map(({ url }) => url), [
+    "/templates/lace/assets/gallery-2.webp",
+    "/templates/lace/assets/gallery-1.webp",
+    "/templates/lace/assets/gallery-3.webp",
+    "/templates/lace/assets/gallery-6.webp",
+    "/templates/lace/assets/gallery-4.webp",
+    "/templates/lace/assets/gallery-5.webp",
+  ]);
+  assert.doesNotMatch(chorloveRenderer, /templateId === "lace"/);
+  assert.match(chorloveRenderer, /makeLegacyData\(invitation, frameLocale, guestName, sampleWishes\)/);
   assert.match(bridge, /const entries=gallery\.filter\(\(item\)=>item\.src\)/);
   assert.doesNotMatch(bridge, /lace-empty-photo/);
 });

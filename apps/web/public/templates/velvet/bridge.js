@@ -127,6 +127,12 @@
   function apply(d) {
     data = d;
     window.velvetLocale = d.locale;
+    window.velvetReducedMotion = !!d.qaReducedMotion;
+    document.documentElement.classList.toggle(
+      "velvet-reduced-motion",
+      window.velvetReducedMotion,
+    );
+    document.dispatchEvent(new Event("velvet:motion"));
     const t = copy[d.locale] || copy.ru,
       p = d.people || [];
     window.velvetUi = t;
@@ -244,7 +250,7 @@
     const map = document.querySelector("#venue-map");
     if (map) {
       map.href = d.mapUrl || "#";
-      map.textContent = t.map;
+      map.textContent = d.ui?.map || t.map || "";
       map.hidden = !d.mapUrl;
     }
     const audio = document.querySelector("#background-music");

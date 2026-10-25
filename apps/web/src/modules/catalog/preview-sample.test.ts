@@ -83,9 +83,25 @@ test("template samples are illustrative complete invitations", () => {
 test("Palace Rose source photos are confined to catalog and initial-selection previews", () => {
   const preview = createTemplatePreviewSample("palace-rose");
   const creatorDraft = createInvitation("palace-rose");
-  const galleryFiles = ["gallery-2.webp", "gallery-1.webp", "gallery-3.webp", "gallery-6.webp", "gallery-4.webp", "gallery-5.webp"];
-  assert.deepEqual(preview.gallery.map(({ url, alt }) => [url, alt]), galleryFiles.map((file, index) => [`/templates/chorlove/orchid-amplop/assets/${file}`, `Wedding photo ${index + 1}`]));
-  assert.equal(getTemplatePreviewVenuePhoto("palace-rose"), "https://images.unsplash.com/photo-1712314947761-a8d718bd8c32?w=1400&h=1000&fit=crop&auto=format&q=80");
+  const galleryFiles = [
+    "gallery-2.webp",
+    "gallery-1.webp",
+    "gallery-3.webp",
+    "gallery-6.webp",
+    "gallery-4.webp",
+    "gallery-5.webp",
+  ];
+  assert.deepEqual(
+    preview.gallery.map(({ url, alt }) => [url, alt]),
+    galleryFiles.map((file, index) => [
+      `/templates/chorlove/orchid-amplop/assets/${file}`,
+      `Wedding photo ${index + 1}`,
+    ]),
+  );
+  assert.equal(
+    getTemplatePreviewVenuePhoto("palace-rose"),
+    "https://images.unsplash.com/photo-1712314947761-a8d718bd8c32?w=1400&h=1000&fit=crop&auto=format&q=80",
+  );
   assert.ok(creatorDraft.gallery.every((photo) => !photo.url && !photo.alt && !photo.caption));
 });
 
@@ -105,6 +121,37 @@ test("Modern Floral preview uses its captured gallery images only in its preview
   );
   assert.ok(otherTemplate.gallery.every((item) => !item.url));
 });
+
+test("Lace source gallery is provided by the preview fixture only", () => {
+  const sample = createTemplatePreviewSample("lace");
+  const emptyCreatorInvitation = createInvitation("lace");
+  assert.deepEqual(
+    sample.gallery.map(({ url }) => url),
+    [
+      "/templates/lace/assets/gallery-2.webp",
+      "/templates/lace/assets/gallery-1.webp",
+      "/templates/lace/assets/gallery-3.webp",
+      "/templates/lace/assets/gallery-6.webp",
+      "/templates/lace/assets/gallery-4.webp",
+      "/templates/lace/assets/gallery-5.webp",
+    ],
+  );
+  assert.ok(emptyCreatorInvitation.gallery.every((photo) => !photo.url));
+});
+
+test("Green Gold gallery photos come only from the catalog and initial-selection sample", () => {
+  const sample = createTemplatePreviewSample("green-gold");
+  const creatorDraft = createInvitation("green-gold");
+  assert.deepEqual(
+    sample.gallery.map((item) => [item.id, item.url]),
+    [2, 1, 3, 6, 4, 5].map((number, index) => [
+      `green-gold-source-preview-${index + 1}`,
+      `/templates/chorlove/orchid-amplop/assets/gallery-${number}.webp`,
+    ]),
+  );
+  assert.ok(creatorDraft.gallery.every((item) => !item.url));
+});
+
 test("Luxury Gold uses the captured demo gallery only in catalog preview samples", () => {
   const preview = createTemplatePreviewSample("luxury-gold");
   const creatorInvitation = createInvitation("luxury-gold");
@@ -115,6 +162,69 @@ test("Luxury Gold uses the captured demo gallery only in catalog preview samples
   assert.ok(creatorInvitation.gallery.every((item) => !item.url));
 });
 
+test("Green Garden preview uses its captured gallery and venue photos only as sample media", () => {
+  const sample = createTemplatePreviewSample("green-garden");
+  const blankInvitation = createInvitation("green-garden");
+  assert.deepEqual(
+    sample.gallery.map((item) => item.url),
+    [
+      "/templates/chorlove/orchid-amplop/assets/gallery-2.webp",
+      "/templates/chorlove/orchid-amplop/assets/gallery-1.webp",
+      "/templates/chorlove/orchid-amplop/assets/gallery-3.webp",
+      "/templates/chorlove/orchid-amplop/assets/gallery-6.webp",
+      "/templates/chorlove/orchid-amplop/assets/gallery-4.webp",
+      "/templates/chorlove/orchid-amplop/assets/gallery-5.webp",
+    ],
+  );
+  assert.equal(
+    getTemplatePreviewVenuePhoto("green-garden"),
+    "/templates/green-garden/assets/preview-venue.jpg",
+  );
+  assert.equal("venuePhoto" in sample, false);
+  assert.equal(getTemplatePreviewVenuePhoto("anor"), undefined);
+  assert.ok(blankInvitation.gallery.every((item) => !item.url));
+});
+
+test("Love Sakura preview uses the exact captured gallery photo order only in its preview sample", () => {
+  const loveSakura = createTemplatePreviewSample("love-sakura");
+  const otherTemplate = createTemplatePreviewSample("anor");
+  assert.deepEqual(
+    loveSakura.gallery.map((item) => item.url),
+    [
+      "/templates/love-sakura/assets/hero-couple.webp",
+      "/templates/love-sakura/assets/bride.webp",
+      "/templates/love-sakura/assets/groom.webp",
+      "/templates/love-sakura/assets/hero-couple.webp",
+      "/templates/love-sakura/assets/bride.webp",
+      "/templates/love-sakura/assets/groom.webp",
+    ],
+  );
+  assert.ok(otherTemplate.gallery.every((item) => !item.url));
+  assert.equal(hasAuthoredInvitationContent(createInvitation("love-sakura")), false);
+});
+
+test("Jasmine White previews use its captured gallery and venue photos only as preview media", () => {
+  const preview = createTemplatePreviewSample("jasmine-white");
+  const creatorDraft = createInvitation("jasmine-white");
+  assert.deepEqual(
+    preview.gallery.map((item) => item.url),
+    [
+      "/templates/jasmine-white/assets/fcd26341-5041-40ad-9cc9-d69a47422378.webp",
+      "/templates/jasmine-white/assets/d1c749b4-edb3-4312-84b6-414459c3d89c.webp",
+      "/templates/jasmine-white/assets/90085094-65d3-45d4-82da-de8d127a859c.webp",
+      "/templates/jasmine-white/assets/d0db2a4e-83f8-4b84-a46d-fc2fefe45cfa.webp",
+    ],
+  );
+  assert.deepEqual(
+    preview.gallery.map((item) => item.alt),
+    ["Wedding photo 1", "Wedding photo 2", "Wedding photo 3", "Wedding photo 4"],
+  );
+  assert.equal(
+    getTemplatePreviewVenuePhoto("jasmine-white"),
+    "https://images.unsplash.com/photo-1712314947761-a8d718bd8c32?w=1400&h=1000&fit=crop&auto=format&q=80",
+  );
+  assert.ok(creatorDraft.gallery.every((item) => !item.url));
+});
 
 test("catalog fixtures use an event type supported by each selected design", () => {
   for (const id of ["lola", "qiz-bazmi", "shahzoda", "chavandoz", "hilol", "yangi-uy"] as const) {
@@ -495,4 +605,42 @@ test("legacy contact cards migrate to optional phone and Telegram fields", () =>
     telegramUsername: "@taklifnoma",
     instagramUrl: "",
   });
+});
+
+test("Glass Pink source gallery photos stay in its preview sample only", () => {
+  const preview = createTemplatePreviewSample("glass-pink");
+  const emptyDraft = createInvitation("glass-pink");
+  assert.deepEqual(
+    preview.gallery.map(({ url, alt }) => [url, alt]),
+    [
+      ["/templates/chorlove/orchid-amplop/assets/gallery-2.webp", "Gallery photo 1"],
+      ["/templates/chorlove/orchid-amplop/assets/gallery-1.webp", "Gallery photo 2"],
+      ["/templates/chorlove/orchid-amplop/assets/gallery-3.webp", "Gallery photo 3"],
+      ["/templates/chorlove/orchid-amplop/assets/gallery-6.webp", "Gallery photo 4"],
+      ["/templates/chorlove/orchid-amplop/assets/gallery-4.webp", "Gallery photo 5"],
+      ["/templates/chorlove/orchid-amplop/assets/gallery-5.webp", "Gallery photo 6"],
+    ],
+  );
+  assert.deepEqual(emptyDraft.gallery, []);
+  assert.equal(hasAuthoredInvitationContent(emptyDraft), false);
+  assert.ok(
+    createTemplatePreviewSample("anor").gallery.every((item) => !item.url),
+  );
+
+  const sourceRoot = join(
+    process.cwd(),
+    "Invitations - this folder will be removed from production/Chorlove/Web invitations/images/templates/orchid-amplop",
+  );
+  const packagedRoot = join(
+    process.cwd(),
+    "apps/web/public/templates/chorlove/orchid-amplop/assets",
+  );
+  for (const { url } of preview.gallery) {
+    const file = url.split("/").at(-1)!;
+    assert.deepEqual(
+      readFileSync(join(packagedRoot, file)),
+      readFileSync(join(sourceRoot, file)),
+      `${file} must remain byte-identical to the Chorlove source image`,
+    );
+  }
 });

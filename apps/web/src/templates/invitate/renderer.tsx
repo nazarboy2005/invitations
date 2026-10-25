@@ -192,6 +192,7 @@ export function InvitateInvitation({
           : "",
       apiBase: `/api/public/invitations/${encodeURIComponent(invitationId)}`,
       contacts: source.contacts,
+      qaReducedMotion: preview && qaReducedMotion,
     };
   }, [
     catalogMusic,
@@ -201,6 +202,7 @@ export function InvitateInvitation({
     invitation,
     invitationId,
     preview,
+    qaReducedMotion,
     sampleWishes,
   ]);
   const veloraMessage = useMemo(() => {
@@ -281,8 +283,21 @@ export function InvitateInvitation({
         guestToken,
         invitationId,
         preview,
+        catalogMusic,
+        silentPlayback,
+        qaReducedMotion,
       ),
-    [frameLocale, guestName, guestToken, invitation, invitationId, preview],
+    [
+      catalogMusic,
+      frameLocale,
+      guestName,
+      guestToken,
+      invitation,
+      invitationId,
+      preview,
+      qaReducedMotion,
+      silentPlayback,
+    ],
   );
   const nahorgiOshMessage = useMemo(
     () =>
@@ -482,7 +497,7 @@ export function InvitateInvitation({
                       : message;
   const latest = useRef(activeMessage);
   latest.current = activeMessage;
-  const frameUrl = `/templates/${templateId}/index.html?lang=${sourceLocale[locale]}`;
+  const frameUrl = `/templates/${templateId}/index.html?lang=${sourceLocale[locale]}${preview && templateId === "estelle" && qaReducedMotion ? "&qaReducedMotion=1" : ""}`;
 
   useEffect(() => {
     const onMessage = (event: MessageEvent) => {

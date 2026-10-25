@@ -7,7 +7,7 @@ import path from "node:path";
 import { test } from "node:test";
 import { fileURLToPath } from "node:url";
 import { runInNewContext } from "node:vm";
-import { templateById } from "../packages/contracts/src/index";
+import { createInvitation, templateById } from "../packages/contracts/src/index";
 import { createTemplatePreviewSample } from "../apps/web/src/modules/catalog/preview-sample";
 
 const root = new URL("../apps/web/public/templates/green-gold/", import.meta.url);
@@ -260,13 +260,14 @@ test("Green Gold runnable adapter isolates the source sections from site runtime
   assert.match(bridge, /role", alert \? "alert" : "status"/);
   assert.match(bridge, /ArrowRight/);
   assert.match(bridge, /aria-label", alt/);
-  assert.match(bridge, /const sourcePreviewGallery = \[2, 1, 3, 6, 4, 5\]/);
+  assert.doesNotMatch(bridge, /sourcePreviewGallery/);
   assert.match(bridge, /const galleryButtons = \[\.\.\.section\.querySelectorAll\("button"\)\]/);
   assert.match(bridge, /galleryButtons\.forEach/);
-  assert.match(bridge, /const hasCreatorImages = gallery\.some\(\(item\) => item\?\.src\)/);
-  assert.match(bridge, /preview && !hasCreatorImages/);
+  assert.match(bridge, /gallery\.filter\(\(item\) =>/);
+  assert.match(bridge, /startsWith\("green-gold-source-preview-"\)/);
+  assert.match(bridge, /Boolean\(preview && sampleGallery\)/);
   assert.match(bridge, /visibleGallery\[index % visibleGallery\.length\]/);
-  assert.match(bridge, /hide\(section, !preview && !hasCreatorImages\)/);
+  assert.match(bridge, /hide\(section, visibleGallery\.length === 0\)/);
   assert.match(css, /:focus-visible/);
   assert.match(css, /min-width:28px;min-height:28px/);
   assert.match(bridge, /"uz-Cyrl":"\\u040e\\u0437"/);
@@ -423,7 +424,17 @@ test("Green Gold is internally registered but remains unpublished", async () => 
   assert.equal(fixture.templateId, "green-gold");
   assert.equal(fixture.eventType, "wedding");
   assert.deepEqual(Object.keys(fixture.content).sort(), ["en", "ru", "uz-Cyrl", "uz-Latn"]);
-  assert.equal(fixture.gallery.length, 6);
+  assert.deepEqual(
+    fixture.gallery.map((item) => item.url),
+    [2, 1, 3, 6, 4, 5].map((number) => `/templates/chorlove/orchid-amplop/assets/gallery-${number}.webp`),
+  );
+  const chorloveRenderer = await readFile(
+    new URL("../../../../../apps/web/src/templates/chorlove/renderer.tsx", root),
+    "utf8",
+  );
+  assert.match(chorloveRenderer, /templateId === "green-gold"\) &&\s*preview &&\s*sampleWishes/);
+  const emptyDraft = createInvitation("green-gold");
+  assert.ok(emptyDraft.gallery.every((item) => !item.url));
   const contracts = await readFile(
     new URL("../../../../../packages/contracts/src/index.ts", root),
     "utf8",

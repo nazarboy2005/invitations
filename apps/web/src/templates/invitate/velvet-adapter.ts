@@ -103,6 +103,7 @@ export function makeVelvetData(
   preview: boolean,
   catalogMusic = false,
   silentPlayback = false,
+  qaReducedMotion = false,
 ) {
   const data = makeLegacyData(invitation, locale, guestName);
   const content = getContent(invitation, locale);
@@ -187,6 +188,7 @@ export function makeVelvetData(
         ? "/music/catalog/emotional-piano.wav"
         : "",
     silentPlayback: preview && silentPlayback,
+    qaReducedMotion: preview && qaReducedMotion,
     startsAt: date?.toISOString() ?? "",
     enabledLocales: invitation.enabledLocales,
   };

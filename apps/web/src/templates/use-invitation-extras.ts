@@ -14,6 +14,7 @@ export function useInvitationExtras(
   preview: boolean,
   enabled = true,
   sectionPolicy: {
+    story?: boolean;
     dressCode?: boolean;
     extraPeople?: boolean;
     receiptHostSelector?: string;

@@ -2,7 +2,8 @@ import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
 import { test } from "node:test";
-import { templateById } from "@taklifnoma/contracts";
+import { createInvitation, templateById } from "@taklifnoma/contracts";
+import { createTemplatePreviewSample } from "../apps/web/src/modules/catalog/preview-sample";
 
 const source = new URL("../apps/web/public/templates/cloud-castle/index.html", import.meta.url);
 const bridge = new URL("../apps/web/public/templates/cloud-castle/bridge.js", import.meta.url);
@@ -77,17 +78,30 @@ test("Cloud Castle preview uses only gallery artwork referenced by its captured 
   const renderer = await readFile(new URL("../apps/web/src/templates/chorlove/renderer.tsx", import.meta.url), "utf8");
   const details = JSON.parse(await readFile(provenance, "utf8"));
   const files = ["gallery-2.webp", "gallery-1.webp", "gallery-3.webp", "gallery-6.webp", "gallery-4.webp"];
+  const previewSample = createTemplatePreviewSample("cloud-castle");
+  const creatorInvitation = createInvitation("cloud-castle");
   assert.deepEqual(details.galleryPreviewSamples.sourceAssets, files.map((file) => `images/templates/orchid-amplop/${file}`));
   assert.equal(details.galleryPreviewSamples.packageAssetDirectory, "../assets/gallery/");
-  assert.match(renderer, /templateId === "cloud-castle"/);
-  assert.match(renderer, /preview && sampleWishes && !hasCreatorPhotos/);
-  for (const file of files) {
+  assert.deepEqual(
+    previewSample.gallery.map(({ id, url }) => [id, url]),
+    files.map((file, index) => [
+      `cloud-castle-source-preview-${index + 1}`,
+      `/templates/cloud-castle/assets/gallery/${file}`,
+    ]),
+  );
+  assert.ok(creatorInvitation.gallery.every((photo) => !photo.url && !photo.alt && !photo.caption));
+  assert.doesNotMatch(renderer, /templateId === "cloud-castle"/);
+  for (const [index, file] of files.entries()) {
     const [original, packaged] = await Promise.all([
       readFile(new URL(file, sourceGallery)),
       readFile(new URL(file, packagedGallery)),
     ]);
     assert.deepEqual(packaged, original, `${file} should be copied byte for byte from the captured source`);
-    assert.match(renderer, new RegExp(file.replaceAll(".", "\\.")));
+    assert.equal(
+      createHash("sha256").update(packaged).digest("hex"),
+      createHash("sha256").update(original).digest("hex"),
+      `Cloud Castle preview sample ${index + 1} should reference the matching source bytes`,
+    );
   }
 });
 

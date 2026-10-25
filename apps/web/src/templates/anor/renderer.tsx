@@ -46,6 +46,7 @@ export type LegacyData = {
   message: string;
   programHeading: string;
   dateTime: string;
+  venueImage?: string;
   date: LegacyDate;
   venue: {
     name: string;
@@ -53,6 +54,7 @@ export type LegacyData = {
     lat: number | null;
     lng: number | null;
     mapUrl: string;
+    photo?: string;
   };
   program: Array<{ id: string; time: string; title: string; description?: string }>;
   story: Array<{ id: string; title: string; text: string }>;

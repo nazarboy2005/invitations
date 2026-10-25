@@ -1,0 +1,36 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Temporary Palace Rose receipt audit</title>
+<style>*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;font:14px Arial;color:#222}body{display:grid;grid-template-rows:42px 1fr;background:#ddd}.bar{display:flex;align-items:center;gap:12px;padding:6px 10px;background:#fff}.bar b{font-size:13px}.stage{display:grid;place-items:center;overflow:auto}iframe{display:block;border:0;background:white;width:100vw;height:calc(100vh - 42px)}body.mobile iframe{width:390px;height:calc(100vh - 42px);max-width:100vw;box-shadow:0 2px 16px #3336}body.mobile .stage{align-items:start}body.short iframe{width:390px;height:500px;box-shadow:0 2px 16px #3336}body.short .stage{align-items:start}.bar small{color:#555}</style></head>
+<body><div class="bar"><b id="label"></b><small>Temporary QA only · uploads disabled · not saved</small></div><div class="stage"><iframe id="view"></iframe></div>
+<script>
+const params = new URLSearchParams(location.search), mode = params.get("view") === "source" ? "source" : "package", mobile = params.get("size") === "mobile", short = params.get("size") === "short";
+document.body.classList.toggle("mobile", mobile); document.body.classList.toggle("short", short);
+document.querySelector("#label").textContent = `${mode} · ${mobile ? "390×678 mobile-width" : short ? "390×500 short viewport" : "1280×678 desktop"}`;
+const frame = document.querySelector("#view");
+const data = { locale:"uz-Latn", groom:"Javohir", bride:"Madina", eventType:"Nikoh to‘yi", title:"Nikoh to‘yi", greeting:"Hurmatli mehmon", message:"Sizni taklif qilamiz", date:"2027-06-12", time:"17:00", timezone:"Asia/Tashkent", venue:{name:"To‘yxona",address:"Toshkent"}, program:[], gallery:[], wishes:[], contacts:[], toyona:{enabled:true,cardNumber:"0000 0000 0000 0000",cardHolder:"QA TEST"}, music:{enabled:false} };
+const payload = { data, locale:"uz-Latn", invitationId:"qa-only", guestToken:"", preview:true, receiptUploadEnabled:true, extraPeople:[], sectionPolicy:{story:false,dressCode:false,extraPeople:false,receiptHostSelector:"[data-pr-gift-receipt-host]"} };
+frame.src = mode === "source" ? "/templates/palace-rose/preview-frame.html" : "/templates/palace-rose/index.html";
+function injectExtras(doc, win) {
+  win.__taklifnomaExtras = payload;
+  const script = doc.createElement("script"); script.src = "/templates/shared/editor-sections.js"; doc.body.append(script);
+  script.onload = () => win.postMessage({type:"taklifnoma:editor-sections",payload},location.origin);
+}
+frame.addEventListener("load", () => {
+  const win = frame.contentWindow, doc = frame.contentDocument;
+  if (mode === "package") {
+    win.postMessage({type:"palace-rose:update",payload},location.origin);
+    injectExtras(doc,win);
+  } else {
+    const watch = new MutationObserver(() => {
+      const overlay = doc.querySelector('[class*="z-[2000]"]');
+      if (!overlay || overlay.querySelector("[data-pr-gift-receipt-host]")) return;
+      const panel = overlay.firstElementChild; if (!panel) return;
+      panel.dataset.prGiftDialogPanel = "";
+      if (!doc.querySelector("link[data-qa-adapter-css]")) { const link=doc.createElement("link");link.rel="stylesheet";link.href="/templates/palace-rose/adapter.css";link.dataset.qaAdapterCss="";doc.head.append(link); }
+      const host = doc.createElement("div"); host.className="pr-gift-receipt-host w-full"; host.dataset.prGiftReceiptHost=""; (panel.children[1] || panel).append(host);
+      injectExtras(doc,win);
+    });
+    watch.observe(doc.body,{childList:true,subtree:true});
+  }
+});
+</script></body></html>

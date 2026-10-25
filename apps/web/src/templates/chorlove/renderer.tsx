@@ -57,35 +57,23 @@ export function ChorloveInvitation({
 
   const data = useMemo(() => {
     const mapped = makeLegacyData(invitation, frameLocale, guestName, sampleWishes);
-    if (templateId === "palace-rose" && preview && sampleWishes) {
-      const venuePhoto = getTemplatePreviewVenuePhoto(templateId);
-      if (venuePhoto) mapped.venueImage = venuePhoto;
-    }
-    if (templateId === "orchid-amplop") {
+    if (templateId === "palace-rose") {
       const venuePhoto = preview && sampleWishes
         ? getTemplatePreviewVenuePhoto(templateId)
         : undefined;
-      if (venuePhoto) Object.assign(mapped.venue, { photo: venuePhoto });
-    } else if (templateId === "lace") {
-      const hasCreatorPhotos = invitation.gallery.some((photo) => photo.url.trim());
-      if (preview && sampleWishes && !hasCreatorPhotos) {
-        mapped.gallery = ["gallery-2.webp", "gallery-1.webp", "gallery-3.webp", "gallery-6.webp", "gallery-4.webp", "gallery-5.webp"].map((file, index) => ({
-          id: `lace-preview-${index + 1}`,
-          src: `/templates/lace/assets/${file}`,
-          alt: "",
-          caption: "",
-        }));
-      }
-    } else if (templateId === "cloud-castle") {
-      const hasCreatorPhotos = invitation.gallery.some((photo) => photo.url.trim());
-      if (preview && sampleWishes && !hasCreatorPhotos) {
-        mapped.gallery = ["gallery-2.webp", "gallery-1.webp", "gallery-3.webp", "gallery-6.webp", "gallery-4.webp"].map((file, index) => ({
-          id: `cloud-castle-preview-${index + 1}`,
-          src: `/templates/cloud-castle/assets/gallery/${file}`,
-          alt: "",
-          caption: "",
-        }));
-      }
+      if (venuePhoto) mapped.venueImage = venuePhoto;
+    } else if (
+      templateId === "green-garden" ||
+      templateId === "orchid-amplop"
+    ) {
+      const venuePhoto = preview && sampleWishes
+        ? getTemplatePreviewVenuePhoto(templateId)
+        : undefined;
+      if (venuePhoto) mapped.venue.photo = venuePhoto;
+    }
+    if (templateId === "jasmine-white" && preview && sampleWishes) {
+      const venuePhoto = getTemplatePreviewVenuePhoto(templateId);
+      if (venuePhoto) mapped.venueImage = venuePhoto;
     }
     return mapped;
   }, [invitation, frameLocale, guestName, sampleWishes, preview, templateId]);
@@ -97,7 +85,7 @@ export function ChorloveInvitation({
     invitationId,
     guestToken,
     preview,
-    true,
+    templateId !== "osh",
     templateId === "palov"
       ? {
           story: false,
@@ -110,6 +98,13 @@ export function ChorloveInvitation({
           extraPeople: false,
           receiptHostSelector: "[data-orchid-receipt-host]",
         }
+      : templateId === "jasmine-white"
+        ? {
+            story: false,
+            dressCode: false,
+            extraPeople: false,
+            receiptHostSelector: ".jw-gift-modal-content",
+          }
       : templateId === "palace-rose"
         ? {
             story: false,
@@ -140,7 +135,10 @@ export function ChorloveInvitation({
         },
         templateId,
         locale: frameLocale,
-        sampleGallery: templateId === "orchid-amplop" && preview && sampleWishes,
+        sampleGallery:
+          (templateId === "orchid-amplop" || templateId === "green-gold") &&
+          preview &&
+          sampleWishes,
         enabledLocales: invitation.enabledLocales,
         invitationId,
         guestName,
@@ -161,6 +159,7 @@ export function ChorloveInvitation({
     invitation.enabledLocales,
     invitationId,
     preview,
+    sampleWishes,
     qaMobile,
     qaReducedMotion,
     silentPlayback,
@@ -171,7 +170,10 @@ export function ChorloveInvitation({
 
   const query = new URLSearchParams({ lang: sourceLocale[frameLocale] });
   if (preview && qaReducedMotion) query.set("qaReducedMotion", "1");
-  const namespaced = templateId === "palov" || templateId === "orchid-amplop";
+  const namespaced =
+    templateId === "osh" ||
+    templateId === "palov" ||
+    templateId === "orchid-amplop";
   const frameUrl = namespaced
     ? `/templates/chorlove/${templateId}/index.html?${query}`
     : `/templates/${templateId}/index.html?${query}`;

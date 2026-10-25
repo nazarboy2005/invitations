@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["file:///D:/Projects/Taklifnoma/apps/web/src/templates/anor/template.module.css"],"sourcesContent":[".sourcePreview,\n.sourcePublic {\n  width: 100%;\n  overflow: hidden;\n  background: #140b08;\n}\n\n.sourcePreview {\n  height: 640px;\n}\n\n.sourcePublic {\n  height: 100dvh;\n  min-height: 560px;\n}\n\n.sourceFullPreview {\n  position: relative;\n  width: 100%;\n  height: 100%;\n  min-height: 560px;\n  overflow: hidden;\n  background: #140b08;\n}\n\n.sourcePreview iframe,\n.sourcePublic iframe,\n.sourceFullPreview iframe {\n  display: block;\n  width: 100%;\n  height: 100%;\n  border: 0;\n  background: #140b08;\n}\n"],"names":[],"mappings":"AAAA;;;;;;AAOA;;;;AAIA;;;;;AAKA;;;;;;;;;AASA"}},
+    {"offset": {"line": 34, "column": 0}, "map": {"version":3,"sources":["file:///D:/Projects/Taklifnoma/apps/web/src/templates/chorlove/renderer.module.css"],"sourcesContent":[".preview,\r\n.public,\r\n.full {\r\n  width: 100%;\r\n  overflow: hidden;\r\n  background: #e8e8e8;\r\n}\r\n\r\n.preview { height: 640px; }\r\n.public { height: 100dvh; min-height: 560px; }\r\n.full { position: relative; height: 100%; min-height: 560px; }\r\n\r\n.preview iframe,\r\n.public iframe,\r\n.full iframe {\r\n  display: block;\r\n  width: 100%;\r\n  height: 100%;\r\n  border: 0;\r\n  background: #e8e8e8;\r\n}\r\n\r\n.qaMobile { max-width: 390px; margin-inline: auto; }\r\n"],"names":[],"mappings":"AAAA;;;;;;AAQA;;;;AACA;;;;;AACA;;;;;;AAEA;;;;;;;;AAUA"}}]
+}

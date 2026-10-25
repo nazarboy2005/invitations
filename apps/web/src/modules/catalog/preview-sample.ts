@@ -31,7 +31,7 @@ type EventSample = {
 };
 
 type TemplateSample = {
-  /** Preview-only source venue photo, never part of invitation data. */
+  /** Preview-only photo captured in a source template without a shared contract field. */
   venuePhoto?: string;
   program?: Array<{
     id: string;
