@@ -9,6 +9,7 @@ const bridge = new URL("../apps/web/public/templates/cloud-castle/bridge.js", im
 const preview = new URL("../apps/web/public/templates/cloud-castle/preview-opening.png", import.meta.url);
 const provenance = new URL("../apps/web/public/templates/cloud-castle/source/provenance.json", import.meta.url);
 const pageModule = new URL("../Invitations - this folder will be removed from production/Chorlove/Web invitations/_next/static/chunks/14t58uni224ve.js", import.meta.url);
+const motionRuntime = new URL("../Invitations - this folder will be removed from production/Chorlove/Web invitations/_next/static/chunks/0ceoe4zwq362f.js", import.meta.url);
 const sourceCapture = new URL("../Invitations - this folder will be removed from production/Chorlove/Web invitations/templates/cloud-castle/preview-frame.html", import.meta.url);
 const sourceGift = new URL("../Invitations - this folder will be removed from production/Chorlove/Web invitations/images/cloud-castle/gift/gift.webp", import.meta.url);
 const packagedGift = new URL("../apps/web/public/templates/cloud-castle/assets/gift/gift.webp", import.meta.url);
@@ -171,4 +172,22 @@ test("Cloud Castle opening and hero motion follow the captured page module", asy
   assert.doesNotMatch(js, /Math\.min\(sequence\+\+ \* 30, 360\)/);
   assert.doesNotMatch(js, /\{ threshold: 0\.16 \}/);
   assert.match(js, /prefers-reduced-motion/);
+});
+
+test("Cloud Castle contact hover and press use the source spring interaction", async () => {
+  const [source, runtime, js, detailsText] = await Promise.all([readFile(pageModule, "utf8"), readFile(motionRuntime, "utf8"), readFile(bridge, "utf8"), readFile(provenance, "utf8")]);
+  const details = JSON.parse(detailsText);
+  assert.match(source, /whileHover:\{scale:1\.03,y:-2\},whileTap:\{scale:\.98\}/);
+  assert.match(runtime, /type:"spring",stiffness:500,damping:25,restSpeed:10/);
+  assert.match(js, /function sourceSpringFrames\(fromScale, fromY, toScale, toY\)/);
+  assert.match(js, /const stiffness = 500;/);
+  assert.match(js, /const damping = 25;/);
+  assert.match(js, /const restSpeed = 10;/);
+  assert.match(js, /const targetScale = pressed \? 0\.98 : hovered \? 1\.03 : 1;/);
+  assert.match(js, /const targetY = hovered \? -2 : 0;/);
+  assert.match(js, /link\.addEventListener\("pointerenter"/);
+  assert.match(js, /link\.addEventListener\("pointerdown"/);
+  assert.match(js, /link\.addEventListener\("keyup"/);
+  assert.match(js, /if \(sourceContactInteractionsBound \|\| sourceReducedMotion\(\)\) return;/);
+  assert.match(details.sourceBehavior.scrollReveals.profiles.contactLinks, /hover scale 1\.03\/y -2 and press scale \.98/);
 });

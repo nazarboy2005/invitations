@@ -212,6 +212,8 @@
   let sourceGiftMotionBound = false;
   let sourcePageOpened = false;
   let sourceRevealBound = false;
+  let sourceContactInteractionsBound = false;
+  const sourceContactAnimations = new WeakMap();
 
   function sourceReducedMotion() {
     return Boolean(state?.reducedMotion) || matchMedia("(prefers-reduced-motion: reduce)").matches || new URLSearchParams(location.search).get("qaReducedMotion") === "1";
@@ -447,6 +449,76 @@
     return { duration: 0.48, threshold: 0.5, delay: 0, easing: "cubic-bezier(.22,1,.36,1)" };
   }
 
+  function sourceSpringFrames(fromScale, fromY, toScale, toY) {
+    const stiffness = 500;
+    const damping = 25;
+    const restSpeed = 10;
+    const naturalFrequency = Math.sqrt(stiffness);
+    const dampingRatio = damping / (2 * naturalFrequency);
+    const dampedFrequency = naturalFrequency * Math.sqrt(1 - dampingRatio * dampingRatio);
+    const envelopeRate = dampingRatio * naturalFrequency;
+    const progressAt = (time) => 1 - Math.exp(-envelopeRate * time) * (
+      Math.cos(dampedFrequency * time) + (envelopeRate / dampedFrequency) * Math.sin(dampedFrequency * time)
+    );
+    const speedAt = (time) => Math.exp(-envelopeRate * time) * (naturalFrequency * naturalFrequency / dampedFrequency) * Math.sin(dampedFrequency * time);
+    let duration = 1 / 120;
+    for (; duration < 1; duration += 1 / 120) {
+      const progress = progressAt(duration);
+      const speed = speedAt(duration);
+      const scaleSettled = Math.abs((1 - progress) * (toScale - fromScale)) < 0.01 && Math.abs(speed * (toScale - fromScale)) < restSpeed;
+      const ySettled = Math.abs((1 - progress) * (toY - fromY)) < 0.01 && Math.abs(speed * (toY - fromY)) < restSpeed;
+      if (scaleSettled && ySettled) break;
+    }
+    const frames = [];
+    for (let time = 0; time < duration; time += 1 / 120) {
+      const progress = progressAt(time);
+      frames.push({
+        scale: String(fromScale + (toScale - fromScale) * progress),
+        translate: `0 ${fromY + (toY - fromY) * progress}px`,
+        offset: time / duration,
+      });
+    }
+    frames.push({ scale: String(toScale), translate: `0 ${toY}px`, offset: 1 });
+    return { frames, duration: duration * 1000 };
+  }
+
+  function bindSourceContactInteractions() {
+    if (sourceContactInteractionsBound || sourceReducedMotion()) return;
+    const links = [...root.querySelectorAll("[data-cc-contact-group] a")];
+    if (!links.length) return;
+    sourceContactInteractionsBound = true;
+    for (const link of links) {
+      let hovered = false;
+      let pressed = false;
+      const animate = () => {
+        if (sourceReducedMotion()) return;
+        const computed = getComputedStyle(link);
+        const scale = computed.scale === "none" ? 1 : Number.parseFloat(computed.scale) || 1;
+        const translation = computed.translate.split(/\s+/);
+        const y = translation.length > 1 ? Number.parseFloat(translation[1]) || 0 : 0;
+        sourceContactAnimations.get(link)?.cancel();
+        const targetScale = pressed ? 0.98 : hovered ? 1.03 : 1;
+        const targetY = hovered ? -2 : 0;
+        const animation = sourceSpringFrames(scale, y, targetScale, targetY);
+        const player = link.animate(animation.frames, { duration: animation.duration, easing: "linear", fill: "both" });
+        sourceContactAnimations.set(link, player);
+      };
+      link.addEventListener("pointerenter", (event) => { hovered = event.pointerType !== "touch"; animate(); });
+      link.addEventListener("pointerleave", () => { hovered = false; pressed = false; animate(); });
+      link.addEventListener("pointerdown", (event) => { pressed = true; hovered ||= event.pointerType !== "touch"; animate(); });
+      for (const eventName of ["pointerup", "pointercancel"]) {
+        link.addEventListener(eventName, () => { pressed = false; animate(); });
+      }
+      link.addEventListener("keydown", (event) => {
+        if ((event.key === "Enter" || event.key === " ") && !pressed) { pressed = true; animate(); }
+      });
+      link.addEventListener("keyup", (event) => {
+        if (event.key === "Enter" || event.key === " ") { pressed = false; animate(); }
+      });
+      link.addEventListener("blur", () => { pressed = false; hovered = false; animate(); });
+    }
+  }
+
   function restoreCapturedMotion() {
     const reduce = sourceReducedMotion();
     document.documentElement.classList.toggle("cc-reduced-motion", reduce);
@@ -454,6 +526,7 @@
     sourceRevealBound = true;
     const hero = root.querySelector("[data-cloud-castle-hero]");
     root.querySelector('img[src$="/chim.webp"]')?.closest(".relative.flex.flex-col.items-center.overflow-hidden")?.setAttribute("data-cc-contact-group", "");
+    bindSourceContactInteractions();
     const observer = new IntersectionObserver((entries) => {
       for (const entry of entries) {
         const element = entry.target;

@@ -90,7 +90,7 @@
         "galleryItems": "opacity 0/scale .86/y 10 to opacity 1/scale 1/y 0; threshold .2; 450ms with source delays .06/.14/.22/.30/.38 seconds",
         "galleryHeading": "opacity 0/y 24 to opacity 1/y 0; threshold .2; 750ms easeOut",
         "giftContent": "opacity 0/scale .88/y 10 to opacity 1/scale 1/y 0; threshold .5; 1000ms",
-        "contactLinks": "opacity 0/y 18/scale .96 to opacity 1/y 0/scale 1; threshold .3; 550ms with 120ms initial delay and 100ms per link",
+        "contactLinks": "opacity 0/y 18/scale .96 to opacity 1/y 0/scale 1; threshold .3; 550ms with 120ms initial delay and 100ms per link; hover scale 1.03/y -2 and press scale .98 use the shared Motion spring (stiffness 500, damping 25, restSpeed 10)",
         "generalContent": "opacity 0/scale .88/y 10 to opacity 1/scale 1/y 0; threshold .5; 480ms cubic-bezier(.22,1,.36,1)",
         "decorativeDividers": "opacity 0/y 20 to opacity 1/y 0; threshold .2; 750ms easeOut",
         "guestbook": "opacity 0/scale .88/y 10 to opacity 1/scale 1/y 0; threshold .5; 480ms; heading/form/list stagger follows source .08/.14s spacing"
