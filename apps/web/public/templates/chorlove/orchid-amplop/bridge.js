@@ -140,7 +140,7 @@
     box.setAttribute("aria-hidden", "false");
     if (!document.documentElement.classList.contains("orchid-reduced-motion")) {
       animateSourceSpring(box, 0, 1, "opacity", (value) => value);
-      animateSourceSpring(image, 0.8, 1, "transform", (value) => `scale(${value})`);
+      animateSourceSpring(image, 0.96, 1, "transform", (value) => `scale(${value})`);
       animateSourceSpring(image, 0, 1, "opacity", (value) => value);
     }
     close.focus();
@@ -157,7 +157,7 @@
       return;
     }
     const backdrop = animateSourceSpring(box, 1, 0, "opacity", (value) => value);
-    const portraitScale = animateSourceSpring(image, 1, 0.8, "transform", (value) => `scale(${value})`);
+    const portraitScale = animateSourceSpring(image, 1, 0.96, "transform", (value) => `scale(${value})`);
     const portraitOpacity = animateSourceSpring(image, 1, 0, "opacity", (value) => value);
     Promise.all([backdrop.finished, portraitScale.finished, portraitOpacity.finished].map((finished) => finished.catch(() => {}))).then(() => {
       if (sequence !== lightboxSequence) return;
