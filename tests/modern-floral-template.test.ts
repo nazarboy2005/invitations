@@ -242,12 +242,15 @@ test("Modern Floral catalog artwork has the source image hash and portrait dimen
 
 test("Modern Floral preview sample packages the captured default gallery images", async () => {
   const provenance = JSON.parse(await readFile(provenanceUrl, "utf8"));
+  const bridge = await readFile(bridgeUrl, "utf8");
   const sourceData = await readFile(sourcePreviewDataUrl);
   const sourceModule = sourceData.toString("utf8");
   const order = ["gallery-2.webp", "gallery-1.webp", "gallery-3.webp", "gallery-6.webp", "gallery-4.webp", "gallery-5.webp"];
   assert.ok(sourceModule.includes(`"DEFAULT_PREVIEW_GALLERY_IMAGES",0,[${order.map((file) => `"/images/templates/orchid-amplop/${file}"`).join(",")}]`));
   assert.equal(provenance.sourceDefaultGalleryData.sha256, createHash("sha256").update(sourceData).digest("hex"));
   assert.deepEqual(provenance.previewSampleGallery.images.map((item: { packagedPath: string }) => item.packagedPath), order.map((file) => `../chorlove/orchid-amplop/assets/${file}`));
+  assert.match(bridge, /const section=sec\[9\].*?publicItems=items\.filter\(item=>item\.url\|\|item\.src\)/);
+  assert.match(bridge, /hide\(section,!publicItems\.length\)/);
   for (const file of order) {
     const source = await readFile(new URL(file, sourceDefaultGalleryDir));
     const packaged = await readFile(new URL(file, packagedPreviewGalleryDir));
