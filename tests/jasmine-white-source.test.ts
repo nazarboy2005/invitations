@@ -54,6 +54,10 @@ test("Jasmine White preserves its captured page, stylesheets, and design artwork
     createHash("sha256").update(source).digest("hex"),
     manifest.source.sha256,
   );
+  assert.match(
+    source.toString("utf8"),
+    /class="text-\[18px\] mb-5 flex flex-col items-center"/,
+  );
 
   for (const record of [
     ...manifest.capturedStylesheets,
@@ -162,6 +166,11 @@ test("Jasmine White preserves its captured page, stylesheets, and design artwork
   assert.match(runtimeHtml, /src="\/templates\/jasmine-white\/bridge\.js"/);
   assert.doesNotMatch(runtimeHtml, /<script[^>]+src="(?:https?:)?\/\/_next\//i);
   assert.match(bridge, /d\.eventType \|\| c\.event/);
+  assert.match(
+    bridge,
+    /intro\.querySelector\("\.mb-5\.flex\.flex-col\.items-center span"\)/,
+  );
+  assert.doesNotMatch(bridge, /querySelector\("p:last-of-type"\)/);
   assert.match(bridge, /tx\(paragraphs\[3\], c\.time\)/);
   assert.match(bridge, /const dateLine = \[/);
   assert.match(bridge, /tx\(paragraphs\[4\], dateLine\.toLocaleUpperCase/);

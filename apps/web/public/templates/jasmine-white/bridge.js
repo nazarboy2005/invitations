@@ -338,7 +338,7 @@
     tx(intro.querySelector("p"), d.greeting || c.welcome);
     const headings = [...intro.querySelectorAll("h1")];
     tx(headings[0], d.title || c.title); tx(headings[1], couple);
-    const date = intro.querySelector("h1")?.parentElement?.querySelector("p:last-of-type");
+    const date = intro.querySelector(".mb-5.flex.flex-col.items-center span");
     tx(date, d.date?.long || "");
     const button = intro.querySelector("button");
     if (button) {
