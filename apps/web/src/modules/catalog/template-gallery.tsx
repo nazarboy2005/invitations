@@ -25,9 +25,11 @@ const TemplateDetailDialog = dynamic(() =>
 export function TemplateGallery({
   templates,
   categories,
+  featured = false,
 }: {
   templates: TemplateDefinition[];
   categories: TemplateCategory[];
+  featured?: boolean;
 }) {
   const results = useRef<HTMLDivElement>(null);
   const { categoryId, renderedCategoryId, selectCategory } =
@@ -66,17 +68,19 @@ export function TemplateGallery({
 
   return (
     <>
-      <label className={styles.catalogSearch}>
-        <Search size={17} aria-hidden="true" />
-        <input
-          type="search"
-          value={searchQuery}
-          onChange={(event) => setSearchQuery(event.target.value)}
-          placeholder="Dizayn qidirish"
-          aria-label="Dizayn qidirish"
-        />
-      </label>
-      {categories.length > 0 && (
+      {!featured && (
+        <label className={styles.catalogSearch}>
+          <Search size={17} aria-hidden="true" />
+          <input
+            type="search"
+            value={searchQuery}
+            onChange={(event) => setSearchQuery(event.target.value)}
+            placeholder="Dizayn qidirish"
+            aria-label="Dizayn qidirish"
+          />
+        </label>
+      )}
+      {!featured && categories.length > 0 && (
         <div
           className={styles.categoryFilters}
           aria-label="Dizayn kategoriyalari"
@@ -158,10 +162,10 @@ export function TemplateGallery({
                   data-card-art
                   aria-label={`${template.name}: batafsil ko‘rish`}
                   aria-haspopup="dialog"
-                    onClick={(event) => {
-                      selectedTrigger.current = event.currentTarget;
-                      setSelectedTemplate(template);
-                    }}
+                  onClick={(event) => {
+                    selectedTrigger.current = event.currentTarget;
+                    setSelectedTemplate(template);
+                  }}
                 >
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img

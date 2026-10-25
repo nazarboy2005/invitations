@@ -6,11 +6,8 @@ import {
   ArrowUpRight,
   Check,
   Flower2,
-  Globe2,
   Heart,
   Mail,
-  MapPin,
-  Music2,
   Plus,
   Sparkles,
 } from "lucide-react";
@@ -22,6 +19,8 @@ import { display, script, sans } from "./platform-fonts";
 import { SmoothScroll } from "@/components/smooth-scroll";
 import { DesignRating } from "@/components/design-rating";
 import { HeroArtwork } from "@/components/hero-artwork";
+import { WhyUs } from "@/components/why-us";
+import { selectFeaturedTemplates } from "@/modules/catalog/featured-templates";
 
 const steps = [
   {
@@ -50,7 +49,7 @@ const questions = [
   {
     title: "Dizaynni tanlashdan oldin to‘liq ko‘rsam bo‘ladimi?",
     answer:
-      "Ha. Har bir dizayn ostidagi “Ko‘rish” tugmasi uning to‘liq namunasini ochadi. Ochilish sahnasi, harakatlar va bo‘limlarni bemalol ko‘rib chiqing.",
+      "Ha. Dizayn ustiga bosing. Ochilgan oynadagi “To‘liq ko‘rish” tugmasi orqali ochilish sahnasi, harakatlar va barcha bo‘limlarni ko‘rib chiqing.",
   },
   {
     title: "Taklifnoma qaysi tillarda bo‘lishi mumkin?",
@@ -68,12 +67,13 @@ export const dynamic = "force-dynamic";
 
 export default async function Home() {
   const [catalog, publishedCount] = await Promise.all([
-    getCatalog(true),
+    getCatalog(),
     getPublishedInvitationCount(),
   ]);
   const visibleTemplates = catalog.templates.filter(
-    (template) => template.published || template.id === "anor",
+    (template) => template.published,
   );
+  const featuredTemplates = selectFeaturedTemplates(visibleTemplates);
   const heroTemplate =
     visibleTemplates.find((template) => template.id === "anor") ??
     visibleTemplates[0];
@@ -260,7 +260,7 @@ export default async function Home() {
         >
           <div className={styles.sectionHeading}>
             <div>
-              <p className={styles.eyebrow}>01 / Dizaynlar kolleksiyasi</p>
+              <p className={styles.eyebrow}>01 / Siz uchun tanladik</p>
               <h2 id="designs-title">
                 Har bir hikoyaning
                 <br />
@@ -268,19 +268,29 @@ export default async function Home() {
               </h2>
             </div>
             <p>
-              Ba’zi takliflar ilk qarashdayoq ko‘ngilga yaqin bo‘ladi.
-              O‘zingiznikini toping — qolganini birga yaratamiz.
+              Turli uslub va quvonchli kunlar uchun tanlangan dizaynlar. To‘liq
+              kolleksiyada yana ko‘plab hikoyalar sizni kutmoqda.
             </p>
           </div>
           <TemplateGallery
-            templates={visibleTemplates}
+            templates={featuredTemplates}
             categories={catalog.categories}
+            featured
           />
+          <div className={styles.collectionCta}>
+            <Link href="/templates" className={styles.collectionLink}>
+              Barcha shablonlar <ArrowUpRight size={18} />
+            </Link>
+          </div>
           <p className={styles.collectionNote}>
             <Sparkles size={15} strokeWidth={1.3} /> Har bir dizaynni tanlashdan
             oldin to‘liq ko‘rishingiz mumkin.
           </p>
         </section>
+
+        <WhyUs
+          previewImage={heroTemplate ? artwork(heroTemplate) : undefined}
+        />
 
         <section
           id="how-it-works"
@@ -289,7 +299,7 @@ export default async function Home() {
         >
           <div className="container">
             <div className={styles.processHeading}>
-              <p className={styles.eyebrow}>02 / Juda oddiy</p>
+              <p className={styles.eyebrow}>03 / Juda oddiy</p>
               <h2 id="process-title">
                 Katta kun sari.
                 <br />
@@ -313,92 +323,6 @@ export default async function Home() {
                 </li>
               ))}
             </ol>
-          </div>
-        </section>
-
-        <section
-          className={`container ${styles.detailsSection}`}
-          aria-labelledby="details-title"
-        >
-          <div className={styles.detailIllustration} aria-hidden="true">
-            <div className={styles.illustrationOrbit} />
-            <div className={styles.letter}>
-              <Flower2 size={26} strokeWidth={1} />
-              <span>Sizni kutamiz</span>
-              <strong>
-                Javohir <i>&</i> Madina
-              </strong>
-              <div className={styles.letterRule} />
-              <p>Bir kun. Bir umrga xotira.</p>
-              <Heart size={18} strokeWidth={1} />
-            </div>
-            <span className={styles.floatingDetail}>
-              <MapPin size={17} /> Manzil ham shu yerda
-            </span>
-            <span className={styles.floatingMusic}>
-              <Music2 size={18} />
-              <span>Sevimli kuy bilan</span>
-              <i />
-              <i />
-              <i />
-              <i />
-            </span>
-          </div>
-          <div className={styles.detailCopy}>
-            <p className={styles.eyebrow}>03 / Tafsilotlar gapirsin</p>
-            <h2 id="details-title">
-              Shunchaki taklifdan
-              <br />
-              <em>ko‘prog‘i.</em>
-            </h2>
-            <p>
-              Mehmoningiz ochgan ilk lahzadan boshlab bayram kayfiyati. Samimiy
-              so‘zlar, sevimli kuy va kerakli ma’lumotlar — barchasi bir joyda.
-            </p>
-            <ul>
-              <li>
-                <Globe2 size={20} strokeWidth={1.3} />
-                <div>
-                  <strong>Yaqinlaringizga yaqin tilda</strong>
-                  <span>O‘zbek lotin va kirill, rus va ingliz tillari.</span>
-                </div>
-              </li>
-              <li>
-                <MapPin size={20} strokeWidth={1.3} />
-                <div>
-                  <strong>Kerakli tafsilotlar bir havolada</strong>
-                  <span>Sana, manzil va bayram dasturi doim qo‘l ostida.</span>
-                </div>
-              </li>
-              <li>
-                <Heart size={20} strokeWidth={1.3} />
-                <div>
-                  <strong>Sizga xos kichik detallar</strong>
-                  <span>O‘z so‘zlaringiz, suratlaringiz va musiqangiz.</span>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </section>
-
-        <section className={styles.manifesto} aria-labelledby="manifesto-title">
-          <div className={`container ${styles.manifestoInner}`}>
-            <Flower2 size={40} strokeWidth={0.8} aria-hidden="true" />
-            <p className={styles.eyebrow}>
-              Eng go‘zal kunlar, eng yaqin insonlar
-            </p>
-            <h2 id="manifesto-title">
-              Bayram bir kun.
-              <br />
-              <span>Xotirasi bir umr.</span>
-            </h2>
-            <p>Hammasi esa bir samimiy taklifdan boshlanadi.</p>
-            <a href="#templates" className={styles.manifestoLink}>
-              O‘z taklifnomangizni toping <ArrowUpRight size={18} />
-            </a>
-            <span className={styles.manifestoWatermark} aria-hidden="true">
-              birga
-            </span>
           </div>
         </section>
 
@@ -432,6 +356,26 @@ export default async function Home() {
             ))}
           </div>
         </section>
+        <section className={styles.manifesto} aria-labelledby="manifesto-title">
+          <div className={`container ${styles.manifestoInner}`}>
+            <Flower2 size={40} strokeWidth={0.8} aria-hidden="true" />
+            <p className={styles.eyebrow}>
+              Eng go‘zal kunlar, eng yaqin insonlar
+            </p>
+            <h2 id="manifesto-title">
+              Bayram bir kun.
+              <br />
+              <span>Xotirasi bir umr.</span>
+            </h2>
+            <p>Hammasi esa bir samimiy taklifdan boshlanadi.</p>
+            <Link href="/templates" className={styles.manifestoLink}>
+              O‘z taklifnomangizni toping <ArrowUpRight size={18} />
+            </Link>
+            <span className={styles.manifestoWatermark} aria-hidden="true">
+              birga
+            </span>
+          </div>
+        </section>
       </main>
 
       <footer className={styles.footer}>
@@ -447,7 +391,8 @@ export default async function Home() {
             <p>Yaxshi kunlar birga boshlanadi.</p>
           </div>
           <nav aria-label="Sahifa bo‘limlari">
-            <a href="#templates">Dizaynlar</a>
+            <Link href="/templates">Barcha dizaynlar</Link>
+            <a href="#why-us">Nega biz?</a>
             <a href="#how-it-works">Qanday ishlaydi</a>
             <a href="#questions">Savol-javob</a>
             <Link href="/dashboard">

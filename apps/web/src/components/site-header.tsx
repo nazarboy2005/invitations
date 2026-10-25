@@ -32,7 +32,7 @@ export async function SiteHeader({
         </Link>
         <nav aria-label="Asosiy menyu" className={styles.nav}>
           {!compact && (
-            <Link href="/#templates" className={styles.catalog}>
+            <Link href="/templates" className={styles.catalog}>
               Dizaynlar
             </Link>
           )}
@@ -41,8 +41,8 @@ export async function SiteHeader({
               <Link href="/#how-it-works" className={styles.howItWorks}>
                 Qanday ishlaydi
               </Link>
-              <Link href="/#questions" className={styles.questions}>
-                Savol-javob
+              <Link href="/#why-us" className={styles.questions}>
+                Nega biz?
               </Link>
             </>
           )}

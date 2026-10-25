@@ -101,3 +101,77 @@ scrollTop=0, dialog focus and zero renderers during entry, then scrollTop=0,
 close-button focus and one renderer afterward. Closing retains its 420ms
 animation. Typecheck and 633/633 tests pass. QA artifact:
 `.data/template-popup-opening-fixed.jpg`.
+
+Homepage discovery revision: home now renders eight curated published designs
+(Anor, Atlas, Bulbul, Toscana, Konfetti, Lola, Nahorgi Osh, Yangi Uy in the
+current catalog). Hidden/unavailable picks are replaced by other published
+entries, capped at eight with no duplicates. Full published catalog lives at
+`/templates`; `/preview` without a valid template redirects there. Individual
+preview routes stay intact. Full-preview return links and site navigation use
+the new catalog. The homepage removes search/category controls and links to
+the full dynamically counted collection.
+
+The new Why us section explains design/photos/music, Google Maps, guest
+attendance, moderated wishes, optional to‘yona card details/receipts, and four
+custom language variants. Its phone/map/reply/wish scene is explicitly sample
+content and loads a static existing cover rather than another live renderer.
+Page order is hero, featured designs, Why us, creation steps, FAQ, final CTA.
+
+Verification: 636/636 unit tests pass (including three featured-selection
+checks), TypeScript and optimized production build pass. Browser checks at
+320, 390, 820 and 1280px found no horizontal overflow. Home shows exactly eight
+cards and six benefits; full catalog shows all 53 published entries. Category
+filtering returns four birthday designs; unmatched search shows the empty
+state; clearing restores results. Full-catalog popup preserves one iframe,
+price, and template-specific preview/create URLs. Full-catalog navigation and
+return-to-home links were followed. Original template assets are unchanged.
+Desktop QA screenshot: `.data/homepage-why-us-desktop.jpg`.
+
+Visual refinement: the homepage collection CTA is now a centered, intrinsic-width
+“Barcha shablonlar” button without the promotional sentence/banner. Why us has
+centered “Nega aynan biz?” and supporting copy directly below. Six bordered
+cards use layout, pinned-map, attendance-calendar, heart-message, giving-hand,
+and language icons. Fine-pointer hover adds a small lift, warmer border/shadow,
+top accent and filled icon tile. Touch does not inherit the hover movement;
+reduced motion disables transitions/transforms. Language heading shortened to
+“To‘rt tilda” after a 320px fit check. Checks at 320/390/1280px found no page
+horizontal overflow or clipped feature headings; CTA aligns to the content
+center. Typecheck and production build pass. Screenshot:
+`.data/homepage-why-us-refined.jpg`.
+
+Complete Why us redesign (supersedes the visual refinement above): replaced
+the phone scene and uniform icon cards with a deep olive editorial section,
+ivory/sage asymmetric panels, an arched invitation composition, illustrated
+map route, guest reply, handwritten wish, sealed envelope, and language strip.
+Six feature explanations remain; all sample art is decorative and marked as
+sample content. No additional client component, iframe, or live renderer.
+Fine-pointer hover lifts the panels and animates their individual illustrations;
+reduced motion removes those movements and transitions. Phone panels stack.
+
+Reviewed at 320/390/820/1024/1400px: no horizontal page overflow or clipped
+feature text. Fixed a 320px art/headline overlap by giving the phone invitation
+art its own layout space; checked the final 320px and 390px art/text separation.
+Verified the desktop map hover activates its route animation and 4px panel
+lift. Typecheck and production build pass; browser reports no console errors.
+Final screenshot: `.data/homepage-why-us-redesigned.jpg`.
+
+Palette correction: user rejected the green theme. Why us now uses the existing
+site cream background, brown text, gold accents, and ivory/beige panels. Removed
+green from the map SVG, stationery, avatars, confirmation, language strip and
+hover colors. Reused platform color variables. Browser review at 1400px and
+390px confirms the cream background, readable text, no horizontal overflow or
+clipped feature text. Screenshot: `.data/homepage-why-us-site-palette.jpg`.
+
+Language-panel follow-up: replaced the old badge row with “Bir quvonch.
+To‘rt tilda.” and four invitation phrase samples, including language/script
+labels and authored-content copy. Removed the section eyebrow and both edge
+dividers; the lower divider belonged to the following process section.
+Verified all three computed border widths are zero. Checked 320/390/820px
+and desktop layouts; shortened the Russian sample to avoid a 320px word
+overflow. Final text has no clipping or page overflow. Typecheck passes.
+Screenshot: `.data/homepage-why-us-language-refined.jpg`.
+
+Latest refinement: removed the temporary language panel. Reduced featured
+catalog bottom spacing from 84px to 24px on desktop and 50px to 22px on
+phones; reduced Why us top spacing to 44px on desktop/tablet and 38px on
+phones. Removed now-unused language-specific markup and styles.

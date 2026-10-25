@@ -1,0 +1,874 @@
+.section {
+  position: relative;
+  padding: 44px 0 54px;
+  background: var(--bg);
+  color: var(--ink);
+  scroll-margin-top: 0;
+}
+.inner {
+  position: relative;
+}
+.heading {
+  text-align: center;
+  margin-bottom: 46px;
+}
+.heading h2 {
+  margin: 0 0 18px;
+  font-family: var(--font-display);
+  font-size: clamp(48px, 5.5vw, 76px);
+  font-weight: 400;
+  letter-spacing: -2px;
+  line-height: 1;
+}
+.heading > p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.9;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 16px;
+}
+.card {
+  position: relative;
+  isolation: isolate;
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--surface);
+  color: var(--ink);
+  transition:
+    transform 300ms ease,
+    box-shadow 300ms ease,
+    border-color 300ms ease;
+}
+.label {
+  position: relative;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 24px 28px 0;
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--primary);
+}
+.copy {
+  position: relative;
+  z-index: 1;
+  padding: 0 28px 28px;
+}
+.card h3 {
+  margin: 0 0 12px;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(26px, 2.4vw, 33px);
+  letter-spacing: -0.7px;
+  line-height: 1.07;
+}
+.card h3 em {
+  color: var(--primary);
+  font-weight: 400;
+}
+.card p {
+  max-width: 360px;
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.85;
+}
+.design {
+  grid-column: span 7;
+  min-height: 370px;
+  background: #f3ead7;
+}
+.designCopy {
+  position: relative;
+  z-index: 2;
+  width: 51%;
+  padding: 75px 0 32px 32px;
+}
+.designCopy h3 {
+  font-size: clamp(29px, 2.9vw, 37px);
+}
+.designCopy p {
+  max-width: 225px;
+}
+.designLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 28px;
+  font-size: 11px;
+  border-bottom: 1px solid var(--line-strong);
+  padding-bottom: 7px;
+}
+.designLink svg {
+  transition: transform 240ms ease;
+}
+.designLink:hover svg {
+  transform: translate(2px, -2px);
+}
+.designArt {
+  position: absolute;
+  inset: 0 0 0 47%;
+}
+.invitation {
+  position: absolute;
+  width: 190px;
+  height: 300px;
+  top: 27px;
+  left: 14%;
+  overflow: hidden;
+  border: 6px solid #fffdf5;
+  border-radius: 90px 90px 4px 4px;
+  background: #5d4835;
+  box-shadow: 0 12px 25px #413a312e;
+  transform: rotate(9deg);
+  transition: transform 500ms ease;
+}
+.invitation img {
+  object-fit: cover;
+  object-position: top;
+}
+.invitationCaption {
+  position: absolute;
+  bottom: 0;
+  inset-inline: 0;
+  padding: 45px 10px 18px;
+  text-align: center;
+  color: #fff6df;
+  background: linear-gradient(transparent, #211f18d9);
+  font-size: 11px;
+  line-height: 1.5;
+}
+.invitationCaption i {
+  font-family: var(--font-display);
+  font-size: 16px;
+}
+.backSheet {
+  position: absolute;
+  top: 65px;
+  left: 0;
+  width: 165px;
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #d9c99e;
+  background: #e8d8b5;
+  color: var(--primary);
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: 26px;
+  transform: rotate(-10deg);
+  transition: transform 500ms ease;
+}
+.designSeal {
+  position: absolute;
+  z-index: 2;
+  left: 4%;
+  top: 265px;
+  width: 46px;
+  height: 46px;
+  border: 1px solid #d5b77a;
+  border-radius: 50%;
+  background: #be9856;
+  color: #fff5dc;
+  box-shadow:
+    0 4px 9px #594d2d2a,
+    inset 0 0 0 2px #ffffff19;
+  display: grid;
+  place-items: center;
+  transform: rotate(-12deg);
+}
+.swatches {
+  position: absolute;
+  bottom: 19px;
+  right: 22px;
+  display: flex;
+  align-items: center;
+}
+.swatches i {
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  border: 2px solid #f3ead7;
+  margin-left: -4px;
+  background: #8a641c;
+}
+.swatches i:nth-child(2) {
+  background: #b7925e;
+}
+.swatches i:nth-child(3) {
+  background: #814d45;
+}
+.swatches > span {
+  margin-left: 6px;
+  font-size: 8px;
+  color: var(--muted);
+}
+.location {
+  grid-column: span 5;
+  min-height: 370px;
+  background: #f5efdf;
+}
+.mapArt {
+  position: relative;
+  height: 174px;
+  margin: -6px 0 12px;
+  overflow: hidden;
+  mask-image: linear-gradient(transparent, #000 22%, #000 72%, transparent);
+}
+.mapArt > svg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+.destination {
+  position: absolute;
+  top: 24px;
+  left: 59%;
+  width: 43px;
+  height: 43px;
+  border-radius: 50% 50% 50% 0;
+  background: var(--primary);
+  color: #fff7dc;
+  display: grid;
+  place-items: center;
+  transform: rotate(-45deg);
+  box-shadow: -5px 8px 14px #8a641c28;
+  transition: translate 350ms ease;
+}
+.destination > svg {
+  transform: rotate(45deg);
+  stroke-width: 1.5;
+}
+.destination i {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  top: 50px;
+  left: -14px;
+  border-radius: 50%;
+  background: var(--primary);
+}
+.mapPill {
+  position: absolute;
+  left: 16%;
+  bottom: 28px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 10px;
+  border: 1px solid var(--line-strong);
+  border-radius: 7px;
+  background: #fffdf5;
+  font-size: 9px;
+  transform: rotate(-4deg);
+  box-shadow: 0 4px 10px #8a641c0d;
+}
+.route {
+  stroke-dashoffset: 0;
+}
+.rsvp,
+.wishes,
+.gifting {
+  grid-column: span 4;
+  min-height: 315px;
+}
+.rsvp {
+  background: #fffdf8;
+}
+.replyArt {
+  height: 126px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 15px;
+}
+.avatars {
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+}
+.avatars > span,
+.avatars > i {
+  display: grid;
+  place-items: center;
+  width: 49px;
+  height: 49px;
+  border: 3px solid #fffdf8;
+  margin-left: -10px;
+  border-radius: 50%;
+  background: #d7c4a5;
+  font-family: var(--font-display);
+  font-size: 24px;
+  color: #6b5a42;
+}
+.avatars > span:nth-child(2) {
+  background: #e6d5b0;
+  color: #8a641c;
+}
+.avatars > span:nth-child(3) {
+  background: #d8b8a9;
+  color: #785142;
+}
+.avatars > i {
+  background: var(--primary);
+  color: #fff9e8;
+  font-family: inherit;
+  transition: transform 350ms ease;
+}
+.replyBubble {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  bottom: 13px;
+  left: calc(50% - 45px);
+  padding: 9px 13px;
+  border: 1px solid var(--line);
+  border-radius: 9px 9px 9px 0;
+  background: #fffdf7;
+  font-size: 9px;
+  color: var(--primary);
+  transform: rotate(-4deg);
+  transition: transform 350ms ease;
+  box-shadow: 0 4px 12px #8a641c08;
+  white-space: nowrap;
+}
+.wishes {
+  background: #f4ede3;
+}
+.wishArt {
+  position: relative;
+  height: 126px;
+  display: grid;
+  place-content: center;
+  text-align: center;
+}
+.quoteMark {
+  position: absolute;
+  top: 4px;
+  left: 25px;
+  font-family: var(--font-display);
+  font-size: 110px;
+  line-height: 1;
+  color: #dbcfb9;
+}
+.handwriting {
+  position: relative;
+  z-index: 1;
+  font-family: var(--font-home-script), cursive;
+  font-size: 32px;
+  line-height: 0.95;
+  color: #8b644c;
+  transform: rotate(-5deg);
+  transition: transform 350ms ease;
+}
+.wishHeart {
+  position: absolute;
+  right: 30px;
+  bottom: 24px;
+  color: #a67c61;
+  transform: rotate(15deg);
+  transition: transform 350ms ease;
+}
+.gifting {
+  background: #eee5d4;
+}
+.giftArt {
+  position: relative;
+  width: 150px;
+  height: 126px;
+  margin: 0 auto;
+}
+.giftNote {
+  position: absolute;
+  left: 20px;
+  top: 15px;
+  width: 110px;
+  height: 71px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 5px;
+  border: 1px solid #dfd4bb;
+  border-radius: 3px;
+  background: #fffaf0;
+  color: #98644e;
+  transform: rotate(-6deg);
+  transition: transform 450ms ease;
+}
+.giftNote span {
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-style: italic;
+}
+.envelope {
+  position: absolute;
+  top: 52px;
+  width: 150px;
+  height: 67px;
+  border-radius: 3px 3px 6px 6px;
+  background: #9d773d;
+  box-shadow: 0 7px 12px #4a30261c;
+  transform: rotate(-6deg);
+}
+.envelope::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(26deg, transparent 49%, #ffffff0a 50%, transparent 51%),
+    linear-gradient(-26deg, transparent 49%, #ffffff0a 50%, transparent 51%);
+  border: 1px solid #88632e;
+  border-radius: inherit;
+}
+.envelope::after {
+  content: "";
+  position: absolute;
+  inset: 0 0 22px;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  background: #b48c50;
+}
+.waxSeal {
+  position: absolute;
+  z-index: 1;
+  left: 59px;
+  top: 29px;
+  width: 33px;
+  height: 33px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: #c2a367;
+  color: #f8edcf;
+  border: 1px solid #a98850;
+  box-shadow: inset 0 0 0 3px #d9bc802d;
+}
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding-top: 24px;
+}
+.footer > span {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 10px;
+  color: var(--muted);
+}
+.footer > p {
+  margin: 0;
+  font-size: 9px;
+  color: var(--muted);
+  text-align: right;
+  line-height: 1.7;
+}
+@media (hover: hover) and (pointer: fine) {
+  .card:hover {
+    transform: translateY(-4px);
+    border-color: #d4bf8c;
+    box-shadow: 0 14px 28px #8a641c20;
+  }
+  .design:hover .invitation {
+    transform: translate(-3px, -5px) rotate(5deg);
+  }
+  .design:hover .backSheet {
+    transform: translate(-6px, 2px) rotate(-13deg);
+  }
+  .location:hover .route {
+    animation: routeFlow 1.2s linear infinite;
+  }
+  .location:hover .destination {
+    translate: 0 -5px;
+  }
+  .rsvp:hover .replyBubble {
+    transform: translateY(-4px) rotate(0);
+  }
+  .rsvp:hover .avatars > i {
+    transform: rotate(-10deg);
+  }
+  .wishes:hover .handwriting {
+    transform: rotate(-2deg) translateY(-3px);
+  }
+  .wishes:hover .wishHeart {
+    transform: rotate(0) scale(1.15);
+  }
+  .gifting:hover .giftNote {
+    transform: translateY(-8px) rotate(-3deg);
+  }
+}
+@keyframes routeFlow {
+  to {
+    stroke-dashoffset: -30;
+  }
+}
+@media (max-width: 1100px) {
+  .designCopy {
+    padding-left: 25px;
+    width: 50%;
+  }
+  .designCopy h3 {
+    font-size: 32px;
+  }
+  .invitation {
+    width: 165px;
+    height: 287px;
+    left: 10%;
+    top: 35px;
+  }
+  .backSheet {
+    width: 140px;
+    left: -5%;
+  }
+  .label {
+    margin-inline: 24px;
+  }
+  .copy {
+    padding-inline: 24px;
+  }
+  .language {
+    padding: 24px;
+    gap: 18px;
+  }
+}
+@media (max-width: 850px) {
+  .section {
+    padding-top: 44px;
+  }
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .design {
+    grid-column: 1 / -1;
+    min-height: 340px;
+  }
+  .designCopy {
+    width: 50%;
+    padding: 58px 0 30px 30px;
+  }
+  .designCopy p {
+    max-width: 260px;
+  }
+  .designArt {
+    left: 52%;
+  }
+  .invitation {
+    width: 180px;
+    height: 280px;
+    top: 22px;
+    left: 13%;
+  }
+  .backSheet {
+    top: 50px;
+    height: 240px;
+    width: 155px;
+  }
+  .designSeal {
+    top: 250px;
+  }
+  .location,
+  .rsvp,
+  .wishes,
+  .gifting {
+    grid-column: span 1;
+    min-height: 324px;
+  }
+  .mapArt {
+    height: 126px;
+    margin: 0;
+  }
+  .destination {
+    top: 8px;
+  }
+  .mapPill {
+    bottom: 9px;
+  }
+  .card h3 {
+    font-size: 30px;
+  }
+  .designCopy h3 {
+    font-size: 37px;
+  }
+  .copy {
+    padding-top: 12px;
+  }
+  .language {
+    grid-template-columns: 1fr;
+    gap: 26px;
+  }
+  .language p {
+    max-width: 420px;
+  }
+}
+@media (max-width: 600px) {
+  .section {
+    padding: 38px 0 26px;
+  }
+  .heading {
+    margin-bottom: 30px;
+  }
+  .heading h2 {
+    font-size: 48px;
+    letter-spacing: -1.4px;
+  }
+  .heading > p {
+    max-width: 310px;
+    margin-inline: auto;
+    font-size: 11px;
+    line-height: 1.8;
+  }
+  .grid {
+    gap: 12px;
+  }
+  .card {
+    border-radius: 14px;
+  }
+  .label {
+    margin: 20px 20px 0;
+    font-size: 9px;
+  }
+  .design {
+    min-height: 442px;
+  }
+  .designArt {
+    position: relative;
+    inset: auto;
+    height: 250px;
+  }
+  .invitation {
+    width: 139px;
+    height: 223px;
+    top: 12px;
+    left: calc(50% - 35px);
+    border-width: 4px;
+  }
+  .backSheet {
+    width: 122px;
+    height: 185px;
+    top: 44px;
+    left: calc(50% - 100px);
+    font-size: 21px;
+    gap: 15px;
+  }
+  .designSeal {
+    top: 195px;
+    left: calc(50% - 88px);
+    width: 36px;
+    height: 36px;
+  }
+  .invitationCaption {
+    font-size: 8px;
+    padding: 30px 7px 13px;
+  }
+  .invitationCaption i {
+    font-size: 13px;
+  }
+  .swatches {
+    display: none;
+  }
+  .designCopy {
+    position: relative;
+    width: 100%;
+    padding: 0 22px 23px;
+  }
+  .designCopy h3 {
+    font-size: 31px;
+  }
+  .designCopy h3 br {
+    display: none;
+  }
+  .designCopy h3 em {
+    display: block;
+  }
+  .designCopy p {
+    max-width: 300px;
+    font-size: 11px;
+  }
+  .designLink {
+    margin-top: 17px;
+    font-size: 10px;
+  }
+  .location {
+    grid-column: 1 / -1;
+    min-height: 310px;
+  }
+  .mapArt {
+    height: 144px;
+  }
+  .destination {
+    top: 12px;
+  }
+  .location .copy {
+    padding-top: 0;
+  }
+  .copy {
+    padding: 7px 20px 23px;
+  }
+  .card h3 {
+    font-size: 28px;
+  }
+  .card p {
+    font-size: 11px;
+  }
+  .rsvp,
+  .wishes {
+    grid-column: 1 / -1;
+    min-height: 285px;
+  }
+  .rsvp .label,
+  .wishes .label {
+    margin: 20px 20px 0;
+    font-size: 9px;
+    gap: 8px;
+  }
+  .rsvp .copy,
+  .wishes .copy {
+    padding-inline: 20px;
+  }
+  .rsvp h3,
+  .wishes h3 {
+    font-size: 29px;
+    line-height: 1.1;
+  }
+  .rsvp p,
+  .wishes p {
+    font-size: 11px;
+    line-height: 1.8;
+  }
+  .replyArt,
+  .wishArt {
+    height: 108px;
+  }
+  .avatars > span,
+  .avatars > i {
+    width: 43px;
+    height: 43px;
+    margin-left: -10px;
+    font-size: 19px;
+  }
+  .replyBubble {
+    left: calc(50% - 40px);
+    font-size: 8px;
+    gap: 6px;
+    padding: 8px;
+  }
+  .handwriting {
+    font-size: 32px;
+  }
+  .quoteMark {
+    left: 40px;
+    top: 8px;
+    font-size: 80px;
+  }
+  .wishHeart {
+    width: 23px;
+    right: 45px;
+    bottom: 20px;
+  }
+  .gifting {
+    grid-column: 1 / -1;
+    min-height: 285px;
+  }
+  .gifting .copy {
+    width: 100%;
+  }
+  .gifting h3 {
+    font-size: 29px;
+  }
+  .giftArt {
+    height: 108px;
+    transform: translateY(-9px) scale(0.88);
+  }
+  .gifting p {
+    max-width: 100%;
+  }
+  .footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 9px;
+    padding-top: 23px;
+  }
+  .footer > span {
+    font-size: 9px;
+  }
+  .footer > p {
+    text-align: left;
+    font-size: 8px;
+  }
+}
+@media (max-width: 360px) {
+  .heading h2 {
+    font-size: 42px;
+  }
+  .invitation {
+    width: 130px;
+  }
+  .designCopy h3 {
+    font-size: 29px;
+  }
+  .rsvp h3,
+  .wishes h3 {
+    font-size: 28px;
+  }
+  .gifting h3 {
+    font-size: 28px;
+  }
+  .language {
+    padding-inline: 16px;
+  }
+  .languageList li {
+    padding-inline: 10px;
+  }
+  .languageList li > span {
+    font-size: 19px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .card *,
+  .card *::before,
+  .card *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+  .card:hover {
+    transform: none;
+  }
+  .design:hover .invitation {
+    transform: rotate(9deg);
+  }
+  .design:hover .backSheet {
+    transform: rotate(-10deg);
+  }
+  .location:hover .destination {
+    translate: none;
+  }
+  .rsvp:hover .replyBubble {
+    transform: rotate(-4deg);
+  }
+  .rsvp:hover .avatars > i {
+    transform: none;
+  }
+  .wishes:hover .handwriting {
+    transform: rotate(-5deg);
+  }
+  .wishes:hover .wishHeart {
+    transform: rotate(15deg);
+  }
+  .gifting:hover .giftNote {
+    transform: rotate(-6deg);
+  }
+}

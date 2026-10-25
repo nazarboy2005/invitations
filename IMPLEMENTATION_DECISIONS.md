@@ -1,5 +1,45 @@
 # Implementation decisions
 
+## Homepage discovery and full catalog (2026-10-25)
+
+- User approved shortening the homepage to eight handpicked published designs,
+  followed by a centered “Barcha shablonlar” link to a dedicated catalog.
+  Selection shows a mix of visual styles and occasions, not a popularity rank;
+  use other published entries if a selected design becomes unavailable.
+- Homepage has no search/category controls; `/templates` contains the complete
+  published catalog with existing search, category transitions, single-preview
+  playback, and animated detail dialogs. Navigation and full-preview return
+  links point there; legacy `/preview` list visits redirect there. Individual
+  `/preview?template=…` routes and source packages stay unchanged.
+- Approved order: hero → featured designs → visual Why us → how it works → FAQ
+  → final create/discovery invitation. Update the old FAQ “View button” wording.
+- Why us explains personal design/photos/music, Google Maps navigation, guest
+  replies, moderated wishes and optional to‘yona card details/receipt uploads.
+  Language support remains elsewhere in the product; do not imply automatic
+  bank verification, payment processing, automatic translation, or invented
+  usage statistics.
+- User requested a complete Why us redesign after rejecting the previous phone
+  illustration and icon-card layout. Keep the centered “Nega aynan biz?” title
+  and supporting copy, but rebuild the visual composition from scratch.
+- User correction: keep Why us within the site's cream, beige, brown and gold
+  palette; remove green from the section, illustrations and hover effects.
+- Implemented direction: cream section, warm ivory/gold bordered panels,
+  large serif headings, an asymmetric invitation/map lead row, then distinct
+  reply, handwritten-wish and sealed-envelope illustrations. Use the existing
+  fonts and catalog artwork; illustrations are lightweight HTML/CSS/SVG and
+  explicitly marked as samples, with no extra live renderer. Each feature has a
+  relevant icon and its own desktop hover response. Phone panels stack for
+  readability; respect reduced motion.
+- Keep the centered catalog CTA without its old promotional sentence/banner.
+- Follow-up: remove the Why us eyebrow “Har bir tafsilot — mehr bilan” and
+  divider lines at both section boundaries (including the next section's top
+  border). A temporary four-language panel was later removed at the user's
+  request; keep the section focused on its invitation, map, reply, wish, and
+  to‘yona examples.
+- Latest refinement: remove the four-language panel altogether and reduce the
+  featured-templates bottom padding and Why us top padding for a closer section
+  transition on desktop, tablet, and phone.
+
 ## Catalog cards, playback, and scrolling (2026-10-25)
 
 - User requirement: taller, fully clickable template cards. Put the name and

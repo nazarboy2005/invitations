@@ -260,7 +260,7 @@ export function FullTemplatePreview({
       >
         <Link
           className={styles.backButton}
-          href="/preview"
+          href="/templates"
           aria-label="Dizaynlar ro‘yxatiga qaytish"
           title="Dizaynlar ro‘yxatiga qaytish"
         >
