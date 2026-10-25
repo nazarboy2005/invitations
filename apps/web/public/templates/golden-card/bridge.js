@@ -74,6 +74,34 @@
     return node;
   };
 
+  function fitCoverHeading() {
+    const heading = root.querySelector('[data-golden="title"]');
+    if (!heading || !card || !heading.textContent.trim()) return;
+    heading.style.removeProperty("font-size");
+    heading.style.whiteSpace = "nowrap";
+    const computed = window.getComputedStyle(heading);
+    const baseSize = Number.parseFloat(computed.fontSize);
+    if (!Number.isFinite(baseSize) || baseSize <= 0) return;
+
+    const canvas = document.createElement("canvas");
+    const context = canvas.getContext("2d");
+    if (!context) return;
+    context.font = computed.font;
+    // Keep creator-provided titles inside the cover's clear center band. The
+    // side ornaments occupy more than the CSS box width around the title.
+    const availableWidth = card.clientWidth * 0.68;
+    const measuredWidth = context.measureText(heading.textContent).width;
+    if (!measuredWidth || measuredWidth <= availableWidth) {
+      heading.style.removeProperty("font-size");
+      heading.style.whiteSpace = "nowrap";
+      return;
+    }
+
+    const fittedSize = Math.max(20, baseSize * (availableWidth / measuredWidth));
+    heading.style.whiteSpace = "nowrap";
+    heading.style.fontSize = `${fittedSize}px`;
+  }
+
   function update(payload) {
     const data = payload?.data ?? {};
     currentPayload = payload;
@@ -94,6 +122,7 @@
 
     text('[data-golden="openingGreeting"]', data.greeting || words.greeting);
     text('[data-golden="title"]', data.title || "");
+    fitCoverHeading();
     text('[data-golden="open"]', words.open);
     text('[data-golden="groom"]', data.groom || "");
     text('[data-golden="bride"]', data.bride || "");
@@ -345,6 +374,10 @@
   });
 
   root.classList.toggle("golden-reduced-motion", new URLSearchParams(window.location.search).get("qaReducedMotion") === "1");
+  if (typeof ResizeObserver !== "undefined" && card) {
+    new ResizeObserver(fitCoverHeading).observe(card);
+  }
+  document.fonts?.ready.then(fitCoverHeading);
 
   window.addEventListener("message", (event) => {
     if (event.origin !== window.location.origin || event.data?.type !== `${templateId}:update`) return;
