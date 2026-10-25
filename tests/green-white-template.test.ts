@@ -79,6 +79,7 @@ test("Green White runtime is isolated and maps the captured sections to the shar
   assert.match(bridge, /const photos = gallery\.filter\(\(photo\) => photo\?\.src\)/);
   assert.match(bridge, /hide\(node, !photos\.length\)/);
   assert.match(bridge, /dialog\.className = "yarl__portal gw-source-lightbox"/);
+  assert.match(bridge, /function showLightbox[\s\S]*?let image = document\.createElement\("img"\)/);
   assert.match(bridge, /index = \(nextIndex \+ items\.length\) % items\.length/);
   assert.match(bridge, /button\.className = "yarl__thumbnails_thumbnail"/);
   assert.match(bridge, /sidePadding = Math\.max\(0, \(thumbnailWrapper\.clientWidth - activeThumbnail\.offsetWidth\) \/ 2\)/);

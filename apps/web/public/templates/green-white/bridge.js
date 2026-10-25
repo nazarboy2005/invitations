@@ -432,7 +432,7 @@
       button.setAttribute("aria-label", `${c.gallery} ${i + 1}`);
       button.style.opacity = "0";
       button.style.transform = "translateY(30px)";
-      let image = document.createElement("img");
+      const image = document.createElement("img");
       image.src = item.src;
       image.alt = "";
       image.loading = "lazy";
@@ -470,7 +470,7 @@
     counter.setAttribute("aria-live", "polite");
     const slide = document.createElement("div");
     slide.className = "yarl__slide yarl__flex_center";
-    const image = document.createElement("img");
+    let image = document.createElement("img");
     image.className = "yarl__slide_image";
     image.alt = "";
     image.draggable = false;
