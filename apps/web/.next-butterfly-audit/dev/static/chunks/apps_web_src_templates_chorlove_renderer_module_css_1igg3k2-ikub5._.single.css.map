@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack:///[project]/apps/web/src/templates/chorlove/renderer.module.css"],"sourcesContent":[".preview,\r\n.public,\r\n.full {\r\n  width: 100%;\r\n  overflow: hidden;\r\n  background: #e8e8e8;\r\n}\r\n\r\n.preview { height: 640px; }\r\n.public { height: 100dvh; min-height: 560px; }\r\n.full { position: relative; height: 100%; min-height: 560px; }\r\n\r\n.preview iframe,\r\n.public iframe,\r\n.full iframe {\r\n  display: block;\r\n  width: 100%;\r\n  height: 100%;\r\n  border: 0;\r\n  background: #e8e8e8;\r\n}\r\n\r\n.qaMobile { max-width: 390px; margin-inline: auto; }\r\n"],"names":[],"mappings":"AAAA;;;;;;AAQA;;;;AACA;;;;;AACA;;;;;;AAEA;;;;;;;;AAUA"}}]
-}
