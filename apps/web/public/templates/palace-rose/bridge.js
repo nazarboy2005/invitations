@@ -3,6 +3,11 @@
   const id = "palace-rose";
   const root = document.querySelector('[data-chorlove-template="palace-rose"]');
   if (!root) return;
+  const giftReceiptHost = document.createElement("div");
+  giftReceiptHost.className = "pr-gift-receipt-host w-full";
+  giftReceiptHost.dataset.prGiftReceiptHost = "";
+  giftReceiptHost.hidden = true;
+  document.body.append(giftReceiptHost);
   const sections = [...root.querySelectorAll("section")];
   const q = (selector, parent = root) => parent.querySelector(selector);
   const all = (selector, parent = root) => [...parent.querySelectorAll(selector)];
@@ -257,6 +262,7 @@
           const duration=reduceMotion?0:250;
           overlay.style.transition=`opacity ${duration}ms ease`;
           const panel=document.createElement("div");
+          panel.dataset.prGiftDialogPanel="";
           panel.className="relative w-full max-w-md rounded-2xl p-0 shadow-2xl overflow-hidden text-[#640e1b] border border-[#ab7a45]/40";
           panel.style.backgroundColor="rgb(247, 227, 205)";
           panel.style.opacity="0";
@@ -312,10 +318,14 @@
             note.textContent=toyona.note?.trim()||words.fallback;
             content.append(note);
           }
+          giftReceiptHost.hidden=false;
+          content.append(giftReceiptHost);
           panel.append(header,content);
           overlay.append(panel);
           const closeDialog=()=>{
             if(!overlay.isConnected)return;
+            giftReceiptHost.hidden=true;
+            document.body.append(giftReceiptHost);
             document.removeEventListener("keydown",onKeyDown);
             overlay.style.opacity="0";panel.style.opacity="0";panel.style.transform="translateY(20px) scale(.92)";
             window.setTimeout(()=>{overlay.remove();button.focus();},duration);

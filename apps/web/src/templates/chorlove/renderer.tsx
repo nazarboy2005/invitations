@@ -91,6 +91,13 @@ export function ChorloveInvitation({
           extraPeople: false,
           receiptHostSelector: "[data-orchid-receipt-host]",
         }
+      : templateId === "palace-rose"
+        ? {
+            story: false,
+            dressCode: false,
+            extraPeople: false,
+            receiptHostSelector: "[data-pr-gift-receipt-host]",
+          }
       : undefined,
   );
   const message = useMemo(() => {

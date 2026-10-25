@@ -103,7 +103,10 @@
     current = payload;
     const { data, locale } = payload,
       copy = texts[locale] || texts["uz-Latn"];
-    if (!document.querySelector('[data-section="story"]')) {
+    if (
+      current.sectionPolicy?.story !== false &&
+      !document.querySelector('[data-section="story"]')
+    ) {
       const host = section("story", copy.story, data.story?.length > 0);
       for (const chapter of data.story || []) {
         host.append(node("h3", chapter.title), node("p", chapter.text));

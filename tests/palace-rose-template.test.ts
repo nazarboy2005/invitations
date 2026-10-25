@@ -100,6 +100,29 @@ test("Palace Rose bridge binds creator fields, service actions, locales, and red
   assert.match(bridge, /img\.src=`\/templates\/\$\{id\}\/assets\/\$\{filename\}`/);
 });
 
+test("Palace Rose limits shared extras to its native To'yona modal", () => {
+  const renderer = read("apps/web/src/templates/chorlove/renderer.tsx");
+  assert.match(renderer, /templateId === "orchid-amplop"/);
+  const palacePolicy = renderer.match(/templateId === "palace-rose"\s*\?\s*\{([^}]+)\}/)?.[1];
+  assert.ok(palacePolicy);
+  assert.match(palacePolicy, /story:\s*false/);
+  assert.match(palacePolicy, /dressCode:\s*false/);
+  assert.match(palacePolicy, /extraPeople:\s*false/);
+  assert.match(palacePolicy, /receiptHostSelector:\s*"\[data-pr-gift-receipt-host\]"/);
+  assert.match(renderer, /templateId === "orchid-amplop"[\s\S]*?receiptHostSelector:\s*"\[data-orchid-receipt-host\]"/);
+
+  const bridge = read(`${base}/bridge.js`);
+  const sharedExtras = read("apps/web/public/templates/shared/editor-sections.js");
+  assert.match(sharedExtras, /sectionPolicy\?\.story !== false/);
+  assert.match(sharedExtras, /sectionPolicy\?\.dressCode !== false/);
+  assert.match(sharedExtras, /sectionPolicy\?\.extraPeople !== false/);
+  assert.match(sharedExtras, /current\?\.sectionPolicy\?\.receiptHostSelector/);
+  assert.match(bridge, /giftReceiptHost\.dataset\.prGiftReceiptHost/);
+  assert.match(bridge, /content\.append\(giftReceiptHost\)/);
+  assert.match(bridge, /giftReceiptHost\.hidden=true;\s*document\.body\.append\(giftReceiptHost\)/);
+  assert.match(read(`${base}/adapter.css`), /\[data-pr-gift-dialog-panel\].*\[data-platform-extra="receipt"\]/);
+});
+
 test("Palace Rose packages its captured styles and source motion timings locally", () => {
   const html = read(`${base}/index.html`);
   const bridge = read(`${base}/bridge.js`);
@@ -132,8 +155,18 @@ test("Palace Rose packages its captured styles and source motion timings locally
   assert.match(bridge, /installOpeningPetals/);
   assert.match(bridge, /1\.2\*duration/);
   assert.match(bridge, /lerp\(1,\.76,heroProgress\)/);
+  assert.match(bridge, /lerp\(1,1\.38,heroProgress\)/);
+  assert.match(bridge, /lerp\(1,1\.28,heroProgress\)/);
+  assert.match(bridge, /lerp\(-85,105,detailProgress\)/);
+  assert.match(bridge, /lerp\(-20,40,programProgress\)/);
+  assert.match(bridge, /const thresholds=\[\.2,\.25,\.3,\.5\]/);
   assert.match(bridge, /threshold=\.5/);
   assert.match(bridge, /pr-petal-exit/);
+  assert.match(bridge, /event\.key==="Escape"\)closeDialog/);
+  assert.match(bridge, /event\.target===overlay\)closeDialog/);
+  assert.match(bridge, /event\.stopPropagation\(\)/);
+  assert.match(bridge, /navigator\.clipboard\.writeText\(toyona\.cardNumber\)/);
+  assert.match(bridge, /toyona\.note\?\.trim\(\)/);
   assert.match(adapterCss, /pr-petal-exit\{animation:pr-petal-exit \.85s ease-out both/);
   assert.match(adapterCss, /pr-bells-sway 4\.2s/);
   assert.match(adapterCss, /pr-envelope-flower-a 5\.5s/);

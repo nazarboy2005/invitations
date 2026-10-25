@@ -54,3 +54,6 @@ body{margin:0;background:#f7e3cd;color:#640e1b;font-family:"Palace Marcellus","T
 #palace-rose-root.pr-reduced,#palace-rose-root.pr-reduced *{scroll-behavior:auto!important;animation:none!important;transition:none!important;scroll-timeline:none!important}
 @media(prefers-reduced-motion:reduce){#palace-rose-root,#palace-rose-root *{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}}
 @media(max-width:560px){#palace-rose-root{max-width:100%}.pr-music{right:10px}}
+[data-pr-gift-dialog-panel] .pr-gift-receipt-host [data-platform-extra="receipt"]{max-width:none;margin:0;padding:1rem 0 0;border-top:1px solid rgba(100,14,27,.15);text-align:left}
+[data-pr-gift-dialog-panel] .pr-gift-receipt-host [data-platform-extra="receipt"] h2{margin:0 0 .75rem;font:600 15px/1.4 "Marcellus",serif;text-align:center}
+[data-pr-gift-dialog-panel] .pr-gift-receipt-host [data-platform-extra="receipt"] form{gap:.75rem}

@@ -17,13 +17,13 @@
     },
     {
       "path": "adapter.css",
-      "bytes": 6457,
-      "sha256": "addf68b0be765c4d9f0df152763dadd60da66ca622c8c7fe4b9f2dba60b3dc4e"
+      "bytes": 6895,
+      "sha256": "59eede02ac4140508e833ffc9f8262f3c87cfdc98c2b6b8a2d5fbb57342715f2"
     },
     {
       "path": "bridge.js",
-      "bytes": 42833,
-      "sha256": "c657e82558fc49edadf908509a516db3146d81ecb15e5af04afd104500e57eb7"
+      "bytes": 43306,
+      "sha256": "d023eb78f87546857129ba61cea23d89e2cc940dd086ebb44ec7edb8db675760"
     },
     {
       "path": "source/design.html",
@@ -32,8 +32,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 5943,
-      "sha256": "b80c493e53398ea9dd1ecfeab304020445552ab3f7f9210c0b3859565a277732"
+      "bytes": 6011,
+      "sha256": "c36f18be5c4e476850bb5dd4e14cb6289833da00ebce957d7dd6966c34d11934"
     },
     {
       "path": "preview.webp",
@@ -293,17 +293,16 @@
     "motion": "12 SVG petals on normal opening; source-derived placements and timings",
     "localePreview": "uz-Latn, uz-Cyrl, en, ru verified",
     "publication": "unpublished",
-    "focusedTests": "4/4 passed after exact source asset recovery",
-    "javascriptSyntax": "passed",
-    "typecheck": "passed",
+    "focusedTests": "5/5 passed after source-absent sections and native receipt-host integration",
+    "javascriptSyntax": "passed after receipt-host integration",
+    "typecheck": "passed after Palace Rose scoped renderer policy",
     "reducedMotion": "opening verified without petals",
     "browserFidelity": "Existing normal-motion browser screenshot inspected at 450x800; latest scroll/reduced-motion behavior not rechecked because browser safety policy blocked localhost authority.",
     "sourceAssets": "8/8 exact Palace Rose URLs returned 200 image/webp; byte sizes and SHA-256 verified",
     "toyonaInteraction": "Source-style modal renders card details/copy or creator note; opens/closes with Escape/backdrop; respects reduced motion",
     "nonRsvpReleaseBlockers": [
-      "Fresh browser QA of scroll, reveal, parallax, motion, and gift modal interactions is outstanding because local browser authority is currently blocked.",
-      "Creator-preview versus public-renderer visual and interaction parity has not been verified in-browser.",
-      "The current shared ChorloveInvitation enables generic editor-sections injection for Palace Rose (story, dress, extra people, and receipt); verify it does not add unsupported sections or collide with the native gift flow, or suppress it for this template."
+      "Fresh browser verification of scroll, reveal, parallax, reduced motion, and optional receipt visibility within the open gift modal remains outstanding because local browser authority is blocked.",
+      "Creator-preview versus public-renderer visual and interaction parity has not been verified in-browser."
     ]
   },
   "sourceStylesheets": [
@@ -734,5 +733,23 @@
       "matchingCount": 17,
       "archiveCount": 17
     }
+  },
+  "palaceRoseIntegration": {
+    "receiptVisibility": "Persistent hidden host receives the optional private receipt section and moves into native modal content on open; it returns hidden to body on close.",
+    "disabledSections": [
+      "story",
+      "dressCode",
+      "extraPeople"
+    ],
+    "receiptHostSelector": "[data-pr-gift-receipt-host]",
+    "sourceModalControlsPreserved": [
+      "card details",
+      "copy button",
+      "creator note",
+      "Escape close",
+      "backdrop close"
+    ],
+    "sharedExtrasEnabled": true,
+    "browserVerified": false
   }
 }
