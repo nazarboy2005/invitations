@@ -143,6 +143,7 @@ export const contentSchema = z.object({
   landmark: z.string().max(1000),
   programHeading: short,
   programTitles: z.record(z.string(), short),
+  programDescriptions: z.record(z.string(), text).default({}),
 });
 export type InvitationContent = z.infer<typeof contentSchema>;
 const localizedShortText = z.partialRecord(localeSchema, short);
@@ -167,6 +168,13 @@ export const storyChapterSchema = z.object({
   id: z.string().min(1).max(100),
   title: localizedShortText.default({}),
   text: localizedLongText.default({}),
+});
+export const invitationArtistSchema = z.object({
+  id: z.string().min(1).max(100),
+  name: localizedShortText.default({}),
+  role: localizedShortText.default({}),
+  imageUrl: safeUrl.default(""),
+  imageAssetId: z.string().max(100).nullable().default(null),
 });
 export const invitationSchema = z
   .object({
@@ -194,6 +202,7 @@ export const invitationSchema = z
     program: z
       .array(z.object({ id: z.string().max(100), time: z.string().max(10) }))
       .max(100),
+    artistLineup: z.array(invitationArtistSchema).max(50).default([]),
     story: z.array(storyChapterSchema).max(20).default([]),
     gallery: z
       .array(
@@ -1772,6 +1781,7 @@ export function emptyContent(): InvitationContent {
     landmark: "",
     programHeading: "",
     programTitles: {},
+    programDescriptions: {},
   };
 }
 export const DEFAULT_WEDDING_INVITATION_MESSAGE =
@@ -1946,6 +1956,7 @@ export function createInvitation(
     timezone: "Asia/Tashkent",
     venue: { latitude: null, longitude: null, mapUrl: "" },
     program: [],
+    artistLineup: [],
     story: [],
     gallery: [],
     music: { enabled: false, assetId: null, url: "", filename: "" },

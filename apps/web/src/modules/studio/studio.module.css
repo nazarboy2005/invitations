@@ -597,6 +597,26 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+.programDescriptionInput {
+  width: 100%;
+  min-height: 58px;
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: var(--surface);
+  color: var(--ink);
+  font: inherit;
+  font-size: 12px;
+  line-height: 1.45;
+  resize: vertical;
+}
+.programSectionPreview li span small {
+  display: block;
+  margin-top: 2px;
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 400;
+}
 .iconButton,
 .programDeleteButton {
   min-width: 34px;

@@ -30,8 +30,27 @@ type EventSample = {
   };
 };
 
+type TemplateSample = {
+  program?: Array<{
+    id: string;
+    time: string;
+    title: Record<Locale, string>;
+    description: Record<Locale, string>;
+  }>;
+  artists?: Array<{
+    id: string;
+    name: Record<Locale, string>;
+    role: Record<Locale, string>;
+    imageUrl: string;
+    imageAssetId?: string | null;
+  }>;
+};
+
 const EVENT_SAMPLES = previewSample.eventSamples as Partial<
   Record<EventType, EventSample>
+>;
+const TEMPLATE_SAMPLES = previewSample.templateSamples as Partial<
+  Record<string, TemplateSample>
 >;
 /**
  * A presentation-only fixture for catalog and empty template-selection previews.
@@ -52,9 +71,28 @@ export function createTemplatePreviewSample(
         ? previewSample.eventType
         : (template?.supportedEventTypes[0] ?? previewSample.eventType)
   ) as EventType;
-  const content = structuredClone(previewSample.content);
+  const templateSample = TEMPLATE_SAMPLES[templateId];
+  const useTemplateSample =
+    templateId === "invitate-wedding" && sampleEventType === "wedding";
+  const content = structuredClone(previewSample.content) as Invitation["content"];
   const dressCode = structuredClone(previewSample.dressCode);
-  const program = previewSample.program.map((entry) => ({ ...entry }));
+  const program =
+    useTemplateSample && templateSample?.program
+      ? templateSample.program.map(({ id, time }) => ({ id, time }))
+      : previewSample.program.map((entry) => ({ ...entry }));
+  if (useTemplateSample && templateSample?.program) {
+    for (const locale of Object.keys(content) as Locale[]) {
+      content[locale].programTitles = {
+        ...content[locale].programTitles,
+        ...Object.fromEntries(
+          templateSample.program.map((item) => [item.id, item.title[locale]]),
+        ),
+      };
+      content[locale].programDescriptions = Object.fromEntries(
+        templateSample.program.map((item) => [item.id, item.description[locale]]),
+      );
+    }
+  }
   let startsAt = previewSample.startsAt;
   const nilufarFotihaPreview = templateId === "nilufar" && sampleEventType === "fotiha";
   if (nilufarFotihaPreview) {
@@ -127,6 +165,7 @@ export function createTemplatePreviewSample(
     gift: structuredClone(previewSample.gift),
     contacts: structuredClone(previewSample.contacts),
     program,
+    artistLineup: useTemplateSample ? templateSample?.artists ?? [] : [],
     gallery: previewSample.gallery.map((item) => ({ ...item })),
     content,
     dressCode,
@@ -177,6 +216,7 @@ export function hasAuthoredInvitationContent(invitation: Invitation): boolean {
       content.programHeading,
       ...content.people,
       ...Object.values(content.programTitles),
+      ...Object.values(content.programDescriptions),
     ]),
   );
   const authoredStory = invitation.story.some((chapter) =>
@@ -203,6 +243,13 @@ export function hasAuthoredInvitationContent(invitation: Invitation): boolean {
   return Boolean(
     authoredCopy ||
     authoredStory ||
+    invitation.artistLineup.some((artist) =>
+      hasText([
+        ...Object.values(artist.name),
+        ...Object.values(artist.role),
+        artist.imageUrl,
+      ]),
+    ) ||
     authoredDressCode ||
     authoredGift ||
     authoredRsvp ||

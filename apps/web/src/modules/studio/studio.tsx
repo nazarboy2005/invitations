@@ -182,6 +182,7 @@ const placeholders = {
   noMusic: "Hozircha yuklangan musiqa yo‘q",
 };
 const PROGRAM_TITLE_MAX_LENGTH = 300;
+const PROGRAM_DESCRIPTION_MAX_LENGTH = 10000;
 
 const defaultProgramItemTitles: Record<Locale, string> = {
   "uz-Latn": "Mehmonlarni kutib olish",
@@ -1081,7 +1082,7 @@ export function Studio({
       setBusy(false);
     }
   }
-  async function upload(file: File, kind: "image" | "audio") {
+  async function upload(file: File, kind: "image" | "audio", artistId?: string) {
     if (!invitationRef.current) return;
     setError("");
     const mimeFallback: Record<string, string> = {
@@ -1185,6 +1186,18 @@ export function Studio({
           },
         });
         setAudioPreview("");
+      } else if (artistId) {
+        update({
+          artistLineup: current.artistLineup.map((artist) =>
+            artist.id === artistId
+              ? {
+                  ...artist,
+                  imageUrl: result.asset.url,
+                  imageAssetId: result.asset.id ?? null,
+                }
+              : artist,
+          ),
+        });
       } else
         update({
           gallery: [
@@ -1818,6 +1831,24 @@ export function Studio({
                             <Trash2 size={14} />
                           </button>
                         </div>
+                        {invitation.templateId === "invitate-wedding" && (
+                          <textarea
+                            className={styles.programDescriptionInput}
+                            aria-label="Dastur bandi izohi"
+                            value={content.programDescriptions[item.id] ?? ""}
+                            maxLength={PROGRAM_DESCRIPTION_MAX_LENGTH}
+                            rows={2}
+                            placeholder="Dastur bandi haqida qisqacha"
+                            onChange={(event) =>
+                              updateContent({
+                                programDescriptions: {
+                                  ...content.programDescriptions,
+                                  [item.id]: event.target.value,
+                                },
+                              })
+                            }
+                          />
+                        )}
                         <span className={styles.programTitleCount}>
                           {(content.programTitles[item.id] ?? "").length}/
                           {PROGRAM_TITLE_MAX_LENGTH}
@@ -1852,6 +1883,10 @@ export function Studio({
                           <span>
                             {content.programTitles[item.id]?.trim() ||
                               placeholders.programItem}
+                            {invitation.templateId === "invitate-wedding" &&
+                              content.programDescriptions[item.id]?.trim() && (
+                                <small>{content.programDescriptions[item.id]}</small>
+                              )}
                           </span>
                         </li>
                       ))}
@@ -2304,6 +2339,92 @@ export function Studio({
                     </button>
                   </div>
                 ))}
+                {invitation.templateId === "invitate-wedding" && (
+                  <>
+                    <div className={styles.divider} />
+                    <div className={styles.groupHeader}>
+                      <h2><Users size={20} /> San’atkorlar va boshlovchilar</h2>
+                      <button
+                        className={styles.textButton}
+                        disabled={identityLocked || invitation.artistLineup.length >= 50}
+                        onClick={() =>
+                          update({
+                            artistLineup: [
+                              ...invitation.artistLineup,
+                              { id: crypto.randomUUID(), name: {}, role: {}, imageUrl: "", imageAssetId: null },
+                            ],
+                          })
+                        }
+                      >
+                        <Plus size={15} /> San’atkor qo‘shish
+                      </button>
+                    </div>
+                    <p className={styles.help}>
+                      Ism, vazifa va suratni kiriting. Har bir yoqilgan tilda ism va vazifani alohida yozishingiz mumkin.
+                    </p>
+                    {invitation.artistLineup.map((artist, index) => (
+                      <div className={styles.storyItem} key={artist.id}>
+                        <div className={styles.twoColumns}>
+                          <Field label={`${index + 1}-san’atkor ismi · ${LANGUAGE_NAMES[locale]}`}>
+                            <input
+                              value={artist.name[locale] ?? ""}
+                              maxLength={300}
+                              disabled={identityLocked}
+                              onChange={(event) =>
+                                update({ artistLineup: invitation.artistLineup.map((row) => row.id === artist.id ? { ...row, name: { ...row.name, [locale]: event.target.value } } : row) })
+                              }
+                            />
+                          </Field>
+                          <Field label={`Vazifasi · ${LANGUAGE_NAMES[locale]}`}>
+                            <input
+                              value={artist.role[locale] ?? ""}
+                              maxLength={300}
+                              disabled={identityLocked}
+                              onChange={(event) =>
+                                update({ artistLineup: invitation.artistLineup.map((row) => row.id === artist.id ? { ...row, role: { ...row.role, [locale]: event.target.value } } : row) })
+                              }
+                            />
+                          </Field>
+                          <Field label="Portret havolasi">
+                            <input
+                              type="url"
+                              value={artist.imageUrl}
+                              maxLength={2048}
+                              disabled={identityLocked}
+                              placeholder="https://…"
+                              onChange={(event) =>
+                                update({ artistLineup: invitation.artistLineup.map((row) => row.id === artist.id ? { ...row, imageUrl: event.target.value, imageAssetId: null } : row) })
+                              }
+                            />
+                          </Field>
+                          <label className={styles.audioUpload}>
+                            <ImagePlus size={18} />
+                            <span>{artist.imageUrl ? "Portretni almashtirish" : "Portret yuklash"}<small>JPG, PNG yoki WebP · 15 MB gacha</small></span>
+                            <input
+                              type="file"
+                              accept="image/jpeg,image/png,image/webp"
+                              disabled={uploading || identityLocked}
+                              onChange={(event) => {
+                                const file = event.target.files?.[0];
+                                if (file) void upload(file, "image", artist.id);
+                                event.target.value = "";
+                              }}
+                            />
+                          </label>
+                          <button
+                            type="button"
+                            className={styles.iconButton}
+                            aria-label="San’atkorni olib tashlash"
+                            disabled={identityLocked}
+                            onClick={() => update({ artistLineup: invitation.artistLineup.filter((row) => row.id !== artist.id) })}
+                          >
+                            <Trash2 size={16} />
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+                  </>
+                )}
                 <div className={styles.divider} />
                 <Toggle
                   title="Fon musiqasi"

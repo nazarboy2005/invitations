@@ -2,6 +2,7 @@ import type { Invitation, Locale } from "@taklifnoma/contracts";
 import { getContent } from "@taklifnoma/contracts";
 import { makeLegacyData } from "@/templates/anor/renderer";
 import { formatDate } from "../date-format";
+import { makeWeddingFields } from "./wedding-fields";
 
 const locale: Record<Locale, string> = {
   "uz-Latn": "uz",
@@ -21,6 +22,7 @@ export function makeWeddingData(
 ) {
   const content = getContent(invitation, activeLocale);
   const base = makeLegacyData(invitation, activeLocale, guestName, preview);
+  const weddingFields = makeWeddingFields(invitation, activeLocale);
   const gallery = invitation.gallery
     .filter((photo) => photo.url.trim())
     .map((photo) => ({
@@ -65,11 +67,7 @@ export function makeWeddingData(
     phoneNumber: invitation.contacts.phoneNumber,
     telegramUsername: invitation.contacts.telegramUsername,
     programHeading: content.programHeading || base.programHeading,
-    program: invitation.program.map((item) => ({
-      id: item.id,
-      time: item.time,
-      title: content.programTitles[item.id] ?? "",
-    })),
+    ...weddingFields,
     gallery,
     dressCode: invitation.dressCode.enabled
       ? {

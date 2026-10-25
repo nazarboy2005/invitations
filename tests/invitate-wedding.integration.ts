@@ -44,6 +44,24 @@ invitation.content["uz-Latn"].greeting = "Wedding integration greeting";
 invitation.content["uz-Latn"].message = "Initial invitation message";
 invitation.content["uz-Latn"].venueName = "Wedding integration venue";
 invitation.content["uz-Latn"].address = "Initial test address";
+invitation.content["uz-Latn"].programTitles = {
+  "wedding-integration-program": "Integration ceremony",
+};
+invitation.content["uz-Latn"].programDescriptions = {
+  "wedding-integration-program": "Creator-authored program detail",
+};
+invitation.program = [
+  { id: "wedding-integration-program", time: "19:00" },
+];
+invitation.artistLineup = [
+  {
+    id: "wedding-integration-artist",
+    name: { "uz-Latn": "Integration artist" },
+    role: { "uz-Latn": "Integration host" },
+    imageUrl: "https://example.test/integration-artist.jpg",
+    imageAssetId: null,
+  },
+];
 invitation.startsAt = "2027-06-14T18:30";
 invitation.timezone = "Asia/Tashkent";
 
@@ -129,6 +147,13 @@ test("Wedding draft saves and reopens, while its catalog entry stays private", a
     openedInvitation.content["uz-Latn"].message,
     "Initial invitation message",
   );
+  assert.equal(
+    openedInvitation.content["uz-Latn"].programDescriptions[
+      "wedding-integration-program"
+    ],
+    "Creator-authored program detail",
+  );
+  assert.equal(openedInvitation.artistLineup[0]?.name["uz-Latn"], "Integration artist");
 
   const updated: Invitation = {
     ...openedInvitation,
@@ -166,6 +191,13 @@ test("Wedding draft saves and reopens, while its catalog entry stays private", a
     reopenedInvitation.content["uz-Latn"].address,
     "Saved test address",
   );
+  assert.equal(
+    reopenedInvitation.content["uz-Latn"].programDescriptions[
+      "wedding-integration-program"
+    ],
+    "Creator-authored program detail",
+  );
+  assert.equal(reopenedInvitation.artistLineup[0]?.name["uz-Latn"], "Integration artist");
 
   const publish = await request(`/api/invitations/${invitation.id}/publish`, {
     revision: 2,

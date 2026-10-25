@@ -4,6 +4,46 @@
   "eventType": "wedding",
   "startsAt": "2027-06-12T17:00",
   "timezone": "Asia/Tashkent",
+  "templateSamples": {
+    "invitate-wedding": {
+      "program": [
+        {
+          "id": "wedding-arrival",
+          "time": "17:20",
+          "title": { "uz-Latn": "Kelish vaqti", "uz-Cyrl": "Келиш вақти", "en": "Guest arrival", "ru": "Встреча гостей" },
+          "description": { "uz-Latn": "Iltimos, o‘zingiz bilan yaxshi kayfiyat va tabassumingizni olib keling.", "uz-Cyrl": "Илтимос, ўзингиз билан яхши кайфият ва табассумингизни олиб келинг.", "en": "Please bring your good mood and your smile.", "ru": "Пожалуйста, приходите с хорошим настроением и улыбкой." }
+        },
+        {
+          "id": "wedding-ceremony",
+          "time": "17:30",
+          "title": { "uz-Latn": "Nikoh marosimi", "uz-Cyrl": "Никоҳ маросими", "en": "Wedding ceremony", "ru": "Свадебная церемония" },
+          "description": { "uz-Latn": "Siz hayajonli lahzalarning guvohi bo‘lasiz — ro‘molchalarni tayyor tuting.", "uz-Cyrl": "Сиз ҳаяжонли лаҳзаларнинг гувоҳи бўласиз — рўмолчаларни тайёр тутинг.", "en": "You will witness moving moments, so keep a handkerchief nearby.", "ru": "Вас ждут трогательные минуты — приготовьте платочки." }
+        },
+        {
+          "id": "wedding-photo-break",
+          "time": "17:40",
+          "title": { "uz-Latn": "Foto-pauza", "uz-Cyrl": "Фото-пауза", "en": "Photo break", "ru": "Фотопауза" },
+          "description": { "uz-Latn": "Ushbu kun xotirangizda va suratlarda uzoq saqlanib qolsin.", "uz-Cyrl": "Ушбу кун хотирангизда ва суратларда узоқ сақланиб қолсин.", "en": "May this day stay with you in your memories and photographs.", "ru": "Пусть этот день надолго останется в вашей памяти и на фотографиях." }
+        },
+        {
+          "id": "wedding-banquet",
+          "time": "18:00",
+          "title": { "uz-Latn": "Dabdabali banket", "uz-Cyrl": "Дабдабали банкет", "en": "Wedding banquet", "ru": "Свадебный банкет" },
+          "description": { "uz-Latn": "Mazali taomlar, jonli musiqa, raqs va ko‘ngilochar lahzalar vaqti.", "uz-Cyrl": "Мазали таомлар, жонли мусиқа, рақс ва кўнгилочар лаҳзалар вақти.", "en": "Enjoy delicious food, live music, dancing, and entertainment.", "ru": "Время вкусных блюд, живой музыки, танцев и развлечений." }
+        }
+      ],
+      "artists": [
+        { "id": "sample-artist-davron", "name": { "uz-Latn": "Davron Kabulov", "uz-Cyrl": "Даврон Кабулов", "en": "Davron Kabulov", "ru": "Даврон Кабулов" }, "role": { "uz-Latn": "Boshlovchi", "uz-Cyrl": "Бошловчи", "en": "Host", "ru": "Ведущий" }, "imageUrl": "/templates/invitate-wedding/assets/images/wedding/davron.png" },
+        { "id": "sample-artist-nilufar", "name": { "uz-Latn": "Nilufar Sotiboldiyeva", "uz-Cyrl": "Нилуфар Сотиболдиева", "en": "Nilufar Sotiboldiyeva", "ru": "Нилуфар Сотиболдиева" }, "role": { "uz-Latn": "Boshlovchi", "uz-Cyrl": "Бошловчи", "en": "Host", "ru": "Ведущая" }, "imageUrl": "/templates/invitate-wedding/assets/images/wedding/nilufar.png" },
+        { "id": "sample-artist-fano", "name": { "uz-Latn": "Fano", "uz-Cyrl": "Фано", "en": "Fano", "ru": "Фано" }, "role": { "uz-Latn": "San’atkorlar guruhi", "uz-Cyrl": "Санъаткорлар гуруҳи", "en": "Music group", "ru": "Музыкальная группа" }, "imageUrl": "/templates/invitate-wedding/assets/images/wedding/fano.png" },
+        { "id": "sample-artist-yulduz", "name": { "uz-Latn": "Yulduz Usmonova", "uz-Cyrl": "Юлдуз Усмонова", "en": "Yulduz Usmonova", "ru": "Юлдуз Усмонова" }, "role": { "uz-Latn": "Primadonna", "uz-Cyrl": "Примадонна", "en": "Singer", "ru": "Певица" }, "imageUrl": "/templates/invitate-wedding/assets/images/wedding/yulduz.png" },
+        { "id": "sample-artist-tohir", "name": { "uz-Latn": "Tohir Sodiqov", "uz-Cyrl": "Тоҳир Содиқов", "en": "Tohir Sodiqov", "ru": "Тоҳир Содиқов" }, "role": { "uz-Latn": "Afsonaviy bolalar", "uz-Cyrl": "Афсонавий болалар", "en": "Afsonaviy Bolalar", "ru": "Афсонавий Болалар" }, "imageUrl": "/templates/invitate-wedding/assets/images/wedding/toxir.png" },
+        { "id": "sample-artist-jahongir", "name": { "uz-Latn": "Jahongir Otajonov", "uz-Cyrl": "Жаҳонгир Отажонов", "en": "Jahongir Otajonov", "ru": "Жаҳонгир Отажонов" }, "role": { "uz-Latn": "Jonli ijro qiroli", "uz-Cyrl": "Жонли ижро қироли", "en": "Live music performer", "ru": "Исполнитель живой музыки" }, "imageUrl": "/templates/invitate-wedding/assets/images/wedding/jahongir.png" },
+        { "id": "sample-artist-sevara", "name": { "uz-Latn": "Sevara Nazarxon", "uz-Cyrl": "Севара Назархон", "en": "Sevara Nazarxon", "ru": "Севара Назархон" }, "role": { "uz-Latn": "Jozibali san’atkor", "uz-Cyrl": "Жозибали санъаткор", "en": "Singer", "ru": "Певица" }, "imageUrl": "/templates/invitate-wedding/assets/images/wedding/sevar.png" },
+        { "id": "sample-artist-munisa", "name": { "uz-Latn": "Munisa Rizayeva", "uz-Cyrl": "Муниса Ризаева", "en": "Munisa Rizayeva", "ru": "Муниса Ризаева" }, "role": { "uz-Latn": "Go‘zal va betakror san’atkor", "uz-Cyrl": "Гўзал ва бетакрор санъаткор", "en": "Singer", "ru": "Певица" }, "imageUrl": "/templates/invitate-wedding/assets/images/wedding/munisa.png" }
+      ]
+    }
+  },
   "gift": {
     "enabled": true,
     "receiptUploadEnabled": false,
@@ -229,7 +269,8 @@
         "sample-music": "Raqs va kuy-qo‘shiqlar",
         "sample-cake": "To‘y torti",
         "sample-farewell": "Yakuniy so‘z"
-      }
+      },
+      "programDescriptions": {}
     },
     "uz-Cyrl": {
       "title": "Бизнинг унутилмас кунимиз",
@@ -250,7 +291,8 @@
         "sample-music": "Рақс ва куй-қўшиқлар",
         "sample-cake": "Тўй торти",
         "sample-farewell": "Якуний сўз"
-      }
+      },
+      "programDescriptions": {}
     },
     "en": {
       "title": "Our Unforgettable Day",
@@ -271,7 +313,8 @@
         "sample-music": "Music and dancing",
         "sample-cake": "Wedding cake",
         "sample-farewell": "Farewell"
-      }
+      },
+      "programDescriptions": {}
     },
     "ru": {
       "title": "Наш незабываемый день",
@@ -292,7 +335,8 @@
         "sample-music": "Музыка и танцы",
         "sample-cake": "Свадебный торт",
         "sample-farewell": "Заключительное слово"
-      }
+      },
+      "programDescriptions": {}
     }
   },
   "eventSamples": {

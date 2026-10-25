@@ -54,7 +54,7 @@ export type LegacyData = {
     lng: number | null;
     mapUrl: string;
   };
-  program: Array<{ id: string; time: string; title: string }>;
+  program: Array<{ id: string; time: string; title: string; description?: string }>;
   story: Array<{ id: string; title: string; text: string }>;
   gallery: Array<{ id: string; src: string; alt: string; caption: string }>;
   contacts: Array<{

@@ -52,6 +52,23 @@ export async function assertPublicMedia(
       );
     assets.push(asset as { object_key: string; size_bytes: number });
   }
+  for (const artist of invitation.artistLineup) {
+    if (!artist.imageUrl.startsWith("/api/media/")) continue;
+    const [asset] = await tx`
+      SELECT object_key,size_bytes FROM media_assets
+      WHERE id::text=${artist.imageAssetId ?? ""} AND owner_id=${userId}
+        AND url=${artist.imageUrl} AND url=('/api/media/' || id::text)
+        AND status='ready' AND visibility='public' AND mime_type LIKE 'image/%'
+      FOR SHARE
+    `;
+    if (!asset)
+      throw new ApiError(
+        400,
+        "MEDIA_NOT_READY",
+        "San’atkor portretlarini tekshiring yoki olib tashlang.",
+      );
+    assets.push(asset as { object_key: string; size_bytes: number });
+  }
   if (invitation.music.enabled && invitation.music.url) {
     if (
       invitation.music.url !== CATALOG_PREVIEW_MUSIC.url ||

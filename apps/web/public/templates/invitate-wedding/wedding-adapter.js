@@ -9,6 +9,13 @@
   const byId = (id) => document.getElementById(id);
   const programTemplate = document.querySelector(".program-list .prog-item")?.cloneNode(true);
   const galleryTemplate = document.querySelector(".gallery-grid .g-item")?.cloneNode(true);
+  const artistTemplate = document.querySelector(".artists-grid .artist-card")?.cloneNode(true);
+  const artistLabels = {
+    uz: ["San’at kechasi", "Mashhur san’atkorlar"],
+    "uz-Cyrl": ["Санъат кечаси", "Машҳур санъаткорлар"],
+    en: ["Entertainment", "Featured artists"],
+    ru: ["Музыкальный вечер", "Приглашённые артисты"],
+  };
   const setText = (selector, value) => {
     const node = document.querySelector(selector);
     if (node) node.textContent = value || "";
@@ -48,6 +55,8 @@
     setText("#invitation .section-title", data.greeting || tr("guests"));
     setText("#program .section-tag", tr("program"));
     setText("#program .section-title", data.programHeading || tr("programTitle"));
+    setText("#artists .section-tag", (artistLabels[data.locale] || artistLabels.uz)[0]);
+    setText("#artists .section-title", (artistLabels[data.locale] || artistLabels.uz)[1]);
     setText("#gallery .section-tag", tr("photos"));
     setText("#gallery .section-title", tr("gallery"));
     setText("#dresscode .section-tag", tr("dress"));
@@ -70,12 +79,12 @@
     const programRoot = document.querySelector(".program-list");
     if (programRoot) {
       programRoot.replaceChildren();
-      (data.program || []).filter((item) => item.title || item.time).forEach((item) => {
+      (data.program || []).filter((item) => item.title || item.time || item.description).forEach((item) => {
         const row = programTemplate?.cloneNode(true);
         if (!row) return;
         row.querySelector(".prog-time").textContent = item.time || "";
         row.querySelector(".prog-title").textContent = item.title || "";
-        row.querySelector(".prog-desc").textContent = "";
+        row.querySelector(".prog-desc").textContent = item.description || "";
         row.classList.remove("vis"); programRoot.append(row);
       });
       programRoot.closest("#program").hidden = !programRoot.children.length;
@@ -102,6 +111,24 @@
       (dress.colors || []).forEach((color) => { const item = document.createElement("div"); item.className = "swatch vis"; const circle = document.createElement("div"); circle.className = "sw-circle"; circle.style.backgroundColor = color.hex || "#c9a84c"; const name = document.createElement("span"); name.className = "sw-lbl"; name.textContent = color.name || ""; item.append(circle, name); palette.append(item); });
       const note = document.querySelector(".dc-note"); if (note) note.textContent = dress.text || dress.note || dress.style || "";
     }
+    const artistRows = (data.artists || []).filter((item) => item.name || item.role || item.imageUrl);
+    const artistGrid = document.querySelector(".artists-grid");
+    if (artistGrid) {
+      artistGrid.replaceChildren();
+      artistRows.forEach((item) => {
+        const card = artistTemplate?.cloneNode(true);
+        if (!card) return;
+        const image = card.querySelector("img");
+        if (image) { image.src = item.imageUrl || ""; image.alt = item.name || ""; image.hidden = !item.imageUrl; }
+        const role = card.querySelector(".artist-role");
+        if (role) role.textContent = item.role || "";
+        const name = card.querySelector(".artist-name");
+        if (name) name.textContent = item.name || "";
+        artistGrid.append(card);
+      });
+    }
+    const artists = byId("artists");
+    if (artists) artists.hidden = artistRows.length === 0;
     if (!data.rsvpEnabled) byId("rsvp").hidden = true;
     if (data.preview) { const previewButton = byId("submitBtn"); if (previewButton) previewButton.disabled = true; }
     const formName = document.querySelector('#rsvpForm input[name="name"]');
