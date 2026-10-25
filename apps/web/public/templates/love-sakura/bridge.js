@@ -18,7 +18,7 @@
     put(q("p",sections[3]),data.message||t().intro);const count=all("span",sections[3]);const labels=[t().days,t().hours,t().minutes,t().seconds];count.forEach((n,i)=>{if(i%2===1)put(n,labels[(i-1)/2]);});const dateText=q(".space-y-3 > p",sections[3]);if(dateText)put(dateText,fmt(date));
     const location=sections[4];const evs=data.program?.length?data.program:[{title:t().venue,time:data.date?.time,venue:venue.name,address:venue.address,mapUrl:venue.mapUrl}];const cards=all("h3",location);cards.forEach((h,i)=>{const e=evs[i];const group=h.parentElement;hide(group,!e);if(!e)return;put(h,e.title||t().venue);const ps=all("p",group);put(ps[0],e.date?fmt(e.date):fmt(date,true));put(ps[1],e.time||data.date?.time||"");put(ps[2],e.venue||venue.name||"");put(ps[3],e.address||venue.address||"");const a=q("a",group),url=e.mapUrl||venue.mapUrl||(venue.latitude&&venue.longitude?`https://maps.google.com/?q=${venue.latitude},${venue.longitude}`:"");if(a){a.href=url||"#";a.target="_blank";a.rel="noopener noreferrer";put(a,t().map);hide(a,!url);}});
     put(q("h2",sections[5]),t().story);const story=data.story||[];const storyPs=all("p",sections[5]);storyPs.forEach((p,i)=>{const item=story[i];if(item){put(p,[item.title,item.description||item.text].filter(Boolean).join(" "));hide(p,false);}else hide(p,true);});hide(sections[5],!story.length);
-    put(q("h2",sections[6]),t().gallery);const gallery=data.gallery||[];hide(sections[6],!gallery.length);const imgs=all("img",sections[6]);imgs.forEach((img,i)=>{const item=gallery[i],card=img.closest(".aspect-square")||img.closest("a")||img.parentElement;if(item?.src){img.src=item.src;img.alt=item.alt||item.caption||`${t().gallery} ${i+1}`;hide(card,false);}else hide(card,true);});
+    put(q("h2",sections[6]),t().gallery);const gallery=(data.gallery||[]).filter(item=>typeof item?.src==="string"&&item.src.trim());hide(sections[6],!gallery.length);const imgs=all("img",sections[6]);imgs.forEach((img,i)=>{const item=gallery[i],card=img.closest(".aspect-square")||img.closest("a")||img.parentElement;if(item?.src){img.src=item.src;img.alt=item.alt||item.caption||`${t().gallery} ${i+1}`;hide(card,false);}else hide(card,true);});
     const wishesEnabled=data.wishesEnabled!==false;hide(sections[7],!wishesEnabled);if(wishesEnabled)setupForms(p);setupAttendance(p);setupGift();setupLocale(p);setupSourceCalendar(date,venue);setupCountdown(date);setupMusic(p);
     setupSourceMotion(p);
   }
@@ -40,7 +40,9 @@
     sourceRevealTargets.forEach(el=>{el.style.opacity="0";el.style.transform="translateY(15px)";});
     sourceMotionObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{
       const el=entry.target;
+      if(!entry.isIntersecting&&!el.dataset.lsSourceSeen)return;
       el.getAnimations().forEach(animation=>animation.cancel());
+      if(entry.isIntersecting)el.dataset.lsSourceSeen="true";
       el.animate(entry.isIntersecting
         ?[{opacity:0,transform:"translateY(15px)"},{opacity:1,transform:"translateY(0px)"}]
         :[{opacity:1,transform:"translateY(0px)"},{opacity:0,transform:"translateY(15px)"}],
@@ -88,4 +90,3 @@
   addEventListener("message",e=>{if(e.source===parent&&e.origin===location.origin&&e.data?.type===`${id}:update`)render(e.data.payload);});
   try{const init=JSON.parse(window.name);if(init?.type===`${id}:update`)render(init.payload);}catch{}
 })();
-

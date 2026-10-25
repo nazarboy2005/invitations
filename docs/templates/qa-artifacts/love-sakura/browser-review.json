@@ -1,0 +1,227 @@
+{
+  "reviewDate": "2026-10-25",
+  "browser": "Headless Chrome",
+  "localRoute": "/preview?template=love-sakura&qaSilent=1",
+  "source": {
+    "provider": "Chorlove",
+    "path": "D:/Projects/Invitations/Chorlove/Web invitations/templates/love-sakura/preview-frame.html",
+    "topLevelSections": 10,
+    "sourceMobileNormal": {
+      "file": "source-mobile-normal.png",
+      "width": 390,
+      "height": 6877,
+      "bytes": 1462785,
+      "sha256": "d25912e4f7617833630b99954a8d82ec43a0a54828c41e2a697d9d3f0cf429a3"
+    },
+    "staticParity": {
+      "cssWidths": [
+        390,
+        450
+      ],
+      "dpr": 2,
+      "differingRgbChannels": 0
+    }
+  },
+  "dynamicPreview": {
+    "viewport": "390x844 mobile; 1440x900 desktop",
+    "originalTemplateSections": 10,
+    "additionalPlatformSections": 4,
+    "assets": {
+      "loadedImages": 25,
+      "failedImages": 0,
+      "fonts": "loaded"
+    },
+    "consoleErrors": 0,
+    "httpFailures": 0,
+    "captures": [
+      {
+        "file": "preview-mobile-normal.png",
+        "width": 390,
+        "height": 5710,
+        "sha256": "d2b9cf702828ac2ba731873e8e54ad164a4769fe85be0bb669734fb5e029042f",
+        "sectionHeights": [
+          722,
+          517,
+          1010,
+          722,
+          1138,
+          0,
+          0,
+          643,
+          431,
+          520
+        ],
+        "mediaReduced": false,
+        "runningAnimations": 0,
+        "loadedImages": 25,
+        "failedImages": 0,
+        "fonts": "loaded",
+        "errors": 0,
+        "httpFailures": 0
+      },
+      {
+        "file": "preview-mobile-reduced.png",
+        "width": 390,
+        "height": 5710,
+        "sha256": "1ae8a18dde7008985ee0be195a17a4de0433fa5f7f2f5935873f8abc49a2672d",
+        "sectionHeights": [
+          722,
+          517,
+          1010,
+          722,
+          1138,
+          0,
+          0,
+          643,
+          431,
+          520
+        ],
+        "mediaReduced": true,
+        "runningAnimations": 0,
+        "loadedImages": 25,
+        "failedImages": 0,
+        "fonts": "loaded",
+        "errors": 0,
+        "httpFailures": 0
+      },
+      {
+        "file": "preview-desktop-opening-normal.png",
+        "width": 450,
+        "height": 723,
+        "sha256": "f2b0bc0bfdd67655c8a5b276213852c2a3d9a73d1fac306c78ee876828161832",
+        "sectionHeights": [
+          722,
+          517,
+          978,
+          722,
+          1170,
+          0,
+          0,
+          643,
+          442,
+          520
+        ],
+        "mediaReduced": false,
+        "runningAnimations": 0,
+        "loadedImages": 25,
+        "failedImages": 0,
+        "fonts": "loaded",
+        "errors": 0,
+        "httpFailures": 0
+      },
+      {
+        "file": "preview-desktop-opening-reduced.png",
+        "width": 450,
+        "height": 723,
+        "sha256": "39df1161bb37b48f906c56347e1545c312441e25dc70351a3cf27a5514e51b36",
+        "sectionHeights": [
+          722,
+          517,
+          978,
+          722,
+          1170,
+          0,
+          0,
+          643,
+          442,
+          520
+        ],
+        "mediaReduced": true,
+        "runningAnimations": 0,
+        "loadedImages": 25,
+        "failedImages": 0,
+        "fonts": "loaded",
+        "errors": 0,
+        "httpFailures": 0
+      }
+    ]
+  },
+  "motion": {
+    "sourceThreshold": 0.2,
+    "durationMs": 600,
+    "easing": "ease-out",
+    "verticalOffsetPx": 15,
+    "normal": {
+      "offscreen": {
+        "opacity": 0,
+        "translateY": 15
+      },
+      "enter": {
+        "opacity": 1,
+        "translateY": 0
+      },
+      "exit": {
+        "opacity": 0,
+        "translateY": 15
+      },
+      "reentry": {
+        "opacity": 1,
+        "translateY": 0
+      },
+      "initialOffscreenFade": false
+    },
+    "reduced": {
+      "rsvpVisibleImmediately": true,
+      "runningAnimations": 0
+    },
+    "music": {
+      "hoverScale": 1.1,
+      "pressScale": 0.9,
+      "pulse": "2s cubic-bezier(.4,0,.6,1)",
+      "reducedHoverTransform": "none",
+      "reducedPulseDurationSeconds": 0.00001
+    }
+  },
+  "gallery": {
+    "fixtureBlankEntries": 6,
+    "sectionHidden": true,
+    "sectionHeight": 0
+  },
+  "interactions": {
+    "previewSubmit": {
+      "blocked": true,
+      "status": "Ko'rish rejimida yuborish o'chiq."
+    },
+    "rsvp": {
+      "yes": {
+        "request": {
+          "status": "yes",
+          "partySize": 1
+        },
+        "localApiResponse": 503
+      },
+      "no": {
+        "request": {
+          "status": "no",
+          "partySize": 0
+        },
+        "localApiResponse": 503
+      },
+      "qaIdWasNonexistent": true
+    },
+    "databaseConfig": {
+      "appsWebEnvLocalPresent": false,
+      "databaseUrlInShellPresent": false
+    },
+    "writesCreated": 0,
+    "successfulInvitationApiSaveReopenOrPublicFlowTested": false
+  },
+  "catalogArtwork": {
+    "file": "/templates/love-sakura/catalog-opening.png",
+    "width": 900,
+    "height": 1444,
+    "sha256": "d4f7e885e2a137c3c3316893d73f4c3681dc525e297814f223fe134ec0e142f4",
+    "sourceRender": "Archived first section, captured CSS, local source fonts/images; 450x722 CSS px at DPR 2"
+  },
+  "providerSearch": {
+    "allLocalProviderFoldersSearched": true,
+    "exactSourceFound": "Chorlove/Web invitations/templates/love-sakura plus images/love-sakura",
+    "otherSakuraMatch": "Taklifla sakura__3c8d741ae0737c86.html and sakura-img assets; distinct page title/assets",
+    "standaloneOriginalCoverFound": false
+  },
+  "releaseGate": {
+    "published": false,
+    "selectable": false,
+    "reason": "Local RSVP API responds HTTP 503 and workspace has no local database configuration; valid-invitation success, save/reopen, and public lifecycle remain unverified."
+  }
+}

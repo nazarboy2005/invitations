@@ -39,7 +39,7 @@ test("Love Sakura restores the captured RSVP and music motion",{skip:!existsSync
  assert.match(routeModule,/navigator\.clipboard\.writeText\(s\.replace\(\/\\s\+\/g,""\)\)/);
  assert.equal((html.match(/style="opacity:0;transform:translateY\(15px\)"/g)||[]).length,2);
  assert.match(bridge,/sourceRevealTargets=all\('\[style\*="opacity:0"\]\[style\*="translateY\(15px\)"\]'\)/);
- assert.match(bridge,/\{threshold:\.2\}/);assert.match(bridge,/duration:600,easing:"ease-out",fill:"both"/);
+ assert.match(bridge,/\{threshold:\.2\}/);assert.match(bridge,/if\(!entry\.isIntersecting&&!el\.dataset\.lsSourceSeen\)return/);assert.match(bridge,/if\(entry\.isIntersecting\)el\.dataset\.lsSourceSeen="true"/);assert.match(bridge,/duration:600,easing:"ease-out",fill:"both"/);
  assert.match(bridge,/el\.style\.opacity="1";el\.style\.transform="none"/);
  assert.match(bridge,/setupAttendance\(p\)/);assert.match(bridge,/hide\(section,rsvp\.enabled===false\)/);assert.match(bridge,/data-ls-generated/);
  assert.match(adapter,/\.ls-music:hover\{transform:scale\(1\.1\)\}/);
@@ -49,7 +49,7 @@ test("Love Sakura restores the captured RSVP and music motion",{skip:!existsSync
 });
 test("Love Sakura package removes sample site runtime and binds the shared contract",()=>{
  assert.match(html,/data-chorlove-template="love-sakura" hidden/);assert.doesNotMatch(html,/_next\/image|_next\/static\/chunks\/[\w~.-]+\.js/);
- assert.match(bridge,/hide\(sections\[6\],!gallery\.length\)/);assert.match(bridge,/hide\(card,true\)/);
+ assert.match(bridge,/const gallery=\(data\.gallery\|\|\[\]\)\.filter\(item=>typeof item\?\.src==="string"&&item\.src\.trim\(\)\)/);assert.match(bridge,/hide\(sections\[6\],!gallery\.length\)/);assert.match(bridge,/hide\(card,true\)/);
  assert.doesNotMatch(html,/chorlove\.uz\/music|Patrick Watson|_next\/static\/chunks\/[0-9a-z~.-]+\.js|<script[^>]+src="https?:/i);
  for(const field of ["groom","bride","dateTime","venue","program","story","gallery","wishes","rsvp","toyona","enabledLocales","reducedMotion","music"])assert.ok(bridge.includes(field),`missing shared field ${field}`);
  assert.match(bridge,/api\/public\/invitations/);
