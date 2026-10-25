@@ -87,9 +87,9 @@
     const context = canvas.getContext("2d");
     if (!context) return;
     context.font = computed.font;
-    // Keep creator-provided titles inside the cover's clear center band. The
-    // side ornaments occupy more than the CSS box width around the title.
-    const availableWidth = card.clientWidth * 0.68;
+    // Keep creator-provided titles inside the clear center of the cover band,
+    // with space around the side ornaments instead of filling the whole band.
+    const availableWidth = card.clientWidth * 0.48;
     const measuredWidth = context.measureText(heading.textContent).width;
     if (!measuredWidth || measuredWidth <= availableWidth) {
       heading.style.removeProperty("font-size");
@@ -97,7 +97,7 @@
       return;
     }
 
-    const fittedSize = Math.max(20, baseSize * (availableWidth / measuredWidth));
+    const fittedSize = Math.max(18, baseSize * (availableWidth / measuredWidth));
     heading.style.whiteSpace = "nowrap";
     heading.style.fontSize = `${fittedSize}px`;
   }

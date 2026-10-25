@@ -58,7 +58,7 @@ test("Golden Card bridge maps authored invitation data and honors reduced motion
   assert.match(bridge, /prefers-reduced-motion/);
   assert.match(bridge, /function fitCoverHeading\(\)/);
   assert.match(bridge, /measureText\(heading\.textContent\)/);
-  assert.match(bridge, /card\.clientWidth \* 0\.68/);
+  assert.match(bridge, /card\.clientWidth \* 0\.48/);
   assert.match(bridge, /new ResizeObserver\(fitCoverHeading\)/);
   assert.match(bridge, /\$\{templateId\}:language/);
   assert.match(html, /data-golden="groom"/);
