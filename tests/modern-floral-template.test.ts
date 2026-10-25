@@ -320,6 +320,9 @@ test("Modern Floral RSVP has fixed party size and exposes only source-backed opt
   assert.match(giftBridge, /g\.cardNumber/);
   assert.match(giftBridge, /body\.dataset\.mfGiftOriginal/);
   assert.match(giftBridge, /caption\.style\.color=accent\.replace\(\/\^rgb\\\(\(\.\+\)\\\)\$\/,"rgba\(\$1, 0\.88\)"\)/);
+  assert.match(giftBridge, /numberGroup\.className="space-y-3"/);
+  const initialCopyStyles = giftBridge.slice(giftBridge.indexOf("copy.style.backgroundColor=open.style.backgroundColor"), giftBridge.indexOf('copy.setAttribute("aria-label",giftText("copy"))'));
+  assert.doesNotMatch(initialCopyStyles, /borderColor/);
   assert.match(giftBridge, /navigator\.clipboard\.writeText\(number\)/);
   assert.ok(giftBridge.includes('M20 6 9 17l-5-5'));
   assert.match(giftBridge, /giftCopyTimer=window\.setTimeout/);
@@ -338,6 +341,8 @@ test("Modern Floral RSVP has fixed party size and exposes only source-backed opt
     assert.match(giftModule, /Card number/);
     assert.match(giftModule, /Copy card number/);
     assert.match(giftModule, /onClick:\(\)=>m\(!0\)/);
+    assert.match(giftModule, /style:n\?p\.copiedStyle:p\.buttonStyle/);
+    assert.match(giftModule, /copiedStyle:\{backgroundColor:R\(a,\.12\),color:t,borderColor:R\(a,\.22\)\}/);
     assert.match(giftModule, /F\.Check/);
     assert.match(giftModule, /setTimeout\(\(\)=>o\(!1\),1800\)/);
   }
