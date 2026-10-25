@@ -229,6 +229,8 @@ test("Glass Pink schedule retains the original illustrated timeline markers", ()
     assert.ok(asset, `${file} must have source provenance`);
     assert.ok(source.includes(`src=\"${asset.originalReference}\"`), `${file} is referenced by the original page`);
     assert.ok(html.includes(`src=\"/templates/glass-pink/assets/${file}\"`), `${file} is wired into the packaged timeline`);
+    assert.ok(source.includes(`src=\"${asset.originalReference}\" style=\"opacity:0;transform:scale(0.8)\"`), `${file} keeps its source reveal start state`);
+    assert.ok(html.includes(`src=\"/templates/glass-pink/assets/${file}\" style=\"opacity:0;transform:scale(0.8)\"`), `${file} starts in the source reveal state`);
     const bytes = readFileSync(resolve(root, "apps/web/public/templates/glass-pink/assets", file));
     assert.equal(bytes.length, asset.bytes);
     assert.equal(createHash("sha256").update(bytes).digest("hex"), asset.sha256);
@@ -239,6 +241,15 @@ test("Glass Pink schedule retains the original illustrated timeline markers", ()
   assert.match(sourceModule, /transition:\{duration:\.6,delay:\.3\}/);
   assert.match(bridge, /duration: 600, delay: \[0, 150, 300\]\[index\] \|\| 0, amount: 0\.3, toOpacity: 0\.9, toTransform: "scale\(1\)"/);
   assert.match(html, /pointer-events-none absolute left-0 top-2 bottom-2 flex flex-col justify-around items-center z-10/);
+});
+
+test("Glass Pink maps the schedule subtitle into the source subtitle slot", () => {
+  const source = readFileSync(sourceSnapshotPath, "utf8");
+  assert.match(source, /To&#x27;y kuni tartibi/);
+  assert.match(html, /data-chorlove-field="programHeading"/);
+  assert.match(bridge, /const programHeading = root\.querySelector\('\[data-chorlove-field="programHeading"\]'\)/);
+  assert.match(bridge, /if \(data\.programHeading\) text\(programHeading, data\.programHeading\)/);
+  assert.doesNotMatch(bridge, /const programHeading = root\.querySelector\('\[data-chorlove-i18n="programTitle"\]'\)/);
 });
 
 test("Glass Pink opener keeps the original timed exit instead of hiding on click", () => {

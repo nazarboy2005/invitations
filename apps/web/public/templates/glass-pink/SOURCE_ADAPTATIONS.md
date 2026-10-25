@@ -20,6 +20,8 @@ The archived route module's gift modal uses a 300ms default opacity fade for the
 
 The source timeline has a three-icon column (`coming.webp`, `cake.webp`, and `water.webp`) at the left of its event rows. These files were absent from both the capture's image folder and the package, so the exact original host files are now included in `assets/`; their captured references, byte lengths, and SHA-256 hashes are recorded in `source/provenance.json`. Their source reveal starts at opacity 0/scale .8, enters to opacity .9/scale 1 at a .3 viewport threshold, lasts 600ms, and staggers by 150ms.
 
+The package's timeline icons now retain that source opacity/scale start state, which was missing in the previous static markup. Browser comparison at 1280×720 confirms the source and package icons settle at opacity .9/scale 1, reset to opacity 0/scale .8 after leaving the viewport, and reveal again when re-entering. The source subtitle slot is also correctly bound to `programHeading`; previously that value overwrote the title while leaving the subtitle blank. Reduced-motion preview opens without the source opener choreography and displays the schedule icons immediately in their final state. The focused Glass Pink test asserts the source icon start style and subtitle binding.
+
 Local source-art audit (2026-10-23): Chorlove's capture manifest maps the Glass Pink preview-frame HTML and 15 Glass Pink image files, all original floral/decorative components. All 22 packaged artwork/font files compared against the archive have exact byte matches. The archived compiled page module supplies the original opener and animation behavior; the source snapshot supplies the first-page artwork. The preserved page's JSON-LD references `https://payment.chorlove.uz/media-assets/dfe335c1-c1d0-4b69-9ed8-998d277ac34f/file`, but that media URL has no local manifest entry or captured file. The local `01/02/03-chorlove-preview-frame.png` artifacts are full-page screenshots with different compositions; the catalog uses the portrait source opening capture rather than those full-page images.
 
 Provider-wide follow-up: all available provider capture manifests, capture titles/slugs, and text references were searched for Glass Pink; the only matching page is Chorlove's `templates/glass-pink/preview-frame.html`. A SHA-256 scan of the full non-production archive confirms every packaged image/font has a byte-identical Chorlove source. Three ornaments are intentionally reused in other Chorlove templates; no Glass Pink page or artwork was found under a different provider.
@@ -56,12 +58,13 @@ titles, the marker scales from zero, and each row uses its source `0.08 * row`
 delay and `0.5` visibility threshold. Reduced motion clears the hidden start
 states and leaves each node at its final visible state. Contact cards now use
 the captured source card container and card styling, and wish cards use the
-source's rounded, translucent card styling. The current local browser check
-opens the packaged gift portal from the gift-box button and confirms the
-source-sized 448×402px modal, card content, close button, Escape dismissal, and
-immediate open/close under the reduced-motion preview. The packaged timeline
-shows the three restored schedule images in the original left-side icon rail;
-all three image requests load. The source route module and asset hashes are
-asserted by the focused test suite. Full-page scroll/re-entry timing has not
-been freshly browser-compared in this repair, so this check does not claim new
-visual verification for every section reveal.
+source's rounded, translucent card styling. Local browser comparison at
+1280×720 confirms the schedule icons and heading hide when scrolled away and
+reveal again on re-entry, with their source-defined start and final states.
+The reduced-motion preview shows those icons immediately in their final state.
+The packaged gift portal also matches its 448×402px source modal, card content,
+close button, Escape dismissal, and immediate open/close under reduced motion.
+The focused suite asserts the source route module, asset hashes, icon start
+styles and subtitle binding. This browser check covers the schedule reveal and
+re-entry; it does not claim fresh browser verification of every other section
+reveal.

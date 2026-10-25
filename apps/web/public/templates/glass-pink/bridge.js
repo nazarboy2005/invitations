@@ -549,7 +549,7 @@
     bindField(data, "calendarAction", localCopy().calendarAction);
     const responseLabel = root.querySelector('[data-chorlove-i18n="responseLabel"]');
     if (responseLabel) text(responseLabel, localCopy().responseLabel);
-    const programHeading = root.querySelector('[data-chorlove-i18n="programTitle"]');
+    const programHeading = root.querySelector('[data-chorlove-field="programHeading"]');
     if (data.programHeading) text(programHeading, data.programHeading);
     for (const node of root.querySelectorAll('[data-chorlove-i18n]')) {
       const key = node.dataset.chorloveI18n;
