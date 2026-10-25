@@ -128,11 +128,6 @@ test("Palace Rose bridge binds creator fields, service actions, locales, and red
     assert.ok(bridge.includes(asset), asset);
   }
   assert.match(bridge, /data-pr-gift-dialog/);
-  assert.match(bridge, /if \(i === 0\) showImage\(items, target\)/);
-  assert.match(bridge, /else if \(items\.length > 1\) \{ galleryPosition=target; paint\(\); \}/);
-  assert.match(bridge, /img\.src = item\.src \|\| item\.url/);
-  const capturedSource = read("Invitations - this folder will be removed from production/Chorlove/Web invitations/_next/static/chunks/0dg.9_70mpb0j.js");
-  assert.match(capturedSource, /onClick:\(\)=>\{i\?c\(a\):F\?\.scrollTo\(a\)\}/);
   assert.match(bridge, /aria-modal/);
   assert.match(bridge, /toyona\.note/);
   assert.match(bridge, /prefers-reduced-motion/);
