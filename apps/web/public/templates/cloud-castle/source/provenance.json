@@ -42,7 +42,7 @@
   "sourceBehavior": {
     "opening": {
       "ambientParticles": 32,
-      "particleMotion": "deterministic source positions/sizes/sways/durations/delays with continuous fall, sway and rotation",
+      "particleMotion": "deterministic source positions/sizes/sways/durations/delays; falling uses per-particle delay; sway uses a half-duration keyframe sequence with alternate/reverse cycles; rotation and opacity start without the fall delay",
       "burstDurationMs": 850,
       "heartPulseMs": 2000,
       "buttonSheenMs": 3000,

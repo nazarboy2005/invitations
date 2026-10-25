@@ -266,9 +266,9 @@
       for (const particle of particles) {
         const { outer, inner, duration, delay, sway, opacity } = particle;
         outer.animate([{ translate: "0 0" }, { translate: "0 110vh" }], { duration: duration * 1000, delay: delay * 1000, iterations: Infinity, easing: "linear" });
-        inner.animate([{ translate: "0 0" }, { translate: `${sway}px 0` }, { translate: "0 0" }], { duration: duration * 500, delay: delay * 1000, iterations: Infinity, easing: "ease-in-out" });
-        inner.animate([{ rotate: "0deg" }, { rotate: "360deg" }], { duration: duration * 1000, delay: delay * 1000, iterations: Infinity, easing: "linear" });
-        inner.animate([{ opacity }, { opacity: 0.8 * opacity }, { opacity }], { duration: duration * 1000, delay: delay * 1000, iterations: Infinity, easing: "linear" });
+        inner.animate([{ translate: "0 0" }, { translate: `${sway}px 0` }, { translate: "0 0" }], { duration: duration * 500, direction: "alternate", iterations: Infinity, easing: "ease-in-out" });
+        inner.animate([{ rotate: "0deg" }, { rotate: "360deg" }], { duration: duration * 1000, iterations: Infinity, easing: "linear" });
+        inner.animate([{ opacity }, { opacity: 0.8 * opacity }, { opacity }], { duration: duration * 1000, iterations: Infinity, easing: "linear" });
       }
       heart?.animate([{ scale: 1 }, { scale: 1.12 }, { scale: 1 }], { duration: 2000, iterations: Infinity, easing: "ease-in-out" });
       sheen?.animate([{ translate: "-100px 0" }, { translate: "260px 0" }], { duration: 3000, iterations: Infinity, easing: "ease-in-out" });
