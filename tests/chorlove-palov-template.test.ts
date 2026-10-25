@@ -91,7 +91,9 @@ test("Chorlove route keeps Palov in its provider namespace", () => {
   const registry = readFileSync(path.join(root, "apps/web/src/templates/chorlove/registry.ts"), "utf8");
   assert.match(registry, /"palov"/);
   assert.match(renderer, /templateId === "palov"/);
-  assert.match(renderer, /templateId === "palov" \|\| templateId === "orchid-amplop"/);
+  const namespacedTemplates = renderer.match(/const namespaced =([\s\S]*?);/)?.[1] ?? "";
+  assert.match(namespacedTemplates, /templateId === "palov"/);
+  assert.match(namespacedTemplates, /templateId === "orchid-amplop"/);
   assert.match(renderer, /`\/templates\/chorlove\/\$\{templateId\}\/index\.html\?\$\{query\}`/);
   assert.doesNotMatch(renderer, /\/templates\/invitate-palov/);
 });
