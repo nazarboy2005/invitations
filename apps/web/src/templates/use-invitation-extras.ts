@@ -13,6 +13,11 @@ export function useInvitationExtras(
   guestToken: string,
   preview: boolean,
   enabled = true,
+  sectionPolicy: {
+    dressCode?: boolean;
+    extraPeople?: boolean;
+    receiptHostSelector?: string;
+  } = {},
 ) {
   const serialized = JSON.stringify({
     data,
@@ -25,6 +30,7 @@ export function useInvitationExtras(
     extraPeople: (invitation.content[locale]?.people ?? [])
       .slice(2)
       .filter((name) => name.trim()),
+    sectionPolicy,
   });
   const send = useCallback(() => {
     if (!enabled) return;

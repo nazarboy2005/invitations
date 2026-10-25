@@ -54,10 +54,21 @@ export function ChorloveInvitation({
   const [frameLocale, setFrameLocale] = useState(locale);
   useEffect(() => setFrameLocale(locale), [locale]);
 
-  const data = useMemo(
-    () => makeLegacyData(invitation, frameLocale, guestName, sampleWishes),
-    [invitation, frameLocale, guestName, sampleWishes],
-  );
+  const data = useMemo(() => {
+    const mapped = makeLegacyData(invitation, frameLocale, guestName, sampleWishes);
+    if (templateId === "orchid-amplop") {
+      const hasCreatorPhotos = invitation.gallery.some((photo) => photo.url.trim());
+      if (preview && sampleWishes && !hasCreatorPhotos) {
+        mapped.gallery = Array.from({ length: 6 }, (_, index) => ({
+          id: `orchid-preview-${index + 1}`,
+          src: `/templates/chorlove/orchid-amplop/assets/gallery-${index + 1}.webp`,
+          alt: "",
+          caption: "",
+        }));
+      }
+    }
+    return mapped;
+  }, [invitation, frameLocale, guestName, sampleWishes, preview, templateId]);
   const sendExtras = useInvitationExtras(
     frame,
     invitation,
@@ -66,6 +77,14 @@ export function ChorloveInvitation({
     invitationId,
     guestToken,
     preview,
+    true,
+    templateId === "orchid-amplop"
+      ? {
+          dressCode: false,
+          extraPeople: false,
+          receiptHostSelector: "[data-orchid-receipt-host]",
+        }
+      : undefined,
   );
   const message = useMemo(() => {
     const music = catalogMusic
@@ -82,6 +101,7 @@ export function ChorloveInvitation({
         },
         templateId,
         locale: frameLocale,
+        sampleGallery: templateId === "orchid-amplop" && preview && sampleWishes,
         enabledLocales: invitation.enabledLocales,
         invitationId,
         guestName,

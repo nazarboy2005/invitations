@@ -79,9 +79,14 @@
       const footer = document.querySelector(
         "[data-section='rsvp'],[data-rsvp],footer,.footer,[data-section='finale']",
       );
+      const receiptHost =
+        key === "receipt" &&
+        current?.sectionPolicy?.receiptHostSelector &&
+        document.querySelector(current.sectionPolicy.receiptHostSelector);
       const gift =
         key === "receipt" && document.querySelector('[data-section="toyona"]');
-      if (gift) gift.append(element);
+      if (receiptHost) receiptHost.append(element);
+      else if (gift) gift.append(element);
       else if (footer) footer.before(element);
       else (document.querySelector("main") || document.body).append(element);
       sections.set(key, element);
@@ -104,7 +109,10 @@
         host.append(node("h3", chapter.title), node("p", chapter.text));
       }
     }
-    if (!document.querySelector('[data-section="dresscode"]')) {
+    if (
+      current.sectionPolicy?.dressCode !== false &&
+      !document.querySelector('[data-section="dresscode"]')
+    ) {
       const dress = data.dressCode || {},
         host = section("dress", copy.dress, !!dress.enabled);
       host.append(node("h3", dress.style), node("p", dress.text));
@@ -120,12 +128,14 @@
       }
       host.append(colors, node("p", dress.note));
     }
-    const people = section(
-      "people",
-      copy.people,
-      payload.extraPeople?.length > 0,
-    );
-    people.append(node("p", (payload.extraPeople || []).join(" · ")));
+    if (current.sectionPolicy?.extraPeople !== false) {
+      const people = section(
+        "people",
+        copy.people,
+        payload.extraPeople?.length > 0,
+      );
+      people.append(node("p", (payload.extraPeople || []).join(" · ")));
+    }
     const host = section(
       "receipt",
       copy.receipt,
