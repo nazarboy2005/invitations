@@ -19,6 +19,7 @@ const provenanceUrl = new URL("source-assets.provenance.json", root);
 const coverUrl = new URL("catalog-opening.jpg", root);
 const sourceChunkUrl = new URL("_next/static/chunks/0umiwyco9-jdx.js", sourceRoot);
 const sourceGalleryChunkUrl = new URL("_next/static/chunks/09cpm7sbnsw7i.js", sourceRoot);
+const sourceWishesChunkUrl = new URL("_next/static/chunks/0q0gfl1vec0ef.js", sourceRoot);
 const sourceCaptureUrl = new URL("templates/modern-floral/preview-frame.html", sourceRoot);
 const packagedCaptureUrl = new URL("../apps/web/public/templates/modern-floral/source/preview-frame.html", import.meta.url);
 const sourceStylesDir = new URL("_next/static/chunks/", sourceRoot);
@@ -39,10 +40,13 @@ test("Modern Floral motion port is tied to the captured route module", async () 
   const provenance = JSON.parse(await readFile(provenanceUrl, "utf8"));
   const sourceChunk = await readIfPresent(sourceChunkUrl);
   const sourceGalleryChunk = await readIfPresent(sourceGalleryChunkUrl);
+  const sourceWishesChunk = await readIfPresent(sourceWishesChunkUrl);
   const motion = await readFile(motionUrl, "utf8");
   assert.match(provenance.sourceMotionModule.sha256, /^[a-f\d]{64}$/);
   assert.equal(provenance.sourceGalleryModule.bytes, 76269);
   assert.match(provenance.sourceGalleryModule.sha256, /^[a-f\d]{64}$/);
+  assert.equal(provenance.sourceWishesModule.bytes, 74121);
+  assert.match(provenance.sourceWishesModule.sha256, /^[a-f\d]{64}$/);
   if (sourceGalleryChunk) {
     const gallery = sourceGalleryChunk.toString("utf8");
     assert.equal(provenance.sourceGalleryModule.bytes, sourceGalleryChunk.length);
@@ -50,6 +54,13 @@ test("Modern Floral motion port is tied to the captured route module", async () 
     assert.match(gallery, /initial:\{opacity:0\},animate:\{opacity:1\},exit:\{opacity:0\},className:"fixed inset-0 z-\[3000\] flex items-center justify-center bg-black\/88 p-4 backdrop-blur-md"/);
     assert.match(gallery, /initial:\{scale:\.96,opacity:0\},animate:\{scale:1,opacity:1\},exit:\{scale:\.96,opacity:0\}/);
     assert.doesNotMatch(gallery, /data-prev|data-next|ArrowLeft|ArrowRight/);
+  }
+  if (sourceWishesChunk) {
+    const wishes = sourceWishesChunk.toString("utf8");
+    assert.equal(provenance.sourceWishesModule.bytes, sourceWishesChunk.length);
+    assert.equal(provenance.sourceWishesModule.sha256, createHash("sha256").update(sourceWishesChunk).digest("hex"));
+    assert.match(wishes, /animate:E\.length>3\?\{y:\["0%","-50%"\]\}:\{y:"0%"\},transition:\{duration:Math\.max\(2\.2\*E\.length,16\),ease:"linear",repeat:1\/0\}/);
+    assert.match(wishes, /className:"space-y-3 py-1",children:E\.map/);
   }
   if (sourceChunk) {
     const source = sourceChunk.toString("utf8");
@@ -69,6 +80,9 @@ test("Modern Floral motion port is tied to the captured route module", async () 
     assert.match(source, /animate:\{rotate:360\},transition:\{duration:20,repeat:1\/0,ease:"linear"\}/);
     assert.match(source, /animate:\{scale:\[1,1\.1,1\]\},transition:\{repeat:1\/0,duration:3\}/);
     assert.match(source, /transition:\{duration:Math\.max\(2\.2\*E\.length,16\),ease:"linear",repeat:1\/0\}/);
+    assert.match(source, /whileHover:\{scale:1\.1\},whileTap:\{scale:\.9\},onClick:p,"aria-label":"Toggle music",className:`w-14 h-14 rounded-full shadow-2xl flex items-center justify-center \$\{l\}`/);
+    assert.match(source, /buttonClassName:l="bg-white\/90 border border-\[#E5E0D8\] text-\[#A69689\] backdrop-blur-md",activeIconClassName:c="animate-pulse text-\[#FFB6C1\]"/);
+    assert.match(source, /whileHover:\{scale:1\.02\},whileTap:\{scale:\.98\},className:"flex items-center justify-center gap-3 bg-white border border-\[#E5E0D8\] text-\[#849685\] px-8 py-4 rounded-2xl/);
   }
   assert.match(motion, /delay: 1450, duration: 1000, easing: "cubic-bezier\(\.83,0,\.17,1\)"/);
   assert.match(motion, /delay: 2250, duration: 750/);
@@ -90,6 +104,7 @@ test("Modern Floral motion port is tied to the captured route module", async () 
   assert.match(motion, /section:nth-of-type\(2\) \.relative\.h-16 > \.z-10/);
   assert.match(motion, /duration: 20000, iterations: Infinity, easing: "linear"/);
   assert.match(motion, /duration: 3000, iterations: Infinity/);
+  assert.match(motion, /wishes\.animate\(\[\{ transform: "translateY\(0%\)" \}, \{ transform: "translateY\(-50%\)" \}\], \{\s*duration: Math\.max\(2200 \* wishCount, 16000\), iterations: Infinity, easing: "linear",/);
   assert.match(motion, /prefers-reduced-motion/);
   assert.match(motion, /node\.matches\("section:nth-of-type\(2\) > div\.absolute\.inset-0"\)\) return \{ duration: 2000, amount: 0, once: false \}/);
   assert.match(motion, /sectionIndex === 1 && node\.matches\("\.relative\.h-16"\)\) return \{ spring: true, delay: 500, amount: 0, once: false \}/);
@@ -112,6 +127,12 @@ test("Modern Floral page loads its source motion runner and preserves source rev
   const html = await readFile(htmlUrl, "utf8");
   const css = await readFile(cssUrl, "utf8");
   const bridge = await readFile(bridgeUrl, "utf8");
+  assert.match(css, /right:2rem;bottom:2rem;z-index:110;display:flex;width:3\.5rem;height:3\.5rem/);
+  assert.match(css, /background:rgba\(255,255,255,\.9\);color:#A69689/);
+  assert.match(bridge, /m\.setAttribute\("aria-label","Toggle music"\)/);
+  assert.match(bridge, /audio\.muted=true/);
+  assert.match(bridge, /m\.dataset\.playing=String\(!audio\.muted&&!audio\.paused\)/);
+  assert.match(bridge, /m\.onclick=\(\)=>\{audio\.muted=!audio\.muted/);
   assert.match(html, /src="\/templates\/modern-floral\/source-motion\.js"/);
   assert.match(html, /data-chorlove-template="modern-floral"/);
   assert.doesNotMatch(css, /section \[style\*="opacity:0"\][^{]*\{[^}]*opacity:1!important/s);

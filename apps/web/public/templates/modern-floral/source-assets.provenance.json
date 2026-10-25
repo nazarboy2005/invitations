@@ -33,6 +33,12 @@
     "sha256": "cc9472f5f183b8f7fcbfe281f0cbdeaa573b774cc594e56446736694bfe09b75",
     "behavior": "Original Modern Floral gallery component, including its source backdrop, close button, image transition, and no next/previous controls."
   },
+  "sourceWishesModule": {
+    "path": "..\\..\\..\\..\\Invitations - this folder will be removed from production\\Chorlove\\Web invitations\\_next\\static\\chunks\\0q0gfl1vec0ef.js",
+    "bytes": 74121,
+    "sha256": "d7e37a2bd97aec969b5b016e7df9d898bf4c5bac1bd1bf4ab9b7fd754a1d1731",
+    "behavior": "Original Modern Floral guest-wishes component; its marquee moves the source wish stack from 0% to -50% with a linear infinite loop for more than three wishes, with a duration of max(2.2 seconds per wish, 16 seconds)."
+  },
   "catalogArtwork": {
     "file": "catalog-opening.jpg",
     "sourceUrl": "https://payment.chorlove.uz/media-assets/958746e5-dc6c-4540-ad17-2c6e692d2212/file",
