@@ -98,6 +98,12 @@ export function ChorloveInvitation({
             extraPeople: false,
             receiptHostSelector: "[data-pr-gift-receipt-host]",
           }
+      : templateId === "green-gold"
+        ? {
+            story: false,
+            dressCode: false,
+            extraPeople: false,
+          }
       : undefined,
   );
   const message = useMemo(() => {

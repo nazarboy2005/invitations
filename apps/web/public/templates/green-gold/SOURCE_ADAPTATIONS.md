@@ -79,3 +79,8 @@ number to the clipboard; the label changes to “Copied” for 1.8 seconds. The
 adapter reproduces those states and source card layout in
 `showGiftCardDetails`; module path, ID, hash, and observed states are recorded
 in `source-assets.provenance.json`.
+
+The full platform preview suppresses generic story, dress-code, and extra-family
+sections because the 13-section Green Gold source has no such sections. The
+optional private receipt-upload flow remains attached to the source to'yona
+section and stays hidden unless the invitation owner enables it.
