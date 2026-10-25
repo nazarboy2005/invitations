@@ -100,7 +100,7 @@ test("Cloud Castle gift modal matches source interaction, card styling and image
   if (compiled && original) {
     const sourceGiftBytes = await readFile(sourceGift);
     assert.equal(createHash("sha256").update(packageArt).digest("hex"), createHash("sha256").update(sourceGiftBytes).digest("hex"));
-    assert.match(original, /data-chorlove-gift/);
+    assert.match(original, /aria-label="Open gift box"/);
     assert.match(compiled, /bg-black\/75 backdrop-blur-sm p-4 select-none/);
     assert.match(compiled, /initial:\{opacity:0,scale:\.92,y:20\},animate:\{opacity:1,scale:1,y:0\},exit:\{opacity:0,scale:\.92,y:20\},transition:\{duration:\.25\}/);
     assert.match(compiled, /Copy Card Number/);
