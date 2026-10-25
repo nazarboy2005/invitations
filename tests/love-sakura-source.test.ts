@@ -15,6 +15,10 @@ const adapter=readFileSync(join(root,"adapter.css"),"utf8");
 test("Love Sakura preserves its full captured page and source asset checksums",()=>{
  if(source){assert.equal(createHash("sha256").update(source).digest("hex"),manifest.sourceSnapshot.sha256);assert.equal(manifest.sourceSnapshot.bytes,source.length);assert.equal(packagedSource.toString("utf8").replaceAll("\r\n","\n"),source.toString("utf8"));}
  else {assert.equal((packagedSource.toString("utf8").match(/<section\b/g)||[]).length,10);assert.equal(manifest.sourceSnapshot.bytes,55773);assert.match(manifest.sourceSnapshot.sha256,/^[a-f0-9]{64}$/);}
+ const sourceSections=[...packagedSource.toString("utf8").matchAll(/<section\b.*?<\/section>/gs)].map(([section])=>section);
+ assert.equal((packagedSource.toString("utf8").match(/\/images\/love-sakura\//g)||[]).length,35);
+ assert.deepEqual([...sourceSections[6].matchAll(/src="\/images\/love-sakura\/([^"]+)"/g)].map(([,file])=>file),["hero-couple.webp","bride.webp","groom.webp","hero-couple.webp","bride.webp","groom.webp"]);
+ assert.doesNotMatch(sourceSections[5],/<img\b/);assert.doesNotMatch(sourceSections[4],/\/(?:bride|groom|hero-couple)\.webp/);
  assert.equal((html.match(/<section\b/g)||[]).length,10);
  for(const asset of manifest.assets){const bytes=readFileSync(join(root,"assets",asset.file));assert.equal(bytes.length,asset.bytes);assert.equal(createHash("sha256").update(bytes).digest("hex"),asset.sha256);assert.match(html,new RegExp(`/templates/love-sakura/assets/${asset.file.replaceAll(".","\\.")}`));}
  assert.equal(manifest.assets.length,10);

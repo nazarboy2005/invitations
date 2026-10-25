@@ -173,9 +173,59 @@
     }
   },
   "gallery": {
-    "fixtureBlankEntries": 6,
-    "sectionHidden": true,
-    "sectionHeight": 0
+    "sourceImageReferenceCount": 35,
+    "uniqueAssets": [
+      "bg-texture.png",
+      "cherry-3.png",
+      "cherry-1.png",
+      "hero-couple.webp",
+      "cherry-7.png",
+      "temples.png",
+      "cherry-2.png",
+      "bride.webp",
+      "groom.webp",
+      "pngwing-medium.png"
+    ],
+    "sourceGalleryOrder": [
+      "hero-couple.webp",
+      "bride.webp",
+      "groom.webp",
+      "hero-couple.webp",
+      "bride.webp",
+      "groom.webp"
+    ],
+    "storyPhotoCount": 0,
+    "venuePhotoCount": 0,
+    "catalogFullPreview": {
+      "renderedImageCount": 6,
+      "loadedImageCount": 6,
+      "orderMatchesSource": true,
+      "urls": [
+        "/templates/love-sakura/assets/hero-couple.webp",
+        "/templates/love-sakura/assets/bride.webp",
+        "/templates/love-sakura/assets/groom.webp",
+        "/templates/love-sakura/assets/hero-couple.webp",
+        "/templates/love-sakura/assets/bride.webp",
+        "/templates/love-sakura/assets/groom.webp"
+      ]
+    },
+    "catalogCardPreview": {
+      "renderedImageCount": 6,
+      "loadedImageCount": 6,
+      "consoleErrors": 0,
+      "consoleWarnings": 0
+    },
+    "emptyCreatorPublicGallery": {
+      "emptySrcEntriesFiltered": true,
+      "sectionHiddenWhenNoUploadedPhotos": true,
+      "sourceBridgeSharedByCreatorAndPublic": true,
+      "authenticatedPublicRouteCapture": false
+    },
+    "assetSha256": {
+      "hero-couple.webp": "8e459de64eff08fb9d56db6ff8d1fbb06a93ac28e09848d3ed45f45c6d5e88dc",
+      "bride.webp": "7fbece3cc4f429ebe2a79230544f7a2ade0131b29255c089fc3dce70b02640d0",
+      "groom.webp": "889d30e43e93ff687af24909d639e514baac2f23589b3304a99d3578c2136cdd"
+    }
   },
   "interactions": {
     "previewSubmit": {
