@@ -129,8 +129,15 @@
   ],
   "sourceReferencedMissingAsset": {
     "file": "/images/green-garden/leaf1-bloom.webp",
-    "archiveResult": "Absent from the complete archived Chorlove/provider tree. Exact-name search found only the visually different Glass Pink leaf artwork.",
+    "archiveResult": "Absent from the recovered complete Chorlove/Web invitations provider tree. Exact-name search found only images/glass-pink/leaf1-bloom.webp, a visually different Glass Pink asset.",
     "liveHttpStatus": 404,
+    "canonicalSourceResponse": {
+      "url": "https://chorlove.uz/images/green-garden/leaf1-bloom.webp",
+      "method": "GET",
+      "status": 404,
+      "checkedAt": "2026-10-25",
+      "redirected": false
+    },
     "packageResolution": {
       "markupFile": "index.html",
       "referenceCount": 5,
@@ -148,7 +155,7 @@
       "resolvedPublicPathExists": false,
       "templateAssetPath": "apps/web/public/templates/green-garden/assets/leaf1-bloom.webp",
       "templateAssetExists": false,
-      "renderedResult": "All five original references remain in the adapted markup, but the local URL returns 404 and no image is rendered. The package has no substitute or fallback.",
+      "renderedResult": "All five original references remain in the adapted markup. The exact canonical source URL returned HTTP 404; the matching public and package image files are absent, so no image is rendered. No substitute or fallback is used.",
       "unrelatedSameNameAsset": {
         "file": "apps/web/public/templates/glass-pink/assets/leaf1-bloom.webp",
         "bytes": 311360,
@@ -156,7 +163,7 @@
         "provenance": "Glass Pink artwork; visually different and not used by Green Garden."
       }
     },
-    "result": "Unrecoverable from the provided source archive and current source URL. The two source references remain broken; no replacement is packaged."
+    "result": "Unrecoverable from the recovered source archive and canonical source response. All five source references resolve to the same URL, which returned HTTP 404 on 2026-10-25; all five remain broken in source and package, with no replacement packaged."
   },
   "integrationStatus": "published-through-0095_publish_green_garden.sql; configured-catalog-and-authenticated-integration-verified",
   "sourceArchiveAudit": {

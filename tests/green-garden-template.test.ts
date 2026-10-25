@@ -160,6 +160,15 @@ test("Green Garden restores available source motion and schedule assets", async 
   }
   assert.equal(manifest.sourceReferencedMissingAsset.file, "/images/green-garden/leaf1-bloom.webp");
   assert.equal(manifest.sourceReferencedMissingAsset.liveHttpStatus, 404);
+  assert.deepEqual(manifest.sourceReferencedMissingAsset.canonicalSourceResponse, {
+    url: "https://chorlove.uz/images/green-garden/leaf1-bloom.webp",
+    method: "GET",
+    status: 404,
+    checkedAt: "2026-10-25",
+    redirected: false,
+  });
+  assert.match(manifest.sourceReferencedMissingAsset.result, /All five source references resolve to the same URL/);
+  assert.match(manifest.sourceReferencedMissingAsset.result, /all five remain broken in source and package/);
   assert.equal(manifest.sourceReferencedMissingAsset.packageResolution.referenceCount, 5);
   assert.equal(manifest.sourceReferencedMissingAsset.packageResolution.resolvedPublicPathExists, false);
   assert.equal(manifest.sourceReferencedMissingAsset.packageResolution.templateAssetExists, false);
@@ -205,6 +214,8 @@ test("Green Garden does not add source-absent optional sections", async () => {
   const source = await readFile(new URL("source/preview-frame.html", root), "utf8");
   const html = await readFile(new URL("index.html", root), "utf8");
   const bridge = await readFile(new URL("bridge.js", root), "utf8");
+  assert.equal((source.match(/\/images\/green-garden\/leaf1-bloom\.webp/g) || []).length, 5);
+  assert.equal((html.match(/src="\/images\/green-garden\/leaf1-bloom\.webp"/g) || []).length, 5);
   for (const unsupported of ["dressCode", "dress-code", "attire", "dress code"]) {
     assert.equal(source.toLowerCase().includes(unsupported.toLowerCase()), false, `reference unexpectedly contains ${unsupported}`);
     assert.equal(html.toLowerCase().includes(unsupported.toLowerCase()), false, `package unexpectedly contains ${unsupported}`);
