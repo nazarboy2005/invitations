@@ -216,7 +216,7 @@
         const item = items.length && i < Math.min(items.length,6) ? items[(galleryPosition + i) % items.length] : null;
         if (!card) return;
         hide(card, !item); const img = q("img", card); if (!img) return;
-        if (item?.src || item?.url) { img.src = item.src || item.url; img.alt = item.alt || item.caption || `${text().gallery} ${i+1}`; card.onclick = () => showImage(items, (galleryPosition+i)%items.length); }
+        if (item?.src || item?.url) { img.src = item.src || item.url; img.alt = item.alt || item.caption || `${text().gallery} ${i+1}`; card.onclick = () => { const target=(galleryPosition+i)%items.length; if (i === 0) showImage(items, target); else if (items.length > 1) { galleryPosition=target; paint(); } }; }
         else { img.removeAttribute("src"); img.alt = ""; const slide=q(".embla__slide__card",card);if(slide){let empty=q(".pr-empty",slide);if(!empty){empty=document.createElement("div");empty.className="pr-empty absolute inset-0";set(empty,text().gallery);slide.append(empty);}hide(empty,false);}card.onclick = null; }
       });
       const counter = all("div", section).find((n) => /^\d+\s*\/\s*\d+$/.test(n.textContent.trim()) && !n.querySelector("div"));
