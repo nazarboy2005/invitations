@@ -18,3 +18,22 @@
 .golden-reduced-motion .golden-card.is-open .golden-cover{transform:rotateY(-100deg)}
 @media(prefers-reduced-motion:reduce){.golden-card,.golden-card *{scroll-behavior:auto!important;animation:none!important;transition:none!important}.golden-card.is-open .golden-cover{transform:rotateY(-100deg)}}
 @media(max-width:420px){.golden-locale{top:max(8px,env(safe-area-inset-top));right:max(8px,env(safe-area-inset-right))}}
+.golden-music-toggle{transform-origin:center;transition:transform .2s cubic-bezier(.34,1.56,.64,1)}
+.golden-music-toggle:hover{transform:scale(1.1)}
+.golden-music-toggle:active{transform:scale(.9)}
+.golden-card-template>.platform-extra{display:none!important}
+.golden-card-template:has([data-golden-rsvp]:not([hidden])){flex-direction:column;justify-content:flex-start;align-items:center;overflow-x:hidden;overflow-y:auto}
+.golden-card-template:has([data-golden-rsvp]:not([hidden])) .golden-card{margin-block:auto 18px}
+.golden-platform-section{box-sizing:border-box;width:min(420px,calc(100vw - 36px));margin:18px auto;padding:18px 20px;border:1px solid #b57729;background:radial-gradient(circle at top,#f7d18220,#0000 55%),#070d1f;color:#f7d182;text-align:center;box-shadow:0 16px 36px #0006}
+.golden-platform-section h2{margin:0 0 14px;color:transparent;background:linear-gradient(#f7d182,#a16a2a);-webkit-background-clip:text;background-clip:text;font:400 2rem/1.2 "Golden Great Vibes",cursive}
+.golden-rsvp-form{display:grid;gap:14px;text-align:left}
+.golden-rsvp-form label{display:grid;gap:6px;font:1rem Lobster,cursive}
+.golden-rsvp-form input{box-sizing:border-box;width:100%;min-width:0;padding:10px 12px;border:1px solid #be8d49;border-radius:8px;background:#070d1f;color:#f7d182;font:1rem system-ui,sans-serif}
+.golden-rsvp-buttons{display:flex;gap:10px;justify-content:center}
+.golden-rsvp-buttons button{flex:1;min-height:40px;padding:8px 14px;border:1px solid #be8d49;border-radius:999px;background:#070d1f;color:#f7d182;font:1rem Lobster,cursive;cursor:pointer}
+.golden-rsvp-buttons button:disabled{opacity:.55;cursor:wait}
+.golden-rsvp-status{min-height:1.5em;margin:12px 0 0;line-height:1.5;text-align:center}
+.golden-platform-section[hidden],.golden-rsvp-buttons[hidden]{display:none!important}
+@media(max-width:420px){.golden-platform-section{width:min(335px,calc(100vw - 28px));padding:16px}}
+@media(prefers-reduced-motion:reduce){.golden-music-toggle,.golden-music-toggle:hover,.golden-music-toggle:active{transform:none!important;transition:none!important}}
+.golden-reduced-motion .golden-music-toggle,.golden-reduced-motion .golden-music-toggle:hover,.golden-reduced-motion .golden-music-toggle:active{transform:none!important;transition:none!important}

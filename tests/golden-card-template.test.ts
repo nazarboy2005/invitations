@@ -67,26 +67,21 @@ test("Golden Card bridge maps authored invitation data and honors reduced motion
 });
 
 test("Golden Card preserves the captured page CSS and opening choreography", async () => {
-  const sourceChunk = await readFile(
-    new URL(
-      "../Invitations - this folder will be removed from production/Chorlove/Web invitations/_next/static/chunks/00phb3uac959r.js",
-      import.meta.url,
-    ),
+  const provenance = JSON.parse((await read("preview.provenance.json")).toString("utf8"));
+  const packagedCss = (await read("adapter.css")).toString("utf8");
+  const cssStart = packagedCss.indexOf(".golden-card-template{");
+  const cssEnd = packagedCss.indexOf("/* Platform-only controls", cssStart);
+  assert.ok(cssStart >= 0 && cssEnd > cssStart);
+  assert.equal(
+    createHash("sha256").update(packagedCss.slice(cssStart, cssEnd)).digest("hex"),
+    provenance.sourceFidelityAudit.sourceCssSha256,
   );
   assert.equal(
-    createHash("sha256").update(sourceChunk).digest("hex"),
+    provenance.sourceFidelityAudit.componentChunkSha256,
     "f054bd58d6153468c79967a1906e68bb69171b61e76f4e45f914cd1ad627b653",
   );
-  const chunk = sourceChunk.toString("utf8");
-  const cssStart = chunk.indexOf("children:'@import") + "children:'".length;
-  const cssEnd = chunk.indexOf("'})]})", cssStart);
-  assert.ok(cssStart > "children:'".length && cssEnd > cssStart);
-  const sourceCss = chunk
-    .slice(cssStart, cssEnd)
-    .replace('@import "https://fonts.googleapis.com/css2?family=Lobster&display=swap";', "")
-    .replaceAll("url(/images/templates/golden-card/", "url(/templates/golden-card/assets/");
-  const packagedCss = (await read("adapter.css")).toString("utf8");
-  assert.ok(packagedCss.includes(sourceCss));
+  assert.match(packagedCss, /\.golden-cover\{[^}]*transition:transform 1\.5s/);
+  assert.match(packagedCss, /\.golden-card\.is-open \.golden-cover\{[^}]*rotateY\(-100deg\)/);
   assert.doesNotMatch(packagedCss, /fonts\.googleapis\.com|fonts\.gstatic\.com/);
 
   const lobsterFiles = [
@@ -101,9 +96,6 @@ test("Golden Card preserves the captured page CSS and opening choreography", asy
 
   const bridge = (await read("bridge.js")).toString("utf8");
   const html = (await read("index.html")).toString("utf8");
-  assert.match(chunk, /delay:t%12\*\.42,duration:3\.4\+t%7\*\.5/);
-  assert.match(chunk, /staggerChildren:\.12/);
-  assert.match(chunk, /transition:\{duration:\.55,ease:\[\.16,1,\.3,1\]\}/);
   assert.match(bridge, /duration: 3400 \+ \(index % 7\) \* 500, delay: \(index % 12\) \* 420/);
   assert.match(bridge, /delay:700\+index\*120,duration:550/);
   assert.match(bridge, /delay:700,duration:300/);
@@ -113,32 +105,16 @@ test("Golden Card preserves the captured page CSS and opening choreography", asy
 test("Golden Card keeps source artwork in the renderer and preview gallery data out of drafts", async () => {
   const html = (await read("index.html")).toString("utf8");
   const styles = (await read("adapter.css")).toString("utf8");
+  const provenance = JSON.parse((await read("preview.provenance.json")).toString("utf8"));
   const renderer = `${html}\n${styles}`;
-  const manifest = JSON.parse(
-    await readFile(
-      new URL(
-        "../Invitations - this folder will be removed from production/Chorlove/capture-manifest.json",
-        import.meta.url,
-      ),
-      "utf8",
-    ),
-  );
-  const sourceImages = Object.entries(manifest.resources)
-    .filter(([url]) => /images\/templates\/golden-card\//.test(url))
-    .map(([url]) => url.split("/").at(-1));
+  const sourceImages = Object.keys(provenance.sourceFidelityAudit.sourceImageSha256);
   assert.deepEqual(sourceImages.sort(), ["corner.png", "mandala.png", "navy-texture.jpg"]);
   for (const image of sourceImages) {
     assert.ok(renderer.includes(`/templates/golden-card/assets/${image}`));
-    const archived = await readFile(
-      new URL(
-        `../Invitations - this folder will be removed from production/Chorlove/Web invitations/images/templates/golden-card/${image}`,
-        import.meta.url,
-      ),
-    );
     const packaged = await read(`assets/${image}`);
     assert.equal(
       createHash("sha256").update(packaged).digest("hex"),
-      createHash("sha256").update(archived).digest("hex"),
+      provenance.sourceFidelityAudit.sourceImageSha256[image],
     );
   }
 
@@ -148,4 +124,36 @@ test("Golden Card keeps source artwork in the renderer and preview gallery data 
   assert.ok(preview.gallery.every((item) => item.url === ""));
   assert.deepEqual(draft.gallery, []);
   assert.doesNotMatch(html, /gallery|photo-grid/i);
+});
+
+test("Golden Card keeps source-absent sections hidden and uses count-free opt-in RSVP", async () => {
+  const source = (await read("source/preview-frame.html")).toString("utf8");
+  const html = (await read("index.html")).toString("utf8");
+  const bridge = (await read("bridge.js")).toString("utf8");
+  const styles = (await read("adapter.css")).toString("utf8");
+  const provenance = JSON.parse((await read("preview.provenance.json")).toString("utf8"));
+
+  assert.doesNotMatch(source, /data-section=["'](?:rsvp|toyona|gift|dresscode)["']/i);
+  assert.doesNotMatch(source, /RSVP|To'yona|Dress code|Kiyinish uslubi/i);
+  assert.deepEqual(provenance.sourceFidelityAudit.sourceInteractions, {
+    musicButtonHoverScale: 1.1,
+    musicButtonTapScale: 0.9,
+    musicIconFollowsPlayback: true,
+    rsvp: false,
+    toyona: false,
+    giftDisclosure: false,
+    dressCode: false,
+  });
+  assert.doesNotMatch(html, /data-golden-rsvp|golden-rsvp|toyona|dress.?code/i);
+  assert.match(bridge, /syncRsvp\(payload, words\)/);
+  assert.match(bridge, /payload\?\.data\?\.rsvp\?\.enabled === true/);
+  assert.match(bridge, /\/api\/public\/invitations\/\$\{encodeURIComponent\(current\.invitationId \|\| ""\)\}\/rsvp/);
+  assert.match(bridge, /partySize: answer === "yes" \? 1 : 0/);
+  assert.doesNotMatch(bridge, /partySize.{0,80}(input|select)|(?:input|select).{0,80}partySize/i);
+  assert.match(bridge, /if \(current\.preview\)/);
+  assert.match(styles, /\.golden-card-template>\.platform-extra\{display:none!important\}/);
+  assert.match(styles, /\.golden-music-toggle:hover\{transform:scale\(1\.1\)\}/);
+  assert.match(styles, /\.golden-music-toggle:active\{transform:scale\(\.9\)\}/);
+  assert.match(styles, /prefers-reduced-motion:reduce\).*golden-music-toggle/);
+  assert.match(bridge, /musicEnabled\s*\?\s*'<path/);
 });

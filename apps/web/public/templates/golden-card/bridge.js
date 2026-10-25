@@ -7,6 +7,8 @@
       greeting: "Assalomu alaykum, aziz mehmon",
       invocation: "Mehribon va rahmli Alloh nomi bilan.",
       defaultMessage: "Sizni hayotimizdagi eng baxtli kun — to'yimizga taklif qilamiz",
+      rsvp: "Kelishingizni tasdiqlang", name: "Ismingiz", yes: "Kelaman", no: "Afsuski, yo‘q",
+      rsvpDone: "Javobingiz saqlandi. Rahmat!", rsvpError: "Javob yuborilmadi. Qayta urinib ko‘ring.", rsvpPreview: "Ko‘rish rejimida javob yuborilmaydi.",
       open: "Ochish uchun bosing",
       map: "Xaritada ko\u02bbrish",
       musicOn: "Musiqani o\u02bbchirish",
@@ -17,6 +19,8 @@
       greeting: "\u0410\u0441\u0441\u0430\u043b\u043e\u043c\u0443 \u0430\u043b\u0430\u0439\u043a\u0443\u043c, \u0430\u0437\u0438\u0437 \u043c\u0435\u04b3\u043c\u043e\u043d",
       invocation: "\u041c\u0435\u04b3\u0440\u0438\u0431\u043e\u043d \u0432\u0430 \u0440\u0430\u04b3\u043c\u043b\u0438 \u0410\u043b\u043b\u043e\u04b3 \u043d\u043e\u043c\u0438 \u0431\u0438\u043b\u0430\u043d.",
       defaultMessage: "\u0421\u0438\u0437\u043d\u0438 \u04b3\u0430\u0451\u0442\u0438\u043c\u0438\u0437\u0434\u0430\u0433\u0438 \u044d\u043d\u0433 \u0431\u0430\u0445\u0442\u043b\u0438 \u043a\u0443\u043d \u2014 \u0442\u045e\u0439\u0438\u043c\u0438\u0437\u0433\u0430 \u0442\u0430\u043a\u043b\u0438\u0444 \u049b\u0438\u043b\u0430\u043c\u0438\u0437",
+      rsvp: "\u041a\u0435\u043b\u0438\u0448\u0438\u043d\u0433\u0438\u0437\u043d\u0438 \u0442\u0430\u0441\u0434\u0438\u049b\u043b\u0430\u043d\u0433", name: "\u0418\u0441\u043c\u0438\u043d\u0433\u0438\u0437", yes: "\u041a\u0435\u043b\u0430\u043c\u0430\u043d", no: "\u0410\u0444\u0441\u0443\u0441\u043a\u0438, \u0439\u045e\u049b",
+      rsvpDone: "\u0416\u0430\u0432\u043e\u0431\u0438\u043d\u0433\u0438\u0437 \u0441\u0430\u049b\u043b\u0430\u043d\u0434\u0438. \u0420\u0430\u04b3\u043c\u0430\u0442!", rsvpError: "\u0416\u0430\u0432\u043e\u0431 \u044e\u0431\u043e\u0440\u0438\u043b\u043c\u0430\u0434\u0438. \u049a\u0430\u0439\u0442\u0430 \u0443\u0440\u0438\u043d\u0438\u0431 \u043a\u045e\u0440\u0438\u043d\u0433.", rsvpPreview: "\u041a\u045e\u0440\u0438\u0448 \u0440\u0435\u0436\u0438\u043c\u0438\u0434\u0430 \u0436\u0430\u0432\u043e\u0431 \u044e\u0431\u043e\u0440\u0438\u043b\u043c\u0430\u0439\u0434\u0438.",
       open: "\u041e\u0447\u0438\u0448 \u0443\u0447\u0443\u043d \u0431\u043e\u0441\u0438\u043d\u0433",
       map: "\u04b2\u0430\u0440\u0438\u0442\u0430\u0434\u0430 \u043a\u045e\u0440\u0438\u0448",
       musicOn: "\u041c\u0443\u0441\u0438\u049b\u0430\u043d\u0438 \u045e\u0447\u0438\u0440\u0438\u0448",
@@ -27,6 +31,8 @@
       greeting: "Welcome, dear guest",
       invocation: "In the Name of Allah, the most Gracious, the most Merciful.",
       defaultMessage: "We would be delighted with your attendance at the wedding of",
+      rsvp: "Please confirm your attendance", name: "Your name", yes: "I will attend", no: "I cannot attend",
+      rsvpDone: "Your response was saved. Thank you!", rsvpError: "Could not send your response. Please try again.", rsvpPreview: "Responses are disabled in preview.",
       open: "Tap to open",
       map: "View on map",
       musicOn: "Turn music off",
@@ -37,6 +43,8 @@
       greeting: "\u0417\u0434\u0440\u0430\u0432\u0441\u0442\u0432\u0443\u0439\u0442\u0435, \u0434\u043e\u0440\u043e\u0433\u043e\u0439 \u0433\u043e\u0441\u0442\u044c",
       invocation: "\u0418\u043c\u0435\u043d\u0435\u043c \u0410\u043b\u043b\u0430\u0445\u0430, \u041c\u0438\u043b\u043e\u0441\u0442\u0438\u0432\u043e\u0433\u043e \u0438 \u041c\u0438\u043b\u043e\u0441\u0435\u0440\u0434\u043d\u043e\u0433\u043e.",
       defaultMessage: "\u0411\u0443\u0434\u0435\u043c \u0440\u0430\u0434\u044b \u0432\u0430\u0448\u0435\u043c\u0443 \u043f\u0440\u0438\u0441\u0443\u0442\u0441\u0442\u0432\u0438\u044e \u043d\u0430 \u043d\u0430\u0448\u0435\u0439 \u0441\u0432\u0430\u0434\u044c\u0431\u0435",
+      rsvp: "\u041f\u043e\u0434\u0442\u0432\u0435\u0440\u0434\u0438\u0442\u0435 \u043f\u0440\u0438\u0441\u0443\u0442\u0441\u0442\u0432\u0438\u0435", name: "\u0412\u0430\u0448\u0435 \u0438\u043c\u044f", yes: "\u0411\u0443\u0434\u0443", no: "\u041d\u0435 \u0441\u043c\u043e\u0433\u0443",
+      rsvpDone: "\u0412\u0430\u0448 \u043e\u0442\u0432\u0435\u0442 \u0441\u043e\u0445\u0440\u0430\u043d\u0451\u043d. \u0421\u043f\u0430\u0441\u0438\u0431\u043e!", rsvpError: "\u041d\u0435 \u0443\u0434\u0430\u043b\u043e\u0441\u044c \u043e\u0442\u043f\u0440\u0430\u0432\u0438\u0442\u044c. \u041f\u043e\u043f\u0440\u043e\u0431\u0443\u0439\u0442\u0435 \u0435\u0449\u0451 \u0440\u0430\u0437.", rsvpPreview: "\u041e\u0442\u0432\u0435\u0442\u044b \u0432 \u0440\u0435\u0436\u0438\u043c\u0435 \u043f\u0440\u043e\u0441\u043c\u043e\u0442\u0440\u0430 \u043e\u0442\u043a\u043b\u044e\u0447\u0435\u043d\u044b.",
       open: "\u041d\u0430\u0436\u043c\u0438\u0442\u0435, \u0447\u0442\u043e\u0431\u044b \u043e\u0442\u043a\u0440\u044b\u0442\u044c",
       map: "\u041f\u043e\u0441\u043c\u043e\u0442\u0440\u0435\u0442\u044c \u043d\u0430 \u043a\u0430\u0440\u0442\u0435",
       musicOn: "\u0412\u044b\u043a\u043b\u044e\u0447\u0438\u0442\u044c \u043c\u0443\u0437\u044b\u043a\u0443",
@@ -58,6 +66,7 @@
   let currentLocale = "uz-Latn";
   let musicEnabled = false;
   let starsReducedMotion = null;
+  let currentPayload = null;
 
   const text = (selector, value) => {
     const node = root.querySelector(selector);
@@ -67,6 +76,7 @@
 
   function update(payload) {
     const data = payload?.data ?? {};
+    currentPayload = payload;
     currentLocale = payload?.locale ?? currentLocale;
     const words = copy[currentLocale] ?? copy["uz-Latn"];
     root.lang = currentLocale;
@@ -133,6 +143,7 @@
     }
     syncMusicLabel();
     animateStars();
+    syncRsvp(payload, words);
   }
 
   function syncMusicLabel() {
@@ -140,6 +151,90 @@
     const words = copy[currentLocale] ?? copy["uz-Latn"];
     musicButton.setAttribute("aria-label", musicEnabled ? words.musicOn : words.musicOff);
     musicButton.setAttribute("aria-pressed", String(musicEnabled));
+    const icon = musicButton.querySelector("svg");
+    if (icon) {
+      icon.innerHTML = musicEnabled
+        ? '<path d="M11 5 6 9H2v6h4l5 4V5Z"></path><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>'
+        : '<path d="M11 4.702a.7.7 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.7.7 0 0 0 11 19.298z"></path><path d="m16.5 14.5 5-5"></path><path d="m16.5 9.5 5 5"></path>';
+    }
+  }
+
+  function syncRsvp(payload, words) {
+    const enabled = payload?.data?.rsvp?.enabled === true;
+    let section = root.querySelector("[data-golden-rsvp]");
+    if (!enabled && !section) return;
+    if (!section) {
+      section = document.createElement("section");
+      section.className = "golden-platform-section";
+      section.dataset.goldenRsvp = "";
+      const heading = document.createElement("h2");
+      heading.dataset.goldenRsvpHeading = "";
+      const form = document.createElement("form");
+      form.className = "golden-rsvp-form";
+      const label = document.createElement("label");
+      label.dataset.goldenRsvpLabel = "";
+      const name = document.createElement("input");
+      name.name = "name";
+      name.type = "text";
+      name.required = true;
+      name.maxLength = 100;
+      name.autocomplete = "name";
+      name.dataset.goldenRsvpName = "";
+      label.append(document.createTextNode(""), name);
+      const buttons = document.createElement("div");
+      buttons.className = "golden-rsvp-buttons";
+      for (const answer of ["yes", "no"]) {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.dataset.goldenRsvpChoice = answer;
+        buttons.append(button);
+      }
+      const status = document.createElement("p");
+      status.className = "golden-rsvp-status";
+      status.setAttribute("role", "status");
+      status.setAttribute("aria-live", "polite");
+      form.append(label, buttons, status);
+      section.append(heading, form);
+      root.append(section);
+      for (const button of buttons.querySelectorAll("button")) {
+        button.addEventListener("click", async () => {
+          const current = currentPayload ?? {};
+          const currentWords = copy[current.locale] ?? copy["uz-Latn"];
+          if (current.preview) {
+            status.textContent = currentWords.rsvpPreview;
+            return;
+          }
+          if (!name.value.trim()) {
+            name.focus();
+            return;
+          }
+          for (const choice of buttons.querySelectorAll("button")) choice.disabled = true;
+          try {
+            const answer = button.dataset.goldenRsvpChoice;
+            const response = await fetch(`/api/public/invitations/${encodeURIComponent(current.invitationId || "")}/rsvp`, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ name: name.value.trim(), status: answer, partySize: answer === "yes" ? 1 : 0, guestToken: current.guestToken || undefined }),
+            });
+            if (!response.ok) throw new Error("RSVP request failed");
+            status.textContent = currentWords.rsvpDone;
+            buttons.hidden = true;
+          } catch {
+            status.textContent = currentWords.rsvpError;
+          } finally {
+            for (const choice of buttons.querySelectorAll("button")) choice.disabled = false;
+          }
+        });
+      }
+    }
+    section.hidden = !enabled;
+    section.querySelector("[data-golden-rsvp-heading]").textContent = words.rsvp;
+    section.querySelector("[data-golden-rsvp-label]").firstChild.textContent = `${words.name}: `;
+    const nameInput = section.querySelector("[data-golden-rsvp-name]");
+    if (!nameInput.value && payload?.guestName) nameInput.value = payload.guestName;
+    section.querySelectorAll("[data-golden-rsvp-choice]").forEach((button) => {
+      button.textContent = words[button.dataset.goldenRsvpChoice];
+    });
   }
 
   function animateStars() {
