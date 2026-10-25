@@ -1,16 +1,13 @@
 .section {
   position: relative;
-  padding: 44px 0 54px;
+  padding-top: 44px;
   background: var(--bg);
   color: var(--ink);
-  scroll-margin-top: 0;
-}
-.inner {
-  position: relative;
+  scroll-margin-top: 24px;
 }
 .heading {
   text-align: center;
-  margin-bottom: 46px;
+  padding-bottom: 48px;
 }
 .heading h2 {
   margin: 0 0 18px;
@@ -26,850 +23,995 @@
   font-size: 13px;
   line-height: 1.9;
 }
-.grid {
-  display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  gap: 16px;
-}
-.card {
+.track {
   position: relative;
   isolation: isolate;
-  min-width: 0;
-  overflow: hidden;
-  border: 1px solid var(--line);
-  border-radius: 18px;
-  background: var(--surface);
-  color: var(--ink);
-  transition:
-    transform 300ms ease,
-    box-shadow 300ms ease,
-    border-color 300ms ease;
+  background: #f8f6f2;
 }
-.label {
+.stage {
   position: relative;
-  z-index: 2;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  margin: 24px 28px 0;
-  font-size: 10px;
-  font-weight: 500;
-  color: var(--primary);
 }
-.copy {
-  position: relative;
-  z-index: 1;
-  padding: 0 28px 28px;
+.track[data-cinematic-ready="true"] {
+  height: calc(var(--scroll-screens) * 100svh);
 }
-.card h3 {
-  margin: 0 0 12px;
-  font-family: var(--font-display);
-  font-weight: 400;
-  font-size: clamp(26px, 2.4vw, 33px);
-  letter-spacing: -0.7px;
-  line-height: 1.07;
+.track[data-cinematic-ready="true"] .stage {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  overflow: clip;
 }
-.card h3 em {
-  color: var(--primary);
-  font-weight: 400;
-}
-.card p {
-  max-width: 360px;
-  margin: 0;
-  color: var(--muted);
-  font-size: 12px;
-  line-height: 1.85;
-}
-.design {
-  grid-column: span 7;
-  min-height: 370px;
-  background: var(--accent-soft);
-}
-.designCopy {
-  position: relative;
-  z-index: 2;
-  width: 51%;
-  padding: 75px 0 32px 32px;
-}
-.designCopy h3 {
-  font-size: clamp(29px, 2.9vw, 37px);
-}
-.designCopy p {
-  max-width: 225px;
-}
-.designLink {
-  display: inline-flex;
-  align-items: center;
-  gap: 14px;
-  margin-top: 28px;
-  font-size: 11px;
-  border-bottom: 1px solid var(--line-strong);
-  padding-bottom: 7px;
-  color: var(--primary);
-}
-.designLink svg {
-  transition: transform 240ms ease;
-}
-.designLink:hover svg {
-  transform: translate(2px, -2px);
-}
-.designArt {
+.track[data-cinematic-ready="true"] .scene {
   position: absolute;
-  inset: 0 0 0 47%;
-}
-.invitation {
-  position: absolute;
-  width: 190px;
-  height: 300px;
-  top: 27px;
-  left: 14%;
-  overflow: hidden;
-  border: 6px solid var(--surface);
-  border-radius: 90px 90px 4px 4px;
-  background: var(--ink);
-  box-shadow: 0 12px 25px rgb(var(--shadow-color) / 18%);
-  transform: rotate(9deg);
-  transition: transform 500ms ease;
-}
-.invitation img {
-  object-fit: cover;
-  object-position: top;
-}
-.invitationCaption {
-  position: absolute;
-  bottom: 0;
-  inset-inline: 0;
-  padding: 45px 10px 18px;
-  text-align: center;
-  color: var(--on-primary);
-  background: linear-gradient(transparent, rgb(var(--shadow-color) / 85%));
-  font-size: 11px;
-  line-height: 1.5;
-}
-.invitationCaption i {
-  font-family: var(--font-display);
-  font-size: 16px;
-}
-.backSheet {
-  position: absolute;
-  top: 65px;
-  left: 0;
-  width: 165px;
-  height: 250px;
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid var(--line-strong);
-  background: var(--accent-tint);
-  color: var(--primary);
-  text-align: center;
-  font-family: var(--font-display);
-  font-size: 26px;
-  transform: rotate(-10deg);
-  transition: transform 500ms ease;
-}
-.designSeal {
-  position: absolute;
-  z-index: 2;
-  left: 4%;
-  top: 265px;
-  width: 46px;
-  height: 46px;
-  border: 1px solid var(--gold);
-  border-radius: 50%;
-  background: var(--gold);
-  color: var(--gold-ink);
-  box-shadow:
-    0 4px 9px rgb(var(--shadow-color) / 12%),
-    inset 0 0 0 2px #ffffff19;
-  display: grid;
-  place-items: center;
-  transform: rotate(-12deg);
-}
-.swatches {
-  position: absolute;
-  bottom: 19px;
-  right: 22px;
-  display: flex;
-  align-items: center;
-}
-.swatches i {
-  width: 17px;
-  height: 17px;
-  border-radius: 50%;
-  border: 2px solid var(--accent-soft);
-  margin-left: -4px;
-  background: var(--primary);
-}
-.swatches i:nth-child(2) {
-  background: var(--gold);
-}
-.swatches i:nth-child(3) {
-  background: var(--ink);
-}
-.swatches > span {
-  margin-left: 6px;
-  font-size: 8px;
-  color: var(--muted);
-}
-.location {
-  grid-column: span 5;
-  min-height: 370px;
-  background: var(--surface-soft);
-}
-.mapArt {
-  position: relative;
-  height: 174px;
-  margin: -6px 0 12px;
-  overflow: hidden;
-  mask-image: linear-gradient(transparent, #000 22%, #000 72%, transparent);
-}
-.mapArt > svg {
-  position: absolute;
-  width: 100%;
+  inset: 0;
   height: 100%;
+  min-height: 0;
+  transform: translate3d(0, var(--panel-y, 100%), 0);
 }
-.destination {
-  position: absolute;
-  top: 24px;
-  left: 59%;
-  width: 43px;
-  height: 43px;
-  border-radius: 50% 50% 50% 0;
-  background: var(--primary);
-  color: var(--on-primary);
-  display: grid;
-  place-items: center;
-  transform: rotate(-45deg);
-  box-shadow: -5px 8px 14px color-mix(in srgb, var(--primary) 16%, transparent);
-  transition: translate 350ms ease;
+.track[data-cinematic-ready="true"] .scene:first-child {
+  transform: translate3d(0, var(--panel-y, 0px), 0);
 }
-.destination > svg {
-  transform: rotate(45deg);
-  stroke-width: 1.5;
-}
-.destination i {
-  position: absolute;
-  width: 6px;
-  height: 6px;
-  top: 50px;
-  left: -14px;
-  border-radius: 50%;
-  background: var(--primary);
-}
-.mapPill {
-  position: absolute;
-  left: 16%;
-  bottom: 28px;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 8px 10px;
-  border: 1px solid var(--line-strong);
-  border-radius: 7px;
-  background: var(--surface);
-  font-size: 9px;
-  transform: rotate(-4deg);
-  box-shadow: 0 4px 10px rgb(var(--shadow-color) / 5%);
-}
-.route {
-  stroke-dashoffset: 0;
-}
-.rsvp,
-.wishes,
-.gifting {
-  grid-column: span 4;
-  min-height: 315px;
-}
-.rsvp {
-  background: var(--surface);
-}
-.replyArt {
-  height: 126px;
+.scene {
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding-bottom: 15px;
+  height: 100svh;
+  min-height: 640px;
+  overflow: clip;
+  isolation: isolate;
+  color: #312b30;
+  background: #f8f6f2;
 }
-.avatars {
-  display: flex;
-  align-items: center;
-  padding-left: 10px;
-}
-.avatars > span,
-.avatars > i {
-  display: grid;
-  place-items: center;
-  width: 49px;
-  height: 49px;
-  border: 3px solid var(--surface);
-  margin-left: -10px;
-  border-radius: 50%;
-  background: var(--accent-tint);
-  font-family: var(--font-display);
-  font-size: 24px;
-  color: var(--primary);
-}
-.avatars > span:nth-child(2) {
-  background: var(--gold-soft);
-  color: var(--gold-ink);
-}
-.avatars > span:nth-child(3) {
-  background: var(--surface-soft);
-  color: var(--ink);
-}
-.avatars > i {
-  background: var(--primary);
-  color: var(--on-primary);
-  font-family: inherit;
-  transition: transform 350ms ease;
-}
-.replyBubble {
-  position: absolute;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  bottom: 13px;
-  left: calc(50% - 45px);
-  padding: 9px 13px;
-  border: 1px solid var(--line);
-  border-radius: 9px 9px 9px 0;
-  background: var(--surface);
-  font-size: 9px;
-  color: var(--primary);
-  transform: rotate(-4deg);
-  transition: transform 350ms ease;
-  box-shadow: 0 4px 12px rgb(var(--shadow-color) / 3%);
-  white-space: nowrap;
-}
-.wishes {
-  background: var(--accent-soft);
-}
-.wishArt {
-  position: relative;
-  height: 126px;
-  display: grid;
-  place-content: center;
-  text-align: center;
-}
-.quoteMark {
-  position: absolute;
-  top: 4px;
-  left: 25px;
-  font-family: var(--font-display);
-  font-size: 110px;
-  line-height: 1;
-  color: var(--accent-tint);
-}
-.handwriting {
-  position: relative;
+.scene:nth-child(1) {
   z-index: 1;
-  font-family: var(--font-home-script), cursive;
-  font-size: 32px;
-  line-height: 0.95;
-  color: var(--primary);
-  transform: rotate(-5deg);
-  transition: transform 350ms ease;
 }
-.wishHeart {
+.scene:nth-child(2) {
+  z-index: 2;
+}
+.scene:nth-child(3) {
+  z-index: 3;
+}
+.scene:nth-child(4) {
+  z-index: 4;
+}
+.photograph {
   position: absolute;
-  right: 30px;
-  bottom: 24px;
-  color: var(--primary);
-  transform: rotate(15deg);
-  transition: transform 350ms ease;
+  inset: -18% 0 -8%;
+  transform: translate3d(0, var(--image-y, 0px), 0)
+    scale(var(--image-scale, 1.04));
 }
-.gifting {
-  background: var(--surface);
-}
-.giftArt {
-  position: relative;
-  width: 150px;
-  height: 126px;
-  margin: 0 auto;
-}
-.giftNote {
+.photograph picture {
   position: absolute;
-  left: 20px;
-  top: 15px;
-  width: 110px;
-  height: 71px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 5px;
-  border: 1px solid var(--line);
-  border-radius: 3px;
-  background: var(--surface);
-  color: var(--primary);
-  transform: rotate(-6deg);
-  transition: transform 450ms ease;
+  inset: 0;
 }
-.giftNote span {
-  font-family: var(--font-display);
-  font-size: 17px;
-  font-style: italic;
+.photograph img {
+  object-fit: cover;
+  object-position: center;
 }
-.envelope {
-  position: absolute;
-  top: 52px;
-  width: 150px;
-  height: 67px;
-  border-radius: 3px 3px 6px 6px;
-  background: var(--primary-hover);
-  box-shadow: 0 7px 12px rgb(var(--shadow-color) / 10%);
-  transform: rotate(-6deg);
-}
-.envelope::before {
-  content: "";
+.shade {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(26deg, transparent 49%, #ffffff0a 50%, transparent 51%),
-    linear-gradient(-26deg, transparent 49%, #ffffff0a 50%, transparent 51%);
-  border: 1px solid var(--primary-hover);
-  border-radius: inherit;
+    linear-gradient(
+      90deg,
+      rgb(255 253 249 / 38%),
+      rgb(255 253 249 / 8%) 48%,
+      transparent 76%
+    ),
+    linear-gradient(0deg, rgb(255 253 249 / 16%), transparent 40%);
 }
-.envelope::after {
-  content: "";
+.scene[data-side="right"] .shade {
+  background:
+    linear-gradient(
+      270deg,
+      rgb(255 253 249 / 44%),
+      rgb(255 253 249 / 8%) 52%,
+      transparent 82%
+    ),
+    linear-gradient(0deg, rgb(255 253 249 / 16%), transparent 40%);
+}
+.chapter {
   position: absolute;
-  inset: 0 0 22px;
-  clip-path: polygon(0 0, 100% 0, 50% 100%);
-  background: var(--primary);
+  bottom: 4.5%;
+  right: 6.5%;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: #705f65;
 }
-.waxSeal {
+.chapter span {
+  color: #47363f;
+}
+.chapter i {
+  width: 47px;
+  height: 1px;
+  background: rgb(84 59 70 / 35%);
+}
+.copy {
+  position: absolute;
+  isolation: isolate;
+  z-index: 2;
+  left: 8.5%;
+  top: 38%;
+  width: 42%;
+  max-width: 600px;
+  transform: translate3d(0, var(--copy-y, 0px), 0);
+  text-shadow: none;
+}
+.scene[data-side="right"] .copy {
+  left: auto;
+  right: 6.5%;
+  width: 43%;
+}
+.eyebrow {
+  margin: 0 0 24px;
+  color: #8e3a4d;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 2.7px;
+  text-transform: uppercase;
+}
+.copy h3 {
+  margin: 0 0 23px;
+  color: #312b30;
+  font-size: clamp(52px, 5.5vw, 90px);
+  line-height: 0.96;
+  letter-spacing: -2.5px;
+  font-weight: 400;
+}
+.copy h3 em {
+  font-weight: inherit;
+  color: #9d314a;
+}
+.description {
+  max-width: 340px;
+  margin: 0;
+  color: #5b4e55;
+  font-size: 13px;
+  line-height: 1.95;
+  text-wrap: pretty;
+}
+.action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  min-height: 48px;
+  margin-top: 28px;
+  padding: 12px 20px;
+  color: #fff;
+  background: #b8324a;
+  border: 1px solid #cb6475;
+  border-radius: 999px;
+  font-size: 12px;
+  transition: background 180ms;
+}
+.action:hover {
+  background: #98263d;
+}
+.action:focus-visible {
+  outline: 3px solid #8e3a4d;
+  outline-offset: 6px;
+}
+.sceneCaption {
+  position: absolute;
+  left: 6.5%;
+  bottom: 4.5%;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: #6c5962;
+  font-size: 9px;
+  letter-spacing: 1.3px;
+}
+.sceneCaption i {
+  height: 1px;
+  width: 35px;
+  background: currentColor;
+  opacity: 0.5;
+}
+.detail {
   position: absolute;
   z-index: 1;
-  left: 59px;
-  top: 29px;
-  width: 33px;
-  height: 33px;
-  border-radius: 50%;
+  width: 42%;
+  height: 70%;
+  top: 15%;
+  right: 5%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translate3d(0, calc(var(--image-y, 0px) * 0.4), 0);
+  pointer-events: none;
+  opacity: var(--detail-opacity, 1);
+}
+.phone {
+  position: relative;
+  width: clamp(225px, 20vw, 310px);
+  aspect-ratio: 9 / 18;
+  padding: 7px;
+  border: 2px solid #b8a99c;
+  border-radius: 42px;
+  background: #161413;
+  box-shadow:
+    14px 22px 46px rgb(57 38 36 / 24%),
+    inset 0 0 0 2px #3e3832;
+  transform: rotate(-9deg);
+}
+.phoneScreen {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 33px;
+  background: #f5e7d6;
+}
+.poster {
+  object-fit: cover;
+  object-position: center;
+}
+.phoneIsland {
+  position: absolute;
+  top: 9px;
+  left: 50%;
+  width: 30%;
+  height: 19px;
+  border-radius: 20px;
+  background: #161413;
+  transform: translateX(-50%);
+}
+.paperBehind {
+  position: absolute;
+  width: 220px;
+  height: 330px;
+  right: 0;
+  top: 24%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 34px;
+  border: 12px solid #eee2cf;
+  outline: 1px solid #b59869;
+  outline-offset: -23px;
+  color: #886944;
+  background: #f6eddf;
+  box-shadow: 10px 16px 35px #0005;
+  transform: rotate(12deg);
+}
+.paperBehind span {
+  font-family: var(--font-display);
+  font-size: 48px;
+}
+.paperBehind i {
+  font-size: 10px;
+  font-weight: 400;
+}
+.detailNote {
+  position: absolute;
+  bottom: -1%;
+  right: 5%;
+  color: #8b4d50;
+  font-family: var(--font-home-script), cursive;
+  font-size: 30px;
+  transform: rotate(-7deg);
+}
+.personalDetail {
+  left: 5%;
+  right: auto;
+}
+.personalPaper {
+  position: relative;
+  width: clamp(270px, 26vw, 385px);
+  aspect-ratio: 3/4;
+  padding: 12px;
+  background: #f6e8da;
+  box-shadow: 18px 28px 50px rgb(57 38 36 / 20%);
+  transform: rotate(7deg);
+}
+.personalImage {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+}
+.personalImage img {
+  object-fit: cover;
+  object-position: center 30%;
+}
+.musicNote {
+  position: absolute;
+  left: 12%;
+  bottom: 4%;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 17px 20px;
+  border: 1px solid #e6d5c344;
+  border-radius: 3px;
+  color: #f5e4d1;
+  background: #2b171cee;
+  box-shadow: 0 12px 25px #0004;
+}
+.musicNote > span {
+  font-size: 12px;
+}
+.musicNote small {
+  display: block;
+  margin-top: 6px;
+  font-size: 9px;
+  color: #cbb9b0;
+}
+.wave {
+  display: flex;
+  gap: 3px;
+  align-items: center;
+  height: 25px;
+  margin-left: 12px;
+}
+.wave i {
+  width: 2px;
+  height: 9px;
+  background: #d5af8d;
+}
+.wave i:nth-child(2n) {
+  height: 19px;
+}
+.wave i:nth-child(3) {
+  height: 25px;
+}
+.venueDetail {
+  right: 5%;
+  top: 18%;
+  height: 68%;
+}
+.venueRoute {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 1px 3px #fff7edaa);
+}
+.venueMarker {
+  position: absolute;
+  left: 62.5%;
+  top: 22.6%;
   display: grid;
   place-items: center;
-  background: var(--gold);
-  color: var(--gold-ink);
-  border: 1px solid var(--gold-ink);
-  box-shadow: inset 0 0 0 3px rgb(255 255 255 / 12%);
+  width: 64px;
+  height: 64px;
+  border: 1px solid #f1d8b777;
+  border-radius: 50%;
+  color: #fff4e3;
+  background: #8f2940cc;
+  box-shadow:
+    0 0 0 12px #e4b49114,
+    0 8px 25px #22131a55;
+  transform: translate(-50%, -100%);
 }
-.footer {
+.venueMarker span {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  bottom: -3px;
+  border-radius: 50%;
+  background: #ead0a9;
+}
+.venueInfo {
+  position: absolute;
+  left: 22%;
+  top: 31%;
+  width: 70%;
+  padding: 23px 25px 22px;
+  border: 1px solid rgb(255 246 233 / 42%);
+  border-radius: 17px;
+  background: linear-gradient(135deg, rgb(54 33 45 / 78%), rgb(70 46 58 / 72%));
+  backdrop-filter: blur(14px);
+  box-shadow: 0 15px 40px rgb(68 39 46 / 18%);
+  color: #fff8f0;
+  text-shadow: none;
+}
+.venueInfo > span {
+  display: block;
+  font-size: 10px;
+  line-height: 1.65;
+  letter-spacing: 1.5px;
+  color: #fff2e1;
+}
+.venueInfo h4 {
+  margin: 13px 0 8px;
+  font-family: var(--font-display);
+  font-size: clamp(35px, 4vw, 60px);
+  font-weight: 400;
+  line-height: 1;
+}
+.venueInfo p {
   display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0;
+  font-size: 13px;
+}
+.venueInfo p i {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: currentColor;
+}
+.venueNavigation {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  width: fit-content;
+  margin-top: 23px;
+  padding: 11px 13px;
+  border: 1px solid #ead0a944;
+  border-radius: 24px;
+  background: #321c28aa;
+  color: #fff0db;
+  font-size: 11px;
+}
+.venueNavigation svg {
+  flex-shrink: 0;
+}
+.cardEyebrow {
+  display: block;
+  font-size: 9px;
+  letter-spacing: 2.2px;
+  color: #946a61;
+}
+.replyPhone h4 {
+  margin: 18px 0 10px;
+  font-family: var(--font-display);
+  font-size: 40px;
+  font-weight: 400;
+  line-height: 1.1;
+}
+.togetherDetail {
+  left: 5%;
+  right: auto;
+}
+.replyPhone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: clamp(245px, 23vw, 305px);
+  min-height: 460px;
+  padding: 42px 23px 30px;
+  border: 6px solid #211b1c;
+  outline: 1px solid #b9a18d;
+  border-radius: 38px;
+  color: #452c35;
+  background: #fff5e9;
+  box-shadow: 20px 30px 55px rgb(57 38 36 / 23%);
+  transform: rotate(-7deg);
+  text-align: center;
+}
+.replyPhone > svg {
+  margin-top: 28px;
+  color: #aa7e5d;
+}
+.replyPhone h4 {
+  font-size: 35px;
+  margin-top: 18px;
+}
+.replyPhone > p {
+  margin: 0 0 23px;
+  font-size: 10px;
+  color: #897067;
+}
+.reply {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  width: 100%;
+  padding: 13px 8px;
+  border-radius: 24px;
+  background: #b8324a;
+  color: #fff;
+  font-size: 11px;
+}
+.wish {
+  width: 100%;
+  margin-top: 25px;
+  padding: 22px 8px 0;
+  border-top: 1px solid #dbc8b7;
+  color: #8f514f;
+}
+.wish blockquote {
+  margin: 12px 0;
+  font-family: var(--font-home-script), cursive;
+  font-size: 28px;
+  line-height: 1.2;
+}
+.wish > span {
+  font-size: 8px;
+  color: #897067;
+}
+.support {
+  display: flex;
+  align-items: center;
   justify-content: space-between;
+  gap: 40px;
+  padding-block: 34px 42px;
+}
+.support > div {
+  display: flex;
   align-items: center;
   gap: 20px;
-  padding-top: 24px;
+  max-width: 590px;
 }
-.footer > span {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 10px;
-  color: var(--muted);
+.giftIcon {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: var(--accent-soft);
+  color: var(--primary);
 }
-.footer > p {
+.support h3 {
+  margin: 0 0 7px;
+  font-size: 27px;
+  letter-spacing: -0.6px;
+}
+.support p {
   margin: 0;
-  font-size: 9px;
   color: var(--muted);
+  font-size: 11px;
+  line-height: 1.8;
+}
+.support .sampleNote {
+  max-width: 285px;
+  font-size: 9px;
   text-align: right;
-  line-height: 1.7;
 }
-@media (hover: hover) and (pointer: fine) {
-  .card:hover {
-    transform: translateY(-4px);
-    border-color: var(--line-strong);
-    box-shadow: 0 14px 28px rgb(var(--shadow-color) / 8%);
+@media (min-width: 1700px) {
+  .detail {
+    right: 9%;
+    width: 37%;
   }
-  .design:hover .invitation {
-    transform: translate(-3px, -5px) rotate(5deg);
-  }
-  .design:hover .backSheet {
-    transform: translate(-6px, 2px) rotate(-13deg);
-  }
-  .location:hover .route {
-    animation: routeFlow 1.2s linear infinite;
-  }
-  .location:hover .destination {
-    translate: 0 -5px;
-  }
-  .rsvp:hover .replyBubble {
-    transform: translateY(-4px) rotate(0);
-  }
-  .rsvp:hover .avatars > i {
-    transform: rotate(-10deg);
-  }
-  .wishes:hover .handwriting {
-    transform: rotate(-2deg) translateY(-3px);
-  }
-  .wishes:hover .wishHeart {
-    transform: rotate(0) scale(1.15);
-  }
-  .gifting:hover .giftNote {
-    transform: translateY(-8px) rotate(-3deg);
+  .personalDetail,
+  .togetherDetail {
+    left: 8%;
+    right: auto;
   }
 }
-@keyframes routeFlow {
-  to {
-    stroke-dashoffset: -30;
-  }
-}
-@media (max-width: 1100px) {
-  .designCopy {
-    padding-left: 25px;
-    width: 50%;
-  }
-  .designCopy h3 {
-    font-size: 32px;
-  }
-  .invitation {
-    width: 165px;
-    height: 287px;
-    left: 10%;
-    top: 35px;
-  }
-  .backSheet {
-    width: 140px;
-    left: -5%;
-  }
-  .label {
-    margin-inline: 24px;
-  }
+@media (max-width: 1000px) and (min-width: 701px) {
   .copy {
-    padding-inline: 24px;
+    left: 6%;
+    width: 44%;
   }
-  .language {
-    padding: 24px;
-    gap: 18px;
+  .copy h3 {
+    font-size: 58px;
   }
-}
-@media (max-width: 850px) {
-  .section {
-    padding-top: 44px;
+  .scene[data-side="right"] .copy {
+    right: 4%;
+    width: 44%;
   }
-  .grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  .detail {
+    right: 2%;
+    width: 45%;
   }
-  .design {
-    grid-column: 1 / -1;
-    min-height: 340px;
+  .personalDetail,
+  .togetherDetail {
+    left: 2%;
+    right: auto;
   }
-  .designCopy {
-    width: 50%;
-    padding: 58px 0 30px 30px;
-  }
-  .designCopy p {
-    max-width: 260px;
-  }
-  .designArt {
-    left: 52%;
-  }
-  .invitation {
-    width: 180px;
+  .paperBehind {
+    width: 170px;
     height: 280px;
-    top: 22px;
-    left: 13%;
   }
-  .backSheet {
-    top: 50px;
-    height: 240px;
-    width: 155px;
+  .phone {
+    width: 225px;
   }
-  .designSeal {
-    top: 250px;
+  .personalPaper {
+    width: 260px;
   }
-  .location,
-  .rsvp,
-  .wishes,
-  .gifting {
-    grid-column: span 1;
-    min-height: 324px;
-  }
-  .mapArt {
-    height: 126px;
-    margin: 0;
-  }
-  .destination {
-    top: 8px;
-  }
-  .mapPill {
-    bottom: 9px;
-  }
-  .card h3 {
-    font-size: 30px;
-  }
-  .designCopy h3 {
-    font-size: 37px;
-  }
-  .copy {
-    padding-top: 12px;
-  }
-  .language {
-    grid-template-columns: 1fr;
-    gap: 26px;
-  }
-  .language p {
-    max-width: 420px;
+  .musicNote {
+    left: 0;
   }
 }
-@media (max-width: 600px) {
+@media (max-width: 700px) {
+  .track[data-cinematic-ready="true"] .copy::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: -25px -18px;
+    background: radial-gradient(
+      ellipse at 28% 50%,
+      rgb(255 253 249 / 90%) 10%,
+      rgb(255 253 249 / 65%) 50%,
+      transparent 80%
+    );
+    filter: blur(18px);
+    pointer-events: none;
+  }
+  .track[data-cinematic-ready="true"] .detail {
+    top: 8%;
+    height: 40%;
+  }
+  .track[data-cinematic-ready="true"] .togetherDetail {
+    top: 8%;
+    height: 43%;
+  }
   .section {
-    padding: 38px 0 26px;
+    padding-top: 30px;
   }
   .heading {
-    margin-bottom: 30px;
+    padding-bottom: 30px;
   }
   .heading h2 {
-    font-size: 48px;
-    letter-spacing: -1.4px;
+    font-size: 49px;
+    letter-spacing: -1.5px;
   }
   .heading > p {
-    max-width: 310px;
+    max-width: 330px;
     margin-inline: auto;
     font-size: 11px;
-    line-height: 1.8;
   }
-  .grid {
-    gap: 12px;
+  .scene {
+    min-height: 0;
   }
-  .card {
-    border-radius: 14px;
+  .photograph {
+    inset: -12% -3% -5%;
   }
-  .label {
-    margin: 20px 20px 0;
+  .shade,
+  .scene[data-side="right"] .shade {
+    background: linear-gradient(
+      180deg,
+      rgb(255 253 249 / 15%) 0%,
+      rgb(255 253 249 / 8%) 29%,
+      transparent 55%,
+      rgb(255 253 249 / 24%) 100%
+    );
+  }
+  .chapter {
+    bottom: 2.4%;
+    right: 7%;
     font-size: 9px;
+    gap: 10px;
   }
-  .design {
-    min-height: 442px;
+  .chapter i {
+    width: 30px;
   }
-  .designArt {
-    position: relative;
-    inset: auto;
-    height: 250px;
+  .copy,
+  .scene[data-side="right"] .copy {
+    top: 11%;
+    left: 7%;
+    right: auto;
+    width: 86%;
+    max-width: 480px;
   }
-  .invitation {
-    width: 139px;
-    height: 223px;
-    top: 12px;
-    left: calc(50% - 35px);
-    border-width: 4px;
-  }
-  .backSheet {
-    width: 122px;
-    height: 185px;
-    top: 44px;
-    left: calc(50% - 100px);
-    font-size: 21px;
-    gap: 15px;
-  }
-  .designSeal {
-    top: 195px;
-    left: calc(50% - 88px);
-    width: 36px;
-    height: 36px;
-  }
-  .invitationCaption {
-    font-size: 8px;
-    padding: 30px 7px 13px;
-  }
-  .invitationCaption i {
-    font-size: 13px;
-  }
-  .swatches {
-    display: none;
-  }
-  .designCopy {
-    position: relative;
-    width: 100%;
-    padding: 0 22px 23px;
-  }
-  .designCopy h3 {
-    font-size: 31px;
-  }
-  .designCopy h3 br {
-    display: none;
-  }
-  .designCopy h3 em {
-    display: block;
-  }
-  .designCopy p {
-    max-width: 300px;
-    font-size: 11px;
-  }
-  .designLink {
-    margin-top: 17px;
-    font-size: 10px;
-  }
-  .location {
-    grid-column: 1 / -1;
-    min-height: 310px;
-  }
-  .mapArt {
-    height: 144px;
-  }
-  .destination {
-    top: 12px;
-  }
-  .location .copy {
-    padding-top: 0;
-  }
-  .copy {
-    padding: 7px 20px 23px;
-  }
-  .card h3 {
-    font-size: 28px;
-  }
-  .card p {
-    font-size: 11px;
-  }
-  .rsvp,
-  .wishes {
-    grid-column: 1 / -1;
-    min-height: 285px;
-  }
-  .rsvp .label,
-  .wishes .label {
-    margin: 20px 20px 0;
+  .eyebrow {
     font-size: 9px;
-    gap: 8px;
+    letter-spacing: 2px;
+    margin-bottom: 16px;
   }
-  .rsvp .copy,
-  .wishes .copy {
-    padding-inline: 20px;
+  .copy h3 {
+    font-size: clamp(42px, 11.5vw, 67px);
+    line-height: 0.98;
+    letter-spacing: -1.7px;
+    margin-bottom: 16px;
   }
-  .rsvp h3,
-  .wishes h3 {
-    font-size: 29px;
-    line-height: 1.1;
+  .description {
+    max-width: 310px;
+    font-size: 12px;
+    line-height: 1.85;
   }
-  .rsvp p,
-  .wishes p {
-    font-size: 11px;
-    line-height: 1.8;
+  .detail,
+  .personalDetail,
+  .venueDetail,
+  .togetherDetail {
+    left: 7%;
+    right: auto;
+    top: 44%;
+    height: 48%;
+    width: 86%;
   }
-  .replyArt,
-  .wishArt {
-    height: 108px;
+  .phone {
+    width: auto;
+    height: 100%;
+    max-height: 410px;
+    padding: 5px;
+    border-radius: 30px;
   }
-  .avatars > span,
-  .avatars > i {
-    width: 43px;
-    height: 43px;
-    margin-left: -10px;
-    font-size: 19px;
+  .phoneScreen {
+    border-radius: 23px;
   }
-  .replyBubble {
-    left: calc(50% - 40px);
+  .phoneIsland {
+    top: 7px;
+    height: 13px;
+  }
+  .paperBehind {
+    top: 20%;
+    right: 3%;
+    height: 74%;
+    width: 47%;
+    max-width: 190px;
+    gap: 22px;
+  }
+  .paperBehind span {
+    font-size: 35px;
+  }
+  .paperBehind i {
     font-size: 8px;
-    gap: 6px;
+  }
+  .designDetail .phone {
+    margin-right: 45px;
+  }
+  .detailNote {
+    font-size: 23px;
+    bottom: -1%;
+    right: -1%;
+  }
+  .personalPaper {
+    width: auto;
+    height: 94%;
+    aspect-ratio: 3/4;
+    max-height: 390px;
     padding: 8px;
   }
-  .handwriting {
-    font-size: 32px;
+  .musicNote {
+    bottom: 0;
+    left: 0;
+    padding: 12px 14px;
+    gap: 10px;
   }
-  .quoteMark {
-    left: 40px;
-    top: 8px;
-    font-size: 80px;
+  .musicNote > span {
+    font-size: 10px;
   }
-  .wishHeart {
-    width: 23px;
-    right: 45px;
-    bottom: 20px;
+  .musicNote small {
+    font-size: 8px;
   }
-  .gifting {
-    grid-column: 1 / -1;
-    min-height: 285px;
+  .venueDetail {
+    align-items: center;
   }
-  .gifting .copy {
-    width: 100%;
+  .venueInfo {
+    left: 9%;
+    width: 82%;
+    padding: 18px 20px;
   }
-  .gifting h3 {
-    font-size: 29px;
-  }
-  .giftArt {
-    height: 108px;
-    transform: translateY(-9px) scale(0.88);
-  }
-  .gifting p {
-    max-width: 100%;
-  }
-  .footer {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 9px;
-    padding-top: 23px;
-  }
-  .footer > span {
+  .venueInfo > span {
     font-size: 9px;
+    letter-spacing: 1.2px;
   }
-  .footer > p {
+  .venueInfo h4 {
+    font-size: 43px;
+  }
+  .venueInfo p {
+    font-size: 12px;
+  }
+  .venueMarker {
+    width: 52px;
+    height: 52px;
+  }
+  .venueNavigation {
+    padding: 10px;
+    font-size: 9px;
+    gap: 7px;
+  }
+  .scene[data-scene="together"] .copy {
+    top: 10%;
+  }
+  .scene[data-scene="together"] .description {
+    max-width: 310px;
+  }
+  .action {
+    margin-top: 15px;
+    min-height: 44px;
+    padding: 10px 17px;
+    font-size: 11px;
+  }
+  .togetherDetail {
+    top: 51%;
+    height: 43%;
+  }
+  .replyPhone {
+    min-height: 0;
+    height: 100%;
+    width: auto;
+    aspect-ratio: 3/4.8;
+    padding: 22px 16px 15px;
+    border-radius: 27px;
+    border-width: 5px;
+  }
+  .replyPhone .cardEyebrow {
+    font-size: 7px;
+    letter-spacing: 1.4px;
+  }
+  .replyPhone > svg {
+    margin-top: 17px;
+    width: 22px;
+    height: 22px;
+  }
+  .replyPhone h4 {
+    font-size: 26px;
+    margin: 10px 0 7px;
+  }
+  .replyPhone > p {
+    font-size: 8px;
+    margin-bottom: 15px;
+  }
+  .reply {
+    padding: 10px 5px;
+    font-size: 9px;
+    gap: 6px;
+  }
+  .wish {
+    margin-top: 15px;
+    padding-top: 12px;
+  }
+  .wish blockquote {
+    font-size: 23px;
+    margin: 8px 0;
+  }
+  .wish > span {
+    font-size: 7px;
+  }
+  .togetherDetail .detailNote {
+    right: 0;
+    bottom: 0;
+    font-size: 21px;
+  }
+  .sceneCaption {
+    bottom: 2.4%;
+    left: 7%;
+    gap: 9px;
+    font-size: 7px;
+    letter-spacing: 0.6px;
+  }
+  .sceneCaption i {
+    width: 20px;
+  }
+  .support {
+    flex-direction: column;
+    align-items: stretch;
+    padding-block: 27px 32px;
+    gap: 20px;
+  }
+  .support > div {
+    align-items: flex-start;
+    gap: 14px;
+  }
+  .giftIcon {
+    width: 43px;
+    height: 43px;
+  }
+  .support h3 {
+    font-size: 24px;
+  }
+  .support p {
+    font-size: 10px;
+  }
+  .support .sampleNote {
+    max-width: none;
     text-align: left;
+    padding-left: 57px;
     font-size: 8px;
   }
 }
-@media (max-width: 360px) {
-  .heading h2 {
-    font-size: 42px;
+@media (max-width: 370px) {
+  .copy h3 {
+    font-size: 41px;
   }
-  .invitation {
-    width: 130px;
+  .description {
+    font-size: 11px;
   }
-  .designCopy h3 {
-    font-size: 29px;
+  .eyebrow {
+    margin-bottom: 12px;
   }
-  .rsvp h3,
-  .wishes h3 {
-    font-size: 28px;
+  .copy h3 {
+    margin-bottom: 12px;
   }
-  .gifting h3 {
-    font-size: 28px;
+  .replyPhone {
+    padding-top: 17px;
   }
-  .language {
-    padding-inline: 16px;
+  .replyPhone > svg {
+    margin-top: 10px;
   }
-  .languageList li {
-    padding-inline: 10px;
+  .replyPhone h4 {
+    font-size: 23px;
   }
-  .languageList li > span {
+  .wish blockquote {
+    font-size: 21px;
+  }
+}
+@media (max-width: 700px) and (max-height: 700px) {
+  .track[data-cinematic-ready="true"] .togetherDetail {
+    height: 37%;
+  }
+  .copy,
+  .scene[data-side="right"] .copy,
+  .scene[data-scene="together"] .copy {
+    top: 84px;
+  }
+  .copy h3 {
+    font-size: 39px;
+  }
+  .eyebrow {
+    font-size: 8px;
+    margin-bottom: 12px;
+  }
+  .description {
+    font-size: 11px;
+    line-height: 1.7;
+  }
+  .detail,
+  .personalDetail,
+  .venueDetail {
+    top: 52%;
+    height: 40%;
+  }
+  .togetherDetail {
+    top: 56%;
+    height: 37%;
+  }
+  .replyPhone {
+    padding: 16px 12px 12px;
+  }
+  .replyPhone > svg,
+  .replyPhone > p,
+  .wish > svg,
+  .wish > span {
+    display: none;
+  }
+  .replyPhone h4 {
     font-size: 19px;
+    margin: 12px 0;
+    white-space: nowrap;
+  }
+  .reply {
+    font-size: 8px;
+    padding: 9px 3px;
+  }
+  .wish {
+    margin-top: 12px;
+    padding-top: 8px;
+  }
+  .wish blockquote {
+    font-size: 19px;
+    margin: 8px 0 0;
+    white-space: nowrap;
+  }
+  .venueInfo h4 {
+    font-size: 34px;
+  }
+  .venueInfo > span {
+    font-size: 8px;
+    letter-spacing: 0.8px;
+  }
+  .venueNavigation {
+    font-size: 8px;
+    padding: 8px;
+    gap: 5px;
+    margin-top: 16px;
+  }
+  .detailNote {
+    display: none;
+  }
+}
+@media (max-height: 500px), (min-width: 701px) and (max-height: 640px) {
+  .scene {
+    position: relative;
+    height: 720px;
+    min-height: 0;
+  }
+  .photograph,
+  .detail,
+  .copy {
+    transform: none;
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  .card,
-  .card *,
-  .card *::before,
-  .card *::after {
-    transition: none !important;
-    animation: none !important;
+  .scene {
+    position: relative;
   }
-  .card:hover {
+  .photograph,
+  .detail,
+  .copy {
     transform: none;
   }
-  .design:hover .invitation {
-    transform: rotate(9deg);
-  }
-  .design:hover .backSheet {
-    transform: rotate(-10deg);
-  }
-  .location:hover .destination {
-    translate: none;
-  }
-  .rsvp:hover .replyBubble {
-    transform: rotate(-4deg);
-  }
-  .rsvp:hover .avatars > i {
-    transform: none;
-  }
-  .wishes:hover .handwriting {
-    transform: rotate(-5deg);
-  }
-  .wishes:hover .wishHeart {
-    transform: rotate(15deg);
-  }
-  .gifting:hover .giftNote {
-    transform: rotate(-6deg);
+  .action {
+    transition: none;
   }
 }

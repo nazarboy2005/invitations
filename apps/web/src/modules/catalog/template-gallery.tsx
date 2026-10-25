@@ -26,14 +26,16 @@ export function TemplateGallery({
   templates,
   categories,
   featured = false,
+  initialCategory = "all",
 }: {
   templates: TemplateDefinition[];
   categories: TemplateCategory[];
   featured?: boolean;
+  initialCategory?: string;
 }) {
   const results = useRef<HTMLDivElement>(null);
   const { categoryId, renderedCategoryId, selectCategory } =
-    useCategoryTransition(results);
+    useCategoryTransition(results, initialCategory);
   const [searchQuery, setSearchQuery] = useState("");
   const grid = useRef<HTMLDivElement>(null);
   const selectedTrigger = useRef<HTMLButtonElement>(null);

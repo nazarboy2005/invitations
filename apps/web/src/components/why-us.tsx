@@ -7,252 +7,300 @@ import {
   Gift,
   Heart,
   MapPin,
+  Music2,
   Navigation,
-  Palette,
-  UsersRound,
 } from "lucide-react";
+import { CinematicScroll } from "./cinematic-scroll";
 import styles from "./why-us.module.css";
 
-export function WhyUs({ previewImage }: { previewImage?: string }) {
+const chapters = [
+  {
+    id: "design",
+    label: "Sizning uslubingiz",
+    title: (
+      <>
+        Har bir hikoyaning
+        <br />
+        <em>o‘z uslubi bor.</em>
+      </>
+    ),
+    text: "Milliy naqshlardan nafis minimalizmgacha. Ko‘nglingizga mos dizaynni tanlang.",
+    image: "design-daylight",
+    side: "left",
+  },
+  {
+    id: "personal",
+    label: "Sizning hikoyangiz",
+    title: (
+      <>
+        Har bir
+        <br />
+        <em>tafsilotda siz.</em>
+      </>
+    ),
+    text: "Ismlaringiz, suratlaringiz va sevimli kuyingiz bilan taklifnomani o‘zingizga xos qiling.",
+    image: "personal-daylight",
+    side: "right",
+  },
+  {
+    id: "venue",
+    label: "Uchrashadigan manzil",
+    title: (
+      <>
+        Yaqinlaringiz
+        <br />
+        <em>yo‘lini topsin.</em>
+      </>
+    ),
+    text: "Sana, vaqt va manzil bir joyda. Mehmonlaringiz xaritada yo‘lni bir bosishda ochadi.",
+    image: "venue-daylight",
+    side: "left",
+  },
+  {
+    id: "together",
+    label: "Eng yaqin insonlar",
+    title: (
+      <>
+        Eng yaqinlaringiz
+        <br />
+        <em>bilan, birga.</em>
+      </>
+    ),
+    text: "Kelish xabarlari va samimiy tilaklar bir joyda. Quvonchli kuningizga birga hozirlik ko‘ring.",
+    image: "together-daylight",
+    side: "right",
+  },
+] as const;
+
+function InvitationPhone({ previewImage }: { previewImage: string }) {
+  return (
+    <div className={styles.phone}>
+      <div className={styles.phoneScreen}>
+        <Image
+          src={previewImage}
+          alt=""
+          fill
+          sizes="(max-width: 700px) 220px, 310px"
+          className={styles.poster}
+        />
+        <span className={styles.phoneIsland} />
+      </div>
+    </div>
+  );
+}
+
+function SceneDetail({
+  chapter,
+  previewImage,
+}: {
+  chapter: string;
+  previewImage: string;
+}) {
+  if (chapter === "design")
+    return (
+      <div
+        className={`${styles.detail} ${styles.designDetail}`}
+        aria-hidden="true"
+      >
+        <div className={styles.paperBehind}>
+          <Flower2 size={34} strokeWidth={0.8} />
+          <span>J & M</span>
+          <i>Birga boshlanadi.</i>
+        </div>
+        <InvitationPhone previewImage={previewImage} />
+        <span className={styles.detailNote}>Bir samimiy taklifdan.</span>
+      </div>
+    );
+  if (chapter === "personal")
+    return (
+      <div
+        className={`${styles.detail} ${styles.personalDetail}`}
+        aria-hidden="true"
+      >
+        <div className={styles.personalPaper}>
+          <div className={styles.personalImage}>
+            <Image
+              src={previewImage}
+              alt=""
+              fill
+              sizes="(max-width: 700px) 250px, 380px"
+            />
+          </div>
+        </div>
+        <div className={styles.musicNote}>
+          <Music2 size={18} strokeWidth={1.4} />
+          <span>
+            Sevimli kuyingiz<small>Har bir lahzaga o‘z ohangi.</small>
+          </span>
+          <span className={styles.wave}>
+            <i />
+            <i />
+            <i />
+            <i />
+            <i />
+          </span>
+        </div>
+      </div>
+    );
+  if (chapter === "venue")
+    return (
+      <div
+        className={`${styles.detail} ${styles.venueDetail}`}
+        aria-hidden="true"
+      >
+        <svg
+          className={styles.venueRoute}
+          viewBox="0 0 400 420"
+          fill="none"
+          preserveAspectRatio="none"
+        >
+          <path
+            d="M35 375C110 350 60 255 160 240S282 155 250 95"
+            stroke="#914358"
+            strokeWidth="2.8"
+            strokeDasharray="3 8"
+            strokeLinecap="round"
+          />
+          <circle
+            cx="35"
+            cy="375"
+            r="6"
+            fill="#914358"
+            stroke="#fffaf2"
+            strokeWidth="2"
+          />
+        </svg>
+        <div className={styles.venueMarker}>
+          <MapPin size={29} strokeWidth={1.2} />
+          <span />
+        </div>
+        <div className={styles.venueInfo}>
+          <span>QUVONCHGA ELTUVCHI MANZIL</span>
+          <h4>Toshkent</h4>
+          <p>
+            14 noyabr <i /> 18:00
+          </p>
+          <div className={styles.venueNavigation}>
+            <Navigation size={13} /> Google Maps orqali{" "}
+            <ArrowUpRight size={14} />
+          </div>
+        </div>
+      </div>
+    );
+  return (
+    <div
+      className={`${styles.detail} ${styles.togetherDetail}`}
+      aria-hidden="true"
+    >
+      <div className={styles.replyPhone}>
+        <span className={styles.cardEyebrow}>JAVOHIR & MADINA</span>
+        <Flower2 size={30} strokeWidth={0.8} />
+        <h4>Birga bo‘lamizmi?</h4>
+        <p>Sizni kutib qolamiz.</p>
+        <div className={styles.reply}>
+          <Check size={17} /> Albatta, kelaman!
+        </div>
+        <div className={styles.wish}>
+          <Heart size={17} strokeWidth={1.1} />
+          <blockquote>
+            Baxtingiz bir umr
+            <br />
+            butun bo‘lsin!
+          </blockquote>
+          <span>Yaqinlaringizdan, mehr bilan.</span>
+        </div>
+      </div>
+      <span className={styles.detailNote}>Yaxshi kunlar birga.</span>
+    </div>
+  );
+}
+
+export function WhyUs({
+  previewImage = "/templates/anor/preview.webp",
+}: {
+  previewImage?: string;
+}) {
   return (
     <section
       id="why-us"
       className={styles.section}
       aria-labelledby="why-us-title"
     >
-      <div className={`container ${styles.inner}`}>
-        <header className={styles.heading}>
-          <h2 id="why-us-title">Nega aynan biz?</h2>
-          <p>
-            Bir qarashda hayrat. Har bir bosishda qulaylik.
-            <br />
-            Sizning kuningiz uchun o‘ylangan kichik, ammo muhim tafsilotlar.
-          </p>
-        </header>
-        <div className={styles.grid}>
-          <article className={`${styles.card} ${styles.design}`}>
-            <span className={styles.label}>
-              <Palette size={15} aria-hidden="true" /> Sizning uslubingiz
+      <header className={`container ${styles.heading}`}>
+        <h2 id="why-us-title">Nega aynan biz?</h2>
+        <p>
+          Bir qarashda hayrat. Har bir bosishda qulaylik.
+          <br />
+          Sizning kuningiz uchun o‘ylangan kichik, ammo muhim tafsilotlar.
+        </p>
+      </header>
+      <CinematicScroll className={styles.track} stageClassName={styles.stage}>
+        {chapters.map((chapter, index) => (
+          <article
+            key={chapter.id}
+            className={styles.scene}
+            data-cinematic-scene
+            data-scene={chapter.id}
+            data-side={chapter.side}
+            aria-labelledby={`scene-${chapter.id}`}
+          >
+            <div className={styles.photograph} data-cinematic-image>
+              <picture>
+                <source
+                  media="(max-width: 700px)"
+                  srcSet={`/images/home/cinematic/${chapter.image}-mobile.webp`}
+                />
+                <Image
+                  src={`/images/home/cinematic/${chapter.image}.webp`}
+                  alt=""
+                  fill
+                  sizes="100vw"
+                  unoptimized
+                />
+              </picture>
+            </div>
+            <div className={styles.shade} />
+            <div className={styles.chapter} aria-hidden="true">
+              <span>0{index + 1}</span>
+              <i />
+              04
+            </div>
+            <SceneDetail chapter={chapter.id} previewImage={previewImage} />
+            <div className={styles.copy} data-cinematic-copy>
+              <p className={styles.eyebrow}>{chapter.label}</p>
+              <h3 id={`scene-${chapter.id}`}>{chapter.title}</h3>
+              <p className={styles.description}>{chapter.text}</p>
+              {index === chapters.length - 1 && (
+                <Link href="/templates" className={styles.action}>
+                  Dizaynlarni ko‘rish <ArrowUpRight size={19} />
+                </Link>
+              )}
+            </div>
+            <span className={styles.sceneCaption} aria-hidden="true">
+              VISOL <i /> Birga boshlanadi.
             </span>
-            <div className={styles.designArt} aria-hidden="true">
-              <div className={styles.backSheet}>
-                <Flower2 size={32} strokeWidth={1} />
-                <span>
-                  Quvonchga
-                  <br />
-                  taklif etamiz
-                </span>
-              </div>
-              <div className={styles.invitation}>
-                {previewImage ? (
-                  <Image
-                    src={previewImage}
-                    alt=""
-                    fill
-                    sizes="(max-width: 600px) 190px, 250px"
-                  />
-                ) : (
-                  <Flower2 size={64} />
-                )}
-                <span className={styles.invitationCaption}>
-                  Sizning hikoyangiz
-                  <br />
-                  <i>shu yerdan boshlanadi.</i>
-                </span>
-              </div>
-              <span className={styles.designSeal}>
-                <Flower2 size={24} strokeWidth={1} />
-              </span>
-              <span className={styles.swatches}>
-                <i />
-                <i />
-                <i />
-                <span>O‘zingizga xos.</span>
-              </span>
-            </div>
-            <div className={styles.designCopy}>
-              <h3>
-                Shunchaki taklif emas.
-                <br />
-                <em>Sizning didingiz.</em>
-              </h3>
-              <p>
-                Milliy naqshlar yoki nafis minimalizm. O‘z ismlaringiz,
-                suratlaringiz va sevimli kuyingiz bilan.
-              </p>
-              <Link href="/templates" className={styles.designLink}>
-                Dizaynlarni ko‘rish{" "}
-                <ArrowUpRight size={17} aria-hidden="true" />
-              </Link>
-            </div>
           </article>
-          <article className={`${styles.card} ${styles.location}`}>
-            <span className={styles.label}>
-              <MapPin size={15} aria-hidden="true" /> Manzil aniq
-            </span>
-            <div className={styles.mapArt} aria-hidden="true">
-              <svg
-                viewBox="0 0 500 250"
-                fill="none"
-                preserveAspectRatio="xMidYMid slice"
-              >
-                <path
-                  d="M-30 68 540 184M90-20 204 280M367-20 253 280M-20 225 525 20"
-                  stroke="var(--surface)"
-                  strokeWidth="25"
-                />
-                <path
-                  d="m-30 68 570 116M90-20l114 300M367-20 253 280M-20 225 525 20"
-                  stroke="var(--line)"
-                  strokeWidth="1"
-                />
-                <rect
-                  x="45"
-                  y="115"
-                  width="68"
-                  height="46"
-                  rx="18"
-                  transform="rotate(12 45 115)"
-                  fill="var(--accent-tint)"
-                />
-                <rect
-                  x="378"
-                  y="174"
-                  width="75"
-                  height="54"
-                  rx="22"
-                  transform="rotate(-18 378 174)"
-                  fill="var(--accent-tint)"
-                />
-                <path
-                  className={styles.route}
-                  d="m104 200 79-30 93-36 29-76"
-                  stroke="var(--primary)"
-                  strokeWidth="4"
-                  strokeLinecap="round"
-                  strokeDasharray="7 8"
-                />
-                <circle
-                  cx="104"
-                  cy="200"
-                  r="8"
-                  fill="var(--primary)"
-                  stroke="var(--surface)"
-                  strokeWidth="4"
-                />
-              </svg>
-              <span className={styles.destination}>
-                <MapPin size={24} />
-                <i />
-              </span>
-              <span className={styles.mapPill}>
-                <Navigation size={13} /> Google Maps bilan
-              </span>
-            </div>
-            <div className={styles.copy}>
-              <h3>
-                “Qayerda ekan?”
-                <br />
-                <em>degan savol qolmaydi.</em>
-              </h3>
-              <p>
-                Manzil taklifnomaning o‘zida. Mehmonlar Google Maps orqali
-                yo‘lni bir bosishda ochadi.
-              </p>
-            </div>
-          </article>
-          <article className={`${styles.card} ${styles.rsvp}`}>
-            <span className={styles.label}>
-              <UsersRound size={15} aria-hidden="true" /> Mehmonlar javobi
-            </span>
-            <div className={styles.replyArt} aria-hidden="true">
-              <div className={styles.avatars}>
-                <span>M</span>
-                <span>A</span>
-                <span>S</span>
-                <i>
-                  <Check size={18} />
-                </i>
-              </div>
-              <span className={styles.replyBubble}>
-                Albatta, kelamiz! <Heart size={12} fill="currentColor" />
-              </span>
-            </div>
-            <div className={styles.copy}>
-              <h3>
-                Kim keladi?
-                <br />
-                <em>Oldindan biling.</em>
-              </h3>
-              <p>
-                Mehmonlar kelishini tasdiqlaydi. Siz javoblarni shaxsiy
-                kabinetingizda kuzatib borasiz.
-              </p>
-            </div>
-          </article>
-          <article className={`${styles.card} ${styles.wishes}`}>
-            <span className={styles.label}>
-              <Heart size={15} aria-hidden="true" /> Samimiy tilaklar
-            </span>
-            <div className={styles.wishArt} aria-hidden="true">
-              <span className={styles.quoteMark}>“</span>
-              <span className={styles.handwriting}>
-                Baxtingiz bir umr
-                <br />
-                butun bo‘lsin!
-              </span>
-              <Heart className={styles.wishHeart} size={23} strokeWidth={1} />
-            </div>
-            <div className={styles.copy}>
-              <h3>
-                Bir kunlik bayram.
-                <br />
-                <em>Bir umrlik so‘zlar.</em>
-              </h3>
-              <p>
-                Yaqinlaringizning tabriklarini bir joyda jamlang. Tilaklarni
-                ko‘rib chiqib, taklifnomada ko‘rsating.
-              </p>
-            </div>
-          </article>
-          <article className={`${styles.card} ${styles.gifting}`}>
-            <span className={styles.label}>
-              <Gift size={15} aria-hidden="true" /> To‘yona
-            </span>
-            <div className={styles.giftArt} aria-hidden="true">
-              <div className={styles.giftNote}>
-                <Heart size={16} strokeWidth={1} />
-                <span>Chin dildan.</span>
-              </div>
-              <div className={styles.envelope}>
-                <span className={styles.waxSeal}>
-                  <Flower2 size={21} strokeWidth={1} />
-                </span>
-              </div>
-            </div>
-            <div className={styles.copy}>
-              <h3>
-                Ezgu niyatga
-                <br />
-                <em>qulay bir yo‘l.</em>
-              </h3>
-              <p>
-                To‘yona uchun karta ma’lumotlarini ulashing. Ixtiyoriy yuklangan
-                cheklarni o‘zingiz tekshirasiz.
-              </p>
-            </div>
-          </article>
-        </div>
-        <footer className={styles.footer}>
-          <span>
-            <Check size={15} aria-hidden="true" /> Kerakli bo‘limlarni o‘zingiz
-            tanlaysiz.
+        ))}
+      </CinematicScroll>
+      <footer className={`container ${styles.support}`}>
+        <div>
+          <span className={styles.giftIcon}>
+            <Gift size={24} strokeWidth={1.2} />
           </span>
-          <p>
-            Vizual misollar — namuna. Bo‘limlar tanlangan dizaynga qarab mavjud.
-          </p>
-        </footer>
-      </div>
+          <div>
+            <h3>Ezgu niyatga qulay bir yo‘l.</h3>
+            <p>
+              To‘yona uchun karta ma’lumotlarini ulashing. Ixtiyoriy yuklangan
+              cheklarni o‘zingiz tekshirasiz.
+            </p>
+          </div>
+        </div>
+        <p className={styles.sampleNote}>
+          Tasvirlar va javoblar namuna sifatida ko‘rsatilgan.
+          <br />
+          Qo‘shimcha bo‘limlar tanlangan dizaynga qarab mavjud.
+        </p>
+      </footer>
     </section>
   );
 }

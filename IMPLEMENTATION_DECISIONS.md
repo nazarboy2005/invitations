@@ -1,5 +1,33 @@
 # Implementation decisions
 
+## Cinematic homepage sequence (2026-10-25)
+
+- User wants the scroll transitions shown in their Bugatti Chiron recording:
+  incoming full-width image panels rise over the previous image, with slower
+  image movement and readable overlaid copy. Following the content/placement
+  exploration, user approved implementing the complete proposed direction.
+- Replace the existing Why us panels after
+  featured designs with four photographic chapters covering design, personal
+  details, venue navigation, and guest replies/wishes. Use one coherent sample
+  invitation and retain the platform's approved visual direction. Retain the
+  centered section introduction and put optional to‘yona information beneath
+  the sequence. Keep native touch scrolling and support reduced motion.
+- Pacing correction: incoming photographs must fill the viewport quickly,
+  then hold while their copy travels from the lower portion to above the top.
+  Only then may the next photograph rise over them. The earlier implementation
+  left copy too high and took a full screen of scrolling to reveal each image.
+  Use a common pinned stage, a 0.32-screen image reveal and a separate 0.9-screen
+  reading distance. Keep the incoming copy low until its image is fully revealed.
+- Venue correction: remove the pale “Sizni kutamiz” map card. Use a route,
+  location pin and compact labels integrated into the venue photograph.
+- User approved replacing all four dark photographs with a coordinated bright
+  daylight set: white stone, champagne fabrics, white flowers, soft shadows,
+  and pomegranate accents. Keep the platform light; use charcoal/pomegranate
+  chapter copy and light local washes rather than darkening the new photos.
+- Laptop venue labels need a small translucent backing and larger type. Keep
+  the route/pin and use a smoked plum glass panel behind city/date/navigation,
+  rather than restoring the previous pale paper card. Recheck on laptop/phone.
+
 ## Platform color refresh (2026-10-25)
 
 - User approved applying the reviewed pomegranate, white, and charcoal direction
@@ -611,6 +639,9 @@ Recorded on 2026-10-19 from the user's explicit approval. These are product requ
 The user requests that the important things discussed be kept here and updated as the discussion continues. Record confirmed requirements and corrections promptly, distinguish recommendations from approved decisions, and keep unresolved choices explicit. Replace superseded requirements so future implementation follows the latest agreement. This instruction authorizes maintaining project documentation, not beginning implementation.
 
 ## Current implementation authorization and visual direction (2026-10-20)
+
+- User requirement (2026-10-25): rebuild the homepage hero to match the supplied Visol reference image, including its warm photographic phone/stationery scene, wordmark and navigation, serif/italic headline, burgundy create action, four benefits, corner linework, and handwritten caption. Omit the “Qanday ishlaydi / 2 daqiqalik video” control entirely. This supersedes the earlier homepage hero's floating cards, rating control, activity badge, statistics, and floating navigation panel. Scope the reference colors and header treatment to the homepage; preserve the existing catalog, studio, and invitation renderers. Implement real text and working links and compare the desktop at the reference's 1699×926 content size, with a responsive mobile layout.
+- User mobile/header correction (2026-10-25): follow the new portrait reference on phones, with a dedicated portrait phone/stationery/floral composition, gold italic headline, hamburger navigation, gold handwritten caption beside the create action, and four benefits across a curved bottom panel with a down-scroll cue. Preserve readable live copy and the existing desktop composition. The homepage header must move upward from the start of downward scrolling and reappear on upward scrolling; keep its background transparent with no scroll-triggered fill, blur, or shadow. The mobile menu must expose the working catalog/about/account links.
 
 - The user has now authorized agents to begin building the project. Earlier statements that implementation had not yet been requested describe the prior planning stage and no longer block this work. External deployment, live payments, or use of unavailable credentials are not implied by starting local development.
 - User correction (2026-10-21): do not research, record, or treat template-source or template-asset licensing/rights as implementation or publication blockers. Continue copying and integrating the requested local reference source. Template publication readiness is determined by implementation, integration, service, and quality requirements only.

@@ -13,8 +13,18 @@ export const metadata = {
     "Nikoh to‘yi, tug‘ilgan kun, nahorgi osh va boshqa quvonchli kunlar uchun dizaynlarni ko‘ring va o‘zingizga mosini tanlang.",
 };
 
-export default async function TemplatesPage() {
+export default async function TemplatesPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ category?: string }>;
+}) {
   const catalog = await getCatalog();
+  const { category } = await searchParams;
+  const initialCategory = catalog.categories.some(
+    (item) => item.id === category,
+  )
+    ? category
+    : "all";
   return (
     <div className={`${styles.page} ${display.variable} ${sans.variable}`}>
       <SiteHeader />
@@ -42,6 +52,8 @@ export default async function TemplatesPage() {
           </div>
         </header>
         <TemplateGallery
+          key={initialCategory}
+          initialCategory={initialCategory}
           templates={catalog.templates}
           categories={catalog.categories}
         />

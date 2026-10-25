@@ -18,3 +18,10 @@ export const sans = localFont({
   display: "swap",
   variable: "--font-home-body",
 });
+
+export const signature = localFont({
+  src: "./fonts/nautigal-regular.ttf",
+  weight: "400",
+  display: "swap",
+  variable: "--font-home-signature",
+});

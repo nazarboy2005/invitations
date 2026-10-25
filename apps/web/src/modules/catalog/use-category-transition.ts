@@ -16,11 +16,14 @@ function resetBox(element: HTMLElement) {
 }
 
 /** Keep selection immediate, then replace the grid between its exit and entrance. */
-export function useCategoryTransition(host: RefObject<HTMLDivElement | null>) {
-  const [categoryId, setCategoryId] = useState("all");
-  const [renderedCategoryId, setRenderedCategoryId] = useState("all");
-  const requested = useRef("all");
-  const rendered = useRef("all");
+export function useCategoryTransition(
+  host: RefObject<HTMLDivElement | null>,
+  initialCategory = "all",
+) {
+  const [categoryId, setCategoryId] = useState(initialCategory);
+  const [renderedCategoryId, setRenderedCategoryId] = useState(initialCategory);
+  const requested = useRef(initialCategory);
+  const rendered = useRef(initialCategory);
   rendered.current = renderedCategoryId;
   const generation = useRef(0);
   const oldHeight = useRef<number | null>(null);

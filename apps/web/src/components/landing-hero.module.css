@@ -1,0 +1,454 @@
+.hero {
+  --wine: #76253b;
+  --champagne: #b78c54;
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  aspect-ratio: 1699 / 926;
+  min-height: 720px;
+  overflow: hidden;
+  color: #272424;
+  background: #f8f5ef;
+}
+.photograph {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+}
+.photograph picture {
+  position: absolute;
+  inset: 0;
+}
+.photograph img {
+  object-fit: cover;
+  object-position: center;
+}
+.portraitSpace,
+.explore,
+.signatureHeart {
+  display: none;
+}
+.benefitsPanel {
+  display: contents;
+}
+.wash {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    rgb(252 250 247 / 77%) 0%,
+    rgb(252 250 247 / 83%) 32%,
+    rgb(252 250 247 / 12%) 48%,
+    transparent 56%
+  );
+}
+.copy {
+  position: absolute;
+  top: 19.65%;
+  left: 5.5%;
+}
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin: 0;
+  font-size: clamp(11px, 0.824vw, 16px);
+  font-weight: 600;
+  line-height: 22px;
+  letter-spacing: 2.8px;
+  text-transform: uppercase;
+  color: var(--champagne);
+}
+.eyebrow::before {
+  content: "";
+  width: 38px;
+  height: 1px;
+  background: currentColor;
+}
+.hero .copy h1 {
+  margin: 13px 0 25px;
+  font-family: "Times New Roman", Times, serif;
+  font-size: clamp(76px, 6.12vw, 126px);
+  font-weight: 400;
+  line-height: 0.91;
+  letter-spacing: -0.2px;
+}
+.copy h1 span,
+.copy h1 em {
+  display: block;
+  white-space: nowrap;
+}
+.copy h1 em {
+  font-weight: 400;
+  color: var(--wine);
+}
+.description {
+  margin: 0;
+  color: #827e7f;
+  font-size: clamp(15px, 1.148vw, 22px);
+  line-height: 1.47;
+  letter-spacing: -0.45px;
+}
+.create {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 22px;
+  width: clamp(245px, 16.95vw, 340px);
+  min-height: clamp(53px, 3.59vw, 72px);
+  margin-top: 39px;
+  padding: 14px 40px;
+  border: 1px solid rgb(255 255 255 / 12%);
+  border-radius: 999px;
+  background: linear-gradient(115deg, #79273e, #702337);
+  box-shadow:
+    0 13px 28px rgb(88 35 47 / 9%),
+    inset 0 1px 1px rgb(255 255 255 / 12%);
+  color: #fff;
+  font-size: clamp(15px, 1.06vw, 20px);
+  font-weight: 500;
+  white-space: nowrap;
+  transition:
+    background 180ms,
+    box-shadow 180ms,
+    transform 180ms;
+}
+.create:hover {
+  background: #642034;
+  box-shadow: 0 15px 30px rgb(88 35 47 / 16%);
+  transform: translateY(-2px);
+}
+.create:focus-visible,
+.artworkLink:focus-visible {
+  outline: 3px solid var(--wine);
+  outline-offset: 5px;
+}
+.artworkLink {
+  position: absolute;
+  top: 17%;
+  left: 53%;
+  width: 19%;
+  height: 70%;
+  border-radius: 50px;
+  transform: rotate(-12deg);
+}
+.benefits {
+  position: absolute;
+  top: 76.35%;
+  left: 5.5%;
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.benefits li {
+  display: flex;
+  align-items: flex-start;
+  gap: 17px;
+  padding-inline: 24px;
+  color: #44403f;
+  font-size: clamp(11px, 0.765vw, 15px);
+  line-height: 1.55;
+}
+.benefits li:first-child {
+  padding-left: 0;
+  padding-right: 37px;
+}
+.benefits li + li {
+  border-left: 1px solid #e6dfd6;
+}
+.benefits svg {
+  flex-shrink: 0;
+  color: #b18a50;
+}
+.signature {
+  position: absolute;
+  right: 3.5%;
+  bottom: 8.2%;
+  color: #fff9ef;
+  font-family: var(--font-home-signature), cursive;
+  font-size: clamp(36px, 2.9vw, 57px);
+  font-weight: 400;
+  line-height: 1;
+  text-align: center;
+  transform: rotate(-12deg);
+  text-shadow: 0 1px 3px rgb(70 45 27 / 20%);
+}
+.signature svg {
+  display: block;
+  width: 92px;
+  margin: 1px auto 0;
+  stroke: currentColor;
+  stroke-width: 1.3;
+}
+.signature .signatureHeart {
+  display: none;
+}
+.corner {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 10.6%;
+  color: #c09a67;
+  stroke: currentColor;
+  stroke-width: 0.8;
+}
+@media (min-width: 2100px) {
+  .copy {
+    top: 22%;
+  }
+}
+@media (max-width: 1200px) and (min-width: 901px) {
+  .copy {
+    top: 22%;
+  }
+  .hero .copy h1 {
+    font-size: 75px;
+  }
+  .description {
+    font-size: 14px;
+  }
+  .create {
+    margin-top: 30px;
+    padding-inline: 28px;
+  }
+  .benefits {
+    top: auto;
+    bottom: 14%;
+  }
+  .benefits li {
+    padding-inline: 15px;
+    gap: 10px;
+  }
+  .benefits svg {
+    width: 24px;
+  }
+}
+@media (max-width: 900px) {
+  .hero {
+    --mobile-benefits-height: clamp(130px, 21vw, 190px);
+    display: flex;
+    flex-direction: column;
+    aspect-ratio: auto;
+    min-height: 0;
+    padding-top: clamp(92px, 16.8vw, 148px);
+    background: #f8f4ec;
+  }
+  .hero::before {
+    content: "";
+    position: absolute;
+    z-index: -3;
+    inset: 0 0 auto;
+    height: 38vw;
+    background: url("/images/home/invitation-scene-mobile.webp") center top /
+      100% auto no-repeat;
+    mask-image: linear-gradient(#000 35%, transparent);
+  }
+  .copy {
+    position: relative;
+    inset: auto;
+    padding-inline: 14.3%;
+  }
+  .eyebrow {
+    font-size: clamp(8px, 1.8vw, 16px);
+    line-height: 1.4;
+    gap: clamp(8px, 2vw, 18px);
+    letter-spacing: clamp(1.4px, 0.28vw, 2.8px);
+    white-space: nowrap;
+  }
+  .eyebrow::before,
+  .eyebrow::after {
+    content: "";
+    flex-shrink: 0;
+    width: clamp(18px, 5.5vw, 50px);
+    height: 1px;
+    background: currentColor;
+  }
+  .hero .copy h1 {
+    font-size: clamp(42px, 10.4vw, 94px);
+    line-height: 0.98;
+    margin: clamp(12px, 2.3vw, 22px) 0 clamp(18px, 4vw, 36px);
+    letter-spacing: -0.9px;
+  }
+  .copy h1 span {
+    font-weight: 600;
+  }
+  .copy h1 em {
+    color: #9a7646;
+  }
+  .description {
+    max-width: 640px;
+    font-size: clamp(13px, 2.25vw, 20px);
+    line-height: 1.55;
+    letter-spacing: -0.25px;
+    color: #666466;
+  }
+  .desktopBreak {
+    display: none;
+  }
+  .create {
+    width: clamp(200px, 35vw, 355px);
+    min-height: clamp(48px, 7.7vw, 70px);
+    font-size: clamp(13px, 2.2vw, 21px);
+    margin-top: clamp(20px, 3.7vw, 34px);
+    padding: 10px clamp(21px, 4.5vw, 40px);
+    gap: 14px;
+  }
+  .create svg {
+    flex-shrink: 0;
+    transform: rotate(45deg);
+  }
+  .photograph {
+    inset: 0 0 var(--mobile-benefits-height);
+    overflow: hidden;
+    mask-image: linear-gradient(
+      transparent calc(100% - 112vw),
+      #000 calc(100% - 80vw)
+    );
+  }
+  .photograph img {
+    object-fit: contain;
+    object-position: center bottom;
+    transform: translateY(8vw);
+  }
+  .wash {
+    background: linear-gradient(
+      #fbf8f2 10%,
+      rgb(251 248 242 / 60%) 26%,
+      transparent 48%
+    );
+    pointer-events: none;
+  }
+  .portraitSpace {
+    display: block;
+    order: 2;
+    height: 73vw;
+    pointer-events: none;
+  }
+  .benefitsPanel {
+    position: relative;
+    z-index: 2;
+    display: block;
+    order: 3;
+    height: var(--mobile-benefits-height);
+    padding-top: clamp(18px, 2.5vw, 25px);
+    background: #faf7f1;
+  }
+  .benefitsPanel::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: -14px;
+    left: -10%;
+    width: 120%;
+    height: 30px;
+    border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+    background: #faf7f1;
+  }
+  .benefits {
+    position: relative;
+    inset: auto;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    align-items: start;
+    gap: 0;
+    width: 84%;
+    margin: 0 auto;
+  }
+  .benefits li {
+    position: relative;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 5px;
+    font-size: clamp(10.5px, 2vw, 17px);
+    line-height: 1.35;
+    gap: 7px;
+    text-align: center;
+  }
+  .benefits li:first-child {
+    padding: 0 5px;
+  }
+  .benefits li + li {
+    border-left: 0;
+  }
+  .benefits li + li::before {
+    content: "";
+    position: absolute;
+    top: 27px;
+    left: 0;
+    height: 27px;
+    width: 1px;
+    background: #d4b894;
+  }
+  .benefits li span {
+    white-space: nowrap;
+  }
+  .benefits svg {
+    width: clamp(22px, 3.5vw, 32px);
+    height: clamp(22px, 3.5vw, 32px);
+  }
+  .explore {
+    display: grid;
+    place-items: center;
+    width: clamp(29px, 4.3vw, 40px);
+    height: clamp(34px, 5.5vw, 48px);
+    margin: clamp(13px, 2vw, 20px) auto 0;
+    border: 1px solid #ab8249;
+    border-radius: 999px;
+    color: #ab8249;
+  }
+  .signature {
+    position: relative;
+    order: 1;
+    z-index: 2;
+    inset: auto;
+    align-self: flex-end;
+    width: 25%;
+    margin: -43px 7% 0 0;
+    font-size: clamp(29px, 6.8vw, 60px);
+    line-height: 0.94;
+    color: #aa7d43;
+    text-shadow: none;
+  }
+  .signature svg:not(.signatureHeart) {
+    width: 65%;
+  }
+  .signature .signatureHeart {
+    position: absolute;
+    display: block;
+    width: 12px;
+    right: 0;
+    bottom: 1px;
+    margin: 0;
+    transform: rotate(-10deg);
+  }
+  .artworkLink {
+    z-index: 2;
+    top: auto;
+    bottom: calc(var(--mobile-benefits-height) + 5vw);
+    left: 28%;
+    width: 31%;
+    height: 56vw;
+    border-radius: 25px;
+  }
+  .corner {
+    display: none;
+  }
+}
+@media (max-width: 360px) {
+  .hero .copy h1 {
+    font-size: 11.2vw;
+  }
+  .signature {
+    width: 30%;
+    margin-top: 9px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .create {
+    transition: none;
+  }
+}

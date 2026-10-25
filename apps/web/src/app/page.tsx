@@ -1,10 +1,7 @@
-import Image from "next/image";
 import Link from "next/link";
 import {
-  ArrowDown,
   ArrowDownRight,
   ArrowUpRight,
-  Check,
   Flower2,
   Heart,
   Mail,
@@ -12,13 +9,12 @@ import {
   Sparkles,
 } from "lucide-react";
 import { SiteHeader } from "@/components/site-header";
-import { getCatalog, getPublishedInvitationCount } from "@/server/catalog";
+import { getCatalog } from "@/server/catalog";
 import { TemplateGallery } from "@/modules/catalog/template-gallery";
 import styles from "./home.module.css";
 import { display, script, sans } from "./platform-fonts";
 import { SmoothScroll } from "@/components/smooth-scroll";
-import { DesignRating } from "@/components/design-rating";
-import { HeroArtwork } from "@/components/hero-artwork";
+import { LandingHero } from "@/components/landing-hero";
 import { WhyUs } from "@/components/why-us";
 import { selectFeaturedTemplates } from "@/modules/catalog/featured-templates";
 
@@ -66,10 +62,7 @@ const questions = [
 export const dynamic = "force-dynamic";
 
 export default async function Home() {
-  const [catalog, publishedCount] = await Promise.all([
-    getCatalog(),
-    getPublishedInvitationCount(),
-  ]);
+  const catalog = await getCatalog();
   const visibleTemplates = catalog.templates.filter(
     (template) => template.published,
   );
@@ -77,9 +70,6 @@ export default async function Home() {
   const heroTemplate =
     visibleTemplates.find((template) => template.id === "anor") ??
     visibleTemplates[0];
-  const secondaryTemplate =
-    visibleTemplates.find((template) => template.id === "sahifa") ??
-    visibleTemplates.find((template) => template.id !== heroTemplate?.id);
   const artwork = (template: NonNullable<typeof heroTemplate>) =>
     template.previewImage?.startsWith("/")
       ? template.previewImage
@@ -90,159 +80,9 @@ export default async function Home() {
       className={`${styles.page} ${display.variable} ${script.variable} ${sans.variable}`}
     >
       <SmoothScroll />
-      <SiteHeader />
+      <SiteHeader hero />
       <main id="main">
-        <div className={styles.heroStage}>
-          <section
-            className={`container ${styles.hero}`}
-            aria-labelledby="hero-title"
-          >
-            <div className={styles.heroCopy}>
-              <p className={styles.eyebrow}>
-                <Sparkles size={13} /> Quvonchingizning ilk sahifasi
-              </p>
-              <h1 id="hero-title">
-                <span className={styles.heroTitle}>Yaxshi kunlar</span>{" "}
-                <span className={styles.script}>birga boshlanadi.</span>
-              </h1>
-              <p className={styles.heroDescription}>
-                Bir havolada butun bir hayajon. Eng aziz insonlaringizni
-                hayotingizning eng go‘zal kuniga o‘zingizga xos taklif qiling.
-              </p>
-              <div className={styles.heroActions}>
-                <Link href="/templates" className="button">
-                  Dizaynlarni ko‘rish{" "}
-                  <ArrowUpRight size={18} aria-hidden="true" />
-                </Link>
-              </div>
-              <div className={styles.heroNote}>
-                <span className={styles.noteIcon}>
-                  <Flower2 size={25} strokeWidth={1.2} />
-                </span>
-                <p>
-                  O‘zbekona ruh. Zamonaviy ko‘rinish.
-                  <br />
-                  <strong>Har bir tafsilotda — siz.</strong>
-                </p>
-              </div>
-              <DesignRating />
-            </div>
-            <HeroArtwork>
-              <div className={styles.artHalo} aria-hidden="true" />
-              <span className={styles.orbitDot} aria-hidden="true" />
-              <span className={styles.artLabel}>
-                <span /> Bir qarashda — bayram
-              </span>
-              <svg
-                className={styles.ribbon}
-                viewBox="0 0 600 610"
-                fill="none"
-                aria-hidden="true"
-              >
-                <path d="M580 53C388-39 533 221 310 185S-38 242 80 395s449 48 390-70-203 105-16 226" />
-                <path d="M570 45C378-47 523 213 300 177S-48 234 70 387s449 48 390-70-203 105-16 226" />
-              </svg>
-              {secondaryTemplate && (
-                <Link
-                  href={`/preview?template=${encodeURIComponent(secondaryTemplate.id)}`}
-                  className={styles.backPreview}
-                  aria-label={`${secondaryTemplate.name} dizaynini ko‘rish`}
-                >
-                  <Image
-                    src={artwork(secondaryTemplate)}
-                    alt=""
-                    width={360}
-                    height={640}
-                    sizes="(max-width: 600px) 160px, 210px"
-                  />
-                </Link>
-              )}
-              {heroTemplate ? (
-                <Link
-                  href={`/preview?template=${encodeURIComponent(heroTemplate.id)}`}
-                  className={styles.mainPreview}
-                  aria-label={`${heroTemplate.name} dizaynini to‘liq ko‘rish`}
-                >
-                  <Image
-                    src={artwork(heroTemplate)}
-                    alt={`${heroTemplate.name} taklifnoma dizayni`}
-                    width={360}
-                    height={640}
-                    sizes="(max-width: 600px) 210px, 270px"
-                    preload
-                  />
-                  <span className={styles.previewCaption}>
-                    {heroTemplate.name}{" "}
-                    <span>
-                      Ko‘rish <ArrowUpRight size={14} />
-                    </span>
-                  </span>
-                </Link>
-              ) : (
-                <div className={styles.artFallback}>
-                  <Flower2 size={75} strokeWidth={0.7} />
-                  <span>Mehr bilan taklif qiling.</span>
-                </div>
-              )}
-              <div className={styles.seal} aria-hidden="true">
-                <Heart size={24} strokeWidth={1.1} />
-                <span>chin dildan</span>
-              </div>
-              <div className={styles.invitationReady}>
-                <span className={styles.readyIcon}>
-                  <Check size={16} strokeWidth={2} />
-                </span>
-                <div>
-                  <strong>Quvonch ulashishga tayyor</strong>
-                  <span>
-                    Javohir & Madina <i>· Namuna</i>
-                  </span>
-                </div>
-                <Heart size={15} strokeWidth={1.4} />
-              </div>
-              <span className={styles.artAnnotation} aria-hidden="true">
-                Bir taklif. Ming hayajon.
-              </span>
-              <Sparkles
-                className={styles.artSparkle}
-                size={32}
-                strokeWidth={0.8}
-                aria-hidden="true"
-              />
-            </HeroArtwork>
-            <div className={styles.heroBottom}>
-              <dl className={styles.heroStats}>
-                <div>
-                  <dt>
-                    {
-                      visibleTemplates.filter((template) => template.published)
-                        .length
-                    }
-                  </dt>
-                  <dd>nafis dizayn</dd>
-                </div>
-                <div>
-                  <dt>4</dt>
-                  <dd>yaqinlaringizga yaqin til</dd>
-                </div>
-                <div>
-                  <dt>{publishedCount ? publishedCount : 3}</dt>
-                  <dd>
-                    {publishedCount
-                      ? "nashr qilingan taklifnoma"
-                      : "oddiy qadam"}
-                  </dd>
-                </div>
-              </dl>
-              <a href="#templates">
-                Kolleksiyani kashf eting{" "}
-                <span>
-                  <ArrowDown size={16} />
-                </span>
-              </a>
-            </div>
-          </section>
-        </div>
+        <LandingHero />
 
         <div
           className={styles.occasionStrip}

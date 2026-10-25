@@ -16,7 +16,10 @@ export default function RootLayout({
   return (
     <html lang="uz-Latn" suppressHydrationWarning>
       <body>
-        <Script src="https://telegram.org/js/telegram-web-app.js" strategy="beforeInteractive" />
+        <Script
+          src="https://telegram.org/js/telegram-web-app.js"
+          strategy="afterInteractive"
+        />
         <a className="skip-link" href="#main">
           Asosiy sahifaga o‘tish
         </a>
