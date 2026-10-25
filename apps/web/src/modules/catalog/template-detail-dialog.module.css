@@ -21,7 +21,7 @@
   animation: sheetEnter 380ms cubic-bezier(0.2, 0.7, 0.3, 1);
 }
 .dialog::backdrop {
-  background: #18150f99;
+  background: rgb(var(--shadow-color) / 60%);
   animation: backdropEnter 380ms ease-out;
 }
 .dialog[data-closing]::backdrop {
@@ -72,7 +72,7 @@
   justify-content: center;
   align-items: center;
   padding: 36px;
-  background: radial-gradient(ellipse at 50% 30%, #f3e6c9, #eee7db);
+  background: radial-gradient(ellipse at 50% 30%, var(--accent-soft), var(--surface-soft));
 }
 .phone {
   position: relative;
@@ -83,7 +83,7 @@
   border-radius: 31px;
   background: #242322;
   box-shadow:
-    0 20px 36px -12px #20190f66,
+    0 20px 36px -12px rgb(var(--shadow-color) / 40%),
     inset 0 0 0 2px #827b71;
 }
 .screen {
@@ -233,7 +233,7 @@
     left: calc(50% - 18px);
     width: 36px;
     height: 4px;
-    background: #b8aa93;
+    background: var(--line-strong);
     border-radius: 4px;
   }
   .close {

@@ -4,7 +4,7 @@
   height: 100dvh;
   min-height: 560px;
   overflow: hidden;
-  background: #140b08;
+  background: var(--ink);
 }
 
 .fullPreview[data-card-preview] {
@@ -39,7 +39,7 @@
   align-items: center;
   justify-content: center;
   border-radius: 999px;
-  color: #fffaf1;
+  color: var(--on-primary);
   text-decoration: none;
   box-shadow: 0 6px 22px rgb(23 13 8 / 24%);
   backdrop-filter: blur(14px);
@@ -51,27 +51,27 @@
   left: 0;
   width: 46px;
   border: 1px solid rgb(255 255 255 / 45%);
-  background: rgb(255 253 248 / 78%);
-  color: #443a31;
+  background: rgb(255 255 255 / 92%);
+  color: var(--ink);
 }
 
 .createButton {
   right: 0;
   gap: 8px;
   padding: 0 18px;
-  border: 1px solid rgb(255 250 241 / 24%);
-  background: rgb(63 51 40 / 86%);
+  border: 1px solid var(--primary);
+  background: var(--primary);
   font-size: 14px;
   font-weight: 650;
 }
 
 .backButton:hover {
   border-color: #fff;
-  background-color: #fffdf8;
+  background-color: var(--surface);
 }
 
 .createButton:hover {
-  background-color: #765417;
+  background-color: var(--primary-hover);
 }
 
 .backButton:active,
@@ -81,8 +81,9 @@
 
 .backButton:focus-visible,
 .createButton:focus-visible {
-  outline: 3px solid #f1d28d;
+  outline: 3px solid var(--on-primary);
   outline-offset: 3px;
+  box-shadow: 0 0 0 6px var(--ink);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -100,7 +101,7 @@
   display: grid;
   place-content: center;
   gap: 12px;
-  color: #f8efe5;
+  color: var(--on-primary);
   text-align: center;
 }
 

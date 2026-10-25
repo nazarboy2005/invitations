@@ -10,10 +10,10 @@
   padding: 0;
   border: 0;
   border-radius: 15px;
-  background: #28251f;
+  background: var(--ink);
   color: #fff;
   text-align: left;
-  box-shadow: 0 4px 16px #34261512;
+  box-shadow: 0 4px 16px rgb(var(--shadow-color) / 7%);
   isolation: isolate;
 }
 .poster {
@@ -74,7 +74,7 @@
   outline-offset: 4px;
 }
 .art:hover {
-  box-shadow: 0 10px 28px #34261526;
+  box-shadow: 0 10px 28px rgb(var(--shadow-color) / 15%);
 }
 @media (max-width: 600px) {
   .art {

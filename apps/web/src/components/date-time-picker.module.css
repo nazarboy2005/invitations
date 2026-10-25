@@ -20,7 +20,7 @@
   font: inherit;
   font-size: 14px;
   box-shadow:
-    0 1px 2px rgb(63 57 50 / 3%),
+    0 1px 2px rgb(var(--shadow-color) / 3%),
     inset 0 1px #ffffffc7;
   transition:
     border-color 140ms ease,
@@ -37,7 +37,7 @@
   background: var(--surface);
   box-shadow:
     0 0 0 3px color-mix(in srgb, var(--accent) 18%, transparent),
-    0 5px 16px rgb(63 57 50 / 6%);
+    0 5px 16px rgb(var(--shadow-color) / 6%);
 }
 .trigger:focus-visible {
   outline: 2px solid var(--focus);
@@ -66,8 +66,8 @@
   border-radius: 14px;
   background: var(--surface);
   box-shadow:
-    0 18px 48px rgb(63 57 50 / 14%),
-    0 3px 10px rgb(63 57 50 / 5%);
+    0 18px 48px rgb(var(--shadow-color) / 14%),
+    0 3px 10px rgb(var(--shadow-color) / 5%);
   animation: appear 140ms ease-out both;
 }
 .calendarHeader {

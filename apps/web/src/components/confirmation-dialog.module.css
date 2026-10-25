@@ -15,10 +15,10 @@
   margin: 0 auto;
   width: min(100%, 440px);
   padding: 28px;
-  border: 1px solid var(--line, #e8e1d5);
+  border: 1px solid var(--line);
   border-radius: 16px;
-  background: var(--surface, #fffdf8);
-  color: var(--ink, #29251f);
+  background: var(--surface);
+  color: var(--ink);
   box-shadow: 0 24px 80px rgb(0 0 0 / 22%);
 }
 .dialog h2 {
@@ -27,7 +27,7 @@
 }
 .dialog p {
   margin: 0;
-  color: var(--muted, #716a60);
+  color: var(--muted);
   font-size: 14px;
   line-height: 1.7;
 }
@@ -40,7 +40,7 @@
 .actions button {
   min-height: 42px;
   padding: 9px 16px;
-  border: 1px solid var(--line, #e8e1d5);
+  border: 1px solid var(--line);
   border-radius: 9px;
   background: transparent;
   color: inherit;
@@ -48,8 +48,8 @@
   cursor: pointer;
 }
 .actions .confirm {
-  border-color: var(--primary, #805b18);
-  background: var(--primary, #805b18);
+  border-color: var(--primary);
+  background: var(--primary);
   color: white;
 }
 .actions button:disabled {

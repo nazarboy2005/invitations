@@ -1,100 +1,88 @@
 # Visual direction
 
-The platform interface uses the user-selected **Ivory + gold + charcoal** palette. Gold gives the product a celebratory identity while ivory keeps the interface light and charcoal keeps text readable.
+The user-approved platform palette is **pomegranate + white + charcoal**, with
+selective blush highlights and small gold decorative details. Approved on
+2026-10-25 after reviewing the cream-heavy implementation. This supersedes the
+previous ivory/gold direction and cream-only Why us treatment.
 
-| Role | Value |
-| --- | --- |
-| Page background | `#faf7f0` |
-| Card and form surface | `#fffdf8` |
-| Soft surface | `#f7f1e5` |
-| Main text | `#3f3932` |
-| Muted text | `#756e65` |
-| Border | `#e8e1d5` |
-| Soft gold border | `#d9c99e` |
-| Primary action | `#8a641c` |
-| Primary action hover | `#73520f` |
-| Champagne gold accent | `#c1a05c` |
-| Strong gold detail | `#8a641c` |
-| Pale gold surface | `#f3ead4` |
+| Role                                 | Token                  | Value     |
+| ------------------------------------ | ---------------------- | --------- |
+| Page background                      | `--bg`                 | `#ffffff` |
+| Cards and forms                      | `--surface`            | `#ffffff` |
+| Quiet workspace/section fill         | `--surface-soft`       | `#f8f6f7` |
+| Main text                            | `--ink`                | `#29252a` |
+| Muted text                           | `--muted`              | `#6f6770` |
+| Neutral borders                      | `--line`               | `#e9e3e6` |
+| Selection/accent borders             | `--line-strong`        | `#e5b4bf` |
+| Primary action and focus             | `--primary`, `--focus` | `#b8324a` |
+| Action hover                         | `--primary-hover`      | `#98263d` |
+| Action text                          | `--on-primary`         | `#ffffff` |
+| Interactive accent                   | `--accent`             | `#b8324a` |
+| Strong interactive accent            | `--accent-strong`      | `#98263d` |
+| Soft selection surface               | `--accent-soft`        | `#fff1f3` |
+| Stronger illustration/selection tint | `--accent-tint`        | `#f7dce2` |
+| Decorative gold                      | `--gold`               | `#c6a15b` |
+| Text on small gold details           | `--gold-ink`           | `#765719` |
+| Soft decorative gold                 | `--gold-soft`          | `#fbf5e8` |
 
-Use a plain sans serif for forms and a restrained serif for headings. Use deep
-gold for primary buttons and the brighter champagne gold for small highlights,
-icons, selection states, and focus rings. Keep gold off large background areas.
-Use ivory/champagne light gradients and metallic text gradients on the homepage,
-as requested in the latest design pass. Avoid brand-green accents and fabricated
-social proof. Keep keyboard focus, readable contrast, reduced motion, and mobile
-form/preview switching.
+Use white as the dominant surface. Pomegranate identifies primary actions,
+selected controls, focus, and selective heading emphasis. Keep blush localized
+to the hero artwork, a few feature panels, and selection states. Reserve gold
+for small ornaments and seals. Do not apply a warm tint to every surface.
+Use neutral charcoal shadows through `--shadow-color`.
 
-This palette is for the platform shell: navigation, editor, dashboard, forms,
-and catalog UI. Invitation templates retain their own reference colors and
-visual identity; do not recolor their source designs to match the shell. The
-catalog currently has published designs as well as unpublished work, so empty
-states should reflect the actual catalog response rather than assume it is empty.
-Preserve each template's meaningful source animations and opening experience,
-with an accessible reduced-motion alternative. Captured reference websites and
-files remain outside the production app.
+White on the primary pomegranate has approximately 5.84:1 contrast; body and
+muted text remain readable on white and blush surfaces. Decorative gold is not
+for small informational text on white. Keep visible keyboard focus, reduced
+motion, and usable phone controls. Semantic warning/error/success colors remain
+independent from the brand palette.
 
-## Homepage composition (2026-10-22)
+## Scope and typography
 
-The homepage follows an invitation-atelier direction: editorial spacing, luminous
-ivory surfaces, gold gradients, layered shadows, fine linework, and a charcoal
-gradient statement section. Cormorant
-Garamond provides the display headings, Manrope the body and navigation, and
-Great Vibes a selective calligraphy accent in the hero and decorative artwork.
-These fonts are hosted locally. The homepage and creator workspace share the
-display/body fonts; calligraphy remains a selective homepage accent. Invitation
-renderers keep their reference typography.
+These tokens style platform navigation, catalog/preview chrome, studio,
+dashboard/activity pages, forms, and dialogs. Invitation templates retain their
+own source colors, typography, assets, animations, and opening experiences.
+Do not recolor template renderers or authored invitation data.
 
-The hero links to real available catalog previews, with Anor and Sahifa preferred
-when present. The catalog preserves complete portrait artwork, published-template
-selection, and current pricing. Only categories containing available templates
-appear as filters. Below it, the page explains the creation process, highlights
-invitation details, and provides keyboard-accessible native FAQ disclosures.
-The hero adds an ivory/champagne atmosphere, metallic display text, floating
-preview cards, a clearly labeled sample completion card, and a motion pause
-control. Reduced-motion users see a static composition. Catalog counts come from
-the available data. A nonzero anonymous published-invitation total can replace
-the three-step metric; no invented usage numbers or customer reviews appear.
-The interactive stars capture only an unsent personal preference and say so.
-The header uses a floating translucent surface, a gold emblem, and a shaded gold
-creation action while retaining directional visibility and signed-in wording.
+Cormorant Garamond supplies editorial headings, Manrope supplies platform body
+text/navigation, and Great Vibes is a selective homepage calligraphy accent.
+Fonts remain locally hosted. Forms and functional controls use the sans serif.
 
-Catalog cards use bounded artwork stages (285px desktop, 225px phone), with the
-complete portrait artwork contained inside. Prices overlay the stage; description
-text occupies one line, with the full description retained in the accessible
-text and browser tooltip.
-The process section uses three raised ivory panels, while the feature and footer
-sections continue the warm layered treatment.
+## Homepage and catalog
 
-Mobile layouts stack the hero and feature sections, use two catalog columns
-where space permits (one below 361px), and adapt navigation. Entrance and hover
-motion respect reduced-motion settings.
+Order: hero, eight curated published designs, visual Why us, three creation
+steps, FAQ, final create/discovery invitation. The white hero has a localized
+blush atmosphere behind real Anor/Sahifa artwork, solid charcoal/pomegranate
+headings, small gold ornaments, and a clear “Dizaynlarni ko‘rish” action linking
+to `/templates`. The personal star preference remains explicitly unsent.
+Do not invent social proof or usage metrics.
 
-## Scroll and navigation (2026-10-22)
+Why us retains its asymmetric invitation/map lead row and reply, wish, and gift
+illustrations. White/neutral cards alternate with selected blush panels; routes,
+hearts, and the envelope use pomegranate, with small gold seals. Illustrations
+are marked as samples and use lightweight HTML/CSS/SVG without extra renderers.
+The process uses a neutral soft background and white cards. FAQ stays white;
+the final statement uses charcoal with a pomegranate action. Footer stays white.
 
-The homepage uses desktop wheel inertia with a restrained slowdown and easing.
-Touch and reduced-motion users keep native scrolling. The implementation uses
-[Lenis](https://github.com/darkroomengineering/lenis), with anchor handling and
-cleanup on navigation. Smoothing is scoped to the homepage so editor fields,
-menus, and invitation frames keep their own native scroll behavior.
+`/templates` contains search, categories, and the full published catalog.
+Selected category pills use white text on pomegranate. Fully clickable 3:5
+portrait cards preserve actual design art and bottom-gradient captions. Detail
+dialogs retain their real silent phone preview and preview/create actions;
+preview surroundings use subtle neutral/blush surfaces. On phones the dialog
+is a partial-height bottom sheet with entrance/exit motion, internal scrolling,
+keyboard focus handling, safe-area padding, and a reduced-motion fallback.
+Only one silent live card preview plays at a time; artwork/renderers load lazily.
 
-The shared site header is sticky. After leaving the top of the page, downward
-scrolling slides it out; upward scrolling reveals it. A direction threshold
-avoids jitter. Keyboard focus reveals the header, and reduced-motion settings
-remove the slide transition. The studio keeps its own sticky save toolbar,
-without the site navigation.
+## Workspace, navigation, and motion
 
-## Creator workspace (2026-10-22)
+Keep the creator workspace calm: white form surfaces, neutral soft surroundings,
+pomegranate active steps, primary actions, selected options, and focus. Preserve
+the four-step workflow, sticky save toolbar, language controls, browser draft
+recovery, and responsive edit/live-preview switching. Dashboard and activity
+views share the same platform tokens, including tabs, summary surfaces, and
+shared select/date/dialog controls.
 
-Use a quiet ivory workspace with a bordered central editing surface, a compact
-four-step rail, and a sticky live-preview panel. Large display headings,
-segmented step position, clear field labels, roomy inputs, and small language
-controls establish hierarchy. Uploads, repeatable program/story entries, optional
-settings, and selected templates share the same soft surfaces and gold details.
-Preview presentation stays rectangular and uses the actual renderer.
-
-At tablet widths the steps become a horizontal row. On phones, show compact
-steps and separate editing/preview controls; stack paired fields on very narrow
-screens and use 16px input text. Returning to another step starts at the top of
-the form. Keep draft recovery, login, save behavior, template compatibility,
-optional sections, and authored-data handling intact.
+Retain the sticky directional site header and restrained desktop wheel smoothing.
+Phones/tablets and reduced-motion users retain native scrolling. Keep smoothing
+scoped to the homepage, allow native nested/form scrolling, and respect reduced
+motion for entrance/hover effects and catalog transitions.

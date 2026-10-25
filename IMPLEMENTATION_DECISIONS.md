@@ -1,5 +1,24 @@
 # Implementation decisions
 
+## Platform color refresh (2026-10-25)
+
+- User approved applying the reviewed pomegranate, white, and charcoal direction
+  throughout the platform after finding the cream-heavy design too subdued.
+  This supersedes the earlier ivory/gold palette and cream-only Why us guidance.
+- White page/card surfaces, pomegranate primary actions (`#b8324a`, hover
+  `#98263d`), charcoal text (`#29252a`), neutral muted text, and selective pale
+  blush surfaces (`#fff1f3`). Gold (`#c6a15b`) is reserved for small decorative
+  details, with separate gold tokens; interactive accents use pomegranate.
+- Apply the shared tokens to navigation, catalog/preview chrome, editor,
+  dashboard/activity pages, forms, and dialogs. Replace hardcoded beige/brown
+  homepage treatments and feature illustrations; keep the workspace calm and
+  the catalog neutral. Preserve the existing fonts, layout, motion preferences,
+  and each invitation template's own source colors/assets.
+- Add a prominent “Dizaynlarni ko‘rish” hero link to `/templates`, superseding
+  the earlier instruction against a hero action. Keep existing navigation and
+  preview/create behavior. Do not change template data, pricing, publication,
+  authentication, or guest-response behavior as part of this visual refresh.
+
 ## Homepage discovery and full catalog (2026-10-25)
 
 - User approved shortening the homepage to eight handpicked published designs,
@@ -21,9 +40,9 @@
 - User requested a complete Why us redesign after rejecting the previous phone
   illustration and icon-card layout. Keep the centered “Nega aynan biz?” title
   and supporting copy, but rebuild the visual composition from scratch.
-- User correction: keep Why us within the site's cream, beige, brown and gold
-  palette; remove green from the section, illustrations and hover effects.
-- Implemented direction: cream section, warm ivory/gold bordered panels,
+- Earlier cream-only Why us guidance is superseded by the approved platform
+  color refresh above. No green brand accents are introduced.
+- Implemented composition: white/blush section, neutral bordered panels,
   large serif headings, an asymmetric invitation/map lead row, then distinct
   reply, handwritten-wish and sealed-envelope illustrations. Use the existing
   fonts and catalog artwork; illustrations are lightweight HTML/CSS/SVG and
@@ -596,10 +615,10 @@ The user requests that the important things discussed be kept here and updated a
 - The user has now authorized agents to begin building the project. Earlier statements that implementation had not yet been requested describe the prior planning stage and no longer block this work. External deployment, live payments, or use of unavailable credentials are not implied by starting local development.
 - User correction (2026-10-21): do not research, record, or treat template-source or template-asset licensing/rights as implementation or publication blockers. Continue copying and integrating the requested local reference source. Template publication readiness is determined by implementation, integration, service, and quality requirements only.
 - Installed complementary design skills: Anthropic `frontend-design` and Vercel `web-design-guidelines`; existing UI/UX Pro Max and shadcn remain available. Installation was explicitly requested before implementation continued.
-- User decision (2026-10-22): use an **Ivory + gold + charcoal** palette throughout the platform interface. This supersedes the earlier taupe/brown action palette. Use ivory page and card surfaces (`#faf7f0`, `#fffdf8`), charcoal text (`#3f3932`), champagne gold accents (`#c1a05c`), deep gold primary actions (`#8a641c`), pale-gold selection surfaces (`#f3ead4`), and warm light borders. Keep gold as an accent rather than a large page background; do not add green as a brand accent. Preserve accessible contrast, visible keyboard focus, restrained effects, and a calm layout. Invitation renderers keep the colors and styling of their exact reference designs.
-- User request (2026-10-22): redesign the whole homepage with creative freedom and use expressive, curving typography selectively in the hero. Implementation choice: an invitation-atelier composition with locally hosted Cormorant Garamond headings, Great Vibes calligraphy accents, Manrope body text, real catalog artwork, fine gold linework, an explanatory three-step section, feature illustration, charcoal statement panel, FAQ, and footer. Keep the existing palette and working preview/creation links; decorative homepage stationery is separate from invitation renderers.
+- The original ivory/gold palette selected on 2026-10-22 is superseded by the approved 2026-10-25 platform color refresh above. Preserve accessible contrast, visible keyboard focus, restrained effects, and invitation renderers’ exact source designs.
+- User request (2026-10-22): redesign the whole homepage with creative freedom and use expressive, curving typography selectively in the hero. Implementation choice: an invitation-atelier composition with locally hosted Cormorant Garamond headings, Great Vibes calligraphy accents, Manrope body text, real catalog artwork, fine gold linework, an explanatory three-step section, feature illustration, charcoal statement panel, FAQ, and footer. Use the current approved platform palette and keep working preview/creation links; decorative homepage stationery is separate from invitation renderers.
 - User request (2026-10-22): give homepage scrolling a slower, weighted feel. Keep the shared site header anchored to the viewport, sliding out gently when scrolling down and returning when scrolling up. Redesign the creator input workspace using the existing palette. Implementation choice: scoped desktop wheel inertia with native touch/reduced-motion fallbacks; preserve native studio and invitation-frame scrolling. Keep site navigation absent from the studio and retain its own save toolbar. Improve the four-step navigation, field hierarchy, language controls, and live-preview presentation without changing invitation source designs.
-- User request (2026-10-22): make the homepage more expressive with text/background gradients, ratings, invitation activity, an improved header, and shorter catalog cards. Implementation choice: ivory/champagne light gradients, metallic charcoal/gold headings, gently floating real template previews with a pause control, a clearly labeled sample completion card, a floating glass navigation surface, and compact portrait artwork frames. Use the actual published catalog count and an anonymous published-invitation count when nonzero; never fabricate customers or review scores. The star control is a personal, unsent design preference rather than an aggregate rating. Preserve the earlier request to avoid duplicate hero creation buttons and keep preview/create actions working.
+- User request (2026-10-22): make the homepage more expressive with text/background gradients, ratings, invitation activity, an improved header, and shorter catalog cards. Original implementation (palette/gradients superseded by the 2026-10-25 refresh): ivory/champagne light gradients, metallic charcoal/gold headings, gently floating real template previews with a pause control, a clearly labeled sample completion card, a floating glass navigation surface, and compact portrait artwork frames. Use the actual published catalog count and an anonymous published-invitation count when nonzero; never fabricate customers or review scores. The star control is a personal, unsent design preference rather than an aggregate rating. The 2026-10-25 refresh adds an approved hero catalog action; keep preview/create actions working.
 
 ## Template catalog status and admin-managed categories (2026-10-20)
 
@@ -635,7 +654,7 @@ Confirmed requirements:
 - User requirement (2026-10-20): every new template must use the complete source implementation from its selected reference, including its HTML, CSS, JavaScript, animation code, fonts, artwork, and interactions. Do not approximate or rebuild the design. Keep template-owned source files unchanged and put typed data/API integration in a separate adapter; any necessary source changes must preserve the reference output and be documented. Keep the original capture untouched.
 - User requirement (2026-10-20): provide a dedicated full-page preview for each real template so people can see the whole design at its actual public size, including its opening sequence and scroll behavior. Do not confine the only full preview to a phone-shaped mockup in the editor. Catalog cards and the editor's design choices should link to the full preview; the editor may keep a compact live preview for quick feedback.
 - User requirement (2026-10-20): the live preview shown during invitation creation should look and behave like the real invitation page at the available viewport size, rather than being clipped inside a decorative phone frame. Keep real creator-entered data in it. Only show illustrative sample names/details while browsing a template or at the template-selection stage before any content has been entered.
-- User requirement (2026-10-20): the site must feel polished, complete, responsive, and carefully reviewed on desktop and mobile. Preserve the current Ivory + gold + charcoal platform styling, while keeping each invitation template's source visual identity intact. Do not publish placeholder or visibly unfinished pages.
+- User requirement (2026-10-20): the site must feel polished, complete, responsive, and carefully reviewed on desktop and mobile. Use the current approved platform palette, while keeping each invitation template's source visual identity intact. Do not publish placeholder or visibly unfinished pages.
 
 Implementation choices:
 

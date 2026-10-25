@@ -109,6 +109,12 @@ export default async function Home() {
                 Bir havolada butun bir hayajon. Eng aziz insonlaringizni
                 hayotingizning eng go‘zal kuniga o‘zingizga xos taklif qiling.
               </p>
+              <div className={styles.heroActions}>
+                <Link href="/templates" className="button">
+                  Dizaynlarni ko‘rish{" "}
+                  <ArrowUpRight size={18} aria-hidden="true" />
+                </Link>
+              </div>
               <div className={styles.heroNote}>
                 <span className={styles.noteIcon}>
                   <Flower2 size={25} strokeWidth={1.2} />

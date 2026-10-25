@@ -79,7 +79,7 @@
 .saveButton {
   color: var(--surface);
   background: var(--primary);
-  box-shadow: 0 3px 7px rgb(63 57 50 / 6%);
+  box-shadow: 0 3px 7px rgb(var(--shadow-color) / 6%);
 }
 .saveButton:hover {
   background: var(--primary-hover);
@@ -172,7 +172,7 @@
   background: var(--surface);
   border-color: var(--line-strong);
   color: var(--primary);
-  box-shadow: 0 5px 12px -8px rgb(63 57 50 / 16%);
+  box-shadow: 0 5px 12px -8px rgb(var(--shadow-color) / 16%);
 }
 .activeSection .sectionNumber {
   background: var(--primary);
@@ -185,7 +185,7 @@
   border-radius: 20px;
   padding: 32px clamp(24px, 2.5vw, 44px) 26px;
   min-width: 0;
-  box-shadow: 0 8px 30px -24px rgb(63 57 50 / 16%);
+  box-shadow: 0 8px 30px -24px rgb(var(--shadow-color) / 16%);
 }
 .editorIntro {
   margin-bottom: 26px;
@@ -261,7 +261,7 @@
   background: var(--surface);
   color: var(--primary);
   font-weight: 600;
-  box-shadow: 0 2px 5px rgb(63 57 50 / 6%);
+  box-shadow: 0 2px 5px rgb(var(--shadow-color) / 6%);
 }
 .languageTabs button.removeLanguage {
   min-width: 24px;
@@ -336,7 +336,7 @@
   border-color: var(--accent);
   background: var(--surface);
   outline: 2px solid color-mix(in srgb, var(--accent) 20%, transparent);
-  box-shadow: 0 3px 9px rgb(63 57 50 / 3%);
+  box-shadow: 0 3px 9px rgb(var(--shadow-color) / 3%);
 }
 .field input.dateTimeInput {
   color-scheme: light;
@@ -356,7 +356,7 @@
   transition: background-color 140ms ease;
 }
 .dateTimeInput::-webkit-calendar-picker-indicator:hover {
-  background-color: #e8d8b5;
+  background-color: var(--accent-tint);
 }
 .field textarea {
   resize: vertical;
@@ -684,9 +684,9 @@
   height: calc(100dvh - 236px);
   min-height: 400px;
   overflow: hidden;
-  background: #140b08;
+  background: var(--ink);
   border-radius: 8px;
-  box-shadow: 0 12px 25px -18px rgb(63 57 50 / 35%);
+  box-shadow: 0 12px 25px -18px rgb(var(--shadow-color) / 35%);
 }
 .previewNote {
   text-align: center;
@@ -1011,7 +1011,7 @@
   background: var(--surface);
   border-radius: 50%;
   transition: transform 0.2s;
-  box-shadow: 0 1px 3px rgb(63 57 50 / 15%);
+  box-shadow: 0 1px 3px rgb(var(--shadow-color) / 15%);
 }
 .toggle input:checked + .switch {
   background: var(--primary);
@@ -1683,7 +1683,7 @@
     padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
     border-top: 1px solid var(--line);
     background: color-mix(in srgb, var(--surface) 96%, transparent);
-    box-shadow: 0 -8px 26px rgb(63 57 50 / 8%);
+    box-shadow: 0 -8px 26px rgb(var(--shadow-color) / 8%);
     backdrop-filter: blur(14px);
   }
   .mobileSelectionActions :is(a, button) {

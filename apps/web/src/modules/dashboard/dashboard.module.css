@@ -53,7 +53,7 @@
   cursor: pointer;
   box-sizing: border-box;
   transition: background 160ms ease, box-shadow 160ms ease;
-  box-shadow: 0 3px 7px rgb(63 57 50 / 6%);
+  box-shadow: 0 3px 7px rgb(var(--shadow-color) / 6%);
 }
 .primaryButton:hover {
   background: var(--primary-hover);
@@ -184,13 +184,13 @@
   overflow: hidden;
   background: var(--surface);
   min-width: 0;
-  box-shadow: 0 4px 18px #6d572a06;
+  box-shadow: 0 4px 18px rgb(var(--shadow-color) / 3%);
 }
 .invitationCard[data-clickable="true"] {
   cursor: pointer;
 }
 .invitationCard[data-clickable="true"]:hover {
-  box-shadow: 0 8px 26px #6d572a12;
+  box-shadow: 0 8px 26px rgb(var(--shadow-color) / 7%);
   border-color: var(--line-strong);
 }
 .invitationCard[data-clickable="true"]:focus-visible {
@@ -530,7 +530,7 @@
 .dialogActions .confirmDelete {
   border-color: #a65345;
   background: #a65345;
-  color: #fffdf8;
+  color: var(--surface);
 }
 .dialogActions button:disabled,
 .dialogClose:disabled {
@@ -663,7 +663,7 @@
 }
 .confirmation {
   padding: 20px;
-  background: #fbf5e7;
+  background: var(--accent-soft);
   border: 1px solid var(--line-strong);
   border-radius: 7px;
   margin-bottom: 24px;

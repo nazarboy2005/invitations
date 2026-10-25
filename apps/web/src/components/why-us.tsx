@@ -98,12 +98,12 @@ export function WhyUs({ previewImage }: { previewImage?: string }) {
               >
                 <path
                   d="M-30 68 540 184M90-20 204 280M367-20 253 280M-20 225 525 20"
-                  stroke="#fdfbf3"
+                  stroke="var(--surface)"
                   strokeWidth="25"
                 />
                 <path
                   d="m-30 68 570 116M90-20l114 300M367-20 253 280M-20 225 525 20"
-                  stroke="#e2d5b9"
+                  stroke="var(--line)"
                   strokeWidth="1"
                 />
                 <rect
@@ -113,7 +113,7 @@ export function WhyUs({ previewImage }: { previewImage?: string }) {
                   height="46"
                   rx="18"
                   transform="rotate(12 45 115)"
-                  fill="#e6d7b5"
+                  fill="var(--accent-tint)"
                 />
                 <rect
                   x="378"
@@ -122,12 +122,12 @@ export function WhyUs({ previewImage }: { previewImage?: string }) {
                   height="54"
                   rx="22"
                   transform="rotate(-18 378 174)"
-                  fill="#e6d7b5"
+                  fill="var(--accent-tint)"
                 />
                 <path
                   className={styles.route}
                   d="m104 200 79-30 93-36 29-76"
-                  stroke="#8a641c"
+                  stroke="var(--primary)"
                   strokeWidth="4"
                   strokeLinecap="round"
                   strokeDasharray="7 8"
@@ -136,8 +136,8 @@ export function WhyUs({ previewImage }: { previewImage?: string }) {
                   cx="104"
                   cy="200"
                   r="8"
-                  fill="#8a641c"
-                  stroke="#fffdf6"
+                  fill="var(--primary)"
+                  stroke="var(--surface)"
                   strokeWidth="4"
                 />
               </svg>

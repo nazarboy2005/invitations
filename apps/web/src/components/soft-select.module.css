@@ -20,7 +20,7 @@
   font: inherit;
   font-size: 14px;
   box-shadow:
-    0 1px 2px rgb(63 57 50 / 3%),
+    0 1px 2px rgb(var(--shadow-color) / 3%),
     inset 0 1px #ffffffc7;
   transition:
     border-color 140ms ease,
@@ -39,7 +39,7 @@
   border-color: var(--accent-strong);
   box-shadow:
     0 0 0 3px color-mix(in srgb, var(--accent) 24%, transparent),
-    0 4px 14px rgb(63 57 50 / 6%);
+    0 4px 14px rgb(var(--shadow-color) / 6%);
 }
 
 .trigger:disabled {
@@ -72,8 +72,8 @@
   border-radius: 12px;
   background: var(--surface);
   box-shadow:
-    0 14px 34px rgb(63 57 50 / 13%),
-    0 2px 7px rgb(63 57 50 / 5%);
+    0 14px 34px rgb(var(--shadow-color) / 13%),
+    0 2px 7px rgb(var(--shadow-color) / 5%);
   animation: menu-in 130ms ease-out both;
 }
 .menuAboveOnMobile {
@@ -117,14 +117,14 @@
 }
 
 .option.selected {
-  background: #eadcb9;
+  background: var(--accent-tint);
   color: var(--ink);
   font-weight: 600;
 }
 
 .option.selected.active,
 .option.selected:hover {
-  background: #e5d3a6;
+  background: color-mix(in srgb, var(--primary) 20%, var(--surface));
 }
 
 .option svg {
