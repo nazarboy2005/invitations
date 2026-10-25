@@ -299,10 +299,10 @@
     "reducedMotion": "Source CSS code review: source/css/00sc_9lpb3zcn.css disables .hero-reveal, .hero-star, .feature-orb, and .divider-shine animations under prefers-reduced-motion:reduce. Adapter uses the same media query to skip petals/envelope transitions, reveal hidden nodes at opacity 1 with no transform, stop parallax, scroll instantly, and set gift modal transition duration to 0ms. Browser media override unavailable; package qaReducedMotion=1 preview verified no petals and immediate opening.",
     "browserFidelity": "Matched source and app browser review at 1280x720 covered opening, parallax bridge, detail date/name layout, empty-gallery policy, gift modal, and footer. Follow-up with the archived compiled module confirmed full-width 720px internal scrollers, source reveal thresholds/durations/staggers, 12 opening petals, and To'yona panel/card geometry after removing an empty receipt-host flex gap. Different demo fixture content explains total page-height differences. Date binding preserves the source ampersand/time-label rows and date separators; source footer attribution is retained.",
     "sourceAssets": "8/8 exact Palace Rose URLs returned 200 image/webp; byte sizes and SHA-256 verified",
-    "toyonaInteraction": "Normal-motion source/package gift modals visually compared at 1280x720; source-style card details and copy controls render. Keyboard/backdrop and optional receipt behavior remain covered statically, not exercised in this browser pass.",
+    "toyonaInteraction": "Browser verified in source and package: close button and backdrop close; clicks inside the panel do not close; copy action shows success feedback. Archived source does not close on Escape; package Escape handling and ARIA dialog semantics are accessibility additions. Package receipt host moves into the modal while open and returns hidden under body on close; shared preview has no receipt content, so an enabled receipt remains unverified.",
     "nonRsvpReleaseBlockers": [
       "Actual public-invitation route parity remains unverified because DATABASE_URL is not configured locally; preview and public routes statically share ChorloveInvitation.",
-      "Optional receipt-host placement in a creator draft remains unverified in-browser; the shared preview fixture does not enable a receipt."
+      "Enabled receipt content in a creator draft remains unverified in-browser; the shared preview has no receipt content, though empty-host modal placement and restore lifecycle were verified."
     ]
   },
   "sourceStylesheets": [
@@ -746,8 +746,11 @@
       "card details",
       "copy button",
       "creator note",
-      "Escape close",
       "backdrop close"
+    ],
+    "adapterAccessibilityAdditions": [
+      "Escape close",
+      "ARIA dialog semantics"
     ],
     "sharedExtrasEnabled": true,
     "browserVerified": false
