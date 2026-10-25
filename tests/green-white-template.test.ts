@@ -167,6 +167,64 @@ test("Green White motion follows the archived source page module", async () => {
   assert.doesNotMatch(bridge, /intro\?\.remove\(\)/);
 });
 
+test("Green White slideshow starts manually, advances at the source delay, pauses, and respects reduced motion", async () => {
+  const bridge = await readFile(new URL("bridge.js", root), "utf8");
+  const setupStart = bridge.indexOf("    let slideshowPlaying = false, slideshowTimer = null;");
+  const setupEnd = bridge.indexOf("    const show = (nextIndex, direction = 0) => {", setupStart);
+  assert.ok(setupStart >= 0 && setupEnd > setupStart);
+  const slideshowSetup = bridge.slice(setupStart, setupEnd);
+  const makeRuntime = (reducedMotion: boolean) => runInNewContext(`(() => {
+    let nextTimerId = 1;
+    const timers = new Map();
+    const shown = [];
+    let closing = false, transitioning = false, index = 2, motionReduced = ${reducedMotion};
+    const slideshow = {};
+    const window = {
+      setTimeout(callback, delay) {
+        const id = nextTimerId++;
+        timers.set(id, { callback, delay, cancelled: false });
+        return id;
+      },
+      clearTimeout(id) {
+        const timer = timers.get(id);
+        if (timer) timer.cancelled = true;
+      },
+    };
+    let icon = false;
+    const setSlideshowIcon = (playing) => { icon = playing; };
+    const show = (nextIndex, direction) => shown.push({ nextIndex, direction });
+    ${slideshowSetup}
+    return { timers, shown, slideshow, get icon() { return icon; }, get slideshowPlaying() { return slideshowPlaying; }, setSlideshowPlaying };
+  })()`);
+
+  const normal = makeRuntime(false) as any;
+  assert.equal(normal.slideshow.disabled, false);
+  assert.equal(normal.slideshowPlaying, false);
+  assert.equal(normal.icon, false);
+  normal.setSlideshowPlaying(true);
+  assert.equal(normal.slideshowPlaying, true);
+  assert.equal(normal.icon, true);
+  const firstTimer = normal.timers.get(1);
+  assert.equal(firstTimer.delay, 1500);
+  firstTimer.callback();
+  assert.equal(normal.shown.length, 1);
+  assert.equal(normal.shown[0].nextIndex, 3);
+  assert.equal(normal.shown[0].direction, -1);
+
+  normal.setSlideshowPlaying(true);
+  const pauseTimer = normal.timers.get(2);
+  normal.setSlideshowPlaying(false);
+  assert.equal(pauseTimer.cancelled, true);
+  assert.equal(normal.slideshowPlaying, false);
+  assert.equal(normal.icon, false);
+
+  const reduced = makeRuntime(true) as any;
+  assert.equal(reduced.slideshow.disabled, true);
+  reduced.setSlideshowPlaying(true);
+  assert.equal(reduced.slideshowPlaying, false);
+  assert.equal(reduced.timers.size, 0);
+});
+
 test("Green White catalog cover is a source-rendered portrait with recorded provenance", async () => {
   const manifest = JSON.parse(await readFile(new URL("source-assets.provenance.json", root), "utf8"));
   const cover = manifest.catalogArtwork;
