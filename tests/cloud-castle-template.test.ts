@@ -135,6 +135,7 @@ test("Cloud Castle opening and hero motion follow the captured page module", asy
   assert.match(js, /outer\.style\.opacity = String\(item\.opacity\)/);
   assert.doesNotMatch(js, /inner\.animate\(\[\{ opacity \}, \{ opacity: 0\.8 \* opacity \}, \{ opacity \}\]/);
   assert.match(js, /outer\.animate\(\[\{ opacity \}, \{ opacity: 1, offset: 0\.5 \}, \{ opacity: 0 \}\], \{ duration: 850, easing: "ease-out", fill: "forwards" \}\)/);
+  assert.match(js, /\[style\*="opacity:0"\]:not\(\.cc-source-petal\), \[style\*="opacity: 0"\]:not\(\.cc-source-petal\)/);
   assert.match(js, /duration: 800, easing: "cubic-bezier\(\.22,1,\.36,1\)"/);
   assert.match(js, /clouds\.forEach\(\(cloud\) => \{ cloud\.style\.transform = "none"; \}\)/);
   assert.match(js, /if \(castle\) castle\.style\.transform = "none"/);

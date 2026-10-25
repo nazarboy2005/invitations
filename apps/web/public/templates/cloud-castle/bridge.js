@@ -467,7 +467,7 @@
         animateSourceReveal(element, inView, initialOpacity, initialTransform, 1, profile.duration, profile.delay, profile.easing);
       }
     }, { threshold: [0.2, 0.3, 0.35, 0.5] });
-    root.querySelectorAll('[style*="opacity:0"], [style*="opacity: 0"]').forEach((element) => {
+    root.querySelectorAll('[style*="opacity:0"]:not(.cc-source-petal), [style*="opacity: 0"]:not(.cc-source-petal)').forEach((element) => {
       if (hero?.contains(element)) return;
       element.dataset.ccInitialTransform = element.style.transform || "translateY(10px)";
       element.dataset.ccInitialOpacity = element.style.opacity || "0";
