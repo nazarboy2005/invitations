@@ -296,12 +296,11 @@
     "focusedTests": "5/5 passed after source-to-adapter binding corrections",
     "javascriptSyntax": "passed after source-to-adapter binding corrections",
     "typecheck": "passed after source-to-adapter binding corrections",
-    "reducedMotion": "Browser preview qaReducedMotion=1 verified: no opening petals and immediate envelope dismissal; source media-query emulation unavailable.",
+    "reducedMotion": "Source CSS code review: source/css/00sc_9lpb3zcn.css disables .hero-reveal, .hero-star, .feature-orb, and .divider-shine animations under prefers-reduced-motion:reduce. Adapter uses the same media query to skip petals/envelope transitions, reveal hidden nodes at opacity 1 with no transform, stop parallax, scroll instantly, and set gift modal transition duration to 0ms. Browser media override unavailable; package qaReducedMotion=1 preview verified no petals and immediate opening.",
     "browserFidelity": "Matched source and app browser review at 1280x720 covered opening, parallax bridge, detail date/name layout, empty-gallery policy, gift modal, and footer. Date binding now preserves the source ampersand/time-label rows and source date separators; source footer attribution is retained.",
     "sourceAssets": "8/8 exact Palace Rose URLs returned 200 image/webp; byte sizes and SHA-256 verified",
     "toyonaInteraction": "Normal-motion source/package gift modals visually compared at 1280x720; source-style card details and copy controls render. Keyboard/backdrop and optional receipt behavior remain covered statically, not exercised in this browser pass.",
     "nonRsvpReleaseBlockers": [
-      "Source-side prefers-reduced-motion behavior could not be emulated in the available browser controls; only the package qaReducedMotion=1 path was verified.",
       "Actual public-invitation route parity remains unverified because DATABASE_URL is not configured locally; preview and public routes statically share ChorloveInvitation.",
       "Optional receipt-host placement in a creator draft remains unverified in-browser; the shared preview fixture does not enable a receipt."
     ]
