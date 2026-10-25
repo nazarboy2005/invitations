@@ -4,7 +4,7 @@ import { createHash } from "node:crypto";
 import { readdirSync } from "node:fs";
 import { resolve } from "node:path";
 import { test } from "node:test";
-import { TEMPLATES } from "@taklifnoma/contracts";
+import { createInvitation, TEMPLATES } from "@taklifnoma/contracts";
 import { createTemplatePreviewSample } from "../apps/web/src/modules/catalog/preview-sample";
 
 const root = resolve(process.cwd());
@@ -105,11 +105,16 @@ test("Glass Pink uses only its own artwork and keeps sample gallery content ephe
 
   const provenance = JSON.parse(readFileSync(provenancePath, "utf8"));
   const fixture = JSON.parse(readFileSync(resolve(root, "apps/web/src/modules/catalog/preview-sample.json"), "utf8"));
-  assert.equal(fixture.gallery.length, 6);
-  assert.ok(fixture.gallery.every((item: { url: string; alt: string; caption: string }) => !item.url && !item.alt && !item.caption));
+  assert.equal(fixture.templateSamples["glass-pink"].gallery.length, 6);
   const previewInvitation = createTemplatePreviewSample("glass-pink");
   assert.equal(previewInvitation.templateId, "glass-pink");
-  assert.ok(previewInvitation.gallery.every((item) => !item.url && !item.alt && !item.caption));
+  assert.deepEqual(
+    previewInvitation.gallery.map((item) => item.url),
+    [2, 1, 3, 6, 4, 5].map((number) => `/templates/chorlove/orchid-amplop/assets/gallery-${number}.webp`),
+  );
+  const blankCreatorInvitation = createInvitation("glass-pink");
+  assert.deepEqual(blankCreatorInvitation.gallery, []);
+  assert.equal(JSON.stringify(blankCreatorInvitation).includes("orchid-amplop"), false);
   assert.deepEqual(provenance.gallerySourceAudit.eligibleGlassPinkGalleryPhotos, []);
   assert.equal(provenance.gallerySourceAudit.excludedCrossTemplateGalleryPhotos.length, 6);
   const renderer = readFileSync(resolve(root, "apps/web/src/templates/anor/renderer.tsx"), "utf8");
