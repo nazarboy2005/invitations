@@ -129,6 +129,18 @@
         "down indicator floats y=0,10,0 over 2s"
       ],
       "galleryTiles": "source stagger: mobile y=18 with .04s/item delay; desktop scale=.96 with .05s/item delay; once at 35% intersection",
+      "galleryLightbox": {
+        "routeModule": "995238 in 09cpm7sbnsw7i.js",
+        "motionRuntimeArchiveFile": "Chorlove/Web invitations/_next/static/chunks/0ceoe4zwq362f.js",
+        "motionRuntimeBytes": 140967,
+        "motionRuntimeSha256": "5dd7d6dc70babc6b0507d8940a534b916c15ae8ede6a63ebb140f07aaf60836d",
+        "sourceTransitions": {
+          "dialogOpacity": "300ms keyframes, cubic-bezier(.25, .1, .35, 1)",
+          "imageOpacity": "300ms keyframes, cubic-bezier(.25, .1, .35, 1)",
+          "imageScale": "spring from .96 to 1 and back; stiffness 550, damping 30, mass 1, restSpeed 10, restDelta .005"
+        },
+        "packageAdapter": "source-motion.js evaluates the source spring formula on each requestAnimationFrame; no Chorlove site or Motion runtime is packaged."
+      },
       "wishTicker": "if more than three wishes, translate y 0% to -50%, linear loop with max(2.2s per item, 16s)",
       "reducedMotion": "application preference support added without site runtime"
     }

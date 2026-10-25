@@ -282,7 +282,42 @@ test("Green Gold restores source opening, scroll, ornament, sparkle, wishes, and
   const manifest = JSON.parse(
     await readFile(new URL("source-assets.provenance.json", root), "utf8"),
   );
+  const lightboxMotion = manifest.sourceMotion.observedSourceMotion.galleryLightbox;
+  const sourceMotionRuntimePath = lightboxMotion.motionRuntimeArchiveFile
+    .replace(/^Chorlove\/Web invitations\//, "");
+  const sourceRoute = await readFile(
+    new URL(manifest.sourceMotion.archiveFile.replace(/^Chorlove\/Web invitations\//, ""), archive),
+  );
+  const sourceMotionRuntime = await readFile(
+    new URL(sourceMotionRuntimePath, archive),
+  );
   assert.match(manifest.sourceMotion.sha256, /^[a-f0-9]{64}$/);
+  assert.equal(
+    createHash("sha256").update(sourceRoute).digest("hex"),
+    manifest.sourceMotion.sha256,
+  );
+  assert.equal(sourceMotionRuntime.length, lightboxMotion.motionRuntimeBytes);
+  assert.equal(
+    createHash("sha256").update(sourceMotionRuntime).digest("hex"),
+    lightboxMotion.motionRuntimeSha256,
+  );
+  assert.match(sourceRoute.toString("utf8"), /initial:\{opacity:0,y:-20\},animate:\{opacity:1,y:0\},transition:\{duration:1\}/);
+  assert.match(sourceRoute.toString("utf8"), /initial:\{scale:\.8,opacity:0\},animate:\{scale:1,opacity:1\},transition:\{delay:\.5,duration:1\}/);
+  assert.match(sourceRoute.toString("utf8"), /initial:\{width:0\},animate:\{width:"80%"\},transition:\{delay:1,duration:1\.5\}/);
+  assert.match(sourceRoute.toString("utf8"), /initial:\{opacity:0,y:20\},animate:\{opacity:1,y:0\},transition:\{delay:1\.2,duration:1\}/);
+  assert.match(sourceRoute.toString("utf8"), /animate:\{y:\[0,10,0\]\},transition:\{duration:2,repeat:1\/0\}/);
+  assert.match(sourceRoute.toString("utf8"), /initial:\{opacity:0\},animate:\{opacity:1\},exit:\{opacity:0\}/);
+  assert.match(sourceRoute.toString("utf8"), /initial:\{scale:\.96,opacity:0\},animate:\{scale:1,opacity:1\},exit:\{scale:\.96,opacity:0\}/);
+  assert.match(sourceMotionRuntime.toString("utf8"), /stiffness:550,damping:0===e\[1\]\?2\*Math\.sqrt\(550\):30,restSpeed:10/);
+  assert.match(sourceMotionRuntime.toString("utf8"), /ease:\[\.25,\.1,\.35,1\],duration:\.3/);
+  assert.match(motion, /function sourceSpringValue\(from, to, seconds\)/);
+  assert.match(motion, /stiffness = 550/);
+  assert.match(motion, /damping = 30/);
+  assert.match(motion, /requestAnimationFrame\(update\)/);
+  assert.match(motion, /cubic-bezier\(\.25, \.1, \.35, 1\)/);
+  assert.match(motion, /Math\.abs\(spring\.velocity \* 1000\) <= 10/);
+  assert.match(motion, /Math\.abs\(to - spring\.value\) <= 0\.005/);
+  assert.match(bridge, /sourceMotion\.closeGallery\(dialog, dialogImage, finish\)/);
   assert.equal(manifest.sourceGiftInteraction.moduleId, "557752");
   assert.equal(manifest.sourceGiftInteraction.routeModuleId, "995238");
   assert.equal(manifest.sourceGiftInteraction.sha256, manifest.sourceMotion.sha256);

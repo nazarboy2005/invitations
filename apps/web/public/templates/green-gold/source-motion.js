@@ -11,6 +11,46 @@
     [1, 40], [-1, 45], [1, 28], [1, 55], [-1, 35], [1, 40], [-1, 25],
     [-1, 45], [1, 30], [1, 50], [1, 50],
   ];
+  const galleryOpacityEasing = "cubic-bezier(.25, .1, .35, 1)";
+
+  // The archived Motion runtime resolves an unspecified scale transition to
+  // stiffness 550, damping 30, mass 1, restSpeed 10, and restDelta .005.
+  // Evaluate that source spring at each animation frame without packaging the
+  // site's animation runtime.
+  function sourceSpringValue(from, to, seconds) {
+    const stiffness = 550;
+    const damping = 30;
+    const mass = 1;
+    const omega = Math.sqrt(stiffness / mass);
+    const dampingRatio = damping / (2 * Math.sqrt(stiffness * mass));
+    const dampedOmega = omega * Math.sqrt(1 - dampingRatio * dampingRatio);
+    const displacement = to - from;
+    const sineAmplitude = (dampingRatio * omega * displacement) / dampedOmega;
+    const velocitySine = dampingRatio * omega * sineAmplitude + displacement * dampedOmega;
+    const velocityCosine = dampingRatio * omega * displacement - sineAmplitude * dampedOmega;
+    const decay = Math.exp(-dampingRatio * omega * seconds);
+    const sine = Math.sin(dampedOmega * seconds);
+    const cosine = Math.cos(dampedOmega * seconds);
+    return {
+      value: to - decay * (sineAmplitude * sine + displacement * cosine),
+      velocity: decay * (velocitySine * sine + velocityCosine * cosine),
+    };
+  }
+
+  function currentScale(element) {
+    const transform = getComputedStyle(element).transform;
+    if (!transform || transform === "none") return 1;
+    try {
+      return new DOMMatrixReadOnly(transform).a;
+    } catch {
+      return 1;
+    }
+  }
+
+  function currentOpacity(element) {
+    const opacity = Number.parseFloat(getComputedStyle(element).opacity);
+    return Number.isFinite(opacity) ? opacity : 1;
+  }
 
   function install(root, payload) {
     if (!root || root.dataset.ggMotionInstalled === "true") return;
@@ -21,9 +61,49 @@
     let reducedMotionPreference = Boolean(payload?.reducedMotion);
     const animations = new Set();
     const revealTargets = new Set();
+    const scaleAnimations = new Set();
+    const galleryStates = new Set();
     let observer;
 
     const reduced = () => Boolean(reducedMotionPreference || reducedQuery.matches);
+    function animateSourceScale(element, from, to) {
+      const start = performance.now();
+      let frame = 0;
+      let cancelled = false;
+      let resolve;
+      const finished = new Promise((complete) => { resolve = complete; });
+      const state = {
+        effect: { target: element },
+        finished,
+        cancel() {
+          if (cancelled) return;
+          cancelled = true;
+          cancelAnimationFrame(frame);
+          scaleAnimations.delete(state);
+          resolve();
+        },
+      };
+      function update(timestamp) {
+        if (cancelled) return;
+        const elapsed = Math.max(0, (timestamp - start) / 1000);
+        const spring = sourceSpringValue(from, to, elapsed);
+        element.style.transform = `scale(${spring.value})`;
+        if (
+          Math.abs(spring.velocity * 1000) <= 10 &&
+          Math.abs(to - spring.value) <= 0.005
+        ) {
+          cancelled = true;
+          element.style.transform = to === 1 ? "none" : `scale(${to})`;
+          scaleAnimations.delete(state);
+          resolve();
+          return;
+        }
+        frame = requestAnimationFrame(update);
+      }
+      scaleAnimations.add(state);
+      frame = requestAnimationFrame(update);
+      return state;
+    }
     const track = (element, animation) => {
       if (!element || reduced()) return null;
       const handle = element.animate(animation.frames, {
@@ -247,6 +327,7 @@
         observer?.disconnect();
         for (const animation of animations) animation.cancel();
         animations.clear();
+        for (const animation of scaleAnimations) animation.cancel();
         for (const state of revealTargets) {
           state.animation?.cancel();
           state.element.style.opacity = "1";
@@ -258,6 +339,11 @@
         if (introRule) introRule.style.width = "80%";
         for (const star of stars) { star.style.opacity = "0"; star.style.transform = "scale(0)"; }
         for (const image of ornaments) image.parentElement?.getAnimations().forEach((animation) => animation.cancel());
+        for (const { dialog, image } of galleryStates) {
+          dialog.style.opacity = "1";
+          image.style.opacity = "1";
+          image.style.transform = "none";
+        }
       } else {
         updateWishes();
       }
@@ -278,15 +364,66 @@
       updateWishes,
       setReducedMotion,
       animateGallery(dialog, image) {
-        if (reduced()) return;
-        track(dialog, { frames: [{ opacity: 0 }, { opacity: 1 }], duration: 300, easing: "ease-out" });
-        track(image, { frames: [{ opacity: 0, transform: "scale(.96)" }, { opacity: 1, transform: "scale(1)" }], duration: 300, easing: "ease-out" });
+        galleryStates.add({ dialog, image });
+        if (reduced()) {
+          dialog.style.opacity = "1";
+          image.style.opacity = "1";
+          image.style.transform = "none";
+          return;
+        }
+        dialog.style.opacity = "0";
+        image.style.opacity = "0";
+        image.style.transform = "scale(.96)";
+        track(dialog, {
+          frames: [{ opacity: 0 }, { opacity: 1 }],
+          duration: 300,
+          easing: galleryOpacityEasing,
+        });
+        track(image, {
+          frames: [{ opacity: 0 }, { opacity: 1 }],
+          duration: 300,
+          easing: galleryOpacityEasing,
+        });
+        const state = [...galleryStates].find((item) => item.dialog === dialog);
+        if (state) state.scaleAnimation = animateSourceScale(image, 0.96, 1);
       },
-      closeGallery(dialog, onFinish) {
-        if (reduced()) { onFinish(); return; }
-        const animation = track(dialog, { frames: [{ opacity: 1 }, { opacity: 0 }], duration: 300, easing: "ease-in" });
-        if (animation) animation.onfinish = () => { animations.delete(animation); onFinish(); };
-        else onFinish();
+      closeGallery(dialog, image, onFinish) {
+        const finish = () => {
+          for (const state of galleryStates) {
+            if (state.dialog === dialog) galleryStates.delete(state);
+          }
+          onFinish();
+        };
+        if (reduced()) { finish(); return; }
+        const opacity = currentOpacity(dialog);
+        const imageOpacity = currentOpacity(image);
+        const scale = currentScale(image);
+        const state = [...galleryStates].find((item) => item.dialog === dialog);
+        state?.scaleAnimation?.cancel();
+        for (const animation of [...animations]) {
+          if (animation.effect?.target === dialog || animation.effect?.target === image) {
+            animation.cancel();
+          }
+        }
+        const animationsToFinish = [
+          track(dialog, {
+            frames: [{ opacity }, { opacity: 0 }],
+            duration: 300,
+            easing: galleryOpacityEasing,
+          }),
+          track(image, {
+            frames: [{ opacity: imageOpacity }, { opacity: 0 }],
+            duration: 300,
+            easing: galleryOpacityEasing,
+          }),
+        ];
+        const scaleAnimation = animateSourceScale(image, scale, 0.96);
+        const activeAnimations = animationsToFinish.filter(Boolean);
+        Promise.all([
+          ...activeAnimations.map((animation) => animation.finished.catch(() => undefined)),
+          scaleAnimation.finished,
+        ])
+          .then(finish);
       },
     };
   }

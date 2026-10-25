@@ -38,6 +38,31 @@ gallery overlay were replaced with the source animation and full-screen dark
 lightbox treatment. Detailed chunk, element, and timing provenance is recorded
 in `source-assets.provenance.json`.
 
+## Gallery lightbox motion follow-up
+
+The exact source route module has the lightbox dialog enter/exit at opacity 0/1
+and the image enter/exit at opacity 0/1 and scale .96/1, with no explicit
+transition props. The archived Motion engine chunk
+`_next/static/chunks/0ceoe4zwq362f.js` (140,967 bytes, SHA-256
+`5dd7d6dc70babc6b0507d8940a534b916c15ae8ede6a63ebb140f07aaf60836d`) resolves
+those defaults to a 300ms opacity tween with
+`cubic-bezier(.25, .1, .35, 1)` and a scale spring with stiffness 550, damping
+30, mass 1, rest speed 10, and rest delta .005. The previous 300ms ease-out
+approximation missed the source curve and spring and did not animate the image
+on exit. `source-motion.js` now evaluates the source spring formula on each
+animation frame, applies the source opacity curve, animates both image and
+dialog on exit, and waits for their transitions before removing the lightbox.
+Only the source-derived
+transition values are used; the Chorlove site and Motion runtime are not
+packaged. Both source and runtime chunk hashes are pinned in
+`source-assets.provenance.json` and the focused source test. In a matched
+390×844 browser run, source/package opacity was .795/.793 at 120ms and 1/1 by
+240ms; both images settled at 367×550, and both dialogs were gone by 400ms
+after close. The first 40ms sample differed (.336/.214), so the local harness
+does not prove frame-origin synchronization; the source page also reports
+React hydration error #418. The package's reduced-motion preview opens without
+an animation and removes the dialog immediately on close.
+
 The archive capture manifest and full Chorlove image-cache manifest contain no
 separate Green Gold catalog portrait or cover metadata; they list the captured
 preview page and the five template artwork assets. A source-faithful cover is
@@ -50,7 +75,9 @@ the fixture remains ephemeral. No crop, compositing, or redraw was used.
 viewport, and loaded image/font checks. The typed catalog entry points to this
 artwork. Green Gold remains unpublished. Browser verification at matching
 390x844 viewports confirms source/package opening composition, cover-rule
-finish, section reveal on scroll, and reduced-motion state without runtime
+finish, section reveal on scroll, and package reduced-motion state. The source
+capture reports React hydration error #418 while its external site services are
+blocked in the local harness; the package frame has no uncaught JavaScript
 errors. The exact source default gallery order is restored in previews using
 the captured shared gallery image files; creator uploads take precedence and an
 empty public gallery stays hidden. Complete public/creator integration remains

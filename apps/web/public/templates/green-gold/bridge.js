@@ -245,7 +245,7 @@
             const closeDialog = () => {
               if (closing) return;
               closing = true;
-              if (sourceMotion) sourceMotion.closeGallery(dialog, finish);
+              if (sourceMotion) sourceMotion.closeGallery(dialog, dialogImage, finish);
               else finish();
             };
             const onKeydown = (event) => {
