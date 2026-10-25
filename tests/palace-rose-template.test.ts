@@ -51,6 +51,8 @@ test("Palace Rose preview media matches its archived photos and stays preview-on
   const bridge = read(`${base}/bridge.js`);
   assert.match(bridge, /const photoUrl = typeof data\(\)\.venueImage === "string" \? data\(\)\.venueImage\.trim\(\) : ""/);
   assert.match(bridge, /photoFrame\.replaceChildren\(\);\s*hide\(photoFrame,true\)/);
+  assert.match(bridge, /q\("\.flex\.touch-pan-y", section\) \|\| q\("\.grid", section\)/);
+  assert.match(bridge, /const counter = all\("div", section\)\.find\(\(n\) =>[^\n]+!n\.querySelector\("div"\)/);
   assert.match(bridge, /paint\(\); hide\(section, !items\.length\)/);
 });
 

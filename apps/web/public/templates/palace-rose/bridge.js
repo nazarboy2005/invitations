@@ -205,7 +205,7 @@
   function bindGallery() {
     const section = sections[2]; if (!section) return;
     set(q("h2", section), text().gallery);
-    const grid = q(".grid", section) || section;
+    const grid = q(".flex.touch-pan-y", section) || q(".grid", section) || section;
     const images = all("img", grid), source = (data().gallery || []).filter((item) => item.src || item.url);
     const items = source;
     const cards = images.map((img) => img.closest(".embla__slide__card")?.parentElement || img.parentElement);
@@ -219,7 +219,7 @@
         if (item?.src || item?.url) { img.src = item.src || item.url; img.alt = item.alt || item.caption || `${text().gallery} ${i+1}`; card.onclick = () => showImage(items, (galleryPosition+i)%items.length); }
         else { img.removeAttribute("src"); img.alt = ""; const slide=q(".embla__slide__card",card);if(slide){let empty=q(".pr-empty",slide);if(!empty){empty=document.createElement("div");empty.className="pr-empty absolute inset-0";set(empty,text().gallery);slide.append(empty);}hide(empty,false);}card.onclick = null; }
       });
-      const counter = all("div", section).find((n) => /^\d+\s*\/\s*\d+$/.test(n.textContent.trim()));
+      const counter = all("div", section).find((n) => /^\d+\s*\/\s*\d+$/.test(n.textContent.trim()) && !n.querySelector("div"));
       if (counter) set(counter, `${items.length ? galleryPosition+1 : 0} / ${items.length}`);
     };
     if (next) { next.disabled = false; next.onclick = () => { if(items.length){galleryPosition=(galleryPosition+1)%items.length;paint();} }; }
