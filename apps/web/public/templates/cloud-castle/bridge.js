@@ -983,6 +983,25 @@
     const present = Boolean(venue.name || venue.address);
     hide(section, !present);
     if (!present) return;
+    const mapHost = section.querySelector("[data-chorlove-map-host]");
+    let mapFrame = mapHost?.querySelector(".cc-venue-map");
+    const hasCoordinates = Number.isFinite(venue.lat) && Number.isFinite(venue.lng) && Math.abs(venue.lat) <= 90 && Math.abs(venue.lng) <= 180;
+    if (mapHost && hasCoordinates) {
+      if (!mapFrame) {
+        mapFrame = document.createElement("iframe");
+        mapFrame.className = "cc-venue-map h-[280px] md:h-[380px] w-full max-w-[340px] md:max-w-[560px] rounded-2xl overflow-hidden";
+        mapFrame.title = localCopy().venueTitle;
+        mapFrame.loading = "lazy";
+        mapFrame.allowFullscreen = true;
+        mapFrame.referrerPolicy = "no-referrer-when-downgrade";
+        mapFrame.style.borderColor = "rgb(18, 52, 103)";
+        mapHost.append(mapFrame);
+      }
+      const point = `${venue.lng},${venue.lat}`;
+      mapFrame.src = `https://yandex.uz/map-widget/v1/?ll=${encodeURIComponent(point)}&z=12&pt=${encodeURIComponent(`${point},pm2rdm`)}`;
+    } else if (mapFrame) {
+      mapFrame.remove();
+    }
     let map = section.querySelector(".cc-map-link");
     const href = venue.mapUrl || (venue.lat != null && venue.lng != null ? `https://maps.google.com/?q=${venue.lat},${venue.lng}` : "");
     if (href) {

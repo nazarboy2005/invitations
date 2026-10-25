@@ -61,7 +61,11 @@ test("Cloud Castle package contains only sanitized markup and no captured websit
 });
 
 test("Cloud Castle bridge maps the shared data and existing RSVP/wish services", async () => {
-  const js = await readFile(bridge, "utf8");
+  const [js, html, original] = await Promise.all([
+    readFile(bridge, "utf8"),
+    readFile(source, "utf8"),
+    optionalSourceText(sourceCapture),
+  ]);
   for (const field of ["groom", "bride", "eventType", "program", "gallery", "story", "toyona", "contacts"]) {
     assert.match(js, new RegExp(`data\\.${field}`));
   }
@@ -72,6 +76,12 @@ test("Cloud Castle bridge maps the shared data and existing RSVP/wish services",
   assert.match(js, /musicToggleLabel/);
   assert.match(js, /languageLabel/);
   assert.match(js, /prefers-reduced-motion/);
+  assert.match(html, /data-chorlove-map-host=""/);
+  assert.match(js, /cc-venue-map h-\[280px\] md:h-\[380px\] w-full max-w-\[340px\] md:max-w-\[560px\] rounded-2xl overflow-hidden/);
+  assert.match(js, /https:\/\/yandex\.uz\/map-widget\/v1\/\?ll=/);
+  if (original) {
+    assert.match(original, /class="h-\[280px\] md:h-\[380px\] w-full max-w-\[340px\] md:max-w-\[560px\] rounded-2xl overflow-hidden" src="https:\/\/yandex\.uz\/map-widget\/v1\/geo\//);
+  }
 });
 
 test("Cloud Castle preview uses only gallery artwork referenced by its captured source", async () => {
