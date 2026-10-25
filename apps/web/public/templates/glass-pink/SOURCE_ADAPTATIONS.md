@@ -14,9 +14,9 @@ The source capture is server-rendered HTML, and the Chorlove archive also contai
 
 The captured wish list is a 460px scroll area with the original rounded translucent cards, source name/date header, Cormorant name/message typography, and 400ms reveal with 50ms card staggering at a 0.2 viewport threshold. The adapter uses platform-approved wishes and renders the API's `submittedAt` value in the source date slot; catalog sample wishes remain ephemeral. The source 🪄 control is preserved and fills the textarea from the source's generic wish suggestions without submitting automatically.
 
-The original RSVP contains only the guest name and yes/no controls. The platform adapter has no guest-count prompt and sends the API's fixed `partySize` value of 1 for yes and 0 for no. The source gift section is an interactive gift-box card with four pulsing sparkles and seven animated ornaments; the adapter shows it only when To'yona is enabled, preserves the captured decoration loops, and cancels them for reduced motion. Clicking the gift box opens the source-matched body-portal modal (z-index 2000, black/75 blurred backdrop, translucent rounded card, 250ms card entrance/exit, source gift-box image, bank-card label/number/holder, clipboard action, backdrop/close/Escape dismissal). It displays the source fallback message when no card number is configured. The captured Glass Pink page has no dress-code section, and the packaged page adds none.
+The original RSVP contains only the guest name and yes/no controls. The platform adapter has no guest-count prompt and sends the API's fixed `partySize` value of 1 for yes and 0 for no. The source gift section is an interactive gift-box card with four pulsing sparkles and seven animated ornaments; the adapter shows it only when To'yona is enabled, preserves the captured decoration loops, and cancels them for reduced motion. Clicking the gift box opens the source-matched body-portal modal (z-index 2000, black/75 blurred backdrop, translucent rounded card, 250ms card entrance/exit with Framer's default ease-out, source gift-box image, bank-card label/number/holder, clipboard action, backdrop/close/Escape dismissal). It displays the source fallback message when no card number is configured. The captured Glass Pink page has no dress-code section, and the packaged page adds none.
 
-The archived route module's gift modal uses a 300ms default opacity fade for the backdrop and an explicit 250ms scale/vertical entrance for its card. Its entrance is immediate under reduced motion. Copy removes spaces from the card number and the confirmation returns to the source label after 2500ms. Modal behavior is recorded in `source/provenance.json` and covered by the Glass Pink focused suite.
+The archived route module's gift modal uses a 300ms default ease-out opacity fade for the backdrop and an explicit 250ms ease-out scale/vertical entrance for its card. Its entrance is immediate under reduced motion. Copy removes spaces from the card number and the confirmation returns to the source label after 2500ms. A final source-chunk comparison caught and fixed the package's prior CSS `ease` mismatch on both modal layers. Modal behavior is recorded in `source/provenance.json` and covered by the Glass Pink focused suite.
 
 Fresh matched browser pass (2026-10-25, 1280×720): source and package both run the original opener exit and leave the invitation visible; their gift modal cards both measure 448×402px and both close from the close control. The schedule heading, subtitle, icon rail, and first row share the same relative placement and reveal states; scrolling away restores the title to opacity 0, row time/title offsets to ±20px, marker scale to 0, and icons to opacity 0/scale .8, then re-entry restores the visible state. This pass also caught a copied-text encoding error in the four gift-box sparkle glyphs: the package showed `âœ¦` where the source shows `✦`; the package now uses the original glyph.
 
@@ -116,6 +116,18 @@ package now includes the captured button's location, icon, classes, font and
 hover styles in the card's original `mt-6` slot. The existing adapter reveals it
 and binds the locale label when the invitation has a user-supplied map URL or
 coordinates; with neither, it stays hidden rather than linking to an invented
-location. The local preview fixture has no map URL/coordinates, so this pass
-verified the hidden empty state; a configured venue link will render in the
-captured slot.
+location. The local-only browser fixture verifies that an explicit venue URL
+is preserved and coordinates produce
+`https://maps.google.com/?q=41.311081,69.240562`; neither link was followed.
+Both configured cases show the localized source-slot button, and the preview
+fixture without map data keeps the CTA hidden.
+
+## Final wish-card and modal motion check (2026-10-26)
+
+The exact archived route chunk sets each guest wish card to enter from opacity
+0 and y=15px, with a 400ms duration, 50ms per-card delay, and a 0.2 viewport
+threshold. `bridge.js` uses those same values and the matching ease-out curve.
+The archived gift overlay defaults to a 300ms ease-out fade; its card uses a
+250ms ease-out entrance/exit from opacity 0, scale .92, and y=20px. The package
+now matches both curves and timings. Focused tests assert the source chunk
+settings and package rules.

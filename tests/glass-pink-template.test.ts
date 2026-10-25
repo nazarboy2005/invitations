@@ -193,6 +193,8 @@ test("Glass Pink restores its captured venue image and source-styled map action"
   assert.match(html, /data-gp-map-link=""[\s\S]*inline-flex items-center gap-2 rounded-full border border-\[rgb\(203,93,108\)\]\/40 bg-white\/50 px-6 py-2\.5/);
   assert.match(bridge, /const map = section\.querySelector\("\[data-gp-map-link\]"\)/);
   assert.match(bridge, /if \(map && href\) \{ map\.href = href; map\.hidden = false;/);
+  assert.match(bridge, /venue\.mapUrl \|\| \(venue\.lat != null && venue\.lng != null \? `https:\/\/maps\.google\.com\/\?q=\$\{venue\.lat\},\$\{venue\.lng\}` : ""\)/);
+  assert.match(bridge, /else if \(map\) \{ map\.hidden = true; map\.removeAttribute\("href"\); \}/);
 });
 
 test("Glass Pink retains its source gift-box section without adding dress code", () => {
@@ -220,6 +222,7 @@ test("Glass Pink gift box opens the source body-portal modal instead of inline d
   assert.match(sourceModule.toString("utf8"), /document\.currentScript:void 0,875662,e=>/);
   assert.match(sourceModule.toString("utf8"), /max-w-md rounded-3xl p-6 shadow-2xl text-center border border-white\/50 bg-white\/90 backdrop-blur-xl/);
   assert.match(sourceModule.toString("utf8"), /duration:\.25/);
+  assert.match(sourceModule.toString("utf8"), /initial:\{opacity:0\},animate:\{opacity:1\},exit:\{opacity:0\}/);
   assert.match(sourceModule.toString("utf8"), /Your presence is the greatest gift for us\./);
   assert.match(sourceModule.toString("utf8"), /Copy Card Number/);
   assert.match(sourceModule.toString("utf8"), /setTimeout\(\(\)=>o\(!1\),2500\)/);
@@ -238,11 +241,19 @@ test("Glass Pink gift box opens the source body-portal modal instead of inline d
   assert.match(adapterCss, /\.cc-gift-modal \{ position: fixed; inset: 0; z-index: 2000/);
   assert.match(adapterCss, /background: rgb\(0 0 0 \/ 75%\); backdrop-filter: blur\(12px\)/);
   assert.match(adapterCss, /max-width: 448px;[^}]*border-radius: 24px/);
-  assert.match(adapterCss, /transition: opacity 250ms ease, transform 250ms ease/);
+  assert.match(adapterCss, /\.cc-gift-modal \{[^}]*transition: opacity 300ms ease-out/);
+  assert.match(adapterCss, /transition: opacity 250ms ease-out, transform 250ms ease-out/);
   assert.match(adapterCss, /scale\(\.92\) translateY\(20px\)/);
   assert.match(adapterCss, /@media \(prefers-reduced-motion: reduce\) \{ \.cc-gift-modal/);
   assert.match(adapterCss, /\.cc-gift-modal\[data-reduced-motion="true"\].*transition: none !important/);
   assert.doesNotMatch(adapterCss, /\.cc-gift-details/);
+});
+
+test("Glass Pink guest wish cards preserve the source stagger and reveal easing", () => {
+  const sourceModule = readFileSync(sourcePageModulePath, "utf8");
+  assert.match(sourceModule.toString("utf8"), /initial:\{opacity:0,y:15\},whileInView:\{opacity:1,y:0\},viewport:\{amount:\.2\},transition:\{duration:\.4,delay:\.05\*a\}/);
+  assert.ok(bridge.includes('root.querySelectorAll("[data-gp-source-wish-card]").forEach((element, index) => setSpec(element, { duration: 400, delay: index * 50, amount: 0.2, toOpacity: 1, toTransform: "translateY(0px)" }));'));
+  assert.match(bridge, /easing: motion\.easing \|\| "ease-out"/);
 });
 
 test("Glass Pink schedule retains the original illustrated timeline markers", () => {
