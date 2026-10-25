@@ -12,12 +12,8 @@ html,body{width:100%;min-height:100%;margin:0;background:#fbf8f5}
 .lace-music-toggle{position:fixed;z-index:120;right:max(.75rem,calc((100vw - 480px)/2 + .75rem));bottom:.75rem;min-height:2.75rem;border:1px solid #633f4d55;border-radius:999px;padding:.5rem 1rem;background:#fbf8f5e8;color:#3e2130;font:600 .75rem Jost,sans-serif;box-shadow:0 4px 16px #3e213022;backdrop-filter:blur(10px)}
 [data-chorlove-template="lace"] :is(button,a,input,textarea,select):focus-visible{outline:3px solid #a98272;outline-offset:3px}
 [data-chorlove-template="lace"] button:disabled{opacity:.6;cursor:not-allowed}
-.lace-empty-photo{display:grid;place-items:center;min-height:10rem;color:#8c6d75}
-.lace-lightbox{width:min(92vw,900px);max-width:none;max-height:92vh;padding:0;border:0;background:transparent;overflow:visible}
-.lace-lightbox::backdrop{background:rgb(30 18 24 / 88%);backdrop-filter:blur(5px)}
-.lace-lightbox img{display:block;max-width:92vw;max-height:82vh;margin:auto;border-radius:.5rem;object-fit:contain}
-.lace-lightbox-controls{display:flex;justify-content:center;gap:.6rem;margin-top:.7rem}
-.lace-lightbox-controls button,.lace-gift-details button{min-height:2.75rem;border:1px solid #fff8f055;border-radius:999px;padding:0 1rem;background:#fbf8f5;color:#3e2130;font:500 .8rem Jost,sans-serif}
+.lace-gift-details button{min-height:2.75rem;border:1px solid #fff8f055;border-radius:999px;padding:0 1rem;background:#fbf8f5;color:#3e2130;font:500 .8rem Jost,sans-serif}
+.lace-lightbox-open{overflow:hidden!important}
 .lace-status{min-height:1.4em;margin-top:.5rem;color:inherit;font:400 .8rem/1.4 Jost,sans-serif}
 .lace-gift-details{width:min(100%,24rem);margin:1rem auto 0;border:1px solid #633f4d44;border-radius:.5rem;padding:1.25rem;background:#fbf8f5;color:#3e2130;box-shadow:0 12px 32px #3e213018;text-align:center}
 .lace-card-number{margin:.5rem 0;overflow-wrap:anywhere;font:600 1rem/1.5 Jost,sans-serif;letter-spacing:.08em}

@@ -27,6 +27,7 @@ const sourceCapture = readFileSync(`${sourceRoot}/templates/lace/preview-frame.h
 const packedCapture = readFileSync(`${packageRoot}/source/preview-frame.html`);
 const bridge = readFileSync(`${packageRoot}/bridge.js`, "utf8");
 const css = readFileSync(`${packageRoot}/adapter.css`, "utf8");
+const chorloveRenderer = readFileSync("apps/web/src/templates/chorlove/renderer.tsx", "utf8");
 const normalizeLines = (value: string) => value.replace(/\r\n/g, "\n");
 
 test("Lace source capture and motion module remain tied to the archived originals", () => {
@@ -54,6 +55,31 @@ test("Lace package mirrors source opening and reveal choreography", () => {
   assert.match(css, /\[data-lace-opening\]\{transition:opacity 2s ease-in-out/);
 });
 
+test("Lace gallery preserves the source lightbox controls and motion settings", () => {
+  assert.match(sourceModule, /animation:\{swipe:250\}/);
+  assert.match(sourceModule, /thumbnails:\{position:"bottom",width:84,height:56,border:1,borderRadius:8,padding:0,gap:8\}/);
+  assert.match(sourceModule, /carousel:\{finite:!1\}/);
+  assert.match(sourceModule, /controller:\{closeOnBackdropClick:!0\}/);
+  assert.match(bridge, /yarl__root yarl__portal yarl__no_scroll_padding/);
+  assert.match(bridge, /yarl__thumbnails_thumbnail_active/);
+  assert.match(bridge, /container\.clientWidth\*1\.3/);
+  assert.match(bridge, /transform 250ms ease/);
+  assert.match(bridge, /setInterval\(\(\)=>move\(1\),1500\)/);
+  assert.match(bridge, /event\.key==="ArrowRight"/);
+  assert.match(bridge, /event\.key==="ArrowLeft"/);
+  assert.match(bridge, /hide\(section,entries\.length===0\)/);
+});
+
+test("Lace initial selection preview uses the source sample gallery and creator photos replace it", () => {
+  assert.match(chorloveRenderer, /templateId === "lace"/);
+  assert.match(chorloveRenderer, /preview && sampleWishes && !hasCreatorPhotos/);
+  for (const file of ["gallery-2.webp", "gallery-1.webp", "gallery-3.webp", "gallery-6.webp", "gallery-4.webp", "gallery-5.webp"]) {
+    assert.ok(chorloveRenderer.includes(file), `missing source preview gallery image ${file}`);
+  }
+  assert.match(bridge, /const entries=gallery\.filter\(\(item\)=>item\.src\)/);
+  assert.doesNotMatch(bridge, /lace-empty-photo/);
+});
+
 test("Lace RSVP uses fixed attendance counts without asking guests for a headcount", () => {
   const rsvp = bridge.slice(bridge.indexOf("function renderRsvp"), bridge.indexOf("function renderGift"));
   assert.match(rsvp, /partySize:answer\?0:1/);
@@ -66,7 +92,7 @@ test("Lace keeps the captured sections and hides optional features when unconfig
   assert.match(bridge, /hide\(section,!venue\.name&&!venue\.address&&!url\)/);
   assert.match(bridge, /hide\(section,program\.length===0\)/);
   assert.match(bridge, /hide\(section,!dress\.enabled\)/);
-  assert.match(bridge, /hide\(section,!p\.preview&&entries\.length===0\)/);
+  assert.match(bridge, /hide\(section,entries\.length===0\)/);
   assert.match(bridge, /hide\(section,!p\.preview&&!p\.data\?\.wishesEnabled\)/);
   assert.match(bridge, /hide\(section,!gift\.enabled\)/);
   assert.match(bridge, /hide\(section,!values\.some\(Boolean\)\)/);

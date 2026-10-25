@@ -73,6 +73,16 @@ export function ChorloveInvitation({
           caption: "",
         }));
       }
+    } else if (templateId === "lace") {
+      const hasCreatorPhotos = invitation.gallery.some((photo) => photo.url.trim());
+      if (preview && sampleWishes && !hasCreatorPhotos) {
+        mapped.gallery = ["gallery-2.webp", "gallery-1.webp", "gallery-3.webp", "gallery-6.webp", "gallery-4.webp", "gallery-5.webp"].map((file, index) => ({
+          id: `lace-preview-${index + 1}`,
+          src: `/templates/lace/assets/${file}`,
+          alt: "",
+          caption: "",
+        }));
+      }
     }
     return mapped;
   }, [invitation, frameLocale, guestName, sampleWishes, preview, templateId]);
