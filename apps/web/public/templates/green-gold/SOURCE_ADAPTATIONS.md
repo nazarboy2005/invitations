@@ -55,13 +55,21 @@ dialog on exit, and waits for their transitions before removing the lightbox.
 Only the source-derived
 transition values are used; the Chorlove site and Motion runtime are not
 packaged. Both source and runtime chunk hashes are pinned in
-`source-assets.provenance.json` and the focused source test. In a matched
-390×844 browser run, source/package opacity was .795/.793 at 120ms and 1/1 by
-240ms; both images settled at 367×550, and both dialogs were gone by 400ms
-after close. The first 40ms sample differed (.336/.214), so the local harness
-does not prove frame-origin synchronization; the source page also reports
-React hydration error #418. The package's reduced-motion preview opens without
-an animation and removes the dialog immediately on close.
+`source-assets.provenance.json` and the focused source test. A new paired
+1280×720 browser check found that the source portal places its dialog directly
+under `document.body`, while the package CSS had scoped the lightbox rules
+inside `[data-gg-root]`; that selector could never match the portaled dialog.
+The lightbox, image, and close-control rules are now global `.gg-lightbox`
+selectors. Computed source and package layouts match: dialog 1280×720 with
+centered flex alignment, black .88 backdrop and 12px blur; image at
+(428.8, 43.2), 422.4×633.6; close control at (1218, 16), 46×46. Both source
+and package close transitions ran their captured 300ms fade and scale exit and
+removed the dialog. The original source replay reports React hydration error
+#418, so its click-to-animation scheduling is not used to infer a package
+delay; the source has no explicit transition delay. Prior 390×844 checks
+confirmed the source and package image dimensions settle at 367×550, and the
+package reduced-motion preview opens without animation and removes the dialog
+immediately on close.
 
 The archive capture manifest and full Chorlove image-cache manifest contain no
 separate Green Gold catalog portrait or cover metadata; they list the captured
