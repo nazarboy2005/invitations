@@ -832,6 +832,17 @@ test("HTTP save → publish → public render → reopen and allowed edits prese
       invitation.content["uz-Latn"].address = "Test address";
       invitation.content["uz-Latn"].people = ["Nodir test", "Madina test"];
     }
+    if (invitation.templateId === "golden-hour") {
+      invitation.eventType = "birthday";
+      invitation.content["uz-Latn"] = defaultLocalizedInvitationContent(
+        "birthday",
+        "uz-Latn",
+      );
+      invitation.content["uz-Latn"].message = "Test taklifnoma";
+      invitation.content["uz-Latn"].venueName = "Test venue";
+      invitation.content["uz-Latn"].address = "Test address";
+      invitation.content["uz-Latn"].people = ["Nodir test", "Madina test"];
+    }
   }
   invitation.slug = "spoof1";
   let response = await request("/api/invitations", { invitation });

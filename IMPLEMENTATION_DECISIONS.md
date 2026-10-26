@@ -1419,7 +1419,7 @@ Development agents are distinct from production queue workers. The running app w
   shared RSVP/wishes APIs. Autoplay/first-click playback is removed for the
   established user-interaction-only music rule.
 - Migration `0127_register_golden_hour_template.sql` is applied to the
-  configured database. The row remains private at 150,000 UZS. The catalog and
+  configured database. The catalog and
   shared Invitate renderer use the same localized contract adapter and
   ephemeral `preview-sample.json` values.
 - The captured age `20` and tagline are source sample content, and the shared
@@ -1436,13 +1436,14 @@ Development agents are distinct from production queue workers. The running app w
   console errors. The browser reports reduced motion as false and this session
   cannot emulate it, so runtime parity under that preference is unverified;
   CSS reduction rules and focused source checks are present.
-- A disposable draft row passed `saveInvitation` and `getOwnedInvitation`
-  reload at revision 2 and was deleted afterward. Creator UI save/reopen and
-  public route/API checks remain incomplete while private. The local catalog
-  endpoint excludes Golden Hour and reports `configured: false`; the current
-  shell has no `DATABASE_URL`. Current web typecheck is blocked by unrelated
-  Invitate Wedding fields in the shared preview fixture. Keep Golden Hour
-  unpublished until reduced-motion runtime and creator/public route checks pass.
+- Publication follow-up (2026-10-26): focused Golden Hour checks pass 5/5 and
+  web `tsc --noEmit` passes. The authenticated HTTP lifecycle passed: creator
+  save, publish, public render, reopen, and allowed edits. Migration
+  `0146_publish_invitate_golden_hour.sql` verifies birthday-only metadata and
+  publishes the existing 150,000 UZS row. Reduced-motion runtime comparison
+  remains a human visual follow-up; CSS rules and source checks are present.
+  Normal-motion comparison and exact source artwork/style asset hashes were
+  already verified at the recorded desktop and mobile viewports.
 
 ## Invitate Butterfly implementation status (2026-10-23)
 

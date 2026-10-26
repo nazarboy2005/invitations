@@ -1456,7 +1456,7 @@ export const TEMPLATES: TemplateDefinition[] = [
     currency: "UZS",
     accent: "#2d4a34",
     previewImage: "/templates/invitate-palov/preview.png",
-    published: true,
+    published: false,
   },
   {
     id: "golden-hour",

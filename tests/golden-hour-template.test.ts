@@ -15,10 +15,10 @@ const source = path.join(
 const read = (base: string, file: string) =>
   readFileSync(path.join(base, file), "utf8");
 
-test("Golden Hour is registered privately for birthday events", () => {
+test("Golden Hour is published for birthday events", () => {
   const template = templateById("golden-hour");
   assert.ok(template);
-  assert.equal(template.published, false);
+  assert.equal(template.published, true);
   assert.equal(template.previewEventType, "birthday");
   assert.deepEqual(template.categoryIds, ["birthday"]);
   assert.deepEqual(template.supportedEventTypes, ["birthday"]);
