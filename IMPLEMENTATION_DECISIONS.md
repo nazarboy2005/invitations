@@ -920,7 +920,7 @@ References checked on 2026-10-19: Google autocomplete https://developers.google.
 - Store audio in R2 and reference it through the proposed `media_assets` / `invitation_music` records. Validate actual audio content and size/duration; supported upload formats and exact limits remain undecided. Recommend MP3 playback output, converting accepted source formats in a background worker where necessary.
 - Only when the creator has enabled music, attempt automatic playback when the public invitation opens. Browsers can block audible autoplay; handle failure and preserve a usable Play control. Never force playback after the guest pauses a track that has started successfully. Invitations without music must not show inactive audio controls.
 - Audio loading/conversion must not block displaying the invitation. Creator replacement/removal follows the existing editing deadline.
-- Browser behavior reference checked on 2026-10-19: https://developer.mozilla.org/en-US/docs/Web/Media/Guides/Autoplay. Requirement/design record only; no upload or player implemented.
+- Browser behavior reference checked on 2026-10-19: https://developer.mozilla.org/en-US/docs/Web/Media/Guides/Autoplay. Audible autoplay can be blocked by browser policy; the public route attempts playback and retains guest controls.
 
 ## Source-supported template sections
 
@@ -1437,8 +1437,9 @@ Development agents are distinct from production queue workers. The running app w
   Invitation contract has no age field. The app copy omits both instead of
   displaying or saving sample age data. The catalog artwork uses the exact
   portrait hero image supplied by the source capture.
-- RSVP and wishes use the public invitation APIs; gift details use approved
-  card fields and receipt uploads use the shared private receipt flow. A
+- The original capture has no gift/To'yana section; the app-added gift markup,
+  card mapping/copy action, and receipt hook have been removed. RSVP and wishes
+  use the public invitation APIs. A
   normal-motion comparison against the live source and app preview is complete
   at 390×844 and 1280×720. Hero image/crop, centered desktop column,
   typography, location, and dress-code styling match. Contract-driven preview

@@ -529,61 +529,6 @@
             object-fit: cover;
         }
 
-        /* ================= TO'YONA ================= */
-        .toyona-section {
-            padding: 44px 24px 56px;
-            background: #FEF4E8;
-            text-align: center;
-        }
-
-        .toyona-title {
-            color: var(--olive-dark);
-            font-family: 'Great Vibes', cursive;
-            font-size: 56px;
-        }
-
-        .toyona-card {
-            max-width: 340px;
-            margin: 22px auto 0;
-            padding: 26px 22px;
-            border: 1px solid rgba(123, 119, 76, .35);
-            border-radius: 22px;
-            background: rgba(255, 255, 255, .56);
-            color: var(--olive-deep);
-        }
-
-        .toyona-holder-label,
-        .toyona-number-label {
-            font-family: 'Poppins', sans-serif;
-            font-size: 10px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-
-        .toyona-holder,
-        .toyona-number {
-            margin: 7px 0 18px;
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 23px;
-            overflow-wrap: anywhere;
-        }
-
-        .toyona-copy {
-            padding: 10px 22px;
-            border: 0;
-            border-radius: 999px;
-            background: var(--olive);
-            color: #fff;
-            font: 500 11px Poppins, sans-serif;
-            cursor: pointer;
-        }
-
-        .toyona-status {
-            min-height: 1.2em;
-            margin-top: 8px;
-            font: 12px Poppins, sans-serif;
-        }
-
         /* ================= DRESS CODE ================= */
         .dresscode-section {
             background: var(--olive);

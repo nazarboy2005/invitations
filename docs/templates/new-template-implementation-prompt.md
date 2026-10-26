@@ -28,7 +28,7 @@ Integration and database
 Behavior and privacy
 - Connect controls to real application functions. Never simulate a successful RSVP, wish submission, receipt processing/delivery, or other service operation. Clearly report missing API, environment, or service dependencies.
 - Preserve authentication, ownership, editing deadlines, publication/payment rules, moderation, and privacy. Never pass private invitation/guest data into public renderer props or responses.
-- Respect prefers-reduced-motion. Music is optional and starts only after an appropriate guest interaction; handle rejected playback and preserve the guest's pause/mute choice.
+- Respect prefers-reduced-motion. Music is optional. Public invitations attempt configured music playback when opened; if the browser blocks it, retain the source play control and retry only on guest interaction where supported. Once music has played, preserve the guest's pause/mute choice and never restart it automatically. Catalog preview music remains user-gesture gated.
 
 Verification and handoff
 - Run relevant type checks, lint, build, and meaningful tests. Verify in a browser on mobile and desktop: opening and animation, every section and control, long/short names and copy, empty optionals, multiple repeatable items, all languages and personalized greeting, music on/off, reduced motion, save/reopen, switching templates without data loss, catalog's complete first-page art, and public rendering. Check console, hydration, missing-asset, and network errors. Capture reference-versus-app screenshots and separately verify motion; still images do not establish animation fidelity.

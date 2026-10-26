@@ -27,6 +27,23 @@ test("Palov package preserves the source opening and loads only local source ass
   ]) assert.ok(existsSync(path.join(template, relative)), `${relative} exists`);
 });
 
+test("Palov does not add a To'yana or gift-card section absent from its Invitate source", () => {
+  const source = readFileSync(
+    path.join(
+      root,
+      "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Invitate/Web invitations/invitate.uz/palov.html",
+    ),
+    "utf8",
+  );
+  const packageHtml = read("index.html");
+  const adapter = read("assets/js/palov-adapter.js");
+  const giftUi = /to[’']?yona|sovg[’']?a|gift\s*card|bank\s*card|card\s*number|karta\s*(?:raqami|number)/i;
+
+  assert.doesNotMatch(source, giftUi, "authoritative source contains no gift-card UI");
+  assert.doesNotMatch(packageHtml, giftUi, "adapted page contains no source-unsupported gift UI");
+  assert.doesNotMatch(adapter, giftUi, "adapter adds no gift-card field or control");
+});
+
 test("Palov adapter maps all approved locales and uses live invitation APIs", () => {
   const adapter = read("assets/js/palov-adapter.js");
   for (const locale of ["uz-Latn", "uz-Cyrl", "en", "ru"]) assert.ok(adapter.includes(`"${locale}"`));
@@ -45,7 +62,7 @@ test("Palov adapter maps all approved locales and uses live invitation APIs", ()
 test("Palov local font stylesheet has no remote font requests", () => {
   const css = read("assets/css/palov-fonts.css");
   assert.doesNotMatch(css, /https?:\/\//);
-  const capturedFontCss = readFileSync(path.join(root, "Invitations - this folder will be removed from production/Invitate/Web invitations/fonts.googleapis.com/css2__8254095ff41b2a53"), "utf8");
+  const capturedFontCss = readFileSync(path.join(root, "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Invitate/Web invitations/fonts.googleapis.com/css2__8254095ff41b2a53"), "utf8");
   const normalizedCapturedCss = capturedFontCss.replace(/url\((https:\/\/fonts\.gstatic\.com\/[^)]+)\)/g, (_match, url: string) => {
     const filename = path.basename(new URL(url).pathname);
     assert.ok(existsSync(path.join(template, "assets/fonts", filename)), `${filename} is packaged`);
@@ -62,7 +79,7 @@ test("Invitate Palov registration publishes only for morning osh compatibility",
   assert.ok(template);
   assert.deepEqual(template.categoryIds, ["osh"]);
   assert.deepEqual(template.supportedEventTypes, ["osh"]);
-  assert.equal(template.published, true);
+  assert.equal(template.published, false, "runtime catalog publication comes from the database");
   assert.equal(template.previewImage, "/templates/invitate-palov/preview.png");
   assert.ok(existsSync(path.join(root, "apps/web/public/templates/invitate-palov/preview.png")));
   assert.match(read("source-provenance.json"), /"dimensions": "480x860"/);

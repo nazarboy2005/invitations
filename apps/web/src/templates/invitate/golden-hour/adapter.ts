@@ -85,7 +85,6 @@ export function makeGoldenHourData(
         name: color.name[locale] ?? "",
       })),
     },
-    gift: invitation.gift,
     rsvp: invitation.rsvp,
     wishesEnabled: invitation.wishes.enabled,
     locale,

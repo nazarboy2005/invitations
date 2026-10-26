@@ -16,7 +16,7 @@ import {
 const root = process.cwd();
 const source = path.join(
   root,
-  "Invitations - this folder will be removed from production/Marxaba/Osh va iftorlik/templates/nahorgi-osh",
+  "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Marxaba/Osh va iftorlik/templates/nahorgi-osh",
 );
 const pkg = path.join(root, "apps/web/public/templates/nahorgi-osh");
 const renderer = path.join(root, "apps/web/src/templates/nahorgi-osh");
@@ -173,6 +173,23 @@ test("captured body, visual source, localized copy, metadata, and artwork are pr
   );
   assert.equal(metaContext.window.TEMPLATE_META?.slug, "nahorgi-osh");
   assert.equal(metaContext.window.TEMPLATE_META?.preview, "preview.webp");
+});
+
+test("Nahorgi Osh gift section and reveal are present in its original source", () => {
+  const sourceHtml = read(source, "index.html");
+  const packageHtml = read(pkg, "index.html");
+  const sourceJs = read(source, "template.js");
+  const packageJs = read(pkg, "template.js");
+
+  // This is a source feature, not a platform-added generic wedding section.
+  assert.match(body(sourceHtml), /<section class="section section--toyona" id="toyona" data-section="toyona">/);
+  assert.match(body(sourceHtml), /<details class="gift"><summary>/);
+  assert.match(body(sourceHtml), /data-slot="toyona\.cardNumber"/);
+  assert.match(body(packageHtml), /<section class="section section--toyona" id="toyona" data-section="toyona">/);
+  assert.match(body(packageHtml), /<details class="gift"><summary>/);
+  assert.match(sourceJs, /section\.querySelectorAll\(["']\.countdown,\.program__item,\.gallery__item,\.rsvp__choices button,\.gift["']\)/);
+  assert.match(packageJs, /section\.querySelectorAll\(["']\.countdown,\.program__item,\.gallery__item,\.rsvp__choices button,\.gift["']\)/);
+  assert.match(read(pkg, "contract-adapter.css"), /#toyona \.gift__details[^}]*display:\s*none/s);
 });
 
 test("all fixed page copy and accessibility labels have English and Russian entries", () => {

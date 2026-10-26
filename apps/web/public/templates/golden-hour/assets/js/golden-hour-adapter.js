@@ -2,10 +2,10 @@
   "use strict";
 
   const words = {
-    "uz-Latn": { dear: "Hurmatli", guests: "mehmonlar", night: "kechasi", edition: "tug‘ilgan kun", party: "Bayram", days: "kun", hours: "soat", minutes: "daqiqa", seconds: "soniya", timing: "Dastur", timingParts: ["kun", "dasturi"], timingIntro: "Bayramimizning har bir lahzasi mehr bilan rejalashtirilgan.", arrival: "Mehmonlar tashrifi", location: "Manzil", locationDesc: "Bayram o‘tkaziladigan joy", map: "Xaritadan ko‘rish", dress: "KIYINISH USLUBI", rsvp: "Ishtirokingizni tasdiqlang", rsvpDesc: "Bayramda qatnasha olishingizni bildiring.", nameLabel: "Ism-familiyangiz", name: "Ism va familiyangiz", question: "Qatnasha olasizmi?", yes: "Ha, mamnuniyat bilan", no: "Afsuski, qatnasha olmayman", wishLabel: "Tilak qoldiring", wish: "Iliq tilagingizni yozing…", send: "Yuborish", sending: "Yuborilmoqda…", errorTitle: "Tekshirib ko‘ring", error: "Ismingizni yozing va javobni tanlang.", preview: "Ko‘rish rejimida javob yuborib bo‘lmaydi.", failure: "Javob yuborilmadi. Qayta urinib ko‘ring.", wishFailure: "Javobingiz saqlandi, ammo tilak yuborilmadi.", thanks: "Rahmat!", thanksYes: "Sizni intizorlik bilan kutamiz.", thanksNo: "Javobingiz uchun rahmat.", close: "Yopish", closing: "Siz bilan birga nishonlashni intiqlik bilan kutamiz.", rights: "Taklifnoma", gift: "To‘yona", copy: "Nusxalash", copied: "Nusxalandi", giftCopyError: "Nusxalab bo‘lmadi." },
-    "uz-Cyrl": { dear: "Ҳурматли", guests: "меҳмонлар", night: "кечаси", edition: "туғилган кун", party: "Байрам", days: "кун", hours: "соат", minutes: "дақиқа", seconds: "сония", timing: "Дастур", timingParts: ["кун", "дастури"], timingIntro: "Байрамимизнинг ҳар бир лаҳзаси меҳр билан режалаштирилган.", arrival: "Меҳмонлар ташрифи", location: "Манзил", locationDesc: "Байрам ўтказиладиган жой", map: "Харитадан кўриш", dress: "КИЙИНИШ УСЛУБИ", rsvp: "Иштирокингизни тасдиқланг", rsvpDesc: "Байрамда қатнашишингиз мумкинлигини билдиринг.", nameLabel: "Исм-фамилиянгиз", name: "Исм ва фамилиянгиз", question: "Қатнаша оласизми?", yes: "Ҳа, мамнуният билан", no: "Афсуски, қатнаша олмайман", wishLabel: "Тилак қолдиринг", wish: "Илиқ тилагингизни ёзинг…", send: "Юбориш", sending: "Юборилмоқда…", errorTitle: "Текшириб кўринг", error: "Исмингизни ёзинг ва жавобни танланг.", preview: "Кўриш режимида жавоб юбориб бўлмайди.", failure: "Жавоб юборилмади. Қайта уриниб кўринг.", wishFailure: "Жавобингиз сақланди, аммо тилак юборилмади.", thanks: "Раҳмат!", thanksYes: "Сизни интизорлик билан кутамиз.", thanksNo: "Жавобингиз учун раҳмат.", close: "Ёпиш", closing: "Сиз билан бирга нишонлашни интиқлик билан кутамиз.", rights: "Таклифнома", gift: "Тўёна", copy: "Нусхалаш", copied: "Нусхаланди", giftCopyError: "Нусхалаб бўлмади." },
-    en: { dear: "Dear", guests: "Guests", night: "night", edition: "birthday", party: "Celebration", days: "days", hours: "hours", minutes: "mins", seconds: "secs", timing: "Timing", timingParts: ["of", "the", "day"], timingIntro: "Every moment of this celebration has been planned with love.", arrival: "Guest Arrival", location: "Location", locationDesc: "Where the celebration takes place", map: "View on the Map", dress: "DRESS CODE", rsvp: "Confirm Attendance", rsvpDesc: "Please let us know if you can join the celebration.", nameLabel: "Full name", name: "Your name & surname", question: "Will you be attending?", yes: "Joyfully accepts", no: "Regretfully declines", wishLabel: "Leave a wish", wish: "Write your warm wishes here…", send: "Send", sending: "Sending…", errorTitle: "Please check your response", error: "Please enter your name and choose a response.", preview: "Responses cannot be sent in preview.", failure: "Your response could not be sent. Please try again.", wishFailure: "Your RSVP was saved, but your wish could not be sent.", thanks: "Thank you!", thanksYes: "We look forward to celebrating with you.", thanksNo: "Thank you for letting us know.", close: "Close", closing: "We can’t wait to celebrate with you.", rights: "Invitation", gift: "Gift details", copy: "Copy", copied: "Copied", giftCopyError: "Could not copy." },
-    ru: { dear: "Дорогие", guests: "гости", night: "вечер", edition: "день рождения", party: "Праздник", days: "дней", hours: "часов", minutes: "минут", seconds: "секунд", timing: "Программа", timingParts: ["праздника"], timingIntro: "Каждый момент праздника мы спланировали с любовью.", arrival: "Сбор гостей", location: "Место проведения", locationDesc: "Где состоится праздник", map: "Открыть карту", dress: "ДРЕСС-КОД", rsvp: "Подтвердите участие", rsvpDesc: "Сообщите, сможете ли вы присоединиться к празднику.", nameLabel: "Имя и фамилия", name: "Ваше имя и фамилия", question: "Вы будете присутствовать?", yes: "С радостью буду", no: "К сожалению, не смогу", wishLabel: "Оставьте пожелание", wish: "Напишите тёплые слова…", send: "Отправить", sending: "Отправка…", errorTitle: "Проверьте ответ", error: "Введите имя и выберите вариант ответа.", preview: "В режиме просмотра ответ отправить нельзя.", failure: "Не удалось отправить ответ. Попробуйте ещё раз.", wishFailure: "Ответ сохранён, но пожелание отправить не удалось.", thanks: "Спасибо!", thanksYes: "Будем ждать встречи с вами.", thanksNo: "Спасибо, что сообщили.", close: "Закрыть", closing: "Будем рады отпраздновать этот день вместе с вами.", rights: "Приглашение", gift: "Подарок", copy: "Скопировать", copied: "Скопировано", giftCopyError: "Не удалось скопировать." },
+    "uz-Latn": { dear: "Hurmatli", guests: "mehmonlar", night: "kechasi", edition: "tug‘ilgan kun", party: "Bayram", days: "kun", hours: "soat", minutes: "daqiqa", seconds: "soniya", timing: "Dastur", timingParts: ["kun", "dasturi"], timingIntro: "Bayramimizning har bir lahzasi mehr bilan rejalashtirilgan.", arrival: "Mehmonlar tashrifi", location: "Manzil", locationDesc: "Bayram o‘tkaziladigan joy", map: "Xaritadan ko‘rish", dress: "KIYINISH USLUBI", rsvp: "Ishtirokingizni tasdiqlang", rsvpDesc: "Bayramda qatnasha olishingizni bildiring.", nameLabel: "Ism-familiyangiz", name: "Ism va familiyangiz", question: "Qatnasha olasizmi?", yes: "Ha, mamnuniyat bilan", no: "Afsuski, qatnasha olmayman", wishLabel: "Tilak qoldiring", wish: "Iliq tilagingizni yozing…", send: "Yuborish", sending: "Yuborilmoqda…", errorTitle: "Tekshirib ko‘ring", error: "Ismingizni yozing va javobni tanlang.", preview: "Ko‘rish rejimida javob yuborib bo‘lmaydi.", failure: "Javob yuborilmadi. Qayta urinib ko‘ring.", wishFailure: "Javobingiz saqlandi, ammo tilak yuborilmadi.", thanks: "Rahmat!", thanksYes: "Sizni intizorlik bilan kutamiz.", thanksNo: "Javobingiz uchun rahmat.", close: "Yopish", closing: "Siz bilan birga nishonlashni intiqlik bilan kutamiz.", rights: "Taklifnoma" },
+    "uz-Cyrl": { dear: "Ҳурматли", guests: "меҳмонлар", night: "кечаси", edition: "туғилган кун", party: "Байрам", days: "кун", hours: "соат", minutes: "дақиқа", seconds: "сония", timing: "Дастур", timingParts: ["кун", "дастури"], timingIntro: "Байрамимизнинг ҳар бир лаҳзаси меҳр билан режалаштирилган.", arrival: "Меҳмонлар ташрифи", location: "Манзил", locationDesc: "Байрам ўтказиладиган жой", map: "Харитадан кўриш", dress: "КИЙИНИШ УСЛУБИ", rsvp: "Иштирокингизни тасдиқланг", rsvpDesc: "Байрамда қатнашишингиз мумкинлигини билдиринг.", nameLabel: "Исм-фамилиянгиз", name: "Исм ва фамилиянгиз", question: "Қатнаша оласизми?", yes: "Ҳа, мамнуният билан", no: "Афсуски, қатнаша олмайман", wishLabel: "Тилак қолдиринг", wish: "Илиқ тилагингизни ёзинг…", send: "Юбориш", sending: "Юборилмоқда…", errorTitle: "Текшириб кўринг", error: "Исмингизни ёзинг ва жавобни танланг.", preview: "Кўриш режимида жавоб юбориб бўлмайди.", failure: "Жавоб юборилмади. Қайта уриниб кўринг.", wishFailure: "Жавобингиз сақланди, аммо тилак юборилмади.", thanks: "Раҳмат!", thanksYes: "Сизни интизорлик билан кутамиз.", thanksNo: "Жавобингиз учун раҳмат.", close: "Ёпиш", closing: "Сиз билан бирга нишонлашни интиқлик билан кутамиз.", rights: "Таклифнома" },
+    en: { dear: "Dear", guests: "Guests", night: "night", edition: "birthday", party: "Celebration", days: "days", hours: "hours", minutes: "mins", seconds: "secs", timing: "Timing", timingParts: ["of", "the", "day"], timingIntro: "Every moment of this celebration has been planned with love.", arrival: "Guest Arrival", location: "Location", locationDesc: "Where the celebration takes place", map: "View on the Map", dress: "DRESS CODE", rsvp: "Confirm Attendance", rsvpDesc: "Please let us know if you can join the celebration.", nameLabel: "Full name", name: "Your name & surname", question: "Will you be attending?", yes: "Joyfully accepts", no: "Regretfully declines", wishLabel: "Leave a wish", wish: "Write your warm wishes here…", send: "Send", sending: "Sending…", errorTitle: "Please check your response", error: "Please enter your name and choose a response.", preview: "Responses cannot be sent in preview.", failure: "Your response could not be sent. Please try again.", wishFailure: "Your RSVP was saved, but your wish could not be sent.", thanks: "Thank you!", thanksYes: "We look forward to celebrating with you.", thanksNo: "Thank you for letting us know.", close: "Close", closing: "We can’t wait to celebrate with you.", rights: "Invitation" },
+    ru: { dear: "Дорогие", guests: "гости", night: "вечер", edition: "день рождения", party: "Праздник", days: "дней", hours: "часов", minutes: "минут", seconds: "секунд", timing: "Программа", timingParts: ["праздника"], timingIntro: "Каждый момент праздника мы спланировали с любовью.", arrival: "Сбор гостей", location: "Место проведения", locationDesc: "Где состоится праздник", map: "Открыть карту", dress: "ДРЕСС-КОД", rsvp: "Подтвердите участие", rsvpDesc: "Сообщите, сможете ли вы присоединиться к празднику.", nameLabel: "Имя и фамилия", name: "Ваше имя и фамилия", question: "Вы будете присутствовать?", yes: "С радостью буду", no: "К сожалению, не смогу", wishLabel: "Оставьте пожелание", wish: "Напишите тёплые слова…", send: "Отправить", sending: "Отправка…", errorTitle: "Проверьте ответ", error: "Введите имя и выберите вариант ответа.", preview: "В режиме просмотра ответ отправить нельзя.", failure: "Не удалось отправить ответ. Попробуйте ещё раз.", wishFailure: "Ответ сохранён, но пожелание отправить не удалось.", thanks: "Спасибо!", thanksYes: "Будем ждать встречи с вами.", thanksNo: "Спасибо, что сообщили.", close: "Закрыть", closing: "Будем рады отпраздновать этот день вместе с вами.", rights: "Приглашение" },
   };
 
   let data = {};
@@ -185,21 +185,6 @@
     swatches.hidden = !(dress.colors || []).length;
   }
 
-  function renderGift() {
-    const gift = data.gift || {};
-    const section = $(".gift-section");
-    if (!section) return;
-    const cardNumber = (gift.cardNumber || "").trim();
-    const cardHolder = (gift.cardHolder || "").trim();
-    section.hidden = !gift.enabled || (!cardNumber && !cardHolder);
-    text($(".gift-title"), localeWords().gift);
-    text($(".gift-holder"), cardHolder);
-    text($(".gift-number"), cardNumber);
-    text($(".gift-copy"), localeWords().copy);
-    const copy = $(".gift-copy");
-    if (copy) copy.hidden = !cardNumber;
-  }
-
   function renderVenue() {
     const venue = data.venue || {};
     const section = $(".location");
@@ -237,7 +222,6 @@
     renderProgram();
     renderVenue();
     renderDressCode();
-    renderGift();
     renderGallery();
     const rsvp = $(".rsvp");
     if (rsvp) rsvp.hidden = !data.rsvp?.enabled && !data.wishesEnabled;
@@ -262,16 +246,6 @@
     document.documentElement.classList.add("golden-hour-ready");
     window.GoldenHourSource?.initialize(data.dateTime, musicUrl);
   }
-
-  $(".gift-copy")?.addEventListener("click", async () => {
-    const status = $(".gift-status");
-    try {
-      await navigator.clipboard.writeText((data.gift?.cardNumber || "").trim());
-      text(status, localeWords().copied);
-    } catch {
-      text(status, localeWords().giftCopyError);
-    }
-  });
 
   const form = $(".rsvp-form");
   const popup = $("#rsvpPopup");

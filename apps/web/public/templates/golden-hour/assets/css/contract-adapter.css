@@ -60,43 +60,8 @@
   text-shadow: 0 1px 8px rgb(0 0 0 / 60%);
   overflow-wrap: anywhere;
 }
-.gift-section {
-  padding: clamp(34px, 8vw, 76px) 24px;
-  text-align: center;
-  color: #49372f;
-  background: #f6eee5;
-  font-family: var(--font-serif, Georgia, serif);
-}
-.gift-title {
-  font-size: clamp(25px, 5vw, 38px);
-  margin-bottom: 16px;
-}
-.gift-holder,
-.gift-number {
-  font-family: var(--font-sans, Arial, sans-serif);
-  font-size: clamp(15px, 2.4vw, 20px);
-  letter-spacing: .04em;
-  overflow-wrap: anywhere;
-}
-.gift-number-row {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-top: 12px;
-}
-.gift-copy {
-  border: 1px solid currentColor;
-  border-radius: 999px;
-  background: transparent;
-  color: inherit;
-  padding: 8px 14px;
-  font: inherit;
-  cursor: pointer;
-}
-.gift-status { min-height: 1.5em; margin: 10px 0 0; }
-.gift-section[hidden] { display: none !important; }
+/* Golden Hour's captured birthday design has no gift or receipt section. */
+.platform-extra[data-platform-extra="receipt"] { display: none !important; }
 
 @media (prefers-reduced-motion: reduce) {
   .golden-hour-ready body,

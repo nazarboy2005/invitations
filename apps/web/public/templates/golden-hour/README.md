@@ -17,8 +17,9 @@ The local package preserves the captured page structure, stylesheet, images,
 and font faces. `assets/js/golden-hour-source.js` adapts the captured script's
 countdown, scroll reveals, and music toggle; `golden-hour-adapter.js` handles
 typed data and application services. The absent PHP endpoint is replaced by
-the public RSVP/wishes APIs. Source autoplay and first-click-anywhere playback
-are removed so optional creator music starts only from the music control.
+the public RSVP/wishes APIs. Public invitations attempt playback on open
+through the shared route tracker; the source control remains available for
+pause and replay, subject to browser autoplay policy.
 `contract-adapter.css` contains the app-only data presentation and reduced
 motion additions. The source analytics beacon, site links, fixed
 invitee/date/venue copy, and age demo value are not loaded. The source
@@ -39,13 +40,13 @@ Byte-level provenance and every source-to-platform change are listed in
 - The source has no age field in the shared Invitation contract. Its fixed
   captured age and slogan are omitted so demo content is never shown as creator
   data. No age requirement or schema field was invented.
-- To‘yona card details and copy control use the approved gift fields. Receipt
-  uploads use the shared private receipt section and public receipt API. Empty
-  gift details and receipt controls stay hidden.
+- The original birthday capture has no gift or To‘yona section. Gift fields,
+  card-copy controls, and the shared receipt upload are omitted from this
+  template.
 - RSVP and wishes use the public invitation APIs; preview submissions are
-  blocked and moderation remains app-managed. Music starts only after a guest
-  presses the control. Reduced-motion rules disable reveal and decorative
-  motion.
+  blocked and moderation remains app-managed. Public music attempts playback on
+  open and remains controllable through the source music control. Reduced-motion
+  rules disable reveal and decorative motion.
 
 Golden Hour uses the shared Invitate iframe renderer and supports `birthday`
 only. Its `birthday` category assignment is independent from event support.

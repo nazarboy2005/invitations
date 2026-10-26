@@ -137,7 +137,7 @@ test("source stylesheet, script, and five artwork files are preserved exactly", 
   }
 });
 
-test("shared renderer maps Golden Hour to contract data and private gift receipts", () => {
+test("Golden Hour omits unsupported gift fields absent from its source", () => {
   const renderer = read(root, "apps/web/src/templates/invitate/renderer.tsx");
   const adapter = read(
     root,
@@ -157,7 +157,6 @@ test("shared renderer maps Golden Hour to contract data and private gift receipt
     "invitation.program",
     "invitation.venue",
     "invitation.gallery",
-    "invitation.gift",
     "invitation.rsvp",
     "invitation.wishes",
     "invitation.dressCode",
@@ -178,4 +177,27 @@ test("shared renderer maps Golden Hour to contract data and private gift receipt
   assert.match(registry, /"golden-hour"/);
   assert.match(migration, /VALUES \('golden-hour', 'birthday'\)/);
   assert.match(migration, /published = false/);
+  assert.doesNotMatch(adapter, /invitation\.gift|gift:/);
+  const sourceHtml = read(source, "golden-hour.html");
+  const sourceCss = read(source, "assets/css/golden-hour.css");
+  const sourceJs = read(source, "assets/js/golden-hour.js");
+  for (const [file, text] of [
+    ["source HTML", sourceHtml],
+    ["source CSS", sourceCss],
+    ["source JavaScript", sourceJs],
+  ] as const)
+    assert.doesNotMatch(
+      text,
+      /gift|to.?yana|to.?yona|toyona|cardholder|cardnumber|sovg/i,
+      `${file} contains no gift section or card entry`,
+    );
+  const packageHtml = read(pub, "index.html");
+  const packageScript = read(pub, "assets/js/golden-hour-adapter.js");
+  const packageCss = read(pub, "assets/css/contract-adapter.css");
+  assert.doesNotMatch(packageHtml, /gift-section|gift-number|gift-copy/i);
+  assert.doesNotMatch(
+    packageScript,
+    /gift|to.?yana|to.?yona|toyona|cardholder|cardnumber|sovg/i,
+  );
+  assert.match(packageCss, /data-platform-extra="receipt"/);
 });

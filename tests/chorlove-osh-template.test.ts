@@ -31,6 +31,17 @@ test("Chorlove Osh package retains source sections and omits guest headcount", (
   assert.match(bridge, /instagram = contacts\.find\(\(c\) => c\.type === "instagram"\)/);
 });
 
+test("Chorlove Osh does not inject To'yana UI absent from its captured source", () => {
+  const html = readPackage("index.html");
+  const bridge = readPackage("bridge.js");
+
+  // The captured Osh component has no gift/bank-card section. Keep both the
+  // isolated package and shared renderer free of a platform-injected variant.
+  assert.doesNotMatch(html, /to['’]?y?ona|sovg['’]?a|gift\s*card|bank\s*card|card\s*number/i);
+  assert.doesNotMatch(bridge, /to['’]?y?ona|sovg['’]?a|giftCard|gift-card|bankCard/i);
+  assert.match(chorloveRenderer, /templateId !== "osh" && templateId !== "palov"/);
+});
+
 test("Chorlove Osh is a distinct published Osh template", () => {
   const osh = TEMPLATES.find((template) => template.id === "osh");
   assert.ok(osh);

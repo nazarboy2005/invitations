@@ -149,6 +149,10 @@ test("Golden Card keeps source-absent sections hidden and uses count-free opt-in
     dressCode: false,
   });
   assert.doesNotMatch(html, /data-golden-rsvp|golden-rsvp|toyona|dress.?code/i);
+  assert.doesNotMatch(
+    `${html}\n${bridge}\n${styles}`,
+    /toyona|to'yona|gift(?:.?card|.?disclosure)?|sovg(?:a|['’]a)|receipt.?upload|bank.?card|card.?number|hisob.?raqam/i,
+  );
   assert.match(bridge, /syncRsvp\(payload, words\)/);
   assert.match(bridge, /payload\?\.data\?\.rsvp\?\.enabled === true/);
   assert.match(bridge, /\/api\/public\/invitations\/\$\{encodeURIComponent\(current\.invitationId \|\| ""\)\}\/rsvp/);

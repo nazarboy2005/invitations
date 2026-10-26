@@ -1,4 +1,5 @@
 import { readFileSync } from "./helpers/source-files";
+import { existsSync } from "node:fs";
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 
@@ -41,9 +42,9 @@ test("Fairy source adapter excludes captured invitation data and binds reduced m
     "utf8",
   );
   assert.doesNotMatch(html, /Baxrom|Sayyora|10\.10\.2026|stats\.tolipov|fonts\.googleapis/);
-  assert.match(html, /toyona-section/);
-  assert.match(script, /data\.toyona/);
-  assert.match(script, /navigator\.clipboard\.writeText/);
+  assert.doesNotMatch(html, /toyona|gift|cardholder|card number/i);
+  assert.doesNotMatch(script, /toyona|gift|cardholder|card number|navigator\.clipboard\.writeText/i);
+  assert.doesNotMatch(css, /toyona|gift|cardholder|card number/i);
   assert.doesNotMatch(script, /Отправлено — спасибо/);
   assert.doesNotMatch(sourceScript, /Отправлено — спасибо|anketaSubmit\.addEventListener/);
   assert.match(script, /data\.apiBase/);
@@ -55,6 +56,29 @@ test("Fairy source adapter excludes captured invitation data and binds reduced m
   assert.doesNotMatch(capturedFonts, /https?:\/\//);
   assert.equal((capturedFonts.match(/@font-face/g) ?? []).length, 16);
   assert.match(html, /fairy-adapter\.js/);
+});
+
+test("Fairy keeps gift/card UI out because it was added during adaptation", () => {
+  const sourcePath =
+    "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Invitate/Web invitations/invitate.uz";
+  assert.ok(existsSync(`${sourcePath}/fairy.html`), "authoritative Fairy source capture is present");
+  const sourceHtml = readFileSync(`${sourcePath}/fairy.html`, "utf8");
+  const sourceCss = readFileSync(`${sourcePath}/assets/css/fairy.css`, "utf8");
+  const sourceScript = readFileSync(`${sourcePath}/assets/js/fairy.js`, "utf8");
+  const html = readFileSync("apps/web/public/templates/fairy/index.html", "utf8");
+  const css = readFileSync("apps/web/public/templates/fairy/assets/css/fairy.css", "utf8");
+  const script = readFileSync(
+    "apps/web/public/templates/fairy/assets/js/fairy-adapter.js",
+    "utf8",
+  );
+
+  const sourceText = /toyona|to.yana|gift[- ](?:section|card)|cardholder|card[- ]number|карта эгаси|карта рақами|номер карты|владелец карты/i;
+  assert.doesNotMatch(sourceHtml, sourceText);
+  assert.doesNotMatch(sourceCss, /toyona|gift|cardholder|card[- ]number/i);
+  assert.doesNotMatch(sourceScript, /toyona|gift|cardholder|card[- ]number|clipboard.*card/i);
+  assert.doesNotMatch(html, /toyona|gift|cardholder|card number/i);
+  assert.doesNotMatch(css, /toyona|gift|cardholder|card number/i);
+  assert.doesNotMatch(script, /toyona|gift|cardholder|card number/i);
 });
 
 test("Fairy preview artwork provenance uses the canonical preview fixture", () => {

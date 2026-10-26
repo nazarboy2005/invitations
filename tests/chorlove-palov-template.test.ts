@@ -80,6 +80,10 @@ test("Chorlove Palov adapter maps approved locales, RSVP, and reduced motion", (
     chorloveRenderer,
     /templateId === "palov"\s*\?\s*\{\s*story: false,\s*dressCode: false,\s*extraPeople: false,/s,
   );
+  assert.match(
+    chorloveRenderer,
+    /invitation,\s*data,\s*frameLocale,\s*invitationId,\s*guestToken,\s*preview,\s*templateId !== "osh" && templateId !== "palov"/s,
+  );
   const renderer = readFileSync(path.join(root, "apps/web/src/templates/anor/renderer.tsx"), "utf8");
   assert.match(renderer, /invitation\.contacts\.instagramUrl/);
   const legacyInvitation = invitationSchema.parse({

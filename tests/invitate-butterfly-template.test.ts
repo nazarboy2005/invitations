@@ -70,3 +70,30 @@ test("Butterfly opening artwork and source package are present and locally bound
   assert.match(css, /marcellus-cyrillic\.woff2/);
   assert.match(html, /Bismillahir rohmanir rohim/);
 });
+
+test("Butterfly keeps gift/to'yana UI absent because it is absent from the Invitate source", () => {
+  const sourceRoot =
+    "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Invitate/Web invitations/invitate.uz";
+  const sourceHtml = readFileSync(`${sourceRoot}/butterfly.html`, "utf8");
+  const sourceScript = readFileSync(`${sourceRoot}/assets/js/butterfly.js`, "utf8");
+  const sourceCss = readFileSync(`${sourceRoot}/assets/css/butterfly.css`, "utf8");
+  const packagedHtml = readFileSync("apps/web/public/templates/butterfly/index.html", "utf8");
+  const packagedScript = readFileSync(
+    "apps/web/public/templates/butterfly/assets/js/butterfly.js",
+    "utf8",
+  );
+  const renderer = readFileSync(
+    "apps/web/src/templates/invitate/butterfly-renderer.tsx",
+    "utf8",
+  );
+
+  // The captured Butterfly HTML has only its opening, photo gallery, invitation,
+  // location/map and footer. Preserve that source structure in the public package.
+  const absentGiftUi = /(?:to['’]?yana|toyona|sovg['’]?a|gift(?:[-_ ]?(?:card|account|section|details))?|bank[-_ ]?(?:card|account)|card[-_ ]?number)/i;
+  assert.doesNotMatch(sourceHtml, absentGiftUi);
+  assert.doesNotMatch(sourceScript, absentGiftUi);
+  assert.doesNotMatch(sourceCss, absentGiftUi);
+  assert.doesNotMatch(packagedHtml, absentGiftUi);
+  assert.doesNotMatch(packagedScript, absentGiftUi);
+  assert.doesNotMatch(renderer, absentGiftUi);
+});

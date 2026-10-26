@@ -58,6 +58,7 @@ test("Cloud Castle package contains only sanitized markup and no captured websit
   assert.match(html, /data-chorlove-i18n="openInvitation"/);
   assert.match(html, /data-chorlove-gallery-item/);
   assert.match(html, /data-chorlove-rsvp/);
+  assert.match(html, /data-chorlove-gift/);
 });
 
 test("Cloud Castle bridge maps the shared data and existing RSVP/wish services", async () => {
@@ -186,6 +187,16 @@ test("Cloud Castle gift modal matches source interaction, card styling and image
   assert.match(js, /dialog\.tabIndex = -1/);
   assert.match(js, /dialog\.focus\(\)/);
   assert.doesNotMatch(js, /close\.focus\(\)/);
+  assert.ok(original, "the archived Cloud Castle source capture is available for comparison");
+  assert.match(original, /aria-label="Open gift box"/);
+  assert.match(original, /images\/cloud-castle\/gift\/gift\.webp/);
+});
+
+test("Cloud Castle starts configured public music on opening and leaves pause under guest control", async () => {
+  const js = await readFile(bridge, "utf8");
+  assert.match(js, /if \(audio && state\?\.data\.music\?\.url && !state\.silentPlayback\) audio\.play\(\)\.catch\(\(\) => \{\}\)/);
+  assert.match(js, /if \(audio\.paused\) \{ try \{ await audio\.play\(\)/);
+  assert.match(js, /else \{ audio\.pause\(\); toggle\.textContent = "♫"; \}/);
 });
 
 test("Cloud Castle opening and hero motion follow the captured page module", async () => {

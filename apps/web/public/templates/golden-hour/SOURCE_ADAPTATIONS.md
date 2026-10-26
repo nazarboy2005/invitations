@@ -17,15 +17,15 @@ The following packaged files match the capture byte-for-byte:
 | `assets/images/golden-hour/location.png`    | `assets/images/golden-hour/location.png`    | `839C8E7A43E9C781C4F18C48738C05A6D23B943034952FEAFE3CF37E645AA97`  |
 | `assets/images/golden-hour/footerimage.png` | `assets/images/golden-hour/footerimage.png` | `6EC900BAFDF18500070680BF3416C9EC1EA70700E117C96B182BF9095B805348` |
 
-The original font stylesheet response and referenced local WOFF2 files are copied to `assets/css/fonts.css` and `assets/fonts/`; 39 font-face rules resolve to 23 local font files with none missing. Page CSS is unchanged. The captured JavaScript and audio remain in the package for audit and design completeness. The active `golden-hour-source.js` retains the source countdown, 1-second timer, 0.18-threshold IntersectionObserver, and music toggle behavior, while taking date and optional music URL from the typed adapter. The source track is not installed as creator data or played automatically. The active data adapter handles dynamic text, sections, public RSVP/wishes APIs, and guest privacy.
+The original font stylesheet response and referenced local WOFF2 files are copied to `assets/css/fonts.css` and `assets/fonts/`; 39 font-face rules resolve to 23 local font files with none missing. Page CSS is unchanged. The captured JavaScript and audio remain in the package for audit and design completeness. The active `golden-hour-source.js` retains the source countdown, 1-second timer, 0.18-threshold IntersectionObserver, and music toggle behavior, while taking date and optional music URL from the typed adapter. Public invitations attempt the configured track on open through the shared route tracker; the source toggle remains available for pause and replay. The active data adapter handles dynamic text, sections, public RSVP/wishes APIs, and guest privacy.
 
 ## Required application changes
 
 - The fixed date is replaced by contract date/time/timezone. The fixed age and “Best Year Yet” tagline are omitted because the shared contract has no age field and they are captured demo invitation content.
-- Source music is an optional creator field. The captured soundtrack (`assets/audio/lanadel.mp3`, 9,386,537 bytes) is packaged byte-for-byte but not bound as invitation data or a default. Autoplay and first-click-anywhere playback are removed; the original toggle remains, and playback begins only from that control.
+- Source music is an optional creator field. The captured soundtrack (`assets/audio/lanadel.mp3`, 9,386,537 bytes) is packaged byte-for-byte but not bound as invitation data or a default. Public invitations attempt the creator-configured track on open; browser-blocked playback retains the original toggle for guest control.
 - The captured `golden-hour.php` RSVP endpoint is not present in the archive. Its submission is replaced with the shared invitation RSVP and moderated-wishes APIs; previews block requests.
 - Site analytics, social/provider links, and fixed sample invitation details are not loaded. Contacts come from invitation data.
-- App-only styles, including data wrapping, loading-state visibility, hidden-section behavior, gift receipt presentation, and reduced-motion overrides, live in `assets/css/contract-adapter.css`. The source stylesheet remains exact.
+- App-only styles, including data wrapping, loading-state visibility, hidden-section behavior, and reduced-motion overrides, live in `assets/css/contract-adapter.css`. The receipt hook is hidden because the captured birthday source has no gift section. The source stylesheet remains exact.
 
 ## Verification status
 

@@ -85,7 +85,7 @@ export function ChorloveInvitation({
     invitationId,
     guestToken,
     preview,
-    templateId !== "osh",
+    templateId !== "osh" && templateId !== "palov",
     templateId === "palov"
       ? {
           story: false,

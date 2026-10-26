@@ -73,6 +73,31 @@ test("Velora packages its source page, local fonts and controls without sample/r
     assert.ok(existsSync(path.join(packageRoot, "assets/fonts", font)), `${font} exists`);
 });
 
+test("Velora keeps gift/to'yona UI absent because it is absent from the captured source", () => {
+  const archivedRoot = path.join(
+    root,
+    "Invitations - this folder will be removed from production",
+    "Invitations - this folder will be removed from production",
+    "Invitate",
+    "Web invitations",
+    "invitate.uz",
+  );
+  const archivedSource = readFileSync(path.join(archivedRoot, "velora.html"), "utf8");
+  const packagedSource = readPackage("source/velora.html");
+  const archivedMotion = readFileSync(path.join(archivedRoot, "assets/js/velora.js"), "utf8");
+  const adapter = readPackage("assets/js/velora-adapter.js");
+  const packaged = readPackage("index.html");
+
+  // The source's `transfer` radio controls are RSVP answers, not gift-card details.
+  assert.equal(packagedSource, archivedSource, "packaged source remains byte-identical to the archive");
+  assert.equal(readPackage("source/assets/js/velora.js"), archivedMotion, "packaged source runtime remains byte-identical to the archive");
+  assert.match(archivedSource, /name="transfer"/);
+  assert.doesNotMatch(archivedSource, /gift|to'yona|sovg['’]?a|hadya|подар/i);
+  assert.doesNotMatch(archivedMotion, /giftCardOwner|giftCardNumber|gift-card|to'yona/i);
+  assert.doesNotMatch(packaged, /giftCardOwner|giftCardNumber|gift-card|to'yona/i);
+  assert.doesNotMatch(adapter, /giftCardOwner|giftCardNumber|gift-card|to'yona/i);
+});
+
 test("Velora opening image is the authentic portrait renderer capture with recorded provenance", () => {
   const cover = readFileSync(path.join(packageRoot, "preview.png"));
   const provenance = JSON.parse(readPackage("preview.provenance.json"));
