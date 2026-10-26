@@ -108,6 +108,7 @@ test("Palace Rose source photos are confined to catalog and initial-selection pr
 test("Modern Floral preview uses its captured gallery images only in its preview sample", () => {
   const modernFloral = createTemplatePreviewSample("modern-floral");
   const otherTemplate = createTemplatePreviewSample("anor");
+  const floralWishes = getTemplatePreviewWishes("uz-Latn", "modern-floral");
   assert.deepEqual(
     modernFloral.gallery.map((item) => item.url),
     [
@@ -119,6 +120,8 @@ test("Modern Floral preview uses its captured gallery images only in its preview
       "/templates/chorlove/orchid-amplop/assets/gallery-5.webp",
     ],
   );
+  assert.equal(floralWishes.length, 6, "the preview exercises the source wishes marquee");
+  assert.equal(getTemplatePreviewWishes("uz-Latn").length, 3, "other previews retain their shared sample");
   assert.ok(otherTemplate.gallery.every((item) => !item.url));
 });
 

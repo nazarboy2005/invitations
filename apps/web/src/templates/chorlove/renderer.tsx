@@ -56,7 +56,7 @@ export function ChorloveInvitation({
   useEffect(() => setFrameLocale(locale), [locale]);
 
   const data = useMemo(() => {
-    const mapped = makeLegacyData(invitation, frameLocale, guestName, sampleWishes);
+    const mapped = makeLegacyData(invitation, frameLocale, guestName, sampleWishes, templateId);
     if (templateId === "palace-rose") {
       const venuePhoto = preview && sampleWishes
         ? getTemplatePreviewVenuePhoto(templateId)

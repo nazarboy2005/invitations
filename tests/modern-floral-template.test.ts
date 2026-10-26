@@ -197,10 +197,14 @@ test("Modern Floral page loads its source motion runner and preserves source rev
   const html = await readFile(htmlUrl, "utf8");
   const css = await readFile(cssUrl, "utf8");
   const bridge = await readFile(bridgeUrl, "utf8");
+  assert.match(css, /#modern-floral-root\{[^}]*position:relative;background:#fffaf3/);
+  assert.doesNotMatch(css, /#modern-floral-root\{[^}]*max-width:480px/);
   assert.match(css, /right:2rem;bottom:2rem;z-index:110;display:flex;width:3\.5rem;height:3\.5rem/);
   assert.match(css, /background:rgba\(255,255,255,\.9\);color:#A69689/);
   assert.match(css, /\.mf-music svg,\[data-mf-music\] svg/);
   assert.match(bridge, /m\.setAttribute\("aria-label","Toggle music"\)/);
+  assert.match(bridge, /galleryHeading:"Bizning lahzalarimiz"/);
+  assert.match(bridge, /put\(q\('h2',section\),c\(\)\.galleryHeading\)/);
   assert.match(bridge, /let m=q\("\[data-mf-music\]"\)\|\|q\('button\[aria-label="Toggle music"\]'\)/);
   assert.match(bridge, /m\.dataset\.mfMusic=""/);
   assert.match(html, /button aria-label="Toggle music" class="w-14 h-14 rounded-full shadow-2xl flex items-center justify-center bg-white\/90 border border-\[#E5E0D8\] text-\[#A69689\] backdrop-blur-md"/);
@@ -278,6 +282,77 @@ test("Modern Floral reacts to live reduced-motion preference changes", async () 
   assert.equal(classes.has("mf-reduced"), false);
   assert.equal(opening.hidden, true);
   assert.equal(openingAnimationCount, completedOpeningAnimations, "returning to normal does not replay the opening");
+});
+
+test("Modern Floral controls respond to pointer and Enter press states", async () => {
+  const motion = await readFile(motionUrl, "utf8");
+  const createControl = () => {
+    const listeners = new Map<string, Array<(event: { key?: string; repeat?: boolean }) => void>>();
+    const animations: Array<{ frames: Array<{ transform?: string }>; options: { duration: number } }> = [];
+    return {
+      dataset: {} as Record<string, string>,
+      listeners,
+      animations,
+      addEventListener(type: string, listener: (event: { key?: string; repeat?: boolean }) => void) {
+        const entries = listeners.get(type) ?? [];
+        entries.push(listener);
+        listeners.set(type, entries);
+      },
+      animate(frames: Array<{ transform?: string }>, options: { duration: number }) {
+        animations.push({ frames, options });
+        return { cancel() {} };
+      },
+    };
+  };
+  const music = createControl();
+  const mapLink = createControl();
+  const classes = new Set<string>();
+  const opening = { dataset: {} as Record<string, string>, hidden: false, isConnected: true, children: [], animate: () => ({}) };
+  const petals = { dataset: {} as Record<string, string>, hidden: false, children: [] };
+  const root = {
+    classList: { add: (name: string) => classes.add(name), remove: (name: string) => classes.delete(name) },
+    children: [opening, {}, petals],
+    firstElementChild: opening,
+    querySelector: (selector: string) => selector === ".mf-music" ? music : null,
+    querySelectorAll: (selector: string) => selector === "section:nth-of-type(6) a" ? [mapLink] : [],
+    getAnimations: () => [],
+  };
+  const windowMock = {
+    name: JSON.stringify({ type: "modern-floral:update", payload: { reducedMotion: false } }),
+    location: { origin: "http://localhost" },
+    getComputedStyle: () => ({ transform: "none" }),
+    matchMedia: () => ({ matches: false, addEventListener() {} }),
+    addEventListener() {},
+    setTimeout: (callback: () => void) => { callback(); return 1; },
+  };
+  runInNewContext(motion, {
+    document: { querySelector: () => root, querySelectorAll: () => [] },
+    window: windowMock,
+    location: windowMock.location,
+    parent: {},
+    IntersectionObserver: class { disconnect() {} observe() {} unobserve() {} },
+  });
+  const fire = (control: ReturnType<typeof createControl>, type: string, event = {}) =>
+    control.listeners.get(type)?.forEach((listener) => listener(event));
+  const lastScale = (control: ReturnType<typeof createControl>) =>
+    control.animations.at(-1)?.frames.at(-1)?.transform;
+
+  fire(music, "pointerenter");
+  assert.equal(lastScale(music), "scale(1.1)");
+  fire(music, "pointerdown");
+  assert.equal(lastScale(music), "scale(0.9)");
+  fire(music, "pointerup");
+  assert.equal(lastScale(music), "scale(1.1)");
+  fire(music, "pointerleave");
+  assert.equal(lastScale(music), "scale(1)");
+  fire(mapLink, "pointerenter");
+  assert.equal(lastScale(mapLink), "scale(1.02)");
+  fire(mapLink, "keydown", { key: "Enter", repeat: false });
+  assert.equal(lastScale(mapLink), "scale(0.98)");
+  fire(mapLink, "keyup", { key: "Enter" });
+  assert.equal(lastScale(mapLink), "scale(1.02)");
+  fire(mapLink, "pointerleave");
+  assert.equal(lastScale(mapLink), "scale(1)");
 });
 
 test("Modern Floral catalog artwork has the source image hash and portrait dimensions", async () => {
@@ -434,6 +509,7 @@ test("Modern Floral RSVP has fixed party size and exposes only source-backed opt
   assert.doesNotMatch(galleryHandler, /data-prev|data-next|ArrowLeft|ArrowRight|event\.key==='Escape'/);
   assert.match(bridge, /if\(x\.preview\)values=d\(\)\.wishes\|\|\[\];else if\(d\(\)\.wishesEnabled\)/);
   assert.match(bridge, /stack\.dataset\.mfSourceWishCount=String\(values\.length\)/);
+  assert.match(bridge, /for\(const wish of \[\.\.\.values,\.\.\.values\]\)/, "marquee content is duplicated for a seamless source-style loop");
   assert.doesNotMatch(bridge, /\bdata\s*\(\s*\)/);
   assert.match(bridge, /hide\(s,!x\.preview&&!d\(\)\.wishesEnabled\)/);
   assert.match(bridge, /hide\(s,!d\(\)\.rsvp\?\.enabled&&!x\.preview\)/);

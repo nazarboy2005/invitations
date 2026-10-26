@@ -1370,7 +1370,7 @@ export const TEMPLATES: TemplateDefinition[] = [
     currency: "UZS",
     accent: "#b8797d",
     previewImage: "/templates/modern-floral/catalog-opening.jpg",
-    published: false,
+    published: true,
   },
   {
     id: "glass-pink",

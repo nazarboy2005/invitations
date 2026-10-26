@@ -84,7 +84,41 @@
         { "id": "modern-floral-source-preview-4", "url": "/templates/chorlove/orchid-amplop/assets/gallery-6.webp", "alt": "", "caption": "" },
         { "id": "modern-floral-source-preview-5", "url": "/templates/chorlove/orchid-amplop/assets/gallery-4.webp", "alt": "", "caption": "" },
         { "id": "modern-floral-source-preview-6", "url": "/templates/chorlove/orchid-amplop/assets/gallery-5.webp", "alt": "", "caption": "" }
-      ]
+      ],
+      "wishes": {
+        "uz-Latn": [
+          { "name": "Nasiba", "text": "Baxtingiz bir umr mehr va barakaga to‘lsin." },
+          { "name": "Otabek", "text": "Yangi oilangizga totuvlik va quvonch tilayman." },
+          { "name": "Malika", "text": "Har kuningiz bugungidek shodlikka boy bo‘lsin." },
+          { "name": "Diyor", "text": "Bir-biringizga tayanch bo‘lib, baxtli yashanglar." },
+          { "name": "Sevara", "text": "Nikohingiz muborak, muhabbatingiz bardavom bo‘lsin." },
+          { "name": "Kamron", "text": "Xonadoningizdan fayz va kulgu arimasin." }
+        ],
+        "uz-Cyrl": [
+          { "name": "Насиба", "text": "Бахтингиз бир умр меҳр ва баракага тўлсин." },
+          { "name": "Отабек", "text": "Янги оилангизга тотувлик ва қувонч тилайман." },
+          { "name": "Малика", "text": "Ҳар кунингиз бугунгидек шодликка бой бўлсин." },
+          { "name": "Диёр", "text": "Бир-бирингизга таянч бўлиб, бахтли яшанглар." },
+          { "name": "Севара", "text": "Никоҳингиз муборак, муҳаббатингиз бардавом бўлсин." },
+          { "name": "Камрон", "text": "Хонадонингиздан файз ва кулгу аримасин." }
+        ],
+        "en": [
+          { "name": "Nasiba", "text": "May your life together be filled with kindness and blessing." },
+          { "name": "Otabek", "text": "Wishing your new family harmony and joy." },
+          { "name": "Malika", "text": "May every day bring you the happiness you share today." },
+          { "name": "Diyor", "text": "Be each other’s support and build a happy life." },
+          { "name": "Sevara", "text": "Congratulations on your wedding; may your love endure." },
+          { "name": "Kamron", "text": "May laughter and warmth always fill your home." }
+        ],
+        "ru": [
+          { "name": "Насиба", "text": "Пусть ваша совместная жизнь будет полной тепла и добра." },
+          { "name": "Отабек", "text": "Желаю вашей новой семье согласия и радости." },
+          { "name": "Малика", "text": "Пусть каждый день приносит вам такую же радость." },
+          { "name": "Диёр", "text": "Поддерживайте друг друга и живите счастливо." },
+          { "name": "Севара", "text": "Поздравляю со свадьбой! Пусть ваша любовь крепнет." },
+          { "name": "Камрон", "text": "Пусть в вашем доме всегда будут тепло и смех." }
+        ]
+      }
     },
     "orchid-amplop": {
       "venuePhoto": "/templates/chorlove/orchid-amplop/assets/gallery-5.webp",

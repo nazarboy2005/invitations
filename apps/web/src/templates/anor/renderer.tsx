@@ -169,6 +169,7 @@ export function makeLegacyData(
   locale: Locale,
   guestName: string,
   sampleWishes = false,
+  templateId?: string,
 ): LegacyData {
   const content = getContent(invitation, locale);
   const people = content.people.filter(Boolean);
@@ -318,7 +319,7 @@ export function makeLegacyData(
     ],
     rsvp: invitation.rsvp,
     wishesEnabled: invitation.wishes.enabled,
-    wishes: sampleWishes ? getTemplatePreviewWishes(locale) : [],
+    wishes: sampleWishes ? getTemplatePreviewWishes(locale, templateId) : [],
     toyona: {
       enabled: invitation.gift.enabled,
       cardNumber: invitation.gift.cardNumber,

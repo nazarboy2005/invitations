@@ -48,6 +48,8 @@ type TemplateSample = {
   }>;
   gallery?: Invitation["gallery"];
   story?: Invitation["story"];
+  /** Optional source-shaped preview content; never persisted to creator invitations. */
+  wishes?: Record<Locale, Array<{ name: string; text: string }>>;
 };
 
 const EVENT_SAMPLES = previewSample.eventSamples as Partial<
@@ -199,8 +201,12 @@ export function createTemplatePreviewSample(
 /** Localized sample guest wishes for previews only; these never enter saved invitations. */
 export function getTemplatePreviewWishes(
   locale: Locale,
+  templateId?: string,
 ): Array<{ name: string; text: string }> {
-  return structuredClone(previewSample.wishes[locale]);
+  return structuredClone(
+    (templateId && TEMPLATE_SAMPLES[templateId]?.wishes?.[locale]) ??
+      previewSample.wishes[locale],
+  );
 }
 
 /** Create an ephemeral stress-test variant for responsive name lockups. */
