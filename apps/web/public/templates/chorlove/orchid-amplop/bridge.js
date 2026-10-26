@@ -314,6 +314,8 @@
   }
   const revealer = new IntersectionObserver((entries) => entries.forEach((entry) => { entry.target.classList.toggle("orchid-visible", entry.isIntersecting); }), { threshold: 0.34, rootMargin: "0px 0px -10% 0px" });
   $$(".orchid-reveal").forEach((node) => revealer.observe(node));
+  const rsvpRevealer = new IntersectionObserver((entries) => entries.forEach((entry) => { entry.target.classList.toggle("orchid-visible", entry.isIntersecting); }), { threshold: 0.2 });
+  $$(".orchid-rsvp-reveal").forEach((node) => rsvpRevealer.observe(node));
   $("[data-orchid-open]").addEventListener("click", async () => {
     const gate = $("[data-orchid-gate]"); document.documentElement.classList.remove("orchid-ready"); gate.classList.add("orchid-gate-opening");
     if (current?.data?.music?.url && !current?.silentPlayback) { const audio = $("[data-orchid-audio]"); try { await audio.play(); } catch { /* Music remains opt-in after a rejected play request. */ } }
