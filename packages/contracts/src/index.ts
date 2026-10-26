@@ -1260,7 +1260,7 @@ export const TEMPLATES: TemplateDefinition[] = [
     currency: "UZS",
     accent: "#667248",
     previewImage: "/templates/green-white/preview-opening.png",
-    published: false,
+    published: true,
   },
   {
     id: "jasmine-white",
@@ -1470,7 +1470,7 @@ export const TEMPLATES: TemplateDefinition[] = [
     priceMinor: 15000000,
     currency: "UZS",
     accent: "#9b6d55",
-    published: false,
+    published: true,
   },
   {
     id: "bloom",

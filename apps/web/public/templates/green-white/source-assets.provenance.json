@@ -135,6 +135,17 @@
     "slideshow": {
       "autoplay": false,
       "delayMs": 1500
+    },
+    "thumbnailLayout": {
+      "containerPaddingPx": 16,
+      "thumbnailWidthPx": 84,
+      "thumbnailHeightPx": 56,
+      "thumbnailBorderPx": 1,
+      "thumbnailPaddingPx": 0,
+      "thumbnailGapPx": 8,
+      "measuredAtViewport": { "width": 1280, "height": 720 },
+      "railHeightPx": 89.6,
+      "slideViewportHeightPx": 630.4
     }
   },
   "catalogArtwork": {
@@ -261,7 +272,7 @@
   ],
   "sourceAudit": {
     "sourceCapture": "The archived HTML capture hash matches its checked-in Git blob. The Windows worktree applies CRLF conversion; normalized content and the recorded LF SHA-256 match the archive.",
-    "gallery": "The original compiled page module imports Yet Another React Lightbox plugins Zoom, Counter, Slideshow, and Thumbnails (module IDs recorded in gallerySource); it does not import Fullscreen. The preserved gallery/core chunk records 16px carousel padding, 30% slide spacing, touch-action none, live horizontal pointer drag with a 30px direction lock, advancement at 30% width or a 5px flick within 250ms, 250ms swipe animation, and looping by default. The route configures autoplay off with a 1500ms manual-start delay, 84x56 thumbnails (1px border, 8px radius, zero padding, 8px gap), and backdrop close. The isolated adapter maps these settings into the shared preview renderer.",
+    "gallery": "The original compiled page module imports Yet Another React Lightbox plugins Zoom, Counter, Slideshow, and Thumbnails (module IDs recorded in gallerySource); it does not import Fullscreen. The preserved gallery/core chunk records 16px carousel padding, 30% slide spacing, touch-action none, live horizontal pointer drag with a 30px direction lock, advancement at 30% width or a 5px flick within 250ms, 250ms swipe animation, and looping by default. The route configures autoplay off with a 1500ms manual-start delay, 84x56 thumbnails (1px border, 8px radius, zero padding, 8px gap), and backdrop close. At a 1280x720 browser viewport, the source keeps the 16px-padded thumbnail container in normal column flow: its rail is 89.6px high and slide viewport is 630.4px. The isolated adapter matches this source layout.",
     "localeControls": "The source uses the app translation context and has no visible locale picker. The package adds a localized host-level picker because the shared invitation contract supports locale variants.",
     "optionalSections": "Source gallery returns null when no images exist; source To’yona returns null without a card number; source contacts return null when none are configured. The package hides empty gallery, gift, and contacts sections. Dress code is always present in the source but follows the approved creator toggle in the platform.",
     "rsvp": "The compiled source contains a yes-only guest-count stepper. The approved platform decision omits that prompt and submits fixed partySize 1/0 for yes/no.",

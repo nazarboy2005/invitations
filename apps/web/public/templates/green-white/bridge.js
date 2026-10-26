@@ -471,7 +471,7 @@
       window.setTimeout(() => { if (dialog.open) dialog.close(); }, fadeDuration);
     };
     const container = document.createElement("div");
-    container.className = "yarl__container";
+    container.className = "yarl__container yarl__flex_center";
     container.tabIndex = -1;
     const toolbar = document.createElement("div");
     toolbar.className = "yarl__toolbar";
@@ -487,6 +487,10 @@
     image.alt = "";
     image.draggable = false;
     slide.append(image);
+    const carousel = document.createElement("div");
+    carousel.className = "yarl__carousel yarl__carousel_with_slides";
+    carousel.style.setProperty("--yarl__carousel_slides_count", "1");
+    carousel.append(slide);
     const makeButton = (label, icon, className = "") => {
       const button = document.createElement("button");
       button.type = "button";
@@ -512,14 +516,13 @@
     toolbar.append(zoom, slideshow, close);
     const thumbnailBar = document.createElement("div");
     thumbnailBar.className = "yarl__thumbnails yarl__thumbnails_bottom";
-    thumbnailBar.style.cssText = "height:74px;--yarl__thumbnails_container_padding:8px;--yarl__thumbnails_thumbnail_width:84px;--yarl__thumbnails_thumbnail_height:56px;--yarl__thumbnails_thumbnail_border:1px;--yarl__thumbnails_thumbnail_border_radius:8px;--yarl__thumbnails_thumbnail_padding:0px;--yarl__thumbnails_thumbnail_gap:8px";
+    thumbnailBar.style.cssText = "--yarl__thumbnails_thumbnail_width:84px;--yarl__thumbnails_thumbnail_height:56px;--yarl__thumbnails_thumbnail_border:1px;--yarl__thumbnails_thumbnail_border_radius:8px;--yarl__thumbnails_thumbnail_padding:0px;--yarl__thumbnails_thumbnail_gap:8px";
     const thumbnailContainer = document.createElement("div");
-    thumbnailContainer.className = "yarl__thumbnails_container yarl__thumbnails_bottom";
+    thumbnailContainer.className = "yarl__thumbnails_container yarl__flex_center";
     const thumbnailWrapper = document.createElement("div");
     thumbnailWrapper.className = "yarl__thumbnails_wrapper";
-    thumbnailWrapper.style.overflow = "hidden";
     const thumbnailTrack = document.createElement("div");
-    thumbnailTrack.className = "yarl__thumbnails_track";
+    thumbnailTrack.className = "yarl__thumbnails_track yarl__flex_center";
     thumbnailTrack.tabIndex = 0;
     thumbnailTrack.setAttribute("role", "listbox");
     thumbnailTrack.style.transition = "transform 250ms ease";
@@ -536,9 +539,9 @@
       thumbnailTrack.append(button);
       return button;
     });
-    thumbnailWrapper.append(thumbnailTrack);
-    thumbnailContainer.append(thumbnailWrapper);
-    thumbnailBar.append(thumbnailContainer);
+    thumbnailWrapper.append(container);
+    thumbnailContainer.append(thumbnailTrack);
+    thumbnailBar.append(thumbnailWrapper, thumbnailContainer);
     let index = start, zoomed = false, pointerX = null, pointerY = null, pointerId = null;
     let swipeStartedAt = 0, swipeOffset = 0, swipeStep = 0, swipePreview = null, transitioning = false;
     let slideshowPlaying = false, slideshowTimer = null;
@@ -627,10 +630,10 @@
         button.setAttribute("aria-selected", String(i === index));
       });
       const activeThumbnail = thumbnails[index];
-      if (activeThumbnail && thumbnailWrapper.clientWidth) {
-        const sidePadding = Math.max(0, (thumbnailWrapper.clientWidth - activeThumbnail.offsetWidth) / 2);
+      if (activeThumbnail && thumbnailContainer.clientWidth) {
+        const sidePadding = Math.max(0, (thumbnailContainer.clientWidth - activeThumbnail.offsetWidth) / 2);
         thumbnailTrack.style.paddingInline = `${sidePadding}px`;
-        const viewport = thumbnailWrapper.getBoundingClientRect();
+        const viewport = thumbnailContainer.getBoundingClientRect();
         const thumb = activeThumbnail.getBoundingClientRect();
         const transform = getComputedStyle(thumbnailTrack).transform;
         const currentX = transform === "none" ? 0 : new DOMMatrixReadOnly(transform).m41;
@@ -752,8 +755,8 @@
       dialog.remove();
       opener?.focus();
     }, { once: true });
-    container.append(counter, toolbar, previous, slide, next, thumbnailBar);
-    dialog.append(container);
+    container.append(counter, toolbar, previous, carousel, next);
+    dialog.append(thumbnailBar);
     root.append(dialog);
     dialog.showModal();
     requestAnimationFrame(() => {

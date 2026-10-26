@@ -111,7 +111,7 @@ test("Green White runtime is isolated and maps the captured sections to the shar
   assert.match(bridge, /function showLightbox[\s\S]*?let image = document\.createElement\("img"\)/);
   assert.match(bridge, /index = \(nextIndex \+ items\.length\) % items\.length/);
   assert.match(bridge, /button\.className = "yarl__thumbnails_thumbnail"/);
-  assert.match(bridge, /sidePadding = Math\.max\(0, \(thumbnailWrapper\.clientWidth - activeThumbnail\.offsetWidth\) \/ 2\)/);
+  assert.match(bridge, /sidePadding = Math\.max\(0, \(thumbnailContainer\.clientWidth - activeThumbnail\.offsetWidth\) \/ 2\)/);
   assert.match(bridge, /new DOMMatrixReadOnly\(transform\)\.m41/);
   assert.match(bridge, /thumb\.left \+ thumb\.width \/ 2 - \(viewport\.left \+ viewport\.width \/ 2\)/);
   assert.match(bridge, /thumbnailTrack\.style\.transform = `translateX\(\$\{currentX - centerDelta\}px\)`/);
@@ -155,11 +155,25 @@ test("Green White motion follows the archived source page module", async () => {
   const galleryChunk = await readFile(new URL(gallerySource.preservedFile, root));
   const bridge = await readFile(new URL("bridge.js", root), "utf8");
   const styles = await readFile(new URL("adapter.css", root), "utf8");
+  assert.match(bridge, /carousel\.className = "yarl__carousel yarl__carousel_with_slides"/);
+  assert.match(bridge, /carousel\.append\(slide\)/);
+  assert.match(bridge, /container\.append\(counter, toolbar, previous, carousel, next\)/);
   assert.equal(sourceModule.length, 36961);
   assert.equal(createHash("sha256").update(sourceModule).digest("hex"), motion.sha256);
   assert.equal(galleryChunk.length, gallerySource.bytes);
   assert.equal(createHash("sha256").update(galleryChunk).digest("hex"), gallerySource.sha256);
   assert.deepEqual(gallerySource.carouselDefaults, { paddingPx: 16, spacingPercent: 30, touchAction: "none" });
+  assert.deepEqual(gallerySource.thumbnailLayout, {
+    containerPaddingPx: 16,
+    thumbnailWidthPx: 84,
+    thumbnailHeightPx: 56,
+    thumbnailBorderPx: 1,
+    thumbnailPaddingPx: 0,
+    thumbnailGapPx: 8,
+    measuredAtViewport: { width: 1280, height: 720 },
+    railHeightPx: 89.6,
+    slideViewportHeightPx: 630.4,
+  });
   assert.deepEqual(gallerySource.swipe, {
     startDistancePx: 30,
     advanceDistanceRatio: 0.3,
@@ -173,6 +187,12 @@ test("Green White motion follows the archived source page module", async () => {
   assert.match(galleryChunk.toString("utf8"), /Math\.abs\(a\)>Math\.abs\(o\)&&Math\.abs\(a\)>30/);
   assert.match(galleryChunk.toString("utf8"), /Math\.abs\(t\)>\.3\*a/);
   assert.match(galleryChunk.toString("utf8"), /Math\.abs\(t\)>5&&e<o/);
+  assert.match(styles, /\.gw-source-lightbox \.yarl__thumbnails \{[\s\S]*?height: 100%;/);
+  assert.match(styles, /\.gw-source-lightbox \.yarl__thumbnails_container \{[\s\S]*?padding: 16px;/);
+  assert.doesNotMatch(styles, /\.gw-source-lightbox \.yarl__thumbnails \{[^}]*position: absolute/);
+  assert.match(bridge, /thumbnailWrapper\.append\(container\)/);
+  assert.match(bridge, /thumbnailBar\.append\(thumbnailWrapper, thumbnailContainer\)/);
+  assert.match(bridge, /thumbnailContainer\.clientWidth - activeThumbnail\.offsetWidth/);
   assert.match(sourceModule.toString("utf8"), /whileInView:[^}]+opacity:1/);
   assert.match(sourceModule.toString("utf8"), /duration:11,repeat:1\/0/);
   assert.match(sourceModule.toString("utf8"), /duration:13,repeat:1\/0/);
@@ -197,7 +217,7 @@ test("Green White motion follows the archived source page module", async () => {
   const durations = runInNewContext(`${durationFunction}; [getSourceSwipeDuration(400, 50, 1000), getSourceSwipeDuration(40, 50, 1000)]`);
   assert.equal(durations[0], 125);
   assert.equal(durations[1], 240);
-  assert.match(bridge, /height:74px/);
+  assert.match(bridge, /thumbnailBar\.className = "yarl__thumbnails yarl__thumbnails_bottom"/);
   assert.doesNotMatch(bridge, /direction \* 28px/);
   assert.match(bridge, /11000 : 13000/);
   assert.match(bridge, /duration = 3600 \+ \(index % 7\) \* 550/);
@@ -211,8 +231,9 @@ test("Green White motion follows the archived source page module", async () => {
   assert.match(styles, /\.gw-source-opening[\s\S]*background: #2d321b/);
   assert.match(styles, /\.gw-opening-copy > h2 \{[\s\S]*font-size: 36px/);
   assert.doesNotMatch(styles, /font-size: clamp\(28px, 9vw, 36px\)/);
-  assert.match(styles, /\.gw-source-lightbox \.yarl__thumbnails_wrapper \{[\s\S]*overflow: hidden/);
-  assert.match(styles, /\.gw-source-lightbox \.yarl__thumbnails_container \{[\s\S]*height: 74px/);
+  assert.match(styles, /\.gw-source-lightbox \.yarl__thumbnails \{[\s\S]*flex-direction: column;[\s\S]*height: 100%/);
+  assert.match(styles, /\.gw-source-lightbox \.yarl__thumbnails_wrapper \{[\s\S]*position: relative;[\s\S]*flex: 1;/);
+  assert.match(styles, /\.gw-source-lightbox \.yarl__thumbnails_container \{[\s\S]*padding: 16px/);
   assert.match(sourceModule.toString("utf8"), /plugins:\[M\.default,D\.default,A\.default,R\.default\]/);
   assert.match(sourceModule.toString("utf8"), /slideshow:\{autoplay:!1,delay:1500\}/);
   assert.doesNotMatch(sourceModule.toString("utf8"), /plugins:\[[^\]]*fullscreen/i);
@@ -288,7 +309,7 @@ test("Green White gallery swipe, wraparound, and thumbnails execute their source
   const swipeStart = bridge.indexOf("    const resetSwipe = () => {");
   const swipeEnd = bridge.indexOf('    container.addEventListener("wheel"', swipeStart);
   const thumbnailStart = bridge.indexOf("    const thumbnails = items.map((item, i) => {");
-  const thumbnailEnd = bridge.indexOf("    thumbnailWrapper.append(thumbnailTrack);", thumbnailStart);
+  const thumbnailEnd = bridge.indexOf("    thumbnailWrapper.append(container);", thumbnailStart);
   assert.ok(swipeStart >= 0 && swipeEnd > swipeStart);
   assert.ok(thumbnailStart >= 0 && thumbnailEnd > thumbnailStart);
 
@@ -452,10 +473,10 @@ test("Green White RSVP honors the fixed party-size platform rule over the source
   assert.match(source, /Qanday kiyinish kerak/);
 });
 
-test("Green White is registered for internal wedding preview and remains unpublished", async () => {
+test("Green White is published for wedding events", async () => {
   const item = templateById("green-white");
   assert.ok(item);
-  assert.equal(item.published, false);
+  assert.equal(item.published, true);
   assert.equal(item.priceMinor, 15000000);
   assert.deepEqual(item.categoryIds, ["wedding"]);
   assert.deepEqual(item.supportedEventTypes, ["wedding"]);
