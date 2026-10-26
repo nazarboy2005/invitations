@@ -1274,7 +1274,7 @@ export const TEMPLATES: TemplateDefinition[] = [
     currency: "UZS",
     accent: "#404a1d",
     previewImage: "/templates/jasmine-white/preview.png",
-    published: false,
+    published: true,
   },
   {
     id: "lace",

@@ -20,7 +20,7 @@
       previous: "Oldingi", next: "Keyingi", guestRequired: "Ismingizni kiriting.", wishRequired: "Tilagingizni yozing.",
       chooseResponse: "Javobingizni tanlang.", saved: "Javobingiz saqlandi. Rahmat!", submitted: "Tilagingiz yuborildi.",
       error: "Yuborilmadi. Qayta urinib ko'ring.", preview: "Ko'rish rejimida yuborish o'chiq.",
-      musicOn: "Musiqani yoqish", musicOff: "Musiqani to'xtatish", musicError: "Musiqa mavjud emas", language: "Til",
+      musicOn: "Musiqani yoqish", musicOff: "Musiqani to'xtatish", musicError: "Musiqa mavjud emas", language: "Til", instagram: "Instagram",
     },
     "uz-Cyrl": {
       title: "Таклифнома", welcome: "Ассалому алайкум, азиз меҳмон", couple: "Куёв & Келин",
@@ -37,7 +37,7 @@
       previous: "Олдинги", next: "Кейинги", guestRequired: "Исмингизни киритинг.", wishRequired: "Тилагингизни ёзинг.",
       chooseResponse: "Жавобингизни танланг.", saved: "Жавобингиз сақланди. Раҳмат!", submitted: "Тилагингиз юборилди.",
       error: "Юборилмади. Қайта уриниб кўринг.", preview: "Кўриш режимида юбориш ўчиқ.",
-      musicOn: "Мусиқани ёқиш", musicOff: "Мусиқани тўхтатиш", musicError: "Мусиқа мавжуд эмас", language: "Тил",
+      musicOn: "Мусиқани ёқиш", musicOff: "Мусиқани тўхтатиш", musicError: "Мусиқа мавжуд эмас", language: "Тил", instagram: "Instagram",
     },
     en: {
       title: "Invitation", welcome: "Hello, dear guest", couple: "Groom & Bride", event: "Wedding", date: "Wedding date",
@@ -53,7 +53,7 @@
       telegram: "Telegram", photo: "Photo", close: "Close", previous: "Previous", next: "Next", guestRequired: "Enter your name.",
       wishRequired: "Write your wish.", chooseResponse: "Choose your response.", saved: "Your response was saved. Thank you!",
       submitted: "Your wish was sent.", error: "Could not send. Please try again.", preview: "Submission is disabled in preview.",
-      musicOn: "Play music", musicOff: "Pause music", musicError: "Music is unavailable", language: "Language",
+      musicOn: "Play music", musicOff: "Pause music", musicError: "Music is unavailable", language: "Language", instagram: "Instagram",
     },
     ru: {
       title: "Приглашение", welcome: "Здравствуйте, дорогой гость", couple: "Жених и невеста", event: "Свадьба", date: "Дата свадьбы",
@@ -70,7 +70,7 @@
       previous: "Назад", next: "Далее", guestRequired: "Введите ваше имя.", wishRequired: "Напишите пожелание.",
       chooseResponse: "Выберите ваш ответ.", saved: "Ваш ответ сохранён. Спасибо!", submitted: "Ваше пожелание отправлено.",
       error: "Не удалось отправить. Попробуйте ещё раз.", preview: "Отправка в режиме просмотра отключена.",
-      musicOn: "Включить музыку", musicOff: "Остановить музыку", musicError: "Музыка недоступна", language: "Язык",
+      musicOn: "Включить музыку", musicOff: "Остановить музыку", musicError: "Музыка недоступна", language: "Язык", instagram: "Instagram",
     },
   };
 
@@ -625,13 +625,18 @@
   function renderContacts(contacts, c) {
     const node = sections[8], links = [...(node?.querySelectorAll("a") || [])]; if (!node) return;
     tx(node.querySelector("h2"), c.contact);
-    const values = [contacts.find((item) => item.type === "phone"), contacts.find((item) => item.type === "telegram")];
+    const values = [
+      contacts.find((item) => item.type === "phone"),
+      contacts.find((item) => item.type === "telegram"),
+      contacts.find((item) => item.type === "instagram"),
+    ];
     links.forEach((link, index) => {
       const item = values[index]; hide(link, !item);
       if (!item) return;
       link.href = item.href || "#";
       const paragraphs = [...link.querySelectorAll("p")];
-      tx(paragraphs[0], index ? c.telegram : c.phone); tx(paragraphs[1], item.value); tx(paragraphs[2], item.label || "");
+      tx(paragraphs[0], index === 0 ? c.phone : index === 1 ? c.telegram : c.instagram);
+      tx(paragraphs[1], item.value); tx(paragraphs[2], item.label || "");
     });
     links.slice(values.length).forEach((link) => hide(link, true));
     hide(node, !values.some(Boolean));

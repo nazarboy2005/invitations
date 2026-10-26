@@ -119,6 +119,10 @@ body {
   font-size: 0.85rem;
 }
 
+.jw-status:empty {
+  display: none;
+}
+
 .jw-gift-backdrop[hidden] { display: none; }
 
 .jw-gift-backdrop {

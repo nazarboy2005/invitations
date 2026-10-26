@@ -4,6 +4,7 @@ import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 
 import { test } from "node:test";
+import { templateById } from "../packages/contracts/src/index";
 
 const root = new URL(
   "../apps/web/public/templates/jasmine-white/",
@@ -17,6 +18,14 @@ const archive = process.env.CHORLOVE_SOURCE_ROOT
       "../Invitations - this folder will be removed from production/Chorlove/Web invitations/",
       import.meta.url,
     );
+
+test("Jasmine White is published for wedding events", () => {
+  const template = templateById("jasmine-white");
+  assert.ok(template);
+  assert.equal(template.published, true);
+  assert.deepEqual(template.categoryIds, ["wedding"]);
+  assert.deepEqual(template.supportedEventTypes, ["wedding"]);
+});
 
 test("Jasmine White preserves its captured page, stylesheets, and design artwork", async () => {
   const manifest = JSON.parse(
@@ -120,6 +129,11 @@ test("Jasmine White preserves its captured page, stylesheets, and design artwork
     ),
     "utf8",
   );
+  const phoneContactPosition = sourceHtml.indexOf('href="tel:+998903747483"');
+  const telegramContactPosition = sourceHtml.indexOf('href="https://t.me/chorlove_uz"');
+  const instagramContactPosition = sourceHtml.indexOf('>Instagram</p>');
+  assert.ok(phoneContactPosition >= 0 && phoneContactPosition < telegramContactPosition);
+  assert.ok(telegramContactPosition < instagramContactPosition);
   if (archiveAvailable) {
     const sourceMotion = await readFile(
       new URL("_next/static/chunks/0ziyt946s2g41.js", archive),
@@ -267,10 +281,11 @@ test("Jasmine White preserves its captured page, stylesheets, and design artwork
     bridge,
     /src="\/templates\/jasmine-white\/assets\/glass_garden_green\.webp"/,
   );
-  assert.match(
-    bridge,
-    /links\.slice\(values\.length\)\.forEach\(\(link\) => hide\(link, true\)\)/,
-  );
+  assert.match(bridge, /const values = \[\s*contacts\.find\(\(item\) => item\.type === "phone"\),\s*contacts\.find\(\(item\) => item\.type === "telegram"\),\s*contacts\.find\(\(item\) => item\.type === "instagram"\),\s*\];/);
+  assert.match(bridge, /index === 0 \? c\.phone : index === 1 \? c\.telegram : c\.instagram/);
+  assert.equal((bridge.match(/instagram: "Instagram"/g) || []).length, 4);
+  assert.match(bridge, /links\.slice\(values\.length\)\.forEach\(\(link\) => hide\(link, true\)\)/);
+  assert.match(adapterCss, /\.jw-status:empty\s*\{\s*display:\s*none;/);
   assert.match(bridge, /Таклифнома/);
   assert.doesNotMatch(bridge, /Ð|Ñ„|â€”/);
 
