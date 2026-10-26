@@ -235,7 +235,8 @@
       if (closing) return;
       closing = true;
       window.clearInterval(slideshow);
-      document.removeEventListener("keydown", onDocumentKeydown, true);
+      window.removeEventListener("keydown", onDocumentKeydown, true);
+      document.body.removeEventListener("keydown", onDocumentKeydown, true);
       portal.classList.remove("yarl__portal_open");
       document.body.classList.remove("yarl__no_scroll");
       templateRoot?.classList.remove("lace-lightbox-open");
@@ -412,7 +413,8 @@
         return;
       }
     };
-    document.addEventListener("keydown", onDocumentKeydown, true);
+    window.addEventListener("keydown", onDocumentKeydown, true);
+    document.body.addEventListener("keydown", onDocumentKeydown, true);
     portal.addEventListener("keydown", (event) => {
       const pan = options.keyboardMoveDistance;
       if (zoom > options.minZoom && event.key.startsWith("Arrow")) {

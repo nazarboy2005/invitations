@@ -3,6 +3,7 @@
   const id = "lace";
   const root = document.querySelector('[data-chorlove-template="lace"]');
   if (!root) return;
+  let musicUserPaused = false, musicAutoplayAttempted = false, musicSource = "";
   const sections = [...root.querySelectorAll("section")];
   const sourceProgramRows = [...(sections[4]?.querySelector(".space-y-10")?.children || [])].map((node) => node.cloneNode(true));
   const sourceGalleryCards = [...(sections[6]?.querySelectorAll(".grid > button") || [])].map((node) => node.cloneNode(true));
@@ -203,9 +204,10 @@
   }
 
   function installMusic(d,p) {
-    const audio=query("audio");if(!audio)return;audio.dataset.laceAudio="";audio.pause();if(d.music?.url)audio.src=d.music.url;else audio.removeAttribute("src");audio.loop=true;audio.preload="none";audio.muted=Boolean(p.preview&&p.silentPlayback);
+    const audio=query("audio");if(!audio)return;audio.dataset.laceAudio="";const source=d.music?.url||"";if(source!==musicSource){audio.pause();musicSource=source;musicAutoplayAttempted=false;if(source)audio.src=source;else audio.removeAttribute("src");}audio.loop=true;audio.preload="none";audio.muted=Boolean(p.preview&&p.silentPlayback);
     const button=query('[aria-label="Toggle music"]');if(!button)return;hide(button,!d.music?.url||Boolean(p.preview&&p.silentPlayback));button.setAttribute("aria-label",audio.paused?c().musicOn:c().musicOff);button.setAttribute("aria-pressed",String(!audio.paused));
-    button.onclick=async()=>{if(audio.paused){try{await audio.play();button.setAttribute("aria-label",c().musicOff);button.setAttribute("aria-pressed","true");}catch{button.setAttribute("aria-label",c().musicOn);}}else{audio.pause();button.setAttribute("aria-label",c().musicOn);button.setAttribute("aria-pressed","false");}};
+    if(!p.preview&&source&&!musicAutoplayAttempted&&!musicUserPaused){musicAutoplayAttempted=true;audio.play().catch(()=>{});}
+    button.onclick=async()=>{if(audio.paused){musicUserPaused=false;try{await audio.play();button.setAttribute("aria-label",c().musicOff);button.setAttribute("aria-pressed","true");}catch{button.setAttribute("aria-label",c().musicOn);}}else{musicUserPaused=true;audio.pause();button.setAttribute("aria-label",c().musicOn);button.setAttribute("aria-pressed","false");}};
   }
 
   function installOpening(d,p) {
@@ -248,7 +250,7 @@
     const open=async()=>{
       if(opened)return;
       opened=true;if(label)label.hidden=true;
-      if(!p.silentPlayback&&d.music?.url)audio?.play().catch(()=>{});
+      if(!p.silentPlayback&&d.music?.url&&!musicUserPaused)audio?.play().catch(()=>{});
       if(reduced||!video){startHero();fadeIntro();return;}
       video.currentTime=0;video.style.opacity="1";if(poster)poster.style.opacity="1";
       video.addEventListener("timeupdate",onTimeUpdate);

@@ -13,6 +13,10 @@ The runnable package keeps the archived Chorlove Lace page capture and captured 
 
 The bridge fills the captured page from the shared invitation contract and connects RSVP, wishes, gallery, music, calendar, and locale controls to the host preview/public renderer. It does not copy Chorlove's app runtime, analytics, or sample invitation data. The host-provided reduced-motion setting opens without waiting for the cover video, shows the hero immediately, pauses video and SVG animation, and disables transitions.
 
+For public invitations with creator-enabled music, the bridge attempts playback when the renderer receives its initial invitation data; browser autoplay policy may reject audible playback. The source music control remains available to play or pause manually, and an explicit guest pause is kept across locale/data refreshes and the cover-opening action. Preview music remains controlled by the preview host, and creator-disabled music stays absent.
+
+The captured route module includes the source's optional gift-card section (`show.gift` renders its `Gift` component). The package preserves that source section, binds the shared invitation's to'yona fields, and hides it while disabled; the focused test asserts that both the source section and package binding remain present.
+
 The catalog cover uses the exact captured opening poster at `/templates/lace/assets/bellagio-2-poster.jpg` (1080 x 1920; SHA-256 `9918bd098acc3620586090b3e6f1eb44dc8876de487849f23c0e272154f5ffff`).
 
 

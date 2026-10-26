@@ -69,7 +69,7 @@ test("Lace gallery preserves the source lightbox controls and motion settings", 
   assert.match(lightbox, /keyboardMoveDistance: 50/);
   assert.match(lightbox, /container\.tabIndex = -1/);
   assert.match(lightbox, /sibling\.setAttribute\("inert"/);
-  assert.match(lightbox, /document\.addEventListener\("keydown", onDocumentKeydown, true\)/);
+  assert.match(lightbox, /window\.addEventListener\("keydown", onDocumentKeydown, true\)/);
   assert.match(lightbox, /document\.activeElement === document\.body/);
   assert.match(lightbox, /event\.shiftKey \? focusables\.at\(-1\) : focusables\[0\]/);
   assert.match(lightbox, /backdropTarget === hitTarget/);
@@ -90,6 +90,21 @@ test("Lace gallery preserves the source lightbox controls and motion settings", 
   assert.match(thumbnailVendor, /tabIndex:-1/);
   assert.match(thumbnailVendor, /count:r-v/);
   assert.match(bridge, /hide\(section,entries\.length===0\)/);
+});
+
+test("Lace public music attempts autoplay once and respects the guest pause", () => {
+  assert.match(bridge, /let musicUserPaused = false, musicAutoplayAttempted = false, musicSource = ""/);
+  assert.match(bridge, /!p\.preview&&source&&!musicAutoplayAttempted&&!musicUserPaused/);
+  assert.match(bridge, /musicUserPaused=true;audio\.pause\(\)/);
+  assert.match(bridge, /d\.music\?\.url&&!musicUserPaused/);
+  assert.match(bridge, /source!==musicSource/);
+});
+
+test("Lace preserves the source gift-card section because the original includes it", () => {
+  assert.match(sourceModule, /show:\{[^}]*gift:i\("gift"\)/);
+  assert.match(sourceModule, /f\.show\.gift&&\(0,t\.jsx\)\(V/);
+  assert.match(bridge, /renderGift\(d\.toyona\s*\|\|\s*\{\}\)/);
+  assert.match(bridge, /hide\(section,!gift\.enabled\)/);
 });
 
 test("Lace gallery photo files match the exact source image bytes and active order", () => {
