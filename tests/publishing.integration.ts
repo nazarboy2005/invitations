@@ -819,8 +819,20 @@ test("every published template preserves every editor field across four-language
 });
 test("HTTP save → publish → public render → reopen and allowed edits preserves URL and locks", async () => {
   const invitation = completeInvitation();
-  if (process.env.PUBLISHING_TEMPLATE_ID)
+  if (process.env.PUBLISHING_TEMPLATE_ID) {
     invitation.templateId = process.env.PUBLISHING_TEMPLATE_ID;
+    if (invitation.templateId === "osh") {
+      invitation.eventType = "osh";
+      invitation.content["uz-Latn"] = defaultLocalizedInvitationContent(
+        "osh",
+        "uz-Latn",
+      );
+      invitation.content["uz-Latn"].message = "Test taklifnoma";
+      invitation.content["uz-Latn"].venueName = "Test venue";
+      invitation.content["uz-Latn"].address = "Test address";
+      invitation.content["uz-Latn"].people = ["Nodir test", "Madina test"];
+    }
+  }
   invitation.slug = "spoof1";
   let response = await request("/api/invitations", { invitation });
   assert.equal(response.status, 201);
@@ -830,7 +842,7 @@ test("HTTP save → publish → public render → reopen and allowed edits prese
   response = await request(`/api/invitations/${invitation.id}/publish`, {
     revision: saved.revision,
   });
-  assert.equal(response.status, 200);
+  assert.equal(response.status, 200, await response.clone().text());
   const published = await response.json();
   saved = published.invitation;
   assert.equal(published.url, `${origin}/i/${saved.slug}`);

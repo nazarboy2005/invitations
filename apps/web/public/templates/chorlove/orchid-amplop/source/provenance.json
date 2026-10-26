@@ -119,7 +119,7 @@
   "notes": [
     "Captured source chunk 0v0-3ulc~exde.js module 482485 contains the exact template tree, embedded CSS literal, opening/reveal/gift/lightbox motion, and source image references. Its current served bytes match the recorded SHA-256. Entry shim 838250 is in the same chunk; source default preview gallery is module 437202 in 0d2h69c7a3snv.js.",
     "The restored captured preview references 16 JavaScript chunks. The isolated package excludes provider runtime, auth, analytics, and sample invitation data. source/orchid.css is byte-identical to the source CSS literal. The exact local font faces map Comfortaa and Allura subsets.",
-    "The restored original Chorlove image directory contains eight files; all eight are byte-identical to packaged assets. Recursive exact-filename search across the recovered provider archive root (Chorlove and Marxaba) confirms the seven other component image paths are absent. Their exact original Chorlove URLs return HTTP 200; response bytes and hashes match the seven packaged assets, with source URL/status/format/hash recorded individually. All 16 source images, nine font subsets, and catalog-opening.png validate against recorded SHA-256 values.",
+    "The restored original Chorlove image directory contains eight files; all eight are byte-identical to packaged assets. Recursive exact-filename search across the recovered provider archives found one same-name divider.svg in Taklifiy's Sacred Garden; its SHA-256 is f4f3156f8e968bd427e94e89287b83bcce461f82c0c4657bcfa09eb70347fa82, distinct from Orchid's source divider hash d1bacc6f8b1bf09c4354d32268615915fa910ea4f143be7e83b503b0e64d2317. The other six referenced names are absent from those archives. All seven exact Orchid source URLs return HTTP 200 and response bytes/hashes match packaged files; source URL/status/format/hash are recorded individually. All 15 source images, nine font subsets, and catalog-opening.png validate against recorded SHA-256 values.",
     "The 450x800 catalog-opening.png is a real capture of the isolated opening using the canonical catalog fixture, without application chrome. Both typed catalog rows point to it. The metadata opening image remains excluded because it contains fixed names and a provider badge.",
     "Adapter maps locale content, personalized greeting, names/hosts, event/date/countdown/calendar, venue/map, repeatable program, source story/gallery/gift/wishes/RSVP/footer, contacts, music, and source image fallbacks. Module 437202 default gallery order is gallery-2, gallery-1, gallery-3, gallery-6, gallery-4, gallery-5; the preview adapter matches that order. Gallery/portrait/story sample assets are preview-only; creator uploads take precedence and public invitations receive no source demo photos.",
     "Exact source section audit confirms story, gallery, gift, wishes and RSVP source sections; no dress-code or extra-family-people section exists. Orchid-specific section policy prevents generic dress-code/extra-people injection. Optional receipt upload uses the existing platform API and is inserted within the source gift card reveal rather than as a separate guest-facing section.",
@@ -181,7 +181,7 @@
     "templateComponent": "0v0-3ulc~exde.js module 482485",
     "entryShim": "0v0-3ulc~exde.js module 838250",
     "defaultPreviewGallery": "0d2h69c7a3snv.js module 437202",
-    "archiveSearch": "All 55 captured Chorlove _next/static/chunks/*.js files and supplied Web invitations assets searched; the seven original image files were absent locally and recovered from the exact source URLs.",
+    "archiveSearch": "All 55 captured Chorlove _next/static/chunks/*.js files and supplied Chorlove Web invitations assets searched; the seven image files were absent from the Orchid source folder and recovered from exact source URLs.",
     "missingImages": [],
     "recoveredImages": [
       "divider.svg",
@@ -192,11 +192,12 @@
       "story-groom.jpg",
       "story-bride.jpg"
     ],
-    "providerArchiveSearch": "Recursive exact-filename search of the recovered provider archive root containing Chorlove and Marxaba (713 files under Marxaba) found zero local copies of all seven component references. The Chorlove Web invitations image folder contains exactly the eight packaged original-directory assets. Each missing archive file was fetched from its exact https://chorlove.uz/images/templates/orchid-amplop/<filename> source URL; response status 200 and SHA-256/byte length match the packaged file."
+    "providerArchiveSearch": "Recursive exact-filename search across the recovered Chorlove, Invitate, and nested Taklifiy archives found only a same-name divider.svg at Taklifiy/Web invitations/taklifiy.uz/reveal/sacred-garden/divider.svg (SHA-256 f4f3156f8e968bd427e94e89287b83bcce461f82c0c4657bcfa09eb70347fa82), which differs from Orchid's divider.svg hash d1bacc6f8b1bf09c4354d32268615915fa910ea4f143be7e83b503b0e64d2317. The other six referenced image names were not found. Chorlove's Orchid image directory contains exactly the eight packaged original-directory assets. All seven component image files were fetched from their exact https://chorlove.uz/images/templates/orchid-amplop/<filename> URLs; current responses have status 200 and SHA-256/byte lengths matching package files."
   },
   "catalogArtwork": {
     "path": "assets/catalog-opening.png",
     "dimensions": "450x800",
+    "sha256": "ec69f727d078423cb0788299025925d3bf21532d6911d27ed62a65a9aba43c29",
     "fixture": "apps/web/src/modules/catalog/preview-sample.json (uz-Latn couple names and greeting)",
     "capture": "The package's real opener rendered in a standalone local frame, with no application chrome. This is preview artwork only; the fixture is not invitation data."
   },

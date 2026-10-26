@@ -10,10 +10,10 @@ const read = (path: string) => readFileSync(join(process.cwd(), path), "utf8");
 const sha256 = (value: Buffer | string) =>
   createHash("sha256").update(value).digest("hex");
 
-test("Palace Rose stays private and supports wedding events only", () => {
+test("Palace Rose is published and supports wedding events only", () => {
   const entry = TEMPLATES.find((template) => template.id === "palace-rose");
   assert.ok(entry);
-  assert.equal(entry.published, false);
+  assert.equal(entry.published, true);
   assert.deepEqual(entry.categoryIds, ["wedding"]);
   assert.deepEqual(entry.supportedEventTypes, ["wedding"]);
   assert.equal(entry.priceMinor, 15_000_000);
@@ -128,6 +128,11 @@ test("Palace Rose bridge binds creator fields, service actions, locales, and red
     assert.ok(bridge.includes(asset), asset);
   }
   assert.match(bridge, /data-pr-gift-dialog/);
+  assert.match(bridge, /if \(i === 0\) showImage\(items, target\)/);
+  assert.match(bridge, /else if \(items\.length > 1\) \{ galleryPosition=target; paint\(\); \}/);
+  assert.match(bridge, /img\.src = item\.src \|\| item\.url/);
+  const capturedSource = read("Invitations - this folder will be removed from production/Chorlove/Web invitations/_next/static/chunks/0dg.9_70mpb0j.js");
+  assert.match(capturedSource, /onClick:\(\)=>\{i\?c\(a\):F\?\.scrollTo\(a\)\}/);
   assert.match(bridge, /aria-modal/);
   assert.match(bridge, /toyona\.note/);
   assert.match(bridge, /prefers-reduced-motion/);

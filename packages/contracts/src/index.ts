@@ -1442,7 +1442,7 @@ export const TEMPLATES: TemplateDefinition[] = [
     priceMinor: 15000000,
     currency: "UZS",
     accent: "#e382d3",
-    published: false,
+    published: true,
   },
   {
     id: "invitate-palov",
@@ -1612,7 +1612,7 @@ export const TEMPLATES: TemplateDefinition[] = [
     priceMinor: 15000000,
     currency: "UZS",
     accent: "#e382d3",
-    published: false,
+    published: true,
   },
   {
     id: "palace-rose",
@@ -1626,7 +1626,7 @@ export const TEMPLATES: TemplateDefinition[] = [
     priceMinor: 15000000,
     currency: "UZS",
     accent: "#640e1b",
-    published: false,
+    published: true,
   },
   {
     id: "royal-burgundy-edition",
