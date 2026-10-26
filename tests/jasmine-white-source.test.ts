@@ -277,6 +277,7 @@ test("Jasmine White preserves its captured page, stylesheets, and design artwork
     /if \(templateId === "jasmine-white" && preview && sampleWishes\)[\s\S]{0,180}mapped\.venueImage = venuePhoto/,
   );
   assert.match(bridge, /d\.music\?\.url/);
+  assert.match(bridge, /else if \(frame && query\) \{\s*frame\.src = `https:\/\/maps\.google\.com\/maps\?q=\$\{encodeURIComponent\(query\)\}&z=15&output=embed`/);
   assert.match(
     bridge,
     /src="\/templates\/jasmine-white\/assets\/glass_garden_green\.webp"/,
@@ -286,6 +287,10 @@ test("Jasmine White preserves its captured page, stylesheets, and design artwork
   assert.equal((bridge.match(/instagram: "Instagram"/g) || []).length, 4);
   assert.match(bridge, /links\.slice\(values\.length\)\.forEach\(\(link\) => hide\(link, true\)\)/);
   assert.match(adapterCss, /\.jw-status:empty\s*\{\s*display:\s*none;/);
+  assert.match(
+    adapterCss,
+    /\.jw-reduced-motion \*,\s*\.jw-reduced-motion \*::before,\s*\.jw-reduced-motion \*::after\s*\{\s*animation:\s*none !important;\s*transition:\s*none !important;/,
+  );
   assert.match(bridge, /Таклифнома/);
   assert.doesNotMatch(bridge, /Ð|Ñ„|â€”/);
 
