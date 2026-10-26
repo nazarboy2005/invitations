@@ -5,13 +5,13 @@ import { createHash } from "node:crypto";
 import test from "node:test";
 import { templateById } from "@taklifnoma/contracts";
 
-test("Fairy is an unpublished wedding-only Invitate source package", () => {
+test("Fairy is a published wedding-only Invitate source package", () => {
   const template = templateById("fairy");
   assert.ok(template);
   assert.deepEqual(template.categoryIds, ["wedding"]);
   assert.deepEqual(template.supportedEventTypes, ["wedding"]);
   assert.equal(template.priceMinor, 15000000);
-  assert.equal(template.published, false);
+  assert.equal(template.published, true);
   assert.equal(template.previewImage, "/templates/fairy/preview.png");
 
   const index = readFileSync("apps/web/src/templates/invitate/registry.ts", "utf8");

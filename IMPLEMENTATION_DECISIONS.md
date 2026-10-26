@@ -1510,6 +1510,14 @@ Development agents are distinct from production queue workers. The running app w
   non-RSVP checks can pass. Per user decision, RSVP/wishes verification may be
   deferred and handled later; do not claim it is verified.
 
+- Publication follow-up (2026-10-26): Fairy is published by additive migration
+  `0144_publish_invitate_fairy.sql` at 15,000,000 UZS with wedding-only
+  compatibility. Focused source checks pass 3/3; web typecheck passes; the
+  authenticated creator save → publish → public-render → reopen integration
+  passes 1/1. RSVP/wishes remain deferred. Reduced-motion browser comparison
+  remains for the user's manual review. No external deployment or live payment
+  activation occurred.
+
 ## Chorlove Orchid Amplop publication (2026-10-26)
 
 - The remaining non-RSVP creator/public lifecycle gate passed through the
