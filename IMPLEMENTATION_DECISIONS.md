@@ -78,6 +78,34 @@
   superseding the earlier 20-degree limit. Keep phone captions below photographs.
   Remove the “Scroll qiling” cue and its icon entirely.
 
+## Homepage celebration story (2026-10-27)
+
+- User approved a separate photographic vortex between cinematic features and
+  “Katta kun sari. Uch kichik qadam.” Keep the existing drop/water/occasion section
+  completely unchanged. This insertion supersedes the previous direct feature-to-step join.
+- Chapters: “Shirin hayajon.” → “Nihoyat, birgamiz.” → “Bir umrga xotira.”
+  Show anticipation, gathering and lasting memories across birthdays, family
+  celebrations and weddings. Use cinematic photographs, not template previews.
+- Latest motion correction: photographs originate small at the centre, follow
+  curved paths along a perspective cylinder and grow as they pass outward, as if
+  the viewer travels through its middle. Supersedes the initial outside-in flat
+  orbit. Scroll changes chapters and reverses the sequence; release naturally
+  into the existing steps. Remove chapter numbers above the title and at the bottom.
+- Use a very light photographic leafy background for a subtle botanical atmosphere.
+- Follow-up: narrow the apparent cylinder so photos stay visible longer while
+  growing closer. A small central glow expands with the first title to cover the
+  screen. Clip photographs to the growing light, with the text above the mask.
+- Phone cylinder cross-section must be circular in pixels, independent of screen
+  aspect ratio. Cap photograph growth smoothly and fade at a near plane before
+  oversized edge fragments can obscure the screen. Keep text above the photo layer.
+- Depth correction: twelve photos per chapter on both phones and laptops must
+  occupy staggered depths along a helix. Later photos emerge from behind while
+  nearer ones pass the viewer; do not expand all twelve as one flat circle.
+  Slow the outward pass with softened perspective and a longer scroll sequence.
+- Retain Visol’s light ivory/pomegranate direction. Use local optimized photos,
+  CSS transforms and native sticky positioning; pause
+  offscreen/background work, and provide readable reduced-motion/no-JS layouts.
+
 ## Homepage three-step section (2026-10-25)
 
 - User approved replacing the standalone process block with a photographic
@@ -89,8 +117,12 @@
   photographic setting and their positions. Use the confirmed three Uzbek steps.
   Add a single thin reversible scroll-progress timeline below them; use a vertical
   rail beside the stacked phone steps. Keep all content readable, including without
-  JavaScript or with reduced motion. No scroll pinning or extra animation dependency.
-- Join this section directly to the cinematic features as its closing section.
+  JavaScript or with reduced motion. No extra animation dependency.
+- Follow-up: pin the stage while the timeline moves when all three steps fit.
+  Upcoming steps remain muted until the ball reaches them; reverse scrolling
+  relocks them. Increase the pinned scroll distance to 1.45 viewport heights so
+  the line progresses more slowly and the reader stays longer in the section.
+- Place this section after the celebration story, following the cinematic features.
   Remove the intervening “Ezgu niyatga qulay bir yo‘l” to‘yona promotion and
   sample/disclaimer text. This removes homepage copy only, not product features.
 - Preserve the existing cinematic scroll timing and light campaign direction.

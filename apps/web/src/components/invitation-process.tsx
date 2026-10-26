@@ -72,7 +72,7 @@ export function InvitationProcess() {
       // If all three steps cannot fit, preserve normal scrolling and readability.
       pinned = !reduced.matches && rect.height + 32 <= innerHeight;
       const stageTop = Math.min(0, innerHeight - stageHeight);
-      distance = pinned ? innerHeight * 0.85 : rect.height + innerHeight * 0.12;
+      distance = pinned ? innerHeight * 1.45 : rect.height + innerHeight * 0.12;
       track.style.setProperty("--stage-top", `${stageTop}px`);
       track.style.setProperty("--stage-height", `${stageHeight}px`);
       track.style.setProperty("--scroll-distance", `${distance}px`);
