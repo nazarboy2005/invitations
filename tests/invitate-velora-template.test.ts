@@ -12,11 +12,11 @@ const packageRoot = path.join(root, "apps/web/public/templates/velora");
 const readPackage = (relative: string) =>
   readFileSync(path.join(packageRoot, relative), "utf8");
 
-test("Velora is a private wedding design in the shared typed catalog", () => {
+test("Velora is a published wedding design in the shared typed catalog", () => {
   const template = templateById("velora");
   assert.ok(template);
   assert.equal(template.name, "Velora");
-  assert.equal(template.published, false);
+  assert.equal(template.published, true);
   assert.equal(template.previewEventType, "wedding");
   assert.deepEqual(template.categoryIds, ["wedding"]);
   assert.deepEqual(template.supportedEventTypes, ["wedding"]);
@@ -152,7 +152,7 @@ test("Velora refreshes keep guest music playback stable unless its URL changes",
   assert.match(adapter, /button\.dataset\.onIcon\)button\.src=button\.dataset\.onIcon/);
 });
 
-test("Velora migration registers only the private wedding row", () => {
+test("Velora registration and publication migrations preserve wedding-only support", () => {
   const migration = readFileSync(
     path.join(root, "packages/database/migrations/0124_register_velora_template.sql"),
     "utf8",
@@ -161,4 +161,11 @@ test("Velora migration registers only the private wedding row", () => {
   assert.match(migration, /VALUES \('velora', 'wedding'\)/);
   assert.match(migration, /template_supported_event_types[\s\S]*VALUES \('velora', 'wedding'\)/);
   assert.doesNotMatch(migration, /published\s*=\s*true/i);
+  const publication = readFileSync(
+    path.join(root, "packages/database/migrations/0145_publish_invitate_velora.sql"),
+    "utf8",
+  );
+  assert.match(publication, /template_id = 'velora' AND category_id = 'wedding'/);
+  assert.match(publication, /template_id = 'velora' AND event_type = 'wedding'/);
+  assert.match(publication, /SET published = true/);
 });

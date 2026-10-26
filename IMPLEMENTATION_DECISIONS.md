@@ -1518,6 +1518,17 @@ Development agents are distinct from production queue workers. The running app w
   remains for the user's manual review. No external deployment or live payment
   activation occurred.
 
+## Invitate Velora publication (2026-10-26)
+
+- Velora is published by additive migration `0145_publish_invitate_velora.sql`
+  at 15,000,000 UZS with wedding-only compatibility. Its focused package suite
+  passes 8/8, web typecheck passes, and the authenticated creator save → publish
+  → public-render → reopen integration passes 1/1.
+- The source CSS/JS/HTML and local font assets are hash-checked, but the manifest
+  screenshot is absent and valid source/package visual and browser reduced-motion
+  comparisons remain for the user's manual review. RSVP service submission was
+  not exercised. No external deployment or live payment activation occurred.
+
 ## Chorlove Orchid Amplop publication (2026-10-26)
 
 - The remaining non-RSVP creator/public lifecycle gate passed through the
