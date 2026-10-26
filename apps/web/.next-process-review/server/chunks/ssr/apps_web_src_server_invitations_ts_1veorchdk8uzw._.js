@@ -1,3 +1,0 @@
-module.exports=[20282,65239,a=>{"use strict";var b=a.i(41641),c=a.i(70591);async function d(a,d){let e=await (0,b.f)()`SELECT data,status FROM invitations WHERE id=${a} AND owner_id=${d}`;return e[0]?c.i.parse({...e[0].data,status:e[0].status}):null}async function e(a){let d=await (0,b.f)()`SELECT id,data FROM invitations WHERE (id::text=${a} OR slug=${a}) AND status='published' LIMIT 1`;return d[0]?{id:d[0].id,invitation:c.i.parse(d[0].data)}:null}a.i(85216),a.s(["f",0,class extends Error{status;code;constructor(a,b,c){super(c),this.status=a,this.code=b}}],65239),a.i(71448),a.i(66680),a.i(43194),a.i(12714),a.i(50227),a.s(["A",0,d,"w",0,e],20282)}];
-
-//# sourceMappingURL=apps_web_src_server_invitations_ts_1veorchdk8uzw._.js.map

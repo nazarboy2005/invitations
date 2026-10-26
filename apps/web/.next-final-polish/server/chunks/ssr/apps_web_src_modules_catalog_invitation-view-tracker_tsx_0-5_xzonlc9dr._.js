@@ -1,3 +1,0 @@
-module.exports=[64471,a=>{"use strict";var b=a.i(46221);a.s(["InvitationViewTracker",0,function({invitationId:a}){let c=(0,b.useRef)(!1);return(0,b.useEffect)(()=>{c.current||(c.current=!0,fetch(`/api/public/invitations/${encodeURIComponent(a)}/view`,{method:"POST",cache:"no-store",keepalive:!0}).catch(()=>{}))},[a]),null}])}];
-
-//# sourceMappingURL=apps_web_src_modules_catalog_invitation-view-tracker_tsx_0-5_xzonlc9dr._.js.map
