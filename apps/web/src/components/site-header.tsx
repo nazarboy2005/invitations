@@ -52,6 +52,7 @@ export async function SiteHeader({
           </Link>
           <HeroMobileMenu
             accountLabel={<AccountLinkLabel signedIn={Boolean(user)} />}
+            isAdmin={user?.isAdmin ?? false}
           />
         </div>
       </ScrollHeader>

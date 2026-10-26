@@ -40,6 +40,21 @@ The browser dashboard does not edit server environment variables or grant roles.
 Deployment operators manage this allowlist using the hosting provider's access
 controls.
 
+In the Telegram Mini App, opening `/` or `/dashboard` automatically resolves the
+server session once the Telegram SDK is ready. Verified admins enter `/admin`
+using a full document navigation, so the privileged page loads its own CSP and
+excludes the remote SDK. Existing sessions are not silently renewed: an admin
+session older than 12 hours still goes to `/admin/verify`. Login exchanges share
+in-flight work to avoid consuming the same launch twice when the SDK and account
+page initialize together. Phone verification and server role checks remain
+required; unsigned Mini App identity fields never grant access.
+
+The account heading and mobile homepage menu show **Boshqaruv** for recognized
+admins. **Hisobga qaytish** opens `/dashboard?mode=personal`, allowing admins to
+use their own creator account without immediately redirecting back. Invitation,
+editor, catalog and guest-response deep links retain their intended destination.
+On phones, the admin top bar also offers **Shaxsiy hisob** for this return.
+
 ## Management tools
 
 - **Users:** searchable, paginated account lists and details, invitation/payment
@@ -178,6 +193,16 @@ penetration testing are outside what these code checks establish.
 
 ### Local verification, 2026-10-27
 
+- Mini App entry update: **18/18** focused session/auth/allowlist checks passed.
+  Browser checks with signed disposable launch data verified delayed SDK loading,
+  one exchange per launch, homepage/account auto-entry, no SDK in the privileged
+  document, mandatory stale-session reconfirmation, personal-account return,
+  visible phone controls, ordinary-user separation and preserved catalog deep
+  links. No hydration/CSP errors or live Telegram sends occurred. Production
+  build passed after correcting a catalog fallback expression's empty-string
+  type. The broader catalog suite has an unrelated stale Shahzoda source-regex
+  assertion expecting `getTemplatePreviewWishes(locale)` while the renderer now
+  correctly passes its template ID; that assertion remains outside this update.
 - Allowlist extension: **11/11** allowlist/admin-policy unit checks and **1/1**
   environment-only admin HTTP/worker check passed. Production build and
   typechecking passed, as did **16/16** existing admin HTTP/auth regression checks.

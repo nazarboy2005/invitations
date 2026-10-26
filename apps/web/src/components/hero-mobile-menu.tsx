@@ -4,7 +4,13 @@ import Link from "next/link";
 import { useEffect, useId, useRef, useState, type ReactNode } from "react";
 import styles from "./site-header.module.css";
 
-export function HeroMobileMenu({ accountLabel }: { accountLabel: ReactNode }) {
+export function HeroMobileMenu({
+  accountLabel,
+  isAdmin = false,
+}: {
+  accountLabel: ReactNode;
+  isAdmin?: boolean;
+}) {
   const [open, setOpen] = useState(false);
   const id = useId();
   const menu = useRef<HTMLDivElement>(null);
@@ -56,6 +62,7 @@ export function HeroMobileMenu({ accountLabel }: { accountLabel: ReactNode }) {
           <Link href="/templates?category=other">Tantanalar</Link>
           <Link href="/#why-us">Biz haqimizda</Link>
           <Link href="/dashboard">{accountLabel}</Link>
+          {isAdmin && <a href="/admin">Boshqaruv</a>}
         </nav>
       )}
     </div>

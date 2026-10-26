@@ -423,6 +423,7 @@
   min-width: 0;
 }
 .topbar {
+  flex-wrap: wrap;
   min-height: 83px;
   display: flex;
   align-items: center;
@@ -433,6 +434,15 @@
   background: #fff;
   font-size: 12px;
   color: var(--muted);
+}
+.topbarActions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+.topbar .mobileAccount {
+  display: none;
 }
 .topbar a {
   display: flex;
@@ -893,6 +903,9 @@
   }
 }
 @media (max-width: 760px) {
+  .topbar .mobileAccount {
+    display: inline-flex;
+  }
   .workspace {
     display: block;
   }

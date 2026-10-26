@@ -40,6 +40,7 @@ import { InvitationThumbnail } from "./invitation-thumbnail";
 import { useRouter } from "next/navigation";
 import { PublishedLink } from "@/components/published-link";
 import { ConfirmationDialog } from "@/components/confirmation-dialog";
+import { loadClientSession } from "@/modules/session/client-session";
 type DashboardInvitation = Invitation & {
   createdAt?: string;
   viewCount?: number;
@@ -355,40 +356,25 @@ export function Dashboard() {
   }
 
   useEffect(() => {
+    const refreshSession = () => setRetry((value) => value + 1);
+    window.addEventListener("taklifnoma:session-changed", refreshSession);
+    return () =>
+      window.removeEventListener("taklifnoma:session-changed", refreshSession);
+  }, []);
+
+  useEffect(() => {
     let alive = true;
 
     async function load() {
       if (!dashboardSnapshot) setLoading(true);
       setError("");
       try {
-        let response = await fetch("/api/auth/session", {
-          cache: "no-store",
-        });
-        if (!response.ok)
-          throw new Error(
-            "Hisobingizni tekshirib bo‘lmadi. Ulanishni tekshirib, qayta urinib ko‘ring.",
-          );
-        let result: SessionResponse = await response.json();
         const initData = window.Telegram?.WebApp?.initData;
-        if (!result.user && initData) {
+        if (initData) {
           window.Telegram?.WebApp?.ready?.();
           window.Telegram?.WebApp?.expand?.();
-          const exchange = await fetch("/api/auth/telegram/mini-app", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ initData }),
-            cache: "no-store",
-          });
-          if (exchange.ok) {
-            response = await fetch("/api/auth/session", { cache: "no-store" });
-            if (!response.ok) throw new Error();
-            result = await response.json();
-          } else if (exchange.status !== 403) {
-            throw new Error(
-              "Telegram hisobingizni tekshirib bo‘lmadi. Mini App’ni qayta oching.",
-            );
-          }
         }
+        const result = await loadClientSession(initData);
         if (!alive) return;
         setSession(result);
         try {
@@ -494,10 +480,21 @@ export function Dashboard() {
             <h1>Taklifnomalarim</h1>
             <span>Har bir muhim kun uchun o‘zgacha taklif.</span>
           </div>
-          <button className={styles.primaryButton} onClick={createNew}>
-            <Plus size={18} />
-            Yangi taklifnoma
-          </button>
+          <div className={styles.headingActions}>
+            {session?.user?.isAdmin && (
+              <a
+                href="/admin"
+                className={`${styles.primaryButton} ${styles.adminButton}`}
+              >
+                <ShieldCheck size={18} aria-hidden="true" />
+                Boshqaruv
+              </a>
+            )}
+            <button className={styles.primaryButton} onClick={createNew}>
+              <Plus size={18} />
+              Yangi taklifnoma
+            </button>
+          </div>
         </div>
         {!session?.user && !loading && !error && (
           <div className={styles.accountNotice}>

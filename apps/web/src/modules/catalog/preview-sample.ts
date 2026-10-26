@@ -204,7 +204,7 @@ export function getTemplatePreviewWishes(
   templateId?: string,
 ): Array<{ name: string; text: string }> {
   return structuredClone(
-    (templateId && TEMPLATE_SAMPLES[templateId]?.wishes?.[locale]) ??
+    (templateId ? TEMPLATE_SAMPLES[templateId]?.wishes?.[locale] : undefined) ??
       previewSample.wishes[locale],
   );
 }

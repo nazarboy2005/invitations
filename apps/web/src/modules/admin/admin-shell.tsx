@@ -82,7 +82,7 @@ export function AdminShell({
               Administrator
             </p>
             <strong>{user.displayName}</strong>
-            <Link href="/dashboard">
+            <Link href="/dashboard?mode=personal">
               <ArrowLeft size={16} aria-hidden="true" />
               Hisobga qaytish
             </Link>
@@ -91,10 +91,18 @@ export function AdminShell({
         <main id="main" className={styles.main}>
           <header className={styles.topbar}>
             <span>Visol / Boshqaruv</span>
-            <Link href="/templates" target="_blank" rel="noopener noreferrer">
-              Katalogni ochish
-              <ExternalLink size={15} aria-hidden="true" />
-            </Link>
+            <nav className={styles.topbarActions} aria-label="Hisob va katalog">
+              <Link
+                href="/dashboard?mode=personal"
+                className={styles.mobileAccount}
+              >
+                Shaxsiy hisob
+              </Link>
+              <Link href="/templates" target="_blank" rel="noopener noreferrer">
+                Katalogni ochish
+                <ExternalLink size={15} aria-hidden="true" />
+              </Link>
+            </nav>
           </header>
           <div className={styles.content}>
             <div className={styles.heading}>

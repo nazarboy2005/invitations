@@ -2,6 +2,12 @@
 
 ## Administrator workspace and access (2026-10-27)
 
+- User follow-up: Mini App admins must enter the admin workspace automatically,
+  without typing `/admin`. Resolve the verified server session after the
+  Telegram SDK is ready on home/account entry routes; load `/admin` as a fresh
+  document. Keep admin reconfirmation after 12 hours, creator/public deep links,
+  and an explicit personal-account return without a redirect loop. Show a
+  visible mobile account/menu **Boshqaruv** link for recognized admins.
 - User confirmed server-side `PLATFORM_ADMIN_TELEGRAM_IDS` configuration as an
   admin assignment option. Use exact positive numeric Telegram user IDs; apply
   the allowlist to both new and existing verified accounts, including web

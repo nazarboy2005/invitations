@@ -52,11 +52,26 @@
   text-decoration: none;
   cursor: pointer;
   box-sizing: border-box;
-  transition: background 160ms ease, box-shadow 160ms ease;
+  transition:
+    background 160ms ease,
+    box-shadow 160ms ease;
   box-shadow: 0 3px 7px rgb(var(--shadow-color) / 6%);
 }
 .primaryButton:hover {
   background: var(--primary-hover);
+}
+.headingActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.adminButton {
+  background: var(--surface);
+  color: var(--primary);
+  border: 1px solid var(--line-strong);
+}
+.adminButton:hover {
+  background: var(--accent-soft);
 }
 .accountNotice {
   display: flex;
