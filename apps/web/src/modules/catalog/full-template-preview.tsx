@@ -15,6 +15,8 @@ import { isInvitateTemplate } from "@/templates/invitate/registry";
 
 import { isChorloveTemplate } from "@/templates/chorlove/registry";
 import { readBrowserDraft } from "@/modules/studio/draft-storage";
+import { CATALOG_PREVIEW_MUSIC } from "./catalog-music";
+import { InvitationMusicAutoplay } from "./invitation-view-tracker";
 import {
   createTemplatePreviewSample,
   createLongNamePreview,
@@ -258,6 +260,19 @@ export function FullTemplatePreview({
 
   return (
     <main className={styles.fullPreview} ref={previewRef} data-card-preview={cardPreview || undefined}>
+      {invitation && !cardPreview && !posterCapture && (
+        <InvitationMusicAutoplay
+          musicUrl={
+            silentPlayback
+              ? ""
+              : catalogPreview
+                ? CATALOG_PREVIEW_MUSIC.url
+                : invitation.music.enabled
+                  ? invitation.music.url
+                  : ""
+          }
+        />
+      )}
       {!cardPreview && !posterCapture && <nav
         className={`${styles.previewControls} ${showControls ? styles.controlsVisible : ""}`}
         aria-label="Dizayn amallari"

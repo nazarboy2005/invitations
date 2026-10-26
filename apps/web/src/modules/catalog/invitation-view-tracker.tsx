@@ -167,6 +167,21 @@ function manageInvitationFrames(expectedSource: string) {
   };
 }
 
+export function InvitationMusicAutoplay({ musicUrl }: { musicUrl?: string }) {
+  useEffect(() => {
+    if (!musicUrl) return;
+    const source = absoluteUrl(musicUrl, window.location.href);
+    const cleanupPage = manageInvitationAudio(document, source);
+    const cleanupFrames = manageInvitationFrames(source);
+    return () => {
+      cleanupPage();
+      cleanupFrames();
+    };
+  }, [musicUrl]);
+
+  return null;
+}
+
 export function InvitationViewTracker({
   invitationId,
   musicUrl,
@@ -191,16 +206,5 @@ export function InvitationViewTracker({
     });
   }, [invitationId]);
 
-  useEffect(() => {
-    if (!musicUrl) return;
-    const source = absoluteUrl(musicUrl, window.location.href);
-    const cleanupPage = manageInvitationAudio(document, source);
-    const cleanupFrames = manageInvitationFrames(source);
-    return () => {
-      cleanupPage();
-      cleanupFrames();
-    };
-  }, [musicUrl]);
-
-  return null;
+  return <InvitationMusicAutoplay musicUrl={musicUrl} />;
 }
