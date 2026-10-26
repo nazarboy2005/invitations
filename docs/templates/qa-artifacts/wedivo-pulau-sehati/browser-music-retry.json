@@ -1,0 +1,36 @@
+{
+  "blocked": {
+    "attempts": 1,
+    "paused": true,
+    "controlVisible": true,
+    "source": "http://127.0.0.1:40393/music/catalog/emotional-piano.wav"
+  },
+  "retried": {
+    "attempts": 2,
+    "paused": false,
+    "time": 1.680422,
+    "ready": 4
+  },
+  "paused": {
+    "attempts": 2,
+    "paused": true,
+    "time": 1.685157
+  },
+  "preserved": {
+    "attempts": 2,
+    "paused": true,
+    "time": 1.685157
+  },
+  "errors": [],
+  "badRequests": [
+    {
+      "url": "http://127.0.0.1:40393/favicon.ico",
+      "status": 404
+    },
+    {
+      "url": "http://127.0.0.1:40393/favicon.ico",
+      "status": 404
+    }
+  ],
+  "instrumentation": "QA-only browser play() rejection simulates autoplay blocking; actual local WAV playback is restored before guest input. No production code modification."
+}

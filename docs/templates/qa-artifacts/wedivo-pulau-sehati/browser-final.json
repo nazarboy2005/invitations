@@ -1,0 +1,91 @@
+{
+  "final": {
+    "long": {
+      "title": "",
+      "frame": "http://127.0.0.1:40387/templates/wedivo-pulau-sehati/index.html",
+      "lang": "uz-Latn",
+      "bound": "true",
+      "body": "has-guest mode-game is-loaded is-started panel-open",
+      "names": "\nAbdulloh Muhammadjon Abdurahmonov\nGulchehra Muborak Abdurahmonova\n",
+      "loaded": true,
+      "fonts": "loaded",
+      "sections": [
+        "hero",
+        "couple",
+        "kisah",
+        "countdown",
+        "events",
+        "rundown",
+        "venue",
+        "dresscode",
+        "gallery",
+        "rsvp",
+        "wishes",
+        "closing"
+      ],
+      "rd": 6,
+      "overflow": 0,
+      "gl": true
+    },
+    "catalog": {
+      "title": "",
+      "frame": "http://127.0.0.1:40387/templates/wedivo-pulau-sehati/index.html",
+      "lang": "uz-Latn",
+      "bound": "true",
+      "body": "is-cover mode-game is-loaded",
+      "names": "\nJavohir\nMadina\n",
+      "loaded": true,
+      "fonts": "loaded",
+      "sections": [
+        "cover",
+        "hero",
+        "couple",
+        "countdown",
+        "events",
+        "rundown",
+        "venue",
+        "dresscode",
+        "gallery",
+        "rsvp",
+        "wishes",
+        "closing"
+      ],
+      "rd": 6,
+      "overflow": 0,
+      "gl": true
+    },
+    "opened": {
+      "title": "",
+      "frame": "http://127.0.0.1:40387/templates/wedivo-pulau-sehati/index.html",
+      "lang": "uz-Latn",
+      "bound": "true",
+      "body": "mode-game is-loaded is-started panel-open",
+      "names": "\nJavohir\nMadina\n",
+      "loaded": true,
+      "fonts": "loaded",
+      "sections": [
+        "hero",
+        "couple",
+        "countdown",
+        "events",
+        "rundown",
+        "venue",
+        "dresscode",
+        "gallery",
+        "rsvp",
+        "wishes",
+        "closing"
+      ],
+      "rd": 6,
+      "overflow": 0,
+      "gl": true
+    }
+  },
+  "errors": [],
+  "badRequests": [
+    {
+      "url": "http://127.0.0.1:40387/favicon.ico",
+      "status": 404
+    }
+  ]
+}

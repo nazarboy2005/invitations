@@ -1,0 +1,20 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Undangan Pulau//ID
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:pulau-1812801600000-0@undangan
+DTSTAMP:20261026T213600Z
+DTSTART:20270612T120000Z
+DTEND:20270612T140000Z
+SUMMARY:Nikoh to‘yi — Javohir & Madina
+LOCATION:Zarafshon tantanalar saroyi\, Toshkent shahri\, Yunusobod tumani · Amir Temur xiyoboni yaqinida
+DESCRIPTION:Baxtli kunimizda ko‘rishguncha!
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Ertaga: Nikoh to‘yi — Javohir & Madina
+END:VALARM
+END:VEVENT
+END:VCALENDAR
