@@ -56,7 +56,7 @@
     if (nameInput) nameInput.placeholder = t.name;
     const wish = $("#wishlist");
     if (wish) wish.placeholder = t.wish;
-    const fields = $$(".rsvp-field label");
+    const fields = $$(".rsvp-field > label");
     if (fields[1]) text(fields[1], t.question);
     if (fields[2]) text(fields[2], t.wishLabel);
     const radios = $$(".rsvp-radio");
