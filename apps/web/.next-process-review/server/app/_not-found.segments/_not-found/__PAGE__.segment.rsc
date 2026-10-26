@@ -1,0 +1,31 @@
+1:"$Sreact.fragment"
+2:"/_next/static/chunks/28yg0a9w-hhb3.js"
+3:I[16706,["$2"],""]
+4:I[93151,["$2"],"default"]
+5:"/_next/static/chunks/2btdzmy-z8zp7.js"
+6:I[71653,["$2","$5"],"default"]
+7:I[71692,["$2"],"default"]
+8:"/_next/static/chunks/1s2xq4e3frlvq.js"
+9:I[2436,["$2","$8"],""]
+10:I[67344,["$2"],"OutletBoundary"]
+11:"$Sreact.suspense"
+14:"ViewportBoundary"
+15:I[67344,["$2"],"$14"]
+16:"MetadataBoundary"
+17:I[67344,["$2"],"$16"]
+:HL["/_next/static/chunks/10q157xz_-5mc.css","style"]
+b:X
+e:X
+e:C
+f:[["children",{"s":"__PAGE__","h":160,"d":{"r":["$","$1","c",{"children":[["$","main",null,{"id":"main","className":"page-error","children":[["$","h1",null,{"children":"Bu sahifa topilmadi"}],["$","p",null,{"children":"Taklifnoma havolasini tekshiring yoki bosh sahifaga qayting."}],["$","$L9",null,{"className":"button","href":"/","children":"Bosh sahifa"}]]}],[["$","script","script-0",{"src":"/_next/static/chunks/1s2xq4e3frlvq.js","async":true}]],["$","$L10",null,{"children":["$","$11",null,{"name":"Next.MetadataOutlet","children":"$@12"}]}]]}],"p":"$@13","v":null,"s":"$b"}}]]
+c:[["children",{"s":"/_not-found","h":96,"d":{"r":["$","$1","c",{"children":[null,["$","$L4",null,{"parallelRouterKey":"children","template":["$","$L7",null,{}]}]]}],"p":"$@d","v":"$e","s":"$b"},"c":"$Qf"}]]
+0:{"t":{"t":{"s":"","h":80,"d":{"r":["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/chunks/10q157xz_-5mc.css","precedence":"next"}],["$","script","script-0",{"src":"/_next/static/chunks/28yg0a9w-hhb3.js","async":true}]],["$","html",null,{"lang":"uz-Latn","suppressHydrationWarning":true,"children":["$","body",null,{"children":[["$","$L3",null,{"src":"https://telegram.org/js/telegram-web-app.js","strategy":"afterInteractive"}],["$","a",null,{"className":"skip-link","href":"#main","children":"Asosiy sahifaga o‘tish"}],["$","$L4",null,{"parallelRouterKey":"children","error":"$6","errorStyles":[],"errorScripts":[["$","script","script-0",{"src":"/_next/static/chunks/2btdzmy-z8zp7.js","async":true}]],"template":["$","$L7",null,{}],"notFound":[["$","main",null,{"id":"main","className":"page-error","children":[["$","h1",null,{"children":"Bu sahifa topilmadi"}],["$","p",null,{"children":"Taklifnoma havolasini tekshiring yoki bosh sahifaga qayting."}],["$","$L9",null,{"className":"button","href":"/","children":"Bosh sahifa"}]]}],[]]}]]}]}]]}],"p":"$@a","v":null,"s":"$b"},"c":"$Qc"},"h":{"r":["$","$1","h",{"children":[["$","meta",null,{"name":"robots","content":"noindex"}],["$","$L15",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]}],["$","$L17",null,{"children":[["$","div",null,{"hidden":true,"children":["$","$11",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"Taklifnoma — Yaxshi kunlar birga"}],["$","meta","1",{"name":"description","content":"Unutilmas kuningiz uchun shaxsiy elektron taklifnoma yarating."}]]}]}],null]}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}],"p":"$@18","v":null,"s":"$b"}},"a":"$@19","u":"$@1a","b":"jwYgS6Qr3aUlunGXougJv"}
+12:null
+b:300
+1a:true
+b:C
+19:0
+d:"$undefined"
+a:"$undefined"
+18:"$undefined"
+13:"$undefined"
