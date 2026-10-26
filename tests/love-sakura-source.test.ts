@@ -16,10 +16,13 @@ test("Love Sakura preserves its full captured page and source asset checksums",(
  if(source){assert.equal(createHash("sha256").update(source).digest("hex"),manifest.sourceSnapshot.sha256);assert.equal(manifest.sourceSnapshot.bytes,source.length);assert.equal(packagedSource.toString("utf8").replaceAll("\r\n","\n"),source.toString("utf8"));}
  else {assert.equal((packagedSource.toString("utf8").match(/<section\b/g)||[]).length,10);assert.equal(manifest.sourceSnapshot.bytes,55773);assert.match(manifest.sourceSnapshot.sha256,/^[a-f0-9]{64}$/);}
  const sourceSections=[...packagedSource.toString("utf8").matchAll(/<section\b.*?<\/section>/gs)].map(([section])=>section);
+ const packagedSections=[...html.matchAll(/<section\b.*?<\/section>/gs)].map(([section])=>section);
  assert.equal((packagedSource.toString("utf8").match(/\/images\/love-sakura\//g)||[]).length,35);
  assert.deepEqual([...sourceSections[6].matchAll(/src="\/images\/love-sakura\/([^"]+)"/g)].map(([,file])=>file),["hero-couple.webp","bride.webp","groom.webp","hero-couple.webp","bride.webp","groom.webp"]);
  assert.doesNotMatch(sourceSections[5],/<img\b/);assert.doesNotMatch(sourceSections[4],/\/(?:bride|groom|hero-couple)\.webp/);
  assert.equal((html.match(/<section\b/g)||[]).length,10);
+ assert.match(sourceSections[9],/Wedding Gift/);assert.match(sourceSections[9],/Bank Kartasi/);assert.match(sourceSections[9],/8600 0000 0000 0000/);assert.match(sourceSections[9],/Amplop Digital/);
+ assert.match(packagedSections[9],/Wedding Gift/);assert.match(packagedSections[9],/Bank Kartasi/);assert.match(bridge,/function setupGift\(\).*?hide\(sections\[9\],!gift\.enabled\)/s);assert.match(bridge,/gift\.cardNumber\|\|""/);assert.match(bridge,/gift\.cardHolder\|\|""/);
  for(const asset of manifest.assets){const bytes=readFileSync(join(root,"assets",asset.file));assert.equal(bytes.length,asset.bytes);assert.equal(createHash("sha256").update(bytes).digest("hex"),asset.sha256);assert.match(html,new RegExp(`/templates/love-sakura/assets/${asset.file.replaceAll(".","\\.")}`));}
  assert.equal(manifest.assets.length,10);
  const textureRefs=html.match(/url\('\/templates\/love-sakura\/assets\/bg-texture\.png'\)/g)||[];
@@ -50,6 +53,7 @@ test("Love Sakura restores the captured RSVP and music motion",{skip:!existsSync
  assert.match(adapter,/\.ls-music:active\{transform:scale\(\.9\)\}/);
  assert.match(adapter,/animation:ls-source-pulse 2s cubic-bezier\(\.4,0,\.6,1\) infinite/);
  assert.match(bridge,/q\('button\[aria-label="Toggle music"\]'\)/);assert.match(bridge,/lucide-volume-2/);assert.match(bridge,/audio\.muted=true/);assert.match(bridge,/onpointerenter=/);assert.match(bridge,/onpointerdown=/);
+ assert.match(bridge,/audio\.play\(\)\.then\(fadeIn\)\.catch\(\(\)=>\{audio\.pause\(\);setMuted\(true\);\}\)/);assert.match(bridge,/audio\.dataset\.lsUserPaused==="true"/);assert.match(bridge,/audio\.dataset\.lsMusicInitialized/);assert.match(bridge,/p\.data\?\.music\?\.enabled===false\?""/);assert.match(bridge,/const sourceChanged=audio\.getAttribute\("src"\)!==\(musicUrl\|\|null\)/);
 });
 test("Love Sakura package removes sample site runtime and binds the shared contract",()=>{
  assert.match(html,/data-chorlove-template="love-sakura" hidden/);assert.doesNotMatch(html,/_next\/image|_next\/static\/chunks\/[\w~.-]+\.js/);
@@ -58,7 +62,8 @@ test("Love Sakura package removes sample site runtime and binds the shared contr
  for(const field of ["groom","bride","dateTime","venue","program","story","gallery","wishes","rsvp","toyona","enabledLocales","reducedMotion","music"])assert.ok(bridge.includes(field),`missing shared field ${field}`);
  assert.match(bridge,/api\/public\/invitations/);
  const contract=readFileSync("packages/contracts/src/index.ts","utf8"),migration=readFileSync("packages/database/migrations/0116_register_love_sakura.sql","utf8");
- assert.match(contract,/id: "love-sakura"[\s\S]*?published: false/);assert.match(migration,/VALUES \('love-sakura', 'Love Sakura', 15000000, 'UZS', false\)/);
+ assert.match(contract,/id: "love-sakura"[\s\S]*?published: true/);assert.match(migration,/VALUES \('love-sakura', 'Love Sakura', 15000000, 'UZS', false\)/);
+ const publishMigration=readFileSync("packages/database/migrations/0149_publish_love_sakura.sql","utf8");assert.match(publishMigration,/template_id = 'love-sakura' AND category_id = 'wedding'/);assert.match(publishMigration,/template_id = 'love-sakura' AND event_type = 'wedding'/);assert.match(publishMigration,/SET published = true/);
 });
 test("Love Sakura keeps source interactions while adapting countdown, gift, optional wishes, and RSVP values",()=>{
  const sections=[...packagedSource.toString("utf8").matchAll(/<section\b.*?<\/section>/gs)].map(([section])=>section);

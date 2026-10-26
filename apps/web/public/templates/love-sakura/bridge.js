@@ -70,8 +70,8 @@
   }
   function setupMusic(p){
     let audio=q("audio");if(!audio){audio=document.createElement("audio");audio.loop=true;audio.preload="none";root.append(audio);}
-    audio.pause();audio.loop=true;if(p.data?.music?.url)audio.src=p.data.music.url;else audio.removeAttribute("src");
-    const silent=Boolean(p.preview&&p.silentPlayback);audio.muted=true;audio.volume=0;
+    audio.loop=true;const musicUrl=p.data?.music?.enabled===false?"":p.data?.music?.url||"";const sourceChanged=audio.getAttribute("src")!==(musicUrl||null);if(sourceChanged){audio.pause();if(musicUrl)audio.setAttribute("src",musicUrl);else audio.removeAttribute("src");audio.dataset.lsMusicInitialized="false";delete audio.dataset.lsUserPaused;audio.muted=true;audio.volume=0;}
+    const silent=Boolean(p.preview&&p.silentPlayback);
     let button=q("[data-ls-music]")||q('button[aria-label="Toggle music"]');
     if(!button){const wrap=document.createElement("div");wrap.className="fixed bottom-8 right-8 z-[110]";button=document.createElement("button");button.type="button";button.setAttribute("aria-label","Toggle music");button.className="w-14 h-14 rounded-full shadow-2xl flex items-center justify-center bg-white/90 border border-[#E5E0D8] text-[#A69689] backdrop-blur-md";wrap.append(button);root.append(wrap);}
     button.dataset.lsMusic="";
@@ -83,8 +83,14 @@
       if(playing){path("M11 5 6 9H2v6h4l5 4z");path("M15.54 8.46a5 5 0 0 1 0 7.07");path("M19.07 4.93a10 10 0 0 1 0 14.14");}
       else{path("M11 4.702a.7.7 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.7.7 0 0 0 11 19.298z");path("m16.5 14.5 5-5");path("m16.5 9.5 5 5");}return svg;};
     const setMuted=muted=>{audio.muted=muted;button.setAttribute("aria-pressed",String(!muted));button.replaceChildren(makeIcon(!muted));};
-    let ramp=null;button.onclick=()=>{const unmute=audio.muted;setMuted(!unmute);if(ramp){clearInterval(ramp);ramp=null;}if(unmute){audio.volume=0;audio.play().catch(()=>{});let step=0;ramp=setInterval(()=>{step=Math.min(1,step+1/30);audio.volume=step;if(step>=1){clearInterval(ramp);ramp=null;}},50);}else audio.pause();};
-    setMuted(true);
+    let ramp=null;const stopRamp=()=>{if(ramp){clearInterval(ramp);ramp=null;}};const fadeIn=()=>{stopRamp();audio.volume=0;let step=0;ramp=setInterval(()=>{step=Math.min(1,step+1/30);audio.volume=step;if(step>=1)stopRamp();},50);};
+    button.onclick=()=>{if(ramp)stopRamp();if(audio.muted){audio.dataset.lsUserPaused="false";setMuted(false);fadeIn();audio.play().catch(()=>{stopRamp();setMuted(true);audio.pause();});}else{audio.dataset.lsUserPaused="true";audio.pause();setMuted(true);}};
+    const firstSetup=audio.dataset.lsMusicInitialized!=="true";audio.dataset.lsMusicInitialized="true";
+    if(!audio.getAttribute("src")||silent){stopRamp();audio.pause();audio.muted=true;audio.volume=0;setMuted(true);}
+    else if(audio.dataset.lsUserPaused==="true"){audio.pause();setMuted(true);}
+    else if(firstSetup){audio.dataset.lsUserPaused="false";setMuted(false);audio.volume=0;audio.play().then(fadeIn).catch(()=>{audio.pause();setMuted(true);});}
+    else if(!audio.paused&&!audio.muted)setMuted(false);
+    else setMuted(true);
   }
   function setupLocale(p){let nav=q("[data-ls-languages]");if(!nav){nav=document.createElement("nav");nav.dataset.lsLanguages="";nav.className="ls-languages";nav.setAttribute("aria-label","Language");root.prepend(nav);}nav.replaceChildren(...(p.enabledLocales||["uz-Latn","uz-Cyrl","en","ru"]).map(locale=>{const b=document.createElement("button");b.type="button";b.textContent=({"uz-Latn":"Uz","uz-Cyrl":"Уз",en:"En",ru:"Ru"})[locale];b.setAttribute("aria-pressed",String(locale===p.locale));b.onclick=()=>parent.postMessage({type:`${id}:language`,locale},location.origin);return b;}));}
   addEventListener("message",e=>{if(e.source===parent&&e.origin===location.origin&&e.data?.type===`${id}:update`)render(e.data.payload);});
