@@ -300,9 +300,28 @@ function Toggle({
 
 export function Studio({
   initialInvitation,
+  adminContext,
 }: {
   initialInvitation?: Invitation;
+  adminContext?: { ownerId: string; ownerName: string };
 }) {
+  const [adminReason, setAdminReason] = useState(
+    "Administrator tomonidan tahrirlash",
+  );
+  function studioFetch(input: RequestInfo | URL, init?: RequestInit) {
+    if (
+      adminContext &&
+      initialInvitation &&
+      typeof input === "string" &&
+      (input.startsWith("/api/invitations") || input.startsWith("/api/uploads"))
+    ) {
+      const headers = new Headers(init?.headers);
+      headers.set("X-Admin-Invitation", initialInvitation.id);
+      headers.set("X-Admin-Reason", encodeURIComponent(adminReason));
+      return globalThis.fetch(input, { ...init, headers });
+    }
+    return globalThis.fetch(input, init);
+  }
   const [invitation, setInvitation] = useState<Invitation | null>(null);
   const [locale, setLocale] = useState<Locale>(
     initialInvitation?.defaultLocale ?? "uz-Latn",
@@ -356,7 +375,7 @@ export function Studio({
     const controller = new AbortController();
     setMusicLibraryLoading(true);
     Promise.all([
-      fetch("/api/music", { signal: controller.signal })
+      studioFetch("/api/music", { signal: controller.signal })
         .then(async (response) => {
           if (!response.ok) return [];
           const result = (await response.json()) as {
@@ -370,7 +389,7 @@ export function Studio({
           return result.tracks ?? [];
         })
         .catch(() => []),
-      fetch("/api/uploads", { signal: controller.signal })
+      studioFetch("/api/uploads", { signal: controller.signal })
         .then(async (response) => {
           if (!response.ok) return [];
           const result = (await response.json()) as {
@@ -415,7 +434,7 @@ export function Studio({
         );
       }
       try {
-        const response = await fetch("/api/auth/session", {
+        const response = await studioFetch("/api/auth/session", {
           cache: "no-store",
         });
         if (response.ok) {
@@ -437,12 +456,13 @@ export function Studio({
         const requestedTemplate = templateIdSchema.safeParse(
           query.get("useTemplate") ?? query.get("template"),
         );
-        const stored = fresh
-          ? null
-          : readBrowserDraft(
-              initialInvitation?.id ?? requestedId,
-              ownerId.current,
-            );
+        const stored =
+          fresh || !!adminContext
+            ? null
+            : readBrowserDraft(
+                initialInvitation?.id ?? requestedId,
+                ownerId.current,
+              );
         if (stored && (!initialInvitation || stored.dirty)) {
           const switchedInvitation = requestedTemplate.success
             ? switchTemplate(stored.invitation, requestedTemplate.data)
@@ -541,7 +561,7 @@ export function Studio({
 
   useEffect(() => {
     let alive = true;
-    fetch("/api/catalog", { cache: "no-store" })
+    studioFetch("/api/catalog", { cache: "no-store" })
       .then((response) => {
         if (!response.ok) throw new Error();
         return response.json();
@@ -571,7 +591,7 @@ export function Studio({
   }, []);
 
   useEffect(() => {
-    if (!invitation) return;
+    if (!invitation || adminContext) return;
     const timer = window.setTimeout(() => {
       try {
         saveBrowserDraft(
@@ -590,6 +610,7 @@ export function Studio({
 
   useEffect(() => {
     const flush = () => {
+      if (adminContext) return;
       const current = invitationRef.current;
       if (current)
         try {
@@ -654,14 +675,14 @@ export function Studio({
     let timer: ReturnType<typeof setTimeout>;
     async function poll() {
       try {
-        const response = await fetch(
+        const response = await studioFetch(
           `/api/auth/telegram/status?requestId=${encodeURIComponent(auth!.requestId)}`,
           { cache: "no-store" },
         );
         const result = await response.json();
         if (cancelled) return;
         if (result.state === "confirmed") {
-          const complete = await fetch("/api/auth/telegram/complete", {
+          const complete = await studioFetch("/api/auth/telegram/complete", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ requestId: auth!.requestId }),
@@ -795,6 +816,22 @@ export function Studio({
         : current,
     );
   }
+  const pulauData = pulauSehatiDataSchema.parse(
+    invitation.templateData["wedivo-pulau-sehati"] ?? {},
+  );
+  function updatePulauData(patch: Partial<typeof pulauData>) {
+    setInvitation((current) =>
+      current
+        ? {
+            ...current,
+            templateData: {
+              ...current.templateData,
+              "wedivo-pulau-sehati": { ...pulauData, ...patch },
+            },
+          }
+        : current,
+    );
+  }
   function changeEventType(value: string) {
     const currentInvitation = invitation;
     if (!currentInvitation) return;
@@ -816,22 +853,6 @@ export function Studio({
       defaultFields
         .filter(
           (field) =>
-  const pulauData = pulauSehatiDataSchema.parse(
-    invitation.templateData["wedivo-pulau-sehati"] ?? {},
-  );
-  function updatePulauData(patch: Partial<typeof pulauData>) {
-    setInvitation((current) =>
-      current
-        ? {
-            ...current,
-            templateData: {
-              ...current.templateData,
-              "wedivo-pulau-sehati": { ...pulauData, ...patch },
-            },
-          }
-        : current,
-    );
-  }
             !currentContent[field].trim() ||
             currentContent[field] === previousDefaults[field],
         )
@@ -900,7 +921,7 @@ export function Studio({
     setError("");
     setNotice("");
     try {
-      const sessionResponse = await fetch("/api/auth/session", {
+      const sessionResponse = await studioFetch("/api/auth/session", {
         cache: "no-store",
       });
       if (!sessionResponse.ok)
@@ -915,7 +936,7 @@ export function Studio({
           );
           return;
         }
-        const response = await fetch("/api/auth/telegram/start", {
+        const response = await studioFetch("/api/auth/telegram/start", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ draftId: current.id }),
@@ -950,7 +971,7 @@ export function Studio({
         throw new Error(
           "Ma’lumotlar saqlashga tayyor emas. Xarita va rasm havolalarini hamda kiritilgan maydonlarni tekshiring.",
         );
-      const response = await fetch("/api/invitations", {
+      const response = await studioFetch("/api/invitations", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ invitation: current }),
@@ -959,11 +980,15 @@ export function Studio({
         const result = await response.json().catch(() => ({}));
         if (result.error?.code === "STALE_REVISION")
           throw new Error(
-            "Taklifnoma boshqa oynada o‘zgartirilgan. Sizning o‘zgartirishlaringiz shu brauzerda saqlandi. Sahifani qayta yuklashdan oldin qoralamangizni yuklab oling va yangilangan taklifnoma bilan solishtiring.",
+            adminContext
+              ? "Taklifnoma boshqa oynada o‘zgartirilgan. O‘zgarishlaringiz hozirgi oynada turibdi; qayta yuklashdan oldin nusxasini saqlang."
+              : "Taklifnoma boshqa oynada o‘zgartirilgan. Sizning o‘zgartirishlaringiz shu brauzerda saqlandi. Sahifani qayta yuklashdan oldin qoralamangizni yuklab oling va yangilangan taklifnoma bilan solishtiring.",
           );
         throw new Error(
           result.error?.message ??
-            "Hisobingizga saqlanmadi. Qoralamangiz shu brauzerda saqlangan; qayta urinib ko‘ring.",
+            (adminContext
+              ? "Saqlanmadi. Ushbu oynani yopmasdan qayta urinib ko‘ring."
+              : "Hisobingizga saqlanmadi. Qoralamangiz shu brauzerda saqlangan; qayta urinib ko‘ring."),
         );
       }
       const result = await response.json();
@@ -978,22 +1003,25 @@ export function Studio({
             revision: result.invitation.revision,
           });
         try {
-          saveBrowserDraft(
-            changedDuringSave && invitationRef.current
-              ? {
-                  ...invitationRef.current,
-                  revision: result.invitation.revision,
-                }
-              : result.invitation,
-            changedDuringSave,
-            ownerId.current,
-          );
+          if (!adminContext)
+            saveBrowserDraft(
+              changedDuringSave && invitationRef.current
+                ? {
+                    ...invitationRef.current,
+                    revision: result.invitation.revision,
+                  }
+                : result.invitation,
+              changedDuringSave,
+              ownerId.current,
+            );
         } catch {
           /* Cloud save has succeeded even if browser storage is unavailable. */
         }
         if (changedDuringSave) {
           setNotice(
-            "Saqlash paytida yana o‘zgartirish kiritdingiz. So‘nggi o‘zgartirishlar brauzerda saqlangan; hisobingizga saqlashni yana bosing.",
+            adminContext
+              ? "Saqlash paytida yana o‘zgartirish kiritdingiz. Ushbu oynadagi so‘nggi o‘zgarishlarni yana saqlang."
+              : "Saqlash paytida yana o‘zgartirish kiritdingiz. So‘nggi o‘zgartirishlar brauzerda saqlangan; hisobingizga saqlashni yana bosing.",
           );
           return;
         }
@@ -1001,13 +1029,15 @@ export function Studio({
         window.history.replaceState(
           window.history.state,
           "",
-          `/studio/${current.id}`,
+          adminContext
+            ? `/admin/invitations/${current.id}/edit`
+            : `/studio/${current.id}`,
         );
       }
       if (action === "publish") {
         const saved = invitationSchema.parse(result.invitation);
         const publish = () =>
-          fetch(`/api/invitations/${saved.id}/publish`, {
+          studioFetch(`/api/invitations/${saved.id}/publish`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ revision: saved.revision }),
@@ -1023,9 +1053,12 @@ export function Studio({
         let published = await publishedResponse.json();
         if (!publishedResponse.ok) {
           // Another tab may already have published this same saved draft.
-          const latestResponse = await fetch(`/api/invitations/${saved.id}`, {
-            cache: "no-store",
-          });
+          const latestResponse = await studioFetch(
+            `/api/invitations/${saved.id}`,
+            {
+              cache: "no-store",
+            },
+          );
           const latest = latestResponse.ok ? await latestResponse.json() : null;
           if (
             latest?.invitation?.status === "published" &&
@@ -1046,7 +1079,8 @@ export function Studio({
         setInvitation(publishedInvitation);
         setPublicUrl(published.url);
         try {
-          saveBrowserDraft(publishedInvitation, false, ownerId.current);
+          if (!adminContext)
+            saveBrowserDraft(publishedInvitation, false, ownerId.current);
         } catch {
           /* Publication succeeded; the link remains visible. */
         }
@@ -1080,7 +1114,7 @@ export function Studio({
     if (!auth) return;
     setBusy(true);
     try {
-      const response = await fetch("/api/auth/telegram/complete", {
+      const response = await studioFetch("/api/auth/telegram/complete", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ requestId: auth.requestId }),
@@ -1100,7 +1134,11 @@ export function Studio({
       setBusy(false);
     }
   }
-  async function upload(file: File, kind: "image" | "audio", artistId?: string) {
+  async function upload(
+    file: File,
+    kind: "image" | "audio",
+    artistId?: string,
+  ) {
     if (!invitationRef.current) return;
     setError("");
     const mimeFallback: Record<string, string> = {
@@ -1147,7 +1185,7 @@ export function Studio({
     }
     setUploading(true);
     try {
-      const response = await fetch("/api/uploads", {
+      const response = await studioFetch("/api/uploads", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -1166,7 +1204,7 @@ export function Studio({
             : prepared.error?.message) ||
             "Faylni yuklash hozircha mavjud emas. Hisobingizga kirganingizni tekshiring va qayta urinib ko‘ring.",
         );
-      const uploaded = await fetch(prepared.upload.url, {
+      const uploaded = await studioFetch(prepared.upload.url, {
         method: "PUT",
         headers: prepared.upload.headers,
         body: file,
@@ -1175,7 +1213,7 @@ export function Studio({
         throw new Error(
           "Fayl yuklanmadi. Ulanishni tekshirib, qayta urinib ko‘ring.",
         );
-      const complete = await fetch(prepared.upload.completeUrl, {
+      const complete = await studioFetch(prepared.upload.completeUrl, {
         method: "POST",
       });
       const result = await complete.json();
@@ -1353,7 +1391,11 @@ export function Studio({
           )}
           <p className={styles.sidebarNote}>
             <CheckCircle2 size={15} strokeWidth={1.3} />
-            <span>Qoralamangiz shu brauzerda avtomatik saqlanadi.</span>
+            <span>
+              {adminContext
+                ? "Administrator tahriri. O‘zgarishlarni Saqlash orqali hisobga yozing."
+                : "Qoralamangiz shu brauzerda avtomatik saqlanadi."}
+            </span>
           </p>
         </aside>
         <main
@@ -1361,6 +1403,50 @@ export function Studio({
           className={`${styles.editor} ${mobilePreview ? styles.mobileHidden : ""}`}
         >
           <fieldset className={styles.editorFields} disabled={busy}>
+            {adminContext && (
+              <section
+                className="inline-note"
+                style={{ padding: 18, marginBottom: 20 }}
+              >
+                <strong>Administrator tahriri: {adminContext.ownerName}</strong>
+                <p style={{ fontSize: 13, lineHeight: 1.7 }}>
+                  Taklifnoma egasi o‘zgarmaydi. Har bir saqlash sizning
+                  nomingizdan tarixga yoziladi.
+                </p>
+                <label style={{ display: "grid", gap: 8, fontSize: 13 }}>
+                  Amal sababi
+                  <input
+                    name="adminReason"
+                    value={adminReason}
+                    onChange={(event) => setAdminReason(event.target.value)}
+                    minLength={5}
+                    maxLength={500}
+                    required
+                    style={{
+                      padding: 12,
+                      border: "1px solid var(--line)",
+                      borderRadius: 6,
+                    }}
+                  />
+                </label>
+                <a
+                  href="/admin?view=invitations"
+                  className="button secondary"
+                  style={{ marginTop: 12 }}
+                >
+                  Boshqaruvga qaytish
+                </a>
+                <a
+                  href="/admin/verify"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="button secondary"
+                  style={{ marginTop: 12, marginLeft: 8 }}
+                >
+                  Hisobni tasdiqlash
+                </a>
+              </section>
+            )}
             {invitation.status === "published" && invitation.slug && (
               <PublishedLink slug={invitation.slug} canonicalUrl={publicUrl} />
             )}
@@ -1593,6 +1679,18 @@ export function Studio({
                     }
                   />
                 </Field>
+                {invitation.templateId === "wedivo-pulau-sehati" && (
+                  <Field label="Birga taklif etuvchilar">
+                    <textarea
+                      value={pulauData.coInviters}
+                      maxLength={1000}
+                      rows={2}
+                      onChange={(event) =>
+                        updatePulauData({ coInviters: event.target.value })
+                      }
+                    />
+                  </Field>
+                )}
                 <div className={styles.divider} />
                 <Field
                   label="Tadbir nomi"
@@ -1679,18 +1777,6 @@ export function Studio({
                             value={chapter.title[locale] ?? ""}
                             maxLength={300}
                             onChange={(event) =>
-                {invitation.templateId === "wedivo-pulau-sehati" && (
-                  <Field label="Birga taklif etuvchilar">
-                    <textarea
-                      value={pulauData.coInviters}
-                      maxLength={1000}
-                      rows={2}
-                      onChange={(event) =>
-                        updatePulauData({ coInviters: event.target.value })
-                      }
-                    />
-                  </Field>
-                )}
                               update({
                                 story: invitation.story.map((item) =>
                                   item.id === chapter.id
@@ -1729,92 +1815,6 @@ export function Studio({
                             }
                           />
                         </Field>
-                      </div>
-                    ))}
-                  </>
-                )}
-              </div>
-            )}
-
-            {section === 2 && (
-              <div className={styles.form}>
-                <h2>Sana va vaqt</h2>
-                <Field label="Tadbir boshlanishi">
-                  <DateTimePicker
-                    value={invitation.startsAt}
-                    disabled={identityLocked}
-                    onChange={(startsAt) => update({ startsAt })}
-                  />
-                </Field>
-                {identityLocked && (
-                  <p className={styles.help}>
-                    Sanani ko‘chirish administrator tasdig‘i bilan amalga
-                    oshiriladi.
-                  </p>
-                )}
-                <div className={styles.divider} />
-                <h2>Manzil</h2>
-                <Field label="To‘yxona yoki joy nomi">
-                  <input
-                    value={content.venueName}
-                    maxLength={300}
-                    onChange={(event) =>
-                      updateContent({ venueName: event.target.value })
-                    }
-                    placeholder={placeholders.venueName}
-                  />
-                </Field>
-                <Field label="To‘liq manzil">
-                  <textarea
-                    value={content.address}
-                    rows={2}
-                    maxLength={1000}
-                    onChange={(event) =>
-                      updateContent({ address: event.target.value })
-                    }
-                  />
-                </Field>
-                <Field label="Mo‘ljal va qo‘shimcha yo‘l-yo‘riq">
-                  <textarea
-                    value={content.landmark}
-                    rows={2}
-                    maxLength={1000}
-                    onChange={(event) =>
-                      updateContent({ landmark: event.target.value })
-                    }
-                    placeholder={placeholders.optional}
-                  />
-                </Field>
-                <Field
-                  label="Xarita havolasi"
-                  hint="Google Maps yoki Yandex Maps havolasini kiriting."
-                >
-                  <input
-                    type="url"
-                    value={invitation.venue.mapUrl}
-                    maxLength={2048}
-                    onChange={(event) =>
-                      update({
-                        venue: {
-                          ...invitation.venue,
-                          mapUrl: event.target.value,
-                        },
-                      })
-                    }
-                    placeholder="https://…"
-                  />
-                </Field>
-                <div className={styles.divider} />
-                <Field label="Dastur sarlavhasi">
-                  <input
-                    value={content.programHeading}
-                    maxLength={300}
-                    onChange={(event) =>
-                      updateContent({ programHeading: event.target.value })
-                    }
-                  />
-                </Field>
-                <div className={styles.program}>
                         {invitation.templateId === "wedivo-pulau-sehati" && (
                           <Field label="Hikoya sanasi">
                             <input
@@ -1831,12 +1831,12 @@ export function Studio({
                             />
                           </Field>
                         )}
-                  {invitation.program.map((item) => (
-                    <div key={item.id} className={styles.programItem}>
-                      <span className={styles.timelineDot} />
-                      <div className={styles.programPreview}>
-                        <div className={styles.programPreviewLine}>
-                          <TimePicker
+                      </div>
+                    ))}
+                  </>
+                )}
+              </div>
+            )}
             {invitation.templateId === "wedivo-pulau-sehati" && (
               <div className={styles.form}>
                 <h2>Pulau Sehati — ma’lumotlar</h2>
@@ -2263,17 +2263,17 @@ export function Studio({
                 </Field>
               </div>
             )}
-                            compact
-                            value={item.time}
-                            onChange={(time) =>
-                              update({
-                                program: invitation.program.map((row) =>
-                                  row.id === item.id ? { ...row, time } : row,
-                                ),
-                              })
-                            }
-                          />
-                          <input
+
+            {section === 2 && (
+              <div className={styles.form}>
+                <h2>Sana va vaqt</h2>
+                <Field label="Tadbir boshlanishi">
+                  <DateTimePicker
+                    value={invitation.startsAt}
+                    disabled={identityLocked}
+                    onChange={(startsAt) => update({ startsAt })}
+                  />
+                </Field>
                 {invitation.templateId === "wedivo-pulau-sehati" && (
                   <>
                     <div className={styles.divider} />
@@ -2377,6 +2377,92 @@ export function Studio({
                     )}
                   </>
                 )}
+                {identityLocked && (
+                  <p className={styles.help}>
+                    Sanani ko‘chirish administrator tasdig‘i bilan amalga
+                    oshiriladi.
+                  </p>
+                )}
+                <div className={styles.divider} />
+                <h2>Manzil</h2>
+                <Field label="To‘yxona yoki joy nomi">
+                  <input
+                    value={content.venueName}
+                    maxLength={300}
+                    onChange={(event) =>
+                      updateContent({ venueName: event.target.value })
+                    }
+                    placeholder={placeholders.venueName}
+                  />
+                </Field>
+                <Field label="To‘liq manzil">
+                  <textarea
+                    value={content.address}
+                    rows={2}
+                    maxLength={1000}
+                    onChange={(event) =>
+                      updateContent({ address: event.target.value })
+                    }
+                  />
+                </Field>
+                <Field label="Mo‘ljal va qo‘shimcha yo‘l-yo‘riq">
+                  <textarea
+                    value={content.landmark}
+                    rows={2}
+                    maxLength={1000}
+                    onChange={(event) =>
+                      updateContent({ landmark: event.target.value })
+                    }
+                    placeholder={placeholders.optional}
+                  />
+                </Field>
+                <Field
+                  label="Xarita havolasi"
+                  hint="Google Maps yoki Yandex Maps havolasini kiriting."
+                >
+                  <input
+                    type="url"
+                    value={invitation.venue.mapUrl}
+                    maxLength={2048}
+                    onChange={(event) =>
+                      update({
+                        venue: {
+                          ...invitation.venue,
+                          mapUrl: event.target.value,
+                        },
+                      })
+                    }
+                    placeholder="https://…"
+                  />
+                </Field>
+                <div className={styles.divider} />
+                <Field label="Dastur sarlavhasi">
+                  <input
+                    value={content.programHeading}
+                    maxLength={300}
+                    onChange={(event) =>
+                      updateContent({ programHeading: event.target.value })
+                    }
+                  />
+                </Field>
+                <div className={styles.program}>
+                  {invitation.program.map((item) => (
+                    <div key={item.id} className={styles.programItem}>
+                      <span className={styles.timelineDot} />
+                      <div className={styles.programPreview}>
+                        <div className={styles.programPreviewLine}>
+                          <TimePicker
+                            compact
+                            value={item.time}
+                            onChange={(time) =>
+                              update({
+                                program: invitation.program.map((row) =>
+                                  row.id === item.id ? { ...row, time } : row,
+                                ),
+                              })
+                            }
+                          />
+                          <input
                             className={styles.programPreviewInput}
                             aria-label="Dastur bandi nomi"
                             value={content.programTitles[item.id] ?? ""}
@@ -2460,7 +2546,9 @@ export function Studio({
                               placeholders.programItem}
                             {invitation.templateId === "invitate-wedding" &&
                               content.programDescriptions[item.id]?.trim() && (
-                                <small>{content.programDescriptions[item.id]}</small>
+                                <small>
+                                  {content.programDescriptions[item.id]}
+                                </small>
                               )}
                           </span>
                         </li>
@@ -2918,15 +3006,25 @@ export function Studio({
                   <>
                     <div className={styles.divider} />
                     <div className={styles.groupHeader}>
-                      <h2><Users size={20} /> San’atkorlar va boshlovchilar</h2>
+                      <h2>
+                        <Users size={20} /> San’atkorlar va boshlovchilar
+                      </h2>
                       <button
                         className={styles.textButton}
-                        disabled={identityLocked || invitation.artistLineup.length >= 50}
+                        disabled={
+                          identityLocked || invitation.artistLineup.length >= 50
+                        }
                         onClick={() =>
                           update({
                             artistLineup: [
                               ...invitation.artistLineup,
-                              { id: crypto.randomUUID(), name: {}, role: {}, imageUrl: "", imageAssetId: null },
+                              {
+                                id: crypto.randomUUID(),
+                                name: {},
+                                role: {},
+                                imageUrl: "",
+                                imageAssetId: null,
+                              },
                             ],
                           })
                         }
@@ -2935,18 +3033,34 @@ export function Studio({
                       </button>
                     </div>
                     <p className={styles.help}>
-                      Ism, vazifa va suratni kiriting. Har bir yoqilgan tilda ism va vazifani alohida yozishingiz mumkin.
+                      Ism, vazifa va suratni kiriting. Har bir yoqilgan tilda
+                      ism va vazifani alohida yozishingiz mumkin.
                     </p>
                     {invitation.artistLineup.map((artist, index) => (
                       <div className={styles.storyItem} key={artist.id}>
                         <div className={styles.twoColumns}>
-                          <Field label={`${index + 1}-san’atkor ismi · ${LANGUAGE_NAMES[locale]}`}>
+                          <Field
+                            label={`${index + 1}-san’atkor ismi · ${LANGUAGE_NAMES[locale]}`}
+                          >
                             <input
                               value={artist.name[locale] ?? ""}
                               maxLength={300}
                               disabled={identityLocked}
                               onChange={(event) =>
-                                update({ artistLineup: invitation.artistLineup.map((row) => row.id === artist.id ? { ...row, name: { ...row.name, [locale]: event.target.value } } : row) })
+                                update({
+                                  artistLineup: invitation.artistLineup.map(
+                                    (row) =>
+                                      row.id === artist.id
+                                        ? {
+                                            ...row,
+                                            name: {
+                                              ...row.name,
+                                              [locale]: event.target.value,
+                                            },
+                                          }
+                                        : row,
+                                  ),
+                                })
                               }
                             />
                           </Field>
@@ -2956,7 +3070,20 @@ export function Studio({
                               maxLength={300}
                               disabled={identityLocked}
                               onChange={(event) =>
-                                update({ artistLineup: invitation.artistLineup.map((row) => row.id === artist.id ? { ...row, role: { ...row.role, [locale]: event.target.value } } : row) })
+                                update({
+                                  artistLineup: invitation.artistLineup.map(
+                                    (row) =>
+                                      row.id === artist.id
+                                        ? {
+                                            ...row,
+                                            role: {
+                                              ...row.role,
+                                              [locale]: event.target.value,
+                                            },
+                                          }
+                                        : row,
+                                  ),
+                                })
                               }
                             />
                           </Field>
@@ -2968,13 +3095,29 @@ export function Studio({
                               disabled={identityLocked}
                               placeholder="https://…"
                               onChange={(event) =>
-                                update({ artistLineup: invitation.artistLineup.map((row) => row.id === artist.id ? { ...row, imageUrl: event.target.value, imageAssetId: null } : row) })
+                                update({
+                                  artistLineup: invitation.artistLineup.map(
+                                    (row) =>
+                                      row.id === artist.id
+                                        ? {
+                                            ...row,
+                                            imageUrl: event.target.value,
+                                            imageAssetId: null,
+                                          }
+                                        : row,
+                                  ),
+                                })
                               }
                             />
                           </Field>
                           <label className={styles.audioUpload}>
                             <ImagePlus size={18} />
-                            <span>{artist.imageUrl ? "Portretni almashtirish" : "Portret yuklash"}<small>JPG, PNG yoki WebP · 15 MB gacha</small></span>
+                            <span>
+                              {artist.imageUrl
+                                ? "Portretni almashtirish"
+                                : "Portret yuklash"}
+                              <small>JPG, PNG yoki WebP · 15 MB gacha</small>
+                            </span>
                             <input
                               type="file"
                               accept="image/jpeg,image/png,image/webp"
@@ -2991,7 +3134,13 @@ export function Studio({
                             className={styles.iconButton}
                             aria-label="San’atkorni olib tashlash"
                             disabled={identityLocked}
-                            onClick={() => update({ artistLineup: invitation.artistLineup.filter((row) => row.id !== artist.id) })}
+                            onClick={() =>
+                              update({
+                                artistLineup: invitation.artistLineup.filter(
+                                  (row) => row.id !== artist.id,
+                                ),
+                              })
+                            }
                           >
                             <Trash2 size={16} />
                           </button>
@@ -3483,6 +3632,16 @@ export function Studio({
                 catalogMusic={section === 0 && !authoredPreview}
                 sampleWishes={section === 0 && !authoredPreview}
               />
+            ) : invitation.templateId === "wedivo-pulau-sehati" ? (
+              <WedivoPulauSehati
+                invitation={previewInvitation}
+                invitationId={invitation.id}
+                locale={locale}
+                preview
+                fullPreview
+                catalogMusic={section === 0 && !authoredPreview}
+                sampleWishes={section === 0 && !authoredPreview}
+              />
             ) : invitation.templateId === "anor" ? (
               <AnorInvitation
                 invitation={previewInvitation}
@@ -3632,16 +3791,6 @@ export function Studio({
       )}
       {auth && (
         <div
-            ) : invitation.templateId === "wedivo-pulau-sehati" ? (
-              <WedivoPulauSehati
-                invitation={previewInvitation}
-                invitationId={invitation.id}
-                locale={locale}
-                preview
-                fullPreview
-                catalogMusic={section === 0 && !authoredPreview}
-                sampleWishes={section === 0 && !authoredPreview}
-              />
           className={styles.overlay}
           onClick={(event) => {
             if (event.target === event.currentTarget) setAuth(null);

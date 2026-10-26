@@ -1,5 +1,64 @@
 # Implementation decisions
 
+## Administrator workspace and access (2026-10-27)
+
+- User confirmed server-side `PLATFORM_ADMIN_TELEGRAM_IDS` configuration as an
+  admin assignment option. Use exact positive numeric Telegram user IDs; apply
+  the allowlist to both new and existing verified accounts, including web
+  access, reauthentication, Telegram moderation and broadcast authorization.
+  Environment grants are evaluated from server configuration, never persisted
+  as database grants or accepted from request metadata. Database-assigned roles
+  remain independent; removing an ID removes only its environment grant after
+  all web/bot/worker processes reload configuration. Invalid configuration
+  fails closed; existing session freshness/suspension checks still apply.
+- Follow-up user requirements: manage users and their invitation links/content,
+  platform payment records and amounts, per-template pricing, and broadcasts.
+  Explicitly include template activation/deactivation and category membership.
+  Admins need the same invitation creation/editing/uploads/publication,
+  responses, wish moderation and receipt-review tools available to creators.
+- Implementation scope: retain the real creator editor and shared validation,
+  using an explicit admin context and the original owner; log the actual admin.
+  Support creating owner-bound drafts, archiving publications, deleting drafts
+  without payment history, and explicitly extending editing deadlines with a
+  reason. Event identity/ownership and payment-history protections remain.
+- Account suspension/revocation must apply to website and Telegram access,
+  preserve invitations/history, and not permit administrator self-lockout or
+  role escalation. Restoring access never revives revoked sessions.
+- Current payments remain a clearly labeled manual register with immutable
+  owner/template/currency snapshots, exact minor-unit amounts, revisions and
+  audited status changes. Recording receipt/refund does not move money or
+  prove provider verification. Preserve free publishing; no live Click/payment
+  activation or external deployment is authorized by these admin requests.
+- Broadcast implementation: Telegram, only verified active connected users;
+  optional selected/published/draft audiences, frozen recipient preview and
+  explicit send confirmation, durable delivery history/cancellation, /stop and
+  /subscribe controls. Recheck eligibility before delivery; respect rate limits
+  and never automatically resend an ambiguous network outcome. Building and
+  testing the tools does not send any real broadcast.
+- Additive migration `0152_admin_management.sql` supports this extension.
+
+- User requirement: redesign the admin experience and restrict access at the
+  server, including direct page/API requests; prioritize security throughout.
+- Implementation: `/admin` remains the canonical address, with an entry shown
+  only to server-authorized admins. Anonymous and ordinary accounts receive
+  a 404 before controls/private data render. Admin authority is rechecked on
+  each protected request; configuration/storage failures deny access.
+- Implementation policy: admin access requires authentication within 12 hours,
+  independent of creator-session renewal. Reconfirm through the existing
+  Telegram flow, bound to the current account/browser, single-use, with session
+  rotation. Ordinary creator session persistence is unchanged.
+- Separate designs, categories, music and change history. Retain event-support
+  restrictions, replacement confirmation and all invitation/editing policies.
+  Use in-page unsaved-change confirmations, never native browser dialogs.
+- Implementation: common authorization/origin checks, durable per-admin write
+  limits, non-cacheable private responses, per-request script nonces, framing
+  restrictions and transactional catalog audit records. Catalog music upload
+  preparation, local byte writes and completion share the admin checks.
+- Migration `0151_admin_audit_log.sql` is additive. No public deployment, live
+  payment activation, real-account privilege changes or template publication
+  changes are part of this task. Security checks are scoped verification, not
+  a claim of a complete independent penetration test.
+
 ## Multi-provider source reconciliation (2026-10-25)
 
 - User requested scanning Chorlove and Marxaba first, then the listed providers,

@@ -1,7 +1,16 @@
 "use client";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { ArrowLeft, Check, Clock3, MessageCircle, Pencil, RefreshCw, Trash2, UserRound } from "lucide-react";
+import {
+  ArrowLeft,
+  Check,
+  Clock3,
+  MessageCircle,
+  Pencil,
+  RefreshCw,
+  Trash2,
+  UserRound,
+} from "lucide-react";
 import { getContent, type Invitation } from "@taklifnoma/contracts";
 import styles from "./invitation-activity.module.css";
 import { formatDate } from "@/templates/date-format";
@@ -15,7 +24,13 @@ type Activity = {
     partySize: number;
     note: string;
   }>;
-  wishes: Array<{ id: string; name: string; message: string; status: string; createdAt: string }>;
+  wishes: Array<{
+    id: string;
+    name: string;
+    message: string;
+    status: string;
+    createdAt: string;
+  }>;
   receipts: Array<{
     id: string;
     giverNames: string;
@@ -24,6 +39,7 @@ type Activity = {
     filename: string;
     cardHolder: string;
     cardLast4: string;
+  }>;
   giftIntentions: Array<{
     id: string;
     senderName: string;
@@ -32,29 +48,46 @@ type Activity = {
     message: string;
     createdAt: string;
   }>;
-  }>;
   totals: { responses: number; guests: number; pending: number };
   hasMore: boolean;
 };
 const activitySnapshots = new Map<string, Activity>();
-export function InvitationActivity({ invitation }: { invitation: Invitation }) {
-  const cacheKey = `${invitation.id}:0`;
-  const [data, setData] = useState<Activity | null>(() => activitySnapshots.get(cacheKey) ?? null);
+export function InvitationActivity({
+  invitation,
+  adminContext,
+}: {
+  invitation: Invitation;
+  adminContext?: { ownerName: string };
+}) {
+  const [adminReason, setAdminReason] = useState(
+    "Administrator tomonidan moderatsiya",
+  );
+  const cacheKey = `${adminContext ? "admin:" : ""}${invitation.id}:0`;
+  const [data, setData] = useState<Activity | null>(
+    () => activitySnapshots.get(cacheKey) ?? null,
+  );
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
   const [refresh, setRefresh] = useState(0);
   const [page, setPage] = useState(0);
-  const [section, setSection] = useState<"responses" | "wishes" | "receipts">("responses");
-  const [wishFilter, setWishFilter] = useState<"all" | "pending" | "approved">("all");
+  const [section, setSection] = useState<
+    "responses" | "wishes" | "receipts" | "intentions"
+  >("responses");
+  const [wishFilter, setWishFilter] = useState<"all" | "pending" | "approved">(
+    "all",
+  );
   const [deleteWishId, setDeleteWishId] = useState<string | null>(null);
   useEffect(() => {
     const controller = new AbortController();
-    const key = `${invitation.id}:${page}`;
+    const key = `${adminContext ? "admin:" : ""}${invitation.id}:${page}`;
     setData(activitySnapshots.get(key) ?? null);
     setError("");
     fetch(`/api/invitations/${invitation.id}/activity?page=${page}`, {
       cache: "no-store",
       signal: controller.signal,
+      headers: adminContext
+        ? { "X-Admin-Invitation": invitation.id }
+        : undefined,
     })
       .then(async (response) => {
         const body = await response.json();
@@ -79,7 +112,15 @@ export function InvitationActivity({ invitation }: { invitation: Invitation }) {
         `/api/invitations/${invitation.id}/activity`,
         {
           method: "PATCH",
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+            ...(adminContext
+              ? {
+                  "X-Admin-Invitation": invitation.id,
+                  "X-Admin-Reason": encodeURIComponent(adminReason),
+                }
+              : {}),
+          },
           body: JSON.stringify(
             status === "approved" || status === "deleted"
               ? { wishId: id, status }
@@ -98,17 +139,56 @@ export function InvitationActivity({ invitation }: { invitation: Invitation }) {
     }
   }
   return (
-    <main className={styles.page}>
+    <main id="main" className={styles.page}>
+      {adminContext && (
+        <section
+          className="inline-note"
+          style={{ padding: 18, marginBottom: 20 }}
+        >
+          <strong>Administrator: {adminContext.ownerName} taklifnomasi</strong>
+          <label style={{ display: "grid", gap: 8, marginTop: 12 }}>
+            Moderatsiya sababi
+            <input
+              name="adminReason"
+              minLength={5}
+              maxLength={500}
+              value={adminReason}
+              onChange={(event) => setAdminReason(event.target.value)}
+            />
+          </label>
+          <a
+            href="/admin?view=invitations"
+            className="button secondary"
+            style={{ marginTop: 12 }}
+          >
+            Boshqaruvga qaytish
+          </a>
+        </section>
+      )}
       <div className={styles.toolbar}>
         <div className={styles.titleRow}>
-          <Link href="/dashboard" className={styles.headerIconButton} aria-label="Taklifnomalarimga qaytish" title="Taklifnomalarimga qaytish">
+          <Link
+            href={adminContext ? "/admin?view=invitations" : "/dashboard"}
+            className={styles.headerIconButton}
+            aria-label="Taklifnomalarimga qaytish"
+            title="Taklifnomalarimga qaytish"
+          >
             <ArrowLeft size={19} />
           </Link>
           <h1>
             {getContent(invitation).people.filter(Boolean).join(" & ") ||
               "Taklifnoma"}
           </h1>
-          <Link href={`/studio/${encodeURIComponent(invitation.id)}`} className={styles.headerEditButton} aria-label="Taklifnomani tahrirlash" title="Tahrirlash">
+          <Link
+            href={
+              adminContext
+                ? `/admin/invitations/${invitation.id}/edit`
+                : `/studio/${encodeURIComponent(invitation.id)}`
+            }
+            className={styles.headerEditButton}
+            aria-label="Taklifnomani tahrirlash"
+            title="Tahrirlash"
+          >
             <Pencil size={17} />
           </Link>
           <button
@@ -123,20 +203,40 @@ export function InvitationActivity({ invitation }: { invitation: Invitation }) {
           </button>
         </div>
       </div>
-      <p className={styles.description}>Mehmonlar faolligi va shaxsiy to‘yona cheklari. Tasdiqlangan tilaklar taklifnomada ko‘rinadi.</p>
+      <p className={styles.description}>
+        Mehmonlar faolligi va shaxsiy to‘yona cheklari. Tasdiqlangan tilaklar
+        taklifnomada ko‘rinadi.
+      </p>
       {error && <p role="alert">{error}</p>}
       {!data && !error && <p role="status">Yuklanmoqda…</p>}
       {data && (
         <>
-          <nav className={styles.sectionTabs} aria-label="Faollik bo‘limlari" role="tablist">
-            <button role="tab" aria-selected={section === "responses"} onClick={() => setSection("responses")}>
+          <nav
+            className={styles.sectionTabs}
+            aria-label="Faollik bo‘limlari"
+            role="tablist"
+          >
+            <button
+              role="tab"
+              aria-selected={section === "responses"}
+              onClick={() => setSection("responses")}
+            >
               Javoblar <span>{data.totals.responses}</span>
             </button>
-            <button role="tab" aria-selected={section === "wishes"} onClick={() => setSection("wishes")}>
+            <button
+              role="tab"
+              aria-selected={section === "wishes"}
+              onClick={() => setSection("wishes")}
+            >
               Tilaklar <span>{data.wishes.length}</span>
             </button>
-            <button role="tab" aria-selected={section === "receipts"} onClick={() => setSection("receipts")}>
+            <button
+              role="tab"
+              aria-selected={section === "receipts"}
+              onClick={() => setSection("receipts")}
+            >
               To‘yona <span>{data.receipts.length}</span>
+            </button>
             <button
               role="tab"
               aria-selected={section === "intentions"}
@@ -144,10 +244,12 @@ export function InvitationActivity({ invitation }: { invitation: Invitation }) {
             >
               Sovg‘a niyatlari <span>{data.giftIntentions?.length ?? 0}</span>
             </button>
-            </button>
           </nav>
-          {section === "responses" && <section className={styles.sectionPanel} role="tabpanel">
-              <h2>Qatnashish javoblari <small>({data.totals.responses})</small></h2>
+          {section === "responses" && (
+            <section className={styles.sectionPanel} role="tabpanel">
+              <h2>
+                Qatnashish javoblari <small>({data.totals.responses})</small>
+              </h2>
               {!data.responses.length && <p>Hozircha javob yo‘q.</p>}
               {data.responses.map((item) => (
                 <article key={item.id}>
@@ -162,13 +264,19 @@ export function InvitationActivity({ invitation }: { invitation: Invitation }) {
                     }
                     {item.status === "yes" ? ` · ${item.partySize} kishi` : ""}
                   </p>
-                  {item.note && <p className={styles.wishMessage}>{item.note}</p>}
+                  {item.note && (
+                    <p className={styles.wishMessage}>{item.note}</p>
+                  )}
                 </article>
               ))}
-          </section>}
-          {section === "wishes" && <section className={styles.sectionPanel} role="tabpanel">
+            </section>
+          )}
+          {section === "wishes" && (
+            <section className={styles.sectionPanel} role="tabpanel">
               <div className={styles.sectionHeading}>
-                <h2>Mehmonlar tilaklari <small>({data.wishes.length})</small></h2>
+                <h2>
+                  Mehmonlar tilaklari <small>({data.wishes.length})</small>
+                </h2>
                 <div className={styles.filter}>
                   <span>Ko‘rsatish</span>
                   <div className={styles.filterSelect}>
@@ -181,45 +289,129 @@ export function InvitationActivity({ invitation }: { invitation: Invitation }) {
                         { value: "pending", label: "Kutilmoqda" },
                         { value: "approved", label: "Tasdiqlangan" },
                       ]}
-                      onChange={(value) => { setWishFilter(value as typeof wishFilter); setPage(0); }}
+                      onChange={(value) => {
+                        setWishFilter(value as typeof wishFilter);
+                        setPage(0);
+                      }}
                     />
                   </div>
                 </div>
               </div>
-              {!data.wishes.length && <p>Hozircha mehmonlardan tilak kelmadi. Yangi tilaklar shu yerda ko‘rinadi.</p>}
-              {data.wishes.filter((item) => wishFilter === "all" || item.status === wishFilter).length === 0 && data.wishes.length > 0 && <p>Bu holatda tilaklar yo‘q.</p>}
-              {data.wishes.filter((item) => wishFilter === "all" || item.status === wishFilter).map((item) => (
-                <article className={styles.wishCard} key={item.id}>
-                  <header className={styles.wishHeader}>
-                  </header>
-                  <div className={styles.wishMessage}>
-                    <div className={styles.wishMessageHeading}>
-                      <span><UserRound size={15} /> {item.name}</span>
-                      <time dateTime={item.createdAt}><Clock3 size={14} />{formatDate(item.createdAt, "uz-Latn", invitation.timezone, { day: "numeric", month: "long", year: "numeric", hour: "2-digit", minute: "2-digit" })}</time>
+              {!data.wishes.length && (
+                <p>
+                  Hozircha mehmonlardan tilak kelmadi. Yangi tilaklar shu yerda
+                  ko‘rinadi.
+                </p>
+              )}
+              {data.wishes.filter(
+                (item) => wishFilter === "all" || item.status === wishFilter,
+              ).length === 0 &&
+                data.wishes.length > 0 && <p>Bu holatda tilaklar yo‘q.</p>}
+              {data.wishes
+                .filter(
+                  (item) => wishFilter === "all" || item.status === wishFilter,
+                )
+                .map((item) => (
+                  <article className={styles.wishCard} key={item.id}>
+                    <header className={styles.wishHeader}></header>
+                    <div className={styles.wishMessage}>
+                      <div className={styles.wishMessageHeading}>
+                        <span>
+                          <UserRound size={15} /> {item.name}
+                        </span>
+                        <time dateTime={item.createdAt}>
+                          <Clock3 size={14} />
+                          {formatDate(
+                            item.createdAt,
+                            "uz-Latn",
+                            invitation.timezone,
+                            {
+                              day: "numeric",
+                              month: "long",
+                              year: "numeric",
+                              hour: "2-digit",
+                              minute: "2-digit",
+                            },
+                          )}
+                        </time>
+                      </div>
+                      <p className={styles.message}>{item.message}</p>
                     </div>
-                    <p className={styles.message}>{item.message}</p>
-                  </div>
-                  <div className={`${styles.wishActions} ${item.status === "pending" ? "" : styles.singleWishAction}`}>
-                    {item.status === "pending" && (
-                      <button
-                        className={styles.approveIcon}
-                        disabled={busy}
-                        onClick={() => void moderate(item.id, "approved")}
-                        aria-label="Tilakni tasdiqlash"
-                        title="Tasdiqlash"
+                    <div
+                      className={`${styles.wishActions} ${item.status === "pending" ? "" : styles.singleWishAction}`}
+                    >
+                      {item.status === "pending" && (
+                        <button
+                          className={styles.approveIcon}
+                          disabled={busy}
+                          onClick={() => void moderate(item.id, "approved")}
+                          aria-label="Tilakni tasdiqlash"
+                          title="Tasdiqlash"
+                        >
+                          <Check size={18} />
+                        </button>
+                      )}
+                      {item.status !== "deleted" && (
+                        <button
+                          className={styles.deleteWishIcon}
+                          disabled={busy}
+                          onClick={() => setDeleteWishId(item.id)}
+                          aria-label="Tilakni o‘chirish"
+                          title="O‘chirish"
+                        >
+                          <Trash2 size={17} />
+                        </button>
+                      )}
+                    </div>
+                  </article>
+                ))}
+            </section>
+          )}
+          {section === "receipts" && (
+            <section className={styles.sectionPanel} role="tabpanel">
+              <h2>To‘yona cheklari · faqat sizga ko‘rinadi</h2>
+              <p>
+                AI va bank tekshiruvi yo‘q. Pul hisobingizga tushganini o‘zingiz
+                tekshirib, belgi qo‘ying.
+              </p>
+              {!data.receipts.length && <p>Hozircha chek yo‘q.</p>}
+              <div className={styles.receiptGrid}>
+                {data.receipts.map((item) => (
+                  <article key={item.id}>
+                    <strong>{item.giverNames}</strong>
+                    <p>
+                      {item.cardHolder} · •••• {item.cardLast4}
+                    </p>
+                    <p>
+                      <a
+                        href={item.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
                       >
-                        <Check size={18} />
+                        {item.filename || "Chekni ochish"} ↗
+                      </a>
+                    </p>
+                    <small>
+                      {
+                        {
+                          unreviewed: "Ko‘rib chiqilmagan",
+                          received: "Siz pul tushganini belgilagansiz",
+                          issue: "Muammo bor deb belgilangan",
+                        }[item.status as "unreviewed"]
+                      }
+                    </small>
+                    <div className={styles.actions}>
+                      <button
+                        disabled={busy || item.status === "received"}
+                        onClick={() => void moderate(item.id, "received")}
+                      >
+                        Pul tushdi
                       </button>
-                    )}
-                    {item.status !== "deleted" && (
                       <button
-                        className={styles.deleteWishIcon}
-                        disabled={busy}
-                        onClick={() => setDeleteWishId(item.id)}
-                        aria-label="Tilakni o‘chirish"
-                        title="O‘chirish"
+                        disabled={busy || item.status === "issue"}
+                        onClick={() => void moderate(item.id, "issue")}
                       >
-                        <Trash2 size={17} />
+                        Muammo bor
                       </button>
                     </div>
                   </article>
@@ -239,46 +431,24 @@ export function InvitationActivity({ invitation }: { invitation: Invitation }) {
               )}
               {data.giftIntentions?.map((item) => (
                 <article key={item.id}>
-                  <strong>{item.giverNames}</strong>
+                  <strong>{item.senderName}</strong>
                   <p>
-                    {item.cardHolder} · •••• {item.cardLast4}
+                    {Number(item.amount).toLocaleString("uz-UZ")}{" "}
+                    {item.currencyLabel}
                   </p>
-                  <p>
-                    <a
-                      href={item.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {item.filename || "Chekni ochish"} ↗
-                    </a>
-                  </p>
+                  {item.message && <p>{item.message}</p>}
                   <small>
-                    {
-                      {
-                        unreviewed: "Ko‘rib chiqilmagan",
-                        received: "Siz pul tushganini belgilagansiz",
-                        issue: "Muammo bor deb belgilangan",
-                      }[item.status as "unreviewed"]
-                    }
+                    {formatDate(
+                      item.createdAt,
+                      invitation.defaultLocale,
+                      invitation.timezone,
+                      { dateStyle: "medium", timeStyle: "short" },
+                    )}
                   </small>
-                  <div className={styles.actions}>
-                    <button
-                      disabled={busy || item.status === "received"}
-                      onClick={() => void moderate(item.id, "received")}
-                    >
-                      Pul tushdi
-                    </button>
-                    <button
-                      disabled={busy || item.status === "issue"}
-                      onClick={() => void moderate(item.id, "issue")}
-                    >
-                      Muammo bor
-                    </button>
-                  </div>
                 </article>
               ))}
-            </div>
-          </section>}
+            </section>
+          )}
           <nav aria-label="Javoblar sahifalari" className={styles.actions}>
             <button
               disabled={page === 0 || busy}
@@ -313,4 +483,3 @@ export function InvitationActivity({ invitation }: { invitation: Invitation }) {
     </main>
   );
 }
-

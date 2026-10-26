@@ -8,6 +8,7 @@ import {
 } from "@/server/invitations";
 import { verifySameOrigin } from "@/server/auth";
 import { apiError, privateHeaders, readJson } from "@/server/api";
+import { invitationRequestActor } from "@/server/admin-invitation-access";
 export const runtime = "nodejs";
 export async function GET() {
   try {
@@ -28,8 +29,20 @@ export async function POST(request: Request) {
       .object({ invitation: invitationSchema })
       .parse(await readJson(request));
     z.uuid().parse(invitation.id);
+    const access = await invitationRequestActor(
+      request,
+      invitation.id,
+      user,
+      true,
+    );
     return NextResponse.json(
-      { invitation: await saveInvitation(invitation, user) },
+      {
+        invitation: await saveInvitation(
+          invitation,
+          access.owner,
+          access.admin,
+        ),
+      },
       { status: 201, headers: privateHeaders },
     );
   } catch (e) {

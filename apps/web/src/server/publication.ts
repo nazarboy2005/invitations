@@ -11,6 +11,8 @@ import { publicationIssues } from "@taklifnoma/contracts/publication";
 import { ApiError } from "./api";
 import { CATALOG_PREVIEW_MUSIC } from "../modules/catalog/catalog-music";
 import { inspectMedia, storageProvider } from "./storage";
+import { requireAdmin, recordAdminChange } from "./admin";
+import type { AdminInvitationAction } from "./admin-invitation-access";
 
 const BASE62 = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 export function generatePublicCode() {
@@ -106,7 +108,10 @@ export async function publishInvitation(
   revision: number,
   user: SessionUser,
   allocateCode = generatePublicCode,
+  admin?: AdminInvitationAction,
 ) {
+  if (admin && (await requireAdmin()).id !== admin.actorId)
+    throw new ApiError(403, "FORBIDDEN", "Administrator tasdig‘i kerak.");
   const sql = getDb();
   return sql.begin(async (tx) => {
     const [row] =
@@ -186,7 +191,16 @@ export async function publishInvitation(
           continue;
         throw error;
       }
-      await tx`INSERT INTO invitation_audit_log(invitation_id,actor_id,action,previous_values,new_values) VALUES(${id},${user.id},'published_free',${tx.json(previous)},${tx.json({ ...invitation, publication: { mode: "free", firstPublishedAt: event.published_at, editDeadlineAt: event.deadline } })})`;
+      await tx`INSERT INTO invitation_audit_log(invitation_id,actor_id,action,previous_values,new_values) VALUES(${id},${admin?.actorId ?? user.id},'published_free',${tx.json(previous)},${tx.json({ ...invitation, publication: { mode: "free", firstPublishedAt: event.published_at, editDeadlineAt: event.deadline } })})`;
+      if (admin)
+        await recordAdminChange(
+          tx,
+          admin.actorId,
+          "invitation.publish",
+          id,
+          { status: "draft" },
+          { status: "published", ownerId: user.id, reason: admin.reason },
+        );
       return { invitation, url: publicInvitationUrl(slug) };
     }
     throw new ApiError(

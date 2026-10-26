@@ -95,6 +95,11 @@ export async function SiteHeader({
           >
             <AccountLinkLabel signedIn={Boolean(user)} />
           </Link>
+          {user?.isAdmin && (
+            <a href="/admin" className={styles.account}>
+              Boshqaruv
+            </a>
+          )}
           <Link href="/studio" className={styles.create} aria-label="Yaratish">
             <span>Yaratish</span> <ArrowUpRight size={16} />
           </Link>

@@ -3,6 +3,8 @@ import { getDb } from "@taklifnoma/database";
 import { authenticatedUser, getOwnedInvitation } from "@/server/invitations";
 import { verifySameOrigin } from "@/server/auth";
 import { ApiError, apiError, privateHeaders, readJson } from "@/server/api";
+import { invitationRequestActor } from "@/server/admin-invitation-access";
+import { recordAdminChange } from "@/server/admin";
 export const runtime = "nodejs";
 type Context = { params: Promise<{ id: string }> };
 
@@ -11,7 +13,8 @@ export async function GET(request: Request, { params }: Context) {
     const user = await authenticatedUser();
     const { id } = await params;
     z.uuid().parse(id);
-    if (!(await getOwnedInvitation(id, user.id)))
+    const access = await invitationRequestActor(request, id, user);
+    if (!(await getOwnedInvitation(id, access.owner.id)))
       throw new ApiError(404, "NOT_FOUND", "Taklifnoma topilmadi.");
     const page = z.coerce
       .number()
@@ -32,8 +35,8 @@ export async function GET(request: Request, { params }: Context) {
       {
         responses: responses.slice(0, 50),
         wishes: wishes.slice(0, 50),
-        giftIntentions: giftIntentions.slice(0, 50),
         receipts: receipts.slice(0, 50),
+        giftIntentions: giftIntentions.slice(0, 50),
         totals,
         hasMore:
           responses.length > 50 ||
@@ -53,6 +56,7 @@ export async function PATCH(request: Request, { params }: Context) {
     const user = await authenticatedUser();
     const { id } = await params;
     z.uuid().parse(id);
+    const access = await invitationRequestActor(request, id, user, true);
     const input = z
       .union([
         z
@@ -67,13 +71,38 @@ export async function PATCH(request: Request, { params }: Context) {
       ])
       .parse(await readJson(request, 1000));
     if ("receiptId" in input) {
-      const rows =
-        await getDb()`UPDATE gift_receipts SET status=${input.status},reviewed_at=now(),reviewed_by=${user.id} WHERE id=${input.receiptId} AND invitation_id=${id} AND EXISTS(SELECT 1 FROM invitations WHERE id=${id} AND owner_id=${user.id}) RETURNING id`;
+      const rows = await getDb().begin(async (tx) => {
+        const rows =
+          await tx`UPDATE gift_receipts SET status=${input.status},reviewed_at=now(),reviewed_by=${user.id} WHERE id=${input.receiptId} AND invitation_id=${id} AND EXISTS(SELECT 1 FROM invitations WHERE id=${id} AND owner_id=${access.owner.id}) RETURNING id`;
+        if (rows.length && access.admin)
+          await recordAdminChange(
+            tx,
+            user.id,
+            "invitation.moderate",
+            id,
+            null,
+            {
+              receiptId: input.receiptId,
+              status: input.status,
+              reason: access.admin.reason,
+            },
+          );
+        return rows;
+      });
       if (!rows.length) throw new ApiError(404, "NOT_FOUND", "Chek topilmadi.");
       return Response.json({ ok: true }, { headers: privateHeaders });
     }
-    const rows =
-      await getDb()`UPDATE wishes SET status=${input.status},moderated_at=now(),moderated_by=${user.id},deleted_at=${input.status === "deleted" ? new Date() : null} WHERE id=${input.wishId} AND invitation_id=${id} AND deleted_at IS NULL AND EXISTS(SELECT 1 FROM invitations WHERE id=${id} AND owner_id=${user.id}) RETURNING id`;
+    const rows = await getDb().begin(async (tx) => {
+      const rows =
+        await tx`UPDATE wishes SET status=${input.status},moderated_at=now(),moderated_by=${user.id},deleted_at=${input.status === "deleted" ? new Date() : null} WHERE id=${input.wishId} AND invitation_id=${id} AND deleted_at IS NULL AND EXISTS(SELECT 1 FROM invitations WHERE id=${id} AND owner_id=${access.owner.id}) RETURNING id`;
+      if (rows.length && access.admin)
+        await recordAdminChange(tx, user.id, "invitation.moderate", id, null, {
+          wishId: input.wishId,
+          status: input.status,
+          reason: access.admin.reason,
+        });
+      return rows;
+    });
     if (!rows.length) throw new ApiError(404, "NOT_FOUND", "Tilak topilmadi.");
     return Response.json({ ok: true }, { headers: privateHeaders });
   } catch (error) {

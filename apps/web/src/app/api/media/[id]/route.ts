@@ -3,6 +3,7 @@ import { getDb } from "@taklifnoma/database";
 import { apiError, ApiError } from "@/server/api";
 import { getSessionUser } from "@/server/auth";
 import { mediaResponse } from "@/server/storage";
+import { requireAdmin } from "@/server/admin";
 export const runtime = "nodejs";
 export async function GET(
   request: Request,
@@ -44,8 +45,9 @@ export async function GET(
     }
     if (!publicAccess) {
       const user = await getSessionUser();
-      if (!user || user.id !== asset.owner_id)
+      if (!user || (user.id !== asset.owner_id && !user.isAdmin))
         throw new ApiError(404, "NOT_FOUND", "Fayl topilmadi.");
+      if (user.id !== asset.owner_id) await requireAdmin();
     }
     return await mediaResponse(request, asset.object_key, asset.mime_type);
   } catch (e) {
