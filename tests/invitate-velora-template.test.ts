@@ -58,6 +58,8 @@ test("Velora packages its source page, local fonts and controls without sample/r
   assert.match(adapter, /data\.gallery/);
   assert.match(adapter, /item\.alt/);
   assert.match(adapter, /item\.caption/);
+  assert.match(adapter, /set\("#questions-intro",""\);visible\("#questions-intro",false\)/);
+  assert.match(adapter, /set\("\.opros-grup-title",t\.answer\)/);
   assert.match(html, /id="dresscode-foto-woman"/);
   assert.doesNotMatch(html, /wow-card\.ru|1103-[1-5]\.jpg/);
   assert.match(html, /data-off-icon="\/templates\/velora\/assets\/images\/music-off2\.png"/);
