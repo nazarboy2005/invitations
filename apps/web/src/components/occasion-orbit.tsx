@@ -6,6 +6,8 @@ import { clamp, ease, waterFrame } from "./occasion-water-motion";
 import { occasionCaption, occasionLayout } from "./occasion-orbit-layout";
 import type { WaterRenderer } from "./occasion-water";
 import styles from "./occasion-orbit.module.css";
+import { createSoundProgress } from "./site-sound-progress";
+import { playSiteSound } from "./site-sound";
 
 const occasions = [
   { first: "Nikoh", second: "to‘yi", image: "wedding", side: "left" },
@@ -48,6 +50,13 @@ export function OccasionOrbit() {
     let waterFailed = false;
     let idle: number | undefined;
     let delayed: number | undefined;
+    const soundProgress = createSoundProgress(
+      [
+        { at: 0.18, sound: "water" },
+        { at: 0.66, sound: "silk" },
+      ],
+      0.09,
+    );
 
     function draw() {
       frame = 0;
@@ -56,6 +65,7 @@ export function OccasionOrbit() {
       const progress = clamp(-root.getBoundingClientRect().top / distance);
       if (progress === lastProgress) return;
       lastProgress = progress;
+      playSiteSound(soundProgress(progress));
       const state = waterFrame(progress, height, width <= 700);
       const { release, orbit } = state;
       const scene = ease((release - 0.05) / 0.75);

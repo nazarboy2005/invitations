@@ -8,6 +8,8 @@ import {
   invitationStepState,
 } from "./invitation-process-motion";
 import styles from "./invitation-steps.module.css";
+import { createSoundProgress } from "./site-sound-progress";
+import { playSiteSound } from "./site-sound";
 
 const steps = [
   {
@@ -44,6 +46,14 @@ export function InvitationProcess() {
     let start = 0;
     let distance = 1;
     let pinned = false;
+    const soundProgress = createSoundProgress(
+      [
+        { at: 0.015, sound: "card" },
+        { at: 0.5, sound: "card" },
+        { at: 0.999, sound: "card" },
+      ],
+      0.15,
+    );
 
     function draw() {
       frame = 0;
@@ -51,6 +61,7 @@ export function InvitationProcess() {
       const phase = (scrollY - start) / distance;
       // Brief holds at either end let the first and last unlocked steps settle.
       const progress = invitationProcessProgress(phase, pinned);
+      playSiteSound(soundProgress(progress));
       root.style.setProperty("--progress", progress.toFixed(5));
       items.forEach((item, i) => {
         const { unlock, focus, active } = invitationStepState(progress, i);

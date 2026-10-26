@@ -6,6 +6,7 @@ import { ScrollHeader } from "./scroll-header";
 import { sans } from "@/app/platform-fonts";
 import { AccountLinkLabel } from "@/components/account-link-label";
 import { HeroMobileMenu } from "@/components/hero-mobile-menu";
+import { SiteSounds } from "./site-sounds";
 export async function SiteHeader({
   compact = false,
   dashboard = false,
@@ -44,6 +45,7 @@ export async function SiteHeader({
             <Link href="/templates?category=other">Tantanalar</Link>
             <Link href="/#why-us">Biz haqimizda</Link>
           </nav>
+          <SiteSounds />
           <Link href="/dashboard" className={styles.heroAccount}>
             <UserRound size={19} strokeWidth={1.2} aria-hidden="true" />
             <AccountLinkLabel signedIn={Boolean(user)} />

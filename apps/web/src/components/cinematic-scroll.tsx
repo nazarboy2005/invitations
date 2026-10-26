@@ -7,6 +7,8 @@ import {
   type CSSProperties,
   type ReactNode,
 } from "react";
+import { createSoundProgress } from "./site-sound-progress";
+import { playSiteSound } from "./site-sound";
 
 const READING_SCREENS = 0.9;
 const ENTRY_SCREENS = 0.32;
@@ -47,6 +49,17 @@ export function CinematicScroll({
     let frame = 0;
     let visible = false;
     let enabled = false;
+    // A cue just after each covering image enters. Text and the first scene
+    // remain silent. Consumed cues cannot retrigger at a scroll boundary.
+    const soundProgress = createSoundProgress(
+      scenes.slice(1).map((_, index) => ({
+        at:
+          (index + 1) * (READING_SCREENS + ENTRY_SCREENS) -
+          ENTRY_SCREENS * 0.92,
+        sound: "sweep",
+      })),
+      0.12,
+    );
 
     function measure() {
       if (!root || !viewport) return;
@@ -70,8 +83,9 @@ export function CinematicScroll({
 
     function draw() {
       frame = 0;
-      if (!enabled || !visible) return;
+      if (!enabled || !visible || document.hidden) return;
       const distance = window.scrollY - start;
+      playSiteSound(soundProgress(distance / height));
       const readingDistance = height * READING_SCREENS;
       const entryDistance = height * ENTRY_SCREENS;
       scenes.forEach((scene, i) => {

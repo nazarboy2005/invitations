@@ -1602,3 +1602,22 @@ Development agents are distinct from production queue workers. The running app w
   the captured reduced-motion rules and package preview path were checked.
   No external deployment or live payment activation was performed.
 
+
+## Visol website sound (2026-10-27)
+
+- User approved replacement of the synthesized effects with natural samples:
+  one water impact, fabric occasion reveal, the same soft fabric/air pass at each
+  cylinder chapter, unpitched card placement for all timeline steps, and paper
+  sliding for previews. The drop rebound/transformation is silent (no shimmer).
+  User approved an additional quiet fabric sweep as each next Why us photograph
+  starts covering the previous one (first scene and text motion stay silent).
+  Reuse the fabric recording at lower gain with a 0.55-second fade; no extra
+  download. Hero, navigation, hover, ordinary buttons, FAQ and footer stay silent.
+- User correction: sounds are enabled by default with no enable/disable control.
+  Initialize audio through the first normal click, tap or key interaction to obey
+  browser autoplay restrictions. No background music is added.
+- Use one lazily created Web Audio context and five short local MP3 samples
+  (about 35 KB combined), fetched/decoded/cached after normal interaction, with no
+  extra dependency. Consume skipped/reversed cues, apply a
+  cooldown, stop effects in hidden tabs, and suppress effects throughout previews
+  so invitation music always takes priority. No queued catch-up playback.

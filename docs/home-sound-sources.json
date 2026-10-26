@@ -1,0 +1,80 @@
+{
+  "date": "2026-10-27",
+  "assets": [
+    {
+      "asset": "/audio/site/water-drop.mp3",
+      "source": {
+        "title": "Water Droplet 01",
+        "author": "SoundJay",
+        "page": "https://www.soundjay.com/water-sound-effects.html",
+        "download": "https://www.soundjay.com/nature_c2026/water-droplet-1.wav",
+        "terms": "https://www.soundjay.com/tos.html"
+      },
+      "trimStart": 0,
+      "trimDuration": 0.5,
+      "processing": "atrim=start=0:duration=0.5,asetpts=PTS-STARTPTS,highpass=f=90,volume=1.2000000000000002dB,afade=t=in:d=0.002,afade=t=out:st=0.46:d=0.04",
+      "sourceSha256": "8e2aafd53f165bfa409c77ce1dc9ec13870d7577913697fa05f4826688302aa0",
+      "bytes": 5791
+    },
+    {
+      "asset": "/audio/site/fabric-reveal.mp3",
+      "source": {
+        "title": "Blanket Movement 6",
+        "author": "OwlStorm (Ashe Kirk / Owlish Media)",
+        "page": "https://freesound.org/people/OwlStorm/sounds/320144/",
+        "download": "https://cdn.freesound.org/previews/320/320144_140737-hq.mp3",
+        "license": "CC0"
+      },
+      "trimStart": 0.13,
+      "trimDuration": 0.87,
+      "processing": "atrim=start=0.13:duration=0.87,asetpts=PTS-STARTPTS,highpass=f=160,lowpass=f=5000,volume=18.4dB,afade=t=in:d=0.04,afade=t=out:st=0.77:d=0.1",
+      "sourceSha256": "20db3405814deef45e33cb5a6c491a07728c6dca87c739e3db519209cb3ac8a5",
+      "bytes": 9448
+    },
+    {
+      "asset": "/audio/site/air-pass.mp3",
+      "source": {
+        "title": "Blanket Movement 6",
+        "author": "OwlStorm (Ashe Kirk / Owlish Media)",
+        "page": "https://freesound.org/people/OwlStorm/sounds/320144/",
+        "download": "https://cdn.freesound.org/previews/320/320144_140737-hq.mp3",
+        "license": "CC0"
+      },
+      "trimStart": 0.13,
+      "trimDuration": 0.87,
+      "processing": "atrim=start=0.13:duration=0.87,asetpts=PTS-STARTPTS,atempo=0.8,highpass=f=320,lowpass=f=2600,volume=21.0dB,afade=t=in:d=0.04,afade=t=out:st=0.9874999999999999:d=0.1",
+      "sourceSha256": "20db3405814deef45e33cb5a6c491a07728c6dca87c739e3db519209cb3ac8a5",
+      "bytes": 11538
+    },
+    {
+      "asset": "/audio/site/card-place.mp3",
+      "source": {
+        "title": "card placed on table.wav",
+        "author": "filmfan87",
+        "page": "https://freesound.org/people/filmfan87/sounds/108395/",
+        "download": "https://cdn.freesound.org/previews/108/108395_1817800-hq.mp3",
+        "license": "CC0"
+      },
+      "trimStart": 9.27,
+      "trimDuration": 0.22,
+      "processing": "atrim=start=9.27:duration=0.22,asetpts=PTS-STARTPTS,highpass=f=150,lowpass=f=6500,volume=6.4dB,afade=t=in:d=0.002,afade=t=out:st=0.18:d=0.04",
+      "sourceSha256": "b0138c383e480e9b058c00d2902489d84a71468e3aa1da10b75ed6e5d87efc1c",
+      "bytes": 2918
+    },
+    {
+      "asset": "/audio/site/paper-slide.mp3",
+      "source": {
+        "title": "Paper slide (1530)",
+        "author": "Mixkit",
+        "page": "https://mixkit.co/free-sound-effects/paper/",
+        "download": "https://assets.mixkit.co/active_storage/sfx/1530/1530.wav",
+        "terms": "https://mixkit.co/license/#sfxFree"
+      },
+      "trimStart": 0,
+      "trimDuration": 0.53,
+      "processing": "atrim=start=0:duration=0.53,asetpts=PTS-STARTPTS,highpass=f=140,lowpass=f=6500,volume=-2.1dB,afade=t=in:d=0.002,afade=t=out:st=0.49000000000000005:d=0.04",
+      "sourceSha256": "2e945267f56208884153867d062838888e6bddc92b512e130aa9566255ad36bb",
+      "bytes": 6052
+    }
+  ]
+}

@@ -12,6 +12,8 @@ import {
   storyPhotoFrame,
 } from "./celebration-story-motion";
 import styles from "./celebration-story.module.css";
+import { createSoundProgress } from "./site-sound-progress";
+import { playSiteSound } from "./site-sound";
 
 /** An independent photographic interlude. The occasions/drop scene is untouched. */
 export function CelebrationStory() {
@@ -41,6 +43,14 @@ export function CelebrationStory() {
     let lastDraw = 0;
     let dirty = true;
     let active = -1;
+    const soundProgress = createSoundProgress(
+      [
+        { at: 0.08, sound: "air" },
+        { at: 1.48, sound: "air" },
+        { at: 2.63, sound: "air" },
+      ],
+      0.28,
+    );
 
     function draw(time: number) {
       frame = 0;
@@ -61,6 +71,7 @@ export function CelebrationStory() {
         clampStory(-rect.top / Math.max(1, rect.height - height)) *
         STORY_TRAVEL;
       root.dataset.storyProgress = travel.toFixed(4);
+      playSiteSound(soundProgress(travel));
       root.style.setProperty(
         "--light-radius",
         `${storyLightRadius(travel, width, height).toFixed(2)}px`,
@@ -231,7 +242,8 @@ export function CelebrationStory() {
                     style={
                       {
                         "--column": index < 9 ? index % 3 : index - 9,
-                        "--row": index < 9 ? Math.floor(index / 3) : chapterIndex,
+                        "--row":
+                          index < 9 ? Math.floor(index / 3) : chapterIndex,
                         "--ratio": [
                           1.2, 0.85, 1.15, 1.3, 0.92, 1.12, 0.88, 1.3, 1.05,
                           1.18, 0.9, 1.25,
