@@ -8,6 +8,8 @@ import { assertCreatorCanEdit } from "@taklifnoma/contracts/policies";
 import { ApiError } from "./api";
 import { getSessionUser } from "./auth";
 import { assertPublicMedia, assertPublishable } from "./publication";
+import { requireAdmin, recordAdminChange } from "./admin";
+import type { AdminInvitationAction } from "./admin-invitation-access";
 export async function authenticatedUser(): Promise<SessionUser> {
   const user = await getSessionUser();
   if (!user)
@@ -38,7 +40,10 @@ export async function listInvitations(
 export async function saveInvitation(
   invitation: Invitation,
   user: SessionUser,
+  admin?: AdminInvitationAction,
 ): Promise<Invitation> {
+  if (admin && (await requireAdmin()).id !== admin.actorId)
+    throw new ApiError(403, "FORBIDDEN", "Administrator tasdig‘i kerak.");
   const sql = getDb();
   let saved = invitation;
   await sql.begin(async (tx) => {
@@ -104,6 +109,17 @@ export async function saveInvitation(
         );
       saved = { ...invitation, slug: undefined };
       await tx`INSERT INTO invitations(id,owner_id,template_id,status,data) VALUES(${invitation.id},${user.id},${invitation.templateId || null},'draft',${tx.json(saved)})`;
+    }
+    if (admin) {
+      await recordAdminChange(
+        tx,
+        admin.actorId,
+        rows[0] ? "invitation.update" : "invitation.create",
+        invitation.id,
+        rows[0] ? { revision: invitation.revision } : null,
+        { ownerId: user.id, revision: saved.revision, reason: admin.reason },
+      );
+      await tx`INSERT INTO invitation_audit_log(invitation_id,actor_id,action,previous_values,new_values) VALUES(${invitation.id},${admin.actorId},'admin_edit',${tx.json({ revision: invitation.revision })},${tx.json({ revision: saved.revision, reason: admin.reason })})`;
     }
   });
   return saved;

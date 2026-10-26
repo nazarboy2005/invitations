@@ -664,6 +664,52 @@ test("unpublished Modern Floral draft saves and reopens while staying out of the
   assert.equal((await fetch(`${origin}/i/${invitation.id}`)).status, 404);
 });
 
+test("Pulau Sehati preserves source fields across authenticated save, reopen, and template switch while private", async () => {
+  const invitation = completeInvitation();
+  invitation.templateId = "wedivo-pulau-sehati";
+  invitation.eventType = "wedding";
+  invitation.templateData = {
+    "wedivo-pulau-sehati": {
+      inscription: { arabic: "نص", text: { "uz-Latn": "Tarjima", en: "Translation" }, attribution: { "uz-Latn": "Manba", en: "Source" } },
+      profiles: [
+        { bio: { "uz-Latn": "Kuyov oilasi", en: "Groom family" }, characterClass: "Explorer", origin: "Toshkent", stats: [{ label: "Mehr", value: 8 }], skill: "Sabr", item: "Kitob" },
+        { bio: { "uz-Latn": "Kelin oilasi", en: "Bride family" }, characterClass: "Artist", origin: "Samarqand", stats: [{ label: "Quvonch", value: 9 }], skill: "Raqs", item: "Gul" },
+      ],
+      hotels: [{ name: "Hotel", address: "Toshkent", distance: "2 km", price: "500 000", bookingUrl: "https://example.com/book", note: "Band qiling" }],
+      media: { videoUrl: "https://example.com/film.mp4", liveUrl: "https://youtube.com/live/abc123456", intro: "Film" },
+      giftWell: { enabled: true, currencyLabel: "UZS" },
+      missions: [{ title: "Surat", description: "Birga rasm", reward: "Xotira" }],
+      keepsakes: [{ name: "Uzuk", anecdote: "Birinchi sovg‘a", icon: "cincin" }],
+      hashtag: "#BaxtliKun",
+    },
+  };
+  await sql`INSERT INTO invitations(id,owner_id,template_id,status,data) VALUES(${invitation.id},${owner.id},${invitation.templateId},'draft',${sql.json(invitation)})`;
+  const savedResponse = await request(`/api/invitations/${invitation.id}`, { invitation }, true, origin, "PUT");
+  assert.equal(savedResponse.status, 200, await savedResponse.clone().text());
+  const saved = (await savedResponse.json()).invitation as Invitation;
+  const reopenedResponse = await request(`/api/invitations/${invitation.id}`);
+  assert.equal(reopenedResponse.status, 200);
+  const reopened = (await reopenedResponse.json()).invitation as Invitation;
+  assert.deepEqual(reopened.templateData, saved.templateData);
+  const slug = generatePublicCode();
+  await sql`UPDATE invitations SET status='published',slug=${slug},first_published_at=now(),data=data||jsonb_build_object('status','published','slug',${slug}::text) WHERE id=${invitation.id}`;
+  const giftResponse = await request(`/api/public/invitations/${invitation.id}/gift-intentions`, { name: "Test guest", amount: 250000, message: "Gift intention" }, false);
+  assert.equal(giftResponse.status, 201, await giftResponse.clone().text());
+  assert.match((await giftResponse.json()).message, /no money|pul o‘tkazmasi/i);
+  await sql`UPDATE invitations SET status='draft',slug=NULL,first_published_at=NULL,data=(data-'slug')||jsonb_build_object('status','draft') WHERE id=${invitation.id}`;
+  const switched = { ...reopened, templateId: "anor", revision: saved.revision };
+  const switchResponse = await request(`/api/invitations/${invitation.id}`, { invitation: switched }, true, origin, "PUT");
+  assert.equal(switchResponse.status, 200, await switchResponse.clone().text());
+  const afterSwitch = (await (await request(`/api/invitations/${invitation.id}`)).json()).invitation as Invitation;
+  assert.deepEqual(afterSwitch.templateData, saved.templateData);
+  const activity = await (await request(`/api/invitations/${invitation.id}/activity`)).json();
+  assert.equal(activity.giftIntentions[0].senderName, "Test guest");
+  assert.equal(activity.giftIntentions[0].amount, "250000");
+  const catalog = await (await request("/api/catalog", undefined, false)).json();
+  assert.ok(!catalog.templates.some((template: { id: string }) => template.id === "wedivo-pulau-sehati"));
+  assert.equal((await fetch(`${origin}/i/${invitation.id}`)).status, 404);
+});
+
 test("every published template preserves every editor field across four-language save, publish and reopen", async () => {
   const catalog = await (
     await request("/api/catalog", undefined, false)

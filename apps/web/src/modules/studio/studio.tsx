@@ -35,6 +35,7 @@ import {
   formatPrice,
   getContent,
   invitationSchema,
+  pulauSehatiDataSchema,
   LANGUAGE_NAMES,
   LOCALES,
   removeLanguage,
@@ -75,6 +76,7 @@ import { KapadokiyaTongiInvitation } from "@/templates/onlinetaklifnoma/kapadoki
 import { BuxoroRavoqInvitation } from "@/templates/onlinetaklifnoma/buxoro-ravoq";
 import { JannatBogiInvitation } from "@/templates/onlinetaklifnoma/jannat-bogi";
 import { TojmahalOltinDarvozasiInvitation } from "@/templates/onlinetaklifnoma/tojmahal-oltin-darvozasi";
+import { WedivoPulauSehati } from "@/templates/wedivo-pulau-sehati/renderer";
 import { isChorloveTemplate, ChorloveInvitation } from "@/templates/chorlove";
 import {
   createTemplatePreviewSample,
@@ -298,9 +300,28 @@ function Toggle({
 
 export function Studio({
   initialInvitation,
+  adminContext,
 }: {
   initialInvitation?: Invitation;
+  adminContext?: { ownerId: string; ownerName: string };
 }) {
+  const [adminReason, setAdminReason] = useState(
+    "Administrator tomonidan tahrirlash",
+  );
+  function studioFetch(input: RequestInfo | URL, init?: RequestInit) {
+    if (
+      adminContext &&
+      initialInvitation &&
+      typeof input === "string" &&
+      (input.startsWith("/api/invitations") || input.startsWith("/api/uploads"))
+    ) {
+      const headers = new Headers(init?.headers);
+      headers.set("X-Admin-Invitation", initialInvitation.id);
+      headers.set("X-Admin-Reason", encodeURIComponent(adminReason));
+      return globalThis.fetch(input, { ...init, headers });
+    }
+    return globalThis.fetch(input, init);
+  }
   const [invitation, setInvitation] = useState<Invitation | null>(null);
   const [locale, setLocale] = useState<Locale>(
     initialInvitation?.defaultLocale ?? "uz-Latn",
@@ -354,7 +375,7 @@ export function Studio({
     const controller = new AbortController();
     setMusicLibraryLoading(true);
     Promise.all([
-      fetch("/api/music", { signal: controller.signal })
+      studioFetch("/api/music", { signal: controller.signal })
         .then(async (response) => {
           if (!response.ok) return [];
           const result = (await response.json()) as {
@@ -368,7 +389,7 @@ export function Studio({
           return result.tracks ?? [];
         })
         .catch(() => []),
-      fetch("/api/uploads", { signal: controller.signal })
+      studioFetch("/api/uploads", { signal: controller.signal })
         .then(async (response) => {
           if (!response.ok) return [];
           const result = (await response.json()) as {
@@ -413,7 +434,7 @@ export function Studio({
         );
       }
       try {
-        const response = await fetch("/api/auth/session", {
+        const response = await studioFetch("/api/auth/session", {
           cache: "no-store",
         });
         if (response.ok) {
@@ -435,12 +456,13 @@ export function Studio({
         const requestedTemplate = templateIdSchema.safeParse(
           query.get("useTemplate") ?? query.get("template"),
         );
-        const stored = fresh
-          ? null
-          : readBrowserDraft(
-              initialInvitation?.id ?? requestedId,
-              ownerId.current,
-            );
+        const stored =
+          fresh || !!adminContext
+            ? null
+            : readBrowserDraft(
+                initialInvitation?.id ?? requestedId,
+                ownerId.current,
+              );
         if (stored && (!initialInvitation || stored.dirty)) {
           const switchedInvitation = requestedTemplate.success
             ? switchTemplate(stored.invitation, requestedTemplate.data)
@@ -539,7 +561,7 @@ export function Studio({
 
   useEffect(() => {
     let alive = true;
-    fetch("/api/catalog", { cache: "no-store" })
+    studioFetch("/api/catalog", { cache: "no-store" })
       .then((response) => {
         if (!response.ok) throw new Error();
         return response.json();
@@ -569,7 +591,7 @@ export function Studio({
   }, []);
 
   useEffect(() => {
-    if (!invitation) return;
+    if (!invitation || adminContext) return;
     const timer = window.setTimeout(() => {
       try {
         saveBrowserDraft(
@@ -588,6 +610,7 @@ export function Studio({
 
   useEffect(() => {
     const flush = () => {
+      if (adminContext) return;
       const current = invitationRef.current;
       if (current)
         try {
@@ -652,14 +675,14 @@ export function Studio({
     let timer: ReturnType<typeof setTimeout>;
     async function poll() {
       try {
-        const response = await fetch(
+        const response = await studioFetch(
           `/api/auth/telegram/status?requestId=${encodeURIComponent(auth!.requestId)}`,
           { cache: "no-store" },
         );
         const result = await response.json();
         if (cancelled) return;
         if (result.state === "confirmed") {
-          const complete = await fetch("/api/auth/telegram/complete", {
+          const complete = await studioFetch("/api/auth/telegram/complete", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ requestId: auth!.requestId }),
@@ -793,6 +816,22 @@ export function Studio({
         : current,
     );
   }
+  const pulauData = pulauSehatiDataSchema.parse(
+    invitation.templateData["wedivo-pulau-sehati"] ?? {},
+  );
+  function updatePulauData(patch: Partial<typeof pulauData>) {
+    setInvitation((current) =>
+      current
+        ? {
+            ...current,
+            templateData: {
+              ...current.templateData,
+              "wedivo-pulau-sehati": { ...pulauData, ...patch },
+            },
+          }
+        : current,
+    );
+  }
   function changeEventType(value: string) {
     const currentInvitation = invitation;
     if (!currentInvitation) return;
@@ -882,7 +921,7 @@ export function Studio({
     setError("");
     setNotice("");
     try {
-      const sessionResponse = await fetch("/api/auth/session", {
+      const sessionResponse = await studioFetch("/api/auth/session", {
         cache: "no-store",
       });
       if (!sessionResponse.ok)
@@ -897,7 +936,7 @@ export function Studio({
           );
           return;
         }
-        const response = await fetch("/api/auth/telegram/start", {
+        const response = await studioFetch("/api/auth/telegram/start", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ draftId: current.id }),
@@ -932,7 +971,7 @@ export function Studio({
         throw new Error(
           "Ma’lumotlar saqlashga tayyor emas. Xarita va rasm havolalarini hamda kiritilgan maydonlarni tekshiring.",
         );
-      const response = await fetch("/api/invitations", {
+      const response = await studioFetch("/api/invitations", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ invitation: current }),
@@ -941,11 +980,15 @@ export function Studio({
         const result = await response.json().catch(() => ({}));
         if (result.error?.code === "STALE_REVISION")
           throw new Error(
-            "Taklifnoma boshqa oynada o‘zgartirilgan. Sizning o‘zgartirishlaringiz shu brauzerda saqlandi. Sahifani qayta yuklashdan oldin qoralamangizni yuklab oling va yangilangan taklifnoma bilan solishtiring.",
+            adminContext
+              ? "Taklifnoma boshqa oynada o‘zgartirilgan. O‘zgarishlaringiz hozirgi oynada turibdi; qayta yuklashdan oldin nusxasini saqlang."
+              : "Taklifnoma boshqa oynada o‘zgartirilgan. Sizning o‘zgartirishlaringiz shu brauzerda saqlandi. Sahifani qayta yuklashdan oldin qoralamangizni yuklab oling va yangilangan taklifnoma bilan solishtiring.",
           );
         throw new Error(
           result.error?.message ??
-            "Hisobingizga saqlanmadi. Qoralamangiz shu brauzerda saqlangan; qayta urinib ko‘ring.",
+            (adminContext
+              ? "Saqlanmadi. Ushbu oynani yopmasdan qayta urinib ko‘ring."
+              : "Hisobingizga saqlanmadi. Qoralamangiz shu brauzerda saqlangan; qayta urinib ko‘ring."),
         );
       }
       const result = await response.json();
@@ -960,22 +1003,25 @@ export function Studio({
             revision: result.invitation.revision,
           });
         try {
-          saveBrowserDraft(
-            changedDuringSave && invitationRef.current
-              ? {
-                  ...invitationRef.current,
-                  revision: result.invitation.revision,
-                }
-              : result.invitation,
-            changedDuringSave,
-            ownerId.current,
-          );
+          if (!adminContext)
+            saveBrowserDraft(
+              changedDuringSave && invitationRef.current
+                ? {
+                    ...invitationRef.current,
+                    revision: result.invitation.revision,
+                  }
+                : result.invitation,
+              changedDuringSave,
+              ownerId.current,
+            );
         } catch {
           /* Cloud save has succeeded even if browser storage is unavailable. */
         }
         if (changedDuringSave) {
           setNotice(
-            "Saqlash paytida yana o‘zgartirish kiritdingiz. So‘nggi o‘zgartirishlar brauzerda saqlangan; hisobingizga saqlashni yana bosing.",
+            adminContext
+              ? "Saqlash paytida yana o‘zgartirish kiritdingiz. Ushbu oynadagi so‘nggi o‘zgarishlarni yana saqlang."
+              : "Saqlash paytida yana o‘zgartirish kiritdingiz. So‘nggi o‘zgartirishlar brauzerda saqlangan; hisobingizga saqlashni yana bosing.",
           );
           return;
         }
@@ -983,13 +1029,15 @@ export function Studio({
         window.history.replaceState(
           window.history.state,
           "",
-          `/studio/${current.id}`,
+          adminContext
+            ? `/admin/invitations/${current.id}/edit`
+            : `/studio/${current.id}`,
         );
       }
       if (action === "publish") {
         const saved = invitationSchema.parse(result.invitation);
         const publish = () =>
-          fetch(`/api/invitations/${saved.id}/publish`, {
+          studioFetch(`/api/invitations/${saved.id}/publish`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ revision: saved.revision }),
@@ -1005,9 +1053,12 @@ export function Studio({
         let published = await publishedResponse.json();
         if (!publishedResponse.ok) {
           // Another tab may already have published this same saved draft.
-          const latestResponse = await fetch(`/api/invitations/${saved.id}`, {
-            cache: "no-store",
-          });
+          const latestResponse = await studioFetch(
+            `/api/invitations/${saved.id}`,
+            {
+              cache: "no-store",
+            },
+          );
           const latest = latestResponse.ok ? await latestResponse.json() : null;
           if (
             latest?.invitation?.status === "published" &&
@@ -1028,7 +1079,8 @@ export function Studio({
         setInvitation(publishedInvitation);
         setPublicUrl(published.url);
         try {
-          saveBrowserDraft(publishedInvitation, false, ownerId.current);
+          if (!adminContext)
+            saveBrowserDraft(publishedInvitation, false, ownerId.current);
         } catch {
           /* Publication succeeded; the link remains visible. */
         }
@@ -1062,7 +1114,7 @@ export function Studio({
     if (!auth) return;
     setBusy(true);
     try {
-      const response = await fetch("/api/auth/telegram/complete", {
+      const response = await studioFetch("/api/auth/telegram/complete", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ requestId: auth.requestId }),
@@ -1082,7 +1134,11 @@ export function Studio({
       setBusy(false);
     }
   }
-  async function upload(file: File, kind: "image" | "audio", artistId?: string) {
+  async function upload(
+    file: File,
+    kind: "image" | "audio",
+    artistId?: string,
+  ) {
     if (!invitationRef.current) return;
     setError("");
     const mimeFallback: Record<string, string> = {
@@ -1129,7 +1185,7 @@ export function Studio({
     }
     setUploading(true);
     try {
-      const response = await fetch("/api/uploads", {
+      const response = await studioFetch("/api/uploads", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -1148,7 +1204,7 @@ export function Studio({
             : prepared.error?.message) ||
             "Faylni yuklash hozircha mavjud emas. Hisobingizga kirganingizni tekshiring va qayta urinib ko‘ring.",
         );
-      const uploaded = await fetch(prepared.upload.url, {
+      const uploaded = await studioFetch(prepared.upload.url, {
         method: "PUT",
         headers: prepared.upload.headers,
         body: file,
@@ -1157,7 +1213,7 @@ export function Studio({
         throw new Error(
           "Fayl yuklanmadi. Ulanishni tekshirib, qayta urinib ko‘ring.",
         );
-      const complete = await fetch(prepared.upload.completeUrl, {
+      const complete = await studioFetch(prepared.upload.completeUrl, {
         method: "POST",
       });
       const result = await complete.json();
@@ -1335,7 +1391,11 @@ export function Studio({
           )}
           <p className={styles.sidebarNote}>
             <CheckCircle2 size={15} strokeWidth={1.3} />
-            <span>Qoralamangiz shu brauzerda avtomatik saqlanadi.</span>
+            <span>
+              {adminContext
+                ? "Administrator tahriri. O‘zgarishlarni Saqlash orqali hisobga yozing."
+                : "Qoralamangiz shu brauzerda avtomatik saqlanadi."}
+            </span>
           </p>
         </aside>
         <main
@@ -1343,6 +1403,50 @@ export function Studio({
           className={`${styles.editor} ${mobilePreview ? styles.mobileHidden : ""}`}
         >
           <fieldset className={styles.editorFields} disabled={busy}>
+            {adminContext && (
+              <section
+                className="inline-note"
+                style={{ padding: 18, marginBottom: 20 }}
+              >
+                <strong>Administrator tahriri: {adminContext.ownerName}</strong>
+                <p style={{ fontSize: 13, lineHeight: 1.7 }}>
+                  Taklifnoma egasi o‘zgarmaydi. Har bir saqlash sizning
+                  nomingizdan tarixga yoziladi.
+                </p>
+                <label style={{ display: "grid", gap: 8, fontSize: 13 }}>
+                  Amal sababi
+                  <input
+                    name="adminReason"
+                    value={adminReason}
+                    onChange={(event) => setAdminReason(event.target.value)}
+                    minLength={5}
+                    maxLength={500}
+                    required
+                    style={{
+                      padding: 12,
+                      border: "1px solid var(--line)",
+                      borderRadius: 6,
+                    }}
+                  />
+                </label>
+                <a
+                  href="/admin?view=invitations"
+                  className="button secondary"
+                  style={{ marginTop: 12 }}
+                >
+                  Boshqaruvga qaytish
+                </a>
+                <a
+                  href="/admin/verify"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="button secondary"
+                  style={{ marginTop: 12, marginLeft: 8 }}
+                >
+                  Hisobni tasdiqlash
+                </a>
+              </section>
+            )}
             {invitation.status === "published" && invitation.slug && (
               <PublishedLink slug={invitation.slug} canonicalUrl={publicUrl} />
             )}
@@ -1575,6 +1679,18 @@ export function Studio({
                     }
                   />
                 </Field>
+                {invitation.templateId === "wedivo-pulau-sehati" && (
+                  <Field label="Birga taklif etuvchilar">
+                    <textarea
+                      value={pulauData.coInviters}
+                      maxLength={1000}
+                      rows={2}
+                      onChange={(event) =>
+                        updatePulauData({ coInviters: event.target.value })
+                      }
+                    />
+                  </Field>
+                )}
                 <div className={styles.divider} />
                 <Field
                   label="Tadbir nomi"
@@ -1699,10 +1815,452 @@ export function Studio({
                             }
                           />
                         </Field>
+                        {invitation.templateId === "wedivo-pulau-sehati" && (
+                          <Field label="Hikoya sanasi">
+                            <input
+                              type="date"
+                              value={pulauData.storyDates[chapter.id] ?? ""}
+                              onChange={(event) =>
+                                updatePulauData({
+                                  storyDates: {
+                                    ...pulauData.storyDates,
+                                    [chapter.id]: event.target.value,
+                                  },
+                                })
+                              }
+                            />
+                          </Field>
+                        )}
                       </div>
                     ))}
                   </>
                 )}
+              </div>
+            )}
+            {invitation.templateId === "wedivo-pulau-sehati" && (
+              <div className={styles.form}>
+                <h2>Pulau Sehati — ma’lumotlar</h2>
+                <Field label="Arabcha bitik">
+                  <textarea
+                    dir="rtl"
+                    rows={3}
+                    value={pulauData.inscription.arabic}
+                    onChange={(event) =>
+                      updatePulauData({
+                        inscription: {
+                          ...pulauData.inscription,
+                          arabic: event.target.value,
+                        },
+                      })
+                    }
+                  />
+                </Field>
+                <Field label="Bitik tarjimasi">
+                  <textarea
+                    rows={3}
+                    value={pulauData.inscription.text[locale] ?? ""}
+                    onChange={(event) =>
+                      updatePulauData({
+                        inscription: {
+                          ...pulauData.inscription,
+                          text: {
+                            ...pulauData.inscription.text,
+                            [locale]: event.target.value,
+                          },
+                        },
+                      })
+                    }
+                  />
+                </Field>
+                <Field label="Manba yoki muallif">
+                  <input
+                    value={pulauData.inscription.attribution[locale] ?? ""}
+                    onChange={(event) =>
+                      updatePulauData({
+                        inscription: {
+                          ...pulauData.inscription,
+                          attribution: {
+                            ...pulauData.inscription.attribution,
+                            [locale]: event.target.value,
+                          },
+                        },
+                      })
+                    }
+                  />
+                </Field>
+                {[0, 1].map((index) => (
+                  <div key={index}>
+                    <h3>{index === 0 ? "Kuyov" : "Kelin"} profili</h3>
+                    <Field label="Sinf">
+                      <input
+                        value={pulauData.profiles[index].characterClass}
+                        onChange={(event) =>
+                          updatePulauData({
+                            profiles: pulauData.profiles.map((row, i) =>
+                              i === index
+                                ? { ...row, characterClass: event.target.value }
+                                : row,
+                            ),
+                          })
+                        }
+                      />
+                    </Field>
+                    <Field label="Kelib chiqishi">
+                      <input
+                        value={pulauData.profiles[index].origin}
+                        onChange={(event) =>
+                          updatePulauData({
+                            profiles: pulauData.profiles.map((row, i) =>
+                              i === index
+                                ? { ...row, origin: event.target.value }
+                                : row,
+                            ),
+                          })
+                        }
+                      />
+                    </Field>
+                    <Field label="Ota-onalar haqida">
+                      <textarea
+                        value={pulauData.profiles[index].bio[locale] ?? ""}
+                        onChange={(event) =>
+                          updatePulauData({
+                            profiles: pulauData.profiles.map((row, i) =>
+                              i === index
+                                ? {
+                                    ...row,
+                                    bio: {
+                                      ...row.bio,
+                                      [locale]: event.target.value,
+                                    },
+                                  }
+                                : row,
+                            ),
+                          })
+                        }
+                      />
+                    </Field>
+                    <Field label="Maxsus mahorat">
+                      <input
+                        value={pulauData.profiles[index].skill}
+                        onChange={(event) =>
+                          updatePulauData({
+                            profiles: pulauData.profiles.map((row, i) =>
+                              i === index
+                                ? { ...row, skill: event.target.value }
+                                : row,
+                            ),
+                          })
+                        }
+                      />
+                    </Field>
+                    <Field label="Esdalik buyumi">
+                      <input
+                        value={pulauData.profiles[index].item}
+                        onChange={(event) =>
+                          updatePulauData({
+                            profiles: pulauData.profiles.map((row, i) =>
+                              i === index
+                                ? { ...row, item: event.target.value }
+                                : row,
+                            ),
+                          })
+                        }
+                      />
+                    </Field>
+                    <h4>Statistika (0–10)</h4>
+                    {Array.from({ length: 6 }, (_, statIndex) => (
+                      <div className={styles.inlineInput} key={statIndex}>
+                        <input
+                          aria-label="Stat nomi"
+                          placeholder="Masalan: Mehr"
+                          value={
+                            pulauData.profiles[index].stats[statIndex]?.label ??
+                            ""
+                          }
+                          onChange={(event) =>
+                            updatePulauData({
+                              profiles: pulauData.profiles.map((row, i) => {
+                                if (i !== index) return row;
+                                const stats = Array.from(
+                                  {
+                                    length: Math.max(
+                                      row.stats.length,
+                                      statIndex + 1,
+                                    ),
+                                  },
+                                  (_, j) =>
+                                    row.stats[j] ?? { label: "", value: 0 },
+                                );
+                                stats[statIndex] = {
+                                  label: event.target.value,
+                                  value: stats[statIndex].value,
+                                };
+                                return { ...row, stats };
+                              }),
+                            })
+                          }
+                        />
+                        <input
+                          aria-label="Stat qiymati"
+                          type="number"
+                          min={0}
+                          max={10}
+                          value={
+                            pulauData.profiles[index].stats[statIndex]?.value ??
+                            0
+                          }
+                          onChange={(event) =>
+                            updatePulauData({
+                              profiles: pulauData.profiles.map((row, i) => {
+                                if (i !== index) return row;
+                                const stats = Array.from(
+                                  {
+                                    length: Math.max(
+                                      row.stats.length,
+                                      statIndex + 1,
+                                    ),
+                                  },
+                                  (_, j) =>
+                                    row.stats[j] ?? { label: "", value: 0 },
+                                );
+                                stats[statIndex] = {
+                                  label: stats[statIndex].label,
+                                  value: Number(event.target.value),
+                                };
+                                return { ...row, stats };
+                              }),
+                            })
+                          }
+                        />
+                      </div>
+                    ))}
+                  </div>
+                ))}
+                <Field label="Hashtag">
+                  <input
+                    value={pulauData.hashtag}
+                    onChange={(event) =>
+                      updatePulauData({ hashtag: event.target.value })
+                    }
+                  />
+                </Field>
+                <h2>Mehmonxonalar</h2>
+                {Array.from({ length: 2 }, (_, index) => (
+                  <div key={index}>
+                    <h3>{index + 1}-mehmonxona</h3>
+                    {(
+                      [
+                        "name",
+                        "address",
+                        "distance",
+                        "price",
+                        "bookingUrl",
+                        "note",
+                      ] as const
+                    ).map((key) => (
+                      <Field
+                        key={key}
+                        label={
+                          {
+                            name: "Nomi",
+                            address: "Manzil",
+                            distance: "Masofa",
+                            price: "Narx",
+                            bookingUrl: "Bron havolasi",
+                            note: "Izoh",
+                          }[key]
+                        }
+                      >
+                        <input
+                          value={pulauData.hotels[index]?.[key] ?? ""}
+                          onChange={(event) => {
+                            const hotels = [...pulauData.hotels];
+                            hotels[index] = {
+                              ...{
+                                name: "",
+                                address: "",
+                                distance: "",
+                                price: "",
+                                bookingUrl: "",
+                                note: "",
+                              },
+                              ...hotels[index],
+                              [key]: event.target.value,
+                            };
+                            updatePulauData({ hotels });
+                          }}
+                        />
+                      </Field>
+                    ))}
+                  </div>
+                ))}
+                <h2>Video va jonli efir</h2>
+                <Field label="Video URL">
+                  <input
+                    value={pulauData.media.videoUrl}
+                    onChange={(event) =>
+                      updatePulauData({
+                        media: {
+                          ...pulauData.media,
+                          videoUrl: event.target.value,
+                        },
+                      })
+                    }
+                  />
+                </Field>
+                <Field label="YouTube / jonli efir URL">
+                  <input
+                    value={pulauData.media.liveUrl}
+                    onChange={(event) =>
+                      updatePulauData({
+                        media: {
+                          ...pulauData.media,
+                          liveUrl: event.target.value,
+                        },
+                      })
+                    }
+                  />
+                </Field>
+                <Field label="Izoh">
+                  <textarea
+                    value={pulauData.media.intro}
+                    onChange={(event) =>
+                      updatePulauData({
+                        media: {
+                          ...pulauData.media,
+                          intro: event.target.value,
+                        },
+                      })
+                    }
+                  />
+                </Field>
+                <h2>Mehmonlar uchun topshiriqlar</h2>
+                {Array.from({ length: 5 }, (_, index) => (
+                  <div key={index}>
+                    <h3>{index + 1}-topshiriq</h3>
+                    {(["title", "description", "reward"] as const).map(
+                      (key) => (
+                        <Field
+                          key={key}
+                          label={
+                            {
+                              title: "Nomi",
+                              description: "Tavsifi",
+                              reward: "Mukofoti",
+                            }[key]
+                          }
+                        >
+                          <input
+                            value={pulauData.missions[index]?.[key] ?? ""}
+                            onChange={(event) => {
+                              const missions = [...pulauData.missions];
+                              missions[index] = {
+                                ...{ title: "", description: "", reward: "" },
+                                ...missions[index],
+                                [key]: event.target.value,
+                              };
+                              updatePulauData({ missions });
+                            }}
+                          />
+                        </Field>
+                      ),
+                    )}
+                  </div>
+                ))}
+                <h2>Esdaliklar</h2>
+                {Array.from({ length: 6 }, (_, index) => (
+                  <div key={index}>
+                    <h3>{index + 1}-esdalik</h3>
+                    <Field label="Nomi">
+                      <input
+                        value={pulauData.keepsakes[index]?.name ?? ""}
+                        onChange={(event) => {
+                          const keepsakes = [...pulauData.keepsakes];
+                          keepsakes[index] = {
+                            ...{
+                              name: "",
+                              anecdote: "",
+                              icon: "cincin" as const,
+                            },
+                            ...keepsakes[index],
+                            name: event.target.value,
+                          };
+                          updatePulauData({ keepsakes });
+                        }}
+                      />
+                    </Field>
+                    <Field label="Hikoya">
+                      <textarea
+                        value={pulauData.keepsakes[index]?.anecdote ?? ""}
+                        onChange={(event) => {
+                          const keepsakes = [...pulauData.keepsakes];
+                          keepsakes[index] = {
+                            ...{
+                              name: "",
+                              anecdote: "",
+                              icon: "cincin" as const,
+                            },
+                            ...keepsakes[index],
+                            anecdote: event.target.value,
+                          };
+                          updatePulauData({ keepsakes });
+                        }}
+                      />
+                    </Field>
+                    <Field label="Belgi">
+                      <select
+                        value={pulauData.keepsakes[index]?.icon ?? "cincin"}
+                        onChange={(event) => {
+                          const keepsakes = [...pulauData.keepsakes];
+                          keepsakes[index] = {
+                            ...{
+                              name: "",
+                              anecdote: "",
+                              icon: "cincin" as const,
+                            },
+                            ...keepsakes[index],
+                            icon: event.target
+                              .value as (typeof pulauData.keepsakes)[number]["icon"],
+                          };
+                          updatePulauData({ keepsakes });
+                        }}
+                      >
+                        <option value="tiket">Tiket</option>
+                        <option value="stik">Stik</option>
+                        <option value="surat">Xat</option>
+                        <option value="kerang">Chig‘anoq</option>
+                        <option value="kunci">Kalit</option>
+                        <option value="cincin">Uzuk</option>
+                        <option value="bunga">Gul</option>
+                        <option value="kamera">Kamera</option>
+                      </select>
+                    </Field>
+                  </div>
+                ))}
+                <Toggle
+                  title="Niyat qudug‘i"
+                  description="Mehmon yuborgan summa va xabar taklif egasiga niyat sifatida saqlanadi; pul o‘tkazilmaydi."
+                  checked={pulauData.giftWell.enabled}
+                  onChange={(enabled) =>
+                    updatePulauData({
+                      giftWell: { ...pulauData.giftWell, enabled },
+                    })
+                  }
+                />
+                <Field label="Valyuta belgisi">
+                  <input
+                    value={pulauData.giftWell.currencyLabel}
+                    maxLength={30}
+                    onChange={(event) =>
+                      updatePulauData({
+                        giftWell: {
+                          ...pulauData.giftWell,
+                          currencyLabel: event.target.value,
+                        },
+                      })
+                    }
+                  />
+                </Field>
               </div>
             )}
 
@@ -1716,6 +2274,109 @@ export function Studio({
                     onChange={(startsAt) => update({ startsAt })}
                   />
                 </Field>
+                {invitation.templateId === "wedivo-pulau-sehati" && (
+                  <>
+                    <div className={styles.divider} />
+                    <Toggle
+                      title="Ikkinchi marosim"
+                      description="Masalan, nikoh va ziyofat uchun alohida vaqt va manzil."
+                      checked={pulauData.secondaryEvent.enabled}
+                      onChange={(enabled) =>
+                        updatePulauData({
+                          secondaryEvent: {
+                            ...pulauData.secondaryEvent,
+                            enabled,
+                          },
+                        })
+                      }
+                    />
+                    {pulauData.secondaryEvent.enabled && (
+                      <>
+                        <Field label="Marosim nomi">
+                          <input
+                            value={pulauData.secondaryEvent.label}
+                            maxLength={300}
+                            onChange={(event) =>
+                              updatePulauData({
+                                secondaryEvent: {
+                                  ...pulauData.secondaryEvent,
+                                  label: event.target.value,
+                                },
+                              })
+                            }
+                          />
+                        </Field>
+                        <Field label="Sana">
+                          <input
+                            type="date"
+                            value={pulauData.secondaryEvent.date}
+                            onChange={(event) =>
+                              updatePulauData({
+                                secondaryEvent: {
+                                  ...pulauData.secondaryEvent,
+                                  date: event.target.value,
+                                },
+                              })
+                            }
+                          />
+                        </Field>
+                        <Field label="Vaqt">
+                          <TimePicker
+                            value={pulauData.secondaryEvent.time}
+                            onChange={(time) =>
+                              updatePulauData({
+                                secondaryEvent: {
+                                  ...pulauData.secondaryEvent,
+                                  time,
+                                },
+                              })
+                            }
+                          />
+                        </Field>
+                        <Field label="Joy nomi">
+                          <input
+                            value={pulauData.secondaryEvent.venueName}
+                            onChange={(event) =>
+                              updatePulauData({
+                                secondaryEvent: {
+                                  ...pulauData.secondaryEvent,
+                                  venueName: event.target.value,
+                                },
+                              })
+                            }
+                          />
+                        </Field>
+                        <Field label="Manzil">
+                          <textarea
+                            value={pulauData.secondaryEvent.address}
+                            maxLength={1000}
+                            onChange={(event) =>
+                              updatePulauData({
+                                secondaryEvent: {
+                                  ...pulauData.secondaryEvent,
+                                  address: event.target.value,
+                                },
+                              })
+                            }
+                          />
+                        </Field>
+                        <Field label="Xarita URL">
+                          <input
+                            value={pulauData.secondaryEvent.mapUrl}
+                            onChange={(event) =>
+                              updatePulauData({
+                                secondaryEvent: {
+                                  ...pulauData.secondaryEvent,
+                                  mapUrl: event.target.value,
+                                },
+                              })
+                            }
+                          />
+                        </Field>
+                      </>
+                    )}
+                  </>
+                )}
                 {identityLocked && (
                   <p className={styles.help}>
                     Sanani ko‘chirish administrator tasdig‘i bilan amalga
@@ -1885,7 +2546,9 @@ export function Studio({
                               placeholders.programItem}
                             {invitation.templateId === "invitate-wedding" &&
                               content.programDescriptions[item.id]?.trim() && (
-                                <small>{content.programDescriptions[item.id]}</small>
+                                <small>
+                                  {content.programDescriptions[item.id]}
+                                </small>
                               )}
                           </span>
                         </li>
@@ -2343,15 +3006,25 @@ export function Studio({
                   <>
                     <div className={styles.divider} />
                     <div className={styles.groupHeader}>
-                      <h2><Users size={20} /> San’atkorlar va boshlovchilar</h2>
+                      <h2>
+                        <Users size={20} /> San’atkorlar va boshlovchilar
+                      </h2>
                       <button
                         className={styles.textButton}
-                        disabled={identityLocked || invitation.artistLineup.length >= 50}
+                        disabled={
+                          identityLocked || invitation.artistLineup.length >= 50
+                        }
                         onClick={() =>
                           update({
                             artistLineup: [
                               ...invitation.artistLineup,
-                              { id: crypto.randomUUID(), name: {}, role: {}, imageUrl: "", imageAssetId: null },
+                              {
+                                id: crypto.randomUUID(),
+                                name: {},
+                                role: {},
+                                imageUrl: "",
+                                imageAssetId: null,
+                              },
                             ],
                           })
                         }
@@ -2360,18 +3033,34 @@ export function Studio({
                       </button>
                     </div>
                     <p className={styles.help}>
-                      Ism, vazifa va suratni kiriting. Har bir yoqilgan tilda ism va vazifani alohida yozishingiz mumkin.
+                      Ism, vazifa va suratni kiriting. Har bir yoqilgan tilda
+                      ism va vazifani alohida yozishingiz mumkin.
                     </p>
                     {invitation.artistLineup.map((artist, index) => (
                       <div className={styles.storyItem} key={artist.id}>
                         <div className={styles.twoColumns}>
-                          <Field label={`${index + 1}-san’atkor ismi · ${LANGUAGE_NAMES[locale]}`}>
+                          <Field
+                            label={`${index + 1}-san’atkor ismi · ${LANGUAGE_NAMES[locale]}`}
+                          >
                             <input
                               value={artist.name[locale] ?? ""}
                               maxLength={300}
                               disabled={identityLocked}
                               onChange={(event) =>
-                                update({ artistLineup: invitation.artistLineup.map((row) => row.id === artist.id ? { ...row, name: { ...row.name, [locale]: event.target.value } } : row) })
+                                update({
+                                  artistLineup: invitation.artistLineup.map(
+                                    (row) =>
+                                      row.id === artist.id
+                                        ? {
+                                            ...row,
+                                            name: {
+                                              ...row.name,
+                                              [locale]: event.target.value,
+                                            },
+                                          }
+                                        : row,
+                                  ),
+                                })
                               }
                             />
                           </Field>
@@ -2381,7 +3070,20 @@ export function Studio({
                               maxLength={300}
                               disabled={identityLocked}
                               onChange={(event) =>
-                                update({ artistLineup: invitation.artistLineup.map((row) => row.id === artist.id ? { ...row, role: { ...row.role, [locale]: event.target.value } } : row) })
+                                update({
+                                  artistLineup: invitation.artistLineup.map(
+                                    (row) =>
+                                      row.id === artist.id
+                                        ? {
+                                            ...row,
+                                            role: {
+                                              ...row.role,
+                                              [locale]: event.target.value,
+                                            },
+                                          }
+                                        : row,
+                                  ),
+                                })
                               }
                             />
                           </Field>
@@ -2393,13 +3095,29 @@ export function Studio({
                               disabled={identityLocked}
                               placeholder="https://…"
                               onChange={(event) =>
-                                update({ artistLineup: invitation.artistLineup.map((row) => row.id === artist.id ? { ...row, imageUrl: event.target.value, imageAssetId: null } : row) })
+                                update({
+                                  artistLineup: invitation.artistLineup.map(
+                                    (row) =>
+                                      row.id === artist.id
+                                        ? {
+                                            ...row,
+                                            imageUrl: event.target.value,
+                                            imageAssetId: null,
+                                          }
+                                        : row,
+                                  ),
+                                })
                               }
                             />
                           </Field>
                           <label className={styles.audioUpload}>
                             <ImagePlus size={18} />
-                            <span>{artist.imageUrl ? "Portretni almashtirish" : "Portret yuklash"}<small>JPG, PNG yoki WebP · 15 MB gacha</small></span>
+                            <span>
+                              {artist.imageUrl
+                                ? "Portretni almashtirish"
+                                : "Portret yuklash"}
+                              <small>JPG, PNG yoki WebP · 15 MB gacha</small>
+                            </span>
                             <input
                               type="file"
                               accept="image/jpeg,image/png,image/webp"
@@ -2416,7 +3134,13 @@ export function Studio({
                             className={styles.iconButton}
                             aria-label="San’atkorni olib tashlash"
                             disabled={identityLocked}
-                            onClick={() => update({ artistLineup: invitation.artistLineup.filter((row) => row.id !== artist.id) })}
+                            onClick={() =>
+                              update({
+                                artistLineup: invitation.artistLineup.filter(
+                                  (row) => row.id !== artist.id,
+                                ),
+                              })
+                            }
                           >
                             <Trash2 size={16} />
                           </button>
@@ -2905,6 +3629,16 @@ export function Studio({
                 invitationId={invitation.id}
                 locale={locale}
                 preview
+                catalogMusic={section === 0 && !authoredPreview}
+                sampleWishes={section === 0 && !authoredPreview}
+              />
+            ) : invitation.templateId === "wedivo-pulau-sehati" ? (
+              <WedivoPulauSehati
+                invitation={previewInvitation}
+                invitationId={invitation.id}
+                locale={locale}
+                preview
+                fullPreview
                 catalogMusic={section === 0 && !authoredPreview}
                 sampleWishes={section === 0 && !authoredPreview}
               />

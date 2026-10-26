@@ -1,0 +1,130 @@
+@font-face {
+  font-family: 'Amiri';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(fonts/font-01.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Amiri';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(fonts/font-02.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url(fonts/font-04.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+  src: url(fonts/font-03.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(fonts/font-05.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Fredoka';
+  font-style: normal;
+  font-weight: 400;
+  font-stretch: normal;
+  font-display: swap;
+  src: url(fonts/font-06.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Fredoka';
+  font-style: normal;
+  font-weight: 500;
+  font-stretch: normal;
+  font-display: swap;
+  src: url(fonts/font-09.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Fredoka';
+  font-style: normal;
+  font-weight: 600;
+  font-stretch: normal;
+  font-display: swap;
+  src: url(fonts/font-08.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Fredoka';
+  font-style: normal;
+  font-weight: 700;
+  font-stretch: normal;
+  font-display: swap;
+  src: url(fonts/font-07.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Lilita One';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(fonts/font-10.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Nunito';
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+  src: url(fonts/font-15.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(fonts/font-14.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(fonts/font-13.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(fonts/font-12.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url(fonts/font-11.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Pixelify Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(fonts/font-18.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Pixelify Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(fonts/font-16.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Pixelify Sans';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(fonts/font-17.ttf) format('truetype');
+}

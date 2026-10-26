@@ -385,6 +385,12 @@ test("Green Gold restores source opening, scroll, ornament, sparkle, wishes, and
   assert.match(bridge, /transition duration-500 hover:scale-105/);
   assert.doesNotMatch(css, /gg-sparkle|@keyframes/);
   assert.match(css, /background:rgba\(0,0,0,\.88\)/);
+  assert.match(
+    css,
+    /^\.gg-lightbox\{position:fixed;inset:0;z-index:3000;display:flex;align-items:center;justify-content:center/m,
+  );
+  assert.match(css, /^\.gg-lightbox img\{max-width:94vw;max-height:88dvh/m);
+  assert.match(bridge, /document\.body\.append\(dialog\)/);
 });
 
 test("Green Gold localized control copy decodes in all four locales", async () => {

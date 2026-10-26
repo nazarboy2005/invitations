@@ -3,6 +3,8 @@ import { getDb } from "@taklifnoma/database";
 import { authenticatedUser, getOwnedInvitation } from "@/server/invitations";
 import { verifySameOrigin } from "@/server/auth";
 import { ApiError, apiError, privateHeaders, readJson } from "@/server/api";
+import { invitationRequestActor } from "@/server/admin-invitation-access";
+import { recordAdminChange } from "@/server/admin";
 export const runtime = "nodejs";
 type Context = { params: Promise<{ id: string }> };
 
@@ -11,7 +13,8 @@ export async function GET(request: Request, { params }: Context) {
     const user = await authenticatedUser();
     const { id } = await params;
     z.uuid().parse(id);
-    if (!(await getOwnedInvitation(id, user.id)))
+    const access = await invitationRequestActor(request, id, user);
+    if (!(await getOwnedInvitation(id, access.owner.id)))
       throw new ApiError(404, "NOT_FOUND", "Taklifnoma topilmadi.");
     const page = z.coerce
       .number()
@@ -20,20 +23,26 @@ export async function GET(request: Request, { params }: Context) {
       .max(100000)
       .parse(new URL(request.url).searchParams.get("page") ?? 0);
     const offset = page * 50;
-    const [responses, wishes, receipts, [totals]] = await Promise.all([
-      getDb()`SELECT id,name,status,party_size AS "partySize",note,created_at AS "createdAt" FROM rsvp_responses WHERE invitation_id=${id} ORDER BY created_at DESC,id DESC LIMIT 51 OFFSET ${offset}`,
-      getDb()`SELECT id,name,message,CASE WHEN status='hidden' THEN 'pending' ELSE status END AS status,created_at AS "createdAt" FROM wishes WHERE invitation_id=${id} AND deleted_at IS NULL ORDER BY created_at DESC,id DESC LIMIT 51 OFFSET ${offset}`,
-      getDb()`SELECT r.id,r.giver_names AS "giverNames",r.status,r.created_at AS "createdAt",r.destination->>'cardHolder' AS "cardHolder",right(regexp_replace(r.destination->>'cardNumber','[^0-9]','','g'),4) AS "cardLast4",a.url,a.filename FROM gift_receipts r JOIN media_assets a ON a.id=r.asset_id WHERE r.invitation_id=${id} ORDER BY r.created_at DESC,r.id DESC LIMIT 51 OFFSET ${offset}`,
-      getDb()`SELECT (SELECT count(*)::int FROM rsvp_responses WHERE invitation_id=${id}) AS responses,(SELECT coalesce(sum(party_size),0)::int FROM rsvp_responses WHERE invitation_id=${id} AND status='yes') AS guests,(SELECT count(*)::int FROM wishes WHERE invitation_id=${id} AND status IN ('pending','hidden') AND deleted_at IS NULL) AS pending`,
-    ]);
+    const [responses, wishes, receipts, giftIntentions, [totals]] =
+      await Promise.all([
+        getDb()`SELECT id,name,status,party_size AS "partySize",note,created_at AS "createdAt" FROM rsvp_responses WHERE invitation_id=${id} ORDER BY created_at DESC,id DESC LIMIT 51 OFFSET ${offset}`,
+        getDb()`SELECT id,name,message,CASE WHEN status='hidden' THEN 'pending' ELSE status END AS status,created_at AS "createdAt" FROM wishes WHERE invitation_id=${id} AND deleted_at IS NULL ORDER BY created_at DESC,id DESC LIMIT 51 OFFSET ${offset}`,
+        getDb()`SELECT r.id,r.giver_names AS "giverNames",r.status,r.created_at AS "createdAt",r.destination->>'cardHolder' AS "cardHolder",right(regexp_replace(r.destination->>'cardNumber','[^0-9]','','g'),4) AS "cardLast4",a.url,a.filename FROM gift_receipts r JOIN media_assets a ON a.id=r.asset_id WHERE r.invitation_id=${id} ORDER BY r.created_at DESC,r.id DESC LIMIT 51 OFFSET ${offset}`,
+        getDb()`SELECT id,sender_name AS "senderName",amount::text AS amount,currency_label AS "currencyLabel",message,created_at AS "createdAt" FROM pulau_gift_intentions WHERE invitation_id=${id} ORDER BY created_at DESC,id DESC LIMIT 51 OFFSET ${offset}`,
+        getDb()`SELECT (SELECT count(*)::int FROM rsvp_responses WHERE invitation_id=${id}) AS responses,(SELECT coalesce(sum(party_size),0)::int FROM rsvp_responses WHERE invitation_id=${id} AND status='yes') AS guests,(SELECT count(*)::int FROM wishes WHERE invitation_id=${id} AND status IN ('pending','hidden') AND deleted_at IS NULL) AS pending`,
+      ]);
     return Response.json(
       {
         responses: responses.slice(0, 50),
         wishes: wishes.slice(0, 50),
         receipts: receipts.slice(0, 50),
+        giftIntentions: giftIntentions.slice(0, 50),
         totals,
         hasMore:
-          responses.length > 50 || wishes.length > 50 || receipts.length > 50,
+          responses.length > 50 ||
+          wishes.length > 50 ||
+          receipts.length > 50 ||
+          giftIntentions.length > 50,
       },
       { headers: privateHeaders },
     );
@@ -47,6 +56,7 @@ export async function PATCH(request: Request, { params }: Context) {
     const user = await authenticatedUser();
     const { id } = await params;
     z.uuid().parse(id);
+    const access = await invitationRequestActor(request, id, user, true);
     const input = z
       .union([
         z
@@ -61,13 +71,38 @@ export async function PATCH(request: Request, { params }: Context) {
       ])
       .parse(await readJson(request, 1000));
     if ("receiptId" in input) {
-      const rows =
-        await getDb()`UPDATE gift_receipts SET status=${input.status},reviewed_at=now(),reviewed_by=${user.id} WHERE id=${input.receiptId} AND invitation_id=${id} AND EXISTS(SELECT 1 FROM invitations WHERE id=${id} AND owner_id=${user.id}) RETURNING id`;
+      const rows = await getDb().begin(async (tx) => {
+        const rows =
+          await tx`UPDATE gift_receipts SET status=${input.status},reviewed_at=now(),reviewed_by=${user.id} WHERE id=${input.receiptId} AND invitation_id=${id} AND EXISTS(SELECT 1 FROM invitations WHERE id=${id} AND owner_id=${access.owner.id}) RETURNING id`;
+        if (rows.length && access.admin)
+          await recordAdminChange(
+            tx,
+            user.id,
+            "invitation.moderate",
+            id,
+            null,
+            {
+              receiptId: input.receiptId,
+              status: input.status,
+              reason: access.admin.reason,
+            },
+          );
+        return rows;
+      });
       if (!rows.length) throw new ApiError(404, "NOT_FOUND", "Chek topilmadi.");
       return Response.json({ ok: true }, { headers: privateHeaders });
     }
-    const rows =
-      await getDb()`UPDATE wishes SET status=${input.status},moderated_at=now(),moderated_by=${user.id},deleted_at=${input.status === "deleted" ? new Date() : null} WHERE id=${input.wishId} AND invitation_id=${id} AND deleted_at IS NULL AND EXISTS(SELECT 1 FROM invitations WHERE id=${id} AND owner_id=${user.id}) RETURNING id`;
+    const rows = await getDb().begin(async (tx) => {
+      const rows =
+        await tx`UPDATE wishes SET status=${input.status},moderated_at=now(),moderated_by=${user.id},deleted_at=${input.status === "deleted" ? new Date() : null} WHERE id=${input.wishId} AND invitation_id=${id} AND deleted_at IS NULL AND EXISTS(SELECT 1 FROM invitations WHERE id=${id} AND owner_id=${access.owner.id}) RETURNING id`;
+      if (rows.length && access.admin)
+        await recordAdminChange(tx, user.id, "invitation.moderate", id, null, {
+          wishId: input.wishId,
+          status: input.status,
+          reason: access.admin.reason,
+        });
+      return rows;
+    });
     if (!rows.length) throw new ApiError(404, "NOT_FOUND", "Tilak topilmadi.");
     return Response.json({ ok: true }, { headers: privateHeaders });
   } catch (error) {

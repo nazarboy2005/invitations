@@ -1,9 +1,13 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { getDb } from "@taklifnoma/database";
-import { authenticatedUser } from "@/server/invitations";
-import { verifySameOrigin } from "@/server/auth";
-import { ApiError, apiError, privateHeaders, readJson } from "@/server/api";
+import {
+  requireAdmin,
+  requireAdminMutation,
+  recordAdminChange,
+  adminError,
+} from "@/server/admin";
+import { ApiError, privateHeaders, readJson } from "@/server/api";
 const inputSchema = z
   .object({
     id: z
@@ -15,11 +19,6 @@ const inputSchema = z
     position: z.number().int().min(0).max(10000).optional(),
   })
   .strict();
-async function requireAdmin() {
-  const user = await authenticatedUser();
-  if (!user.isAdmin)
-    throw new ApiError(403, "FORBIDDEN", "Administrator huquqi kerak.");
-}
 export async function GET() {
   try {
     await requireAdmin();
@@ -27,27 +26,37 @@ export async function GET() {
       await getDb()`SELECT id,name,position FROM template_categories ORDER BY position,id`;
     return NextResponse.json({ categories: rows }, { headers: privateHeaders });
   } catch (error) {
-    return apiError(error);
+    return adminError(error);
   }
 }
 export async function POST(request: Request) {
   try {
-    verifySameOrigin(request);
-    await requireAdmin();
+    const user = await requireAdminMutation(request);
     const input = inputSchema.parse(await readJson(request, 5000));
-    const [category] =
-      await getDb()`INSERT INTO template_categories(id,name,position) VALUES(${input.id},${input.name},${input.position ?? 100}) ON CONFLICT(id) DO NOTHING RETURNING id,name,position`;
-    if (!category)
-      throw new ApiError(
-        409,
-        "CATEGORY_EXISTS",
-        "Bu turkum identifikatori allaqachon mavjud.",
+    const category = await getDb().begin(async (tx) => {
+      const [created] =
+        await tx`INSERT INTO template_categories(id,name,position) VALUES(${input.id},${input.name},${input.position ?? 100}) ON CONFLICT(id) DO NOTHING RETURNING id,name,position`;
+      if (!created)
+        throw new ApiError(
+          409,
+          "CATEGORY_EXISTS",
+          "Bu turkum identifikatori allaqachon mavjud.",
+        );
+      await recordAdminChange(
+        tx,
+        user.id,
+        "category.create",
+        input.id,
+        null,
+        created,
       );
+      return created;
+    });
     return NextResponse.json(
       { category },
       { status: 201, headers: privateHeaders },
     );
   } catch (error) {
-    return apiError(error);
+    return adminError(error);
   }
 }

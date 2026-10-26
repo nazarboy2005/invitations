@@ -6,11 +6,17 @@ import { authenticatedUser } from "@/server/invitations";
 import { verifySameOrigin } from "@/server/auth";
 import { ApiError, apiError, privateHeaders, readJson } from "@/server/api";
 import { presignMedia, mediaObjectKey } from "@/server/storage";
+import { requireAdminMutation } from "@/server/admin";
+import { invitationRequestActor } from "@/server/admin-invitation-access";
 export const runtime = "nodejs";
 
-export async function GET() {
+export async function GET(request: Request) {
   try {
-    const user = await authenticatedUser();
+    const actor = await authenticatedUser();
+    const target = request.headers.get("x-admin-invitation");
+    const user = target
+      ? (await invitationRequestActor(request, target, actor)).owner
+      : actor;
     const assets = await getDb()`
       SELECT id, url, filename, created_at
       FROM media_assets
@@ -60,10 +66,29 @@ const inputSchema = z
 export async function POST(request: Request) {
   try {
     verifySameOrigin(request);
-    const user = await authenticatedUser();
+    const actor = await authenticatedUser();
     const input = inputSchema.parse(await readJson(request, 5000));
+    const access = input.draftId
+      ? await invitationRequestActor(request, input.draftId, actor, true)
+      : { owner: actor, admin: undefined };
+    const user = access.owner;
+    if (input.catalog && access.admin)
+      throw new ApiError(
+        400,
+        "INVALID_INPUT",
+        "Kutubxona audiosi foydalanuvchi kontekstida yuklanmaydi.",
+      );
     if (input.catalog && (!user.isAdmin || input.kind !== "audio"))
       throw new ApiError(403, "FORBIDDEN", "Administrator huquqi kerak.");
+    if (input.catalog) {
+      await requireAdminMutation(request);
+      if (input.draftId)
+        throw new ApiError(
+          400,
+          "INVALID_INPUT",
+          "Kutubxona audiosi taklifnomaga biriktirilmaydi.",
+        );
+    }
     if (!input.catalog && !input.draftId)
       throw new ApiError(
         400,

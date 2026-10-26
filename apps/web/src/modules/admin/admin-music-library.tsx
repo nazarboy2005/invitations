@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useState, type CSSProperties, type FormEvent } from "react";
+import styles from "./admin.module.css";
+import { useAdminDirty } from "./admin-navigation-guard";
 
 type Track = {
   id: string;
@@ -30,6 +32,7 @@ export function AdminMusicLibrary() {
   const [file, setFile] = useState<File | null>(null);
   const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
+  useAdminDirty(!!title.trim() || !!file);
 
   async function load() {
     const response = await fetch("/api/admin/music", { cache: "no-store" });
@@ -86,6 +89,7 @@ export function AdminMusicLibrary() {
 
   async function addTrack(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    const form = event.currentTarget;
     if (!file) return;
     setBusy(true);
     setError("");
@@ -155,7 +159,7 @@ export function AdminMusicLibrary() {
       await load();
       setTitle("");
       setFile(null);
-      event.currentTarget.reset();
+      form.reset();
       setNotice("Musiqa qo‘shildi va foydalanuvchilar tanlovi uchun yoqildi.");
     } catch (cause) {
       setError(
@@ -167,11 +171,7 @@ export function AdminMusicLibrary() {
   }
 
   return (
-    <section
-      className="inline-note"
-      style={{ display: "grid", gap: 20, padding: 24, marginTop: 34 }}
-      aria-labelledby="music-library-heading"
-    >
+    <section className={styles.panel} aria-labelledby="music-library-heading">
       <div>
         <h2
           id="music-library-heading"
@@ -199,59 +199,68 @@ export function AdminMusicLibrary() {
           {notice}
         </p>
       )}
-      <form
-        onSubmit={addTrack}
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit,minmax(min(100%,220px),1fr))",
-          alignItems: "end",
-          gap: 12,
-        }}
-      >
-        <label style={{ display: "grid", gap: 8, fontSize: 13 }}>
-          Kutubxonada ko‘rinadigan nom
-          <input
-            required
-            maxLength={160}
-            value={title}
-            onChange={(event) => setTitle(event.target.value)}
-            disabled={busy}
-            style={fieldStyle}
-            placeholder="Masalan, Sokkin piano"
-          />
-        </label>
-        <label style={{ display: "grid", gap: 8, fontSize: 13 }}>
-          Audio fayl
-          <input
-            required
-            type="file"
-            accept="audio/mpeg,audio/wav,audio/mp4,audio/x-m4a,.mp3,.wav,.m4a"
-            onChange={(event) => setFile(event.target.files?.[0] ?? null)}
-            disabled={busy}
-            style={{ ...fieldStyle, padding: 8 }}
-          />
-          <small className="muted">MP3, WAV yoki M4A · 15 MB gacha</small>
-        </label>
-        <button className="button" disabled={busy || !file || !title.trim()}>
-          {busy ? "Yuklanmoqda…" : "Musiqa qo‘shish"}
+      {!loading && !error && (
+        <form onSubmit={addTrack} className={styles.musicForm}>
+          <label style={{ display: "grid", gap: 8, fontSize: 13 }}>
+            Kutubxonada ko‘rinadigan nom
+            <input
+              required
+              name="title"
+              autoComplete="off"
+              maxLength={160}
+              value={title}
+              onChange={(event) => setTitle(event.target.value)}
+              disabled={busy}
+              style={fieldStyle}
+              placeholder="Masalan, Sokin piano…"
+            />
+          </label>
+          <label style={{ display: "grid", gap: 8, fontSize: 13 }}>
+            Audio fayl
+            <input
+              required
+              name="audio"
+              type="file"
+              accept="audio/mpeg,audio/wav,audio/mp4,audio/x-m4a,.mp3,.wav,.m4a"
+              onChange={(event) => setFile(event.target.files?.[0] ?? null)}
+              disabled={busy}
+              style={{ ...fieldStyle, padding: 8 }}
+            />
+            <small className="muted">MP3, WAV yoki M4A · 15 MB gacha</small>
+          </label>
+          <button className="button" disabled={busy || !file || !title.trim()}>
+            {busy ? "Yuklanmoqda…" : "Musiqa qo‘shish"}
+          </button>
+        </form>
+      )}
+      {error && (
+        <button
+          type="button"
+          className="button secondary"
+          disabled={busy}
+          onClick={async () => {
+            setLoading(true);
+            setError("");
+            try {
+              await load();
+            } catch (cause) {
+              setError((cause as Error).message);
+            } finally {
+              setLoading(false);
+            }
+          }}
+        >
+          Qayta yuklash
         </button>
-      </form>
+      )}
       {loading ? (
-        <p className="muted">Musiqalar yuklanmoqda…</p>
-      ) : tracks.length ? (
+        <p role="status" className="muted">
+          Musiqalar yuklanmoqda…
+        </p>
+      ) : !error && tracks.length ? (
         <div style={{ display: "grid", gap: 10 }}>
           {tracks.map((track) => (
-            <div
-              key={track.id}
-              style={{
-                display: "flex",
-                flexWrap: "wrap",
-                gap: 14,
-                alignItems: "center",
-                padding: "14px 0",
-                borderTop: "1px solid var(--line)",
-              }}
-            >
+            <div key={track.id} className={styles.musicTrack}>
               <div style={{ minWidth: 200, flex: "1 1 auto" }}>
                 <strong>{track.title}</strong>
                 <div className="muted" style={{ fontSize: 12, marginTop: 4 }}>
@@ -265,6 +274,7 @@ export function AdminMusicLibrary() {
               </div>
               <audio
                 controls
+                aria-label={`${track.title} audiosi`}
                 preload="none"
                 src={`/api/media/${track.asset_id}`}
                 style={{ width: "min(100%,300px)" }}
@@ -286,7 +296,12 @@ export function AdminMusicLibrary() {
           ))}
         </div>
       ) : (
-        <p className="muted">Umumiy kutubxonaga hali musiqa qo‘shilmagan.</p>
+        !error && (
+          <p className={styles.empty}>
+            Umumiy kutubxona hozircha bo‘sh. Birinchi musiqani yuqoridagi forma
+            orqali qo‘shing.
+          </p>
+        )
       )}
     </section>
   );

@@ -1,16 +1,21 @@
 import { NextResponse } from "next/server";
 import { getCatalog } from "@/server/catalog";
-import { authenticatedUser } from "@/server/invitations";
-import { ApiError, apiError, privateHeaders } from "@/server/api";
+import { requireAdmin, adminError } from "@/server/admin";
+import { ApiError, privateHeaders } from "@/server/api";
 export async function GET() {
   try {
-    const user = await authenticatedUser();
-    if (!user.isAdmin)
-      throw new ApiError(403, "FORBIDDEN", "Administrator huquqi kerak.");
-    return NextResponse.json(await getCatalog(true), {
+    await requireAdmin();
+    const catalog = await getCatalog(true);
+    if (!catalog.configured)
+      throw new ApiError(
+        503,
+        "CATALOG_UNAVAILABLE",
+        "Dizaynlar yuklanmadi. Qayta urinib ko‘ring.",
+      );
+    return NextResponse.json(catalog, {
       headers: privateHeaders,
     });
   } catch (e) {
-    return apiError(e);
+    return adminError(e);
   }
 }

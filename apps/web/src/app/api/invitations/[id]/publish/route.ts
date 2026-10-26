@@ -4,6 +4,7 @@ import { authenticatedUser } from "@/server/invitations";
 import { publishInvitation } from "@/server/publication";
 import { verifySameOrigin } from "@/server/auth";
 import { apiError, privateHeaders, readJson } from "@/server/api";
+import { invitationRequestActor } from "@/server/admin-invitation-access";
 export const runtime = "nodejs";
 export async function POST(
   request: Request,
@@ -18,9 +19,19 @@ export async function POST(
       .object({ revision: z.number().int().positive() })
       .strict()
       .parse(await readJson(request, 1000));
-    return NextResponse.json(await publishInvitation(id, revision, user), {
-      headers: privateHeaders,
-    });
+    const access = await invitationRequestActor(request, id, user, true);
+    return NextResponse.json(
+      await publishInvitation(
+        id,
+        revision,
+        access.owner,
+        undefined,
+        access.admin,
+      ),
+      {
+        headers: privateHeaders,
+      },
+    );
   } catch (error) {
     return apiError(error);
   }

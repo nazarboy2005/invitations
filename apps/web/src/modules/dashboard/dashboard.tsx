@@ -229,7 +229,9 @@ export function Dashboard() {
     local: boolean;
     accountSaved: boolean;
   } | null>(null);
-  const [unpublishTarget, setUnpublishTarget] = useState<Invitation | null>(null);
+  const [unpublishTarget, setUnpublishTarget] = useState<Invitation | null>(
+    null,
+  );
 
   async function removeDraft(
     invitation: Invitation,
@@ -640,6 +642,16 @@ export function Dashboard() {
             )}
           </section>
           <aside className={styles.helpSidebar}>
+            {session?.user?.isAdmin && (
+              <a href="/admin" className={styles.tip}>
+                <ShieldCheck size={19} aria-hidden="true" />
+                <div>
+                  <strong>Sayt boshqaruvi</strong>
+                  <p>Dizaynlar, kategoriyalar va musiqa kutubxonasi.</p>
+                </div>
+                <ArrowRight size={16} aria-hidden="true" />
+              </a>
+            )}
             <div className={styles.guide}>
               <span className={styles.guideIcon}>
                 <Heart size={21} />

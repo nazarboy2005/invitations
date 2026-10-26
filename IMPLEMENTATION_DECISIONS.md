@@ -1,5 +1,64 @@
 # Implementation decisions
 
+## Administrator workspace and access (2026-10-27)
+
+- User confirmed server-side `PLATFORM_ADMIN_TELEGRAM_IDS` configuration as an
+  admin assignment option. Use exact positive numeric Telegram user IDs; apply
+  the allowlist to both new and existing verified accounts, including web
+  access, reauthentication, Telegram moderation and broadcast authorization.
+  Environment grants are evaluated from server configuration, never persisted
+  as database grants or accepted from request metadata. Database-assigned roles
+  remain independent; removing an ID removes only its environment grant after
+  all web/bot/worker processes reload configuration. Invalid configuration
+  fails closed; existing session freshness/suspension checks still apply.
+- Follow-up user requirements: manage users and their invitation links/content,
+  platform payment records and amounts, per-template pricing, and broadcasts.
+  Explicitly include template activation/deactivation and category membership.
+  Admins need the same invitation creation/editing/uploads/publication,
+  responses, wish moderation and receipt-review tools available to creators.
+- Implementation scope: retain the real creator editor and shared validation,
+  using an explicit admin context and the original owner; log the actual admin.
+  Support creating owner-bound drafts, archiving publications, deleting drafts
+  without payment history, and explicitly extending editing deadlines with a
+  reason. Event identity/ownership and payment-history protections remain.
+- Account suspension/revocation must apply to website and Telegram access,
+  preserve invitations/history, and not permit administrator self-lockout or
+  role escalation. Restoring access never revives revoked sessions.
+- Current payments remain a clearly labeled manual register with immutable
+  owner/template/currency snapshots, exact minor-unit amounts, revisions and
+  audited status changes. Recording receipt/refund does not move money or
+  prove provider verification. Preserve free publishing; no live Click/payment
+  activation or external deployment is authorized by these admin requests.
+- Broadcast implementation: Telegram, only verified active connected users;
+  optional selected/published/draft audiences, frozen recipient preview and
+  explicit send confirmation, durable delivery history/cancellation, /stop and
+  /subscribe controls. Recheck eligibility before delivery; respect rate limits
+  and never automatically resend an ambiguous network outcome. Building and
+  testing the tools does not send any real broadcast.
+- Additive migration `0152_admin_management.sql` supports this extension.
+
+- User requirement: redesign the admin experience and restrict access at the
+  server, including direct page/API requests; prioritize security throughout.
+- Implementation: `/admin` remains the canonical address, with an entry shown
+  only to server-authorized admins. Anonymous and ordinary accounts receive
+  a 404 before controls/private data render. Admin authority is rechecked on
+  each protected request; configuration/storage failures deny access.
+- Implementation policy: admin access requires authentication within 12 hours,
+  independent of creator-session renewal. Reconfirm through the existing
+  Telegram flow, bound to the current account/browser, single-use, with session
+  rotation. Ordinary creator session persistence is unchanged.
+- Separate designs, categories, music and change history. Retain event-support
+  restrictions, replacement confirmation and all invitation/editing policies.
+  Use in-page unsaved-change confirmations, never native browser dialogs.
+- Implementation: common authorization/origin checks, durable per-admin write
+  limits, non-cacheable private responses, per-request script nonces, framing
+  restrictions and transactional catalog audit records. Catalog music upload
+  preparation, local byte writes and completion share the admin checks.
+- Migration `0151_admin_audit_log.sql` is additive. No public deployment, live
+  payment activation, real-account privilege changes or template publication
+  changes are part of this task. Security checks are scoped verification, not
+  a claim of a complete independent penetration test.
+
 ## Multi-provider source reconciliation (2026-10-25)
 
 - User requested scanning Chorlove and Marxaba first, then the listed providers,
@@ -948,7 +1007,7 @@ References checked on 2026-10-19: Google autocomplete https://developers.google.
 - Confirmed clarification: music is optional for each invitation. Creators may leave music off entirely; no audio upload or track selection is required to save or publish an invitation. If they want music, allow them to upload their preferred audio file and use it as background music.
 - Confirmed clarification (2026-10-20): when music is enabled, creators may either upload a new track or choose one of their previously uploaded audio tracks from a reusable personal music library. A track stays owned by its creator and can be reused across that creator's invitations; do not expose another creator's uploads in the picker.
 - User requirement (2026-10-21): administrators must be able to add shared music tracks and choose which tracks are available in creators' music selectors. The creator selector combines active platform-curated tracks with that creator's own uploads; personal tracks remain private and reusable only by their owner. Platform tracks are uploaded to R2, stored as catalog entries, and can be hidden from new selections without removing existing invitation references.
-- User requirement (2026-10-20): preserve and check each reference template's own music and mute/play control. Every full catalog template preview must have default preview music, even when the source capture only has a toggle and no bundled track. Catalog preview music starts only after the visitor opens/plays the preview; never autoplay on catalog load.
+- User requirement (2026-10-20, clarified 2026-10-26): preserve and check each reference template's own music and mute/play control. Every full catalog template preview must have default preview music, even when the source capture only has a toggle and no bundled track. Attempt autoplay when a visitor opens a full template preview; never start audio from catalog cards/listing load. Browser policy may block audible autoplay, so retain the template's play control for that case.
 - User correction (2026-10-26): for every published invitation with creator-enabled music, attempt playback automatically when the public invitation opens. Guests can pause/stop it and start it again with the template's control. If the browser blocks autoplay, keep the template control available and retry on guest interaction where supported; never auto-restart a track after it has started successfully and the guest paused it. Invitations with music disabled remain silent. This public invitation rule is separate from catalog preview music.
 - Catalog preview music is presentation-only and must not be saved into an invitation or override creator music settings. Creators may separately choose a clearly licensed platform library track or one of their own uploaded tracks for an invitation.
 - The default catalog soundtrack is one global setting shared by all templates. Changing that single setting updates every supported full preview; do not maintain separate per-template defaults unless the user later requests them. This global preview setting is separate from each creator's invitation music.
@@ -1621,3 +1680,34 @@ Development agents are distinct from production queue workers. The running app w
   extra dependency. Consume skipped/reversed cues, apply a
   cooldown, stop effects in hidden tabs, and suppress effects throughout previews
   so invitation music always takes priority. No queued catch-up playback.
+
+## Pulau Sehati source-field support (2026-10-27)
+
+- User requirement: preserve the selected reference's source-present authoring
+  fields and interactions; expand the shared contract/editor/persistence before
+  publication when the existing invitation model cannot store them.
+- Implementation: template-specific JSON persists under
+  `templateData["wedivo-pulau-sehati"]`, with a typed validation schema and
+  creator controls for inscription, couple profiles, hotels, video/live URLs,
+  missions, keepsakes and hashtag. Existing invitation JSON storage and
+  template-switch preservation carry these fields through.
+- The source gift well accepts a money amount through simulated success. No
+  amount-transfer service was approved or activated; do not claim a transfer.
+  Implementation records its sender/amount/note as a private gift intention
+  visible to the invitation owner, and explicitly states that no money moves.
+  The second ceremony, story dates and co-inviters are stored in the same
+  template namespace. Video is URL-based because no creator video upload path
+  is available. The dormant source check-in button stays hidden because it has
+  no handler or platform check-in service.
+- Verification update (2026-10-27): the first isolated Chrome editor pass found
+  that blank Pulau data failed because `hashtag` had no default. Setting its
+  schema default to an empty string fixed studio initialization. Browser QA then
+  verified the fresh studio editor, Pulau creator fields, live iframe preview
+  updates, gift-well source panel and truthful no-transfer copy, and restored
+  local draft values after reload. The user also confirmed the preview opening
+  renderer and Uzbek source panel. Additive migration
+  `0157_publish_wedivo_pulau_sehati.sql` is applied. The database and
+  `/api/catalog` confirm published `Ko‘ngillar oroli` at 15,000,000 UZS with
+  wedding category/event support; `/preview` returns successfully. Focused
+  adapter checks pass 2/2, TypeScript and production build pass. No external
+  deployment or live payment activation occurred.

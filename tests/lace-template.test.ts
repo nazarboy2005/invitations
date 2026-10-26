@@ -88,6 +88,6 @@ test("Lace retains the opening animation and maps the complete shared invitation
   assert.match(bridge, /lace-reduced-motion/);
   assert.match(bridge, /postMessage\(\{type:`\$\{id\}:language`/);
   assert.match(bridge, /brand,true/);
-  assert.equal(templateById("lace")?.published, false);
+  assert.equal(templateById("lace")?.published, true);
   assert.match(await readFile(new URL("../packages/database/migrations/0115_register_lace.sql", import.meta.url), "utf8"), /published\s*=\s*false/);
 });

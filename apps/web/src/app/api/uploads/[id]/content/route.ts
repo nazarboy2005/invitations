@@ -4,6 +4,8 @@ import { authenticatedUser } from "@/server/invitations";
 import { verifySameOrigin } from "@/server/auth";
 import { ApiError, apiError, privateHeaders, readBytes } from "@/server/api";
 import { detectMedia, putMedia } from "@/server/storage";
+import { requireAdminMutation } from "@/server/admin";
+import { invitationRequestActor } from "@/server/admin-invitation-access";
 export const runtime = "nodejs";
 
 export async function PUT(
@@ -12,15 +14,36 @@ export async function PUT(
 ) {
   try {
     verifySameOrigin(request);
-    const user = await authenticatedUser();
+    const actor = await authenticatedUser();
+    const target = request.headers.get("x-admin-invitation");
+    const user = target
+      ? (await invitationRequestActor(request, target, actor, true)).owner
+      : actor;
     const { id } = await params;
     z.uuid().parse(id);
+    const [upload] =
+      await getDb()`SELECT object_key,draft_id FROM media_assets WHERE id=${id} AND owner_id=${user.id}`;
+    if (!upload) throw new ApiError(404, "NOT_FOUND", "Fayl topilmadi.");
+    if (target && upload.draft_id !== target)
+      throw new ApiError(
+        403,
+        "ADMIN_CONTEXT_MISMATCH",
+        "Fayl tanlangan taklifnomaga tegishli emas.",
+      );
+    if (upload.object_key.startsWith("local/platform-music/"))
+      await requireAdminMutation(request);
     const bytes = await readBytes(request, 15 * 1024 * 1024);
     await getDb().begin(async (tx) => {
       const [asset] =
         await tx`SELECT * FROM media_assets WHERE id=${id} AND owner_id=${user.id} FOR UPDATE`;
       if (!asset || !asset.object_key.startsWith("local/"))
         throw new ApiError(404, "NOT_FOUND", "Fayl topilmadi.");
+      if (target && asset.draft_id !== target)
+        throw new ApiError(
+          403,
+          "ADMIN_CONTEXT_MISMATCH",
+          "Fayl tanlangan taklifnomaga tegishli emas.",
+        );
       if (asset.status !== "pending")
         throw new ApiError(
           409,

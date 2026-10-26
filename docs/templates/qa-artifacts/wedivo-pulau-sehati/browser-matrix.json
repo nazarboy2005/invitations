@@ -1,0 +1,288 @@
+{
+  "results": [
+    {
+      "locale": "uz-Latn",
+      "state": {
+        "title": "",
+        "frame": "http://127.0.0.1:40387/templates/wedivo-pulau-sehati/index.html",
+        "lang": "uz-Latn",
+        "bound": "true",
+        "body": "has-guest is-cover mode-game is-loaded",
+        "names": "\nJavohir\nMadina\n",
+        "loaded": true,
+        "fonts": "loaded",
+        "sections": [
+          "cover",
+          "hero",
+          "couple",
+          "countdown",
+          "events",
+          "rundown",
+          "venue",
+          "dresscode",
+          "gallery",
+          "rsvp",
+          "wishes",
+          "closing"
+        ],
+        "rd": 6,
+        "overflow": 0,
+        "gl": true
+      },
+      "previewForm": {
+        "feedback": "Ko‘rish rejimida yuborib bo‘lmaydi.",
+        "headcountHidden": true,
+        "open": "Sayohatni boshlash",
+        "names": "\nJavohir\nMadina\n",
+        "month": "iyun"
+      }
+    },
+    {
+      "locale": "uz-Cyrl",
+      "state": {
+        "title": "",
+        "frame": "http://127.0.0.1:40387/templates/wedivo-pulau-sehati/index.html",
+        "lang": "uz-Cyrl",
+        "bound": "true",
+        "body": "has-guest is-cover mode-game is-loaded",
+        "names": "\nЖавохир\nМадина\n",
+        "loaded": true,
+        "fonts": "loading",
+        "sections": [
+          "cover",
+          "hero",
+          "couple",
+          "countdown",
+          "events",
+          "rundown",
+          "venue",
+          "dresscode",
+          "gallery",
+          "rsvp",
+          "wishes",
+          "closing"
+        ],
+        "rd": 6,
+        "overflow": 0,
+        "gl": true
+      },
+      "previewForm": {
+        "feedback": "Кўриш режимида юбориб бўлмайди.",
+        "headcountHidden": true,
+        "open": "Саёҳатни бошлаш",
+        "names": "\nЖавохир\nМадина\n",
+        "month": "июн"
+      }
+    },
+    {
+      "locale": "en",
+      "state": {
+        "title": "",
+        "frame": "http://127.0.0.1:40387/templates/wedivo-pulau-sehati/index.html",
+        "lang": "en",
+        "bound": "true",
+        "body": "has-guest is-cover mode-game is-loaded",
+        "names": "\nJavohir\nMadina\n",
+        "loaded": true,
+        "fonts": "loaded",
+        "sections": [
+          "cover",
+          "hero",
+          "couple",
+          "countdown",
+          "events",
+          "rundown",
+          "venue",
+          "dresscode",
+          "gallery",
+          "rsvp",
+          "wishes",
+          "closing"
+        ],
+        "rd": 6,
+        "overflow": 0,
+        "gl": true
+      },
+      "previewForm": {
+        "feedback": "Sending is disabled in preview.",
+        "headcountHidden": true,
+        "open": "Start adventure",
+        "names": "\nJavohir\nMadina\n",
+        "month": "June"
+      }
+    },
+    {
+      "locale": "ru",
+      "state": {
+        "title": "",
+        "frame": "http://127.0.0.1:40387/templates/wedivo-pulau-sehati/index.html",
+        "lang": "ru",
+        "bound": "true",
+        "body": "has-guest is-cover mode-game is-loaded",
+        "names": "\nЖавохир\nМадина\n",
+        "loaded": true,
+        "fonts": "loaded",
+        "sections": [
+          "cover",
+          "hero",
+          "couple",
+          "countdown",
+          "events",
+          "rundown",
+          "venue",
+          "dresscode",
+          "gallery",
+          "rsvp",
+          "wishes",
+          "closing"
+        ],
+        "rd": 6,
+        "overflow": 0,
+        "gl": true
+      },
+      "previewForm": {
+        "feedback": "Отправка в режиме просмотра отключена.",
+        "headcountHidden": true,
+        "open": "Начать путешествие",
+        "names": "\nЖавохир\nМадина\n",
+        "month": "июнь"
+      }
+    },
+    {
+      "reducedEmpty": {
+        "title": "",
+        "frame": "http://127.0.0.1:40387/templates/wedivo-pulau-sehati/index.html",
+        "lang": "uz-Latn",
+        "bound": "true",
+        "body": "has-guest mode-page is-loaded is-started",
+        "names": "\nJavohir\nMadina\n",
+        "loaded": true,
+        "fonts": "loaded",
+        "sections": [
+          "cover",
+          "hero",
+          "couple",
+          "countdown",
+          "events",
+          "venue",
+          "gallery",
+          "closing"
+        ],
+        "rd": 0,
+        "overflow": 0,
+        "gl": true
+      },
+      "sections": [
+        "hero",
+        "couple",
+        "countdown",
+        "events",
+        "venue",
+        "gallery",
+        "closing"
+      ]
+    },
+    {
+      "longStoryPhotos": {
+        "title": "",
+        "frame": "http://127.0.0.1:40387/templates/wedivo-pulau-sehati/index.html",
+        "lang": "uz-Latn",
+        "bound": "true",
+        "body": "has-guest mode-page is-loaded is-started",
+        "names": "\nAbdulloh Muhammadjon Abdurahmonov\nGulchehra Muborak Abdurahmonova\n",
+        "loaded": true,
+        "fonts": "loaded",
+        "sections": [
+          "hero",
+          "couple",
+          "kisah",
+          "countdown",
+          "events",
+          "rundown",
+          "venue",
+          "dresscode",
+          "gallery",
+          "rsvp",
+          "wishes",
+          "closing"
+        ],
+        "rd": 6,
+        "overflow": 0,
+        "gl": true
+      },
+      "chapters": 6,
+      "gallery": 3
+    },
+    {
+      "desktopMap": {
+        "open": true,
+        "pins": 12,
+        "labels": [
+          "Kelish bandargohi",
+          "Uy: Javohir",
+          "Uy: Madina",
+          "Gulxan",
+          "Bayram saroyi",
+          "Bayram darvozasi",
+          "Xarita minorasi",
+          "Kiyim xonasi",
+          "Fotostudiya",
+          "Mehmonlar uyi",
+          "Tilaklar bog‘i",
+          "Shom tepaligi"
+        ]
+      }
+    },
+    {
+      "failedSubmit": {
+        "submitted": false,
+        "feedback": "Yuborilmadi. Qayta urinib ko‘ring."
+      }
+    },
+    {
+      "mockService": {
+        "requests": [
+          {
+            "url": "/api/public/invitations/qa-pulau/rsvp",
+            "body": {
+              "name": "QA Guest",
+              "status": "yes",
+              "partySize": 1,
+              "note": ""
+            }
+          },
+          {
+            "url": "/api/public/invitations/qa-pulau/rsvp",
+            "body": {
+              "name": "QA Guest",
+              "status": "yes",
+              "partySize": 1,
+              "note": ""
+            }
+          },
+          {
+            "url": "/api/public/invitations/qa-pulau/wishes",
+            "body": {
+              "name": "QA Guest",
+              "message": "QA moderated wish"
+            }
+          }
+        ],
+        "submitted": true,
+        "pendingFeedback": "Tilagingiz yuborildi. Egasi tasdiqlagach ko‘rinadi.",
+        "publishedPending": false
+      }
+    }
+  ],
+  "errors": [],
+  "badRequests": [
+    {
+      "url": "http://127.0.0.1:40387/favicon.ico",
+      "status": 404
+    },
+    {
+      "url": "http://127.0.0.1:40387/api/public/invitations/qa-pulau/wishes",
+      "status": 404
+    }
+  ]
+}

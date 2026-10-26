@@ -69,9 +69,8 @@ test("Lace gallery preserves the source lightbox controls and motion settings", 
   assert.match(lightbox, /keyboardMoveDistance: 50/);
   assert.match(lightbox, /container\.tabIndex = -1/);
   assert.match(lightbox, /sibling\.setAttribute\("inert"/);
-  assert.match(lightbox, /window\.addEventListener\("keydown", onDocumentKeydown, true\)/);
-  assert.match(lightbox, /document\.activeElement === document\.body/);
-  assert.match(lightbox, /event\.shiftKey \? focusables\.at\(-1\) : focusables\[0\]/);
+  assert.match(lightbox, /event\.shiftKey && document\.activeElement === first/);
+  assert.match(lightbox, /!event\.shiftKey && document\.activeElement === last/);
   assert.match(lightbox, /backdropTarget === hitTarget/);
   assert.match(lightbox, /hitTarget\.classList\.contains\("yarl__slide"\)/);
   assert.match(lightbox, /hitTarget\.classList\.contains\("yarl__slide_wrapper"\)/);

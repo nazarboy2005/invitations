@@ -1,15 +1,20 @@
 "use client";
 
-import { useEffect, useState, type CSSProperties } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import {
   EVENT_TYPE_OPTIONS,
   formatPrice,
   type TemplateCategory,
   type TemplateDefinition,
 } from "@taklifnoma/contracts";
+import { Search, ChevronDown, ExternalLink, ImageOff } from "lucide-react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { SoftSelect } from "@/components/soft-select";
 import { ConfirmationDialog } from "@/components/confirmation-dialog";
+import { templatePoster } from "@/modules/catalog/template-poster";
+import styles from "./admin.module.css";
+import { useAdminDirty } from "./admin-navigation-guard";
 
 const inputStyle: CSSProperties = {
   padding: "11px 12px",
@@ -29,18 +34,57 @@ const labelStyle: CSSProperties = {
   overflowWrap: "anywhere",
 };
 
-export function AdminTemplates() {
-  const [templates, setTemplates] = useState<TemplateDefinition[]>([]);
-  const [categories, setCategories] = useState<TemplateCategory[]>([]);
-  const [configured, setConfigured] = useState(false);
+export function AdminTemplates({
+  initialCatalog,
+  view,
+}: {
+  initialCatalog: {
+    templates: TemplateDefinition[];
+    categories: TemplateCategory[];
+    configured: boolean;
+  };
+  view: "templates" | "categories";
+}) {
+  const searchParams = useSearchParams();
+  const [query, setQuery] = useState(searchParams.get("q") ?? "");
+  const [status, setStatus] = useState(
+    ["published", "hidden"].includes(searchParams.get("status") ?? "")
+      ? searchParams.get("status")!
+      : "all",
+  );
+  const [page, setPage] = useState(
+    Math.max(1, Math.floor(Number(searchParams.get("page")) || 1)),
+  );
+  const [templates, setTemplates] = useState<TemplateDefinition[]>(
+    initialCatalog.templates,
+  );
+  const [categories, setCategories] = useState<TemplateCategory[]>(
+    initialCatalog.categories,
+  );
+  const [configured, setConfigured] = useState(initialCatalog.configured);
   const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
   const [busy, setBusy] = useState(false);
-  const [loading, setLoading] = useState(true);
   const [newCategoryId, setNewCategoryId] = useState("");
   const [newCategoryName, setNewCategoryName] = useState("");
   const [hideTarget, setHideTarget] = useState<TemplateDefinition | null>(null);
   const [hideReplacement, setHideReplacement] = useState("");
+  const leave = useAdminDirty(
+    !!newCategoryId.trim() || !!newCategoryName.trim(),
+  );
+  const loading = false;
+  useEffect(() => {
+    const url = new URL(window.location.href);
+    for (const [key, value] of Object.entries({
+      q: query,
+      status: status === "all" ? "" : status,
+      page: page === 1 ? "" : String(page),
+    })) {
+      if (value) url.searchParams.set(key, value);
+      else url.searchParams.delete(key);
+    }
+    window.history.replaceState(null, "", url);
+  }, [query, status, page]);
 
   async function load() {
     const response = await fetch("/api/admin/templates", { cache: "no-store" });
@@ -58,22 +102,6 @@ export function AdminTemplates() {
     );
     setConfigured(data.configured === true);
   }
-  useEffect(() => {
-    let alive = true;
-    void load()
-      .catch((cause) => {
-        if (alive)
-          setError(
-            cause instanceof Error ? cause.message : "Sahifani ochib bo‘lmadi.",
-          );
-      })
-      .finally(() => {
-        if (alive) setLoading(false);
-      });
-    return () => {
-      alive = false;
-    };
-  }, []);
 
   async function mutate(
     url: string,
@@ -91,6 +119,11 @@ export function AdminTemplates() {
         body: JSON.stringify(body),
       });
       const data = await response.json();
+      if (data.error?.code === "ADMIN_REAUTH_REQUIRED") {
+        throw new Error(
+          "Tasdiqlash muddati tugadi. Yuqoridagi «Hisobni tasdiqlash» havolasini oching, so‘ng o‘zgarishlarni qayta saqlang.",
+        );
+      }
       if (!response.ok)
         throw new Error(
           data.error?.message ??
@@ -117,16 +150,79 @@ export function AdminTemplates() {
     }
   }
   const unavailable = busy || !configured;
+  const filtered = templates.filter(
+    (template) =>
+      (status === "all" || template.published === (status === "published")) &&
+      `${template.name} ${template.id}`
+        .toLocaleLowerCase()
+        .includes(query.trim().toLocaleLowerCase()),
+  );
+  const pages = Math.max(1, Math.ceil(filtered.length / 12));
+  const currentPage = Math.min(page, pages);
+  const visible = filtered.slice((currentPage - 1) * 12, currentPage * 12);
 
   return (
-    <main id="main" className="container" style={{ paddingBlock: 40 }}>
-      <p className="muted">Sayt administratori</p>
-      <h1 className="page-heading">Dizaynlarni boshqarish</h1>
-      <p className="muted" style={{ lineHeight: 1.8, maxWidth: 760 }}>
-        Dizayn narxi, ko‘rinishi va kategoriyalarini boshqaring. Bitta dizaynni
-        bir nechta kategoriyada ko‘rsatish mumkin. Bu taklifnoma ma’lumotlarini
-        o‘zgartirmaydi.
-      </p>
+    <div>
+      {view === "templates" && (
+        <>
+          <div className={styles.overview} aria-label="Dizaynlar holati">
+            <div>
+              <span>Jami dizaynlar</span>
+              <strong>{templates.length}</strong>
+            </div>
+            <div>
+              <span>Nashr qilingan</span>
+              <strong>
+                {templates.filter((item) => item.published).length}
+              </strong>
+            </div>
+            <div>
+              <span>Yashirilgan</span>
+              <strong>
+                {templates.filter((item) => !item.published).length}
+              </strong>
+            </div>
+          </div>
+          <div className={styles.toolbar}>
+            <label className={styles.search}>
+              <Search size={18} aria-hidden="true" />
+              <span className={styles.srOnly}>Dizaynlarni qidirish</span>
+              <input
+                name="q"
+                type="search"
+                autoComplete="off"
+                placeholder="Nomi yoki belgisi bo‘yicha qidirish…"
+                value={query}
+                onChange={(event) => {
+                  const value = event.target.value;
+                  leave(() => {
+                    setQuery(value);
+                    setPage(1);
+                  });
+                }}
+              />
+            </label>
+            <label className={styles.statusFilter}>
+              <span>Holat</span>
+              <select
+                name="status"
+                value={status}
+                onChange={(event) => {
+                  const value = event.target.value;
+                  leave(() => {
+                    setStatus(value);
+                    setPage(1);
+                  });
+                }}
+              >
+                <option value="all">Barchasi</option>
+                <option value="published">Nashr qilingan</option>
+                <option value="hidden">Yashirilgan</option>
+              </select>
+            </label>
+          </div>
+        </>
+      )}
       {error && (
         <p role="alert" className="inline-note">
           {error}{" "}
@@ -152,12 +248,8 @@ export function AdminTemplates() {
         </p>
       )}
 
-      {!loading && categories.length > 0 && (
-        <section
-          className="inline-note"
-          style={{ marginBlock: 28, padding: 24 }}
-          aria-labelledby="categories-title"
-        >
+      {view === "categories" && !loading && categories.length > 0 && (
+        <section className={styles.panel} aria-labelledby="categories-title">
           <h2
             id="categories-title"
             style={{
@@ -193,115 +285,188 @@ export function AdminTemplates() {
         </section>
       )}
 
-      {!loading && (configured || categories.length > 0) && (
-        <section
-          className="inline-note"
-          style={{ marginBlock: 24, padding: 24 }}
-          aria-labelledby="create-category-title"
-        >
-          <h2
-            id="create-category-title"
-            style={{ fontSize: 17, margin: "0 0 18px", fontWeight: 500 }}
+      {view === "categories" &&
+        !loading &&
+        (configured || categories.length > 0) && (
+          <section
+            className="inline-note"
+            style={{ marginBlock: 24, padding: 24 }}
+            aria-labelledby="create-category-title"
           >
-            Yangi kategoriya
-          </h2>
-          <form
-            style={{
-              display: "flex",
-              flexWrap: "wrap",
-              gap: 16,
-              alignItems: "end",
-            }}
-            onSubmit={async (event) => {
-              event.preventDefault();
-              const result = await mutate(
-                "/api/admin/categories",
-                "POST",
-                { id: newCategoryId.trim(), name: newCategoryName.trim() },
-                "Yangi kategoriya yaratildi.",
-              );
-              if (result) {
-                setNewCategoryId("");
-                setNewCategoryName("");
-              }
-            }}
-          >
-            <label style={{ ...labelStyle, flex: "1 1 240px" }}>
-              Kategoriya nomi
-              <input
-                required
-                maxLength={120}
-                value={newCategoryName}
-                onChange={(event) => setNewCategoryName(event.target.value)}
-                disabled={unavailable}
-                style={inputStyle}
-                placeholder="Masalan: Fotiha"
-              />
-            </label>
-            <label style={{ ...labelStyle, flex: "1 1 240px" }}>
-              Qisqa belgi
-              <input
-                required
-                pattern="[a-z][a-z0-9]*(?:-[a-z0-9]+)*"
-                maxLength={64}
-                value={newCategoryId}
-                onChange={(event) => setNewCategoryId(event.target.value)}
-                disabled={unavailable}
-                style={inputStyle}
-                placeholder="Masalan: fotiha"
-                aria-describedby="category-id-help"
-              />
-              <small
-                id="category-id-help"
-                className="muted"
-                style={{ fontSize: 11 }}
-              >
-                Kichik lotin harfidan boshlang. Harf, raqam va chiziqcha; 64
-                belgigacha. Keyin o‘zgarmaydi.
-              </small>
-            </label>
-            <button className="button" disabled={unavailable}>
-              Kategoriya qo‘shish
-            </button>
-          </form>
-        </section>
-      )}
+            <h2
+              id="create-category-title"
+              style={{ fontSize: 17, margin: "0 0 18px", fontWeight: 500 }}
+            >
+              Yangi kategoriya
+            </h2>
+            <form
+              style={{
+                display: "flex",
+                flexWrap: "wrap",
+                gap: 16,
+                alignItems: "end",
+              }}
+              onSubmit={async (event) => {
+                event.preventDefault();
+                const result = await mutate(
+                  "/api/admin/categories",
+                  "POST",
+                  { id: newCategoryId.trim(), name: newCategoryName.trim() },
+                  "Yangi kategoriya yaratildi.",
+                );
+                if (result) {
+                  setNewCategoryId("");
+                  setNewCategoryName("");
+                }
+              }}
+            >
+              <label style={{ ...labelStyle, flex: "1 1 240px" }}>
+                Kategoriya nomi
+                <input
+                  required
+                  name="categoryName"
+                  autoComplete="off"
+                  maxLength={120}
+                  value={newCategoryName}
+                  onChange={(event) => setNewCategoryName(event.target.value)}
+                  disabled={unavailable}
+                  style={inputStyle}
+                  placeholder="Masalan: Fotiha…"
+                />
+              </label>
+              <label style={{ ...labelStyle, flex: "1 1 240px" }}>
+                Qisqa belgi
+                <input
+                  required
+                  name="categoryId"
+                  autoComplete="off"
+                  spellCheck={false}
+                  pattern="[a-z][a-z0-9]*(?:-[a-z0-9]+)*"
+                  maxLength={64}
+                  value={newCategoryId}
+                  onChange={(event) => setNewCategoryId(event.target.value)}
+                  disabled={unavailable}
+                  style={inputStyle}
+                  placeholder="Masalan: fotiha…"
+                  aria-describedby="category-id-help"
+                />
+                <small
+                  id="category-id-help"
+                  className="muted"
+                  style={{ fontSize: 11 }}
+                >
+                  Kichik lotin harfidan boshlang. Harf, raqam va chiziqcha; 64
+                  belgigacha. Keyin o‘zgarmaydi.
+                </small>
+              </label>
+              <button className="button" disabled={unavailable}>
+                Kategoriya qo‘shish
+              </button>
+            </form>
+          </section>
+        )}
 
-      <div style={{ display: "grid", gap: 24, marginBlock: 30 }}>
-        {templates.map((template) => (
-          <TemplateRow
-            key={template.id}
-            template={template}
-            templates={templates}
-            categories={categories}
-            busy={unavailable}
-            onHideRequest={(replacementId) => {
-              setHideTarget(template);
-              setHideReplacement(replacementId);
-            }}
-            onUpdate={(id, body) =>
-              mutate(
-                `/api/admin/templates/${encodeURIComponent(id)}`,
-                "PATCH",
-                body,
-                "Dizayn o‘zgarishlari saqlandi.",
-              )
-            }
-          />
-        ))}
-      </div>
-      {!loading && templates.length === 0 && !error && (
-        <p className="inline-note">Hozircha dizaynlar yo‘q.</p>
+      {view === "templates" && (
+        <section className={styles.panel} aria-label="Dizaynlar ro‘yxati">
+          <div className={styles.panelHeading}>
+            <h2>Katalog dizaynlari</h2>
+            <span className={styles.count}>{filtered.length} ta dizayn</span>
+          </div>
+          {visible.map((template) => (
+            <details className={styles.templateItem} key={template.id}>
+              <summary>
+                <TemplateArtwork template={template} />
+                <span className={styles.templateName}>
+                  <strong>{template.name}</strong>
+                  <small>{template.id}</small>
+                </span>
+                <span
+                  className={
+                    template.published ? styles.published : styles.hidden
+                  }
+                >
+                  {template.published ? "Nashr qilingan" : "Yashirilgan"}
+                </span>
+                <span className={styles.price}>
+                  {formatPrice(template.priceMinor)}
+                </span>
+                <ChevronDown
+                  size={18}
+                  aria-hidden="true"
+                  className={styles.expandIcon}
+                />
+              </summary>
+              <div className={styles.templateEditor}>
+                <Link
+                  href={`/preview?template=${encodeURIComponent(template.id)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.previewLink}
+                >
+                  Dizaynni ko‘rish
+                  <ExternalLink size={15} aria-hidden="true" />
+                </Link>
+                <TemplateRow
+                  key={template.id}
+                  template={template}
+                  templates={templates}
+                  categories={categories}
+                  busy={unavailable}
+                  onHideRequest={(replacementId) => {
+                    setHideTarget(template);
+                    setHideReplacement(replacementId);
+                  }}
+                  onUpdate={(id, body) =>
+                    mutate(
+                      `/api/admin/templates/${encodeURIComponent(id)}`,
+                      "PATCH",
+                      body,
+                      "Dizayn o‘zgarishlari saqlandi.",
+                    )
+                  }
+                />
+              </div>
+            </details>
+          ))}
+          {!filtered.length && (
+            <p className={styles.empty}>
+              Dizayn topilmadi. Qidiruv yoki holat filtrini o‘zgartiring.
+            </p>
+          )}
+          <nav className={styles.pagination} aria-label="Dizaynlar sahifalari">
+            <span>
+              {currentPage} / {pages} sahifa
+            </span>
+            <div>
+              <button
+                type="button"
+                className="button secondary"
+                disabled={currentPage <= 1 || busy}
+                onClick={() => leave(() => setPage(currentPage - 1))}
+              >
+                Oldingi
+              </button>
+              <button
+                type="button"
+                className="button secondary"
+                disabled={currentPage >= pages || busy}
+                onClick={() => leave(() => setPage(currentPage + 1))}
+              >
+                Keyingi
+              </button>
+            </div>
+          </nav>
+        </section>
       )}
       {hideTarget && (
         <ConfirmationDialog
-          title="Dizaynni yashirasizmi?"
+          title="Dizaynni faolsizlantirasizmi?"
           description="Dizayn unga tegishli taklifnomalar bilan tanlangan dizaynga almashtiriladi."
-          confirmLabel="Yashirish va almashtirish"
+          confirmLabel="Faolsizlantirish va almashtirish"
           onCancel={() => setHideTarget(null)}
           onConfirm={async () => {
             const target = hideTarget;
-            await mutate(
+            const saved = await mutate(
               `/api/admin/templates/${encodeURIComponent(target.id)}`,
               "PATCH",
               {
@@ -312,12 +477,36 @@ export function AdminTemplates() {
               },
               "Dizayn yashirildi.",
             );
-            setHideTarget(null);
+            if (saved) setHideTarget(null);
           }}
           busy={busy}
         />
       )}
-    </main>
+    </div>
+  );
+}
+
+function TemplateArtwork({ template }: { template: TemplateDefinition }) {
+  const ref = useRef<HTMLImageElement>(null);
+  const [failed, setFailed] = useState(false);
+  useEffect(() => {
+    if (ref.current?.complete && !ref.current.naturalWidth) setFailed(true);
+  }, []);
+  return (
+    <span className={styles.poster}>
+      <ImageOff size={18} aria-hidden="true" />
+      {!failed && (
+        <img
+          ref={ref}
+          src={templatePoster(template)}
+          width={54}
+          height={72}
+          loading="lazy"
+          alt=""
+          onError={() => setFailed(true)}
+        />
+      )}
+    </span>
   );
 }
 
@@ -331,6 +520,7 @@ function CategoryRow({
   onSave: (name: string) => Promise<boolean>;
 }) {
   const [name, setName] = useState(category.name);
+  useAdminDirty(name.trim() !== category.name);
   useEffect(() => {
     setName(category.name);
   }, [category.name]);
@@ -353,6 +543,8 @@ function CategoryRow({
         {category.id}
         <input
           required
+          name="name"
+          autoComplete="off"
           maxLength={120}
           value={name}
           onChange={(event) => setName(event.target.value)}
@@ -408,6 +600,12 @@ function TemplateRow({
   const changedCategories =
     [...categoryIds].sort().join("|") !==
     [...template.categoryIds].sort().join("|");
+  useAdminDirty(
+    changedCategories ||
+      Number(price) * 100 !== template.priceMinor ||
+      [...supportedEventTypes].sort().join("|") !==
+        [...template.supportedEventTypes].sort().join("|"),
+  );
   return (
     <section
       className="inline-note"
@@ -458,7 +656,10 @@ function TemplateRow({
             Narx (so‘m)
             <input
               required
+              name="price"
+              inputMode="numeric"
               min="0"
+              max="10000000000"
               step="1"
               type="number"
               value={price}
@@ -479,7 +680,7 @@ function TemplateRow({
             display: "grid",
             gap: 10,
             marginLeft: "auto",
-            minWidth: 230,
+            minWidth: "min(100%, 230px)",
           }}
         >
           {template.published && (
@@ -511,7 +712,9 @@ function TemplateRow({
               });
             }}
           >
-            {template.published ? "Yashirish va almashtirish" : "Nashr qilish"}
+            {template.published
+              ? "Faolsizlantirish va almashtirish"
+              : "Faollashtirish"}
           </button>
         </div>
       </div>

@@ -1,0 +1,214 @@
+{
+  "results": {
+    "initialMusic": {
+      "enabled": true,
+      "paused": false,
+      "controlVisible": true,
+      "source": "http://127.0.0.1:40393/music/catalog/emotional-piano.wav",
+      "state": {
+        "player": {
+          "x": 0,
+          "z": 37.6,
+          "outfit": [
+            0.9176470588235294,
+            0.8431372549019608,
+            0.7176470588235294
+          ],
+          "style": "short"
+        },
+        "joy": {
+          "x": 0,
+          "y": 0,
+          "on": false
+        },
+        "keys": {},
+        "mode": "game",
+        "panel": null,
+        "mapOpen": false,
+        "ready": true,
+        "soundOn": true,
+        "started": false,
+        "reduced": false,
+        "daySpeed": 0.00909090909090909,
+        "viewerOpen": false
+      }
+    },
+    "gestureMusic": {
+      "paused": false,
+      "time": 4.309993,
+      "state": 4
+    },
+    "pausedMusic": {
+      "paused": true,
+      "on": false
+    },
+    "keyboard": {
+      "before": {
+        "x": 0,
+        "z": 37.6,
+        "outfit": [
+          0.9176470588235294,
+          0.8431372549019608,
+          0.7176470588235294
+        ],
+        "style": "short"
+      },
+      "pressed": {
+        "up": true
+      },
+      "after": {
+        "x": -1.2788893147556013e-15,
+        "z": 33.76026303907903,
+        "outfit": [
+          0.9176470588235294,
+          0.8431372549019608,
+          0.7176470588235294
+        ],
+        "style": "short"
+      },
+      "distance": 3.8397369609209733
+    },
+    "joystick": {
+      "active": {
+        "x": 0.6375227686703097,
+        "y": 0.5692167577413478,
+        "on": true,
+        "id": 2
+      },
+      "released": {
+        "x": 0,
+        "y": 0,
+        "on": false,
+        "id": 2
+      },
+      "distance": 2.763200939845237
+    },
+    "resumeMusic": {
+      "paused": false,
+      "time": 4.948089,
+      "on": true
+    },
+    "photos": {
+      "photo1": {
+        "src": "http://127.0.0.1:40393/templates/wedivo-pulau-sehati/assets/art-01.jpg",
+        "alt": "Authored photo 1",
+        "index": "01 / 03"
+      },
+      "filter": true,
+      "photo2": "http://127.0.0.1:40393/templates/wedivo-pulau-sehati/assets/art-02.jpg",
+      "photo3": {
+        "src": "http://127.0.0.1:40393/templates/wedivo-pulau-sehati/assets/art-03.jpg",
+        "alt": "Authored photo 3",
+        "index": "03 / 03"
+      },
+      "swipeAdvanced": true
+    },
+    "outfit": {
+      "color": "#78805b",
+      "actual": "#78805b",
+      "style": "long",
+      "mirror": {},
+      "message": "Libos tayyor! Orolga qayting."
+    },
+    "calendarLink": "https://calendar.google.com/calendar/render?action=TEMPLATE&text=Nikoh%20to%E2%80%98yi%20%E2%80%94%20Javohir%20%26%20Madina&dates=20270612T120000Z/20270612T140000Z&location=Zarafshon%20tantanalar%20saroyi%2C%20Toshkent%20shahri%2C%20Yunusobod%20tumani%20%C2%B7%20Amir%20Temur%20xiyoboni%20yaqinida&details=Baxtli%20kunimizda%20ko%E2%80%98rishguncha!",
+    "generatedCalendar": "BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//Undangan Pulau//ID\r\nCALSCALE:GREGORIAN\r\nMETHOD:PUBLISH\r\nBEGIN:VEVENT\r\nUID:pulau-1812801600000-0@undangan\r\nDTSTAMP:20261026T213600Z\r\nDTSTART:20270612T120000Z\r\nDTEND:20270612T140000Z\r\nSUMMARY:Nikoh to‘yi — Javohir & Madina\r\nLOCATION:Zarafshon tantanalar saroyi\\, Toshkent shahri\\, Yunusobod tumani · Amir Temur xiyoboni yaqinida\r\nDESCRIPTION:Baxtli kunimizda ko‘rishguncha!\r\nBEGIN:VALARM\r\nTRIGGER:-P1D\r\nACTION:DISPLAY\r\nDESCRIPTION:Ertaga: Nikoh to‘yi — Javohir & Madina\r\nEND:VALARM\r\nEND:VEVENT\r\nEND:VCALENDAR",
+    "ics": [
+      {
+        "file": "source-generated-calendar.ics",
+        "text": "BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//Undangan Pulau//ID\r\nCALSCALE:GREGORIAN\r\nMETHOD:PUBLISH\r\nBEGIN:VEVENT\r\nUID:pulau-1812801600000-0@undangan\r\nDTSTAMP:20261026T213600Z\r\nDTSTART:20270612T120000Z\r\nDTEND:20270612T140000Z\r\nSUMMARY:Nikoh to‘yi — Javohir & Madina\r\nLOCATION:Zarafshon tantanalar saroyi\\, Toshkent shahri\\, Yunusobod tumani · Amir Temur xiyoboni yaqinida\r\nDESCRIPTION:Baxtli kunimizda ko‘rishguncha!\r\nBEGIN:VALARM\r\nTRIGGER:-P1D\r\nACTION:DISPLAY\r\nDESCRIPTION:Ertaga: Nikoh to‘yi — Javohir & Madina\r\nEND:VALARM\r\nEND:VEVENT\r\nEND:VCALENDAR"
+      }
+    ],
+    "clipboard": {
+      "matches": true,
+      "message": "NusxalandiManzil nusxalandiZarafshon tantanalar saroyi, Toshkent shahri, Yunusobod t…",
+      "restored": true
+    },
+    "localeSwitch": {
+      "locale": "ru",
+      "names": "\nЖавохир\nМадина\n",
+      "photos": [
+        "control-photo-1",
+        "control-photo-2",
+        "control-photo-3"
+      ],
+      "program": [
+        "sample-arrival",
+        "sample-entrance",
+        "sample-meal",
+        "sample-music",
+        "sample-cake",
+        "sample-farewell"
+      ],
+      "music": {
+        "enabled": true,
+        "url": "/music/catalog/emotional-piano.wav"
+      },
+      "paused": true,
+      "progress": {
+        "visited": [
+          "hero",
+          "gallery",
+          "dresscode",
+          "countdown",
+          "venue"
+        ],
+        "found": [],
+        "quests": [],
+        "ach": [
+          "start",
+          "explorer3",
+          "outfit"
+        ],
+        "sound": false,
+        "mode": "game",
+        "outfit": "#78805b",
+        "style": "long"
+      }
+    },
+    "reduced": {
+      "state": {
+        "player": {
+          "x": 0,
+          "z": 37.6,
+          "outfit": [
+            0.47058823529411764,
+            0.5019607843137255,
+            0.3568627450980392
+          ],
+          "style": "long"
+        },
+        "joy": {
+          "x": 0,
+          "y": 0,
+          "on": false
+        },
+        "keys": {},
+        "mode": "page",
+        "panel": null,
+        "mapOpen": false,
+        "ready": true,
+        "soundOn": false,
+        "started": false,
+        "reduced": true,
+        "daySpeed": 0,
+        "viewerOpen": false
+      },
+      "body": "has-guest is-cover mode-page has-save is-loaded",
+      "attribute": "true",
+      "transition": "1e-05s",
+      "paused": true
+    }
+  },
+  "errors": [],
+  "badRequests": [
+    {
+      "url": "http://127.0.0.1:40393/favicon.ico",
+      "status": 404
+    },
+    {
+      "url": "http://127.0.0.1:40393/favicon.ico",
+      "status": 404
+    }
+  ],
+  "instrumentation": "Read-only state snapshot installed via Chrome Debugger call-frame evaluation; no production hook or source mutation."
+}

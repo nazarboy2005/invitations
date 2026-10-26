@@ -236,6 +236,14 @@ body {
   transition: none !important;
 }
 
+.jw-reduced-motion *,
+.jw-reduced-motion *::before,
+.jw-reduced-motion *::after {
+  animation: none !important;
+  transition: none !important;
+  scroll-behavior: auto !important;
+}
+
 .jw-reduced-motion .jw-source-petal {
   display: none !important;
 }

@@ -50,6 +50,8 @@ a{color:inherit;text-decoration:inherit}
 .wish-message{white-space:pre-wrap;overflow-wrap:anywhere}
 .wishes-section{display:grid}
 .rsvp-section{text-align:center}
+.orchid-rsvp-reveal{opacity:0;transform:translateY(15px);transition:opacity .6s cubic-bezier(0,0,.58,1),transform .6s cubic-bezier(0,0,.58,1)}
+.orchid-rsvp-reveal.orchid-visible{opacity:1;transform:none}
 .wishes-section .wish-form{max-width:640px}
 .rsvp-container{width:100%;max-width:600px;margin:0 auto}
 .rsvp-heading h2{font-size:25px;line-height:1.2}
@@ -73,6 +75,7 @@ a{color:inherit;text-decoration:inherit}
 .footer-date,.footer-hosts{margin:.6em auto}
 html.orchid-reduced-motion *,html.orchid-reduced-motion *::before,html.orchid-reduced-motion *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
 html.orchid-reduced-motion .orchid-reveal{opacity:1;transform:none;filter:none}
+html.orchid-reduced-motion .orchid-rsvp-reveal{opacity:1;transform:none}
 html.orchid-reduced-motion.orchid-ready .gate-circle-content>*{opacity:1}
 .orchid-gate-opening{animation:orchid-gate-exit .34s .6s ease-in-out both}
 .orchid-gate-opening .gate-forest{animation:orchid-forest-exit 1.1s cubic-bezier(.16,1,.3,1) both}
@@ -108,7 +111,7 @@ html.orchid-reduced-motion.orchid-ready .gate-circle-content>*{opacity:1}
 .orchid-contacts{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin:18px auto}
 .orchid-contacts a{color:inherit}
 @media(max-width:767px){.map-card{height:260px}.event-card{min-height:280px}.story-grid{grid-template-columns:1fr}.orchid-music{right:18px;bottom:max(18px,env(safe-area-inset-bottom))}}
-@media(prefers-reduced-motion:reduce){.orchid-reveal,.orchid-gate-opening,.gate-forest,.gate-shell,.gate-envelope,.gate-open-row,.gate-circle-pulse,.gate-circle-content>*,.gate-arrow,.gate-open,.orchid-button,.gallery-cell img,.orchid-main:not([hidden]){transition:none!important;animation:none!important;scroll-behavior:auto!important}.orchid-reveal{opacity:1;transform:none;filter:none}.orchid-gate-opening{opacity:0}.gate-open:hover,.gate-open:active,.orchid-button:hover,.orchid-button:active,.gallery-cell:hover img{transform:none!important}}
+@media(prefers-reduced-motion:reduce){.orchid-reveal,.orchid-rsvp-reveal,.orchid-gate-opening,.gate-forest,.gate-shell,.gate-envelope,.gate-open-row,.gate-circle-pulse,.gate-circle-content>*,.gate-arrow,.gate-open,.orchid-button,.gallery-cell img,.orchid-main:not([hidden]){transition:none!important;animation:none!important;scroll-behavior:auto!important}.orchid-reveal,.orchid-rsvp-reveal{opacity:1;transform:none;filter:none}.orchid-gate-opening{opacity:0}.gate-open:hover,.gate-open:active,.orchid-button:hover,.orchid-button:active,.gallery-cell:hover img{transform:none!important}}
 .orchid-reduced-motion .orchid-reveal,.orchid-reduced-motion .orchid-gate-opening,.orchid-reduced-motion .gate-forest,.orchid-reduced-motion .gate-shell,.orchid-reduced-motion .gate-envelope,.orchid-reduced-motion .gate-open-row,.orchid-reduced-motion .gate-circle-pulse,.orchid-reduced-motion .gate-circle-content>*,.orchid-reduced-motion .gate-arrow,.orchid-reduced-motion .gate-open,.orchid-reduced-motion .orchid-button,.orchid-reduced-motion .gallery-cell img,.orchid-reduced-motion .orchid-main:not([hidden]){transition:none!important;animation:none!important}
 .orchid-reduced-motion .gate-circle-content>*{opacity:1!important;transform:none!important;filter:none!important}
 .orchid-reduced-motion .gate-open:hover,.orchid-reduced-motion .gate-open:active,.orchid-reduced-motion .orchid-button:hover,.orchid-reduced-motion .orchid-button:active,.orchid-reduced-motion .gallery-cell:hover img{transform:none!important}

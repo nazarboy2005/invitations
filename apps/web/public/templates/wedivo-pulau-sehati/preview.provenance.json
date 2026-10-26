@@ -1,0 +1,22 @@
+{
+  "templateId": "wedivo-pulau-sehati",
+  "displayName": "Ko‘ngillar oroli",
+  "file": "preview.png",
+  "width": 720,
+  "height": 1280,
+  "sha256": "e7cb72c21c81ac446bcd2529ec09fec3827230a0b498f43571a1e49ee3331d5b",
+  "kind": "actual bound source opening, no crop or resize",
+  "fixture": "apps/web/src/modules/catalog/preview-sample.json",
+  "fixtureSha256": "98591ce063bd2fa23c2ae508ad19e54ded2f965ac6693aa5a8410fbe497a1f13",
+  "locale": "uz-Latn",
+  "guestName": "",
+  "music": "silent",
+  "fonts": "document.fonts.ready",
+  "exclude": [
+    "injected locale switcher",
+    "app/browser chrome"
+  ],
+  "eligible": true,
+  "sourceCaptureSha256": "ffaf98bae85bf9fb2a45d000ac298c095493ab27428f1a1d07c85d84a0392d10",
+  "verification": "docs/templates/qa-artifacts/wedivo-pulau-sehati/browser-final.json"
+}

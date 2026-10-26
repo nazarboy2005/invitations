@@ -15,6 +15,8 @@ import { isInvitateTemplate } from "@/templates/invitate/registry";
 
 import { isChorloveTemplate } from "@/templates/chorlove/registry";
 import { readBrowserDraft } from "@/modules/studio/draft-storage";
+import { CATALOG_PREVIEW_MUSIC } from "./catalog-music";
+import { InvitationMusicAutoplay } from "./invitation-view-tracker";
 import {
   createTemplatePreviewSample,
   createLongNamePreview,
@@ -24,6 +26,7 @@ import styles from "./full-template-preview.module.css";
 
 // Load only the renderer selected by this preview, rather than every design.
 const AnorInvitation = dynamic(() => import("@/templates/anor/renderer").then((module) => module.AnorInvitation));
+const WedivoPulauSehati = dynamic(() => import("@/templates/wedivo-pulau-sehati/renderer").then((module) => module.WedivoPulauSehati));
 const MarxabaInvitation = dynamic(() => import("@/templates/marxaba/renderer").then((module) => module.MarxabaInvitation));
 const InvitateInvitation = dynamic(() => import("@/templates/invitate/renderer").then((module) => module.InvitateInvitation));
 const VelvetRoyaleInvitation = dynamic(() => import("@/templates/velvet-royale/renderer").then((module) => module.VelvetRoyaleInvitation));
@@ -258,6 +261,19 @@ export function FullTemplatePreview({
 
   return (
     <main className={styles.fullPreview} ref={previewRef} data-card-preview={cardPreview || undefined}>
+      {invitation && !cardPreview && !posterCapture && (
+        <InvitationMusicAutoplay
+          musicUrl={
+            silentPlayback
+              ? ""
+              : catalogPreview
+                ? CATALOG_PREVIEW_MUSIC.url
+                : invitation.music.enabled
+                  ? invitation.music.url
+                  : ""
+          }
+        />
+      )}
       {!cardPreview && !posterCapture && <nav
         className={`${styles.previewControls} ${showControls ? styles.controlsVisible : ""}`}
         aria-label="Dizayn amallari"
@@ -305,6 +321,8 @@ export function FullTemplatePreview({
         <AndalusDarvozasiInvitation invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} sampleWishes={catalogPreview} silentPlayback={silentPlayback} />
       ) : template.id === "zarrin-doppi" ? (
         <ZarrinDoppiInvitation invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} sampleWishes={catalogPreview} silentPlayback={silentPlayback} />
+      ) : template.id === "wedivo-pulau-sehati" ? (
+        <WedivoPulauSehati invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} silentPlayback={silentPlayback} qaReducedMotion={qaReducedMotion} />
       ) : template.id === "anor" ? (
         <AnorInvitation
           invitation={invitation}
@@ -340,6 +358,8 @@ export function FullTemplatePreview({
           qaReducedMotion={qaReducedMotion}
           qaMobile={qaMobile}
         />
+      ) : template.id === "wedivo-pulau-sehati" ? (
+        <WedivoPulauSehati invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} silentPlayback={silentPlayback} qaReducedMotion={qaReducedMotion} />
       ) : template.id === "royal-burgundy-edition" ? (
           <VelvetRoyaleInvitation invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} sampleWishes={catalogPreview} silentPlayback={silentPlayback} qaReducedMotion={qaReducedMotion} qaMobile={qaMobile} />
       ) : template.id === "olive-manor-edition" ? (

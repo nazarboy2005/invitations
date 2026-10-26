@@ -104,6 +104,8 @@ test("Green White runtime is isolated and maps the captured sections to the shar
   assert.match(bridge, /prefers-reduced-motion/);
   assert.doesNotMatch(bridge, /createElement\("select"\).*partySize|\[name="partySize"\]/);
   assert.match(bridge, /partySize: choice \? 0 : 1/);
+  assert.match(bridge, /button\.querySelector\(":scope > span:last-child"\), i \? c\.no : c\.yes\)/);
+  assert.doesNotMatch(bridge, /tx\(button\.querySelector\("span"\), i \? c\.no : c\.yes\)/);
   assert.match(bridge, /\$\{id\}:language/);
   assert.match(bridge, /const photos = gallery\.filter\(\(photo\) => photo\?\.src\)/);
   assert.match(bridge, /hide\(node, !photos\.length\)/);
@@ -136,6 +138,15 @@ test("Green White runtime is isolated and maps the captured sections to the shar
   for (const dependency of dependencies) {
     await readFile(new URL(dependency.slice(1), publicRoot));
   }
+});
+
+test("Green White RSVP localizes the source label span without replacing its radio indicator", async () => {
+  const source = await readFile(new URL("source/preview-frame.html", root), "utf8");
+  const bridge = await readFile(new URL("bridge.js", root), "utf8");
+  assert.match(source, /<span class="flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 border-green-700\/35"><\/span><span class="text-sm font-medium text-green-900">Kelaman<\/span>/);
+  assert.match(source, /<span class="flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 border-green-700\/35"><\/span><span class="text-sm font-medium text-green-900">Kela olmayman<\/span>/);
+  assert.match(bridge, /tx\(button\.querySelector\(":scope > span:last-child"\), i \? c\.no : c\.yes\)/);
+  assert.match(bridge, /partySize: choice \? 0 : 1/);
 });
 
 test("Green White motion follows the archived source page module", async () => {

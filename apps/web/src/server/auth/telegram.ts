@@ -2,6 +2,7 @@ import { getDb } from "@taklifnoma/database";
 import type postgres from "postgres";
 import { AuthError } from "./index";
 import { digest, isOwnContact, type TelegramIdentity } from "./crypto";
+import { hasAdminRole } from "./admin-role";
 
 type TelegramMessage = {
   message_id?: number;
@@ -44,13 +45,17 @@ export async function telegramCall(
     );
 }
 function escapeHtml(value: string) {
-  return value.replace(/[&<>"']/g, (character) => ({
-    "&": "&amp;",
-    "<": "&lt;",
-    ">": "&gt;",
-    '"': "&quot;",
-    "'": "&#39;",
-  })[character]!);
+  return value.replace(
+    /[&<>"']/g,
+    (character) =>
+      ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;",
+      })[character]!,
+  );
 }
 async function sendSticker(chatId: number, stickerId: string | undefined) {
   if (!stickerId) return;
@@ -68,12 +73,8 @@ async function identify(
   const name = `${identity.first_name} ${identity.last_name ?? ""}`
     .trim()
     .slice(0, 300);
-  const admin = (process.env.PLATFORM_ADMIN_TELEGRAM_IDS ?? "")
-    .split(",")
-    .map((s) => s.trim())
-    .includes(String(identity.id));
   const [user] =
-    await db`INSERT INTO users(telegram_user_id,display_name,telegram_username,is_admin) VALUES(${String(identity.id)},${name},${identity.username ?? null},${admin}) ON CONFLICT(telegram_user_id) DO UPDATE SET display_name=EXCLUDED.display_name,telegram_username=EXCLUDED.telegram_username,updated_at=now() RETURNING *`;
+    await db`INSERT INTO users(telegram_user_id,display_name,telegram_username) VALUES(${String(identity.id)},${name},${identity.username ?? null}) ON CONFLICT(telegram_user_id) DO UPDATE SET display_name=EXCLUDED.display_name,telegram_username=EXCLUDED.telegram_username,updated_at=now() RETURNING *`;
   await db`INSERT INTO telegram_connections(user_id,telegram_chat_id,status) VALUES(${user.id},${String(chatId)},'active') ON CONFLICT(user_id) DO UPDATE SET telegram_chat_id=EXCLUDED.telegram_chat_id,status='active',updated_at=now()`;
   return user;
 }
@@ -86,10 +87,14 @@ function continueKeyboard() {
   const url = process.env.APP_URL;
   return url
     ? {
-        inline_keyboard: [[{
-          text: "💌 Sayt / Mini Appga qaytish",
-          web_app: { url },
-        }]],
+        inline_keyboard: [
+          [
+            {
+              text: "💌 Sayt / Mini Appga qaytish",
+              web_app: { url },
+            },
+          ],
+        ],
       }
     : undefined;
 }
@@ -100,7 +105,9 @@ async function askContact(chatId: number) {
     text: "📱 <b>Telefon raqamingizni tasdiqlang</b>\n\nDavom etish uchun shaxsiy Telegram raqamingizni quyidagi tugma orqali yuboring. Raqam akkauntingizni himoyalash va tiklash uchun ishlatiladi. So‘ng ishni sayt yoki Mini App’da davom ettirish uchun quyidagi havolani bosing.",
     reply_markup: {
       ...contactKeyboard,
-      ...(continueKeyboard() ? { inline_keyboard: continueKeyboard()!.inline_keyboard } : {}),
+      ...(continueKeyboard()
+        ? { inline_keyboard: continueKeyboard()!.inline_keyboard }
+        : {}),
     },
   });
 }
@@ -116,7 +123,9 @@ async function confirmSiteLogin(
     text: "✅ <b>Kirish tasdiqlandi</b>\n\nSayt yoki Mini App’ga qayting — ishni davom ettirishingiz mumkin.",
     reply_markup: {
       remove_keyboard: true,
-      ...(continueKeyboard() ? { inline_keyboard: continueKeyboard()!.inline_keyboard } : {}),
+      ...(continueKeyboard()
+        ? { inline_keyboard: continueKeyboard()!.inline_keyboard }
+        : {}),
     },
   });
 }
@@ -154,6 +163,32 @@ async function processLocked(update: Update, db: postgres.TransactionSql) {
     )
       throw new AuthError("INVALID_UPDATE", "Invalid Telegram identity");
     const user = await identify(identity, message.chat.id, db);
+    if (/^\/stop(?:@\w+)?\s*$/.test(message.text ?? "")) {
+      await db`UPDATE telegram_connections SET broadcast_opt_out_at=now() WHERE user_id=${user.id}`;
+      await telegramCall("sendMessage", {
+        chat_id: message.chat.id,
+        text: "Umumiy xabarlar o‘chirildi. Qayta yoqish uchun /subscribe yuboring. Hisobingizga oid zarur amallar ishlashda davom etadi.",
+      });
+      await db`INSERT INTO telegram_updates(update_id) VALUES(${update.update_id}) ON CONFLICT DO NOTHING`;
+      return;
+    }
+    if (/^\/subscribe(?:@\w+)?\s*$/.test(message.text ?? "")) {
+      await db`UPDATE telegram_connections SET broadcast_opt_out_at=NULL WHERE user_id=${user.id}`;
+      await telegramCall("sendMessage", {
+        chat_id: message.chat.id,
+        text: "Umumiy xabarlar yoqildi. O‘chirish uchun /stop yuboring.",
+      });
+      await db`INSERT INTO telegram_updates(update_id) VALUES(${update.update_id}) ON CONFLICT DO NOTHING`;
+      return;
+    }
+    if (user.disabled_at) {
+      await telegramCall("sendMessage", {
+        chat_id: message.chat.id,
+        text: "Hisobga kirish cheklangan. Qo‘llab-quvvatlash xizmatiga murojaat qiling.",
+      });
+      await db`INSERT INTO telegram_updates(update_id) VALUES(${update.update_id}) ON CONFLICT DO NOTHING`;
+      return;
+    }
     const start = message.text?.match(/^\/start(?:@\w+)?(?:\s+(\S+))?$/);
     if (start?.[1]?.startsWith("auth_")) {
       const token = start[1].slice(5);
@@ -181,14 +216,19 @@ async function processLocked(update: Update, db: postgres.TransactionSql) {
         const normalized =
           "+" + message.contact.phone_number!.replace(/\D/g, "");
         await db`UPDATE users SET phone_number=${normalized},phone_source='telegram_contact',phone_shared_at=now(),updated_at=now() WHERE id=${user.id}`;
-        await sendSticker(message.chat.id, process.env.TELEGRAM_SUCCESS_STICKER_ID);
+        await sendSticker(
+          message.chat.id,
+          process.env.TELEGRAM_SUCCESS_STICKER_ID,
+        );
         await telegramCall("sendMessage", {
           parse_mode: "HTML",
           chat_id: message.chat.id,
           text: "✅ <b>Telefon raqamingiz qabul qilindi</b>\n\nQuyidagi havola orqali sayt yoki Mini App’ga qaytib ishingizni davom ettiring.",
           reply_markup: {
             remove_keyboard: true,
-            ...(continueKeyboard() ? { inline_keyboard: continueKeyboard()!.inline_keyboard } : {}),
+            ...(continueKeyboard()
+              ? { inline_keyboard: continueKeyboard()!.inline_keyboard }
+              : {}),
           },
         });
         const [auth] =
@@ -205,22 +245,25 @@ async function processLocked(update: Update, db: postgres.TransactionSql) {
     } else if (start) {
       if (!user.phone_shared_at) await askContact(message.chat.id);
       else
-        await sendSticker(message.chat.id, process.env.TELEGRAM_WELCOME_STICKER_ID);
-        await telegramCall("sendMessage", {
-          parse_mode: "HTML",
-          chat_id: message.chat.id,
-          text: `✨ <b>Taklifnoma</b>\n\nSalom, ${escapeHtml(identity.first_name)}!\n\nYaqinlaringiz uchun chiroyli taklifnoma yarating, mehmonlar javobi va tilaklarini bir joyda kuzating. 💌`,
-          reply_markup: {
-            inline_keyboard: [
-              [
-                {
-                  text: "💌 Taklifnoma yaratish",
-                  web_app: { url: process.env.APP_URL },
-                },
-              ],
+        await sendSticker(
+          message.chat.id,
+          process.env.TELEGRAM_WELCOME_STICKER_ID,
+        );
+      await telegramCall("sendMessage", {
+        parse_mode: "HTML",
+        chat_id: message.chat.id,
+        text: `✨ <b>Taklifnoma</b>\n\nSalom, ${escapeHtml(identity.first_name)}!\n\nYaqinlaringiz uchun chiroyli taklifnoma yarating, mehmonlar javobi va tilaklarini bir joyda kuzating. 💌`,
+        reply_markup: {
+          inline_keyboard: [
+            [
+              {
+                text: "💌 Taklifnoma yaratish",
+                web_app: { url: process.env.APP_URL },
+              },
             ],
-          },
-        });
+          ],
+        },
+      });
     }
   }
   const callback = update.callback_query;
@@ -232,7 +275,7 @@ async function processLocked(update: Update, db: postgres.TransactionSql) {
       callback.message.chat.id === callback.from.id
     ) {
       const [auth] =
-        await db`UPDATE auth_requests a SET state='confirmed',confirmed_at=now() FROM users u WHERE a.id=${id} AND a.user_id=u.id AND u.telegram_user_id=${String(callback.from.id)} AND u.phone_shared_at IS NOT NULL AND a.state='identified' AND a.expires_at>now() RETURNING a.id`;
+        await db`UPDATE auth_requests a SET state='confirmed',confirmed_at=now() FROM users u WHERE a.id=${id} AND a.user_id=u.id AND u.telegram_user_id=${String(callback.from.id)} AND u.phone_shared_at IS NOT NULL AND u.disabled_at IS NULL AND a.state='identified' AND a.expires_at>now() RETURNING a.id`;
       await telegramCall("answerCallbackQuery", {
         callback_query_id: callback.id,
         text: auth
@@ -257,8 +300,8 @@ async function processLocked(update: Update, db: postgres.TransactionSql) {
       });
     } else {
       const [wish] =
-        await db`SELECT w.*,u.id AS actor_id FROM wishes w JOIN invitations i ON i.id=w.invitation_id JOIN users u ON u.telegram_user_id=${String(callback.from.id)} WHERE w.id=${moderation[2]} AND (i.owner_id=u.id OR u.is_admin=true) FOR UPDATE OF w`;
-      if (!wish)
+        await db`SELECT w.*,u.id AS actor_id,u.telegram_user_id,u.is_admin,i.owner_id FROM wishes w JOIN invitations i ON i.id=w.invitation_id JOIN users u ON u.telegram_user_id=${String(callback.from.id)} WHERE w.id=${moderation[2]} AND u.disabled_at IS NULL FOR UPDATE OF w`;
+      if (!wish || (wish.owner_id !== wish.actor_id && !hasAdminRole(wish)))
         await telegramCall("answerCallbackQuery", {
           callback_query_id: callback.id,
           text: "Xabar topilmadi yoki ruxsatingiz yo‘q.",
@@ -279,7 +322,10 @@ async function processLocked(update: Update, db: postgres.TransactionSql) {
             await telegramCall("sendMessage", {
               parse_mode: "HTML",
               chat_id: callback.message.chat.id,
-              text: status === "approved" ? "🌟 <b>Tilak tasdiqlandi</b>\nEndi u ommaviy taklifnomada ko‘rinadi." : "🗑️ <b>Tilak rad etildi va o‘chirildi</b>\nU ommaviy taklifnomada ko‘rinmaydi.",
+              text:
+                status === "approved"
+                  ? "🌟 <b>Tilak tasdiqlandi</b>\nEndi u ommaviy taklifnomada ko‘rinadi."
+                  : "🗑️ <b>Tilak rad etildi va o‘chirildi</b>\nU ommaviy taklifnomada ko‘rinmaydi.",
             });
           }
         }

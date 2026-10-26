@@ -13,7 +13,7 @@ export const runtime = "nodejs";
 export async function GET() {
   return authRoute(async () => {
     const missing = missingAuthConfig();
-    if (missing.length) return json({ user: null, configured: false, missing });
+    if (missing.length) return json({ user: null, configured: false });
     const row = await currentSession();
     if (row) {
       // Renewal is capped at an absolute 90 days, so inactivity and absolute expiry remain enforceable.

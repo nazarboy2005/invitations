@@ -492,6 +492,8 @@
     const frame = node.querySelector("[data-jasmine-map]");
     if (frame && venue.lat != null && venue.lng != null) {
       frame.src = `https://maps.google.com/maps?q=${venue.lat},${venue.lng}&z=15&output=embed`; hide(frame, false);
+    } else if (frame && query) {
+      frame.src = `https://maps.google.com/maps?q=${encodeURIComponent(query)}&z=15&output=embed`; hide(frame, false);
     } else if (frame) { frame.removeAttribute("src"); hide(frame, true); }
     hide(node, !venue.name && !venue.address && !url);
   }

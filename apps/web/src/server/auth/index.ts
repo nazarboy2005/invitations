@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 import { getDb } from "@taklifnoma/database";
 import type { SessionUser } from "@taklifnoma/contracts";
 import { digest, randomToken } from "./crypto";
+import { hasAdminRole } from "./admin-role";
 
 export const SESSION_COOKIE =
   process.env.NODE_ENV === "production"
@@ -75,7 +76,7 @@ export function toSessionUser(row: Record<string, unknown>): SessionUser {
     telegramUserId: String(row.telegram_user_id),
     displayName: String(row.display_name),
     phoneShared: !!row.phone_shared_at,
-    isAdmin: row.is_admin === true,
+    isAdmin: hasAdminRole(row),
   };
 }
 export async function currentSession() {
@@ -83,7 +84,7 @@ export async function currentSession() {
   const token = (await cookies()).get(SESSION_COOKIE)?.value;
   if (!token || token.length > 100) return null;
   const rows =
-    await getDb()`SELECT s.id AS session_id, s.expires_at, s.absolute_expires_at, u.* FROM sessions s JOIN users u ON u.id=s.user_id WHERE s.token_hash=${digest(token)} AND s.revoked_at IS NULL AND s.expires_at>now() AND s.absolute_expires_at>now() AND u.phone_shared_at IS NOT NULL`;
+    await getDb()`SELECT s.id AS session_id, s.created_at AS authenticated_at, s.expires_at, s.absolute_expires_at, u.* FROM sessions s JOIN users u ON u.id=s.user_id WHERE s.token_hash=${digest(token)} AND s.revoked_at IS NULL AND s.expires_at>now() AND s.absolute_expires_at>now() AND u.phone_shared_at IS NOT NULL AND u.disabled_at IS NULL`;
   return rows[0] ?? null;
 }
 export async function getSessionUser(): Promise<SessionUser | null> {
@@ -98,7 +99,17 @@ export async function requireUser() {
 export async function issueSession(userId: string) {
   const token = randomToken();
   const agent = (await headers()).get("user-agent")?.slice(0, 500) ?? "";
-  await getDb()`INSERT INTO sessions(user_id,token_hash,user_agent,expires_at,absolute_expires_at) VALUES(${userId},${digest(token)},${agent},${new Date(Date.now() + 30 * DAY)},${new Date(Date.now() + 90 * DAY)})`;
+  await getDb().begin(async (tx) => {
+    const [user] =
+      await tx`SELECT id FROM users WHERE id=${userId} AND disabled_at IS NULL AND phone_shared_at IS NOT NULL FOR SHARE`;
+    if (!user)
+      throw new AuthError(
+        "ACCOUNT_UNAVAILABLE",
+        "Hisobga kirish cheklangan.",
+        403,
+      );
+    await tx`INSERT INTO sessions(user_id,token_hash,user_agent,expires_at,absolute_expires_at) VALUES(${userId},${digest(token)},${agent},${new Date(Date.now() + 30 * DAY)},${new Date(Date.now() + 90 * DAY)})`;
+  });
   (await cookies()).set(SESSION_COOKIE, token, cookieOptions(30 * 86400));
 }
 export async function browserHash() {

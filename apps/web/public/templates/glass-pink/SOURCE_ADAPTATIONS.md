@@ -138,3 +138,8 @@ were about 433ms for source and 458ms for package, including browser interaction
 and rendering overhead; the code-defined durations are 300ms for the overlay and
 250ms for the card. No source mismatch was found. Focused tests assert the source chunk
 settings and package rules.
+
+
+## Published visual regression pass (2026-10-26)
+
+At 1280×800, the archived source and package browser previews use the same opening card, floral artwork, and cover composition; the package preserves the source responsive width/spacing classes. A direct RSVP markup comparison found one heading, one prompt, two radio choices, one submit control, and matching section, heading, form, and radio-grid classes in both source and package. Desktop DOM measurements show the response form at 550.4×163.6px in both; its document y-position differs because the two preview invitations have different content, while internal section/form geometry is source-matched. The captured and packaged RSVP use the same mobile/desktop breakpoint classes (`px-[16px] md:px-[32px]`, `md:max-w-[600px]`, `text-[20px] md:text-[26px]`, and two-column response controls), and no Glass Pink adapter rule overrides those styles. Browser scrolling/full-page capture timed out during this pass, so a rendered mobile viewport screenshot was not obtained. No source-backed RSVP defect was found and no template behavior was changed.

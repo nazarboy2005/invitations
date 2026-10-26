@@ -177,6 +177,18 @@ export function createTemplatePreviewSample(
     artistLineup: useTemplateSample ? templateSample?.artists ?? [] : [],
     gallery: structuredClone(templateSample?.gallery ?? previewSample.gallery),
     story: structuredClone(templateSample?.story ?? createInvitation(templateId).story),
+    templateData: templateId === "wedivo-pulau-sehati"
+      ? { "wedivo-pulau-sehati": {
+          inscription: { arabic: "", text: {}, attribution: {} },
+          profiles: [
+            { bio: {}, characterClass: "", origin: "", stats: [], skill: "", item: "" },
+            { bio: {}, characterClass: "", origin: "", stats: [], skill: "", item: "" },
+          ],
+          hotels: [], media: { videoUrl: "", liveUrl: "", intro: "" }, giftWell: { enabled: false, currencyLabel: "UZS" },
+          secondaryEvent: { enabled: false, date: "", time: "", label: "", venueName: "", address: "", mapUrl: "" }, storyDates: {}, coInviters: "",
+          missions: [], keepsakes: [], hashtag: "",
+        } }
+      : {},
     content,
     dressCode,
     rsvp: { ...createInvitation(templateId).rsvp, enabled: true },

@@ -95,6 +95,8 @@ test("local package keeps the captured structure and avoids site runtime request
   assert.match(adapter, /\/wishes/);
   assert.match(adapter, /data\.catalogPreview/);
   assert.match(adapter, /guestToken/);
+  assert.match(adapter, /const fields = \$\$\("\.rsvp-field > label"\)/);
+  assert.match(adapter, /const radios = \$\$\("\.rsvp-radio"\)/);
   assert.match(sourceBehavior, /threshold: 0\.18/);
   assert.match(sourceBehavior, /setInterval\(updateCountdown, 1000\)/);
   assert.match(sourceBehavior, /musicToggle\.addEventListener\("click"/);

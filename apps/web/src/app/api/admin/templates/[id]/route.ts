@@ -2,9 +2,12 @@ import { NextResponse } from "next/server";
 import { z } from "zod";
 import { EVENT_TYPES, templateIdSchema } from "@taklifnoma/contracts";
 import { getDb } from "@taklifnoma/database";
-import { authenticatedUser } from "@/server/invitations";
-import { verifySameOrigin } from "@/server/auth";
-import { ApiError, apiError, privateHeaders, readJson } from "@/server/api";
+import {
+  requireAdminMutation,
+  recordAdminChange,
+  adminError,
+} from "@/server/admin";
+import { ApiError, privateHeaders, readJson } from "@/server/api";
 const inputSchema = z
   .object({
     published: z.boolean().optional(),
@@ -41,10 +44,7 @@ export async function PATCH(
   { params }: { params: Promise<{ id: string }> },
 ) {
   try {
-    verifySameOrigin(request);
-    const user = await authenticatedUser();
-    if (!user.isAdmin)
-      throw new ApiError(403, "FORBIDDEN", "Administrator huquqi kerak.");
+    const user = await requireAdminMutation(request);
     const { id } = await params;
     templateIdSchema.parse(id);
     const input = inputSchema.parse(await readJson(request, 5000));
@@ -54,6 +54,10 @@ export async function PATCH(
       const [template] =
         await tx`SELECT * FROM templates WHERE id=${id} FOR UPDATE`;
       if (!template) throw new ApiError(404, "NOT_FOUND", "Dizayn topilmadi.");
+      const oldCategories =
+        await tx`SELECT category_id FROM template_category_assignments WHERE template_id=${id}`;
+      const oldEvents =
+        await tx`SELECT event_type FROM template_supported_event_types WHERE template_id=${id}`;
       if (input.categoryIds !== undefined) {
         const categories = input.categoryIds.length
           ? await tx`SELECT id FROM template_categories WHERE id=ANY(${tx.array(input.categoryIds)}::text[]) FOR SHARE`
@@ -135,12 +139,26 @@ export async function PATCH(
         }
       }
       await tx`UPDATE templates SET published=${input.published ?? template.published},price_minor=${input.priceMinor ?? Number(template.price_minor)},replacement_template_id=${input.published === undefined ? template.replacement_template_id : input.published === false ? (input.replacementTemplateId ?? null) : null},updated_at=now() WHERE id=${id}`;
+      await recordAdminChange(
+        tx,
+        user.id,
+        "template.update",
+        id,
+        {
+          published: template.published,
+          priceMinor: Number(template.price_minor),
+          categoryIds: oldCategories.map((row) => row.category_id),
+          supportedEventTypes: oldEvents.map((row) => row.event_type),
+          replacementTemplateId: template.replacement_template_id,
+        },
+        { ...input, replaced },
+      );
     });
     return NextResponse.json(
       { ok: true, replaced },
       { headers: privateHeaders },
     );
   } catch (e) {
-    return apiError(e);
+    return adminError(e);
   }
 }
