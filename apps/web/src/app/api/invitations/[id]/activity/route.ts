@@ -20,20 +20,26 @@ export async function GET(request: Request, { params }: Context) {
       .max(100000)
       .parse(new URL(request.url).searchParams.get("page") ?? 0);
     const offset = page * 50;
-    const [responses, wishes, receipts, [totals]] = await Promise.all([
-      getDb()`SELECT id,name,status,party_size AS "partySize",note,created_at AS "createdAt" FROM rsvp_responses WHERE invitation_id=${id} ORDER BY created_at DESC,id DESC LIMIT 51 OFFSET ${offset}`,
-      getDb()`SELECT id,name,message,CASE WHEN status='hidden' THEN 'pending' ELSE status END AS status,created_at AS "createdAt" FROM wishes WHERE invitation_id=${id} AND deleted_at IS NULL ORDER BY created_at DESC,id DESC LIMIT 51 OFFSET ${offset}`,
-      getDb()`SELECT r.id,r.giver_names AS "giverNames",r.status,r.created_at AS "createdAt",r.destination->>'cardHolder' AS "cardHolder",right(regexp_replace(r.destination->>'cardNumber','[^0-9]','','g'),4) AS "cardLast4",a.url,a.filename FROM gift_receipts r JOIN media_assets a ON a.id=r.asset_id WHERE r.invitation_id=${id} ORDER BY r.created_at DESC,r.id DESC LIMIT 51 OFFSET ${offset}`,
-      getDb()`SELECT (SELECT count(*)::int FROM rsvp_responses WHERE invitation_id=${id}) AS responses,(SELECT coalesce(sum(party_size),0)::int FROM rsvp_responses WHERE invitation_id=${id} AND status='yes') AS guests,(SELECT count(*)::int FROM wishes WHERE invitation_id=${id} AND status IN ('pending','hidden') AND deleted_at IS NULL) AS pending`,
-    ]);
+    const [responses, wishes, receipts, giftIntentions, [totals]] =
+      await Promise.all([
+        getDb()`SELECT id,name,status,party_size AS "partySize",note,created_at AS "createdAt" FROM rsvp_responses WHERE invitation_id=${id} ORDER BY created_at DESC,id DESC LIMIT 51 OFFSET ${offset}`,
+        getDb()`SELECT id,name,message,CASE WHEN status='hidden' THEN 'pending' ELSE status END AS status,created_at AS "createdAt" FROM wishes WHERE invitation_id=${id} AND deleted_at IS NULL ORDER BY created_at DESC,id DESC LIMIT 51 OFFSET ${offset}`,
+        getDb()`SELECT r.id,r.giver_names AS "giverNames",r.status,r.created_at AS "createdAt",r.destination->>'cardHolder' AS "cardHolder",right(regexp_replace(r.destination->>'cardNumber','[^0-9]','','g'),4) AS "cardLast4",a.url,a.filename FROM gift_receipts r JOIN media_assets a ON a.id=r.asset_id WHERE r.invitation_id=${id} ORDER BY r.created_at DESC,r.id DESC LIMIT 51 OFFSET ${offset}`,
+        getDb()`SELECT id,sender_name AS "senderName",amount::text AS amount,currency_label AS "currencyLabel",message,created_at AS "createdAt" FROM pulau_gift_intentions WHERE invitation_id=${id} ORDER BY created_at DESC,id DESC LIMIT 51 OFFSET ${offset}`,
+        getDb()`SELECT (SELECT count(*)::int FROM rsvp_responses WHERE invitation_id=${id}) AS responses,(SELECT coalesce(sum(party_size),0)::int FROM rsvp_responses WHERE invitation_id=${id} AND status='yes') AS guests,(SELECT count(*)::int FROM wishes WHERE invitation_id=${id} AND status IN ('pending','hidden') AND deleted_at IS NULL) AS pending`,
+      ]);
     return Response.json(
       {
         responses: responses.slice(0, 50),
         wishes: wishes.slice(0, 50),
+        giftIntentions: giftIntentions.slice(0, 50),
         receipts: receipts.slice(0, 50),
         totals,
         hasMore:
-          responses.length > 50 || wishes.length > 50 || receipts.length > 50,
+          responses.length > 50 ||
+          wishes.length > 50 ||
+          receipts.length > 50 ||
+          giftIntentions.length > 50,
       },
       { headers: privateHeaders },
     );

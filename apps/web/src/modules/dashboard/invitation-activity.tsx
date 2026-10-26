@@ -24,6 +24,14 @@ type Activity = {
     filename: string;
     cardHolder: string;
     cardLast4: string;
+  giftIntentions: Array<{
+    id: string;
+    senderName: string;
+    amount: string;
+    currencyLabel: string;
+    message: string;
+    createdAt: string;
+  }>;
   }>;
   totals: { responses: number; guests: number; pending: number };
   hasMore: boolean;
@@ -129,6 +137,13 @@ export function InvitationActivity({ invitation }: { invitation: Invitation }) {
             </button>
             <button role="tab" aria-selected={section === "receipts"} onClick={() => setSection("receipts")}>
               To‘yona <span>{data.receipts.length}</span>
+            <button
+              role="tab"
+              aria-selected={section === "intentions"}
+              onClick={() => setSection("intentions")}
+            >
+              Sovg‘a niyatlari <span>{data.giftIntentions?.length ?? 0}</span>
+            </button>
             </button>
           </nav>
           {section === "responses" && <section className={styles.sectionPanel} role="tabpanel">
@@ -206,20 +221,23 @@ export function InvitationActivity({ invitation }: { invitation: Invitation }) {
                       >
                         <Trash2 size={17} />
                       </button>
-                    )}
-                  </div>
-                </article>
-              ))}
-          </section>}
-          {section === "receipts" && <section className={styles.sectionPanel} role="tabpanel">
-            <h2>To‘yona cheklari · faqat sizga ko‘rinadi</h2>
-            <p>
-              AI va bank tekshiruvi yo‘q. Pul hisobingizga tushganini o‘zingiz
-              tekshirib, belgi qo‘ying.
-            </p>
-            {!data.receipts.length && <p>Hozircha chek yo‘q.</p>}
-            <div className={styles.receiptGrid}>
-              {data.receipts.map((item) => (
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </section>
+          )}
+          {section === "intentions" && (
+            <section className={styles.sectionPanel} role="tabpanel">
+              <h2>Sovg‘a niyatlari · pul o‘tkazilmagan</h2>
+              <p>
+                Bu yozuvlar mehmonlarning niyatidir. Platforma pul qabul
+                qilmaydi yoki o‘tkazmaydi.
+              </p>
+              {!data.giftIntentions?.length && (
+                <p>Hozircha sovg‘a niyati yo‘q.</p>
+              )}
+              {data.giftIntentions?.map((item) => (
                 <article key={item.id}>
                   <strong>{item.giverNames}</strong>
                   <p>

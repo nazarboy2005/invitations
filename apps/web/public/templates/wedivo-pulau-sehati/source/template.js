@@ -157,7 +157,7 @@
   function utcStamp(dt) { return dt.getUTCFullYear() + pad2(dt.getUTCMonth() + 1) + pad2(dt.getUTCDate()) + "T" + pad2(dt.getUTCHours()) + pad2(dt.getUTCMinutes()) + "00Z"; }
   var P1 = parseParts(window.PULAU.date, window.PULAU.time);
   var T1 = instantOf(P1);
-  var P1END = null, P2 = null, P2END = null, PDEAD = parseParts(window.PULAU.deadline, "23:59");
+  var P1END = null, P2 = window.PULAU.secondaryEvent && window.PULAU.secondaryEvent.date ? parseParts(window.PULAU.secondaryEvent.date, window.PULAU.secondaryEvent.time || "00:00") : null, P2END = null, PDEAD = parseParts(window.PULAU.deadline, "23:59");
   function gcalUrl(title, start, end, loc, details) {
     var u = "https://calendar.google.com/calendar/render?action=TEMPLATE&text=" + encodeURIComponent(title);
     if (start) { var e = end || new Date(start.getTime() + 2 * 3600 * 1000); u += "&dates=" + utcStamp(start) + "/" + utcStamp(e); }
@@ -2865,7 +2865,7 @@
       if (!p) { $("ev-" + n + "-when").style.display = "none"; return; }
       $("ev-" + n + "-m").textContent = monthShort(p); $("ev-" + n + "-d").textContent = String(p.d);
       $("ev-" + n + "-day").textContent = dayLabel(p);
-      var tr = window.PULAU.timeLabel; if (tr) { $("ev-" + n + "-time").textContent = tr; } else { $("ev-" + n + "-time").style.display = "none"; }
+      var tr = n === 2 ? window.PULAU.secondaryEvent.timeLabel : window.PULAU.timeLabel; if (tr) { $("ev-" + n + "-time").textContent = tr; } else { $("ev-" + n + "-time").style.display = "none"; }
     };
     if (!txt("ev-1-name")) { $("ev-1-name").textContent = window.PULAU.translate("Acara Utama"); }
     fillEv(1, P1, "");
@@ -2881,7 +2881,7 @@
       if (!txt("ev-2-addr")) { $("ev-2-addr").textContent = a1; }
       hideIfEmpty("ev-2-addr");
       var v2 = txt("ev-2-venue-name"), a2 = txt("ev-2-addr");
-      $("ev-2-map").href = (v2 === v1 && a2 === a1) ? mapsDirUrl([v1, a1].filter(Boolean).join(", "), PLACE_ID) : mapsDirUrl([v2, a2].filter(Boolean).join(", "), "");
+      $("ev-2-map").href = window.PULAU.secondaryEvent.mapUrl || ((v2 === v1 && a2 === a1) ? mapsDirUrl([v1, a1].filter(Boolean).join(", "), PLACE_ID) : mapsDirUrl([v2, a2].filter(Boolean).join(", "), ""));
       if (evs[1]) { $("ev-2-cal-link").href = gcalUrl(evs[1].title, evs[1].start, evs[1].end, evs[1].loc); } else { $("ev-2-cal-link").style.display = "none"; }
     }
     if (!txt("ev-note-text")) { $("ev-note").style.display = "none"; }

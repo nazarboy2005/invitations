@@ -1,11 +1,13 @@
 # Ko‘ngillar oroli — Pulau Sehati source integration
 
-Status: **private, unregistered, not publication-ready**. Proposed ID
+Status: **private, registered, not publication-ready**. ID
 `wedivo-pulau-sehati`, display name `Ko‘ngillar oroli`, category `wedding`, supported
-event types `wedding` only. The coordinator owns catalog/registry wiring and an
-additive registration migration with the approved existing price, initially
-`published=false`. No database, publication, deployment or payment action was
-performed by this implementation task.
+event types `wedding` only. Registration is additive migration
+`0154_register_wedivo_pulau_sehati.sql`, price 15,000,000 UZS, published=false.
+Gift-intention storage is additive migration `0155_pulau_gift_intentions.sql`;
+`0156_pulau_gift_intention_amount_units.sql` names the stored integer as the
+entered currency amount.
+No external deployment or live payment was performed.
 
 ## Reference and exact dependencies
 
@@ -74,37 +76,28 @@ source religious/example personal text is never assigned to creator content.
 Browser line-wrap, dynamic-message and glyph coverage checks remain required. Reduced motion selects page mode and disables CSS motion; it does not
 replace the original engine with a newly drawn design.
 
-## Explicit source-present contract/API gaps
+## Expanded source-present support
 
-These sections and their source interaction code remain packaged. The platform
-adapter hides them and removes their invitation-specific example values. This
-is an explicit gap decision for this private implementation, not a claim that
-those source sections were absent:
+The shared invitation object now stores validated namespaced JSONB data under
+`templateData["wedivo-pulau-sehati"]`. `pulauSehatiDataSchema` validates URL
+protocols, bounded text, array sizes, stats and keepsake icon IDs; existing
+save/load/publication JSON persistence carries it through and template switching
+preserves it. Creator controls now author inscription text and attribution,
+two separate profiles and metadata, two accommodations, video/live URLs, a
+second ceremony, story dates, co-inviters, five missions, six keepsakes, the
+source hashtag and gift intentions. Locale-specific inscription and profile
+text are authored per enabled editor language and the renderer passes only the
+selected locale to the source frame.
 
-- **Inscription:** Arabic verse, translation and attribution lack matching
-  approved editable fields. No source religious quotation is assigned to an
-  arbitrary creator invitation.
-- **Character RPG metadata:** two separate parent bios, character class/origin,
-  numeric stats, special skill and signature item have no approved fields.
-  Existing shared `hosts` maps to the source family text; the unsupported stat
-  radar and metadata remain hidden. The ordinary couple tabs/photos still work.
-- **Accommodation:** two hotel name/address/distance/price/booking URL/note records
-  have no contract/editor/persistence fields.
-- **Video:** film upload and live/YouTube URLs have no approved media field.
-- **Missions and keepsakes:** five creator-authored mission records and six
-  keepsake name/anecdote/icon records lack shared contract support. The generic
-  island walking/navigation/day-night experience remains intact.
-- **Gift well:** the source has sender/amount/message transfer simulation,
-  not card-number/to‘yona UI. There is no approved amount-transfer payment
-  service. The provider simulated success handler is excluded, the form is
-  unavailable, and no card UI or receipt uploader is invented.
-- Source hashtag, co-inviters, story dates, secondary event and check-in also have
-  no corresponding approved fields/services; they remain blank/unavailable.
-- Source has no general phone/Telegram contact section; none is injected.
-
-Restoring these unsupported fields requires a coordinator/product decision and
-shared editor/contract/persistence/API work, not hardcoded demo content.
-
+The source adapter binds those values into the original optional sections and
+keeps empty entries hidden. Film URLs are accepted only as HTTP(S) URLs; no
+creator video upload API exists. The gift well records a guest's sender name,
+amount and note as a private intention in its own table, visible to invitation
+hosts in activity. It says clearly that this does not transfer or receive money;
+no payment provider, confirmation or financial receipt is involved. Empty
+optional source sections remain hidden. The source check-in button has no handler
+or platform service and remains hidden. Existing parent/family shared text
+continues to bind where no template-specific profile bio was authored.
 ## Verification and release gates
 
 Passed locally on 2026-10-26:
@@ -188,11 +181,31 @@ Extra evidence: `controls-island-mobile.png`, `controls-photo-filter-mobile.png`
 and the generated calendar file. These supplement the canonical portrait cover,
 long-name, four-locale, source-opening and responsive checks above.
 
-**Remaining coordinator gates:** typed registry/preview/public routing, additive
-private database row, authenticated save/reopen/switch/public-render lifecycle,
-actual RSVP/wishes service checks or the user's explicit service-test deferral,
-production build after shared integration, and review of the explicit existing
-source-present contract/API gaps. There is no newly discovered blocker in the
-mapped source controls. Keep `publicationReady=false` and unselectable until the
-coordinator clears those gates. No registry, migration, database, payment or
-external deployment change belongs to this package commit.
+**Coordinator checks completed in this integration:** typed registry/creator and
+catalog preview/public route wiring; private DB registration and event/category
+verification; authenticated API save/reopen/template-switch preservation; gift
+intention submission and private activity listing; existing RSVP/wishes service
+integration; focused schema/payload checks, TypeScript check, production build
+and source JavaScript syntax checks. The public renderer is wired to the same
+iframe component used in preview. The local `/preview?template=wedivo-pulau-sehati`
+route was visually opened in the in-app browser: the island renderer and source
+opening action load, the opening panel is Uzbek, and the source panel/control DOM
+is present. This verifies renderer startup only.
+
+The first isolated creator browser pass exposed a concrete contract bug: blank
+Pulau data failed because `hashtag` had no default. Giving it an empty-string
+default fixed studio initialization. A fresh
+`/studio?template=wedivo-pulau-sehati&new=1` then loaded all Pulau controls in
+Uzbek with no application error. Browser verification confirmed creator field
+edits update the iframe preview, the gift-well toggle reveals the source gift
+location and panel with the explicit no-money-transfer copy, and reload restores
+local draft values. Together with the preview/opening pass above, this clears
+the creator browser release gate.
+
+**Publication (2026-10-27):** additive migration
+`0157_publish_wedivo_pulau_sehati.sql` was applied to the configured database.
+The database and `/api/catalog` verify the published `Ko‘ngillar oroli` entry at
+15,000,000 UZS with wedding category and wedding-only compatibility. The
+published preview route returns successfully. Focused adapter tests pass 2/2,
+TypeScript check and production build pass, and source adapter/template syntax
+checks pass. No external deployment or live payment activation occurred.

@@ -1,9 +1,10 @@
 import {
   getContent,
+  pulauSehatiDataSchema,
   type Invitation,
   type Locale,
 } from "@taklifnoma/contracts";
-import { makeLegacyData } from "@/templates/anor/renderer";
+import { makeLegacyData } from "./legacy-data";
 import {
   eventInstant,
   eventWallDate,
@@ -24,6 +25,7 @@ export function makePulauSehatiPayload(
   },
 ) {
   const content = getContent(invitation, locale);
+  const extra = pulauSehatiDataSchema.parse(invitation.templateData["wedivo-pulau-sehati"] ?? {});
   const data = makeLegacyData(
     invitation,
     locale,
@@ -58,6 +60,20 @@ export function makePulauSehatiPayload(
           ...item,
           description: content.programDescriptions?.[item.id] ?? "",
         })),
+        pulau: {
+          inscription: { arabic: extra.inscription.arabic, text: extra.inscription.text[locale] ?? "", attribution: extra.inscription.attribution[locale] ?? "" },
+          profiles: extra.profiles.map((profile) => ({ ...profile, bio: profile.bio[locale] ?? "", stats: profile.stats.filter((stat) => stat.label.trim()).map((stat) => `${stat.label}: ${stat.value}`).join(", ") })),
+          hotels: extra.hotels,
+          media: extra.media,
+          giftWell: extra.giftWell,
+          secondaryEvent: { ...extra.secondaryEvent, mapUrl: /^https?:\/\//i.test(extra.secondaryEvent.mapUrl) ? extra.secondaryEvent.mapUrl : "" },
+          storyDates: extra.storyDates,
+          coInviters: extra.coInviters,
+          missions: extra.missions,
+          keepsakes: extra.keepsakes,
+          hashtag: extra.hashtag,
+        },
+        gift: { ...data.toyona, enabled: false },
       },
       locale,
       enabledLocales: invitation.enabledLocales,

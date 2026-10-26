@@ -34,7 +34,7 @@
   }
   function bind(p) {
     current=p;const d=p.data;const t=value=>window.PulauCopy.translate(value,p.locale);
-    window.PULAU={...p,compass:({'uz-Latn':['Sh','Shq','J','G‘'],'uz-Cyrl':['Ш','Шқ','Ж','Ғ'],en:['N','E','S','W'],ru:['С','В','Ю','З']}[p.locale]),gallery:d.gallery.filter(item=>safeUrl(item.src)),deadline:d.rsvp.deadline || '',timeLabel:d.date.time,translate:t,storyIds:d.story.map((_,i)=>i+1)};
+    window.PULAU={...p,compass:({'uz-Latn':['Sh','Shq','J','G‘'],'uz-Cyrl':['Ш','Шқ','Ж','Ғ'],en:['N','E','S','W'],ru:['С','В','Ю','З']}[p.locale]),gallery:d.gallery.filter(item=>safeUrl(item.src)),deadline:d.rsvp.deadline || '',timeLabel:d.date.time,secondaryEvent:{...d.pulau?.secondaryEvent,timeLabel:d.pulau?.secondaryEvent?.time || ''},translate:t,storyIds:d.story.map((_,i)=>i+1)};
     document.documentElement.lang=p.locale;if(p.reducedMotion)document.documentElement.dataset.reducedMotion='true';
     const couple=[d.groom,d.bride].filter(Boolean).join(' & ');
     if(Math.max(d.groom.length,d.bride.length)>22){$('hero-title').style.fontSize='clamp(26px,9.4vw,44px)';for(const who of ['groom','bride'])$('cs-'+who+'-name').style.fontSize='clamp(24px,8vw,36px)';$('cover-names').style.fontSize='clamp(18px,5.8vw,28px)';}
@@ -56,8 +56,22 @@
     for(const who of ['groom','bride']) {
       for(const id of ['class','origin','skill-row','item-row','ig'])show('cs-'+who+'-'+id,false);
     }
-    // Unsupported creator-specific fields remain in the source DOM, with explicit gaps in README.
-    for(const id of ['prasasti','hotel','video','misi','harta','gifts'])section(id,false);
+    const extra=d.pulau || {};
+    text('quote-arabic',extra.inscription?.arabic);text('quote-text',extra.inscription?.text);text('quote-source',extra.inscription?.attribution);
+    for(const [index,who] of ['groom','bride'].entries()) {const profile=extra.profiles?.[index] || {};text('cs-'+who+'-parents',profile.bio || d.hosts);text('cs-'+who+'-class-text',profile.characterClass);text('cs-'+who+'-origin-text',profile.origin);text('cs-'+who+'-skill',profile.skill);text('cs-'+who+'-item',profile.item);text('cs-'+who+'-stats-src',profile.stats);show('cs-'+who+'-class',!!profile.characterClass);show('cs-'+who+'-origin',!!profile.origin);show('cs-'+who+'-skill-row',!!profile.skill);show('cs-'+who+'-item-row',!!profile.item);}
+    section('prasasti',!!(extra.inscription?.arabic || extra.inscription?.text));
+    for(const [index,hotel] of (extra.hotels || []).entries()) {const n=index+1;text(`inn-${n}-name`,hotel.name);text(`inn-${n}-addr-text`,hotel.address);text(`inn-${n}-dist-text`,hotel.distance);text(`inn-${n}-price-text`,hotel.price);text(`inn-${n}-note`,hotel.note);if(safeUrl(hotel.bookingUrl))$(`inn-${n}-link`).href=safeUrl(hotel.bookingUrl);else $(`inn-${n}-link`).hidden=true;}
+    section('hotel',(extra.hotels || []).some(h=>h.name));
+    text('cr-coinviters',extra.coInviters);show('cr-co',!!extra.coInviters);
+    text('vid-intro',extra.media?.intro);$('vid-el').setAttribute('data-src',safeUrl(extra.media?.videoUrl));if(safeUrl(extra.media?.liveUrl))$('vid-live-link').href=safeUrl(extra.media.liveUrl);section('video',!!(extra.media?.videoUrl || extra.media?.liveUrl));
+    for(let n=1;n<=5;n++){const item=extra.missions?.[n-1];text(`mq-${n}-title`,item?.title);text(`mq-${n}-desc`,item?.description);text(`mq-${n}-reward`,item?.reward);}
+    section('misi',(extra.missions || []).some(m=>m.title || m.description));
+    for(let n=1;n<=6;n++){const item=extra.keepsakes?.[n-1];text(`hj-${n}-name`,item?.name);text(`hj-${n}-story`,item?.anecdote);text(`hj-${n}-icon`,item?.icon);}
+    section('harta',(extra.keepsakes || []).some(k=>k.name));text('cr-hashtag-t',extra.hashtag);show('cr-hashtag-row',!!extra.hashtag);
+    section('gifts',!!extra.giftWell?.enabled);
+    text('gift-amount-lbl',extra.giftWell?.currencyLabel || 'UZS');
+    const giftNotice={"uz-Latn":"Bu sovg‘a niyati egasiga yuboriladi; pul o‘tkazilmaydi.","uz-Cyrl":"Бу совға нияти эгасига юборилади; пул ўтказилмайди.",en:"This records a gift intention for the hosts; no money is transferred.",ru:"Это только намерение подарка для хозяев; деньги не переводятся."}[p.locale];
+    text('gifts-intro',giftNotice);text('gift-ok-title',({"uz-Latn":"Niyatingiz yuborildi","uz-Cyrl":"Ниятингиз юборилди",en:"Intention sent",ru:"Намерение отправлено"})[p.locale]);text('gift-ok-text',giftNotice);
     section('kisah',d.story.length>0);
     const prototype=$('ach-4');
     for(let n=5;n<=d.story.length;n++) {
@@ -68,10 +82,10 @@
     }
     for(let n=1;n<=Math.max(4,d.story.length);n++) {
       const story=d.story[n-1];show('ach-'+n,!!story);
-      if(story) { $('ach-'+n).dataset.itemId=story.id;text('ach-'+n+'-title',story.title);text('ach-'+n+'-text',story.text); }
+      if(story) { $('ach-'+n).dataset.itemId=story.id;text('ach-'+n+'-title',story.title);text('ach-'+n+'-text',story.text);text('ach-'+n+'-date',d.pulau?.storyDates?.[story.id] || ''); }
     }
     text('wedivo-rundown-data',JSON.stringify(d.program.map(row=>({id:row.id,title:row.title,description:row.description,date:p.date,startTime:row.time,isAllDay:false}))));
-    show('ev-2',false);text('ev-2-name','');show('ev-note',false);show('ev-reward',false);
+    const second=extra.secondaryEvent || {};show('ev-2',!!second.enabled && !!second.label && !!second.date);text('ev-2-name',second.label);text('ev-2-venue-name',second.venueName);text('ev-2-addr',second.address);show('ev-note',false);show('ev-reward',false);
     section('rsvp',d.rsvp.enabled);section('wishes',d.wishesEnabled);
     show('rsvp-pax-fld',false);show('rsvp-pax-row',false);show('member-pax',false);show('rsvp-checkin',false);show('wish-more',false);
     $('rsvp-pax').value='1';$('rsvp-name').value=p.guestName || '';$('wish-name').value=p.guestName || '';
@@ -126,7 +140,7 @@
     catch{feedback(form,ui(1));}
     finally{delete form.dataset.sending;form.querySelector('[type=submit]').disabled=false;}
   });
-  $('gift-form').addEventListener('submit',event=>event.preventDefault());
+  $('gift-form').addEventListener('submit',async event=>{event.preventDefault();const form=event.currentTarget;if(!current || current.preview)return;if(form.dataset.sending)return;const input=new FormData(form);const body={name:input.get('senderName'),amount:Number(input.get('amount')),message:input.get('message')||''};if(current.guestToken)body.guestToken=current.guestToken;form.dataset.sending='true';form.querySelector('[type=submit]').disabled=true;try{const response=await fetch(`/api/public/invitations/${encodeURIComponent(current.invitationId)}/gift-intentions`,{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});if(!response.ok)throw Error();form.classList.add('is-submitted');form.reset();let node=form.querySelector('[data-platform-feedback]');if(!node){node=document.createElement('p');node.dataset.platformFeedback='';node.className='form-feedback';node.setAttribute('role','status');form.append(node);}node.textContent=giftNotice;}catch{let node=form.querySelector('[data-platform-feedback]');if(!node){node=document.createElement('p');node.dataset.platformFeedback='';node.className='form-feedback';node.setAttribute('role','status');form.append(node);}node.textContent=ui(1);}finally{delete form.dataset.sending;form.querySelector('[type=submit]').disabled=false;}});
   const accept=p=>{const next=JSON.stringify(p);if(next===fingerprint)return;if(fingerprint){window.name=JSON.stringify({type:ID+':update',payload:p});location.reload();return;}fingerprint=next;bind(p);};
   addEventListener('message',event=>{if(event.source===parent && event.origin===location.origin && event.data?.type===ID+':update')accept(event.data.payload);});
   let initial;try{initial=JSON.parse(window.name);}catch{/* The host supplies the first payload after frame load. */}

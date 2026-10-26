@@ -148,6 +148,28 @@ export const contentSchema = z.object({
 export type InvitationContent = z.infer<typeof contentSchema>;
 const localizedShortText = z.partialRecord(localeSchema, short);
 const localizedLongText = z.partialRecord(localeSchema, text);
+export type JsonValue = string | number | boolean | null | JsonValue[] | { [key: string]: JsonValue };
+function isJsonValue(value: unknown): value is JsonValue {
+  if (value === null || typeof value === "string" || typeof value === "boolean") return true;
+  if (typeof value === "number") return Number.isFinite(value);
+  if (Array.isArray(value)) return value.every(isJsonValue);
+  if (typeof value === "object") return Object.values(value).every(isJsonValue);
+  return false;
+}
+const pulauLocalizedText = z.partialRecord(localeSchema, text);
+export const pulauSehatiDataSchema = z.object({
+  inscription: z.object({ arabic: z.string().max(4000), text: pulauLocalizedText, attribution: pulauLocalizedText }).default({ arabic: "", text: {}, attribution: {} }),
+  profiles: z.array(z.object({ bio: pulauLocalizedText, characterClass: short, origin: short, stats: z.array(z.object({ label: short, value: z.number().int().min(0).max(10) })).max(6), skill: short, item: short })).length(2).default([{ bio: {}, characterClass: "", origin: "", stats: [], skill: "", item: "" }, { bio: {}, characterClass: "", origin: "", stats: [], skill: "", item: "" }]),
+  hotels: z.array(z.object({ name: short, address: z.string().max(1000), distance: short, price: short, bookingUrl: safeUrl, note: z.string().max(1000) })).max(2).default([]),
+  media: z.object({ videoUrl: safeUrl, liveUrl: safeUrl, intro: z.string().max(1000) }).default({ videoUrl: "", liveUrl: "", intro: "" }),
+  giftWell: z.object({ enabled: z.boolean(), currencyLabel: short }).default({ enabled: false, currencyLabel: "UZS" }),
+  secondaryEvent: z.object({ enabled: z.boolean(), date: z.string().max(50), time: z.string().max(10), label: short, venueName: short, address: z.string().max(1000), mapUrl: safeUrl }).default({ enabled: false, date: "", time: "", label: "", venueName: "", address: "", mapUrl: "" }),
+  storyDates: z.record(z.string().max(100), z.string().max(50)).default({}),
+  coInviters: z.string().max(1000).default(""),
+  missions: z.array(z.object({ title: short, description: z.string().max(1000), reward: short })).max(5).default([]),
+  keepsakes: z.array(z.object({ name: short, anecdote: z.string().max(1000), icon: z.enum(["tiket", "stik", "surat", "kerang", "kunci", "cincin", "bunga", "kamera"]) })).max(6).default([]),
+  hashtag: z.string().max(100).default(""),
+}).default({ inscription: { arabic: "", text: {}, attribution: {} }, profiles: [{ bio: {}, characterClass: "", origin: "", stats: [], skill: "", item: "" }, { bio: {}, characterClass: "", origin: "", stats: [], skill: "", item: "" }], hotels: [], media: { videoUrl: "", liveUrl: "", intro: "" }, giftWell: { enabled: false, currencyLabel: "UZS" }, secondaryEvent: { enabled: false, date: "", time: "", label: "", venueName: "", address: "", mapUrl: "" }, storyDates: {}, coInviters: "", missions: [], keepsakes: [], hashtag: "" });
 export const dressCodeSchema = z.object({
   enabled: z.boolean().default(false),
   style: localizedShortText.default({}),
@@ -182,6 +204,12 @@ export const invitationSchema = z
     revision: z.number().int().min(1).default(1),
     id: z.string().min(1).max(100),
     templateId: invitationTemplateIdSchema,
+    templateData: z.record(z.string(), z.custom<JsonValue>(isJsonValue)).default({}).superRefine((data, ctx) => {
+      if (data["wedivo-pulau-sehati"] !== undefined) {
+        const checked = pulauSehatiDataSchema.safeParse(data["wedivo-pulau-sehati"]);
+        if (!checked.success) ctx.addIssue({ code: "custom", path: ["wedivo-pulau-sehati"], message: "Invalid Pulau Sehati data" });
+      }
+    }),
     status: z.enum(["draft", "published", "archived"]),
     // Assigned exclusively by the publication service. Optional for older drafts.
     slug: z
@@ -374,6 +402,19 @@ export type TemplateDefinition = {
   published: boolean;
 };
 export const TEMPLATES: TemplateDefinition[] = [
+  {
+    id: "wedivo-pulau-sehati",
+    name: "Ko‘ngillar oroli",
+    description: "Sayr, kashfiyot va o‘z hikoyangiz bilan bezatilgan interaktiv to‘y taklifnomasi.",
+    previewImage: "/templates/wedivo-pulau-sehati/preview.png",
+    previewEventType: "wedding",
+    categoryIds: ["wedding"],
+    supportedEventTypes: ["wedding"],
+    priceMinor: 15000000,
+    currency: "UZS",
+    accent: "#35b7d6",
+    published: false,
+  },
   {
     id: "oltin-darvoza-ortidagi-baxt",
     name: "Oltin darvoza ortidagi baxt",
@@ -1958,6 +1999,7 @@ export function createInvitation(
     venue: { latitude: null, longitude: null, mapUrl: "" },
     program: [],
     artistLineup: [],
+    templateData: {},
     story: [],
     gallery: [],
     music: { enabled: false, assetId: null, url: "", filename: "" },

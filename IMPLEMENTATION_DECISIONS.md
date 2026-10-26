@@ -1602,3 +1602,34 @@ Development agents are distinct from production queue workers. The running app w
   the captured reduced-motion rules and package preview path were checked.
   No external deployment or live payment activation was performed.
 
+
+## Pulau Sehati source-field support (2026-10-27)
+
+- User requirement: preserve the selected reference's source-present authoring
+  fields and interactions; expand the shared contract/editor/persistence before
+  publication when the existing invitation model cannot store them.
+- Implementation: template-specific JSON persists under
+  `templateData["wedivo-pulau-sehati"]`, with a typed validation schema and
+  creator controls for inscription, couple profiles, hotels, video/live URLs,
+  missions, keepsakes and hashtag. Existing invitation JSON storage and
+  template-switch preservation carry these fields through.
+- The source gift well accepts a money amount through simulated success. No
+  amount-transfer service was approved or activated; do not claim a transfer.
+  Implementation records its sender/amount/note as a private gift intention
+  visible to the invitation owner, and explicitly states that no money moves.
+  The second ceremony, story dates and co-inviters are stored in the same
+  template namespace. Video is URL-based because no creator video upload path
+  is available. The dormant source check-in button stays hidden because it has
+  no handler or platform check-in service.
+- Verification update (2026-10-27): the first isolated Chrome editor pass found
+  that blank Pulau data failed because `hashtag` had no default. Setting its
+  schema default to an empty string fixed studio initialization. Browser QA then
+  verified the fresh studio editor, Pulau creator fields, live iframe preview
+  updates, gift-well source panel and truthful no-transfer copy, and restored
+  local draft values after reload. The user also confirmed the preview opening
+  renderer and Uzbek source panel. Additive migration
+  `0157_publish_wedivo_pulau_sehati.sql` is applied. The database and
+  `/api/catalog` confirm published `Ko‘ngillar oroli` at 15,000,000 UZS with
+  wedding category/event support; `/preview` returns successfully. Focused
+  adapter checks pass 2/2, TypeScript and production build pass. No external
+  deployment or live payment activation occurred.
