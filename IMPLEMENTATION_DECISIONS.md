@@ -1470,6 +1470,15 @@ Development agents are distinct from production queue workers. The running app w
   remain unavailable because `DATABASE_URL` and the local app server are
   absent; keep the template unpublished until those checks pass.
 
+- Publication follow-up (2026-10-26): the database is now configured in the
+  ignored local env. Butterfly is published by migration
+  `0143_publish_invitate_butterfly.sql`; wedding-only metadata and 15,000,000
+  UZS are verified. Focused source checks pass 3/3, web typecheck passes, and
+  authenticated creator save → publish → public-render → reopen passes 1/1.
+  RSVP/wishes remain deferred. The known reduced-motion gate presentation
+  difference is recorded for the user's manual review. No external deployment
+  or live payment activation occurred.
+
 ## Invitate Fairy implementation status (2026-10-23)
 
 - Exact source is Invitate `Web invitations/invitate.uz/fairy.html` with its
@@ -1522,3 +1531,4 @@ Development agents are distinct from production queue workers. The running app w
   optional receipt host. Native OS reduced-motion emulation was unavailable;
   the captured reduced-motion rules and package preview path were checked.
   No external deployment or live payment activation was performed.
+

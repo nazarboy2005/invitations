@@ -72,28 +72,28 @@ Escape-close behavior were also checked.
 Reduced motion intentionally suppresses the source's animated butterflies and
 gate-opening transition. The source's static reduced-motion page retains the
 full gate image overlay, while the adapted page hides the gate overlay to avoid
-blocking interaction; that visible accessibility difference remains. The
+blocking interaction; the user will review this accessibility difference
+manually. The
 captured sample also has an internal countdown-date mismatch (its displayed
 date and source countdown target differ); the adapter binds the authored event
-date consistently instead. Full invitation fields still need a product
-decision before publication (see above).
+date consistently instead. The user-approved source-absence decision is to keep
+program, RSVP, gift, dress-code, contact, and wishes sections hidden because
+they are absent from the captured design.
 
 ## Release status
 
-Private and unselectable. The source directory remains untouched. The typed
-catalog entry and additive `0129_register_butterfly_template.sql` migration
-register `butterfly` for wedding events in the wedding category at 15,000,000
-UZS. The configured database confirms migration 0129 is applied and the row is
-still unpublished; the template remains unselectable because field/service
-gaps and full release verification are unresolved.
+Published in the configured catalog by additive migration
+`0143_publish_invitate_butterfly.sql` at 15,000,000 UZS for wedding events in
+the wedding category. The authenticated creator save → publish → public-render
+→ reopen integration passes. The source directory remains untouched. RSVP and
+wishes checks remain deferred by the user's decision; the user will review the
+known reduced-motion gate difference manually. No external deployment or live
+payment activation was performed.
 
 `node --check apps/web/public/templates/butterfly/assets/js/butterfly.js`
 passes. The focused Butterfly suite passes 3/3, and a scoped TypeScript check
 of its adapter/renderer passes. The database-backed catalog check confirms
-Butterfly is excluded from the public catalog and present when unpublished
-entries are requested. The local preview route rendered the shared sample;
+Butterfly is published and available. The local preview route rendered the shared sample;
 desktop and portrait openings were inspected, and the gallery lightbox opened
 and closed with Escape without browser page errors. The workspace-wide web
-typecheck currently fails on a stale `.next/types/validator.ts` reference to
-`src/app/safir-qa/page.js`; its generated route output is shared with concurrent
-work. No publication, external deployment, or payment change was made.
+typecheck now passes. No external deployment or payment activation was made.

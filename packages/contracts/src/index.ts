@@ -562,7 +562,7 @@ export const TEMPLATES: TemplateDefinition[] = [
     priceMinor: 15000000,
     currency: "UZS",
     accent: "#d64d89",
-    published: false,
+    published: true,
   },
   {
     id: "girlsparty",
@@ -1414,7 +1414,7 @@ export const TEMPLATES: TemplateDefinition[] = [
     priceMinor: 15000000,
     currency: "UZS",
     accent: "#6e1f2b",
-    published: false,
+    published: true,
   },
   {
     id: "palov",

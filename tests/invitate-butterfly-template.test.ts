@@ -3,10 +3,10 @@ import { readFileSync, statSync } from "node:fs";
 import test from "node:test";
 import { templateById } from "../packages/contracts/src/index";
 
-test("Butterfly is a private wedding-only catalog template", () => {
+test("Butterfly is a published wedding-only catalog template", () => {
   const template = templateById("butterfly");
   assert.ok(template);
-  assert.equal(template.published, false);
+  assert.equal(template.published, true);
   assert.equal(template.priceMinor, 15_000_000);
   assert.deepEqual(template.categoryIds, ["wedding"]);
   assert.deepEqual(template.supportedEventTypes, ["wedding"]);

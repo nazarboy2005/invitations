@@ -31,13 +31,13 @@ test("Chorlove Osh package retains source sections and omits guest headcount", (
   assert.match(bridge, /instagram = contacts\.find\(\(c\) => c\.type === "instagram"\)/);
 });
 
-test("Chorlove Osh remains a distinct unpublished Osh template", () => {
+test("Chorlove Osh is a distinct published Osh template", () => {
   const osh = TEMPLATES.find((template) => template.id === "osh");
   assert.ok(osh);
   assert.deepEqual(osh.categoryIds, ["osh"]);
   assert.deepEqual(osh.supportedEventTypes, ["osh"]);
   assert.equal(osh.previewImage, "/templates/chorlove/osh/preview.jpg");
-  assert.equal(osh.published, false);
+  assert.equal(osh.published, true);
   assert.notEqual(osh.id, "palov");
   assert.notEqual(osh.id, "invitate-palov");
 });
