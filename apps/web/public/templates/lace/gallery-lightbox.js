@@ -235,8 +235,6 @@
       if (closing) return;
       closing = true;
       window.clearInterval(slideshow);
-      window.removeEventListener("keydown", onDocumentKeydown, true);
-      document.body.removeEventListener("keydown", onDocumentKeydown, true);
       portal.classList.remove("yarl__portal_open");
       document.body.classList.remove("yarl__no_scroll");
       templateRoot?.classList.remove("lace-lightbox-open");
@@ -405,17 +403,22 @@
         moveOffsets(-event.deltaX / zoom, -event.deltaY / zoom, false);
       }
     }, { passive: true });
-    const onDocumentKeydown = (event) => {
-      if (event.key === "Tab" && document.activeElement === document.body) {
-        event.preventDefault();
-        const focusables = [...portal.querySelectorAll("button:not(:disabled):not([tabindex=\"-1\"])")];
-        (event.shiftKey ? focusables.at(-1) : focusables[0])?.focus({ preventScroll: true });
-        return;
-      }
-    };
-    window.addEventListener("keydown", onDocumentKeydown, true);
-    document.body.addEventListener("keydown", onDocumentKeydown, true);
     portal.addEventListener("keydown", (event) => {
+      if (event.key === "Tab") {
+        const focusables = [...portal.querySelectorAll("button:not(:disabled):not([tabindex=\"-1\"])")];
+        const first = focusables[0];
+        const last = focusables.at(-1);
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last?.focus({ preventScroll: true });
+          return;
+        }
+        if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first?.focus({ preventScroll: true });
+          return;
+        }
+      }
       const pan = options.keyboardMoveDistance;
       if (zoom > options.minZoom && event.key.startsWith("Arrow")) {
         event.preventDefault();
