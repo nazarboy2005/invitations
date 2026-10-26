@@ -82,8 +82,14 @@
 
 - User approved replacing the standalone process block with a photographic
   invitation scene inspired by their supplied reference: left-aligned serif
-  heading, pomegranate action, and three translucent numbered cards. Retain
-  “Katta kun sari. Uch kichik qadam.” and use a stacked phone layout.
+  heading and pomegranate action. Retain “Katta kun sari. Uch kichik qadam.”
+  and use a stacked phone layout.
+- Follow-up redesign (2026-10-26): replace the three boxed cards only with open,
+  borderless numbered image/text steps. Preserve the existing headline, copy,
+  photographic setting and their positions. Use the confirmed three Uzbek steps.
+  Add a single thin reversible scroll-progress timeline below them; use a vertical
+  rail beside the stacked phone steps. Keep all content readable, including without
+  JavaScript or with reduced motion. No scroll pinning or extra animation dependency.
 - Join this section directly to the cinematic features as its closing section.
   Remove the intervening “Ezgu niyatga qulay bir yo‘l” to‘yona promotion and
   sample/disclaimer text. This removes homepage copy only, not product features.

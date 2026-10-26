@@ -1,0 +1,162 @@
+"use client";
+
+import Link from "next/link";
+import { useEffect, useRef } from "react";
+import { InvitationStepArtwork } from "./invitation-step-artwork";
+import {
+  invitationProcessProgress,
+  invitationStepState,
+} from "./invitation-process-motion";
+import styles from "./invitation-steps.module.css";
+
+const steps = [
+  {
+    title: "Ko‘nglingizga mosini tanlang",
+    text: "Turli uslubdagi nafis dizaynlar. Katta kuningiz uchun eng mosini toping.",
+    href: "/templates",
+  },
+  {
+    title: "O‘z hikoyangizni qo‘shing",
+    text: "Ismlar, sana, manzil va samimiy so‘zlaringiz. Har bir tafsilotda siz.",
+    href: "/studio",
+  },
+  {
+    title: "Yaqinlaringizni chorlang",
+    text: "Tayyor taklifnomangiz havolasini ulashing. Quvonchli kunga birga hozirlik ko‘ring.",
+    href: "/dashboard",
+  },
+];
+
+/** A single, reversible scroll value drives the rail and all three illustrations. */
+export function InvitationProcess() {
+  const process = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const root = process.current;
+    if (!root) return;
+    const track = root.closest<HTMLElement>("[data-invitation-track]");
+    const stage = root.closest<HTMLElement>("section");
+    if (!track || !stage) return;
+    const items = Array.from(root.querySelectorAll<HTMLElement>("[data-step]"));
+    const reduced = matchMedia("(prefers-reduced-motion: reduce)");
+    let frame = 0;
+    let visible = false;
+    let start = 0;
+    let distance = 1;
+    let pinned = false;
+
+    function draw() {
+      frame = 0;
+      if (!root || !visible || document.hidden || reduced.matches) return;
+      const phase = (scrollY - start) / distance;
+      // Brief holds at either end let the first and last unlocked steps settle.
+      const progress = invitationProcessProgress(phase, pinned);
+      root.style.setProperty("--progress", progress.toFixed(5));
+      items.forEach((item, i) => {
+        const { unlock, focus, active } = invitationStepState(progress, i);
+        item.style.setProperty("--unlock", unlock.toFixed(4));
+        item.style.setProperty("--focus", focus.toFixed(4));
+        item.dataset.active = String(active);
+      });
+    }
+
+    function schedule() {
+      if (visible && !reduced.matches && !frame)
+        frame = requestAnimationFrame(draw);
+    }
+
+    function measure() {
+      if (!root || !track || !stage) return;
+      const rect = root.getBoundingClientRect();
+      const stageHeight = stage.offsetHeight;
+      // If all three steps cannot fit, preserve normal scrolling and readability.
+      pinned = !reduced.matches && rect.height + 32 <= innerHeight;
+      const stageTop = Math.min(0, innerHeight - stageHeight);
+      distance = pinned ? innerHeight * 0.85 : rect.height + innerHeight * 0.12;
+      track.style.setProperty("--stage-top", `${stageTop}px`);
+      track.style.setProperty("--stage-height", `${stageHeight}px`);
+      track.style.setProperty("--scroll-distance", `${distance}px`);
+      track.dataset.pinned = String(pinned);
+      start = pinned
+        ? track.getBoundingClientRect().top + scrollY - stageTop
+        : rect.top + scrollY - innerHeight * 0.78;
+      // Mobile rail terminates exactly at the first/last illustration centres.
+      const first = items[0];
+      const last = items[items.length - 1];
+      if (first && last) {
+        root.style.setProperty(
+          "--rail-top",
+          `${first.offsetTop + first.offsetHeight / 2}px`,
+        );
+        root.style.setProperty(
+          "--rail-height",
+          `${last.offsetTop + last.offsetHeight / 2 - first.offsetTop - first.offsetHeight / 2}px`,
+        );
+      }
+      draw();
+    }
+
+    function preference() {
+      if (!root) return;
+      root.dataset.motion = String(!reduced.matches);
+      measure();
+    }
+
+    const intersection = new IntersectionObserver(
+      ([entry]) => {
+        visible = entry.isIntersecting;
+        if (visible) measure();
+      },
+      { rootMargin: "100px 0px" },
+    );
+    const resize = new ResizeObserver(measure);
+    intersection.observe(root);
+    resize.observe(root);
+    resize.observe(stage);
+    items.forEach((item) => resize.observe(item));
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", measure);
+    document.addEventListener("visibilitychange", schedule);
+    reduced.addEventListener("change", preference);
+    preference();
+
+    return () => {
+      cancelAnimationFrame(frame);
+      intersection.disconnect();
+      resize.disconnect();
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", measure);
+      document.removeEventListener("visibilitychange", schedule);
+      reduced.removeEventListener("change", preference);
+      delete track.dataset.pinned;
+    };
+  }, []);
+
+  return (
+    <div ref={process} className={styles.process} data-invitation-process>
+      <ol className={styles.steps}>
+        {steps.map(({ title, text, href }, index) => (
+          <li key={title} data-step>
+            <Link href={href} className={styles.step}>
+              <span className={styles.artwork} aria-hidden="true">
+                <InvitationStepArtwork step={index} />
+              </span>
+              <div className={styles.stepCopy}>
+                <span className={styles.number}>0{index + 1}</span>
+                <h3>{title}</h3>
+                <p>{text}</p>
+              </div>
+            </Link>
+          </li>
+        ))}
+      </ol>
+      <div className={styles.timeline} aria-hidden="true">
+        <span className={styles.fill} />
+        <i className={styles.marker} />
+        <i className={styles.marker} />
+        <i className={styles.marker} />
+        <span className={styles.ball} />
+      </div>
+    </div>
+  );
+}

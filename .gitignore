@@ -1,6 +1,5 @@
 node_modules/
-.next/
-.next-verify/
+.next*/
 .env
 .env.*
 !.env.example
@@ -10,4 +9,5 @@ coverage/
 test-results/
 playwright-report/
 *.tsbuildinfo
+.tmp-*.png
 Invitations - this folder will be removed from production/
