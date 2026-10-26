@@ -1301,7 +1301,7 @@ export const TEMPLATES: TemplateDefinition[] = [
     currency: "UZS",
     accent: "#df9c9b",
     previewImage: "/templates/love-sakura/catalog-opening.png",
-    published: false,
+    published: true,
   },
   {
     id: "luxury-gold",

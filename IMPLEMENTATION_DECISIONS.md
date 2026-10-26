@@ -910,16 +910,26 @@ References checked on 2026-10-19: Google autocomplete https://developers.google.
 - Confirmed clarification: music is optional for each invitation. Creators may leave music off entirely; no audio upload or track selection is required to save or publish an invitation. If they want music, allow them to upload their preferred audio file and use it as background music.
 - Confirmed clarification (2026-10-20): when music is enabled, creators may either upload a new track or choose one of their previously uploaded audio tracks from a reusable personal music library. A track stays owned by its creator and can be reused across that creator's invitations; do not expose another creator's uploads in the picker.
 - User requirement (2026-10-21): administrators must be able to add shared music tracks and choose which tracks are available in creators' music selectors. The creator selector combines active platform-curated tracks with that creator's own uploads; personal tracks remain private and reusable only by their owner. Platform tracks are uploaded to R2, stored as catalog entries, and can be hidden from new selections without removing existing invitation references.
-- User requirement (2026-10-20): preserve and check each reference template's own music and mute/play control. Every full catalog template preview must have default preview music, even when the source capture only has a toggle and no bundled track. Start it only after the visitor opens/plays the invitation; never autoplay on catalog load.
+- User requirement (2026-10-20): preserve and check each reference template's own music and mute/play control. Every full catalog template preview must have default preview music, even when the source capture only has a toggle and no bundled track. Catalog preview music starts only after the visitor opens/plays the preview; never autoplay on catalog load.
+- User correction (2026-10-26): for every published invitation with creator-enabled music, attempt playback automatically when the public invitation opens. Guests can pause/stop it and start it again with the template's control. If the browser blocks autoplay, keep the template control available and retry on guest interaction where supported; never auto-restart a track after it has started successfully and the guest paused it. Invitations with music disabled remain silent. This public invitation rule is separate from catalog preview music.
 - Catalog preview music is presentation-only and must not be saved into an invitation or override creator music settings. Creators may separately choose a clearly licensed platform library track or one of their own uploaded tracks for an invitation.
 - The default catalog soundtrack is one global setting shared by all templates. Changing that single setting updates every supported full preview; do not maintain separate per-template defaults unless the user later requests them. This global preview setting is separate from each creator's invitation music.
 - Current implementation uses "Emotional Piano" by triangelx, verified as CC0 1.0 on its Wikimedia Commons file page, for catalog previews and as an optional platform-library selection. Keep the source/license record in `apps/web/src/modules/catalog/catalog-music.ts`; replace the file if its license or availability is later disputed.
 - Keep the uploaded track linked to the invitation independently of its template; switching designs must retain the selection, asset, and enabled/disabled choice. Template defaults must not enable music against the creator's choice.
 - Recommended controls: preview, replace/remove the track, and disable music; guests receive accessible play/pause or mute controls.
 - Store audio in R2 and reference it through the proposed `media_assets` / `invitation_music` records. Validate actual audio content and size/duration; supported upload formats and exact limits remain undecided. Recommend MP3 playback output, converting accepted source formats in a background worker where necessary.
-- Only when the creator has enabled music, start playback from the guest's explicit opening interaction (for example, "Taklifnomani ochish") or Play button. Browsers can block audible autoplay; handle playback failure and leave a usable Play control. Never promise sound immediately on page load or force playback after the guest pauses it. Invitations without music must not show inactive audio controls.
+- Only when the creator has enabled music, attempt automatic playback when the public invitation opens. Browsers can block audible autoplay; handle failure and preserve a usable Play control. Never force playback after the guest pauses a track that has started successfully. Invitations without music must not show inactive audio controls.
 - Audio loading/conversion must not block displaying the invitation. Creator replacement/removal follows the existing editing deadline.
 - Browser behavior reference checked on 2026-10-19: https://developer.mozilla.org/en-US/docs/Web/Media/Guides/Autoplay. Requirement/design record only; no upload or player implemented.
+
+## Source-supported template sections
+
+- User correction (2026-10-26): a template must not add a To'yana/gift card
+  section or related creator-facing fields unless its original source includes
+  that section. Compare each published template with its matching original
+  capture and remove template-specific gift UI/adapters when the source has
+  none. Preserve gift support only for source designs that include it; this
+  does not remove the shared invitation gift data used by other templates.
 
 ## Voice greeting removal
 
@@ -1414,11 +1424,11 @@ Development agents are distinct from production queue workers. The running app w
   intentionally not copied as creator media. The referenced `golden-hour.php`
   endpoint is absent and replaced by the shared RSVP API adapter. Use ID
   `golden-hour`, birthday category, and birthday-only event compatibility.
-- Package behavior now adapts the captured countdown, reveal observer, and
-  music toggle from the original script in `golden-hour-source.js`; the narrow
-  app adapter maps typed data and replaces the missing PHP RSVP endpoint with
-  shared RSVP/wishes APIs. Autoplay/first-click playback is removed for the
-  established user-interaction-only music rule.
+- Package behavior adapts the captured countdown, reveal observer, and music
+  toggle from the original script in `golden-hour-source.js`; the narrow app
+  adapter maps typed data and replaces the missing PHP RSVP endpoint with
+  shared RSVP/wishes APIs. Public invitations now attempt playback on open under
+  the 2026-10-26 music requirement; the template toggle remains available.
 - Migration `0127_register_golden_hour_template.sql` is applied to the
   configured database. The catalog and
   shared Invitate renderer use the same localized contract adapter and

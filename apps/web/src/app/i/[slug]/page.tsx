@@ -62,7 +62,7 @@ export default async function InvitationPage({
   if (invitation.templateId === "oltin-darvoza-ortidagi-baxt")
     return (
       <>
-        <InvitationViewTracker invitationId={result.id} />
+        <InvitationViewTracker invitationId={result.id} musicUrl={invitation.music.enabled ? invitation.music.url : ""} />
         <OltinDarvozaInvitation
           invitation={invitation}
           invitationId={result.id}
@@ -75,7 +75,7 @@ export default async function InvitationPage({
   if (invitation.templateId === "gulli-darvoza")
     return (
       <>
-        <InvitationViewTracker invitationId={result.id} />
+        <InvitationViewTracker invitationId={result.id} musicUrl={invitation.music.enabled ? invitation.music.url : ""} />
         <GulliDarvozaInvitation
           invitation={invitation}
           invitationId={result.id}
@@ -88,40 +88,40 @@ export default async function InvitationPage({
   if (invitation.templateId === "ming-bir-kecha")
     return (
       <>
-        <InvitationViewTracker invitationId={result.id} />
+        <InvitationViewTracker invitationId={result.id} musicUrl={invitation.music.enabled ? invitation.music.url : ""} />
         <MingBirKechaInvitation invitation={invitation} invitationId={result.id} locale={locale} guestName={guestName} guestToken={query.g} />
       </>
     );
   if (invitation.templateId === "shisha-bog")
-    return <><InvitationViewTracker invitationId={result.id} /><ShishaBogInvitation invitation={invitation} invitationId={result.id} locale={locale} guestName={guestName} guestToken={query.g} /></>;
+    return <><InvitationViewTracker invitationId={result.id} musicUrl={invitation.music.enabled ? invitation.music.url : ""} /><ShishaBogInvitation invitation={invitation} invitationId={result.id} locale={locale} guestName={guestName} guestToken={query.g} /></>;
   if (invitation.templateId === "kapadokiya-tongi")
-    return <><InvitationViewTracker invitationId={result.id} /><KapadokiyaTongiInvitation invitation={invitation} invitationId={result.id} locale={locale} guestName={guestName} guestToken={query.g} /></>;
+    return <><InvitationViewTracker invitationId={result.id} musicUrl={invitation.music.enabled ? invitation.music.url : ""} /><KapadokiyaTongiInvitation invitation={invitation} invitationId={result.id} locale={locale} guestName={guestName} guestToken={query.g} /></>;
   if (invitation.templateId === "buxoro-ravoq")
-    return <><InvitationViewTracker invitationId={result.id} /><BuxoroRavoqInvitation invitation={invitation} invitationId={result.id} locale={locale} guestName={guestName} guestToken={query.g} /></>;
+    return <><InvitationViewTracker invitationId={result.id} musicUrl={invitation.music.enabled ? invitation.music.url : ""} /><BuxoroRavoqInvitation invitation={invitation} invitationId={result.id} locale={locale} guestName={guestName} guestToken={query.g} /></>;
   if (invitation.templateId === "jannat-bogi")
-    return <><InvitationViewTracker invitationId={result.id} /><JannatBogiInvitation invitation={invitation} invitationId={result.id} locale={locale} guestName={guestName} guestToken={query.g} /></>;
+    return <><InvitationViewTracker invitationId={result.id} musicUrl={invitation.music.enabled ? invitation.music.url : ""} /><JannatBogiInvitation invitation={invitation} invitationId={result.id} locale={locale} guestName={guestName} guestToken={query.g} /></>;
   if (invitation.templateId === "tojmahal-oltin-darvozasi")
-    return <><InvitationViewTracker invitationId={result.id} /><TojmahalOltinDarvozasiInvitation invitation={invitation} invitationId={result.id} locale={locale} guestName={guestName} guestToken={query.g} /></>;
+    return <><InvitationViewTracker invitationId={result.id} musicUrl={invitation.music.enabled ? invitation.music.url : ""} /><TojmahalOltinDarvozasiInvitation invitation={invitation} invitationId={result.id} locale={locale} guestName={guestName} guestToken={query.g} /></>;
   if (invitation.templateId === "samarqand-peshtoqi")
-    return <><InvitationViewTracker invitationId={result.id} /><SamarqandPeshtoqInvitation invitation={invitation} invitationId={result.id} locale={locale} guestName={guestName} guestToken={query.g} /></>;
+    return <><InvitationViewTracker invitationId={result.id} musicUrl={invitation.music.enabled ? invitation.music.url : ""} /><SamarqandPeshtoqInvitation invitation={invitation} invitationId={result.id} locale={locale} guestName={guestName} guestToken={query.g} /></>;
   if (invitation.templateId === "andalus-darvozasi")
     return (
       <>
-        <InvitationViewTracker invitationId={result.id} />
+        <InvitationViewTracker invitationId={result.id} musicUrl={invitation.music.enabled ? invitation.music.url : ""} />
         <AndalusDarvozasiInvitation invitation={invitation} invitationId={result.id} locale={locale} guestName={guestName} guestToken={query.g} />
       </>
     );
   if (invitation.templateId === "zarrin-doppi")
     return (
       <>
-        <InvitationViewTracker invitationId={result.id} />
+        <InvitationViewTracker invitationId={result.id} musicUrl={invitation.music.enabled ? invitation.music.url : ""} />
         <ZarrinDoppiInvitation invitation={invitation} invitationId={result.id} locale={locale} guestName={guestName} guestToken={query.g} />
       </>
     );
   if (invitation.templateId === "anor")
     return (
       <>
-        <InvitationViewTracker invitationId={result.id} />
+        <InvitationViewTracker invitationId={result.id} musicUrl={invitation.music.enabled ? invitation.music.url : ""} />
         <AnorInvitation
           invitation={invitation}
           invitationId={result.id}
@@ -134,7 +134,7 @@ export default async function InvitationPage({
   if (isMarxabaTemplate(invitation.templateId))
     return (
       <>
-        <InvitationViewTracker invitationId={result.id} />
+        <InvitationViewTracker invitationId={result.id} musicUrl={invitation.music.enabled ? invitation.music.url : ""} />
         <MarxabaInvitation
           invitation={invitation}
           invitationId={result.id}
@@ -148,7 +148,7 @@ export default async function InvitationPage({
   if (isInvitateTemplate(invitation.templateId))
     return (
       <>
-        <InvitationViewTracker invitationId={result.id} />
+        <InvitationViewTracker invitationId={result.id} musicUrl={invitation.music.enabled ? invitation.music.url : ""} />
         <InvitateInvitation
           invitation={invitation}
           invitationId={result.id}
@@ -162,7 +162,7 @@ export default async function InvitationPage({
   if (isChorloveTemplate(invitation.templateId))
     return (
       <>
-        <InvitationViewTracker invitationId={result.id} />
+        <InvitationViewTracker invitationId={result.id} musicUrl={invitation.music.enabled ? invitation.music.url : ""} />
         <ChorloveInvitation
           invitation={invitation}
           invitationId={result.id}
@@ -177,7 +177,7 @@ export default async function InvitationPage({
   if (invitation.templateId === "royal-burgundy-edition")
     return (
       <>
-        <InvitationViewTracker invitationId={result.id} />
+        <InvitationViewTracker invitationId={result.id} musicUrl={invitation.music.enabled ? invitation.music.url : ""} />
         <VelvetRoyaleInvitation
           invitation={invitation}
           invitationId={result.id}
@@ -190,7 +190,7 @@ export default async function InvitationPage({
   if (invitation.templateId === "olive-manor-edition")
     return (
       <>
-        <InvitationViewTracker invitationId={result.id} />
+        <InvitationViewTracker invitationId={result.id} musicUrl={invitation.music.enabled ? invitation.music.url : ""} />
         <OliveManorInvitation
           invitation={invitation}
           invitationId={result.id}
@@ -203,7 +203,7 @@ export default async function InvitationPage({
   if (invitation.templateId === "islamic-edition")
     return (
       <>
-        <InvitationViewTracker invitationId={result.id} />
+        <InvitationViewTracker invitationId={result.id} musicUrl={invitation.music.enabled ? invitation.music.url : ""} />
         <IslamicEditionInvitation
           invitation={invitation}
           invitationId={result.id}
@@ -216,7 +216,7 @@ export default async function InvitationPage({
   if (invitation.templateId === "manor-edition")
     return (
       <>
-        <InvitationViewTracker invitationId={result.id} />
+        <InvitationViewTracker invitationId={result.id} musicUrl={invitation.music.enabled ? invitation.music.url : ""} />
         <ManorInvitation
           invitation={invitation}
           invitationId={result.id}
@@ -229,7 +229,7 @@ export default async function InvitationPage({
   if (invitation.templateId === "osh-edition-v1")
     return (
       <>
-        <InvitationViewTracker invitationId={result.id} />
+        <InvitationViewTracker invitationId={result.id} musicUrl={invitation.music.enabled ? invitation.music.url : ""} />
         <OshEditionInvitation
           invitation={invitation}
           invitationId={result.id}
@@ -242,21 +242,21 @@ export default async function InvitationPage({
   if (invitation.templateId === "monochrome-editorial-edition")
     return (
       <>
-        <InvitationViewTracker invitationId={result.id} />
+        <InvitationViewTracker invitationId={result.id} musicUrl={invitation.music.enabled ? invitation.music.url : ""} />
         <MonochromeEditorialInvitation invitation={invitation} invitationId={result.id} locale={locale} guestName={guestName} guestToken={query.g} />
       </>
     );
   if (invitation.templateId === "amru-maruf-edition-v1")
     return (
       <>
-        <InvitationViewTracker invitationId={result.id} />
+        <InvitationViewTracker invitationId={result.id} musicUrl={invitation.music.enabled ? invitation.music.url : ""} />
         <AmruMarufEditionInvitation invitation={invitation} invitationId={result.id} locale={locale} guestName={guestName} />
       </>
     );
   if (invitation.templateId === "xatna-edition")
     return (
       <>
-        <InvitationViewTracker invitationId={result.id} />
+        <InvitationViewTracker invitationId={result.id} musicUrl={invitation.music.enabled ? invitation.music.url : ""} />
         <XatnaEditionInvitation invitation={invitation} invitationId={result.id} locale={locale} guestName={guestName} guestToken={query.g} />
       </>
     );
