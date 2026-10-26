@@ -4,6 +4,7 @@ import type { SessionResponse } from "@taklifnoma/contracts";
 import {
   loadClientSession,
   miniAppAdminDestination,
+  telegramLaunchData,
 } from "../apps/web/src/modules/session/client-session";
 
 const admin = {
@@ -50,7 +51,7 @@ test("Mini App admin entry requires a verified server role and preserves persona
   );
 });
 
-test("existing sessions retain their authentication age without a Mini App exchange or cached role", async () => {
+test("Mini App entry always checks signed identity before using a browser session; ordinary browser access still reads its session", async () => {
   const original = globalThis.fetch,
     paths: string[] = [];
   let signedIn = true;
@@ -63,10 +64,13 @@ test("existing sessions retain their authentication age without a Mini App excha
       (await loadClientSession("existing-admin-launch")).user?.isAdmin,
       true,
     );
-    assert.deepEqual(paths, ["/api/auth/session"]);
+    assert.deepEqual(paths, [
+      "/api/auth/telegram/mini-app",
+      "/api/auth/session",
+    ]);
     signedIn = false;
     assert.equal((await loadClientSession()).user, null);
-    assert.equal(paths.length, 2);
+    assert.equal(paths.length, 3);
   } finally {
     globalThis.fetch = original;
   }
@@ -94,7 +98,6 @@ test("concurrent Mini App bootstraps exchange a launch only once and use the res
     assert.equal(first, second);
     assert.equal((await first).user?.isAdmin, true);
     assert.deepEqual(calls, [
-      "/api/auth/session",
       "/api/auth/telegram/mini-app",
       "/api/auth/session",
     ]);
@@ -107,7 +110,7 @@ test("phone verification and blocked accounts never gain an admin redirect", asy
   const original = globalThis.fetch;
   globalThis.fetch = async (input) =>
     String(input) === "/api/auth/session"
-      ? Response.json(anonymous)
+      ? Response.json(authenticated)
       : Response.json({ phoneRequired: true }, { status: 403 });
   try {
     assert.equal((await loadClientSession("phone-required-launch")).user, null);
@@ -118,10 +121,9 @@ test("phone verification and blocked accounts never gain an admin redirect", asy
 
 test("replayed launch recovery requires an authenticated session, not a client role claim", async () => {
   const original = globalThis.fetch;
-  let reads = 0;
   globalThis.fetch = async (input) =>
     String(input) === "/api/auth/session"
-      ? Response.json(++reads === 1 ? anonymous : authenticated)
+      ? Response.json(authenticated)
       : Response.json({ user: admin }, { status: 409 });
   try {
     assert.equal(
@@ -145,7 +147,7 @@ test("replayed launch recovery requires an authenticated session, not a client r
   }
 });
 
-test("failed session checks do not attempt a Telegram exchange", async () => {
+test("failed session checks without launch data do not attempt a Telegram exchange", async () => {
   const original = globalThis.fetch;
   let calls = 0;
   globalThis.fetch = async () => {
@@ -153,9 +155,30 @@ test("failed session checks do not attempt a Telegram exchange", async () => {
     return Response.json({}, { status: 503 });
   };
   try {
-    await assert.rejects(loadClientSession("unavailable-session"));
+    await assert.rejects(loadClientSession());
     assert.equal(calls, 1);
   } finally {
     globalThis.fetch = original;
   }
+});
+
+test("signed launch payload can be recovered before the Telegram SDK loads, without trusting user metadata", () => {
+  const raw = "user=%7B%22id%22%3A123%7D&auth_date=123&hash=opaque";
+  assert.equal(
+    telegramLaunchData(
+      undefined,
+      "#tgWebAppVersion=9.0&tgWebAppData=" + encodeURIComponent(raw),
+    ),
+    raw,
+  );
+  assert.equal(
+    telegramLaunchData("sdk-proof", "#tgWebAppData=" + encodeURIComponent(raw)),
+    "sdk-proof",
+  );
+  assert.equal(telegramLaunchData(undefined, "#templates"), "");
+  assert.equal(telegramLaunchData(undefined, "#user=123&isAdmin=true"), "");
+  assert.equal(
+    telegramLaunchData(undefined, "#tgWebAppData=" + "a".repeat(16385)),
+    "",
+  );
 });

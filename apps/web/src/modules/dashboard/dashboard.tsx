@@ -40,7 +40,10 @@ import { InvitationThumbnail } from "./invitation-thumbnail";
 import { useRouter } from "next/navigation";
 import { PublishedLink } from "@/components/published-link";
 import { ConfirmationDialog } from "@/components/confirmation-dialog";
-import { loadClientSession } from "@/modules/session/client-session";
+import {
+  loadClientSession,
+  currentTelegramLaunchData,
+} from "@/modules/session/client-session";
 type DashboardInvitation = Invitation & {
   createdAt?: string;
   viewCount?: number;
@@ -369,7 +372,7 @@ export function Dashboard() {
       if (!dashboardSnapshot) setLoading(true);
       setError("");
       try {
-        const initData = window.Telegram?.WebApp?.initData;
+        const initData = currentTelegramLaunchData();
         if (initData) {
           window.Telegram?.WebApp?.ready?.();
           window.Telegram?.WebApp?.expand?.();

@@ -49,6 +49,25 @@ test("Mini App rejects duplicate parameters and absent verified user", () => {
     verifyInitData(signed({ ...fields, user: "null" }), bot, now),
   );
 });
+
+test("older signed launch data is reusable only with its matching existing server session", () => {
+  const raw = signed(fields),
+    later = now + 600000;
+  assert.equal(verifyMiniAppLaunch(raw, bot, later, "123").user.id, 123);
+  assert.throws(() => verifyMiniAppLaunch(raw, bot, later));
+  assert.throws(() => verifyMiniAppLaunch(raw, bot, later, "456"));
+  assert.throws(() =>
+    verifyMiniAppLaunch(raw.replace("unique", "altered"), bot, later, "123"),
+  );
+  assert.throws(() =>
+    verifyMiniAppLaunch(
+      signed({ ...fields, auth_date: String(now / 1000 + 60) }),
+      bot,
+      now,
+      "123",
+    ),
+  );
+});
 test("Mini App replay identity survives parameter reordering and equivalent URL encodings", () => {
   const raw = signed({
     ...fields,

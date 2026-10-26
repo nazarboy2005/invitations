@@ -40,14 +40,30 @@ The browser dashboard does not edit server environment variables or grant roles.
 Deployment operators manage this allowlist using the hosting provider's access
 controls.
 
-In the Telegram Mini App, opening `/` or `/dashboard` automatically resolves the
-server session once the Telegram SDK is ready. Verified admins enter `/admin`
+Opening `/` or `/dashboard` automatically resolves the server session, even
+without the SDK. For Telegram launches, the client passes the SDK's opaque signed
+data, or recovers the same payload from `tgWebAppData` in the URL fragment. The
+server validates the signature and reconciles it with the current browser
+session: a different Telegram account cannot inherit another account's cookie
+or server-rendered navigation. Verified admins enter `/admin`
 using a full document navigation, so the privileged page loads its own CSP and
 excludes the remote SDK. Existing sessions are not silently renewed: an admin
 session older than 12 hours still goes to `/admin/verify`. Login exchanges share
 in-flight work to avoid consuming the same launch twice when the SDK and account
 page initialize together. Phone verification and server role checks remain
-required; unsigned Mini App identity fields never grant access.
+required; unsigned Mini App identity fields never grant access. Older signed
+launch data is accepted only to identify its matching already-authenticated
+session; it cannot create a new login, switch identity or renew admin access.
+Fresh launch fingerprints remain single-use for creating a session in a new
+browser, while repeated requests from the matching authenticated browser retain
+the original session and authentication time.
+
+In the bot, `/admin` replies privately with **Boshqaruvga kirish** for an active,
+phone-verified administrator. Recognized admins also see that button after
+`/start`. These buttons open `/dashboard`, where authentication precedes the
+admin redirect. Ordinary accounts receive a permission denial with only their
+own Telegram ID. The command grants no roles and sends nothing until a user
+invokes it.
 
 The account heading and mobile homepage menu show **Boshqaruv** for recognized
 admins. **Hisobga qaytish** opens `/dashboard?mode=personal`, allowing admins to
@@ -193,6 +209,16 @@ penetration testing are outside what these code checks establish.
 
 ### Local verification, 2026-10-27
 
+- Follow-up launch fix: **20/20** focused unit/auth/allowlist checks and **5/5**
+  local HTTP/bot checks passed. Browser verification used Telegram's actual SDK
+  with signed disposable identities and URL launch parameters, covering blocked
+  SDK loading, no launch data with an existing admin session, both directions of
+  account switching, refreshed creator navigation, and unchanged stale-session
+  age. No hydration/CSP errors or live Telegram sends occurred. The production
+  build passed. The publicly deployed previous bridge was verified present;
+  this follow-up addresses initialization/account-binding gaps rather than
+  assuming an old deployment. Live user sessions and environment values were
+  not changed.
 - Mini App entry update: **18/18** focused session/auth/allowlist checks passed.
   Browser checks with signed disposable launch data verified delayed SDK loading,
   one exchange per launch, homepage/account auto-entry, no SDK in the privileged

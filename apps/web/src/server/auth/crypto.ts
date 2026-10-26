@@ -23,6 +23,7 @@ export function verifyInitData(
   raw: string,
   botToken: string,
   now = Date.now(),
+  authenticatedTelegramId?: string,
 ): TelegramIdentity {
   if (!raw || raw.length > 16384)
     throw new Error("Invalid Telegram launch data");
@@ -44,9 +45,9 @@ export function verifyInitData(
     throw new Error("Invalid Telegram signature");
   const timestamp = Number(params.get("auth_date"));
   if (
-    !Number.isInteger(timestamp) ||
-    timestamp * 1000 > now + 30000 ||
-    now - timestamp * 1000 > 300000
+    !Number.isSafeInteger(timestamp) ||
+    timestamp <= 0 ||
+    timestamp * 1000 > now + 30000
   )
     throw new Error("Telegram launch expired; reopen the Mini App");
   const user = JSON.parse(
@@ -59,14 +60,22 @@ export function verifyInitData(
     typeof user.first_name !== "string"
   )
     throw new Error("Telegram user missing");
+  // Only a matching, already authenticated server session may keep using its
+  // own older signed launch. This never permits a new login or session renewal.
+  if (
+    now - timestamp * 1000 > 300000 &&
+    String(user.id) !== authenticatedTelegramId
+  )
+    throw new Error("Telegram launch expired; reopen the Mini App");
   return user;
 }
 export function verifyMiniAppLaunch(
   raw: string,
   botToken: string,
   now = Date.now(),
+  authenticatedTelegramId?: string,
 ) {
-  const user = verifyInitData(raw, botToken, now);
+  const user = verifyInitData(raw, botToken, now, authenticatedTelegramId);
   const params = new URLSearchParams(raw);
   // Only construct this fingerprint after signature validation. URL ordering and
   // equivalent percent encodings do not change the verified signature or fields.

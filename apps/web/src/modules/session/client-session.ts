@@ -24,10 +24,9 @@ async function readSession(): Promise<SessionResponse> {
 }
 
 async function resolveSession(initData: string): Promise<SessionResponse> {
-  const session = await readSession();
-  // An existing session retains its original authentication time. Reopening the
-  // Mini App must not silently renew the twelve-hour administrator access window.
-  if (session.user || !initData) return session;
+  if (!initData) return readSession();
+  // The server binds the signed launch to the session, including account switches.
+  // Reusing an unrelated browser cookie here would select the wrong account.
   const exchange = await fetch("/api/auth/telegram/mini-app", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -35,7 +34,7 @@ async function resolveSession(initData: string): Promise<SessionResponse> {
     cache: "no-store",
     signal: AbortSignal.timeout(15000),
   });
-  if (exchange.status === 403) return session; // Phone verification or access restriction.
+  if (exchange.status === 403) return { user: null, configured: true };
   // Another tab may already have exchanged this launch. Trust only its resulting
   // server session, never launch metadata or an unverified identity in the browser.
   if (exchange.ok || exchange.status === 409) {
@@ -44,6 +43,24 @@ async function resolveSession(initData: string): Promise<SessionResponse> {
   }
   throw new Error(
     "Telegram hisobingizni tekshirib bo‘lmadi. Mini App’ni qayta oching.",
+  );
+}
+
+/** Opaque signed data only. User/role claims are never decoded or trusted here. */
+export function telegramLaunchData(
+  sdkData: string | undefined,
+  hash: string,
+): string {
+  if (sdkData) return sdkData;
+  const value =
+    new URLSearchParams(hash.replace(/^#/, "")).get("tgWebAppData") ?? "";
+  return value.length <= 16384 ? value : "";
+}
+
+export function currentTelegramLaunchData(): string {
+  return telegramLaunchData(
+    window.Telegram?.WebApp?.initData,
+    window.location.hash,
   );
 }
 
