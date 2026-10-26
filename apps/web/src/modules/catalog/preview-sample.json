@@ -153,6 +153,13 @@
         }
       ]
     },
+    "taklifla-zarhal-sahifa": {
+      "gallery": [
+        { "id": "zarhal-source-preview-1", "url": "/templates/taklifla-zarhal-sahifa/assets/preview/photo-1519741497674-611481863552.avif", "alt": "", "caption": "" },
+        { "id": "zarhal-source-preview-2", "url": "/templates/taklifla-zarhal-sahifa/assets/preview/photo-1606800052052-a08af7148866.avif", "alt": "", "caption": "" },
+        { "id": "zarhal-source-preview-3", "url": "/templates/taklifla-zarhal-sahifa/assets/preview/photo-1525772764200-be829a350797.avif", "alt": "", "caption": "" }
+      ]
+    },
     "love-sakura": {
       "gallery": [
         { "id": "love-sakura-source-preview-1", "url": "/templates/love-sakura/assets/hero-couple.webp", "alt": "", "caption": "" },

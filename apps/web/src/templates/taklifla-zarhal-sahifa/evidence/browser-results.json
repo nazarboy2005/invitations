@@ -1,0 +1,107 @@
+{
+  "browser": "156.0.8078.47",
+  "sourceSha256": "432eb5dc172af87e85fd8fa8dab561225697f8b50b6ab95f70f4e4526d85e9ef",
+  "cases": [
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "opening": {
+        "names": [
+          "Javohir",
+          "Madina"
+        ],
+        "width": 390,
+        "overflow": false
+      },
+      "checks": [
+        "source/app opening and details",
+        "scroll reveal",
+        "preview wishes no-send",
+        "four locales and selector",
+        "personal greeting",
+        "long names no horizontal overflow",
+        "seven stable-ID photos",
+        "empty optional sections",
+        "legacy map remains hidden",
+        "music disabled"
+      ]
+    },
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 844
+      },
+      "opening": {
+        "names": [
+          "Javohir",
+          "Madina"
+        ],
+        "width": 478,
+        "overflow": false
+      },
+      "checks": [
+        "source/app opening and details",
+        "scroll reveal",
+        "preview wishes no-send",
+        "four locales and selector",
+        "personal greeting",
+        "long names no horizontal overflow",
+        "seven stable-ID photos",
+        "empty optional sections",
+        "legacy map remains hidden",
+        "music disabled"
+      ]
+    },
+    {
+      "reducedMotion": {
+        "opacity": "1",
+        "transition": "0s",
+        "animation": "none"
+      }
+    },
+    {
+      "wishes": "required input, real HTTP failure retains text, success acknowledgment waits for ok, pending not rendered, guest token forwarded",
+      "requests": [
+        {
+          "method": "GET",
+          "path": "/api/public/invitations/qa-service/wishes",
+          "body": null
+        },
+        {
+          "method": "POST",
+          "path": "/api/public/invitations/qa-service/wishes",
+          "body": {
+            "name": "Mehmon",
+            "message": "<b>Yangi tilak</b>",
+            "guestToken": "qa-token"
+          }
+        },
+        {
+          "method": "POST",
+          "path": "/api/public/invitations/qa-service/wishes",
+          "body": {
+            "name": "Mehmon",
+            "message": "<b>Yangi tilak</b>",
+            "guestToken": "qa-token"
+          }
+        },
+        {
+          "method": "GET",
+          "path": "/api/public/invitations/qa/wishes",
+          "body": null
+        }
+      ]
+    },
+    {
+      "music": "enabled player, actual WAV playback, pause survives later page gesture; disabled player absent; browser audible autoplay remains policy-dependent"
+    },
+    {
+      "cover": "source .hero at 390×844, canonical sample, silent, source locale control excluded for artwork only"
+    }
+  ],
+  "errors": [],
+  "httpFailures": [],
+  "serviceMode": "HTTP stub validates bridge behavior only; no database/service persistence claim"
+}

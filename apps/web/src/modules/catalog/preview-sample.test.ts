@@ -460,7 +460,7 @@ test("Shahzoda keeps its wishes section connected to localized preview samples",
   assert.match(adapter, /wishesEnabled:\s*invitation\.wishes\.enabled/);
   assert.match(
     adapter,
-    /wishes:\s*sampleWishes\s*\?\s*getTemplatePreviewWishes\(locale\)\s*:\s*\[\]/,
+    /wishes:\s*sampleWishes\s*\?\s*getTemplatePreviewWishes\(locale(?:,\s*templateId)?\)\s*:\s*\[\]/,
   );
   for (const locale of ["uz-Latn", "uz-Cyrl", "en", "ru"] as const) {
     const wishes = getTemplatePreviewWishes(locale);

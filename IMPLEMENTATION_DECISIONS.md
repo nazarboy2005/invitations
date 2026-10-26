@@ -1717,3 +1717,12 @@ Development agents are distinct from production queue workers. The running app w
   wedding category/event support; `/preview` returns successfully. Focused
   adapter checks pass 2/2, TypeScript and production build pass. No external
   deployment or live payment activation occurred.
+## Taklifla Zarhal Sahifa release (2026-10-27)
+
+- The completed Taklifla `Diyora-Shahzod` source package is selectable as
+  **Zarhal Sahifa**, retaining its Uzbek Latin catalog name and default content.
+  Migration 0159 publishes it at 150,000 UZS for wedding-only compatibility.
+  The shared preview fixture, editor preview, public route, and creator wishes
+  API use the same source-derived renderer. Focused package tests pass 4/4;
+  four-locale save/reopen and public-render lifecycle checks pass 1/1 each.
+  No external deployment or live payment activation.

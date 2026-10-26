@@ -646,7 +646,7 @@ test("RSVP limits and wish moderation reach the owner and approved public list",
   );
 });
 
-test("unpublished Modern Floral draft saves and reopens while staying out of the public catalog", async () => {
+test("published Modern Floral draft saves and reopens while remaining in the public catalog", async () => {
   const invitation = completeInvitation();
   invitation.templateId = "modern-floral";
   await sql`INSERT INTO invitations(id,owner_id,template_id,status,data) VALUES(${invitation.id},${owner.id},${invitation.templateId},'draft',${sql.json(invitation)})`;
@@ -660,11 +660,11 @@ test("unpublished Modern Floral draft saves and reopens while staying out of the
   for (const key of ["templateId", "content", "enabledLocales", "startsAt", "timezone", "venue", "program", "gallery", "music", "gift", "contacts", "rsvp", "wishes"] as const)
     assert.deepEqual(reopened[key], saved[key], key);
   const catalog = await (await request("/api/catalog", undefined, false)).json();
-  assert.ok(!catalog.templates.some((template: { id: string }) => template.id === "modern-floral"));
+  assert.ok(catalog.templates.some((template: { id: string; published: boolean }) => template.id === "modern-floral" && template.published));
   assert.equal((await fetch(`${origin}/i/${invitation.id}`)).status, 404);
 });
 
-test("Pulau Sehati preserves source fields across authenticated save, reopen, and template switch while private", async () => {
+test("published Pulau Sehati preserves source fields across authenticated save, reopen, and template switch", async () => {
   const invitation = completeInvitation();
   invitation.templateId = "wedivo-pulau-sehati";
   invitation.eventType = "wedding";
@@ -706,7 +706,7 @@ test("Pulau Sehati preserves source fields across authenticated save, reopen, an
   assert.equal(activity.giftIntentions[0].senderName, "Test guest");
   assert.equal(activity.giftIntentions[0].amount, "250000");
   const catalog = await (await request("/api/catalog", undefined, false)).json();
-  assert.ok(!catalog.templates.some((template: { id: string }) => template.id === "wedivo-pulau-sehati"));
+  assert.ok(catalog.templates.some((template: { id: string; published: boolean }) => template.id === "wedivo-pulau-sehati" && template.published));
   assert.equal((await fetch(`${origin}/i/${invitation.id}`)).status, 404);
 });
 

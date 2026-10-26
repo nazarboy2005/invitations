@@ -1,0 +1,256 @@
+{
+  "source": "Invitations - this folder will be removed from production\\Invitations - this folder will be removed from production\\Taklifla\\Web invitations\\taklifla.uz\\templates\\diyora-shahzod__be3e347086adb843.html",
+  "sourceSha256": "432eb5dc172af87e85fd8fa8dab561225697f8b50b6ab95f70f4e4526d85e9ef",
+  "requestedSiblingDirectoryPresent": false,
+  "sourceCssSha256": "bb3ffa6459be8508f7dfeae739eb37b6ad4e1473bd8701d4b1ea18efe660a9a6",
+  "dependencies": [
+    {
+      "url": "https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=1200&q=85&auto=format&fit=crop",
+      "capture": "Web invitations/images.unsplash.com/photo-1606216794074-735e91aa2c92__d3ef44ac66219f88",
+      "file": "assets/photo-1606216794074-735e91aa2c92.avif",
+      "origin": "capture-manifest",
+      "bytes": 197287,
+      "sha256": "b7fe00d076863d43c22965d031b03b3a1f7f205510d56db77ab866863df428f2"
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=400&q=80&auto=format&fit=crop",
+      "capture": "Web invitations/images.unsplash.com/photo-1570077188670-e3a8d69ac5ff__cdcc0a7f0be7e084",
+      "file": "assets/photo-1570077188670-e3a8d69ac5ff.avif",
+      "origin": "capture-manifest",
+      "bytes": 29805,
+      "sha256": "d725deee3a9e2246d855ce58c7eee4edb6519453a10c0545e627b48c407a0194"
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=500&q=80&auto=format&fit=crop",
+      "capture": "Web invitations/images.unsplash.com/photo-1545569341-9eb8b30979d9__bc9eea902e9b928e",
+      "file": "assets/photo-1545569341-9eb8b30979d9.avif",
+      "origin": "capture-manifest",
+      "bytes": 22654,
+      "sha256": "c7acb47d70d125f1589e241d5813c7d280bca7d14f878ef49210ee8bf53bded0"
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1519741497674-611481863552?w=600&q=80&auto=format&fit=crop",
+      "capture": "Web invitations/images.unsplash.com/photo-1519741497674-611481863552__e7be1861d89cdc50",
+      "file": "assets/preview/photo-1519741497674-611481863552.avif",
+      "origin": "capture-manifest",
+      "bytes": 16401,
+      "sha256": "c828028bb8572c8a7a751cfa43c3444772cc439d949672bf8db558da4ff32364"
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1606800052052-a08af7148866?w=600&q=80&auto=format&fit=crop",
+      "capture": "Web invitations/images.unsplash.com/photo-1606800052052-a08af7148866__e7be1861d89cdc50",
+      "file": "assets/preview/photo-1606800052052-a08af7148866.avif",
+      "origin": "capture-manifest",
+      "bytes": 21952,
+      "sha256": "39e46b53b0a91bc76e3f1a3813ca6ae9413874021c09e58b8b55233547e45af8"
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1525772764200-be829a350797?w=600&q=80&auto=format&fit=crop",
+      "capture": "Web invitations/images.unsplash.com/photo-1525772764200-be829a350797__e7be1861d89cdc50",
+      "file": "assets/preview/photo-1525772764200-be829a350797.avif",
+      "origin": "capture-manifest",
+      "bytes": 57010,
+      "sha256": "9bcfb2970b63eb51eb47319ba1f5d7a86c777d29b9147e1f43458ef6e0383b94"
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?w=500&q=80&auto=format&fit=crop",
+      "capture": "Web invitations/images.unsplash.com/photo-1541432901042-2d8bd64b4a9b__bc9eea902e9b928e",
+      "file": "assets/photo-1541432901042-2d8bd64b4a9b.avif",
+      "origin": "capture-manifest",
+      "bytes": 25994,
+      "sha256": "cbb73e103906e4b6eacbd4a4bd9344ce0b829ea746fdb4cd88d377393a2f1948"
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1485965120184-e220f721d03e?w=500&q=80&auto=format&fit=crop",
+      "capture": "Web invitations/images.unsplash.com/photo-1485965120184-e220f721d03e__bc9eea902e9b928e",
+      "file": "assets/photo-1485965120184-e220f721d03e.avif",
+      "origin": "capture-manifest",
+      "bytes": 21292,
+      "sha256": "5920c40b8c636668d9bcf6eb53155df78e8f4328301642b5a94117c79c115beb"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/cinzel/v26/8vIJ7ww63mVu7gt7-GT7LEc.woff2",
+      "capture": null,
+      "file": "assets/fonts/8e3fecd2d493.woff2",
+      "origin": "exact-source-url",
+      "bytes": 14540,
+      "sha256": "8fc2606f8ae6c569f444e138dba052d9a6e3f0657f9031796503bbb94eced600"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/cinzel/v26/8vIJ7ww63mVu7gt79mT7.woff2",
+      "capture": "Web invitations/fonts.gstatic.com/s/cinzel/v26/8vIJ7ww63mVu7gt79mT7.woff2",
+      "file": "assets/fonts/192773d8da73.woff2",
+      "origin": "capture-manifest",
+      "bytes": 25904,
+      "sha256": "09941fb1c169c38fd414536b37690057fc01b3117a5c63dd6571186540c8f370"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3ZmX5slCNuHLi8bLeY9MK7whWMhyjYrEtFmSq17w.woff2",
+      "capture": null,
+      "file": "assets/fonts/4ae4c5dabe8f.woff2",
+      "origin": "exact-source-url",
+      "bytes": 25184,
+      "sha256": "ae25de0507a445fd9e953e90432ae75b1ee2eccb48370a6ced4934551eb56fc3"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3ZmX5slCNuHLi8bLeY9MK7whWMhyjYrEtMmSq17w.woff2",
+      "capture": null,
+      "file": "assets/fonts/954d638259f9.woff2",
+      "origin": "exact-source-url",
+      "bytes": 21300,
+      "sha256": "cb13c04533ee98c94e49a053b9f4d39bf616fd7ba6360d71aead92a78dc571f7"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3ZmX5slCNuHLi8bLeY9MK7whWMhyjYrEtHmSq17w.woff2",
+      "capture": null,
+      "file": "assets/fonts/4c494e010d00.woff2",
+      "origin": "exact-source-url",
+      "bytes": 11516,
+      "sha256": "b8ecb4ae898cd9ccae2f2d18fd364f6593bb67776060f9b5d833cec65d34d112"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3ZmX5slCNuHLi8bLeY9MK7whWMhyjYrEtGmSq17w.woff2",
+      "capture": null,
+      "file": "assets/fonts/8fbaa36df2a8.woff2",
+      "origin": "exact-source-url",
+      "bytes": 34392,
+      "sha256": "cd5bf126b2c84ab41b254a6a9a1ffb5c326a0f9f82c22fb4704daa31c9aaa415"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3ZmX5slCNuHLi8bLeY9MK7whWMhyjYrEtImSo.woff2",
+      "capture": "Web invitations/fonts.gstatic.com/s/cormorantgaramond/v21/co3ZmX5slCNuHLi8bLeY9MK7whWMhyjYrEtImSo.woff2",
+      "file": "assets/fonts/291655adcb38.woff2",
+      "origin": "capture-manifest",
+      "bytes": 39260,
+      "sha256": "6f2f5c3b1abc3d0bb035a927f66a90ca873f94fc31c4966c8d024142c2036e55"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjYpHtKgS4.woff2",
+      "capture": null,
+      "file": "assets/fonts/c4be89389609.woff2",
+      "origin": "exact-source-url",
+      "bytes": 23416,
+      "sha256": "a4d7cf345b8091e1d2c8c5c8fa3bd0f9bb9d00bc8988185471db398ddb5ae4c4"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjYrXtKgS4.woff2",
+      "capture": null,
+      "file": "assets/fonts/535639032664.woff2",
+      "origin": "exact-source-url",
+      "bytes": 21168,
+      "sha256": "017fab69b4be8ffc08ca312823327989ade6dc3d948f0afa125e12ec2e5e7ca1"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjYpntKgS4.woff2",
+      "capture": null,
+      "file": "assets/fonts/c74911618d2d.woff2",
+      "origin": "exact-source-url",
+      "bytes": 11220,
+      "sha256": "6252e819a7665ae512c2d046308a9016ada63c06d0d8f96984c4b29f6c9e1bd2"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjYp3tKgS4.woff2",
+      "capture": null,
+      "file": "assets/fonts/a55f75e9e7fa.woff2",
+      "origin": "exact-source-url",
+      "bytes": 33736,
+      "sha256": "cfa9a397d86f66c5c51775a2500a712d5f632a04f0c5eca6930dfaf612d4566d"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjYqXtK.woff2",
+      "capture": "Web invitations/fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjYqXtK.woff2",
+      "file": "assets/fonts/d9ec821052ff.woff2",
+      "origin": "capture-manifest",
+      "bytes": 37640,
+      "sha256": "d80df8ff5aecd299a61549f9e29ab1ed0b9b05f4ea71d50fe978e07d5240b235"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/italiana/v21/QldNNTtLsx4E__B0XQmWaXw.woff2",
+      "capture": "Web invitations/fonts.gstatic.com/s/italiana/v21/QldNNTtLsx4E__B0XQmWaXw.woff2",
+      "file": "assets/fonts/846911c4431d.woff2",
+      "origin": "capture-manifest",
+      "bytes": 10100,
+      "sha256": "5079c87a4e86c58e8cd4f18ec2d3255918b7d565708ed934b15c4710301f838c"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/manrope/v20/xn7gYHE41ni1AdIRggqxSuXd.woff2",
+      "capture": null,
+      "file": "assets/fonts/842459da81f9.woff2",
+      "origin": "exact-source-url",
+      "bytes": 2552,
+      "sha256": "de37de877dc17e4577341fa68bb5cb526b53d54cb29721e674208546a3c7849d"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/manrope/v20/xn7gYHE41ni1AdIRggOxSuXd.woff2",
+      "capture": null,
+      "file": "assets/fonts/9b2d027172a3.woff2",
+      "origin": "exact-source-url",
+      "bytes": 14500,
+      "sha256": "c268b459a9329e59fecf39a17618efd44c71735532048d60b12aab76a8c14914"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/manrope/v20/xn7gYHE41ni1AdIRggSxSuXd.woff2",
+      "capture": null,
+      "file": "assets/fonts/ed7393f42d27.woff2",
+      "origin": "exact-source-url",
+      "bytes": 9444,
+      "sha256": "2fb2e8cbfd52ae46179a8b6024eb162f1f9c6de3d22d6e3a30d8f395de7220be"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/manrope/v20/xn7gYHE41ni1AdIRggixSuXd.woff2",
+      "capture": null,
+      "file": "assets/fonts/1f3ea86e40d9.woff2",
+      "origin": "exact-source-url",
+      "bytes": 8520,
+      "sha256": "6bbb044ab420e07edb0a3042d2eb314b85e83a0182e945a15ab3b9092668dfd5"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/manrope/v20/xn7gYHE41ni1AdIRggmxSuXd.woff2",
+      "capture": null,
+      "file": "assets/fonts/ee75508933e6.woff2",
+      "origin": "exact-source-url",
+      "bytes": 15120,
+      "sha256": "3911b66d9f2e005a4b989223405d0e5032619c668597ba467cc76a23c8fffcfb"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/manrope/v20/xn7gYHE41ni1AdIRggexSg.woff2",
+      "capture": "Web invitations/fonts.gstatic.com/s/manrope/v20/xn7gYHE41ni1AdIRggexSg.woff2",
+      "file": "assets/fonts/4872f2a6dc9a.woff2",
+      "origin": "capture-manifest",
+      "bytes": 24836,
+      "sha256": "a30ddcd349703aff7464c34bef3fffdff405ee50c113440d7c8693c02d210972"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/pinyonscript/v24/6xKpdSJbL9-e9LuoeQiDRQR8WOraOrbh.woff2",
+      "capture": null,
+      "file": "assets/fonts/98e3cd4a790b.woff2",
+      "origin": "exact-source-url",
+      "bytes": 10700,
+      "sha256": "7b21477143c6cfd96aedc8864390d5b1c92f2684012d3e6da9eaa0aa0f11135a"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/pinyonscript/v24/6xKpdSJbL9-e9LuoeQiDRQR8WOvaOrbh.woff2",
+      "capture": null,
+      "file": "assets/fonts/74f6be8fc12b.woff2",
+      "origin": "exact-source-url",
+      "bytes": 36152,
+      "sha256": "c208ba67b4eff57e673bb188faeca3a51a6d928f8d94aca268b0a41a5deb6932"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/pinyonscript/v24/6xKpdSJbL9-e9LuoeQiDRQR8WOXaOg.woff2",
+      "capture": "Web invitations/fonts.gstatic.com/s/pinyonscript/v24/6xKpdSJbL9-e9LuoeQiDRQR8WOXaOg.woff2",
+      "file": "assets/fonts/0451ffb02b41.woff2",
+      "origin": "capture-manifest",
+      "bytes": 39044,
+      "sha256": "3e1f69a201572cad4aabea7ccf720f093a7dbc005380b2a1b89e0b94476d3e42"
+    }
+  ],
+  "excluded": [
+    "provider query-string customizer",
+    "provider guestbook/localStorage/backfill/demo seeds",
+    "_wish-close.js provider one-per-browser policy",
+    "provider translations and storage runtime",
+    "duplicate appended shared music player",
+    "Cloudflare analytics"
+  ]
+}

@@ -1,0 +1,18 @@
+[hidden] { display: none !important; }
+body:not([data-bound]) .shell, body:not([data-bound]) .taklifla-lang-switch { visibility: hidden; }
+.hero-names, .invite-names, .detail-value, .detail-sub, .closing-meta, .closing-mono { overflow-wrap: anywhere; }
+.hero-names { max-width: 100%; }
+.invite-quote, .detail-sub { white-space: pre-line; }
+.closing-mono { font-size: clamp(36px, 15vw, 80px); }
+.wish-name, .wish-text { overflow-wrap: anywhere; }
+#wish-status { font-size: 16px; margin-bottom: 16px; }
+.wish-form .btn:disabled { cursor: wait; opacity: .65; }
+:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
+html[data-reduced-motion] .reveal { opacity: 1; transform: none; transition: none; }
+html[data-reduced-motion] *, html[data-reduced-motion] *::before, html[data-reduced-motion] *::after { animation: none !important; transition: none !important; }
+html[lang="uz-Cyrl"] .display, html[lang="ru"] .display,
+html[lang="uz-Cyrl"] .hero-monogram, html[lang="ru"] .hero-monogram,
+html[lang="uz-Cyrl"] .closing-mono, html[lang="ru"] .closing-mono,
+html[lang="uz-Cyrl"] .invite-names, html[lang="ru"] .invite-names,
+html[lang="uz-Cyrl"] .wish-name, html[lang="ru"] .wish-name { font-family: 'Italiana', 'Cormorant Garamond', serif; }
+@media (prefers-reduced-motion: reduce) { .tk-pulse { animation: none !important; } }

@@ -1,0 +1,15 @@
+{
+  "id": "taklifla-zarhal-sahifa",
+  "name": "Zarhal Sahifa",
+  "description": "Zarhal chiziqlar, nafis gullar va sayohat bezaklari bilan ishlangan nikoh taklifnomasi.",
+  "categoryIds": ["wedding"],
+  "supportedEventTypes": ["wedding"],
+  "rendererModule": "apps/web/src/templates/taklifla-zarhal-sahifa/renderer.tsx",
+  "rendererExport": "TakliflaZarhalSahifaInvitation",
+  "previewImage": "/templates/taklifla-zarhal-sahifa/preview.webp",
+  "priceMinor": 150000,
+  "currency": "UZS",
+  "published": true,
+  "selectable": true,
+  "integration": "Registered in the shared catalog and public renderer; migration 0159 and authenticated lifecycle verification complete."
+}
