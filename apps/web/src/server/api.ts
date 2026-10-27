@@ -12,6 +12,7 @@ export class ApiError extends Error {
 export function apiError(error: unknown) {
   const response = errorResponse(error);
   response.headers.set("Cache-Control", "private, no-store");
+  if (response.status === 429) response.headers.set("Retry-After", "60");
   return response;
 }
 function errorResponse(error: unknown) {

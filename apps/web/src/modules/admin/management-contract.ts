@@ -127,6 +127,8 @@ export type AdminInvitation = {
   updatedAt: string;
 };
 export type AdminPayment = {
+  method?: "manual" | "nodze";
+  providerStatus?: string | null;
   id: string;
   invitationId: string;
   ownerName: string;

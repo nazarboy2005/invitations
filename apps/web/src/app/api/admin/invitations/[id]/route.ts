@@ -61,7 +61,7 @@ export async function PATCH(request: Request, { params }: Context) {
           );
         if (
           (
-            await tx`SELECT id FROM platform_payments WHERE invitation_id=${id} LIMIT 1`
+            await tx`SELECT id FROM platform_payments WHERE invitation_id=${id} UNION ALL SELECT id FROM payment_orders WHERE invitation_id=${id} LIMIT 1`
           ).length
         )
           throw new ApiError(

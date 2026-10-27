@@ -10,6 +10,7 @@ import { getSessionUser } from "./auth";
 import { assertPublicMedia, assertPublishable } from "./publication";
 import { requireAdmin, recordAdminChange } from "./admin";
 import type { AdminInvitationAction } from "./admin-invitation-access";
+import { paymentIdentity } from "@taklifnoma/contracts/payment";
 export async function authenticatedUser(): Promise<SessionUser> {
   const user = await getSessionUser();
   if (!user)
@@ -72,6 +73,19 @@ export async function saveInvitation(
       );
     if (rows[0]) {
       const previous = invitationSchema.parse(rows[0].data);
+      if (
+        rows[0].status === "draft" &&
+        paymentIdentity(previous) !== paymentIdentity(invitation)
+      ) {
+        const [order] =
+          await tx`SELECT id FROM payment_orders WHERE invitation_id=${invitation.id} AND status NOT IN ('FAILED','CANCELLED','EXPIRED') LIMIT 1`;
+        if (order)
+          throw new ApiError(
+            409,
+            "CHECKOUT_IDENTITY_LOCKED",
+            "To‘lov boshlangan. Ismlar, sana va dizaynni almashtirish uchun yangi taklifnoma yarating yoki to‘lov holati yakunlanishini kuting.",
+          );
+      }
       if (previous.revision !== invitation.revision)
         throw new ApiError(
           409,

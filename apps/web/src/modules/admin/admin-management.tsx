@@ -836,9 +836,9 @@ export function AdminPayments({
       <div className={styles.notice}>
         <strong>Platforma to‘lovlari registri</strong>
         <p>
-          Hozir taklifnomalarni nashr qilish bepul. Bu yerda administrator
-          qo‘lda qayd etgan to‘lovlar ko‘rinadi; bank yoki Click tasdig‘i mavjud
-          emas. To‘yona cheklari alohida, taklifnoma faolligida.
+          Click orqali tasdiqlangan to‘lovlar va qo‘lda yuritiladigan registr.
+          Nodze yozuvlari faqat server tasdig‘i bilan yangilanadi. To‘yona
+          cheklari alohida, taklifnoma faolligida.
         </p>
         <div className={styles.inlineActions}>
           <Link className="button secondary" href="/admin?view=templates">
@@ -896,7 +896,11 @@ export function AdminPayments({
                   </td>
                   <td>
                     {formatPrice(payment.amountMinor)}
-                    <small>Qo‘lda qayd etilgan</small>
+                    <small>
+                      {payment.method === "nodze"
+                        ? "Nodze / Click"
+                        : "Qo‘lda qayd etilgan"}
+                    </small>
                   </td>
                   <td>
                     <span
@@ -906,7 +910,7 @@ export function AdminPayments({
                           : styles.hidden
                       }
                     >
-                      {paymentLabels[payment.status]}
+                      {payment.providerStatus ?? paymentLabels[payment.status]}
                     </span>
                   </td>
                   <td>
@@ -914,19 +918,21 @@ export function AdminPayments({
                     <small>{payment.reference || payment.note}</small>
                   </td>
                   <td>
-                    <button
-                      className="button secondary"
-                      onClick={() => {
-                        setTarget(payment);
-                        setCreate(false);
-                        setAmount(String(payment.amountMinor / 100));
-                        setReference(payment.reference);
-                        setNote("");
-                        setStatus(payment.status);
-                      }}
-                    >
-                      Boshqarish
-                    </button>
+                    {payment.method !== "nodze" && (
+                      <button
+                        className="button secondary"
+                        onClick={() => {
+                          setTarget(payment);
+                          setCreate(false);
+                          setAmount(String(payment.amountMinor / 100));
+                          setReference(payment.reference);
+                          setNote("");
+                          setStatus(payment.status);
+                        }}
+                      >
+                        Boshqarish
+                      </button>
+                    )}
                   </td>
                 </tr>
               ))}

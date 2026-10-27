@@ -13,6 +13,7 @@ import { CATALOG_PREVIEW_MUSIC } from "../modules/catalog/catalog-music";
 import { inspectMedia, storageProvider } from "./storage";
 import { requireAdmin, recordAdminChange } from "./admin";
 import type { AdminInvitationAction } from "./admin-invitation-access";
+import { paymentIdentity } from "@taklifnoma/contracts/payment";
 
 const BASE62 = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 export function generatePublicCode() {
@@ -113,100 +114,126 @@ export async function publishInvitation(
   if (admin && (await requireAdmin()).id !== admin.actorId)
     throw new ApiError(403, "FORBIDDEN", "Administrator tasdig‘i kerak.");
   const sql = getDb();
-  return sql.begin(async (tx) => {
-    const [row] =
-      await tx`SELECT * FROM invitations WHERE id=${id} AND owner_id=${user.id} FOR UPDATE`;
-    if (!row) throw new ApiError(404, "NOT_FOUND", "Taklifnoma topilmadi.");
-    const previous = invitationSchema.parse(row.data);
-    // A repeated successful request must not allocate a code or extend the deadline.
-    if (row.status === "published" && row.slug)
-      return {
-        invitation: { ...previous, slug: row.slug as string },
-        url: publicInvitationUrl(row.slug),
-      };
-    if (row.status !== "draft")
-      throw new ApiError(
-        403,
-        "INVITATION_ARCHIVED",
-        "Bu taklifnomani nashr qilib bo‘lmaydi.",
-      );
-    if (previous.revision !== revision)
-      throw new ApiError(
-        409,
-        "STALE_REVISION",
-        "Taklifnoma boshqa oynada o‘zgargan. Yangilangan nusxani oching.",
-      );
-    if ((process.env.PUBLISHING_MODE ?? "free") !== "free")
-      throw new ApiError(
-        503,
-        "PUBLISHING_UNAVAILABLE",
-        "Nashr qilish vaqtincha mavjud emas.",
-      );
-    const [template] =
-      await tx`SELECT t.published, EXISTS(SELECT 1 FROM template_supported_event_types s WHERE s.template_id=t.id AND s.event_type=${previous.eventType}) AS supports_event FROM templates t WHERE t.id=${previous.templateId} FOR SHARE OF t`;
-    if (!templateById(previous.templateId) || !template?.published)
-      throw new ApiError(
-        409,
-        "TEMPLATE_UNAVAILABLE",
-        "Bu dizayn hozir mavjud emas. Boshqa dizaynni tanlang.",
-      );
-    if (!template.supports_event)
-      throw new ApiError(
-        409,
-        "TEMPLATE_EVENT_MISMATCH",
-        "Tanlangan dizayn tadbir turiga mos emas.",
-      );
-    assertPublishable(previous);
-    await assertPublicMedia(tx, previous, user.id);
-    // Treat startsAt as a wall-clock value in the invitation's own timezone.
-    // Compare the resulting instants in PostgreSQL, without relying on the
-    // database session's timezone or JS coercion of a timezone-less string.
-    const [event] =
-      await tx`SELECT (((${previous.startsAt}::timestamp)::date + 1)::timestamp AT TIME ZONE ${previous.timezone}) <= now() AS ended, now() AS published_at, ((${previous.startsAt}::timestamp)::date + 1)::timestamp AT TIME ZONE ${previous.timezone} AS deadline`;
-    if (event.ended)
-      throw new ApiError(
-        400,
-        "EVENT_ENDED",
-        "Tadbir kuni o‘tib ketgan. Sanani tekshiring.",
-      );
-    for (let attempt = 0; attempt < 10; attempt++) {
-      const slug = allocateCode();
-      const invitation = invitationSchema.parse({
-        ...previous,
-        status: "published",
-        slug,
-        revision: previous.revision + 1,
-      });
-      try {
-        await tx.savepoint(async (savepoint) => {
-          await savepoint`UPDATE invitations SET slug=${slug},status='published',data=${savepoint.json(invitation)},first_published_at=${event.published_at},identity_locked_at=${event.published_at},edit_deadline_at=${event.deadline},updated_at=now() WHERE id=${id}`;
-        });
-      } catch (error) {
-        if (
-          (error as { code?: string; constraint_name?: string }).code ===
-            "23505" &&
-          (error as { constraint_name?: string }).constraint_name ===
-            "invitations_slug_key"
-        )
-          continue;
-        throw error;
-      }
-      await tx`INSERT INTO invitation_audit_log(invitation_id,actor_id,action,previous_values,new_values) VALUES(${id},${admin?.actorId ?? user.id},'published_free',${tx.json(previous)},${tx.json({ ...invitation, publication: { mode: "free", firstPublishedAt: event.published_at, editDeadlineAt: event.deadline } })})`;
-      if (admin)
-        await recordAdminChange(
-          tx,
-          admin.actorId,
-          "invitation.publish",
-          id,
-          { status: "draft" },
-          { status: "published", ownerId: user.id, reason: admin.reason },
-        );
-      return { invitation, url: publicInvitationUrl(slug) };
-    }
+  return sql.begin((tx) =>
+    publishInvitationInTransaction(tx, id, revision, user, allocateCode, admin),
+  );
+}
+
+// Caller must authenticate first or supply a verified payment's database owner.
+// Shared transaction keeps payment fulfillment, audit and publication atomic.
+export async function publishInvitationInTransaction(
+  tx: postgres.TransactionSql,
+  id: string,
+  revision: number,
+  user: SessionUser,
+  allocateCode = generatePublicCode,
+  admin?: AdminInvitationAction,
+) {
+  const [row] =
+    await tx`SELECT * FROM invitations WHERE id=${id} AND owner_id=${user.id} FOR UPDATE`;
+  if (!row) throw new ApiError(404, "NOT_FOUND", "Taklifnoma topilmadi.");
+  const previous = invitationSchema.parse(row.data);
+  // A repeated successful request must not allocate a code or extend the deadline.
+  if (row.status === "published" && row.slug)
+    return {
+      invitation: { ...previous, slug: row.slug as string },
+      url: publicInvitationUrl(row.slug),
+    };
+  if (row.status !== "draft")
+    throw new ApiError(
+      403,
+      "INVITATION_ARCHIVED",
+      "Bu taklifnomani nashr qilib bo‘lmaydi.",
+    );
+  if (previous.revision !== revision)
+    throw new ApiError(
+      409,
+      "STALE_REVISION",
+      "Taklifnoma boshqa oynada o‘zgargan. Yangilangan nusxani oching.",
+    );
+  const mode = process.env.PUBLISHING_MODE ?? "free";
+  if (!["free", "paid"].includes(mode))
     throw new ApiError(
       503,
-      "CODE_ALLOCATION_FAILED",
-      "Havola yaratilmadi. Qayta urinib ko‘ring.",
+      "PUBLISHING_UNAVAILABLE",
+      "Nashr qilish vaqtincha mavjud emas.",
     );
-  });
+  if (mode === "paid") {
+    const [entitlement] =
+      await tx`SELECT id FROM payment_orders WHERE invitation_id=${id} AND owner_id=${user.id} AND template_id=${previous.templateId} AND identity_snapshot=${paymentIdentity(previous)} AND status='SUCCEEDED' AND verified_at IS NOT NULL FOR SHARE`;
+    if (!entitlement)
+      throw new ApiError(
+        402,
+        "PAYMENT_REQUIRED",
+        "Nashr qilish uchun to‘lovni yakunlang.",
+      );
+  }
+  const [template] =
+    await tx`SELECT t.published, EXISTS(SELECT 1 FROM template_supported_event_types s WHERE s.template_id=t.id AND s.event_type=${previous.eventType}) AS supports_event FROM templates t WHERE t.id=${previous.templateId} FOR SHARE OF t`;
+  if (!templateById(previous.templateId) || !template?.published)
+    throw new ApiError(
+      409,
+      "TEMPLATE_UNAVAILABLE",
+      "Bu dizayn hozir mavjud emas. Boshqa dizaynni tanlang.",
+    );
+  if (!template.supports_event)
+    throw new ApiError(
+      409,
+      "TEMPLATE_EVENT_MISMATCH",
+      "Tanlangan dizayn tadbir turiga mos emas.",
+    );
+  assertPublishable(previous);
+  await assertPublicMedia(tx, previous, user.id);
+  // Treat startsAt as a wall-clock value in the invitation's own timezone.
+  // Compare the resulting instants in PostgreSQL, without relying on the
+  // database session's timezone or JS coercion of a timezone-less string.
+  const [event] =
+    await tx`SELECT (((${previous.startsAt}::timestamp)::date + 1)::timestamp AT TIME ZONE ${previous.timezone}) <= now() AS ended, now() AS published_at, ((${previous.startsAt}::timestamp)::date + 1)::timestamp AT TIME ZONE ${previous.timezone} AS deadline`;
+  if (event.ended)
+    throw new ApiError(
+      400,
+      "EVENT_ENDED",
+      "Tadbir kuni o‘tib ketgan. Sanani tekshiring.",
+    );
+  for (let attempt = 0; attempt < 10; attempt++) {
+    const slug = allocateCode();
+    const invitation = invitationSchema.parse({
+      ...previous,
+      status: "published",
+      slug,
+      revision: previous.revision + 1,
+    });
+    try {
+      await tx.savepoint(async (savepoint) => {
+        await savepoint`UPDATE invitations SET slug=${slug},status='published',data=${savepoint.json(invitation)},first_published_at=${event.published_at},identity_locked_at=${event.published_at},edit_deadline_at=${event.deadline},updated_at=now() WHERE id=${id}`;
+      });
+    } catch (error) {
+      if (
+        (error as { code?: string; constraint_name?: string }).code ===
+          "23505" &&
+        (error as { constraint_name?: string }).constraint_name ===
+          "invitations_slug_key"
+      )
+        continue;
+      throw error;
+    }
+    await tx`INSERT INTO invitation_audit_log(invitation_id,actor_id,action,previous_values,new_values) VALUES(${id},${admin?.actorId ?? user.id},${mode === "paid" ? "published_paid" : "published_free"},${tx.json(previous)},${tx.json({ ...invitation, publication: { mode, firstPublishedAt: event.published_at, editDeadlineAt: event.deadline } })})`;
+    if (mode === "paid")
+      await tx`UPDATE payment_orders SET fulfilled_at=COALESCE(fulfilled_at,now()),publication_error=NULL WHERE invitation_id=${id} AND status='SUCCEEDED'`;
+    if (admin)
+      await recordAdminChange(
+        tx,
+        admin.actorId,
+        "invitation.publish",
+        id,
+        { status: "draft" },
+        { status: "published", ownerId: user.id, reason: admin.reason },
+      );
+    return { invitation, url: publicInvitationUrl(slug) };
+  }
+  throw new ApiError(
+    503,
+    "CODE_ALLOCATION_FAILED",
+    "Havola yaratilmadi. Qayta urinib ko‘ring.",
+  );
 }

@@ -192,6 +192,11 @@ function InvitationCard({
           </Link>
         )}
         <div className={styles.cardActions}>
+          {accountSaved && invitation.status === "draft" && (
+            <Link className={styles.secondaryAction} href="/payment/return">
+              To‘lov holati
+            </Link>
+          )}
           {invitation.status === "published" && onUnpublish && (
             <button
               className={styles.secondaryAction}

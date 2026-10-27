@@ -1,0 +1,82 @@
+.page {
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  padding: 32px 16px;
+  background: #fbf8f5;
+  color: #30252a;
+}
+.card {
+  width: min(100%, 560px);
+  padding: clamp(24px, 5vw, 48px);
+  border: 1px solid #e9dedf;
+  border-radius: 24px;
+  background: white;
+  box-shadow: 0 20px 70px #6b16300a;
+}
+.brand {
+  font-family: Georgia, serif;
+  font-size: 32px;
+  color: #801d39;
+  text-decoration: none;
+}
+.eyebrow {
+  margin-top: 32px;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  color: #801d39;
+}
+.card h1 {
+  font-family: Georgia, serif;
+  font-size: clamp(30px, 6vw, 42px);
+  margin: 12px 0 24px;
+}
+.card p {
+  line-height: 1.65;
+  overflow-wrap: anywhere;
+}
+.status {
+  font-weight: 700;
+  color: #801d39;
+}
+.actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 24px 0;
+}
+.link {
+  display: block;
+  margin-top: 24px;
+  color: #801d39;
+  text-underline-offset: 4px;
+}
+.select {
+  display: grid;
+  gap: 8px;
+  font-size: 14px;
+}
+.select select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #d8c6cb;
+  border-radius: 10px;
+  background: white;
+}
+.card button,
+.card a {
+  margin-right: 8px;
+}
+.card :focus-visible {
+  outline: 3px solid #b56d83;
+  outline-offset: 4px;
+}
+@media (max-width: 480px) {
+  .actions {
+    flex-direction: column;
+  }
+  .card :global(.button) {
+    width: 100%;
+    margin: 4px 0;
+  }
+}

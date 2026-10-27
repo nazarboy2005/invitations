@@ -171,8 +171,8 @@ export async function listAdminPayments(
     db = getDb();
   const predicate = db`(${q.status}='' OR p.status=${q.status}) AND (${q.userId}='' OR p.owner_id::text=${q.userId}) AND (u.display_name ILIKE ${q.search} OR p.reference ILIKE ${q.search} OR p.id::text=${q.q} OR p.invitation_id::text=${q.q})`;
   const [rows, [count]] = await Promise.all([
-    db`SELECT p.*,u.display_name,i.slug FROM platform_payments p JOIN users u ON u.id=p.owner_id JOIN invitations i ON i.id=p.invitation_id WHERE ${predicate} ORDER BY p.created_at DESC,p.id DESC LIMIT 20 OFFSET ${q.offset}`,
-    db`SELECT count(*)::int AS total FROM platform_payments p JOIN users u ON u.id=p.owner_id WHERE ${predicate}`,
+    db`SELECT p.*,u.display_name,i.slug FROM admin_payment_records p JOIN users u ON u.id=p.owner_id JOIN invitations i ON i.id=p.invitation_id WHERE ${predicate} ORDER BY p.created_at DESC,p.id DESC LIMIT 20 OFFSET ${q.offset}`,
+    db`SELECT count(*)::int AS total FROM admin_payment_records p JOIN users u ON u.id=p.owner_id WHERE ${predicate}`,
   ]);
   return result(
     rows.map((row) => ({
@@ -181,6 +181,8 @@ export async function listAdminPayments(
       ownerName: row.display_name,
       templateName: row.template_name,
       amountMinor: Number(row.amount_minor),
+      method: row.method,
+      providerStatus: row.provider_status,
       status: row.status,
       reference: row.reference,
       note: row.note,

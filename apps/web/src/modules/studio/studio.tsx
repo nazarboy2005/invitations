@@ -332,6 +332,7 @@ export function Studio({
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
   const [publishing, setPublishing] = useState(false);
+  const [publishingMode, setPublishingMode] = useState("free");
   const [publishIssues, setPublishIssues] = useState<PublicationIssue[]>([]);
   const [publicUrl, setPublicUrl] = useState<string>();
   const pendingAction = useRef<"save" | "publish">("save");
@@ -569,6 +570,7 @@ export function Studio({
       .then((result) => {
         if (alive && Array.isArray(result.templates)) {
           setTemplates(result.templates);
+          setPublishingMode(result.publishingMode ?? "free");
           if (Array.isArray(result.categories))
             setCategories(
               [...result.categories].sort(
@@ -1051,6 +1053,41 @@ export function Studio({
           publishedResponse = await publish();
         }
         let published = await publishedResponse.json();
+        if (
+          publishedResponse.status === 402 &&
+          published.error?.code === "PAYMENT_REQUIRED"
+        ) {
+          if (adminContext)
+            throw new Error(
+              "To‘lovni taklifnoma egasi o‘z hisobidan yakunlashi kerak.",
+            );
+          if (!selectedTemplate)
+            throw new Error("Narxni tekshirish uchun dizaynni qayta tanlang.");
+          const checkout = await studioFetch(
+            `/api/invitations/${saved.id}/checkout`,
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                revision: saved.revision,
+                expectedAmountMinor: selectedTemplate.priceMinor,
+              }),
+            },
+          );
+          const result = await checkout.json();
+          if (!checkout.ok)
+            throw new Error(
+              result.error?.message ??
+                "To‘lovni boshlab bo‘lmadi. Qoralamangiz saqlangan.",
+            );
+          try {
+            sessionStorage.setItem("nodze-order", result.order.id);
+          } catch {
+            /* Return page also loads owned orders. */
+          }
+          window.location.assign(result.order.checkoutUrl ?? "/payment/return");
+          return;
+        }
         if (!publishedResponse.ok) {
           // Another tab may already have published this same saved draft.
           const latestResponse = await studioFetch(
@@ -2880,8 +2917,9 @@ export function Studio({
                     <strong>{selectedTemplate.name}</strong>
                     <b>{formatPrice(selectedTemplate.priceMinor)}</b>
                     <small>
-                      Hozirgi bosqichda nashr qilish uchun to‘lov talab
-                      qilinmaydi.
+                      {publishingMode === "paid"
+                        ? "To‘lov Click orqali amalga oshiriladi. Tasdiqdan so‘ng taklifnoma nashr qilinadi."
+                        : "Hozirgi bosqichda nashr qilish uchun to‘lov talab qilinmaydi."}
                     </small>
                   </div>
                 ) : (
@@ -3442,10 +3480,12 @@ export function Studio({
                   <span>MEHMONLARGA ULASHISH</span>
                   <h2>Tayyor bo‘ldimi?</h2>
                   <p>
-                    Hozir nashr qilish bepul. Nashrdan so‘ng ismlar, mezbon,
-                    tadbir turi, sana va dizayn qulflanadi. Matn, manzil va
-                    boshqa tafsilotlarni tadbir kuni tugaguncha yangilashingiz
-                    mumkin.
+                    {publishingMode === "paid"
+                      ? `Nashr qilish: ${selectedTemplate ? formatPrice(selectedTemplate.priceMinor) : "dizayn narxi bo‘yicha"}. Click tasdig‘idan so‘ng taklifnoma avtomatik nashr qilinadi. To‘lov boshlanganidan keyin ismlar, sana va dizaynni almashtirib bo‘lmaydi. `
+                      : "Hozir nashr qilish bepul. "}
+                    Nashrdan so‘ng ismlar, mezbon, tadbir turi, sana va dizayn
+                    qulflanadi. Matn, manzil va boshqa tafsilotlarni tadbir kuni
+                    tugaguncha yangilashingiz mumkin.
                   </p>
                 </div>
                 <button
@@ -3455,7 +3495,11 @@ export function Studio({
                   disabled={busy || uploading || !!auth}
                 >
                   <Send size={16} />
-                  {publishing ? "Nashr qilinmoqda…" : "Nashr qilish"}
+                  {publishing
+                    ? "Tayyorlanmoqda…"
+                    : publishingMode === "paid"
+                      ? `To‘lash va nashr qilish${selectedTemplate ? ` · ${formatPrice(selectedTemplate.priceMinor)}` : ""}`
+                      : "Nashr qilish"}
                 </button>
               </section>
             )}

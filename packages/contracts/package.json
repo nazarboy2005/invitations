@@ -6,7 +6,8 @@
   "exports": {
     ".": "./src/index.ts",
     "./policies": "./src/policies.ts",
-    "./publication": "./src/publication.ts"
+    "./publication": "./src/publication.ts",
+    "./payment": "./src/payment.ts"
   },
   "dependencies": {
     "zod": "^4.1.12"
