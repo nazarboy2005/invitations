@@ -220,6 +220,21 @@
   Upcoming steps remain muted until the ball reaches them; reverse scrolling
   relocks them. Increase the pinned scroll distance to 1.45 viewport heights so
   the line progresses more slowly and the reader stays longer in the section.
+- Timing correction (2026-10-27): stop the stage slightly earlier (32px when
+  taller than the viewport). Keep step 01 muted like the other steps until the
+  pinned sequence begins, and mute it again when scrolling back above that point.
+- Phone correction (2026-10-28): use a full-section portrait photograph instead
+  of a middle-only image/spacer. Compact the phone layout and pin only when the
+  whole section fits below the navigation; otherwise retain normal scrolling.
+  Keep the approved laptop layout and pin timing unchanged.
+- Section handoff correction (2026-10-28): the gallery must stay attached to the
+  bottom of the three-step section during the pin and move with it after release.
+  Share their sticky stage instead of letting the gallery scroll independently
+  through blank spacer space. Preserve the original scroll distance and holds;
+  do not stretch the phone photograph to hide the gap.
+  Keep phone navigation clearance inside the section's top padding, with the
+  shared stage pinned at the viewport top so the previous section cannot show
+  through above it.
 - Place this section after the celebration story, following the cinematic features.
   Remove the intervening “Ezgu niyatga qulay bir yo‘l” to‘yona promotion and
   sample/disclaimer text. This removes homepage copy only, not product features.

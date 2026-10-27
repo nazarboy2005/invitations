@@ -18,6 +18,7 @@ import { OccasionOrbit } from "@/components/occasion-orbit";
 import { WhyUs } from "@/components/why-us";
 import { selectFeaturedTemplates } from "@/modules/catalog/featured-templates";
 import { PaperShowcase } from "@/components/paper-showcase";
+import { InvitationSteps } from "@/components/invitation-steps";
 
 const questions = [
   {
@@ -127,7 +128,9 @@ export default async function Home() {
           previewImage={heroTemplate ? artwork(heroTemplate) : undefined}
         />
 
-        <PaperShowcase papers={showcasePapers} />
+        <InvitationSteps>
+          <PaperShowcase papers={showcasePapers} />
+        </InvitationSteps>
 
         <section
           id="questions"

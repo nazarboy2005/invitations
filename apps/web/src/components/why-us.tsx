@@ -8,7 +8,6 @@ import {
   Navigation,
 } from "lucide-react";
 import { CinematicScroll } from "./cinematic-scroll";
-import { InvitationSteps } from "./invitation-steps";
 import { CelebrationStory } from "./celebration-story";
 import styles from "./why-us.module.css";
 
@@ -257,7 +256,6 @@ export function WhyUs({
         ))}
       </CinematicScroll>
       <CelebrationStory />
-      <InvitationSteps />
     </section>
   );
 }

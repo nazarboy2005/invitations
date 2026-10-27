@@ -5,7 +5,10 @@
 .scrollTrack[data-pinned="true"] {
   height: calc(var(--stage-height) + var(--scroll-distance));
 }
-.scrollTrack[data-pinned="true"] .section {
+.stage {
+  position: relative;
+}
+.scrollTrack[data-pinned="true"] .stage {
   position: sticky;
   top: var(--stage-top);
 }
@@ -170,6 +173,10 @@
   font-size: 12px;
   line-height: 1.85;
 }
+.process[data-motion="true"] .steps li {
+  --focus: 0;
+  --unlock: 0;
+}
 .process[data-motion="true"] .artwork {
   opacity: calc(0.24 + var(--unlock) * 0.42 + var(--focus) * 0.34);
   filter: grayscale(calc((1 - var(--unlock)) * 0.9));
@@ -293,37 +300,36 @@
   .inner {
     width: calc(100% - 40px);
     max-width: 480px;
-    padding-block: 53px 42px;
+    /* Keep navigation clearance inside the photograph, not above the stage. */
+    padding-block: 108px 28px;
   }
   .photograph {
-    top: 245px;
-    bottom: auto;
-    height: 410px;
-    mask-image: linear-gradient(
-      180deg,
-      transparent,
-      #000 16%,
-      #000 78%,
-      transparent
-    );
+    inset: 0;
+    height: auto;
+    mask-image: none;
   }
   .photograph img {
     object-position: center;
   }
   .section::before {
-    background: none;
+    background: linear-gradient(
+      90deg,
+      rgb(248 245 241 / 65%),
+      rgb(248 245 241 / 55%) 72%,
+      rgb(248 245 241 / 25%)
+    );
   }
   .heading {
     width: 100%;
     min-height: 0;
   }
   .heading h2 {
-    font-size: clamp(43px, 11vw, 64px);
+    font-size: clamp(40px, 10.7vw, 52px);
     letter-spacing: -1.4px;
   }
   .eyebrow {
     max-width: 310px;
-    margin-bottom: 20px;
+    margin-bottom: 14px;
     font-size: 8px;
     letter-spacing: 1.3px;
     gap: 10px;
@@ -332,40 +338,41 @@
     flex-basis: 20px;
   }
   .description {
-    margin: 20px 0 23px;
-    font-size: 12px;
+    margin: 16px 0 18px;
+    font-size: 11.5px;
+    line-height: 1.75;
   }
   .create {
-    min-height: 48px;
-    padding-inline: 22px;
+    min-height: 44px;
+    padding: 11px 22px;
     font-size: 12px;
   }
   .process {
-    margin-top: 258px;
+    margin-top: 28px;
     padding-block: 0;
     padding-left: 24px;
   }
   .steps {
     grid-template-columns: 1fr;
     grid-auto-rows: 1fr;
-    gap: 12px;
+    gap: 8px;
   }
   .step {
-    grid-template-columns: 82px minmax(0, 1fr);
-    gap: 13px;
-    min-height: 132px;
+    grid-template-columns: 66px minmax(0, 1fr);
+    gap: 12px;
+    min-height: 112px;
   }
   .step h3 {
-    font-size: 27px;
-    margin-bottom: 10px;
+    font-size: 24px;
+    margin-bottom: 8px;
   }
   .step p {
-    font-size: 12px;
-    line-height: 1.8;
+    font-size: 11px;
+    line-height: 1.7;
   }
   .number {
-    font-size: 16px;
-    margin-bottom: 8px;
+    font-size: 14px;
+    margin-bottom: 6px;
   }
   .timeline {
     position: absolute;
@@ -418,7 +425,7 @@
   .scrollTrack[data-pinned="true"] {
     height: auto;
   }
-  .scrollTrack[data-pinned="true"] .section {
+  .scrollTrack[data-pinned="true"] .stage {
     position: relative;
     top: auto;
   }

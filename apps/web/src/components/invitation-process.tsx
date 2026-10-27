@@ -38,9 +38,11 @@ export function InvitationProcess() {
     if (!root) return;
     const track = root.closest<HTMLElement>("[data-invitation-track]");
     const stage = root.closest<HTMLElement>("section");
-    if (!track || !stage) return;
+    const pinnedStage = root.closest<HTMLElement>("[data-invitation-stage]");
+    if (!track || !stage || !pinnedStage) return;
     const items = Array.from(root.querySelectorAll<HTMLElement>("[data-step]"));
     const reduced = matchMedia("(prefers-reduced-motion: reduce)");
+    const phone = matchMedia("(max-width: 700px)");
     let frame = 0;
     let visible = false;
     let start = 0;
@@ -64,7 +66,11 @@ export function InvitationProcess() {
       playSiteSound(soundProgress(progress));
       root.style.setProperty("--progress", progress.toFixed(5));
       items.forEach((item, i) => {
-        const { unlock, focus, active } = invitationStepState(progress, i);
+        const { unlock, focus, active } = invitationStepState(
+          progress,
+          i,
+          phase >= 0,
+        );
         item.style.setProperty("--unlock", unlock.toFixed(4));
         item.style.setProperty("--focus", focus.toFixed(4));
         item.dataset.active = String(active);
@@ -77,15 +83,22 @@ export function InvitationProcess() {
     }
 
     function measure() {
-      if (!root || !track || !stage) return;
+      if (!root || !track || !stage || !pinnedStage) return;
       const rect = root.getBoundingClientRect();
       const stageHeight = stage.offsetHeight;
-      // If all three steps cannot fit, preserve normal scrolling and readability.
-      pinned = !reduced.matches && rect.height + 32 <= innerHeight;
-      const stageTop = Math.min(0, innerHeight - stageHeight);
+      // On phones, keep the heading in view too; short screens scroll normally.
+      const requiredHeight = phone.matches
+        ? (root.parentElement?.offsetHeight ?? stageHeight)
+        : rect.height;
+      pinned = !reduced.matches && requiredHeight + 32 <= innerHeight;
+      // Pin slightly earlier, using part of the bottom padding as breathing room.
+      const stageTop = phone.matches
+        ? 0
+        : Math.min(0, innerHeight - stageHeight + 32);
       distance = pinned ? innerHeight * 1.45 : rect.height + innerHeight * 0.12;
       track.style.setProperty("--stage-top", `${stageTop}px`);
-      track.style.setProperty("--stage-height", `${stageHeight}px`);
+      // Both sections share the pin so the gallery stays attached throughout.
+      track.style.setProperty("--stage-height", `${pinnedStage.offsetHeight}px`);
       track.style.setProperty("--scroll-distance", `${distance}px`);
       track.dataset.pinned = String(pinned);
       start = pinned
@@ -124,6 +137,7 @@ export function InvitationProcess() {
     intersection.observe(root);
     resize.observe(root);
     resize.observe(stage);
+    resize.observe(pinnedStage);
     items.forEach((item) => resize.observe(item));
     window.addEventListener("scroll", schedule, { passive: true });
     window.addEventListener("resize", measure);
