@@ -11,7 +11,14 @@ FAQ. They are not presented as customer work. Item destinations are supplied by
   tapping another closes the previous paper. Native pointer focus is deliberately
   ignored so it cannot turn the first tap into navigation.
 - Phones arrange four smaller papers in a 2x2 grid (140px maximum
-  item width, 120px sheet width); laptops show a single row of four.
+  item width, 120px resting sheet width); laptops show a single row of four.
+  The original compact section and row heights remain. Opening uses the existing
+  whitespace between the heading and bottom padding, with 12px clearance from
+  both limits. Scale and horizontal/vertical adjustment are calculated around
+  folded neighbors, conservatively reserving a square the resting sheet's width
+  around each ball, including the other phone row. Growth follows the last
+  quarter of the unfolding pose, so a previous selection shrinks before the next
+  one grows. Opening never changes layout height.
 - Keyboard: focus opens, Enter follows the link, blur closes. Modifier clicks
   preserve native link behavior. With JavaScript disabled the normal link works.
 - There is no text beneath the papers, new sound or scroll animation.

@@ -16,6 +16,13 @@
   use native RAF timing and one shared WebGL2 renderer. Defer engine/data until
   near the section, cap resolution, stop idle/offscreen/hidden-tab rendering,
   and provide normal cover/link fallbacks for reduced motion or unavailable GL.
+- Open-paper sizing (2026-10-28): enlarge the unfolded sheet into the space
+  freed by its folded neighbors. Preserve the original compact section height;
+  do not make rows taller to accommodate enlargement. Keep folded sizes stable.
+  Set the top limit below the heading and the bottom limit inside the existing
+  section padding. Calculate scale and horizontal/vertical adjustment within
+  these limits, clearing folded neighbors in both rows on phones. Keep the
+  layout stationary while opening and switching papers.
 - Visual refinement: use a warm botanical photographic background inspired by
   the supplied gallery reference, with a separately composed phone background.
   Upper-right light must cast the paper shadows toward lower-left. Phones show

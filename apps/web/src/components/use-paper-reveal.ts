@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import type { PaperRenderer } from "./paper-reveal-engine";
 import { paperEase, paperHash } from "./paper-reveal-motion";
 import { printPaperCaption } from "./paper-print";
+import { paperExpansion, paperOpenLayout } from "./paper-layout";
 
 /** One shared, demand-driven WebGL engine; each paper keeps only a 2D presentation canvas. */
 export function usePaperReveal(
@@ -47,6 +48,9 @@ export function usePaperReveal(
     let lightX = 0;
     let lightY = 0;
     let pointerNear = false;
+    let openScale = 1;
+    let openShiftX = 0;
+    let openShiftY = 0;
     const key = `visol-paper-${shape}`;
     const seed = shape - 1;
     const hash = (salt: number) => paperHash(seed, salt);
@@ -103,6 +107,13 @@ export function usePaperReveal(
       last = now;
       const elapsed = Math.min(1, Math.max(0, (now - started) / 1200));
       progress = from + (target - from) * paperEase(elapsed);
+      const expansion = paperExpansion(progress);
+      el!.style.setProperty(
+        "--paper-scale",
+        String(1 + (openScale - 1) * expansion),
+      );
+      el!.style.setProperty("--paper-shift-x", `${openShiftX * expansion}px`);
+      el!.style.setProperty("--paper-shift-y", `${openShiftY * expansion}px`);
       const desiredAngle = pointerNear
         ? Math.atan2(-(lightY - height / 2), lightX - width / 2)
         : 0.85;
@@ -201,6 +212,43 @@ export function usePaperReveal(
     function measure() {
       width = el!.clientWidth;
       height = el!.clientHeight;
+      const slot = el!.closest<HTMLElement>("[data-paper-slot]");
+      const grid = el!.closest<HTMLElement>("[data-paper-grid]");
+      const bounds = el!.closest<HTMLElement>("[data-paper-bounds]");
+      if (slot && grid && bounds) {
+        // Read stable slots, not the animated anchor's transformed bounds.
+        const box = (item: Element) => {
+          const rect = item.getBoundingClientRect();
+          const sheet = item.querySelector("a")!;
+          return {
+            left: rect.left + (rect.width - sheet.clientWidth) / 2,
+            top: rect.top + (rect.height - sheet.clientHeight) / 2,
+            width: sheet.clientWidth,
+            height: sheet.clientHeight,
+          };
+        };
+        const section = bounds.getBoundingClientRect();
+        const heading = bounds
+          .querySelector("[data-paper-heading]")!
+          .getBoundingClientRect();
+        const top = heading.bottom + 12;
+        const layout = paperOpenLayout(
+          box(slot),
+          {
+            left: section.left,
+            top,
+            width: section.width,
+            height: section.bottom - 12 - top,
+          },
+          section,
+          [...grid.querySelectorAll("[data-paper-slot]")]
+            .filter((item) => item !== slot)
+            .map(box),
+        );
+        openScale = layout.scale;
+        openShiftX = layout.shiftX;
+        openShiftY = layout.shiftY;
+      }
       dpr = Math.min(
         matchMedia("(max-width: 700px)").matches ? 1.25 : 1.5,
         devicePixelRatio || 1,
@@ -287,8 +335,8 @@ export function usePaperReveal(
     function pointer(event: PointerEvent) {
       if (event.pointerType === "touch") return;
       const rect = el!.getBoundingClientRect();
-      lightX = event.clientX - rect.left;
-      lightY = event.clientY - rect.top;
+      lightX = ((event.clientX - rect.left) / rect.width) * width;
+      lightY = ((event.clientY - rect.top) / rect.height) * height;
       pointerNear = true;
       kick();
     }
@@ -315,6 +363,9 @@ export function usePaperReveal(
     measure();
     const resize = new ResizeObserver(measure);
     resize.observe(el);
+    if (el.parentElement) resize.observe(el.parentElement);
+    const gallery = el.closest("[data-paper-bounds]");
+    if (gallery) resize.observe(gallery);
     const observe = new IntersectionObserver(([entry]) => {
       visible = entry.isIntersecting;
       if (visible) {

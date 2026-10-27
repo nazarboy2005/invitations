@@ -45,7 +45,7 @@ function Paper({
     [paper.id, select],
   );
   return (
-    <article className={styles.item} data-open={active}>
+    <article className={styles.item} data-open={active} data-paper-slot>
       <a
         ref={root}
         className={styles.paper}
@@ -91,6 +91,7 @@ export function PaperShowcase({ papers }: { papers: ShowcasePaper[] }) {
       id="paper-showcase"
       className={styles.section}
       aria-labelledby="paper-title"
+      data-paper-bounds
     >
       <picture className={styles.backdrop} aria-hidden="true">
         <source
@@ -108,7 +109,7 @@ export function PaperShowcase({ papers }: { papers: ShowcasePaper[] }) {
         />
       </picture>
       <div className={`container ${styles.inner}`}>
-        <div className={styles.heading}>
+        <div className={styles.heading} data-paper-heading>
           <p className={styles.eyebrow}>Taklifnomalar galereyasi</p>
           <h2 id="paper-title">
             Bir taklif.
@@ -116,7 +117,7 @@ export function PaperShowcase({ papers }: { papers: ShowcasePaper[] }) {
             <em>Bir go‘zal hikoya.</em>
           </h2>
         </div>
-        <div className={styles.papers}>
+        <div className={styles.papers} data-paper-grid>
           {papers.map((paper, index) => (
             <Paper
               key={paper.id}

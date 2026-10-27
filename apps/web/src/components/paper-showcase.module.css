@@ -56,8 +56,13 @@
 }
 .item {
   position: relative;
+  display: grid;
+  place-items: center;
   min-width: 0;
   text-align: center;
+}
+.item[data-open="true"] {
+  z-index: 1;
 }
 .paper {
   position: relative;
@@ -97,6 +102,10 @@
 }
 .paper[data-rendered] .canvas {
   opacity: 1;
+}
+.paper[data-rendered] {
+  transform: translate(var(--paper-shift-x, 0px), var(--paper-shift-y, 0px))
+    scale(var(--paper-scale, 1));
 }
 .paper[data-rendered] .fallback,
 .paper[data-rendered] .creases {
