@@ -1,5 +1,33 @@
 # Implementation decisions
 
+## Homepage paper showcase (2026-10-27)
+
+- User approved a four-paper showcase after the three-step section, before FAQ:
+  Anor, Cloud Castle, Kuzgi Chinor and Bogi Eram only. Use their actual template covers and
+  link directly to `/preview?template=…`. These are sample designs, not customer
+  invitations; later destinations can be changed to real published invitations.
+- Desktop: hover unfolds the paper; leaving it/hovering another folds it again.
+  Clicking the unfolded paper opens its preview. Phones: first tap unfolds,
+  second tap on that paper opens its preview; tapping another folds the previous
+  one and unfolds the newly tapped one. Keyboard focus also unfolds for access.
+  No automatic unfolding on entry, new sounds, pinning or scroll trapping.
+- Preserve the supplied CrumpledPaperReveal engine, folding data, crease shading
+  and light response locally. Remove Framer editor/runtime and Motion imports;
+  use native RAF timing and one shared WebGL2 renderer. Defer engine/data until
+  near the section, cap resolution, stop idle/offscreen/hidden-tab rendering,
+  and provide normal cover/link fallbacks for reduced motion or unavailable GL.
+- Visual refinement: use a warm botanical photographic background inspired by
+  the supplied gallery reference, with a separately composed phone background.
+  Upper-right light must cast the paper shadows toward lower-left. Phones show
+  four smaller papers in a 2x2 grid; laptops show all four in one row. Print
+  the catalog name/description over its dark bottom fade into each texture, so
+  the caption folds with the paper rather than sitting underneath. Keep the
+  same tap-to-open/tap-again-to-preview behavior. No text/hints beneath
+  the papers. Bogi Eram uses the curated catalog cover with fully revealed names,
+  not its historical opening artwork.
+
+- User requested removal of the global skip link at the top left.
+
 ## Administrator workspace and access (2026-10-27)
 
 - User follow-up: Mini App admins must enter the admin workspace automatically,

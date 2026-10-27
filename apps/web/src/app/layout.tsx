@@ -17,9 +17,6 @@ export default function RootLayout({
     <html lang="uz-Latn" suppressHydrationWarning>
       <body>
         <TelegramWebAppScript />
-        <a className="skip-link" href="#main">
-          Asosiy sahifaga o‘tish
-        </a>
         {children}
       </body>
     </html>

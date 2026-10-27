@@ -2,7 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowUpRight,
-  ChevronDown,
   Heart,
   ShieldCheck,
   Smartphone,
@@ -80,13 +79,6 @@ export function LandingHero() {
             </li>
           ))}
         </ul>
-        <a
-          href="#templates"
-          className={styles.explore}
-          aria-label="Taklifnoma dizaynlarini kashf eting"
-        >
-          <ChevronDown size={20} strokeWidth={1.4} aria-hidden="true" />
-        </a>
       </div>
       <div className={styles.signature} aria-hidden="true">
         Tabriklar,

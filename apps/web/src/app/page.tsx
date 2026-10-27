@@ -17,6 +17,7 @@ import { LandingHero } from "@/components/landing-hero";
 import { OccasionOrbit } from "@/components/occasion-orbit";
 import { WhyUs } from "@/components/why-us";
 import { selectFeaturedTemplates } from "@/modules/catalog/featured-templates";
+import { PaperShowcase } from "@/components/paper-showcase";
 
 const questions = [
   {
@@ -49,6 +50,25 @@ export default async function Home() {
     (template) => template.published,
   );
   const featuredTemplates = selectFeaturedTemplates(visibleTemplates);
+  const showcasePapers = [
+    "anor",
+    "cloud-castle",
+    "kuzgi-chinor",
+    "bogi-eram",
+  ].flatMap((id) => {
+    const template = visibleTemplates.find((template) => template.id === id);
+    return template
+      ? [
+          {
+            id,
+            name: template.name,
+            description: template.description,
+            image: `/images/home/paper/${id === "bogi-eram" ? "bogi-eram-cover" : id}.webp`,
+            href: `/preview?template=${encodeURIComponent(id)}`,
+          },
+        ]
+      : [];
+  });
   const heroTemplate =
     visibleTemplates.find((template) => template.id === "anor") ??
     visibleTemplates[0];
@@ -106,6 +126,8 @@ export default async function Home() {
         <WhyUs
           previewImage={heroTemplate ? artwork(heroTemplate) : undefined}
         />
+
+        <PaperShowcase papers={showcasePapers} />
 
         <section
           id="questions"

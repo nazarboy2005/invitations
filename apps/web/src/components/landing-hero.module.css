@@ -24,7 +24,6 @@
   object-position: center;
 }
 .portraitSpace,
-.explore,
 .signatureHeart {
   display: none;
 }
@@ -389,16 +388,6 @@
   .benefits svg {
     width: clamp(22px, 3.5vw, 32px);
     height: clamp(22px, 3.5vw, 32px);
-  }
-  .explore {
-    display: grid;
-    place-items: center;
-    width: clamp(29px, 4.3vw, 40px);
-    height: clamp(34px, 5.5vw, 48px);
-    margin: clamp(13px, 2vw, 20px) auto 0;
-    border: 1px solid #ab8249;
-    border-radius: 999px;
-    color: #ab8249;
   }
   .signature {
     position: relative;
