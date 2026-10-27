@@ -5,6 +5,7 @@ import type { PaperRenderer } from "./paper-reveal-engine";
 import { paperEase, paperHash } from "./paper-reveal-motion";
 import { printPaperCaption } from "./paper-print";
 import { paperExpansion, paperOpenLayout } from "./paper-layout";
+import type { PaperStatus } from "./paper-availability";
 
 /** One shared, demand-driven WebGL engine; each paper keeps only a 2D presentation canvas. */
 export function usePaperReveal(
@@ -13,6 +14,8 @@ export function usePaperReveal(
   open: boolean,
   name: string,
   description: string,
+  enabled: boolean,
+  onStatus: (id: number, status: PaperStatus) => void,
 ) {
   const root = useRef<HTMLAnchorElement>(null);
   const canvas = useRef<HTMLCanvasElement>(null);
@@ -23,8 +26,18 @@ export function usePaperReveal(
   useEffect(() => {
     const el = root.current;
     const surface = canvas.current;
-    if (!el || !surface) return;
+    if (!el || !surface || !enabled) return;
     const reduced = matchMedia("(prefers-reduced-motion: reduce)");
+    if (reduced.matches) return;
+    if (
+      typeof ResizeObserver === "undefined" ||
+      typeof IntersectionObserver === "undefined"
+    ) {
+      el.dataset.paperFailure = "observer-unavailable";
+      onStatus(shape, "failed");
+      return;
+    }
+    delete el.dataset.paperFailure;
     let disposed = false;
     let visible = false;
     let near = false;
@@ -34,6 +47,7 @@ export function usePaperReveal(
     let loading = false;
     let failed = false;
     let loaded = false;
+    let hasFrame = false;
     let width = 0;
     let height = 0;
     let dpr = 1;
@@ -59,10 +73,13 @@ export function usePaperReveal(
       cancelAnimationFrame(frame);
       frame = 0;
     }
-    function fallback() {
+    function fallback(reason: unknown = "graphics-context-lost") {
       failed = true;
       stop();
       delete el!.dataset.rendered;
+      el!.dataset.paperFailure =
+        reason instanceof Error ? reason.message : String(reason);
+      onStatus(shape, "failed");
     }
     function options() {
       return {
@@ -94,7 +111,7 @@ export function usePaperReveal(
       frame = 0;
       if (
         disposed ||
-        !visible ||
+        (!visible && (hasFrame || !near)) ||
         document.hidden ||
         reduced.matches ||
         failed ||
@@ -186,6 +203,10 @@ export function usePaperReveal(
           ph,
         );
         el!.dataset.rendered = "true";
+        if (!hasFrame) {
+          hasFrame = true;
+          onStatus(shape, "ready");
+        }
         if (
           (elapsed < 1 && progress !== target) ||
           Math.abs(delta) > 0.002 ||
@@ -194,14 +215,14 @@ export function usePaperReveal(
           renderer.scene.fading(key)
         )
           kick();
-      } catch {
-        fallback();
+      } catch (error) {
+        fallback(error);
       }
     }
     function kick() {
       if (
         !frame &&
-        visible &&
+        (visible || (near && !hasFrame)) &&
         !document.hidden &&
         !reduced.matches &&
         !failed &&
@@ -317,8 +338,8 @@ export function usePaperReveal(
         loaded = true;
         last = performance.now();
         kick();
-      } catch {
-        if (!disposed) fallback();
+      } catch (error) {
+        if (!disposed) fallback(error);
       } finally {
         loading = false;
       }
@@ -360,6 +381,7 @@ export function usePaperReveal(
         kick();
       }
     }
+    setTarget.current(open);
     measure();
     const resize = new ResizeObserver(measure);
     resize.observe(el);
@@ -390,6 +412,10 @@ export function usePaperReveal(
       disposed = true;
       stop();
       setTarget.current = () => {};
+      delete el.dataset.rendered;
+      el.style.removeProperty("--paper-scale");
+      el.style.removeProperty("--paper-shift-x");
+      el.style.removeProperty("--paper-shift-y");
       observe.disconnect();
       preload.disconnect();
       resize.disconnect();
@@ -403,7 +429,7 @@ export function usePaperReveal(
         release?.(renderer);
       }
     };
-  }, [image, shape, name, description]);
+  }, [image, shape, name, description, enabled, onStatus]);
 
   return { root, canvas };
 }

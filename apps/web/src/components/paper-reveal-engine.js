@@ -3,6 +3,7 @@
 // https://framer.com/m/CrumpledPaperReveal-8D5gW8.js@0VQbXvSZ3yFdg4ftHQFG
 // Framer controls, React wrapper and Framer Motion are intentionally excluded.
 // Compressed folding keyframes are loaded separately only near the showcase.
+import { loadPaperBytes } from "./paper-data";
 function _define_property(obj, key, value) {
   Object.defineProperty(obj, key, {
     value,
@@ -15,12 +16,7 @@ function _define_property(obj, key, value) {
 let dataPromise = null;
 function loadCrumpleData() {
   if (!dataPromise) {
-    dataPromise = fetch("/images/home/paper/crumple.bin")
-      .then((r) => {
-        if (!r.ok) throw new Error("Paper data unavailable");
-        return r.arrayBuffer();
-      })
-      .then((buf) => decodeCrumple(new Uint8Array(buf)));
+    dataPromise = loadPaperBytes().then(decodeCrumple);
     dataPromise.catch(() => {
       dataPromise = null;
     });
@@ -69,14 +65,7 @@ function releaseRenderer(r) {
     }
   }, 4e3);
 }
-async function inflateRaw(bytes) {
-  const DS = globalThis.DecompressionStream;
-  if (!DS) throw new Error("DecompressionStream unavailable");
-  const stream = new Blob([bytes]).stream().pipeThrough(new DS("deflate-raw"));
-  return new Uint8Array(await new Response(stream).arrayBuffer());
-}
-async function decodeCrumple(bytes) {
-  const buf = await inflateRaw(bytes);
+async function decodeCrumple(buf) {
   const dv = new DataView(buf.buffer, buf.byteOffset, buf.byteLength);
   const magic = String.fromCharCode(buf[0], buf[1], buf[2], buf[3]);
   if (magic !== "CRP1") throw new Error("Unknown crumple data");

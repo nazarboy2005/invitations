@@ -1,9 +1,22 @@
 "use client";
 
-import { useMemo, useRef, useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useMemo,
+  useReducer,
+  useRef,
+  useState,
+} from "react";
 import { usePaperReveal } from "./use-paper-reveal";
 import { paperInteractions } from "./paper-interactions";
 import styles from "./paper-showcase.module.css";
+import {
+  initialPaperAvailability,
+  paperGalleryMode,
+  recordPaperAvailability,
+  type PaperStatus,
+} from "./paper-availability";
 
 export type ShowcasePaper = {
   id: string;
@@ -18,11 +31,17 @@ function Paper({
   index,
   active,
   select,
+  enabled,
+  animated,
+  onStatus,
 }: {
   paper: ShowcasePaper;
   index: number;
   active: boolean;
   select: (id: string | null) => void;
+  enabled: boolean;
+  animated: boolean;
+  onStatus: (id: number, status: PaperStatus) => void;
 }) {
   const { root, canvas } = usePaperReveal(
     paper.image,
@@ -30,6 +49,8 @@ function Paper({
     active,
     paper.name,
     paper.description,
+    enabled,
+    onStatus,
   );
   const activeRef = useRef(active);
   activeRef.current = active;
@@ -53,7 +74,7 @@ function Paper({
         aria-label={`${paper.name} — taklifnomani ko‘rish`}
         aria-describedby={`paper-description-${paper.id}`}
         data-paper-id={paper.id}
-        {...interaction}
+        {...(animated ? interaction : {})}
       >
         {/* Native cover/link remain available without WebGL, reduced motion or JavaScript. */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -85,6 +106,26 @@ function Paper({
 
 export function PaperShowcase({ papers }: { papers: ShowcasePaper[] }) {
   const [active, setActive] = useState<string | null>(null);
+  const [reduced, setReduced] = useState(false);
+  const [availability, report] = useReducer(
+    recordPaperAvailability,
+    initialPaperAvailability,
+  );
+  const onStatus = useCallback(
+    (id: number, status: PaperStatus) => report({ id, status }),
+    [],
+  );
+  useEffect(() => {
+    const preference = matchMedia("(prefers-reduced-motion: reduce)");
+    setReduced(preference.matches);
+    function change() {
+      setReduced(preference.matches);
+      if (!preference.matches) report({ status: "reset" });
+    }
+    preference.addEventListener("change", change);
+    return () => preference.removeEventListener("change", change);
+  }, []);
+  const mode = paperGalleryMode(availability, papers.length, reduced);
   if (!papers.length) return null;
   return (
     <section
@@ -92,6 +133,7 @@ export function PaperShowcase({ papers }: { papers: ShowcasePaper[] }) {
       className={styles.section}
       aria-labelledby="paper-title"
       data-paper-bounds
+      data-paper-mode={mode}
     >
       <picture className={styles.backdrop} aria-hidden="true">
         <source
@@ -125,6 +167,9 @@ export function PaperShowcase({ papers }: { papers: ShowcasePaper[] }) {
               index={index}
               active={active === paper.id}
               select={setActive}
+              enabled={!availability.failed && !reduced}
+              animated={mode === "animated"}
+              onStatus={onStatus}
             />
           ))}
         </div>

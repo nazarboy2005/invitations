@@ -1,6 +1,17 @@
 .scrollTrack {
   position: relative;
   background: #f8f5f1;
+  overflow-anchor: none;
+}
+.viewportProbe {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100vh;
+  height: 100svh;
+  visibility: hidden;
+  pointer-events: none;
 }
 .scrollTrack[data-pinned="true"] {
   height: calc(var(--stage-height) + var(--scroll-distance));

@@ -1,9 +1,37 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
+import { stableProcessViewport } from "../apps/web/src/components/process-viewport";
 import {
   invitationProcessProgress,
   invitationStepState,
 } from "../apps/web/src/components/invitation-process-motion";
+
+test("phone toolbar resizing cannot toggle pinning or change the scroll spacer", () => {
+  let viewport = stableProcessViewport(
+    undefined,
+    { width: 393, height: 780 },
+    true,
+  );
+  for (const height of [844, 800, 768, 844, 780]) {
+    viewport = stableProcessViewport(viewport, { width: 393, height }, true);
+    assert.equal(viewport.height, 780);
+    assert.equal(770 + 32 <= viewport.height, false);
+    assert.equal(viewport.height * 1.45, 1131);
+  }
+  viewport = stableProcessViewport(viewport, { width: 844, height: 393 }, true);
+  assert.equal(viewport.height, 393, "rotation takes a new measurement");
+  viewport = stableProcessViewport(
+    viewport,
+    { width: 1440, height: 768 },
+    false,
+  );
+  viewport = stableProcessViewport(
+    viewport,
+    { width: 1440, height: 900 },
+    false,
+  );
+  assert.equal(viewport.height, 900, "desktop window resizing still works");
+});
 
 test("the pinned sequence holds at its start and end, and clamps overscroll", () => {
   assert.equal(invitationProcessProgress(-1, true), 0);

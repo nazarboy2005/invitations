@@ -62,6 +62,23 @@ WebGL2, decoder failure and lost contexts also leave usable cover links. This is
 a richer multi-pass effect than the drop shader, with a nonzero CPU/GPU cost;
 there is no claim of zero performance impact or universal mobile frame rates.
 
+All four papers must produce a first frame before the gallery enables animation
+or enlargement. A failure in any one paper switches the entire gallery to the
+original compact static grid; every cover then links directly on the first tap.
+This prevents a scaled open sheet from expanding into an unfolded fallback
+neighbor. Static and loading views never apply the enlargement transform.
+The failed anchor records its technical reason in `data-paper-failure` for
+on-device inspection. Missing/unsupported native `DecompressionStream` falls
+back to `crumple.raw.bin` (212,450 bytes, exactly the unpacked original geometry).
+Modern browsers still use the 100,973-byte compressed file. Sheet height is
+reserved with intrinsic percentage padding before images or WebGL load.
+
+The shared process/gallery pin uses the small viewport height on phones and
+holds its height measurement across same-width toolbar resizes. Width/orientation
+changes still recalculate it. The track opts out of scroll anchoring so its
+sticky descendants cannot become adjustment anchors. These address the observed
+pin/unpin/spacer instability; Redmi hardware behavior still needs a device retest.
+
 ## Botanical background assets
 
 Built-in Image Generation produced two background-only plates, optimized into

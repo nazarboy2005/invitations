@@ -23,6 +23,14 @@
   section padding. Calculate scale and horizontal/vertical adjustment within
   these limits, clearing folded neighbors in both rows on phones. Keep the
   layout stationary while opening and switching papers.
+- Compatibility correction (2026-10-28): keep the same compact, non-overlapping
+  four-cover grid when folding is unavailable. Enable enlargement only after all
+  four papers render; any renderer failure switches the entire gallery to static
+  covers with direct, single-tap preview links. Honor reduced motion. Provide the
+  identical unpacked fold data when native decompression is unavailable. Stabilize
+  phone pin/spacer measurements across address-bar height changes to avoid jumps;
+  recalculate for width/orientation changes. The reported Redmi/Chrome failure
+  needs an on-device retest; its precise cause has not been confirmed.
 - Visual refinement: use a warm botanical photographic background inspired by
   the supplied gallery reference, with a separately composed phone background.
   Upper-right light must cast the paper shadows toward lower-left. Phones show

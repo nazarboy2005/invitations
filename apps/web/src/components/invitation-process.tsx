@@ -10,6 +10,10 @@ import {
 import styles from "./invitation-steps.module.css";
 import { createSoundProgress } from "./site-sound-progress";
 import { playSiteSound } from "./site-sound";
+import {
+  stableProcessViewport,
+  type ProcessViewport,
+} from "./process-viewport";
 
 const steps = [
   {
@@ -32,6 +36,7 @@ const steps = [
 /** A single, reversible scroll value drives the rail and all three illustrations. */
 export function InvitationProcess() {
   const process = useRef<HTMLDivElement>(null);
+  const viewportProbe = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
     const root = process.current;
@@ -48,6 +53,7 @@ export function InvitationProcess() {
     let start = 0;
     let distance = 1;
     let pinned = false;
+    let viewport: ProcessViewport | undefined;
     const soundProgress = createSoundProgress(
       [
         { at: 0.015, sound: "card" },
@@ -86,24 +92,43 @@ export function InvitationProcess() {
       if (!root || !track || !stage || !pinnedStage) return;
       const rect = root.getBoundingClientRect();
       const stageHeight = stage.offsetHeight;
+      viewport = stableProcessViewport(
+        viewport,
+        {
+          width: innerWidth,
+          height: phone.matches
+            ? Math.min(
+                innerHeight,
+                viewportProbe.current?.offsetHeight || innerHeight,
+              )
+            : innerHeight,
+        },
+        phone.matches,
+      );
+      const viewportHeight = viewport.height;
       // On phones, keep the heading in view too; short screens scroll normally.
       const requiredHeight = phone.matches
         ? (root.parentElement?.offsetHeight ?? stageHeight)
         : rect.height;
-      pinned = !reduced.matches && requiredHeight + 32 <= innerHeight;
+      pinned = !reduced.matches && requiredHeight + 32 <= viewportHeight;
       // Pin slightly earlier, using part of the bottom padding as breathing room.
       const stageTop = phone.matches
         ? 0
-        : Math.min(0, innerHeight - stageHeight + 32);
-      distance = pinned ? innerHeight * 1.45 : rect.height + innerHeight * 0.12;
+        : Math.min(0, viewportHeight - stageHeight + 32);
+      distance = pinned
+        ? viewportHeight * 1.45
+        : rect.height + viewportHeight * 0.12;
       track.style.setProperty("--stage-top", `${stageTop}px`);
       // Both sections share the pin so the gallery stays attached throughout.
-      track.style.setProperty("--stage-height", `${pinnedStage.offsetHeight}px`);
+      track.style.setProperty(
+        "--stage-height",
+        `${pinnedStage.offsetHeight}px`,
+      );
       track.style.setProperty("--scroll-distance", `${distance}px`);
       track.dataset.pinned = String(pinned);
       start = pinned
         ? track.getBoundingClientRect().top + scrollY - stageTop
-        : rect.top + scrollY - innerHeight * 0.78;
+        : rect.top + scrollY - viewportHeight * 0.78;
       // Mobile rail terminates exactly at the first/last illustration centres.
       const first = items[0];
       const last = items[items.length - 1];
@@ -159,6 +184,11 @@ export function InvitationProcess() {
 
   return (
     <div ref={process} className={styles.process} data-invitation-process>
+      <span
+        ref={viewportProbe}
+        className={styles.viewportProbe}
+        aria-hidden="true"
+      />
       <ol className={styles.steps}>
         {steps.map(({ title, text, href }, index) => (
           <li key={title} data-step>

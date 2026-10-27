@@ -5,9 +5,75 @@ import { inflateRawSync } from "node:zlib";
 import { paperInteractions } from "../apps/web/src/components/paper-interactions";
 import { paperEase } from "../apps/web/src/components/paper-reveal-motion";
 import {
+  initialPaperAvailability,
+  paperGalleryMode,
+  recordPaperAvailability,
+} from "../apps/web/src/components/paper-availability";
+import { loadPaperBytes } from "../apps/web/src/components/paper-data";
+import {
   paperExpansion,
   paperOpenLayout,
 } from "../apps/web/src/components/paper-layout";
+
+test("enlargement starts only when every paper rendered and any failure makes the whole gallery static", () => {
+  let state = initialPaperAvailability;
+  for (const id of [1, 2, 3]) {
+    state = recordPaperAvailability(state, { id, status: "ready" });
+    assert.equal(paperGalleryMode(state, 4, false), "loading");
+  }
+  state = recordPaperAvailability(state, { id: 4, status: "ready" });
+  assert.equal(paperGalleryMode(state, 4, false), "animated");
+  assert.equal(paperGalleryMode(state, 4, true), "static");
+  state = recordPaperAvailability(state, { id: 2, status: "failed" });
+  assert.equal(paperGalleryMode(state, 4, false), "static");
+  state = recordPaperAvailability(state, { id: 2, status: "ready" });
+  assert.equal(
+    paperGalleryMode(state, 4, false),
+    "static",
+    "late ready callbacks cannot undo a GPU failure",
+  );
+});
+
+test("missing or unsupported native decompression uses identical unpacked geometry", async () => {
+  const compressed = readFileSync(
+    "apps/web/public/images/home/paper/crumple.bin",
+  );
+  const raw = readFileSync("apps/web/public/images/home/paper/crumple.raw.bin");
+  assert.deepEqual(raw, inflateRawSync(compressed));
+  for (const reason of [
+    new ReferenceError("DecompressionStream unavailable"),
+    new TypeError("deflate-raw unsupported"),
+  ]) {
+    const requests: string[] = [];
+    const result = await loadPaperBytes(
+      async (path) => {
+        requests.push(path);
+        return path.endsWith("raw.bin") ? raw : compressed;
+      },
+      async () => {
+        throw reason;
+      },
+    );
+    assert.deepEqual(result, raw);
+    assert.deepEqual(requests, [
+      "/images/home/paper/crumple.bin",
+      "/images/home/paper/crumple.raw.bin",
+    ]);
+  }
+  const requests: string[] = [];
+  await loadPaperBytes(
+    async (path) => {
+      requests.push(path);
+      return compressed;
+    },
+    async (bytes) => inflateRawSync(bytes),
+  );
+  assert.equal(
+    requests.length,
+    1,
+    "modern browsers keep the smaller compressed download",
+  );
+});
 
 test("open sheets grow inside the original compact gallery without touching folded neighbors", () => {
   for (const viewport of [320, 375, 390, 700, 701, 1024, 1440, 1920]) {
