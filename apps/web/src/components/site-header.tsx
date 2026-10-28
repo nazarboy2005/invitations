@@ -19,6 +19,7 @@ export async function SiteHeader({
     <ScrollHeader
       className={`${styles.header} ${styles.heroHeader} ${catalog ? styles.catalogHeader : ""} ${sans.className}`}
       followScroll
+      yieldToCatalog={catalog}
     >
       <div className={styles.heroInner}>
         <Link

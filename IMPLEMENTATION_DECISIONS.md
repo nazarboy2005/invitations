@@ -160,6 +160,27 @@
 
 ## Catalog navigation and curated covers (2026-10-25)
 
+- User requirement (2026-10-28): fully redesign `/templates` as an organized,
+  easy-to-understand catalog rather than a landing page. User correction:
+  keep “Tadbir turi” and category controls at the top on every screen; no left
+  sidebar. Preserve the cards' black bottom fade and their overlaid names and
+  descriptions; do not move captions below previews. Refine heading, spacing,
+  alignment and search/results controls around those requirements. Preserve the
+  curated default order, shared Visol navigation and existing preview/dialog behavior.
+- User supplied a laptop reference: use a full-width ivory floral stationery
+  header, a two-line black/burgundy serif heading and a separated introduction,
+  followed by a wide search and top category pills. This
+  supersedes the compact plain header direction. Adapt the composition to phones
+  with a shorter stacked header, readable copy and horizontally scrollable pills;
+  keep two cards per row with the original dark fades and overlay captions.
+- Latest refinement: remove the sorting dropdown entirely. Selected category
+  pills use the previous burgundy fill color for their border and text, with
+  the site's light background inside. Keep the category row sticky while
+  browsing. Follow-up correction: keep the categories stationary at the top in
+  either scroll direction. The catalog navbar yields to the pinned categories
+  and returns only after scrolling above the gallery with enough room for it;
+  do not make the category row jump below a returning navbar. Other pages retain
+  their existing navbar behavior.
 - Catalog ordering (2026-10-28): on `/templates`, Nikoh starts with Anor,
   Cloud Castle, Bog‘i Eram, Ganch, Green Garden, Kuzgi Chinor, Muhr, O‘rik Guli,
   Samarqand Kechasi, Evelina, then Ko‘zgu; remaining Nikoh designs retain their
