@@ -1808,3 +1808,20 @@ Development agents are distinct from production queue workers. The running app w
 - Slow covering images slightly while keeping them faster than their text:
   reveal distance increases from 0.32 to 0.4 viewport scrolls; text stays at 0.9.
   Generation prompt and assets are documented in docs/home-cinematic-intro.md.
+
+## Homepage help and footer (2026-10-28)
+
+- User requested a complete redesign of the ending help section and footer,
+  with useful questions/answers and elegant, smooth presentation matching Visol.
+- Implementation: ivory editorial FAQ with six practical questions, native
+  exclusive accordion, gentle height/fade transitions and reduced-motion support.
+  Combine the closing invitation and footer into one warm dark section with
+  Visol branding, grouped navigation and a return-to-top link. No added media,
+  client JavaScript or sounds. Keep answers aligned with established product
+  capabilities and editing policy; avoid price/retention guarantees.
+
+## Shared site navigation (2026-10-28)
+
+- Use the single Visol navbar on home, templates and all dashboard/activity pages.
+- Studio, preview, public invitations, payment return and administrator routes retain focused controls without the public navbar.
+- Dashboard layout owns navigation and reserves space for the fixed header. Remove the legacy navbar implementation; preserve signed-in labels and admin mobile entry.
