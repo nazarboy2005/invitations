@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Muhrli Maktub — Taklifnoma</title>
+<link rel="stylesheet" href="fonts/fonts.css">
+<link rel="stylesheet" href="source/template.css">
+<link rel="stylesheet" href="platform.css">
+</head>
+<body>
+
+<div id="env-root" style="min-height:100vh; background-color:#f4e8d2; overflow-x:hidden;">
+
+  <!-- ── Sealed-envelope stage (tap the wax seal to open) ── -->
+  <div id="env-stage" role="button" tabindex="0" aria-label="Taklifnomani ochish" style="position:fixed; inset:0; z-index:60; cursor:pointer; overflow:hidden;">
+    <img src="envelope-img/01-desk-splash.webp" alt="" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;">
+    <div style="position:absolute; inset:0; background:radial-gradient(120% 90% at 50% 42%, rgba(0,0,0,0) 40%, rgba(24,12,7,.52) 100%);"></div>
+    <div style="position:relative; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:16px 24px;">
+      <div id="env-monogram" data-i18n="monogram_default" style="font-family:'Comforter',cursive; font-size:clamp(26px, 7svh, 44px); line-height:1; color:#ecd3a0; text-shadow:0 1px 3px rgba(30,14,8,.65), 0 0 22px rgba(30,14,8,.5); margin-bottom:min(22px, 2.6svh);"></div>
+      <div style="perspective:1100px; width:min(84vw, 360px, 64svh);">
+        <div style="position:relative; width:100%; aspect-ratio:1.468; transform-style:preserve-3d;">
+          <img id="env-back1" src="envelope-img/03-envelope-liner.webp" alt="" style="position:absolute; left:-14%; top:-93.5%; width:127.4%; z-index:1; opacity:0; clip-path:polygon(11% 40%, 50% 8%, 89.5% 40%, 89.5% 81.6%, 11% 81.6%);">
+          <div id="env-letter" style="position:absolute; left:18%; top:42%; width:64%; aspect-ratio:2.4; z-index:2; transform-style:preserve-3d;">
+            <div style="position:absolute; inset:0; background:url('envelope-img/04-letter-paper.webp') 0% 0% / 100% 300%; border-radius:2px; box-shadow:0 6px 18px -6px rgba(30,14,8,.5);"></div>
+            <div id="env-p2" style="position:absolute; top:100%; left:0; width:100%; height:100%; transform-origin:top center; transform:rotateX(-178deg); transform-style:preserve-3d;">
+              <div style="position:absolute; inset:0; background:url('envelope-img/04-letter-paper.webp') 0% 50% / 100% 300%; backface-visibility:hidden;"></div>
+              <div style="position:absolute; inset:0; background:linear-gradient(#f0e6d0, #e7dabf); transform:rotateX(180deg); backface-visibility:hidden;"></div>
+              <div class="env-crease" style="position:absolute; inset:0; background:linear-gradient(to bottom, rgba(60,30,10,.3), rgba(60,30,10,0) 45%); opacity:.55; pointer-events:none; backface-visibility:hidden;"></div>
+              <div id="env-p3" style="position:absolute; top:100%; left:0; width:100%; height:100%; transform-origin:top center; transform:rotateX(178deg); transform-style:preserve-3d;">
+                <div style="position:absolute; inset:0; background:url('envelope-img/04-letter-paper.webp') 0% 100% / 100% 300%; backface-visibility:hidden;"></div>
+                <div style="position:absolute; inset:0; background:linear-gradient(#f0e6d0, #e7dabf); transform:rotateX(180deg); backface-visibility:hidden;"></div>
+                <div class="env-crease" style="position:absolute; inset:0; background:linear-gradient(to bottom, rgba(60,30,10,.3), rgba(60,30,10,0) 45%); opacity:.55; pointer-events:none; backface-visibility:hidden;"></div>
+              </div>
+            </div>
+          </div>
+          <img id="env-back2" src="envelope-img/03-envelope-liner.webp" alt="" style="position:absolute; left:-14%; top:-93.5%; width:127.4%; z-index:3; opacity:0; clip-path:polygon(11% 40%, 50% 55.2%, 89.5% 40%, 89.5% 81.6%, 11% 81.6%);">
+          <img id="env-front" src="envelope-img/02-envelope-front.webp" alt="" style="position:absolute; left:-14%; top:-66.4%; width:127.4%; z-index:4; clip-path:polygon(11% 28.4%, 50% 60%, 89.5% 28.4%, 89.5% 71.2%, 11% 71.2%);">
+          <img id="env-flap" src="envelope-img/02-envelope-front.webp" alt="" style="position:absolute; left:-14%; top:-66.4%; width:127.4%; z-index:5; clip-path:polygon(11% 28.4%, 89.5% 28.4%, 50% 60%); transform-origin:50% 28.4%; backface-visibility:hidden;">
+          <div id="env-specks" aria-hidden="true"></div>
+          <button type="button" id="env-seal" aria-label="Taklifnomani ochish" style="position:absolute; left:50%; top:71%; width:24%; aspect-ratio:1; min-width:64px; z-index:7; border:none; padding:0; background:transparent; cursor:pointer; transform:translate(-50%,-50%); filter:drop-shadow(0 8px 14px rgba(25,10,6,.55)); animation:kSealPulse 2.6s ease-in-out infinite;">
+            <img src="envelope-img/07-wax-seal.webp" alt="" style="width:100%; height:100%; display:block;">
+          </button>
+        </div>
+      </div>
+      <div style="margin-top:min(34px, 4svh); font-family:'Prata',serif; font-size:13px; letter-spacing:.18em; text-transform:uppercase; text-align:center; color:#f3e6cc; background:rgba(50,24,40,.55); backdrop-filter:blur(6px); border:1px solid rgba(236,211,160,.35); border-radius:999px; padding:14px 24px; animation:kHint 2.2s ease-in-out infinite;">
+        <span id="env-hint-open" data-i18n="stage_open">Taklifnomani ochish</span>
+        <span id="env-hint-skip" data-i18n="stage_skip" style="display:none;">O'tkazib yuborish uchun bosing</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Drifting gold flecks ── -->
+  <div id="env-motes" aria-hidden="true" style="position:fixed; inset:0; z-index:55; pointer-events:none;"></div>
+
+  <!-- ── Music toggle ── -->
+  <audio id="env-audio" loop preload="none"></audio>
+  <button type="button" id="env-music" aria-label="Musiqa" style="display:none; position:fixed; top:14px; left:max(calc(50% - 201px), 14px); z-index:70; width:46px; height:46px; border-radius:50%; background:rgba(244,232,210,.85); backdrop-filter:blur(8px); border:1px solid rgba(160,120,60,.4); align-items:center; justify-content:center; cursor:pointer; font-size:19px; color:#5c2a4d; box-shadow:0 6px 16px -8px rgba(58,28,20,.4);"><span id="env-music-icon" style="opacity:.45;">♪</span></button>
+
+  <!-- ── Language switcher ── -->
+  <div class="env-lang" role="group" aria-label="Til / Language">
+    <button type="button" data-lang="uz-Latn" class="on">UZ</button>
+    <button type="button" data-lang="uz-Cyrl">УЗ</button>
+    <button type="button" data-lang="en">EN</button>
+    <button type="button" data-lang="ru">RU</button>
+  </div>
+
+  <div style="max-width:430px; margin:0 auto; position:relative; color:#3a2233;">
+
+    <!-- ============ HERO LETTER ============ -->
+    <section style="position:relative; min-height:100svh; overflow:hidden; display:flex; flex-direction:column; justify-content:center; padding:84px 18px 42px;">
+      <img id="env-hero-bg" src="envelope-img/01-desk-splash.webp" alt="" style="position:absolute; left:-6%; top:-14%; width:112%; height:128%; object-fit:cover; z-index:0;">
+      <div style="position:absolute; inset:0; z-index:1; background:linear-gradient(to bottom, rgba(58,28,20,.18), rgba(244,232,210,0) 26%, rgba(244,232,210,0) 60%, #f4e8d2 97%);"></div>
+      <img id="env-hero-env" src="envelope-img/03-envelope-liner.webp" alt="" style="position:absolute; left:50%; bottom:-26%; width:114%; z-index:1; transform:translateX(-50%); clip-path:polygon(11% 40%, 50% 8%, 89.5% 40%, 89.5% 81.6%, 11% 81.6%); filter:drop-shadow(0 -14px 30px rgba(30,14,8,.35)); opacity:.98;">
+      <div style="position:relative; z-index:2; width:100%; max-width:394px; margin:0 auto;">
+        <div style="position:relative; aspect-ratio:4/5; background:url('envelope-img/04-letter-paper.webp') center / cover; border-radius:3px; box-shadow:0 26px 60px -18px rgba(43,20,12,.6); overflow:hidden; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:18% 15%;">
+          <div aria-hidden="true" style="position:absolute; left:4%; right:4%; top:33.3%; height:7px; background:linear-gradient(rgba(90,55,25,.11), rgba(90,55,25,0)); pointer-events:none;"></div>
+          <div aria-hidden="true" style="position:absolute; left:4%; right:4%; top:66.6%; height:7px; background:linear-gradient(rgba(90,55,25,.11), rgba(90,55,25,0)); pointer-events:none;"></div>
+          <div aria-hidden="true" style="position:absolute; top:0; bottom:0; left:-45%; width:55%; background:linear-gradient(105deg, rgba(255,244,214,0), rgba(255,244,214,.15), rgba(255,244,214,0)); animation:kSheen 8s linear infinite; pointer-events:none;"></div>
+          <div data-i18n="hero_kicker" style="position:relative; font-size:11px; letter-spacing:.3em; color:rgba(109,74,99,.9); margin-bottom:16px;">TO'Y TAKLIFNOMASI</div>
+          <div id="env-name1" class="env-shimmer-name"></div>
+          <div id="env-amp" style="position:relative; font-family:'Comforter',cursive; font-size:30px; line-height:1; color:#b78d4e; margin:2px 0;">&amp;</div>
+          <div id="env-name2" class="env-shimmer-name"></div>
+          <div id="env-hero-date" style="position:relative; width:100%; min-width:0; font-family:'Prata',serif; font-size:16px; letter-spacing:.12em; color:#4a2340; margin-top:20px;"></div>
+          <div id="env-hero-venueshort" style="position:relative; font-size:13.5px; color:rgba(74,35,64,.75); margin-top:8px;"></div>
+        </div>
+        <div style="text-align:center; margin-top:20px;">
+          <div data-i18n="scroll_hint" style="font-family:'Comforter',cursive; font-size:20px; color:#8a5a3b;">Pastga suring</div>
+          <div style="font-size:18px; color:#8a5a3b; animation:kHint 1.8s ease-in-out infinite;">↓</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ INVITATION LETTER ============ -->
+    <section style="padding:56px 18px 0;">
+      <div data-reveal style="position:relative; max-width:394px; margin:0 auto;">
+        <img src="envelope-img/08-pressed-flower.webp" alt="" style="position:absolute; top:-32px; right:-12px; width:96px; transform:rotate(26deg); z-index:3; pointer-events:none; filter:drop-shadow(0 6px 8px rgba(43,20,12,.3));">
+        <div style="position:relative; aspect-ratio:4/5; background:url('envelope-img/04-letter-paper.webp') center / cover; border-radius:3px; box-shadow:0 20px 50px -18px rgba(43,20,12,.5); overflow:hidden; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:17% 14%;">
+          <div aria-hidden="true" style="position:absolute; top:0; bottom:0; left:-45%; width:55%; background:linear-gradient(105deg, rgba(255,244,214,0), rgba(255,244,214,.13), rgba(255,244,214,0)); animation:kSheen 9s linear 2s infinite; pointer-events:none;"></div>
+          <div data-i18n="inv_title" style="position:relative; font-family:'Comforter',cursive; font-size:28px; color:#7a2230;">Aziz mehmonlar!</div>
+          <div id="env-inv-body" data-i18n="inv_body_default" style="position:relative; font-size:14.5px; line-height:1.68; color:#4a2340; margin-top:12px; text-wrap:pretty;"></div>
+          <div aria-hidden="true" style="position:relative; width:54px; height:1px; background:#b78d4e; margin:16px auto 14px;"></div>
+          <div class="env-datetime" style="position:relative; font-family:'Prata',serif; font-size:15px; letter-spacing:.06em; color:#7a2230;"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ COUNTDOWN ============ -->
+    <section style="padding:64px 18px 0; text-align:center;">
+      <div data-reveal>
+        <img src="envelope-img/09-ribbon.webp" alt="" style="width:230px; display:block; margin:0 auto 14px; animation:kSway 6s ease-in-out infinite;">
+        <div data-i18n="save_kicker" style="font-family:'Comforter',cursive; font-size:24px; color:#8a5a3b;">Sanani belgilab qo'ying</div>
+        <div data-i18n="cd_title" style="font-family:'Prata',serif; font-size:21px; color:#4a2340; margin:6px 0 22px;">To'ygacha qoldi</div>
+        <div id="env-cd-grid" style="display:grid; grid-template-columns:repeat(4, 1fr); gap:10px; max-width:394px; margin:0 auto;">
+          <div class="env-cd-tile">
+            <img src="envelope-img/07-wax-seal.webp" alt="" style="position:absolute; width:86%; left:7%; top:6%; opacity:.1; pointer-events:none;">
+            <div id="env-cd-d" style="position:relative; font-family:'Prata',serif; font-size:27px; color:#7a2230;">–</div>
+            <div data-i18n="cd_days" style="position:relative; font-size:9.5px; letter-spacing:.18em; text-transform:uppercase; color:rgba(74,35,64,.6); margin-top:4px;">Kun</div>
+          </div>
+          <div class="env-cd-tile">
+            <img src="envelope-img/07-wax-seal.webp" alt="" style="position:absolute; width:86%; left:7%; top:6%; opacity:.1; pointer-events:none;">
+            <div id="env-cd-h" style="position:relative; font-family:'Prata',serif; font-size:27px; color:#7a2230;">–</div>
+            <div data-i18n="cd_hours" style="position:relative; font-size:9.5px; letter-spacing:.18em; text-transform:uppercase; color:rgba(74,35,64,.6); margin-top:4px;">Soat</div>
+          </div>
+          <div class="env-cd-tile">
+            <img src="envelope-img/07-wax-seal.webp" alt="" style="position:absolute; width:86%; left:7%; top:6%; opacity:.1; pointer-events:none;">
+            <div id="env-cd-m" style="position:relative; font-family:'Prata',serif; font-size:27px; color:#7a2230;">–</div>
+            <div data-i18n="cd_mins" style="position:relative; font-size:9.5px; letter-spacing:.18em; text-transform:uppercase; color:rgba(74,35,64,.6); margin-top:4px;">Daqiqa</div>
+          </div>
+          <div class="env-cd-tile">
+            <img src="envelope-img/07-wax-seal.webp" alt="" style="position:absolute; width:86%; left:7%; top:6%; opacity:.1; pointer-events:none;">
+            <div id="env-cd-s" style="position:relative; font-family:'Prata',serif; font-size:27px; color:#7a2230;">–</div>
+            <div data-i18n="cd_secs" style="position:relative; font-size:9.5px; letter-spacing:.18em; text-transform:uppercase; color:rgba(74,35,64,.6); margin-top:4px;">Soniya</div>
+          </div>
+        </div>
+        <div id="env-cd-arrived" data-i18n="cd_arrived" style="display:none; font-family:'Prata',serif; font-size:22px; color:#7a2230; line-height:1.4;">Kutilgan kun keldi.</div>
+        <div class="env-datetime" style="font-family:'Prata',serif; font-size:15px; color:#4a2340; margin-top:18px;"></div>
+      </div>
+    </section>
+
+    <!-- ============ PROGRAMME ============ -->
+    <section id="env-prog-section" style="padding:68px 18px 0;">
+      <div data-reveal style="max-width:394px; margin:0 auto;">
+        <div style="text-align:center; margin-bottom:26px;">
+          <div data-i18n="prog_kicker" style="font-family:'Comforter',cursive; font-size:23px; color:#8a5a3b;">Oqshom dasturi</div>
+          <div data-i18n="prog_title" style="font-family:'Prata',serif; font-size:21px; color:#4a2340; margin-top:4px;">Dastur</div>
+        </div>
+        <div id="env-prog" style="position:relative; margin-left:36px; border-left:2px solid rgba(183,141,78,.55); padding:4px 0 4px 28px; display:flex; flex-direction:column; gap:26px;">
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ VENUE ============ -->
+    <section style="padding:68px 18px 0;">
+      <div data-reveal style="max-width:394px; margin:0 auto; text-align:center;">
+        <div data-i18n="venue_kicker" style="font-family:'Comforter',cursive; font-size:23px; color:#8a5a3b;">Sizni kutamiz</div>
+        <div data-i18n="venue_title" style="font-family:'Prata',serif; font-size:21px; color:#4a2340; margin:4px 0 18px;">To'y manzili</div>
+        <div style="background:#f7efdd; border:1px solid #cbb27e; border-radius:12px; overflow:hidden; box-shadow:0 18px 44px -18px rgba(58,28,20,.45);">
+          <img id="env-venue-photo" src="envelope-img/05-venue.webp" alt="" style="width:100%; display:block; aspect-ratio:3/2; object-fit:cover;">
+          <div style="padding:18px 16px 20px;">
+            <div id="env-venue-name" data-i18n="venue_name_default" style="font-family:'Prata',serif; font-size:19px; color:#4a2340;"></div>
+            <div id="env-venue-addr" data-i18n="venue_addr_default" style="font-size:14px; color:rgba(74,35,64,.75); margin-top:6px;"></div>
+            <div style="display:flex; gap:8px; margin-top:16px;">
+              <a id="env-map-g" class="env-map-btn" href="#" target="_blank" rel="noopener">Google Maps</a>
+              <a id="env-map-y" class="env-map-btn" data-i18n="yandex_label" href="#" target="_blank" rel="noopener">Yandex Xarita</a>
+              <a id="env-map-t" class="env-map-btn" href="#" target="_blank" rel="noopener" style="display:none;">Telegram</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ DETAILS (dress code · RSVP · flowers) ============ -->
+    <section id="env-details-section" style="padding:68px 18px 0;">
+      <div data-reveal style="position:relative; max-width:394px; margin:0 auto;">
+        <img src="envelope-img/08-pressed-flower.webp" alt="" style="position:absolute; top:-26px; left:-10px; width:84px; transform:rotate(-18deg) scaleX(-1); z-index:3; pointer-events:none; filter:drop-shadow(0 6px 8px rgba(43,20,12,.3));">
+        <div style="background:#f7efdd; border:1px solid #cbb27e; border-radius:12px; padding:26px 20px 28px; box-shadow:0 18px 44px -18px rgba(58,28,20,.45); text-align:center;">
+          <div id="env-dress-block">
+            <div data-i18n="dress_kicker" style="font-family:'Comforter',cursive; font-size:22px; color:#8a5a3b;">Dress-kod</div>
+            <div id="env-dress-text" data-i18n="dress_text_default" style="font-size:14.5px; line-height:1.6; color:#4a2340; margin-top:8px;"></div>
+            <div id="env-dress-colors" style="display:flex; justify-content:center; gap:10px; margin-top:12px;">
+            </div>
+          </div>
+          <div id="env-div1" aria-hidden="true" style="width:60px; height:1px; background:#b78d4e; margin:22px auto;"></div>
+          <div id="env-rsvp-block">
+            <div data-i18n="rsvp_kicker" style="font-family:'Comforter',cursive; font-size:22px; color:#8a5a3b;">Ishtirokni tasdiqlang</div>
+            <div id="env-rsvp-text" data-i18n="rsvp_text_default" style="font-size:14px; line-height:1.6; color:#4a2340; margin-top:8px;">Iltimos, ishtirokingizni quyidagi raqam orqali tasdiqlang:</div>
+            <a id="env-phone" href="#" style="display:inline-block; font-family:'Prata',serif; font-size:19px; letter-spacing:.04em; color:#7a2230; margin-top:8px; padding:10px 14px; text-decoration:none;"></a>
+          </div>
+          <div id="env-div2" aria-hidden="true" style="width:60px; height:1px; background:#b78d4e; margin:14px auto 22px;"></div>
+          <div id="env-flowers" data-i18n="flowers_note_default" style="font-family:'Comforter',cursive; font-size:21px; line-height:1.45; color:#7a2230;"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ WISHES ============ -->
+    <section style="padding:68px 18px 0;">
+      <div data-reveal style="max-width:394px; margin:0 auto;">
+        <div style="text-align:center;">
+          <img src="envelope-img/09-ribbon.webp" alt="" style="width:200px; display:block; margin:0 auto 12px; animation:kSway 7s ease-in-out 1s infinite;">
+          <div data-i18n="wish_kicker" style="font-family:'Comforter',cursive; font-size:23px; color:#8a5a3b;">Tilaklar daftari</div>
+          <div data-i18n="wish_title" style="font-family:'Prata',serif; font-size:21px; color:#4a2340; margin-top:4px;">Iliq so'zlaringiz</div>
+        </div>
+        <form id="env-wish-form" class="wish-form" style="display:flex; flex-direction:column; gap:10px; margin-top:20px;">
+          <input name="wname" data-i18n-ph="ph_name" placeholder="Ismingiz" style="padding:13px 14px; min-height:46px; background:#fbf5e6; border:1px solid #d3bd8e; border-radius:9px; font-size:15px; color:#3a2233; outline:none;">
+          <textarea name="wmsg" rows="3" data-i18n-ph="ph_msg" placeholder="Kelin-kuyovga tilagingiz…" style="padding:13px 14px; background:#fbf5e6; border:1px solid #d3bd8e; border-radius:9px; font-size:15px; color:#3a2233; outline:none; resize:vertical; line-height:1.55;"></textarea>
+          <button type="submit" style="min-height:48px; background:#5c2a4d; color:#f3e6cc; font-family:'Prata',serif; font-size:14px; letter-spacing:.14em; text-transform:uppercase; border:none; border-radius:9px; cursor:pointer;"><span data-i18n="btn_send">Yuborish</span></button>
+        </form>
+        <div id="env-wish-confirm" data-i18n="wish_thanks" style="display:none; text-align:center; font-style:italic; font-size:14px; color:#8a5a3b; margin-top:14px;">Rahmat — tilagingiz saqlandi ♡</div>
+        <div id="env-wish-empty" data-i18n="wish_empty" style="text-align:center; font-style:italic; font-size:14px; color:rgba(74,35,64,.55); margin-top:24px;">Birinchi tilakni siz yozing</div>
+        <div id="env-wish-list" style="display:flex; flex-direction:column; gap:14px; margin-top:24px;"></div>
+      </div>
+    </section>
+
+    <!-- ============ FOOTER ============ -->
+    <section style="position:relative; margin-top:80px; overflow:hidden;">
+      <img src="envelope-img/06-footer-desk.webp" alt="" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;">
+      <div style="position:absolute; inset:0; background:linear-gradient(to bottom, #d9b894, rgba(217,184,148,0) 32%, rgba(24,12,7,.35) 100%);"></div>
+      <div style="position:relative; z-index:2; padding:72px 18px 46px; text-align:center; max-width:394px; margin:0 auto;">
+        <div aria-hidden="true" style="position:relative; width:190px; height:102px; margin:0 auto 18px;">
+          <img src="envelope-img/02-envelope-front.webp" alt="" style="position:absolute; left:0; top:-66.4%; width:100%; clip-path:inset(28.4% 10.5% 28.8% 11%); filter:drop-shadow(0 10px 18px rgba(20,10,6,.5));">
+          <img src="envelope-img/07-wax-seal.webp" alt="" style="position:absolute; left:50%; top:52%; width:26%; transform:translate(-50%,-50%); filter:drop-shadow(0 4px 7px rgba(20,10,6,.5));">
+        </div>
+        <div data-i18n="with_love" style="font-family:'Comforter',cursive; font-size:31px; color:#ecd3a0; text-shadow:0 1px 2px rgba(40,18,10,.7), 0 0 18px rgba(40,18,10,.55);">Sevgi bilan,</div>
+        <div id="env-foot-names" style="font-family:'Prata',serif; font-size:17px; color:#f3e6cc; margin-top:8px; text-shadow:0 1px 2px rgba(40,18,10,.7), 0 0 14px rgba(40,18,10,.5);"><span id="env-foot-n1"></span> <span id="env-foot-joiner" data-i18n="names_joiner">va</span> <span id="env-foot-n2"></span></div>
+        <div id="env-foot-year" style="font-size:11px; letter-spacing:.3em; color:rgba(243,230,204,.78); margin-top:16px; text-shadow:0 1px 2px rgba(40,18,10,.7);"></div>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<script src="source/motion.js"></script>
+<script src="source/wish-cards.js"></script>
+<script src="source/wish-close.js"></script>
+<script src="ui-copy.js"></script>
+<script src="bridge.js"></script>
+</body>
+</html>

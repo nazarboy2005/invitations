@@ -28,6 +28,8 @@ import styles from "./full-template-preview.module.css";
 const AnorInvitation = dynamic(() => import("@/templates/anor/renderer").then((module) => module.AnorInvitation));
 const WedivoPulauSehati = dynamic(() => import("@/templates/wedivo-pulau-sehati/renderer").then((module) => module.WedivoPulauSehati));
 const TakliflaZarhalSahifa = dynamic(() => import("@/templates/taklifla-zarhal-sahifa/renderer").then((module) => module.TakliflaZarhalSahifaInvitation));
+const TakliflaAsalari = dynamic(() => import("@/templates/taklifla-asalari/renderer").then((module) => module.TakliflaAsalari));
+const MuhrliMaktubInvitation = dynamic(() => import("@/templates/taklifla-muhrli-maktub/renderer").then((module) => module.MuhrliMaktubInvitation));
 const MarxabaInvitation = dynamic(() => import("@/templates/marxaba/renderer").then((module) => module.MarxabaInvitation));
 const InvitateInvitation = dynamic(() => import("@/templates/invitate/renderer").then((module) => module.InvitateInvitation));
 const VelvetRoyaleInvitation = dynamic(() => import("@/templates/velvet-royale/renderer").then((module) => module.VelvetRoyaleInvitation));
@@ -338,6 +340,10 @@ export function FullTemplatePreview({
         <WedivoPulauSehati invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} silentPlayback={silentPlayback} qaReducedMotion={qaReducedMotion} />
       ) : template.id === "taklifla-zarhal-sahifa" ? (
         <TakliflaZarhalSahifa invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} sampleWishes={catalogPreview} silentPlayback={silentPlayback} qaReducedMotion={qaReducedMotion} />
+      ) : template.id === "taklifla-asalari" ? (
+        <TakliflaAsalari invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview sampleWishes={catalogPreview} silentPlayback={silentPlayback} qaReducedMotion={qaReducedMotion} />
+      ) : template.id === "taklifla-muhrli-maktub" ? (
+        <MuhrliMaktubInvitation invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} silentPlayback={silentPlayback} />
       ) : template.id === "anor" ? (
         <AnorInvitation
           invitation={invitation}

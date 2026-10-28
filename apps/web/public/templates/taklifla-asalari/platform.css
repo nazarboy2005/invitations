@@ -1,0 +1,19 @@
+[hidden] { display: none !important; }
+body[data-pending] .shell, body[data-pending] .taklifla-lang-switch { visibility: hidden; }
+.hero h1.name { overflow-wrap: anywhere; max-width: 100%; }
+.splash h1, .name-mini, .foot .line, .venue h2 { overflow-wrap: anywhere; }
+.invite .when { flex-wrap: wrap; }
+.invite p, .plate p { white-space: pre-line; }
+.splash .stack-top { flex-shrink: 0; }
+.splash { gap: 28px; }
+body.locked { overflow-y: auto; }
+body.locked .shell { height: auto; min-height: 100svh; }
+.wish-status { color: var(--ink-soft); font-size: 13px; line-height: 1.5; }
+:focus-visible { outline: 3px solid var(--sky-deep); outline-offset: 4px; }
+.reduce-motion *, .reduce-motion *::before, .reduce-motion *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+.reduce-motion .reveal { opacity: 1; transform: none; }
+.reduce-motion .particles { display: none; }
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; }
+  .particles { display: none; }
+}

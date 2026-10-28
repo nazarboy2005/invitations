@@ -1,0 +1,1506 @@
+<!doctype html>
+<html lang="uz">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<title>Asila turns three · July 14, 2026</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Quicksand:wght@400;500;600;700&family=Caveat:wght@500;700&display=swap" rel="stylesheet" />
+
+<style>
+/* ------------------------------------------------------------------ *
+ * Asila's 3rd Birthday — Tunnel-book invitation
+ * Single self-contained HTML. All paths under assets/ are optional;
+ * if a WebP is missing the section falls back to gradients.
+ * ------------------------------------------------------------------ */
+
+:root{
+  --sky-1:#bfe6f7;
+  --sky-2:#7ec9ec;
+  --sky-deep:#4ba8d6;
+  --sun:#ffd45e;
+  --sun-deep:#f0a93a;
+  --cream:#fffaf0;
+  --paper:#fff7e6;
+  --coral:#ff998a;
+  --mint:#a9e0c3;
+  --ink:#2c3a5e;
+  --ink-soft:#5a6890;
+  --frame:#1d2238;   /* dark desktop frame */
+  --frame-2:#0f1322;
+  --max:430px;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+
+body{
+  font-family:'Quicksand',system-ui,sans-serif;
+  color:var(--ink);
+  background:
+    radial-gradient(60% 70% at 50% 10%, #2a3050 0%, transparent 70%),
+    radial-gradient(60% 60% at 50% 100%, #1a1f36 0%, transparent 70%),
+    linear-gradient(180deg,#15182a,#0c0e1d);
+  min-height:100vh;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+
+/* Dark framing background pattern on desktop */
+body::before{
+  content:"";
+  position:fixed; inset:0;
+  background:
+    radial-gradient(2px 2px at 12% 18%, #fff5 50%, transparent 51%),
+    radial-gradient(1.5px 1.5px at 78% 32%, #fff4 50%, transparent 51%),
+    radial-gradient(2px 2px at 38% 72%, #fff3 50%, transparent 51%),
+    radial-gradient(1.5px 1.5px at 88% 84%, #fff5 50%, transparent 51%),
+    radial-gradient(1.5px 1.5px at 22% 56%, #fff4 50%, transparent 51%);
+  pointer-events:none;
+  z-index:0;
+}
+
+.shell{
+  position:relative;
+  max-width:var(--max);
+  margin:0 auto;
+  background:var(--cream);
+  box-shadow:
+    0 0 0 1px #ffffff10,
+    0 30px 80px -20px #000a,
+    0 60px 120px -40px #0009;
+  overflow:hidden;
+  isolation:isolate;
+  z-index:1;
+}
+
+/* paper grain overlay across the whole shell */
+.shell::after{
+  content:"";
+  position:absolute; inset:0;
+  pointer-events:none;
+  z-index:50;
+  opacity:.35;
+  mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence baseFrequency='0.9' numOctaves='2' seed='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.65  0 0 0 0 0.55  0 0 0 0 0.4  0 0 0 0.12 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+/* ---------- Section base ---------- */
+section{
+  position:relative;
+  overflow:hidden;
+  padding:64px 22px;
+}
+section.full{
+  min-height:100svh;
+  padding:48px 22px;
+  display:flex;
+  flex-direction:column;
+}
+
+/* fallback gradient backgrounds (used when WebP missing) */
+.bg-splash{
+  background:
+    radial-gradient(120% 60% at 50% 110%, #b6e5a3 0 35%, transparent 60%),
+    linear-gradient(180deg,#ffe6c6 0%, #ffd1a8 30%, #ffc8e3 55%, #cfeaf6 80%, #bfe6f7 100%);
+}
+.bg-hero{
+  background:
+    radial-gradient(80% 40% at 50% 90%, #a8d99a 0 40%, transparent 65%),
+    linear-gradient(180deg,#cdeaf8 0%, #a3d7ee 60%, #d8f0e2 100%);
+}
+.bg-card{
+  background:linear-gradient(180deg,#fffdf6 0%, #fff5e0 100%);
+}
+.bg-venue{
+  background:
+    radial-gradient(70% 40% at 50% 90%, #f8cfa8 0 40%, transparent 65%),
+    linear-gradient(180deg,#bee3f4 0%, #ffe2bf 100%);
+}
+.bg-countdown{
+  background:
+    radial-gradient(50% 30% at 50% 70%, #ffd086 0 35%, transparent 70%),
+    linear-gradient(180deg,#ffb27a 0%, #ff8e8e 60%, #6e6aa8 100%);
+}
+
+/* image bg layer */
+.imgbg{
+  position:absolute; inset:0; z-index:0;
+  background-size:cover; background-position:center;
+}
+
+/* ---------- Typography ---------- */
+h1,h2,h3{font-family:'Fredoka',system-ui,sans-serif;font-weight:600;margin:0;line-height:1.05;color:var(--ink)}
+.script{font-family:'Caveat',cursive;font-weight:700}
+
+.eyebrow{
+  font-family:'Quicksand',sans-serif;
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:.22em;
+  font-size:11px;
+  color:var(--ink-soft);
+}
+
+/* drop-shadow stack for text over busy painted backgrounds */
+.contrast{
+  text-shadow:
+    0 1px 0 #fff,
+    0 0 12px #fff8,
+    0 2px 14px #fffa,
+    0 6px 28px #2229;
+}
+.contrast-dark{
+  text-shadow:
+    0 1px 0 #fff8,
+    0 0 14px #fffb,
+    0 2px 18px #fffb;
+}
+
+/* ===========================================================
+   SPLASH
+=========================================================== */
+.splash{
+  align-items:center;
+  justify-content:space-between;  /* push content top + bottom so the sun face shows between */
+  text-align:center;
+  color:var(--ink);
+  padding-top:54px;
+  padding-bottom:36px;
+}
+.splash .stack-top{
+  position:relative; z-index:2;
+  display:flex;flex-direction:column;align-items:center;gap:18px;
+}
+.splash .stack-bottom{
+  position:relative; z-index:2;
+  display:flex;flex-direction:column;align-items:center;gap:16px;
+}
+.monogram{
+  width:120px;height:120px;border-radius:50%;
+  background:radial-gradient(circle at 30% 30%, #fff7c8 0%, var(--sun) 55%, var(--sun-deep) 100%);
+  display:grid;place-items:center;
+  font-family:'Fredoka',sans-serif;font-weight:700;font-size:64px;color:#a8590f;
+  box-shadow:
+    inset 0 -10px 24px #d18a2240,
+    0 18px 36px #f0a93a55,
+    0 0 0 8px #fff8;
+  position:relative;
+}
+.monogram::after{
+  content:"";position:absolute;inset:-22px;border-radius:50%;
+  background:radial-gradient(circle, #fff5c855 0%, transparent 60%);
+  z-index:-1;
+}
+.splash .top-line{font-family:'Caveat',cursive;font-size:24px;color:var(--ink-soft);font-weight:700}
+.splash h1{font-size:34px;letter-spacing:.5px}
+.splash p.lede{
+  max-width:300px;font-size:15px;line-height:1.55;color:var(--ink-soft);
+  font-weight:500;margin:0;
+}
+.splash .open-btn{
+  appearance:none;border:0;cursor:pointer;
+  font-family:'Fredoka',sans-serif;font-weight:600;font-size:15px;letter-spacing:.6px;
+  padding:16px 32px;border-radius:999px;
+  background:linear-gradient(180deg, #ffe082, var(--sun) 60%, var(--sun-deep));
+  color:#5a3309;
+  box-shadow:
+    inset 0 1px 0 #fff,
+    inset 0 -3px 0 #d4892240,
+    0 12px 24px -8px #f0a93a99,
+    0 4px 0 #d48a2255;
+  transform:translateY(0);transition:transform .15s ease, box-shadow .15s ease;
+}
+.splash .open-btn:active{transform:translateY(2px);box-shadow:inset 0 1px 0 #fff,inset 0 -3px 0 #d4892240,0 6px 14px -6px #f0a93a99}
+.splash .hint{font-size:12px;color:var(--ink-soft);letter-spacing:.2em;text-transform:uppercase}
+
+/* hide everything but splash until "Open Invitation" */
+body.locked .below-splash{display:none}
+body.locked{overflow:hidden}
+body.locked .shell{height:100svh}
+
+/* ===========================================================
+   HERO  — tunnel book
+=========================================================== */
+.hero{
+  justify-content:center;
+  text-align:center;
+  min-height:100svh;
+  color:var(--ink);
+}
+.tunnel{
+  position:absolute; inset:0; z-index:1;
+  pointer-events:none;
+}
+.tunnel .arch{
+  position:absolute; left:50%; top:50%;
+  background-repeat:no-repeat;background-position:center;background-size:contain;
+  transform-origin:center;
+  filter:drop-shadow(0 8px 16px #0003);
+}
+.arch.back{
+  width:118%;height:118%;
+  transform:translate(-50%,-50%) scale(1);
+  background-image:url('asalari-img/arch-back.webp');
+  opacity:.85;
+}
+.arch.mid{
+  width:108%;height:108%;
+  transform:translate(-50%,-50%);
+  background-image:url('asalari-img/arch-mid.webp');
+  opacity:.95;
+}
+.arch.front{
+  width:104%;height:104%;
+  transform:translate(-50%,-50%);
+  background-image:url('asalari-img/arch-front.webp');
+}
+
+.hero .core{
+  position:relative; z-index:3;
+  margin:auto;
+  /* sit INSIDE the arch interior, not over the painted frame */
+  width:62%;
+  max-width:260px;
+  display:flex;flex-direction:column;align-items:center;gap:14px;
+}
+.hero .pre{
+  font-family:'Caveat',cursive;font-size:26px;color:var(--ink);
+  font-weight:700;
+}
+.hero h1.name{
+  font-size:64px; line-height:.95;
+  letter-spacing:.5px;
+  font-weight:700;
+  background:linear-gradient(180deg,#fff5c4 0%, var(--sun) 35%, var(--sun-deep) 65%, #b25e0e 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  position:relative;
+  filter:drop-shadow(0 2px 0 #fff) drop-shadow(0 4px 12px #fff8) drop-shadow(0 8px 22px #00000044);
+}
+/* shimmer */
+.hero h1.name::after{
+  content:attr(data-text);
+  position:absolute;inset:0;
+  background:linear-gradient(110deg, transparent 30%, #ffffffcc 50%, transparent 70%);
+  background-size:220% 100%;
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  animation:shimmer 3.2s ease-in-out infinite;
+  pointer-events:none;
+}
+@keyframes shimmer{
+  0%{background-position:180% 0}
+  60%{background-position:-80% 0}
+  100%{background-position:-80% 0}
+}
+
+.hero .age-pill{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:8px 18px;border-radius:999px;
+  background:#fffefa;
+  border:2px dashed var(--sun-deep);
+  font-family:'Fredoka',sans-serif;font-weight:600;color:var(--ink);font-size:14px;
+  box-shadow:0 6px 14px #00000018;
+}
+.hero .age-pill b{font-size:18px;color:var(--sun-deep)}
+.hero .date{
+  font-family:'Fredoka',sans-serif;font-weight:500;font-size:18px;color:var(--ink);
+  letter-spacing:.6px;
+}
+.hero .scroll-hint{
+  position:absolute;bottom:22px;left:0;right:0; z-index:4;
+  display:flex;flex-direction:column;align-items:center;gap:6px;
+  font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--ink);
+  opacity:.75;
+}
+.hero .scroll-hint .dot{
+  width:8px;height:14px;border:2px solid var(--ink);border-radius:6px;position:relative;
+}
+.hero .scroll-hint .dot::after{
+  content:"";position:absolute;left:50%;top:3px;width:2px;height:4px;background:var(--ink);
+  border-radius:1px;transform:translateX(-50%);
+  animation:scrollDot 1.6s ease-in-out infinite;
+}
+@keyframes scrollDot{
+  0%,100%{transform:translate(-50%,0);opacity:1}
+  60%{transform:translate(-50%,4px);opacity:.2}
+}
+
+/* ===========================================================
+   DECORATIVE DIVIDER
+=========================================================== */
+.divider{
+  padding:18px 0; background:transparent; display:flex; align-items:center; justify-content:center; gap:14px;
+  color:var(--sun-deep);
+}
+.divider .line{
+  flex:1; max-width:90px; height:2px; border-radius:2px;
+  background:linear-gradient(90deg, transparent, var(--sun-deep) 50%, transparent);
+}
+.divider .glyph{font-size:22px; line-height:1; transform:translateY(-1px); filter:drop-shadow(0 1px 0 #fff)}
+
+/* ===========================================================
+   INVITATION CARD
+=========================================================== */
+.invite{ text-align:center; padding:48px 22px 56px }
+.invite .card{
+  position:relative;
+  background:var(--paper);
+  border-radius:24px;
+  padding:36px 26px;
+  border:1px solid #ecd9b0;
+  box-shadow:
+    0 1px 0 #fff,
+    0 18px 36px -18px #00000026;
+}
+.invite .eyebrow{margin-bottom:14px;display:block}
+.invite h2{font-size:28px;margin-bottom:14px}
+.invite .name-mini{
+  font-family:'Caveat',cursive;font-size:42px;color:var(--sun-deep);font-weight:700;
+  line-height:1;margin:6px 0 18px;
+}
+.invite p{font-size:15px;line-height:1.65;color:var(--ink-soft);margin:0 auto;max-width:300px}
+.invite .when{
+  margin-top:22px;display:flex;align-items:center;justify-content:center;gap:14px;
+  font-family:'Fredoka',sans-serif;font-weight:500;color:var(--ink);
+}
+.invite .when .pip{width:6px;height:6px;border-radius:50%;background:var(--sun-deep)}
+
+/* ===========================================================
+   TIMELINE
+=========================================================== */
+.timeline{padding:56px 22px}
+.timeline .head{text-align:center;margin-bottom:32px}
+.timeline h2{font-size:26px}
+.timeline .sub{font-family:'Caveat',cursive;font-size:22px;color:var(--coral);font-weight:700}
+
+.tl{position:relative;padding:8px 0 8px 0}
+.tl::before{
+  content:"";
+  position:absolute; left:34px; top:10px; bottom:10px; width:3px;
+  background:repeating-linear-gradient(180deg, var(--sun-deep) 0 6px, transparent 6px 12px);
+  border-radius:3px;
+  z-index:0;
+}
+.tl-item{
+  position:relative; display:grid; grid-template-columns:68px 1fr; gap:10px; padding:14px 0;
+  z-index:1;
+}
+.tl-item .marker{
+  width:52px;height:52px;border-radius:50%;
+  background:#fff;border:3px solid var(--sun);
+  display:grid;place-items:center;
+  font-family:'Fredoka',sans-serif;font-weight:600;color:var(--ink);font-size:13px;
+  box-shadow:0 6px 14px #0001, inset 0 -3px 0 #fff3c440;
+  position:relative; z-index:2;
+  justify-self:start;
+  margin-left:8px;
+}
+.tl-item .plate{
+  background:var(--paper);
+  border-radius:16px;
+  padding:14px 16px;
+  border:1px solid #ecd9b0;
+  box-shadow:0 6px 14px -8px #00000018;
+  position:relative; z-index:2;
+}
+.tl-item .plate h3{font-size:17px;margin-bottom:4px;font-family:'Fredoka',sans-serif;font-weight:600;color:var(--ink)}
+.tl-item .plate p{margin:0;font-size:13.5px;color:var(--ink-soft);line-height:1.5}
+
+/* ===========================================================
+   VENUE
+=========================================================== */
+.venue{
+  min-height:72svh; color:var(--ink);
+  display:flex; flex-direction:column; justify-content:flex-end;
+  padding:48px 22px;
+}
+.venue .v-inner{position:relative;z-index:2;text-align:center}
+.venue .eyebrow{display:block;margin-bottom:8px}
+.venue h2{font-size:28px}
+.venue p{margin:8px auto 0;max-width:300px;color:var(--ink);font-weight:500}
+.venue .map-btn{
+  margin-top:22px;
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:'Fredoka',sans-serif;font-weight:600;font-size:14px;letter-spacing:.4px;
+  padding:14px 26px; border-radius:999px;
+  background:#fff;color:var(--ink);text-decoration:none;
+  border:2px solid var(--ink);
+  box-shadow:0 8px 0 -2px var(--sun-deep), 0 10px 24px -10px #0006;
+  transition:transform .15s ease, box-shadow .15s ease;
+}
+.venue .map-btn:active{transform:translateY(3px);box-shadow:0 4px 0 -2px var(--sun-deep)}
+
+/* ===========================================================
+   INFO CARD
+=========================================================== */
+.info{padding:48px 22px}
+.info .card{
+  background:var(--paper);
+  border-radius:24px;
+  padding:30px 24px;
+  border:1px solid #ecd9b0;
+  box-shadow:0 18px 36px -18px #00000026;
+}
+.info h2{font-size:22px;text-align:center;margin-bottom:18px}
+.info ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:14px}
+.info li{display:grid;grid-template-columns:40px 1fr;gap:12px;align-items:flex-start}
+.info li .icon{
+  width:36px;height:36px;border-radius:50%;
+  background:#fff;border:2px solid var(--sun);
+  display:grid;place-items:center;font-size:18px;
+  box-shadow:0 4px 8px #00000010;
+}
+.info li b{display:block;font-family:'Fredoka',sans-serif;font-weight:600;color:var(--ink);font-size:14px;margin-bottom:2px}
+.info li span{font-size:13.5px;color:var(--ink-soft);line-height:1.5}
+
+/* ===========================================================
+   WISHES
+=========================================================== */
+.wishes{padding:56px 22px;background:linear-gradient(180deg, var(--cream), #fff3da)}
+.wishes .head{text-align:center;margin-bottom:22px}
+.wishes h2{font-size:26px}
+.wishes .sub{font-family:'Caveat',cursive;font-size:22px;color:var(--coral);font-weight:700}
+.wishes form{
+  background:#fff;border-radius:20px;padding:18px;border:1px solid #ecd9b0;
+  box-shadow:0 10px 24px -16px #00000022;
+  display:flex;flex-direction:column;gap:10px;
+}
+.wishes input,.wishes textarea{
+  font:inherit;font-family:'Quicksand',sans-serif;
+  width:100%;padding:12px 14px;border-radius:12px;border:1.5px solid #e6d6ab;background:#fffdf3;
+  color:var(--ink);outline:none;
+}
+.wishes input:focus,.wishes textarea:focus{border-color:var(--sun-deep);background:#fff}
+.wishes textarea{min-height:84px;resize:vertical}
+.wishes button{
+  appearance:none;border:0;cursor:pointer;
+  font-family:'Fredoka',sans-serif;font-weight:600;font-size:14px;
+  padding:13px 18px;border-radius:12px;color:#5a3309;
+  background:linear-gradient(180deg, #ffe082, var(--sun) 70%, var(--sun-deep));
+  box-shadow:inset 0 1px 0 #fff,inset 0 -2px 0 #d4892240,0 8px 18px -8px #f0a93a88;
+}
+.wishes .feed{
+  margin-top:22px; display:flex;flex-direction:column;gap:10px;
+  max-height:280px;overflow-y:auto;padding-right:4px;
+  scrollbar-width:thin;scrollbar-color:#e3c98a transparent;
+}
+.wishes .feed::-webkit-scrollbar{width:6px}
+.wishes .feed::-webkit-scrollbar-thumb{background:#e3c98a;border-radius:6px}
+.wish{
+  background:#fff;border:1px solid #ecd9b0;border-radius:14px;padding:12px 14px;
+  box-shadow:0 6px 14px -10px #0001;
+}
+.wish .who{font-family:'Fredoka',sans-serif;font-weight:600;font-size:13px;color:var(--ink)}
+.wish .when{font-size:11px;color:var(--ink-soft);letter-spacing:.04em}
+.wish .msg{margin-top:6px;font-size:14px;line-height:1.5;color:#444b6a}
+.wishes .empty{
+  text-align:center;font-family:'Caveat',cursive;font-size:20px;color:var(--ink-soft);
+  padding:18px 0;
+}
+
+/* ===========================================================
+   COUNTDOWN
+=========================================================== */
+.countdown{
+  min-height:64svh;
+  color:#fff;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;
+}
+.countdown .head{position:relative;z-index:2}
+.countdown .eyebrow{color:#fff;opacity:.85}
+.countdown h2{color:#fff;font-size:28px;margin-bottom:6px}
+.countdown .sub{font-family:'Caveat',cursive;font-size:22px;color:#fff;opacity:.95}
+.countdown .grid{
+  position:relative; z-index:2;
+  margin-top:24px;
+  display:grid;grid-template-columns:repeat(4, 1fr);gap:10px; width:100%; max-width:380px;
+}
+.countdown .cell{
+  background:rgba(255,255,255,.92);
+  color:var(--ink);
+  border-radius:16px;
+  padding:14px 6px 10px;
+  box-shadow:0 18px 36px -18px #0007, inset 0 -4px 0 #fff8;
+}
+.countdown .cell .n{
+  font-family:'Fredoka',sans-serif;font-weight:600;font-size:30px;line-height:1;color:var(--ink);
+  font-variant-numeric:tabular-nums;
+}
+.countdown .cell .l{
+  margin-top:4px;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft);
+  font-weight:600;
+}
+
+/* ===========================================================
+   FOOTER
+=========================================================== */
+.foot{
+  text-align:center;padding:50px 22px 60px;
+  background:linear-gradient(180deg, #fff3da, #ffe7c2);
+}
+.foot .mono{
+  display:inline-grid;place-items:center;
+  width:74px;height:74px;border-radius:50%;
+  background:radial-gradient(circle at 30% 30%, #fff7c8, var(--sun) 60%, var(--sun-deep));
+  font-family:'Fredoka',sans-serif;font-weight:700;font-size:32px;color:#7c3f08;
+  box-shadow:0 10px 20px -10px #f0a93a99, inset 0 -4px 0 #d4892240;
+  margin-bottom:14px;
+}
+.foot .date{font-family:'Fredoka',sans-serif;font-weight:500;color:var(--ink);font-size:14px;letter-spacing:.4px}
+.foot .line{
+  margin:12px auto 0;max-width:280px;
+  font-family:'Caveat',cursive;font-size:22px;color:var(--ink-soft);font-weight:700;
+}
+
+/* ===========================================================
+   FLOATERS — diagonal drift, always visible on-screen
+=========================================================== */
+.floater{
+  position:absolute; pointer-events:none; z-index:3;
+  background-repeat:no-repeat;background-size:contain;background-position:center;
+  will-change:left, top, transform;
+  opacity:.96;
+  filter:drop-shadow(0 6px 10px #0002);
+}
+
+/* Splash cloud sits BEHIND the headline text */
+.splash .floater.float-cloud{ z-index:1; }
+
+/* Second cloud on splash — slightly smaller, different beat */
+.splash .float-cloud.cloud2{
+  width:104px; height:74px;
+  opacity:.78;
+  animation: drift-cloud-2 40s linear infinite;
+  animation-delay:-18s;
+}
+@keyframes drift-cloud-2{
+  0%   { left:-22%;  top:24%; transform:rotate(-2deg); }
+  25%  { left:18%;   top:8%;  transform:rotate(3deg); }
+  50%  { left:50%;   top:18%; transform:rotate(-3deg); }
+  75%  { left:78%;   top:4%;  transform:rotate(2deg); }
+  100% { left:120%;  top:22%; transform:rotate(-1deg); }
+}
+/* Use left/top % (relative to section) so floaters truly cross the
+   frame from one side to the other, with a long visible middle. */
+@keyframes drift-1{
+  0%   { left:-22%;  top:42%; transform:rotate(-6deg); }
+  25%  { left:18%;   top:18%; transform:rotate(4deg); }
+  50%  { left:48%;   top:32%; transform:rotate(-3deg); }
+  75%  { left:78%;   top:14%; transform:rotate(6deg); }
+  100% { left:118%;  top:48%; transform:rotate(-4deg); }
+}
+@keyframes drift-2{
+  0%   { left:108%;  top:8%;  transform:rotate(2deg); }
+  25%  { left:72%;   top:22%; transform:rotate(-2deg); }
+  50%  { left:38%;   top:6%;  transform:rotate(3deg); }
+  75%  { left:8%;    top:24%; transform:rotate(-4deg); }
+  100% { left:-26%;  top:12%; transform:rotate(2deg); }
+}
+@keyframes drift-3{
+  0%   { left:-24%;  top:60%; transform:rotate(-2deg); }
+  25%  { left:14%;   top:36%; transform:rotate(3deg); }
+  50%  { left:46%;   top:50%; transform:rotate(-4deg); }
+  75%  { left:80%;   top:30%; transform:rotate(2deg); }
+  100% { left:120%;  top:55%; transform:rotate(-2deg); }
+}
+/* bee bobs around with a curvy path — different rhythm than butterfly */
+@keyframes drift-bee{
+  0%   { left:-20%;  top:18%; transform:rotate(8deg); }
+  20%  { left:14%;   top:42%; transform:rotate(-6deg); }
+  40%  { left:36%;   top:18%; transform:rotate(10deg); }
+  60%  { left:58%;   top:46%; transform:rotate(-8deg); }
+  80%  { left:84%;   top:22%; transform:rotate(6deg); }
+  100% { left:120%;  top:44%; transform:rotate(-4deg); }
+}
+/* balloons drift upward + sideways — they have strings so they should rise */
+@keyframes drift-up{
+  0%   { left:-10%;  top:118%; transform:rotate(-3deg); }
+  25%  { left:18%;   top:78%;  transform:rotate(2deg); }
+  50%  { left:42%;   top:42%;  transform:rotate(-2deg); }
+  75%  { left:68%;   top:14%;  transform:rotate(3deg); }
+  100% { left:96%;   top:-30%; transform:rotate(-2deg); }
+}
+@keyframes bob{
+  0%,100% { transform:translateY(0) rotate(var(--r,0deg)); }
+  50%     { transform:translateY(-8px) rotate(var(--r,0deg)); }
+}
+
+.float-butterfly{
+  width:92px;height:74px;
+  background-image:url('asalari-img/butterfly.webp');
+  animation:drift-1 28s linear infinite;
+  animation-delay:-9s;
+}
+.float-bee{
+  width:74px;height:64px;
+  background-image:url('asalari-img/bee.webp');
+  animation:drift-bee 26s linear infinite;
+  animation-delay:-7s;
+}
+.float-cloud{
+  width:130px;height:92px;
+  background-image:url('asalari-img/cloud-puff.webp?v=2');
+  animation:drift-2 34s linear infinite;
+  animation-delay:-12s;
+}
+.float-balloon-y{
+  width:78px;height:140px;
+  background-image:url('asalari-img/balloon-yellow.webp');
+  animation:drift-up 32s linear infinite;
+  animation-delay:-4s;
+}
+.float-balloon-r{
+  width:78px;height:140px;
+  background-image:url('asalari-img/balloon-red.webp');
+  animation:drift-up 36s linear infinite;
+  animation-delay:-14s;
+}
+.float-balloon-b{
+  width:78px;height:140px;
+  background-image:url('asalari-img/balloon-blue.webp');
+  animation:drift-up 30s linear infinite;
+  animation-delay:-8s;
+}
+
+/* per-instance overrides */
+.float-butterfly.b1{animation-delay:-3s;animation-duration:30s}
+.float-butterfly.b2{animation-delay:-14s;animation-duration:34s}
+.float-bee.be1{animation-delay:-5s;animation-duration:24s}
+.float-bee.be2{animation-delay:-15s;animation-duration:30s}
+
+/* fallback floaters (pure CSS) if images missing — small drawn shapes */
+.float-fallback{
+  width:54px;height:54px;border-radius:50%;
+  background:radial-gradient(circle at 35% 30%, #fff, var(--sun) 60%, var(--sun-deep));
+  box-shadow:0 8px 14px -6px #00000033;
+}
+
+/* ===========================================================
+   PARTICLES (sparkles)
+=========================================================== */
+.particles{position:fixed;inset:0;pointer-events:none;z-index:40;overflow:hidden}
+.particle{
+  position:absolute; bottom:-20px; width:8px; height:8px; border-radius:50%;
+  background:radial-gradient(circle at 35% 35%, #fff, var(--sun) 60%, var(--sun-deep));
+  opacity:0;
+  animation: rise linear infinite;
+}
+@keyframes rise{
+  0%   { transform: translateY(0)    rotate(0)   scale(.6); opacity:0;}
+  10%  { opacity:.9 }
+  90%  { opacity:.9 }
+  100% { transform: translateY(-110vh) rotate(360deg) scale(1.1); opacity:0;}
+}
+
+/* ===========================================================
+   MUSIC TOGGLE
+=========================================================== */
+.music{
+  position:fixed; z-index:80;
+  top:14px; right:14px;
+  width:44px;height:44px;border-radius:50%;
+  background:rgba(255,255,255,.85);
+  border:1.5px solid #ffffff;
+  box-shadow:0 6px 18px -6px #0007;
+  display:grid;place-items:center;cursor:pointer;
+  backdrop-filter:blur(8px);
+  transition:transform .2s ease;
+}
+.music:active{transform:scale(.95)}
+.music svg{width:18px;height:18px;color:var(--ink)}
+.music .bars{display:none;align-items:flex-end;gap:2px;height:18px}
+.music.playing .bars{display:flex}
+.music.playing svg{display:none}
+.music .bar{width:3px;background:var(--ink);border-radius:2px;animation:eq 1s ease-in-out infinite}
+.music .bar:nth-child(1){height:8px;animation-delay:0s}
+.music .bar:nth-child(2){height:14px;animation-delay:.15s}
+.music .bar:nth-child(3){height:10px;animation-delay:.3s}
+@keyframes eq{ 0%,100%{transform:scaleY(.4)} 50%{transform:scaleY(1)} }
+
+/* ===========================================================
+   SCROLL REVEAL
+=========================================================== */
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .8s ease, transform .8s ease}
+.reveal.in{opacity:1;transform:none}
+
+/* ===========================================================
+   RESPONSIVE / DESKTOP FRAME
+=========================================================== */
+@media (min-width: 600px){
+  body{padding:24px 0}
+  .shell{border-radius:28px}
+  .music{position:absolute}
+}
+
+/* tighten on very small */
+@media (max-width: 360px){
+  .hero h1.name{font-size:54px}
+  .splash h1{font-size:30px}
+}
+
+/* respect reduced motion */
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important}
+}
+</style>
+<script>
+/* ===== taklifla customizer =====
+   ?names= (single child name), ?date= DD.MM.YYYY, ?venue=, ?address=,
+   ?time=, ?age=. demo=1 keeps mock content. */
+(function () {
+  var q = new URLSearchParams(location.search);
+  // Apply the owner-pasted map link regardless of demo mode — the editor
+  // preview iframe runs in demo mode (no real slug yet) but we still
+  // want the user to see their venue pin reflected on the map button.
+  // Other personalisation (names/date) is kept gated by demo so the
+  // catalog thumbnail keeps showing the mock couple.
+  (function applyMapUrl() {
+    var mapUrl = q.get('map_url'); if (mapUrl && !/^https?:/i.test(mapUrl)) mapUrl = ''; /* http(s) only */
+    if (!mapUrl) return;
+    var apply = function () {
+      var el = document.querySelector('.venue .map-btn');
+      if (el) el.href = mapUrl;
+    };
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', apply);
+    } else {
+      apply();
+    }
+  })();
+  if (q.get('demo') === '1') return;
+  function ready(fn) {
+    if (document.readyState !== 'loading') fn();
+    else document.addEventListener('DOMContentLoaded', fn);
+  }
+  ready(function () {
+    var qs = function (s) { return document.querySelector(s); };
+    var qa = function (s) { return document.querySelectorAll(s); };
+
+    var name = q.get('names');
+    if (name) {
+      var who = name.split(/\s*[&+—]\s*|\s+(?:va|и)\s+/)[0].trim();
+      // Stash the child's name so the i18n pass can rebuild the
+      // language-aware composite captions (splash "<name> turns N",
+      // "for little <name>", footer line) without re-baking English.
+      window.__B12_NAME = who;
+      var nm = qs('.name');
+      if (nm) { nm.textContent = who; nm.setAttribute('data-text', who); nm.setAttribute('data-user-set', '1'); }
+      // Footer + splash monograms (single letter — birthday is one name).
+      var splashMono = qs('.splash .monogram');
+      if (splashMono) { splashMono.textContent = who.charAt(0).toUpperCase(); splashMono.setAttribute('data-user-set', '1'); }
+      var mono = qs('.foot .mono');
+      if (mono) { mono.textContent = who.charAt(0).toUpperCase(); mono.setAttribute('data-user-set', '1'); }
+      document.title = who + " — Birthday Invitation";
+    }
+
+    var age = q.get('age');
+    if (age) {
+      // Stash the age so the i18n pass can rebuild the age-bearing
+      // captions per language (splash headline, hero "happy Nth
+      // birthday", the age pill numeral). Default art age was "3".
+      window.__B12_AGE = age.trim();
+      var pill = qs('.age-pill b');
+      if (pill) { pill.textContent = age.trim(); pill.setAttribute('data-user-set', '1'); }
+    }
+
+    var venue = q.get('venue');
+    if (venue) {
+      var vh = qs('.venue h2'); if (vh) vh.textContent = venue;
+    }
+    var addr = q.get('address');
+    if ((venue || addr) && qs('.venue .map-btn')) {
+      qs('.venue .map-btn').href = 'https://maps.google.com/?q=' +
+        encodeURIComponent(addr || venue);
+    }
+    // ?map_url= override (applied earlier above the demo bail) — re-apply
+    // here so the address-based href doesn't clobber it.
+    var mapUrlOverride = q.get('map_url'); if (mapUrlOverride && !/^https?:/i.test(mapUrlOverride)) mapUrlOverride = ''; /* http(s) only */
+    if (mapUrlOverride && qs('.venue .map-btn')) {
+      qs('.venue .map-btn').href = mapUrlOverride;
+    }
+
+    var rawDate = q.get('date');
+    if (rawDate) {
+      var m = rawDate.match(/^(\d{1,2})\.(\d{1,2})\.(\d{4})$/);
+      var iso = rawDate.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/);
+      var d, mo, y;
+      if (m)        { d = +m[1]; mo = +m[2]; y = +m[3]; }
+      else if (iso) { y = +iso[1]; mo = +iso[2]; d = +iso[3]; }
+      if (d) {
+        var time = q.get('time') || '08:00';
+        var tp = time.match(/(\d{1,2}):(\d{2})/);
+        var hh = tp ? +tp[1] : 8, mn = tp ? +tp[2] : 0;
+        window.__WED_TS = new Date(y, mo - 1, d, hh, mn, 0).getTime();
+        // Stash the raw parts + a numeric weekday so the i18n pass can
+        // rebuild the hero/footer dates and the invite weekday in the
+        // active language (month + weekday names per language).
+        window.__B12_DATE = { d: d, mo: mo, y: y, wd: new Date(y, mo - 1, d).getDay() };
+        var p2 = function (n) { return (n < 10 ? '0' : '') + n; };
+        // footer .date "14 · 07 · 2026" (language-neutral, numeric).
+        if (qs('.foot .date')) { qs('.foot .date').textContent =
+          p2(d) + ' · ' + p2(mo) + ' · ' + y; qs('.foot .date').setAttribute('data-user-set', '1'); }
+        // hero .date + invite weekday/date are rebuilt (localised) by the
+        // i18n apply() from window.__B12_DATE so they follow the switcher.
+      }
+    }
+  });
+})();
+
+</script>
+</head>
+
+<body class="locked" data-screen-label="Birthday Invitation · Asila">
+
+<!-- floating particles (sparkles) -->
+<div class="particles" id="particles" aria-hidden="true"></div>
+
+<div class="shell">
+
+  <!-- Music toggle -->
+  <button class="music" id="musicBtn" type="button" aria-label="Toggle music">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M9 18V5l12-2v13"/>
+      <circle cx="6" cy="18" r="3"/>
+      <circle cx="18" cy="16" r="3"/>
+    </svg>
+    <span class="bars" aria-hidden="true"><span class="bar"></span><span class="bar"></span><span class="bar"></span></span>
+  </button>
+  <audio id="bgm" src="assets/music.mp3" loop preload="none"></audio>
+
+  <!-- ===================== SPLASH ===================== -->
+  <section class="splash full bg-splash" data-screen-label="01 Splash">
+    <div class="imgbg" style="background-image:url('asalari-img/splash-bg.webp')"></div>
+    <div class="floater float-cloud"></div>
+    <div class="floater float-cloud cloud2"></div>
+
+    <div class="stack-top">
+      <div class="monogram">A</div>
+      <div class="top-line">you are warmly invited to celebrate</div>
+      <h1 class="contrast-dark">Asila turns Three</h1>
+      <p class="lede">A small soul, a big sky — come share a sunny day of laughter, cake, and tiny wonders.</p>
+    </div>
+
+    <div class="stack-bottom">
+      <button class="open-btn" id="openBtn" type="button">Open the Invitation</button>
+      <div class="hint">tap to begin</div>
+    </div>
+  </section>
+
+  <!-- All sections below are hidden until splash is opened -->
+  <div class="below-splash">
+
+    <!-- ===================== HERO ===================== -->
+    <section class="hero full bg-hero" data-screen-label="02 Hero">
+      <div class="imgbg" style="background-image:url('asalari-img/hero-bg.webp')"></div>
+
+      <!-- tunnel-book layered arches -->
+      <div class="tunnel">
+        <div class="arch back"></div>
+        <div class="arch mid"></div>
+        <div class="arch front"></div>
+      </div>
+
+      <!-- single floater across hero -->
+      <div class="floater float-butterfly b1"></div>
+
+      <div class="core">
+        <div class="pre contrast-dark">happy 3rd birthday</div>
+        <h1 class="name" data-text="Asila">Asila</h1>
+        <div class="age-pill"><span>turning</span><b>3</b><span>this summer</span></div>
+        <div class="date contrast-dark">14 · July · 2026</div>
+      </div>
+
+      <div class="scroll-hint"><div class="dot"></div><span>scroll</span></div>
+    </section>
+
+    <!-- divider -->
+    <div class="divider" aria-hidden="true">
+      <div class="line"></div><div class="glyph">✿</div><div class="line"></div>
+    </div>
+
+    <!-- ===================== INVITATION CARD ===================== -->
+    <section class="invite bg-card" data-screen-label="03 Invitation">
+      <div class="floater float-bee be1"></div>
+      <div class="card reveal">
+        <span class="eyebrow">— the invitation —</span>
+        <h2>Under a Sunny Sky</h2>
+        <div class="name-mini">for little Asila</div>
+        <p>
+          The clouds have planned a parade, the butterflies have rehearsed.
+          On her third trip around the sun, we'd love for you to join the wonder —
+          for warm food, sweet cake, and the giggles of a tiny person growing up.
+        </p>
+        <div class="when">
+          <span>Tuesday</span><span class="pip"></span>
+          <span>14 July 2026</span>
+          <span class="pip"></span><span>All day</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- divider -->
+    <div class="divider" aria-hidden="true">
+      <div class="line"></div><div class="glyph">☀</div><div class="line"></div>
+    </div>
+
+    <!-- ===================== TIMELINE ===================== -->
+    <section class="timeline bg-card" data-screen-label="04 Schedule">
+      <div class="floater float-balloon-y"></div>
+
+      <div class="head reveal">
+        <span class="eyebrow">— the day —</span>
+        <h2>How the Day Unfolds</h2>
+        <div class="sub">three little chapters</div>
+      </div>
+
+      <div class="tl">
+        <div class="tl-item reveal">
+          <div class="marker">08:00</div>
+          <div class="plate">
+            <h3>Morning Gathering</h3>
+            <p>Morning blessings shared over warm plov, in keeping with family tradition.</p>
+          </div>
+        </div>
+        <div class="tl-item reveal">
+          <div class="marker">15:00</div>
+          <div class="plate">
+            <h3>Guests Welcomed</h3>
+            <p>Drop in any time from three o'clock — tea, treats, and a smiling little host.</p>
+          </div>
+        </div>
+        <div class="tl-item reveal">
+          <div class="marker">17:00</div>
+          <div class="plate">
+            <h3>The Special Party</h3>
+            <p>Music, cake, balloons and the wishing of three candles — the heart of the day.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- divider -->
+    <div class="divider" aria-hidden="true">
+      <div class="line"></div><div class="glyph">✦</div><div class="line"></div>
+    </div>
+
+    <!-- ===================== VENUE ===================== -->
+    <section class="venue full bg-venue" data-screen-label="05 Venue">
+      <div class="imgbg" style="background-image:url('asalari-img/venue-bg.webp')"></div>
+      <div class="floater float-butterfly b2"></div>
+
+      <div class="v-inner reveal">
+        <span class="eyebrow contrast">— the place —</span>
+        <h2 class="contrast">Koşebaşı Restaurant</h2>
+        <p class="contrast-dark">A bright, family-friendly spot with plenty of room for little ones to run, laugh and play.</p>
+        <a class="map-btn" href="https://maps.app.goo.gl/VanA1LiHH4qT6aDb7" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Open the Map
+        </a>
+      </div>
+    </section>
+
+    <!-- ===================== INFO ===================== -->
+    <section class="info bg-card" data-screen-label="06 Info">
+      <div class="floater float-bee be2"></div>
+
+      <div class="card reveal">
+        <h2>Good to know</h2>
+        <ul>
+          <li>
+            <div class="icon" aria-hidden="true">👗</div>
+            <div><b>Dress code</b><span>Sunshine colours encouraged — comfortable for kids on the move.</span></div>
+          </li>
+          <li>
+            <div class="icon" aria-hidden="true">🕒</div>
+            <div><b>Arrive any time</b><span>Pop in across the day — the door is open from 8am to evening.</span></div>
+          </li>
+          <li>
+            <div class="icon" aria-hidden="true">👶</div>
+            <div><b>Little ones welcome</b><span>Bring the whole family. There'll be plenty of room to play.</span></div>
+          </li>
+          <li>
+            <div class="icon" aria-hidden="true">🎁</div>
+            <div><b>Your presence is the gift</b><span>No need to bring anything — just yourselves and a smile.</span></div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- divider -->
+    <div class="divider" aria-hidden="true">
+      <div class="line"></div><div class="glyph">❀</div><div class="line"></div>
+    </div>
+
+    <!-- ===================== WISHES ===================== -->
+    <section class="wishes" data-screen-label="07 Wishes">
+      <div class="floater float-balloon-r"></div>
+
+      <div class="head reveal">
+        <span class="eyebrow">— wishes —</span>
+        <h2>Leave a wish for Asila</h2>
+        <div class="sub">a little note to keep forever</div>
+      </div>
+
+      <form id="wishForm" class="reveal" autocomplete="off">
+        <input type="text" name="name" id="wName" placeholder="Your name" maxlength="40" required />
+        <textarea name="msg" id="wMsg" placeholder="A birthday wish, a tiny poem, a hello…" maxlength="320" required></textarea>
+        <button type="submit">Send Sunshine ☀</button>
+      </form>
+
+      <div class="feed" id="wishFeed" aria-live="polite"></div>
+    </section>
+
+    <!-- ===================== COUNTDOWN ===================== -->
+    <section class="countdown full bg-countdown" data-screen-label="08 Countdown">
+      <div class="imgbg" style="background-image:url('asalari-img/countdown-bg.webp')"></div>
+      <div class="floater float-balloon-b"></div>
+
+      <div class="head reveal">
+        <span class="eyebrow">— counting down —</span>
+        <h2 class="contrast-dark">Until the big day</h2>
+        <div class="sub">tick · tock · twirl</div>
+      </div>
+
+      <div class="grid reveal" id="cd">
+        <div class="cell"><div class="n" id="cd-d">—</div><div class="l">Days</div></div>
+        <div class="cell"><div class="n" id="cd-h">—</div><div class="l">Hours</div></div>
+        <div class="cell"><div class="n" id="cd-m">—</div><div class="l">Minutes</div></div>
+        <div class="cell"><div class="n" id="cd-s">—</div><div class="l">Seconds</div></div>
+      </div>
+    </section>
+
+    <!-- ===================== FOOTER ===================== -->
+    <footer class="foot" data-screen-label="09 Footer">
+      <div class="mono">A</div>
+      <div class="date">14 · 07 · 2026</div>
+      <div class="line">Made with sunshine for Asila &amp; everyone she loves.</div>
+    </footer>
+
+  </div><!-- /.below-splash -->
+</div><!-- /.shell -->
+
+<script>
+/* ----------------------- SPLASH unlock ----------------------- */
+const openBtn = document.getElementById('openBtn');
+openBtn.addEventListener('click', () => {
+  document.body.classList.remove('locked');
+  // smooth scroll to hero
+  const hero = document.querySelector('.hero');
+  if (hero){
+    setTimeout(()=>hero.scrollIntoView({behavior:'smooth', block:'start'}), 60);
+  }
+});
+
+/* ----------------------- Scroll reveal ---------------------- */
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+  });
+},{ threshold: .15, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+/* ----------------------- Particles (sparkles) --------------- */
+const PARTICLES = 18;
+const p = document.getElementById('particles');
+for (let i=0;i<PARTICLES;i++){
+  const el = document.createElement('span');
+  el.className = 'particle';
+  const size = 4 + Math.random()*8;
+  el.style.width = size+'px';
+  el.style.height = size+'px';
+  el.style.left = (Math.random()*100)+'%';
+  el.style.animationDuration = (14 + Math.random()*18)+'s';
+  el.style.animationDelay = (-Math.random()*20)+'s';
+  // alternate colors
+  if (i%3===0){
+    el.style.background = 'radial-gradient(circle at 35% 35%, #fff, #bfe6f7 60%, #4ba8d6)';
+  } else if (i%3===1){
+    el.style.background = 'radial-gradient(circle at 35% 35%, #fff, #ffd6cb 60%, #ff998a)';
+  }
+  p.appendChild(el);
+}
+
+/* ----------------------- Countdown -------------------------- */
+const target = (window.__WED_TS ? new Date(window.__WED_TS) : new Date('2026-07-14T08:00:00')).getTime();
+const els = {
+  d: document.getElementById('cd-d'),
+  h: document.getElementById('cd-h'),
+  m: document.getElementById('cd-m'),
+  s: document.getElementById('cd-s'),
+};
+function pad(n){ return String(Math.max(0,n)).padStart(2,'0'); }
+function tick(){
+  const now = Date.now();
+  let diff = Math.max(0, target - now);
+  const day = 86400000;
+  const d = Math.floor(diff/day); diff -= d*day;
+  const h = Math.floor(diff/3600000); diff -= h*3600000;
+  const m = Math.floor(diff/60000); diff -= m*60000;
+  const s = Math.floor(diff/1000);
+  els.d.textContent = pad(d);
+  els.h.textContent = pad(h);
+  els.m.textContent = pad(m);
+  els.s.textContent = pad(s);
+}
+tick(); setInterval(tick, 1000);
+
+/* ----------------------- Wishes ----------------------------- */
+const WK = 'asila-wishes-v1';
+const feed = document.getElementById('wishFeed');
+const form = document.getElementById('wishForm');
+
+function loadWishes(){
+  try { return JSON.parse(localStorage.getItem(WK) || '[]'); } catch { return []; }
+}
+function saveWishes(list){ localStorage.setItem(WK, JSON.stringify(list)); }
+
+function renderFeed(){
+  const list = loadWishes();
+  if (!list.length){
+    feed.innerHTML = '<div class="empty">be the first to leave a wish ✿</div>';
+    return;
+  }
+  feed.innerHTML = list.slice().reverse().map(w=>{
+    const t = new Date(w.t);
+    const when = t.toLocaleDateString(undefined, {month:'short', day:'numeric'}) + ' · ' +
+                 t.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
+    return `<div class="wish">
+      <div class="who">${escapeHTML(w.name)} <span class="when">· ${when}</span></div>
+      <div class="msg">${escapeHTML(w.msg)}</div>
+    </div>`;
+  }).join('');
+}
+function escapeHTML(s){ return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+form.addEventListener('submit', (e)=>{
+  e.preventDefault();
+  const name = document.getElementById('wName').value.trim();
+  const msg  = document.getElementById('wMsg').value.trim();
+  if (!name || !msg) return;
+  const list = loadWishes();
+  list.push({ name, msg, t: Date.now() });
+  saveWishes(list);
+  form.reset();
+  renderFeed();
+  feed.scrollTop = 0;
+});
+renderFeed();
+
+/* ----------------------- Music ------------------------------ */
+const btn = document.getElementById('musicBtn');
+const bgm = document.getElementById('bgm');
+let playing = false;
+btn.addEventListener('click', async ()=>{
+  if (!playing){
+    try {
+      await bgm.play();
+      playing = true; btn.classList.add('playing');
+    } catch(err){
+      // music file may be missing; do nothing
+      btn.animate([{transform:'scale(1)'},{transform:'scale(.94)'},{transform:'scale(1)'}], {duration:240});
+    }
+  } else {
+    bgm.pause(); playing = false; btn.classList.remove('playing');
+  }
+});
+</script>
+
+<script>
+// taklifla music override — load the owner-picked soundtrack
+// passed in by the React variant as ?audio=/music/<id>.mp3.
+// Empty / missing param leaves the hardcoded fallback intact.
+(function () {
+  try {
+    var q = new URLSearchParams(location.search);
+    var audioUrl = q.get('audio');
+    if (!audioUrl) return;
+    var el = document.getElementById('bgm');
+    if (!el) return;
+    // Strip any inline <source> children so the new src wins.
+    while (el.firstChild) el.removeChild(el.firstChild);
+    el.src = audioUrl;
+  } catch (e) { /* harmless */ }
+})();
+</script>
+
+<!-- taklifla language switcher — single labeled button that opens a
+     small popover with UZ / EN / RU. Top-left floating, pairs with the
+     top-right music button. Sets <html lang> + persists to localStorage
+     + emits a "taklifla:langchange" event for per-template i18n maps. -->
+<style>
+.taklifla-lang-switch{position:fixed;top:16px;left:16px;z-index:9999;font-family:system-ui,-apple-system,sans-serif}
+.taklifla-lang-toggle{display:inline-flex;align-items:center;gap:6px;height:30px;padding:0 12px;border-radius:999px;border:none;background:rgba(255,255,255,.92);color:rgba(0,0,0,.85);box-shadow:0 4px 16px rgba(0,0,0,.18);font:inherit;font-size:11px;font-weight:700;letter-spacing:.14em;cursor:pointer;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);transition:transform .15s ease}
+.taklifla-lang-toggle:hover{transform:scale(1.04)}
+.taklifla-lang-toggle:active{transform:scale(.96)}
+.taklifla-lang-toggle .chev{display:inline-block;font-size:9px;opacity:.55;transition:transform .25s ease}
+.taklifla-lang-switch.open .taklifla-lang-toggle .chev{transform:rotate(180deg)}
+.taklifla-lang-menu{position:absolute;top:38px;left:0;min-width:88px;padding:4px;border-radius:10px;background:rgba(255,255,255,.96);box-shadow:0 12px 30px -8px rgba(0,0,0,.28);display:none;flex-direction:column;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.taklifla-lang-switch.open .taklifla-lang-menu{display:flex}
+.taklifla-lang-menu button{appearance:none;border:none;background:none;cursor:pointer;font:inherit;font-size:11px;font-weight:700;letter-spacing:.14em;color:rgba(0,0,0,.85);text-align:left;padding:8px 12px;border-radius:6px;transition:background .15s ease}
+.taklifla-lang-menu button:hover{background:rgba(0,0,0,.06)}
+.taklifla-lang-menu button.active{background:rgba(0,0,0,.85);color:#fff}
+.taklifla-lang-menu hr{border:none;height:1px;background:rgba(0,0,0,.08);margin:2px 8px}
+</style>
+<div class="taklifla-lang-switch" role="group" aria-label="Language">
+  <button type="button" class="taklifla-lang-toggle" aria-haspopup="menu" aria-expanded="false">
+    <span class="taklifla-lang-current">UZ</span>
+    <span class="chev" aria-hidden="true">▾</span>
+  </button>
+  <div class="taklifla-lang-menu" role="menu">
+    <button type="button" data-lang="uz" role="menuitemradio">UZ</button>
+    <hr />
+    <button type="button" data-lang="en" role="menuitemradio">EN</button>
+    <hr />
+    <button type="button" data-lang="ru" role="menuitemradio">RU</button>
+  </div>
+</div>
+<script>
+(function(){
+  var KEY = 'takliflaLang';
+  var q = new URLSearchParams(location.search);
+  var initial = q.get('lang');
+  if (!initial) { try { initial = localStorage.getItem(KEY); } catch(_){} }
+  if (!initial) initial = (document.documentElement.lang || 'uz').toLowerCase().slice(0,2);
+  if (['uz','en','ru'].indexOf(initial) === -1) initial = 'uz';
+  document.documentElement.lang = initial;
+  var sw = document.querySelector('.taklifla-lang-switch');
+  if (!sw) return;
+  var toggle = sw.querySelector('.taklifla-lang-toggle');
+  var label = sw.querySelector('.taklifla-lang-current');
+  var menu = sw.querySelector('.taklifla-lang-menu');
+  function mark(active){
+    if (label) label.textContent = active.toUpperCase();
+    var btns = menu.querySelectorAll('button[data-lang]');
+    for (var i=0;i<btns.length;i++){
+      btns[i].classList.toggle('active', btns[i].getAttribute('data-lang') === active);
+    }
+  }
+  mark(initial);
+  function openMenu(open){
+    sw.classList.toggle('open', open);
+    if (toggle) toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
+  toggle && toggle.addEventListener('click', function(e){
+    e.stopPropagation();
+    openMenu(!sw.classList.contains('open'));
+  });
+  menu && menu.addEventListener('click', function(e){
+    var t = e.target.closest && e.target.closest('button[data-lang]');
+    if (!t) return;
+    var lang = t.getAttribute('data-lang');
+    if (!lang) return;
+    try { localStorage.setItem(KEY, lang); } catch(_){}
+    document.documentElement.lang = lang;
+    mark(lang);
+    openMenu(false);
+    window.__takliflaLang = lang;
+    document.dispatchEvent(new CustomEvent('taklifla:langchange', { detail: { lang: lang } }));
+  });
+  document.addEventListener('click', function(e){
+    if (!sw.contains(e.target)) openMenu(false);
+  });
+  window.__takliflaLang = initial;
+})();
+</script>
+
+<!-- taklifla i18n block — full UZ/EN/RU localisation (gold pattern, w33).
+     The HTML body ships in ENGLISH, so UZ is supplied explicitly for every
+     boilerplate string (def=en). Owner data (child name, age, venue,
+     date) is never translated — composite captions that weave the name/
+     age/date in are rebuilt per language from window.__B12_NAME / _AGE /
+     _DATE stashed by the customizer, and owner-only elements carry
+     data-user-set="1" so one() skips them. -->
+<script>
+(function(){
+  // [selector, UZ, EN, RU] — one element each (first match). UZ provided
+  // because the HTML defaults are English.
+  var ITEMS = [
+    ['.splash .top-line', "Sizni quvonch bilan bayramga taklif qilamiz", "you are warmly invited to celebrate", "сердечно приглашаем вас на праздник"],
+    ['.splash p.lede', "Kichkina qalb, katta osmon — kulgi, tort va kichik mo'jizalarga to'la quyoshli kunni biz bilan baham ko'ring.", "A small soul, a big sky — come share a sunny day of laughter, cake, and tiny wonders.", "Маленькая душа, большое небо — разделите с нами солнечный день, полный смеха, торта и маленьких чудес."],
+    ['.splash .open-btn', "Taklifnomani ochish", "Open the Invitation", "Открыть приглашение"],
+    ['.splash .hint', "boshlash uchun bosing", "tap to begin", "нажмите, чтобы начать"],
+
+    ['.hero .scroll-hint span', "pastga", "scroll", "вниз"],
+
+    ['.invite .eyebrow', "— taklifnoma —", "— the invitation —", "— приглашение —"],
+    ['.invite h2', "Quyoshli osmon ostida", "Under a Sunny Sky", "Под солнечным небом"],
+    ['.invite p', "Bulutlar bayram saflarini tuzdi, kapalaklar mashq qildi. Quyosh atrofidagi yangi aylanishida biz bilan birga bo'ling — iliq taomlar, shirin tort va kichkina insonning quvnoq kulgisi uchun.", "The clouds have planned a parade, the butterflies have rehearsed. On her trip around the sun, we'd love for you to join the wonder — for warm food, sweet cake, and the giggles of a tiny person growing up.", "Облака устроили парад, бабочки порепетировали. В её новом круге вокруг солнца мы будем рады разделить с вами это чудо — тёплые угощения, сладкий торт и смех маленького человечка."],
+    ['.invite .when span:last-child', "Kun bo'yi", "All day", "Весь день"],
+
+    ['.timeline .eyebrow', "— kun —", "— the day —", "— день —"],
+    ['.timeline h2', "Kun qanday o'tadi", "How the Day Unfolds", "Как пройдёт день"],
+    ['.timeline .sub', "uchta kichik bob", "three little chapters", "три маленькие главы"],
+    ['.tl-item:nth-of-type(1) .plate h3', "Ertalabki yig'in", "Morning Gathering", "Утренний сбор"],
+    ['.tl-item:nth-of-type(1) .plate p', "Oilaviy an'anaga ko'ra issiq palov ustida ertalabki duolar.", "Morning blessings shared over warm plov, in keeping with family tradition.", "Утренние благословения за тёплым пловом по семейной традиции."],
+    ['.tl-item:nth-of-type(2) .plate h3', "Mehmonlarni kutib olish", "Guests Welcomed", "Встреча гостей"],
+    ['.tl-item:nth-of-type(2) .plate p', "Soat uchdan boshlab istalgan vaqtda tashrif buyuring — choy, shirinliklar va tabassumli kichik mezbon.", "Drop in any time from three o'clock — tea, treats, and a smiling little host.", "Заходите в любое время после трёх — чай, угощения и улыбчивый маленький хозяин."],
+    ['.tl-item:nth-of-type(3) .plate h3', "Asosiy bazm", "The Special Party", "Главный праздник"],
+    ['.tl-item:nth-of-type(3) .plate p', "Musiqa, tort, sharlar va shamlar tilagi — kunning eng asosiy qismi.", "Music, cake, balloons and the wishing over the candles — the heart of the day.", "Музыка, торт, шары и загадывание желания над свечами — сердце дня."],
+
+    ['.venue .eyebrow', "— manzil —", "— the place —", "— место —"],
+    ['.venue p', "Yorug', oilaviy maskan — kichkintoylar yugurib, kulib, o'ynashi uchun yetarli joy bor.", "A bright, family-friendly spot with plenty of room for little ones to run, laugh and play.", "Светлое семейное место с простором, где малыши могут бегать, смеяться и играть."],
+    ['.venue .map-btn', "Xaritani ochish", "Open the Map", "Открыть карту"],
+
+    ['.info h2', "Bilib qo'ying", "Good to know", "Полезно знать"],
+    ['.info li:nth-of-type(1) b', "Kiyim uslubi", "Dress code", "Дресс-код"],
+    ['.info li:nth-of-type(1) span', "Quyoshli ranglar marhamat — bolalar uchun qulay kiyim.", "Sunshine colours encouraged — comfortable for kids on the move.", "Приветствуются солнечные цвета — удобная одежда для активных детей."],
+    ['.info li:nth-of-type(2) b', "Istalgan vaqtda keling", "Arrive any time", "Приходите в любое время"],
+    ['.info li:nth-of-type(2) span', "Kun davomida tashrif buyuring — eshik ertalabdan kechgacha ochiq.", "Pop in across the day — the door is open from morning to evening.", "Заходите в течение дня — двери открыты с утра до вечера."],
+    ['.info li:nth-of-type(3) b', "Kichkintoylar marhamat", "Little ones welcome", "Малыши приветствуются"],
+    ['.info li:nth-of-type(3) span', "Butun oila bilan keling. O'ynash uchun joy ko'p.", "Bring the whole family. There'll be plenty of room to play.", "Приходите всей семьёй. Места для игр будет достаточно."],
+    ['.info li:nth-of-type(4) b', "Tashrifingiz — eng yaxshi sovg'a", "Your presence is the gift", "Ваше присутствие — лучший подарок"],
+    ['.info li:nth-of-type(4) span', "Hech narsa olib kelishingiz shart emas — faqat o'zingiz va tabassum bilan keling.", "No need to bring anything — just yourselves and a smile.", "Ничего приносить не нужно — только себя и улыбку."],
+
+    ['.wishes .eyebrow', "— tilaklar —", "— wishes —", "— пожелания —"],
+    ['.wishes .sub', "abadiy saqlanadigan kichik xat", "a little note to keep forever", "маленькая записка на память"],
+
+    ['.countdown .eyebrow', "— sanab turibmiz —", "— counting down —", "— обратный отсчёт —"],
+    ['.countdown h2', "Katta kungacha", "Until the big day", "До большого дня"],
+    ['.countdown .sub', "tik · tak · charx", "tick · tock · twirl", "тик · так · кружись"]
+  ];
+
+  var SEND  = { uz: "Quyosh yuborish ☀", en: "Send Sunshine ☀", ru: "Отправить лучик ☀" };
+  var EMPTY = { uz: "birinchi bo'lib tilak qoldiring ✿", en: "be the first to leave a wish ✿", ru: "оставьте пожелание первым ✿" };
+  var PHNAME= { uz: "Ismingiz", en: "Your name", ru: "Ваше имя" };
+  var PHMSG = { uz: "Tug'ilgan kun tilagi, kichik she'r yoki salom…", en: "A birthday wish, a tiny poem, a hello…", ru: "Поздравление, маленький стих или просто привет…" };
+  var CDL   = { uz: ["Kun","Soat","Daqiqa","Soniya"], en: ["Days","Hours","Minutes","Seconds"], ru: ["Дни","Часы","Минуты","Секунды"] };
+
+  var MON = {
+    uz: ['yanvar','fevral','mart','aprel','may','iyun','iyul','avgust','sentabr','oktabr','noyabr','dekabr'],
+    en: ['January','February','March','April','May','June','July','August','September','October','November','December'],
+    ru: ['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря']
+  };
+  var DAY = {
+    uz: ['Yakshanba','Dushanba','Seshanba','Chorshanba','Payshanba','Juma','Shanba'],
+    en: ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],
+    ru: ['Воскресенье','Понедельник','Вторник','Среда','Четверг','Пятница','Суббота']
+  };
+
+  function pick(){
+    var l = (window.__takliflaLang || document.documentElement.lang || 'uz').toLowerCase().slice(0,2);
+    return (l === 'en' || l === 'ru') ? l : 'uz';
+  }
+  function one(el, lang, uz, en, ru){
+    if (!el || el.getAttribute('data-user-set') === '1') return;
+    if (el.__uz == null) el.__uz = el.textContent;          // capture original once
+    var v = lang === 'en' ? en : lang === 'ru' ? ru : uz;
+    if (v == null || v === '') v = el.__uz;
+    el.textContent = v;
+  }
+  function ph(el, lang, uz, en, ru){
+    if (!el) return;
+    if (el.__uzph == null) el.__uzph = el.getAttribute('placeholder') || '';
+    var v = lang === 'en' ? en : lang === 'ru' ? ru : uz;
+    el.setAttribute('placeholder', (v == null || v === '') ? el.__uzph : v);
+  }
+
+  // Default name/age baked into the artwork — used when the owner left a
+  // field blank so the composite captions still read naturally per language.
+  var DEF_NAME = "Asila";
+  var DEF_AGE  = "3";
+  function ageOrdinalEn(a){
+    if (/^(11|12|13)$/.test(a)) return a + 'th';
+    var last = a.slice(-1);
+    return a + (last === '1' ? 'st' : last === '2' ? 'nd' : last === '3' ? 'rd' : 'th');
+  }
+
+  function apply(){
+    var lang = pick();
+    for (var i = 0; i < ITEMS.length; i++) {
+      one(document.querySelector(ITEMS[i][0]), lang, ITEMS[i][1], ITEMS[i][2], ITEMS[i][3]);
+    }
+
+    // Age-pill flanking words — structure is [span][b=age][span], so the
+    // UZ phrasing puts a leading word before the numeral and a trailing
+    // word after it: "endi <age> yoshda".
+    var pillSpans = document.querySelectorAll('.age-pill span');
+    if (pillSpans[0]) one(pillSpans[0], lang, "endi", "turning", "исполняется");
+    if (pillSpans[1]) one(pillSpans[1], lang, "yoshda", "this summer", "этим летом");
+
+    // Wishes "Send" button + name/msg placeholders + empty-state.
+    var sendBtn = document.querySelector('.wishes button');
+    if (sendBtn) one(sendBtn, lang, SEND.uz, SEND.en, SEND.ru);
+    ph(document.getElementById('wName'), lang, PHNAME.uz, PHNAME.en, PHNAME.ru);
+    ph(document.getElementById('wMsg'),  lang, PHMSG.uz,  PHMSG.en,  PHMSG.ru);
+    var emptyEl = document.querySelector('.wishes .empty');
+    if (emptyEl) emptyEl.textContent = EMPTY[lang] || EMPTY.uz;
+
+    // Countdown cell labels [Days, Hours, Minutes, Seconds].
+    var cdl = document.querySelectorAll('.countdown .cell .l');
+    for (var c = 0; c < cdl.length && c < 4; c++) one(cdl[c], lang, CDL.uz[c], CDL.en[c], CDL.ru[c]);
+
+    // ── Owner composites — rebuilt per language from stashed globals ──
+    var name = window.__B12_NAME || DEF_NAME;
+    var age  = window.__B12_AGE  || DEF_AGE;
+
+    // Splash headline "<name> turns <age>".
+    var splashH1 = document.querySelector('.splash h1');
+    if (splashH1) {
+      splashH1.textContent = lang === 'en' ? (name + ' turns ' + age)
+        : lang === 'ru' ? (name + ' — ' + age + ' лет')
+        : (name + ' ' + age + ' yoshda');
+    }
+    // Hero "happy Nth birthday".
+    var preEl = document.querySelector('.hero .pre');
+    if (preEl) {
+      preEl.textContent = lang === 'en' ? ('happy ' + ageOrdinalEn(age) + ' birthday')
+        : lang === 'ru' ? ('с ' + age + '-летием')
+        : ('tug‘ilgan kuning muborak');
+    }
+    // Invite "for little <name>".
+    var nameMini = document.querySelector('.invite .name-mini');
+    if (nameMini) {
+      nameMini.textContent = lang === 'en' ? ('for little ' + name)
+        : lang === 'ru' ? ('для маленькой ' + name)
+        : ('kichkina ' + name + ' uchun');
+    }
+    // Wishes "Leave a wish for <name>".
+    var wishH2 = document.querySelector('.wishes h2');
+    if (wishH2) {
+      wishH2.textContent = lang === 'en' ? ('Leave a wish for ' + name)
+        : lang === 'ru' ? (name + ': оставьте пожелание')
+        : (name + ' uchun tilak qoldiring');
+    }
+    // Footer line "Made with sunshine for <name> & everyone she loves."
+    var footLine = document.querySelector('.foot .line');
+    if (footLine) {
+      footLine.textContent = lang === 'en' ? ('Made with sunshine for ' + name + ' & everyone she loves.')
+        : lang === 'ru' ? ('Сделано с теплом для ' + name + ' и всех, кого она любит.')
+        : (name + ' va u sevgan barcha uchun mehr bilan tayyorlandi.');
+    }
+
+    // ── Localised dates (hero + invite weekday/date) from raw parts ──
+    if (window.__B12_DATE) {
+      var dt = window.__B12_DATE, mon = MON[lang] || MON.uz, dys = DAY[lang] || DAY.uz;
+      var heroDate = document.querySelector('.core .date');
+      if (heroDate && heroDate.getAttribute('data-user-set') !== '1') {
+        heroDate.textContent = dt.d + ' · ' + (mon[dt.mo - 1] || '') + ' · ' + dt.y;
+      }
+      var when = document.querySelectorAll('.invite .when span');
+      // spans: [weekday] [pip] [date] [pip] [all day] — index 0 + 2.
+      if (when[0]) when[0].textContent = dys[dt.wd] || '';
+      if (when[2]) {
+        when[2].textContent = lang === 'uz'
+          ? (dt.d + ' ' + (mon[dt.mo - 1] || '') + ' ' + dt.y)
+          : lang === 'ru'
+            ? (dt.d + ' ' + (mon[dt.mo - 1] || '') + ' ' + dt.y)
+            : (dt.d + ' ' + (mon[dt.mo - 1] || '') + ' ' + dt.y);
+      }
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', apply);
+  } else {
+    apply();
+  }
+  document.addEventListener('taklifla:langchange', apply);
+})();
+</script>
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092" integrity="sha512-UKNk8GbxkABxKcXYuLkO16EleLGUkcvJWtpSNmExE0Too3ZaFAxTscNWEc1OdAv5/BikHawapSCaiD2XCmp+Bw==" data-cf-beacon='{"version":"2024.11.0","token":"6431f953c96a4463ae9db5f7f0ad549e","r":1,"spa":2}' crossorigin="anonymous"></script>
+</body>
+</html>

@@ -11,6 +11,7 @@ import {
   LOCALES,
   defaultDressCode,
   defaultLocalizedInvitationContent,
+  templateById,
 } from "../packages/contracts/src/index";
 import {
   publishInvitation,
@@ -910,6 +911,69 @@ test("published Pulau Sehati preserves source fields across authenticated save, 
     ),
   );
   assert.equal((await fetch(`${origin}/i/${invitation.id}`)).status, 404);
+});
+
+test("Taklifla Asalari and Muhrli Maktub save, reopen, publish, and render publicly", async () => {
+  const catalog = await (await request("/api/catalog", undefined, false)).json();
+  for (const [templateId, eventType, people] of [
+    ["taklifla-asalari", "birthday", ["Asal Qiz"]],
+    ["taklifla-muhrli-maktub", "wedding", ["Aziza", "Jahongir"]],
+  ] as const) {
+    const definition = catalog.templates.find((item: { id: string }) => item.id === templateId);
+    const typed = templateById(templateId);
+    assert.ok(typed, `${templateId} must have a typed registration`);
+    const [registration] = await sql`SELECT published FROM templates WHERE id=${templateId}`;
+    assert.ok(registration, `${templateId} must have a database registration`);
+    const supported = await sql`SELECT event_type FROM template_supported_event_types WHERE template_id=${templateId} ORDER BY event_type`;
+    assert.deepEqual(supported.map((row) => row.event_type), [eventType]);
+    if (registration.published) {
+      assert.ok(definition, `${templateId} must be in the published catalog`);
+      assert.deepEqual(definition.supportedEventTypes, [eventType]);
+    } else assert.equal(definition, undefined, `${templateId} must stay hidden before release`);
+    const invitation = completeInvitation();
+    invitation.templateId = templateId;
+    invitation.eventType = eventType;
+    invitation.enabledLocales = [...LOCALES];
+    invitation.defaultLocale = "uz-Latn";
+    for (const locale of LOCALES) {
+      invitation.content[locale] = defaultLocalizedInvitationContent(eventType, locale);
+      invitation.content[locale].people = [...people];
+      invitation.content[locale].message = `Authored ${templateId} copy`;
+      invitation.content[locale].venueName = "Test venue";
+      invitation.content[locale].address = "Test address";
+    }
+    if (templateId === "taklifla-muhrli-maktub")
+      invitation.templateData[templateId] = {
+        flowersNote: Object.fromEntries(LOCALES.map((locale) => [locale, "A creator-authored flowers note."])),
+      };
+    await sql`INSERT INTO invitations(id,owner_id,template_id,status,data) VALUES(${invitation.id},${owner.id},${templateId},'draft',${sql.json(invitation)})`;
+    const created = await request(`/api/invitations/${invitation.id}`, { invitation }, true, origin, "PUT");
+    assert.equal(created.status, 200, await created.clone().text());
+    const saved = (await created.json()).invitation as Invitation;
+    const reopenResponse = await request(`/api/invitations/${saved.id}`);
+    assert.equal(reopenResponse.status, 200);
+    const reopened = (await reopenResponse.json()).invitation as Invitation;
+    assert.equal(reopened.templateId, templateId);
+    assert.deepEqual(reopened.content, saved.content);
+    assert.deepEqual(reopened.program, saved.program);
+    assert.deepEqual(reopened.templateData, saved.templateData);
+
+    const incompatible = { ...reopened, eventType: eventType === "wedding" ? "birthday" as const : "wedding" as const };
+    assert.equal((await request(`/api/invitations/${saved.id}`, { invitation: incompatible }, true, origin, "PUT")).status, 409);
+    if (!registration.published) {
+      assert.equal((await request(`/api/invitations/${saved.id}/publish`, { revision: reopened.revision })).status, 409);
+      continue;
+    }
+    const published = await request(`/api/invitations/${saved.id}/publish`, { revision: reopened.revision });
+    assert.equal(published.status, 200, await published.clone().text());
+    const result = (await published.json()).invitation as Invitation;
+    const publicPage = await fetch(`${origin}/i/${result.slug}`);
+    assert.equal(publicPage.status, 200, `${templateId} public page failed`);
+    const html = await publicPage.text();
+    assert.ok(html.includes(`/templates/${templateId}/index.html`), `${templateId} source renderer is missing from public route`);
+    if (templateId === "taklifla-muhrli-maktub")
+      assert.ok(html.includes("A creator-authored flowers note."), "Muhrli Maktub public payload must include the saved source-specific note");
+  }
 });
 
 test("every published template preserves every editor field across four-language save, publish and reopen", async () => {

@@ -1913,13 +1913,25 @@ Development agents are distinct from production queue workers. The running app w
   deployment or live payment activation occurred.
 ## Taklifla Zarhal Sahifa release (2026-10-27)
 
-- The completed Taklifla `Diyora-Shahzod` source package is selectable as
-  **Zarhal Sahifa**, retaining its Uzbek Latin catalog name and default content.
-  Migration 0159 publishes it at 150,000 UZS for wedding-only compatibility.
-  The shared preview fixture, editor preview, public route, and creator wishes
-  API use the same source-derived renderer. Focused package tests pass 4/4;
-  four-locale save/reopen and public-render lifecycle checks pass 1/1 each.
-  No external deployment or live payment activation.
+- User requested review of hidden templates and making a design from an Uzbek
+  source ready for publication. `Taklifla/Web invitations/taklifla.uz` is a
+  confirmed Uzbek source. **Zarhal Sahifa** (source `Diyora-Shahzod`) is already
+  integrated and published, so it is not a newly released hidden template.
+- Its source comparison/browser evidence covers desktop/mobile, all four
+  locales, long names, reduced motion, optional sections, music and wishes API
+  bridge behavior. The wishes service in that evidence is an HTTP stub; it
+  explicitly does not establish database-backed authenticated save/reopen or
+  publish/public-render lifecycle completion. Do not claim that gate passed.
+- Catalog audit on 2026-10-28 found a price mismatch: migration 0159 and the
+  release proposal specify 150,000 UZS, while the typed definition and
+  configured database row both reported 100,000 UZS. Corrected the typed price
+  and applied additive migration 0163; configured PostgreSQL now reports the
+  published row at 150,000 UZS with wedding-only support. The migration runner
+  was slow to exit, but the migration ledger and row were queried afterward and
+  confirmed. Preserve the existing publication. The authenticated
+  save/publish/public-render/reopen lifecycle still needs a real session before
+  describing every release gate as complete. No external deployment or live
+  payment activation.
 
 ## Homepage feature presentation (2026-10-28)
 
@@ -1963,3 +1975,10 @@ Development agents are distinct from production queue workers. The running app w
 - Published fixes from the one-by-one audit: Velora, Golden Card, Orchid Amplop, Chorlove Palov, Chorlove Osh, Glass Pink, Cloud Castle, Velvet Royale, Palace Rose, Fairy and Golden Hour. Each control now reflects actual audio playback state, including automatic playback and playback failures.
 - Unpublished fixes: Invitate Palov, Green Gold, Monochrome Editorial, Xatna, Amru Maruf, Taklifnomachi 16, 17, 18 and 19, Manor Edition, Islamic Edition and Luxury Gold. Each control now synchronizes its visual and accessible pressed state with audio events.
 - Inventory complete: 63 published and 43 unpublished catalog entries checked in that order. Templates without a confirmed mismatch were left unchanged; Doira's control is for percussion sound effects rather than background music.
+
+## Uzbek Taklifla templates (2026-10-28)
+
+- User requested completing and publishing more source-backed unpublished templates. The approved template workflow applies here: preserve local reference captures, package the complete template-level HTML/CSS/JavaScript/assets, adapt through the typed invitation contract, keep source and platform adapters separate, and publish only after source, catalog, browser, and persisted lifecycle verification. No external deployment or live-payment activation is included.
+- **Asalari** is birthday-only, category `birthday`, at 150,000 UZS. Its source has no matching music file and no gallery/RSVP controls; do not borrow unrelated provider audio or invent fields. Creator music remains optional, wishes use the moderated wishes service, and unsupported source age is removed. The captured 3:5 opening is the catalog art. Migration `0164_register_taklifla_templates.sql` registered it privately; `0165_publish_taklifla_templates.sql` published it.
+- **Muhrli Maktub** (Taklifla Envelope) is wedding-only, category `wedding`, at 150,000 UZS. Preserve its opening seal/envelope animation, local artwork/fonts, language switching, phone RSVP link, wishes service, and source copy. Its source-supported localized flowers note is stored under `templateData["taklifla-muhrli-maktub"].flowersNote`, editable per locale, and survives save/reopen; the source's own localized default appears until a creator edits it. Migrations `0164`/`0165` registered/published it; `0166_defer_muhrli_source_field.sql` temporarily hid it until this field was integrated; `0167_publish_muhrli_maktub.sql` republished after its checks passed.
+- Both templates use the same renderer for preview and public display and their actual 3:5 opening artwork in the catalog. Event compatibility is recorded separately from category assignment and enforced on save. Exact source capture checksums remain unchanged.

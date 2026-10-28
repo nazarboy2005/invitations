@@ -35,6 +35,7 @@ import {
   formatPrice,
   getContent,
   invitationSchema,
+  muhrliMaktubDataSchema,
   pulauSehatiDataSchema,
   LANGUAGE_NAMES,
   LOCALES,
@@ -77,6 +78,8 @@ import { BuxoroRavoqInvitation } from "@/templates/onlinetaklifnoma/buxoro-ravoq
 import { JannatBogiInvitation } from "@/templates/onlinetaklifnoma/jannat-bogi";
 import { TojmahalOltinDarvozasiInvitation } from "@/templates/onlinetaklifnoma/tojmahal-oltin-darvozasi";
 import { WedivoPulauSehati } from "@/templates/wedivo-pulau-sehati/renderer";
+import { TakliflaAsalari } from "@/templates/taklifla-asalari/renderer";
+import { MuhrliMaktubInvitation } from "@/templates/taklifla-muhrli-maktub/renderer";
 import { isChorloveTemplate, ChorloveInvitation } from "@/templates/chorlove";
 import {
   createTemplatePreviewSample,
@@ -856,6 +859,27 @@ export function Studio({
           }
         : current,
     );
+  }
+  const muhrliMaktubData = muhrliMaktubDataSchema.parse(
+    invitation.templateData["taklifla-muhrli-maktub"] ?? {},
+  );
+  function updateMuhrliMaktubFlowersNote(value: string) {
+    setInvitation((current) => {
+      if (!current) return current;
+      const data = muhrliMaktubDataSchema.parse(
+        current.templateData["taklifla-muhrli-maktub"] ?? {},
+      );
+      return {
+        ...current,
+        templateData: {
+          ...current.templateData,
+          "taklifla-muhrli-maktub": {
+            ...data,
+            flowersNote: { ...data.flowersNote, [locale]: value },
+          },
+        },
+      };
+    });
   }
   function changeEventType(value: string) {
     const currentInvitation = invitation;
@@ -3383,6 +3407,18 @@ export function Studio({
                     />
                   </div>
                 )}
+                {invitation.templateId === "taklifla-muhrli-maktub" && (
+                  <Field label={`Gullar o‘rniga izoh · ${LANGUAGE_NAMES[locale]}`} hint="Mehmonlarga ko‘rinadi. Bo‘sh qoldirsangiz, dizaynning boshlang‘ich matni ishlatiladi.">
+                    <textarea
+                      value={muhrliMaktubData.flowersNote?.[locale] ?? ""}
+                      maxLength={1000}
+                      rows={3}
+                      disabled={identityLocked}
+                      placeholder="Masalan, gullar o‘rniga samimiy tilaklaringizni qoldiring."
+                      onChange={(event) => updateMuhrliMaktubFlowersNote(event.target.value)}
+                    />
+                  </Field>
+                )}
                 <div className={styles.divider} />
                 <Toggle
                   title="Qatnashishni tasdiqlash"
@@ -3792,6 +3828,10 @@ export function Studio({
                 preview
                 catalogMusic={section === 0 && !authoredPreview}
               />
+            ) : invitation.templateId === "taklifla-asalari" ? (
+              <TakliflaAsalari invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview sampleWishes={section === 0 && !authoredPreview} silentPlayback />
+            ) : invitation.templateId === "taklifla-muhrli-maktub" ? (
+              <MuhrliMaktubInvitation invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview fullPreview catalogMusic={section === 0 && !authoredPreview} silentPlayback />
             ) : invitation.templateId &&
               isChorloveTemplate(invitation.templateId) ? (
               <ChorloveInvitation

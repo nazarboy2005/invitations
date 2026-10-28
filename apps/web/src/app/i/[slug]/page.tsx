@@ -9,6 +9,8 @@ import { resolveGuest } from "@/server/public";
 import { AnorInvitation } from "@/templates/anor";
 import { WedivoPulauSehati } from "@/templates/wedivo-pulau-sehati/renderer";
 import { TakliflaZarhalSahifaInvitation } from "@/templates/taklifla-zarhal-sahifa/renderer";
+import { TakliflaAsalari } from "@/templates/taklifla-asalari/renderer";
+import { MuhrliMaktubInvitation } from "@/templates/taklifla-muhrli-maktub/renderer";
 import { isMarxabaTemplate, MarxabaInvitation } from "@/templates/marxaba";
 import { isInvitateTemplate, InvitateInvitation } from "@/templates/invitate";
 import { VelvetRoyaleInvitation } from "@/templates/velvet-royale/renderer";
@@ -143,6 +145,10 @@ export default async function InvitationPage({
     return <><InvitationViewTracker invitationId={result.id} musicUrl={invitation.music.enabled ? invitation.music.url : ""} /><WedivoPulauSehati invitation={invitation} invitationId={result.id} locale={locale} guestName={guestName} guestToken={query.g} /></>;
   if (invitation.templateId === "taklifla-zarhal-sahifa")
     return <><InvitationViewTracker invitationId={result.id} musicUrl={invitation.music.enabled ? invitation.music.url : ""} /><TakliflaZarhalSahifaInvitation invitation={invitation} invitationId={result.id} locale={locale} guestName={guestName} guestToken={query.g} /></>;
+  if (invitation.templateId === "taklifla-asalari")
+    return <><InvitationViewTracker invitationId={result.id} musicUrl={invitation.music.enabled ? invitation.music.url : ""} /><TakliflaAsalari invitation={invitation} invitationId={result.id} locale={locale} guestName={guestName} guestToken={query.g} preview={false} silentPlayback={false} /></>;
+  if (invitation.templateId === "taklifla-muhrli-maktub")
+    return <><InvitationViewTracker invitationId={result.id} musicUrl={invitation.music.enabled ? invitation.music.url : ""} /><MuhrliMaktubInvitation invitation={invitation} invitationId={result.id} locale={locale} guestName={guestName} guestToken={query.g} preview={false} silentPlayback={false} /></>;
   if (isMarxabaTemplate(invitation.templateId))
     return (
       <>

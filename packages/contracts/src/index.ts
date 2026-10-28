@@ -157,6 +157,9 @@ function isJsonValue(value: unknown): value is JsonValue {
   return false;
 }
 const pulauLocalizedText = z.partialRecord(localeSchema, text);
+export const muhrliMaktubDataSchema = z.object({
+  flowersNote: z.partialRecord(localeSchema, z.string().max(1000)).optional(),
+}).default({});
 export const pulauSehatiDataSchema = z.object({
   inscription: z.object({ arabic: z.string().max(4000), text: pulauLocalizedText, attribution: pulauLocalizedText }).default({ arabic: "", text: {}, attribution: {} }),
   profiles: z.array(z.object({ bio: pulauLocalizedText, characterClass: short, origin: short, stats: z.array(z.object({ label: short, value: z.number().int().min(0).max(10) })).max(6), skill: short, item: short })).length(2).default([{ bio: {}, characterClass: "", origin: "", stats: [], skill: "", item: "" }, { bio: {}, characterClass: "", origin: "", stats: [], skill: "", item: "" }]),
@@ -205,6 +208,10 @@ export const invitationSchema = z
     id: z.string().min(1).max(100),
     templateId: invitationTemplateIdSchema,
     templateData: z.record(z.string(), z.custom<JsonValue>(isJsonValue)).default({}).superRefine((data, ctx) => {
+      if (data["taklifla-muhrli-maktub"] !== undefined) {
+        const checked = muhrliMaktubDataSchema.safeParse(data["taklifla-muhrli-maktub"]);
+        if (!checked.success) ctx.addIssue({ code: "custom", path: ["taklifla-muhrli-maktub"], message: "Invalid Muhrli Maktub data" });
+      }
       if (data["wedivo-pulau-sehati"] !== undefined) {
         const checked = pulauSehatiDataSchema.safeParse(data["wedivo-pulau-sehati"]);
         if (!checked.success) ctx.addIssue({ code: "custom", path: ["wedivo-pulau-sehati"], message: "Invalid Pulau Sehati data" });
@@ -1380,9 +1387,35 @@ export const TEMPLATES: TemplateDefinition[] = [
     previewEventType: "wedding",
     categoryIds: ["wedding"],
     supportedEventTypes: ["wedding"],
-    priceMinor: 100000,
+    priceMinor: 150000,
     currency: "UZS",
     accent: "#b68d42",
+    published: true,
+  },
+  {
+    id: "taklifla-muhrli-maktub",
+    name: "Muhrli Maktub",
+    description: "Muhrli konvert, nafis maktub va klassik nikoh taklifnomasi.",
+    previewImage: "/templates/taklifla-muhrli-maktub/preview.webp",
+    previewEventType: "wedding",
+    categoryIds: ["wedding"],
+    supportedEventTypes: ["wedding"],
+    priceMinor: 150000,
+    currency: "UZS",
+    accent: "#a1845e",
+    published: true,
+  },
+  {
+    id: "taklifla-asalari",
+    name: "Asalari",
+    description: "Quvnoq, asalrang bezakli tug‘ilgan kun taklifnomasi.",
+    previewImage: "/templates/taklifla-asalari/preview.webp",
+    previewEventType: "birthday",
+    categoryIds: ["birthday"],
+    supportedEventTypes: ["birthday"],
+    priceMinor: 150000,
+    currency: "UZS",
+    accent: "#d4a52e",
     published: true,
   },
   {
