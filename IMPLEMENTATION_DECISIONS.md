@@ -1033,6 +1033,12 @@ Implementation choices:
 
 ## Required invitation content
 
+- User correction (2026-10-28): event date selections must not revert when
+  leaving the picker; its closing action must remain visible without scrolling
+  down the editor. Implementation: apply a complete date/time immediately,
+  retain incomplete choices while reopening, and use a viewport-bounded modal
+  with a scrollable calendar body and always-visible close/“Tayyor” controls.
+  Existing publication identity/date locks remain enforced.
 - User requirement (2026-10-21): hide the site-wide navigation header throughout invitation creation/editing; it belongs on the landing page, not inside the studio. Rename the fourth creator step from “Rasmlar va imkoniyatlar” to “Qo‘shimcha”.
 - User correction (2026-10-22): use one consistent shared site header across the homepage, design catalog, and dashboard; this supersedes the earlier separate dashboard account bar. Keep site navigation absent from the studio.
 - User requirement (2026-10-22): dashboard cards show each invitation’s actual opening design with creator-authored content, use a compact layout, and combine browser drafts and saved invitations in newest-created-first order. Implementation choice: lazy-mounted, silent, noninteractive real renderer thumbnails; database creation timestamps and retained browser-draft creation timestamps determine order. Legacy browser drafts fall back to their earliest available saved timestamp.
@@ -1231,6 +1237,14 @@ Database additions agreed as part of this policy:
 
 ## Current invitation publication milestone (2026-10-22)
 
+- User requirement (2026-10-28): unpublished invitations in “Taklifnomalarim”
+  need a “Qayta nashr qilish” action.
+- Implementation: restore the saved invitation at its original link; preserve
+  event identity, first publication time, editing deadline and guest history.
+  Republication does not save browser-only edits or require a second payment
+  for the same previously published event. Existing content, template
+  compatibility and media checks still apply. Restoring read-only public
+  viewing after the editing deadline does not reopen editing access.
 - User requirement: plan the publishing flow first. During the current prelaunch stage, clicking Publish should publish a valid invitation immediately without checkout or a payment requirement. Payment integration is a later milestone. This concerns customer invitations, separately from administrator publication of catalog templates.
 - Preserve existing authenticated ownership, draft recovery, authored-content validation, and post-publication editing rules. The user has not requested anonymous publishing or an authentication bypass.
 - User decision (2026-10-22): public invitation codes must be exactly **six Base62 characters**, using `0-9`, `A-Z`, and `a-z`, for example `/i/aB3xY9` on the existing invitation route. This supersedes the earlier ten-character lowercase recommendation. Generate random codes on the server, preserve case, enforce database uniqueness, retry collisions, and keep the code stable through allowed edits. A custom domain is not required to implement this flow: keep the stored slug independent from the configured application origin.

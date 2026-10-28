@@ -189,6 +189,118 @@ test("unpublishing archives the canonical and returned invitation state", async 
   });
 });
 
+test("republication restores the same link and preserves locks, deadlines and prior publication", async () => {
+  const invitation = await draft();
+  const published = await publishInvitation(invitation.id, 1, owner);
+  assert.equal(
+    (
+      await request(
+        `/api/invitations/${invitation.id}`,
+        { action: "unpublish" },
+        true,
+        origin,
+        "PATCH",
+      )
+    ).status,
+    200,
+  );
+  // Read-only keepsakes may be restored without reopening creator editing.
+  await sql`UPDATE invitations SET edit_deadline_at=now()-interval '1 day' WHERE id=${invitation.id}`;
+  const [before] =
+    await sql`SELECT slug,first_published_at,identity_locked_at,edit_deadline_at FROM invitations WHERE id=${invitation.id}`;
+  const path = `/api/invitations/${invitation.id}/publish`;
+  const revision = published.invitation.revision;
+  assert.equal((await request(path, { revision }, false)).status, 401);
+  assert.equal(
+    (await request(path, { revision }, true, "https://other.test")).status,
+    403,
+  );
+  await rejectsCode(
+    publishInvitation(invitation.id, revision, stranger),
+    "NOT_FOUND",
+  );
+  assert.equal((await request(path, { revision: revision + 1 })).status, 409);
+
+  const mode = process.env.PUBLISHING_MODE;
+  process.env.PUBLISHING_MODE = "paid";
+  try {
+    const results = await Promise.all(
+      Array.from({ length: 3 }, () =>
+        publishInvitation(invitation.id, revision, owner, () => {
+          throw new Error("Must reuse the existing code");
+        }),
+      ),
+    );
+    for (const result of results) {
+      assert.equal(result.url, published.url);
+      assert.equal(result.invitation.status, "published");
+      assert.equal(result.invitation.revision, revision + 1);
+    }
+  } finally {
+    if (mode === undefined) delete process.env.PUBLISHING_MODE;
+    else process.env.PUBLISHING_MODE = mode;
+  }
+  // The dashboard's HTTP action returns the same canonical state on retries.
+  const response = await request(path, { revision });
+  assert.equal(response.status, 200);
+  assert.equal((await response.json()).invitation.status, "published");
+  const [after] =
+    await sql`SELECT slug,first_published_at,identity_locked_at,edit_deadline_at,status,data->>'status' AS data_status,archived_at FROM invitations WHERE id=${invitation.id}`;
+  assert.deepEqual(after, {
+    ...before,
+    status: "published",
+    data_status: "published",
+    archived_at: null,
+  });
+  const audits =
+    await sql`SELECT action FROM invitation_audit_log WHERE invitation_id=${invitation.id} ORDER BY created_at`;
+  assert.deepEqual(
+    audits.map((audit) => audit.action),
+    ["published_free", "unpublished", "republished"],
+  );
+  const owned = await request(`/api/invitations/${invitation.id}`);
+  assert.equal((await owned.json()).invitation.status, "published");
+});
+
+test("republication still validates archived invitation media and template availability", async () => {
+  const invitation = await draft();
+  const published = await publishInvitation(invitation.id, 1, owner);
+  await request(
+    `/api/invitations/${invitation.id}`,
+    { action: "unpublish" },
+    true,
+    origin,
+    "PATCH",
+  );
+  const invalidMedia = {
+    ...published.invitation,
+    status: "archived",
+    gallery: [
+      { id: randomUUID(), url: "/api/media/missing", alt: "", caption: "" },
+    ],
+  };
+  await sql`UPDATE invitations SET data=${sql.json(invalidMedia)} WHERE id=${invitation.id}`;
+  await rejectsCode(
+    publishInvitation(invitation.id, published.invitation.revision, owner),
+    "MEDIA_NOT_READY",
+  );
+  const [retired] =
+    await sql`SELECT id FROM templates WHERE NOT published LIMIT 1`;
+  const invalidTemplate = {
+    ...published.invitation,
+    status: "archived",
+    templateId: retired.id,
+  };
+  await sql`UPDATE invitations SET data=${sql.json(invalidTemplate)} WHERE id=${invitation.id}`;
+  await rejectsCode(
+    publishInvitation(invitation.id, published.invitation.revision, owner),
+    "TEMPLATE_UNAVAILABLE",
+  );
+  const [row] =
+    await sql`SELECT status FROM invitations WHERE id=${invitation.id}`;
+  assert.equal(row.status, "archived");
+});
+
 test("draft deletion is owner-scoped and removes only drafts", async () => {
   const invitation = await draft();
   const deleted = await request(

@@ -3,10 +3,10 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
   CalendarDays,
-  ChevronDown,
   ChevronLeft,
   ChevronRight,
   Clock3,
+  X,
 } from "lucide-react";
 import { SoftSelect } from "./soft-select";
 import styles from "./date-time-picker.module.css";
@@ -53,7 +53,7 @@ export function DateTimePicker({
   onChange: (value: string) => void;
   disabled?: boolean;
 }) {
-  const root = useRef<HTMLDivElement>(null);
+  const dialog = useRef<HTMLDialogElement>(null);
   const initialDate = value.slice(0, 10);
   const [open, setOpen] = useState(false);
   const [selectedDate, setSelectedDate] = useState(initialDate);
@@ -76,20 +76,23 @@ export function DateTimePicker({
   }, [value]);
 
   useEffect(() => {
-    if (!open) return;
-    const closeOutside = (event: PointerEvent) => {
-      if (!root.current?.contains(event.target as Node)) setOpen(false);
-    };
-    const closeEscape = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setOpen(false);
-    };
-    document.addEventListener("pointerdown", closeOutside);
-    document.addEventListener("keydown", closeEscape);
-    return () => {
-      document.removeEventListener("pointerdown", closeOutside);
-      document.removeEventListener("keydown", closeEscape);
-    };
+    if (open && !dialog.current?.open) dialog.current?.showModal();
+    else if (!open && dialog.current?.open) dialog.current.close();
   }, [open]);
+
+  function selectDateTime(date: string, nextHour: string, nextMinute: string) {
+    setSelectedDate(date);
+    setHour(nextHour);
+    setMinute(nextMinute);
+    if (date && nextHour && nextMinute)
+      onChange(`${date}T${nextHour}:${nextMinute}`);
+  }
+
+  const minuteOptions = useMemo(() => {
+    if (!minute || minutes.some((option) => option.value === minute))
+      return minutes;
+    return [{ value: minute, label: minute }, ...minutes];
+  }, [minute]);
 
   const days = useMemo(() => {
     const offset = (visibleMonth.getDay() + 6) % 7;
@@ -106,154 +109,180 @@ export function DateTimePicker({
   }, [visibleMonth]);
 
   const chosenDate = displayDate(selectedDate);
-  const displayValue = value
-    ? `${displayDate(value.slice(0, 10))} · ${value.slice(11, 16)}`
+  const displayValue = chosenDate
+    ? `${chosenDate} · ${hour && minute ? `${hour}:${minute}` : "Vaqtni tanlang"}`
     : "Sana va vaqtni tanlang";
 
   return (
-    <div className={styles.root} ref={root}>
+    <div className={styles.root}>
       <button
         type="button"
         className={`${styles.trigger} ${open ? styles.open : ""}`}
         aria-label="Tadbir sanasi va vaqtini tanlang"
         aria-expanded={open}
         disabled={disabled}
-        onClick={() => {
-          if (!open) {
-            setSelectedDate(value.slice(0, 10));
-            setHour(value.slice(11, 13));
-            setMinute(value.slice(14, 16));
-          }
-          setOpen(!open);
-        }}
+        aria-haspopup="dialog"
+        onClick={() => setOpen(true)}
       >
-        <span className={value ? styles.value : styles.placeholder}>
+        <span className={chosenDate ? styles.value : styles.placeholder}>
           {displayValue}
         </span>
         <CalendarDays size={18} aria-hidden="true" />
       </button>
-      {open && (
-        <div
-          className={styles.popover}
-          role="dialog"
-          aria-label="Sana va vaqtni tanlash"
-        >
-          <div className={styles.calendarHeader}>
-            <button
-              type="button"
-              aria-label="Oldingi oy"
-              onClick={() =>
-                setVisibleMonth(
-                  new Date(
-                    visibleMonth.getFullYear(),
-                    visibleMonth.getMonth() - 1,
-                    1,
-                  ),
-                )
-              }
-            >
-              <ChevronLeft size={18} />
-            </button>
-            <strong>
-              {months[visibleMonth.getMonth()]} {visibleMonth.getFullYear()}
-            </strong>
-            <button
-              type="button"
-              aria-label="Keyingi oy"
-              onClick={() =>
-                setVisibleMonth(
-                  new Date(
-                    visibleMonth.getFullYear(),
-                    visibleMonth.getMonth() + 1,
-                    1,
-                  ),
-                )
-              }
-            >
-              <ChevronRight size={18} />
-            </button>
-          </div>
-          <div
-            className={styles.calendarGrid}
-            role="grid"
-            aria-label="Kalendar"
-          >
-            {weekdays.map((weekday) => (
-              <span className={styles.weekday} key={weekday}>
-                {weekday}
-              </span>
-            ))}
-            {days.map((day, index) => {
-              if (day === null)
-                return (
-                  <span className={styles.emptyDay} key={`empty-${index}`} />
-                );
-              const date = new Date(
-                visibleMonth.getFullYear(),
-                visibleMonth.getMonth(),
-                day,
-              );
-              const dateValue = toDateValue(date);
-              return (
+      <dialog
+        ref={dialog}
+        className={styles.popover}
+        aria-label="Sana va vaqtni tanlash"
+        onCancel={(event) => {
+          event.preventDefault();
+          setOpen(false);
+        }}
+        onClick={(event) => {
+          if (event.target !== event.currentTarget) return;
+          const bounds = event.currentTarget.getBoundingClientRect();
+          if (
+            event.clientX < bounds.left ||
+            event.clientX > bounds.right ||
+            event.clientY < bounds.top ||
+            event.clientY > bounds.bottom
+          )
+            setOpen(false);
+        }}
+      >
+        {open && (
+          <>
+            <div className={styles.dialogHeader}>
+              <strong>Sana va vaqt</strong>
+              <button
+                type="button"
+                aria-label="Yopish"
+                onClick={() => setOpen(false)}
+              >
+                <X size={18} aria-hidden="true" />
+              </button>
+            </div>
+            <div className={styles.pickerBody}>
+              <div className={styles.calendarHeader}>
                 <button
                   type="button"
-                  role="gridcell"
-                  aria-selected={dateValue === selectedDate}
-                  aria-label={`${day} ${months[visibleMonth.getMonth()]} ${visibleMonth.getFullYear()}`}
-                  className={`${styles.day} ${dateValue === selectedDate ? styles.selectedDay : ""}`}
-                  key={dateValue}
-                  onClick={() => setSelectedDate(dateValue)}
+                  aria-label="Oldingi oy"
+                  onClick={() =>
+                    setVisibleMonth(
+                      new Date(
+                        visibleMonth.getFullYear(),
+                        visibleMonth.getMonth() - 1,
+                        1,
+                      ),
+                    )
+                  }
                 >
-                  {day}
+                  <ChevronLeft size={18} />
                 </button>
-              );
-            })}
-          </div>
-          <div className={styles.timeSection}>
-            <div className={styles.timeTitle}>
-              <Clock3 size={16} />
-              <span>Vaqtni tanlang</span>
+                <strong>
+                  {months[visibleMonth.getMonth()]} {visibleMonth.getFullYear()}
+                </strong>
+                <button
+                  type="button"
+                  aria-label="Keyingi oy"
+                  onClick={() =>
+                    setVisibleMonth(
+                      new Date(
+                        visibleMonth.getFullYear(),
+                        visibleMonth.getMonth() + 1,
+                        1,
+                      ),
+                    )
+                  }
+                >
+                  <ChevronRight size={18} />
+                </button>
+              </div>
+              <div
+                className={styles.calendarGrid}
+                role="grid"
+                aria-label="Kalendar"
+              >
+                {weekdays.map((weekday) => (
+                  <span className={styles.weekday} key={weekday}>
+                    {weekday}
+                  </span>
+                ))}
+                {days.map((day, index) => {
+                  if (day === null)
+                    return (
+                      <span
+                        className={styles.emptyDay}
+                        key={`empty-${index}`}
+                      />
+                    );
+                  const date = new Date(
+                    visibleMonth.getFullYear(),
+                    visibleMonth.getMonth(),
+                    day,
+                  );
+                  const dateValue = toDateValue(date);
+                  return (
+                    <button
+                      type="button"
+                      role="gridcell"
+                      aria-selected={dateValue === selectedDate}
+                      aria-label={`${day} ${months[visibleMonth.getMonth()]} ${visibleMonth.getFullYear()}`}
+                      className={`${styles.day} ${dateValue === selectedDate ? styles.selectedDay : ""}`}
+                      key={dateValue}
+                      onClick={() => selectDateTime(dateValue, hour, minute)}
+                    >
+                      {day}
+                    </button>
+                  );
+                })}
+              </div>
+              <div className={styles.timeSection}>
+                <div className={styles.timeTitle}>
+                  <Clock3 size={16} />
+                  <span>Vaqtni tanlang</span>
+                </div>
+                <div className={styles.timeSelects}>
+                  <SoftSelect
+                    label="Soat"
+                    value={hour}
+                    placeholder="Soat"
+                    options={hours}
+                    menuPlacement="aboveOnMobile"
+                    onChange={(nextHour) =>
+                      selectDateTime(selectedDate, nextHour, minute)
+                    }
+                  />
+                  <span className={styles.timeSeparator}>:</span>
+                  <SoftSelect
+                    label="Daqiqa"
+                    value={minute}
+                    placeholder="Daqiqa"
+                    options={minuteOptions}
+                    menuPlacement="aboveOnMobile"
+                    onChange={(nextMinute) =>
+                      selectDateTime(selectedDate, hour, nextMinute)
+                    }
+                  />
+                </div>
+              </div>
             </div>
-            <div className={styles.timeSelects}>
-              <SoftSelect
-                label="Soat"
-                value={hour}
-                placeholder="Soat"
-                options={hours}
-                menuPlacement="aboveOnMobile"
-                onChange={setHour}
-              />
-              <span className={styles.timeSeparator}>:</span>
-              <SoftSelect
-                label="Daqiqa"
-                value={minute}
-                placeholder="Daqiqa"
-                options={minutes}
-                menuPlacement="aboveOnMobile"
-                onChange={setMinute}
-              />
+            <div className={styles.footer}>
+              <span aria-live="polite">
+                {chosenDate
+                  ? `${chosenDate}${hour && minute ? ` · ${hour}:${minute}` : ""}`
+                  : "Sana va vaqtni belgilang"}
+              </span>
+              <button
+                type="button"
+                className={styles.apply}
+                onClick={() => setOpen(false)}
+              >
+                Tayyor
+              </button>
             </div>
-          </div>
-          <div className={styles.footer}>
-            <span>
-              {chosenDate
-                ? `${chosenDate}${hour && minute ? ` · ${hour}:${minute}` : ""}`
-                : "Sana va vaqtni belgilang"}
-            </span>
-            <button
-              type="button"
-              className={styles.apply}
-              disabled={!selectedDate || !hour || !minute}
-              onClick={() => {
-                onChange(`${selectedDate}T${hour}:${minute}`);
-                setOpen(false);
-              }}
-            >
-              Tasdiqlash
-            </button>
-          </div>
-        </div>
-      )}
+          </>
+        )}
+      </dialog>
     </div>
   );
 }
@@ -284,7 +313,9 @@ export function TimePicker({
   }, [minute]);
 
   return (
-    <div className={`${styles.timeOnly}${compact ? ` ${styles.timeOnlyCompact}` : ""}`}>
+    <div
+      className={`${styles.timeOnly}${compact ? ` ${styles.timeOnlyCompact}` : ""}`}
+    >
       {!compact && <Clock3 size={16} aria-hidden="true" />}
       <SoftSelect
         label="Soat"

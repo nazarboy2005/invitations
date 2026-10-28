@@ -58,6 +58,7 @@ function InvitationCard({
   accountSaved = !local,
   onDelete,
   onUnpublish,
+  onRepublish,
   busy = false,
   onOpenActivity,
   viewCount,
@@ -67,6 +68,7 @@ function InvitationCard({
   accountSaved?: boolean;
   onDelete?: () => void;
   onUnpublish?: () => void;
+  onRepublish?: () => void;
   busy?: boolean;
   onOpenActivity?: () => void;
   viewCount?: number;
@@ -206,6 +208,16 @@ function InvitationCard({
               <EyeOff size={14} /> Nashrdan olish
             </button>
           )}
+          {invitation.status === "archived" && onRepublish && (
+            <button
+              className={styles.secondaryAction}
+              onClick={onRepublish}
+              disabled={busy}
+            >
+              {busy ? <LoaderCircle size={14} /> : <Send size={14} />}
+              {busy ? "Nashr qilinmoqda…" : "Qayta nashr qilish"}
+            </button>
+          )}
           <Link href={editUrl}>
             {invitation.status === "published" ? "Tahrirlash" : "Davom etish"}
             <ArrowRight size={15} />
@@ -308,6 +320,42 @@ export function Dashboard() {
       setBrowserDrafts((items) =>
         items.filter((item) => item.invitation.id !== invitation.id),
       );
+    } catch (cause) {
+      setActionError(
+        cause instanceof Error ? cause.message : "Amal bajarilmadi.",
+      );
+    } finally {
+      setActionBusy(null);
+    }
+  }
+
+  async function republishInvitation(invitation: Invitation) {
+    setActionBusy(invitation.id);
+    setActionError("");
+    try {
+      const response = await fetch(
+        `/api/invitations/${encodeURIComponent(invitation.id)}/publish`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ revision: invitation.revision }),
+        },
+      );
+      const result = await response.json();
+      if (!response.ok)
+        throw new Error(
+          result.error?.message ??
+            "Taklifnomani qayta nashr qilib bo‘lmadi. Qayta urinib ko‘ring.",
+        );
+      const published = invitationSchema.parse(result.invitation);
+      setInvitations((items) => {
+        const next = items.map((item) =>
+          item.id === invitation.id ? { ...item, ...published } : item,
+        );
+        if (dashboardSnapshot)
+          dashboardSnapshot = { ...dashboardSnapshot, invitations: next };
+        return next;
+      });
     } catch (cause) {
       setActionError(
         cause instanceof Error ? cause.message : "Amal bajarilmadi.",
@@ -602,6 +650,17 @@ export function Dashboard() {
                       invitation.status === "published" &&
                       cloudIds.has(invitation.id)
                         ? () => setUnpublishTarget(invitation)
+                        : undefined
+                    }
+                    onRepublish={
+                      invitation.status === "archived" &&
+                      cloudIds.has(invitation.id)
+                        ? () => {
+                            const saved = invitations.find(
+                              (item) => item.id === invitation.id,
+                            );
+                            if (saved) void republishInvitation(saved);
+                          }
                         : undefined
                     }
                     onOpenActivity={

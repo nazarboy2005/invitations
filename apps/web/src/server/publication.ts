@@ -139,7 +139,12 @@ export async function publishInvitationInTransaction(
       invitation: { ...previous, slug: row.slug as string },
       url: publicInvitationUrl(row.slug),
     };
-  if (row.status !== "draft")
+  const republishing =
+    row.status === "archived" &&
+    !!row.slug &&
+    !!row.first_published_at &&
+    !!row.identity_locked_at;
+  if (row.status !== "draft" && !republishing)
     throw new ApiError(
       403,
       "INVITATION_ARCHIVED",
@@ -158,7 +163,7 @@ export async function publishInvitationInTransaction(
       "PUBLISHING_UNAVAILABLE",
       "Nashr qilish vaqtincha mavjud emas.",
     );
-  if (mode === "paid") {
+  if (mode === "paid" && !republishing) {
     const [entitlement] =
       await tx`SELECT id FROM payment_orders WHERE invitation_id=${id} AND owner_id=${user.id} AND template_id=${previous.templateId} AND identity_snapshot=${paymentIdentity(previous)} AND status='SUCCEEDED' AND verified_at IS NOT NULL FOR SHARE`;
     if (!entitlement)
@@ -184,6 +189,27 @@ export async function publishInvitationInTransaction(
     );
   assertPublishable(previous);
   await assertPublicMedia(tx, previous, user.id);
+  if (republishing) {
+    const invitation = invitationSchema.parse({
+      ...previous,
+      status: "published",
+      slug: row.slug,
+      revision: previous.revision + 1,
+    });
+    // Restore the same event without resetting its identity or editing window.
+    await tx`UPDATE invitations SET status='published',data=${tx.json(invitation)},archived_at=NULL,updated_at=now() WHERE id=${id}`;
+    await tx`INSERT INTO invitation_audit_log(invitation_id,actor_id,action,previous_values,new_values) VALUES(${id},${admin?.actorId ?? user.id},'republished',${tx.json(previous)},${tx.json(invitation)})`;
+    if (admin)
+      await recordAdminChange(
+        tx,
+        admin.actorId,
+        "invitation.publish",
+        id,
+        { status: "archived" },
+        { status: "published", ownerId: user.id, reason: admin.reason },
+      );
+    return { invitation, url: publicInvitationUrl(row.slug) };
+  }
   // Treat startsAt as a wall-clock value in the invitation's own timezone.
   // Compare the resulting instants in PostgreSQL, without relying on the
   // database session's timezone or JS coercion of a timezone-less string.
