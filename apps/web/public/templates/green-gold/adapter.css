@@ -18,3 +18,5 @@ html,body{margin:0;min-height:100%;background:#082418;color:#fff;font-family:Geo
 
 [data-gg-root] :focus-visible{outline:3px solid #fff1b8;outline-offset:3px}
 [data-gg-root] form [data-gg-status]:empty{display:none}
+
+[data-gg-root] .gg-music-toggle.is-playing{background:#d4af37;color:#082418}

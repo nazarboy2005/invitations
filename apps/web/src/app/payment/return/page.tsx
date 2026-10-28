@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { PaymentReturn } from "@/modules/payments/payment-return";
 export const metadata: Metadata = {
-  title: "To‘lov holati",
+  title: "Taklifnomani nashr qilish",
   robots: { index: false, follow: false },
 };
 export default function Page() {

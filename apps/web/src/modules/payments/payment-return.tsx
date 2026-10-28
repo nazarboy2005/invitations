@@ -1,10 +1,22 @@
 "use client";
+
 import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { formatPrice } from "@taklifnoma/contracts";
+import {
+  ArrowLeft,
+  ArrowRight,
+  Check,
+  CheckCircle2,
+  Clock3,
+  Copy,
+  CreditCard,
+  LoaderCircle,
+  ShieldCheck,
+} from "lucide-react";
+import { formatPrice, getContent, templateById } from "@taklifnoma/contracts";
 import {
   paymentStateLabels,
-  type PaymentOrderView,
+  type InvitationPaymentContext,
 } from "@taklifnoma/contracts/payment";
 import styles from "./payment-return.module.css";
 import { CheckoutActions } from "./checkout-actions";
@@ -17,6 +29,10 @@ import {
   rememberPaymentOrder,
   telegramPaymentReturnLink,
 } from "./payment-navigation";
+import { formatDate } from "@/templates/date-format";
+
+const retryableStates = ["FAILED", "CANCELLED", "EXPIRED"];
+const pendingStates = ["CREATED", "PENDING", "PROCESSING", "REJECTED"];
 
 export function PaymentReturn({
   botUsername,
@@ -25,38 +41,60 @@ export function PaymentReturn({
   botUsername?: string;
   mainMiniApp?: boolean;
 }) {
-  const [orders, setOrders] = useState<PaymentOrderView[]>([]);
-  const [selected, setSelected] = useState("");
+  const [context, setContext] = useState<InvitationPaymentContext | null>(null);
   const [loading, setLoading] = useState(true);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
+  const [notice, setNotice] = useState("");
   const [loginRequired, setLoginRequired] = useState(false);
   const [miniApp, setMiniApp] = useState(false);
   const [userId, setUserId] = useState("");
+  const [returnOrderId, setReturnOrderId] = useState("");
   const [retry, setRetry] = useState(0);
   const inFlight = useRef(false);
-  const order = orders.find((item) => item.id === selected);
+  const order = context?.order;
+  const invitation = context?.invitation;
+  const paid = order?.status === "SUCCEEDED";
+  const pending = !!order && pendingStates.includes(order.status);
+  const retryable = !!order && retryableStates.includes(order.status);
+  const published = invitation?.status === "published" || !!order?.url;
+  const publicUrl =
+    order?.url ??
+    (published && invitation?.slug
+      ? `/i/${encodeURIComponent(invitation.slug)}`
+      : null);
+  const editUrl = invitation
+    ? `/studio/${encodeURIComponent(invitation.id)}`
+    : "/dashboard";
   const telegramUrl = telegramPaymentReturnLink(
     botUsername,
-    selected || undefined,
+    returnOrderId || undefined,
     mainMiniApp,
   );
+
   const refresh = useCallback(async (id: string, signal?: AbortSignal) => {
     if (inFlight.current) return;
     inFlight.current = true;
     setBusy(true);
     try {
-      const response = await fetch(`/api/payments/${id}/refresh`, {
-        method: "POST",
-        signal,
-      });
+      const response = await fetch(
+        `/api/payments/${encodeURIComponent(id)}/refresh`,
+        { method: "POST", signal },
+      );
       const body = await response.json();
       if (!response.ok)
         throw new Error(body.error?.message ?? "To‘lovni tekshirib bo‘lmadi.");
-      setOrders((current) =>
-        current.map((item) => (item.id === id ? body.order : item)),
-      );
-      setError("");
+      if (!signal?.aborted) {
+        setContext((current) =>
+          current?.order?.id === id
+            ? {
+                ...current,
+                order: body.order,
+              }
+            : current,
+        );
+        setError("");
+      }
     } catch (cause) {
       if (!signal?.aborted)
         setError(
@@ -64,37 +102,56 @@ export function PaymentReturn({
         );
     } finally {
       inFlight.current = false;
-      setBusy(false);
+      if (!signal?.aborted) setBusy(false);
     }
   }, []);
+
   useEffect(() => {
     const onReady = () => setRetry((value) => value + 1);
     window.addEventListener("taklifnoma:telegram-ready", onReady);
-    return () =>
+    window.addEventListener("taklifnoma:session-changed", onReady);
+    return () => {
       window.removeEventListener("taklifnoma:telegram-ready", onReady);
+      window.removeEventListener("taklifnoma:session-changed", onReady);
+    };
   }, []);
+
   useEffect(() => {
     const controller = new AbortController();
     setLoading(true);
+    setBusy(false);
     setLoginRequired(false);
     setError("");
-    setOrders([]);
-    setSelected("");
+    setNotice("");
+    setContext(null);
     setUserId("");
+    const params = new URLSearchParams(window.location.search);
+    const requested = params.get("order");
+    const requestedInvitation = params.get("invitation");
+    setReturnOrderId(requested ?? "");
     void (async () => {
       try {
         const initData = currentTelegramLaunchData();
         setMiniApp(Boolean(initData));
-        // A newly opened Mini App may not have a cookie yet. Verify its signed
-        // Telegram identity before requesting any private payment records.
+        // Verify signed Mini App identity before requesting private records.
         const session = await loadClientSession(initData);
         if (controller.signal.aborted) return;
         if (!session.user) {
           setLoginRequired(true);
           return;
         }
-        const accountId = session.user.id;
-        const response = await fetch("/api/payments", {
+        setUserId(session.user.id);
+        // The fixed provider return can recover this account's navigation hint.
+        // Never choose an arbitrary latest order or substitute an invalid ID.
+        const id =
+          requested ??
+          (requestedInvitation ? "" : rememberedPaymentOrder(session.user.id));
+        if (!id && !requestedInvitation) return;
+        setReturnOrderId(id);
+        const endpoint = id
+          ? `/api/payments/${encodeURIComponent(id)}`
+          : `/api/invitations/${encodeURIComponent(requestedInvitation!)}/payment`;
+        const response = await fetch(endpoint, {
           cache: "no-store",
           signal: controller.signal,
         });
@@ -104,28 +161,12 @@ export function PaymentReturn({
         }
         const body = await response.json();
         if (!response.ok)
-          throw new Error(body.error?.message ?? "Buyurtmalar olinmadi.");
-        const items = body.orders as PaymentOrderView[];
-        if (controller.signal.aborted) return;
-        setUserId(accountId);
-        setOrders(items);
-        let remembered = "";
-        try {
-          remembered = sessionStorage.getItem("nodze-order") ?? "";
-        } catch {
-          /* Account records are the fallback. */
-        }
-        const requested = new URLSearchParams(window.location.search).get(
-          "order",
-        );
-        setSelected(
-          items.find((item) => item.id === requested)?.id ??
-            items.find((item) => item.id === remembered)?.id ??
-            items.find((item) => item.id === rememberedPaymentOrder(accountId))
-              ?.id ??
-            items[0]?.id ??
-            "",
-        );
+          throw new Error(
+            body.error?.message ?? "Taklifnoma ma’lumotlari yuklanmadi.",
+          );
+        if (requestedInvitation && body.invitation.id !== requestedInvitation)
+          throw new Error("To‘lov ushbu taklifnomaga tegishli emas.");
+        if (!controller.signal.aborted) setContext(body);
       } catch (cause) {
         if (!controller.signal.aborted)
           setError(
@@ -137,33 +178,19 @@ export function PaymentReturn({
     })();
     return () => controller.abort();
   }, [retry]);
+
   useEffect(() => {
-    if (!selected || !userId) return;
-    rememberPaymentOrder(userId, selected);
-    // Selection survives reload, browser return and unavailable sessionStorage.
+    if (!order?.id || !userId) return;
+    rememberPaymentOrder(userId, order.id);
+    setReturnOrderId(order.id);
     const url = new URL(window.location.href);
-    url.searchParams.set("order", selected);
+    url.searchParams.set("order", order.id);
+    url.searchParams.delete("invitation");
     window.history.replaceState(window.history.state, "", url);
-    try {
-      sessionStorage.setItem("nodze-order", selected);
-    } catch {
-      /* Owned server records and the URL remain available. */
-    }
-  }, [selected, userId]);
+  }, [order?.id, userId]);
+
   useEffect(() => {
-    if (
-      !order ||
-      order.url ||
-      [
-        "FAILED",
-        "CANCELLED",
-        "EXPIRED",
-        "REFUNDED",
-        "PARTIALLY_REFUNDED",
-        "REFUND_PENDING",
-      ].includes(order.status)
-    )
-      return;
+    if (!order || !pending || published) return;
     const controller = new AbortController();
     void refresh(order.id, controller.signal);
     const onReturn = () => {
@@ -177,7 +204,7 @@ export function PaymentReturn({
         window.clearInterval(timer);
         return;
       }
-      if (!document.hidden) void refresh(order.id, controller.signal);
+      onReturn();
     }, 15000);
     return () => {
       controller.abort();
@@ -185,157 +212,308 @@ export function PaymentReturn({
       window.removeEventListener("focus", onReturn);
       document.removeEventListener("visibilitychange", onReturn);
     };
-  }, [selected, order?.status, order?.url, refresh]);
+  }, [order?.id, pending, published, refresh]);
+
+  async function startPayment() {
+    if (!context || inFlight.current) return;
+    inFlight.current = true;
+    setBusy(true);
+    setError("");
+    try {
+      const response = await fetch(
+        `/api/invitations/${context.invitation.id}/checkout`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            revision: context.invitation.revision,
+            expectedAmountMinor: context.template?.priceMinor,
+          }),
+        },
+      );
+      const body = await response.json();
+      if (!response.ok)
+        throw new Error(
+          body.error?.message ?? "To‘lov boshlanmadi. Qayta urinib ko‘ring.",
+        );
+      setContext((current) =>
+        current?.invitation.id === context.invitation.id
+          ? { ...current, order: body.order }
+          : current,
+      );
+    } catch (cause) {
+      setError(
+        cause instanceof Error ? cause.message : "Ulanishni tekshiring.",
+      );
+    } finally {
+      inFlight.current = false;
+      setBusy(false);
+    }
+  }
+
+  const title = loading
+    ? "Taklifnomangiz yuklanmoqda"
+    : loginRequired
+      ? "Taklifnomangizga qayting"
+      : !invitation
+        ? error
+          ? "Taklifnoma ochilmadi"
+          : "Taklifnomani tanlang"
+        : published
+          ? "Taklifnomangiz tayyor"
+          : paid
+            ? "Nashrni yakunlang"
+            : context?.publishingMode === "free" && !order
+              ? "Taklifnomani nashr qiling"
+              : order?.status === "PROCESSING" || order?.status === "REJECTED"
+                ? "To‘lov tasdiqlanmoqda"
+                : order && !pending && !retryable
+                  ? "To‘lov bo‘yicha ma’lumot"
+                  : "To‘lov qilish";
+  const content = invitation ? getContent(invitation) : null;
+  const templateName =
+    (order && !retryable ? order.templateName : undefined) ??
+    context?.template?.name ??
+    templateById(invitation?.templateId ?? "")?.name ??
+    "Tanlanmagan";
+  const amount =
+    published && !order
+      ? undefined
+      : order && !retryable
+        ? order.amountMinor
+        : context?.template?.priceMinor;
+
   return (
     <main className={styles.page}>
-      <section className={styles.card}>
-        <Link href="/" className={styles.brand}>
-          Visol
-        </Link>
-        <p className={styles.eyebrow}>TO‘LOV VA NASHR</p>
-        <h1>To‘lov holati</h1>
-        {!miniApp && telegramUrl && (
-          <div>
-            <p>
-              Telegram Mini App’da boshlagan bo‘lsangiz, o‘sha hisobda davom
-              eting. Buyurtma va to‘lovingiz saqlangan. Brauzer Telegram’dagi
-              kirishni avtomatik qabul qilmaydi.
-            </p>
-            <a className="button" href={telegramUrl}>
-              Telegram’da davom etish
-            </a>
-            {!mainMiniApp && (
-              <p>
-                Telegram ochilgach, botdagi “To‘lov holatini ochish” tugmasini
-                bosing.
-              </p>
+      <div className={styles.shell}>
+        <header className={styles.header}>
+          <Link href="/" className={styles.brand}>
+            Visol
+          </Link>
+          <Link href="/dashboard" className={styles.backLink}>
+            <ArrowLeft size={16} aria-hidden="true" /> Taklifnomalarim
+          </Link>
+        </header>
+        <section className={styles.card} aria-busy={loading}>
+          <span
+            className={styles.stateIcon}
+            data-success={published || paid}
+            aria-hidden="true"
+          >
+            {loading ? (
+              <LoaderCircle size={27} className={styles.spinner} />
+            ) : paid || published ? (
+              <CheckCircle2 size={28} />
+            ) : pending ? (
+              <Clock3 size={27} />
+            ) : (
+              <CreditCard size={27} />
             )}
-          </div>
-        )}
-        {loading ? (
-          <p role="status">Buyurtma tekshirilmoqda…</p>
-        ) : loginRequired ? (
-          <>
+          </span>
+          <h1 aria-live="polite">{title}</h1>
+          {loading ? (
+            <p role="status">Bir oz kuting…</p>
+          ) : loginRequired ? (
             <p>
               {miniApp
-                ? "Mini App’ni botdan qayta oching. Hisobingiz tekshirilgach, buyurtmangiz ko‘rinadi."
-                : "Shu brauzerda davom etish uchun hisobingizga kiring yoki yuqoridagi tugma orqali Telegram’ga qayting. To‘lov yo‘qolmaydi."}
+                ? "Hisobingizni tasdiqlash uchun Mini App’ni botdan qayta oching."
+                : "To‘lovni boshlagan hisobingizda davom eting. To‘lovingiz va taklifnomangiz saqlangan."}
             </p>
-            <Link className="button secondary" href="/dashboard">
-              Brauzerda hisobga kirish
-            </Link>
-          </>
-        ) : error && orders.length === 0 ? (
-          <p>Buyurtmalar hozircha yuklanmadi. Qayta tekshiring.</p>
-        ) : (
-          <>
-            {orders.length > 1 && (
-              <label className={styles.select}>
-                Buyurtma
-                <select
-                  value={selected}
-                  onChange={(event) => setSelected(event.target.value)}
-                >
-                  {orders.map((item) => (
-                    <option value={item.id} key={item.id}>
-                      {item.templateName} — {formatPrice(item.amountMinor)} —{" "}
-                      {item.id.slice(0, 8)}
-                    </option>
-                  ))}
-                </select>
-              </label>
-            )}
-            {order ? (
-              <>
+          ) : context && invitation ? (
+            <>
+              <div className={styles.invitationSummary}>
+                <p className={styles.names}>
+                  {content?.people.filter(Boolean).join(" & ") ||
+                    "Taklifnomangiz"}
+                </p>
                 <p>
-                  {order.templateName} ·{" "}
-                  <strong>{formatPrice(order.amountMinor)}</strong>
+                  {formatDate(
+                    invitation.startsAt,
+                    "uz-Latn",
+                    invitation.timezone,
+                    { day: "numeric", month: "long", year: "numeric" },
+                  ) || "Sana kiritilmagan"}
                 </p>
-                <p className={styles.status} role="status" aria-live="polite">
-                  {paymentStateLabels[order.status]}
-                </p>
-                {order.url ? (
-                  <>
-                    <p>
-                      Taklifnomangiz nashr qilindi. Havolani mehmonlarga
-                      ulashing.
-                    </p>
-                    <a className="button" href={order.url}>
-                      Taklifnomani ochish
+                <dl>
+                  <div>
+                    <dt>Dizayn</dt>
+                    <dd>{templateName}</dd>
+                  </div>
+                  {amount !== undefined && (
+                    <div>
+                      <dt>
+                        {paid
+                          ? "To‘langan summa"
+                          : published || context.publishingMode === "free"
+                            ? "Narx"
+                            : "Jami to‘lov"}
+                      </dt>
+                      <dd>{formatPrice(amount)}</dd>
+                    </div>
+                  )}
+                </dl>
+              </div>
+              {published && publicUrl ? (
+                <>
+                  <p>
+                    Taklifnomangiz nashr qilindi. Havolani yaqinlaringiz bilan
+                    ulashing.
+                  </p>
+                  <div className={styles.actions}>
+                    <a className="button" href={publicUrl}>
+                      Taklifnomani ochish{" "}
+                      <ArrowRight size={16} aria-hidden="true" />
                     </a>
                     <button
                       className="button secondary"
-                      onClick={() =>
-                        void navigator.clipboard
-                          .writeText(order.url!)
-                          .then(() => setError("Havola nusxalandi."))
-                          .catch(() =>
-                            setError("Havolani manzil satridan nusxalang."),
-                          )
-                      }
+                      onClick={async () => {
+                        try {
+                          await navigator.clipboard.writeText(
+                            new URL(publicUrl, window.location.origin).href,
+                          );
+                          setNotice("Havola nusxalandi.");
+                        } catch {
+                          setNotice("Havolani quyidagi maydondan nusxalang.");
+                        }
+                      }}
                     >
-                      Havolani nusxalash
+                      <Copy size={16} aria-hidden="true" /> Havolani nusxalash
                     </button>
-                  </>
-                ) : (
-                  <>
-                    <p>
-                      {order.status === "SUCCEEDED"
-                        ? "To‘lov saqlandi. Nashrni yakunlash uchun quyidagi tafsilotlarni tekshiring. Qayta to‘lamang."
-                        : "Tasdiq Click va server orqali tekshiriladi. Natija kechiksa, yangi to‘lov boshlamang."}
+                  </div>
+                  <input
+                    className={styles.publicLink}
+                    aria-label="Taklifnoma havolasi"
+                    readOnly
+                    value={
+                      typeof window === "undefined"
+                        ? publicUrl
+                        : new URL(publicUrl, window.location.origin).href
+                    }
+                    onFocus={(event) => event.currentTarget.select()}
+                  />
+                </>
+              ) : paid ? (
+                <>
+                  <p className={styles.paidNote} role="status">
+                    <Check size={17} aria-hidden="true" /> To‘langan
+                  </p>
+                  <p>
+                    To‘lov qabul qilindi. Taklifnoma ma’lumotlarini tekshirib,
+                    nashrni yakunlang. Qo‘shimcha to‘lov talab qilinmaydi.
+                  </p>
+                  {order?.publicationError && (
+                    <p className={styles.alert} role="alert">
+                      {order.publicationError}
                     </p>
-                    {order.publicationError && (
-                      <p role="alert">{order.publicationError}</p>
-                    )}
-                    <div className={styles.actions}>
+                  )}
+                  <Link className="button" href={editUrl}>
+                    Nashrni yakunlash{" "}
+                    <ArrowRight size={16} aria-hidden="true" />
+                  </Link>
+                </>
+              ) : order && !pending && !retryable ? (
+                <p role="status">
+                  {paymentStateLabels[order.status]}. Taklifnomangiz saqlangan.
+                </p>
+              ) : context.publishingMode === "free" && !order ? (
+                <>
+                  <p>Ma’lumotlarni tekshirib, taklifnomani nashr qiling.</p>
+                  <Link className="button" href={editUrl}>
+                    Nashr qilish <ArrowRight size={16} aria-hidden="true" />
+                  </Link>
+                </>
+              ) : (
+                <>
+                  {order && (
+                    <p className={styles.paymentStatus} role="status">
+                      {paymentStateLabels[order.status]}
+                    </p>
+                  )}
+                  <p>
+                    {retryable
+                      ? "Avvalgi to‘lov yakunlanmagan. Shu taklifnoma uchun qayta to‘lov boshlashingiz mumkin."
+                      : pending
+                        ? "To‘lov tasdiqlangach, taklifnomangiz avtomatik nashr qilinadi."
+                        : "Bir martalik to‘lov. Tasdiqlangach, taklifnomangiz nashr qilinadi."}
+                  </p>
+                  {order?.checkoutUrl && pending && (
+                    <CheckoutActions
+                      key={order.id}
+                      checkoutUrl={order.checkoutUrl}
+                    />
+                  )}
+                  {(!order || retryable) && context.template && (
+                    <button
+                      className="button"
+                      disabled={busy}
+                      onClick={() => void startPayment()}
+                    >
+                      {busy ? "Tayyorlanmoqda…" : "To‘lov qilish"}{" "}
+                      {!busy && <ArrowRight size={16} aria-hidden="true" />}
+                    </button>
+                  )}
+                  {pending && (
+                    <div className={styles.refresh}>
                       <button
-                        className="button"
                         disabled={busy}
-                        onClick={() => void refresh(order.id)}
+                        onClick={() => void refresh(order!.id)}
                       >
-                        {busy ? "Tekshirilmoqda…" : "Holatni tekshirish"}
+                        {busy ? "Tekshirilmoqda…" : "To‘lovni tekshirish"}
                       </button>
+                      <small>To‘lagan bo‘lsangiz, qayta to‘lamang.</small>
                     </div>
-                    {order.checkoutUrl && (
-                      <CheckoutActions
-                        key={order.id}
-                        checkoutUrl={order.checkoutUrl}
-                      />
-                    )}
-                  </>
-                )}
-                <Link
-                  className={styles.link}
-                  href={`/studio/${order.invitationId}`}
-                >
-                  {["FAILED", "CANCELLED", "EXPIRED"].includes(order.status)
-                    ? "Qoralamaga qaytish / qayta urinish"
-                    : "Taklifnomani tahrirlash"}
+                  )}
+                </>
+              )}
+              {!published && !paid && (
+                <Link className={styles.editLink} href={editUrl}>
+                  Ma’lumotlarni tahrirlash
                 </Link>
-              </>
-            ) : (
-              <p>
-                Hozircha to‘lov buyurtmasi yo‘q. Taklifnomangizdan “Nashr
-                qilish”ni bosing.
-              </p>
+              )}
+            </>
+          ) : !error ? (
+            <p>Taklifnomalarim bo‘limidan kerakli taklifnomani oching.</p>
+          ) : null}
+          {!miniApp &&
+            telegramUrl &&
+            (loginRequired || !context) &&
+            !loading && (
+              <div className={styles.telegramReturn}>
+                <a className="button" href={telegramUrl}>
+                  Telegram’da davom etish
+                </a>
+                {!mainMiniApp && (
+                  <p>
+                    To‘lov tasdiqlangach, taklifnoma havolasi bot chatiga
+                    yuboriladi.
+                  </p>
+                )}
+              </div>
             )}
-          </>
-        )}
-        {error && (
-          <>
-            <p role="status">{error}</p>
-            <button
-              className="button secondary"
-              onClick={() => setRetry((value) => value + 1)}
-            >
-              Qayta tekshirish
-            </button>
-          </>
-        )}
-        <Link className={styles.link} href="/dashboard">
-          Taklifnomalarim
-        </Link>
-      </section>
+          {loginRequired && (
+            <Link className={styles.editLink} href="/dashboard">
+              Brauzerda hisobga kirish
+            </Link>
+          )}
+          {error && (
+            <div className={styles.alert} role="alert">
+              <p>{error}</p>
+              <button onClick={() => setRetry((value) => value + 1)}>
+                Qayta yuklash
+              </button>
+            </div>
+          )}
+          {notice && (
+            <p role="status" className={styles.notice}>
+              {notice}
+            </p>
+          )}
+        </section>
+        <p className={styles.security}>
+          <ShieldCheck size={15} aria-hidden="true" /> To‘lov faqat tanlangan
+          taklifnomaga tegishli.
+        </p>
+      </div>
     </main>
   );
 }

@@ -17,14 +17,14 @@ const user = {
   isAdmin: false,
 };
 
-test("return links use the existing bot by default, and Main Mini App only when enabled", () => {
+test("return links open the confirmation chat without /start, and Main Mini App only when enabled", () => {
   assert.equal(
     telegramPaymentReturnLink("@fixture_bot"),
-    "https://t.me/fixture_bot?start=payment_return",
+    "https://t.me/fixture_bot",
   );
   assert.equal(
     telegramPaymentReturnLink("fixture_bot", id),
-    `https://t.me/fixture_bot?start=payment_return_${id}`,
+    "https://t.me/fixture_bot",
   );
   assert.equal(
     telegramPaymentReturnLink("fixture_bot", id, true),
@@ -32,7 +32,7 @@ test("return links use the existing bot by default, and Main Mini App only when 
   );
   assert.equal(
     telegramPaymentReturnLink("fixture_bot", "https://attacker.example"),
-    "https://t.me/fixture_bot?start=payment_return",
+    "https://t.me/fixture_bot",
   );
   for (const bot of [
     undefined,

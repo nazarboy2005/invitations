@@ -542,7 +542,17 @@
       root.append(b);
     }
     b.dataset.lgMusic = "";
+    const syncMusicButton = () => {
+      const playing = !a.paused;
+      b.innerHTML = playing
+        ? '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>'
+        : '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 18V5l11-2v13"/><circle cx="7" cy="18" r="3"/><circle cx="19" cy="16" r="3"/><path d="m3 3 18 18"/></svg>';
+      b.setAttribute("aria-pressed", String(playing));
+      b.setAttribute("aria-label", playing ? "Pause music" : "Play music");
+    };
+    ["play", "pause", "ended", "error"].forEach(event => a.addEventListener(event, syncMusicButton));
     hide(b, !url || !!(p.preview && p.silentPlayback));
+    syncMusicButton();
     b.onclick = () => (a.paused ? a.play().catch(() => {}) : a.pause());
     b.onpointerenter = () => applyPressScale(b, 1.1);
     b.onpointerleave = () => applyPressScale(b, 1);

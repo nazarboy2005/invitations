@@ -33,6 +33,10 @@
   the toolbar, with accurate browser/account/failure status, and one final publish
   action. Localize the remaining English studio descriptions. Responsive visual
   and interaction review was subsequently requested and authorized.
+- Merge integration (2026-10-29): retain Google Places venue selection and the
+  Asalari/Muhrli Maktub renderers and localized flowers-note control alongside
+  the refined editor. Show confirmed-payment status and “Nashrni yakunlash” in
+  the final review without restoring publication panels on earlier steps.
 
 ## Personal dashboard redesign (2026-10-28)
 
@@ -138,6 +142,13 @@
   for accounts without active administrator access, including suspended accounts
   and users who have not shared a phone number. Do not send denial messages,
   Telegram IDs, onboarding prompts or buttons; still mark the update processed.
+- User confirmed `invitations-wk6h.vercel.app` as the canonical live website
+  for the Telegram bot. The bot webhook was moved from `invitations-liart`
+  to `https://invitations-wk6h.vercel.app/api/telegram/webhook` and verified
+  through Telegram's API, preserving pending updates and delivery settings.
+  Non-writing preflight requests verified the receiver's configured secret
+  and matching login origin. The supplied admin IDs pass local role checks;
+  the deployed allowlist and real-account admin entry still need verification.
 - User follow-up: Mini App admins must enter the admin workspace automatically,
   without typing `/admin`. Resolve the verified server session on home/account
   entry routes even without the SDK; recover opaque signed launch data from
@@ -1179,7 +1190,15 @@ Recommended behavior and schema guidance:
 - Suggested schema: `invitations.default_locale`, enabled locales, and `invitation_content` unique by `(invitation_id, locale)`; translated repeatable items reference the same stable item ID and locale. Choose one consistent translation-table/JSONB approach during final schema design. Guest preferred locale can be optional; all variants reuse the same greeting placeholders and guest identity.
 - Language variants follow existing creator editing deadlines. Per-language prices, separate publication fees, and exact interface-language settings have not been decided.
 
-## Optional venue/restaurant autocomplete
+## Google Maps venue search and template navigation
+
+User requirement (2026-10-28): Google Maps is the chosen venue provider. Every current and future invitation template must use the shared invitation venue's Google Maps location and navigation target, including coordinates and the creator's map link. A template's original map presentation and animation stay intact; its map controls must point to the shared venue rather than reference sample data. Selecting a template must not change the venue. A copied source field such as `maps_api_key` is not a creator field or invitation value.
+
+The creator editor offers Google Places suggestions while typing a venue. Selection fills the shared venue name, address, coordinates, and Google Maps link. Manual venue entry and pasted map links remain available; editing text after selection does not silently move the selected pin. The server uses `GOOGLE_MAPS_API_KEY` for Places API (New) Autocomplete and Place Details. Keep the key server-only and out of public template payloads. Map navigation URLs need no API key. Google Places requires an enabled API and billing on the owner's Google Cloud project. If the key or service is unavailable, the editor continues to accept manual venues and map links.
+
+Future template integration must check that every map button, directions link, and embedded map uses the shared venue or a derived Google Maps URL; verify a creator-selected place and a manual URL in preview and public rendering. Keep source-specific secondary event venue links separate where the contract provides them.
+
+## Venue/restaurant autocomplete details
 
 Confirmed requirements:
 
@@ -1189,12 +1208,12 @@ Confirmed requirements:
 
 Recommended implementation:
 
-- Use supported Google Places Autocomplete + Place Details or Yandex Geosuggest + appropriate place-detail/search/geocoding API, not scraping map HTML. Final provider is undecided; evaluate real venue coverage in target cities, cost, supported languages, and licensing for persistent invitation content.
+- Use supported Google Places Autocomplete (New) and Place Details (New), not scraping map HTML. Google Maps is the chosen provider.
 - Use an interchangeable place-search module. Show locality/address in suggestions to distinguish same-named venues and optionally bias results by selected city/country without requiring GPS access. Include restaurants, wedding halls, and other event venues rather than restricting every event to restaurants.
 - Prefill only after explicit selection. Debounce/rate-limit search and discard stale responses; outages/no results must not prevent manual entry, saving, or publication. Do not guess missing coordinates or claim venue availability/bookability from search results.
 - Keep creator-authored display fields independent from optional provider references (`place_provider`, `place_id`/URI). Preserve existing location data and language variants when switching templates. Renaming a venue must not silently move its map pin; changing the pin/location should update navigation targets consistently. Selecting a different suggestion must not silently overwrite authored translations or additional venue notes.
 - Provider content has attribution, map-display, and storage/caching restrictions; confirm the selected plan permits the intended long-lived data use before choosing a persistence strategy. Do not assume copying or editing API data removes its licensing restrictions, or mix Google-derived place data onto another provider's map without checking permitted use. Persist only permitted provider metadata and separate it from creator-entered values.
-- API keys, provider setup, exact map UI, storage/refresh policy, and any alternate provider fallback remain implementation choices; no scraping job or restaurant database import is requested.
+- Exact map UI, storage/refresh policy, and any alternate provider fallback remain implementation choices; no scraping job or restaurant database import is requested.
 
 References checked on 2026-10-19: Google autocomplete https://developers.google.com/maps/documentation/places/web-service/place-autocomplete and policies https://developers.google.com/maps/documentation/places/web-service/policies; Yandex suggestions https://yandex.com/maps-api/docs/suggest-api/request.html and place search https://yandex.com/maps-api/docs/geosearch-api/request.html.
 
@@ -1355,6 +1374,22 @@ Database additions agreed as part of this policy:
 
 Confirmed user intent:
 
+- User correction (2026-10-28): payment screens and dashboard actions must be
+  specific to one invitation. Remove the account-wide order selector and generic
+  “To‘lov holati” action. Unpaid invitations offer “To‘lov qilish”; pending
+  payments resume the existing checkout; paid drafts show “To‘langan” and
+  “Nashrni yakunlash”, with no checkout or status-check controls. Published
+  invitations prioritize opening/sharing and editing. Retain refund/uncertain
+  states without inviting another charge. Browser-only changes must be saved
+  through the editor before checkout.
+  The editor also uses the owned payment record to label paid-draft publication
+  “Nashrni yakunlash” and explain that another payment is unnecessary.
+- Implementation: owner-checked invitation/order payment endpoints, per-card
+  latest-payment summaries and a compact invitation/date/design/amount view.
+  An explicit missing/inaccessible order must fail without substituting another
+  invitation. The fixed provider return may recover an account-scoped remembered
+  order; without that context, send the creator to “Taklifnomalarim” to choose
+  the invitation. Never select an arbitrary recent order.
 - User authorized implementation and necessary tests on 2026-10-28, using the existing owned Nodze engine at `https://payments.nodze.org/api/v1` for website Click checkout. The updated supplied integration guide is preserved in `docs/NODZE_INTEGRATION.md`. Do not create or attempt real provider payments during agent testing; use mocked provider responses and disposable database fixtures. No external application deployment was requested. The follow-up request explicitly authorizes repairing the existing Telegram Mini App checkout handoff as recorded below.
 - User requires all template prices to be **1,000 UZS for testing**. Migration 0161 changes current template rows; typed fallback prices match. Store 100,000 minor units, send exact JSON decimal `1000.00` soums to Nodze. Existing payment/order snapshots remain unchanged; administrators retain future pricing control.
 - Nodze calls are backend-only with a project Bearer key and persisted original request bodies/idempotency keys. Confirm only signed `payment.succeeded` or authenticated `SUCCEEDED`; never the browser return. Verify HMAC-SHA256 over exact `timestamp.eventId.rawBody` bytes, five-minute timestamp tolerance, matching event-header/body IDs, exact order/payment/amount/currency and transactional event-ID deduplication/fulfillment. REJECTED may subsequently resolve; stale events must not undo success. Refund/reversal operations are disabled by Nodze.
@@ -1370,7 +1405,8 @@ Validated constraint and recommendations:
 - User requirement (2026-10-28): prepare/persist the Nodze payment and order first, then show a fresh-tap “Click orqali davom etish” action. Inside Telegram call `WebApp.openLink` synchronously with the unchanged HTTPS checkout URL; never invent a Click application scheme. Preserve normal-browser access, explain Telegram's possible embedded-browser routing, and offer copy-to-Chrome/manual-copy recovery. Opening, returning or launch failure never confirms payment or automatically creates another attempt. Keep the original order selected and allow backend status refresh after returning.
 - Implementation/verification: the studio now routes to the selected order's status page instead of navigating directly to Click; the plain checkout anchor is replaced with the SDK handoff and recovery controls. Focused tests, mocked payment/database and HTTP lifecycle tests, desktop Chrome UI checks and TypeScript pass. No Android device was available; same-URL Telegram/Chrome comparison, installed/missing Click app launch and real return behavior remain unverified. Evidence and device checklist: `docs/click-mini-app-checkout.md`. No real payment or external deployment.
 - User-approved follow-up: Click opening works in their manual use, but Click's Continue returns to an unauthenticated browser. Retain the fixed HTTPS `/payment/return` and offer “Telegram’da davom etish”; verify fresh Telegram launch data before loading owned payment history and recover the selected order. Ordinary browser sessions remain independently persistent; browser history/local storage/payment IDs are not authentication. No cross-browser session transfer is requested.
-- Return implementation: account-scoped local storage remembers only an order ID, accepted only if present in authenticated owned records. The payment route verifies the launch before requesting private orders and can recover late SDK readiness. Explicit payment launches take priority over automatic admin-home entry, without trapping later navigation. Read-only `getMe` confirms the configured bot has no Main Mini App. Default return therefore uses `/start payment_return` and the bot's existing web_app button to open `/payment/return` (two taps). Optional direct `startapp` routing is implemented; set `TELEGRAM_MAIN_MINI_APP_ENABLED=true` only after enabling the Main Mini App in BotFather at `APP_URL`. Keep both Nodze return fields unchanged; no provider return-registration change, real payment, live bot message or external deployment was performed by the agent. Physical Android return testing remains pending.
+- Return implementation: account-scoped local storage remembers only an order ID, accepted only if present in authenticated owned records. The payment route verifies the launch before requesting private orders and can recover late SDK readiness. Explicit payment launches take priority over automatic admin-home entry, without trapping later navigation. Read-only `getMe` found no Main Mini App. Default return now opens the bot chat without `/start`, where the automatic confirmation/link arrives. Optional direct `startapp` routing remains; enable `TELEGRAM_MAIN_MINI_APP_ENABLED=true` only after BotFather's Main Mini App is configured at `APP_URL`. Keep both Nodze return fields unchanged. Physical Android return testing remains pending.
+- User correction (2026-10-28): successful payment must automatically send a nicely formatted Telegram confirmation with the invitation URL; do not require restarting the bot or send a generic status prompt. Queue transactional notifications with verified payment/publication in the existing durable jobs table, deduplicate by order, and dispatch after committed webhooks/checkout/refresh/publication. Include real names, design, amount, clickable URL and invitation/dashboard buttons. If paid publication needs correction, acknowledge payment without inventing a link, then send the link after correction. Legacy return commands read the authenticated owner's actual order and use the same truthful formatting. Pending/failed/unverified states cannot claim success. Retry definite rate-limit rejections; retain ambiguous/crashed delivery for investigation rather than blindly duplicating messages. The existing protected payment reconciliation endpoint also drains queued notifications. No real test messages/payments or external deployment are part of agent verification.
 - Sequence: draft/preview -> authenticate and complete required phone sharing -> server-created checkout/order -> verified payment completion -> publication entitlement -> automatic publication, with correction/retry if publication validation fails.
 - Store merchant secrets only in server-side secret/environment configuration, never this document, frontend bundles, or Git. Keep provider integration behind a modular payment adapter.
 - Persist order price/currency/template snapshots and payment attempts/provider transaction references. Validate payment notifications using the chosen provider's documented verification process; check order, amount, currency, and final successful state. Browser redirects, screenshots, AI screening, or an initial payment/preparation event do not prove platform payment completion. Handle retries/duplicate notifications idempotently.
@@ -1925,13 +1961,25 @@ Development agents are distinct from production queue workers. The running app w
   deployment or live payment activation occurred.
 ## Taklifla Zarhal Sahifa release (2026-10-27)
 
-- The completed Taklifla `Diyora-Shahzod` source package is selectable as
-  **Zarhal Sahifa**, retaining its Uzbek Latin catalog name and default content.
-  Migration 0159 publishes it at 150,000 UZS for wedding-only compatibility.
-  The shared preview fixture, editor preview, public route, and creator wishes
-  API use the same source-derived renderer. Focused package tests pass 4/4;
-  four-locale save/reopen and public-render lifecycle checks pass 1/1 each.
-  No external deployment or live payment activation.
+- User requested review of hidden templates and making a design from an Uzbek
+  source ready for publication. `Taklifla/Web invitations/taklifla.uz` is a
+  confirmed Uzbek source. **Zarhal Sahifa** (source `Diyora-Shahzod`) is already
+  integrated and published, so it is not a newly released hidden template.
+- Its source comparison/browser evidence covers desktop/mobile, all four
+  locales, long names, reduced motion, optional sections, music and wishes API
+  bridge behavior. The wishes service in that evidence is an HTTP stub; it
+  explicitly does not establish database-backed authenticated save/reopen or
+  publish/public-render lifecycle completion. Do not claim that gate passed.
+- Catalog audit on 2026-10-28 found a price mismatch: migration 0159 and the
+  release proposal specify 150,000 UZS, while the typed definition and
+  configured database row both reported 100,000 UZS. Corrected the typed price
+  and applied additive migration 0163; configured PostgreSQL now reports the
+  published row at 150,000 UZS with wedding-only support. The migration runner
+  was slow to exit, but the migration ledger and row were queried afterward and
+  confirmed. Preserve the existing publication. The authenticated
+  save/publish/public-render/reopen lifecycle still needs a real session before
+  describing every release gate as complete. No external deployment or live
+  payment activation.
 
 ## Homepage feature presentation (2026-10-28)
 
@@ -1965,3 +2013,20 @@ Development agents are distinct from production queue workers. The running app w
 - Use the single Visol navbar on home, templates and all dashboard/activity pages.
 - Studio, preview, public invitations, payment return and administrator routes retain focused controls without the public navbar.
 - Dashboard layout owns navigation and reserves space for the fixed header. Remove the legacy navbar implementation; preserve signed-in labels and admin mobile entry.
+
+## Template music toggle states (2026-10-28)
+
+- User requirement: review published designs first, then unpublished designs, one by one; fix only templates where the music control's visible on/off state disagrees with playback.
+- Confirmed repair: published Velora showed its off-state artwork while audio played, and its initial paused state showed the on artwork. The adapted control now derives artwork from the audio element's paused state and follows play/pause events. Keep the archived source untouched.
+- Confirmed repair: published Golden Card showed the enabled music preference as active even before playback began or when playback was blocked. Its icon, pressed state and action label now follow actual audio playback events.
+- Confirmed repair: published Orchid Amplop starts music when the cover opens, but the control only refreshed its status after a manual toggle. It now synchronizes from actual audio events, including cover autoplay.
+- Published fixes from the one-by-one audit: Velora, Golden Card, Orchid Amplop, Chorlove Palov, Chorlove Osh, Glass Pink, Cloud Castle, Velvet Royale, Palace Rose, Fairy and Golden Hour. Each control now reflects actual audio playback state, including automatic playback and playback failures.
+- Unpublished fixes: Invitate Palov, Green Gold, Monochrome Editorial, Xatna, Amru Maruf, Taklifnomachi 16, 17, 18 and 19, Manor Edition, Islamic Edition and Luxury Gold. Each control now synchronizes its visual and accessible pressed state with audio events.
+- Inventory complete: 63 published and 43 unpublished catalog entries checked in that order. Templates without a confirmed mismatch were left unchanged; Doira's control is for percussion sound effects rather than background music.
+
+## Uzbek Taklifla templates (2026-10-28)
+
+- User requested completing and publishing more source-backed unpublished templates. The approved template workflow applies here: preserve local reference captures, package the complete template-level HTML/CSS/JavaScript/assets, adapt through the typed invitation contract, keep source and platform adapters separate, and publish only after source, catalog, browser, and persisted lifecycle verification. No external deployment or live-payment activation is included.
+- **Asalari** is birthday-only, category `birthday`, at 150,000 UZS. Its source has no matching music file and no gallery/RSVP controls; do not borrow unrelated provider audio or invent fields. Creator music remains optional, wishes use the moderated wishes service, and unsupported source age is removed. The captured 3:5 opening is the catalog art. Migration `0164_register_taklifla_templates.sql` registered it privately; `0165_publish_taklifla_templates.sql` published it.
+- **Muhrli Maktub** (Taklifla Envelope) is wedding-only, category `wedding`, at 150,000 UZS. Preserve its opening seal/envelope animation, local artwork/fonts, language switching, phone RSVP link, wishes service, and source copy. Its source-supported localized flowers note is stored under `templateData["taklifla-muhrli-maktub"].flowersNote`, editable per locale, and survives save/reopen; the source's own localized default appears until a creator edits it. Migrations `0164`/`0165` registered/published it; `0166_defer_muhrli_source_field.sql` temporarily hid it until this field was integrated; `0167_publish_muhrli_maktub.sql` republished after its checks passed.
+- Both templates use the same renderer for preview and public display and their actual 3:5 opening artwork in the catalog. Event compatibility is recorded separately from category assignment and enforced on save. Exact source capture checksums remain unchanged.

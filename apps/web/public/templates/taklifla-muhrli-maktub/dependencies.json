@@ -1,0 +1,151 @@
+{
+  "capture": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/taklifla.uz/templates/envelope__3be3ae79bcbb3487.html",
+  "captureSha256": "cd8aedd68c40871784db0839926dfabb6460f4ff42f45c67937ffe6f55c27782",
+  "sourceCssSha256": "cc0abf23d3957c531d398c6c7b3465d1253f8355631a61fc18f6fcc7d82f5b86",
+  "originalScriptSha256": "c92b63720df336b60cc9a5702be1d96bd17e2c1ee7eb59fbadfc84584f22f58f",
+  "motionOriginalRange": {
+    "start": 16008,
+    "end": 22161
+  },
+  "wishCloseSha256": "68865a0551e3d058b5490d6359d9f93b0f500e9d92db885e28ff5b4702fd4c43",
+  "fontCssCapture": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/fonts.googleapis.com/css2__43839d8b25dcf858",
+  "fontCssSha256": "e2b79421f9c547152b12a898af1cce2e2a6bc3aa9fa78d90713a23e8b38d3908",
+  "assets": [
+    {
+      "file": "envelope-img/01-desk-splash.webp",
+      "sha256": "f304fa4dd45139ca6cdb1a9d128e13b5802f55aa296cc4cd1f20d969bebb8f33",
+      "bytes": 234544
+    },
+    {
+      "file": "envelope-img/02-envelope-front.webp",
+      "sha256": "a6c9c16496ab0cd20c41b8c71eb70b0fbedc7798365a4921fb8465eb66a281c4",
+      "bytes": 391402
+    },
+    {
+      "file": "envelope-img/03-envelope-liner.webp",
+      "sha256": "168f698da8efd55010bd74f747f16a40119880dc600f77858de70c3e1ff7363f",
+      "bytes": 423236
+    },
+    {
+      "file": "envelope-img/04-letter-paper.webp",
+      "sha256": "c38e06b9aec1a5923facfde81269e4faa47ff16e099812280a8cb152b4e2650c",
+      "bytes": 249900
+    },
+    {
+      "file": "envelope-img/05-venue.webp",
+      "sha256": "4eb322a1e13df4a784fe695a33905ba5463bfa9764ef984ad700eb04ad932509",
+      "bytes": 389132
+    },
+    {
+      "file": "envelope-img/06-footer-desk.webp",
+      "sha256": "b4e4fa7faf808f0246fc23ec68bf072858d3bbcc93d79cdefa1c39418055545a",
+      "bytes": 220310
+    },
+    {
+      "file": "envelope-img/07-wax-seal.webp",
+      "sha256": "2f5f44eb995aadaddbce9bba8de4fc41fdd5a86cd7542e7a9c4f543b80c018ef",
+      "bytes": 435414
+    },
+    {
+      "file": "envelope-img/08-pressed-flower.webp",
+      "sha256": "4a61ef62387aee5173759c4f3d12616fa079df1be420cd502b7dcdea9493ff7d",
+      "bytes": 310592
+    },
+    {
+      "file": "envelope-img/09-ribbon.webp",
+      "sha256": "edf11ac8761096ad718ef670330bbcacbdaf1763b38adaac1049d9eacdcc100e",
+      "bytes": 256512
+    },
+    {
+      "file": "envelope-img/10-gold-fleck.webp",
+      "sha256": "2b4d4bf44ea6e6c428448330b4f7c97b2d4cca93b161a6b5a35ca6f216e283ad",
+      "bytes": 163796
+    }
+  ],
+  "fonts": [
+    {
+      "url": "https://fonts.gstatic.com/s/alice/v21/OpNCnoEEmtHa6GcDrg7shw.woff2",
+      "file": "fonts/OpNCnoEEmtHa6GcDrg7shw.woff2",
+      "method": "exact-source-url",
+      "sha256": "f7d94d65d3db06a280e71658bc6caaca48dae310650aae4689f4866325e05036",
+      "bytes": 15748
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/alice/v21/OpNCnoEEmtHa6GcKrg7shw.woff2",
+      "file": "fonts/OpNCnoEEmtHa6GcKrg7shw.woff2",
+      "method": "exact-source-url",
+      "sha256": "14b7a2332182c55b78f06dd8be16f3e4d3e4fcb0fd3e44821cd058174d14ed2f",
+      "bytes": 17784
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/alice/v21/OpNCnoEEmtHa6GcArg7shw.woff2",
+      "file": "fonts/OpNCnoEEmtHa6GcArg7shw.woff2",
+      "method": "exact-source-url",
+      "sha256": "e0dea19b43287c16b9e1ae82da21f82fcd769bc411f6e8db0941d98e28de912d",
+      "bytes": 4880
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/alice/v21/OpNCnoEEmtHa6GcOrg4.woff2",
+      "file": "fonts/OpNCnoEEmtHa6GcOrg4.woff2",
+      "method": "archive",
+      "sha256": "5b965140642abe6952917a3c3ca293fabfaf7a69b6759f205098df4294c2a350",
+      "bytes": 25788
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/comforter/v9/H4clBXOCl8nQnlaql3Qq65u9uqc.woff2",
+      "file": "fonts/H4clBXOCl8nQnlaql3Qq65u9uqc.woff2",
+      "method": "exact-source-url",
+      "sha256": "ccd262cc8f3463a69ab86ba9220576927e076f7b8be88258e2d5764da078e56c",
+      "bytes": 21848
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/comforter/v9/H4clBXOCl8nQnlaql3Qq4Ju9uqc.woff2",
+      "file": "fonts/H4clBXOCl8nQnlaql3Qq4Ju9uqc.woff2",
+      "method": "exact-source-url",
+      "sha256": "0a3384cf8b3cb8c4ecca22c893850ed71bd354ff4893b006336781f199cd94c0",
+      "bytes": 10068
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/comforter/v9/H4clBXOCl8nQnlaql3Qq4Zu9uqc.woff2",
+      "file": "fonts/H4clBXOCl8nQnlaql3Qq4Zu9uqc.woff2",
+      "method": "exact-source-url",
+      "sha256": "53f1339e824f3626fcedee7786a8086871dec0f707daddac38dff7951434e5a3",
+      "bytes": 32652
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/comforter/v9/H4clBXOCl8nQnlaql3Qq75u9.woff2",
+      "file": "fonts/H4clBXOCl8nQnlaql3Qq75u9.woff2",
+      "method": "archive",
+      "sha256": "9de90d6401a9cc2ce3542b18ac29487d938c76a121fbfa06e644f4f3f38cc2af",
+      "bytes": 46068
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/prata/v22/6xKhdSpbNNCT-sWCCm7JLQ.woff2",
+      "file": "fonts/6xKhdSpbNNCT-sWCCm7JLQ.woff2",
+      "method": "exact-source-url",
+      "sha256": "1a71ca94e943aac8154d195f9ea21959d374ebf3a3a9420651d0dbb46253f897",
+      "bytes": 12868
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/prata/v22/6xKhdSpbNNCT-sWLCm7JLQ.woff2",
+      "file": "fonts/6xKhdSpbNNCT-sWLCm7JLQ.woff2",
+      "method": "exact-source-url",
+      "sha256": "3392de5a383deac60effcad2beb8b847f40eb0eb200ffd4888c3e13d6e40845f",
+      "bytes": 13132
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/prata/v22/6xKhdSpbNNCT-sWACm7JLQ.woff2",
+      "file": "fonts/6xKhdSpbNNCT-sWACm7JLQ.woff2",
+      "method": "exact-source-url",
+      "sha256": "60aab7caa7ea16a76672583f1db7f2e7ea17ee205e00e1c1027a06cc548a6a9b",
+      "bytes": 7396
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/prata/v22/6xKhdSpbNNCT-sWPCm4.woff2",
+      "file": "fonts/6xKhdSpbNNCT-sWPCm4.woff2",
+      "method": "archive",
+      "sha256": "1b85a8c794709747c9f689b791984c430a2d9716a5cf9440d955bd7d20dad9d0",
+      "bytes": 19224
+    }
+  ]
+}

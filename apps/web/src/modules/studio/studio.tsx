@@ -32,6 +32,7 @@ import {
   formatPrice,
   getContent,
   invitationSchema,
+  muhrliMaktubDataSchema,
   pulauSehatiDataSchema,
   LANGUAGE_NAMES,
   LOCALES,
@@ -54,6 +55,7 @@ import { useStudioPreview, type PreviewTarget } from "./use-studio-preview";
 import { SoftSelect } from "@/components/soft-select";
 import { DateTimePicker, TimePicker } from "@/components/date-time-picker";
 import { readBrowserDraft, saveBrowserDraft } from "./draft-storage";
+import { PlaceSearch } from "./place-search";
 import { AnorInvitation } from "@/templates/anor";
 import { isMarxabaTemplate, MarxabaInvitation } from "@/templates/marxaba";
 import { isInvitateTemplate, InvitateInvitation } from "@/templates/invitate";
@@ -77,6 +79,8 @@ import { BuxoroRavoqInvitation } from "@/templates/onlinetaklifnoma/buxoro-ravoq
 import { JannatBogiInvitation } from "@/templates/onlinetaklifnoma/jannat-bogi";
 import { TojmahalOltinDarvozasiInvitation } from "@/templates/onlinetaklifnoma/tojmahal-oltin-darvozasi";
 import { WedivoPulauSehati } from "@/templates/wedivo-pulau-sehati/renderer";
+import { TakliflaAsalari } from "@/templates/taklifla-asalari/renderer";
+import { MuhrliMaktubInvitation } from "@/templates/taklifla-muhrli-maktub/renderer";
 import { isChorloveTemplate, ChorloveInvitation } from "@/templates/chorlove";
 import {
   createTemplatePreviewSample,
@@ -328,6 +332,7 @@ export function Studio({
   const [busy, setBusy] = useState(false);
   const [publishing, setPublishing] = useState(false);
   const [publishingMode, setPublishingMode] = useState("free");
+  const [paidInvitationId, setPaidInvitationId] = useState("");
   const [publishIssues, setPublishIssues] = useState<PublicationIssue[]>([]);
   const [publicUrl, setPublicUrl] = useState<string>();
   const pendingAction = useRef<"save" | "publish">("save");
@@ -418,6 +423,7 @@ export function Studio({
 
   useEffect(() => {
     let alive = true;
+    setPaidInvitationId("");
     async function recover() {
       function bindDraftUrl(id: string) {
         if (initialInvitation) return;
@@ -441,6 +447,27 @@ export function Studio({
           ownerId.current =
             session.user?.id ??
             (initialInvitation ? "unavailable-private-owner" : null);
+          const savedId =
+            initialInvitation?.id ??
+            new URLSearchParams(window.location.search).get("draft");
+          if (session.user && savedId && !adminContext) {
+            void studioFetch(
+              `/api/invitations/${encodeURIComponent(savedId)}/payment`,
+              { cache: "no-store" },
+            )
+              .then((result) => (result.ok ? result.json() : null))
+              .then((result) => {
+                if (
+                  alive &&
+                  result?.order?.invitationId === savedId &&
+                  result.order.status === "SUCCEEDED"
+                )
+                  setPaidInvitationId(savedId);
+              })
+              .catch(() => {
+                /* Payment authority is rechecked when publishing. */
+              });
+          }
         }
       } catch {
         /* Private stored drafts stay hidden if account identity cannot be checked. */
@@ -850,6 +877,27 @@ export function Studio({
         : current,
     );
   }
+  const muhrliMaktubData = muhrliMaktubDataSchema.parse(
+    invitation.templateData["taklifla-muhrli-maktub"] ?? {},
+  );
+  function updateMuhrliMaktubFlowersNote(value: string) {
+    setInvitation((current) => {
+      if (!current) return current;
+      const data = muhrliMaktubDataSchema.parse(
+        current.templateData["taklifla-muhrli-maktub"] ?? {},
+      );
+      return {
+        ...current,
+        templateData: {
+          ...current.templateData,
+          "taklifla-muhrli-maktub": {
+            ...data,
+            flowersNote: { ...data.flowersNote, [locale]: value },
+          },
+        },
+      };
+    });
+  }
   function changeEventType(value: string) {
     const currentInvitation = invitation;
     if (!currentInvitation) return;
@@ -1094,11 +1142,6 @@ export function Studio({
               result.error?.message ??
                 "To‘lovni boshlab bo‘lmadi. Qoralamangiz saqlangan.",
             );
-          try {
-            sessionStorage.setItem("nodze-order", result.order.id);
-          } catch {
-            /* Return page also loads owned orders. */
-          }
           // Checkout was prepared asynchronously. Keep the order in our app and
           // let a fresh user tap open its saved URL through Telegram's SDK.
           window.location.assign(
@@ -2487,14 +2530,27 @@ export function Studio({
                 )}
                 <div className={styles.divider} />
                 <h2>Manzil</h2>
-                <Field label="To‘yxona yoki joy nomi">
-                  <input
+                <Field
+                  label="To‘yxona yoki joy nomi"
+                  hint="Nomni yozib Google Maps joylaridan tanlang yoki qo‘lda kiriting."
+                >
+                  <PlaceSearch
                     value={content.venueName}
-                    maxLength={300}
-                    onChange={(event) =>
-                      updateContent({ venueName: event.target.value })
-                    }
-                    placeholder={placeholders.venueName}
+                    locale={locale}
+                    onChange={(value) => updateContent({ venueName: value })}
+                    onSelect={(place) => {
+                      updateContent({
+                        venueName: place.name,
+                        address: place.address,
+                      });
+                      update({
+                        venue: {
+                          latitude: place.latitude,
+                          longitude: place.longitude,
+                          mapUrl: place.mapUrl,
+                        },
+                      });
+                    }}
                   />
                 </Field>
                 <Field label="To‘liq manzil">
@@ -3279,6 +3335,23 @@ export function Studio({
                   )}
                 </OptionalSection>
                 <div className={styles.divider} />
+                {invitation.templateId === "taklifla-muhrli-maktub" && (
+                  <Field
+                    label={`Gullar o‘rniga izoh · ${LANGUAGE_NAMES[locale]}`}
+                    hint="Mehmonlarga ko‘rinadi. Bo‘sh qoldirsangiz, dizaynning boshlang‘ich matni ishlatiladi."
+                  >
+                    <textarea
+                      value={muhrliMaktubData.flowersNote?.[locale] ?? ""}
+                      maxLength={1000}
+                      rows={3}
+                      disabled={identityLocked}
+                      placeholder="Masalan, gullar o‘rniga samimiy tilaklaringizni qoldiring."
+                      onChange={(event) =>
+                        updateMuhrliMaktubFlowersNote(event.target.value)
+                      }
+                    />
+                  </Field>
+                )}
                 <OptionalSection
                   title="Mehmonlar javobi"
                   summary={invitation.rsvp.enabled ? "Yoqilgan" : "O‘chirilgan"}
@@ -3500,11 +3573,13 @@ export function Studio({
                       <div>
                         <dt>Nashr narxi</dt>
                         <dd>
-                          {publishingMode === "paid"
-                            ? selectedTemplate
-                              ? formatPrice(selectedTemplate.priceMinor)
-                              : "Dizayn tanlang"
-                            : "Bepul"}
+                          {paidInvitationId === invitation.id
+                            ? "To‘lov qabul qilingan"
+                            : publishingMode === "paid"
+                              ? selectedTemplate
+                                ? formatPrice(selectedTemplate.priceMinor)
+                                : "Dizayn tanlang"
+                              : "Bepul"}
                         </dd>
                       </div>
                     </dl>
@@ -3527,12 +3602,19 @@ export function Studio({
                       </div>
                     )}
                     <ul className={styles.publicationTerms}>
-                      {publishingMode === "paid" && (
+                      {paidInvitationId === invitation.id ? (
                         <li>
-                          Click to‘lovi tasdiqlangach, taklifnoma nashr
-                          qilinadi. To‘lov boshlanganidan keyin ismlar, sana va
-                          dizayn qulflanadi.
+                          To‘lov qabul qilingan. Nashrni yakunlash uchun qayta
+                          to‘lov talab qilinmaydi.
                         </li>
+                      ) : (
+                        publishingMode === "paid" && (
+                          <li>
+                            Click to‘lovi tasdiqlangach, taklifnoma nashr
+                            qilinadi. To‘lov boshlanganidan keyin ismlar, sana
+                            va dizayn qulflanadi.
+                          </li>
+                        )
                       )}
                       <li>
                         Nashrdan so‘ng ismlar, mezbon, tadbir turi, sana va
@@ -3555,9 +3637,11 @@ export function Studio({
                     <Send size={16} />
                     {publishing
                       ? "Tayyorlanmoqda…"
-                      : publishingMode === "paid"
-                        ? `To‘lash va nashr qilish${selectedTemplate ? ` · ${formatPrice(selectedTemplate.priceMinor)}` : ""}`
-                        : "Nashr qilish"}
+                      : paidInvitationId === invitation.id
+                        ? "Nashrni yakunlash"
+                        : publishingMode === "paid"
+                          ? `To‘lash va nashr qilish${selectedTemplate ? ` · ${formatPrice(selectedTemplate.priceMinor)}` : ""}`
+                          : "Nashr qilish"}
                   </button>
                 </section>
               )}
@@ -3793,6 +3877,25 @@ export function Studio({
                 locale={locale}
                 preview
                 catalogMusic={section === 0 && !authoredPreview}
+              />
+            ) : invitation.templateId === "taklifla-asalari" ? (
+              <TakliflaAsalari
+                invitation={previewInvitation}
+                invitationId={invitation.id}
+                locale={locale}
+                preview
+                sampleWishes={section === 0 && !authoredPreview}
+                silentPlayback
+              />
+            ) : invitation.templateId === "taklifla-muhrli-maktub" ? (
+              <MuhrliMaktubInvitation
+                invitation={previewInvitation}
+                invitationId={invitation.id}
+                locale={locale}
+                preview
+                fullPreview
+                catalogMusic={section === 0 && !authoredPreview}
+                silentPlayback
               />
             ) : invitation.templateId &&
               isChorloveTemplate(invitation.templateId) ? (

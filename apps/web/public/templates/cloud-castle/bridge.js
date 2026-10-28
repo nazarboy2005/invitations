@@ -1049,12 +1049,15 @@
     toggle.className = "cc-music-toggle";
     toggle.type = "button";
     toggle.setAttribute("aria-label", payload.locale === "en" ? "Toggle music" : payload.locale === "ru" ? "Включить или выключить музыку" : "Musiqani yoqish yoki o‘chirish");
-    toggle.textContent = audio.paused ? "♫" : "Ⅱ";
+    const syncMusic = () => { const playing = !audio.paused && !audio.ended; toggle.textContent = playing ? "Ⅱ" : "♫"; toggle.setAttribute("aria-pressed", String(playing)); };
+    audio.onplay = syncMusic; audio.onpause = syncMusic; audio.onended = syncMusic; audio.onerror = syncMusic;
+    syncMusic();
     hide(toggle, !audio.src);
     if (!toggle.isConnected) root.append(toggle);
     toggle.onclick = async () => {
-      if (audio.paused) { try { await audio.play(); toggle.textContent = "Ⅱ"; } catch { toggle.setAttribute("aria-label", "Music unavailable"); } }
-      else { audio.pause(); toggle.textContent = "♫"; }
+      if (audio.paused) { try { await audio.play(); } catch { toggle.setAttribute("aria-label", "Music unavailable"); } }
+      else audio.pause();
+      syncMusic();
     };
     if (payload.silentPlayback) { audio.pause(); audio.muted = true; }
     else audio.muted = false;

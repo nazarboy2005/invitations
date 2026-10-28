@@ -10,7 +10,7 @@ export function CheckoutActions({ checkoutUrl }: { checkoutUrl: string }) {
     <div>
       <button
         type="button"
-        className="button secondary"
+        className="button"
         onClick={() => {
           try {
             openCheckout(checkoutUrl);
@@ -26,49 +26,55 @@ export function CheckoutActions({ checkoutUrl }: { checkoutUrl: string }) {
       >
         Click orqali davom etish
       </button>
-      <button
-        type="button"
-        className="button secondary"
-        onClick={async () => {
-          try {
-            await navigator.clipboard.writeText(checkoutUrl);
-            setMessage(
-              "To‘lov havolasi nusxalandi. Uni Chrome manzil satriga joylang.",
-            );
-          } catch {
-            setManualCopy(true);
-            setMessage("Quyidagi to‘lov havolasini bosib ushlab, nusxalang.");
-          }
-        }}
-      >
-        To‘lov havolasini nusxalash
-      </button>
-      <p>
-        Click sahifasida “Открыть в приложении”ni bosing. Ilova ochilmasa yoki
-        “ERR_UNKNOWN_URL_SCHEME” chiqsa, Telegram brauzeri menyusidan “Brauzerda
-        ochish / Open in browser”ni tanlang. Bu band bo‘lmasa, shu to‘lov
-        havolasini nusxalab, Chrome manzil satriga joylang. Telegram versiyasi
-        va sozlamalariga qarab havola ichki brauzerda ochilishi mumkin.
-      </p>
-      <p>
-        Click o‘rnatilmagan bo‘lsa, uni o‘rnating va shu havolani qayta oching
-        yoki Click sahifasidagi boshqa mavjud usuldan foydalaning. Yangi to‘lov
-        yaratmang. So‘ng Taklifnoma’ga qaytib, “Holatni tekshirish”ni bosing.
-        Havolani ochish to‘lov tasdig‘i emas.
-      </p>
-      {manualCopy && (
-        <label>
-          To‘lov havolasi
-          <input
-            aria-label="To‘lov havolasi"
-            type="text"
-            readOnly
-            value={checkoutUrl}
-            onFocus={(event) => event.currentTarget.select()}
-            style={{ width: "100%" }}
-          />
-        </label>
-      )}
+      <details style={{ marginTop: 16, fontSize: 13, lineHeight: 1.65 }}>
+        <summary style={{ cursor: "pointer", paddingBlock: 10 }}>
+          Click ochilmayaptimi?
+        </summary>
+        <button
+          type="button"
+          className="button secondary"
+          onClick={async () => {
+            try {
+              await navigator.clipboard.writeText(checkoutUrl);
+              setMessage(
+                "To‘lov havolasi nusxalandi. Uni Chrome manzil satriga joylang.",
+              );
+            } catch {
+              setManualCopy(true);
+              setMessage("Quyidagi to‘lov havolasini bosib ushlab, nusxalang.");
+            }
+          }}
+        >
+          To‘lov havolasini nusxalash
+        </button>
+        <p>
+          Click sahifasida “Открыть в приложении”ni bosing. Ilova ochilmasa yoki
+          “ERR_UNKNOWN_URL_SCHEME” chiqsa, Telegram brauzeri menyusidan
+          “Brauzerda ochish / Open in browser”ni tanlang. Bu band bo‘lmasa, shu
+          to‘lov havolasini nusxalab, Chrome manzil satriga joylang. Telegram
+          versiyasi va sozlamalariga qarab havola ichki brauzerda ochilishi
+          mumkin.
+        </p>
+        <p>
+          Click o‘rnatilmagan bo‘lsa, uni o‘rnating va shu havolani qayta oching
+          yoki Click sahifasidagi boshqa mavjud usuldan foydalaning. Yangi
+          to‘lov yaratmang. So‘ng Visol’ga qaytib, “To‘lovni tekshirish”ni
+          bosing. Havolani ochish to‘lov tasdig‘i emas.
+        </p>
+        {manualCopy && (
+          <label>
+            To‘lov havolasi
+            <input
+              aria-label="To‘lov havolasi"
+              type="text"
+              readOnly
+              value={checkoutUrl}
+              onFocus={(event) => event.currentTarget.select()}
+              style={{ width: "100%" }}
+            />
+          </label>
+        )}
+      </details>
       {message && <p role="status">{message}</p>}
     </div>
   );

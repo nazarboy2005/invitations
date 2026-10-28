@@ -1,0 +1,172 @@
+{
+  "capture": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/taklifla.uz/templates/asalari__74e3ca34cc14e7b4.html",
+  "sha256": "865f3b53deec86c4365b019a0d49673fefef05c5bf1d6d6a976f88676a89b756",
+  "assets": [
+    {
+      "capture": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/taklifla.uz/templates/asalari-img/arch-back.webp",
+      "file": "asalari-img/arch-back.webp",
+      "url": "asalari-img/arch-back.webp",
+      "bytes": 42382,
+      "sha256": "f7fa1b6050f7d483a667dfb467cb129768e243c4cbd9a8a0ab0bed5f7c382f17"
+    },
+    {
+      "capture": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/taklifla.uz/templates/asalari-img/arch-front.webp",
+      "file": "asalari-img/arch-front.webp",
+      "url": "asalari-img/arch-front.webp",
+      "bytes": 251636,
+      "sha256": "7ecda6d28375cec9ed84edb4fa1fe0c9369923181ff6d8eef82c3c7b54e3dd48"
+    },
+    {
+      "capture": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/taklifla.uz/templates/asalari-img/arch-mid.webp",
+      "file": "asalari-img/arch-mid.webp",
+      "url": "asalari-img/arch-mid.webp",
+      "bytes": 60618,
+      "sha256": "5a42d01b994a489bb2cd7db43f98ffe240c368cedfe6dbdb2d3bda68172dbeb1"
+    },
+    {
+      "capture": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/taklifla.uz/templates/asalari-img/balloon-blue.webp",
+      "file": "asalari-img/balloon-blue.webp",
+      "url": "asalari-img/balloon-blue.webp",
+      "bytes": 42532,
+      "sha256": "1c986be8b12a1e6480258fa3cd8c42fc958a7df2d79cfa3679d7ac5b509d83b5"
+    },
+    {
+      "capture": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/taklifla.uz/templates/asalari-img/balloon-red.webp",
+      "file": "asalari-img/balloon-red.webp",
+      "url": "asalari-img/balloon-red.webp",
+      "bytes": 49646,
+      "sha256": "bd4ed76df98366c9a92f89a941c3ea8558824f0d221d1ae05016ef29e51886ba"
+    },
+    {
+      "capture": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/taklifla.uz/templates/asalari-img/balloon-yellow.webp",
+      "file": "asalari-img/balloon-yellow.webp",
+      "url": "asalari-img/balloon-yellow.webp",
+      "bytes": 37110,
+      "sha256": "3aa04cef6eabfdb75d1baaedb6eb7caa20bcf74a87babd94966d0c2b10548d88"
+    },
+    {
+      "capture": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/taklifla.uz/templates/asalari-img/bee.webp",
+      "file": "asalari-img/bee.webp",
+      "url": "asalari-img/bee.webp",
+      "bytes": 69442,
+      "sha256": "16df19328e12b2202daba52d52c6675908ef7e157b0f33212d541b9fda7a8c09"
+    },
+    {
+      "capture": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/taklifla.uz/templates/asalari-img/butterfly.webp",
+      "file": "asalari-img/butterfly.webp",
+      "url": "asalari-img/butterfly.webp",
+      "bytes": 114992,
+      "sha256": "83dc0b99886e933197bcbfbfc10b0e349b0c0686b7db289488dca34efd3863a6"
+    },
+    {
+      "capture": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/taklifla.uz/templates/asalari-img/cloud-puff__5de144d3edb34ccd.webp",
+      "file": "asalari-img/cloud-puff.webp",
+      "url": "asalari-img/cloud-puff.webp?v=2",
+      "bytes": 95212,
+      "sha256": "c72f8ffc772a35770f037d444a5db0a0dfa954837557ef9149bdf76918c43d4f"
+    },
+    {
+      "capture": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/taklifla.uz/templates/asalari-img/countdown-bg.webp",
+      "file": "asalari-img/countdown-bg.webp",
+      "url": "asalari-img/countdown-bg.webp",
+      "bytes": 160358,
+      "sha256": "fb058f4279ff430be35800ba61f8e98cf36ca3eb6253687eac9e13434b95dcf3"
+    },
+    {
+      "capture": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/taklifla.uz/templates/asalari-img/hero-bg.webp",
+      "file": "asalari-img/hero-bg.webp",
+      "url": "asalari-img/hero-bg.webp",
+      "bytes": 158924,
+      "sha256": "c63c3452144775253ddb8c26249e0a822110189b965885771e9567df3f35c4b5"
+    },
+    {
+      "capture": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/taklifla.uz/templates/asalari-img/splash-bg.webp",
+      "file": "asalari-img/splash-bg.webp",
+      "url": "asalari-img/splash-bg.webp",
+      "bytes": 102610,
+      "sha256": "e86e4881bb8dec07568edb0df536d81c36b4f102f5da847a80afeee1ade5e1ac"
+    },
+    {
+      "capture": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/taklifla.uz/templates/asalari-img/venue-bg.webp",
+      "file": "asalari-img/venue-bg.webp",
+      "url": "asalari-img/venue-bg.webp",
+      "bytes": 311162,
+      "sha256": "3a0d68d41fc2602040b9e3a565bfc55b84336396ed85f63799f8e563de82f634"
+    },
+    {
+      "capture": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/fonts.gstatic.com/s/fredoka/v17/X7n64b87HvSqjb_WIi2yDCRwoQ_k7367_DWg89XyHw.woff2",
+      "file": "fonts/X7n64b87HvSqjb_WIi2yDCRwoQ_k7367_DWg89XyHw.woff2",
+      "url": "https://fonts.gstatic.com/s/fredoka/v17/X7n64b87HvSqjb_WIi2yDCRwoQ_k7367_DWg89XyHw.woff2",
+      "bytes": 4576,
+      "sha256": "18a1723c878c0d8acc2e45a108fd62fbb976e408337804afa2908982fac13e2a"
+    },
+    {
+      "capture": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/fonts.gstatic.com/s/fredoka/v17/X7n64b87HvSqjb_WIi2yDCRwoQ_k7367_DWu89U.woff2",
+      "file": "fonts/X7n64b87HvSqjb_WIi2yDCRwoQ_k7367_DWu89U.woff2",
+      "url": "https://fonts.gstatic.com/s/fredoka/v17/X7n64b87HvSqjb_WIi2yDCRwoQ_k7367_DWu89U.woff2",
+      "bytes": 29732,
+      "sha256": "99d6c78e043710d4f83ed90716779798b7b04eb690f73e0ad0e8f32d1f0e98c2"
+    },
+    {
+      "capture": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/fonts.gstatic.com/s/quicksand/v37/6xKtdSZaM9iE8KbpRA_hK1QN.woff2",
+      "file": "fonts/6xKtdSZaM9iE8KbpRA_hK1QN.woff2",
+      "url": "https://fonts.gstatic.com/s/quicksand/v37/6xKtdSZaM9iE8KbpRA_hK1QN.woff2",
+      "bytes": 28244,
+      "sha256": "2add7d60b1cd2ab84c9967e23d5ec08eb3fc9635c46855b17d59404dec6b410e"
+    },
+    {
+      "capture": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/fonts.gstatic.com/s/caveat/v23/Wnz6HAc5bAfYB2Q7ZjYY.woff2",
+      "file": "fonts/Wnz6HAc5bAfYB2Q7ZjYY.woff2",
+      "url": "https://fonts.gstatic.com/s/caveat/v23/Wnz6HAc5bAfYB2Q7ZjYY.woff2",
+      "bytes": 74932,
+      "sha256": "891951df5e8b5b0f0bc760d31375405e795c666b5add70437de12d4a6482b33f"
+    }
+  ],
+  "sourceMusic": "assets/music.mp3",
+  "matchingMusicManifestUrls": [],
+  "otherArchiveMusicCandidates": [
+    "Invitate/Web invitations/invitate.uz/assets/audio/music.mp3",
+    "Taklifiy/Web invitations/taklifiy.uz/reveal/alexa-richard/music.mp3",
+    "Taklifiy/Web invitations/taklifiy.uz/reveal/endless-love/music.mp3",
+    "Taklifiy/Web invitations/taklifiy.uz/reveal/sacred-garden/music.mp3",
+    "Taklifiy/Web invitations/taklifiy.uz/reveal/viktor-paula/music.mp3",
+    "Taklifnomachi/Web invitations/taklifnomachi.uz/templates/12/audio/music.mp3",
+    "Taklifnomachi/Web invitations/taklifnomachi.uz/templates/13/audio/music.mp3",
+    "Taklifnomachi/Web invitations/taklifnomachi.uz/templates/15/audio/music.mp3",
+    "Yoryor/Web invitations/www.yoryor.org/t/0208/assets/music__509a4b037e4e8eca.mp3",
+    "Yoryor/Web invitations/www.yoryor.org/t/0515/assets/music__509a4b037e4e8eca.mp3",
+    "Yoryor/Web invitations/www.yoryor.org/t/10ad/assets/music__509a4b037e4e8eca.mp3",
+    "Yoryor/Web invitations/www.yoryor.org/t/1913/assets/music__509a4b037e4e8eca.mp3",
+    "Yoryor/Web invitations/www.yoryor.org/t/1a17/assets/music__509a4b037e4e8eca.mp3",
+    "Yoryor/Web invitations/www.yoryor.org/t/2211/assets/music__509a4b037e4e8eca.mp3",
+    "Yoryor/Web invitations/www.yoryor.org/t/2a7c/assets/music__509a4b037e4e8eca.mp3",
+    "Yoryor/Web invitations/www.yoryor.org/t/2eb0/assets/music__509a4b037e4e8eca.mp3",
+    "Yoryor/Web invitations/www.yoryor.org/t/4afa/assets/music__509a4b037e4e8eca.mp3",
+    "Yoryor/Web invitations/www.yoryor.org/t/a1f4/assets/music__509a4b037e4e8eca.mp3",
+    "Yoryor/Web invitations/www.yoryor.org/t/a414/assets/music__509a4b037e4e8eca.mp3",
+    "Yoryor/Web invitations/www.yoryor.org/t/a7c3/assets/music__509a4b037e4e8eca.mp3",
+    "Yoryor/Web invitations/www.yoryor.org/t/a807/assets/music__509a4b037e4e8eca.mp3",
+    "Yoryor/Web invitations/www.yoryor.org/t/b8e1/assets/music__509a4b037e4e8eca.mp3",
+    "Yoryor/Web invitations/www.yoryor.org/t/ba05/assets/music__509a4b037e4e8eca.mp3",
+    "Yoryor/Web invitations/www.yoryor.org/t/ba7a/assets/music__509a4b037e4e8eca.mp3",
+    "Yoryor/Web invitations/www.yoryor.org/t/ba91/assets/music__509a4b037e4e8eca.mp3",
+    "Yoryor/Web invitations/www.yoryor.org/t/c016/assets/music__509a4b037e4e8eca.mp3",
+    "Yoryor/Web invitations/www.yoryor.org/t/c410/assets/music__509a4b037e4e8eca.mp3",
+    "Yoryor/Web invitations/www.yoryor.org/t/c9a4/assets/music__509a4b037e4e8eca.mp3",
+    "Yoryor/Web invitations/www.yoryor.org/t/cb04/assets/music__509a4b037e4e8eca.mp3",
+    "Yoryor/Web invitations/www.yoryor.org/t/d009/assets/music__509a4b037e4e8eca.mp3",
+    "Yoryor/Web invitations/www.yoryor.org/t/d012/assets/music__509a4b037e4e8eca.mp3",
+    "Yoryor/Web invitations/www.yoryor.org/t/da06/assets/music__509a4b037e4e8eca.mp3",
+    "Yoryor/Web invitations/www.yoryor.org/t/f0a5/assets/music__509a4b037e4e8eca.mp3",
+    "Yoryor/Web invitations/www.yoryor.org/t/f1da/assets/music__509a4b037e4e8eca.mp3",
+    "Yoryor/Web invitations/www.yoryor.org/t/fa7e/assets/music__509a4b037e4e8eca.mp3"
+  ],
+  "missing": [
+    "assets/music.mp3"
+  ],
+  "notes": [
+    "cloud-puff.webp?v=2 resolves to captured cloud-puff__5de144d3edb34ccd.webp",
+    "Other providers have unrelated music files; no Taklifla music.mp3 or manifest mapping exists.",
+    "No source app runtime or Cloudflare beacon runs. Inert source/reference.html.txt preserves evidence only."
+  ]
+}

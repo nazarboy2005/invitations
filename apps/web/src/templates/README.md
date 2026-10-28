@@ -13,6 +13,9 @@ and cloud-service verification remain separate from local renderer checks.
 Keep every future template in its own renderer, styles, assets, and motion
 implementation. When a reference source exists, integrate that exact complete
 HTML/CSS/JavaScript/assets implementation; do not recreate it from screenshots.
+Map controls must use the shared invitation venue's Google Maps link or coordinates.
+Verify a Google Places selection and a manually pasted map URL in preview and
+public rendering; never copy a source template's sample map API key or location.
 Keep platform data and API adapters separate from the template source. Register
 only complete designs in the shared catalog. A renderer consumes the shared
 invitation contract and must not insert demo names, dates, venues, program

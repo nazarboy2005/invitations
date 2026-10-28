@@ -79,6 +79,7 @@ before(async () => {
       env: {
         ...process.env,
         NODE_ENV: "development",
+        TELEGRAM_BOT_TOKEN: "http-fixture-telegram-token",
         APP_URL: origin,
         PUBLISHING_MODE: "paid",
         NODZE_API_BASE_URL: `http://127.0.0.1:${port}/api/v1`,
@@ -116,6 +117,7 @@ after(async () => {
     );
   await new Promise<void>((resolve) => mock.close(() => resolve()));
   await sql.begin(async (tx) => {
+    await tx`DELETE FROM jobs WHERE type='payment-confirmation' AND payload->>'orderId' IN (SELECT id::text FROM payment_orders WHERE owner_id=${userId})`;
     await tx`DELETE FROM payment_webhook_events WHERE order_id IN(SELECT id FROM payment_orders WHERE owner_id=${userId})`;
     await tx`DELETE FROM payment_orders WHERE owner_id=${userId}`;
     await tx`DELETE FROM invitation_audit_log WHERE invitation_id IN(SELECT id FROM invitations WHERE owner_id=${userId})`;
@@ -169,6 +171,18 @@ test("HTTP checkout requires login/origin, verified webhook publishes, return pa
   assert.equal(savedResponse.status, 201, await savedResponse.clone().text());
   const saved = (await savedResponse.json()).invitation;
   assert.equal(
+    (await req(`/api/invitations/${saved.id}/payment`, undefined, false))
+      .status,
+    401,
+  );
+  const unpaidContext = await req(`/api/invitations/${saved.id}/payment`);
+  assert.equal(unpaidContext.status, 200);
+  assert.equal((await unpaidContext.json()).order, null);
+  assert.equal(
+    (await req(`/api/invitations/${randomUUID()}/payment`)).status,
+    404,
+  );
+  assert.equal(
     (
       await req(`/api/invitations/${saved.id}/publish`, {
         revision: saved.revision,
@@ -183,6 +197,18 @@ test("HTTP checkout requires login/origin, verified webhook publishes, return pa
   assert.equal(checkout.status, 200, await checkout.clone().text());
   assert.match(checkout.headers.get("cache-control")!, /no-store/);
   const order = (await checkout.json()).order;
+  assert.equal(
+    (await req(`/api/payments/${order.id}`, undefined, false)).status,
+    401,
+  );
+  const scoped = await req(`/api/payments/${order.id}`);
+  assert.equal(scoped.status, 200);
+  assert.match(scoped.headers.get("cache-control")!, /no-store/);
+  const scopedContext = await scoped.json();
+  assert.equal(scopedContext.invitation.id, saved.id);
+  assert.equal(scopedContext.order.id, order.id);
+  assert.equal("orders" in scopedContext, false);
+  assert.equal((await req(`/api/payments/${randomUUID()}`)).status, 404);
   const returnPage = await fetch(
     origin + "/payment/return?status=SUCCEEDED&paid=true",
   );

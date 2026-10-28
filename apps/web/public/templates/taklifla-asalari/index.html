@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="uz-Latn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Asalari</title><link rel="stylesheet" href="fonts/fonts.css"><link rel="stylesheet" href="template.css"><link rel="stylesheet" href="source/language.css"><link rel="stylesheet" href="platform.css"></head><body class="locked" data-pending>
+
+
+
+<div class="particles" id="particles" aria-hidden="true"></div>
+
+<div class="shell">
+
+
+  <button class="music" id="musicBtn" type="button" aria-label="">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M9 18V5l12-2v13"/>
+      <circle cx="6" cy="18" r="3"/>
+      <circle cx="18" cy="16" r="3"/>
+    </svg>
+    <span class="bars" aria-hidden="true"><span class="bar"></span><span class="bar"></span><span class="bar"></span></span>
+  </button>
+  <audio id="bgm" loop preload="none"></audio>
+
+
+  <section class="splash full bg-splash" data-screen-label="01 Splash">
+    <div class="imgbg" style="background-image:url('asalari-img/splash-bg.webp')"></div>
+    <div class="floater float-cloud"></div>
+    <div class="floater float-cloud cloud2"></div>
+
+    <div class="stack-top">
+      <div class="monogram"></div>
+      <div class="top-line"></div>
+      <h1 class="contrast-dark"></h1>
+      <p class="lede"></p>
+    </div>
+
+    <div class="stack-bottom">
+      <button class="open-btn" id="openBtn" type="button"></button>
+      <div class="hint"></div>
+    </div>
+  </section>
+
+
+  <div class="below-splash">
+
+
+    <section class="hero full bg-hero" data-screen-label="02 Hero">
+      <div class="imgbg" style="background-image:url('asalari-img/hero-bg.webp')"></div>
+
+
+      <div class="tunnel">
+        <div class="arch back"></div>
+        <div class="arch mid"></div>
+        <div class="arch front"></div>
+      </div>
+
+
+      <div class="floater float-butterfly b1"></div>
+
+      <div class="core">
+        <div class="pre contrast-dark"></div>
+        <h1 class="name" data-text=""></h1>
+        <div class="age-pill"><span></span><b></b><span></span></div>
+        <div class="date contrast-dark"></div>
+      </div>
+
+      <div class="scroll-hint"><div class="dot"></div><span></span></div>
+    </section>
+
+
+    <div class="divider" aria-hidden="true">
+      <div class="line"></div><div class="glyph">✿</div><div class="line"></div>
+    </div>
+
+
+    <section class="invite bg-card" data-screen-label="03 Invitation">
+      <div class="floater float-bee be1"></div>
+      <div class="card reveal">
+        <span class="eyebrow"></span>
+        <h2></h2>
+        <div class="name-mini"></div>
+        <p></p>
+        <div class="when">
+          <span></span><span class="pip"></span>
+          <span></span>
+          <span class="pip"></span><span></span>
+        </div>
+      </div>
+    </section>
+
+
+    <div class="divider" aria-hidden="true">
+      <div class="line"></div><div class="glyph">☀</div><div class="line"></div>
+    </div>
+
+
+    <section class="timeline bg-card" data-screen-label="04 Schedule">
+      <div class="floater float-balloon-y"></div>
+
+      <div class="head reveal">
+        <span class="eyebrow"></span>
+        <h2></h2>
+        <div class="sub"></div>
+      </div>
+
+      <div class="tl">
+        <div class="tl-item reveal">
+          <div class="marker"></div>
+          <div class="plate">
+            <h3></h3>
+            <p></p>
+          </div>
+        </div>
+        <div class="tl-item reveal">
+          <div class="marker"></div>
+          <div class="plate">
+            <h3></h3>
+            <p></p>
+          </div>
+        </div>
+        <div class="tl-item reveal">
+          <div class="marker"></div>
+          <div class="plate">
+            <h3></h3>
+            <p></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <div class="divider" aria-hidden="true">
+      <div class="line"></div><div class="glyph">✦</div><div class="line"></div>
+    </div>
+
+
+    <section class="venue full bg-venue" data-screen-label="05 Venue">
+      <div class="imgbg" style="background-image:url('asalari-img/venue-bg.webp')"></div>
+      <div class="floater float-butterfly b2"></div>
+
+      <div class="v-inner reveal">
+        <span class="eyebrow contrast"></span>
+        <h2 class="contrast"></h2>
+        <p class="contrast-dark"></p>
+        <a class="map-btn" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg></a>
+      </div>
+    </section>
+
+
+    <section class="info bg-card" data-screen-label="06 Info">
+      <div class="floater float-bee be2"></div>
+
+      <div class="card reveal">
+        <h2></h2>
+        <ul>
+          <li>
+            <div class="icon" aria-hidden="true"></div>
+            <div><b></b><span></span></div>
+          </li>
+          <li>
+            <div class="icon" aria-hidden="true"></div>
+            <div><b></b><span></span></div>
+          </li>
+          <li>
+            <div class="icon" aria-hidden="true"></div>
+            <div><b></b><span></span></div>
+          </li>
+          <li>
+            <div class="icon" aria-hidden="true"></div>
+            <div><b></b><span></span></div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+
+    <div class="divider" aria-hidden="true">
+      <div class="line"></div><div class="glyph">❀</div><div class="line"></div>
+    </div>
+
+
+    <section class="wishes" data-screen-label="07 Wishes">
+      <div class="floater float-balloon-r"></div>
+
+      <div class="head reveal">
+        <span class="eyebrow"></span>
+        <h2></h2>
+        <div class="sub"></div>
+      </div>
+
+      <form id="wishForm" class="reveal" autocomplete="off">
+        <input type="text" name="name" id="wName" placeholder="" maxlength="100" required />
+        <textarea name="msg" id="wMsg" placeholder="" maxlength="2000" required></textarea>
+        <button type="submit"></button>
+      </form>
+
+      <div class="feed" id="wishFeed" aria-live="polite"></div>
+    </section>
+
+
+    <section class="countdown full bg-countdown" data-screen-label="08 Countdown">
+      <div class="imgbg" style="background-image:url('asalari-img/countdown-bg.webp')"></div>
+      <div class="floater float-balloon-b"></div>
+
+      <div class="head reveal">
+        <span class="eyebrow"></span>
+        <h2 class="contrast-dark"></h2>
+        <div class="sub"></div>
+      </div>
+
+      <div class="grid reveal" id="cd">
+        <div class="cell"><div class="n" id="cd-d"></div><div class="l"></div></div>
+        <div class="cell"><div class="n" id="cd-h"></div><div class="l"></div></div>
+        <div class="cell"><div class="n" id="cd-m"></div><div class="l"></div></div>
+        <div class="cell"><div class="n" id="cd-s"></div><div class="l"></div></div>
+      </div>
+    </section>
+
+
+    <footer class="foot" data-screen-label="09 Footer">
+      <div class="mono"></div>
+      <div class="date"></div>
+      <div class="line"></div>
+    </footer>
+
+  </div>
+</div>
+
+<div class="taklifla-lang-switch" role="group" aria-label="Til">
+  <button type="button" class="taklifla-lang-toggle" aria-haspopup="menu" aria-expanded="false">
+    <span class="taklifla-lang-current">Uz</span>
+    <span class="chev" aria-hidden="true">▾</span>
+  </button>
+  <div class="taklifla-lang-menu" role="menu">
+    <button type="button" data-lang="uz-Latn" role="menuitemradio">Uz</button>
+    <hr /><button type="button" data-lang="uz-Cyrl" role="menuitemradio">Уз</button>
+    <button type="button" data-lang="en" role="menuitemradio">En</button>
+    <hr />
+    <button type="button" data-lang="ru" role="menuitemradio">Ru</button>
+  </div>
+</div><script src="source/motion.js"></script><script src="copy.js"></script><script src="bridge.js"></script></body></html>

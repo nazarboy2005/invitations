@@ -78,3 +78,15 @@ export type PaymentOrderView = {
   url: string | null;
   publicationError: string | null;
 };
+
+export type InvitationPaymentSummary = Pick<
+  PaymentOrderView,
+  "id" | "status" | "amountMinor"
+>;
+
+export type InvitationPaymentContext = {
+  invitation: Invitation;
+  order: PaymentOrderView | null;
+  template: { name: string; priceMinor: number } | null;
+  publishingMode: "free" | "paid";
+};

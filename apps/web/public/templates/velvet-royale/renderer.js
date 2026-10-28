@@ -62,7 +62,11 @@
     document.getElementById("gallery-next")?.addEventListener("click",()=>moveGallery(1));
     reel?.addEventListener("scroll",()=>{if(!reel||!counter)return;const item=reel.querySelector("figure"),step=(item?.getBoundingClientRect().width||240)+14;counter.textContent=`${Math.min(photos.length,Math.max(1,Math.round(reel.scrollLeft/step)+1))} / ${photos.length}`;},{passive:true});
     document.getElementById("music-toggle").hidden = !data.music;
-    document.getElementById("music-toggle").onclick = () => music.paused ? music.play().catch(()=>{}) : music.pause();
+    const musicToggle = document.getElementById("music-toggle");
+    const syncMusicToggle = () => { const playing = !music.paused; musicToggle.textContent = playing ? "♫" : "×"; musicToggle.setAttribute("aria-pressed", String(playing)); };
+    ["play", "pause", "ended", "error"].forEach(event => music.addEventListener(event, syncMusicToggle));
+    musicToggle.onclick = () => music.paused ? music.play().catch(()=>{}) : music.pause();
+    syncMusicToggle();
     document.getElementById("gift-toggle")?.addEventListener("click",(event)=>{const button=event.currentTarget,number=document.getElementById("gift-number"),copy=document.getElementById("gift-copy"),show=number.hidden;number.hidden=!show;copy.hidden=!show;button.setAttribute("aria-expanded",String(show));button.textContent=show?l.hideGift:l.showGift;});
     document.getElementById("gift-copy")?.addEventListener("click",async()=>{const number=document.getElementById("gift-number")?.textContent||"",status=document.getElementById("gift-status");try{await navigator.clipboard.writeText(number);status.textContent=locale==="en"?"Copied":locale==="ru"?"Скопировано":"Nusxalandi";}catch{status.textContent=number;}});
     document.getElementById("open").onclick = () => {

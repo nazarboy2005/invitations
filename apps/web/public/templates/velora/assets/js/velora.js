@@ -30,11 +30,20 @@
   document.addEventListener("DOMContentLoaded", () => {
     if (window.AOS) window.AOS.init({ once: true, duration: 1000, disable: () => matchMedia("(prefers-reduced-motion: reduce)").matches });
     const audio = document.getElementById("backgroundAudio"), button = document.getElementById("playButton"), rotatingText = document.getElementById("rotatingText");
+    const syncMusicIcon = () => {
+      if (!button || !audio) return;
+      button.src = audio.paused ? button.dataset.offIcon : button.dataset.onIcon;
+      button.alt = audio.paused ? "Включить музыку" : "Выключить музыку";
+    };
+    audio?.addEventListener("play", syncMusicIcon);
+    audio?.addEventListener("pause", syncMusicIcon);
+    audio?.addEventListener("ended", syncMusicIcon);
+    syncMusicIcon();
     if (button && audio) button.addEventListener("click", async () => {
       if (audio.paused) {
-        try { await audio.play(); button.src = button.dataset.offIcon; rotatingText?.classList.remove("is-paused"); }
+        try { await audio.play(); rotatingText?.classList.remove("is-paused"); }
         catch { audio.pause(); }
-      } else { audio.pause(); button.src = button.dataset.onIcon; rotatingText?.classList.add("is-paused"); }
+      } else { audio.pause(); rotatingText?.classList.add("is-paused"); }
     });
     document.querySelectorAll(".dresscode-foto").forEach((slider) => {
       let down = false, startX = 0, scrollLeft = 0;

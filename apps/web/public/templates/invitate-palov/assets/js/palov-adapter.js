@@ -73,10 +73,11 @@
     if(socials){const anchors=[...socials.querySelectorAll("a")];anchors.forEach((anchor)=>{const contact=(payload.contacts||[]).find((item)=>item.type==="phone"?anchor.getAttribute("aria-label")?.includes("Qo"):anchor.getAttribute("aria-label")==="Telegram");anchor.hidden=!contact;if(contact){anchor.href=contact.href;anchor.setAttribute("aria-label",contact.label);}});socials.hidden=!(payload.contacts||[]).length;}
     const rsvpSection=$(".rsvp");if(rsvpSection)rsvpSection.hidden=!payload.rsvp?.enabled;
     syncRsvpState();
-    const audio=$("#bgm");const music=$("#music");if(audio&&music){audio.src=typeof payload.music==="string"?payload.music:"";music.hidden=!audio.src;music.setAttribute("aria-label",musicStarted?l.musicOff:l.musicOn);}
+    const audio=$("#bgm");const music=$("#music");if(audio&&music){audio.src=typeof payload.music==="string"?payload.music:"";music.hidden=!audio.src;syncMusicButton(audio,music);}
     const input=$("#ism");if(input)input.placeholder=l.name;
     updateCountdown(); if(countdownTimer)clearInterval(countdownTimer);countdownTimer=setInterval(updateCountdown,1000);
   }
+  function syncMusicButton(audio,button){musicStarted=!audio.paused&&!audio.ended;button.classList.toggle("on",musicStarted);button.setAttribute("aria-pressed",String(musicStarted));button.setAttribute("aria-label",musicStarted?labels[currentLocale].musicOff:labels[currentLocale].musicOn);}
   function start() { try { if(window.name){fill(JSON.parse(window.name));} } catch {} }
   window.addEventListener("message",(event)=>{if(event.origin===location.origin&&event.data?.type==="invitate-palov:update")fill(event.data.payload);});
   document.addEventListener("click",async(event)=>{
@@ -93,8 +94,9 @@
       finally{button.disabled=false;}
     }
     if(button.id==="again"){rsvpSent=false;rsvpAnswer="";const error=$("[data-if='error']");if(error){error.dataset.active="false";error.textContent=labels[currentLocale].error;}$("#ism").value="";document.querySelectorAll("input[name='javob']").forEach(el=>el.checked=false);syncRsvpState();}
-    if(button.id==="music"){const audio=$("#bgm");if(!audio)return;if(audio.paused){audio.play().then(()=>{musicStarted=true;button.setAttribute("aria-pressed","true");button.setAttribute("aria-label",labels[currentLocale].musicOff);}).catch(()=>{});}else{audio.pause();musicStarted=false;button.setAttribute("aria-pressed","false");button.setAttribute("aria-label",labels[currentLocale].musicOn);}}
+    if(button.id==="music"){const audio=$("#bgm");if(!audio)return;if(audio.paused){audio.play().catch(()=>{});}else{audio.pause();}syncMusicButton(audio,button);}
   });
+  const musicAudio=$("#bgm"),musicButton=$("#music");if(musicAudio&&musicButton){for(const event of ["play","pause","ended","error"]){musicAudio.addEventListener(event,()=>syncMusicButton(musicAudio,musicButton));}syncMusicButton(musicAudio,musicButton);}
   document.addEventListener("input",(event)=>{if(event.target?.id==="ism"){const error=$("[data-if='error']");if(error){error.dataset.active="false";error.textContent=labels[currentLocale].error;syncRsvpState();}}});
   document.addEventListener("change",(event)=>{if(event.target?.name==="javob"){const error=$("[data-if='error']");if(error){error.dataset.active="false";error.textContent=labels[currentLocale].error;syncRsvpState();}}});
   const reveal=document.querySelectorAll(".rv");

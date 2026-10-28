@@ -12,9 +12,11 @@ the native failure itself was not reproduced in this session.
 
 The studio now opens `/payment/return?order=<original-order-id>` after preparing
 the payment. The backend already persists the Nodze payment ID, checkout URL and
-order association. The page retrieves account-owned orders and selects that ID
-before falling back to session storage/the most recent order. It also retains
-selection in the URL and session storage when the user changes orders.
+order association. The page reads only that owned order and its invitation.
+It has no account-wide order selector. An inaccessible order fails without
+substituting another invitation; an older valid attempt resolves the current
+attempt for the same invitation. The selected ID persists in the URL and
+account-scoped local storage.
 
 An explicit fresh tap calls `Telegram.WebApp.openLink(checkoutUrl)` synchronously
 inside Telegram. The SDK's mere presence outside Telegram is insufficient to
@@ -30,7 +32,7 @@ backend status verification, idempotency and signed webhook fulfillment remain
 authoritative. Focus/visibility return and the manual refresh action retrieve
 the same order's backend status.
 
-Recovery instructions are always available: use the Telegram browser menu's
+Recovery instructions are available under “Click ochilmayaptimi?”: use the Telegram browser menu's
 external-browser action where available, or copy this same checkout URL into
 Chrome. Clipboard denial reveals a selectable read-only URL. If Click is absent,
 install it and reopen the same URL, or use an available alternative on Click's
@@ -62,7 +64,7 @@ client/version and user settings.
   dispatches are mocked; this is not an Android emulator or physical device test.
 - Web TypeScript check and scoped diff whitespace checks pass.
 
-Run the browser check with `node --test tests/payment-checkout.browser.mjs`.
+Run the browser check with `node --import tsx --test tests/payment-checkout.browser.mjs`.
 Install/provide Playwright and Chrome; `PLAYWRIGHT_MODULE_PATH` can point to an
 existing Playwright package. It starts an isolated local Next server on port
 3103, disables database/provider credentials, intercepts payment APIs, blocks
@@ -101,23 +103,45 @@ per-order query strings to the registered provider return URL.
 
 The public return page now offers **Telegram’da davom etish**. A read-only
 Telegram `getMe` check found `has_main_web_app=false` for the configured bot
-`taklifnomayasagichbot`. Therefore the default link uses
-`https://t.me/taklifnomayasagichbot?start=payment_return`. Telegram opens the bot;
-its reply's **To‘lov holatini ochish** web_app button opens the real Mini App
-at `/payment/return`. No new phone sharing or interactive login confirmation is
-needed for an existing eligible account; the fresh signed launch is verified
-by the existing server authentication endpoint first. Suspended accounts,
-invalid launches and accounts without completed phone onboarding still fail
-the existing checks. Ordinary browser sign-in remains available as a fallback.
+`taklifnomayasagichbot`. The default link now opens
+`https://t.me/taklifnomayasagichbot` without sending another `/start` command.
+The verified-payment confirmation and real invitation link arrive automatically
+in that chat. Legacy `payment_return` commands remain supported and now display
+the actual owned order's result using the same formatted message. They do not
+fabricate success or silently fall back from an explicit unknown order.
+The message's management button opens the real Mini App. No new phone sharing
+or interactive login confirmation is needed for an existing eligible account;
+the fresh signed launch is verified by the existing server authentication
+endpoint first. Suspended accounts, invalid launches and accounts without
+completed phone onboarding still fail the existing checks. Ordinary browser
+sign-in remains available as a fallback.
 
-The Mini App reads private orders only after verified session resolution. It
-restores the account's last selected order from session storage or an
-account-scoped local-storage ID, provided it matches an owned backend record;
-otherwise it shows recent owned orders. The neutral external return cannot
-identify a specific transaction by itself when no remembered context survives.
-The order selector remains available. IDs are navigation hints, never login
+The Mini App reads private payment data only after verified session resolution.
+It restores the account's last selected order from an account-scoped local-storage
+ID, provided it matches an owned backend record. Without a hint, the return page
+directs the creator to “Taklifnomalarim” to choose an invitation. It never loads
+an arbitrary recent order or offers an order selector. The neutral external return
+cannot identify a specific transaction by itself when no remembered context survives.
+IDs are navigation hints, never login
 credentials or payment confirmation. No session cookies or signed Telegram
 launch data are passed through Click or placed in return links.
+
+The payment page identifies the invitation by actual names, date, design and
+server-provided price. Unpaid invitations offer “To‘lov qilish”; pending ones
+resume the existing Click URL. Paid drafts show “To‘langan” and a direct
+“Nashrni yakunlash” editor action without payment/status controls. Published
+invitations show open/copy actions. Dashboard cards receive a latest-payment
+summary for each invitation, including those outside the old 20-order history
+limit; browser-only edits return to the editor before checkout.
+
+Invitation-scoped UI verification: 15 payment/navigation/handoff unit checks,
+10 disposable-database payment checks, the loopback-provider HTTP lifecycle,
+and mocked Chrome browser QA pass. Browser coverage includes 1440px, 390px and
+320px widths; unpaid checkout creation, pending resume, paid correction,
+publication sharing, failed/refunded states, invalid links, no-context returns,
+per-invitation dashboard actions, storage denial and authenticated Telegram
+return. Screenshots were reviewed for desktop and phone layouts. No real charge
+or application deployment was performed.
 
 Optional one-tap Main Mini App setup:
 
@@ -144,3 +168,37 @@ rejecting invalid launch data despite a previously authenticated browser account
 All Telegram messages in integration tests are stubbed. Physical Android/Click
 return behavior and BotFather Main Mini App configuration remain unverified;
 no external deployment or real payment was performed.
+
+## Automatic formatted payment confirmations
+
+Verified success queues a `payment-confirmation` job in the same transaction as
+payment/publication changes. The existing `jobs` table is reused; no migration
+is required. A published invitation receives a concise HTML confirmation with
+actual host names, template, exact order amount, visible/clickable public URL,
+an invitation button and a Mini App management button. Dynamic text is escaped;
+no sample names, session data or guest tokens appear in it.
+
+If payment is verified but publication needs correction, the first message
+acknowledges receipt and tells the owner to finish publication without paying
+again. Successful correction queues the invitation link. If correction finishes
+before delivery, the ready message replaces the obsolete incomplete message.
+Pending, failed and unverified payments never get success messages or public URLs.
+
+Webhook, checkout, status refresh and publication routes dispatch only their
+own order/invitation jobs using Next's post-response `after` hook, after commit.
+Duplicate webhooks do not enqueue another receipt. Concurrent workers use job
+row claims; delivery failure cannot roll back a payment or publication. The
+existing cron-secret-protected `/api/internal/payments` endpoint recovers queued
+jobs as part of reconciliation; keep its scheduled caller configured for retries.
+Known rate-limit rejections retry with the supplied delay. Ambiguous network or
+crashed sends remain `uncertain` and are not automatically duplicated. Blocked,
+disconnected or suspended recipients are skipped/failed as appropriate.
+An owner can still explicitly request status through a legacy return command.
+
+Verification uses mocked Telegram/provider requests and disposable database
+fixtures: formatted success and escaped data; no false pending success; paid
+publication correction and subsequent link; duplicate verification/concurrent
+delivery; explicit unknown orders; retry, ambiguous/crashed delivery and suspended
+recipients. No actual Telegram message or real provider payment was sent by the
+agent. Live Android message display, link handling and production delivery still
+need a post-deployment check.

@@ -25,7 +25,11 @@ export function telegramPaymentReturnLink(
   const start =
     PAYMENT_RETURN_START +
     (orderId && orderIdPattern.test(orderId) ? `_${orderId}` : "");
-  return `https://t.me/${bot}?${mainMiniApp ? "startapp" : "start"}=${start}`;
+  // The confirmation/link arrives automatically. Returning should open the chat,
+  // not send another /start command or generic onboarding message.
+  return mainMiniApp
+    ? `https://t.me/${bot}?startapp=${start}`
+    : `https://t.me/${bot}`;
 }
 
 /** Call after the server has verified this launch and resolved its session. */

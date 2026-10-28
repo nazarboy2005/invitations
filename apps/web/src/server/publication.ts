@@ -14,6 +14,7 @@ import { inspectMedia, storageProvider } from "./storage";
 import { requireAdmin, recordAdminChange } from "./admin";
 import type { AdminInvitationAction } from "./admin-invitation-access";
 import { paymentIdentity } from "@taklifnoma/contracts/payment";
+import { enqueuePaymentNotifications } from "./payment-notifications";
 
 const BASE62 = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 export function generatePublicCode() {
@@ -245,8 +246,10 @@ export async function publishInvitationInTransaction(
       throw error;
     }
     await tx`INSERT INTO invitation_audit_log(invitation_id,actor_id,action,previous_values,new_values) VALUES(${id},${admin?.actorId ?? user.id},${mode === "paid" ? "published_paid" : "published_free"},${tx.json(previous)},${tx.json({ ...invitation, publication: { mode, firstPublishedAt: event.published_at, editDeadlineAt: event.deadline } })})`;
-    if (mode === "paid")
+    if (mode === "paid") {
       await tx`UPDATE payment_orders SET fulfilled_at=COALESCE(fulfilled_at,now()),publication_error=NULL WHERE invitation_id=${id} AND status='SUCCEEDED'`;
+      await enqueuePaymentNotifications(tx, id);
+    }
     if (admin)
       await recordAdminChange(
         tx,
