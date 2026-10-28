@@ -1,4 +1,4 @@
-import type { TemplateDefinition } from "@taklifnoma/contracts";
+import type { EventType, TemplateDefinition } from "@taklifnoma/contracts";
 
 const NIKOH_TEMPLATE_IDS = [
   "anor",
@@ -16,7 +16,7 @@ const NIKOH_TEMPLATE_IDS = [
 
 const nikohRank = new Map(NIKOH_TEMPLATE_IDS.map((id, index) => [id, index]));
 
-/** Full catalog only; the homepage keeps its separate featured selection. */
+/** Catalog and studio share this ranking; homepage selections stay separate. */
 export function orderCatalogTemplates(
   templates: TemplateDefinition[],
   categoryId: string,
@@ -56,4 +56,22 @@ export function orderCatalogTemplates(
     }
   }
   return ordered;
+}
+
+/** Event compatibility is independent of the admin-managed catalog categories. */
+export function orderEventTemplates(
+  templates: TemplateDefinition[],
+  eventType: EventType,
+): TemplateDefinition[] {
+  const compatible = templates.filter(
+    (template) =>
+      template.published && template.supportedEventTypes.includes(eventType),
+  );
+  if (eventType !== "wedding") return orderCatalogTemplates(compatible, "all");
+  return [
+    ...orderCatalogTemplates(compatible, "wedding"),
+    ...compatible.filter(
+      (template) => !template.categoryIds.includes("wedding"),
+    ),
+  ];
 }

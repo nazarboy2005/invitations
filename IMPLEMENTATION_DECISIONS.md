@@ -1,5 +1,39 @@
 # Implementation decisions
 
+## Studio refinement (2026-10-28)
+
+- Remove the document title/status from the header; keep a compact back/save
+  toolbar. Remove the sidebar autosave note and preview title, design name,
+  language badge and explanatory caption. Keep the preview pane within the
+  viewport while editing and remove the sidebar's independent scroll area.
+- After event selection, show only compatible published designs without catalog
+  category tabs. Reuse the catalog's stable curated order, including its Nikoh
+  ranking, and its portrait artwork with dark fades and overlaid captions.
+- Changing event type silently clears an incompatible design and resets search;
+  preserve entered invitation content. Do not show the former incompatibility
+  warning as part of this normal selection flow.
+- Show the publishing panel only on the final step. Existing required-content
+  validation still prevents incomplete publication. Keep draft saving available
+  throughout.
+- User approved the full studio critique and refinement: compact selected-design
+  summary plus searchable, progressively loaded native dialog; preserve curated
+  order and full portrait covers. Consolidate progress into desktop navigation
+  and a compact phone step menu, use real completion checks, shorten headings,
+  stack phone fields, and retain reachable navigation actions.
+- Use a quiet ivory/white/burgundy editor with readable labels and fewer boxes.
+  Put optional features in expandable rows with current-state summaries. Keep
+  language management compact and show each language's readiness in final review.
+- Editor preview opens supported local invitation scenes automatically and moves
+  to supported section anchors without moving the editor page. Retain a separate
+  full guest preview and leave unsupported scenes interactive; do not alter public
+  template behavior or invitation data.
+- Final review shows actual names, design, date/time, venue, languages and price;
+  list missing fields with links and expand invalid optional settings. Disable
+  publication until existing content validation passes. Keep one save action in
+  the toolbar, with accurate browser/account/failure status, and one final publish
+  action. Localize the remaining English studio descriptions. Responsive visual
+  and interaction review was subsequently requested and authorized.
+
 ## Personal dashboard redesign (2026-10-28)
 
 - User requested improving `/dashboard` (Taklifnomalarim), using the supplied
@@ -35,6 +69,8 @@
 - Dashboard refinement: label browser-only drafts “Qoralama”. Position card menus
   beside their trigger within the viewport, flipping upward when space is tight;
   do not depend on browser CSS anchor-positioning support.
+- “Yangi taklifnoma” opens the full `/templates` gallery to choose a design,
+  rather than sending the creator back to the homepage.
 
 ## Published invitation link previews (2026-10-28)
 
