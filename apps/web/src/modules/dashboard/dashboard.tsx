@@ -499,9 +499,6 @@ export function Dashboard() {
   const publishedCount = allInvitations.filter(
     (item) => item.status === "published",
   ).length;
-  function createNew() {
-    window.location.assign("/#templates");
-  }
 
   return (
     <div className={styles.dashboard}>
@@ -526,10 +523,10 @@ export function Dashboard() {
                 Boshqaruv
               </a>
             )}
-            <button className={styles.primaryButton} onClick={createNew}>
+            <Link className={styles.primaryButton} href="/templates">
               <Plus size={18} />
               Yangi taklifnoma
-            </button>
+            </Link>
           </div>
         </div>
         {!session?.user && !loading && !error && (
