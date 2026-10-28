@@ -57,9 +57,8 @@ export function HeroMobileMenu({
           aria-label="Mobil menyu"
           onClick={() => setOpen(false)}
         >
-          <Link href="/templates?category=wedding">To‘ylar</Link>
-          <Link href="/templates?category=osh">Marosimlar</Link>
-          <Link href="/templates?category=other">Tantanalar</Link>
+          <Link href="/templates">Shablonlar</Link>
+          <a href="https://t.me/HyperLean">Bog‘lanish</a>
           <Link href="/#why-us">Biz haqimizda</Link>
           <Link href="/dashboard">{accountLabel}</Link>
           {isAdmin && <a href="/admin">Boshqaruv</a>}

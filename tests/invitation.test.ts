@@ -319,9 +319,9 @@ test("published event identity and deadlines cannot be extended by creator edits
       assertCreatorCanEdit(
         previous,
         practical,
-        { status: "archived", editDeadlineAt: null },
+        { status: "deleted", editDeadlineAt: null },
         now,
       ),
-    /ARCHIVED/,
+    /DELETED/,
   );
 });

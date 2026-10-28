@@ -9,7 +9,8 @@ export function assertCreatorCanEdit(
   state: EditState,
   now = new Date(),
 ): void {
-  if (state.status === "archived") throw new Error("INVITATION_ARCHIVED");
+  if (state.status !== "draft" && state.status !== "published")
+    throw new Error("INVITATION_DELETED");
   if (next.id !== previous.id || next.status !== previous.status)
     throw new Error("IMMUTABLE_IDENTITY");
   if (state.status !== "published") return;

@@ -210,7 +210,7 @@ export const invitationSchema = z
         if (!checked.success) ctx.addIssue({ code: "custom", path: ["wedivo-pulau-sehati"], message: "Invalid Pulau Sehati data" });
       }
     }),
-    status: z.enum(["draft", "published", "archived"]),
+    status: z.enum(["draft", "published"]),
     // Assigned exclusively by the publication service. Optional for older drafts.
     slug: z
       .string()

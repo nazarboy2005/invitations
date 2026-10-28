@@ -105,3 +105,56 @@
   font-size: 9px;
   margin-top: 5px;
 }
+.inline {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: var(--surface-soft);
+}
+.inline > a {
+  flex: 1;
+  min-width: 0;
+  padding: 8px;
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.5;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.inline > a:hover {
+  color: var(--primary);
+}
+.inline > button {
+  flex: 0 0 34px;
+  display: grid;
+  place-items: center;
+  align-self: stretch;
+  min-height: 34px;
+  padding: 0;
+  border: 0;
+  border-left: 1px solid var(--line);
+  border-radius: 0 6px 6px 0;
+  background: transparent;
+  color: var(--muted);
+}
+.inline > button:hover {
+  background: var(--accent-soft);
+  color: var(--primary);
+}
+.inline > button[data-copied="true"] {
+  color: #426b50;
+  background: #eef5ef;
+}
+.inlineStatus {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}

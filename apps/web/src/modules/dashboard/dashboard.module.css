@@ -1,127 +1,128 @@
 .dashboard {
   --font-display: var(--font-home-display), Georgia, serif;
   --font-body: var(--font-home-body), Arial, sans-serif;
+  --primary: #963f50;
+  --primary-hover: #803343;
+  --accent-soft: #f7ecee;
+  --bg: #faf8f5;
   font-family: var(--font-body);
   min-height: calc(100vh - 96px);
   background: var(--bg);
   color: var(--ink);
+  position: relative;
+  isolation: isolate;
 }
 .main {
-  max-width: 1250px;
+  max-width: 1440px;
   margin: auto;
-  padding: 55px 28px 36px;
+  padding: 28px 32px 28px;
 }
 .pageHeading {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 25px;
-  margin-bottom: 34px;
+  gap: 28px;
+  margin-bottom: 20px;
 }
 .pageHeading p {
-  font-size: 12px;
-  color: var(--muted);
-  margin: 0 0 11px;
-}
-.pageHeading h1 {
-  font-family: var(--font-display);
-  font-size: 41px;
-  line-height: 1.1;
-  font-weight: 400;
-  margin: 0 0 12px;
-  letter-spacing: -1px;
-}
-.pageHeading > div > span {
   font-size: 13px;
   color: var(--muted);
+  margin: 0 0 8px;
+}
+.pageHeading h1 {
+  font: 500 clamp(34px, 3vw, 44px)/1.06 var(--font-display);
+  margin: 0 0 7px;
+  letter-spacing: -0.8px;
+}
+.pageHeading > div > span {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.7;
 }
 .primaryButton {
-  background: var(--primary);
-  color: var(--surface);
-  border: 0;
-  border-radius: 10px;
-  min-height: 46px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 9px;
-  font: inherit;
-  font-size: 12px;
-  font-weight: 600;
-  padding: 12px 19px;
+  gap: 10px;
+  min-height: 40px;
+  padding: 10px 16px;
+  border: 1px solid transparent;
+  border-radius: 9px;
+  background: var(--primary);
+  color: white;
+  font: 600 13px/1.5 var(--font-body);
   text-decoration: none;
   cursor: pointer;
-  box-sizing: border-box;
   transition:
     background 160ms ease,
     box-shadow 160ms ease;
-  box-shadow: 0 3px 7px rgb(var(--shadow-color) / 6%);
+  box-shadow: 0 4px 12px #963f5010;
 }
 .primaryButton:hover {
   background: var(--primary-hover);
+  box-shadow: 0 5px 18px #963f5024;
 }
 .headingActions {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
+  flex-shrink: 0;
 }
 .adminButton {
-  background: var(--surface);
+  background: #ffffffb0;
   color: var(--primary);
-  border: 1px solid var(--line-strong);
+  border-color: var(--line);
 }
 .adminButton:hover {
   background: var(--accent-soft);
 }
 .accountNotice {
   display: flex;
-  gap: 17px;
+  flex-wrap: wrap;
+  gap: 16px;
   align-items: center;
-  background: var(--accent-soft);
-  border: 1px solid var(--line-strong);
-  border-radius: 9px;
-  padding: 23px 25px;
-  margin-bottom: 36px;
+  background: #ffffffa0;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 20px 24px;
+  margin-bottom: 26px;
 }
 .noticeIcon {
-  width: 45px;
-  height: 45px;
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
-  background: var(--surface);
+  background: var(--accent-soft);
   display: grid;
   place-items: center;
   color: var(--primary);
   flex-shrink: 0;
+}
+.accountNotice > div {
+  flex: 1;
+  min-width: 180px;
 }
 .accountNotice strong {
   font-size: 13px;
   font-weight: 600;
 }
 .accountNotice p {
-  max-width: 650px;
   font-size: 12px;
   line-height: 1.8;
   color: var(--muted);
-  margin: 6px 0 0;
+  margin: 5px 0 0;
 }
-.accountNotice > a,
 .accountNotice > button {
   display: flex;
   align-items: center;
   gap: 8px;
-  flex-shrink: 0;
-  color: var(--primary);
-  font-size: 12px;
-  font-weight: 500;
-  text-decoration: none;
+  min-height: 40px;
   margin-left: auto;
-}
-.accountNotice > button {
   border: 0;
-  padding: 0;
+  padding: 4px 0;
   background: transparent;
   cursor: pointer;
-  font: inherit;
+  color: var(--primary);
+  font: 600 12px var(--font-body);
 }
 .accountNotice > button:disabled {
   opacity: 0.65;
@@ -131,11 +132,7 @@
   flex-basis: 100%;
   color: #9b3c30;
 }
-.contentLayout {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 260px;
-  gap: 35px;
-}
+.contentLayout,
 .invitationList {
   min-width: 0;
 }
@@ -143,99 +140,120 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 10px;
+  gap: 16px;
   border-bottom: 1px solid var(--line);
-  margin-bottom: 25px;
-  min-height: 45px;
+  margin-bottom: 18px;
 }
 .listToolbar > div {
   display: flex;
-  gap: 20px;
+  gap: 26px;
 }
 .listToolbar button {
   display: flex;
-  gap: 6px;
+  gap: 9px;
   align-items: center;
   border: 0;
   border-bottom: 2px solid transparent;
-  padding: 9px 0 16px;
+  padding: 10px 0 12px;
   background: none;
-  font: inherit;
-  font-size: 12px;
+  font: 500 13px var(--font-body);
   color: var(--muted);
   cursor: pointer;
   white-space: nowrap;
 }
+.listToolbar button:hover {
+  color: var(--primary);
+}
 .listToolbar button.activeTab {
   border-color: var(--primary);
   color: var(--primary);
-  font-weight: 600;
+  font-weight: 700;
 }
 .listToolbar button > span {
-  border-radius: 4px;
-  padding: 1px 5px;
+  display: inline-grid;
+  place-items: center;
+  min-width: 21px;
+  height: 21px;
+  border-radius: 6px;
+  padding: 0 5px;
+  background: #eee9e7;
+  color: var(--muted);
+  font-size: 10px;
+}
+.listToolbar .activeTab > span {
   background: var(--accent-soft);
   color: var(--primary);
-  font-size: 9px;
 }
 .privateLabel {
   display: flex;
   align-items: center;
-  gap: 5px;
-  font-size: 10px;
+  gap: 6px;
+  font-size: 11px;
   color: var(--muted);
   white-space: nowrap;
 }
 .cardGrid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(180px, 210px));
   gap: 16px;
+  align-items: stretch;
 }
 .invitationCard {
-  display: grid;
-  grid-template-columns: 132px minmax(0, 1fr);
-  border: 1px solid var(--line);
-  border-radius: 14px;
-  overflow: hidden;
-  background: var(--surface);
+  display: flex;
+  flex-direction: column;
   min-width: 0;
-  box-shadow: 0 4px 18px rgb(var(--shadow-color) / 3%);
+  border: 1px solid #eae4df;
+  border-radius: 11px;
+  background: #fffefd;
+  box-shadow: 0 2px 7px #38291f03;
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    border-color 180ms ease;
+}
+.invitationCard[hidden] {
+  display: none;
+}
+.invitationCard:hover {
+  box-shadow: 0 5px 16px #38291f09;
+  border-color: #d9cbc5;
 }
 .invitationCard[data-clickable="true"] {
   cursor: pointer;
 }
-.invitationCard[data-clickable="true"]:hover {
-  box-shadow: 0 8px 26px rgb(var(--shadow-color) / 7%);
-  border-color: var(--line-strong);
-}
-.invitationCard[data-clickable="true"]:focus-visible {
-  outline: 2px solid var(--primary);
-  outline-offset: 3px;
+.cardCover {
+  position: relative;
+  border-radius: 10px 10px 0 0;
+  overflow: hidden;
 }
 .cardArt {
   position: relative;
-  min-height: 235px;
+  display: block;
+  aspect-ratio: 3 / 5;
   overflow: hidden;
-  background: var(--surface-soft);
-  border-right: 1px solid var(--line);
+  background: #ede8df;
 }
 .cardArt:focus-visible {
   outline-offset: -4px !important;
 }
 .cardStatus {
-  align-self: flex-start;
-  font-size: 9px;
-  line-height: 1.4;
-  background: var(--surface-soft);
-  border: 1px solid var(--line);
-  border-radius: 5px;
-  color: var(--muted);
-  padding: 4px 6px;
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  max-width: calc(100% - 16px);
+  padding: 4px 8px;
+  border: 1px solid #ffffff30;
+  border-radius: 20px;
+  color: white;
+  background: #4e4944b8;
+  backdrop-filter: blur(10px);
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 1.5;
+  pointer-events: none;
 }
 .cardStatus[data-published="true"] {
-  background: var(--accent-soft);
-  border-color: var(--line-strong);
-  color: var(--primary);
+  background: #4c6553d9;
 }
 .noTemplateLabel {
   position: absolute;
@@ -247,147 +265,187 @@
   gap: 12px;
   color: var(--muted);
   text-align: center;
-  padding: 14px;
-  font-size: 11px;
+  padding: 24px;
+  font-size: 12px;
+  background: radial-gradient(ellipse at top, #f7e8e8, #f3eee6);
 }
 .cardBody {
-  position: relative;
   display: flex;
   flex-direction: column;
-  gap: 9px;
+  flex: 1;
+  gap: 7px;
   min-width: 0;
-  padding: 15px 13px 12px;
-}
-.draftDeleteIcon {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  width: 34px;
-  height: 34px;
-  display: grid;
-  place-items: center;
-  padding: 0;
-  border: 1px solid var(--line);
-  border-radius: 7px;
-  background: var(--surface);
-  color: #91483e;
-  cursor: pointer;
-}
-.draftDeleteIcon:hover:not(:disabled) {
-  background: #fbefeb;
-  border-color: #d6aaa1;
-}
-.draftDeleteIcon:focus-visible {
-  outline: 2px solid var(--primary);
-  outline-offset: 2px;
-}
-.draftDeleteIcon:disabled {
-  opacity: 0.55;
-  cursor: wait;
+  padding: 12px;
 }
 .invitationName {
-  font-family: var(--font-display);
-  font-size: 24px;
-  line-height: 1.05;
-  font-weight: 500;
+  font: 500 21px/1.15 var(--font-display);
   overflow-wrap: anywhere;
-  margin: 1px 0 0;
+  margin: 0;
+  letter-spacing: -0.3px;
 }
 .cardName {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 5px 8px;
+  gap: 5px 10px;
 }
 .cardName strong {
-  font-size: 10px;
-  font-weight: 600;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--muted);
 }
 .cardName > span {
-  font-size: 9px;
-  color: var(--muted);
-}
-.cardDate {
-  display: flex;
-  align-items: center;
-  gap: 6px;
   font-size: 10px;
   color: var(--muted);
-  line-height: 1.5;
-  margin: 0;
 }
-.cardDate svg {
-  flex-shrink: 0;
+.cardName > span::before {
+  content: "·";
+  margin-right: 8px;
+  color: #b6aaa8;
 }
+.cardMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+  margin: 1px 0 2px;
+}
+.cardDate,
 .cardViews {
   display: flex;
   align-items: center;
-  gap: 6px;
-  margin: -3px 0 0;
+  gap: 5px;
+  font-size: 10px;
   color: var(--muted);
-  font-size: 10px;
-  line-height: 1.5;
-}
-.cardViews svg {
-  flex-shrink: 0;
-}
-.activityLink {
-  color: var(--primary);
-  font-size: 10px;
   line-height: 1.6;
-  padding-block: 3px;
+  margin: 0;
 }
-.activityLink:hover {
-  text-decoration: underline;
-  text-underline-offset: 3px;
+.cardMeta svg {
+  flex-shrink: 0;
+  opacity: 0.75;
+}
+.shareRow {
+  min-width: 0;
+  margin-top: auto;
 }
 .cardActions {
-  margin-top: auto;
-  border-top: 1px solid var(--line);
-  padding-top: 10px;
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
-  gap: 7px;
+  gap: 6px;
+  margin-top: auto;
+  padding-top: 3px;
 }
-.cardActions > span {
-  font-size: 8px;
-  color: var(--muted);
-}
-.cardActions > a {
+.cardActions > a,
+.cardActions > button.continueAction {
   display: inline-flex;
+  flex: 1;
   align-items: center;
-  gap: 5px;
+  justify-content: center;
+  gap: 9px;
+  min-height: 34px;
+  padding: 7px 8px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
   font-size: 11px;
   font-weight: 600;
+  transition: background 160ms ease;
+}
+.cardActions > .continueAction {
   color: var(--primary);
-  min-height: 28px;
-  margin-left: auto;
+  background: var(--accent-soft);
+  border-color: #ecd9de;
 }
-.cardActions > .secondaryAction + a {
-  margin-left: auto;
+.cardActions > .continueAction:hover {
+  background: #f0dde2;
 }
-.cardActions > .secondaryAction {
-  order: -1;
+.cardActions > .viewAction {
+  color: var(--primary);
+  background: transparent;
+}
+.cardActions > .viewAction:hover {
+  background: var(--accent-soft);
+}
+.moreButton {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+}
+.moreButton:hover {
+  background: var(--accent-soft);
+  border-color: #dfc2c7;
+}
+.cardMenu {
+  position: fixed;
+  inset: auto;
+  width: min(300px, calc(100vw - 32px));
+  max-height: min(460px, 80dvh);
+  overflow-y: auto;
+  margin: 0;
+  padding: 8px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: #fffefd;
+  color: var(--ink);
+  box-shadow: 0 14px 55px #30202426;
+  font-family: var(--font-body);
+}
+.menuHeading {
+  margin: 0;
+  padding: 10px 10px 12px;
+  border-bottom: 1px solid var(--line);
+  font: 500 23px/1.2 var(--font-display);
+  overflow-wrap: anywhere;
+}
+.cardMenu > a,
+.cardMenu > button {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  width: 100%;
+  min-height: 42px;
+  border: 0;
+  border-radius: 8px;
+  padding: 9px 10px;
+  background: transparent;
+  color: var(--ink);
+  font: 500 12px/1.5 var(--font-body);
+  text-align: left;
+  cursor: pointer;
+}
+.cardMenu > :is(a, button):hover {
+  background: var(--accent-soft);
+}
+.cardMenu > .dangerAction {
+  color: #a23e3e;
+}
+.cardMenu > button:disabled {
+  opacity: 0.55;
+  cursor: wait;
 }
 .empty {
   grid-column: 1/-1;
-  background: var(--surface);
-  border: 1px dashed var(--line-strong);
-  border-radius: 10px;
-  padding: 49px 25px;
+  background: #ffffff80;
+  border: 1px dashed #ded0cb;
+  border-radius: 18px;
+  padding: 64px 24px;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: 330px;
-  box-sizing: border-box;
+  min-height: 380px;
   justify-content: center;
 }
 .emptyArt {
   position: relative;
   color: var(--primary);
-  margin-bottom: 18px;
+  margin-bottom: 20px;
 }
 .emptyArt > span {
   position: absolute;
@@ -395,65 +453,94 @@
   place-items: center;
   right: -9px;
   bottom: 5px;
-  width: 25px;
-  height: 25px;
+  width: 26px;
+  height: 26px;
   background: var(--accent-soft);
-  border: 3px solid white;
+  border: 3px solid var(--bg);
   border-radius: 50%;
 }
 .empty h2 {
-  font-family: var(--font-display);
-  font-size: 27px;
-  font-weight: 400;
+  font: 500 34px/1.15 var(--font-display);
   margin: 0 0 13px;
-  line-height: 1.3;
 }
 .empty p {
   color: var(--muted);
-  font-size: 12px;
+  font-size: 13px;
   line-height: 1.9;
-  max-width: 350px;
-  margin: 0 0 23px;
+  max-width: 380px;
+  margin: 0 0 24px;
 }
 .empty small {
-  font-size: 10px;
+  font-size: 11px;
   color: var(--muted);
-  margin-top: 15px;
+  margin-top: 16px;
   line-height: 1.7;
 }
-.helpSidebar {
-  padding-top: 0;
-}
-.guide {
-  background: var(--accent-soft);
-  border-radius: 10px 10px 42px 10px;
-  padding: 25px 24px 29px;
-  color: var(--primary);
-}
-.cardActions > button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
-  min-height: 36px;
-  padding: 6px 10px;
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  background: var(--surface);
+.bottomNote {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
   color: var(--muted);
-  font: inherit;
+  padding-top: 30px;
   font-size: 11px;
+  line-height: 1.9;
+}
+.bottomNote svg {
+  flex-shrink: 0;
+  margin-top: 3px;
+  color: #788679;
+}
+.bottomNote p {
+  margin: 0;
+}
+.error {
+  background: #fff0eb;
+  border: 1px solid #efd3ca;
+  border-radius: 9px;
+  padding: 17px;
+  color: #943c2f;
+  font-size: 12px;
+  line-height: 1.8;
+  margin-bottom: 20px;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+.error p {
+  margin: 0;
+}
+.error button {
+  font: inherit;
+  flex-shrink: 0;
+  min-height: 38px;
+  border: 1px solid #d9aca1;
+  border-radius: 8px;
+  background: var(--surface);
+  color: inherit;
+  padding: 7px 10px;
   cursor: pointer;
 }
-.cardActions > button:disabled {
-  opacity: 0.55;
-  cursor: wait;
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  min-height: 340px;
+  gap: 15px;
+  color: var(--muted);
+  font-size: 12px;
 }
-.cardActions > .dangerAction {
-  color: #91483e;
+.loading svg {
+  animation: spin 1s linear infinite;
 }
-.cardActions > .secondaryAction {
-  color: var(--primary);
+.dashboard :is(button, a):focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 4px;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 .dialogBackdrop {
   position: fixed;
@@ -552,391 +639,168 @@
   opacity: 0.6;
   cursor: wait;
 }
-.guideIcon {
-  display: inline-flex;
-  border: 1px solid var(--line-strong);
-  border-radius: 50%;
-  width: 35px;
-  height: 35px;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 17px;
-}
-.guide h2 {
-  font-family: var(--font-display);
-  font-size: 26px;
-  line-height: 1.2;
-  font-weight: 400;
-  margin: 0 0 17px;
-}
-.guide p {
-  font-size: 11px;
-  line-height: 1.9;
-  max-width: 190px;
-  color: var(--muted);
-  margin-bottom: 21px;
-}
-.guide > a {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  font-size: 11px;
-  color: var(--primary);
-  text-decoration: none;
-  font-weight: 600;
-}
-.tip {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  padding: 24px 3px 0;
-}
-.tip > svg {
-  flex-shrink: 0;
-  color: var(--primary);
-  margin-top: 1px;
-}
-.tip strong {
-  font-size: 11px;
-  font-weight: 600;
-  line-height: 1.7;
-}
-.tip p {
-  font-size: 10px;
-  color: var(--muted);
-  line-height: 1.9;
-  margin: 7px 0 0;
-}
-.helpFooter {
-  display: flex;
-  gap: 9px;
-  font-size: 10px;
-  color: var(--muted);
-  line-height: 1.9;
-  padding: 22px 3px;
-  margin-top: 22px;
-  border-top: 1px solid var(--line);
-}
-.helpFooter svg {
-  flex-shrink: 0;
-  margin-top: 2px;
-}
-.bottomNote {
-  display: flex;
-  align-items: flex-start;
-  gap: 7px;
-  color: var(--muted);
-  padding-top: 34px;
-  max-width: 780px;
-  font-size: 10px;
-  line-height: 1.9;
-}
-.bottomNote svg {
-  flex-shrink: 0;
-  margin-top: 2px;
-}
-.bottomNote p {
-  margin: 0;
-}
-.error {
-  background: #fff0eb;
-  border-radius: 7px;
-  padding: 17px;
-  color: #943c2f;
-  font-size: 12px;
-  line-height: 1.8;
-  margin-bottom: 20px;
-  display: flex;
-  gap: 20px;
-  align-items: center;
-}
-.error p {
-  margin: 0;
-}
-.error button {
-  font: inherit;
-  flex-shrink: 0;
-  border: 1px solid #d9aca1;
-  border-radius: 5px;
-  background: var(--surface);
-  color: inherit;
-  padding: 7px 10px;
-  cursor: pointer;
-}
-.loading {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  min-height: 300px;
-  gap: 15px;
-  color: var(--muted);
-  font-size: 12px;
-}
-.loading svg {
-  animation: spin 1s linear infinite;
-}
-.confirmation {
-  padding: 20px;
-  background: var(--accent-soft);
-  border: 1px solid var(--line-strong);
-  border-radius: 7px;
-  margin-bottom: 24px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 15px;
-  align-items: center;
-  font-size: 12px;
-}
-.confirmation > div {
-  flex-basis: 100%;
-  line-height: 1.7;
-}
-.confirmation p {
-  margin: 7px 0 0;
-  color: var(--muted);
-}
-.confirmation a,
-.confirmation button {
-  border: 1px solid var(--accent);
-  border-radius: 5px;
-  padding: 8px 10px;
-  background: var(--surface);
-  color: var(--ink);
-  font: inherit;
-  font-size: 11px;
-  text-decoration: none;
-  cursor: pointer;
-}
-.dashboard :is(button, a):focus-visible {
-  outline: 2px solid var(--primary);
-  outline-offset: 4px;
-}
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-@media (max-width: 1050px) {
+
+@media (max-width: 900px) {
   .main {
-    padding-top: 40px;
-  }
-  .contentLayout {
-    grid-template-columns: 1fr;
-    gap: 24px;
+    padding: 24px;
   }
   .cardGrid {
-    gap: 15px;
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+    gap: 14px;
   }
-  .guide {
-    padding: 23px 20px;
+  .headingActions {
+    flex-shrink: 1;
+    justify-content: flex-end;
   }
   .privateLabel {
     display: none;
   }
-  .listToolbar > div {
-    gap: 18px;
-  }
-}
-@media (max-width: 800px) {
-  .main {
-    padding: 35px 22px;
-  }
-  .contentLayout {
-    grid-template-columns: 1fr;
-  }
-  .helpSidebar {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-  }
-  .guide {
-    grid-row: 1/3;
-  }
-  .guide p {
-    max-width: 230px;
-  }
-  .tip {
-    padding: 6px 0;
-  }
-  .helpFooter {
-    display: none;
-  }
-  .accountNotice {
-    padding: 20px;
-    gap: 12px;
-  }
-  .accountNotice p {
-    font-size: 11px;
-  }
-  .pageHeading h1 {
-    font-size: 36px;
-  }
-  .cardGrid {
-    gap: 20px;
-  }
 }
 @media (max-width: 580px) {
   .main {
-    padding: 30px 18px;
+    padding: 22px 16px;
   }
   .pageHeading {
     align-items: flex-start;
-    gap: 18px;
-    flex-direction: column;
-    margin-bottom: 25px;
+    gap: 15px;
+    margin-bottom: 16px;
+  }
+  .pageHeading h1 {
+    font-size: 34px;
+    letter-spacing: -0.7px;
   }
   .pageHeading p {
     font-size: 11px;
-    line-height: 1.6;
-    margin-bottom: 9px;
-  }
-  .pageHeading h1 {
-    font-size: 35px;
+    margin-bottom: 5px;
   }
   .pageHeading > div > span {
-    font-size: 12px;
+    display: none;
   }
-  .pageHeading .primaryButton {
+  .headingActions {
+    flex-shrink: 0;
+    gap: 6px;
+  }
+  .headingActions .primaryButton {
+    min-height: 36px;
+    padding: 8px 10px;
+    font-size: 10px;
+    gap: 5px;
+  }
+  .listToolbar {
+    margin-bottom: 15px;
+  }
+  .listToolbar > div {
     width: 100%;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .listToolbar button {
+    font-size: 11px;
+    gap: 6px;
+    padding-bottom: 11px;
+  }
+  .listToolbar button > span {
+    font-size: 9px;
+    min-width: 18px;
+    height: 18px;
+  }
+  .cardGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+  .cardBody {
+    padding: 10px;
+    gap: 6px;
+  }
+  .invitationName {
+    font-size: 20px;
+  }
+  .cardStatus {
+    top: 7px;
+    left: 7px;
+    font-size: 9px;
+    padding: 3px 7px;
+  }
+  .cardActions > a,
+  .cardActions > button.continueAction {
+    min-height: 36px;
+    padding-inline: 4px;
+    font-size: 10px;
+    gap: 5px;
+  }
+  .moreButton {
+    width: 32px;
+    height: 36px;
+  }
+  .cardName {
+    gap: 4px 6px;
+  }
+  .cardName > span::before {
+    margin-right: 6px;
   }
   .accountNotice {
-    padding: 19px 16px;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin-bottom: 25px;
+    padding: 14px;
+    gap: 10px;
+    margin-bottom: 16px;
   }
-  .noticeIcon {
-    height: 35px;
-    width: 35px;
-  }
-  .accountNotice > div {
-    flex: 1;
-    min-width: 200px;
-  }
-  .accountNotice strong {
-    font-size: 12px;
+  .accountNotice > button {
+    margin-left: 52px;
+    font-size: 11px;
   }
   .accountNotice p {
     font-size: 11px;
   }
-  .accountNotice > a {
-    margin-left: 47px;
-    font-size: 11px;
-  }
-  .listToolbar {
-    margin-bottom: 20px;
-  }
-  .listToolbar > div {
-    gap: 22px;
-  }
-  .listToolbar button {
-    font-size: 11px;
-  }
-  .cardGrid {
-    grid-template-columns: 1fr;
-  }
   .empty {
-    padding: 39px 21px;
-    min-height: 350px;
+    min-height: 300px;
+    padding: 32px 18px;
   }
   .empty h2 {
-    font-size: 27px;
+    font-size: 28px;
   }
   .empty p {
     font-size: 12px;
-  }
-  .helpSidebar {
-    grid-template-columns: 1fr;
-    gap: 19px;
-    margin-top: 5px;
-  }
-  .guide {
-    grid-row: auto;
-    padding: 25px;
-    border-radius: 10px 10px 42px 10px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0 20px;
-  }
-  .guideIcon {
-    display: none;
-  }
-  .guide h2 {
-    font-size: 26px;
-    grid-row: 1/3;
-    margin: 0;
-    align-self: center;
-  }
-  .guide p {
-    font-size: 10px;
-    margin-top: 0;
-    margin-bottom: 14px;
-  }
-  .guide > a {
-    font-size: 10px;
-  }
-  .tip {
-    padding: 0 4px;
-  }
-  .bottomNote {
-    font-size: 10px;
-    padding-top: 27px;
   }
   .error {
     flex-direction: column;
     align-items: flex-start;
     gap: 12px;
   }
-  .confirmation {
-    padding: 16px;
+}
+@media (max-width: 390px) {
+  .pageHeading {
+    flex-wrap: wrap;
+    gap: 12px;
   }
-  .confirmation button,
-  .confirmation a {
-    font-size: 10px;
+  .pageHeading h1 {
+    font-size: 32px;
+  }
+  .headingActions {
+    margin-left: auto;
+  }
+  .main {
+    padding-inline: 12px;
+  }
+  .cardGrid {
+    gap: 10px;
+  }
+  .cardBody {
+    padding: 9px;
+  }
+  .invitationName {
+    font-size: 19px;
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  .loading svg {
+  .loading svg,
+  .deleteDialog {
     animation: none;
   }
-}
-.accountNotice > button,
-.error button,
-.confirmation :is(a, button) {
-  min-height: 36px;
-  border-radius: 10px;
-}
-@media (max-width: 390px) {
-  .invitationCard {
-    grid-template-columns: 110px minmax(0, 1fr);
+  .invitationCard,
+  .primaryButton,
+  .cardActions > a {
+    transition: none;
   }
-  .invitationName {
-    font-size: 22px;
-  }
-  .cardBody {
-    padding-inline: 11px;
-  }
-}
-
-@media (min-width: 801px) and (max-width: 1050px) {
-  .helpSidebar {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-  }
-  .guide {
-    grid-row: 1 / 3;
-  }
-  .tip {
-    padding: 6px 0;
-  }
-  .helpFooter {
-    display: none;
-  }
-}
-@media (max-width: 650px) {
-  .cardGrid {
-    grid-template-columns: 1fr;
+  .invitationCard:hover {
+    transform: none;
   }
 }

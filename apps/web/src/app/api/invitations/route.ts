@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
+import { getDb } from "@taklifnoma/database";
 import { invitationSchema } from "@taklifnoma/contracts";
 import {
   authenticatedUser,
@@ -14,7 +15,12 @@ export async function GET() {
   try {
     const user = await authenticatedUser();
     return NextResponse.json(
-      { invitations: await listInvitations(user.id) },
+      {
+        invitations: await listInvitations(user.id),
+        deletedIds: (
+          await getDb()`SELECT id FROM invitations WHERE owner_id=${user.id} AND status='deleted'`
+        ).map((row) => row.id),
+      },
       { headers: privateHeaders },
     );
   } catch (e) {

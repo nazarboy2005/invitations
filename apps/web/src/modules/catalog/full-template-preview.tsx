@@ -67,6 +67,7 @@ export function FullTemplatePreview({
   qaMobile = false,
   cardPreview = false,
   posterCapture = false,
+  coverCapture = false,
 }: {
   template: TemplateDefinition;
   canSelect: boolean;
@@ -79,6 +80,7 @@ export function FullTemplatePreview({
   qaMobile?: boolean;
   cardPreview?: boolean;
   posterCapture?: boolean;
+  coverCapture?: boolean;
 }) {
   const [invitation, setInvitation] = useState<Invitation | null>(null);
   const [catalogPreview, setCatalogPreview] = useState(true);
@@ -89,6 +91,16 @@ export function FullTemplatePreview({
     let active = true;
     async function load() {
       let candidate: Invitation | null = null;
+      // Only the isolated cover worker injects this value. Never fall back to
+      // catalog fixtures when rendering a creator's personalized cover.
+      if (coverCapture) {
+        const input = (window as Window & { __invitationCover?: unknown }).__invitationCover;
+        const parsed = invitationSchema.safeParse(input);
+        if (!parsed.success || parsed.data.templateId !== template.id) return;
+        setCatalogPreview(false);
+        setInvitation({ ...parsed.data, enabledLocales: [parsed.data.defaultLocale], music: { ...parsed.data.music, enabled: false, url: "" } });
+        return;
+      }
       if (draftId && !posterCapture) {
         try {
           const stored = sessionStorage.getItem(previewDraftKey(draftId));
@@ -134,10 +146,10 @@ export function FullTemplatePreview({
     return () => {
       active = false;
     };
-  }, [cardPreview, demo, draftId, longNames, posterCapture, template.id]);
+  }, [cardPreview, coverCapture, demo, draftId, longNames, posterCapture, template.id]);
 
   useEffect(() => {
-    if (!cardPreview || !invitation || !previewRef.current) return;
+    if (!cardPreview || coverCapture || !invitation || !previewRef.current) return;
     const timers: ReturnType<typeof setTimeout>[] = [];
     const cleanups: Array<() => void> = [];
     const opened = new WeakSet<Document>();
@@ -186,7 +198,7 @@ export function FullTemplatePreview({
     const framesObserver = new MutationObserver(attachFrames);
     framesObserver.observe(host, { childList: true, subtree: true });
     return () => { framesObserver.disconnect(); timers.forEach(clearTimeout); cleanups.forEach((cleanup) => cleanup()); };
-  }, [cardPreview, invitation, template.id]);
+  }, [cardPreview, coverCapture, invitation, template.id]);
 
   useEffect(() => {
     if (cardPreview) return;

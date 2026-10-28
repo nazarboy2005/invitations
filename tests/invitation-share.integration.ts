@@ -18,7 +18,7 @@ const ownerId = randomUUID();
 const slugs = {
   published: generatePublicCode(),
   draft: generatePublicCode(),
-  archived: generatePublicCode(),
+  deleted: generatePublicCode(),
 };
 const userAgent = "TelegramBot";
 before(async () => {
@@ -27,14 +27,14 @@ before(async () => {
     "HTTP checks must target a local app",
   );
   await sql`INSERT INTO users(id,telegram_user_id,display_name) VALUES(${ownerId},${-Math.floor(Math.random() * 1e12) - 1},'Disposable share-preview test')`;
-  for (const status of ["published", "draft", "archived"] as const) {
+  for (const status of ["published", "draft", "deleted"] as const) {
     let invitation = completeInvitation();
     invitation = addLanguage(invitation, "ru");
     invitation.content.ru = {
       ...defaultLocalizedInvitationContent("wedding", "ru"),
       people: ["Шерзод тест", "Мадина тест"],
     };
-    invitation.status = status;
+    invitation.status = status === "deleted" ? "published" : status;
     invitation.slug = slugs[status];
     await sql`INSERT INTO invitations(id,owner_id,template_id,slug,status,data) VALUES(${invitation.id},${ownerId},${invitation.templateId},${slugs[status]},${status},${sql.json(invitation)})`;
   }
@@ -81,7 +81,7 @@ test("anonymous Telegram fetch receives personalized metadata in head and a publ
   assert.equal(bytes[1], 0xd8);
 });
 
-test("unsupported language uses default preview; draft, archived and malformed links reveal no invitation metadata", async () => {
+test("unsupported language uses default preview; draft, deleted and malformed links reveal no invitation metadata", async () => {
   const response = await fetch(`${origin}/i/${slugs.published}?lang=en`, {
     headers: { "User-Agent": userAgent },
     signal: AbortSignal.timeout(30_000),
@@ -91,7 +91,7 @@ test("unsupported language uses default preview; draft, archived and malformed l
     (await response.text()).match(/<head>([\s\S]*?)<\/head>/)?.[1] ?? "";
   assert.match(head, /Nodir test &amp; Madina test — Nikoh to‘yi/);
   assert.doesNotMatch(head, /Шерзод тест/);
-  for (const slug of [slugs.draft, slugs.archived, "not-a-code"]) {
+  for (const slug of [slugs.draft, slugs.deleted, "not-a-code"]) {
     const hidden = await fetch(`${origin}/i/${slug}`, {
       headers: { "User-Agent": userAgent },
       signal: AbortSignal.timeout(30_000),

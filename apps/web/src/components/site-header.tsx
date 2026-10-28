@@ -36,9 +36,8 @@ export async function SiteHeader({
           <span>visol</span>
         </Link>
         <nav className={styles.heroNav} aria-label="Asosiy menyu">
-          <Link href="/templates?category=wedding">To‘ylar</Link>
-          <Link href="/templates?category=osh">Marosimlar</Link>
-          <Link href="/templates?category=other">Tantanalar</Link>
+          <Link href="/templates">Shablonlar</Link>
+          <a href="https://t.me/HyperLean">Bog‘lanish</a>
           <Link href="/#why-us">Biz haqimizda</Link>
         </nav>
         <SiteSounds />

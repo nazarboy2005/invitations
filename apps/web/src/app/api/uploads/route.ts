@@ -98,13 +98,14 @@ export async function POST(request: Request) {
     if (!input.contentType.startsWith(input.kind + "/"))
       throw new ApiError(400, "INVALID_FILE", "Fayl turini tekshiring.");
     const existing = input.draftId
-      ? await getDb()`SELECT owner_id,status,edit_deadline_at FROM invitations WHERE id=${input.draftId}`
+      ? await getDb()`SELECT owner_id,status,identity_locked_at,edit_deadline_at FROM invitations WHERE id=${input.draftId}`
       : [];
     if (
       existing[0] &&
       (existing[0].owner_id !== user.id ||
-        existing[0].status === "archived" ||
-        (existing[0].status === "published" &&
+        existing[0].status === "deleted" ||
+        ((existing[0].status === "published" ||
+          existing[0].identity_locked_at) &&
           (!existing[0].edit_deadline_at ||
             new Date(existing[0].edit_deadline_at) <= new Date())))
     )

@@ -354,7 +354,7 @@ async function processLocked(update: Update, db: postgres.TransactionSql) {
       });
     } else {
       const [wish] =
-        await db`SELECT w.*,u.id AS actor_id,u.telegram_user_id,u.is_admin,i.owner_id FROM wishes w JOIN invitations i ON i.id=w.invitation_id JOIN users u ON u.telegram_user_id=${String(callback.from.id)} WHERE w.id=${moderation[2]} AND u.disabled_at IS NULL FOR UPDATE OF w`;
+        await db`SELECT w.*,u.id AS actor_id,u.telegram_user_id,u.is_admin,i.owner_id FROM wishes w JOIN invitations i ON i.id=w.invitation_id JOIN users u ON u.telegram_user_id=${String(callback.from.id)} WHERE w.id=${moderation[2]} AND i.status<>'deleted' AND u.disabled_at IS NULL FOR UPDATE OF w`;
       if (!wish || (wish.owner_id !== wish.actor_id && !hasAdminRole(wish)))
         await telegramCall("answerCallbackQuery", {
           callback_query_id: callback.id,

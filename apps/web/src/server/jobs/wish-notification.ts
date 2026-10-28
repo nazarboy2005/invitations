@@ -87,7 +87,7 @@ export async function processWishNotifications(limit = 20) {
         FROM wishes w JOIN invitations i ON i.id=w.invitation_id
         JOIN users u ON u.id=i.owner_id
         JOIN telegram_connections tc ON tc.user_id=u.id AND tc.status='active'
-        WHERE w.id=${job.payload.wishId} AND w.status='pending' AND w.deleted_at IS NULL`;
+        WHERE w.id=${job.payload.wishId} AND w.status='pending' AND w.deleted_at IS NULL AND i.status<>'deleted'`;
       if (target) {
         const content = target.content as Record<string, { people?: string[] }>;
         const people = content?.["uz-Latn"]?.people ?? content?.uz?.people ?? content?.["uz-Cyrl"]?.people ?? [];
