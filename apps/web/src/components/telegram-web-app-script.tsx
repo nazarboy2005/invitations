@@ -7,9 +7,11 @@ import {
   miniAppAdminDestination,
   currentTelegramLaunchData,
 } from "@/modules/session/client-session";
+import { miniAppPaymentDestination } from "@/modules/payments/payment-navigation";
 
 export function TelegramWebAppScript() {
   const pathname = usePathname();
+  const entryPathname = useRef(pathname);
   const router = useRouter();
   const [ready, setReady] = useState(0);
   const handled = useRef<string | null>(null);
@@ -31,6 +33,19 @@ export function TelegramWebAppScript() {
       .then((session) => {
         if (!active) return;
         handled.current = key;
+        // An explicit payment launch takes precedence over the admin home entry.
+        // The launch has been verified; ownership is checked again by payment APIs.
+        // Consume the launch destination only on document entry. Telegram keeps
+        // start_param for the app's lifetime; later dashboard/home navigation
+        // must not send the creator back to payments again.
+        const paymentDestination =
+          pathname === entryPathname.current
+            ? miniAppPaymentDestination(initData, session.user)
+            : null;
+        if (paymentDestination) {
+          window.location.replace(paymentDestination + window.location.hash);
+          return;
+        }
         const destination = miniAppAdminDestination(
           pathname,
           window.location.search,
@@ -68,6 +83,7 @@ export function TelegramWebAppScript() {
       strategy="afterInteractive"
       onReady={() => {
         window.Telegram?.WebApp?.ready?.();
+        window.dispatchEvent(new Event("taklifnoma:telegram-ready"));
         setReady((value) => value + 1);
       }}
     />

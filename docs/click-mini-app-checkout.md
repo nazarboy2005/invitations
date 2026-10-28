@@ -90,3 +90,57 @@ session. None of these device checks has been performed by the agent:
 
 The user's earlier manual observation that the Nodze test page opens Click
 successfully is context supplied by the user, not a device test performed here.
+
+## Returning from Click without another browser login
+
+The user subsequently confirmed the opening fix works in their manual use and
+reported that Click's Continue opens a browser without the Mini App session.
+Keep Nodze's **successUrl and cancelUrl unchanged**, both exactly
+`https://<APP_URL-host>/payment/return`. Do not substitute a `t.me` URL or add
+per-order query strings to the registered provider return URL.
+
+The public return page now offers **Telegram’da davom etish**. A read-only
+Telegram `getMe` check found `has_main_web_app=false` for the configured bot
+`taklifnomayasagichbot`. Therefore the default link uses
+`https://t.me/taklifnomayasagichbot?start=payment_return`. Telegram opens the bot;
+its reply's **To‘lov holatini ochish** web_app button opens the real Mini App
+at `/payment/return`. No new phone sharing or interactive login confirmation is
+needed for an existing eligible account; the fresh signed launch is verified
+by the existing server authentication endpoint first. Suspended accounts,
+invalid launches and accounts without completed phone onboarding still fail
+the existing checks. Ordinary browser sign-in remains available as a fallback.
+
+The Mini App reads private orders only after verified session resolution. It
+restores the account's last selected order from session storage or an
+account-scoped local-storage ID, provided it matches an owned backend record;
+otherwise it shows recent owned orders. The neutral external return cannot
+identify a specific transaction by itself when no remembered context survives.
+The order selector remains available. IDs are navigation hints, never login
+credentials or payment confirmation. No session cookies or signed Telegram
+launch data are passed through Click or placed in return links.
+
+Optional one-tap Main Mini App setup:
+
+1. In BotFather, select this bot and configure/enable its **Main Mini App** with
+   the canonical HTTPS `APP_URL` (currently the approved live site is
+   `https://invitations-wk6h.vercel.app`). This differs from its existing menu button.
+2. Set server configuration `TELEGRAM_MAIN_MINI_APP_ENABLED=true` and redeploy
+   the new code. The return action then uses `?startapp=payment_return`.
+3. Verify on Android that the link opens the configured Mini App and reaches
+   payment status. Keep the flag false until the Main Mini App is enabled.
+
+Direct launch destinations are restricted to payment status, optionally an order
+UUID. They are handled after verified authentication and before the default
+admin redirect. The launch destination is consumed only on document entry so
+later home/dashboard navigation does not bounce back into payment status.
+Neither mode changes Nodze or Click configuration or creates another payment.
+
+Follow-up checks: focused navigation/auth/checkout tests (16/16), the mocked
+desktop Chrome return flow, and the disposable bot-entry integration cover the
+new behavior. The browser check includes an anonymous external return, fresh
+Telegram identity verification before private data, persistent owned-order
+selection, explicit admin payment routing, leaving the payment page, and
+rejecting invalid launch data despite a previously authenticated browser account.
+All Telegram messages in integration tests are stubbed. Physical Android/Click
+return behavior and BotFather Main Mini App configuration remain unverified;
+no external deployment or real payment was performed.

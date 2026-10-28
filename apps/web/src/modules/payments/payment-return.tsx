@@ -8,16 +8,39 @@ import {
 } from "@taklifnoma/contracts/payment";
 import styles from "./payment-return.module.css";
 import { CheckoutActions } from "./checkout-actions";
+import {
+  currentTelegramLaunchData,
+  loadClientSession,
+} from "../session/client-session";
+import {
+  rememberedPaymentOrder,
+  rememberPaymentOrder,
+  telegramPaymentReturnLink,
+} from "./payment-navigation";
 
-export function PaymentReturn() {
+export function PaymentReturn({
+  botUsername,
+  mainMiniApp = false,
+}: {
+  botUsername?: string;
+  mainMiniApp?: boolean;
+}) {
   const [orders, setOrders] = useState<PaymentOrderView[]>([]);
   const [selected, setSelected] = useState("");
   const [loading, setLoading] = useState(true);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const [loginRequired, setLoginRequired] = useState(false);
+  const [miniApp, setMiniApp] = useState(false);
+  const [userId, setUserId] = useState("");
+  const [retry, setRetry] = useState(0);
   const inFlight = useRef(false);
   const order = orders.find((item) => item.id === selected);
+  const telegramUrl = telegramPaymentReturnLink(
+    botUsername,
+    selected || undefined,
+    mainMiniApp,
+  );
   const refresh = useCallback(async (id: string, signal?: AbortSignal) => {
     if (inFlight.current) return;
     inFlight.current = true;
@@ -45,9 +68,32 @@ export function PaymentReturn() {
     }
   }, []);
   useEffect(() => {
+    const onReady = () => setRetry((value) => value + 1);
+    window.addEventListener("taklifnoma:telegram-ready", onReady);
+    return () =>
+      window.removeEventListener("taklifnoma:telegram-ready", onReady);
+  }, []);
+  useEffect(() => {
     const controller = new AbortController();
+    setLoading(true);
+    setLoginRequired(false);
+    setError("");
+    setOrders([]);
+    setSelected("");
+    setUserId("");
     void (async () => {
       try {
+        const initData = currentTelegramLaunchData();
+        setMiniApp(Boolean(initData));
+        // A newly opened Mini App may not have a cookie yet. Verify its signed
+        // Telegram identity before requesting any private payment records.
+        const session = await loadClientSession(initData);
+        if (controller.signal.aborted) return;
+        if (!session.user) {
+          setLoginRequired(true);
+          return;
+        }
+        const accountId = session.user.id;
         const response = await fetch("/api/payments", {
           cache: "no-store",
           signal: controller.signal,
@@ -60,6 +106,8 @@ export function PaymentReturn() {
         if (!response.ok)
           throw new Error(body.error?.message ?? "Buyurtmalar olinmadi.");
         const items = body.orders as PaymentOrderView[];
+        if (controller.signal.aborted) return;
+        setUserId(accountId);
         setOrders(items);
         let remembered = "";
         try {
@@ -73,6 +121,8 @@ export function PaymentReturn() {
         setSelected(
           items.find((item) => item.id === requested)?.id ??
             items.find((item) => item.id === remembered)?.id ??
+            items.find((item) => item.id === rememberedPaymentOrder(accountId))
+              ?.id ??
             items[0]?.id ??
             "",
         );
@@ -86,9 +136,10 @@ export function PaymentReturn() {
       }
     })();
     return () => controller.abort();
-  }, []);
+  }, [retry]);
   useEffect(() => {
-    if (!selected) return;
+    if (!selected || !userId) return;
+    rememberPaymentOrder(userId, selected);
     // Selection survives reload, browser return and unavailable sessionStorage.
     const url = new URL(window.location.href);
     url.searchParams.set("order", selected);
@@ -98,7 +149,7 @@ export function PaymentReturn() {
     } catch {
       /* Owned server records and the URL remain available. */
     }
-  }, [selected]);
+  }, [selected, userId]);
   useEffect(() => {
     if (
       !order ||
@@ -143,18 +194,39 @@ export function PaymentReturn() {
         </Link>
         <p className={styles.eyebrow}>TO‘LOV VA NASHR</p>
         <h1>To‘lov holati</h1>
+        {!miniApp && telegramUrl && (
+          <div>
+            <p>
+              Telegram Mini App’da boshlagan bo‘lsangiz, o‘sha hisobda davom
+              eting. Buyurtma va to‘lovingiz saqlangan. Brauzer Telegram’dagi
+              kirishni avtomatik qabul qilmaydi.
+            </p>
+            <a className="button" href={telegramUrl}>
+              Telegram’da davom etish
+            </a>
+            {!mainMiniApp && (
+              <p>
+                Telegram ochilgach, botdagi “To‘lov holatini ochish” tugmasini
+                bosing.
+              </p>
+            )}
+          </div>
+        )}
         {loading ? (
           <p role="status">Buyurtma tekshirilmoqda…</p>
         ) : loginRequired ? (
           <>
             <p>
-              Buyurtmangizni ko‘rish uchun o‘sha Telegram hisobingiz bilan
-              kiring. To‘lov yo‘qolmaydi.
+              {miniApp
+                ? "Mini App’ni botdan qayta oching. Hisobingiz tekshirilgach, buyurtmangiz ko‘rinadi."
+                : "Shu brauzerda davom etish uchun hisobingizga kiring yoki yuqoridagi tugma orqali Telegram’ga qayting. To‘lov yo‘qolmaydi."}
             </p>
-            <Link className="button" href="/dashboard">
-              Hisobga kirish
+            <Link className="button secondary" href="/dashboard">
+              Brauzerda hisobga kirish
             </Link>
           </>
+        ) : error && orders.length === 0 ? (
+          <p>Buyurtmalar hozircha yuklanmadi. Qayta tekshiring.</p>
         ) : (
           <>
             {orders.length > 1 && (
@@ -249,7 +321,17 @@ export function PaymentReturn() {
             )}
           </>
         )}
-        {error && <p role="status">{error}</p>}
+        {error && (
+          <>
+            <p role="status">{error}</p>
+            <button
+              className="button secondary"
+              onClick={() => setRetry((value) => value + 1)}
+            >
+              Qayta tekshirish
+            </button>
+          </>
+        )}
         <Link className={styles.link} href="/dashboard">
           Taklifnomalarim
         </Link>

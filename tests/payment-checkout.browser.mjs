@@ -7,7 +7,7 @@ import { spawn } from "node:child_process";
 import { readFile, writeFile } from "node:fs/promises";
 
 test(
-  "checkout fresh tap, recovery, order retention and verified-status UI",
+  "checkout handoff, recovery and authenticated Mini App return",
   { timeout: 180000 },
   async () => {
     const require = createRequire(
@@ -51,6 +51,8 @@ test(
         env: {
           ...process.env,
           DATABASE_URL: "",
+          TELEGRAM_BOT_USERNAME: "fixture_bot",
+          TELEGRAM_MAIN_MINI_APP_ENABLED: "false",
           NODZE_API_KEY: "",
           NODZE_WEBHOOK_SECRET: "",
           TAKLIFNOMA_BUILD_DIST_DIR: ".next-payment-browser-test",
@@ -87,6 +89,7 @@ test(
         const requests = [],
           errors = [];
         let confirmed = false;
+        let verified = mode === "browser";
         await context.addInitScript(
           ({ mode }) => {
             window.launches = [];
@@ -142,10 +145,27 @@ test(
           }
           if (!url.pathname.startsWith("/api/")) return route.continue();
           requests.push(`${request.method()} ${url.pathname}`);
-          if (url.pathname === "/api/payments")
+          const user = {
+            id: "fixture-creator",
+            telegramUserId: "123",
+            displayName: "Creator",
+            phoneShared: true,
+            isAdmin: false,
+          };
+          if (url.pathname === "/api/auth/telegram/mini-app") {
+            verified = true;
+            return route.fulfill({ json: { user } });
+          }
+          if (url.pathname === "/api/auth/session")
             return route.fulfill({
-              json: { orders: [{ ...order, id: "newer-order" }, order] },
+              json: { user: verified ? user : null, configured: true },
             });
+          if (url.pathname === "/api/payments")
+            return verified
+              ? route.fulfill({
+                  json: { orders: [{ ...order, id: "newer-order" }, order] },
+                })
+              : route.fulfill({ status: 401, json: {} });
           if (url.pathname === `/api/payments/${order.id}/refresh`)
             return route.fulfill({
               json: {
@@ -264,6 +284,156 @@ test(
         assert.deepEqual(errors, []);
         await context.close();
       }
+
+      // Fresh external browser: no inherited Mini App cookie, no private data.
+      // Then simulate Telegram opening a fresh launch into the root route.
+      const context = await browser.newContext({
+        viewport: { width: 390, height: 844 },
+      });
+      const calls = [],
+        pageErrors = [];
+      let verified = false,
+        rejectLaunch = false;
+      const rawLaunch = "start_param=payment_return&user=fixture&hash=fixture";
+      const returnedUser = {
+        id: "returning-owner",
+        telegramUserId: "456",
+        displayName: "Returning owner",
+        phoneShared: true,
+        isAdmin: true,
+      };
+      await context.route("**/*", async (route) => {
+        const request = route.request(),
+          url = new URL(request.url());
+        if (url.origin !== origin) {
+          if (url.hostname === "telegram.org")
+            return route.fulfill({
+              body: "",
+              contentType: "application/javascript",
+            });
+          return route.abort();
+        }
+        if (!url.pathname.startsWith("/api/")) return route.continue();
+        calls.push(url.pathname);
+        if (url.pathname === "/api/auth/telegram/mini-app") {
+          assert.equal(request.postDataJSON().initData, rawLaunch);
+          if (rejectLaunch)
+            return route.fulfill({
+              status: 401,
+              json: { error: { message: "Invalid launch" } },
+            });
+          verified = true;
+          return route.fulfill({ json: { user: returnedUser } });
+        }
+        if (url.pathname === "/api/auth/session")
+          return route.fulfill({
+            json: { user: verified ? returnedUser : null, configured: true },
+          });
+        if (url.pathname === "/api/payments") {
+          assert.equal(
+            verified,
+            true,
+            "signed launch verified before private orders",
+          );
+          return route.fulfill({
+            json: { orders: [{ ...order, id: "newer-order" }, order] },
+          });
+        }
+        if (url.pathname === `/api/payments/${order.id}/refresh`)
+          return route.fulfill({ json: { order } });
+        return route.abort();
+      });
+      const page = await context.newPage();
+      page.on("pageerror", (error) => pageErrors.push(error.message));
+      await page.goto(origin + "/payment/return");
+      await page
+        .getByRole("link", { name: "Brauzerda hisobga kirish" })
+        .waitFor();
+      assert.equal(
+        await page
+          .getByRole("link", { name: "Telegram’da davom etish" })
+          .getAttribute("href"),
+        "https://t.me/fixture_bot?start=payment_return",
+      );
+      assert.equal(
+        calls.includes("/api/payments"),
+        false,
+        "anonymous return cannot expose orders",
+      );
+      assert.equal(
+        calls.includes("/api/auth/telegram/start"),
+        false,
+        "no repeated interactive login automatically",
+      );
+      await page.evaluate((id) => {
+        localStorage.setItem("nodze-order:returning-owner", id);
+        sessionStorage.clear();
+      }, order.id);
+      await page.goto(
+        `${origin}/#tgWebAppData=${encodeURIComponent(rawLaunch)}`,
+      );
+      await page.waitForURL("**/payment/return**");
+      await page
+        .getByRole("button", { name: "Click orqali davom etish", exact: true })
+        .waitFor();
+      assert.equal(
+        await page.locator("select").inputValue(),
+        order.id,
+        "recover account-scoped selection in fresh Mini App",
+      );
+      assert.equal(
+        await page
+          .getByRole("link", { name: "Brauzerda hisobga kirish" })
+          .count(),
+        0,
+      );
+      assert.ok(
+        !page.url().includes("/admin"),
+        "explicit payment launch takes priority for admins",
+      );
+      assert.ok(
+        calls.indexOf("/api/auth/telegram/mini-app") <
+          calls.indexOf("/api/payments"),
+      );
+      assert.deepEqual(pageErrors, []);
+
+      // Real SDKs keep start_param in initData after navigation. Do not consume
+      // that original launch again when leaving the payment page.
+      await page.evaluate((data) => {
+        window.Telegram = {
+          WebApp: { initData: data, ready() {}, expand() {} },
+        };
+      }, rawLaunch);
+      await page
+        .getByRole("link", { name: "Taklifnomalarim", exact: true })
+        .click();
+      await page.waitForURL("**/admin");
+      assert.ok(!page.url().includes("/payment/return"));
+
+      // Even an existing browser account must not authorize a failed Telegram launch.
+      rejectLaunch = true;
+      const beforeFailure = calls.filter(
+        (path) => path === "/api/payments",
+      ).length;
+      await page.goto(
+        `${origin}/payment/return#tgWebAppData=${encodeURIComponent(rawLaunch)}`,
+      );
+      await page
+        .getByRole("button", { name: "Qayta tekshirish", exact: true })
+        .waitFor();
+      assert.equal(
+        calls.filter((path) => path === "/api/payments").length,
+        beforeFailure,
+      );
+      assert.equal(
+        await page.getByText(order.templateName, { exact: true }).count(),
+        0,
+      );
+      assert.equal(
+        calls.some((path) => path.includes("/checkout")),
+        false,
+      );
+      await context.close();
     } finally {
       await browser?.close();
       app.kill();

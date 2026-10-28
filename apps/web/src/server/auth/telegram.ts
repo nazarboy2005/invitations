@@ -3,6 +3,7 @@ import type postgres from "postgres";
 import { AuthError } from "./index";
 import { digest, isOwnContact, type TelegramIdentity } from "./crypto";
 import { hasAdminRole } from "./admin-role";
+import { paymentReturnPath } from "../../modules/payments/payment-navigation";
 
 type TelegramMessage = {
   message_id?: number;
@@ -217,7 +218,27 @@ async function processLocked(update: Update, db: postgres.TransactionSql) {
       return;
     }
     const start = message.text?.match(/^\/start(?:@\w+)?(?:\s+(\S+))?$/);
-    if (start?.[1]?.startsWith("auth_")) {
+    const paymentPath = paymentReturnPath(start?.[1]);
+    if (paymentPath) {
+      if (!user.phone_shared_at) await askContact(message.chat.id);
+      else
+        await telegramCall("sendMessage", {
+          chat_id: message.chat.id,
+          text: "To‘lov holatini Mini App’da tekshiring. Buyurtmangiz saqlangan; qayta to‘lamang.",
+          reply_markup: {
+            inline_keyboard: [
+              [
+                {
+                  text: "To‘lov holatini ochish",
+                  web_app: {
+                    url: new URL(paymentPath, process.env.APP_URL).href,
+                  },
+                },
+              ],
+            ],
+          },
+        });
+    } else if (start?.[1]?.startsWith("auth_")) {
       const token = start[1].slice(5);
       const [auth] = /^[A-Za-z0-9_-]{43}$/.test(token)
         ? await db`UPDATE auth_requests SET user_id=${user.id},state='identified' WHERE token_hash=${digest(token)} AND expires_at>now() AND state IN ('pending','identified') AND (user_id IS NULL OR user_id=${user.id}) RETURNING *`
