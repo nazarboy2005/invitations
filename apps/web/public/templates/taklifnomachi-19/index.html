@@ -243,8 +243,10 @@
   if(!a||!b)return;a.volume=0.6;
   
   function stopPulse(){b.style.animation='none';}
-  function play(){var p=a.play();if(p&&p.then){p.then(stopPulse).catch(function(){});}}
-  b.addEventListener('click',function(){if(a.paused){play();}else{a.pause();}});
+  function sync(){var on=!a.paused&&!a.ended;b.setAttribute('aria-pressed',String(on));b.setAttribute('aria-label',on?'Musiqa ijro etilmoqda. O‘chirish uchun bosing':'Musiqa: ijro etish uchun bosing');b.dataset.playing=String(on);b.style.background=on?'#6b5a34':'#1c1c1c';if(on)stopPulse();}
+  function play(){var p=a.play();if(p&&p.then){p.then(sync).catch(sync);}}
+  ['play','pause','ended','error'].forEach(function(event){a.addEventListener(event,sync);});
+  b.addEventListener('click',function(){if(a.paused){play();}else{a.pause();}sync();});sync();
   // Start on the first interaction ANYWHERE ELSE on the page (autoplay policies) —
   // skip clicks on the button itself, it already toggles play/pause above. Without
   // this guard, a tap directly on the button fires BOTH handlers on the same click:

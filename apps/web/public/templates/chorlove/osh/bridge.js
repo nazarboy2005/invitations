@@ -39,6 +39,14 @@
     hide(q(".osh-volume-2"), !musicOn);
     musicButton?.setAttribute("aria-pressed", String(musicOn));
   };
+  const syncMusicPlayback = () => {
+    if (musicAudio) musicOn = !musicAudio.paused && !musicAudio.ended;
+    updateMusicIcon();
+  };
+  musicAudio?.addEventListener("play", syncMusicPlayback);
+  musicAudio?.addEventListener("pause", syncMusicPlayback);
+  musicAudio?.addEventListener("ended", syncMusicPlayback);
+  musicAudio?.addEventListener("error", syncMusicPlayback);
   const stopMusic = () => {
     if (musicFadeTimer) clearInterval(musicFadeTimer);
     musicFadeTimer = 0;

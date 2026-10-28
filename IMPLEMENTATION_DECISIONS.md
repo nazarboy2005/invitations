@@ -1872,3 +1872,13 @@ Development agents are distinct from production queue workers. The running app w
 - Use the single Visol navbar on home, templates and all dashboard/activity pages.
 - Studio, preview, public invitations, payment return and administrator routes retain focused controls without the public navbar.
 - Dashboard layout owns navigation and reserves space for the fixed header. Remove the legacy navbar implementation; preserve signed-in labels and admin mobile entry.
+
+## Template music toggle states (2026-10-28)
+
+- User requirement: review published designs first, then unpublished designs, one by one; fix only templates where the music control's visible on/off state disagrees with playback.
+- Confirmed repair: published Velora showed its off-state artwork while audio played, and its initial paused state showed the on artwork. The adapted control now derives artwork from the audio element's paused state and follows play/pause events. Keep the archived source untouched.
+- Confirmed repair: published Golden Card showed the enabled music preference as active even before playback began or when playback was blocked. Its icon, pressed state and action label now follow actual audio playback events.
+- Confirmed repair: published Orchid Amplop starts music when the cover opens, but the control only refreshed its status after a manual toggle. It now synchronizes from actual audio events, including cover autoplay.
+- Published fixes from the one-by-one audit: Velora, Golden Card, Orchid Amplop, Chorlove Palov, Chorlove Osh, Glass Pink, Cloud Castle, Velvet Royale, Palace Rose, Fairy and Golden Hour. Each control now reflects actual audio playback state, including automatic playback and playback failures.
+- Unpublished fixes: Invitate Palov, Green Gold, Monochrome Editorial, Xatna, Amru Maruf, Taklifnomachi 16, 17, 18 and 19, Manor Edition, Islamic Edition and Luxury Gold. Each control now synchronizes its visual and accessible pressed state with audio events.
+- Inventory complete: 63 published and 43 unpublished catalog entries checked in that order. Templates without a confirmed mismatch were left unchanged; Doira's control is for percussion sound effects rather than background music.

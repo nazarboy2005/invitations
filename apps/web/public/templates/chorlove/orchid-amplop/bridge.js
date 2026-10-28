@@ -26,6 +26,13 @@
   let lightboxSequence = 0;
   let galleryTrigger = null;
   const text = (key) => (copy[current?.locale] || copy["uz-Latn"])[key] || key;
+  const syncMusicControl = () => {
+    const audio = $("[data-orchid-audio]"), button = $("[data-orchid-music]");
+    if (!audio || !button) return;
+    const playing = !audio.paused && !audio.ended;
+    button.setAttribute("aria-pressed", String(playing));
+    button.setAttribute("aria-label", text(playing ? "musicOff" : "musicOn"));
+  };
   const put = (selector, value, scope = document) => {
     const node = $(selector, scope);
     if (node) node.textContent = value == null ? "" : String(value);
@@ -307,7 +314,7 @@
     if (rsvpName && envelope.guestName) { rsvpName.value = envelope.guestName; rsvpName.readOnly = true; }
     if (envelope.reducedMotion || matchMedia("(prefers-reduced-motion: reduce)").matches) document.documentElement.classList.add("orchid-reduced-motion"); else document.documentElement.classList.remove("orchid-reduced-motion");
     document.documentElement.classList.add("orchid-ready");
-    const audio = $("[data-orchid-audio]"); audio.src = safeUrl(data.music?.url) || ""; show("[data-orchid-music]", !!audio.src);
+    const audio = $("[data-orchid-audio]"); audio.src = safeUrl(data.music?.url) || ""; show("[data-orchid-music]", !!audio.src); syncMusicControl();
     const sampleOnly = !!envelope.preview;
     $$('[data-orchid-rsvp] input,[data-orchid-rsvp] select,[data-orchid-rsvp] button[type="submit"],[data-orchid-rsvp-choice],[data-orchid-wishes-form] input,[data-orchid-wishes-form] textarea,[data-orchid-wishes-form] button[type="submit"]').forEach((el) => { el.disabled = sampleOnly; });
     show("[data-orchid-main]", opened);
@@ -322,7 +329,12 @@
     // The source AnimatePresence waits for its longest child exit: envelope 0.9s + 0.22s delay.
     window.setTimeout(() => { opened = true; gate.hidden = true; show("[data-orchid-main]", true); scrollTemplateToTop(); }, document.documentElement.classList.contains("orchid-reduced-motion") ? 0 : 1120);
   });
-  $("[data-orchid-music]").addEventListener("click", async (event) => { const audio = $("[data-orchid-audio]"); if (audio.paused) { try { await audio.play(); audioStarted = true; } catch {} } else audio.pause(); const button = event.currentTarget; button.setAttribute("aria-pressed", String(!audio.paused)); button.setAttribute("aria-label", text(audio.paused ? "musicOn" : "musicOff")); });
+  const musicAudio = $("[data-orchid-audio]");
+  musicAudio.addEventListener("play", syncMusicControl);
+  musicAudio.addEventListener("pause", syncMusicControl);
+  musicAudio.addEventListener("ended", syncMusicControl);
+  musicAudio.addEventListener("error", syncMusicControl);
+  $("[data-orchid-music]").addEventListener("click", async () => { if (musicAudio.paused) { try { await musicAudio.play(); audioStarted = true; } catch {} } else musicAudio.pause(); syncMusicControl(); });
   $("[data-orchid-calendar]").addEventListener("click", () => {
     const data = current?.data || {}; const start = new Date(data.dateTime || ""); if (!Number.isFinite(start.getTime())) return;
     const end = new Date(start.getTime() + 3 * 60 * 60 * 1000);

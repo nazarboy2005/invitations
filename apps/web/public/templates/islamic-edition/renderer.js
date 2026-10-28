@@ -69,7 +69,10 @@
     const gallery = root.querySelector("#gallery"); const move = d => gallery?.scrollBy({ left: d * (gallery.clientWidth * .82 + 16), behavior: reduced ? "auto" : "smooth" });
     root.querySelector("#gallery-prev")?.addEventListener("click", () => move(-1)); root.querySelector("#gallery-next")?.addEventListener("click", () => move(1));
     root.querySelector("#copy-gift")?.addEventListener("click", async () => { try { await navigator.clipboard.writeText(data.toyona?.cardNumber || ""); root.querySelector("#gift-status").textContent = l.thanks; } catch { root.querySelector("#gift-status").textContent = data.toyona?.cardNumber || ""; } });
-    const audio = root.querySelector("#music"); root.querySelector("#music-toggle")?.addEventListener("click", () => audio.paused ? audio.play().catch(() => {}) : audio.pause());
+    const audio = root.querySelector("#music"), musicToggle = root.querySelector("#music-toggle");
+    const syncMusicToggle = () => { if (!audio || !musicToggle) return; const playing = !audio.paused; musicToggle.textContent = playing ? "♫" : "×"; musicToggle.setAttribute("aria-pressed", String(playing)); };
+    ["play", "pause", "ended", "error"].forEach(event => audio?.addEventListener(event, syncMusicToggle));
+    musicToggle?.addEventListener("click", () => audio.paused ? audio.play().catch(() => {}) : audio.pause()); syncMusicToggle();
     const end = Date.parse(data.dateTime || ""); const tick = () => { if (!end) return; const left = Math.max(0, end - Date.now()); for (const [key, unit, mod] of [["days",864e5,0],["hours",36e5,24],["minutes",6e4,60],["seconds",1e3,60]]) { const node = root.querySelector(`[data-count="${key}"]`); if (node) node.textContent = String(mod ? Math.floor(left / unit) % mod : Math.floor(left / unit)); } }; tick(); clearInterval(timer); timer = setInterval(tick, 1000);
     const api = data.apiBase || "";
     if (data.wishesEnabled && !data.preview && api) fetch(`${api}/wishes`).then(r => r.ok ? r.json() : null).then(payload => { const list = root.querySelector("#wish-list"); if (list && payload?.wishes) list.innerHTML = payload.wishes.map(w => `<article class="section-wishes__item"><h3>${esc(w.name)}</h3><p>${esc(w.message)}</p></article>`).join(""); }).catch(() => {});

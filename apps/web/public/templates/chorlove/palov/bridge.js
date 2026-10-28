@@ -252,28 +252,34 @@
     audio.removeAttribute("src");
     if (!url) return;
     audio.src = url;
-    let playing = false;
+    let playing = !audio.paused;
     const updateIcon = () => {
       button.setAttribute("aria-label", playing ? text("pause") : text("play"));
+      button.setAttribute("aria-pressed", String(playing));
       button.innerHTML = playing
         ? '<svg aria-hidden="true" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4h4v16H6zM14 4h4v16h-4z"></path></svg>'
         : '<svg aria-hidden="true" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z"></path><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14"></path></svg>';
     };
+    const syncPlayback = () => {
+      playing = !audio.paused;
+      updateIcon();
+    };
+    audio.onplay = syncPlayback;
+    audio.onpause = syncPlayback;
+    audio.onended = syncPlayback;
+    audio.onerror = syncPlayback;
     updateIcon();
     button.onclick = async () => {
-      if (playing) {
+      if (!audio.paused) {
         audio.pause();
-        playing = false;
       } else {
         try {
           await audio.play();
-          playing = true;
         } catch {
-          playing = false;
           button.title = text("play");
         }
       }
-      updateIcon();
+      syncPlayback();
     };
   }
 

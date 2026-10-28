@@ -3,6 +3,14 @@ const music = document.getElementById("bgMusic");
 const musicToggle = document.getElementById("musicToggle");
 let musicStarted = false;
 
+function syncMusicToggle() {
+  const playing = !music.paused;
+  musicToggle.classList.toggle("playing", playing);
+  musicToggle.setAttribute("aria-pressed", String(playing));
+}
+
+["play", "pause", "ended", "error"].forEach(event => music.addEventListener(event, syncMusicToggle));
+
 function tryPlayMusic() {
   music
     .play()
@@ -49,7 +57,7 @@ musicToggle.addEventListener("click", () => {
     tryPlayMusic();
   } else {
     music.pause();
-    musicToggle.classList.remove("playing");
+    syncMusicToggle();
   }
 });
 

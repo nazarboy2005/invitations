@@ -178,11 +178,12 @@
   function syncMusicLabel() {
     if (!musicButton) return;
     const words = copy[currentLocale] ?? copy["uz-Latn"];
-    musicButton.setAttribute("aria-label", musicEnabled ? words.musicOn : words.musicOff);
-    musicButton.setAttribute("aria-pressed", String(musicEnabled));
+    const playing = !audio.paused && !audio.ended;
+    musicButton.setAttribute("aria-label", playing ? words.musicOn : words.musicOff);
+    musicButton.setAttribute("aria-pressed", String(playing));
     const icon = musicButton.querySelector("svg");
     if (icon) {
-      icon.innerHTML = musicEnabled
+      icon.innerHTML = playing
         ? '<path d="M11 5 6 9H2v6h4l5 4V5Z"></path><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>'
         : '<path d="M11 4.702a.7.7 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.7.7 0 0 0 11 19.298z"></path><path d="m16.5 14.5 5-5"></path><path d="m16.5 9.5 5 5"></path>';
     }
@@ -342,6 +343,11 @@
     try { await audio.play(); } catch { /* The visitor may keep music paused. */ }
   }
 
+  audio.addEventListener("play", syncMusicLabel);
+  audio.addEventListener("pause", syncMusicLabel);
+  audio.addEventListener("ended", syncMusicLabel);
+  audio.addEventListener("error", syncMusicLabel);
+
   root.addEventListener("click", (event) => {
     const languageButton = event.target.closest("[data-locale]");
     if (languageButton) {
@@ -352,8 +358,14 @@
     if (event.target.closest("[data-golden-map]")) return;
     if (event.target.closest("[aria-label]") === musicButton) {
       event.preventDefault();
-      musicEnabled = !musicEnabled;
-      if (musicEnabled) void tryPlay(); else { audio.pause(); audio.currentTime = 0; }
+      if (!audio.paused && !audio.ended) {
+        musicEnabled = false;
+        audio.pause();
+        audio.currentTime = 0;
+      } else {
+        musicEnabled = true;
+        void tryPlay();
+      }
       syncMusicLabel();
       return;
     }
