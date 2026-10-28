@@ -333,6 +333,7 @@ export function Studio({
   const [busy, setBusy] = useState(false);
   const [publishing, setPublishing] = useState(false);
   const [publishingMode, setPublishingMode] = useState("free");
+  const [paidInvitationId, setPaidInvitationId] = useState("");
   const [publishIssues, setPublishIssues] = useState<PublicationIssue[]>([]);
   const [publicUrl, setPublicUrl] = useState<string>();
   const pendingAction = useRef<"save" | "publish">("save");
@@ -420,6 +421,7 @@ export function Studio({
 
   useEffect(() => {
     let alive = true;
+    setPaidInvitationId("");
     async function recover() {
       function bindDraftUrl(id: string) {
         if (initialInvitation) return;
@@ -443,6 +445,27 @@ export function Studio({
           ownerId.current =
             session.user?.id ??
             (initialInvitation ? "unavailable-private-owner" : null);
+          const savedId =
+            initialInvitation?.id ??
+            new URLSearchParams(window.location.search).get("draft");
+          if (session.user && savedId && !adminContext) {
+            void studioFetch(
+              `/api/invitations/${encodeURIComponent(savedId)}/payment`,
+              { cache: "no-store" },
+            )
+              .then((result) => (result.ok ? result.json() : null))
+              .then((result) => {
+                if (
+                  alive &&
+                  result?.order?.invitationId === savedId &&
+                  result.order.status === "SUCCEEDED"
+                )
+                  setPaidInvitationId(savedId);
+              })
+              .catch(() => {
+                /* Payment authority is rechecked when publishing. */
+              });
+          }
         }
       } catch {
         /* Private stored drafts stay hidden if account identity cannot be checked. */
@@ -1080,11 +1103,6 @@ export function Studio({
               result.error?.message ??
                 "To‘lovni boshlab bo‘lmadi. Qoralamangiz saqlangan.",
             );
-          try {
-            sessionStorage.setItem("nodze-order", result.order.id);
-          } catch {
-            /* Return page also loads owned orders. */
-          }
           // Checkout was prepared asynchronously. Keep the order in our app and
           // let a fresh user tap open its saved URL through Telegram's SDK.
           window.location.assign(
@@ -2921,9 +2939,11 @@ export function Studio({
                     <strong>{selectedTemplate.name}</strong>
                     <b>{formatPrice(selectedTemplate.priceMinor)}</b>
                     <small>
-                      {publishingMode === "paid"
-                        ? "To‘lov Click orqali amalga oshiriladi. Tasdiqdan so‘ng taklifnoma nashr qilinadi."
-                        : "Hozirgi bosqichda nashr qilish uchun to‘lov talab qilinmaydi."}
+                      {paidInvitationId === invitation.id
+                        ? "To‘lov qabul qilingan. Nashr qilish uchun qayta to‘lov talab qilinmaydi."
+                        : publishingMode === "paid"
+                          ? "To‘lov Click orqali amalga oshiriladi. Tasdiqdan so‘ng taklifnoma nashr qilinadi."
+                          : "Hozirgi bosqichda nashr qilish uchun to‘lov talab qilinmaydi."}
                     </small>
                   </div>
                 ) : (
@@ -3484,9 +3504,11 @@ export function Studio({
                   <span>MEHMONLARGA ULASHISH</span>
                   <h2>Tayyor bo‘ldimi?</h2>
                   <p>
-                    {publishingMode === "paid"
-                      ? `Nashr qilish: ${selectedTemplate ? formatPrice(selectedTemplate.priceMinor) : "dizayn narxi bo‘yicha"}. Click tasdig‘idan so‘ng taklifnoma avtomatik nashr qilinadi. To‘lov boshlanganidan keyin ismlar, sana va dizaynni almashtirib bo‘lmaydi. `
-                      : "Hozir nashr qilish bepul. "}
+                    {paidInvitationId === invitation.id
+                      ? "To‘lov qabul qilingan. Ma’lumotlarni tekshirib, nashrni yakunlang. Qo‘shimcha to‘lov talab qilinmaydi. "
+                      : publishingMode === "paid"
+                        ? `Nashr qilish: ${selectedTemplate ? formatPrice(selectedTemplate.priceMinor) : "dizayn narxi bo‘yicha"}. Click tasdig‘idan so‘ng taklifnoma avtomatik nashr qilinadi. To‘lov boshlanganidan keyin ismlar, sana va dizaynni almashtirib bo‘lmaydi. `
+                        : "Hozir nashr qilish bepul. "}
                     Nashrdan so‘ng ismlar, mezbon, tadbir turi, sana va dizayn
                     qulflanadi. Matn, manzil va boshqa tafsilotlarni tadbir kuni
                     tugaguncha yangilashingiz mumkin.
@@ -3501,9 +3523,11 @@ export function Studio({
                   <Send size={16} />
                   {publishing
                     ? "Tayyorlanmoqda…"
-                    : publishingMode === "paid"
-                      ? `To‘lash va nashr qilish${selectedTemplate ? ` · ${formatPrice(selectedTemplate.priceMinor)}` : ""}`
-                      : "Nashr qilish"}
+                    : paidInvitationId === invitation.id
+                      ? "Nashrni yakunlash"
+                      : publishingMode === "paid"
+                        ? `To‘lash va nashr qilish${selectedTemplate ? ` · ${formatPrice(selectedTemplate.priceMinor)}` : ""}`
+                        : "Nashr qilish"}
                 </button>
               </section>
             )}

@@ -14,7 +14,11 @@ export async function GET() {
   try {
     const user = await authenticatedUser();
     return NextResponse.json(
-      { invitations: await listInvitations(user.id) },
+      {
+        invitations: await listInvitations(user.id),
+        publishingMode:
+          process.env.PUBLISHING_MODE === "paid" ? "paid" : "free",
+      },
       { headers: privateHeaders },
     );
   } catch (e) {

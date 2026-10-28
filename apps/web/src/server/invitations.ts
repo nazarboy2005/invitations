@@ -10,7 +10,10 @@ import { getSessionUser } from "./auth";
 import { assertPublicMedia, assertPublishable } from "./publication";
 import { requireAdmin, recordAdminChange } from "./admin";
 import type { AdminInvitationAction } from "./admin-invitation-access";
-import { paymentIdentity } from "@taklifnoma/contracts/payment";
+import {
+  paymentIdentity,
+  type InvitationPaymentSummary,
+} from "@taklifnoma/contracts/payment";
 export async function authenticatedUser(): Promise<SessionUser> {
   const user = await getSessionUser();
   if (!user)
@@ -29,13 +32,32 @@ export async function getOwnedInvitation(
 }
 export async function listInvitations(
   userId: string,
-): Promise<Array<Invitation & { createdAt: string; viewCount: number }>> {
+): Promise<
+  Array<
+    Invitation & {
+      createdAt: string;
+      viewCount: number;
+      payment: InvitationPaymentSummary | null;
+    }
+  >
+> {
   const rows =
-    await getDb()`SELECT data,status,created_at,view_count FROM invitations WHERE owner_id=${userId} ORDER BY created_at DESC,id DESC LIMIT 100`;
+    await getDb()`SELECT i.data,i.status,i.created_at,i.view_count,p.id AS payment_id,p.status AS payment_status,p.amount_minor
+      FROM invitations i LEFT JOIN LATERAL (
+        SELECT id,status,amount_minor FROM payment_orders
+        WHERE invitation_id=i.id AND owner_id=${userId} ORDER BY created_at DESC,id DESC LIMIT 1
+      ) p ON true WHERE i.owner_id=${userId} ORDER BY i.created_at DESC,i.id DESC LIMIT 100`;
   return rows.map((row) => ({
     ...invitationSchema.parse({ ...row.data, status: row.status }),
     createdAt: new Date(row.created_at).toISOString(),
     viewCount: Number(row.view_count ?? 0),
+    payment: row.payment_id
+      ? {
+          id: String(row.payment_id),
+          status: row.payment_status as InvitationPaymentSummary["status"],
+          amountMinor: Number(row.amount_minor),
+        }
+      : null,
   }));
 }
 export async function saveInvitation(

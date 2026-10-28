@@ -66,6 +66,13 @@
   for accounts without active administrator access, including suspended accounts
   and users who have not shared a phone number. Do not send denial messages,
   Telegram IDs, onboarding prompts or buttons; still mark the update processed.
+- User confirmed `invitations-wk6h.vercel.app` as the canonical live website
+  for the Telegram bot. The bot webhook was moved from `invitations-liart`
+  to `https://invitations-wk6h.vercel.app/api/telegram/webhook` and verified
+  through Telegram's API, preserving pending updates and delivery settings.
+  Non-writing preflight requests verified the receiver's configured secret
+  and matching login origin. The supplied admin IDs pass local role checks;
+  the deployed allowlist and real-account admin entry still need verification.
 - User follow-up: Mini App admins must enter the admin workspace automatically,
   without typing `/admin`. Resolve the verified server session on home/account
   entry routes even without the SDK; recover opaque signed launch data from
@@ -1262,6 +1269,22 @@ Database additions agreed as part of this policy:
 
 Confirmed user intent:
 
+- User correction (2026-10-28): payment screens and dashboard actions must be
+  specific to one invitation. Remove the account-wide order selector and generic
+  “To‘lov holati” action. Unpaid invitations offer “To‘lov qilish”; pending
+  payments resume the existing checkout; paid drafts show “To‘langan” and
+  “Nashrni yakunlash”, with no checkout or status-check controls. Published
+  invitations prioritize opening/sharing and editing. Retain refund/uncertain
+  states without inviting another charge. Browser-only changes must be saved
+  through the editor before checkout.
+  The editor also uses the owned payment record to label paid-draft publication
+  “Nashrni yakunlash” and explain that another payment is unnecessary.
+- Implementation: owner-checked invitation/order payment endpoints, per-card
+  latest-payment summaries and a compact invitation/date/design/amount view.
+  An explicit missing/inaccessible order must fail without substituting another
+  invitation. The fixed provider return may recover an account-scoped remembered
+  order; without that context, send the creator to “Taklifnomalarim” to choose
+  the invitation. Never select an arbitrary recent order.
 - User authorized implementation and necessary tests on 2026-10-28, using the existing owned Nodze engine at `https://payments.nodze.org/api/v1` for website Click checkout. The updated supplied integration guide is preserved in `docs/NODZE_INTEGRATION.md`. Do not create or attempt real provider payments during agent testing; use mocked provider responses and disposable database fixtures. No external application deployment was requested. The follow-up request explicitly authorizes repairing the existing Telegram Mini App checkout handoff as recorded below.
 - User requires all template prices to be **1,000 UZS for testing**. Migration 0161 changes current template rows; typed fallback prices match. Store 100,000 minor units, send exact JSON decimal `1000.00` soums to Nodze. Existing payment/order snapshots remain unchanged; administrators retain future pricing control.
 - Nodze calls are backend-only with a project Bearer key and persisted original request bodies/idempotency keys. Confirm only signed `payment.succeeded` or authenticated `SUCCEEDED`; never the browser return. Verify HMAC-SHA256 over exact `timestamp.eventId.rawBody` bytes, five-minute timestamp tolerance, matching event-header/body IDs, exact order/payment/amount/currency and transactional event-ID deduplication/fulfillment. REJECTED may subsequently resolve; stale events must not undo success. Refund/reversal operations are disabled by Nodze.

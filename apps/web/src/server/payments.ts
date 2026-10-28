@@ -10,6 +10,7 @@ import {
   nextPaymentState,
   type PaymentOrderView,
   type PaymentState,
+  type InvitationPaymentContext,
 } from "@taklifnoma/contracts/payment";
 import { ApiError } from "./api";
 import {
@@ -28,6 +29,7 @@ import {
   type NodzePayment,
 } from "./nodze";
 import { toSessionUser } from "./auth";
+import { getOwnedInvitation } from "./invitations";
 import { enqueuePaymentNotifications } from "./payment-notifications";
 
 type Order = {
@@ -344,6 +346,40 @@ export async function listPaymentOrders(userId: string) {
     Order[]
   >`SELECT p.*,CASE WHEN i.status='published' THEN i.slug END AS slug FROM payment_orders p JOIN invitations i ON i.id=p.invitation_id WHERE p.owner_id=${userId} ORDER BY p.created_at DESC LIMIT 20`;
   return rows.map(orderView);
+}
+
+/** Resolve the current attempt for one owned invitation, including old return links. */
+export async function getInvitationPayment(
+  invitationId: string,
+  userId: string,
+  explicitOrder?: PaymentOrderView,
+): Promise<InvitationPaymentContext> {
+  const invitation = await getOwnedInvitation(invitationId, userId);
+  if (
+    !invitation ||
+    (explicitOrder && explicitOrder.invitationId !== invitationId)
+  )
+    throw new ApiError(404, "NOT_FOUND", "Taklifnoma topilmadi.");
+  const [template] =
+    await getDb()`SELECT name,price_minor FROM templates WHERE id=${invitation.templateId}`;
+  const [row] = await getDb()<
+    Order[]
+  >`SELECT p.*,CASE WHEN i.status='published' THEN i.slug END AS slug
+      FROM payment_orders p JOIN invitations i ON i.id=p.invitation_id
+      WHERE p.invitation_id=${invitationId} AND p.owner_id=${userId}
+      ORDER BY p.created_at DESC,p.id DESC LIMIT 1`;
+  const order = row ? orderView(row) : null;
+  return {
+    invitation,
+    order,
+    template: template
+      ? {
+          name: String(template.name),
+          priceMinor: Number(template.price_minor),
+        }
+      : null,
+    publishingMode: process.env.PUBLISHING_MODE === "paid" ? "paid" : "free",
+  };
 }
 export async function reconcilePayments() {
   const rows =

@@ -12,9 +12,11 @@ the native failure itself was not reproduced in this session.
 
 The studio now opens `/payment/return?order=<original-order-id>` after preparing
 the payment. The backend already persists the Nodze payment ID, checkout URL and
-order association. The page retrieves account-owned orders and selects that ID
-before falling back to session storage/the most recent order. It also retains
-selection in the URL and session storage when the user changes orders.
+order association. The page reads only that owned order and its invitation.
+It has no account-wide order selector. An inaccessible order fails without
+substituting another invitation; an older valid attempt resolves the current
+attempt for the same invitation. The selected ID persists in the URL and
+account-scoped local storage.
 
 An explicit fresh tap calls `Telegram.WebApp.openLink(checkoutUrl)` synchronously
 inside Telegram. The SDK's mere presence outside Telegram is insufficient to
@@ -30,7 +32,7 @@ backend status verification, idempotency and signed webhook fulfillment remain
 authoritative. Focus/visibility return and the manual refresh action retrieve
 the same order's backend status.
 
-Recovery instructions are always available: use the Telegram browser menu's
+Recovery instructions are available under “Click ochilmayaptimi?”: use the Telegram browser menu's
 external-browser action where available, or copy this same checkout URL into
 Chrome. Clipboard denial reveals a selectable read-only URL. If Click is absent,
 install it and reopen the same URL, or use an available alternative on Click's
@@ -62,7 +64,7 @@ client/version and user settings.
   dispatches are mocked; this is not an Android emulator or physical device test.
 - Web TypeScript check and scoped diff whitespace checks pass.
 
-Run the browser check with `node --test tests/payment-checkout.browser.mjs`.
+Run the browser check with `node --import tsx --test tests/payment-checkout.browser.mjs`.
 Install/provide Playwright and Chrome; `PLAYWRIGHT_MODULE_PATH` can point to an
 existing Playwright package. It starts an isolated local Next server on port
 3103, disables database/provider credentials, intercepts payment APIs, blocks
@@ -114,14 +116,32 @@ endpoint first. Suspended accounts, invalid launches and accounts without
 completed phone onboarding still fail the existing checks. Ordinary browser
 sign-in remains available as a fallback.
 
-The Mini App reads private orders only after verified session resolution. It
-restores the account's last selected order from session storage or an
-account-scoped local-storage ID, provided it matches an owned backend record;
-otherwise it shows recent owned orders. The neutral external return cannot
-identify a specific transaction by itself when no remembered context survives.
-The order selector remains available. IDs are navigation hints, never login
+The Mini App reads private payment data only after verified session resolution.
+It restores the account's last selected order from an account-scoped local-storage
+ID, provided it matches an owned backend record. Without a hint, the return page
+directs the creator to “Taklifnomalarim” to choose an invitation. It never loads
+an arbitrary recent order or offers an order selector. The neutral external return
+cannot identify a specific transaction by itself when no remembered context survives.
+IDs are navigation hints, never login
 credentials or payment confirmation. No session cookies or signed Telegram
 launch data are passed through Click or placed in return links.
+
+The payment page identifies the invitation by actual names, date, design and
+server-provided price. Unpaid invitations offer “To‘lov qilish”; pending ones
+resume the existing Click URL. Paid drafts show “To‘langan” and a direct
+“Nashrni yakunlash” editor action without payment/status controls. Published
+invitations show open/copy actions. Dashboard cards receive a latest-payment
+summary for each invitation, including those outside the old 20-order history
+limit; browser-only edits return to the editor before checkout.
+
+Invitation-scoped UI verification: 15 payment/navigation/handoff unit checks,
+10 disposable-database payment checks, the loopback-provider HTTP lifecycle,
+and mocked Chrome browser QA pass. Browser coverage includes 1440px, 390px and
+320px widths; unpaid checkout creation, pending resume, paid correction,
+publication sharing, failed/refunded states, invalid links, no-context returns,
+per-invitation dashboard actions, storage denial and authenticated Telegram
+return. Screenshots were reviewed for desktop and phone layouts. No real charge
+or application deployment was performed.
 
 Optional one-tap Main Mini App setup:
 

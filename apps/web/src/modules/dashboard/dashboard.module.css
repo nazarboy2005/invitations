@@ -331,6 +331,21 @@
 .cardViews svg {
   flex-shrink: 0;
 }
+.cardPayment {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin: 0;
+  font-size: 11px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+.cardPayment svg {
+  flex-shrink: 0;
+}
+.cardPayment[data-paid="true"] {
+  color: #236044;
+}
 .activityLink {
   color: var(--primary);
   font-size: 10px;
@@ -369,6 +384,19 @@
 }
 .cardActions > .secondaryAction {
   order: -1;
+}
+.cardActions > .paymentAction {
+  background: var(--primary);
+  color: var(--on-primary);
+  border-radius: 7px;
+  padding: 8px 10px;
+  min-height: 40px;
+  text-align: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.cardActions > .paymentAction:hover {
+  background: var(--primary-hover);
 }
 .empty {
   grid-column: 1/-1;

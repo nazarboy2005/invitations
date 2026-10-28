@@ -12,8 +12,12 @@ import {
   applyPayment,
   refreshPayment,
   listPaymentOrders,
+  getInvitationPayment,
 } from "../apps/web/src/server/payments";
-import { saveInvitation } from "../apps/web/src/server/invitations";
+import {
+  saveInvitation,
+  listInvitations,
+} from "../apps/web/src/server/invitations";
 import { publishInvitation } from "../apps/web/src/server/publication";
 import { type NodzePayment } from "../apps/web/src/server/nodze";
 import { completeInvitation } from "./fixtures/publication";
@@ -148,6 +152,64 @@ async function paymentFor(id: string) {
   const [row] = await sql`SELECT payment_id FROM payment_orders WHERE id=${id}`;
   return remote.get(row.payment_id)!;
 }
+test("payment context and dashboard summaries stay bound to one owned invitation", async () => {
+  const first = await draft(),
+    second = await draft(),
+    unpaid = await draft();
+  const firstOrder = await createCheckout(
+    first.id,
+    first.revision,
+    100000,
+    owner,
+  );
+  const secondOrder = await createCheckout(
+    second.id,
+    second.revision,
+    100000,
+    owner,
+  );
+  const firstContext = await getInvitationPayment(first.id, owner.id);
+  assert.equal(firstContext.invitation.id, first.id);
+  assert.equal(firstContext.order?.id, firstOrder.id);
+  assert.equal(firstContext.template?.priceMinor, 100000);
+  assert.equal(
+    (await getInvitationPayment(second.id, owner.id)).order?.id,
+    secondOrder.id,
+  );
+  assert.equal((await getInvitationPayment(unpaid.id, owner.id)).order, null);
+  await fails(getInvitationPayment(first.id, stranger.id), "NOT_FOUND");
+  await fails(
+    getInvitationPayment(first.id, owner.id, secondOrder),
+    "NOT_FOUND",
+  );
+  await fails(getPaymentOrder(randomUUID(), owner.id), "NOT_FOUND");
+  const list = await listInvitations(owner.id);
+  assert.equal(
+    list.find((item) => item.id === first.id)?.payment?.id,
+    firstOrder.id,
+  );
+  assert.equal(
+    list.find((item) => item.id === second.id)?.payment?.id,
+    secondOrder.id,
+  );
+  assert.equal(list.find((item) => item.id === unpaid.id)?.payment, null);
+  assert.equal((await listInvitations(stranger.id)).length, 0);
+
+  // A valid older return link resolves the current attempt for this same
+  // invitation, so a cancelled attempt cannot hide its subsequent payment.
+  const cancelled = await paymentFor(firstOrder.id);
+  await applyPayment({ ...cancelled, status: "CANCELLED" });
+  const replacement = await createCheckout(
+    first.id,
+    first.revision,
+    100000,
+    owner,
+  );
+  assert.notEqual(replacement.id, firstOrder.id);
+  const recovered = await getInvitationPayment(first.id, owner.id, firstOrder);
+  assert.equal(recovered.invitation.id, first.id);
+  assert.equal(recovered.order?.id, replacement.id);
+});
 test("unpaid direct publish, wrong owner, stale revision and tampered price fail before creating checkout", async () => {
   const d = await draft(),
     before = requests.length;

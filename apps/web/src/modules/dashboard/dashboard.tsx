@@ -29,6 +29,10 @@ import {
   type Invitation,
   type SessionResponse,
 } from "@taklifnoma/contracts";
+import {
+  paymentStateLabels,
+  type InvitationPaymentSummary,
+} from "@taklifnoma/contracts/payment";
 import styles from "./dashboard.module.css";
 import {
   deleteBrowserDraft,
@@ -47,10 +51,12 @@ import {
 type DashboardInvitation = Invitation & {
   createdAt?: string;
   viewCount?: number;
+  payment?: InvitationPaymentSummary | null;
 };
 let dashboardSnapshot: {
   session: SessionResponse;
   invitations: DashboardInvitation[];
+  publishingMode: "free" | "paid";
 } | null = null;
 function InvitationCard({
   invitation,
@@ -62,6 +68,8 @@ function InvitationCard({
   busy = false,
   onOpenActivity,
   viewCount,
+  payment,
+  publishingMode,
 }: {
   invitation: Invitation;
   local?: boolean;
@@ -72,6 +80,8 @@ function InvitationCard({
   busy?: boolean;
   onOpenActivity?: () => void;
   viewCount?: number;
+  payment?: InvitationPaymentSummary | null;
+  publishingMode: "free" | "paid";
 }) {
   const content = getContent(invitation);
   const template = templateById(invitation.templateId);
@@ -87,6 +97,23 @@ function InvitationCard({
     ? `/studio?draft=${encodeURIComponent(invitation.id)}`
     : `/studio/${encodeURIComponent(invitation.id)}`;
   const activityUrl = `/dashboard/${encodeURIComponent(invitation.id)}/activity`;
+  const paid = payment?.status === "SUCCEEDED";
+  const retryable =
+    !payment || ["FAILED", "CANCELLED", "EXPIRED"].includes(payment.status);
+  const pending =
+    payment &&
+    ["CREATED", "PENDING", "PROCESSING", "REJECTED"].includes(payment.status);
+  const paymentAction =
+    accountSaved &&
+    !local &&
+    invitation.status === "draft" &&
+    !!invitation.templateId &&
+    !paid &&
+    (publishingMode === "paid" || !!payment);
+  const paymentUrl =
+    payment && !retryable
+      ? `/payment/return?order=${encodeURIComponent(payment.id)}`
+      : `/payment/return?invitation=${encodeURIComponent(invitation.id)}`;
   return (
     <article
       className={styles.invitationCard}
@@ -174,6 +201,16 @@ function InvitationCard({
           <CalendarDays size={14} />
           {date}
         </p>
+        {accountSaved && payment && (
+          <p className={styles.cardPayment} data-paid={paid}>
+            {paid ? (
+              <CheckCircle2 size={13} aria-hidden="true" />
+            ) : (
+              <Clock3 size={13} aria-hidden="true" />
+            )}
+            {paid ? "To‘langan" : paymentStateLabels[payment.status]}
+          </p>
+        )}
         {invitation.status === "published" && viewCount !== undefined && (
           <p
             className={styles.cardViews}
@@ -194,11 +231,6 @@ function InvitationCard({
           </Link>
         )}
         <div className={styles.cardActions}>
-          {accountSaved && invitation.status === "draft" && (
-            <Link className={styles.secondaryAction} href="/payment/return">
-              To‘lov holati
-            </Link>
-          )}
           {invitation.status === "published" && onUnpublish && (
             <button
               className={styles.secondaryAction}
@@ -218,9 +250,27 @@ function InvitationCard({
               {busy ? "Nashr qilinmoqda…" : "Qayta nashr qilish"}
             </button>
           )}
-          <Link href={editUrl}>
-            {invitation.status === "published" ? "Tahrirlash" : "Davom etish"}
-            <ArrowRight size={15} />
+          {paymentAction && (
+            <Link href={editUrl} className={styles.secondaryAction}>
+              Tahrirlash
+            </Link>
+          )}
+          <Link
+            href={paymentAction ? paymentUrl : editUrl}
+            className={paymentAction ? styles.paymentAction : undefined}
+          >
+            {paymentAction
+              ? pending
+                ? "To‘lovni yakunlash"
+                : retryable
+                  ? "To‘lov qilish"
+                  : "To‘lov tafsilotlari"
+              : invitation.status === "published"
+                ? "Tahrirlash"
+                : paid && invitation.status === "draft"
+                  ? "Nashrni yakunlash"
+                  : "Davom etish"}
+            {!paymentAction && <ArrowRight size={15} aria-hidden="true" />}
           </Link>
         </div>
       </div>
@@ -238,6 +288,9 @@ export function Dashboard() {
   );
   const [browserDrafts, setBrowserDrafts] = useState<BrowserDraft[]>([]);
   const [loading, setLoading] = useState(!dashboardSnapshot);
+  const [publishingMode, setPublishingMode] = useState<"free" | "paid">(
+    dashboardSnapshot?.publishingMode ?? "free",
+  );
   const [error, setError] = useState("");
   const [tab, setTab] = useState<"all" | "draft" | "published">("all");
   const [retry, setRetry] = useState(0);
@@ -452,11 +505,18 @@ export function Dashboard() {
             dashboardSnapshot = {
               session: result,
               invitations: nextInvitations,
+              publishingMode: data.publishingMode === "paid" ? "paid" : "free",
             };
+            setPublishingMode(dashboardSnapshot.publishingMode);
             setInvitations(nextInvitations);
           }
         } else {
-          dashboardSnapshot = { session: result, invitations: [] };
+          dashboardSnapshot = {
+            session: result,
+            invitations: [],
+            publishingMode: "free",
+          };
+          setPublishingMode("free");
           setInvitations([]);
         }
       } catch (cause) {
@@ -492,6 +552,7 @@ export function Dashboard() {
       },
       local: localById.has(invitation.id),
       viewCount: invitation.viewCount,
+      payment: invitation.payment,
       createdAt:
         invitation.createdAt ?? localById.get(invitation.id)?.createdAt ?? "",
     })),
@@ -501,6 +562,7 @@ export function Dashboard() {
         invitation: draft.invitation,
         local: true,
         viewCount: undefined,
+        payment: undefined,
         createdAt: draft.createdAt || draft.savedAt,
       })),
   ]
@@ -629,11 +691,13 @@ export function Dashboard() {
               </div>
             ) : (
               <div className={styles.cardGrid}>
-                {entries.map(({ invitation, local, viewCount }) => (
+                {entries.map(({ invitation, local, viewCount, payment }) => (
                   <InvitationCard
                     invitation={invitation}
                     local={local}
                     viewCount={viewCount}
+                    payment={payment}
+                    publishingMode={publishingMode}
                     accountSaved={cloudIds.has(invitation.id)}
                     busy={actionBusy === invitation.id}
                     onDelete={
@@ -726,8 +790,8 @@ export function Dashboard() {
                 Mingta samimiy lahza.
               </h2>
               <p>
-                Dizaynni tanlang va o‘z taklifnomangizni yarating. Hozir nashr
-                qilish bepul.
+                Dizaynni tanlang, taklifnomangizni tayyorlang va yaqinlaringiz
+                bilan ulashing.
               </p>
               <Link href="/#templates">
                 Dizaynlarni ko‘rish
