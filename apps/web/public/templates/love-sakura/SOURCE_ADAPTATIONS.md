@@ -51,3 +51,9 @@
 - **API and lifecycle integration:** authenticated `tests/publishing.integration.ts` passed 15/15 with `PUBLISHING_TEMPLATE_ID=love-sakura`, including the required HTTP save → publish → public render → reopen flow. Focused source/preview tests pass 25/25; web typecheck passes.
 - **Autoplay:** public invitations with configured music now attempt audible autoplay on first render and ramp in. If browser policy blocks playback, the audio stays paused and the visible source control starts it after guest interaction; a guest pause remains in effect across locale rerenders. Browser-policy success varies by browser and user settings, so audible autoplay still needs a manual browser check.
 - **Catalog/database state:** Love Sakura was published by additive migration `0149_publish_love_sakura.sql`, guarded for wedding category and wedding event support. The local typed catalog entry is published and selectable. The owner may complete the visual follow-up after publication; verify audible autoplay behavior in a browser that allows or blocks it.
+# Shared Google Maps correction (2026-10-28)
+
+All original location-card map anchors now bind to the shared invitation venue
+URL, including captured cards outside the repeatable program container. Generic
+`maps.google.com` links cannot survive hydration or subsequent content updates.
+No artwork, source layout or motion changed.

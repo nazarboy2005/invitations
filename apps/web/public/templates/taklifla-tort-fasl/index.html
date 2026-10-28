@@ -1,0 +1,198 @@
+<!doctype html><html lang="uz-Latn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>To‘rt fasl</title><link rel="icon" href="data:,"><link rel="stylesheet" href="fonts.css"><link rel="stylesheet" href="source/template.css"><link rel="stylesheet" href="platform.css"></head><body>
+
+<div style="min-height:100vh; display:flex; justify-content:center;">
+  <div id="fs-col" style="width:100%; max-width:430px; position:relative; overflow:hidden; box-shadow:0 0 70px rgba(90,60,75,.22); background:#fdf6ef;">
+
+    <audio id="fs-audio" loop preload="none"></audio>
+
+    <!-- ============ SPRING · HERO ============ -->
+    <section id="fs-hero" style="position:relative; min-height:100svh; display:flex; flex-direction:column; justify-content:flex-end; overflow:hidden; background:url(fasllar-img/spring-hero.webp) center top / cover no-repeat #b8c06b;">
+      <div aria-hidden="true" style="position:absolute; left:0; right:0; bottom:0; height:42%; background:linear-gradient(to bottom, rgba(255,252,244,0), rgba(250,250,236,.55)); pointer-events:none;"></div>
+      <div id="fs-particles-hero" aria-hidden="true" style="position:absolute; inset:0; overflow:hidden; pointer-events:none;"></div>
+      <div style="position:relative; padding:0 26px 42px; text-align:center;">
+        <div data-i18n="hero_kicker" style="font-size:11px; letter-spacing:.3em; text-transform:uppercase; color:#7d6a55; font-weight:700;">to'yga taklif etamiz</div>
+        <h1 id="fs-hero-names" class="fs-fitline" style="margin:10px 0 6px; font-family:'Marck Script',cursive; font-weight:400; font-size:50px; line-height:1.08; color:#7c3f58; animation:fsNames 4.5s ease-in-out infinite; text-align:center;"><span id="fs-hero-n1"></span><span id="fs-hero-joiner" data-i18n="name_joiner"> va </span><span id="fs-hero-n2"></span></h1>
+        <div id="fs-hero-date" style="font-family:'Vollkorn',serif; font-size:18px; letter-spacing:.14em; color:#5d5340;"></div>
+        <div style="margin-top:4px; font-size:12.5px; color:#5f6b4a;"><span id="fs-hero-city-wrap"><span id="fs-hero-city"></span> · </span><span id="fs-hero-venue"></span></div>
+        <div style="margin-top:28px; display:flex; flex-direction:column; align-items:center; gap:2px; color:#65714f; animation:fsBob 2.4s ease-in-out infinite;">
+          <span data-i18n="scroll_hint" style="font-size:11px; letter-spacing:.24em; text-transform:uppercase; font-weight:700;">varaqlang</span>
+          <span aria-hidden="true" style="font-size:17px; line-height:1;">⌄</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- transition band 1: spring → summer (petal + dandelion-seed) -->
+    <section style="position:relative; overflow:hidden; background:linear-gradient(#88a564 0%, #bdd29b 14%, #507c3a 86%, #507c3a 100%);">
+      <img src="fasllar-img/transition-spring-summer.webp" alt="" data-plx="0.05" style="display:block; width:100%; mask-image:linear-gradient(to bottom, transparent, black 14%, black 86%, transparent); -webkit-mask-image:linear-gradient(to bottom, transparent, black 14%, black 86%, transparent); will-change:transform;">
+      <div id="fs-particles-band1" aria-hidden="true" style="position:absolute; inset:0; overflow:hidden; pointer-events:none;"></div>
+    </section>
+
+    <!-- ============ SUMMER ============ -->
+    <section id="fs-summer" style="position:relative; overflow:hidden; background:linear-gradient(#507c3a 0%, #55884a 28%, #679943 58%, #55904d 100%); padding:46px 0 54px;">
+      <div id="fs-particles-summer" aria-hidden="true" style="position:absolute; inset:0; overflow:hidden; pointer-events:none;"></div>
+      <div style="position:relative; padding:0 20px; text-align:center;">
+        <div data-i18n="summer_script" style="font-family:'Marck Script',cursive; font-size:21px; color:#f9edc8;">bir yil · to'rt fasl · bitta muhabbat</div>
+        <div data-reveal style="position:relative; margin:18px auto 0; max-width:362px; aspect-ratio:4/5; border-radius:18px; background:url(fasllar-img/wreath-frame.webp) center / cover no-repeat #fef9ef; box-shadow:0 22px 44px rgba(25,60,32,.32); display:flex; align-items:center; justify-content:center; padding:24% 23%; text-align:center;">
+          <!-- width:100%/min-width:0 — flex items size to max-content and
+               overflow the padded window otherwise, so fit-to-width never
+               engages (round-26 lesson) -->
+          <div style="width:100%; min-width:0;">
+            <div data-i18n="invite_heading" style="font-family:'Vollkorn',serif; font-weight:700; font-size:16.5px; color:#6b4a38;">Aziz yaqinlarimiz!</div>
+            <p id="fs-invite-text" data-i18n="invite_text_default" style="margin-top:10px; font-family:'Vollkorn',serif; font-style:italic; font-size:14px; line-height:1.65; color:#7a5a45;"></p>
+            <div id="fs-invite-names" class="fs-fitline" style="margin-top:12px; font-family:'Marck Script',cursive; font-size:22px; color:#a2506f; text-align:center;"><span id="fs-invite-n1"></span><span id="fs-invite-joiner" data-i18n="name_joiner"> va </span><span id="fs-invite-n2"></span></div>
+            <div id="fs-invite-date" style="margin-top:8px; font-size:10.5px; letter-spacing:.2em; text-transform:uppercase; color:#9a8468; font-weight:700;"></div>
+          </div>
+        </div>
+      </div>
+
+      <div id="fs-events-wrap">
+        <img id="fs-divider-summer" src="fasllar-img/divider-summer.webp" alt="" data-plx="0.06" style="display:block; width:100%; margin:40px 0 34px; mask-image:linear-gradient(to bottom, transparent, black 18%, black 82%, transparent); -webkit-mask-image:linear-gradient(to bottom, transparent, black 18%, black 82%, transparent); will-change:transform;">
+        <div style="position:relative; padding:0 24px;">
+          <div style="text-align:center;">
+            <div data-i18n="program_script" style="font-family:'Marck Script',cursive; font-size:20px; color:#f9edc8;">yozning eng uzun kuni</div>
+            <h2 data-i18n="program_title" style="margin:4px 0 0; font-family:'Vollkorn',serif; font-weight:700; font-size:26px; color:#f4fbe9;">Kun dasturi</h2>
+          </div>
+          <div id="fs-events" style="margin-top:22px; position:relative; display:flex; flex-direction:column; gap:14px;">
+            <div aria-hidden="true" style="position:absolute; left:7px; top:10px; bottom:10px; width:2px; background:rgba(255,255,255,.38); border-radius:2px;"></div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- transition band 2: summer → autumn (dandelion-seed + autumn-leaf) -->
+    <section style="position:relative; overflow:hidden; background:linear-gradient(#55904d 0%, #febc6b 20%, #ad5814 80%, #ad5814 100%);">
+      <img src="fasllar-img/divider-autumn.webp" alt="" data-plx="0.05" style="display:block; width:100%; margin:26px 0; mask-image:linear-gradient(to bottom, transparent, black 20%, black 80%, transparent); -webkit-mask-image:linear-gradient(to bottom, transparent, black 20%, black 80%, transparent); will-change:transform;">
+      <div id="fs-particles-band2" aria-hidden="true" style="position:absolute; inset:0; overflow:hidden; pointer-events:none;"></div>
+    </section>
+
+    <!-- ============ AUTUMN ============ -->
+    <section id="fs-autumn" style="position:relative; overflow:hidden; background:linear-gradient(#ad5814 0%, #a55e22 50%, #96562c 100%); padding:44px 24px 54px;">
+      <div id="fs-particles-autumn" aria-hidden="true" style="position:absolute; inset:0; overflow:hidden; pointer-events:none;"></div>
+      <div style="position:relative; text-align:center;">
+        <div data-i18n="autumn_script" style="font-family:'Marck Script',cursive; font-size:20px; color:#ffe4b8;">kuz hammani bir dasturxon atrofida jamlaydi</div>
+        <h2 data-i18n="venue_title" style="margin:4px 0 0; font-family:'Vollkorn',serif; font-weight:700; font-size:26px; color:#fff3e0;">To'y manzili</h2>
+        <div data-reveal style="margin-top:18px; background:rgba(255,248,238,.92); border-radius:20px; padding:22px 20px; box-shadow:0 14px 30px rgba(90,45,15,.28);">
+          <div id="fs-venue-name" style="font-family:'Vollkorn',serif; font-weight:700; font-size:19px; color:#8a5a2e;"></div>
+          <div id="fs-venue-addr" style="margin-top:4px; font-size:13px; color:#7a6a52;"></div>
+          <a id="fs-map" href="#" target="_blank" rel="noopener noreferrer" style="display:inline-block; margin-top:14px; padding:12px 28px; border-radius:999px; background:#a2506f; color:#fff4ea; font-weight:700; font-size:13.5px; text-decoration:none; box-shadow:0 8px 18px rgba(90,30,55,.32);"><span data-i18n="map_btn">Xaritani ochish ↗</span></a>
+        </div>
+
+        <div id="fs-details-card" data-reveal style="margin-top:16px; background:rgba(255,248,238,.92); border-radius:20px; padding:20px; box-shadow:0 14px 30px rgba(90,45,15,.28); text-align:left; display:flex; flex-direction:column; gap:14px;">
+          <div id="fs-detail-dress" style="display:flex; gap:12px; align-items:flex-start;">
+            <div style="flex:1;">
+              <div data-i18n="detail_dress_label" style="font-weight:700; font-size:13px; color:#8a5a2e;">Kiyim</div>
+              <div id="fs-detail-dress-text" data-i18n="info_dress_default" style="margin-top:2px; font-size:12.5px; color:#7a6a52;">Istalgan fasl palitrasidagi libos</div>
+            </div>
+            <div style="display:flex; gap:6px; margin-top:3px;" aria-hidden="true">
+              <span style="width:15px; height:15px; border-radius:50%; background:#f6a8c4; border:2px solid #fff;"></span>
+              <span style="width:15px; height:15px; border-radius:50%; background:#4f8f4d; border:2px solid #fff;"></span>
+              <span style="width:15px; height:15px; border-radius:50%; background:#ef953f; border:2px solid #fff;"></span>
+              <span style="width:15px; height:15px; border-radius:50%; background:#b9c9ec; border:2px solid #fff;"></span>
+            </div>
+          </div>
+          <div id="fs-detail-rsvp">
+            <div data-i18n="detail_rsvp_label" style="font-weight:700; font-size:13px; color:#8a5a2e;">Tasdiqlash</div>
+            <div id="fs-detail-rsvp-text" data-i18n="info_rsvp_default" style="margin-top:2px; font-size:12.5px; color:#7a6a52;"></div>
+          </div>
+          <div id="fs-detail-flowers">
+            <div data-i18n="detail_flowers_label" style="font-weight:700; font-size:13px; color:#8a5a2e;">Gullar</div>
+            <div id="fs-detail-flowers-text" data-i18n="info_flowers_default" style="margin-top:2px; font-size:12.5px; color:#7a6a52;">Guldastalar o'rniga — iliq so'zlar: quyida tilak qoldiring</div>
+          </div>
+        </div>
+
+        <div style="margin-top:40px; font-family:'Marck Script',cursive; font-size:20px; color:#ffe4b8;" data-i18n="wishes_script">sovuq fasl uchun iliq so'zlar</div>
+        <h2 data-i18n="wishes_title" style="margin:4px 0 0; font-family:'Vollkorn',serif; font-weight:700; font-size:26px; color:#fff3e0;">Tilaklar</h2>
+        <form id="fs-wish-form" class="wish-form" data-reveal style="margin-top:16px; background:rgba(255,248,238,.92); border-radius:20px; padding:18px; box-shadow:0 14px 30px rgba(90,45,15,.28); display:flex; flex-direction:column; gap:10px;">
+          <input name="wname" required maxlength="100" autocomplete="name" data-i18n-ph="wish_name_ph" placeholder="Ismingiz" style="width:100%; box-sizing:border-box; padding:12px 14px; border-radius:12px; border:1px solid #e3cba6; background:#fffdf8; font-size:14px; color:#5a4634; outline:none;">
+          <textarea name="wmsg" required maxlength="2000" rows="3" data-i18n-ph="wish_msg_ph" placeholder="Bir necha iliq so'z…" style="width:100%; box-sizing:border-box; padding:12px 14px; border-radius:12px; border:1px solid #e3cba6; background:#fffdf8; font-size:14px; color:#5a4634; outline:none; resize:vertical;"></textarea>
+          <button type="submit" style="width:100%; padding:13px; border:none; border-radius:999px; background:#a2506f; color:#fff4ea; font-weight:700; font-size:14px; cursor:pointer; box-shadow:0 8px 18px rgba(90,30,55,.3);"><span data-i18n="wish_send">Tilak yo'llash</span></button>
+        </form>
+        <div id="fs-wish-confirm" data-i18n="wish_thanks" style="display:none; margin-top:14px; font-size:13px; font-style:italic; color:rgba(255,240,220,.9);">Tilagingiz yuborildi. Taklifnoma egasi tasdiqlagach ko‘rinadi.</div>
+        <div id="fs-wish-empty" data-i18n="wish_empty" style="margin-top:14px; font-size:13px; font-style:italic; color:rgba(255,240,220,.9);">Birinchi bo'ling — tilagingiz qishni isitadi.</div>
+        <div id="fs-wish-list" style="margin-top:14px; display:flex; flex-direction:column; gap:10px; text-align:left;"></div>
+      </div>
+    </section>
+
+    <!-- transition band 3: autumn → winter (autumn-leaf + snowflake) -->
+    <section style="position:relative; overflow:hidden; height:180px; background:linear-gradient(#96562c 0%, #9a6a7a 50%, #d0b3d3 80%, #ddbfde 100%);">
+      <div id="fs-particles-band3" aria-hidden="true" style="position:absolute; inset:0; overflow:hidden; pointer-events:none;"></div>
+    </section>
+
+    <!-- ============ WINTER ============ -->
+    <section id="fs-winter" style="position:relative; min-height:100svh; display:flex; flex-direction:column; justify-content:center; overflow:hidden; background:url(fasllar-img/winter-sky.webp) center / cover no-repeat #ddbfde; padding:70px 22px; box-sizing:border-box;">
+      <div id="fs-particles-winter" aria-hidden="true" style="position:absolute; inset:0; overflow:hidden; pointer-events:none;"></div>
+      <div style="position:relative; text-align:center;">
+        <div data-i18n="winter_script" style="font-family:'Marck Script',cursive; font-size:21px; color:#fdeef7; text-shadow:0 1px 3px rgba(90,50,90,.55), 0 2px 14px rgba(90,50,90,.55);">qish bahorgacha kunlarni sanaydi</div>
+        <h2 data-i18n="winter_title" style="margin:6px 0 0; font-family:'Vollkorn',serif; font-weight:700; font-size:27px; color:#fff6ee; text-shadow:0 2px 18px rgba(80,50,90,.4);">Kunimizgacha qoldi</h2>
+        <div style="margin:24px auto 0; max-width:348px; display:grid; grid-template-columns:repeat(4,1fr); gap:10px;">
+          <div style="border-radius:16px; padding:15px 4px 11px; background:rgba(255,206,140,.16); border:1px solid rgba(255,220,170,.42); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); animation:fsGlow 4.4s ease-in-out infinite;">
+            <div id="fs-cd-d" style="font-family:'Vollkorn',serif; font-weight:700; font-size:31px; line-height:1; color:#fff4de;">–</div>
+            <div data-i18n="cd_days" style="margin-top:6px; font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:rgba(255,240,220,.78); font-weight:700;">kun</div>
+          </div>
+          <div style="border-radius:16px; padding:15px 4px 11px; background:rgba(255,206,140,.16); border:1px solid rgba(255,220,170,.42); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); animation:fsGlow 4.4s ease-in-out -1.1s infinite;">
+            <div id="fs-cd-h" style="font-family:'Vollkorn',serif; font-weight:700; font-size:31px; line-height:1; color:#fff4de;">–</div>
+            <div data-i18n="cd_hours" style="margin-top:6px; font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:rgba(255,240,220,.78); font-weight:700;">soat</div>
+          </div>
+          <div style="border-radius:16px; padding:15px 4px 11px; background:rgba(255,206,140,.16); border:1px solid rgba(255,220,170,.42); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); animation:fsGlow 4.4s ease-in-out -2.2s infinite;">
+            <div id="fs-cd-m" style="font-family:'Vollkorn',serif; font-weight:700; font-size:31px; line-height:1; color:#fff4de;">–</div>
+            <div data-i18n="cd_mins" style="margin-top:6px; font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:rgba(255,240,220,.78); font-weight:700;">daqiqa</div>
+          </div>
+          <div style="border-radius:16px; padding:15px 4px 11px; background:rgba(255,206,140,.16); border:1px solid rgba(255,220,170,.42); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); animation:fsGlow 4.4s ease-in-out -3.3s infinite;">
+            <div id="fs-cd-s" style="font-family:'Vollkorn',serif; font-weight:700; font-size:31px; line-height:1; color:#fff4de;">–</div>
+            <div data-i18n="cd_secs" style="margin-top:6px; font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:rgba(255,240,220,.78); font-weight:700;">soniya</div>
+          </div>
+        </div>
+        <div id="fs-winter-date" style="margin-top:26px; font-family:'Marck Script',cursive; font-size:23px; color:#fff3f9; text-shadow:0 1px 3px rgba(90,50,90,.6), 0 2px 16px rgba(90,50,90,.6);"></div>
+        <div style="margin-top:2px; font-size:12px; font-weight:700; color:#fffdfd; text-shadow:0 1px 3px rgba(90,50,90,.6), 0 2px 12px rgba(90,50,90,.55);"><span id="fs-winter-venue"></span> · <span id="fs-winter-time"></span></div>
+      </div>
+    </section>
+
+    <!-- ============ FINALE · yana bahor ============ -->
+    <section style="position:relative; overflow:hidden; text-align:center; padding:58px 26px 46px; background:linear-gradient(#daddf2 0%, #fdeef2 55%, #ffe4ec 100%);">
+      <div id="fs-particles-foot" aria-hidden="true" style="position:absolute; inset:0; overflow:hidden; pointer-events:none;"></div>
+      <div style="position:relative;">
+        <img src="fasllar-img/petal.webp" alt="" style="width:26px; animation:fsBob 3s ease-in-out infinite;">
+        <p id="fs-foot-note" data-i18n="footer_note_default" style="margin-top:10px; font-family:'Vollkorn',serif; font-style:italic; font-size:15px; line-height:1.6; color:#7a5a63;">Qish doimo bahor bilan tugaydi —<br>bizning bahorimiz esa sizdan boshlanadi.</p>
+        <div id="fs-foot-names" class="fs-fitline" style="margin-top:14px; font-family:'Marck Script',cursive; font-size:27px; color:#a2506f; text-align:center;"><span id="fs-foot-n1"></span><span id="fs-foot-joiner" data-i18n="name_joiner"> va </span><span id="fs-foot-n2"></span></div>
+        <div style="margin-top:6px; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:#b48a96; font-weight:700;"><span id="fs-foot-date"></span> · <span data-i18n="finale_suffix">mehr bilan</span></div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- ── Language switcher ── -->
+  <div class="fs-lang" role="group" aria-label="Til / Language">
+    <button type="button" data-lang="uz-Latn" class="on">UZ</button>
+    <button type="button" data-lang="uz-Cyrl">ЎЗ</button>
+    <button type="button" data-lang="en">EN</button>
+    <button type="button" data-lang="ru">RU</button>
+  </div>
+
+  <!-- ============ MUSIC TOGGLE ============ -->
+  <button type="button" id="fs-music" aria-label="Musiqa" style="display:none; position:fixed; z-index:55; bottom:18px; right:max(14px, calc(50vw - 201px)); width:46px; height:46px; border-radius:50%; border:1px solid rgba(255,255,255,.55); background:rgba(90,55,72,.72); color:#fff5ea; font-size:18px; backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); cursor:pointer; box-shadow:0 8px 22px -10px rgba(45,30,40,.5);">♪</button>
+
+  <!-- ============ SPLASH ============ -->
+  <div id="fs-splash" style="position:fixed; inset:0; z-index:100; display:flex; align-items:center; justify-content:center; overflow:hidden; opacity:1; pointer-events:auto; transition:opacity .9s ease; background:#7c3f58;">
+    <!-- pre-blurred tiny asset instead of a runtime blur(15px): Safari
+         rasterizes fixed layers carrying huge blur filters at reduced
+         resolution, which blurred ALL the splash text on iPhones -->
+    <img src="fasllar-img/spring-splash.webp" alt="" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transform:scale(1.06);">
+    <div aria-hidden="true" style="position:absolute; inset:0; background:rgba(56,36,52,.38);"></div>
+    <div style="position:relative; text-align:center; color:#fff7f0; padding:24px; max-width:340px;">
+      <div id="fs-splash-mono" style="width:110px; height:110px; margin:0 auto; border-radius:50%; border:1.5px solid rgba(255,247,240,.75); display:flex; align-items:center; justify-content:center; font-family:'Marck Script',cursive; font-size:36px; box-shadow:0 0 40px rgba(255,200,220,.25) inset;"></div>
+      <div data-i18n="splash_kicker" style="margin-top:18px; font-size:10.5px; letter-spacing:.32em; text-transform:uppercase; font-weight:700; color:rgba(255,247,240,.85);">TO'Y TAKLIFNOMASI</div>
+      <div id="fs-splash-names" class="fs-fitline" style="margin-top:8px; font-family:'Marck Script',cursive; font-size:30px; text-align:center;"><span id="fs-splash-n1"></span><span id="fs-splash-joiner" data-i18n="name_joiner"> va </span><span id="fs-splash-n2"></span></div>
+      <button type="button" id="fs-open" style="margin-top:22px; padding:14px 32px; border:none; border-radius:999px; background:rgba(255,247,240,.94); color:#6d4a58; font-weight:700; font-size:14.5px; cursor:pointer; box-shadow:0 10px 26px rgba(30,15,25,.35);"><span data-i18n="splash_open">Taklifnomani ochish</span></button>
+    </div>
+  </div>
+
+</div>
+
+<template id="fs-event-template"><div class="fs-ev-row" data-reveal style="position:relative; display:flex; gap:16px; align-items:flex-start;">
+              <div style="flex:none; width:16px; height:16px; margin-top:16px; border-radius:50%; background:#f6a8c4; box-shadow:0 0 0 3px rgba(255,255,255,.6);"></div>
+              <div style="flex:1; background:rgba(250,252,240,.9); border-radius:16px; padding:13px 16px; box-shadow:0 8px 20px rgba(25,60,32,.18);">
+                <div style="font-family:'Vollkorn',serif; font-weight:700; font-size:16px; color:#3f6b3d;"><span data-event-title></span></div>
+                <div data-event-description style="margin-top:2px; font-size:12.5px; color:#6d6250;"></div>
+              </div>
+            </div></template><script src="source/motion.js"></script><script src="source/closing-panel.js"></script><script src="labels.js"></script><script src="platform-adapter.js"></script></body></html>

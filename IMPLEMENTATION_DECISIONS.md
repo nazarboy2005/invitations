@@ -1,5 +1,26 @@
 # Implementation decisions
 
+## Shared preview data and To‘rt fasl (2026-10-28)
+
+- User correction: do not add a “Mehmonlar soni” input. Remove the added Velvet
+  Royale control; attendance submits one person through the existing RSVP API.
+  To‘rt fasl retains its source telephone response and moderated wish form.
+- All catalog and blank-selection previews read semantic content and Google Maps
+  mock venue from `apps/web/src/modules/catalog/preview-sample.json`. Event profiles
+  may differ; designs for the same event share people, wording, dates, program,
+  venue, contacts, artists, story and wishes. Per-template fixture overrides are
+  limited to visual media. Changing templates preserves actual creator data;
+  previews never become saved/public invitation data.
+- User requested another unpublished Uzbek-source design. Integrate Taklifla's
+  complete Fasllar source as `taklifla-tort-fasl` (To‘rt fasl), wedding category
+  and event compatibility. Preserve all four seasonal scenes, opening, particles,
+  parallax, countdown and closing panel; adapt shared content and real wishes.
+  Publish through the existing catalog only after verification. No app deployment.
+- Applied additive migrations `0169` (registration) and `0170` (publication).
+  Configured public catalog publication is verified at 1,000 UZS. Source hashes,
+  responsive/motion/audio checks, real four-locale save/publication/wishes, and
+  personalized spring cover are recorded with the template verification files.
+
 ## Velvet Royale source fidelity correction (2026-10-28)
 
 - User requested the complete live `e-invitation.uz/preview/velvet-royale/`

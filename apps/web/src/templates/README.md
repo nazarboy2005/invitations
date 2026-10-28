@@ -27,6 +27,10 @@ public invitations, and authored invitation content always replaces it.
 The canonical fixture is `apps/web/src/modules/catalog/preview-sample.json`;
 keep sample copy and repeatable program entries there for the four supported
 locales rather than defining template-specific examples.
+The fixture also owns the Google Maps mock URL and coordinates. Apply event
+profiles consistently across designs; template overrides may contain visual
+media only. Do not add guest-count inputs; attendance uses the existing
+one-person API value when a source attendance control is present.
 
 The local reference captures are stored outside the application in
 `Invitations - this folder will be removed from production`. Keep that folder

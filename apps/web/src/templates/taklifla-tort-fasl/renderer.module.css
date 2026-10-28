@@ -1,0 +1,5 @@
+.full, .public, .preview { width: 100%; overflow: hidden; background: #fbe7ee; }
+.full { height: 100%; min-height: 560px; }
+.public { height: 100dvh; min-height: 360px; }
+.preview { height: 640px; }
+.full iframe, .public iframe, .preview iframe { display: block; width: 100%; height: 100%; border: 0; }

@@ -81,13 +81,13 @@ test("Velvet Royale saves, publishes, renders all locales and persists real gues
     const frame = page.frameLocator('iframe[src*="velvet-royale/index.html"]');
     await frame.locator('input[name="name"]').fill("Backend Royale guest");
     await frame.locator('input[type="radio"]').first().check();
-    await frame.locator('input[name="partySize"]').fill("3");
+    assert.equal(await frame.locator('input[name="partySize"]').count(), 0);
     await frame.locator('input[name="phone"]').fill("+000123456");
     await frame.locator('textarea[name="wish"]').fill("Disposable moderated Royale wish");
     await frame.locator('.section-rsvp__submit').click();
     await frame.locator('.section-rsvp__notice').filter({hasText:"Спасибо"}).waitFor();
     const [rsvp] = await db`SELECT status,party_size,note,guest_id FROM rsvp_responses WHERE invitation_id=${invitation.id}`;
-    assert.equal(rsvp.status,"yes"); assert.equal(rsvp.party_size,3); assert.ok(rsvp.note.includes("+000123456")); assert.ok(rsvp.guest_id);
+    assert.equal(rsvp.status,"yes"); assert.equal(rsvp.party_size,1); assert.ok(rsvp.note.includes("+000123456")); assert.ok(rsvp.guest_id);
     const [wish] = await db`SELECT status,message,guest_id FROM wishes WHERE invitation_id=${invitation.id}`;
     assert.equal(wish.status,"pending"); assert.equal(wish.message,"Disposable moderated Royale wish"); assert.equal(wish.guest_id,rsvp.guest_id);
     assert.deepEqual((await (await request(`/api/public/invitations/${invitation.id}/wishes`)).json()).wishes,[]);

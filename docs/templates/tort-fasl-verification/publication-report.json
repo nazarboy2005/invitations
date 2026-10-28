@@ -1,0 +1,38 @@
+{
+  "date": "2026-10-28",
+  "migration": "0170_publish_complete_tort_fasl.sql",
+  "before": [
+    {
+      "id": "taklifla-tort-fasl",
+      "published": false,
+      "price_minor": "100000",
+      "currency": "UZS"
+    }
+  ],
+  "after": [
+    {
+      "id": "taklifla-tort-fasl",
+      "published": true,
+      "price_minor": "100000",
+      "currency": "UZS"
+    }
+  ],
+  "catalog": {
+    "id": "taklifla-tort-fasl",
+    "name": "To‘rt fasl",
+    "description": "Bahor, yoz, kuz va qish manzaralari bo‘ylab nafis nikoh taklifnomasi.",
+    "previewImage": "/templates/taklifla-tort-fasl/preview.webp",
+    "previewEventType": "wedding",
+    "categoryIds": [
+      "wedding"
+    ],
+    "supportedEventTypes": [
+      "wedding"
+    ],
+    "priceMinor": 100000,
+    "currency": "UZS",
+    "accent": "#a2506f",
+    "published": true
+  },
+  "applicationDeployment": false
+}

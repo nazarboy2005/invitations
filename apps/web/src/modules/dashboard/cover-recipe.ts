@@ -6,6 +6,7 @@ export const COVER_VIEWPORT = { width: 480, height: 800 };
 export type CoverScene = "opening" | "opened" | "lid" | "book";
 const openedHeroes = new Set([
   "anor",
+  "taklifla-tort-fasl",
   "cloud-castle",
   "kuzgi-chinor",
   "sahifa",

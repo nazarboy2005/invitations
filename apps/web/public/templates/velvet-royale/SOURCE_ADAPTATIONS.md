@@ -44,7 +44,7 @@ public display and personalized dashboard cover generation use that renderer.
 | Venue, address and map | Shared venue coordinates and creator Google Maps link |
 | Gift card and copy | Enabled shared gift card number/holder; no sample bank/card |
 | Contact cards | Shared phone, Telegram and Instagram |
-| RSVP and wishes | Existing public APIs, resolved guest token, party limit and moderation |
+| RSVP and wishes | Existing public APIs, resolved guest token, single-person attendance and moderation |
 | Music | Global catalog preview track or creator-selected audio; source sample audio is excluded |
 
 The opener retains the idle engraving wave, animated wax layers, released seal,
@@ -67,7 +67,7 @@ server-only `GOOGLE_MAPS_API_KEY` remains in the editor's Places API routes and
 is never sent to this renderer. Google navigation and these embeds need no key.
 
 RSVP stores phone input in the existing RSVP note, respects the attendance
-deadline and party limit, and sends wishes through moderation. Preview submits
+deadline, submits one-person attendance without a guest-count input, and sends wishes through moderation. Preview submits
 never write. The music control reflects actual playback; a guest pause survives
 locale updates and unrelated clicks. Reduced motion opens immediately, displays
 content and the selected date, and suppresses video, particles and transitions.

@@ -31,3 +31,10 @@ iframe screenshot into the workspace. No substitute artwork was made, and the
 existing preview and all original captures remain unchanged.
 
 Catalog-art verification (2026-10-23): the captured `meta.js` declares `preview.webp`, and its SHA-256 matches the canonical Marxaba `meta.js` at `https://www.marxaba.uz/templates/anor/meta.js` (`3844ba95…80bfe8`). The source's official `https://www.marxaba.uz/templates/anor/preview.webp` is 720×1280, 133,366 bytes, SHA-256 `2a17a48b…5bdfc`; the packaged `preview.webp` is byte-identical. This official source catalog cover depicts the post-opening hero; that is source-authentic catalog art. The earlier finding that treated the closed `#intro` as the only acceptable cover is superseded. No replacement capture is needed. See `preview.provenance.json`.
+# Shared Google Maps correction (2026-10-28)
+
+The platform bridge now prioritizes `venue.mapUrl` on every navigation control.
+Its capture-phase map-toggle adapter loads Google coordinates in the original
+map panel. Captured `template.js` remains byte-for-byte unchanged; its provider
+map handler is intercepted by the bridge. The shared Nikoh runtime likewise uses
+Google embeds and the authored navigation URL instead of Yandex static maps.

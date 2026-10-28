@@ -1,0 +1,557 @@
+[
+  {
+    "id": "butterfly",
+    "sharedMap": true,
+    "maps": [
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797"
+    ]
+  },
+  {
+    "id": "fairy",
+    "sharedMap": true,
+    "maps": [
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797"
+    ]
+  },
+  {
+    "id": "velora",
+    "sharedMap": true,
+    "maps": [
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797"
+    ]
+  },
+  {
+    "id": "aurelia",
+    "sharedMap": true,
+    "maps": [
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797"
+    ]
+  },
+  {
+    "id": "anor",
+    "sharedMap": true,
+    "maps": [
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797",
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797"
+    ]
+  },
+  {
+    "id": "evelina",
+    "sharedMap": true,
+    "maps": [
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797"
+    ]
+  },
+  {
+    "id": "oltin-nur",
+    "sharedMap": true,
+    "maps": [
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797",
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797",
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797"
+    ]
+  },
+  {
+    "id": "samarqand-kechasi",
+    "sharedMap": true,
+    "maps": [
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797",
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797",
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797"
+    ]
+  },
+  {
+    "id": "bogi-eram",
+    "sharedMap": true,
+    "maps": [
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797",
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797",
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797"
+    ]
+  },
+  {
+    "id": "atlas",
+    "sharedMap": true,
+    "maps": [
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797",
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797",
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797"
+    ]
+  },
+  {
+    "id": "sahifa",
+    "sharedMap": true,
+    "maps": [
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797",
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797",
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797"
+    ]
+  },
+  {
+    "id": "oynavand",
+    "sharedMap": true,
+    "maps": [
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797",
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797",
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797"
+    ]
+  },
+  {
+    "id": "somon-yoli",
+    "sharedMap": true,
+    "maps": [
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797",
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797",
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797"
+    ]
+  },
+  {
+    "id": "qogoz-turna",
+    "sharedMap": true,
+    "maps": [
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797",
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797",
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797"
+    ]
+  },
+  {
+    "id": "nilufar",
+    "sharedMap": true,
+    "maps": [
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797",
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797",
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797"
+    ]
+  },
+  {
+    "id": "monogram",
+    "sharedMap": true,
+    "maps": [
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797",
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797",
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797"
+    ]
+  },
+  {
+    "id": "retro-kino",
+    "sharedMap": true,
+    "maps": [
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797",
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797",
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797"
+    ]
+  },
+  {
+    "id": "suzani",
+    "sharedMap": true,
+    "maps": [
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797",
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797",
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797"
+    ]
+  },
+  {
+    "id": "orik-guli",
+    "sharedMap": true,
+    "maps": [
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797",
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797",
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797"
+    ]
+  },
+  {
+    "id": "paxta",
+    "sharedMap": true,
+    "maps": [
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797",
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797",
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797"
+    ]
+  },
+  {
+    "id": "sahro-fonusi",
+    "sharedMap": true,
+    "maps": [
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797",
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797",
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797"
+    ]
+  },
+  {
+    "id": "vals",
+    "sharedMap": true,
+    "maps": [
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797",
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797",
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797"
+    ]
+  },
+  {
+    "id": "toscana",
+    "sharedMap": true,
+    "maps": [
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797",
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797",
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797"
+    ]
+  },
+  {
+    "id": "muhr",
+    "sharedMap": true,
+    "maps": [
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797",
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797",
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797"
+    ]
+  },
+  {
+    "id": "bulbul",
+    "sharedMap": true,
+    "maps": [
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797",
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797",
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797"
+    ]
+  },
+  {
+    "id": "kozgu",
+    "sharedMap": true,
+    "maps": [
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797",
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797",
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797"
+    ]
+  },
+  {
+    "id": "doira",
+    "sharedMap": true,
+    "maps": [
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797",
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797",
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797"
+    ]
+  },
+  {
+    "id": "qandil",
+    "sharedMap": true,
+    "maps": [
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797",
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797",
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797"
+    ]
+  },
+  {
+    "id": "parda",
+    "sharedMap": true,
+    "maps": [
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797",
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797",
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797"
+    ]
+  },
+  {
+    "id": "ganch",
+    "sharedMap": true,
+    "maps": [
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797",
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797",
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797"
+    ]
+  },
+  {
+    "id": "qatlam",
+    "sharedMap": true,
+    "maps": [
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797",
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797",
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797"
+    ]
+  },
+  {
+    "id": "lola",
+    "sharedMap": true,
+    "maps": [
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797",
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797",
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797"
+    ]
+  },
+  {
+    "id": "qiz-bazmi",
+    "sharedMap": true,
+    "maps": [
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797",
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797",
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797"
+    ]
+  },
+  {
+    "id": "shahzoda",
+    "sharedMap": true,
+    "maps": [
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797",
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797",
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797"
+    ]
+  },
+  {
+    "id": "chavandoz",
+    "sharedMap": true,
+    "maps": [
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797",
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797",
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797"
+    ]
+  },
+  {
+    "id": "beshik",
+    "sharedMap": true,
+    "maps": [
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797",
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797",
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797"
+    ]
+  },
+  {
+    "id": "shirin-bayram",
+    "sharedMap": true,
+    "maps": [
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797",
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797"
+    ]
+  },
+  {
+    "id": "oltin-kuz",
+    "sharedMap": true,
+    "maps": [
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797",
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797"
+    ]
+  },
+  {
+    "id": "oltin-yosh",
+    "sharedMap": true,
+    "maps": [
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797",
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797",
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797"
+    ]
+  },
+  {
+    "id": "konfetti",
+    "sharedMap": true,
+    "maps": [
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797",
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797",
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797"
+    ]
+  },
+  {
+    "id": "nahor",
+    "sharedMap": true,
+    "maps": [
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797",
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797",
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797"
+    ]
+  },
+  {
+    "id": "nahorgi-osh",
+    "sharedMap": true,
+    "maps": [
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797",
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797",
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797"
+    ]
+  },
+  {
+    "id": "hilol",
+    "sharedMap": true,
+    "maps": [
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797",
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797"
+    ]
+  },
+  {
+    "id": "bitiruv",
+    "sharedMap": true,
+    "maps": [
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797",
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797",
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797"
+    ]
+  },
+  {
+    "id": "korporativ",
+    "sharedMap": true,
+    "maps": [
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797",
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797",
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797"
+    ]
+  },
+  {
+    "id": "yangi-uy",
+    "sharedMap": true,
+    "maps": [
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797",
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797",
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797"
+    ]
+  },
+  {
+    "id": "golden-card",
+    "sharedMap": true,
+    "maps": [
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797"
+    ]
+  },
+  {
+    "id": "green-white",
+    "sharedMap": true,
+    "maps": [
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797"
+    ]
+  },
+  {
+    "id": "jasmine-white",
+    "sharedMap": true,
+    "maps": [
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797"
+    ]
+  },
+  {
+    "id": "lace",
+    "sharedMap": true,
+    "maps": [
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797"
+    ]
+  },
+  {
+    "id": "modern-floral",
+    "sharedMap": true,
+    "maps": [
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797"
+    ]
+  },
+  {
+    "id": "taklifla-zarhal-sahifa",
+    "sharedMap": true,
+    "maps": [
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797",
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797"
+    ]
+  },
+  {
+    "id": "taklifla-muhrli-maktub",
+    "sharedMap": true,
+    "maps": [
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797",
+      "https://yandex.uz/maps/?text=41.3111%2C69.2797"
+    ]
+  },
+  {
+    "id": "taklifla-asalari",
+    "sharedMap": true,
+    "maps": [
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797"
+    ]
+  },
+  {
+    "id": "taklifla-tort-fasl",
+    "sharedMap": true,
+    "maps": [
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797"
+    ]
+  },
+  {
+    "id": "glass-pink",
+    "sharedMap": true,
+    "maps": [
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797"
+    ]
+  },
+  {
+    "id": "osh",
+    "sharedMap": true,
+    "maps": [
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797"
+    ]
+  },
+  {
+    "id": "palov",
+    "sharedMap": true,
+    "maps": [
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797"
+    ]
+  },
+  {
+    "id": "orchid-amplop",
+    "sharedMap": true,
+    "maps": [
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797",
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797",
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797",
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797",
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797",
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797",
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797"
+    ]
+  },
+  {
+    "id": "golden-hour",
+    "sharedMap": true,
+    "maps": [
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797"
+    ]
+  },
+  {
+    "id": "invitate-nahorgi-osh",
+    "sharedMap": true,
+    "maps": [
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797"
+    ]
+  },
+  {
+    "id": "cloud-castle",
+    "sharedMap": true,
+    "maps": [
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797"
+    ]
+  },
+  {
+    "id": "orchid-amplop",
+    "sharedMap": true,
+    "maps": [
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797",
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797",
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797",
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797",
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797",
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797",
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797"
+    ]
+  },
+  {
+    "id": "royal-burgundy-edition",
+    "sharedMap": true,
+    "maps": [
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797"
+    ]
+  },
+  {
+    "id": "palace-rose",
+    "sharedMap": true,
+    "maps": [
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797"
+    ]
+  },
+  {
+    "id": "love-sakura",
+    "sharedMap": true,
+    "maps": [
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797",
+      "https://www.google.com/maps/search/?api=1&query=41.3111%2C69.2797"
+    ]
+  }
+]

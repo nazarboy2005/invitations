@@ -1,0 +1,121 @@
+{
+  "source": "Invitations - this folder will be removed from production\\Invitations - this folder will be removed from production\\Taklifla\\Web invitations\\taklifla.uz\\templates\\fasllar__e3f8284915228dc1.html",
+  "sourceSha256": "46a04f97732fbbe81bc060999624e1708f0568fdf6c00ea82b1ff3b8eb30013e",
+  "private": false,
+  "published": true,
+  "registered": true,
+  "assets": [
+    {
+      "file": "fasllar-img/autumn-leaf.webp",
+      "sha256": "0bd20f0b1527ef77df2e40a73d662ef2d4c2030f759122878f3ff43b6e966ad1",
+      "bytes": 168116
+    },
+    {
+      "file": "fasllar-img/dandelion-seed.webp",
+      "sha256": "48264ccdd4f36e6488db0b96e3aeccaff56a7a8bf81d05d6be960b6b976d3deb",
+      "bytes": 86644
+    },
+    {
+      "file": "fasllar-img/divider-autumn.webp",
+      "sha256": "8f9e4380fed317d210a7fefbd18e3e2bb7379d9bbb716ac5c2ef7ed820c16f77",
+      "bytes": 321820
+    },
+    {
+      "file": "fasllar-img/divider-summer.webp",
+      "sha256": "62618993abd67a8015e8fdae11dec5d3a4de9acc9d28b01185a465a44a07cca7",
+      "bytes": 363130
+    },
+    {
+      "file": "fasllar-img/petal.webp",
+      "sha256": "39d0d49f3e4d7ae68eda2b8b11f8dba0160a4f2c65e54d0f64eb246064e2e1ae",
+      "bytes": 45268
+    },
+    {
+      "file": "fasllar-img/snowflake.webp",
+      "sha256": "23bbb74bbf128fead881959777f70a954d0cf5c8c13d934aa9377f2638e0eff9",
+      "bytes": 107516
+    },
+    {
+      "file": "fasllar-img/spring-hero.webp",
+      "sha256": "13932ec52adb4477cb9f97c1d0ed8b5af426003814f51696185947e11335de71",
+      "bytes": 268234
+    },
+    {
+      "file": "fasllar-img/spring-splash.webp",
+      "sha256": "5bb853eba3262abf98249e335269aab260fbee275a44e619fa2dde427dfbd218",
+      "bytes": 1000
+    },
+    {
+      "file": "fasllar-img/transition-spring-summer.webp",
+      "sha256": "2a02807d8b91594e885e7168dbfc5d769383c1324b59b506081c4bb1186ed0d4",
+      "bytes": 345438
+    },
+    {
+      "file": "fasllar-img/winter-sky.webp",
+      "sha256": "24362c0c8b4b8cdd4b9a1aa6c3c6ffd4f9923553f4e48529a2bede75f4ec1a41",
+      "bytes": 218446
+    },
+    {
+      "file": "fasllar-img/wreath-frame.webp",
+      "sha256": "ac8d96099a18871a83cf5c533ade208874246388196022a48012be630b187546",
+      "bytes": 198556
+    }
+  ],
+  "fonts": [
+    {
+      "url": "https://fonts.gstatic.com/s/marckscript/v22/nwpTtK2oNgBA3Or78gapdwuCzw.ttf",
+      "file": "fonts/nwpTtK2oNgBA3Or78gapdwuCzw.ttf",
+      "sha256": "334d5b19adc74ad1a97bcc403deafa2df7cb338d05da95d67a4587ed0f7c329e",
+      "bytes": 81208
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/nunito/v32/XRXI3I6Li01BKofiOc5wtlZ2di8HDLshRTM.ttf",
+      "file": "fonts/XRXI3I6Li01BKofiOc5wtlZ2di8HDLshRTM.ttf",
+      "sha256": "9ecbdba35fa74f10a1a916c31649b802a12deb9e66c7b1fe4650afcfd4d16971",
+      "bytes": 125528
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/nunito/v32/XRXI3I6Li01BKofiOc5wtlZ2di8HDGUmRTM.ttf",
+      "file": "fonts/XRXI3I6Li01BKofiOc5wtlZ2di8HDGUmRTM.ttf",
+      "sha256": "1506fc96971e84d1a4ca89f0d1157a881b9ce217bbfa05d2b3c9e3c8f6723091",
+      "bytes": 125536
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/nunito/v32/XRXI3I6Li01BKofiOc5wtlZ2di8HDFwmRTM.ttf",
+      "file": "fonts/XRXI3I6Li01BKofiOc5wtlZ2di8HDFwmRTM.ttf",
+      "sha256": "1a025dfce6e6e03bbe31ba82277ec5ed96df8b8dd58b3df6267269490b90b1dc",
+      "bytes": 125464
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/vollkorn/v30/0ybuGDoxxrvAnPhYGxksckM2WMCpRjDj-DJGWmmZ.ttf",
+      "file": "fonts/0ybuGDoxxrvAnPhYGxksckM2WMCpRjDj-DJGWmmZ.ttf",
+      "sha256": "dd8f4ad369c707565d1b5fc16ed66c6016aa52c5e3148dcb3f1c99857833061f",
+      "bytes": 225984
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/vollkorn/v30/0ybgGDoxxrvAnPhYGzMlQLzuMasz6Df2MHGuGQ.ttf",
+      "file": "fonts/0ybgGDoxxrvAnPhYGzMlQLzuMasz6Df2MHGuGQ.ttf",
+      "sha256": "656470470dcf13b9c9a4b5d29603c73784329bfe104e7b2294c128909e161795",
+      "bytes": 228856
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/vollkorn/v30/0ybgGDoxxrvAnPhYGzMlQLzuMasz6Df27nauGQ.ttf",
+      "file": "fonts/0ybgGDoxxrvAnPhYGzMlQLzuMasz6Df27nauGQ.ttf",
+      "sha256": "fbcdbd10887e0b53dbb4fc1a21d02ded59768bcfe3b23794cb3b55e4ca4b82ee",
+      "bytes": 230380
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/vollkorn/v30/0ybgGDoxxrvAnPhYGzMlQLzuMasz6Df213auGQ.ttf",
+      "file": "fonts/0ybgGDoxxrvAnPhYGzMlQLzuMasz6Df213auGQ.ttf",
+      "sha256": "06c14edf1ac300c0908d42b728b2422bd3fd54724bc55252f65ef035c67fc33d",
+      "bytes": 231072
+    }
+  ],
+  "wishCloseSha256": "68865a0551e3d058b5490d6359d9f93b0f500e9d92db885e28ff5b4702fd4c43",
+  "excluded": [
+    "Cloudflare analytics beacon",
+    "provider query customizer and localStorage demo wishes",
+    "provider /api/v1/public/i/:slug/guestbook endpoint"
+  ],
+  "templateName": "To‘rt fasl"
+}

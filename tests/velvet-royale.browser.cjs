@@ -59,10 +59,10 @@ const base = {
  page.on('request',r=>{if(r.url().includes('/api/public/invitations/qa/')&&r.method()==='POST')requests.push({url:r.url(),body:r.postDataJSON()});});
  await update({...base,preview:false,guestToken:'guest-test-token'});
  await page.locator('input[name=name]').fill('Browser guest'); await page.locator('input[type=radio]').first().check();
- await page.locator('input[name=partySize]').fill('3'); await page.locator('input[name=phone]').fill('+998 90 111 22 33'); await page.locator('textarea').fill('Browser wish');
+ assert.equal(await page.locator('input[name=partySize]').count(),0); await page.locator('input[name=phone]').fill('+998 90 111 22 33'); await page.locator('textarea').fill('Browser wish');
  await page.locator('.section-rsvp__submit').click(); await page.waitForTimeout(200);
- assert.equal(requests.length,2); assert.equal(requests[0].body.partySize,3); assert.equal(requests[0].body.guestToken,'guest-test-token'); assert.ok(requests[0].body.note.includes('+998 90 111 22 33')); assert.equal(requests[1].body.message,'Browser wish');
- checks.push('RSVP and wishes use shared API shape with party size, phone note and guest token (transport mocked)');
+ assert.equal(requests.length,2); assert.equal(requests[0].body.partySize,1); assert.equal(requests[0].body.guestToken,'guest-test-token'); assert.ok(requests[0].body.note.includes('+998 90 111 22 33')); assert.equal(requests[1].body.message,'Browser wish');
+ checks.push('RSVP and wishes use shared API shape with one-person attendance, phone note and guest token (transport mocked)');
  await update({...base,music:'/music/catalog/emotional-piano.wav'});
  await page.waitForFunction(()=>!document.getElementById('velvet-music')?.paused);
  await page.locator('.velvet-music-toggle').click();

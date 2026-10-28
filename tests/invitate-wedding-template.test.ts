@@ -27,17 +27,17 @@ test("legacy invitations default to no artist lineup and empty program descripti
 
 test("catalog sample keeps source artists and descriptions in the shared fixture", () => {
   const sample = createTemplatePreviewSample("invitate-wedding");
-  assert.equal(sample.program.length, 4);
+  assert.deepEqual(sample.program, createTemplatePreviewSample("anor").program);
   assert.equal(sample.artistLineup.length, 8);
   assert.equal(
     sample.content["uz-Latn"].programDescriptions[sample.program[0].id],
-    "Iltimos, o‘zingiz bilan yaxshi kayfiyat va tabassumingizni olib keling.",
+    createTemplatePreviewSample("anor").content["uz-Latn"].programDescriptions[sample.program[0].id],
   );
 
   assert.equal(sample.artistLineup[0].name["uz-Latn"], "Davron Kabulov");
   assert.equal(
     sample.content["uz-Latn"].programDescriptions[sample.program[0].id],
-    "Iltimos, o‘zingiz bilan yaxshi kayfiyat va tabassumingizni olib keling.",
+    createTemplatePreviewSample("anor").content["uz-Latn"].programDescriptions[sample.program[0].id],
   );
   const sampleFields = makeWeddingFields(sample, "uz-Latn");
   assert.equal(sampleFields.artists[0].name, "Davron Kabulov");

@@ -9,20 +9,21 @@ import {
 import previewSample from "./preview-sample.json";
 
 type EventSample = {
-  personIndex: number;
+  personIndex?: number;
   celebrantAge?: number;
   /** Optional localized one-person name used by source templates such as Bitiruv. */
   personName?: Record<Locale, string>;
   title?: Record<Locale, string>;
-  hosts: Record<Locale, string>;
+  hosts?: Record<Locale, string>;
   eventLabel?: Record<Locale, string>;
   startsAt?: string;
   programTimes?: string[];
   message?: Record<Locale, string>;
   venueName?: Record<Locale, string>;
   address?: Record<Locale, string>;
-  programHeading: Record<Locale, string>;
-  programTitles: Record<Locale, string[]>;
+  venue?: Invitation["venue"];
+  programHeading?: Record<Locale, string>;
+  programTitles?: Record<Locale, string[]>;
   dressCode?: {
     style: Record<Locale, string>;
     text: Record<Locale, string>;
@@ -34,23 +35,7 @@ type EventSample = {
 type TemplateSample = {
   /** Preview-only photo captured in a source template without a shared contract field. */
   venuePhoto?: string;
-  program?: Array<{
-    id: string;
-    time: string;
-    title: Record<Locale, string>;
-    description: Record<Locale, string>;
-  }>;
-  artists?: Array<{
-    id: string;
-    name: Record<Locale, string>;
-    role: Record<Locale, string>;
-    imageUrl: string;
-    imageAssetId?: string | null;
-  }>;
   gallery?: Invitation["gallery"];
-  story?: Invitation["story"];
-  /** Optional source-shaped preview content; never persisted to creator invitations. */
-  wishes?: Record<Locale, Array<{ name: string; text: string }>>;
 };
 
 const EVENT_SAMPLES = previewSample.eventSamples as Partial<
@@ -84,41 +69,11 @@ export function createTemplatePreviewSample(
         : (template?.supportedEventTypes[0] ?? previewSample.eventType)
   ) as EventType;
   const templateSample = TEMPLATE_SAMPLES[templateId];
-  const useTemplateSample =
-    templateId === "invitate-wedding" && sampleEventType === "wedding";
   const content = structuredClone(previewSample.content) as Invitation["content"];
   const dressCode = structuredClone(previewSample.dressCode);
-  const program =
-    useTemplateSample && templateSample?.program
-      ? templateSample.program.map(({ id, time }) => ({ id, time }))
-      : previewSample.program.map((entry) => ({ ...entry }));
-  if (useTemplateSample && templateSample?.program) {
-    for (const locale of Object.keys(content) as Locale[]) {
-      content[locale].programTitles = {
-        ...content[locale].programTitles,
-        ...Object.fromEntries(
-          templateSample.program.map((item) => [item.id, item.title[locale]]),
-        ),
-      };
-      content[locale].programDescriptions = Object.fromEntries(
-        templateSample.program.map((item) => [item.id, item.description[locale]]),
-      );
-    }
-  }
+  const program = previewSample.program.map((entry) => ({ ...entry }));
   let startsAt = previewSample.startsAt;
-  const nilufarFotihaPreview = templateId === "nilufar" && sampleEventType === "fotiha";
-  if (nilufarFotihaPreview) {
-    const fotihaLabels: Record<Locale, string> = {
-      "uz-Latn": "Fotiha to‘yi",
-      "uz-Cyrl": "Фотиҳа тўйи",
-      en: "Engagement celebration",
-      ru: "Праздник фотиha",
-    };
-    for (const locale of Object.keys(content) as Locale[]) {
-      content[locale].eventLabel = fotihaLabels[locale];
-    }
-  }
-  if (sampleEventType !== previewSample.eventType && !nilufarFotihaPreview) {
+  {
     const eventSample = EVENT_SAMPLES[sampleEventType];
     if (eventSample) {
       if (eventSample.startsAt) startsAt = eventSample.startsAt;
@@ -129,20 +84,20 @@ export function createTemplatePreviewSample(
       for (const locale of Object.keys(content) as Locale[]) {
         content[locale].eventLabel = eventSample.eventLabel?.[locale] ?? "";
         if (eventSample.title) content[locale].title = eventSample.title[locale];
-        content[locale].hosts = eventSample.hosts[locale];
+        content[locale].hosts = eventSample.hosts?.[locale] ?? content[locale].hosts;
         if (eventSample.message)
           content[locale].message = eventSample.message[locale];
         if (eventSample.venueName)
           content[locale].venueName = eventSample.venueName[locale];
         if (eventSample.address)
           content[locale].address = eventSample.address[locale];
-        content[locale].programHeading = eventSample.programHeading[locale];
+        content[locale].programHeading = eventSample.programHeading?.[locale] ?? content[locale].programHeading;
         const honoree =
           eventSample.personName?.[locale] ??
-          previewSample.content[locale].people[eventSample.personIndex];
-        content[locale].people = honoree ? [honoree] : [];
+          (eventSample.personIndex != null ? previewSample.content[locale].people[eventSample.personIndex] : undefined);
+        if (eventSample.personIndex != null || eventSample.personName) content[locale].people = honoree ? [honoree] : [];
         program.forEach((entry, index) => {
-          const title = eventSample.programTitles[locale][index];
+          const title = eventSample.programTitles?.[locale]?.[index];
           if (title)
             (content[locale].programTitles as Record<string, string>)[
               entry.id
@@ -175,12 +130,13 @@ export function createTemplatePreviewSample(
     celebrantAge: EVENT_SAMPLES[sampleEventType]?.celebrantAge ?? null,
     startsAt,
     timezone: previewSample.timezone,
+    venue: structuredClone(EVENT_SAMPLES[sampleEventType]?.venue ?? previewSample.venue),
     gift: structuredClone(previewSample.gift),
     contacts: structuredClone(previewSample.contacts),
     program,
-    artistLineup: useTemplateSample ? templateSample?.artists ?? [] : [],
+    artistLineup: sampleEventType === "wedding" ? structuredClone(previewSample.artistLineup) : [],
     gallery: structuredClone(templateSample?.gallery ?? previewSample.gallery),
-    story: structuredClone(templateSample?.story ?? createInvitation(templateId).story),
+    story: sampleEventType === "wedding" ? structuredClone(previewSample.story) : [],
     templateData: templateId === "wedivo-pulau-sehati"
       ? { "wedivo-pulau-sehati": {
           inscription: { arabic: "", text: {}, attribution: {} },
@@ -206,8 +162,7 @@ export function getTemplatePreviewWishes(
   templateId?: string,
 ): Array<{ name: string; text: string }> {
   return structuredClone(
-    (templateId ? TEMPLATE_SAMPLES[templateId]?.wishes?.[locale] : undefined) ??
-      previewSample.wishes[locale],
+    previewSample.wishes[locale],
   );
 }
 

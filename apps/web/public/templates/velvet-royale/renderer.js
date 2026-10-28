@@ -218,13 +218,6 @@ import confetti from "./source/reference/C94ZD2ww.js";
     q('input[name="phone"]').closest("label").hidden = !attendanceEnabled;
     q('#manor-rsvp-v-0-1-wish').closest("label").hidden = !data.wishesEnabled;
     q('#manor-rsvp-v-0-1-wish').maxLength = 500;
-    const maxPartySize = Math.max(1, Number(data.rsvp?.maxPartySize) || 1);
-    if (attendanceEnabled && maxPartySize > 1) {
-      const field = element("label", "section-rsvp__field", ""); field.setAttribute("data-v-525c4769", "");
-      const title = element("span", "", data.locale === "en" ? "Number of guests" : data.locale === "ru" ? "Количество гостей" : data.locale === "uz-Cyrl" ? "Меҳмонлар сони" : "Mehmonlar soni");
-      const input = document.createElement("input"); input.type = "number"; input.name = "partySize"; input.min = "1"; input.max = String(maxPartySize); input.value = "1"; input.setAttribute("data-v-525c4769", "");
-      field.append(title, input); q(".section-rsvp__attendance").after(field);
-    }
     q('#manor-rsvp-v-0-1-name').value = data.guestName || "";
     q(".section-rsvp__submit").disabled = false;
     form.onsubmit = async event => {
@@ -232,11 +225,11 @@ import confetti from "./source/reference/C94ZD2ww.js";
       if (data.preview) { notice.textContent = label.preview; return; }
       const values = new FormData(form), name = String(values.get("name") || "").trim();
       const status = radios.find(radio => radio.checked)?.value || "";
-      const wish = String(values.get("wish") || "").trim(), partySize = Number(values.get("partySize") || 1), phone = String(values.get("phone") || "").trim();
-      if (!name || (attendanceEnabled && (!status || (status === "yes" && (!Number.isInteger(partySize) || partySize < 1 || partySize > maxPartySize)))) || (!attendanceEnabled && !wish)) { notice.textContent = label.error; return; }
+      const wish = String(values.get("wish") || "").trim(), phone = String(values.get("phone") || "").trim();
+      if (!name || (attendanceEnabled && !status) || (!attendanceEnabled && !wish)) { notice.textContent = label.error; return; }
       const submit = q(".section-rsvp__submit"); submit.disabled = true; form.setAttribute("aria-busy", "true");
       try {
-        if (attendanceEnabled) { const response = await fetch(`${data.apiBase}/rsvp`, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ name, status, partySize: status === "yes" ? partySize : 0, note: phone ? `${label.phone}: ${phone}` : "", guestToken: data.guestToken || undefined }) }); if (!response.ok) throw new Error("rsvp"); }
+        if (attendanceEnabled) { const response = await fetch(`${data.apiBase}/rsvp`, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ name, status, partySize: status === "yes" ? 1 : 0, note: phone ? `${label.phone}: ${phone}` : "", guestToken: data.guestToken || undefined }) }); if (!response.ok) throw new Error("rsvp"); }
         if (wish && data.wishesEnabled) { const response = await fetch(`${data.apiBase}/wishes`, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ name, message: wish, guestToken: data.guestToken || undefined }) }); if (!response.ok) throw new Error("wish"); }
         notice.textContent = wish && data.wishesEnabled ? data.locale === "en" ? "Thank you! Your wish will appear after approval." : data.locale === "ru" ? "Спасибо! Пожелание появится после одобрения." : data.locale === "uz-Cyrl" ? "Раҳмат! Тилагингиз тасдиқлангач кўринади." : "Rahmat! Tilagingiz tasdiqlangach ko‘rinadi." : label.thanks; form.reset();
       } catch { notice.textContent = label.error; } finally { submit.disabled = false; form.setAttribute("aria-busy", "false"); }

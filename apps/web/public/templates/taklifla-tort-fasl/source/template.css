@@ -1,0 +1,27 @@
+
+  * { box-sizing: border-box; }
+  :root { --accent:#a2506f; /* alias for shared _wish-close.js */ }
+  html, body { margin: 0; padding: 0; }
+  body { background: #fbe7ee; font-family: 'Nunito', sans-serif; color: #4a3b33; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; transition: background-color .2s linear; }
+  a { color: #a2506f; text-decoration: none; } a:hover { color: #8d4260; }
+  input, textarea, button { font-family: inherit; }
+  input::placeholder, textarea::placeholder { color: #b09a86; opacity: 1; }
+  @keyframes fsFallL{0%{transform:translate3d(0,-8vh,0) rotate(-10deg)}50%{transform:translate3d(-30px,46vh,0) rotate(150deg)}100%{transform:translate3d(16px,104vh,0) rotate(330deg)}}
+  @keyframes fsFallR{0%{transform:translate3d(0,-8vh,0) rotate(8deg)}50%{transform:translate3d(30px,46vh,0) rotate(-150deg)}100%{transform:translate3d(-16px,104vh,0) rotate(-330deg)}}
+  @keyframes fsDropL{0%{transform:translate3d(0,-70px,0) rotate(0deg)}50%{transform:translate3d(-20px,180px,0) rotate(160deg)}100%{transform:translate3d(12px,430px,0) rotate(320deg)}}
+  @keyframes fsDropR{0%{transform:translate3d(0,-70px,0) rotate(0deg)}50%{transform:translate3d(20px,180px,0) rotate(-160deg)}100%{transform:translate3d(-12px,430px,0) rotate(-320deg)}}
+  @keyframes fsFloatL{0%{transform:translate3d(0,-9vh,0) rotate(-8deg)}33%{transform:translate3d(-34px,30vh,0) rotate(7deg)}66%{transform:translate3d(24px,66vh,0) rotate(-10deg)}100%{transform:translate3d(-12px,104vh,0) rotate(5deg)}}
+  @keyframes fsFloatR{0%{transform:translate3d(0,-9vh,0) rotate(8deg)}33%{transform:translate3d(34px,30vh,0) rotate(-7deg)}66%{transform:translate3d(-24px,66vh,0) rotate(10deg)}100%{transform:translate3d(12px,104vh,0) rotate(-5deg)}}
+  @keyframes fsSeedDropL{0%{transform:translate3d(0,-80px,0) rotate(6deg)}50%{transform:translate3d(-22px,180px,0) rotate(-8deg)}100%{transform:translate3d(10px,440px,0) rotate(6deg)}}
+  @keyframes fsSeedDropR{0%{transform:translate3d(0,-80px,0) rotate(-6deg)}50%{transform:translate3d(22px,180px,0) rotate(8deg)}100%{transform:translate3d(-10px,440px,0) rotate(-6deg)}}
+  @keyframes fsBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+  @keyframes fsRise{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes fsGlow{0%,100%{box-shadow:0 0 16px rgba(255,196,124,.3),0 8px 26px rgba(45,30,70,.28)}50%{box-shadow:0 0 34px rgba(255,208,140,.62),0 8px 26px rgba(45,30,70,.28)}}
+  @keyframes fsNames{0%,100%{text-shadow:0 0 14px rgba(255,224,238,.55)}50%{text-shadow:0 0 30px rgba(255,238,246,.95),0 0 8px rgba(255,255,255,.6)}}
+  @media (prefers-reduced-motion: reduce) { * { animation-duration: .001ms !important; animation-iteration-count: 1 !important; } }
+  [data-reveal] { opacity: 0; }
+  [data-reveal].fs-in { animation: fsRise .9s cubic-bezier(.2,.7,.3,1) both; }
+  .fs-lang { position:fixed; top:14px; right:max(14px, calc(50vw - 201px)); z-index:60; display:flex; gap:2px; background:rgba(74,59,51,.72); border:1px solid rgba(255,255,255,.35); border-radius:999px; padding:3px; box-shadow:0 8px 22px -10px rgba(45,30,40,.5); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); }
+  .fs-lang button { border:0; background:transparent; cursor:pointer; font-family:'Nunito',sans-serif; font-size:11px; font-weight:700; letter-spacing:.08em; color:#fdf3f6; padding:5px 9px; border-radius:999px; line-height:1; text-transform:uppercase; }
+  .fs-lang button.on { background:linear-gradient(180deg,#e79ab3,#a2506f); color:#fff; }
+  .fs-fitline { white-space:nowrap; overflow:hidden; display:block; }

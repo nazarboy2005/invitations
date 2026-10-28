@@ -1,0 +1,12 @@
+{
+  "date": "2026-10-28",
+  "checks": [
+    "Authenticated four-locale save/reopen preserves authored fields, authored story chapters and venue",
+    "Real shared publication transaction succeeds without exposing the hidden template during verification",
+    "Real public route uses the same renderer in every locale with the resolved guest and creator-selected Google Place",
+    "Actual wish stores resolved guest identity, remains pending and absent from the public list",
+    "Published edit/reopen updates authored content and manual Google Maps target in the public renderer"
+  ],
+  "consoleErrors": [],
+  "cleanup": "All generated accounts, invitations, guest responses and notification jobs removed"
+}

@@ -10,6 +10,7 @@ import { AnorInvitation } from "@/templates/anor";
 import { WedivoPulauSehati } from "@/templates/wedivo-pulau-sehati/renderer";
 import { TakliflaZarhalSahifaInvitation } from "@/templates/taklifla-zarhal-sahifa/renderer";
 import { TakliflaAsalari } from "@/templates/taklifla-asalari/renderer";
+import { TakliflaTortFasl } from "@/templates/taklifla-tort-fasl/renderer";
 import { MuhrliMaktubInvitation } from "@/templates/taklifla-muhrli-maktub/renderer";
 import { isMarxabaTemplate, MarxabaInvitation } from "@/templates/marxaba";
 import { isInvitateTemplate, InvitateInvitation } from "@/templates/invitate";
@@ -145,6 +146,8 @@ export default async function InvitationPage({
     return <><InvitationViewTracker invitationId={result.id} musicUrl={invitation.music.enabled ? invitation.music.url : ""} /><WedivoPulauSehati invitation={invitation} invitationId={result.id} locale={locale} guestName={guestName} guestToken={query.g} /></>;
   if (invitation.templateId === "taklifla-zarhal-sahifa")
     return <><InvitationViewTracker invitationId={result.id} musicUrl={invitation.music.enabled ? invitation.music.url : ""} /><TakliflaZarhalSahifaInvitation invitation={invitation} invitationId={result.id} locale={locale} guestName={guestName} guestToken={query.g} /></>;
+  if (invitation.templateId === "taklifla-tort-fasl")
+    return <><InvitationViewTracker invitationId={result.id} musicUrl={invitation.music.enabled ? invitation.music.url : ""} /><TakliflaTortFasl invitation={invitation} invitationId={result.id} locale={locale} guestName={guestName} guestToken={query.g} /></>;
   if (invitation.templateId === "taklifla-asalari")
     return <><InvitationViewTracker invitationId={result.id} musicUrl={invitation.music.enabled ? invitation.music.url : ""} /><TakliflaAsalari invitation={invitation} invitationId={result.id} locale={locale} guestName={guestName} guestToken={query.g} preview={false} silentPlayback={false} /></>;
   if (invitation.templateId === "taklifla-muhrli-maktub")
