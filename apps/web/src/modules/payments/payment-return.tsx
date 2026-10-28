@@ -261,17 +261,15 @@ export function PaymentReturn({
           : "Taklifnomani tanlang"
         : published
           ? "Taklifnomangiz tayyor"
-          : invitation.status === "archived"
-            ? "Taklifnoma arxivlangan"
-            : paid
-              ? "Nashrni yakunlang"
-              : context?.publishingMode === "free" && !order
-                ? "Taklifnomani nashr qiling"
-                : order?.status === "PROCESSING" || order?.status === "REJECTED"
-                  ? "To‘lov tasdiqlanmoqda"
-                  : order && !pending && !retryable
-                    ? "To‘lov bo‘yicha ma’lumot"
-                    : "To‘lov qilish";
+          : paid
+            ? "Nashrni yakunlang"
+            : context?.publishingMode === "free" && !order
+              ? "Taklifnomani nashr qiling"
+              : order?.status === "PROCESSING" || order?.status === "REJECTED"
+                ? "To‘lov tasdiqlanmoqda"
+                : order && !pending && !retryable
+                  ? "To‘lov bo‘yicha ma’lumot"
+                  : "To‘lov qilish";
   const content = invitation ? getContent(invitation) : null;
   const templateName =
     (order && !retryable ? order.templateName : undefined) ??
@@ -394,16 +392,6 @@ export function PaymentReturn({
                     onFocus={(event) => event.currentTarget.select()}
                   />
                 </>
-              ) : invitation.status === "archived" ? (
-                <>
-                  <p>
-                    Taklifnomani avvalgi havolasi bilan qayta nashr qilishingiz
-                    mumkin.
-                  </p>
-                  <Link className="button" href="/dashboard">
-                    Taklifnomalarimga qaytish
-                  </Link>
-                </>
               ) : paid ? (
                 <>
                   <p className={styles.paidNote} role="status">
@@ -477,7 +465,7 @@ export function PaymentReturn({
                   )}
                 </>
               )}
-              {!published && invitation.status !== "archived" && !paid && (
+              {!published && !paid && (
                 <Link className={styles.editLink} href={editUrl}>
                   Ma’lumotlarni tahrirlash
                 </Link>
