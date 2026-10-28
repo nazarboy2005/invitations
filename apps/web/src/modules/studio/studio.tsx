@@ -55,6 +55,7 @@ import styles from "./studio.module.css";
 import { SoftSelect } from "@/components/soft-select";
 import { DateTimePicker, TimePicker } from "@/components/date-time-picker";
 import { readBrowserDraft, saveBrowserDraft } from "./draft-storage";
+import { PlaceSearch } from "./place-search";
 import { AnorInvitation } from "@/templates/anor";
 import { isMarxabaTemplate, MarxabaInvitation } from "@/templates/marxaba";
 import { isInvitateTemplate, InvitateInvitation } from "@/templates/invitate";
@@ -2468,14 +2469,15 @@ export function Studio({
                 )}
                 <div className={styles.divider} />
                 <h2>Manzil</h2>
-                <Field label="To‘yxona yoki joy nomi">
-                  <input
+                <Field label="To‘yxona yoki joy nomi" hint="Nomni yozib Google Maps joylaridan tanlang yoki qo‘lda kiriting.">
+                  <PlaceSearch
                     value={content.venueName}
-                    maxLength={300}
-                    onChange={(event) =>
-                      updateContent({ venueName: event.target.value })
-                    }
-                    placeholder={placeholders.venueName}
+                    locale={locale}
+                    onChange={(value) => updateContent({ venueName: value })}
+                    onSelect={(place) => {
+                      updateContent({ venueName: place.name, address: place.address });
+                      update({ venue: { latitude: place.latitude, longitude: place.longitude, mapUrl: place.mapUrl } });
+                    }}
                   />
                 </Field>
                 <Field label="To‘liq manzil">

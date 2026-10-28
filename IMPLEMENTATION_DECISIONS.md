@@ -1150,7 +1150,15 @@ Recommended behavior and schema guidance:
 - Suggested schema: `invitations.default_locale`, enabled locales, and `invitation_content` unique by `(invitation_id, locale)`; translated repeatable items reference the same stable item ID and locale. Choose one consistent translation-table/JSONB approach during final schema design. Guest preferred locale can be optional; all variants reuse the same greeting placeholders and guest identity.
 - Language variants follow existing creator editing deadlines. Per-language prices, separate publication fees, and exact interface-language settings have not been decided.
 
-## Optional venue/restaurant autocomplete
+## Google Maps venue search and template navigation
+
+User requirement (2026-10-28): Google Maps is the chosen venue provider. Every current and future invitation template must use the shared invitation venue's Google Maps location and navigation target, including coordinates and the creator's map link. A template's original map presentation and animation stay intact; its map controls must point to the shared venue rather than reference sample data. Selecting a template must not change the venue. A copied source field such as `maps_api_key` is not a creator field or invitation value.
+
+The creator editor offers Google Places suggestions while typing a venue. Selection fills the shared venue name, address, coordinates, and Google Maps link. Manual venue entry and pasted map links remain available; editing text after selection does not silently move the selected pin. The server uses `GOOGLE_MAPS_API_KEY` for Places API (New) Autocomplete and Place Details. Keep the key server-only and out of public template payloads. Map navigation URLs need no API key. Google Places requires an enabled API and billing on the owner's Google Cloud project. If the key or service is unavailable, the editor continues to accept manual venues and map links.
+
+Future template integration must check that every map button, directions link, and embedded map uses the shared venue or a derived Google Maps URL; verify a creator-selected place and a manual URL in preview and public rendering. Keep source-specific secondary event venue links separate where the contract provides them.
+
+## Venue/restaurant autocomplete details
 
 Confirmed requirements:
 
@@ -1160,12 +1168,12 @@ Confirmed requirements:
 
 Recommended implementation:
 
-- Use supported Google Places Autocomplete + Place Details or Yandex Geosuggest + appropriate place-detail/search/geocoding API, not scraping map HTML. Final provider is undecided; evaluate real venue coverage in target cities, cost, supported languages, and licensing for persistent invitation content.
+- Use supported Google Places Autocomplete (New) and Place Details (New), not scraping map HTML. Google Maps is the chosen provider.
 - Use an interchangeable place-search module. Show locality/address in suggestions to distinguish same-named venues and optionally bias results by selected city/country without requiring GPS access. Include restaurants, wedding halls, and other event venues rather than restricting every event to restaurants.
 - Prefill only after explicit selection. Debounce/rate-limit search and discard stale responses; outages/no results must not prevent manual entry, saving, or publication. Do not guess missing coordinates or claim venue availability/bookability from search results.
 - Keep creator-authored display fields independent from optional provider references (`place_provider`, `place_id`/URI). Preserve existing location data and language variants when switching templates. Renaming a venue must not silently move its map pin; changing the pin/location should update navigation targets consistently. Selecting a different suggestion must not silently overwrite authored translations or additional venue notes.
 - Provider content has attribution, map-display, and storage/caching restrictions; confirm the selected plan permits the intended long-lived data use before choosing a persistence strategy. Do not assume copying or editing API data removes its licensing restrictions, or mix Google-derived place data onto another provider's map without checking permitted use. Persist only permitted provider metadata and separate it from creator-entered values.
-- API keys, provider setup, exact map UI, storage/refresh policy, and any alternate provider fallback remain implementation choices; no scraping job or restaurant database import is requested.
+- Exact map UI, storage/refresh policy, and any alternate provider fallback remain implementation choices; no scraping job or restaurant database import is requested.
 
 References checked on 2026-10-19: Google autocomplete https://developers.google.com/maps/documentation/places/web-service/place-autocomplete and policies https://developers.google.com/maps/documentation/places/web-service/policies; Yandex suggestions https://yandex.com/maps-api/docs/suggest-api/request.html and place search https://yandex.com/maps-api/docs/geosearch-api/request.html.
 
