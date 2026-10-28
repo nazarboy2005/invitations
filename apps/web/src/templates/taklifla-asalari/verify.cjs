@@ -26,12 +26,12 @@ test('four variants map authored values, stable program IDs and event-zone insta
   v.program=[{id:'first',time:'17:30'},{id:'second',time:'18:00'}];
   for (const locale of LOCALES) { v.content[locale].people=['Author <script>']; v.content[locale].personalGreeting='Welcome {name}';v.content[locale].programTitles={first:'One',second:'Two'};v.content[locale].programDescriptions={first:'Description'}; }
   const before=JSON.stringify(v), p=exports.payload(v).payload;
-  for (const locale of LOCALES) { const d=p.variants[locale];assert.equal(d.child,'Author <script>');assert.equal(d.greeting,'Welcome Aziza');assert.deepEqual(d.program.map(x=>x.id),['first','second']);assert.equal(d.program[0].description,'Description');assert.equal(d.target,Date.parse('2027-06-12T12:00:00Z')); }
+  for (const locale of LOCALES) { const d=p.variants[locale];assert.equal(d.child,'Author <script>');assert.equal(d.age,3);assert.equal(d.greeting,'Welcome Aziza');assert.deepEqual(d.program.map(x=>x.id),['first','second']);assert.equal(d.program[0].description,'Description');assert.equal(d.target,Date.parse('2027-06-12T12:00:00Z'));assert.match(d.venue.mapUrl,/^https:\/\/www\.google\.com\/maps\/search\/\?api=1&query=/); }
   assert.equal(JSON.stringify(v),before);
 });
-test('blank/public invitations never acquire demo wishes, age, music, or unsupported sections', () => {
+test('blank/public invitations never acquire demo wishes, music, or unsupported sections', () => {
   const v=createInvitation('taklifla-asalari');const p=exports.payload(v,{preview:false,sampleWishes:true}).payload;
-  for (const d of Object.values(p.variants)) { assert.equal(d.child,''); assert.equal(d.target,null);assert.deepEqual(d.program,[]);assert.deepEqual(d.wishes,[]);for(const key of ['age','rsvp','gift','gallery','contacts','story']) assert.ok(!(key in d)); }
+  for (const d of Object.values(p.variants)) { assert.equal(d.child,''); assert.equal(d.age,null); assert.equal(d.target,null);assert.deepEqual(d.program,[]);assert.deepEqual(d.wishes,[]);for(const key of ['rsvp','gift','gallery','contacts','story']) assert.ok(!(key in d)); }
   assert.equal(p.music.enabled,false);assert.equal(p.music.url,'');assert.equal(templateById('taklifla-asalari').published,true);assert.deepEqual(templateById('taklifla-asalari').supportedEventTypes,['birthday']);
   const runnable=fs.readFileSync(path.join(pkg,'index.html'),'utf8')+fs.readFileSync(path.join(pkg,'bridge.js'),'utf8');
   assert.doesNotMatch(runnable,/Asila|Koşebaşı|2026-07-14|assets\/music.mp3|localStorage|cloudflareinsights|fonts.googleapis/);

@@ -933,6 +933,7 @@ test("Taklifla Asalari and Muhrli Maktub save, reopen, publish, and render publi
     const invitation = completeInvitation();
     invitation.templateId = templateId;
     invitation.eventType = eventType;
+    if (templateId === "taklifla-asalari") invitation.celebrantAge = 3;
     invitation.enabledLocales = [...LOCALES];
     invitation.defaultLocale = "uz-Latn";
     for (const locale of LOCALES) {
@@ -957,6 +958,7 @@ test("Taklifla Asalari and Muhrli Maktub save, reopen, publish, and render publi
     assert.deepEqual(reopened.content, saved.content);
     assert.deepEqual(reopened.program, saved.program);
     assert.deepEqual(reopened.templateData, saved.templateData);
+    if (templateId === "taklifla-asalari") assert.equal(reopened.celebrantAge, 3);
 
     const incompatible = { ...reopened, eventType: eventType === "wedding" ? "birthday" as const : "wedding" as const };
     assert.equal((await request(`/api/invitations/${saved.id}`, { invitation: incompatible }, true, origin, "PUT")).status, 409);

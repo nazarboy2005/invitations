@@ -611,6 +611,7 @@
       }
     },
     "birthday": {
+      "celebrantAge": 3,
       "personIndex": 0,
       "eventLabel": {
         "uz-Latn": "Tug‘ilgan kun",

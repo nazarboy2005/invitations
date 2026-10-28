@@ -10,6 +10,7 @@ import previewSample from "./preview-sample.json";
 
 type EventSample = {
   personIndex: number;
+  celebrantAge?: number;
   /** Optional localized one-person name used by source templates such as Bitiruv. */
   personName?: Record<Locale, string>;
   title?: Record<Locale, string>;
@@ -171,6 +172,7 @@ export function createTemplatePreviewSample(
       ? [...localeSettings.enabledLocales]
       : [...previewSample.enabledLocales],
     eventType: sampleEventType,
+    celebrantAge: EVENT_SAMPLES[sampleEventType]?.celebrantAge ?? null,
     startsAt,
     timezone: previewSample.timezone,
     gift: structuredClone(previewSample.gift),
@@ -283,6 +285,7 @@ export function hasAuthoredInvitationContent(invitation: Invitation): boolean {
     authoredRsvp ||
     !invitation.wishes.enabled ||
     invitation.eventType !== "other" ||
+    invitation.celebrantAge !== null ||
     invitation.startsAt ||
     invitation.program.length ||
     invitation.gallery.length ||

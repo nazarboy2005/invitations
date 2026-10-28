@@ -1752,6 +1752,20 @@ export function Studio({
                     Tuzatish uchun administratorga murojaat qiling.
                   </p>
                 )}
+                {invitation.eventType === "birthday" && (
+                  <Field label="Bayram sohibining yoshi" hint="Ixtiyoriy. Tug‘ilgan kun dizaynlarida ko‘rsatiladi.">
+                    <input
+                      type="number"
+                      min={1}
+                      max={120}
+                      value={invitation.celebrantAge ?? ""}
+                      onChange={(event) => {
+                        const value = event.target.value;
+                        update({ celebrantAge: value === "" ? null : Math.min(120, Math.max(1, Number(value))) });
+                      }}
+                    />
+                  </Field>
+                )}
                 <Field label="Oila yoki mezbonlar" hint="Ixtiyoriy">
                   <input
                     value={content.hosts}

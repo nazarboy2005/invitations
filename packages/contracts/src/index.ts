@@ -227,6 +227,7 @@ export const invitationSchema = z
     enabledLocales: z.array(localeSchema).min(1).max(4),
     content: z.record(z.string(), contentSchema),
     eventType: eventTypeSchema,
+    celebrantAge: z.number().int().min(1).max(120).nullable().default(null),
     startsAt: z.string().max(50),
     timezone: z.string().max(100),
     venue: z.object({
@@ -2040,6 +2041,7 @@ export function createInvitation(
     enabledLocales: ["uz-Latn"],
     content: { "uz-Latn": emptyContent() },
     eventType: "other",
+    celebrantAge: null,
     startsAt: "",
     timezone: "Asia/Tashkent",
     venue: { latitude: null, longitude: null, mapUrl: "" },

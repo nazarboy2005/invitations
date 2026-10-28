@@ -22,18 +22,24 @@ export function makeAsalariPayload(
     const c = getContent(invitation, language);
     const local = (value: Partial<Record<Locale, string>>) => value[language] || value[invitation.defaultLocale] || "";
     const date = (format: Intl.DateTimeFormatOptions) => formatDate(invitation.startsAt, language, invitation.timezone, format);
+    const venueQuery = [c.venueName, c.address].filter(Boolean).join(", ");
+    const coordinates = invitation.venue.latitude != null && invitation.venue.longitude != null
+      ? `${invitation.venue.latitude},${invitation.venue.longitude}` : "";
+    const mapUrl = invitation.venue.mapUrl || (coordinates || venueQuery
+      ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(coordinates || venueQuery)}` : "");
     return [language, {
       title: c.title,
       child: c.people[0] || "",
       hosts: c.hosts,
       eventLabel: c.eventLabel,
+      age: invitation.celebrantAge,
       greeting: (guestName && c.personalGreeting ? c.personalGreeting.replaceAll("{name}", guestName) : c.greeting),
       message: c.message,
-      date: { weekday: date({ weekday: "long" }), long: date({ day: "numeric", month: "long", year: "numeric" }), time: date({ hour: "2-digit", minute: "2-digit", hourCycle: "h23" }) },
+      date: { weekday: date({ weekday: "long" }), long: date({ day: "numeric", month: "long", year: "numeric" }), hero: `${date({ day: "numeric" })} · ${date({ month: "long" })} · ${date({ year: "numeric" })}`, time: date({ hour: "2-digit", minute: "2-digit", hourCycle: "h23" }) },
       target: eventInstant(invitation.startsAt, invitation.timezone)?.getTime() ?? null,
       programHeading: c.programHeading,
       program: invitation.program.map((item) => ({ id: item.id, time: item.time, title: c.programTitles[item.id] || "", description: c.programDescriptions[item.id] || "" })),
-      venue: { name: c.venueName, address: [c.address, c.landmark].filter(Boolean).join(" · "), mapUrl: invitation.venue.mapUrl || (invitation.venue.latitude != null && invitation.venue.longitude != null ? `https://www.google.com/maps/search/?api=1&query=${invitation.venue.latitude},${invitation.venue.longitude}` : "") },
+      venue: { name: c.venueName, address: [c.address, c.landmark].filter(Boolean).join(" · "), mapUrl },
       dressCode: { enabled: invitation.dressCode.enabled, style: local(invitation.dressCode.style), text: local(invitation.dressCode.text), note: local(invitation.dressCode.note), colors: invitation.dressCode.colors.map((color) => local(color.name)).filter(Boolean) },
       wishes: options.preview && options.sampleWishes ? getTemplatePreviewWishes(language) : [],
     }];

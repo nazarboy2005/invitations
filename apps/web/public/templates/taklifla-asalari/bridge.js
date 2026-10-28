@@ -38,11 +38,16 @@
     }
     text('.splash .top-line', data.greeting || window.ASALARI_COPY[language]['.splash .top-line']);
     text('.splash h1', data.title || data.child || data.eventLabel);
-    text('.splash p.lede', data.message); text('.hero .pre', data.eventLabel || l.birthday);
+    text('.splash p.lede', data.message); text('.hero .pre', language === 'en' && data.age ? `Happy ${data.age}${data.age % 10 === 1 && data.age % 100 !== 11 ? 'st' : data.age % 10 === 2 && data.age % 100 !== 12 ? 'nd' : data.age % 10 === 3 && data.age % 100 !== 13 ? 'rd' : 'th'} birthday` : language === 'ru' && data.age ? `С ${data.age}-летием` : language.startsWith('uz') ? l.birthday.toLocaleLowerCase() : l.birthday);
     text('.hero h1.name', data.child); $('.hero h1.name').dataset.text = data.child;
     text('.splash .monogram', [...data.child][0]?.toUpperCase() || ''); text('.foot .mono', [...data.child][0]?.toUpperCase() || '');
-    show('.age-pill', false); // No approved contract field: never retain the sample age.
-    text('.hero .date', data.date.long); text('.invite h2', data.title);
+    show('.age-pill', Number.isInteger(data.age) && data.age > 0);
+    if (data.age) {
+      const ageWords = language === 'uz-Cyrl' ? ['энди', 'ёшда'] : language === 'uz-Latn' ? ['endi', 'yoshda'] : language === 'ru' ? ['исполняется', 'лет'] : ['turning', 'this year'];
+      const parts = $$('.age-pill span'); parts[0].textContent = ageWords[0]; parts[1].textContent = ageWords[1];
+      text('.age-pill b', String(data.age));
+    }
+    text('.hero .date', data.date.hero); text('.invite h2', data.title);
     text('.invite .name-mini', language.startsWith('uz') ? `${data.child} ${l.welcome}` : `${l.welcome} ${data.child}`);
     text('.invite p', data.message);
     const spans = $$('.invite .when span'); [data.date.weekday, '', data.date.long, '', data.date.time].forEach((v,i) => spans[i].textContent = v);
