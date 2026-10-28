@@ -76,12 +76,13 @@ export async function createCheckout(
   const order = await getDb().begin(async (tx) => {
     const [row] =
       await tx`SELECT * FROM invitations WHERE id=${id} AND owner_id=${user.id} FOR UPDATE`;
-    if (!row) throw new ApiError(404, "NOT_FOUND", "Taklifnoma topilmadi.");
+    if (!row || row.status === "deleted")
+      throw new ApiError(404, "NOT_FOUND", "Taklifnoma topilmadi.");
     if (row.status !== "draft")
       throw new ApiError(
         409,
         "NOT_DRAFT",
-        "Taklifnoma allaqachon nashr qilingan yoki arxivlangan.",
+        "To‘lovni faqat qoralama uchun boshlash mumkin.",
       );
     const invitation = invitationSchema.parse(row.data);
     if (invitation.revision !== revision)

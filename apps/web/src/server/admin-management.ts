@@ -51,7 +51,7 @@ export async function listAdminUsers(
   const predicate = db`(u.display_name ILIKE ${q.search} OR coalesce(u.telegram_username,'') ILIKE ${q.search} OR u.telegram_user_id::text ILIKE ${q.search} OR u.id::text=${q.q}) AND (${q.status}='' OR (${q.status}='active' AND u.disabled_at IS NULL) OR (${q.status}='suspended' AND u.disabled_at IS NOT NULL))`;
   const [rows, [count]] = await Promise.all([
     db`SELECT u.id,u.display_name,u.telegram_username,u.telegram_user_id,right(u.phone_number,4) AS phone_last4,u.is_admin,u.disabled_at,u.created_at,
-      (SELECT count(*)::int FROM invitations i WHERE i.owner_id=u.id) AS invitations,
+      (SELECT count(*)::int FROM invitations i WHERE i.owner_id=u.id AND i.status<>'deleted') AS invitations,
       (SELECT count(*)::int FROM invitations i WHERE i.owner_id=u.id AND i.status='published') AS published,
       EXISTS(SELECT 1 FROM telegram_connections tc WHERE tc.user_id=u.id AND tc.status='active' AND tc.broadcast_opt_out_at IS NULL AND tc.telegram_chat_id=u.telegram_user_id) AS reachable
       FROM users u WHERE ${predicate} ORDER BY u.created_at DESC,u.id DESC LIMIT 20 OFFSET ${q.offset}`,
@@ -81,7 +81,7 @@ export async function listAdminInvitations(
   await requireAdmin();
   const q = managementQuery(filters),
     db = getDb();
-  const predicate = db`(${q.status}='' OR i.status=${q.status}) AND (${q.userId}='' OR i.owner_id::text=${q.userId}) AND (i.id::text=${q.q} OR coalesce(i.slug,'') ILIKE ${q.search} OR u.display_name ILIKE ${q.search} OR (i.data->'content'->(i.data->>'defaultLocale')->'people')::text ILIKE ${q.search})`;
+  const predicate = db`i.status<>'deleted' AND (${q.status}='' OR i.status=${q.status}) AND (${q.userId}='' OR i.owner_id::text=${q.userId}) AND (i.id::text=${q.q} OR coalesce(i.slug,'') ILIKE ${q.search} OR u.display_name ILIKE ${q.search} OR (i.data->'content'->(i.data->>'defaultLocale')->'people')::text ILIKE ${q.search})`;
   const [rows, [count]] = await Promise.all([
     db`SELECT i.id,i.owner_id,u.display_name,i.template_id,coalesce(t.name,'Dizayn tanlanmagan') AS template_name,i.data->>'eventType' AS event_type,i.data->>'startsAt' AS starts_at,i.data->'content'->(i.data->>'defaultLocale')->'people' AS people,i.status,i.slug,i.created_at,i.updated_at FROM invitations i JOIN users u ON u.id=i.owner_id LEFT JOIN templates t ON t.id=i.template_id WHERE ${predicate} ORDER BY i.updated_at DESC,i.id DESC LIMIT 20 OFFSET ${q.offset}`,
     db`SELECT count(*)::int AS total FROM invitations i JOIN users u ON u.id=i.owner_id WHERE ${predicate}`,
@@ -218,7 +218,7 @@ export async function createAdminPayment(
       return { id: existing.id };
     }
     const [invitation] =
-      await tx`SELECT i.owner_id,i.template_id,t.name FROM invitations i JOIN templates t ON t.id=i.template_id WHERE i.id=${input.invitationId} FOR SHARE OF i,t`;
+      await tx`SELECT i.owner_id,i.template_id,t.name FROM invitations i JOIN templates t ON t.id=i.template_id WHERE i.id=${input.invitationId} AND i.status<>'deleted' FOR SHARE OF i,t`;
     if (!invitation)
       throw new ApiError(
         404,
@@ -300,7 +300,7 @@ export async function updateAdminPayment(
 export async function getAdminInvitationOwner(id: string) {
   z.uuid().parse(id);
   const [row] =
-    await getDb()`SELECT u.* FROM invitations i JOIN users u ON u.id=i.owner_id WHERE i.id=${id}`;
+    await getDb()`SELECT u.* FROM invitations i JOIN users u ON u.id=i.owner_id WHERE i.id=${id} AND i.status<>'deleted'`;
   if (!row) throw new ApiError(404, "NOT_FOUND", "Taklifnoma topilmadi.");
   return toSessionUser(row);
 }

@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { z } from "zod";
 import { invitationSchema } from "@taklifnoma/contracts";
 import { getDb } from "@taklifnoma/database";
+import { deleteInvitation } from "@/server/delete-invitation";
 import {
   authenticatedUser,
   getOwnedInvitation,
@@ -62,58 +63,7 @@ export async function DELETE(request: Request, { params }: Context) {
     const { id } = await params;
     z.uuid().parse(id);
     await getDb().begin(async (tx) => {
-      const found =
-        await tx`SELECT status FROM invitations WHERE id=${id} AND owner_id=${user.id} FOR UPDATE`;
-      if (!found.length)
-        throw new ApiError(404, "NOT_FOUND", "Taklifnoma topilmadi.");
-      if (found[0].status !== "draft")
-        throw new ApiError(
-          409,
-          "NOT_DRAFT",
-          "Faqat qoralamani o‘chirish mumkin.",
-        );
-      if (
-        (
-          await tx`SELECT id FROM platform_payments WHERE invitation_id=${id} UNION ALL SELECT id FROM payment_orders WHERE invitation_id=${id} LIMIT 1`
-        ).length
-      )
-        throw new ApiError(
-          409,
-          "PAYMENT_HISTORY_EXISTS",
-          "To‘lov tarixiga bog‘langan taklifnoma o‘chirilmaydi.",
-        );
-      await tx`DELETE FROM invitation_change_requests WHERE invitation_id=${id}`;
-      await tx`DELETE FROM invitation_audit_log WHERE invitation_id=${id}`;
-      await tx`DELETE FROM invitations WHERE id=${id} AND owner_id=${user.id}`;
-    });
-    return NextResponse.json({ ok: true }, { headers: privateHeaders });
-  } catch (e) {
-    return apiError(e);
-  }
-}
-
-export async function PATCH(request: Request, { params }: Context) {
-  try {
-    verifySameOrigin(request);
-    const user = await authenticatedUser();
-    const { id } = await params;
-    z.uuid().parse(id);
-    z.object({ action: z.literal("unpublish") })
-      .strict()
-      .parse(await readJson(request, 1000));
-    await getDb().begin(async (tx) => {
-      const rows =
-        await tx`SELECT status FROM invitations WHERE id=${id} AND owner_id=${user.id} FOR UPDATE`;
-      if (!rows.length)
-        throw new ApiError(404, "NOT_FOUND", "Taklifnoma topilmadi.");
-      if (rows[0].status !== "published")
-        throw new ApiError(
-          409,
-          "NOT_PUBLISHED",
-          "Faqat nashr qilingan taklifnomani yashirish mumkin.",
-        );
-      await tx`UPDATE invitations SET status='archived',data=jsonb_set(data,'{status}','"archived"'::jsonb),archived_at=now(),updated_at=now() WHERE id=${id} AND owner_id=${user.id}`;
-      await tx`INSERT INTO invitation_audit_log(invitation_id,actor_id,action,previous_values,new_values) VALUES(${id},${user.id},'unpublished',${tx.json({ status: "published" })},${tx.json({ status: "archived" })})`;
+      await deleteInvitation(tx, id, user.id);
     });
     return NextResponse.json({ ok: true }, { headers: privateHeaders });
   } catch (e) {

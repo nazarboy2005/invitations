@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { getDb } from "@taklifnoma/database";
+import { deleteInvitation } from "@/server/delete-invitation";
 import {
   requireAdmin,
   requireAdminMutation,
@@ -11,7 +12,6 @@ import { getOwnedInvitation } from "@/server/invitations";
 import { reasonSchema } from "@/modules/admin/management-contract";
 import { ApiError, privateHeaders, readJson } from "@/server/api";
 const inputSchema = z.discriminatedUnion("action", [
-  z.object({ action: z.literal("archive"), reason: reasonSchema }).strict(),
   z.object({ action: z.literal("delete"), reason: reasonSchema }).strict(),
   z
     .object({
@@ -43,35 +43,10 @@ export async function PATCH(request: Request, { params }: Context) {
     await getDb().begin(async (tx) => {
       const [row] =
         await tx`SELECT id,owner_id,status,edit_deadline_at FROM invitations WHERE id=${id} FOR UPDATE`;
-      if (!row) throw new ApiError(404, "NOT_FOUND", "Taklifnoma topilmadi.");
-      if (input.action === "archive") {
-        if (row.status !== "published")
-          throw new ApiError(
-            409,
-            "NOT_PUBLISHED",
-            "Faqat nashr qilingan taklifnoma yashiriladi.",
-          );
-        await tx`UPDATE invitations SET status='archived',data=jsonb_set(data,'{status}','"archived"'::jsonb),archived_at=now(),updated_at=now() WHERE id=${id}`;
-      } else if (input.action === "delete") {
-        if (row.status !== "draft")
-          throw new ApiError(
-            409,
-            "NOT_DRAFT",
-            "Faqat qoralamani o‘chirish mumkin.",
-          );
-        if (
-          (
-            await tx`SELECT id FROM platform_payments WHERE invitation_id=${id} UNION ALL SELECT id FROM payment_orders WHERE invitation_id=${id} LIMIT 1`
-          ).length
-        )
-          throw new ApiError(
-            409,
-            "PAYMENT_HISTORY_EXISTS",
-            "To‘lov tarixiga bog‘langan taklifnoma o‘chirilmaydi.",
-          );
-        await tx`DELETE FROM invitation_change_requests WHERE invitation_id=${id}`;
-        await tx`DELETE FROM invitation_audit_log WHERE invitation_id=${id}`;
-        await tx`DELETE FROM invitations WHERE id=${id}`;
+      if (!row || row.status === "deleted")
+        throw new ApiError(404, "NOT_FOUND", "Taklifnoma topilmadi.");
+      if (input.action === "delete") {
+        await deleteInvitation(tx, id, row.owner_id, actor.id);
       } else {
         const deadline = new Date(input.deadline);
         if (
@@ -102,7 +77,7 @@ export async function PATCH(request: Request, { params }: Context) {
           ownerId: row.owner_id,
           ...(input.action === "extend_deadline"
             ? { editDeadlineAt: input.deadline }
-            : { status: input.action === "delete" ? "deleted" : "archived" }),
+            : { status: "deleted" }),
         },
       );
       if (input.action !== "delete")

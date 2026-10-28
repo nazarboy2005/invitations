@@ -1,5 +1,41 @@
 # Implementation decisions
 
+## Personal dashboard redesign (2026-10-28)
+
+- User requested improving `/dashboard` (Taklifnomalarim), using the supplied
+  invitation-card reference as visual direction. Implementation uses a warm
+  neutral background, a full-width responsive grid, overlaid status badges
+  and counted filters. Secondary card actions
+  live in an accessible popover; preserve editing, sharing, activity, draft
+  deletion, authentication and administrator access.
+- User correction: retain full 3:5 portrait covers and the exact scenes selected
+  for the template catalog. Reproduce those scenes with the invitation's own
+  names, dates and content using the real renderer; never reuse sample-text
+  screenshots or place replacement names over baked-in sample text. Generate
+  static WebPs through per-template opening/gesture recipes, cache privately by
+  content/version/session and refresh after edits. Include browser-only drafts.
+- User correction: remove the decorative dashboard background image and make
+  the entire page compact. Keep portrait artwork; use smaller cards, tighter
+  spacing and two columns on phones. Published cards must show their public
+  URL and a copy control directly, with clear copy feedback; retain activity
+  access and secondary management actions without duplicating sharing controls.
+- Performance correction: switching dashboard filters must preserve mounted cards
+  and ready cover URLs without a loading flash or regeneration. Retain a bounded
+  memory cache when browser disk storage is unavailable. Only visual content
+  changes invalidate a cover; publication state, revisions, counters, audio and
+  unrelated cookies do not. Reuse the previous cache format during migration.
+- User correction: invitations have only two creator states: draft and published.
+  Remove archive/unpublish actions, labels and republish controls, including admin
+  management. Both drafts and publications can be deleted with confirmation.
+  Deletion removes the card and public access permanently; retain only internal
+  tombstones and linked payment/guest/audit records. Deleted records cannot be
+  edited or published by delayed payment callbacks. Migrate old archived records
+  to drafts while retaining their original event identity, link and edit deadline.
+
+- Dashboard refinement: label browser-only drafts “Qoralama”. Position card menus
+  beside their trigger within the viewport, flipping upward when space is tight;
+  do not depend on browser CSS anchor-positioning support.
+
 ## Published invitation link previews (2026-10-28)
 
 - User approved dedicated square artwork for each template, with actual host
@@ -100,8 +136,8 @@
   responses, wish moderation and receipt-review tools available to creators.
 - Implementation scope: retain the real creator editor and shared validation,
   using an explicit admin context and the original owner; log the actual admin.
-  Support creating owner-bound drafts, archiving publications, deleting drafts
-  without payment history, and explicitly extending editing deadlines with a
+  Support creating owner-bound drafts, deleting invitations while retaining
+  payment history, and explicitly extending editing deadlines with a
   reason. Event identity/ownership and payment-history protections remain.
 - Account suspension/revocation must apply to website and Telegram access,
   preserve invitations/history, and not permit administrator self-lockout or
@@ -167,6 +203,27 @@
 
 ## Catalog navigation and curated covers (2026-10-25)
 
+- User requirement (2026-10-28): fully redesign `/templates` as an organized,
+  easy-to-understand catalog rather than a landing page. User correction:
+  keep “Tadbir turi” and category controls at the top on every screen; no left
+  sidebar. Preserve the cards' black bottom fade and their overlaid names and
+  descriptions; do not move captions below previews. Refine heading, spacing,
+  alignment and search/results controls around those requirements. Preserve the
+  curated default order, shared Visol navigation and existing preview/dialog behavior.
+- User supplied a laptop reference: use a full-width ivory floral stationery
+  header, a two-line black/burgundy serif heading and a separated introduction,
+  followed by a wide search and top category pills. This
+  supersedes the compact plain header direction. Adapt the composition to phones
+  with a shorter stacked header, readable copy and horizontally scrollable pills;
+  keep two cards per row with the original dark fades and overlay captions.
+- Latest refinement: remove the sorting dropdown entirely. Selected category
+  pills use the previous burgundy fill color for their border and text, with
+  the site's light background inside. Keep the category row sticky while
+  browsing. Follow-up correction: keep the categories stationary at the top in
+  either scroll direction. The catalog navbar yields to the pinned categories
+  and returns only after scrolling above the gallery with enough room for it;
+  do not make the category row jump below a returning navbar. Other pages retain
+  their existing navbar behavior.
 - Catalog ordering (2026-10-28): on `/templates`, Nikoh starts with Anor,
   Cloud Castle, Bog‘i Eram, Ganch, Green Garden, Kuzgi Chinor, Muhr, O‘rik Guli,
   Samarqand Kechasi, Evelina, then Ko‘zgu; remaining Nikoh designs retain their
@@ -1892,6 +1949,7 @@ Development agents are distinct from production queue workers. The running app w
 
 ## Shared site navigation (2026-10-28)
 
+- Public navigation links, on desktop and mobile: Shablonlar (`/templates`), Bog‘lanish (`https://t.me/HyperLean`), and Biz haqimizda (`/#why-us`). These replace the separate event-category links; retain the account entry. Keep navigation labels in Uzbek.
 - Use the single Visol navbar on home, templates and all dashboard/activity pages.
 - Studio, preview, public invitations, payment return and administrator routes retain focused controls without the public navbar.
 - Dashboard layout owns navigation and reserves space for the fixed header. Remove the legacy navbar implementation; preserve signed-in labels and admin mobile entry.

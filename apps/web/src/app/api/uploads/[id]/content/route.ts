@@ -51,12 +51,13 @@ export async function PUT(
           "Bu faylni almashtirib bo‘lmaydi.",
         );
       const [invitation] =
-        await tx`SELECT owner_id,status,edit_deadline_at FROM invitations WHERE id=${asset.draft_id} FOR SHARE`;
+        await tx`SELECT owner_id,status,identity_locked_at,edit_deadline_at FROM invitations WHERE id=${asset.draft_id} FOR SHARE`;
       if (
         invitation &&
         (invitation.owner_id !== user.id ||
-          invitation.status === "archived" ||
-          (invitation.status === "published" &&
+          invitation.status === "deleted" ||
+          ((invitation.status === "published" ||
+            invitation.identity_locked_at) &&
             (!invitation.edit_deadline_at ||
               new Date(invitation.edit_deadline_at) <= new Date())))
       )

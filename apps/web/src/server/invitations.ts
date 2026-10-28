@@ -10,10 +10,7 @@ import { getSessionUser } from "./auth";
 import { assertPublicMedia, assertPublishable } from "./publication";
 import { requireAdmin, recordAdminChange } from "./admin";
 import type { AdminInvitationAction } from "./admin-invitation-access";
-import {
-  paymentIdentity,
-  type InvitationPaymentSummary,
-} from "@taklifnoma/contracts/payment";
+import { paymentIdentity } from "@taklifnoma/contracts/payment";
 export async function authenticatedUser(): Promise<SessionUser> {
   const user = await getSessionUser();
   if (!user)
@@ -25,39 +22,20 @@ export async function getOwnedInvitation(
   userId: string,
 ): Promise<Invitation | null> {
   const rows =
-    await getDb()`SELECT data,status FROM invitations WHERE id=${id} AND owner_id=${userId}`;
+    await getDb()`SELECT data,status FROM invitations WHERE id=${id} AND owner_id=${userId} AND status<>'deleted'`;
   return rows[0]
     ? invitationSchema.parse({ ...rows[0].data, status: rows[0].status })
     : null;
 }
 export async function listInvitations(
   userId: string,
-): Promise<
-  Array<
-    Invitation & {
-      createdAt: string;
-      viewCount: number;
-      payment: InvitationPaymentSummary | null;
-    }
-  >
-> {
+): Promise<Array<Invitation & { createdAt: string; viewCount: number }>> {
   const rows =
-    await getDb()`SELECT i.data,i.status,i.created_at,i.view_count,p.id AS payment_id,p.status AS payment_status,p.amount_minor
-      FROM invitations i LEFT JOIN LATERAL (
-        SELECT id,status,amount_minor FROM payment_orders
-        WHERE invitation_id=i.id AND owner_id=${userId} ORDER BY created_at DESC,id DESC LIMIT 1
-      ) p ON true WHERE i.owner_id=${userId} ORDER BY i.created_at DESC,i.id DESC LIMIT 100`;
+    await getDb()`SELECT data,status,created_at,view_count FROM invitations WHERE owner_id=${userId} AND status<>'deleted' ORDER BY created_at DESC,id DESC LIMIT 100`;
   return rows.map((row) => ({
     ...invitationSchema.parse({ ...row.data, status: row.status }),
     createdAt: new Date(row.created_at).toISOString(),
     viewCount: Number(row.view_count ?? 0),
-    payment: row.payment_id
-      ? {
-          id: String(row.payment_id),
-          status: row.payment_status as InvitationPaymentSummary["status"],
-          amountMinor: Number(row.amount_minor),
-        }
-      : null,
   }));
 }
 export async function saveInvitation(
@@ -72,7 +50,10 @@ export async function saveInvitation(
   await sql.begin(async (tx) => {
     const rows =
       await tx`SELECT * FROM invitations WHERE id=${invitation.id} FOR UPDATE`;
-    if (rows[0] && rows[0].owner_id !== user.id)
+    if (
+      rows[0] &&
+      (rows[0].owner_id !== user.id || rows[0].status === "deleted")
+    )
       throw new ApiError(404, "NOT_FOUND", "Taklifnoma topilmadi.");
     const templates = invitation.templateId
       ? await tx`SELECT t.published, EXISTS (SELECT 1 FROM template_supported_event_types s WHERE s.template_id=t.id AND s.event_type=${invitation.eventType}) AS supports_event FROM templates t WHERE t.id=${invitation.templateId}`
@@ -116,7 +97,7 @@ export async function saveInvitation(
         );
       try {
         assertCreatorCanEdit(invitationSchema.parse(rows[0].data), invitation, {
-          status: rows[0].status,
+          status: rows[0].identity_locked_at ? "published" : rows[0].status,
           editDeadlineAt: rows[0].edit_deadline_at,
         });
       } catch (error) {

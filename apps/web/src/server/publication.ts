@@ -132,7 +132,8 @@ export async function publishInvitationInTransaction(
 ) {
   const [row] =
     await tx`SELECT * FROM invitations WHERE id=${id} AND owner_id=${user.id} FOR UPDATE`;
-  if (!row) throw new ApiError(404, "NOT_FOUND", "Taklifnoma topilmadi.");
+  if (!row || row.status === "deleted")
+    throw new ApiError(404, "NOT_FOUND", "Taklifnoma topilmadi.");
   const previous = invitationSchema.parse(row.data);
   // A repeated successful request must not allocate a code or extend the deadline.
   if (row.status === "published" && row.slug)
@@ -141,14 +142,14 @@ export async function publishInvitationInTransaction(
       url: publicInvitationUrl(row.slug),
     };
   const republishing =
-    row.status === "archived" &&
+    row.status === "draft" &&
     !!row.slug &&
     !!row.first_published_at &&
     !!row.identity_locked_at;
   if (row.status !== "draft" && !republishing)
     throw new ApiError(
       403,
-      "INVITATION_ARCHIVED",
+      "INVALID_INVITATION_STATE",
       "Bu taklifnomani nashr qilib bo‘lmaydi.",
     );
   if (previous.revision !== revision)
@@ -206,7 +207,7 @@ export async function publishInvitationInTransaction(
         admin.actorId,
         "invitation.publish",
         id,
-        { status: "archived" },
+        { status: "draft" },
         { status: "published", ownerId: user.id, reason: admin.reason },
       );
     return { invitation, url: publicInvitationUrl(row.slug) };

@@ -1,25 +1,23 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import Link from "next/link";
 import {
   ArrowRight,
   CalendarDays,
   CheckCircle2,
-  CircleHelp,
-  EyeOff,
   AlertTriangle,
   X,
   Trash2,
   FileHeart,
-  Heart,
+  MoreHorizontal,
+  Pencil,
   LoaderCircle,
   Clock3,
   Eye,
   Plus,
   Send,
   ShieldCheck,
-  Smartphone,
 } from "lucide-react";
 import {
   getContent,
@@ -29,10 +27,6 @@ import {
   type Invitation,
   type SessionResponse,
 } from "@taklifnoma/contracts";
-import {
-  paymentStateLabels,
-  type InvitationPaymentSummary,
-} from "@taklifnoma/contracts/payment";
 import styles from "./dashboard.module.css";
 import {
   deleteBrowserDraft,
@@ -43,7 +37,6 @@ import { formatDate } from "@/templates/date-format";
 import { InvitationThumbnail } from "./invitation-thumbnail";
 import { useRouter } from "next/navigation";
 import { PublishedLink } from "@/components/published-link";
-import { ConfirmationDialog } from "@/components/confirmation-dialog";
 import {
   loadClientSession,
   currentTelegramLaunchData,
@@ -51,38 +44,34 @@ import {
 type DashboardInvitation = Invitation & {
   createdAt?: string;
   viewCount?: number;
-  payment?: InvitationPaymentSummary | null;
 };
 let dashboardSnapshot: {
   session: SessionResponse;
   invitations: DashboardInvitation[];
-  publishingMode: "free" | "paid";
 } | null = null;
 function InvitationCard({
   invitation,
+  cacheScope,
+  hidden = false,
   local = false,
   accountSaved = !local,
   onDelete,
-  onUnpublish,
-  onRepublish,
   busy = false,
   onOpenActivity,
   viewCount,
-  payment,
-  publishingMode,
 }: {
   invitation: Invitation;
+  cacheScope: string;
+  hidden?: boolean;
   local?: boolean;
   accountSaved?: boolean;
   onDelete?: () => void;
-  onUnpublish?: () => void;
-  onRepublish?: () => void;
   busy?: boolean;
   onOpenActivity?: () => void;
   viewCount?: number;
-  payment?: InvitationPaymentSummary | null;
-  publishingMode: "free" | "paid";
 }) {
+  const menuId = useId();
+  const menuButton = useRef<HTMLButtonElement>(null);
   const content = getContent(invitation);
   const template = templateById(invitation.templateId);
   const names =
@@ -97,25 +86,9 @@ function InvitationCard({
     ? `/studio?draft=${encodeURIComponent(invitation.id)}`
     : `/studio/${encodeURIComponent(invitation.id)}`;
   const activityUrl = `/dashboard/${encodeURIComponent(invitation.id)}/activity`;
-  const paid = payment?.status === "SUCCEEDED";
-  const retryable =
-    !payment || ["FAILED", "CANCELLED", "EXPIRED"].includes(payment.status);
-  const pending =
-    payment &&
-    ["CREATED", "PENDING", "PROCESSING", "REJECTED"].includes(payment.status);
-  const paymentAction =
-    accountSaved &&
-    !local &&
-    invitation.status === "draft" &&
-    !!invitation.templateId &&
-    !paid &&
-    (publishingMode === "paid" || !!payment);
-  const paymentUrl =
-    payment && !retryable
-      ? `/payment/return?order=${encodeURIComponent(payment.id)}`
-      : `/payment/return?invitation=${encodeURIComponent(invitation.id)}`;
   return (
     <article
+      hidden={hidden}
       className={styles.invitationCard}
       data-clickable={!!onOpenActivity}
       role={onOpenActivity ? "link" : undefined}
@@ -127,7 +100,7 @@ function InvitationCard({
         if (!onOpenActivity) return;
         if (
           (event.target as HTMLElement).closest(
-            "a,button,input,select,textarea",
+            "a,button,input,select,textarea,[popover]",
           )
         )
           return;
@@ -144,36 +117,28 @@ function InvitationCard({
         }
       }}
     >
-      <Link
-        href={onOpenActivity ? activityUrl : editUrl}
-        className={styles.cardArt}
-        aria-label={
-          onOpenActivity
-            ? `${names}: javoblar, tilaklar va cheklar`
-            : `${names}: taklifnomani tahrirlash`
-        }
-      >
-        {template ? (
-          <InvitationThumbnail invitation={invitation} />
-        ) : (
-          <span className={styles.noTemplateLabel}>
-            <FileHeart size={26} />
-            Dizayn tanlanmagan
-          </span>
-        )}
-      </Link>
-      <div className={styles.cardBody}>
-        {invitation.status === "draft" && onDelete && (
-          <button
-            className={styles.draftDeleteIcon}
-            onClick={onDelete}
-            disabled={busy}
-            aria-label="Qoralamani o‘chirish"
-            title="Qoralamani o‘chirish"
-          >
-            <Trash2 size={16} />
-          </button>
-        )}
+      <div className={styles.cardCover}>
+        <Link
+          href={onOpenActivity ? activityUrl : editUrl}
+          className={styles.cardArt}
+          aria-label={
+            onOpenActivity
+              ? `${names}: javoblar, tilaklar va cheklar`
+              : `${names}: taklifnomani tahrirlash`
+          }
+        >
+          {template ? (
+            <InvitationThumbnail
+              invitation={invitation}
+              cacheScope={cacheScope}
+            />
+          ) : (
+            <span className={styles.noTemplateLabel}>
+              <FileHeart size={26} />
+              Dizayn tanlanmagan
+            </span>
+          )}
+        </Link>
         <span
           className={styles.cardStatus}
           data-published={invitation.status === "published"}
@@ -181,13 +146,13 @@ function InvitationCard({
           {local
             ? accountSaved
               ? "Saqlanmagan o‘zgarishlar"
-              : "Brauzerdagi qoralama"
+              : "Qoralama"
             : invitation.status === "published"
               ? "Nashr qilingan"
-              : invitation.status === "archived"
-                ? "Arxivlangan"
-                : "Qoralama"}
+              : "Qoralama"}
         </span>
+      </div>
+      <div className={styles.cardBody}>
         <h2 className={styles.invitationName}>{names}</h2>
         <div className={styles.cardName}>
           <strong>{template?.name ?? "Dizayn tanlanmagan"}</strong>
@@ -197,81 +162,101 @@ function InvitationCard({
               : LANGUAGE_NAMES[invitation.defaultLocale]}
           </span>
         </div>
-        <p className={styles.cardDate}>
-          <CalendarDays size={14} />
-          {date}
-        </p>
-        {accountSaved && payment && (
-          <p className={styles.cardPayment} data-paid={paid}>
-            {paid ? (
-              <CheckCircle2 size={13} aria-hidden="true" />
-            ) : (
-              <Clock3 size={13} aria-hidden="true" />
-            )}
-            {paid ? "To‘langan" : paymentStateLabels[payment.status]}
+        <div className={styles.cardMeta}>
+          <p className={styles.cardDate}>
+            <CalendarDays size={14} />
+            {date}
           </p>
-        )}
-        {invitation.status === "published" && viewCount !== undefined && (
-          <p
-            className={styles.cardViews}
-            aria-label={`Ko‘rishlar: ${viewCount}`}
-          >
-            <Eye size={14} />
-            {new Intl.NumberFormat("uz-UZ").format(viewCount)} ko‘rish
-          </p>
-        )}
+          {invitation.status === "published" && viewCount !== undefined && (
+            <p
+              className={styles.cardViews}
+              aria-label={`Ko‘rishlar: ${viewCount}`}
+            >
+              <Eye size={14} />
+              {new Intl.NumberFormat("uz-UZ").format(viewCount)} ko‘rish
+            </p>
+          )}
+        </div>
         {invitation.status === "published" && invitation.slug && (
-          <div onClick={(event) => event.stopPropagation()}>
-            <PublishedLink slug={invitation.slug} compact />
+          <div
+            className={styles.shareRow}
+            onClick={(event) => event.stopPropagation()}
+          >
+            <PublishedLink slug={invitation.slug} inline />
           </div>
         )}
-        {accountSaved && invitation.status === "published" && (
-          <Link className={styles.activityLink} href={activityUrl}>
-            Javoblar, tilaklar va cheklar →
-          </Link>
-        )}
         <div className={styles.cardActions}>
-          {invitation.status === "published" && onUnpublish && (
-            <button
-              className={styles.secondaryAction}
-              onClick={onUnpublish}
-              disabled={busy}
+          {invitation.status === "published" && invitation.slug ? (
+            <Link
+              className={styles.viewAction}
+              href={
+                accountSaved
+                  ? activityUrl
+                  : `/i/${encodeURIComponent(invitation.slug)}`
+              }
+              aria-label={
+                accountSaved
+                  ? `${names}: javoblar, tilaklar va cheklar`
+                  : `${names}: taklifnomani ko‘rish`
+              }
             >
-              <EyeOff size={14} /> Nashrdan olish
-            </button>
-          )}
-          {invitation.status === "archived" && onRepublish && (
-            <button
-              className={styles.secondaryAction}
-              onClick={onRepublish}
-              disabled={busy}
-            >
-              {busy ? <LoaderCircle size={14} /> : <Send size={14} />}
-              {busy ? "Nashr qilinmoqda…" : "Qayta nashr qilish"}
-            </button>
-          )}
-          {paymentAction && (
-            <Link href={editUrl} className={styles.secondaryAction}>
-              Tahrirlash
+              {accountSaved ? "Javoblar" : "Ko‘rish"} <ArrowRight size={14} />
+            </Link>
+          ) : (
+            <Link className={styles.continueAction} href={editUrl}>
+              Davom etish <ArrowRight size={16} />
             </Link>
           )}
-          <Link
-            href={paymentAction ? paymentUrl : editUrl}
-            className={paymentAction ? styles.paymentAction : undefined}
+          <button
+            className={styles.moreButton}
+            ref={menuButton}
+            popoverTarget={menuId}
+            aria-label={`${names}: qo‘shimcha amallar`}
           >
-            {paymentAction
-              ? pending
-                ? "To‘lovni yakunlash"
-                : retryable
-                  ? "To‘lov qilish"
-                  : "To‘lov tafsilotlari"
-              : invitation.status === "published"
-                ? "Tahrirlash"
-                : paid && invitation.status === "draft"
-                  ? "Nashrni yakunlash"
-                  : "Davom etish"}
-            {!paymentAction && <ArrowRight size={15} aria-hidden="true" />}
-          </Link>
+            <MoreHorizontal size={20} />
+          </button>
+          <div
+            id={menuId}
+            popover="auto"
+            onToggle={(event) => {
+              const menu = event.currentTarget;
+              if (!menu.matches(":popover-open") || !menuButton.current) return;
+              const button = menuButton.current.getBoundingClientRect();
+              const gap = 6;
+              const edge = 12;
+              menu.style.maxHeight = "";
+              const height = menu.offsetHeight;
+              const below = window.innerHeight - button.bottom - gap - edge;
+              const above = button.top - gap - edge;
+              const opensAbove = below < height && above > below;
+              const available = Math.max(0, opensAbove ? above : below);
+              menu.style.maxHeight = `${available}px`;
+              menu.style.left = `${Math.max(edge, Math.min(button.right - menu.offsetWidth, window.innerWidth - menu.offsetWidth - edge))}px`;
+              menu.style.top = `${opensAbove ? Math.max(edge, button.top - gap - Math.min(height, available)) : button.bottom + gap}px`;
+            }}
+            className={styles.cardMenu}
+            onClick={(event) => {
+              if ((event.target as HTMLElement).closest("a,button"))
+                event.currentTarget.hidePopover();
+            }}
+          >
+            <p className={styles.menuHeading}>{names}</p>
+            <Link href={editUrl}>
+              <Pencil size={15} /> Tahrirlash
+            </Link>
+            {accountSaved && invitation.status === "draft" && (
+              <Link href="/payment/return">To‘lov holati</Link>
+            )}
+            {onDelete && (
+              <button
+                className={styles.dangerAction}
+                onClick={onDelete}
+                disabled={busy}
+              >
+                <Trash2 size={15} /> O‘chirish
+              </button>
+            )}
+          </div>
         </div>
       </div>
     </article>
@@ -288,9 +273,6 @@ export function Dashboard() {
   );
   const [browserDrafts, setBrowserDrafts] = useState<BrowserDraft[]>([]);
   const [loading, setLoading] = useState(!dashboardSnapshot);
-  const [publishingMode, setPublishingMode] = useState<"free" | "paid">(
-    dashboardSnapshot?.publishingMode ?? "free",
-  );
   const [error, setError] = useState("");
   const [tab, setTab] = useState<"all" | "draft" | "published">("all");
   const [retry, setRetry] = useState(0);
@@ -303,11 +285,7 @@ export function Dashboard() {
     local: boolean;
     accountSaved: boolean;
   } | null>(null);
-  const [unpublishTarget, setUnpublishTarget] = useState<Invitation | null>(
-    null,
-  );
-
-  async function removeDraft(
+  async function removeInvitation(
     invitation: Invitation,
     local: boolean,
     accountSaved: boolean,
@@ -322,7 +300,7 @@ export function Dashboard() {
         );
         if (!response.ok)
           throw new Error(
-            "Qoralamani o‘chirib bo‘lmadi. Qayta urinib ko‘ring.",
+            "Taklifnomani o‘chirib bo‘lmadi. Qayta urinib ko‘ring.",
           );
         setInvitations((items) => {
           const next = items.filter((item) => item.id !== invitation.id);
@@ -331,84 +309,16 @@ export function Dashboard() {
           return next;
         });
       }
-      if (local) {
-        deleteBrowserDraft(invitation.id);
-        setBrowserDrafts(listBrowserDrafts(session?.user?.id ?? null));
+      if (local || accountSaved) {
+        try {
+          deleteBrowserDraft(invitation.id);
+        } catch {
+          /* Storage may be unavailable. */
+        }
+        setBrowserDrafts((items) =>
+          items.filter((item) => item.invitation.id !== invitation.id),
+        );
       }
-    } catch (cause) {
-      setActionError(
-        cause instanceof Error ? cause.message : "Amal bajarilmadi.",
-      );
-    } finally {
-      setActionBusy(null);
-    }
-  }
-
-  async function unpublishInvitation(invitation: Invitation) {
-    setActionBusy(invitation.id);
-    setActionError("");
-    try {
-      const response = await fetch(
-        `/api/invitations/${encodeURIComponent(invitation.id)}`,
-        {
-          method: "PATCH",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ action: "unpublish" }),
-        },
-      );
-      if (!response.ok)
-        throw new Error(
-          "Taklifnomani nashrdan olib bo‘lmadi. Qayta urinib ko‘ring.",
-        );
-      setInvitations((items) => {
-        const next = items.map((item) =>
-          item.id === invitation.id
-            ? { ...item, status: "archived" as const }
-            : item,
-        );
-        if (dashboardSnapshot)
-          dashboardSnapshot = { ...dashboardSnapshot, invitations: next };
-        return next;
-      });
-      setBrowserDrafts((items) =>
-        items.filter((item) => item.invitation.id !== invitation.id),
-      );
-    } catch (cause) {
-      setActionError(
-        cause instanceof Error ? cause.message : "Amal bajarilmadi.",
-      );
-    } finally {
-      setActionBusy(null);
-    }
-  }
-
-  async function republishInvitation(invitation: Invitation) {
-    setActionBusy(invitation.id);
-    setActionError("");
-    try {
-      const response = await fetch(
-        `/api/invitations/${encodeURIComponent(invitation.id)}/publish`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ revision: invitation.revision }),
-        },
-      );
-      const result = await response.json();
-      if (!response.ok)
-        throw new Error(
-          result.error?.message ??
-            "Taklifnomani qayta nashr qilib bo‘lmadi. Qayta urinib ko‘ring.",
-        );
-      const published = invitationSchema.parse(result.invitation);
-      setInvitations((items) => {
-        const next = items.map((item) =>
-          item.id === invitation.id ? { ...item, ...published } : item,
-        );
-        if (dashboardSnapshot)
-          dashboardSnapshot = { ...dashboardSnapshot, invitations: next };
-        return next;
-      });
     } catch (cause) {
       setActionError(
         cause instanceof Error ? cause.message : "Amal bajarilmadi.",
@@ -499,24 +409,27 @@ export function Dashboard() {
             );
           const data = await list.json();
           if (alive) {
+            // A browser copy must not revive an invitation deleted on another device.
+            const deletedIds = new Set<string>(data.deletedIds ?? []);
+            try {
+              for (const id of deletedIds) deleteBrowserDraft(id);
+            } catch {
+              /* Storage may be unavailable. */
+            }
+            setBrowserDrafts((items) =>
+              items.filter((item) => !deletedIds.has(item.invitation.id)),
+            );
             const nextInvitations = (data.invitations ?? []).filter(
               (item: unknown) => invitationSchema.safeParse(item).success,
             ) as DashboardInvitation[];
             dashboardSnapshot = {
               session: result,
               invitations: nextInvitations,
-              publishingMode: data.publishingMode === "paid" ? "paid" : "free",
             };
-            setPublishingMode(dashboardSnapshot.publishingMode);
             setInvitations(nextInvitations);
           }
         } else {
-          dashboardSnapshot = {
-            session: result,
-            invitations: [],
-            publishingMode: "free",
-          };
-          setPublishingMode("free");
+          dashboardSnapshot = { session: result, invitations: [] };
           setInvitations([]);
         }
       } catch (cause) {
@@ -552,7 +465,6 @@ export function Dashboard() {
       },
       local: localById.has(invitation.id),
       viewCount: invitation.viewCount,
-      payment: invitation.payment,
       createdAt:
         invitation.createdAt ?? localById.get(invitation.id)?.createdAt ?? "",
     })),
@@ -562,25 +474,31 @@ export function Dashboard() {
         invitation: draft.invitation,
         local: true,
         viewCount: undefined,
-        payment: undefined,
         createdAt: draft.createdAt || draft.savedAt,
       })),
-  ]
-    .filter(
-      ({ invitation }) =>
-        tab === "all" ||
-        (tab === "draft"
-          ? invitation.status === "draft"
-          : invitation.status === "published"),
-    )
-    .sort(
-      (a, b) =>
-        b.createdAt.localeCompare(a.createdAt) ||
-        b.invitation.id.localeCompare(a.invitation.id),
-    );
-  const count =
-    invitations.length +
-    browserDrafts.filter((draft) => !cloudIds.has(draft.invitation.id)).length;
+  ].sort(
+    (a, b) =>
+      b.createdAt.localeCompare(a.createdAt) ||
+      b.invitation.id.localeCompare(a.invitation.id),
+  );
+  const matchesTab = (invitation: Invitation) =>
+    tab === "all" || invitation.status === tab;
+  const hasVisibleEntries = entries.some(({ invitation }) =>
+    matchesTab(invitation),
+  );
+  const allInvitations = [
+    ...invitations,
+    ...localDrafts
+      .filter((draft) => !cloudIds.has(draft.invitation.id))
+      .map((draft) => draft.invitation),
+  ];
+  const count = allInvitations.length;
+  const draftCount = allInvitations.filter(
+    (item) => item.status === "draft",
+  ).length;
+  const publishedCount = allInvitations.filter(
+    (item) => item.status === "published",
+  ).length;
   function createNew() {
     window.location.assign("/#templates");
   }
@@ -656,14 +574,14 @@ export function Dashboard() {
                   aria-pressed={tab === "draft"}
                   onClick={() => setTab("draft")}
                 >
-                  Qoralamalar
+                  Qoralamalar{!loading && <span>{draftCount}</span>}
                 </button>
                 <button
                   className={tab === "published" ? styles.activeTab : ""}
                   aria-pressed={tab === "published"}
                   onClick={() => setTab("published")}
                 >
-                  Nashr qilingan
+                  Nashr qilingan{!loading && <span>{publishedCount}</span>}
                 </button>
               </div>
               <span className={styles.privateLabel}>
@@ -691,41 +609,21 @@ export function Dashboard() {
               </div>
             ) : (
               <div className={styles.cardGrid}>
-                {entries.map(({ invitation, local, viewCount, payment }) => (
+                {entries.map(({ invitation, local, viewCount }) => (
                   <InvitationCard
                     invitation={invitation}
+                    hidden={!matchesTab(invitation)}
+                    cacheScope={session?.user?.id ?? "browser-drafts"}
                     local={local}
                     viewCount={viewCount}
-                    payment={payment}
-                    publishingMode={publishingMode}
                     accountSaved={cloudIds.has(invitation.id)}
                     busy={actionBusy === invitation.id}
-                    onDelete={
-                      invitation.status === "draft"
-                        ? () =>
-                            setDeleteTarget({
-                              invitation,
-                              local,
-                              accountSaved: cloudIds.has(invitation.id),
-                            })
-                        : undefined
-                    }
-                    onUnpublish={
-                      invitation.status === "published" &&
-                      cloudIds.has(invitation.id)
-                        ? () => setUnpublishTarget(invitation)
-                        : undefined
-                    }
-                    onRepublish={
-                      invitation.status === "archived" &&
-                      cloudIds.has(invitation.id)
-                        ? () => {
-                            const saved = invitations.find(
-                              (item) => item.id === invitation.id,
-                            );
-                            if (saved) void republishInvitation(saved);
-                          }
-                        : undefined
+                    onDelete={() =>
+                      setDeleteTarget({
+                        invitation,
+                        local,
+                        accountSaved: cloudIds.has(invitation.id),
+                      })
                     }
                     onOpenActivity={
                       invitation.status === "published" &&
@@ -739,7 +637,7 @@ export function Dashboard() {
                     key={invitation.id}
                   />
                 ))}
-                {entries.length === 0 && !error && (
+                {!hasVisibleEntries && !error && (
                   <div className={styles.empty}>
                     <div className={styles.emptyArt}>
                       <FileHeart size={54} strokeWidth={1} />
@@ -750,14 +648,18 @@ export function Dashboard() {
                     <h2>
                       {tab === "published"
                         ? "Hali nashr qilingan taklifnoma yo‘q"
-                        : "Birinchi taklifingizni yarating"}
+                        : tab === "draft"
+                          ? "Hali qoralamalar yo‘q"
+                          : "Birinchi taklifingizni yarating"}
                     </h2>
                     <p>
                       {tab === "published"
                         ? "Tayyor taklifnomalar nashr qilingach shu yerda ko‘rinadi."
-                        : "Dizaynni tanlang, ma’lumotlaringizni kiriting va tayyor taklifnomani mehmonlaringizga ulashing."}
+                        : tab === "draft"
+                          ? "Yangi taklifnoma yarating. Tugallanmagan taklifnomalaringiz shu yerda saqlanadi."
+                          : "Dizaynni tanlang, ma’lumotlaringizni kiriting va tayyor taklifnomani mehmonlaringizga ulashing."}
                     </p>
-                    <Link href="/studio" className={styles.primaryButton}>
+                    <Link href="/#templates" className={styles.primaryButton}>
                       <Plus size={16} />
                       Taklifnoma yaratish
                     </Link>
@@ -769,62 +671,6 @@ export function Dashboard() {
               </div>
             )}
           </section>
-          <aside className={styles.helpSidebar}>
-            {session?.user?.isAdmin && (
-              <a href="/admin" className={styles.tip}>
-                <ShieldCheck size={19} aria-hidden="true" />
-                <div>
-                  <strong>Sayt boshqaruvi</strong>
-                  <p>Dizaynlar, kategoriyalar va musiqa kutubxonasi.</p>
-                </div>
-                <ArrowRight size={16} aria-hidden="true" />
-              </a>
-            )}
-            <div className={styles.guide}>
-              <span className={styles.guideIcon}>
-                <Heart size={21} />
-              </span>
-              <h2>
-                Bir taklif.
-                <br />
-                Mingta samimiy lahza.
-              </h2>
-              <p>
-                Dizaynni tanlang, taklifnomangizni tayyorlang va yaqinlaringiz
-                bilan ulashing.
-              </p>
-              <Link href="/#templates">
-                Dizaynlarni ko‘rish
-                <ArrowRight size={15} />
-              </Link>
-            </div>
-            <div className={styles.tip}>
-              <ShieldCheck size={19} />
-              <div>
-                <strong>Tilaklar sizning nazoratingizda</strong>
-                <p>
-                  Mehmonlarning tilaklari faqat tasdiqlashingizdan keyin
-                  taklifnomada ko‘rinadi.
-                </p>
-              </div>
-            </div>
-            <div className={styles.tip}>
-              <Smartphone size={19} />
-              <div>
-                <strong>Telefon uchun ham qulay</strong>
-                <p>
-                  Yaratish paytida taklifnomangizni jonli ko‘rinishda
-                  tekshiring.
-                </p>
-              </div>
-            </div>
-            <div className={styles.helpFooter}>
-              <CircleHelp size={16} />
-              <span>
-                Qoralamalar va nashr qilingan takliflar shu yerda saqlanadi.
-              </span>
-            </div>
-          </aside>
         </div>
         <div className={styles.bottomNote}>
           <CheckCircle2 size={15} />
@@ -861,13 +707,14 @@ export function Dashboard() {
             <span className={styles.dialogIcon}>
               <AlertTriangle size={23} />
             </span>
-            <h2 id="delete-draft-title">Qoralamani o‘chirasizmi?</h2>
+            <h2 id="delete-draft-title">Taklifnomani o‘chirasizmi?</h2>
             <p id="delete-draft-description">
               “
               {getContent(deleteTarget.invitation)
                 .people.filter(Boolean)
                 .join(" & ") || "Yangi taklifnoma"}
-              ” qoralamasi butunlay o‘chiriladi. Bu amalni qaytarib bo‘lmaydi.
+              ” taklifnomasi o‘chiriladi. Uning havolasi ishlamaydi. Bu amalni
+              qaytarib bo‘lmaydi.
             </p>
             <div className={styles.dialogActions}>
               <button
@@ -883,7 +730,7 @@ export function Dashboard() {
                   const target = deleteTarget;
                   if (!target) return;
                   setDeleteTarget(null);
-                  void removeDraft(
+                  void removeInvitation(
                     target.invitation,
                     target.local,
                     target.accountSaved,
@@ -901,20 +748,6 @@ export function Dashboard() {
             </div>
           </section>
         </div>
-      )}
-      {unpublishTarget && (
-        <ConfirmationDialog
-          title="Taklifnomani nashrdan olasizmi?"
-          description="Uning havolasi saqlanadi, ammo mehmonlar sahifani ko‘ra olmaydi."
-          confirmLabel="Nashrdan olish"
-          onCancel={() => setUnpublishTarget(null)}
-          onConfirm={() => {
-            const target = unpublishTarget;
-            setUnpublishTarget(null);
-            void unpublishInvitation(target);
-          }}
-          busy={actionBusy === unpublishTarget.id}
-        />
       )}
     </div>
   );

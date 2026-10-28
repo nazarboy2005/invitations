@@ -65,6 +65,7 @@ after(async () => {
     await tx`DELETE FROM wishes WHERE invitation_id IN (SELECT id FROM invitations WHERE owner_id IN (${owner.id},${stranger.id}))`;
     await tx`DELETE FROM rsvp_responses WHERE invitation_id IN (SELECT id FROM invitations WHERE owner_id IN (${owner.id},${stranger.id}))`;
     await tx`DELETE FROM invitation_audit_log WHERE invitation_id IN (SELECT id FROM invitations WHERE owner_id IN (${owner.id},${stranger.id}))`;
+    await tx`DELETE FROM platform_payments WHERE owner_id IN (${owner.id},${stranger.id})`;
     await tx`DELETE FROM invitations WHERE owner_id IN (${owner.id},${stranger.id})`;
     await tx`DELETE FROM media_assets WHERE owner_id IN (${owner.id},${stranger.id})`;
     await tx`DELETE FROM sessions WHERE user_id IN (${owner.id},${stranger.id})`;
@@ -158,52 +159,62 @@ test("first publish is atomic, free, stable, concurrent-safe and uses event-loca
   }
 });
 
-test("unpublishing archives the canonical and returned invitation state", async () => {
+test("deleting a publication removes owner/public access and preserves payment history", async () => {
   const invitation = await draft();
   const published = await publishInvitation(invitation.id, 1, owner);
-  const response = await request(
-    `/api/invitations/${invitation.id}`,
-    { action: "unpublish" },
-    true,
-    origin,
-    "PATCH",
-  );
-  assert.equal(response.status, 200);
-
-  const listed = await request("/api/invitations");
-  const listedBody = await listed.json();
+  const [payment] =
+    await sql`INSERT INTO platform_payments(invitation_id,owner_id,template_id,template_name,amount_minor,note,idempotency_key,created_by,updated_by) VALUES(${invitation.id},${owner.id},${invitation.templateId},'Disposable template',100,'Disposable deletion test',${randomUUID()},${owner.id},${owner.id}) RETURNING id`;
+  const path = `/api/invitations/${invitation.id}`;
   assert.equal(
-    listedBody.invitations.find((item: Invitation) => item.id === invitation.id)
-      ?.status,
-    "archived",
+    (await request(path, undefined, false, origin, "DELETE")).status,
+    401,
   );
-  const owned = await request(`/api/invitations/${invitation.id}`);
-  const ownedBody = await owned.json();
-  assert.equal(ownedBody.invitation.status, "archived");
-  const publicRows = await sql`SELECT id FROM invitations WHERE id=${invitation.id} AND slug=${published.invitation.slug} AND status='published'`;
-  assert.equal(publicRows.length, 0);
-  const archivedRows = await sql`SELECT status,data->>'status' AS data_status FROM invitations WHERE id=${invitation.id}`;
-  assert.deepEqual(archivedRows[0], {
-    status: "archived",
-    data_status: "archived",
-  });
-});
-
-test("republication restores the same link and preserves locks, deadlines and prior publication", async () => {
-  const invitation = await draft();
-  const published = await publishInvitation(invitation.id, 1, owner);
+  assert.equal(
+    (await request(path, undefined, true, "https://other.test", "DELETE"))
+      .status,
+    403,
+  );
+  assert.equal(
+    (await request(path, undefined, true, origin, "DELETE")).status,
+    200,
+  );
+  const listed = await (await request("/api/invitations")).json();
+  assert.ok(
+    !listed.invitations.some((item: Invitation) => item.id === invitation.id),
+  );
+  assert.ok(listed.deletedIds.includes(invitation.id));
+  assert.equal((await request(path)).status, 404);
   assert.equal(
     (
       await request(
-        `/api/invitations/${invitation.id}`,
-        { action: "unpublish" },
+        path,
+        { invitation: published.invitation },
         true,
         origin,
-        "PATCH",
+        "PUT",
       )
     ).status,
-    200,
+    404,
   );
+  assert.equal((await fetch(published.url)).status, 404);
+  await rejectsCode(
+    publishInvitation(invitation.id, published.invitation.revision, owner),
+    "NOT_FOUND",
+  );
+  assert.equal(
+    (await sql`SELECT id FROM platform_payments WHERE id=${payment.id}`).length,
+    1,
+  );
+  assert.equal(
+    (await request(path, undefined, true, origin, "DELETE")).status,
+    404,
+  );
+});
+
+test("publishing a migrated draft restores the same link and preserves locks, deadlines and prior publication", async () => {
+  const invitation = await draft();
+  const published = await publishInvitation(invitation.id, 1, owner);
+  await sql`UPDATE invitations SET status='draft',data=jsonb_set(data,'{status}','"draft"') WHERE id=${invitation.id}`;
   // Read-only keepsakes may be restored without reopening creator editing.
   await sql`UPDATE invitations SET edit_deadline_at=now()-interval '1 day' WHERE id=${invitation.id}`;
   const [before] =
@@ -256,25 +267,19 @@ test("republication restores the same link and preserves locks, deadlines and pr
     await sql`SELECT action FROM invitation_audit_log WHERE invitation_id=${invitation.id} ORDER BY created_at`;
   assert.deepEqual(
     audits.map((audit) => audit.action),
-    ["published_free", "unpublished", "republished"],
+    ["published_free", "republished"],
   );
   const owned = await request(`/api/invitations/${invitation.id}`);
   assert.equal((await owned.json()).invitation.status, "published");
 });
 
-test("republication still validates archived invitation media and template availability", async () => {
+test("publishing a migrated draft still validates invitation media and template availability", async () => {
   const invitation = await draft();
   const published = await publishInvitation(invitation.id, 1, owner);
-  await request(
-    `/api/invitations/${invitation.id}`,
-    { action: "unpublish" },
-    true,
-    origin,
-    "PATCH",
-  );
+  await sql`UPDATE invitations SET status='draft',data=jsonb_set(data,'{status}','"draft"') WHERE id=${invitation.id}`;
   const invalidMedia = {
     ...published.invitation,
-    status: "archived",
+    status: "draft",
     gallery: [
       { id: randomUUID(), url: "/api/media/missing", alt: "", caption: "" },
     ],
@@ -288,7 +293,7 @@ test("republication still validates archived invitation media and template avail
     await sql`SELECT id FROM templates WHERE NOT published LIMIT 1`;
   const invalidTemplate = {
     ...published.invitation,
-    status: "archived",
+    status: "draft",
     templateId: retired.id,
   };
   await sql`UPDATE invitations SET data=${sql.json(invalidTemplate)} WHERE id=${invitation.id}`;
@@ -298,10 +303,10 @@ test("republication still validates archived invitation media and template avail
   );
   const [row] =
     await sql`SELECT status FROM invitations WHERE id=${invitation.id}`;
-  assert.equal(row.status, "archived");
+  assert.equal(row.status, "draft");
 });
 
-test("draft deletion is owner-scoped and removes only drafts", async () => {
+test("deletion supports drafts and publications", async () => {
   const invitation = await draft();
   const deleted = await request(
     `/api/invitations/${invitation.id}`,
@@ -311,8 +316,9 @@ test("draft deletion is owner-scoped and removes only drafts", async () => {
     "DELETE",
   );
   assert.equal(deleted.status, 200);
-  const remaining = await sql`SELECT id FROM invitations WHERE id=${invitation.id}`;
-  assert.equal(remaining.length, 0);
+  const remaining =
+    await sql`SELECT status FROM invitations WHERE id=${invitation.id}`;
+  assert.equal(remaining[0].status, "deleted");
 
   const publishedInvitation = await draft();
   await publishInvitation(publishedInvitation.id, 1, owner);
@@ -323,7 +329,7 @@ test("draft deletion is owner-scoped and removes only drafts", async () => {
     origin,
     "DELETE",
   );
-  assert.equal(protectedResponse.status, 409);
+  assert.equal(protectedResponse.status, 200);
 });
 test("slug collisions retry through a savepoint and letter case stays distinct", async () => {
   const first = await draft(),
@@ -435,13 +441,10 @@ test("unready or foreign media cannot become public", async () => {
   });
   await rejectsCode(publishInvitation(music.id, 1, owner), "MEDIA_NOT_READY");
 });
-test("publication rejects archived records and permits built-in music and manual receipts without R2", async () => {
-  const archived = await draft();
-  await sql`UPDATE invitations SET status='archived',data=jsonb_set(data,'{status}','"archived"') WHERE id=${archived.id}`;
-  await rejectsCode(
-    publishInvitation(archived.id, 1, owner),
-    "INVITATION_ARCHIVED",
-  );
+test("publication rejects deleted records and permits built-in music and manual receipts without R2", async () => {
+  const deleted = await draft();
+  await sql`UPDATE invitations SET status='deleted',deleted_at=now() WHERE id=${deleted.id}`;
+  await rejectsCode(publishInvitation(deleted.id, 1, owner), "NOT_FOUND");
   const invitation = await draft({
     music: {
       enabled: true,
@@ -769,10 +772,31 @@ test("published Modern Floral draft saves and reopens while remaining in the pub
   const reopenedResponse = await request(`/api/invitations/${invitation.id}`);
   assert.equal(reopenedResponse.status, 200);
   const reopened = (await reopenedResponse.json()).invitation as Invitation;
-  for (const key of ["templateId", "content", "enabledLocales", "startsAt", "timezone", "venue", "program", "gallery", "music", "gift", "contacts", "rsvp", "wishes"] as const)
+  for (const key of [
+    "templateId",
+    "content",
+    "enabledLocales",
+    "startsAt",
+    "timezone",
+    "venue",
+    "program",
+    "gallery",
+    "music",
+    "gift",
+    "contacts",
+    "rsvp",
+    "wishes",
+  ] as const)
     assert.deepEqual(reopened[key], saved[key], key);
-  const catalog = await (await request("/api/catalog", undefined, false)).json();
-  assert.ok(catalog.templates.some((template: { id: string; published: boolean }) => template.id === "modern-floral" && template.published));
+  const catalog = await (
+    await request("/api/catalog", undefined, false)
+  ).json();
+  assert.ok(
+    catalog.templates.some(
+      (template: { id: string; published: boolean }) =>
+        template.id === "modern-floral" && template.published,
+    ),
+  );
   assert.equal((await fetch(`${origin}/i/${invitation.id}`)).status, 404);
 });
 
@@ -782,21 +806,62 @@ test("published Pulau Sehati preserves source fields across authenticated save, 
   invitation.eventType = "wedding";
   invitation.templateData = {
     "wedivo-pulau-sehati": {
-      inscription: { arabic: "نص", text: { "uz-Latn": "Tarjima", en: "Translation" }, attribution: { "uz-Latn": "Manba", en: "Source" } },
+      inscription: {
+        arabic: "نص",
+        text: { "uz-Latn": "Tarjima", en: "Translation" },
+        attribution: { "uz-Latn": "Manba", en: "Source" },
+      },
       profiles: [
-        { bio: { "uz-Latn": "Kuyov oilasi", en: "Groom family" }, characterClass: "Explorer", origin: "Toshkent", stats: [{ label: "Mehr", value: 8 }], skill: "Sabr", item: "Kitob" },
-        { bio: { "uz-Latn": "Kelin oilasi", en: "Bride family" }, characterClass: "Artist", origin: "Samarqand", stats: [{ label: "Quvonch", value: 9 }], skill: "Raqs", item: "Gul" },
+        {
+          bio: { "uz-Latn": "Kuyov oilasi", en: "Groom family" },
+          characterClass: "Explorer",
+          origin: "Toshkent",
+          stats: [{ label: "Mehr", value: 8 }],
+          skill: "Sabr",
+          item: "Kitob",
+        },
+        {
+          bio: { "uz-Latn": "Kelin oilasi", en: "Bride family" },
+          characterClass: "Artist",
+          origin: "Samarqand",
+          stats: [{ label: "Quvonch", value: 9 }],
+          skill: "Raqs",
+          item: "Gul",
+        },
       ],
-      hotels: [{ name: "Hotel", address: "Toshkent", distance: "2 km", price: "500 000", bookingUrl: "https://example.com/book", note: "Band qiling" }],
-      media: { videoUrl: "https://example.com/film.mp4", liveUrl: "https://youtube.com/live/abc123456", intro: "Film" },
+      hotels: [
+        {
+          name: "Hotel",
+          address: "Toshkent",
+          distance: "2 km",
+          price: "500 000",
+          bookingUrl: "https://example.com/book",
+          note: "Band qiling",
+        },
+      ],
+      media: {
+        videoUrl: "https://example.com/film.mp4",
+        liveUrl: "https://youtube.com/live/abc123456",
+        intro: "Film",
+      },
       giftWell: { enabled: true, currencyLabel: "UZS" },
-      missions: [{ title: "Surat", description: "Birga rasm", reward: "Xotira" }],
-      keepsakes: [{ name: "Uzuk", anecdote: "Birinchi sovg‘a", icon: "cincin" }],
+      missions: [
+        { title: "Surat", description: "Birga rasm", reward: "Xotira" },
+      ],
+      keepsakes: [
+        { name: "Uzuk", anecdote: "Birinchi sovg‘a", icon: "cincin" },
+      ],
       hashtag: "#BaxtliKun",
     },
   };
   await sql`INSERT INTO invitations(id,owner_id,template_id,status,data) VALUES(${invitation.id},${owner.id},${invitation.templateId},'draft',${sql.json(invitation)})`;
-  const savedResponse = await request(`/api/invitations/${invitation.id}`, { invitation }, true, origin, "PUT");
+  const savedResponse = await request(
+    `/api/invitations/${invitation.id}`,
+    { invitation },
+    true,
+    origin,
+    "PUT",
+  );
   assert.equal(savedResponse.status, 200, await savedResponse.clone().text());
   const saved = (await savedResponse.json()).invitation as Invitation;
   const reopenedResponse = await request(`/api/invitations/${invitation.id}`);
@@ -805,20 +870,45 @@ test("published Pulau Sehati preserves source fields across authenticated save, 
   assert.deepEqual(reopened.templateData, saved.templateData);
   const slug = generatePublicCode();
   await sql`UPDATE invitations SET status='published',slug=${slug},first_published_at=now(),data=data||jsonb_build_object('status','published','slug',${slug}::text) WHERE id=${invitation.id}`;
-  const giftResponse = await request(`/api/public/invitations/${invitation.id}/gift-intentions`, { name: "Test guest", amount: 250000, message: "Gift intention" }, false);
+  const giftResponse = await request(
+    `/api/public/invitations/${invitation.id}/gift-intentions`,
+    { name: "Test guest", amount: 250000, message: "Gift intention" },
+    false,
+  );
   assert.equal(giftResponse.status, 201, await giftResponse.clone().text());
   assert.match((await giftResponse.json()).message, /no money|pul o‘tkazmasi/i);
   await sql`UPDATE invitations SET status='draft',slug=NULL,first_published_at=NULL,data=(data-'slug')||jsonb_build_object('status','draft') WHERE id=${invitation.id}`;
-  const switched = { ...reopened, templateId: "anor", revision: saved.revision };
-  const switchResponse = await request(`/api/invitations/${invitation.id}`, { invitation: switched }, true, origin, "PUT");
+  const switched = {
+    ...reopened,
+    templateId: "anor",
+    revision: saved.revision,
+  };
+  const switchResponse = await request(
+    `/api/invitations/${invitation.id}`,
+    { invitation: switched },
+    true,
+    origin,
+    "PUT",
+  );
   assert.equal(switchResponse.status, 200, await switchResponse.clone().text());
-  const afterSwitch = (await (await request(`/api/invitations/${invitation.id}`)).json()).invitation as Invitation;
+  const afterSwitch = (
+    await (await request(`/api/invitations/${invitation.id}`)).json()
+  ).invitation as Invitation;
   assert.deepEqual(afterSwitch.templateData, saved.templateData);
-  const activity = await (await request(`/api/invitations/${invitation.id}/activity`)).json();
+  const activity = await (
+    await request(`/api/invitations/${invitation.id}/activity`)
+  ).json();
   assert.equal(activity.giftIntentions[0].senderName, "Test guest");
   assert.equal(activity.giftIntentions[0].amount, "250000");
-  const catalog = await (await request("/api/catalog", undefined, false)).json();
-  assert.ok(catalog.templates.some((template: { id: string; published: boolean }) => template.id === "wedivo-pulau-sehati" && template.published));
+  const catalog = await (
+    await request("/api/catalog", undefined, false)
+  ).json();
+  assert.ok(
+    catalog.templates.some(
+      (template: { id: string; published: boolean }) =>
+        template.id === "wedivo-pulau-sehati" && template.published,
+    ),
+  );
   assert.equal((await fetch(`${origin}/i/${invitation.id}`)).status, 404);
 });
 

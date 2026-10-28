@@ -529,7 +529,7 @@ export function AdminInvitations({
   const router = useRouter(),
     [target, setTarget] = useState<{
       invitation: AdminInvitation;
-      action: "archive" | "delete" | "extend_deadline";
+      action: "delete" | "extend_deadline";
     } | null>(null),
     [reason, setReason] = useState(""),
     [deadline, setDeadline] = useState(""),
@@ -566,7 +566,7 @@ export function AdminInvitations({
   }
   const open = (
     invitation: AdminInvitation,
-    action: "archive" | "delete" | "extend_deadline",
+    action: "delete" | "extend_deadline",
   ) => {
     setTarget({ invitation, action });
     setReason("");
@@ -580,7 +580,6 @@ export function AdminInvitations({
         statuses={[
           ["draft", "Qoralama"],
           ["published", "Nashr qilingan"],
-          ["archived", "Nashrdan olingan"],
         ]}
       />
       <Message error={error} notice={notice} />
@@ -613,11 +612,7 @@ export function AdminInvitations({
                       : styles.hidden
                   }
                 >
-                  {item.status === "published"
-                    ? "Nashr qilingan"
-                    : item.status === "draft"
-                      ? "Qoralama"
-                      : "Nashrdan olingan"}
+                  {item.status === "published" ? "Nashr qilingan" : "Qoralama"}
                 </span>
               </div>
               {item.url ? (
@@ -675,22 +670,14 @@ export function AdminInvitations({
                     >
                       Muddatni uzaytirish
                     </button>
-                    <button
-                      className="button secondary"
-                      onClick={() => open(item, "archive")}
-                    >
-                      Nashrdan olish
-                    </button>
                   </>
                 )}
-                {item.status === "draft" && (
-                  <button
-                    className="button secondary"
-                    onClick={() => open(item, "delete")}
-                  >
-                    Qoralamani o‘chirish
-                  </button>
-                )}
+                <button
+                  className="button secondary"
+                  onClick={() => open(item, "delete")}
+                >
+                  Taklifnomani o‘chirish
+                </button>
               </div>
             </article>
           ))}
@@ -703,26 +690,21 @@ export function AdminInvitations({
       {target && (
         <ActionDialog
           title={
-            target.action === "archive"
-              ? "Taklifnomani nashrdan olish"
-              : target.action === "delete"
-                ? "Qoralamani o‘chirish"
-                : "Tahrirlash muddatini uzaytirish"
+            target.action === "delete"
+              ? "Taklifnomani o‘chirish"
+              : "Tahrirlash muddatini uzaytirish"
           }
           busy={busy}
           onCancel={() => setTarget(null)}
           onSubmit={submit}
           label={
-            target.action === "delete" ? "Qoralamani o‘chirish" : "Tasdiqlash"
+            target.action === "delete" ? "Taklifnomani o‘chirish" : "Tasdiqlash"
           }
         >
           <p>{target.invitation.people || target.invitation.ownerName}</p>
-          {target.action === "archive" && (
-            <p>Havola saqlanadi, lekin mehmonlar taklifnomani ko‘ra olmaydi.</p>
-          )}
           {target.action === "delete" && (
             <p>
-              Qoralama o‘chiriladi. To‘lov tarixiga bog‘langan taklifnomalar
+              Taklifnoma o‘chiriladi va havolasi ishlamaydi. To‘lov tarixi
               saqlanadi.
             </p>
           )}

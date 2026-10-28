@@ -6,10 +6,12 @@ export function ScrollHeader({
   children,
   className,
   followScroll = false,
+  yieldToCatalog = false,
 }: {
   children: ReactNode;
   className: string;
   followScroll?: boolean;
+  yieldToCatalog?: boolean;
 }) {
   const header = useRef<HTMLElement>(null);
 
@@ -41,9 +43,22 @@ export function ScrollHeader({
         const delta = y - lastY;
         const menuOpen =
           header.current.querySelector('[aria-expanded="true"]') !== null;
+        const catalogBoundary = yieldToCatalog
+          ? document.querySelector<HTMLElement>("[data-catalog-pin-boundary]")
+          : null;
+        const catalogAtTop =
+          catalogBoundary !== null &&
+          catalogBoundary.getBoundingClientRect().top <=
+            header.current.offsetHeight + 12;
         if (y === 0 || menuOpen) {
           offset = 0;
           upwardDistance = 0;
+        } else if (catalogAtTop) {
+          // The pinned categories own the top edge until there is room for
+          // the public navigation again, regardless of scroll direction.
+          offset = header.current.offsetHeight + 2;
+          upwardDistance = 0;
+          header.current.dataset.direction = "down";
         } else if (delta > 0) {
           upwardDistance = 0;
           offset = Math.min(header.current.offsetHeight + 2, offset + delta);
@@ -84,7 +99,7 @@ export function ScrollHeader({
       window.removeEventListener("scroll", onScroll);
       cancelAnimationFrame(frame);
     };
-  }, [followScroll]);
+  }, [followScroll, yieldToCatalog]);
 
   return (
     <header ref={header} className={className}>

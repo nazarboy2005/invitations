@@ -2,14 +2,37 @@
   position: absolute;
   inset: 0;
   overflow: hidden;
-  background: var(--surface-soft);
+  background: #f2ece5;
   pointer-events: none;
 }
-.viewport {
-  width: 390px;
-  height: 640px;
-  transform-origin: top left;
-}
-.viewport > div {
+.thumbnail > img {
+  display: block;
+  width: 100%;
   height: 100%;
+  object-fit: contain;
+}
+.placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  font-size: 11px;
+  color: var(--muted);
+  background: radial-gradient(ellipse at top, #f8eeeb, #f2ece5);
+}
+.spinner {
+  animation: spin 1.2s linear infinite;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .spinner {
+    animation: none;
+  }
 }
