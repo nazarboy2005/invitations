@@ -1085,7 +1085,11 @@ export function Studio({
           } catch {
             /* Return page also loads owned orders. */
           }
-          window.location.assign(result.order.checkoutUrl ?? "/payment/return");
+          // Checkout was prepared asynchronously. Keep the order in our app and
+          // let a fresh user tap open its saved URL through Telegram's SDK.
+          window.location.assign(
+            `/payment/return?order=${encodeURIComponent(result.order.id)}${window.location.hash}`,
+          );
           return;
         }
         if (!publishedResponse.ok) {

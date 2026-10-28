@@ -133,6 +133,9 @@ test("checkout URLs reject scripts, HTTP and embedded credentials", () => {
     safeCheckoutUrl("https://my.click.uz/services/pay"),
     "https://my.click.uz/services/pay",
   );
+  const original =
+    "https://my.click.uz:443/services/pay?token=a%2fb%2Bc&order=existing";
+  assert.equal(safeCheckoutUrl(original), original);
 });
 test("provider errors are sanitized and network ambiguity is never called failure", async () => {
   const saved = globalThis.fetch;

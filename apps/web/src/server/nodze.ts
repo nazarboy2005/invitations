@@ -135,7 +135,8 @@ export function safeCheckoutUrl(
   const url = new URL(value);
   if (url.protocol !== "https:" || url.username || url.password)
     throw new ApiError(502, "INVALID_CHECKOUT", "To‘lov havolasi noto‘g‘ri.");
-  return url.href;
+  // Validate without normalizing the provider's signed/encoded checkout URL.
+  return value;
 }
 export async function nodzeRequest(
   path: string,

@@ -7,6 +7,7 @@ import {
   type PaymentOrderView,
 } from "@taklifnoma/contracts/payment";
 import styles from "./payment-return.module.css";
+import { CheckoutActions } from "./checkout-actions";
 
 export function PaymentReturn() {
   const [orders, setOrders] = useState<PaymentOrderView[]>([]);
@@ -66,8 +67,12 @@ export function PaymentReturn() {
         } catch {
           /* Account records are the fallback. */
         }
+        const requested = new URLSearchParams(window.location.search).get(
+          "order",
+        );
         setSelected(
-          items.find((item) => item.id === remembered)?.id ??
+          items.find((item) => item.id === requested)?.id ??
+            items.find((item) => item.id === remembered)?.id ??
             items[0]?.id ??
             "",
         );
@@ -82,6 +87,18 @@ export function PaymentReturn() {
     })();
     return () => controller.abort();
   }, []);
+  useEffect(() => {
+    if (!selected) return;
+    // Selection survives reload, browser return and unavailable sessionStorage.
+    const url = new URL(window.location.href);
+    url.searchParams.set("order", selected);
+    window.history.replaceState(window.history.state, "", url);
+    try {
+      sessionStorage.setItem("nodze-order", selected);
+    } catch {
+      /* Owned server records and the URL remain available. */
+    }
+  }, [selected]);
   useEffect(() => {
     if (
       !order ||
@@ -98,6 +115,11 @@ export function PaymentReturn() {
       return;
     const controller = new AbortController();
     void refresh(order.id, controller.signal);
+    const onReturn = () => {
+      if (!document.hidden) void refresh(order.id, controller.signal);
+    };
+    window.addEventListener("focus", onReturn);
+    document.addEventListener("visibilitychange", onReturn);
     let attempts = 0;
     const timer = window.setInterval(() => {
       if (++attempts >= 8) {
@@ -109,6 +131,8 @@ export function PaymentReturn() {
     return () => {
       controller.abort();
       window.clearInterval(timer);
+      window.removeEventListener("focus", onReturn);
+      document.removeEventListener("visibilitychange", onReturn);
     };
   }, [selected, order?.status, order?.url, refresh]);
   return (
@@ -199,15 +223,13 @@ export function PaymentReturn() {
                       >
                         {busy ? "Tekshirilmoqda…" : "Holatni tekshirish"}
                       </button>
-                      {order.checkoutUrl && (
-                        <a
-                          className="button secondary"
-                          href={order.checkoutUrl}
-                        >
-                          Click orqali davom etish
-                        </a>
-                      )}
                     </div>
+                    {order.checkoutUrl && (
+                      <CheckoutActions
+                        key={order.id}
+                        checkoutUrl={order.checkoutUrl}
+                      />
+                    )}
                   </>
                 )}
                 <Link
