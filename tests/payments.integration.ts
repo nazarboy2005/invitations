@@ -93,6 +93,7 @@ before(async () => {
 after(async () => {
   globalThis.fetch = originalFetch;
   await sql.begin(async (tx) => {
+    await tx`DELETE FROM jobs WHERE type='payment-confirmation' AND payload->>'orderId' IN (SELECT id::text FROM payment_orders WHERE owner_id IN (${owner.id},${stranger.id}))`;
     await tx`DELETE FROM payment_webhook_events WHERE order_id IN (SELECT id FROM payment_orders WHERE owner_id IN (${owner.id},${stranger.id}))`;
     await tx`DELETE FROM payment_orders WHERE owner_id IN (${owner.id},${stranger.id})`;
     await tx`DELETE FROM platform_payments WHERE owner_id IN (${owner.id},${stranger.id})`;

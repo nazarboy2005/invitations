@@ -1,6 +1,7 @@
 import { timingSafeEqual } from "node:crypto";
 import { apiError, privateHeaders } from "@/server/api";
 import { reconcilePayments } from "@/server/payments";
+import { processPaymentNotifications } from "@/server/payment-notifications";
 export const runtime = "nodejs";
 export const maxDuration = 180;
 export async function GET(request: Request) {
@@ -15,9 +16,14 @@ export async function GET(request: Request) {
   )
     return new Response(null, { status: 401 });
   try {
-    return Response.json(await reconcilePayments(), {
-      headers: privateHeaders,
-    });
+    const reconciliation = await reconcilePayments();
+    const notifications = await processPaymentNotifications();
+    return Response.json(
+      { ...reconciliation, notifications },
+      {
+        headers: privateHeaders,
+      },
+    );
   } catch (error) {
     return apiError(error);
   }

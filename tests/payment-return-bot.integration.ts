@@ -38,7 +38,9 @@ test("payment return bot entry opens the local Mini App without login confirmati
     await db`INSERT INTO users(id,telegram_user_id,display_name,phone_shared_at) VALUES(${userId},${telegramId},'Payment return QA',now())`;
     await command("payment_return");
     let button = bodies.at(-1).reply_markup.inline_keyboard[0][0];
-    assert.equal(button.text, "To‘lov holatini ochish");
+    assert.equal(button.text, "📱 Buyurtmani ko‘rish");
+    assert.equal(bodies.at(-1).parse_mode, "HTML");
+    assert.match(bodies.at(-1).text, /buyurtmasi topilmadi/);
     assert.equal(
       button.web_app.url,
       "https://invitation.example/payment/return",

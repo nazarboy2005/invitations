@@ -3,7 +3,10 @@ import { authenticatedUser } from "@/server/invitations";
 import { verifySameOrigin } from "@/server/auth";
 import { apiError, privateHeaders, readJson } from "@/server/api";
 import { createCheckout } from "@/server/payments";
+import { after } from "next/server";
+import { processPaymentNotifications } from "@/server/payment-notifications";
 export const runtime = "nodejs";
+export const maxDuration = 60;
 export async function POST(
   request: Request,
   { params }: { params: Promise<{ id: string }> },
@@ -20,17 +23,16 @@ export async function POST(
       })
       .strict()
       .parse(await readJson(request, 1000));
-    return Response.json(
-      {
-        order: await createCheckout(
-          id,
-          input.revision,
-          input.expectedAmountMinor,
-          user,
-        ),
-      },
-      { headers: privateHeaders },
+    const order = await createCheckout(
+      id,
+      input.revision,
+      input.expectedAmountMinor,
+      user,
     );
+    after(async () => {
+      await processPaymentNotifications({ orderId: order.id, limit: 2 });
+    });
+    return Response.json({ order }, { headers: privateHeaders });
   } catch (error) {
     return apiError(error);
   }

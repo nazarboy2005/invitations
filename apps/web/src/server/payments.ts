@@ -28,6 +28,7 @@ import {
   type NodzePayment,
 } from "./nodze";
 import { toSessionUser } from "./auth";
+import { enqueuePaymentNotifications } from "./payment-notifications";
 
 type Order = {
   id: string;
@@ -247,6 +248,8 @@ export async function applyPayment(
         await tx`UPDATE payment_orders SET publication_error=${error.message} WHERE id=${order.id}`;
       }
     }
+    if (next === "SUCCEEDED")
+      await enqueuePaymentNotifications(tx, order.invitation_id);
     if (event)
       await tx`INSERT INTO payment_webhook_events(event_id,order_id,body_hash) VALUES(${event.id},${order.id},${event.hash})`;
   });
@@ -263,7 +266,7 @@ export async function consumeWebhook(raw: Buffer, headers: Headers) {
         "EVENT_CONFLICT",
         "Webhook ma’lumotlari o‘zgargan.",
       );
-    return;
+    return event.data.orderId;
   }
   let payment: NodzePayment = {
     id: event.data.paymentId,
@@ -287,6 +290,7 @@ export async function consumeWebhook(raw: Buffer, headers: Headers) {
       );
   }
   await applyPayment(payment, { id: event.id, hash });
+  return event.data.orderId;
 }
 export async function refreshPayment(id: string, userId?: string) {
   const sql = getDb();

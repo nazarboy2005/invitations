@@ -116,6 +116,7 @@ after(async () => {
     );
   await new Promise<void>((resolve) => mock.close(() => resolve()));
   await sql.begin(async (tx) => {
+    await tx`DELETE FROM jobs WHERE type='payment-confirmation' AND payload->>'orderId' IN (SELECT id::text FROM payment_orders WHERE owner_id=${userId})`;
     await tx`DELETE FROM payment_webhook_events WHERE order_id IN(SELECT id FROM payment_orders WHERE owner_id=${userId})`;
     await tx`DELETE FROM payment_orders WHERE owner_id=${userId}`;
     await tx`DELETE FROM invitation_audit_log WHERE invitation_id IN(SELECT id FROM invitations WHERE owner_id=${userId})`;

@@ -101,14 +101,18 @@ per-order query strings to the registered provider return URL.
 
 The public return page now offers **Telegram’da davom etish**. A read-only
 Telegram `getMe` check found `has_main_web_app=false` for the configured bot
-`taklifnomayasagichbot`. Therefore the default link uses
-`https://t.me/taklifnomayasagichbot?start=payment_return`. Telegram opens the bot;
-its reply's **To‘lov holatini ochish** web_app button opens the real Mini App
-at `/payment/return`. No new phone sharing or interactive login confirmation is
-needed for an existing eligible account; the fresh signed launch is verified
-by the existing server authentication endpoint first. Suspended accounts,
-invalid launches and accounts without completed phone onboarding still fail
-the existing checks. Ordinary browser sign-in remains available as a fallback.
+`taklifnomayasagichbot`. The default link now opens
+`https://t.me/taklifnomayasagichbot` without sending another `/start` command.
+The verified-payment confirmation and real invitation link arrive automatically
+in that chat. Legacy `payment_return` commands remain supported and now display
+the actual owned order's result using the same formatted message. They do not
+fabricate success or silently fall back from an explicit unknown order.
+The message's management button opens the real Mini App. No new phone sharing
+or interactive login confirmation is needed for an existing eligible account;
+the fresh signed launch is verified by the existing server authentication
+endpoint first. Suspended accounts, invalid launches and accounts without
+completed phone onboarding still fail the existing checks. Ordinary browser
+sign-in remains available as a fallback.
 
 The Mini App reads private orders only after verified session resolution. It
 restores the account's last selected order from session storage or an
@@ -144,3 +148,37 @@ rejecting invalid launch data despite a previously authenticated browser account
 All Telegram messages in integration tests are stubbed. Physical Android/Click
 return behavior and BotFather Main Mini App configuration remain unverified;
 no external deployment or real payment was performed.
+
+## Automatic formatted payment confirmations
+
+Verified success queues a `payment-confirmation` job in the same transaction as
+payment/publication changes. The existing `jobs` table is reused; no migration
+is required. A published invitation receives a concise HTML confirmation with
+actual host names, template, exact order amount, visible/clickable public URL,
+an invitation button and a Mini App management button. Dynamic text is escaped;
+no sample names, session data or guest tokens appear in it.
+
+If payment is verified but publication needs correction, the first message
+acknowledges receipt and tells the owner to finish publication without paying
+again. Successful correction queues the invitation link. If correction finishes
+before delivery, the ready message replaces the obsolete incomplete message.
+Pending, failed and unverified payments never get success messages or public URLs.
+
+Webhook, checkout, status refresh and publication routes dispatch only their
+own order/invitation jobs using Next's post-response `after` hook, after commit.
+Duplicate webhooks do not enqueue another receipt. Concurrent workers use job
+row claims; delivery failure cannot roll back a payment or publication. The
+existing cron-secret-protected `/api/internal/payments` endpoint recovers queued
+jobs as part of reconciliation; keep its scheduled caller configured for retries.
+Known rate-limit rejections retry with the supplied delay. Ambiguous network or
+crashed sends remain `uncertain` and are not automatically duplicated. Blocked,
+disconnected or suspended recipients are skipped/failed as appropriate.
+An owner can still explicitly request status through a legacy return command.
+
+Verification uses mocked Telegram/provider requests and disposable database
+fixtures: formatted success and escaped data; no false pending success; paid
+publication correction and subsequent link; duplicate verification/concurrent
+delivery; explicit unknown orders; retry, ambiguous/crashed delivery and suspended
+recipients. No actual Telegram message or real provider payment was sent by the
+agent. Live Android message display, link handling and production delivery still
+need a post-deployment check.

@@ -4,6 +4,10 @@ import { AuthError } from "./index";
 import { digest, isOwnContact, type TelegramIdentity } from "./crypto";
 import { hasAdminRole } from "./admin-role";
 import { paymentReturnPath } from "../../modules/payments/payment-navigation";
+import {
+  botPaymentOrder,
+  paymentTelegramMessage,
+} from "../payment-notifications";
 
 type TelegramMessage = {
   message_id?: number;
@@ -221,23 +225,16 @@ async function processLocked(update: Update, db: postgres.TransactionSql) {
     const paymentPath = paymentReturnPath(start?.[1]);
     if (paymentPath) {
       if (!user.phone_shared_at) await askContact(message.chat.id);
-      else
+      else {
+        const requested =
+          new URL(paymentPath, process.env.APP_URL).searchParams.get("order") ??
+          undefined;
+        const order = await botPaymentOrder(db, String(user.id), requested);
         await telegramCall("sendMessage", {
           chat_id: message.chat.id,
-          text: "To‘lov holatini Mini App’da tekshiring. Buyurtmangiz saqlangan; qayta to‘lamang.",
-          reply_markup: {
-            inline_keyboard: [
-              [
-                {
-                  text: "To‘lov holatini ochish",
-                  web_app: {
-                    url: new URL(paymentPath, process.env.APP_URL).href,
-                  },
-                },
-              ],
-            ],
-          },
+          ...paymentTelegramMessage(order, paymentPath),
         });
+      }
     } else if (start?.[1]?.startsWith("auth_")) {
       const token = start[1].slice(5);
       const [auth] = /^[A-Za-z0-9_-]{43}$/.test(token)

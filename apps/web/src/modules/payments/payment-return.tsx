@@ -206,8 +206,7 @@ export function PaymentReturn({
             </a>
             {!mainMiniApp && (
               <p>
-                Telegram ochilgach, botdagi “To‘lov holatini ochish” tugmasini
-                bosing.
+                To‘lov tasdiqlangach, taklifnoma havolasi bot chatiga yuboriladi.
               </p>
             )}
           </div>
