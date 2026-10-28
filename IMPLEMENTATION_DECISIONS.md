@@ -62,6 +62,10 @@
 
 ## Administrator workspace and access (2026-10-27)
 
+- User requirement (2026-10-28): Telegram `/admin` must stay completely silent
+  for accounts without active administrator access, including suspended accounts
+  and users who have not shared a phone number. Do not send denial messages,
+  Telegram IDs, onboarding prompts or buttons; still mark the update processed.
 - User follow-up: Mini App admins must enter the admin workspace automatically,
   without typing `/admin`. Resolve the verified server session on home/account
   entry routes even without the SDK; recover opaque signed launch data from

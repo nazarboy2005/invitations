@@ -181,6 +181,11 @@ async function processLocked(update: Update, db: postgres.TransactionSql) {
       await db`INSERT INTO telegram_updates(update_id) VALUES(${update.update_id}) ON CONFLICT DO NOTHING`;
       return;
     }
+    const adminCommand = /^\/admin(?:@\w+)?\s*$/.test(message.text ?? "");
+    if (adminCommand && !hasAdminRole(user)) {
+      await db`INSERT INTO telegram_updates(update_id) VALUES(${update.update_id}) ON CONFLICT DO NOTHING`;
+      return;
+    }
     if (user.disabled_at) {
       await telegramCall("sendMessage", {
         chat_id: message.chat.id,
@@ -189,13 +194,8 @@ async function processLocked(update: Update, db: postgres.TransactionSql) {
       await db`INSERT INTO telegram_updates(update_id) VALUES(${update.update_id}) ON CONFLICT DO NOTHING`;
       return;
     }
-    if (/^\/admin(?:@\w+)?\s*$/.test(message.text ?? "")) {
-      if (!hasAdminRole(user))
-        await telegramCall("sendMessage", {
-          chat_id: message.chat.id,
-          text: `Bu hisob uchun administrator huquqi yo‘q. Telegram ID: ${identity.id}.`,
-        });
-      else if (!user.phone_shared_at) await askContact(message.chat.id);
+    if (adminCommand) {
+      if (!user.phone_shared_at) await askContact(message.chat.id);
       else
         await telegramCall("sendMessage", {
           chat_id: message.chat.id,

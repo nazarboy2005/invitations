@@ -147,7 +147,7 @@ test("a verified switch to an unverified phone account clears the previous brows
   );
   assert.match(response.headers.get("set-cookie") ?? "", /Max-Age=0/i);
 });
-test("bot admin command and welcome entry use the authenticated account route and deny ordinary users", async () => {
+test("bot admin entry uses the authenticated account route and stays silent for unauthorized users", async () => {
   const original = globalThis.fetch,
     bodies: Array<Record<string, any>> = [];
   globalThis.fetch = async (input, init) => {
@@ -174,9 +174,27 @@ test("bot admin command and welcome entry use the authenticated account route an
     const entry = bodies.at(-1)!.reply_markup.inline_keyboard[0][0];
     assert.equal(entry.web_app.url, origin + "/dashboard");
     assert.match(entry.text, /Boshqaruv/);
+    const adminReplies = bodies.length;
+    for (const id of [creator, unverified]) {
+      for (const text of ["/admin", "/admin@TaklifnomaBot", "/admin  "]) {
+        await command(id, text);
+        assert.equal(bodies.length, adminReplies);
+        const update = updates.at(-1)!;
+        assert.equal(
+          (
+            await db`SELECT update_id FROM telegram_updates WHERE update_id=${update}`
+          ).length,
+          1,
+        );
+      }
+    }
+    await db`UPDATE users SET disabled_at=now() WHERE id=${creator}`;
     await command(creator, "/admin");
-    assert.equal(bodies.at(-1)!.reply_markup, undefined);
-    assert.match(bodies.at(-1)!.text, /huquqi yo‘q/);
+    assert.equal(bodies.length, adminReplies);
+    await db`UPDATE users SET disabled_at=now() WHERE id=${admin}`;
+    await command(admin, "/admin");
+    assert.equal(bodies.length, adminReplies);
+    await db`UPDATE users SET disabled_at=NULL WHERE id=${admin}`;
     await command(admin, "/start");
     assert.equal(
       bodies.at(-1)!.reply_markup.inline_keyboard[0][0].web_app.url,
