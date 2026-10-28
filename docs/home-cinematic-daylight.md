@@ -14,7 +14,9 @@ available for reference but the website now uses the daylight filenames.
 The photos use daylight, white stone, champagne textiles, white flowers and
 restrained pomegranate accents. Chapter typography uses charcoal/pomegranate;
 local washes are light. The venue city/date/navigation uses larger text over
-a smoked plum translucent panel, with a contrasting route and location pin.
+a cream paper panel with gold borders and brown lettering, updated on
+2026-10-28 from the original smoked plum treatment. The generated opening
+scene and revised reveal timing are documented in `home-cinematic-intro.md`.
 
 ## Final prompt set
 

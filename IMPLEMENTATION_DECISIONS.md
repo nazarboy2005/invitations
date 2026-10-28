@@ -1793,3 +1793,18 @@ Development agents are distinct from production queue workers. The running app w
   API use the same source-derived renderer. Focused package tests pass 4/4;
   four-locale save/reopen and public-render lifecycle checks pass 1/1 each.
   No external deployment or live payment activation.
+
+## Homepage feature presentation (2026-10-28)
+
+- User requirement: make “Nega aynan biz?” the opening photographic scene of
+  the Why us image-over-image sequence with a newly generated background.
+  Its heading and introduction share the existing animated copy treatment.
+- The venue card should match the cream website palette, informed by the
+  supplied cream/gold/brown reference. User rejected the code-only styling and
+  approved generated decorative artwork with creative freedom: ivory paper,
+  gold architectural relief, compass and floral details. Keep city, date, time
+  and map label live. Optimized lazy-loaded WebP is about 145 KB; prompt is in
+  docs/home-venue-card-art.md.
+- Slow covering images slightly while keeping them faster than their text:
+  reveal distance increases from 0.32 to 0.4 viewport scrolls; text stays at 0.9.
+  Generation prompt and assets are documented in docs/home-cinematic-intro.md.

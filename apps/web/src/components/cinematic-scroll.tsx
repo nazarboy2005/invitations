@@ -11,9 +11,9 @@ import { createSoundProgress } from "./site-sound-progress";
 import { playSiteSound } from "./site-sound";
 
 const READING_SCREENS = 0.9;
-const ENTRY_SCREENS = 0.32;
+const ENTRY_SCREENS = 0.4;
 
-/** A short covering reveal, then a stationary photograph with bottom-to-top copy. */
+/** A covering reveal, then a stationary photograph with slower bottom-to-top copy. */
 export function CinematicScroll({
   children,
   className,

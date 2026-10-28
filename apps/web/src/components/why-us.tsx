@@ -2,6 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowUpRight,
+  CalendarDays,
+  Clock3,
   Flower2,
   MapPin,
   Music2,
@@ -12,6 +14,20 @@ import { CelebrationStory } from "./celebration-story";
 import styles from "./why-us.module.css";
 
 const chapters = [
+  {
+    id: "intro",
+    label: "Sizning kuningiz uchun",
+    title: (
+      <>
+        Nega aynan
+        <br />
+        <em>biz?</em>
+      </>
+    ),
+    text: "Bir qarashda hayrat. Har bir bosishda qulaylik. Sizning kuningiz uchun o‘ylangan kichik, ammo muhim tafsilotlar.",
+    image: "intro-daylight",
+    side: "left",
+  },
   {
     id: "design",
     label: "Sizning uslubingiz",
@@ -173,10 +189,21 @@ function SceneDetail({
           <span />
         </div>
         <div className={styles.venueInfo}>
-          <span>QUVONCHGA ELTUVCHI MANZIL</span>
+          <Image
+            src="/images/home/cinematic/venue-card-art.webp"
+            alt=""
+            fill
+            sizes="(max-width: 700px) 360px, 560px"
+            className={styles.venueArtwork}
+            unoptimized
+          />
+          <span>
+            <Flower2 size={17} strokeWidth={1} /> QUVONCHGA ELTUVCHI MANZIL
+          </span>
           <h4>Toshkent</h4>
           <p>
-            14 noyabr <i /> 18:00
+            <CalendarDays size={16} strokeWidth={1.4} /> 14 noyabr <i />
+            <Clock3 size={16} strokeWidth={1.4} /> 18:00
           </p>
           <div className={styles.venueNavigation}>
             <Navigation size={13} /> Google Maps orqali{" "}
@@ -199,14 +226,6 @@ export function WhyUs({
       className={styles.section}
       aria-labelledby="why-us-title"
     >
-      <header className={`container ${styles.heading}`}>
-        <h2 id="why-us-title">Nega aynan biz?</h2>
-        <p>
-          Bir qarashda hayrat. Har bir bosishda qulaylik.
-          <br />
-          Sizning kuningiz uchun o‘ylangan kichik, ammo muhim tafsilotlar.
-        </p>
-      </header>
       <CinematicScroll className={styles.track} stageClassName={styles.stage}>
         {chapters.map((chapter, index) => (
           <article
@@ -215,7 +234,9 @@ export function WhyUs({
             data-cinematic-scene
             data-scene={chapter.id}
             data-side={chapter.side}
-            aria-labelledby={`scene-${chapter.id}`}
+            aria-labelledby={
+              chapter.id === "intro" ? "why-us-title" : `scene-${chapter.id}`
+            }
           >
             <div className={styles.photograph} data-cinematic-image>
               <picture>
@@ -235,13 +256,16 @@ export function WhyUs({
             <div className={styles.shade} />
             <div className={styles.chapter} aria-hidden="true">
               <span>0{index + 1}</span>
-              <i />
-              04
+              <i />0{chapters.length}
             </div>
             <SceneDetail chapter={chapter.id} previewImage={previewImage} />
             <div className={styles.copy} data-cinematic-copy>
               <p className={styles.eyebrow}>{chapter.label}</p>
-              <h3 id={`scene-${chapter.id}`}>{chapter.title}</h3>
+              {chapter.id === "intro" ? (
+                <h2 id="why-us-title">{chapter.title}</h2>
+              ) : (
+                <h3 id={`scene-${chapter.id}`}>{chapter.title}</h3>
+              )}
               <p className={styles.description}>{chapter.text}</p>
               {index === chapters.length - 1 && (
                 <Link href="/templates" className={styles.action}>
