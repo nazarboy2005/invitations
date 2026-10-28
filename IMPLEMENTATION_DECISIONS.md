@@ -139,6 +139,13 @@
 
 ## Catalog navigation and curated covers (2026-10-25)
 
+- Catalog ordering (2026-10-28): on `/templates`, Nikoh starts with Anor,
+  Cloud Castle, Bog‘i Eram, Ganch, Green Garden, Kuzgi Chinor, Muhr, O‘rik Guli,
+  Samarqand Kechasi, Evelina, then Ko‘zgu; remaining Nikoh designs retain their
+  existing order. Other category tabs retain their existing order. All starts
+  with the best ten available Nikoh designs, then alternates categories while
+  preserving each category's order. Keep the mix stable across reloads. Change
+  ordering only; preserve all covers and the homepage's separate eight selections.
 - Match `/templates` to the homepage Visol brand, navigation links, mobile menu
   and hide-down/reappear-up scroll behavior. Keep its background transparent,
   including while scrolling, like the homepage; retain readable link/account colors.

@@ -12,6 +12,7 @@ import styles from "@/app/home.module.css";
 import cardStyles from "./template-cards.module.css";
 import { templatePoster } from "./template-poster";
 import { matchesTemplateSearch } from "./template-search";
+import { orderCatalogTemplates } from "./template-order";
 import { TemplateCardPreview } from "./template-card-preview";
 import { useCardPlayback } from "./use-card-playback";
 import { useCategoryTransition } from "./use-category-transition";
@@ -43,16 +44,13 @@ export function TemplateGallery({
     useState<TemplateDefinition | null>(null);
   const visibleTemplates = useMemo(
     () =>
-      templates
-        .filter(
-          (template) =>
-            renderedCategoryId === "all" ||
-            template.categoryIds.includes(renderedCategoryId),
-        )
-        .filter((template) =>
-          matchesTemplateSearch(template, categories, searchQuery),
-        ),
-    [renderedCategoryId, categories, searchQuery, templates],
+      (featured
+        ? templates
+        : orderCatalogTemplates(templates, renderedCategoryId)
+      ).filter((template) =>
+        matchesTemplateSearch(template, categories, searchQuery),
+      ),
+    [renderedCategoryId, categories, searchQuery, templates, featured],
   );
   const playback = useCardPlayback(
     grid,
