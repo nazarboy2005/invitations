@@ -1,0 +1,310 @@
+{
+  "uz-Latn": {
+    "title": "Taklifnoma",
+    "sections": {
+      "details": "Tafsilotlar",
+      "remember": "Sanani eslab qoling",
+      "ceremony": "— Marosim —",
+      "venueAddress": "To'yxona manzili",
+      "gift": "— Samimiy tilak —",
+      "contact": "— Bog'lanish —",
+      "closing": "— Chin qalbimizdan —",
+      "closingText": "Tashrifingizni\nkutib qolamiz",
+      "withRespect": "Hurmat bilan",
+      "countdown": "— Kunlar sanalmoqda —",
+      "table": "— Sizning joyingiz —",
+      "tableTitle": "Stol",
+      "tableSubtitle": "Marosimda Sizni shu joyda kutib qolamiz"
+    },
+    "music": {
+      "pause": "Pauza",
+      "play": "Ijro"
+    },
+    "gift": {
+      "title": "To'yona",
+      "desc": "Qalban to'yona atamoqchi bo'lsangiz, quyidagi karta raqamidan foydalanishingiz mumkin",
+      "cardHolder": "Karta egasi",
+      "copyBtn": "Raqamni nusxalash",
+      "copied": "Nusxalandi!"
+    },
+    "contact": {
+      "label": "Ma'lumot uchun",
+      "phone": "Telefon"
+    },
+    "countdown": {
+      "label": "To'ygacha qolgan vaqt",
+      "days": "Kun",
+      "hours": "Soat",
+      "minutes": "Daqiqa",
+      "seconds": "Soniya",
+      "past": "Biz shuncha vaqtdan beri baxtli hayot kechirmoqdamiz"
+    },
+    "quotes": [
+      {
+        "text": "Ba'zi uchrashuvlar tasodif emas… Qalbimizni birlashtirgan muhabbat bizni eng baxtli kunimiz sari yetakladi.\nShu unutilmas onlarimizga sizni ham guvoh bo'lishga chorlaymiz.",
+        "source": ""
+      },
+      {
+        "text": "Umrimizning eng yorqin kuniga siz ham guvoh bo'lishingizni istaymiz. Quvonchimiz siz bilan bo'lsa, u yanada to'kis bo'ladi.",
+        "source": ""
+      },
+      {
+        "text": "Ular sizlar uchun libos, sizlar ham ular uchun libossiz.",
+        "source": "Baqara surasi, 187-oyat"
+      }
+    ],
+    "copy": {
+      "rsvpEyebrow": "Sizning javobingiz",
+      "rsvpDescription": "Ushbu quvonchli kunimizda sizni kutamiz. Kelishingiz haqida bizga xabar bering.",
+      "rsvpAttendance": "To‘yimizda ishtirok etasizmi?",
+      "namePlaceholder": "Ism va familiyangiz",
+      "wishPlaceholder": "Biz uchun samimiy tilaklaringiz…",
+      "validation": "Ismingizni yozing va ishtirokingizni belgilang."
+    },
+    "gallery": {
+      "eyebrow": "Qalbda qoladigan lahzalar",
+      "swipe": "Suring",
+      "previous": "Oldingi surat",
+      "next": "Keyingi surat",
+      "photos": "Suratlar",
+      "photo": "Surat",
+      "of": "/"
+    },
+    "intro": {
+      "dialog": "Taklifnomani ochish",
+      "seal": "Taklifnomani ochish uchun muhrni bosing",
+      "opening": "Taklifnoma ochilmoqda…"
+    }
+  },
+  "uz-Cyrl": {
+    "title": "Таклифнома",
+    "sections": {
+      "details": "Тафсилотлар",
+      "remember": "Санани эслаб қолинг",
+      "ceremony": "— Маросим —",
+      "venueAddress": "Тойхона манзили",
+      "gift": "— Самимий тилак —",
+      "contact": "— Боғланиш —",
+      "closing": "— Чин қалбимиздан —",
+      "closingText": "Ташрифингизни\nкутиб қоламиз",
+      "withRespect": "Ҳурмат билан",
+      "countdown": "— Кунлар саналмоқда —",
+      "table": "— Сизнинг жойингиз —",
+      "tableTitle": "Стол",
+      "tableSubtitle": "Маросимда Сизни шу жойда кутиб қоламиз"
+    },
+    "music": {
+      "pause": "Пауза",
+      "play": "Ижро"
+    },
+    "gift": {
+      "title": "Тўёна",
+      "desc": "Қалбан тўёна атамоқчи бўлсангиз, қуйидаги карта рақамидан фойдаланишингиз мумкин",
+      "cardHolder": "Карта эгаси",
+      "copyBtn": "Рақамни нусхалаш",
+      "copied": "Нусхаланди!"
+    },
+    "contact": {
+      "label": "Маълумот учун",
+      "phone": "Телефон"
+    },
+    "countdown": {
+      "label": "Тўйгача қолган вақт",
+      "days": "Кун",
+      "hours": "Соат",
+      "minutes": "Дақиқа",
+      "seconds": "Сония",
+      "past": "Биз шунча вақтдан бери бахтли ҳаёт кечирмоқдамиз"
+    },
+    "quotes": [
+      {
+        "text": "Севги — икки қалбнинг битта ҳикояни бирга ёзишга қарор қилиши. Ва бу ҳикоянинг энг гўзал саҳифаси бугун бошланади.",
+        "source": "Бизнинг ҳикоямиз"
+      },
+      {
+        "text": "Умримизнинг энг ёрқин кунига сиз ҳам гувоҳ бўлишингизни истаймиз. Қувончимиз сиз билан бўлса, у янада тўкис бўлади.",
+        "source": "Самимий таклиф"
+      },
+      {
+        "text": "Улар сизлар учун либос, сизлар ҳам улар учун либоссиз.",
+        "source": "Бақара сураси, 187-оят"
+      }
+    ],
+    "copy": {
+      "rsvpEyebrow": "Сизнинг жавобингиз",
+      "rsvpDescription": "Ушбу қувончли кунимизда сизни кутамиз. Келишингиз ҳақида бизга хабар беринг.",
+      "rsvpAttendance": "Тўйимизда иштирок этасизми?",
+      "namePlaceholder": "Исм ва фамилиянгиз",
+      "wishPlaceholder": "Биз учун самимий тилакларингиз…",
+      "validation": "Исмингизни ёзинг ва иштирокингизни белгиланг."
+    },
+    "gallery": {
+      "eyebrow": "Қалбда қоладиган лаҳзалар",
+      "swipe": "Суринг",
+      "previous": "Олдинги сурат",
+      "next": "Кейинги сурат",
+      "photos": "Суратлар",
+      "photo": "Сурат",
+      "of": "/"
+    },
+    "intro": {
+      "dialog": "Таклифномани очиш",
+      "seal": "Таклифномани очиш учун муҳрни босинг",
+      "opening": "Таклифнома очилмоқда…"
+    }
+  },
+  "ru": {
+    "title": "Приглашение",
+    "sections": {
+      "details": "Подробности",
+      "remember": "Запомните дату",
+      "ceremony": "— Торжество —",
+      "venueAddress": "Адрес тойхоны",
+      "gift": "— С пожеланиями —",
+      "contact": "— Контакты —",
+      "closing": "— От всего сердца —",
+      "closingText": "Ждём\nвас",
+      "withRespect": "С уважением и почтением",
+      "countdown": "— Обратный отсчёт —",
+      "table": "— Ваше место —",
+      "tableTitle": "Стол",
+      "tableSubtitle": "Мы будем рады встретить Вас за этим столом"
+    },
+    "music": {
+      "pause": "Пауза",
+      "play": "Воспроизвести"
+    },
+    "gift": {
+      "title": "Подарок",
+      "desc": "Если вы хотите сделать подарок, воспользуйтесь реквизитами карты ниже",
+      "cardHolder": "Владелец карты",
+      "copyBtn": "Скопировать номер",
+      "copied": "Скопировано!"
+    },
+    "contact": {
+      "label": "Контакты",
+      "phone": "Телефон"
+    },
+    "countdown": {
+      "label": "До свадьбы осталось",
+      "days": "Дней",
+      "hours": "Часов",
+      "minutes": "Минут",
+      "seconds": "Секунд",
+      "past": "Столько времени мы живём счастливо"
+    },
+    "quotes": [
+      {
+        "text": "Любовь — это решение двух сердец писать одну историю вместе. И самая прекрасная страница этой истории начинается сегодня.",
+        "source": "Наша история"
+      },
+      {
+        "text": "Мы хотим, чтобы вы стали свидетелем самого яркого дня нашей жизни. Наша радость будет полнее, если вы будете рядом.",
+        "source": "Сердечное приглашение"
+      },
+      {
+        "text": "Они — одеяние для вас, а вы — одеяние для них.",
+        "source": "Сура аль-Бакара, 187-й аят"
+      }
+    ],
+    "copy": {
+      "rsvpEyebrow": "Ваш ответ",
+      "rsvpDescription": "Будем рады видеть вас в этот счастливый день. Пожалуйста, сообщите, сможете ли вы прийти.",
+      "rsvpAttendance": "Вы придёте на нашу свадьбу?",
+      "namePlaceholder": "Ваше имя и фамилия",
+      "wishPlaceholder": "Ваши тёплые пожелания…",
+      "validation": "Укажите ваше имя и выберите ответ об участии."
+    },
+    "gallery": {
+      "eyebrow": "Мгновения, которые остаются",
+      "swipe": "Листайте",
+      "previous": "Предыдущее фото",
+      "next": "Следующее фото",
+      "photos": "Фотографии",
+      "photo": "Фото",
+      "of": "из"
+    },
+    "intro": {
+      "dialog": "Открыть приглашение",
+      "seal": "Нажмите на печать, чтобы открыть приглашение",
+      "opening": "Приглашение открывается…"
+    }
+  },
+  "en": {
+    "title": "Invitation",
+    "sections": {
+      "details": "Details",
+      "remember": "Save the Date",
+      "ceremony": "— Ceremony —",
+      "venueAddress": "Venue Address",
+      "gift": "— Gift —",
+      "contact": "— Contact —",
+      "closing": "— With All Our Hearts —",
+      "closingText": "We look forward\nto seeing you",
+      "withRespect": "With respect",
+      "countdown": "— Counting the Days —",
+      "table": "— Your Seat —",
+      "tableTitle": "Table",
+      "tableSubtitle": "Your seat is reserved here for the celebration"
+    },
+    "music": {
+      "pause": "Pause",
+      "play": "Play"
+    },
+    "gift": {
+      "title": "Gift",
+      "desc": "If you would like to send a gift, you may use the card number below",
+      "cardHolder": "Card holder",
+      "copyBtn": "Copy number",
+      "copied": "Copied!"
+    },
+    "contact": {
+      "label": "Contact",
+      "phone": "Phone"
+    },
+    "countdown": {
+      "label": "Time until the wedding",
+      "days": "Days",
+      "hours": "Hours",
+      "minutes": "Minutes",
+      "seconds": "Seconds",
+      "past": "We have been happily celebrating since then"
+    },
+    "quotes": [
+      {
+        "text": "Some meetings are not accidental... The love that united our hearts has led us to our happiest day.\nWe invite you to witness these unforgettable moments with us.",
+        "source": ""
+      },
+      {
+        "text": "We would be honored to have you witness the brightest day of our lives. Our joy will be complete with your presence.",
+        "source": ""
+      },
+      {
+        "text": "They are a garment for you, and you are a garment for them.",
+        "source": "Surah Al-Baqarah, verse 187"
+      }
+    ],
+    "copy": {
+      "rsvpEyebrow": "Your response",
+      "rsvpDescription": "We look forward to sharing this special day with you. Please let us know whether you can join us.",
+      "rsvpAttendance": "Will you join our celebration?",
+      "namePlaceholder": "Your full name",
+      "wishPlaceholder": "Your warm wishes for us…",
+      "validation": "Please enter your name and select your attendance."
+    },
+    "gallery": {
+      "eyebrow": "Moments that stay",
+      "swipe": "Swipe",
+      "previous": "Previous photo",
+      "next": "Next photo",
+      "photos": "Photographs",
+      "photo": "Photo",
+      "of": "of"
+    },
+    "intro": {
+      "dialog": "Open the invitation",
+      "seal": "Tap the seal to open the invitation",
+      "opening": "Opening the invitation…"
+    }
+  }
+}

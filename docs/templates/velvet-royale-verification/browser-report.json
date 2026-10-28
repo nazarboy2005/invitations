@@ -1,0 +1,19 @@
+{
+  "date": "2026-10-28",
+  "checks": [
+    "Source idle shimmer, seal release, video, final reveal and animated hero complete",
+    "Calendar lights days in order, reveals event day and emits captured confetti",
+    "Gallery arrows, keyboard navigation, automatic wraparound after interaction pause and accurate active slide",
+    "Google Places link retains place ID and embed uses selected coordinates",
+    "RSVP and wishes use shared API shape with party size, phone note and guest token (transport mocked)",
+    "Configured music plays; pause survives language updates and ordinary clicks; source control resumes it",
+    "All four locales retain opened state, translated controls and no page overflow",
+    "Five authored chapters preserve IDs/order; empty optional sections hide; manual Google short link remains exact",
+    "One-photo gallery hides empty reel; long names cause no horizontal page overflow",
+    "Past events use the source completed-countdown wording and expired attendance is closed",
+    "Desktop canvas remains centered at source 450 px width",
+    "Reduced motion opens immediately, suppresses hero video/particles and shows event day"
+  ],
+  "consoleErrors": [],
+  "missingTemplateAssets": []
+}

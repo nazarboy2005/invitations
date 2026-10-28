@@ -11,10 +11,6 @@ const reference = path.join(
   root,
   "apps/web/public/templates/velvet-royale/source/reference",
 );
-const capturedModule = path.join(
-  root,
-  "Invitations - this folder will be removed from production/E-invitation/Nikoh to'yi/_nuxt/CjKUbLp8.js",
-);
 
 test("Velvet Royale publishes the exact E-invitation source ID after release", () => {
   const template = templateById("royal-burgundy-edition");
@@ -24,7 +20,7 @@ test("Velvet Royale publishes the exact E-invitation source ID after release", (
   assert.equal(template.previewEventType, "wedding");
   assert.deepEqual(template.categoryIds, ["wedding"]);
   assert.deepEqual(template.supportedEventTypes, ["wedding"]);
-  assert.equal(template.priceMinor, 15_000_000);
+  assert.equal(template.priceMinor, 100_000);
   assert.equal(
     template.previewImage,
     "/templates/velvet-royale/source/reference/intro-v4-20261014-blank-poster-c521108180.webp",
@@ -32,21 +28,18 @@ test("Velvet Royale publishes the exact E-invitation source ID after release", (
 });
 
 test("Velvet Royale retains its captured source module and page assets", () => {
-  const copiedModule = readFileSync(path.join(reference, "CjKUbLp8.js"));
-  const sourceModule = readFileSync(capturedModule);
-  assert.equal(
-    createHash("sha256").update(copiedModule).digest("hex"),
-    createHash("sha256").update(sourceModule).digest("hex"),
-  );
+  const provenance = JSON.parse(readFileSync(path.join(reference, "../provenance.json"), "utf8"));
+  for (const file of provenance.files) assert.equal(createHash("sha256").update(readFileSync(path.join(reference, file.name))).digest("hex"), file.sha256, file.name);
   const capturedCss = readFileSync(
     path.join(reference, "VelvetRoyale.Bur_z5Os.css"),
     "utf8",
   );
-  const adaptedCss = readFileSync(
-    path.join(root, "apps/web/public/templates/velvet-royale/renderer.css"),
-    "utf8",
-  );
-  assert.equal(adaptedCss, capturedCss.replace(/\[data-v-[a-f0-9]+\]/g, ""));
+  const sourceHtml = readFileSync(path.join(root, "apps/web/public/templates/velvet-royale/template.html"), "utf8");
+  assert.match(sourceHtml, /data-v-965f1a66/);
+  for (const section of ["section-intro", "section-hero", "section-couple", "section-story", "section-photo-story", "section-datetime", "section-countdown", "section-venue", "section-table", "section-card", "section-contact", "section-rsvp", "section-family", "section-closing"]) assert.match(sourceHtml, new RegExp(section));
+  assert.doesNotMatch(sourceHtml, /Akmal|Madina|Navruz tantanalar saroyi|Karimovlar|0000 0000 0000 0000|assets\.e-invitation\.uz/);
+  assert.match(capturedCss, /\[data-v-[a-f0-9]+\]/);
+  assert.ok(existsSync(path.join(reference, "Cn3YHNzc.js")));
 
   for (const file of [
     "VelvetRoyale.Bur_z5Os.css",
@@ -116,6 +109,10 @@ test("Velvet Royale has a separate explicit publication migration", () => {
   );
   assert.match(migration, /published = true/);
   assert.match(migration, /'royal-burgundy-edition', 'wedding'/);
+  const correction = readFileSync(path.join(root, "packages/database/migrations/0168_publish_complete_velvet_royale.sql"), "utf8");
+  assert.match(correction, /SET published = true/);
+  assert.match(correction, /WHERE id = 'royal-burgundy-edition'/);
+  assert.doesNotMatch(correction, /price_minor\s*=/);
 });
 
 test("Velvet Royale renderer binds contract fields and application RSVP APIs", () => {
@@ -143,9 +140,9 @@ test("Velvet Royale renderer binds contract fields and application RSVP APIs", (
   assert.match(renderer, /data\.contacts/);
   assert.match(renderer, /prefers-reduced-motion/);
   assert.match(renderer, /qaReducedMotion/);
-  assert.match(renderer, /if\(opened\)return/);
+  assert.match(renderer, /if \(opened\) return/);
   assert.doesNotMatch(renderer, /assets\.e-invitation\.uz|e-invitation\.uz\/musics|\/webhook|tracking/);
-  assert.match(sourceHtml, /renderer\.css/);
+  assert.match(sourceHtml, /VelvetRoyale\.Bur_z5Os\.css/);
   assert.match(sourceHtml, /fonts\.css/);
 });
 
@@ -159,19 +156,16 @@ test("Velvet Royale uses its own renderer across preview and public routes", () 
   for (const route of [
     "apps/web/src/modules/studio/studio.tsx",
     "apps/web/src/modules/catalog/full-template-preview.tsx",
-    "apps/web/src/modules/dashboard/invitation-thumbnail.tsx",
     "apps/web/src/app/i/[slug]/page.tsx",
   ]) {
     assert.match(readFileSync(path.join(root, route), "utf8"), /VelvetRoyaleInvitation/);
   }
+  assert.match(readFileSync(path.join(root, "apps/web/src/server/invitation-cover.ts"), "utf8"), /\/preview\?template=/);
   assert.match(renderer, /royal-burgundy-edition:update/);
   assert.match(renderer, /qaReducedMotion=1/);
   assert.match(renderer, /qaMobile/);
   assert.doesNotMatch(renderer, /InvitateInvitation|Chorlove/);
-  const css = readFileSync(
-    path.join(root, "apps/web/public/templates/velvet-royale/renderer.css"),
-    "utf8",
-  );
+  const css = readFileSync(path.join(reference, "VelvetRoyale.Bur_z5Os.css"), "utf8");
   assert.match(css, /\.section-intro/);
   assert.match(css, /\.section-hero/);
   assert.match(css, /prefers-reduced-motion/);

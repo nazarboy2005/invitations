@@ -1,0 +1,34 @@
+{
+  "date": "2026-10-28",
+  "migration": "0168_publish_complete_velvet_royale.sql",
+  "before": [
+    {
+      "id": "royal-burgundy-edition",
+      "published": false,
+      "price_minor": "100000",
+      "currency": "UZS"
+    }
+  ],
+  "after": [
+    {
+      "id": "royal-burgundy-edition",
+      "name": "Velvet Royale",
+      "published": true,
+      "price_minor": "100000",
+      "currency": "UZS"
+    }
+  ],
+  "publicCatalog": {
+    "id": "royal-burgundy-edition",
+    "published": true,
+    "priceMinor": 100000,
+    "currency": "UZS",
+    "supportedEventTypes": [
+      "wedding"
+    ],
+    "categoryIds": [
+      "wedding"
+    ]
+  },
+  "applicationDeployment": false
+}

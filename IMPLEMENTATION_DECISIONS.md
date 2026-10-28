@@ -1,5 +1,27 @@
 # Implementation decisions
 
+## Velvet Royale source fidelity correction (2026-10-28)
+
+- User requested the complete live `e-invitation.uz/preview/velvet-royale/`
+  source and publication of the hidden existing `royal-burgundy-edition` design.
+  This supersedes the earlier simplified renderer's completion claim.
+- Implementation reuses the actual source DOM, original scoped CSS, local
+  artwork/fonts/videos and captured calendar particle engine. Restore the seal,
+  final envelope reveal, hero video, four scroll-reveal classes, calendar day
+  sequence/burst, automatic photo album and source section layout. The adapter
+  binds shared creator content and APIs; source personal sample data is cleared.
+- Keep the source's decorative quotes as translated template wording when there
+  are no authored chapters; creator story chapters replace them in stable order.
+  All map controls use the shared Google venue; never expose the server Places key.
+- The source's guest table artwork remains packaged, with its sample number
+  removed. Shared guest management has no seating assignment field, so hide that
+  optional section until such a field is supported; do not invent a number.
+- The configured database row was hidden despite the typed fallback being marked
+  published. Migration `0168_publish_complete_velvet_royale.sql` is applied and
+  database/public catalog publication is verified after source, browser and real
+  backend checks. The current administrator price is preserved (1,000 UZS at this
+  release). Application deployment and live payment activation were not performed.
+
 ## Personal dashboard redesign (2026-10-28)
 
 - User requested improving `/dashboard` (Taklifnomalarim), using the supplied

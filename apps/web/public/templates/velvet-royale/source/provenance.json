@@ -1,0 +1,190 @@
+{
+  "reference": "https://e-invitation.uz/preview/velvet-royale/",
+  "capturedAt": "2026-10-28",
+  "textHashNormalization": "CRLF to LF; binary assets unchanged",
+  "templateModule": "Cn3YHNzc.js",
+  "stylesheet": "VelvetRoyale.Bur_z5Os.css",
+  "confettiEngine": "C94ZD2ww.js",
+  "files": [
+    {
+      "name": "C94ZD2ww.js",
+      "sha256": "32dfc70a532eb741995abf20520cab962cac5adfc71214fe4a45982226bc40f5"
+    },
+    {
+      "name": "CjKUbLp8.js",
+      "sha256": "d77ad802df1f7441f37e048ee8d77149ed8598d0c1169d1e420f495799d9c053"
+    },
+    {
+      "name": "Cn3YHNzc.js",
+      "sha256": "69fb83f94aa4cc60680a607950c64785fb7399e5cf515701f3c2e5fc0a6e8a2b"
+    },
+    {
+      "name": "couple-gallery-v20261021-01.webp",
+      "sha256": "c6a793d39a331fa714ff676dcbafc21cea5e03fb95dcffd03b6de77d11deb0c2"
+    },
+    {
+      "name": "couple-gallery-v20261021-02.webp",
+      "sha256": "68344232f57764cb47c02b4d2f33a623fc1016cf976a9cbcf8df6d602d0cd713"
+    },
+    {
+      "name": "couple-gallery-v20261021-03.webp",
+      "sha256": "de9d8c408162a0ce9138e7e74da8b97787d1dee9d581f2444cc141a47b2ea95f"
+    },
+    {
+      "name": "couple-gallery-v20261021-04.webp",
+      "sha256": "7d1e7e3498b85850a7996dd9083d9864cf0348084ea4a6f8123158fcbfeb8bc2"
+    },
+    {
+      "name": "couple-gallery-v20261021-05.webp",
+      "sha256": "d230c766c76898d72a0c60e83c37b049a7cf5f7aec22309bb58d12431ad43ca3"
+    },
+    {
+      "name": "couple-gallery-v20261021-06.webp",
+      "sha256": "9ce97a948e484ba9f5434a47ca569829bced1d7aea5ed28a3868d5a83252f518"
+    },
+    {
+      "name": "fonts/cyrillic-script.ttf",
+      "sha256": "334d5b19adc74ad1a97bcc403deafa2df7cb338d05da95d67a4587ed0f7c329e"
+    },
+    {
+      "name": "fonts/font-01.woff2",
+      "sha256": "ae25de0507a445fd9e953e90432ae75b1ee2eccb48370a6ced4934551eb56fc3"
+    },
+    {
+      "name": "fonts/font-02.woff2",
+      "sha256": "cb13c04533ee98c94e49a053b9f4d39bf616fd7ba6360d71aead92a78dc571f7"
+    },
+    {
+      "name": "fonts/font-03.woff2",
+      "sha256": "b8ecb4ae898cd9ccae2f2d18fd364f6593bb67776060f9b5d833cec65d34d112"
+    },
+    {
+      "name": "fonts/font-04.woff2",
+      "sha256": "cd5bf126b2c84ab41b254a6a9a1ffb5c326a0f9f82c22fb4704daa31c9aaa415"
+    },
+    {
+      "name": "fonts/font-05.woff2",
+      "sha256": "6f2f5c3b1abc3d0bb035a927f66a90ca873f94fc31c4966c8d024142c2036e55"
+    },
+    {
+      "name": "fonts/font-06.woff2",
+      "sha256": "a4d7cf345b8091e1d2c8c5c8fa3bd0f9bb9d00bc8988185471db398ddb5ae4c4"
+    },
+    {
+      "name": "fonts/font-07.woff2",
+      "sha256": "017fab69b4be8ffc08ca312823327989ade6dc3d948f0afa125e12ec2e5e7ca1"
+    },
+    {
+      "name": "fonts/font-08.woff2",
+      "sha256": "6252e819a7665ae512c2d046308a9016ada63c06d0d8f96984c4b29f6c9e1bd2"
+    },
+    {
+      "name": "fonts/font-09.woff2",
+      "sha256": "cfa9a397d86f66c5c51775a2500a712d5f632a04f0c5eca6930dfaf612d4566d"
+    },
+    {
+      "name": "fonts/font-10.woff2",
+      "sha256": "d80df8ff5aecd299a61549f9e29ab1ed0b9b05f4ea71d50fe978e07d5240b235"
+    },
+    {
+      "name": "fonts/font-11.woff2",
+      "sha256": "6b071406bf0cb2c4a84a01ffbabe275032dca341733fe7f4ece8a1d4a615e44b"
+    },
+    {
+      "name": "fonts/font-12.woff2",
+      "sha256": "80b935e653c6426a8780daca822409f546c8a9bc0ea41fd3c0f98dcf456463f5"
+    },
+    {
+      "name": "fonts/font-13.woff2",
+      "sha256": "36cccce6b2eb27eba45a96660f52d4a1d4a0a30822150b9600eebd67be9462a8"
+    },
+    {
+      "name": "fonts/font-14.woff2",
+      "sha256": "9b624180d019ee43faf972e083bf81dfafabf43234ac9e80ba2d93013f25a3d0"
+    },
+    {
+      "name": "fonts/font-15.woff2",
+      "sha256": "b63469c752efac950ef0497a345e3823d70211b70f60d61887066a87bc3b62f3"
+    },
+    {
+      "name": "fonts/font-16.woff2",
+      "sha256": "c59dc73d29daf142ef2431f455d21464172374aa750d793a79d608735db2d856"
+    },
+    {
+      "name": "fonts/font-17.woff2",
+      "sha256": "0f53d1c03b3918d744a843b5039001ee31695ca1e255e3914188df81beb461e9"
+    },
+    {
+      "name": "fonts/font-18.woff2",
+      "sha256": "6c18d579fd87c3776be068b762cbc83fde3acb543d49eabd3ade842eb987e887"
+    },
+    {
+      "name": "fonts.css",
+      "sha256": "693c415d22962da31e84160b6ca29e082695c341a59413c115787ec48fd8de8b"
+    },
+    {
+      "name": "google-fonts-capture.css",
+      "sha256": "2c4c1625658b77c21379ff46fc44dae963946f3cf393c28b6b3e0b8a5a139a58"
+    },
+    {
+      "name": "hero-upscale-v1-20260927-c4fec8e94c.mp4",
+      "sha256": "c4fec8e94c7a9bb18c845257485a80c4025016e6ba587b259d0ded0007243104"
+    },
+    {
+      "name": "hero-upscale-v1-20260927-poster-361e716aba.webp",
+      "sha256": "361e716aba212b3aaeb9ffbd27748ca5752f2efde3fd02d66b43d19fc2317819"
+    },
+    {
+      "name": "intro-v4-20261014-blank-envelope-cf28b7812a.mp4",
+      "sha256": "cf28b7812a15102811cf660c31b0b9f86aebf4041945192d62abae4f7001fc44"
+    },
+    {
+      "name": "intro-v4-20261014-blank-poster-c521108180.webp",
+      "sha256": "c5211081803f2da3ee49aefc1f2c01fdd8a278f578573e546130e726d3fdbf31"
+    },
+    {
+      "name": "v3-20260927-cake.webp",
+      "sha256": "d966eee043f86c061f2b4c7b5d23b8a6ca2b39a016964cb266d53c86ee31e662"
+    },
+    {
+      "name": "v3-20260927-calendar-corner.webp",
+      "sha256": "44d8a0a2d5134e128810fd04e141a8ff6e5be5db02d69e3bf0ace7734539d2d4"
+    },
+    {
+      "name": "v3-20260927-divider.webp",
+      "sha256": "c892f24f21203b84daa7169acb5551a573a2c4dd02718b80492a0db12bf38bf3"
+    },
+    {
+      "name": "v3-20260927-doves.webp",
+      "sha256": "e326d49ba7ceb03b4a78180e43f773bba3dbc5b0e13e4f8b9815fe289351635b"
+    },
+    {
+      "name": "v3-20260927-frame.webp",
+      "sha256": "353bce447d7856e20f46ef2b9ffc38ee77007f9c9d39593c26a566cdeccf44b8"
+    },
+    {
+      "name": "v3-20260927-rings.webp",
+      "sha256": "a25e7c9ba229decd5e8314a3546c2ef88e312b4d24a818bd7c4029660823e7ef"
+    },
+    {
+      "name": "v3-20260927-table.webp",
+      "sha256": "f499be773ab0ce6c06397b6e4e5e1a0e4796106e1aee1d1ad32de26076ba97f3"
+    },
+    {
+      "name": "v3-20260927-wreath.webp",
+      "sha256": "d53b19b34195f39a4a0ddc94768d0abc316405a366fbeed3d37c4bf8905315de"
+    },
+    {
+      "name": "v4-20260927-couple-stage.webp",
+      "sha256": "f2644e09e49a34793dd4b136bdffc9163de7164be1a0fe6eb70a0c8a57b774eb"
+    },
+    {
+      "name": "VelvetRoyale.Bur_z5Os.css",
+      "sha256": "9b8c3eefa9bf451a515fe09560174325748013aa8955130d38fb152056643857"
+    },
+    {
+      "name": "wax-blank-v1-20261014.webp",
+      "sha256": "88e0668cb75299c3a1221d8389490b17e9a34e866ffb98911725c70e5a4a956a"
+    }
+  ]
+}
