@@ -1,0 +1,373 @@
+{
+  "wedivo-pulau-sehati": { "motif": "island", "background": "#d9edf0" },
+  "oltin-darvoza-ortidagi-baxt": {
+    "source": "onlinetaklifnoma-oltin-darvoza-ortidagi-baxt/source/assets/dd2fe7c942f5a910.webp",
+    "crop": [0, 0, 1, 0.38],
+    "fit": "cover"
+  },
+  "gulli-darvoza": {
+    "source": "onlinetaklifnoma-gulli-darvoza/source/assets/gate.webp"
+  },
+  "ming-bir-kecha": {
+    "source": "onlinetaklifnoma-ming-bir-kecha/source/assets/71a55bb0516b6064.webp"
+  },
+  "andalus-darvozasi": {
+    "source": "onlinetaklifnoma-andalus-darvozasi/source/assets/1d10c6e525d2c33c.webp"
+  },
+  "samarqand-peshtoqi": {
+    "source": "onlinetaklifnoma-samarqand-peshtoqi/source/assets/portal.8f988e1a927420cc.webp"
+  },
+  "shisha-bog": {
+    "source": "onlinetaklifnoma-shisha-bog/source/assets/portal.5a918f2300357ece.webp"
+  },
+  "kapadokiya-tongi": {
+    "source": "onlinetaklifnoma-kapadokiya-tongi/source/assets/e924b6a0555070ae.webp"
+  },
+  "buxoro-ravoq": {
+    "source": "onlinetaklifnoma-buxoro-ravoq/source/assets/portal.a4bda8eccc9cfdff.webp"
+  },
+  "jannat-bogi": {
+    "source": "onlinetaklifnoma-jannat-bogi/source/assets/e32742ca7893c3a2.webp"
+  },
+  "tojmahal-oltin-darvozasi": {
+    "source": "onlinetaklifnoma-tojmahal-oltin-darvozasi/source/assets/247f19e46f38efab.webp",
+    "crop": [0, 0, 1, 0.6],
+    "fit": "cover"
+  },
+  "zarrin-doppi": {
+    "source": "onlinetaklifnoma-zarrin-doppi/source/assets/doppi-girih.svg",
+    "fit": "cover",
+    "background": "#101f41"
+  },
+  "fairy": {
+    "source": "fairy/assets/images/fairy/heroback.png",
+    "fit": "cover"
+  },
+  "butterfly": { "motif": "butterfly", "background": "#eee9e2" },
+  "girlsparty": { "motif": "floral" },
+  "estelle": { "motif": "rings" },
+  "velora": {
+    "source": "velora/source/assets/previews/template/velora/back.png",
+    "fit": "cover"
+  },
+  "velvet": { "source": "velvet/assets/images/curtain.jpg", "fit": "cover" },
+  "aurelia": { "motif": "arch" },
+  "evelina": {
+    "source": "evelina/assets/previews/template/evelina/hero.png",
+    "fit": "cover"
+  },
+  "anor": {
+    "source": "anor/fruit.webp",
+    "fit": "contain",
+    "background": "#f5eee4"
+  },
+  "oltin-nur": {
+    "source": "oltin-nur/art/gift-box.webp",
+    "fit": "contain",
+    "background": "#24140e"
+  },
+  "samarqand-kechasi": {
+    "source": "samarqand-kechasi/art/registan-reveal.webp",
+    "fit": "cover"
+  },
+  "bogi-eram": { "source": "bogi-eram/art/garden-court.webp", "fit": "cover" },
+  "atlas": { "source": "atlas/art/silk-hero.webp", "fit": "cover" },
+  "uchar-gilam": {
+    "source": "uchar-gilam/art/carpet.webp",
+    "fit": "contain",
+    "background": "#141b35"
+  },
+  "oq-kabutar": {
+    "source": "oq-kabutar/art/doves-perched.webp",
+    "fit": "contain",
+    "background": "#e9f1f6"
+  },
+  "kuzgi-chinor": {
+    "source": "kuzgi-chinor/art/avenue-far.webp",
+    "fit": "cover"
+  },
+  "muhabbat-kitobi": {
+    "source": "muhabbat-kitobi/art/book-cover.svg",
+    "fit": "contain",
+    "background": "#ede0cb"
+  },
+  "sahifa": { "motif": "envelope", "background": "#f2eadb" },
+  "oltin-uzuk": {
+    "source": "oltin-uzuk/art/rings-angle-1.webp",
+    "fit": "contain",
+    "background": "#f6f0e6"
+  },
+  "oynavand": { "source": "oynavand/art/poster-dome.webp", "fit": "cover" },
+  "somon-yoli": {
+    "source": "somon-yoli/art/poster-galaxy.webp",
+    "fit": "cover"
+  },
+  "qogoz-turna": { "motif": "paper" },
+  "nilufar": { "source": "nilufar/art/poster-pond.webp", "fit": "cover" },
+  "monogram": { "motif": "rings", "background": "#f3eee5" },
+  "retro-kino": {
+    "source": "retro-kino/art/curtains.webp",
+    "fit": "cover",
+    "background": "#281319"
+  },
+  "suzani": { "source": "suzani/art/panel.webp", "fit": "cover" },
+  "orik-guli": {
+    "source": "orik-guli/art/wreath.webp",
+    "fit": "contain",
+    "background": "#f7f0e8"
+  },
+  "paxta": {
+    "source": "paxta/art/cotton-branch.webp",
+    "fit": "contain",
+    "background": "#ede6d9"
+  },
+  "sahro-fonusi": {
+    "source": "sahro-fonusi/art/desert-panorama.webp",
+    "fit": "cover"
+  },
+  "vals": { "source": "vals/art/ballroom.webp", "fit": "cover" },
+  "toscana": { "source": "toscana/art/arch.webp", "fit": "cover" },
+  "muhr": {
+    "source": "muhr/art/scene-mid.webp",
+    "crop": [0, 0.55, 1, 0.45],
+    "fit": "cover"
+  },
+  "bulbul": {
+    "source": "bulbul/art/blossom-branch.webp",
+    "fit": "contain",
+    "background": "#f3e8d5"
+  },
+  "kozgu": { "source": "kozgu/art/room.webp", "fit": "cover" },
+  "doira": { "source": "doira/art/courtyard-night-v2.webp", "fit": "cover" },
+  "qandil": {
+    "source": "qandil/art/skyline-near.webp",
+    "fit": "cover",
+    "background": "#151b35"
+  },
+  "parda": { "source": "parda/art/suzani.webp", "fit": "cover" },
+  "ganch": { "source": "ganch/art/ganch-doors-v2.webp", "fit": "cover" },
+  "qatlam": {
+    "source": "qatlam/art/registan.webp",
+    "fit": "contain",
+    "background": "#f4eada"
+  },
+  "lola": {
+    "source": "lola/art/bouquet.webp",
+    "fit": "contain",
+    "background": "#f3e8dd"
+  },
+  "qiz-bazmi": {
+    "source": "qiz-bazmi/art/tilla-qosh.svg",
+    "fit": "contain",
+    "background": "#f3e1cc"
+  },
+  "shahzoda": {
+    "source": "shahzoda/art/crown.webp",
+    "fit": "contain",
+    "background": "#13233a"
+  },
+  "chavandoz": {
+    "source": "chavandoz/art/portrait-horses.webp",
+    "fit": "cover"
+  },
+  "beshik": {
+    "source": "beshik/art/beshik.webp",
+    "fit": "contain",
+    "background": "#eeebf5"
+  },
+  "shirin-bayram": {
+    "source": "shirin-bayram/art/cake-hero.webp",
+    "fit": "cover"
+  },
+  "oltin-kuz": { "source": "oltin-kuz/art/chinar.webp", "fit": "cover" },
+  "oltin-yosh": {
+    "source": "oltin-yosh/art/room-backdrop.webp",
+    "fit": "cover"
+  },
+  "konfetti": { "motif": "confetti" },
+  "nahor": { "source": "nahor/art/osh-close.webp", "fit": "cover" },
+  "nahorgi-osh": {
+    "source": "nahorgi-osh/art/nahorgi-dawn.webp",
+    "fit": "cover"
+  },
+  "hilol": {
+    "source": "hilol/art/still-life.svg",
+    "fit": "contain",
+    "background": "#162b29"
+  },
+  "bitiruv": { "source": "bitiruv/art/graduation-scene.webp", "fit": "cover" },
+  "korporativ": { "source": "korporativ/art/event-01.svg", "fit": "cover" },
+  "yangi-uy": {
+    "source": "yangi-uy/art/house-iso.webp",
+    "fit": "contain",
+    "background": "#f3e9da"
+  },
+  "golden-card": {
+    "source": "golden-card/assets/mandala.png",
+    "fit": "contain",
+    "background": "#142238"
+  },
+  "green-garden": {
+    "source": "green-garden/assets/flower1-decoration.webp",
+    "fit": "contain",
+    "background": "#e8ebde"
+  },
+  "green-gold": {
+    "source": "green-gold/assets/naqsh.png",
+    "fit": "contain",
+    "background": "#162e29"
+  },
+  "green-white": {
+    "source": "green-white/assets/flower.webp",
+    "fit": "contain",
+    "background": "#f5f3e9"
+  },
+  "jasmine-white": {
+    "source": "jasmine-white/assets/khung-hoa.webp",
+    "fit": "contain",
+    "background": "#f5f2e8"
+  },
+  "lace": {
+    "source": "lace/assets/lace-bow.webp",
+    "fit": "contain",
+    "background": "#673443"
+  },
+  "love-sakura": {
+    "source": "love-sakura/assets/cherry-1.png",
+    "fit": "contain",
+    "background": "#f7e5e5"
+  },
+  "luxury-gold": {
+    "source": "luxury-gold/assets/corner.png",
+    "fit": "contain",
+    "background": "#25231c"
+  },
+  "modern-floral": {
+    "source": "modern-floral/assets/flower.png",
+    "fit": "contain",
+    "background": "#f8efea"
+  },
+  "taklifla-zarhal-sahifa": { "motif": "envelope", "background": "#fbf6ec" },
+  "glass-pink": {
+    "source": "glass-pink/assets/flower1-decoration.webp",
+    "fit": "contain",
+    "background": "#f6e5e8"
+  },
+  "manor-edition": {
+    "source": "manor-edition/source/reference/assets/wreath.webp",
+    "fit": "contain",
+    "background": "#f3ebdf"
+  },
+  "olive-manor-edition": {
+    "source": "olive-manor-edition/source/reference/assets/holding-hands-watercolor-v20260920.webp",
+    "fit": "contain",
+    "background": "#f2efe5"
+  },
+  "islamic-edition": {
+    "source": "islamic-edition/source/reference/assets/closing-moon.webp",
+    "fit": "contain",
+    "background": "#152d36"
+  },
+  "osh-edition-v1": {
+    "source": "osh-edition-v1/source/reference/assets/osh.webp",
+    "fit": "contain",
+    "background": "#f0e6d7"
+  },
+  "osh": {
+    "source": "chorlove/osh/palov.png",
+    "fit": "contain",
+    "background": "#f4e8d7"
+  },
+  "palov": {
+    "source": "chorlove/palov/assets/palov.png",
+    "fit": "contain",
+    "background": "#eae9df"
+  },
+  "orchid-amplop": {
+    "source": "chorlove/orchid-amplop/assets/hero-forest.webp",
+    "crop": [0, 0, 1, 0.6],
+    "fit": "cover"
+  },
+  "invitate-palov": {
+    "source": "invitate-palov/assets/images/palov.png",
+    "fit": "contain",
+    "background": "#eceddf"
+  },
+  "golden-hour": {
+    "source": "golden-hour/assets/images/golden-hour/flocake.png",
+    "crop": [0, 0, 1, 0.58],
+    "fit": "cover"
+  },
+  "bloom": { "motif": "floral" },
+  "invitate-nahorgi-osh": {
+    "source": "invitate-nahorgi-osh/assets/images/palov.png",
+    "fit": "contain",
+    "background": "#ede6d9"
+  },
+  "invitate-wedding": { "motif": "rings", "background": "#141c1c" },
+  "whiteless": { "motif": "rings", "background": "#eae8e2" },
+  "safir": {
+    "source": "safir/assets/images/safir/top.png",
+    "fit": "contain",
+    "background": "#f0eee4"
+  },
+  "amru-maruf-edition-v1": { "motif": "arch", "background": "#f6eddf" },
+  "monochrome-editorial-edition": {
+    "source": "monochrome-editorial-edition/source/reference/assets/hero-hands.webp",
+    "fit": "cover"
+  },
+  "xatna-edition": {
+    "source": "xatna-edition/source/reference/assets/intro-ivory-doors.webp",
+    "fit": "cover"
+  },
+  "cloud-castle": {
+    "source": "cloud-castle/assets/home.webp",
+    "fit": "contain",
+    "background": "#dee7f2"
+  },
+  "palace-rose": {
+    "source": "palace-rose/assets/castle.webp",
+    "fit": "contain",
+    "background": "#f2e4d5"
+  },
+  "royal-burgundy-edition": {
+    "source": "velvet-royale/source/reference/v3-20260927-rings.webp",
+    "fit": "contain",
+    "background": "#3b1420"
+  },
+  "taklifnomachi-1": {
+    "source": "taklifnomachi-1/source/templates/1/cdn/tild3063-6162-4734-b966-356139343638_2ruby.png",
+    "fit": "contain",
+    "background": "#f5e9e2"
+  },
+  "taklifnomachi-12": {
+    "source": "taklifnomachi-12/source/templates/12/assets/heart-blue.png",
+    "fit": "contain",
+    "background": "#e7edf2"
+  },
+  "taklifnomachi-13": {
+    "source": "taklifnomachi-13/source/taklifnomachi.uz/templates/13/assets/p2/fingerprint-heart.png",
+    "fit": "contain",
+    "background": "#f3e8d5"
+  },
+  "taklifnomachi-15": {
+    "source": "taklifnomachi-15/source/taklifnomachi.uz/templates/15/assets/main-bg.png",
+    "fit": "cover"
+  },
+  "taklifnomachi-16": {
+    "source": "taklifnomachi-16/source/taklifnomachi.uz/templates/16/assets/flower-big.png",
+    "fit": "contain",
+    "background": "#f1eee3"
+  },
+  "taklifnomachi-17": {
+    "source": "taklifnomachi-17/source/taklifnomachi.uz/templates/17/assets/flower-deco.png",
+    "fit": "contain",
+    "background": "#efe5dd"
+  },
+  "taklifnomachi-18": {
+    "source": "taklifnomachi-18/source/taklifnomachi.uz/templates-source/18/assets/floral-tr.png",
+    "fit": "contain",
+    "background": "#ecf1eb"
+  },
+  "taklifnomachi-19": { "motif": "floral", "background": "#f3eee3" }
+}

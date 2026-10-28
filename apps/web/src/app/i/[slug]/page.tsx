@@ -1,6 +1,10 @@
 import { notFound } from "next/navigation";
+import { cache } from "react";
+import type { Metadata } from "next";
 import { templateById } from "@taklifnoma/contracts";
 import { getPublishedInvitation } from "@/server/invitations";
+import { publicInvitationUrl } from "@/server/publication";
+import { invitationLocale, invitationShareMetadata } from "@/modules/catalog/invitation-share";
 import { resolveGuest } from "@/server/public";
 import { AnorInvitation } from "@/templates/anor";
 import { WedivoPulauSehati } from "@/templates/wedivo-pulau-sehati/renderer";
@@ -29,29 +33,31 @@ import { TojmahalOltinDarvozasiInvitation } from "@/templates/onlinetaklifnoma/t
 import { isChorloveTemplate, ChorloveInvitation } from "@/templates/chorlove";
 import { InvitationViewTracker } from "@/modules/catalog/invitation-view-tracker";
 export const dynamic = "force-dynamic";
-export const metadata = {
-  title: "Sizga taklifnoma",
-  robots: { index: false, follow: false },
+const loadPublishedInvitation = cache(getPublishedInvitation);
+type Props = {
+  params: Promise<{ slug: string }>;
+  searchParams: Promise<{ lang?: string | string[]; g?: string }>;
 };
+
+export async function generateMetadata({ params, searchParams }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  if (!/^[0-9A-Za-z]{6}$/.test(slug)) notFound();
+  const result = await loadPublishedInvitation(slug);
+  if (!result || !templateById(result.invitation.templateId)) notFound();
+  const query = await searchParams;
+  return invitationShareMetadata(result.invitation, slug, publicInvitationUrl(slug), query.lang);
+}
 export default async function InvitationPage({
   params,
   searchParams,
-}: {
-  params: Promise<{ slug: string }>;
-  searchParams: Promise<{ lang?: string; g?: string }>;
-}) {
+}: Props) {
   const { slug } = await params;
   if (!/^[0-9A-Za-z]{6}$/.test(slug)) notFound();
   const query = await searchParams;
-  const result = await getPublishedInvitation(slug);
+  const result = await loadPublishedInvitation(slug);
   if (!result || !templateById(result.invitation.templateId)) notFound();
   const invitation = result.invitation;
-  const requested = query.lang;
-  const locale = invitation.enabledLocales.includes(
-    requested as typeof invitation.defaultLocale,
-  )
-    ? (requested as typeof invitation.defaultLocale)
-    : invitation.defaultLocale;
+  const locale = invitationLocale(invitation, query.lang);
   let guestName = "";
   if (query.g) {
     try {

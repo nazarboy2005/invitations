@@ -1,5 +1,22 @@
 # Implementation decisions
 
+## Published invitation link previews (2026-10-28)
+
+- User approved dedicated square artwork for each template, with actual host
+  names/event title and localized event/date details in preview metadata. Use
+  text-free template details, never catalog screenshots with sample names or
+  tall phone captures. Artwork must work in compact and expanded previews;
+  the messaging client controls presentation.
+- Implementation: 1200×1200 JPEGs, curated from template assets or text-free
+  vector motifs for designs without suitable assets. Keep these separate from
+  catalog covers. Source recipes and a repeatable generation script produce
+  content-hashed public image URLs, with a neutral fallback for unknown designs.
+- The public route generates Open Graph/Twitter metadata from published data,
+  respects enabled language variants and the event timezone, and never places
+  guest tokens, personalized greetings or preview fixtures in metadata. Retain
+  noindex. Include Telegram in Next's blocking-metadata crawler list while
+  preserving the framework defaults. This change does not deploy the app.
+
 ## Homepage paper showcase (2026-10-27)
 
 - User approved a four-paper showcase after the three-step section, before FAQ:
