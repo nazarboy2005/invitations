@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="uz-Latn" data-awaiting="true" data-awaiting-data><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Yulduzli Tun</title><link rel="icon" href="data:,"><link rel="stylesheet" href="fonts/fonts.css"><link rel="stylesheet" href="template.css"><link rel="stylesheet" href="adapter.css"><link rel="stylesheet" href="source/language.css"><script src="cyrillic.js"></script><script defer src="bridge.js"></script></head><body>
+<!-- STARS -->
+<div class="stars-box" id="starsBox"></div>
+<!-- PARTICLES -->
+<canvas id="particles"></canvas>
+<!-- GRAIN -->
+<div class="grain"></div>
+<!-- ===== SPLASH ===== -->
+<div class="splash" id="splash">
+<div class="splash-inner">
+<p class="splash-sub" data-i18n="splash_sub"></p>
+<div class="mono-ring">
+<span class="mono-l"></span>
+<span class="mono-a">&amp;</span>
+<span class="mono-l"></span>
+</div>
+<p class="splash-names"></p>
+<button class="open-btn" data-i18n="open_btn" id="openBtn"></button>
+</div>
+</div>
+<!-- ===== MAIN WRAPPER ===== -->
+<div class="wrap">
+<!-- HERO -->
+<section class="hero">
+<div class="hero-bg" id="heroBg"></div>
+<div class="hero-over"></div>
+<div class="hero-ct">
+<p class="hero-date"></p>
+<h1 class="hero-names shimmer"></h1>
+<p class="hero-tag" data-i18n="hero_tag"></p>
+</div>
+<div class="scroll-hint">
+<span data-i18n="scroll"></span>
+<div class="scroll-arrow"></div>
+</div>
+</section>
+<!-- DIVIDER 1 — Moon Garland -->
+<div class="cdiv">
+<div class="cdiv-img" style="background-image:url('starry-night-img/divider-moon.webp');height:140px"></div>
+</div>
+<!-- INVITATION -->
+<section class="invite rv">
+<div class="invite-card">
+<p class="invite-fam"></p>
+<p class="invite-txt" data-html="1"></p>
+<h2 class="invite-names shimmer"></h2>
+<p class="invite-welcome" data-i18n="invite_welcome"></p>
+<div class="invite-dateblock">
+<div>
+<span class="invite-day"></span>
+</div>
+<span class="invite-dnum"></span>
+<div>
+<span class="invite-my" data-html="1"></span>
+</div>
+</div>
+<p class="invite-venue"></p>
+</div>
+</section>
+<!-- DIVIDER 2 -->
+<div class="cdiv rv">
+<div class="cdiv-line"><span class="cdiv-sym">☽</span></div>
+</div>
+<!-- EVENTS -->
+<section class="events">
+<h2 class="sec-title rv" data-i18n="events_title"></h2>
+<div class="timeline"></div>
+</section>
+<!-- DIVIDER 3 — Star Cluster -->
+<div class="cdiv rv">
+<div class="cdiv-img-wide" style="background-image:url('starry-night-img/divider-stars.webp');height:120px"></div>
+</div>
+<!-- VENUE -->
+<section class="venue">
+<div class="venue-bg" id="venueBg"></div>
+<div class="venue-over"></div>
+<div class="venue-ct rv">
+<h2 data-i18n="venue_label"></h2>
+<p class="venue-name"></p>
+<p class="venue-date"></p>
+<a class="map-btn" data-i18n="map_btn" href="" rel="noopener" target="_blank"></a>
+</div>
+</section>
+<!-- INFO -->
+<section class="info rv">
+<h2 class="sec-title" data-i18n="info_title"></h2>
+<div class="info-card">
+<p></p>
+</div>
+</section>
+
+<!-- DIVIDER 4 -->
+<div class="cdiv rv">
+<div class="cdiv-line"><span class="cdiv-sym">✦</span></div>
+</div>
+<!-- WISHES -->
+<section class="wishes">
+<h2 class="sec-title rv" data-i18n="wishes_title"></h2>
+<form class="wish-form rv" id="wishForm">
+<input data-i18n-ph="ph_name" name="wname" id="wishName" maxlength="100" placeholder="" required="" type="text"/>
+<textarea data-i18n-ph="ph_wish" name="wmsg" id="wishMsg" maxlength="2000" placeholder="" required=""></textarea>
+<button class="wish-submit" data-i18n="wish_btn" type="submit"></button>
+<p aria-live="polite" id="wishStatus" role="status"></p></form>
+<div class="wishes-list" id="wishList"></div>
+</section>
+<!-- COUNTDOWN -->
+<section class="countdown">
+<div class="cd-bg" id="cdBg"></div>
+<div class="cd-over"></div>
+<div class="cd-ct rv">
+<h2 data-i18n="cd_title"></h2>
+<p class="cd-date"></p>
+<div class="cd-timer">
+<div class="cd-unit"><span class="cd-num" id="cdD">---</span><span class="cd-lbl" data-i18n="days"></span></div>
+<div class="cd-unit"><span class="cd-num" id="cdH">--</span><span class="cd-lbl" data-i18n="hours"></span></div>
+<div class="cd-unit"><span class="cd-num" id="cdM">--</span><span class="cd-lbl" data-i18n="mins"></span></div>
+<div class="cd-unit"><span class="cd-num" id="cdS">--</span><span class="cd-lbl" data-i18n="secs"></span></div>
+</div>
+</div>
+</section>
+<!-- FOOTER -->
+<footer class="footer">
+<p class="footer-names shimmer"></p>
+<p class="footer-date"></p>
+<p class="footer-msg" data-html="1" data-i18n="footer_msg"></p>
+<p class="footer-star">✦</p>
+</footer>
+</div>
+<!-- MUSIC -->
+<button class="music-btn" id="musicBtn" title="Toggle music">♫</button>
+<audio id="bgMusic" loop="" preload="none"></audio>
+
+
+
+
+<div class="starry-language" hidden><select aria-label="Til" id="localeSelect"></select></div><div class="taklifla-lang-switch" role="group" aria-label="Language"><button type="button" class="taklifla-lang-toggle" aria-haspopup="menu" aria-expanded="false"><span class="taklifla-lang-current">UZ</span><span class="chev" aria-hidden="true">▾</span></button><div class="taklifla-lang-menu" role="menu"><button type="button" data-lang="uz-Latn" role="menuitemradio">UZ</button><button type="button" data-lang="uz-Cyrl" role="menuitemradio">ЎЗ</button><button type="button" data-lang="en" role="menuitemradio">EN</button><button type="button" data-lang="ru" role="menuitemradio">RU</button></div></div></body></html>

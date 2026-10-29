@@ -1,0 +1,85 @@
+{
+  "date": "2026-10-29",
+  "viewports": [
+    {
+      "width": 320,
+      "reference": {
+        "width": 320,
+        "font": "\"Great Vibes\", cursive",
+        "stars": 120
+      },
+      "actual": {
+        "width": 320,
+        "font": "\"Great Vibes\", cursive",
+        "stars": 120
+      },
+      "animation": "twinkle",
+      "canvasMotion": true,
+      "sourceOpen": true,
+      "locales": 4,
+      "canonicalWishes": true,
+      "restoredInfo": true,
+      "sevenStableEvents": true,
+      "longNamesAndCopy": true,
+      "previewNoSend": true,
+      "failureRetainsInput": true,
+      "failureSurvivesLocale": true,
+      "reducedMotion": true,
+      "emptyOptionals": true
+    },
+    {
+      "width": 390,
+      "reference": {
+        "width": 390,
+        "font": "\"Great Vibes\", cursive",
+        "stars": 120
+      },
+      "actual": {
+        "width": 390,
+        "font": "\"Great Vibes\", cursive",
+        "stars": 120
+      },
+      "animation": "twinkle",
+      "canvasMotion": true,
+      "sourceOpen": true,
+      "locales": 4,
+      "canonicalWishes": true,
+      "restoredInfo": true,
+      "sevenStableEvents": true,
+      "longNamesAndCopy": true,
+      "previewNoSend": true,
+      "failureRetainsInput": true,
+      "failureSurvivesLocale": true,
+      "reducedMotion": true,
+      "emptyOptionals": true
+    },
+    {
+      "width": 1280,
+      "reference": {
+        "width": 430,
+        "font": "\"Great Vibes\", cursive",
+        "stars": 120
+      },
+      "actual": {
+        "width": 430,
+        "font": "\"Great Vibes\", cursive",
+        "stars": 120
+      },
+      "animation": "twinkle",
+      "canvasMotion": true,
+      "sourceOpen": true,
+      "locales": 4,
+      "canonicalWishes": true,
+      "restoredInfo": true,
+      "sevenStableEvents": true,
+      "longNamesAndCopy": true,
+      "previewNoSend": true,
+      "failureRetainsInput": true,
+      "failureSurvivesLocale": true,
+      "reducedMotion": true,
+      "emptyOptionals": true
+    }
+  ],
+  "errors": [],
+  "mockTransport": true
+}

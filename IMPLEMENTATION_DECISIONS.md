@@ -2157,3 +2157,7 @@ Development agents are distinct from production queue workers. The running app w
 ### Sharlar completion (2026-10-29)
 
 - Sharlar is birthday-only and uses shared celebrantAge and birthday content. Source doors-opening time is editable validated `templateData["taklifla-sharlar"].doorsAt` (blank hides it); catalog derives its example from the shared first program time. Preserve native carnival artwork, motion and language menu. Shared Google venue, dress, program and contacts remain reusable; no guest-count input. Migrations 0197/0198 register/publish after verification.
+
+### Starry Night completion (2026-10-29)
+
+- Yulduzli Tun retains the original starry artwork, 120 stars/35 canvas particles and native language popover. Guest information and optional footer prose use editable validated localized `templateData["taklifla-yulduzli-tun"]`; shared identity, hosts, dates, program and Google venue remain reusable. Catalog notes/wishes use the shared wedding event fixture only. Migrations 0199/0200 register/publish after verification.

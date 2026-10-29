@@ -42,6 +42,7 @@ import {
   osmonDataSchema,
   pariDataSchema,
   qogozDataSchema,
+  starryDataSchema,
   sharlarDataSchema,
   sakuraDataSchema,
   pulauSehatiDataSchema,
@@ -105,6 +106,7 @@ import { TakliflaParilarErtagiInvitation } from "@/templates/taklifla-parilar-er
 import { TakliflaQogozErtagiInvitation } from "@/templates/taklifla-qogoz-ertagi/renderer";
 import { SakuraGuliInvitation } from "@/templates/taklifla-sakura-guli/renderer";
 import { TakliflaSharlarInvitation } from "@/templates/taklifla-sharlar/renderer";
+import { TakliflaYulduzliTun } from "@/templates/taklifla-yulduzli-tun/renderer";
 import { TakliflaYubileySahifasi } from "@/templates/taklifla-yubiley-sahifasi/renderer";
 import { TakliflaBarakali } from "@/templates/taklifla-barakali/renderer";
 import { TakliflaZarhalSahifaInvitation } from "@/templates/taklifla-zarhal-sahifa/renderer";
@@ -905,6 +907,8 @@ export function Studio({
         : current,
     );
   }
+  const starryData=starryDataSchema.parse(invitation.templateData["taklifla-yulduzli-tun"] ?? {});
+  function updateStarryNote(key:keyof typeof starryData,value:string){setInvitation(current=>current?{...current,templateData:{...current.templateData,"taklifla-yulduzli-tun":{...starryData,[key]:{...starryData[key],[locale]:value}}}}:current);}
   const sharlarData=sharlarDataSchema.parse(invitation.templateData["taklifla-sharlar"] ?? {});
   const sakuraData=sakuraDataSchema.parse(invitation.templateData["taklifla-sakura-guli"] ?? {});
   function updateSakuraNote(key:keyof typeof sakuraData,value:string){setInvitation(current=>current?{...current,templateData:{...current.templateData,"taklifla-sakura-guli":{...sakuraData,[key]:{...sakuraData[key],[locale]:value}}}}:current);}
@@ -3400,6 +3404,7 @@ export function Studio({
                   )}
                 </OptionalSection>
                 <div className={styles.divider} />
+                {invitation.templateId === "taklifla-yulduzli-tun" && <div className={styles.formGrid}>{(["infoNote","footerNote"] as const).map(key=><Field key={key} label={`${key === "infoNote" ? "Mehmonlarga eslatma" : "Yakuniy izoh"} · ${LANGUAGE_NAMES[locale]}`}><textarea maxLength={4000} rows={3} value={starryData[key][locale] || ""} onChange={e=>updateStarryNote(key,e.target.value)} /></Field>)}</div>}
                 {invitation.templateId === "taklifla-sharlar" && <Field label="Eshiklar ochilish vaqti"><input type="time" value={sharlarData.doorsAt} onChange={e=>{const doorsAt=e.target.value;setInvitation(current=>current?{...current,templateData:{...current.templateData,"taklifla-sharlar":{doorsAt}}}:current);}} /></Field>}
                 {invitation.templateId === "taklifla-sakura-guli" && <div className={styles.formGrid}>{(["contactNote","infoNote","footerNote"] as const).map(key=><Field key={key} label={`${({contactNote:"Aloqa haqida izoh",infoNote:"Mehmonlarga eslatma",footerNote:"Yakuniy izoh"})[key]} · ${LANGUAGE_NAMES[locale]}`}><textarea maxLength={4000} rows={3} value={sakuraData[key][locale] || ""} onChange={e=>updateSakuraNote(key,e.target.value)} /></Field>)}</div>}
                 {invitation.templateId === "taklifla-qogoz-ertagi" && <div className={styles.formGrid}>{(["contactNote","footerNote"] as const).map(key=><Field key={key} label={`${key === "contactNote" ? "Aloqa haqida izoh" : "Yakuniy izoh"} · ${LANGUAGE_NAMES[locale]}`}><textarea maxLength={4000} rows={3} value={qogozData[key][locale] || ""} onChange={e=>updateQogozNote(key,e.target.value)} /></Field>)}</div>}
@@ -3996,6 +4001,8 @@ export function Studio({
               <SakuraGuliInvitation invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview fullPreview catalogMusic={section === 0 && !authoredPreview} silentPlayback />
             ) : invitation.templateId === "taklifla-sharlar" ? (
               <TakliflaSharlarInvitation invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview fullPreview catalogMusic={section === 0 && !authoredPreview} silentPlayback />
+            ) : invitation.templateId === "taklifla-yulduzli-tun" ? (
+              <TakliflaYulduzliTun invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview fullPreview catalogMusic={section === 0 && !authoredPreview} silentPlayback />
             ) : invitation.templateId === "taklifla-yubiley-sahifasi" ? (
               <TakliflaYubileySahifasi invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview fullPreview catalogMusic={section === 0 && !authoredPreview} silentPlayback />
             ) : invitation.templateId === "taklifla-barakali" ? (

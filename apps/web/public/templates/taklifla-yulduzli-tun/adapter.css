@@ -1,0 +1,29 @@
+html[data-awaiting] body { visibility: hidden; }
+[hidden] { display: none !important; }
+
+.splash-inner { max-width: 100%; padding: 20px; }
+.splash-names, .hero-names, .invite-names, .footer-names { overflow-wrap: anywhere; }
+.splash-names { max-width: 600px; }
+.hero-ct, .venue-ct { max-width: 100%; }
+.invite-fam, .invite-txt, .invite-venue, .venue-name, .tl-card, .footer-msg { overflow-wrap: anywhere; }
+.invite-txt { white-space: pre-line; }
+.venue-address { font-size: 17px; line-height: 1.6; white-space: pre-line; margin: 12px 0; }
+
+.starry-language select { color: var(--cream); background: var(--bg-card); border: 1px solid var(--gold-dim); border-radius: 16px; padding: 7px 12px; }
+button:focus-visible, a:focus-visible, select:focus-visible { outline: 2px solid var(--gold-lt); outline-offset: 5px; }
+#wishStatus { color: var(--silver-lt); font-size: 17px; line-height: 1.5; }
+input, textarea { color-scheme: dark; }
+html[data-reduced-motion] { scroll-behavior: auto; }
+html[data-reduced-motion] *, html[data-reduced-motion] *::before, html[data-reduced-motion] *::after { animation: none !important; transition: none !important; }
+html[data-reduced-motion] .rv { opacity: 1; transform: none; }
+html[data-reduced-motion] #particles { display: none; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .rv { opacity: 1; transform: none; }
+  #particles { display: none; }
+}
+@media (max-height: 650px) { .splash { overflow-y: auto; } .splash-inner { margin: auto; } }
+
+.info-card p,.footer-msg{white-space:pre-line;overflow-wrap:anywhere}
+.taklifla-lang-menu button[hidden]{display:none}

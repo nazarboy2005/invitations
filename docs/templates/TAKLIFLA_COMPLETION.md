@@ -27,7 +27,7 @@ untouched. Application deployment and live payment activation are excluded.
 | Qog‘oz | taklifla-qogoz-ertagi | Private package | Complete — full bridge, fitting/closure, editable notes and routes restored; published 0193/0194 |
 | Sakura | taklifla-sakura-guli | Private package | Complete — hidden notes/city, empty timeline, wishes/music/status/sizing fixed; published 0195/0196 |
 | Sharlar | taklifla-sharlar | Private package | Complete — missing bridge/motion, shared age/doors/maps/wishes restored; published 0197/0198 |
-| Starry Night | taklifla-yulduzli-tun | Private package | Pending |
+| Starry Night | taklifla-yulduzli-tun | Private package | Complete — broken scene URLs, hidden information, native menu and shared wishes/maps restored; published 0199/0200 |
 | Terracotta | taklifla-terracotta | Private package | Pending |
 | Uchrashuv | taklifla-uchrashuv | Private package | Pending |
 | Yaylov | To reconcile | No registered package | Pending |
@@ -164,3 +164,9 @@ the individual commit below each completed row.
 - Reused exact source CSS and all 29 art/font dependencies, restored native 36 stars, three arches, three balloons, six confetti pieces, opening, parallax and reveals. The former package referenced a nonexistent bridge and never loaded its visual engine.
 - Shared birthday identity/age, date, hosts, program, dress and Google venue now drive every route. Doors opening uses a validated editable time in templateData; canonical preview derives it from shared program data. Original source language menu supports all four locales; desktop preview controls leave it usable. No guest-count field or provider sample storage/runtime.
 - 25 shared/package checks, three source comparison viewports, active motion, four locales, long/empty/seven-event/reduced/failure and preview checks, actual audio, authentic covers, real authenticated save/reopen/studio/publication/public/maps/moderated wishes and compatible birthday switching, typecheck and production build pass. Migrations 0197/0198 publish only Sharlar. Evidence: docs/templates/taklifla-audit/sharlar*.
+
+## Starry Night integration
+
+- All six paintings and nine fonts, exact source CSS, 120 stars, 35 native particles, shimmer/opening/reveals/countdown and original language popover retained. CSS now resolves four previously broken painted scene paths. Previously hidden information prose has editable localized persistence; footer note restored similarly.
+- Full route registration, ready handshake, canonical localized preview wishes, authored-address Google fallback and status/context handling added. Shared identity/hosts/message/program/maps stay reusable. No sample provider data or storage served.
+- 25 shared/package checks, three-viewport source/motion comparisons, four locales, long/empty/seven events/reduced/failed and preview checks, actual audio, source/personalized covers, real note save/reopen/studio/publication/public/maps/pending wishes and compatible switching, typecheck/build pass. Migrations 0199/0200 publish only Starry Night. Evidence: docs/templates/taklifla-audit/starry*.

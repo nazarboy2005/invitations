@@ -1,0 +1,131 @@
+{
+  "capture": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/taklifla.uz/templates/starry-night__8ece68251f6da08e.html",
+  "captureSha256": "d35029d802dda5f39c14839ee452dad8aa4e2e1a191fa1614e85f78c3c2d89e5",
+  "manifestSha256": "fbbae2e521f547ea865252a76c9c776e81d0df95a5875abf58088b1fab6c125e",
+  "assets": [
+    {
+      "reference": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/taklifla.uz/templates/starry-night-img/countdown-heart.webp",
+      "file": "starry-night-img/countdown-heart.webp",
+      "bytes": 487284,
+      "sha256": "3c08b4be0b3b12620ae704c10e3d85407d9fdb2e3a363bd9f60d00a351c1e1fd"
+    },
+    {
+      "reference": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/taklifla.uz/templates/starry-night-img/divider-moon.webp",
+      "file": "starry-night-img/divider-moon.webp",
+      "bytes": 236606,
+      "sha256": "8a99931464ddf9891cf0c0e3f5c9cea2071e978d6004383cd34c5d36993cac9d"
+    },
+    {
+      "reference": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/taklifla.uz/templates/starry-night-img/divider-stars.webp",
+      "file": "starry-night-img/divider-stars.webp",
+      "bytes": 226644,
+      "sha256": "493bb237416f9985aba4885be9c1c2a2f0b9411318968935d41084d8b4789a1d"
+    },
+    {
+      "reference": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/taklifla.uz/templates/starry-night-img/hero-sky.webp",
+      "file": "starry-night-img/hero-sky.webp",
+      "bytes": 477736,
+      "sha256": "b26ee36858b71c04fc97febb4f2c02bf22d3d98e4d8780e7a9ec3bb346cca094"
+    },
+    {
+      "reference": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/taklifla.uz/templates/starry-night-img/invite-frame.webp",
+      "file": "starry-night-img/invite-frame.webp",
+      "bytes": 291260,
+      "sha256": "76bd27da6149ff088c378b3426170fa1db8eaceac3b5e4a97817189f25dd0ff1"
+    },
+    {
+      "reference": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/taklifla.uz/templates/starry-night-img/venue-palace.webp",
+      "file": "starry-night-img/venue-palace.webp",
+      "bytes": 474876,
+      "sha256": "dc0fcd4b5ef4b1e9d6a090da7d57bbe065355dee4ee69a075315e781dd3a0348"
+    }
+  ],
+  "fonts": [
+    {
+      "url": "https://fonts.gstatic.com/s/cinzel/v26/8vIU7ww63mVu7gtR-kwKxNvkNOjw-gjgTYo.ttf",
+      "file": "fonts/06156eb6e366d18d.ttf",
+      "bytes": 46116,
+      "sha256": "5150b3609eeaaa9c6d7e093cb9b16ab8ec2f7110ddf0cbe751887e6f158398af"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/cinzel/v26/8vIU7ww63mVu7gtR-kwKxNvkNOjw-jHgTYo.ttf",
+      "file": "fonts/59b1fd4063982492.ttf",
+      "bytes": 46124,
+      "sha256": "2c6b1ff0d368efb73636700b69dbef707fa5602a06d085a4e91e5125082651f0"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/cinzel/v26/8vIU7ww63mVu7gtR-kwKxNvkNOjw-tbnTYo.ttf",
+      "file": "fonts/5c592cba534d3294.ttf",
+      "bytes": 45884,
+      "sha256": "a0242f6698ae0d3220a29986a09274f9d1eddb4a24da4e50faf387fd1804eb7b"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3smX5slCNuHLi8bLeY9MK7whWMhyjYrGFEsdtdc62E6zd58jDOjw.ttf",
+      "file": "fonts/374c6c52ce838c05.ttf",
+      "bytes": 293036,
+      "sha256": "0b9a8a33cfaa624d30f70f9b6686da769b319b8c37a55af16e29fef690108bbf"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3umX5slCNuHLi8bLeY9MK7whWMhyjypVO7abI26QOD_iE9GnM.ttf",
+      "file": "fonts/705776b6237d1fd4.ttf",
+      "bytes": 290392,
+      "sha256": "69e7ae35cba23d962227b86f99217c250e642e4c6f6104b4f3ec465039e4e2d8"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3umX5slCNuHLi8bLeY9MK7whWMhyjypVO7abI26QOD_qE6GnM.ttf",
+      "file": "fonts/911bf559d287436e.ttf",
+      "bytes": 289788,
+      "sha256": "63e313fb9c65b6b2e177222010bbea911bfc5c79bee0fb69f8246fcc4e08c93a"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3umX5slCNuHLi8bLeY9MK7whWMhyjypVO7abI26QOD_s06GnM.ttf",
+      "file": "fonts/75407d22188550d6.ttf",
+      "bytes": 290496,
+      "sha256": "1724047c8988ca5155bff667bc48fa52e97d57aabc6b42eebbf986f21a4be20b"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3umX5slCNuHLi8bLeY9MK7whWMhyjypVO7abI26QOD_v86GnM.ttf",
+      "file": "fonts/bb8f3c3b0ca40380.ttf",
+      "bytes": 290236,
+      "sha256": "6d37a86241a25d63f8fe6018b4c083449886b7165c1acb15edd0f574f690ecf7"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/greatvibes/v21/RWmMoKWR9v4ksMfaWd_JN-XC.ttf",
+      "file": "fonts/592c5d8fa63597b0.ttf",
+      "bytes": 362736,
+      "sha256": "9d76b8c67f5289c310114c935c5c3831fc3c25bc2bb888a28210c1659d701b9e"
+    }
+  ],
+  "fontStylesheetUrl": "https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Great+Vibes&display=swap",
+  "excluded": [
+    "Provider query-string customizer",
+    "Provider localStorage sample wishes",
+    "Provider guestbook API and lock state",
+    "Provider language storage and runtime",
+    "Cloudflare analytics beacon"
+  ],
+  "sourceAbsent": [
+    "RSVP",
+    "gallery",
+    "story",
+    "dress code",
+    "contacts",
+    "gift/to‘yona",
+    "receipt upload",
+    "calendar export"
+  ],
+  "sourceParts": {
+    "template.css": "b0da9a6f2635ccdac7071c9243b89791e06292e206dd1a0b7a6ef97e1068693e",
+    "source/template.css": "b0da9a6f2635ccdac7071c9243b89791e06292e206dd1a0b7a6ef97e1068693e",
+    "source/motion.js": "3fad20b789032ec8ea7ae4320925631ebf3c8a5f8f28bb11fa94130afd1b15e8",
+    "source/language.css": "63d867eb99a48076d594b1494c1ae84017c1e1cc35f9909332601e8949b25b6b",
+    "source/labels.json": "212c98b8ff7a427ea9d46fb8e97cc41582e85aefacfa92fe9ff1851181d9631f",
+    "fonts/fonts.css": "39b98dc6d4b34d619b39822871d8d0ce40f12dddaca9be1603c43c2e205ea140"
+  },
+  "adaptations": [
+    "Original CSS is served at template root so native art URLs resolve.",
+    "Original guest information section restored with editable localized information note.",
+    "Native language menu restored; fixed boilerplate only from original dictionary; creator text remains separate.",
+    "Motion retains original stars, particles, opening/reveal/countdown with reduced-motion/visibility guards and shared timestamp."
+  ]
+}

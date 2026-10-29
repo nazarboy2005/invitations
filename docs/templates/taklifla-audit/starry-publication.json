@@ -1,0 +1,25 @@
+{
+  "date": "2026-10-29",
+  "configured": true,
+  "template": {
+    "id": "taklifla-yulduzli-tun",
+    "name": "Yulduzli Tun",
+    "description": "Yulduzli osmon, zarhal oy bezaklari va saroy manzarali nikoh taklifnomasi.",
+    "previewImage": "/templates/taklifla-yulduzli-tun/preview.webp",
+    "previewEventType": "wedding",
+    "categoryIds": [
+      "wedding"
+    ],
+    "supportedEventTypes": [
+      "wedding"
+    ],
+    "priceMinor": 100000,
+    "currency": "UZS",
+    "accent": "#c8a951",
+    "published": true
+  },
+  "migrations": [
+    "0199_register_taklifla_yulduzli_tun.sql",
+    "0200_publish_taklifla_yulduzli_tun.sql"
+  ]
+}
