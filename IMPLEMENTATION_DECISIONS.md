@@ -2125,3 +2125,7 @@ Development agents are distinct from production queue workers. The running app w
 ### Gulbog completion (2026-10-29)
 
 - Garden Arch is the Gulbog wedding design. Preserve its source monogram/petal opening and floral hero. Source-supported bride-family line, reminder title/text and custom footer persist under validated `templateData["taklifla-gulbog"]` with localized editor controls. Canonical examples remain in the shared wedding event profile. Catalog/personalized artwork uses the actual opened floral hero; public view retains the source opener. Migrations 0181/0182 register/publish after full verification.
+
+### Zarrin gullar completion (2026-10-29)
+
+- Marigold is Zarrin gullar, a wedding design. Preserve its floral arch, native opener, petals and closed-wishes panel. Separate bride/groom family lines, accommodation, custom footer and hashtag use validated editable `templateData["taklifla-zarrin-gullar"]`; shared identity/venue/program remain reusable. Generic wedding details in the canonical event profile serve both this and Gulbog. Migrations 0183/0184 register/publish after complete verification.

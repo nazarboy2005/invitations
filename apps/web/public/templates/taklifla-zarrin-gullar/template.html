@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="uz-Latn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Zarrin gullar — Taklifnoma</title><link rel="stylesheet" href="fonts/fonts.css"><link rel="stylesheet" href="source.css"><link rel="stylesheet" href="platform.css"></head><body data-waiting>
+<div style="min-height:100vh;background:linear-gradient(180deg,#2a1b12,#201410);display:flex;justify-content:center;">
+  <div style="width:min(430px,100%);background:var(--color-bg);position:relative;box-shadow:0 0 80px rgba(0,0,0,.55);">
+
+    <!-- ── Language switcher ── -->
+    <div class="mw-lang" role="group" aria-label="Til / Language">
+      <button type="button" data-lang="uz-Latn" class="on">Uz</button>
+      <button type="button" data-lang="uz-Cyrl">Уз</button>
+      <button type="button" data-lang="en">En</button>
+      <button type="button" data-lang="ru">Ru</button>
+    </div>
+
+    <!-- ── Splash ── -->
+    <div id="mw-splash" style="position:fixed;top:0;left:50%;transform:translateX(-50%);width:min(430px,100vw);height:100dvh;z-index:100;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;text-align:center;padding:36px 28px;background:radial-gradient(120% 90% at 50% 0%,#fdf6ea 0%,var(--color-bg) 55%,#eedcbe 100%);transition:opacity .7s ease,transform .7s ease;">
+      <div style="position:relative;width:234px;height:234px;display:flex;align-items:center;justify-content:center;background:url('marigold-img/medallion.webp') center/contain no-repeat;">
+        <div style="font-family:var(--font-heading);font-size:46px;line-height:1;color:var(--color-accent-700);padding-bottom:4px;"><span id="mw-mono-a"></span><span style="color:var(--color-accent-2-600);font-size:30px;">&amp;</span><span id="mw-mono-b"></span></div>
+      </div>
+      <div data-i18n="kicker_weddingof" style="letter-spacing:.32em;font-size:11px;font-weight:600;text-transform:uppercase;color:var(--color-accent-2-700);margin-top:8px;">To'y marosimi</div>
+      <h1 id="mw-splash-names" style="margin:0;font-size:42px;line-height:1.1;font-weight:400;color:var(--color-accent-800);"></h1>
+      <div id="mw-splash-meta" style="font-size:13.5px;color:var(--color-neutral-700);"></div>
+      <button type="button" id="mw-open" class="btn btn-primary" data-i18n="btn_open" style="font-size:15px;padding:13px 30px;margin-top:10px;animation:mw-glow 2.6s ease infinite;">Taklifnomani ochish</button>
+    </div>
+
+    <!-- ── Falling petals ── -->
+    <div id="mw-petals" aria-hidden="true" style="position:fixed;top:0;left:50%;transform:translateX(-50%);width:min(430px,100vw);height:100vh;z-index:40;pointer-events:none;overflow:hidden;"></div>
+
+    <!-- ── Music toggle ── -->
+    <button type="button" id="mw-music" class="btn btn-icon" aria-label="Musiqa" hidden style="position:fixed;top:14px;right:max(calc(50% - 201px),14px);z-index:60;width:42px;height:42px;background:rgba(253,246,234,.92);box-shadow:var(--shadow-md);border:1px solid var(--color-accent-200);color:var(--color-accent-700);">
+      <svg id="mw-music-off" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>
+      <svg id="mw-music-on" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round" style="display:none;"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path></svg>
+    </button>
+    <audio id="mw-audio" loop preload="none"></audio>
+
+    <!-- ── Hero ── -->
+    <section style="position:relative;min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:84px 22px 96px;overflow:hidden;">
+      <div aria-hidden="true" style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(245,234,216,0) 52%,rgba(245,234,216,.35) 78%,var(--color-bg) 100%),url('marigold-img/hero.webp') center top/cover no-repeat;"></div>
+      <div data-reveal style="position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:13px;text-align:center;padding:40px 28px 32px;border-radius:38px;background:radial-gradient(closest-side,rgba(253,246,234,.95) 55%,rgba(253,246,234,.72) 80%,rgba(253,246,234,0) 100%);">
+        <div data-i18n="kicker_families" style="letter-spacing:.32em;font-size:11px;font-weight:600;text-transform:uppercase;color:var(--color-accent-2-700);">Oilalarimiz duosi bilan</div>
+        <h1 style="margin:0;display:flex;flex-direction:column;gap:3px;font-size:54px;line-height:1.02;font-weight:400;">
+          <span id="mw-hero-a" style="background:linear-gradient(105deg,#8c491a 32%,#eaa95e 50%,#8c491a 68%);background-size:230% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:mw-shimmer 5.5s linear infinite;"></span>
+          <span style="font-size:28px;line-height:1;color:var(--color-accent-2-600);">&amp;</span>
+          <span id="mw-hero-b" style="background:linear-gradient(105deg,#8c491a 32%,#eaa95e 50%,#8c491a 68%);background-size:230% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:mw-shimmer 5.5s linear -2.75s infinite;"></span>
+        </h1>
+        <div data-i18n="hero_sub" style="font-style:italic;font-size:15px;color:var(--color-neutral-700);">turmush qurishmoqda — sizni taklif qilamiz</div>
+        <div style="display:flex;align-items:center;gap:10px;margin-top:5px;font-size:12px;font-weight:700;letter-spacing:.22em;color:var(--color-accent-800);">
+          <span id="mw-hero-dow"></span>
+          <span aria-hidden="true" style="width:5px;height:5px;border-radius:50%;background:var(--color-accent);"></span>
+          <span id="mw-hero-date"></span>
+          <span id="mw-hero-dot2" aria-hidden="true" style="width:5px;height:5px;border-radius:50%;background:var(--color-accent);"></span>
+          <span id="mw-hero-city"></span>
+        </div>
+      </div>
+      <div style="position:absolute;bottom:24px;left:50%;transform:translateX(-50%);z-index:2;display:flex;flex-direction:column;align-items:center;gap:3px;color:var(--color-accent-700);">
+        <span data-i18n="scroll" style="font-size:10px;letter-spacing:.3em;text-transform:uppercase;font-weight:600;">Pastga</span>
+        <span style="display:block;animation:mw-bob 1.8s ease-in-out infinite;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span>
+      </div>
+    </section>
+
+    <!-- ── Garland divider ── -->
+    <section aria-label="Gulchambar" style="position:relative;height:118px;display:flex;align-items:center;justify-content:center;overflow:hidden;">
+      <div aria-hidden="true" style="width:330px;height:110px;background:url('marigold-img/garland.webp') center/contain no-repeat;"></div>
+    </section>
+
+    <!-- ── Invitation card ── -->
+    <section style="position:relative;padding:36px 22px 26px;">
+      <div data-reveal style="position:relative;background:#fdf6ea;border-radius:36px;box-shadow:var(--shadow-md);padding:74px 46px;text-align:center;overflow:hidden;">
+        <div aria-hidden="true" style="position:absolute;inset:0;background:url('marigold-img/frame.webp') center/100% 100% no-repeat;pointer-events:none;"></div>
+        <div style="position:relative;display:flex;flex-direction:column;align-items:center;gap:11px;">
+          <div data-i18n="inv_blessing" style="letter-spacing:.3em;font-size:10.5px;font-weight:600;text-transform:uppercase;color:var(--color-accent-2-700);">Oilalarimiz oq fotihasi bilan</div>
+          <p id="mw-inv-request" data-i18n="inv_request" style="margin:0;font-size:13.5px;line-height:1.7;color:var(--color-neutral-700);">Sizni farzandlarimiz nikoh to'yiga taklif etamiz</p>
+          <div id="mw-inv-bride-wrap" style="display:flex;flex-direction:column;gap:2px;">
+            <div data-i18n="inv_bride_side" style="font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--color-accent-2-700);">Kelin ota-onasi</div>
+            <div id="mw-bride-parents" style="font-size:13.5px;color:var(--color-neutral-800);"></div>
+          </div>
+          <div id="mw-inv-bride" style="font-family:var(--font-heading);font-size:38px;line-height:1.1;color:var(--color-accent-800);"></div>
+          <div id="mw-inv-amp" style="font-family:var(--font-heading);font-size:22px;line-height:1;color:var(--color-accent-2-600);">&amp;</div>
+          <div id="mw-inv-groom" style="font-family:var(--font-heading);font-size:38px;line-height:1.1;color:var(--color-accent-800);"></div>
+          <div id="mw-inv-groom-wrap" style="display:flex;flex-direction:column;gap:2px;">
+            <div data-i18n="inv_groom_side" style="font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--color-accent-2-700);">Kuyov ota-onasi</div>
+            <div id="mw-groom-parents" style="font-size:13.5px;color:var(--color-neutral-800);"></div>
+          </div>
+          <div aria-hidden="true" style="display:flex;align-items:center;gap:8px;padding:4px 0;">
+            <span style="width:34px;border-top:2px dotted var(--color-accent-300);"></span>
+            <span style="width:7px;height:7px;border-radius:50%;background:var(--color-accent-400);"></span>
+            <span style="width:34px;border-top:2px dotted var(--color-accent-300);"></span>
+          </div>
+          <p id="mw-inv-date" style="margin:0;font-style:italic;font-size:16px;line-height:1.5;color:var(--color-neutral-800);"></p>
+          <div id="mw-inv-venue" style="font-size:11.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--color-accent-700);"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── ornament divider ── -->
+    <div aria-hidden="true" style="display:flex;align-items:center;justify-content:center;gap:9px;padding:22px 0 10px;">
+      <span style="width:44px;border-top:2px dotted var(--color-accent-300);"></span>
+      <span style="width:6px;height:6px;border-radius:50%;background:var(--color-accent-2-400);"></span>
+      <span style="width:10px;height:10px;border-radius:50%;background:var(--color-accent-400);"></span>
+      <span style="width:6px;height:6px;border-radius:50%;background:var(--color-accent-2-400);"></span>
+      <span style="width:44px;border-top:2px dotted var(--color-accent-300);"></span>
+    </div>
+
+    <!-- ── Events timeline ── -->
+    <section id="mw-events-section" style="position:relative;padding:18px 22px 40px;">
+      <div data-reveal style="text-align:center;">
+        <div data-i18n="ev_kicker" style="letter-spacing:.3em;font-size:10.5px;font-weight:600;text-transform:uppercase;color:var(--color-accent-2-700);margin-bottom:8px;">Sizni kutamiz</div>
+        <h2 data-i18n="ev_title" style="margin:0 0 6px;font-size:34px;font-weight:400;color:var(--color-accent-800);">Bayram</h2>
+        <p data-i18n="ev_sub" style="margin:0;font-size:13.5px;color:var(--color-neutral-700);">Kuy, gullar va quvonchga to'la oltin oqshom</p>
+      </div>
+      <div id="mw-events" style="position:relative;margin-top:26px;padding-left:30px;display:flex;flex-direction:column;gap:16px;">
+        <div aria-hidden="true" style="position:absolute;left:9px;top:10px;bottom:10px;width:0;border-left:2px dotted var(--color-accent-300);"></div>
+        
+      </div>
+    </section>
+
+    <!-- ── Venue ── -->
+    <section style="position:relative;padding:34px 22px 40px;overflow:hidden;">
+      <div aria-hidden="true" style="position:absolute;inset:0;background:linear-gradient(180deg,var(--color-bg) 0%,rgba(245,234,216,0) 24%,rgba(245,234,216,0) 76%,var(--color-bg) 100%),url('marigold-img/venue.webp') center/cover no-repeat;"></div>
+      <div data-reveal style="position:relative;z-index:2;margin-top:22px;background:rgba(253,246,234,.94);border-radius:36px;box-shadow:var(--shadow-md);padding:34px 26px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:9px;">
+        <div data-i18n="venue_kicker" style="letter-spacing:.3em;font-size:10.5px;font-weight:600;text-transform:uppercase;color:var(--color-accent-2-700);">Marosim joyi</div>
+        <h2 id="mw-venue-name" style="margin:0;font-size:32px;font-weight:400;color:var(--color-accent-800);"></h2>
+        <p id="mw-venue-addr" style="margin:0;font-size:13.5px;line-height:1.6;color:var(--color-neutral-700);"></p>
+        <a id="mw-map" class="btn btn-primary" href="#" target="_blank" rel="noopener noreferrer" style="font-size:14px;padding:12px 26px;margin-top:7px;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+          <span data-i18n="btn_map">Xaritada ochish</span>
+        </a>
+        <div id="mw-venue-note" data-i18n="venue_note" style="font-size:11.5px;color:var(--color-neutral-600);"></div>
+      </div>
+    </section>
+
+    <!-- ── Info ── -->
+    <section style="padding:6px 22px 32px;">
+      <div data-reveal style="background:#fdf6ea;box-shadow:var(--shadow-sm);padding:26px 24px 18px;border-radius:32px;">
+        <h3 data-i18n="info_title" style="text-align:center;margin:0 0 10px;font-size:24px;font-weight:400;color:var(--color-accent-800);">Bilib qo'ying</h3>
+        <div id="mw-info-dress" class="mw-info-row" style="display:flex;gap:14px;padding:13px 2px;">
+          <div data-i18n="info_dress_label" style="flex:none;width:96px;font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--color-accent-2-700);padding-top:2px;">Kiyim</div>
+          <div id="mw-info-dress-text" data-i18n="info_dress_text" style="font-size:13.5px;line-height:1.55;color:var(--color-neutral-700);"></div>
+        </div>
+        <div id="mw-info-stay" class="mw-info-row" style="display:flex;gap:14px;padding:13px 2px;border-top:2px dotted var(--color-accent-200);">
+          <div data-i18n="info_stay_label" style="flex:none;width:96px;font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--color-accent-2-700);padding-top:2px;">Mehmonxona</div>
+          <div id="mw-info-stay-text" data-i18n="info_stay_text" style="font-size:13.5px;line-height:1.55;color:var(--color-neutral-700);"></div>
+        </div>
+        <div id="mw-info-gifts" class="mw-info-row" style="display:flex;gap:14px;padding:13px 2px;border-top:2px dotted var(--color-accent-200);">
+          <div data-i18n="info_gifts_label" style="flex:none;width:96px;font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--color-accent-2-700);padding-top:2px;">Sovg'alar</div>
+          <div id="mw-info-gifts-text" data-i18n="info_gifts_text" style="font-size:13.5px;line-height:1.55;color:var(--color-neutral-700);">Ishtirokingiz va duoyingiz — biz uchun eng qimmat sovg'a.</div>
+        </div>
+        <div id="mw-info-rsvp" class="mw-info-row" style="display:flex;gap:14px;padding:13px 2px;border-top:2px dotted var(--color-accent-200);">
+          <div data-i18n="info_rsvp_label" style="flex:none;width:96px;font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--color-accent-2-700);padding-top:2px;">Tasdiqlash</div>
+          <div id="mw-info-rsvp-text" data-i18n="info_rsvp_text" style="font-size:13.5px;line-height:1.55;color:var(--color-neutral-700);"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Wishes ── -->
+    <section id="mw-wishes-section" style="padding:4px 22px 38px;">
+      <div data-reveal style="text-align:center;margin-bottom:16px;">
+        <div data-i18n="wish_kicker" style="letter-spacing:.3em;font-size:10.5px;font-weight:600;text-transform:uppercase;color:var(--color-accent-2-700);margin-bottom:8px;">Bizga tilak qoldiring</div>
+        <h2 data-i18n="wish_title" style="margin:0 0 6px;font-size:32px;font-weight:400;color:var(--color-accent-800);">Iliq tilaklar</h2>
+        <p data-i18n="wish_sub" style="margin:0;font-size:13.5px;color:var(--color-neutral-700);">Sizning bir og'iz so'zingiz biz uchun bebaho.</p>
+      </div>
+      <form class="wish-form" id="mw-wish-form" data-reveal style="display:flex;flex-direction:column;gap:12px;background:#fdf6ea;border-radius:32px;box-shadow:var(--shadow-sm);padding:22px 20px;">
+        <div class="field">
+          <label for="mw-wname" data-i18n="wish_name_label">Ismingiz</label>
+          <input class="input" id="mw-wname" name="wname" required maxlength="100" autocomplete="name" data-i18n-ph="wish_name_ph" placeholder="Ismingiz">
+        </div>
+        <div class="field">
+          <label for="mw-wmsg" data-i18n="wish_msg_label">Tilaklaringiz</label>
+          <textarea class="input" id="mw-wmsg" name="wmsg" required maxlength="2000" rows="3" data-i18n-ph="wish_msg_ph" placeholder="Yangi oila uchun tilak yozing…"></textarea>
+        </div>
+        <button class="btn btn-primary" type="submit" style="font-size:14px;padding:12px 22px;">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg>
+          <span data-i18n="btn_send">Tilak yuborish</span>
+        </button>
+      </form>
+      <div id="mw-wish-confirm" role="status" aria-live="polite" class="wish-confirm" data-i18n="wish_thanks" style="display:none;text-align:center;font-size:13.5px;font-style:italic;color:var(--color-accent-700);margin:15px 0 0;">Tilagingiz uchun rahmat — yangi oilaga yetkazamiz.</div>
+      <p id="mw-wish-empty" data-i18n="wish_empty" style="text-align:center;font-size:12.5px;font-style:italic;color:var(--color-neutral-600);margin:15px 0 0;">Yangi oilaga birinchi bo'lib tilak bildiring.</p>
+      <div id="mw-wish-list" style="display:flex;flex-direction:column;gap:10px;margin-top:15px;"></div>
+    </section>
+
+    <!-- ── Countdown ── -->
+    <section style="position:relative;padding:40px 22px 46px;overflow:hidden;">
+      <div aria-hidden="true" style="position:absolute;inset:0;background:linear-gradient(180deg,var(--color-bg) 0%,rgba(245,234,216,0) 22%),url('marigold-img/countdown.webp') center/cover no-repeat;"></div>
+      <div data-reveal style="position:relative;z-index:2;text-align:center;display:flex;flex-direction:column;align-items:center;gap:18px;margin-top:14px;">
+        <div>
+          <div data-i18n="cd_kicker" style="letter-spacing:.3em;font-size:10.5px;font-weight:600;text-transform:uppercase;color:var(--color-accent-2-700);margin-bottom:8px;">Vaqt sanog'i boshlandi</div>
+          <h2 data-i18n="cd_title" style="margin:0;font-size:32px;font-weight:400;color:var(--color-accent-800);">Baxtli kungacha</h2>
+        </div>
+        <div id="mw-cd-circles" style="display:flex;gap:11px;">
+          <div style="width:76px;height:76px;border-radius:50%;background:#fdf6ea;box-shadow:var(--shadow-md);border:1px solid var(--color-accent-200);display:flex;flex-direction:column;align-items:center;justify-content:center;">
+            <span id="cd-d" style="font-family:var(--font-heading);font-size:23px;line-height:1;color:var(--color-accent-700);">–</span>
+            <span data-i18n="cd_days" style="font-size:9px;letter-spacing:.16em;font-weight:700;color:var(--color-neutral-600);margin-top:3px;">KUN</span>
+          </div>
+          <div style="width:76px;height:76px;border-radius:50%;background:#fdf6ea;box-shadow:var(--shadow-md);border:1px solid var(--color-accent-200);display:flex;flex-direction:column;align-items:center;justify-content:center;">
+            <span id="cd-h" style="font-family:var(--font-heading);font-size:23px;line-height:1;color:var(--color-accent-700);">–</span>
+            <span data-i18n="cd_hours" style="font-size:9px;letter-spacing:.16em;font-weight:700;color:var(--color-neutral-600);margin-top:3px;">SOAT</span>
+          </div>
+          <div style="width:76px;height:76px;border-radius:50%;background:#fdf6ea;box-shadow:var(--shadow-md);border:1px solid var(--color-accent-200);display:flex;flex-direction:column;align-items:center;justify-content:center;">
+            <span id="cd-m" style="font-family:var(--font-heading);font-size:23px;line-height:1;color:var(--color-accent-700);">–</span>
+            <span data-i18n="cd_mins" style="font-size:9px;letter-spacing:.16em;font-weight:700;color:var(--color-neutral-600);margin-top:3px;">DAQIQA</span>
+          </div>
+          <div style="width:76px;height:76px;border-radius:50%;background:#fdf6ea;box-shadow:var(--shadow-md);border:1px solid var(--color-accent-200);display:flex;flex-direction:column;align-items:center;justify-content:center;">
+            <span id="cd-s" style="font-family:var(--font-heading);font-size:23px;line-height:1;color:var(--color-accent-2-600);">–</span>
+            <span data-i18n="cd_secs" style="font-size:9px;letter-spacing:.16em;font-weight:700;color:var(--color-neutral-600);margin-top:3px;">SONIYA</span>
+          </div>
+        </div>
+        <div id="mw-cd-foot" style="font-size:11.5px;letter-spacing:.22em;font-weight:700;color:var(--color-accent-800);"></div>
+      </div>
+    </section>
+
+    <!-- ── Footer ── -->
+    <footer style="position:relative;background:linear-gradient(180deg,#3a2417,#241811);color:var(--color-bg);text-align:center;padding:46px 24px 40px;display:flex;flex-direction:column;align-items:center;gap:11px;">
+      <div aria-hidden="true" style="display:flex;gap:8px;margin-bottom:4px;">
+        <span style="width:7px;height:7px;border-radius:50%;background:var(--color-accent-2-400);"></span>
+        <span style="width:10px;height:10px;border-radius:50%;background:var(--color-accent-400);margin-top:-2px;"></span>
+        <span style="width:7px;height:7px;border-radius:50%;background:var(--color-accent-2-400);"></span>
+      </div>
+      <div id="mw-foot-names" style="font-family:var(--font-heading);font-size:34px;line-height:1.1;color:#f6c89a;"></div>
+      <div id="mw-foot-meta" style="font-size:11.5px;letter-spacing:.24em;font-weight:600;color:rgba(245,234,216,.75);"></div>
+      <p id="mw-foot-note" data-i18n="foot_note" style="margin:5px 0 0;font-size:13px;line-height:1.65;color:rgba(245,234,216,.65);max-width:280px;">Sizni bag'rimizga olishga oshiqamiz —<br>gullarga burkangan hovlidan muhabbat bilan.</p>
+      <span class="tag" id="mw-hashtag" style="border:1px solid rgba(246,160,107,.6);color:#f6a06b;margin-top:5px;"></span>
+    </footer>
+
+  </div>
+</div>
+
+<script src="source-engine.js"></script><script src="i18n.js"></script><script src="platform-adapter.js"></script></body></html>

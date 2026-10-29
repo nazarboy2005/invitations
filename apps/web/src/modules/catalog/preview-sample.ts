@@ -11,7 +11,7 @@ import previewSample from "./preview-sample.json";
 type EventSample = {
   personIndex?: number;
   celebrantAge?: number;
-  gardenDetails?: Invitation["templateData"][string];
+  details?: {families:{bride:Partial<Record<Locale,string>>;groom:Partial<Record<Locale,string>>};reminderTitle:Partial<Record<Locale,string>>;reminderText:Partial<Record<Locale,string>>;footerNote:Partial<Record<Locale,string>>;stayText:Partial<Record<Locale,string>>;hashtag:string};
   housewarmingDetails?: Invitation["templateData"][string];
   anniversaryDetails?: Invitation["templateData"][string];
   story?: Invitation["story"];
@@ -141,8 +141,10 @@ export function createTemplatePreviewSample(
     artistLineup: sampleEventType === "wedding" ? structuredClone(previewSample.artistLineup) : [],
     gallery: structuredClone(templateSample?.gallery ?? previewSample.gallery),
     story: structuredClone(EVENT_SAMPLES[sampleEventType]?.story ?? (sampleEventType === "wedding" ? previewSample.story : [])),
-    templateData: templateId === "taklifla-gulbog" && EVENT_SAMPLES[sampleEventType]?.gardenDetails
-      ? { "taklifla-gulbog": structuredClone(EVENT_SAMPLES[sampleEventType]!.gardenDetails!) }
+    templateData: templateId === "taklifla-zarrin-gullar" && EVENT_SAMPLES[sampleEventType]?.details
+      ? { "taklifla-zarrin-gullar": structuredClone({brideFamily:EVENT_SAMPLES[sampleEventType]!.details!.families.bride,groomFamily:EVENT_SAMPLES[sampleEventType]!.details!.families.groom,stayText:EVENT_SAMPLES[sampleEventType]!.details!.stayText,footerNote:EVENT_SAMPLES[sampleEventType]!.details!.footerNote,hashtag:EVENT_SAMPLES[sampleEventType]!.details!.hashtag}) }
+      : templateId === "taklifla-gulbog" && EVENT_SAMPLES[sampleEventType]?.details
+      ? { "taklifla-gulbog": structuredClone({brideFamily:EVENT_SAMPLES[sampleEventType]!.details!.families.bride,reminderTitle:EVENT_SAMPLES[sampleEventType]!.details!.reminderTitle,reminderText:EVENT_SAMPLES[sampleEventType]!.details!.reminderText,footerNote:EVENT_SAMPLES[sampleEventType]!.details!.footerNote}) }
       : templateId === "taklifla-fayzli-xonadon" && EVENT_SAMPLES[sampleEventType]?.housewarmingDetails
       ? { "taklifla-fayzli-xonadon": structuredClone(EVENT_SAMPLES[sampleEventType]!.housewarmingDetails!) }
       : templateId === "taklifla-yubiley-sahifasi" && EVENT_SAMPLES[sampleEventType]?.anniversaryDetails

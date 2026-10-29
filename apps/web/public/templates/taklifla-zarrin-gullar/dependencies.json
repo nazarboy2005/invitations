@@ -1,0 +1,77 @@
+{
+  "capture": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/taklifla.uz/templates/marigold__93e52da761f9ba6b.html",
+  "captureSha256": "204baee0843dee93cd8bea76183af73f1e816598600148bd92269805500567b2",
+  "sourceCssSha256": "dd990bd613be6fc2e80b0ab714eea7ae38749cbe0931d50ae05c97a7391ed8ae",
+  "assets": [
+    {
+      "file": "marigold-img/countdown.webp",
+      "sha256": "26b6f72b8da4984de4be8f267ed4d958bf3dad50a751147f118a2972a7f2911d",
+      "bytes": 108726
+    },
+    {
+      "file": "marigold-img/frame.webp",
+      "sha256": "cd06f11f1f78972b13dcd2f52c674d24d4c26323aaf44667028aac085f74d995",
+      "bytes": 228202
+    },
+    {
+      "file": "marigold-img/garland.webp",
+      "sha256": "57834d2a0c39f089b1f28f9d3356df00e427b274fec4fe7007d9729dff9d4212",
+      "bytes": 147146
+    },
+    {
+      "file": "marigold-img/hero.webp",
+      "sha256": "e61685bf967703692d2b55ac32234930d28688d68b92ed10ca660995994f8b47",
+      "bytes": 211192
+    },
+    {
+      "file": "marigold-img/medallion.webp",
+      "sha256": "3a7948f1417fa124bb7e7e5c64cab6f33828138e6e83e6303585ad948fcfdf21",
+      "bytes": 210368
+    },
+    {
+      "file": "marigold-img/venue.webp",
+      "sha256": "5ffee7346dcc009ff929520fc11f15794c8057079056d3d732638b42d9e4d281",
+      "bytes": 223846
+    }
+  ],
+  "fonts": [
+    {
+      "url": "https://fonts.gstatic.com/s/caprasimo/v6/esDT31JQOPuXIUGBp72klQ.ttf",
+      "file": "fonts/font-0.ttf",
+      "sha256": "5d18d346718f3a116b7ad22488fc25dab1c26a54b32ace42b64e1edff01e8cb1"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/figtree/v9/_Xmz-HUzqDCFdgfMsYiV_F7wfS-Bs_d_QF5e.ttf",
+      "file": "fonts/font-1.ttf",
+      "sha256": "81f3fc9d8d4e307e5ae0dd43a03d22eb90d50b6cc72241552c460a59b6731b31"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/figtree/v9/_Xmz-HUzqDCFdgfMsYiV_F7wfS-Bs_dNQF5e.ttf",
+      "file": "fonts/font-2.ttf",
+      "sha256": "f8a90c01bc4c31aa84be5cbff3e80784bfc0da37e5aaa23eb9e05108b9ba0ece"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/figtree/v9/_Xmz-HUzqDCFdgfMsYiV_F7wfS-Bs_ehR15e.ttf",
+      "file": "fonts/font-3.ttf",
+      "sha256": "b5d3fe714f8283b072579c9318c6cbe9e028ca51d6ba33eed0412a828ec331da"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/figtree/v9/_Xmz-HUzqDCFdgfMsYiV_F7wfS-Bs_eYR15e.ttf",
+      "file": "fonts/font-4.ttf",
+      "sha256": "88aad0bfccf47bc631abd1351a0c815be98edf58c2c8706f72deb24a531639d6"
+    }
+  ],
+  "fontStylesheetSource": "https://fonts.googleapis.com/css2?family=Caprasimo:wght@400&family=Figtree:wght@400;500;600;700&display=swap",
+  "excluded": [
+    "Cloudflare analytics beacon",
+    "Taklifla query customizer and parent gesture runtime",
+    "provider guestbook API",
+    "provider localStorage demo wishes and language storage",
+    "source sample names, parents, date, venue, program, phone, hotel and hashtag"
+  ],
+  "sourceWishClose": {
+    "captureSha256": "68865a0551e3d058b5490d6359d9f93b0f500e9d92db885e28ff5b4702fd4c43",
+    "behavior": "Original source close-panel builder is extracted; platform adapter supplies localized copy"
+  },
+  "publication": "Registered 0183; published 0184 after complete source and real lifecycle verification"
+}

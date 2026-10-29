@@ -1,0 +1,25 @@
+{
+  "date": "2026-10-29",
+  "configured": true,
+  "template": {
+    "id": "taklifla-zarrin-gullar",
+    "name": "Zarrin gullar",
+    "description": "Iliq zarrin gullar, nafis bezaklar va bahoriy nikoh taklifnomasi.",
+    "previewImage": "/templates/taklifla-zarrin-gullar/preview.webp",
+    "previewEventType": "wedding",
+    "categoryIds": [
+      "wedding"
+    ],
+    "supportedEventTypes": [
+      "wedding"
+    ],
+    "priceMinor": 100000,
+    "currency": "UZS",
+    "accent": "#c67139",
+    "published": true
+  },
+  "migrations": [
+    "0183_register_taklifla_zarrin_gullar.sql",
+    "0184_publish_taklifla_zarrin_gullar.sql"
+  ]
+}

@@ -19,7 +19,7 @@ untouched. Application deployment and live payment activation are excluded.
 | Bookie Terracotta | taklifla-fayzli-xonadon | Private package | Complete — dinner menu integrated, source engine reused; published 0177/0178 |
 | Ertak | taklifla-ertak | Private package | Complete — source parallax/ambient, shared wishes and lifecycle verified; published 0179/0180 |
 | Garden Arch | taklifla-gulbog | Private package | Complete — family/reminder/footer fields restored; source/lifecycle/audio verified; published 0181/0182 |
-| Marigold | taklifla-zarrin-gullar | Private package | Pending |
+| Marigold | taklifla-zarrin-gullar | Private package | Complete — family/stay/footer/hashtag restored; shared data and source verified; published 0183/0184 |
 | Mountain | taklifla-toglar-bagrida | Private package | Pending |
 | Oltin Yo‘l | taklifla-oltin-yol | Private package | Pending |
 | Osmon | taklifla-osmon | Private package | Pending |
@@ -115,3 +115,10 @@ the individual commit below each completed row.
 - Canonical wedding profile/wishes and catalog gesture music are wired. Partial wedding preview profiles preserve the shared event label; other event-label behavior stays intact. Studio waits for bound data before opening; source hero is captured for catalog/personalized artwork.
 - 25 shared/package tests, source comparisons at 320/390/1280, petal/reveal/opening, all locales, long/empty/seven-event/reduced data, preview no-send/failures, real source-field save/reopen/switching/studio/publication/public/maps/pending wishes, audio play/pause/resume/dismiss, covers, typecheck and build pass.
 - Additive migrations 0181/0182 publish only Gulbog for weddings. Evidence: `docs/templates/taklifla-audit/gulbog*` and `taklifla-gulbog-personalized-cover.webp`.
+
+## Zarrin gullar integration
+
+- Complete Marigold source, exact CSS/art/fonts, native opener/ten petals/reveals/closed-wishes builder retained. Restored editable/persistent bride and groom families, accommodation, footer and hashtag. Stable payload dependencies prevent preview UI rerenders from resetting language/input.
+- Shared wedding details now supply canonical family/footer examples across this design and Gulbog; maps/music/wishes stay canonical and preview-only. Normal/reduced motion, four locales, long/empty/seven-row data and failure states pass.
+- 28 shared/package tests, three-viewport source comparisons, actual audio, real authenticated source-field save/reopen/studio/publication/public/maps/pending wishes, compatible switching, source/personalized covers, typecheck and production build pass. Evidence: `docs/templates/taklifla-audit/zarrin*`.
+- Additive migrations 0183/0184 publish only Zarrin gullar for weddings. Configured API confirms publication; no external deployment or payments.

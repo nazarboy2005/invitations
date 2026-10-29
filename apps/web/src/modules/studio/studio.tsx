@@ -36,6 +36,7 @@ import {
   yubileySahifasiDataSchema,
   fayzliXonadonDataSchema,
   gulbogDataSchema,
+  zarrinDataSchema,
   pulauSehatiDataSchema,
   LANGUAGE_NAMES,
   LOCALES,
@@ -89,6 +90,7 @@ import { TakliflaTortFasl } from "@/templates/taklifla-tort-fasl/renderer";
 import { TakliflaFayzliXonadonInvitation } from "@/templates/taklifla-fayzli-xonadon/renderer";
 import { TakliflaErtak } from "@/templates/taklifla-ertak/renderer";
 import { TakliflaGulbog } from "@/templates/taklifla-gulbog/renderer";
+import { TakliflaZarrinGullar } from "@/templates/taklifla-zarrin-gullar/renderer";
 import { TakliflaYubileySahifasi } from "@/templates/taklifla-yubiley-sahifasi/renderer";
 import { TakliflaBarakali } from "@/templates/taklifla-barakali/renderer";
 import { TakliflaZarhalSahifaInvitation } from "@/templates/taklifla-zarhal-sahifa/renderer";
@@ -889,6 +891,8 @@ export function Studio({
         : current,
     );
   }
+  const zarrinData=zarrinDataSchema.parse(invitation.templateData["taklifla-zarrin-gullar"] ?? {});
+  function updateZarrinField(key:"brideFamily"|"groomFamily"|"stayText"|"footerNote"|"hashtag",value:string){setInvitation(current=>current?{...current,templateData:{...current.templateData,"taklifla-zarrin-gullar":{...zarrinData,[key]:key==="hashtag"?value:{...zarrinData[key],[locale]:value}}}}:current);}
   const gulbogData=gulbogDataSchema.parse(invitation.templateData["taklifla-gulbog"] ?? {});
   function updateGulbogField(key:keyof typeof gulbogData,value:string){setInvitation(current=>current?{...current,templateData:{...current.templateData,"taklifla-gulbog":{...gulbogData,[key]:{...gulbogData[key],[locale]:value}}}}:current);}
   const xonadonData=fayzliXonadonDataSchema.parse(invitation.templateData["taklifla-fayzli-xonadon"] ?? {});
@@ -3369,6 +3373,9 @@ export function Studio({
                   )}
                 </OptionalSection>
                 <div className={styles.divider} />
+                {invitation.templateId === "taklifla-zarrin-gullar" && <div className={styles.formGrid}>
+                  {(["brideFamily","groomFamily","stayText","footerNote","hashtag"] as const).map(key=><Field key={key} label={`${({brideFamily:"Kelin oilasi",groomFamily:"Kuyov oilasi",stayText:"Turar joy haqida",footerNote:"Yakuniy izoh",hashtag:"Heshteg"})[key]} · ${LANGUAGE_NAMES[locale]}`}><textarea maxLength={key==="hashtag"?100:4000} rows={2} value={key==="hashtag"?zarrinData.hashtag:zarrinData[key][locale] || ""} onChange={e=>updateZarrinField(key,e.target.value)}/></Field>)}
+                </div>}
                 {invitation.templateId === "taklifla-gulbog" && <div className={styles.formGrid}>
                   {(["brideFamily","reminderTitle","reminderText","footerNote"] as const).map(key=><Field key={key} label={`${({brideFamily:"Kelin oilasi satri",reminderTitle:"Eslatma sarlavhasi",reminderText:"Mehmonlarga eslatma",footerNote:"Yakuniy izoh"})[key]} · ${LANGUAGE_NAMES[locale]}`}><textarea maxLength={key==="reminderTitle"?300:4000} rows={3} value={gulbogData[key][locale] || ""} onChange={e=>updateGulbogField(key,e.target.value)}/></Field>)}
                 </div>}
@@ -3939,6 +3946,8 @@ export function Studio({
               <TakliflaErtak invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview fullPreview catalogMusic={section === 0 && !authoredPreview} silentPlayback />
             ) : invitation.templateId === "taklifla-gulbog" ? (
               <TakliflaGulbog invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview fullPreview catalogMusic={section === 0 && !authoredPreview} silentPlayback />
+            ) : invitation.templateId === "taklifla-zarrin-gullar" ? (
+              <TakliflaZarrinGullar invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview fullPreview catalogMusic={section === 0 && !authoredPreview} silentPlayback />
             ) : invitation.templateId === "taklifla-yubiley-sahifasi" ? (
               <TakliflaYubileySahifasi invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview fullPreview catalogMusic={section === 0 && !authoredPreview} silentPlayback />
             ) : invitation.templateId === "taklifla-barakali" ? (

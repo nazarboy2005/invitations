@@ -1,0 +1,19 @@
+/* Accessibility/data-only changes; source geometry and normal motion stay in source.css. */
+[hidden]{display:none!important}
+body[data-waiting] > div{visibility:hidden}
+html.reduced{scroll-behavior:auto}
+html.reduced *,html.reduced *::before,html.reduced *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+html.reduced [data-reveal]{opacity:1;transform:none}
+html.reduced #mw-petals{display:none}
+#mw-splash-names,#mw-foot-names,#mw-hero-a,#mw-hero-b,#mw-inv-bride,#mw-inv-groom{overflow-wrap:anywhere;max-width:100%}
+#mw-hero-a,#mw-hero-b{min-width:0}
+#mw-splash h1{max-width:100%}
+#mw-splash{overflow:auto}
+#mw-info-dress-text,#mw-inv-request{white-space:pre-line}
+.mw-ev-card>*{overflow-wrap:anywhere}
+@media(max-width:359px){#mw-cd-circles{gap:6px!important}#mw-cd-circles>div{width:62px!important;height:62px!important}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}[data-reveal]{opacity:1;transform:none}#mw-petals{display:none}}
+
+#mw-bride-parents,#mw-groom-parents,#mw-info-stay-text,#mw-hashtag{overflow-wrap:anywhere;white-space:pre-line;max-width:100%}
+
+#mw-foot-note{white-space:pre-line;overflow-wrap:anywhere}
