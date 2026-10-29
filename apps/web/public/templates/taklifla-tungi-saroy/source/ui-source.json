@@ -1,0 +1,137 @@
+{
+  "splash_kicker": {
+    "uz-Latn": "TO'Y TAKLIFNOMASI",
+    "en": "THE WEDDING OF",
+    "ru": "ПРИГЛАШЕНИЕ НА СВАДЬБУ"
+  },
+  "splash_open": {
+    "uz-Latn": "TAKLIFNOMANI OCHISH",
+    "en": "OPEN INVITATION",
+    "ru": "ОТКРЫТЬ ПРИГЛАШЕНИЕ"
+  },
+  "hero_kicker": {
+    "uz-Latn": "Yulduzlar to'la osmon ostida",
+    "en": "Under a sky full of stars",
+    "ru": "Под небом, полным звёзд"
+  },
+  "scroll_hint": {
+    "uz-Latn": "PASTGA",
+    "en": "SCROLL",
+    "ru": "ЛИСТАЙТЕ ВНИЗ"
+  },
+  "inv_blessing": {
+    "uz-Latn": "Yaratganning marhamati bilan",
+    "en": "With the blessings of the Almighty",
+    "ru": "По благословению Всевышнего"
+  },
+  "inv_with": {
+    "uz-Latn": "va",
+    "en": "with",
+    "ru": "и"
+  },
+  "inv_request": {
+    "uz-Latn": "sizni to'y marosimiga lutfan taklif etadilar",
+    "en": "request the honour of your presence",
+    "ru": "приглашают вас разделить радость свадебного торжества"
+  },
+  "events_title": {
+    "uz-Latn": "Tantanalar",
+    "en": "The Celebrations",
+    "ru": "Торжества"
+  },
+  "venue_kicker": {
+    "uz-Latn": "MANZIL",
+    "en": "THE VENUE",
+    "ru": "МЕСТО ПРОВЕДЕНИЯ"
+  },
+  "btn_map": {
+    "uz-Latn": "XARITADA OCHISH",
+    "en": "OPEN MAP",
+    "ru": "ОТКРЫТЬ КАРТУ"
+  },
+  "info_dress_label": {
+    "uz-Latn": "KIYIM",
+    "en": "DRESS CODE",
+    "ru": "ДРЕСС-КОД"
+  },
+  "info_weather_label": {
+    "uz-Latn": "QISHKI OQSHOMLAR",
+    "en": "WINTER EVENINGS",
+    "ru": "ЗИМНИЕ ВЕЧЕРА"
+  },
+  "info_stay_label": {
+    "uz-Latn": "MEHMONXONA VA YO'L",
+    "en": "STAY & TRAVEL",
+    "ru": "ПРОЖИВАНИЕ И ДОРОГА"
+  },
+  "info_rsvp_label": {
+    "uz-Latn": "TASDIQLASH",
+    "en": "RSVP",
+    "ru": "ПОДТВЕРЖДЕНИЕ"
+  },
+  "wish_title": {
+    "uz-Latn": "Tilaklaringizni yo'llang",
+    "en": "Send Your Wishes",
+    "ru": "Отправьте свои пожелания"
+  },
+  "wish_sub": {
+    "uz-Latn": "KELIN-KUYOV UCHUN TILAKLAR",
+    "en": "A BLESSING FOR THE COUPLE",
+    "ru": "ПОЖЕЛАНИЕ ДЛЯ МОЛОДОЖЁНОВ"
+  },
+  "btn_send": {
+    "uz-Latn": "MEHR BILAN YO'LLASH",
+    "en": "SEND WITH LOVE",
+    "ru": "ОТПРАВИТЬ С ЛЮБОВЬЮ"
+  },
+  "wish_thanks": {
+    "uz-Latn": "Rahmat — tilagingiz saqlandi ♡",
+    "en": "Thank you — your wish has been saved ♡",
+    "ru": "Спасибо — ваше пожелание сохранено ♡"
+  },
+  "wish_empty": {
+    "uz-Latn": "Birinchi bo'lib tilak yo'llang.",
+    "en": "Be the first to send your blessings.",
+    "ru": "Будьте первым, кто оставит пожелание."
+  },
+  "cd_title": {
+    "uz-Latn": "Visol kunigacha",
+    "en": "Until we say forever",
+    "ru": "До заветного дня"
+  },
+  "cd_days": {
+    "uz-Latn": "KUN",
+    "en": "DAYS",
+    "ru": "ДНИ"
+  },
+  "cd_hours": {
+    "uz-Latn": "SOAT",
+    "en": "HOURS",
+    "ru": "ЧАСЫ"
+  },
+  "cd_mins": {
+    "uz-Latn": "DAQIQA",
+    "en": "MINUTES",
+    "ru": "МИНУТЫ"
+  },
+  "cd_secs": {
+    "uz-Latn": "SONIYA",
+    "en": "SECONDS",
+    "ru": "СЕКУНДЫ"
+  },
+  "cd_arrived": {
+    "uz-Latn": "Kutilgan kun keldi.",
+    "en": "The day has finally arrived.",
+    "ru": "Долгожданный день настал."
+  },
+  "cd_foot": {
+    "uz-Latn": "HAR LAHZANI SANAYAPMIZ",
+    "en": "COUNTING EVERY MOMENT",
+    "ru": "СЧИТАЕМ КАЖДОЕ МГНОВЕНИЕ"
+  },
+  "footer_note_default": {
+    "uz-Latn": "Sizning tashrifingiz — biz uchun eng katta sovg'a.",
+    "en": "Your presence is the greatest gift our hearts could ask for.",
+    "ru": "Ваше присутствие — самый большой подарок для нас."
+  }
+}

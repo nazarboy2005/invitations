@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="uz-Latn" class="awaiting-data">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tungi Saroy — Taklifnoma</title>
+
+
+
+<link rel="stylesheet" href="assets/fonts.css">
+<link rel="stylesheet" href="source/template.css">
+<link rel="stylesheet" href="platform.css">
+</head>
+<body>
+
+<div style="min-height:100vh; display:flex; justify-content:center; background:#060a1f; font-family:'EB Garamond',serif; color:#c6cde8;">
+
+  <!-- ── Language switcher ── -->
+  <div class="mp-lang" role="group" aria-label="Til / Language">
+    <button type="button" data-lang="uz-Latn" class="on">UZ</button>
+    <button type="button" data-lang="uz-Cyrl">ЎЗ</button>
+    <button type="button" data-lang="en">EN</button>
+    <button type="button" data-lang="ru">RU</button>
+  </div>
+
+  <!-- ============ SPLASH ============ -->
+  <div id="mp-splash" style="position:fixed; inset:0; z-index:60; display:flex; align-items:center; justify-content:center; background:radial-gradient(120% 90% at 50% 18%, #18214b 0%, #0b1026 55%, #060a1f 100%); transition:opacity .9s ease; text-align:center;">
+    <div style="display:flex; flex-direction:column; align-items:center; gap:26px; padding:30px; animation:mpFade 1.2s ease both;">
+      <div style="width:132px; height:132px; border-radius:50%; border:1px solid rgba(216,182,92,.55); display:flex; align-items:center; justify-content:center; box-shadow:0 0 0 7px rgba(216,182,92,.10), 0 0 46px rgba(216,182,92,.18);">
+        <div style="width:112px; height:112px; border-radius:50%; border:1px solid rgba(216,182,92,.3); display:flex; align-items:center; justify-content:center; gap:7px;">
+          <span id="mp-mono-a" style="font-family:'Marcellus',serif; font-size:34px; color:#e9d9a6;"></span>
+          <span id="mp-mono-amp" style="font-family:'Great Vibes',cursive; font-size:30px; color:#b98f2e; line-height:1;">&amp;</span>
+          <span id="mp-mono-b" style="font-family:'Marcellus',serif; font-size:34px; color:#e9d9a6;"></span>
+        </div>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:10px;">
+        <p data-i18n="splash_kicker" style="margin:0; font-size:12px; letter-spacing:.34em; color:#a9b3d6; font-family:'Marcellus',serif;">TO'Y TAKLIFNOMASI</p>
+        <p id="mp-splash-names" style="margin:0; font-family:'Great Vibes',cursive; font-size:42px; color:#efe3b8; line-height:1.1;"></p>
+        <p style="margin:0; font-size:13px; letter-spacing:.24em; color:#7f89b3;"><span id="mp-splash-date"></span><span id="mp-splash-city-wrap"> — <span id="mp-splash-city"></span></span></p>
+      </div>
+      <button type="button" id="mp-open" class="mp-btn" style="margin-top:6px; padding:15px 38px; border:1px solid rgba(216,182,92,.65); border-radius:999px; background:linear-gradient(180deg, rgba(216,182,92,.16), rgba(216,182,92,.04)); color:#e9d9a6; font-family:'Marcellus',serif; font-size:12px; letter-spacing:.26em; cursor:pointer; animation:mpFade 1.2s ease both;"><span data-i18n="splash_open">TAKLIFNOMANI OCHISH</span></button>
+    </div>
+  </div>
+
+  <!-- ============ MUSIC TOGGLE ============ -->
+  <button type="button" id="mp-music" title="Musiqa" aria-label="Musiqa" style="display:none; position:fixed; z-index:55; bottom:18px; right:max(14px, calc(50% - 201px)); width:46px; height:46px; border-radius:50%; border:1px solid rgba(216,182,92,.55); background:rgba(11,16,38,.82); color:#e9d9a6; font-size:19px; cursor:pointer; opacity:.55; backdrop-filter:blur(6px); align-items:center; justify-content:center;">♪</button>
+  <audio id="mp-audio" loop preload="none"></audio>
+
+  <main style="position:relative; width:100%; max-width:430px; background:#0b1026; box-shadow:0 0 90px rgba(0,0,0,.8); overflow:hidden;">
+
+    <!-- ============ HERO ============ -->
+    <section style="position:relative; min-height:100svh; display:flex; flex-direction:column; justify-content:flex-end; background-image:linear-gradient(180deg, rgba(6,10,31,.32) 0%, rgba(6,10,31,.08) 34%, rgba(6,10,31,.78) 76%, #0b1026 100%), url('assets/hero.webp'); background-size:cover; background-position:center top; padding:0 26px 30px; text-align:center; overflow:hidden;">
+      <div id="mp-hero-flies" aria-hidden="true" style="position:absolute; inset:0; pointer-events:none;"></div>
+      <div style="position:relative; display:flex; flex-direction:column; gap:12px; align-items:center;">
+        <p data-i18n="hero_kicker" style="margin:0; font-family:'Great Vibes',cursive; font-size:27px; color:#d9c58a;">Yulduzlar to'la osmon ostida</p>
+        <h1 id="mp-hero-a" style="margin:0; font-family:'Marcellus',serif; font-size:46px; font-weight:400; letter-spacing:.05em; line-height:1.12; background:linear-gradient(100deg, #8a6a20 0%, #d9b65c 25%, #f8ecc0 50%, #d9b65c 75%, #8a6a20 100%); background-size:200% 100%; -webkit-background-clip:text; background-clip:text; color:transparent; animation:mpShimmer 6s linear infinite;"></h1>
+        <p id="mp-hero-amp" style="margin:0; font-family:'Great Vibes',cursive; font-size:34px; color:#b98f2e; line-height:.9;">&amp;</p>
+        <h1 id="mp-hero-b" style="margin:0; font-family:'Marcellus',serif; font-size:46px; font-weight:400; letter-spacing:.05em; line-height:1.12; background:linear-gradient(100deg, #8a6a20 0%, #d9b65c 25%, #f8ecc0 50%, #d9b65c 75%, #8a6a20 100%); background-size:200% 100%; -webkit-background-clip:text; background-clip:text; color:transparent; animation:mpShimmer 6s linear infinite;"></h1>
+        <div style="display:flex; align-items:center; justify-content:center; gap:14px; margin-top:10px; width:100%;">
+          <div style="width:56px; height:1px; background:linear-gradient(90deg, rgba(216,182,92,0), rgba(216,182,92,.8));"></div>
+          <p id="mp-hero-date" style="margin:0; font-family:'Marcellus',serif; font-size:19px; letter-spacing:.3em; color:#e9d9a6;"></p>
+          <div style="width:56px; height:1px; background:linear-gradient(90deg, rgba(216,182,92,.8), rgba(216,182,92,0));"></div>
+        </div>
+        <p style="margin:0; font-size:13px; letter-spacing:.26em; color:#a9b3d6;"><span id="mp-hero-venue"></span><span id="mp-hero-city-wrap"> · <span id="mp-hero-city"></span></span></p>
+      </div>
+      <div style="position:relative; margin-top:26px; display:flex; flex-direction:column; align-items:center; gap:7px; animation:mpBob 2.4s ease-in-out infinite;">
+        <p data-i18n="scroll_hint" style="margin:0; font-size:10px; letter-spacing:.34em; color:#8b95bf; font-family:'Marcellus',serif;">PASTGA</p>
+        <div style="width:9px; height:9px; border-right:1px solid rgba(233,217,166,.9); border-bottom:1px solid rgba(233,217,166,.9); transform:rotate(45deg);"></div>
+      </div>
+    </section>
+
+    <!-- GARLAND DIVIDER -->
+    <div style="position:relative; height:172px; background:url('assets/garland.webp') center / cover no-repeat;">
+      <div style="position:absolute; inset:0; background:linear-gradient(180deg, #0b1026 0%, rgba(11,16,38,0) 28%, rgba(11,16,38,0) 72%, #0b1026 100%);"></div>
+    </div>
+
+    <!-- ============ INVITATION ============ -->
+    <section style="padding:56px 22px 24px;">
+      <div data-reveal style="position:relative; background:#f3ecdc url('assets/frame.webp') center / 100% 100% no-repeat; border-radius:8px; padding:172px 24% 92px; text-align:center; box-shadow:0 30px 70px rgba(0,0,0,.5); display:flex; flex-direction:column; gap:10px; align-items:center;">
+        <p id="mp-greeting" data-i18n="inv_blessing" style="margin:0; max-width:150px; font-family:'Great Vibes',cursive; font-size:22px; color:#9c7a2b; line-height:1.2;">Yaratganning marhamati bilan</p>
+        <div id="mp-inv-groom-block">
+          <p id="mp-inv-groom" style="margin:8px 0 0; font-family:'Marcellus',serif; font-size:30px; color:#7c5c16; letter-spacing:.06em;"></p>
+          <div id="mp-inv-groom-parents-wrap">
+            <p id="mp-inv-groom-parents" style="margin:0; font-size:13.5px; font-style:italic; color:#5a6088; line-height:1.4;"></p>
+          </div>
+        </div>
+        <p id="mp-inv-with" data-i18n="inv_with" style="margin:0; font-family:'Great Vibes',cursive; font-size:21px; color:#9c7a2b; line-height:.9;">va</p>
+        <div id="mp-inv-bride-block">
+          <p id="mp-inv-bride" style="margin:0; font-family:'Marcellus',serif; font-size:30px; color:#7c5c16; letter-spacing:.06em;"></p>
+          <div id="mp-inv-bride-parents-wrap">
+            <p id="mp-inv-bride-parents" style="margin:0; font-size:13.5px; font-style:italic; color:#5a6088; line-height:1.4;"></p>
+          </div>
+        </div>
+        <div style="width:56px; height:1px; background:rgba(156,122,43,.55); margin:4px auto;"></div>
+        <p id="mp-message" data-i18n="inv_request" style="margin:0; font-size:13.5px; font-style:italic; color:#5a6088; line-height:1.4;">sizni to'y marosimiga lutfan taklif etadilar</p>
+        <p id="mp-inv-date" style="margin:0; font-size:14.5px; color:#3c4166; line-height:1.45;"></p>
+        <p style="margin:0; font-family:'Marcellus',serif; font-size:10.5px; letter-spacing:.09em; color:#7c5c16; line-height:1.5;"><span id="mp-inv-venue"></span><span id="mp-inv-venue-city-wrap"> · <span id="mp-inv-venue-city"></span></span></p>
+      </div>
+    </section>
+
+    <!-- divider -->
+    <div id="mp-events-divider-top" style="height:112px; margin:18px 0 2px; background-image:linear-gradient(180deg, #0b1026, rgba(11,16,38,0) 32%, rgba(11,16,38,0) 68%, #0b1026), url('assets/divider.webp'); background-size:cover; background-position:center;"></div>
+
+    <!-- ============ EVENTS TIMELINE ============ -->
+    <section id="mp-events-section" style="padding:16px 24px 52px;">
+      <div data-reveal style="text-align:center; margin-bottom:32px; display:flex; flex-direction:column; gap:8px;">
+        <p id="mp-program-heading" data-i18n="events_title" style="margin:0; font-family:'Great Vibes',cursive; font-size:40px; color:#e9d9a6; line-height:1.1;">Tantanalar</p>
+        <p id="mp-events-note" style="margin:0; font-size:11px; letter-spacing:.3em; color:#7f89b3; font-family:'Marcellus',serif;"><span id="mp-events-note-prefix" data-i18n="events_note_prefix"></span><span id="mp-events-note-city-wrap"> · <span id="mp-events-note-city"></span></span></p>
+      </div>
+
+      <div id="mp-events" style="position:relative; display:flex; flex-direction:column; gap:20px;">
+        <div id="mp-events-spine" aria-hidden="true" style="position:absolute; left:9px; top:12px; bottom:12px; width:1px; background:linear-gradient(180deg, rgba(216,182,92,0), rgba(216,182,92,.55) 10%, rgba(216,182,92,.55) 90%, rgba(216,182,92,0));"></div>
+
+        <template id="mp-event-template"><div class="mp-ev-row" data-program-id="" data-reveal="" style="position:relative; margin-left:34px; background:#121a3e; border:1px solid rgba(216,182,92,.28); border-radius:14px; padding:19px 21px; display:flex; flex-direction:column; gap:5px;">
+<div style="position:absolute; left:-30px; top:24px; width:9px; height:9px; border-radius:50%; border:1px solid rgba(216,182,92,.85); background:#0b1026; box-shadow:0 0 10px rgba(216,182,92,.5);"></div>
+<p style="margin:0; font-size:11px; letter-spacing:.26em; color:#b98f2e; font-family:'Marcellus',serif;"></p>
+<p style="margin:0; font-family:'Marcellus',serif; font-size:21px; color:#f0e6c8;"></p>
+<p style="margin:0; font-size:15px; color:#a9b3d6;"></p>
+</div></template>
+      </div>
+    </section>
+
+    <div id="mp-events-divider-bottom" style="height:112px; margin:0 0 6px; background-image:linear-gradient(180deg, #0b1026, rgba(11,16,38,0) 32%, rgba(11,16,38,0) 68%, #0b1026), url('assets/divider.webp'); background-size:cover; background-position:center; transform:scaleX(-1);"></div>
+
+    <!-- ============ VENUE / MAP ============ -->
+    <section style="position:relative; min-height:540px; background-image:linear-gradient(180deg, #0b1026 0%, rgba(11,16,38,.2) 30%, rgba(11,16,38,.28) 62%, #0b1026 100%), url('assets/venue.webp'); background-size:cover; background-position:center; display:flex; align-items:flex-end; padding:56px 24px 48px;">
+      <div data-reveal style="width:100%; background:rgba(9,13,33,.78); backdrop-filter:blur(8px); border:1px solid rgba(216,182,92,.32); border-radius:16px; padding:28px 24px; text-align:center; display:flex; flex-direction:column; gap:10px; align-items:center;">
+        <p data-i18n="venue_kicker" style="margin:0; font-size:11px; letter-spacing:.32em; color:#b98f2e; font-family:'Marcellus',serif;">MANZIL</p>
+        <p id="mp-venue-name" style="margin:0; font-family:'Marcellus',serif; font-size:26px; color:#f0e6c8;"></p>
+        <p style="margin:0; font-size:15px; color:#a9b3d6;"><span id="mp-venue-addr"></span><span id="mp-venue-note-wrap"><br><span id="mp-venue-note"></span></span></p>
+        <a id="mp-map" href="#" target="_blank" rel="noopener noreferrer" class="mp-map" style="margin-top:10px; display:inline-block; padding:13px 34px; border:1px solid rgba(216,182,92,.65); border-radius:999px; background:linear-gradient(180deg, rgba(216,182,92,.16), rgba(216,182,92,.04)); color:#e9d9a6; font-family:'Marcellus',serif; font-size:12px; letter-spacing:.26em;"><span data-i18n="btn_map">XARITADA OCHISH</span></a>
+      </div>
+    </section>
+
+    <!-- ============ GUEST INFO ============ -->
+    <section id="mp-info-section" style="padding:52px 24px 16px;">
+      <div data-reveal style="background:#121a3e; border:1px solid rgba(216,182,92,.28); border-radius:16px; padding:10px 24px; display:flex; flex-direction:column;">
+        <div id="mp-info-dress" style="padding:18px 0; border-bottom:1px solid rgba(216,182,92,.16); display:flex; flex-direction:column; gap:5px;">
+          <p data-i18n="info_dress_label" style="margin:0; font-size:11px; letter-spacing:.28em; color:#b98f2e; font-family:'Marcellus',serif;">KIYIM</p>
+          <p id="mp-info-dress-text" style="margin:0; font-size:15px; color:#c6cde8;"></p>
+        </div>
+        <div id="mp-info-weather" style="padding:18px 0; border-bottom:1px solid rgba(216,182,92,.16); display:flex; flex-direction:column; gap:5px;">
+          <p data-i18n="info_weather_label" style="margin:0; font-size:11px; letter-spacing:.28em; color:#b98f2e; font-family:'Marcellus',serif;">QISHKI OQSHOMLAR</p>
+          <p id="mp-info-weather-text" style="margin:0; font-size:15px; color:#c6cde8;"></p>
+        </div>
+        <div id="mp-info-stay" style="padding:18px 0; border-bottom:1px solid rgba(216,182,92,.16); display:flex; flex-direction:column; gap:5px;">
+          <p data-i18n="info_stay_label" style="margin:0; font-size:11px; letter-spacing:.28em; color:#b98f2e; font-family:'Marcellus',serif;">MEHMONXONA VA YO'L</p>
+          <p id="mp-info-stay-text" style="margin:0; font-size:15px; color:#c6cde8;"></p>
+        </div>
+        <div id="mp-info-rsvp" style="padding:18px 0; display:flex; flex-direction:column; gap:5px;">
+          <p data-i18n="info_rsvp_label" style="margin:0; font-size:11px; letter-spacing:.28em; color:#b98f2e; font-family:'Marcellus',serif;">TASDIQLASH</p>
+          <p id="mp-info-rsvp-text" style="margin:0; font-size:15px; color:#c6cde8;"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ WISHES ============ -->
+    <section style="padding:44px 24px 52px;">
+      <div data-reveal style="text-align:center; display:flex; flex-direction:column; gap:8px;">
+        <p data-i18n="wish_title" style="margin:0; font-family:'Great Vibes',cursive; font-size:40px; color:#e9d9a6; line-height:1.1;">Tilaklaringizni yo'llang</p>
+        <p data-i18n="wish_sub" style="margin:0; font-size:11px; letter-spacing:.3em; color:#7f89b3; font-family:'Marcellus',serif;">KELIN-KUYOV UCHUN TILAKLAR</p>
+      </div>
+
+      <form aria-label="Tilak yo‘llash" id="mp-wish-form" class="wish-form" data-reveal style="display:flex; flex-direction:column; gap:12px; margin-top:26px;">
+        <input name="wname" required maxlength="300" autocomplete="name" class="mp-input" data-i18n-ph="wish_name_ph" placeholder="Ismingiz" style="padding:14px 16px; border-radius:12px; border:1px solid rgba(216,182,92,.35); background:rgba(18,26,62,.6); color:#efe6cf; outline:none;">
+        <textarea name="wmsg" required maxlength="4000" rows="3" class="mp-input" data-i18n-ph="wish_msg_ph" placeholder="Kelin-kuyov uchun tilagingizni yozing…" style="padding:14px 16px; border-radius:12px; border:1px solid rgba(216,182,92,.35); background:rgba(18,26,62,.6); color:#efe6cf; outline:none; resize:vertical; font-family:'EB Garamond',serif;"></textarea>
+        <button type="submit" class="mp-wish-btn" style="padding:15px 34px; border:1px solid rgba(216,182,92,.7); border-radius:999px; background:linear-gradient(180deg, rgba(216,182,92,.28), rgba(216,182,92,.08)); color:#f0e2ac; font-family:'Marcellus',serif; font-size:12px; letter-spacing:.26em; cursor:pointer;"><span data-i18n="btn_send">MEHR BILAN YO'LLASH</span></button>
+      </form>
+
+      <div role="status" aria-live="polite" id="mp-wish-confirm" data-i18n="wish_thanks" style="display:none; text-align:center; font-size:15px; font-style:italic; color:#d8b65c; margin:18px 0 0;">Rahmat — tilagingiz saqlandi ♡</div>
+
+      <div style="display:flex; flex-direction:column; gap:12px; margin-top:26px;">
+        <div id="mp-wish-empty" data-i18n="wish_empty" style="text-align:center; font-size:14px; font-style:italic; color:#7f89b3;">Birinchi bo'lib tilak yo'llang.</div>
+        <div id="mp-wish-list" style="display:flex; flex-direction:column; gap:12px;"></div>
+      </div>
+    </section>
+
+    <!-- ============ COUNTDOWN ============ -->
+    <section style="position:relative; padding:70px 24px 76px; text-align:center; background-image:linear-gradient(180deg, #0b1026 0%, rgba(11,16,38,.5) 40%, #0b1026 100%), url('assets/countdown.webp'); background-size:cover; background-position:center; overflow:hidden;">
+      <div id="mp-cd-flies" aria-hidden="true" style="position:absolute; inset:0; pointer-events:none;"></div>
+      <p data-i18n="cd_title" style="margin:0; position:relative; font-family:'Great Vibes',cursive; font-size:38px; color:#e9d9a6; line-height:1.1;">Visol kunigacha</p>
+      <div id="mp-cd-grid" data-reveal style="position:relative; display:flex; justify-content:center; gap:10px; margin-top:28px;">
+        <div style="flex:1; max-width:84px; background:rgba(9,13,33,.62); border:1px solid rgba(216,182,92,.35); border-radius:14px; padding:16px 6px 13px; backdrop-filter:blur(5px); display:flex; flex-direction:column; gap:4px;">
+          <span id="mp-cd-d" style="font-family:'Marcellus',serif; font-size:30px; color:#efe3b8;">00</span>
+          <span data-i18n="cd_days" style="font-size:10px; letter-spacing:.24em; color:#8b95bf; font-family:'Marcellus',serif;">KUN</span>
+        </div>
+        <div style="flex:1; max-width:84px; background:rgba(9,13,33,.62); border:1px solid rgba(216,182,92,.35); border-radius:14px; padding:16px 6px 13px; backdrop-filter:blur(5px); display:flex; flex-direction:column; gap:4px;">
+          <span id="mp-cd-h" style="font-family:'Marcellus',serif; font-size:30px; color:#efe3b8;">00</span>
+          <span data-i18n="cd_hours" style="font-size:10px; letter-spacing:.24em; color:#8b95bf; font-family:'Marcellus',serif;">SOAT</span>
+        </div>
+        <div style="flex:1; max-width:84px; background:rgba(9,13,33,.62); border:1px solid rgba(216,182,92,.35); border-radius:14px; padding:16px 6px 13px; backdrop-filter:blur(5px); display:flex; flex-direction:column; gap:4px;">
+          <span id="mp-cd-m" style="font-family:'Marcellus',serif; font-size:30px; color:#efe3b8;">00</span>
+          <span data-i18n="cd_mins" style="font-size:10px; letter-spacing:.24em; color:#8b95bf; font-family:'Marcellus',serif;">DAQIQA</span>
+        </div>
+        <div style="flex:1; max-width:84px; background:rgba(9,13,33,.62); border:1px solid rgba(216,182,92,.35); border-radius:14px; padding:16px 6px 13px; backdrop-filter:blur(5px); display:flex; flex-direction:column; gap:4px;">
+          <span id="mp-cd-s" style="font-family:'Marcellus',serif; font-size:30px; color:#efe3b8;">00</span>
+          <span data-i18n="cd_secs" style="font-size:10px; letter-spacing:.24em; color:#8b95bf; font-family:'Marcellus',serif;">SONIYA</span>
+        </div>
+      </div>
+      <div id="mp-cd-arrived" data-i18n="cd_arrived" style="display:none; position:relative; font-size:18px; font-style:italic; color:#efe3b8; margin-top:20px; line-height:1.4;">Kutilgan kun keldi.</div>
+      <p data-i18n="cd_foot" style="margin:18px 0 0; position:relative; font-size:11px; letter-spacing:.3em; color:#7f89b3; font-family:'Marcellus',serif;">HAR LAHZANI SANAYAPMIZ</p>
+    </section>
+
+    <!-- ============ FOOTER ============ -->
+    <footer style="padding:60px 24px 92px; text-align:center; display:flex; flex-direction:column; gap:13px; align-items:center; background:linear-gradient(180deg, #0b1026, #070b22);">
+      <p id="mp-foot-names" style="margin:0; font-family:'Great Vibes',cursive; font-size:44px; color:#e9d9a6; line-height:1.1;"></p>
+      <p style="margin:0; font-size:12px; letter-spacing:.3em; color:#8b95bf; font-family:'Marcellus',serif;"><span id="mp-foot-date"></span><span id="mp-foot-city-wrap"> · <span id="mp-foot-city"></span></span></p>
+      <div style="width:64px; height:1px; background:linear-gradient(90deg, rgba(216,182,92,0), rgba(216,182,92,.7), rgba(216,182,92,0));"></div>
+      <p id="mp-foot-note" data-i18n="footer_note_default" style="margin:0; font-size:15px; font-style:italic; color:#a9b3d6; max-width:300px;">Sizning tashrifingiz — biz uchun eng katta sovg'a.</p>
+      <p id="mp-hashtag" style="display:none; margin:0; font-size:13px; letter-spacing:.12em; color:#58618c;"></p>
+    </footer>
+
+  </main>
+</div>
+
+
+<script src="source/template-motion.js"></script>
+<script src="source/wish-panel.js"></script>
+<script src="labels.js"></script>
+<script src="platform-adapter.js"></script>
+</body>
+</html>

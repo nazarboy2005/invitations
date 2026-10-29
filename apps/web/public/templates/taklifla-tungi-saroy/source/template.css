@@ -1,0 +1,23 @@
+
+  * { box-sizing: border-box; }
+  :root { --accent:#d8b65c; /* alias for shared _wish-close.js */ }
+  html, body { margin: 0; padding: 0; background: #060a1f; }
+  body { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; font-family: 'EB Garamond', serif; }
+  input, textarea, button { font-family: inherit; }
+  a { color: #d8b65c; text-decoration: none; }
+  a:hover { color: #f0dfa2; }
+  input::placeholder, textarea::placeholder { color: #6f79a6; }
+  ::selection { background: rgba(216,182,92,.35); }
+  @keyframes mpShimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+  @keyframes mpTwinkle { 0%, 100% { opacity: .12; transform: translateY(0); } 50% { opacity: .85; transform: translateY(-16px); } }
+  @keyframes mpBob { 0%, 100% { transform: translateY(0); opacity: .9; } 50% { transform: translateY(9px); opacity: .35; } }
+  @keyframes mpPulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(216,182,92,.35); } 50% { box-shadow: 0 0 0 10px rgba(216,182,92,0); } }
+  @keyframes mpFade { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { * { animation-duration: .001ms !important; animation-iteration-count: 1 !important; } }
+  .mp-lang { position: fixed; top: 14px; right: max(calc(50% - 201px), 14px); z-index: 55; display: flex; gap: 2px; background: rgba(11,16,38,.82); border: 1px solid rgba(216,182,92,.4); border-radius: 999px; padding: 3px; box-shadow: 0 8px 22px -10px rgba(0,0,0,.6); }
+  .mp-lang button { border: 0; background: transparent; cursor: pointer; font-family: 'Marcellus', serif; font-size: 11px; font-weight: 700; letter-spacing: .08em; color: #e9d9a6; padding: 5px 9px; border-radius: 999px; line-height: 1; text-transform: uppercase; }
+  .mp-lang button.on { background: linear-gradient(180deg, #efe3b8, #d8b65c); color: #0b1026; }
+  .mp-btn:hover { background: linear-gradient(180deg, rgba(216,182,92,.3), rgba(216,182,92,.1)); box-shadow: 0 0 26px rgba(216,182,92,.25); }
+  .mp-map:hover { background: linear-gradient(180deg, rgba(216,182,92,.3), rgba(216,182,92,.1)); color: #f6ecc6; }
+  .mp-wish-btn:hover { background: linear-gradient(180deg, rgba(216,182,92,.42), rgba(216,182,92,.16)); box-shadow: 0 0 26px rgba(216,182,92,.22); }
+  .mp-input:focus { border-color: rgba(216,182,92,.8); box-shadow: 0 0 0 3px rgba(216,182,92,.12); }

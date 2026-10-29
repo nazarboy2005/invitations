@@ -1,0 +1,22 @@
+/* Adapter-only safety, language and accessibility adjustments. Source CSS is unchanged. */
+.awaiting-data body { visibility: hidden; }
+[hidden] { display: none !important; }
+button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visible {
+  outline: 2px solid #efe3b8; outline-offset: 4px;
+}
+button:disabled { opacity: .55; cursor: default; }
+#mp-splash-names, #mp-foot-names, #mp-hero-a, #mp-hero-b, #mp-inv-groom,
+#mp-inv-bride, .mp-ev-row, #mp-venue-name { overflow-wrap: anywhere; max-width: 100%; }
+#mp-greeting, #mp-message, #mp-info-dress-text { white-space: pre-line; }
+html.reduced-motion *, html.reduced-motion *::before, html.reduced-motion *::after {
+  animation: none !important; transition: none !important; scroll-behavior: auto !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
+/* Source calligraphy/Marcellus have Latin coverage only; EB Garamond supplies Cyrillic. */
+html[lang="uz-Cyrl"] body, html[lang="ru"] body { --cyrillic-serif: 'EB Garamond', serif; }
+html[lang="uz-Cyrl"] [style*="Marcellus"], html[lang="ru"] [style*="Marcellus"],
+html[lang="uz-Cyrl"] [style*="Great Vibes"], html[lang="ru"] [style*="Great Vibes"] {
+  font-family: var(--cyrillic-serif) !important;
+}

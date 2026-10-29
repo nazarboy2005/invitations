@@ -3,18 +3,18 @@ import { useEffect, type RefObject } from "react";
 export type PreviewTarget =
   "names" | "location" | "gallery" | "music" | "rsvp" | "gift" | "contacts";
 const targets: Record<PreviewTarget, string> = {
-  names: "#hero, #home, #invitation, .hero, [data-cloud-castle-hero]",
+  names: "#mp-hero-a, #tv-hero-a, #hero, #home, #invitation, .hero, [data-cloud-castle-hero]",
   location:
-    '#location, #venue, #map, #address, #event, .location-section, .venue-section, [data-landing-screenshot-id="invite-map"]',
+    '#mp-venue-name, #tv-venue-name, #location, #venue, #map, #address, #event, .location-section, .venue-section, [data-landing-screenshot-id="invite-map"]',
   gallery:
     "#gallery, #photos, #memories, .gallery-section, [data-chorlove-story]",
   music: "#music, #gallery, #hero",
-  rsvp: "#rsvp, #attendance, #confirmation, .rsvp-section",
+  rsvp: "#mp-info-rsvp, #tv-info-rsvp, #rsvp, #attendance, #confirmation, .rsvp-section",
   gift: "#gift, #gifts, #wedding-gift, .gift-section, [data-chorlove-gift]",
   contacts: "#contact, #contacts, footer, [data-chorlove-contacts]",
 };
 const openerSelector =
-  "#open-invitation, #open-prompt, #open-btn, #openBtn, #openEnvelope, #si-opener, [data-gg-source-opening], [data-landing-screenshot-id='invite-envelope']";
+  "#mp-open, #tv-open, #open-invitation, #open-prompt, #open-btn, #openBtn, #openEnvelope, #si-opener, [data-gg-source-opening], [data-landing-screenshot-id='invite-envelope']";
 
 /** Operates only on our same-origin preview; never touches the public renderer. */
 export function useStudioPreview(

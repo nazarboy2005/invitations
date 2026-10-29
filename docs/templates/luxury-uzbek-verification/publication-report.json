@@ -1,0 +1,73 @@
+{
+  "date": "2026-10-29",
+  "migrations": [
+    "0171_register_luxury_taklifla_templates.sql",
+    "0172_publish_luxury_taklifla_templates.sql"
+  ],
+  "before": [
+    {
+      "id": "taklifla-tovus",
+      "published": false,
+      "price_minor": "100000",
+      "currency": "UZS"
+    },
+    {
+      "id": "taklifla-tungi-saroy",
+      "published": false,
+      "price_minor": "100000",
+      "currency": "UZS"
+    }
+  ],
+  "after": [
+    {
+      "id": "taklifla-tovus",
+      "published": true,
+      "price_minor": "100000",
+      "currency": "UZS"
+    },
+    {
+      "id": "taklifla-tungi-saroy",
+      "published": true,
+      "price_minor": "100000",
+      "currency": "UZS"
+    }
+  ],
+  "catalog": [
+    {
+      "id": "taklifla-tovus",
+      "name": "Tovus",
+      "description": "Zumrad va oltin jilolar, tovus patlari va nafis saroy taklifnomasi.",
+      "previewImage": "/templates/taklifla-tovus/preview.webp",
+      "previewEventType": "wedding",
+      "categoryIds": [
+        "wedding"
+      ],
+      "supportedEventTypes": [
+        "wedding"
+      ],
+      "priceMinor": 100000,
+      "currency": "UZS",
+      "accent": "#0a4c40",
+      "published": true
+    },
+    {
+      "id": "taklifla-tungi-saroy",
+      "name": "Tungi Saroy",
+      "description": "Yulduzli tun, oltin bezaklar va muhtasham saroy manzarasi.",
+      "previewImage": "/templates/taklifla-tungi-saroy/preview.webp",
+      "previewEventType": "wedding",
+      "categoryIds": [
+        "wedding"
+      ],
+      "supportedEventTypes": [
+        "wedding"
+      ],
+      "priceMinor": 100000,
+      "currency": "UZS",
+      "accent": "#d8b65c",
+      "published": true
+    }
+  ],
+  "applicationDeployment": false,
+  "livePayments": false
+}

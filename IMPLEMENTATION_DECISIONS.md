@@ -1,5 +1,26 @@
 # Implementation decisions
 
+## Luxury Uzbek templates (2026-10-29)
+
+- User requested more of the most luxurious unpublished/untouched designs,
+  preferably from Uzbek sources. Selected Taklifla Midnight Palace (Tungi Saroy)
+  and Tovus: distinct full-source designs with midnight/gold and emerald/peacock
+  art, respectively. Complete their private packages and publish through the
+  catalog only after source, browser, shared-data and backend verification.
+- Retain the existing shared preview JSON, Google Maps venue, four locales,
+  optional music, moderated wishes and no guest-count input. Use the same
+  renderer in catalog, studio, public view and personalized covers. Preserve
+  source captures and administrator prices. No external application deployment.
+- Completed both integrations and applied registration/publication migrations
+  `0171`/`0172`. The configured catalog publishes both wedding designs at
+  1,000 UZS each. Source hash checks, normal/reduced motion and audio checks,
+  320/390/1280 responsive comparisons, long-name fitting, authenticated studio
+  preview, real save/reopen/publication/wishes and personalized covers are
+  recorded in `docs/templates/luxury-uzbek-verification`.
+- On small screens, the app's transient full-preview actions sit below these
+  templates' original top language controls so publication's “Yaratish” action
+  cannot intercept language switching. Public template layouts are unchanged.
+
 ## Shared preview data and To‘rt fasl (2026-10-28)
 
 - User correction: do not add a “Mehmonlar soni” input. Remove the added Velvet

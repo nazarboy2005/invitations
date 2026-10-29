@@ -1,0 +1,158 @@
+{
+  "capture": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/taklifla.uz/templates/tovus__c7e8ea90968ad140.html",
+  "sha256": "79c917e5c2e3a3b848f2edfe3010c2da1016fdc5b6f33bbc7ba6f8abdef9abe8",
+  "assets": [
+    {
+      "capture": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/taklifla.uz/templates/tovus-img/countdown.webp",
+      "file": "tovus-img/countdown.webp",
+      "url": "https://taklifla.uz/templates/tovus-img/countdown.webp",
+      "bytes": 276870,
+      "sha256": "06e06b6e14de5f9b303d9151d80e7baef0c6d124f95aeba094ed01c28733bcea"
+    },
+    {
+      "capture": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/taklifla.uz/templates/tovus-img/crest.webp",
+      "file": "tovus-img/crest.webp",
+      "url": "https://taklifla.uz/templates/tovus-img/crest.webp",
+      "bytes": 278710,
+      "sha256": "e31f687ec986191102e43e7753b4481eb38f199ce2bcd10433f66776bcfaee9b"
+    },
+    {
+      "capture": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/taklifla.uz/templates/tovus-img/frame.webp",
+      "file": "tovus-img/frame.webp",
+      "url": "https://taklifla.uz/templates/tovus-img/frame.webp",
+      "bytes": 455726,
+      "sha256": "e84dcda1bec840171bf652933b83ebe354ae0ba03e077991efa606d91a7d5e46"
+    },
+    {
+      "capture": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/taklifla.uz/templates/tovus-img/garland.webp",
+      "file": "tovus-img/garland.webp",
+      "url": "https://taklifla.uz/templates/tovus-img/garland.webp",
+      "bytes": 256488,
+      "sha256": "83271055fc7b13ced023bd7e2640751c1001f146d7f99ddfb1d77c871ff9ab7a"
+    },
+    {
+      "capture": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/taklifla.uz/templates/tovus-img/hero.webp",
+      "file": "tovus-img/hero.webp",
+      "url": "https://taklifla.uz/templates/tovus-img/hero.webp",
+      "bytes": 297882,
+      "sha256": "ae2a04ba3aa5837c626b219375ca42a7b5bdbb62dd569d1e862b2dd3353b485a"
+    },
+    {
+      "capture": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/taklifla.uz/templates/tovus-img/venue.webp",
+      "file": "tovus-img/venue.webp",
+      "url": "https://taklifla.uz/templates/tovus-img/venue.webp",
+      "bytes": 349618,
+      "sha256": "8d61cb35a3cb4a4ddf30d98e984d948c3c61cf5e35ad689d60907aad8e3f6d74"
+    },
+    {
+      "capture": null,
+      "file": "fonts/co3ZmX5slCNuHLi8bLeY9MK7whWMhyjYrEtFmSq17w.woff2",
+      "url": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3ZmX5slCNuHLi8bLeY9MK7whWMhyjYrEtFmSq17w.woff2",
+      "bytes": 25184,
+      "sha256": "ae25de0507a445fd9e953e90432ae75b1ee2eccb48370a6ced4934551eb56fc3",
+      "recovered": "Exact source-CSS URL; absent from archive"
+    },
+    {
+      "capture": null,
+      "file": "fonts/co3ZmX5slCNuHLi8bLeY9MK7whWMhyjYrEtGmSq17w.woff2",
+      "url": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3ZmX5slCNuHLi8bLeY9MK7whWMhyjYrEtGmSq17w.woff2",
+      "bytes": 34392,
+      "sha256": "cd5bf126b2c84ab41b254a6a9a1ffb5c326a0f9f82c22fb4704daa31c9aaa415",
+      "recovered": "Exact source-CSS URL; absent from archive"
+    },
+    {
+      "capture": null,
+      "file": "fonts/co3ZmX5slCNuHLi8bLeY9MK7whWMhyjYrEtHmSq17w.woff2",
+      "url": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3ZmX5slCNuHLi8bLeY9MK7whWMhyjYrEtHmSq17w.woff2",
+      "bytes": 11516,
+      "sha256": "b8ecb4ae898cd9ccae2f2d18fd364f6593bb67776060f9b5d833cec65d34d112",
+      "recovered": "Exact source-CSS URL; absent from archive"
+    },
+    {
+      "capture": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/fonts.gstatic.com/s/cormorantgaramond/v21/co3ZmX5slCNuHLi8bLeY9MK7whWMhyjYrEtImSo.woff2",
+      "file": "fonts/co3ZmX5slCNuHLi8bLeY9MK7whWMhyjYrEtImSo.woff2",
+      "url": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3ZmX5slCNuHLi8bLeY9MK7whWMhyjYrEtImSo.woff2",
+      "bytes": 39260,
+      "sha256": "6f2f5c3b1abc3d0bb035a927f66a90ca873f94fc31c4966c8d024142c2036e55"
+    },
+    {
+      "capture": null,
+      "file": "fonts/co3ZmX5slCNuHLi8bLeY9MK7whWMhyjYrEtMmSq17w.woff2",
+      "url": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3ZmX5slCNuHLi8bLeY9MK7whWMhyjYrEtMmSq17w.woff2",
+      "bytes": 21300,
+      "sha256": "cb13c04533ee98c94e49a053b9f4d39bf616fd7ba6360d71aead92a78dc571f7",
+      "recovered": "Exact source-CSS URL; absent from archive"
+    },
+    {
+      "capture": null,
+      "file": "fonts/co3bmX5slCNuHLi8bLeY9MK7whWMhyjYp3tKgS4.woff2",
+      "url": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjYp3tKgS4.woff2",
+      "bytes": 33736,
+      "sha256": "cfa9a397d86f66c5c51775a2500a712d5f632a04f0c5eca6930dfaf612d4566d",
+      "recovered": "Exact source-CSS URL; absent from archive"
+    },
+    {
+      "capture": null,
+      "file": "fonts/co3bmX5slCNuHLi8bLeY9MK7whWMhyjYpHtKgS4.woff2",
+      "url": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjYpHtKgS4.woff2",
+      "bytes": 23416,
+      "sha256": "a4d7cf345b8091e1d2c8c5c8fa3bd0f9bb9d00bc8988185471db398ddb5ae4c4",
+      "recovered": "Exact source-CSS URL; absent from archive"
+    },
+    {
+      "capture": null,
+      "file": "fonts/co3bmX5slCNuHLi8bLeY9MK7whWMhyjYpntKgS4.woff2",
+      "url": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjYpntKgS4.woff2",
+      "bytes": 11220,
+      "sha256": "6252e819a7665ae512c2d046308a9016ada63c06d0d8f96984c4b29f6c9e1bd2",
+      "recovered": "Exact source-CSS URL; absent from archive"
+    },
+    {
+      "capture": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjYqXtK.woff2",
+      "file": "fonts/co3bmX5slCNuHLi8bLeY9MK7whWMhyjYqXtK.woff2",
+      "url": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjYqXtK.woff2",
+      "bytes": 37640,
+      "sha256": "d80df8ff5aecd299a61549f9e29ab1ed0b9b05f4ea71d50fe978e07d5240b235"
+    },
+    {
+      "capture": null,
+      "file": "fonts/co3bmX5slCNuHLi8bLeY9MK7whWMhyjYrXtKgS4.woff2",
+      "url": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjYrXtKgS4.woff2",
+      "bytes": 21168,
+      "sha256": "017fab69b4be8ffc08ca312823327989ade6dc3d948f0afa125e12ec2e5e7ca1",
+      "recovered": "Exact source-CSS URL; absent from archive"
+    },
+    {
+      "capture": null,
+      "file": "fonts/E21i_d3kivvAkxhLEVZpQyZwD9Ku.woff2",
+      "url": "https://fonts.gstatic.com/s/parisienne/v14/E21i_d3kivvAkxhLEVZpQyZwD9Ku.woff2",
+      "bytes": 14232,
+      "sha256": "652fa5786f9ca3be5718cfeba62261ae745ef0ea5efdc264e2b727fafb3d2a11",
+      "recovered": "Exact source-CSS URL; absent from archive"
+    },
+    {
+      "capture": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/fonts.gstatic.com/s/parisienne/v14/E21i_d3kivvAkxhLEVZpQyhwDw.woff2",
+      "file": "fonts/E21i_d3kivvAkxhLEVZpQyhwDw.woff2",
+      "url": "https://fonts.gstatic.com/s/parisienne/v14/E21i_d3kivvAkxhLEVZpQyhwDw.woff2",
+      "bytes": 22600,
+      "sha256": "cf3c285d1ec1ee935746c475ca71e20d9f1fc3b5d62166e2523acdd0737e239c"
+    }
+  ],
+  "missing": [],
+  "excluded": [
+    "Cloudflare beacon",
+    "provider query customizer",
+    "provider guestbook API and localStorage demo writes"
+  ],
+  "notes": [
+    "Original HTML is inert evidence outside public assets; original captures are unchanged.",
+    "Fonts are exact captured Google CSS dependencies; no network font request.",
+    "No source audio file: audio is optional via source ?audio parameter.",
+    "All six tovus-img assets copied, including template-owned venue artwork.",
+    "Source guestbook closing panel extracted and bound to the shared event instant."
+  ],
+  "private": false,
+  "registered": true,
+  "published": true,
+  "verifiedAt": "2026-10-29"
+}

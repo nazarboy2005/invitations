@@ -1,5 +1,11 @@
 # Invitation templates
 
+Latest Uzbek luxury integrations: Taklifla **Tungi Saroy** and **Tovus** use
+complete captured source packages, the shared invitation contract and the same
+renderer across preview/studio/public display. Registration/publication is in
+migrations 0171/0172; template READMEs and
+`docs/templates/luxury-uzbek-verification` record source adaptations and checks.
+
 This directory contains 34 template renderer folders at different stages of
 integration and review. Static assets and captured source packages are also
 stored under `apps/web/public/templates`; their presence does not make a design

@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="uz-Latn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Tovus</title><link rel="stylesheet" href="fonts/fonts.css"><link rel="stylesheet" href="source/template.css"><link rel="stylesheet" href="platform.css"></head><body data-pending>
+
+
+<div style="--emerald:#0A4C40; --emerald-deep:#0C1E1A; --teal:#0E6B62; --teal-2:#127C74; --peacock:#1C6E8C; --gold:#C6A24A; --gold-2:#E4CE8F; --ivory:#F6F1E7; --ivory-2:#FBF7EE; --ink:#22322C; --ink-soft:#5E6E66; min-height:100vh; display:flex; justify-content:center; font-family:'Cormorant Garamond', Georgia, serif; color:var(--ink); background: radial-gradient(120% 80% at 50% 0%, #14362B 0%, #0C1E1A 58%, #081611 100%);">
+
+  <div style="position:relative; width:100%; max-width:430px; min-height:100vh; overflow:hidden; background: repeating-linear-gradient(45deg, rgba(150,120,50,.05) 0 1px, transparent 1px 27px), repeating-linear-gradient(-45deg, rgba(150,120,50,.05) 0 1px, transparent 1px 27px), radial-gradient(135% 92% at 50% 10%, #FCF8EF 0%, #F3ECDD 58%, #EAE0CD 100%); box-shadow: 0 0 90px rgba(0,0,0,.55);">
+
+    <audio id="tv-audio" loop preload="none"></audio>
+
+    <!-- ── Language switcher ── -->
+    <div class="tv-lang" role="group" aria-label="Til / Language">
+      <button type="button" data-lang="uz-Latn" class="on">Uz</button>
+      <button type="button" data-lang="uz-Cyrl">Уз</button>
+      <button type="button" data-lang="en">En</button>
+      <button type="button" data-lang="ru">Ru</button>
+    </div>
+
+    <!-- ── Floating particles ── -->
+    <div id="tv-particles" aria-hidden="true" style="position:fixed; top:0; left:50%; transform:translateX(-50%); width:100%; max-width:430px; height:100vh; pointer-events:none; overflow:hidden; z-index:40;"></div>
+
+    <!-- ── Grain overlay (always on) ── -->
+    <div aria-hidden="true" style="position:fixed; top:0; left:50%; transform:translateX(-50%); width:100%; max-width:430px; height:100vh; pointer-events:none; z-index:45; opacity:.05; mix-blend-mode:multiply; background-image:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E&quot;);"></div>
+
+    <!-- ============ HERO ============ -->
+    <section style="position:relative; width:100%; height:100svh; min-height:640px; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; overflow:hidden;">
+      <div style="position:absolute; inset:0; background:url(tovus-img/hero.webp) center/cover no-repeat;"></div>
+      <div aria-hidden="true" style="position:absolute; inset:0; background: radial-gradient(82% 46% at 50% 43%, rgba(8,22,17,.52) 0%, rgba(8,22,17,.14) 58%, transparent 80%), linear-gradient(180deg, rgba(8,22,17,.14) 0%, rgba(8,22,17,.34) 42%, rgba(8,22,17,.52) 64%, rgba(8,22,17,.82) 100%);"></div>
+
+      <div style="position:relative; z-index:2; padding:0 30px;">
+        <div data-i18n="hero_kicker" style="font-family:'Cormorant Garamond',serif; text-transform:uppercase; letter-spacing:.44em; font-size:11.5px; font-weight:600; color:var(--gold-2); padding-left:.44em; margin-bottom:26px;">Biz oila quramiz</div>
+
+        <div id="tv-hero-a" style="font-family:'Parisienne','Cormorant Garamond',cursive; font-size:64px; line-height:1.16; padding:6px 8px 10px; color:transparent; background:linear-gradient(100deg,#B8934A,#E4CE8F 26%,#F5EAC4 50%,#C6A24A 72%,#B8934A); -webkit-background-clip:text; background-clip:text; background-size:220% auto; animation:sheen 8s linear infinite; filter:drop-shadow(0 3px 12px rgba(0,0,0,.4));"></div>
+        <div id="tv-hero-amp" style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:26px; color:var(--gold-2); margin:-2px 0; opacity:.92;">&amp;</div>
+        <div id="tv-hero-b" style="font-family:'Parisienne','Cormorant Garamond',cursive; font-size:64px; line-height:1.16; padding:6px 8px 10px; color:transparent; background:linear-gradient(100deg,#B8934A,#E4CE8F 26%,#F5EAC4 50%,#C6A24A 72%,#B8934A); -webkit-background-clip:text; background-clip:text; background-size:220% auto; animation:sheen 8s linear infinite .4s; filter:drop-shadow(0 3px 12px rgba(0,0,0,.4));"></div>
+
+        <div style="display:flex; align-items:center; justify-content:center; gap:14px; margin:30px 0 8px;">
+          <div style="height:1px; width:40px; background:linear-gradient(90deg, transparent, rgba(228,206,143,.85));"></div>
+          <div id="tv-hero-date" style="font-family:'Cormorant Garamond',serif; letter-spacing:.36em; font-size:16px; color:#F3ECD9; padding-left:.36em;"></div>
+          <div style="height:1px; width:40px; background:linear-gradient(90deg, rgba(228,206,143,.85), transparent);"></div>
+        </div>
+        <div style="font-family:'Cormorant Garamond',serif; text-transform:uppercase; letter-spacing:.34em; font-size:11px; color:rgba(243,236,217,.78); padding-left:.34em;"><span id="tv-hero-venue"></span><span id="tv-hero-city-wrap"> · <span id="tv-hero-city"></span></span></div>
+      </div>
+
+      <div style="position:absolute; bottom:30px; left:0; right:0; z-index:2; display:flex; flex-direction:column; align-items:center; gap:9px; animation:bob 2.6s ease-in-out infinite;">
+        <div data-i18n="scroll_hint" style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:13px; letter-spacing:.06em; color:rgba(243,236,217,.82);">Pastga suring</div>
+        <div style="width:9px; height:9px; border-right:1.5px solid var(--gold-2); border-bottom:1.5px solid var(--gold-2); transform:rotate(45deg);"></div>
+      </div>
+    </section>
+
+    <!-- ============ INVITATION ============ -->
+    <section style="padding:0 0 14px;">
+      <!-- FRAMED CENTREPIECE -->
+      <div data-reveal style="position:relative; background:linear-gradient(180deg, #0A2019 0%, #0A4C40 42%, #0A4C40 60%, #F3ECDD 100%);">
+        <img id="tv-frame-img" src="tovus-img/frame.webp" alt="Naqshinkor tovus va yasmin gullari ramkasi" style="width:100%; height:auto; display:block; -webkit-mask-image:radial-gradient(116% 96% at 50% 48%, #000 68%, transparent 99%); mask-image:radial-gradient(116% 96% at 50% 48%, #000 68%, transparent 99%);">
+        <div aria-hidden="true" style="position:absolute; inset:0; box-shadow:inset 0 0 70px 26px rgba(10,32,25,.85); pointer-events:none;"></div>
+        <div style="position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:20% 17% 15%;">
+          <div style="padding:20px 14px; border-radius:50%; background:radial-gradient(closest-side, rgba(250,247,240,.66), rgba(250,247,240,0) 82%);">
+            <div style="width:24px; height:24px; margin:0 auto 12px; border-radius:50%; background:radial-gradient(circle at 50% 45%, var(--peacock) 0 15%, var(--gold) 17% 32%, var(--teal) 34% 60%, var(--gold) 62% 74%, transparent 76%);"></div>
+            <div id="tv-frame-groom" style="font-family:'Parisienne','Cormorant Garamond',cursive; font-size:38px; line-height:1.2; padding:4px 6px; color:var(--emerald);"></div>
+            <div id="tv-frame-amp" style="font-family:'Cormorant Garamond',serif; font-size:18px; color:var(--gold); letter-spacing:.28em; margin:-2px 0;">&amp;</div>
+            <div id="tv-frame-bride" style="font-family:'Parisienne','Cormorant Garamond',cursive; font-size:38px; line-height:1.2; padding:4px 6px 8px; color:var(--emerald);"></div>
+            <div id="tv-frame-date" style="font-family:'Cormorant Garamond',serif; text-transform:uppercase; letter-spacing:.26em; font-size:11px; color:var(--teal-2); padding-left:.26em;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- INVITATION DETAILS -->
+      <div data-reveal style="margin:18px 22px 0; padding:40px 30px; background:linear-gradient(180deg, #FCFAF3, #F3ECDD); border:1px solid rgba(198,162,74,.24); box-shadow:0 34px 62px -34px rgba(12,30,26,.42), 0 12px 26px -18px rgba(12,30,26,.26), inset 0 1px 0 rgba(255,255,255,.6); text-align:center;">
+        <div data-i18n="inv_kicker" style="font-family:'Cormorant Garamond',serif; text-transform:uppercase; letter-spacing:.4em; font-size:11px; font-weight:600; color:var(--teal-2); padding-left:.4em; margin-bottom:16px;">Ota-onalarining duosi bilan</div>
+        <p data-i18n="inv_request" style="font-family:'Cormorant Garamond',serif; font-size:18px; line-height:1.75; color:var(--ink); margin:0 0 24px;"></p>
+
+        <div id="tv-inv-groom-block">
+          <div id="tv-inv-groom" style="font-family:'Cormorant Garamond',serif; font-size:20px; color:var(--emerald); font-style:italic;"></div>
+          <div id="tv-inv-groom-parents-wrap" style="margin-bottom:12px;">
+            <div id="tv-inv-groom-parents" data-i18n="groom_parents_default" style="font-family:'Cormorant Garamond',serif; font-size:14.5px; color:var(--ink-soft); font-style:italic;"></div>
+          </div>
+        </div>
+        <div id="tv-inv-amp" style="font-family:'Cormorant Garamond',serif; font-size:18px; color:var(--gold); letter-spacing:.3em; margin:2px 0 12px;">&amp;</div>
+        <div id="tv-inv-bride-block">
+          <div id="tv-inv-bride" style="font-family:'Cormorant Garamond',serif; font-size:20px; color:var(--emerald); font-style:italic;"></div>
+          <div id="tv-inv-bride-parents-wrap">
+            <div id="tv-inv-bride-parents" data-i18n="bride_parents_default" style="font-family:'Cormorant Garamond',serif; font-size:14.5px; color:var(--ink-soft); font-style:italic;"></div>
+          </div>
+        </div>
+
+        <div id="tv-quote-wrap">
+          <div style="display:flex; align-items:center; justify-content:center; gap:12px; margin:26px 0;">
+            <div style="height:1px; width:48px; background:linear-gradient(90deg, transparent, var(--gold));"></div>
+            <div style="width:7px; height:7px; transform:rotate(45deg); background:var(--gold);"></div>
+            <div style="height:1px; width:48px; background:linear-gradient(90deg, var(--gold), transparent);"></div>
+          </div>
+          <p id="tv-inv-quote" data-i18n="quote_default" style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:15px; line-height:1.7; color:var(--ink-soft); margin:22px 0 0;"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- GARLAND DIVIDER -->
+    <div data-reveal style="padding:22px 26px 34px; display:flex; justify-content:center;">
+      <img src="tovus-img/garland.webp" alt="Tovus pati va yasmin girlandi" style="width:100%; max-width:384px; height:auto; display:block; filter:drop-shadow(0 12px 20px rgba(12,30,26,.16));">
+    </div>
+
+    <!-- ============ EVENTS TIMELINE ============ -->
+    <section id="tv-events-section" style="padding:22px 26px 40px;">
+      <div data-reveal style="text-align:center; margin-bottom:38px;">
+        <div data-i18n="ev_kicker" style="font-family:'Cormorant Garamond',serif; text-transform:uppercase; letter-spacing:.42em; font-size:11.5px; font-weight:600; color:var(--teal-2); padding-left:.42em; margin-bottom:8px;">Tantanalar</div>
+        <div data-i18n="ev_title" style="font-family:'Cormorant Garamond',serif; font-weight:500; font-size:32px; color:var(--emerald);">Marosim tartibi</div>
+      </div>
+
+      <div id="tv-events" style="position:relative; padding-left:40px;">
+        <div aria-hidden="true" style="position:absolute; left:11px; top:6px; bottom:6px; width:1px; background:linear-gradient(180deg, var(--gold), rgba(198,162,74,.25));"></div>
+
+        <div class="tv-ev-row" data-reveal style="position:relative; margin-bottom:30px;">
+          <div style="position:absolute; left:-40px; top:2px; width:24px; height:24px; border-radius:50%; background:var(--ivory); border:1px solid var(--gold); display:flex; align-items:center; justify-content:center;"><div style="width:12px; height:12px; border-radius:50%; background:radial-gradient(circle at 50% 45%, var(--peacock) 0 22%, var(--gold) 26% 52%, var(--teal) 58% 100%);"></div></div>
+          <div style="background:linear-gradient(180deg, #FCFAF3, #F3ECDD); padding:24px 24px 26px; border:1px solid rgba(198,162,74,.22); box-shadow:0 24px 46px -30px rgba(12,30,26,.4), 0 8px 18px -14px rgba(12,30,26,.24), inset 0 1px 0 rgba(255,255,255,.55);">
+            <div data-i18n="ev1_kicker" style="font-family:'Cormorant Garamond',serif; text-transform:uppercase; letter-spacing:.3em; font-size:11px; color:var(--gold); padding-left:.3em; margin-bottom:6px;">Marosim</div>
+            <div data-i18n="ev1_title" style="font-family:'Cormorant Garamond',serif; font-size:27px; font-weight:500; color:var(--emerald); line-height:1.1; margin-bottom:6px;">Nikoh</div>
+            <p data-i18n="ev1_desc" style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:16px; color:var(--ink-soft); margin:0 0 16px;">Nikoh o'qilishi — muqaddas ahd marosimi</p>
+            <div style="display:flex; flex-direction:column; gap:5px; font-family:'Cormorant Garamond',serif; font-size:15.5px; color:var(--ink);">
+              <div><span data-i18n="ev_when_label" style="color:var(--teal-2); font-style:italic;">Qachon&nbsp;·&nbsp;</span><span id="tv-ev1-when"></span></div>
+              <div><span data-i18n="ev_where_label" style="color:var(--teal-2); font-style:italic;">Qayerda&nbsp;·&nbsp;</span><span id="tv-ev1-where"></span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tv-ev-row" data-reveal data-reveal-delay="90" style="position:relative;">
+          <div style="position:absolute; left:-40px; top:2px; width:24px; height:24px; border-radius:50%; background:var(--ivory); border:1px solid var(--gold); display:flex; align-items:center; justify-content:center;"><div style="width:12px; height:12px; border-radius:50%; background:radial-gradient(circle at 50% 45%, var(--peacock) 0 22%, var(--gold) 26% 52%, var(--teal) 58% 100%);"></div></div>
+          <div style="background:linear-gradient(180deg, #FCFAF3, #F3ECDD); padding:24px 24px 26px; border:1px solid rgba(198,162,74,.22); box-shadow:0 24px 46px -30px rgba(12,30,26,.4), 0 8px 18px -14px rgba(12,30,26,.24), inset 0 1px 0 rgba(255,255,255,.55);">
+            <div data-i18n="ev2_kicker" style="font-family:'Cormorant Garamond',serif; text-transform:uppercase; letter-spacing:.3em; font-size:11px; color:var(--gold); padding-left:.3em; margin-bottom:6px;">Ziyofat</div>
+            <div data-i18n="ev2_title" style="font-family:'Cormorant Garamond',serif; font-size:27px; font-weight:500; color:var(--emerald); line-height:1.1; margin-bottom:6px;">Bazm</div>
+            <p data-i18n="ev2_desc" style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:16px; color:var(--ink-soft); margin:0 0 16px;">Tantanali kechki ziyofat — davramizga marhamat</p>
+            <div style="display:flex; flex-direction:column; gap:5px; font-family:'Cormorant Garamond',serif; font-size:15.5px; color:var(--ink);">
+              <div><span data-i18n="ev_when_label" style="color:var(--teal-2); font-style:italic;">Qachon&nbsp;·&nbsp;</span><span id="tv-ev2-when"></span></div>
+              <div><span data-i18n="ev_where_label" style="color:var(--teal-2); font-style:italic;">Qayerda&nbsp;·&nbsp;</span><span id="tv-ev2-where"></span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- divider -->
+    <div data-reveal style="display:flex; align-items:center; justify-content:center; gap:16px; padding:8px 26px 26px;">
+      <div style="height:1px; width:84px; background:linear-gradient(90deg, transparent, var(--gold));"></div>
+      <div style="width:18px; height:18px; border-radius:50%; background:radial-gradient(circle at 50% 45%, var(--peacock) 0 16%, var(--gold) 18% 33%, var(--teal) 35% 60%, var(--gold) 62% 74%, transparent 76%);"></div>
+      <div style="height:1px; width:84px; background:linear-gradient(90deg, var(--gold), transparent);"></div>
+    </div>
+
+    <!-- ============ VENUE / MAP ============ -->
+    <section style="position:relative; width:100%; height:560px; margin:4px 0 0; display:flex; flex-direction:column; align-items:center; justify-content:flex-end; text-align:center; overflow:hidden;">
+      <div style="position:absolute; inset:0; background:url(tovus-img/venue.webp) center/cover no-repeat;"></div>
+      <div aria-hidden="true" style="position:absolute; inset:0; background:linear-gradient(180deg, #F6F1E7 0%, rgba(246,241,231,0) 15%, rgba(8,22,17,0) 40%, rgba(8,22,17,.42) 68%, rgba(8,22,17,.86) 100%);"></div>
+
+      <div style="position:relative; z-index:2; padding:0 28px 76px;">
+        <div data-i18n="venue_kicker" style="font-family:'Cormorant Garamond',serif; text-transform:uppercase; letter-spacing:.42em; font-size:11px; font-weight:600; color:var(--gold-2); padding-left:.42em; margin-bottom:10px;">Manzil</div>
+        <div id="tv-venue-name" style="font-family:'Parisienne','Cormorant Garamond',cursive; font-size:46px; line-height:1.2; padding:4px 0 8px; color:#F5EAC4; margin-bottom:6px;"></div>
+        <p id="tv-venue-addr" style="font-family:'Cormorant Garamond',serif; font-size:15.5px; line-height:1.6; color:rgba(243,236,217,.86); margin:0 0 22px;"></p>
+        <a id="tv-map"  target="_blank" rel="noopener noreferrer" style="display:inline-flex; align-items:center; gap:9px; font-family:'Cormorant Garamond',serif; text-transform:uppercase; letter-spacing:.28em; font-size:12.5px; font-weight:600; color:#0C1E1A; text-decoration:none; background:linear-gradient(180deg,#E4CE8F,#C6A24A); padding:14px 26px 14px 30px; border-radius:1px;"><span data-i18n="btn_map">Xaritada ochish</span> <span style="width:6px; height:6px; border-right:1.5px solid #0C1E1A; border-top:1.5px solid #0C1E1A; transform:rotate(45deg);"></span></a>
+      </div>
+    </section>
+
+    <!-- ============ GUEST INFO ============ -->
+    <section id="tv-info-section" style="margin-top:-46px; padding:0 22px 44px; position:relative; z-index:3;">
+      <div data-reveal style="background:linear-gradient(160deg,#127C74,#0A4C40); padding:36px 28px 32px; text-align:center; border:1px solid rgba(198,162,74,.3); box-shadow:0 40px 70px -34px rgba(8,22,17,.62), 0 14px 30px -16px rgba(8,22,17,.45);">
+        <div data-i18n="info_kicker" style="font-family:'Cormorant Garamond',serif; text-transform:uppercase; letter-spacing:.42em; font-size:11px; font-weight:600; color:var(--gold-2); padding-left:.42em; margin-bottom:6px;">Bilib qo'ying</div>
+        <div data-i18n="info_title" style="font-family:'Cormorant Garamond',serif; font-size:26px; color:#FBF7EE; margin-bottom:24px;">Mehmonlar uchun</div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:22px 20px; text-align:left;">
+          <div id="tv-info-dress">
+            <div data-i18n="info_dress_label" style="font-family:'Cormorant Garamond',serif; text-transform:uppercase; letter-spacing:.22em; font-size:10.5px; color:var(--gold-2); margin-bottom:4px;">Kiyim</div>
+            <div id="tv-info-dress-text" data-i18n="info_dress_default" style="font-family:'Cormorant Garamond',serif; font-size:16px; color:#F1ECDE; line-height:1.4;"></div>
+          </div>
+          <div id="tv-info-timing">
+            <div data-i18n="info_timing_label" style="font-family:'Cormorant Garamond',serif; text-transform:uppercase; letter-spacing:.22em; font-size:10.5px; color:var(--gold-2); margin-bottom:4px;">Vaqtlar</div>
+            <div id="tv-info-timing-text" data-i18n="info_timing_default" style="font-family:'Cormorant Garamond',serif; font-size:16px; color:#F1ECDE; line-height:1.4;"></div>
+          </div>
+          <div id="tv-info-rsvp">
+            <div data-i18n="info_rsvp_label" style="font-family:'Cormorant Garamond',serif; text-transform:uppercase; letter-spacing:.22em; font-size:10.5px; color:var(--gold-2); margin-bottom:4px;">Tasdiqlash</div>
+            <div id="tv-info-rsvp-text" data-i18n="info_rsvp_default" style="font-family:'Cormorant Garamond',serif; font-size:16px; color:#F1ECDE; line-height:1.4;"></div>
+          </div>
+          <div id="tv-info-parking">
+            <div data-i18n="info_parking_label" style="font-family:'Cormorant Garamond',serif; text-transform:uppercase; letter-spacing:.22em; font-size:10.5px; color:var(--gold-2); margin-bottom:4px;">Avtoturargoh</div>
+            <div id="tv-info-parking-text" data-i18n="info_parking_default" style="font-family:'Cormorant Garamond',serif; font-size:16px; color:#F1ECDE; line-height:1.4;"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ WISHES ============ -->
+    <section style="padding:6px 26px 44px;">
+      <div data-reveal style="text-align:center; margin-bottom:26px;">
+        <div data-i18n="wish_kicker" style="font-family:'Cormorant Garamond',serif; text-transform:uppercase; letter-spacing:.42em; font-size:11.5px; font-weight:600; color:var(--teal-2); padding-left:.42em; margin-bottom:8px;">Tilaklar</div>
+        <div data-i18n="wish_title" style="font-family:'Cormorant Garamond',serif; font-weight:500; font-size:31px; color:var(--emerald); line-height:1.15;">Tilaklaringizni qoldiring</div>
+        <p data-i18n="wish_sub" style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:16px; color:var(--ink-soft); margin:8px 0 0;">Sizning iliq so'zlaringiz biz uchun qadrli</p>
+      </div>
+
+      <form id="tv-wish-form" class="wish-form" data-reveal style="display:flex; flex-direction:column; gap:12px; margin-bottom:22px;">
+        <input name="wname" data-i18n-ph="wish_name_ph" placeholder="Ismingiz" style="width:100%; font-size:16px; color:var(--ink); background:#FCF9F1; border:1px solid rgba(198,162,74,.45); border-radius:2px; padding:13px 15px; outline:none;">
+        <textarea name="wmsg" rows="3" data-i18n-ph="wish_msg_ph" placeholder="Tilagingizni yozing…" style="width:100%; font-size:16px; color:var(--ink); background:#FCF9F1; border:1px solid rgba(198,162,74,.45); border-radius:2px; padding:13px 15px; outline:none; resize:vertical; line-height:1.55;"></textarea>
+        <button type="submit" style="width:100%; font-family:'Cormorant Garamond',serif; text-transform:uppercase; letter-spacing:.28em; font-size:13px; font-weight:600; color:#FBF7EE; background:linear-gradient(180deg,#0E6B62,#0A4C40); border:none; border-radius:2px; padding:15px; cursor:pointer;"><span data-i18n="btn_send">Tilak yo'llash</span></button>
+      </form>
+
+      <div id="tv-wish-confirm" data-i18n="wish_thanks" style="display:none; text-align:center; font-family:'Cormorant Garamond',serif; font-style:italic; font-size:15px; color:var(--teal-2); margin-bottom:18px;">Rahmat — tilagingiz saqlandi ♡</div>
+      <div id="tv-wish-empty" data-i18n="wish_empty" style="text-align:center; font-family:'Cormorant Garamond',serif; font-style:italic; font-size:16px; color:var(--ink-soft); opacity:.8; padding:14px 0;">Birinchi bo'lib tilak qoldiring.</div>
+      <div id="tv-wish-list" style="display:flex; flex-direction:column; gap:12px;"></div>
+    </section>
+
+    <!-- ============ COUNTDOWN ============ -->
+    <section style="position:relative; padding:52px 30px 56px; text-align:center; overflow:hidden;">
+      <div style="position:absolute; inset:0; background:url(tovus-img/countdown.webp) center/cover no-repeat;"></div>
+      <div aria-hidden="true" style="position:absolute; inset:0; background:linear-gradient(180deg, rgba(8,22,17,.3) 0%, rgba(8,22,17,.4) 55%, rgba(8,22,17,.6) 100%);"></div>
+
+      <div style="position:relative; z-index:2;">
+        <div data-i18n="cd_kicker" style="font-family:'Cormorant Garamond',serif; text-transform:uppercase; letter-spacing:.42em; font-size:11px; font-weight:600; color:var(--gold-2); padding-left:.42em; margin-bottom:8px;">Kunlarni sanayapmiz</div>
+        <div data-i18n="cd_title" style="font-family:'Parisienne','Cormorant Garamond',cursive; font-size:38px; line-height:1.2; padding:4px 0 8px; color:#F5EAC4; margin-bottom:26px;">Visol kunigacha</div>
+
+        <div id="tv-cd-grid" style="display:flex; align-items:stretch; justify-content:center; gap:0;">
+          <div style="flex:1;">
+            <div id="tv-cd-d" style="font-family:'Cormorant Garamond',serif; font-weight:500; font-size:44px; color:#FBF7EE; line-height:1;">–</div>
+            <div data-i18n="cd_days" style="font-family:'Cormorant Garamond',serif; text-transform:uppercase; letter-spacing:.18em; font-size:10px; color:var(--gold-2); margin-top:6px;">Kun</div>
+          </div>
+          <div style="width:1px; background:rgba(198,162,74,.4); margin:4px 0;"></div>
+          <div style="flex:1;">
+            <div id="tv-cd-h" style="font-family:'Cormorant Garamond',serif; font-weight:500; font-size:44px; color:#FBF7EE; line-height:1;">–</div>
+            <div data-i18n="cd_hours" style="font-family:'Cormorant Garamond',serif; text-transform:uppercase; letter-spacing:.18em; font-size:10px; color:var(--gold-2); margin-top:6px;">Soat</div>
+          </div>
+          <div style="width:1px; background:rgba(198,162,74,.4); margin:4px 0;"></div>
+          <div style="flex:1;">
+            <div id="tv-cd-m" style="font-family:'Cormorant Garamond',serif; font-weight:500; font-size:44px; color:#FBF7EE; line-height:1;">–</div>
+            <div data-i18n="cd_mins" style="font-family:'Cormorant Garamond',serif; text-transform:uppercase; letter-spacing:.18em; font-size:10px; color:var(--gold-2); margin-top:6px;">Daqiqa</div>
+          </div>
+          <div style="width:1px; background:rgba(198,162,74,.4); margin:4px 0;"></div>
+          <div style="flex:1;">
+            <div id="tv-cd-s" style="font-family:'Cormorant Garamond',serif; font-weight:500; font-size:44px; color:#FBF7EE; line-height:1;">–</div>
+            <div data-i18n="cd_secs" style="font-family:'Cormorant Garamond',serif; text-transform:uppercase; letter-spacing:.18em; font-size:10px; color:var(--gold-2); margin-top:6px;">Soniya</div>
+          </div>
+        </div>
+        <div id="tv-cd-arrived" data-i18n="cd_arrived" style="display:none; font-family:'Cormorant Garamond',serif; font-style:italic; font-size:24px; color:#FBF7EE; line-height:1.4;">Kutilgan kun keldi.</div>
+      </div>
+    </section>
+
+    <!-- ============ FOOTER ============ -->
+    <footer style="background:linear-gradient(180deg, #0C1E1A, #081511); padding:48px 30px 44px; text-align:center;">
+      <img src="tovus-img/crest.webp" alt="Tovus gerbi" style="width:108px; height:auto; margin:0 auto 14px; display:block; opacity:.96;">
+      <div id="tv-foot-names" style="font-family:'Parisienne','Cormorant Garamond',cursive; font-size:44px; line-height:1.2; padding:4px 8px 8px; color:transparent; background:linear-gradient(100deg,#B8934A,#E4CE8F 40%,#C6A24A 70%,#B8934A); -webkit-background-clip:text; background-clip:text;"></div>
+      <div id="tv-foot-meta" style="font-family:'Cormorant Garamond',serif; text-transform:uppercase; letter-spacing:.34em; font-size:11px; color:rgba(243,236,217,.7); padding-left:.34em; margin:12px 0 26px;"></div>
+      <p id="tv-foot-note" data-i18n="footer_note_default" style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:15px; color:rgba(243,236,217,.72); margin:0;"></p>
+    </footer>
+
+    <!-- ============ MUSIC TOGGLE ============ -->
+    <div aria-hidden="false" style="position:fixed; bottom:0; left:50%; transform:translateX(-50%); width:100%; max-width:430px; height:0; z-index:60; pointer-events:none;">
+      <button type="button" id="tv-music" aria-label="Musiqa" style="display:none; position:absolute; right:18px; bottom:20px; width:46px; height:46px; border-radius:50%; border:1px solid rgba(198,162,74,.6); background:linear-gradient(180deg,#0E6B62,#0A4C40); box-shadow:0 8px 22px -10px rgba(0,0,0,.7); cursor:pointer; pointer-events:auto; align-items:center; justify-content:center; gap:2.5px; padding:0;">
+        <span id="tv-music-on" style="display:none; align-items:flex-end; gap:2.5px; height:16px;">
+          <span style="width:2.5px; height:16px; background:var(--gold-2); transform-origin:bottom; animation:eq .9s ease-in-out infinite;"></span>
+          <span style="width:2.5px; height:16px; background:var(--gold-2); transform-origin:bottom; animation:eq .9s ease-in-out .3s infinite;"></span>
+          <span style="width:2.5px; height:16px; background:var(--gold-2); transform-origin:bottom; animation:eq .9s ease-in-out .15s infinite;"></span>
+          <span style="width:2.5px; height:16px; background:var(--gold-2); transform-origin:bottom; animation:eq .9s ease-in-out .45s infinite;"></span>
+        </span>
+        <span id="tv-music-off" style="position:relative; display:flex; align-items:flex-end; gap:2.5px; height:16px; opacity:.62;">
+          <span style="width:2.5px; height:6px; background:var(--gold-2);"></span>
+          <span style="width:2.5px; height:11px; background:var(--gold-2);"></span>
+          <span style="width:2.5px; height:8px; background:var(--gold-2);"></span>
+          <span style="width:2.5px; height:13px; background:var(--gold-2);"></span>
+          <span style="position:absolute; left:-3px; top:50%; width:26px; height:1.5px; background:var(--gold-2); transform:rotate(-32deg);"></span>
+        </span>
+      </button>
+    </div>
+
+    <!-- ============ SPLASH ============ -->
+    <div id="tv-splash" style="position:fixed; top:0; left:50%; transform:translateX(-50%); width:100%; max-width:430px; height:100vh; z-index:100; display:flex; align-items:center; justify-content:center; opacity:1; pointer-events:auto; transition:opacity .9s ease, transform 1.1s cubic-bezier(.5,0,.2,1);">
+      <div style="position:relative; width:100%; max-width:430px; height:100%; padding:0 34px; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; background: radial-gradient(120% 90% at 50% 16%, #14362B 0%, #0C1E1A 58%, #081511 100%);">
+        <div aria-hidden="true" style="position:absolute; top:20px; bottom:20px; left:20px; right:20px; border:1px solid rgba(198,162,74,.42); outline:1px solid rgba(198,162,74,.2); outline-offset:-5px; pointer-events:none;">
+          <div style="position:absolute; top:-4px; left:-4px; width:7px; height:7px; transform:rotate(45deg); background:var(--gold);"></div>
+          <div style="position:absolute; top:-4px; right:-4px; width:7px; height:7px; transform:rotate(45deg); background:var(--gold);"></div>
+          <div style="position:absolute; bottom:-4px; left:-4px; width:7px; height:7px; transform:rotate(45deg); background:var(--gold);"></div>
+          <div style="position:absolute; bottom:-4px; right:-4px; width:7px; height:7px; transform:rotate(45deg); background:var(--gold);"></div>
+        </div>
+
+        <img src="tovus-img/crest.webp" alt="Tovus gerbi" style="width:150px; height:auto; margin-bottom:26px; filter:drop-shadow(0 10px 22px rgba(0,0,0,.45)); animation:rise .9s cubic-bezier(.22,.61,.36,1) both;">
+
+        <div data-i18n="splash_kicker" style="font-family:'Cormorant Garamond',serif; text-transform:uppercase; letter-spacing:.42em; font-size:10.5px; color:var(--gold-2); padding-left:.42em; margin-bottom:20px; animation:rise .9s cubic-bezier(.22,.61,.36,1) .1s both;">Nikoh taklifnomasi</div>
+
+        <div id="tv-splash-names" style="font-family:'Parisienne','Cormorant Garamond',cursive; font-size:52px; line-height:1.18; padding:4px 8px 10px; color:transparent; background:linear-gradient(100deg,#B8934A,#E4CE8F 40%,#F5EAC4 55%,#C6A24A 78%,#B8934A); -webkit-background-clip:text; background-clip:text; background-size:220% auto; animation:sheen 8s linear infinite, rise .9s cubic-bezier(.22,.61,.36,1) .18s both;"></div>
+
+        <div style="display:flex; align-items:center; justify-content:center; gap:12px; margin:22px 0 28px; animation:rise .9s cubic-bezier(.22,.61,.36,1) .26s both;">
+          <div style="height:1px; width:38px; background:linear-gradient(90deg, transparent, var(--gold));"></div>
+          <div id="tv-splash-date" style="font-family:'Cormorant Garamond',serif; letter-spacing:.3em; font-size:12px; color:rgba(243,236,217,.72); padding-left:.3em;"></div>
+          <div style="height:1px; width:38px; background:linear-gradient(90deg, var(--gold), transparent);"></div>
+        </div>
+
+        <button type="button" id="tv-open" style="font-family:'Cormorant Garamond',serif; text-transform:uppercase; letter-spacing:.34em; font-size:13px; font-weight:600; color:#0C1E1A; background:linear-gradient(180deg,#E4CE8F,#C6A24A); border:none; border-radius:1px; padding:16px 40px 16px 44px; cursor:pointer; animation:glow 3.4s ease-in-out infinite, rise .9s cubic-bezier(.22,.61,.36,1) .34s both;"><span data-i18n="splash_open">Taklifnomani ochish</span></button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script src="copy.js"></script><script src="source/motion.js"></script><script src="source/closing-panel.js"></script><script src="bridge.js"></script></body></html>

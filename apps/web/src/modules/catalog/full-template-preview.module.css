@@ -30,6 +30,13 @@
   visibility: visible;
 }
 
+/* These source designs keep their language controls fixed along the top edge. */
+@media (max-width: 600px) {
+  .templateLanguageClearance {
+    top: max(68px, calc(env(safe-area-inset-top) + 60px));
+  }
+}
+
 .backButton,
 .createButton {
   position: absolute;

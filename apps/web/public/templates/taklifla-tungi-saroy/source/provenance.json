@@ -1,0 +1,232 @@
+{
+  "id": "taklifla-tungi-saroy",
+  "name": "Tungi Saroy",
+  "private": false,
+  "capture": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/taklifla.uz/templates/midnight-palace__40820cc7bb626b43.html",
+  "captureSha256": "3629a209675891ecb0141e5bd0d703b5c1882642e6c3702211bc79fbe5e0ded4",
+  "sourceCssSha256": "c9f75166c53bed9888609cb73d259aa9af099e8e74108eecece1cb39682501f8",
+  "fontStylesheetCapture": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/fonts.googleapis.com/css2__72e06e297789428b",
+  "fontStylesheetSha256": "cbafc522d2b770d86fdd81563deb3edaf97d46ec7325920a4c828d8329fad8fc",
+  "wishCloseCaptureSha256": "68865a0551e3d058b5490d6359d9f93b0f500e9d92db885e28ff5b4702fd4c43",
+  "dependencies": [
+    {
+      "capture": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/taklifla.uz/templates/midnight-palace-img/countdown.webp",
+      "path": "assets/countdown.webp",
+      "url": null,
+      "sha256": "415a0c4d8dbd2bd3efb4aa340ab345b26c007bebba9c084aad67970e964b7c80",
+      "bytes": 199804
+    },
+    {
+      "capture": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/taklifla.uz/templates/midnight-palace-img/divider.webp",
+      "path": "assets/divider.webp",
+      "url": null,
+      "sha256": "ce23e546a24d549207010a4e579990420eebc7131961355131220991ce723765",
+      "bytes": 35806
+    },
+    {
+      "capture": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/taklifla.uz/templates/midnight-palace-img/frame.webp",
+      "path": "assets/frame.webp",
+      "url": null,
+      "sha256": "bb2370ca73ade8b614a7ba42f2bf76448653c92187ac8ca02ae0f98071e46da4",
+      "bytes": 624514
+    },
+    {
+      "capture": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/taklifla.uz/templates/midnight-palace-img/garland.webp",
+      "path": "assets/garland.webp",
+      "url": null,
+      "sha256": "1f478fd9178b731a7af086b0a0a89c07d157b7f7aa5b81b0671d546e812b40ec",
+      "bytes": 412308
+    },
+    {
+      "capture": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/taklifla.uz/templates/midnight-palace-img/hero.webp",
+      "path": "assets/hero.webp",
+      "url": null,
+      "sha256": "a8a9e3c225421e3b18c7b862874decc4a230d66447dea0df37dfc5b60808520f",
+      "bytes": 189486
+    },
+    {
+      "capture": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/taklifla.uz/templates/midnight-palace-img/venue.webp",
+      "path": "assets/venue.webp",
+      "url": null,
+      "sha256": "3ef02b149f6fbb08b4bd8e755b4094d031b57522abb02dbb30d166fbd05725f1",
+      "bytes": 422000
+    },
+    {
+      "capture": null,
+      "path": "assets/fonts/SlGFmQSNjdsmc35JDF1K5GRwUjcdlttVFm-rI7e8QL9wU6ingQ.woff2",
+      "url": "https://fonts.gstatic.com/s/ebgaramond/v33/SlGFmQSNjdsmc35JDF1K5GRwUjcdlttVFm-rI7e8QL9wU6ingQ.woff2",
+      "sha256": "69762e1dda54fb65b871792ec3a42c182bf10ab68e8045c27ec3b0be2737dd24",
+      "bytes": 17952
+    },
+    {
+      "capture": null,
+      "path": "assets/fonts/SlGFmQSNjdsmc35JDF1K5GRwUjcdlttVFm-rI7e8QL95U6ingQ.woff2",
+      "url": "https://fonts.gstatic.com/s/ebgaramond/v33/SlGFmQSNjdsmc35JDF1K5GRwUjcdlttVFm-rI7e8QL95U6ingQ.woff2",
+      "sha256": "2471084322da28cd71b77972fe5261495bd923b41edbfe1c1b7220959e274185",
+      "bytes": 13572
+    },
+    {
+      "capture": null,
+      "path": "assets/fonts/SlGFmQSNjdsmc35JDF1K5GRwUjcdlttVFm-rI7e8QL9xU6ingQ.woff2",
+      "url": "https://fonts.gstatic.com/s/ebgaramond/v33/SlGFmQSNjdsmc35JDF1K5GRwUjcdlttVFm-rI7e8QL9xU6ingQ.woff2",
+      "sha256": "0fbbfca37bdd1b4f99f7c38ad25918e25a620aabc4bbc13e78f9319cb0a5a718",
+      "bytes": 6608
+    },
+    {
+      "capture": null,
+      "path": "assets/fonts/SlGFmQSNjdsmc35JDF1K5GRwUjcdlttVFm-rI7e8QL9-U6ingQ.woff2",
+      "url": "https://fonts.gstatic.com/s/ebgaramond/v33/SlGFmQSNjdsmc35JDF1K5GRwUjcdlttVFm-rI7e8QL9-U6ingQ.woff2",
+      "sha256": "9a9f37128dd79d5a77aa61c0c91b8ce9957bf202c35721b13430a157819f53e3",
+      "bytes": 10500
+    },
+    {
+      "capture": null,
+      "path": "assets/fonts/SlGFmQSNjdsmc35JDF1K5GRwUjcdlttVFm-rI7e8QL9yU6ingQ.woff2",
+      "url": "https://fonts.gstatic.com/s/ebgaramond/v33/SlGFmQSNjdsmc35JDF1K5GRwUjcdlttVFm-rI7e8QL9yU6ingQ.woff2",
+      "sha256": "7b8ef3e70791929569af845b202150cdf8165f2a6a50ffef49cf897bde9b8c7a",
+      "bytes": 6268
+    },
+    {
+      "capture": null,
+      "path": "assets/fonts/SlGFmQSNjdsmc35JDF1K5GRwUjcdlttVFm-rI7e8QL9zU6ingQ.woff2",
+      "url": "https://fonts.gstatic.com/s/ebgaramond/v33/SlGFmQSNjdsmc35JDF1K5GRwUjcdlttVFm-rI7e8QL9zU6ingQ.woff2",
+      "sha256": "a7aad7b598be80caf14221e4b3066676537a2010bb51c1609e6b68973adb01d7",
+      "bytes": 45468
+    },
+    {
+      "capture": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/fonts.gstatic.com/s/ebgaramond/v33/SlGFmQSNjdsmc35JDF1K5GRwUjcdlttVFm-rI7e8QL99U6g.woff2",
+      "path": "assets/fonts/SlGFmQSNjdsmc35JDF1K5GRwUjcdlttVFm-rI7e8QL99U6g.woff2",
+      "url": "https://fonts.gstatic.com/s/ebgaramond/v33/SlGFmQSNjdsmc35JDF1K5GRwUjcdlttVFm-rI7e8QL99U6g.woff2",
+      "sha256": "fc5851c4466e73bec048bb62d65f8abadf70d602816687e6d364214e35fa8abb",
+      "bytes": 25388
+    },
+    {
+      "capture": null,
+      "path": "assets/fonts/SlGUmQSNjdsmc35JDF1K5GR4SDktYw.woff2",
+      "url": "https://fonts.gstatic.com/s/ebgaramond/v33/SlGUmQSNjdsmc35JDF1K5GR4SDktYw.woff2",
+      "sha256": "7738b6004721f3d23e4e284b1055120f0ac1fd96fd01e5786b58b3042998876c",
+      "bytes": 33948
+    },
+    {
+      "capture": null,
+      "path": "assets/fonts/SlGUmQSNjdsmc35JDF1K5GRxSDktYw.woff2",
+      "url": "https://fonts.gstatic.com/s/ebgaramond/v33/SlGUmQSNjdsmc35JDF1K5GRxSDktYw.woff2",
+      "sha256": "197ed98b8524dd8664aefb5d5ef4ca515d2df1ef90d3f771e19cb0893b95cc2b",
+      "bytes": 26024
+    },
+    {
+      "capture": null,
+      "path": "assets/fonts/SlGUmQSNjdsmc35JDF1K5GR5SDktYw.woff2",
+      "url": "https://fonts.gstatic.com/s/ebgaramond/v33/SlGUmQSNjdsmc35JDF1K5GR5SDktYw.woff2",
+      "sha256": "3cd432d0dc2b756e69eea4325fd40f3515a31753445238f7fb5d349588192511",
+      "bytes": 11484
+    },
+    {
+      "capture": null,
+      "path": "assets/fonts/SlGUmQSNjdsmc35JDF1K5GR2SDktYw.woff2",
+      "url": "https://fonts.gstatic.com/s/ebgaramond/v33/SlGUmQSNjdsmc35JDF1K5GR2SDktYw.woff2",
+      "sha256": "f6475b2f7530f248b5d3a0237d97dc2e1987665153dcb888fbeea3b0f9019b56",
+      "bytes": 19868
+    },
+    {
+      "capture": null,
+      "path": "assets/fonts/SlGUmQSNjdsmc35JDF1K5GR6SDktYw.woff2",
+      "url": "https://fonts.gstatic.com/s/ebgaramond/v33/SlGUmQSNjdsmc35JDF1K5GR6SDktYw.woff2",
+      "sha256": "af68d0b256558e0fecffabca6696d47c78902249db6bc7e1ac9964980a610a77",
+      "bytes": 10952
+    },
+    {
+      "capture": null,
+      "path": "assets/fonts/SlGUmQSNjdsmc35JDF1K5GR7SDktYw.woff2",
+      "url": "https://fonts.gstatic.com/s/ebgaramond/v33/SlGUmQSNjdsmc35JDF1K5GR7SDktYw.woff2",
+      "sha256": "f8d3fa06e20989a938972165406a1b731cdc7fe33ff2b0b6798c75aa63709901",
+      "bytes": 113928
+    },
+    {
+      "capture": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/fonts.gstatic.com/s/ebgaramond/v33/SlGUmQSNjdsmc35JDF1K5GR1SDk.woff2",
+      "path": "assets/fonts/SlGUmQSNjdsmc35JDF1K5GR1SDk.woff2",
+      "url": "https://fonts.gstatic.com/s/ebgaramond/v33/SlGUmQSNjdsmc35JDF1K5GR1SDk.woff2",
+      "sha256": "88603384163d301aebd5bd769832a8bfe3c9004ec24178417b9817f0ad32c63b",
+      "bytes": 44336
+    },
+    {
+      "capture": null,
+      "path": "assets/fonts/RWmMoKWR9v4ksMfaWd_JN9XIiaQ6DQ.woff2",
+      "url": "https://fonts.gstatic.com/s/greatvibes/v21/RWmMoKWR9v4ksMfaWd_JN9XIiaQ6DQ.woff2",
+      "sha256": "6b071406bf0cb2c4a84a01ffbabe275032dca341733fe7f4ece8a1d4a615e44b",
+      "bytes": 4548
+    },
+    {
+      "capture": null,
+      "path": "assets/fonts/RWmMoKWR9v4ksMfaWd_JN9XBiaQ6DQ.woff2",
+      "url": "https://fonts.gstatic.com/s/greatvibes/v21/RWmMoKWR9v4ksMfaWd_JN9XBiaQ6DQ.woff2",
+      "sha256": "80b935e653c6426a8780daca822409f546c8a9bc0ea41fd3c0f98dcf456463f5",
+      "bytes": 45244
+    },
+    {
+      "capture": null,
+      "path": "assets/fonts/RWmMoKWR9v4ksMfaWd_JN9XJiaQ6DQ.woff2",
+      "url": "https://fonts.gstatic.com/s/greatvibes/v21/RWmMoKWR9v4ksMfaWd_JN9XJiaQ6DQ.woff2",
+      "sha256": "36cccce6b2eb27eba45a96660f52d4a1d4a0a30822150b9600eebd67be9462a8",
+      "bytes": 3224
+    },
+    {
+      "capture": null,
+      "path": "assets/fonts/RWmMoKWR9v4ksMfaWd_JN9XKiaQ6DQ.woff2",
+      "url": "https://fonts.gstatic.com/s/greatvibes/v21/RWmMoKWR9v4ksMfaWd_JN9XKiaQ6DQ.woff2",
+      "sha256": "9b624180d019ee43faf972e083bf81dfafabf43234ac9e80ba2d93013f25a3d0",
+      "bytes": 11640
+    },
+    {
+      "capture": null,
+      "path": "assets/fonts/RWmMoKWR9v4ksMfaWd_JN9XLiaQ6DQ.woff2",
+      "url": "https://fonts.gstatic.com/s/greatvibes/v21/RWmMoKWR9v4ksMfaWd_JN9XLiaQ6DQ.woff2",
+      "sha256": "b63469c752efac950ef0497a345e3823d70211b70f60d61887066a87bc3b62f3",
+      "bytes": 66480
+    },
+    {
+      "capture": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/fonts.gstatic.com/s/greatvibes/v21/RWmMoKWR9v4ksMfaWd_JN9XFiaQ.woff2",
+      "path": "assets/fonts/RWmMoKWR9v4ksMfaWd_JN9XFiaQ.woff2",
+      "url": "https://fonts.gstatic.com/s/greatvibes/v21/RWmMoKWR9v4ksMfaWd_JN9XFiaQ.woff2",
+      "sha256": "c59dc73d29daf142ef2431f455d21464172374aa750d793a79d608735db2d856",
+      "bytes": 42800
+    },
+    {
+      "capture": null,
+      "path": "assets/fonts/wEO_EBrOk8hQLDvIAF81WPoK7Es.woff2",
+      "url": "https://fonts.gstatic.com/s/marcellus/v14/wEO_EBrOk8hQLDvIAF81WPoK7Es.woff2",
+      "sha256": "1d5a9870851a0dac4c92c1237b792886704b46050162afc2a0b1990f4f0095a3",
+      "bytes": 8912
+    },
+    {
+      "capture": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/fonts.gstatic.com/s/marcellus/v14/wEO_EBrOk8hQLDvIAF81VvoK.woff2",
+      "path": "assets/fonts/wEO_EBrOk8hQLDvIAF81VvoK.woff2",
+      "url": "https://fonts.gstatic.com/s/marcellus/v14/wEO_EBrOk8hQLDvIAF81VvoK.woff2",
+      "sha256": "8a539799d12e3a144273288055490f57e1eee84da7a9145f085bc522e80719c3",
+      "bytes": 14552
+    }
+  ],
+  "excluded": [
+    "Cloudflare analytics beacon",
+    "provider API and localStorage demo guestbook",
+    "provider parent-shell gesture handshake",
+    "URL customizer with source demo fallbacks"
+  ],
+  "sourceMotion": [
+    "12 deterministic fireflies in hero and countdown",
+    "mpFade .95s scroll reveal at threshold .12",
+    "splash opacity .9s, removal 950ms",
+    "source CSS shimmer/bob/twinkle/pulse keyframes"
+  ],
+  "unsupportedSourceFields": [
+    "separate groom/bride parents (one shared hosts field available)",
+    "weather guidance",
+    "hotel/airport travel guidance",
+    "hashtag",
+    "independent footer note",
+    "per-program date and place (only same-day time/title/description available)"
+  ],
+  "registered": true,
+  "published": true,
+  "verifiedAt": "2026-10-29"
+}

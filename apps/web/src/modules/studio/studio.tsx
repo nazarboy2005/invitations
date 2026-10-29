@@ -80,6 +80,8 @@ import { JannatBogiInvitation } from "@/templates/onlinetaklifnoma/jannat-bogi";
 import { TojmahalOltinDarvozasiInvitation } from "@/templates/onlinetaklifnoma/tojmahal-oltin-darvozasi";
 import { WedivoPulauSehati } from "@/templates/wedivo-pulau-sehati/renderer";
 import { TakliflaAsalari } from "@/templates/taklifla-asalari/renderer";
+import { TungiSaroyInvitation } from "@/templates/taklifla-tungi-saroy/renderer";
+import { TakliflaTovus } from "@/templates/taklifla-tovus/renderer";
 import { TakliflaTortFasl } from "@/templates/taklifla-tort-fasl/renderer";
 import { MuhrliMaktubInvitation } from "@/templates/taklifla-muhrli-maktub/renderer";
 import { isChorloveTemplate, ChorloveInvitation } from "@/templates/chorlove";
@@ -3893,6 +3895,10 @@ export function Studio({
                 preview
                 catalogMusic={section === 0 && !authoredPreview}
               />
+            ) : invitation.templateId === "taklifla-tungi-saroy" ? (
+              <TungiSaroyInvitation invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview fullPreview catalogMusic={section === 0 && !authoredPreview} silentPlayback />
+            ) : invitation.templateId === "taklifla-tovus" ? (
+              <TakliflaTovus invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview fullPreview catalogMusic={section === 0 && !authoredPreview} silentPlayback />
             ) : invitation.templateId === "taklifla-tort-fasl" ? (
               <TakliflaTortFasl invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview fullPreview catalogMusic={section === 0 && !authoredPreview} silentPlayback />
             ) : invitation.templateId === "taklifla-asalari" ? (

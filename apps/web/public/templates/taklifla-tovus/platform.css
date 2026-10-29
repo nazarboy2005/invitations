@@ -1,0 +1,24 @@
+body[data-pending] > div { visibility: hidden; }
+[hidden] { display: none !important; }
+#tv-hero-a, #tv-hero-b, #tv-frame-groom, #tv-frame-bride,
+#tv-splash-names, #tv-foot-names, #tv-venue-name { overflow-wrap: anywhere; max-width: 100%; }
+#tv-splash-names { max-width: min(350px, 82vw); }
+#tv-frame-groom, #tv-frame-bride { max-width: 220px; }
+#tv-inv-groom, #tv-inv-bride, #tv-inv-quote, #tv-venue-addr,
+#tv-foot-meta, #tv-info-section, .tv-ev-row { overflow-wrap: anywhere; }
+.tv-lang { max-width: calc(100vw - 28px); }
+.tv-lang button { padding-inline: 8px; }
+button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visible { outline: 2px solid #c6a24a !important; outline-offset: 4px; }
+#tv-wish-confirm { white-space: pre-wrap; }
+#tv-wish-form input, #tv-wish-form textarea { border-radius: 2px; }
+html[data-reduced] *, html[data-reduced] *::before, html[data-reduced] *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+html[data-reduced] [data-reveal] { opacity: 1; transform: none; }
+html[data-reduced] #tv-particles { display: none; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+  [data-reveal] { opacity: 1; transform: none; }
+  #tv-particles { display: none; }
+}
+
+#tv-hero-a, #tv-hero-b { min-width:0; }
+section:first-of-type > div[style*="padding:0 30px"] { max-width:100%; }

@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tovus — Taklifnoma</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500;1,600&family=Parisienne&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  :root { --accent:#C6A24A; /* alias for shared _wish-close.js */ }
+  body { margin: 0; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; background: #0C1E1A; }
+  input, textarea, button { font-family: inherit; }
+  @keyframes sheen { 0% { background-position: 0% 50%; } 100% { background-position: 220% 50%; } }
+  @keyframes fall { 0% { transform: translateY(-8vh) translateX(0) rotate(0deg); } 100% { transform: translateY(112vh) translateX(var(--drift, 20px)) rotate(240deg); } }
+  @keyframes bob { 0%, 100% { transform: translateY(0); opacity: .7; } 50% { transform: translateY(9px); opacity: 1; } }
+  @keyframes glow { 0%, 100% { box-shadow: 0 0 0 0 rgba(198,161,74,0); } 50% { box-shadow: 0 0 26px 1px rgba(198,161,74,.30); } }
+  @keyframes eq { 0%, 100% { transform: scaleY(.32); } 50% { transform: scaleY(1); } }
+  @keyframes twinkle { 0%, 100% { opacity: .3; transform: scale(.8); } 50% { opacity: 1; transform: scale(1.12); } }
+  @keyframes rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+  @media (prefers-reduced-motion: reduce) { * { animation-duration: .001ms !important; animation-iteration-count: 1 !important; } }
+  [data-reveal] { opacity:0; transform:translateY(26px); transition:opacity 1.05s cubic-bezier(.22,.61,.36,1), transform 1.05s cubic-bezier(.22,.61,.36,1); will-change:opacity, transform; }
+  [data-reveal].tv-in { opacity:1; transform:translateY(0); }
+  .tv-lang { position:fixed; top:14px; right:max(calc(50% - 201px),14px); z-index:60; display:flex; gap:2px; background:rgba(10,32,25,.82); border:1px solid rgba(198,162,74,.4); border-radius:999px; padding:3px; box-shadow:0 8px 22px -10px rgba(0,0,0,.6); }
+  .tv-lang button { border:0; background:transparent; cursor:pointer; font-family:'Cormorant Garamond',serif; font-size:11px; font-weight:700; letter-spacing:.08em; color:var(--gold-2,#E4CE8F); padding:5px 9px; border-radius:999px; line-height:1; text-transform:uppercase; }
+  .tv-lang button.on { background:linear-gradient(180deg,#E4CE8F,#C6A24A); color:#0C1E1A; }
+</style>
+</head>
+<body>
+
+<div style="--emerald:#0A4C40; --emerald-deep:#0C1E1A; --teal:#0E6B62; --teal-2:#127C74; --peacock:#1C6E8C; --gold:#C6A24A; --gold-2:#E4CE8F; --ivory:#F6F1E7; --ivory-2:#FBF7EE; --ink:#22322C; --ink-soft:#5E6E66; min-height:100vh; display:flex; justify-content:center; font-family:'Cormorant Garamond', Georgia, serif; color:var(--ink); background: radial-gradient(120% 80% at 50% 0%, #14362B 0%, #0C1E1A 58%, #081611 100%);">
+
+  <div style="position:relative; width:100%; max-width:430px; min-height:100vh; overflow:hidden; background: repeating-linear-gradient(45deg, rgba(150,120,50,.05) 0 1px, transparent 1px 27px), repeating-linear-gradient(-45deg, rgba(150,120,50,.05) 0 1px, transparent 1px 27px), radial-gradient(135% 92% at 50% 10%, #FCF8EF 0%, #F3ECDD 58%, #EAE0CD 100%); box-shadow: 0 0 90px rgba(0,0,0,.55);">
+
+    <audio id="tv-audio" loop preload="none"></audio>
+
+    <!-- ── Language switcher ── -->
+    <div class="tv-lang" role="group" aria-label="Til / Language">
+      <button type="button" data-lang="uz" class="on">UZ</button>
+      <button type="button" data-lang="en">EN</button>
+      <button type="button" data-lang="ru">RU</button>
+    </div>
+
+    <!-- ── Floating particles ── -->
+    <div id="tv-particles" aria-hidden="true" style="position:fixed; top:0; left:50%; transform:translateX(-50%); width:100%; max-width:430px; height:100vh; pointer-events:none; overflow:hidden; z-index:40;"></div>
+
+    <!-- ── Grain overlay (always on) ── -->
+    <div aria-hidden="true" style="position:fixed; top:0; left:50%; transform:translateX(-50%); width:100%; max-width:430px; height:100vh; pointer-events:none; z-index:45; opacity:.05; mix-blend-mode:multiply; background-image:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E&quot;);"></div>
+
+    <!-- ============ HERO ============ -->
+    <section style="position:relative; width:100%; height:100svh; min-height:640px; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; overflow:hidden;">
+      <div style="position:absolute; inset:0; background:url(tovus-img/hero.webp) center/cover no-repeat;"></div>
+      <div aria-hidden="true" style="position:absolute; inset:0; background: radial-gradient(82% 46% at 50% 43%, rgba(8,22,17,.52) 0%, rgba(8,22,17,.14) 58%, transparent 80%), linear-gradient(180deg, rgba(8,22,17,.14) 0%, rgba(8,22,17,.34) 42%, rgba(8,22,17,.52) 64%, rgba(8,22,17,.82) 100%);"></div>
+
+      <div style="position:relative; z-index:2; padding:0 30px;">
+        <div data-i18n="hero_kicker" style="font-family:'Cormorant Garamond',serif; text-transform:uppercase; letter-spacing:.44em; font-size:11.5px; font-weight:600; color:var(--gold-2); padding-left:.44em; margin-bottom:26px;">Biz oila quramiz</div>
+
+        <div id="tv-hero-a" style="font-family:'Parisienne',cursive; font-size:64px; line-height:1.16; padding:6px 8px 10px; color:transparent; background:linear-gradient(100deg,#B8934A,#E4CE8F 26%,#F5EAC4 50%,#C6A24A 72%,#B8934A); -webkit-background-clip:text; background-clip:text; background-size:220% auto; animation:sheen 8s linear infinite; filter:drop-shadow(0 3px 12px rgba(0,0,0,.4));">Avazbek</div>
+        <div id="tv-hero-amp" style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:26px; color:var(--gold-2); margin:-2px 0; opacity:.92;">&amp;</div>
+        <div id="tv-hero-b" style="font-family:'Parisienne',cursive; font-size:64px; line-height:1.16; padding:6px 8px 10px; color:transparent; background:linear-gradient(100deg,#B8934A,#E4CE8F 26%,#F5EAC4 50%,#C6A24A 72%,#B8934A); -webkit-background-clip:text; background-clip:text; background-size:220% auto; animation:sheen 8s linear infinite .4s; filter:drop-shadow(0 3px 12px rgba(0,0,0,.4));">Anora</div>
+
+        <div style="display:flex; align-items:center; justify-content:center; gap:14px; margin:30px 0 8px;">
+          <div style="height:1px; width:40px; background:linear-gradient(90deg, transparent, rgba(228,206,143,.85));"></div>
+          <div id="tv-hero-date" style="font-family:'Cormorant Garamond',serif; letter-spacing:.36em; font-size:16px; color:#F3ECD9; padding-left:.36em;">14 · 08 · 2026</div>
+          <div style="height:1px; width:40px; background:linear-gradient(90deg, rgba(228,206,143,.85), transparent);"></div>
+        </div>
+        <div style="font-family:'Cormorant Garamond',serif; text-transform:uppercase; letter-spacing:.34em; font-size:11px; color:rgba(243,236,217,.78); padding-left:.34em;"><span id="tv-hero-venue">Beksaroy</span><span id="tv-hero-city-wrap"> · <span id="tv-hero-city">Toshkent</span></span></div>
+      </div>
+
+      <div style="position:absolute; bottom:30px; left:0; right:0; z-index:2; display:flex; flex-direction:column; align-items:center; gap:9px; animation:bob 2.6s ease-in-out infinite;">
+        <div data-i18n="scroll_hint" style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:13px; letter-spacing:.06em; color:rgba(243,236,217,.82);">Pastga suring</div>
+        <div style="width:9px; height:9px; border-right:1.5px solid var(--gold-2); border-bottom:1.5px solid var(--gold-2); transform:rotate(45deg);"></div>
+      </div>
+    </section>
+
+    <!-- ============ INVITATION ============ -->
+    <section style="padding:0 0 14px;">
+      <!-- FRAMED CENTREPIECE -->
+      <div data-reveal style="position:relative; background:linear-gradient(180deg, #0A2019 0%, #0A4C40 42%, #0A4C40 60%, #F3ECDD 100%);">
+        <img id="tv-frame-img" src="tovus-img/frame.webp" alt="Naqshinkor tovus va yasmin gullari ramkasi" style="width:100%; height:auto; display:block; -webkit-mask-image:radial-gradient(116% 96% at 50% 48%, #000 68%, transparent 99%); mask-image:radial-gradient(116% 96% at 50% 48%, #000 68%, transparent 99%);">
+        <div aria-hidden="true" style="position:absolute; inset:0; box-shadow:inset 0 0 70px 26px rgba(10,32,25,.85); pointer-events:none;"></div>
+        <div style="position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:20% 17% 15%;">
+          <div style="padding:20px 14px; border-radius:50%; background:radial-gradient(closest-side, rgba(250,247,240,.66), rgba(250,247,240,0) 82%);">
+            <div style="width:24px; height:24px; margin:0 auto 12px; border-radius:50%; background:radial-gradient(circle at 50% 45%, var(--peacock) 0 15%, var(--gold) 17% 32%, var(--teal) 34% 60%, var(--gold) 62% 74%, transparent 76%);"></div>
+            <div id="tv-frame-groom" style="font-family:'Parisienne',cursive; font-size:38px; line-height:1.2; padding:4px 6px; color:var(--emerald);">Avazbek</div>
+            <div id="tv-frame-amp" style="font-family:'Cormorant Garamond',serif; font-size:18px; color:var(--gold); letter-spacing:.28em; margin:-2px 0;">&amp;</div>
+            <div id="tv-frame-bride" style="font-family:'Parisienne',cursive; font-size:38px; line-height:1.2; padding:4px 6px 8px; color:var(--emerald);">Anora</div>
+            <div id="tv-frame-date" style="font-family:'Cormorant Garamond',serif; text-transform:uppercase; letter-spacing:.26em; font-size:11px; color:var(--teal-2); padding-left:.26em;">14 avgust 2026</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- INVITATION DETAILS -->
+      <div data-reveal style="margin:18px 22px 0; padding:40px 30px; background:linear-gradient(180deg, #FCFAF3, #F3ECDD); border:1px solid rgba(198,162,74,.24); box-shadow:0 34px 62px -34px rgba(12,30,26,.42), 0 12px 26px -18px rgba(12,30,26,.26), inset 0 1px 0 rgba(255,255,255,.6); text-align:center;">
+        <div data-i18n="inv_kicker" style="font-family:'Cormorant Garamond',serif; text-transform:uppercase; letter-spacing:.4em; font-size:11px; font-weight:600; color:var(--teal-2); padding-left:.4em; margin-bottom:16px;">Ota-onalarining duosi bilan</div>
+        <p data-i18n="inv_request" style="font-family:'Cormorant Garamond',serif; font-size:18px; line-height:1.75; color:var(--ink); margin:0 0 24px;">aziz farzandlarining <span style="font-style:italic; color:var(--emerald);">nikoh</span> to'yiga tashrif buyurishingizni so'raydilar</p>
+
+        <div id="tv-inv-groom-block">
+          <div id="tv-inv-groom" style="font-family:'Cormorant Garamond',serif; font-size:20px; color:var(--emerald); font-style:italic;">Avazbek</div>
+          <div id="tv-inv-groom-parents-wrap" style="margin-bottom:12px;">
+            <div id="tv-inv-groom-parents" data-i18n="groom_parents_default" style="font-family:'Cormorant Garamond',serif; font-size:14.5px; color:var(--ink-soft); font-style:italic;">Karimovlar xonadonining o'g'li</div>
+          </div>
+        </div>
+        <div id="tv-inv-amp" style="font-family:'Cormorant Garamond',serif; font-size:18px; color:var(--gold); letter-spacing:.3em; margin:2px 0 12px;">&amp;</div>
+        <div id="tv-inv-bride-block">
+          <div id="tv-inv-bride" style="font-family:'Cormorant Garamond',serif; font-size:20px; color:var(--emerald); font-style:italic;">Anora</div>
+          <div id="tv-inv-bride-parents-wrap">
+            <div id="tv-inv-bride-parents" data-i18n="bride_parents_default" style="font-family:'Cormorant Garamond',serif; font-size:14.5px; color:var(--ink-soft); font-style:italic;">Yusupovlar xonadonining qizi</div>
+          </div>
+        </div>
+
+        <div id="tv-quote-wrap">
+          <div style="display:flex; align-items:center; justify-content:center; gap:12px; margin:26px 0;">
+            <div style="height:1px; width:48px; background:linear-gradient(90deg, transparent, var(--gold));"></div>
+            <div style="width:7px; height:7px; transform:rotate(45deg); background:var(--gold);"></div>
+            <div style="height:1px; width:48px; background:linear-gradient(90deg, var(--gold), transparent);"></div>
+          </div>
+          <p id="tv-inv-quote" data-i18n="quote_default" style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:15px; line-height:1.7; color:var(--ink-soft); margin:22px 0 0;">"Ikki qalb — bir yurak, abadiyatning ibtidosi."</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- GARLAND DIVIDER -->
+    <div data-reveal style="padding:22px 26px 34px; display:flex; justify-content:center;">
+      <img src="tovus-img/garland.webp" alt="Tovus pati va yasmin girlandi" style="width:100%; max-width:384px; height:auto; display:block; filter:drop-shadow(0 12px 20px rgba(12,30,26,.16));">
+    </div>
+
+    <!-- ============ EVENTS TIMELINE ============ -->
+    <section id="tv-events-section" style="padding:22px 26px 40px;">
+      <div data-reveal style="text-align:center; margin-bottom:38px;">
+        <div data-i18n="ev_kicker" style="font-family:'Cormorant Garamond',serif; text-transform:uppercase; letter-spacing:.42em; font-size:11.5px; font-weight:600; color:var(--teal-2); padding-left:.42em; margin-bottom:8px;">Tantanalar</div>
+        <div data-i18n="ev_title" style="font-family:'Cormorant Garamond',serif; font-weight:500; font-size:32px; color:var(--emerald);">Marosim tartibi</div>
+      </div>
+
+      <div id="tv-events" style="position:relative; padding-left:40px;">
+        <div aria-hidden="true" style="position:absolute; left:11px; top:6px; bottom:6px; width:1px; background:linear-gradient(180deg, var(--gold), rgba(198,162,74,.25));"></div>
+
+        <div class="tv-ev-row" data-reveal style="position:relative; margin-bottom:30px;">
+          <div style="position:absolute; left:-40px; top:2px; width:24px; height:24px; border-radius:50%; background:var(--ivory); border:1px solid var(--gold); display:flex; align-items:center; justify-content:center;"><div style="width:12px; height:12px; border-radius:50%; background:radial-gradient(circle at 50% 45%, var(--peacock) 0 22%, var(--gold) 26% 52%, var(--teal) 58% 100%);"></div></div>
+          <div style="background:linear-gradient(180deg, #FCFAF3, #F3ECDD); padding:24px 24px 26px; border:1px solid rgba(198,162,74,.22); box-shadow:0 24px 46px -30px rgba(12,30,26,.4), 0 8px 18px -14px rgba(12,30,26,.24), inset 0 1px 0 rgba(255,255,255,.55);">
+            <div data-i18n="ev1_kicker" style="font-family:'Cormorant Garamond',serif; text-transform:uppercase; letter-spacing:.3em; font-size:11px; color:var(--gold); padding-left:.3em; margin-bottom:6px;">Marosim</div>
+            <div data-i18n="ev1_title" style="font-family:'Cormorant Garamond',serif; font-size:27px; font-weight:500; color:var(--emerald); line-height:1.1; margin-bottom:6px;">Nikoh</div>
+            <p data-i18n="ev1_desc" style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:16px; color:var(--ink-soft); margin:0 0 16px;">Nikoh o'qilishi — muqaddas ahd marosimi</p>
+            <div style="display:flex; flex-direction:column; gap:5px; font-family:'Cormorant Garamond',serif; font-size:15.5px; color:var(--ink);">
+              <div><span data-i18n="ev_when_label" style="color:var(--teal-2); font-style:italic;">Qachon&nbsp;·&nbsp;</span><span id="tv-ev1-when">Juma, 14 avgust 2026 — 16:00</span></div>
+              <div><span data-i18n="ev_where_label" style="color:var(--teal-2); font-style:italic;">Qayerda&nbsp;·&nbsp;</span><span id="tv-ev1-where">Beksaroy, Toshkent</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tv-ev-row" data-reveal data-reveal-delay="90" style="position:relative;">
+          <div style="position:absolute; left:-40px; top:2px; width:24px; height:24px; border-radius:50%; background:var(--ivory); border:1px solid var(--gold); display:flex; align-items:center; justify-content:center;"><div style="width:12px; height:12px; border-radius:50%; background:radial-gradient(circle at 50% 45%, var(--peacock) 0 22%, var(--gold) 26% 52%, var(--teal) 58% 100%);"></div></div>
+          <div style="background:linear-gradient(180deg, #FCFAF3, #F3ECDD); padding:24px 24px 26px; border:1px solid rgba(198,162,74,.22); box-shadow:0 24px 46px -30px rgba(12,30,26,.4), 0 8px 18px -14px rgba(12,30,26,.24), inset 0 1px 0 rgba(255,255,255,.55);">
+            <div data-i18n="ev2_kicker" style="font-family:'Cormorant Garamond',serif; text-transform:uppercase; letter-spacing:.3em; font-size:11px; color:var(--gold); padding-left:.3em; margin-bottom:6px;">Ziyofat</div>
+            <div data-i18n="ev2_title" style="font-family:'Cormorant Garamond',serif; font-size:27px; font-weight:500; color:var(--emerald); line-height:1.1; margin-bottom:6px;">Bazm</div>
+            <p data-i18n="ev2_desc" style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:16px; color:var(--ink-soft); margin:0 0 16px;">Tantanali kechki ziyofat — davramizga marhamat</p>
+            <div style="display:flex; flex-direction:column; gap:5px; font-family:'Cormorant Garamond',serif; font-size:15.5px; color:var(--ink);">
+              <div><span data-i18n="ev_when_label" style="color:var(--teal-2); font-style:italic;">Qachon&nbsp;·&nbsp;</span><span id="tv-ev2-when">Juma, 14 avgust 2026 — 19:00</span></div>
+              <div><span data-i18n="ev_where_label" style="color:var(--teal-2); font-style:italic;">Qayerda&nbsp;·&nbsp;</span><span id="tv-ev2-where">Beksaroy, Toshkent</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- divider -->
+    <div data-reveal style="display:flex; align-items:center; justify-content:center; gap:16px; padding:8px 26px 26px;">
+      <div style="height:1px; width:84px; background:linear-gradient(90deg, transparent, var(--gold));"></div>
+      <div style="width:18px; height:18px; border-radius:50%; background:radial-gradient(circle at 50% 45%, var(--peacock) 0 16%, var(--gold) 18% 33%, var(--teal) 35% 60%, var(--gold) 62% 74%, transparent 76%);"></div>
+      <div style="height:1px; width:84px; background:linear-gradient(90deg, var(--gold), transparent);"></div>
+    </div>
+
+    <!-- ============ VENUE / MAP ============ -->
+    <section style="position:relative; width:100%; height:560px; margin:4px 0 0; display:flex; flex-direction:column; align-items:center; justify-content:flex-end; text-align:center; overflow:hidden;">
+      <div style="position:absolute; inset:0; background:url(tovus-img/venue.webp) center/cover no-repeat;"></div>
+      <div aria-hidden="true" style="position:absolute; inset:0; background:linear-gradient(180deg, #F6F1E7 0%, rgba(246,241,231,0) 15%, rgba(8,22,17,0) 40%, rgba(8,22,17,.42) 68%, rgba(8,22,17,.86) 100%);"></div>
+
+      <div style="position:relative; z-index:2; padding:0 28px 76px;">
+        <div data-i18n="venue_kicker" style="font-family:'Cormorant Garamond',serif; text-transform:uppercase; letter-spacing:.42em; font-size:11px; font-weight:600; color:var(--gold-2); padding-left:.42em; margin-bottom:10px;">Manzil</div>
+        <div id="tv-venue-name" style="font-family:'Parisienne',cursive; font-size:46px; line-height:1.2; padding:4px 0 8px; color:#F5EAC4; margin-bottom:6px;">Beksaroy</div>
+        <p id="tv-venue-addr" style="font-family:'Cormorant Garamond',serif; font-size:15.5px; line-height:1.6; color:rgba(243,236,217,.86); margin:0 0 22px;">Toshkent sh., Yunusobod tumani</p>
+        <a id="tv-map" href="https://maps.google.com/?q=Beksaroy+Toshkent" target="_blank" rel="noopener noreferrer" style="display:inline-flex; align-items:center; gap:9px; font-family:'Cormorant Garamond',serif; text-transform:uppercase; letter-spacing:.28em; font-size:12.5px; font-weight:600; color:#0C1E1A; text-decoration:none; background:linear-gradient(180deg,#E4CE8F,#C6A24A); padding:14px 26px 14px 30px; border-radius:1px;"><span data-i18n="btn_map">Xaritada ochish</span> <span style="width:6px; height:6px; border-right:1.5px solid #0C1E1A; border-top:1.5px solid #0C1E1A; transform:rotate(45deg);"></span></a>
+      </div>
+    </section>
+
+    <!-- ============ GUEST INFO ============ -->
+    <section id="tv-info-section" style="margin-top:-46px; padding:0 22px 44px; position:relative; z-index:3;">
+      <div data-reveal style="background:linear-gradient(160deg,#127C74,#0A4C40); padding:36px 28px 32px; text-align:center; border:1px solid rgba(198,162,74,.3); box-shadow:0 40px 70px -34px rgba(8,22,17,.62), 0 14px 30px -16px rgba(8,22,17,.45);">
+        <div data-i18n="info_kicker" style="font-family:'Cormorant Garamond',serif; text-transform:uppercase; letter-spacing:.42em; font-size:11px; font-weight:600; color:var(--gold-2); padding-left:.42em; margin-bottom:6px;">Bilib qo'ying</div>
+        <div data-i18n="info_title" style="font-family:'Cormorant Garamond',serif; font-size:26px; color:#FBF7EE; margin-bottom:24px;">Mehmonlar uchun</div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:22px 20px; text-align:left;">
+          <div id="tv-info-dress">
+            <div data-i18n="info_dress_label" style="font-family:'Cormorant Garamond',serif; text-transform:uppercase; letter-spacing:.22em; font-size:10.5px; color:var(--gold-2); margin-bottom:4px;">Kiyim</div>
+            <div id="tv-info-dress-text" data-i18n="info_dress_default" style="font-family:'Cormorant Garamond',serif; font-size:16px; color:#F1ECDE; line-height:1.4;">Bayramona libos — zumrad, feruza va tilla ranglarda</div>
+          </div>
+          <div id="tv-info-timing">
+            <div data-i18n="info_timing_label" style="font-family:'Cormorant Garamond',serif; text-transform:uppercase; letter-spacing:.22em; font-size:10.5px; color:var(--gold-2); margin-bottom:4px;">Vaqtlar</div>
+            <div id="tv-info-timing-text" data-i18n="info_timing_default" style="font-family:'Cormorant Garamond',serif; font-size:16px; color:#F1ECDE; line-height:1.4;">Nikoh 16:00 · Bazm 19:00</div>
+          </div>
+          <div id="tv-info-rsvp">
+            <div data-i18n="info_rsvp_label" style="font-family:'Cormorant Garamond',serif; text-transform:uppercase; letter-spacing:.22em; font-size:10.5px; color:var(--gold-2); margin-bottom:4px;">Tasdiqlash</div>
+            <div id="tv-info-rsvp-text" data-i18n="info_rsvp_default" style="font-family:'Cormorant Garamond',serif; font-size:16px; color:#F1ECDE; line-height:1.4;">Iltimos, 1-avgustgacha tasdiqlang</div>
+          </div>
+          <div id="tv-info-parking">
+            <div data-i18n="info_parking_label" style="font-family:'Cormorant Garamond',serif; text-transform:uppercase; letter-spacing:.22em; font-size:10.5px; color:var(--gold-2); margin-bottom:4px;">Avtoturargoh</div>
+            <div id="tv-info-parking-text" data-i18n="info_parking_default" style="font-family:'Cormorant Garamond',serif; font-size:16px; color:#F1ECDE; line-height:1.4;">Asosiy darvoza oldida avtoturargoh mavjud</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ WISHES ============ -->
+    <section style="padding:6px 26px 44px;">
+      <div data-reveal style="text-align:center; margin-bottom:26px;">
+        <div data-i18n="wish_kicker" style="font-family:'Cormorant Garamond',serif; text-transform:uppercase; letter-spacing:.42em; font-size:11.5px; font-weight:600; color:var(--teal-2); padding-left:.42em; margin-bottom:8px;">Tilaklar</div>
+        <div data-i18n="wish_title" style="font-family:'Cormorant Garamond',serif; font-weight:500; font-size:31px; color:var(--emerald); line-height:1.15;">Tilaklaringizni qoldiring</div>
+        <p data-i18n="wish_sub" style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:16px; color:var(--ink-soft); margin:8px 0 0;">Sizning iliq so'zlaringiz biz uchun qadrli</p>
+      </div>
+
+      <form id="tv-wish-form" class="wish-form" data-reveal style="display:flex; flex-direction:column; gap:12px; margin-bottom:22px;">
+        <input name="wname" data-i18n-ph="wish_name_ph" placeholder="Ismingiz" style="width:100%; font-size:16px; color:var(--ink); background:#FCF9F1; border:1px solid rgba(198,162,74,.45); border-radius:2px; padding:13px 15px; outline:none;">
+        <textarea name="wmsg" rows="3" data-i18n-ph="wish_msg_ph" placeholder="Tilagingizni yozing…" style="width:100%; font-size:16px; color:var(--ink); background:#FCF9F1; border:1px solid rgba(198,162,74,.45); border-radius:2px; padding:13px 15px; outline:none; resize:vertical; line-height:1.55;"></textarea>
+        <button type="submit" style="width:100%; font-family:'Cormorant Garamond',serif; text-transform:uppercase; letter-spacing:.28em; font-size:13px; font-weight:600; color:#FBF7EE; background:linear-gradient(180deg,#0E6B62,#0A4C40); border:none; border-radius:2px; padding:15px; cursor:pointer;"><span data-i18n="btn_send">Tilak yo'llash</span></button>
+      </form>
+
+      <div id="tv-wish-confirm" data-i18n="wish_thanks" style="display:none; text-align:center; font-family:'Cormorant Garamond',serif; font-style:italic; font-size:15px; color:var(--teal-2); margin-bottom:18px;">Rahmat — tilagingiz saqlandi ♡</div>
+      <div id="tv-wish-empty" data-i18n="wish_empty" style="text-align:center; font-family:'Cormorant Garamond',serif; font-style:italic; font-size:16px; color:var(--ink-soft); opacity:.8; padding:14px 0;">Birinchi bo'lib tilak qoldiring.</div>
+      <div id="tv-wish-list" style="display:flex; flex-direction:column; gap:12px;"></div>
+    </section>
+
+    <!-- ============ COUNTDOWN ============ -->
+    <section style="position:relative; padding:52px 30px 56px; text-align:center; overflow:hidden;">
+      <div style="position:absolute; inset:0; background:url(tovus-img/countdown.webp) center/cover no-repeat;"></div>
+      <div aria-hidden="true" style="position:absolute; inset:0; background:linear-gradient(180deg, rgba(8,22,17,.3) 0%, rgba(8,22,17,.4) 55%, rgba(8,22,17,.6) 100%);"></div>
+
+      <div style="position:relative; z-index:2;">
+        <div data-i18n="cd_kicker" style="font-family:'Cormorant Garamond',serif; text-transform:uppercase; letter-spacing:.42em; font-size:11px; font-weight:600; color:var(--gold-2); padding-left:.42em; margin-bottom:8px;">Kunlarni sanayapmiz</div>
+        <div data-i18n="cd_title" style="font-family:'Parisienne',cursive; font-size:38px; line-height:1.2; padding:4px 0 8px; color:#F5EAC4; margin-bottom:26px;">Visol kunigacha</div>
+
+        <div id="tv-cd-grid" style="display:flex; align-items:stretch; justify-content:center; gap:0;">
+          <div style="flex:1;">
+            <div id="tv-cd-d" style="font-family:'Cormorant Garamond',serif; font-weight:500; font-size:44px; color:#FBF7EE; line-height:1;">–</div>
+            <div data-i18n="cd_days" style="font-family:'Cormorant Garamond',serif; text-transform:uppercase; letter-spacing:.18em; font-size:10px; color:var(--gold-2); margin-top:6px;">Kun</div>
+          </div>
+          <div style="width:1px; background:rgba(198,162,74,.4); margin:4px 0;"></div>
+          <div style="flex:1;">
+            <div id="tv-cd-h" style="font-family:'Cormorant Garamond',serif; font-weight:500; font-size:44px; color:#FBF7EE; line-height:1;">–</div>
+            <div data-i18n="cd_hours" style="font-family:'Cormorant Garamond',serif; text-transform:uppercase; letter-spacing:.18em; font-size:10px; color:var(--gold-2); margin-top:6px;">Soat</div>
+          </div>
+          <div style="width:1px; background:rgba(198,162,74,.4); margin:4px 0;"></div>
+          <div style="flex:1;">
+            <div id="tv-cd-m" style="font-family:'Cormorant Garamond',serif; font-weight:500; font-size:44px; color:#FBF7EE; line-height:1;">–</div>
+            <div data-i18n="cd_mins" style="font-family:'Cormorant Garamond',serif; text-transform:uppercase; letter-spacing:.18em; font-size:10px; color:var(--gold-2); margin-top:6px;">Daqiqa</div>
+          </div>
+          <div style="width:1px; background:rgba(198,162,74,.4); margin:4px 0;"></div>
+          <div style="flex:1;">
+            <div id="tv-cd-s" style="font-family:'Cormorant Garamond',serif; font-weight:500; font-size:44px; color:#FBF7EE; line-height:1;">–</div>
+            <div data-i18n="cd_secs" style="font-family:'Cormorant Garamond',serif; text-transform:uppercase; letter-spacing:.18em; font-size:10px; color:var(--gold-2); margin-top:6px;">Soniya</div>
+          </div>
+        </div>
+        <div id="tv-cd-arrived" data-i18n="cd_arrived" style="display:none; font-family:'Cormorant Garamond',serif; font-style:italic; font-size:24px; color:#FBF7EE; line-height:1.4;">Kutilgan kun keldi.</div>
+      </div>
+    </section>
+
+    <!-- ============ FOOTER ============ -->
+    <footer style="background:linear-gradient(180deg, #0C1E1A, #081511); padding:48px 30px 44px; text-align:center;">
+      <img src="tovus-img/crest.webp" alt="Tovus gerbi" style="width:108px; height:auto; margin:0 auto 14px; display:block; opacity:.96;">
+      <div id="tv-foot-names" style="font-family:'Parisienne',cursive; font-size:44px; line-height:1.2; padding:4px 8px 8px; color:transparent; background:linear-gradient(100deg,#B8934A,#E4CE8F 40%,#C6A24A 70%,#B8934A); -webkit-background-clip:text; background-clip:text;">Avazbek &amp; Anora</div>
+      <div id="tv-foot-meta" style="font-family:'Cormorant Garamond',serif; text-transform:uppercase; letter-spacing:.34em; font-size:11px; color:rgba(243,236,217,.7); padding-left:.34em; margin:12px 0 26px;">14 avgust 2026 · Toshkent</div>
+      <p id="tv-foot-note" data-i18n="footer_note_default" style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:15px; color:rgba(243,236,217,.72); margin:0;">Mehr va minnatdorlik ila — sizni ko'rishdan mamnun bo'lamiz.</p>
+    </footer>
+
+    <!-- ============ MUSIC TOGGLE ============ -->
+    <div aria-hidden="false" style="position:fixed; bottom:0; left:50%; transform:translateX(-50%); width:100%; max-width:430px; height:0; z-index:60; pointer-events:none;">
+      <button type="button" id="tv-music" aria-label="Musiqa" style="display:none; position:absolute; right:18px; bottom:20px; width:46px; height:46px; border-radius:50%; border:1px solid rgba(198,162,74,.6); background:linear-gradient(180deg,#0E6B62,#0A4C40); box-shadow:0 8px 22px -10px rgba(0,0,0,.7); cursor:pointer; pointer-events:auto; align-items:center; justify-content:center; gap:2.5px; padding:0;">
+        <span id="tv-music-on" style="display:none; align-items:flex-end; gap:2.5px; height:16px;">
+          <span style="width:2.5px; height:16px; background:var(--gold-2); transform-origin:bottom; animation:eq .9s ease-in-out infinite;"></span>
+          <span style="width:2.5px; height:16px; background:var(--gold-2); transform-origin:bottom; animation:eq .9s ease-in-out .3s infinite;"></span>
+          <span style="width:2.5px; height:16px; background:var(--gold-2); transform-origin:bottom; animation:eq .9s ease-in-out .15s infinite;"></span>
+          <span style="width:2.5px; height:16px; background:var(--gold-2); transform-origin:bottom; animation:eq .9s ease-in-out .45s infinite;"></span>
+        </span>
+        <span id="tv-music-off" style="position:relative; display:flex; align-items:flex-end; gap:2.5px; height:16px; opacity:.62;">
+          <span style="width:2.5px; height:6px; background:var(--gold-2);"></span>
+          <span style="width:2.5px; height:11px; background:var(--gold-2);"></span>
+          <span style="width:2.5px; height:8px; background:var(--gold-2);"></span>
+          <span style="width:2.5px; height:13px; background:var(--gold-2);"></span>
+          <span style="position:absolute; left:-3px; top:50%; width:26px; height:1.5px; background:var(--gold-2); transform:rotate(-32deg);"></span>
+        </span>
+      </button>
+    </div>
+
+    <!-- ============ SPLASH ============ -->
+    <div id="tv-splash" style="position:fixed; top:0; left:50%; transform:translateX(-50%); width:100%; max-width:430px; height:100vh; z-index:100; display:flex; align-items:center; justify-content:center; opacity:1; pointer-events:auto; transition:opacity .9s ease, transform 1.1s cubic-bezier(.5,0,.2,1);">
+      <div style="position:relative; width:100%; max-width:430px; height:100%; padding:0 34px; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; background: radial-gradient(120% 90% at 50% 16%, #14362B 0%, #0C1E1A 58%, #081511 100%);">
+        <div aria-hidden="true" style="position:absolute; top:20px; bottom:20px; left:20px; right:20px; border:1px solid rgba(198,162,74,.42); outline:1px solid rgba(198,162,74,.2); outline-offset:-5px; pointer-events:none;">
+          <div style="position:absolute; top:-4px; left:-4px; width:7px; height:7px; transform:rotate(45deg); background:var(--gold);"></div>
+          <div style="position:absolute; top:-4px; right:-4px; width:7px; height:7px; transform:rotate(45deg); background:var(--gold);"></div>
+          <div style="position:absolute; bottom:-4px; left:-4px; width:7px; height:7px; transform:rotate(45deg); background:var(--gold);"></div>
+          <div style="position:absolute; bottom:-4px; right:-4px; width:7px; height:7px; transform:rotate(45deg); background:var(--gold);"></div>
+        </div>
+
+        <img src="tovus-img/crest.webp" alt="Tovus gerbi" style="width:150px; height:auto; margin-bottom:26px; filter:drop-shadow(0 10px 22px rgba(0,0,0,.45)); animation:rise .9s cubic-bezier(.22,.61,.36,1) both;">
+
+        <div data-i18n="splash_kicker" style="font-family:'Cormorant Garamond',serif; text-transform:uppercase; letter-spacing:.42em; font-size:10.5px; color:var(--gold-2); padding-left:.42em; margin-bottom:20px; animation:rise .9s cubic-bezier(.22,.61,.36,1) .1s both;">Nikoh taklifnomasi</div>
+
+        <div id="tv-splash-names" style="font-family:'Parisienne',cursive; font-size:52px; line-height:1.18; padding:4px 8px 10px; color:transparent; background:linear-gradient(100deg,#B8934A,#E4CE8F 40%,#F5EAC4 55%,#C6A24A 78%,#B8934A); -webkit-background-clip:text; background-clip:text; background-size:220% auto; animation:sheen 8s linear infinite, rise .9s cubic-bezier(.22,.61,.36,1) .18s both;">Avazbek &amp; Anora</div>
+
+        <div style="display:flex; align-items:center; justify-content:center; gap:12px; margin:22px 0 28px; animation:rise .9s cubic-bezier(.22,.61,.36,1) .26s both;">
+          <div style="height:1px; width:38px; background:linear-gradient(90deg, transparent, var(--gold));"></div>
+          <div id="tv-splash-date" style="font-family:'Cormorant Garamond',serif; letter-spacing:.3em; font-size:12px; color:rgba(243,236,217,.72); padding-left:.3em;">14 · 08 · 2026</div>
+          <div style="height:1px; width:38px; background:linear-gradient(90deg, var(--gold), transparent);"></div>
+        </div>
+
+        <button type="button" id="tv-open" style="font-family:'Cormorant Garamond',serif; text-transform:uppercase; letter-spacing:.34em; font-size:13px; font-weight:600; color:#0C1E1A; background:linear-gradient(180deg,#E4CE8F,#C6A24A); border:none; border-radius:1px; padding:16px 40px 16px 44px; cursor:pointer; animation:glow 3.4s ease-in-out infinite, rise .9s cubic-bezier(.22,.61,.36,1) .34s both;"><span data-i18n="splash_open">Taklifnomani ochish</span></button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+/* ══ Tovus (n03) customizer + i18n + guestbook + countdown + music ══
+   Base DOM language is Uzbek; apply() captures el.__uz once and swaps in
+   EN/RU from DICT, skipping any element the owner filled (data-user-set). */
+(function () {
+  "use strict";
+  var q = new URLSearchParams(location.search);
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var esc = function (s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
+    return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); };
+  var setTxt = function (el, v) { if (el) { el.textContent = v; el.setAttribute("data-user-set", "1"); } };
+  var hide = function (el) { if (el) el.style.display = "none"; };
+
+  /* ── i18n dictionary: key -> [en, ru]; uz is read from the DOM ── */
+  var DICT = {
+    splash_kicker: ["Nikah Invitation", "Приглашение на никох"],
+    splash_open: ["Open Invitation", "Открыть приглашение"],
+    hero_kicker: ["We're getting married", "Мы создаём семью"],
+    scroll_hint: ["scroll to begin", "Прокрутите вниз"],
+    inv_kicker: ["Together with their families", "С благословения родителей"],
+    inv_request: ["request the honour of your presence at the <span style=\"font-style:italic;color:var(--emerald);\">Nikah</span> of their beloved children", "просят вас разделить радость <span style=\"font-style:italic;color:var(--emerald);\">никоха</span> их дорогих детей"],
+    groom_parents_default: ["Son of the Karimov family", "Сын семьи Каримовых"],
+    bride_parents_default: ["Daughter of the Yusupov family", "Дочь семьи Юсуповых"],
+    quote_default: ["“Two souls, one heart — the beginning of forever.”", "«Две души, одно сердце — начало вечности.»"],
+    ev_kicker: ["The Celebrations", "Торжества"],
+    ev_title: ["Order of Events", "Порядок торжества"],
+    ev1_kicker: ["Ceremony", "Церемония"],
+    ev1_title: ["Nikah", "Никох"],
+    ev1_desc: ["The solemnisation of our marriage", "Священное таинство бракосочетания"],
+    ev2_kicker: ["Reception", "Приём"],
+    ev2_title: ["Walima", "Валима"],
+    ev2_desc: ["Join us for dinner & celebration", "Праздничный ужин — ждём вас за нашим столом"],
+    ev_when_label: ["When&nbsp;·&nbsp;", "Когда&nbsp;·&nbsp;"],
+    ev_where_label: ["Where&nbsp;·&nbsp;", "Где&nbsp;·&nbsp;"],
+    venue_kicker: ["The Venue", "Место торжества"],
+    btn_map: ["Open Map", "Открыть карту"],
+    info_kicker: ["Good to know", "Полезно знать"],
+    info_title: ["Guest Information", "Информация для гостей"],
+    info_dress_label: ["Dress Code", "Дресс-код"],
+    info_timing_label: ["Timing", "Время"],
+    info_rsvp_label: ["RSVP", "Подтверждение"],
+    info_parking_label: ["Parking", "Парковка"],
+    info_dress_default: ["Festive attire — emerald, turquoise and gold tones", "Праздничный наряд — оттенки изумруда, бирюзы и золота"],
+    info_timing_default: ["Nikah 4:00 PM · Walima 7:00 PM", "Никох в 16:00 · Валима в 19:00"],
+    info_rsvp_default: ["Kindly confirm by 1 August", "Просьба подтвердить до 1 августа"],
+    info_parking_default: ["Parking available by the main gate", "Парковка у главных ворот"],
+    wish_kicker: ["Guestbook", "Книга пожеланий"],
+    wish_title: ["Leave your wishes", "Оставьте пожелание"],
+    wish_sub: ["Your kind words mean the world to us", "Ваши тёплые слова очень важны для нас"],
+    btn_send: ["Send your blessing", "Отправить пожелание"],
+    wish_thanks: ["Thank you — your wish has been saved ♡", "Спасибо — ваше пожелание сохранено ♡"],
+    wish_empty: ["Be the first to leave a wish for the couple.", "Будьте первым, кто оставит пожелание молодожёнам."],
+    cd_kicker: ["Counting the days", "Отсчитываем дни"],
+    cd_title: ["until we say “I do”", "до заветного дня"],
+    cd_days: ["Days", "Дни"], cd_hours: ["Hours", "Часы"], cd_mins: ["Minutes", "Минуты"], cd_secs: ["Seconds", "Секунды"],
+    cd_arrived: ["The day has finally arrived.", "Долгожданный день настал."],
+    footer_note_default: ["With love and gratitude, we can't wait to celebrate with you.", "С любовью и благодарностью — с нетерпением ждём встречи с вами."]
+  };
+  var PH = {
+    wish_name_ph: ["Your name", "Ваше имя"],
+    wish_msg_ph: ["Write your message…", "Напишите пожелание…"]
+  };
+  /* localized month names + full weekday names, index 0 = Jan / Sunday */
+  var MON = {
+    uz: ["yanvar","fevral","mart","aprel","may","iyun","iyul","avgust","sentabr","oktabr","noyabr","dekabr"],
+    en: ["January","February","March","April","May","June","July","August","September","October","November","December"],
+    ru: ["января","февраля","марта","апреля","мая","июня","июля","августа","сентября","октября","ноября","декабря"]
+  };
+  var DOWFULL = {
+    uz: ["Yakshanba","Dushanba","Seshanba","Chorshanba","Payshanba","Juma","Shanba"],
+    en: ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
+    ru: ["Воскресенье","Понедельник","Вторник","Среда","Четверг","Пятница","Суббота"]
+  };
+
+  /* ── language state ── */
+  function norm(l) { l = (l || "").toLowerCase(); return l === "en" || l === "ru" ? l : "uz"; }
+  var initLang = norm(q.get("lang") || q.get("default_lang") ||
+    (function () { try { return localStorage.getItem("takliflaLang"); } catch (e) { return null; } })() ||
+    document.documentElement.lang || "uz");
+  window.__takliflaLang = initLang;
+
+  var MW = {}; // stash of date parts for re-localisation (dd, mm, yy, dow, ev1Time)
+
+  function localizeDate(lang) {
+    if (!MW.dd) return;
+    var months = MON[lang] || MON.uz;
+    var dows = DOWFULL[lang] || DOWFULL.uz;
+    var fEl = $("#tv-frame-date");
+    if (fEl && fEl.getAttribute("data-user-set") !== "1") {
+      fEl.textContent = MW.dd + " " + (months[MW.mm - 1] || "") + " " + MW.yy;
+    }
+    var footEl = $("#tv-foot-meta");
+    if (footEl && footEl.getAttribute("data-user-set") !== "1") {
+      footEl.textContent = MW.dd + " " + (months[MW.mm - 1] || "") + " " + MW.yy + (MW.city ? " · " + MW.city : "");
+    }
+    var e1 = $("#tv-ev1-when");
+    if (e1 && e1.getAttribute("data-user-set") !== "1") {
+      e1.textContent = dows[MW.dow] + ", " + MW.dd + " " + (months[MW.mm - 1] || "") + " " + MW.yy + " — " + MW.ev1Time;
+    }
+    var e2 = $("#tv-ev2-when");
+    if (e2 && e2.getAttribute("data-user-set") !== "1") {
+      e2.textContent = dows[MW.dow] + ", " + MW.dd + " " + (months[MW.mm - 1] || "") + " " + MW.yy + " — 19:00";
+    }
+  }
+
+  function apply() {
+    var lang = norm(window.__takliflaLang);
+    var nodes = document.querySelectorAll("[data-i18n]");
+    for (var i = 0; i < nodes.length; i++) {
+      var el = nodes[i];
+      if (el.getAttribute("data-user-set") === "1") continue;
+      if (el.__uz == null) el.__uz = el.innerHTML;
+      var pair = DICT[el.getAttribute("data-i18n")];
+      el.innerHTML = lang === "uz" || !pair ? el.__uz : (lang === "en" ? pair[0] : pair[1]);
+    }
+    var phs = document.querySelectorAll("[data-i18n-ph]");
+    for (var j = 0; j < phs.length; j++) {
+      var pe = phs[j];
+      if (pe.__uzph == null) pe.__uzph = pe.getAttribute("placeholder") || "";
+      var pp = PH[pe.getAttribute("data-i18n-ph")];
+      pe.setAttribute("placeholder", lang === "uz" || !pp ? pe.__uzph : (lang === "en" ? pp[0] : pp[1]));
+    }
+    localizeDate(lang);
+    var btns = document.querySelectorAll(".tv-lang button");
+    for (var k = 0; k < btns.length; k++) btns[k].classList.toggle("on", btns[k].getAttribute("data-lang") === lang);
+    document.documentElement.lang = lang;
+  }
+
+  /* ── language switcher ── */
+  (function () {
+    var wrap = $(".tv-lang");
+    if (!wrap) return;
+    wrap.addEventListener("click", function (e) {
+      var b = e.target.closest("button[data-lang]");
+      if (!b) return;
+      var lang = norm(b.getAttribute("data-lang"));
+      window.__takliflaLang = lang;
+      try { localStorage.setItem("takliflaLang", lang); } catch (er) {}
+      document.dispatchEvent(new CustomEvent("taklifla:langchange", { detail: { lang: lang } }));
+    });
+  })();
+  document.addEventListener("taklifla:langchange", apply);
+
+  /* ── names ── */
+  var names = q.get("names");
+  var n1 = "", n2 = "";
+  if (names && names.trim()) {
+    // word separators (va/и) require surrounding whitespace so names that
+    // contain them as substrings (Avazbek, Anvar, Дилшод) don't get split
+    var parts = names.split(/\s*[&+—]\s*|\s+(?:va|и)\s+/i).filter(Boolean);
+    n1 = (parts[0] || names).trim();
+    n2 = (parts[1] || "").trim();
+    if (n1) { setTxt($("#tv-hero-a"), n1); setTxt($("#tv-frame-groom"), n1); setTxt($("#tv-inv-groom"), n1); }
+    var pair = n2 ? n1 + " & " + n2 : n1;
+    setTxt($("#tv-splash-names"), pair);
+    setTxt($("#tv-foot-names"), pair);
+    if (n2) {
+      setTxt($("#tv-hero-b"), n2);
+      setTxt($("#tv-frame-bride"), n2);
+      setTxt($("#tv-inv-bride"), n2);
+    } else {
+      hide($("#tv-hero-b")); hide($("#tv-hero-amp"));
+      hide($("#tv-frame-bride")); hide($("#tv-frame-amp"));
+      hide($("#tv-inv-bride-block")); hide($("#tv-inv-amp"));
+    }
+  }
+
+  /* ── parents (owner) ── */
+  var gp = q.get("groom_parents");
+  if (gp != null) { if (gp.trim()) setTxt($("#tv-inv-groom-parents"), gp.trim()); else hide($("#tv-inv-groom-parents-wrap")); }
+  var bp = q.get("bride_parents");
+  if (bp != null) { if (bp.trim()) setTxt($("#tv-inv-bride-parents"), bp.trim()); else hide($("#tv-inv-bride-parents-wrap")); }
+
+  /* ── quote (owner) ── */
+  var quote = q.get("quote");
+  if (quote != null) {
+    // strip any quotes the owner typed, then re-wrap so the rendered line
+    // always matches the base design's typographic “…” framing
+    var qt = quote.trim().replace(/^["“”«»]+|["“”«»]+$/g, "").trim();
+    if (qt) setTxt($("#tv-inv-quote"), "“" + qt + "”"); else hide($("#tv-quote-wrap"));
+  }
+
+  /* ── venue / address / map ── */
+  var venue = q.get("venue");
+  var city = "";
+  var addr = q.get("address");
+  if (addr && addr.trim()) {
+    setTxt($("#tv-venue-addr"), addr.trim());
+    // Uzbek addresses are city-FIRST ("Toshkent sh., Yunusobod tumani"):
+    // prefer a leading segment carrying a city marker; otherwise take the
+    // last segment only if it doesn't look like a street/district.
+    var segs = addr.split(",").map(function (s) { return s.trim(); }).filter(Boolean);
+    var cm = segs[0] && (segs[0].match(/^(.+?)\s+(?:sh\.?|shahri|шаҳри|ш\.)$/i) || segs[0].match(/^(?:г|g)\.\s*(.+)$/i));
+    if (cm) city = cm[1].trim();
+    else {
+      var tail = segs[segs.length - 1] || "";
+      city = /(tuman|ko'?cha|kuchasi|mavze|mahalla|MFY|uy\b|ул\.|улиц|дом|туман|кўча|street|district|avenue)/i.test(tail) ? "" : tail;
+    }
+  }
+  if (venue && venue.trim()) {
+    setTxt($("#tv-venue-name"), venue.trim());
+    setTxt($("#tv-hero-venue"), venue.trim());
+  }
+  MW.city = city;
+  if (city) {
+    setTxt($("#tv-hero-city"), city);
+  } else {
+    // no derivable city — drop the chip so the demo default never lingers
+    // next to an owner-entered venue
+    hide($("#tv-hero-city-wrap"));
+  }
+  var mapUrl = q.get("map_url");
+  var mapEl = $("#tv-map");
+  if (mapEl) {
+    // only http(s) — blocks javascript:/data: schemes from the owner param
+    if (mapUrl && /^https?:\/\//i.test(mapUrl.trim())) mapEl.setAttribute("href", mapUrl.trim());
+    else if (addr && addr.trim()) mapEl.setAttribute("href", "https://maps.google.com/?q=" + encodeURIComponent(addr.trim()));
+    else if (venue && venue.trim()) mapEl.setAttribute("href", "https://maps.google.com/?q=" + encodeURIComponent(venue.trim()));
+  }
+  /* events "Qayerda" (where) lines always reflect current venue+city,
+     independent of whether a date was parsed */
+  (function () {
+    if (!venue && !addr) return;
+    var vName = (venue && venue.trim()) || $("#tv-venue-name").textContent;
+    var whereText = vName + (city ? ", " + city : "");
+    var e1w = $("#tv-ev1-where"); if (e1w && e1w.getAttribute("data-user-set") !== "1") setTxt(e1w, whereText);
+    var e2w = $("#tv-ev2-where"); if (e2w && e2w.getAttribute("data-user-set") !== "1") setTxt(e2w, whereText);
+  })();
+
+  /* ── info rows (owner; empty hides the row; all-four-empty hides section) ── */
+  (function () {
+    var rows = [["info_dress", "#tv-info-dress", "#tv-info-dress-text"],
+      ["info_timing", "#tv-info-timing", "#tv-info-timing-text"],
+      ["info_rsvp", "#tv-info-rsvp", "#tv-info-rsvp-text"],
+      ["info_parking", "#tv-info-parking", "#tv-info-parking-text"]];
+    rows.forEach(function (r) {
+      var v = q.get(r[0]);
+      if (v == null) return;
+      if (v.trim()) setTxt($(r[2]), v.trim()); else hide($(r[1]));
+    });
+    var anyVisible = rows.some(function (r) { var el = $(r[1]); return el && el.style.display !== "none"; });
+    if (!anyVisible) hide($("#tv-info-section"));
+  })();
+
+  /* ── footer note (owner) ── */
+  var fnote = q.get("footer_note");
+  if (fnote != null) { if (fnote.trim()) { var fe = $("#tv-foot-note"); if (fe) { fe.innerHTML = esc(fnote.trim()).replace(/\n/g, "<br>"); fe.setAttribute("data-user-set", "1"); } } else hide($("#tv-foot-note")); }
+
+  /* ── date + time ── */
+  var rawDate = q.get("date");
+  var rawTime = q.get("time");
+  var target = null;
+  if (rawDate) {
+    var m = rawDate.match(/^(\d{1,2})\.(\d{1,2})\.(\d{4})$/);
+    var iso = rawDate.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/);
+    var dd, mm, yy;
+    if (m) { dd = +m[1]; mm = +m[2]; yy = +m[3]; }
+    else if (iso) { yy = +iso[1]; mm = +iso[2]; dd = +iso[3]; }
+    if (dd) {
+      var hh = 16, mi = 0;
+      if (rawTime) { var tp = rawTime.split(":"); hh = parseInt(tp[0], 10); mi = parseInt(tp[1], 10) || 0; if (isNaN(hh)) hh = 16; }
+      var dObj = new Date(yy, mm - 1, dd, hh, mi, 0);
+      var p2 = function (n) { return (n < 10 ? "0" : "") + n; };
+      MW.dd = dd; MW.mm = mm; MW.yy = yy; MW.dow = dObj.getDay(); MW.ev1Time = p2(hh) + ":" + p2(mi);
+      target = dObj;
+      window.__INV_TARGET__ = dObj.getTime();
+      setTxt($("#tv-hero-date"), p2(dd) + " · " + p2(mm) + " · " + yy);
+      setTxt($("#tv-splash-date"), p2(dd) + " · " + p2(mm) + " · " + yy);
+    }
+  }
+
+  /* ── events timeline (owner list overrides defaults) ── */
+  (function () {
+    var raw = q.get("events");
+    if (raw == null) return;
+    var rows;
+    try { rows = JSON.parse(raw); } catch (e) { return; }
+    if (!Array.isArray(rows)) return;
+    var section = $("#tv-events-section");
+    var live = rows.filter(function (r) { return r && (r.title || r.description || r.time || r.place); });
+    if (!live.length) { hide(section); return; }
+    var host = $("#tv-events");
+    var spine = host.firstElementChild;
+    host.innerHTML = "";
+    if (spine) host.appendChild(spine);
+    live.forEach(function (r) {
+      var meta = [r.time, r.place].filter(Boolean).join(" · ");
+      var row = document.createElement("div");
+      row.className = "tv-ev-row";
+      row.setAttribute("data-reveal", "");
+      row.style.position = "relative";
+      row.style.marginBottom = "30px";
+      row.innerHTML =
+        '<div style="position:absolute;left:-40px;top:2px;width:24px;height:24px;border-radius:50%;background:var(--ivory);border:1px solid var(--gold);display:flex;align-items:center;justify-content:center;"><div style="width:12px;height:12px;border-radius:50%;background:radial-gradient(circle at 50% 45%, var(--peacock) 0 22%, var(--gold) 26% 52%, var(--teal) 58% 100%);"></div></div>' +
+        '<div style="background:linear-gradient(180deg, #FCFAF3, #F3ECDD);padding:24px 24px 26px;border:1px solid rgba(198,162,74,.22);box-shadow:0 24px 46px -30px rgba(12,30,26,.4), 0 8px 18px -14px rgba(12,30,26,.24), inset 0 1px 0 rgba(255,255,255,.55);">' +
+          (r.title ? '<div style="font-family:\'Cormorant Garamond\',serif;font-size:27px;font-weight:500;color:var(--emerald);line-height:1.1;margin-bottom:6px;">' + esc(r.title) + '</div>' : '') +
+          (meta ? '<div style="font-family:\'Cormorant Garamond\',serif;text-transform:uppercase;letter-spacing:.2em;font-size:12px;color:var(--teal-2);margin-bottom:10px;">' + esc(meta) + '</div>' : '') +
+          (r.description ? '<p style="font-family:\'Cormorant Garamond\',serif;font-style:italic;font-size:16px;color:var(--ink-soft);margin:0;">' + esc(r.description) + '</p>' : '') +
+        '</div>';
+      host.appendChild(row);
+    });
+    // freshly-built rows have no prior transition state — reveal immediately
+    Array.prototype.forEach.call(host.querySelectorAll("[data-reveal]"), function (n) { n.classList.add("tv-in"); });
+  })();
+
+  /* ── countdown ── */
+  (function () {
+    var grid = $("#tv-cd-grid"), arrived = $("#tv-cd-arrived");
+    var cd = { d: $("#tv-cd-d"), h: $("#tv-cd-h"), m: $("#tv-cd-m"), s: $("#tv-cd-s") };
+    if (!cd.d) return;
+    var when = target || new Date(2026, 7, 14, 16, 0, 0);
+    function tick() {
+      var diff = when.getTime() - Date.now();
+      if (diff <= 0) {
+        if (grid) grid.style.display = "none";
+        if (arrived) arrived.style.display = "block";
+        cd.d.textContent = "0"; cd.h.textContent = "00"; cd.m.textContent = "00"; cd.s.textContent = "00";
+        return;
+      }
+      var day = 86400000;
+      cd.d.textContent = Math.floor(diff / day);
+      cd.h.textContent = ("0" + Math.floor(diff % day / 3600000)).slice(-2);
+      cd.m.textContent = ("0" + Math.floor(diff % 3600000 / 60000)).slice(-2);
+      cd.s.textContent = ("0" + Math.floor(diff % 60000 / 1000)).slice(-2);
+    }
+    tick();
+    setInterval(tick, 1000);
+  })();
+
+  /* ── splash open ── */
+  (function () {
+    var splash = $("#tv-splash");
+    var opened = false;
+    if (splash) document.body.style.overflow = "hidden";
+    function open() {
+      if (opened) return; opened = true;
+      if (splash) {
+        splash.style.opacity = "0";
+        splash.style.transform = "translateX(-50%) translateY(-26px)";
+        splash.style.pointerEvents = "none";
+        setTimeout(function () { splash.style.display = "none"; }, 1100);
+      }
+      document.body.style.overflow = "";
+    }
+    var ob = $("#tv-open");
+    if (ob) ob.addEventListener("click", open);
+    if (!splash) document.body.style.overflow = "";
+  })();
+
+  /* ── feather-mask JS fallback (harmless duplicate of the inline style) ── */
+  (function () {
+    var f = $("#tv-frame-img");
+    if (!f) return;
+    var mVal = "radial-gradient(118% 98% at 50% 48%, #000 64%, rgba(0,0,0,0) 100%)";
+    f.style.webkitMaskImage = mVal;
+    f.style.maskImage = mVal;
+    f.style.webkitMaskRepeat = f.style.maskRepeat = "no-repeat";
+    f.style.webkitMaskSize = f.style.maskSize = "100% 100%";
+  })();
+
+  /* ── music (?audio) + first-gesture handshake with the parent shell ── */
+  (function () {
+    var audio = $("#tv-audio"), btn = $("#tv-music");
+    var onI = $("#tv-music-on"), offI = $("#tv-music-off");
+    var url = q.get("audio");
+    var playing = false;
+    function setIcon() { if (onI) onI.style.display = playing ? "flex" : "none"; if (offI) offI.style.display = playing ? "none" : "flex"; }
+    if (url && audio && btn) {
+      audio.src = url;
+      btn.style.display = "flex";
+      btn.addEventListener("click", function () {
+        if (playing) { audio.pause(); playing = false; }
+        else { audio.play().then(function () { playing = true; setIcon(); }).catch(function () {}); }
+        setIcon();
+      });
+    }
+    var fired = false;
+    var evs = ["pointerdown", "touchstart", "keydown"];
+    function once() {
+      if (fired) return; fired = true;
+      try { if (window.parent && window.parent !== window) window.parent.postMessage("taklifla:gesture", "*"); } catch (e) {}
+      evs.forEach(function (x) { window.removeEventListener(x, once, true); });
+    }
+    evs.forEach(function (x) { window.addEventListener(x, once, { capture: true, passive: true }); });
+  })();
+
+  /* ── reveal on scroll (IO + no-IO fallback + reduced-motion respected) ── */
+  (function () {
+    var els = document.querySelectorAll("[data-reveal]");
+    var reduced = false;
+    try { reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches; } catch (e) {}
+    if (reduced || !("IntersectionObserver" in window)) {
+      for (var i = 0; i < els.length; i++) els[i].classList.add("tv-in");
+      return;
+    }
+    var io = new IntersectionObserver(function (ents) {
+      ents.forEach(function (en) {
+        if (en.isIntersecting) {
+          var d = parseInt(en.target.getAttribute("data-reveal-delay") || "0", 10);
+          if (d) en.target.style.transitionDelay = d + "ms";
+          en.target.classList.add("tv-in");
+          io.unobserve(en.target);
+        }
+      });
+    }, { threshold: 0.14, rootMargin: "0px 0px -7% 0px" });
+    for (var j = 0; j < els.length; j++) io.observe(els[j]);
+  })();
+
+  /* ── floating particles (6 dots, ported from buildParticles) ── */
+  (function () {
+    var host = $("#tv-particles");
+    if (!host) return;
+    var n = 6;
+    var tints = ["#C6A24A", "#0E6B62"];
+    for (var i = 0; i < n; i++) {
+      var size = 3 + (i % 3) * 2;
+      var left = (8 + i * 15) % 100;
+      var dur = 28 + (i * 13 % 14);
+      var delay = -(i * 37 % 26);
+      var drift = ((i % 2) ? 1 : -1) * (14 + (i * 11 % 30));
+      var tint = tints[i % tints.length];
+      var d = document.createElement("div");
+      d.style.cssText = "position:absolute;top:-6vh;left:" + left + "%;width:" + size + "px;height:" + size +
+        "px;border-radius:50%;background:radial-gradient(circle at 50% 42%, " + tint + " 0 22%, rgba(198,162,74,.26) 28% 52%, transparent 60%);" +
+        "opacity:.22;--drift:" + drift + "px;animation:fall " + dur + "s linear " + delay + "s infinite;";
+      host.appendChild(d);
+    }
+  })();
+
+  /* ── guestbook (wishes) ── */
+  (function () {
+    var slug = q.get("slug");
+    var form = $("#tv-wish-form"), list = $("#tv-wish-list");
+    var empty = $("#tv-wish-empty"), confirm = $("#tv-wish-confirm");
+    if (!form || !list) return;
+    var KEY = "takliflaWishSubmitted:" + (slug || "demo");
+
+    function render(items) {
+      list.innerHTML = "";
+      if (!items || !items.length) { if (empty) empty.style.display = "block"; return; }
+      if (empty) empty.style.display = "none";
+      items.forEach(function (w) {
+        var name = w.name || w.n || "";
+        var msg = w.message || w.m || "";
+        var c = document.createElement("div");
+        c.style.cssText = "background:rgba(255,255,255,.66);border:1px solid rgba(198,162,74,.22);border-radius:2px;padding:16px 18px;box-shadow:0 14px 28px -22px rgba(12,30,26,.34);";
+        c.innerHTML = '<div style="display:flex;align-items:center;gap:9px;margin-bottom:6px;">' +
+          '<div style="width:13px;height:13px;border-radius:50%;background:radial-gradient(circle at 50% 45%, var(--peacock) 0 24%, var(--gold) 28% 56%, var(--teal) 60% 100%);flex:none;"></div>' +
+          '<div style="font-family:\'Cormorant Garamond\',serif;font-style:italic;font-size:18px;color:var(--emerald);">' + esc(name) + '</div></div>' +
+          '<div style="font-family:\'Cormorant Garamond\',serif;font-size:16px;line-height:1.55;color:var(--ink);white-space:pre-wrap;">' + esc(msg) + '</div>';
+        list.appendChild(c);
+      });
+    }
+    function lock() { form.style.display = "none"; if (confirm) confirm.style.display = "block"; }
+
+    if (!slug) {
+      var demo = [];
+      try { demo = JSON.parse(localStorage.getItem("tvDemoWishes") || "[]"); } catch (e) {}
+      render(demo);
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        var n = form.elements.wname.value.trim(), msg = form.elements.wmsg.value.trim();
+        if (!n || !msg) return;
+        demo.unshift({ name: n, message: msg });
+        try { localStorage.setItem("tvDemoWishes", JSON.stringify(demo)); } catch (er) {}
+        render(demo); form.reset();
+      });
+      return;
+    }
+
+    var URL = "/api/v1/public/i/" + encodeURIComponent(slug) + "/guestbook";
+    function load() {
+      fetch(URL, { credentials: "omit" }).then(function (r) { return r.ok ? r.json() : []; })
+        .then(function (items) { render(items || []); }).catch(function () {});
+    }
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var n = form.elements.wname.value.trim(), msg = form.elements.wmsg.value.trim();
+      if (!n || !msg) return;
+      var btn = form.querySelector('button[type="submit"]');
+      if (btn) btn.disabled = true;
+      fetch(URL, { method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name: n, message: msg }), credentials: "omit" })
+        .then(function (r) { if (!r.ok) throw new Error("http_" + r.status); return r.json(); })
+        .then(function () { try { localStorage.setItem(KEY, "1"); } catch (er) {} form.reset(); lock(); load(); })
+        .catch(function () { if (btn) btn.disabled = false; });
+    });
+    load();
+    try { if (localStorage.getItem(KEY) === "1") lock(); } catch (e) {}
+  })();
+
+  apply();
+})();
+</script>
+<script src="_wish-close.js" defer></script>
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092" integrity="sha512-UKNk8GbxkABxKcXYuLkO16EleLGUkcvJWtpSNmExE0Too3ZaFAxTscNWEc1OdAv5/BikHawapSCaiD2XCmp+Bw==" data-cf-beacon='{"version":"2024.11.0","token":"6431f953c96a4463ae9db5f7f0ad549e","r":1,"spa":2}' crossorigin="anonymous"></script>
+</body>
+</html>
