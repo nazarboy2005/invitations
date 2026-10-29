@@ -39,6 +39,7 @@ const TakliflaQogozErtagiInvitation = dynamic(() => import("@/templates/taklifla
 const SakuraGuliInvitation = dynamic(() => import("@/templates/taklifla-sakura-guli/renderer").then(m=>m.SakuraGuliInvitation));
 const TakliflaSharlarInvitation = dynamic(() => import("@/templates/taklifla-sharlar/renderer").then(m=>m.TakliflaSharlarInvitation));
 const TakliflaYulduzliTun = dynamic(() => import("@/templates/taklifla-yulduzli-tun/renderer").then(m=>m.TakliflaYulduzliTun));
+const TakliflaTerracottaInvitation = dynamic(() => import("@/templates/taklifla-terracotta/renderer").then(m=>m.TakliflaTerracottaInvitation));
 const TakliflaYubileySahifasi = dynamic(() => import("@/templates/taklifla-yubiley-sahifasi/renderer").then(m=>m.TakliflaYubileySahifasi));
 const TakliflaBarakali = dynamic(() => import("@/templates/taklifla-barakali/renderer").then(m => m.TakliflaBarakali));
 const TakliflaZarhalSahifa = dynamic(() => import("@/templates/taklifla-zarhal-sahifa/renderer").then((module) => module.TakliflaZarhalSahifaInvitation));
@@ -305,7 +306,7 @@ export function FullTemplatePreview({
         />
       )}
       {!cardPreview && !posterCapture && <nav
-        className={`${styles.previewControls} ${["taklifla-sharlar","taklifla-yulduzli-tun"].includes(template.id) ? styles.leftLanguageClearance : ""} ${showControls ? styles.controlsVisible : ""} ${["taklifla-yulduzli-tun", "taklifla-sharlar", "taklifla-sakura-guli", "taklifla-qogoz-ertagi", "taklifla-parilar-ertagi", "taklifla-osmon", "taklifla-oltin-yol", "taklifla-toglar-bagrida", "taklifla-zarrin-gullar", "taklifla-gulbog", "taklifla-ertak", "taklifla-fayzli-xonadon", "taklifla-yubiley-sahifasi", "taklifla-barakali", "taklifla-tungi-saroy", "taklifla-tovus"].includes(template.id) ? styles.templateLanguageClearance : ""}`}
+        className={`${styles.previewControls} ${["taklifla-sharlar","taklifla-yulduzli-tun","taklifla-terracotta"].includes(template.id) ? styles.leftLanguageClearance : ""} ${showControls ? styles.controlsVisible : ""} ${["taklifla-terracotta", "taklifla-yulduzli-tun", "taklifla-sharlar", "taklifla-sakura-guli", "taklifla-qogoz-ertagi", "taklifla-parilar-ertagi", "taklifla-osmon", "taklifla-oltin-yol", "taklifla-toglar-bagrida", "taklifla-zarrin-gullar", "taklifla-gulbog", "taklifla-ertak", "taklifla-fayzli-xonadon", "taklifla-yubiley-sahifasi", "taklifla-barakali", "taklifla-tungi-saroy", "taklifla-tovus"].includes(template.id) ? styles.templateLanguageClearance : ""}`}
         aria-label="Dizayn amallari"
         aria-hidden={!showControls}
         inert={!showControls}
@@ -377,6 +378,8 @@ export function FullTemplatePreview({
         <TakliflaSharlarInvitation invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} silentPlayback={silentPlayback} qaReducedMotion={qaReducedMotion} />
       ) : template.id === "taklifla-yulduzli-tun" ? (
         <TakliflaYulduzliTun invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} silentPlayback={silentPlayback} qaReducedMotion={qaReducedMotion} />
+      ) : template.id === "taklifla-terracotta" ? (
+        <TakliflaTerracottaInvitation invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} silentPlayback={silentPlayback} qaReducedMotion={qaReducedMotion} />
       ) : template.id === "taklifla-yubiley-sahifasi" ? (
         <TakliflaYubileySahifasi invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} silentPlayback={silentPlayback} qaReducedMotion={qaReducedMotion} />
       ) : template.id === "taklifla-barakali" ? (

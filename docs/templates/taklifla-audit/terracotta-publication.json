@@ -1,0 +1,25 @@
+{
+  "date": "2026-10-29",
+  "configured": true,
+  "template": {
+    "id": "taklifla-terracotta",
+    "name": "Terracotta",
+    "description": "Sopol tuslari, nafis botanika qatlamlari va iliq nikoh manzaralari.",
+    "previewImage": "/templates/taklifla-terracotta/preview.webp",
+    "previewEventType": "wedding",
+    "categoryIds": [
+      "wedding"
+    ],
+    "supportedEventTypes": [
+      "wedding"
+    ],
+    "priceMinor": 100000,
+    "currency": "UZS",
+    "accent": "#bb7657",
+    "published": true
+  },
+  "migrations": [
+    "0201_register_taklifla_terracotta.sql",
+    "0202_publish_taklifla_terracotta.sql"
+  ]
+}

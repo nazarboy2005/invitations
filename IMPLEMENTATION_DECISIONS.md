@@ -2161,3 +2161,7 @@ Development agents are distinct from production queue workers. The running app w
 ### Starry Night completion (2026-10-29)
 
 - Yulduzli Tun retains the original starry artwork, 120 stars/35 canvas particles and native language popover. Guest information and optional footer prose use editable validated localized `templateData["taklifla-yulduzli-tun"]`; shared identity, hosts, dates, program and Google venue remain reusable. Catalog notes/wishes use the shared wedding event fixture only. Migrations 0199/0200 register/publish after verification.
+
+### Terracotta completion (2026-10-29)
+
+- Preserve the Terracotta wedding source artwork, native opener, dust and floating botanicals. Information/footer prose uses editable validated localized `templateData["taklifla-terracotta"]`; core identity/greeting/message/hosts/program/date and Google venue stay shared. Catalog notes and wishes come only from the canonical wedding profile. No guest-count input. Migrations 0201/0202 register/publish after verification.

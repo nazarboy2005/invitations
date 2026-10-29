@@ -28,7 +28,7 @@ untouched. Application deployment and live payment activation are excluded.
 | Sakura | taklifla-sakura-guli | Private package | Complete — hidden notes/city, empty timeline, wishes/music/status/sizing fixed; published 0195/0196 |
 | Sharlar | taklifla-sharlar | Private package | Complete — missing bridge/motion, shared age/doors/maps/wishes restored; published 0197/0198 |
 | Starry Night | taklifla-yulduzli-tun | Private package | Complete — broken scene URLs, hidden information, native menu and shared wishes/maps restored; published 0199/0200 |
-| Terracotta | taklifla-terracotta | Private package | Pending |
+| Terracotta | taklifla-terracotta | Private package | Complete — missing bridge/services/routes, editable notes/shared maps/music restored; published 0201/0202 |
 | Uchrashuv | taklifla-uchrashuv | Private package | Pending |
 | Yaylov | To reconcile | No registered package | Pending |
 | Yomg‘ir | taklifla-yomgirdan-song | Private package | Pending |
@@ -170,3 +170,9 @@ the individual commit below each completed row.
 - All six paintings and nine fonts, exact source CSS, 120 stars, 35 native particles, shimmer/opening/reveals/countdown and original language popover retained. CSS now resolves four previously broken painted scene paths. Previously hidden information prose has editable localized persistence; footer note restored similarly.
 - Full route registration, ready handshake, canonical localized preview wishes, authored-address Google fallback and status/context handling added. Shared identity/hosts/message/program/maps stay reusable. No sample provider data or storage served.
 - 25 shared/package checks, three-viewport source/motion comparisons, four locales, long/empty/seven events/reduced/failed and preview checks, actual audio, source/personalized covers, real note save/reopen/studio/publication/public/maps/pending wishes and compatible switching, typecheck/build pass. Migrations 0199/0200 publish only Starry Night. Evidence: docs/templates/taklifla-audit/starry*.
+
+## Terracotta integration
+
+- Connected previously missing bridge while retaining exact source CSS/art/fonts, original opener, four botanical layers, 22 particles, parallax, shimmer and reveals. Full native timeline/wish markup retained. Editor/public/catalog share one real renderer.
+- Added validated editable information/footer notes with canonical shared preview examples; shared names/date/greeting/message/hosts/program and Google venue drive source data. Canonical wishes/music remain preview-only. Failures retain input and translated status; moderated submissions require real API acknowledgement. No guest-count form.
+- 25 shared/package checks, source/motion comparisons at 320/390/1280, four locales/long/empty/seven events/reduced/failure/preview checks, actual decoded audio, covers, real notes save/reopen/studio/publication/personalized public/maps/pending wishes and compatible switching, typecheck/build pass. Migrations 0201/0202 publish only Terracotta. Evidence: docs/templates/taklifla-audit/terracotta*.

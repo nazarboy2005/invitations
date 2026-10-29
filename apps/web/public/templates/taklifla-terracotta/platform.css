@@ -1,0 +1,22 @@
+/* Contract/accessibility adaptations only; original visual CSS is template.css. */
+[hidden] { display: none !important; }
+body[data-pending] { visibility: hidden; }
+.invitation-message, .venue-address { white-space: pre-line; }
+.hero-content { max-width: 100%; }
+.hero-names, .invitation-couple, .footer-names, .venue-name, .timeline-event, .wish-author, .wish-text { overflow-wrap: anywhere; }
+.hero-names { max-width: 100%; }
+.hero-names.long-names { font-size: clamp(24px, 7.6vw, 36px); }
+.wish-text { white-space: pre-wrap; }
+#wishStatus { margin-top: 12px; color: var(--medium-brown); font-size: 13px; line-height: 1.6; }
+.wish-submit:disabled { opacity: .6; cursor: wait; }
+:focus-visible { outline: 2px solid var(--terracotta-dark); outline-offset: 5px; }
+html[data-reduced-motion] { scroll-behavior: auto; }
+html[data-reduced-motion] *, html[data-reduced-motion] *::before, html[data-reduced-motion] *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+html[data-reduced-motion] .reveal { opacity: 1; transform: none; }
+html[data-reduced-motion] #particles-container { display: none; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+  .reveal { opacity: 1; transform: none; }
+  #particles-container { display: none; }
+}

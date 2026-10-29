@@ -157,6 +157,7 @@ function isJsonValue(value: unknown): value is JsonValue {
   return false;
 }
 const pulauLocalizedText = z.partialRecord(localeSchema, text);
+export const terracottaDataSchema = z.object({infoNote:localizedLongText.default({}),footerNote:localizedLongText.default({})}).default({infoNote:{},footerNote:{}});
 export const starryDataSchema = z.object({infoNote:localizedLongText.default({}),footerNote:localizedLongText.default({})}).default({infoNote:{},footerNote:{}});
 export const sharlarDataSchema = z.object({doorsAt:z.string().regex(/^(?:[01]\d|2[0-3]):[0-5]\d$/).or(z.literal("")).default("")}).default({doorsAt:""});
 export const sakuraDataSchema = z.object({contactNote:localizedLongText.default({}),infoNote:localizedLongText.default({}),footerNote:localizedLongText.default({})}).default({contactNote:{},infoNote:{},footerNote:{}});
@@ -227,6 +228,7 @@ export const invitationSchema = z
     id: z.string().min(1).max(100),
     templateId: invitationTemplateIdSchema,
     templateData: z.record(z.string(), z.custom<JsonValue>(isJsonValue)).default({}).superRefine((data, ctx) => {
+      if(data["taklifla-terracotta"] !== undefined && !terracottaDataSchema.safeParse(data["taklifla-terracotta"]).success) ctx.addIssue({code:"custom",path:["taklifla-terracotta"],message:"Invalid terracotta notes"});
       if(data["taklifla-yulduzli-tun"] !== undefined && !starryDataSchema.safeParse(data["taklifla-yulduzli-tun"]).success) ctx.addIssue({code:"custom",path:["taklifla-yulduzli-tun"],message:"Invalid starry invitation notes"});
       if(data["taklifla-sharlar"] !== undefined && !sharlarDataSchema.safeParse(data["taklifla-sharlar"]).success) ctx.addIssue({code:"custom",path:["taklifla-sharlar"],message:"Invalid doors opening time"});
       if (data["taklifla-sakura-guli"] !== undefined && !sakuraDataSchema.safeParse(data["taklifla-sakura-guli"]).success) ctx.addIssue({code:"custom",path:["taklifla-sakura-guli"],message:"Invalid sakura notes"});
@@ -1521,6 +1523,12 @@ export const TEMPLATES: TemplateDefinition[] = [
     previewImage: "/templates/taklifla-yulduzli-tun/preview.webp", previewEventType: "wedding",
     categoryIds: ["wedding"], supportedEventTypes: ["wedding"],
     priceMinor: 100000, currency: "UZS", accent: "#c8a951", published: true,
+  },
+  {
+    id: "taklifla-terracotta", name: "Terracotta", description: "Sopol tuslari, nafis botanika qatlamlari va iliq nikoh manzaralari.",
+    previewImage: "/templates/taklifla-terracotta/preview.webp", previewEventType: "wedding",
+    categoryIds: ["wedding"], supportedEventTypes: ["wedding"],
+    priceMinor: 100000, currency: "UZS", accent: "#bb7657", published: true,
   },
   {
     id: "taklifla-yubiley-sahifasi", name: "Yubiley Sahifasi",

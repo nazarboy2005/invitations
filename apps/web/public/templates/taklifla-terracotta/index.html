@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="uz-Latn" data-awaiting-data><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Sopol nafosi</title><link rel="stylesheet" href="fonts/fonts.css"><link rel="stylesheet" href="template.css"><link rel="stylesheet" href="language.css"><link rel="stylesheet" href="platform.css"></head><body data-pending>
+
+
+
+<div id="splash">
+    <div class="splash-decor" style="background-image: url('terracotta-img/countdown-bg.webp'); background-size: 460px auto; background-position: 48% center;"></div>
+    <div class="monogram"><span class="monogram-and">&</span></div>
+    <div class="splash-ornament"></div>
+    <div class="splash-date"></div>
+    <button class="open-btn" id="openBtn"></button>
+</div>
+
+
+<button class="music-btn" id="musicBtn" aria-label="">♪</button>
+<audio id="bgMusic" loop preload="none">
+
+</audio>
+
+
+<div id="particles-container"></div>
+
+
+
+<div id="app">
+
+
+    <section class="hero">
+        <div class="hero-bg" id="heroBg" style="background-image: url('terracotta-img/hero-bg.webp');"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <p class="hero-subtitle reveal"></p>
+            <h1 class="hero-names reveal reveal-delay-1">
+                <span class="shimmer-text"></span>
+                <span class="hero-amp" aria-hidden="true">&</span>
+                <span class="shimmer-text"></span>
+            </h1>
+            <p class="hero-date reveal reveal-delay-2"></p>
+        </div>
+        <div class="scroll-hint">
+            <span></span>
+            <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </div>
+    </section>
+
+
+    <div class="divider">
+        <div class="divider-img" id="divider1" style="height:80px; background-image: url('terracotta-img/divider-1.webp');"></div>
+    </div>
+
+
+    <section class="invitation section-padding">
+        <div class="invitation-frame" id="invFrame" style="background-image: url('terracotta-img/invitation-frame.webp'); background-size: contain; background-repeat: no-repeat; background-position: center;"></div>
+        <div class="invitation-inner">
+            <div class="invitation-icon reveal">✦ &nbsp; ✦ &nbsp; ✦</div>
+            <div class="invitation-couple reveal reveal-delay-1"></div>
+            <p class="invitation-message reveal reveal-delay-2"><br></p>
+            <p class="invitation-date-formal reveal reveal-delay-2"></p>
+            <p class="invitation-venue reveal reveal-delay-2"></p>
+        </div>
+    </section>
+
+
+    <div class="divider">
+        <div class="divider-fallback">
+            <span>✦ &nbsp; ✦ &nbsp; ✦</span>
+        </div>
+    </div>
+
+
+    <section class="events section-padding">
+        <p class="section-script reveal"></p>
+        <h2 class="section-title reveal"></h2>
+        <div class="timeline" data-program>
+        </div>
+    </section>
+
+
+    <div class="divider">
+        <div class="divider-img" id="divider2" style="height:80px; background-image: url('terracotta-img/divider-1.webp'); transform: scaleX(-1);"></div>
+    </div>
+
+
+    <section class="venue">
+        <div class="venue-bg" id="venueBg" style="background-image: url('terracotta-img/venue-bg.webp');"></div>
+        <div class="venue-overlay"></div>
+        <div class="venue-content">
+            <p class="section-script reveal"></p>
+            <h2 class="venue-name reveal"></h2>
+            <p class="venue-address reveal reveal-delay-1"></p>
+            <a class="map-btn reveal reveal-delay-2" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"></path><circle cx="12" cy="9" r="2.5"></circle></svg></a>
+        </div>
+    </section>
+
+
+    <div class="info-section">
+        <div class="info-card reveal">
+            <p class="section-script" style="margin-bottom:16px;"></p>
+            <p></p>
+        </div>
+    </div>
+
+
+    <section class="wishes section-padding">
+        <p class="section-script reveal"></p>
+        <h2 class="section-title reveal" style="margin-bottom:24px;"></h2>
+
+        <div class="wishes-list" id="wishesList">
+        </div>
+
+        <form class="wish-form reveal" id="wishForm">
+            <input type="text" name="wname" id="wishName" maxlength="100" autocomplete="name" placeholder="" required>
+            <textarea name="wmsg" id="wishMsg" maxlength="2000" placeholder="" required></textarea>
+            <button type="submit" class="wish-submit"></button>
+        <p id="wishStatus" role="status" aria-live="polite"></p></form><p id="wishConfirm" role="status" hidden></p>
+    </section>
+
+
+    <section class="countdown-section">
+        <div class="countdown-bg" id="countdownBg" style="background-image: url('terracotta-img/countdown-bg.webp');"></div>
+        <div class="countdown-overlay"></div>
+        <div class="countdown-content">
+            <p class="section-script reveal"></p>
+            <h2 class="section-title reveal"></h2>
+            <div class="countdown-boxes reveal reveal-delay-1">
+                <div class="countdown-box">
+                    <div class="countdown-num" id="cdDays"></div>
+                    <div class="countdown-label"></div>
+                </div>
+                <div class="countdown-box">
+                    <div class="countdown-num" id="cdHours"></div>
+                    <div class="countdown-label"></div>
+                </div>
+                <div class="countdown-box">
+                    <div class="countdown-num" id="cdMins"></div>
+                    <div class="countdown-label"></div>
+                </div>
+                <div class="countdown-box">
+                    <div class="countdown-num" id="cdSecs"></div>
+                    <div class="countdown-label"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <footer class="footer">
+        <div class="footer-names"></div>
+        <div class="footer-date"></div>
+        <p class="footer-msg"></p>
+        <div class="footer-heart">♥</div>
+    </footer>
+
+
+    <div class="float-botanical fb-1" data-speed="-0.06" data-rotate="-12">
+        <img src="terracotta-img/float-eucalyptus.webp" alt="" loading="lazy">
+    </div>
+    <div class="float-botanical fb-2" data-speed="0.04" data-rotate="8">
+        <img src="terracotta-img/float-lavender.webp" alt="" loading="lazy">
+    </div>
+    <div class="float-botanical fb-3" data-speed="-0.05" data-rotate="15">
+        <img src="terracotta-img/float-wheat.webp" alt="" loading="lazy">
+    </div>
+    <div class="float-botanical fb-4" data-speed="0.03" data-rotate="-10">
+        <img src="terracotta-img/float-cotton.webp" alt="" loading="lazy">
+    </div>
+
+</div>
+
+<div class="taklifla-lang-switch" role="group" aria-label="Til">
+  <button type="button" class="taklifla-lang-toggle" aria-haspopup="menu" aria-expanded="false">
+    <span class="taklifla-lang-current">Uz</span>
+    <span class="chev" aria-hidden="true">▾</span>
+  </button>
+  <div class="taklifla-lang-menu" role="menu">
+    <button type="button" data-lang="uz-Latn" role="menuitemradio">Uz</button>
+    <hr /><button type="button" data-lang="uz-Cyrl" role="menuitemradio">Уз</button>
+    <button type="button" data-lang="en" role="menuitemradio">En</button>
+    <hr />
+    <button type="button" data-lang="ru" role="menuitemradio">Ru</button>
+  </div>
+</div><script src="source/motion.js"></script><script src="cyrillic.js"></script><script src="copy.js"></script><script src="bridge.js"></script></body></html>

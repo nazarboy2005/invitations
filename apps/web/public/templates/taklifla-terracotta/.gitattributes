@@ -1,0 +1,5 @@
+template.css -text
+language.css -text
+source/*.js -text
+fonts/fonts.css -text
+source/labels.json -text

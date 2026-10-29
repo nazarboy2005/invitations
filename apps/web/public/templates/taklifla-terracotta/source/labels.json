@@ -1,0 +1,104 @@
+[
+  [
+    "#openBtn",
+    "Taklifnomani ochish",
+    "Open Invitation",
+    "Открыть приглашение"
+  ],
+  [
+    ".hero-subtitle",
+    "Biz turmush quramiz",
+    "We're getting married",
+    "Мы женимся"
+  ],
+  [
+    ".scroll-hint span",
+    "Pastga",
+    "Scroll",
+    "Вниз"
+  ],
+  [
+    ".invitation-message",
+    "Eng baxtli kunimizda biz bilan birga bo'lib,\nshu quvonchni baham ko'rishingizni so'raymiz",
+    "We invite you to our happiest day\nto be with us and share the joy",
+    "Приглашаем вас в наш самый счастливый день\nбыть рядом и разделить эту радость"
+  ],
+  [
+    ".events .section-script",
+    "Tantanalar",
+    "Celebrations",
+    "Торжества"
+  ],
+  [
+    ".events .section-title",
+    "Bizning maxsus kunimiz",
+    "Our Special Day",
+    "Наш особенный день"
+  ],
+  [
+    ".venue .section-script",
+    "Manzil",
+    "Location",
+    "Место проведения"
+  ],
+  [
+    ".venue-address",
+    "Oilalarimiz tantanada birlashadigan joy",
+    "Where our families unite in celebration",
+    "Там, где наши семьи объединяются в торжестве"
+  ],
+  [
+    ".map-btn",
+    "Xaritani ochish",
+    "Open Map",
+    "Открыть карту"
+  ],
+  [
+    ".info-card .section-script",
+    "Bilib qo'ying",
+    "Good to Know",
+    "Полезно знать"
+  ],
+  [
+    ".info-card p:not(.section-script)",
+    "Har bir mehmon biz uchun aziz — eng yaxshi kunimizda sizni ko'rishdan baxtiyormiz. Borligingizcha keling, biz bilan tantana qiling va birga go'zal xotiralar yarating.",
+    "Everyone is welcome — we are happy to have you on our best day. Come as you are, celebrate with us, and make beautiful memories together.",
+    "Каждый гость для нас дорог — мы счастливы видеть вас в наш лучший день. Приходите такими, какие вы есть, празднуйте с нами и создавайте вместе прекрасные воспоминания."
+  ],
+  [
+    ".wishes .section-script",
+    "Iliq tilaklar",
+    "Warm Wishes",
+    "Тёплые пожелания"
+  ],
+  [
+    ".wishes .section-title",
+    "Tilaklaringizni qoldiring",
+    "Leave Your Blessings",
+    "Оставьте свои пожелания"
+  ],
+  [
+    ".wish-submit",
+    "Tilakni yuborish",
+    "Send Wishes",
+    "Отправить пожелание"
+  ],
+  [
+    ".countdown-section .section-script",
+    "Sanab turibmiz",
+    "Counting Down",
+    "Обратный отсчёт"
+  ],
+  [
+    ".countdown-section .section-title",
+    "Bayramgacha",
+    "Until We Say \"I Do\"",
+    "До нашего торжества"
+  ],
+  [
+    ".footer-msg",
+    "Siz bilan tantana qilishni intizorlik bilan kutamiz",
+    "We can't wait to celebrate with you",
+    "Мы с нетерпением ждём встречи с вами"
+  ]
+]

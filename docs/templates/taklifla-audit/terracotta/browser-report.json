@@ -1,0 +1,91 @@
+{
+  "date": "2026-10-29",
+  "viewports": [
+    {
+      "width": 320,
+      "reference": {
+        "width": 320,
+        "font": "Lora, Georgia, serif",
+        "botanicals": 4,
+        "particles": 22
+      },
+      "actual": {
+        "width": 320,
+        "font": "Lora, Georgia, serif",
+        "botanicals": 4,
+        "particles": 22
+      },
+      "animation": "dust-float",
+      "botanicalParallax": true,
+      "sourceOpen": true,
+      "locales": 4,
+      "canonicalWishes": true,
+      "restoredInfo": true,
+      "sevenStableEvents": true,
+      "longNamesAndCopy": true,
+      "previewNoSend": true,
+      "failureRetainsInput": true,
+      "failureSurvivesLocale": true,
+      "reducedMotion": true,
+      "emptyOptionals": true
+    },
+    {
+      "width": 390,
+      "reference": {
+        "width": 390,
+        "font": "Lora, Georgia, serif",
+        "botanicals": 4,
+        "particles": 22
+      },
+      "actual": {
+        "width": 390,
+        "font": "Lora, Georgia, serif",
+        "botanicals": 4,
+        "particles": 22
+      },
+      "animation": "dust-float",
+      "botanicalParallax": true,
+      "sourceOpen": true,
+      "locales": 4,
+      "canonicalWishes": true,
+      "restoredInfo": true,
+      "sevenStableEvents": true,
+      "longNamesAndCopy": true,
+      "previewNoSend": true,
+      "failureRetainsInput": true,
+      "failureSurvivesLocale": true,
+      "reducedMotion": true,
+      "emptyOptionals": true
+    },
+    {
+      "width": 1280,
+      "reference": {
+        "width": 430,
+        "font": "Lora, Georgia, serif",
+        "botanicals": 4,
+        "particles": 22
+      },
+      "actual": {
+        "width": 430,
+        "font": "Lora, Georgia, serif",
+        "botanicals": 4,
+        "particles": 22
+      },
+      "animation": "dust-float",
+      "botanicalParallax": true,
+      "sourceOpen": true,
+      "locales": 4,
+      "canonicalWishes": true,
+      "restoredInfo": true,
+      "sevenStableEvents": true,
+      "longNamesAndCopy": true,
+      "previewNoSend": true,
+      "failureRetainsInput": true,
+      "failureSurvivesLocale": true,
+      "reducedMotion": true,
+      "emptyOptionals": true
+    }
+  ],
+  "errors": [],
+  "mockTransport": true
+}
