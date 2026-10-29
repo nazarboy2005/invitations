@@ -157,6 +157,7 @@ function isJsonValue(value: unknown): value is JsonValue {
   return false;
 }
 const pulauLocalizedText = z.partialRecord(localeSchema, text);
+export const osmonDataSchema = z.object({rsvpNote:localizedLongText.default({}),giftNote:localizedLongText.default({})}).default({rsvpNote:{},giftNote:{}});
 export const oltinYolDataSchema = z.object({arrivalNote:localizedLongText.default({}),giftNote:localizedLongText.default({}),contactNote:localizedLongText.default({}),footerNote:localizedLongText.default({})}).default({arrivalNote:{},giftNote:{},contactNote:{},footerNote:{}});
 export const mountainDataSchema = z.object({ceremonyTime:z.string().max(80).default(""),celebrationTime:z.string().max(80).default("")}).default({ceremonyTime:"",celebrationTime:""});
 export const zarrinDataSchema = z.object({brideFamily:localizedLongText.default({}),groomFamily:localizedLongText.default({}),stayText:localizedLongText.default({}),footerNote:localizedLongText.default({}),hashtag:z.string().max(100).default("")}).default({brideFamily:{},groomFamily:{},stayText:{},footerNote:{},hashtag:""});
@@ -221,6 +222,7 @@ export const invitationSchema = z
     id: z.string().min(1).max(100),
     templateId: invitationTemplateIdSchema,
     templateData: z.record(z.string(), z.custom<JsonValue>(isJsonValue)).default({}).superRefine((data, ctx) => {
+      if (data["taklifla-osmon"] !== undefined && !osmonDataSchema.safeParse(data["taklifla-osmon"]).success) ctx.addIssue({code:"custom",path:["taklifla-osmon"],message:"Invalid sky notes"});
       if (data["taklifla-oltin-yol"] !== undefined && !oltinYolDataSchema.safeParse(data["taklifla-oltin-yol"]).success) ctx.addIssue({code:"custom",path:["taklifla-oltin-yol"],message:"Invalid railway notes"});
       if (data["taklifla-toglar-bagrida"] !== undefined && !mountainDataSchema.safeParse(data["taklifla-toglar-bagrida"]).success) ctx.addIssue({code:"custom",path:["taklifla-toglar-bagrida"],message:"Invalid mountain scene times"});
       if (data["taklifla-zarrin-gullar"] !== undefined && !zarrinDataSchema.safeParse(data["taklifla-zarrin-gullar"]).success) ctx.addIssue({code:"custom",path:["taklifla-zarrin-gullar"],message:"Invalid marigold details"});
@@ -1473,6 +1475,12 @@ export const TEMPLATES: TemplateDefinition[] = [
     previewImage: "/templates/taklifla-oltin-yol/preview.webp", previewEventType: "wedding",
     categoryIds: ["wedding"], supportedEventTypes: ["wedding"],
     priceMinor: 100000, currency: "UZS", accent: "#b3552f", published: true,
+  },
+  {
+    id: "taklifla-osmon", name: "Cheksiz Osmon", description: "Bulutlar orasidagi sayohat, uchuvchi bezaklar va moviy nikoh taklifnomasi.",
+    previewImage: "/templates/taklifla-osmon/preview.webp", previewEventType: "wedding",
+    categoryIds: ["wedding"], supportedEventTypes: ["wedding"],
+    priceMinor: 100000, currency: "UZS", accent: "#3d6a99", published: true,
   },
   {
     id: "taklifla-yubiley-sahifasi", name: "Yubiley Sahifasi",

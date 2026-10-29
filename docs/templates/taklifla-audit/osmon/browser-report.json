@@ -1,0 +1,108 @@
+{
+  "date": "2026-10-29",
+  "viewports": [
+    {
+      "width": 320,
+      "reference": {
+        "width": 320,
+        "font": "\"Yeseva One\", serif",
+        "decor": 19,
+        "stars": 14
+      },
+      "actual": {
+        "width": 320,
+        "font": "\"Yeseva One\", serif",
+        "decor": 19,
+        "stars": 14
+      },
+      "starAnimation": "twinkle",
+      "sourceOpen": true,
+      "locales": 4,
+      "localizedCanonicalWishes": true,
+      "sourceDetails": true,
+      "planeRestored": true,
+      "skyParallax": true,
+      "sevenStableEvents": true,
+      "longNamesFit": true,
+      "previewNoSend": true,
+      "failureRetainsInput": true,
+      "closedAfter24Hours": true,
+      "reducedMotion": true,
+      "emptySections": true
+    },
+    {
+      "width": 390,
+      "reference": {
+        "width": 390,
+        "font": "\"Yeseva One\", serif",
+        "decor": 19,
+        "stars": 14
+      },
+      "actual": {
+        "width": 390,
+        "font": "\"Yeseva One\", serif",
+        "decor": 19,
+        "stars": 14
+      },
+      "starAnimation": "twinkle",
+      "sourceOpen": true,
+      "locales": 4,
+      "localizedCanonicalWishes": true,
+      "sourceDetails": true,
+      "planeRestored": true,
+      "skyParallax": true,
+      "sevenStableEvents": true,
+      "longNamesFit": true,
+      "previewNoSend": true,
+      "failureRetainsInput": true,
+      "closedAfter24Hours": true,
+      "reducedMotion": true,
+      "emptySections": true
+    },
+    {
+      "width": 1280,
+      "reference": {
+        "width": 430,
+        "font": "\"Yeseva One\", serif",
+        "decor": 19,
+        "stars": 14
+      },
+      "actual": {
+        "width": 430,
+        "font": "\"Yeseva One\", serif",
+        "decor": 19,
+        "stars": 14
+      },
+      "starAnimation": "twinkle",
+      "sourceOpen": true,
+      "locales": 4,
+      "localizedCanonicalWishes": true,
+      "sourceDetails": true,
+      "planeRestored": true,
+      "skyParallax": true,
+      "sevenStableEvents": true,
+      "longNamesFit": true,
+      "previewNoSend": true,
+      "failureRetainsInput": true,
+      "closedAfter24Hours": true,
+      "reducedMotion": true,
+      "emptySections": true
+    }
+  ],
+  "errors": [],
+  "httpErrors": [
+    {
+      "url": "http://127.0.0.1:3001/api/public/invitations/osmon-qa/wishes",
+      "status": 503
+    },
+    {
+      "url": "http://127.0.0.1:3001/api/public/invitations/osmon-qa/wishes",
+      "status": 503
+    },
+    {
+      "url": "http://127.0.0.1:3001/api/public/invitations/osmon-qa/wishes",
+      "status": 503
+    }
+  ],
+  "mockTransport": true
+}

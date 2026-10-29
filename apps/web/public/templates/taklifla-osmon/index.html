@@ -1,0 +1,162 @@
+<!doctype html><html lang="uz-Latn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Cheksiz Osmon — Taklifnoma</title><link rel="stylesheet" href="fonts.css"><link rel="stylesheet" href="source/template.css"><link rel="stylesheet" href="platform.css"></head><body>
+<div style="position:relative;">
+<div id="os-sky-outside" style="position:fixed;inset:0;z-index:0;background:#cbecfe;"></div>
+<!-- ── Language switcher ── -->
+<div aria-label="Til / Language" class="os-lang" role="group">
+<button class="on" data-lang="uz-Latn" type="button">UZ</button><button data-lang="uz-Cyrl" type="button">ЎЗ</button>
+<button data-lang="en" type="button">EN</button>
+<button data-lang="ru" type="button">RU</button>
+</div>
+<!-- ============ SPLASH ============ -->
+<div id="os-splash" style="position:fixed;inset:0;z-index:90;display:flex;align-items:center;justify-content:center;overflow:hidden;transition:opacity .75s ease;background:#7cbdf0;">
+<!-- pre-blurred tiny asset instead of a runtime blur(14px): Safari
+         rasterizes fixed layers carrying huge blur filters at reduced
+         resolution, which blurred ALL the splash text on iPhones -->
+<img alt="" src="osmon-img/sky-splash.webp" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.06);"/>
+<img alt="" src="osmon-img/obj-balloon.webp" style="position:absolute;top:12%;right:8%;width:90px;opacity:.55;animation:bobY 12s ease-in-out infinite;"/>
+<img alt="" src="osmon-img/cloud-3.webp" style="position:absolute;bottom:6%;left:-10%;width:70%;opacity:.5;animation:swayX 16s ease-in-out infinite;"/>
+<div style="position:relative;text-align:center;color:#fff;padding:0 28px;">
+<div data-i18n="splash_kicker" style="font-size:13px;letter-spacing:.32em;text-transform:uppercase;opacity:.85;">To'y taklifnomasi</div>
+<div id="os-splash-mono" style="font-family:'Yeseva One',serif;font-size:64px;line-height:1.05;margin:18px 0 4px;text-shadow:0 4px 26px rgba(20,50,90,.45);"></div>
+<div class="os-fitline" id="os-splash-names" style="font-family:'Borel','Marck Script',cursive;font-size:20px;opacity:.95;margin-bottom:36px;"></div>
+<button id="os-open" style="cursor:pointer;font-size:14px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#fff;padding:17px 36px;border-radius:999px;background:rgba(255,255,255,.18);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.6);box-shadow:0 10px 30px rgba(20,50,90,.3),inset 0 1px 0 rgba(255,255,255,.5);" type="button"><span data-i18n="splash_open">Taklifnomani ochish</span></button>
+</div>
+</div>
+<div id="os-col" style="position:relative;z-index:1;max-width:430px;margin:0 auto;overflow:hidden;box-shadow:0 0 80px rgba(70,110,170,.28);" tabindex="-1">
+<div style="position:absolute;inset:0;overflow:hidden;pointer-events:none;">
+<div style="position:absolute;inset:0;display:flex;flex-direction:column;">
+<img alt="" src="osmon-img/sky-tile-1.webp" style="flex:1;min-height:0;width:100%;object-fit:cover;display:block;transform:scaleY(-1);"/>
+<img alt="" src="osmon-img/sky-tile-2.webp" style="flex:1;min-height:0;width:100%;object-fit:cover;display:block;margin-top:-2px;"/>
+<img alt="" src="osmon-img/sky-tile-3.webp" style="flex:1;min-height:0;width:100%;object-fit:cover;display:block;margin-top:-2px;transform:scaleY(-1);"/>
+<img alt="" src="osmon-img/sky-tile-4.webp" style="flex:1;min-height:0;width:100%;object-fit:cover;display:block;margin-top:-2px;transform:scaleY(-1);"/>
+</div>
+<div style="position:absolute;left:0;right:0;top:25%;height:170px;transform:translateY(-50%);background:linear-gradient(rgba(146,208,245,0),rgb(146,208,245) 46%,rgb(146,208,245) 54%,rgba(146,208,245,0));"></div>
+<div style="position:absolute;left:0;right:0;top:50%;height:170px;transform:translateY(-50%);background:linear-gradient(rgba(148,200,237,0),rgb(148,200,237) 46%,rgb(148,200,237) 54%,rgba(148,200,237,0));"></div>
+<div style="position:absolute;left:0;right:0;top:75%;height:300px;transform:translateY(-50%);background:linear-gradient(rgba(189,134,124,0),rgb(189,134,124) 46%,rgb(189,134,124) 54%,rgba(189,134,124,0));"></div>
+<div id="os-sky-decor"></div>
+</div>
+<!-- ============ HERO ============ -->
+<section style="position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 22px 44px;box-sizing:border-box;">
+<img alt="" data-par="0.06" src="osmon-img/cloud-1.webp" style="position:absolute;top:4%;left:-14%;width:75%;opacity:.9;will-change:transform;"/>
+<img alt="" data-par="0.12" src="osmon-img/cloud-4.webp" style="position:absolute;top:13%;right:-18%;width:64%;opacity:.75;will-change:transform;"/>
+<div style="position:relative;text-align:center;color:#fff;">
+<div data-i18n="hero_kicker" style="font-family:'Borel','Marck Script',cursive;font-size:19px;text-shadow:0 2px 12px rgba(50,90,140,.45);">Biz turmush quramiz!</div>
+<div style="margin:12px 0 14px;">
+<div class="os-fitline" id="os-hero-line1" style="font-family:'Yeseva One',serif;font-weight:400;font-size:54px;line-height:1.12;background:linear-gradient(100deg,#ffffff 35%,#ffe9c0 50%,#ffffff 65%);background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;animation:shimmer 7s linear infinite;filter:drop-shadow(0 3px 14px rgba(40,80,130,.5));"></div>
+<div class="os-fitline" id="os-hero-line2" style="font-family:'Yeseva One',serif;font-weight:400;font-size:54px;line-height:1.12;background:linear-gradient(100deg,#ffffff 35%,#ffe9c0 50%,#ffffff 65%);background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;animation:shimmer 7s linear infinite;filter:drop-shadow(0 3px 14px rgba(40,80,130,.5));"></div>
+</div>
+<div id="os-hero-date" style="font-size:15px;letter-spacing:.3em;font-weight:600;text-shadow:0 2px 10px rgba(50,90,140,.55);"></div>
+<div style="margin-top:48px;display:flex;flex-direction:column;align-items:center;gap:8px;animation:hintBob 2.4s ease-in-out infinite;">
+<div data-i18n="hero_hint" style="font-size:11.5px;letter-spacing:.24em;text-transform:uppercase;font-weight:600;text-shadow:0 2px 8px rgba(50,90,140,.55);">Osmonga ko'tarilamiz</div>
+<svg fill="none" height="12" viewbox="0 0 20 12" width="20"><path d="M2 2l8 8 8-8" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4"></path></svg>
+</div>
+</div>
+</section>
+<!-- ============ SHOWCASE ============ -->
+<section style="position:relative;height:60vh;min-height:430px;">
+<div style="position:absolute;top:12%;left:0;width:100%;animation:crossR 140s linear -66s infinite;">
+<img alt="" loading="lazy" src="osmon-img/obj-cottage.webp" style="width:230px;display:block;margin:0 auto;animation:bobTilt 9s ease-in-out infinite;filter:drop-shadow(0 18px 30px rgba(60,90,140,.25));"/>
+</div>
+<div data-reveal="" style="position:absolute;left:0;right:0;bottom:10%;text-align:center;color:#fff;padding:0 30px;">
+<div data-i18n="showcase_line1" style="font-family:'Borel','Marck Script',cursive;font-size:21px;text-shadow:0 2px 14px rgba(50,90,140,.5);">Osmon uzra — baxt sari</div>
+<div data-i18n="showcase_line2" style="font-size:12px;letter-spacing:.2em;text-transform:uppercase;font-weight:600;opacity:.85;margin-top:8px;text-shadow:0 2px 8px rgba(50,90,140,.5);">Biz bilan parvoz qiling</div>
+</div>
+</section>
+<!-- ============ TAKLIFNOMA ============ -->
+<section style="position:relative;padding:34px 20px 70px;">
+<div style="position:relative;max-width:392px;margin:0 auto;">
+<img alt="" loading="lazy" src="osmon-img/frame-wreath.webp" style="position:absolute;top:calc(-11% - 48px);left:calc(-50% + 100px);width:calc(200% - 200px);height:calc(140% + 60px);min-width:calc(100% + 170px);pointer-events:none;z-index:2;opacity:.8;-webkit-mask-image:radial-gradient(ellipse closest-side at 50% 50%,#000 70%,transparent 95%);mask-image:radial-gradient(ellipse closest-side at 50% 50%,#000 70%,transparent 95%);"/>
+<div data-reveal="" style="position:relative;background:linear-gradient(165deg,rgba(255,255,255,.44),rgba(255,255,255,.18) 40%,rgba(255,255,255,.30));backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4);border:1px solid rgba(255,255,255,.65);border-radius:30px;box-shadow:0 20px 55px rgba(50,90,150,.2),inset 0 1.5px 0 rgba(255,255,255,.75);padding:58px 34px;text-align:center;color:#274565;text-shadow:0 1px 0 rgba(255,255,255,.35);">
+<div data-i18n="inv_kicker" style="font-family:'Borel','Marck Script',cursive;font-size:22px;color:#3d6a99;">Aziz mehmonlar!</div>
+<p id="os-message" style="font-size:15px;line-height:1.75;margin:16px 0 0;font-weight:500;"></p>
+<div class="os-fitline" id="os-inv-names" style="font-family:'Yeseva One',serif;font-size:29px;margin:14px 0;color:#2b4d74;"><span id="os-inv-n1"></span><span data-i18n="name_joiner" id="os-inv-joiner"> va </span><span id="os-inv-n2"></span></div>
+<p hidden="" style="font-size:15px;line-height:1.75;margin:0;font-weight:500;"></p>
+<div style="width:14px;height:14px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#ffe9b0,#f4b95f 60%,#e79a3c);box-shadow:0 0 12px rgba(244,185,95,.9);margin:22px auto;"></div>
+<div id="os-inv-date" style="font-size:13px;letter-spacing:.2em;font-weight:700;color:#2b4d74;"></div>
+<div id="os-parents-wrap"><p id="os-parents" style="font-size:12.5px;margin:18px 0 0;opacity:.75;"></p></div>
+</div>
+</div>
+</section>
+<section style="position:relative;height:32vh;min-height:230px;"></section>
+<!-- ============ TADBIRLAR ============ -->
+<section id="os-events-section" style="position:relative;padding:10px 22px 70px;">
+<div data-reveal="" style="background:linear-gradient(165deg,rgba(255,255,255,.44),rgba(255,255,255,.18) 40%,rgba(255,255,255,.30));backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4);border:1px solid rgba(255,255,255,.65);border-radius:30px;box-shadow:0 20px 55px rgba(50,90,150,.2),inset 0 1.5px 0 rgba(255,255,255,.75);padding:36px 30px;color:#274565;text-shadow:0 1px 0 rgba(255,255,255,.35);">
+<h2 data-i18n="tadbirlar_title" style="font-family:'Yeseva One',serif;font-weight:400;font-size:26px;margin:0;text-align:center;color:#2b4d74;">Tadbirlar</h2>
+<div data-i18n="tadbirlar_sub" style="font-family:'Borel','Marck Script',cursive;text-align:center;font-size:15px;color:#4a76a6;margin:6px 0 24px;">to'y kuni dasturi</div>
+<div id="os-events" style="display:flex;flex-direction:column;"></div>
+</div>
+</section>
+<section style="position:relative;height:30vh;min-height:210px;"></section>
+<!-- ============ MANZIL ============ -->
+<section style="position:relative;padding:10px 22px 70px;">
+<div data-reveal="" style="background:linear-gradient(165deg,rgba(255,255,255,.44),rgba(255,255,255,.18) 40%,rgba(255,255,255,.30));backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4);border:1px solid rgba(255,255,255,.65);border-radius:30px;box-shadow:0 20px 55px rgba(50,90,150,.2),inset 0 1.5px 0 rgba(255,255,255,.75);padding:36px 30px;text-align:center;color:#274565;text-shadow:0 1px 0 rgba(255,255,255,.35);">
+<h2 data-i18n="manzil_title" style="font-family:'Yeseva One',serif;font-weight:400;font-size:26px;margin:0;color:#2b4d74;">Manzil</h2>
+<div data-i18n="manzil_sub" style="font-family:'Borel','Marck Script',cursive;font-size:15px;color:#4a76a6;margin:6px 0 18px;">sizni shu yerda kutamiz</div>
+<div id="os-venue-name" style="font-family:'Yeseva One',serif;font-size:21px;color:#2b4d74;"></div>
+<p id="os-venue-addr" style="font-size:14px;line-height:1.65;margin:10px 0 0;font-weight:500;"></p>
+<a href="#" id="os-map" rel="noreferrer" style="display:inline-flex;align-items:center;gap:10px;margin-top:22px;padding:15px 30px;border-radius:999px;background:rgba(61,106,153,.92);color:#fff;text-decoration:none;font-weight:700;font-size:13.5px;letter-spacing:.08em;box-shadow:0 10px 26px rgba(50,90,150,.35);border:1px solid rgba(255,255,255,.4);" target="_blank">
+<svg fill="none" height="16" viewbox="0 0 24 24" width="16"><path d="M12 21s7-5.1 7-11a7 7 0 1 0-14 0c0 5.9 7 11 7 11z" stroke="#fff" stroke-width="2"></path><circle cx="12" cy="10" fill="#fff" r="2.6"></circle></svg>
+<span data-i18n="map_btn">Xaritada ochish</span></a>
+</div>
+</section>
+<!-- ============ MA'LUMOT ============ -->
+<section id="os-info-section" style="position:relative;padding:10px 22px 70px;">
+<div data-reveal="" style="background:linear-gradient(165deg,rgba(255,255,255,.44),rgba(255,255,255,.18) 40%,rgba(255,255,255,.30));backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4);border:1px solid rgba(255,255,255,.65);border-radius:30px;box-shadow:0 20px 55px rgba(50,90,150,.2),inset 0 1.5px 0 rgba(255,255,255,.75);padding:36px 30px;color:#274565;text-shadow:0 1px 0 rgba(255,255,255,.35);">
+<h2 data-i18n="malumot_title" style="font-family:'Yeseva One',serif;font-weight:400;font-size:26px;margin:0 0 22px;text-align:center;color:#2b4d74;">Ma'lumot</h2>
+<div style="display:flex;flex-direction:column;gap:16px;">
+<div id="os-info-rsvp" style="display:flex;gap:14px;align-items:flex-start;"><div style="width:10px;height:10px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#ffe9b0,#f4b95f 60%,#e79a3c);flex:none;margin-top:5px;"></div><div id="os-info-rsvp-text" style="font-size:14px;line-height:1.6;font-weight:500;"></div></div>
+<div id="os-info-dress" style="display:flex;gap:14px;align-items:flex-start;"><div style="width:10px;height:10px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#ffe9b0,#f4b95f 60%,#e79a3c);flex:none;margin-top:5px;"></div><div id="os-info-dress-text" style="font-size:14px;line-height:1.6;font-weight:500;"></div></div>
+<div id="os-info-gifts" style="display:flex;gap:14px;align-items:flex-start;"><div style="width:10px;height:10px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#ffe9b0,#f4b95f 60%,#e79a3c);flex:none;margin-top:5px;"></div><div data-i18n="info_gifts_default" id="os-info-gifts-text" style="font-size:14px;line-height:1.6;font-weight:500;">Eng qimmatli sovg'a — do'stlaringiz davrasidagi samimiy tabrigingiz</div></div>
+</div>
+</div>
+</section>
+<!-- ============ TILAKLAR ============ -->
+<section style="position:relative;padding:10px 22px 70px;">
+<div data-reveal="" style="background:linear-gradient(165deg,rgba(255,255,255,.44),rgba(255,255,255,.18) 40%,rgba(255,255,255,.30));backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4);border:1px solid rgba(255,255,255,.65);border-radius:30px;box-shadow:0 20px 55px rgba(50,90,150,.2),inset 0 1.5px 0 rgba(255,255,255,.75);padding:36px 28px;color:#274565;text-shadow:0 1px 0 rgba(255,255,255,.35);">
+<h2 data-i18n="tilaklar_title" style="font-family:'Yeseva One',serif;font-weight:400;font-size:26px;margin:0;text-align:center;color:#2b4d74;">Tilaklar</h2>
+<div data-i18n="tilaklar_sub" style="font-family:'Borel','Marck Script',cursive;text-align:center;font-size:15px;color:#4a76a6;margin:6px 0 20px;">yosh oilaga oq yo'l tilang</div>
+<form autocomplete="on" class="wish-form" id="os-wish-form" style="display:flex;flex-direction:column;gap:12px;margin-bottom:26px;">
+<input aria-label="Ismingiz" data-i18n-ph="wish_name_ph" maxlength="100" name="wname" placeholder="Ismingiz" required="" style="width:100%;box-sizing:border-box;padding:14px 16px;border-radius:16px;border:1px solid rgba(255,255,255,.75);background:rgba(255,255,255,.5);color:#274565;font-size:14.5px;outline:none;"/>
+<textarea aria-label="Tilagingiz" data-i18n-ph="wish_msg_ph" maxlength="2000" name="wmsg" placeholder="Tilagingiz..." required="" rows="3" style="width:100%;box-sizing:border-box;padding:14px 16px;border-radius:16px;border:1px solid rgba(255,255,255,.75);background:rgba(255,255,255,.5);color:#274565;font-size:14.5px;outline:none;resize:none;"></textarea>
+<button style="cursor:pointer;padding:15px;border-radius:16px;border:1px solid rgba(255,255,255,.4);background:rgba(61,106,153,.92);color:#fff;font-weight:700;font-size:14px;letter-spacing:.08em;box-shadow:0 10px 26px rgba(50,90,150,.3);" type="submit"><span data-i18n="wish_send">Yuborish</span></button>
+</form>
+<div aria-live="polite" data-i18n="wish_thanks" id="os-wish-confirm" role="status" style="display:none;text-align:center;font-size:13.5px;opacity:.85;margin-bottom:18px;">Rahmat — tilagingiz saqlandi ♡</div>
+<div data-i18n="wish_empty" id="os-wish-empty" style="text-align:center;font-size:13.5px;opacity:.7;">Birinchi bo'lib tilak qoldiring</div>
+<div id="os-wish-list" style="display:flex;flex-direction:column;gap:12px;"></div>
+</div>
+</section>
+<!-- ============ SANOQ ============ -->
+<section style="position:relative;padding:120px 22px 90px;">
+<div data-par="0.05" style="position:absolute;top:-40px;right:-24px;width:195px;will-change:transform;">
+<img alt="" loading="lazy" src="osmon-img/obj-cottage.webp" style="width:100%;display:block;animation:bobTilt 10s ease-in-out infinite;filter:drop-shadow(0 16px 28px rgba(120,80,40,.3));"/>
+</div>
+<img alt="" loading="lazy" src="osmon-img/obj-petals.webp" style="position:absolute;top:16%;left:-6%;width:150px;opacity:.8;animation:swayX 18s ease-in-out infinite;"/>
+<div data-reveal="" style="background:linear-gradient(165deg,rgba(255,246,228,.52),rgba(255,238,208,.22) 40%,rgba(255,244,222,.36));backdrop-filter:blur(16px) saturate(1.45);-webkit-backdrop-filter:blur(16px) saturate(1.45);border:1px solid rgba(255,240,210,.8);border-radius:30px;box-shadow:0 20px 55px rgba(150,95,45,.22),inset 0 1.5px 0 rgba(255,250,235,.85);padding:42px 24px;text-align:center;color:#5b3d20;text-shadow:0 1px 0 rgba(255,248,235,.4);">
+<div data-i18n="sanoq_kicker" style="font-family:'Borel','Marck Script',cursive;font-size:16px;color:#8a5a2b;">baxtli kungacha</div>
+<h2 data-i18n="sanoq_title" style="font-family:'Yeseva One',serif;font-weight:400;font-size:28px;margin:8px 0 24px;color:#6b4423;">Sanoq boshlandi</h2>
+<div style="display:flex;gap:10px;justify-content:center;">
+<div style="flex:1;max-width:82px;background:rgba(255,255,255,.42);border:1px solid rgba(255,255,255,.8);border-radius:18px;padding:15px 4px 11px;box-shadow:inset 0 1px 0 rgba(255,255,255,.85),0 8px 20px rgba(160,110,50,.15);"><div id="os-cd-d" style="font-family:'Yeseva One',serif;font-size:29px;color:#6b4423;">–</div><div data-i18n="cd_days" style="font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;opacity:.75;margin-top:4px;font-weight:700;">Kun</div></div>
+<div style="flex:1;max-width:82px;background:rgba(255,255,255,.42);border:1px solid rgba(255,255,255,.8);border-radius:18px;padding:15px 4px 11px;box-shadow:inset 0 1px 0 rgba(255,255,255,.85),0 8px 20px rgba(160,110,50,.15);"><div id="os-cd-h" style="font-family:'Yeseva One',serif;font-size:29px;color:#6b4423;">–</div><div data-i18n="cd_hours" style="font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;opacity:.75;margin-top:4px;font-weight:700;">Soat</div></div>
+<div style="flex:1;max-width:82px;background:rgba(255,255,255,.42);border:1px solid rgba(255,255,255,.8);border-radius:18px;padding:15px 4px 11px;box-shadow:inset 0 1px 0 rgba(255,255,255,.85),0 8px 20px rgba(160,110,50,.15);"><div id="os-cd-m" style="font-family:'Yeseva One',serif;font-size:29px;color:#6b4423;">–</div><div data-i18n="cd_mins" style="font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;opacity:.75;margin-top:4px;font-weight:700;">Daqiqa</div></div>
+<div style="flex:1;max-width:82px;background:rgba(255,255,255,.42);border:1px solid rgba(255,255,255,.8);border-radius:18px;padding:15px 4px 11px;box-shadow:inset 0 1px 0 rgba(255,255,255,.85),0 8px 20px rgba(160,110,50,.15);"><div id="os-cd-s" style="font-family:'Yeseva One',serif;font-size:29px;color:#6b4423;">–</div><div data-i18n="cd_secs" style="font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;opacity:.75;margin-top:4px;font-weight:700;">Soniya</div></div>
+</div>
+<div id="os-cd-foot" style="margin-top:22px;font-size:12.5px;letter-spacing:.22em;font-weight:700;color:#7a4f28;"></div>
+</div>
+</section>
+<!-- ============ FOOTER ============ -->
+<section style="position:relative;padding:60px 22px 80px;text-align:center;color:#fff;">
+<div id="os-stars"></div>
+<div style="position:relative;">
+<div data-i18n="footer_kicker" style="font-family:'Borel','Marck Script',cursive;font-size:19px;opacity:.95;text-shadow:0 2px 10px rgba(30,30,80,.55);">Sizni kutamiz!</div>
+<div class="os-fitline" id="os-foot-mono" style="font-family:'Yeseva One',serif;font-size:42px;margin:14px 0 10px;text-shadow:0 3px 18px rgba(30,30,80,.6);"></div>
+<div style="font-size:12px;letter-spacing:.26em;opacity:.85;font-weight:600;"><span id="os-foot-date"></span><span id="os-foot-city-wrap"> · <span id="os-foot-city"></span></span></div>
+</div>
+</section>
+</div>
+<audio id="os-audio" loop="" preload="none"></audio>
+<button aria-label="Musiqa" id="os-music" style="display:none;position:fixed;right:max(18px,calc(50% - 199px));bottom:18px;z-index:55;width:52px;height:52px;border-radius:50%;border:1px solid rgba(255,255,255,.6);background:rgba(255,255,255,.22);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:0 8px 26px rgba(40,80,130,.28);cursor:pointer;align-items:center;justify-content:center;" type="button">
+<svg fill="none" height="20" viewbox="0 0 24 24" width="20"><path d="M9 18V6l10-2v12" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path><circle cx="6.5" cy="18" fill="#fff" r="2.6"></circle><circle cx="16.5" cy="16" fill="#fff" r="2.6"></circle></svg>
+<span id="os-music-off" style="position:absolute;width:30px;height:2.5px;background:#fff;transform:rotate(-45deg);border-radius:2px;box-shadow:0 1px 4px rgba(40,80,130,.4);"></span>
+</button>
+</div>
+<script src="source/template.js"></script><script src="source/wish-close.js"></script><script src="bridge.js"></script></body></html>

@@ -1,0 +1,24 @@
+
+  * { box-sizing: border-box; }
+  :root { --accent:#3d6a99; /* alias for shared _wish-close.js */ }
+  html, body { margin: 0; padding: 0; }
+  body { background: #cbecfe; font-family: 'Quicksand', sans-serif; color: #274565; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+  a { color: #2e5f8f; text-decoration: none; } a:hover { color: #1d466e; }
+  input, textarea, button { font-family: inherit; }
+  input::placeholder, textarea::placeholder { color: #6f8fae; opacity: 1; }
+  @keyframes bobY { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-14px); } }
+  @keyframes bobTilt { 0%, 100% { transform: translateY(-8px) rotate(-1.6deg); } 50% { transform: translateY(9px) rotate(1.4deg); } }
+  @keyframes swayX { 0%, 100% { transform: translateX(-12px); } 50% { transform: translateX(12px); } }
+  @keyframes crossR { 0% { transform: translateX(-540px); } 100% { transform: translateX(640px); } }
+  @keyframes crossL { 0% { transform: translateX(640px); } 100% { transform: translateX(-540px); } }
+  @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+  @keyframes twinkle { 0%, 100% { opacity: .2; } 50% { opacity: 1; } }
+  @keyframes riseIn { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes hintBob { 0%, 100% { transform: translateY(0); opacity: .9; } 50% { transform: translateY(9px); opacity: .5; } }
+  @media (prefers-reduced-motion: reduce) { * { animation-duration: .001ms !important; animation-iteration-count: 1 !important; } }
+  [data-reveal] { opacity: 0; }
+  [data-reveal].os-in { animation: riseIn .95s cubic-bezier(.22,.9,.3,1) both; }
+  .os-lang { position:fixed; top:14px; right:max(14px, calc(50vw - 201px)); z-index:60; display:flex; gap:2px; background:rgba(39,69,101,.75); border:1px solid rgba(255,255,255,.35); border-radius:999px; padding:3px; box-shadow:0 8px 22px -10px rgba(20,50,90,.5); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); }
+  .os-lang button { border:0; background:transparent; cursor:pointer; font-family:'Quicksand',sans-serif; font-size:11px; font-weight:700; letter-spacing:.08em; color:#eaf4ff; padding:5px 9px; border-radius:999px; line-height:1; text-transform:uppercase; }
+  .os-lang button.on { background:linear-gradient(180deg,#8fc4ec,#3d6a99); color:#fff; }
+  .os-fitline { white-space:nowrap; overflow:hidden; display:block; }

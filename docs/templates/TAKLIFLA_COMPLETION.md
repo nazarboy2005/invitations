@@ -22,7 +22,7 @@ untouched. Application deployment and live payment activation are excluded.
 | Marigold | taklifla-zarrin-gullar | Private package | Complete — family/stay/footer/hashtag restored; shared data and source verified; published 0183/0184 |
 | Mountain | taklifla-toglar-bagrida | Private package | Complete — independent scene times, shared maps/wishes and full routes restored; published 0185/0186 |
 | Oltin Yo‘l | taklifla-oltin-yol | Private package | Complete — renderer/bridge, notes, timetable/wishes and full source motion integrated; published 0187/0188 |
-| Osmon | taklifla-osmon | Private package | Pending |
+| Osmon | taklifla-osmon | Private package | Complete — exact airplane recovered, editable notes/shared wishes/closure restored; published 0189/0190 |
 | Pari | taklifla-parilar-ertagi | Private package | Pending |
 | Qog‘oz | taklifla-qogoz-ertagi | Private package | Pending |
 | Sakura | taklifla-sakura-guli | Private package | Pending |
@@ -134,3 +134,9 @@ the individual commit below each completed row.
 - Former art-only private package now has a full typed renderer/bridge and all routes. Exact source CSS/eight images/23 font dependencies, native opening/train marker/background interpolation/parallax/24 motes/reveals and timetable/telegram-card/closed-panel builders are retained. Long names wrap only when native fitting cannot fit; Cyrillic labels corrected.
 - Source arrival/gift/contact/footer notes are editable, validated, saved/reopened and preserved on switching. Dress/contact/venue/program/date/identity reuse shared data. Canonical wedding notes/wishes/music/maps never enter public invitations.
 - 31 shared/regression tests, three-viewport source/motion comparisons, all locales/long/empty/seven-row/reduced/closed/failure checks, actual audio, real authenticated note save/reopen/studio/publication/public/maps/pending wishes and switching, authentic covers, typecheck/build pass. Migrations 0187/0188 publish only this wedding design. Evidence: `docs/templates/taklifla-audit/oltin*`.
+
+## Osmon integration
+
+- Recovered the exact source airplane previously omitted after HTTP 403; all 19 cloud/flying objects and 14 seeded stars are present. Exact CSS/dependency hashes and original CLOUDS/DRIFTERS arrays verified. Native sky interpolation/parallax/floating/opening/reveal/fitting retained.
+- Added validated editable/persistent RSVP/gift prose, canonical localized preview wishes, original source close panel, correct Cyrillic labels, zero countdown and audio URL handling. Shared hosts/dress/maps/identity/program remain reusable; ready handshake avoids payload in window.name.
+- 25 shared/package tests, source/motion comparisons at 320/390/1280, four locales/long/empty/seven-event/reduced/closed/failure checks, real notes save/reopen/studio/publication/public/maps/pending wishes and compatible switching, actual audio, covers, typecheck/build pass. Migrations 0189/0190 publish only this wedding design. Evidence: `docs/templates/taklifla-audit/osmon*`.

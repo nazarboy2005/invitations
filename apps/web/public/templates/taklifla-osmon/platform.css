@@ -1,0 +1,16 @@
+/* Narrow application/accessibility adaptations; source design stays isolated. */
+html:not(.os-bound) body{visibility:hidden}
+[hidden]{display:none!important}
+:focus-visible{outline:2px solid #274565!important;outline-offset:4px}
+#os-open:focus-visible,#os-music:focus-visible{outline-color:white!important}
+#os-col:focus{outline:none}
+#os-message,#os-venue-addr,#os-info-dress-text{white-space:pre-line;overflow-wrap:anywhere}
+.os-ev-row>div:last-child{min-width:0;overflow-wrap:anywhere}
+.os-lang button{min-height:28px}
+.os-lang button[aria-pressed="true"]{background:linear-gradient(180deg,#8fc4ec,#3d6a99);color:#fff}
+.reduced-motion *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+.reduced-motion [data-reveal]{opacity:1!important;transform:none!important}
+.reduced-motion [data-par]{transform:none!important}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}[data-reveal]{opacity:1!important;transform:none!important}[data-par]{transform:none!important}}
+@media(max-width:350px){.os-lang button{padding-inline:7px}}
+@media(prefers-reduced-motion:no-preference){body.os-hidden *{animation-play-state:paused!important}}

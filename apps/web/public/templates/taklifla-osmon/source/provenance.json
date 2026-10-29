@@ -1,0 +1,264 @@
+{
+  "templateId": "taklifla-osmon",
+  "name": "Cheksiz Osmon",
+  "private": false,
+  "published": true,
+  "selectable": true,
+  "supportedEventTypes": [
+    "wedding"
+  ],
+  "capture": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/taklifla.uz/templates/osmon__2a7e2bd6946d8d4c.html",
+  "captureSha256": "df2218d9fdd8aefc188814529d0f46ab74aa1df6bb49f42d6bbebf1f2876fc37",
+  "fontCssSha256": "96f2f1a0f7516f09bd3a49b323cbc718ddf81db9adc2dbe2f98679d68bba7fc5",
+  "sourceCssSha256": "9c12f847fd9151e9549a95f334abb65b32afa846b91e668abf82a73a5410ab61",
+  "dependencies": [
+    {
+      "path": "osmon-img/cloud-1.webp",
+      "source": "Web invitations/taklifla.uz/templates/osmon-img/cloud-1.webp",
+      "sha256": "527f6da0b487f6175778d8b05e7d163a94e923ab778785cd76e2f5ff3855b7a4",
+      "bytes": 148250
+    },
+    {
+      "path": "osmon-img/cloud-2.webp",
+      "source": "Web invitations/taklifla.uz/templates/osmon-img/cloud-2.webp",
+      "sha256": "35ede49e35d646127a0b184a55fe5b9f6a56a704428f62aa93a6b63048be2979",
+      "bytes": 165172
+    },
+    {
+      "path": "osmon-img/cloud-3.webp",
+      "source": "Web invitations/taklifla.uz/templates/osmon-img/cloud-3.webp",
+      "sha256": "fb8ee39ef25739d2865519732a47c8337a513254503111dbe0f657283bb3ae6a",
+      "bytes": 77736
+    },
+    {
+      "path": "osmon-img/cloud-4.webp",
+      "source": "Web invitations/taklifla.uz/templates/osmon-img/cloud-4.webp",
+      "sha256": "508566b4a572d130b32e252c37da695028ffbca69adce5ac373a31266f9256a3",
+      "bytes": 89632
+    },
+    {
+      "path": "osmon-img/cloud-5.webp",
+      "source": "Web invitations/taklifla.uz/templates/osmon-img/cloud-5.webp",
+      "sha256": "39c54a2b5cea3c50d06407dff9727f073a75ae346e28e9764630c66af2f317e4",
+      "bytes": 44118
+    },
+    {
+      "path": "osmon-img/frame-wreath.webp",
+      "source": "Web invitations/taklifla.uz/templates/osmon-img/frame-wreath.webp",
+      "sha256": "c2a0b8894a57c0cf9942ac81e774ad59af3d72187f19fc579d02287ae397833e",
+      "bytes": 316652
+    },
+    {
+      "path": "osmon-img/obj-airship.webp",
+      "source": "Web invitations/taklifla.uz/templates/osmon-img/obj-airship.webp",
+      "sha256": "e083cba7a2f990374ec9885ceca2f13a66e51601b390aceb333d9b76cbcc352a",
+      "bytes": 216926
+    },
+    {
+      "path": "osmon-img/obj-balloon.webp",
+      "source": "Web invitations/taklifla.uz/templates/osmon-img/obj-balloon.webp",
+      "sha256": "18497ad6e093b24734b317d7bd0040afb8bfa9eb04b9854a7bcf238c94a5c73f",
+      "bytes": 320640
+    },
+    {
+      "path": "osmon-img/obj-birds.webp",
+      "source": "Web invitations/taklifla.uz/templates/osmon-img/obj-birds.webp",
+      "sha256": "c6d6aec378a2cf6767eca9b89e48ab380ebcad5ec276d8e8a4e41a4277d85a5c",
+      "bytes": 63712
+    },
+    {
+      "path": "osmon-img/obj-cottage.webp",
+      "source": "Web invitations/taklifla.uz/templates/osmon-img/obj-cottage.webp",
+      "sha256": "44638359091c26f8c6b589de982e8d9259f49ae9bb16630e0c807bfffe6d290e",
+      "bytes": 190936
+    },
+    {
+      "path": "osmon-img/obj-island.webp",
+      "source": "Web invitations/taklifla.uz/templates/osmon-img/obj-island.webp",
+      "sha256": "46c2f47227606d4ce552631e47efe30f95dd471e22d425ddbaa4cb21b20e6b09",
+      "bytes": 231460
+    },
+    {
+      "path": "osmon-img/obj-kite.webp",
+      "source": "Web invitations/taklifla.uz/templates/osmon-img/obj-kite.webp",
+      "sha256": "5cc9ec742a508f076a1c651b9b31f1981ecbf16ed34682b34821eb58ca93824c",
+      "bytes": 255360
+    },
+    {
+      "path": "osmon-img/obj-petals.webp",
+      "source": "Web invitations/taklifla.uz/templates/osmon-img/obj-petals.webp",
+      "sha256": "c371ef6b4fd4dfaf3a115cbb57baa0e0d881cc07c598f5e9f4fc9daed3fb2a84",
+      "bytes": 61098
+    },
+    {
+      "path": "osmon-img/obj-whale-cloud.webp",
+      "source": "Web invitations/taklifla.uz/templates/osmon-img/obj-whale-cloud.webp",
+      "sha256": "f2115c44675252caa7fdc1c58d47212e4add4a1e6cb1a40970d280859fd097d3",
+      "bytes": 598114
+    },
+    {
+      "path": "osmon-img/sky-splash.webp",
+      "source": "Web invitations/taklifla.uz/templates/osmon-img/sky-splash.webp",
+      "sha256": "ca58d3dada57a5cf53dc39e8164e98abb2ffeeff43ffbbdff673225d69985b61",
+      "bytes": 2024
+    },
+    {
+      "path": "osmon-img/sky-tile-1.webp",
+      "source": "Web invitations/taklifla.uz/templates/osmon-img/sky-tile-1.webp",
+      "sha256": "7726d9f90a4554d18d5e68c64f69f24a83f1997cc9ec5c80c109dc6a97c73eb9",
+      "bytes": 51096
+    },
+    {
+      "path": "osmon-img/sky-tile-2.webp",
+      "source": "Web invitations/taklifla.uz/templates/osmon-img/sky-tile-2.webp",
+      "sha256": "a63ac2aa09b0cb9ecaf90847429baa6dfd5b232981b5ca05b524c5aaf192ed25",
+      "bytes": 182674
+    },
+    {
+      "path": "osmon-img/sky-tile-3.webp",
+      "source": "Web invitations/taklifla.uz/templates/osmon-img/sky-tile-3.webp",
+      "sha256": "b3deb31116915dc28e511c7a632717bab73f386e438145ec14df7df7af959d52",
+      "bytes": 113674
+    },
+    {
+      "path": "osmon-img/sky-tile-4.webp",
+      "source": "Web invitations/taklifla.uz/templates/osmon-img/sky-tile-4.webp",
+      "sha256": "0ec6950f993240dc2ab6f65f9228de61cd3abb16bd767701678a0f60258045cd",
+      "bytes": 163342
+    },
+    {
+      "path": "fonts/6qLOKZsftAPisjsmaSI.woff2",
+      "source": "https://fonts.gstatic.com/s/borel/v10/6qLOKZsftAPisjsmaSI.woff2",
+      "origin": "archive",
+      "sha256": "1db622888380e5288596c743dff79ee041570359d78d7e5d1d24a016413746db",
+      "bytes": 39544
+    },
+    {
+      "path": "fonts/6qLOKZsftAPisjsoaSIXOg.woff2",
+      "source": "https://fonts.gstatic.com/s/borel/v10/6qLOKZsftAPisjsoaSIXOg.woff2",
+      "origin": "exact-source-url",
+      "sha256": "8b6b084c36b5d01cd69ec8b21c5d7ecd2e1df57c844dfd44a9e175153c7394bd",
+      "bytes": 15788
+    },
+    {
+      "path": "fonts/6qLOKZsftAPisjspaSIXOg.woff2",
+      "source": "https://fonts.gstatic.com/s/borel/v10/6qLOKZsftAPisjspaSIXOg.woff2",
+      "origin": "exact-source-url",
+      "sha256": "de25d58c9fe1b2fbace3191c35d1b7c9bae811d81e8011b1802bb8d6375ce569",
+      "bytes": 16760
+    },
+    {
+      "path": "fonts/6qLOKZsftAPisjtIaSIXOg.woff2",
+      "source": "https://fonts.gstatic.com/s/borel/v10/6qLOKZsftAPisjtIaSIXOg.woff2",
+      "origin": "exact-source-url",
+      "sha256": "84d3331faffe26d607a3b28bfb1ea8235f0620ea27897ddf12febd7a27da9feb",
+      "bytes": 27992
+    },
+    {
+      "path": "fonts/6qLOKZsftAPisjtaaSIXOg.woff2",
+      "source": "https://fonts.gstatic.com/s/borel/v10/6qLOKZsftAPisjtaaSIXOg.woff2",
+      "origin": "exact-source-url",
+      "sha256": "ef15d1eb6baf6cac8523fcdde85ff67fcdc41fd693217d37c7c46f4c8565b334",
+      "bytes": 31884
+    },
+    {
+      "path": "fonts/nwpTtK2oNgBA3Or78gapdwuyxig_WMM.woff2",
+      "source": "https://fonts.gstatic.com/s/marckscript/v22/nwpTtK2oNgBA3Or78gapdwuyxig_WMM.woff2",
+      "origin": "exact-source-url",
+      "sha256": "0b81e24db3e626c58446fc2ea58dbeaa5d4edb219856afe36ad902c95248d18d",
+      "bytes": 8740
+    },
+    {
+      "path": "fonts/nwpTtK2oNgBA3Or78gapdwuyyCg_.woff2",
+      "source": "https://fonts.gstatic.com/s/marckscript/v22/nwpTtK2oNgBA3Or78gapdwuyyCg_.woff2",
+      "origin": "archive",
+      "sha256": "b32acf77642711e18c14d57aabeefa02ee25664a7f40929ee5f72396557b6e76",
+      "bytes": 13352
+    },
+    {
+      "path": "fonts/nwpTtK2oNgBA3Or78gapdwuyzCg_WMM.woff2",
+      "source": "https://fonts.gstatic.com/s/marckscript/v22/nwpTtK2oNgBA3Or78gapdwuyzCg_WMM.woff2",
+      "origin": "exact-source-url",
+      "sha256": "457f5ae9dd211fb276e605a4ce3ecb35cbe1aee8bb1a54698c81d7834873ed06",
+      "bytes": 10528
+    },
+    {
+      "path": "fonts/6xKtdSZaM9iE8KbpRA_hJFQNcOM.woff2",
+      "source": "https://fonts.gstatic.com/s/quicksand/v37/6xKtdSZaM9iE8KbpRA_hJFQNcOM.woff2",
+      "origin": "exact-source-url",
+      "sha256": "602d23d1e2cb8d416e336f184720c07d06497674c2876d05821f7839bba3e6c8",
+      "bytes": 8840
+    },
+    {
+      "path": "fonts/6xKtdSZaM9iE8KbpRA_hJVQNcOM.woff2",
+      "source": "https://fonts.gstatic.com/s/quicksand/v37/6xKtdSZaM9iE8KbpRA_hJVQNcOM.woff2",
+      "origin": "exact-source-url",
+      "sha256": "b5a37861949c4489894ff1e76d3657819830e91316b40effa16c5a6923bc0928",
+      "bytes": 26616
+    },
+    {
+      "path": "fonts/6xKtdSZaM9iE8KbpRA_hK1QN.woff2",
+      "source": "https://fonts.gstatic.com/s/quicksand/v37/6xKtdSZaM9iE8KbpRA_hK1QN.woff2",
+      "origin": "archive",
+      "sha256": "2add7d60b1cd2ab84c9967e23d5ec08eb3fc9635c46855b17d59404dec6b410e",
+      "bytes": 28244
+    },
+    {
+      "path": "fonts/OpNJno4ck8vc-xYpwWWxli1VWw.woff2",
+      "source": "https://fonts.gstatic.com/s/yesevaone/v24/OpNJno4ck8vc-xYpwWWxli1VWw.woff2",
+      "origin": "archive",
+      "sha256": "593184b5936b6c88f68a1ac5d03e1e505478de7f61caaa2f8377a50a804c211b",
+      "bytes": 17492
+    },
+    {
+      "path": "fonts/OpNJno4ck8vc-xYpwWWxliBVWyXD.woff2",
+      "source": "https://fonts.gstatic.com/s/yesevaone/v24/OpNJno4ck8vc-xYpwWWxliBVWyXD.woff2",
+      "origin": "exact-source-url",
+      "sha256": "d09a2259bbbea60e02698f524948758ccf1bbda8e214845489a995b0ef62a64a",
+      "bytes": 9636
+    },
+    {
+      "path": "fonts/OpNJno4ck8vc-xYpwWWxliJVWyXD.woff2",
+      "source": "https://fonts.gstatic.com/s/yesevaone/v24/OpNJno4ck8vc-xYpwWWxliJVWyXD.woff2",
+      "origin": "exact-source-url",
+      "sha256": "db5f1b592fb443c9e453a77fd3dad5acdab3552d9f3f15cc6eb9864a86df056a",
+      "bytes": 6816
+    },
+    {
+      "path": "fonts/OpNJno4ck8vc-xYpwWWxliNVWyXD.woff2",
+      "source": "https://fonts.gstatic.com/s/yesevaone/v24/OpNJno4ck8vc-xYpwWWxliNVWyXD.woff2",
+      "origin": "exact-source-url",
+      "sha256": "41a87f521b1f8b2ce82a5d010287775bb3a5dddb2ba6f705c06a2fea5f7adf9a",
+      "bytes": 12920
+    },
+    {
+      "path": "fonts/OpNJno4ck8vc-xYpwWWxlilVWyXD.woff2",
+      "source": "https://fonts.gstatic.com/s/yesevaone/v24/OpNJno4ck8vc-xYpwWWxlilVWyXD.woff2",
+      "origin": "exact-source-url",
+      "sha256": "9cffb38567d540eedfccaa03e205dd157ff2bd3891ed59fe817e4c37536ee7f2",
+      "bytes": 11328
+    },
+    {
+      "path": "osmon-img/obj-plane.webp",
+      "source": "https://taklifla.uz/templates/osmon-img/obj-plane.webp",
+      "origin": "exact-source-url recovered 2026-10-29",
+      "bytes": 45122,
+      "sha256": "3ce1bd749ab1d613b7e3685b960a3b46edda11796158e9464e5fdc771a61c0c0"
+    }
+  ],
+  "missing": [],
+  "excluded": [
+    "Cloudflare analytics beacon",
+    "provider customizer and query-param personal data",
+    "provider guestbook API and localStorage demo wishes",
+    "provider language localStorage"
+  ],
+  "sourceParts": {
+    "source/template.js": "82054c9b41600086918ac693a1a34febc41f691e93198277f51d12708eb260e8",
+    "source/wish-close.js": "fa5cfae21ab44694f19fe5051820b0b6b26f8a12a52746e168c28b5b37535546"
+  },
+  "publicationMigrations": [
+    "0189_register_taklifla_osmon.sql",
+    "0190_publish_taklifla_osmon.sql"
+  ]
+}

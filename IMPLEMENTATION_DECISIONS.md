@@ -2137,3 +2137,7 @@ Development agents are distinct from production queue workers. The running app w
 ### Oltin Yo‘l completion (2026-10-29)
 
 - Preserve the golden railway source ticket/timetable, moving train, changing backdrop, parallax, motes and telegram wishes. Source informational arrival/gift/contact/footer notes persist as localized editable `templateData["taklifla-oltin-yol"]`; these gift notes are nontransactional copy. Dress, contact links, dates, program and Google venue remain shared. No attendance-count input. Migrations 0187/0188 register/publish for weddings after verification.
+
+### Osmon completion (2026-10-29)
+
+- Cheksiz Osmon retains all original cloud/flying artwork, including the recovered exact airplane, stars and sky motion. RSVP and nontransactional gift prose use editable localized `templateData["taklifla-osmon"]`; shared hosts/contacts/dress/maps/program stay reusable. Preserve native wishes closure and moderation states. Migrations 0189/0190 register/publish for weddings after full verification.

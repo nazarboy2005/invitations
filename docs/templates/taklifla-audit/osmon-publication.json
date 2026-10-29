@@ -1,0 +1,25 @@
+{
+  "date": "2026-10-29",
+  "configured": true,
+  "template": {
+    "id": "taklifla-osmon",
+    "name": "Cheksiz Osmon",
+    "description": "Bulutlar orasidagi sayohat, uchuvchi bezaklar va moviy nikoh taklifnomasi.",
+    "previewImage": "/templates/taklifla-osmon/preview.webp",
+    "previewEventType": "wedding",
+    "categoryIds": [
+      "wedding"
+    ],
+    "supportedEventTypes": [
+      "wedding"
+    ],
+    "priceMinor": 100000,
+    "currency": "UZS",
+    "accent": "#3d6a99",
+    "published": true
+  },
+  "migrations": [
+    "0189_register_taklifla_osmon.sql",
+    "0190_publish_taklifla_osmon.sql"
+  ]
+}

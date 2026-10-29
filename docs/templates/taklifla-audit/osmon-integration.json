@@ -1,0 +1,14 @@
+{
+  "date": "2026-10-29",
+  "checks": [
+    "Authenticated four-locale save/reopen preserves authored fields, authored story chapters and venue",
+    "Switching between published compatible templates preserves all shared creator content on real save/reopen",
+    "Real shared publication transaction succeeds and preserves the existing catalog publication state",
+    "Authenticated studio uses the same renderer with saved creator data and opens the preview scene",
+    "Real public route uses the same renderer in every locale with the resolved guest and creator-selected Google Place",
+    "Actual wish stores resolved guest identity, remains pending and absent from the public list",
+    "Published edit/reopen updates authored content and manual Google Maps target in the public renderer"
+  ],
+  "consoleErrors": [],
+  "cleanup": "All generated accounts, invitations, guest responses and notification jobs removed"
+}

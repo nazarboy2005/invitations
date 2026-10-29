@@ -39,6 +39,7 @@ import {
   zarrinDataSchema,
   mountainDataSchema,
   oltinYolDataSchema,
+  osmonDataSchema,
   pulauSehatiDataSchema,
   LANGUAGE_NAMES,
   LOCALES,
@@ -95,6 +96,7 @@ import { TakliflaGulbog } from "@/templates/taklifla-gulbog/renderer";
 import { TakliflaZarrinGullar } from "@/templates/taklifla-zarrin-gullar/renderer";
 import { ToglarBagridaInvitation } from "@/templates/taklifla-toglar-bagrida/renderer";
 import { TakliflaOltinYol } from "@/templates/taklifla-oltin-yol/renderer";
+import { TakliflaOsmonInvitation } from "@/templates/taklifla-osmon/renderer";
 import { TakliflaYubileySahifasi } from "@/templates/taklifla-yubiley-sahifasi/renderer";
 import { TakliflaBarakali } from "@/templates/taklifla-barakali/renderer";
 import { TakliflaZarhalSahifaInvitation } from "@/templates/taklifla-zarhal-sahifa/renderer";
@@ -895,6 +897,8 @@ export function Studio({
         : current,
     );
   }
+  const osmonData=osmonDataSchema.parse(invitation.templateData["taklifla-osmon"] ?? {});
+  function updateOsmonNote(key:keyof typeof osmonData,value:string){setInvitation(current=>current?{...current,templateData:{...current.templateData,"taklifla-osmon":{...osmonData,[key]:{...osmonData[key],[locale]:value}}}}:current);}
   const oltinYolData=oltinYolDataSchema.parse(invitation.templateData["taklifla-oltin-yol"] ?? {});
   function updateOltinNote(key:keyof typeof oltinYolData,value:string){setInvitation(current=>current?{...current,templateData:{...current.templateData,"taklifla-oltin-yol":{...oltinYolData,[key]:{...oltinYolData[key],[locale]:value}}}}:current);}
   const mountainData=mountainDataSchema.parse(invitation.templateData["taklifla-toglar-bagrida"] ?? {});
@@ -3381,6 +3385,7 @@ export function Studio({
                   )}
                 </OptionalSection>
                 <div className={styles.divider} />
+                {invitation.templateId === "taklifla-osmon" && <div className={styles.formGrid}>{(["rsvpNote","giftNote"] as const).map(key=><Field key={key} label={`${key === "rsvpNote" ? "Ishtirok haqida izoh" : "Sovg‘alar haqida izoh"} · ${LANGUAGE_NAMES[locale]}`}><textarea maxLength={4000} rows={3} value={osmonData[key][locale] || ""} onChange={e=>updateOsmonNote(key,e.target.value)} /></Field>)}</div>}
                 {invitation.templateId === "taklifla-oltin-yol" && <div className={styles.formGrid}>{(["arrivalNote","giftNote","contactNote","footerNote"] as const).map(key=><Field key={key} label={`${({arrivalNote:"Kelish haqida",giftNote:"Sovg‘alar haqida izoh",contactNote:"Mas’ul shaxs haqida",footerNote:"Yakuniy izoh"})[key]} · ${LANGUAGE_NAMES[locale]}`}><textarea maxLength={4000} rows={3} value={oltinYolData[key][locale] || ""} onChange={e=>updateOltinNote(key,e.target.value)} /></Field>)}</div>}
                 {invitation.templateId === "taklifla-toglar-bagrida" && <div className={styles.formGrid}>{(["ceremonyTime","celebrationTime"] as const).map(key=><Field key={key} label={key === "ceremonyTime" ? "Marosim vaqti" : "Ziyofat vaqti"}><input maxLength={80} value={mountainData[key]} placeholder="Asosiy tadbir vaqti" onChange={e=>updateMountainTime(key,e.target.value)} /></Field>)}</div>}
                 {invitation.templateId === "taklifla-zarrin-gullar" && <div className={styles.formGrid}>
@@ -3962,6 +3967,8 @@ export function Studio({
               <ToglarBagridaInvitation invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview fullPreview catalogMusic={section === 0 && !authoredPreview} silentPlayback />
             ) : invitation.templateId === "taklifla-oltin-yol" ? (
               <TakliflaOltinYol invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview fullPreview catalogMusic={section === 0 && !authoredPreview} silentPlayback />
+            ) : invitation.templateId === "taklifla-osmon" ? (
+              <TakliflaOsmonInvitation invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview fullPreview catalogMusic={section === 0 && !authoredPreview} silentPlayback />
             ) : invitation.templateId === "taklifla-yubiley-sahifasi" ? (
               <TakliflaYubileySahifasi invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview fullPreview catalogMusic={section === 0 && !authoredPreview} silentPlayback />
             ) : invitation.templateId === "taklifla-barakali" ? (
