@@ -350,7 +350,7 @@ export function FullTemplatePreview({
       ) : template.id === "taklifla-asalari" ? (
         <TakliflaAsalari invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview sampleWishes={catalogPreview} silentPlayback={silentPlayback} qaReducedMotion={qaReducedMotion} />
       ) : template.id === "taklifla-muhrli-maktub" ? (
-        <MuhrliMaktubInvitation invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} silentPlayback={silentPlayback} />
+        <MuhrliMaktubInvitation sampleWishes={catalogPreview} invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} silentPlayback={silentPlayback} />
       ) : template.id === "anor" ? (
         <AnorInvitation
           invitation={invitation}

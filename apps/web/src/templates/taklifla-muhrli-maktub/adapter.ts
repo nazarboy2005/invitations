@@ -2,6 +2,8 @@ import { defaultEventLabel, getContent, muhrliMaktubDataSchema, type Invitation,
 import { eventInstant, eventWallDate, formatDate } from "../date-format";
 import { CATALOG_PREVIEW_MUSIC } from "../../modules/catalog/catalog-music";
 
+import { getTemplatePreviewWishes } from "../../modules/catalog/preview-sample";
+
 export type EnvelopeOptions = {
   invitationId: string;
   guestName?: string;
@@ -9,6 +11,7 @@ export type EnvelopeOptions = {
   preview?: boolean;
   silentPlayback?: boolean;
   catalogMusic?: boolean;
+  sampleWishes?: boolean;
   fullPreview?: boolean;
 };
 
@@ -37,7 +40,8 @@ export function makeEnvelopePayload(invitation: Invitation, locale: Locale, opti
       footerDate: wall ? `${String(day).padStart(2,"0")} · ${String(wall.getUTCMonth()+1).padStart(2,"0")} · ${year}` : "",
       venueName: c.venueName, address: [c.address,c.landmark].filter(Boolean).join("\n"),
       mapGoogle: invitation.venue.mapUrl || (query ? `https://maps.google.com/?q=${encodeURIComponent(query)}` : ""),
-      mapYandex: query ? `https://yandex.uz/maps/?text=${encodeURIComponent(query)}` : "",
+      mapYandex: invitation.venue.mapUrl || (query ? `https://maps.google.com/?q=${encodeURIComponent(query)}` : ""),
+      sampleWishes: options.preview && options.sampleWishes ? getTemplatePreviewWishes(language).map(wish => ({ name: wish.name, message: wish.text })) : [],
       telegram: telegram ? (/^https:\/\/t\.me\//i.test(telegram) ? telegram : `https://t.me/${encodeURIComponent(telegram)}`) : "",
       programHeading: c.programHeading,
       program: invitation.program.map(item => ({...item,title:c.programTitles[item.id] || "",description:c.programDescriptions[item.id] || ""})),

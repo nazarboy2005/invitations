@@ -11,14 +11,14 @@ export type MuhrliMaktubProps = EnvelopeOptions & {
   fullPreview?: boolean;
 };
 
-/** Private renderer; deliberately absent from every shared registry and route. */
+/** Source renderer shared by catalog, studio and public invitations. */
 export function MuhrliMaktubInvitation(props: MuhrliMaktubProps) {
   const frame = useRef<HTMLIFrameElement>(null);
   const message = useMemo(() => makeEnvelopePayload(props.invitation, props.locale, {
     ...props, catalogMusic: props.catalogMusic ?? props.fullPreview,
   }), [
     props.invitation, props.locale, props.invitationId, props.guestName,
-    props.guestToken, props.preview, props.silentPlayback, props.catalogMusic, props.fullPreview,
+    props.guestToken, props.preview, props.sampleWishes, props.silentPlayback, props.catalogMusic, props.fullPreview,
   ]);
   const latest = useRef(message);
   latest.current = message;

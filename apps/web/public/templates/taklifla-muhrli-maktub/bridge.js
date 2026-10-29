@@ -5,6 +5,7 @@
   var wishes = [], musicUrl = '', pausedByGuest = false, playing = false;
   var audio = $('#env-audio'), music = $('#env-music'), form = $('#env-wish-form');
   var status = document.createElement('div');
+  status.id = 'env-wish-status';
   status.setAttribute('role','status'); status.setAttribute('aria-live','polite');
   status.style.cssText='text-align:center;font-size:14px;color:#8a5a3b;margin-top:14px;';
   form.after(status);
@@ -64,7 +65,7 @@
     $('#env-venue-name').closest('section').hidden=!(data.venueName||data.address||data.mapGoogle);
     // Source sample venue photo lacks a creator venue-photo field; preview only.
     $('#env-venue-photo').hidden=!state.preview;
-    link('#env-map-g',data.mapGoogle);link('#env-map-y',data.mapYandex);link('#env-map-t',data.telegram);
+    link('#env-map-g',data.mapGoogle);link('#env-map-y',data.mapYandex);text('#env-map-y','Google Maps');link('#env-map-t',data.telegram);
     var host=$('#env-prog'); host.replaceChildren();
     data.program.forEach(item=>{
       var row=document.createElement('div');row.style.position='relative';row.dataset.itemId=item.id;
@@ -94,6 +95,7 @@
     var wishSection=form.closest('section');wishSection.hidden=!state.wishesEnabled;
     var expired=state.target!==null&&Date.now()>=state.target+86400000;
     closed.hidden=!expired;form.hidden=expired;
+    if(state.preview) wishes=data.sampleWishes || [];
     window.renderEnvelopeWishes(wishes,language);
     document.querySelectorAll('.env-lang button').forEach(b=>{
       b.hidden=!state.enabledLocales.includes(b.dataset.lang);
@@ -103,8 +105,8 @@
     music.hidden=!state.music.enabled||!state.music.url||state.silentPlayback;
     music.style.display=music.hidden?'none':'flex';
     var nextUrl=state.music.enabled&&!state.silentPlayback?state.music.url:'';
-    if(nextUrl!==musicUrl){audio.pause();playing=false;musicUrl=nextUrl;if(nextUrl)audio.src=nextUrl;else audio.removeAttribute('src');pausedByGuest=false;}
-    if(!state.preview||state.previewAutoplay)tryMusic();
+    if(nextUrl!==musicUrl){audio.pause();playing=false;musicUrl=nextUrl;if(nextUrl)audio.src=nextUrl;else audio.removeAttribute('src');pausedByGuest=false;icon();}
+    if(!state.preview && $('#env-stage').style.display === 'none')tryMusic();
     document.documentElement.dataset.bound='true';
     fitLetter();
     document.dispatchEvent(new CustomEvent('taklifla:langchange'));
@@ -129,6 +131,9 @@
     if(!state||!musicUrl||pausedByGuest||playing||state.silentPlayback)return;
     audio.play().then(()=>{playing=true;icon();}).catch(()=>{playing=false;icon();});
   }
+  audio.addEventListener('play',()=>{playing=true;icon();});
+  audio.addEventListener('pause',()=>{playing=false;icon();});
+  audio.addEventListener('error',()=>{playing=false;icon();});
   music.addEventListener('click',()=>{if(playing){pausedByGuest=true;audio.pause();playing=false;icon();}else{pausedByGuest=false;tryMusic();}});
   document.addEventListener('pointerdown',e=>{if(e.target.closest('#env-music'))return;if(state&&!state.preview)tryMusic();});
   document.addEventListener('keydown',e=>{if(state&&!state.preview)tryMusic();if(e.target===$('#env-stage')&&(e.key==='Enter'||e.key===' ')){e.preventDefault();$('#env-stage').click();}});

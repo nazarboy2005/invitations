@@ -1,0 +1,119 @@
+{
+  "browser": "156.0.8078.48",
+  "results": [
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "reduced": false,
+      "openingMs": 5122,
+      "sourceSealGeometry": {
+        "x": 155.3886260986328,
+        "y": 421.34173583984375,
+        "width": 79.22274780273438,
+        "height": 79.2227783203125
+      },
+      "appSealGeometry": null,
+      "locales": 4,
+      "previewNoSend": true,
+      "programRows": 6
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "reduced": true,
+      "openingMs": 847,
+      "sourceSealGeometry": {
+        "x": 155.6953125,
+        "y": 421.6484375,
+        "width": 78.609375,
+        "height": 78.609375
+      },
+      "appSealGeometry": null,
+      "locales": 4,
+      "previewNoSend": true,
+      "programRows": 6
+    },
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "reduced": false,
+      "openingMs": 5141,
+      "sourceSealGeometry": {
+        "x": 675.6334228515625,
+        "y": 499.1177978515625,
+        "width": 88.733154296875,
+        "height": 88.733154296875
+      },
+      "appSealGeometry": null,
+      "locales": 4,
+      "previewNoSend": true,
+      "programRows": 6
+    },
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "reduced": true,
+      "openingMs": 831,
+      "sourceSealGeometry": {
+        "x": 676.8046875,
+        "y": 500.2890625,
+        "width": 86.390625,
+        "height": 86.390625
+      },
+      "appSealGeometry": null,
+      "locales": 4,
+      "previewNoSend": true,
+      "programRows": 6
+    },
+    {
+      "publicStub": {
+        "approvedRead": true,
+        "failurePreservesText": true,
+        "pendingOnly": true,
+        "guestToken": true
+      },
+      "longCopy": {
+        "cardHeight": 1562,
+        "scrollHeight": 1562
+      },
+      "emptyOptionals": true,
+      "closedAfter24Hours": true,
+      "music": {
+        "autoplayAttempt": true,
+        "pausePreserved": true,
+        "resume": true,
+        "mediaApi": "stubbed"
+      }
+    }
+  ],
+  "errors": [],
+  "networkErrors": [],
+  "external": [],
+  "posts": [
+    {
+      "url": "/api/public/invitations/qa-envelope/wishes",
+      "body": {
+        "name": "Mehmon",
+        "message": "Yangi tilak",
+        "guestToken": "qa-opaque"
+      }
+    },
+    {
+      "url": "/api/public/invitations/qa-envelope/wishes",
+      "body": {
+        "name": "Mehmon",
+        "message": "Yangi tilak",
+        "guestToken": "qa-opaque"
+      }
+    }
+  ],
+  "liveServiceVerified": false
+}

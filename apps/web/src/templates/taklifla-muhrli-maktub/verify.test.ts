@@ -49,3 +49,13 @@ test('empty creator content cannot acquire source names, dates, venue, events or
   assert.doesNotMatch(source,/Shahzod|Robiya|Navruz Hall|envDemoWishes|cloudflareinsights|api\/v1/);
   assert.doesNotMatch(source,/partySize|headcount|receipt|cardNumber/);
 });
+
+test("shared Google venue and preview-only wishes are mapped consistently",()=>{
+ const invitation=createTemplatePreviewSample("taklifla-muhrli-maktub");
+ for(const locale of invitation.enabledLocales){
+  const p=makeEnvelopePayload(invitation,locale,{invitationId:"qa",preview:true,sampleWishes:true}).payload;
+  const d=p.variants[locale]; assert.equal(d.mapGoogle,invitation.venue.mapUrl);assert.equal(d.mapYandex,invitation.venue.mapUrl);
+  assert.equal(d.sampleWishes.length,3);assert.ok(d.sampleWishes.every(w=>w.message));
+  assert.deepEqual(makeEnvelopePayload(invitation,locale,{invitationId:"public",sampleWishes:true}).payload.variants[locale].sampleWishes,[]);
+ }
+});

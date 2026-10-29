@@ -3915,6 +3915,7 @@ export function Studio({
               />
             ) : invitation.templateId === "taklifla-muhrli-maktub" ? (
               <MuhrliMaktubInvitation
+                sampleWishes={section === 0 && !authoredPreview}
                 invitation={previewInvitation}
                 invitationId={invitation.id}
                 locale={locale}

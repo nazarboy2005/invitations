@@ -8,7 +8,7 @@ const {makeEnvelopePayload}=require('./adapter.ts');
 const {buildSync}=require(require.resolve('esbuild',{paths:[require.resolve('tsx')]}));
 const {chromium}=require(process.env.PLAYWRIGHT_MODULE||'C:/Users/user/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
 const invitation=createTemplatePreviewSample('taklifla-muhrli-maktub');
-const props={invitation,locale:'uz-Latn',invitationId:'qa-envelope',guestName:'Dilnoza',guestToken:'qa-opaque',preview:true,silentPlayback:true};
+const props={invitation,locale:'uz-Latn',invitationId:'qa-envelope',guestName:'Dilnoza',guestToken:'qa-opaque',preview:true,sampleWishes:true,silentPlayback:true};
 const script=buildSync({stdin:{contents:`import React from 'react';import {createRoot} from 'react-dom/client';import {MuhrliMaktubInvitation} from './renderer';const root=createRoot(document.querySelector('#app'));window.updateEnvelope=props=>root.render(React.createElement(MuhrliMaktubInvitation,props));updateEnvelope(${JSON.stringify(props)});`,resolveDir:__dirname,loader:'tsx'},absWorkingDir:root,bundle:true,write:false,outfile:'qa.js',format:'iife',platform:'browser',loader:{'.css':'empty'}}).outputFiles[0].text;
 const dep=JSON.parse(fs.readFileSync(path.join(pub,base,'dependencies.json')));
 let reference=fs.readFileSync(path.join(root,dep.capture),'utf8');
@@ -61,6 +61,8 @@ async function main(){
    assert.equal(await frame.locator('#env-name1').innerText(),d.people[0]);
    assert.equal(await frame.locator('#env-prog > div').count(),invitation.program.length);
    assert.equal(await frame.locator('#env-map-g').getAttribute('href'),d.mapGoogle);
+   assert.equal(await frame.locator('#env-map-y').getAttribute('href'),d.mapGoogle);
+   assert.equal(await frame.locator('#env-wish-list > div').count(),3);
    for(const locale of ['uz-Cyrl','en','ru','uz-Latn']){
     await frame.locator(`[data-lang="${locale}"]`).click();await frame.locator(`html[lang="${locale}"]`).waitFor();
     assert.equal(await frame.locator('#env-name1').innerText(),makeEnvelopePayload(invitation,locale,props).payload.variants[locale].people[0]);
@@ -116,7 +118,7 @@ async function main(){
   await f.locator('#env-music').click();await f.locator('#env-music[aria-pressed=true]').waitFor();
   results.push({publicStub:{approvedRead:true,failurePreservesText:true,pendingOnly:true,guestToken:true},longCopy:overflow,emptyOptionals:true,closedAfter24Hours:true,music:{autoplayAttempt:true,pausePreserved:true,resume:true,mediaApi:'stubbed'}});
   const coverPage=await browser.newPage({viewport:{width:720,height:1200}});await coverPage.goto(origin+'/qa');const coverFrame=coverPage.frameLocator('iframe');await coverFrame.locator('html[data-bound]').waitFor();
-  await coverPage.locator('iframe').screenshot({path:path.join(pub,base,'preview.webp'),type:'webp'});await coverPage.close();
+  await coverPage.locator('iframe').screenshot({path:path.join(output,'catalog-opening.webp'),type:'webp'});await coverPage.close();
   assert.deepEqual(errors,[]);assert.deepEqual(networkErrors,[]);assert.deepEqual(external,[]);
   fs.writeFileSync(path.join(output,'browser-results.json'),JSON.stringify({browser:await browser.version(),results,errors,networkErrors,external,posts,liveServiceVerified:false},null,2)+'\n');
   console.log(JSON.stringify({browser:await browser.version(),scenarios:results.length,errors,networkErrors,external}));

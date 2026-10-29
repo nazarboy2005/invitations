@@ -10,7 +10,7 @@ untouched. Application deployment and live payment activation are excluded.
 | --- | --- | --- | --- |
 | Asalari | taklifla-asalari | Published | Complete — source/6 browser cases, real lifecycle and actual audio verified; music gap fixed |
 | Diyora-Shahzod | taklifla-zarhal-sahifa | Published | Complete — missing studio renderer, Google fallback and catalog audio fixed; real lifecycle verified |
-| Envelope | taklifla-muhrli-maktub | Published | Pending audit |
+| Envelope | taklifla-muhrli-maktub | Published | Complete — shared Google links/wish samples, gesture audio and studio opening corrected |
 | Fasllar | taklifla-tort-fasl | Published | Pending audit |
 | Midnight Palace | taklifla-tungi-saroy | Published | Pending audit |
 | Tovus | taklifla-tovus | Published | Pending audit |
@@ -55,3 +55,10 @@ the individual commit below each completed row.
 - Fixed missing studio dispatch, Google Maps fallback and catalog gesture gating. Actual local audio decoding, pause across locale switching and resume pass.
 - Real authenticated save/reopen, compatible switching, studio/public routes, publication, personalized four-locale data, selected/manual Google maps and pending wishes pass. Existing publication and admin price are preserved.
 - Evidence: `apps/web/src/templates/taklifla-zarhal-sahifa/evidence`, `docs/templates/taklifla-audit/zarhal-integration.json` and `zarhal-audio.json`. Four package tests and web typecheck pass.
+
+## Muhrli Maktub audit
+
+- Original capture/CSS, ten images and twelve fonts retain their bytes. Five source/browser cases cover sealed/open/unfold states, four locales, repeats, long copy, empty sections, closed wishes, reduced motion and HTTP errors.
+- Both map buttons use the shared Google target. Preview wish cards use only canonical localized samples. Audio starts on opening, follows actual play/pause events and retains manual pause across locale changes.
+- Studio opens the source scene and targets authored names/location/RSVP. Real four-locale save/reopen and source flowers notes, switching, publication, public guest/maps, edited content/manual link and pending wish persistence pass.
+- Evidence: `apps/web/src/templates/taklifla-muhrli-maktub/evidence`, `docs/templates/taklifla-audit/muhrli-integration.json`, `muhrli-audio.json`. Package tests and typecheck pass; original catalog publication/price unchanged.
