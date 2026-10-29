@@ -36,6 +36,7 @@ const TakliflaOltinYol = dynamic(() => import("@/templates/taklifla-oltin-yol/re
 const TakliflaOsmonInvitation = dynamic(() => import("@/templates/taklifla-osmon/renderer").then(m=>m.TakliflaOsmonInvitation));
 const TakliflaParilarErtagiInvitation = dynamic(() => import("@/templates/taklifla-parilar-ertagi/renderer").then(m=>m.TakliflaParilarErtagiInvitation));
 const TakliflaQogozErtagiInvitation = dynamic(() => import("@/templates/taklifla-qogoz-ertagi/renderer").then(m=>m.TakliflaQogozErtagiInvitation));
+const SakuraGuliInvitation = dynamic(() => import("@/templates/taklifla-sakura-guli/renderer").then(m=>m.SakuraGuliInvitation));
 const TakliflaYubileySahifasi = dynamic(() => import("@/templates/taklifla-yubiley-sahifasi/renderer").then(m=>m.TakliflaYubileySahifasi));
 const TakliflaBarakali = dynamic(() => import("@/templates/taklifla-barakali/renderer").then(m => m.TakliflaBarakali));
 const TakliflaZarhalSahifa = dynamic(() => import("@/templates/taklifla-zarhal-sahifa/renderer").then((module) => module.TakliflaZarhalSahifaInvitation));
@@ -188,7 +189,7 @@ export function FullTemplatePreview({
         observer.observe(doc.documentElement, { childList: true, subtree: true });
         cleanups.push(() => { observer.disconnect(); doc.removeEventListener("volumechange", mute, true); });
         // Only invitation-opening controls; never submit RSVP, wishes, or links.
-        const opener = doc.querySelector<HTMLElement>("#qg-open, #splash-open, #os-open, #oy-open, #mw-open, #splash.splash[onclick], #fs-open, #mp-open, #tv-open, #open-invitation, #open-prompt, #open-btn, #openBtn, #openEnvelope, #si-opener, [data-open], [data-gg-source-opening], [data-landing-screenshot-id='invite-envelope']");
+        const opener = doc.querySelector<HTMLElement>("#sk-open, #qg-open, #splash-open, #os-open, #oy-open, #mw-open, #splash.splash[onclick], #fs-open, #mp-open, #tv-open, #open-invitation, #open-prompt, #open-btn, #openBtn, #openEnvelope, #si-opener, [data-open], [data-gg-source-opening], [data-landing-screenshot-id='invite-envelope']");
         opener?.click();
         window.parent.postMessage({ type: "catalog-preview:ready" }, window.location.origin);
         if (template.id === "doira") {
@@ -302,7 +303,7 @@ export function FullTemplatePreview({
         />
       )}
       {!cardPreview && !posterCapture && <nav
-        className={`${styles.previewControls} ${showControls ? styles.controlsVisible : ""} ${["taklifla-qogoz-ertagi", "taklifla-parilar-ertagi", "taklifla-osmon", "taklifla-oltin-yol", "taklifla-toglar-bagrida", "taklifla-zarrin-gullar", "taklifla-gulbog", "taklifla-ertak", "taklifla-fayzli-xonadon", "taklifla-yubiley-sahifasi", "taklifla-barakali", "taklifla-tungi-saroy", "taklifla-tovus"].includes(template.id) ? styles.templateLanguageClearance : ""}`}
+        className={`${styles.previewControls} ${showControls ? styles.controlsVisible : ""} ${["taklifla-sakura-guli", "taklifla-qogoz-ertagi", "taklifla-parilar-ertagi", "taklifla-osmon", "taklifla-oltin-yol", "taklifla-toglar-bagrida", "taklifla-zarrin-gullar", "taklifla-gulbog", "taklifla-ertak", "taklifla-fayzli-xonadon", "taklifla-yubiley-sahifasi", "taklifla-barakali", "taklifla-tungi-saroy", "taklifla-tovus"].includes(template.id) ? styles.templateLanguageClearance : ""}`}
         aria-label="Dizayn amallari"
         aria-hidden={!showControls}
         inert={!showControls}
@@ -368,6 +369,8 @@ export function FullTemplatePreview({
         <TakliflaParilarErtagiInvitation invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} silentPlayback={silentPlayback} qaReducedMotion={qaReducedMotion} />
       ) : template.id === "taklifla-qogoz-ertagi" ? (
         <TakliflaQogozErtagiInvitation invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} silentPlayback={silentPlayback} qaReducedMotion={qaReducedMotion} />
+      ) : template.id === "taklifla-sakura-guli" ? (
+        <SakuraGuliInvitation invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} silentPlayback={silentPlayback} qaReducedMotion={qaReducedMotion} />
       ) : template.id === "taklifla-yubiley-sahifasi" ? (
         <TakliflaYubileySahifasi invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} silentPlayback={silentPlayback} qaReducedMotion={qaReducedMotion} />
       ) : template.id === "taklifla-barakali" ? (

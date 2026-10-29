@@ -1,0 +1,25 @@
+{
+  "date": "2026-10-29",
+  "configured": true,
+  "template": {
+    "id": "taklifla-sakura-guli",
+    "name": "Sakura Guli",
+    "description": "Sakura gullari, nafis sharshara manzarasi va harakatli gulbargli nikoh taklifnomasi.",
+    "previewImage": "/templates/taklifla-sakura-guli/preview.webp",
+    "previewEventType": "wedding",
+    "categoryIds": [
+      "wedding"
+    ],
+    "supportedEventTypes": [
+      "wedding"
+    ],
+    "priceMinor": 100000,
+    "currency": "UZS",
+    "accent": "#c2637f",
+    "published": true
+  },
+  "migrations": [
+    "0195_register_taklifla_sakura_guli.sql",
+    "0196_publish_taklifla_sakura_guli.sql"
+  ]
+}

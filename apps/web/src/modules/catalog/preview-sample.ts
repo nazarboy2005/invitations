@@ -141,7 +141,9 @@ export function createTemplatePreviewSample(
     artistLineup: sampleEventType === "wedding" ? structuredClone(previewSample.artistLineup) : [],
     gallery: structuredClone(templateSample?.gallery ?? previewSample.gallery),
     story: structuredClone(EVENT_SAMPLES[sampleEventType]?.story ?? (sampleEventType === "wedding" ? previewSample.story : [])),
-    templateData: templateId === "taklifla-qogoz-ertagi" && EVENT_SAMPLES[sampleEventType]?.details
+    templateData: templateId === "taklifla-sakura-guli" && EVENT_SAMPLES[sampleEventType]?.details
+      ? { "taklifla-sakura-guli": structuredClone({infoNote:EVENT_SAMPLES[sampleEventType]!.details!.reminderText,footerNote:EVENT_SAMPLES[sampleEventType]!.details!.footerNote}) }
+      : templateId === "taklifla-qogoz-ertagi" && EVENT_SAMPLES[sampleEventType]?.details
       ? { "taklifla-qogoz-ertagi": structuredClone({footerNote:EVENT_SAMPLES[sampleEventType]!.details!.footerNote}) }
       : templateId === "taklifla-parilar-ertagi" && EVENT_SAMPLES[sampleEventType]?.details
       ? { "taklifla-parilar-ertagi": structuredClone({arrivalNote:EVENT_SAMPLES[sampleEventType]!.details!.reminderText,programLabels:EVENT_SAMPLES[sampleEventType]!.details!.programLabels}) }

@@ -1,0 +1,102 @@
+{
+  "date": "2026-10-29",
+  "viewports": [
+    {
+      "width": 320,
+      "reference": {
+        "width": 320,
+        "font": "\"Shippori Mincho\", serif",
+        "petals": 37
+      },
+      "actual": {
+        "width": 320,
+        "font": "\"Shippori Mincho\", serif",
+        "petals": 37
+      },
+      "petalAnimation": "petalFall",
+      "parallax": true,
+      "cityRestored": true,
+      "sourceOpen": true,
+      "locales": 4,
+      "canonicalWishes": true,
+      "sevenStableEvents": true,
+      "longNamesAndCopy": true,
+      "previewNoSend": true,
+      "failureRetainsInput": true,
+      "failureSurvivesLocale": true,
+      "closedAfter24Hours": true,
+      "reducedMotion": true,
+      "emptyOptionals": true
+    },
+    {
+      "width": 390,
+      "reference": {
+        "width": 390,
+        "font": "\"Shippori Mincho\", serif",
+        "petals": 37
+      },
+      "actual": {
+        "width": 390,
+        "font": "\"Shippori Mincho\", serif",
+        "petals": 37
+      },
+      "petalAnimation": "petalFall",
+      "parallax": true,
+      "cityRestored": true,
+      "sourceOpen": true,
+      "locales": 4,
+      "canonicalWishes": true,
+      "sevenStableEvents": true,
+      "longNamesAndCopy": true,
+      "previewNoSend": true,
+      "failureRetainsInput": true,
+      "failureSurvivesLocale": true,
+      "closedAfter24Hours": true,
+      "reducedMotion": true,
+      "emptyOptionals": true
+    },
+    {
+      "width": 1280,
+      "reference": {
+        "width": 430,
+        "font": "\"Shippori Mincho\", serif",
+        "petals": 37
+      },
+      "actual": {
+        "width": 430,
+        "font": "\"Shippori Mincho\", serif",
+        "petals": 37
+      },
+      "petalAnimation": "petalFall",
+      "parallax": true,
+      "cityRestored": true,
+      "sourceOpen": true,
+      "locales": 4,
+      "canonicalWishes": true,
+      "sevenStableEvents": true,
+      "longNamesAndCopy": true,
+      "previewNoSend": true,
+      "failureRetainsInput": true,
+      "failureSurvivesLocale": true,
+      "closedAfter24Hours": true,
+      "reducedMotion": true,
+      "emptyOptionals": true
+    }
+  ],
+  "errors": [],
+  "httpErrors": [
+    {
+      "url": "http://127.0.0.1:3001/api/public/invitations/sakura-qa/wishes",
+      "status": 503
+    },
+    {
+      "url": "http://127.0.0.1:3001/api/public/invitations/sakura-qa/wishes",
+      "status": 503
+    },
+    {
+      "url": "http://127.0.0.1:3001/api/public/invitations/sakura-qa/wishes",
+      "status": 503
+    }
+  ],
+  "mockTransport": true
+}

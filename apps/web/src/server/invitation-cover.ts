@@ -222,7 +222,7 @@ export async function captureCover(invitation: Invitation, cookie = "") {
       const selector =
         recipe.scene === "lid"
           ? "#lid"
-          : "#qg-open, #splash-open, #os-open, #oy-open, #mw-open, #splash.splash[onclick], #fs-open, #mp-open, #tv-open, #open-invitation, #gate-knock, #open-prompt, #open-btn, #openBtn, #openEnvelope, #si-opener, [data-open], [data-gg-source-opening], [data-chorlove-open], [data-landing-screenshot-id='invite-envelope']";
+          : "#sk-open, #qg-open, #splash-open, #os-open, #oy-open, #mw-open, #splash.splash[onclick], #fs-open, #mp-open, #tv-open, #open-invitation, #gate-knock, #open-prompt, #open-btn, #openBtn, #openEnvelope, #si-opener, [data-open], [data-gg-source-opening], [data-chorlove-open], [data-landing-screenshot-id='invite-envelope']";
       const opener = frame.locator(selector).first();
       if (recipe.scene === "book") {
         const box = await opener.boundingBox();

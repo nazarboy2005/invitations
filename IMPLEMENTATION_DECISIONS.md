@@ -2149,3 +2149,7 @@ Development agents are distinct from production queue workers. The running app w
 ### Qog‘oz ertagi completion (2026-10-29)
 
 - Preserve Qog‘oz’s physical cover turn, layered paper scenes, pop reveals, desk color changes and native wishes-close state. Contact and footer notes use validated editable localized `templateData["taklifla-qogoz-ertagi"]`; shared venue/landmark, dress, program, contacts, dates and identities remain reusable. No source sample organizer/phone/program values are served. Migrations 0193/0194 register/publish for weddings after verification.
+
+### Sakura Guli completion (2026-10-29)
+
+- Preserve Sakura’s source city chip, floral frame, petals and native close state. Localized contact/info/footer notes persist in validated editable `templateData["taklifla-sakura-guli"]`; common venue/landmark/city derivation, names, hosts, dress, contacts and program remain shared. Long copy may grow the frame; normal source proportions remain. Migrations 0195/0196 register/publish for weddings after verification.

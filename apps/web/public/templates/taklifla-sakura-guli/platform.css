@@ -1,0 +1,14 @@
+html:not([data-bound]) body { visibility:hidden; }
+[hidden] { display:none !important; }
+:focus-visible { outline:2px solid #c2637f !important; outline-offset:4px; }
+#sk-wish-form input,#sk-wish-form textarea { outline:revert; }
+#sk-frame-n1,#sk-frame-n2,#sk-hero-n1,#sk-hero-n2 { overflow-wrap:anywhere; }
+#sk-info-contact-text,#sk-info-dress-text { white-space:pre-line; overflow-wrap:anywhere; }
+html[data-reduced] *,html[data-reduced] *::before,html[data-reduced] *::after { animation:none !important; transition:none !important; scroll-behavior:auto !important; }
+html[data-reduced] [data-reveal] { opacity:1 !important; transform:none !important; }
+@media(prefers-reduced-motion:reduce) { *,*::before,*::after { animation:none !important; transition:none !important; scroll-behavior:auto !important; } [data-reveal] { opacity:1 !important; transform:none !important; } }
+@media(max-width:370px) { #sk-countdown-section [style*="min-width:76px"] { min-width:0 !important; flex:1; } #sk-countdown-section [style*="gap:10px"] { gap:6px !important; } }
+
+#sk-info-note-text,#sk-foot-note{white-space:pre-line;overflow-wrap:anywhere}html[data-reduced] [data-para]{transform:none!important}html[data-reduced] [id$="-petals"]{display:none}@media(prefers-reduced-motion:reduce){[data-para]{transform:none!important}[id$="-petals"]{display:none}}
+
+#sk-frame_request,#sk-frame_kicker{overflow-wrap:anywhere;white-space:pre-line}.sk-ev-row>div:last-child{min-width:0;overflow-wrap:anywhere}

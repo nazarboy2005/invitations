@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+
+<html lang="uz-Latn" data-awaiting-data>
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Sakura Guli</title>
+
+
+
+
+<link href="source/fonts.css" rel="stylesheet"/><link href="source/template.css" rel="stylesheet"/><link href="platform.css" rel="stylesheet"/></head>
+<body>
+<!-- ============ SPLASH ============ -->
+<div id="sk-splash" style="position:fixed; inset:0; z-index:80; overflow:hidden; display:flex; align-items:center; justify-content:center; transition:opacity 1s ease, visibility 1s ease; opacity:1; pointer-events:auto;">
+<img alt="" src="sakura-img/hero.webp" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:blur(16px) brightness(0.62) saturate(1.05); transform:scale(1.12);"/>
+<div aria-hidden="true" style="position:absolute; inset:0; background:radial-gradient(circle at 50% 42%, rgba(84,38,58,0.18), rgba(48,22,40,0.58));"></div>
+<div style="position:relative; text-align:center; color:#fff7f2; padding:0 32px; max-width:430px;">
+<div data-i18n="splash_kicker" style="font-size:11px; letter-spacing:0.42em; text-transform:uppercase; color:rgba(255,240,240,0.85);">TO'Y TAKLIFNOMASI</div>
+<div style="width:148px; height:148px; margin:26px auto; border:1px solid rgba(255,226,214,0.55); border-radius:50%; display:grid; place-items:center;">
+<div style="width:132px; height:132px; border:1px solid rgba(255,226,214,0.3); border-radius:50%; display:grid; place-items:center; font-family:'Parisienne','Marck Script',cursive; font-size:34px; white-space:nowrap; color:#ffe3c9; text-shadow:0 2px 18px rgba(0,0,0,0.35);"><span id="sk-splash-mono"></span></div>
+</div>
+<div id="sk-splash-names" style="font-family:'Shippori Mincho',serif; font-size:24px; letter-spacing:0.12em;"></div>
+<div id="sk-splash-date" style="margin-top:10px; font-size:13px; letter-spacing:0.3em; color:rgba(255,236,232,0.9);"></div>
+<button id="sk-open" style="margin-top:34px; padding:15px 42px; border:1px solid rgba(255,220,205,0.6); border-radius:999px; background:linear-gradient(120deg,rgba(238,157,180,0.92),rgba(232,178,106,0.92)); color:#fff; font-family:'Figtree',sans-serif; font-size:13px; letter-spacing:0.28em; text-transform:uppercase; cursor:pointer; box-shadow:0 10px 30px rgba(90,30,50,0.35);" type="button"><span data-i18n="splash_open">Taklifnomani ochish</span></button>
+</div>
+</div>
+<!-- ── Language switcher (top-left) ── -->
+<div aria-label="Til / Language" class="sk-lang" role="group">
+<button class="on" data-lang="uz-Latn" type="button">UZ</button>
+<button data-lang="en" type="button">EN</button>
+<button data-lang="ru" type="button">RU</button>
+<button data-lang="uz-Cyrl" type="button">ЎЗ</button></div>
+<!-- ── Music toggle (hidden entirely without ?audio) ── -->
+<button aria-label="Musiqa" id="sk-music" style="display:none; position:fixed; z-index:75; top:16px; right:max(16px, calc(50% - 199px)); width:46px; height:46px; border-radius:50%; border:1px solid rgba(226,138,166,0.45); background:rgba(255,252,250,0.78); backdrop-filter:blur(8px); color:#c2637f; font-size:19px; cursor:pointer; align-items:center; justify-content:center; padding:0;" type="button">
+<span id="sk-music-note" style="animation:none;">♪</span>
+<span id="sk-music-slash" style="position:absolute; width:24px; height:2px; background:#c2637f; transform:rotate(-45deg); border-radius:2px; opacity:.85; transition:opacity .3s;"></span>
+</button>
+<div style="max-width:430px; margin:0 auto; background:#fdf6f0; box-shadow:0 0 70px rgba(150,90,110,0.28); position:relative;">
+<audio id="sk-audio" loop="" preload="none"></audio>
+<!-- ============ HERO ============ -->
+<section style="position:relative; min-height:100svh; display:flex; flex-direction:column; justify-content:flex-end; overflow:hidden;">
+<img alt="Gullagan sakura bog'i" src="sakura-img/hero.webp" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;"/>
+<div aria-hidden="true" style="position:absolute; inset:0; background:linear-gradient(180deg,rgba(64,32,52,0.12),rgba(64,32,52,0) 30%,rgba(64,30,48,0.02) 55%,rgba(74,36,54,0.55) 100%);"></div>
+<div data-para="0.06" style="position:absolute; top:-28px; left:-24px; width:66%; max-width:300px; pointer-events:none;">
+<img alt="" src="sakura-img/branch.webp" style="width:100%; transform-origin:8% 8%; animation:swayBranch 7.5s ease-in-out infinite;"/>
+</div>
+<div aria-hidden="true" data-para="-0.05" id="sk-hero-petals" style="position:absolute; inset:0; pointer-events:none;"></div>
+<div style="position:relative; text-align:center; padding:0 26px 28px; color:#fff;">
+<div data-i18n="hero_kicker" style="font-family:'Parisienne','Marck Script',cursive; font-size:26px; color:#ffe2ce; text-shadow:0 2px 12px rgba(70,25,45,0.5);">nikoh to'yi</div>
+<h1 style="margin:10px 0 0; font-family:'Shippori Mincho',serif; font-weight:500; font-size:52px; line-height:1.1; letter-spacing:0.05em; background:linear-gradient(110deg,#fff 30%,#ffd9e6 44%,#ffedbe 52%,#fff 66%); background-size:230% 100%; -webkit-background-clip:text; background-clip:text; color:transparent; animation:shimmer 6.5s linear infinite; filter:drop-shadow(0 3px 16px rgba(70,25,45,0.55));"><span id="sk-hero-n1"></span><span id="sk-hero-amp" style="display:block; font-family:'Parisienne','Marck Script',cursive; font-size:34px; line-height:1.3;">&amp;</span><span id="sk-hero-n2"></span></h1>
+<div id="sk-hero-date" style="margin-top:16px; display:inline-block; padding:9px 22px; border-top:1px solid rgba(255,230,220,0.55); border-bottom:1px solid rgba(255,230,220,0.55); font-family:'Shippori Mincho',serif; font-size:16px; letter-spacing:0.14em;"></div>
+<div id="sk-hero-loc-wrap" style="font-size:11px; letter-spacing:0.3em; margin-top:10px; color:rgba(255,238,232,0.85); text-transform:uppercase;"><span id="sk-hero-city"></span> · <span data-i18n="country_word">O'ZBEKISTON</span></div>
+<div style="margin-top:20px; animation:hintBob 2.2s ease-in-out infinite;">
+<div data-i18n="scroll_hint" style="font-size:10px; letter-spacing:0.4em; text-transform:uppercase; color:rgba(255,240,235,0.8);">pastga</div>
+<div style="font-size:16px; color:rgba(255,240,235,0.85); margin-top:2px;">︾</div>
+</div>
+</div>
+</section>
+<!-- ============ MEADOW STRIP 1 ============ -->
+<section style="position:relative; height:240px; overflow:hidden;">
+<img alt="Daryo bo'yidagi o'tloq" src="sakura-img/meadow.webp" style="width:100%; height:100%; object-fit:cover; object-position:50% 30%;"/>
+<div aria-hidden="true" style="position:absolute; top:0; left:0; right:0; height:64px; z-index:2; background:linear-gradient(#fad3db,rgba(250,211,219,0)); pointer-events:none;"></div>
+</section>
+<!-- ============ INVITATION ============ -->
+<section id="sk-invitation-section" style="position:relative; padding:64px 26px 56px; background:linear-gradient(180deg,#ccd69f,#eef4e2 22%,#fdf5ee 55%,#e7f1de 100%); overflow:hidden;">
+<div aria-hidden="true" data-para="0.04" id="sk-inv-petals" style="position:absolute; inset:0; pointer-events:none;"></div>
+<div data-reveal="" style="text-align:center; position:relative;">
+<div data-i18n="inv_kicker" style="font-family:'Parisienne','Marck Script',cursive; font-size:25px; color:#c2637f;">quvonchga to'la qalb bilan</div>
+<h2 data-i18n="inv_h2" style="margin:6px 0 0; font-family:'Shippori Mincho',serif; font-weight:500; font-size:22px; letter-spacing:0.24em; color:#3f3340; text-transform:uppercase;">TAKLIFNOMA</h2>
+<img alt="" src="sakura-img/blossom.webp" style="width:26px; margin:12px auto 0; display:block; animation:spinSlow 26s linear infinite;"/>
+</div>
+<div data-reveal="" style="position:relative; margin:30px auto 0; max-width:346px; aspect-ratio:2/3; filter:drop-shadow(0 18px 40px rgba(150,90,110,0.22));">
+<img alt="" src="sakura-img/frame.webp" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; border-radius:6px;"/>
+<div style="position:absolute; inset:0; padding:25% 23%; display:flex; flex-direction:column; justify-content:center; text-align:center; gap:9px;">
+<div id="sk-frame_kicker" style="font-family:'Parisienne','Marck Script',cursive; font-size:18px; color:#c2637f;"></div>
+<div style="font-family:'Shippori Mincho',serif; font-size:23px; color:#3f3340; letter-spacing:0.05em; line-height:1.35;"><span id="sk-frame-n1"></span><span id="sk-frame-amp"><br/><span style="font-family:'Parisienne','Marck Script',cursive; font-size:18px; color:#cd8a4b;">&amp;</span><br/></span><span id="sk-frame-n2"></span></div>
+<div id="sk-frame_request" style="font-size:11.5px; line-height:1.6; color:#6d5a66;"></div>
+<div style="font-family:'Shippori Mincho',serif; font-size:13px; color:#3f3340; letter-spacing:0.08em; line-height:1.7;"><span id="sk-frame-date"></span><br/><span id="sk-frame-timevenue" style="font-size:11.5px; color:#6d5a66; font-family:'Figtree',sans-serif;"></span></div>
+</div>
+</div>
+</section>
+<!-- ============ MEADOW STRIP 2 ============ -->
+<section style="position:relative; height:150px; overflow:hidden;">
+<img alt="" src="sakura-img/meadow.webp" style="width:100%; height:100%; object-fit:cover; object-position:50% 78%;"/>
+<div aria-hidden="true" style="position:absolute; top:0; left:0; right:0; height:54px; z-index:2; background:linear-gradient(#e7f1de,rgba(231,241,222,0)); pointer-events:none;"></div>
+</section>
+<!-- ============ EVENTS ============ -->
+<section id="sk-events-section" style="position:relative; padding:60px 30px 46px; background:linear-gradient(180deg,#ccd69f,#ddf0ef 45%,#d2ecee 100%);">
+<div data-reveal="" style="text-align:center;">
+<div data-i18n="events_kicker" style="font-family:'Parisienne','Marck Script',cursive; font-size:25px; color:#c2637f;">tantana</div>
+<h2 data-i18n="events_h2" style="margin:6px 0 0; font-family:'Shippori Mincho',serif; font-weight:500; font-size:22px; letter-spacing:0.24em; color:#3f3340; text-transform:uppercase;">TO'Y KUNI</h2>
+<img alt="" src="sakura-img/blossom.webp" style="width:26px; margin:12px auto 0; display:block; animation:spinSlow 26s linear infinite;"/>
+</div>
+<div id="sk-events" style="margin-top:32px; display:flex; flex-direction:column;"></div>
+</section>
+<!-- ============ MEADOW STRIP 3 (mirrored) ============ -->
+<section style="position:relative; height:150px; overflow:hidden;">
+<img alt="" src="sakura-img/meadow.webp" style="width:100%; height:100%; object-fit:cover; object-position:50% 15%; transform:scaleX(-1);"/>
+<div aria-hidden="true" style="position:absolute; top:0; left:0; right:0; height:54px; z-index:2; background:linear-gradient(#d2ecee,rgba(210,236,238,0)); pointer-events:none;"></div>
+</section>
+<!-- ============ VENUE ============ -->
+<section id="sk-venue-section" style="padding:58px 26px 30px; background:linear-gradient(180deg,#ccd69f,#d6eef0 40%,#cfe9ec 100%);">
+<div data-reveal="" style="text-align:center;">
+<div data-i18n="venue_kicker" style="font-family:'Parisienne','Marck Script',cursive; font-size:25px; color:#c2637f;">qayerda yig'ilamiz</div>
+<h2 data-i18n="venue_h2" style="margin:6px 0 0; font-family:'Shippori Mincho',serif; font-weight:500; font-size:22px; letter-spacing:0.24em; color:#3f3340; text-transform:uppercase;">MANZIL</h2>
+<img alt="" src="sakura-img/blossom.webp" style="width:26px; margin:12px auto 0; display:block; animation:spinSlow 26s linear infinite;"/>
+</div>
+<div data-reveal="" style="margin-top:26px; background:rgba(255,255,255,0.92); border-radius:20px; padding:28px 24px; text-align:center; box-shadow:0 14px 34px rgba(90,140,150,0.16);">
+<div id="sk-venue-name" style="font-family:'Shippori Mincho',serif; font-size:23px; color:#3f3340; letter-spacing:0.04em;"></div>
+<div id="sk-venue-addr" style="font-size:13px; color:#6d5a66; margin-top:8px; line-height:1.6;"></div>
+<div id="sk-venue-note-wrap"><div id="sk-venue-note" style="font-size:12px; color:#8fa5ab; margin-top:4px; letter-spacing:0.08em;"></div></div>
+<a href="#" id="sk-map" rel="noopener noreferrer" style="margin-top:20px; display:block; width:100%; padding:15px 0; border:none; border-radius:999px; background:linear-gradient(120deg,#5fc0c9,#7fce9d); color:#fff; text-decoration:none; font-family:'Figtree',sans-serif; font-size:12px; letter-spacing:0.26em; text-transform:uppercase; font-weight:600; cursor:pointer; box-shadow:0 10px 24px rgba(70,150,155,0.3);" target="_blank"><span data-i18n="btn_map">Xaritada ochish</span></a>
+</div>
+</section>
+<!-- ============ GUEST INFO ============ -->
+<section id="sk-info-section" style="padding:28px 26px 58px; background:linear-gradient(180deg,#cfe9ec,#c6e6ea);">
+<div data-reveal="" style="background:rgba(255,255,255,0.92); border-radius:20px; padding:8px 24px; box-shadow:0 14px 34px rgba(90,140,150,0.14);">
+<div id="sk-info-dress" style="padding:18px 0; border-bottom:1px dashed rgba(46,147,166,0.22);">
+<div data-i18n="info_dress_label" style="font-size:10px; letter-spacing:0.3em; text-transform:uppercase; color:#2e93a6; font-weight:600;">Kiyim</div>
+<div id="sk-info-dress-text" style="font-size:13.5px; color:#4c3a45; margin-top:6px; line-height:1.6;"></div>
+</div>
+<div id="sk-info-contact" style="padding:18px 0; border-bottom:1px dashed rgba(46,147,166,0.22);">
+<div data-i18n="info_contact_label" style="font-size:10px; letter-spacing:0.3em; text-transform:uppercase; color:#2e93a6; font-weight:600;">Aloqa</div>
+<div id="sk-info-contact-text" style="font-size:13.5px; color:#4c3a45; margin-top:6px; line-height:1.8;"></div>
+</div>
+<div id="sk-info-note" style="padding:18px 0;">
+<div data-i18n="info_note_label" style="font-size:10px; letter-spacing:0.3em; text-transform:uppercase; color:#2e93a6; font-weight:600;">Bilib qo'ying</div>
+<div id="sk-info-note-text" style="font-size:13.5px; color:#4c3a45; margin-top:6px; line-height:1.6;"></div>
+</div>
+</div>
+</section>
+<!-- ============ WISHES ============ -->
+<section id="sk-wishes-section" style="position:relative; padding:58px 26px 64px; background:linear-gradient(180deg,#c6e6ea,#bfe2e7); overflow:hidden;">
+<img alt="" src="sakura-img/blossom.webp" style="position:absolute; top:26px; right:-34px; width:120px; opacity:0.35; filter:blur(2px); animation:spinSlow 44s linear infinite; pointer-events:none;"/>
+<div aria-hidden="true" data-para="0.03" id="sk-wish-petals" style="position:absolute; inset:0; pointer-events:none;"></div>
+<div data-reveal="" style="text-align:center; position:relative;">
+<div data-i18n="wish_kicker" style="font-family:'Parisienne','Marck Script',cursive; font-size:25px; color:#c2637f;">bizga xat qoldiring</div>
+<h2 data-i18n="wish_h2" style="margin:6px 0 0; font-family:'Shippori Mincho',serif; font-weight:500; font-size:22px; letter-spacing:0.24em; color:#3f3340; text-transform:uppercase;">TILAKLAR</h2>
+<img alt="" src="sakura-img/blossom.webp" style="width:26px; margin:12px auto 0; display:block; animation:spinSlow 26s linear infinite;"/>
+</div>
+<form class="wish-form" data-reveal="" id="sk-wish-form" style="position:relative; margin-top:26px; background:rgba(255,255,255,0.94); border-radius:20px; padding:20px; display:flex; flex-direction:column; gap:12px; box-shadow:0 14px 34px rgba(90,140,150,0.16);">
+<input aria-label="Ismingiz" data-i18n-ph="wish_name_ph" maxlength="100" name="wname" placeholder="Ismingiz" required="" style="width:100%; padding:13px 14px; border:1px solid #e3ccd6; border-radius:12px; background:#fffdfb; font-size:14px; color:#3f3340; outline:none;" type="text"/>
+<textarea aria-label="Kelin-kuyov uchun iliq so'zlar…" data-i18n-ph="wish_msg_ph" maxlength="2000" name="wmsg" placeholder="Kelin-kuyov uchun iliq so'zlar…" required="" rows="3" style="width:100%; padding:13px 14px; border:1px solid #e3ccd6; border-radius:12px; background:#fffdfb; font-size:14px; color:#3f3340; outline:none; resize:vertical;"></textarea>
+<button style="padding:14px 0; border:none; border-radius:999px; background:linear-gradient(120deg,#ee9db4,#e8b26a); color:#fff; font-size:12px; letter-spacing:0.26em; text-transform:uppercase; font-weight:600; cursor:pointer; box-shadow:0 10px 24px rgba(200,110,140,0.3);" type="submit"><span data-i18n="btn_send">Tilak yo'llash</span></button>
+<p aria-live="polite" id="sk-wish-status" role="status"></p></form>
+<div data-i18n="wish_thanks" id="sk-wish-confirm" style="display:none; position:relative; text-align:center; font-size:13.5px; font-style:italic; color:#2e93a6; margin-top:22px;">Rahmat — tilagingiz saqlandi ♡</div>
+<div data-i18n="wish_empty" id="sk-wish-empty" style="position:relative; margin-top:22px; text-align:center; font-size:13px; color:#55707a; opacity:0.85;">Birinchi bo'lib tilak qoldiring.</div>
+<div id="sk-wish-list" style="position:relative; margin-top:22px; display:flex; flex-direction:column; gap:12px;"></div>
+</section>
+<!-- ============ COUNTDOWN ============ -->
+<section id="sk-countdown-section" style="position:relative; min-height:92svh; display:flex; align-items:center; justify-content:center; overflow:hidden;">
+<div aria-hidden="true" style="position:absolute; top:0; left:0; right:0; height:70px; z-index:3; background:linear-gradient(#bfe2e7,rgba(191,226,231,0)); pointer-events:none;"></div>
+<img alt="Buyuk sharshara" src="sakura-img/waterfall.webp" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;"/>
+<div data-para="-0.05" style="position:absolute; inset:0; pointer-events:none; z-index:1;">
+<div style="position:absolute; left:-20%; bottom:6%; width:150%; height:190px; background:radial-gradient(ellipse at 50% 55%,rgba(255,255,255,0.8),rgba(255,255,255,0) 68%); filter:blur(16px); animation:mistDrift 11s ease-in-out infinite alternate;"></div>
+<div style="position:absolute; left:-10%; bottom:18%; width:130%; height:150px; background:radial-gradient(ellipse at 45% 50%,rgba(255,255,255,0.55),rgba(255,255,255,0) 70%); filter:blur(18px); animation:mistDrift 15s ease-in-out infinite alternate-reverse;"></div>
+<div style="position:absolute; left:0; bottom:0; width:100%; height:110px; background:linear-gradient(rgba(255,255,255,0),rgba(255,255,255,0.5)); filter:blur(10px);"></div>
+</div>
+<div id="sk-cd-petals" style="position:absolute; inset:0; pointer-events:none; z-index:1;"></div>
+<div aria-hidden="true" style="position:absolute; inset:0; z-index:1; background:radial-gradient(ellipse 90% 55% at 50% 46%,rgba(16,62,74,0.42),rgba(16,62,74,0.14) 60%,rgba(16,62,74,0) 78%);"></div>
+<div aria-hidden="true" style="position:absolute; left:0; right:0; bottom:0; height:90px; z-index:1; background:linear-gradient(rgba(66,164,167,0),#42a4a7); pointer-events:none;"></div>
+<div data-reveal="" style="position:relative; z-index:2; text-align:center; color:#fff; padding:0 22px; text-shadow:0 1px 3px rgba(10,45,55,0.55),0 4px 18px rgba(10,45,55,0.45);">
+<div data-i18n="cd_kicker" style="font-family:'Parisienne','Marck Script',cursive; font-size:27px; color:#fff0d8; text-shadow:0 1px 3px rgba(10,45,55,0.6),0 4px 18px rgba(10,45,55,0.5);">har lahzani sanayapmiz</div>
+<h2 data-i18n="cd_h2" style="margin:8px 0 0; font-family:'Shippori Mincho',serif; font-weight:500; font-size:24px; letter-spacing:0.2em; text-transform:uppercase;">BAZMIMIZGACHA</h2>
+<div style="display:flex; gap:10px; justify-content:center; margin-top:28px;">
+<div style="min-width:76px; padding:14px 6px 11px; border-radius:16px; background:rgba(20,70,82,0.28); border:1px solid rgba(255,255,255,0.5); backdrop-filter:blur(10px);">
+<div id="sk-cd-d" style="font-family:'Shippori Mincho',serif; font-size:32px; line-height:1; font-variant-numeric:tabular-nums;">–</div>
+<div data-i18n="cd_days" style="font-size:9.5px; letter-spacing:0.24em; text-transform:uppercase; margin-top:7px; color:rgba(255,255,255,0.92);">Kun</div>
+</div>
+<div style="min-width:76px; padding:14px 6px 11px; border-radius:16px; background:rgba(20,70,82,0.28); border:1px solid rgba(255,255,255,0.5); backdrop-filter:blur(10px);">
+<div id="sk-cd-h" style="font-family:'Shippori Mincho',serif; font-size:32px; line-height:1; font-variant-numeric:tabular-nums;">–</div>
+<div data-i18n="cd_hours" style="font-size:9.5px; letter-spacing:0.24em; text-transform:uppercase; margin-top:7px; color:rgba(255,255,255,0.92);">Soat</div>
+</div>
+<div style="min-width:76px; padding:14px 6px 11px; border-radius:16px; background:rgba(20,70,82,0.28); border:1px solid rgba(255,255,255,0.5); backdrop-filter:blur(10px);">
+<div id="sk-cd-m" style="font-family:'Shippori Mincho',serif; font-size:32px; line-height:1; font-variant-numeric:tabular-nums;">–</div>
+<div data-i18n="cd_mins" style="font-size:9.5px; letter-spacing:0.24em; text-transform:uppercase; margin-top:7px; color:rgba(255,255,255,0.92);">Daqiqa</div>
+</div>
+<div style="min-width:76px; padding:14px 6px 11px; border-radius:16px; background:rgba(20,70,82,0.28); border:1px solid rgba(255,255,255,0.5); backdrop-filter:blur(10px);">
+<div id="sk-cd-s" style="font-family:'Shippori Mincho',serif; font-size:32px; line-height:1; font-variant-numeric:tabular-nums;">–</div>
+<div data-i18n="cd_secs" style="font-size:9.5px; letter-spacing:0.24em; text-transform:uppercase; margin-top:7px; color:rgba(255,255,255,0.92);">Soniya</div>
+</div>
+</div>
+<div id="sk-cd-foot" style="margin-top:24px; font-family:'Shippori Mincho',serif; font-size:15px; letter-spacing:0.16em;"></div>
+</div>
+</section>
+<!-- ============ SUNSET STRIP ============ -->
+<section aria-hidden="true" style="height:76px; background:linear-gradient(180deg,#42a4a7,#c9a183 70%,#e69873);"></section>
+<!-- ============ FOOTER ============ -->
+<footer style="position:relative; min-height:74svh; display:flex; align-items:flex-end; overflow:hidden;">
+<div aria-hidden="true" style="position:absolute; top:0; left:0; right:0; height:70px; z-index:1; background:linear-gradient(#e69873,rgba(230,152,115,0)); pointer-events:none;"></div>
+<img alt="Oltin soatdagi gulbarg ko'li" src="sakura-img/pool.webp" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;"/>
+<div aria-hidden="true" style="position:absolute; inset:0; background:linear-gradient(rgba(102,53,60,0) 38%,rgba(64,30,38,0.5));"></div>
+<div aria-hidden="true" data-para="-0.04" id="sk-foot-petals" style="position:absolute; inset:0; pointer-events:none;"></div>
+<div style="position:relative; z-index:2; width:100%; text-align:center; padding:60px 28px 44px; color:#fff5ea; text-shadow:0 2px 12px rgba(60,25,35,0.5);">
+<div style="width:74px; height:74px; margin:0 auto; border:1px solid rgba(255,235,210,0.65); border-radius:50%; display:grid; place-items:center; font-family:'Parisienne','Marck Script',cursive; font-size:19px; white-space:nowrap; color:#ffe6c4;"><span id="sk-foot-mono"></span></div>
+<div id="sk-foot-names" style="margin-top:14px; font-family:'Shippori Mincho',serif; font-size:24px; letter-spacing:0.1em;"></div>
+<div id="sk-foot-date" style="margin-top:8px; font-size:12px; letter-spacing:0.34em; color:rgba(255,240,225,0.9);"></div>
+<div data-i18n="footer_note_default" id="sk-foot-note" style="margin-top:18px; font-family:'Parisienne','Marck Script',cursive; font-size:23px; color:#ffe2c8;">Gullar ostida ko‘rishguncha</div>
+<div data-i18n="footer_signoff" style="margin-top:26px; font-size:10px; letter-spacing:0.3em; text-transform:uppercase; color:rgba(255,236,220,0.6);">Sakura Guli · mehr bilan</div>
+</div>
+</footer>
+</div>
+
+
+
+<script defer="" src="source/design.js"></script><script defer="" src="source/wish-close.js"></script><script defer="" src="bridge.js"></script></body>
+</html>

@@ -25,7 +25,7 @@ untouched. Application deployment and live payment activation are excluded.
 | Osmon | taklifla-osmon | Private package | Complete — exact airplane recovered, editable notes/shared wishes/closure restored; published 0189/0190 |
 | Pari | taklifla-parilar-ertagi | Private package | Complete — broken body extraction repaired; full renderer/bridge and editable labels/arrival integrated; published 0191/0192 |
 | Qog‘oz | taklifla-qogoz-ertagi | Private package | Complete — full bridge, fitting/closure, editable notes and routes restored; published 0193/0194 |
-| Sakura | taklifla-sakura-guli | Private package | Pending |
+| Sakura | taklifla-sakura-guli | Private package | Complete — hidden notes/city, empty timeline, wishes/music/status/sizing fixed; published 0195/0196 |
 | Sharlar | taklifla-sharlar | Private package | Pending |
 | Starry Night | taklifla-yulduzli-tun | Private package | Pending |
 | Terracotta | taklifla-terracotta | Private package | Pending |
@@ -152,3 +152,9 @@ the individual commit below each completed row.
 - Complete source paper-book DOM/inline CSS, twelve images/twelve fonts, cover turn, scene parallax/desk color/reveals/bobbing/fitting retained. Original timeline/wish builders and 24-hour close panel restored; real bridge and all routes added.
 - Contact/footer notes are validated, editable and persistent; shared identity/date/venue/maps/program/dress/contacts remain reusable. Canonical fixture/wishes stay preview-only. Failure status is translated accurately after native locale changes; related Zarrin/Oltin regressions were corrected in commit 55d8a8fd2.
 - 25 shared/package checks, three-viewport source/motion comparisons, four locales/long/empty/seven-row/reduced/closed/failure checks, actual audio, real authenticated notes save/reopen/studio/publication/public/maps/pending wishes and switching, covers, typecheck/build pass. Migrations 0193/0194 publish only this wedding design. Evidence: `docs/templates/taklifla-audit/qogoz*`.
+
+## Sakura Guli integration
+
+- Exact source CSS/eight images/thirteen fonts and native 37 petals/reveals/parallax/background/fitting/opening retained. Restored hidden city/info/footer/contact prose, original closed-wishes panel and full routes. New notes have typed editor/persistence and shared canonical examples.
+- Fixed empty timeline exception, unstable preview memo, missing canonical wishes/audio, invisible/unchecked success states, locale failure handling, dynamic reduced motion and preview sizing. Extended copy grows the source floral frame without clipping; normal geometry stays 2:3.
+- 25 shared/package tests, source/motion comparisons at 320/390/1280, all locales/long names and copy/seven rows/empty/reduced/closed/failure checks, real notes save/reopen/studio/publication/public/maps/pending wishes and switching, actual audio, covers, typecheck/build pass. Migrations 0195/0196 publish only this wedding design. Evidence: `docs/templates/taklifla-audit/sakura*`.

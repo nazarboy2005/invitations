@@ -1,0 +1,206 @@
+{
+  "source": "Invitations - this folder will be removed from production\\Invitations - this folder will be removed from production\\Taklifla\\Web invitations\\taklifla.uz\\templates\\sakura__3c8d741ae0737c86.html",
+  "sourceSha256": "fe813097da21d3d04b2273c85ab824d5f331e6510c219dceafcfb69831115fc8",
+  "fontStylesheet": "Invitations - this folder will be removed from production\\Invitations - this folder will be removed from production\\Taklifla\\Web invitations\\fonts.googleapis.com\\css2__4d639c736935ab1d",
+  "fontStylesheetSha256": "5c30591183c6fe065315777e60c933447b4039762bc0c5c0a7d942a83562f0ed",
+  "fonts": [
+    {
+      "url": "https://fonts.gstatic.com/s/figtree/v9/_Xms-HUzqDCFdgfMm4q9DbZs.woff2",
+      "path": "source\\fonts\\_Xms-HUzqDCFdgfMm4q9DbZs.woff2",
+      "origin": "exact referenced URL"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/figtree/v9/_Xms-HUzqDCFdgfMm4S9DQ.woff2",
+      "path": "source\\fonts\\_Xms-HUzqDCFdgfMm4S9DQ.woff2",
+      "origin": "capture"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/figtree/v9/_Xms-HUzqDCFdgfMm4q9DbZs.woff2",
+      "path": "source\\fonts\\_Xms-HUzqDCFdgfMm4q9DbZs.woff2",
+      "origin": "exact referenced URL"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/figtree/v9/_Xms-HUzqDCFdgfMm4S9DQ.woff2",
+      "path": "source\\fonts\\_Xms-HUzqDCFdgfMm4S9DQ.woff2",
+      "origin": "capture"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/figtree/v9/_Xms-HUzqDCFdgfMm4q9DbZs.woff2",
+      "path": "source\\fonts\\_Xms-HUzqDCFdgfMm4q9DbZs.woff2",
+      "origin": "exact referenced URL"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/figtree/v9/_Xms-HUzqDCFdgfMm4S9DQ.woff2",
+      "path": "source\\fonts\\_Xms-HUzqDCFdgfMm4S9DQ.woff2",
+      "origin": "capture"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/figtree/v9/_Xms-HUzqDCFdgfMm4q9DbZs.woff2",
+      "path": "source\\fonts\\_Xms-HUzqDCFdgfMm4q9DbZs.woff2",
+      "origin": "exact referenced URL"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/figtree/v9/_Xms-HUzqDCFdgfMm4S9DQ.woff2",
+      "path": "source\\fonts\\_Xms-HUzqDCFdgfMm4S9DQ.woff2",
+      "origin": "capture"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/marckscript/v22/nwpTtK2oNgBA3Or78gapdwuyzCg_WMM.woff2",
+      "path": "source\\fonts\\nwpTtK2oNgBA3Or78gapdwuyzCg_WMM.woff2",
+      "origin": "exact referenced URL"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/marckscript/v22/nwpTtK2oNgBA3Or78gapdwuyxig_WMM.woff2",
+      "path": "source\\fonts\\nwpTtK2oNgBA3Or78gapdwuyxig_WMM.woff2",
+      "origin": "exact referenced URL"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/marckscript/v22/nwpTtK2oNgBA3Or78gapdwuyyCg_.woff2",
+      "path": "source\\fonts\\nwpTtK2oNgBA3Or78gapdwuyyCg_.woff2",
+      "origin": "capture"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/parisienne/v14/E21i_d3kivvAkxhLEVZpQyZwD9Ku.woff2",
+      "path": "source\\fonts\\E21i_d3kivvAkxhLEVZpQyZwD9Ku.woff2",
+      "origin": "exact referenced URL"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/parisienne/v14/E21i_d3kivvAkxhLEVZpQyhwDw.woff2",
+      "path": "source\\fonts\\E21i_d3kivvAkxhLEVZpQyhwDw.woff2",
+      "origin": "capture"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/shipporimincho/v17/VdGGAZweH5EbgHY6YExcZfDoj0Bw0vWD3Lo.woff2",
+      "path": "source\\fonts\\VdGGAZweH5EbgHY6YExcZfDoj0Bw0vWD3Lo.woff2",
+      "origin": "exact referenced URL"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/shipporimincho/v17/VdGGAZweH5EbgHY6YExcZfDoj0Bw3PWD.woff2",
+      "path": "source\\fonts\\VdGGAZweH5EbgHY6YExcZfDoj0Bw3PWD.woff2",
+      "origin": "capture"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/shipporimincho/v17/VdGDAZweH5EbgHY6YExcZfDoj0B4L9aW7ZsP1-8.woff2",
+      "path": "source\\fonts\\VdGDAZweH5EbgHY6YExcZfDoj0B4L9aW7ZsP1-8.woff2",
+      "origin": "exact referenced URL"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/shipporimincho/v17/VdGDAZweH5EbgHY6YExcZfDoj0B4L9aW45sP.woff2",
+      "path": "source\\fonts\\VdGDAZweH5EbgHY6YExcZfDoj0B4L9aW45sP.woff2",
+      "origin": "capture"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/shipporimincho/v17/VdGDAZweH5EbgHY6YExcZfDoj0B4A9GW7ZsP1-8.woff2",
+      "path": "source\\fonts\\VdGDAZweH5EbgHY6YExcZfDoj0B4A9GW7ZsP1-8.woff2",
+      "origin": "exact referenced URL"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/shipporimincho/v17/VdGDAZweH5EbgHY6YExcZfDoj0B4A9GW45sP.woff2",
+      "path": "source\\fonts\\VdGDAZweH5EbgHY6YExcZfDoj0B4A9GW45sP.woff2",
+      "origin": "exact referenced URL"
+    }
+  ],
+  "transformations": [
+    "Retained body structure and inline styles; removed demo fields/program and provider scripts/analytics.",
+    "Extracted original CSS unchanged; motion/fit/timeline functions reused with reduced-motion parallax guard and explicit payload arguments.",
+    "Subset font CSS to supported Latin/extended Latin/Cyrillic ranges; exact URLs localized. Japanese subsets are outside approved locales.",
+    "Provider localStorage/query customizer, gesture handshake, guestbook replaced by typed platform adapter; native 24h close-panel builder retained; no provider API or simulated persistence."
+  ],
+  "assetFiles": [
+    {
+      "file": "sakura-img/blossom.webp",
+      "sha256": "99ff768f3de857ec8d986894e5d807591fdd41c29602a04dcec4a4877a8237fd"
+    },
+    {
+      "file": "sakura-img/branch.webp",
+      "sha256": "fdbf341bd56782114226931734ecf44f372481c30c437e7eafe0facf95869957"
+    },
+    {
+      "file": "sakura-img/frame.webp",
+      "sha256": "6ec324e09982f2e62ce61d87bd8fb51a654d866bc1b4ff4b1d164c5a83ae1636"
+    },
+    {
+      "file": "sakura-img/hero.webp",
+      "sha256": "e78012dc537d8a01a17a987ae73334c73fb00d344bb115bb2936f5ba46e8bfff"
+    },
+    {
+      "file": "sakura-img/meadow.webp",
+      "sha256": "d290420fa019d834f196655fd3d3f19a11d7bb559d21c28a23c0cf04ae4a0ae5"
+    },
+    {
+      "file": "sakura-img/petal.webp",
+      "sha256": "84e97bd938f6d20e85cc7964f30df37ef8cd8c172f3bffbd0eedb63277daf536"
+    },
+    {
+      "file": "sakura-img/pool.webp",
+      "sha256": "1d1859ed95968b0c92dc60fe0eedf0b21aa49fbb2440a33bc1d5626b56decd0e"
+    },
+    {
+      "file": "sakura-img/waterfall.webp",
+      "sha256": "d35b8a5a66dc2eff18ee236f573a039efa61e02c140ebdfa905bbce6b76f179a"
+    },
+    {
+      "file": "source/fonts/E21i_d3kivvAkxhLEVZpQyhwDw.woff2",
+      "sha256": "cf3c285d1ec1ee935746c475ca71e20d9f1fc3b5d62166e2523acdd0737e239c"
+    },
+    {
+      "file": "source/fonts/E21i_d3kivvAkxhLEVZpQyZwD9Ku.woff2",
+      "sha256": "652fa5786f9ca3be5718cfeba62261ae745ef0ea5efdc264e2b727fafb3d2a11"
+    },
+    {
+      "file": "source/fonts/nwpTtK2oNgBA3Or78gapdwuyxig_WMM.woff2",
+      "sha256": "0b81e24db3e626c58446fc2ea58dbeaa5d4edb219856afe36ad902c95248d18d"
+    },
+    {
+      "file": "source/fonts/nwpTtK2oNgBA3Or78gapdwuyyCg_.woff2",
+      "sha256": "b32acf77642711e18c14d57aabeefa02ee25664a7f40929ee5f72396557b6e76"
+    },
+    {
+      "file": "source/fonts/nwpTtK2oNgBA3Or78gapdwuyzCg_WMM.woff2",
+      "sha256": "457f5ae9dd211fb276e605a4ce3ecb35cbe1aee8bb1a54698c81d7834873ed06"
+    },
+    {
+      "file": "source/fonts/VdGDAZweH5EbgHY6YExcZfDoj0B4A9GW45sP.woff2",
+      "sha256": "f9418b06c09cd545a7676e26779798fa4776d07f2be2eaf97983b240a1981fcb"
+    },
+    {
+      "file": "source/fonts/VdGDAZweH5EbgHY6YExcZfDoj0B4A9GW7ZsP1-8.woff2",
+      "sha256": "e0d7eaf88d8a4fb9c0937c4f980bde426e6ff1f7c558e46417cd42c8bd02d088"
+    },
+    {
+      "file": "source/fonts/VdGDAZweH5EbgHY6YExcZfDoj0B4L9aW45sP.woff2",
+      "sha256": "f29d2122e2fcf7797ba4f2fc4527d2e21906e341dc17bad2e3903ab7bfe0b287"
+    },
+    {
+      "file": "source/fonts/VdGDAZweH5EbgHY6YExcZfDoj0B4L9aW7ZsP1-8.woff2",
+      "sha256": "374bb7f164db53c00e023e39305a51ba4260cb501eebab6a0e4fe724e920316b"
+    },
+    {
+      "file": "source/fonts/VdGGAZweH5EbgHY6YExcZfDoj0Bw0vWD3Lo.woff2",
+      "sha256": "6c66b797c70240e1d93c3f3da25b3c8b028d5b92b646315b766d6fbbcfb5c96c"
+    },
+    {
+      "file": "source/fonts/VdGGAZweH5EbgHY6YExcZfDoj0Bw3PWD.woff2",
+      "sha256": "65624096ca9a30ccc9a32bb915fb5a4dd9052e571b342ece09ef2f20a682862f"
+    },
+    {
+      "file": "source/fonts/_Xms-HUzqDCFdgfMm4q9DbZs.woff2",
+      "sha256": "bf7828e2c258cffcfa50a048ee388a36b95bc16b452e8d36fa797635dbe15965"
+    },
+    {
+      "file": "source/fonts/_Xms-HUzqDCFdgfMm4S9DQ.woff2",
+      "sha256": "4ba7d3d096695818fe0686be4f1e82c6b05134e18a22260336130335027462dd"
+    }
+  ],
+  "sourceParts": {
+    "source/template.css": "07a571e5f7f748c7c439e63bf8bc5dc1c5e8b071bed1e66758075f07862ed666",
+    "source/design.js": "d26795dec86be613c6df0b46426dbd91ded50017cd9b6986414d83c54a02ff7a",
+    "source/wish-close.js": "b4facbc4e58299d3c14f9a9035f2c404649a3d5951f9960156da588926cbb2ec",
+    "source/fonts.css": "1ae593c9f925f7a21596fb4022a13996b9d48f6e899829cf14d288395e8eb4e2"
+  },
+  "published": true,
+  "publicationMigrations": [
+    "0195_register_taklifla_sakura_guli.sql",
+    "0196_publish_taklifla_sakura_guli.sql"
+  ]
+}

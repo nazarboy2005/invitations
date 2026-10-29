@@ -1,0 +1,146 @@
+{
+  "uz": {
+    "splash_kicker": "TO'Y TAKLIFNOMASI",
+    "splash_open": "Taklifnomani ochish",
+    "hero_kicker": "nikoh to'yi",
+    "country_word": "O'ZBEKISTON",
+    "scroll_hint": "pastga",
+    "inv_kicker": "quvonchga to'la qalb bilan",
+    "inv_h2": "TAKLIFNOMA",
+    "events_kicker": "tantana",
+    "events_h2": "TO'Y KUNI",
+    "venue_kicker": "qayerda yig'ilamiz",
+    "venue_h2": "MANZIL",
+    "btn_map": "Xaritada ochish",
+    "info_dress_label": "Kiyim",
+    "info_contact_label": "Aloqa",
+    "info_note_label": "Bilib qo'ying",
+    "wish_kicker": "bizga xat qoldiring",
+    "wish_h2": "TILAKLAR",
+    "btn_send": "Tilak yo'llash",
+    "wish_thanks": "Rahmat — tilagingiz saqlandi ♡",
+    "wish_empty": "Birinchi bo'lib tilak qoldiring.",
+    "cd_kicker": "har lahzani sanayapmiz",
+    "cd_h2": "BAZMIMIZGACHA",
+    "cd_days": "Kun",
+    "cd_hours": "Soat",
+    "cd_mins": "Daqiqa",
+    "cd_secs": "Soniya",
+    "footer_note_default": "Gullar ostida ko‘rishguncha",
+    "footer_signoff": "Sakura Guli · mehr bilan"
+  },
+  "pairs": {
+    "splash_kicker": [
+      "Wedding Invitation",
+      "Приглашение на свадьбу"
+    ],
+    "splash_open": [
+      "Open Invitation",
+      "Открыть приглашение"
+    ],
+    "hero_kicker": [
+      "the wedding of",
+      "свадьба"
+    ],
+    "scroll_hint": [
+      "scroll",
+      "вниз"
+    ],
+    "country_word": [
+      "UZBEKISTAN",
+      "УЗБЕКИСТАН"
+    ],
+    "inv_kicker": [
+      "with joyful hearts",
+      "с радостью в сердце"
+    ],
+    "inv_h2": [
+      "Invitation",
+      "Приглашение"
+    ],
+    "frame_kicker": [
+      "together with their families",
+      "Вместе с родителями"
+    ],
+    "events_kicker": [
+      "the celebration",
+      "торжество"
+    ],
+    "events_h2": [
+      "Wedding Day",
+      "День свадьбы"
+    ],
+    "venue_kicker": [
+      "where we gather",
+      "где мы соберёмся"
+    ],
+    "venue_h2": [
+      "The Venue",
+      "Место проведения"
+    ],
+    "btn_map": [
+      "Open Map",
+      "Открыть карту"
+    ],
+    "info_dress_label": [
+      "Dress code",
+      "Дресс-код"
+    ],
+    "info_contact_label": [
+      "Contacts",
+      "Контакты"
+    ],
+    "info_note_label": [
+      "Good to know",
+      "Полезно знать"
+    ],
+    "wish_kicker": [
+      "leave us a note",
+      "оставьте нам записку"
+    ],
+    "wish_h2": [
+      "Wishes",
+      "Пожелания"
+    ],
+    "btn_send": [
+      "Send a wish",
+      "Отправить пожелание"
+    ],
+    "wish_thanks": [
+      "Thank you — your wish has been saved ♡",
+      "Спасибо — ваше пожелание сохранено ♡"
+    ],
+    "wish_empty": [
+      "Be the first to leave the couple a wish.",
+      "Будьте первым, кто оставит пожелание молодожёнам."
+    ],
+    "cd_kicker": [
+      "counting every moment",
+      "считаем каждое мгновение"
+    ],
+    "cd_h2": [
+      "Until Our Celebration",
+      "До нашего торжества"
+    ],
+    "cd_days": [
+      "Days",
+      "Дни"
+    ],
+    "footer_signoff": [
+      "Sakura · with love",
+      "Сакура · с любовью"
+    ],
+    "cd_hours": [
+      "Hours",
+      "Часы"
+    ],
+    "cd_mins": [
+      "Minutes",
+      "Минуты"
+    ],
+    "cd_secs": [
+      "Seconds",
+      "Секунды"
+    ]
+  }
+}
