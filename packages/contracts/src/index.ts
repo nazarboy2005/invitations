@@ -157,6 +157,7 @@ function isJsonValue(value: unknown): value is JsonValue {
   return false;
 }
 const pulauLocalizedText = z.partialRecord(localeSchema, text);
+export const gulbogDataSchema = z.object({brideFamily:localizedLongText.default({}),reminderTitle:localizedShortText.default({}),reminderText:localizedLongText.default({}),footerNote:localizedLongText.default({})}).default({brideFamily:{},reminderTitle:{},reminderText:{},footerNote:{}});
 export const fayzliXonadonDataSchema = z.object({
   menu: z.array(z.object({id:z.string().min(1).max(100),label:localizedShortText.default({}),name:localizedShortText.default({}),description:localizedLongText.default({})})).max(12).default([]),
 }).default({menu:[]});
@@ -217,6 +218,7 @@ export const invitationSchema = z
     id: z.string().min(1).max(100),
     templateId: invitationTemplateIdSchema,
     templateData: z.record(z.string(), z.custom<JsonValue>(isJsonValue)).default({}).superRefine((data, ctx) => {
+      if (data["taklifla-gulbog"] !== undefined && !gulbogDataSchema.safeParse(data["taklifla-gulbog"]).success) ctx.addIssue({code:"custom",path:["taklifla-gulbog"],message:"Invalid garden details"});
       if (data["taklifla-fayzli-xonadon"] !== undefined && !fayzliXonadonDataSchema.safeParse(data["taklifla-fayzli-xonadon"]).success) ctx.addIssue({code:"custom",path:["taklifla-fayzli-xonadon"],message:"Invalid housewarming menu"});
       if (data["taklifla-yubiley-sahifasi"] !== undefined && !yubileySahifasiDataSchema.safeParse(data["taklifla-yubiley-sahifasi"]).success) ctx.addIssue({ code:"custom", path:["taklifla-yubiley-sahifasi"], message:"Invalid anniversary details" });
       if (data["taklifla-muhrli-maktub"] !== undefined) {
@@ -1441,6 +1443,12 @@ export const TEMPLATES: TemplateDefinition[] = [
     previewImage: "/templates/taklifla-ertak/preview.webp", previewEventType: "wedding",
     categoryIds: ["wedding"], supportedEventTypes: ["wedding"],
     priceMinor: 100000, currency: "UZS", accent: "#c9a24a", published: true,
+  },
+  {
+    id: "taklifla-gulbog", name: "Gulbog", description: "Gullar darvozasi va nafis bog manzarasidagi nikoh taklifnomasi.",
+    previewImage: "/templates/taklifla-gulbog/preview.webp", previewEventType: "wedding",
+    categoryIds: ["wedding"], supportedEventTypes: ["wedding"],
+    priceMinor: 100000, currency: "UZS", accent: "#6b8f5e", published: true,
   },
   {
     id: "taklifla-yubiley-sahifasi", name: "Yubiley Sahifasi",

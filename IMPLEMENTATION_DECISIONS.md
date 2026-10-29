@@ -2121,3 +2121,7 @@ Development agents are distinct from production queue workers. The running app w
 ### Ertak completion (2026-10-29)
 
 - Ertak is the captured tunnel-book wedding design. Reuse its exact layered artwork/CSS and mouse/scroll/ambient engine, adding only reduced-motion guards and unusual-name fitting. Keep shared authored wording visible even without program rows. Canonical preview wishes/music remain preview-only and gesture gated. Migrations 0179/0180 register/publish it for weddings after complete verification.
+
+### Gulbog completion (2026-10-29)
+
+- Garden Arch is the Gulbog wedding design. Preserve its source monogram/petal opening and floral hero. Source-supported bride-family line, reminder title/text and custom footer persist under validated `templateData["taklifla-gulbog"]` with localized editor controls. Canonical examples remain in the shared wedding event profile. Catalog/personalized artwork uses the actual opened floral hero; public view retains the source opener. Migrations 0181/0182 register/publish after full verification.

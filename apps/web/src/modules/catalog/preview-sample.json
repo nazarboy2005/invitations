@@ -660,6 +660,34 @@
     }
   },
   "eventSamples": {
+    "wedding": {
+      "gardenDetails": {
+        "brideFamily": {
+          "uz-Latn": "Rahmonovlar oilasi",
+          "uz-Cyrl": "Раҳмоновлар оиласи",
+          "en": "The Rahmonov family",
+          "ru": "Семья Рахмоновых"
+        },
+        "reminderTitle": {
+          "uz-Latn": "Eslatma",
+          "uz-Cyrl": "Эслатма",
+          "en": "A little reminder",
+          "ru": "Небольшое напоминание"
+        },
+        "reminderText": {
+          "uz-Latn": "Marosimdan biroz oldin kelishingizni so‘raymiz.",
+          "uz-Cyrl": "Маросимдан бироз олдин келишингизни сўраймиз.",
+          "en": "Please arrive a little before the ceremony.",
+          "ru": "Пожалуйста, приходите немного раньше начала церемонии."
+        },
+        "footerNote": {
+          "uz-Latn": "Quvonchimizga sherik bo‘ling.",
+          "uz-Cyrl": "Қувончимизга шерик бўлинг.",
+          "en": "Share in our joy.",
+          "ru": "Разделите нашу радость."
+        }
+      }
+    },
     "fotiha": {
       "eventLabel": {
         "uz-Latn": "Fotiha to‘yi",

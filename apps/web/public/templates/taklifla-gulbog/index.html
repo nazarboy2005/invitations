@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+
+<html data-awaiting-data="" lang="uz-Latn">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Taklifnoma</title>
+
+
+
+
+<link href="fonts.css" rel="stylesheet"/><link href="source/template.css" rel="stylesheet"/><link href="source/language.css" rel="stylesheet"/><link href="platform.css" rel="stylesheet"/><script defer="True" src="source/motion.js"></script><script defer="True" src="platform-adapter.js"></script></head>
+<body>
+<!-- SPLASH -->
+<div class="splash" id="splash" onclick="openInvitation()" role="button" tabindex="0">
+<div class="splash-inner">
+<div class="splash-petals">
+<span class="sp sp1"></span><span class="sp sp2"></span><span class="sp sp3"></span>
+<span class="sp sp4"></span><span class="sp sp5"></span><span class="sp sp6"></span>
+</div>
+<div class="splash-mono"><span class="splash-initial-1"></span> <span class="splash-amp">&amp;</span> <span class="splash-initial-2"></span></div>
+<div class="splash-date"></div>
+<button class="splash-btn"><span>Taklifnomani ochish</span>
+<svg fill="none" height="18" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" width="18"><path d="M7 17L17 7M17 7H7M17 7V17"></path></svg>
+</button>
+</div>
+</div>
+<!-- MUSIC -->
+<div class="music-cluster" id="musicCluster">
+<button aria-label="Musiqa" class="music-btn" id="musicBtn" onclick="toggleMusic()">
+<svg fill="none" height="20" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" width="20"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
+</button>
+<button aria-label="Musiqani yashirish" class="music-close" id="musicClose" onclick="dismissMusic(event)" title="Yashirish">×</button>
+</div>
+<audio id="bgMusic" loop="" preload="none"></audio>
+<!-- PETALS -->
+<div aria-hidden="true" class="petals-container" id="petals"></div>
+<!-- MAIN -->
+<main class="main-content" id="mainContent" inert="">
+<!-- HERO -->
+<section class="hero">
+<div class="hero-bg-layers">
+<div class="hero-bg-base"></div>
+<div class="hero-bg-glow"></div>
+<div class="hero-bg-image" id="heroImageSlot"></div>
+<div class="hero-overlay"></div>
+</div>
+<div class="hero-content reveal">
+<div class="hero-ornament-top">
+<svg height="24" viewbox="0 0 200 30" width="160"><path d="M0 15 Q50 0 100 15 Q150 30 200 15" fill="none" opacity="0.6" stroke="var(--gold)" stroke-width="0.8"></path><circle cx="100" cy="15" fill="var(--gold)" opacity="0.5" r="3"></circle><circle cx="60" cy="9" fill="var(--blush)" opacity="0.5" r="1.5"></circle><circle cx="140" cy="21" fill="var(--blush)" opacity="0.5" r="1.5"></circle></svg>
+</div>
+<p class="hero-pre">Oilalarining duo va roziligi bilan</p>
+<h1 class="hero-name gold-shimmer"></h1>
+<p class="hero-and"><span>&amp;</span></p>
+<h1 class="hero-name gold-shimmer"></h1>
+<p class="hero-date-label">Nikoh to‘yi</p>
+<div class="hero-date-box">
+<span class="hero-day"></span>
+<span class="hero-month"></span>
+<span class="hero-year"></span>
+</div>
+<div class="hero-ornament-bottom">
+<svg height="24" viewbox="0 0 200 30" width="160"><path d="M0 15 Q50 30 100 15 Q150 0 200 15" fill="none" opacity="0.6" stroke="var(--gold)" stroke-width="0.8"></path><circle cx="100" cy="15" fill="var(--gold)" opacity="0.5" r="3"></circle></svg>
+</div>
+<div class="hero-scroll-hint">
+<span>Pastga torting</span>
+<svg fill="none" height="16" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" width="16"><path d="M12 5v14M5 12l7 7 7-7"></path></svg>
+</div>
+</div>
+</section>
+<!-- TRANSITION -->
+<div class="section-transition st-1">
+<div class="transition-image" id="floralTopSlot"></div>
+</div>
+<!-- INVITATION -->
+<section class="invitation">
+<div class="invitation-card reveal">
+<div class="inv-frame" id="floralFrameSlot">
+<div class="inv-frame-bg"></div>
+<div class="inv-frame-inner">
+<div class="inv-bismillah">❀</div>
+<p class="inv-bless">Oilamizning quvonchli kuni</p>
+<div class="inv-divider">
+<svg height="10" viewbox="0 0 120 12" width="100"><line opacity="0.5" stroke="var(--gold)" stroke-width="0.5" x1="0" x2="50" y1="6" y2="6"></line><circle cx="60" cy="6" fill="none" opacity="0.5" r="3" stroke="var(--gold)" stroke-width="0.5"></circle><line opacity="0.5" stroke="var(--gold)" stroke-width="0.5" x1="70" x2="120" y1="6" y2="6"></line></svg>
+</div>
+<p class="inv-family"></p>
+<p class="inv-invite-text"></p>
+<p class="inv-invite-word">Taklif</p>
+<div class="inv-names">
+<span class="inv-groom gold-shimmer"></span>
+<span class="inv-amp">&amp;</span>
+<span class="inv-bride gold-shimmer"></span>
+</div>
+<p class="inv-daughter"></p>
+<div class="inv-divider">
+<svg height="10" viewbox="0 0 120 12" width="100"><line opacity="0.5" stroke="var(--gold)" stroke-width="0.5" x1="0" x2="50" y1="6" y2="6"></line><circle cx="60" cy="6" fill="none" opacity="0.5" r="3" stroke="var(--gold)" stroke-width="0.5"></circle><line opacity="0.5" stroke="var(--gold)" stroke-width="0.5" x1="70" x2="120" y1="6" y2="6"></line></svg>
+</div>
+<p class="inv-on">Quyidagi tantanaga</p>
+<p class="inv-date-big"></p>
+</div>
+</div>
+</div>
+</section>
+<!-- TRANSITION -->
+<div class="section-transition st-2">
+<div class="transition-image" id="floralDividerSlot1"></div>
+</div>
+<!-- EVENTS -->
+<section class="events">
+<h2 class="section-title reveal">Marosim jadvali</h2>
+<p class="section-subtitle reveal">Marosim dasturi</p>
+<div class="timeline">
+<div class="timeline-line"></div>
+<div class="timeline-item reveal">
+<div class="timeline-dot"></div>
+<div class="timeline-card">
+<div class="tc-time"></div>
+<div class="tc-title"></div>
+<div class="tc-desc"></div>
+<div class="tc-icon"><svg fill="none" height="32" stroke="var(--sage)" stroke-width="1.2" viewbox="0 0 24 24" width="32"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-4 0a1 1 0 01-1-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 01-1 1"></path></svg></div>
+</div>
+</div>
+
+
+</div>
+</section>
+<!-- TRANSITION -->
+<div class="section-transition st-3">
+<div class="transition-image" id="floralDividerSlot2"></div>
+</div>
+<!-- VENUE -->
+<section class="venue">
+<div class="venue-bg">
+<div class="venue-bg-image" id="gardenSceneSlot"></div>
+<div class="venue-bg-overlay"></div>
+</div>
+<div class="venue-content reveal">
+<h2 class="section-title light">Manzil</h2>
+<p class="venue-place"></p>
+<p class="venue-address"></p>
+<p class="venue-text">Sizni kutib qolamiz</p>
+<a class="map-btn" href="#" rel="noopener" target="_blank">
+<svg fill="none" height="22" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" width="22"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+<span>Xaritani ochish</span>
+</a>
+</div>
+</section>
+<!-- INFO -->
+<section class="info">
+<div class="info-card reveal">
+<div class="info-icon"><svg fill="none" height="36" stroke="var(--gold)" stroke-width="1.2" viewbox="0 0 24 24" width="36"><path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg></div>
+<h3 class="info-title">Eslatma</h3>
+<p class="info-text"></p>
+</div>
+</section>
+<!-- WISHES -->
+<section class="wishes">
+<div class="wishes-inner reveal">
+<div class="wishes-ornament">
+<svg height="48" viewbox="0 0 60 60" width="48"><circle cx="30" cy="30" fill="none" opacity="0.4" r="28" stroke="var(--gold)" stroke-width="0.5"></circle><circle cx="30" cy="30" fill="none" opacity="0.4" r="20" stroke="var(--blush)" stroke-width="0.5"></circle></svg>
+</div>
+<h2 class="section-title">Tilaklaringiz</h2>
+<p class="wishes-subtitle">Tilaklaringiz biz uchun muhim</p>
+<form class="wishes-form">
+<input class="wish-input" maxlength="100" placeholder="Ismingiz" required="" type="text"/>
+<textarea class="wish-textarea" maxlength="2000" placeholder="Iliq tilaklaringizni yozing…" required="" rows="3"></textarea>
+<button class="wish-btn" type="submit"><span>Yuborish</span>
+<svg fill="none" height="16" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="16"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
+</button>
+</form>
+<div class="wish-confirm" id="wishConfirm" style="display:none">
+<p></p>
+</div>
+</div>
+</section>
+<!-- COUNTDOWN -->
+<section class="countdown">
+<div class="countdown-bg">
+<div class="countdown-bg-image" id="floralBottomSlot"></div>
+</div>
+<div class="countdown-content reveal">
+<h2 class="countdown-label">Bayramgacha qoldi</h2>
+<div class="countdown-grid" id="countdownGrid">
+<div class="cd-item"><span class="cd-num" id="cdDays">00</span><span class="cd-label">Kun</span></div>
+<div class="cd-sep">:</div>
+<div class="cd-item"><span class="cd-num" id="cdHours">00</span><span class="cd-label">Soat</span></div>
+<div class="cd-sep">:</div>
+<div class="cd-item"><span class="cd-num" id="cdMins">00</span><span class="cd-label">Daqiqa</span></div>
+<div class="cd-sep">:</div>
+<div class="cd-item"><span class="cd-num" id="cdSecs">00</span><span class="cd-label">Soniya</span></div>
+</div>
+<p class="countdown-msg">Sizni to‘yimizda ko‘rishdan baxtiyormiz</p>
+</div>
+</section>
+<!-- FOOTER -->
+<footer class="footer">
+<div class="footer-ornament">
+<svg height="14" viewbox="0 0 200 20" width="140"><path d="M0 10 Q50 0 100 10 Q150 20 200 10" fill="none" opacity="0.5" stroke="var(--gold-light)" stroke-width="0.6"></path></svg>
+</div>
+<p class="footer-names"></p>
+<p class="footer-date"></p>
+<p class="footer-thanks">Sevgi va minnatdorchilik bilan</p>
+</footer>
+</main>
+
+
+<!-- taklifla language switcher — single labeled button that opens a
+     small popover with UZ / EN / RU. Top-left floating, pairs with the
+     top-right music button. Sets <html lang> + persists to localStorage
+     + emits a "taklifla:langchange" event for per-template i18n maps. -->
+
+<div aria-label="Language" class="taklifla-lang-switch" role="group">
+<button aria-expanded="false" aria-haspopup="menu" class="taklifla-lang-toggle" type="button">
+<span class="taklifla-lang-current">UZ</span>
+<span aria-hidden="true" class="chev">▾</span>
+</button>
+<div class="taklifla-lang-menu" role="menu">
+<button data-lang="uz" role="menuitemradio" type="button">UZ</button>
+<hr/>
+<button data-lang="en" role="menuitemradio" type="button">EN</button>
+<hr/>
+<button data-lang="ru" role="menuitemradio" type="button">RU</button>
+</div>
+</div>
+
+<!-- taklifla i18n block -->
+
+<!-- taklifla-wishbook v1 — shared client for the public guestbook
+     endpoint. Replaces per-template localStorage-only submitWish() with
+     a real round-trip to /api/v1/public/i/{slug}/guestbook, then renders
+     the returned wishes under the form. Locks the form after the visitor
+     submits one wish. Slug comes from ?slug= forwarded by the variant. -->
+
+
+</body>
+</html>

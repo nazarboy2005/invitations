@@ -18,7 +18,7 @@ untouched. Application deployment and live payment activation are excluded.
 | Bookie Navy | taklifla-yubiley-sahifasi | Private package | Complete — anniversary fields, map and real RSVP implemented; published 0175/0176 |
 | Bookie Terracotta | taklifla-fayzli-xonadon | Private package | Complete — dinner menu integrated, source engine reused; published 0177/0178 |
 | Ertak | taklifla-ertak | Private package | Complete — source parallax/ambient, shared wishes and lifecycle verified; published 0179/0180 |
-| Garden Arch | taklifla-gulbog | Private package | Pending |
+| Garden Arch | taklifla-gulbog | Private package | Complete — family/reminder/footer fields restored; source/lifecycle/audio verified; published 0181/0182 |
 | Marigold | taklifla-zarrin-gullar | Private package | Pending |
 | Mountain | taklifla-toglar-bagrida | Private package | Pending |
 | Oltin Yo‘l | taklifla-oltin-yol | Private package | Pending |
@@ -108,3 +108,10 @@ the individual commit below each completed row.
 - Catalog autoplay and missing canonical wishes corrected. Shared names/greetings/hosts/date/maps/program/music/wishes bind through typed data; all map actions use the selected/manual Google venue or authored address search. No source gallery/gift/count interface invented.
 - Three source/adapter tests, source comparisons and active motion checks at 320/390/1280, four locales, long/empty/repeated/reduced data, actual audio, real save/reopen/studio/publication/public/maps/pending wishes, compatible switching, cover captures, typecheck and build pass.
 - Additive migrations 0179/0180 publish only Ertak for weddings. Evidence: `docs/templates/taklifla-audit/ertak*` and `taklifla-ertak-personalized-cover.webp`.
+
+## Gulbog integration
+
+- Exact garden/floral artwork, fonts and source styles retained. Source monogram opening, 18 petals, countdown and reveal engine run directly. Added typed/persistent editor support for the omitted bride-family, reminder and footer fields. Main authored data/maps/program remain shared.
+- Canonical wedding profile/wishes and catalog gesture music are wired. Partial wedding preview profiles preserve the shared event label; other event-label behavior stays intact. Studio waits for bound data before opening; source hero is captured for catalog/personalized artwork.
+- 25 shared/package tests, source comparisons at 320/390/1280, petal/reveal/opening, all locales, long/empty/seven-event/reduced data, preview no-send/failures, real source-field save/reopen/switching/studio/publication/public/maps/pending wishes, audio play/pause/resume/dismiss, covers, typecheck and build pass.
+- Additive migrations 0181/0182 publish only Gulbog for weddings. Evidence: `docs/templates/taklifla-audit/gulbog*` and `taklifla-gulbog-personalized-cover.webp`.

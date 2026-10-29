@@ -7,6 +7,7 @@ export type CoverScene = "opening" | "opened" | "lid" | "book";
 const openedHeroes = new Set([
   "anor",
   "taklifla-tort-fasl",
+  "taklifla-gulbog",
   "taklifla-tungi-saroy",
   "taklifla-tovus",
   "cloud-castle",

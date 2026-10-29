@@ -1,0 +1,181 @@
+{
+  "templateId": "taklifla-gulbog",
+  "name": "Gulbog‘",
+  "published": true,
+  "selectable": true,
+  "capture": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/taklifla.uz/templates/garden-arch__814ad8f7131593e4.html",
+  "captureSha256": "e03de4ef2f0bd6d70dd216dd41e16f4f8f1867564825066dbe4d587e07295073",
+  "fontStylesheetCapture": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/fonts.googleapis.com/css2__ee8ac59f76be10ad",
+  "fontStylesheetSha256": "0e4b0b532ba1538f07d84e75804e1becfc54cae0a8236a5c3b398a9b4b9a111d",
+  "assets": [
+    {
+      "capture": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/taklifla.uz/templates/garden-arch-img/floral-arch.webp",
+      "file": "source/garden-arch-img/floral-arch.webp",
+      "sha256": "2ab8e126aae91e4892fcb9613939f5b5ad3b132d930b0255fa9036391ad1577a",
+      "bytes": 640262
+    },
+    {
+      "capture": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/taklifla.uz/templates/garden-arch-img/floral-divider.webp",
+      "file": "source/garden-arch-img/floral-divider.webp",
+      "sha256": "7aa7d421a5c28112de1b65ccb5c5bd6ba8e20205058a3e3f75a9e0274613b7f2",
+      "bytes": 135164
+    },
+    {
+      "capture": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/taklifla.uz/templates/garden-arch-img/floral-frame.webp",
+      "file": "source/garden-arch-img/floral-frame.webp",
+      "sha256": "58de3a4a99311a8396c4b92156ef334953e2bd15052cffa3ecfa9c7782035b5a",
+      "bytes": 350344
+    },
+    {
+      "capture": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/taklifla.uz/templates/garden-arch-img/floral-top.webp",
+      "file": "source/garden-arch-img/floral-top.webp",
+      "sha256": "7f8484cc1e538d2885570cce8c24aca5fd80685bcde2da91c2fb01c0b0b50749",
+      "bytes": 486538
+    },
+    {
+      "capture": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/taklifla.uz/templates/garden-arch-img/garden-scene.webp",
+      "file": "source/garden-arch-img/garden-scene.webp",
+      "sha256": "c03441e2f87bd4d66b5103376d11846600ec795a09ea541345acbfa72fadd057",
+      "bytes": 436214
+    },
+    {
+      "capture": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/taklifla.uz/templates/garden-arch-img/hero-bg.webp",
+      "file": "source/garden-arch-img/hero-bg.webp",
+      "sha256": "8c0b2835e7e9115e1f60666df773cd20890279d3bbadc436c5b6fc968eef90c9",
+      "bytes": 339648
+    }
+  ],
+  "fonts": [
+    {
+      "url": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3ZmX5slCNuHLi8bLeY9MK7whWMhyjYrEtFmSq17w.woff2",
+      "file": "fonts/co3ZmX5slCNuHLi8bLeY9MK7whWMhyjYrEtFmSq17w.woff2",
+      "sha256": "ae25de0507a445fd9e953e90432ae75b1ee2eccb48370a6ced4934551eb56fc3",
+      "bytes": 25184,
+      "origin": "exact stylesheet URL (absent from local capture)"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3ZmX5slCNuHLi8bLeY9MK7whWMhyjYrEtGmSq17w.woff2",
+      "file": "fonts/co3ZmX5slCNuHLi8bLeY9MK7whWMhyjYrEtGmSq17w.woff2",
+      "sha256": "cd5bf126b2c84ab41b254a6a9a1ffb5c326a0f9f82c22fb4704daa31c9aaa415",
+      "bytes": 34392,
+      "origin": "exact stylesheet URL (absent from local capture)"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3ZmX5slCNuHLi8bLeY9MK7whWMhyjYrEtHmSq17w.woff2",
+      "file": "fonts/co3ZmX5slCNuHLi8bLeY9MK7whWMhyjYrEtHmSq17w.woff2",
+      "sha256": "b8ecb4ae898cd9ccae2f2d18fd364f6593bb67776060f9b5d833cec65d34d112",
+      "bytes": 11516,
+      "origin": "exact stylesheet URL (absent from local capture)"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3ZmX5slCNuHLi8bLeY9MK7whWMhyjYrEtImSo.woff2",
+      "file": "fonts/co3ZmX5slCNuHLi8bLeY9MK7whWMhyjYrEtImSo.woff2",
+      "sha256": "6f2f5c3b1abc3d0bb035a927f66a90ca873f94fc31c4966c8d024142c2036e55",
+      "bytes": 39260,
+      "origin": "local capture"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3ZmX5slCNuHLi8bLeY9MK7whWMhyjYrEtMmSq17w.woff2",
+      "file": "fonts/co3ZmX5slCNuHLi8bLeY9MK7whWMhyjYrEtMmSq17w.woff2",
+      "sha256": "cb13c04533ee98c94e49a053b9f4d39bf616fd7ba6360d71aead92a78dc571f7",
+      "bytes": 21300,
+      "origin": "exact stylesheet URL (absent from local capture)"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjYp3tKgS4.woff2",
+      "file": "fonts/co3bmX5slCNuHLi8bLeY9MK7whWMhyjYp3tKgS4.woff2",
+      "sha256": "cfa9a397d86f66c5c51775a2500a712d5f632a04f0c5eca6930dfaf612d4566d",
+      "bytes": 33736,
+      "origin": "exact stylesheet URL (absent from local capture)"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjYpHtKgS4.woff2",
+      "file": "fonts/co3bmX5slCNuHLi8bLeY9MK7whWMhyjYpHtKgS4.woff2",
+      "sha256": "a4d7cf345b8091e1d2c8c5c8fa3bd0f9bb9d00bc8988185471db398ddb5ae4c4",
+      "bytes": 23416,
+      "origin": "exact stylesheet URL (absent from local capture)"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjYpntKgS4.woff2",
+      "file": "fonts/co3bmX5slCNuHLi8bLeY9MK7whWMhyjYpntKgS4.woff2",
+      "sha256": "6252e819a7665ae512c2d046308a9016ada63c06d0d8f96984c4b29f6c9e1bd2",
+      "bytes": 11220,
+      "origin": "exact stylesheet URL (absent from local capture)"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjYqXtK.woff2",
+      "file": "fonts/co3bmX5slCNuHLi8bLeY9MK7whWMhyjYqXtK.woff2",
+      "sha256": "d80df8ff5aecd299a61549f9e29ab1ed0b9b05f4ea71d50fe978e07d5240b235",
+      "bytes": 37640,
+      "origin": "local capture"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjYrXtKgS4.woff2",
+      "file": "fonts/co3bmX5slCNuHLi8bLeY9MK7whWMhyjYrXtKgS4.woff2",
+      "sha256": "017fab69b4be8ffc08ca312823327989ade6dc3d948f0afa125e12ec2e5e7ca1",
+      "bytes": 21168,
+      "origin": "exact stylesheet URL (absent from local capture)"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/jost/v20/92zatBhPNqw73oDd4iYl.woff2",
+      "file": "fonts/92zatBhPNqw73oDd4iYl.woff2",
+      "sha256": "732ac61fdb7b964d3edfe40fe4a96aba1d1e34c349aebf0353118f8bda4aabdb",
+      "bytes": 10140,
+      "origin": "local capture"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/jost/v20/92zatBhPNqw73oTd4g.woff2",
+      "file": "fonts/92zatBhPNqw73oTd4g.woff2",
+      "sha256": "7726a5cd6f3c0e876c028ea2a643d45f7aad4b0f164b70966c669f4a4668f4b9",
+      "bytes": 26576,
+      "origin": "local capture"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/jost/v20/92zatBhPNqw73ord4iYl.woff2",
+      "file": "fonts/92zatBhPNqw73ord4iYl.woff2",
+      "sha256": "312ef2b80cefd8d6fd0e8553536862e7103f80be117a5aeba333dac68e4c0a6a",
+      "bytes": 17104,
+      "origin": "local capture"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/pinyonscript/v24/6xKpdSJbL9-e9LuoeQiDRQR8WOXaOg.woff2",
+      "file": "fonts/6xKpdSJbL9-e9LuoeQiDRQR8WOXaOg.woff2",
+      "sha256": "3e1f69a201572cad4aabea7ccf720f093a7dbc005380b2a1b89e0b94476d3e42",
+      "bytes": 39044,
+      "origin": "local capture"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/pinyonscript/v24/6xKpdSJbL9-e9LuoeQiDRQR8WOraOrbh.woff2",
+      "file": "fonts/6xKpdSJbL9-e9LuoeQiDRQR8WOraOrbh.woff2",
+      "sha256": "7b21477143c6cfd96aedc8864390d5b1c92f2684012d3e6da9eaa0aa0f11135a",
+      "bytes": 10700,
+      "origin": "exact stylesheet URL (absent from local capture)"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/pinyonscript/v24/6xKpdSJbL9-e9LuoeQiDRQR8WOvaOrbh.woff2",
+      "file": "fonts/6xKpdSJbL9-e9LuoeQiDRQR8WOvaOrbh.woff2",
+      "sha256": "c208ba67b4eff57e673bb188faeca3a51a6d928f8d94aca268b0a41a5deb6932",
+      "bytes": 36152,
+      "origin": "exact stylesheet URL (absent from local capture)"
+    }
+  ],
+  "sourceStyles": {
+    "source/template.css": "ebd0af8e0f9bf3b4b1ab4b5f9ff9bfddf384613820b8985f11e9158f37a79876",
+    "source/language.css": "63d867eb99a48076d594b1494c1ae84017c1e1cc35f9909332601e8949b25b6b"
+  },
+  "excluded": [
+    "provider query-string customizer and demo values",
+    "provider language localStorage runtime",
+    "provider guestbook endpoints/localStorage success",
+    "Cloudflare analytics"
+  ],
+  "gaps": [],
+  "sourceMotionChanges": [
+    "Wrap engine in startGardenSource for contract-first initialization.",
+    "Bind countdown to event instant; empty/invalid dates display zero and hide countdown.",
+    "Skip petal generation for reduced motion.",
+    "Delegate open music to adapter to respect guest pause and preview policy.",
+    "Expose reveal observer for dynamically ordered program rows."
+  ],
+  "sourceFieldIntegration": "Bride-family line, reminder title/text and footer note now have typed editor/persistence support."
+}

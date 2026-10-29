@@ -29,6 +29,7 @@ const AnorInvitation = dynamic(() => import("@/templates/anor/renderer").then((m
 const WedivoPulauSehati = dynamic(() => import("@/templates/wedivo-pulau-sehati/renderer").then((module) => module.WedivoPulauSehati));
 const TakliflaFayzliXonadonInvitation = dynamic(() => import("@/templates/taklifla-fayzli-xonadon/renderer").then(m=>m.TakliflaFayzliXonadonInvitation));
 const TakliflaErtak = dynamic(() => import("@/templates/taklifla-ertak/renderer").then(m=>m.TakliflaErtak));
+const TakliflaGulbog = dynamic(() => import("@/templates/taklifla-gulbog/renderer").then(m=>m.TakliflaGulbog));
 const TakliflaYubileySahifasi = dynamic(() => import("@/templates/taklifla-yubiley-sahifasi/renderer").then(m=>m.TakliflaYubileySahifasi));
 const TakliflaBarakali = dynamic(() => import("@/templates/taklifla-barakali/renderer").then(m => m.TakliflaBarakali));
 const TakliflaZarhalSahifa = dynamic(() => import("@/templates/taklifla-zarhal-sahifa/renderer").then((module) => module.TakliflaZarhalSahifaInvitation));
@@ -181,7 +182,7 @@ export function FullTemplatePreview({
         observer.observe(doc.documentElement, { childList: true, subtree: true });
         cleanups.push(() => { observer.disconnect(); doc.removeEventListener("volumechange", mute, true); });
         // Only invitation-opening controls; never submit RSVP, wishes, or links.
-        const opener = doc.querySelector<HTMLElement>("#fs-open, #mp-open, #tv-open, #open-invitation, #open-prompt, #open-btn, #openBtn, #openEnvelope, #si-opener, [data-open], [data-gg-source-opening], [data-landing-screenshot-id='invite-envelope']");
+        const opener = doc.querySelector<HTMLElement>("#splash.splash[onclick], #fs-open, #mp-open, #tv-open, #open-invitation, #open-prompt, #open-btn, #openBtn, #openEnvelope, #si-opener, [data-open], [data-gg-source-opening], [data-landing-screenshot-id='invite-envelope']");
         opener?.click();
         window.parent.postMessage({ type: "catalog-preview:ready" }, window.location.origin);
         if (template.id === "doira") {
@@ -295,7 +296,7 @@ export function FullTemplatePreview({
         />
       )}
       {!cardPreview && !posterCapture && <nav
-        className={`${styles.previewControls} ${showControls ? styles.controlsVisible : ""} ${["taklifla-ertak", "taklifla-fayzli-xonadon", "taklifla-yubiley-sahifasi", "taklifla-barakali", "taklifla-tungi-saroy", "taklifla-tovus"].includes(template.id) ? styles.templateLanguageClearance : ""}`}
+        className={`${styles.previewControls} ${showControls ? styles.controlsVisible : ""} ${["taklifla-gulbog", "taklifla-ertak", "taklifla-fayzli-xonadon", "taklifla-yubiley-sahifasi", "taklifla-barakali", "taklifla-tungi-saroy", "taklifla-tovus"].includes(template.id) ? styles.templateLanguageClearance : ""}`}
         aria-label="Dizayn amallari"
         aria-hidden={!showControls}
         inert={!showControls}
@@ -347,6 +348,8 @@ export function FullTemplatePreview({
         <TakliflaFayzliXonadonInvitation invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} silentPlayback={silentPlayback} qaReducedMotion={qaReducedMotion} />
       ) : template.id === "taklifla-ertak" ? (
         <TakliflaErtak invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} silentPlayback={silentPlayback} qaReducedMotion={qaReducedMotion} />
+      ) : template.id === "taklifla-gulbog" ? (
+        <TakliflaGulbog invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} silentPlayback={silentPlayback} qaReducedMotion={qaReducedMotion} />
       ) : template.id === "taklifla-yubiley-sahifasi" ? (
         <TakliflaYubileySahifasi invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} silentPlayback={silentPlayback} qaReducedMotion={qaReducedMotion} />
       ) : template.id === "taklifla-barakali" ? (

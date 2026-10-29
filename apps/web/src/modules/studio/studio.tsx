@@ -35,6 +35,7 @@ import {
   muhrliMaktubDataSchema,
   yubileySahifasiDataSchema,
   fayzliXonadonDataSchema,
+  gulbogDataSchema,
   pulauSehatiDataSchema,
   LANGUAGE_NAMES,
   LOCALES,
@@ -87,6 +88,7 @@ import { TakliflaTovus } from "@/templates/taklifla-tovus/renderer";
 import { TakliflaTortFasl } from "@/templates/taklifla-tort-fasl/renderer";
 import { TakliflaFayzliXonadonInvitation } from "@/templates/taklifla-fayzli-xonadon/renderer";
 import { TakliflaErtak } from "@/templates/taklifla-ertak/renderer";
+import { TakliflaGulbog } from "@/templates/taklifla-gulbog/renderer";
 import { TakliflaYubileySahifasi } from "@/templates/taklifla-yubiley-sahifasi/renderer";
 import { TakliflaBarakali } from "@/templates/taklifla-barakali/renderer";
 import { TakliflaZarhalSahifaInvitation } from "@/templates/taklifla-zarhal-sahifa/renderer";
@@ -887,6 +889,8 @@ export function Studio({
         : current,
     );
   }
+  const gulbogData=gulbogDataSchema.parse(invitation.templateData["taklifla-gulbog"] ?? {});
+  function updateGulbogField(key:keyof typeof gulbogData,value:string){setInvitation(current=>current?{...current,templateData:{...current.templateData,"taklifla-gulbog":{...gulbogData,[key]:{...gulbogData[key],[locale]:value}}}}:current);}
   const xonadonData=fayzliXonadonDataSchema.parse(invitation.templateData["taklifla-fayzli-xonadon"] ?? {});
   function updateXonadonMenu(menu: typeof xonadonData.menu) {setInvitation(current=>current?{...current,templateData:{...current.templateData,"taklifla-fayzli-xonadon":{menu}}}:current);}
   const yubileyData = yubileySahifasiDataSchema.parse(invitation.templateData["taklifla-yubiley-sahifasi"] ?? {});
@@ -3365,6 +3369,9 @@ export function Studio({
                   )}
                 </OptionalSection>
                 <div className={styles.divider} />
+                {invitation.templateId === "taklifla-gulbog" && <div className={styles.formGrid}>
+                  {(["brideFamily","reminderTitle","reminderText","footerNote"] as const).map(key=><Field key={key} label={`${({brideFamily:"Kelin oilasi satri",reminderTitle:"Eslatma sarlavhasi",reminderText:"Mehmonlarga eslatma",footerNote:"Yakuniy izoh"})[key]} · ${LANGUAGE_NAMES[locale]}`}><textarea maxLength={key==="reminderTitle"?300:4000} rows={3} value={gulbogData[key][locale] || ""} onChange={e=>updateGulbogField(key,e.target.value)}/></Field>)}
+                </div>}
                 {invitation.templateId === "taklifla-fayzli-xonadon" && <div className={styles.formGrid}>
                   {xonadonData.menu.map((item,index)=><div key={item.id}>
                     {(["label","name","description"] as const).map(key=><Field key={key} label={`${({label:"Taom turi",name:"Taom",description:"Izoh"})[key]} · ${LANGUAGE_NAMES[locale]}`}><textarea maxLength={key==="description"?4000:300} rows={2} value={item[key][locale] || ""} onChange={e=>updateXonadonMenu(xonadonData.menu.map((s,i)=>i===index?{...s,[key]:{...s[key],[locale]:e.target.value}}:s))}/></Field>)}
@@ -3930,6 +3937,8 @@ export function Studio({
               <TakliflaFayzliXonadonInvitation invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview fullPreview catalogMusic={section === 0 && !authoredPreview} silentPlayback />
             ) : invitation.templateId === "taklifla-ertak" ? (
               <TakliflaErtak invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview fullPreview catalogMusic={section === 0 && !authoredPreview} silentPlayback />
+            ) : invitation.templateId === "taklifla-gulbog" ? (
+              <TakliflaGulbog invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview fullPreview catalogMusic={section === 0 && !authoredPreview} silentPlayback />
             ) : invitation.templateId === "taklifla-yubiley-sahifasi" ? (
               <TakliflaYubileySahifasi invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview fullPreview catalogMusic={section === 0 && !authoredPreview} silentPlayback />
             ) : invitation.templateId === "taklifla-barakali" ? (

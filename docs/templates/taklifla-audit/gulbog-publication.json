@@ -1,0 +1,25 @@
+{
+  "date": "2026-10-29",
+  "configured": true,
+  "template": {
+    "id": "taklifla-gulbog",
+    "name": "Gulbog",
+    "description": "Gullar darvozasi va nafis bog manzarasidagi nikoh taklifnomasi.",
+    "previewImage": "/templates/taklifla-gulbog/preview.webp",
+    "previewEventType": "wedding",
+    "categoryIds": [
+      "wedding"
+    ],
+    "supportedEventTypes": [
+      "wedding"
+    ],
+    "priceMinor": 100000,
+    "currency": "UZS",
+    "accent": "#6b8f5e",
+    "published": true
+  },
+  "migrations": [
+    "0181_register_taklifla_gulbog.sql",
+    "0182_publish_taklifla_gulbog.sql"
+  ]
+}

@@ -14,7 +14,7 @@ const targets: Record<PreviewTarget, string> = {
   contacts: "#contact, #contacts, footer, [data-chorlove-contacts]",
 };
 const openerSelector =
-  "#fs-open, #env-stage, #mp-open, #tv-open, #open-invitation, #open-prompt, #open-btn, #openBtn, #openEnvelope, #si-opener, [data-gg-source-opening], [data-landing-screenshot-id='invite-envelope']";
+  "#splash.splash[onclick], #fs-open, #env-stage, #mp-open, #tv-open, #open-invitation, #open-prompt, #open-btn, #openBtn, #openEnvelope, #si-opener, [data-gg-source-opening], [data-landing-screenshot-id='invite-envelope']";
 
 /** Operates only on our same-origin preview; never touches the public renderer. */
 export function useStudioPreview(
@@ -29,6 +29,7 @@ export function useStudioPreview(
     const cleanups: Array<() => void> = [];
     const subscribed = new WeakSet<HTMLIFrameElement>();
     function prepare(doc: Document) {
+      if (doc.documentElement.hasAttribute("data-awaiting-data")) return;
       if (doc.documentElement.dataset.studioOpened !== "true") {
         const opener = doc.querySelector<HTMLElement>(openerSelector);
         if (opener) {

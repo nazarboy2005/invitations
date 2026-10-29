@@ -11,6 +11,7 @@ import previewSample from "./preview-sample.json";
 type EventSample = {
   personIndex?: number;
   celebrantAge?: number;
+  gardenDetails?: Invitation["templateData"][string];
   housewarmingDetails?: Invitation["templateData"][string];
   anniversaryDetails?: Invitation["templateData"][string];
   story?: Invitation["story"];
@@ -85,7 +86,7 @@ export function createTemplatePreviewSample(
         if (time) entry.time = time;
       });
       for (const locale of Object.keys(content) as Locale[]) {
-        content[locale].eventLabel = eventSample.eventLabel?.[locale] ?? "";
+        content[locale].eventLabel = eventSample.eventLabel?.[locale] ?? (sampleEventType === "wedding" ? content[locale].eventLabel : "");
         if (eventSample.title) content[locale].title = eventSample.title[locale];
         content[locale].hosts = eventSample.hosts?.[locale] ?? content[locale].hosts;
         if (eventSample.message)
@@ -140,7 +141,9 @@ export function createTemplatePreviewSample(
     artistLineup: sampleEventType === "wedding" ? structuredClone(previewSample.artistLineup) : [],
     gallery: structuredClone(templateSample?.gallery ?? previewSample.gallery),
     story: structuredClone(EVENT_SAMPLES[sampleEventType]?.story ?? (sampleEventType === "wedding" ? previewSample.story : [])),
-    templateData: templateId === "taklifla-fayzli-xonadon" && EVENT_SAMPLES[sampleEventType]?.housewarmingDetails
+    templateData: templateId === "taklifla-gulbog" && EVENT_SAMPLES[sampleEventType]?.gardenDetails
+      ? { "taklifla-gulbog": structuredClone(EVENT_SAMPLES[sampleEventType]!.gardenDetails!) }
+      : templateId === "taklifla-fayzli-xonadon" && EVENT_SAMPLES[sampleEventType]?.housewarmingDetails
       ? { "taklifla-fayzli-xonadon": structuredClone(EVENT_SAMPLES[sampleEventType]!.housewarmingDetails!) }
       : templateId === "taklifla-yubiley-sahifasi" && EVENT_SAMPLES[sampleEventType]?.anniversaryDetails
       ? { "taklifla-yubiley-sahifasi": structuredClone(EVENT_SAMPLES[sampleEventType]!.anniversaryDetails!) }

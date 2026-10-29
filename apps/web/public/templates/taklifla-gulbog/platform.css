@@ -1,0 +1,21 @@
+html[data-awaiting-data] body{visibility:hidden}
+[hidden]{display:none!important}
+.hero-name,.inv-groom,.inv-bride,.footer-names{overflow-wrap:anywhere}
+.inv-invite-text,.tc-desc,.venue-address{white-space:pre-line;overflow-wrap:anywhere}
+.hero-name{max-width:370px}
+.hero-content{max-width:100%}
+.wish-input,.wish-textarea{font-family:inherit}
+.garden-status{font-size:13px;line-height:1.6;margin-top:14px;color:var(--forest)}
+.garden-status[data-error="true"]{color:#9e3737}
+.garden-wishes-list{margin:28px auto 0;max-width:380px;display:flex;flex-direction:column;gap:12px;text-align:left}
+.garden-wish{padding:14px 16px;background:rgba(255,255,255,.55);border:1px solid rgba(0,0,0,.08);border-radius:10px;overflow-wrap:anywhere}
+.garden-wish strong{font-weight:600;font-size:14px;display:block;margin-bottom:4px}
+.garden-wish p{font-size:13px;line-height:1.55;opacity:.85;white-space:pre-wrap}
+:focus-visible{outline:2px solid var(--forest);outline-offset:4px}
+.taklifla-lang-menu button:focus-visible{outline-offset:-2px}
+html[data-reduced-motion] *,html[data-reduced-motion] *::before,html[data-reduced-motion] *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+html[data-reduced-motion] .reveal{opacity:1;transform:none}
+html[data-reduced-motion] .petals-container{display:none}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}.reveal{opacity:1;transform:none}.petals-container{display:none}}
+
+.inv-daughter,.info-title,.info-text,.footer-thanks{overflow-wrap:anywhere;white-space:pre-line}
