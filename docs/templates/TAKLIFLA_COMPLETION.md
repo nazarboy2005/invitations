@@ -9,7 +9,7 @@ untouched. Application deployment and live payment activation are excluded.
 | Source | Application ID | Initial state | Current review |
 | --- | --- | --- | --- |
 | Asalari | taklifla-asalari | Published | Complete — source/6 browser cases, real lifecycle and actual audio verified; music gap fixed |
-| Diyora-Shahzod | taklifla-zarhal-sahifa | Published | Pending audit |
+| Diyora-Shahzod | taklifla-zarhal-sahifa | Published | Complete — missing studio renderer, Google fallback and catalog audio fixed; real lifecycle verified |
 | Envelope | taklifla-muhrli-maktub | Published | Pending audit |
 | Fasllar | taklifla-tort-fasl | Published | Pending audit |
 | Midnight Palace | taklifla-tungi-saroy | Published | Pending audit |
@@ -48,3 +48,10 @@ the individual commit below each completed row.
 - Fixed missing catalog track and prevented the preview shell from bypassing template gesture gating. Public creator playback is retained; manual pause survives language switches.
 - Actual birthday save/reopen, compatible template switching, studio/public rendering, personalized guest, manual/Place maps and pending wishes pass.
 - Evidence: `apps/web/src/templates/taklifla-asalari/evidence`, `docs/templates/taklifla-audit/asalari-integration.json` and `asalari-audio.json`. Existing database publication/price are preserved.
+
+## Zarhal Sahifa audit
+
+- Preserved exact source CSS and 30 captured dependencies. Mobile/desktop source comparisons, reveals, four locales, long/empty data, seven gallery items, reduced motion and service error handling pass.
+- Fixed missing studio dispatch, Google Maps fallback and catalog gesture gating. Actual local audio decoding, pause across locale switching and resume pass.
+- Real authenticated save/reopen, compatible switching, studio/public routes, publication, personalized four-locale data, selected/manual Google maps and pending wishes pass. Existing publication and admin price are preserved.
+- Evidence: `apps/web/src/templates/taklifla-zarhal-sahifa/evidence`, `docs/templates/taklifla-audit/zarhal-integration.json` and `zarhal-audio.json`. Four package tests and web typecheck pass.

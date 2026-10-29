@@ -112,8 +112,8 @@
     const coords = state.coordinates;
     const query = coords && coords.latitude !== null && coords.longitude !== null ? `${coords.latitude},${coords.longitude}` : [d.venueName, d.address].filter(Boolean).join(' ');
     const mapLinks = $$('.map-buttons a');
-    mapLinks[0].href = safeURL(state.mapUrl) || `https://yandex.com/maps/?text=${encodeURIComponent(query)}`;
-    mapLinks[1].href = safeURL(state.mapUrl) || `https://maps.google.com/?q=${encodeURIComponent(query)}`;
+    const mapTarget = safeURL(state.mapUrl) || `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
+    mapLinks.forEach(link => { link.href = mapTarget; link.textContent = 'Google Maps'; });
     $('#wishes-section').hidden = !state.wishesEnabled;
     text('.wishes-head .script', labels.book); text('.wishes-head h2', labels.wishHeading); text('.wishes-head p', labels.wishIntro);
     name.placeholder = labels.name; name.setAttribute('aria-label', labels.name);
@@ -134,7 +134,7 @@
     const nextKey = `${url}|${state.preview}`;
     if (nextKey !== musicKey) {
       if (music) music.destroy();
-      music = url ? window.createZarhalMusic(url, !state.preview || state.music.catalogAutoplay) : null;
+      music = url ? window.createZarhalMusic(url, !state.preview) : null;
       musicKey = nextKey;
     }
     if (music) music.paint();

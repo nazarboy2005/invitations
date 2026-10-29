@@ -38,3 +38,7 @@ opening artwork is rendered as `preview.webp` at portrait ratio. The isolated
 HTTP harness uses stub wish responses, so it is not evidence of database
 persistence; authenticated application save/publish/public-route/reopen is
 verified separately before release.
+
+## Sequential audit, 2026-10-29
+
+The studio now dispatches to the same Zarhal renderer as catalog/public routes. Both legacy map anchors bind the shared Google URL or coordinate/address search; the source-hidden map section stays hidden. Catalog audio is gesture gated, with real decoded playback and pause retained through language changes. Original CSS, 30 dependencies and capture bytes remain unchanged. The current browser harness writes cover evidence without replacing released artwork. Real authenticated save/reopen, compatible switching, public four-locale personalized data, publication, edited manual maps and pending wish persistence are exercised by `tests/taklifla-zarhal-sahifa.integration.ts`.

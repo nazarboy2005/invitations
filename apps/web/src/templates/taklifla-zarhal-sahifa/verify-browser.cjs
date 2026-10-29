@@ -62,6 +62,7 @@ async function main(){
    await page.screenshot({path:path.join(evidence,`app-${width}-opening.webp`)});
    const opening=await frame.locator('.hero').evaluate(el=>({names:[...el.querySelectorAll('.hero-names')].map(x=>x.textContent),width:el.getBoundingClientRect().width,overflow:document.documentElement.scrollWidth>innerWidth}));
    assert.equal(opening.overflow,false);assert.deepEqual(opening.names,['Javohir','Madina']);
+   for (const link of await frame.locator('.map-buttons a').all()) assert.match(await link.getAttribute('href'), /^https:\/\/(www\.)?google\.com\/maps/);
    await frame.locator('.details').scrollIntoViewIfNeeded();await page.waitForTimeout(950);
    await page.screenshot({path:path.join(evidence,`app-${width}-details.webp`)});
    assert.equal(await frame.locator('.detail-photos img').count(),3);
@@ -110,7 +111,7 @@ async function main(){
   await page.evaluate(()=>send('uz-Latn'));await frame.locator('.hero').scrollIntoViewIfNeeded();await page.evaluate(()=>document.querySelector('iframe').contentWindow.document.querySelector('.taklifla-lang-switch').style.visibility='hidden');
   const shot=await frame.locator('body').screenshot({type:'png'});
   // Cover is the actual source opening at portrait ratio, no injected controls.
-  await frame.locator('.hero').screenshot({path:path.join(packagePath,'preview.webp')});
+  await frame.locator('.hero').screenshot({path:path.join(evidence,'catalog-opening.webp')});
   results.cases.push({cover:'source .hero at 390×844, canonical sample, silent, source locale control excluded for artwork only'});
   await context.close();
   assert.deepEqual(results.errors,[]);assert.deepEqual(results.httpFailures,[]);
