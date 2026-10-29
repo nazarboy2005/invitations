@@ -1437,6 +1437,12 @@ export const TEMPLATES: TemplateDefinition[] = [
     priceMinor: 100000, currency: "UZS", accent: "#b5523a", published: true,
   },
   {
+    id: "taklifla-ertak", name: "Ertak", description: "Sehrli qal’a, ertak darvozasi va qatlamli bog manzarasi.",
+    previewImage: "/templates/taklifla-ertak/preview.webp", previewEventType: "wedding",
+    categoryIds: ["wedding"], supportedEventTypes: ["wedding"],
+    priceMinor: 100000, currency: "UZS", accent: "#c9a24a", published: true,
+  },
+  {
     id: "taklifla-yubiley-sahifasi", name: "Yubiley Sahifasi",
     description: "To‘q moviy va oltin bezaklar, korxona tarixi va tantanali yubiley.",
     previewImage: "/templates/taklifla-yubiley-sahifasi/preview.webp",

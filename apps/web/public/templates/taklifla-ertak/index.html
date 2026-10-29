@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="uz-Latn"><head><meta charset="utf-8"><title>Ertak</title><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="stylesheet" href="fonts/fonts.css"><link rel="stylesheet" href="source/template.css"><link rel="stylesheet" href="source/controls.css"><link rel="stylesheet" href="platform.css">
+<link rel="preload" as="image" href="ertak-img/01-sky.webp" fetchpriority="high"><link rel="preload" as="image" href="ertak-img/02-castle.webp" fetchpriority="high"><link rel="preload" as="image" href="ertak-img/09-arch-v2.webp"></head><body>
+
+
+<!-- ────────────────────────────────────────────────────────────────── -->
+<!-- SPLASH · Tunnel-book hero                                          -->
+<!-- ────────────────────────────────────────────────────────────────── -->
+<section class="splash" data-screen-label="01 Splash">
+
+  <!-- 5 tunnel layers, back → front -->
+  <div class="tunnel" id="tunnel">
+    <div class="layer layer-sky" data-depth="0">
+      <img decoding="async" src="ertak-img/01-sky.webp" alt="" />
+    </div>
+
+    <div class="layer layer-castle" data-depth="0.06">
+      <img decoding="async" src="ertak-img/02-castle.webp" alt="" />
+    </div>
+
+    <!-- floating objects sit between castle and garden -->
+    <div class="float float-moon" data-depth="0.10">
+      <img decoding="async" src="ertak-img/07-moon.webp" alt="" />
+    </div>
+    <div class="float float-balloon" data-depth="0.14">
+      <img decoding="async" src="ertak-img/06-balloon.webp" alt="" />
+    </div>
+
+    <div class="layer layer-garden" data-depth="0.20">
+      <div class="sym-half left"><img decoding="async" src="ertak-img/03-garden.webp" alt="" /></div>
+      <div class="sym-half right"><img decoding="async" src="ertak-img/03-garden.webp" alt="" /></div>
+    </div>
+
+    <div class="float float-butterflies" data-depth="0.30">
+      <img decoding="async" src="ertak-img/08-butterflies.webp" alt="" />
+    </div>
+
+    <div class="layer layer-foliage" data-depth="0.34">
+      <div class="sym-half left"><img decoding="async" src="ertak-img/04-foliage.webp" alt="" /></div>
+      <div class="sym-half right"><img decoding="async" src="ertak-img/04-foliage.webp" alt="" /></div>
+    </div>
+
+    <div class="layer layer-arch" data-depth="0.45">
+      <img decoding="async" src="ertak-img/09-arch-v2.webp" alt="" />
+    </div>
+
+    <!-- title sits inside the arch opening -->
+    <div class="splash-title" data-depth="0.22">
+      <div class="splash-eyebrow">— qalblarimizdagi quvonch bilan sizni taklif qilamiz —</div>
+      <h1 class="splash-names">
+        <span class="name-a"></span>
+        <span class="amp">&amp;</span>
+        <span class="name-b"></span>
+      </h1>
+      <div class="splash-script">turmush quramiz</div>
+      <div class="splash-date"></div>
+      <div class="splash-place"></div>
+    </div>
+  </div>
+
+  <!-- twinkling stars overlay -->
+  <div class="stars" aria-hidden="true"></div>
+
+  <!-- scroll cue -->
+  <div class="scroll-cue" aria-hidden="true">
+    <span>hikoyani boshlang</span>
+    <div class="cue-line"></div>
+  </div>
+</section>
+
+<!-- ────────────────────────────────────────────────────────────────── -->
+<!-- COUNTDOWN                                                          -->
+<!-- ────────────────────────────────────────────────────────────────── -->
+<section class="countdown-section" data-screen-label="02 Countdown">
+  <div class="paper-bg"></div>
+  <div class="section-eyebrow">Birinchi bob</div>
+  <h2 class="section-title">Lahza yaqinlashmoqda</h2>
+  <div class="ornament-divider" aria-hidden="true">
+    <span class="line"></span><span class="star">✦</span><span class="line"></span>
+  </div>
+
+  <div class="countdown" id="countdown">
+    <div class="cd-unit"><div class="cd-num" data-cd="d">000</div><div class="cd-lbl">kun</div></div>
+    <div class="cd-sep">:</div>
+    <div class="cd-unit"><div class="cd-num" data-cd="h">00</div><div class="cd-lbl">soat</div></div>
+    <div class="cd-sep">:</div>
+    <div class="cd-unit"><div class="cd-num" data-cd="m">00</div><div class="cd-lbl">daqiqa</div></div>
+    <div class="cd-sep">:</div>
+    <div class="cd-unit"><div class="cd-num" data-cd="s">00</div><div class="cd-lbl">soniya</div></div>
+  </div>
+
+  <p class="cd-caption">ikki hikoya bir bo‘lguncha</p>
+</section>
+
+<!-- ────────────────────────────────────────────────────────────────── -->
+<!-- INVITATION CARD                                                    -->
+<!-- ────────────────────────────────────────────────────────────────── -->
+<section class="invitation-section" data-screen-label="03 Invitation">
+
+  <div class="section-eyebrow">Ikkinchi bob</div>
+  <h2 class="section-title">Taklifnoma</h2>
+  <div class="ornament-divider"><span class="line"></span><span class="star">✦</span><span class="line"></span></div>
+
+  <div class="invite-card">
+    <img loading="lazy" decoding="async" class="invite-frame" src="ertak-img/10-frame.webp" alt="" />
+    <div class="invite-inner">
+      <div class="invite-mono">— oilalarimiz duosi bilan —</div>
+
+      <div class="invite-name-row">
+        <div class="invite-name"></div>
+        <div class="invite-script">&amp;</div>
+        <div class="invite-name"></div>
+      </div>
+
+      <div class="invite-line"></div>
+
+      <div class="invite-detail">
+        <div class="invite-date-big"></div>
+      </div>
+
+      <div class="invite-line short"></div>
+
+      <div class="invite-detail">
+        <div class="invite-place"></div>
+        <div class="invite-place-sub"></div>
+      </div>
+
+      <div class="invite-flourish">✦ · ✦ · ✦</div>
+
+      <div class="invite-rsvp">
+        <a href="#wishes" class="btn-gold">Tilak qoldirish</a>
+      </div>
+    </div>
+
+    <!-- corner butterflies on the card -->
+    <img loading="lazy" decoding="async" class="invite-fly invite-fly-1" src="ertak-img/08-butterflies.webp" alt="" />
+  </div>
+
+</section>
+
+<!-- ────────────────────────────────────────────────────────────────── -->
+<!-- EVENTS · timeline                                                  -->
+<!-- ────────────────────────────────────────────────────────────────── -->
+<section class="events-section" data-screen-label="04 Events">
+
+  <div class="paper-bg"></div>
+  <div class="section-eyebrow">Uchinchi bob</div>
+  <h2 class="section-title">Tadbir tartibi</h2>
+  <div class="ornament-divider"><span class="line"></span><span class="star">✦</span><span class="line"></span></div>
+  <p class="section-lede"></p>
+
+  <div class="timeline"></div>
+</section>
+
+<!-- ────────────────────────────────────────────────────────────────── -->
+<!-- VENUE / MAP                                                        -->
+<!-- ────────────────────────────────────────────────────────────────── -->
+<section class="venue-section" data-screen-label="05 Venue">
+
+  <div class="section-eyebrow">To‘rtinchi bob</div>
+  <h2 class="section-title">Manzil</h2>
+  <div class="ornament-divider"><span class="line"></span><span class="star">✦</span><span class="line"></span></div>
+
+  <div class="venue-grid">
+
+    <div class="venue-card">
+      <div class="venue-arch">
+        <img loading="lazy" decoding="async" src="ertak-img/09-arch-v2.webp" alt="" />
+      </div>
+      <h3></h3>
+      <div class="venue-sub"></div>
+      <p></p>
+      <a class="btn-ghost" hidden target="_blank" rel="noopener">Xaritada ochish ↗</a>
+    </div>
+
+    <a class="venue-map" hidden target="_blank" rel="noopener" aria-label="Xaritada ochish">
+      <!-- decorative paper-cut map -->
+      <svg viewBox="0 0 500 600" preserveAspectRatio="xMidYMid slice">
+        <defs>
+          <pattern id="dot" x="0" y="0" width="14" height="14" patternUnits="userSpaceOnUse">
+            <circle cx="2" cy="2" r="0.8" fill="rgba(201,162,74,.25)"/>
+          </pattern>
+        </defs>
+        <rect width="500" height="600" fill="url(#dot)"/>
+        <!-- park / green area -->
+        <path d="M40,200 C90,160 200,180 260,150 C340,110 420,140 470,180 C490,260 460,340 410,360 C320,400 220,380 160,400 C90,420 40,360 40,300 Z"
+          fill="rgba(31,67,142,.18)" stroke="rgba(201,162,74,.4)" stroke-width="1" stroke-dasharray="3 4" />
+        <!-- main roads -->
+        <path d="M0,420 C120,400 220,400 280,380 S420,340 500,360" fill="none" stroke="rgba(201,162,74,.55)" stroke-width="1.4" />
+        <path d="M120,600 L150,380 L240,300" fill="none" stroke="rgba(201,162,74,.45)" stroke-dasharray="2 5" stroke-width="1" />
+        <path d="M380,0 L360,180 L300,320" fill="none" stroke="rgba(201,162,74,.45)" stroke-dasharray="2 5" stroke-width="1" />
+        <!-- venue marker -->
+        <g transform="translate(250,300)">
+          <circle r="22" fill="none" stroke="#c9a24a" stroke-width="1" opacity=".6">
+            <animate attributeName="r" values="18;30;18" dur="3s" repeatCount="indefinite" />
+            <animate attributeName="opacity" values="0.7;0;0.7" dur="3s" repeatCount="indefinite" />
+          </circle>
+          <circle r="14" fill="none" stroke="#c9a24a" stroke-width="1.5" />
+          <circle r="6" fill="#e7c66b" />
+          <text y="-26" text-anchor="middle" font-family="Cinzel" font-size="10" fill="#c9a24a" letter-spacing="2" data-venue-label></text>
+        </g>
+        <!-- compass -->
+        <g transform="translate(440,80)">
+          <circle r="22" fill="none" stroke="rgba(201,162,74,.5)" />
+          <text y="-26" text-anchor="middle" font-family="Cinzel" font-size="10" fill="#c9a24a" data-north>Sh</text>
+          <path d="M0,-18 L4,0 L0,18 L-4,0 Z" fill="#c9a24a" opacity=".8" />
+        </g>
+        <text x="60" y="170" font-family="Cormorant Garamond" font-style="italic" font-size="13" fill="rgba(255,255,255,.5)" data-map-city></text>
+        <text x="70" y="550" font-family="Cormorant Garamond" font-style="italic" font-size="12" fill="rgba(255,255,255,.4)" data-map-hint>Xaritada ochish ↗</text>
+      </svg>
+    </a>
+
+  </div>
+
+</section>
+
+<!-- ────────────────────────────────────────────────────────────────── -->
+<!-- WISHES                                                             -->
+<!-- ────────────────────────────────────────────────────────────────── -->
+<section class="wishes-section" id="wishes" data-screen-label="06 Wishes">
+
+  <div class="section-eyebrow">Beshinchi bob</div>
+  <h2 class="section-title">Tilak qoldiring</h2>
+  <div class="ornament-divider"><span class="line"></span><span class="star">✦</span><span class="line"></span></div>
+  <p class="section-lede">Yaqinlaringizga ezgu tilaklaringizni qoldiring.</p>
+
+  <form class="wish-form" novalidate>
+    <input type="text" name="name" maxlength="100" placeholder="Ismingiz" required />
+    <textarea name="message" maxlength="2000" placeholder="Tilak, duo yoki xotira yozing…" required></textarea>
+    <button type="submit" class="btn-gold">Tilak yuborish</button>
+  <p class="wish-form-status" role="status" aria-live="polite"></p>
+</form>
+
+  <div class="wishes" id="wishes-list"></div>
+
+</section>
+
+<!-- ────────────────────────────────────────────────────────────────── -->
+<!-- FOOTER                                                             -->
+<!-- ────────────────────────────────────────────────────────────────── -->
+<footer class="site-footer" data-screen-label="07 Footer">
+  <img loading="lazy" decoding="async" class="footer-moon" src="ertak-img/07-moon.webp" alt="" />
+  <img loading="lazy" decoding="async" class="footer-balloon" src="ertak-img/06-balloon.webp" alt="" />
+
+  <div class="footer-script">— va ular —</div>
+  <div class="footer-mono">baxtli umr kechirishdi.</div>
+
+  <div class="footer-monogram"><span></span><span class="amp">&amp;</span><span></span></div>
+  <div class="footer-date"></div>
+
+  <div class="footer-tiny">Mehr, qog‘oz va zar bilan yaratilgan.</div>
+</footer>
+
+<!-- floating ambient layer (scroll-following moon + butterflies) -->
+<div class="ambient" aria-hidden="true">
+  <img loading="lazy" decoding="async" class="ambient-moon" src="ertak-img/07-moon.webp" alt="" />
+  <img loading="lazy" decoding="async" class="ambient-fly" src="ertak-img/08-butterflies.webp" alt="" />
+</div>
+
+<audio id="bgMusic" loop preload="none"></audio>
+<button id="taklifla-music-btn" class="taklifla-music-btn" type="button" aria-label="Musiqa" hidden>
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+  <span class="taklifla-music-label">Musiqa</span>
+</button>
+<div class="taklifla-lang-switch" role="group" aria-label="Language">
+  <button type="button" class="taklifla-lang-toggle" aria-haspopup="menu" aria-expanded="false">
+    <span class="taklifla-lang-current">UZ</span>
+    <span class="chev" aria-hidden="true">▾</span>
+  </button>
+  <div class="taklifla-lang-menu" role="menu">
+    <button type="button" data-lang="uz-Latn" role="menuitemradio">UZ</button>
+    <hr /><button type="button" data-lang="uz-Cyrl" role="menuitemradio">ЎЗ</button><hr />
+    <button type="button" data-lang="en" role="menuitemradio">EN</button>
+    <hr />
+    <button type="button" data-lang="ru" role="menuitemradio">RU</button>
+  </div>
+</div>
+
+<script src="source/localization.js"></script><script src="platform-adapter.js"></script><script src="source/motion.js"></script>
+</body></html>

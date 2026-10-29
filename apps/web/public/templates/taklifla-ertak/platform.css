@@ -1,0 +1,16 @@
+[hidden] { display: none !important; }
+html:not([data-ready]) .splash-title { visibility: hidden; }
+button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visible { outline: 2px solid var(--gold-bright); outline-offset: 5px; }
+.splash-names, .invite-name, .event-name, .venue-card h3, .wish-name { overflow-wrap: anywhere; }
+.splash-eyebrow, .invite-mono, .invite-place-sub, .venue-sub { overflow-wrap: anywhere; }
+.wish-form input, .wish-form textarea { max-width: 100%; }
+.wish-form-status { color: var(--gold-bright); white-space: pre-wrap; min-height: 1.4em; }
+.wish p { white-space: pre-wrap; overflow-wrap: anywhere; }
+.venue-map { color: var(--gold); }
+.event-desc { white-space: pre-wrap; }
+html[data-reduced-motion="true"] *, html[data-reduced-motion="true"] *::before, html[data-reduced-motion="true"] *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
+
+.splash-names .name-a, .splash-names .name-b { max-width:100%; overflow-wrap:anywhere; }

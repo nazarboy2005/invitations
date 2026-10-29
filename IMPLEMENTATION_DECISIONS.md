@@ -2117,3 +2117,7 @@ Development agents are distinct from production queue workers. The running app w
 ### Fayzli Xonadon completion (2026-10-29)
 
 - Bookie Terracotta is the housewarming source. Keep its floor-plan as decorative source artwork and restore its dinner section with typed, localized, editable menu courses under `templateData["taklifla-fayzli-xonadon"]`. Use stable item IDs and preserve these fields on switching. Shared housewarming preview menu belongs to the canonical event profile JSON, never creator saves. Real RSVP uses one-person attendance. Migrations 0177/0178 register/publish for `yangi-uy`, category other.
+
+### Ertak completion (2026-10-29)
+
+- Ertak is the captured tunnel-book wedding design. Reuse its exact layered artwork/CSS and mouse/scroll/ambient engine, adding only reduced-motion guards and unusual-name fitting. Keep shared authored wording visible even without program rows. Canonical preview wishes/music remain preview-only and gesture gated. Migrations 0179/0180 register/publish it for weddings after complete verification.

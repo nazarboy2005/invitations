@@ -1,0 +1,99 @@
+{
+  "date": "2026-10-29",
+  "viewports": [
+    {
+      "width": 320,
+      "reference": {
+        "width": 320,
+        "font": "\"Cormorant Garamond\", \"EB Garamond\", Georgia, serif",
+        "layers": 5
+      },
+      "actual": {
+        "width": 320,
+        "font": "\"Cormorant Garamond\", \"EB Garamond\", Georgia, serif",
+        "layers": 5
+      },
+      "parallaxChanges": true,
+      "ambientDrift": {
+        "opacity": "0.45",
+        "transform": "translateY(-71.04px) rotate(5.10121deg)"
+      },
+      "locales": 4,
+      "canonicalWishes": true,
+      "sevenStableEvents": true,
+      "longNamesFit": true,
+      "previewNoSend": true,
+      "failureRetainsInput": true,
+      "reducedMotion": true,
+      "emptySections": true
+    },
+    {
+      "width": 390,
+      "reference": {
+        "width": 390,
+        "font": "\"Cormorant Garamond\", \"EB Garamond\", Georgia, serif",
+        "layers": 5
+      },
+      "actual": {
+        "width": 390,
+        "font": "\"Cormorant Garamond\", \"EB Garamond\", Georgia, serif",
+        "layers": 5
+      },
+      "parallaxChanges": true,
+      "ambientDrift": {
+        "opacity": "0.45",
+        "transform": "translateY(-71.2px) rotate(5.01859deg)"
+      },
+      "locales": 4,
+      "canonicalWishes": true,
+      "sevenStableEvents": true,
+      "longNamesFit": true,
+      "previewNoSend": true,
+      "failureRetainsInput": true,
+      "reducedMotion": true,
+      "emptySections": true
+    },
+    {
+      "width": 1280,
+      "reference": {
+        "width": 1280,
+        "font": "\"Cormorant Garamond\", \"EB Garamond\", Georgia, serif",
+        "layers": 5
+      },
+      "actual": {
+        "width": 1280,
+        "font": "\"Cormorant Garamond\", \"EB Garamond\", Georgia, serif",
+        "layers": 5
+      },
+      "parallaxChanges": true,
+      "ambientDrift": {
+        "opacity": "0.45",
+        "transform": "translateY(-73.84px) rotate(3.53804deg)"
+      },
+      "locales": 4,
+      "canonicalWishes": true,
+      "sevenStableEvents": true,
+      "longNamesFit": true,
+      "previewNoSend": true,
+      "failureRetainsInput": true,
+      "reducedMotion": true,
+      "emptySections": true
+    }
+  ],
+  "errors": [],
+  "httpErrors": [
+    {
+      "url": "http://127.0.0.1:3001/api/public/invitations/qa/wishes",
+      "status": 503
+    },
+    {
+      "url": "http://127.0.0.1:3001/api/public/invitations/qa/wishes",
+      "status": 503
+    },
+    {
+      "url": "http://127.0.0.1:3001/api/public/invitations/qa/wishes",
+      "status": 503
+    }
+  ],
+  "mockTransport": true
+}

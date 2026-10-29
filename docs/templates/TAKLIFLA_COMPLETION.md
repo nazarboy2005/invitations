@@ -17,7 +17,7 @@ untouched. Application deployment and live payment activation are excluded.
 | Barakali | taklifla-barakali | Private package | Complete — fully integrated and published through migrations 0173/0174 |
 | Bookie Navy | taklifla-yubiley-sahifasi | Private package | Complete — anniversary fields, map and real RSVP implemented; published 0175/0176 |
 | Bookie Terracotta | taklifla-fayzli-xonadon | Private package | Complete — dinner menu integrated, source engine reused; published 0177/0178 |
-| Ertak | taklifla-ertak | Private package | Pending |
+| Ertak | taklifla-ertak | Private package | Complete — source parallax/ambient, shared wishes and lifecycle verified; published 0179/0180 |
 | Garden Arch | taklifla-gulbog | Private package | Pending |
 | Marigold | taklifla-zarrin-gullar | Private package | Pending |
 | Mountain | taklifla-toglar-bagrida | Private package | Pending |
@@ -101,3 +101,10 @@ the individual commit below each completed row.
 - Shared Google venue, hosts/greetings/date, dress palette, optional audio and real RSVP bind through typed data. No guest-count field. Catalog semantics/menu live in the shared event profile only.
 - 27 shared/package tests, source comparisons at 320/390/1280, actual audio, four locales/long/empty/reduced checks, real menu save/reopen/studio/publication/public/maps/one-person RSVP, covers, typecheck/build pass. Compatible switching is checked after release.
 - Additive migrations 0177/0178 publish only this design for housewarming, category other. Evidence: `docs/templates/taklifla-audit/xonadon*` and `taklifla-fayzli-xonadon-personalized-cover.webp`.
+
+## Ertak integration
+
+- Complete tunnel-book source CSS, nine exact artwork layers and twelve fonts retained. Source mouse/scroll parallax and ambient engine run directly; reduced-motion guards stop ambient drift and recover RAF scheduling. Long names fit without changing normal typography.
+- Catalog autoplay and missing canonical wishes corrected. Shared names/greetings/hosts/date/maps/program/music/wishes bind through typed data; all map actions use the selected/manual Google venue or authored address search. No source gallery/gift/count interface invented.
+- Three source/adapter tests, source comparisons and active motion checks at 320/390/1280, four locales, long/empty/repeated/reduced data, actual audio, real save/reopen/studio/publication/public/maps/pending wishes, compatible switching, cover captures, typecheck and build pass.
+- Additive migrations 0179/0180 publish only Ertak for weddings. Evidence: `docs/templates/taklifla-audit/ertak*` and `taklifla-ertak-personalized-cover.webp`.
