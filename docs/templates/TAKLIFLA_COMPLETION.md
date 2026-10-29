@@ -13,7 +13,7 @@ untouched. Application deployment and live payment activation are excluded.
 | Envelope | taklifla-muhrli-maktub | Published | Complete — shared Google links/wish samples, gesture audio and studio opening corrected |
 | Fasllar | taklifla-tort-fasl | Published | Complete — studio opening and shared sample wishes corrected; full source/lifecycle/audio checks pass |
 | Midnight Palace | taklifla-tungi-saroy | Published | Complete — current source, three-viewport motion, audio and real lifecycle audit passes |
-| Tovus | taklifla-tovus | Published | Pending audit |
+| Tovus | taklifla-tovus | Published | Complete — current source, three-viewport motion/audio and real lifecycle audit passes |
 | Barakali | taklifla-barakali | Private package | Pending |
 | Bookie Navy | taklifla-yubiley-sahifasi | Private package | Pending |
 | Bookie Terracotta | taklifla-fayzli-xonadon | Private package | Pending |
@@ -74,3 +74,9 @@ the individual commit below each completed row.
 - No new implementation gap found. Four source/data tests pass; 320/390/1280 source comparisons verify palace scene, particles, reveal/parallax, four locales, stable program items, long/empty content, Google maps and reduced motion.
 - Real authenticated lifecycle including compatible switching, studio opening, public four-locale personalization, publication, manual Google edits and pending wishes passes. Actual catalog audio is gesture gated and pause/resume survives locale changes.
 - Evidence: `docs/templates/luxury-uzbek-verification/taklifla-tungi-saroy-*`, `docs/templates/taklifla-audit/tungi-saroy-audio.json`. Publication and price remain unchanged.
+
+## Tovus audit
+
+- No new implementation gap found. Four source/adapter tests and 320/390/1280 browser comparisons pass: source feather/crest composition, particles, reveals, four locales, long/empty names, stable repeatable items, shared Google maps, reduced motion and closed wishes.
+- Real authenticated save/reopen, compatible switching, publication, studio opening, personalized four-locale public content, selected/manual Google maps and pending wishes pass. Catalog audio decodes after opening and pause/resume survives locale changes.
+- Evidence: `docs/templates/luxury-uzbek-verification/taklifla-tovus-*`, `docs/templates/taklifla-audit/tovus-audio.json`. Existing publication and price preserved.

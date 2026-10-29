@@ -1,0 +1,111 @@
+{
+  "date": "2026-10-29",
+  "checks": [
+    {
+      "id": "taklifla-tovus",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "particles": 6,
+      "animation": "fall",
+      "overflow": false,
+      "allLocales": true,
+      "stableProgramIds": true,
+      "manualMap": true,
+      "emptyCreatorData": true,
+      "longNameFit": [
+        {
+          "fontSize": 31,
+          "lines": 2.0022246941045605,
+          "left": 30,
+          "right": 360,
+          "viewport": 390
+        },
+        {
+          "fontSize": 36,
+          "lines": 2.0114942528735633,
+          "left": 30,
+          "right": 360,
+          "viewport": 390
+        }
+      ]
+    },
+    {
+      "id": "taklifla-tovus",
+      "viewport": {
+        "width": 1280,
+        "height": 800
+      },
+      "particles": 6,
+      "animation": "fall",
+      "overflow": false,
+      "allLocales": true,
+      "stableProgramIds": true,
+      "manualMap": true,
+      "emptyCreatorData": true,
+      "longNameFit": [
+        {
+          "fontSize": 35,
+          "lines": 1.9950738916256157,
+          "left": 455,
+          "right": 825,
+          "viewport": 1280
+        },
+        {
+          "fontSize": 41,
+          "lines": 1.9974768713204372,
+          "left": 455,
+          "right": 825,
+          "viewport": 1280
+        }
+      ]
+    },
+    {
+      "id": "taklifla-tovus",
+      "viewport": {
+        "width": 320,
+        "height": 740
+      },
+      "particles": 6,
+      "animation": "fall",
+      "overflow": false,
+      "allLocales": true,
+      "stableProgramIds": true,
+      "manualMap": true,
+      "emptyCreatorData": true,
+      "longNameFit": [
+        {
+          "fontSize": 24,
+          "lines": 2.0114942528735633,
+          "left": 30,
+          "right": 290,
+          "viewport": 320
+        },
+        {
+          "fontSize": 28,
+          "lines": 2.001231527093596,
+          "left": 30,
+          "right": 290,
+          "viewport": 320
+        }
+      ]
+    },
+    {
+      "id": "taklifla-tovus",
+      "nativeReducedMotion": true,
+      "actualAudioPlayback": true,
+      "pauseSurvivesLocale": true,
+      "mockedWishes": {
+        "failureRetainsMessage": true,
+        "approvedOnly": true,
+        "pendingHidden": true,
+        "guestToken": true
+      },
+      "sourceClosingPanel": true
+    }
+  ],
+  "errors": [],
+  "failedLocalRequests": [],
+  "httpErrors": []
+}
