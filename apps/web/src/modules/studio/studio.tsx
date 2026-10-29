@@ -83,6 +83,7 @@ import { TakliflaAsalari } from "@/templates/taklifla-asalari/renderer";
 import { TungiSaroyInvitation } from "@/templates/taklifla-tungi-saroy/renderer";
 import { TakliflaTovus } from "@/templates/taklifla-tovus/renderer";
 import { TakliflaTortFasl } from "@/templates/taklifla-tort-fasl/renderer";
+import { TakliflaBarakali } from "@/templates/taklifla-barakali/renderer";
 import { TakliflaZarhalSahifaInvitation } from "@/templates/taklifla-zarhal-sahifa/renderer";
 import { MuhrliMaktubInvitation } from "@/templates/taklifla-muhrli-maktub/renderer";
 import { isChorloveTemplate, ChorloveInvitation } from "@/templates/chorlove";
@@ -3896,6 +3897,8 @@ export function Studio({
                 preview
                 catalogMusic={section === 0 && !authoredPreview}
               />
+            ) : invitation.templateId === "taklifla-barakali" ? (
+              <TakliflaBarakali invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview fullPreview catalogMusic={section === 0 && !authoredPreview} sampleWishes={section === 0 && !authoredPreview} silentPlayback />
             ) : invitation.templateId === "taklifla-zarhal-sahifa" ? (
               <TakliflaZarhalSahifaInvitation invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview fullPreview catalogMusic={section === 0 && !authoredPreview} sampleWishes={section === 0 && !authoredPreview} silentPlayback />
             ) : invitation.templateId === "taklifla-tungi-saroy" ? (

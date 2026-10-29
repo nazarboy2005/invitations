@@ -1,0 +1,87 @@
+{
+  "name": "Barakali",
+  "id": "taklifla-barakali",
+  "private": false,
+  "published": true,
+  "selectable": true,
+  "capture": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/taklifla.uz/templates/barakali__808e4379f375a212.html",
+  "captureSha256": "4647162994bb169e6f51347434a211326971ca391d750c1e66af810514199826",
+  "sourceUrl": "https://taklifla.uz/templates/barakali.html",
+  "sourcePageCount": 24,
+  "sourceLinkedTemplateCount": 24,
+  "siblingDirectory": {
+    "requested": "barakali-img",
+    "present": false,
+    "referencesInSelectedHtml": 0,
+    "resolution": "No external images or CSS url() references; all art is inline SVG. No substitute artwork fabricated."
+  },
+  "assets": [
+    {
+      "url": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3smX5slCNuHLi8bLeY9MK7whWMhyjYrGFEsdtdc62E6zd58jDOjw.ttf",
+      "file": "fonts/374c6c52ce838c05.ttf",
+      "sha256": "0b9a8a33cfaa624d30f70f9b6686da769b319b8c37a55af16e29fef690108bbf"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3umX5slCNuHLi8bLeY9MK7whWMhyjypVO7abI26QOD_v86GnM.ttf",
+      "file": "fonts/bb8f3c3b0ca40380.ttf",
+      "sha256": "6d37a86241a25d63f8fe6018b4c083449886b7165c1acb15edd0f574f690ecf7"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3umX5slCNuHLi8bLeY9MK7whWMhyjypVO7abI26QOD_s06GnM.ttf",
+      "file": "fonts/75407d22188550d6.ttf",
+      "sha256": "1724047c8988ca5155bff667bc48fa52e97d57aabc6b42eebbf986f21a4be20b"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/dmmono/v16/aFTU7PB1QTsUX8KYhh0.ttf",
+      "file": "fonts/38f8abefb8f859c4.ttf",
+      "sha256": "c97fcd822f825e9e731867b650a39ee678b609bead29385e320171b573ec0910"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/dmmono/v16/aFTR7PB1QTsUX8KYvumzIYQ.ttf",
+      "file": "fonts/4da63a1b968e240d.ttf",
+      "sha256": "dd60d0861a3efd540efc3f2f85e7a7fd69a7ece7eadf44aaffa5fc5c86adda0e"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/manrope/v20/xn7_YHE41ni1AdIRqAuZuw1Bx9mbZk79FO_F.ttf",
+      "file": "fonts/755fa076675e6f61.ttf",
+      "sha256": "a13d9b41b0a471ce58f0e46d377fa3cc76615e4632c3b15eb397caadf7a13f0a"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/manrope/v20/xn7_YHE41ni1AdIRqAuZuw1Bx9mbZk7PFO_F.ttf",
+      "file": "fonts/e6fa40b6715a310a.ttf",
+      "sha256": "f433e5d333be1128d8ec8a28b8aadd0314d10e14e4105406076666bc830fc15d"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/manrope/v20/xn7_YHE41ni1AdIRqAuZuw1Bx9mbZk4jE-_F.ttf",
+      "file": "fonts/900670474e93d412.ttf",
+      "sha256": "6bad1a774228464cc88b8b0271555b266f7a3c64a7bedf15e165fdab4f6ac0ce"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/manrope/v20/xn7_YHE41ni1AdIRqAuZuw1Bx9mbZk4aE-_F.ttf",
+      "file": "fonts/e7e0cf40cb44208e.ttf",
+      "sha256": "b9584e099e0e7f1e1e914c3037aabb9010c50346a3ce8df5eeeeecc0563044d8"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/pinyonscript/v24/6xKpdSJbL9-e9LuoeQiDRQR8aOI.ttf",
+      "file": "fonts/817ee20ba8ab0ebc.ttf",
+      "sha256": "3683830e3bb3f1a2138b6098f8663ca5ceb66b1f397a4f30639aae139e344bb8"
+    }
+  ],
+  "sourceParts": {
+    "source/template.css": "0eb0bfde7ec572cf5109a0d0fa6df4b8d619779c1725fe040b30396cefd8504c",
+    "source/language.css": "3dc1647a5d83a45840ea669a0992d5601f7780d9e194c3bbd3fbfcaaacda770e",
+    "source/motion.js": "c5351e2944739c4960402c8634a2c44dd75afdfa5583a7dd9014846ab5289bee"
+  },
+  "excluded": [
+    "Provider URL customizer and demo content",
+    "Local-storage wishes and fake success",
+    "Provider i18n globals/storage",
+    "Cloudflare analytics beacon",
+    "Provider application runtime"
+  ],
+  "gaps": [
+    "Source age slot has no approved contract/editor/persistence field; hidden rather than inferring age.",
+    "No barakali-img sibling exists in selected capture; source requests no images.",
+    "No bundled source music; catalog preview uses shared catalog track only when explicitly requested."
+  ]
+}

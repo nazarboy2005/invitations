@@ -8,6 +8,7 @@ import { invitationLocale, invitationShareMetadata } from "@/modules/catalog/inv
 import { resolveGuest } from "@/server/public";
 import { AnorInvitation } from "@/templates/anor";
 import { WedivoPulauSehati } from "@/templates/wedivo-pulau-sehati/renderer";
+import { TakliflaBarakali } from "@/templates/taklifla-barakali/renderer";
 import { TakliflaZarhalSahifaInvitation } from "@/templates/taklifla-zarhal-sahifa/renderer";
 import { TakliflaAsalari } from "@/templates/taklifla-asalari/renderer";
 import { TungiSaroyInvitation } from "@/templates/taklifla-tungi-saroy/renderer";
@@ -146,6 +147,8 @@ export default async function InvitationPage({
     );
   if (invitation.templateId === "wedivo-pulau-sehati")
     return <><InvitationViewTracker invitationId={result.id} musicUrl={invitation.music.enabled ? invitation.music.url : ""} /><WedivoPulauSehati invitation={invitation} invitationId={result.id} locale={locale} guestName={guestName} guestToken={query.g} /></>;
+  if (invitation.templateId === "taklifla-barakali")
+    return <><InvitationViewTracker invitationId={result.id} musicUrl={invitation.music.enabled ? invitation.music.url : ""} /><TakliflaBarakali invitation={invitation} invitationId={result.id} locale={locale} guestName={guestName} guestToken={query.g} /></>;
   if (invitation.templateId === "taklifla-zarhal-sahifa")
     return <><InvitationViewTracker invitationId={result.id} musicUrl={invitation.music.enabled ? invitation.music.url : ""} /><TakliflaZarhalSahifaInvitation invitation={invitation} invitationId={result.id} locale={locale} guestName={guestName} guestToken={query.g} /></>;
   if (invitation.templateId === "taklifla-tungi-saroy")

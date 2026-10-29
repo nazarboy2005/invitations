@@ -14,7 +14,7 @@ untouched. Application deployment and live payment activation are excluded.
 | Fasllar | taklifla-tort-fasl | Published | Complete — studio opening and shared sample wishes corrected; full source/lifecycle/audio checks pass |
 | Midnight Palace | taklifla-tungi-saroy | Published | Complete — current source, three-viewport motion, audio and real lifecycle audit passes |
 | Tovus | taklifla-tovus | Published | Complete — current source, three-viewport motion/audio and real lifecycle audit passes |
-| Barakali | taklifla-barakali | Private package | Pending |
+| Barakali | taklifla-barakali | Private package | Complete — fully integrated and published through migrations 0173/0174 |
 | Bookie Navy | taklifla-yubiley-sahifasi | Private package | Pending |
 | Bookie Terracotta | taklifla-fayzli-xonadon | Private package | Pending |
 | Ertak | taklifla-ertak | Private package | Pending |
@@ -80,3 +80,10 @@ the individual commit below each completed row.
 - No new implementation gap found. Four source/adapter tests and 320/390/1280 browser comparisons pass: source feather/crest composition, particles, reveals, four locales, long/empty names, stable repeatable items, shared Google maps, reduced motion and closed wishes.
 - Real authenticated save/reopen, compatible switching, publication, studio opening, personalized four-locale public content, selected/manual Google maps and pending wishes pass. Catalog audio decodes after opening and pause/resume survives locale changes.
 - Evidence: `docs/templates/luxury-uzbek-verification/taklifla-tovus-*`, `docs/templates/taklifla-audit/tovus-audio.json`. Existing publication and price preserved.
+
+## Barakali integration
+
+- Complete source floral SVG/CSS/reveal implementation and ten local fonts retained; no missing image-directory dependency. Fixed Google destinations, preview gesture audio, and private QA harness defects. Birthday-only compatibility/category registered separately.
+- Same real renderer in catalog/studio/public. Canonical birthday fixture, translated sample wishes, creator portrait/alt/caption, guest greeting, date/countdown, contacts and Google venue bind through the typed contract. Public samples never leak.
+- Five package tests, mobile/desktop source comparison with motion, four locales/long/empty/reduced checks, actual audio, real authenticated lifecycle/moderated wishes, personalized cover, typecheck and production build pass. Compatible switching is rechecked after publication.
+- Applied only additive migrations 0173/0174; configured catalog confirms published birthday design. Evidence in `apps/web/src/templates/taklifla-barakali/evidence` and `docs/templates/taklifla-audit/barakali-*`. No app deployment or payment activation.

@@ -1,0 +1,24 @@
+/* Integration-only changes; captured source styles are isolated and unchanged. */
+[hidden] { display: none !important; }
+body[data-bound="false"] .shell, body[data-bound="false"] .music-fab,
+body[data-bound="false"] .taklifla-lang-switch { visibility: hidden; }
+.hero-name, .closing-mono, .det-val, .greet-quote, .wish-text, .wish-name { overflow-wrap: anywhere; }
+.hero-name { max-width: 100%; }
+.hero-name[data-long="true"] { font-size: clamp(34px, 9vw, 60px); line-height: 1.15; }
+.photo-frame { position: relative; overflow: hidden; }
+.photo-frame img { display: block; width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
+.photo-blooms { z-index: 1; }
+.det-body { min-width: 0; }
+.greet-quote { white-space: pre-line; }
+.rsvp-thanks.show { display: block; }
+.rsvp-thanks[data-error="true"] { color: #8f312e; }
+.rsvp-form button:disabled { opacity: .65; cursor: wait; }
+:focus-visible { outline: 2px solid var(--teal); outline-offset: 4px; }
+html[data-reduced="true"] *, html[data-reduced="true"] *::before, html[data-reduced="true"] *::after {
+  animation: none !important; transition: none !important; scroll-behavior: auto !important;
+}
+html[data-reduced="true"] .rise, html[data-reduced="true"] .reveal { opacity: 1 !important; transform: none !important; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+  .rise, .reveal { opacity: 1 !important; transform: none !important; }
+}

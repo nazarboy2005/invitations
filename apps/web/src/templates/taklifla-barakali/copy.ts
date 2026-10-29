@@ -1,0 +1,48 @@
+import type { Locale } from "@taklifnoma/contracts";
+
+export const copy = {
+  "uz-Latn": {
+    occasion: "Bizning quvonchimizga sherik bo‘ling", scroll: "Pastga suring", closing: "Sizni kutib qolamiz",
+    photo: "Bayram qahramoni", countdown: "Bayramgacha qoldi", date: "Sana", time: "Vaqt", when: "Qachon va qayerda",
+    dateTime: "Sana va vaqt", address: "Manzil", contact: "Aloqa", call: "Bog‘lanish uchun qo‘ng‘iroq qiling",
+    wishEye: "Tabrik so‘zi", wishTitle: "Tilak qoldiring", wishSub: "Bayram qahramoniga eng ezgu tilaklaringizni yozib qoldiring.",
+    name: "Ismingiz", message: "Tabrik so‘zi…", send: "Yuborish", sending: "Yuborilmoqda…",
+    success: "Tilagingiz yuborildi. Egasi tasdiqlagach ko‘rinadi.", error: "Tilak yuborilmadi. Qayta urinib ko‘ring.",
+    required: "Ismingiz va tilagingizni kiriting.", preview: "Bu namuna. Tilak yuborilmaydi.", loadError: "Tilaklarni yuklab bo‘lmadi.",
+    play: "Musiqani yoqish", pause: "Musiqani o‘chirish", musicError: "Musiqa ijro etilmadi. Qayta urinib ko‘ring.",
+    language: "Tilni tanlash", cd: ["Kun", "Soat", "Daqiqa", "Soniya"],
+  },
+  "uz-Cyrl": {
+    occasion: "Бизнинг қувончимизга шерик бўлинг", scroll: "Пастга суринг", closing: "Сизни кутиб қоламиз",
+    photo: "Байрам қаҳрамони", countdown: "Байрамгача қолди", date: "Сана", time: "Вақт", when: "Қачон ва қаерда",
+    dateTime: "Сана ва вақт", address: "Манзил", contact: "Алоқа", call: "Боғланиш учун қўнғироқ қилинг",
+    wishEye: "Табрик сўзи", wishTitle: "Тилак қолдиринг", wishSub: "Байрам қаҳрамонига энг эзгу тилакларингизни ёзиб қолдиринг.",
+    name: "Исмингиз", message: "Табрик сўзи…", send: "Юбориш", sending: "Юборилмоқда…",
+    success: "Тилагингиз юборилди. Эгаси тасдиқлагач кўринади.", error: "Тилак юборилмади. Қайта уриниб кўринг.",
+    required: "Исмингиз ва тилагингизни киритинг.", preview: "Бу намуна. Тилак юборилмайди.", loadError: "Тилакларни юклаб бўлмади.",
+    play: "Мусиқани ёқиш", pause: "Мусиқани ўчириш", musicError: "Мусиқа ижро этилмади. Қайта уриниб кўринг.",
+    language: "Тилни танлаш", cd: ["Кун", "Соат", "Дақиқа", "Сония"],
+  },
+  en: {
+    occasion: "Share in our joy", scroll: "Scroll down", closing: "We look forward to seeing you",
+    photo: "Star of the day", countdown: "Time until the party", date: "Date", time: "Time", when: "When and where",
+    dateTime: "Date and time", address: "Address", contact: "Contact", call: "Call to get in touch",
+    wishEye: "A word of greeting", wishTitle: "Leave a wish", wishSub: "Leave the star of the day your warmest wishes.",
+    name: "Your name", message: "Your wish…", send: "Send", sending: "Sending…",
+    success: "Your wish was sent. It will appear after the host approves it.", error: "Your wish was not sent. Please try again.",
+    required: "Enter your name and wish.", preview: "This is a preview. Wishes are not sent.", loadError: "Wishes could not be loaded.",
+    play: "Play music", pause: "Pause music", musicError: "Music could not play. Please try again.",
+    language: "Choose language", cd: ["Days", "Hours", "Min.", "Sec."],
+  },
+  ru: {
+    occasion: "Разделите нашу радость", scroll: "Прокрутите вниз", closing: "Будем рады видеть вас",
+    photo: "Герой праздника", countdown: "До праздника осталось", date: "Дата", time: "Время", when: "Когда и где",
+    dateTime: "Дата и время", address: "Адрес", contact: "Связь", call: "Позвоните, чтобы связаться",
+    wishEye: "Слово поздравления", wishTitle: "Оставьте пожелание", wishSub: "Оставьте герою праздника самые тёплые пожелания.",
+    name: "Ваше имя", message: "Ваше пожелание…", send: "Отправить", sending: "Отправляется…",
+    success: "Пожелание отправлено. Оно появится после одобрения хозяином.", error: "Не удалось отправить пожелание. Попробуйте ещё раз.",
+    required: "Введите имя и пожелание.", preview: "Это образец. Пожелания не отправляются.", loadError: "Не удалось загрузить пожелания.",
+    play: "Включить музыку", pause: "Выключить музыку", musicError: "Не удалось воспроизвести музыку. Попробуйте ещё раз.",
+    language: "Выбрать язык", cd: ["Дни", "Часы", "Мин.", "Сек."],
+  },
+} satisfies Record<Locale, Record<string, string | string[]>>;

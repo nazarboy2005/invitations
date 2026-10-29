@@ -1,0 +1,25 @@
+{
+  "date": "2026-10-29",
+  "configured": true,
+  "template": {
+    "id": "taklifla-barakali",
+    "name": "Barakali",
+    "description": "Nafis gul bezaklari, moviy-yashil jilolar va bayram xotiralari.",
+    "previewImage": "/templates/taklifla-barakali/preview.webp",
+    "previewEventType": "birthday",
+    "categoryIds": [
+      "birthday"
+    ],
+    "supportedEventTypes": [
+      "birthday"
+    ],
+    "priceMinor": 100000,
+    "currency": "UZS",
+    "accent": "#376c66",
+    "published": true
+  },
+  "migrations": [
+    "0173_register_taklifla_barakali.sql",
+    "0174_publish_taklifla_barakali.sql"
+  ]
+}
