@@ -21,12 +21,12 @@ export function TakliflaSharlarInvitation({ invitation, invitationId, locale,
   const message = useMemo(() => {
     const message = makeSharlarPayload(invitation, locale, {
       invitationId, guestName, guestToken, preview, sampleWishes:preview&&catalogMusic,
-      silentPlayback: preview && (silentPlayback || !catalogMusic),
+      silentPlayback: preview && (silentPlayback || (!catalogMusic && !fullPreview)),
       reducedMotion: preview && qaReducedMotion,
     });
     if (preview && catalogMusic) message.payload.music = { enabled: true, url: CATALOG_PREVIEW_MUSIC.url };
     return message;
-  }, [invitation, invitationId, locale, guestName, guestToken, preview, catalogMusic, silentPlayback, qaReducedMotion]);
+  }, [invitation, invitationId, locale, guestName, guestToken, preview, catalogMusic, fullPreview, silentPlayback, qaReducedMotion]);
   const latest = useRef(message);
   latest.current = message;
   useEffect(() => { frame.current?.contentWindow?.postMessage(message, window.location.origin); }, [message]);

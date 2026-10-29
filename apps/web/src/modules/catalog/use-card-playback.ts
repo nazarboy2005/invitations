@@ -110,7 +110,11 @@ export function useCardPlayback(
     motion.addEventListener("change", schedule);
     touch.addEventListener("change", schedule);
     document.addEventListener("visibilitychange", visibilityChanged);
-    window.addEventListener("scroll", scrolling, { passive: true });
+    // Capture scrolling inside dialogs and independently scrolling editor panes too.
+    window.addEventListener("scroll", scrolling, {
+      passive: true,
+      capture: true,
+    });
     window.addEventListener("resize", schedule);
     connection?.addEventListener?.("change", schedule);
     choose();
@@ -121,7 +125,7 @@ export function useCardPlayback(
       motion.removeEventListener("change", schedule);
       touch.removeEventListener("change", schedule);
       document.removeEventListener("visibilitychange", visibilityChanged);
-      window.removeEventListener("scroll", scrolling);
+      window.removeEventListener("scroll", scrolling, true);
       window.removeEventListener("resize", schedule);
       connection?.removeEventListener?.("change", schedule);
     };

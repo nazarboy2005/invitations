@@ -104,8 +104,6 @@ export function publicationIssues(invitation: Invitation): PublicationIssue[] {
       "Karta raqami 16 yoki 19 ta raqamdan iborat bo‘lishi kerak.",
       3,
     );
-  if (invitation.music.enabled && !invitation.music.url)
-    add("music", "Musiqani tanlang yoki fon musiqasini o‘chiring.", 3);
   const phone = invitation.contacts.phoneNumber.trim();
   if (
     phone &&

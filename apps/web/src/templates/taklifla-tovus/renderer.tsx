@@ -41,7 +41,7 @@ export function TakliflaTovus({
       guestToken,
       preview,
       sampleWishes: preview && catalogMusic,
-      silentPlayback: preview && (silentPlayback || !catalogMusic),
+      silentPlayback: preview && (silentPlayback || (!catalogMusic && !fullPreview)),
       reducedMotion: qaReducedMotion,
     });
     if (preview && catalogMusic)
@@ -55,6 +55,7 @@ export function TakliflaTovus({
     guestToken,
     preview,
     catalogMusic,
+    fullPreview,
     silentPlayback,
     qaReducedMotion,
   ]);

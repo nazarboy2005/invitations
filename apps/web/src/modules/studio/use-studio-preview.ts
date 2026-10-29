@@ -28,7 +28,29 @@ export function useStudioPreview(
     const timers: ReturnType<typeof setTimeout>[] = [];
     const cleanups: Array<() => void> = [];
     const subscribed = new WeakSet<HTMLIFrameElement>();
+    function decorate(doc: Document) {
+      // Source templates own their scroll surfaces inside same-origin frames.
+      // Apply editor chrome here so public/catalog renderers keep their styling.
+      if (!doc.getElementById("studio-preview-scrollbar")) {
+        const style = doc.createElement("style");
+        style.id = "studio-preview-scrollbar";
+        style.textContent = `
+          * { scrollbar-width: thin !important; scrollbar-color: #9b8879 #e9e1d6 !important; }
+          @supports selector(::-webkit-scrollbar) {
+            * { scrollbar-width: auto !important; scrollbar-color: auto !important; }
+            *::-webkit-scrollbar { width: 4px !important; height: 4px !important; }
+            *::-webkit-scrollbar-track, *::-webkit-scrollbar-corner { background: #e9e1d6 !important; }
+            *::-webkit-scrollbar-thumb { background: #9b8879 !important; border-radius: 999px !important; }
+            *::-webkit-scrollbar-thumb:hover { background: #7d6a5c !important; }
+          }
+        `;
+        doc.head.appendChild(style);
+        // Keep this frame-owned style across step effects. Removing it during
+        // cleanup exposes the native scrollbar until the next scene is ready.
+      }
+    }
     function prepare(doc: Document) {
+      decorate(doc);
       if (doc.documentElement.hasAttribute("data-awaiting-data")) return;
       if (doc.documentElement.dataset.studioOpened !== "true") {
         const opener = doc.querySelector<HTMLElement>(openerSelector);
@@ -81,6 +103,13 @@ export function useStudioPreview(
         if (subscribed.has(frame)) return;
         subscribed.add(frame);
         const update = () => {
+          try {
+            const doc = frame.contentDocument;
+            if (doc?.head && (doc.URL.startsWith(`${location.origin}/templates/`) || frame.hasAttribute("srcdoc")))
+              decorate(doc);
+          } catch {
+            /* Cross-origin frames cannot receive editor styling. */
+          }
           timers.push(
             setTimeout(() => {
               try {

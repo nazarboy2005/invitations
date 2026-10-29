@@ -36,3 +36,7 @@ Normal-motion browser comparison is complete against the live source and app pre
 The mobile RSVP comparison exposed a confirmed bug: localization selected every nested `.rsvp-field label`, replacing the first radio label's input. The adapter now targets only direct field labels with `.rsvp-field > label`. After the fix, both yes/no radios render with source-aligned spacing at 390×844 and 1280×720. No guest-count control is present. The preview blocks RSVP submission; no RSVP was submitted.
 
 The configured catalog API reports Golden Hour published with birthday-only category/event support. The authenticated HTTP save → publish → public-render → reopen/allowed-edits integration passes 1/1; its disposable test invitation and user were removed afterward. Reduced-motion runtime emulation is unavailable in this browser session (`prefers-reduced-motion: reduce` is false). The original reduced-motion CSS rule is preserved, and the app package retains its reduced-motion overrides. No external deployment or payment activation occurred.
+
+### Studio opening-art correction (2026-10-30)
+
+The adapter retains `pink.png`, the exact packaged source opening/catalog artwork, when the creator has no portrait. A creator's first gallery image replaces it. Other gallery slots still hide when empty; this does not populate saved invitation photos or introduce source sample copy.

@@ -215,7 +215,7 @@ test("a language variant starts with localized defaults and blank names", () => 
   assert.equal(second.content.ru.eventLabel, "Свадьба");
   assert.equal(addLanguage(second, "ru"), second);
 });
-test("removing a language deletes only that locale and protects the primary locale", () => {
+test("removing a language deletes that locale and automatically retains an enabled fallback", () => {
   const draft = addLanguage(addLanguage(createInvitation(), "ru"), "en");
   draft.content.ru.people = ["Асадбек", "Гулҳаё"];
   draft.story = [
@@ -232,12 +232,15 @@ test("removing a language deletes only that locale and protects the primary loca
   assert.equal(withoutRussian.story[0].title.ru, undefined);
   assert.equal(withoutRussian.story[0].text.ru, undefined);
   assert.equal(withoutRussian.dressCode.style.ru, undefined);
-  assert.equal(removeLanguage(withoutRussian, "uz-Latn"), withoutRussian);
+  const onlyEnglish = removeLanguage(withoutRussian, "uz-Latn");
+  assert.equal(onlyEnglish.defaultLocale, "en");
+  assert.deepEqual(onlyEnglish.enabledLocales, ["en"]);
+  assert.equal(removeLanguage(onlyEnglish, "en"), onlyEnglish);
   assert.equal(invitationSchema.safeParse(withoutRussian).success, true);
 });
 test("receipt switch requires gift details; music and gifts are optional", () => {
   const draft = createInvitation();
-  assert.equal(draft.music.enabled, false);
+  assert.equal(draft.music.enabled, true);
   assert.equal(invitationSchema.safeParse(draft).success, true);
   const legacyData = {
     ...draft,

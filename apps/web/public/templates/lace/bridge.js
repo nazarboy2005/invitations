@@ -264,7 +264,7 @@
   function installLocales(p) {
     let nav=query("[data-lace-languages]");if(!nav){nav=document.createElement("nav");nav.dataset.laceLanguages="";nav.className="lace-languages";nav.setAttribute("aria-label","Language");root.append(nav);}
     nav.setAttribute("aria-label",({"uz-Latn":"Til","uz-Cyrl":"Тил",en:"Language",ru:"Язык"})[p.locale]||"Language");
-    nav.replaceChildren();for(const locale of p.enabledLocales||["uz-Latn","uz-Cyrl","en","ru"]){const button=document.createElement("button");button.type="button";button.textContent=({"uz-Latn":"Uz","uz-Cyrl":"Уз",en:"En",ru:"Ru"})[locale]||locale;button.setAttribute("aria-pressed",String(locale===p.locale));button.onclick=()=>parent.postMessage({type:`${id}:language`,locale},location.origin);nav.append(button);}
+    nav.style.display=(p.enabledLocales||[]).length>1?"":"none";nav.replaceChildren();for(const locale of p.enabledLocales||["uz-Latn","uz-Cyrl","en","ru"]){const button=document.createElement("button");button.type="button";button.textContent=({"uz-Latn":"Uz","uz-Cyrl":"Уз",en:"En",ru:"Ru"})[locale]||locale;button.setAttribute("aria-pressed",String(locale===p.locale));button.onclick=()=>parent.postMessage({type:`${id}:language`,locale},location.origin);nav.append(button);}
   }
 
   addEventListener("message",(event)=>{if(event.source===parent&&event.origin===location.origin&&event.data?.type===`${id}:update`)render(event.data.payload);});

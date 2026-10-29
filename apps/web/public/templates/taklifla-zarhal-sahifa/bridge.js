@@ -134,7 +134,7 @@
     const nextKey = `${url}|${state.preview}`;
     if (nextKey !== musicKey) {
       if (music) music.destroy();
-      music = url ? window.createZarhalMusic(url, !state.preview) : null;
+      music = url ? window.createZarhalMusic(url, true) : null;
       musicKey = nextKey;
     }
     if (music) music.paint();

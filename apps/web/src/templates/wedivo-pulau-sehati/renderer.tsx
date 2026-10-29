@@ -68,7 +68,7 @@ export function WedivoPulauSehati({
             : base.payload.data.music,
         },
         catalogMusic,
-        silentPlayback: preview && (silentPlayback || !catalogMusic),
+        silentPlayback: preview && (silentPlayback || (!catalogMusic && !fullPreview)),
         reducedMotion: preview && qaReducedMotion,
       },
     };
@@ -81,6 +81,7 @@ export function WedivoPulauSehati({
     preview,
     sampleWishes,
     catalogMusic,
+    fullPreview,
     silentPlayback,
     qaReducedMotion,
   ]);

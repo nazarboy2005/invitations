@@ -96,13 +96,6 @@ test("enabled optional inputs must be usable before publishing, and disabled inp
     [string, (invitation: ReturnType<typeof completeInvitation>) => void]
   > = [
     [
-      "music",
-      (i) => {
-        i.music.enabled = true;
-        i.music.url = "";
-      },
-    ],
-    [
       "contacts.phoneNumber",
       (i) => {
         i.contacts.phoneNumber = "abc";

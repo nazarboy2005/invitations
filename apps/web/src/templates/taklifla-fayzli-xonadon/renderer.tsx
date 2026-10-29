@@ -46,7 +46,7 @@ export function TakliflaFayzliXonadonInvitation({
   const message = useMemo(() => {
     const value = makeXonadonPayload(invitation, activeLocale, {
       invitationId, guestName, guestToken, preview,
-      silentPlayback: silentPlayback || !catalogMusic,
+      silentPlayback: silentPlayback || (!catalogMusic && !fullPreview),
       reducedMotion: qaReducedMotion,
     });
     return { ...value, payload: { ...value.payload,
@@ -54,7 +54,7 @@ export function TakliflaFayzliXonadonInvitation({
         ? { enabled: true, url: CATALOG_PREVIEW_MUSIC.url } : value.payload.music,
     } };
   }, [invitation, invitationId, activeLocale, guestName, guestToken, preview,
-    catalogMusic, silentPlayback, qaReducedMotion]);
+    catalogMusic, fullPreview, silentPlayback, qaReducedMotion]);
   const latest = useRef(message);
   latest.current = message;
   useEffect(() => {

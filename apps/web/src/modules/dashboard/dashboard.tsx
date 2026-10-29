@@ -523,7 +523,7 @@ export function Dashboard() {
                 Boshqaruv
               </a>
             )}
-            <Link className={styles.primaryButton} href="/templates">
+            <Link className={styles.primaryButton} href="/studio?new=1">
               <Plus size={18} />
               Yangi taklifnoma
             </Link>
@@ -656,7 +656,7 @@ export function Dashboard() {
                           ? "Yangi taklifnoma yarating. Tugallanmagan taklifnomalaringiz shu yerda saqlanadi."
                           : "Dizaynni tanlang, ma’lumotlaringizni kiriting va tayyor taklifnomani mehmonlaringizga ulashing."}
                     </p>
-                    <Link href="/#templates" className={styles.primaryButton}>
+                    <Link href="/studio?new=1" className={styles.primaryButton}>
                       <Plus size={16} />
                       Taklifnoma yaratish
                     </Link>

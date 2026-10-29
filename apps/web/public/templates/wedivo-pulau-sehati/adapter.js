@@ -34,7 +34,10 @@
   }
   function bind(p) {
     current=p;const d=p.data;const t=value=>window.PulauCopy.translate(value,p.locale);
-    window.PULAU={...p,compass:({'uz-Latn':['Sh','Shq','J','G‘'],'uz-Cyrl':['Ш','Шқ','Ж','Ғ'],en:['N','E','S','W'],ru:['С','В','Ю','З']}[p.locale]),gallery:d.gallery.filter(item=>safeUrl(item.src)),deadline:d.rsvp.deadline || '',timeLabel:d.date.time,secondaryEvent:{...d.pulau?.secondaryEvent,timeLabel:d.pulau?.secondaryEvent?.time || ''},translate:t,storyIds:d.story.map((_,i)=>i+1)};
+    // The source uses this ID only for local progress storage. Quiet editor/
+    // disabled-music sessions must not overwrite a guest's active sound choice.
+    const progressId=p.invitationId+(p.preview?':preview':'')+(!d.music.enabled||p.silentPlayback?':silent':'');
+    window.PULAU={...p,invitationId:progressId,compass:({'uz-Latn':['Sh','Shq','J','G‘'],'uz-Cyrl':['Ш','Шқ','Ж','Ғ'],en:['N','E','S','W'],ru:['С','В','Ю','З']}[p.locale]),gallery:d.gallery.filter(item=>safeUrl(item.src)),deadline:d.rsvp.deadline || '',timeLabel:d.date.time,secondaryEvent:{...d.pulau?.secondaryEvent,timeLabel:d.pulau?.secondaryEvent?.time || ''},translate:t,storyIds:d.story.map((_,i)=>i+1)};
     document.documentElement.lang=p.locale;if(p.reducedMotion)document.documentElement.dataset.reducedMotion='true';
     const couple=[d.groom,d.bride].filter(Boolean).join(' & ');
     if(Math.max(d.groom.length,d.bride.length)>22){$('hero-title').style.fontSize='clamp(26px,9.4vw,44px)';for(const who of ['groom','bride'])$('cs-'+who+'-name').style.fontSize='clamp(24px,8vw,36px)';$('cover-names').style.fontSize='clamp(18px,5.8vw,28px)';}
@@ -103,6 +106,7 @@
     const picker=document.createElement('div');picker.className='platform-locales';picker.setAttribute('aria-label',({en:'Language',ru:'Язык','uz-Latn':'Til','uz-Cyrl':'Тил'}[p.locale]));
     const labels={'uz-Latn':'Uz','uz-Cyrl':'Уз',en:'En',ru:'Ru'};
     for(const locale of p.enabledLocales){const b=document.createElement('button');b.type='button';b.textContent=labels[locale];b.setAttribute('aria-pressed',String(locale===p.locale));b.addEventListener('click',()=>parent.postMessage({type:ID+':locale',locale},location.origin));picker.append(b);}
+    picker.style.display=p.enabledLocales.length>1?"":"none";
     document.body.append(picker);
     translateTree(document.body);
     new MutationObserver(records=>{for(const record of records){if(record.type==='characterData')translateTree(record.target);else for(const node of record.addedNodes)translateTree(node);}}).observe(document.body,{subtree:true,childList:true,characterData:true});

@@ -38,9 +38,9 @@
     const gift = data.toyona || {};
     const giftVisible = gift.enabled && (gift.cardNumber || gift.cardHolder || gift.note);
     const rsvpVisible = data.rsvp?.enabled;
-    const music = data.music?.url || "";
+    const music = (typeof data.music === "string" ? data.music : data.music?.url) || "";
     root.innerHTML = `
-      <nav class="olive-locale" aria-label="Language">${(data.languages || ["uz","uz-Cyrl","en","ru"]).map(code=>`<button type="button" data-locale="${esc(code)}" aria-pressed="${code===locale}">${({uz:"UZ","uz-Cyrl":"ЎЗ",en:"EN",ru:"RU"})[code]||esc(code)}</button>`).join("")}</nav>
+      <nav class="olive-locale" aria-label="Language" style="${(data.languages || []).length > 1 ? "" : "display:none"}">${(data.languages || ["uz","uz-Cyrl","en","ru"]).map(code=>`<button type="button" data-locale="${esc(code)}" aria-pressed="${code===locale}">${({uz:"UZ","uz-Cyrl":"ЎЗ",en:"EN",ru:"RU"})[code]||esc(code)}</button>`).join("")}</nav>
       ${!reduced && !opened ? `<section class="section-intro" id="intro" aria-label="${esc(l.invite)}"><video class="section-intro__video" autoplay muted playsinline loop poster="${asset("intro-start-v2.jpg")}"><source src="${asset("intro-v3.mp4")}" type="video/mp4"></video><button class="section-intro__open" id="open" type="button">${esc(l.open)}</button></section>` : ""}
       <div class="invitation">
         <main class="invitation__main">

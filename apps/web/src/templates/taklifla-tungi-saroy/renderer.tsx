@@ -41,7 +41,7 @@ export function TungiSaroyInvitation({
       guestToken,
       preview,
       sampleWishes: preview && catalogMusic,
-      silentPlayback: preview && (silentPlayback || !catalogMusic),
+      silentPlayback: preview && (silentPlayback || (!catalogMusic && !fullPreview)),
       reducedMotion: qaReducedMotion,
     });
     return {
@@ -62,6 +62,7 @@ export function TungiSaroyInvitation({
     guestToken,
     preview,
     catalogMusic,
+    fullPreview,
     silentPlayback,
     qaReducedMotion,
   ]);

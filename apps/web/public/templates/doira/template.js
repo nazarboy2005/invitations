@@ -14,14 +14,22 @@
   const letters = names.map(n => Array.from(n.trim())[0] || '');
   const cyrillic = names.some(n => /[\u0400-\u04ff]/.test(n));
   const scriptFont = cyrillic ? 'Georgia, serif' : '"Great Vibes", Georgia, serif';
-  const sound = window.DoiraSound, audioToggle = $('#doira-audio');
+  // BEGIN creator soundtrack binding
+  const musicUrl = data.silentPlayback ? '' : (typeof data.music === 'string' ? data.music : data.music?.enabled ? data.music.url : '');
+  const sound = musicUrl ? window.DoiraSound : null, audioToggle = $('#doira-audio');
+  audioToggle.hidden = !musicUrl;
   const heroParts = '.hero__copy,.hero__kicker,.hero__name,.hero__date,.hero__when,.hero__greeting,.hero__cue';
-  function silenceSong() {
+  function syncSoundtrack() {
     const audio = $('audio[data-music]');
-    if (audio) { audio.pause(); audio.removeAttribute('src'); audio.load(); }
-    // This invitation's soundtrack is the drum performance, including in the demo.
-    data.music = '';
+    if (!audio) return;
+    audio.loop = true;
+    if (musicUrl) {
+      if (audio.getAttribute('src') !== musicUrl) audio.src = musicUrl;
+    } else {
+      audio.pause(); audio.removeAttribute('src'); audio.load();
+    }
   }
+  // END creator soundtrack binding
   function writeNames() {
     const ns = 'http://www.w3.org/2000/svg';
     const vals = [names[0], names[0] && names[1] ? '&' : '', names[1]];
@@ -121,7 +129,7 @@
   function open() {
     if (phase !== 'waiting') return;
     phase = 'performing'; intro.dataset.phase = phase; $('.mh-lang')?.classList.add('is-hidden'); button.disabled = true; idle?.kill(); arrival?.kill();
-    silenceSong(); sound?.unlock(); surface.live(!reduced); $('.drum__touch').hidden = true;
+    syncSoundtrack(); sound?.unlock(); surface.live(!reduced); $('.drum__touch').hidden = true;
     status('Oqshom boshlanmoqda…', 'Вечер начинается…', 'The evening begins…');
     if (!gsap || reduced) { finish(); return; }
     master = gsap.timeline({onComplete:finish,defaults:{ease:'power2.inOut'}});
@@ -164,7 +172,7 @@
     } else { $$(heroParts).forEach(el => {el.style.opacity=1;}); }
     surface?.live(false); surface?.set('glow',0); effects?.stop(); effects?.clear();
     intro.hidden = true; intro.setAttribute('aria-hidden','true'); button.disabled = true;
-    silenceSong(); M.open(); document.documentElement.classList.remove('is-locked'); document.body.classList.add('is-open');
+    syncSoundtrack(); M.open(); document.documentElement.classList.remove('is-locked'); document.body.classList.add('is-open');
     audioToggle.classList.remove('is-playing'); window.DoiraScene?.start();
     if (!scrollReady) { setupScroll(); scrollReady = true; }
     window.ScrollTrigger?.refresh(); $('.hero__names').focus({preventScroll:true});
@@ -211,7 +219,7 @@
 
   function init() {
     if (!intro || !button) return;
-    silenceSong(); makeScore();
+    syncSoundtrack(); makeScore();
     document.title = names.filter(Boolean).join(' & ') + ' — Doira';
     const fonts = document.fonts ? Promise.race([Promise.all([document.fonts.load('124px "Great Vibes"'), document.fonts.load('16px "Playfair Display"')]), new Promise(r => setTimeout(r,1800))]) : Promise.resolve();
     fonts.catch(() => {}).then(() => {writeNames();setupDrum();if (!opened) arrive();});
@@ -220,6 +228,10 @@
     $('#replay-intro').addEventListener('click',replay);
     audioToggle.addEventListener('click', () => {
       sound?.unlock(); const muted = !sound?.muted; sound?.setMuted(muted);
+      // BEGIN creator soundtrack toggle
+      const audio = $('audio[data-music]');
+      if (audio) { if (muted) audio.pause(); else if (musicUrl) void audio.play().catch(() => {}); }
+      // END creator soundtrack toggle
       audioToggle.setAttribute('aria-pressed',String(!muted));
       audioToggle.setAttribute('aria-label',muted ? localized('Ovozni yoqish','Включить звук','Enable sound') : localized('Ovozni o‘chirish','Выключить звук','Mute sound'));
       if (!muted && phase === 'opened') {sound?.dum(0,.55);sound?.jingle(.04,3,.3);}

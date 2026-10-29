@@ -1274,6 +1274,7 @@
     picker.setAttribute("aria-label", localCopy().languageLabel);
     picker.replaceChildren();
     const available = payload.enabledLocales?.length ? payload.enabledLocales : locales;
+    picker.style.display = available.length > 1 ? "" : "none";
     for (const locale of available) {
       const button = document.createElement("button");
       button.type = "button";

@@ -10,6 +10,7 @@ export type OsmonOptions = {
   preview?: boolean;
   catalogMusic?: boolean;
   silentPlayback?: boolean;
+  fullPreview?: boolean;
   reducedMotion?: boolean;
 };
 
@@ -79,7 +80,7 @@ export function makeOsmonPayload(invitation: Invitation, locale: Locale, options
       music: options.preview && options.catalogMusic
         ? {enabled: true, url: CATALOG_PREVIEW_MUSIC.url}
         : {enabled: invitation.music.enabled, url: invitation.music.url},
-      silentPlayback: !!options.silentPlayback || (!!options.preview && !options.catalogMusic),
+      silentPlayback: !!options.silentPlayback || (!!options.preview && !options.catalogMusic && !options.fullPreview),
     },
   };
 }

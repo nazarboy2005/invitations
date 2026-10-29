@@ -657,7 +657,7 @@
   function installLocales(p, c) {
     let nav = q("[data-jw-languages]");
     if (!nav) { nav = document.createElement("nav"); nav.dataset.jwLanguages = ""; nav.className = "jw-languages"; root.append(nav); }
-    nav.setAttribute("aria-label", c.language); nav.replaceChildren();
+    nav.setAttribute("aria-label", c.language); nav.style.display=(p.enabledLocales||[]).length>1?"":"none";nav.replaceChildren();
     for (const locale of p.enabledLocales || ["uz-Latn", "uz-Cyrl", "en", "ru"]) {
       const button = document.createElement("button"); button.type = "button"; button.textContent = ({ "uz-Latn": "Uz", "uz-Cyrl": "Уз", en: "En", ru: "Ru" })[locale] || locale;
       button.setAttribute("aria-pressed", String(locale === p.locale));

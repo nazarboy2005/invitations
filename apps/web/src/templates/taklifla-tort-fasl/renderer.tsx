@@ -39,7 +39,7 @@ export function TakliflaTortFasl({
       guestToken,
       preview,
       sampleWishes: preview && catalogMusic,
-      silentPlayback: preview && (silentPlayback || !catalogMusic),
+      silentPlayback: preview && (silentPlayback || (!catalogMusic && !fullPreview)),
       reducedMotion: preview && qaReducedMotion,
     });
     if (preview && catalogMusic)
@@ -53,6 +53,7 @@ export function TakliflaTortFasl({
     guestToken,
     preview,
     catalogMusic,
+    fullPreview,
     silentPlayback,
     qaReducedMotion,
   ]);

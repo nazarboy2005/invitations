@@ -45,9 +45,8 @@
       document.body.append(languageControl);
     }
     languageControl.value = p.locale;
-    if (captureMode) {
-      languageControl.hidden = true;
-    }
+    languageControl.hidden = captureMode || (p.languages || []).length < 2;
+    languageControl.style.display = languageControl.hidden ? "none" : "";
     [...languageControl.options].forEach((option) => { option.hidden = !(p.languages || []).includes(option.value); });
     text(".hero-title", l.wedding); text(".hero-subtitle", [p.groom, p.bride].filter(Boolean).join(" & "));
     text(".hero-desctitle", date); text(".name-title", p.greeting || l.welcome);

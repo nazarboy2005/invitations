@@ -1,3 +1,4 @@
+import { DEFAULT_INVITATION_MUSIC } from "@taklifnoma/contracts/music";
 import {
   createInvitation,
   invitationSchema,
@@ -59,12 +60,16 @@ export function getTemplatePreviewVenuePhoto(templateId: string): string | undef
  */
 export function createTemplatePreviewSample(
   templateId: string,
-  localeSettings?: Pick<Invitation, "defaultLocale" | "enabledLocales">,
+  localeSettings?: Pick<Invitation, "defaultLocale" | "enabledLocales"> &
+    Partial<Pick<Invitation, "eventType">>,
 ): Invitation {
   const template = templateById(templateId);
   const sampleEventType = (
-    template?.previewEventType &&
-    template.supportedEventTypes.includes(template.previewEventType)
+    localeSettings?.eventType &&
+    template?.supportedEventTypes.includes(localeSettings.eventType)
+      ? localeSettings.eventType
+      : template?.previewEventType &&
+        template.supportedEventTypes.includes(template.previewEventType)
       ? template.previewEventType
       : template?.supportedEventTypes.some(
             (eventType) => eventType === previewSample.eventType,
@@ -248,7 +253,7 @@ export function hasAuthoredInvitationContent(invitation: Invitation): boolean {
   const authoredRsvp =
     invitation.rsvp.enabled !== true ||
     Boolean(invitation.rsvp.deadline.trim()) ||
-    invitation.rsvp.maxPartySize !== 5;
+    invitation.rsvp.maxPartySize !== 1;
   return Boolean(
     authoredCopy ||
     authoredStory ||
@@ -270,9 +275,7 @@ export function hasAuthoredInvitationContent(invitation: Invitation): boolean {
     invitation.gallery.length ||
     invitation.contacts.phoneNumber.trim() ||
     invitation.contacts.telegramUsername.trim() ||
-    invitation.music.enabled ||
-    invitation.music.url ||
-    invitation.music.filename ||
+    (invitation.music.url && invitation.music.url !== DEFAULT_INVITATION_MUSIC.url) ||
     invitation.music.assetId ||
     invitation.venue.mapUrl ||
     invitation.venue.latitude !== null ||

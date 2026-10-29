@@ -31,9 +31,9 @@ export function TakliflaErtak({ invitation, invitationId, locale, guestName,
     sampleWishes: preview && catalogMusic,
     reducedMotion: qaReducedMotion,
     catalogMusicUrl: preview && catalogMusic ? CATALOG_PREVIEW_MUSIC.url : "",
-    silentPlayback: preview && (silentPlayback || !catalogMusic),
+    silentPlayback: preview && (silentPlayback || (!catalogMusic && !fullPreview)),
   }), [invitation, activeLocale, invitationId, guestName, guestToken, preview,
-    qaReducedMotion, catalogMusic, silentPlayback]);
+    qaReducedMotion, catalogMusic, fullPreview, silentPlayback]);
   const latest = useRef(message);
   latest.current = message;
   const send = () => frame.current?.contentWindow?.postMessage(latest.current, window.location.origin);

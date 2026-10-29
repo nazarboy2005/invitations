@@ -97,6 +97,7 @@
     closed.hidden=!expired;form.hidden=expired;
     if(state.preview) wishes=data.sampleWishes || [];
     window.renderEnvelopeWishes(wishes,language);
+    $('.env-lang').style.display=state.enabledLocales.length>1?'':'none';
     document.querySelectorAll('.env-lang button').forEach(b=>{
       b.hidden=!state.enabledLocales.includes(b.dataset.lang);
       b.classList.toggle('on',b.dataset.lang===language);

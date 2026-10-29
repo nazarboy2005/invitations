@@ -9,7 +9,7 @@
     "dev": "pnpm --filter @taklifnoma/web dev",
     "build": "pnpm --filter @taklifnoma/web build",
     "typecheck": "pnpm --filter @taklifnoma/web typecheck",
-    "test": "tsx --test tests/*.test.ts apps/web/src/modules/studio/draft-storage.test.ts apps/web/src/modules/catalog/*.test.ts",
+    "test": "tsx --test tests/*.test.ts apps/web/src/modules/studio/*.test.ts apps/web/src/modules/catalog/*.test.ts",
     "test:publishing": "node --env-file=apps/web/.env.local --import tsx --test tests/publishing.test.ts tests/publishing.integration.ts",
     "test:payments": "node --env-file=apps/web/.env.local --import tsx --test tests/payments.test.ts tests/payments.integration.ts",
     "test:payments:http": "node --env-file=apps/web/.env.local --import tsx --test tests/payments-http.integration.ts",

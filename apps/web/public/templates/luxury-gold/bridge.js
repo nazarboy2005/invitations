@@ -500,7 +500,7 @@
       nav.className = "lg-languages";
       root.prepend(nav);
     }
-    nav.replaceChildren(
+    nav.style.display=(p.enabledLocales||[]).length>1?"":"none";nav.replaceChildren(
       ...(p.enabledLocales || ["uz-Latn", "uz-Cyrl", "en", "ru"]).map(
         (locale) => {
           const b = document.createElement("button");
@@ -529,8 +529,9 @@
       root.append(a);
     }
     a.pause();
+    a.loop = true;
     a.preload = "none";
-    const url = p.data?.music?.url;
+    const url = p.data?.music?.enabled ? p.data.music.url : "";
     if (url) a.src = url;
     else a.removeAttribute("src");
     a.muted = !!(p.preview && p.silentPlayback);

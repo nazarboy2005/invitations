@@ -1,13 +1,15 @@
+import { normalizeInvitation } from "@taklifnoma/contracts/capabilities";
 import { getDb } from "@taklifnoma/database";
 import {
   invitationSchema,
+  templateById,
   type Invitation,
   type SessionUser,
 } from "@taklifnoma/contracts";
 import { assertCreatorCanEdit } from "@taklifnoma/contracts/policies";
 import { ApiError } from "./api";
 import { getSessionUser } from "./auth";
-import { assertPublicMedia, assertPublishable } from "./publication";
+import { assertManagedImages, assertPublicMedia, assertPublishable } from "./publication";
 import { requireAdmin, recordAdminChange } from "./admin";
 import type { AdminInvitationAction } from "./admin-invitation-access";
 import { paymentIdentity } from "@taklifnoma/contracts/payment";
@@ -45,6 +47,10 @@ export async function saveInvitation(
 ): Promise<Invitation> {
   if (admin && (await requireAdmin()).id !== admin.actorId)
     throw new ApiError(403, "FORBIDDEN", "Administrator tasdig‘i kerak.");
+  if (invitation.templateId && !templateById(invitation.templateId))
+    throw new ApiError(409, "TEMPLATE_UNAVAILABLE", "Bu dizayn hozir mavjud emas.");
+  invitation = normalizeInvitation(invitation);
+  assertManagedImages(invitation);
   const sql = getDb();
   let saved = invitation;
   await sql.begin(async (tx) => {
@@ -75,7 +81,7 @@ export async function saveInvitation(
         "Tanlangan dizayn bu tadbir turini qo‘llamaydi. Mos dizaynni tanlang.",
       );
     if (rows[0]) {
-      const previous = invitationSchema.parse(rows[0].data);
+      const previous = normalizeInvitation(invitationSchema.parse(rows[0].data));
       if (
         rows[0].status === "draft" &&
         paymentIdentity(previous) !== paymentIdentity(invitation)
@@ -96,7 +102,7 @@ export async function saveInvitation(
           "Taklifnoma boshqa oynada o‘zgargan. Qoralamangiz saqlangan; yangilangan nusxani oching.",
         );
       try {
-        assertCreatorCanEdit(invitationSchema.parse(rows[0].data), invitation, {
+        assertCreatorCanEdit(previous, invitation, {
           status: rows[0].identity_locked_at ? "published" : rows[0].status,
           editDeadlineAt: rows[0].edit_deadline_at,
         });
@@ -147,7 +153,7 @@ export async function getPublishedInvitation(idOrSlug: string) {
   return rows[0]
     ? {
         id: rows[0].id as string,
-        invitation: invitationSchema.parse(rows[0].data),
+        invitation: normalizeInvitation(invitationSchema.parse(rows[0].data)),
       }
     : null;
 }

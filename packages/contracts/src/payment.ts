@@ -1,4 +1,5 @@
 import type { Invitation } from "./index";
+import { templateCapabilities } from "./capabilities";
 
 // Content may be corrected while checkout is pending; its purchased event may not change.
 export function paymentIdentity(invitation: Invitation): string {
@@ -13,6 +14,32 @@ export function paymentIdentity(invitation: Invitation): string {
       hosts: invitation.content[locale]?.hosts,
     })),
   });
+}
+
+/** Old checkouts can contain extra names the source never displayed. Removing
+ * those unsupported slots must not invalidate a purchase for the same event.
+ * Every displayed name, host, locale, date and design still has to match.
+ */
+export function paymentIdentityMatches(invitation: Invitation, snapshot: string): boolean {
+  try {
+    type Identity = {
+      templateId: string; eventType: string; startsAt: string; timezone: string;
+      people: Array<{ locale: string; people: string[]; hosts: string }>;
+    };
+    const canonical = (value: Identity) => {
+      const limit = templateCapabilities(value.templateId).people;
+      return JSON.stringify({
+        templateId: value.templateId, eventType: value.eventType,
+        startsAt: value.startsAt, timezone: value.timezone,
+        people: value.people.map((item) => ({
+          locale: item.locale, people: item.people.slice(0, limit), hosts: item.hosts,
+        })).sort((a, b) => a.locale.localeCompare(b.locale)),
+      });
+    };
+    return canonical(JSON.parse(paymentIdentity(invitation))) === canonical(JSON.parse(snapshot));
+  } catch {
+    return false;
+  }
 }
 
 export const PAYMENT_STATES = [

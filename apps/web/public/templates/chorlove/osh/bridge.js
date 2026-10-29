@@ -22,6 +22,8 @@
     youtubePlayer = null,
     youtubeReady = false,
     musicOn = false,
+    musicStarted = false,
+    guestPausedMusic = false,
     musicFadeTimer = 0;
   const getYouTubeId = (value) => {
     try {
@@ -101,6 +103,7 @@
     musicAudio.volume = 0;
     try {
       await musicAudio.play();
+      musicStarted = true;
       if (musicOn) startMusicFade();
     } catch {
       failMusic();
@@ -146,7 +149,7 @@
     }
   };
   const syncMusic = (music) => {
-    const nextUrl = music?.enabled && typeof music.url === "string" ? music.url.trim() : "";
+    const nextUrl = music?.enabled && !p?.silentPlayback && typeof music.url === "string" ? music.url.trim() : "";
     if (nextUrl !== activeMusicUrl) {
       stopMusic();
       try {
@@ -159,6 +162,8 @@
         musicAudio.load();
       }
       activeMusicUrl = nextUrl;
+      musicStarted = false;
+      guestPausedMusic = false;
       activeYouTubeId = activeMusicUrl ? getYouTubeId(activeMusicUrl) : "";
       if (musicAudio && activeMusicUrl && !activeYouTubeId) musicAudio.src = activeMusicUrl;
       if (musicAudio) {
@@ -166,13 +171,19 @@
         musicAudio.muted = true;
       }
       if (activeYouTubeId) loadYouTubeApi();
+      if (activeMusicUrl) void startMusic();
     }
     hide(musicControl, !activeMusicUrl);
   };
   musicButton?.addEventListener("click", () => {
     if (!activeMusicUrl) return;
+    guestPausedMusic = musicOn;
     if (musicOn) stopMusic();
     else void startMusic();
+  });
+  document.addEventListener("click", (event) => {
+    if (event.target.closest?.(".osh-music-button") || guestPausedMusic || musicStarted || p?.silentPlayback) return;
+    if (activeMusicUrl) void startMusic();
   });
   const dict = {
     "uz-Latn": {

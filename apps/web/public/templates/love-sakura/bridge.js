@@ -95,7 +95,7 @@
     else if(!audio.paused&&!audio.muted)setMuted(false);
     else setMuted(true);
   }
-  function setupLocale(p){let nav=q("[data-ls-languages]");if(!nav){nav=document.createElement("nav");nav.dataset.lsLanguages="";nav.className="ls-languages";nav.setAttribute("aria-label","Language");root.prepend(nav);}nav.replaceChildren(...(p.enabledLocales||["uz-Latn","uz-Cyrl","en","ru"]).map(locale=>{const b=document.createElement("button");b.type="button";b.textContent=({"uz-Latn":"Uz","uz-Cyrl":"Уз",en:"En",ru:"Ru"})[locale];b.setAttribute("aria-pressed",String(locale===p.locale));b.onclick=()=>parent.postMessage({type:`${id}:language`,locale},location.origin);return b;}));}
+  function setupLocale(p){let nav=q("[data-ls-languages]");if(!nav){nav=document.createElement("nav");nav.dataset.lsLanguages="";nav.className="ls-languages";nav.setAttribute("aria-label","Language");root.prepend(nav);}nav.style.display=(p.enabledLocales||[]).length>1?"":"none";nav.replaceChildren(...(p.enabledLocales||["uz-Latn","uz-Cyrl","en","ru"]).map(locale=>{const b=document.createElement("button");b.type="button";b.textContent=({"uz-Latn":"Uz","uz-Cyrl":"Уз",en:"En",ru:"Ru"})[locale];b.setAttribute("aria-pressed",String(locale===p.locale));b.onclick=()=>parent.postMessage({type:`${id}:language`,locale},location.origin);return b;}));}
   addEventListener("message",e=>{if(e.source===parent&&e.origin===location.origin&&e.data?.type===`${id}:update`)render(e.data.payload);});
   try{const init=JSON.parse(window.name);if(init?.type===`${id}:update`)render(init.payload);}catch{}
 })();

@@ -75,12 +75,92 @@
   database/public catalog publication is verified after source, browser and real
   backend checks. The current administrator price is preserved (1,000 UZS at this
   release). Application deployment and live payment activation were not performed.
+## Studio picker and workspace (2026-10-29)
+
+- User requested automatic catalog updates in Studio, clear green selection,
+  and the same hover playback as `/templates`. Keep published/event-compatible
+  eligibility and curated ordering; refresh catalog on picker open and window
+  focus so newly published compatible designs appear without a Studio list edit.
+- Keep the whole workspace within the viewport. Steps, editor and invitation
+  preview scroll independently only when their content overflows, including on
+  laptops. Preserve the invitation's own scrolling and interactive renderer.
+- Use the supplied warm botanical reference for the background, translucent
+  navbar/panels and connected vertical step timeline. Move the guest-view action
+  to the top toolbar, outside the invitation preview. Reuse existing botanical
+  artwork; leave template designs unchanged.
+- Follow-up: the initial middle-pane collection shows six designs, three per
+  row on laptop/desktop and two per row on smaller screens. Remove the active
+  sidebar step chevron to keep text/layout stable and soften the translucent
+  top toolbar. Additional Studio review ideas are recommendations only in this
+  follow-up; do not implement them as part of these adjustments.
+- New follow-up: separate date/time, venue, program and dress code visually in
+  “Dastur va manzil”. Use restrained transitions across Studio step changes,
+  mobile panes, disclosures, dialogs and controls; respect reduced motion.
+- Studio previews retain canonical placeholders for missing required fields
+  across every step, replacing each field independently as it is authored.
+  Optional content and disabled features always follow the actual draft; never
+  restore sample photos, program, contacts, gift, music or other optional data.
+  Preview placeholders never enter editor state, browser/account saves, final
+  readiness checks or published invitations. Catalog hover samples stay complete.
+- Further refinement: reuse the distinct section-card treatment in main details;
+  keep design selection compact and give final-step optional disclosures
+  matching cards and contextual icons. Rename step 3 to “Tadbir tafsilotlari”.
+  Sidebar notes for steps 1/4 are “Tadbir va dizayn” / “Yakuniy tekshiruv”.
+- Remove the bottom-left selected-design tile without adding replacement content
+  yet. Replacement ideas are recommendations only. Remove the Instagram input
+  from final-step contacts; retain existing stored contract data.
+- Latest correction: language settings live only in “Asosiy ma’lumotlar”, with
+  four direct on/off buttons. Green styling/checkmarks indicate enabled choices.
+  Keep one language enabled; remove any other language, including the former
+  fallback, without a primary-language selector. A compact editing-language control
+  changes which translation is being authored. Retain published identity locks.
+- Choose the public invitation's initial enabled translation from an explicit
+  guest choice, otherwise a coarse hosting IP-country hint, browser language and
+  an enabled fallback. No GPS permission, IP lookup service, or location storage.
+  Keep language controls hidden for one-language previews/public invitations.
+- Recover browser drafts silently. Remove only the restoration notice, retaining
+  browser draft recovery, save feedback and real error reporting.
+- New creator invitations start with the packaged shared piano enabled. Existing
+  off choices stay off. Replacing/uploading selects one track; off retains its
+  reference, removal clears it. Enabled with no track equals disabled and must not
+  block publication. Fix looping/mapping and unintended full-preview muting; retain
+  quiet embedded Studio previews and explicit editor listening controls.
+- Replace the flat final missing-field list with grouped, linked field cards.
+  Keep actual mandatory-content validation and no saved/published sample copy.
+- Each catalog design declares source-supported slots and limits in the shared
+  capability registry. Studio exposes only those features; account save/update
+  and publication independently project data through that registry. Remove
+  unsupported values, surplus slots and inactive template-specific payloads rather
+  than keeping hidden data when switching. The same definitions advertise maps
+  support, but Places/provider/location-sync behavior is deferred by the user.
+- Distinguish response forms, telephone confirmation and deadline-only information;
+  show/store deadlines only where supported. Responses remain one person. Gate
+  card details, receipt uploads, contacts, age, artists, photos, story and dress
+  independently, including Barakali's one portrait and Asalari's one name.
+- Creator photos use verified file uploads; remove fragile external-image-link
+  entry and reject external image references on save/publication. Catalog sample
+  artwork is unaffected. Preserve existing paid checkouts when only unused name
+  slots are removed; displayed identity/date/design changes remain protected.
+- Aurelia needs a small shared audio control because its source has no player;
+  Doira now honors the selected track/off choice while retaining its drum effects
+  only when sound is enabled. Keep original source captures untouched.
+- Previous audit findings and current implementation/verification notes:
+  `docs/studio-input-audit-2026-10-29.md`.
+- Keep editor navigation in its own bottom row, flush to the panel edge, with
+  content scrolling above it. Use a narrow preview scrollbar with a warm track;
+  scope both native and source-frame scrollbar styling to Studio only.
+- Map review found Google Places (New) server endpoints and shared Google Maps
+  links, with manual entry fallback. The checked local environment has no Google
+  Places key configured. Mapbox capabilities are research/recommendations only;
+  no provider migration or new map feature is authorized by this discussion.
+
 ## Studio refinement (2026-10-28)
 
 - Remove the document title/status from the header; keep a compact back/save
   toolbar. Remove the sidebar autosave note and preview title, design name,
   language badge and explanatory caption. Keep the preview pane within the
-  viewport while editing and remove the sidebar's independent scroll area.
+  viewport while editing. The later independent-pane requirement below supersedes
+  the earlier sidebar overflow choice.
 - After event selection, show only compatible published designs without catalog
   category tabs. Reuse the catalog's stable curated order, including its Nikoh
   ranking, and its portrait artwork with dark fades and overlaid captions.
@@ -1249,7 +1329,7 @@ Confirmed requirements:
 
 - Support invitation creation in Uzbek Latin (existing language), Uzbek Cyrillic, English, and Russian. Recommended standard locale keys: `uz-Latn`, `uz-Cyrl`, `en`, `ru`.
 - Each invitation has one selected default language and optional additional language variants. Creators add variants only where needed; creating in one language must not require filling every supported language.
-- Creators can remove any non-primary language variant from the editor. To remove the primary language, they first designate another enabled language as primary. Removing a language also deletes that locale's authored text and localized story/dress-code labels; shared event data and media remain unchanged.
+- Creators toggle any enabled language off while at least one remains. The internal fallback follows the remaining languages automatically; there is no primary-language question. Removing a language deletes that locale's authored text and localized story/dress-code labels; shared event data/media follow template support.
 - Keep variants under one invitation/owner/URL with shared events, guest records, and media, rather than creating independent invitation copies.
 - Allow separate wording for names/family names when needed, greetings and personalized greeting patterns, invitation/introduction text, event labels, program titles/descriptions/speakers, venue names/addresses/directions, contact labels, stories, dress-code text, photo captions/alt text, gift notes, and other editable visible text.
 - Couple/celebrant names are locale-specific authored content too: store and edit each enabled language's names independently, render the active language's values in every template, and never silently transliterate or overwrite another language's names. The shared catalog fixture may demonstrate the appropriate Uzbek Cyrillic and Russian spellings; it remains preview-only.
@@ -1257,7 +1337,7 @@ Confirmed requirements:
 
 Recommended behavior and schema guidance:
 
-- Editor: choose a primary language, then "Til qo'shish" / Add language to enter only language-dependent fields. Reuse shared dates/times, coordinates/map references, contact values, card details, uploaded files, and event/program item identities/order. Display dates/numbers using the active locale; do not store duplicate dates or media per language. New events use Asia/Tashkent by default; timezone remains internal event data and is not creator-editable in the current editor.
+- Editor: toggle the four language choices in “Asosiy ma’lumotlar”, then select an enabled translation for manual text entry. Reuse shared dates/times, coordinates/map references, contact values, card details, uploaded files, and event/program item identities/order. Display dates/numbers using the active locale; do not store duplicate dates or media per language. New events use Asia/Tashkent by default; timezone remains internal event data and is not creator-editable in the current editor.
 - Supply translated built-in interface text (section/button labels, RSVP choices, music controls, moderation acknowledgments, and receipt messages); creators should not have to translate standard controls themselves. Custom heading overrides can have language variants.
 - Public invitation language selector shows only enabled/published variants. Recommended locale URL selector: `?lang=ru`, compatible with personalized links such as `?g=<token>&lang=ru`. A language change must not create a new invitation or duplicate a guest/RSVP/receipt.
 - Allow incomplete variants to be saved privately. Before exposing a variant publicly, validate its required text and identify missing fields. Recommend default-language fallback for optional missing wording, shown clearly to the creator in preview; exact per-field fallback policy remains to be finalized. Do not silently publish a supposedly complete translation with missing required content.
@@ -2165,3 +2245,11 @@ Development agents are distinct from production queue workers. The running app w
 ### Terracotta completion (2026-10-29)
 
 - Preserve the Terracotta wedding source artwork, native opener, dust and floating botanicals. Information/footer prose uses editable validated localized `templateData["taklifla-terracotta"]`; core identity/greeting/message/hosts/program/date and Google venue stay shared. Catalog notes and wishes come only from the canonical wedding profile. No guest-count input. Migrations 0201/0202 register/publish after verification.
+
+## Studio follow-up corrections (2026-10-30)
+
+- Default music means a soundtrack is preselected for publishing, not automatic playback for the creator. Studio sends a silent music projection to every embedded renderer; the saved selection and manually operated editor listening sample remain available. Guest/public playback policy is unchanged.
+- Keep the thin, warm-track preview scrollbar attached across step changes; apply frame styling synchronously when the document is available instead of removing it and waiting for scene navigation.
+- Golden Hour keeps its exact source opening artwork when there is no creator portrait. Creator photos replace it; optional gallery sections still remain absent without photos. Original captures remain untouched.
+- Omit the successful browser-save label from Studio navigation; keep save failures and account-save feedback.
+- Both dashboard new-invitation entry points open `/studio?new=1` at design selection. Reopening the design-change dialog clears its search/scroll and puts the selected design first, before pagination; active searches still filter normally.

@@ -44,10 +44,20 @@ test("Doira preserves the complete captured markup, scripts, styles, and artwork
     "effects.js",
     "scene.js",
   ]) {
-    assert.equal(
-      normalize(read(packageRoot, file)),
-      normalize(read(sourceRoot, file)),
-    );
+    let packaged = normalize(read(packageRoot, file));
+    const captured = normalize(read(sourceRoot, file));
+    if (file === "template.js") {
+      // Creator-selected music is the approved exception. Keep every other
+      // byte of the captured drum sequence and animation engine unchanged.
+      const capturedBinding = captured.slice(captured.indexOf("  const sound ="), captured.indexOf("  function writeNames()"));
+      assert.match(packaged, /audio\.loop = true/);
+      assert.match(packaged, /data\.silentPlayback/);
+      packaged = packaged
+        .replace(/  \/\/ BEGIN creator soundtrack binding[\s\S]*?  \/\/ END creator soundtrack binding\n/, capturedBinding)
+        .replace(/      \/\/ BEGIN creator soundtrack toggle[\s\S]*?      \/\/ END creator soundtrack toggle\n/, "")
+        .replaceAll("syncSoundtrack()", "silenceSong()");
+    }
+    assert.equal(packaged, captured);
   }
   const sourceMeta = read(sourceRoot, "meta.js")
     .replace(/\r\n/g, "\n")

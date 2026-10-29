@@ -1,10 +1,12 @@
+import { headers } from "next/headers";
+import { visitorLocale } from "@taklifnoma/contracts/visitor-locale";
 import { notFound } from "next/navigation";
 import { cache } from "react";
 import type { Metadata } from "next";
 import { templateById } from "@taklifnoma/contracts";
 import { getPublishedInvitation } from "@/server/invitations";
 import { publicInvitationUrl } from "@/server/publication";
-import { invitationLocale, invitationShareMetadata } from "@/modules/catalog/invitation-share";
+import { invitationShareMetadata } from "@/modules/catalog/invitation-share";
 import { resolveGuest } from "@/server/public";
 import { AnorInvitation } from "@/templates/anor";
 import { WedivoPulauSehati } from "@/templates/wedivo-pulau-sehati/renderer";
@@ -77,7 +79,8 @@ export default async function InvitationPage({
   const result = await loadPublishedInvitation(slug);
   if (!result || !templateById(result.invitation.templateId)) notFound();
   const invitation = result.invitation;
-  const locale = invitationLocale(invitation, query.lang);
+  const requestHeaders = await headers();
+  const locale = visitorLocale(invitation, query.lang, requestHeaders.get("x-vercel-ip-country"), requestHeaders.get("accept-language") ?? "");
   let guestName = "";
   if (query.g) {
     try {

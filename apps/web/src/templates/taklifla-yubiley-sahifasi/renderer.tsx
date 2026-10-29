@@ -45,10 +45,10 @@ export function TakliflaYubileySahifasi({
     return { ...base, payload: {
       ...base.payload,
       music: preview && catalogMusic ? { enabled: true, url: CATALOG_PREVIEW_MUSIC.url } : base.payload.music,
-      silentPlayback: preview && (silentPlayback || !catalogMusic),
+      silentPlayback: preview && (silentPlayback || (!catalogMusic && !fullPreview)),
       reducedMotion: preview && qaReducedMotion,
     } };
-  }, [invitation, activeLocale, invitationId, guestName, guestToken, preview, catalogMusic, silentPlayback, qaReducedMotion]);
+  }, [invitation, activeLocale, invitationId, guestName, guestToken, preview, catalogMusic, fullPreview, silentPlayback, qaReducedMotion]);
   const latest = useRef(message);
   latest.current = message;
   useEffect(() => {

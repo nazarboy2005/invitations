@@ -23,7 +23,7 @@ export function TakliflaQogozErtagiInvitation({
   const message = useMemo(() => {
     const value = makeQogozPayload(invitation, locale, {
       invitationId, guestName, guestToken, preview, sampleWishes:sampleWishes||catalogMusic,
-      silentPlayback: preview && (silentPlayback || !catalogMusic),
+      silentPlayback: preview && (silentPlayback || (!catalogMusic && !fullPreview)),
       reducedMotion: preview && qaReducedMotion,
     });
     if (preview && catalogMusic) value.payload.music = {
@@ -31,7 +31,7 @@ export function TakliflaQogozErtagiInvitation({
     };
     return value;
   }, [invitation, invitationId, locale, guestName, guestToken, preview,
-    sampleWishes, catalogMusic, silentPlayback, qaReducedMotion]);
+    sampleWishes, catalogMusic, fullPreview, silentPlayback, qaReducedMotion]);
   const latest = useRef(message);
   latest.current = message;
   useEffect(() => {

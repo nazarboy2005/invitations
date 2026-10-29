@@ -1,3 +1,4 @@
+import { normalizeInvitation } from "@taklifnoma/contracts/capabilities";
 import { randomInt } from "node:crypto";
 import type postgres from "postgres";
 import { getDb } from "@taklifnoma/database";
@@ -13,7 +14,7 @@ import { CATALOG_PREVIEW_MUSIC } from "../modules/catalog/catalog-music";
 import { inspectMedia, storageProvider } from "./storage";
 import { requireAdmin, recordAdminChange } from "./admin";
 import type { AdminInvitationAction } from "./admin-invitation-access";
-import { paymentIdentity } from "@taklifnoma/contracts/payment";
+import { paymentIdentityMatches } from "@taklifnoma/contracts/payment";
 import { enqueuePaymentNotifications } from "./payment-notifications";
 
 const BASE62 = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
@@ -35,17 +36,24 @@ export function assertPublishable(invitation: Invitation) {
     );
 }
 
+// Creator images use verified uploads, avoiding protected/expired external URLs.
+export function assertManagedImages(invitation: Invitation) {
+  if (invitation.gallery.some((image) => !/^\/api\/media\/[^/]+$/.test(image.url)) ||
+      invitation.artistLineup.some((artist) => artist.imageUrl && !/^\/api\/media\/[^/]+$/.test(artist.imageUrl)))
+    throw new ApiError(400, "IMAGE_UPLOAD_REQUIRED", "Rasmni havola orqali emas, fayl sifatida yuklang.");
+}
+
 // Both publication and subsequent public edits must reference usable media.
 export async function assertPublicMedia(
   tx: postgres.TransactionSql,
   invitation: Invitation,
   userId: string,
 ) {
+  assertManagedImages(invitation);
   if (invitation.gift.enabled && invitation.gift.receiptUploadEnabled)
     storageProvider();
   const assets: Array<{ object_key: string; size_bytes: number }> = [];
   for (const image of invitation.gallery) {
-    if (/^https?:\/\//i.test(image.url)) continue; // Creator-supplied external images are supported.
     const [asset] =
       await tx`SELECT object_key,size_bytes FROM media_assets WHERE id::text=${image.id} AND owner_id=${userId} AND url=${image.url} AND url=('/api/media/' || id::text) AND status='ready' AND visibility='public' AND mime_type LIKE 'image/%' FOR SHARE`;
     if (!asset)
@@ -134,7 +142,8 @@ export async function publishInvitationInTransaction(
     await tx`SELECT * FROM invitations WHERE id=${id} AND owner_id=${user.id} FOR UPDATE`;
   if (!row || row.status === "deleted")
     throw new ApiError(404, "NOT_FOUND", "Taklifnoma topilmadi.");
-  const previous = invitationSchema.parse(row.data);
+  const storedInvitation = invitationSchema.parse(row.data);
+  const previous = normalizeInvitation(storedInvitation);
   // A repeated successful request must not allocate a code or extend the deadline.
   if (row.status === "published" && row.slug)
     return {
@@ -166,9 +175,9 @@ export async function publishInvitationInTransaction(
       "Nashr qilish vaqtincha mavjud emas.",
     );
   if (mode === "paid" && !republishing) {
-    const [entitlement] =
-      await tx`SELECT id FROM payment_orders WHERE invitation_id=${id} AND owner_id=${user.id} AND template_id=${previous.templateId} AND identity_snapshot=${paymentIdentity(previous)} AND status='SUCCEEDED' AND verified_at IS NOT NULL FOR SHARE`;
-    if (!entitlement)
+    const entitlements =
+      await tx`SELECT identity_snapshot FROM payment_orders WHERE invitation_id=${id} AND owner_id=${user.id} AND template_id=${previous.templateId} AND status='SUCCEEDED' AND verified_at IS NOT NULL FOR SHARE`;
+    if (!entitlements.some((order) => paymentIdentityMatches(previous, order.identity_snapshot)))
       throw new ApiError(
         402,
         "PAYMENT_REQUIRED",

@@ -1,24 +1,36 @@
 "use client";
 
-import { isValidElement, useEffect, useRef, useState } from "react";
+import { normalizeInvitation, templateCapabilities } from "@taklifnoma/contracts/capabilities";
+import { DEFAULT_INVITATION_MUSIC } from "@taklifnoma/contracts/music";
+import { ReadinessChecklist } from "./readiness-checklist";
+import { isValidElement, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState, type SetStateAction } from "react";
 import Link from "next/link";
 import {
   ArrowLeft,
+  CalendarDays,
+  BookOpen,
   Check,
   CheckCircle2,
   ChevronRight,
   Eye,
   Globe2,
+  Gift,
   ImagePlus,
   LayoutTemplate,
   LoaderCircle,
   MapPin,
   Music2,
+  MessageSquare,
+  Phone,
   Plus,
   Save,
   Send,
   Settings2,
+  FileText,
+  UserCheck,
+  Shirt,
   Trash2,
+  ListOrdered,
   Users,
   X,
 } from "lucide-react";
@@ -64,6 +76,7 @@ import {
 import styles from "./studio.module.css";
 import { StudioTemplatePicker } from "./studio-template-picker";
 import { OptionalSection } from "./optional-section";
+import { StudioSection } from "./studio-section";
 import { useStudioPreview, type PreviewTarget } from "./use-studio-preview";
 import { SoftSelect } from "@/components/soft-select";
 import { DateTimePicker, TimePicker } from "@/components/date-time-picker";
@@ -114,10 +127,7 @@ import { TakliflaBarakali } from "@/templates/taklifla-barakali/renderer";
 import { TakliflaZarhalSahifaInvitation } from "@/templates/taklifla-zarhal-sahifa/renderer";
 import { MuhrliMaktubInvitation } from "@/templates/taklifla-muhrli-maktub/renderer";
 import { isChorloveTemplate, ChorloveInvitation } from "@/templates/chorlove";
-import {
-  createTemplatePreviewSample,
-  hasAuthoredInvitationContent,
-} from "@/modules/catalog/preview-sample";
+import { createStudioPreviewInvitation } from "./preview-invitation";
 import { CATALOG_PREVIEW_MUSIC } from "@/modules/catalog/catalog-music";
 import { orderEventTemplates } from "@/modules/catalog/template-order";
 import { PublishedLink } from "@/components/published-link";
@@ -131,7 +141,7 @@ const sections = [
     icon: LayoutTemplate,
     title: "Dizayn tanlash",
     short: "Dizayn",
-    note: "Tadbir va dizaynni tanlang",
+    note: "Tadbir va dizayn",
     description: "Tadbir turini va dizaynni tanlang.",
   },
   {
@@ -143,16 +153,16 @@ const sections = [
   },
   {
     icon: MapPin,
-    title: "Dastur va manzil",
-    short: "Manzil",
-    note: "Qachon va qayerda",
-    description: "Sana, manzil va tadbir dasturini belgilang.",
+    title: "Tadbir tafsilotlari",
+    short: "Tafsilotlar",
+    note: "Sana, joy va dastur",
+    description: "Sana, manzil, dastur va kiyinish uslubini belgilang.",
   },
   {
     icon: Settings2,
     title: "Yakunlash",
     short: "Yakunlash",
-    note: "Imkoniyatlar va yakuniy tekshiruv",
+    note: "Yakuniy tekshiruv",
     description: "Kerakli imkoniyatlarni yoqing va taklifnomani tekshiring.",
   },
 ];
@@ -202,7 +212,6 @@ function fillDressCodeDefaults(
 }
 
 const placeholders = {
-  addLanguage: "+ Til qo‘shish",
   groomName: "Kuyovning ismi",
   brideName: "Kelinning ismi",
   personName: "Ism",
@@ -353,11 +362,31 @@ export function Studio({
     }
     return globalThis.fetch(input, init);
   }
-  const [invitation, setInvitation] = useState<Invitation | null>(null);
+  const [invitation, setInvitationState] = useState<Invitation | null>(null);
+  const setInvitation = useCallback((action: SetStateAction<Invitation | null>) => {
+    setInvitationState((current) => {
+      const next = typeof action === "function" ? action(current) : action;
+      return next ? normalizeInvitation(next) : null;
+    });
+  }, []);
+  const previewInvitation = useMemo(
+    () => invitation ? {
+      ...createStudioPreviewInvitation(invitation),
+      // Preview projection only: keep the creator's saved soundtrack selected,
+      // but never send playable audio to an automatically opened Studio frame.
+      music: { ...invitation.music, enabled: false, url: "" },
+    } : null,
+    [invitation],
+  );
   const [locale, setLocale] = useState<Locale>(
     initialInvitation?.defaultLocale ?? "uz-Latn",
   );
   const [section, setSection] = useState(0);
+  const editorScroll = useRef<HTMLDivElement>(null);
+  useLayoutEffect(() => {
+    // Reset after the next step is committed, before focus/scroll anchoring.
+    editorScroll.current?.scrollTo({ top: 0, behavior: "instant" });
+  }, [section]);
   const [mobilePreview, setMobilePreview] = useState(false);
   const [notice, setNotice] = useState("");
   const [error, setError] = useState("");
@@ -377,7 +406,6 @@ export function Studio({
     displayName: string;
   } | null>(null);
   const [authStatus, setAuthStatus] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
   const [audioPreview, setAudioPreview] = useState("");
   const [audioName, setAudioName] = useState("");
   const [savedMusic, setSavedMusic] = useState<
@@ -385,6 +413,7 @@ export function Studio({
   >([]);
   const [musicLibraryLoading, setMusicLibraryLoading] = useState(false);
   const [uploading, setUploading] = useState(false);
+  const [catalogVersion, setCatalogVersion] = useState(0);
   const [templates, setTemplates] = useState<TemplateDefinition[]>([]);
   const [categories, setCategories] =
     useState<TemplateCategory[]>(TEMPLATE_CATEGORIES);
@@ -435,7 +464,8 @@ export function Studio({
         })
         .catch(() => []),
     ])
-      .then(([catalogTracks, assets]) =>
+      .then(([catalogTracks, assets]) => {
+        if (controller.signal.aborted) return;
         setSavedMusic([
           {
             id: CATALOG_PREVIEW_MUSIC.id,
@@ -445,8 +475,8 @@ export function Studio({
           },
           ...catalogTracks.map((track) => ({ ...track })),
           ...assets.map((asset) => ({ ...asset, assetId: asset.id })),
-        ]),
-      )
+        ]);
+      })
       .finally(() => {
         if (!controller.signal.aborted) setMusicLibraryLoading(false);
       });
@@ -535,9 +565,6 @@ export function Studio({
           setLocale(restoredInvitation.defaultLocale);
           setSection(restoredInvitation.templateId ? 1 : 0);
           bindDraftUrl(stored.invitation.id);
-          setNotice(
-            "Shu brauzerdagi saqlanmagan o‘zgartirishlaringiz tiklandi.",
-          );
           return;
         }
       } catch {
@@ -588,7 +615,7 @@ export function Studio({
         created.content[created.defaultLocale] =
           defaultLocalizedInvitationContent("wedding", created.defaultLocale);
       }
-      const invitationWithStarterProgram = addStarterProgramItem(created);
+      const invitationWithStarterProgram = normalizeInvitation(addStarterProgramItem(created));
       setInvitation(invitationWithStarterProgram);
       try {
         saveBrowserDraft(invitationWithStarterProgram, true, ownerId.current);
@@ -619,7 +646,9 @@ export function Studio({
 
   useEffect(() => {
     let alive = true;
-    studioFetch("/api/catalog", { cache: "no-store" })
+    const refresh = () => setCatalogVersion((version) => version + 1);
+    window.addEventListener("focus", refresh);
+    fetch("/api/catalog", { cache: "no-store" })
       .then((response) => {
         if (!response.ok) throw new Error();
         return response.json();
@@ -646,8 +675,9 @@ export function Studio({
       });
     return () => {
       alive = false;
+      window.removeEventListener("focus", refresh);
     };
-  }, []);
+  }, [catalogVersion]);
 
   useEffect(() => {
     if (!invitation || adminContext) return;
@@ -783,20 +813,21 @@ export function Studio({
         ?.focus();
   }, [authIdentity]);
 
-  if (!invitation)
+  if (!invitation || !previewInvitation)
     return (
       <div className={styles.loading}>
         <LoaderCircle size={24} className={styles.spinner} />
         <p>Taklifnomangiz tayyorlanmoqda…</p>
       </div>
     );
+  const capabilities = templateCapabilities(invitation.templateId);
   const content = getContent(invitation, locale);
   // Placeholder copy follows the Uzbek Latin editor UI, independently of the
   // invitation language currently being authored.
   const selectedTemplate = templates.find(
     (item) => item.id === invitation.templateId,
   );
-  const singleCelebrant =
+  const singleCelebrant = capabilities.people === 1 ||
     invitation.eventType === "sunnat-toyi" ||
     invitation.eventType === "beshik-toyi" ||
     invitation.templateId === "beshik" ||
@@ -808,6 +839,7 @@ export function Studio({
     invitation.eventType === "yangi-uy" ||
     invitation.templateId === "yangi-uy";
   const singleCelebrantLabel =
+    invitation.eventType === "birthday" ? "Bayram sohibining ismi" :
     invitation.templateId === "nahor"
       ? "Mezbon yoki oila nomi"
       : invitation.eventType === "bitiruv"
@@ -822,6 +854,7 @@ export function Studio({
               ? "Nishonlanuvchi ismi"
               : "Bola ismi";
   const singleCelebrantPlaceholder =
+    invitation.eventType === "birthday" ? "Ismni kiriting" :
     invitation.templateId === "nahor"
       ? "Masalan, Rahmonovlar oilasi"
       : invitation.eventType === "bitiruv"
@@ -837,7 +870,7 @@ export function Studio({
               : "Bolaning ismi";
   const personFields =
     content.people.length > 0
-      ? content.people
+      ? content.people.slice(0, capabilities.people)
       : singleCelebrant
         ? [""]
         : ["", ""];
@@ -869,13 +902,8 @@ export function Studio({
         : browserSaveError
           ? "Brauzerga saqlanmadi"
           : browserSnapshot === currentSnapshot
-            ? "Brauzerga saqlangan"
+            ? ""
             : "Saqlanmoqda…";
-  const authoredPreview = hasAuthoredInvitationContent(invitation);
-  const previewInvitation =
-    section === 0 && !authoredPreview
-      ? createTemplatePreviewSample(invitation.templateId, invitation)
-      : invitation;
   const identityLocked = invitation.status !== "draft";
   function update(patch: Partial<Invitation>) {
     setInvitation((current) => (current ? { ...current, ...patch } : current));
@@ -1425,6 +1453,7 @@ export function Studio({
         });
       setNotice("Fayl yuklandi. Taklifnomani hisobingizga saqlashni unutmang.");
     } catch (cause) {
+      if (kind === "audio") { setAudioPreview(""); setAudioName(""); }
       setError(cause instanceof Error ? cause.message : "Fayl yuklanmadi.");
     } finally {
       setUploading(false);
@@ -1437,8 +1466,6 @@ export function Studio({
     document
       .querySelector<HTMLDetailsElement>("[data-mobile-steps]")
       ?.removeAttribute("open");
-    // Avoid opening the next step halfway down a long form.
-    window.scrollTo({ top: 0, behavior: "instant" });
   }
   function goToIssue(issue: PublicationIssue) {
     if (issue.locale) setLocale(issue.locale);
@@ -1478,10 +1505,32 @@ export function Studio({
           <ArrowLeft size={19} />
           <span>Taklifnomalarim</span>
         </Link>
+        <div className={styles.toolbarPreview}>
+          {invitation.templateId && (
+            <Link
+              className={styles.fullPreviewLink}
+              href={`/preview?template=${encodeURIComponent(invitation.templateId)}&draft=${encodeURIComponent(invitation.id)}`}
+              onClick={() => {
+                try {
+                  sessionStorage.setItem(
+                    `taklifnoma:full-preview:v1:${invitation.id}`,
+                    JSON.stringify(invitation),
+                  );
+                } catch {
+                  // The full preview can recover the last saved browser draft.
+                }
+              }}
+            >
+              <Eye size={14} /> Mehmon sifatida ko‘rish
+            </Link>
+          )}
+        </div>
         <div className={styles.toolbarSave}>
-          <span className={styles.saveStatus} role="status">
-            {saveStatus}
-          </span>
+          {saveStatus && (
+            <span className={styles.saveStatus} role="status">
+              {saveStatus}
+            </span>
+          )}
           <button
             className={styles.saveButton}
             onClick={cloudSave}
@@ -1542,7 +1591,7 @@ export function Studio({
         </details>
       )}
       <div
-        className={`${styles.workspace} ${section === 0 && invitation.templateId ? styles.hasSelectionActions : ""}`}
+        className={`${styles.workspace} ${section < sections.length - 1 ? styles.hasSelectionActions : ""}`}
       >
         <aside
           className={`${styles.sidebar} ${mobilePreview ? styles.mobileHidden : ""}`}
@@ -1576,25 +1625,9 @@ export function Studio({
                   </strong>
                   <small>{item.note}</small>
                 </span>
-                {section === index && <ChevronRight size={15} />}
               </button>
             ))}
           </nav>
-          {selectedTemplate && (
-            <button
-              className={styles.selectedDesign}
-              onClick={() => goToSection(0)}
-            >
-              <span className={styles.selectedDesignIcon}>
-                <LayoutTemplate size={21} strokeWidth={1.2} />
-              </span>
-              <span>
-                <small>Tanlangan dizayn</small>
-                <strong>{selectedTemplate.name}</strong>
-              </span>
-              <ChevronRight size={14} />
-            </button>
-          )}
         </aside>
         <main
           id="main"
@@ -1613,6 +1646,7 @@ export function Studio({
           }}
         >
           <fieldset className={styles.editorFields} disabled={busy}>
+            <div className={styles.editorScroll} ref={editorScroll}>
             {adminContext && (
               <section
                 className="inline-note"
@@ -1674,6 +1708,7 @@ export function Studio({
                 </ul>
               </div>
             )}
+            <div key={section} className={styles.stepContent}>
             <div className={styles.editorIntro}>
               <h1>{sections[section].title}</h1>
               <p>{sections[section].description}</p>
@@ -1703,107 +1738,41 @@ export function Studio({
                 </div>
               )}
             </div>
-            {section !== 2 && (
-              <details className={styles.languageDisclosure}>
-                <summary>
-                  <Globe2 size={15} />
-                  {LANGUAGE_NAMES[locale]}
-                  <span>
-                    {invitation.enabledLocales.length > 1
-                      ? `${invitation.enabledLocales.length} til`
-                      : "Til sozlamalari"}
-                  </span>
-                </summary>
-                <div className={styles.languages}>
-                  <Globe2 size={16} />
-                  <div className={styles.languageTabs}>
-                    {invitation.enabledLocales.map((item) => (
-                      <span className={styles.languageItem} key={item}>
-                        <button
-                          className={
-                            locale === item ? styles.activeLanguage : ""
-                          }
-                          aria-pressed={locale === item}
-                          onClick={() => setLocale(item)}
-                        >
-                          {LANGUAGE_NAMES[item]}
-                          {item === invitation.defaultLocale && (
-                            <span
-                              className={styles.primaryDot}
-                              title="Asosiy til"
-                            />
-                          )}
-                        </button>
-                        {item !== invitation.defaultLocale &&
-                          !identityLocked && (
-                            <button
-                              type="button"
-                              className={styles.removeLanguage}
-                              aria-label={`${LANGUAGE_NAMES[item]} tilini olib tashlash`}
-                              title="Tilni olib tashlash"
-                              onClick={() => {
-                                setInvitation(removeLanguage(invitation, item));
-                                if (locale === item)
-                                  setLocale(invitation.defaultLocale);
-                              }}
-                            >
-                              <X size={12} />
-                            </button>
-                          )}
-                      </span>
-                    ))}
+              {section === 1 && (
+                <section className={styles.languageSettings} aria-label="Taklifnoma tillari">
+                  <div className={styles.languageHeading}><Globe2 size={16} /><strong>Taklifnoma tillari</strong></div>
+                  <div className={styles.languageChoices}>
+                    {LOCALES.map((item) => {
+                      const enabled = invitation.enabledLocales.includes(item);
+                      return <button key={item} type="button" aria-pressed={enabled}
+                        aria-label={item === "uz-Latn" ? "O‘zbekcha" : item === "uz-Cyrl" ? "Ўзбекча" : item === "en" ? "English" : "Русский"}
+                        disabled={identityLocked || (enabled && invitation.enabledLocales.length === 1)}
+                        className={enabled ? styles.enabledLanguage : ""}
+                        onClick={() => {
+                          const next = enabled ? removeLanguage(invitation, item) : addInvitationLanguage(invitation, item);
+                          setInvitation(next);
+                          setLocale(enabled ? (next.enabledLocales.includes(locale) ? locale : next.defaultLocale) : item);
+                        }}>
+                        <span>{item === "uz-Latn" ? "O‘zbekcha" : item === "uz-Cyrl" ? "Ўзбекча" : item === "en" ? "English" : "Русский"}</span>
+                        <Check size={14} aria-hidden="true" style={{opacity: enabled ? 1 : 0}} />
+                      </button>;
+                    })}
                   </div>
-                  {invitation.enabledLocales.length < 4 && !identityLocked && (
-                    <div className={styles.addLanguage}>
-                      <SoftSelect
-                        label="Til qo‘shish"
-                        value=""
-                        placeholder={placeholders.addLanguage}
-                        options={LOCALES.filter(
-                          (item) => !invitation.enabledLocales.includes(item),
-                        ).map((item) => ({
-                          value: item,
-                          label: LANGUAGE_NAMES[item],
-                        }))}
-                        onChange={(value) => {
-                          const next = value as Locale;
-                          setInvitation(
-                            addInvitationLanguage(invitation, next),
-                          );
-                          setLocale(next);
-                        }}
-                      />
-                    </div>
-                  )}
-                </div>
-              </details>
-            )}
+                  {invitation.enabledLocales.length > 1 && <div className={styles.languageEditor}>
+                    <span>Matn tili</span>
+                    <SoftSelect label="Tahrirlash tili" value={locale}
+                      onChange={(value) => setLocale(value as Locale)}
+                      options={invitation.enabledLocales.map((item) => ({value:item,label:LANGUAGE_NAMES[item]}))} />
+                  </div>}
+                </section>
+              )}
 
             {section === 1 && (
-              <div className={styles.form}>
-                {invitation.enabledLocales.length > 1 && (
-                  <div className={styles.languageHint}>
-                    <span>
-                      {LANGUAGE_NAMES[locale]} matnlarini kiriting. Sana,
-                      rasmlar va boshqa umumiy ma’lumotlar barcha tillarda bir
-                      xil.
-                    </span>
-                    <button
-                      onClick={() => update({ defaultLocale: locale })}
-                      disabled={locale === invitation.defaultLocale}
-                    >
-                      {locale === invitation.defaultLocale
-                        ? "Asosiy til"
-                        : "Asosiy til qilish"}
-                    </button>
-                  </div>
-                )}
-                <div className={styles.groupHeader}>
-                  <h2>Kimning quvonchli kuni?</h2>
-                  {!singleCelebrant && (
+              <div className={styles.scheduleSections}>
+                <StudioSection id="studio-people-title" title="Tadbir egalari" description="Ismlar va taklif etuvchi mezbonlar." icon={Users} action={!singleCelebrant && (
                     <button
                       className={styles.textButton}
-                      disabled={identityLocked || content.people.length >= 20}
+                      disabled={identityLocked || content.people.length >= capabilities.people}
                       onClick={() =>
                         updateContent({
                           people: [...personFields, ""],
@@ -1813,8 +1782,7 @@ export function Studio({
                       <Plus size={15} />
                       Ism qo‘shish
                     </button>
-                  )}
-                </div>
+                  )}>
                 <div className={styles.twoColumns}>
                   {personFields.map((name, index) => (
                     <Field
@@ -1872,7 +1840,7 @@ export function Studio({
                     Tuzatish uchun administratorga murojaat qiling.
                   </p>
                 )}
-                {invitation.eventType === "birthday" && (
+                {invitation.eventType === "birthday" && capabilities.age && (
                   <Field label="Bayram sohibining yoshi" hint="Ixtiyoriy. Tug‘ilgan kun dizaynlarida ko‘rsatiladi.">
                     <input
                       type="number"
@@ -1909,7 +1877,8 @@ export function Studio({
                     />
                   </Field>
                 )}
-                <div className={styles.divider} />
+                </StudioSection>
+                <StudioSection id="studio-wording-title" title="Taklif matni" description="Mehmonlarga aytmoqchi bo‘lgan so‘zlaringiz." icon={FileText}>
                 <Field
                   label="Tadbir nomi"
                   hint="Bu matn taklifnomada ko‘rinadi."
@@ -1944,21 +1913,13 @@ export function Studio({
                     }
                   />
                 </Field>
-                {(invitation.templateId === "muhabbat-kitobi" ||
-                  invitation.story.length > 0) && (
-                  <>
-                    <div className={styles.divider} />
+                </StudioSection>
+                {capabilities.story > 0 && (
+                  <StudioSection id="studio-story-title" title="Hikoyangiz" description="Har bir til uchun hikoya boblarini alohida kiriting." icon={BookOpen}>
                     <div className={styles.groupHeader}>
-                      <div>
-                        <h2>Hikoya boblari</h2>
-                        <p className={styles.help}>
-                          Ixtiyoriy. Muhabbat Kitobi dizaynida ko‘rsatiladi. Har
-                          bir til uchun matnni alohida kiriting.
-                        </p>
-                      </div>
                       <button
                         className={styles.textButton}
-                        disabled={invitation.story.length >= 20}
+                        disabled={invitation.story.length >= capabilities.story}
                         onClick={() =>
                           update({
                             story: [
@@ -2051,7 +2012,7 @@ export function Studio({
                         )}
                       </div>
                     ))}
-                  </>
+                  </StudioSection>
                 )}
               </div>
             )}
@@ -2483,8 +2444,13 @@ export function Studio({
             )}
 
             {section === 2 && (
-              <div className={styles.form}>
-                <h2>Sana va vaqt</h2>
+              <div className={styles.scheduleSections}>
+                <section className={styles.scheduleCard} aria-labelledby="studio-date-title">
+                <div className={styles.scheduleHeading}>
+                  <span><CalendarDays size={19} /></span>
+                  <div><h2 id="studio-date-title">Sana va vaqt</h2><p>Tadbir qachon boshlanadi?</p></div>
+                  <small>Asosiy</small>
+                </div>
                 <Field label="Tadbir boshlanishi">
                   <DateTimePicker
                     value={invitation.startsAt}
@@ -2601,8 +2567,13 @@ export function Studio({
                     oshiriladi.
                   </p>
                 )}
-                <div className={styles.divider} />
-                <h2>Manzil</h2>
+                </section>
+                {capabilities.maps && (<section className={styles.scheduleCard} aria-labelledby="studio-venue-title">
+                <div className={styles.scheduleHeading}>
+                  <span><MapPin size={19} /></span>
+                  <div><h2 id="studio-venue-title">Manzil</h2><p>Mehmonlar uchun joy va yo‘l-yo‘riq.</p></div>
+                  <small>Asosiy</small>
+                </div>
                 <Field
                   label="To‘yxona yoki joy nomi"
                   hint="Nomni yozib Google Maps joylaridan tanlang yoki qo‘lda kiriting."
@@ -2666,7 +2637,13 @@ export function Studio({
                     placeholder="https://…"
                   />
                 </Field>
-                <div className={styles.divider} />
+                </section>)}
+                {capabilities.program && (<section className={styles.scheduleCard} aria-labelledby="studio-program-title">
+                <div className={styles.scheduleHeading}>
+                  <span><ListOrdered size={19} /></span>
+                  <div><h2 id="studio-program-title">Tadbir dasturi</h2><p>Kun tartibi va har bir bosqich vaqti.</p></div>
+                  <small>Ixtiyoriy</small>
+                </div>
                 <Field label="Dastur sarlavhasi">
                   <input
                     value={content.programHeading}
@@ -2723,7 +2700,7 @@ export function Studio({
                             <Trash2 size={14} />
                           </button>
                         </div>
-                        {invitation.templateId === "invitate-wedding" && (
+                        {capabilities.artists > 0 && (
                           <textarea
                             className={styles.programDescriptionInput}
                             aria-label="Dastur bandi izohi"
@@ -2789,7 +2766,13 @@ export function Studio({
                     <p>Dastur bandlari shu yerda ko‘rinadi.</p>
                   )}
                 </section>
-                <div className={styles.divider} />
+                </section>)}
+                {capabilities.dressCode && (<section className={styles.scheduleCard} aria-labelledby="studio-dress-title">
+                <div className={styles.scheduleHeading}>
+                  <span><Shirt size={19} /></span>
+                  <div><h2 id="studio-dress-title">Kiyinish uslubi</h2><p>Mehmonlarga uslub va ranglarni tavsiya qiling.</p></div>
+                  <small>Ixtiyoriy</small>
+                </div>
                 <Toggle
                   title="Kiyinish uslubi"
                   description="Taklifnomaga ixtiyoriy kiyinish uslubi va ranglar palitrasini qo‘shing."
@@ -2915,6 +2898,7 @@ export function Studio({
                     </button>
                   </div>
                 )}
+                </section>)}
               </div>
             )}
 
@@ -2936,6 +2920,7 @@ export function Studio({
                 <StudioTemplatePicker
                   invitation={invitation}
                   templates={compatibleTemplates}
+                  onOpen={() => setCatalogVersion((version) => version + 1)}
                   categories={categories}
                   disabled={identityLocked}
                   onSelect={(id) =>
@@ -2952,9 +2937,10 @@ export function Studio({
             )}
 
             {section === 3 && (
-              <div className={styles.form}>
-                <OptionalSection
+              <div className={styles.finishingSections}>
+                {(capabilities.gallery > 0) && (<OptionalSection
                   title="Rasmlar"
+                  icon={ImagePlus}
                   summary={`${invitation.gallery.length} ta rasm`}
                   target="gallery"
                 >
@@ -2966,8 +2952,7 @@ export function Studio({
                     <span className={styles.optional}>Ixtiyoriy</span>
                   </div>
                   <p className={styles.help}>
-                    O‘zingiz uchun qadrli rasmlarni qo‘shing. Dizayn o‘zgarsa
-                    ham ular saqlanadi.
+                    {capabilities.gallery === 1 ? "Bu dizayn uchun bitta portret yuklang." : "Qadrli lahzalaringizni rasm sifatida yuklang."}
                   </p>
                   <label className={styles.uploadBox}>
                     <ImagePlus size={25} />
@@ -2978,7 +2963,7 @@ export function Studio({
                     <input
                       type="file"
                       accept="image/jpeg,image/png,image/webp"
-                      disabled={uploading || invitation.gallery.length >= 50}
+                      disabled={uploading || invitation.gallery.length >= capabilities.gallery}
                       onChange={(event) => {
                         const file = event.target.files?.[0];
                         if (file) void upload(file, "image");
@@ -2986,44 +2971,7 @@ export function Studio({
                       }}
                     />
                   </label>
-                  <details className={styles.details}>
-                    <summary>Mavjud rasm havolasi orqali qo‘shish</summary>
-                    <div className={styles.linkInput}>
-                      <input
-                        aria-label="Rasm havolasi"
-                        type="url"
-                        value={imageUrl}
-                        onChange={(event) => setImageUrl(event.target.value)}
-                        placeholder="https://…"
-                      />
-                      <button
-                        onClick={() => {
-                          if (!/^https?:\/\//i.test(imageUrl)) {
-                            setError(
-                              "To‘liq https:// rasm havolasini kiriting.",
-                            );
-                            return;
-                          }
-                          if (invitation.gallery.length >= 50) return;
-                          update({
-                            gallery: [
-                              ...invitation.gallery,
-                              {
-                                id: crypto.randomUUID(),
-                                url: imageUrl,
-                                alt: "",
-                                caption: "",
-                              },
-                            ],
-                          });
-                          setImageUrl("");
-                        }}
-                      >
-                        <Plus size={17} />
-                        Qo‘shish
-                      </button>
-                    </div>
-                  </details>
+
                   {invitation.gallery.map((image, index) => (
                     <div className={styles.galleryRow} key={image.id}>
                       <div
@@ -3068,10 +3016,11 @@ export function Studio({
                       </button>
                     </div>
                   ))}
-                </OptionalSection>
-                {invitation.templateId === "invitate-wedding" && (
+                </OptionalSection>)}
+                {capabilities.artists > 0 && (
                   <OptionalSection
                     title="San’atkorlar va boshlovchilar"
+                    icon={Users}
                     summary={`${invitation.artistLineup.length} ta ishtirokchi`}
                   >
                     <div className={styles.divider} />
@@ -3157,29 +3106,7 @@ export function Studio({
                               }
                             />
                           </Field>
-                          <Field label="Portret havolasi">
-                            <input
-                              type="url"
-                              value={artist.imageUrl}
-                              maxLength={2048}
-                              disabled={identityLocked}
-                              placeholder="https://…"
-                              onChange={(event) =>
-                                update({
-                                  artistLineup: invitation.artistLineup.map(
-                                    (row) =>
-                                      row.id === artist.id
-                                        ? {
-                                            ...row,
-                                            imageUrl: event.target.value,
-                                            imageAssetId: null,
-                                          }
-                                        : row,
-                                  ),
-                                })
-                              }
-                            />
-                          </Field>
+
                           <label className={styles.audioUpload}>
                             <ImagePlus size={18} />
                             <span>
@@ -3220,8 +3147,9 @@ export function Studio({
                   </OptionalSection>
                 )}
                 <div className={styles.divider} />
-                <OptionalSection
+                {(capabilities.music) && (<OptionalSection
                   title="Musiqa"
+                  icon={Music2}
                   summary={
                     invitation.music.enabled
                       ? invitation.music.filename || "Yoqilgan"
@@ -3234,7 +3162,7 @@ export function Studio({
                     description="Mehmon taklifnomani ochganda musiqa tinglashi mumkin."
                     checked={invitation.music.enabled}
                     onChange={(enabled) =>
-                      update({ music: { ...invitation.music, enabled } })
+                      update({ music: { ...(enabled && !invitation.music.url ? DEFAULT_INVITATION_MUSIC : invitation.music), enabled } })
                     }
                   />
                   {invitation.music.enabled && (
@@ -3311,6 +3239,7 @@ export function Studio({
                           </p>
                           <audio
                             controls
+                            loop
                             preload="none"
                             src={audioPreview || invitation.music.url}
                             className={styles.audio}
@@ -3321,6 +3250,7 @@ export function Studio({
                               update({
                                 music: {
                                   ...invitation.music,
+                                  enabled: false,
                                   assetId: null,
                                   url: "",
                                   filename: "",
@@ -3335,16 +3265,14 @@ export function Studio({
                           </button>
                         </>
                       )}
-                      <p className={styles.help}>
-                        Musiqa qo‘shish majburiy emas. Mehmon uni o‘zi bosib
-                        tinglaydi.
-                      </p>
+
                     </div>
                   )}
-                </OptionalSection>
+                </OptionalSection>)}
                 <div className={styles.divider} />
-                <OptionalSection
+                {(capabilities.gift) && (<OptionalSection
                   title="To‘yona"
+                  icon={Gift}
                   summary={invitation.gift.enabled ? "Yoqilgan" : "O‘chirilgan"}
                   target="gift"
                 >
@@ -3394,7 +3322,7 @@ export function Studio({
                           }
                         />
                       </Field>
-                      <Toggle
+{capabilities.receipts && (                      <Toggle
                         title="Chek yuborishga ruxsat"
                         description="Chek faqat sizga ko‘rinadi. Pul tushganini o‘zingiz tekshirasiz."
                         checked={invitation.gift.receiptUploadEnabled}
@@ -3403,10 +3331,10 @@ export function Studio({
                             gift: { ...invitation.gift, receiptUploadEnabled },
                           })
                         }
-                      />
+                      />)}
                     </div>
                   )}
-                </OptionalSection>
+                </OptionalSection>)}
                 <div className={styles.divider} />
                 {invitation.templateId === "taklifla-terracotta" && <div className={styles.formGrid}>{(["infoNote","footerNote"] as const).map(key=><Field key={key} label={`${key === "infoNote" ? "Mehmonlarga eslatma" : "Yakuniy izoh"} · ${LANGUAGE_NAMES[locale]}`}><textarea maxLength={4000} rows={3} value={terracottaData[key][locale] || ""} onChange={e=>updateTerracottaNote(key,e.target.value)} /></Field>)}</div>}
                 {invitation.templateId === "taklifla-yulduzli-tun" && <div className={styles.formGrid}>{(["infoNote","footerNote"] as const).map(key=><Field key={key} label={`${key === "infoNote" ? "Mehmonlarga eslatma" : "Yakuniy izoh"} · ${LANGUAGE_NAMES[locale]}`}><textarea maxLength={4000} rows={3} value={starryData[key][locale] || ""} onChange={e=>updateStarryNote(key,e.target.value)} /></Field>)}</div>}
@@ -3458,20 +3386,21 @@ export function Studio({
                     />
                   </Field>
                 )}
-                <OptionalSection
+                {(capabilities.rsvp !== "none") && (<OptionalSection
                   title="Mehmonlar javobi"
+                  icon={UserCheck}
                   summary={invitation.rsvp.enabled ? "Yoqilgan" : "O‘chirilgan"}
                   target="rsvp"
                 >
                   <Toggle
-                    title="Qatnashishni tasdiqlash"
-                    description="Mehmonlar kelishini oldindan bildirsin."
+                    title={capabilities.rsvp === "form" ? "Qatnashishni tasdiqlash" : capabilities.rsvp === "phone" ? "Telefon orqali javob" : "Javob berish muddati"}
+                    description={capabilities.rsvp === "form" ? "Mehmonlar javoblari hisobingizda saqlanadi." : capabilities.rsvp === "phone" ? "Mehmonlar sizga telefon orqali xabar beradi." : "Javob berish sanasini taklifnomada ko‘rsating."}
                     checked={invitation.rsvp.enabled}
                     onChange={(enabled) =>
                       update({ rsvp: { ...invitation.rsvp, enabled } })
                     }
                   />
-                  {invitation.rsvp.enabled && (
+                  {invitation.rsvp.enabled && capabilities.rsvpDeadline && (
                     <div
                       className={`${styles.optionBody} ${styles.twoColumns}`}
                     >
@@ -3489,31 +3418,14 @@ export function Studio({
                           }
                         />
                       </Field>
-                      <Field label="Bir javobdagi mehmonlar soni">
-                        <input
-                          type="number"
-                          min={1}
-                          max={100}
-                          value={invitation.rsvp.maxPartySize}
-                          onChange={(event) =>
-                            update({
-                              rsvp: {
-                                ...invitation.rsvp,
-                                maxPartySize: Math.min(
-                                  100,
-                                  Math.max(1, Number(event.target.value) || 1),
-                                ),
-                              },
-                            })
-                          }
-                        />
-                      </Field>
+
                     </div>
                   )}
-                </OptionalSection>
+                </OptionalSection>)}
                 <div className={styles.divider} />
-                <OptionalSection
+                {(capabilities.wishes) && (<OptionalSection
                   title="Mehmonlar tilaklari"
+                  icon={MessageSquare}
                   summary={
                     invitation.wishes.enabled ? "Yoqilgan" : "O‘chirilgan"
                   }
@@ -3527,15 +3439,15 @@ export function Studio({
                       update({ wishes: { ...invitation.wishes, enabled } })
                     }
                   />
-                </OptionalSection>
+                </OptionalSection>)}
                 <div className={styles.divider} />
-                <OptionalSection
+                {(capabilities.phone || capabilities.telegram) && (<OptionalSection
                   title="Bog‘lanish"
+                  icon={Phone}
                   summary={
                     [
                       invitation.contacts.phoneNumber,
                       invitation.contacts.telegramUsername,
-                      invitation.contacts.instagramUrl,
                     ].filter(Boolean).length
                       ? "Kiritilgan"
                       : "Ixtiyoriy"
@@ -3546,7 +3458,7 @@ export function Studio({
                     <h2>Bog‘lanish</h2>
                   </div>
                   <div className={styles.twoColumns}>
-                    <Field label="Telefon raqami">
+                    {capabilities.phone && (<Field label="Telefon raqami">
                       <input
                         type="tel"
                         autoComplete="tel"
@@ -3563,8 +3475,8 @@ export function Studio({
                           })
                         }
                       />
-                    </Field>
-                    <Field label="Telegram nomi">
+                    </Field>)}
+                    {capabilities.telegram && (<Field label="Telegram nomi">
                       <input
                         type="text"
                         autoComplete="username"
@@ -3580,26 +3492,9 @@ export function Studio({
                           })
                         }
                       />
-                    </Field>
-                    <Field label="Instagram">
-                      <input
-                        type="text"
-                        autoComplete="url"
-                        value={invitation.contacts.instagramUrl}
-                        maxLength={300}
-                        placeholder="@username yoki instagram.com/username"
-                        onChange={(event) =>
-                          update({
-                            contacts: {
-                              ...invitation.contacts,
-                              instagramUrl: event.target.value,
-                            },
-                          })
-                        }
-                      />
-                    </Field>
+                    </Field>)}
                   </div>{" "}
-                </OptionalSection>
+                </OptionalSection>)}
               </div>
             )}
             {section === sections.length - 1 &&
@@ -3607,6 +3502,7 @@ export function Studio({
                 <section className={styles.publishPanel}>
                   <div>
                     <h2>
+                      <CheckCircle2 size={22} aria-hidden="true" />
                       {readiness.length
                         ? "Yakuniy tekshiruv"
                         : "Taklifnomangiz tayyor"}
@@ -3690,22 +3586,7 @@ export function Studio({
                       </div>
                     </dl>
                     {readiness.length > 0 && (
-                      <div className={styles.reviewIssues}>
-                        <strong>Quyidagilarni to‘ldiring</strong>
-                        <ul>
-                          {readiness.map((issue) => (
-                            <li key={issue.path}>
-                              <button
-                                type="button"
-                                onClick={() => goToIssue(issue)}
-                              >
-                                {issue.message}
-                                <ChevronRight size={14} />
-                              </button>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
+                      <ReadinessChecklist issues={readiness} onSelect={goToIssue} />
                     )}
                     <ul className={styles.publicationTerms}>
                       {paidInvitationId === invitation.id ? (
@@ -3751,6 +3632,8 @@ export function Studio({
                   </button>
                 </section>
               )}
+            </div>
+            </div>
             <footer className={styles.editorFooter}>
               <button
                 className={styles.secondaryButton}
@@ -3776,35 +3659,15 @@ export function Studio({
           className={`${styles.previewPanel} ${!mobilePreview ? styles.previewMobileHidden : ""}`}
           aria-label="Taklifnoma ko‘rinishi"
         >
-          <div className={styles.previewHeading}>
-            {invitation.templateId && (
-              <Link
-                className={styles.fullPreviewLink}
-                href={`/preview?template=${encodeURIComponent(invitation.templateId)}&draft=${encodeURIComponent(invitation.id)}${section === 0 && !authoredPreview ? "&demo=1" : ""}`}
-                onClick={() => {
-                  try {
-                    sessionStorage.setItem(
-                      `taklifnoma:full-preview:v1:${invitation.id}`,
-                      JSON.stringify(invitation),
-                    );
-                  } catch {
-                    // The full preview can recover the last saved browser draft.
-                  }
-                }}
-              >
-                <Eye size={14} /> Mehmon sifatida ko‘rish
-              </Link>
-            )}
-          </div>
-          <div className={styles.realPreview} ref={previewHost}>
+          <div className={styles.realPreview} ref={previewHost} key={invitation.templateId}>
             {invitation.templateId === "oltin-darvoza-ortidagi-baxt" ? (
               <OltinDarvozaInvitation
                 invitation={previewInvitation}
                 invitationId={invitation.id}
                 locale={locale}
                 preview
-                catalogMusic={section === 0 && !authoredPreview}
-                sampleWishes={section === 0 && !authoredPreview}
+                catalogMusic={false}
+                sampleWishes={false}
               />
             ) : invitation.templateId === "ming-bir-kecha" ? (
               <MingBirKechaInvitation
@@ -3812,8 +3675,8 @@ export function Studio({
                 invitationId={invitation.id}
                 locale={locale}
                 preview
-                catalogMusic={section === 0 && !authoredPreview}
-                sampleWishes={section === 0 && !authoredPreview}
+                catalogMusic={false}
+                sampleWishes={false}
               />
             ) : invitation.templateId === "samarqand-peshtoqi" ? (
               <SamarqandPeshtoqInvitation
@@ -3821,8 +3684,8 @@ export function Studio({
                 invitationId={invitation.id}
                 locale={locale}
                 preview
-                catalogMusic={section === 0 && !authoredPreview}
-                sampleWishes={section === 0 && !authoredPreview}
+                catalogMusic={false}
+                sampleWishes={false}
               />
             ) : invitation.templateId === "shisha-bog" ? (
               <ShishaBogInvitation
@@ -3830,8 +3693,8 @@ export function Studio({
                 invitationId={invitation.id}
                 locale={locale}
                 preview
-                catalogMusic={section === 0 && !authoredPreview}
-                sampleWishes={section === 0 && !authoredPreview}
+                catalogMusic={false}
+                sampleWishes={false}
               />
             ) : invitation.templateId === "kapadokiya-tongi" ? (
               <KapadokiyaTongiInvitation
@@ -3839,8 +3702,8 @@ export function Studio({
                 invitationId={invitation.id}
                 locale={locale}
                 preview
-                catalogMusic={section === 0 && !authoredPreview}
-                sampleWishes={section === 0 && !authoredPreview}
+                catalogMusic={false}
+                sampleWishes={false}
               />
             ) : invitation.templateId === "buxoro-ravoq" ? (
               <BuxoroRavoqInvitation
@@ -3848,8 +3711,8 @@ export function Studio({
                 invitationId={invitation.id}
                 locale={locale}
                 preview
-                catalogMusic={section === 0 && !authoredPreview}
-                sampleWishes={section === 0 && !authoredPreview}
+                catalogMusic={false}
+                sampleWishes={false}
               />
             ) : invitation.templateId === "jannat-bogi" ? (
               <JannatBogiInvitation
@@ -3857,8 +3720,8 @@ export function Studio({
                 invitationId={invitation.id}
                 locale={locale}
                 preview
-                catalogMusic={section === 0 && !authoredPreview}
-                sampleWishes={section === 0 && !authoredPreview}
+                catalogMusic={false}
+                sampleWishes={false}
               />
             ) : invitation.templateId === "tojmahal-oltin-darvozasi" ? (
               <TojmahalOltinDarvozasiInvitation
@@ -3866,8 +3729,8 @@ export function Studio({
                 invitationId={invitation.id}
                 locale={locale}
                 preview
-                catalogMusic={section === 0 && !authoredPreview}
-                sampleWishes={section === 0 && !authoredPreview}
+                catalogMusic={false}
+                sampleWishes={false}
               />
             ) : invitation.templateId === "andalus-darvozasi" ? (
               <AndalusDarvozasiInvitation
@@ -3875,8 +3738,8 @@ export function Studio({
                 invitationId={invitation.id}
                 locale={locale}
                 preview
-                catalogMusic={section === 0 && !authoredPreview}
-                sampleWishes={section === 0 && !authoredPreview}
+                catalogMusic={false}
+                sampleWishes={false}
               />
             ) : invitation.templateId === "zarrin-doppi" ? (
               <ZarrinDoppiInvitation
@@ -3884,8 +3747,8 @@ export function Studio({
                 invitationId={invitation.id}
                 locale={locale}
                 preview
-                catalogMusic={section === 0 && !authoredPreview}
-                sampleWishes={section === 0 && !authoredPreview}
+                catalogMusic={false}
+                sampleWishes={false}
               />
             ) : invitation.templateId === "gulli-darvoza" ? (
               <GulliDarvozaInvitation
@@ -3893,8 +3756,8 @@ export function Studio({
                 invitationId={invitation.id}
                 locale={locale}
                 preview
-                catalogMusic={section === 0 && !authoredPreview}
-                sampleWishes={section === 0 && !authoredPreview}
+                catalogMusic={false}
+                sampleWishes={false}
               />
             ) : invitation.templateId === "wedivo-pulau-sehati" ? (
               <WedivoPulauSehati
@@ -3903,8 +3766,8 @@ export function Studio({
                 locale={locale}
                 preview
                 fullPreview
-                catalogMusic={section === 0 && !authoredPreview}
-                sampleWishes={section === 0 && !authoredPreview}
+                catalogMusic={false}
+                sampleWishes={false}
               />
             ) : invitation.templateId === "anor" ? (
               <AnorInvitation
@@ -3913,8 +3776,8 @@ export function Studio({
                 locale={locale}
                 preview
                 fullPreview
-                catalogMusic={section === 0 && !authoredPreview}
-                sampleWishes={section === 0 && !authoredPreview}
+                catalogMusic={false}
+                sampleWishes={false}
               />
             ) : invitation.templateId === "royal-burgundy-edition" ? (
               <VelvetRoyaleInvitation
@@ -3922,8 +3785,8 @@ export function Studio({
                 invitationId={invitation.id}
                 locale={locale}
                 preview
-                catalogMusic={section === 0 && !authoredPreview}
-                sampleWishes={section === 0 && !authoredPreview}
+                catalogMusic={false}
+                sampleWishes={false}
               />
             ) : invitation.templateId === "olive-manor-edition" ? (
               <OliveManorInvitation
@@ -3931,8 +3794,8 @@ export function Studio({
                 invitationId={invitation.id}
                 locale={locale}
                 preview
-                catalogMusic={section === 0 && !authoredPreview}
-                sampleWishes={section === 0 && !authoredPreview}
+                catalogMusic={false}
+                sampleWishes={false}
               />
             ) : invitation.templateId === "islamic-edition" ? (
               <IslamicEditionInvitation
@@ -3940,8 +3803,8 @@ export function Studio({
                 invitationId={invitation.id}
                 locale={locale}
                 preview
-                catalogMusic={section === 0 && !authoredPreview}
-                sampleWishes={section === 0 && !authoredPreview}
+                catalogMusic={false}
+                sampleWishes={false}
               />
             ) : invitation.templateId === "manor-edition" ? (
               <ManorInvitation
@@ -3949,8 +3812,8 @@ export function Studio({
                 invitationId={invitation.id}
                 locale={locale}
                 preview
-                catalogMusic={section === 0 && !authoredPreview}
-                sampleWishes={section === 0 && !authoredPreview}
+                catalogMusic={false}
+                sampleWishes={false}
               />
             ) : invitation.templateId === "osh-edition-v1" ? (
               <OshEditionInvitation
@@ -3958,7 +3821,7 @@ export function Studio({
                 invitationId={invitation.id}
                 locale={locale}
                 preview
-                catalogMusic={section === 0 && !authoredPreview}
+                catalogMusic={false}
               />
             ) : invitation.templateId === "monochrome-editorial-edition" ? (
               <MonochromeEditorialInvitation
@@ -3966,7 +3829,7 @@ export function Studio({
                 invitationId={invitation.id}
                 locale={locale}
                 preview
-                catalogMusic={section === 0 && !authoredPreview}
+                catalogMusic={false}
               />
             ) : invitation.templateId === "amru-maruf-edition-v1" ? (
               <AmruMarufEditionInvitation
@@ -3974,7 +3837,7 @@ export function Studio({
                 invitationId={invitation.id}
                 locale={locale}
                 preview
-                catalogMusic={section === 0 && !authoredPreview}
+                catalogMusic={false}
               />
             ) : invitation.templateId === "xatna-edition" ? (
               <XatnaEditionInvitation
@@ -3982,64 +3845,64 @@ export function Studio({
                 invitationId={invitation.id}
                 locale={locale}
                 preview
-                catalogMusic={section === 0 && !authoredPreview}
+                catalogMusic={false}
               />
             ) : invitation.templateId === "taklifla-fayzli-xonadon" ? (
-              <TakliflaFayzliXonadonInvitation invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview fullPreview catalogMusic={section === 0 && !authoredPreview} silentPlayback />
+              <TakliflaFayzliXonadonInvitation invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview fullPreview catalogMusic={false} silentPlayback />
             ) : invitation.templateId === "taklifla-ertak" ? (
-              <TakliflaErtak invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview fullPreview catalogMusic={section === 0 && !authoredPreview} silentPlayback />
+              <TakliflaErtak invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview fullPreview catalogMusic={false} silentPlayback />
             ) : invitation.templateId === "taklifla-gulbog" ? (
-              <TakliflaGulbog invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview fullPreview catalogMusic={section === 0 && !authoredPreview} silentPlayback />
+              <TakliflaGulbog invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview fullPreview catalogMusic={false} silentPlayback />
             ) : invitation.templateId === "taklifla-zarrin-gullar" ? (
-              <TakliflaZarrinGullar invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview fullPreview catalogMusic={section === 0 && !authoredPreview} silentPlayback />
+              <TakliflaZarrinGullar invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview fullPreview catalogMusic={false} silentPlayback />
             ) : invitation.templateId === "taklifla-toglar-bagrida" ? (
-              <ToglarBagridaInvitation invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview fullPreview catalogMusic={section === 0 && !authoredPreview} silentPlayback />
+              <ToglarBagridaInvitation invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview fullPreview catalogMusic={false} silentPlayback />
             ) : invitation.templateId === "taklifla-oltin-yol" ? (
-              <TakliflaOltinYol invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview fullPreview catalogMusic={section === 0 && !authoredPreview} silentPlayback />
+              <TakliflaOltinYol invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview fullPreview catalogMusic={false} silentPlayback />
             ) : invitation.templateId === "taklifla-osmon" ? (
-              <TakliflaOsmonInvitation invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview fullPreview catalogMusic={section === 0 && !authoredPreview} silentPlayback />
+              <TakliflaOsmonInvitation invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview fullPreview catalogMusic={false} silentPlayback />
             ) : invitation.templateId === "taklifla-parilar-ertagi" ? (
-              <TakliflaParilarErtagiInvitation invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview fullPreview catalogMusic={section === 0 && !authoredPreview} silentPlayback />
+              <TakliflaParilarErtagiInvitation invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview fullPreview catalogMusic={false} silentPlayback />
             ) : invitation.templateId === "taklifla-qogoz-ertagi" ? (
-              <TakliflaQogozErtagiInvitation invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview fullPreview catalogMusic={section === 0 && !authoredPreview} silentPlayback />
+              <TakliflaQogozErtagiInvitation invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview fullPreview catalogMusic={false} silentPlayback />
             ) : invitation.templateId === "taklifla-sakura-guli" ? (
-              <SakuraGuliInvitation invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview fullPreview catalogMusic={section === 0 && !authoredPreview} silentPlayback />
+              <SakuraGuliInvitation invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview fullPreview catalogMusic={false} silentPlayback />
             ) : invitation.templateId === "taklifla-sharlar" ? (
-              <TakliflaSharlarInvitation invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview fullPreview catalogMusic={section === 0 && !authoredPreview} silentPlayback />
+              <TakliflaSharlarInvitation invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview fullPreview catalogMusic={false} silentPlayback />
             ) : invitation.templateId === "taklifla-yulduzli-tun" ? (
-              <TakliflaYulduzliTun invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview fullPreview catalogMusic={section === 0 && !authoredPreview} silentPlayback />
+              <TakliflaYulduzliTun invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview fullPreview catalogMusic={false} silentPlayback />
             ) : invitation.templateId === "taklifla-terracotta" ? (
-              <TakliflaTerracottaInvitation invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview fullPreview catalogMusic={section === 0 && !authoredPreview} silentPlayback />
+              <TakliflaTerracottaInvitation invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview fullPreview catalogMusic={false} silentPlayback />
             ) : invitation.templateId === "taklifla-yubiley-sahifasi" ? (
-              <TakliflaYubileySahifasi invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview fullPreview catalogMusic={section === 0 && !authoredPreview} silentPlayback />
+              <TakliflaYubileySahifasi invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview fullPreview catalogMusic={false} silentPlayback />
             ) : invitation.templateId === "taklifla-barakali" ? (
-              <TakliflaBarakali invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview fullPreview catalogMusic={section === 0 && !authoredPreview} sampleWishes={section === 0 && !authoredPreview} silentPlayback />
+              <TakliflaBarakali invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview fullPreview catalogMusic={false} sampleWishes={false} silentPlayback />
             ) : invitation.templateId === "taklifla-zarhal-sahifa" ? (
-              <TakliflaZarhalSahifaInvitation invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview fullPreview catalogMusic={section === 0 && !authoredPreview} sampleWishes={section === 0 && !authoredPreview} silentPlayback />
+              <TakliflaZarhalSahifaInvitation invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview fullPreview catalogMusic={false} sampleWishes={false} silentPlayback />
             ) : invitation.templateId === "taklifla-tungi-saroy" ? (
-              <TungiSaroyInvitation invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview fullPreview catalogMusic={section === 0 && !authoredPreview} silentPlayback />
+              <TungiSaroyInvitation invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview fullPreview catalogMusic={false} silentPlayback />
             ) : invitation.templateId === "taklifla-tovus" ? (
-              <TakliflaTovus invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview fullPreview catalogMusic={section === 0 && !authoredPreview} silentPlayback />
+              <TakliflaTovus invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview fullPreview catalogMusic={false} silentPlayback />
             ) : invitation.templateId === "taklifla-tort-fasl" ? (
-              <TakliflaTortFasl invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview fullPreview catalogMusic={section === 0 && !authoredPreview} silentPlayback />
+              <TakliflaTortFasl invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview fullPreview catalogMusic={false} silentPlayback />
             ) : invitation.templateId === "taklifla-asalari" ? (
               <TakliflaAsalari
                 invitation={previewInvitation}
                 invitationId={invitation.id}
                 locale={locale}
                 preview
-                sampleWishes={section === 0 && !authoredPreview}
+                sampleWishes={false}
                 silentPlayback
               />
             ) : invitation.templateId === "taklifla-muhrli-maktub" ? (
               <MuhrliMaktubInvitation
-                sampleWishes={section === 0 && !authoredPreview}
+                sampleWishes={false}
                 invitation={previewInvitation}
                 invitationId={invitation.id}
                 locale={locale}
                 preview
                 fullPreview
-                catalogMusic={section === 0 && !authoredPreview}
+                catalogMusic={false}
                 silentPlayback
               />
             ) : invitation.templateId &&
@@ -4051,8 +3914,8 @@ export function Studio({
                 templateId={invitation.templateId}
                 preview
                 fullPreview
-                catalogMusic={section === 0 && !authoredPreview}
-                sampleWishes={section === 0 && !authoredPreview}
+                catalogMusic={false}
+                sampleWishes={false}
               />
             ) : invitation.templateId &&
               isInvitateTemplate(invitation.templateId) ? (
@@ -4062,8 +3925,8 @@ export function Studio({
                 locale={locale}
                 preview
                 fullPreview
-                catalogMusic={section === 0 && !authoredPreview}
-                sampleWishes={section === 0 && !authoredPreview}
+                catalogMusic={false}
+                sampleWishes={false}
               />
             ) : invitation.templateId &&
               isMarxabaTemplate(invitation.templateId) ? (
@@ -4074,8 +3937,8 @@ export function Studio({
                 templateId={invitation.templateId}
                 preview
                 fullPreview
-                catalogMusic={section === 0 && !authoredPreview}
-                sampleWishes={section === 0 && !authoredPreview}
+                catalogMusic={false}
+                sampleWishes={false}
               />
             ) : (
               <div className={styles.categoryEmpty}>

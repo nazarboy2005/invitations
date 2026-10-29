@@ -16,9 +16,9 @@ type Props = OsmonOptions & {
 export function TakliflaOsmonInvitation({invitation, locale, fullPreview, qaReducedMotion, ...options}: Props) {
   const frame = useRef<HTMLIFrameElement>(null);
   const message = useMemo(() => makeOsmonPayload(invitation, locale, {
-    ...options, reducedMotion: qaReducedMotion || options.reducedMotion,
+    ...options, fullPreview, reducedMotion: qaReducedMotion || options.reducedMotion,
   }), [invitation, locale, options.invitationId, options.guestName, options.guestToken,
-    options.preview, options.catalogMusic, options.silentPlayback, options.reducedMotion, qaReducedMotion]);
+    options.preview, options.catalogMusic, options.silentPlayback, options.reducedMotion, qaReducedMotion, fullPreview]);
   const latest = useRef(message);
   latest.current = message;
   const send = useCallback(() => frame.current?.contentWindow?.postMessage(latest.current, window.location.origin), []);

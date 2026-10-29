@@ -31,7 +31,7 @@ export function TakliflaParilarErtagiInvitation({ invitation, invitationId, loca
   }, [invitation.enabledLocales]);
   const message = useMemo(() => {
     const value = makePariPayload(invitation, language, { invitationId, guestName, guestToken,
-      preview, sampleWishes:sampleWishes||catalogMusic, silentPlayback: preview && (silentPlayback || !catalogMusic),
+      preview, sampleWishes:sampleWishes||catalogMusic, silentPlayback: preview && (silentPlayback || (!catalogMusic && !fullPreview)),
       reducedMotion: preview && qaReducedMotion });
     if (preview && catalogMusic) value.payload.music = { ...value.payload.music, enabled: true, url: CATALOG_PREVIEW_MUSIC.url };
     return value;

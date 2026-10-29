@@ -14,6 +14,7 @@ import { makeVelvetData } from "./velvet-adapter";
 import { makeWeddingData } from "./wedding-adapter";
 import { makeGoldenHourData } from "./golden-hour/adapter";
 import { useInvitationExtras } from "@/templates/use-invitation-extras";
+import { AureliaSoundtrack } from "./aurelia-soundtrack";
 import { SafirInvitation } from "./safir-renderer";
 
 type Props = {
@@ -548,6 +549,9 @@ export function InvitateInvitation({
       : styles.public;
   return (
     <div className={classes}>
+      {templateId === "aurelia" && invitation.music.enabled && invitation.music.url && !(preview && silentPlayback) && (
+        <AureliaSoundtrack key={invitation.music.url} url={invitation.music.url} locale={frameLocale} />
+      )}
       <iframe
         key={templateId}
         ref={frame}

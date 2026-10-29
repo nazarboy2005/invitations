@@ -22,8 +22,8 @@ export function TakliflaTerracottaInvitation({ invitation, invitationId, locale,
   useEffect(() => setActiveLocale(locale), [locale]);
   const selectedLocale = invitation.enabledLocales.includes(activeLocale) ? activeLocale : locale;
   const message = useMemo(() => {const value=makeTerracottaPayload(invitation, selectedLocale, {
-    invitationId, guestName, guestToken, preview, sampleWishes:preview&&(sampleWishes||catalogMusic), silentPlayback:preview&&(silentPlayback||!catalogMusic), reducedMotion: qaReducedMotion,
-  });if(preview&&catalogMusic)value.payload.music={...value.payload.music,enabled:true,url:CATALOG_PREVIEW_MUSIC.url};return value;}, [invitation, selectedLocale, invitationId, guestName, guestToken, preview, sampleWishes,catalogMusic, silentPlayback, qaReducedMotion]);
+    invitationId, guestName, guestToken, preview, sampleWishes:preview&&(sampleWishes||catalogMusic), silentPlayback:preview&&(silentPlayback||(!catalogMusic&&!fullPreview)), reducedMotion: qaReducedMotion,
+  });if(preview&&catalogMusic)value.payload.music={...value.payload.music,enabled:true,url:CATALOG_PREVIEW_MUSIC.url};return value;}, [invitation, selectedLocale, invitationId, guestName, guestToken, preview, sampleWishes,catalogMusic, fullPreview, silentPlayback, qaReducedMotion]);
   const latest = useRef(message);
   latest.current = message;
   useEffect(() => {

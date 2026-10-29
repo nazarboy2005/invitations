@@ -37,6 +37,7 @@ function manageInvitationAudio(doc: Document, expectedSource: string) {
   const Element = doc.defaultView?.Element;
   const tryPlay = (audio: HTMLAudioElement, fromGesture = false) => {
     if (!audioUsesSource(audio, expectedSource)) return;
+    audio.loop = true;
     const source = expectedSource;
     let state = states.get(audio);
     if (!state || state.source !== source) {

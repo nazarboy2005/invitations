@@ -7,7 +7,10 @@
     ".": "./src/index.ts",
     "./policies": "./src/policies.ts",
     "./publication": "./src/publication.ts",
-    "./payment": "./src/payment.ts"
+    "./payment": "./src/payment.ts",
+    "./music": "./src/music.ts",
+    "./visitor-locale": "./src/visitor-locale.ts",
+    "./capabilities": "./src/capabilities.ts"
   },
   "dependencies": {
     "zod": "^4.1.12"

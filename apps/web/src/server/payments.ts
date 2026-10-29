@@ -7,6 +7,7 @@ import {
 } from "@taklifnoma/contracts";
 import {
   paymentIdentity,
+  paymentIdentityMatches,
   nextPaymentState,
   type PaymentOrderView,
   type PaymentState,
@@ -113,7 +114,7 @@ export async function createCheckout(
       Order[]
     >`SELECT * FROM payment_orders WHERE invitation_id=${id} AND status NOT IN ('FAILED','CANCELLED','EXPIRED') FOR UPDATE`;
     if (existing) {
-      if (existing.identity_snapshot !== paymentIdentity(invitation))
+      if (!paymentIdentityMatches(invitation, existing.identity_snapshot))
         throw new ApiError(
           409,
           "ORDER_MISMATCH",
@@ -231,7 +232,7 @@ export async function applyPayment(
           const [invitation] =
             await savepoint`SELECT data FROM invitations WHERE id=${order.invitation_id}`;
           const data = invitationSchema.parse(invitation.data);
-          if (paymentIdentity(data) !== order.identity_snapshot)
+          if (!paymentIdentityMatches(data, order.identity_snapshot))
             throw new ApiError(
               409,
               "ORDER_MISMATCH",

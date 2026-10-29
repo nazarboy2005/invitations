@@ -95,7 +95,9 @@
     const photos = (data.gallery || []).filter((photo) => photo.src);
     const preview = Boolean(data.catalogPreview);
     const media = photos.length ? photos.map((photo) => ({ src: photo.src, alt: photo.alt || photo.caption || "", caption: photo.caption || "" })) : preview ? previewAssets.map((file) => ({ src: src(file), alt: "", caption: "" })) : [];
-    setImage($(".hero-photo"), media[0]?.src, media[0]?.alt);
+    // The source opening artwork remains when the creator has no portrait.
+    // Optional gallery sections below still stay empty until photos are added.
+    setImage($(".hero-photo"), media[0]?.src || src("pink.png"), media[0]?.alt);
     const heroCaption = $(".hero-photo-caption");
     if (heroCaption) { text(heroCaption, media[0]?.caption); heroCaption.hidden = !media[0]?.caption; }
     const guestImages = $$(".guests-photos img");

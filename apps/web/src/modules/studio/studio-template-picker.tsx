@@ -12,6 +12,8 @@ import {
 } from "@taklifnoma/contracts";
 import { matchesTemplateSearch } from "@/modules/catalog/template-search";
 import { templatePoster } from "@/modules/catalog/template-poster";
+import { TemplateCardPreview } from "@/modules/catalog/template-card-preview";
+import { useCardPlayback } from "@/modules/catalog/use-card-playback";
 import cardStyles from "@/modules/catalog/template-cards.module.css";
 import { studioTemplateDescription } from "./template-copy";
 import styles from "./studio.module.css";
@@ -21,18 +23,23 @@ export function StudioTemplatePicker({
   templates,
   categories,
   onSelect,
+  onOpen,
   disabled,
 }: {
   invitation: Invitation;
   templates: TemplateDefinition[];
   categories: TemplateCategory[];
   onSelect: (id: TemplateDefinition["id"]) => void;
+  onOpen: () => void;
   disabled: boolean;
 }) {
   const dialog = useRef<HTMLDialogElement>(null);
   const changeButton = useRef<HTMLButtonElement>(null);
   const [query, setQuery] = useState("");
   const [limit, setLimit] = useState(12);
+  const [open, setOpen] = useState(false);
+  const inlineGrid = useRef<HTMLDivElement>(null);
+  const dialogGrid = useRef<HTMLDivElement>(null);
   useEffect(() => {
     setQuery("");
     setLimit(12);
@@ -41,7 +48,11 @@ export function StudioTemplatePicker({
   const selected = templates.find(
     (template) => template.id === invitation.templateId,
   );
-  const filtered = templates.filter((template) =>
+  const inlineTemplates = templates.slice(0, 6);
+  const orderedTemplates = selected
+    ? [selected, ...templates.filter((template) => template.id !== selected.id)]
+    : templates;
+  const filtered = orderedTemplates.filter((template) =>
     matchesTemplateSearch(
       {
         ...template,
@@ -51,6 +62,24 @@ export function StudioTemplatePicker({
       query,
     ),
   );
+  const inlinePlayback = useCardPlayback(
+    inlineGrid,
+    inlineTemplates.map((template) => template.id),
+    open || !!selected,
+  );
+  const dialogPlayback = useCardPlayback(
+    dialogGrid,
+    filtered.slice(0, limit).map((template) => template.id),
+    !open,
+  );
+  function openPicker() {
+    onOpen();
+    setQuery("");
+    setLimit(12);
+    setOpen(true);
+    dialog.current?.showModal();
+    dialog.current?.scrollTo({ top: 0 });
+  }
   function choose(template: TemplateDefinition) {
     onSelect(template.id);
     dialog.current?.close();
@@ -59,14 +88,30 @@ export function StudioTemplatePicker({
       changeButton.current?.focus({ preventScroll: true }),
     );
   }
-  function card(template: TemplateDefinition) {
+  function card(template: TemplateDefinition, playback: typeof inlinePlayback) {
     return (
-      <div className={styles.templateCard} key={template.id}>
+      <div
+        className={styles.templateCard}
+        key={template.id}
+        data-template-id={template.id}
+        onPointerEnter={(event) => {
+          if (event.pointerType !== "touch") playback.start(template.id);
+        }}
+        onPointerLeave={(event) => {
+          if (event.pointerType !== "touch") playback.stop(template.id);
+        }}
+        onFocus={() => playback.start(template.id)}
+        onBlur={(event) => {
+          if (!event.currentTarget.contains(event.relatedTarget))
+            playback.stop(template.id);
+        }}
+      >
         <button
           type="button"
           disabled={disabled}
           aria-pressed={template.id === invitation.templateId}
           className={`${cardStyles.art} ${styles.templateSelect}`}
+          data-card-art
           onClick={() => choose(template)}
         >
           <img
@@ -75,9 +120,12 @@ export function StudioTemplatePicker({
             alt=""
             loading="lazy"
           />
+          {playback.activeId === template.id && (
+            <TemplateCardPreview templateId={template.id} />
+          )}
           {template.id === invitation.templateId && (
             <span className={styles.pickerCheck}>
-              <Check size={17} />
+              <Check size={15} /> Tanlangan
             </span>
           )}
           <span className={`${cardStyles.caption} ${styles.templateMeta}`}>
@@ -125,15 +173,15 @@ export function StudioTemplatePicker({
             type="button"
             className={styles.secondaryButton}
             disabled={disabled}
-            onClick={() => dialog.current?.showModal()}
+            onClick={openPicker}
           >
             Almashtirish
           </button>
         </div>
       ) : (
         <>
-          <div className={styles.templateGrid}>
-            {templates.slice(0, 4).map(card)}
+          <div className={styles.templateGrid} ref={inlineGrid}>
+            {inlineTemplates.map((template) => card(template, inlinePlayback))}
           </div>
           {!templates.length && (
             <p className={styles.help}>
@@ -143,12 +191,12 @@ export function StudioTemplatePicker({
           )}
         </>
       )}
-      {!selected && templates.length > 4 && (
+      {!selected && templates.length > inlineTemplates.length && (
         <button
           type="button"
           className={styles.secondaryButton}
           disabled={disabled}
-          onClick={() => dialog.current?.showModal()}
+          onClick={openPicker}
         >
           Barcha dizaynlarni ko‘rish · {templates.length}
         </button>
@@ -157,6 +205,7 @@ export function StudioTemplatePicker({
         ref={dialog}
         className={styles.pickerDialog}
         aria-labelledby="studio-picker-title"
+        onClose={() => setOpen(false)}
         onClick={(event) => {
           if (event.target === event.currentTarget) {
             const box = event.currentTarget.getBoundingClientRect();
@@ -196,10 +245,12 @@ export function StudioTemplatePicker({
           />
         </label>
         <p className={styles.help} role="status">
-          {filtered.length} ta dizayn
+          {filtered.length} ta dizayn · tanlangan tadbir uchun
         </p>
-        <div className={styles.pickerGrid}>
-          {filtered.slice(0, limit).map(card)}
+        <div className={styles.pickerGrid} ref={dialogGrid}>
+          {filtered
+            .slice(0, limit)
+            .map((template) => card(template, dialogPlayback))}
         </div>
         {!filtered.length && <p>Qidiruv bo‘yicha dizayn topilmadi.</p>}
         {filtered.length > limit && (
