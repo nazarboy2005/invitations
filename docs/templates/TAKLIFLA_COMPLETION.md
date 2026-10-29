@@ -21,7 +21,7 @@ untouched. Application deployment and live payment activation are excluded.
 | Garden Arch | taklifla-gulbog | Private package | Complete — family/reminder/footer fields restored; source/lifecycle/audio verified; published 0181/0182 |
 | Marigold | taklifla-zarrin-gullar | Private package | Complete — family/stay/footer/hashtag restored; shared data and source verified; published 0183/0184 |
 | Mountain | taklifla-toglar-bagrida | Private package | Complete — independent scene times, shared maps/wishes and full routes restored; published 0185/0186 |
-| Oltin Yo‘l | taklifla-oltin-yol | Private package | Pending |
+| Oltin Yo‘l | taklifla-oltin-yol | Private package | Complete — renderer/bridge, notes, timetable/wishes and full source motion integrated; published 0187/0188 |
 | Osmon | taklifla-osmon | Private package | Pending |
 | Pari | taklifla-parilar-ertagi | Private package | Pending |
 | Qog‘oz | taklifla-qogoz-ertagi | Private package | Pending |
@@ -128,3 +128,9 @@ the individual commit below each completed row.
 - Exact captured watercolor mountain/floral assets, source CSS/fonts and native three-layer idle/parallax/reveal retained. Added reduced-motion guard, missing independent scene time editor/persistence, canonical localized preview wishes and authored-address Google fallback. Scene copy reuses shared story chapters.
 - 25 shared/package tests, source comparisons at 320/390/1280 and active motion/reveal checks, all locales/long/empty/seven-row data, real authenticated save/reopen/studio/publication/public/maps/pending wishes and compatible switching, actual audio, covers, typecheck/build pass.
 - Additive migrations 0185/0186 register/publish only Mountain for weddings; configured catalog publication verified. Evidence: `docs/templates/taklifla-audit/mountain*`.
+
+## Oltin Yo‘l integration
+
+- Former art-only private package now has a full typed renderer/bridge and all routes. Exact source CSS/eight images/23 font dependencies, native opening/train marker/background interpolation/parallax/24 motes/reveals and timetable/telegram-card/closed-panel builders are retained. Long names wrap only when native fitting cannot fit; Cyrillic labels corrected.
+- Source arrival/gift/contact/footer notes are editable, validated, saved/reopened and preserved on switching. Dress/contact/venue/program/date/identity reuse shared data. Canonical wedding notes/wishes/music/maps never enter public invitations.
+- 31 shared/regression tests, three-viewport source/motion comparisons, all locales/long/empty/seven-row/reduced/closed/failure checks, actual audio, real authenticated note save/reopen/studio/publication/public/maps/pending wishes and switching, authentic covers, typecheck/build pass. Migrations 0187/0188 publish only this wedding design. Evidence: `docs/templates/taklifla-audit/oltin*`.

@@ -8,6 +8,7 @@ const openedHeroes = new Set([
   "anor",
   "taklifla-tort-fasl",
   "taklifla-gulbog",
+  "taklifla-oltin-yol",
   "taklifla-zarrin-gullar",
   "taklifla-tungi-saroy",
   "taklifla-tovus",

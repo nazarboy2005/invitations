@@ -32,6 +32,7 @@ const TakliflaErtak = dynamic(() => import("@/templates/taklifla-ertak/renderer"
 const TakliflaGulbog = dynamic(() => import("@/templates/taklifla-gulbog/renderer").then(m=>m.TakliflaGulbog));
 const TakliflaZarrinGullar = dynamic(() => import("@/templates/taklifla-zarrin-gullar/renderer").then(m=>m.TakliflaZarrinGullar));
 const ToglarBagridaInvitation = dynamic(() => import("@/templates/taklifla-toglar-bagrida/renderer").then(m=>m.ToglarBagridaInvitation));
+const TakliflaOltinYol = dynamic(() => import("@/templates/taklifla-oltin-yol/renderer").then(m=>m.TakliflaOltinYol));
 const TakliflaYubileySahifasi = dynamic(() => import("@/templates/taklifla-yubiley-sahifasi/renderer").then(m=>m.TakliflaYubileySahifasi));
 const TakliflaBarakali = dynamic(() => import("@/templates/taklifla-barakali/renderer").then(m => m.TakliflaBarakali));
 const TakliflaZarhalSahifa = dynamic(() => import("@/templates/taklifla-zarhal-sahifa/renderer").then((module) => module.TakliflaZarhalSahifaInvitation));
@@ -184,7 +185,7 @@ export function FullTemplatePreview({
         observer.observe(doc.documentElement, { childList: true, subtree: true });
         cleanups.push(() => { observer.disconnect(); doc.removeEventListener("volumechange", mute, true); });
         // Only invitation-opening controls; never submit RSVP, wishes, or links.
-        const opener = doc.querySelector<HTMLElement>("#mw-open, #splash.splash[onclick], #fs-open, #mp-open, #tv-open, #open-invitation, #open-prompt, #open-btn, #openBtn, #openEnvelope, #si-opener, [data-open], [data-gg-source-opening], [data-landing-screenshot-id='invite-envelope']");
+        const opener = doc.querySelector<HTMLElement>("#oy-open, #mw-open, #splash.splash[onclick], #fs-open, #mp-open, #tv-open, #open-invitation, #open-prompt, #open-btn, #openBtn, #openEnvelope, #si-opener, [data-open], [data-gg-source-opening], [data-landing-screenshot-id='invite-envelope']");
         opener?.click();
         window.parent.postMessage({ type: "catalog-preview:ready" }, window.location.origin);
         if (template.id === "doira") {
@@ -298,7 +299,7 @@ export function FullTemplatePreview({
         />
       )}
       {!cardPreview && !posterCapture && <nav
-        className={`${styles.previewControls} ${showControls ? styles.controlsVisible : ""} ${["taklifla-toglar-bagrida", "taklifla-zarrin-gullar", "taklifla-gulbog", "taklifla-ertak", "taklifla-fayzli-xonadon", "taklifla-yubiley-sahifasi", "taklifla-barakali", "taklifla-tungi-saroy", "taklifla-tovus"].includes(template.id) ? styles.templateLanguageClearance : ""}`}
+        className={`${styles.previewControls} ${showControls ? styles.controlsVisible : ""} ${["taklifla-oltin-yol", "taklifla-toglar-bagrida", "taklifla-zarrin-gullar", "taklifla-gulbog", "taklifla-ertak", "taklifla-fayzli-xonadon", "taklifla-yubiley-sahifasi", "taklifla-barakali", "taklifla-tungi-saroy", "taklifla-tovus"].includes(template.id) ? styles.templateLanguageClearance : ""}`}
         aria-label="Dizayn amallari"
         aria-hidden={!showControls}
         inert={!showControls}
@@ -356,6 +357,8 @@ export function FullTemplatePreview({
         <TakliflaZarrinGullar invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} silentPlayback={silentPlayback} qaReducedMotion={qaReducedMotion} />
       ) : template.id === "taklifla-toglar-bagrida" ? (
         <ToglarBagridaInvitation invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} silentPlayback={silentPlayback} qaReducedMotion={qaReducedMotion} />
+      ) : template.id === "taklifla-oltin-yol" ? (
+        <TakliflaOltinYol invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} silentPlayback={silentPlayback} qaReducedMotion={qaReducedMotion} />
       ) : template.id === "taklifla-yubiley-sahifasi" ? (
         <TakliflaYubileySahifasi invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} silentPlayback={silentPlayback} qaReducedMotion={qaReducedMotion} />
       ) : template.id === "taklifla-barakali" ? (

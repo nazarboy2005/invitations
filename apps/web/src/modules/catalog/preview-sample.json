@@ -700,7 +700,13 @@
           "en": "Please contact us with any accommodation questions.",
           "ru": "По вопросам размещения свяжитесь с нами."
         },
-        "hashtag": "#JavohirVaMadina"
+        "hashtag": "#JavohirVaMadina",
+        "giftNote": {
+          "uz-Latn": "Ishtirokingiz va duoyingiz biz uchun eng qimmat sovg‘a.",
+          "uz-Cyrl": "Иштирокингиз ва дуойингиз биз учун энг қиммат совға.",
+          "en": "Your presence and blessings are the most precious gift.",
+          "ru": "Ваше присутствие и добрые пожелания — самый ценный подарок."
+        }
       }
     },
     "fotiha": {

@@ -1,0 +1,282 @@
+{
+  "name": "Oltin Yo‘l",
+  "id": "taklifla-oltin-yol",
+  "private": false,
+  "published": true,
+  "selectable": true,
+  "suggestedEventTypes": [
+    "wedding"
+  ],
+  "capture": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/taklifla.uz/templates/oltin-yol__206249889dfccf76.html",
+  "sourceBytes": 68765,
+  "sourceSha256": "aef7517a4e001ec1cc13e5898040e119976f84a6d0ccc6b680b5fb1f0b4fa09a",
+  "manifestSha256": "fbbae2e521f547ea865252a76c9c776e81d0df95a5875abf58088b1fab6c125e",
+  "fontCssSource": "Web invitations/fonts.googleapis.com/css2__5c9da2473432c269",
+  "fontCssSha256": "bfb4f24e0a386c7166935fbdcbc9adb357a56ceaa4e247bb81cd989058c35828",
+  "sourceStyleSha256": "4ceddc4964c5a38d08c6deb7519f6ba09bded49dd1eb9bf6723a44a5c537f4a2",
+  "sourceInlineScriptSha256": "3a42062153a9790f7a6a8b74b74e09a947c0ebb2236a83250ed757c396fec69a",
+  "dependencies": [
+    {
+      "url": "https://taklifla.uz/templates/oltin-yol-img/bunting.webp",
+      "archive": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/taklifla.uz/templates/oltin-yol-img/bunting.webp",
+      "package": "oltin-yol-img/bunting.webp",
+      "bytes": 81616,
+      "sha256": "1fe6dfa1d180ad9948cbf7dbb35850c003e1ee073f1f970600034fa02684b1e9"
+    },
+    {
+      "url": "https://taklifla.uz/templates/oltin-yol-img/fields.webp",
+      "archive": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/taklifla.uz/templates/oltin-yol-img/fields.webp",
+      "package": "oltin-yol-img/fields.webp",
+      "bytes": 289826,
+      "sha256": "308b8285a84ce9dcfc3a638805a6f7d819235bc20f7777fdb7b9a1e5ab83ffc0"
+    },
+    {
+      "url": "https://taklifla.uz/templates/oltin-yol-img/hero.webp",
+      "archive": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/taklifla.uz/templates/oltin-yol-img/hero.webp",
+      "package": "oltin-yol-img/hero.webp",
+      "bytes": 282434,
+      "sha256": "d7708e28b1702dbf6568d107459a2004ea69b839c20706cb7cc9c37497aeb855"
+    },
+    {
+      "url": "https://taklifla.uz/templates/oltin-yol-img/steam.webp",
+      "archive": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/taklifla.uz/templates/oltin-yol-img/steam.webp",
+      "package": "oltin-yol-img/steam.webp",
+      "bytes": 196128,
+      "sha256": "4821a008e7ce3c622af26c4fd1b173687e2fa99b87db8114ff36288aa0819f17"
+    },
+    {
+      "url": "https://taklifla.uz/templates/oltin-yol-img/terminus.webp",
+      "archive": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/taklifla.uz/templates/oltin-yol-img/terminus.webp",
+      "package": "oltin-yol-img/terminus.webp",
+      "bytes": 188104,
+      "sha256": "89efea3242154804854876c110042411d9a7840f726ff93762e71405a5e39b74"
+    },
+    {
+      "url": "https://taklifla.uz/templates/oltin-yol-img/ticket.webp",
+      "archive": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/taklifla.uz/templates/oltin-yol-img/ticket.webp",
+      "package": "oltin-yol-img/ticket.webp",
+      "bytes": 279744,
+      "sha256": "9bd7555de99d3026f303c285e5e8ac4522d405be27b99413a6c2246dd9b84dab"
+    },
+    {
+      "url": "https://taklifla.uz/templates/oltin-yol-img/train-side.webp",
+      "archive": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/taklifla.uz/templates/oltin-yol-img/train-side.webp",
+      "package": "oltin-yol-img/train-side.webp",
+      "bytes": 248576,
+      "sha256": "7a5370c01ead1a2427e2e8e9df09394e889322e5987df5e729d56d4ba738d671"
+    },
+    {
+      "url": "https://taklifla.uz/templates/oltin-yol-img/viaduct.webp",
+      "archive": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/taklifla.uz/templates/oltin-yol-img/viaduct.webp",
+      "package": "oltin-yol-img/viaduct.webp",
+      "bytes": 327498,
+      "sha256": "c73e1da342611f4602fe70ab4cd91141fb423ee216de7d1fd7f37b199554b40a"
+    },
+    {
+      "url": "https://taklifla.uz/templates/cards/oltin-yol.webp",
+      "archive": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/taklifla.uz/templates/cards/oltin-yol.webp",
+      "package": "source/catalog-reference.webp",
+      "bytes": 31286,
+      "sha256": "7683b3a10202d392c43f0d05b80016101ba7969bd698af5814c95396ab5e4288"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/marckscript/v22/nwpTtK2oNgBA3Or78gapdwuyxig_WMM.woff2",
+      "recoveredFromExactUrl": true,
+      "retrieved": "2026-10-26",
+      "package": "fonts/nwpTtK2oNgBA3Or78gapdwuyxig_WMM.woff2",
+      "bytes": 8740,
+      "sha256": "0b81e24db3e626c58446fc2ea58dbeaa5d4edb219856afe36ad902c95248d18d"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/marckscript/v22/nwpTtK2oNgBA3Or78gapdwuyyCg_.woff2",
+      "archive": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/fonts.gstatic.com/s/marckscript/v22/nwpTtK2oNgBA3Or78gapdwuyyCg_.woff2",
+      "package": "fonts/nwpTtK2oNgBA3Or78gapdwuyyCg_.woff2",
+      "bytes": 13352,
+      "sha256": "b32acf77642711e18c14d57aabeefa02ee25664a7f40929ee5f72396557b6e76"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/marckscript/v22/nwpTtK2oNgBA3Or78gapdwuyzCg_WMM.woff2",
+      "recoveredFromExactUrl": true,
+      "retrieved": "2026-10-26",
+      "package": "fonts/nwpTtK2oNgBA3Or78gapdwuyzCg_WMM.woff2",
+      "bytes": 10528,
+      "sha256": "457f5ae9dd211fb276e605a4ce3ecb35cbe1aee8bb1a54698c81d7834873ed06"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/montecarlo/v13/buEzpo6-f9X01GadLA0G4C0f_Q.woff2",
+      "archive": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/fonts.gstatic.com/s/montecarlo/v13/buEzpo6-f9X01GadLA0G4C0f_Q.woff2",
+      "package": "fonts/buEzpo6-f9X01GadLA0G4C0f_Q.woff2",
+      "bytes": 42260,
+      "sha256": "63754534a2d145578ace870c42ede47d1e69d802068d277c91e3436c8a8d9901"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/montecarlo/v13/buEzpo6-f9X01GadLA0G4CIf_exL.woff2",
+      "recoveredFromExactUrl": true,
+      "retrieved": "2026-10-26",
+      "package": "fonts/buEzpo6-f9X01GadLA0G4CIf_exL.woff2",
+      "bytes": 9876,
+      "sha256": "fb210e056e30e4ea13759e344f5e61c4538f15e042c0e389da928dd4e2d1a8a9"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/montecarlo/v13/buEzpo6-f9X01GadLA0G4CMf_exL.woff2",
+      "recoveredFromExactUrl": true,
+      "retrieved": "2026-10-26",
+      "package": "fonts/buEzpo6-f9X01GadLA0G4CMf_exL.woff2",
+      "bytes": 21376,
+      "sha256": "abf627bb3dfcfc5575e8cca4a4709cc826ca52186b50d4e3a3bb3db9f6f36ba1"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/podkova/v33/K2FxfZ1EmftJSV9VaJ3zJ7Kh.woff2",
+      "archive": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/fonts.gstatic.com/s/podkova/v33/K2FxfZ1EmftJSV9VaJ3zJ7Kh.woff2",
+      "package": "fonts/K2FxfZ1EmftJSV9VaJ3zJ7Kh.woff2",
+      "bytes": 14476,
+      "sha256": "1f35c1ed53d0d58a83e4054402e61c24e01350aa8768f6a7eb34c3ed98f50830"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/podkova/v33/K2FxfZ1EmftJSV9VaJTzJ7Kh.woff2",
+      "recoveredFromExactUrl": true,
+      "retrieved": "2026-10-26",
+      "package": "fonts/K2FxfZ1EmftJSV9VaJTzJ7Kh.woff2",
+      "bytes": 17068,
+      "sha256": "81106eb3668a2c30a894bdf40b0934f9d43460d87506df16e782dee72909befd"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/podkova/v33/K2FxfZ1EmftJSV9VaJbzJ7Kh.woff2",
+      "recoveredFromExactUrl": true,
+      "retrieved": "2026-10-26",
+      "package": "fonts/K2FxfZ1EmftJSV9VaJbzJ7Kh.woff2",
+      "bytes": 8076,
+      "sha256": "d728654ec9afb1f40a1cbd0663474e48d796dbb0843d8a896818071139c32982"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/podkova/v33/K2FxfZ1EmftJSV9VaJfzJ7Kh.woff2",
+      "recoveredFromExactUrl": true,
+      "retrieved": "2026-10-26",
+      "package": "fonts/K2FxfZ1EmftJSV9VaJfzJ7Kh.woff2",
+      "bytes": 22972,
+      "sha256": "67d99b55e748f2809314dc813529388052d06c14d60ad881702fdcaa2ae16a7b"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/podkova/v33/K2FxfZ1EmftJSV9VaJnzJw.woff2",
+      "archive": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/fonts.gstatic.com/s/podkova/v33/K2FxfZ1EmftJSV9VaJnzJw.woff2",
+      "package": "fonts/K2FxfZ1EmftJSV9VaJnzJw.woff2",
+      "bytes": 25324,
+      "sha256": "a6d49de822366c68df44e88f2da42c43b6f730dda296d97eab7d7948328a8736"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/vollkorn/v30/0yb7GDoxxrvAnPhYGxksWE8eqQ.woff2",
+      "archive": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/fonts.gstatic.com/s/vollkorn/v30/0yb7GDoxxrvAnPhYGxksWE8eqQ.woff2",
+      "package": "fonts/0yb7GDoxxrvAnPhYGxksWE8eqQ.woff2",
+      "bytes": 47528,
+      "sha256": "2b21f0fe01d929e246f513850bb1e2658eb77d9ab80c68a53a460725d66a5059"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/vollkorn/v30/0yb7GDoxxrvAnPhYGxksWEAeqSg1.woff2",
+      "recoveredFromExactUrl": true,
+      "retrieved": "2026-10-26",
+      "package": "fonts/0yb7GDoxxrvAnPhYGxksWEAeqSg1.woff2",
+      "bytes": 12272,
+      "sha256": "0bc4121b148c3afcf8cd0996282b37d6b5923276d970376002e585c495f91b91"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/vollkorn/v30/0yb7GDoxxrvAnPhYGxksWEEeqSg1.woff2",
+      "recoveredFromExactUrl": true,
+      "retrieved": "2026-10-26",
+      "package": "fonts/0yb7GDoxxrvAnPhYGxksWEEeqSg1.woff2",
+      "bytes": 41256,
+      "sha256": "5aff1d5511c936c03f1dbd2db0400e0d075b99a4417dcc2c5b11ca6fe8009325"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/vollkorn/v30/0yb7GDoxxrvAnPhYGxksWEIeqSg1.woff2",
+      "recoveredFromExactUrl": true,
+      "retrieved": "2026-10-26",
+      "package": "fonts/0yb7GDoxxrvAnPhYGxksWEIeqSg1.woff2",
+      "bytes": 30644,
+      "sha256": "1f32d034560ab86f54c27bb41b244a7b6a9fc55dfa4c9b255d896da1f7a2864d"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/vollkorn/v30/0yb7GDoxxrvAnPhYGxksWEseqSg1.woff2",
+      "recoveredFromExactUrl": true,
+      "retrieved": "2026-10-26",
+      "package": "fonts/0yb7GDoxxrvAnPhYGxksWEseqSg1.woff2",
+      "bytes": 27204,
+      "sha256": "7a764339aeea7b10f8def07604771923722ee2d7a70be08ecdce3b52780c8add"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/vollkorn/v30/0yb7GDoxxrvAnPhYGxksWEweqSg1.woff2",
+      "recoveredFromExactUrl": true,
+      "retrieved": "2026-10-26",
+      "package": "fonts/0yb7GDoxxrvAnPhYGxksWEweqSg1.woff2",
+      "bytes": 18436,
+      "sha256": "7ee50928e00bae8747347361d6e67704fc452982f15508039b91b5449bb9e329"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/vollkorn/v30/0yb9GDoxxrvAnPhYGxkkaE0GrQ.woff2",
+      "recoveredFromExactUrl": true,
+      "retrieved": "2026-10-26",
+      "package": "fonts/0yb9GDoxxrvAnPhYGxkkaE0GrQ.woff2",
+      "bytes": 28964,
+      "sha256": "ced6d4d4fbb0580e7b87ffdd7235eaa0ea13d7647b19ff1dba225beade7b8277"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/vollkorn/v30/0yb9GDoxxrvAnPhYGxkmaE0GrQ.woff2",
+      "recoveredFromExactUrl": true,
+      "retrieved": "2026-10-26",
+      "package": "fonts/0yb9GDoxxrvAnPhYGxkmaE0GrQ.woff2",
+      "bytes": 11260,
+      "sha256": "644ecf45a3ccab266280b909a27c29be9025bc4a8b67fc74e4324cb8f41de887"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/vollkorn/v30/0yb9GDoxxrvAnPhYGxknaE0GrQ.woff2",
+      "recoveredFromExactUrl": true,
+      "retrieved": "2026-10-26",
+      "package": "fonts/0yb9GDoxxrvAnPhYGxknaE0GrQ.woff2",
+      "bytes": 37620,
+      "sha256": "fd562f72811cac53a5bf14f86732e952a3f5cfd3c61896b7b809e164978fd7dd"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/vollkorn/v30/0yb9GDoxxrvAnPhYGxkpaE0.woff2",
+      "archive": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/fonts.gstatic.com/s/vollkorn/v30/0yb9GDoxxrvAnPhYGxkpaE0.woff2",
+      "package": "fonts/0yb9GDoxxrvAnPhYGxkpaE0.woff2",
+      "bytes": 46356,
+      "sha256": "3d9ff812bd542e52bb7f0c204f3a21152e22aead4572ff09722c1b38f30d7567"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/vollkorn/v30/0yb9GDoxxrvAnPhYGxkqaE0GrQ.woff2",
+      "recoveredFromExactUrl": true,
+      "retrieved": "2026-10-26",
+      "package": "fonts/0yb9GDoxxrvAnPhYGxkqaE0GrQ.woff2",
+      "bytes": 17328,
+      "sha256": "8c67f52775cfcc4b4fb38b9b80cebaaaaf9466baac27d51ab08505a8e17090ab"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/vollkorn/v30/0yb9GDoxxrvAnPhYGxktaE0GrQ.woff2",
+      "recoveredFromExactUrl": true,
+      "retrieved": "2026-10-26",
+      "package": "fonts/0yb9GDoxxrvAnPhYGxktaE0GrQ.woff2",
+      "bytes": 28016,
+      "sha256": "0a30dfec06879aabe5edaa29e9feb425557f108eb234eb8937da48f23067643d"
+    }
+  ],
+  "excluded": [
+    "Cloudflare beacon",
+    "URL customizer and demo names/date/venue/program/notes/contact",
+    "provider language and demo-wish localStorage",
+    "provider guestbook API"
+  ],
+  "missingAssets": [],
+  "sourceAdaptations": {
+    "motion": "Exact extracted motion with contract initialization/reduced-motion/focus hooks",
+    "render": "Original timetable and telegram card builders, canonical data input",
+    "close": "Original _wish-close panel builder with localized platform policy binding"
+  },
+  "sourceParts": {
+    "source/motion.js": "d93a58407150022f6f580fee0b1565e50c4d9321ead30ef16ee12b8394945ba6",
+    "source/render.js": "99ec474a53a0c70093b6bb23a5ba53cc8a0b768315df756baf4144ffbd1c214e",
+    "source/wish-close.js": "ffd00a01fd8a44bed53b2b3cf503bc0ce0c143e070a21f5850ef42681b81690d"
+  },
+  "publicationMigrations": [
+    "0187_register_taklifla_oltin_yol.sql",
+    "0188_publish_taklifla_oltin_yol.sql"
+  ]
+}

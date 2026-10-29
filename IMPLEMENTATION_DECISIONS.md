@@ -2133,3 +2133,7 @@ Development agents are distinct from production queue workers. The running app w
 ### Mountain completion (2026-10-29)
 
 - Mountain is Tog‘lar bag‘rida, a wedding template. Preserve original layered mountain motion, floral frames and two narrative scene cards. The two scene titles/text reuse the first two shared story chapters; explicit blank titles hide the corresponding scene. Independent ceremony/reception time overrides use validated editable `templateData["taklifla-toglar-bagrida"]`, falling back to the shared event time. Source action prefers the shared Google venue and otherwise goes to wishes. Migrations 0185/0186 register/publish after verification.
+
+### Oltin Yo‘l completion (2026-10-29)
+
+- Preserve the golden railway source ticket/timetable, moving train, changing backdrop, parallax, motes and telegram wishes. Source informational arrival/gift/contact/footer notes persist as localized editable `templateData["taklifla-oltin-yol"]`; these gift notes are nontransactional copy. Dress, contact links, dates, program and Google venue remain shared. No attendance-count input. Migrations 0187/0188 register/publish for weddings after verification.

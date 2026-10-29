@@ -1,0 +1,25 @@
+{
+  "date": "2026-10-29",
+  "configured": true,
+  "template": {
+    "id": "taklifla-oltin-yol",
+    "name": "Oltin Yo‘l",
+    "description": "Oltin poyezd sayohati, nafis chiptalar va harakatli temiryo‘l taklifnomasi.",
+    "previewImage": "/templates/taklifla-oltin-yol/preview.webp",
+    "previewEventType": "wedding",
+    "categoryIds": [
+      "wedding"
+    ],
+    "supportedEventTypes": [
+      "wedding"
+    ],
+    "priceMinor": 100000,
+    "currency": "UZS",
+    "accent": "#b3552f",
+    "published": true
+  },
+  "migrations": [
+    "0187_register_taklifla_oltin_yol.sql",
+    "0188_publish_taklifla_oltin_yol.sql"
+  ]
+}

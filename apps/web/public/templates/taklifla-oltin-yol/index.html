@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="uz-Latn" class="awaiting-data" data-awaiting-data>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Oltin Yo‘l — Taklifnoma</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="fonts.css"><link rel="stylesheet" href="source/template.css">
+<link rel="stylesheet" href="platform.css"></head><body>
+
+<div id="oy-bg" style="position:fixed; inset:0; background:#f6d17d; z-index:0;"></div>
+
+<div id="oy-col" style="position:relative; z-index:1; max-width:430px; margin:0 auto; background:#fbf3e2; box-shadow:0 0 70px rgba(90,55,20,.30); overflow:clip;">
+
+  <audio id="oy-audio" loop preload="none"></audio>
+
+  <!-- ── Music toggle (hidden entirely without ?audio) ── -->
+  <div style="position:sticky; top:14px; z-index:50; height:0; display:flex; justify-content:flex-end; padding-right:14px;">
+    <button type="button" id="oy-music" class="oy-music-btn" aria-label="Musiqa" style="display:none; position:relative; width:44px; height:44px; border-radius:50%; border:1.5px solid rgba(185,138,63,.7); background:rgba(251,243,226,.88); color:#7a5a2e; font-size:19px; cursor:pointer; box-shadow:0 4px 12px rgba(80,50,20,.22); align-items:center; justify-content:center;">
+      <span>♪</span>
+      <span id="oy-music-off" style="position:absolute; left:50%; top:50%; width:2px; height:24px; background:#a4693a; transform:translate(-50%,-50%) rotate(45deg); border-radius:2px;"></span>
+    </button>
+  </div>
+
+  <!-- ── Language switcher (top-left) ── -->
+  <div class="oy-lang" role="group" aria-label="Til / Language">
+    <button type="button" data-lang="uz-Latn" class="on">UZ</button>
+    <button type="button" data-lang="uz-Cyrl">ЎЗ</button>
+    <button type="button" data-lang="en">EN</button>
+    <button type="button" data-lang="ru">RU</button>
+  </div>
+
+  <!-- ============ HERO — DEPARTURE ============ -->
+  <section style="position:relative; min-height:100svh; display:flex; flex-direction:column; justify-content:flex-end; overflow:hidden;">
+    <div data-para="0.11" style="position:absolute; inset:-13% 0; background:url(oltin-yol-img/hero.webp) center/cover no-repeat; will-change:transform;"></div>
+    <div style="position:absolute; inset:0; background:linear-gradient(180deg,rgba(63,32,14,.22) 0%,rgba(63,32,14,0) 26%,rgba(63,32,14,0) 52%,rgba(58,30,14,.55) 100%);"></div>
+    <div id="oy-hero-motes" aria-hidden="true" style="position:absolute; inset:0; pointer-events:none;"></div>
+    <div style="position:relative; z-index:2; text-align:center; padding:0 26px 34px; color:#fff3da;">
+      <div data-i18n="hero_kicker" style="font:600 11px 'Podkova',serif; letter-spacing:.34em; color:rgba(255,236,200,.9); text-shadow:0 1px 8px rgba(50,25,10,.5);">OLTIN YO'L · 1-PLATFORMA</div>
+      <h1 id="oy-hero-names" tabindex="-1" class="oy-hero-names" style="margin:10px 0 2px; font-family:'MonteCarlo','Marck Script',cursive; font-weight:400; font-size:58px; line-height:1.05; background:linear-gradient(100deg,#f7e7c3 20%,#fffbe9 38%,#e8b04b 50%,#f7e7c3 64%); background-size:280% auto; -webkit-background-clip:text; background-clip:text; color:transparent; animation:gl-shimmer 6.5s linear infinite;"></h1>
+      <div data-i18n="hero_sub" style="font:600 12px 'Podkova',serif; letter-spacing:.42em; margin:8px 0 14px; color:rgba(255,240,210,.95); text-shadow:0 1px 8px rgba(50,25,10,.5);">TURMUSH QURMOQDALAR</div>
+      <div style="display:flex; align-items:center; justify-content:center; gap:12px;">
+        <span style="display:block; width:44px; height:1.5px; background:rgba(255,230,180,.7);"></span>
+        <span id="oy-hero-date" style="font:700 21px 'Podkova',serif; letter-spacing:.16em; text-shadow:0 1px 8px rgba(50,25,10,.5);"></span>
+        <span style="display:block; width:44px; height:1.5px; background:rgba(255,230,180,.7);"></span>
+      </div>
+      <div style="margin-top:26px; animation:gl-bob 2.4s ease-in-out infinite;">
+        <div data-i18n="scroll_hint" style="font:600 10px 'Podkova',serif; letter-spacing:.3em; color:rgba(255,236,200,.85);">PASTGA — POYEZD JO'NAYDI</div>
+        <div style="font-size:17px; margin-top:3px; color:rgba(255,236,200,.85);">▾</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ JOURNEY STRIP 1 ============ -->
+  <section style="position:relative; height:36vh; min-height:235px; overflow:hidden;">
+    <div data-para="0.14" style="position:absolute; inset:-18% 0; background:url(oltin-yol-img/fields.webp) center 55%/cover no-repeat; will-change:transform;"></div>
+    <div style="position:absolute; inset:0; background:linear-gradient(180deg,#603d23 0%,rgba(96,61,35,0) 30%,rgba(251,243,226,0) 74%,#fbf3e2 100%);"></div>
+    <div data-i18n="mile1" style="position:absolute; right:14px; bottom:14px; background:rgba(47,90,82,.85); color:#f7ecd6; font:600 9px 'Podkova',serif; letter-spacing:.24em; padding:5px 11px; border-radius:6px; border:1.5px solid rgba(247,236,214,.55);">KM 1 · SHAHARDAN YO'LGA</div>
+  </section>
+
+  <!-- ============ INVITATION ============ -->
+  <section style="position:relative; padding:58px 0 62px;">
+    <div style="position:relative; display:flex; flex-direction:column; align-items:center; gap:8px; margin-bottom:28px;">
+      <div style="position:absolute; left:4px; top:32px; width:13px; height:13px; border-radius:50%; background:#fbf3e2; border:4px solid #2f5a52; box-shadow:0 2px 6px rgba(60,40,20,.3);"></div>
+      <div data-i18n="stop1_label" style="font:600 10.5px 'Podkova',serif; letter-spacing:.3em; color:#a8895c;">BEKAT № 1</div>
+      <div data-i18n="stop1_title" style="background:#2f5a52; color:#f7ecd6; border:3px solid #f7ecd6; box-shadow:0 0 0 2.5px #b98a3f,0 8px 18px rgba(60,40,20,.28); border-radius:10px; padding:9px 26px; font:700 19px 'Podkova',serif; letter-spacing:.15em;">TAKLIFNOMA</div>
+    </div>
+    <div data-reveal style="margin:0 24px;">
+      <div style="background:#fdeec3; border:1.5px solid rgba(185,138,63,.5); border-bottom:2px dashed rgba(150,110,55,.55); border-radius:14px 14px 0 0; padding:12px 16px; display:flex; align-items:center; justify-content:space-between; gap:10px; box-shadow:0 -4px 14px rgba(96,64,28,.08);">
+        <span data-i18n="ticket_stub_ry" style="font:600 9px 'Podkova',serif; letter-spacing:.2em; color:#a8895c;">OLTIN YO'L T.Y.</span>
+        <span data-i18n="ticket_stub_admit" style="font:800 13px 'Podkova',serif; letter-spacing:.26em; color:#b3552f;">IKKI KISHILIK</span>
+        <span style="width:16px; height:16px; border-radius:50%; background:#fbf3e2; box-shadow:inset 0 1px 3px rgba(60,40,20,.5),0 0 0 1.5px rgba(150,110,55,.4);"></span>
+      </div>
+      <div style="position:relative; aspect-ratio:5/7; background:url(oltin-yol-img/ticket.webp) center/100% 100% no-repeat; border-radius:0 0 14px 14px; overflow:hidden; box-shadow:0 16px 34px rgba(96,64,28,.18); display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:15% 23%; box-sizing:border-box;">
+        <div data-i18n="ticket_greeting" style="font:italic 600 14px 'Vollkorn',serif; color:#7a5f42;">Aziz do'stlar va yaqinlar,</div>
+        <div data-i18n="ticket_lead" style="font:15px/1.6 'Vollkorn',serif; color:#5b4530; margin-top:10px;">quvonchga to'la qalb bilan sizni nikoh to'yimizga birga yo'l olishga taklif etamiz</div>
+        <div id="oy-ticket-names" class="oy-ticket-names" style="font-family:'MonteCarlo','Marck Script',cursive; font-size:43px; line-height:1.06; color:#b3552f; margin:14px -13% 10px; max-width:126%;"></div>
+        <div style="display:flex; align-items:center; gap:9px; margin-bottom:12px;">
+          <span style="display:block; width:26px; height:1px; background:#b98a3f;"></span>
+          <span style="width:7px; height:7px; background:#b98a3f; transform:rotate(45deg);"></span>
+          <span style="display:block; width:26px; height:1px; background:#b98a3f;"></span>
+        </div>
+        <div id="oy-ticket-date" style="font:700 17px 'Podkova',serif; letter-spacing:.12em; color:#3f2d20;"></div>
+        <div style="font:italic 14px 'Vollkorn',serif; color:#7a5f42; margin-top:5px;"><span data-i18n="ticket_depart_label">jo'nash</span> <span id="oy-ticket-time"></span> · <span id="oy-ticket-venue"></span></div>
+        <div style="display:flex; gap:14px; margin-top:16px; padding-top:12px; border-top:1.5px dashed rgba(150,110,55,.5);">
+          <div><div data-i18n="ticket_class_label" style="font:600 8px 'Podkova',serif; letter-spacing:.18em; color:#a8895c;">KLASS</div><div data-i18n="ticket_class_val" style="font:700 13px 'Podkova',serif; color:#3f2d20;">OLIY</div></div>
+          <div><div data-i18n="ticket_seat_label" style="font:600 8px 'Podkova',serif; letter-spacing:.18em; color:#a8895c;">O'RIN</div><div style="font:700 13px 'Podkova',serif; color:#3f2d20;">№ 2</div></div>
+          <div><div data-i18n="ticket_line_label" style="font:600 8px 'Podkova',serif; letter-spacing:.18em; color:#a8895c;">YO'NALISH</div><div data-i18n="ticket_line_val" style="font:700 13px 'Podkova',serif; color:#3f2d20;">OLTIN</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ JOURNEY STRIP 2 ============ -->
+  <section style="position:relative; height:32vh; min-height:215px; overflow:hidden;">
+    <div data-para="0.14" style="position:absolute; inset:-18% 0; background:url(oltin-yol-img/viaduct.webp) center 62%/cover no-repeat; will-change:transform;"></div>
+    <div style="position:absolute; inset:0; background:linear-gradient(180deg,#fbf3e2 0%,rgba(251,243,226,0) 13%,rgba(251,243,226,0) 87%,#fbf3e2 100%);"></div>
+    <div data-i18n="mile2" style="position:absolute; right:14px; bottom:14px; background:rgba(47,90,82,.85); color:#f7ecd6; font:600 9px 'Podkova',serif; letter-spacing:.24em; padding:5px 11px; border-radius:6px; border:1.5px solid rgba(247,236,214,.55);">KM 14 · TOSH KO'PRIK</div>
+  </section>
+
+  <!-- ============ TIMETABLE ============ -->
+  <section id="oy-timetable-section" style="position:relative; padding:50px 0 62px;">
+    <img src="oltin-yol-img/bunting.webp" alt="" style="width:100%; display:block; margin:-40px 0 6px; transform-origin:50% 0; animation:gl-sway 7s ease-in-out infinite; pointer-events:none;">
+    <div style="position:relative; display:flex; flex-direction:column; align-items:center; gap:8px; margin-bottom:28px;">
+      <div style="position:absolute; left:4px; top:32px; width:13px; height:13px; border-radius:50%; background:#fbf3e2; border:4px solid #2f5a52; box-shadow:0 2px 6px rgba(60,40,20,.3);"></div>
+      <div data-i18n="stop2_label" style="font:600 10.5px 'Podkova',serif; letter-spacing:.3em; color:#a8895c;">BEKAT № 2</div>
+      <div data-i18n="stop2_title" style="background:#2f5a52; color:#f7ecd6; border:3px solid #f7ecd6; box-shadow:0 0 0 2.5px #b98a3f,0 8px 18px rgba(60,40,20,.28); border-radius:10px; padding:9px 26px; font:700 19px 'Podkova',serif; letter-spacing:.15em;">JADVAL</div>
+      <div data-i18n="stop2_sub" style="font:italic 14px 'Vollkorn',serif; color:#8a7454;">kunimizning yo'l xaritasi</div>
+    </div>
+    <div data-reveal style="margin:0 24px; background:#fdf6e6; border:1.5px solid rgba(185,138,63,.4); border-radius:16px; padding:26px 20px 14px 24px; box-shadow:0 12px 28px rgba(96,64,28,.12);">
+      <div style="position:relative;">
+        <div style="position:absolute; left:9px; top:10px; bottom:26px; width:3px; background:repeating-linear-gradient(to bottom,#c9a25c 0 7px,rgba(201,162,92,0) 7px 13px);"></div>
+        <div id="oy-stops">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ JOURNEY STRIP 3 ============ -->
+  <section style="position:relative; height:32vh; min-height:215px; overflow:hidden;">
+    <div data-para="0.14" style="position:absolute; inset:-18% 0; background:url(oltin-yol-img/fields.webp) 55% 68%/170% no-repeat; will-change:transform;"></div>
+    <div style="position:absolute; inset:0; background:linear-gradient(180deg,#fbf3e2 0%,rgba(138,155,110,.10) 14%,rgba(138,155,110,.10) 86%,#fbf3e2 100%);"></div>
+    <div data-i18n="mile3" style="position:absolute; right:14px; bottom:14px; background:rgba(47,90,82,.85); color:#f7ecd6; font:600 9px 'Podkova',serif; letter-spacing:.24em; padding:5px 11px; border-radius:6px; border:1.5px solid rgba(247,236,214,.55);">KM 22 · BOG' BEKATI</div>
+  </section>
+
+  <!-- ============ VENUE ============ -->
+  <section id="oy-venue-section" style="position:relative; padding:56px 0 60px;">
+    <div style="position:relative; display:flex; flex-direction:column; align-items:center; gap:8px; margin-bottom:26px;">
+      <div style="position:absolute; left:4px; top:32px; width:13px; height:13px; border-radius:50%; background:#fbf3e2; border:4px solid #2f5a52; box-shadow:0 2px 6px rgba(60,40,20,.3);"></div>
+      <div data-i18n="stop3_label" style="font:600 10.5px 'Podkova',serif; letter-spacing:.3em; color:#a8895c;">BEKAT № 3</div>
+      <div data-i18n="stop3_title" style="background:#2f5a52; color:#f7ecd6; border:3px solid #f7ecd6; box-shadow:0 0 0 2.5px #b98a3f,0 8px 18px rgba(60,40,20,.28); border-radius:10px; padding:9px 26px; font:700 19px 'Podkova',serif; letter-spacing:.15em;">MANZIL</div>
+    </div>
+    <div data-reveal style="margin:0 24px; text-align:center; background:#fdf6e6; border:1.5px solid rgba(185,138,63,.4); border-radius:16px; padding:28px 24px; box-shadow:0 12px 28px rgba(96,64,28,.12);">
+      <div data-i18n="venue_kicker" style="font:600 10px 'Podkova',serif; letter-spacing:.3em; color:#a8895c;">BARCHA POYEZDLAR YETIB KELADIGAN MANZIL</div>
+      <div id="oy-venue-name" style="font:700 26px 'Podkova',serif; letter-spacing:.06em; color:#3f2d20; margin:10px 0 4px;"></div>
+      <div id="oy-venue-addr" style="font:italic 15px 'Vollkorn',serif; color:#6b5949;"></div>
+      <div id="oy-venue-note-wrap"><div id="oy-venue-note"  style="font:14px/1.55 'Vollkorn',serif; color:#7a5f42; margin-top:10px;"></div></div>
+      <a id="oy-map" class="oy-map-btn" href="#" target="_blank" rel="noopener noreferrer" style="display:inline-block; margin-top:18px; background:#2f5a52; color:#f7ecd6; border:2px solid rgba(247,236,214,.8); box-shadow:0 0 0 2px #b98a3f,0 8px 18px rgba(47,90,82,.35); border-radius:10px; padding:13px 30px; font:700 14px 'Podkova',serif; letter-spacing:.2em; cursor:pointer;"><span data-i18n="map_btn">XARITANI OCHISH →</span></a>
+    </div>
+  </section>
+
+  <!-- ============ GOOD TO KNOW ============ -->
+  <section id="oy-info-section" style="position:relative; padding:26px 0 62px;">
+    <div style="position:relative; display:flex; flex-direction:column; align-items:center; gap:8px; margin-bottom:26px;">
+      <div style="position:absolute; left:4px; top:32px; width:13px; height:13px; border-radius:50%; background:#fbf3e2; border:4px solid #2f5a52; box-shadow:0 2px 6px rgba(60,40,20,.3);"></div>
+      <div data-i18n="stop4_label" style="font:600 10.5px 'Podkova',serif; letter-spacing:.3em; color:#a8895c;">BEKAT № 4</div>
+      <div data-i18n="stop4_title" style="background:#2f5a52; color:#f7ecd6; border:3px solid #f7ecd6; box-shadow:0 0 0 2.5px #b98a3f,0 8px 18px rgba(60,40,20,.28); border-radius:10px; padding:9px 26px; font:700 19px 'Podkova',serif; letter-spacing:.15em;">BILIB QO'YING</div>
+    </div>
+    <div data-reveal class="oy-tag" style="margin:0 24px; background:#efd9a8; border-radius:14px; padding:24px 22px 20px 52px; box-shadow:0 12px 28px rgba(96,64,28,.14); transform:rotate(-.5deg);">
+      <div style="position:absolute; left:16px; top:50%; transform:translateY(-50%); width:15px; height:15px; border-radius:50%; background:#fbf3e2; box-shadow:inset 0 1px 3px rgba(60,40,20,.5),0 0 0 4px #c9a25c;"></div>
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div id="oy-info-dress"><div data-i18n="tag_dress_label" style="font:600 9.5px 'Podkova',serif; letter-spacing:.24em; color:#8a6a34;">KIYIM</div><div id="oy-info-dress-text"  style="font:15px/1.5 'Vollkorn',serif; color:#4a3626;"></div></div>
+        <div id="oy-div-arrival" style="border-top:1.5px dotted rgba(120,85,40,.4); padding-top:12px;"><div id="oy-info-arrival"><div data-i18n="tag_arrival_label" style="font:600 9.5px 'Podkova',serif; letter-spacing:.24em; color:#8a6a34;">JO'NASH VAQTI</div><div id="oy-info-arrival-text"  style="font:15px/1.5 'Vollkorn',serif; color:#4a3626;"></div></div></div>
+        <div id="oy-div-gifts" style="border-top:1.5px dotted rgba(120,85,40,.4); padding-top:12px;"><div id="oy-info-gifts"><div data-i18n="tag_gifts_label" style="font:600 9.5px 'Podkova',serif; letter-spacing:.24em; color:#8a6a34;">SOVG'ALAR</div><div id="oy-info-gifts-text"  style="font:15px/1.5 'Vollkorn',serif; color:#4a3626;"></div></div></div>
+        <div id="oy-div-contact" style="border-top:1.5px dotted rgba(120,85,40,.4); padding-top:12px;"><div id="oy-info-contact"><div data-i18n="tag_contact_label" style="font:600 9.5px 'Podkova',serif; letter-spacing:.24em; color:#8a6a34;">BEKAT BOSHLIG'I</div><div id="oy-info-contact-text"  style="font:15px/1.5 'Vollkorn',serif; color:#4a3626;"></div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TELEGRAMS (WISHES) ============ -->
+  <section id="oy-wishes-section" style="position:relative; padding:26px 0 66px;">
+    <div style="position:relative; display:flex; flex-direction:column; align-items:center; gap:8px; margin-bottom:26px;">
+      <div style="position:absolute; left:4px; top:32px; width:13px; height:13px; border-radius:50%; background:#fbf3e2; border:4px solid #2f5a52; box-shadow:0 2px 6px rgba(60,40,20,.3);"></div>
+      <div data-i18n="stop5_label" style="font:600 10.5px 'Podkova',serif; letter-spacing:.3em; color:#a8895c;">BEKAT № 5</div>
+      <div data-i18n="stop5_title" style="background:#2f5a52; color:#f7ecd6; border:3px solid #f7ecd6; box-shadow:0 0 0 2.5px #b98a3f,0 8px 18px rgba(60,40,20,.28); border-radius:10px; padding:9px 26px; font:700 19px 'Podkova',serif; letter-spacing:.15em;">TELEGRAMMALAR</div>
+      <div data-i18n="stop5_sub" style="font:italic 14px 'Vollkorn',serif; color:#8a7454; text-align:center; max-width:290px;">Yangi oilaga ezgu tilaklaringizni yo‘llang.</div>
+    </div>
+    <div data-reveal style="margin:0 24px 22px; background:#fdf6e6; border:1.5px solid rgba(185,138,63,.4); border-radius:6px; box-shadow:0 12px 28px rgba(96,64,28,.12); overflow:hidden;">
+      <div style="display:flex; align-items:center; justify-content:space-between; background:#b3552f; padding:9px 16px;">
+        <span data-i18n="telegraph_header" style="font:600 9px 'Podkova',serif; letter-spacing:.22em; color:#ffe9c9;">OLTIN YO'L TELEGRAFI</span>
+        <span data-i18n="telegraph_badge" style="font:800 9px 'Podkova',serif; letter-spacing:.22em; color:#b3552f; background:#ffe9c9; padding:3px 8px; border-radius:3px;">SHOSHILINCH</span>
+      </div>
+      <form id="oy-wish-form" class="wish-form" style="padding:18px 18px 20px; display:flex; flex-direction:column; gap:14px;">
+        <div>
+          <div data-i18n="telegraph_from_label" style="font:600 9px 'Podkova',serif; letter-spacing:.22em; color:#a8895c; margin-bottom:4px;">KIMDAN</div>
+          <input name="wname" required maxlength="100" autocomplete="name" aria-label="Ismingiz" data-i18n-ph="wish_name_ph" placeholder="Ismingiz" style="width:100%; box-sizing:border-box; background:transparent; border:none; border-bottom:1.5px dashed rgba(150,110,55,.6); padding:6px 2px; font:16px 'Vollkorn',serif; color:#3f2d20; outline:none;">
+        </div>
+        <div>
+          <div data-i18n="telegraph_msg_label" style="font:600 9px 'Podkova',serif; letter-spacing:.22em; color:#a8895c; margin-bottom:4px;">XABAR</div>
+          <textarea name="wmsg" required maxlength="2000" aria-label="Xabar" rows="3" data-i18n-ph="wish_msg_ph" placeholder="Yo'l oldidan iliq so'zlar…" style="width:100%; box-sizing:border-box; background:transparent; border:none; border-bottom:1.5px dashed rgba(150,110,55,.6); padding:6px 2px; font:16px/1.5 'Vollkorn',serif; color:#3f2d20; outline:none; resize:vertical;"></textarea>
+        </div>
+        <button type="submit" class="oy-send-btn" style="background:#d95b43; color:#fff6e6; border:none; border-radius:8px; padding:14px; font:700 14px 'Podkova',serif; letter-spacing:.22em; cursor:pointer; box-shadow:0 6px 16px rgba(179,85,47,.4);"><span data-i18n="telegraph_send">TELEGRAMMA YUBORISH</span></button>
+      </form>
+    </div>
+    <div id="oy-wish-confirm" role="status" aria-live="polite" data-i18n="wish_thanks" style="display:none; margin:0 24px 18px; text-align:center; font-style:italic; font-size:14px; color:#8a6a34;">Tilagingiz yuborildi. Taklifnoma egasi tasdiqlagach ko‘rinadi.</div>
+    <div id="oy-wish-empty" data-i18n="wish_empty" style="margin:0 24px; text-align:center; font:italic 14.5px 'Vollkorn',serif; color:#a08a68;">Hozircha telegrammalar yo'q — birinchi bo'lib tilak yo'llang.</div>
+    <div id="oy-wish-list" style="margin:0 24px; display:flex; flex-direction:column; gap:13px;"></div>
+  </section>
+
+  <!-- ============ COUNTDOWN — TERMINUS ============ -->
+  <section id="oy-countdown-section" style="position:relative; min-height:94svh; display:flex; flex-direction:column; justify-content:center; overflow:hidden;">
+    <div data-para="0.10" style="position:absolute; inset:-12% 0; background:url(oltin-yol-img/terminus.webp) center/cover no-repeat; will-change:transform;"></div>
+    <div style="position:absolute; inset:0; background:linear-gradient(180deg,#fbf3e2 0%,rgba(251,243,226,0) 14%,rgba(45,26,22,0) 72%,rgba(45,26,22,.55) 100%);"></div>
+    <img src="oltin-yol-img/bunting.webp" alt="" style="position:absolute; top:7%; left:-2%; width:104%; transform-origin:50% 0; animation:gl-sway 8s ease-in-out infinite; pointer-events:none;">
+    <img src="oltin-yol-img/steam.webp" alt="" style="position:absolute; right:5%; top:17%; width:190px; opacity:.8; animation:gl-drift 14s ease-in-out infinite; pointer-events:none;">
+    <div style="position:absolute; left:8%; bottom:14%; width:90px; height:90px; background:radial-gradient(circle,rgba(255,190,110,.55),rgba(255,190,110,0) 70%); animation:gl-flicker 3.2s ease-in-out infinite; pointer-events:none;"></div>
+    <div style="position:absolute; right:12%; bottom:12%; width:70px; height:70px; background:radial-gradient(circle,rgba(255,190,110,.5),rgba(255,190,110,0) 70%); animation:gl-flicker 4.1s ease-in-out 1.2s infinite; pointer-events:none;"></div>
+    <div id="oy-cd-motes" aria-hidden="true" style="position:absolute; inset:0; pointer-events:none;"></div>
+    <div style="position:relative; z-index:2; text-align:center; padding:70px 22px;">
+      <div style="display:inline-flex; flex-direction:column; align-items:center; gap:8px;">
+        <div data-i18n="cd_kicker" style="font:600 10.5px 'Podkova',serif; letter-spacing:.3em; color:#fff0d4; text-shadow:0 1px 8px rgba(60,30,20,.6);">OXIRGI BEKAT</div>
+        <div data-i18n="cd_badge" style="background:#b3452f; color:#ffe9c9; border:3px solid #ffe9c9; box-shadow:0 0 0 2.5px #8a6a34,0 8px 20px rgba(60,25,15,.4); border-radius:10px; padding:10px 30px; font:800 21px 'Podkova',serif; letter-spacing:.2em;">VISOL BEKATI</div>
+      </div>
+      <div data-i18n="cd_arriving" style="font:600 11px 'Podkova',serif; letter-spacing:.36em; color:#fff0d4; margin:26px 0 14px; text-shadow:0 1px 8px rgba(60,30,20,.6);">YETIB KELISHGA QOLDI</div>
+      <div style="display:flex; gap:9px; justify-content:center;">
+        <div style="background:rgba(56,36,60,.82); border:1.5px solid rgba(255,220,170,.55); border-radius:10px; min-width:68px; padding:13px 6px 10px; backdrop-filter:blur(3px);"><div id="oy-cd-d" style="font:800 34px 'Podkova',serif; color:#ffe6b8; line-height:1;">–</div><div data-i18n="cd_days" style="font:600 8.5px 'Podkova',serif; letter-spacing:.24em; color:rgba(255,230,190,.8); margin-top:6px;">KUN</div></div>
+        <div style="background:rgba(56,36,60,.82); border:1.5px solid rgba(255,220,170,.55); border-radius:10px; min-width:68px; padding:13px 6px 10px; backdrop-filter:blur(3px);"><div id="oy-cd-h" style="font:800 34px 'Podkova',serif; color:#ffe6b8; line-height:1;">–</div><div data-i18n="cd_hours" style="font:600 8.5px 'Podkova',serif; letter-spacing:.24em; color:rgba(255,230,190,.8); margin-top:6px;">SOAT</div></div>
+        <div style="background:rgba(56,36,60,.82); border:1.5px solid rgba(255,220,170,.55); border-radius:10px; min-width:68px; padding:13px 6px 10px; backdrop-filter:blur(3px);"><div id="oy-cd-m" style="font:800 34px 'Podkova',serif; color:#ffe6b8; line-height:1;">–</div><div data-i18n="cd_mins" style="font:600 8.5px 'Podkova',serif; letter-spacing:.24em; color:rgba(255,230,190,.8); margin-top:6px;">DAQ</div></div>
+        <div style="background:rgba(56,36,60,.82); border:1.5px solid rgba(255,220,170,.55); border-radius:10px; min-width:68px; padding:13px 6px 10px; backdrop-filter:blur(3px);"><div id="oy-cd-s" style="font:800 34px 'Podkova',serif; color:#ffe6b8; line-height:1;">–</div><div data-i18n="cd_secs" style="font:600 8.5px 'Podkova',serif; letter-spacing:.24em; color:rgba(255,230,190,.8); margin-top:6px;">SON</div></div>
+      </div>
+      <div style="font:italic 16px 'Vollkorn',serif; color:#fff0d4; margin-top:22px; text-shadow:0 1px 8px rgba(60,30,20,.6);"><span data-i18n="cd_foot_label">bazm boshlanishiga —</span> <span id="oy-cd-foot-date"></span></div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER — DUSK PLATFORM ============ -->
+  <footer style="position:relative; overflow:hidden; padding:64px 24px 56px; text-align:center;">
+    <div style="position:absolute; inset:0; background:url(oltin-yol-img/terminus.webp) center 88%/cover no-repeat;"></div>
+    <div style="position:absolute; inset:0; background:linear-gradient(180deg,rgba(44,25,22,.60) 0%,rgba(36,20,18,.85) 55%,rgba(28,15,13,.94) 100%);"></div>
+    <div style="position:absolute; left:14%; top:30%; width:60px; height:60px; background:radial-gradient(circle,rgba(255,190,110,.5),rgba(255,190,110,0) 70%); animation:gl-flicker 3.6s ease-in-out infinite; pointer-events:none;"></div>
+    <div style="position:absolute; right:14%; top:26%; width:52px; height:52px; background:radial-gradient(circle,rgba(255,190,110,.45),rgba(255,190,110,0) 70%); animation:gl-flicker 4.4s ease-in-out .9s infinite; pointer-events:none;"></div>
+    <div style="position:relative; z-index:2;">
+      <img src="oltin-yol-img/train-side.webp" alt="" style="width:215px; max-width:70%; display:block; margin:0 auto 6px; filter:drop-shadow(0 8px 16px rgba(0,0,0,.45));">
+      <div data-i18n="foot_rest" style="font:600 9.5px 'Podkova',serif; letter-spacing:.3em; color:rgba(255,224,170,.75);">POYEZD DAM OLMOQDA · BARCHA YO'LOVCHILAR UYIDA</div>
+      <div id="oy-foot-names" class="oy-foot-names" style="font-family:'MonteCarlo','Marck Script',cursive; font-size:40px; color:#ffd9a0; margin:16px 0 4px; line-height:1;"></div>
+      <div id="oy-foot-date" style="font:700 12px 'Podkova',serif; letter-spacing:.3em; color:rgba(255,236,200,.9);"></div>
+      <div style="width:46px; height:1.5px; background:rgba(255,224,170,.4); margin:18px auto;"></div>
+      <div id="oy-foot-note-wrap"><div id="oy-foot-note" data-i18n="footer_note_default" style="font:italic 14px 'Vollkorn',serif; color:rgba(255,236,200,.65);">safar tugadi — yangisi boshlanadi</div></div>
+    </div>
+  </footer>
+
+  <!-- ── THE SPINE (dashed railway track + train marker) ── -->
+  <div id="oy-spine" style="position:absolute; top:0; bottom:0; left:9px; width:6px; z-index:1; pointer-events:none; border-left:2px solid rgba(90,70,45,.30); border-right:2px solid rgba(90,70,45,.30); background:repeating-linear-gradient(to bottom,rgba(90,70,45,.26) 0 2.5px,transparent 2.5px 15px);"></div>
+  <div id="oy-marker" style="position:absolute; top:0; left:14px; width:56px; margin-left:-28px; z-index:6; transform:translate3d(0,14px,0); will-change:transform; pointer-events:none;">
+    <img src="oltin-yol-img/train-side.webp" alt="" style="width:56px; display:block; transform:rotate(-90deg); filter:drop-shadow(2px 2px 4px rgba(60,35,15,.45));">
+  </div>
+</div>
+
+<!-- ============ SPLASH ============ -->
+<div id="oy-splash" style="position:fixed; inset:0; z-index:90; overflow:hidden; display:flex; align-items:center; justify-content:center; transition:opacity .9s ease, transform 1.1s cubic-bezier(.5,0,.2,1);">
+  <div style="position:absolute; inset:-30px; background:url(oltin-yol-img/hero.webp) center 30%/cover no-repeat; filter:blur(16px) brightness(.5) saturate(1.15); transform:scale(1.06);"></div>
+  <div style="position:absolute; inset:0; background:radial-gradient(circle at 50% 42%,rgba(60,32,14,0) 0%,rgba(40,22,12,.55) 100%);"></div>
+  <div style="position:relative; width:100%; max-width:430px; box-sizing:border-box; text-align:center; padding:30px; animation:gl-splash-in .8s cubic-bezier(.22,.8,.32,1) both;">
+    <div class="oy-monogram" style="width:118px; height:118px; border-radius:50%; border:2px solid rgba(232,200,135,.9); box-shadow:0 0 0 6px rgba(232,200,135,.18),0 12px 40px rgba(0,0,0,.4); margin:0 auto; display:flex; align-items:center; justify-content:center;">
+      <span id="oy-splash-monogram" style="font-family:'MonteCarlo','Marck Script',cursive; font-size:52px; color:#f7e7c3; line-height:1; padding-bottom:8px;"></span>
+    </div>
+    <div data-i18n="splash_wordmark" style="font:600 11px 'Podkova',serif; letter-spacing:.42em; color:rgba(255,236,200,.9); margin:22px 0 6px;">OLTIN YO'L</div>
+    <div data-i18n="splash_sub" style="font:italic 15px 'Vollkorn',serif; color:rgba(255,236,200,.75);">nikoh to'yiga kichik sayohat</div>
+    <div id="oy-splash-names" class="oy-splash-names" style="font-family:'MonteCarlo','Marck Script',cursive; font-size:44px; color:#ffd9a0; margin:8px auto 26px; line-height:1.05; max-width:100%;"></div>
+    <button type="button" id="oy-open" class="oy-splash-btn"><span data-i18n="splash_open">TAKLIFNOMANI OCHISH</span></button>
+    <div data-i18n="splash_hint" style="font:600 9px 'Podkova',serif; letter-spacing:.26em; color:rgba(255,236,200,.55); margin-top:14px;">CHIPTALARINGIZNI TAYYORLAB QO'YING</div>
+  </div>
+</div>
+
+
+<script src="labels.js"></script><script src="source/motion.js"></script><script src="source/render.js"></script><script src="source/wish-close.js"></script><script src="bridge.js"></script>
+</body></html>
