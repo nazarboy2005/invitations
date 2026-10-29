@@ -1,0 +1,25 @@
+{
+  "date": "2026-10-29",
+  "configured": true,
+  "template": {
+    "id": "taklifla-qogoz-ertagi",
+    "name": "Qog‘oz ertagi",
+    "description": "Qog‘oz kitob sahifalari, ochiluvchi muqova va qatlamli nikoh manzaralari.",
+    "previewImage": "/templates/taklifla-qogoz-ertagi/preview.webp",
+    "previewEventType": "wedding",
+    "categoryIds": [
+      "wedding"
+    ],
+    "supportedEventTypes": [
+      "wedding"
+    ],
+    "priceMinor": 100000,
+    "currency": "UZS",
+    "accent": "#c9a24b",
+    "published": true
+  },
+  "migrations": [
+    "0193_register_taklifla_qogoz_ertagi.sql",
+    "0194_publish_taklifla_qogoz_ertagi.sql"
+  ]
+}

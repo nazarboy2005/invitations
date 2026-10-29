@@ -24,7 +24,7 @@ untouched. Application deployment and live payment activation are excluded.
 | Oltin Yo‘l | taklifla-oltin-yol | Private package | Complete — renderer/bridge, notes, timetable/wishes and full source motion integrated; published 0187/0188 |
 | Osmon | taklifla-osmon | Private package | Complete — exact airplane recovered, editable notes/shared wishes/closure restored; published 0189/0190 |
 | Pari | taklifla-parilar-ertagi | Private package | Complete — broken body extraction repaired; full renderer/bridge and editable labels/arrival integrated; published 0191/0192 |
-| Qog‘oz | taklifla-qogoz-ertagi | Private package | Pending |
+| Qog‘oz | taklifla-qogoz-ertagi | Private package | Complete — full bridge, fitting/closure, editable notes and routes restored; published 0193/0194 |
 | Sakura | taklifla-sakura-guli | Private package | Pending |
 | Sharlar | taklifla-sharlar | Private package | Pending |
 | Starry Night | taklifla-yulduzli-tun | Private package | Pending |
@@ -146,3 +146,9 @@ the individual commit below each completed row.
 - Repaired extraction that matched `<body>` inside a script comment and produced an empty design. Full native page is restored; exact CSS/eleven images/twelve fonts and source tunnel/opening/parallax/reveal/petals retained. Root CSS resolves original artwork paths correctly; source pin/arrow markup preserved.
 - Added full typed bridge and route integration, editable/persistent localized arrival note and stable-ID supplementary program labels, shared canonical wedding examples/wishes, shared maps/dress/contacts/identity and real moderated wishes. No sample identities/storage or placeholder audio served.
 - 25 shared/package checks, source comparisons at 320/390/1280 with six layers and active motion, four locales/long/empty/seven-event/reduced/failure/preview checks, real label/arrival save/reopen/studio/publication/public/maps/pending wishes and switching, actual audio, covers, typecheck/build pass. Migrations 0191/0192 publish only this wedding design. Evidence: `docs/templates/taklifla-audit/pari*`.
+
+## Qog‘oz ertagi integration
+
+- Complete source paper-book DOM/inline CSS, twelve images/twelve fonts, cover turn, scene parallax/desk color/reveals/bobbing/fitting retained. Original timeline/wish builders and 24-hour close panel restored; real bridge and all routes added.
+- Contact/footer notes are validated, editable and persistent; shared identity/date/venue/maps/program/dress/contacts remain reusable. Canonical fixture/wishes stay preview-only. Failure status is translated accurately after native locale changes; related Zarrin/Oltin regressions were corrected in commit 55d8a8fd2.
+- 25 shared/package checks, three-viewport source/motion comparisons, four locales/long/empty/seven-row/reduced/closed/failure checks, actual audio, real authenticated notes save/reopen/studio/publication/public/maps/pending wishes and switching, covers, typecheck/build pass. Migrations 0193/0194 publish only this wedding design. Evidence: `docs/templates/taklifla-audit/qogoz*`.

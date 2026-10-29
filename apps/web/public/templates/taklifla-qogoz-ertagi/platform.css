@@ -1,0 +1,16 @@
+[hidden] { display: none !important; }
+:focus-visible { outline: 3px solid #8a6238 !important; outline-offset: 4px; }
+#qg-cover-names, #qg-hero-names, #qg-foot-names { overflow-wrap: anywhere; }
+#qg-frame-venuecity, #qg-frame-invdate, #qg-venue-name, #qg-venue-addr { overflow-wrap: anywhere; }
+#qg-info-dress-text, #qg-foot-note, [data-i18n="frame_sentence"] { white-space: pre-wrap; overflow-wrap: anywhere; }
+#qg-wish-confirm { white-space: pre-wrap; }
+html.qg-reduced *, html.qg-reduced *::before, html.qg-reduced *::after {
+  animation: none !important; transition: none !important; scroll-behavior: auto !important;
+}
+html.qg-reduced [data-pop] { opacity: 1 !important; transform: none !important; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+  [data-pop] { opacity: 1 !important; transform: none !important; }
+}
+
+html:not([data-ready]) body{visibility:hidden}.qg-long-name{white-space:normal!important;overflow:visible!important;overflow-wrap:anywhere}#qg-info-contact-text,#qg-venue-note{white-space:pre-line;overflow-wrap:anywhere}

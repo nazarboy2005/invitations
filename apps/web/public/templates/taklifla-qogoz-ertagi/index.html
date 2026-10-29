@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="uz-Latn" data-awaiting-data>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Qog‘oz Ertagi</title>
+
+
+
+<style>
+  * { box-sizing: border-box; }
+  :root { --accent:#c9a24b; /* alias for shared _wish-close.js */ }
+  html, body { margin: 0; padding: 0; }
+  body { background: #f6ecd6; font-family: 'Averia Serif Libre', Georgia, serif; color: #4a3a28; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; overflow-x: hidden; }
+  a { color: #8a6238; } a:hover { color: #5f9c4a; }
+  input, textarea, button { font-family: inherit; }
+  input::placeholder, textarea::placeholder { color: #b7a684; opacity: 1; }
+  [data-pop] { opacity: 0; }
+  @keyframes pmPop { from { opacity:0; transform:perspective(900px) rotateX(16deg) translateY(26px) scale(.985); } to { opacity:1; transform:perspective(900px) rotateX(0deg) translateY(0) scale(1); } }
+  @keyframes pmShimmer { 0% { background-position:0% 50%; } 100% { background-position:200% 50%; } }
+  @keyframes pmBobA { from { transform:translateY(-8px) rotate(-5deg); } to { transform:translateY(10px) rotate(4deg); } }
+  @keyframes pmBobB { from { transform:translateY(9px) rotate(6deg); } to { transform:translateY(-9px) rotate(-4deg); } }
+  @keyframes pmBobC { from { transform:translateY(-6px) translateX(-5px) rotate(3deg); } to { transform:translateY(8px) translateX(6px) rotate(-6deg); } }
+  @keyframes pmHint { 0%, 100% { transform:translateY(0); } 50% { transform:translateY(7px); } }
+  @media (prefers-reduced-motion: reduce) { * { animation-duration: .001ms !important; animation-iteration-count: 1 !important; } }
+  .qg-lang { position:fixed; top:14px; left:max(14px, calc(50vw - 199px)); z-index:70; display:flex; gap:2px; background:rgba(251,243,226,.92); border:1px solid rgba(201,162,75,.5); border-radius:999px; padding:3px; box-shadow:0 8px 22px -10px rgba(90,55,20,.3); }
+  .qg-lang button { border:0; background:transparent; cursor:pointer; font-family:Amarante,serif; font-size:11px; font-weight:700; letter-spacing:.06em; color:#8a6238; padding:5px 9px; border-radius:999px; line-height:1; text-transform:uppercase; }
+  .qg-lang button.on { background:linear-gradient(180deg,#d9b25f,#bd9440); color:#fff9ea; }
+</style>
+<link rel="stylesheet" href="fonts.css"><link rel="stylesheet" href="platform.css"></head>
+<body>
+
+<div id="qg-desk" style="position:fixed;inset:0;z-index:0;background:radial-gradient(130% 90% at 50% 12%, #b5804e 0%, #8a5a38 82%)"></div>
+
+<!-- ============ SPLASH — 3D book cover ============ -->
+<div id="qg-splash" style="position:fixed;inset:0;z-index:50;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;background:radial-gradient(120% 90% at 50% 24%, #aa7b50 0%, #7c4e2c 80%);opacity:1;pointer-events:auto;transition:opacity .6s ease .55s">
+  <div style="perspective:1500px;width:min(78vw,330px)">
+    <div style="position:relative;aspect-ratio:2/3">
+      <div style="position:absolute;inset:0;background:#fbf3e2;border-radius:6px 14px 14px 6px;box-shadow:inset 0 0 0 1px #e6d6b4, inset -14px 0 24px rgba(140,100,50,.18), 0 18px 50px rgba(50,25,5,.5);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px">
+        <img src="qogoz-img/gen-petal-2.webp" alt="" style="width:22px;transform:rotate(28deg)">
+        <div data-i18n="cover_inner" style="font-family:'MonteCarlo','Marck Script',cursive;font-size:26px;color:#a88a4e">siz uchun</div>
+      </div>
+      <div id="qg-cover" style="position:absolute;inset:0;transform-origin:0% 50%;transform:perspective(1500px) rotateY(0deg);transition:transform 1.15s cubic-bezier(.7,.05,.3,1);border-radius:6px 14px 14px 6px;overflow:hidden;box-shadow:0 20px 55px rgba(50,25,5,.55)">
+        <img src="qogoz-img/cover.webp" alt="Kitob muqovasi" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+        <div style="position:absolute;left:0;top:0;bottom:0;width:16px;background:linear-gradient(90deg, rgba(90,55,20,.35), rgba(255,255,255,0))"></div>
+        <div style="position:absolute;left:10%;right:10%;bottom:8%;padding:15px 10px 13px;text-align:center;background:rgba(251,243,226,.94);border:1.5px solid #c9a24b;border-radius:10px;box-shadow:inset 0 2px 0 rgba(255,255,255,.65), inset 0 -2px 8px rgba(120,80,30,.16), 0 8px 22px rgba(60,30,5,.28)">
+          <div data-i18n="cover_kicker" style="font-family:Amarante,serif;font-size:10px;letter-spacing:3.5px;color:#8a6238">NIKOH TO'YI</div>
+          <div id="qg-cover-names" style="font-family:'MonteCarlo','Marck Script',cursive;font-size:31px;line-height:1.15;color:#6b4f2a;margin-top:2px;white-space:nowrap;overflow:hidden"></div>
+          <div style="width:52px;height:1.5px;background:#c9a24b;margin:7px auto"></div>
+          <div id="qg-cover-dots" style="font-family:Amarante,serif;font-size:12px;letter-spacing:2.5px;color:#8a6238"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button type="button" id="qg-open" style="font-family:Amarante,serif;font-size:15px;letter-spacing:2px;color:#fff9ea;background:linear-gradient(180deg,#d9b25f,#bd9440);border:1px solid rgba(255,246,220,.55);border-radius:999px;padding:14px 34px;cursor:pointer;box-shadow:0 8px 22px rgba(50,25,5,.4)"><span data-i18n="cover_open">Taklifnomani ochish</span></button>
+</div>
+
+<!-- ── Language switcher (top-left) ── -->
+<div class="qg-lang" role="group" aria-label="Til / Language">
+  <button type="button" data-lang="uz-Latn" class="on">UZ</button>
+  <button type="button" data-lang="uz-Cyrl">Уз</button>
+  <button type="button" data-lang="en">EN</button>
+  <button type="button" data-lang="ru">RU</button>
+</div>
+
+<!-- ── Music toggle (hidden entirely without ?audio) ── -->
+<button type="button" id="qg-music" title="Musiqa" style="display:none;position:fixed;bottom:16px;right:max(16px, calc(50% - 199px));z-index:60;width:46px;height:46px;border-radius:50%;background:#fffdf4;border:1.5px solid #d0b06a;box-shadow:0 8px 20px rgba(70,40,10,.38);align-items:center;justify-content:center;cursor:pointer;padding:0">
+  <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#8a6238" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
+  <div id="qg-music-off" style="position:absolute;width:26px;height:2px;background:#b0532e;transform:rotate(-45deg);border-radius:2px"></div>
+</button>
+
+<div style="position:relative;z-index:1;max-width:430px;margin:0 auto;min-height:100vh;background:#f6ecd6;box-shadow:0 0 0 1px rgba(120,90,50,.3), 10px 0 0 -4px #e7d8b6, -10px 0 0 -4px #e7d8b6, 18px 0 0 -9px #d9c79f, -18px 0 0 -9px #d9c79f, 0 34px 80px rgba(55,28,8,.5)">
+
+  <audio id="qg-audio" loop preload="none"></audio>
+
+  <!-- ============ HERO SCENE ============ -->
+  <div data-scene="hero" style="position:relative;min-height:100svh;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end">
+    <img data-par="26" src="qogoz-img/hero-back.webp" alt="" style="position:absolute;left:-5%;top:-13%;width:110%;height:122%;object-fit:cover">
+    <div data-par="16" style="position:absolute;left:7%;top:8%;width:104px;filter:drop-shadow(0 10px 14px rgba(90,55,20,.32));pointer-events:none">
+      <img src="qogoz-img/gen-sun.webp" alt="" style="width:100%;animation:pmBobB 9s ease-in-out -2s infinite alternate">
+    </div>
+    <div data-par="12" style="position:absolute;left:74%;top:21%;width:62px;filter:drop-shadow(0 8px 10px rgba(90,55,20,.32));pointer-events:none">
+      <img src="qogoz-img/bird.webp" alt="" style="width:100%;animation:pmBobC 6.5s ease-in-out infinite alternate">
+    </div>
+    <div data-par="14" style="position:absolute;left:10%;top:26%;width:24px;pointer-events:none"><img src="qogoz-img/gen-petal-1.webp" alt="" style="width:100%;animation:pmBobA 7s ease-in-out -1s infinite alternate"></div>
+    <div data-par="8" style="position:absolute;left:78%;top:13%;width:18px;pointer-events:none"><img src="qogoz-img/gen-petal-2.webp" alt="" style="width:100%;animation:pmBobB 8.5s ease-in-out -3s infinite alternate"></div>
+    <div data-par="6" style="position:absolute;left:31%;top:8%;width:14px;pointer-events:none"><img src="qogoz-img/gen-petal-3.webp" alt="" style="width:100%;animation:pmBobC 9.5s ease-in-out -2s infinite alternate"></div>
+    <div data-par="18" style="position:absolute;left:85%;top:41%;width:20px;pointer-events:none"><img src="qogoz-img/gen-petal-2.webp" alt="" style="width:100%;animation:pmBobA 8s ease-in-out -4s infinite alternate"></div>
+    <div data-par="10" style="position:absolute;left:5%;top:49%;width:16px;pointer-events:none"><img src="qogoz-img/gen-petal-1.webp" alt="" style="width:100%;animation:pmBobB 7.5s ease-in-out -2.5s infinite alternate"></div>
+    <img data-par="-10" src="qogoz-img/hills.webp" alt="" style="position:absolute;left:-9%;bottom:18%;width:118%;filter:drop-shadow(0 -8px 18px rgba(90,55,20,.3));pointer-events:none">
+    <img data-par="-30" src="qogoz-img/arch.webp" alt="" style="position:absolute;left:-8%;top:-6%;width:116%;height:112%;object-fit:cover;filter:drop-shadow(0 14px 26px rgba(80,45,15,.38));pointer-events:none">
+    <div style="position:relative;z-index:6;padding:38px 28px 30px;text-align:center;background:linear-gradient(180deg, rgba(246,236,214,0) 0%, rgba(246,236,214,.8) 30%, rgba(246,236,214,.97) 72%, #f6ecd6 100%)">
+      <div data-i18n="hero_kicker" style="font-family:Amarante,serif;font-size:12px;letter-spacing:4.5px;color:#8a6238">BIZ TURMUSH QURAMIZ</div>
+      <h1 id="qg-hero-names" style="margin:4px 0 0;font-family:'MonteCarlo','Marck Script',cursive;font-weight:400;font-size:57px;line-height:1.08;background:linear-gradient(105deg,#6b4f2a 0%,#b98d3e 38%,#ffe9ae 50%,#b98d3e 62%,#6b4f2a 100%);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;animation:pmShimmer 5.5s linear infinite;white-space:nowrap;overflow:hidden"></h1>
+      <div id="qg-hero-dateline" style="margin-top:8px;font-size:15px;color:#6b563c;letter-spacing:.5px"></div>
+      <div style="margin-top:22px;display:flex;flex-direction:column;align-items:center;gap:3px;color:#8a6238;animation:pmHint 2.2s ease-in-out infinite">
+        <div data-i18n="hero_hint" style="font-family:Amarante,serif;font-size:11px;letter-spacing:3px">SAHIFALARNI OCHING</div>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ PAGE-TURN STRIP ============ -->
+  <div style="position:relative">
+    <div style="height:24px;background:linear-gradient(180deg,#f6ecd6,#c8e6f2)"></div>
+    <img src="qogoz-img/strip.webp" alt="" style="display:block;width:100%;height:172px;object-fit:cover">
+    <div style="height:24px;background:linear-gradient(180deg,#6b8c3f,#f6ecd6)"></div>
+  </div>
+
+  <!-- ============ INVITATION ============ -->
+  <div style="padding:44px 26px 8px">
+    <div data-pop style="text-align:center;margin-bottom:24px">
+      <img src="qogoz-img/gen-petal-2.webp" alt="" style="width:20px;transform:rotate(24deg)">
+      <div data-i18n="inv_header" style="font-family:Amarante,serif;font-size:22px;letter-spacing:2.5px;color:#4a3a28;margin-top:4px">Taklifnoma</div>
+      <div style="width:54px;height:1.5px;background:#c9a24b;margin:10px auto 0"></div>
+    </div>
+    <div data-pop style="position:relative">
+      <img src="qogoz-img/frame.webp" alt="" style="display:block;width:100%;border-radius:8px;box-shadow:0 14px 34px rgba(120,80,30,.22)">
+      <div style="position:absolute;left:22%;right:22%;top:23%;bottom:23%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:9px">
+        <div data-i18n="frame_cursive" style="font-family:'MonteCarlo','Marck Script',cursive;font-size:25px;line-height:1;color:#b98d3e">Quvnoq qalb bilan</div>
+        <div data-i18n="frame_sentence" style="font-size:13px;line-height:1.7;color:#5d4a32"></div>
+        <div style="display:flex;gap:6px;align-items:center"><div style="width:4px;height:4px;border-radius:50%;background:#c9a24b"></div><div style="width:4px;height:4px;border-radius:50%;background:#c9a24b"></div><div style="width:4px;height:4px;border-radius:50%;background:#c9a24b"></div></div>
+        <div id="qg-frame-invdate" style="font-family:Amarante,serif;font-size:15px;letter-spacing:1px;color:#4a3a28"></div>
+        <div id="qg-frame-venuecity" style="font-size:12px;color:#8a7357"></div>
+      </div>
+    </div>
+  </div>
+
+  <div data-pop style="margin:34px 26px;height:76px;border-radius:14px;overflow:hidden;position:relative;box-shadow:0 8px 20px rgba(120,80,30,.22)">
+    <img src="qogoz-img/strip.webp" alt="" style="width:100%;height:100%;object-fit:cover;object-position:50% 82%;transform:scaleX(-1)">
+  </div>
+
+  <!-- ============ EVENTS ============ -->
+  <div id="qg-events-section" style="padding:10px 30px 12px">
+    <div data-pop style="text-align:center;margin-bottom:26px">
+      <img src="qogoz-img/gen-petal-1.webp" alt="" style="width:20px;transform:rotate(-18deg)">
+      <div data-i18n="events_header" style="font-family:Amarante,serif;font-size:22px;letter-spacing:2.5px;color:#4a3a28;margin-top:4px">To'y kunimiz</div>
+      <div style="width:54px;height:1.5px;background:#c9a24b;margin:10px auto 0"></div>
+    </div>
+    <div id="qg-events" style="border-left:2px dashed #d5bf94;padding-left:24px;margin-left:6px;display:flex;flex-direction:column;gap:26px">
+    </div>
+  </div>
+
+  <div data-pop style="margin:34px 26px;height:76px;border-radius:14px;overflow:hidden;position:relative;box-shadow:0 8px 20px rgba(120,80,30,.22)">
+    <img src="qogoz-img/strip.webp" alt="" style="width:100%;height:100%;object-fit:cover;object-position:50% 26%">
+  </div>
+
+  <!-- ============ VENUE ============ -->
+  <div id="qg-venue-section" style="padding:10px 26px 12px">
+    <div data-pop style="text-align:center;margin-bottom:24px">
+      <img src="qogoz-img/gen-petal-3.webp" alt="" style="width:20px;transform:rotate(40deg)">
+      <div data-i18n="venue_header" style="font-family:Amarante,serif;font-size:22px;letter-spacing:2.5px;color:#4a3a28;margin-top:4px">Manzil</div>
+      <div style="width:54px;height:1.5px;background:#c9a24b;margin:10px auto 0"></div>
+    </div>
+    <div data-pop style="background:#fffdf4;border:1px solid #e6d6b4;border-radius:16px;padding:26px 22px;box-shadow:0 10px 26px rgba(120,85,40,.16);text-align:center">
+      <div id="qg-venue-name" style="font-family:Amarante,serif;font-size:21px;letter-spacing:1px"></div>
+      <div id="qg-venue-addr" style="font-size:14px;color:#7a654a;margin-top:6px;line-height:1.6"></div>
+      <div id="qg-venue-note-wrap"><div id="qg-venue-note" data-i18n="venue_note_default" style="font-size:12.5px;color:#a08b68;margin-top:4px"></div></div>
+      <a id="qg-map" href="#" target="_blank" rel="noopener noreferrer" style="display:inline-block;margin-top:18px;text-decoration:none;font-family:Amarante,serif;font-size:14px;letter-spacing:2px;color:#fff9ea;background:linear-gradient(180deg,#d9b25f,#bd9440);border-radius:999px;padding:13px 30px;box-shadow:0 8px 20px rgba(140,100,40,.35)"><span data-i18n="map_btn">XARITANI OCHISH</span></a>
+    </div>
+  </div>
+
+  <!-- ============ GOOD TO KNOW ============ -->
+  <div id="qg-info-section" style="padding:26px 26px 8px">
+    <div id="qg-info-card" data-pop style="background:#fffdf4;border:1px solid #e6d6b4;border-radius:16px;padding:24px 22px;box-shadow:0 10px 26px rgba(120,85,40,.16)">
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div id="qg-info-dress">
+          <div data-i18n="info_dress_label" style="font-family:Amarante,serif;font-size:13px;letter-spacing:2.5px;color:#b98d3e">KIYIM</div>
+          <div id="qg-info-dress-text" data-i18n="info_dress_default" style="font-size:14px;line-height:1.6;color:#5d4a32;margin-top:3px"></div>
+        </div>
+        <div id="qg-info-divider" style="height:1px;background:#eee0c2"></div>
+        <div id="qg-info-contact">
+          <div data-i18n="info_contact_label" style="font-family:Amarante,serif;font-size:13px;letter-spacing:2.5px;color:#b98d3e">SAVOLLAR</div>
+          <div id="qg-info-contact-text" data-i18n="info_contact_default" style="font-size:14px;line-height:1.6;color:#5d4a32;margin-top:3px"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ WISHES ============ -->
+  <div id="qg-wishes-section" style="padding:40px 26px 46px">
+    <div data-pop style="text-align:center;margin-bottom:24px">
+      <img src="qogoz-img/gen-petal-2.webp" alt="" style="width:20px;transform:rotate(-30deg)">
+      <div data-i18n="wish_header" style="font-family:Amarante,serif;font-size:22px;letter-spacing:2.5px;color:#4a3a28;margin-top:4px">Tilaklar</div>
+      <div data-i18n="wish_sub" style="font-size:13px;color:#8a7357;margin-top:6px">Kelin-kuyov uchun iliq so'z qoldiring</div>
+      <div style="width:54px;height:1.5px;background:#c9a24b;margin:10px auto 0"></div>
+    </div>
+    <form id="qg-wish-form" class="wish-form" data-pop style="background:#fffdf4;border:1px solid #e6d6b4;border-radius:16px;padding:20px 18px;box-shadow:0 10px 26px rgba(120,85,40,.16);display:flex;flex-direction:column;gap:12px">
+      <input name="wname" required maxlength="100" autocomplete="name" data-i18n-ph="wish_name_ph" placeholder="Ismingiz" style="width:100%;box-sizing:border-box;background:#fbf5e6;border:1.5px solid #decba0;border-radius:12px;padding:12px 14px;font-family:'Averia Serif Libre',Georgia,serif;font-size:14px;color:#4a3a28;outline:none">
+      <textarea name="wmsg" required maxlength="2000" rows="3" data-i18n-ph="wish_msg_ph" placeholder="Kelin-kuyov uchun tilagingiz…" style="width:100%;box-sizing:border-box;background:#fbf5e6;border:1.5px solid #decba0;border-radius:12px;padding:12px 14px;font-family:'Averia Serif Libre',Georgia,serif;font-size:14px;color:#4a3a28;outline:none;resize:vertical"></textarea>
+      <button type="submit" style="font-family:Amarante,serif;font-size:14px;letter-spacing:2px;color:#fff9ea;background:linear-gradient(180deg,#d9b25f,#bd9440);border:none;border-radius:999px;padding:13px 20px;cursor:pointer;box-shadow:0 8px 20px rgba(140,100,40,.35)"><span data-i18n="wish_send">TILAK YO'LLASH</span></button>
+    </form>
+    <div id="qg-wish-confirm" role="status" aria-live="polite" data-i18n="wish_thanks" style="display:none;text-align:center;font-style:italic;font-size:13px;color:#a08b68;margin-top:18px">Rahmat — tilagingiz saqlandi ♡</div>
+    <div id="qg-wish-empty" data-i18n="wish_empty" style="text-align:center;font-style:italic;font-size:13px;color:#a08b68;margin-top:18px">Hozircha tilaklar yo'q — siznikisi kitobni ochadi.</div>
+    <div id="qg-wish-list" style="display:flex;flex-direction:column;gap:12px;margin-top:18px"></div>
+  </div>
+
+  <div style="height:28px;background:linear-gradient(180deg,#f6ecd6,#fdc065)"></div>
+
+  <!-- ============ COUNTDOWN SCENE ============ -->
+  <div id="qg-countdown-section" data-scene="count" style="position:relative;min-height:104svh;overflow:hidden;display:flex;align-items:center;justify-content:center">
+    <img data-par="30" src="qogoz-img/count-back.webp" alt="" style="position:absolute;left:-5%;top:-13%;width:110%;height:122%;object-fit:cover">
+    <div data-par="18" style="position:absolute;left:-9%;bottom:26%;width:118%;pointer-events:none">
+      <img src="qogoz-img/hills.webp" alt="" style="width:100%;transform:scaleX(-1);filter:drop-shadow(0 -8px 18px rgba(90,45,15,.35)) brightness(.92) saturate(.9)">
+    </div>
+    <div data-par="10" style="position:absolute;inset:-2%;pointer-events:none">
+      <img src="qogoz-img/arch.webp" alt="" style="width:100%;height:100%;object-fit:cover;transform:scale(.8);opacity:.94;filter:brightness(.9)">
+    </div>
+    <div data-par="8" style="position:absolute;left:72%;top:16%;width:54px;filter:drop-shadow(0 8px 10px rgba(90,45,15,.35));pointer-events:none">
+      <img src="qogoz-img/bird.webp" alt="" style="width:100%;animation:pmBobC 7s ease-in-out -1s infinite alternate">
+    </div>
+    <div data-par="16" style="position:absolute;left:12%;top:20%;width:20px;pointer-events:none"><img src="qogoz-img/gen-petal-1.webp" alt="" style="width:100%;animation:pmBobA 7.5s ease-in-out infinite alternate"></div>
+    <div data-par="6" style="position:absolute;left:82%;top:34%;width:15px;pointer-events:none"><img src="qogoz-img/gen-petal-2.webp" alt="" style="width:100%;animation:pmBobB 8s ease-in-out -2s infinite alternate"></div>
+    <div data-par="22" style="position:absolute;left:8%;top:64%;width:22px;pointer-events:none"><img src="qogoz-img/gen-petal-3.webp" alt="" style="width:100%;animation:pmBobC 9s ease-in-out -4s infinite alternate"></div>
+    <div data-par="12" style="position:absolute;left:66%;top:74%;width:17px;pointer-events:none"><img src="qogoz-img/gen-petal-1.webp" alt="" style="width:100%;animation:pmBobB 7s ease-in-out -3s infinite alternate"></div>
+    <img data-par="-36" src="qogoz-img/arch.webp" alt="" style="position:absolute;left:-9%;top:-7%;width:118%;height:114%;object-fit:cover;filter:drop-shadow(0 16px 30px rgba(70,35,10,.42));pointer-events:none">
+    <div data-pop style="position:relative;z-index:6;background:rgba(255,251,240,.94);border:1.5px solid #d9bc7a;border-radius:18px;padding:26px 22px;margin:0 30px;text-align:center;box-shadow:0 18px 44px rgba(80,40,10,.38)">
+      <div data-i18n="cd_kicker" style="font-family:Amarante,serif;font-size:10px;letter-spacing:3.5px;color:#8a6238">ENG TERAN SAHIFA</div>
+      <div data-i18n="cd_cursive" style="font-family:'MonteCarlo','Marck Script',cursive;font-size:31px;line-height:1.1;color:#6b4f2a;margin-top:4px">Kunlarni sanayapmiz</div>
+      <div style="display:flex;justify-content:center;gap:9px;margin-top:16px">
+        <div style="min-width:62px;background:#f6ecd6;border:1px solid #d9bc7a;border-radius:12px;padding:10px 6px 8px">
+          <div id="qg-cd-d" style="font-family:Amarante,serif;font-size:29px;line-height:1;color:#4a3a28">–</div>
+          <div data-i18n="cd_days" style="font-size:9px;letter-spacing:2px;color:#8a6238;margin-top:5px">KUN</div>
+        </div>
+        <div style="min-width:62px;background:#f6ecd6;border:1px solid #d9bc7a;border-radius:12px;padding:10px 6px 8px">
+          <div id="qg-cd-h" style="font-family:Amarante,serif;font-size:29px;line-height:1;color:#4a3a28">–</div>
+          <div data-i18n="cd_hours" style="font-size:9px;letter-spacing:2px;color:#8a6238;margin-top:5px">SOAT</div>
+        </div>
+        <div style="min-width:62px;background:#f6ecd6;border:1px solid #d9bc7a;border-radius:12px;padding:10px 6px 8px">
+          <div id="qg-cd-m" style="font-family:Amarante,serif;font-size:29px;line-height:1;color:#4a3a28">–</div>
+          <div data-i18n="cd_mins" style="font-size:9px;letter-spacing:2px;color:#8a6238;margin-top:5px">DAQIQA</div>
+        </div>
+        <div style="min-width:62px;background:#f6ecd6;border:1px solid #d9bc7a;border-radius:12px;padding:10px 6px 8px">
+          <div id="qg-cd-s" style="font-family:Amarante,serif;font-size:29px;line-height:1;color:#4a3a28">–</div>
+          <div data-i18n="cd_secs" style="font-size:9px;letter-spacing:2px;color:#8a6238;margin-top:5px">SONIYA</div>
+        </div>
+      </div>
+      <div id="qg-cd-invdate" style="font-family:Amarante,serif;font-size:13px;letter-spacing:1.5px;color:#8a6238;margin-top:16px"></div>
+    </div>
+  </div>
+  <div style="height:26px;background:linear-gradient(180deg,#482a13,#4a3a28)"></div>
+
+  <!-- ============ FOOTER — back cover ============ -->
+  <div style="background:linear-gradient(180deg,#4a3a28,#3b2d1e);padding:42px 26px 40px;text-align:center;color:#e7d8b6">
+    <div data-pop style="border:1.5px solid rgba(201,162,75,.6);border-radius:8px;padding:30px 20px">
+      <div id="qg-foot-names" style="font-family:'MonteCarlo','Marck Script',cursive;font-size:42px;line-height:1;color:#d9bc7a;white-space:nowrap;overflow:hidden"></div>
+      <div id="qg-foot-dots" style="font-family:Amarante,serif;font-size:12px;letter-spacing:3.5px;color:rgba(231,216,182,.85);margin-top:10px"></div>
+      <div style="width:44px;height:1.5px;background:rgba(201,162,75,.6);margin:16px auto"></div>
+      <div id="qg-foot-note" data-i18n="footer_note_default" style="font-size:12.5px;font-style:italic;color:rgba(231,216,182,.72);line-height:1.6"></div>
+    </div>
+  </div>
+
+</div>
+
+
+
+
+<script src="source-labels.js"></script><script src="source/fit.js"></script><script src="source/render.js"></script><script src="source/wish-close.js"></script><script src="cyrillic.js"></script><script src="bridge.js"></script><script src="motion.js"></script></body>
+</html>

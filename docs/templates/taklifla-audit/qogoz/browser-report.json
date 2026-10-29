@@ -1,0 +1,105 @@
+{
+  "date": "2026-10-29",
+  "viewports": [
+    {
+      "width": 320,
+      "reference": {
+        "width": 320,
+        "font": "MonteCarlo, \"Marck Script\", cursive",
+        "layers": 19
+      },
+      "actual": {
+        "width": 320,
+        "font": "MonteCarlo, \"Marck Script\", cursive",
+        "layers": 19
+      },
+      "moteAnimation": "pmBobB",
+      "sourceOpen": true,
+      "bookCoverRotation": true,
+      "locales": 4,
+      "localizedCanonicalWishes": true,
+      "sourceDetails": true,
+      "deskGradient": true,
+      "sevenStableEvents": true,
+      "longNamesFit": true,
+      "previewNoSend": true,
+      "failureRetainsInput": true,
+      "failureSurvivesLocale": true,
+      "closedAfter24Hours": true,
+      "reducedMotion": true,
+      "emptySections": true
+    },
+    {
+      "width": 390,
+      "reference": {
+        "width": 390,
+        "font": "MonteCarlo, \"Marck Script\", cursive",
+        "layers": 19
+      },
+      "actual": {
+        "width": 390,
+        "font": "MonteCarlo, \"Marck Script\", cursive",
+        "layers": 19
+      },
+      "moteAnimation": "pmBobB",
+      "sourceOpen": true,
+      "bookCoverRotation": true,
+      "locales": 4,
+      "localizedCanonicalWishes": true,
+      "sourceDetails": true,
+      "deskGradient": true,
+      "sevenStableEvents": true,
+      "longNamesFit": true,
+      "previewNoSend": true,
+      "failureRetainsInput": true,
+      "failureSurvivesLocale": true,
+      "closedAfter24Hours": true,
+      "reducedMotion": true,
+      "emptySections": true
+    },
+    {
+      "width": 1280,
+      "reference": {
+        "width": 430,
+        "font": "MonteCarlo, \"Marck Script\", cursive",
+        "layers": 19
+      },
+      "actual": {
+        "width": 430,
+        "font": "MonteCarlo, \"Marck Script\", cursive",
+        "layers": 19
+      },
+      "moteAnimation": "pmBobB",
+      "sourceOpen": true,
+      "bookCoverRotation": true,
+      "locales": 4,
+      "localizedCanonicalWishes": true,
+      "sourceDetails": true,
+      "deskGradient": true,
+      "sevenStableEvents": true,
+      "longNamesFit": true,
+      "previewNoSend": true,
+      "failureRetainsInput": true,
+      "failureSurvivesLocale": true,
+      "closedAfter24Hours": true,
+      "reducedMotion": true,
+      "emptySections": true
+    }
+  ],
+  "errors": [],
+  "httpErrors": [
+    {
+      "url": "http://127.0.0.1:3001/api/public/invitations/qogoz-qa/wishes",
+      "status": 503
+    },
+    {
+      "url": "http://127.0.0.1:3001/api/public/invitations/qogoz-qa/wishes",
+      "status": 503
+    },
+    {
+      "url": "http://127.0.0.1:3001/api/public/invitations/qogoz-qa/wishes",
+      "status": 503
+    }
+  ],
+  "mockTransport": true
+}

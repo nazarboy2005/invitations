@@ -1,0 +1,193 @@
+{
+  "source": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/taklifla.uz/templates/qogoz__0df80395f1810a92.html",
+  "sourceSha256": "67b69dca11c9bbf705ae0cc39a814b5a56b0e160ca62ea3accb549179b9d707f",
+  "sourceBytes": 54249,
+  "dependencies": [
+    {
+      "source": "qogoz-img/arch.webp",
+      "file": "qogoz-img/arch.webp",
+      "bytes": 724326,
+      "sha256": "e857ae1268cad135d3d9bac8823e064e1a7c0c1d90d9189c9dfcffc9cec5ea47",
+      "recovered": false
+    },
+    {
+      "source": "qogoz-img/bird.webp",
+      "file": "qogoz-img/bird.webp",
+      "bytes": 139554,
+      "sha256": "6d9caf96255c680bb3be16d4aebfba7f70d55d67f50224d7a55cb574f783cded",
+      "recovered": false
+    },
+    {
+      "source": "qogoz-img/count-back.webp",
+      "file": "qogoz-img/count-back.webp",
+      "bytes": 348220,
+      "sha256": "d49cab189872cef9f4c0094b6efe94056f1c90e707178e3e824460e5ce2b504b",
+      "recovered": false
+    },
+    {
+      "source": "qogoz-img/cover.webp",
+      "file": "qogoz-img/cover.webp",
+      "bytes": 586378,
+      "sha256": "84428da9e2e83e4fab397a810f5bf05fe20ac73bc18ca97dd02ec8ea31410dcd",
+      "recovered": false
+    },
+    {
+      "source": "qogoz-img/frame.webp",
+      "file": "qogoz-img/frame.webp",
+      "bytes": 183168,
+      "sha256": "e7ccb6c612a646ba5164b7d83ead7577245819a406473ef2084318e65144c921",
+      "recovered": false
+    },
+    {
+      "source": "qogoz-img/gen-petal-1.webp",
+      "file": "qogoz-img/gen-petal-1.webp",
+      "bytes": 1046,
+      "sha256": "df873b9263fbbea2847e0c2698df5b78faffd5fc28498b34c30f6c4651b4786a",
+      "recovered": false
+    },
+    {
+      "source": "qogoz-img/gen-petal-2.webp",
+      "file": "qogoz-img/gen-petal-2.webp",
+      "bytes": 952,
+      "sha256": "8eb8d46bafceae2523529ef2f27dbffa9fe1c6faaa2daffbfb592a94c63225de",
+      "recovered": false
+    },
+    {
+      "source": "qogoz-img/gen-petal-3.webp",
+      "file": "qogoz-img/gen-petal-3.webp",
+      "bytes": 1108,
+      "sha256": "8207efecac88c48f248867e062c87379262ae320004de292fbab14d1b6494c0e",
+      "recovered": false
+    },
+    {
+      "source": "qogoz-img/gen-sun.webp",
+      "file": "qogoz-img/gen-sun.webp",
+      "bytes": 27144,
+      "sha256": "28c83efa251a73ee5845190cd65d80487d82efe19ef04d7019c0e28c52dd2dd2",
+      "recovered": false
+    },
+    {
+      "source": "qogoz-img/hero-back.webp",
+      "file": "qogoz-img/hero-back.webp",
+      "bytes": 324426,
+      "sha256": "40f83a7c152b735de1986365b8de8ab82a6eaee510141a54d7358e2febeadcf5",
+      "recovered": false
+    },
+    {
+      "source": "qogoz-img/hills.webp",
+      "file": "qogoz-img/hills.webp",
+      "bytes": 170536,
+      "sha256": "27f50988900c280091a8f1b8f49253de56da33b3f352c38065146b3a65ab5eb2",
+      "recovered": false
+    },
+    {
+      "source": "qogoz-img/strip.webp",
+      "file": "qogoz-img/strip.webp",
+      "bytes": 288872,
+      "sha256": "38dc51978af458084e92de741f060f43cc665736f332ed21b1ec189230ed3612",
+      "recovered": false
+    },
+    {
+      "source": "https://fonts.gstatic.com/s/amarante/v30/xMQXuF1KTa6EvGx9bp--AXvwmA.woff2",
+      "file": "fonts/xMQXuF1KTa6EvGx9bp--AXvwmA.woff2",
+      "bytes": 18384,
+      "sha256": "09a90a50bdca9e47b4b2d0cb41cd04c275f2d3909b23db5fdf713d3d7aba5a41",
+      "recovered": true
+    },
+    {
+      "source": "https://fonts.gstatic.com/s/amarante/v30/xMQXuF1KTa6EvGx9bp-wAXs.woff2",
+      "file": "fonts/xMQXuF1KTa6EvGx9bp-wAXs.woff2",
+      "bytes": 23360,
+      "sha256": "3b75c56c640fff7db44de23ce7419983ce960a8d26731c739f24b3d02a9a8e9e",
+      "recovered": false
+    },
+    {
+      "source": "https://fonts.gstatic.com/s/averiaseriflibre/v19/neIUzD2ms4wxr6GvjeD0X88SHPyX2xYOpzuN4Yg.woff2",
+      "file": "fonts/neIUzD2ms4wxr6GvjeD0X88SHPyX2xYOpzuN4Yg.woff2",
+      "bytes": 42188,
+      "sha256": "c6eebbbc8f5dcbe894caee1995413496968f3fd993b0e8f8c77f46d361063263",
+      "recovered": false
+    },
+    {
+      "source": "https://fonts.gstatic.com/s/averiaseriflibre/v19/neIVzD2ms4wxr6GvjeD0X88SHPyX2xYGCSmaxq0r.woff2",
+      "file": "fonts/neIVzD2ms4wxr6GvjeD0X88SHPyX2xYGCSmaxq0r.woff2",
+      "bytes": 38980,
+      "sha256": "491871e8b0d5e78bbc8040a69a863e3adac69b10cfd75d48c33cb7833d35afba",
+      "recovered": true
+    },
+    {
+      "source": "https://fonts.gstatic.com/s/averiaseriflibre/v19/neIWzD2ms4wxr6GvjeD0X88SHPyX2xYOoguP.woff2",
+      "file": "fonts/neIWzD2ms4wxr6GvjeD0X88SHPyX2xYOoguP.woff2",
+      "bytes": 38404,
+      "sha256": "a870992b7544a7adbfdefab5a5d97174662ff7935984a3edb5f858a5a3dee9ac",
+      "recovered": false
+    },
+    {
+      "source": "https://fonts.gstatic.com/s/averiaseriflibre/v19/neIVzD2ms4wxr6GvjeD0X88SHPyX2xYGGS6axq0r.woff2",
+      "file": "fonts/neIVzD2ms4wxr6GvjeD0X88SHPyX2xYGGS6axq0r.woff2",
+      "bytes": 38712,
+      "sha256": "23166bf0013be1ca9b713dad081abe7eb7d47f712391ef6b917ba54ef8adeba6",
+      "recovered": false
+    },
+    {
+      "source": "https://fonts.gstatic.com/s/marckscript/v22/nwpTtK2oNgBA3Or78gapdwuyzCg_WMM.woff2",
+      "file": "fonts/nwpTtK2oNgBA3Or78gapdwuyzCg_WMM.woff2",
+      "bytes": 10528,
+      "sha256": "457f5ae9dd211fb276e605a4ce3ecb35cbe1aee8bb1a54698c81d7834873ed06",
+      "recovered": true
+    },
+    {
+      "source": "https://fonts.gstatic.com/s/marckscript/v22/nwpTtK2oNgBA3Or78gapdwuyxig_WMM.woff2",
+      "file": "fonts/nwpTtK2oNgBA3Or78gapdwuyxig_WMM.woff2",
+      "bytes": 8740,
+      "sha256": "0b81e24db3e626c58446fc2ea58dbeaa5d4edb219856afe36ad902c95248d18d",
+      "recovered": true
+    },
+    {
+      "source": "https://fonts.gstatic.com/s/marckscript/v22/nwpTtK2oNgBA3Or78gapdwuyyCg_.woff2",
+      "file": "fonts/nwpTtK2oNgBA3Or78gapdwuyyCg_.woff2",
+      "bytes": 13352,
+      "sha256": "b32acf77642711e18c14d57aabeefa02ee25664a7f40929ee5f72396557b6e76",
+      "recovered": false
+    },
+    {
+      "source": "https://fonts.gstatic.com/s/montecarlo/v13/buEzpo6-f9X01GadLA0G4CIf_exL.woff2",
+      "file": "fonts/buEzpo6-f9X01GadLA0G4CIf_exL.woff2",
+      "bytes": 9876,
+      "sha256": "fb210e056e30e4ea13759e344f5e61c4538f15e042c0e389da928dd4e2d1a8a9",
+      "recovered": true
+    },
+    {
+      "source": "https://fonts.gstatic.com/s/montecarlo/v13/buEzpo6-f9X01GadLA0G4CMf_exL.woff2",
+      "file": "fonts/buEzpo6-f9X01GadLA0G4CMf_exL.woff2",
+      "bytes": 21376,
+      "sha256": "abf627bb3dfcfc5575e8cca4a4709cc826ca52186b50d4e3a3bb3db9f6f36ba1",
+      "recovered": true
+    },
+    {
+      "source": "https://fonts.gstatic.com/s/montecarlo/v13/buEzpo6-f9X01GadLA0G4C0f_Q.woff2",
+      "file": "fonts/buEzpo6-f9X01GadLA0G4C0f_Q.woff2",
+      "bytes": 42260,
+      "sha256": "63754534a2d145578ace870c42ede47d1e69d802068d277c91e3436c8a8d9901",
+      "recovered": false
+    }
+  ],
+  "excluded": [
+    "Cloudflare beacon analytics",
+    "provider guestbook API and localStorage demo persistence",
+    "provider language localStorage"
+  ],
+  "private": false,
+  "registered": true,
+  "sourceParts": {
+    "source/fit.js": "55a264d56065c004486c7ae70089949b93bbe87b3d03f7863a3aa3259422ee2f",
+    "source/render.js": "5fa7b174a37d402e5b0e111442c6615a6a112e89ed5cac1db48ad98d8d0eaeb9",
+    "source/wish-close.js": "657a69e9b1a7d0c9e3a732a736c15e295a381c25747dce742e1168704793c0bb",
+    "motion.js": "43d2d695d436c9a8b6e9a3878d2f60ffe1f25c18e9596996ee5fa1ade3f1790d"
+  },
+  "published": true,
+  "publicationMigrations": [
+    "0193_register_taklifla_qogoz_ertagi.sql",
+    "0194_publish_taklifla_qogoz_ertagi.sql"
+  ]
+}

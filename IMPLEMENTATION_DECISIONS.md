@@ -2145,3 +2145,7 @@ Development agents are distinct from production queue workers. The running app w
 ### Parilar ertagi completion (2026-10-29)
 
 - Preserve Pari’s six-layer fairy tunnel, opener, particles, timeline and original source page. Supplementary timeline script labels are localized under `templateData["taklifla-parilar-ertagi"].programLabels` by stable program ID; arrival prose is editable there too. Main program titles/descriptions, people/hosts/date/maps/dress/contact data remain shared. Generic preview labels belong in the shared wedding event profile. Migrations 0191/0192 register/publish after verification.
+
+### Qog‘oz ertagi completion (2026-10-29)
+
+- Preserve Qog‘oz’s physical cover turn, layered paper scenes, pop reveals, desk color changes and native wishes-close state. Contact and footer notes use validated editable localized `templateData["taklifla-qogoz-ertagi"]`; shared venue/landmark, dress, program, contacts, dates and identities remain reusable. No source sample organizer/phone/program values are served. Migrations 0193/0194 register/publish for weddings after verification.

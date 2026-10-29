@@ -16,6 +16,7 @@ import { ToglarBagridaInvitation } from "@/templates/taklifla-toglar-bagrida/ren
 import { TakliflaOltinYol } from "@/templates/taklifla-oltin-yol/renderer";
 import { TakliflaOsmonInvitation } from "@/templates/taklifla-osmon/renderer";
 import { TakliflaParilarErtagiInvitation } from "@/templates/taklifla-parilar-ertagi/renderer";
+import { TakliflaQogozErtagiInvitation } from "@/templates/taklifla-qogoz-ertagi/renderer";
 import { TakliflaYubileySahifasi } from "@/templates/taklifla-yubiley-sahifasi/renderer";
 import { TakliflaBarakali } from "@/templates/taklifla-barakali/renderer";
 import { TakliflaZarhalSahifaInvitation } from "@/templates/taklifla-zarhal-sahifa/renderer";
@@ -172,6 +173,8 @@ export default async function InvitationPage({
     return <><InvitationViewTracker invitationId={result.id} musicUrl={invitation.music.enabled ? invitation.music.url : ""} /><TakliflaOsmonInvitation invitation={invitation} invitationId={result.id} locale={locale} guestName={guestName} guestToken={query.g} /></>;
   if (invitation.templateId === "taklifla-parilar-ertagi")
     return <><InvitationViewTracker invitationId={result.id} musicUrl={invitation.music.enabled ? invitation.music.url : ""} /><TakliflaParilarErtagiInvitation invitation={invitation} invitationId={result.id} locale={locale} guestName={guestName} guestToken={query.g} /></>;
+  if (invitation.templateId === "taklifla-qogoz-ertagi")
+    return <><InvitationViewTracker invitationId={result.id} musicUrl={invitation.music.enabled ? invitation.music.url : ""} /><TakliflaQogozErtagiInvitation invitation={invitation} invitationId={result.id} locale={locale} guestName={guestName} guestToken={query.g} /></>;
   if (invitation.templateId === "taklifla-yubiley-sahifasi")
     return <><InvitationViewTracker invitationId={result.id} musicUrl={invitation.music.enabled ? invitation.music.url : ""} /><TakliflaYubileySahifasi invitation={invitation} invitationId={result.id} locale={locale} guestName={guestName} guestToken={query.g} /></>;
   if (invitation.templateId === "taklifla-barakali")
