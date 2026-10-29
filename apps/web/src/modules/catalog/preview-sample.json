@@ -1569,10 +1569,38 @@
         "ru": "Программа корпоративного мероприятия"
       },
       "programTitles": {
-        "uz-Latn": ["Mehmonlarni kutib olish", "Rahbariyat tabrigi", "Yil sarhisobi", "Tushlik va suhbat", "Jamoaviy o‘yinlar", "Yakuniy so‘z"],
-        "uz-Cyrl": ["Меҳмонларни кутиб олиш", "Раҳбарият табриги", "Йил сарҳисоби", "Тушлик ва суҳбат", "Жамоавий ўйинлар", "Якуний сўз"],
-        "en": ["Welcoming guests", "Welcome from leadership", "Year in review", "Dinner and conversation", "Team activities", "Closing words"],
-        "ru": ["Встреча гостей", "Приветствие руководства", "Итоги года", "Ужин и общение", "Командные игры", "Заключительное слово"]
+        "uz-Latn": [
+          "Mehmonlarni kutib olish",
+          "Rahbariyat tabrigi",
+          "Yil sarhisobi",
+          "Tushlik va suhbat",
+          "Jamoaviy o‘yinlar",
+          "Yakuniy so‘z"
+        ],
+        "uz-Cyrl": [
+          "Меҳмонларни кутиб олиш",
+          "Раҳбарият табриги",
+          "Йил сарҳисоби",
+          "Тушлик ва суҳбат",
+          "Жамоавий ўйинлар",
+          "Якуний сўз"
+        ],
+        "en": [
+          "Welcoming guests",
+          "Welcome from leadership",
+          "Year in review",
+          "Dinner and conversation",
+          "Team activities",
+          "Closing words"
+        ],
+        "ru": [
+          "Встреча гостей",
+          "Приветствие руководства",
+          "Итоги года",
+          "Ужин и общение",
+          "Командные игры",
+          "Заключительное слово"
+        ]
       },
       "dressCode": {
         "style": {
@@ -1594,14 +1622,156 @@
           "ru": "Можно выбрать классические оттенки."
         },
         "colors": [
-          { "hex": "#0E0F12", "name": { "uz-Latn": "Qora", "uz-Cyrl": "Қора", "en": "Black", "ru": "Чёрный" } },
-          { "hex": "#E9EEF5", "name": { "uz-Latn": "Kumushrang", "uz-Cyrl": "Кумушранг", "en": "Silver", "ru": "Серебристый" } },
-          { "hex": "#4F7CFF", "name": { "uz-Latn": "Ko‘k", "uz-Cyrl": "Кўк", "en": "Blue", "ru": "Синий" } },
-          { "hex": "#C8A86B", "name": { "uz-Latn": "Oltin", "uz-Cyrl": "Олтин", "en": "Gold", "ru": "Золотой" } }
+          {
+            "hex": "#0E0F12",
+            "name": {
+              "uz-Latn": "Qora",
+              "uz-Cyrl": "Қора",
+              "en": "Black",
+              "ru": "Чёрный"
+            }
+          },
+          {
+            "hex": "#E9EEF5",
+            "name": {
+              "uz-Latn": "Kumushrang",
+              "uz-Cyrl": "Кумушранг",
+              "en": "Silver",
+              "ru": "Серебристый"
+            }
+          },
+          {
+            "hex": "#4F7CFF",
+            "name": {
+              "uz-Latn": "Ko‘k",
+              "uz-Cyrl": "Кўк",
+              "en": "Blue",
+              "ru": "Синий"
+            }
+          },
+          {
+            "hex": "#C8A86B",
+            "name": {
+              "uz-Latn": "Oltin",
+              "uz-Cyrl": "Олтин",
+              "en": "Gold",
+              "ru": "Золотой"
+            }
+          }
         ]
       },
       "startsAt": "2026-11-14T18:30",
-      "programTimes": ["17:30", "18:00", "18:30", "19:00", "20:00", "21:30"]
+      "programTimes": [
+        "17:30",
+        "18:00",
+        "18:30",
+        "19:00",
+        "20:00",
+        "21:30"
+      ],
+      "anniversaryDetails": {
+        "years": 10,
+        "founderRole": {
+          "uz-Latn": "Asoschi va rahbar",
+          "uz-Cyrl": "Асосчи ва раҳбар",
+          "en": "Founder and director",
+          "ru": "Основатель и руководитель"
+        },
+        "storyYears": {
+          "company-start": "2017",
+          "company-team": "2021",
+          "company-next": "2027"
+        },
+        "statistics": [
+          {
+            "id": "years",
+            "value": "10",
+            "label": {
+              "uz-Latn": "Yil birga",
+              "uz-Cyrl": "Йил бирга",
+              "en": "Years together",
+              "ru": "Лет вместе"
+            }
+          },
+          {
+            "id": "projects",
+            "value": "200+",
+            "label": {
+              "uz-Latn": "Loyihalar",
+              "uz-Cyrl": "Лойиҳалар",
+              "en": "Projects",
+              "ru": "Проектов"
+            }
+          },
+          {
+            "id": "team",
+            "value": "40+",
+            "label": {
+              "uz-Latn": "Jamoa a’zosi",
+              "uz-Cyrl": "Жамоа аъзоси",
+              "en": "Team members",
+              "ru": "Сотрудников"
+            }
+          },
+          {
+            "id": "cities",
+            "value": "8",
+            "label": {
+              "uz-Latn": "Shahar",
+              "uz-Cyrl": "Шаҳар",
+              "en": "Cities",
+              "ru": "Городов"
+            }
+          }
+        ]
+      },
+      "story": [
+        {
+          "id": "company-start",
+          "title": {
+            "uz-Latn": "Ilk qadam",
+            "uz-Cyrl": "Илк қадам",
+            "en": "Our first step",
+            "ru": "Первый шаг"
+          },
+          "text": {
+            "uz-Latn": "Bir maqsad yo‘lida ish boshladik.",
+            "uz-Cyrl": "Бир мақсад йўлида иш бошладик.",
+            "en": "We began with one shared purpose.",
+            "ru": "Мы начали с общей целью."
+          }
+        },
+        {
+          "id": "company-team",
+          "title": {
+            "uz-Latn": "Jamoamiz o‘sdi",
+            "uz-Cyrl": "Жамоамиз ўсди",
+            "en": "Our team grew",
+            "ru": "Команда выросла"
+          },
+          "text": {
+            "uz-Latn": "Yangi hamkasblar bilan ko‘proq marralarga erishdik.",
+            "uz-Cyrl": "Янги ҳамкасблар билан кўпроқ марраларга эришдик.",
+            "en": "New colleagues helped us reach new milestones.",
+            "ru": "С новыми коллегами мы достигли новых высот."
+          }
+        },
+        {
+          "id": "company-next",
+          "title": {
+            "uz-Latn": "Yangi ufqlar",
+            "uz-Cyrl": "Янги уфқлар",
+            "en": "New horizons",
+            "ru": "Новые горизонты"
+          },
+          "text": {
+            "uz-Latn": "Kelajakni birgalikda quramiz.",
+            "uz-Cyrl": "Келажакни биргаликда қурамиз.",
+            "en": "We are building our future together.",
+            "ru": "Мы вместе строим будущее."
+          }
+        }
+      ]
     }
   }
 }

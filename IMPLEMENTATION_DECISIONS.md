@@ -2109,3 +2109,7 @@ Development agents are distinct from production queue workers. The running app w
 ### Barakali completion (2026-10-29)
 
 - Sequential Taklifla queue: source Barakali is a birthday design with one portrait slot, floral SVG art, wishes and contact/map actions. Registered supported event `birthday` independently of its birthday category; migrations 0173/0174 register and publish after source/browser/real lifecycle checks. No attendance-count field is added. All copy/maps/wishes use the shared contract and canonical preview-only fixture.
+
+### Yubiley Sahifasi completion (2026-10-29)
+
+- Bookie Navy is the corporate anniversary source. Preserve its central/closing years, founder role, milestone dates and statistics. Store these source-supported values in validated `templateData["taklifla-yubiley-sahifasi"]` and expose editor controls; shared people/hosts/story/program/map data remain reusable. Canonical corporate preview-only statistics/milestones belong in the shared event profile JSON. RSVP organisation is part of its note and attendance uses 1/0, without a guest-count input. Migrations 0175/0176 register/publish it for corporate events in category other after complete verification.

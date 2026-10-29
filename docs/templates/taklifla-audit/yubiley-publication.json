@@ -1,0 +1,25 @@
+{
+  "date": "2026-10-29",
+  "configured": true,
+  "template": {
+    "id": "taklifla-yubiley-sahifasi",
+    "name": "Yubiley Sahifasi",
+    "description": "To‘q moviy va oltin bezaklar, korxona tarixi va tantanali yubiley.",
+    "previewImage": "/templates/taklifla-yubiley-sahifasi/preview.webp",
+    "previewEventType": "korporativ",
+    "categoryIds": [
+      "other"
+    ],
+    "supportedEventTypes": [
+      "korporativ"
+    ],
+    "priceMinor": 100000,
+    "currency": "UZS",
+    "accent": "#1f2a4a",
+    "published": true
+  },
+  "migrations": [
+    "0175_register_taklifla_yubiley_sahifasi.sql",
+    "0176_publish_taklifla_yubiley_sahifasi.sql"
+  ]
+}

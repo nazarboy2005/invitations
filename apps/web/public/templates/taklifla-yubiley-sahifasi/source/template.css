@@ -1,0 +1,730 @@
+
+    :root {
+      /* Locked 5-tone palette: navy + paper + gold + neutral grey supporting tone */
+      --paper: #FBF6EC;
+      --paper-2: #F2EADA;
+      --ink: #1F2A4A;        /* navy */
+      --accent: #B89968;     /* gold */
+      --accent-soft: #D7C19A;
+      --ink-3: #6C7290;
+      --neutral: #4A526A;    /* corporate slate supporting tone */
+      --line: rgba(31, 42, 74, 0.18);
+      --line-gold: rgba(184, 153, 104, 0.42);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { background: #0E1530; color: var(--ink); -webkit-font-smoothing: antialiased; }
+    body {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 17px; line-height: 1.6;
+      max-width: 100vw; overflow-x: hidden;
+    }
+    .shell {
+      max-width: 480px; margin: 0 auto;
+      background: var(--paper);
+      position: relative;
+      box-shadow: 0 0 80px rgba(0,0,0,0.6);
+      min-height: 100vh;
+    }
+    /* Reusable */
+    .eyebrow {
+      font-family: 'Manrope', sans-serif;
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 0.45em;
+      color: var(--accent);
+      text-transform: uppercase;
+    }
+    .label {
+      font-family: 'Manrope', sans-serif;
+      font-size: 11px; font-weight: 600;
+      letter-spacing: 0.32em;
+      color: var(--ink);
+      text-transform: uppercase;
+    }
+    .display {
+      font-family: 'Bodoni Moda', 'Bodoni 72', serif;
+      font-weight: 500;
+      letter-spacing: -0.005em;
+      line-height: 0.96;
+    }
+    .body {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      color: var(--ink);
+      opacity: 0.85;
+      line-height: 1.65;
+    }
+    .rule-h {
+      height: 1px; width: 60%;
+      background: linear-gradient(to right, transparent, var(--accent), transparent);
+      margin: 0 auto;
+    }
+    .ornament { color: var(--accent); display: inline-flex; }
+
+    /* Sections */
+    section {
+      padding: 80px 28px;
+      position: relative;
+    }
+    section + section {
+      border-top: 1px solid var(--line);
+    }
+
+    /* HERO — corporate anniversary: enormous "25" numeral set in
+       Bodoni Moda, company name underneath, with a gold Greek-key
+       (meander) cornice banding the top and bottom. */
+    .hero {
+      min-height: 100vh;
+      padding: 0 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      background: var(--paper);
+    }
+    .hero::before {
+      content: "";
+      position: absolute; inset: 0;
+      background-image: url("https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1200&q=85&auto=format&fit=crop");
+      background-size: cover; background-position: center;
+      opacity: 0.32;
+      filter: brightness(0.95) contrast(1.05) saturate(0.55) hue-rotate(-8deg);
+    }
+    .hero::after {
+      content: "";
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse at center, rgba(251,246,236,0.55), rgba(251,246,236,0.94) 78%),
+        linear-gradient(to bottom, rgba(251,246,236,0.45) 0%, rgba(251,246,236,0.8) 60%, rgba(251,246,236,0.98) 100%);
+    }
+    .hero > * { position: relative; z-index: 2; }
+
+    /* Greek-key (meander) bands across the top and bottom of HERO. */
+    .meander-band {
+      position: absolute;
+      left: 0; right: 0;
+      height: 28px;
+      width: 100%;
+      z-index: 2;
+      pointer-events: none;
+      color: var(--accent);
+    }
+    .meander-band.top { top: 18px; }
+    .meander-band.bottom { bottom: 18px; transform: scaleY(-1); }
+
+    /* Thin double-rule above and below the meander bands */
+    .hero-double {
+      position: absolute; left: 28px; right: 28px;
+      height: 4px; z-index: 2; pointer-events: none;
+    }
+    .hero-double::before, .hero-double::after {
+      content: ""; position: absolute; left: 0; right: 0; height: 1px;
+      background: var(--accent); opacity: 0.55;
+    }
+    .hero-double::before { top: 0; }
+    .hero-double::after { bottom: 0; }
+    .hero-double.top    { top: 8px; }
+    .hero-double.top2   { top: 54px; }
+    .hero-double.bot    { bottom: 8px; }
+    .hero-double.bot2   { bottom: 54px; }
+
+    .hero-mid {
+      flex: 1;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 12px;
+      padding: 90px 0 90px;
+    }
+    .hero-eyebrow {
+      font-family: 'Manrope', sans-serif;
+      font-weight: 700;
+      font-size: 11px;
+      letter-spacing: 0.55em;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .hero-25 {
+      font-family: 'Bodoni Moda', serif;
+      font-weight: 500;
+      font-size: clamp(170px, 48vw, 260px);
+      line-height: 0.9;
+      color: var(--ink);
+      font-variant-numeric: lining-nums;
+      letter-spacing: -0.02em;
+      position: relative;
+    }
+    .hero-25-sub {
+      font-family: 'Manrope', sans-serif;
+      font-weight: 600;
+      font-size: 12px;
+      letter-spacing: 0.4em;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-top: -4px;
+    }
+    .hero-company {
+      font-family: 'Bodoni Moda', serif;
+      font-weight: 500;
+      font-size: clamp(28px, 7.2vw, 38px);
+      color: var(--ink);
+      margin-top: 22px;
+      letter-spacing: 0.01em;
+      line-height: 1.05;
+      max-width: 320px;
+    }
+    .hero-tagline {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 18px;
+      color: var(--neutral);
+      margin-top: 10px;
+      max-width: 320px;
+    }
+    .hero-meta {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 16px;
+      align-items: center;
+      margin-top: 28px;
+      width: 100%;
+      max-width: 320px;
+    }
+    .hero-meta-cell {
+      display: flex; flex-direction: column;
+      align-items: center; gap: 6px;
+    }
+    .hero-meta-val {
+      font-family: 'Bodoni Moda', serif;
+      font-weight: 500;
+      font-size: 22px;
+      color: var(--ink);
+    }
+    .hero-meta-divider {
+      width: 1px; height: 36px;
+      background: var(--line-gold);
+    }
+    .scroll-hint {
+      font-family: 'Manrope', sans-serif;
+      font-size: 9px; font-weight: 600;
+      letter-spacing: 0.4em;
+      color: var(--ink-3);
+      text-transform: uppercase;
+    }
+    .scroll-arrow {
+      width: 1px; height: 28px;
+      background: var(--accent);
+      margin: 10px auto 0;
+      animation: scroll-pulse 2s ease-in-out infinite;
+    }
+    @keyframes scroll-pulse {
+      0%, 100% { opacity: 0.3; transform: translateY(0); }
+      50% { opacity: 1; transform: translateY(4px); }
+    }
+
+    /* FOUNDER QUOTE — pull-quote section, italic, big leading quotation
+       mark, founder name + facsimile signature beneath. */
+    .founder {
+      text-align: center;
+      padding: 96px 32px;
+      background: var(--paper);
+    }
+    .founder-eyebrow { margin-bottom: 28px; display: block; }
+    .founder-mark {
+      font-family: 'Bodoni Moda', serif;
+      font-weight: 500;
+      font-size: 96px;
+      line-height: 0.6;
+      color: var(--accent);
+      opacity: 0.85;
+      height: 40px;
+    }
+    .founder-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px;
+      font-style: italic;
+      font-weight: 300;
+      line-height: 1.5;
+      color: var(--ink);
+      margin: 22px auto 30px;
+      max-width: 380px;
+      text-wrap: pretty;
+    }
+    .founder-quote .accent { color: var(--accent); }
+    .founder-sig {
+      font-family: 'Bodoni Moda', serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 28px;
+      color: var(--ink);
+      margin-top: 22px;
+      letter-spacing: 0.02em;
+    }
+    .founder-name {
+      font-family: 'Manrope', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.4em;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-top: 10px;
+    }
+    .founder-role {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 15px;
+      color: var(--ink-3);
+      margin-top: 4px;
+    }
+
+    /* MILESTONES TIMELINE — 5 entries, vertical, gold rail with year
+       chip at left and entry copy at right. */
+    .timeline {
+      background: linear-gradient(180deg, var(--paper) 0%, var(--paper-2) 50%, var(--paper) 100%);
+      padding: 90px 28px 80px;
+    }
+    .timeline-head { text-align: center; margin-bottom: 44px; }
+    .timeline-head h2 {
+      font-family: 'Bodoni Moda', serif;
+      font-weight: 500;
+      font-size: 32px;
+      color: var(--ink);
+      margin-top: 12px;
+    }
+    .timeline-rail {
+      position: relative;
+      max-width: 380px;
+      margin: 0 auto;
+      padding-left: 78px;
+    }
+    .timeline-rail::before {
+      content: "";
+      position: absolute;
+      left: 60px; top: 4px; bottom: 4px;
+      width: 1px;
+      background: linear-gradient(to bottom, transparent, var(--accent) 8%, var(--accent) 92%, transparent);
+      opacity: 0.6;
+    }
+    .ms {
+      position: relative;
+      padding: 14px 0 26px 22px;
+    }
+    .ms:last-child { padding-bottom: 0; }
+    .ms::before {
+      content: "";
+      position: absolute;
+      left: -8px; top: 22px;
+      width: 9px; height: 9px;
+      background: var(--accent);
+      transform: rotate(45deg);
+      border: 1px solid var(--paper);
+      box-shadow: 0 0 0 1px var(--accent);
+    }
+    .ms-year {
+      position: absolute;
+      left: -78px; top: 14px;
+      width: 60px;
+      font-family: 'Bodoni Moda', serif;
+      font-weight: 600;
+      font-size: 20px;
+      color: var(--accent);
+      letter-spacing: 0.02em;
+      text-align: right;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    .ms-title {
+      font-family: 'Bodoni Moda', serif;
+      font-weight: 500;
+      font-size: 19px;
+      color: var(--ink);
+      line-height: 1.2;
+      margin-bottom: 6px;
+    }
+    .ms-desc {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 16px;
+      color: var(--ink);
+      opacity: 0.8;
+      line-height: 1.5;
+    }
+
+    /* NUMBERS ROW — 4 stats. Big Bodoni numerals, gold rules between. */
+    .numbers {
+      background: var(--ink);
+      color: var(--paper);
+      padding: 70px 24px;
+      text-align: center;
+      position: relative;
+    }
+    .numbers::before, .numbers::after {
+      content: "";
+      position: absolute; left: 24px; right: 24px;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--accent), transparent);
+    }
+    .numbers::before { top: 18px; }
+    .numbers::after { bottom: 18px; }
+    .numbers-eyebrow {
+      font-family: 'Manrope', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.45em;
+      color: var(--accent-soft);
+      text-transform: uppercase;
+      margin-bottom: 30px;
+      display: block;
+    }
+    .numbers-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 28px 12px;
+      max-width: 380px;
+      margin: 0 auto;
+    }
+    .stat {
+      display: flex; flex-direction: column;
+      align-items: center; gap: 8px;
+      position: relative;
+    }
+    .stat-val {
+      font-family: 'Bodoni Moda', serif;
+      font-weight: 500;
+      font-size: 46px;
+      line-height: 1;
+      color: var(--paper);
+      font-variant-numeric: lining-nums;
+      letter-spacing: -0.01em;
+    }
+    .stat-val .plus {
+      color: var(--accent);
+      font-size: 32px;
+      vertical-align: 10px;
+      margin-left: -2px;
+    }
+    .stat-label {
+      font-family: 'Manrope', sans-serif;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.32em;
+      color: var(--accent-soft);
+      text-transform: uppercase;
+    }
+
+    /* AGENDA — 3 steps. Numbered, gold rule between. */
+    .agenda { padding: 90px 28px 80px; background: var(--paper); }
+    .agenda-head { text-align: center; margin-bottom: 38px; }
+    .agenda-head h2 {
+      font-family: 'Bodoni Moda', serif;
+      font-weight: 500;
+      font-size: 30px;
+      color: var(--ink);
+      margin-top: 12px;
+    }
+    .agenda-list {
+      max-width: 380px;
+      margin: 0 auto;
+      display: flex; flex-direction: column;
+      gap: 0;
+    }
+    .ag {
+      display: grid;
+      grid-template-columns: 64px 1fr;
+      gap: 14px;
+      padding: 22px 0;
+      position: relative;
+    }
+    .ag + .ag {
+      border-top: 1px solid var(--line-gold);
+    }
+    .ag-num {
+      font-family: 'Bodoni Moda', serif;
+      font-weight: 500;
+      font-size: 44px;
+      line-height: 0.9;
+      color: var(--accent);
+      letter-spacing: -0.01em;
+      font-variant-numeric: lining-nums;
+    }
+    .ag-time {
+      font-family: 'Manrope', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.3em;
+      color: var(--ink-3);
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .ag-title {
+      font-family: 'Bodoni Moda', serif;
+      font-weight: 500;
+      font-size: 19px;
+      color: var(--ink);
+      margin-bottom: 4px;
+    }
+    .ag-desc {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 15px;
+      color: var(--ink);
+      opacity: 0.78;
+      line-height: 1.5;
+    }
+
+    /* VENUE & MAP */
+    .venue { text-align: center; padding: 80px 28px; background: var(--paper-2); }
+    .venue-eyebrow { margin-bottom: 24px; display: block; }
+    .venue-name {
+      font-family: 'Bodoni Moda', serif;
+      font-weight: 500;
+      font-size: 28px;
+      color: var(--ink);
+      margin-bottom: 8px;
+    }
+    .venue-addr {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 16px;
+      color: var(--ink);
+      opacity: 0.8;
+      margin-bottom: 22px;
+    }
+    .venue-meta {
+      display: inline-flex; gap: 24px;
+      align-items: center; justify-content: center;
+      margin-bottom: 26px;
+      padding: 12px 20px;
+      border: 1px solid var(--line-gold);
+      background: var(--paper);
+    }
+    .venue-meta-cell {
+      display: flex; flex-direction: column; align-items: center; gap: 4px;
+    }
+    .venue-meta-label {
+      font-family: 'Manrope', sans-serif;
+      font-size: 8.5px; font-weight: 700;
+      letter-spacing: 0.32em;
+      color: var(--ink-3);
+      text-transform: uppercase;
+    }
+    .venue-meta-val {
+      font-family: 'Bodoni Moda', serif;
+      font-weight: 500;
+      font-size: 16px;
+      color: var(--ink);
+    }
+    .venue-map {
+      width: 100%; max-width: 380px;
+      height: 160px;
+      margin: 0 auto;
+      border: 1px solid var(--line-gold);
+      background: var(--paper);
+      position: relative;
+      overflow: hidden;
+    }
+    .venue-map svg { display: block; width: 100%; height: 100%; }
+    .venue-pin {
+      position: absolute;
+      left: 50%; top: 50%;
+      transform: translate(-50%, -100%);
+      width: 26px; height: 26px;
+      color: var(--accent);
+    }
+
+    /* RSVP */
+    .rsvp { padding: 90px 28px 70px; background: var(--paper); }
+    .rsvp-head { text-align: center; margin-bottom: 32px; }
+    .rsvp-head h2 {
+      font-family: 'Bodoni Moda', serif;
+      font-weight: 500;
+      font-size: 30px;
+      color: var(--ink);
+      margin-top: 10px;
+    }
+    .rsvp-head .body {
+      max-width: 340px;
+      margin: 12px auto 0;
+    }
+    .rsvp-form {
+      border: 1px solid var(--line-gold);
+      background: var(--paper);
+      padding: 22px;
+      max-width: 380px;
+      margin: 0 auto;
+    }
+    .rsvp-form input,
+    .rsvp-form textarea,
+    .rsvp-form select {
+      width: 100%;
+      padding: 12px 14px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      color: var(--ink);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 16px;
+      outline: none;
+      margin-bottom: 12px;
+      transition: border-color 0.2s;
+      border-radius: 0;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+    .rsvp-form input::placeholder,
+    .rsvp-form textarea::placeholder {
+      color: var(--ink-3);
+      font-style: italic;
+    }
+    .rsvp-form input:focus,
+    .rsvp-form textarea:focus,
+    .rsvp-form select:focus { border-color: var(--accent); }
+    .rsvp-form textarea {
+      min-height: 70px;
+      resize: vertical;
+      font-style: italic;
+      line-height: 1.5;
+    }
+    .rsvp-attend {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .rsvp-attend label {
+      display: flex; align-items: center; justify-content: center;
+      gap: 8px;
+      padding: 12px 10px;
+      min-height: 44px;
+      border: 1px solid var(--line);
+      cursor: pointer;
+      font-family: 'Manrope', sans-serif;
+      font-size: 11px; font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink);
+      transition: all 0.2s;
+    }
+    .rsvp-attend input { display: none; }
+    .rsvp-attend label.on {
+      background: var(--ink);
+      color: var(--paper);
+      border-color: var(--ink);
+    }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      gap: 8px;
+      padding: 13px 18px;
+      min-height: 44px;
+      font-family: 'Manrope', sans-serif;
+      font-size: 12px; font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      cursor: pointer;
+      border: 1px solid var(--accent);
+      background: transparent;
+      color: var(--accent);
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+    .btn:hover, .btn:active {
+      background: var(--accent);
+      color: var(--paper);
+    }
+    .btn-primary {
+      background: var(--ink);
+      border-color: var(--ink);
+      color: var(--paper);
+    }
+    .btn-primary:hover, .btn-primary:active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: var(--paper);
+    }
+    .rsvp-form .btn { width: 100%; margin-top: 4px; }
+    .rsvp-thanks {
+      text-align: center;
+      padding: 28px 16px;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 18px;
+      color: var(--ink);
+      animation: fadeUp 0.5s ease;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* CLOSING */
+    .closing {
+      padding: 100px 28px 70px;
+      text-align: center;
+      background: var(--paper);
+      position: relative;
+    }
+    .closing-25 {
+      font-family: 'Bodoni Moda', serif;
+      font-weight: 500;
+      font-size: 92px;
+      line-height: 1;
+      color: var(--ink);
+      letter-spacing: 0.02em;
+      font-variant-numeric: lining-nums;
+      margin-bottom: 6px;
+    }
+    .closing-25-sub {
+      font-family: 'Manrope', sans-serif;
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 0.45em;
+      color: var(--accent);
+      text-transform: uppercase;
+    }
+    .closing-company {
+      font-family: 'Bodoni Moda', serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 24px;
+      color: var(--ink);
+      margin-top: 18px;
+    }
+    .closing-meta {
+      font-family: 'Manrope', sans-serif;
+      font-size: 10px; font-weight: 600;
+      letter-spacing: 0.4em;
+      color: var(--ink-3);
+      text-transform: uppercase;
+      margin-top: 24px;
+    }
+    .closing .meander-band {
+      position: relative;
+      width: 80%;
+      margin: 0 auto;
+      height: 22px;
+    }
+    .footer {
+      padding: 22px 28px max(env(safe-area-inset-bottom), 30px);
+      text-align: center;
+      border-top: 1px solid var(--line);
+      background: var(--paper);
+    }
+    .footer-text {
+      font-family: 'Manrope', sans-serif;
+      font-size: 9px; font-weight: 600;
+      letter-spacing: 0.32em;
+      color: var(--ink-3);
+      text-transform: uppercase;
+    }
+
+    /* Reveal-on-scroll */
+    .reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.8s ease, transform 0.8s ease; }
+    .reveal.in { opacity: 1; transform: translateY(0); }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal, .reveal.in { opacity: 1; transform: none; transition: none; }
+      .scroll-arrow { animation: none; }
+    }
+
+    @media (min-width: 600px) {
+      body { padding: 32px 0; background: #0E1530; }
+      .shell { border: 1px solid var(--line); border-radius: 2px; }
+    }
+  

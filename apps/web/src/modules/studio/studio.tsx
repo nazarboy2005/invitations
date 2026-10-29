@@ -33,6 +33,7 @@ import {
   getContent,
   invitationSchema,
   muhrliMaktubDataSchema,
+  yubileySahifasiDataSchema,
   pulauSehatiDataSchema,
   LANGUAGE_NAMES,
   LOCALES,
@@ -83,6 +84,7 @@ import { TakliflaAsalari } from "@/templates/taklifla-asalari/renderer";
 import { TungiSaroyInvitation } from "@/templates/taklifla-tungi-saroy/renderer";
 import { TakliflaTovus } from "@/templates/taklifla-tovus/renderer";
 import { TakliflaTortFasl } from "@/templates/taklifla-tort-fasl/renderer";
+import { TakliflaYubileySahifasi } from "@/templates/taklifla-yubiley-sahifasi/renderer";
 import { TakliflaBarakali } from "@/templates/taklifla-barakali/renderer";
 import { TakliflaZarhalSahifaInvitation } from "@/templates/taklifla-zarhal-sahifa/renderer";
 import { MuhrliMaktubInvitation } from "@/templates/taklifla-muhrli-maktub/renderer";
@@ -881,6 +883,10 @@ export function Studio({
           }
         : current,
     );
+  }
+  const yubileyData = yubileySahifasiDataSchema.parse(invitation.templateData["taklifla-yubiley-sahifasi"] ?? {});
+  function updateYubileyData(next: typeof yubileyData) {
+    setInvitation(current=>current ? {...current,templateData:{...current.templateData,"taklifla-yubiley-sahifasi":next}} : current);
   }
   const muhrliMaktubData = muhrliMaktubDataSchema.parse(
     invitation.templateData["taklifla-muhrli-maktub"] ?? {},
@@ -3354,6 +3360,17 @@ export function Studio({
                   )}
                 </OptionalSection>
                 <div className={styles.divider} />
+                {invitation.templateId === "taklifla-yubiley-sahifasi" && <div className={styles.formGrid}>
+                  <Field label="Yubiley yili"><input type="number" min={1} max={999} value={yubileyData.years ?? ""} disabled={identityLocked} onChange={e=>updateYubileyData({...yubileyData,years:e.target.value ? Math.min(999,Math.max(1,Number(e.target.value))) : null})}/></Field>
+                  <Field label={`Asoschining lavozimi · ${LANGUAGE_NAMES[locale]}`}><input maxLength={300} value={yubileyData.founderRole[locale] || ""} onChange={e=>updateYubileyData({...yubileyData,founderRole:{...yubileyData.founderRole,[locale]:e.target.value}})}/></Field>
+                  {invitation.story.map(chapter=><Field key={chapter.id} label={`Tarix sanasi · ${chapter.title[locale] || chapter.id}`}><input maxLength={30} value={yubileyData.storyYears[chapter.id] || ""} onChange={e=>updateYubileyData({...yubileyData,storyYears:{...yubileyData.storyYears,[chapter.id]:e.target.value}})}/></Field>)}
+                  {yubileyData.statistics.map((item,index)=><div key={item.id}>
+                    <Field label="Ko‘rsatkich"><input maxLength={30} value={item.value} onChange={e=>updateYubileyData({...yubileyData,statistics:yubileyData.statistics.map((s,i)=>i===index?{...s,value:e.target.value}:s)})}/></Field>
+                    <Field label={`Izoh · ${LANGUAGE_NAMES[locale]}`}><input maxLength={300} value={item.label[locale] || ""} onChange={e=>updateYubileyData({...yubileyData,statistics:yubileyData.statistics.map((s,i)=>i===index?{...s,label:{...s.label,[locale]:e.target.value}}:s)})}/></Field>
+                    <button type="button" onClick={()=>updateYubileyData({...yubileyData,statistics:yubileyData.statistics.filter(s=>s.id!==item.id)})}>O‘chirish</button>
+                  </div>)}
+                  {yubileyData.statistics.length<8 && <button type="button" onClick={()=>updateYubileyData({...yubileyData,statistics:[...yubileyData.statistics,{id:crypto.randomUUID(),value:"",label:{}}]})}>Ko‘rsatkich qo‘shish</button>}
+                </div>}
                 {invitation.templateId === "taklifla-muhrli-maktub" && (
                   <Field
                     label={`Gullar o‘rniga izoh · ${LANGUAGE_NAMES[locale]}`}
@@ -3897,6 +3914,8 @@ export function Studio({
                 preview
                 catalogMusic={section === 0 && !authoredPreview}
               />
+            ) : invitation.templateId === "taklifla-yubiley-sahifasi" ? (
+              <TakliflaYubileySahifasi invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview fullPreview catalogMusic={section === 0 && !authoredPreview} silentPlayback />
             ) : invitation.templateId === "taklifla-barakali" ? (
               <TakliflaBarakali invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview fullPreview catalogMusic={section === 0 && !authoredPreview} sampleWishes={section === 0 && !authoredPreview} silentPlayback />
             ) : invitation.templateId === "taklifla-zarhal-sahifa" ? (

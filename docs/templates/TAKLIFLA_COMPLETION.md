@@ -15,7 +15,7 @@ untouched. Application deployment and live payment activation are excluded.
 | Midnight Palace | taklifla-tungi-saroy | Published | Complete — current source, three-viewport motion, audio and real lifecycle audit passes |
 | Tovus | taklifla-tovus | Published | Complete — current source, three-viewport motion/audio and real lifecycle audit passes |
 | Barakali | taklifla-barakali | Private package | Complete — fully integrated and published through migrations 0173/0174 |
-| Bookie Navy | taklifla-yubiley-sahifasi | Private package | Pending |
+| Bookie Navy | taklifla-yubiley-sahifasi | Private package | Complete — anniversary fields, map and real RSVP implemented; published 0175/0176 |
 | Bookie Terracotta | taklifla-fayzli-xonadon | Private package | Pending |
 | Ertak | taklifla-ertak | Private package | Pending |
 | Garden Arch | taklifla-gulbog | Private package | Pending |
@@ -87,3 +87,10 @@ the individual commit below each completed row.
 - Same real renderer in catalog/studio/public. Canonical birthday fixture, translated sample wishes, creator portrait/alt/caption, guest greeting, date/countdown, contacts and Google venue bind through the typed contract. Public samples never leak.
 - Five package tests, mobile/desktop source comparison with motion, four locales/long/empty/reduced checks, actual audio, real authenticated lifecycle/moderated wishes, personalized cover, typecheck and production build pass. Compatible switching is rechecked after publication.
 - Applied only additive migrations 0173/0174; configured catalog confirms published birthday design. Evidence in `apps/web/src/templates/taklifla-barakali/evidence` and `docs/templates/taklifla-audit/barakali-*`. No app deployment or payment activation.
+
+## Yubiley Sahifasi integration
+
+- Exact navy book corporate source CSS, city photo and fonts retained. Restored missing hero/closing anniversary years, founder role, milestone years and statistic cards with validated editable persistent fields. Shared stories/program retain stable IDs.
+- Source venue illustration now links to the shared Google venue. Real one-person RSVP includes organisation/note and guest identity; repaired the hidden acknowledgment. Catalog music is gesture gated; all four locales, reduced motion, long/empty fields and seven repeated items pass.
+- Source/browser comparisons at 320/390/1280, 24 shared/adapter tests, actual audio, real save/reopen/source-data persistence, compatible switching, studio/public, publication/manual map/RSVP, personalized covers, typecheck and build pass.
+- Applied additive migrations 0175/0176, category other and supported corporate event registered independently. Configured catalog publication is confirmed. Evidence: `docs/templates/taklifla-audit/yubiley*`, `taklifla-yubiley-sahifasi-personalized-cover.webp`.

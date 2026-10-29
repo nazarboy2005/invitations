@@ -157,6 +157,12 @@ function isJsonValue(value: unknown): value is JsonValue {
   return false;
 }
 const pulauLocalizedText = z.partialRecord(localeSchema, text);
+export const yubileySahifasiDataSchema = z.object({
+  years: z.number().int().min(1).max(999).nullable().default(null),
+  founderRole: localizedShortText.default({}),
+  storyYears: z.record(z.string().max(100), z.string().max(30)).default({}),
+  statistics: z.array(z.object({ id: z.string().min(1).max(100), value: z.string().max(30), label: localizedShortText.default({}) })).max(8).default([]),
+}).default({years:null,founderRole:{},storyYears:{},statistics:[]});
 export const muhrliMaktubDataSchema = z.object({
   flowersNote: z.partialRecord(localeSchema, z.string().max(1000)).optional(),
 }).default({});
@@ -208,6 +214,7 @@ export const invitationSchema = z
     id: z.string().min(1).max(100),
     templateId: invitationTemplateIdSchema,
     templateData: z.record(z.string(), z.custom<JsonValue>(isJsonValue)).default({}).superRefine((data, ctx) => {
+      if (data["taklifla-yubiley-sahifasi"] !== undefined && !yubileySahifasiDataSchema.safeParse(data["taklifla-yubiley-sahifasi"]).success) ctx.addIssue({ code:"custom", path:["taklifla-yubiley-sahifasi"], message:"Invalid anniversary details" });
       if (data["taklifla-muhrli-maktub"] !== undefined) {
         const checked = muhrliMaktubDataSchema.safeParse(data["taklifla-muhrli-maktub"]);
         if (!checked.success) ctx.addIssue({ code: "custom", path: ["taklifla-muhrli-maktub"], message: "Invalid Muhrli Maktub data" });
@@ -1418,6 +1425,13 @@ export const TEMPLATES: TemplateDefinition[] = [
     currency: "UZS",
     accent: "#d4a52e",
     published: true,
+  },
+  {
+    id: "taklifla-yubiley-sahifasi", name: "Yubiley Sahifasi",
+    description: "To‘q moviy va oltin bezaklar, korxona tarixi va tantanali yubiley.",
+    previewImage: "/templates/taklifla-yubiley-sahifasi/preview.webp",
+    previewEventType: "korporativ", categoryIds: ["other"], supportedEventTypes: ["korporativ"],
+    priceMinor: 100000, currency: "UZS", accent: "#1f2a4a", published: true,
   },
   {
     id: "taklifla-barakali",

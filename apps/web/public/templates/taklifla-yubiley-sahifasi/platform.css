@@ -1,0 +1,23 @@
+/* Asset relocation and narrowly scoped accessibility/data adapters only. */
+.hero::before { background-image: url("assets/hero.jpg"); }
+[hidden] { display: none !important; }
+body:not([data-ready]) .shell { visibility: hidden; }
+.hero-company, .closing-company, .founder-sig, .venue-name, .hero-eyebrow { overflow-wrap: anywhere; max-width: 100%; }
+.hero-company { max-width: 320px; }
+.hero-25:empty { display: none; }
+.hero-tagline, .founder-quote, .ms-desc, .ag-desc { white-space: pre-line; }
+.ms-title, .ms-desc, .ag-title, .ag-desc { overflow-wrap: anywhere; }
+.hero-mid > *, .ag > div, .ms { min-width: 0; }
+.taklifla-lang-menu { min-width: 110px; }
+.taklifla-lang-switch, .taklifla-music-btn { top: max(16px, env(safe-area-inset-top)); }
+.taklifla-music-btn { max-width: calc(100vw - 130px); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+html[data-reduced-motion] *, html[data-reduced-motion] *::before, html[data-reduced-motion] *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+html[data-reduced-motion] .reveal { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
+
+a.venue-map { display:block; color:inherit; }
+
+.rsvp-thanks:not([hidden]) { display:block; }

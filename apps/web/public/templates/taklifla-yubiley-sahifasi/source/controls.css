@@ -1,0 +1,21 @@
+
+.taklifla-music-btn{position:fixed;top:16px;right:16px;z-index:9999;display:inline-flex;align-items:center;gap:8px;height:44px;padding:0 16px;border-radius:999px;border:none;background:rgba(255,255,255,.92);color:rgba(0,0,0,.85);box-shadow:0 4px 16px rgba(0,0,0,.18);cursor:pointer;font-family:system-ui,-apple-system,sans-serif;font-size:13px;font-weight:600;letter-spacing:.02em;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);transition:transform .15s ease,background .25s ease,color .25s ease}
+.taklifla-music-btn:hover{transform:scale(1.04)}
+.taklifla-music-btn:active{transform:scale(.96)}
+.taklifla-music-btn[hidden]{display:none}
+.taklifla-music-btn.playing{background:rgba(0,0,0,.85);color:#fff}
+.taklifla-music-btn svg{flex:none}
+
+
+.taklifla-lang-switch{position:fixed;top:16px;left:16px;z-index:9999;font-family:system-ui,-apple-system,sans-serif}
+.taklifla-lang-toggle{display:inline-flex;align-items:center;gap:6px;height:30px;padding:0 12px;border-radius:999px;border:none;background:rgba(255,255,255,.92);color:rgba(0,0,0,.85);box-shadow:0 4px 16px rgba(0,0,0,.18);font:inherit;font-size:11px;font-weight:700;letter-spacing:.14em;cursor:pointer;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);transition:transform .15s ease}
+.taklifla-lang-toggle:hover{transform:scale(1.04)}
+.taklifla-lang-toggle:active{transform:scale(.96)}
+.taklifla-lang-toggle .chev{display:inline-block;font-size:9px;opacity:.55;transition:transform .25s ease}
+.taklifla-lang-switch.open .taklifla-lang-toggle .chev{transform:rotate(180deg)}
+.taklifla-lang-menu{position:absolute;top:38px;left:0;min-width:88px;padding:4px;border-radius:10px;background:rgba(255,255,255,.96);box-shadow:0 12px 30px -8px rgba(0,0,0,.28);display:none;flex-direction:column;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.taklifla-lang-switch.open .taklifla-lang-menu{display:flex}
+.taklifla-lang-menu button{appearance:none;border:none;background:none;cursor:pointer;font:inherit;font-size:11px;font-weight:700;letter-spacing:.14em;color:rgba(0,0,0,.85);text-align:left;padding:8px 12px;border-radius:6px;transition:background .15s ease}
+.taklifla-lang-menu button:hover{background:rgba(0,0,0,.06)}
+.taklifla-lang-menu button.active{background:rgba(0,0,0,.85);color:#fff}
+.taklifla-lang-menu hr{border:none;height:1px;background:rgba(0,0,0,.08);margin:2px 8px}
