@@ -11,7 +11,7 @@ import previewSample from "./preview-sample.json";
 type EventSample = {
   personIndex?: number;
   celebrantAge?: number;
-  details?: {families:{bride:Partial<Record<Locale,string>>;groom:Partial<Record<Locale,string>>};reminderTitle:Partial<Record<Locale,string>>;reminderText:Partial<Record<Locale,string>>;footerNote:Partial<Record<Locale,string>>;giftNote:Partial<Record<Locale,string>>;stayText:Partial<Record<Locale,string>>;hashtag:string};
+  details?: {programLabels:Record<string,Partial<Record<Locale,string>>>;families:{bride:Partial<Record<Locale,string>>;groom:Partial<Record<Locale,string>>};reminderTitle:Partial<Record<Locale,string>>;reminderText:Partial<Record<Locale,string>>;footerNote:Partial<Record<Locale,string>>;giftNote:Partial<Record<Locale,string>>;stayText:Partial<Record<Locale,string>>;hashtag:string};
   housewarmingDetails?: Invitation["templateData"][string];
   anniversaryDetails?: Invitation["templateData"][string];
   story?: Invitation["story"];
@@ -141,7 +141,9 @@ export function createTemplatePreviewSample(
     artistLineup: sampleEventType === "wedding" ? structuredClone(previewSample.artistLineup) : [],
     gallery: structuredClone(templateSample?.gallery ?? previewSample.gallery),
     story: structuredClone(EVENT_SAMPLES[sampleEventType]?.story ?? (sampleEventType === "wedding" ? previewSample.story : [])),
-    templateData: templateId === "taklifla-osmon" && EVENT_SAMPLES[sampleEventType]?.details
+    templateData: templateId === "taklifla-parilar-ertagi" && EVENT_SAMPLES[sampleEventType]?.details
+      ? { "taklifla-parilar-ertagi": structuredClone({arrivalNote:EVENT_SAMPLES[sampleEventType]!.details!.reminderText,programLabels:EVENT_SAMPLES[sampleEventType]!.details!.programLabels}) }
+      : templateId === "taklifla-osmon" && EVENT_SAMPLES[sampleEventType]?.details
       ? { "taklifla-osmon": structuredClone({giftNote:EVENT_SAMPLES[sampleEventType]!.details!.giftNote}) }
       : templateId === "taklifla-oltin-yol" && EVENT_SAMPLES[sampleEventType]?.details
       ? { "taklifla-oltin-yol": structuredClone({arrivalNote:EVENT_SAMPLES[sampleEventType]!.details!.reminderText,giftNote:EVENT_SAMPLES[sampleEventType]!.details!.giftNote,footerNote:EVENT_SAMPLES[sampleEventType]!.details!.footerNote}) }

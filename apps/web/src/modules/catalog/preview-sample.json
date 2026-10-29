@@ -701,6 +701,44 @@
           "ru": "По вопросам размещения свяжитесь с нами."
         },
         "hashtag": "#JavohirVaMadina",
+        "programLabels": {
+          "sample-arrival": {
+            "uz-Latn": "Kutib olish",
+            "uz-Cyrl": "Кутиб олиш",
+            "en": "Welcome",
+            "ru": "Встреча"
+          },
+          "sample-entrance": {
+            "uz-Latn": "Tantanali lahza",
+            "uz-Cyrl": "Тантанали лаҳза",
+            "en": "The entrance",
+            "ru": "Начало торжества"
+          },
+          "sample-meal": {
+            "uz-Latn": "Dasturxon",
+            "uz-Cyrl": "Дастурхон",
+            "en": "At the table",
+            "ru": "За столом"
+          },
+          "sample-music": {
+            "uz-Latn": "Raqs va kuy",
+            "uz-Cyrl": "Рақс ва куй",
+            "en": "Music and dance",
+            "ru": "Музыка и танцы"
+          },
+          "sample-cake": {
+            "uz-Latn": "Shirin lahza",
+            "uz-Cyrl": "Ширин лаҳза",
+            "en": "A sweet moment",
+            "ru": "Сладкий момент"
+          },
+          "sample-farewell": {
+            "uz-Latn": "Yaxshi tilaklar",
+            "uz-Cyrl": "Яхши тилаклар",
+            "en": "Kind wishes",
+            "ru": "Добрые пожелания"
+          }
+        },
         "giftNote": {
           "uz-Latn": "Ishtirokingiz va duoyingiz biz uchun eng qimmat sovg‘a.",
           "uz-Cyrl": "Иштирокингиз ва дуойингиз биз учун энг қиммат совға.",

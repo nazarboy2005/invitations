@@ -14,7 +14,7 @@ const targets: Record<PreviewTarget, string> = {
   contacts: "#contact, #contacts, footer, [data-chorlove-contacts]",
 };
 const openerSelector =
-  "#os-open, #oy-open, #mw-open, #splash.splash[onclick], #fs-open, #env-stage, #mp-open, #tv-open, #open-invitation, #open-prompt, #open-btn, #openBtn, #openEnvelope, #si-opener, [data-gg-source-opening], [data-landing-screenshot-id='invite-envelope']";
+  "#splash-open, #os-open, #oy-open, #mw-open, #splash.splash[onclick], #fs-open, #env-stage, #mp-open, #tv-open, #open-invitation, #open-prompt, #open-btn, #openBtn, #openEnvelope, #si-opener, [data-gg-source-opening], [data-landing-screenshot-id='invite-envelope']";
 
 /** Operates only on our same-origin preview; never touches the public renderer. */
 export function useStudioPreview(

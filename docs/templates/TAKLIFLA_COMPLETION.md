@@ -23,7 +23,7 @@ untouched. Application deployment and live payment activation are excluded.
 | Mountain | taklifla-toglar-bagrida | Private package | Complete — independent scene times, shared maps/wishes and full routes restored; published 0185/0186 |
 | Oltin Yo‘l | taklifla-oltin-yol | Private package | Complete — renderer/bridge, notes, timetable/wishes and full source motion integrated; published 0187/0188 |
 | Osmon | taklifla-osmon | Private package | Complete — exact airplane recovered, editable notes/shared wishes/closure restored; published 0189/0190 |
-| Pari | taklifla-parilar-ertagi | Private package | Pending |
+| Pari | taklifla-parilar-ertagi | Private package | Complete — broken body extraction repaired; full renderer/bridge and editable labels/arrival integrated; published 0191/0192 |
 | Qog‘oz | taklifla-qogoz-ertagi | Private package | Pending |
 | Sakura | taklifla-sakura-guli | Private package | Pending |
 | Sharlar | taklifla-sharlar | Private package | Pending |
@@ -140,3 +140,9 @@ the individual commit below each completed row.
 - Recovered the exact source airplane previously omitted after HTTP 403; all 19 cloud/flying objects and 14 seeded stars are present. Exact CSS/dependency hashes and original CLOUDS/DRIFTERS arrays verified. Native sky interpolation/parallax/floating/opening/reveal/fitting retained.
 - Added validated editable/persistent RSVP/gift prose, canonical localized preview wishes, original source close panel, correct Cyrillic labels, zero countdown and audio URL handling. Shared hosts/dress/maps/identity/program remain reusable; ready handshake avoids payload in window.name.
 - 25 shared/package tests, source/motion comparisons at 320/390/1280, four locales/long/empty/seven-event/reduced/closed/failure checks, real notes save/reopen/studio/publication/public/maps/pending wishes and compatible switching, actual audio, covers, typecheck/build pass. Migrations 0189/0190 publish only this wedding design. Evidence: `docs/templates/taklifla-audit/osmon*`.
+
+## Parilar ertagi integration
+
+- Repaired extraction that matched `<body>` inside a script comment and produced an empty design. Full native page is restored; exact CSS/eleven images/twelve fonts and source tunnel/opening/parallax/reveal/petals retained. Root CSS resolves original artwork paths correctly; source pin/arrow markup preserved.
+- Added full typed bridge and route integration, editable/persistent localized arrival note and stable-ID supplementary program labels, shared canonical wedding examples/wishes, shared maps/dress/contacts/identity and real moderated wishes. No sample identities/storage or placeholder audio served.
+- 25 shared/package checks, source comparisons at 320/390/1280 with six layers and active motion, four locales/long/empty/seven-event/reduced/failure/preview checks, real label/arrival save/reopen/studio/publication/public/maps/pending wishes and switching, actual audio, covers, typecheck/build pass. Migrations 0191/0192 publish only this wedding design. Evidence: `docs/templates/taklifla-audit/pari*`.

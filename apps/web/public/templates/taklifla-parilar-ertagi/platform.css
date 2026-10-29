@@ -1,0 +1,24 @@
+[hidden] { display: none !important; }
+.couple, .invite-couple, .venue-name, .event-title, .event-desc, .wish-name, .wish-text { overflow-wrap: anywhere; }
+.invite-poem, .info-value, .event-desc, .wish-text { white-space: pre-line; }
+.invite-location { display: block; }
+.wish-status { margin: 12px 0; color: var(--cream); text-align: center; }
+.wish-status:empty { display: none; }
+.wish-form input:focus-visible, .wish-form textarea:focus-visible, button:focus-visible, a:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
+.wish-submit:disabled { opacity: .6; cursor: wait; }
+.pari-long-name { font-size: clamp(30px, 9vw, 46px); }
+.splash-monogram .letter { overflow-wrap: anywhere; }
+html.pari-reduced { scroll-behavior: auto; }
+html.pari-reduced *, html.pari-reduced *::before, html.pari-reduced *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+html.pari-reduced .reveal { opacity: 1 !important; transform: none !important; }
+html.pari-reduced .petal { display: none; }
+html[lang="uz-Cyrl"] { --display: 'Cormorant Garamond', serif; --script: 'Cormorant Garamond', serif; }
+html[lang="ru"] { --display: 'Cormorant Garamond', serif; --script: 'Cormorant Garamond', serif; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+  .reveal { opacity: 1 !important; transform: none !important; }
+  .petal { display: none; }
+}
+
+html:not([data-ready]) body{visibility:hidden}.couple,.invite-couple,.invite-location,.footer-date,.invite-eyebrow,.invite-script{overflow-wrap:anywhere}.venue-city{white-space:pre-line}

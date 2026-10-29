@@ -1,0 +1,162 @@
+{
+  "source": "Invitations - this folder will be removed from production\\Invitations - this folder will be removed from production\\Taklifla\\Web invitations\\taklifla.uz\\templates\\pari__d3aabdc75890ce49.html",
+  "sourceSha256": "1a06507a4c2fbc03eedc7f6bfa60818032f61165e653a84b8801243d87f22ef7",
+  "sourceBytes": 77181,
+  "templateName": "Parilar ertagi",
+  "id": "taklifla-parilar-ertagi",
+  "private": false,
+  "assets": [
+    {
+      "file": "pari-img/arch-1.webp",
+      "bytes": 202860,
+      "sha256": "6f4779698c57faacfad6003f858050a7841a3fa45cb81da77fd38630a1f3e10b"
+    },
+    {
+      "file": "pari-img/arch-2.webp",
+      "bytes": 153876,
+      "sha256": "7fe3cce15563f91d5b1c871ab39d0eb652d491ab4d96da5506e7a71dbf74cb75"
+    },
+    {
+      "file": "pari-img/arch-3.webp",
+      "bytes": 69862,
+      "sha256": "127f7f425a4263a183d2016d8c596e4049dbac1481ce8cf4eb97cbc99cd2c262"
+    },
+    {
+      "file": "pari-img/balloon-1.webp",
+      "bytes": 99908,
+      "sha256": "63f9c6da4b52c37a3d10143e804a18e14d2abc9c3e00427bcb46214bf8e8951b"
+    },
+    {
+      "file": "pari-img/balloon-2.webp",
+      "bytes": 93534,
+      "sha256": "a33106173dd95e4bff90972c5660ce815e767ce77e8101010c38cf88ed2d3956"
+    },
+    {
+      "file": "pari-img/bg-countdown.webp",
+      "bytes": 273306,
+      "sha256": "b779b29bb2c65ad78c528f9f8bd7cd34c2c3976c523945f43678e414cff74ff3"
+    },
+    {
+      "file": "pari-img/bg-events.webp",
+      "bytes": 324676,
+      "sha256": "9f5bca88de325699102de9be9ea3f8f1f6a9ae0c604e0ca1b1ff89233029472c"
+    },
+    {
+      "file": "pari-img/bg-hero.webp",
+      "bytes": 55072,
+      "sha256": "a5ae670d5f93d546ae160e05020c977c68998bab59b054add7bfa885904c4512"
+    },
+    {
+      "file": "pari-img/bg-invite.webp",
+      "bytes": 42602,
+      "sha256": "4591bd7855f42a88649d784781bb6ceb9fc26f3d38b4140518b138b0ab4310ca"
+    },
+    {
+      "file": "pari-img/butterflies.webp",
+      "bytes": 113752,
+      "sha256": "2e7aa8f82d1bb7d5f7249c76e7253487db932a6cc9c211a67f5ea5bb2c44e85f"
+    },
+    {
+      "file": "pari-img/sparkles.webp",
+      "bytes": 22146,
+      "sha256": "7a8dbd5eec9f68ec9fd885ae434d9b521a29a258a5d589d801a938753ba8306a"
+    }
+  ],
+  "fonts": [
+    {
+      "url": "https://fonts.gstatic.com/s/cinzel/v26/8vIU7ww63mVu7gtR-kwKxNvkNOjw-tbnTYo.ttf",
+      "file": "fonts/8vIU7ww63mVu7gtR-kwKxNvkNOjw-tbnTYo.ttf",
+      "sha256": "a0242f6698ae0d3220a29986a09274f9d1eddb4a24da4e50faf387fd1804eb7b",
+      "bytes": 45884
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/cinzel/v26/8vIU7ww63mVu7gtR-kwKxNvkNOjw-uTnTYo.ttf",
+      "file": "fonts/8vIU7ww63mVu7gtR-kwKxNvkNOjw-uTnTYo.ttf",
+      "sha256": "bd933cb739b5125a1fda907d61ea237beadb4ac382ac7a5f9af0a8bbedaf48b7",
+      "bytes": 46048
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/cinzel/v26/8vIU7ww63mVu7gtR-kwKxNvkNOjw-gjgTYo.ttf",
+      "file": "fonts/8vIU7ww63mVu7gtR-kwKxNvkNOjw-gjgTYo.ttf",
+      "sha256": "5150b3609eeaaa9c6d7e093cb9b16ab8ec2f7110ddf0cbe751887e6f158398af",
+      "bytes": 46116
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/cinzel/v26/8vIU7ww63mVu7gtR-kwKxNvkNOjw-jHgTYo.ttf",
+      "file": "fonts/8vIU7ww63mVu7gtR-kwKxNvkNOjw-jHgTYo.ttf",
+      "sha256": "2c6b1ff0d368efb73636700b69dbef707fa5602a06d085a4e91e5125082651f0",
+      "bytes": 46124
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3smX5slCNuHLi8bLeY9MK7whWMhyjYrGFEsdtdc62E6zd5rDDOjw.ttf",
+      "file": "fonts/co3smX5slCNuHLi8bLeY9MK7whWMhyjYrGFEsdtdc62E6zd5rDDOjw.ttf",
+      "sha256": "b13a316f34ce9c69f634b729bc733ab21512e823e6f801f1e427ac4be7364979",
+      "bytes": 292904
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3smX5slCNuHLi8bLeY9MK7whWMhyjYrGFEsdtdc62E6zd58jDOjw.ttf",
+      "file": "fonts/co3smX5slCNuHLi8bLeY9MK7whWMhyjYrGFEsdtdc62E6zd58jDOjw.ttf",
+      "sha256": "0b9a8a33cfaa624d30f70f9b6686da769b319b8c37a55af16e29fef690108bbf",
+      "bytes": 293036
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3umX5slCNuHLi8bLeY9MK7whWMhyjypVO7abI26QOD_qE6GnM.ttf",
+      "file": "fonts/co3umX5slCNuHLi8bLeY9MK7whWMhyjypVO7abI26QOD_qE6GnM.ttf",
+      "sha256": "63e313fb9c65b6b2e177222010bbea911bfc5c79bee0fb69f8246fcc4e08c93a",
+      "bytes": 289788
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3umX5slCNuHLi8bLeY9MK7whWMhyjypVO7abI26QOD_v86GnM.ttf",
+      "file": "fonts/co3umX5slCNuHLi8bLeY9MK7whWMhyjypVO7abI26QOD_v86GnM.ttf",
+      "sha256": "6d37a86241a25d63f8fe6018b4c083449886b7165c1acb15edd0f574f690ecf7",
+      "bytes": 290236
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3umX5slCNuHLi8bLeY9MK7whWMhyjypVO7abI26QOD_s06GnM.ttf",
+      "file": "fonts/co3umX5slCNuHLi8bLeY9MK7whWMhyjypVO7abI26QOD_s06GnM.ttf",
+      "sha256": "1724047c8988ca5155bff667bc48fa52e97d57aabc6b42eebbf986f21a4be20b",
+      "bytes": 290496
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3umX5slCNuHLi8bLeY9MK7whWMhyjypVO7abI26QOD_iE9GnM.ttf",
+      "file": "fonts/co3umX5slCNuHLi8bLeY9MK7whWMhyjypVO7abI26QOD_iE9GnM.ttf",
+      "sha256": "69e7ae35cba23d962227b86f99217c250e642e4c6f6104b4f3ec465039e4e2d8",
+      "bytes": 290392
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/tangerine/v18/IurY6Y5j_oScZZow4VOBDg.ttf",
+      "file": "fonts/IurY6Y5j_oScZZow4VOBDg.ttf",
+      "sha256": "bf122bc56965760a9d898341fa151db9bdde3aa0827bfe07373b52d943d03603",
+      "bytes": 59440
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/tangerine/v18/Iurd6Y5j_oScZZow4VO5srNpjA.ttf",
+      "file": "fonts/Iurd6Y5j_oScZZow4VO5srNpjA.ttf",
+      "sha256": "af0922afe25d5e6b470cacfd65db4831da8c6f3954e850a508196a8ab2ae3cfc",
+      "bytes": 64284
+    }
+  ],
+  "fontCssUrl": "https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Tangerine:wght@400;700&display=swap",
+  "missingSourceDependencies": [],
+  "excluded": [
+    "query customizer/demo values",
+    "provider music query override",
+    "provider localStorage wishes and guestbook client",
+    "provider language persistence",
+    "Cloudflare analytics",
+    "tweaks app runtime (not referenced by a script)",
+    "Source assets/music.mp3 placeholder; optional shared creator/catalog audio replaces it"
+  ],
+  "sourceCssSha256": "54c9536d24125c5ff8ff7f13fc76da7df23ee22516a4cbaacdcc820ee5187a82",
+  "sourceParts": {
+    "source/motion.js": "56ac4ed9d9b2993dc96457a45b0e42b1bc366732cdda51b74becd3443c036b05",
+    "motion.js": "eba0317ea6256ad61119d86b981a978dbd395d4817d30bb18f2bcb6a881721c8",
+    "source/localization-items.js": "052280ae2412f2e21b2c25a3f3625c07f6d138813a21b7735f921d51752029e4"
+  },
+  "published": true,
+  "selectable": true,
+  "publicationMigrations": [
+    "0191_register_taklifla_parilar_ertagi.sql",
+    "0192_publish_taklifla_parilar_ertagi.sql"
+  ]
+}

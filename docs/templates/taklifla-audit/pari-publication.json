@@ -1,0 +1,25 @@
+{
+  "date": "2026-10-29",
+  "configured": true,
+  "template": {
+    "id": "taklifla-parilar-ertagi",
+    "name": "Parilar ertagi",
+    "description": "Qasrlar, ertaknamo arka qatlamlari va nafis harakatli nikoh taklifnomasi.",
+    "previewImage": "/templates/taklifla-parilar-ertagi/preview.webp",
+    "previewEventType": "wedding",
+    "categoryIds": [
+      "wedding"
+    ],
+    "supportedEventTypes": [
+      "wedding"
+    ],
+    "priceMinor": 100000,
+    "currency": "UZS",
+    "accent": "#b8a4c9",
+    "published": true
+  },
+  "migrations": [
+    "0191_register_taklifla_parilar_ertagi.sql",
+    "0192_publish_taklifla_parilar_ertagi.sql"
+  ]
+}

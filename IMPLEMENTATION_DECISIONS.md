@@ -2141,3 +2141,7 @@ Development agents are distinct from production queue workers. The running app w
 ### Osmon completion (2026-10-29)
 
 - Cheksiz Osmon retains all original cloud/flying artwork, including the recovered exact airplane, stars and sky motion. RSVP and nontransactional gift prose use editable localized `templateData["taklifla-osmon"]`; shared hosts/contacts/dress/maps/program stay reusable. Preserve native wishes closure and moderation states. Migrations 0189/0190 register/publish for weddings after full verification.
+
+### Parilar ertagi completion (2026-10-29)
+
+- Preserve Pari’s six-layer fairy tunnel, opener, particles, timeline and original source page. Supplementary timeline script labels are localized under `templateData["taklifla-parilar-ertagi"].programLabels` by stable program ID; arrival prose is editable there too. Main program titles/descriptions, people/hosts/date/maps/dress/contact data remain shared. Generic preview labels belong in the shared wedding event profile. Migrations 0191/0192 register/publish after verification.
