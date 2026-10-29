@@ -50,3 +50,5 @@ passes play/pause/resume/language-state checks. Catalog and personalized hero
 captures, typecheck and production build pass.
 
 Evidence: docs/templates/taklifla-audit/oltin*. No external app deployment/payments.
+
+Wish failures retain their translated failure state across native language changes; guest-token changes reset the form context. Three-viewport browser regressions verify this.

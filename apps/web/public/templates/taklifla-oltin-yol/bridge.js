@@ -7,7 +7,7 @@
   var show=function(s,on){var el=$(s);if(el)el.hidden=!on;};
   var safe=function(url){return typeof url==="string" && (/^https?:\/\//i.test(url)||/^\/(?!\/)/.test(url))?url:"";};
   function copy(){var c=window.OltinYolLabels[locale]||window.OltinYolLabels["uz-Latn"];return Object.assign({},c,{preview:c.preview_notice,failure:c.wish_error,load_failure:c.wish_load_error});}
-  function status(key){var el=$("#oy-wish-confirm");el.style.display="block";el.textContent=copy()[key];}
+  function status(key){var el=$("#oy-wish-confirm");el.dataset.statusKey=key;el.style.display="block";el.textContent=copy()[key];}
   function closed(){return state.epoch!==null && Date.now()>=state.epoch+86400000;}
   function closePanel(){
     var panel=$(".wish-closed");
@@ -24,7 +24,7 @@
     var d=state.variants[locale],c=copy();if(!d)return;
     if(state.preview)wishes=d.previewWishes||[];
     document.documentElement.lang=locale;document.documentElement.classList.toggle("reduced",state.reducedMotion);
-    all("[data-i18n]").forEach(function(el){var v=c[el.dataset.i18n];if(v!==undefined)el.textContent=v;});
+    all("[data-i18n]").forEach(function(el){var v=c[el.dataset.statusKey||el.dataset.i18n];if(v!==undefined)el.textContent=v;});
     all("[data-i18n-ph]").forEach(function(el){el.placeholder=c[el.dataset.i18nPh]||"";el.setAttribute("aria-label",el.placeholder);});
     all(".oy-lang button").forEach(function(b){b.hidden=!state.enabledLocales.includes(b.dataset.lang);b.classList.toggle("on",b.dataset.lang===locale);b.setAttribute("aria-pressed",String(b.dataset.lang===locale));});show(".oy-lang",state.enabledLocales.length>1);
     var pair=d.people.filter(Boolean).join(" & ");["splash","hero","ticket","foot"].forEach(function(k){text("#oy-"+k+"-names",pair);});text("#oy-splash-monogram",d.people.map(function(n){return Array.from(n.trim())[0]||""}).join(" · "));
@@ -49,8 +49,8 @@
   window.addEventListener("message",function(e){
     if(e.source!==window.parent||e.origin!==location.origin||e.data?.type!=="taklifla-oltin-yol:update")return;
     var next=e.data.payload;if(!next||!next.variants||!next.enabledLocales?.includes(next.locale)||!next.variants[next.locale])return;
-    var changed=!state||state.invitationId!==next.invitationId||state.preview!==next.preview||state.wishesEnabled!==next.wishesEnabled;
-    if(changed){generation++;sent=false;pending=false;$("#oy-wish-form").reset();}
+    var changed=!state||state.invitationId!==next.invitationId||state.preview!==next.preview||state.wishesEnabled!==next.wishesEnabled||state.guestToken!==next.guestToken;
+    if(changed){generation++;sent=false;pending=false;var confirm=$("#oy-wish-confirm");delete confirm.dataset.statusKey;confirm.style.display="none";$("#oy-wish-form").reset();}
     state=next;locale=next.locale;render();if(changed||state.preview)loadWishes();
     var audio=$("#oy-audio"),url=safe(state.music);show("#oy-music",!!url&&!state.silentPlayback);$("#oy-music").style.display=url&&!state.silentPlayback?"flex":"none";
     if(audio.getAttribute("src")!==url){audio.pause();if(url)audio.src=url;else audio.removeAttribute("src");musicChoice=null;}

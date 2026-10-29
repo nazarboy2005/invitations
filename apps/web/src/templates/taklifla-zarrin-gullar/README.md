@@ -43,3 +43,5 @@ switching and pending guest wishes. Catalog and personalized artwork are actual
 source hero captures. Typecheck and production build pass.
 
 Evidence: docs/templates/taklifla-audit/zarrin*. No external app deployment or payments.
+
+Wish failures retain their translated failure state across native language changes; guest-token changes reset the form context. Three-viewport browser regressions verify this.

@@ -7,7 +7,7 @@
   var show=function(s,on){var el=$(s);if(el)el.hidden=!on;};
   var safe=function(url){return typeof url==="string" && (/^https?:\/\//i.test(url)||/^\/(?!\/)/.test(url))?url:"";};
   function copy(){return window.ZARRIN_COPY[locale]||window.ZARRIN_COPY["uz-Latn"];}
-  function status(key){var el=$("#mw-wish-confirm");el.style.display="block";el.textContent=copy()[key];}
+  function status(key){var el=$("#mw-wish-confirm");el.dataset.statusKey=key;el.style.display="block";el.textContent=copy()[key];}
   function closed(){return state.epoch!==null && Date.now()>=state.epoch+86400000;}
   function closePanel(){
     var panel=$(".wish-closed");
@@ -32,7 +32,7 @@
     if(state.preview)wishes=d.previewWishes||[];
     document.documentElement.lang=locale;
     document.documentElement.classList.toggle("reduced",state.reducedMotion);
-    all("[data-i18n]").forEach(function(el){var v=c[el.dataset.i18n];if(v!==undefined)el.innerHTML=v;});
+    all("[data-i18n]").forEach(function(el){var v=c[el.dataset.statusKey||el.dataset.i18n];if(v!==undefined)el.innerHTML=v;});
     all("[data-i18n-ph]").forEach(function(el){el.placeholder=c[el.dataset.i18nPh]||"";});
     $(".mw-lang").setAttribute("aria-label",c.languages);$("#mw-music").setAttribute("aria-label",c.music);
     all(".mw-lang button").forEach(function(b){b.hidden=!state.enabledLocales.includes(b.dataset.lang);b.classList.toggle("on",b.dataset.lang===locale);b.setAttribute("aria-pressed",String(b.dataset.lang===locale));});
@@ -82,8 +82,8 @@
   window.addEventListener("message",function(e){
     if(e.source!==window.parent||e.origin!==location.origin||e.data?.type!=="taklifla-zarrin-gullar:update")return;
     var next=e.data.payload;if(!next||!next.variants||!next.enabledLocales?.includes(next.locale)||!next.variants[next.locale])return;
-    var changed=!state||state.invitationId!==next.invitationId||state.preview!==next.preview||state.wishesEnabled!==next.wishesEnabled;
-    if(changed){generation++;sent=false;pending=false;$("#mw-wish-form").reset();}
+    var changed=!state||state.invitationId!==next.invitationId||state.preview!==next.preview||state.wishesEnabled!==next.wishesEnabled||state.guestToken!==next.guestToken;
+    if(changed){generation++;sent=false;pending=false;var confirm=$("#mw-wish-confirm");delete confirm.dataset.statusKey;confirm.style.display="none";$("#mw-wish-form").reset();}
     state=next;locale=next.locale;render();if(changed||state.preview)loadWishes();
     var audio=$("#mw-audio"),url=safe(state.music);show("#mw-music",!!url&&!state.silentPlayback);
     if(audio.getAttribute("src")!==url){audio.pause();if(url)audio.src=url;else audio.removeAttribute("src");musicChoice=null;}

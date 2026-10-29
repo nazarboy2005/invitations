@@ -22,6 +22,7 @@
       "longNamesFit": true,
       "previewNoSend": true,
       "failureRetainsInput": true,
+      "failureSurvivesLocale": true,
       "closedAfter24Hours": true,
       "reducedMotion": true,
       "emptySections": true
@@ -47,6 +48,7 @@
       "longNamesFit": true,
       "previewNoSend": true,
       "failureRetainsInput": true,
+      "failureSurvivesLocale": true,
       "closedAfter24Hours": true,
       "reducedMotion": true,
       "emptySections": true
@@ -72,6 +74,7 @@
       "longNamesFit": true,
       "previewNoSend": true,
       "failureRetainsInput": true,
+      "failureSurvivesLocale": true,
       "closedAfter24Hours": true,
       "reducedMotion": true,
       "emptySections": true
