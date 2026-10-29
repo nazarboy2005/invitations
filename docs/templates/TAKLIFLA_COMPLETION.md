@@ -12,7 +12,7 @@ untouched. Application deployment and live payment activation are excluded.
 | Diyora-Shahzod | taklifla-zarhal-sahifa | Published | Complete — missing studio renderer, Google fallback and catalog audio fixed; real lifecycle verified |
 | Envelope | taklifla-muhrli-maktub | Published | Complete — shared Google links/wish samples, gesture audio and studio opening corrected |
 | Fasllar | taklifla-tort-fasl | Published | Complete — studio opening and shared sample wishes corrected; full source/lifecycle/audio checks pass |
-| Midnight Palace | taklifla-tungi-saroy | Published | Pending audit |
+| Midnight Palace | taklifla-tungi-saroy | Published | Complete — current source, three-viewport motion, audio and real lifecycle audit passes |
 | Tovus | taklifla-tovus | Published | Pending audit |
 | Barakali | taklifla-barakali | Private package | Pending |
 | Bookie Navy | taklifla-yubiley-sahifasi | Private package | Pending |
@@ -68,3 +68,9 @@ the individual commit below each completed row.
 - Capture/CSS/assets remain exact. Browser comparison at 320/390/1280 verifies seasonal particles, parallax, source sections, four locales, long/empty fields, reduced motion, closed wishes and transport failure handling.
 - Catalog wishes now use canonical preview-only data. Studio opens the source scene and targets authored names/location. Real save/reopen, compatible switching, studio, four-locale personalized public data, Google Place/manual map, publication and pending wishes pass.
 - Evidence: `apps/web/src/templates/taklifla-tort-fasl/qa`, `docs/templates/tort-fasl-verification/integration-report.json`, `docs/templates/taklifla-audit/fasllar-audio.json`. Four source/adapter tests and typecheck pass; existing publication/price retained.
+
+## Tungi Saroy audit
+
+- No new implementation gap found. Four source/data tests pass; 320/390/1280 source comparisons verify palace scene, particles, reveal/parallax, four locales, stable program items, long/empty content, Google maps and reduced motion.
+- Real authenticated lifecycle including compatible switching, studio opening, public four-locale personalization, publication, manual Google edits and pending wishes passes. Actual catalog audio is gesture gated and pause/resume survives locale changes.
+- Evidence: `docs/templates/luxury-uzbek-verification/taklifla-tungi-saroy-*`, `docs/templates/taklifla-audit/tungi-saroy-audio.json`. Publication and price remain unchanged.

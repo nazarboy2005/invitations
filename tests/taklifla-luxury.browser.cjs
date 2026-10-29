@@ -33,7 +33,7 @@ const blank = (value) =>
     httpErrors: [],
   };
   try {
-    for (const fixture of fixtures) {
+    for (const fixture of fixtures.filter(f => !process.env.TAKLIFLA_AUDIT_ID || f.id === process.env.TAKLIFLA_AUDIT_ID)) {
       const { id, message, invitation } = fixture,
         prefix = id.endsWith("tovus") ? "tv" : "mp";
       for (const viewport of [
@@ -424,7 +424,7 @@ const blank = (value) =>
       JSON.stringify(report.httpErrors),
     );
     fs.writeFileSync(
-      `${out}/browser-report.json`,
+      `${out}/${process.env.TAKLIFLA_AUDIT_ID || "browser"}-report.json`,
       JSON.stringify(report, null, 2) + "\n",
     );
     console.log(JSON.stringify(report, null, 2));
