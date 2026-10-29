@@ -1,0 +1,239 @@
+{
+  "browser": "156.0.8078.48",
+  "results": [
+    {
+      "width": 360,
+      "reduced": false,
+      "geometry": {
+        "width": 360,
+        "scrollWidth": 360,
+        "shellWidth": 360,
+        "animations": 29,
+        "animationNames": [
+          "rise:particle",
+          "rise:particle",
+          "rise:particle",
+          "rise:particle",
+          "rise:particle",
+          "rise:particle",
+          "rise:particle",
+          "rise:particle",
+          "rise:particle",
+          "rise:particle",
+          "rise:particle",
+          "rise:particle",
+          "rise:particle",
+          "rise:particle",
+          "rise:particle",
+          "rise:particle",
+          "rise:particle",
+          "rise:particle",
+          "drift-2:floater float-cloud",
+          "drift-cloud-2:floater float-cloud cloud2",
+          "drift-1:floater float-butterfly b1",
+          "shimmer:name",
+          "scrollDot:dot",
+          "drift-bee:floater float-bee be1",
+          "drift-up:floater float-balloon-y",
+          "drift-1:floater float-butterfly b2",
+          "drift-bee:floater float-bee be2",
+          "drift-up:floater float-balloon-r",
+          "drift-up:floater float-balloon-b"
+        ],
+        "reducedClass": false,
+        "heroTop": 0
+      },
+      "locales": 4,
+      "longName": {
+        "width": 196,
+        "scroll": 196,
+        "height": 163
+      },
+      "opening": true,
+      "previewNoSend": true,
+      "emptyOptionals": true
+    },
+    {
+      "width": 360,
+      "reduced": true,
+      "geometry": {
+        "width": 360,
+        "scrollWidth": 360,
+        "shellWidth": 360,
+        "animations": 0,
+        "animationNames": [],
+        "reducedClass": true,
+        "heroTop": 0
+      },
+      "locales": 4,
+      "longName": {
+        "width": 196,
+        "scroll": 196,
+        "height": 163
+      },
+      "opening": true,
+      "previewNoSend": true,
+      "emptyOptionals": true
+    },
+    {
+      "width": 390,
+      "reduced": false,
+      "geometry": {
+        "width": 390,
+        "scrollWidth": 390,
+        "shellWidth": 390,
+        "animations": 29,
+        "animationNames": [
+          "rise:particle",
+          "rise:particle",
+          "rise:particle",
+          "rise:particle",
+          "rise:particle",
+          "rise:particle",
+          "rise:particle",
+          "rise:particle",
+          "rise:particle",
+          "rise:particle",
+          "rise:particle",
+          "rise:particle",
+          "rise:particle",
+          "rise:particle",
+          "rise:particle",
+          "rise:particle",
+          "rise:particle",
+          "rise:particle",
+          "drift-2:floater float-cloud",
+          "drift-cloud-2:floater float-cloud cloud2",
+          "drift-1:floater float-butterfly b1",
+          "shimmer:name",
+          "scrollDot:dot",
+          "drift-bee:floater float-bee be1",
+          "drift-up:floater float-balloon-y",
+          "drift-1:floater float-butterfly b2",
+          "drift-bee:floater float-bee be2",
+          "drift-up:floater float-balloon-r",
+          "drift-up:floater float-balloon-b"
+        ],
+        "reducedClass": false,
+        "heroTop": 0
+      },
+      "locales": 4,
+      "longName": {
+        "width": 215,
+        "scroll": 215,
+        "height": 179
+      },
+      "opening": true,
+      "previewNoSend": true,
+      "emptyOptionals": true
+    },
+    {
+      "width": 390,
+      "reduced": true,
+      "geometry": {
+        "width": 390,
+        "scrollWidth": 390,
+        "shellWidth": 390,
+        "animations": 0,
+        "animationNames": [],
+        "reducedClass": true,
+        "heroTop": 0
+      },
+      "locales": 4,
+      "longName": {
+        "width": 215,
+        "scroll": 215,
+        "height": 179
+      },
+      "opening": true,
+      "previewNoSend": true,
+      "emptyOptionals": true
+    },
+    {
+      "width": 1440,
+      "reduced": false,
+      "geometry": {
+        "width": 1440,
+        "scrollWidth": 1440,
+        "shellWidth": 430,
+        "animations": 29,
+        "animationNames": [
+          "rise:particle",
+          "rise:particle",
+          "rise:particle",
+          "rise:particle",
+          "rise:particle",
+          "rise:particle",
+          "rise:particle",
+          "rise:particle",
+          "rise:particle",
+          "rise:particle",
+          "rise:particle",
+          "rise:particle",
+          "rise:particle",
+          "rise:particle",
+          "rise:particle",
+          "rise:particle",
+          "rise:particle",
+          "rise:particle",
+          "drift-2:floater float-cloud",
+          "drift-cloud-2:floater float-cloud cloud2",
+          "drift-1:floater float-butterfly b1",
+          "shimmer:name",
+          "scrollDot:dot",
+          "drift-bee:floater float-bee be1",
+          "drift-up:floater float-balloon-y",
+          "drift-1:floater float-butterfly b2",
+          "drift-bee:floater float-bee be2",
+          "drift-up:floater float-balloon-r",
+          "drift-up:floater float-balloon-b"
+        ],
+        "reducedClass": false,
+        "heroTop": 0
+      },
+      "locales": 4,
+      "longName": {
+        "width": 239,
+        "scroll": 239,
+        "height": 201
+      },
+      "opening": true,
+      "previewNoSend": true,
+      "emptyOptionals": true
+    },
+    {
+      "width": 1440,
+      "reduced": true,
+      "geometry": {
+        "width": 1440,
+        "scrollWidth": 1440,
+        "shellWidth": 430,
+        "animations": 0,
+        "animationNames": [],
+        "reducedClass": true,
+        "heroTop": 0
+      },
+      "locales": 4,
+      "longName": {
+        "width": 239,
+        "scroll": 239,
+        "height": 201
+      },
+      "opening": true,
+      "previewNoSend": true,
+      "emptyOptionals": true
+    }
+  ],
+  "diagnostics": [],
+  "posts": [
+    {
+      "name": "Real Guest",
+      "message": "A real note"
+    },
+    {
+      "name": "Retry Guest",
+      "message": "Keep on error"
+    }
+  ],
+  "scope": "isolated iframe harness; mocked wishes transport and media element, no catalog/save/public-route integration"
+}

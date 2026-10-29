@@ -91,6 +91,7 @@
   setInterval(tick,1000);
   async function play() {
     if (!state?.music.enabled || !state.music.url || state.silentPlayback || userPaused || pendingPlay) return;
+    if (state.preview && document.body.classList.contains('locked')) return;
     pendingPlay = true;
     try { await audio.play(); hasPlayed = true; music.classList.add('playing'); music.setAttribute('aria-pressed','true'); } catch { /* Browser policy: keep manual control available. */ }
     finally { pendingPlay = false; }

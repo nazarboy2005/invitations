@@ -1,5 +1,17 @@
 # Implementation decisions
 
+## Complete Taklifla queue (2026-10-29)
+
+- User requested all 24 Taklifla source templates, strictly one at a time:
+  first check existing implementation, audit and fix it if present, otherwise
+  integrate the complete source. Verify and publish each completed design,
+  commit that template separately, then move to the next. Do not treat private
+  packages as completed integrations or duplicate existing designs.
+- Maintain `docs/templates/TAKLIFLA_COMPLETION.md` as the per-source checklist.
+  Preserve shared preview data, authored content, Google Maps, four locales,
+  original source/assets/motion, reduced motion and catalog publication gates.
+  Existing unrelated uncommitted work stays outside these commits.
+
 ## Luxury Uzbek templates (2026-10-29)
 
 - User requested more of the most luxurious unpublished/untouched designs,

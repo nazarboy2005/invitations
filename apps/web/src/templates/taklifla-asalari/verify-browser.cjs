@@ -70,7 +70,7 @@ const server=http.createServer((req,res)=>{
   const coverContext=await browser.newContext({viewport:{width:430,height:717}}),coverPage=await coverContext.newPage();
   await coverPage.goto(origin+'/harness');const coverFrame=coverPage.frames()[1];await coverFrame.waitForSelector('#openBtn',{state:'attached'});
   await coverPage.evaluate(p=>document.querySelector('iframe').contentWindow.postMessage(p,location.origin),payload());await coverFrame.evaluate(()=>document.fonts.ready);
-  await coverPage.locator('iframe').screenshot({path:path.join(assets,base,'preview.webp'),type:'webp'});await coverContext.close();
+  await coverPage.locator('iframe').screenshot({path:path.join(evidence,'catalog-opening.webp'),type:'webp'});await coverContext.close();
   fs.writeFileSync(path.join(evidence,'browser-results.json'),JSON.stringify({browser:browser.version(),results,diagnostics,posts,scope:'isolated iframe harness; mocked wishes transport and media element, no catalog/save/public-route integration'},null,2));
   assert.deepEqual(diagnostics,[]);console.log('Browser checks passed',results.length,'viewport/motion cases.');
  } finally {await browser.close();server.close();}

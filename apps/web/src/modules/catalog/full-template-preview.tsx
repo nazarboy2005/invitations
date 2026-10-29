@@ -282,10 +282,8 @@ export function FullTemplatePreview({
       {invitation && !cardPreview && !posterCapture && (
         <InvitationMusicAutoplay
           musicUrl={
-            silentPlayback
+            silentPlayback || catalogPreview
               ? ""
-              : catalogPreview
-                ? CATALOG_PREVIEW_MUSIC.url
                 : invitation.music.enabled
                   ? invitation.music.url
                   : ""

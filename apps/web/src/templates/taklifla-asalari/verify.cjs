@@ -7,7 +7,7 @@ const { makeAsalariPayload } = require('./adapter.ts');
 const { createTemplatePreviewSample } = require('../../modules/catalog/preview-sample.ts');
 const { createInvitation, LOCALES, templateById } = require('@taklifnoma/contracts');
 const hash = b => crypto.createHash('sha256').update(b).digest('hex');
-function fixture() { const v=createTemplatePreviewSample('konfetti'); v.templateId='taklifla-asalari'; return v; }
+function fixture() { return createTemplatePreviewSample('taklifla-asalari'); }
 exports.fixture = fixture;
 exports.payload = (v=fixture(), options={}) => makeAsalariPayload(v,'uz-Latn','Aziza',{invitationId:'qa-asalari',preview:true,sampleWishes:true,...options});
 if (require.main === module) {
