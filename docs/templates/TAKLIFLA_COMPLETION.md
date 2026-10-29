@@ -26,7 +26,7 @@ untouched. Application deployment and live payment activation are excluded.
 | Pari | taklifla-parilar-ertagi | Private package | Complete — broken body extraction repaired; full renderer/bridge and editable labels/arrival integrated; published 0191/0192 |
 | Qog‘oz | taklifla-qogoz-ertagi | Private package | Complete — full bridge, fitting/closure, editable notes and routes restored; published 0193/0194 |
 | Sakura | taklifla-sakura-guli | Private package | Complete — hidden notes/city, empty timeline, wishes/music/status/sizing fixed; published 0195/0196 |
-| Sharlar | taklifla-sharlar | Private package | Pending |
+| Sharlar | taklifla-sharlar | Private package | Complete — missing bridge/motion, shared age/doors/maps/wishes restored; published 0197/0198 |
 | Starry Night | taklifla-yulduzli-tun | Private package | Pending |
 | Terracotta | taklifla-terracotta | Private package | Pending |
 | Uchrashuv | taklifla-uchrashuv | Private package | Pending |
@@ -158,3 +158,9 @@ the individual commit below each completed row.
 - Exact source CSS/eight images/thirteen fonts and native 37 petals/reveals/parallax/background/fitting/opening retained. Restored hidden city/info/footer/contact prose, original closed-wishes panel and full routes. New notes have typed editor/persistence and shared canonical examples.
 - Fixed empty timeline exception, unstable preview memo, missing canonical wishes/audio, invisible/unchecked success states, locale failure handling, dynamic reduced motion and preview sizing. Extended copy grows the source floral frame without clipping; normal geometry stays 2:3.
 - 25 shared/package tests, source/motion comparisons at 320/390/1280, all locales/long names and copy/seven rows/empty/reduced/closed/failure checks, real notes save/reopen/studio/publication/public/maps/pending wishes and switching, actual audio, covers, typecheck/build pass. Migrations 0195/0196 publish only this wedding design. Evidence: `docs/templates/taklifla-audit/sakura*`.
+
+## Sharlar integration
+
+- Reused exact source CSS and all 29 art/font dependencies, restored native 36 stars, three arches, three balloons, six confetti pieces, opening, parallax and reveals. The former package referenced a nonexistent bridge and never loaded its visual engine.
+- Shared birthday identity/age, date, hosts, program, dress and Google venue now drive every route. Doors opening uses a validated editable time in templateData; canonical preview derives it from shared program data. Original source language menu supports all four locales; desktop preview controls leave it usable. No guest-count field or provider sample storage/runtime.
+- 25 shared/package checks, three source comparison viewports, active motion, four locales, long/empty/seven-event/reduced/failure and preview checks, actual audio, authentic covers, real authenticated save/reopen/studio/publication/public/maps/moderated wishes and compatible birthday switching, typecheck and production build pass. Migrations 0197/0198 publish only Sharlar. Evidence: docs/templates/taklifla-audit/sharlar*.

@@ -2153,3 +2153,7 @@ Development agents are distinct from production queue workers. The running app w
 ### Sakura Guli completion (2026-10-29)
 
 - Preserve Sakura’s source city chip, floral frame, petals and native close state. Localized contact/info/footer notes persist in validated editable `templateData["taklifla-sakura-guli"]`; common venue/landmark/city derivation, names, hosts, dress, contacts and program remain shared. Long copy may grow the frame; normal source proportions remain. Migrations 0195/0196 register/publish for weddings after verification.
+
+### Sharlar completion (2026-10-29)
+
+- Sharlar is birthday-only and uses shared celebrantAge and birthday content. Source doors-opening time is editable validated `templateData["taklifla-sharlar"].doorsAt` (blank hides it); catalog derives its example from the shared first program time. Preserve native carnival artwork, motion and language menu. Shared Google venue, dress, program and contacts remain reusable; no guest-count input. Migrations 0197/0198 register/publish after verification.

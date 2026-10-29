@@ -1,0 +1,140 @@
+[
+  [
+    "#splash .tagline",
+    "Diqqat — juda alohida tomosha boshlanmoqda.",
+    "Step right up — a very special show is about to begin.",
+    "Внимание — начинается совершенно особенное представление."
+  ],
+  [
+    "#openInvite",
+    "Taklifnomani ochish",
+    "Open Invitation",
+    "Открыть приглашение"
+  ],
+  [
+    ".hero-eyebrow",
+    "Sizni taklif qilamiz",
+    "You're invited to",
+    "Вы приглашены на"
+  ],
+  [
+    ".scroll-hint span",
+    "Pastga",
+    "Scroll",
+    "Вниз"
+  ],
+  [
+    "#invite .kicker",
+    "Marhamat, qo'shiling",
+    "Please join us",
+    "Просим вас присоединиться"
+  ],
+  [
+    "#invite .h2",
+    "Bayramona tug'ilgan kun",
+    "A Carnival Birthday",
+    "Карнавальный день рождения"
+  ],
+  [
+    "#timeline .head .kicker",
+    "Kun tartibi",
+    "The Day's Schedule",
+    "Расписание дня"
+  ],
+  [
+    "#timeline .head .h2",
+    "Tomosha",
+    "The Show",
+    "Представление"
+  ],
+  [
+    "#venue .kicker",
+    "Manzilgoh",
+    "The Venue",
+    "Место проведения"
+  ],
+  [
+    ".map-btn",
+    "Xaritani ochish",
+    "Open the Map",
+    "Открыть карту"
+  ],
+  [
+    "#info .head .kicker",
+    "Bilib qo'ying",
+    "Good to Know",
+    "Полезно знать"
+  ],
+  [
+    "#info .head .h2",
+    "Bir nechta eslatma",
+    "A Few Notes",
+    "Несколько заметок"
+  ],
+  [
+    "#info .info-row.d1 .lbl",
+    "Eshiklar ochiladi",
+    "Doors open",
+    "Двери открываются"
+  ],
+  [
+    "#info .info-row.d2 .lbl",
+    "Bolalar bilanmisiz?",
+    "Bringing kids?",
+    "Будете с детьми?"
+  ],
+  [
+    "#info .info-row.d2 .val",
+    "Iltimos, oldindan qisqa qo'ng'iroq qiling — ularga joy ajratamiz.",
+    "Please give us a quick call ahead so we can save them a seat.",
+    "Пожалуйста, позвоните нам заранее, чтобы мы оставили им место."
+  ],
+  [
+    "#info .info-row.d3 .lbl",
+    "Rasmiyatchiliksiz",
+    "No formalities",
+    "Без формальностей"
+  ],
+  [
+    "#info .info-row.d3 .val",
+    "O'zingiz qanday bo'lsangiz, shunday keling — faqat tabassumingizni olib keling.",
+    "Come as you are — just bring your smile.",
+    "Приходите как есть — просто прихватите улыбку."
+  ],
+  [
+    "#wishes .head .kicker",
+    "Tilaklar bankasi",
+    "Wishes Jar",
+    "Банка пожеланий"
+  ],
+  [
+    "#wishes .head .h2",
+    "Tilak qoldiring",
+    "Leave a Wish",
+    "Оставьте пожелание"
+  ],
+  [
+    "#wishes .head .invite-text",
+    "Bir satr, bir xotira yoki kulgili hazil — bankaga tashlang, biz ularni ovoz chiqarib o'qiymiz.",
+    "A line, a memory, a silly joke — drop it in the jar and we'll read them aloud.",
+    "Строчка, воспоминание или весёлая шутка — бросьте в банку, и мы прочитаем их вслух."
+  ],
+  [
+    "#wishForm button",
+    "Bankaga tashlang",
+    "Drop it in",
+    "Бросить в банку"
+  ],
+  [
+    "#countdown .kicker",
+    "Sanab boramiz",
+    "Counting down to",
+    "Обратный отсчёт до"
+  ],
+  [
+    "#countdown .h2",
+    "Katta kun",
+    "The Big Day",
+    "Большой день"
+  ]
+]

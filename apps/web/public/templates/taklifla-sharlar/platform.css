@@ -1,0 +1,13 @@
+html[data-awaiting-data] body{visibility:hidden}
+[hidden]{display:none!important}
+.invite-text,.val,.wish .msg,.closing{white-space:pre-wrap;overflow-wrap:anywhere}
+.what,.sub,.venue-name,.venue-city,.hero-name{overflow-wrap:anywhere;min-width:0}
+.invite-meta{flex-wrap:wrap;gap:12px}
+.hero-inner{max-width:100%}
+#wishStatus,#wishConfirm{text-align:center;font-family:var(--serif);line-height:1.6;overflow-wrap:anywhere}
+.taklifla-lang-menu button[hidden]{display:none}
+:focus-visible{outline:2px solid #c89b3c;outline-offset:4px}
+html[data-reduced] *,html[data-reduced] *::before,html[data-reduced] *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+html[data-reduced] .reveal{opacity:1!important;transform:none!important}
+html[data-reduced] .confetti{display:none}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}.reveal{opacity:1!important;transform:none!important}.confetti{display:none}}

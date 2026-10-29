@@ -18,6 +18,7 @@ import { TakliflaOsmonInvitation } from "@/templates/taklifla-osmon/renderer";
 import { TakliflaParilarErtagiInvitation } from "@/templates/taklifla-parilar-ertagi/renderer";
 import { TakliflaQogozErtagiInvitation } from "@/templates/taklifla-qogoz-ertagi/renderer";
 import { SakuraGuliInvitation } from "@/templates/taklifla-sakura-guli/renderer";
+import { TakliflaSharlarInvitation } from "@/templates/taklifla-sharlar/renderer";
 import { TakliflaYubileySahifasi } from "@/templates/taklifla-yubiley-sahifasi/renderer";
 import { TakliflaBarakali } from "@/templates/taklifla-barakali/renderer";
 import { TakliflaZarhalSahifaInvitation } from "@/templates/taklifla-zarhal-sahifa/renderer";
@@ -178,6 +179,8 @@ export default async function InvitationPage({
     return <><InvitationViewTracker invitationId={result.id} musicUrl={invitation.music.enabled ? invitation.music.url : ""} /><TakliflaQogozErtagiInvitation invitation={invitation} invitationId={result.id} locale={locale} guestName={guestName} guestToken={query.g} /></>;
   if (invitation.templateId === "taklifla-sakura-guli")
     return <><InvitationViewTracker invitationId={result.id} musicUrl={invitation.music.enabled ? invitation.music.url : ""} /><SakuraGuliInvitation invitation={invitation} invitationId={result.id} locale={locale} guestName={guestName} guestToken={query.g} /></>;
+  if (invitation.templateId === "taklifla-sharlar")
+    return <><InvitationViewTracker invitationId={result.id} musicUrl={invitation.music.enabled ? invitation.music.url : ""} /><TakliflaSharlarInvitation invitation={invitation} invitationId={result.id} locale={locale} guestName={guestName} guestToken={query.g} /></>;
   if (invitation.templateId === "taklifla-yubiley-sahifasi")
     return <><InvitationViewTracker invitationId={result.id} musicUrl={invitation.music.enabled ? invitation.music.url : ""} /><TakliflaYubileySahifasi invitation={invitation} invitationId={result.id} locale={locale} guestName={guestName} guestToken={query.g} /></>;
   if (invitation.templateId === "taklifla-barakali")

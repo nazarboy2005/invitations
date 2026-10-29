@@ -157,6 +157,7 @@ function isJsonValue(value: unknown): value is JsonValue {
   return false;
 }
 const pulauLocalizedText = z.partialRecord(localeSchema, text);
+export const sharlarDataSchema = z.object({doorsAt:z.string().regex(/^(?:[01]\d|2[0-3]):[0-5]\d$/).or(z.literal("")).default("")}).default({doorsAt:""});
 export const sakuraDataSchema = z.object({contactNote:localizedLongText.default({}),infoNote:localizedLongText.default({}),footerNote:localizedLongText.default({})}).default({contactNote:{},infoNote:{},footerNote:{}});
 export const qogozDataSchema = z.object({contactNote:localizedLongText.default({}),footerNote:localizedLongText.default({})}).default({contactNote:{},footerNote:{}});
 export const pariDataSchema = z.object({arrivalNote:localizedLongText.default({}),programLabels:z.record(z.string().min(1).max(100),localizedShortText).default({})}).default({arrivalNote:{},programLabels:{}});
@@ -225,6 +226,7 @@ export const invitationSchema = z
     id: z.string().min(1).max(100),
     templateId: invitationTemplateIdSchema,
     templateData: z.record(z.string(), z.custom<JsonValue>(isJsonValue)).default({}).superRefine((data, ctx) => {
+      if(data["taklifla-sharlar"] !== undefined && !sharlarDataSchema.safeParse(data["taklifla-sharlar"]).success) ctx.addIssue({code:"custom",path:["taklifla-sharlar"],message:"Invalid doors opening time"});
       if (data["taklifla-sakura-guli"] !== undefined && !sakuraDataSchema.safeParse(data["taklifla-sakura-guli"]).success) ctx.addIssue({code:"custom",path:["taklifla-sakura-guli"],message:"Invalid sakura notes"});
       if (data["taklifla-qogoz-ertagi"] !== undefined && !qogozDataSchema.safeParse(data["taklifla-qogoz-ertagi"]).success) ctx.addIssue({code:"custom",path:["taklifla-qogoz-ertagi"],message:"Invalid paper invitation notes"});
       if (data["taklifla-parilar-ertagi"] !== undefined && !pariDataSchema.safeParse(data["taklifla-parilar-ertagi"]).success) ctx.addIssue({code:"custom",path:["taklifla-parilar-ertagi"],message:"Invalid fairy invitation details"});
@@ -1505,6 +1507,12 @@ export const TEMPLATES: TemplateDefinition[] = [
     previewImage: "/templates/taklifla-sakura-guli/preview.webp", previewEventType: "wedding",
     categoryIds: ["wedding"], supportedEventTypes: ["wedding"],
     priceMinor: 100000, currency: "UZS", accent: "#c2637f", published: true,
+  },
+  {
+    id: "taklifla-sharlar", name: "Sharlar", description: "Burgund rangli karnaval, oltin sharlar va harakatli bayram sahnasi.",
+    previewImage: "/templates/taklifla-sharlar/preview.webp", previewEventType: "birthday",
+    categoryIds: ["birthday"], supportedEventTypes: ["birthday"],
+    priceMinor: 100000, currency: "UZS", accent: "#7a1a26", published: true,
   },
   {
     id: "taklifla-yubiley-sahifasi", name: "Yubiley Sahifasi",

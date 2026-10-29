@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="uz-Latn" data-awaiting-data><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Sharlar</title><link rel="stylesheet" href="assets/fonts.css"><link rel="stylesheet" href="source/template.css"><link rel="stylesheet" href="source/language.css"><link rel="stylesheet" href="platform.css"></head><body data-awaiting-content>
+
+<!-- ────────  SPLASH (fixed overlay)  ──────── -->
+<div id="splash" data-screen-label="00 Splash">
+  <div class="stars" aria-hidden="true"></div>
+  <div class="inner">
+    <div class="ring">
+      <span class="mono"></span>
+    </div>
+    <p class="tagline"></p>
+    <button class="open-btn" id="openInvite" type="button"></button>
+    <div class="hint">
+      <i></i><i></i>
+    </div>
+  </div>
+</div>
+
+<!-- ────────  MUSIC TOGGLE  ──────── -->
+<button id="musicBtn" class="music"  type="button">
+  <svg class="play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <path d="M8 5v14l11-7z"/>
+  </svg>
+  <span class="bars" aria-hidden="true"><b></b><b></b><b></b></span>
+</button>
+<audio id="bgm"  loop preload="none"></audio>
+
+<!-- ────────  FRAME  ──────── -->
+<main class="frame">
+
+  <!-- ── HERO ── -->
+  <section id="hero" data-screen-label="01 Hero">
+    <div class="bg-layer" data-bg="assets/hero-bg.webp" data-speed="-0.05"></div>
+    <div class="bg-overlay"></div>
+
+    <div class="arches" aria-hidden="true">
+      <div class="arch-wrap back"  data-speed="-0.02"><img src="assets/arch-back.webp"  alt="" onerror="this.closest('.arch-wrap').remove()"></div>
+      <div class="arch-wrap mid"   data-speed="0.025"><img src="assets/arch-mid.webp"   alt="" onerror="this.closest('.arch-wrap').remove()"></div>
+      <div class="arch-wrap front" data-speed="0.06" ><img src="assets/arch-front.webp" alt="" onerror="this.closest('.arch-wrap').remove()"></div>
+    </div>
+
+    <!-- multiple balloons drifting up the hero -->
+    <div class="balloon b1" aria-hidden="true"><img src="assets/float-balloon.webp" alt="" onerror="this.parentElement.remove()"></div>
+    <div class="balloon b2" aria-hidden="true"><img src="assets/float-balloon.webp" alt="" onerror="this.parentElement.remove()"></div>
+    <div class="balloon b3" aria-hidden="true"><img src="assets/float-balloon.webp" alt="" onerror="this.parentElement.remove()"></div>
+
+    <div class="hero-inner reveal">
+      <div class="hero-eyebrow"></div>
+      <h1 class="hero-name"></h1>
+      <div class="hero-rule"></div>
+      <div class="hero-date"><b></b></div>
+      <div class="hero-age-num"></div>
+      <div class="hero-age-lbl"></div>
+    </div>
+
+    <div class="scroll-hint" aria-hidden="true">
+      <span></span><i></i>
+    </div>
+
+    <div class="grain"></div>
+  </section>
+
+  <!-- ── DIVIDER 1 ── -->
+  <div class="ornament" aria-hidden="true">
+    <svg width="180" height="22" viewBox="0 0 180 22" fill="none">
+      <line x1="0"   y1="11" x2="70"  y2="11" stroke="#8d6a1f" stroke-width="1"/>
+      <line x1="110" y1="11" x2="180" y2="11" stroke="#8d6a1f" stroke-width="1"/>
+      <circle cx="90" cy="11" r="5" fill="none" stroke="#8d6a1f"/>
+      <circle cx="90" cy="11" r="1.6" fill="#7a1a26"/>
+      <circle cx="76" cy="11" r="1.2" fill="#8d6a1f"/>
+      <circle cx="104" cy="11" r="1.2" fill="#8d6a1f"/>
+    </svg>
+    <div class="label"></div>
+  </div>
+
+  <!-- ── INVITATION CARD ── -->
+  <section id="invite">
+    <div class="confetti" aria-hidden="true" data-confetti="6"></div>
+
+    <div class="card reveal">
+      <div class="kicker"></div>
+      <div class="h2"></div>
+      <p class="invite-text"><b></b></p>
+      <div class="invite-meta">
+        <i></i><span></span><i></i><span></span><i></i>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── DIVIDER 2 ── -->
+  <div class="ornament" aria-hidden="true">
+    <svg width="180" height="28" viewBox="0 0 180 28" fill="none">
+      <path d="M10 14 Q 60 4, 90 14 T 170 14" stroke="#8d6a1f" stroke-width="1" fill="none"/>
+      <path d="M10 14 Q 60 24, 90 14 T 170 14" stroke="#8d6a1f" stroke-width="1" fill="none"/>
+      <circle cx="90" cy="14" r="2.5" fill="#7a1a26"/>
+    </svg>
+    <div class="label"></div>
+  </div>
+
+  <!-- ── TIMELINE ── -->
+  <section id="timeline">
+    <div class="floater float-star" aria-hidden="true" style="top:10%; animation-duration:46s,7s;">
+      <img src="assets/float-star.webp" alt="" onerror="this.parentElement.style.display='none'">
+    </div>
+
+    <div class="head reveal">
+      <div class="kicker"></div>
+      <div class="h2"></div>
+    </div>
+
+    <div class="tl">
+      <div class="ev reveal d1">
+        <div class="dot"><b></b></div>
+        <div class="body">
+          <div class="time"></div>
+          <div class="what"></div>
+          <div class="sub"></div>
+        </div>
+      </div>
+      <div class="ev reveal d2">
+        <div class="dot"><b></b></div>
+        <div class="body">
+          <div class="time"></div>
+          <div class="what"></div>
+          <div class="sub"></div>
+        </div>
+      </div>
+      <div class="ev reveal d3">
+        <div class="dot"><b></b></div>
+        <div class="body">
+          <div class="time"></div>
+          <div class="what"></div>
+          <div class="sub"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── DIVIDER 3 ── -->
+  <div class="ornament" aria-hidden="true">
+    <svg width="180" height="22" viewBox="0 0 180 22" fill="none">
+      <line x1="0" y1="11" x2="80" y2="11" stroke="#8d6a1f" stroke-width="1"/>
+      <line x1="100" y1="11" x2="180" y2="11" stroke="#8d6a1f" stroke-width="1"/>
+      <path d="M82 11 L90 4 L98 11 L90 18 Z" fill="none" stroke="#8d6a1f"/>
+    </svg>
+    <div class="label"></div>
+  </div>
+
+  <!-- ── VENUE ── -->
+  <section id="venue" data-screen-label="02 Venue">
+    <div class="bg-layer" data-bg="assets/venue-bg.webp" data-speed="-0.08" style="background-position:center 65%"></div>
+    <div class="bg-overlay"></div>
+
+    <div class="pinned-floater pin-bunting" aria-hidden="true" data-speed="0.18">
+      <img src="assets/float-bunting.webp" alt="" onerror="this.parentElement.remove()">
+    </div>
+
+    <div class="venue-inner reveal">
+      <div class="kicker" style="color:var(--gold-light); opacity:.95"></div>
+      <div class="h2"></div>
+      <div class="venue-name"></div>
+      <div class="venue-city"></div>
+      <a class="map-btn"  target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/>
+        </svg></a>
+    </div>
+
+    <div class="grain"></div>
+  </section>
+
+  <!-- ── INFO CARD ── -->
+  <section id="info">
+    <div class="head reveal" style="text-align:center">
+      <div class="kicker"></div>
+      <div class="h2"></div>
+    </div>
+    <div class="info-grid">
+      <div class="info-row reveal d1">
+        <div class="ico"></div>
+        <div>
+          <div class="lbl"></div>
+          <div class="val"><em></em></div>
+        </div>
+      </div>
+      <div class="info-row reveal d2">
+        <div class="ico"></div>
+        <div>
+          <div class="lbl"></div>
+          <div class="val"></div>
+        </div>
+      </div>
+      <div class="info-row reveal d3">
+        <div class="ico"></div>
+        <div>
+          <div class="lbl"></div>
+          <div class="val"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── DIVIDER 4 ── -->
+  <div class="ornament" aria-hidden="true">
+    <svg width="180" height="22" viewBox="0 0 180 22" fill="none">
+      <line x1="0" y1="11" x2="76" y2="11" stroke="#8d6a1f" stroke-width="1"/>
+      <line x1="104" y1="11" x2="180" y2="11" stroke="#8d6a1f" stroke-width="1"/>
+      <path d="M90 4 L93 10 L99 11 L94.5 15 L96 21 L90 18 L84 21 L85.5 15 L81 11 L87 10 Z"
+            fill="#c89b3c" opacity=".85"/>
+    </svg>
+    <div class="label"></div>
+  </div>
+
+  <!-- ── WISHES ── -->
+  <section id="wishes">
+    <div class="head reveal" style="text-align:center">
+      <div class="kicker"></div>
+      <div class="h2"></div>
+      <p class="invite-text" style="font-size:17px; margin-top:8px"></p>
+    </div>
+
+    <form class="wish-form reveal d1" id="wishForm" autocomplete="off">
+      <input name="wname" id="wishName" type="text"  required maxlength="100">
+      <textarea name="wmsg" id="wishMsg"  required maxlength="2000"></textarea>
+      <button type="submit"></button>
+    </form>
+
+    <p id="wishStatus" role="status"></p><p id="wishConfirm" role="status" hidden></p>
+    <div class="wish-list" id="wishList" aria-live="polite"></div>
+  </section>
+
+  <!-- ── COUNTDOWN ── -->
+  <section id="countdown" data-screen-label="03 Countdown">
+    <div class="bg-layer" data-bg="assets/countdown-bg.webp" data-speed="-0.08"></div>
+    <div class="bg-overlay"></div>
+
+    <div class="cd-inner reveal">
+      <div class="kicker"></div>
+      <div class="h2"></div>
+      <div class="cd-grid" id="cdGrid">
+        <div class="cd-cell"><div class="cd-num" id="cdD"></div><div class="cd-lbl"></div></div>
+        <div class="cd-cell"><div class="cd-num" id="cdH"></div><div class="cd-lbl"></div></div>
+        <div class="cd-cell"><div class="cd-num" id="cdM"></div><div class="cd-lbl"></div></div>
+        <div class="cd-cell"><div class="cd-num" id="cdS"></div><div class="cd-lbl"></div></div>
+      </div>
+      <div class="cd-when"></div>
+    </div>
+    <div class="grain"></div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer id="foot">
+    <div class="mono-sm"></div>
+    <div class="when"></div>
+    <div class="rule"></div>
+    <div class="closing"></div>
+  </footer>
+
+</main>
+
+
+
+
+<div class="taklifla-lang-switch" role="group" aria-label="Language"><button type="button" class="taklifla-lang-toggle" aria-haspopup="menu" aria-expanded="false"><span class="taklifla-lang-current">UZ</span><span class="chev" aria-hidden="true">▾</span></button><div class="taklifla-lang-menu" role="menu"><button type="button" data-lang="uz-Latn" role="menuitemradio">UZ</button><button type="button" data-lang="uz-Cyrl" role="menuitemradio">ЎЗ</button><button type="button" data-lang="en" role="menuitemradio">EN</button><button type="button" data-lang="ru" role="menuitemradio">RU</button></div></div><script src="cyrillic.js"></script><script src="source/text.js"></script><script src="source/motion.js"></script><script src="platform-i18n.js"></script><script src="platform-adapter.js"></script></body></html>

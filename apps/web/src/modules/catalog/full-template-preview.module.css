@@ -116,3 +116,5 @@
   text-decoration: underline;
   text-underline-offset: 4px;
 }
+
+@media(min-width:601px){.leftLanguageClearance{left:max(96px,calc(env(safe-area-inset-left) + 96px))}}

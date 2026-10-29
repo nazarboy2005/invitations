@@ -1,0 +1,25 @@
+{
+  "date": "2026-10-29",
+  "configured": true,
+  "template": {
+    "id": "taklifla-sharlar",
+    "name": "Sharlar",
+    "description": "Burgund rangli karnaval, oltin sharlar va harakatli bayram sahnasi.",
+    "previewImage": "/templates/taklifla-sharlar/preview.webp",
+    "previewEventType": "birthday",
+    "categoryIds": [
+      "birthday"
+    ],
+    "supportedEventTypes": [
+      "birthday"
+    ],
+    "priceMinor": 100000,
+    "currency": "UZS",
+    "accent": "#7a1a26",
+    "published": true
+  },
+  "migrations": [
+    "0197_register_taklifla_sharlar.sql",
+    "0198_publish_taklifla_sharlar.sql"
+  ]
+}
