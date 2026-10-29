@@ -38,6 +38,7 @@ export function TakliflaTortFasl({
       invitationId,
       guestToken,
       preview,
+      sampleWishes: preview && catalogMusic,
       silentPlayback: preview && (silentPlayback || !catalogMusic),
       reducedMotion: preview && qaReducedMotion,
     });

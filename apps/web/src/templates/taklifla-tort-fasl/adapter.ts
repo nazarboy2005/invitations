@@ -5,6 +5,8 @@ import {
 } from "@taklifnoma/contracts";
 import { eventInstant, eventWallDate, formatDate } from "../date-format";
 
+import { getTemplatePreviewWishes } from "../../modules/catalog/preview-sample";
+
 export const FASLLAR_ID = "taklifla-tort-fasl";
 export const FASLLAR_NAME = "To‘rt fasl";
 
@@ -17,6 +19,7 @@ export function makeFasllarPayload(
     invitationId: string;
     guestToken?: string;
     preview?: boolean;
+    sampleWishes?: boolean;
     silentPlayback?: boolean;
     reducedMotion?: boolean;
   },
@@ -30,6 +33,7 @@ export function makeFasllarPayload(
         language,
         {
           title: content.title,
+          sampleWishes: options.preview && options.sampleWishes ? getTemplatePreviewWishes(language).map(w => ({name:w.name,message:w.text})) : [],
           people: content.people.filter((name) => name.trim()),
           greeting:
             guestName && content.personalGreeting

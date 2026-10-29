@@ -167,6 +167,7 @@
     ["wishes_script","wishes_title"].forEach((key) => { document.querySelector(`[data-i18n="${key}"]`).hidden = !current.wishesEnabled; });
     visible("fs-wish-list",current.wishesEnabled); feedback.hidden = true;
     if (loadFailed) status(t("loading"), true);
+    if(current.preview) approved=v.sampleWishes || [];
     renderWishes(); countdown();
     const musicUrl = current.music.enabled ? safeUrl(current.music.url) : "";
     if (musicUrl !== musicKey) { audio.pause(); userPaused = false; musicKey = musicUrl; if (musicUrl) audio.src = musicUrl; else audio.removeAttribute("src"); }

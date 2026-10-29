@@ -99,3 +99,11 @@ test("Fasllar artwork and source CSS match the untouched capture; runtime is iso
   assert.equal(deps.registered, true);
   assert.equal(deps.published, true);
 });
+
+test("Fasllar canonical wish samples are preview only",()=>{
+const invitation=createInvitation("taklifla-tort-fasl");
+const preview=makeFasllarPayload(invitation,"uz-Latn","",{invitationId:"qa",preview:true,sampleWishes:true}).payload;
+assert.equal(preview.variants["uz-Latn"].sampleWishes.length,3);
+assert.ok(preview.variants["uz-Latn"].sampleWishes.every(w=>w.message));
+assert.deepEqual(makeFasllarPayload(invitation,"uz-Latn","",{invitationId:"real",sampleWishes:true}).payload.variants["uz-Latn"].sampleWishes,[]);
+});

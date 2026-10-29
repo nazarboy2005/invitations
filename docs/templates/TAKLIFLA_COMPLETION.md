@@ -11,7 +11,7 @@ untouched. Application deployment and live payment activation are excluded.
 | Asalari | taklifla-asalari | Published | Complete — source/6 browser cases, real lifecycle and actual audio verified; music gap fixed |
 | Diyora-Shahzod | taklifla-zarhal-sahifa | Published | Complete — missing studio renderer, Google fallback and catalog audio fixed; real lifecycle verified |
 | Envelope | taklifla-muhrli-maktub | Published | Complete — shared Google links/wish samples, gesture audio and studio opening corrected |
-| Fasllar | taklifla-tort-fasl | Published | Pending audit |
+| Fasllar | taklifla-tort-fasl | Published | Complete — studio opening and shared sample wishes corrected; full source/lifecycle/audio checks pass |
 | Midnight Palace | taklifla-tungi-saroy | Published | Pending audit |
 | Tovus | taklifla-tovus | Published | Pending audit |
 | Barakali | taklifla-barakali | Private package | Pending |
@@ -62,3 +62,9 @@ the individual commit below each completed row.
 - Both map buttons use the shared Google target. Preview wish cards use only canonical localized samples. Audio starts on opening, follows actual play/pause events and retains manual pause across locale changes.
 - Studio opens the source scene and targets authored names/location/RSVP. Real four-locale save/reopen and source flowers notes, switching, publication, public guest/maps, edited content/manual link and pending wish persistence pass.
 - Evidence: `apps/web/src/templates/taklifla-muhrli-maktub/evidence`, `docs/templates/taklifla-audit/muhrli-integration.json`, `muhrli-audio.json`. Package tests and typecheck pass; original catalog publication/price unchanged.
+
+## To‘rt fasl audit
+
+- Capture/CSS/assets remain exact. Browser comparison at 320/390/1280 verifies seasonal particles, parallax, source sections, four locales, long/empty fields, reduced motion, closed wishes and transport failure handling.
+- Catalog wishes now use canonical preview-only data. Studio opens the source scene and targets authored names/location. Real save/reopen, compatible switching, studio, four-locale personalized public data, Google Place/manual map, publication and pending wishes pass.
+- Evidence: `apps/web/src/templates/taklifla-tort-fasl/qa`, `docs/templates/tort-fasl-verification/integration-report.json`, `docs/templates/taklifla-audit/fasllar-audio.json`. Four source/adapter tests and typecheck pass; existing publication/price retained.

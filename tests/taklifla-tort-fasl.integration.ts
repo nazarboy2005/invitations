@@ -20,7 +20,7 @@ const { chromium } = createRequire(
 )("playwright");
 
 test(
-  "To‘rt fasl saves, publishes, renders all locales and persists real guest responses",
+  "Fasllar saves, publishes, renders all locales and persists real guest responses",
   { timeout: 150000 },
   async () => {
     const origin = process.env.APP_URL!;
@@ -111,6 +111,32 @@ test(
       checks.push(
         "Authenticated four-locale save/reopen preserves authored fields, authored story chapters and venue",
       );
+      const originalShared = structuredClone(invitation);
+      for (const templateId of ["taklifla-tungi-saroy", "taklifla-tort-fasl"]) {
+        response = await request(
+          `/api/invitations/${invitation.id}`,
+          { invitation: { ...invitation, templateId } },
+          "PUT",
+        );
+        assert.equal(response.status, 200, await response.clone().text());
+        invitation = (await response.json()).invitation;
+        for (const field of [
+          "content",
+          "program",
+          "venue",
+          "contacts",
+          "story",
+          "gallery",
+          "dressCode",
+          "gift",
+          "enabledLocales",
+          "wishes",
+        ] as const)
+          assert.deepEqual(invitation[field], originalShared[field], field);
+      }
+      checks.push(
+        "Switching between published compatible templates preserves all shared creator content on real save/reopen",
+      );
       // Exercise the real publication transaction before exposing the catalog row.
       // The temporary catalog flag is restored before this transaction commits.
       const publication = await db.begin(async (tx) => {
@@ -131,7 +157,7 @@ test(
       assert.equal(invitation.status, "published");
       assert.match(invitation.slug!, /^[0-9A-Za-z]{6}$/);
       checks.push(
-        "Real shared publication transaction succeeds without exposing the hidden template during verification",
+        "Real shared publication transaction succeeds and preserves the existing catalog publication state",
       );
       await db`INSERT INTO invitation_guests(invitation_id,display_name,token_hash,max_party_size) VALUES(${invitation.id},'Personalized Fasllar guest',${digest(guestToken)},4)`;
       browser = await chromium.launch({
@@ -140,6 +166,35 @@ test(
           "C:/Program Files/Google/Chrome/Application/chrome.exe",
         headless: true,
       });
+      const ownerContext = await browser.newContext({
+        viewport: { width: 1280, height: 850 },
+        reducedMotion: "reduce",
+      });
+      await ownerContext.addCookies([
+        { name: "taklifnoma_session", value: token, url: origin },
+      ]);
+      const editor = await ownerContext.newPage();
+      await editor.goto(`${origin}/studio/${invitation.id}`, {
+        waitUntil: "domcontentloaded",
+      });
+      const studioFrame = editor.frameLocator(
+        'iframe[src*="taklifla-tort-fasl/index.html"]',
+      );
+      await studioFrame
+        .locator("#fs-hero-n1")
+        .filter({
+          hasText: invitation.content[invitation.defaultLocale].people[0],
+        })
+        .waitFor();
+      assert.equal(
+        await studioFrame.locator("#fs-hero-n1").textContent(),
+        invitation.content[invitation.defaultLocale].people[0],
+      );
+      await studioFrame.locator("#fs-splash").waitFor({ state: "hidden" });
+      checks.push(
+        "Authenticated studio uses the same renderer with saved creator data and opens the preview scene",
+      );
+      await ownerContext.close();
       const page = await browser.newPage({
         viewport: { width: 390, height: 844 },
         reducedMotion: "reduce",
@@ -161,7 +216,7 @@ test(
         );
         assert.ok(
           (
-            await frame.locator('[data-i18n="invite_heading"]').textContent()
+            await frame.locator("[data-i18n=invite_heading]").textContent()
           )?.includes("Personalized Fasllar guest"),
         );
         assert.equal(
@@ -221,9 +276,9 @@ test(
       );
       await updated.locator("#fs-open").click();
       assert.ok(
-        (await updated.locator("#fs-invite-text").textContent())?.includes(
-          "Reopened creator correction",
-        ),
+        (
+          await updated.locator("#fs-invite-text").textContent()
+        )?.includes("Reopened creator correction"),
       );
       assert.equal(
         await updated.locator("#fs-map").getAttribute("href"),
@@ -238,7 +293,7 @@ test(
         "docs/templates/tort-fasl-verification/integration-report.json",
         JSON.stringify(
           {
-            date: "2026-10-28",
+            date: "2026-10-29",
             checks,
             consoleErrors: errors,
             cleanup:
