@@ -1,0 +1,131 @@
+{
+  "capture": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/taklifla.uz/templates/bookie-terracotta__8a87d8f06f729fad.html",
+  "captureSha256": "d59b577b0616e2183734c64155073e6ba08663a5d7f92e5898c6e8b7d0666532",
+  "sourceName": "bookie-terracotta",
+  "name": "Fayzli Xonadon",
+  "id": "taklifla-fayzli-xonadon",
+  "private": false,
+  "registered": true,
+  "requestedSiblingDirectoryPresent": false,
+  "bookieArchiveMatches": [
+    "Web invitations/taklifla.uz/templates/bookie-navy__c1c53050cebf500c.html",
+    "Web invitations/taklifla.uz/templates/bookie-terracotta__8a87d8f06f729fad.html"
+  ],
+  "manifestMatches": [
+    "\"https://taklifla.uz/templates/bookie-terracotta.html?names=Karimov+oilasi&date=14.08.2026&venue=Yangi+uy&address=Yunusobod+tumani%2C+Magnum+ko%27chasi+9&time=18%3A00&v=3&lang=uz&default_lang=uz\"",
+    "\"https://taklifla.uz/templates/bookie-terracotta.html?names=Karimov+oilasi&date=14.08.2026&venue=Yangi+uy&address=Yunusobod+tumani%2C+Magnum+ko%27chasi+9&time=18%3A00&v=3&lang=uz&default_lang=uz\": {",
+    "\"file\": \"Web invitations/taklifla.uz/templates/bookie-terracotta__8a87d8f06f729fad.html\",",
+    "\"https://taklifla.uz/templates/bookie-terracotta.html?names=Karimov+oilasi&date=14.08.2026&venue=Yangi+uy&address=Yunusobod+tumani%2C+Magnum+ko%27chasi+9&time=18%3A00&v=3&lang=uz&default_lang=uz\""
+  ],
+  "dependencies": [
+    {
+      "url": "https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=1200&q=85&auto=format&fit=crop",
+      "path": "assets/art/house.jpg",
+      "bytes": 215720,
+      "sha256": "b2a874df6da7b01a0f4ed3b655710fcfc32dde2158e3e253e9537468f4d0d7fb"
+    },
+    {
+      "url": "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Newsreader:ital,wght@0,300;0,400;1,300;1,400;1,500&family=Manrope:wght@400;500;600;700&display=swap",
+      "path": "source/google-fonts.css",
+      "bytes": 3204,
+      "sha256": "1f020c45aa3ecf19b81d3002e03f8b2e6ec98c17a0c7fcae17929f02257789cb"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/fraunces/v38/6NUh8FyLNQOQZAnv9bYEvDiIdE9Ea92uemAk_WBq8U_9v0c2Wa0K7iN7hzFUPJH58nib1603gg7S2nfgRYIc6RujDg.ttf",
+      "path": "assets/fonts/68db300b3e14e7a3.ttf",
+      "bytes": 71560,
+      "sha256": "1e07336e3d6c0475d64c59f98d5a0ce22ece7c8b46473bdd24e956cea2e804d6"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/fraunces/v38/6NUh8FyLNQOQZAnv9bYEvDiIdE9Ea92uemAk_WBq8U_9v0c2Wa0K7iN7hzFUPJH58nib1603gg7S2nfgRYIctxujDg.ttf",
+      "path": "assets/fonts/79347ed53aa14e8b.ttf",
+      "bytes": 71580,
+      "sha256": "3eb6cf0a14feb1876cc464fa093af4e0c5b05dc46dec65619c1d95f2a1ab5aa7"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/fraunces/v38/6NUh8FyLNQOQZAnv9bYEvDiIdE9Ea92uemAk_WBq8U_9v0c2Wa0K7iN7hzFUPJH58nib1603gg7S2nfgRYIchRujDg.ttf",
+      "path": "assets/fonts/72025d9b68a7dd0b.ttf",
+      "bytes": 71596,
+      "sha256": "0c2fad18ed36cc400041f1e281ee79954a329b345caffc38dfaa3bb8bcef57de"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/fraunces/v38/6NUh8FyLNQOQZAnv9bYEvDiIdE9Ea92uemAk_WBq8U_9v0c2Wa0K7iN7hzFUPJH58nib1603gg7S2nfgRYIcaRyjDg.ttf",
+      "path": "assets/fonts/959364b06f81af7e.ttf",
+      "bytes": 71632,
+      "sha256": "ff7cf63717c27756df857ca12045a83522569f7b561bedaff813a25274eb263f"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/manrope/v20/xn7_YHE41ni1AdIRqAuZuw1Bx9mbZk79FO_F.ttf",
+      "path": "assets/fonts/755fa076675e6f61.ttf",
+      "bytes": 94972,
+      "sha256": "a13d9b41b0a471ce58f0e46d377fa3cc76615e4632c3b15eb397caadf7a13f0a"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/manrope/v20/xn7_YHE41ni1AdIRqAuZuw1Bx9mbZk7PFO_F.ttf",
+      "path": "assets/fonts/e6fa40b6715a310a.ttf",
+      "bytes": 95060,
+      "sha256": "f433e5d333be1128d8ec8a28b8aadd0314d10e14e4105406076666bc830fc15d"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/manrope/v20/xn7_YHE41ni1AdIRqAuZuw1Bx9mbZk4jE-_F.ttf",
+      "path": "assets/fonts/900670474e93d412.ttf",
+      "bytes": 95096,
+      "sha256": "6bad1a774228464cc88b8b0271555b266f7a3c64a7bedf15e165fdab4f6ac0ce"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/manrope/v20/xn7_YHE41ni1AdIRqAuZuw1Bx9mbZk4aE-_F.ttf",
+      "path": "assets/fonts/e7e0cf40cb44208e.ttf",
+      "bytes": 94928,
+      "sha256": "b9584e099e0e7f1e1e914c3037aabb9010c50346a3ce8df5eeeeecc0563044d8"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/newsreader/v26/cY9kfjOCX1hbuyalUrK439vogqC9yFZCYg7oRZaLP4obnf7fTXglsMx2T-ZA.ttf",
+      "path": "assets/fonts/463b9785306ce85e.ttf",
+      "bytes": 120440,
+      "sha256": "7a9b671b0fd0fd3677da4b8daecb33928b3c49cf6d77a5d4cc049331f85dc409"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/newsreader/v26/cY9kfjOCX1hbuyalUrK439vogqC9yFZCYg7oRZaLP4obnf7fTXglsMwoT-ZA.ttf",
+      "path": "assets/fonts/289d2aa8e0ed6731.ttf",
+      "bytes": 119892,
+      "sha256": "a7a0a9114e29fbf6e83a339ed930d5d8ae69fe4217c34fdd95386d995929d6e8"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/newsreader/v26/cY9kfjOCX1hbuyalUrK439vogqC9yFZCYg7oRZaLP4obnf7fTXglsMwaT-ZA.ttf",
+      "path": "assets/fonts/e365077394b3cd59.ttf",
+      "bytes": 121908,
+      "sha256": "5f4c8787a65ca5ec7595b8146c7366e436097aab682e5764db67177fb20584d3"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/newsreader/v26/cY9qfjOCX1hbuyalUrK49dLac06G1ZGsZBtoBCzBDXXD9JVF438wJo_ADA.ttf",
+      "path": "assets/fonts/dfe936d7a3e5c58f.ttf",
+      "bytes": 109432,
+      "sha256": "0ebe594e405b7849e52721b494cc260d26150c94baf8e7f6ad8f8c15f3af2788"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/newsreader/v26/cY9qfjOCX1hbuyalUrK49dLac06G1ZGsZBtoBCzBDXXD9JVF438weI_ADA.ttf",
+      "path": "assets/fonts/d6c65600eb0149bc.ttf",
+      "bytes": 109472,
+      "sha256": "b8f5e0a8bdd6a12c722ca5635d9da87e77ccbb2d0172112e34e00c4e55f2cd5a"
+    }
+  ],
+  "sourceStyleSha256": [
+    "5270501a3096f1d5cefeaaa24f36c2504a863a7da25a45b5ade7574d732d5bb0",
+    "d5d1f4c87d86121983461e435ba3050567e5bd9288412afac9b7ebd3c7c3af10",
+    "63d867eb99a48076d594b1494c1ae84017c1e1cc35f9909332601e8949b25b6b"
+  ],
+  "sourceRevealSha256": "188872602cfe76d76f69d6b7108e626e6151d69faa5e17167db812235eb77aca",
+  "excludedScripts": [
+    "query-string demo customizer",
+    "local-only simulated RSVP confirmation",
+    "provider audio query-string plumbing (replaced with contract music)",
+    "provider persisted language selector and partial i18n (replaced with enabled platform locales)",
+    "Cloudflare analytics beacon"
+  ],
+  "gaps": [],
+  "published": true,
+  "sourceNotes": [
+    "Requested sibling image directory is absent and not referenced. Exact source photo is locally packaged.",
+    "Fixed floor-plan is decorative source artwork. Dinner menu now has typed editor/persistence support."
+  ]
+}

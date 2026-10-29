@@ -713,7 +713,14 @@
         "ru": "Юнусабадский район, Ташкент"
       },
       "startsAt": "2027-06-12T17:00",
-      "programTimes": ["16:30", "17:00", "17:30", "18:30", "19:30", "20:00"],
+      "programTimes": [
+        "16:30",
+        "17:00",
+        "17:30",
+        "18:30",
+        "19:30",
+        "20:00"
+      ],
       "programHeading": {
         "uz-Latn": "Yangi uy to‘yi dasturi",
         "uz-Cyrl": "Янги уй тўйи дастури",
@@ -721,10 +728,38 @@
         "ru": "Программа новоселья"
       },
       "programTitles": {
-        "uz-Latn": ["Mehmonlarni kutib olish", "Yangi xonadon bilan tanishuv", "Uy bo‘ylab sayohat", "Dasturxon va suhbat", "Ezgu tilaklar", "Yakuniy so‘z"],
-        "uz-Cyrl": ["Меҳмонларни кутиб олиш", "Янги хонадон билан танишув", "Уй бўйлаб саёҳат", "Дастурхон ва суҳбат", "Эзгу тилаклар", "Якуний сўз"],
-        "en": ["Welcoming guests", "Welcome to our new home", "A tour of the house", "Food and conversation", "Warm wishes", "Closing words"],
-        "ru": ["Встреча гостей", "Знакомство с новым домом", "Экскурсия по дому", "Угощение и беседа", "Добрые пожелания", "Заключительное слово"]
+        "uz-Latn": [
+          "Mehmonlarni kutib olish",
+          "Yangi xonadon bilan tanishuv",
+          "Uy bo‘ylab sayohat",
+          "Dasturxon va suhbat",
+          "Ezgu tilaklar",
+          "Yakuniy so‘z"
+        ],
+        "uz-Cyrl": [
+          "Меҳмонларни кутиб олиш",
+          "Янги хонадон билан танишув",
+          "Уй бўйлаб саёҳат",
+          "Дастурхон ва суҳбат",
+          "Эзгу тилаклар",
+          "Якуний сўз"
+        ],
+        "en": [
+          "Welcoming guests",
+          "Welcome to our new home",
+          "A tour of the house",
+          "Food and conversation",
+          "Warm wishes",
+          "Closing words"
+        ],
+        "ru": [
+          "Встреча гостей",
+          "Знакомство с новым домом",
+          "Экскурсия по дому",
+          "Угощение и беседа",
+          "Добрые пожелания",
+          "Заключительное слово"
+        ]
       },
       "dressCode": {
         "style": {
@@ -746,11 +781,139 @@
           "ru": "Для удобства в доме можно переобуться."
         },
         "colors": [
-          { "hex": "#c96f4a", "name": { "uz-Latn": "Terrakota", "uz-Cyrl": "Терракота", "en": "Terracotta", "ru": "Терракотовый" } },
-          { "hex": "#f4dfb1", "name": { "uz-Latn": "Qaymoqrang", "uz-Cyrl": "Қаймоқранг", "en": "Cream", "ru": "Кремовый" } },
-          { "hex": "#2f6f73", "name": { "uz-Latn": "Ko‘kimtir yashil", "uz-Cyrl": "Кўкимтир яшил", "en": "Teal", "ru": "Бирюзовый" } },
-          { "hex": "#7aa95c", "name": { "uz-Latn": "Zaytun", "uz-Cyrl": "Зайтун", "en": "Olive", "ru": "Оливковый" } },
-          { "hex": "#ffd27a", "name": { "uz-Latn": "Oltin", "uz-Cyrl": "Олтин", "en": "Golden", "ru": "Золотистый" } }
+          {
+            "hex": "#c96f4a",
+            "name": {
+              "uz-Latn": "Terrakota",
+              "uz-Cyrl": "Терракота",
+              "en": "Terracotta",
+              "ru": "Терракотовый"
+            }
+          },
+          {
+            "hex": "#f4dfb1",
+            "name": {
+              "uz-Latn": "Qaymoqrang",
+              "uz-Cyrl": "Қаймоқранг",
+              "en": "Cream",
+              "ru": "Кремовый"
+            }
+          },
+          {
+            "hex": "#2f6f73",
+            "name": {
+              "uz-Latn": "Ko‘kimtir yashil",
+              "uz-Cyrl": "Кўкимтир яшил",
+              "en": "Teal",
+              "ru": "Бирюзовый"
+            }
+          },
+          {
+            "hex": "#7aa95c",
+            "name": {
+              "uz-Latn": "Zaytun",
+              "uz-Cyrl": "Зайтун",
+              "en": "Olive",
+              "ru": "Оливковый"
+            }
+          },
+          {
+            "hex": "#ffd27a",
+            "name": {
+              "uz-Latn": "Oltin",
+              "uz-Cyrl": "Олтин",
+              "en": "Golden",
+              "ru": "Золотистый"
+            }
+          }
+        ]
+      },
+      "housewarmingDetails": {
+        "menu": [
+          {
+            "id": "course-welcome",
+            "label": {
+              "uz-Latn": "Yengil taom",
+              "uz-Cyrl": "Енгил таом",
+              "en": "Starter",
+              "ru": "Закуска"
+            },
+            "name": {
+              "uz-Latn": "Yangi sabzavotlar",
+              "uz-Cyrl": "Янги сабзавотлар",
+              "en": "Fresh vegetables",
+              "ru": "Свежие овощи"
+            },
+            "description": {
+              "uz-Latn": "Mavsumiy sabzavotlardan salat",
+              "uz-Cyrl": "Мавсумий сабзавотлардан салат",
+              "en": "Seasonal vegetable salad",
+              "ru": "Салат из сезонных овощей"
+            }
+          },
+          {
+            "id": "course-soup",
+            "label": {
+              "uz-Latn": "Issiq taom",
+              "uz-Cyrl": "Иссиқ таом",
+              "en": "Soup",
+              "ru": "Первое блюдо"
+            },
+            "name": {
+              "uz-Latn": "Sho‘rva",
+              "uz-Cyrl": "Шўрва",
+              "en": "Shurpa",
+              "ru": "Шурпа"
+            },
+            "description": {
+              "uz-Latn": "Sabzavotli sho‘rva",
+              "uz-Cyrl": "Сабзавотли шўрва",
+              "en": "Vegetable broth",
+              "ru": "Овощной бульон"
+            }
+          },
+          {
+            "id": "course-main",
+            "label": {
+              "uz-Latn": "Asosiy taom",
+              "uz-Cyrl": "Асосий таом",
+              "en": "Main course",
+              "ru": "Основное блюдо"
+            },
+            "name": {
+              "uz-Latn": "Bayram oshi",
+              "uz-Cyrl": "Байрам оши",
+              "en": "Celebration plov",
+              "ru": "Праздничный плов"
+            },
+            "description": {
+              "uz-Latn": "An’anaviy oilaviy taom",
+              "uz-Cyrl": "Анъанавий оилавий таом",
+              "en": "A traditional family dish",
+              "ru": "Традиционное семейное блюдо"
+            }
+          },
+          {
+            "id": "course-dessert",
+            "label": {
+              "uz-Latn": "Shirinlik",
+              "uz-Cyrl": "Ширинлик",
+              "en": "Dessert",
+              "ru": "Десерт"
+            },
+            "name": {
+              "uz-Latn": "Mevali shirinlik",
+              "uz-Cyrl": "Мевали ширинлик",
+              "en": "Fruit dessert",
+              "ru": "Фруктовый десерт"
+            },
+            "description": {
+              "uz-Latn": "Meva va choy bilan",
+              "uz-Cyrl": "Мева ва чой билан",
+              "en": "Served with fruit and tea",
+              "ru": "С фруктами и чаем"
+            }
+          }
         ]
       }
     },

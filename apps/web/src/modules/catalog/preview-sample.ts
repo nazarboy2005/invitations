@@ -11,6 +11,7 @@ import previewSample from "./preview-sample.json";
 type EventSample = {
   personIndex?: number;
   celebrantAge?: number;
+  housewarmingDetails?: Invitation["templateData"][string];
   anniversaryDetails?: Invitation["templateData"][string];
   story?: Invitation["story"];
   /** Optional localized one-person name used by source templates such as Bitiruv. */
@@ -139,7 +140,9 @@ export function createTemplatePreviewSample(
     artistLineup: sampleEventType === "wedding" ? structuredClone(previewSample.artistLineup) : [],
     gallery: structuredClone(templateSample?.gallery ?? previewSample.gallery),
     story: structuredClone(EVENT_SAMPLES[sampleEventType]?.story ?? (sampleEventType === "wedding" ? previewSample.story : [])),
-    templateData: templateId === "taklifla-yubiley-sahifasi" && EVENT_SAMPLES[sampleEventType]?.anniversaryDetails
+    templateData: templateId === "taklifla-fayzli-xonadon" && EVENT_SAMPLES[sampleEventType]?.housewarmingDetails
+      ? { "taklifla-fayzli-xonadon": structuredClone(EVENT_SAMPLES[sampleEventType]!.housewarmingDetails!) }
+      : templateId === "taklifla-yubiley-sahifasi" && EVENT_SAMPLES[sampleEventType]?.anniversaryDetails
       ? { "taklifla-yubiley-sahifasi": structuredClone(EVENT_SAMPLES[sampleEventType]!.anniversaryDetails!) }
       : templateId === "wedivo-pulau-sehati"
       ? { "wedivo-pulau-sehati": {

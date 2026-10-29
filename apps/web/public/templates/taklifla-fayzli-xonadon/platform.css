@@ -1,0 +1,15 @@
+[hidden] { display: none !important; }
+body { visibility: hidden; }
+html[data-ready] body { visibility: visible; }
+.hero-names { overflow-wrap: anywhere; }
+.welcome-quote, .address-sub, .address-line, .closing-meta, .dress-desc { overflow-wrap: anywhere; white-space: pre-line; }
+.welcome .eyebrow { display: block; overflow-wrap: anywhere; }
+.rsvp-status { margin-top: 16px; font: 14px/1.5 Manrope, sans-serif; color: var(--ink-2); }
+.rsvp-status:empty { display: none; }
+.btn:disabled { cursor: wait; opacity: .65; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+html[data-reduced-motion] .reveal { opacity: 1; transform: none; transition: none; }
+html[data-reduced-motion] *, html[data-reduced-motion] *::before, html[data-reduced-motion] *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}

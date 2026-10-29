@@ -157,6 +157,9 @@ function isJsonValue(value: unknown): value is JsonValue {
   return false;
 }
 const pulauLocalizedText = z.partialRecord(localeSchema, text);
+export const fayzliXonadonDataSchema = z.object({
+  menu: z.array(z.object({id:z.string().min(1).max(100),label:localizedShortText.default({}),name:localizedShortText.default({}),description:localizedLongText.default({})})).max(12).default([]),
+}).default({menu:[]});
 export const yubileySahifasiDataSchema = z.object({
   years: z.number().int().min(1).max(999).nullable().default(null),
   founderRole: localizedShortText.default({}),
@@ -214,6 +217,7 @@ export const invitationSchema = z
     id: z.string().min(1).max(100),
     templateId: invitationTemplateIdSchema,
     templateData: z.record(z.string(), z.custom<JsonValue>(isJsonValue)).default({}).superRefine((data, ctx) => {
+      if (data["taklifla-fayzli-xonadon"] !== undefined && !fayzliXonadonDataSchema.safeParse(data["taklifla-fayzli-xonadon"]).success) ctx.addIssue({code:"custom",path:["taklifla-fayzli-xonadon"],message:"Invalid housewarming menu"});
       if (data["taklifla-yubiley-sahifasi"] !== undefined && !yubileySahifasiDataSchema.safeParse(data["taklifla-yubiley-sahifasi"]).success) ctx.addIssue({ code:"custom", path:["taklifla-yubiley-sahifasi"], message:"Invalid anniversary details" });
       if (data["taklifla-muhrli-maktub"] !== undefined) {
         const checked = muhrliMaktubDataSchema.safeParse(data["taklifla-muhrli-maktub"]);
@@ -1425,6 +1429,12 @@ export const TEMPLATES: TemplateDefinition[] = [
     currency: "UZS",
     accent: "#d4a52e",
     published: true,
+  },
+  {
+    id: "taklifla-fayzli-xonadon", name: "Fayzli Xonadon", description: "Terrakota jilolari, xonadon chizmasi va samimiy uy to‘yi taklifnomasi.",
+    previewImage: "/templates/taklifla-fayzli-xonadon/preview.webp", previewEventType: "yangi-uy",
+    categoryIds: ["other"], supportedEventTypes: ["yangi-uy"],
+    priceMinor: 100000, currency: "UZS", accent: "#b5523a", published: true,
   },
   {
     id: "taklifla-yubiley-sahifasi", name: "Yubiley Sahifasi",

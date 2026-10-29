@@ -34,6 +34,7 @@ import {
   invitationSchema,
   muhrliMaktubDataSchema,
   yubileySahifasiDataSchema,
+  fayzliXonadonDataSchema,
   pulauSehatiDataSchema,
   LANGUAGE_NAMES,
   LOCALES,
@@ -84,6 +85,7 @@ import { TakliflaAsalari } from "@/templates/taklifla-asalari/renderer";
 import { TungiSaroyInvitation } from "@/templates/taklifla-tungi-saroy/renderer";
 import { TakliflaTovus } from "@/templates/taklifla-tovus/renderer";
 import { TakliflaTortFasl } from "@/templates/taklifla-tort-fasl/renderer";
+import { TakliflaFayzliXonadonInvitation } from "@/templates/taklifla-fayzli-xonadon/renderer";
 import { TakliflaYubileySahifasi } from "@/templates/taklifla-yubiley-sahifasi/renderer";
 import { TakliflaBarakali } from "@/templates/taklifla-barakali/renderer";
 import { TakliflaZarhalSahifaInvitation } from "@/templates/taklifla-zarhal-sahifa/renderer";
@@ -884,6 +886,8 @@ export function Studio({
         : current,
     );
   }
+  const xonadonData=fayzliXonadonDataSchema.parse(invitation.templateData["taklifla-fayzli-xonadon"] ?? {});
+  function updateXonadonMenu(menu: typeof xonadonData.menu) {setInvitation(current=>current?{...current,templateData:{...current.templateData,"taklifla-fayzli-xonadon":{menu}}}:current);}
   const yubileyData = yubileySahifasiDataSchema.parse(invitation.templateData["taklifla-yubiley-sahifasi"] ?? {});
   function updateYubileyData(next: typeof yubileyData) {
     setInvitation(current=>current ? {...current,templateData:{...current.templateData,"taklifla-yubiley-sahifasi":next}} : current);
@@ -3360,6 +3364,13 @@ export function Studio({
                   )}
                 </OptionalSection>
                 <div className={styles.divider} />
+                {invitation.templateId === "taklifla-fayzli-xonadon" && <div className={styles.formGrid}>
+                  {xonadonData.menu.map((item,index)=><div key={item.id}>
+                    {(["label","name","description"] as const).map(key=><Field key={key} label={`${({label:"Taom turi",name:"Taom",description:"Izoh"})[key]} · ${LANGUAGE_NAMES[locale]}`}><textarea maxLength={key==="description"?4000:300} rows={2} value={item[key][locale] || ""} onChange={e=>updateXonadonMenu(xonadonData.menu.map((s,i)=>i===index?{...s,[key]:{...s[key],[locale]:e.target.value}}:s))}/></Field>)}
+                    <button type="button" onClick={()=>updateXonadonMenu(xonadonData.menu.filter(s=>s.id!==item.id))}>O‘chirish</button>
+                  </div>)}
+                  {xonadonData.menu.length<12 && <button type="button" onClick={()=>updateXonadonMenu([...xonadonData.menu,{id:crypto.randomUUID(),label:{},name:{},description:{}}])}>Taom qo‘shish</button>}
+                </div>}
                 {invitation.templateId === "taklifla-yubiley-sahifasi" && <div className={styles.formGrid}>
                   <Field label="Yubiley yili"><input type="number" min={1} max={999} value={yubileyData.years ?? ""} disabled={identityLocked} onChange={e=>updateYubileyData({...yubileyData,years:e.target.value ? Math.min(999,Math.max(1,Number(e.target.value))) : null})}/></Field>
                   <Field label={`Asoschining lavozimi · ${LANGUAGE_NAMES[locale]}`}><input maxLength={300} value={yubileyData.founderRole[locale] || ""} onChange={e=>updateYubileyData({...yubileyData,founderRole:{...yubileyData.founderRole,[locale]:e.target.value}})}/></Field>
@@ -3914,6 +3925,8 @@ export function Studio({
                 preview
                 catalogMusic={section === 0 && !authoredPreview}
               />
+            ) : invitation.templateId === "taklifla-fayzli-xonadon" ? (
+              <TakliflaFayzliXonadonInvitation invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview fullPreview catalogMusic={section === 0 && !authoredPreview} silentPlayback />
             ) : invitation.templateId === "taklifla-yubiley-sahifasi" ? (
               <TakliflaYubileySahifasi invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview fullPreview catalogMusic={section === 0 && !authoredPreview} silentPlayback />
             ) : invitation.templateId === "taklifla-barakali" ? (

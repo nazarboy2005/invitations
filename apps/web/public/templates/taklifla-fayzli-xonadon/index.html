@@ -1,0 +1,254 @@
+<!doctype html><html lang="uz-Latn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Fayzli Xonadon</title><link rel="stylesheet" href="assets/fonts.css"><link rel="stylesheet" href="template.css"><link rel="stylesheet" href="platform.css"></head><body> <div class="shell">
+<!-- ─── HERO ─────────────────────────────────────── -->
+<section class="hero">
+<div class="hero-frame"></div>
+<div class="hero-content">
+<div class="hero-eyebrow">Yangi uy bayrami</div>
+<div class="hero-occasion"></div>
+<h1 class="hero-names"></h1>
+<div class="hero-rule"></div>
+<div class="hero-meta">
+<div class="hero-meta-cell">
+<span class="hero-meta-label">Sana</span>
+<span class="hero-meta-val"></span>
+</div>
+<div class="hero-meta-divider"></div>
+<div class="hero-meta-cell">
+<span class="hero-meta-label">Vaqt</span>
+<span class="hero-meta-val"></span>
+</div>
+</div>
+<div class="scroll-hint">Pastga torting</div>
+<div class="scroll-arrow"></div>
+</div>
+</section>
+<!-- ─── WELCOME MESSAGE ──────────────────────────── -->
+<section class="welcome reveal">
+<span class="eyebrow">Xush kelibsiz</span>
+<p class="welcome-quote"></p>
+<div class="welcome-attr"></div>
+</section>
+<!-- ─── FLOOR PLAN ───────────────────────────────── -->
+<section class="floorplan reveal">
+<span class="eyebrow">Reja</span>
+<h2>Uy chizmasi</h2>
+<div class="floorplan-sub">Mehmonxonadan boshlanadi, oshxonada davom etadi</div>
+<div class="floorplan-card">
+<!-- Simple 4-room sketch: living, dining, kitchen, terrace.
+             Outer wall, inner walls dividing into 4 zones, door arcs,
+             a small terracotta tile pattern hint. -->
+<svg aria-hidden="true" viewbox="0 0 340 240">
+<!-- Outer wall -->
+<rect class="fp-wall" height="216" width="316" x="12" y="12"></rect>
+<!-- Room fills -->
+<rect class="fp-room-fill" height="120" opacity="0.35" width="180" x="13" y="13"></rect>
+<rect class="fp-room-fill" height="120" opacity="0.6" width="135" x="193" y="13"></rect>
+<rect class="fp-room-fill" height="95" opacity="0.5" width="120" x="13" y="133"></rect>
+<rect class="fp-room-fill" height="95" opacity="0.25" width="195" x="133" y="133"></rect>
+<!-- Inner walls -->
+<path class="fp-wall" d="M 193 13 L 193 133"></path>
+<path class="fp-wall" d="M 12 133 L 328 133"></path>
+<path class="fp-wall" d="M 133 133 L 133 228"></path>
+<!-- Door openings (gaps + arcs) -->
+<path d="M 193 70 L 193 92" fill="none" stroke="#FAF3E3" stroke-width="3"></path>
+<path class="fp-door" d="M 193 70 A 22 22 0 0 1 215 92"></path>
+<path d="M 88 133 L 110 133" fill="none" stroke="#FAF3E3" stroke-width="3"></path>
+<path class="fp-door" d="M 88 133 A 22 22 0 0 1 110 155"></path>
+<path d="M 133 170 L 133 192" fill="none" stroke="#FAF3E3" stroke-width="3"></path>
+<path class="fp-door" d="M 133 170 A 22 22 0 0 0 155 192"></path>
+<!-- Entry arrow from outside (left edge) -->
+<path d="M 12 60 L 13 60" stroke="#FAF3E3" stroke-width="3"></path>
+<path d="M 2 60 L 14 60 M 8 55 L 14 60 L 8 65" fill="none" stroke="#B5523A" stroke-width="1.2"></path>
+<text class="fp-sublabel" font-size="8" x="6" y="48">kirish</text>
+<!-- Furniture hints — minimal terracotta strokes -->
+<!-- Living: sofa + coffee table -->
+<rect class="fp-room-stroke" height="18" width="60" x="28" y="60"></rect>
+<rect class="fp-room-stroke" height="14" width="38" x="38" y="92"></rect>
+<!-- Dining: long table + chairs -->
+<rect class="fp-room-stroke" height="22" width="80" x="218" y="40"></rect>
+<circle class="fp-room-stroke" cx="228" cy="78" r="4"></circle>
+<circle class="fp-room-stroke" cx="248" cy="78" r="4"></circle>
+<circle class="fp-room-stroke" cx="268" cy="78" r="4"></circle>
+<circle class="fp-room-stroke" cx="288" cy="78" r="4"></circle>
+<circle class="fp-room-stroke" cx="228" cy="26" r="4"></circle>
+<circle class="fp-room-stroke" cx="248" cy="26" r="4"></circle>
+<circle class="fp-room-stroke" cx="268" cy="26" r="4"></circle>
+<circle class="fp-room-stroke" cx="288" cy="26" r="4"></circle>
+<!-- Kitchen: L-counter + stove -->
+<path class="fp-room-stroke" d="M 26 152 L 120 152 L 120 200 L 100 200"></path>
+<rect class="fp-room-stroke" height="14" width="22" x="40" y="158"></rect>
+<circle class="fp-room-stroke" cx="76" cy="165" r="3"></circle>
+<circle class="fp-room-stroke" cx="92" cy="165" r="3"></circle>
+<!-- Terrace: a couple of pots + a lounger -->
+<rect class="fp-room-stroke" height="14" width="78" x="160" y="160"></rect>
+<circle class="fp-room-stroke" cx="265" cy="170" r="6"></circle>
+<circle class="fp-room-stroke" cx="290" cy="170" r="6"></circle>
+<path class="fp-room-stroke" d="M 160 200 L 230 200"></path>
+<!-- Room labels -->
+<text class="fp-label" text-anchor="middle" x="103" y="44">Mehmonxona</text>
+<text class="fp-sublabel" text-anchor="middle" x="103" y="56">Living</text>
+<text class="fp-label" text-anchor="middle" x="260" y="105">Oshxona</text>
+<text class="fp-sublabel" text-anchor="middle" x="260" y="117">Dining</text>
+<text class="fp-label" text-anchor="middle" x="73" y="220">Pazandalik</text>
+<text class="fp-sublabel" dy="-4" font-size="8" text-anchor="middle" x="73" y="232">Kitchen</text>
+<text class="fp-label" text-anchor="middle" x="230" y="220">Ayvon</text>
+<text class="fp-sublabel" dy="-4" font-size="8" text-anchor="middle" x="230" y="232">Terrace</text>
+</svg>
+<div class="floorplan-legend">
+<span>Xona</span>
+<span>Eshik</span>
+</div>
+</div>
+</section>
+<!-- ─── DINNER MENU ──────────────────────────────── -->
+<section class="menu reveal" hidden="">
+<span class="eyebrow">Dasturxon</span>
+<h2>Kechki taom</h2>
+<div class="menu-sub">To'rt taomli oilaviy ziyofat</div>
+<div class="menu-list">
+<div class="menu-course">
+<div class="menu-num">I</div>
+<div>
+<div class="menu-course-label"></div>
+<div class="menu-course-name"></div>
+<div class="menu-course-desc"></div>
+</div>
+</div>
+<div class="menu-course">
+<div class="menu-num">II</div>
+<div>
+<div class="menu-course-label"></div>
+<div class="menu-course-name"></div>
+<div class="menu-course-desc"></div>
+</div>
+</div>
+<div class="menu-course">
+<div class="menu-num">III</div>
+<div>
+<div class="menu-course-label"></div>
+<div class="menu-course-name"></div>
+<div class="menu-course-desc"></div>
+</div>
+</div>
+<div class="menu-course">
+<div class="menu-num">IV</div>
+<div>
+<div class="menu-course-label"></div>
+<div class="menu-course-name"></div>
+<div class="menu-course-desc"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- ─── ADDRESS + MAP ────────────────────────────── -->
+<section class="address reveal">
+<span class="eyebrow">Manzil</span>
+<h2>Bizning yangi uyimiz</h2>
+<div class="address-line" data-venue=""></div>
+<div class="address-sub"></div>
+<a class="map-card" hidden="" href="#" rel="noopener noreferrer" target="_blank">
+<div aria-hidden="true" class="map-art">
+<svg viewbox="0 0 380 180">
+<!-- Subtle street grid -->
+<defs>
+<pattern height="32" id="gridT" patternunits="userSpaceOnUse" width="32">
+<path class="map-grid" d="M 32 0 L 0 0 0 32"></path>
+</pattern>
+</defs>
+<rect fill="#ECDDBE" height="180" width="380"></rect>
+<rect fill="url(#gridT)" height="180" width="380"></rect>
+<!-- A wandering main road -->
+<path class="map-pin-path" d="M 0 120 Q 80 110 140 90 T 280 70 T 380 60" opacity="0.7" stroke-width="2.2"></path>
+<path class="map-pin-path" d="M 60 0 Q 80 60 140 90 T 200 180" opacity="0.55" stroke-width="1.6"></path>
+<path class="map-pin-path" d="M 220 0 Q 240 50 280 70 T 360 180" opacity="0.55" stroke-width="1.6"></path>
+<!-- Pin -->
+<g transform="translate(190 85)">
+<circle fill="#FAF3E3" opacity="0.85" r="18" stroke="#B5523A" stroke-width="1.2"></circle>
+<path d="M 0 -10 C 6 -10 10 -6 10 0 C 10 8 0 18 0 18 C 0 18 -10 8 -10 0 C -10 -6 -6 -10 0 -10 Z" fill="#B5523A"></path>
+<circle cx="0" cy="-1" fill="#FAF3E3" r="3"></circle>
+</g>
+<!-- Small directional north -->
+<g transform="translate(346 18)">
+<circle fill="#FAF3E3" r="10" stroke="#B69356" stroke-width="0.6"></circle>
+<path d="M 0 -6 L 3 4 L 0 1 L -3 4 Z" fill="#B5523A"></path>
+<text fill="#5A463A" font-family="Manrope, sans-serif" font-size="7" font-weight="700" letter-spacing="0.2em" text-anchor="middle" y="20">N</text>
+</g>
+</svg>
+</div>
+<div class="map-cta">
+<svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24">
+<path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+<circle cx="12" cy="10" r="3"></circle>
+</svg>
+<span>Xaritada ochish</span>
+</div>
+</a>
+</section>
+<!-- ─── DRESS CODE ──────────────────────────────── -->
+<section class="dress reveal" hidden="">
+<span class="eyebrow">Kiyim qoidasi</span>
+<div class="dress-value"></div>
+<p class="dress-desc"></p>
+<div class="dress-swatches"></div>
+</section>
+<!-- ─── RSVP ────────────────────────────────────── -->
+<section class="rsvp reveal" hidden="">
+<span class="eyebrow">Tasdiqlash</span>
+<h2>RSVP</h2>
+<p class="rsvp-sub"></p>
+<form class="rsvp-form" id="rsvp-form">
+<div class="rsvp-row">
+<label for="rsvp-name">Ism familiya</label>
+<input autocomplete="name" id="rsvp-name" maxlength="60" name="name" required="" type="text"/>
+</div>
+<div class="rsvp-row">
+<div class="rsvp-row">
+<label for="rsvp-attend">Qatnashasizmi</label>
+<select id="rsvp-attend" name="attend" required="">
+<option value="yes">Ha, albatta</option>
+<option value="no">Afsus, kela olmayman</option>
+</select>
+</div>
+
+</div>
+<button class="btn" type="submit">
+<span>Yuborish</span>
+<span aria-hidden="true">→</span>
+</button>
+</form>
+<div class="rsvp-thanks" id="rsvp-thanks">
+        Rahmat — sizni kutamiz.
+      </div>
+</section>
+<!-- ─── CLOSING ─────────────────────────────────── -->
+<section class="closing reveal">
+<div class="closing-mono" id="closing-mono"></div>
+<div class="rule-h"></div>
+<p class="closing-line">
+        Eshikimiz ochiq, dasturxonimiz tayyor — kelganingizdan xursand bo'lamiz.
+      </p>
+<div class="closing-meta"></div>
+</section>
+<div class="footer">
+<div class="footer-text">Visol ✱</div>
+</div>
+</div>
+<audio id="bgMusic" loop preload="none"></audio>
+<button id="taklifla-music-btn" class="taklifla-music-btn" type="button" aria-label="Musiqa" hidden>
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+  <span class="taklifla-music-label">Musiqa</span>
+</button>
+<div class="taklifla-lang-switch" role="group" aria-label="Language">
+  <button type="button" class="taklifla-lang-toggle" aria-haspopup="menu" aria-expanded="false">
+    <span class="taklifla-lang-current">UZ</span>
+    <span class="chev" aria-hidden="true">▾</span>
+  </button>
+  <div class="taklifla-lang-menu" role="menu">
+    <button type="button" data-lang="uz" role="menuitemradio">UZ</button>
+    <hr />
+    <button type="button" data-lang="en" role="menuitemradio">EN</button>
+    <hr />
+    <button type="button" data-lang="ru" role="menuitemradio">RU</button>
+  </div>
+</div>
+<script src="source/reveal.js"></script><script src="platform-i18n.js"></script><script src="platform-adapter.js"></script></body></html>

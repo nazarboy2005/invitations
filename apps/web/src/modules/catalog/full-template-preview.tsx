@@ -27,6 +27,7 @@ import styles from "./full-template-preview.module.css";
 // Load only the renderer selected by this preview, rather than every design.
 const AnorInvitation = dynamic(() => import("@/templates/anor/renderer").then((module) => module.AnorInvitation));
 const WedivoPulauSehati = dynamic(() => import("@/templates/wedivo-pulau-sehati/renderer").then((module) => module.WedivoPulauSehati));
+const TakliflaFayzliXonadonInvitation = dynamic(() => import("@/templates/taklifla-fayzli-xonadon/renderer").then(m=>m.TakliflaFayzliXonadonInvitation));
 const TakliflaYubileySahifasi = dynamic(() => import("@/templates/taklifla-yubiley-sahifasi/renderer").then(m=>m.TakliflaYubileySahifasi));
 const TakliflaBarakali = dynamic(() => import("@/templates/taklifla-barakali/renderer").then(m => m.TakliflaBarakali));
 const TakliflaZarhalSahifa = dynamic(() => import("@/templates/taklifla-zarhal-sahifa/renderer").then((module) => module.TakliflaZarhalSahifaInvitation));
@@ -293,7 +294,7 @@ export function FullTemplatePreview({
         />
       )}
       {!cardPreview && !posterCapture && <nav
-        className={`${styles.previewControls} ${showControls ? styles.controlsVisible : ""} ${["taklifla-yubiley-sahifasi", "taklifla-barakali", "taklifla-tungi-saroy", "taklifla-tovus"].includes(template.id) ? styles.templateLanguageClearance : ""}`}
+        className={`${styles.previewControls} ${showControls ? styles.controlsVisible : ""} ${["taklifla-fayzli-xonadon", "taklifla-yubiley-sahifasi", "taklifla-barakali", "taklifla-tungi-saroy", "taklifla-tovus"].includes(template.id) ? styles.templateLanguageClearance : ""}`}
         aria-label="Dizayn amallari"
         aria-hidden={!showControls}
         inert={!showControls}
@@ -341,6 +342,8 @@ export function FullTemplatePreview({
         <ZarrinDoppiInvitation invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} sampleWishes={catalogPreview} silentPlayback={silentPlayback} />
       ) : template.id === "wedivo-pulau-sehati" ? (
         <WedivoPulauSehati invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} silentPlayback={silentPlayback} qaReducedMotion={qaReducedMotion} />
+      ) : template.id === "taklifla-fayzli-xonadon" ? (
+        <TakliflaFayzliXonadonInvitation invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} silentPlayback={silentPlayback} qaReducedMotion={qaReducedMotion} />
       ) : template.id === "taklifla-yubiley-sahifasi" ? (
         <TakliflaYubileySahifasi invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} silentPlayback={silentPlayback} qaReducedMotion={qaReducedMotion} />
       ) : template.id === "taklifla-barakali" ? (

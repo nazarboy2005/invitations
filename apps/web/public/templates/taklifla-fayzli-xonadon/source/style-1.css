@@ -1,0 +1,7 @@
+
+.taklifla-music-btn{position:fixed;top:16px;right:16px;z-index:9999;display:inline-flex;align-items:center;gap:8px;height:44px;padding:0 16px;border-radius:999px;border:none;background:rgba(255,255,255,.92);color:rgba(0,0,0,.85);box-shadow:0 4px 16px rgba(0,0,0,.18);cursor:pointer;font-family:system-ui,-apple-system,sans-serif;font-size:13px;font-weight:600;letter-spacing:.02em;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);transition:transform .15s ease,background .25s ease,color .25s ease}
+.taklifla-music-btn:hover{transform:scale(1.04)}
+.taklifla-music-btn:active{transform:scale(.96)}
+.taklifla-music-btn[hidden]{display:none}
+.taklifla-music-btn.playing{background:rgba(0,0,0,.85);color:#fff}
+.taklifla-music-btn svg{flex:none}

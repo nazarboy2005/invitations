@@ -1,0 +1,3 @@
+source/*.css -text
+source/*.js -text
+template.css -text

@@ -2113,3 +2113,7 @@ Development agents are distinct from production queue workers. The running app w
 ### Yubiley Sahifasi completion (2026-10-29)
 
 - Bookie Navy is the corporate anniversary source. Preserve its central/closing years, founder role, milestone dates and statistics. Store these source-supported values in validated `templateData["taklifla-yubiley-sahifasi"]` and expose editor controls; shared people/hosts/story/program/map data remain reusable. Canonical corporate preview-only statistics/milestones belong in the shared event profile JSON. RSVP organisation is part of its note and attendance uses 1/0, without a guest-count input. Migrations 0175/0176 register/publish it for corporate events in category other after complete verification.
+
+### Fayzli Xonadon completion (2026-10-29)
+
+- Bookie Terracotta is the housewarming source. Keep its floor-plan as decorative source artwork and restore its dinner section with typed, localized, editable menu courses under `templateData["taklifla-fayzli-xonadon"]`. Use stable item IDs and preserve these fields on switching. Shared housewarming preview menu belongs to the canonical event profile JSON, never creator saves. Real RSVP uses one-person attendance. Migrations 0177/0178 register/publish for `yangi-uy`, category other.

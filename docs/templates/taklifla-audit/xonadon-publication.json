@@ -1,0 +1,25 @@
+{
+  "date": "2026-10-29",
+  "configured": true,
+  "template": {
+    "id": "taklifla-fayzli-xonadon",
+    "name": "Fayzli Xonadon",
+    "description": "Terrakota jilolari, xonadon chizmasi va samimiy uy to‘yi taklifnomasi.",
+    "previewImage": "/templates/taklifla-fayzli-xonadon/preview.webp",
+    "previewEventType": "yangi-uy",
+    "categoryIds": [
+      "other"
+    ],
+    "supportedEventTypes": [
+      "yangi-uy"
+    ],
+    "priceMinor": 100000,
+    "currency": "UZS",
+    "accent": "#b5523a",
+    "published": true
+  },
+  "migrations": [
+    "0177_register_taklifla_fayzli_xonadon.sql",
+    "0178_publish_taklifla_fayzli_xonadon.sql"
+  ]
+}

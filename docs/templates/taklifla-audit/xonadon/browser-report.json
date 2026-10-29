@@ -1,0 +1,75 @@
+{
+  "date": "2026-10-29",
+  "viewports": [
+    {
+      "width": 320,
+      "sourceGeometry": {
+        "font": "Fraunces, serif",
+        "hero": 320
+      },
+      "appGeometry": {
+        "font": "Fraunces, serif",
+        "hero": 320
+      },
+      "sourceMotion": "scroll-pulse",
+      "locales": 4,
+      "sevenStableRepeats": true,
+      "previewNoSend": true,
+      "failureRetainsInput": true,
+      "reducedMotion": true,
+      "emptySections": true
+    },
+    {
+      "width": 390,
+      "sourceGeometry": {
+        "font": "Fraunces, serif",
+        "hero": 390
+      },
+      "appGeometry": {
+        "font": "Fraunces, serif",
+        "hero": 390
+      },
+      "sourceMotion": "scroll-pulse",
+      "locales": 4,
+      "sevenStableRepeats": true,
+      "previewNoSend": true,
+      "failureRetainsInput": true,
+      "reducedMotion": true,
+      "emptySections": true
+    },
+    {
+      "width": 1280,
+      "sourceGeometry": {
+        "font": "Fraunces, serif",
+        "hero": 478
+      },
+      "appGeometry": {
+        "font": "Fraunces, serif",
+        "hero": 478
+      },
+      "sourceMotion": "scroll-pulse",
+      "locales": 4,
+      "sevenStableRepeats": true,
+      "previewNoSend": true,
+      "failureRetainsInput": true,
+      "reducedMotion": true,
+      "emptySections": true
+    }
+  ],
+  "errors": [],
+  "httpErrors": [
+    {
+      "url": "http://127.0.0.1:3001/api/public/invitations/xonadon-qa/rsvp",
+      "status": 503
+    },
+    {
+      "url": "http://127.0.0.1:3001/api/public/invitations/xonadon-qa/rsvp",
+      "status": 503
+    },
+    {
+      "url": "http://127.0.0.1:3001/api/public/invitations/xonadon-qa/rsvp",
+      "status": 503
+    }
+  ],
+  "mockTransport": true
+}
