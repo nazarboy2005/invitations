@@ -1,0 +1,20 @@
+/* Binding/accessibility adaptations only. Original geometry remains in source/. */
+[hidden] { display: none !important; }
+html:not([data-ready]) .sheet { visibility: hidden; }
+:focus-visible { outline: 2px solid var(--wine); outline-offset: 4px; }
+.hero__names [data-bind], .frame__inner .who [data-bind] { display: block; overflow-wrap: anywhere; }
+.hero__kicker, .eyebrow, .footer__sign, .frame__inner .who { overflow-wrap: anywhere; }
+.hero__kicker { white-space: pre-line; }
+.frame__inner .who { width: 100%; }
+.opening .lead, .vow, .scene .body, .footer__note, .meta span, .ev { white-space: pre-line; overflow-wrap: anywhere; }
+.taklifla-lang-menu { max-height: calc(100svh - 72px); overflow-y: auto; }
+.wish-thanks { line-height: 1.65; }
+html[lang="uz-Cyrl"], html[lang="ru"] { --script: 'Pinyon Script', 'Cormorant Garamond', serif; }
+html[data-reduced-motion] .reveal { opacity: 1; transform: none; transition: none; }
+html[data-reduced-motion] .hero__scroll i, html[data-reduced-motion] .mandala-stage > img { animation: none; }
+html[data-reduced-motion] .ml { animation: none !important; transform: translateX(-50%) !important; }
+html[data-reduced-motion] .rsvp-btn, html[data-reduced-motion] .wish-btn,
+html[data-reduced-motion] .taklifla-lang-toggle, html[data-reduced-motion] .taklifla-music-btn { transition: none; }
+@media (prefers-reduced-motion: reduce) {
+  .rsvp-btn, .wish-btn, .taklifla-lang-toggle, .taklifla-music-btn { transition: none; }
+}

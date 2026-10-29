@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="uz-Latn"><head><meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Tog‘lar bag‘rida — Taklifnoma</title>
+<link rel="stylesheet" href="fonts/fonts.css" />
+<link rel="stylesheet" href="source/template.css" />
+<link rel="stylesheet" href="source/controls.css" />
+<link rel="stylesheet" href="platform.css" />
+</head><body>
+<div class="sheet">
+
+  <!-- ════ HERO ════════════════════════════════════════════════════ -->
+  <header class="hero" id="hero">
+    <div class="hero__sky"></div>
+    <div class="hero__content">
+      <div class="hero__kicker">Biz turmush quramiz</div>
+      <h1 class="hero__names">
+        <span data-bind="name1"></span>
+        <span class="hero__amp">va</span>
+        <span data-bind="name2"></span>
+      </h1>
+      <div class="hero__date" data-bind="hero-date"></div>
+    </div>
+    <div class="hero__range">
+      <img class="ml back"  data-depth="0.10" src="mountain-img/mountains-back.webp"  alt="" />
+      <img class="ml mid"   data-depth="0.22" src="mountain-img/mountains-mid.webp"   alt="" />
+      <img class="ml front" data-depth="0.36" src="mountain-img/mountains-front.webp" alt="" />
+    </div>
+    <div class="hero__scroll">
+      <span>Pastga</span>
+      <i></i>
+    </div>
+  </header>
+
+  <!-- ════ OPENING WORDS ═══════════════════════════════════════════ -->
+  <section class="block opening reveal">
+    <img class="garland" src="mountain-img/floral-arch.webp" alt="" />
+    <div class="eyebrow sage">Taklifnoma</div>
+    <div class="rule"></div>
+    <p class="display lead">
+      Ikki yurak bir bo'lgan kun —
+      sizni shu quvonchni biz bilan
+      baham ko'rishga chorlaymiz.
+    </p>
+  </section>
+
+  <div class="divider-wrap reveal">
+    <img class="divider" src="mountain-img/floral-divider.webp" alt="" />
+  </div>
+
+  <!-- ════ ORNAMENTAL-FRAME INVITATION ═════════════════════════════ -->
+  <section class="invite reveal">
+    <div class="frame">
+      <img src="mountain-img/ornamental-frame.webp" alt="" />
+      <div class="frame__inner">
+        <div class="eyebrow">Nikoh to'yi</div>
+        <div class="who">
+          <span data-bind="name1"></span>
+          <small>va</small>
+          <span data-bind="name2"></span>
+        </div>
+        <p class="vow">
+          oilamizning eng go'zal kunida
+          aziz mehmonimiz bo'ling.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════ CEREMONY ════════════════════════════════════════════════ -->
+  <section class="scene reveal">
+    <img class="corner tl" src="mountain-img/floral-corner.webp" alt="" />
+    <img class="corner tr" src="mountain-img/floral-corner.webp" alt="" />
+    <img class="scene__art" src="mountain-img/scene-ceremony.webp" alt="" />
+    <div class="eyebrow sage">Marosim</div>
+    <h2 class="display scene__title">Nikoh qasamyodi</h2>
+    <p class="body" style="max-width:26ch;margin:0 auto;">
+      Tog'lar bag'rida, eng yaqinlarimiz davrasida
+      bir-birimizga bir umrlik so'z beramiz.
+    </p>
+    <div class="meta">
+      <b>Soat</b>
+      <span data-bind="cer-time"></span>
+    </div>
+  </section>
+
+  <!-- ════ CELEBRATION ═════════════════════════════════════════════ -->
+  <section class="scene alt reveal">
+    <img class="corner bl" src="mountain-img/floral-corner.webp" alt="" />
+    <img class="corner br" src="mountain-img/floral-corner.webp" alt="" />
+    <img class="scene__art" src="mountain-img/scene-celebration.webp" alt="" />
+    <div class="eyebrow wine">Ziyofat</div>
+    <h2 class="display scene__title">Kechki bazm</h2>
+    <p class="body" style="max-width:26ch;margin:0 auto;">
+      Chiroqlar yog'dusida, kuy va kulgi bilan —
+      birga raqsga tushamiz.
+    </p>
+    <div class="meta">
+      <b>Soat</b>
+      <span data-bind="cel-time"></span>
+    </div>
+  </section>
+
+  <!-- ════ VENUE + ADDRESS (shared by both ceremonies, stacked) ════ -->
+  <section class="block venue-block reveal">
+    <div class="rule"></div>
+    <div class="meta">
+      <b>Joy</b>
+      <span data-bind="venue-main"></span>
+    </div>
+    <div class="meta scene-addr-meta">
+      <b>Manzil</b>
+      <span class="meta-addr" data-bind="card-address"></span>
+    </div>
+  </section>
+
+  <!-- ════ PROGRAMME ═══════════════════════════════════════════════ -->
+  <section class="block programme reveal">
+    <div class="eyebrow sage">Kun tartibi</div>
+    <div class="rule"></div>
+    <div class="timeline">
+    </div>
+  </section>
+
+  <div class="divider-wrap reveal">
+    <img class="divider" src="mountain-img/floral-divider.webp" alt="" />
+  </div>
+
+  <!-- ════ MANDALA / COUNTDOWN / RSVP ══════════════════════════════ -->
+  <section class="mandala-sec reveal">
+    <div class="mandala-date">
+      <div class="eyebrow" style="color:var(--gold)">Sanasi</div>
+      <div class="script" data-bind="mandala-date"></div>
+    </div>
+    <div class="mandala-stage">
+      <img src="mountain-img/mandala-ornament.webp" alt="" />
+    </div>
+    <div class="countdown" id="countdown">
+      <div class="cd-cell"><b data-cd="d">—</b><span>kun</span></div>
+      <div class="cd-cell"><b data-cd="h">—</b><span>soat</span></div>
+      <div class="cd-cell"><b data-cd="m">—</b><span>daqiqa</span></div>
+    </div>
+    <p class="body" style="margin-top:30px;max-width:24ch;margin-left:auto;margin-right:auto;text-align:center;">
+      Tashrifingizni bizga ma’lum qiling.
+    </p>
+    <a class="rsvp-btn" href="#wishes" data-bind="rsvp-link"></a>
+  </section>
+
+  <!-- ════ WISHES WALL ═════════════════════════════════════════════ -->
+  <section class="wishes-sec reveal" id="wishes">
+    <div class="eyebrow sage">Mehmonlar tilaklari</div>
+    <div class="rule"></div>
+    <p class="body">
+      Bizga eng yaxshi tilaklaringizni qoldiring —
+      tasdiqlangach shu sahifada ko‘rinadi.
+    </p>
+    <form class="wish-form" id="wishForm" >
+      <input class="wish-input" id="wishName" type="text"
+        placeholder="Ismingiz" maxlength="60" required />
+      <textarea class="wish-text" id="wishMsg"
+        placeholder="Tilakingizni yozing..."
+        maxlength="400" required></textarea>
+      <button class="wish-btn" type="submit">Tilakni yuborish</button>
+      <div class="wish-thanks" id="wishThanks" role="status" hidden>Rahmat — tilagingiz qabul qilindi.</div>
+    </form>
+    <div class="wish-list" id="wishList" aria-live="polite"></div>
+  </section>
+
+  <!-- ════ FOOTER ══════════════════════════════════════════════════ -->
+  <footer class="footer reveal">
+    <img class="footer__florals" src="mountain-img/mountains-front.webp" alt="" />
+    <div class="seal">
+      <img src="mountain-img/wax-seal.webp" alt="" />
+      <div class="seal__mono" data-bind="monogram"></div>
+    </div>
+    <div class="footer__sign">
+      <span data-bind="name1"></span> &amp; <span data-bind="name2"></span>
+    </div>
+    <p class="footer__note">
+      Sizni kutib qolamiz — bu kun
+      bizning xotiramizda siz bilan yorqin bo'ladi.
+    </p>
+    <div class="footer__credit">Visol</div>
+  </footer>
+
+</div>
+
+<audio id="bgMusic" loop preload="none"></audio>
+<button id="taklifla-music-btn" class="taklifla-music-btn" type="button" aria-label="Musiqa" hidden>
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+  <span class="taklifla-music-label">Musiqa</span>
+</button>
+<div class="taklifla-lang-switch" role="group" aria-label="Til">
+  <button type="button" class="taklifla-lang-toggle" aria-haspopup="menu" aria-expanded="false">
+    <span class="taklifla-lang-current">UZ</span>
+    <span class="chev" aria-hidden="true">▾</span>
+  </button>
+  <div class="taklifla-lang-menu" role="menu">
+    <button type="button" data-lang="uz-Latn" role="menuitemradio">UZ</button>
+    <hr />
+    <button type="button" data-lang="uz-Cyrl" role="menuitemradio">ЎЗ</button>
+    <hr />
+    <button type="button" data-lang="en" role="menuitemradio">EN</button>
+    <hr />
+    <button type="button" data-lang="ru" role="menuitemradio">RU</button>
+  </div>
+</div>
+<script src="platform-adapter.js"></script>
+<script src="source/motion.js"></script>
+</body></html>

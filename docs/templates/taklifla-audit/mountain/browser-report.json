@@ -1,0 +1,99 @@
+{
+  "date": "2026-10-29",
+  "viewports": [
+    {
+      "width": 320,
+      "reference": {
+        "width": 320,
+        "font": "\"Pinyon Script\", cursive",
+        "layers": 3
+      },
+      "actual": {
+        "width": 320,
+        "font": "\"Pinyon Script\", cursive",
+        "layers": 3
+      },
+      "idleAnimation": "mlFloat",
+      "parallaxOffset": "90px",
+      "reveal": true,
+      "locales": 4,
+      "canonicalWishes": true,
+      "independentSceneTimes": true,
+      "sharedScenes": true,
+      "sevenStableEvents": true,
+      "longNamesFit": true,
+      "previewNoSend": true,
+      "failureRetainsInput": true,
+      "reducedMotion": true,
+      "emptyOptionals": true
+    },
+    {
+      "width": 390,
+      "reference": {
+        "width": 390,
+        "font": "\"Pinyon Script\", cursive",
+        "layers": 3
+      },
+      "actual": {
+        "width": 390,
+        "font": "\"Pinyon Script\", cursive",
+        "layers": 3
+      },
+      "idleAnimation": "mlFloat",
+      "parallaxOffset": "90px",
+      "reveal": true,
+      "locales": 4,
+      "canonicalWishes": true,
+      "independentSceneTimes": true,
+      "sharedScenes": true,
+      "sevenStableEvents": true,
+      "longNamesFit": true,
+      "previewNoSend": true,
+      "failureRetainsInput": true,
+      "reducedMotion": true,
+      "emptyOptionals": true
+    },
+    {
+      "width": 1280,
+      "reference": {
+        "width": 540,
+        "font": "\"Pinyon Script\", cursive",
+        "layers": 3
+      },
+      "actual": {
+        "width": 540,
+        "font": "\"Pinyon Script\", cursive",
+        "layers": 3
+      },
+      "idleAnimation": "mlFloat",
+      "parallaxOffset": "90px",
+      "reveal": true,
+      "locales": 4,
+      "canonicalWishes": true,
+      "independentSceneTimes": true,
+      "sharedScenes": true,
+      "sevenStableEvents": true,
+      "longNamesFit": true,
+      "previewNoSend": true,
+      "failureRetainsInput": true,
+      "reducedMotion": true,
+      "emptyOptionals": true
+    }
+  ],
+  "errors": [],
+  "httpErrors": [
+    {
+      "url": "http://127.0.0.1:3001/api/public/invitations/mountain-qa/wishes",
+      "status": 503
+    },
+    {
+      "url": "http://127.0.0.1:3001/api/public/invitations/mountain-qa/wishes",
+      "status": 503
+    },
+    {
+      "url": "http://127.0.0.1:3001/api/public/invitations/mountain-qa/wishes",
+      "status": 503
+    }
+  ],
+  "mockTransport": true
+}

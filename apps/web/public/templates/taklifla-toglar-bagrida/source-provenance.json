@@ -1,0 +1,161 @@
+{
+  "id": "taklifla-toglar-bagrida",
+  "name": "Tog‘lar bag‘rida",
+  "source": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/taklifla.uz/templates/mountain__fab6fd322ba1f179.html",
+  "sourceSha256": "e06b4fe7d45ea647db64a77f69b039a5829adbc71cac59de6ebd798c808858c8",
+  "captureManifestSha256": "fbbae2e521f547ea865252a76c9c776e81d0df95a5875abf58088b1fab6c125e",
+  "manifestEntries": [
+    {
+      "url": "https://taklifla.uz/i/w33?names=Aziza%20%26%20Sardor&date=12.09.2026&venue=Chorbog%27%20bog%27i",
+      "status": 200,
+      "title": "Aziza & Sardor · taklifla.uz",
+      "frames": [
+        "https://taklifla.uz/i/w33?names=Aziza%20%26%20Sardor&date=12.09.2026&venue=Chorbog%27%20bog%27i",
+        "https://taklifla.uz/templates/mountain.html?names=Aziza+%26+Sardor&date=12.09.2026&time=15%3A00&venue=Chorbog%27+bog%27i&address=Toshkent+sh.%2C+Chorbog%27+ko%27chasi&lang=uz&default_lang=uz"
+      ],
+      "finalUrl": "https://taklifla.uz/i/w33?names=Aziza%20%26%20Sardor&date=12.09.2026&venue=Chorbog%27%20bog%27i",
+      "textLength": 0,
+      "buttons": [],
+      "file": "Web invitations/taklifla.uz/i/w33/index__754b1ca52ce65b77.html",
+      "screenshot": "reports/new-sites/Taklifla/3538cfa369f056e7-source.png"
+    }
+  ],
+  "assets": [
+    {
+      "source": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/taklifla.uz/templates/mountain-img/floral-arch.webp",
+      "file": "mountain-img/floral-arch.webp",
+      "sha256": "8ecfccdfc90e4a5a29c40cc147d6bfd591ea452b8f14ff19048d017532e27f60",
+      "bytes": 160892
+    },
+    {
+      "source": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/taklifla.uz/templates/mountain-img/floral-corner.webp",
+      "file": "mountain-img/floral-corner.webp",
+      "sha256": "6953bd526116322b7f4ff821887774e6d8bd4b2e9ec631818984c25e396206ad",
+      "bytes": 87568
+    },
+    {
+      "source": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/taklifla.uz/templates/mountain-img/floral-divider.webp",
+      "file": "mountain-img/floral-divider.webp",
+      "sha256": "ccf3cb9713dc5ad75bb310ef68034238cb95c66fb17020f0ce0d2a77f502a62a",
+      "bytes": 68788
+    },
+    {
+      "source": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/taklifla.uz/templates/mountain-img/mandala-ornament.webp",
+      "file": "mountain-img/mandala-ornament.webp",
+      "sha256": "b037b20e2c546118ac14285f5619af5585ff0cbb6d6026dfc683596985b68af7",
+      "bytes": 220294
+    },
+    {
+      "source": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/taklifla.uz/templates/mountain-img/mountains-back.webp",
+      "file": "mountain-img/mountains-back.webp",
+      "sha256": "27de3ea7e4fcfb8f7dbf03d003260349947e9fd28132672f429b2fff5990a565",
+      "bytes": 268104
+    },
+    {
+      "source": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/taklifla.uz/templates/mountain-img/mountains-front.webp",
+      "file": "mountain-img/mountains-front.webp",
+      "sha256": "4ef5d753e7563f26cdd1cd3bb1f7553ee3410bce20f3c80cf31187453ff99c4a",
+      "bytes": 216526
+    },
+    {
+      "source": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/taklifla.uz/templates/mountain-img/mountains-mid.webp",
+      "file": "mountain-img/mountains-mid.webp",
+      "sha256": "48e8a9324ad5b6d9fb6cf93cd58013e89f8aab455cf48fc9e1b3f2713d5dc595",
+      "bytes": 132928
+    },
+    {
+      "source": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/taklifla.uz/templates/mountain-img/ornamental-frame.webp",
+      "file": "mountain-img/ornamental-frame.webp",
+      "sha256": "9cce3d49bcfc61eb80769e91bd27b6d941c466dbfe2f05c1d5682a03d945131b",
+      "bytes": 202746
+    },
+    {
+      "source": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/taklifla.uz/templates/mountain-img/scene-celebration.webp",
+      "file": "mountain-img/scene-celebration.webp",
+      "sha256": "1793051cdfae64c2c8d9c68503e5112358cb6cd94e26f6f2f42a06c7e031632a",
+      "bytes": 305894
+    },
+    {
+      "source": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/taklifla.uz/templates/mountain-img/scene-ceremony.webp",
+      "file": "mountain-img/scene-ceremony.webp",
+      "sha256": "42ce02040816d5f045c044262585a07a21277f39668a0f64178f044fe0db8070",
+      "bytes": 250172
+    },
+    {
+      "source": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/taklifla.uz/templates/mountain-img/wax-seal.webp",
+      "file": "mountain-img/wax-seal.webp",
+      "sha256": "3df7e0522da7a62b1457574b91755d3b0b54dbb22d1304172a63f6e43f9025f7",
+      "bytes": 112986
+    }
+  ],
+  "fonts": {
+    "stylesheetUrl": "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Pinyon+Script&family=Manrope:wght@400;500;600&display=swap",
+    "files": [
+      {
+        "file": "fonts/font-00.ttf",
+        "url": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3smX5slCNuHLi8bLeY9MK7whWMhyjYrGFEsdtdc62E6zd58jDOjw.ttf",
+        "sha256": "0b9a8a33cfaa624d30f70f9b6686da769b319b8c37a55af16e29fef690108bbf",
+        "bytes": 293036
+      },
+      {
+        "file": "fonts/font-01.ttf",
+        "url": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3smX5slCNuHLi8bLeY9MK7whWMhyjYrGFEsdtdc62E6zd5wDDOjw.ttf",
+        "sha256": "14efb9443652199ade5bc6ba8637b4084acce40a58368a3808f84f55667e3e90",
+        "bytes": 293244
+      },
+      {
+        "file": "fonts/font-02.ttf",
+        "url": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3umX5slCNuHLi8bLeY9MK7whWMhyjypVO7abI26QOD_v86GnM.ttf",
+        "sha256": "6d37a86241a25d63f8fe6018b4c083449886b7165c1acb15edd0f574f690ecf7",
+        "bytes": 290236
+      },
+      {
+        "file": "fonts/font-03.ttf",
+        "url": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3umX5slCNuHLi8bLeY9MK7whWMhyjypVO7abI26QOD_s06GnM.ttf",
+        "sha256": "1724047c8988ca5155bff667bc48fa52e97d57aabc6b42eebbf986f21a4be20b",
+        "bytes": 290496
+      },
+      {
+        "file": "fonts/font-04.ttf",
+        "url": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3umX5slCNuHLi8bLeY9MK7whWMhyjypVO7abI26QOD_iE9GnM.ttf",
+        "sha256": "69e7ae35cba23d962227b86f99217c250e642e4c6f6104b4f3ec465039e4e2d8",
+        "bytes": 290392
+      },
+      {
+        "file": "fonts/font-05.ttf",
+        "url": "https://fonts.gstatic.com/s/manrope/v20/xn7_YHE41ni1AdIRqAuZuw1Bx9mbZk79FO_F.ttf",
+        "sha256": "a13d9b41b0a471ce58f0e46d377fa3cc76615e4632c3b15eb397caadf7a13f0a",
+        "bytes": 94972
+      },
+      {
+        "file": "fonts/font-06.ttf",
+        "url": "https://fonts.gstatic.com/s/manrope/v20/xn7_YHE41ni1AdIRqAuZuw1Bx9mbZk7PFO_F.ttf",
+        "sha256": "f433e5d333be1128d8ec8a28b8aadd0314d10e14e4105406076666bc830fc15d",
+        "bytes": 95060
+      },
+      {
+        "file": "fonts/font-07.ttf",
+        "url": "https://fonts.gstatic.com/s/manrope/v20/xn7_YHE41ni1AdIRqAuZuw1Bx9mbZk4jE-_F.ttf",
+        "sha256": "6bad1a774228464cc88b8b0271555b266f7a3c64a7bedf15e165fdab4f6ac0ce",
+        "bytes": 95096
+      },
+      {
+        "file": "fonts/font-08.ttf",
+        "url": "https://fonts.gstatic.com/s/pinyonscript/v24/6xKpdSJbL9-e9LuoeQiDRQR8aOI.ttf",
+        "sha256": "3683830e3bb3f1a2138b6098f8663ca5ceb66b1f397a4f30639aae139e344bb8",
+        "bytes": 144584
+      }
+    ]
+  },
+  "sourceParts": {
+    "templateCssSha256": "5622c6d967e7730bd8cd8b78a14b353115e3f8bd34973c132aad7afd9c100b13",
+    "controlsCssSha256": "805ea8b90f7375236c3f03a5cc15bc9313e3acc3c8ffccc6da7ffebc0e896c03",
+    "motionJsSha256": "8c62c1ebbfe917ea6b065e14b91ea285f3761d61bb058e7d4137a37b50c35d2e"
+  },
+  "excluded": [
+    "Provider URL-data customizer and demo invitation values",
+    "Provider music/language scripts, localStorage persistence and guestbook client",
+    "Cloudflare analytics beacon"
+  ],
+  "status": "Registered 0185; published 0186 after complete source and real lifecycle verification"
+}

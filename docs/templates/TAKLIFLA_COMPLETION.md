@@ -20,7 +20,7 @@ untouched. Application deployment and live payment activation are excluded.
 | Ertak | taklifla-ertak | Private package | Complete — source parallax/ambient, shared wishes and lifecycle verified; published 0179/0180 |
 | Garden Arch | taklifla-gulbog | Private package | Complete — family/reminder/footer fields restored; source/lifecycle/audio verified; published 0181/0182 |
 | Marigold | taklifla-zarrin-gullar | Private package | Complete — family/stay/footer/hashtag restored; shared data and source verified; published 0183/0184 |
-| Mountain | taklifla-toglar-bagrida | Private package | Pending |
+| Mountain | taklifla-toglar-bagrida | Private package | Complete — independent scene times, shared maps/wishes and full routes restored; published 0185/0186 |
 | Oltin Yo‘l | taklifla-oltin-yol | Private package | Pending |
 | Osmon | taklifla-osmon | Private package | Pending |
 | Pari | taklifla-parilar-ertagi | Private package | Pending |
@@ -122,3 +122,9 @@ the individual commit below each completed row.
 - Shared wedding details now supply canonical family/footer examples across this design and Gulbog; maps/music/wishes stay canonical and preview-only. Normal/reduced motion, four locales, long/empty/seven-row data and failure states pass.
 - 28 shared/package tests, three-viewport source comparisons, actual audio, real authenticated source-field save/reopen/studio/publication/public/maps/pending wishes, compatible switching, source/personalized covers, typecheck and production build pass. Evidence: `docs/templates/taklifla-audit/zarrin*`.
 - Additive migrations 0183/0184 publish only Zarrin gullar for weddings. Configured API confirms publication; no external deployment or payments.
+
+## Mountain integration
+
+- Exact captured watercolor mountain/floral assets, source CSS/fonts and native three-layer idle/parallax/reveal retained. Added reduced-motion guard, missing independent scene time editor/persistence, canonical localized preview wishes and authored-address Google fallback. Scene copy reuses shared story chapters.
+- 25 shared/package tests, source comparisons at 320/390/1280 and active motion/reveal checks, all locales/long/empty/seven-row data, real authenticated save/reopen/studio/publication/public/maps/pending wishes and compatible switching, actual audio, covers, typecheck/build pass.
+- Additive migrations 0185/0186 register/publish only Mountain for weddings; configured catalog publication verified. Evidence: `docs/templates/taklifla-audit/mountain*`.

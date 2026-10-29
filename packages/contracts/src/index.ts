@@ -157,6 +157,7 @@ function isJsonValue(value: unknown): value is JsonValue {
   return false;
 }
 const pulauLocalizedText = z.partialRecord(localeSchema, text);
+export const mountainDataSchema = z.object({ceremonyTime:z.string().max(80).default(""),celebrationTime:z.string().max(80).default("")}).default({ceremonyTime:"",celebrationTime:""});
 export const zarrinDataSchema = z.object({brideFamily:localizedLongText.default({}),groomFamily:localizedLongText.default({}),stayText:localizedLongText.default({}),footerNote:localizedLongText.default({}),hashtag:z.string().max(100).default("")}).default({brideFamily:{},groomFamily:{},stayText:{},footerNote:{},hashtag:""});
 export const gulbogDataSchema = z.object({brideFamily:localizedLongText.default({}),reminderTitle:localizedShortText.default({}),reminderText:localizedLongText.default({}),footerNote:localizedLongText.default({})}).default({brideFamily:{},reminderTitle:{},reminderText:{},footerNote:{}});
 export const fayzliXonadonDataSchema = z.object({
@@ -219,6 +220,7 @@ export const invitationSchema = z
     id: z.string().min(1).max(100),
     templateId: invitationTemplateIdSchema,
     templateData: z.record(z.string(), z.custom<JsonValue>(isJsonValue)).default({}).superRefine((data, ctx) => {
+      if (data["taklifla-toglar-bagrida"] !== undefined && !mountainDataSchema.safeParse(data["taklifla-toglar-bagrida"]).success) ctx.addIssue({code:"custom",path:["taklifla-toglar-bagrida"],message:"Invalid mountain scene times"});
       if (data["taklifla-zarrin-gullar"] !== undefined && !zarrinDataSchema.safeParse(data["taklifla-zarrin-gullar"]).success) ctx.addIssue({code:"custom",path:["taklifla-zarrin-gullar"],message:"Invalid marigold details"});
       if (data["taklifla-gulbog"] !== undefined && !gulbogDataSchema.safeParse(data["taklifla-gulbog"]).success) ctx.addIssue({code:"custom",path:["taklifla-gulbog"],message:"Invalid garden details"});
       if (data["taklifla-fayzli-xonadon"] !== undefined && !fayzliXonadonDataSchema.safeParse(data["taklifla-fayzli-xonadon"]).success) ctx.addIssue({code:"custom",path:["taklifla-fayzli-xonadon"],message:"Invalid housewarming menu"});
@@ -1457,6 +1459,12 @@ export const TEMPLATES: TemplateDefinition[] = [
     previewImage: "/templates/taklifla-zarrin-gullar/preview.webp", previewEventType: "wedding",
     categoryIds: ["wedding"], supportedEventTypes: ["wedding"],
     priceMinor: 100000, currency: "UZS", accent: "#c67139", published: true,
+  },
+  {
+    id: "taklifla-toglar-bagrida", name: "Tog‘lar bag‘rida", description: "Tog‘lar manzarasi, nafis gullar va qatlamli harakatli nikoh taklifnomasi.",
+    previewImage: "/templates/taklifla-toglar-bagrida/preview.webp", previewEventType: "wedding",
+    categoryIds: ["wedding"], supportedEventTypes: ["wedding"],
+    priceMinor: 100000, currency: "UZS", accent: "#819480", published: true,
   },
   {
     id: "taklifla-yubiley-sahifasi", name: "Yubiley Sahifasi",

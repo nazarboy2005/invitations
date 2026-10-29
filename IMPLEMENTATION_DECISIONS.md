@@ -2129,3 +2129,7 @@ Development agents are distinct from production queue workers. The running app w
 ### Zarrin gullar completion (2026-10-29)
 
 - Marigold is Zarrin gullar, a wedding design. Preserve its floral arch, native opener, petals and closed-wishes panel. Separate bride/groom family lines, accommodation, custom footer and hashtag use validated editable `templateData["taklifla-zarrin-gullar"]`; shared identity/venue/program remain reusable. Generic wedding details in the canonical event profile serve both this and Gulbog. Migrations 0183/0184 register/publish after complete verification.
+
+### Mountain completion (2026-10-29)
+
+- Mountain is Tog‘lar bag‘rida, a wedding template. Preserve original layered mountain motion, floral frames and two narrative scene cards. The two scene titles/text reuse the first two shared story chapters; explicit blank titles hide the corresponding scene. Independent ceremony/reception time overrides use validated editable `templateData["taklifla-toglar-bagrida"]`, falling back to the shared event time. Source action prefers the shared Google venue and otherwise goes to wishes. Migrations 0185/0186 register/publish after verification.

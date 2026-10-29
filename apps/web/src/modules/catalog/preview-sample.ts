@@ -141,7 +141,9 @@ export function createTemplatePreviewSample(
     artistLineup: sampleEventType === "wedding" ? structuredClone(previewSample.artistLineup) : [],
     gallery: structuredClone(templateSample?.gallery ?? previewSample.gallery),
     story: structuredClone(EVENT_SAMPLES[sampleEventType]?.story ?? (sampleEventType === "wedding" ? previewSample.story : [])),
-    templateData: templateId === "taklifla-zarrin-gullar" && EVENT_SAMPLES[sampleEventType]?.details
+    templateData: templateId === "taklifla-toglar-bagrida"
+      ? { "taklifla-toglar-bagrida": {ceremonyTime:previewSample.program[0]?.time || "",celebrationTime:previewSample.program[1]?.time || ""} }
+      : templateId === "taklifla-zarrin-gullar" && EVENT_SAMPLES[sampleEventType]?.details
       ? { "taklifla-zarrin-gullar": structuredClone({brideFamily:EVENT_SAMPLES[sampleEventType]!.details!.families.bride,groomFamily:EVENT_SAMPLES[sampleEventType]!.details!.families.groom,stayText:EVENT_SAMPLES[sampleEventType]!.details!.stayText,footerNote:EVENT_SAMPLES[sampleEventType]!.details!.footerNote,hashtag:EVENT_SAMPLES[sampleEventType]!.details!.hashtag}) }
       : templateId === "taklifla-gulbog" && EVENT_SAMPLES[sampleEventType]?.details
       ? { "taklifla-gulbog": structuredClone({brideFamily:EVENT_SAMPLES[sampleEventType]!.details!.families.bride,reminderTitle:EVENT_SAMPLES[sampleEventType]!.details!.reminderTitle,reminderText:EVENT_SAMPLES[sampleEventType]!.details!.reminderText,footerNote:EVENT_SAMPLES[sampleEventType]!.details!.footerNote}) }

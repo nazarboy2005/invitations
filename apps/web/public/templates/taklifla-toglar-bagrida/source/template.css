@@ -1,0 +1,670 @@
+
+  /* ── Palette + tokens ─────────────────────────────────────────────── */
+  :root {
+    --cream:      #f1e3bf;
+    --cream-deep: #e7d3a6;
+    --paper:      #faf3e3;
+    --sage:       #8a9a7b;
+    --sage-deep:  #5f6e54;
+    --gold:       #c0a05c;
+    --gold-soft:  #d8c08a;
+    --terra:      #c2785a;
+    --wine:       #6e2433;
+    --blue:       #8fa3ad;
+    --ink:        #463a2c;
+    --ink-soft:   #6e6048;
+
+    --serif:  'Cormorant Garamond', 'Times New Roman', serif;
+    --script: 'Pinyon Script', cursive;
+    --ui:     'Manrope', system-ui, sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body { overflow-x: hidden; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--serif);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  img { display: block; max-width: 100%; }
+
+  /* The whole document is a single mobile-width column, centred on
+     wider screens so it always reads like a held invitation card. */
+  .sheet {
+    position: relative;
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+    background: var(--paper);
+    overflow: hidden;
+    box-shadow: 0 0 60px rgba(70, 58, 44, 0.14);
+  }
+
+  /* ── Shared type ──────────────────────────────────────────────────── */
+  .eyebrow {
+    font-family: var(--ui);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.34em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .eyebrow.sage  { color: var(--sage-deep); }
+  .eyebrow.wine  { color: var(--wine); }
+
+  .display {
+    font-weight: 500;
+    line-height: 1.04;
+    letter-spacing: 0.01em;
+    color: var(--ink);
+  }
+  .script {
+    font-family: var(--script);
+    font-weight: 400;
+    color: var(--wine);
+    line-height: 1;
+  }
+  .body {
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+  }
+  .rule {
+    width: 46px; height: 1px;
+    background: var(--gold);
+    margin: 22px auto;
+  }
+  .rule.tall { width: 1px; height: 46px; }
+
+  /* ── HERO — 3-layer parallax mountains ────────────────────────────── */
+  .hero {
+    position: relative;
+    height: 100svh;
+    min-height: 640px;
+    overflow: hidden;
+    /* Solid base so no pixel of the hero is ever transparent. */
+    background: #f1e3bf;
+  }
+  /* Painted-sky gradient fills the whole hero behind every layer. */
+  .hero__sky {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background: linear-gradient(
+      180deg,
+      #f6ecd0 0%,
+      #f3e7c6 34%,
+      #eadcaf 64%,
+      #e4d3a0 100%
+    );
+  }
+  /* Bottom-anchored band holding the 3 mountain layers. They all sit
+     on bottom:0-ish and OVERLAP — distant range pokes highest, hills
+     overlap it, florals overlap the hills — so there are never any
+     transparent gaps between bands. */
+  .hero__range {
+    position: absolute;
+    left: 0; right: 0;
+    bottom: 0;
+    height: 70%;
+    z-index: 1;
+    pointer-events: none;
+  }
+  .ml {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    /* --py is set by the parallax JS on scroll; `translate` carries the
+       idle float animation. They compose: transform (parallax) and the
+       individual `translate` property are separate, so neither stomps
+       on the other. */
+    transform: translateX(-50%) translateY(var(--py, 0px));
+    animation: mlFloat var(--dur, 9s) ease-in-out var(--delay, 0s) infinite;
+    max-width: none;
+    will-change: transform, translate;
+  }
+  /* Distant mountains — carries its own painted sky glow; sits highest.
+     Wider + lower than before so its solid range overlaps the green
+     hills with no transparent cream strip between them. */
+  .ml.back  { width: 180%; bottom: 28%; opacity: 0.97; z-index: 1;
+              --amp: -4px; --dur: 12s; }
+  /* Rolling green hills — raised so they overlap the distant range. */
+  .ml.mid   { width: 172%; bottom: 18%; z-index: 2;
+              --amp: -6px; --dur: 9s;  --delay: -2.5s; }
+  /* Foreground florals — overlaps the hills, anchored below the floor.
+     Bottom faded so the hero/opening seam isn't a hard horizontal cut. */
+  .ml.front { width: 160%; bottom: -7%; z-index: 4;
+              --amp: -9px; --dur: 7s;  --delay: -1s;
+              mask-image: linear-gradient(to bottom, #000 75%, transparent 100%);
+              -webkit-mask-image: linear-gradient(to bottom, #000 75%, transparent 100%); }
+  /* Subtle idle drift — each layer breathes at its own rate/amplitude.
+     Back drifts least, front drifts most, faking depth of field. */
+  @keyframes mlFloat {
+    0%, 100% { translate: 0 0; }
+    50%      { translate: 0 var(--amp, -6px); }
+  }
+
+  .hero__content {
+    position: absolute;
+    left: 0; right: 0;
+    top: 19%;
+    z-index: 3;
+    text-align: center;
+    padding: 0 28px;
+  }
+  .hero__kicker {
+    font-family: var(--ui);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--sage-deep);
+    margin-bottom: 18px;
+  }
+  .hero__names {
+    font-family: var(--script);
+    color: var(--wine);
+    font-size: clamp(58px, 21vw, 96px);
+    line-height: 0.86;
+  }
+  .hero__amp {
+    display: block;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 22px;
+    color: var(--gold);
+    margin: 6px 0;
+    letter-spacing: 0.05em;
+  }
+  .hero__date {
+    margin-top: 22px;
+    font-family: var(--ui);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  .hero__scroll {
+    position: absolute;
+    left: 50%;
+    bottom: 26px;
+    transform: translateX(-50%);
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: var(--ink-soft);
+  }
+  .hero__scroll span {
+    font-family: var(--ui);
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+  }
+  .hero__scroll i {
+    width: 1px; height: 34px;
+    background: linear-gradient(var(--gold), transparent);
+    animation: drip 2.4s ease-in-out infinite;
+  }
+  @keyframes drip {
+    0%, 100% { transform: scaleY(0.4); transform-origin: top; opacity: 0.4; }
+    50%      { transform: scaleY(1);   transform-origin: top; opacity: 1;   }
+  }
+
+  /* ── Section scaffolding ──────────────────────────────────────────── */
+  section { position: relative; }
+
+  .block {
+    position: relative;
+    padding: 92px 30px;
+    text-align: center;
+  }
+  .block.tight { padding: 64px 30px; }
+
+  /* Floral garland hanging from the top edge of a block. Bottom edge
+     faded so it doesn't read as a copy-pasted rectangular cutout. */
+  .garland {
+    position: absolute;
+    top: -6px; left: 50%;
+    transform: translateX(-50%);
+    width: 86%;
+    max-width: 420px;
+    z-index: 2;
+    pointer-events: none;
+    mask-image: linear-gradient(to bottom, #000 60%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, #000 60%, transparent 100%);
+  }
+
+  /* Corner sprays — small and softened so they decorate the corners
+     without bleeding into the meta text. The bottom pair stays clear
+     of the section's content area thanks to the scene's bottom padding. */
+  .corner {
+    position: absolute;
+    width: 108px;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0.7;
+  }
+  .corner.tl { top: -8px;  left: -10px; }
+  .corner.tr { top: -8px;  right: -10px; transform: scaleX(-1); }
+  .corner.bl { bottom: -8px; left: -10px; transform: scaleY(-1); }
+  .corner.br { bottom: -8px; right: -10px; transform: scale(-1, -1); }
+
+  /* Horizontal floral divider between sections. */
+  .divider {
+    width: 78%;
+    max-width: 360px;
+    margin: 0 auto;
+  }
+  .divider-wrap { padding: 16px 0; text-align: center; }
+
+  /* ── Opening words ────────────────────────────────────────────────── */
+  /* Extra top padding so the body text starts below the faded garland
+     instead of bumping into its bottom edge. */
+  .opening { padding-top: 220px; }
+  .opening .lead {
+    font-style: italic;
+    font-size: clamp(25px, 7.4vw, 33px);
+    line-height: 1.42;
+    color: var(--ink);
+    margin: 8px auto 0;
+    max-width: 22ch;
+  }
+
+  /* ── Ornamental-frame invitation ──────────────────────────────────── */
+  .invite { padding: 70px 24px 96px; }
+  .frame {
+    position: relative;
+    width: 100%;
+    max-width: 380px;
+    margin: 0 auto;
+  }
+  .frame > img { width: 100%; }
+  .frame__inner {
+    position: absolute;
+    inset: 19% 21% 16%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  .frame__inner .eyebrow { margin-bottom: 14px; }
+  .frame__inner .who {
+    font-family: var(--script);
+    color: var(--wine);
+    font-size: clamp(34px, 12vw, 46px);
+    line-height: 0.95;
+  }
+  .frame__inner .who small {
+    display: block;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 17px;
+    color: var(--gold);
+    margin: 4px 0;
+  }
+  .frame__inner .vow {
+    font-style: italic;
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+    margin-top: 14px;
+    max-width: 20ch;
+  }
+
+  /* ── Event scenes ─────────────────────────────────────────────────── */
+  .scene {
+    padding: 90px 30px;
+    text-align: center;       /* the whole scene block centres its content */
+    position: relative;
+  }
+  .scene .body { margin: 0 auto; }
+  .scene .meta { margin-left: auto; margin-right: auto; }
+  .scene__art {
+    width: 84%;
+    max-width: 340px;
+    margin: 0 auto 10px;
+    filter: drop-shadow(0 16px 26px rgba(70, 58, 44, 0.16));
+  }
+  .scene__title {
+    font-style: italic;
+    font-size: clamp(34px, 10vw, 44px);
+    margin: 14px 0 6px;
+  }
+  .meta {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-top: 18px;
+  }
+  .meta b {
+    font-family: var(--ui);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--sage-deep);
+  }
+  .meta span {
+    font-size: 19px;
+    color: var(--ink);
+  }
+  .scene.alt { background: linear-gradient(180deg, var(--paper), #f3e9cf); }
+  /* Address value (under the "Manzil" label, below the venue/Joy block).
+     Smaller + pre-line so a long, multi-line address reads cleanly. */
+  .meta .meta-addr {
+    font-size: 14px;
+    line-height: 1.5;
+    max-width: 26ch;
+    margin: 0 auto;
+    white-space: pre-line;
+  }
+  /* Shared venue + address block after both scene cards — the Joy and
+     Manzil rows stack vertically (one under the other), centred. */
+  .venue-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+    padding: 48px 30px 88px;
+  }
+  .venue-block .meta { margin-top: 0; }
+
+  /* ── Programme / timeline ─────────────────────────────────────────── */
+  .programme { padding: 86px 34px; }
+  .timeline {
+    margin: 26px auto 0;
+    max-width: 320px;
+    text-align: left;
+  }
+  .tl-row {
+    display: grid;
+    grid-template-columns: 64px 1fr;
+    gap: 18px;
+    padding: 17px 0;
+    border-bottom: 1px solid rgba(192, 160, 92, 0.32);
+    align-items: baseline;
+  }
+  .tl-row:last-child { border-bottom: 0; }
+  .tl-row time {
+    font-family: var(--ui);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: var(--gold);
+  }
+  .tl-row .ev {
+    font-size: 20px;
+    font-style: italic;
+    color: var(--ink);
+  }
+  .tl-row .ev small {
+    display: block;
+    font-family: var(--ui);
+    font-style: normal;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    color: var(--ink-soft);
+    margin-top: 2px;
+  }
+
+  /* ── Mandala / RSVP ───────────────────────────────────────────────── */
+  .mandala-sec {
+    padding: 96px 30px 104px;
+    background: linear-gradient(180deg, #f3e9cf, var(--paper));
+  }
+  /* Date now sits ABOVE the mandala, in clear space — the mandala's
+     own artwork was too busy to read script text on top of. */
+  .mandala-date {
+    text-align: center;
+    margin-bottom: 22px;
+  }
+  .mandala-date .script { font-size: 44px; color: var(--wine); }
+  .mandala-stage {
+    position: relative;
+    width: 260px;
+    height: 260px;
+    margin: 0 auto 6px;
+  }
+  .mandala-stage > img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    animation: turn 90s linear infinite;
+  }
+  @keyframes turn { to { transform: rotate(360deg); } }
+  /* Three equal-width columns so different digit counts don't make the
+     cells look ragged. tabular-nums keeps the digits monospaced. */
+  .countdown {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    max-width: 280px;
+    margin: 28px auto 0;
+    font-variant-numeric: tabular-nums;
+  }
+  .cd-cell { text-align: center; }
+  .cd-cell b {
+    display: block;
+    font-size: 38px;
+    font-weight: 500;
+    color: var(--wine);
+    line-height: 1;
+  }
+  .cd-cell span {
+    font-family: var(--ui);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  .rsvp-btn {
+    display: block;
+    width: -moz-fit-content;
+    width: fit-content;
+    margin: 34px auto 0;
+    padding: 15px 40px;
+    font-family: var(--ui);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--paper);
+    background: var(--wine);
+    border: 0;
+    border-radius: 999px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: transform 0.25s ease, background 0.25s ease;
+  }
+  .rsvp-btn:hover { transform: translateY(-2px); background: #511a26; }
+
+  /* ── Wishes wall ───────────────────────────────────────────────────
+     Guests leave their name + a wish; entries persist in localStorage
+     so re-opening the link keeps the wishes. Three mock wishes seed
+     the wall visually for newly-shared invitations. */
+  .wishes-sec {
+    padding: 80px 30px 100px;
+    text-align: center;
+    background: var(--paper);
+  }
+  .wishes-sec .body { max-width: 28ch; margin: 12px auto 0; }
+  .wish-form {
+    margin: 30px auto 24px;
+    max-width: 340px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .wish-input, .wish-text {
+    width: 100%;
+    padding: 13px 16px;
+    font-family: var(--serif);
+    font-size: 16px;
+    color: var(--ink);
+    background: #fff;
+    border: 1px solid rgba(192, 160, 92, 0.42);
+    border-radius: 4px;
+    outline: none;
+    transition: border-color 0.2s ease;
+  }
+  .wish-text { min-height: 96px; resize: vertical; line-height: 1.5; }
+  .wish-input::placeholder, .wish-text::placeholder {
+    color: var(--ink-soft); opacity: 0.55;
+  }
+  .wish-input:focus, .wish-text:focus { border-color: var(--gold); }
+  .wish-btn {
+    align-self: center;
+    padding: 13px 36px;
+    font-family: var(--ui);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--paper);
+    background: var(--wine);
+    border: 0;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: transform 0.25s ease, background 0.25s ease;
+  }
+  .wish-btn:hover:not(:disabled) { transform: translateY(-2px); background: #511a26; }
+  .wish-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+  .wish-thanks {
+    margin: 8px auto 0;
+    font-family: var(--ui);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--sage-deep);
+  }
+  .wish-list {
+    margin: 36px auto 0;
+    max-width: 360px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    text-align: left;
+  }
+  .wish-card {
+    background: #fff;
+    padding: 16px 18px;
+    border-radius: 4px;
+    border: 1px solid rgba(192, 160, 92, 0.22);
+    box-shadow: 0 4px 12px -8px rgba(70, 58, 44, 0.18);
+  }
+  .wish-card .who {
+    font-family: var(--script);
+    font-size: 22px;
+    color: var(--wine);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .wish-card .msg {
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--ink);
+    font-style: italic;
+  }
+  .wish-card .when {
+    font-family: var(--ui);
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-top: 8px;
+  }
+
+  /* ── Footer ───────────────────────────────────────────────────────── */
+  .footer {
+    position: relative;
+    padding: 120px 30px 56px;
+    text-align: center;
+    background: linear-gradient(180deg, var(--paper), #ecdcb2);
+    overflow: hidden;
+  }
+  /* mountains-front reused, flipped, as the footer floral band. The
+     mask fades the rendered-top edge into cream so the band reads as a
+     bouquet melting into the page, not a rectangle that was pasted. */
+  .footer__florals {
+    position: absolute;
+    top: -2px; left: 50%;
+    transform: translateX(-50%) scaleY(-1);
+    width: 150%;
+    max-width: 620px;
+    pointer-events: none;
+    mask-image: linear-gradient(to bottom, #000 70%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, #000 70%, transparent 100%);
+  }
+  .seal {
+    position: relative;
+    width: 138px;
+    margin: 0 auto 8px;
+  }
+  .seal > img { width: 100%; }
+  .seal__mono {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 30px;
+    letter-spacing: 0.02em;
+    color: var(--gold-soft);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+  }
+  .footer__sign {
+    font-family: var(--script);
+    font-size: 46px;
+    color: var(--wine);
+    line-height: 1;
+    margin: 6px 0 10px;
+  }
+  .footer__note {
+    font-style: italic;
+    font-size: 16px;
+    color: var(--ink-soft);
+    max-width: 24ch;
+    margin: 0 auto;
+  }
+  .footer__credit {
+    margin-top: 40px;
+    font-family: var(--ui);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(110, 96, 72, 0.6);
+  }
+
+  /* ── Reveal-on-scroll ─────────────────────────────────────────────── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(26px);
+    transition: opacity 0.9s ease, transform 0.9s cubic-bezier(.2,.7,.2,1);
+  }
+  .reveal.in { opacity: 1; transform: none; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .hero__scroll i, .mandala-stage > img { animation: none; }
+    .ml { animation: none !important; transform: translateX(-50%) !important; }
+    .ml.front {
+      mask-image: linear-gradient(to bottom, #000 75%, transparent 100%) !important;
+    }
+  }
+
+  /* ── Wider screens: keep the held-card feel, just a touch larger ──── */
+  @media (min-width: 540px) {
+    .sheet { max-width: 540px; }
+    .corner { width: 158px; }
+  }

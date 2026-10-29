@@ -1,0 +1,25 @@
+{
+  "date": "2026-10-29",
+  "configured": true,
+  "template": {
+    "id": "taklifla-toglar-bagrida",
+    "name": "Tog‘lar bag‘rida",
+    "description": "Tog‘lar manzarasi, nafis gullar va qatlamli harakatli nikoh taklifnomasi.",
+    "previewImage": "/templates/taklifla-toglar-bagrida/preview.webp",
+    "previewEventType": "wedding",
+    "categoryIds": [
+      "wedding"
+    ],
+    "supportedEventTypes": [
+      "wedding"
+    ],
+    "priceMinor": 100000,
+    "currency": "UZS",
+    "accent": "#819480",
+    "published": true
+  },
+  "migrations": [
+    "0185_register_taklifla_toglar_bagrida.sql",
+    "0186_publish_taklifla_toglar_bagrida.sql"
+  ]
+}
