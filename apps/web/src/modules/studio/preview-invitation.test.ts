@@ -83,7 +83,7 @@ test("authored addresses and maps never link to the sample venue", () => {
   );
   assert.deepEqual(preview.venue, invitation.venue);
   invitation.content["uz-Latn"].address = "";
-  invitation.venue.mapUrl = "https://maps.google.com/?q=Samarkand";
+  invitation.venue.mapUrl = "https://yandex.uz/maps/?text=Samarkand";
   preview = createStudioPreviewInvitation(invitation);
   assert.equal(preview.content["uz-Latn"].address, "");
   assert.deepEqual(preview.venue, invitation.venue);

@@ -1,4 +1,5 @@
 "use client";
+import { useInvitationMaps } from "@/templates/use-invitation-maps";
 
 import { useEffect, useMemo, useRef } from "react";
 import type { Invitation, Locale } from "@taklifnoma/contracts";
@@ -35,6 +36,7 @@ export function TakliflaTovus({
   qaReducedMotion = false,
 }: Props) {
   const frame = useRef<HTMLIFrameElement>(null);
+  useInvitationMaps(frame);
   const message = useMemo(() => {
     const value = makeTovusPayload(invitation, locale, guestName, {
       invitationId,

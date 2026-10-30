@@ -1,3 +1,4 @@
+import { yandexMapUrl } from "@taklifnoma/contracts/maps";
 import assert from "node:assert/strict";
 import test from "node:test";
 import { readFileSync } from "node:fs";
@@ -85,9 +86,9 @@ for (const design of designs) {
     );
     assert.doesNotMatch(runtime, /name=["']partySize|name=["']pax/);
   });
-  test(`${design.id}: shared fixture, all locales, stable IDs and saved map preference`, () => {
+  test(`${design.id}: shared fixture, all locales, stable IDs and one saved destination`, () => {
     const invitation = createTemplatePreviewSample(design.id);
-    invitation.venue.mapUrl = "https://maps.app.goo.gl/author-map";
+    invitation.venue.mapUrl = "https://yandex.uz/maps/?ll=1,2";
     for (const locale of LOCALES)
       invitation.content[locale].personalGreeting = "Salom {name}";
     invitation.gift.cardNumber = "private-unneeded-card";
@@ -104,7 +105,7 @@ for (const design of designs) {
         v.program.map((x: any) => x.id),
         invitation.program.map((x) => x.id),
       );
-      assert.equal(payload.mapUrl ?? v.venue.mapUrl, invitation.venue.mapUrl);
+      assert.equal(payload.mapUrl ?? v.venue.mapUrl, yandexMapUrl(invitation.venue));
       assert.equal(payload.guestToken, "opaque");
       assert.doesNotMatch(JSON.stringify(payload), /private-unneeded-card/);
     }

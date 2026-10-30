@@ -78,7 +78,7 @@
     text("#os-foot-date",data.numericDate);text("#os-cd-foot",data.countdownDate);
     text("#os-venue-name",data.venueName);text("#os-venue-addr",data.address);
     $("#os-venue-name").closest("section").hidden=!(data.venueName||data.address);
-    const map=state.mapUrl || ((data.cityAddress||data.venueName)?"https://maps.google.com/?q="+encodeURIComponent(data.cityAddress||data.venueName):"");
+    const map=state.mapUrl || ((data.cityAddress||data.venueName)?"https://yandex.uz/maps/?text="+encodeURIComponent(data.cityAddress||data.venueName):"");
     $("#os-map").href=map||"#";visible("#os-map",!!map);
     text("#os-foot-city",city(data.cityAddress).toUpperCase());visible("#os-foot-city-wrap",!!city(data.cityAddress));
     programme(data.program);if(data.programHeading)text('[data-i18n="tadbirlar_title"]',data.programHeading);

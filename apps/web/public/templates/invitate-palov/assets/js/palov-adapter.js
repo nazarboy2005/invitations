@@ -56,7 +56,7 @@
     set($(".ticket-time .label"), l.time); set($(".time-big"), date.time); set($(".time-cap"), l.starts); set($(".time-date"), dateText);
     set($(".ticket-place .label"), l.place); set($(".place-name"), payload.venue?.name);
     set($(".place-addr"), payload.venue?.address);
-    const map = $(".map-btn"); if(map){map.href=payload.venue?.mapUrl || (payload.venue?.lat != null ? `https://maps.google.com/?q=${payload.venue.lat},${payload.venue.lng}` : "#"); map.textContent=l.map; map.hidden=!payload.venue?.mapUrl && payload.venue?.lat==null;}
+    const map = $(".map-btn"); if(map){map.href=payload.venue?.mapUrl || (payload.venue?.lat != null ? `https://yandex.uz/maps/?text=${payload.venue.lat},${payload.venue.lng}` : "#"); map.textContent=l.map; map.hidden=!payload.venue?.mapUrl && payload.venue?.lat==null;}
     const photo = $(".frame-img img");
     const creatorPhoto = payload.gallery?.find((item)=>item.src)?.src;
     if(photo){if(creatorPhoto){const item=payload.gallery.find((entry)=>entry.src);photo.src=creatorPhoto;photo.alt=item.alt || item.caption || "";}else{photo.alt=currentLocale==="en"?"Palov served on a traditional Uzbek platter":currentLocale==="ru"?"Плов на традиционном узбекском блюде":currentLocale==="uz-Cyrl"?"Анъанавий ўзбек лаганидаги палов":"An’anaviy o‘zbek laganidagi palov";}}

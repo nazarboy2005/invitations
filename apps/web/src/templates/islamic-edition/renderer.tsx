@@ -1,4 +1,5 @@
 "use client";
+import { useInvitationMaps } from "@/templates/use-invitation-maps";
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { Invitation, Locale } from "@taklifnoma/contracts";
@@ -11,6 +12,7 @@ const sourceLocale: Record<Locale, string> = { "uz-Latn": "uz", "uz-Cyrl": "uz-C
 
 export function IslamicEditionInvitation({ invitation, invitationId, locale, guestName = "", guestToken = "", preview = false, fullPreview = false, catalogMusic = false, sampleWishes = false, silentPlayback = false, qaReducedMotion = false, qaMobile = false }: Props) {
   const frame = useRef<HTMLIFrameElement>(null);
+  useInvitationMaps(frame);
   const [frameLocale, setFrameLocale] = useState(locale);
   useEffect(() => setFrameLocale(locale), [locale]);
   const message = useMemo(() => {

@@ -193,8 +193,8 @@ test("Shirin Bayram retains its complete captured body, style, copy, and motion"
   assert.equal(body(read(pkg, "index.html")), expected);
   for (const name of ["template.css", "meta.js", "i18n.js"])
     assert.deepEqual(
-      readFileSync(path.join(pkg, name)),
-      readFileSync(path.join(source, name)),
+      readFileSync(path.join(pkg, name), "utf8"),
+      readFileSync(path.join(source, name), "utf8"),
     );
   const expectedScript = read(source, "template.js").replace(
     "../../shared/vendor/three/three.bundle.min.js",

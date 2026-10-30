@@ -1,3 +1,4 @@
+import { yandexMapUrl } from "@taklifnoma/contracts/maps";
 import { defaultEventLabel, getContent, muhrliMaktubDataSchema, type Invitation, type Locale } from "@taklifnoma/contracts";
 import { eventInstant, eventWallDate, formatDate } from "../date-format";
 import { CATALOG_PREVIEW_MUSIC } from "../../modules/catalog/catalog-music";
@@ -39,8 +40,8 @@ export function makeEnvelopePayload(invitation: Invitation, locale: Locale, opti
       date, dateTime: [date, time].filter(Boolean).join(" · "),
       footerDate: wall ? `${String(day).padStart(2,"0")} · ${String(wall.getUTCMonth()+1).padStart(2,"0")} · ${year}` : "",
       venueName: c.venueName, address: [c.address,c.landmark].filter(Boolean).join("\n"),
-      mapGoogle: invitation.venue.mapUrl || (query ? `https://maps.google.com/?q=${encodeURIComponent(query)}` : ""),
-      mapYandex: invitation.venue.mapUrl || (query ? `https://maps.google.com/?q=${encodeURIComponent(query)}` : ""),
+      mapUrl: yandexMapUrl(invitation.venue) || (query ? `https://yandex.uz/maps/?text=${encodeURIComponent(query)}` : ""),
+      mapYandex: yandexMapUrl(invitation.venue) || (query ? `https://yandex.uz/maps/?text=${encodeURIComponent(query)}` : ""),
       sampleWishes: options.preview && options.sampleWishes ? getTemplatePreviewWishes(language).map(wish => ({ name: wish.name, message: wish.text })) : [],
       telegram: telegram ? (/^https:\/\/t\.me\//i.test(telegram) ? telegram : `https://t.me/${encodeURIComponent(telegram)}`) : "",
       programHeading: c.programHeading,

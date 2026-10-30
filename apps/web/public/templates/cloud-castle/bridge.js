@@ -997,17 +997,12 @@
         mapFrame.style.borderColor = "rgb(18, 52, 103)";
         mapHost.append(mapFrame);
       }
-      const point = `${venue.lng},${venue.lat}`;
-      mapFrame.src = `https://yandex.uz/map-widget/v1/?ll=${encodeURIComponent(point)}&z=12&pt=${encodeURIComponent(`${point},pm2rdm`)}`;
+      const next = `/maps/venue?latitude=${venue.lat}&longitude=${venue.lng}&lang=${state.locale || "uz-Latn"}&destination=${encodeURIComponent(venue.mapUrl || "")}`;
+      if (mapFrame.getAttribute("src") !== next) mapFrame.src = next;
     } else if (mapFrame) {
       mapFrame.remove();
     }
-    let map = section.querySelector(".cc-map-link");
-    const href = venue.mapUrl || (venue.lat != null && venue.lng != null ? `https://maps.google.com/?q=${venue.lat},${venue.lng}` : "");
-    if (href) {
-      if (!map) { map = document.createElement("a"); map.className = "cc-map-link inline-flex items-center justify-center mt-4 rounded-full border px-5 py-2 text-sm"; section.append(map); }
-      map.href = href; map.target = "_blank"; map.rel = "noreferrer"; text(map, localCopy().map);
-    } else if (map) map.remove();
+    section.querySelector(".cc-map-link")?.remove();
   }
 
   function renderCalendarLink(data) {

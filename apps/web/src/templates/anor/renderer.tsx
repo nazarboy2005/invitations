@@ -1,4 +1,6 @@
 "use client";
+import { useInvitationMaps } from "@/templates/use-invitation-maps";
+import { yandexMapUrl } from "@taklifnoma/contracts/maps";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { Invitation, Locale } from "@taklifnoma/contracts";
@@ -256,7 +258,7 @@ export function makeLegacyData(
       address: [content.address, content.landmark].filter(Boolean).join(" · "),
       lat: invitation.venue.latitude,
       lng: invitation.venue.longitude,
-      mapUrl: invitation.venue.mapUrl,
+      mapUrl: yandexMapUrl(invitation.venue),
     },
     program: invitation.program.map((item) => ({
       id: item.id,
@@ -365,6 +367,7 @@ export function AnorInvitation({
   sampleWishes = false,
 }: Props) {
   const frame = useRef<HTMLIFrameElement>(null);
+  useInvitationMaps(frame);
   const [frameLocale, setFrameLocale] = useState(locale);
   const data = useMemo(
     () => {

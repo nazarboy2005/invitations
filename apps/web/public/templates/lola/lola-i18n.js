@@ -18,7 +18,7 @@
     "Uchrashuv maskani": ["Место встречи", "The meeting place"],
     "To‘y manzili": ["Место проведения", "Venue"],
     "Yandex xaritada": ["На карте Яндекса", "Open in Yandex Maps"],
-    "Google xaritada": ["На карте Google", "Open in Google Maps"],
+    "Yandex xaritada": ["На карте Yandex", "Open in Yandex Maps"],
     "Kiyinish uslubi": ["Стиль одежды", "Dress code"],
     "Bir chimdim xotira": ["Немного воспоминаний", "A handful of memories"],
     "Lahzalar": ["Моменты", "Moments"],

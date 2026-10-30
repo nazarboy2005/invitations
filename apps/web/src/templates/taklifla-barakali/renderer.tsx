@@ -1,4 +1,5 @@
 "use client";
+import { useInvitationMaps } from "@/templates/use-invitation-maps";
 
 import { useEffect, useMemo, useRef } from "react";
 import type { Invitation, Locale } from "@taklifnoma/contracts";
@@ -10,6 +11,7 @@ export type BarakaliProps = BarakaliOptions & { invitation: Invitation; locale: 
 /** Exact source renderer shared by catalog, studio and public display. */
 export function TakliflaBarakali({ invitation, locale, fullPreview, ...options }: BarakaliProps) {
   const frame = useRef<HTMLIFrameElement>(null);
+  useInvitationMaps(frame);
   const message = useMemo(() => makeBarakaliPayload(invitation, locale, options), [invitation, locale,
     options.invitationId, options.guestName, options.guestToken, options.preview, options.sampleWishes,
     options.catalogMusic, options.silentPlayback, options.qaReducedMotion]);

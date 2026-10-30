@@ -1,3 +1,4 @@
+import { yandexMapUrl } from "@taklifnoma/contracts/maps";
 import { getContent, type Invitation, type Locale } from "@taklifnoma/contracts";
 import { eventInstant, formatDate } from "../date-format";
 import { getTemplatePreviewWishes } from "@/modules/catalog/preview-sample";
@@ -25,8 +26,8 @@ export function makeAsalariPayload(
     const venueQuery = [c.venueName, c.address].filter(Boolean).join(", ");
     const coordinates = invitation.venue.latitude != null && invitation.venue.longitude != null
       ? `${invitation.venue.latitude},${invitation.venue.longitude}` : "";
-    const mapUrl = invitation.venue.mapUrl || (coordinates || venueQuery
-      ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(coordinates || venueQuery)}` : "");
+    const mapUrl = yandexMapUrl(invitation.venue) || (coordinates || venueQuery
+      ? `https://yandex.uz/maps/?text=${encodeURIComponent(coordinates || venueQuery)}` : "");
     return [language, {
       title: c.title,
       child: c.people[0] || "",

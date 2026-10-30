@@ -55,7 +55,7 @@
     const hasVenue = Boolean(p.venue?.name || p.venue?.address || p.venue?.landmark || p.venue?.mapUrl || (p.venue?.lat && p.venue?.lng));
     document.querySelector(".info-block").hidden = !hasVenue;
     text(".block-desc", [p.venue?.name, p.venue?.address, p.venue?.landmark].filter(Boolean).join(" · ")); text(".map-btn", l.map);
-    const map = document.querySelector(".map-btn"); if (map) { map.href = p.venue?.mapUrl || (p.venue?.lat && p.venue?.lng ? `https://maps.google.com/?q=${p.venue.lat},${p.venue.lng}` : "#"); map.hidden = !p.venue?.mapUrl && !(p.venue?.lat && p.venue?.lng); }
+    const map = document.querySelector(".map-btn"); if (map) { map.href = p.venue?.mapUrl || (p.venue?.lat && p.venue?.lng ? `https://yandex.uz/maps/?text=${p.venue.lat},${p.venue.lng}` : "#"); map.hidden = !p.venue?.mapUrl && !(p.venue?.lat && p.venue?.lng); }
     const programHeading = document.querySelector(".time-card-block .main-title");
     if (programHeading) programHeading.textContent = p.programHeading || l.program;
     const wrapper = document.querySelector(".timing-wrapper");

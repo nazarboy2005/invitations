@@ -1,4 +1,5 @@
 "use client";
+import { useInvitationMaps } from "@/templates/use-invitation-maps";
 
 import { useCallback, useEffect, useMemo, useRef } from "react";
 import type { Invitation, Locale } from "@taklifnoma/contracts";
@@ -15,6 +16,7 @@ type Props = OsmonOptions & {
 /** Complete source renderer shared by catalog, studio and public routes. */
 export function TakliflaOsmonInvitation({invitation, locale, fullPreview, qaReducedMotion, ...options}: Props) {
   const frame = useRef<HTMLIFrameElement>(null);
+  useInvitationMaps(frame);
   const message = useMemo(() => makeOsmonPayload(invitation, locale, {
     ...options, fullPreview, reducedMotion: qaReducedMotion || options.reducedMotion,
   }), [invitation, locale, options.invitationId, options.guestName, options.guestToken,

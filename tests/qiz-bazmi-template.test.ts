@@ -74,7 +74,7 @@ test("Qiz Bazmi keeps captured body, scripts, styles, metadata, and source artwo
   const capturedHtml = readFileSync(new URL("index.html", capture), "utf8");
   assert.equal(normalize(body(source)), normalize(body(capturedHtml)));
   for (const file of ["template.css", "template.js", "i18n.js", "meta.js"])
-    assert.deepEqual(readFileSync(new URL(file, root)), readFileSync(new URL(file, capture)), `${file} remains source-identical`);
+    assert.deepEqual(readFileSync(new URL(file, root), "utf8"), readFileSync(new URL(file, capture), "utf8"), `${file} remains source-identical`);
   for (const file of ["atlas-pattern.svg", "henna-bowl.svg", "palm-henna.webp", "tilla-qosh.svg", "venue.svg"]) {
     assert.deepEqual(readFileSync(new URL(`art/${file}`, root)), readFileSync(new URL(`art/${file}`, capture)), `source art ${file} remains unchanged`);
     assert.equal(captureManifest.resources[`https://www.marxaba.uz/templates/qiz-bazmi/art/${file}`]?.file, `Qiz uzatish/templates/qiz-bazmi/art/${file}`);

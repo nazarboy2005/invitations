@@ -10,7 +10,7 @@ Object.assign(window.MARHAMAT_I18N = window.MARHAMAT_I18N || {}, {
   "kun": ["дней", "days"], "soat": ["часов", "hours"], "daqiqa": ["минут", "minutes"], "soniya": ["секунд", "seconds"],
   "Bu kunni birga nishonlaganingiz uchun rahmat!": ["Спасибо, что разделили с нами этот день!", "Thank you for celebrating this day with us!"],
   "Kalendarga qo‘shish": ["Добавить в календарь", "Add to calendar"], "Birgalikdagi oqshom": ["Наш вечер вместе", "An evening together"], "To‘y dasturi": ["Программа свадьбы", "Wedding program"],
-  "Manzil": ["Адрес", "Location"], "To‘y manzili": ["Место проведения", "Wedding venue"], "Yandex xaritada": ["На карте Яндекс", "Open in Yandex Maps"], "Google xaritada": ["На карте Google", "Open in Google Maps"],
+  "Manzil": ["Адрес", "Location"], "To‘y manzili": ["Место проведения", "Wedding venue"], "Yandex xaritada": ["На карте Яндекс", "Open in Yandex Maps"], "Yandex xaritada": ["На карте Yandex", "Open in Yandex Maps"],
   "Kiyinish uslubi": ["Стиль одежды", "Dress style"], "Dress-kod": ["Дресс-код", "Dress code"], "Xotiralar": ["Воспоминания", "Memories"], "Lahzalar": ["Мгновения", "Moments"],
   "Oldingi surat": ["Предыдущее фото", "Previous photo"], "Suratni kattalashtirish": ["Увеличить фото", "Enlarge photo"], "To‘y surati": ["Фото свадьбы", "Wedding photo"], "Keyingi surat": ["Следующее фото", "Next photo"], "Suratlar galereyasi": ["Фотогалерея", "Photo gallery"], "Surat tanlash": ["Выбор фото", "Choose a photo"],
   "Bizga xabar bering": ["Дайте нам знать", "Let us know"], "Tashrifingizni tasdiqlang": ["Подтвердите ваше присутствие", "Please RSVP"], "Javobingiz biz uchun muhim.": ["Ваш ответ очень важен для нас.", "Your reply means a lot to us."],

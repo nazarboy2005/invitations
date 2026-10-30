@@ -1,3 +1,4 @@
+import { yandexMapUrl } from "@taklifnoma/contracts/maps";
 import {
   getContent,
   type Invitation,
@@ -108,9 +109,9 @@ export function makeTungiSaroyPayload(
     }),
   );
   const mapUrl =
-    invitation.venue.mapUrl ||
+    yandexMapUrl(invitation.venue) ||
     (invitation.venue.latitude !== null && invitation.venue.longitude !== null
-      ? `https://www.google.com/maps/search/?api=1&query=${invitation.venue.latitude},${invitation.venue.longitude}`
+      ? `https://yandex.uz/maps/?text=${invitation.venue.latitude},${invitation.venue.longitude}`
       : "");
   return {
     type: "taklifla-tungi-saroy:update" as const,

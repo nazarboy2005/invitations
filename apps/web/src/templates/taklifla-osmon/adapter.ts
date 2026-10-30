@@ -1,3 +1,4 @@
+import { yandexMapUrl } from "@taklifnoma/contracts/maps";
 import { osmonDataSchema, getContent, type Invitation, type Locale } from "@taklifnoma/contracts";
 import { getTemplatePreviewWishes } from "../../modules/catalog/preview-sample";
 import { eventInstant, formatDate } from "../date-format";
@@ -59,9 +60,9 @@ export function makeOsmonPayload(invitation: Invitation, locale: Locale, options
       deadline: invitation.rsvp.deadline ? formatDate(invitation.rsvp.deadline, lang, invitation.timezone, {day:"numeric", month:"long"}) : "",
     }];
   }));
-  const mapUrl = /^https?:\/\//i.test(invitation.venue.mapUrl) ? invitation.venue.mapUrl
+  const mapUrl = /^https?:\/\//i.test(yandexMapUrl(invitation.venue)) ? yandexMapUrl(invitation.venue)
     : invitation.venue.latitude !== null && invitation.venue.longitude !== null
-      ? `https://www.google.com/maps/search/?api=1&query=${invitation.venue.latitude},${invitation.venue.longitude}` : "";
+      ? `https://yandex.uz/maps/?text=${invitation.venue.latitude},${invitation.venue.longitude}` : "";
   return {
     type: "taklifla-osmon:update" as const,
     payload: {

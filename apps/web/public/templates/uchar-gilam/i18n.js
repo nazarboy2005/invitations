@@ -21,7 +21,7 @@ Object.assign(window.MARHAMAT_I18N = window.MARHAMAT_I18N || {}, {
   "To‘y dasturi": ["Программа свадьбы", "Wedding program"],
   "Manzil": ["Адрес", "Location"], "To‘y manzili": ["Место свадьбы", "Wedding venue"],
   "Xaritani shu yerda ko‘rish": ["Показать карту здесь", "Show the map here"],
-  "Yandex xaritada": ["На карте Яндекса", "Open in Yandex Maps"], "Google xaritada": ["На карте Google", "Open in Google Maps"],
+  "Yandex xaritada": ["На карте Яндекса", "Open in Yandex Maps"], "Yandex xaritada": ["На карте Yandex", "Open in Yandex Maps"],
   "Savdogar rastasidan": ["С купеческого прилавка", "From the merchant’s stall"],
   "Kiyinish uslubi": ["Стиль одежды", "Dress code"],
   "Birga boshlanadigan hikoya": ["История, которая начинается вместе", "A story beginning together"],

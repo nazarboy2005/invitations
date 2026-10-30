@@ -20,7 +20,7 @@ Object.assign(window.MARHAMAT_I18N = window.MARHAMAT_I18N || {}, {
   "Manzil": ["Адрес", "The venue"],
   "To‘y manzili": ["Место свадьбы", "Wedding venue"],
   "Yandex xaritada ↗": ["На карте Яндекса ↗", "Yandex Maps ↗"],
-  "Google xaritada ↗": ["На карте Google ↗", "Google Maps ↗"],
+  "Yandex xaritada ↗": ["На карте Yandex ↗", "Yandex Maps ↗"],
   "Kiyinish uslubi": ["Дресс-код", "Dress code"],
   "Our story": ["Наша история", "Our story"],
   "Our guest book": ["Наш гостевой альбом", "Our guest book"],

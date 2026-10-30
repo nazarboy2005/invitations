@@ -1,3 +1,4 @@
+import { yandexMapUrl } from "@taklifnoma/contracts/maps";
 import type { Invitation, Locale } from "@taklifnoma/contracts";
 import { getContent } from "@taklifnoma/contracts";
 import { eventInstant, eventWallDate, formatDate } from "../date-format";
@@ -69,7 +70,7 @@ export function makeButterflyData(
       address: [content.address, content.landmark].filter(Boolean).join(" · "),
       lat: invitation.venue.latitude,
       lng: invitation.venue.longitude,
-      mapUrl: invitation.venue.mapUrl,
+      mapUrl: yandexMapUrl(invitation.venue),
     },
     gallery,
     music: { enabled: Boolean(music), url: music },

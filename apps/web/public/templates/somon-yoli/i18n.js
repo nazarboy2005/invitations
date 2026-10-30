@@ -14,7 +14,7 @@ Object.assign(window.MARHAMAT_I18N = window.MARHAMAT_I18N || {}, {
   "Kalendarga qo‘shish": ["Добавить в календарь", "Add to calendar"],
   "Birgalikdagi oqshom": ["Наш общий вечер", "An evening together"], "To‘y dasturi": ["Программа свадьбы", "Wedding program"],
   "Manzil": ["Адрес", "Location"], "To‘y manzili": ["Место свадьбы", "Wedding venue"],
-  "Yandex xaritada": ["На карте Яндекса", "Open in Yandex Maps"], "Google xaritada": ["На карте Google", "Open in Google Maps"],
+  "Yandex xaritada": ["На карте Яндекса", "Open in Yandex Maps"], "Yandex xaritada": ["На карте Yandex", "Open in Yandex Maps"],
   "Kiyinish uslubi": ["Стиль одежды", "Dress code"], "Dress-kod": ["Дресс-код", "Dress code"],
   "Xotiralar": ["Воспоминания", "Memories"], "Lahzalar": ["Мгновения", "Moments"],
   "Oldingi surat": ["Предыдущее фото", "Previous photo"], "Suratni kattalashtirish": ["Увеличить фото", "Enlarge photo"], "To‘y surati": ["Свадебное фото", "Wedding photo"], "Suratlar galereyasi": ["Фотогалерея", "Photo gallery"], "Keyingi surat": ["Следующее фото", "Next photo"], "Surat tanlash": ["Выбрать фото", "Choose a photo"],

@@ -1,3 +1,4 @@
+import { yandexMapUrl } from "@taklifnoma/contracts/maps";
 import {getTemplatePreviewWishes} from "../../modules/catalog/preview-sample";
 import { sharlarDataSchema, getContent, type Invitation, type Locale } from "@taklifnoma/contracts";
 import { eventInstant, eventWallDate, formatDate } from "../date-format";
@@ -28,7 +29,7 @@ export function makeSharlarPayload(invitation: Invitation, locale: Locale, optio
       },
       previewWishes:options.preview&&options.sampleWishes?getTemplatePreviewWishes(language):[],
       wallDate:eventWallDate(invitation.startsAt,invitation.timezone)?.toISOString().slice(0,10) ?? "",
-      mapUrl:invitation.venue.mapUrl || (invitation.venue.latitude!==null&&invitation.venue.longitude!==null?`https://www.google.com/maps/search/?api=1&query=${invitation.venue.latitude},${invitation.venue.longitude}`:content.address||content.venueName?`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(content.address||content.venueName)}`:""),
+      mapUrl:yandexMapUrl(invitation.venue) || (invitation.venue.latitude!==null&&invitation.venue.longitude!==null?`https://yandex.uz/maps/?text=${invitation.venue.latitude},${invitation.venue.longitude}`:content.address||content.venueName?`https://yandex.uz/maps/?text=${encodeURIComponent(content.address||content.venueName)}`:""),
       date: formatDate(invitation.startsAt, language, invitation.timezone, { day: "numeric", month: "long", year: "numeric" }),
       numericDate: formatDate(invitation.startsAt, language, invitation.timezone, { day: "2-digit", month: "2-digit", year: "numeric" }),
       time: formatDate(invitation.startsAt, language, invitation.timezone, { hour: "2-digit", minute: "2-digit", hourCycle: "h23" }),
@@ -48,9 +49,9 @@ export function makeSharlarPayload(invitation: Invitation, locale: Locale, optio
       ...options, locale:invitation.enabledLocales.includes(locale)?locale:invitation.defaultLocale, views, doorsAt:details.doorsAt,celebrantAge:invitation.celebrantAge,apiBase:`/api/public/invitations/${encodeURIComponent(options.invitationId)}`,enabledLocales: invitation.enabledLocales,
       preview: options.preview ?? false,
       instant: eventInstant(invitation.startsAt, invitation.timezone)?.toISOString() ?? "",
-      mapUrl: invitation.venue.mapUrl || (
+      mapUrl: yandexMapUrl(invitation.venue) || (
         invitation.venue.latitude !== null && invitation.venue.longitude !== null
-          ? `https://www.google.com/maps/search/?api=1&query=${invitation.venue.latitude},${invitation.venue.longitude}` : ""
+          ? `https://yandex.uz/maps/?text=${invitation.venue.latitude},${invitation.venue.longitude}` : ""
       ),
       music: { enabled: invitation.music.enabled, url: invitation.music.url },
       phone: invitation.contacts.phoneNumber,

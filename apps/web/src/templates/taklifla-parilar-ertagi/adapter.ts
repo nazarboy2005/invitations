@@ -1,3 +1,4 @@
+import { yandexMapUrl } from "@taklifnoma/contracts/maps";
 import { pariDataSchema, getContent, type Invitation, type Locale } from "@taklifnoma/contracts";
 import { getTemplatePreviewWishes } from "../../modules/catalog/preview-sample";
 import { eventInstant, eventWallDate, formatDate } from "../date-format";
@@ -40,8 +41,8 @@ export function makePariPayload(invitation: Invitation, locale: Locale, options:
   return { type: "taklifla-parilar-ertagi:update" as const, payload: {
     ...options, locale:invitation.enabledLocales.includes(locale)?locale:invitation.defaultLocale, variants, enabledLocales: invitation.enabledLocales,
     instant: eventInstant(invitation.startsAt, invitation.timezone)?.toISOString() ?? "",
-    mapUrl: invitation.venue.mapUrl || (invitation.venue.latitude !== null && invitation.venue.longitude !== null
-      ? `https://www.google.com/maps/search/?api=1&query=${invitation.venue.latitude},${invitation.venue.longitude}` : ""),
+    mapUrl: yandexMapUrl(invitation.venue) || (invitation.venue.latitude !== null && invitation.venue.longitude !== null
+      ? `https://yandex.uz/maps/?text=${invitation.venue.latitude},${invitation.venue.longitude}` : ""),
     wishesEnabled: invitation.wishes.enabled,
     music: invitation.music,
   } };

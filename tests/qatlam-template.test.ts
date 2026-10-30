@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
-import { readFileSync, readdirSync } from "node:fs";
+import { readdirSync } from "node:fs";
+import { readFileSync } from "./helpers/source-files";
 import path from "node:path";
 import test from "node:test";
 import { runInNewContext } from "node:vm";

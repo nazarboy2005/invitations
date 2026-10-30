@@ -1,3 +1,4 @@
+import { yandexMapUrl } from "@taklifnoma/contracts/maps";
 import type { Invitation, Locale } from "@taklifnoma/contracts";
 import { getContent } from "@taklifnoma/contracts";
 import { makeLegacyData } from "@/templates/anor/renderer";
@@ -158,7 +159,7 @@ export function makeVelvetData(
     venueAddress: [content.address, content.landmark]
       .filter(Boolean)
       .join(" · "),
-    mapUrl: invitation.venue.mapUrl,
+    mapUrl: yandexMapUrl(invitation.venue),
     programHeading: content.programHeading || text.program,
     program: invitation.program.map((item) => ({
       id: item.id,

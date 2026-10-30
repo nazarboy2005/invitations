@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
+import { readFileSync } from "./helpers/source-files";
 import test from "node:test";
 
 const appRoot = new URL("../apps/web/public/templates/anor/source/", import.meta.url);

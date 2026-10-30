@@ -1,5 +1,28 @@
 # Implementation decisions
 
+## Yandex venue selection and guest navigation (2026-10-30)
+
+- User explicitly replaced Google Maps/Places with Yandex across the running site.
+  This supersedes earlier Google venue/provider requirements and the map deferral.
+- Studio step 3 uses Uzbekistan Geosuggest results; selecting an organization
+  resolves its exact URI with Geocoder and saves one coordinate pair and Yandex
+  identity with the invitation. Also accept full/short Yandex Maps links and
+  provide «Xaritadan tanlash» beside that input for placing/dragging a pin.
+  Resolve link/pin metadata: autofill an empty place name, preserve an existing
+  one, and offer the fetched name below the input when it differs.
+  Name/address replacement clears the old location; landmark notes do not.
+- All invitation maps use the shared Yandex JavaScript API renderer and the same
+  saved destination as guest links. Preserve each template's map composition.
+  The map itself is the only navigation action: tapping it opens Yandex Maps
+  with the saved point/organization and Uzbek language (`lang=uz_UZ`). No taxi,
+  «view here», or separate «open Yandex Maps» buttons below invitation maps.
+  Native app launch/language preferences remain controlled by Yandex/device.
+- The supplied keys are configured only in ignored local environment settings.
+  Geocoder/Geosuggest stay server-only; the JS API key is browser-visible by design.
+  No external deployment or actual ride order is authorized by this change.
+- Original reference captures and historical QA reports remain archival evidence;
+  remove the old provider from active application/template code and configuration.
+
 ## Complete Taklifla queue (2026-10-29)
 
 - User requested all 24 Taklifla source templates, strictly one at a time:

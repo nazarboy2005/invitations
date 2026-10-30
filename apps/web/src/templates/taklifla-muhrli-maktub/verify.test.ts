@@ -43,7 +43,7 @@ test('empty creator content cannot acquire source names, dates, venue, events or
   for(const content of Object.values(invitation.content))Object.assign(content,{people:[],venueName:'',address:'',landmark:'',message:''});
   const p=makeEnvelopePayload(invitation,'uz-Latn',{invitationId:'blank'}).payload;
   assert.equal(p.target,null);assert.equal(p.variants['uz-Latn'].date,'');assert.deepEqual(p.variants['uz-Latn'].people,[]);
-  assert.deepEqual(p.variants['uz-Latn'].program,[]);assert.equal(p.variants['uz-Latn'].mapGoogle,'');
+  assert.deepEqual(p.variants['uz-Latn'].program,[]);assert.equal(p.variants['uz-Latn'].mapUrl,'');
   assert.equal(p.phone,'');assert.equal(p.music.url,'');
   const source=read('index.html').toString()+read('bridge.js').toString();
   assert.doesNotMatch(source,/Shahzod|Robiya|Navruz Hall|envDemoWishes|cloudflareinsights|api\/v1/);
@@ -54,7 +54,7 @@ test("shared Google venue and preview-only wishes are mapped consistently",()=>{
  const invitation=createTemplatePreviewSample("taklifla-muhrli-maktub");
  for(const locale of invitation.enabledLocales){
   const p=makeEnvelopePayload(invitation,locale,{invitationId:"qa",preview:true,sampleWishes:true}).payload;
-  const d=p.variants[locale]; assert.equal(d.mapGoogle,invitation.venue.mapUrl);assert.equal(d.mapYandex,invitation.venue.mapUrl);
+  const d=p.variants[locale]; assert.equal(d.mapUrl,invitation.venue.mapUrl);assert.equal(d.mapYandex,invitation.venue.mapUrl);
   assert.equal(d.sampleWishes.length,3);assert.ok(d.sampleWishes.every(w=>w.message));
   assert.deepEqual(makeEnvelopePayload(invitation,locale,{invitationId:"public",sampleWishes:true}).payload.variants[locale].sampleWishes,[]);
  }

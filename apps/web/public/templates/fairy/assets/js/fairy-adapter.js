@@ -69,7 +69,7 @@
     text(".location-title", t.location);
     text(".location-address", [data.venue?.name, data.venue?.address].filter(Boolean).join(" · "));
     const map = $(".location-btn");
-    if (map) { map.textContent = t.map; map.href = data.venue?.mapUrl || (data.venue?.lat != null && data.venue?.lng != null ? `https://maps.google.com/?q=${data.venue.lat},${data.venue.lng}` : "#"); map.hidden = !data.venue?.mapUrl && data.venue?.lat == null; }
+    if (map) { map.textContent = t.map; map.href = data.venue?.mapUrl || (data.venue?.lat != null && data.venue?.lng != null ? `https://yandex.uz/maps/?text=${data.venue.lat},${data.venue.lng}` : "#"); map.hidden = !data.venue?.mapUrl && data.venue?.lat == null; }
     const dress = data.dressCode || {};
     text(".dresscode-title", dress.style || t.dress); text(".dresscode-desc", [dress.text, dress.note].filter(Boolean).join("\n"));
     $(".dresscode-section").hidden = !dress.enabled;

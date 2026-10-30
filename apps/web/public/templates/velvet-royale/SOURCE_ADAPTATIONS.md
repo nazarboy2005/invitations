@@ -59,12 +59,12 @@ keyboard navigation, active indicators and 3.8-second automatic advancement,
 pausing for focus, gestures, hidden tabs and reduced motion. Source artwork stays
 visible without creator photos; an empty creator album remains hidden.
 
-Google Maps replaces the reference's Yandex target inside its original floral
-frame. Places links retain their place ID and use stored coordinates for the
-embed. Full manual Google links derive an embed from their query where possible;
-short links retain the exact navigation URL without inventing a pin. The
-server-only `GOOGLE_MAPS_API_KEY` remains in the editor's Places API routes and
-is never sent to this renderer. Google navigation and these embeds need no key.
+Yandex Maps renders inside the original floral frame using the shared venue
+map endpoint. The saved point drives both its marker and click-through link;
+guests tap the map itself to open Yandex Maps in Uzbek. No separate navigation
+or taxi buttons are shown. Studio resolves place searches, share links and picked
+pins through server-side Geosuggest/Geocoder; only the JS API key reaches the
+browser map renderer.
 
 RSVP stores phone input in the existing RSVP note, respects the attendance
 deadline, submits one-person attendance without a guest-count input, and sends wishes through moderation. Preview submits

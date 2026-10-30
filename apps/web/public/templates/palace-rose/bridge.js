@@ -148,10 +148,8 @@
     return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent([data().groom,data().bride].filter(Boolean).join(" & "))}&dates=${iso(date)}/${iso(end)}&location=${encodeURIComponent([data().venue?.name,data().venue?.address].filter(Boolean).join(", "))}`;
   }
   function mapEmbedUrl(url){
-    if(!url)return "";
-    if(url.includes("map-widget"))return url;
-    if(url.includes("yandex")&&url.includes("/maps"))return url.replace("/maps","/map-widget/v1");
-    return url;
+    const venue=data().venue;
+    return venue?.lat!=null&&venue?.lng!=null ? `/maps/venue?latitude=${venue.lat}&longitude=${venue.lng}&lang=${payload?.locale || "uz-Latn"}` : "";
   }
 
   function bindVenue() {
@@ -183,8 +181,8 @@
     const ps = all("p", section); ps.forEach((node) => { if (/Navro|Chirchiq|Toshkent/i.test(node.textContent)) set(node, ""); });
     const anchors = all("a", section), map = anchors.find((a) => a.getAttribute("href")?.includes("maps") || a.querySelector("svg.lucide-navigation"));
     const loc = [data().venue?.lat,data().venue?.lng].every((n) => n != null) ? `${data().venue.lat},${data().venue.lng}` : address;
-    if (map) { set(q("span",map)||map, text().map); map.href = data().venue?.mapUrl || (loc ? `https://maps.google.com/?q=${encodeURIComponent(loc)}` : "#"); map.target="_blank"; map.rel="noopener noreferrer"; hide(map, !loc && !data().venue?.mapUrl); }
-    const mapFrame=q("iframe",section);if(mapFrame){const embed=mapEmbedUrl(data().venue?.mapUrl)||(loc?`https://maps.google.com/maps?q=${encodeURIComponent(loc)}&output=embed`:"");if(embed)mapFrame.src=embed;else mapFrame.removeAttribute("src");hide(mapFrame.parentElement,!embed);}
+    if (map) { set(q("span",map)||map, text().map); map.href = data().venue?.mapUrl || (loc ? `https://yandex.uz/maps/?text=${encodeURIComponent(loc)}` : "#"); map.target="_blank"; map.rel="noopener noreferrer"; hide(map, !loc && !data().venue?.mapUrl); }
+    const mapFrame=q("iframe",section);if(mapFrame){const embed=mapEmbedUrl(data().venue?.mapUrl)||(loc?`/maps/venue?point=${encodeURIComponent(loc)}`:"");if(embed)mapFrame.src=embed;else mapFrame.removeAttribute("src");hide(mapFrame.parentElement,!embed);}
     hide(section, !name && !address);
   }
 

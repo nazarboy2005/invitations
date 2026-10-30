@@ -17,7 +17,7 @@ Object.assign(window.MARHAMAT_I18N = window.MARHAMAT_I18N || {}, {
   "Birgalikdagi oqshom": ["Наш общий вечер", "An evening together"],
   "To‘y dasturi": ["Программа свадьбы", "Wedding program"],
   "Manzil": ["Адрес", "Location"], "To‘y manzili": ["Место свадьбы", "Wedding venue"],
-  "Yandex xaritada": ["На карте Яндекса", "Open in Yandex Maps"], "Google xaritada": ["На карте Google", "Open in Google Maps"],
+  "Yandex xaritada": ["На карте Яндекса", "Open in Yandex Maps"], "Yandex xaritada": ["На карте Yandex", "Open in Yandex Maps"],
   "Kiyinish uslubi": ["Стиль одежды", "Dress code"], "Dress-kod": ["Дресс-код", "Dress code"],
   "Xotiralar": ["Воспоминания", "Memories"], "Lahzalar": ["Мгновения", "Moments"],
   "Suratni kattalashtirish": ["Увеличить фото", "Enlarge photo"], "To‘y surati": ["Свадебное фото", "Wedding photo"],

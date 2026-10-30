@@ -1,3 +1,4 @@
+import { yandexMapUrl } from "@taklifnoma/contracts/maps";
 import type { Invitation, Locale } from "@taklifnoma/contracts";
 import { getContent } from "@taklifnoma/contracts";
 import { CATALOG_PREVIEW_MUSIC } from "@/modules/catalog/catalog-music";
@@ -39,7 +40,7 @@ export function makeSafirData(
       landmark: content.landmark,
       lat: invitation.venue.latitude,
       lng: invitation.venue.longitude,
-      mapUrl: invitation.venue.mapUrl,
+      mapUrl: yandexMapUrl(invitation.venue),
     },
     programHeading: content.programHeading,
     program: invitation.program.map((entry) => ({

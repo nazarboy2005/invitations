@@ -1,4 +1,5 @@
 "use client";
+import { useInvitationMaps } from "@/templates/use-invitation-maps";
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { Invitation, Locale } from "@taklifnoma/contracts";
@@ -26,6 +27,7 @@ export function TakliflaFayzliXonadonInvitation({
   silentPlayback = false, qaReducedMotion = false,
 }: Props) {
   const frame = useRef<HTMLIFrameElement>(null);
+  useInvitationMaps(frame);
   const [activeLocale, setActiveLocale] = useState(locale);
   useEffect(() => setActiveLocale(locale), [locale]);
   useEffect(() => {

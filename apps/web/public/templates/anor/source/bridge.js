@@ -348,37 +348,21 @@
   function setMapLinks(data) {
     const venue = data.venue || {};
     const hasPoint = venue.lat != null && venue.lng != null && Number.isFinite(Number(venue.lat)) && Number.isFinite(Number(venue.lng));
-    $$('[data-map]').forEach((link) => {
-      if (!hasPoint && !venue.mapUrl) { link.hidden = true; return; }
-      link.hidden = false;
-      link.href = venue.mapUrl || `https://www.google.com/maps/search/?api=1&query=${venue.lat},${venue.lng}`;
-      link.target = "_blank";
-      link.rel = "noopener noreferrer";
+    const box = $(".venue__map");
+    if (box && !hasPoint) { box.replaceChildren(); box.hidden = true; }
+    if (box && hasPoint) {
+      let frame = box.querySelector("iframe");
+      if (!frame) { frame = document.createElement("iframe"); frame.title = "Joy xaritasi"; frame.loading = "lazy"; box.append(frame); }
+      const next = `/maps/venue?latitude=${venue.lat}&longitude=${venue.lng}&destination=${encodeURIComponent(venue.mapUrl || "")}`;
+      if (frame.getAttribute("src") !== next) frame.src = next;
+      box.hidden = false;
+    }
+    $$('[data-map]').forEach(link => {
+      link.hidden = !hasPoint;
+      if (venue.mapUrl) link.href = venue.mapUrl;
     });
     const toggle = $("[data-map-toggle]");
-    // Adapt the provider inside the platform bridge; captured template.js stays exact.
-    if (toggle && !toggle.dataset.googleBound) {
-      toggle.dataset.googleBound = "true";
-      toggle.addEventListener("click", (event) => {
-        event.stopImmediatePropagation();
-        const current = app.data.venue || {}, box = $(".venue__map");
-        if (!box || current.lat == null || current.lng == null) return;
-        if (!box.firstChild) {
-          const frame = document.createElement("iframe");
-          frame.title = current.name || "Google Maps";
-          frame.loading = "lazy";
-          frame.referrerPolicy = "no-referrer-when-downgrade";
-          frame.src = `https://www.google.com/maps?q=${encodeURIComponent(`${current.lat},${current.lng}`)}&output=embed`;
-          box.append(frame);
-        }
-        box.hidden = !box.hidden;
-        const labels = config.locale === "ru" ? ["Показать карту здесь", "Закрыть карту"]
-          : config.locale === "en" ? ["Show the map here", "Close the map"]
-          : config.locale === "uz-Cyrl" ? ["Харитани шу ерда кўриш", "Харитани ёпиш"]
-          : ["Xaritani shu yerda ko‘rish", "Xaritani yopish"];
-        toggle.textContent = labels[box.hidden ? 0 : 1];
-      }, true);
-    }
+    if (toggle) toggle.hidden = true;
   }
 
   function showToast(message) {

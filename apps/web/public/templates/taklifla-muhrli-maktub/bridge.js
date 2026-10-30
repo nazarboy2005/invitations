@@ -62,10 +62,10 @@
     text('[data-i18n=inv_title]',data.greeting);
     text('#env-inv-body',data.message);
     text('#env-venue-name',data.venueName);text('#env-venue-addr',data.address);
-    $('#env-venue-name').closest('section').hidden=!(data.venueName||data.address||data.mapGoogle);
+    $('#env-venue-name').closest('section').hidden=!(data.venueName||data.address||data.mapUrl);
     // Source sample venue photo lacks a creator venue-photo field; preview only.
     $('#env-venue-photo').hidden=!state.preview;
-    link('#env-map-g',data.mapGoogle);link('#env-map-y',data.mapYandex);text('#env-map-y','Google Maps');link('#env-map-t',data.telegram);
+    link('#env-map-g',data.mapUrl);link('#env-map-y',data.mapYandex);text('#env-map-y','Yandex Maps');link('#env-map-t',data.telegram);
     var host=$('#env-prog'); host.replaceChildren();
     data.program.forEach(item=>{
       var row=document.createElement('div');row.style.position='relative';row.dataset.itemId=item.id;

@@ -24,7 +24,7 @@ Object.assign(window.MARHAMAT_I18N = window.MARHAMAT_I18N || {}, {
   "Manzil": ["Адрес", "Location"],
   "To‘y manzili": ["Место торжества", "Venue"],
   "Yandex xaritada": ["На карте Яндекса", "Open in Yandex Maps"],
-  "Google xaritada": ["На карте Google", "Open in Google Maps"],
+  "Yandex xaritada": ["На карте Yandex", "Open in Yandex Maps"],
   "Kiyinish uslubi": ["Стиль одежды", "Dress code"],
   "Dress-kod": ["Дресс-код", "Dress code"],
   "Xotiralar": ["Воспоминания", "Memories"],

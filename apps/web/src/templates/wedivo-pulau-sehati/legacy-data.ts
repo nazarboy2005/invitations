@@ -1,3 +1,4 @@
+import { yandexMapUrl } from "@taklifnoma/contracts/maps";
 import { getContent, type Invitation, type Locale } from "@taklifnoma/contracts";
 import { eventInstant, eventWallDate, formatDate } from "../date-format";
 type LegacyDate = { weekday: string; weekdayShort: string; day: number | ""; month: string; monthNumber: number | ""; year: number | ""; time: string; long: string; short: string };
@@ -95,7 +96,7 @@ export function makeLegacyData(
       address: [content.address, content.landmark].filter(Boolean).join(" · "),
       lat: invitation.venue.latitude,
       lng: invitation.venue.longitude,
-      mapUrl: invitation.venue.mapUrl,
+      mapUrl: yandexMapUrl(invitation.venue),
     },
     program: invitation.program.map((item) => ({
       id: item.id,

@@ -206,7 +206,7 @@ function SceneDetail({
             <Clock3 size={16} strokeWidth={1.4} /> 18:00
           </p>
           <div className={styles.venueNavigation}>
-            <Navigation size={13} /> Google Maps orqali{" "}
+            <Navigation size={13} /> Yandex Maps orqali{" "}
             <ArrowUpRight size={14} />
           </div>
         </div>

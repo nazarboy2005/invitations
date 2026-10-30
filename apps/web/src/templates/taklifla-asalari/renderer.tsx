@@ -1,4 +1,5 @@
 "use client";
+import { useInvitationMaps } from "@/templates/use-invitation-maps";
 
 import { useEffect, useMemo, useRef } from "react";
 import type { Invitation, Locale } from "@taklifnoma/contracts";
@@ -11,6 +12,7 @@ type Props = { invitation: Invitation; invitationId: string; locale: Locale; gue
 /** Same source renderer in catalog, studio and public invitations. */
 export function TakliflaAsalari({ invitation, invitationId, locale, guestName = "", guestToken = "", preview = false, fullPreview = false, sampleWishes = false, silentPlayback = false, qaReducedMotion = false }: Props) {
   const frame = useRef<HTMLIFrameElement>(null);
+  useInvitationMaps(frame);
   const message = useMemo(() => {
     const value=makeAsalariPayload(invitation, locale, guestName, { invitationId, guestToken, preview, sampleWishes, silentPlayback, reducedMotion: qaReducedMotion });
     if(preview && sampleWishes) value.payload.music={enabled:true,url:CATALOG_PREVIEW_MUSIC.url};

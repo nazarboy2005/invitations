@@ -1,3 +1,4 @@
+import { yandexMapUrl } from "@taklifnoma/contracts/maps";
 import type { Invitation, Locale } from "@taklifnoma/contracts";
 import { getContent } from "@taklifnoma/contracts";
 import { eventInstant, formatDate } from "../date-format";
@@ -34,7 +35,7 @@ export function makeBloomData(
       name: content.venueName,
       address: content.address,
       landmark: content.landmark,
-      mapUrl: invitation.venue.mapUrl,
+      mapUrl: yandexMapUrl(invitation.venue),
       lat: invitation.venue.latitude,
       lng: invitation.venue.longitude,
     },

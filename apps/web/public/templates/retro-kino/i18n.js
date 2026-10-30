@@ -22,7 +22,7 @@ Object.assign(window.MARHAMAT_I18N = window.MARHAMAT_I18N || {}, {
   "Kalendarga qo‘shish": ["Добавить в календарь", "Add to calendar"],
   "Seans jadvali": ["Расписание сеансов", "Showtimes"], "To‘y dasturi": ["Программа свадьбы", "Wedding program"],
   "Lokatsiya": ["Место встречи", "Location"], "To‘y manzili": ["Адрес свадьбы", "Wedding venue"],
-  "Yandex xaritada": ["На карте Яндекса", "View on Yandex Maps"], "Google xaritada": ["На карте Google", "View on Google Maps"],
+  "Yandex xaritada": ["На карте Яндекса", "View on Yandex Maps"], "Yandex xaritada": ["На карте Yandex", "View on Yandex Maps"],
   "To‘y kuni taqvimi": ["Календарь дня свадьбы", "Wedding day calendar"],
   "Kostyumlar bo‘limi": ["Костюмерная", "Costume department"], "Dress-kod": ["Дресс-код", "Dress code"],
   "Kino tasmasi": ["Киноплёнка", "Film strip"], "Lahzalar": ["Мгновения", "Moments"],

@@ -8,8 +8,8 @@ import confetti from "./source/reference/C94ZD2ww.js";
   const words = {
     "uz-Latn": { invitation: "Taklifnoma", guest: "Hurmatli mehmon", date: "Sanani eslab qoling", venue: "To‘yxona manzili", map: "Xaritada ochish", gift: "To‘yona", contact: "Ma’lumot uchun", reply: "Ishtirokingizni tasdiqlang", name: "Ismingiz", attend: "To‘yimizda ishtirok etasizmi?", yes: "Qatnashaman", no: "Qatnasha olmayman", phone: "Telefon", wish: "Tilak", submit: "Javobni yuborish", family: "Hurmat bilan", closing: "Tashrifingizni kutib qolamiz", copy: "Raqamni nusxalash", copied: "Nusxalandi", preview: "Ko‘rish rejimida javob yuborilmaydi.", thanks: "Rahmat!", error: "Yuborilmadi. Qayta urinib ko‘ring.", days: ["Kun", "Soat", "Daqiqa", "Soniya"], weekdays: ["Du", "Se", "Ch", "Pa", "Ju", "Sh", "Ya"] },
     "uz-Cyrl": { invitation: "Таклифнома", guest: "Ҳурматли меҳмон", date: "Санани эслаб қолинг", venue: "Тўйхона манзили", map: "Харитада очиш", gift: "Тўёна", contact: "Маълумот учун", reply: "Иштирокингизни тасдиқланг", name: "Исмингиз", attend: "Тўйимизда иштирок этасизми?", yes: "Қатнашаман", no: "Қатнаша олмайман", phone: "Телефон", wish: "Тилак", submit: "Жавобни юбориш", family: "Ҳурмат билан", closing: "Ташрифингизни кутиб қоламиз", copy: "Рақамни нусхалаш", copied: "Нусхаланди", preview: "Кўриш режимида жавоб юборилмайди.", thanks: "Раҳмат!", error: "Юборилмади. Қайта уриниб кўринг.", days: ["Кун", "Соат", "Дақиқа", "Сония"], weekdays: ["Ду", "Се", "Чо", "Па", "Жу", "Ша", "Як"] },
-    en: { invitation: "Invitation", guest: "Dear guest", date: "Save the date", venue: "Venue", map: "Open in Google Maps", gift: "Gift", contact: "Contact", reply: "Confirm your attendance", name: "Your name", attend: "Will you attend?", yes: "I will attend", no: "I cannot attend", phone: "Phone", wish: "Your wish", submit: "Send response", family: "With respect", closing: "We look forward to seeing you", copy: "Copy card number", copied: "Copied", preview: "Preview only.", thanks: "Thank you!", error: "Could not send. Please try again.", days: ["Days", "Hours", "Minutes", "Seconds"], weekdays: ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"] },
-    ru: { invitation: "Приглашение", guest: "Дорогой гость", date: "Сохраните дату", venue: "Место проведения", map: "Открыть в Google Картах", gift: "Подарок", contact: "Контакты", reply: "Подтвердите участие", name: "Ваше имя", attend: "Вы придёте?", yes: "Приду", no: "Не смогу", phone: "Телефон", wish: "Пожелание", submit: "Отправить ответ", family: "С уважением", closing: "Будем рады видеть вас", copy: "Скопировать номер карты", copied: "Скопировано", preview: "Только предварительный просмотр.", thanks: "Спасибо!", error: "Не удалось отправить. Попробуйте снова.", days: ["Дней", "Часов", "Минут", "Секунд"], weekdays: ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"] }
+    en: { invitation: "Invitation", guest: "Dear guest", date: "Save the date", venue: "Venue", map: "Open in Yandex Maps", gift: "Gift", contact: "Contact", reply: "Confirm your attendance", name: "Your name", attend: "Will you attend?", yes: "I will attend", no: "I cannot attend", phone: "Phone", wish: "Your wish", submit: "Send response", family: "With respect", closing: "We look forward to seeing you", copy: "Copy card number", copied: "Copied", preview: "Preview only.", thanks: "Thank you!", error: "Could not send. Please try again.", days: ["Days", "Hours", "Minutes", "Seconds"], weekdays: ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"] },
+    ru: { invitation: "Приглашение", guest: "Дорогой гость", date: "Сохраните дату", venue: "Место проведения", map: "Открыть в Яндекс Картах", gift: "Подарок", contact: "Контакты", reply: "Подтвердите участие", name: "Ваше имя", attend: "Вы придёте?", yes: "Приду", no: "Не смогу", phone: "Телефон", wish: "Пожелание", submit: "Отправить ответ", family: "С уважением", closing: "Будем рады видеть вас", copy: "Скопировать номер карты", copied: "Скопировано", preview: "Только предварительный просмотр.", thanks: "Спасибо!", error: "Не удалось отправить. Попробуйте снова.", days: ["Дней", "Часов", "Минут", "Секунд"], weekdays: ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"] }
   };
   let current = {}, opened = false, timer, observer, galleryIndex = 0;
   let audio = null, audioSource = "", audioStarted = false, audioPaused = false;
@@ -155,26 +155,16 @@ import confetti from "./source/reference/C94ZD2ww.js";
     const venue = data.venue || {}, present = !!(venue.name || venue.address || venue.mapUrl || (venue.lat != null && venue.lng != null));
     show(".section-venue", present); if (!present) return;
     put("venue-eyebrow", label.source.sections.ceremony); put("venue-title", label.source.sections.venueAddress); put("venue-name", venue.name); put("venue-address", venue.address);
-    let query = venue.lat != null && venue.lng != null ? `${venue.lat},${venue.lng}` : "", navigation = "";
-    try {
-      const url = new URL(venue.mapUrl || "");
-      if (/^(www\.)?google\.[a-z.]+$/.test(url.hostname) || url.hostname === "maps.google.com" || url.hostname === "maps.app.goo.gl" || url.hostname === "goo.gl") {
-        navigation = url.href;
-        const encodedPoint = url.pathname.match(/!3d(-?\d+(?:\.\d+)?)!4d(-?\d+(?:\.\d+)?)/);
-        query = url.searchParams.has("query_place_id") && query ? query : url.searchParams.get("query") || url.searchParams.get("q") || url.searchParams.get("destination") || (encodedPoint ? `${encodedPoint[1]},${encodedPoint[2]}` : query);
-        // A newly pasted short link can supersede an older stored pin. Its
-        // destination is unknown here, so never display that older pin beside it.
-        if (url.hostname === "maps.app.goo.gl" || url.hostname === "goo.gl") query = "";
-      }
-    } catch { /* A blank manual URL is valid while editing. */ }
-    if (!query && !navigation) query = [venue.name, venue.address].filter(Boolean).join(", ");
+    const hasPoint = venue.lat != null && venue.lng != null;
+    const query = [venue.name, venue.address].filter(Boolean).join(", ");
     const map = q(".section-venue iframe"), action = q(".section-venue__action");
-    if (query) {
-      map.src = `https://www.google.com/maps?q=${encodeURIComponent(query)}&output=embed`;
-      action.href = navigation || `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
-      action.querySelector("span").textContent = label.map; map.title = label.venue;
-      show(".section-venue__map", true); action.hidden = false;
-    } else { map.removeAttribute("src"); show(".section-venue__map", false); action.hidden = !navigation; if (navigation) { action.href = navigation; action.querySelector("span").textContent = label.map; } }
+    if (hasPoint) {
+      map.src = `/maps/venue?latitude=${venue.lat}&longitude=${venue.lng}`;
+      map.title = label.venue; show(".section-venue__map", true);
+    } else { map.removeAttribute("src"); show(".section-venue__map", false); }
+    const navigation = venue.mapUrl || (query ? `https://yandex.uz/maps/?text=${encodeURIComponent(query)}` : "");
+    action.hidden = !navigation;
+    if (navigation) { action.href = navigation; action.querySelector("span").textContent = label.map; }
   }
 
   function renderGift(data, label) {

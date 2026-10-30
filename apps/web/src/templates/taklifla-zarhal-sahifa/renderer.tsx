@@ -1,4 +1,5 @@
 "use client";
+import { useInvitationMaps } from "@/templates/use-invitation-maps";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { Invitation, Locale } from "@taklifnoma/contracts";
@@ -15,6 +16,7 @@ export type ZarhalSahifaProps = ZarhalOptions & {
 /** Source-derived renderer shared by preview and public invitation routes. */
 export function TakliflaZarhalSahifaInvitation(props: ZarhalSahifaProps) {
   const frame = useRef<HTMLIFrameElement>(null);
+  useInvitationMaps(frame);
   const [locale, setLocale] = useState(props.locale);
   useEffect(() => setLocale(props.locale), [props.locale]);
   const message = useMemo(() => makeZarhalPayload(props.invitation, locale, {

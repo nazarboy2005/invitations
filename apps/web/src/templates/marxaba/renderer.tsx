@@ -1,4 +1,5 @@
 "use client";
+import { useInvitationMaps } from "@/templates/use-invitation-maps";
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { Invitation, Locale } from "@taklifnoma/contracts";
@@ -249,6 +250,7 @@ export function MarxabaInvitation({
   sampleWishes = false,
 }: Props) {
   const frame = useRef<HTMLIFrameElement>(null);
+  useInvitationMaps(frame);
   const initialized = useRef(false);
   const structuralSignature = useRef("");
   const [frameLocale, setFrameLocale] = useState(locale);

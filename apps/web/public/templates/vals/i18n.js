@@ -19,7 +19,7 @@ Object.assign(window.MARHAMAT_I18N = window.MARHAMAT_I18N || {}, {
   "Bal qayerda o‘tadi": ["Где пройдёт бал", "Where the ball takes place"],
   "To‘y manzili": ["Место свадьбы", "Wedding venue"],
   "Yandex xaritada": ["Яндекс Карты", "Yandex Maps"],
-  "Google xaritada": ["Google Карты", "Google Maps"],
+  "Yandex xaritada": ["Яндекс Карты", "Yandex Maps"],
   "Bal libosi": ["Бальный наряд", "Ball attire"],
   "Kiyinish uslubi": ["Дресс-код", "Dress code"],
   "Bizning hikoyamiz": ["Наша история", "Our story"],

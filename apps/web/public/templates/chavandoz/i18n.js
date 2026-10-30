@@ -8,7 +8,7 @@ Object.assign(window.MARHAMAT_I18N = window.MARHAMAT_I18N || {}, {
   "kun": ["дней", "days"], "soat": ["часов", "hours"], "daqiqa": ["минут", "minutes"], "soniya": ["секунд", "seconds"],
   "Bu kunni birga nishonlaganingiz uchun rahmat!": ["Спасибо, что отметили этот день вместе с нами!", "Thank you for celebrating this day with us!"],
   "Kalendarga qo‘shish": ["Добавить в календарь", "Add to calendar"], "Kalendarga qo‘shish ✦": ["Добавить в календарь ✦", "Add to calendar ✦"], "Oqshom rejasi": ["План вечера", "Evening programme"], "To‘y dasturi": ["Программа праздника", "Celebration programme"],
-  "Manzil": ["Адрес", "Venue"], "To‘y manzili": ["Место праздника", "Celebration venue"], "Yandex xaritada": ["На Яндекс Картах", "On Yandex Maps"], "Google xaritada": ["На Google Картах", "On Google Maps"],
+  "Manzil": ["Адрес", "Venue"], "To‘y manzili": ["Место праздника", "Celebration venue"], "Yandex xaritada": ["На Яндекс Картах", "On Yandex Maps"], "Yandex xaritada": ["На Яндекс Картах", "On Yandex Maps"],
   "Bayramona ranglar": ["Праздничные цвета", "Celebration colours"], "Dress-kod": ["Дресс-код", "Dress code"], "Xotiralar": ["Воспоминания", "Memories"], "Lahzalar": ["Мгновения", "Moments"],
   "Oldingi surat": ["Предыдущее фото", "Previous photo"], "Keyingi surat": ["Следующее фото", "Next photo"], "Suratlar galereyasi": ["Галерея фотографий", "Photo gallery"], "Suratni kattalashtirish": ["Увеличить фото", "Enlarge photo"], "Bayram surati": ["Фото праздника", "Celebration photo"],
   "Javob varaqasi": ["Карточка ответа", "Reply card"], "Tashrifingizni tasdiqlang": ["Подтвердите своё присутствие", "Please RSVP"], "Javobingiz biz uchun muhim.": ["Ваш ответ очень важен для нас.", "Your reply means a lot to us."],

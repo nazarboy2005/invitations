@@ -309,7 +309,7 @@
     var map =
       safeUrl(data.mapUrl) ||
       (content.address || content.venueName
-        ? "https://maps.google.com/?q=" +
+        ? "https://yandex.uz/maps/?text=" +
           encodeURIComponent(content.address || content.venueName)
         : "");
     $("#mp-map").href = map || "#";

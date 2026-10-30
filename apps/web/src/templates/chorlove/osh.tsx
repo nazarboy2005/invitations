@@ -1,4 +1,5 @@
 "use client";
+import { useInvitationMaps } from "@/templates/use-invitation-maps";
 
 import { useEffect, useMemo, useRef } from "react";
 import type { Invitation, Locale } from "@taklifnoma/contracts";
@@ -32,6 +33,7 @@ export function ChorloveOshInvitation({
   qaMobile = false,
 }: Props) {
   const frame = useRef<HTMLIFrameElement>(null);
+  useInvitationMaps(frame);
   const data = useMemo(() => {
     const mapped = makeLegacyData(invitation, locale, guestName);
     const localizedOshTitle: Record<Locale, string> = {

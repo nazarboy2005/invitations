@@ -1,3 +1,4 @@
+import { yandexMapUrl } from "@taklifnoma/contracts/maps";
 import {getTemplatePreviewWishes} from "../../modules/catalog/preview-sample";
 import { starryDataSchema, getContent, type Invitation, type Locale } from "@taklifnoma/contracts";
 import { eventInstant, eventWallDate, formatDate } from "../date-format";
@@ -29,7 +30,7 @@ export function makeStarryPayload(
     return [language, {
       infoNote:localized(details.infoNote),footerNote:details.footerNote[language] ?? details.footerNote[invitation.defaultLocale] ?? null,
       wishes:options.preview&&options.sampleWishes?getTemplatePreviewWishes(language):[],
-      mapUrl:invitation.venue.mapUrl || (invitation.venue.latitude!==null&&invitation.venue.longitude!==null?`https://www.google.com/maps/search/?api=1&query=${invitation.venue.latitude},${invitation.venue.longitude}`:content.address||content.venueName?`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(content.address||content.venueName)}`:""),
+      mapUrl:yandexMapUrl(invitation.venue) || (invitation.venue.latitude!==null&&invitation.venue.longitude!==null?`https://yandex.uz/maps/?text=${invitation.venue.latitude},${invitation.venue.longitude}`:content.address||content.venueName?`https://yandex.uz/maps/?text=${encodeURIComponent(content.address||content.venueName)}`:""),
       people: content.people.filter(person => person.trim()),
       title: content.title, hosts: content.hosts, message: content.message, greeting,
       eventLabel: content.eventLabel, programHeading: content.programHeading,
@@ -54,8 +55,8 @@ export function makeStarryPayload(
       silentPlayback: !!options.preview && !!options.silentPlayback,
       reducedMotion: !!options.preview && !!options.reducedMotion,
       instant: eventInstant(invitation.startsAt, invitation.timezone)?.toISOString() ?? "",
-      mapUrl: invitation.venue.mapUrl || (invitation.venue.latitude !== null && invitation.venue.longitude !== null
-        ? `https://www.google.com/maps/search/?api=1&query=${invitation.venue.latitude},${invitation.venue.longitude}`
+      mapUrl: yandexMapUrl(invitation.venue) || (invitation.venue.latitude !== null && invitation.venue.longitude !== null
+        ? `https://yandex.uz/maps/?text=${invitation.venue.latitude},${invitation.venue.longitude}`
         : ""),
       wishesEnabled: invitation.wishes.enabled,
       music: options.preview && options.catalogMusicUrl

@@ -198,7 +198,7 @@ test("Glass Pink restores its captured venue image and source-styled map action"
   assert.match(html, /data-gp-map-link=""[\s\S]*inline-flex items-center gap-2 rounded-full border border-\[rgb\(203,93,108\)\]\/40 bg-white\/50 px-6 py-2\.5/);
   assert.match(bridge, /const map = section\.querySelector\("\[data-gp-map-link\]"\)/);
   assert.match(bridge, /if \(map && href\) \{ map\.href = href; map\.hidden = false;/);
-  assert.match(bridge, /venue\.mapUrl \|\| \(venue\.lat != null && venue\.lng != null \? `https:\/\/maps\.google\.com\/\?q=\$\{venue\.lat\},\$\{venue\.lng\}` : ""\)/);
+  assert.match(bridge, /venue\.mapUrl \|\| \(venue\.lat != null && venue\.lng != null \? `https:\/\/yandex\.uz\/maps\/\?text=\$\{venue\.lat\},\$\{venue\.lng\}` : ""\)/);
   assert.match(bridge, /else if \(map\) \{ map\.hidden = true; map\.removeAttribute\("href"\); \}/);
 });
 

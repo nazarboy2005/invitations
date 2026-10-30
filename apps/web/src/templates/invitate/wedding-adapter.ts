@@ -1,3 +1,4 @@
+import { yandexMapUrl } from "@taklifnoma/contracts/maps";
 import type { Invitation, Locale } from "@taklifnoma/contracts";
 import { getContent } from "@taklifnoma/contracts";
 import { makeLegacyData } from "@/templates/anor/renderer";
@@ -63,7 +64,7 @@ export function makeWeddingData(
     venueAddress: [content.address, content.landmark]
       .filter(Boolean)
       .join(" · "),
-    mapUrl: invitation.venue.mapUrl,
+    mapUrl: yandexMapUrl(invitation.venue),
     phoneNumber: invitation.contacts.phoneNumber,
     telegramUsername: invitation.contacts.telegramUsername,
     programHeading: content.programHeading || base.programHeading,

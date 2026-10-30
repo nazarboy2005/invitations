@@ -1,3 +1,4 @@
+import { yandexMapUrl } from "@taklifnoma/contracts/maps";
 import { mountainDataSchema, getContent, type Invitation, type Locale } from "@taklifnoma/contracts";
 import { getTemplatePreviewWishes } from "../../modules/catalog/preview-sample";
 import { eventInstant, eventWallDate, formatDate } from "../date-format";
@@ -22,7 +23,7 @@ export function makeMountainPayload(invitation: Invitation, locale: Locale, gues
       title: content.title,
       sceneTimes:[details.ceremonyTime,details.celebrationTime],
       previewWishes:options.preview && options.sampleWishes ? getTemplatePreviewWishes(language) : [],
-      mapUrl:invitation.venue.mapUrl || (invitation.venue.latitude !== null && invitation.venue.longitude !== null ? `https://www.google.com/maps/search/?api=1&query=${invitation.venue.latitude},${invitation.venue.longitude}` : content.address || content.venueName ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(content.address || content.venueName)}` : ""),
+      mapUrl:yandexMapUrl(invitation.venue) || (invitation.venue.latitude !== null && invitation.venue.longitude !== null ? `https://yandex.uz/maps/?text=${invitation.venue.latitude},${invitation.venue.longitude}` : content.address || content.venueName ? `https://yandex.uz/maps/?text=${encodeURIComponent(content.address || content.venueName)}` : ""),
       people: content.people.filter(name=>name.trim()).slice(0, 2),
       greeting: guestName && content.personalGreeting ? content.personalGreeting.replaceAll("{name}", guestName) : content.greeting,
       message: content.message,

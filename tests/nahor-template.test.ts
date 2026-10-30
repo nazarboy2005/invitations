@@ -159,7 +159,7 @@ test("Nahor maps every visible sample field and keeps blank invitations empty", 
 test("Nahor retains the captured page, styles, copy, and opening animation", () => {
   assert.equal(body(read(pkg, "index.html")), body(read(source, "index.html")));
   for (const name of ["template.css", "template.js", "i18n.js", "meta.js"])
-    assert.deepEqual(readFileSync(path.join(pkg, name)), readFileSync(path.join(source, name)));
+    assert.deepEqual(readFileSync(path.join(pkg, name), "utf8"), readFileSync(path.join(source, name), "utf8"));
   assert.match(read(pkg, "template.js"), /lift the lid/);
   assert.match(read(pkg, "template.js"), /app\.reducedMotion/);
   assert.match(read(pkg, "template.js"), /ScrollTrigger/);

@@ -104,7 +104,7 @@
     const venue=d.venue||{}, ps=all("p",section), heading=section.querySelector("h2"), name=section.querySelector(".lace-doulaise");
     put(heading,c().venue); put(name,venue.name||""); put(ps[1],venue.address||""); put(ps[2],d.date?.long?`${d.date.long}${d.date.time?` · ${d.date.time}`:""}`:"");
     const link=section.querySelector("a"), queryText=[venue.name,venue.address].filter(Boolean).join(" ");
-    const url=venue.mapUrl||((venue.lat!=null&&venue.lng!=null)?`https://maps.google.com/?q=${venue.lat},${venue.lng}`:queryText?`https://maps.google.com/?q=${encodeURIComponent(queryText)}`:"");
+    const url=venue.mapUrl||((venue.lat!=null&&venue.lng!=null)?`https://yandex.uz/maps/?text=${venue.lat},${venue.lng}`:queryText?`https://yandex.uz/maps/?text=${encodeURIComponent(queryText)}`:"");
     if(link){link.href=url||"#";link.target="_blank";link.rel="noopener noreferrer";put(link.querySelector("span"),c().map);hide(link,!url);}
     hide(section,!venue.name&&!venue.address&&!url);
   }

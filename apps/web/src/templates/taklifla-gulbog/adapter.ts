@@ -1,3 +1,4 @@
+import { yandexMapUrl } from "@taklifnoma/contracts/maps";
 import { gulbogDataSchema, getContent, type Invitation, type Locale } from "@taklifnoma/contracts";
 import { eventInstant, eventWallDate, formatDate } from "../date-format";
 
@@ -25,11 +26,11 @@ export function makeGulbogPayload(invitation: Invitation, locale: Locale, option
     const greeting = guest && c.personalGreeting
       ? c.personalGreeting.replace(/\{\{?\s*(?:name|guest)\s*\}?\}/g, guest)
       : c.greeting;
-    const mapUrl = invitation.venue.mapUrl || (
+    const mapUrl = yandexMapUrl(invitation.venue) || (
       invitation.venue.latitude !== null && invitation.venue.longitude !== null
-        ? `https://www.google.com/maps/search/?api=1&query=${invitation.venue.latitude},${invitation.venue.longitude}`
+        ? `https://yandex.uz/maps/?text=${invitation.venue.latitude},${invitation.venue.longitude}`
         : c.address || c.venueName
-          ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(c.address || c.venueName)}` : ""
+          ? `https://yandex.uz/maps/?text=${encodeURIComponent(c.address || c.venueName)}` : ""
     );
     return [language, {
       brideFamily:details.brideFamily[language] ?? "",reminderTitle:details.reminderTitle[language] ?? "",reminderText:details.reminderText[language] ?? "",footerNote:details.footerNote[language] ?? null,

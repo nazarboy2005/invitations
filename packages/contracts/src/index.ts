@@ -188,7 +188,7 @@ export const pulauSehatiDataSchema = z.object({
   hotels: z.array(z.object({ name: short, address: z.string().max(1000), distance: short, price: short, bookingUrl: safeUrl, note: z.string().max(1000) })).max(2).default([]),
   media: z.object({ videoUrl: safeUrl, liveUrl: safeUrl, intro: z.string().max(1000) }).default({ videoUrl: "", liveUrl: "", intro: "" }),
   giftWell: z.object({ enabled: z.boolean(), currencyLabel: short }).default({ enabled: false, currencyLabel: "UZS" }),
-  secondaryEvent: z.object({ enabled: z.boolean(), date: z.string().max(50), time: z.string().max(10), label: short, venueName: short, address: z.string().max(1000), mapUrl: safeUrl }).default({ enabled: false, date: "", time: "", label: "", venueName: "", address: "", mapUrl: "" }),
+  secondaryEvent: z.object({ enabled: z.boolean(), date: z.string().max(50), time: z.string().max(10), label: short, venueName: short, address: z.string().max(1000), mapUrl: safeUrl, placeUri: z.string().max(2000).regex(/^ymapsbm1:\/\/(?:org|geo)\?/).optional(), latitude: z.number().min(-90).max(90).nullable().optional(), longitude: z.number().min(-180).max(180).nullable().optional() }).default({ enabled: false, date: "", time: "", label: "", venueName: "", address: "", mapUrl: "" }),
   storyDates: z.record(z.string().max(100), z.string().max(50)).default({}),
   coInviters: z.string().max(1000).default(""),
   missions: z.array(z.object({ title: short, description: z.string().max(1000), reward: short })).max(5).default([]),
@@ -269,6 +269,7 @@ export const invitationSchema = z
       latitude: z.number().min(-90).max(90).nullable(),
       longitude: z.number().min(-180).max(180).nullable(),
       mapUrl: safeUrl,
+      placeUri: z.string().max(2000).regex(/^ymapsbm1:\/\/(?:org|geo)\?/).optional(),
     }),
     program: z
       .array(z.object({ id: z.string().max(100), time: z.string().max(10) }))

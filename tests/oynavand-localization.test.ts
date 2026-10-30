@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync } from "node:fs";
+import { readFileSync } from "./helpers/source-files";
 import test from "node:test";
 import { runInNewContext } from "node:vm";
 
@@ -87,7 +88,7 @@ test("Oynavand keeps captured markup, visual source, and interactions", () => {
     'data-list="wishes"',
     'data-wishes-form',
     'data-music-toggle',
-    'data-map="google"',
+    'data-map="secondary"',
     'data-slot="toyona.cardNumber"',
   ]) {
     assert.ok(body(html).includes(marker), `${marker} is missing`);

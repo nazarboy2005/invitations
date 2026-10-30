@@ -20,7 +20,7 @@ export function proxy(request: NextRequest) {
     `script-src 'self' 'nonce-${nonce}' 'strict-dynamic'${dev ? " 'unsafe-eval'" : ""}`,
     "style-src 'self' 'unsafe-inline'", // Existing form components use style attributes.
     `img-src 'self' data: blob: ${storageOrigin}`,
-    "frame-src 'self' https://www.google.com https://maps.google.com https://www.youtube.com https://www.youtube-nocookie.com",
+    "frame-src 'self' https://www.google.com https://yandex.uz/maps/ https://www.youtube.com https://www.youtube-nocookie.com",
     "font-src 'self'",
     `media-src 'self' blob: ${storageOrigin}`,
     `connect-src 'self' ${storageOrigin}${dev ? " ws://127.0.0.1:* ws://localhost:*" : ""}`,

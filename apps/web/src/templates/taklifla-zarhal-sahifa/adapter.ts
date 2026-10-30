@@ -1,3 +1,4 @@
+import { yandexMapUrl } from "@taklifnoma/contracts/maps";
 import { getContent, type Invitation, type Locale } from "@taklifnoma/contracts";
 import { eventInstant, formatDate } from "../date-format";
 import { createTemplatePreviewSample, getTemplatePreviewWishes } from "@/modules/catalog/preview-sample";
@@ -57,7 +58,7 @@ export function makeZarhalPayload(invitation: Invitation, locale: Locale, option
       eventInstant: eventInstant(invitation.startsAt, invitation.timezone)?.getTime() ?? null,
       gallery,
       previewMedia: sampleMedia,
-      mapUrl: invitation.venue.mapUrl,
+      mapUrl: yandexMapUrl(invitation.venue),
       coordinates: { latitude: invitation.venue.latitude, longitude: invitation.venue.longitude },
       wishesEnabled: invitation.wishes.enabled,
       invitationId: options.invitationId,

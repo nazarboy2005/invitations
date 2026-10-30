@@ -487,13 +487,13 @@
     tx(paragraphs[1], venue.address || "");
     const link = node.querySelector("a");
     const query = [venue.name, venue.address].filter(Boolean).join(" ");
-    const url = venue.mapUrl || (venue.lat != null && venue.lng != null ? `https://maps.google.com/?q=${venue.lat},${venue.lng}` : query ? `https://maps.google.com/?q=${encodeURIComponent(query)}` : "");
+    const url = venue.mapUrl || (venue.lat != null && venue.lng != null ? `https://yandex.uz/maps/?text=${venue.lat},${venue.lng}` : query ? `https://yandex.uz/maps/?text=${encodeURIComponent(query)}` : "");
     if (link) { link.href = url || "#"; tx(link, c.map); hide(link, !url); }
     const frame = node.querySelector("[data-jasmine-map]");
     if (frame && venue.lat != null && venue.lng != null) {
-      frame.src = `https://maps.google.com/maps?q=${venue.lat},${venue.lng}&z=15&output=embed`; hide(frame, false);
+      frame.src = `/maps/venue?point=${venue.lat},${venue.lng}&z=15`; hide(frame, false);
     } else if (frame && query) {
-      frame.src = `https://maps.google.com/maps?q=${encodeURIComponent(query)}&z=15&output=embed`; hide(frame, false);
+      frame.src = `/maps/venue?point=${encodeURIComponent(query)}&z=15`; hide(frame, false);
     } else if (frame) { frame.removeAttribute("src"); hide(frame, true); }
     hide(node, !venue.name && !venue.address && !url);
   }

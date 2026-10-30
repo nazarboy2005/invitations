@@ -51,7 +51,7 @@ test("all locale content, personalized greeting, timezone, dress palette IDs map
     assert.equal(payload.content.hosts, c.hosts || c.people.join(" & "));
     assert.equal(payload.content.greeting, c.personalGreeting.replaceAll("{name}", "<Guest>"));
     assert.equal(payload.content.message, c.message);
-    assert.equal(payload.mapUrl, "https://www.google.com/maps/search/?api=1&query=41.3,69.2");
+    assert.equal(payload.mapUrl, "https://yandex.uz/maps/?text=41.3,69.2");
     assert.deepEqual(payload.dressCode.colors.map(c => c.id), invitation.dressCode.colors.map(c => c.id));
     assert.equal(payload.guestToken, "opaque");
     assert.equal(payload.locale, locale);

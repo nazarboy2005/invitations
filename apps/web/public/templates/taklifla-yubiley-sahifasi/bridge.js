@@ -94,7 +94,7 @@
     $$(".stat-val").forEach(node=>{if(node.textContent.endsWith("+")){const value=node.textContent;node.textContent=value.slice(0,-1);const plus=document.createElement("span");plus.className="plus";plus.textContent="+";node.append(plus);}});
     visible(".numbers", data.statistics.length);
     const map = $(".venue-map"); map.href=data.mapUrl || "#"; map.hidden=!data.mapUrl;
-    map.setAttribute("aria-label", "Google Maps");
+    map.setAttribute("aria-label", "Yandex Maps");
 
     text(".agenda-head .eyebrow", t.agenda);
     text(".agenda-head h2", data.programHeading || t.stages);

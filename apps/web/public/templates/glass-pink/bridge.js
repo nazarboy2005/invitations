@@ -1207,7 +1207,7 @@
     hide(section, !present);
     if (!present) return;
     const map = section.querySelector("[data-gp-map-link]");
-    const href = venue.mapUrl || (venue.lat != null && venue.lng != null ? `https://maps.google.com/?q=${venue.lat},${venue.lng}` : "");
+    const href = venue.mapUrl || (venue.lat != null && venue.lng != null ? `https://yandex.uz/maps/?text=${venue.lat},${venue.lng}` : "");
     if (map && href) { map.href = href; map.hidden = false; text(map.querySelector("[data-gp-map-label]"), localCopy().map); }
     else if (map) { map.hidden = true; map.removeAttribute("href"); }
   }

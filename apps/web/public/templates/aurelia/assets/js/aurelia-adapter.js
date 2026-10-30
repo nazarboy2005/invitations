@@ -39,7 +39,7 @@
     const countdown = $(".countdown"); if (countdown) countdown.hidden = !data.dateTime;
     const venue = $(".venue"); if (venue) venue.hidden = !(data.venue?.name || data.venue?.address || data.venue?.mapUrl || data.venue?.lat != null);
     const map = $("#venueMap");
-    const mapUrl = data.venue?.mapUrl || (data.venue?.lat != null && data.venue?.lng != null ? `https://maps.google.com/?q=${data.venue.lat},${data.venue.lng}` : "");
+    const mapUrl = data.venue?.mapUrl || (data.venue?.lat != null && data.venue?.lng != null ? `https://yandex.uz/maps/?text=${data.venue.lat},${data.venue.lng}` : "");
     if (map) { map.href = mapUrl; map.hidden = !mapUrl; map.textContent = t.map; }
 
     const gallery = (data.gallery || []).filter((item) => item.src);

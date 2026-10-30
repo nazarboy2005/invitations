@@ -50,7 +50,7 @@ Object.assign(window.MARHAMAT_I18N = window.MARHAMAT_I18N || {}, {
   "Tilak yuborish": ["Отправить пожелание", "Send your wish"],
   "To‘yona": ["Тойона", "Wedding gift"], "To‘yona ma’lumotlarini ko‘rish": ["Посмотреть реквизиты", "View gift details"],
   "Nusxa olish": ["Скопировать", "Copy"], "Bog‘lanish uchun": ["Контакты", "Contact"],
-  "Yandex xaritada": ["На карте Яндекса", "Open Yandex Maps"], "Google xaritada": ["На карте Google", "Open Google Maps"],
+  "Yandex xaritada": ["На карте Яндекса", "Open Yandex Maps"], "Yandex xaritada": ["На карте Yandex", "Open Yandex Maps"],
   "Mahalla hovlisi": ["Двор махалли", "Mahalla courtyard"], "Mahalla hovlisi.": ["Двор махалли.", "Mahalla courtyard."],
   "Tonggi mahalla hovlisida qozon": ["Казан во дворе махалли на рассвете", "A qozon in the mahalla courtyard at dawn"],
   "Tong yorishayotgan mahalla": ["Махалля в лучах рассвета", "The mahalla at daybreak"],

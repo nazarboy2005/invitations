@@ -1,4 +1,5 @@
 "use client";
+import { useInvitationMaps } from "@/templates/use-invitation-maps";
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { Invitation, Locale } from "@taklifnoma/contracts";
@@ -33,6 +34,7 @@ export function AndalusDarvozasiInvitation({
   silentPlayback = false,
 }: Props) {
   const frame = useRef<HTMLIFrameElement>(null);
+  useInvitationMaps(frame);
   const [frameLocale, setFrameLocale] = useState(locale);
   useEffect(() => setFrameLocale(locale), [locale]);
 

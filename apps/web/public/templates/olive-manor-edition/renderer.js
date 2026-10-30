@@ -34,7 +34,7 @@
     const calendarHref = calendarRange ? `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(data.title || people.join(" & "))}&dates=${calendarRange}&details=${encodeURIComponent(data.message || "")}&location=${encodeURIComponent([venue.name,venue.address].filter(Boolean).join(" "))}` : "";
     const contacts = (data.contacts || []).filter(x => x.value && safeUrl(x.href));
     const coords = venue.lat != null && venue.lng != null ? `${venue.lat},${venue.lng}` : "";
-    const mapHref = safeUrl(venue.mapUrl) || (coords ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(coords)}` : venue.address ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent([venue.name,venue.address].filter(Boolean).join(" "))}` : "");
+    const mapHref = safeUrl(venue.mapUrl) || (coords ? `https://yandex.uz/maps/?text=${encodeURIComponent(coords)}` : venue.address ? `https://yandex.uz/maps/?text=${encodeURIComponent([venue.name,venue.address].filter(Boolean).join(" "))}` : "");
     const gift = data.toyona || {};
     const giftVisible = gift.enabled && (gift.cardNumber || gift.cardHolder || gift.note);
     const rsvpVisible = data.rsvp?.enabled;

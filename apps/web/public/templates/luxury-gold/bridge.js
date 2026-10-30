@@ -217,7 +217,7 @@
     const mapUrl =
       venue.mapUrl ||
       (venue.latitude && venue.longitude
-        ? `https://maps.google.com/?q=${venue.latitude},${venue.longitude}`
+        ? `https://yandex.uz/maps/?text=${venue.latitude},${venue.longitude}`
         : "");
     if (map) {
       map.href = mapUrl || "#";

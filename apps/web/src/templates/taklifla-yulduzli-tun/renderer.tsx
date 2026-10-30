@@ -1,4 +1,5 @@
 "use client";
+import { useInvitationMaps } from "@/templates/use-invitation-maps";
 
 import { useEffect, useMemo, useRef } from "react";
 import type { Invitation, Locale } from "@taklifnoma/contracts";
@@ -15,6 +16,7 @@ type Props = {
 /** Shared native source renderer for catalog, creator and public display. */
 export function TakliflaYulduzliTun({ invitation, invitationId, locale, guestName = "", guestToken = "", preview = false, fullPreview = false, catalogMusic = false, silentPlayback = false, qaReducedMotion = false }: Props) {
   const frame = useRef<HTMLIFrameElement>(null);
+  useInvitationMaps(frame);
   const message = useMemo(() => makeStarryPayload(invitation, locale, {
     invitationId, guestName, guestToken, preview, sampleWishes:preview&&catalogMusic,silentPlayback, reducedMotion: qaReducedMotion,
     catalogMusicUrl: preview && catalogMusic ? CATALOG_PREVIEW_MUSIC.url : undefined,

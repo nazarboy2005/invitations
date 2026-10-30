@@ -1,3 +1,4 @@
+import { yandexMapUrl } from "@taklifnoma/contracts/maps";
 import type { Invitation, Locale } from "@taklifnoma/contracts";
 import { getContent } from "@taklifnoma/contracts";
 import { eventInstant, eventWallDate, formatDate } from "../date-format";
@@ -67,7 +68,7 @@ export function makeNahorgiOshData(
       landmark: content.landmark,
       lat: invitation.venue.latitude,
       lng: invitation.venue.longitude,
-      mapUrl: invitation.venue.mapUrl,
+      mapUrl: yandexMapUrl(invitation.venue),
     },
     contacts: source.contacts,
     rsvp: invitation.rsvp,

@@ -18,7 +18,7 @@ Object.assign(window.MARHAMAT_I18N = window.MARHAMAT_I18N || {}, {
  "Bir dasturxon atrofida": ["За одним столом", "Around one family table"],
  "Uchrashuv manzili": ["Место встречи", "Gathering place"],
  "Yubiley manzili": ["Место юбилея", "Jubilee venue"],
- "Yandex xaritada": ["На Яндекс Картах", "On Yandex Maps"], "Google xaritada": ["В Google Картах", "On Google Maps"],
+ "Yandex xaritada": ["На Яндекс Картах", "On Yandex Maps"], "Yandex xaritada": ["В Яндекс Картах", "On Yandex Maps"],
  "Kuz oqshomiga": ["Для осеннего вечера", "For an autumn evening"],
  "Kiyinish uslubi": ["Стиль одежды", "What to wear"],
  "Kuz ranglaridagi nafis, o‘zingizga qulay libos tanlang. Oqshomimiz oilaviy, samimiy va ehtiromga boy bo‘ladi.": ["Выберите изящный и удобный наряд в осенних тонах. Наш вечер будет семейным, душевным и полным уважения.", "Choose an elegant, comfortable outfit in autumn colours. Our evening will be warm, intimate and full of respect."],

@@ -1,4 +1,5 @@
 "use client";
+import { useInvitationMaps } from "@/templates/use-invitation-maps";
 
 import { useEffect, useMemo, useRef } from "react";
 import type { Invitation, Locale } from "@taklifnoma/contracts";
@@ -20,6 +21,7 @@ export function TakliflaQogozErtagiInvitation({
   catalogMusic = false, silentPlayback = false, qaReducedMotion = false,
 }: Props) {
   const frame = useRef<HTMLIFrameElement>(null);
+  useInvitationMaps(frame);
   const message = useMemo(() => {
     const value = makeQogozPayload(invitation, locale, {
       invitationId, guestName, guestToken, preview, sampleWishes:sampleWishes||catalogMusic,

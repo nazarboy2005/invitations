@@ -1,4 +1,5 @@
 "use client";
+import { useInvitationMaps } from "@/templates/use-invitation-maps";
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { Invitation, Locale } from "@taklifnoma/contracts";
 import {CATALOG_PREVIEW_MUSIC} from "../../modules/catalog/catalog-music";
@@ -8,6 +9,7 @@ import styles from "./renderer.module.css";
 type Props = { invitation: Invitation; invitationId: string; locale: Locale; guestName?: string; guestToken?: string; preview?: boolean; fullPreview?: boolean; silentPlayback?: boolean; qaReducedMotion?: boolean;catalogMusic?:boolean };
 export function SakuraGuliInvitation(props: Props) {
   const frame = useRef<HTMLIFrameElement>(null);
+  useInvitationMaps(frame);
   const [locale, setLocale] = useState(props.locale);
   useEffect(() => setLocale(props.locale), [props.locale]);
   const payload=useMemo(()=>{const value=makeSakuraPayload(props.invitation,locale,{...props,reducedMotion:props.qaReducedMotion,sampleWishes:props.preview&&props.catalogMusic});if(props.preview&&props.catalogMusic)value.musicUrl=CATALOG_PREVIEW_MUSIC.url;return value;},[props.invitation,locale,props.invitationId,props.guestName,props.guestToken,props.preview,props.catalogMusic,props.silentPlayback,props.qaReducedMotion]);

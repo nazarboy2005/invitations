@@ -1,3 +1,4 @@
+import { yandexMapUrl } from "@taklifnoma/contracts/maps";
 import {
   getContent,
   type Invitation,
@@ -96,9 +97,9 @@ export function makeFasllarPayload(
   const lat = invitation.venue.latitude,
     lng = invitation.venue.longitude;
   const mapUrl =
-    invitation.venue.mapUrl ||
+    yandexMapUrl(invitation.venue) ||
     (lat !== null && lng !== null
-      ? `https://www.google.com/maps/search/?api=1&query=${lat},${lng}`
+      ? `https://yandex.uz/maps/?text=${lat},${lng}`
       : "");
   return {
     type: `${FASLLAR_ID}:update` as const,

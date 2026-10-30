@@ -17,13 +17,13 @@ import {
   hasAuthoredInvitationContent,
 } from "./preview-sample";
 
-test("every design shares event content and the canonical Google Maps venue", () => {
+test("every design shares event content and the canonical Yandex Maps venue", () => {
   const fixture = JSON.parse(readFileSync(join(process.cwd(), "apps/web/src/modules/catalog/preview-sample.json"), "utf8"));
   const profiles = new Map<string, unknown>();
   for (const template of TEMPLATES) {
     const sample = createTemplatePreviewSample(template.id);
     assert.deepEqual(sample.venue, fixture.eventSamples[sample.eventType]?.venue ?? fixture.venue);
-    assert.match(sample.venue.mapUrl, /^https:\/\/www\.google\.com\/maps/);
+    assert.match(sample.venue.mapUrl, /^https:\/\/yandex\.uz\/maps/);
     const shared = { content: sample.content, program: sample.program, venue: sample.venue,
       startsAt: sample.startsAt, contacts: sample.contacts, gift: sample.gift,
       story: sample.story, artists: sample.artistLineup, age: sample.celebrantAge };

@@ -1,0 +1,16 @@
+.root { position: relative; }
+.inputWrap { position: relative; }
+.inputWrap input { padding-right: 44px !important; }
+.icon { position: absolute; right: 15px; top: 50%; transform: translateY(-50%); color: #8c6d62; pointer-events: none; }
+.loading { animation: spin .8s linear infinite; }
+.list { position: absolute; z-index: 30; top: calc(100% + 8px); left: 0; right: 0; padding: 6px; margin: 0; list-style: none; border: 1px solid #e0d7cd; border-radius: 16px; background: #fffdf9; box-shadow: 0 16px 38px #513d2920; max-height: 300px; overflow-y: auto; }
+.option { display: flex; align-items: flex-start; gap: 11px; width: 100%; padding: 12px !important; border: 0 !important; border-radius: 10px !important; background: transparent; text-align: left; color: #3e342d; cursor: pointer; }
+.option:hover, .active { background: #f2ece4 !important; }
+.option svg { flex: 0 0 auto; margin-top: 3px; color: #8d3a4b; }
+.option strong { display: block; font-size: 14px; font-weight: 600; }
+.option small { display: block; margin-top: 3px; font-size: 12px; line-height: 1.5; color: #807267; }
+.attribution { padding: 8px 12px 4px; text-align: right; font-size: 10px; color: #918276; }
+.status { display: block; margin-top: 7px; color: #8b594c; font-size: 12px; line-height: 1.5; }
+.confirmed { color: #487555; }
+@keyframes spin { to { rotate: 360deg; } }
+@media (prefers-reduced-motion: reduce) { .loading { animation: none; } }

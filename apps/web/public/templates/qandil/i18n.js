@@ -19,7 +19,7 @@ Object.assign(window.MARHAMAT_I18N = window.MARHAMAT_I18N || {}, {
   "soat": ["часов", "hours"], "daqiqa": ["минут", "minutes"], "soniya": ["секунд", "seconds"],
   "Kalendarga qo‘shish": ["Добавить в календарь", "Add to calendar"], "To‘y dasturi": ["Программа торжества", "Celebration schedule"],
   "To‘y manzili": ["Место торжества", "Venue"], "Yandex xaritada": ["На карте Яндекса", "Open in Yandex Maps"],
-  "Google xaritada": ["На Google Картах", "Open in Google Maps"], "Lahzalar": ["Моменты", "Moments"],
+  "Yandex xaritada": ["На Яндекс Картах", "Open in Yandex Maps"], "Lahzalar": ["Моменты", "Moments"],
   "Tashrifingizni tasdiqlang": ["Подтвердите участие", "Please RSVP"], "Kelaman": ["Буду", "Joyfully attending"],
   "Kelmayman": ["Не смогу", "Unable to attend"], "Hali bilmayman": ["Пока не знаю", "Not sure yet"],
   "Necha kishi bo‘lasiz?": ["Сколько вас будет?", "How many guests?"], "Javobni yuborish": ["Отправить ответ", "Send response"],

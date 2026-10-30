@@ -15,7 +15,7 @@ export function createStudioPreviewInvitation(
     invitation.venue.mapUrl.trim() ||
     (invitation.venue.latitude !== null &&
       invitation.venue.longitude !== null) ||
-    Object.values(invitation.content).some((content) => content.address.trim()),
+    Object.values(invitation.content).some((content) => content.address.trim() || content.venueName.trim()),
   );
   const content = { ...invitation.content };
   for (const locale of invitation.enabledLocales) {

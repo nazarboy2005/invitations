@@ -1,3 +1,4 @@
+import { yandexMapUrl } from "@taklifnoma/contracts/maps";
 import { fayzliXonadonDataSchema, getContent, type Invitation, type Locale } from "@taklifnoma/contracts";
 import { eventInstant, formatDate } from "../date-format";
 
@@ -44,10 +45,10 @@ export function makeXonadonPayload(invitation: Invitation, locale: Locale, optio
       timeLabel: formatDate(invitation.startsAt, locale, invitation.timezone, {
         hour: "2-digit", minute: "2-digit", hourCycle: "h23",
       }),
-      mapUrl: invitation.venue.mapUrl || (
+      mapUrl: yandexMapUrl(invitation.venue) || (
         invitation.venue.latitude !== null && invitation.venue.longitude !== null
-          ? `https://www.google.com/maps/search/?api=1&query=${invitation.venue.latitude},${invitation.venue.longitude}`
-          : content.address ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(content.address)}` : ""
+          ? `https://yandex.uz/maps/?text=${invitation.venue.latitude},${invitation.venue.longitude}`
+          : content.address ? `https://yandex.uz/maps/?text=${encodeURIComponent(content.address)}` : ""
       ),
       rsvp: {
         enabled: invitation.rsvp.enabled,

@@ -16,7 +16,7 @@ Object.assign(window.MARHAMAT_I18N = window.MARHAMAT_I18N || {}, {
   "BAYRAM DASTURI": ["ПРОГРАММА ВЕЧЕРА", "EVENING PROGRAM"],
   "Oqshom rejasi": ["План вечера", "Evening plan"],
   "UCHRASHUV JOYI": ["МЕСТО ВСТРЕЧИ", "VENUE"], "Manzil": ["Адрес", "Location"],
-  "Yandex xaritada": ["На карте Яндекса", "Open Yandex Maps"], "Google xaritada": ["На карте Google", "Open Google Maps"],
+  "Yandex xaritada": ["На карте Яндекса", "Open Yandex Maps"], "Yandex xaritada": ["На карте Yandex", "Open Yandex Maps"],
   "KECHKI LIBOS": ["ВЕЧЕРНИЙ ОБРАЗ", "EVENING ATTIRE"], "Dress-kod": ["Дресс-код", "Dress code"],
   "BAYRAMDAN LAHZALAR": ["МГНОВЕНИЯ ПРАЗДНИКА", "CELEBRATION MOMENTS"], "Fotozona": ["Фотогалерея", "Photo moments"],
   "Suratlarni ko‘rish uchun suring": ["Листайте фотографии", "Swipe to browse photos"],

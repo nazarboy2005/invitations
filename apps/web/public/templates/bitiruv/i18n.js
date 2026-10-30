@@ -25,7 +25,7 @@ Object.assign(window.MARHAMAT_I18N = window.MARHAMAT_I18N || {}, {
   "Birga nishonlaymiz": ["Отпразднуем вместе", "Let’s celebrate together"],
   "Bayram manzili": ["Место праздника", "Celebration venue"],
   "Yandex xaritada": ["В Яндекс Картах", "On Yandex Maps"],
-  "Google xaritada": ["В Google Картах", "On Google Maps"],
+  "Yandex xaritada": ["В Яндекс Картах", "On Yandex Maps"],
   "05 / KIYINISH USLUBI": ["05 / СТИЛЬ ОДЕЖДЫ", "05 / DRESS CODE"],
   "Dress-kod": ["Дресс-код", "Dress code"],
   "06 / SINFDOSH XOTIRALARI": ["06 / ВОСПОМИНАНИЯ ОДНОКЛАССНИКОВ", "06 / CLASS MEMORIES"],

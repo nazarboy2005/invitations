@@ -1,5 +1,6 @@
 import type { Invitation, InvitationContent } from "./index";
 import { TEMPLATE_CAPABILITIES } from "./template-capabilities";
+import { normalizeVenue } from "./maps";
 
 export type TemplateCapabilities = {
   maps: boolean;
@@ -56,7 +57,7 @@ export function normalizeInvitation(invitation: Invitation): Invitation {
     program: c.program ? invitation.program : [],
     story: invitation.story.slice(0, c.story),
     artistLineup: invitation.artistLineup.slice(0, c.artists),
-    venue: c.maps ? invitation.venue : { latitude: null, longitude: null, mapUrl: "" },
+    venue: c.maps ? normalizeVenue(invitation.venue) : { latitude: null, longitude: null, mapUrl: "" },
     dressCode: c.dressCode ? invitation.dressCode : { enabled: false, style: {}, text: {}, note: {}, colors: [] },
     music: c.music ? { ...invitation.music, enabled: invitation.music.enabled && !!invitation.music.url.trim() } : {
       enabled: false, assetId: null, url: "", filename: "",

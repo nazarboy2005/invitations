@@ -34,7 +34,7 @@ Object.assign(window.MARHAMAT_I18N = window.MARHAMAT_I18N || {}, {
   "04 / MANZIL": ["04 / МЕСТО", "04 / VENUE"],
   "Uchrashuv nuqtasi": ["Место встречи", "The meeting point"],
   "Mehmonlar uchun valet parking mavjud.": ["Для гостей доступен valet parking.", "Valet parking is available for guests."],
-  "Yandex xaritada ↗": ["На карте Yandex ↗", "Open in Yandex Maps ↗"], "Google xaritada ↗": ["На карте Google ↗", "Open in Google Maps ↗"],
+  "Yandex xaritada ↗": ["На карте Yandex ↗", "Open in Yandex Maps ↗"], "Yandex xaritada ↗": ["На карте Yandex ↗", "Open in Yandex Maps ↗"],
   "05 / ETIKET": ["05 / ДРЕСС-КОД", "05 / DRESS CODE"], "Dress-kod": ["Дресс-код", "Dress code"],
   "Kechki rasmiy libos tavsiya etiladi. To‘q ranglar va saranjom siluetlar oqshom ruhiga mos keladi.": ["Рекомендуется вечерний официальный наряд. Тёмные цвета и элегантный силуэт подойдут атмосфере вечера.", "Formal evening attire is recommended. Dark tones and polished silhouettes suit the occasion."],
   "Grafit": ["Графит", "Graphite"], "Moviy": ["Синий", "Blue"], "Kumush": ["Серебро", "Silver"],

@@ -1,3 +1,4 @@
+import { yandexMapUrl } from "@taklifnoma/contracts/maps";
 import {
   getContent,
   pulauSehatiDataSchema,
@@ -66,7 +67,7 @@ export function makePulauSehatiPayload(
           hotels: extra.hotels,
           media: extra.media,
           giftWell: extra.giftWell,
-          secondaryEvent: { ...extra.secondaryEvent, mapUrl: /^https?:\/\//i.test(extra.secondaryEvent.mapUrl) ? extra.secondaryEvent.mapUrl : "" },
+          secondaryEvent: { ...extra.secondaryEvent, mapUrl: yandexMapUrl({ latitude: extra.secondaryEvent.latitude ?? null, longitude: extra.secondaryEvent.longitude ?? null, mapUrl: extra.secondaryEvent.mapUrl, placeUri: extra.secondaryEvent.placeUri }, extra.secondaryEvent.address || extra.secondaryEvent.venueName) },
           storyDates: extra.storyDates,
           coInviters: extra.coInviters,
           missions: extra.missions,

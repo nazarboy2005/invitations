@@ -155,9 +155,9 @@
     tx(sections[6]?.querySelector("p"), venue.address);
     const mapLink = sections[6]?.querySelector("a");
     const query = [venue.name,venue.address].filter(Boolean).join(" ");
-    const mapUrl = venue.mapUrl || (venue.lat!=null&&venue.lng!=null ? `https://maps.google.com/?q=${venue.lat},${venue.lng}` : query ? `https://maps.google.com/?q=${encodeURIComponent(query)}` : "");
+    const mapUrl = venue.mapUrl || (venue.lat!=null&&venue.lng!=null ? `https://yandex.uz/maps/?text=${venue.lat},${venue.lng}` : query ? `https://yandex.uz/maps/?text=${encodeURIComponent(query)}` : "");
     if(mapLink){mapLink.href=mapUrl||"#";tx(mapLink,c.map);hide(mapLink,!mapUrl);}
-    const mapFrame=sections[6]?.querySelector("iframe"); if(mapFrame){if(venue.lat!=null&&venue.lng!=null){mapFrame.src=`https://maps.google.com/maps?q=${venue.lat},${venue.lng}&z=15&output=embed`;hide(mapFrame,false);}else{mapFrame.removeAttribute("src");hide(mapFrame,true);}}
+    const mapFrame=sections[6]?.querySelector("iframe"); if(mapFrame){if(venue.lat!=null&&venue.lng!=null){mapFrame.src=`/maps/venue?point=${venue.lat},${venue.lng}&z=15`;hide(mapFrame,false);}else{mapFrame.removeAttribute("src");hide(mapFrame,true);}}
     hide(sections[6],!venue.name&&!venue.address&&!mapUrl);
     const contacts=d.contacts||[];const contactSection=sections[7];
     tx(contactSection?.querySelector("h3"),c.contacts);

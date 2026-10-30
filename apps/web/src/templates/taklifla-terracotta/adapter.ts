@@ -1,3 +1,4 @@
+import { yandexMapUrl } from "@taklifnoma/contracts/maps";
 import { terracottaDataSchema, getContent, type Invitation, type Locale } from "@taklifnoma/contracts";
 import { getTemplatePreviewWishes } from "../../modules/catalog/preview-sample";
 import { eventInstant, eventWallDate, formatDate } from "../date-format";
@@ -36,8 +37,8 @@ export function makeTerracottaPayload(invitation: Invitation, locale: Locale, op
       date:wall?`${String(wall.getUTCDate()).padStart(2,"0")} · ${String(wall.getUTCMonth()+1).padStart(2,"0")} · ${wall.getUTCFullYear()}`:"",
       formalDate: formatDate(invitation.startsAt, locale, invitation.timezone, { weekday: "long", day: "numeric", month: "long", year: "numeric", hour: "2-digit", minute: "2-digit" }),
       instant: eventInstant(invitation.startsAt, invitation.timezone)?.toISOString() ?? "",
-      mapUrl: invitation.venue.mapUrl || (invitation.venue.latitude !== null && invitation.venue.longitude !== null
-        ? `https://www.google.com/maps/search/?api=1&query=${invitation.venue.latitude},${invitation.venue.longitude}` : content.address||content.venueName?`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(content.address||content.venueName)}`:""),
+      mapUrl: yandexMapUrl(invitation.venue) || (invitation.venue.latitude !== null && invitation.venue.longitude !== null
+        ? `https://yandex.uz/maps/?text=${invitation.venue.latitude},${invitation.venue.longitude}` : content.address||content.venueName?`https://yandex.uz/maps/?text=${encodeURIComponent(content.address||content.venueName)}`:""),
       program: invitation.program.map((item) => ({ ...item,
         title: content.programTitles[item.id] ?? "",
         description: content.programDescriptions[item.id] ?? "",

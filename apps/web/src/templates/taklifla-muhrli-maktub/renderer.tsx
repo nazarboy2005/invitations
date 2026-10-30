@@ -1,4 +1,5 @@
 "use client";
+import { useInvitationMaps } from "@/templates/use-invitation-maps";
 
 import { useEffect, useMemo, useRef } from "react";
 import type { Invitation, Locale } from "@taklifnoma/contracts";
@@ -14,6 +15,7 @@ export type MuhrliMaktubProps = EnvelopeOptions & {
 /** Source renderer shared by catalog, studio and public invitations. */
 export function MuhrliMaktubInvitation(props: MuhrliMaktubProps) {
   const frame = useRef<HTMLIFrameElement>(null);
+  useInvitationMaps(frame);
   const message = useMemo(() => makeEnvelopePayload(props.invitation, props.locale, {
     ...props, catalogMusic: props.catalogMusic ?? props.fullPreview,
   }), [

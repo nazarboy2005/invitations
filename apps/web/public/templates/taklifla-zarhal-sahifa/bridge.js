@@ -112,8 +112,8 @@
     const coords = state.coordinates;
     const query = coords && coords.latitude !== null && coords.longitude !== null ? `${coords.latitude},${coords.longitude}` : [d.venueName, d.address].filter(Boolean).join(' ');
     const mapLinks = $$('.map-buttons a');
-    const mapTarget = safeURL(state.mapUrl) || `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
-    mapLinks.forEach(link => { link.href = mapTarget; link.textContent = 'Google Maps'; });
+    const mapTarget = safeURL(state.mapUrl) || `https://yandex.uz/maps/?text=${encodeURIComponent(query)}`;
+    mapLinks.forEach(link => { link.href = mapTarget; link.textContent = 'Yandex Maps'; });
     $('#wishes-section').hidden = !state.wishesEnabled;
     text('.wishes-head .script', labels.book); text('.wishes-head h2', labels.wishHeading); text('.wishes-head p', labels.wishIntro);
     name.placeholder = labels.name; name.setAttribute('aria-label', labels.name);

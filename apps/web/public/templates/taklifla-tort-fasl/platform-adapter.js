@@ -131,7 +131,7 @@
     visible("fs-hero-city-wrap", false); // No separate city field; never guess from an authored address.
     ["hero-venue","venue-name","winter-venue"].forEach((id) => text(`fs-${id}`,v.venueName));
     text("fs-venue-addr", v.address);
-    const url = safeUrl(current.mapUrl) || (v.address || v.venueName ? `https://maps.google.com/?q=${encodeURIComponent(v.address || v.venueName)}` : "");
+    const url = safeUrl(current.mapUrl) || (v.address || v.venueName ? `https://yandex.uz/maps/?text=${encodeURIComponent(v.address || v.venueName)}` : "");
     $("fs-map").href = url || "#"; visible("fs-map", Boolean(url));
     $("fs-venue-name").parentElement.hidden = !v.venueName && !v.address && !url;
     text("fs-detail-dress-text", v.dressText); visible("fs-detail-dress", Boolean(v.dressText || v.colors.length));

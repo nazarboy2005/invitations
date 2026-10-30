@@ -46,7 +46,7 @@
       put(divs[0], l.address); put(divs[1], payload.venue?.name);
       put(q("p", venueCard), [payload.venue?.address, payload.venue?.landmark].filter(Boolean).join(" · "));
       const map = q(".map-btn", venueCard);
-      const href = payload.venue?.mapUrl || (payload.venue?.lat != null ? `https://maps.google.com/?q=${payload.venue.lat},${payload.venue.lng}` : "");
+      const href = payload.venue?.mapUrl || (payload.venue?.lat != null ? `https://yandex.uz/maps/?text=${payload.venue.lat},${payload.venue.lng}` : "");
       if (map) { map.href = href || "#"; map.hidden = !href; put(q("span", map), l.map); }
       venueCard.hidden = !(payload.venue?.name || payload.venue?.address || href);
     }

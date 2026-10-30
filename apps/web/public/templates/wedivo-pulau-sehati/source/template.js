@@ -166,7 +166,7 @@
     return u;
   }
   function mapsDirUrl(dest, placeId) {
-    var u = "https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=" + encodeURIComponent(dest || window.PULAU.translate("Lokasi Acara"));
+    var u = "https://yandex.uz/maps//dir/?api=1&travelmode=driving&destination=" + encodeURIComponent(dest || window.PULAU.translate("Lokasi Acara"));
     if (placeId) { u += "&destination_place_id=" + encodeURIComponent(placeId); }
     return u;
   }

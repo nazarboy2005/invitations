@@ -15,8 +15,8 @@
   const esc = value => String(value ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
   const safeUrl = value => { if (typeof value !== "string" || !value.trim()) return ""; try { const u = new URL(value, location.origin); return ["http:","https:","tel:","mailto:"].includes(u.protocol) ? u.href : ""; } catch { return ""; } };
   const localeKey = () => data.locale === "uz-Cyrl" ? "uz-Cyrl" : labels[data.locale] ? data.locale : "uz";
-  const mapHref = () => safeUrl(data.venue?.mapUrl) || (Number.isFinite(data.venue?.lat) && Number.isFinite(data.venue?.lng) ? `https://maps.google.com/?q=${data.venue.lat},${data.venue.lng}` : "");
-  const mapEmbed = () => Number.isFinite(data.venue?.lat) && Number.isFinite(data.venue?.lng) ? `https://maps.google.com/maps?q=${data.venue.lat},${data.venue.lng}&output=embed` : "";
+  const mapHref = () => safeUrl(data.venue?.mapUrl) || (Number.isFinite(data.venue?.lat) && Number.isFinite(data.venue?.lng) ? `https://yandex.uz/maps/?text=${data.venue.lat},${data.venue.lng}` : "");
+  const mapEmbed = () => Number.isFinite(data.venue?.lat) && Number.isFinite(data.venue?.lng) ? `/maps/venue?point=${data.venue.lat},${data.venue.lng}` : "";
   const section = (kind, title, body, extra = "") => `<section class="${kind} section-shell ${extra}"><span class="section-ornament" aria-hidden="true">✦</span>${title ? `<h2 class="section-title">${esc(title)}</h2>` : ""}${body}</section>`;
   function render() {
     const l = labels[localeKey()];

@@ -4,7 +4,7 @@
     "Bu kunni birga nishonlaganingiz uchun rahmat!": ["Спасибо, что разделили с нами этот день!", "Thank you for celebrating this day with us!"],
     "daqiqa": ["минуты", "minutes"],
     "Dress-kod": ["Дресс-код", "Dress code"],
-    "Google xaritada": ["На карте Google", "View on Google Maps"],
+    "Yandex xaritada": ["На карте Yandex", "View on Yandex Maps"],
     "Hali bilmayman": ["Пока не знаю", "Not sure yet"],
     "Ismingiz": ["Ваше имя", "Your name"],
     "Javobingiz biz uchun muhim.": ["Ваш ответ важен для нас.", "Your response matters to us."],

@@ -81,7 +81,7 @@ test("Cloud Castle bridge maps the shared data and existing RSVP/wish services",
   assert.match(html, /data-landing-screenshot-id="invite-map"/);
   assert.match(js, /root\.querySelector\('\[data-landing-screenshot-id="invite-map"\]'\)/);
   assert.match(js, /cc-venue-map h-\[280px\] md:h-\[380px\] w-full max-w-\[340px\] md:max-w-\[560px\] rounded-2xl overflow-hidden/);
-  assert.match(js, /https:\/\/yandex\.uz\/map-widget\/v1\/\?ll=/);
+  assert.match(js, /\/maps\/venue\?latitude=\$\{venue\.lat\}&longitude=\$\{venue\.lng\}/);
   if (original) {
     assert.match(original, /class="h-\[280px\] md:h-\[380px\] w-full max-w-\[340px\] md:max-w-\[560px\] rounded-2xl overflow-hidden" src="https:\/\/yandex\.uz\/map-widget\/v1\/geo\//);
   }

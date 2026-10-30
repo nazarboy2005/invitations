@@ -73,9 +73,9 @@ test("Konfetti preserves captured markup, styles, translations, metadata and art
   assert.equal(body(read("index.html")), body(readCaptured("index.html")));
   for (const name of ["template.css", "i18n.js", "meta.js"])
     assert.deepEqual(
-      readFileSync(new URL(name, root)),
-      readFileSync(new URL(name, captured)),
-      `${name} remains byte-identical to its capture`,
+      readFileSync(new URL(name, root), "utf8"),
+      readFileSync(new URL(name, captured), "utf8"),
+      `${name} remains source-identical after the map migration to its capture`,
     );
   for (const name of [
     "art/venue.webp",

@@ -10,7 +10,8 @@
     "./payment": "./src/payment.ts",
     "./music": "./src/music.ts",
     "./visitor-locale": "./src/visitor-locale.ts",
-    "./capabilities": "./src/capabilities.ts"
+    "./capabilities": "./src/capabilities.ts",
+    "./maps": "./src/maps.ts"
   },
   "dependencies": {
     "zod": "^4.1.12"

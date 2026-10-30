@@ -1,4 +1,5 @@
 "use client";
+import { useInvitationMaps } from "@/templates/use-invitation-maps";
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { Invitation, Locale } from "@taklifnoma/contracts";
@@ -17,6 +18,7 @@ export function TakliflaParilarErtagiInvitation({ invitation, invitationId, loca
   guestName = "", guestToken = "", preview = false, fullPreview = false,
   sampleWishes = false, catalogMusic = false, silentPlayback = false, qaReducedMotion = false }: Props) {
   const frame = useRef<HTMLIFrameElement>(null);
+  useInvitationMaps(frame);
   const [language, setLanguage] = useState(locale);
   useEffect(() => setLanguage(locale), [locale]);
   useEffect(() => {

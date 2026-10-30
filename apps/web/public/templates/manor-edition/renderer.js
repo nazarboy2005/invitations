@@ -12,8 +12,8 @@
   const esc=v=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
   const safeUrl=v=>{if(typeof v!=="string"||!v.trim())return"";try{const u=new URL(v,location.origin);return["http:","https:","tel:","mailto:"].includes(u.protocol)?u.href:""}catch{return""}};
   const localeKey=()=>data.locale==="uz-Cyrl"?"uz-Cyrl":labels[data.locale]?data.locale:"uz";
-  const mapUrl=()=>safeUrl(data.venue?.mapUrl)||(Number.isFinite(data.venue?.lat)&&Number.isFinite(data.venue?.lng)?`https://maps.google.com/?q=${data.venue.lat},${data.venue.lng}`:"");
-  const mapEmbed=()=>Number.isFinite(data.venue?.lat)&&Number.isFinite(data.venue?.lng)?`https://maps.google.com/maps?q=${data.venue.lat},${data.venue.lng}&output=embed`:"";
+  const mapUrl=()=>safeUrl(data.venue?.mapUrl)||(Number.isFinite(data.venue?.lat)&&Number.isFinite(data.venue?.lng)?`https://yandex.uz/maps/?text=${data.venue.lat},${data.venue.lng}`:"");
+  const mapEmbed=()=>Number.isFinite(data.venue?.lat)&&Number.isFinite(data.venue?.lng)?`/maps/venue?point=${data.venue.lat},${data.venue.lng}`:"";
   function render(){
     const l=labels[localeKey()],venue=data.venue||{},date=data.date||{},guest=esc(data.guestName||""),dateText=esc(date.long||date.short||""),time=esc(date.time||"");
     const languages=(data.languages||[]).filter(Boolean);

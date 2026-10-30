@@ -1,3 +1,4 @@
+import { yandexMapUrl } from "@taklifnoma/contracts/maps";
 import { yubileySahifasiDataSchema, getContent, type Invitation, type Locale } from "@taklifnoma/contracts";
 import { formatDate } from "../date-format";
 
@@ -31,7 +32,7 @@ export function makeYubileySahifasiPayload(
       years: details.years,
       founderRole: localized(details.founderRole),
       statistics: details.statistics.map(item=>({id:item.id,value:item.value,label:localized(item.label)})),
-      mapUrl: invitation.venue.mapUrl || (invitation.venue.latitude !== null && invitation.venue.longitude !== null ? `https://www.google.com/maps/search/?api=1&query=${invitation.venue.latitude},${invitation.venue.longitude}` : (content.venueName || content.address ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent([content.venueName,content.address].filter(Boolean).join(" "))}` : "")),
+      mapUrl: yandexMapUrl(invitation.venue) || (invitation.venue.latitude !== null && invitation.venue.longitude !== null ? `https://yandex.uz/maps/?text=${invitation.venue.latitude},${invitation.venue.longitude}` : (content.venueName || content.address ? `https://yandex.uz/maps/?text=${encodeURIComponent([content.venueName,content.address].filter(Boolean).join(" "))}` : "")),
       date: formatDate(invitation.startsAt, locale, invitation.timezone, {
         day: "2-digit", month: "2-digit", year: "numeric",
       }),

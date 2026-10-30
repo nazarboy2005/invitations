@@ -1,4 +1,6 @@
 "use client";
+import { useInvitationMaps } from "@/templates/use-invitation-maps";
+import { yandexMapUrl } from "@taklifnoma/contracts/maps";
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { Invitation, Locale } from "@taklifnoma/contracts";
@@ -52,6 +54,7 @@ export function InvitateInvitation({
   qaReducedMotion = false,
 }: Props) {
   const frame = useRef<HTMLIFrameElement>(null);
+  useInvitationMaps(frame);
   const initialized = useRef<string | null>(null);
   const [frameLocale, setFrameLocale] = useState(locale);
   const templateId = invitation.templateId;
@@ -158,7 +161,7 @@ export function InvitateInvitation({
         landmark: content.landmark,
         lat: invitation.venue.latitude,
         lng: invitation.venue.longitude,
-        mapUrl: invitation.venue.mapUrl,
+        mapUrl: yandexMapUrl(invitation.venue),
       },
       programHeading: content.programHeading,
       program: invitation.program.map((entry) => ({
@@ -235,7 +238,7 @@ export function InvitateInvitation({
         landmark: content.landmark,
         lat: invitation.venue.latitude,
         lng: invitation.venue.longitude,
-        mapUrl: invitation.venue.mapUrl,
+        mapUrl: yandexMapUrl(invitation.venue),
       },
       programHeading: content.programHeading,
       program: invitation.program.map((entry) => ({
@@ -366,7 +369,7 @@ export function InvitateInvitation({
         ...source.venue,
         name: content.venueName,
         address: [content.address, content.landmark].filter(Boolean).join(", "),
-        mapUrl: invitation.venue.mapUrl,
+        mapUrl: yandexMapUrl(invitation.venue),
       },
       rsvp: invitation.rsvp,
       rsvpEnabled: invitation.rsvp.enabled,

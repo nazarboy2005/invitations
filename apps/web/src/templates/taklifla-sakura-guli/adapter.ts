@@ -1,3 +1,4 @@
+import { yandexMapUrl } from "@taklifnoma/contracts/maps";
 import type { Invitation, Locale } from "@taklifnoma/contracts";
 import { sakuraDataSchema,getContent } from "@taklifnoma/contracts";
 import {getTemplatePreviewWishes} from "../../modules/catalog/preview-sample";
@@ -29,9 +30,9 @@ export function makeSakuraPayload(invitation: Invitation, locale: Locale, option
     time: formatDate(invitation.startsAt, locale, invitation.timezone, { hour: "2-digit", minute: "2-digit" }),
     target: eventInstant(invitation.startsAt, invitation.timezone)?.getTime() ?? null,
     venueName: c.venueName, address: c.address, landmark: c.landmark,
-    mapUrl: invitation.venue.mapUrl || (invitation.venue.latitude !== null && invitation.venue.longitude !== null
-      ? `https://www.google.com/maps/search/?api=1&query=${invitation.venue.latitude},${invitation.venue.longitude}`
-      : c.address || c.venueName ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(c.address || c.venueName)}` : ""),
+    mapUrl: yandexMapUrl(invitation.venue) || (invitation.venue.latitude !== null && invitation.venue.longitude !== null
+      ? `https://yandex.uz/maps/?text=${invitation.venue.latitude},${invitation.venue.longitude}`
+      : c.address || c.venueName ? `https://yandex.uz/maps/?text=${encodeURIComponent(c.address || c.venueName)}` : ""),
     programHeading: c.programHeading,
     program: invitation.program.map(item => ({ id: item.id, time: item.time, title: c.programTitles[item.id] ?? "", description: c.programDescriptions[item.id] ?? "" })),
     dressText: invitation.dressCode.enabled ? [localized(invitation.dressCode.style), localized(invitation.dressCode.text), localized(invitation.dressCode.note), ...invitation.dressCode.colors.map(color => localized(color.name)||color.hex)].filter(Boolean).join("\n") : "",

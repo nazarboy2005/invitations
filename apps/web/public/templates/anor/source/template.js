@@ -395,7 +395,7 @@
           frame.title = data.venue?.name || 'Xarita';
           frame.loading = 'lazy';
           frame.referrerPolicy = 'no-referrer';
-          frame.src = `https://yandex.uz/map-widget/v1/?ll=${lng}%2C${lat}&z=16&pt=${lng}%2C${lat}%2Cpm2rdm`;
+          frame.src = `/maps/venue?latitude=${lat}&longitude=${lng}`;
           mapBox.append(frame);
         }
         mapBox.hidden = !mapBox.hidden;

@@ -122,10 +122,10 @@
     set("#phone-link", state.phone); $("#phone-link").href = "tel:" + (state.phone || "").replace(/[^+\d]/g, "");
     const hasCoordinates = data.venue.latitude !== null && data.venue.longitude !== null;
     const query = hasCoordinates ? `${data.venue.latitude},${data.venue.longitude}` : [data.venue.name, data.venue.address].filter(Boolean).join(" ");
-    $("#map-google").href = safeUrl(data.venue.mapUrl) || `https://maps.google.com/?q=${encodeURIComponent(query)}`;
-    $("#map-yandex").href = $("#map-google").href;
-    $("#map-yandex").textContent = "Google Maps";
-    $("#map-yandex").hidden = $("#map-google").hidden = !(query || safeUrl(data.venue.mapUrl));
+    $("#map-primary").href = safeUrl(data.venue.mapUrl) || `https://yandex.uz/maps/?text=${encodeURIComponent(query)}`;
+    $("#map-yandex").href = $("#map-primary").href;
+    $("#map-yandex").textContent = "Yandex Maps";
+    $("#map-yandex").hidden = $("#map-primary").hidden = !(query || safeUrl(data.venue.mapUrl));
     visible(".det-actions", Boolean(query || safeUrl(data.venue.mapUrl)));
     visible(".details", Boolean(data.date || !rows[1].hidden || state.phone || safeUrl(data.venue.mapUrl)));
     const photo = safeUrl(data.photo?.url); visible(".photo-sec", Boolean(photo || state.preview));

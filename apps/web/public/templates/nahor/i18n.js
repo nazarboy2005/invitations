@@ -22,7 +22,7 @@ Object.assign(window.MARHAMAT_I18N = window.MARHAMAT_I18N || {}, {
   "Davraga yo‘l": ["Дорога к нам", "Finding us"],
   "Osh manzili": ["Место плова", "Where the osh is"],
   "Yandex xaritada": ["На Яндекс Картах", "Yandex Maps"],
-  "Google xaritada": ["На Google Картах", "Google Maps"],
+  "Yandex xaritada": ["На Яндекс Картах", "Yandex Maps"],
   "Kiyinish uslubi": ["Стиль одежды", "What to wear"],
   "Dress-kod": ["Дресс-код", "Dress code"],
   "Xotiralar": ["Воспоминания", "Memories"],

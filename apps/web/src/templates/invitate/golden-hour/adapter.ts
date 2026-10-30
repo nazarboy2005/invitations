@@ -1,3 +1,4 @@
+import { yandexMapUrl } from "@taklifnoma/contracts/maps";
 import type { Invitation, Locale } from "@taklifnoma/contracts";
 import { getContent } from "@taklifnoma/contracts";
 import { makeLegacyData } from "@/templates/anor/renderer";
@@ -72,7 +73,7 @@ export function makeGoldenHourData(
       address: [content.address, content.landmark].filter(Boolean).join(" · "),
       lat: invitation.venue.latitude,
       lng: invitation.venue.longitude,
-      mapUrl: invitation.venue.mapUrl,
+      mapUrl: yandexMapUrl(invitation.venue),
     },
     dressCode: {
       enabled: invitation.dressCode.enabled,

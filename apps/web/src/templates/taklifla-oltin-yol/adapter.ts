@@ -1,3 +1,4 @@
+import { yandexMapUrl } from "@taklifnoma/contracts/maps";
 import { oltinYolDataSchema, getContent, type Invitation, type Locale } from "@taklifnoma/contracts";
 import { eventInstant, eventWallDate, formatDate } from "../date-format";
 import { getTemplatePreviewWishes } from "../../modules/catalog/preview-sample";
@@ -28,9 +29,9 @@ export function makeOltinYolPayload(
       message: c.message, eventLabel: c.eventLabel, programHeading: c.programHeading,
       date: { long: date({day:"numeric",month:"long",year:"numeric"}), numeric, weekday: date({weekday:"short"}).toLocaleUpperCase(), time: date({hour:"2-digit",minute:"2-digit",hour12:false}) },
       venue: { name:c.venueName, address:c.address, landmark:c.landmark, city,
-        mapUrl: invitation.venue.mapUrl || (invitation.venue.latitude !== null && invitation.venue.longitude !== null
-          ? `https://www.google.com/maps/search/?api=1&query=${invitation.venue.latitude},${invitation.venue.longitude}`
-          : c.address || c.venueName ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(c.address || c.venueName)}` : "") },
+        mapUrl: yandexMapUrl(invitation.venue) || (invitation.venue.latitude !== null && invitation.venue.longitude !== null
+          ? `https://yandex.uz/maps/?text=${invitation.venue.latitude},${invitation.venue.longitude}`
+          : c.address || c.venueName ? `https://yandex.uz/maps/?text=${encodeURIComponent(c.address || c.venueName)}` : "") },
       program: invitation.program.map((p) => ({id:p.id,time:p.time,title:c.programTitles[p.id] || "",description:c.programDescriptions[p.id] || ""})),
       dress: invitation.dressCode.enabled ? [localized(invitation.dressCode.style),localized(invitation.dressCode.text),localized(invitation.dressCode.note),...invitation.dressCode.colors.map((color)=>localized(color.name) || color.hex)].filter(Boolean).join("\n") : "",
       deadline: invitation.rsvp.enabled && invitation.rsvp.deadline ? formatDate(invitation.rsvp.deadline,language,invitation.timezone,{day:"numeric",month:"long"}) : "",

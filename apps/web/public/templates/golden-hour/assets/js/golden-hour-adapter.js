@@ -196,7 +196,7 @@
     text($(".location-address"), address);
     const link = $(".location-btn");
     if (link) {
-      const href = venue.mapUrl || (hasCoordinates ? `https://maps.google.com/?q=${venue.lat},${venue.lng}` : "");
+      const href = venue.mapUrl || (hasCoordinates ? `https://yandex.uz/maps/?text=${venue.lat},${venue.lng}` : "");
       link.hidden = !href;
       if (href) link.href = href; else link.removeAttribute("href");
     }
