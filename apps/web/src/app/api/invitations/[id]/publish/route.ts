@@ -6,6 +6,7 @@ import { verifySameOrigin } from "@/server/auth";
 import { apiError, privateHeaders, readJson } from "@/server/api";
 import { invitationRequestActor } from "@/server/admin-invitation-access";
 import { processPaymentNotifications } from "@/server/payment-notifications";
+import { preparePublishedCover } from "@/server/published-cover";
 export const runtime = "nodejs";
 export const maxDuration = 60;
 export async function POST(
@@ -30,7 +31,10 @@ export async function POST(
       access.admin,
     );
     after(async () => {
-      await processPaymentNotifications({ invitationId: id, limit: 2 });
+      await Promise.allSettled([
+        processPaymentNotifications({ invitationId: id, limit: 2 }),
+        preparePublishedCover({ invitationId: id }),
+      ]);
     });
     return NextResponse.json(publication, {
       headers: privateHeaders,

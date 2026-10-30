@@ -1,4 +1,5 @@
-import { NextResponse } from "next/server";
+import { NextResponse, after } from "next/server";
+import { preparePublishedCover } from "@/server/published-cover";
 import { z } from "zod";
 import { invitationSchema } from "@taklifnoma/contracts";
 import { getDb } from "@taklifnoma/database";
@@ -12,6 +13,7 @@ import { verifySameOrigin } from "@/server/auth";
 import { ApiError, apiError, privateHeaders, readJson } from "@/server/api";
 import { invitationRequestActor } from "@/server/admin-invitation-access";
 export const runtime = "nodejs";
+export const maxDuration = 60;
 type Context = { params: Promise<{ id: string }> };
 export async function GET(request: Request, { params }: Context) {
   try {
@@ -41,13 +43,12 @@ export async function PUT(request: Request, { params }: Context) {
     const access = await invitationRequestActor(request, id, user, true);
     if (!(await getOwnedInvitation(id, access.owner.id)))
       throw new ApiError(404, "NOT_FOUND", "Taklifnoma topilmadi.");
+    const saved = await saveInvitation(invitation, access.owner, access.admin);
+    if (saved.status === "published")
+      after(() => preparePublishedCover({ invitationId: id }));
     return NextResponse.json(
       {
-        invitation: await saveInvitation(
-          invitation,
-          access.owner,
-          access.admin,
-        ),
+        invitation: saved,
       },
       { headers: privateHeaders },
     );

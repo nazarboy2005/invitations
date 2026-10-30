@@ -161,6 +161,23 @@ test(
             })
             .first();
           const oldUrl = await card.locator("img").getAttribute("src");
+          const oldCacheKeys = await p.evaluate(async () =>
+            (
+              await (await caches.open("visol-invitation-covers-v1")).keys()
+            ).map((key) => key.url),
+          );
+          f.items[0].startsAt = "2028-01-01T12:00";
+          f.items[0].content["uz-Latn"].venueName = "Updated draft venue";
+          const unchanged = p.waitForResponse("**/api/invitations");
+          await refresh(p);
+          await unchanged;
+          await p.waitForTimeout(250);
+          assert.equal(
+            f.requests(),
+            2,
+            "date/venue draft edits reuse the cover",
+          );
+          assert.equal(await card.locator("img").getAttribute("src"), oldUrl);
           let release!: () => void;
           const hold = new Promise<void>((resolve) => {
             release = resolve;
@@ -197,6 +214,21 @@ test(
             );
           }, oldUrl);
           assert.equal(f.requests(), 3, "only the edited cover regenerates");
+          await p.waitForFunction(async (previous: string[]) => {
+            const cache = await caches.open("visol-invitation-covers-v1");
+            const keys = (await cache.keys()).map((key) => key.url);
+            return (
+              keys.length === 2 &&
+              keys.filter((key) => previous.includes(key)).length === 1
+            );
+          }, oldCacheKeys);
+          await p.reload();
+          await loaded(p, 2);
+          assert.equal(
+            f.requests(),
+            3,
+            "replacement persisted and old cover was removed",
+          );
           f.owner("another-cover-owner");
           await p.reload();
           await loaded(p, 2);
@@ -215,6 +247,44 @@ test(
             );
           }
           assert.deepEqual(f.errors, []);
+        },
+      );
+      await t.test(
+        "late draft capture cannot replace the current browser cover",
+        async () => {
+          const f = await fixture(),
+            p = f.page;
+          await p.goto(`${origin}/dashboard`);
+          await loaded(p);
+          const original = [...f.items[0].content["uz-Latn"].people];
+          let release!: () => void;
+          const hold = new Promise<void>((resolve) => {
+            release = resolve;
+          });
+          f.respond(async (route: any) => {
+            await hold;
+            return route.fulfill({ contentType: "image/webp", body: bytes });
+          });
+          f.items[0].content["uz-Latn"].people = ["Superseded", "Names"];
+          await refresh(p);
+          await p.waitForFunction(() =>
+            document.body.textContent?.includes("Superseded & Names"),
+          );
+          while (f.requests() < 2) await p.waitForTimeout(20);
+          f.items[0].content["uz-Latn"].people = original;
+          await refresh(p);
+          await p.waitForFunction(() =>
+            document.body.textContent?.includes("Nodir test & Madina test"),
+          );
+          release();
+          await p.waitForTimeout(250);
+          await p.reload();
+          await loaded(p);
+          assert.equal(
+            f.requests(),
+            2,
+            "obsolete response did not evict the selected cover",
+          );
         },
       );
       for (const unavailable of ["storage", "hashing"]) {

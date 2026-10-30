@@ -69,6 +69,7 @@ test("local cover browser preserves Playwright defaults and a managed executable
     const options = await coverBrowserOptions();
     assert.equal(options.executablePath, "/managed/chromium");
     assert.ok(options.args?.includes("--no-sandbox"));
+    assert.ok(!options.args?.includes("--single-process"));
   } finally {
     if (previous.vercel === undefined) delete process.env.VERCEL;
     else process.env.VERCEL = previous.vercel;

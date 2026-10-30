@@ -388,9 +388,11 @@ export async function reconcilePayments() {
     await getDb()`SELECT id FROM payment_orders WHERE fulfilled_at IS NULL AND sync_after<=now() AND status IN ('CREATED','PENDING','PROCESSING','REJECTED','SUCCEEDED') ORDER BY sync_after LIMIT 10`;
   let checked = 0;
   let failed = 0;
+  const coverOrderIds: string[] = [];
   for (const row of rows) {
     try {
       await refreshPayment(row.id);
+      coverOrderIds.push(row.id);
       checked++;
     } catch (error) {
       failed++;
@@ -401,5 +403,5 @@ export async function reconcilePayments() {
       if (error instanceof ApiError && error.status === 429) break;
     }
   }
-  return { checked, failed };
+  return { checked, failed, coverOrderIds };
 }

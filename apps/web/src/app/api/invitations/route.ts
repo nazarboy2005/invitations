@@ -1,4 +1,5 @@
-import { NextResponse } from "next/server";
+import { NextResponse, after } from "next/server";
+import { preparePublishedCover } from "@/server/published-cover";
 import { z } from "zod";
 import { getDb } from "@taklifnoma/database";
 import { invitationSchema } from "@taklifnoma/contracts";
@@ -11,6 +12,7 @@ import { verifySameOrigin } from "@/server/auth";
 import { apiError, privateHeaders, readJson } from "@/server/api";
 import { invitationRequestActor } from "@/server/admin-invitation-access";
 export const runtime = "nodejs";
+export const maxDuration = 60;
 export async function GET() {
   try {
     const user = await authenticatedUser();
@@ -41,14 +43,11 @@ export async function POST(request: Request) {
       user,
       true,
     );
+    const saved = await saveInvitation(invitation, access.owner, access.admin);
+    if (saved.status === "published")
+      after(() => preparePublishedCover({ invitationId: saved.id }));
     return NextResponse.json(
-      {
-        invitation: await saveInvitation(
-          invitation,
-          access.owner,
-          access.admin,
-        ),
-      },
+      { invitation: saved },
       { status: 201, headers: privateHeaders },
     );
   } catch (e) {

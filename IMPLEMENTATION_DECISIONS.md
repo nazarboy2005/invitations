@@ -1,5 +1,20 @@
 # Implementation decisions
 
+## Draft and published dashboard covers (2026-10-30)
+
+- Generate and durably save a real personalized cover immediately after successful
+  publication, including automatic paid publication. Fetch saved published covers
+  after cache deletion/server replacement; use canonical saved invitation data.
+- Draft covers are saved only in the creator's browser. Reuse the same image
+  while names stay unchanged, even when dates, venue or other draft fields change.
+  Changing names generates a replacement and deletes the previous browser cover
+  after the replacement is ready. Design/default cover language changes also
+  invalidate the draft thumbnail so it shows the selected renderer/language.
+- Published covers use the full visual snapshot, account scope and renderer
+  version, with encrypted persistent media storage and authenticated delivery.
+  Keep draft and published browser identities distinct so publishing generates
+  the final current-content cover rather than retaining a stale draft thumbnail.
+
 ## Template independence and public identity (2026-10-30)
 
 - User requires all invitation templates to work independently of previous
@@ -256,8 +271,8 @@
   for the template catalog. Reproduce those scenes with the invitation's own
   names, dates and content using the real renderer; never reuse sample-text
   screenshots or place replacement names over baked-in sample text. Generate
-  static WebPs through per-template opening/gesture recipes, cache privately by
-  content/version/session and refresh after edits. Include browser-only drafts.
+  static WebPs through per-template opening/gesture recipes. Follow the newer
+  draft/published cover policy above for persistence and invalidation.
 - User correction: remove the decorative dashboard background image and make
   the entire page compact. Keep portrait artwork; use smaller cards, tighter
   spacing and two columns on phones. Published cards must show their public
@@ -265,9 +280,10 @@
   access and secondary management actions without duplicating sharing controls.
 - Performance correction: switching dashboard filters must preserve mounted cards
   and ready cover URLs without a loading flash or regeneration. Retain a bounded
-  memory cache when browser disk storage is unavailable. Only visual content
-  changes invalidate a cover; publication state, revisions, counters, audio and
-  unrelated cookies do not. Reuse the previous cache format during migration.
+  memory cache when browser disk storage is unavailable. Draft covers invalidate
+  on names/design/default language, and published covers on visual content.
+  Revisions, counters, audio and unrelated cookies do not invalidate covers.
+  Draft-to-published transitions use a separate final-snapshot identity.
 - Production repair approved (2026-10-30): fix covers that work on localhost but
   fail at the Vercel cover endpoint, and harden browser caching/recovery. Package
   serverless Chromium for Vercel, use private temporary disk storage there, and

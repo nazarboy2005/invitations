@@ -20,7 +20,9 @@ export async function coverBrowserOptions(): Promise<LaunchOptions> {
     const { default: chromium } = await import("@sparticuz/chromium");
     return {
       headless: true,
-      args: chromium.args,
+      // Single-process Chromium cannot reliably dispose and recreate private
+      // contexts. Keep the no-sandbox/no-zygote flags for the serverless host.
+      args: chromium.args.filter((arg) => arg !== "--single-process"),
       executablePath: executablePath || (await chromium.executablePath()),
       timeout: 15000,
     };

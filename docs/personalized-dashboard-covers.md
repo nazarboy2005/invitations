@@ -19,8 +19,24 @@ run in the recipe's fixed viewport, wait for fonts/visible images, and freeze th
 See `catalog-cover-captures.json` for the original curated reference captures.
 
 The dashboard submits the actual typed invitation to `POST /api/invitation-covers`.
-This supports browser-only drafts and unsaved local changes. The route does not
-read invitations by ID or save/publish submitted data. An isolated Chromium
+Browser-only drafts and unsaved draft changes render transiently: the server
+does not write draft screenshots to disk or persistent storage. Their browser
+thumbnail identity contains the invitation, names, design and default language.
+Date, venue, text and other draft edits reuse that thumbnail. A name/design/language
+change replaces it; after the replacement succeeds, the previous browser cache
+entry and unused object URL are removed. While replacement is pending, the old
+image stays visible. Clearing the browser cache requires a fresh draft capture.
+
+Published requests use the authenticated owner's canonical database record,
+never client-supplied published content. After publication commits, publication,
+checkout, payment refresh and webhook handlers immediately schedule cover
+preparation with Next's `after`; reconciliation and published edits do the same.
+Preparation calls the cover function with an expiring HMAC signature bound to
+the invitation ID, so other functions do not bundle Chromium. The cover endpoint
+verifies that signature and loads a still-published record before capturing.
+Failed/busy preparation remains recoverable through the normal dashboard path;
+publication itself does not wait for screenshot generation. No invitation
+records are saved or published by the cover endpoint. An isolated Chromium
 context injects the data into `/preview?template=…&cover=1`; this mode never falls
 back to preview fixtures. Ordinary preview/catalog/public rendering is unchanged.
 
@@ -31,24 +47,58 @@ images pass through the existing endpoint with the caller's cookie, without
 following redirects. Draft content never appears in query strings or public
 image URLs. Responses use `private, no-store`.
 
-The server stores WebPs outside `public/`, scoped by visual content, cover version
-and the authentication session cookie. Analytics/development cookies, publication
+Published covers are saved in the existing persistent media storage
+(R2 on Vercel, or persistent local media storage on a conventional host). The
+lookup is scoped by the verified account ID, visual content and cover version,
+so signing in again or clearing all disposable caches reuses the saved image.
+Private draft screenshots are encrypted with AES-256-GCM before storage, using
+a key derived from the existing `SESSION_SECRET`, with the content/account hash
+authenticated as associated data. Even a publicly accessible media bucket holds
+only ciphertext. Keep that secret stable; rotating it requires regeneration of
+old covers. Saved objects have no automatic cache expiry. Storage failures are
+logged and fall back to rendering/caching, without discarding a successful image.
+Existing published disk covers migrate into persistent storage when requested.
+Draft captures remain browser-only regardless of authentication.
+
+The draft/published policy is covered by browser checks for unchanged names,
+name replacement and old-entry deletion, reload reuse, and stale capture results
+after reverting a name edit. A real local production integration verified that a
+draft capture creates neither a server cache file nor a persistent object, then
+published the synthetic invitation through the publication service and invoked
+the post-publication preparation helper. It saved the canonical published cover
+without a dashboard request. Focused payment/publication/cover tests, the browser
+suite, typecheck, build and deployment trace verification passed. Synthetic
+database rows and media from that integration were removed.
+
+Persistence verification generated a real synthetic cover into temporary local
+media storage, deleted its entire disposable disk cache, replaced its session
+cookie, and disabled rendering through an invalid capture origin. The identical
+saved image returned in 9 ms, proving that retrieval did not launch a new capture.
+Encryption, tamper rejection, account/content separation and storage-outage
+fallback tests passed, as did the production build and deployment trace check.
+R2 transport uses the existing configured storage client; these persistence
+checks used the local backend and did not write test objects to live R2.
+
+The server also caches WebPs outside `public/`. Analytics/development cookies, publication
 status, revisions, audio, view counters and extra language variants do not change
 the fingerprint. Default-language content and JSON keys are normalized on both
 client and server. Previous-format cache entries remain readable during migration.
-Identical in-flight requests share a job. At most two captures
-run per process; extra callers receive a retry response. New work is limited to
+Identical in-flight requests share a job. At most one capture
+runs per process; extra callers receive a retry response. The dashboard also
+queues uncached requests one at a time so its own cards do not compete for the
+capture slot. New work is limited to
 24 captures per IP per minute. Cached reads do not consume that budget. The disk
 cache retains at most 500 images for up to seven days; it is disposable. Browser
-CacheStorage holds up to 100 content/version/account-scoped images. A bounded
+CacheStorage holds up to 100 version/account-scoped images, with one current
+cover per invitation. Draft and published browser identities are distinct. A bounded
 memory cache retains ready object URLs across component remounts, including when
 disk caching or Web Crypto is unavailable. Cached WebPs are decoded before reuse;
 broken entries are deleted and fetched again. Successful images display without
 waiting for browser cache writes/eviction. Displayed images remain pinned until their cards
 unmount. Filters hide cards without unmounting them, so switching tabs preserves
 the image DOM and performs no cache lookup, request or generation for loaded
-covers. Reopening the dashboard reuses images; editing visual content changes
-the key and generates a fresh cover. Offscreen cards defer requests and listing
+covers. Reopening the dashboard reuses images; draft name/design/language edits
+or published visual-content edits change the key. Offscreen cards defer requests and listing
 pages run no live templates. During an edit, the previous image for that same
 account/invitation/template stays visible until its replacement is ready. Network
 errors and HTTP 429/500/502/503/504 get at most three attempts within an 80-second
@@ -69,7 +119,8 @@ metadata/entry points/bundles and Chromium's binary/library/font archives, faili
 the build if any are absent. No runtime binary download URL or extra service is needed.
 Vercel's private disk cache lives under the OS temporary directory (`/tmp`), since
 the deployed application directory is read-only. It survives warm invocations only;
-browser CacheStorage provides reuse across reloads and server cold starts. Read or
+the persistent media store and browser CacheStorage provide reuse across reloads
+and server cold starts. Read or
 write failures in the disposable server cache never discard a successful capture.
 Runtime cache paths opt out of source tracing so public template assets are not
 accidentally bundled into the server function.
@@ -82,17 +133,50 @@ Next's server bundle; the full Playwright dependency remains available for local
 `INVITATION_COVER_BROWSER_PATH` selects a managed Chromium executable;
 `INVITATION_COVER_DIR` selects the private cache directory. No database migration
 or catalog publication change is required. Browser imports occur inside the API's
-JSON error boundary. Browser launch has a 15-second timeout and the capture browser
-closes after 40 seconds, leaving room under the route's 60-second function limit.
+JSON error boundary. Browser launch has a 15-second timeout and a 35-second capture
+watchdog, leaving room under the route's 60-second function limit. Successful jobs
+close their private context and retain the browser for up to 20 idle seconds;
+failed jobs discard the browser. Each context starts with no cookies or draft
+data from earlier jobs. Serverless launch disables Chromium's single-process
+flag so private contexts can be disposed and recreated reliably.
+
+Captures block audio downloads (preserving video artwork), wait for DOM readiness rather than the
+whole page load event, and bound font waits. Once the selected source scene and
+visible images settle, CDP captures its pixels directly, including the special
+hero crop. This avoids Playwright screenshot preparation waiting again for
+unrelated hidden/offscreen fonts. The selected scenes and existing cache version
+are preserved.
+
+2026-10-30 performance repair verification: the focused tests, dashboard browser
+suite, production build and deployment trace checks passed. Real synthetic
+captures passed for Anor (including edited names and an identical cache hit),
+Somon Yo‘li's hero crop, Butterfly and Aurelia's video artwork. Local captures
+took about 5–9 seconds after browser startup; the server cache hit took 24 ms.
+The bundled Linux x64 Chromium 153 also passed three successive isolated context
+captures with the serverless launch flags. These are local/WSL checks; the live
+deployment still needs to be updated.
+
+To repeat the packaged-browser smoke check on a Linux host with Node 22, run
+`VERCEL=1 node tests/cover-linux-smoke.mjs`.
 
 Verification commands:
 
 ```sh
 pnpm exec tsx --test tests/invitation-covers.test.ts tests/cover-runtime.test.ts
+pnpm exec tsx --test tests/cover-browser.test.ts tests/cover-error.test.ts
+pnpm exec tsx --test tests/cover-storage.test.ts
+pnpm exec tsx --test tests/cover-publication.test.ts
 pnpm typecheck
 pnpm build
 # With the built app running on http://127.0.0.1:3002:
 pnpm exec tsx --test tests/invitation-covers.browser.integration.ts
+# Real synthetic captures (defaults to port 3001; COVER_TEST_URL overrides it):
+pnpm exec tsx --test tests/cover-capture.integration.ts
+# Real render, delete disk cache, then fetch saved image with rendering disabled:
+# Set TSX_TSCONFIG_PATH=apps/web/tsconfig.json in the shell first.
+pnpm exec tsx --test tests/cover-persistence.integration.ts
+# With matching local media/cache directories, free publishing and app env loaded:
+pnpm exec node --env-file=apps/web/.env.local --import tsx --test tests/cover-publication.integration.ts
 ```
 
 The browser integration uses synthetic API fixtures and writes no account records.

@@ -11,6 +11,26 @@ import {
   COVER_VIEWPORT,
 } from "../apps/web/src/modules/dashboard/cover-recipe";
 import { CATALOG_COVERS } from "../apps/web/src/modules/catalog/catalog-covers";
+import { thumbnailContent } from "../apps/web/src/modules/dashboard/cover-content";
+
+test("draft thumbnail identity changes only with names/design/locale; publication uses a full snapshot", () => {
+  const draft = completeInvitation();
+  const key = thumbnailContent(draft);
+  draft.startsAt = "2028-01-01T12:00";
+  draft.content["uz-Latn"].venueName = "New venue";
+  draft.content["uz-Latn"].body = "New text";
+  draft.revision++;
+  assert.equal(thumbnailContent(draft), key);
+  draft.content["uz-Latn"].people[0] = "New name";
+  assert.notEqual(thumbnailContent(draft), key);
+  const named = thumbnailContent(draft);
+  draft.templateId = "cloud-castle";
+  assert.notEqual(thumbnailContent(draft), named);
+  draft.status = "published";
+  const published = thumbnailContent(draft);
+  draft.content["uz-Latn"].venueName = "Published venue edit";
+  assert.notEqual(thumbnailContent(draft), published);
+});
 
 test("cover cache distinguishes edited content, language, template and private session scope", () => {
   const invitation = completeInvitation();

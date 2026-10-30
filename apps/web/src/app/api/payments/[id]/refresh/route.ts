@@ -5,6 +5,7 @@ import { apiError, privateHeaders } from "@/server/api";
 import { getPaymentOrder, refreshPayment } from "@/server/payments";
 import { after } from "next/server";
 import { processPaymentNotifications } from "@/server/payment-notifications";
+import { preparePublishedCover } from "@/server/published-cover";
 export const runtime = "nodejs";
 export const maxDuration = 60;
 export async function POST(
@@ -19,7 +20,10 @@ export async function POST(
     await getPaymentOrder(id, user.id);
     await refreshPayment(id, user.id);
     after(async () => {
-      await processPaymentNotifications({ orderId: id, limit: 2 });
+      await Promise.allSettled([
+        processPaymentNotifications({ orderId: id, limit: 2 }),
+        preparePublishedCover({ orderId: id }),
+      ]);
     });
     return Response.json(
       { order: await getPaymentOrder(id, user.id) },

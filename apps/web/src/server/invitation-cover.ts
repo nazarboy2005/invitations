@@ -1,7 +1,12 @@
 import { createHash } from "node:crypto";
 import { readdir, stat, unlink } from "node:fs/promises";
 import path from "node:path";
-import { chromium, type Browser, type Page } from "playwright-core";
+import {
+  chromium,
+  type Browser,
+  type BrowserContext,
+  type Page,
+} from "playwright-core";
 import sharp from "sharp";
 import type { Invitation } from "@taklifnoma/contracts";
 import {
@@ -15,8 +20,19 @@ import { SESSION_COOKIE } from "./auth";
 import { coverBrowserOptions, coverCacheRoot } from "./cover-runtime";
 import { readCoverFile, writeCoverFile } from "./cover-disk-cache";
 import { coverFailure } from "./cover-error";
+import { CoverBrowser, captureCoverPixels } from "./cover-browser";
+import { coverStorage } from "./cover-storage";
+
+const browsers = new CoverBrowser(async () =>
+  chromium.launch(await coverBrowserOptions()),
+);
 
 const pending = new Map<string, Promise<Buffer>>();
+const persisted = new Set<string>();
+function rememberPersisted(key: string) {
+  if (persisted.size >= 500) persisted.delete(persisted.values().next().value!);
+  persisted.add(key);
+}
 let active = 0;
 const buckets = new Map<string, { count: number; until: number }>();
 
@@ -62,7 +78,13 @@ export async function personalizedCover(
   invitation: Invitation,
   address: string,
   cookie: string,
+  ownerId?: string,
 ) {
+  if (invitation.status !== "published") {
+    // Draft output belongs only in the caller's browser. Keep no disk/R2 copy.
+    const key = `draft:${coverKey(invitation, cookie)}`;
+    return generateCover(key, address, () => captureCover(invitation, cookie));
+  }
   // Analytics/dev cookies can rotate on navigation. Only the private session
   // distinguishes access to uploaded media; other cookies must not invalidate art.
   const session =
@@ -70,11 +92,28 @@ export async function personalizedCover(
       .split(";")
       .map((part) => part.trim())
       .find((part) => part.startsWith(`${SESSION_COOKIE}=`)) ?? "";
-  const key = coverKey(invitation, session);
+  const key = coverKey(invitation, ownerId ? `owner:${ownerId}` : session);
+  const storage = ownerId ? coverStorage() : undefined;
+  const save = async (bytes: Buffer) => {
+    if (await storage?.write(key, bytes)) rememberPersisted(key);
+  };
   const root = coverCacheRoot();
   const file = path.join(root, `${key}.webp`);
   const cached = await readCoverFile(file);
-  if (cached) return cached;
+  if (cached) {
+    // Also migrate images generated before persistent storage was enabled.
+    if (storage && !persisted.has(key)) {
+      if (await storage.read(key)) rememberPersisted(key);
+      else await save(cached);
+    }
+    return cached;
+  }
+  const saved = await storage?.read(key);
+  if (saved) {
+    rememberPersisted(key);
+    await writeCoverFile(file, saved);
+    return saved;
+  }
   // Preserve previously generated covers while upgrading the fingerprint.
   const legacy = createHash("sha256")
     .update(COVER_VERSION)
@@ -82,9 +121,33 @@ export async function personalizedCover(
     .update(cookie)
     .digest("hex");
   const previous = await readCoverFile(path.join(root, `${legacy}.webp`));
-  if (previous) return previous;
+  const previousSession = ownerId
+    ? await readCoverFile(
+        path.join(root, `${coverKey(invitation, session)}.webp`),
+      )
+    : undefined;
+  if (previous || previousSession) {
+    const bytes = (previous || previousSession)!;
+    await save(bytes);
+    await writeCoverFile(file, bytes);
+    return bytes;
+  }
+  return generateCover(key, address, async () => {
+    const bytes = await captureCover(invitation, cookie);
+    await save(bytes);
+    if (await writeCoverFile(file, bytes))
+      await pruneCache(root).catch(() => {});
+    return bytes;
+  });
+}
+
+async function generateCover(
+  key: string,
+  address: string,
+  capture: () => Promise<Buffer>,
+) {
   if (pending.has(key)) return pending.get(key)!;
-  if (active >= 2)
+  if (active >= 1)
     throw new ApiError(
       429,
       "COVER_BUSY",
@@ -94,10 +157,7 @@ export async function personalizedCover(
   const work = (async () => {
     active++;
     try {
-      const bytes = await captureCover(invitation, cookie);
-      if (await writeCoverFile(file, bytes))
-        await pruneCache(root).catch(() => {});
-      return bytes;
+      return await capture();
     } finally {
       active--;
     }
@@ -113,18 +173,19 @@ export async function captureCover(invitation: Invitation, cookie = "") {
     if (process.env.INVITATION_COVER_TRACE) console.log(stage);
   };
   let browser: Browser | undefined;
+  let context: BrowserContext | undefined;
+  let succeeded = false;
   let timeout: ReturnType<typeof setTimeout> | undefined;
   try {
     const origin = new URL(process.env.APP_URL!).origin;
     const recipe = coverRecipe(invitation.templateId);
     trace("browser");
-    const options = await coverBrowserOptions();
     trace("launch");
-    browser = await chromium.launch(options);
+    browser = await browsers.acquire();
     timeout = setTimeout(() => {
-      void browser?.close().catch(() => {});
-    }, 40000);
-    const context = await browser.newContext({
+      if (browser) void browsers.discard(browser);
+    }, 35000);
+    context = await browser.newContext({
       viewport: recipe.viewport,
       deviceScaleFactor: 1,
       serviceWorkers: "block",
@@ -138,6 +199,10 @@ export async function captureCover(invitation: Invitation, cookie = "") {
       const request = route.request();
       const url = new URL(request.url());
       if (request.method() !== "GET") return route.abort();
+      // Audio contributes no pixels. Keep video available because some source
+      // templates use its first frame as their actual cover artwork.
+      if (/\.(?:mp3|ogg|wav|m4a|aac|flac)$/i.test(url.pathname))
+        return route.abort();
       const kind = coverRequestKind(url.href, origin, mediaOrigin);
       if (kind === "deny") return route.abort();
       if (kind === "media") {
@@ -145,7 +210,8 @@ export async function captureCover(invitation: Invitation, cookie = "") {
           headers: { cookie },
           redirect: "manual",
           signal: AbortSignal.timeout(10000),
-        });
+        }).catch(() => null);
+        if (!response) return route.abort();
         const contentType = response.headers.get("Content-Type") ?? "";
         if (!response.ok || !contentType.startsWith("image/"))
           return route.abort();
@@ -164,6 +230,7 @@ export async function captureCover(invitation: Invitation, cookie = "") {
       HTMLMediaElement.prototype.play = () => Promise.resolve();
     }, JSON.stringify(invitation));
     const page = await context.newPage();
+    page.setDefaultTimeout(8000);
     trace("navigate");
     await page.goto(
       `${origin}/preview?template=${encodeURIComponent(invitation.templateId)}&cover=1`,
@@ -185,11 +252,14 @@ export async function captureCover(invitation: Invitation, cookie = "") {
     if (!frame) throw new Error("Cover renderer did not mount");
     trace("frame load");
     await frame.waitForURL(/\/templates\//, { timeout: 20000 });
-    await frame.waitForLoadState("load");
+    await frame.waitForLoadState("domcontentloaded");
     await page.waitForTimeout(1800);
     trace("fonts");
     await frame.evaluate(async () => {
-      await document.fonts.ready;
+      await Promise.race([
+        document.fonts.ready,
+        new Promise((resolve) => setTimeout(resolve, 3000)),
+      ]);
     });
     if (invitation.templateId === "oltin-uzuk") {
       // Repeat the selected cover's documented source-only capture overrides.
@@ -268,28 +338,35 @@ export async function captureCover(invitation: Invitation, cookie = "") {
       document.head.append(style);
     });
     trace("screenshot");
-    const screenshot = recipe.element
-      ? await frame.locator(recipe.element).screenshot({ animations: "allow" })
-      : await page.screenshot({ animations: "allow" });
-    return sharp(screenshot)
+    const screenshot = await captureCoverPixels(page, recipe.element);
+    const bytes = await sharp(screenshot)
       .resize(COVER_VIEWPORT.width, COVER_VIEWPORT.height, {
         fit: "cover",
         position: "top",
       })
       .webp({ quality: 88 })
       .toBuffer();
+    succeeded = true;
+    return bytes;
   } catch (error) {
     throw coverFailure(error, stage);
   } finally {
+    await context?.close().catch(() => {});
     clearTimeout(timeout);
-    await browser?.close().catch(() => {});
+    if (browser) {
+      if (succeeded) browsers.release(browser);
+      else await browsers.discard(browser);
+    }
   }
 }
 
 async function settleImages(page: Page) {
   for (const frame of page.frames()) {
     await frame.evaluate(async () => {
-      await document.fonts.ready;
+      await Promise.race([
+        document.fonts.ready,
+        new Promise((resolve) => setTimeout(resolve, 3000)),
+      ]);
       const visible = Array.from(document.images).filter((image) => {
         const rect = image.getBoundingClientRect();
         return (

@@ -22,3 +22,16 @@ export function coverContent(invitation: Invitation): string {
         : value,
   );
 }
+
+/** Draft screenshots are a name/design thumbnail, not a live preview of edits. */
+export function thumbnailContent(invitation: Invitation): string {
+  if (invitation.status === "published")
+    return `published:${coverContent(invitation)}`;
+  return JSON.stringify({
+    kind: "draft",
+    id: invitation.id,
+    templateId: invitation.templateId,
+    locale: invitation.defaultLocale,
+    people: invitation.content[invitation.defaultLocale]?.people ?? [],
+  });
+}
