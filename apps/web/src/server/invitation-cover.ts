@@ -1,7 +1,7 @@
 import { createHash } from "node:crypto";
 import { readdir, stat, unlink } from "node:fs/promises";
 import path from "node:path";
-import { chromium, type Page } from "playwright-core";
+import { chromium, type Browser, type Page } from "playwright-core";
 import sharp from "sharp";
 import type { Invitation } from "@taklifnoma/contracts";
 import {
@@ -14,6 +14,7 @@ import { coverKey, coverRequestKind } from "./cover-policy";
 import { SESSION_COOKIE } from "./auth";
 import { coverBrowserOptions, coverCacheRoot } from "./cover-runtime";
 import { readCoverFile, writeCoverFile } from "./cover-disk-cache";
+import { coverFailure } from "./cover-error";
 
 const pending = new Map<string, Promise<Buffer>>();
 let active = 0;
@@ -22,8 +23,8 @@ const buckets = new Map<string, { count: number; until: number }>();
 // Cache files contain private draft content. They never live under public/ and
 // there is no GET-by-hash route: a caller must submit the actual content again.
 async function pruneCache(root: string) {
-  const names = (await readdir(/* turbopackIgnore: true */ root)).filter((name) =>
-    /^[a-f0-9]{64}\.webp$/.test(name),
+  const names = (await readdir(/* turbopackIgnore: true */ root)).filter(
+    (name) => /^[a-f0-9]{64}\.webp$/.test(name),
   );
   const files = await Promise.all(
     names.map(async (name) => ({
@@ -106,17 +107,23 @@ export async function personalizedCover(
 }
 
 export async function captureCover(invitation: Invitation, cookie = "") {
-  const trace = (stage: string) => {
+  let stage = "configuration";
+  const trace = (nextStage: string) => {
+    stage = nextStage;
     if (process.env.INVITATION_COVER_TRACE) console.log(stage);
   };
-  trace("launch");
-  const origin = new URL(process.env.APP_URL!).origin;
-  const recipe = coverRecipe(invitation.templateId);
-  const browser = await chromium.launch(await coverBrowserOptions());
-  const timeout = setTimeout(() => {
-    void browser.close().catch(() => {});
-  }, 40000);
+  let browser: Browser | undefined;
+  let timeout: ReturnType<typeof setTimeout> | undefined;
   try {
+    const origin = new URL(process.env.APP_URL!).origin;
+    const recipe = coverRecipe(invitation.templateId);
+    trace("browser");
+    const options = await coverBrowserOptions();
+    trace("launch");
+    browser = await chromium.launch(options);
+    timeout = setTimeout(() => {
+      void browser?.close().catch(() => {});
+    }, 40000);
     const context = await browser.newContext({
       viewport: recipe.viewport,
       deviceScaleFactor: 1,
@@ -191,6 +198,7 @@ export async function captureCover(invitation: Invitation, cookie = "") {
           "html.rx-on #intro .intro__fallback-scene{display:block!important;opacity:1!important}.rx--intro,#intro .scene-canvas,.mh-lang{display:none!important}",
       });
     }
+    trace("scene");
     if (recipe.scene !== "opening") {
       const selector =
         recipe.scene === "lid"
@@ -270,9 +278,11 @@ export async function captureCover(invitation: Invitation, cookie = "") {
       })
       .webp({ quality: 88 })
       .toBuffer();
+  } catch (error) {
+    throw coverFailure(error, stage);
   } finally {
     clearTimeout(timeout);
-    await browser.close().catch(() => {});
+    await browser?.close().catch(() => {});
   }
 }
 
