@@ -9,7 +9,19 @@
   identity with the invitation. Also accept full/short Yandex Maps links and
   provide «Xaritadan tanlash» beside that input for placing/dragging a pin.
   Resolve link/pin metadata: autofill an empty place name, preserve an existing
-  one, and offer the fetched name below the input when it differs.
+  one, and offer only the fetched name as a clickable suggestion directly below
+  the place-name input when it differs. Keep address/landmark fields side by
+  side, and link input/map-picker button side by side with an outlined picker
+  button. Omit redundant selection/help copy. Picker supports drag, wheel,
+  touch and button zoom; add subtle transitions with reduced-motion support.
+  Name suggestion is colored, underlined text with no border/background. Add
+  Lucide icons to location controls, compact label spacing, and an input copy
+  action that changes from Copy to Check on success without visible status text.
+  Embedded API 2.1 supports Russian, English, Turkish and Ukrainian, not Uzbek.
+  User chose Russian for Uzbekistan/Uzbek fallback. An Uzbekistan browser timezone
+  uses Russian; otherwise select a supported viewer browser language, then
+  timezone fallback, without GPS/IP lookup.
+  External Yandex Maps links continue to request Uzbek.
   Name/address replacement clears the old location; landmark notes do not.
 - All invitation maps use the shared Yandex JavaScript API renderer and the same
   saved destination as guest links. Preserve each template's map composition.

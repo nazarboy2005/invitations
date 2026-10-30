@@ -20,6 +20,7 @@ import {
   LayoutTemplate,
   LoaderCircle,
   MapPin,
+  MapPinned,
   Music2,
   MessageSquare,
   Phone,
@@ -27,6 +28,7 @@ import {
   Save,
   Send,
   Settings2,
+  Signpost,
   FileText,
   UserCheck,
   Shirt,
@@ -285,10 +287,12 @@ function addInvitationLanguage(invitation: Invitation, locale: Locale) {
 
 function Field({
   label,
+  icon,
   hint,
   children,
 }: {
   label: string;
+  icon?: React.ReactNode;
   hint?: string;
   children: React.ReactNode;
 }) {
@@ -301,14 +305,14 @@ function Field({
   )
     return (
       <div className={styles.field}>
-        <span>{label}</span>
+        <span className={icon ? styles.fieldLabel : undefined}>{icon}{label}</span>
         {children}
         {hint && <small>{hint}</small>}
       </div>
     );
   return (
     <label className={styles.field}>
-      <span>{label}</span>
+      <span className={icon ? styles.fieldLabel : undefined}>{icon}{label}</span>
       {children}
       {hint && <small>{hint}</small>}
     </label>
@@ -2520,13 +2524,13 @@ export function Studio({
                             }
                           />
                         </Field>
-                        <Field label="Joy nomi" hint="Qo‘shimcha tadbir uchun ham joyni Yandex natijalaridan tanlang.">
+                        <VenueLink venue={{ latitude: pulauData.secondaryEvent.latitude ?? null, longitude: pulauData.secondaryEvent.longitude ?? null, mapUrl: pulauData.secondaryEvent.mapUrl, placeUri: pulauData.secondaryEvent.placeUri }}
+                          nameInput={<Field label="Joy nomi">
                           <PlaceSearch value={pulauData.secondaryEvent.venueName} locale={locale} label="Qo‘shimcha tadbir joyi"
                             confirmed={hasVenuePoint({ latitude: pulauData.secondaryEvent.latitude ?? null, longitude: pulauData.secondaryEvent.longitude ?? null })}
                             onChange={value => updatePulauData({ secondaryEvent: { ...pulauData.secondaryEvent, venueName: value, address: "", mapUrl: "", placeUri: undefined, latitude: null, longitude: null } })}
                             onSelect={place => updatePulauData({ secondaryEvent: { ...pulauData.secondaryEvent, venueName: place.name, address: place.address, mapUrl: place.mapUrl, placeUri: place.placeUri, latitude: place.latitude, longitude: place.longitude } })} />
-                        </Field>
-                        <VenueLink venue={{ latitude: pulauData.secondaryEvent.latitude ?? null, longitude: pulauData.secondaryEvent.longitude ?? null, mapUrl: pulauData.secondaryEvent.mapUrl, placeUri: pulauData.secondaryEvent.placeUri }}
+                        </Field>}
                           name={pulauData.secondaryEvent.venueName} locale={locale}
                           onEdit={() => updatePulauData({ secondaryEvent: { ...pulauData.secondaryEvent, mapUrl: "", placeUri: undefined, latitude: null, longitude: null } })}
                           onResolve={place => updatePulauData({ secondaryEvent: { ...pulauData.secondaryEvent, venueName: pulauData.secondaryEvent.venueName.trim() || place.name, address: place.address, mapUrl: place.mapUrl, placeUri: place.placeUri, latitude: place.latitude, longitude: place.longitude } })}
@@ -2564,9 +2568,9 @@ export function Studio({
                   <div><h2 id="studio-venue-title">Manzil</h2><p>Mehmonlar uchun joy va yo‘l-yo‘riq.</p></div>
                   <small>Asosiy</small>
                 </div>
-                <Field
+                <VenueLink venue={invitation.venue} name={content.venueName} locale={locale}
+                  nameInput={<Field
                   label="To‘yxona yoki joy nomi"
-                  hint="Joy nomini yozing va O‘zbekistondagi Yandex natijalaridan tanlang."
                 >
                   <PlaceSearch
                     value={content.venueName}
@@ -2583,8 +2587,7 @@ export function Studio({
                       content: Object.fromEntries(Object.entries(current.content).map(([language, text]) => [language, { ...text, venueName: place.name, address: place.address }])),
                     } : current)}
                   />
-                </Field>
-                <VenueLink venue={invitation.venue} name={content.venueName} locale={locale}
+                </Field>}
                   onEdit={() => setInvitation(current => current ? { ...current, venue: { latitude: null, longitude: null, mapUrl: "" } } : current)}
                   onResolve={place => setInvitation(current => current ? {
                     ...current,
@@ -2592,14 +2595,15 @@ export function Studio({
                     content: Object.fromEntries(Object.entries(current.content).map(([language, text]) => [language, { ...text, venueName: text.venueName.trim() || place.name, address: place.address }])),
                   } : current)}
                   onNameChange={venueName => updateContent({ venueName })} />
-                <Field label="To‘liq manzil" hint="Joy tanlanganda avtomatik to‘ldiriladi. Manzilni o‘zgartirsangiz, joyni qayta tanlang.">
+                <div className={styles.venueDetails}>
+                <Field label="To‘liq manzil" icon={<MapPinned size={14} aria-hidden="true" />}>
                   <textarea value={content.address} rows={2} maxLength={1000}
                     onChange={event => setInvitation(current => current ? {
                       ...current, venue: { latitude: null, longitude: null, mapUrl: "" },
                       content: { ...current.content, [locale]: { ...getContent(current, locale), address: event.target.value } },
                     } : current)} />
                 </Field>
-                <Field label="Mo‘ljal va qo‘shimcha yo‘l-yo‘riq">
+                <Field label="Mo‘ljal va qo‘shimcha yo‘l-yo‘riq" icon={<Signpost size={14} aria-hidden="true" />}>
                   <textarea
                     value={content.landmark}
                     rows={2}
@@ -2610,12 +2614,12 @@ export function Studio({
                     placeholder={placeholders.optional}
                   />
                 </Field>
+                </div>
                 {hasVenuePoint(invitation.venue) && <div className={styles.venueSelection}>
                   <iframe key={`${invitation.venue.latitude},${invitation.venue.longitude}`} title="Tanlangan joy — Yandex Maps"
                     src={`/maps/venue?latitude=${invitation.venue.latitude}&longitude=${invitation.venue.longitude}&lang=${locale}&destination=${encodeURIComponent(yandexMapUrl(invitation.venue))}`}
                     loading="lazy" />
                 </div>}
-                {!hasVenuePoint(invitation.venue) && content.venueName.trim() && <p className={styles.help}>Xarita uchun joyni qidiring, havola kiriting yoki xaritadan belgilang.</p>}
                 </section>)}
                 {capabilities.program && (<section className={styles.scheduleCard} aria-labelledby="studio-program-title">
                 <div className={styles.scheduleHeading}>

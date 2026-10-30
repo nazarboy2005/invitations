@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useId, useRef, useState } from "react";
-import { LoaderCircle, MapPin, X } from "lucide-react";
+import { useEffect, useId, useRef, useState, type ReactNode } from "react";
+import { Check, CircleAlert, Copy, Link2, LoaderCircle, MapPin, X } from "lucide-react";
 import type { Locale } from "@taklifnoma/contracts";
 import type { VenueLocation } from "@taklifnoma/contracts/maps";
 import { hasVenuePoint, yandexMapUrl } from "@taklifnoma/contracts/maps";
@@ -14,9 +14,10 @@ function sameName(a: string, b: string) {
 }
 
 /** Link entry, map picking and name reconciliation share one resolution path. */
-export function VenueLink({ venue, name, locale, onEdit, onResolve, onNameChange }: {
+export function VenueLink({ venue, name, nameInput, locale, onEdit, onResolve, onNameChange }: {
   venue: VenueLocation;
   name: string;
+  nameInput: ReactNode;
   locale: Locale;
   onEdit: () => void;
   onResolve: (place: SelectedPlace) => void;
@@ -30,6 +31,8 @@ export function VenueLink({ venue, name, locale, onEdit, onResolve, onNameChange
   const [status, setStatus] = useState("");
   const [failed, setFailed] = useState(false);
   const [picking, setPicking] = useState(false);
+  const [copyState, setCopyState] = useState<"idle" | "copied" | "error">("idle");
+  const copyReset = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [point, setPoint] = useState<{ latitude: number; longitude: number } | null>(null);
   const dialog = useRef<HTMLDialogElement>(null);
   const frame = useRef<HTMLIFrameElement>(null);
@@ -58,7 +61,7 @@ export function VenueLink({ venue, name, locale, onEdit, onResolve, onNameChange
       if (!response.ok) throw new Error(data.error?.message || "Havoladagi joy topilmadi.");
       const place = data as SelectedPlace;
       acknowledged.current = place.mapUrl; setDraft(place.mapUrl); setResolved(place);
-      setStatus("Joy aniqlandi. Xarita shu manzilga bog‘landi.");
+      setStatus("");
       callbacks.current.onResolve(place); setPicking(false);
     } catch (error) {
       if (!controller.signal.aborted && version === generation.current) { setFailed(true); setStatus(error instanceof Error ? error.message : "Joy topilmadi."); }
@@ -73,6 +76,10 @@ export function VenueLink({ venue, name, locale, onEdit, onResolve, onNameChange
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [draft, locale]);
   useEffect(() => () => { generation.current++; request.current?.abort(); }, []);
+  useEffect(() => {
+    setCopyState("idle");
+    return () => { if (copyReset.current) clearTimeout(copyReset.current); };
+  }, [draft]);
   useEffect(() => {
     const element = dialog.current;
     if (picking) element?.showModal(); else element?.close();
@@ -91,25 +98,36 @@ export function VenueLink({ venue, name, locale, onEdit, onResolve, onNameChange
     generation.current++; request.current?.abort(); setLoading(false); setPicking(false);
   }
 
+  async function copyLink() {
+    const value = draft.trim();
+    if (!value) return;
+    if (copyReset.current) clearTimeout(copyReset.current);
+    try {
+      await navigator.clipboard.writeText(value);
+      setCopyState("copied");
+    } catch {
+      setCopyState("error");
+    }
+    copyReset.current = setTimeout(() => setCopyState("idle"), 2200);
+  }
+
   const mismatch = resolved?.name && name.trim() && !sameName(name, resolved.name);
   const start = hasVenuePoint(venue) ? venue : { latitude: 41.311151, longitude: 69.279737 };
   return <div className={styles.root}>
-    <div className={styles.heading}><label htmlFor={`${id}-link`}>Yandex Maps havolasi</label>
-      <button type="button" className={styles.pick} onClick={() => { setPoint(null); setStatus(""); setPicking(true); }}><MapPin size={15} /> Xaritadan tanlash</button>
-    </div>
-    <div className={styles.inputWrap}>
+    {nameInput}
+    {mismatch && <button className={styles.suggestion} type="button" onClick={() => onNameChange(resolved.name)}>{resolved.name}</button>}
+    <div className={styles.heading}><label htmlFor={`${id}-link`}><Link2 size={14} aria-hidden="true" />Yandex Maps havolasi</label></div>
+    <div className={styles.linkRow}><div className={styles.inputWrap}>
       <input id={`${id}-link`} type="url" inputMode="url" value={draft} maxLength={4000} autoComplete="off"
         placeholder="https://yandex.uz/maps/…" aria-describedby={`${id}-status`}
         onChange={event => { generation.current++; request.current?.abort(); acknowledged.current = "";
           setDraft(event.target.value); setResolved(null); setStatus(""); setFailed(false); setLoading(false); onEdit(); }} />
-      {loading && <LoaderCircle size={17} className={styles.loading} />}
-    </div>
-    <small className={styles.hint}>Yandex Maps’dan joy havolasini qo‘ying yoki xaritadan belgilang.</small>
+      {loading ? <LoaderCircle size={17} className={styles.loading} aria-hidden="true" /> : <button type="button" className={styles.copy} data-state={copyState}
+        disabled={!draft.trim()} aria-label={copyState === "copied" ? "Nusxalandi" : copyState === "error" ? "Nusxalanmadi. Qayta urinish" : "Havolani nusxalash"} onClick={() => void copyLink()}>
+        {copyState === "copied" ? <Check size={17} /> : copyState === "error" ? <CircleAlert size={17} /> : <Copy size={17} />}
+      </button>}
+    </div><button type="button" className={styles.pick} onClick={() => { setPoint(null); setStatus(""); setPicking(true); }}><MapPin size={16} aria-hidden="true" /> Xaritadan tanlash</button></div>
     <div id={`${id}-status`} role="status" aria-live="polite" className={`${styles.status} ${failed ? styles.error : ""}`}>{status}</div>
-    {mismatch && <div className={styles.suggestion}>
-      <p>Yandex’dagi joy nomi: <strong>{resolved.name}</strong>. Kiritgan nomingiz saqlandi.</p>
-      <button type="button" onClick={() => onNameChange(resolved.name)}>Nomni «{resolved.name}»ga o‘zgartirish</button>
-    </div>}
     <dialog ref={dialog} className={styles.dialog} aria-labelledby={`${id}-title`} onClose={closePicker}>
       <header><div><h3 id={`${id}-title`}>Joyni xaritadan tanlang</h3><p>Kerakli nuqtaga bosing. Xaritani surish va yaqinlashtirish mumkin.</p></div>
         <button type="button" aria-label="Xaritani yopish" onClick={closePicker}><X size={20} /></button></header>

@@ -97,7 +97,7 @@ export function PlaceSearch({ value, locale, onChange, onSelect, confirmed = fal
       <li role="presentation" className={styles.attribution}>Yandex Maps</li>
     </ul>}
     <small id={`${id}-status`} role="status" aria-live="polite" className={`${styles.status} ${confirmed ? styles.confirmed : ""}`}>
-      {status || (confirmed ? "Joy tanlandi. Xarita shu manzilga bog‘langan." : "")}
+      {status}
     </small>
   </div>;
 }
