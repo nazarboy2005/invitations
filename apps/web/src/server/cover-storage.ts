@@ -70,12 +70,26 @@ export function persistentCovers(objects: CoverObjects, secret: string) {
 
 export function coverStorage() {
   const secret = process.env.SESSION_SECRET;
-  if (!secret || secret.length < 32) return undefined;
+  if (!secret || secret.length < 32) {
+    console.error(
+      "Invitation cover storage requires SESSION_SECRET (32+ characters)",
+    );
+    return undefined;
+  }
   let provider: "local" | "r2";
   try {
     provider = storageProvider();
   } catch {
-    console.error("Invitation cover storage is not configured");
+    console.error("Invitation cover storage is not configured", {
+      provider: process.env.MEDIA_STORAGE || "auto",
+      missing: [
+        "R2_ACCOUNT_ID",
+        "R2_ACCESS_KEY_ID",
+        "R2_SECRET_ACCESS_KEY",
+        "R2_BUCKET_NAME",
+      ].filter((name) => !process.env[name]),
+      vercel: Boolean(process.env.VERCEL),
+    });
     return undefined;
   }
   return persistentCovers(

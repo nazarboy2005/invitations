@@ -22,6 +22,7 @@ import { readCoverFile, writeCoverFile } from "./cover-disk-cache";
 import { coverFailure } from "./cover-error";
 import { CoverBrowser, captureCoverPixels } from "./cover-browser";
 import { coverStorage } from "./cover-storage";
+import { coverCleanup, coverDeadline } from "./cover-deadline";
 
 const browsers = new CoverBrowser(async () =>
   chromium.launch(await coverBrowserOptions()),
@@ -167,6 +168,7 @@ async function generateCover(
 }
 
 export async function captureCover(invitation: Invitation, cookie = "") {
+  const started = Date.now();
   let stage = "configuration";
   const trace = (nextStage: string) => {
     stage = nextStage;
@@ -175,184 +177,233 @@ export async function captureCover(invitation: Invitation, cookie = "") {
   let browser: Browser | undefined;
   let context: BrowserContext | undefined;
   let succeeded = false;
-  let timeout: ReturnType<typeof setTimeout> | undefined;
+  let expired = false;
   try {
-    const origin = new URL(process.env.APP_URL!).origin;
-    const recipe = coverRecipe(invitation.templateId);
-    trace("browser");
-    trace("launch");
-    browser = await browsers.acquire();
-    timeout = setTimeout(() => {
-      if (browser) void browsers.discard(browser);
-    }, 35000);
-    context = await browser.newContext({
-      viewport: recipe.viewport,
-      deviceScaleFactor: 1,
-      serviceWorkers: "block",
-    });
-    // No caller cookies in the browser, no API writes, no arbitrary remote URLs.
-    // Creator media is proxied only through its existing authorization endpoint.
-    const mediaOrigin = process.env.R2_PUBLIC_BASE_URL
-      ? new URL(process.env.R2_PUBLIC_BASE_URL).origin
-      : null;
-    await context.route("**/*", async (route) => {
-      const request = route.request();
-      const url = new URL(request.url());
-      if (request.method() !== "GET") return route.abort();
-      // Audio contributes no pixels. Keep video available because some source
-      // templates use its first frame as their actual cover artwork.
-      if (/\.(?:mp3|ogg|wav|m4a|aac|flac)$/i.test(url.pathname))
-        return route.abort();
-      const kind = coverRequestKind(url.href, origin, mediaOrigin);
-      if (kind === "deny") return route.abort();
-      if (kind === "media") {
-        const response = await fetch(url.href, {
-          headers: { cookie },
-          redirect: "manual",
-          signal: AbortSignal.timeout(10000),
-        }).catch(() => null);
-        if (!response) return route.abort();
-        const contentType = response.headers.get("Content-Type") ?? "";
-        if (!response.ok || !contentType.startsWith("image/"))
-          return route.abort();
-        return route.fulfill({
-          status: 200,
-          contentType,
-          body: Buffer.from(await response.arrayBuffer()),
+    return await coverDeadline(
+      async () => {
+        const origin = new URL(process.env.APP_URL!).origin;
+        const recipe = coverRecipe(invitation.templateId);
+        trace("browser");
+        trace("launch");
+        browser = await browsers.acquire();
+        if (expired) {
+          await browsers.discard(browser);
+          throw new Error("Cover launch completed after deadline");
+        }
+        context = await browser.newContext({
+          viewport: recipe.viewport,
+          deviceScaleFactor: 1,
+          serviceWorkers: "block",
         });
-      }
-      return route.continue();
-    });
-    await context.addInitScript((data) => {
-      if (window === window.top)
-        (window as Window & { __invitationCover?: unknown }).__invitationCover =
-          JSON.parse(data);
-      HTMLMediaElement.prototype.play = () => Promise.resolve();
-    }, JSON.stringify(invitation));
-    const page = await context.newPage();
-    page.setDefaultTimeout(8000);
-    trace("navigate");
-    await page.goto(
-      `${origin}/preview?template=${encodeURIComponent(invitation.templateId)}&cover=1`,
-      { waitUntil: "domcontentloaded", timeout: 30000 },
-    );
-    await page.addStyleTag({
-      content: "nextjs-portal{display:none!important}",
-    });
-    trace("mount");
-    await page
-      .locator("main iframe")
-      .first()
-      .waitFor({ state: "attached", timeout: 20000 });
-    const frameElement = await page
-      .locator("main iframe")
-      .first()
-      .elementHandle();
-    const frame = await frameElement!.contentFrame();
-    if (!frame) throw new Error("Cover renderer did not mount");
-    trace("frame load");
-    await frame.waitForURL(/\/templates\//, { timeout: 20000 });
-    await frame.waitForLoadState("domcontentloaded");
-    await page.waitForTimeout(1800);
-    trace("fonts");
-    await frame.evaluate(async () => {
-      await Promise.race([
-        document.fonts.ready,
-        new Promise((resolve) => setTimeout(resolve, 3000)),
-      ]);
-    });
-    if (invitation.templateId === "oltin-uzuk") {
-      // Repeat the selected cover's documented source-only capture overrides.
-      await frame.addStyleTag({
-        content:
-          "html.rx-on #intro .intro__fallback-scene{display:block!important;opacity:1!important}.rx--intro,#intro .scene-canvas,.mh-lang{display:none!important}",
-      });
-    }
-    trace("scene");
-    if (recipe.scene !== "opening") {
-      const selector =
-        recipe.scene === "lid"
-          ? "#lid"
-          : "#openInvite, #sk-open, #qg-open, #splash-open, #os-open, #oy-open, #mw-open, #splash.splash[onclick], #fs-open, #mp-open, #tv-open, #open-invitation, #gate-knock, #open-prompt, #open-btn, #openBtn, #openEnvelope, #si-opener, [data-open], [data-gg-source-opening], [data-chorlove-open], [data-landing-screenshot-id='invite-envelope']";
-      const opener = frame.locator(selector).first();
-      if (recipe.scene === "book") {
-        const box = await opener.boundingBox();
-        if (!box) throw new Error("Cover opening control missing");
-        await page.mouse.move(box.x + box.width / 2, box.y + box.height / 3);
-        await page.mouse.down();
-        await page.mouse.move(
-          box.x + box.width / 2,
-          Math.min(790, box.y + box.height / 3 + 360),
-          { steps: 30 },
-        );
-        await page.mouse.up();
-        // The source also supports Enter; this completes a short drag that
-        // falls below its viewport-dependent threshold without fabricating art.
-        if (
-          !(await frame.evaluate(() =>
-            document.body.classList.contains("is-open"),
-          ))
-        ) {
-          await opener.press("Enter");
-        }
-      } else {
-        await opener.click({ force: true, timeout: 5000 });
-      }
-      if (invitation.templateId === "doira") {
-        for (let tap = 0; tap < 2; tap++) {
-          await page.waitForTimeout(250);
-          await opener.evaluate((element) => (element as HTMLElement).click());
-        }
-      }
-      const skip = frame.locator("#skip-intro");
-      if (await skip.count())
-        await skip.evaluate((element) => (element as HTMLElement).click());
-      // Let the source finish its own reveal, including chained name strokes.
-      await frame.evaluate(() => {
-        const gsap = (
-          window as Window & {
-            gsap?: { globalTimeline: { timeScale(value: number): void } };
+        // No caller cookies in the browser, no API writes, no arbitrary remote URLs.
+        // Creator media is proxied only through its existing authorization endpoint.
+        const mediaOrigin = process.env.R2_PUBLIC_BASE_URL
+          ? new URL(process.env.R2_PUBLIC_BASE_URL).origin
+          : null;
+        await context.route("**/*", async (route) => {
+          const request = route.request();
+          const url = new URL(request.url());
+          if (request.method() !== "GET") return route.abort();
+          // Audio contributes no pixels. Keep video available because some source
+          // templates use its first frame as their actual cover artwork.
+          if (/\.(?:mp3|ogg|wav|m4a|aac|flac)$/i.test(url.pathname))
+            return route.abort();
+          const kind = coverRequestKind(url.href, origin, mediaOrigin);
+          if (kind === "deny") return route.abort();
+          if (kind === "media") {
+            const response = await fetch(url.href, {
+              headers: { cookie },
+              redirect: "manual",
+              signal: AbortSignal.timeout(10000),
+            }).catch(() => null);
+            if (!response) return route.abort();
+            const contentType = response.headers.get("Content-Type") ?? "";
+            if (!response.ok || !contentType.startsWith("image/"))
+              return route.abort();
+            return route.fulfill({
+              status: 200,
+              contentType,
+              body: Buffer.from(await response.arrayBuffer()),
+            });
           }
-        ).gsap;
-        gsap?.globalTimeline.timeScale(4);
-      });
-      await page.waitForTimeout(4000);
-    } else {
-      // Some selected covers follow an automatic door reveal rather than a tap.
-      await page.waitForTimeout(
-        invitation.templateId === "butterfly" ? 6500 : 2000,
-      );
-    }
-    trace("settle images");
-    await settleImages(page);
-    trace("freeze");
-    // Freeze the selected scene; don't replay its animation on every dashboard visit.
-    await frame.evaluate(() => {
-      document
-        .querySelectorAll("audio,video")
-        .forEach((media) => (media as HTMLMediaElement).pause());
-      document.getAnimations().forEach((animation) => animation.pause());
-      const style = document.createElement("style");
-      style.textContent =
-        "html,body,*{scrollbar-width:none!important}::-webkit-scrollbar{display:none!important}";
-      document.head.append(style);
-    });
-    trace("screenshot");
-    const screenshot = await captureCoverPixels(page, recipe.element);
-    const bytes = await sharp(screenshot)
-      .resize(COVER_VIEWPORT.width, COVER_VIEWPORT.height, {
-        fit: "cover",
-        position: "top",
-      })
-      .webp({ quality: 88 })
-      .toBuffer();
-    succeeded = true;
-    return bytes;
+          return route.continue();
+        });
+        await context.addInitScript((data) => {
+          // Canvas/GSAP loops continue after CSS animations are paused. Retain the
+          // selected frame but stop requesting new frames before pixel capture.
+          const requestFrame = window.requestAnimationFrame.bind(window);
+          const cancelFrame = window.cancelAnimationFrame.bind(window);
+          const pendingFrames = new Set<number>();
+          let frozen = false;
+          window.requestAnimationFrame = (callback) => {
+            if (frozen) return 0;
+            const id = requestFrame((time) => {
+              pendingFrames.delete(id);
+              if (!frozen) callback(time);
+            });
+            pendingFrames.add(id);
+            return id;
+          };
+          window.cancelAnimationFrame = (id) => {
+            pendingFrames.delete(id);
+            cancelFrame(id);
+          };
+          (window as Window & { __freezeCover?: () => void }).__freezeCover =
+            () => {
+              frozen = true;
+              pendingFrames.forEach(cancelFrame);
+              pendingFrames.clear();
+            };
+          if (window === window.top)
+            (
+              window as Window & { __invitationCover?: unknown }
+            ).__invitationCover = JSON.parse(data);
+          HTMLMediaElement.prototype.play = () => Promise.resolve();
+        }, JSON.stringify(invitation));
+        const page = await context.newPage();
+        page.setDefaultTimeout(8000);
+        trace("navigate");
+        await page.goto(
+          `${origin}/preview?template=${encodeURIComponent(invitation.templateId)}&cover=1`,
+          { waitUntil: "domcontentloaded", timeout: 30000 },
+        );
+        await page.addStyleTag({
+          content: "nextjs-portal{display:none!important}",
+        });
+        trace("mount");
+        await page
+          .locator("main iframe")
+          .first()
+          .waitFor({ state: "attached", timeout: 20000 });
+        const frameElement = await page
+          .locator("main iframe")
+          .first()
+          .elementHandle();
+        const frame = await frameElement!.contentFrame();
+        if (!frame) throw new Error("Cover renderer did not mount");
+        trace("frame load");
+        await frame.waitForURL(/\/templates\//, { timeout: 20000 });
+        await frame.waitForLoadState("domcontentloaded");
+        await page.waitForTimeout(1800);
+        trace("fonts");
+        await frame.evaluate(async () => {
+          await Promise.race([
+            document.fonts.ready,
+            new Promise((resolve) => setTimeout(resolve, 3000)),
+          ]);
+        });
+        if (invitation.templateId === "oltin-uzuk") {
+          // Repeat the selected cover's documented source-only capture overrides.
+          await frame.addStyleTag({
+            content:
+              "html.rx-on #intro .intro__fallback-scene{display:block!important;opacity:1!important}.rx--intro,#intro .scene-canvas,.mh-lang{display:none!important}",
+          });
+        }
+        trace("scene");
+        if (recipe.scene !== "opening") {
+          const selector =
+            recipe.scene === "lid"
+              ? "#lid"
+              : "#openInvite, #sk-open, #qg-open, #splash-open, #os-open, #oy-open, #mw-open, #splash.splash[onclick], #fs-open, #mp-open, #tv-open, #open-invitation, #gate-knock, #open-prompt, #open-btn, #openBtn, #openEnvelope, #si-opener, [data-open], [data-gg-source-opening], [data-chorlove-open], [data-landing-screenshot-id='invite-envelope']";
+          const opener = frame.locator(selector).first();
+          if (recipe.scene === "book") {
+            const box = await opener.boundingBox();
+            if (!box) throw new Error("Cover opening control missing");
+            await page.mouse.move(
+              box.x + box.width / 2,
+              box.y + box.height / 3,
+            );
+            await page.mouse.down();
+            await page.mouse.move(
+              box.x + box.width / 2,
+              Math.min(790, box.y + box.height / 3 + 360),
+              { steps: 30 },
+            );
+            await page.mouse.up();
+            // The source also supports Enter; this completes a short drag that
+            // falls below its viewport-dependent threshold without fabricating art.
+            if (
+              !(await frame.evaluate(() =>
+                document.body.classList.contains("is-open"),
+              ))
+            ) {
+              await opener.press("Enter");
+            }
+          } else {
+            await opener.click({ force: true, timeout: 5000 });
+          }
+          if (invitation.templateId === "doira") {
+            for (let tap = 0; tap < 2; tap++) {
+              await page.waitForTimeout(250);
+              await opener.evaluate((element) =>
+                (element as HTMLElement).click(),
+              );
+            }
+          }
+          const skip = frame.locator("#skip-intro");
+          if (await skip.count())
+            await skip.evaluate((element) => (element as HTMLElement).click());
+          // Let the source finish its own reveal, including chained name strokes.
+          await frame.evaluate(() => {
+            const gsap = (
+              window as Window & {
+                gsap?: { globalTimeline: { timeScale(value: number): void } };
+              }
+            ).gsap;
+            gsap?.globalTimeline.timeScale(4);
+          });
+          await page.waitForTimeout(4000);
+        } else {
+          // Some selected covers follow an automatic door reveal rather than a tap.
+          await page.waitForTimeout(
+            invitation.templateId === "butterfly" ? 6500 : 2000,
+          );
+        }
+        trace("settle images");
+        await settleImages(page);
+        trace("freeze");
+        // Freeze the selected scene; don't replay its animation on every dashboard visit.
+        await frame.evaluate(() => {
+          (window as Window & { __freezeCover?: () => void }).__freezeCover?.();
+          document
+            .querySelectorAll("audio,video")
+            .forEach((media) => (media as HTMLMediaElement).pause());
+          document.getAnimations().forEach((animation) => animation.pause());
+          const style = document.createElement("style");
+          style.textContent =
+            "html,body,*{scrollbar-width:none!important}::-webkit-scrollbar{display:none!important}";
+          document.head.append(style);
+        });
+        trace("screenshot");
+        const screenshot = await captureCoverPixels(page, recipe.element);
+        const bytes = await sharp(screenshot)
+          .resize(COVER_VIEWPORT.width, COVER_VIEWPORT.height, {
+            fit: "cover",
+            position: "top",
+          })
+          .webp({ quality: 88 })
+          .toBuffer();
+        succeeded = true;
+        return bytes;
+      },
+      42000,
+      () => {
+        expired = true;
+        // Invalidate the warm pool immediately; do not reuse a timed-out browser.
+        if (browser) void browsers.discard(browser);
+      },
+    );
   } catch (error) {
+    console.error("Invitation cover capture diagnostics", {
+      templateId: invitation.templateId,
+      stage,
+      elapsedMs: Date.now() - started,
+      deadlineExpired: expired,
+      rssMb: Math.round(process.memoryUsage().rss / 1048576),
+    });
     throw coverFailure(error, stage);
   } finally {
-    await context?.close().catch(() => {});
-    clearTimeout(timeout);
+    if (context) await coverCleanup(() => context!.close());
     if (browser) {
       if (succeeded) browsers.release(browser);
       else await browsers.discard(browser);

@@ -133,8 +133,11 @@ Next's server bundle; the full Playwright dependency remains available for local
 `INVITATION_COVER_BROWSER_PATH` selects a managed Chromium executable;
 `INVITATION_COVER_DIR` selects the private cache directory. No database migration
 or catalog publication change is required. Browser imports occur inside the API's
-JSON error boundary. Browser launch has a 15-second timeout and a 35-second capture
-watchdog, leaving room under the route's 60-second function limit. Successful jobs
+JSON error boundary. Browser launch has a 15-second timeout. An independent
+42-second deadline includes executable extraction, launch and the entire render;
+it rejects even if Chromium shutdown stalls. CDP screenshot calls have an
+8-second deadline and context/browser/CDP cleanup waits are bounded to one second
+each, leaving room under the route's 60-second function limit. Successful jobs
 close their private context and retain the browser for up to 20 idle seconds;
 failed jobs discard the browser. Each context starts with no cookies or draft
 data from earlier jobs. Serverless launch disables Chromium's single-process
@@ -146,6 +149,26 @@ visible images settle, CDP captures its pixels directly, including the special
 hero crop. This avoids Playwright screenshot preparation waiting again for
 unrelated hidden/offscreen fonts. The selected scenes and existing cache version
 are preserved.
+
+Before screenshotting, cancel outstanding animation-frame callbacks as well as
+pausing CSS animations and media. This stops canvas/GSAP loops from continuously
+rendering during capture while retaining the selected real source frame.
+Failures log template ID, stage, elapsed milliseconds, deadline status and Node
+RSS (no names/content/cookies). Storage configuration warnings report missing
+environment-variable names without exposing values. On Vercel, configure
+`MEDIA_STORAGE=r2`, `R2_ACCOUNT_ID`, `R2_ACCESS_KEY_ID`, `R2_SECRET_ACCESS_KEY`,
+`R2_BUCKET_NAME` and a stable `SESSION_SECRET` of at least 32 characters in the
+deployment's environment. Vercel Deployment Storage is retained build output,
+not this application media backend; reducing deployment retention does not
+configure cover persistence. No production Vercel stall is claimed reproduced
+by local tests.
+
+Timeout repair verification: 10 focused tests passed, including permanently
+stalled CDP screenshot/detach and browser-close operations. Production build and
+deployment tracing passed. Real local production captures passed for Anor
+(including a name replacement), Somon Yo‘li, Butterfly and Aurelia in 5–10 seconds
+each. The deployed Vercel runtime still needs verification after deployment and
+configuration of persistent storage.
 
 2026-10-30 performance repair verification: the focused tests, dashboard browser
 suite, production build and deployment trace checks passed. Real synthetic

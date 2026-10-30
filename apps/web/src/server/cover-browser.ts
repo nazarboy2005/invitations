@@ -1,4 +1,5 @@
 import type { Browser, Page } from "playwright-core";
+import { coverCleanup, coverDeadline } from "./cover-deadline";
 
 // One warm browser, with a new private context for every capture. The caller
 // admits one capture at a time, including cleanup of failed jobs.
@@ -19,7 +20,7 @@ export class CoverBrowser {
       clearTimeout(this.idle);
       this.browser = undefined;
     }
-    await browser.close().catch(() => {});
+    await coverCleanup(() => browser.close());
   }
 
   release(browser: Browser) {
@@ -41,13 +42,17 @@ export async function captureCoverPixels(page: Page, element?: string) {
     // Fonts/images and the selected animation scene are settled by the caller.
     // Capture those pixels directly: Playwright's screenshot preparation waits
     // again for every font (including hidden/offscreen template content).
-    const result = await session.send("Page.captureScreenshot", {
-      format: "png",
-      captureBeyondViewport: true,
-      clip: { ...(box ?? { x: 0, y: 0, ...viewport }), scale: 1 },
-    });
+    const result = await coverDeadline(
+      () =>
+        session.send("Page.captureScreenshot", {
+          format: "png",
+          captureBeyondViewport: true,
+          clip: { ...(box ?? { x: 0, y: 0, ...viewport }), scale: 1 },
+        }),
+      8000,
+    );
     return Buffer.from(result.data, "base64");
   } finally {
-    await session.detach().catch(() => {});
+    await coverCleanup(() => session.detach());
   }
 }
