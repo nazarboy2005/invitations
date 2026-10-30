@@ -16,7 +16,12 @@ const config: NextConfig = {
     "sharp",
   ],
   outputFileTracingIncludes: {
-    "/api/invitation-covers": ["./node_modules/@sparticuz/chromium/bin/**"],
+    "/api/invitation-covers": [
+      "./node_modules/@sparticuz/chromium/bin/**",
+      // Playwright resolves browsers.json and other runtime assets dynamically.
+      // Tracing only its JS entry points produces a broken serverless package.
+      "./node_modules/playwright-core/**",
+    ],
   },
   outputFileTracingExcludes: {
     // Capture loads template artwork over HTTP; these files stay on the CDN.

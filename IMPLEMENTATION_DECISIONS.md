@@ -274,6 +274,10 @@
   make unavailable hashing/storage nonfatal. Reuse personalized WebPs on repeat
   visits, regenerate only changed visual content, retain the previous same-card
   image during replacement, and provide bounded retries plus manual recovery.
+- Production packaging follow-up (2026-10-30): the deployed error confirmed
+  Playwright Core's dynamically loaded `browsers.json` was missing. Explicitly
+  trace the complete Playwright Core package alongside Chromium's archives and
+  verify required runtime assets in the generated manifest after every build.
 - User correction: invitations have only two creator states: draft and published.
   Remove archive/unpublish actions, labels and republish controls, including admin
   management. Both drafts and publications can be deleted with confirmation.

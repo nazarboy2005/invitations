@@ -60,7 +60,13 @@ budget. Long rate limits stop automatic retries. A separate keyboard-accessible
 On Vercel, the application uses the pinned `@sparticuz/chromium` Linux x64 binary
 with `playwright-core`, not a developer machine's Playwright browser install.
 Next externalizes both packages and explicitly traces `@sparticuz/chromium/bin/**`
-into the cover route. No runtime binary download URL or extra service is needed.
+and the complete `playwright-core/**` runtime into the cover route. Playwright
+loads `browsers.json` dynamically at import time even when Chromium's executable
+path is supplied separately. Tracing its JavaScript alone omitted that file in
+production and caused `COVER_DEPENDENCY_MISSING` before browser startup.
+`pnpm build` now checks the actual cover-route deployment manifest for Playwright's
+metadata/entry points/bundles and Chromium's binary/library/font archives, failing
+the build if any are absent. No runtime binary download URL or extra service is needed.
 Vercel's private disk cache lives under the OS temporary directory (`/tmp`), since
 the deployed application directory is read-only. It survives warm invocations only;
 browser CacheStorage provides reuse across reloads and server cold starts. Read or
@@ -102,6 +108,13 @@ cache. The live Vercel endpoint was confirmed to return an empty HTTP 500 before
 the repair. A separate Linux x64 smoke check launched packaged Chromium 153 with
 Playwright Core and rendered Anor's real opened scene using synthetic personalized
 names. External redeployment still requires access to the Vercel project.
+
+The subsequent production dependency error identified the omitted
+`playwright-core/browsers.json`. After the explicit package include, the build and
+its new manifest check passed. All 115 Playwright Core files were copied from the
+manifest to an isolated temporary directory and successfully imported there,
+including browser metadata and device descriptors. The updated cover trace totals
+about 83.2 MiB on the local build host. This packaging correction requires redeployment.
 
 When changing selected scenes or renderer artwork, update the recipe and bump
 `COVER_VERSION` to invalidate both caches. Inspect personalized captures beside

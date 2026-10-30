@@ -7,7 +7,7 @@
   "version": "0.1.0",
   "scripts": {
     "dev": "next dev --hostname 127.0.0.1 --port 3001",
-    "build": "next build",
+    "build": "next build && node scripts/verify-cover-deployment.cjs",
     "start": "next start --hostname 127.0.0.1 --port 3001",
     "typecheck": "tsc --noEmit"
   },
