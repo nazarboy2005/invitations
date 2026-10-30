@@ -9,7 +9,19 @@ const config: NextConfig = {
   distDir: process.env.TAKLIFNOMA_BUILD_DIST_DIR ?? ".next",
   transpilePackages: ["@taklifnoma/contracts", "@taklifnoma/database"],
   poweredByHeader: false,
-  serverExternalPackages: ["playwright", "playwright-core", "sharp"],
+  serverExternalPackages: [
+    "playwright",
+    "playwright-core",
+    "@sparticuz/chromium",
+    "sharp",
+  ],
+  outputFileTracingIncludes: {
+    "/api/invitation-covers": ["./node_modules/@sparticuz/chromium/bin/**"],
+  },
+  outputFileTracingExcludes: {
+    // Capture loads template artwork over HTTP; these files stay on the CDN.
+    "/api/invitation-covers": ["./public/**", "./src/templates/**"],
+  },
   async headers() {
     return [
       {

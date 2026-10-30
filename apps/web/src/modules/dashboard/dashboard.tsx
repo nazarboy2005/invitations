@@ -118,15 +118,16 @@ function InvitationCard({
       }}
     >
       <div className={styles.cardCover}>
-        <Link
-          href={onOpenActivity ? activityUrl : editUrl}
-          className={styles.cardArt}
-          aria-label={
-            onOpenActivity
-              ? `${names}: javoblar, tilaklar va cheklar`
-              : `${names}: taklifnomani tahrirlash`
-          }
-        >
+        <div className={styles.cardArt}>
+          <Link
+            href={onOpenActivity ? activityUrl : editUrl}
+            className={styles.coverLink}
+            aria-label={
+              onOpenActivity
+                ? `${names}: javoblar, tilaklar va cheklar`
+                : `${names}: taklifnomani tahrirlash`
+            }
+          />
           {template ? (
             <InvitationThumbnail
               invitation={invitation}
@@ -138,7 +139,7 @@ function InvitationCard({
               Dizayn tanlanmagan
             </span>
           )}
-        </Link>
+        </div>
         <span
           className={styles.cardStatus}
           data-published={invitation.status === "published"}

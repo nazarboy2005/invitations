@@ -1,7 +1,6 @@
 import { invitationSchema, templateById } from "@taklifnoma/contracts";
 import { verifySameOrigin } from "@/server/auth";
 import { ApiError, apiError, privateHeaders, readJson } from "@/server/api";
-import { personalizedCover } from "@/server/invitation-cover";
 
 export const runtime = "nodejs";
 export const maxDuration = 60;
@@ -14,6 +13,8 @@ export async function POST(request: Request) {
     const invitation = invitationSchema.parse(await readJson(request));
     if (!templateById(invitation.templateId))
       throw new ApiError(400, "NO_TEMPLATE", "Avval dizayn tanlang.");
+    // Keep browser/native dependency failures inside the JSON error boundary.
+    const { personalizedCover } = await import("@/server/invitation-cover");
     const image = await personalizedCover(
       invitation,
       request.headers.get("x-forwarded-for")?.split(",")[0] ?? "local",

@@ -1,15 +1,7 @@
-import { createHash, randomUUID } from "node:crypto";
-import {
-  mkdir,
-  readFile,
-  rename,
-  writeFile,
-  readdir,
-  stat,
-  unlink,
-} from "node:fs/promises";
+import { createHash } from "node:crypto";
+import { readdir, stat, unlink } from "node:fs/promises";
 import path from "node:path";
-import { chromium, type Page } from "playwright";
+import { chromium, type Page } from "playwright-core";
 import sharp from "sharp";
 import type { Invitation } from "@taklifnoma/contracts";
 import {
@@ -20,6 +12,8 @@ import {
 import { ApiError } from "./api";
 import { coverKey, coverRequestKind } from "./cover-policy";
 import { SESSION_COOKIE } from "./auth";
+import { coverBrowserOptions, coverCacheRoot } from "./cover-runtime";
+import { readCoverFile, writeCoverFile } from "./cover-disk-cache";
 
 const pending = new Map<string, Promise<Buffer>>();
 let active = 0;
@@ -27,21 +21,14 @@ const buckets = new Map<string, { count: number; until: number }>();
 
 // Cache files contain private draft content. They never live under public/ and
 // there is no GET-by-hash route: a caller must submit the actual content again.
-function cacheRoot() {
-  return path.resolve(
-    /* turbopackIgnore: true */ process.env.INVITATION_COVER_DIR ||
-      path.join(process.cwd(), ".data", "invitation-covers"),
-  );
-}
-
 async function pruneCache(root: string) {
-  const names = (await readdir(root)).filter((name) =>
+  const names = (await readdir(/* turbopackIgnore: true */ root)).filter((name) =>
     /^[a-f0-9]{64}\.webp$/.test(name),
   );
   const files = await Promise.all(
     names.map(async (name) => ({
       name,
-      info: await stat(path.join(root, name)),
+      info: await stat(/* turbopackIgnore: true */ path.join(root, name)),
     })),
   );
   files.sort((a, b) => b.info.mtimeMs - a.info.mtimeMs);
@@ -83,26 +70,18 @@ export async function personalizedCover(
       .map((part) => part.trim())
       .find((part) => part.startsWith(`${SESSION_COOKIE}=`)) ?? "";
   const key = coverKey(invitation, session);
-  const root = cacheRoot();
+  const root = coverCacheRoot();
   const file = path.join(root, `${key}.webp`);
-  try {
-    return await readFile(/* turbopackIgnore: true */ file);
-  } catch (error) {
-    if ((error as NodeJS.ErrnoException).code !== "ENOENT") throw error;
-  }
+  const cached = await readCoverFile(file);
+  if (cached) return cached;
   // Preserve previously generated covers while upgrading the fingerprint.
   const legacy = createHash("sha256")
     .update(COVER_VERSION)
     .update(JSON.stringify(invitation))
     .update(cookie)
     .digest("hex");
-  try {
-    return await readFile(
-      /* turbopackIgnore: true */ path.join(root, `${legacy}.webp`),
-    );
-  } catch (error) {
-    if ((error as NodeJS.ErrnoException).code !== "ENOENT") throw error;
-  }
+  const previous = await readCoverFile(path.join(root, `${legacy}.webp`));
+  if (previous) return previous;
   if (pending.has(key)) return pending.get(key)!;
   if (active >= 2)
     throw new ApiError(
@@ -115,11 +94,8 @@ export async function personalizedCover(
     active++;
     try {
       const bytes = await captureCover(invitation, cookie);
-      await mkdir(root, { recursive: true, mode: 0o700 });
-      const temporary = `${file}.${randomUUID()}.tmp`;
-      await writeFile(temporary, bytes, { mode: 0o600 });
-      await rename(temporary, file);
-      await pruneCache(root).catch(() => {});
+      if (await writeCoverFile(file, bytes))
+        await pruneCache(root).catch(() => {});
       return bytes;
     } finally {
       active--;
@@ -136,19 +112,16 @@ export async function captureCover(invitation: Invitation, cookie = "") {
   trace("launch");
   const origin = new URL(process.env.APP_URL!).origin;
   const recipe = coverRecipe(invitation.templateId);
-  const browser = await chromium.launch({
-    headless: true,
-    executablePath: process.env.INVITATION_COVER_BROWSER_PATH || undefined,
-  });
-  const context = await browser.newContext({
-    viewport: recipe.viewport,
-    deviceScaleFactor: 1,
-    serviceWorkers: "block",
-  });
+  const browser = await chromium.launch(await coverBrowserOptions());
   const timeout = setTimeout(() => {
-    void context.close();
-  }, 55000);
+    void browser.close().catch(() => {});
+  }, 40000);
   try {
+    const context = await browser.newContext({
+      viewport: recipe.viewport,
+      deviceScaleFactor: 1,
+      serviceWorkers: "block",
+    });
     // No caller cookies in the browser, no API writes, no arbitrary remote URLs.
     // Creator media is proxied only through its existing authorization endpoint.
     const mediaOrigin = process.env.R2_PUBLIC_BASE_URL
@@ -299,7 +272,7 @@ export async function captureCover(invitation: Invitation, cookie = "") {
       .toBuffer();
   } finally {
     clearTimeout(timeout);
-    await browser.close();
+    await browser.close().catch(() => {});
   }
 }
 

@@ -268,6 +268,12 @@
   memory cache when browser disk storage is unavailable. Only visual content
   changes invalidate a cover; publication state, revisions, counters, audio and
   unrelated cookies do not. Reuse the previous cache format during migration.
+- Production repair approved (2026-10-30): fix covers that work on localhost but
+  fail at the Vercel cover endpoint, and harden browser caching/recovery. Package
+  serverless Chromium for Vercel, use private temporary disk storage there, and
+  make unavailable hashing/storage nonfatal. Reuse personalized WebPs on repeat
+  visits, regenerate only changed visual content, retain the previous same-card
+  image during replacement, and provide bounded retries plus manual recovery.
 - User correction: invitations have only two creator states: draft and published.
   Remove archive/unpublish actions, labels and republish controls, including admin
   management. Both drafts and publications can be deleted with confirmation.
@@ -2298,6 +2304,8 @@ Development agents are distinct from production queue workers. The running app w
 - Preserve the Terracotta wedding source artwork, native opener, dust and floating botanicals. Information/footer prose uses editable validated localized `templateData["taklifla-terracotta"]`; core identity/greeting/message/hosts/program/date and Google venue stay shared. Catalog notes and wishes come only from the canonical wedding profile. No guest-count input. Migrations 0201/0202 register/publish after verification.
 
 ## Studio follow-up corrections (2026-10-30)
+
+- Landing-page paper gallery ("Bir taklif. Bir go‘zal hikoya."): add paper rustling synchronized to folding/unfolding; preserve all other landing-page sounds.
 
 - Default music means a soundtrack is preselected for publishing, not automatic playback for the creator. Studio sends a silent music projection to every embedded renderer; the saved selection and manually operated editor listening sample remain available. Guest/public playback policy is unchanged.
 - Keep the thin, warm-track preview scrollbar attached across step changes; apply frame styling synchronously when the document is available instead of removing it and waiting for scene navigation.

@@ -6,6 +6,7 @@ import { paperEase, paperHash } from "./paper-reveal-motion";
 import { printPaperCaption } from "./paper-print";
 import { paperExpansion, paperOpenLayout } from "./paper-layout";
 import type { PaperStatus } from "./paper-availability";
+import { createPaperMotionSound } from "./site-sound";
 
 /** One shared, demand-driven WebGL engine; each paper keeps only a 2D presentation canvas. */
 export function usePaperReveal(
@@ -68,10 +69,12 @@ export function usePaperReveal(
     const key = `visol-paper-${shape}`;
     const seed = shape - 1;
     const hash = (salt: number) => paperHash(seed, salt);
+    const sound = createPaperMotionSound();
 
     function stop() {
       cancelAnimationFrame(frame);
       frame = 0;
+      sound.stop();
     }
     function fallback(reason: unknown = "graphics-context-lost") {
       failed = true;
@@ -123,6 +126,7 @@ export function usePaperReveal(
       const dt = Math.min(0.05, Math.max(0, (now - last) / 1000));
       last = now;
       const elapsed = Math.min(1, Math.max(0, (now - started) / 1200));
+      const previousProgress = progress;
       progress = from + (target - from) * paperEase(elapsed);
       const expansion = paperExpansion(progress);
       el!.style.setProperty(
@@ -203,6 +207,11 @@ export function usePaperReveal(
           ph,
         );
         el!.dataset.rendered = "true";
+        sound.update(
+          visible && elapsed < 1 && dt > 0
+            ? Math.abs(progress - previousProgress) / dt
+            : 0,
+        );
         if (!hasFrame) {
           hasFrame = true;
           onStatus(shape, "ready");

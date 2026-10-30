@@ -74,6 +74,60 @@ export function resumeSiteSound() {
   if (!document.hidden) void context?.resume().catch(() => {});
 }
 
+/** A gallery-local rustle that follows actual paper movement, outside cue cooldowns. */
+export function createPaperMotionSound() {
+  let voice: { source: AudioBufferSourceNode; envelope: GainNode } | undefined;
+  function stop() {
+    if (!voice || !context) return;
+    const { source, envelope } = voice;
+    voice = undefined;
+    envelope.gain.cancelScheduledValues(context.currentTime);
+    envelope.gain.setTargetAtTime(0, context.currentTime, 0.015);
+    source.stop(context.currentTime + 0.06);
+  }
+  return {
+    stop,
+    update(speed: number) {
+      if (
+        speed < 0.015 ||
+        blocked ||
+        !context ||
+        context.state !== "running" ||
+        document.hidden
+      ) {
+        stop();
+        return;
+      }
+      const buffer = buffers.get(siteSoundSamples.paper.file);
+      if (!buffer) return;
+      if (!voice) {
+        const source = context.createBufferSource();
+        const envelope = context.createGain();
+        source.buffer = buffer;
+        source.loop = true;
+        source.playbackRate.value = 1;
+        envelope.gain.setValueAtTime(0, context.currentTime);
+        source.connect(envelope).connect(context.destination);
+        voices.set(source, envelope);
+        source.onended = () => {
+          voices.delete(source);
+          if (voice?.source === source) voice = undefined;
+          source.disconnect();
+          envelope.disconnect();
+        };
+        voice = { source, envelope };
+        source.start(context.currentTime);
+      }
+      // The same natural paper texture grows with fold speed and fades at rest.
+      voice.envelope.gain.setTargetAtTime(
+        0.16 * Math.min(1, speed / 1.8),
+        context.currentTime,
+        0.025,
+      );
+    },
+  };
+}
+
 /** Play only a ready sample at its cue. Never queue playback behind a fetch. */
 export function playSiteSound(cue: SiteSound | string | undefined) {
   if (

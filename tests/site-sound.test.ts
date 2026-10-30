@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import { createSoundProgress } from "../apps/web/src/components/site-sound-progress";
 import {
   blockSiteSound,
+  createPaperMotionSound,
   playSiteSound,
   quietSiteSound,
   resumeSiteSound,
@@ -47,6 +48,7 @@ test("samples load once after interaction and never play late or over a preview"
   let starts = 0;
   let created = 0;
   let decodes = 0;
+  let stops = 0;
   const requests: string[] = [];
   const pending: Array<() => void> = [];
   const rates: number[] = [];
@@ -76,7 +78,9 @@ test("samples load once after interaction and never play late or over a preview"
         starts++;
         rates.push(rate.value);
       },
-      stop() {},
+      stop() {
+        stops++;
+      },
       playbackRate: rate,
       onended: null,
     };
@@ -174,10 +178,48 @@ test("samples load once after interaction and never play late or over a preview"
       rates.every((rate) => rate === 1),
       "natural pitch for every cue",
     );
+    const paper = createPaperMotionSound();
+    const beforePaper = starts;
+    paper.update(0);
+    assert.equal(starts, beforePaper, "stationary paper stays silent");
+    paper.update(2);
+    assert.equal(starts, beforePaper + 1);
+    paper.update(1);
+    assert.equal(starts, beforePaper + 1, "movement shares one rustle voice");
+    playSiteSound("water");
+    assert.equal(
+      starts,
+      beforePaper + 2,
+      "paper does not consume other cues' cooldown",
+    );
+    const beforeStop = stops;
+    paper.update(0);
+    assert.equal(stops, beforeStop + 1, "settling fades the rustle");
+    paper.stop();
+    assert.equal(stops, beforeStop + 1, "cleanup is idempotent");
+    paper.update(2);
+    assert.equal(
+      starts,
+      beforePaper + 3,
+      "a reversed fold can sound immediately",
+    );
+    blockSiteSound(true);
+    paper.update(2);
+    assert.equal(
+      starts,
+      beforePaper + 3,
+      "preview blocks paper movement audio",
+    );
+    blockSiteSound(false);
+    page.hidden = true;
+    paper.update(2);
+    assert.equal(starts, beforePaper + 3, "hidden paper stays silent");
+    page.hidden = false;
+    const beforeQuiet = starts;
     quietSiteSound();
     assert.equal(audio!.state, "suspended");
     playSiteSound("water");
-    assert.equal(starts, beforeRemoved);
+    assert.equal(starts, beforeQuiet);
   } finally {
     for (const [name, original] of restore) {
       if (original) Object.defineProperty(globalThis, name, original);

@@ -42,23 +42,66 @@ run per process; extra callers receive a retry response. New work is limited to
 cache retains at most 500 images for up to seven days; it is disposable. Browser
 CacheStorage holds up to 100 content/version/account-scoped images. A bounded
 memory cache retains ready object URLs across component remounts, including when
-disk caching is unavailable; displayed images remain pinned until their cards
+disk caching or Web Crypto is unavailable. Cached WebPs are decoded before reuse;
+broken entries are deleted and fetched again. Successful images display without
+waiting for browser cache writes/eviction. Displayed images remain pinned until their cards
 unmount. Filters hide cards without unmounting them, so switching tabs preserves
 the image DOM and performs no cache lookup, request or generation for loaded
 covers. Reopening the dashboard reuses images; editing visual content changes
 the key and generates a fresh cover. Offscreen cards defer requests and listing
-pages run no live templates.
+pages run no live templates. During an edit, the previous image for that same
+account/invitation/template stays visible until its replacement is ready. Network
+errors and HTTP 429/500/502/503/504 get at most three attempts within an 80-second
+budget. Long rate limits stop automatic retries. A separate keyboard-accessible
+"Qayta urinish" button retries failed covers without opening the card's link.
 
 ## Application host setup
 
-Run `pnpm --filter @taklifnoma/web exec playwright install --with-deps chromium`
-on a Node application host that supports spawning Chromium. Playwright and Sharp
-are application dependencies and are externalized from Next's server bundle.
+On Vercel, the application uses the pinned `@sparticuz/chromium` Linux x64 binary
+with `playwright-core`, not a developer machine's Playwright browser install.
+Next externalizes both packages and explicitly traces `@sparticuz/chromium/bin/**`
+into the cover route. No runtime binary download URL or extra service is needed.
+Vercel's private disk cache lives under the OS temporary directory (`/tmp`), since
+the deployed application directory is read-only. It survives warm invocations only;
+browser CacheStorage provides reuse across reloads and server cold starts. Read or
+write failures in the disposable server cache never discard a successful capture.
+Runtime cache paths opt out of source tracing so public template assets are not
+accidentally bundled into the server function.
+
+For local development or a conventional Node host, run
+`pnpm --filter @taklifnoma/web exec playwright install --with-deps chromium`.
+Playwright Core and Sharp are application dependencies and are externalized from
+Next's server bundle; the full Playwright dependency remains available for local QA.
 `APP_URL` must reach the running application from that host. Optional
 `INVITATION_COVER_BROWSER_PATH` selects a managed Chromium executable;
 `INVITATION_COVER_DIR` selects the private cache directory. No database migration
-or catalog publication change is required. This workflow has been tested locally;
-provision Chromium separately on any deployment host.
+or catalog publication change is required. Browser imports occur inside the API's
+JSON error boundary. Browser launch has a 15-second timeout and the capture browser
+closes after 40 seconds, leaving room under the route's 60-second function limit.
+
+Verification commands:
+
+```sh
+pnpm exec tsx --test tests/invitation-covers.test.ts tests/cover-runtime.test.ts
+pnpm typecheck
+pnpm build
+# With the built app running on http://127.0.0.1:3002:
+pnpm exec tsx --test tests/invitation-covers.browser.integration.ts
+```
+
+The browser integration uses synthetic API fixtures and writes no account records.
+It checks cold/warm loads, filters, account isolation, edits, unavailable hashing or
+storage, corrupt cached images, bounded transient retries and manual recovery.
+
+2026-10-30 verification: all 14 focused/browser checks, typecheck and production
+build passed. The cover route's deployment trace includes the Chromium binary,
+Amazon Linux libraries, fonts and SwiftShader; it totals about 81.3 MiB and excludes
+public template artwork. A real synthetic personalized cover returned HTTP 200
+from the local production server in 11.0 seconds cold and 27 ms from its server
+cache. The live Vercel endpoint was confirmed to return an empty HTTP 500 before
+the repair. A separate Linux x64 smoke check launched packaged Chromium 153 with
+Playwright Core and rendered Anor's real opened scene using synthetic personalized
+names. External redeployment still requires access to the Vercel project.
 
 When changing selected scenes or renderer artwork, update the recipe and bump
 `COVER_VERSION` to invalidate both caches. Inspect personalized captures beside
