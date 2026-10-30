@@ -1,5 +1,5 @@
 Object.assign(window.MARHAMAT_I18N = window.MARHAMAT_I18N || {}, {
-  "Oltin Yosh · Marxaba": ["Золотой возраст · Marxaba", "Golden Years · Marxaba"],
+  "Oltin Yosh": ["Золотой возраст", "Golden Years"],
   "Tug‘ilgan kun taqvimi": ["Календарь дня рождения", "Birthday calendar"],
   "Oltin Yosh — shaxsiy bayram taklifnomasi": ["Золотой возраст — персональное приглашение на праздник", "Golden Years — a personal celebration invitation"],
   "Yorqin yosh. Oltin oqshom.": ["Яркий возраст. Золотой вечер.", "Golden years. A golden evening."],
@@ -29,8 +29,7 @@ Object.assign(window.MARHAMAT_I18N = window.MARHAMAT_I18N || {}, {
   "Tilaklar": ["Пожелания", "Wishes"], "Tilagingiz": ["Ваше пожелание", "Your wish"], "Tilak yuborish": ["Отправить пожелание", "Send wish"],
   "EZGU NIYATLAR": ["С ДОБРЫМИ ПОЖЕЛАНИЯМИ", "WITH WARM WISHES"], "To‘yona": ["Подарок", "Gift"],
   "To‘yona ma’lumotlarini ko‘rish": ["Посмотреть реквизиты", "View gift details"], "Nusxa olish": ["Скопировать", "Copy"],
-  "SAVOLLAR UCHUN": ["ПО ВОПРОСАМ", "QUESTIONS"], "Bog‘lanish uchun": ["Контакты", "Contact"], "Marxaba bilan yaratildi": ["Создано с Marxaba", "Made with Marxaba"],
-  "Tug‘ilgan kun": ["День рождения", "Birthday"], "Bayramona libos tanlang.": ["Выберите праздничный наряд.", "Choose festive attire."],
+  "SAVOLLAR UCHUN": ["ПО ВОПРОСАМ", "QUESTIONS"], "Bog‘lanish uchun": ["Контакты", "Contact"], "Tug‘ilgan kun": ["День рождения", "Birthday"], "Bayramona libos tanlang.": ["Выберите праздничный наряд.", "Choose festive attire."],
   "Samimiy tilaklaringizning o‘zi biz uchun katta sovg‘a.": ["Ваши искренние пожелания — уже большой подарок для нас.", "Your heartfelt wishes are already a wonderful gift."],
   "Tabriklaringiz uchun": ["Для ваших поздравлений", "For your congratulations"],
   "Musiqani yoqish": ["Включить музыку", "Turn music on"], "Musiqani o‘chirish": ["Выключить музыку", "Turn music off"],

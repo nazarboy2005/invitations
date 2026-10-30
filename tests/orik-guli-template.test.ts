@@ -80,8 +80,8 @@ test("O‘rik Guli localizes its visible copy and page metadata", () => {
     (text) => !translations[text],
   );
   assert.deepEqual(missing, []);
-  assert.ok(translations["O‘rik Guli · Marxaba taklifnomasi"]);
-  assert.ok(translations["O‘rik Guli — Marxaba raqamli taklifnomasi"]);
+  assert.ok(translations["O‘rik Guli taklifnomasi"]);
+  assert.ok(translations["O‘rik Guli raqamli taklifnomasi"]);
 });
 
 test("O‘rik Guli retains captured source and uses renderer-generated opening art", () => {
@@ -303,7 +303,7 @@ test("O‘rik Guli retains captured source and uses renderer-generated opening a
   }
 });
 
-test("O‘rik Guli routes through the shared typed Marxaba invitation renderer", () => {
+test("O‘rik Guli routes through the shared typed  invitation renderer", () => {
   const marxabaIndex = readFileSync(
     new URL("../apps/web/src/templates/marxaba/registry.ts", import.meta.url),
     "utf8",

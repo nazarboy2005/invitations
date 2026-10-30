@@ -1,9 +1,9 @@
 // Qandil package additions for localized document metadata.
 Object.assign((window.MARHAMAT_I18N = window.MARHAMAT_I18N || {}), {
-  "Marxaba · Qandil": ["Marxaba · Кандиль", "Marxaba · Qandil"],
-  "Qandil — Marxaba raqamli taklifnomasi": [
-    "Кандиль — цифровое приглашение Marxaba",
-    "Qandil — a digital invitation by Marxaba",
+  "Qandil": ["Кандиль", "Qandil"],
+  "Qandil raqamli taklifnomasi": [
+    "Кандиль — цифровое приглашение ",
+    "Qandil — a digital invitation by ",
   ],
 });
 

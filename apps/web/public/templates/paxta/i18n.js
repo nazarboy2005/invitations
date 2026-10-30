@@ -24,11 +24,10 @@ Object.assign(window.MARHAMAT_I18N = window.MARHAMAT_I18N || {}, {
   "Javobni yuborish": ["Отправить ответ", "Send response"], "Javobingiz uchun rahmat!": ["Спасибо за ваш ответ!", "Thank you for your reply!"], "Javobni o‘zgartirish": ["Изменить ответ", "Change response"],
   "Yurakdan": ["От всего сердца", "From the heart"], "Tilaklar": ["Пожелания", "Wishes"], "Tilagingiz": ["Ваше пожелание", "Your wish"], "Tilak yuborish": ["Отправить пожелание", "Send a wish"],
   "Ezgu niyatlar": ["С добрыми пожеланиями", "With good wishes"], "To‘yona": ["Подарок молодожёнам", "Wedding gift"], "To‘yona ma’lumotlarini ko‘rish": ["Показать реквизиты", "View gift details"], "Nusxa olish": ["Скопировать", "Copy"],
-  "Savollar uchun": ["По всем вопросам", "Questions"], "Bog‘lanish uchun": ["Контакты", "Get in touch"], "Marxaba bilan yaratildi": ["Создано с Marxaba", "Made with Marxaba"],
-  "Musiqani yoqish": ["Включить музыку", "Play music"], "Musiqani o‘chirish": ["Выключить музыку", "Mute music"],
-  "Marxaba raqamli taklifnomasi": ["Цифровое приглашение Marxaba", "A Marxaba digital invitation"],
-  "Oq oltin · Marxaba": ["Белое золото · Marxaba", "White gold · Marxaba"],
-  "Oq oltin — Marxaba raqamli taklifnomasi": ["Белое золото — цифровое приглашение Marxaba", "White gold — a Marxaba digital invitation"],
+  "Savollar uchun": ["По всем вопросам", "Questions"], "Bog‘lanish uchun": ["Контакты", "Get in touch"], "Musiqani yoqish": ["Включить музыку", "Play music"], "Musiqani o‘chirish": ["Выключить музыку", "Mute music"],
+  " raqamli taklifnomasi": ["Цифровое приглашение ", "A  digital invitation"],
+  "Oq oltin": ["Белое золото", "White gold"],
+  "Oq oltin raqamli taklifnomasi": ["Белое золото — цифровое приглашение ", "White gold — a  digital invitation"],
   "Paxta · Taklifnoma": ["Хлопок · Приглашение", "Cotton · Invitation"],
   "PA X TA": ["ХЛОПОК", "COTTON"], "COTTON / 01": ["ХЛОПОК / 01", "COTTON / 01"]
 });

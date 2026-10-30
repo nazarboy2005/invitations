@@ -1,7 +1,7 @@
 // Fixed template copy: Uzbek Latin → [Russian, English]. Invitation data is translated in sample-overrides.js.
 Object.assign(window.MARHAMAT_I18N = window.MARHAMAT_I18N || {}, {
-  "Nahorgi osh · Marxaba": ["Утренний плов · Marxaba", "Morning osh · Marxaba"],
-  "Nahorgi osh — Marxaba taklifnomasi": ["Утренний плов — приглашение Marxaba", "Morning osh — a Marxaba invitation"],
+  "Nahorgi osh": ["Утренний плов", "Morning osh"],
+  "Nahorgi osh taklifnomasi": ["Утренний плов — приглашение ", "Morning osh — a  invitation"],
   "Taklifnoma": ["Приглашение", "Invitation"],
   "Qozon qopqog‘ini oching": ["Поднимите крышку казана", "Lift the lid of the qozon"],
   "Taklifnomani ochish": ["Открыть приглашение", "Open the invitation"],
@@ -51,5 +51,4 @@ Object.assign(window.MARHAMAT_I18N = window.MARHAMAT_I18N || {}, {
   "Savollar uchun": ["По вопросам", "Questions"],
   "Bog‘lanish uchun": ["Контакты", "Contact us"],
   "Sizni kutib qolamiz!": ["Ждём вас!", "We look forward to seeing you!"],
-  "Marxaba bilan yaratildi": ["Создано с Marxaba", "Made with Marxaba"]
-});
+  });

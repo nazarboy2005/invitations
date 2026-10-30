@@ -1,0 +1,727 @@
+{
+  "checked": 90,
+  "expected": 90,
+  "failures": [],
+  "results": [
+    {
+      "id": "atlas",
+      "slug": "atlas",
+      "badLinks": [],
+      "badExternal": [],
+      "credits": [],
+      "sampleMaps": []
+    },
+    {
+      "id": "anor",
+      "slug": "anor",
+      "badLinks": [],
+      "badExternal": [],
+      "credits": [],
+      "sampleMaps": []
+    },
+    {
+      "id": "aurelia",
+      "slug": "aurelia",
+      "badLinks": [],
+      "badExternal": [],
+      "credits": [],
+      "sampleMaps": []
+    },
+    {
+      "id": "bitiruv",
+      "slug": "bitiruv",
+      "badLinks": [],
+      "badExternal": [],
+      "credits": [],
+      "sampleMaps": []
+    },
+    {
+      "id": "beshik",
+      "slug": "beshik",
+      "badLinks": [],
+      "badExternal": [],
+      "credits": [],
+      "sampleMaps": []
+    },
+    {
+      "id": "bogi-eram",
+      "slug": "bogi-eram",
+      "badLinks": [],
+      "badExternal": [],
+      "credits": [],
+      "sampleMaps": []
+    },
+    {
+      "id": "bulbul",
+      "slug": "bulbul",
+      "badLinks": [],
+      "badExternal": [],
+      "credits": [],
+      "sampleMaps": []
+    },
+    {
+      "id": "butterfly",
+      "slug": "butterfly",
+      "badLinks": [],
+      "badExternal": [],
+      "credits": [],
+      "sampleMaps": []
+    },
+    {
+      "id": "chavandoz",
+      "slug": "chavandoz",
+      "badLinks": [],
+      "badExternal": [],
+      "credits": [],
+      "sampleMaps": []
+    },
+    {
+      "id": "cloud-castle",
+      "slug": "cloud-castle",
+      "badLinks": [],
+      "badExternal": [],
+      "credits": [],
+      "sampleMaps": []
+    },
+    {
+      "id": "doira",
+      "slug": "doira",
+      "badLinks": [],
+      "badExternal": [],
+      "credits": [],
+      "sampleMaps": []
+    },
+    {
+      "id": "evelina",
+      "slug": "evelina",
+      "badLinks": [],
+      "badExternal": [],
+      "credits": [],
+      "sampleMaps": []
+    },
+    {
+      "id": "fairy",
+      "slug": "fairy",
+      "badLinks": [],
+      "badExternal": [],
+      "credits": [],
+      "sampleMaps": []
+    },
+    {
+      "id": "ganch",
+      "slug": "ganch",
+      "badLinks": [],
+      "badExternal": [],
+      "credits": [],
+      "sampleMaps": []
+    },
+    {
+      "id": "glass-pink",
+      "slug": "glass-pink",
+      "badLinks": [],
+      "badExternal": [],
+      "credits": [],
+      "sampleMaps": []
+    },
+    {
+      "id": "golden-card",
+      "slug": "golden-card",
+      "badLinks": [],
+      "badExternal": [],
+      "credits": [],
+      "sampleMaps": []
+    },
+    {
+      "id": "golden-hour",
+      "slug": "golden-hour",
+      "badLinks": [],
+      "badExternal": [],
+      "credits": [],
+      "sampleMaps": []
+    },
+    {
+      "id": "green-garden",
+      "slug": "green-garden",
+      "badLinks": [],
+      "badExternal": [],
+      "credits": [],
+      "sampleMaps": []
+    },
+    {
+      "id": "green-white",
+      "slug": "green-white",
+      "badLinks": [],
+      "badExternal": [],
+      "credits": [],
+      "sampleMaps": []
+    },
+    {
+      "id": "hilol",
+      "slug": "hilol",
+      "badLinks": [],
+      "badExternal": [],
+      "credits": [],
+      "sampleMaps": []
+    },
+    {
+      "id": "invitate-palov",
+      "slug": "osh-ziyofati",
+      "badLinks": [],
+      "badExternal": [],
+      "credits": [],
+      "sampleMaps": []
+    },
+    {
+      "id": "islamic-edition",
+      "slug": "islamic-edition",
+      "badLinks": [],
+      "badExternal": [],
+      "credits": [],
+      "sampleMaps": []
+    },
+    {
+      "id": "jasmine-white",
+      "slug": "jasmine-white",
+      "badLinks": [],
+      "badExternal": [],
+      "credits": [],
+      "sampleMaps": []
+    },
+    {
+      "id": "konfetti",
+      "slug": "konfetti",
+      "badLinks": [],
+      "badExternal": [],
+      "credits": [],
+      "sampleMaps": []
+    },
+    {
+      "id": "korporativ",
+      "slug": "korporativ",
+      "badLinks": [],
+      "badExternal": [],
+      "credits": [],
+      "sampleMaps": []
+    },
+    {
+      "id": "kozgu",
+      "slug": "kozgu",
+      "badLinks": [],
+      "badExternal": [],
+      "credits": [],
+      "sampleMaps": []
+    },
+    {
+      "id": "kuzgi-chinor",
+      "slug": "kuzgi-chinor",
+      "badLinks": [],
+      "badExternal": [],
+      "credits": [],
+      "sampleMaps": []
+    },
+    {
+      "id": "lace",
+      "slug": "lace",
+      "badLinks": [],
+      "badExternal": [],
+      "credits": [],
+      "sampleMaps": []
+    },
+    {
+      "id": "lola",
+      "slug": "lola",
+      "badLinks": [],
+      "badExternal": [],
+      "credits": [],
+      "sampleMaps": []
+    },
+    {
+      "id": "love-sakura",
+      "slug": "love-sakura",
+      "badLinks": [],
+      "badExternal": [],
+      "credits": [],
+      "sampleMaps": []
+    },
+    {
+      "id": "manor-edition",
+      "slug": "manor-edition",
+      "badLinks": [],
+      "badExternal": [],
+      "credits": [],
+      "sampleMaps": []
+    },
+    {
+      "id": "modern-floral",
+      "slug": "modern-floral",
+      "badLinks": [],
+      "badExternal": [],
+      "credits": [],
+      "sampleMaps": []
+    },
+    {
+      "id": "monogram",
+      "slug": "monogram",
+      "badLinks": [],
+      "badExternal": [],
+      "credits": [],
+      "sampleMaps": []
+    },
+    {
+      "id": "muhabbat-kitobi",
+      "slug": "muhabbat-kitobi",
+      "badLinks": [],
+      "badExternal": [],
+      "credits": [],
+      "sampleMaps": []
+    },
+    {
+      "id": "muhr",
+      "slug": "muhr",
+      "badLinks": [],
+      "badExternal": [],
+      "credits": [],
+      "sampleMaps": []
+    },
+    {
+      "id": "nahor",
+      "slug": "nahor",
+      "badLinks": [],
+      "badExternal": [],
+      "credits": [],
+      "sampleMaps": []
+    },
+    {
+      "id": "nahorgi-osh",
+      "slug": "nahorgi-osh",
+      "badLinks": [],
+      "badExternal": [],
+      "credits": [],
+      "sampleMaps": []
+    },
+    {
+      "id": "nilufar",
+      "slug": "nilufar",
+      "badLinks": [],
+      "badExternal": [],
+      "credits": [],
+      "sampleMaps": []
+    },
+    {
+      "id": "oltin-kuz",
+      "slug": "oltin-kuz",
+      "badLinks": [],
+      "badExternal": [],
+      "credits": [],
+      "sampleMaps": []
+    },
+    {
+      "id": "oltin-nur",
+      "slug": "oltin-nur",
+      "badLinks": [],
+      "badExternal": [],
+      "credits": [],
+      "sampleMaps": []
+    },
+    {
+      "id": "oltin-uzuk",
+      "slug": "oltin-uzuk",
+      "badLinks": [],
+      "badExternal": [],
+      "credits": [],
+      "sampleMaps": []
+    },
+    {
+      "id": "oltin-yosh",
+      "slug": "oltin-yosh",
+      "badLinks": [],
+      "badExternal": [],
+      "credits": [],
+      "sampleMaps": []
+    },
+    {
+      "id": "orchid-amplop",
+      "slug": "orchid-amplop",
+      "badLinks": [],
+      "badExternal": [],
+      "credits": [],
+      "sampleMaps": []
+    },
+    {
+      "id": "oq-kabutar",
+      "slug": "oq-kabutar",
+      "badLinks": [],
+      "badExternal": [],
+      "credits": [],
+      "sampleMaps": []
+    },
+    {
+      "id": "orik-guli",
+      "slug": "orik-guli",
+      "badLinks": [],
+      "badExternal": [],
+      "credits": [],
+      "sampleMaps": []
+    },
+    {
+      "id": "osh",
+      "slug": "osh",
+      "badLinks": [],
+      "badExternal": [],
+      "credits": [],
+      "sampleMaps": []
+    },
+    {
+      "id": "oynavand",
+      "slug": "oynavand",
+      "badLinks": [],
+      "badExternal": [],
+      "credits": [],
+      "sampleMaps": []
+    },
+    {
+      "id": "palace-rose",
+      "slug": "palace-rose",
+      "badLinks": [],
+      "badExternal": [],
+      "credits": [],
+      "sampleMaps": []
+    },
+    {
+      "id": "palov",
+      "slug": "palov",
+      "badLinks": [],
+      "badExternal": [],
+      "credits": [],
+      "sampleMaps": []
+    },
+    {
+      "id": "parda",
+      "slug": "parda",
+      "badLinks": [],
+      "badExternal": [],
+      "credits": [],
+      "sampleMaps": []
+    },
+    {
+      "id": "paxta",
+      "slug": "paxta",
+      "badLinks": [],
+      "badExternal": [],
+      "credits": [],
+      "sampleMaps": []
+    },
+    {
+      "id": "qandil",
+      "slug": "qandil",
+      "badLinks": [],
+      "badExternal": [],
+      "credits": [],
+      "sampleMaps": []
+    },
+    {
+      "id": "qatlam",
+      "slug": "qatlam",
+      "badLinks": [],
+      "badExternal": [],
+      "credits": [],
+      "sampleMaps": []
+    },
+    {
+      "id": "qiz-bazmi",
+      "slug": "qiz-bazmi",
+      "badLinks": [],
+      "badExternal": [],
+      "credits": [],
+      "sampleMaps": []
+    },
+    {
+      "id": "qogoz-turna",
+      "slug": "qogoz-turna",
+      "badLinks": [],
+      "badExternal": [],
+      "credits": [],
+      "sampleMaps": []
+    },
+    {
+      "id": "retro-kino",
+      "slug": "retro-kino",
+      "badLinks": [],
+      "badExternal": [],
+      "credits": [],
+      "sampleMaps": []
+    },
+    {
+      "id": "royal-burgundy-edition",
+      "slug": "royal-burgundy-edition",
+      "badLinks": [],
+      "badExternal": [],
+      "credits": [],
+      "sampleMaps": []
+    },
+    {
+      "id": "sahifa",
+      "slug": "sahifa",
+      "badLinks": [],
+      "badExternal": [],
+      "credits": [],
+      "sampleMaps": []
+    },
+    {
+      "id": "sahro-fonusi",
+      "slug": "sahro-fonusi",
+      "badLinks": [],
+      "badExternal": [],
+      "credits": [],
+      "sampleMaps": []
+    },
+    {
+      "id": "samarqand-kechasi",
+      "slug": "samarqand-kechasi",
+      "badLinks": [],
+      "badExternal": [],
+      "credits": [],
+      "sampleMaps": []
+    },
+    {
+      "id": "shahzoda",
+      "slug": "shahzoda",
+      "badLinks": [],
+      "badExternal": [],
+      "credits": [],
+      "sampleMaps": []
+    },
+    {
+      "id": "shirin-bayram",
+      "slug": "shirin-bayram",
+      "badLinks": [],
+      "badExternal": [],
+      "credits": [],
+      "sampleMaps": []
+    },
+    {
+      "id": "somon-yoli",
+      "slug": "somon-yoli",
+      "badLinks": [],
+      "badExternal": [],
+      "credits": [],
+      "sampleMaps": []
+    },
+    {
+      "id": "suzani",
+      "slug": "suzani",
+      "badLinks": [],
+      "badExternal": [],
+      "credits": [],
+      "sampleMaps": []
+    },
+    {
+      "id": "taklifla-asalari",
+      "slug": "asalari",
+      "badLinks": [],
+      "badExternal": [],
+      "credits": [],
+      "sampleMaps": []
+    },
+    {
+      "id": "taklifla-barakali",
+      "slug": "barakali",
+      "badLinks": [],
+      "badExternal": [],
+      "credits": [],
+      "sampleMaps": []
+    },
+    {
+      "id": "taklifla-ertak",
+      "slug": "ertak",
+      "badLinks": [],
+      "badExternal": [],
+      "credits": [],
+      "sampleMaps": []
+    },
+    {
+      "id": "taklifla-fayzli-xonadon",
+      "slug": "fayzli-xonadon",
+      "badLinks": [],
+      "badExternal": [],
+      "credits": [],
+      "sampleMaps": []
+    },
+    {
+      "id": "taklifla-gulbog",
+      "slug": "gulbog",
+      "badLinks": [],
+      "badExternal": [],
+      "credits": [],
+      "sampleMaps": []
+    },
+    {
+      "id": "taklifla-muhrli-maktub",
+      "slug": "muhrli-maktub",
+      "badLinks": [],
+      "badExternal": [],
+      "credits": [],
+      "sampleMaps": []
+    },
+    {
+      "id": "taklifla-oltin-yol",
+      "slug": "oltin-yol",
+      "badLinks": [],
+      "badExternal": [],
+      "credits": [],
+      "sampleMaps": []
+    },
+    {
+      "id": "taklifla-osmon",
+      "slug": "osmon",
+      "badLinks": [],
+      "badExternal": [],
+      "credits": [],
+      "sampleMaps": []
+    },
+    {
+      "id": "taklifla-parilar-ertagi",
+      "slug": "parilar-ertagi",
+      "badLinks": [],
+      "badExternal": [],
+      "credits": [],
+      "sampleMaps": []
+    },
+    {
+      "id": "taklifla-qogoz-ertagi",
+      "slug": "qogoz-ertagi",
+      "badLinks": [],
+      "badExternal": [],
+      "credits": [],
+      "sampleMaps": []
+    },
+    {
+      "id": "taklifla-sakura-guli",
+      "slug": "sakura-guli",
+      "badLinks": [],
+      "badExternal": [],
+      "credits": [],
+      "sampleMaps": []
+    },
+    {
+      "id": "taklifla-terracotta",
+      "slug": "terracotta",
+      "badLinks": [],
+      "badExternal": [],
+      "credits": [],
+      "sampleMaps": []
+    },
+    {
+      "id": "taklifla-sharlar",
+      "slug": "sharlar",
+      "badLinks": [],
+      "badExternal": [],
+      "credits": [],
+      "sampleMaps": []
+    },
+    {
+      "id": "taklifla-toglar-bagrida",
+      "slug": "toglar-bagrida",
+      "badLinks": [],
+      "badExternal": [],
+      "credits": [],
+      "sampleMaps": []
+    },
+    {
+      "id": "taklifla-tort-fasl",
+      "slug": "tort-fasl",
+      "badLinks": [],
+      "badExternal": [],
+      "credits": [],
+      "sampleMaps": []
+    },
+    {
+      "id": "taklifla-tovus",
+      "slug": "tovus",
+      "badLinks": [],
+      "badExternal": [],
+      "credits": [],
+      "sampleMaps": []
+    },
+    {
+      "id": "taklifla-tungi-saroy",
+      "slug": "tungi-saroy",
+      "badLinks": [],
+      "badExternal": [],
+      "credits": [],
+      "sampleMaps": []
+    },
+    {
+      "id": "taklifla-yubiley-sahifasi",
+      "slug": "yubiley-sahifasi",
+      "badLinks": [],
+      "badExternal": [],
+      "credits": [],
+      "sampleMaps": []
+    },
+    {
+      "id": "taklifla-yulduzli-tun",
+      "slug": "yulduzli-tun",
+      "badLinks": [],
+      "badExternal": [],
+      "credits": [],
+      "sampleMaps": []
+    },
+    {
+      "id": "taklifla-zarhal-sahifa",
+      "slug": "zarhal-sahifa",
+      "badLinks": [],
+      "badExternal": [],
+      "credits": [],
+      "sampleMaps": []
+    },
+    {
+      "id": "taklifla-zarrin-gullar",
+      "slug": "zarrin-gullar",
+      "badLinks": [],
+      "badExternal": [],
+      "credits": [],
+      "sampleMaps": []
+    },
+    {
+      "id": "toscana",
+      "slug": "toscana",
+      "badLinks": [],
+      "badExternal": [],
+      "credits": [],
+      "sampleMaps": []
+    },
+    {
+      "id": "vals",
+      "slug": "vals",
+      "badLinks": [],
+      "badExternal": [],
+      "credits": [],
+      "sampleMaps": []
+    },
+    {
+      "id": "velora",
+      "slug": "velora",
+      "badLinks": [],
+      "badExternal": [],
+      "credits": [],
+      "sampleMaps": []
+    },
+    {
+      "id": "yangi-uy",
+      "slug": "yangi-uy",
+      "badLinks": [],
+      "badExternal": [],
+      "credits": [],
+      "sampleMaps": []
+    },
+    {
+      "id": "wedivo-pulau-sehati",
+      "slug": "kongillar-oroli",
+      "badLinks": [],
+      "badExternal": [],
+      "credits": [],
+      "sampleMaps": []
+    }
+  ]
+}

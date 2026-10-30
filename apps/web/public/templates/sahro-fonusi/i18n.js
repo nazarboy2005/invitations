@@ -23,7 +23,7 @@ Object.assign(window.MARHAMAT_I18N = window.MARHAMAT_I18N || {}, {
   "YURAKDAN": ["ОТ СЕРДЦА", "FROM THE HEART"], "Tilaklar": ["Пожелания", "Wishes"], "Tilagingiz": ["Ваше пожелание", "Your wish"], "Tilak yuborish": ["Отправить пожелание", "Send a wish"],
   "EZGU NIYATLAR": ["ДОБРЫЕ ПОЖЕЛАНИЯ", "KIND WISHES"], "To‘yona": ["Подарок", "Wedding gift"], "To‘yona ma’lumotlarini ko‘rish": ["Открыть данные для подарка", "View gift details"], "Nusxa olish": ["Копировать", "Copy"],
   "SAVOLLAR UCHUN": ["ПО ВОПРОСАМ", "QUESTIONS"], "Bog‘lanish uchun": ["Контакты", "Contact"], "To‘y manzili": ["Место торжества", "Wedding venue"],
-  "Marxaba bilan yaratildi": ["Создано с Marxaba", "Made with Marxaba"], "Musiqani yoqish": ["Включить музыку", "Play music"], "Musiqani o‘chirish": ["Выключить музыку", "Pause music"],
-  "Sahro Fonusi · Taklifnoma": ["Сахро Фонуси · Приглашение", "Sahro Fonusi · Invitation"], "Sahro Fonusi · Marxaba taklifnomasi": ["Сахро Фонуси · приглашение Marxaba", "Sahro Fonusi · Marxaba invitation"],
+  "Musiqani yoqish": ["Включить музыку", "Play music"], "Musiqani o‘chirish": ["Выключить музыку", "Pause music"],
+  "Sahro Fonusi · Taklifnoma": ["Сахро Фонуси · Приглашение", "Sahro Fonusi · Invitation"], "Sahro Fonusi taklifnomasi": ["Сахро Фонуси · приглашение ", "Sahro Fonusi invitation"],
   "To‘y kuni taqvimi": ["Календарь дня торжества", "Celebration calendar"], "To‘y manzili": ["Место торжества", "Wedding venue"], "Taklifnomani ochish": ["Открыть приглашение", "Open invitation"], "Musiqani yoqish": ["Включить музыку", "Play music"]
 });

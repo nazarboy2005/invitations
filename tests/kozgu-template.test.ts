@@ -97,8 +97,8 @@ test("Ko‘zgu localizes fixed text and maps the shared invitation fixture for a
   runInNewContext(read(appRoot, "platform-i18n.js"), { window });
   const translations = window.MARHAMAT_I18N;
   assert.ok(translations);
-  assert.ok(translations["Marxaba · Ko‘zgu"], "document title has localized metadata");
-  assert.ok(translations["Ko‘zgu — Marxaba raqamli taklifnomasi"], "description has localized metadata");
+  assert.ok(translations["Ko‘zgu"], "document title has localized metadata");
+  assert.ok(translations["Ko‘zgu raqamli taklifnomasi"], "description has localized metadata");
   const ignored = new Set(["&", "♫", "◆", "◷", "✓", "✕", "?", "‹", "›", "00", "−", "+", "↗"]);
   const visible = Array.from(body(html).matchAll(/>([^<>]+)</g), (match) => match[1].replace(/&amp;/g, "&").replace(/\s+/g, " ").trim()).filter((value) => value.length > 1 && !ignored.has(value));
   const attributes = Array.from(body(html).matchAll(/(?:aria-label|placeholder|title|alt)="([^"]+)"/g), (match) => match[1].replace(/\s+/g, " ").trim());

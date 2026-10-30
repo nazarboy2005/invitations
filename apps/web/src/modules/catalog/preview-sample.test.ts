@@ -118,7 +118,7 @@ test("Palace Rose source photos are confined to catalog and initial-selection pr
   );
   assert.equal(
     getTemplatePreviewVenuePhoto("palace-rose"),
-    "https://images.unsplash.com/photo-1712314947761-a8d718bd8c32?w=1400&h=1000&fit=crop&auto=format&q=80",
+    "/images/preview/venue.jpg",
   );
   assert.ok(creatorDraft.gallery.every((photo) => !photo.url && !photo.alt && !photo.caption));
 });
@@ -243,7 +243,7 @@ test("Jasmine White previews use its captured gallery and venue photos only as p
   );
   assert.equal(
     getTemplatePreviewVenuePhoto("jasmine-white"),
-    "https://images.unsplash.com/photo-1712314947761-a8d718bd8c32?w=1400&h=1000&fit=crop&auto=format&q=80",
+    "/images/preview/venue.jpg",
   );
   assert.ok(creatorDraft.gallery.every((item) => !item.url));
 });

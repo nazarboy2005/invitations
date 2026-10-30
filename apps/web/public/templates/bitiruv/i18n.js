@@ -1,5 +1,5 @@
 Object.assign(window.MARHAMAT_I18N = window.MARHAMAT_I18N || {}, {
-  "Bitiruv · Marxaba": ["Выпускной · Marxaba", "Graduation · Marxaba"],
+  "Bitiruv": ["Выпускной", "Graduation"],
   "Bitiruv kechasi uchun raqamli taklifnoma": ["Электронное приглашение на выпускной", "Digital graduation invitation"],
   "Taklifnomani ochish": ["Открыть приглашение", "Open invitation"],
   "Bayram manzili": ["Место праздника", "Celebration venue"],
@@ -44,7 +44,6 @@ Object.assign(window.MARHAMAT_I18N = window.MARHAMAT_I18N || {}, {
   "Ustozlarga sovg‘a": ["Подарок учителям", "A gift for the teachers"],
   "Sovg‘a ma’lumotlarini ko‘rish": ["Показать данные для подарка", "Show gift details"], "Nusxa olish": ["Скопировать", "Copy"],
   "10 / ALOQA": ["10 / КОНТАКТЫ", "10 / CONTACTS"], "Savollaringiz bormi?": ["Остались вопросы?", "Any questions?"],
-  "Marxaba bilan yaratildi": ["Создано с Marxaba", "Made with Marxaba"],
   "Sinf xotirasi — surat 1": ["Фото из школьных воспоминаний 1", "Class memory photo 1"],
   "Sinf xotirasi — surat 2": ["Фото из школьных воспоминаний 2", "Class memory photo 2"],
   "Sinf xotirasi — surat 3": ["Фото из школьных воспоминаний 3", "Class memory photo 3"],

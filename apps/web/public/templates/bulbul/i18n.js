@@ -1,7 +1,7 @@
 Object.assign(window.MARHAMAT_I18N = window.MARHAMAT_I18N || {}, {
   "Bulbul · Taklifnoma": ["Бульбуль · Приглашение", "Bulbul · Invitation"],
-  "Bulbul · Marxaba": ["Бульбуль · Marxaba", "Bulbul · Marxaba"],
-  "Bulbul — Marxaba raqamli taklifnomasi": ["Бульбуль — цифровое приглашение Marxaba", "Bulbul — a Marxaba digital invitation"],
+  "Bulbul": ["Бульбуль", "Bulbul"],
+  "Bulbul raqamli taklifnomasi": ["Бульбуль — цифровое приглашение ", "Bulbul — a  digital invitation"],
   "Tongda oltin qafas eshigi ochiladi va bulbul baxtli kuningizga yetaklaydi.": ["На рассвете открывается золотая клетка, и соловей ведёт вас к счастливому дню.", "At dawn, a golden cage opens and a nightingale leads the way to your happy day."],
   "Taklifnoma": ["Приглашение", "Invitation"],
   "Qafas eshigini oching": ["Откройте дверцу клетки", "Open the cage door"],
@@ -35,6 +35,5 @@ Object.assign(window.MARHAMAT_I18N = window.MARHAMAT_I18N || {}, {
   "Kassa oynasi": ["Окошко кассы", "Ticket window"], "To‘yona": ["Подарок молодожёнам", "Wedding gift"], "Tabriklaringiz uchun": ["Для ваших поздравлений", "For your congratulations"],
   "To‘yona ma’lumotlarini ko‘rish": ["Показать реквизиты подарка", "View gift details"], "Nusxa olish": ["Скопировать", "Copy"],
   "Aloqa": ["Контакты", "Contact"], "Bog‘lanish uchun": ["Связаться с нами", "Get in touch"], "Telefon": ["Телефон", "Phone"], "Telegram": ["Telegram", "Telegram"],
-  "Marxaba bilan yaratildi": ["Создано с Marxaba", "Made with Marxaba"],
   "Sizni kutamiz": ["Мы вас ждём", "We are waiting for you"], "Hurmat bilan": ["С уважением", "With love"]
 });

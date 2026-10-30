@@ -159,13 +159,6 @@ const hostsLabels: Record<Locale, string> = {
   en: "With love from",
   ru: "С уважением",
 };
-const footerLabels: Record<Locale, string> = {
-  "uz-Latn": "Marxaba bilan yaratildi",
-  "uz-Cyrl": "Marxaba билан яратилди",
-  en: "Made with Marxaba",
-  ru: "Создано с Marxaba",
-};
-
 export function makeLegacyData(
   invitation: Invitation,
   locale: Locale,
@@ -232,7 +225,7 @@ export function makeLegacyData(
   const greeting = personalGreeting || content.greeting;
   return {
     title: content.title,
-    footer: footerLabels[locale],
+    footer: "",
     groom: people[0] ?? "",
     bride: people[1] ?? "",
     hosts: content.hosts,

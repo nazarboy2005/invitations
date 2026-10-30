@@ -1,5 +1,5 @@
 Object.assign(window.MARHAMAT_I18N = window.MARHAMAT_I18N || {}, {
-  "Uchar Gilam · Marxaba": ["Летающий ковёр · Marxaba", "Flying Carpet · Marxaba"],
+  "Uchar Gilam": ["Летающий ковёр", "Flying Carpet"],
   "Uchar Gilam — Buxoro tunida yulduzlar orasiga yozilgan taklifnoma": ["Летающий ковёр — приглашение, написанное среди звёзд ночного Бухары", "Flying Carpet — an invitation written among the stars above Bukhara"],
   "Taklifnoma": ["Приглашение", "Invitation"],
   "uchar-gilam · Invitation": ["Летающий ковёр · Приглашение", "Uchar Gilam · Invitation"],
@@ -38,8 +38,7 @@ Object.assign(window.MARHAMAT_I18N = window.MARHAMAT_I18N || {}, {
   "Yaxshi tilaklar": ["Добрые пожелания", "Kind wishes"], "Tilaklar": ["Пожелания", "Wishes"], "Tilagingiz": ["Ваше пожелание", "Your wish"], "Kelin-kuyovga ezgu tilaklar…": ["Добрые пожелания молодым…", "Kind words for the couple…"], "Tilak yuborish": ["Отправить пожелание", "Send a wish"],
   "Ezgu niyatlar": ["С добрыми намерениями", "With good wishes"], "To‘yona": ["Подарок молодожёнам", "Wedding gift"], "To‘yona ma’lumotlarini ko‘rish": ["Показать реквизиты", "View gift details"], "Nusxa olish": ["Скопировать", "Copy"],
   "Savollar bo‘lsa": ["Если возникнут вопросы", "If you have questions"], "Bog‘lanish uchun": ["Контакты", "Get in touch"],
-  "Sizni kutamiz!": ["Ждём вас!", "We are waiting for you!"], "Marxaba bilan yaratildi": ["Создано с Marxaba", "Made with Marxaba"],
-  "Musiqani yoqish": ["Включить музыку", "Play music"], "Musiqani o‘chirish": ["Выключить музыку", "Mute music"],
+  "Sizni kutamiz!": ["Ждём вас!", "We are waiting for you!"], "Musiqani yoqish": ["Включить музыку", "Play music"], "Musiqani o‘chirish": ["Выключить музыку", "Mute music"],
   "Buxoro xaritasi": ["Карта Бухары", "Map of Bukhara"],
   "Muhammadjon  &  Mohinabonu": ["Мухаммаджон  &  Мохинабону", "Muhammadjon  &  Mohinabonu"]
 });

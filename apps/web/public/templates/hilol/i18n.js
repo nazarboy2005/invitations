@@ -1,7 +1,7 @@
 // Hilol fixed text: Uzbek Latin → [Russian, English]. Invitation data has its own i18n tables.
 Object.assign(window.MARHAMAT_I18N = window.MARHAMAT_I18N || {}, {
   "Hilol · Taklifnoma": ["Хилол · Приглашение", "Hilol · Invitation"],
-  "Hilol · Marxaba taklifnomasi": ["Хилол · приглашение Marxaba", "Hilol · a Marxaba invitation"],
+  "Hilol taklifnomasi": ["Хилол · приглашение ", "Hilol · an invitation"],
   "Hilol nuri ostida sokin iftorlik taklifnomasi": ["Спокойное приглашение на ифтар под светом полумесяца", "A quiet iftar invitation under the crescent moon"],
   "MANZIL": ["АДРЕС", "VENUE"],
   "JAVOB VARAQASI": ["ОТВЕТ ГОСТЯ", "REPLY CARD"],

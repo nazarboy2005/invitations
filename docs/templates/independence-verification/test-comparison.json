@@ -1,0 +1,9 @@
+{
+  "baselineCommit": "c49869f",
+  "baselineFailures": 60,
+  "currentFailures": 59,
+  "newFailures": [],
+  "baselineNowPassing": [
+    "Green Garden preview capture matches its canonical fixture provenance"
+  ]
+}

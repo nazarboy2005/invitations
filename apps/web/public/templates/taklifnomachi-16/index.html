@@ -9,9 +9,7 @@
 
 
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Gilda+Display&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="/templates/shared/fonts/catalog/taklifnomachi-16.css" rel="stylesheet">
 <link rel="stylesheet" href="/templates/taklifnomachi-16/source/taklifnomachi.uz/templates/16/css/style.css">
 </head>
 <body>
@@ -124,7 +122,7 @@
 <script>(function(){
   var a=document.getElementById('si-bg-music'),b=document.getElementById('si-music-btn');
   if(!a||!b)return;a.volume=0.6;
-  
+
   function stopPulse(){b.style.animation='none';}
   function sync(){var on=!a.paused&&!a.ended;b.setAttribute('aria-pressed',String(on));b.setAttribute('aria-label',on?'Musiqa ijro etilmoqda. O‘chirish uchun bosing':'Musiqa: ijro etish uchun bosing');b.dataset.playing=String(on);b.style.background=on?'#6b5a34':'#1c1c1c';if(on)stopPulse();}
   function play(){var p=a.play();if(p&&p.then){p.then(sync).catch(sync);}}

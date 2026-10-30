@@ -1,7 +1,7 @@
 Object.assign(window.MARHAMAT_I18N = window.MARHAMAT_I18N || {}, {
   "Qiz bazmi": ["Девичий вечер", "Bridal henna evening"],
   "Kelin oqshomi": ["Вечер невесты", "The bride’s evening"],
-  "Qiz bazmi · Marxaba": ["Девичий вечер · Marxaba", "Bridal henna evening · Marxaba"],
+  "Qiz bazmi": ["Девичий вечер", "Bridal henna evening"],
   "Qiz bazmi uchun raqamli taklifnoma": ["Электронное приглашение на девичий вечер", "Digital bridal henna evening invitation"],
   "XINA KECHASI": ["ВЕЧЕР ХНЫ", "HENNA NIGHT"],
   "Taklifnomani ochish": ["Открыть приглашение", "Open invitation"],
@@ -25,7 +25,6 @@ Object.assign(window.MARHAMAT_I18N = window.MARHAMAT_I18N || {}, {
   "Javobni yuborish": ["Отправить ответ", "Send reply"], "Rahmat, sizni kutamiz!": ["Спасибо, будем вас ждать!", "Thank you, we look forward to seeing you!"], "Javobni o‘zgartirish": ["Изменить ответ", "Change reply"],
   "Mehr bilan": ["С любовью", "With love"], "Kelinga tilaklar": ["Пожелания невесте", "Wishes for the bride"], "Tilagingiz": ["Ваше пожелание", "Your wish"], "Tilak yuborish": ["Отправить пожелание", "Send your wish"],
   "Ezgu niyatlar": ["Добрые пожелания", "Kind wishes"], "To‘yona": ["Подарок", "Gift"], "To‘yona ma’lumotlarini ko‘rish": ["Реквизиты для подарка", "View gift details"], "Nusxa olish": ["Скопировать", "Copy"],
-  "Savollar uchun": ["По вопросам", "Questions"], "Bog‘lanish uchun": ["Контакты", "Contact"], "Marxaba bilan yaratildi": ["Создано с Marxaba", "Made with Marxaba"],
-  "Taklifnomani ko‘rish ↓": ["Посмотреть приглашение ↓", "View invitation ↓"], "To‘y kuni taqvimi": ["Календарь праздника", "Celebration calendar"], "Yandex xaritada": ["В Яндекс Картах", "On Yandex Maps"], "Yandex xaritada": ["В Яндекс Картах", "On Yandex Maps"],
+  "Savollar uchun": ["По вопросам", "Questions"], "Bog‘lanish uchun": ["Контакты", "Contact"], "Taklifnomani ko‘rish ↓": ["Посмотреть приглашение ↓", "View invitation ↓"], "To‘y kuni taqvimi": ["Календарь праздника", "Celebration calendar"], "Yandex xaritada": ["В Яндекс Картах", "On Yandex Maps"], "Yandex xaritada": ["В Яндекс Картах", "On Yandex Maps"],
   "Oldingi surat": ["Предыдущее фото", "Previous photo"], "Keyingi surat": ["Следующее фото", "Next photo"], "Suratlar galereyasi": ["Фотогалерея", "Photo gallery"], "Qiz bazmi surati": ["Фото девичьего вечера", "Henna night photo"], "Bazm manzili": ["Адрес праздника", "Celebration venue"], "Musiqani yoqish": ["Включить музыку", "Play music"], "Musiqani o‘chirish": ["Выключить музыку", "Turn music off"]
 });

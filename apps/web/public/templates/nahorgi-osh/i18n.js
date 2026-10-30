@@ -1,7 +1,7 @@
 // Fixed template copy: Uzbek Latin → [Russian, English]. Couple data is translated in sample-overrides.js.
 Object.assign(window.MARHAMAT_I18N = window.MARHAMAT_I18N || {}, {
-  "Nahorgi osh · Marxaba": ["Утренний плов · Marxaba", "Morning osh · Marxaba"],
-  "Nahorgi osh — Marxaba taklifnomasi": ["Утренний плов — приглашение Marxaba", "Morning osh — Marxaba invitation"],
+  "Nahorgi osh": ["Утренний плов", "Morning osh"],
+  "Nahorgi osh taklifnomasi": ["Утренний плов — приглашение ", "Morning osh invitation"],
   "Tong nafasi bilan boshlangan ezgu davra": ["Добрая встреча на рассвете", "A warm gathering at daybreak"],
   "Nahorgi osh": ["Утренний плов", "Morning osh"],
   "Nahorgi": ["Утренний", "Morning"], "osh": ["плов", "osh"],
@@ -57,7 +57,6 @@ Object.assign(window.MARHAMAT_I18N = window.MARHAMAT_I18N || {}, {
   "Osh atrofidagi fayzli davra": ["Тёплая встреча за дастарханом", "A warm gathering around the dastarkhan"],
   "Telefon": ["Телефон", "Phone"], "Telegram": ["Телеграм", "Telegram"], "Musiqani yoqish": ["Включить музыку", "Play music"],
   "Karimovlar xonadoni": ["Семья Каримовых", "The Karimov family"], "xonadoni": ["семья", "family"],
-  "Marxaba bilan yaratildi": ["Создано с Marxaba", "Made with Marxaba"],
   "Musiqani o‘chirish": ["Выключить музыку", "Mute music"],
   "Toshkent shahri, Yunusobod tumani": ["г. Ташкент, Юнусабадский район", "Yunusabad district, Tashkent"]
 });

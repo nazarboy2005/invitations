@@ -50,7 +50,6 @@ Object.assign(window.MARHAMAT_I18N = window.MARHAMAT_I18N || {}, {
   "Savollar uchun": ["По вопросам", "Questions"],
   "Bog‘lanish uchun": ["Контакты", "Contacts"],
   "Sizni kutamiz": ["Ждём вас", "We await you"],
-  "Marxaba bilan yaratildi": ["Создано с Marxaba", "Made with Marxaba"],
   "To‘y kuni taqvimi": ["Календарь свадьбы", "Wedding calendar"],
   "Surat tanlash": ["Выбрать фото", "Choose a photo"],
   "Musiqani yoqish": ["Включить музыку", "Play music"]

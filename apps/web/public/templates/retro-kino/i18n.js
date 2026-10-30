@@ -1,13 +1,13 @@
 Object.assign(window.MARHAMAT_I18N = window.MARHAMAT_I18N || {}, {
   "Retro Kino · Taklifnoma": ["Ретро кино · Приглашение", "Retro Kino · Invitation"],
-  "Marxaba · Retro Kino": ["Marxaba · Ретро кино", "Marxaba · Retro Kino"],
-  "Marxaba raqamli taklifnomasi": ["Цифровое приглашение Marxaba", "A Marxaba digital invitation"],
+  "Retro Kino": ["Ретро кино", "Retro Kino"],
+  " raqamli taklifnomasi": ["Цифровое приглашение ", "A  digital invitation"],
   "TASVIR BOSHI · 1976": ["НАЧАЛО ФИЛЬМА · 1976", "PICTURE START · 1976"],
-  "Marxaba taqdim etadi": ["Представляет Marxaba", "Marxaba presents"],
+  " taqdim etadi": ["Представляет ", " presents"],
   "Taklifnoma": ["Приглашение", "Invitation"],
   "Bosh rollarda": ["В главных ролях", "Starring"],
   "Taklifnomani ochish": ["Открыть приглашение", "Open invitation"],
-  "Marxaba kinojurnali": ["Киножурнал Marxaba", "Marxaba film journal"],
+  "Kinojurnal": ["Киножурнал", " film journal"],
   "Rangli film · Toshkent": ["Цветной фильм · Ташкент", "Color film · Tashkent"],
   "Bir oqshom · Bir umr": ["Один вечер · На всю жизнь", "One evening · A lifetime"],
   "Premyera № 01": ["Премьера № 01", "Premiere No. 01"],
@@ -31,5 +31,5 @@ Object.assign(window.MARHAMAT_I18N = window.MARHAMAT_I18N || {}, {
   "Kelaman": ["Буду", "I’ll be there"], "Kelmayman": ["Не смогу прийти", "I can’t make it"], "Hali bilmayman": ["Пока не знаю", "Not sure yet"], "Ismingiz": ["Ваше имя", "Your name"], "Necha kishi bo‘lasiz?": ["Сколько вас будет?", "How many guests?"], "Mehmonlar sonini kamaytirish": ["Уменьшить число гостей", "Reduce guest count"], "Mehmonlar sonini oshirish": ["Увеличить число гостей", "Increase guest count"], "Javobni yuborish": ["Отправить ответ", "Send reply"], "QABUL QILINDI": ["ПРИНЯТО", "ACCEPTED"], "Javobingiz uchun rahmat!": ["Спасибо за ваш ответ!", "Thank you for your reply!"], "Javobni o‘zgartirish": ["Изменить ответ", "Change reply"],
   "Yaxshi tilaklar": ["Добрые пожелания", "Best wishes"], "Tilaklar": ["Пожелания", "Wishes"], "Tilagingiz": ["Ваше пожелание", "Your wish"], "Tilak yuborish": ["Отправить пожелание", "Send a wish"],
   "Kassa oynasi": ["Окошко кассы", "Box office window"], "To‘yona": ["Подарок молодожёнам", "Wedding gift"], "To‘yona ma’lumotlarini ko‘rish": ["Посмотреть реквизиты подарка", "View gift details"], "Nusxa olish": ["Скопировать", "Copy"],
-  "Aloqa": ["Контакты", "Contact"], "Bog‘lanish uchun": ["Связаться с нами", "Get in touch"], "Marxaba bilan yaratildi": ["Создано с Marxaba", "Made with Marxaba"], "Musiqani yoqish": ["Включить музыку", "Turn music on"]
+  "Aloqa": ["Контакты", "Contact"], "Bog‘lanish uchun": ["Связаться с нами", "Get in touch"], "Musiqani yoqish": ["Включить музыку", "Turn music on"]
 });

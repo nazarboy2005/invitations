@@ -43,6 +43,6 @@ Object.assign(window.MARHAMAT_I18N = window.MARHAMAT_I18N || {}, {
   "Mehmonlar uchun tayyorlangan uy": ["Дом, приготовленный для гостей", "Our home ready to welcome guests"],
   "Musiqani yoqish": ["Включить музыку", "Play music"],
   "Yangi uy to‘yi · Taklifnoma": ["Новоселье · Приглашение", "Housewarming · Invitation"],
-  "Yangi uy to‘yi · Marxaba": ["Новоселье · Marxaba", "Housewarming · Marxaba"],
+  "Yangi uy to‘yi": ["Новоселье", "Housewarming"],
   "Yangi xonadonimizdagi quvonchli oqshomga marhamat": ["Добро пожаловать на радостный вечер в нашем новом доме", "Join us for a joyful evening in our new home"]
 });

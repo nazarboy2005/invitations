@@ -1,3 +1,5 @@
+import { resolveTemplateId } from "./template-identity";
+export { publicTemplateId, publicTemplateName, resolveTemplateId } from "./template-identity";
 import { z } from "zod";
 import { DEFAULT_INVITATION_MUSIC } from "./music";
 import { templateCapabilities, type TemplateCapabilities } from "./capabilities";
@@ -1783,7 +1785,7 @@ export const TEMPLATES: TemplateDefinition[] = [
   {
     id: "palov",
     capabilities: templateCapabilities("palov"),
-    name: "Chorlove Palov",
+    name: "Palov",
     description:
       "An’anaviy nahorgi osh taklifnomasi palov bezagi va nafis naqshlar bilan.",
     previewImage: "/templates/chorlove/palov/catalog-opening.png",
@@ -1813,7 +1815,7 @@ export const TEMPLATES: TemplateDefinition[] = [
   {
     id: "invitate-palov",
     capabilities: templateCapabilities("invitate-palov"),
-    name: "Invitate Palov",
+    name: "Osh ziyofati",
     description:
       "Peshtoq naqshlari, palov bezagi va nahorgi osh uchun taklifnoma.",
     previewEventType: "osh",
@@ -1858,7 +1860,7 @@ export const TEMPLATES: TemplateDefinition[] = [
   {
     id: "invitate-nahorgi-osh",
     capabilities: templateCapabilities("invitate-nahorgi-osh"),
-    name: "Invitate Nahorgi Osh",
+    name: "Sahar ziyofati",
     description:
       "Yashil girih naqshlari, tillarang bezaklar va nahorgi osh uchun taklifnoma.",
     previewEventType: "osh",
@@ -1873,7 +1875,7 @@ export const TEMPLATES: TemplateDefinition[] = [
   {
     id: "invitate-wedding",
     capabilities: templateCapabilities("invitate-wedding"),
-    name: "Invitate Wedding",
+    name: "Gulchambar",
     description:
       "A dark cinematic wedding invitation with golden details, countdown, schedule, and RSVP.",
     previewImage: "/templates/invitate-wedding/preview.jpg",
@@ -2026,7 +2028,7 @@ export const TEMPLATES: TemplateDefinition[] = [
   {
     id: "taklifnomachi-1",
     capabilities: templateCapabilities("taklifnomachi-1"),
-    name: "Taklifnomachi · Klassik",
+    name: "Klassik nafis",
     description: "Bordo ranglar, nafis kalligrafiya va marosim sahifalari.",
     previewImage: "/templates/taklifnomachi-1/preview.png",
     previewEventType: "wedding",
@@ -2040,7 +2042,7 @@ export const TEMPLATES: TemplateDefinition[] = [
   {
     id: "taklifnomachi-12",
     capabilities: templateCapabilities("taklifnomachi-12"),
-    name: "Taklifnomachi · Moviy osmon",
+    name: "Moviy osmon",
     description: "Moviy bulutlar, nafis muhr va ochiladigan taklifnoma.",
     previewImage:
       "/templates/taklifnomachi-12/source/templates/12/assets/hero.png",
@@ -2055,7 +2057,7 @@ export const TEMPLATES: TemplateDefinition[] = [
   {
     id: "taklifnomachi-13",
     capabilities: templateCapabilities("taklifnomachi-13"),
-    name: "Taklifnomachi - Oltin atirgul",
+    name: "Oltin atirgul",
     description: "Golden silk, botanical details, and a rose calendar.",
     previewImage:
       "/templates/taklifnomachi-13/source/taklifnomachi.uz/templates/13/assets/p2/intro-golden.png",
@@ -2070,7 +2072,7 @@ export const TEMPLATES: TemplateDefinition[] = [
   {
     id: "taklifnomachi-15",
     capabilities: templateCapabilities("taklifnomachi-15"),
-    name: "Taklifnomachi - Monoxrom swap",
+    name: "Monoxrom",
     description: "A cinematic charcoal invitation with a swipe-to-open reveal.",
     previewImage:
       "/templates/taklifnomachi-15/source/taklifnomachi.uz/templates/15/assets/main-bg.png",
@@ -2085,7 +2087,7 @@ export const TEMPLATES: TemplateDefinition[] = [
   {
     id: "taklifnomachi-16",
     capabilities: templateCapabilities("taklifnomachi-16"),
-    name: "Taklifnomachi - Zaytun guli",
+    name: "Zaytun guli",
     description: "An ivory envelope opens into an olive floral invitation.",
     previewImage:
       "/templates/taklifnomachi-16/source/taklifnomachi.uz/templates/16/assets/couple-top.png",
@@ -2100,7 +2102,7 @@ export const TEMPLATES: TemplateDefinition[] = [
   {
     id: "taklifnomachi-17",
     capabilities: templateCapabilities("taklifnomachi-17"),
-    name: "Taklifnomachi - Atlas va atlas ipak",
+    name: "Atlas ipak",
     description: "A walnut-toned floral invitation framed by flowing satin.",
     previewImage:
       "/templates/taklifnomachi-17/source/taklifnomachi.uz/templates/17/assets/main-bg.jpg",
@@ -2115,7 +2117,7 @@ export const TEMPLATES: TemplateDefinition[] = [
   {
     id: "taklifnomachi-18",
     capabilities: templateCapabilities("taklifnomachi-18"),
-    name: "Taklifnomachi - Gul naqshli marosim",
+    name: "Gul naqshli marosim",
     description:
       "A wide floral artboard with a detailed program and soft sage accents.",
     previewImage:
@@ -2131,7 +2133,7 @@ export const TEMPLATES: TemplateDefinition[] = [
   {
     id: "taklifnomachi-19",
     capabilities: templateCapabilities("taklifnomachi-19"),
-    name: "Taklifnomachi - Zaytun bogi",
+    name: "Zaytun bogi",
     description:
       "A sage botanical invitation with an illustrated three-day calendar.",
     previewImage:
@@ -2146,7 +2148,7 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
 ];
 export const templateById = (id: string) =>
-  TEMPLATES.find((item) => item.id === id);
+  TEMPLATES.find((item) => item.id === resolveTemplateId(id));
 // Some browser builds lack Uzbek ICU data. Keep SSR and hydration identical.
 export function formatPrice(minor: number): string {
   const absolute = Math.abs(minor);

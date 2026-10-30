@@ -1,5 +1,7 @@
 "use client";
 
+import { publicTemplateId } from "@taklifnoma/contracts";
+
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
@@ -322,7 +324,7 @@ export function FullTemplatePreview({
         {canSelect && canCreate && (
           <Link
             className={styles.createButton}
-            href={`/studio?new=1&template=${encodeURIComponent(template.id)}`}
+            href={`/studio?new=1&template=${encodeURIComponent(publicTemplateId(template.id))}`}
           >
             Yaratish <ArrowUpRight size={16} aria-hidden="true" />
           </Link>

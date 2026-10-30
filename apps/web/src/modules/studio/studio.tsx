@@ -1,5 +1,7 @@
 "use client";
 
+import { publicTemplateId, resolveTemplateId } from "@taklifnoma/contracts";
+
 import { normalizeInvitation, templateCapabilities } from "@taklifnoma/contracts/capabilities";
 import { hasVenuePoint, yandexMapUrl } from "@taklifnoma/contracts/maps";
 import { DEFAULT_INVITATION_MUSIC } from "@taklifnoma/contracts/music";
@@ -549,7 +551,7 @@ export function Studio({
           new URLSearchParams(window.location.search).get("draft") ?? undefined;
         const query = new URLSearchParams(window.location.search);
         const requestedTemplate = templateIdSchema.safeParse(
-          query.get("useTemplate") ?? query.get("template"),
+          resolveTemplateId(query.get("useTemplate") ?? query.get("template") ?? ""),
         );
         const stored =
           fresh || !!adminContext
@@ -602,7 +604,7 @@ export function Studio({
       const template = new URLSearchParams(window.location.search).get(
         "template",
       );
-      const selected = templateIdSchema.safeParse(template);
+      const selected = templateIdSchema.safeParse(resolveTemplateId(template ?? ""));
       const created = createInvitation(selected.success ? selected.data : "");
       if (selected.success) {
         const templateDefinition = templateById(selected.data);
@@ -1516,7 +1518,7 @@ export function Studio({
           {invitation.templateId && (
             <Link
               className={styles.fullPreviewLink}
-              href={`/preview?template=${encodeURIComponent(invitation.templateId)}&draft=${encodeURIComponent(invitation.id)}`}
+              href={`/preview?template=${encodeURIComponent(publicTemplateId(invitation.templateId))}&draft=${encodeURIComponent(invitation.id)}`}
               onClick={() => {
                 try {
                   sessionStorage.setItem(

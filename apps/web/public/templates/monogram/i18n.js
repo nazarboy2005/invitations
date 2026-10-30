@@ -1,8 +1,8 @@
 Object.assign(window.MARHAMAT_I18N = window.MARHAMAT_I18N || {}, {
-  "MARXABA · INVITATION": ["MARXABA · ПРИГЛАШЕНИЕ", "MARXABA · INVITATION"],
+  "INVITATION": ["ПРИГЛАШЕНИЕ", "INVITATION"],
   "A PRIVATE CELEBRATION · NO. 01": ["ЧАСТНОЕ ТОРЖЕСТВО · № 01", "A PRIVATE CELEBRATION · NO. 01"],
-  "Monogram · Marxaba": ["Monogram · Marxaba", "Monogram · Marxaba"],
-  "Monogram — black-tie editorial Marxaba taklifnomasi": ["Monogram — приглашение в эстетике black tie", "Monogram — a black-tie editorial invitation"],
+  "Monogram": ["Monogram", "Monogram"],
+  "Monogram — black-tie editorial  taklifnomasi": ["Monogram — приглашение в эстетике black tie", "Monogram — a black-tie editorial invitation"],
   "01 — Aziz mehmonimiz": ["01 — Дорогой гость", "01 — Dear guest"],
   "02 — Sanani belgilang": ["02 — Отметьте дату", "02 — Save the date"],
   "03 — Oqshom tartibi": ["03 — Порядок вечера", "03 — Evening schedule"],
@@ -40,7 +40,6 @@ Object.assign(window.MARHAMAT_I18N = window.MARHAMAT_I18N || {}, {
   "Ismingiz": ["Ваше имя", "Your name"], "Necha kishi bo‘lasiz?": ["Сколько вас будет?", "How many guests?"], "Mehmonlar sonini kamaytirish": ["Уменьшить число гостей", "Decrease guest count"], "Mehmonlar sonini oshirish": ["Увеличить число гостей", "Increase guest count"], "Javobni yuborish ↗": ["Отправить ответ ↗", "Send reply ↗"], "Javobni yuborish": ["Отправить ответ", "Send reply"], "Javobingiz uchun rahmat!": ["Спасибо за ваш ответ!", "Thank you for your reply!"], "Javobni o‘zgartirish": ["Изменить ответ", "Change reply"],
   "Yaxshi tilaklar": ["Добрые пожелания", "Kind wishes"], "Tilaklar": ["Пожелания", "Wishes"], "Tilagingiz": ["Ваше пожелание", "Your wish"], "Tilak yuborish": ["Отправить пожелание", "Send a wish"],
   "Ezgu niyatlar": ["Добрые намерения", "With warm wishes"], "To‘yona": ["Подарок", "Gift"], "To‘yona ma’lumotlarini ko‘rish ＋": ["Посмотреть данные для подарка ＋", "View gift details ＋"], "To‘yona ma’lumotlarini ko‘rish": ["Посмотреть данные для подарка", "View gift details"], "Nusxa olish": ["Скопировать", "Copy"],
-  "Savollaringiz bormi?": ["Остались вопросы?", "Any questions?"], "Bog‘lanish uchun": ["Контакты", "Contact"], "Marxaba bilan yaratildi": ["Создано с Marxaba", "Made with Marxaba"],
-  "Musiqani yoqish": ["Включить музыку", "Play music"], 
+  "Savollaringiz bormi?": ["Остались вопросы?", "Any questions?"], "Bog‘lanish uchun": ["Контакты", "Contact"], "Musiqani yoqish": ["Включить музыку", "Play music"],
   "Surat tanlash": ["Выбрать фото", "Choose photo"]
 });

@@ -46,12 +46,12 @@ test("Uchar Gilam translates every fixed invitation label and metadata", () => {
     [],
   );
   assert.equal(
-    translations["Uchar Gilam · Marxaba"][0],
-    "Летающий ковёр · Marxaba",
+    translations["Uchar Gilam"][0],
+    "Летающий ковёр",
   );
   assert.equal(
-    translations["Uchar Gilam · Marxaba"][1],
-    "Flying Carpet · Marxaba",
+    translations["Uchar Gilam"][1],
+    "Flying Carpet",
   );
   const dynamicMapTitle = template.match(
     /frame\.title=data\?\.venue\?\.name\|\|'([^']+)'/,
@@ -172,8 +172,6 @@ test("Uchar Gilam data slots resolve through the shared typed invitation adapter
   );
   assert.doesNotMatch(html, /data-slot="toyona\.bank"/);
   assert.match(template, /wish',\(\)=>\{if\(isReduced\(\)\)return;/);
-  assert.match(sharedAdapter, /footer:\s*footerLabels\[locale\]/);
-  assert.match(sharedAdapter, /"uz-Cyrl":\s*"Marxaba билан яратилди"/);
-  assert.match(sharedAdapter, /en:\s*"Made with Marxaba"/);
-  assert.match(sharedAdapter, /ru:\s*"Создано с Marxaba"/);
+  assert.match(sharedAdapter, /footer:\s*""/);
+  assert.doesNotMatch(html, /data-slot="footer"/);
 });

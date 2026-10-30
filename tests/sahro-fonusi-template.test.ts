@@ -161,7 +161,7 @@ test("Sahro Fonusi localizes fixed interface copy and supports all approved loca
   ];
   assert.deepEqual([...visible, ...attributes, ...metadata].filter((text) => !translations[text]), []);
   assert.deepEqual(Array.from(translations[metadata[0]] ?? []), ["Сахро Фонуси · Приглашение", "Sahro Fonusi · Invitation"]);
-  assert.deepEqual(Array.from(translations[metadata[1]] ?? []), ["Сахро Фонуси · приглашение Marxaba", "Sahro Fonusi · Marxaba invitation"]);
+  assert.deepEqual(Array.from(translations[metadata[1]] ?? []), ["Сахро Фонуси · приглашение ", "Sahro Fonusi invitation"]);
   for (const label of ["Taklifnomani ochish", "Lahzalar", "To‘yona", "Bog‘lanish uchun", "Dress-kod", "Tilaklar"]) assert.ok(translations[label], `Missing translation ${label}`);
   const { makeLegacyData } = await import("../apps/web/src/templates/anor/renderer");
   const sample = createTemplatePreviewSample("sahro-fonusi");

@@ -5,6 +5,7 @@ import { readdir } from "node:fs/promises";
 import path from "node:path";
 import { test } from "node:test";
 import { createTemplatePreviewSample } from "../apps/web/src/modules/catalog/preview-sample.ts";
+import { templateById } from "../packages/contracts/src/index";
 
 const root = new URL("../apps/web/public/templates/green-garden/", import.meta.url);
 
@@ -19,7 +20,6 @@ test("Green Garden preview capture matches its canonical fixture provenance", as
   const image = await readFile(new URL("catalog-cover-opening.png", root));
   const provenance = JSON.parse(await readFile(new URL("preview.provenance.json", root), "utf8"));
   const sourceManifest = JSON.parse(await readFile(new URL("source-assets.provenance.json", root), "utf8"));
-  const contracts = await readFile(new URL("../packages/contracts/src/index.ts", import.meta.url), "utf8");
   assert.equal(createHash("sha256").update(image).digest("hex"), provenance.sha256);
   assert.equal(provenance.file, "catalog-cover-opening.png");
   assert.equal(provenance.fixture, "source snapshot sample invitation");
@@ -35,7 +35,7 @@ test("Green Garden preview capture matches its canonical fixture provenance", as
     operation: "none; full source opening viewport preserved",
   });
   assert.match(provenance.captureMethod, /archived Chorlove Green Garden server-rendered source opening/);
-  assert.match(contracts, /id: "green-garden",\s+name: "Green Garden",\s+description:[^\n]+\s+previewImage: "\/templates\/green-garden\/catalog-cover-opening\.png"/);
+  assert.equal(templateById("green-garden")?.previewImage, "/templates/green-garden/catalog-cover-opening.png");
 });
 
 test("Green Garden gallery photos stay ephemeral and authored photos replace placeholders", async () => {

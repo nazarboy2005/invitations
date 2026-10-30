@@ -23,9 +23,8 @@ Object.assign(window.MARHAMAT_I18N = window.MARHAMAT_I18N || {}, {
   "Ismingiz": ["Ваше имя", "Your name"], "Necha kishi bo‘lasiz?": ["Сколько вас будет?", "How many guests?"], "Mehmonlar sonini kamaytirish": ["Уменьшить число гостей", "Decrease guest count"], "Mehmonlar sonini oshirish": ["Увеличить число гостей", "Increase guest count"], "Javobni yuborish": ["Отправить ответ", "Send reply"], "Javobingiz uchun rahmat!": ["Спасибо за ваш ответ!", "Thank you for your reply!"], "Javobni o‘zgartirish": ["Изменить ответ", "Change reply"],
   "Yurakdan": ["От всего сердца", "From the heart"], "Tilaklar": ["Пожелания", "Wishes"], "Tilagingiz": ["Ваше пожелание", "Your wish"], "Tilak yuborish": ["Отправить пожелание", "Send a wish"],
   "Ezgu niyatlar": ["С добрыми пожеланиями", "With good wishes"], "To‘yona": ["Подарок молодожёнам", "Wedding gift"], "To‘yona ma’lumotlarini ko‘rish": ["Посмотреть данные для подарка", "View gift details"], "Nusxa olish": ["Скопировать", "Copy"],
-  "Savollar uchun": ["По вопросам", "Questions"], "Bog‘lanish uchun": ["Контакты", "Contact"], "Siz bizning eng yorug‘ yulduzimizsiz": ["Вы — наша самая яркая звезда", "You are our brightest star"], "Marxaba bilan yaratildi": ["Создано с Marxaba", "Made with Marxaba"],
-  "Musiqani yoqish": ["Включить музыку", "Turn music on"], "Musiqani o‘chirish": ["Выключить музыку", "Turn music off"],
-  "Marxaba · Somon Yo‘li": ["Marxaba · Млечный Путь", "Marxaba · The Milky Way"],
+  "Savollar uchun": ["По вопросам", "Questions"], "Bog‘lanish uchun": ["Контакты", "Contact"], "Siz bizning eng yorug‘ yulduzimizsiz": ["Вы — наша самая яркая звезда", "You are our brightest star"], "Musiqani yoqish": ["Включить музыку", "Turn music on"], "Musiqani o‘chirish": ["Выключить музыку", "Turn music off"],
+  "Somon Yo‘li": ["Млечный Путь", "The Milky Way"],
   "Somon Yo‘li · Taklifnoma": ["Сомон Йўли · Приглашение", "Somon Yo‘li · Invitation"],
   "Somon Yo‘li · taklifnoma": ["Сомон Йўли · таклифнома", "Somon Yo‘li · invitation"],
   "To‘y kuni taqvimi": ["Календарь дня свадьбы", "Wedding day calendar"]

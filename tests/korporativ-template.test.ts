@@ -254,7 +254,7 @@ test("Korporativ adapts a single honoree and every preview-only sample field acr
     const localized = sample.content[locale];
     const data = makeLegacyData(sample, locale, "Hurmatli mehmon", true);
     assert.equal(localized.people.length, 1);
-    assert.equal(localized.people[0], "Marxaba Tech");
+    assert.equal(localized.people[0], ({ "uz-Latn": "Hamkorlar jamoasi", "uz-Cyrl": "Ҳамкорлар жамоаси", en: "Our team", ru: "Наша команда" })[locale]);
     assert.equal(data.groom, localized.people[0]);
     assert.equal(data.bride, "");
     assert.equal(data.hosts, localized.hosts);

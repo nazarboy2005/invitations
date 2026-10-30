@@ -31,11 +31,10 @@ Object.assign(window.MARHAMAT_I18N = window.MARHAMAT_I18N || {}, {
   "Sovg‘a": ["Подарок", "Gift"], "Tabriklar uchun": ["Для поздравлений", "For gifts"], "Ochish uchun bosing": ["Нажмите, чтобы открыть", "Tap to open"],
   "Nusxa olish": ["Скопировать", "Copy"],
   "Savollar uchun": ["По вопросам", "Questions"], "Bog‘lanish": ["Контакты", "Contact"],
-  "Ko‘rishguncha!": ["До встречи!", "See you there!"], "Marxaba bilan yaratildi": ["Создано с Marxaba", "Made with Marxaba"],
-  "Tug‘ilgan kun": ["День рождения", "Birthday"],
+  "Ko‘rishguncha!": ["До встречи!", "See you there!"], "Tug‘ilgan kun": ["День рождения", "Birthday"],
   "Musiqani yoqish": ["Включить музыку", "Turn music on"], "Musiqani o‘chirish": ["Выключить музыку", "Turn music off"],
   "Oldingi surat": ["Предыдущее фото", "Previous photo"], "Keyingi surat": ["Следующее фото", "Next photo"], "Surat tanlash": ["Выбрать фото", "Choose photo"], "Bayram surati": ["Фото с праздника", "Party photo"],
   "Tashrif javobi": ["Подтверждение участия", "Attendance reply"], "Mehmonlar sonini kamaytirish": ["Уменьшить число гостей", "Fewer guests"], "Mehmonlar sonini oshirish": ["Увеличить число гостей", "More guests"],
   "Tug‘ilgan kun taqvimi": ["Календарь дня рождения", "Birthday calendar"],
-  "Konfetti · Marxaba": ["Конфетти · Marxaba", "Konfetti · Marxaba"]
+  "Konfetti": ["Конфетти", "Konfetti"]
 });

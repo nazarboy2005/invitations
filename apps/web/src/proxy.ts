@@ -1,8 +1,18 @@
 import { randomBytes } from "node:crypto";
 import { NextResponse, type NextRequest } from "next/server";
+import { isPrivateTemplateArtifact } from "./server/template-artifacts";
 
-// Headers only. Each server page and API handler enforces authorization.
+// Each server page and API handler enforces authorization.
 export function proxy(request: NextRequest) {
+  const pathname = new URL(request.url).pathname;
+  if (pathname.startsWith("/templates/")) {
+    return isPrivateTemplateArtifact(pathname)
+      ? new NextResponse(null, {
+          status: 404,
+          headers: { "Cache-Control": "no-store", "X-Robots-Tag": "noindex" },
+        })
+      : NextResponse.next();
+  }
   const nonce = randomBytes(32).toString("base64");
   const dev = process.env.NODE_ENV === "development";
   const account = process.env.R2_ACCOUNT_ID ?? "";
@@ -45,4 +55,4 @@ export function proxy(request: NextRequest) {
   );
   return response;
 }
-export const config = { matcher: ["/admin/:path*", "/api/admin/:path*"] };
+export const config = { matcher: ["/admin/:path*", "/api/admin/:path*", "/templates/:path*"] };

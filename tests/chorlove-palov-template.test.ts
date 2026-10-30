@@ -113,7 +113,7 @@ test("Chorlove route keeps Palov in its provider namespace", () => {
 test("Chorlove Palov is published for nahorgi osh", () => {
   const entry = TEMPLATES.find((item) => item.id === "palov");
   assert.ok(entry);
-  assert.equal(entry.name, "Chorlove Palov");
+  assert.equal(entry.name, "Palov");
   assert.deepEqual(entry.categoryIds, ["osh"]);
   assert.deepEqual(entry.supportedEventTypes, ["osh"]);
   assert.equal(entry.published, true);

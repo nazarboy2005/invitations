@@ -1,6 +1,7 @@
 import {
   TEMPLATES,
   TEMPLATE_CATEGORIES,
+  publicTemplateName,
   type TemplateDefinition,
   type TemplateCategory,
 } from "@taklifnoma/contracts";
@@ -55,7 +56,7 @@ export async function getCatalog(includeUnpublished = false): Promise<{
           ? [
               {
                 ...definition,
-                name: row.name,
+                name: publicTemplateName(row.name),
                 published: row.published,
                 priceMinor: Number(row.price_minor),
                 categoryIds: assignments

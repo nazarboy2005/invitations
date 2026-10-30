@@ -195,7 +195,7 @@ test("Qandil static copy localizes and its typed wrapper fixes the source templa
     {
       window: dictionaryWindow,
       location: { search: "?lang=uz-Latn" },
-      document: { title: "Marxaba · Qandil" },
+      document: { title: "Qandil" },
       URLSearchParams,
     },
   );
@@ -228,13 +228,13 @@ test("Qandil static copy localizes and its typed wrapper fixes the source templa
   );
   assert.deepEqual(
     [...dictionary[title]],
-    ["Marxaba · Кандиль", "Marxaba · Qandil"],
+    ["Кандиль", "Qandil"],
   );
   assert.deepEqual(
     [...dictionary[description]],
     [
-      "Кандиль — цифровое приглашение Marxaba",
-      "Qandil — a digital invitation by Marxaba",
+      "Кандиль — цифровое приглашение ",
+      "Qandil — a digital invitation by ",
     ],
   );
   assert.match(

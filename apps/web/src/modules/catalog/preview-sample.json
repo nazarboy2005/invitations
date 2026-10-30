@@ -193,7 +193,7 @@
       ]
     },
     "palace-rose": {
-      "venuePhoto": "https://images.unsplash.com/photo-1712314947761-a8d718bd8c32?w=1400&h=1000&fit=crop&auto=format&q=80",
+      "venuePhoto": "/images/preview/venue.jpg",
       "gallery": [
         { "id": "palace-rose-source-preview-1", "url": "/templates/chorlove/orchid-amplop/assets/gallery-2.webp", "alt": "Wedding photo 1", "caption": "" },
         { "id": "palace-rose-source-preview-2", "url": "/templates/chorlove/orchid-amplop/assets/gallery-1.webp", "alt": "Wedding photo 2", "caption": "" },
@@ -338,7 +338,7 @@
         { "id": "jasmine-white-source-preview-3", "url": "/templates/jasmine-white/assets/90085094-65d3-45d4-82da-de8d127a859c.webp", "alt": "Wedding photo 3", "caption": "" },
         { "id": "jasmine-white-source-preview-4", "url": "/templates/jasmine-white/assets/d0db2a4e-83f8-4b84-a46d-fc2fefe45cfa.webp", "alt": "Wedding photo 4", "caption": "" }
       ],
-      "venuePhoto": "https://images.unsplash.com/photo-1712314947761-a8d718bd8c32?w=1400&h=1000&fit=crop&auto=format&q=80"
+      "venuePhoto": "/images/preview/venue.jpg"
     },
     "invitate-wedding": {},
     "glass-pink": {
@@ -1777,10 +1777,10 @@
     "korporativ": {
       "personIndex": 0,
       "personName": {
-        "uz-Latn": "Marxaba Tech",
-        "uz-Cyrl": "Marxaba Tech",
-        "en": "Marxaba Tech",
-        "ru": "Marxaba Tech"
+        "uz-Latn": "Hamkorlar jamoasi",
+        "uz-Cyrl": "Ҳамкорлар жамоаси",
+        "en": "Our team",
+        "ru": "Наша команда"
       },
       "eventLabel": {
         "uz-Latn": "Yil yakuni kechasi",
@@ -1789,10 +1789,10 @@
         "ru": "Вечер по итогам года"
       },
       "hosts": {
-        "uz-Latn": "Marxaba Tech",
-        "uz-Cyrl": "Marxaba Tech",
-        "en": "Marxaba Tech",
-        "ru": "Marxaba Tech"
+        "uz-Latn": "Hamkorlar jamoasi",
+        "uz-Cyrl": "Ҳамкорлар жамоаси",
+        "en": "Our team",
+        "ru": "Наша команда"
       },
       "message": {
         "uz-Latn": "Birgalikdagi yutuqlarimizni samimiy davrada nishonlaymiz.",

@@ -206,8 +206,8 @@ test("Suzani localizes template metadata and gift section copy", () => {
   assert.ok(translations);
 
   const required = [
-    "Suzani · Marxaba",
-    "Suzani — Marxaba taklifnomasi",
+    "Suzani",
+    "Suzani taklifnomasi",
     "09 · Ezgu niyatlar",
     "To‘yona",
     "To‘yona ma’lumotlarini ko‘rish",

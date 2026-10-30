@@ -25,5 +25,4 @@ Object.assign(window.MARHAMAT_I18N = window.MARHAMAT_I18N || {}, {
   "Necha kishi bo‘lasiz?": ["Сколько вас будет?", "How many guests?"], "Javobni yuborish": ["Отправить ответ", "Send response"],
   "Tilaklar": ["Пожелания", "Wishes"], "Tilak yuborish": ["Отправить пожелание", "Send a wish"],
   "To‘yona": ["Подарок", "Gift"], "Nusxa olish": ["Скопировать", "Copy"], "Nusxalandi": ["Скопировано", "Copied"],
-  "Bog‘lanish uchun": ["Контакты", "Contact"], "Marxaba bilan yaratildi": ["Создано с Marxaba", "Made with Marxaba"]
-});
+  "Bog‘lanish uchun": ["Контакты", "Contact"], });

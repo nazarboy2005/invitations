@@ -1,5 +1,7 @@
 "use client";
 
+import { publicTemplateId } from "@taklifnoma/contracts";
+
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { Check, Eye, Search, X } from "lucide-react";
@@ -140,7 +142,7 @@ export function StudioTemplatePicker({
         </button>
         <Link
           className={styles.templateFullPreview}
-          href={`/preview?template=${encodeURIComponent(template.id)}&draft=${encodeURIComponent(invitation.id)}`}
+          href={`/preview?template=${encodeURIComponent(publicTemplateId(template.id))}&draft=${encodeURIComponent(invitation.id)}`}
           onClick={() => {
             try {
               sessionStorage.setItem(

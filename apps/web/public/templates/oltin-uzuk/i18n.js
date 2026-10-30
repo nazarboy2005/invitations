@@ -1,8 +1,8 @@
 Object.assign(window.MARHAMAT_I18N = window.MARHAMAT_I18N || {}, {
-  "Marxaba · Oltin Uzuk": ["Marxaba · Золотое кольцо", "Marxaba · Golden Rings"],
+  "Oltin Uzuk": ["Золотое кольцо", "Golden Rings"],
   "Oltin Uzuk · Taklifnoma": ["Oltin Uzuk · Приглашение", "Oltin Uzuk · Invitation"],
   "Hashamatli nikoh taklifnomasi": ["Роскошное свадебное приглашение", "A luxury wedding invitation"],
-  "Oltin Uzuk — Marxaba raqamli taklifnomasi": ["Золотое кольцо — цифровое приглашение Marxaba", "Golden Rings — a Marxaba digital invitation"],
+  "Oltin Uzuk raqamli taklifnomasi": ["Золотое кольцо — цифровое приглашение ", "Golden Rings — a  digital invitation"],
   "Taklifnoma": ["Приглашение", "Invitation"],
   "Taklifnomani ochish": ["Открыть приглашение", "Open invitation"],
   "Taklifnomani ko‘rish": ["Посмотреть приглашение", "View invitation"],
@@ -28,7 +28,6 @@ Object.assign(window.MARHAMAT_I18N = window.MARHAMAT_I18N || {}, {
   "Javobni yuborish": ["Отправить ответ", "Send response"], "Javobingiz uchun rahmat!": ["Спасибо за ваш ответ!", "Thank you for your reply!"], "Javobni o‘zgartirish": ["Изменить ответ", "Change response"],
   "Yurakdan": ["От всего сердца", "From the heart"], "Tilaklar": ["Пожелания", "Wishes"], "Tilagingiz": ["Ваше пожелание", "Your wish"], "Tilak yuborish": ["Отправить пожелание", "Send a wish"],
   "Ezgu niyatlar": ["С добрыми намерениями", "With good wishes"], "To‘yona": ["Подарок молодожёнам", "Wedding gift"], "To‘yona ma’lumotlarini ko‘rish": ["Показать реквизиты", "View gift details"], "Nusxa olish": ["Скопировать", "Copy"],
-  "Savollar uchun": ["По всем вопросам", "Questions"], "Bog‘lanish uchun": ["Контакты", "Get in touch"], "Mehr bilan": ["С любовью", "With love"], "Marxaba bilan yaratildi": ["Создано с Marxaba", "Made with Marxaba"],
-  "Musiqani yoqish": ["Включить музыку", "Play music"], "Musiqani o‘chirish": ["Выключить музыку", "Mute music"],
+  "Savollar uchun": ["По всем вопросам", "Questions"], "Bog‘lanish uchun": ["Контакты", "Get in touch"], "Mehr bilan": ["С любовью", "With love"], "Musiqani yoqish": ["Включить музыку", "Play music"], "Musiqani o‘chirish": ["Выключить музыку", "Mute music"],
   "Noto Serif Display": ["Noto Serif Display", "Noto Serif Display"], "Muhammadjon & Mohinabonu": ["Мухаммаджон и Мохинабону", "Muhammadjon & Mohinabonu"]
 });

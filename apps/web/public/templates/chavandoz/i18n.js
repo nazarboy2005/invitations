@@ -1,6 +1,6 @@
 Object.assign(window.MARHAMAT_I18N = window.MARHAMAT_I18N || {}, {
   "Taklifnomani ochish": ["Открыть приглашение", "Open invitation"],
-  "CHAVANDOZ · MARXABA": ["ЧАВАНДОЗ · MARXABA", "CHAVANDOZ · MARXABA"],
+  "CHAVANDOZ": ["ЧАВАНДОЗ", "CHAVANDOZ"],
   "Kichik chavandozning bayrami": ["Праздник маленького наездника", "A celebration for our little rider"],
   "Taklifnomani ko‘rish": ["Посмотреть приглашение", "View invitation"],
   "Aziz mehmonimiz": ["Дорогой гость", "Dear guest"], "Sizni kutamiz": ["Мы вас ждём", "We await you"],
@@ -16,5 +16,4 @@ Object.assign(window.MARHAMAT_I18N = window.MARHAMAT_I18N || {}, {
   "Mehmonlar sonini kamaytirish": ["Уменьшить число гостей", "Decrease guest count"], "Mehmonlar sonini oshirish": ["Увеличить число гостей", "Increase guest count"], "Javobni yuborish": ["Отправить ответ", "Send reply"], "Javobingiz uchun rahmat!": ["Спасибо за ваш ответ!", "Thank you for your reply!"], "Javobni o‘zgartirish": ["Изменить ответ", "Change reply"],
   "Yurakdan": ["От всего сердца", "From the heart"], "Tilaklar": ["Пожелания", "Wishes"], "Tilagingiz": ["Ваше пожелание", "Your wish"], "Tilak yuborish": ["Отправить пожелание", "Send wish"],
   "Ezgu niyatlar uchun": ["С добрыми пожеланиями", "With kind wishes"], "To‘yona": ["Тойона", "Wedding gift"], "To‘yona ma’lumotlarini ko‘rish": ["Посмотреть реквизиты", "View gift details"], "Nusxa olish": ["Скопировать", "Copy"],
-  "Savollar uchun": ["По вопросам", "Questions"], "Bog‘lanish uchun": ["Контакты", "Contact"], "Marxaba bilan yaratildi": ["Создано с Marxaba", "Made with Marxaba"], "Marhamat bilan yaratildi": ["Создано с Marxaba", "Made with Marxaba"]
-});
+  "Savollar uchun": ["По вопросам", "Questions"], "Bog‘lanish uchun": ["Контакты", "Contact"], });

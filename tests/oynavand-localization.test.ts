@@ -42,7 +42,7 @@ test("Oynavand has localized static copy in every supported interface language",
     [...textNodes, ...attributes, ...metadata].filter((text) => !translations[text]),
     [],
   );
-  assert.ok(translations["Marxaba · Oynavand"]);
+  assert.ok(translations["Oynavand"]);
   assert.ok(translations["Oynavand — oynakori ko‘zgular saroyidagi nikoh taklifnomasi"]);
 });
 
@@ -64,8 +64,8 @@ test("Oynavand keeps captured markup, visual source, and interactions", () => {
   const sourceI18n = normalize(readFileSync(new URL("i18n.js", captureRoot), "utf8"));
   const expectedI18n = sourceI18n
     .replace(
-      '"Marxaba · Oynavand": ["Marxaba · Oynavand", "Marxaba · Oynavand"],',
-      '"Marxaba · Oynavand": ["Marxaba · Ойнаванд", "Marxaba · Oynavand"],\n  "Oynavand — oynakori ko‘zgular saroyidagi nikoh taklifnomasi": ["Ойнаванд — свадебное приглашение в дворце зеркал", "Oynavand — a wedding invitation in a palace of mirrors"],',
+      '"Oynavand": ["Oynavand", "Oynavand"],',
+      '"Oynavand": ["Ойнаванд", "Oynavand"],\n  "Oynavand — oynakori ko‘zgular saroyidagi nikoh taklifnomasi": ["Ойнаванд — свадебное приглашение в дворце зеркал", "Oynavand — a wedding invitation in a palace of mirrors"],',
     );
   assert.equal(normalize(readFileSync(new URL("i18n.js", templateRoot), "utf8")), expectedI18n);
 

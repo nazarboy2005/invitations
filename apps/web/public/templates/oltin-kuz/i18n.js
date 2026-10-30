@@ -1,6 +1,6 @@
 Object.assign(window.MARHAMAT_I18N = window.MARHAMAT_I18N || {}, {
- "Marxaba · Oltin Kuz": ["Marxaba · Золотая осень", "Marxaba · Golden Autumn"],
- "Marxaba · Oltin Kuz — oilaviy yubiley taklifnomasi": ["Marxaba · приглашение на семейный юбилей золотой осени", "Marxaba · Golden Autumn family jubilee invitation"],
+ "Oltin Kuz": ["Золотая осень", "Golden Autumn"],
+ "Oltin Kuz — oilaviy yubiley taklifnomasi": ["приглашение на семейный юбилей золотой осени", "Golden Autumn family jubilee invitation"],
  "Yubiley kuni taqvimi": ["Календарь юбилея", "Jubilee calendar"],
  "Keyingi surat": ["Следующее фото", "Next photo"],
  "Oltin Kuz": ["Золотая осень", "Golden Autumn"],
@@ -34,7 +34,7 @@ Object.assign(window.MARHAMAT_I18N = window.MARHAMAT_I18N || {}, {
  "Ismingiz": ["Ваше имя", "Your name"], "Necha kishi bo‘lasiz?": ["Сколько вас будет?", "How many guests?"], "Mehmonlar sonini kamaytirish": ["Уменьшить число гостей", "Fewer guests"], "Mehmonlar sonini oshirish": ["Увеличить число гостей", "More guests"], "Javobni yuborish": ["Отправить ответ", "Send reply"], "Javobingiz uchun rahmat!": ["Спасибо за ответ!", "Thank you for your reply!"], "Javobni o‘zgartirish": ["Изменить ответ", "Change reply"],
  "Tabriklar va duolar": ["Поздравления и молитвы", "Greetings and blessings"], "Ezgu tilaklar": ["Добрые пожелания", "Kind wishes"], "Tilagingiz": ["Ваше пожелание", "Your wish"], "Tilak yuborish": ["Отправить пожелание", "Send wish"],
  "Ko‘ngildan ko‘ngilga": ["От сердца к сердцу", "From heart to heart"], "To‘yona": ["Подарок", "Gift"], "To‘yona ma’lumotlarini ko‘rish": ["Посмотреть реквизиты", "View gift details"], "Nusxa olish": ["Копировать", "Copy"],
- "Mehr bilan bog‘laning": ["Свяжитесь с нами", "Get in touch"], "Bog‘lanish uchun": ["Для связи", "Contact"], "Marxaba bilan yaratildi": ["Создано с Marxaba", "Made with Marxaba"], "Musiqani yoqish": ["Включить музыку", "Play music"], "Musiqani o‘chirish": ["Выключить музыку", "Turn music off"],
+ "Mehr bilan bog‘laning": ["Свяжитесь с нами", "Get in touch"], "Bog‘lanish uchun": ["Для связи", "Contact"], "Musiqani yoqish": ["Включить музыку", "Play music"], "Musiqani o‘chirish": ["Выключить музыку", "Turn music off"],
  "Taklifnomani ochish": ["Открыть приглашение", "Open invitation"], "Taklifnoma": ["Приглашение", "Invitation"], "Sana va vaqt": ["Дата и время", "Date and time"],
  "Musiqani yoqish": ["Включить музыку", "Play music"]
 });

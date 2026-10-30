@@ -1,5 +1,7 @@
 "use client";
 
+import { publicTemplateId } from "@taklifnoma/contracts";
+
 import { useEffect, useId, useLayoutEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { ArrowUpRight, Eye, X } from "lucide-react";
@@ -147,7 +149,7 @@ export function TemplateDetailDialog({
             <Link
               prefetch={false}
               className={styles.view}
-              href={`/preview?template=${encodeURIComponent(template.id)}`}
+              href={`/preview?template=${encodeURIComponent(publicTemplateId(template.id))}`}
             >
               <Eye size={17} /> To‘liq ko‘rish
             </Link>
@@ -155,7 +157,7 @@ export function TemplateDetailDialog({
               <Link
                 prefetch={false}
                 className={styles.create}
-                href={`/studio?new=1&template=${encodeURIComponent(template.id)}`}
+                href={`/studio?new=1&template=${encodeURIComponent(publicTemplateId(template.id))}`}
               >
                 Yaratish <ArrowUpRight size={17} />
               </Link>

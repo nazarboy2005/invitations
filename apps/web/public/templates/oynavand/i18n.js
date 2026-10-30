@@ -1,5 +1,5 @@
 Object.assign(window.MARHAMAT_I18N = window.MARHAMAT_I18N || {}, {
-  "Marxaba · Oynavand": ["Marxaba · Ойнаванд", "Marxaba · Oynavand"],
+  "Oynavand": ["Ойнаванд", "Oynavand"],
   "Oynavand — oynakori ko‘zgular saroyidagi nikoh taklifnomasi": ["Ойнаванд — свадебное приглашение в дворце зеркал", "Oynavand — a wedding invitation in a palace of mirrors"],
   "Taklifnoma": ["Приглашение", "Invitation"], "To‘y kuni taqvimi": ["Календарь свадебного дня", "Wedding date calendar"], "Musiqani yoqish": ["Включить музыку", "Turn music on"],
   "Taklifnoma · Nikoh to‘yi": ["Приглашение · Свадьба никах", "Invitation · Nikoh wedding"],
@@ -17,5 +17,4 @@ Object.assign(window.MARHAMAT_I18N = window.MARHAMAT_I18N || {}, {
   "Tashrif javobi": ["Ответ о присутствии", "Attendance response"], "Kelaman": ["Приду", "I will attend"], "Kelmayman": ["Не смогу прийти", "I cannot attend"], "Hali bilmayman": ["Пока не знаю", "I am not sure yet"], "Ismingiz": ["Ваше имя", "Your name"], "Necha kishi bo‘lasiz?": ["Сколько вас будет?", "How many guests?"], "Mehmonlar sonini kamaytirish": ["Уменьшить число гостей", "Decrease guest count"], "Mehmonlar sonini oshirish": ["Увеличить число гостей", "Increase guest count"], "Javobni yuborish": ["Отправить ответ", "Send reply"], "Javobingiz uchun rahmat!": ["Спасибо за ваш ответ!", "Thank you for your reply!"], "Javobni o‘zgartirish": ["Изменить ответ", "Change reply"],
   "Yurakdan": ["От всего сердца", "From the heart"], "Tilaklar": ["Пожелания", "Wishes"], "Tilagingiz": ["Ваше пожелание", "Your wish"], "Tilak yuborish": ["Отправить пожелание", "Send a wish"],
   "Ezgu niyatlar": ["С добрыми пожеланиями", "With kind wishes"], "To‘yona": ["Подарок молодым", "Wedding gift"], "To‘yona ma’lumotlarini ko‘rish": ["Посмотреть реквизиты", "View gift details"], "Nusxa olish": ["Скопировать", "Copy"],
-  "Savollar uchun": ["По вопросам", "For questions"], "Bog‘lanish uchun": ["Контакты", "Contact"], "Marxaba bilan yaratildi": ["Создано с Marxaba", "Made with Marxaba"]
-});
+  "Savollar uchun": ["По вопросам", "For questions"], "Bog‘lanish uchun": ["Контакты", "Contact"], });

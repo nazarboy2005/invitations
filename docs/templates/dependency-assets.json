@@ -1,0 +1,20 @@
+[
+  {
+    "url": "https://images.unsplash.com/photo-1712314947761-a8d718bd8c32?w=1400&h=1000&fit=crop&auto=format&q=80",
+    "path": "/images/preview/venue.jpg",
+    "bytes": 355870,
+    "sha256": "ef71550b3110fe9d17b3c49c7deccb7ff93a34c9fe0e79d6079fe34e140b1a55"
+  },
+  {
+    "url": "https://images.unsplash.com/photo-1470290378698-263fa7ca1582?w=400&q=75",
+    "error": "HTTP Error 404: Not Found"
+  },
+  {
+    "url": "https://images.unsplash.com/photo-1481683002780-9e7e6b0a5b42?w=1400&q=55",
+    "error": "HTTP Error 404: Not Found"
+  },
+  {
+    "url": "https://assets.mixkit.co/videos/preview/mixkit-aerial-view-of-a-city-at-night-1050-large.mp4",
+    "error": "HTTP Error 403: Forbidden"
+  }
+]

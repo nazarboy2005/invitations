@@ -1,5 +1,7 @@
 "use client";
 
+import { publicTemplateId } from "@taklifnoma/contracts";
+
 import { useEffect, useRef, useState } from "react";
 import styles from "@/app/home.module.css";
 
@@ -73,7 +75,7 @@ export function TemplateCardPreview({ templateId }: { templateId: string }) {
         <iframe
           ref={frame}
           title="Dizayn animatsiyasi"
-          src={`/preview?template=${encodeURIComponent(templateId)}&card=1`}
+          src={`/preview?template=${encodeURIComponent(publicTemplateId(templateId))}&card=1`}
           className={styles.templatePlaybackFrame}
           style={{
             height: frameHeight,

@@ -38,7 +38,7 @@ test("Palace Rose preview media matches its archived photos and stays preview-on
   ));
   assert.equal(
     sample.templateSamples["palace-rose"].venuePhoto,
-    "https://images.unsplash.com/photo-1712314947761-a8d718bd8c32?w=1400&h=1000&fit=crop&auto=format&q=80",
+    "/images/preview/venue.jpg",
   );
   const archiveRoot = "Invitations - this folder will be removed from production/Chorlove/Web invitations";
   for (const file of files) {

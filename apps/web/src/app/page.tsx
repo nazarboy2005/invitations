@@ -1,3 +1,5 @@
+
+import { publicTemplateId } from "@taklifnoma/contracts";
 import Link from "next/link";
 import { ArrowUpRight, Sparkles } from "lucide-react";
 import { SiteHeader } from "@/components/site-header";
@@ -36,7 +38,7 @@ export default async function Home() {
             name: template.name,
             description: template.description,
             image: `/images/home/paper/${id === "bogi-eram" ? "bogi-eram-cover" : id}.webp`,
-            href: `/preview?template=${encodeURIComponent(id)}`,
+            href: `/preview?template=${encodeURIComponent(publicTemplateId(id))}`,
           },
         ]
       : [];

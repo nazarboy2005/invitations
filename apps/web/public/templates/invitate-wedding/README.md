@@ -22,8 +22,8 @@ Source changes are limited to these integration adaptations:
   greeting, programme, gallery, dress code, and form controls are bound by the
   isolated bridge. Analytics and source-site footer destinations were removed.
   The artist section uses empty source-structure markup and receives creator
-  lineup data through the bridge. The missing source strip/programme/location
-  media URLs are preserved and remain unresolved.
+  lineup data through the bridge. The unavailable external strip/programme/location
+  media elements are omitted; no remote fallback or unrelated media is substituted.
 - `assets/css/wedding.css` is the captured stylesheet with added reduced-motion
   rules; original layout, responsive styling, and animation declarations stay.
 - `assets/js/wedding.js` is the captured animation/interaction script with
@@ -56,8 +56,9 @@ filename/URL search of the complete local capture archive found no recoverable
 copies; the same broken strip URL also appears in the captured Aurora page.
 The 2026-10-25 retry returned the same 404, 404, and 403 statuses, and the
 recovered archive ZIP contains no matching filenames.
-The exact source URLs are preserved in this private package. No unrelated or
-cross-template media is substituted. `preview.jpg` is a portrait screenshot of
+The failed URLs are recorded in `docs/templates/dependency-assets.json`; the
+2026-10-30 dependency cleanup removes these broken decorative elements from the
+runtime. No unrelated or cross-template media is substituted. `preview.jpg` is a portrait screenshot of
 the fully rendered shared renderer using the approved catalog fixture; capture
 details are in `preview.provenance.json`.
 

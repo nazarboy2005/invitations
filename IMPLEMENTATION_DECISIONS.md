@@ -1,5 +1,21 @@
 # Implementation decisions
 
+## Template independence and public identity (2026-10-30)
+
+- User requires all invitation templates to work independently of previous
+  providers: package artwork/fonts/media locally, use only this application's
+  APIs and configured map services, and never load captured analytics or sample
+  venue embeds. Unavailable decorative source media is omitted rather than
+  leaving broken remote requests or substituting unrelated artwork.
+- Remove template business attribution entirely, including existing
+  credits. Do not add replacement business names; the business name is undecided.
+- Customer-facing template names and preview/selection links must omit previous
+  providers' names. Neutral public aliases resolve to historical internal IDs so
+  existing invitations, draft data and template-specific content remain intact.
+- Preserve original captures as evidence. Block web access to archived source
+  HTML and unused tracking/fallback scripts while allowing live template source,
+  local artwork/fonts and the shared map integration.
+
 ## Yandex venue selection and guest navigation (2026-10-30)
 
 - User explicitly replaced Google Maps/Places with Yandex across the running site.

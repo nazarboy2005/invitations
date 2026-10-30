@@ -1,5 +1,7 @@
 "use client";
 
+import { publicTemplateId } from "@taklifnoma/contracts";
+
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 import {
   EVENT_TYPE_OPTIONS,
@@ -398,7 +400,7 @@ export function AdminTemplates({
               </summary>
               <div className={styles.templateEditor}>
                 <Link
-                  href={`/preview?template=${encodeURIComponent(template.id)}`}
+                  href={`/preview?template=${encodeURIComponent(publicTemplateId(template.id))}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className={styles.previewLink}

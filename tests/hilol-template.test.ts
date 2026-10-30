@@ -108,7 +108,7 @@ test("Hilol preserves the captured body, CSS, metadata, interactions, and transl
   );
   assert.match(
     packagedI18n,
-    /"Hilol · Marxaba taklifnomasi": \["Хилол · приглашение Marxaba", "Hilol · a Marxaba invitation"\]/,
+    /"Hilol taklifnomasi": \["Хилол · приглашение ", "Hilol · an invitation"\]/,
   );
   const expectedScript = captured("template.js")
     .replace(

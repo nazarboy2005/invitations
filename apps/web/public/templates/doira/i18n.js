@@ -43,9 +43,9 @@ Object.assign(window.MARHAMAT_I18N = window.MARHAMAT_I18N || {}, {
   "Mehmonlar sonini oshirish": ["Увеличить число гостей", "Increase guest count"]
 });
 Object.assign(window.MARHAMAT_I18N = window.MARHAMAT_I18N || {}, {
-  "Marxaba · Doira": ["Marxaba · Дойра", "Marxaba · Doira"],
+  "Doira": ["Дойра", "Doira"],
   "Doira · Taklifnoma": ["Дойра · Приглашение", "Doira · Invitation"],
-  "Doira — Marxaba raqamli taklifnomasi": ["Дойра — цифровое приглашение Marxaba", "Doira — a Marxaba digital invitation"],
+  "Doira raqamli taklifnomasi": ["Дойра — цифровое приглашение ", "Doira — a  digital invitation"],
   "Bizga xabar bering": ["Сообщите нам", "Let us know"],
   "Tashrifingizni tasdiqlang": ["Подтвердите присутствие", "Please RSVP"],
   "Javobingiz biz uchun muhim.": ["Ваш ответ важен для нас.", "Your reply matters to us."],

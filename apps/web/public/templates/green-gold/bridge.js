@@ -171,8 +171,7 @@
     tx(gift?.querySelector("h2"), c.giftHeading);
     const giftButton=gift?.querySelector("button");if(giftButton){giftButton.onclick=()=>showGiftCardDetails(giftButton.parentElement,d.toyona||{},p.locale);}
     if(giftButton)tx(giftButton,c.giftCta);
-    const footerLink=sections[12]?.querySelector("a");if(footerLink){footerLink.href="/";tx(footerLink,"Taklifnoma");}
-    const footerCta=sections[12]?.querySelectorAll("a")[1];if(footerCta){footerCta.href="/";tx(footerCta,p.locale==="en"?"Create your invitation":p.locale==="ru"?"Создать приглашение":p.locale==="uz-Cyrl"?"Таклифнома яратинг":"O'z taklifnomangizni yarating");}
+    const footerCta=sections[12]?.querySelector("a");if(footerCta){footerCta.href="/";tx(footerCta,p.locale==="en"?"Create your invitation":p.locale==="ru"?"Создать приглашение":p.locale==="uz-Cyrl"?"Таклифнома яратинг":"O'z taklifnomangizni yarating");}
     renderGallery(sections[9],d.gallery||[],p.preview,p.sampleGallery,c);
     await renderWishes(sections[10],d.wishes||[],p);
     root.dispatchEvent(new Event("gg:wishes-updated"));

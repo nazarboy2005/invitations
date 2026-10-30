@@ -1,7 +1,7 @@
 // O‘rik Guli-specific text; shared strings live in shared/i18n.js. Key: Uzbek text → [Russian, English].
 Object.assign(window.MARHAMAT_I18N = window.MARHAMAT_I18N || {}, {
-  "O‘rik Guli · Marxaba taklifnomasi": ["Абрикосовый цвет · цифровое приглашение Marxaba", "Apricot Blossom · Marxaba invitation"],
-  "O‘rik Guli — Marxaba raqamli taklifnomasi": ["Абрикосовый цвет — цифровое приглашение Marxaba", "Apricot Blossom — a Marxaba digital invitation"],
+  "O‘rik Guli taklifnomasi": ["Абрикосовый цвет · цифровое приглашение ", "Apricot Blossom invitation"],
+  "O‘rik Guli raqamli taklifnomasi": ["Абрикосовый цвет — цифровое приглашение ", "Apricot Blossom — a  digital invitation"],
   "Sizga taklifnoma": ["Вам приглашение", "An invitation for you"],
   "Oynani arting": ["Протрите окно", "Wipe the window"],
   "Oynani artib taklifnomani ochish": ["Протрите окно, чтобы открыть приглашение", "Wipe the window to open the invitation"],

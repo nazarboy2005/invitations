@@ -54,7 +54,6 @@ Object.assign(window.MARHAMAT_I18N = window.MARHAMAT_I18N || {}, {
   "Nusxa olish": ["Скопировать", "Copy"],
   "Savollar uchun": ["По всем вопросам", "Questions"],
   "Bog‘lanish uchun": ["Контакты", "Contact"],
-  "Marxaba bilan yaratildi": ["Создано с Marxaba", "Made with Marxaba"],
   "Oldingi surat": ["Предыдущее фото", "Previous photo"],
   "Keyingi surat": ["Следующее фото", "Next photo"],
   "Suratni kattalashtirish": ["Увеличить фото", "Enlarge photo"],

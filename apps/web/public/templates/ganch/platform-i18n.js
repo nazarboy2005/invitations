@@ -15,7 +15,6 @@
     "Kelaman": ["Буду", "I will attend"],
     "Kelmayman": ["Не смогу прийти", "I cannot attend"],
     "kun": ["дней", "days"],
-    "Marhamat bilan yaratildi": ["Создано с Marxaba", "Made with Marxaba"],
     "Mehmonlar sonini kamaytirish": ["Уменьшить число гостей", "Decrease guest count"],
     "Mehmonlar sonini oshirish": ["Увеличить число гостей", "Increase guest count"],
     "Musiqani yoqish": ["Включить музыку", "Turn music on"],

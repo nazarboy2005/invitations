@@ -57,7 +57,7 @@ test("Oltin Yosh retains its captured sections, controls, and responsive motion"
     );
   assert.match(
     packagedI18n,
-    /"Oltin Yosh · Marxaba": \["Золотой возраст · Marxaba", "Golden Years · Marxaba"\]/,
+    /"Oltin Yosh": \["Золотой возраст", "Golden Years"\]/,
   );
   assert.match(
     packagedI18n,

@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
-import { templateById } from "@taklifnoma/contracts";
+import { publicTemplateId, templateById } from "@taklifnoma/contracts";
 import { FullTemplatePreview } from "@/modules/catalog/full-template-preview";
 import { getCatalog } from "@/server/catalog";
 
@@ -46,6 +46,16 @@ export default async function PreviewPage({
   const template = templateId ? templateById(templateId) : undefined;
 
   if (template) {
+    if (templateId !== publicTemplateId(template.id)) {
+      const canonical = new URLSearchParams();
+      for (const [key, value] of Object.entries(params)) {
+        for (const item of Array.isArray(value) ? value : value ? [value] : []) {
+          canonical.append(key, item);
+        }
+      }
+      canonical.set("template", publicTemplateId(template.id));
+      redirect(`/preview?${canonical}`);
+    }
     const cardPreview = params.card === "1" || params.cover === "1";
     const catalog = cardPreview ? { templates: [] } : await getCatalog();
     return (
