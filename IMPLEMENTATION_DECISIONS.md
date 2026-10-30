@@ -2325,6 +2325,11 @@ Development agents are distinct from production queue workers. The running app w
 
 ## Studio follow-up corrections (2026-10-30)
 
+- New invitations start with no program items. In step 3, show two clearly
+  labeled, display-only example items until the creator adds their first real
+  item. Examples never enter drafts, guest previews, saves or publication checks;
+  leaving the optional program empty must not block completion.
+
 - Landing-page paper gallery ("Bir taklif. Bir go‘zal hikoya."): add paper rustling synchronized to folding/unfolding; preserve all other landing-page sounds.
 
 - Default music means a soundtrack is preselected for publishing, not automatic playback for the creator. Studio sends a silent music projection to every embedded renderer; the saved selection and manually operated editor listening sample remain available. Guest/public playback policy is unchanged.

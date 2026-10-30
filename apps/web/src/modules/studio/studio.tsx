@@ -19,7 +19,9 @@ import {
   Globe2,
   Gift,
   ImagePlus,
+  Info,
   LayoutTemplate,
+  Lightbulb,
   LoaderCircle,
   MapPin,
   MapPinned,
@@ -624,16 +626,16 @@ export function Studio({
         created.content[created.defaultLocale] =
           defaultLocalizedInvitationContent("wedding", created.defaultLocale);
       }
-      const invitationWithStarterProgram = normalizeInvitation(addStarterProgramItem(created));
-      setInvitation(invitationWithStarterProgram);
+      const newInvitation = normalizeInvitation(created);
+      setInvitation(newInvitation);
       try {
-        saveBrowserDraft(invitationWithStarterProgram, true, ownerId.current);
+        saveBrowserDraft(newInvitation, true, ownerId.current);
       } catch {
         setError(
           "Brauzerga saqlash imkoni yo‘q. Zaxira uchun qoralamangizni yuklab oling.",
         );
       }
-      bindDraftUrl(invitationWithStarterProgram.id);
+      bindDraftUrl(newInvitation.id);
     }
     void recover();
     return () => {
@@ -2638,7 +2640,23 @@ export function Studio({
                     }
                   />
                 </Field>
-                <div className={styles.program}>
+                {invitation.program.length === 0 && (
+                  <section className={styles.programExample} aria-labelledby="studio-program-example-title">
+                    <div className={styles.programExampleHeading}>
+                      <Lightbulb size={24} aria-hidden="true" />
+                      <div>
+                        <span className={styles.programExampleBadge}>Namuna</span>
+                        <h3 id="studio-program-example-title">Dastur bandlari qanday ko‘rinadi?</h3>
+                        <p>Bu faqat namuna. O‘zingiz dastur bandlarini qo‘shmaguningizcha mehmonlarga ko‘rsatilmaydi.</p>
+                      </div>
+                    </div>
+                    <ol className={styles.programExampleList}>
+                      <li><time>18:00</time><span>Mehmonlarni kutib olish<small>Namuna</small></span></li>
+                      <li><time>18:30</time><span>Tadbirning boshlanishi<small>Namuna</small></span></li>
+                    </ol>
+                  </section>
+                )}
+                {invitation.program.length > 0 && <div className={styles.program}>
                   {invitation.program.map((item) => (
                     <div key={item.id} className={styles.programItem}>
                       <span className={styles.timelineDot} />
@@ -2710,8 +2728,9 @@ export function Studio({
                       </div>
                     </div>
                   ))}
-                </div>
+                </div>}
                 <button
+                  type="button"
                   className={styles.addButton}
                   disabled={invitation.program.length >= 100}
                   onClick={() =>
@@ -2719,9 +2738,10 @@ export function Studio({
                   }
                 >
                   <Plus size={17} />
-                  Dastur bandini qo‘shish
+                  {invitation.program.length ? "Dastur bandini qo‘shish" : "Birinchi dastur bandini qo‘shish"}
                 </button>
-                <section
+                <p className={styles.programOptionalNote}><Info size={15} aria-hidden="true" />Dastur ixtiyoriy — bo‘sh qoldirsangiz ham davom etishingiz mumkin.</p>
+                {invitation.program.length > 0 && <section
                   className={styles.programSectionPreview}
                   aria-label="Taklifnomadagi dastur ko‘rinishi"
                 >
@@ -2729,8 +2749,7 @@ export function Studio({
                     Taklifnomada ko‘rinishi
                   </span>
                   <h3>{content.programHeading || "To‘y dasturi"}</h3>
-                  {invitation.program.length ? (
-                    <ol>
+                  <ol>
                       {invitation.program.map((item) => (
                         <li key={item.id}>
                           <time>{item.time || "--:--"}</time>
@@ -2746,11 +2765,8 @@ export function Studio({
                           </span>
                         </li>
                       ))}
-                    </ol>
-                  ) : (
-                    <p>Dastur bandlari shu yerda ko‘rinadi.</p>
-                  )}
-                </section>
+                  </ol>
+                </section>}
                 </section>)}
                 {capabilities.dressCode && (<section className={styles.scheduleCard} aria-labelledby="studio-dress-title">
                 <div className={styles.scheduleHeading}>

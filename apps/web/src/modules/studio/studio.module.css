@@ -456,6 +456,95 @@
   flex-direction: column;
   gap: 10px;
 }
+.programExample {
+  display: grid;
+  gap: 18px;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--accent-soft), #fffefa80);
+}
+.programExampleHeading {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+.programExampleHeading > svg {
+  flex-shrink: 0;
+  margin-top: 4px;
+  color: var(--primary);
+}
+.programExampleBadge {
+  display: inline-block;
+  padding: 3px 9px;
+  border-radius: 20px;
+  background: #91404f0d;
+  color: var(--primary);
+  font-size: 10px;
+  line-height: 1.4;
+}
+.programExampleHeading h3 {
+  margin: 8px 0 5px;
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 500;
+}
+.programExampleHeading p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.6;
+}
+.programExampleList {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.programExampleList li {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: #fffefa70;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
+.programExampleList time {
+  flex-shrink: 0;
+  padding: 7px 10px;
+  border-radius: 7px;
+  background: #91404f08;
+  font-variant-numeric: tabular-nums;
+}
+.programExampleList li > span {
+  min-width: 0;
+  padding-left: 14px;
+  border-left: 1px solid var(--line);
+  overflow-wrap: anywhere;
+}
+.programExampleList small {
+  display: block;
+  margin-top: 3px;
+  font-size: 10px;
+}
+.programOptionalNote {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin: 0;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.6;
+}
+.programOptionalNote > svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
 .programItem {
   position: relative;
   display: grid;
