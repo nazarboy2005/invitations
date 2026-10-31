@@ -1,8 +1,9 @@
 import { DEFAULT_INVITATION_MUSIC } from "@taklifnoma/contracts/music";
+import { publicAsset } from "../../lib/public-asset";
 
 export const CATALOG_PREVIEW_MUSIC = {
   id: "catalog-emotional-piano",
-  url: DEFAULT_INVITATION_MUSIC.url,
+  url: publicAsset(DEFAULT_INVITATION_MUSIC.url),
   filename: DEFAULT_INVITATION_MUSIC.filename,
 } as const;
 

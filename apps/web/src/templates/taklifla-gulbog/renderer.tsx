@@ -1,4 +1,6 @@
 "use client";
+import { publicAsset } from "../../lib/public-asset";
+
 import { useInvitationMaps } from "@/templates/use-invitation-maps";
 
 import { useEffect, useMemo, useRef } from "react";
@@ -22,6 +24,6 @@ export function TakliflaGulbog({ invitation, locale, fullPreview, ...options }: 
   useEffect(send, [message]);
   return <div className={fullPreview ? styles.full : options.preview ? styles.preview : styles.public}>
     <iframe ref={frame} title={locale === "en" ? "Gulbog‘ invitation" : locale === "ru" ? "Приглашение Гулбог" : locale === "uz-Cyrl" ? "Гулбоғ таклифномаси" : "Gulbog‘ taklifnomasi"}
-      src="/templates/taklifla-gulbog/index.html" onLoad={send} allow="autoplay" />
+      src={publicAsset("/templates/taklifla-gulbog/index.html")} onLoad={send} allow="autoplay" />
   </div>;
 }

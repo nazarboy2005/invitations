@@ -1,5 +1,11 @@
 # Implementation decisions
 
+## Main page scrollbars (2026-10-31)
+
+- Use very thin warm gold scrollbars with transparent tracks on the landing page,
+  `/templates` (including its favorites view), and `/dashboard` only. Keep Studio,
+  invitation previews, and other routes' scrollbar styling unchanged.
+
 ## Template favorites (2026-10-30)
 
 - Keep heart color/opacity unchanged while favorites are loading or saving;
@@ -2362,3 +2368,10 @@ Development agents are distinct from production queue workers. The running app w
 - Golden Hour keeps its exact source opening artwork when there is no creator portrait. Creator photos replace it; optional gallery sections still remain absent without photos. Original captures remain untouched.
 - Omit the successful browser-save label from Studio navigation; keep save failures and account-save feedback.
 - Both dashboard new-invitation entry points open `/studio?new=1` at design selection. Reopening the design-change dialog clears its search/scroll and puts the selected design first, before pagination; active searches still filter normally.
+
+## Public asset caching (2026-10-31)
+
+- Approved: implement browser caching for landing/catalog assets and extend it to shared template assets across previews, Studio and public invitations. Use content-versioned URLs so artwork changes do not leave returning visitors with stale files.
+- In production, version packaged public images, audio, fonts, template runtime bundles and paper geometry together under `/_assets/<content-revision>/`. Serve valid production URLs with one-year immutable caching; preserve the original captured files. Development uses original local asset URLs so refresh/HMR never depends on a build revision. Keep ordinary unversioned URLs revalidating and private responses uncached.
+- Preserve dynamic account navigation, authoritative pricing/publication checks, uploaded-media authorization and existing template-artifact restrictions. Public catalog data caching remains a separate optimization; it is not required for asset reuse.
+- Implementation and verification procedure: `docs/PUBLIC_ASSET_CACHING.md`.

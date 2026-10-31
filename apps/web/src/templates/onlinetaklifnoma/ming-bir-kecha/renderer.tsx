@@ -1,4 +1,6 @@
 "use client";
+import { publicAsset } from "../../../lib/public-asset";
+
 import { useInvitationMaps } from "@/templates/use-invitation-maps";
 
 import { useEffect, useMemo, useRef, useState } from "react";
@@ -74,7 +76,7 @@ export function MingBirKechaInvitation({
     frame.current?.contentWindow?.postMessage({ type: "ming-bir-kecha:update", payload: message }, window.location.origin);
   }, [message]);
 
-  const frameUrl = `/templates/onlinetaklifnoma-ming-bir-kecha/index.html${preview && silentPlayback ? "?qaSilent=1" : ""}`;
+  const frameUrl = publicAsset(`/templates/onlinetaklifnoma-ming-bir-kecha/index.html${preview && silentPlayback ? "?qaSilent=1" : ""}`);
   const mode = fullPreview ? styles.full : preview ? styles.preview : styles.public;
   return (
     <div className={mode}>

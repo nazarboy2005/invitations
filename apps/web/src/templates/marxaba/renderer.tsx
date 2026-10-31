@@ -1,4 +1,6 @@
 "use client";
+import { publicAsset } from "../../lib/public-asset";
+
 import { useInvitationMaps } from "@/templates/use-invitation-maps";
 
 import { useEffect, useMemo, useRef, useState } from "react";
@@ -215,7 +217,7 @@ export function mapMarxabaPreviewGallery(
     const localizedAlt = typeof alt === "string" ? alt : alt[locale];
     return {
       id: `${templateId}-source-preview-${index + 1}`,
-      src: `/templates/${encodeURIComponent(templateId)}/art/${file}`,
+      src: publicAsset(`/templates/${encodeURIComponent(templateId)}/art/${file}`),
       alt: localizedAlt,
       caption: localizedAlt,
     };
@@ -232,7 +234,7 @@ export function mapMarxabaPreviewVenuePhoto(
   if (templateId !== "oltin-kuz" || !preview || !samplePreview || hasCreatorPhotos)
     return undefined;
 
-  return "/templates/oltin-kuz/art/venue.svg";
+  return publicAsset("/templates/oltin-kuz/art/venue.svg");
 }
 
 export function MarxabaInvitation({
@@ -381,7 +383,7 @@ export function MarxabaInvitation({
   ]);
   const latestMessage = useRef(message);
   latestMessage.current = message;
-  const frameUrl = `/templates/${encodeURIComponent(templateId)}/index.html?lang=${sourceLocale[frameLocale]}${preview && qaReducedMotion ? "&qaReducedMotion=1" : ""}`;
+  const frameUrl = publicAsset(`/templates/${encodeURIComponent(templateId)}/index.html?lang=${sourceLocale[frameLocale]}${preview && qaReducedMotion ? "&qaReducedMotion=1" : ""}`);
   const currentStructure = JSON.stringify({
     frameUrl,
     start: invitation.startsAt,

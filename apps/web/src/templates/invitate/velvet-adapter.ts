@@ -1,3 +1,4 @@
+import { publicAsset } from "../../lib/public-asset";
 import { yandexMapUrl } from "@taklifnoma/contracts/maps";
 import type { Invitation, Locale } from "@taklifnoma/contracts";
 import { getContent } from "@taklifnoma/contracts";
@@ -184,9 +185,9 @@ export function makeVelvetData(
     apiBase: `/api/public/invitations/${encodeURIComponent(invitationId)}`,
     preview,
     music: invitation.music.enabled
-      ? invitation.music.url
+      ? publicAsset(invitation.music.url)
       : preview && catalogMusic
-        ? "/music/catalog/emotional-piano.wav"
+        ? publicAsset("/music/catalog/emotional-piano.wav")
         : "",
     silentPlayback: preview && silentPlayback,
     qaReducedMotion: preview && qaReducedMotion,

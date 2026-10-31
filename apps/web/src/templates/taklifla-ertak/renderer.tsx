@@ -1,4 +1,6 @@
 "use client";
+import { publicAsset } from "../../lib/public-asset";
+
 import { useInvitationMaps } from "@/templates/use-invitation-maps";
 
 import { useEffect, useMemo, useRef, useState } from "react";
@@ -51,7 +53,7 @@ export function TakliflaErtak({ invitation, invitationId, locale, guestName,
     return () => window.removeEventListener("message", receive);
   }, [invitation.enabledLocales]);
   return <div className={fullPreview ? styles.full : preview ? styles.preview : styles.public}>
-    <iframe ref={frame} src="/templates/taklifla-ertak/index.html" onLoad={send}
+    <iframe ref={frame} src={publicAsset("/templates/taklifla-ertak/index.html")} onLoad={send}
       title={`Ertak · ${invitation.content[activeLocale]?.title ?? ""}`}
       allow="autoplay" loading="eager" />
   </div>;

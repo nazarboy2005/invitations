@@ -1,4 +1,6 @@
 "use client";
+import { publicAsset } from "../../lib/public-asset";
+
 import { useInvitationMaps } from "@/templates/use-invitation-maps";
 import { yandexMapUrl } from "@taklifnoma/contracts/maps";
 
@@ -267,7 +269,7 @@ export function makeLegacyData(
       .filter((chapter) => chapter.title.trim() || chapter.text.trim()),
     gallery: invitation.gallery.map((item) => ({
       id: item.id,
-      src: item.url,
+      src: publicAsset(item.url),
       alt: item.alt || item.caption,
       caption: item.caption,
     })),
@@ -323,7 +325,7 @@ export function makeLegacyData(
     },
     music: {
       enabled: invitation.music.enabled,
-      url: invitation.music.url,
+      url: publicAsset(invitation.music.url),
     },
     dressCode: {
       enabled: invitation.dressCode.enabled,
@@ -377,7 +379,7 @@ export function AnorInvitation({
         ] as const;
         mapped.gallery = sourceImages.map(([file, alt], index) => ({
           id: `anor-source-preview-${index + 1}`,
-          src: `/templates/anor/source/art/${file}`,
+          src: publicAsset(`/templates/anor/source/art/${file}`),
           alt,
           caption: alt,
         }));
@@ -476,7 +478,7 @@ export function AnorInvitation({
         key={frameLocale}
         ref={frame}
         title={`${data.title || data.eventType} invitation`}
-        src={`/templates/anor/source/index.html?locale=${encodeURIComponent(frameLocale)}`}
+        src={publicAsset(`/templates/anor/source/index.html?locale=${encodeURIComponent(frameLocale)}`)}
         onLoad={sendData}
         allow="autoplay; fullscreen"
         loading="eager"

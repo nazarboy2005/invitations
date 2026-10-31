@@ -1,4 +1,6 @@
 "use client";
+import { publicAsset } from "../lib/public-asset";
+
 
 import { useLayoutEffect, useRef } from "react";
 import Image from "next/image";
@@ -396,7 +398,7 @@ export function OccasionOrbit() {
             <li key={first} data-occasion data-side={side}>
               <div className={styles.artwork}>
                 <Image
-                  src={`/images/home/occasions/${image}-silk.webp`}
+                  src={publicAsset(`/images/home/occasions/${image}-silk.webp`)}
                   width={600}
                   height={450}
                   alt=""

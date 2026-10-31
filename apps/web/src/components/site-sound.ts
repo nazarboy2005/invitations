@@ -1,3 +1,4 @@
+import { publicAsset } from "../lib/public-asset";
 // Enabled by default. Samples are fetched/decoded only after normal interaction.
 export const siteSoundSamples = {
   water: { file: "water-drop.mp3", gain: 0.26 },
@@ -36,7 +37,7 @@ function warmSample(cue: SiteSound, audio: AudioContext) {
   if (pending) return pending;
   const load = (async () => {
     try {
-      const response = await fetch(`/audio/site/${file}`);
+      const response = await fetch(publicAsset(`/audio/site/${file}`));
       if (!response.ok) return;
       const buffer = await audio.decodeAudioData(await response.arrayBuffer());
       buffers.set(file, buffer);

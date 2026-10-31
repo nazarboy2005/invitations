@@ -47,7 +47,7 @@ test("Palace Rose preview media matches its archived photos and stays preview-on
     assert.equal(sha256(readFileSync(sourcePath)), sha256(readFileSync(packagePath)), file);
   }
   const renderer = read("apps/web/src/templates/chorlove/renderer.tsx");
-  assert.match(renderer, /templateId === "palace-rose"[\s\S]*?preview && sampleWishes[\s\S]*?mapped\.venueImage = venuePhoto/);
+  assert.match(renderer, /templateId === "palace-rose"[\s\S]*?preview && sampleWishes[\s\S]*?mapped\.venueImage = publicAsset\(venuePhoto\)/);
   const bridge = read(`${base}/bridge.js`);
   assert.match(bridge, /const photoUrl = typeof data\(\)\.venueImage === "string" \? data\(\)\.venueImage\.trim\(\) : ""/);
   assert.match(bridge, /photoFrame\.replaceChildren\(\);\s*hide\(photoFrame,true\)/);

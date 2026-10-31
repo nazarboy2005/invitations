@@ -34,6 +34,33 @@
 body {
   margin: 0;
 }
+/* Only the landing, catalog/favorites, and dashboard page scrollbars. */
+html:has([data-page-scrollbar="gold"]) {
+  scrollbar-width: thin;
+  scrollbar-color: var(--gold) transparent;
+}
+@supports selector(::-webkit-scrollbar) {
+  html:has([data-page-scrollbar="gold"]) {
+    scrollbar-width: auto;
+    scrollbar-color: auto;
+  }
+  html:has([data-page-scrollbar="gold"])::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+    background: transparent;
+  }
+  html:has([data-page-scrollbar="gold"])::-webkit-scrollbar-track,
+  html:has([data-page-scrollbar="gold"])::-webkit-scrollbar-corner {
+    background: transparent;
+  }
+  html:has([data-page-scrollbar="gold"])::-webkit-scrollbar-thumb {
+    border-radius: 999px;
+    background: var(--gold);
+  }
+  html:has([data-page-scrollbar="gold"])::-webkit-scrollbar-thumb:hover {
+    background: var(--gold-ink);
+  }
+}
 a {
   color: inherit;
   text-decoration: none;

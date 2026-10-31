@@ -1,3 +1,4 @@
+import { publicAsset } from "../../lib/public-asset";
 import { yandexMapUrl } from "@taklifnoma/contracts/maps";
 import type { Invitation, Locale } from "@taklifnoma/contracts";
 import { getContent } from "@taklifnoma/contracts";
@@ -51,7 +52,7 @@ export function makeBloomData(
       text: invitation.dressCode.text[locale] ?? "",
     },
     gallery: preview ? [{
-      url: "/templates/bloom/source/assets/previews/template/bloom/pink.png",
+      url: publicAsset("/templates/bloom/source/assets/previews/template/bloom/pink.png"),
       alt: "",
       caption: "",
     }] : invitation.gallery.map((photo) => ({
@@ -60,7 +61,7 @@ export function makeBloomData(
       caption: photo.caption,
     })),
     music: invitation.music.enabled
-      ? invitation.music.url
+      ? publicAsset(invitation.music.url)
       : preview && catalogMusic
         ? CATALOG_PREVIEW_MUSIC.url
         : "",

@@ -1,3 +1,4 @@
+import { publicAsset } from "../../lib/public-asset";
 import { yandexMapUrl } from "@taklifnoma/contracts/maps";
 import type { Invitation, Locale } from "@taklifnoma/contracts";
 import { getContent } from "@taklifnoma/contracts";
@@ -66,7 +67,7 @@ export function makeSafirData(
     guestName,
     guestToken,
     music: invitation.music.enabled
-      ? invitation.music.url
+      ? publicAsset(invitation.music.url)
       : preview && catalogMusic
         ? CATALOG_PREVIEW_MUSIC.url
         : "",

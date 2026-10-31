@@ -1,3 +1,4 @@
+import { publicAsset, publicAssetPrefix } from "../apps/web/src/lib/public-asset";
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { createRequire } from "node:module";
@@ -97,9 +98,9 @@ test("Korporativ catalog preview uses the shared Emotional Piano default", () =>
   const sharedRenderer = read("apps/web/src/templates/marxaba", "renderer.tsx");
   assert.match(fullPreview, /catalogMusic={catalogPreview}/);
   assert.match(sharedRenderer, /catalogMusic\s*\?\s*CATALOG_PREVIEW_MUSIC\.url/);
-  assert.equal(CATALOG_PREVIEW_MUSIC.url, "/music/catalog/emotional-piano.wav");
+  assert.equal(CATALOG_PREVIEW_MUSIC.url, publicAsset("/music/catalog/emotional-piano.wav"));
   assert.ok(
-    existsSync(path.join(root, "apps/web/public", CATALOG_PREVIEW_MUSIC.url)),
+    existsSync(path.join(root, "apps/web/public", CATALOG_PREVIEW_MUSIC.url.slice(publicAssetPrefix.length))),
     "the shared default audio asset is packaged",
   );
 });
@@ -305,7 +306,7 @@ test("Korporativ source gallery art is ephemeral preview content and creator pho
     const previewGallery = mapMarxabaPreviewGallery(
       "korporativ", sample.gallery, blankSourceGallery, locale, true, true,
     );
-    assert.deepEqual(previewGallery.map((item) => item.src), expectedFiles.map((file) => `/templates/korporativ/art/${file}`));
+    assert.deepEqual(previewGallery.map((item) => item.src), expectedFiles.map((file) => publicAsset(`/templates/korporativ/art/${file}`)));
     assert.ok(previewGallery.every((item) => item.alt && item.caption));
     for (const file of expectedFiles) assert.ok(existsSync(path.join(pkg, "art", file)));
   }

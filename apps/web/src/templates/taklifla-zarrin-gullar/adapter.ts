@@ -1,3 +1,4 @@
+import { publicAsset } from "../../lib/public-asset";
 import { yandexMapUrl } from "@taklifnoma/contracts/maps";
 import { zarrinDataSchema, getContent, type Invitation, type Locale } from "@taklifnoma/contracts";
 import { eventInstant, eventWallDate, formatDate } from "../date-format";
@@ -46,7 +47,7 @@ export function makeZarrinPayload(
     preview:options.preview === true, reducedMotion:options.reducedMotion === true,
     silentPlayback:options.preview === true && options.silentPlayback === true,
     epoch:eventInstant(invitation.startsAt,invitation.timezone)?.getTime() ?? null,
-    music:invitation.music.enabled ? invitation.music.url : "",
+    music:invitation.music.enabled ? publicAsset(invitation.music.url) : "",
     wishesEnabled:invitation.wishes.enabled,
   }};
 }

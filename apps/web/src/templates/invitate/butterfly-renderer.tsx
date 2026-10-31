@@ -1,4 +1,6 @@
 "use client";
+import { publicAsset } from "../../lib/public-asset";
+
 import { useInvitationMaps } from "@/templates/use-invitation-maps";
 
 import { useEffect, useMemo, useRef, useState } from "react";
@@ -35,7 +37,7 @@ export function ButterflyInvitation({
   const latest = useRef(message);
   latest.current = message;
   const templateId = invitation.templateId;
-  const frameUrl = `/templates/${templateId}/index.html?lang=${localeCode(frameLocale)}`;
+  const frameUrl = publicAsset(`/templates/${templateId}/index.html?lang=${localeCode(frameLocale)}`);
 
   useEffect(() => {
     const onMessage = (event: MessageEvent) => {

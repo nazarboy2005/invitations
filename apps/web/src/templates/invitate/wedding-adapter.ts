@@ -1,3 +1,4 @@
+import { publicAsset } from "../../lib/public-asset";
 import { yandexMapUrl } from "@taklifnoma/contracts/maps";
 import type { Invitation, Locale } from "@taklifnoma/contracts";
 import { getContent } from "@taklifnoma/contracts";
@@ -36,14 +37,14 @@ export function makeWeddingData(
     gallery.push(
       ...Array.from({ length: 6 }, (_, index) => ({
         id: `wedding-preview-${index + 1}`,
-        src: `/templates/invitate-wedding/assets/captured/${[
+        src: publicAsset(`/templates/invitate-wedding/assets/captured/${[
           "7419a394e8fcdc1a.jpg",
           "9df50deadd54b10f.jpg",
           "508106ed635af865.jpg",
           "9c6e060d31968064.jpg",
           "739da402a4d1adf7.jpg",
           "fbefe685d0037622.jpg",
-        ][index]}`,
+        ][index]}`),
         alt: "",
         caption: "",
       })),
@@ -95,7 +96,7 @@ export function makeWeddingData(
     preview,
     reducedMotion: preview && reducedMotion,
     music: invitation.music.enabled
-      ? { enabled: true, url: invitation.music.url }
+      ? { enabled: true, url: publicAsset(invitation.music.url) }
       : { enabled: false, url: "" },
   };
 }

@@ -4,6 +4,7 @@ import { existsSync } from "node:fs";
 import path from "node:path";
 import test from "node:test";
 import { CATALOG_PREVIEW_MUSIC } from "../apps/web/src/modules/catalog/catalog-music";
+import { publicAsset, publicAssetPrefix } from "../apps/web/src/lib/public-asset";
 
 const root = process.cwd();
 const read = (file: string) =>
@@ -14,9 +15,9 @@ test("every full-template preview uses the shared Emotional Piano default", () =
   const anorRenderer = read("apps/web/src/templates/anor/renderer.tsx");
   const marxabaRenderer = read("apps/web/src/templates/marxaba/renderer.tsx");
 
-  assert.equal(CATALOG_PREVIEW_MUSIC.url, "/music/catalog/emotional-piano.wav");
+  assert.equal(CATALOG_PREVIEW_MUSIC.url, publicAsset("/music/catalog/emotional-piano.wav"));
   assert.ok(
-    existsSync(path.join(root, "apps/web/public", CATALOG_PREVIEW_MUSIC.url)),
+    existsSync(path.join(root, "apps/web/public", CATALOG_PREVIEW_MUSIC.url.slice(publicAssetPrefix.length))),
     "the default preview track must be packaged locally",
   );
   const renderers = [...preview.matchAll(/<([A-Z]\w*Invitation)\b[^>]*\/>/g)];

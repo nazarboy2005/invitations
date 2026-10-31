@@ -1,3 +1,4 @@
+import { publicAsset } from "../../lib/public-asset";
 import { defaultEventLabel, getContent, type Invitation, type Locale } from "@taklifnoma/contracts";
 import { eventInstant, eventWallDate, formatDate } from "../date-format";
 import { getTemplatePreviewWishes } from "@/modules/catalog/preview-sample";
@@ -38,7 +39,7 @@ export function makeBarakaliPayload(invitation: Invitation, locale: Locale, opti
     guestName: options.guestName || "", guestToken: options.guestToken || "",
     phone: invitation.contacts.phoneNumber,
     preview: Boolean(options.preview), wishesEnabled: invitation.wishes.enabled,
-    music: options.preview && options.catalogMusic ? { enabled: true, url: CATALOG_PREVIEW_MUSIC.url } : { enabled: invitation.music.enabled, url: invitation.music.url },
+    music: options.preview && options.catalogMusic ? { enabled: true, url: CATALOG_PREVIEW_MUSIC.url } : { enabled: invitation.music.enabled, url: publicAsset(invitation.music.url) },
     silentPlayback: Boolean(options.preview && options.silentPlayback), reducedMotion: Boolean(options.preview && options.qaReducedMotion),
   } };
 }

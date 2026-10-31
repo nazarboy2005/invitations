@@ -18,7 +18,7 @@
   color: var(--ink);
   background:
     linear-gradient(#f7f1e83d, #f7f1e83d),
-    url("/images/home/paper/gallery-desktop.webp") center / cover;
+    var(--studio-gallery-desktop) center / cover;
   font-family: var(--font-body);
 }
 
@@ -2713,7 +2713,7 @@
   .studio {
     background-image:
       linear-gradient(#f7f1e83d, #f7f1e83d),
-      url("/images/home/paper/gallery-mobile.webp");
+      var(--studio-gallery-mobile);
   }
   .topbar {
     gap: 8px;

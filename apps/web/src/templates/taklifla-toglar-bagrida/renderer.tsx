@@ -1,4 +1,6 @@
 "use client";
+import { publicAsset } from "../../lib/public-asset";
+
 import { useInvitationMaps } from "@/templates/use-invitation-maps";
 
 import { useEffect, useMemo, useRef, useState } from "react";
@@ -44,6 +46,6 @@ export function ToglarBagridaInvitation({ invitation, invitationId, locale, gues
     return () => window.removeEventListener("message", receive);
   }, [invitation.enabledLocales]);
   return <div className={fullPreview ? styles.full : preview ? styles.preview : styles.public}>
-    <iframe ref={frame} title={`${invitation.content[activeLocale]?.title || "Tog‘lar bag‘rida"}`} src="/templates/taklifla-toglar-bagrida/index.html" onLoad={() => frame.current?.contentWindow?.postMessage(latest.current, window.location.origin)} allow="autoplay" />
+    <iframe ref={frame} title={`${invitation.content[activeLocale]?.title || "Tog‘lar bag‘rida"}`} src={publicAsset("/templates/taklifla-toglar-bagrida/index.html")} onLoad={() => frame.current?.contentWindow?.postMessage(latest.current, window.location.origin)} allow="autoplay" />
   </div>;
 }

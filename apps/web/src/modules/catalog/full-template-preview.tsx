@@ -1,4 +1,5 @@
 "use client";
+import { isTemplateDocument } from "../../lib/public-asset";
 import { FavoriteButton, FavoritesStatus } from "@/modules/favorites/favorite-button";
 
 import { publicTemplateId } from "@taklifnoma/contracts";
@@ -179,7 +180,7 @@ export function FullTemplatePreview({
     function start(frame: HTMLIFrameElement) {
       timers.push(setTimeout(() => {
         const doc = frame.contentDocument;
-        if (!doc || !doc.URL.startsWith(`${window.location.origin}/templates/`) || doc.readyState !== "complete" || opened.has(doc)) return;
+        if (!doc || !isTemplateDocument(doc.URL, window.location.origin) || doc.readyState !== "complete" || opened.has(doc)) return;
         opened.add(doc);
         // Only catalog embeds hide scrollbar chrome; full previews remain scrollable.
         const scrollbarStyle = doc.createElement("style");

@@ -1,3 +1,4 @@
+import { publicAsset } from "../../lib/public-asset";
 import { yandexMapUrl } from "@taklifnoma/contracts/maps";
 import { getContent, type Invitation, type Locale } from "@taklifnoma/contracts";
 import { eventInstant, eventWallDate, formatDate } from "../date-format";
@@ -112,7 +113,7 @@ export function makeLegacyData(
       .filter((chapter) => chapter.title.trim() || chapter.text.trim()),
     gallery: invitation.gallery.map((item) => ({
       id: item.id,
-      src: item.url,
+      src: publicAsset(item.url),
       alt: item.alt || item.caption,
       caption: item.caption,
     })),
@@ -168,7 +169,7 @@ export function makeLegacyData(
     },
     music: {
       enabled: invitation.music.enabled,
-      url: invitation.music.url,
+      url: publicAsset(invitation.music.url),
     },
     dressCode: {
       enabled: invitation.dressCode.enabled,

@@ -1,4 +1,6 @@
 "use client";
+import { publicAsset } from "../../lib/public-asset";
+
 import { useInvitationMaps } from "@/templates/use-invitation-maps";
 
 import { useEffect, useMemo, useRef } from "react";
@@ -82,7 +84,7 @@ export function TungiSaroyInvitation({
       <iframe
         ref={frame}
         name={JSON.stringify(message)}
-        src="/templates/taklifla-tungi-saroy/index.html"
+        src={publicAsset("/templates/taklifla-tungi-saroy/index.html")}
         title="Tungi Saroy — Taklifnoma"
         loading="eager"
         allow="autoplay"

@@ -1,4 +1,6 @@
 "use client";
+import { publicAsset } from "../../lib/public-asset";
+
 import { useInvitationMaps } from "@/templates/use-invitation-maps";
 
 import { useEffect, useMemo, useRef } from "react";
@@ -27,7 +29,7 @@ export function TakliflaYulduzliTun({ invitation, invitationId, locale, guestNam
   useEffect(()=>{const receive=(e:MessageEvent)=>{if(e.origin===window.location.origin && e.source===frame.current?.contentWindow && e.data?.type==="starry:ready")frame.current?.contentWindow?.postMessage(latest.current,window.location.origin);};addEventListener("message",receive);return()=>removeEventListener("message",receive);},[]);
   return <div className={fullPreview ? styles.full : preview ? styles.preview : styles.public}>
     <iframe ref={frame} title={invitation.content[locale]?.title || "Yulduzli Tun"}
-      src="/templates/taklifla-yulduzli-tun/index.html"
+      src={publicAsset("/templates/taklifla-yulduzli-tun/index.html")}
       onLoad={event => event.currentTarget.contentWindow?.postMessage(latest.current, window.location.origin)}
       allow="autoplay" />
   </div>;

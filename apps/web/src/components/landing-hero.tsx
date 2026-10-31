@@ -1,3 +1,4 @@
+import { publicAsset } from "../lib/public-asset";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -28,10 +29,10 @@ export function LandingHero() {
         <picture>
           <source
             media="(max-width: 900px)"
-            srcSet="/images/home/invitation-scene-mobile.webp"
+            srcSet={publicAsset("/images/home/invitation-scene-mobile.webp")}
           />
           <Image
-            src="/images/home/invitation-scene.webp"
+            src={publicAsset("/images/home/invitation-scene.webp")}
             alt="Oq gullar yonida Ali va Malikaning telefondagi onlayn taklifnomasi va unga mos nafis qog‘oz taklifnoma"
             fill
             sizes="100vw"

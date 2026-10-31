@@ -98,7 +98,7 @@
 .creases {
   position: absolute;
   inset: 0;
-  background: url("/images/home/paper/creases.jpg") center / 100% 100%;
+  background: var(--paper-creases) center / 100% 100%;
   mix-blend-mode: soft-light;
   opacity: 0.35;
   pointer-events: none;

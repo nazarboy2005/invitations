@@ -1,3 +1,4 @@
+import { publicAsset } from "../../lib/public-asset";
 import { yandexMapUrl } from "@taklifnoma/contracts/maps";
 import { yubileySahifasiDataSchema, getContent, type Invitation, type Locale } from "@taklifnoma/contracts";
 import { formatDate } from "../date-format";
@@ -53,7 +54,7 @@ export function makeYubileySahifasiPayload(
         id: item.id, year: details.storyYears[item.id] || "", title: localized(item.title), text: localized(item.text),
       })),
       rsvp: { enabled: invitation.rsvp.enabled, deadline: invitation.rsvp.deadline },
-      music: { enabled: invitation.music.enabled, url: invitation.music.url },
+      music: { enabled: invitation.music.enabled, url: publicAsset(invitation.music.url) },
     },
   };
 }

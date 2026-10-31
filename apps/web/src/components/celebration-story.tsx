@@ -1,4 +1,6 @@
 "use client";
+import { publicAsset } from "../lib/public-asset";
+
 
 import Image from "next/image";
 import { useEffect, useRef, type CSSProperties } from "react";
@@ -207,7 +209,7 @@ export function CelebrationStory() {
       <div ref={stage} className={styles.stage}>
         <div className={styles.botanical} aria-hidden="true">
           <Image
-            src="/images/home/celebration/botanical.webp"
+            src={publicAsset("/images/home/celebration/botanical.webp")}
             alt=""
             fill
             sizes="100vw"
@@ -253,7 +255,7 @@ export function CelebrationStory() {
                   >
                     <div className={styles.crop}>
                       <Image
-                        src={`/images/home/celebration/${index < 9 ? chapter.image : "moments"}.webp`}
+                        src={publicAsset(`/images/home/celebration/${index < 9 ? chapter.image : "moments"}.webp`)}
                         alt=""
                         width={1254}
                         height={1254}

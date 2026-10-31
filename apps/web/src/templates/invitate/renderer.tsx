@@ -1,4 +1,6 @@
 "use client";
+import { publicAsset } from "../../lib/public-asset";
+
 import { useInvitationMaps } from "@/templates/use-invitation-maps";
 import { yandexMapUrl } from "@taklifnoma/contracts/maps";
 
@@ -79,7 +81,7 @@ export function InvitateInvitation({
       source.gallery = [
         {
           id: "evelina-source-preview",
-          src: "/templates/evelina/assets/previews/template/evelina/hero.png",
+          src: publicAsset("/templates/evelina/assets/previews/template/evelina/hero.png"),
           alt: "Evelina manba fotosurati",
           caption: "Evelina manba fotosurati",
         },
@@ -89,7 +91,7 @@ export function InvitateInvitation({
       source.gallery = [
         {
           id: "swan-source-preview",
-          src: "/templates/swan/assets/images/0310/1.png",
+          src: publicAsset("/templates/swan/assets/images/0310/1.png"),
           alt: "Swan source preview photo",
           caption: "Swan source preview photo",
         },
@@ -190,7 +192,7 @@ export function InvitateInvitation({
       guestName,
       guestToken,
       music: invitation.music.enabled
-        ? invitation.music.url
+        ? publicAsset(invitation.music.url)
         : preview && catalogMusic
           ? CATALOG_PREVIEW_MUSIC.url
           : "",
@@ -258,7 +260,7 @@ export function InvitateInvitation({
       },
       rsvp: invitation.rsvp,
       music: invitation.music.enabled
-        ? invitation.music.url
+        ? publicAsset(invitation.music.url)
         : preview && catalogMusic
           ? CATALOG_PREVIEW_MUSIC.url
           : "",
@@ -380,11 +382,11 @@ export function InvitateInvitation({
         .filter((item) => item.url.trim())
         .map((item) => ({
           id: item.id,
-          src: item.url,
+          src: publicAsset(item.url),
           alt: item.alt || item.caption,
           caption: item.caption,
         })),
-      music: invitation.music.enabled ? invitation.music.url : "",
+      music: invitation.music.enabled ? publicAsset(invitation.music.url) : "",
       guestToken,
       preview,
       apiBase: `/api/public/invitations/${encodeURIComponent(invitationId)}`,
@@ -501,7 +503,7 @@ export function InvitateInvitation({
                       : message;
   const latest = useRef(activeMessage);
   latest.current = activeMessage;
-  const frameUrl = `/templates/${templateId}/index.html?lang=${sourceLocale[locale]}${preview && templateId === "estelle" && qaReducedMotion ? "&qaReducedMotion=1" : ""}`;
+  const frameUrl = publicAsset(`/templates/${templateId}/index.html?lang=${sourceLocale[locale]}${preview && templateId === "estelle" && qaReducedMotion ? "&qaReducedMotion=1" : ""}`);
 
   useEffect(() => {
     const onMessage = (event: MessageEvent) => {
@@ -552,8 +554,8 @@ export function InvitateInvitation({
       : styles.public;
   return (
     <div className={classes}>
-      {templateId === "aurelia" && invitation.music.enabled && invitation.music.url && !(preview && silentPlayback) && (
-        <AureliaSoundtrack key={invitation.music.url} url={invitation.music.url} locale={frameLocale} />
+      {templateId === "aurelia" && invitation.music.enabled && publicAsset(invitation.music.url) && !(preview && silentPlayback) && (
+        <AureliaSoundtrack key={publicAsset(invitation.music.url)} url={publicAsset(invitation.music.url)} locale={frameLocale} />
       )}
       <iframe
         key={templateId}

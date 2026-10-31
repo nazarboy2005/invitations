@@ -1,3 +1,4 @@
+import { publicAsset } from "../../lib/public-asset";
 import { yandexMapUrl } from "@taklifnoma/contracts/maps";
 import { fayzliXonadonDataSchema, getContent, type Invitation, type Locale } from "@taklifnoma/contracts";
 import { eventInstant, formatDate } from "../date-format";
@@ -57,7 +58,7 @@ export function makeXonadonPayload(invitation: Invitation, locale: Locale, optio
           day: "numeric", month: "long", year: "numeric",
         }),
       },
-      music: { enabled: invitation.music.enabled, url: invitation.music.url },
+      music: { enabled: invitation.music.enabled, url: publicAsset(invitation.music.url) },
       dressCode: {
         enabled: invitation.dressCode.enabled,
         style: localized(invitation.dressCode.style),

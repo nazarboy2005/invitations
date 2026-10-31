@@ -5,6 +5,7 @@ import test from "node:test";
 import { TEMPLATES } from "@taklifnoma/contracts";
 import { CATALOG_COVERS } from "../apps/web/src/modules/catalog/catalog-covers";
 import { templatePoster } from "../apps/web/src/modules/catalog/template-poster";
+import { publicAsset } from "../apps/web/src/lib/public-asset";
 
 test("curated covers exist, have matching provenance, and fit portrait card bounds", () => {
   const manifest = JSON.parse(
@@ -35,8 +36,8 @@ test("curated covers exist, have matching provenance, and fit portrait card boun
 test("curation applies consistently while preserving original artwork fallback", () => {
   const ganch = TEMPLATES.find((template) => template.id === "ganch")!;
   const anor = TEMPLATES.find((template) => template.id === "anor")!;
-  assert.equal(templatePoster(ganch), "/images/catalog/ganch-cover.webp");
-  assert.equal(templatePoster(anor), "/templates/anor/preview.webp");
+  assert.equal(templatePoster(ganch), publicAsset("/images/catalog/ganch-cover.webp"));
+  assert.equal(templatePoster(anor), publicAsset("/templates/anor/preview.webp"));
   assert.equal(
     ganch.previewImage,
     "/templates/ganch/preview-browser-capture.jpg",

@@ -1,4 +1,6 @@
 "use client";
+import { publicAsset } from "../../lib/public-asset";
+
 import { useInvitationMaps } from "@/templates/use-invitation-maps";
 
 import { useEffect, useMemo, useRef } from "react";
@@ -42,7 +44,7 @@ export function TakliflaQogozErtagiInvitation({
   useEffect(()=>{const receive=(e:MessageEvent)=>{if(e.origin===location.origin&&e.source===frame.current?.contentWindow&&e.data?.type==="taklifla-qogoz-ertagi:ready")frame.current?.contentWindow?.postMessage(latest.current,location.origin);};window.addEventListener("message",receive);return()=>window.removeEventListener("message",receive);},[]);
   return <div className={fullPreview ? styles.full : preview ? styles.preview : styles.public}>
     <iframe ref={frame} title={invitation.content[locale]?.title || "Qog‘oz Ertagi"}
-      src="/templates/taklifla-qogoz-ertagi/index.html" allow="autoplay"
+      src={publicAsset("/templates/taklifla-qogoz-ertagi/index.html")} allow="autoplay"
       onLoad={() => frame.current?.contentWindow?.postMessage(latest.current, window.location.origin)} />
   </div>;
 }

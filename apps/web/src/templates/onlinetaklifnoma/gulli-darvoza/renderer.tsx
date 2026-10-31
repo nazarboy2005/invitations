@@ -1,4 +1,6 @@
 "use client";
+import { publicAsset } from "../../../lib/public-asset";
+
 import { useInvitationMaps } from "@/templates/use-invitation-maps";
 
 import { useEffect, useMemo, useRef, useState } from "react";
@@ -106,7 +108,7 @@ export function GulliDarvozaInvitation({
     );
   }, [message]);
 
-  const frameUrl = `/templates/onlinetaklifnoma-gulli-darvoza/index.html${preview && silentPlayback ? "?qaSilent=1" : ""}`;
+  const frameUrl = publicAsset(`/templates/onlinetaklifnoma-gulli-darvoza/index.html${preview && silentPlayback ? "?qaSilent=1" : ""}`);
   const mode = fullPreview ? styles.full : preview ? styles.preview : styles.public;
   return (
     <div className={mode}>

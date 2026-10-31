@@ -1,3 +1,4 @@
+import { publicAsset } from "../lib/public-asset";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -91,7 +92,7 @@ function InvitationPhone({ previewImage }: { previewImage: string }) {
     <div className={styles.phone}>
       <div className={styles.phoneScreen}>
         <Image
-          src={previewImage}
+          src={publicAsset(previewImage)}
           alt=""
           fill
           sizes="(max-width: 700px) 220px, 310px"
@@ -134,7 +135,7 @@ function SceneDetail({
         <div className={styles.personalPaper}>
           <div className={styles.personalImage}>
             <Image
-              src={previewImage}
+              src={publicAsset(previewImage)}
               alt=""
               fill
               sizes="(max-width: 700px) 250px, 380px"
@@ -190,7 +191,7 @@ function SceneDetail({
         </div>
         <div className={styles.venueInfo}>
           <Image
-            src="/images/home/cinematic/venue-card-art.webp"
+            src={publicAsset("/images/home/cinematic/venue-card-art.webp")}
             alt=""
             fill
             sizes="(max-width: 700px) 360px, 560px"
@@ -216,7 +217,7 @@ function SceneDetail({
 }
 
 export function WhyUs({
-  previewImage = "/templates/anor/preview.webp",
+  previewImage = publicAsset("/templates/anor/preview.webp"),
 }: {
   previewImage?: string;
 }) {
@@ -242,10 +243,10 @@ export function WhyUs({
               <picture>
                 <source
                   media="(max-width: 700px)"
-                  srcSet={`/images/home/cinematic/${chapter.image}-mobile.webp`}
+                  srcSet={publicAsset(`/images/home/cinematic/${chapter.image}-mobile.webp`)}
                 />
                 <Image
-                  src={`/images/home/cinematic/${chapter.image}.webp`}
+                  src={publicAsset(`/images/home/cinematic/${chapter.image}.webp`)}
                   alt=""
                   fill
                   sizes="100vw"

@@ -1,3 +1,4 @@
+import { publicAsset } from "../../lib/public-asset";
 import { yandexMapUrl } from "@taklifnoma/contracts/maps";
 import type { Invitation, Locale } from "@taklifnoma/contracts";
 import { getContent } from "@taklifnoma/contracts";
@@ -31,15 +32,15 @@ export function makeButterflyData(
     : {};
   const gallery = invitation.gallery
     .filter((item) => item.url.trim())
-    .map((item) => ({ id: item.id, src: item.url, alt: item.alt || item.caption, caption: item.caption }));
+    .map((item) => ({ id: item.id, src: publicAsset(item.url), alt: item.alt || item.caption, caption: item.caption }));
   if (options.preview && !gallery.length) {
     // These source photographs are presentation-only and never enter invitation data.
     gallery.push(
-      { id: "butterfly-preview-memory-1", src: "/templates/butterfly/assets/images/afina/image2.png", alt: "Preview memory", caption: "" },
-      { id: "butterfly-preview-memory-2", src: "/templates/butterfly/assets/images/afina/image3.png", alt: "Preview memory", caption: "" },
+      { id: "butterfly-preview-memory-1", src: publicAsset("/templates/butterfly/assets/images/afina/image2.png"), alt: "Preview memory", caption: "" },
+      { id: "butterfly-preview-memory-2", src: publicAsset("/templates/butterfly/assets/images/afina/image3.png"), alt: "Preview memory", caption: "" },
     );
   }
-  const music = invitation.music.enabled ? invitation.music.url : "";
+  const music = invitation.music.enabled ? publicAsset(invitation.music.url) : "";
   return {
     ...data,
     locale: sourceLocale[locale],

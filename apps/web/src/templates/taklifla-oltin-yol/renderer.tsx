@@ -1,4 +1,6 @@
 "use client";
+import { publicAsset } from "../../lib/public-asset";
+
 
 import { useEffect, useMemo, useRef } from "react";
 import type { Invitation, Locale } from "@taklifnoma/contracts";
@@ -25,5 +27,5 @@ export function TakliflaOltinYol(props:Props) {
     };
     window.addEventListener("message",ready);return()=>window.removeEventListener("message",ready);
   },[]);
-  return <div className={props.fullPreview ? styles.full : props.preview ? styles.preview : styles.public}><iframe ref={frame} className={styles.frame} title="Oltin Yo‘l" src="/templates/taklifla-oltin-yol/index.html" onLoad={()=>frame.current?.contentWindow?.postMessage(latest.current,window.location.origin)} allow="autoplay" /></div>;
+  return <div className={props.fullPreview ? styles.full : props.preview ? styles.preview : styles.public}><iframe ref={frame} className={styles.frame} title="Oltin Yo‘l" src={publicAsset("/templates/taklifla-oltin-yol/index.html")} onLoad={()=>frame.current?.contentWindow?.postMessage(latest.current,window.location.origin)} allow="autoplay" /></div>;
 }

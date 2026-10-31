@@ -1,3 +1,4 @@
+import { publicAsset } from "../apps/web/src/lib/public-asset";
 import { readFileSync } from "./helpers/source-files";
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
@@ -454,7 +455,7 @@ test("Hilol source gallery art is localized and stays ephemeral around creator u
     );
     assert.deepEqual(
       previewGallery.map(({ src }) => src),
-      expectedFiles.map((file) => `/templates/hilol/art/${file}`),
+      expectedFiles.map((file) => publicAsset(`/templates/hilol/art/${file}`)),
     );
     assert.deepEqual(
       previewGallery.map(({ alt }) => alt),

@@ -1,4 +1,6 @@
 "use client";
+import { publicAsset } from "../../lib/public-asset";
+
 import { useInvitationMaps } from "@/templates/use-invitation-maps";
 
 import { useEffect, useMemo, useRef, useState } from "react";
@@ -82,7 +84,7 @@ export function ChavandozInvitation({
     };
   }, [catalogMusic, frameLocale, guestName, guestToken, invitation, invitationId, preview, sampleWishes, silentPlayback]);
 
-  const frameUrl = `/templates/chavandoz/index.html?lang=${sourceLocale[frameLocale]}`;
+  const frameUrl = publicAsset(`/templates/chavandoz/index.html?lang=${sourceLocale[frameLocale]}`);
   const structure = JSON.stringify({
     frameUrl,
     startsAt: invitation.startsAt,

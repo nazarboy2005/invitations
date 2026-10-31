@@ -25,7 +25,7 @@
       rgb(247 242 235 / 70%) 72%,
       transparent 88%
     ),
-    url("/images/catalog/floral-header.webp");
+    var(--catalog-floral-header);
   background-size: cover;
   background-position: center;
 }
@@ -184,7 +184,7 @@
         rgb(247 242 235 / 82%) 60%,
         rgb(247 242 235 / 35%)
       ),
-      url("/images/catalog/floral-header.webp");
+      var(--catalog-floral-header);
     background-position: right center;
     background-size: auto 100%;
   }

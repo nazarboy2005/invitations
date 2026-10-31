@@ -1,4 +1,6 @@
 "use client";
+import { publicAsset } from "../../lib/public-asset";
+
 import { useInvitationMaps } from "@/templates/use-invitation-maps";
 
 import { useEffect, useMemo, useRef, useState } from "react";
@@ -71,7 +73,7 @@ export function SafirInvitation({
   );
   const latest = useRef(payload);
   latest.current = payload;
-  const frameUrl = `/templates/safir/index.html?lang=${sourceLocale[locale]}`;
+  const frameUrl = publicAsset(`/templates/safir/index.html?lang=${sourceLocale[locale]}`);
 
   useEffect(() => {
     const onMessage = (event: MessageEvent) => {

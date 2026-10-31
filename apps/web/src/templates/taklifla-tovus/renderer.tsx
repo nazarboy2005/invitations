@@ -1,4 +1,6 @@
 "use client";
+import { publicAsset } from "../../lib/public-asset";
+
 import { useInvitationMaps } from "@/templates/use-invitation-maps";
 
 import { useEffect, useMemo, useRef } from "react";
@@ -79,7 +81,7 @@ export function TakliflaTovus({
     >
       <iframe
         ref={frame}
-        src="/templates/taklifla-tovus/index.html"
+        src={publicAsset("/templates/taklifla-tovus/index.html")}
         title={invitation.content[locale]?.title || "Tovus"}
         onLoad={send}
         allow="autoplay"

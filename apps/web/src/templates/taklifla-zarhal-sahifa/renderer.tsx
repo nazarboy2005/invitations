@@ -1,4 +1,6 @@
 "use client";
+import { publicAsset } from "../../lib/public-asset";
+
 import { useInvitationMaps } from "@/templates/use-invitation-maps";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
@@ -38,7 +40,7 @@ export function TakliflaZarhalSahifaInvitation(props: ZarhalSahifaProps) {
     return () => window.removeEventListener("message", receive);
   }, [props.invitation.enabledLocales, send]);
   return <div className={props.fullPreview ? styles.full : props.preview ? styles.preview : styles.public}>
-    <iframe ref={frame} src="/templates/taklifla-zarhal-sahifa/index.html"
+    <iframe ref={frame} src={publicAsset("/templates/taklifla-zarhal-sahifa/index.html")}
       title={message.payload.variants[message.payload.locale]?.title || "Taklifnoma"}
       onLoad={send} allow="autoplay; fullscreen" loading="eager" />
   </div>;

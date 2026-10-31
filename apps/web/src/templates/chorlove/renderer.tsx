@@ -1,4 +1,6 @@
 "use client";
+import { publicAsset } from "../../lib/public-asset";
+
 import { useInvitationMaps } from "@/templates/use-invitation-maps";
 
 import { useEffect, useMemo, useRef, useState } from "react";
@@ -63,7 +65,7 @@ export function ChorloveInvitation({
       const venuePhoto = preview && sampleWishes
         ? getTemplatePreviewVenuePhoto(templateId)
         : undefined;
-      if (venuePhoto) mapped.venueImage = venuePhoto;
+      if (venuePhoto) mapped.venueImage = publicAsset(venuePhoto);
     } else if (
       templateId === "green-garden" ||
       templateId === "orchid-amplop"
@@ -71,11 +73,11 @@ export function ChorloveInvitation({
       const venuePhoto = preview && sampleWishes
         ? getTemplatePreviewVenuePhoto(templateId)
         : undefined;
-      if (venuePhoto) mapped.venue.photo = venuePhoto;
+      if (venuePhoto) mapped.venue.photo = publicAsset(venuePhoto);
     }
     if (templateId === "jasmine-white" && preview && sampleWishes) {
       const venuePhoto = getTemplatePreviewVenuePhoto(templateId);
-      if (venuePhoto) mapped.venueImage = venuePhoto;
+      if (venuePhoto) mapped.venueImage = publicAsset(venuePhoto);
     }
     return mapped;
   }, [invitation, frameLocale, guestName, sampleWishes, preview, templateId]);
@@ -177,8 +179,8 @@ export function ChorloveInvitation({
     templateId === "palov" ||
     templateId === "orchid-amplop";
   const frameUrl = namespaced
-    ? `/templates/chorlove/${templateId}/index.html?${query}`
-    : `/templates/${templateId}/index.html?${query}`;
+    ? publicAsset(`/templates/chorlove/${templateId}/index.html?${query}`)
+    : publicAsset(`/templates/${templateId}/index.html?${query}`);
 
   useEffect(() => {
     const onMessage = (event: MessageEvent) => {

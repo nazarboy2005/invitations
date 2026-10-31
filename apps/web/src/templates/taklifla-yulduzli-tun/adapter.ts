@@ -1,3 +1,4 @@
+import { publicAsset } from "../../lib/public-asset";
 import { yandexMapUrl } from "@taklifnoma/contracts/maps";
 import {getTemplatePreviewWishes} from "../../modules/catalog/preview-sample";
 import { starryDataSchema, getContent, type Invitation, type Locale } from "@taklifnoma/contracts";
@@ -61,7 +62,7 @@ export function makeStarryPayload(
       wishesEnabled: invitation.wishes.enabled,
       music: options.preview && options.catalogMusicUrl
         ? { enabled: true, url: options.catalogMusicUrl }
-        : { enabled: invitation.music.enabled, url: invitation.music.url },
+        : { enabled: invitation.music.enabled, url: publicAsset(invitation.music.url) },
     },
   };
 }

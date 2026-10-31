@@ -1,4 +1,6 @@
 "use client";
+import { publicAsset } from "../../lib/public-asset";
+
 import { useInvitationMaps } from "@/templates/use-invitation-maps";
 
 import { useEffect, useMemo, useRef, useState } from "react";
@@ -64,7 +66,7 @@ export function TakliflaFayzliXonadonInvitation({
   }, [message]);
   return <div className={fullPreview ? styles.full : preview ? styles.preview : styles.public}>
     <iframe ref={frame} name={JSON.stringify(message)}
-      src="/templates/taklifla-fayzli-xonadon/index.html"
+      src={publicAsset("/templates/taklifla-fayzli-xonadon/index.html")}
       title={`${message.payload.content.hosts || "Fayzli Xonadon"} — taklifnoma`}
       onLoad={() => frame.current?.contentWindow?.postMessage(latest.current, window.location.origin)}
       allow="autoplay" loading="eager" />

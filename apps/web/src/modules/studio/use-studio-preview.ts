@@ -1,4 +1,5 @@
 import { useEffect, type RefObject } from "react";
+import { isTemplateDocument } from "../../lib/public-asset";
 
 export type PreviewTarget =
   "names" | "location" | "gallery" | "music" | "rsvp" | "gift" | "contacts";
@@ -105,7 +106,7 @@ export function useStudioPreview(
         const update = () => {
           try {
             const doc = frame.contentDocument;
-            if (doc?.head && (doc.URL.startsWith(`${location.origin}/templates/`) || frame.hasAttribute("srcdoc")))
+            if (doc?.head && (isTemplateDocument(doc.URL, location.origin) || frame.hasAttribute("srcdoc")))
               decorate(doc);
           } catch {
             /* Cross-origin frames cannot receive editor styling. */
@@ -118,7 +119,7 @@ export function useStudioPreview(
                   !doc ||
                   doc.readyState !== "complete" ||
                   !(
-                    doc.URL.startsWith(`${location.origin}/templates/`) ||
+                    isTemplateDocument(doc.URL, location.origin) ||
                     frame.hasAttribute("srcdoc")
                   )
                 )

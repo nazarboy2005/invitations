@@ -1,4 +1,6 @@
 "use client";
+import { publicAsset } from "../../lib/public-asset";
+
 import { useInvitationMaps } from "@/templates/use-invitation-maps";
 
 import { useEffect, useMemo, useRef } from "react";
@@ -23,6 +25,6 @@ export function TakliflaAsalari({ invitation, invitationId, locale, guestName = 
   const send = () => frame.current?.contentWindow?.postMessage(latest.current, window.location.origin);
   useEffect(() => { send(); }, [message]);
   return <div className={fullPreview ? styles.full : preview ? styles.preview : styles.public}>
-    <iframe ref={frame} src="/templates/taklifla-asalari/index.html" title={invitation.content[locale]?.title || "Asalari"} onLoad={send} allow="autoplay" />
+    <iframe ref={frame} src={publicAsset("/templates/taklifla-asalari/index.html")} title={invitation.content[locale]?.title || "Asalari"} onLoad={send} allow="autoplay" />
   </div>;
 }

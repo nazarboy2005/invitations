@@ -1,4 +1,6 @@
 "use client";
+import { publicAsset } from "../../lib/public-asset";
+
 import { useInvitationMaps } from "@/templates/use-invitation-maps";
 
 import { useEffect, useMemo, useRef, useState } from "react";
@@ -21,7 +23,7 @@ export function ManorInvitation({ invitation, invitationId, locale, guestName = 
   }, [invitation, invitationId, frameLocale, guestName, guestToken, preview, catalogMusic, sampleWishes, silentPlayback]);
   const latest = useRef(message); latest.current = message;
   const flags = [qaReducedMotion ? "qaReducedMotion=1" : "", qaMobile ? "qaMobile=1" : ""].filter(Boolean).join("&");
-  const frameUrl = `/templates/manor-edition/index.html${preview && flags ? `?${flags}` : ""}`;
+  const frameUrl = publicAsset(`/templates/manor-edition/index.html${preview && flags ? `?${flags}` : ""}`);
   useEffect(() => { frame.current?.contentWindow?.postMessage({ type: "manor-edition:update", payload: message }, window.location.origin); }, [message]);
   useEffect(() => {
     const onMessage = (event: MessageEvent) => {

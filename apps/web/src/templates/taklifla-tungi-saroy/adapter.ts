@@ -1,3 +1,4 @@
+import { publicAsset } from "../../lib/public-asset";
 import { yandexMapUrl } from "@taklifnoma/contracts/maps";
 import {
   getContent,
@@ -134,7 +135,7 @@ export function makeTungiSaroyPayload(
       phone: invitation.contacts.phoneNumber,
       rsvpEnabled: invitation.rsvp.enabled,
       wishesEnabled: invitation.wishes.enabled,
-      music: { enabled: invitation.music.enabled, url: invitation.music.url },
+      music: { enabled: invitation.music.enabled, url: publicAsset(invitation.music.url) },
     },
   };
 }

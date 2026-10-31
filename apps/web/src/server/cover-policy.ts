@@ -2,6 +2,7 @@ import { createHash } from "node:crypto";
 import type { Invitation } from "@taklifnoma/contracts";
 import { COVER_VERSION } from "../modules/dashboard/cover-recipe";
 import { coverContent } from "../modules/dashboard/cover-content";
+import { publicAssetPrefix } from "../lib/public-asset";
 
 export function coverKey(invitation: Invitation, scope = "") {
   return createHash("sha256")
@@ -28,7 +29,9 @@ export function coverRequestKind(
     if (/^\/api\/media\/[a-zA-Z0-9-]+$/.test(url.pathname)) return "media";
     if (
       url.pathname === "/preview" ||
-      /^\/(?:templates|images|fonts|_next\/static)\//.test(url.pathname)
+      /^\/(?:templates|images|fonts|_next\/static)\//.test(url.pathname) ||
+      (url.pathname.startsWith(publicAssetPrefix + "/") &&
+        /^\/(?:templates|images)\//.test(url.pathname.slice(publicAssetPrefix.length)))
     )
       return "asset";
     return "deny";

@@ -1,3 +1,4 @@
+import { publicAsset } from "../../lib/public-asset";
 import { writeFileSync } from "node:fs";
 import { createTemplatePreviewSample, createLongNamePreview } from "@/modules/catalog/preview-sample";
 import { createInvitation, LOCALES } from "@taklifnoma/contracts";
@@ -10,7 +11,7 @@ for (const locale of LOCALES) fixtures[locale] = makeZarhalPayload(invitation, l
 fixtures.long = makeZarhalPayload(createLongNamePreview(invitation), "uz-Latn", { invitationId: "qa", preview: true, sampleWishes: true, guestName: "Aziz mehmon", silentPlayback: true });
 fixtures.empty = makeZarhalPayload(createInvitation("taklifla-zarhal-sahifa"), "uz-Latn", { invitationId: "qa", preview: true });
 const repeat = structuredClone(invitation);
-repeat.gallery = Array.from({ length: 7 }, (_, i) => ({ id: `photo-${i}`, url: "/templates/taklifla-zarhal-sahifa/assets/preview/photo-1519741497674-611481863552.avif", alt: `Surat ${i+1}`, caption: `Xotira ${i+1}` }));
+repeat.gallery = Array.from({ length: 7 }, (_, i) => ({ id: `photo-${i}`, url: publicAsset("/templates/taklifla-zarhal-sahifa/assets/preview/photo-1519741497674-611481863552.avif"), alt: `Surat ${i+1}`, caption: `Xotira ${i+1}` }));
 fixtures.repeat = makeZarhalPayload(repeat, "uz-Latn", { invitationId: "qa", preview: true, sampleWishes: true, silentPlayback: true });
 fixtures.public = makeZarhalPayload(invitation, "uz-Latn", { invitationId: "qa-service", guestToken: "qa-token", guestName: "Mehmon" });
 const music = structuredClone(invitation);

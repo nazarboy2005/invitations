@@ -9,5 +9,8 @@ coverage/
 test-results/
 playwright-report/
 *.tsbuildinfo
+apps/web/public/_assets/
+apps/web/src/generated/public-assets.json
+apps/web/src/generated/public-asset-version.json
 .tmp-*.png
 Invitations - this folder will be removed from production/

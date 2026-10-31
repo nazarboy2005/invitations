@@ -1,3 +1,4 @@
+import { publicAsset } from "../../lib/public-asset";
 import { yandexMapUrl } from "@taklifnoma/contracts/maps";
 import { getContent, type Invitation, type Locale } from "@taklifnoma/contracts";
 import { eventInstant, formatDate } from "../date-format";
@@ -49,7 +50,7 @@ export function makeAsalariPayload(
     locale, variants, enabledLocales: invitation.enabledLocales,
     invitationId: options.invitationId, guestToken: options.guestToken || "",
     preview: !!options.preview, wishesEnabled: invitation.wishes.enabled,
-    music: { enabled: invitation.music.enabled, url: invitation.music.url },
+    music: { enabled: invitation.music.enabled, url: publicAsset(invitation.music.url) },
     silentPlayback: !!options.preview && !!options.silentPlayback,
     reducedMotion: !!options.preview && !!options.reducedMotion,
   } };

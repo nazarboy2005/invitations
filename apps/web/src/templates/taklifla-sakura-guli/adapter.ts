@@ -1,3 +1,4 @@
+import { publicAsset } from "../../lib/public-asset";
 import { yandexMapUrl } from "@taklifnoma/contracts/maps";
 import type { Invitation, Locale } from "@taklifnoma/contracts";
 import { sakuraDataSchema,getContent } from "@taklifnoma/contracts";
@@ -37,7 +38,7 @@ export function makeSakuraPayload(invitation: Invitation, locale: Locale, option
     program: invitation.program.map(item => ({ id: item.id, time: item.time, title: c.programTitles[item.id] ?? "", description: c.programDescriptions[item.id] ?? "" })),
     dressText: invitation.dressCode.enabled ? [localized(invitation.dressCode.style), localized(invitation.dressCode.text), localized(invitation.dressCode.note), ...invitation.dressCode.colors.map(color => localized(color.name)||color.hex)].filter(Boolean).join("\n") : "",
     contacts: { phone: invitation.contacts.phoneNumber, telegram: invitation.contacts.telegramUsername, instagram: invitation.contacts.instagramUrl },
-    musicUrl: invitation.music.enabled ? invitation.music.url : "",
+    musicUrl: invitation.music.enabled ? publicAsset(invitation.music.url) : "",
     wishesEnabled: invitation.wishes.enabled,
     apiBase: `/api/public/invitations/${encodeURIComponent(options.invitationId)}`,
     guestName: options.guestName ?? "", guestToken: options.guestToken ?? "",

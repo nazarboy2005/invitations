@@ -26,7 +26,7 @@ export default async function TemplatesPage({
     ? category
     : "all";
   return (
-    <div className={`${styles.page} ${display.variable} ${sans.variable}`}>
+    <div data-page-scrollbar="gold" className={`${styles.page} ${display.variable} ${sans.variable}`}>
       <SiteHeader catalog />
       <main id="main" className={styles.main}>
         <header className={styles.header}>

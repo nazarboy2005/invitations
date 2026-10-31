@@ -1,4 +1,6 @@
 "use client";
+import { publicAsset } from "../../lib/public-asset";
+
 import { useInvitationMaps } from "@/templates/use-invitation-maps";
 
 import { useEffect, useMemo, useRef, useState } from "react";
@@ -20,7 +22,7 @@ export function VelvetRoyaleInvitation({ invitation, invitationId, locale, guest
     return { ...source, locale: sourceLocale[frameLocale], defaultLang: sourceLocale[frameLocale], languages: invitation.enabledLocales.map((item) => sourceLocale[item]), guestName, guestToken, music: preview && catalogMusic ? CATALOG_PREVIEW_MUSIC.url : source.music.enabled ? source.music.url : "", silentPlayback: preview && silentPlayback, catalogPreview: preview && catalogMusic, preview, apiBase: `/api/public/invitations/${encodeURIComponent(invitationId)}`, rsvp: invitation.rsvp, wishesEnabled: invitation.wishes.enabled };
   }, [invitation, invitationId, frameLocale, guestName, guestToken, preview, catalogMusic, sampleWishes, silentPlayback]);
   const latest = useRef(message); latest.current = message;
-  const frameUrl = `/templates/velvet-royale/index.html${preview && qaReducedMotion ? "?qaReducedMotion=1" : ""}`;
+  const frameUrl = publicAsset(`/templates/velvet-royale/index.html${preview && qaReducedMotion ? "?qaReducedMotion=1" : ""}`);
   useEffect(() => {
     frame.current?.contentWindow?.postMessage({ type: "royal-burgundy-edition:update", payload: message }, window.location.origin);
   }, [message]);

@@ -1,3 +1,4 @@
+import { publicAsset } from "../lib/public-asset";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
@@ -18,10 +19,10 @@ export function InvitationSteps({ children }: { children: ReactNode }) {
             <picture>
               <source
                 media="(max-width: 700px)"
-                srcSet="/images/home/invitation-steps-mobile-full.webp"
+                srcSet={publicAsset("/images/home/invitation-steps-mobile-full.webp")}
               />
               <Image
-                src="/images/home/invitation-steps.webp"
+                src={publicAsset("/images/home/invitation-steps.webp")}
                 alt=""
                 fill
                 sizes="100vw"

@@ -1,4 +1,6 @@
 "use client";
+import { publicAsset } from "../lib/public-asset";
+
 import { useCallback, useEffect, type RefObject } from "react";
 import type { Invitation, Locale } from "@taklifnoma/contracts";
 import type { LegacyData } from "./anor/renderer";
@@ -44,7 +46,7 @@ export function useInvitationExtras(
     if (!document.querySelector("script[data-editor-sections]")) {
       const script = document.createElement("script");
       script.dataset.editorSections = "";
-      script.src = "/templates/shared/editor-sections.js";
+      script.src = publicAsset("/templates/shared/editor-sections.js");
       document.body.append(script);
     }
     target.postMessage(

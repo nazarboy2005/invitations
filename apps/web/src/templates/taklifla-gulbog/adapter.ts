@@ -1,3 +1,4 @@
+import { publicAsset } from "../../lib/public-asset";
 import { yandexMapUrl } from "@taklifnoma/contracts/maps";
 import { gulbogDataSchema, getContent, type Invitation, type Locale } from "@taklifnoma/contracts";
 import { eventInstant, eventWallDate, formatDate } from "../date-format";
@@ -48,7 +49,7 @@ export function makeGulbogPayload(invitation: Invitation, locale: Locale, option
         id: item.id, time: item.time, title: c.programTitles[item.id] || "",
         description: c.programDescriptions[item.id] || "",
       })),
-      music: options.preview && options.catalogMusic ? {enabled:true,url:CATALOG_PREVIEW_MUSIC.url} : { enabled: invitation.music.enabled, url: invitation.music.url },
+      music: options.preview && options.catalogMusic ? {enabled:true,url:CATALOG_PREVIEW_MUSIC.url} : { enabled: invitation.music.enabled, url: publicAsset(invitation.music.url) },
       wishesEnabled: invitation.wishes.enabled,
     }];
   }));

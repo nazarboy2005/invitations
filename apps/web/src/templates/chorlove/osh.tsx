@@ -1,4 +1,6 @@
 "use client";
+import { publicAsset } from "../../lib/public-asset";
+
 import { useInvitationMaps } from "@/templates/use-invitation-maps";
 
 import { useEffect, useMemo, useRef } from "react";
@@ -76,7 +78,7 @@ export function ChorloveOshInvitation({
       <iframe
         ref={frame}
         title={`${data.groom} ${data.bride} Nahorgi osh taklifnomasi`}
-        src="/templates/chorlove/osh/index.html"
+        src={publicAsset("/templates/chorlove/osh/index.html")}
         onLoad={() => frame.current?.contentWindow?.postMessage(latest.current, window.location.origin)}
         allow="autoplay; fullscreen"
         loading="eager"

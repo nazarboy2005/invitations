@@ -1,4 +1,6 @@
 "use client";
+import { publicAsset } from "../../lib/public-asset";
+
 import { useInvitationMaps } from "@/templates/use-invitation-maps";
 
 import { useEffect, useMemo, useRef, useState } from "react";
@@ -57,7 +59,7 @@ export function TakliflaYubileySahifasi({
     frame.current?.contentWindow?.postMessage(message, window.location.origin);
   }, [message]);
   return <div className={fullPreview ? styles.full : preview ? styles.preview : styles.public}>
-    <iframe ref={frame} src="/templates/taklifla-yubiley-sahifasi/index.html"
+    <iframe ref={frame} src={publicAsset("/templates/taklifla-yubiley-sahifasi/index.html")}
       title={message.payload.company || { "uz-Latn": "Yubiley sahifasi", "uz-Cyrl": "Юбилей саҳифаси", en: "Anniversary page", ru: "Юбилейная страница" }[activeLocale]}
       onLoad={(event) => event.currentTarget.contentWindow?.postMessage(latest.current, window.location.origin)}
       allow="autoplay" loading="eager" />

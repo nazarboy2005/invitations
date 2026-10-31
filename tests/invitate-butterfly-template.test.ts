@@ -35,7 +35,7 @@ test("Butterfly adapter maps authored content and keeps preview-only gallery ass
   assert.match(adapter, /content\.landmark/);
   assert.match(adapter, /invitation\.gallery[\s\S]*\.map\(/);
   assert.match(adapter, /if \(options\.preview && !gallery\.length\)/);
-  assert.match(adapter, /invitation\.music\.enabled \? invitation\.music\.url/);
+  assert.match(adapter, /invitation\.music\.enabled \? publicAsset\(invitation\.music\.url\)/);
   assert.match(adapter, /silentPlayback: options\.preview && options\.silentPlayback/);
   assert.doesNotMatch(adapter, /eyebrow|eventLabel.*greeting/i);
   assert.match(adapter, /"uz-Cyrl": "uz-Cyrl"[\s\S]*en: "en"[\s\S]*ru: "ru"/);

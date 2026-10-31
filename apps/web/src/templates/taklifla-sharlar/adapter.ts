@@ -1,3 +1,4 @@
+import { publicAsset } from "../../lib/public-asset";
 import { yandexMapUrl } from "@taklifnoma/contracts/maps";
 import {getTemplatePreviewWishes} from "../../modules/catalog/preview-sample";
 import { sharlarDataSchema, getContent, type Invitation, type Locale } from "@taklifnoma/contracts";
@@ -53,7 +54,7 @@ export function makeSharlarPayload(invitation: Invitation, locale: Locale, optio
         invitation.venue.latitude !== null && invitation.venue.longitude !== null
           ? `https://yandex.uz/maps/?text=${invitation.venue.latitude},${invitation.venue.longitude}` : ""
       ),
-      music: { enabled: invitation.music.enabled, url: invitation.music.url },
+      music: { enabled: invitation.music.enabled, url: publicAsset(invitation.music.url) },
       phone: invitation.contacts.phoneNumber,
       wishesEnabled: invitation.wishes.enabled,
     },

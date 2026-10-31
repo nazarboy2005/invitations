@@ -1,10 +1,42 @@
 import { randomBytes } from "node:crypto";
 import { NextResponse, type NextRequest } from "next/server";
 import { isPrivateTemplateArtifact } from "./server/template-artifacts";
+import publicAssets from "./generated/public-assets.json";
+
+const publicAssetFiles = new Set(publicAssets.files);
+const publicAssetPrefix = `/_assets/${publicAssets.version}`;
 
 // Each server page and API handler enforces authorization.
 export function proxy(request: NextRequest) {
   const pathname = new URL(request.url).pathname;
+  if (pathname.startsWith("/_assets/")) {
+    let originalPath: string;
+    try {
+      originalPath = decodeURIComponent(
+        pathname.slice(publicAssetPrefix.length),
+      );
+    } catch {
+      originalPath = "";
+    }
+    if (
+      !pathname.startsWith(publicAssetPrefix + "/") ||
+      !publicAssetFiles.has(originalPath) ||
+      isPrivateTemplateArtifact(originalPath)
+    ) {
+      return new NextResponse(null, {
+        status: 404,
+        headers: { "Cache-Control": "no-store", "X-Robots-Tag": "noindex" },
+      });
+    }
+    const response = NextResponse.next();
+    response.headers.set(
+      "Cache-Control",
+      process.env.NODE_ENV === "production"
+        ? "public, max-age=31536000, immutable"
+        : "no-store",
+    );
+    return response;
+  }
   if (pathname.startsWith("/templates/")) {
     return isPrivateTemplateArtifact(pathname)
       ? new NextResponse(null, {
@@ -55,4 +87,11 @@ export function proxy(request: NextRequest) {
   );
   return response;
 }
-export const config = { matcher: ["/admin/:path*", "/api/admin/:path*", "/templates/:path*"] };
+export const config = {
+  matcher: [
+    "/admin/:path*",
+    "/api/admin/:path*",
+    "/templates/:path*",
+    "/_assets/:path*",
+  ],
+};

@@ -1,3 +1,4 @@
+import { publicAsset } from "../../lib/public-asset";
 import { yandexMapUrl } from "@taklifnoma/contracts/maps";
 import { getContent, type Invitation, type Locale } from "@taklifnoma/contracts";
 import { eventInstant, formatDate } from "../date-format";
@@ -50,7 +51,7 @@ export function makeZarhalPayload(invitation: Invitation, locale: Locale, option
     : creatorPhotos;
   const music = options.preview && options.catalogMusic
     ? { enabled: true, url: CATALOG_PREVIEW_MUSIC.url }
-    : { enabled: invitation.music.enabled, url: invitation.music.url };
+    : { enabled: invitation.music.enabled, url: publicAsset(invitation.music.url) };
   return {
     type: "zarhal-sahifa:update" as const,
     payload: {

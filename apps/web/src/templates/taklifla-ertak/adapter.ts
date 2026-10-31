@@ -1,3 +1,4 @@
+import { publicAsset } from "../../lib/public-asset";
 import { yandexMapUrl } from "@taklifnoma/contracts/maps";
 import { getContent, type Invitation, type Locale } from "@taklifnoma/contracts";
 import { eventInstant, eventWallDate, formatDate } from "../date-format";
@@ -76,7 +77,7 @@ export function makeErtakPayload(
       wishesEnabled: invitation.wishes.enabled,
       music: preview && options.catalogMusicUrl
         ? { enabled: true, url: options.catalogMusicUrl }
-        : { enabled: invitation.music.enabled, url: invitation.music.url },
+        : { enabled: invitation.music.enabled, url: publicAsset(invitation.music.url) },
       silentPlayback: preview && options.silentPlayback === true,
     },
   };

@@ -1,4 +1,6 @@
 "use client";
+import { publicAsset } from "../lib/public-asset";
+
 
 import {
   useCallback,
@@ -138,11 +140,11 @@ export function PaperShowcase({ papers }: { papers: ShowcasePaper[] }) {
       <picture className={styles.backdrop} aria-hidden="true">
         <source
           media="(max-width: 700px)"
-          srcSet="/images/home/paper/gallery-mobile.webp"
+          srcSet={publicAsset("/images/home/paper/gallery-mobile.webp")}
         />
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="/images/home/paper/gallery-desktop.webp"
+          src={publicAsset("/images/home/paper/gallery-desktop.webp")}
           alt=""
           width={1674}
           height={940}

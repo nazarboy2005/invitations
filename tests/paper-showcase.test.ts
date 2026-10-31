@@ -1,3 +1,4 @@
+import { publicAsset } from "../apps/web/src/lib/public-asset";
 import assert from "node:assert/strict";
 import test from "node:test";
 import { readFileSync } from "node:fs";
@@ -56,8 +57,8 @@ test("missing or unsupported native decompression uses identical unpacked geomet
     );
     assert.deepEqual(result, raw);
     assert.deepEqual(requests, [
-      "/images/home/paper/crumple.bin",
-      "/images/home/paper/crumple.raw.bin",
+      publicAsset("/images/home/paper/crumple.bin"),
+      publicAsset("/images/home/paper/crumple.raw.bin"),
     ]);
   }
   const requests: string[] = [];

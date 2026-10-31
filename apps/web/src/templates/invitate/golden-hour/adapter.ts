@@ -1,3 +1,4 @@
+import { publicAsset } from "../../../lib/public-asset";
 import { yandexMapUrl } from "@taklifnoma/contracts/maps";
 import type { Invitation, Locale } from "@taklifnoma/contracts";
 import { getContent } from "@taklifnoma/contracts";
@@ -19,31 +20,31 @@ export function makeGoldenHourData(
     data.gallery = [
       {
         id: "golden-hour-source-preview-1",
-        src: "/templates/golden-hour/assets/images/golden-hour/pink.png",
+        src: publicAsset("/templates/golden-hour/assets/images/golden-hour/pink.png"),
         alt: "",
         caption: "",
       },
       {
         id: "golden-hour-source-preview-2",
-        src: "/templates/golden-hour/assets/images/golden-hour/flowers.png",
+        src: publicAsset("/templates/golden-hour/assets/images/golden-hour/flowers.png"),
         alt: "",
         caption: "",
       },
       {
         id: "golden-hour-source-preview-3",
-        src: "/templates/golden-hour/assets/images/golden-hour/flocake.png",
+        src: publicAsset("/templates/golden-hour/assets/images/golden-hour/flocake.png"),
         alt: "",
         caption: "",
       },
       {
         id: "golden-hour-source-preview-4",
-        src: "/templates/golden-hour/assets/images/golden-hour/location.png",
+        src: publicAsset("/templates/golden-hour/assets/images/golden-hour/location.png"),
         alt: "",
         caption: "",
       },
       {
         id: "golden-hour-source-preview-5",
-        src: "/templates/golden-hour/assets/images/golden-hour/footerimage.png",
+        src: publicAsset("/templates/golden-hour/assets/images/golden-hour/footerimage.png"),
         alt: "",
         caption: "",
       },

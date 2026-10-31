@@ -1,3 +1,4 @@
+import { publicAsset } from "../../lib/public-asset";
 import { yandexMapUrl } from "@taklifnoma/contracts/maps";
 import { mountainDataSchema, getContent, type Invitation, type Locale } from "@taklifnoma/contracts";
 import { getTemplatePreviewWishes } from "../../modules/catalog/preview-sample";
@@ -55,7 +56,7 @@ export function makeMountainPayload(invitation: Invitation, locale: Locale, gues
       enabledLocales: [...invitation.enabledLocales],
       localized,
       instant: eventInstant(invitation.startsAt, invitation.timezone)?.toISOString() ?? "",
-      music: { enabled: invitation.music.enabled, url: invitation.music.url },
+      music: { enabled: invitation.music.enabled, url: publicAsset(invitation.music.url) },
       wishesEnabled: invitation.wishes.enabled,
       rsvp: { enabled: invitation.rsvp.enabled, deadline: invitation.rsvp.deadline },
       guestName,

@@ -1,4 +1,6 @@
 "use client";
+import { publicAsset } from "../../lib/public-asset";
+
 import { useInvitationMaps } from "@/templates/use-invitation-maps";
 
 import { useCallback, useEffect, useMemo, useRef } from "react";
@@ -28,7 +30,7 @@ export function TakliflaOsmonInvitation({invitation, locale, fullPreview, qaRedu
   useEffect(()=>{const receive=(e:MessageEvent)=>{if(e.origin===location.origin&&e.source===frame.current?.contentWindow&&e.data?.type==="taklifla-osmon:ready")send();};window.addEventListener("message",receive);return()=>window.removeEventListener("message",receive);},[send]);
   return <div className={fullPreview ? styles.full : options.preview ? styles.preview : styles.public}>
     <iframe ref={frame} title={invitation.content[locale]?.title || "Cheksiz Osmon"}
-      src="/templates/taklifla-osmon/index.html" onLoad={send}
+      src={publicAsset("/templates/taklifla-osmon/index.html")} onLoad={send}
       allow="autoplay" loading="eager" />
   </div>;
 }

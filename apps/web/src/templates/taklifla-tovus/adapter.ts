@@ -1,3 +1,4 @@
+import { publicAsset } from "../../lib/public-asset";
 import { yandexMapUrl } from "@taklifnoma/contracts/maps";
 import {
   getContent,
@@ -125,7 +126,7 @@ export function makeTovusPayload(
       guestToken: options.guestToken || "",
       preview: !!options.preview,
       wishesEnabled: invitation.wishes.enabled,
-      music: { enabled: invitation.music.enabled, url: invitation.music.url },
+      music: { enabled: invitation.music.enabled, url: publicAsset(invitation.music.url) },
       silentPlayback: !!options.preview && !!options.silentPlayback,
       reducedMotion: !!options.preview && !!options.reducedMotion,
     },

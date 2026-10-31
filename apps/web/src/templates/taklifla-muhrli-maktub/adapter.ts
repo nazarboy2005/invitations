@@ -1,3 +1,4 @@
+import { publicAsset } from "../../lib/public-asset";
 import { yandexMapUrl } from "@taklifnoma/contracts/maps";
 import { defaultEventLabel, getContent, muhrliMaktubDataSchema, type Invitation, type Locale } from "@taklifnoma/contracts";
 import { eventInstant, eventWallDate, formatDate } from "../date-format";
@@ -67,7 +68,7 @@ export function makeEnvelopePayload(invitation: Invitation, locale: Locale, opti
       wishesEnabled: invitation.wishes.enabled,
       music: options.preview && options.catalogMusic
         ? { enabled: true, url: CATALOG_PREVIEW_MUSIC.url }
-        : { enabled: invitation.music.enabled, url: invitation.music.url },
+        : { enabled: invitation.music.enabled, url: publicAsset(invitation.music.url) },
     },
   };
 }

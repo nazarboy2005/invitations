@@ -1,4 +1,6 @@
 "use client";
+import { publicAsset } from "../../lib/public-asset";
+
 import { useInvitationMaps } from "@/templates/use-invitation-maps";
 
 import { useEffect, useMemo, useRef } from "react";
@@ -89,7 +91,7 @@ export function TakliflaTortFasl({
       <iframe
         ref={frame}
         title={`${invitation.content[locale]?.title || FASLLAR_NAME} — ${FASLLAR_NAME}`}
-        src={`/templates/${FASLLAR_ID}/index.html`}
+        src={publicAsset(`/templates/${FASLLAR_ID}/index.html`)}
         onLoad={() =>
           frame.current?.contentWindow?.postMessage(
             latest.current,

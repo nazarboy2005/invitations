@@ -1,4 +1,6 @@
 "use client";
+import { publicAsset } from "../../lib/public-asset";
+
 import { useInvitationMaps } from "@/templates/use-invitation-maps";
 
 import { useEffect, useMemo, useRef, useState } from "react";
@@ -107,7 +109,7 @@ export function WedivoPulauSehati({
       <iframe
         ref={frame}
         title={`${invitation.content[activeLocale]?.people.slice(0, 2).join(" & ")} · ${{ "uz-Latn": "Taklifnoma", "uz-Cyrl": "Таклифнома", en: "Invitation", ru: "Приглашение" }[activeLocale]}`}
-        src="/templates/wedivo-pulau-sehati/index.html"
+        src={publicAsset("/templates/wedivo-pulau-sehati/index.html")}
         onLoad={(event) => {
           const target = event.currentTarget.contentWindow;
           if (!target) return;

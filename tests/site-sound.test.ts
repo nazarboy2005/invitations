@@ -1,6 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { createSoundProgress } from "../apps/web/src/components/site-sound-progress";
+import { publicAsset } from "../apps/web/src/lib/public-asset";
 import {
   blockSiteSound,
   createPaperMotionSound,
@@ -137,7 +138,7 @@ test("samples load once after interaction and never play late or over a preview"
     await Promise.resolve();
     assert.equal(created, 1);
     assert.equal(requests.length, 5);
-    assert.ok(requests.every((url) => url.startsWith("/audio/site/")));
+    assert.ok(requests.every((url) => url.startsWith(publicAsset("/audio/site/"))));
     playSiteSound("water");
     assert.equal(starts, 0);
     pending.forEach((finish) => finish());

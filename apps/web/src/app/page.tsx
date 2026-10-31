@@ -1,3 +1,4 @@
+import { publicAsset } from "../lib/public-asset";
 
 import { publicTemplateId } from "@taklifnoma/contracts";
 import Link from "next/link";
@@ -37,7 +38,7 @@ export default async function Home() {
             id,
             name: template.name,
             description: template.description,
-            image: `/images/home/paper/${id === "bogi-eram" ? "bogi-eram-cover" : id}.webp`,
+            image: publicAsset(`/images/home/paper/${id === "bogi-eram" ? "bogi-eram-cover" : id}.webp`),
             href: `/preview?template=${encodeURIComponent(publicTemplateId(id))}`,
           },
         ]
@@ -48,11 +49,12 @@ export default async function Home() {
     visibleTemplates[0];
   const artwork = (template: NonNullable<typeof heroTemplate>) =>
     template.previewImage?.startsWith("/")
-      ? template.previewImage
-      : `/templates/${template.id}/${template.previewImage ?? "stage.webp"}`;
+      ? publicAsset(template.previewImage)
+      : publicAsset(`/templates/${template.id}/${template.previewImage ?? "stage.webp"}`);
 
   return (
     <div
+      data-page-scrollbar="gold"
       className={`${styles.page} ${display.variable} ${script.variable} ${sans.variable}`}
     >
       <SmoothScroll />

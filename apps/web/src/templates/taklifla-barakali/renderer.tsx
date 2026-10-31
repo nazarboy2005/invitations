@@ -1,4 +1,6 @@
 "use client";
+import { publicAsset } from "../../lib/public-asset";
+
 import { useInvitationMaps } from "@/templates/use-invitation-maps";
 
 import { useEffect, useMemo, useRef } from "react";
@@ -27,7 +29,7 @@ export function TakliflaBarakali({ invitation, locale, fullPreview, ...options }
     return () => window.removeEventListener("message", ready);
   }, [message]);
   return <div className={options.preview && !fullPreview ? styles.preview : styles.full}>
-    <iframe ref={frame} src="/templates/taklifla-barakali/index.html" title={invitation.content[locale]?.title || "Barakali"}
+    <iframe ref={frame} src={publicAsset("/templates/taklifla-barakali/index.html")} title={invitation.content[locale]?.title || "Barakali"}
       onLoad={send} allow="autoplay" loading="eager" />
   </div>;
 }

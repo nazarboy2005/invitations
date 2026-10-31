@@ -1,4 +1,6 @@
 "use client";
+import { publicAsset } from "../../lib/public-asset";
+
 
 import { useEffect, useMemo, useRef } from "react";
 import type { Invitation, Locale } from "@taklifnoma/contracts";
@@ -25,5 +27,5 @@ export function TakliflaZarrinGullar(props:Props) {
     };
     window.addEventListener("message",ready);return()=>window.removeEventListener("message",ready);
   },[]);
-  return <div className={props.fullPreview ? styles.full : props.preview ? styles.preview : styles.public}><iframe ref={frame} className={styles.frame} title="Zarrin gullar" src="/templates/taklifla-zarrin-gullar/template.html" onLoad={()=>frame.current?.contentWindow?.postMessage(latest.current,window.location.origin)} allow="autoplay" /></div>;
+  return <div className={props.fullPreview ? styles.full : props.preview ? styles.preview : styles.public}><iframe ref={frame} className={styles.frame} title="Zarrin gullar" src={publicAsset("/templates/taklifla-zarrin-gullar/template.html")} onLoad={()=>frame.current?.contentWindow?.postMessage(latest.current,window.location.origin)} allow="autoplay" /></div>;
 }

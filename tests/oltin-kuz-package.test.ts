@@ -1,5 +1,6 @@
 import { readFileSync } from "./helpers/source-files";
 import assert from "node:assert/strict";
+import { publicAsset } from "../apps/web/src/lib/public-asset";
 import { createHash } from "node:crypto";
 import { createRequire } from "node:module";
 import path from "node:path";
@@ -268,13 +269,13 @@ test("Oltin Kuz source photos are preview-only, localized, and yield to creator 
     );
     assert.deepEqual(
       previewGallery.map(({ src }) => src),
-      galleryFiles.map((file) => `/templates/oltin-kuz/art/${file}`),
+      galleryFiles.map((file) => publicAsset(`/templates/oltin-kuz/art/${file}`)),
       `${locale}: captured gallery art fills only the sample preview`,
     );
     assert.ok(previewGallery.every(({ alt }) => alt.trim().length > 0));
     assert.equal(
       mapMarxabaPreviewVenuePhoto("oltin-kuz", sample.gallery, true, true),
-      "/templates/oltin-kuz/art/venue.svg",
+      publicAsset("/templates/oltin-kuz/art/venue.svg"),
       `${locale}: captured venue art is available in the sample preview`,
     );
     assert.deepEqual(sourceData.gallery.map(({ src }) => src), ["", "", "", "", "", ""]);

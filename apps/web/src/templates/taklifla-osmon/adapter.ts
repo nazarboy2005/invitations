@@ -1,3 +1,4 @@
+import { publicAsset } from "../../lib/public-asset";
 import { yandexMapUrl } from "@taklifnoma/contracts/maps";
 import { osmonDataSchema, getContent, type Invitation, type Locale } from "@taklifnoma/contracts";
 import { getTemplatePreviewWishes } from "../../modules/catalog/preview-sample";
@@ -80,7 +81,7 @@ export function makeOsmonPayload(invitation: Invitation, locale: Locale, options
       wishes: invitation.wishes.enabled,
       music: options.preview && options.catalogMusic
         ? {enabled: true, url: CATALOG_PREVIEW_MUSIC.url}
-        : {enabled: invitation.music.enabled, url: invitation.music.url},
+        : {enabled: invitation.music.enabled, url: publicAsset(invitation.music.url)},
       silentPlayback: !!options.silentPlayback || (!!options.preview && !options.catalogMusic && !options.fullPreview),
     },
   };

@@ -1,5 +1,7 @@
 import type { NextConfig } from "next";
 import { HTML_LIMITED_BOT_UA_RE } from "next/dist/shared/lib/router/utils/html-bots";
+import { preparePublicAssets } from "./scripts/prepare-public-assets.mjs";
+const publicAssets = preparePublicAssets();
 const config: NextConfig = {
   // Keep Next's defaults and include Telegram, whose crawler needs metadata in <head>.
   htmlLimitedBots: new RegExp(
@@ -26,6 +28,14 @@ const config: NextConfig = {
   outputFileTracingExcludes: {
     // Capture loads template artwork over HTTP; these files stay on the CDN.
     "/api/invitation-covers": ["./public/**", "./src/templates/**"],
+  },
+  async rewrites() {
+    // Production asset routing is pinned to the build's revision. Development
+    // callers use original public URLs and do not depend on these rules.
+    return ["images", "audio", "music", "templates"].map((root) => ({
+      source: `/_assets/${publicAssets.version}/${root}/:path*`,
+      destination: `/${root}/:path*`,
+    }));
   },
   async headers() {
     return [
