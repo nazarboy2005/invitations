@@ -1,4 +1,5 @@
 "use client";
+import { refreshFavorites } from "@/modules/favorites/favorites-store";
 
 import { publicTemplateId, resolveTemplateId } from "@taklifnoma/contracts";
 
@@ -791,6 +792,7 @@ export function Studio({
             body: JSON.stringify({ requestId: auth!.requestId }),
           });
           if (!complete.ok) throw new Error("Kirishni yakunlab bo‘lmadi.");
+          void refreshFavorites();
           setAuth(null);
           setAuthIdentity(null);
           await saveOrPublish(pendingAction.current);
@@ -1091,6 +1093,7 @@ export function Studio({
           "Hisobni tekshirib bo‘lmadi. Qoralamangiz brauzerda saqlanmoqda.",
         );
       const session: SessionResponse = await sessionResponse.json();
+      window.dispatchEvent(new CustomEvent("session-changed", { detail: { userId: session.user?.id ?? null } }));
       if (!session.user) {
         if (!session.configured) {
           setNotice(
@@ -1319,6 +1322,7 @@ export function Studio({
         throw new Error(
           "Kirish yakunlanmadi. Botdagi tasdiqlash va telefon ulashishni tekshiring.",
         );
+      void refreshFavorites();
       setAuth(null);
       setAuthIdentity(null);
       await saveOrPublish(pendingAction.current);

@@ -1,4 +1,5 @@
 "use client";
+import { FavoritesLink, FavoritesStatus } from "@/modules/favorites/favorite-button";
 
 import { useEffect, useId, useRef, useState } from "react";
 import Link from "next/link";
@@ -515,6 +516,7 @@ export function Dashboard() {
             <span>Har bir muhim kun uchun o‘zgacha taklif.</span>
           </div>
           <div className={styles.headingActions}>
+            <FavoritesLink />
             {session?.user?.isAdmin && (
               <a
                 href="/admin"
@@ -530,6 +532,7 @@ export function Dashboard() {
             </Link>
           </div>
         </div>
+        <FavoritesStatus />
         {!session?.user && !loading && !error && (
           <div className={styles.accountNotice}>
             <span className={styles.noticeIcon}>

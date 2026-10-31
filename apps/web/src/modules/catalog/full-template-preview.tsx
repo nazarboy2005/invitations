@@ -1,4 +1,5 @@
 "use client";
+import { FavoriteButton, FavoritesStatus } from "@/modules/favorites/favorite-button";
 
 import { publicTemplateId } from "@taklifnoma/contracts";
 
@@ -328,6 +329,12 @@ export function FullTemplatePreview({
           >
             Yaratish <ArrowUpRight size={16} aria-hidden="true" />
           </Link>
+        )}
+        {canSelect && (
+          <div className={styles.favoriteAction}>
+            <FavoriteButton templateId={template.id} name={template.name} />
+            <FavoritesStatus />
+          </div>
         )}
       </nav>}
       {!invitation ? (

@@ -20,7 +20,14 @@ async function readSession(): Promise<SessionResponse> {
   });
   if (!response.ok)
     throw new Error("Hisobingizni tekshirib bo‘lmadi. Qayta urinib ko‘ring.");
-  return response.json();
+  const session: SessionResponse = await response.json();
+  if (typeof window !== "undefined")
+    window.dispatchEvent(
+      new CustomEvent("session-changed", {
+        detail: { userId: session.user?.id ?? null },
+      }),
+    );
+  return session;
 }
 
 async function resolveSession(initData: string): Promise<SessionResponse> {

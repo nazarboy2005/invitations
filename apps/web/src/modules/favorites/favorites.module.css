@@ -1,0 +1,57 @@
+.button {
+  display: inline-flex;
+  flex: 0 0 auto;
+  justify-content: center;
+  align-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: #ff0000;
+  cursor: pointer;
+}
+.button[aria-pressed="true"] {
+  color: #ff0000;
+  background: transparent;
+}
+.button:disabled {
+  cursor: pointer;
+  opacity: 1;
+}
+.button:focus-visible,
+.link:focus-visible {
+  outline: 3px solid #ff0000;
+  outline-offset: 3px;
+}
+.overlay {
+  position: absolute;
+  z-index: 4;
+  top: 10px;
+  right: 10px;
+}
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 44px;
+  color: inherit;
+}
+.status {
+  margin: 10px 0;
+  font-size: 13px;
+  line-height: 1.7;
+}
+.status a,
+.status button {
+  color: #84354b;
+  text-decoration: underline;
+}
+.status button {
+  background: none;
+  border: 0;
+  padding: 4px;
+  font: inherit;
+  cursor: pointer;
+}

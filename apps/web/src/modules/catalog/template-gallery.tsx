@@ -2,8 +2,16 @@
 
 import { useEffect, useId, useMemo, useRef, useState } from "react";
 import dynamic from "next/dynamic";
-import { ChevronRight, LayoutTemplate, Search, X } from "lucide-react";
+import Link from "next/link";
 import {
+  FavoriteButton,
+  FavoritesStatus,
+} from "@/modules/favorites/favorite-button";
+import { useFavorites } from "@/modules/favorites/favorites-store";
+import type { Favorite } from "@/modules/favorites/favorites-data";
+import { ChevronRight, Heart, LayoutTemplate, Search, X } from "lucide-react";
+import {
+  templateById,
   type TemplateCategory,
   type TemplateDefinition,
 } from "@taklifnoma/contracts";
@@ -29,12 +37,42 @@ export function TemplateGallery({
   categories,
   featured = false,
   initialCategory = "all",
+  favoritesOnly = false,
 }: {
   templates: TemplateDefinition[];
   categories: TemplateCategory[];
   featured?: boolean;
   initialCategory?: string;
+  favoritesOnly?: boolean;
 }) {
+  const favorites = useFavorites();
+  // Keep this visit's cards available for undo; persistence still changes
+  // immediately. A new visit (or account switch) gets a fresh collection.
+  const [visit, setVisit] = useState<{
+    userId: string | null;
+    items: Favorite[];
+  }>({ userId: favorites.userId, items: [] });
+  const sameAccount = visit.userId === favorites.userId;
+  const visitItems = sameAccount ? visit.items : [];
+  const additions = favorites.favorites.filter(
+    (item) => !visitItems.some((saved) => saved.templateId === item.templateId),
+  );
+  const displayedFavorites = favoritesOnly
+    ? [...visitItems, ...additions]
+    : favorites.favorites;
+  if (favoritesOnly && (!sameAccount || additions.length > 0)) {
+    setVisit({ userId: favorites.userId, items: displayedFavorites });
+  }
+  const savedIds = useMemo(
+    () =>
+      new Map(
+        displayedFavorites.map((item) => [item.templateId, item.savedAt]),
+      ),
+    [displayedFavorites],
+  );
+  const unavailable = displayedFavorites.filter(
+    (item) => !templates.some((template) => template.id === item.templateId),
+  );
   const results = useRef<HTMLDivElement>(null);
   const { categoryId, renderedCategoryId, selectCategory } =
     useCategoryTransition(results, initialCategory);
@@ -47,20 +85,22 @@ export function TemplateGallery({
   const selectedTrigger = useRef<HTMLButtonElement>(null);
   const [selectedTemplate, setSelectedTemplate] =
     useState<TemplateDefinition | null>(null);
-  const availableCategories = useMemo(
-    () => [
-      { id: "all", name: "Barchasi", count: templates.length },
+  const availableCategories = useMemo(() => {
+    const collection = favoritesOnly
+      ? templates.filter((template) => savedIds.has(template.id))
+      : templates;
+    return [
+      { id: "all", name: "Barchasi", count: collection.length },
       ...categories
         .map((category) => ({
           ...category,
-          count: templates.filter((template) =>
+          count: collection.filter((template) =>
             template.categoryIds.includes(category.id),
           ).length,
         }))
         .filter((category) => category.count > 0),
-    ],
-    [categories, templates],
-  );
+    ];
+  }, [categories, templates, favoritesOnly, savedIds]);
   const visibleTemplates = useMemo(() => {
     const filtered = (
       featured
@@ -69,8 +109,23 @@ export function TemplateGallery({
     ).filter((template) =>
       matchesTemplateSearch(template, categories, searchQuery),
     );
-    return filtered;
-  }, [renderedCategoryId, categories, searchQuery, templates, featured]);
+    return favoritesOnly
+      ? filtered
+          .filter((template) => savedIds.has(template.id))
+          .sort(
+            (a, b) =>
+              Date.parse(savedIds.get(b.id)!) - Date.parse(savedIds.get(a.id)!),
+          )
+      : filtered;
+  }, [
+    renderedCategoryId,
+    categories,
+    searchQuery,
+    templates,
+    featured,
+    favoritesOnly,
+    savedIds,
+  ]);
   const playback = useCardPlayback(
     grid,
     visibleTemplates.map((template) => template.id),
@@ -119,7 +174,7 @@ export function TemplateGallery({
     changeCategory("all");
   }
 
-  if (templates.length === 0)
+  if (templates.length === 0 && !favoritesOnly)
     return (
       <div className={featured ? styles.catalogEmpty : galleryStyles.empty}>
         <LayoutTemplate size={28} strokeWidth={1.5} aria-hidden="true" />
@@ -162,6 +217,20 @@ export function TemplateGallery({
                   </button>
                 )}
               </div>
+              <Link
+                className={galleryStyles.favoritesToggle}
+                href={favoritesOnly ? "/templates" : "/templates?favorites=1"}
+                data-active={favoritesOnly || undefined}
+              >
+                <Heart
+                  size={17}
+                  fill={favoritesOnly ? "currentColor" : "none"}
+                  aria-hidden="true"
+                />
+                {favoritesOnly
+                  ? "Barcha dizaynlar"
+                  : `Saralanganlar · ${favorites.favorites.length}`}
+              </Link>
             </div>
 
             <span
@@ -198,15 +267,17 @@ export function TemplateGallery({
             </div>
             <div
               className={galleryStyles.resultsHeading}
-              data-default={!hasFilters || undefined}
+              data-default={(!hasFilters && !favoritesOnly) || undefined}
             >
               <div>
                 <h2>
-                  {searchQuery.trim()
-                    ? "Qidiruv natijalari"
-                    : renderedCategoryId === "all"
-                      ? "Barcha dizaynlar"
-                      : categoryName}
+                  {favoritesOnly
+                    ? "Saralangan dizaynlar"
+                    : searchQuery.trim()
+                      ? "Qidiruv natijalari"
+                      : renderedCategoryId === "all"
+                        ? "Barcha dizaynlar"
+                        : categoryName}
                 </h2>
                 <span>{visibleTemplates.length} ta dizayn</span>
               </div>
@@ -233,21 +304,35 @@ export function TemplateGallery({
           data-catalog-results
           aria-busy={categoryId !== renderedCategoryId}
         >
-          {visibleTemplates.length === 0 ? (
+          <FavoritesStatus guestHint={favoritesOnly} />
+          {favoritesOnly && !favorites.ready && !favorites.error ? (
+            <p role="status">Saralanganlar yuklanmoqda…</p>
+          ) : visibleTemplates.length === 0 ? (
             <div
               className={featured ? styles.catalogEmpty : galleryStyles.empty}
             >
               <Search size={28} strokeWidth={1.3} aria-hidden="true" />
-              <h3>Dizayn topilmadi</h3>
+              <h3>
+                {favoritesOnly && !favorites.favorites.length
+                  ? "Hali saralangan dizayn yo‘q"
+                  : "Dizayn topilmadi"}
+              </h3>
               <p>
-                {searchQuery.trim()
-                  ? "Boshqa nom bilan qidiring yoki tadbir turini o‘zgartiring."
-                  : "Bu kategoriyada hozircha dizayn yo‘q."}
+                {favoritesOnly && !favorites.favorites.length
+                  ? "Yoqtirgan dizayningizdagi yurakchani bosing — keyin shu yerdan topasiz."
+                  : searchQuery.trim()
+                    ? "Boshqa nom bilan qidiring yoki tadbir turini o‘zgartiring."
+                    : "Bu kategoriyada hozircha dizayn yo‘q."}
               </p>
-              <button type="button" onClick={resetFilters}>
-                Barcha dizaynlarni ko‘rish{" "}
-                <ChevronRight size={15} aria-hidden="true" />
-              </button>
+              {!favoritesOnly || hasFilters ? (
+                <button type="button" onClick={resetFilters}>
+                  Barcha dizaynlarni ko‘rish{" "}
+                  <ChevronRight size={15} aria-hidden="true" />
+                </button>
+              ) : null}
+              {favoritesOnly && (
+                <Link href="/templates">Dizaynlarni ko‘rish</Link>
+              )}
             </div>
           ) : (
             <div
@@ -259,24 +344,26 @@ export function TemplateGallery({
                   className={cardStyles.card}
                   key={template.id}
                   data-template-id={template.id}
-                  onPointerEnter={(event) => {
-                    if (event.pointerType !== "touch")
-                      playback.start(template.id);
-                  }}
-                  onPointerLeave={(event) => {
-                    if (event.pointerType !== "touch")
-                      playback.stop(template.id);
-                  }}
-                  onFocus={() => playback.start(template.id)}
-                  onBlur={(event) => {
-                    if (!event.currentTarget.contains(event.relatedTarget))
-                      playback.stop(template.id);
-                  }}
                 >
+                  <FavoriteButton
+                    templateId={template.id}
+                    name={template.name}
+                    overlay
+                  />
                   <button
                     type="button"
                     className={cardStyles.art}
                     data-card-art
+                    onPointerEnter={(event) => {
+                      if (event.pointerType !== "touch")
+                        playback.start(template.id);
+                    }}
+                    onPointerLeave={(event) => {
+                      if (event.pointerType !== "touch")
+                        playback.stop(template.id);
+                    }}
+                    onFocus={() => playback.start(template.id)}
+                    onBlur={() => playback.stop(template.id)}
                     aria-label={`${template.name}: batafsil ko‘rish`}
                     aria-haspopup="dialog"
                     onClick={(event) => {
@@ -320,6 +407,25 @@ export function TemplateGallery({
             </div>
           )}
         </div>
+        {favoritesOnly &&
+          unavailable.length > 0 &&
+          renderedCategoryId === "all" &&
+          !searchQuery.trim() && (
+            <div className={galleryStyles.unavailable}>
+              {unavailable.map((item) => (
+                <div key={item.templateId}>
+                  <span>
+                    {templateById(item.templateId)?.name ?? "Saqlangan dizayn"}{" "}
+                    — hozir mavjud emas
+                  </span>
+                  <FavoriteButton
+                    templateId={item.templateId}
+                    name="Mavjud bo‘lmagan dizayn"
+                  />
+                </div>
+              ))}
+            </div>
+          )}
       </section>
       {selectedTemplate && (
         <TemplateDetailDialog

@@ -29,6 +29,8 @@
   opacity: 1;
   visibility: visible;
 }
+.favoriteAction { position: absolute; top: 0; left: 58px; pointer-events: auto; }
+.favoriteAction p { width: min(260px, 65vw); padding: 10px; border-radius: 12px; background: #fffaf4; color: #6e303e; }
 
 /* These source designs keep their language controls fixed along the top edge. */
 @media (max-width: 600px) {

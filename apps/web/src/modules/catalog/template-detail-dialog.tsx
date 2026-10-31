@@ -9,6 +9,7 @@ import { formatPrice, type TemplateDefinition } from "@taklifnoma/contracts";
 import { TemplateCardPreview } from "./template-card-preview";
 import { templatePoster } from "./template-poster";
 import styles from "./template-detail-dialog.module.css";
+import { FavoriteButton, FavoritesStatus } from "@/modules/favorites/favorite-button";
 
 export function TemplateDetailDialog({
   template,
@@ -139,11 +140,15 @@ export function TemplateDetailDialog({
         </div>
         <div className={styles.details}>
           <p className={styles.eyebrow}>Sizning taklifnomangiz</p>
-          <h2 id={titleId}>{template.name}</h2>
+          <div className={styles.titleRow}>
+            <h2 id={titleId}>{template.name}</h2>
+            <FavoriteButton templateId={template.id} name={template.name} />
+          </div>
           <p id={descriptionId} className={styles.description}>
             {template.description}
           </p>
           <p className={styles.price}>{formatPrice(template.priceMinor)}</p>
+          <FavoritesStatus />
           {!template.published && <p>Faqat ko‘rib chiqish uchun</p>}
           <div className={styles.actions}>
             <Link

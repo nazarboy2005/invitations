@@ -681,6 +681,8 @@
   contain: layout paint;
 }
 .templatePlaybackFrame {
+  pointer-events: none;
+  cursor: inherit;
   position: absolute;
   top: 0;
   left: 0;

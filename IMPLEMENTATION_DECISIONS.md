@@ -1,5 +1,30 @@
 # Implementation decisions
 
+## Template favorites (2026-10-30)
+
+- Keep heart color/opacity unchanged while favorites are loading or saving;
+  saving one template must not dim the other hearts.
+
+- Follow-up: removing a favorite in the favorites view saves immediately and
+  empties its heart, but retains the card for the current visit so it can be
+  re-saved. Leaving and returning refreshes the list. Reset on account changes.
+
+- User approved the proposed plan and requested implementation. Visitors can favorite
+  templates without signing in and retain favorites in browser storage; signed-in
+  users must see their favorites.
+- Approved: guest favorites in localStorage, account
+  favorites in the database, with an automatic deduplicated merge after sign-in
+  or sign-up. Expose a favorites view within `/templates`, linked from the site
+  header/mobile menu and dashboard. Hearts appear on gallery/homepage cards,
+  details and full previews. Keep unavailable saves removable and report failures.
+- Studio must not have a separate favorites category. After event selection,
+  place favorites first within the existing published, event-compatible list,
+  preserving the existing order inside each group (inline list and full picker).
+- Follow-up (2026-10-31): hearts use a pure red (#ff0000) outline and saved fill,
+  with no button background or circular border. Keep a stable pointer cursor;
+  hovering/focusing a heart must not start the card preview. Place the desktop
+  favorites shortcut beside the account button, outside the main navigation.
+
 ## Draft and published dashboard covers (2026-10-30)
 
 - Generate and durably save a real personalized cover immediately after successful

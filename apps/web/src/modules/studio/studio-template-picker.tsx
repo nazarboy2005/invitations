@@ -19,6 +19,8 @@ import { useCardPlayback } from "@/modules/catalog/use-card-playback";
 import cardStyles from "@/modules/catalog/template-cards.module.css";
 import { studioTemplateDescription } from "./template-copy";
 import styles from "./studio.module.css";
+import { useFavorites } from "@/modules/favorites/favorites-store";
+import { favoritesFirst } from "@/modules/favorites/favorites-data";
 
 export function StudioTemplatePicker({
   invitation,
@@ -35,6 +37,7 @@ export function StudioTemplatePicker({
   onOpen: () => void;
   disabled: boolean;
 }) {
+  const { favorites } = useFavorites();
   const dialog = useRef<HTMLDialogElement>(null);
   const changeButton = useRef<HTMLButtonElement>(null);
   const [query, setQuery] = useState("");
@@ -50,10 +53,8 @@ export function StudioTemplatePicker({
   const selected = templates.find(
     (template) => template.id === invitation.templateId,
   );
-  const inlineTemplates = templates.slice(0, 6);
-  const orderedTemplates = selected
-    ? [selected, ...templates.filter((template) => template.id !== selected.id)]
-    : templates;
+  const orderedTemplates = favoritesFirst(templates, favorites);
+  const inlineTemplates = orderedTemplates.slice(0, 6);
   const filtered = orderedTemplates.filter((template) =>
     matchesTemplateSearch(
       {

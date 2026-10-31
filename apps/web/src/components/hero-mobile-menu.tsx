@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useId, useRef, useState, type ReactNode } from "react";
 import styles from "./site-header.module.css";
+import { FavoritesLink } from "@/modules/favorites/favorite-button";
 
 export function HeroMobileMenu({
   accountLabel,
@@ -60,6 +61,7 @@ export function HeroMobileMenu({
           <Link href="/templates">Shablonlar</Link>
           <a href="https://t.me/HyperLean">Bog‘lanish</a>
           <Link href="/#why-us">Biz haqimizda</Link>
+          <FavoritesLink />
           <Link href="/dashboard">{accountLabel}</Link>
           {isAdmin && <a href="/admin">Boshqaruv</a>}
         </nav>

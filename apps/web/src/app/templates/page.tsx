@@ -16,10 +16,10 @@ export const metadata = {
 export default async function TemplatesPage({
   searchParams,
 }: {
-  searchParams: Promise<{ category?: string }>;
+  searchParams: Promise<{ category?: string; favorites?: string }>;
 }) {
   const catalog = await getCatalog();
-  const { category } = await searchParams;
+  const { category, favorites } = await searchParams;
   const initialCategory = catalog.categories.some(
     (item) => item.id === category,
   )
@@ -54,7 +54,8 @@ export default async function TemplatesPage({
         </header>
         <div className={`${styles.shell} ${styles.gallery}`}>
           <TemplateGallery
-            key={initialCategory}
+            key={`${initialCategory}:${favorites === "1"}`}
+            favoritesOnly={favorites === "1"}
             initialCategory={initialCategory}
             templates={catalog.templates}
             categories={catalog.categories}

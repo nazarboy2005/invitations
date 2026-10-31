@@ -7,6 +7,7 @@ import { sans } from "@/app/platform-fonts";
 import { AccountLinkLabel } from "@/components/account-link-label";
 import { HeroMobileMenu } from "@/components/hero-mobile-menu";
 import { SiteSounds } from "./site-sounds";
+import { FavoritesLink } from "@/modules/favorites/favorite-button";
 export async function SiteHeader({
   dashboard = false,
   catalog = false,
@@ -41,14 +42,17 @@ export async function SiteHeader({
           <Link href="/#why-us">Biz haqimizda</Link>
         </nav>
         <SiteSounds />
-        <Link
-          href="/dashboard"
-          className={styles.heroAccount}
-          aria-current={dashboard ? "page" : undefined}
-        >
-          <UserRound size={19} strokeWidth={1.2} aria-hidden="true" />
-          <AccountLinkLabel signedIn={Boolean(user)} />
-        </Link>
+        <div className={styles.heroActions}>
+          <FavoritesLink className={styles.heroFavorites} />
+          <Link
+            href="/dashboard"
+            className={styles.heroAccount}
+            aria-current={dashboard ? "page" : undefined}
+          >
+            <UserRound size={19} strokeWidth={1.2} aria-hidden="true" />
+            <AccountLinkLabel signedIn={Boolean(user)} />
+          </Link>
+        </div>
         <HeroMobileMenu
           accountLabel={<AccountLinkLabel signedIn={Boolean(user)} />}
           isAdmin={user?.isAdmin ?? false}
