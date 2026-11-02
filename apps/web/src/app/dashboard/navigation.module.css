@@ -1,8 +1,11 @@
 .content {
-  padding-top: 116px;
+  padding-top: 76px;
 }
 @media (max-width: 900px) {
   .content {
     padding-top: clamp(74px, 14.6vw, 132px);
   }
+}
+@media (max-width: 900px) {
+  .content { padding-top: 52px; }
 }

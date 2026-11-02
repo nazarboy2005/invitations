@@ -22,6 +22,8 @@ export function ScrollHeader({
     let frame = 0;
     let offset = 0;
     let upwardDistance = 0;
+    let idleTimer: ReturnType<typeof setTimeout> | undefined;
+    const mobile = window.matchMedia("(max-width: 900px)");
     const lightSections = Array.from(
       document.querySelectorAll<HTMLElement>('[data-header-theme="light"]'),
     );
@@ -30,6 +32,10 @@ export function ScrollHeader({
       frame = 0;
       if (!header.current) return;
       const y = Math.max(0, window.scrollY);
+      if (mobile.matches) {
+        lastY = y;
+        return;
+      }
       const headerLine = header.current.offsetHeight / 2;
       header.current.dataset.tone = lightSections.some((section) => {
         const bounds = section.getBoundingClientRect();
@@ -91,6 +97,13 @@ export function ScrollHeader({
       lastY = y;
     }
     function onScroll() {
+      if (mobile.matches && header.current) {
+        header.current.dataset.mobileScrolling = "true";
+        clearTimeout(idleTimer);
+        idleTimer = setTimeout(() => {
+          if (header.current) header.current.dataset.mobileScrolling = "false";
+        }, 500);
+      }
       if (!frame) frame = requestAnimationFrame(update);
     }
     update();
@@ -98,6 +111,7 @@ export function ScrollHeader({
     return () => {
       window.removeEventListener("scroll", onScroll);
       cancelAnimationFrame(frame);
+      clearTimeout(idleTimer);
     };
   }, [followScroll, yieldToCatalog]);
 

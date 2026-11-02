@@ -1,6 +1,6 @@
 import { BRAND_NAME } from "@/lib/brand";
 import Link from "next/link";
-import { UserRound } from "lucide-react";
+import { Heart, Home, LayoutGrid, UserRound } from "lucide-react";
 import { getSessionUser } from "@/server/auth";
 import styles from "./site-header.module.css";
 import { ScrollHeader } from "./scroll-header";
@@ -18,6 +18,7 @@ export async function SiteHeader({
 }) {
   const user = await getSessionUser().catch(() => null);
   return (
+    <>
     <ScrollHeader
       className={`${styles.header} ${styles.heroHeader} ${catalog ? styles.catalogHeader : ""} ${sans.className}`}
       followScroll
@@ -60,5 +61,14 @@ export async function SiteHeader({
         />
       </div>
     </ScrollHeader>
+      <nav className={`${styles.bottomNav} ${sans.className}`} aria-label="Mobil asosiy menyu">
+        <Link href="/"><Home size={21} aria-hidden="true" />Asosiy</Link>
+        <Link href="/templates"><LayoutGrid size={21} aria-hidden="true" />Shablonlar</Link>
+        <Link href="/templates?favorites=1"><Heart size={21} aria-hidden="true" />Saqlangan</Link>
+        <Link href="/dashboard" aria-current={dashboard ? "page" : undefined}>
+          <UserRound size={21} aria-hidden="true" />Taklifnomalarim
+        </Link>
+      </nav>
+    </>
   );
 }

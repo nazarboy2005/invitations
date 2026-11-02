@@ -2289,6 +2289,12 @@ Development agents are distinct from production queue workers. The running app w
 
 ## Shared site navigation (2026-10-28)
 
+- User approved desktop refresh (2026-11-02): use a compact 76px warm ivory
+  navbar, smaller serif wordmark with gold symbol, balanced navigation groups,
+  and a 44px burgundy outlined account button. Preserve the existing gradual
+  hide while scrolling down and reveal only when scrolling up, including catalog
+  handoff behavior. Apply above 900px only; leave mobile unchanged for now.
+  Mobile top versus bottom navigation remains undecided pending recommendations.
 - Public navigation links, on desktop and mobile: Shablonlar (`/templates`), Bog‘lanish (`https://t.me/HyperLean`), and Biz haqimizda (`/#why-us`). These replace the separate event-category links; retain the account entry. Keep navigation labels in Uzbek.
 - Use the single Fotiha navbar on home, templates and all dashboard/activity pages.
 - Studio, preview, public invitations, payment return and administrator routes retain focused controls without the public navbar.
@@ -2392,3 +2398,17 @@ Development agents are distinct from production queue workers. The running app w
 - In production, version packaged public images, audio, fonts, template runtime bundles and paper geometry together under `/_assets/<content-revision>/`. Serve valid production URLs with one-year immutable caching; preserve the original captured files. Development uses original local asset URLs so refresh/HMR never depends on a build revision. Keep ordinary unversioned URLs revalidating and private responses uncached.
 - Preserve dynamic account navigation, authoritative pricing/publication checks, uploaded-media authorization and existing template-artifact restrictions. Public catalog data caching remains a separate optimization; it is not required for asset reuse.
 - Implementation and verification procedure: `docs/PUBLIC_ASSET_CACHING.md`.
+
+- Follow-up (2026-11-02): user approved frosted ivory navbar backgrounds on
+  desktop and mobile. Mobile uses a compact 64px top bar; catalog/dashboard add
+  persistent bottom shortcuts for templates, favorites and invitations, with
+  safe-area spacing. Preserve desktop scroll behavior. This resolves the earlier
+  mobile deferral; contact/about remain available in the mobile menu.
+
+- Mobile navigation correction (2026-11-02): all shared public-header pages use
+  four bottom links: Asosiy, Shablonlar, Saqlangan, Taklifnomalarim. Top bar shows
+  only the temporary gold symbol and Fotiha name. Both bars hide during scrolling
+  in either direction and return after 1 second idle (user confirmed). Both phone
+  bars match the user's laptop glass settings: rgba(252, 251, 249, 0.65) and 24px blur.
+  Preserve keyboard access and desktop scroll behavior. Supersedes the mobile
+  menu and catalog/dashboard-only bottom bar above.
