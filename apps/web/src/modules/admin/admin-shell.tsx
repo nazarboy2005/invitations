@@ -1,3 +1,4 @@
+import { BRAND_NAME } from "@/lib/brand";
 import Link from "next/link";
 import {
   ArrowLeft,
@@ -58,9 +59,9 @@ export function AdminShell({
           <Link
             href="/"
             className={styles.brand}
-            aria-label="Visol bosh sahifa"
+            aria-label={`${BRAND_NAME} bosh sahifa`}
           >
-            ✦ <span>visol</span>
+            ✦ <span>{BRAND_NAME.toLowerCase()}</span>
           </Link>
           <span className={styles.workspaceLabel}>Sayt boshqaruvi</span>
           <nav className={styles.nav} aria-label="Boshqaruv bo‘limlari">
@@ -90,7 +91,7 @@ export function AdminShell({
         </aside>
         <main id="main" className={styles.main}>
           <header className={styles.topbar}>
-            <span>Visol / Boshqaruv</span>
+            <span>{BRAND_NAME} / Boshqaruv</span>
             <nav className={styles.topbarActions} aria-label="Hisob va katalog">
               <Link
                 href="/dashboard?mode=personal"

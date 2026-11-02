@@ -23,7 +23,7 @@ import {
 import { coverRequestKind } from "../apps/web/src/server/cover-policy";
 
 test("asset snapshots invalidate dependencies when bytes change and preserve original sources", () => {
-  const root = mkdtempSync(join(tmpdir(), "visol-public-assets-"));
+  const root = mkdtempSync(join(tmpdir(), "public-assets-"));
   const write = (path: string, contents: string) => {
     const file = join(root, "public", path);
     mkdirSync(resolve(file, ".."), { recursive: true });
@@ -158,7 +158,7 @@ test("development uses original files across refreshes instead of revision-depen
 });
 
 test("versioned frames retain preview styling and cover capture without broadening media access", () => {
-  const origin = "https://visol.example";
+  const origin = "https://fotiha.example";
   assert.equal(
     isTemplateDocument(
       origin + publicAsset("/templates/anor/source/index.html"),

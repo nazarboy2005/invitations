@@ -1,3 +1,4 @@
+import { BRAND_NAME } from "@/lib/brand";
 import Link from "next/link";
 import { ChevronRight, Flower2 } from "lucide-react";
 import { SiteHeader } from "@/components/site-header";
@@ -62,7 +63,7 @@ export default async function TemplatesPage({
           />
           <footer className={styles.footer}>
             <Link href="/" className={styles.wordmark}>
-              visol
+              {BRAND_NAME.toLowerCase()}
             </Link>
             <p>Quvonchli kunlar chiroyli taklifdan boshlanadi.</p>
             <Link href="/#questions">

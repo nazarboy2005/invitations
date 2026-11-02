@@ -122,7 +122,7 @@ test("portrait recipes preserve the curated opening states and special gestures"
 });
 
 test("capture requests allow static source assets and authorized media, denying APIs and external URLs", () => {
-  const origin = "https://visol.example";
+  const origin = "https://fotiha.example";
   for (const path of [
     "/preview?cover=1",
     "/templates/anor/source/index.html",
@@ -149,7 +149,7 @@ test("capture requests allow static source assets and authorized media, denying 
     "http://169.254.169.254/metadata",
     "http://127.0.0.1:22/templates/a",
     "https://attacker.example/collect",
-    "https://user:pass@visol.example/templates/a",
+    "https://user:pass@fotiha.example/templates/a",
     "file:///C:/private",
   ]) {
     assert.equal(coverRequestKind(url, origin), "deny", url);

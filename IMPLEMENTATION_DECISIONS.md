@@ -1,5 +1,19 @@
 # Implementation decisions
 
+## Brand identity (2026-11-02)
+
+- User confirmed the permanent brand is Fotiha and the purchased domain is
+  `fotiha.uz`. Replace former Visol branding throughout the website in all locales;
+  preserve ordinary uses of the Uzbek word visol and original reference captures.
+- Implementation: centralize public brand text in `apps/web/src/lib/brand.ts`: Fotiha
+  in Latin Uzbek/English, Фотиҳа in Uzbek Cyrillic, Фотиха in Russian. Retain
+  existing lowercase/uppercase wordmark treatments. Keep legacy storage keys stable
+  to preserve cached data. This does not change the Fotiha ceremony event type or
+  add business attribution to invitation templates.
+- Folder audit: packaging scripts must remove source credits rather than inserting
+  platform branding. Preserve historical reference/prompt/QA records, old build
+  outputs, and regression checks that reject former business credits.
+
 ## Main page scrollbars (2026-10-31)
 
 - Use very thin warm gold scrollbars with transparent tracks on the landing page,
@@ -54,7 +68,7 @@
   venue embeds. Unavailable decorative source media is omitted rather than
   leaving broken remote requests or substituting unrelated artwork.
 - Remove template business attribution entirely, including existing
-  credits. Do not add replacement business names; the business name is undecided.
+  credits. Do not add replacement business names to invitation templates.
 - Customer-facing template names and preview/selection links must omit previous
   providers' names. Neutral public aliases resolve to historical internal IDs so
   existing invitations, draft data and template-specific content remain intact.
@@ -512,7 +526,7 @@
   sidebar. Preserve the cards' black bottom fade and their overlaid names and
   descriptions; do not move captions below previews. Refine heading, spacing,
   alignment and search/results controls around those requirements. Preserve the
-  curated default order, shared Visol navigation and existing preview/dialog behavior.
+  curated default order, shared Fotiha navigation and existing preview/dialog behavior.
 - User supplied a laptop reference: use a full-width ivory floral stationery
   header, a two-line black/burgundy serif heading and a separated introduction,
   followed by a wide search and top category pills. This
@@ -534,7 +548,7 @@
   with the best ten available Nikoh designs, then alternates categories while
   preserving each category's order. Keep the mix stable across reloads. Change
   ordering only; preserve all covers and the homepage's separate eight selections.
-- Match `/templates` to the homepage Visol brand, navigation links, mobile menu
+- Match `/templates` to the homepage Fotiha brand, navigation links, mobile menu
   and hide-down/reappear-up scroll behavior. Keep its background transparent,
   including while scrolling, like the homepage; retain readable link/account colors.
 - Homepage shows only these published designs, in order: Anor, Bog‘i Eram,
@@ -610,7 +624,7 @@
   occupy staggered depths along a helix. Later photos emerge from behind while
   nearer ones pass the viewer; do not expand all twelve as one flat circle.
   Slow the outward pass with softened perspective and a longer scroll sequence.
-- Retain Visol’s light ivory/pomegranate direction. Use local optimized photos,
+- Retain Fotiha’s light ivory/pomegranate direction. Use local optimized photos,
   CSS transforms and native sticky positioning; pause
   offscreen/background work, and provide readable reduced-motion/no-JS layouts.
 
@@ -1350,7 +1364,7 @@ The user requests that the important things discussed be kept here and updated a
 
 ## Current implementation authorization and visual direction (2026-10-20)
 
-- User requirement (2026-10-25): rebuild the homepage hero to match the supplied Visol reference image, including its warm photographic phone/stationery scene, wordmark and navigation, serif/italic headline, burgundy create action, four benefits, corner linework, and handwritten caption. Omit the “Qanday ishlaydi / 2 daqiqalik video” control entirely. This supersedes the earlier homepage hero's floating cards, rating control, activity badge, statistics, and floating navigation panel. Scope the reference colors and header treatment to the homepage; preserve the existing catalog, studio, and invitation renderers. Implement real text and working links and compare the desktop at the reference's 1699×926 content size, with a responsive mobile layout.
+- User requirement (2026-10-25): rebuild the homepage hero to match the supplied Fotiha reference image, including its warm photographic phone/stationery scene, wordmark and navigation, serif/italic headline, burgundy create action, four benefits, corner linework, and handwritten caption. Omit the “Qanday ishlaydi / 2 daqiqalik video” control entirely. This supersedes the earlier homepage hero's floating cards, rating control, activity badge, statistics, and floating navigation panel. Scope the reference colors and header treatment to the homepage; preserve the existing catalog, studio, and invitation renderers. Implement real text and working links and compare the desktop at the reference's 1699×926 content size, with a responsive mobile layout.
 - User mobile/header correction (2026-10-25): follow the new portrait reference on phones, with a dedicated portrait phone/stationery/floral composition, gold italic headline, hamburger navigation, gold handwritten caption beside the create action, and four benefits across a curved bottom panel with a down-scroll cue. Preserve readable live copy and the existing desktop composition. The homepage header must move upward from the start of downward scrolling and reappear on upward scrolling; keep its background transparent with no scroll-triggered fill, blur, or shadow. The mobile menu must expose the working catalog/about/account links.
 
 - The user has now authorized agents to begin building the project. Earlier statements that implementation had not yet been requested describe the prior planning stage and no longer block this work. External deployment, live payments, or use of unavailable credentials are not implied by starting local development.
@@ -2173,7 +2187,7 @@ Development agents are distinct from production queue workers. The running app w
   No external deployment or live payment activation was performed.
 
 
-## Visol website sound (2026-10-27)
+## Fotiha website sound (2026-10-27)
 
 - User approved replacement of the synthesized effects with natural samples:
   one water impact, fabric occasion reveal, the same soft fabric/air pass at each
@@ -2262,18 +2276,18 @@ Development agents are distinct from production queue workers. The running app w
 ## Homepage help and footer (2026-10-28)
 
 - User requested a complete redesign of the ending help section and footer,
-  with useful questions/answers and elegant, smooth presentation matching Visol.
+  with useful questions/answers and elegant, smooth presentation matching Fotiha.
 - Implementation: ivory editorial FAQ with six practical questions, native
   exclusive accordion, gentle height/fade transitions and reduced-motion support.
   Combine the closing invitation and footer into one warm dark section with
-  Visol branding, grouped navigation and a return-to-top link. No added media,
+  Fotiha branding, grouped navigation and a return-to-top link. No added media,
   client JavaScript or sounds. Keep answers aligned with established product
   capabilities and editing policy; avoid price/retention guarantees.
 
 ## Shared site navigation (2026-10-28)
 
 - Public navigation links, on desktop and mobile: Shablonlar (`/templates`), Bog‘lanish (`https://t.me/HyperLean`), and Biz haqimizda (`/#why-us`). These replace the separate event-category links; retain the account entry. Keep navigation labels in Uzbek.
-- Use the single Visol navbar on home, templates and all dashboard/activity pages.
+- Use the single Fotiha navbar on home, templates and all dashboard/activity pages.
 - Studio, preview, public invitations, payment return and administrator routes retain focused controls without the public navbar.
 - Dashboard layout owns navigation and reserves space for the fixed header. Remove the legacy navbar implementation; preserve signed-in labels and admin mobile entry.
 

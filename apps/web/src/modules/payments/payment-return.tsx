@@ -1,4 +1,5 @@
 "use client";
+import { BRAND_NAME } from "@/lib/brand";
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
@@ -288,7 +289,7 @@ export function PaymentReturn({
       <div className={styles.shell}>
         <header className={styles.header}>
           <Link href="/" className={styles.brand}>
-            Visol
+            {BRAND_NAME}
           </Link>
           <Link href="/dashboard" className={styles.backLink}>
             <ArrowLeft size={16} aria-hidden="true" /> Taklifnomalarim

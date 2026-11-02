@@ -71,7 +71,8 @@ for selector, tag, pattern in [
     body = re.sub(r'(<'+tag+r' class="[^"]*\b'+selector+r'\b[^>]*>).*?(</'+tag+'>)', r'\1\2', body, flags=re.S)
 body = body.replace('Save the date', 'Sanani eslab qoling').replace('are getting married', 'Nikoh to‘yimizga marhamat')
 body = body.replace('guest book', 'Tilaklar daftari').replace('see you soon', 'Ko‘rishguncha')
-body = body.replace('Made with taklifla.uz ✦', 'Visol bilan yaratildi ✦')
+# Invitation templates carry no business attribution.
+body = body.replace('Made with taklifla.uz ✦', '')
 body = body.replace('Yunusobod tumani, &laquo;Magnum Palace&raquo; to\'yxonasi', '')
 body = re.sub(r'https://(?:yandex.com/maps/|maps.google.com/)[^"]+', '#', body)
 body = re.sub(r'(<img src=")(/templates/[^\"]+/assets/preview/[^\"]+)(" alt=""/>)', r'\1\3', body)

@@ -60,7 +60,7 @@ test("entry pages contain no remote source assets, captured maps or business cre
   for (const entry of entries) {
     const html = readFileSync(entry, "utf8");
     assert.doesNotMatch(html, /<(?:img|source|video|audio|iframe|script|link)\b[^>]*(?:src|href)=["']https?:\/\//i, entry);
-    assert.doesNotMatch(html, /powered by|Made with (?:Visol|Marxaba)|(?:Visol|Marxaba|Marhamat) bilan yaratildi|data-slot="footer"/i, entry);
+    assert.doesNotMatch(html, /powered by|Made with (?:Visol|Fotiha|Фотиҳа|Фотиха|Marxaba)|(?:Visol|Fotiha|Фотиҳа|Фотиха|Marxaba|Marhamat) bilan yaratildi|data-slot="footer"/i, entry);
     assert.doesNotMatch(html, /href="https:\/\/(?:chorlove\.uz|t\.me\/chorlove_uz|instagram\.com\/chorlove\.uz)/i, entry);
   }
   for (const id of ["palace-rose", "jasmine-white"] as const) {

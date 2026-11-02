@@ -1,6 +1,6 @@
 # Catalog covers
 
-The homepage and `/templates` share Visol navigation. The homepage selection is
+The homepage and `/templates` share Fotiha navigation. The homepage selection is
 Anor, Bog‘i Eram, Cloud Castle, Ganch, Kuzgi Chinor, Nahor, Yangi Uy and Shirin
 Bayram, in that order; unpublished entries are omitted without substitutions.
 

@@ -1,4 +1,4 @@
-# Visol interaction sounds
+# Fotiha interaction sounds
 
 These are short samples rather than runtime-generated tones/noise. No music,
 shimmer, rising notes or per-photo sound. Default-on behavior has no toggle;
@@ -24,7 +24,7 @@ filtered to reduce rumble/harshness, peak-adjusted, and faded at their edges.
 There is no pitch progression or oscillator-based effect. Source credits,
 download locations, hashes, and exact processing are in home-sound-sources.json.
 OwlStorm and filmfan87 sources are CC0; SoundJay and Mixkit permit use in projects
-under their respective terms. Assets are part of Visol, not a sound download library.
+under their respective terms. Assets are part of Fotiha, not a sound download library.
 
 One shared AudioContext fetches and decodes samples once after interaction.
 Cues never await a fetch: if a sample is not ready, that occurrence stays silent.

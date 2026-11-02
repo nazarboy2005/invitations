@@ -66,7 +66,7 @@ export function usePaperReveal(
     let openScale = 1;
     let openShiftX = 0;
     let openShiftY = 0;
-    const key = `visol-paper-${shape}`;
+    const key = `paper-${shape}`;
     const seed = shape - 1;
     const hash = (salt: number) => paperHash(seed, salt);
     const sound = createPaperMotionSound();

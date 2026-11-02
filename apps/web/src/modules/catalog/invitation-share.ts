@@ -1,3 +1,4 @@
+import { brandName } from "../../lib/brand";
 import type { Metadata } from "next";
 import {
   defaultEventLabel,
@@ -102,13 +103,13 @@ export function invitationShareMetadata(
     alt: text.artwork,
   };
   return {
-    title: { absolute: `${title} | Visol` },
+    title: { absolute: `${title} | ${brandName(locale)}` },
     description,
     robots: { index: false, follow: false, noarchive: true },
     alternates: { canonical: url.href },
     openGraph: {
       type: "website",
-      siteName: "Visol",
+      siteName: brandName(locale),
       title,
       description,
       url: url.href,

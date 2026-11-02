@@ -1,3 +1,4 @@
+import { BRAND_NAME } from "@/lib/brand";
 import type { Metadata } from "next";
 import type { CSSProperties } from "react";
 import { publicAsset } from "../lib/public-asset";
@@ -14,8 +15,8 @@ const assetBackgrounds = Object.fromEntries(
 ) as CSSProperties;
 export const metadata: Metadata = {
   title: {
-    default: "Taklifnoma — Yaxshi kunlar birga",
-    template: "%s | Taklifnoma",
+    default: `${BRAND_NAME} — Yaxshi kunlar birga`,
+    template: `%s | ${BRAND_NAME}`,
   },
   description: "Unutilmas kuningiz uchun shaxsiy elektron taklifnoma yarating.",
 };

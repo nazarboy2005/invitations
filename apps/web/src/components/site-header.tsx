@@ -1,3 +1,4 @@
+import { BRAND_NAME } from "@/lib/brand";
 import Link from "next/link";
 import { UserRound } from "lucide-react";
 import { getSessionUser } from "@/server/auth";
@@ -26,7 +27,7 @@ export async function SiteHeader({
         <Link
           href="/"
           className={styles.heroBrand}
-          aria-label="Visol bosh sahifa"
+          aria-label={`${BRAND_NAME} bosh sahifa`}
         >
           <svg viewBox="0 0 32 36" fill="none" aria-hidden="true">
             <path
@@ -34,7 +35,7 @@ export async function SiteHeader({
               fill="currentColor"
             />
           </svg>
-          <span>visol</span>
+          <span>{BRAND_NAME.toLowerCase()}</span>
         </Link>
         <nav className={styles.heroNav} aria-label="Asosiy menyu">
           <Link href="/templates">Shablonlar</Link>

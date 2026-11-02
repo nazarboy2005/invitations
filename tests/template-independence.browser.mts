@@ -73,7 +73,7 @@ try {
         }));
         const badLinks = inspection.links.filter((url: string) => new URL(url).origin !== origin && providers.test(url));
         const badExternal = [...external].filter((url) => url !== "https://telegram.org/js/telegram-web-app.js" && !/^https:\/\/(?:api-maps\.yandex\.ru|yandex\.(?:uz|ru|com))\//.test(url));
-        const credits = inspection.text.match(/powered by|made with (?:Visol|Marxaba)|(?:Marxaba|Visol) (?:bilan|билан)|Marxaba|chorlove\.uz/gi) || [];
+        const credits = inspection.text.match(/powered by|made with (?:Visol|Fotiha|Фотиҳа|Фотиха|Marxaba)|(?:Marxaba|Visol|Fotiha|Фотиҳа|Фотиха) (?:bilan|билан)|Marxaba|chorlove\.uz/gi) || [];
         const result = { id: template.id, slug: publicTemplateId(template.id), badLinks, badExternal, credits, sampleMaps: inspection.sampleMaps };
         results.push(result);
         if (badLinks.length || badExternal.length || credits.length || inspection.sampleMaps.length) failures.push(result);

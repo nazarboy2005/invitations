@@ -73,20 +73,20 @@ test("reauth entry permits stale admins but never grants role elevation", () => 
 });
 test("same-origin validation rejects missing, null, sibling and attacker origins", () => {
   const previous = process.env.APP_URL;
-  process.env.APP_URL = "https://visol.example";
+  process.env.APP_URL = "https://fotiha.example";
   try {
     for (const origin of [
       undefined,
       "null",
       "https://evil.example",
-      "https://sub.visol.example",
-      "http://visol.example",
-      "https://visol.example.evil.test",
+      "https://sub.fotiha.example",
+      "http://fotiha.example",
+      "https://fotiha.example.evil.test",
     ]) {
       assert.throws(
         () =>
           verifySameOrigin(
-            new Request("https://visol.example/api/admin/categories", {
+            new Request("https://fotiha.example/api/admin/categories", {
               method: "POST",
               headers: origin ? { Origin: origin } : {},
             }),
@@ -96,9 +96,9 @@ test("same-origin validation rejects missing, null, sibling and attacker origins
     }
     assert.doesNotThrow(() =>
       verifySameOrigin(
-        new Request("https://visol.example/api/admin/categories", {
+        new Request("https://fotiha.example/api/admin/categories", {
           method: "POST",
-          headers: { Origin: "https://visol.example" },
+          headers: { Origin: "https://fotiha.example" },
         }),
       ),
     );
@@ -138,7 +138,7 @@ test("production admin policy uses unpredictable nonces, overwrites supplied pol
   const previous = process.env.NODE_ENV;
   process.env.NODE_ENV = "production";
   try {
-    const request = new Request("https://visol.example/admin", {
+    const request = new Request("https://fotiha.example/admin", {
       headers: {
         "x-nonce": "attacker",
         "Content-Security-Policy": "script-src * 'unsafe-inline'",

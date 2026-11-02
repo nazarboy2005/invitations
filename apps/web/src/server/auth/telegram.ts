@@ -1,3 +1,4 @@
+import { BRAND_NAME } from "../../lib/brand";
 import { getDb } from "@taklifnoma/database";
 import type postgres from "postgres";
 import { AuthError } from "./index";
@@ -297,7 +298,7 @@ async function processLocked(update: Update, db: postgres.TransactionSql) {
       await telegramCall("sendMessage", {
         parse_mode: "HTML",
         chat_id: message.chat.id,
-        text: `✨ <b>Taklifnoma</b>\n\nSalom, ${escapeHtml(identity.first_name)}!\n\nYaqinlaringiz uchun chiroyli taklifnoma yarating, mehmonlar javobi va tilaklarini bir joyda kuzating. 💌`,
+        text: `✨ <b>${BRAND_NAME}</b>\n\nSalom, ${escapeHtml(identity.first_name)}!\n\nYaqinlaringiz uchun chiroyli taklifnoma yarating, mehmonlar javobi va tilaklarini bir joyda kuzating. 💌`,
         reply_markup: {
           inline_keyboard: [
             [

@@ -61,7 +61,7 @@ test("anonymous Telegram fetch receives personalized metadata in head and a publ
     /property="og:title" content="Шерзод тест &amp; Мадина тест — Свадьба"/,
   );
   assert.match(head, /14 июня 2027/);
-  assert.match(head, /property="og:site_name" content="Visol"/);
+  assert.match(head, /property="og:site_name" content="Фотиха"/);
   assert.match(head, /name="twitter:card" content="summary"/);
   assert.match(head, /property="og:image:width" content="1200"/);
   assert.match(head, /property="og:image:height" content="1200"/);

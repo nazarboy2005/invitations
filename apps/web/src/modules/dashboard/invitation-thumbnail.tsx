@@ -135,6 +135,7 @@ function loadCover(
     try {
       // Hashing and storage are optional: neither may block the network path.
       key = await storageKey(content, scope);
+      // Keep the legacy cache name so the rebrand preserves existing covers.
       cache = await caches.open("visol-invitation-covers-v1");
       const cached = await cache.match(key);
       if (cached) {

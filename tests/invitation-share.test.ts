@@ -18,22 +18,22 @@ import {
 import artwork from "../apps/web/src/modules/catalog/share-artwork.json";
 import config from "../apps/web/next.config";
 
-test("share metadata uses authored names, square artwork, Visol branding and absolute URLs", () => {
+test("share metadata uses authored names, square artwork, Fotiha branding and absolute URLs", () => {
   const invitation = completeInvitation();
   const metadata = invitationShareMetadata(
     invitation,
     "Ab1cD2",
-    "https://visol.example/old?g=private",
+    "https://fotiha.example/old?g=private",
   );
   assert.deepEqual(metadata.title, {
-    absolute: "Nodir test & Madina test — Nikoh to‘yi | Visol",
+    absolute: "Nodir test & Madina test — Nikoh to‘yi | Fotiha",
   });
   assert.equal(
     metadata.openGraph?.title,
     "Nodir test & Madina test — Nikoh to‘yi",
   );
   assert.match(metadata.description!, /14 iyun 2027/);
-  assert.equal(metadata.openGraph?.url, "https://visol.example/i/Ab1cD2");
+  assert.equal(metadata.openGraph?.url, "https://fotiha.example/i/Ab1cD2");
   assert.equal(metadata.alternates?.canonical, metadata.openGraph?.url);
   assert.deepEqual(metadata.robots, {
     index: false,
@@ -42,7 +42,7 @@ test("share metadata uses authored names, square artwork, Visol branding and abs
   });
   assert.deepEqual(metadata.openGraph?.images, [
     {
-      url: `https://visol.example${artwork.anor}`,
+      url: `https://fotiha.example${artwork.anor}`,
       width: 1200,
       height: 1200,
       type: "image/jpeg",
@@ -73,10 +73,15 @@ test("each enabled language uses its own authored names and localized event/date
     const metadata = invitationShareMetadata(
       invitation,
       "Ab1cD2",
-      "https://visol.example",
+      "https://fotiha.example",
       locale,
     );
     assert.match(String(metadata.openGraph?.title), new RegExp(names[locale]));
+    const expectedBrand = {
+      "uz-Latn": "Fotiha", "uz-Cyrl": "Фотиҳа", en: "Fotiha", ru: "Фотиха",
+    }[locale];
+    assert.equal(metadata.openGraph?.siteName, expectedBrand);
+    assert.ok((metadata.title as { absolute: string }).absolute.endsWith(` | ${expectedBrand}`));
     assert.ok(
       metadata.description?.includes(
         { "uz-Latn": "iyun", "uz-Cyrl": "июн", en: "June", ru: "июня" }[locale],
@@ -106,7 +111,7 @@ test("disabled languages, private greeting content and catalog samples never ent
     invitationShareMetadata(
       invitation,
       "Ab1cD2",
-      "https://visol.example?g=PRIVATE",
+      "https://fotiha.example?g=PRIVATE",
       "ru",
     ),
   );
@@ -126,7 +131,7 @@ test("single-person and custom events have useful titles, and dates honor the ev
   let metadata = invitationShareMetadata(
     invitation,
     "Ab1cD2",
-    "https://visol.example",
+    "https://fotiha.example",
   );
   assert.equal(metadata.openGraph?.title, "Dilnoza Karimova — Tug‘ilgan kun");
   assert.match(metadata.description!, /1 yanvar 2027/);
@@ -134,14 +139,14 @@ test("single-person and custom events have useful titles, and dates honor the ev
   metadata = invitationShareMetadata(
     invitation,
     "Ab1cD2",
-    "https://visol.example",
+    "https://fotiha.example",
   );
   assert.match(metadata.description!, /1 yanvar 2027/);
   invitation.content["uz-Latn"].people = [];
   invitation.content["uz-Latn"].title = "Yangi ofis ochilishi";
   invitation.content["uz-Latn"].eventLabel = "Ochilish marosimi";
   assert.equal(
-    invitationShareMetadata(invitation, "Ab1cD2", "https://visol.example")
+    invitationShareMetadata(invitation, "Ab1cD2", "https://fotiha.example")
       .openGraph?.title,
     "Yangi ofis ochilishi — Ochilish marosimi",
   );

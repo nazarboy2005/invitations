@@ -1,4 +1,5 @@
 "use client";
+import { BRAND_NAME } from "@/lib/brand";
 
 import { useState } from "react";
 import { openCheckout } from "./open-checkout";
@@ -58,7 +59,7 @@ export function CheckoutActions({ checkoutUrl }: { checkoutUrl: string }) {
         <p>
           Click o‘rnatilmagan bo‘lsa, uni o‘rnating va shu havolani qayta oching
           yoki Click sahifasidagi boshqa mavjud usuldan foydalaning. Yangi
-          to‘lov yaratmang. So‘ng Visol’ga qaytib, “To‘lovni tekshirish”ni
+          to‘lov yaratmang. So‘ng {BRAND_NAME}’ga qaytib, “To‘lovni tekshirish”ni
           bosing. Havolani ochish to‘lov tasdig‘i emas.
         </p>
         {manualCopy && (

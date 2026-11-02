@@ -1,3 +1,4 @@
+import { BRAND_NAME } from "@/lib/brand";
 import Link from "next/link";
 import { ArrowUp, ArrowUpRight, Flower2, Plus } from "lucide-react";
 import styles from "./home-ending.module.css";
@@ -110,7 +111,7 @@ export function HomeFooter() {
             <Link
               href="/"
               className={styles.brand}
-              aria-label="Visol bosh sahifa"
+              aria-label={`${BRAND_NAME} bosh sahifa`}
             >
               <svg viewBox="0 0 32 36" fill="none" aria-hidden="true">
                 <path
@@ -118,7 +119,7 @@ export function HomeFooter() {
                   fill="currentColor"
                 />
               </svg>
-              visol
+              {BRAND_NAME.toLowerCase()}
             </Link>
             <p>
               Bir kunlik bayram.
@@ -126,12 +127,12 @@ export function HomeFooter() {
               Bir umr eslanadigan taklif.
             </p>
           </div>
-          <nav className={styles.footerNav} aria-label="Visol bo‘limlari">
+          <nav className={styles.footerNav} aria-label={`${BRAND_NAME} bo‘limlari`}>
             <span>Kashf eting</span>
             <Link href="/templates">
               Dizaynlar <ArrowUpRight size={13} aria-hidden="true" />
             </Link>
-            <a href="#why-us">Nega Visol?</a>
+            <a href="#why-us">Nega {BRAND_NAME}?</a>
             <a href="#how-it-works">Qanday ishlaydi</a>
           </nav>
           <nav className={styles.footerNav} aria-label="Foydali havolalar">
@@ -151,7 +152,7 @@ export function HomeFooter() {
           </a>
         </div>
         <div className={styles.bottom}>
-          <span>© {new Date().getFullYear()} Visol</span>
+          <span>© {new Date().getFullYear()} {BRAND_NAME}</span>
           <span>O‘zbekistonda, mehr bilan yaratilgan.</span>
           <Flower2 size={18} strokeWidth={1} aria-hidden="true" />
         </div>

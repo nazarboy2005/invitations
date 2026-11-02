@@ -1,3 +1,4 @@
+import { BRAND_NAME } from "@/lib/brand";
 import { publicAsset } from "../lib/public-asset";
 import Image from "next/image";
 import Link from "next/link";
@@ -275,7 +276,7 @@ export function WhyUs({
               )}
             </div>
             <span className={styles.sceneCaption} aria-hidden="true">
-              VISOL <i /> Birga boshlanadi.
+              {BRAND_NAME.toUpperCase()} <i /> Birga boshlanadi.
             </span>
           </article>
         ))}

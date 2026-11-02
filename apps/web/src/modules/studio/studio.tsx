@@ -1,4 +1,6 @@
 "use client";
+import { BRAND_NAME } from "@/lib/brand";
+
 import { refreshFavorites } from "@/modules/favorites/favorites-store";
 
 import { publicTemplateId, resolveTemplateId } from "@taklifnoma/contracts";
@@ -1613,7 +1615,7 @@ export function Studio({
           aria-label="Tahrirlash bo‘limlari"
         >
           <Link href="/dashboard" className={styles.studioBrand}>
-            visol<span>Yaratish studiyasi</span>
+            {BRAND_NAME.toLowerCase()}<span>Yaratish studiyasi</span>
           </Link>
           <nav>
             {sections.map((item, index) => (

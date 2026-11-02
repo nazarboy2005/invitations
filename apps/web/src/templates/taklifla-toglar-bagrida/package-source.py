@@ -22,7 +22,8 @@ body=re.sub(r'(<div class="timeline">)[\s\S]*?(\n    </div>\n  </section>)',r'\1
 body=body.replace(' data-target="2026-09-12T15:00:00"','')
 body=body.replace("Tashrifingizni 1-avgustgacha bizga ma'lum qiling.","Tashrifingizni bizga ma’lum qiling.")
 body=body.replace('shu sahifaning oxirida ko\'rinadi.', 'tasdiqlangach shu sahifada ko‘rinadi.')
-body=body.replace('taklifla.uz','Visol')
+# Remove the source credit instead of inserting platform branding.
+body=re.sub(r'<([a-z][\w:-]*)\b[^>]*>[^<]*taklifla\.uz[^<]*</\1>', '', body, flags=re.I)
 body=body.replace('novalidate','').replace('id="wishThanks" hidden','id="wishThanks" role="status" hidden')
 audio=s[s.index('<audio id="bgMusic"'):s.index('<script>',s.index('<audio id="bgMusic"'))]
 lang=s[s.index('<div class="taklifla-lang-switch"'):s.index('<script>',s.index('<div class="taklifla-lang-switch"'))]

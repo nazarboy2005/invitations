@@ -114,7 +114,7 @@ window.TungiSaroyUI = {
     "uz-Cyrl": "Биринчи бўлиб тилак ё'лланг.",
   },
   cd_title: {
-    "uz-Latn": "Visol kunigacha",
+    "uz-Latn": "Fotiha kunigacha",
     en: "Until we say forever",
     ru: "До заветного дня",
     "uz-Cyrl": "Висол кунигача",
