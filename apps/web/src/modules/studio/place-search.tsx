@@ -22,6 +22,8 @@ export function PlaceSearch({ value, locale, onChange, onSelect, confirmed = fal
   const [loading, setLoading] = useState(false);
   const [active, setActive] = useState(-1);
   const [open, setOpen] = useState(false);
+  const root = useRef<HTMLDivElement>(null);
+  const focused = useRef(false);
   const selectedValue = useRef(confirmed ? value : "");
   const editedValue = useRef<string | null>(null);
   const generation = useRef(0);
@@ -42,7 +44,7 @@ export function PlaceSearch({ value, locale, onChange, onSelect, confirmed = fal
         const data = await response.json();
         if (version !== generation.current || controller.signal.aborted) return;
         if (!response.ok) throw new Error(data.error?.message || "Joy qidiruvi ishlamadi. Qayta urinib ko‘ring.");
-        setPlaces(data.places || []); setActive(-1); setOpen(true);
+        setPlaces(data.places || []); setActive(-1); setOpen(focused.current);
         setStatus(data.places?.length ? "" : "Joy topilmadi. Joy nomiga shahar yoki ko‘cha nomini qo‘shing.");
       } catch (error) {
         if (!controller.signal.aborted && version === generation.current) {
@@ -52,6 +54,17 @@ export function PlaceSearch({ value, locale, onChange, onSelect, confirmed = fal
     }, 280);
     return () => { clearTimeout(timer); controller.abort(); };
   }, [value, locale, confirmed]);
+  useEffect(() => {
+    function dismissOutside(event: PointerEvent) {
+      if (event.target instanceof Node && !root.current?.contains(event.target)) {
+        focused.current = false;
+        setOpen(false);
+        setActive(-1);
+      }
+    }
+    document.addEventListener("pointerdown", dismissOutside, true);
+    return () => document.removeEventListener("pointerdown", dismissOutside, true);
+  }, []);
   useEffect(() => () => { generation.current++; selectionRequest.current?.abort(); }, []);
 
   async function choose(place: Suggestion) {
@@ -72,19 +85,21 @@ export function PlaceSearch({ value, locale, onChange, onSelect, confirmed = fal
     } finally { if (version === generation.current) setLoading(false); }
   }
 
-  return <div className={styles.root}>
+  return <div ref={root} className={styles.root}>
     <div className={styles.inputWrap}>
       <input role="combobox" aria-label={label} aria-autocomplete="list" aria-expanded={open && places.length > 0}
         aria-controls={`${id}-list`} aria-activedescendant={open && active >= 0 ? `${id}-${active}` : undefined}
         aria-describedby={`${id}-status`} value={value} maxLength={300} autoComplete="off" placeholder="Masalan, Versal, Toshkent"
-        onFocus={() => setOpen(true)} onBlur={() => setOpen(false)}
-        onChange={event => { generation.current++; selectionRequest.current?.abort(); selectedValue.current = ""; editedValue.current = event.target.value; setPlaces([]); setStatus(""); onChange(event.target.value); }}
+        onFocus={() => { focused.current = true; setOpen(true); }}
+        onPointerDown={() => { focused.current = true; setOpen(true); }}
+        onBlur={() => { focused.current = false; setOpen(false); setActive(-1); }}
+        onChange={event => { focused.current = true; generation.current++; selectionRequest.current?.abort(); selectedValue.current = ""; editedValue.current = event.target.value; setPlaces([]); setStatus(""); onChange(event.target.value); }}
         onKeyDown={event => {
           if (event.key === "ArrowDown" || event.key === "ArrowUp") {
             event.preventDefault(); setOpen(true);
             setActive(index => places.length ? (index + (event.key === "ArrowDown" ? 1 : -1) + places.length) % places.length : -1);
           } else if (event.key === "Enter" && open && active >= 0 && places[active]) { event.preventDefault(); void choose(places[active]); }
-          else if (event.key === "Escape") { setOpen(false); setActive(-1); }
+          else if (event.key === "Escape") { focused.current = false; setOpen(false); setActive(-1); }
         }} />
       <span className={styles.icon}>{loading ? <LoaderCircle className={styles.loading} size={18} /> : confirmed ? <CheckCircle2 size={18} /> : <Search size={18} />}</span>
     </div>

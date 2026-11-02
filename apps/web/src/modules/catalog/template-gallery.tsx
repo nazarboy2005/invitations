@@ -235,15 +235,13 @@ export function TemplateGallery({
                 className={galleryStyles.favoritesToggle}
                 href={favoritesOnly ? "/templates" : "/templates?favorites=1"}
                 data-active={favoritesOnly || undefined}
+                aria-label={favoritesOnly ? "Barcha dizaynlar" : `Saralanganlar: ${favorites.favorites.length}`}
               >
-                <Heart
-                  size={17}
-                  fill={favoritesOnly ? "currentColor" : "none"}
-                  aria-hidden="true"
-                />
-                {favoritesOnly
-                  ? "Barcha dizaynlar"
-                  : `Saralanganlar · ${favorites.favorites.length}`}
+                {favoritesOnly ? <LayoutTemplate size={18} aria-hidden="true" /> : <Heart size={18} aria-hidden="true" />}
+                <span className={galleryStyles.favoritesLabel}>
+                  {favoritesOnly ? "Barcha dizaynlar" : "Saralanganlar"}
+                </span>
+                {!favoritesOnly && <span className={galleryStyles.favoritesCount}>{favorites.favorites.length}</span>}
               </Link>
             </div>
 

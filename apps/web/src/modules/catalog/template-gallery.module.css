@@ -32,6 +32,9 @@
 .favoritesToggle[data-active] {
   background: #f8eeec;
 }
+.favoritesCount::before {
+  content: "· ";
+}
 .unavailable {
   grid-column: 1 / -1;
   display: grid;
@@ -49,11 +52,16 @@
 }
 @media (max-width: 600px) {
   .toolbar {
-    flex-wrap: wrap;
+    gap: 8px;
   }
   .favoritesToggle {
-    min-height: 44px;
+    min-height: 46px;
+    min-width: 46px;
+    padding: 10px 12px;
+    gap: 5px;
   }
+  .favoritesLabel { display: none; }
+  .favoritesCount::before { content: none; }
 }
 .search {
   grid-row: 1;

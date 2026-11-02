@@ -890,12 +890,10 @@ export function Studio({
             : invitation.templateId === "bitiruv"
               ? "Nishonlanuvchining ismi"
               : "Bolaning ismi";
-  const personFields =
-    content.people.length > 0
-      ? content.people.slice(0, capabilities.people)
-      : singleCelebrant
-        ? [""]
-        : ["", ""];
+  const personFields = Array.from(
+    { length: Math.min(capabilities.people, Math.max(content.people.length, singleCelebrant ? 1 : 2)) },
+    (_, index) => content.people[index] ?? "",
+  );
   const compatibleTemplates = orderEventTemplates(
     formatTemplates,
     invitation.eventType,
@@ -1803,20 +1801,7 @@ export function Studio({
 
             {section === 1 && (
               <div className={styles.scheduleSections}>
-                <StudioSection id="studio-people-title" title="Tadbir egalari" description="Ismlar va taklif etuvchi mezbonlar." icon={Users} action={!singleCelebrant && (
-                    <button
-                      className={styles.textButton}
-                      disabled={identityLocked || content.people.length >= capabilities.people}
-                      onClick={() =>
-                        updateContent({
-                          people: [...personFields, ""],
-                        })
-                      }
-                    >
-                      <Plus size={15} />
-                      Ism qo‘shish
-                    </button>
-                  )}>
+                <StudioSection id="studio-people-title" title="Tadbir egalari" description="Ismlar va taklif etuvchi mezbonlar." icon={Users}>
                 <div className={styles.twoColumns}>
                   {personFields.map((name, index) => (
                     <Field
@@ -1849,21 +1834,6 @@ export function Studio({
                                 : placeholders.personName
                           }
                         />
-                        {content.people.length > 1 && (
-                          <button
-                            aria-label={`${index + 1}-ismni olib tashlash`}
-                            disabled={identityLocked}
-                            onClick={() =>
-                              updateContent({
-                                people: content.people.filter(
-                                  (_, i) => i !== index,
-                                ),
-                              })
-                            }
-                          >
-                            <X size={15} />
-                          </button>
-                        )}
                       </div>
                     </Field>
                   ))}

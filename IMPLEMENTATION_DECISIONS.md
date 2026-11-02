@@ -1,5 +1,19 @@
 # Implementation decisions
 
+## Studio and phone layout refinements (2026-11-03)
+
+- Venue suggestions close on outside mouse/touch interaction or focus loss;
+  delayed search responses must not reopen a dismissed dropdown. Explicit
+  selection and the previously approved map-link preservation remain intact.
+- Remove the generic “Ism qo‘shish” control for now across Studio. Keep required
+  name fields available without add/remove controls, including both wedding names;
+  preserve existing stored names. Do not add birthday multi-person support yet.
+- On phones, keep the catalog search and favorites shortcut in one row. Show
+  only a heart and count for favorites; in the favorites view use a matching
+  catalog icon to return to all designs. Retain accessible link labels.
+- Taklifnomalarim on phones stacks its heading and action row, keeps the new
+  invitation button inside the viewport, and aligns the actions with the content.
+
 ## Templates page background and format row (2026-11-03)
 
 - User requested the supplied AI catalog reference's visual direction, keeping
