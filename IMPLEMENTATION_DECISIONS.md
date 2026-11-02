@@ -6,8 +6,11 @@
   `fotiha.uz`. Replace former Visol branding throughout the website in all locales;
   preserve ordinary uses of the Uzbek word visol and original reference captures.
 - Implementation: centralize public brand text in `apps/web/src/lib/brand.ts`: Fotiha
-  in Latin Uzbek/English, Фотиҳа in Uzbek Cyrillic, Фотиха in Russian. Retain
-  existing lowercase/uppercase wordmark treatments. Keep legacy storage keys stable
+  in Latin Uzbek/English, Фотиҳа in Uzbek Cyrillic, Фотиха in Russian. Use title
+  case for primary wordmarks, navigation, Studio/admin/payment brands, prose,
+  accessibility labels and metadata. Retain all caps only in the small decorative
+  occasion-card caption; lowercase is for domain names and technical IDs. This
+  supersedes the earlier lowercase wordmark treatment. Keep legacy storage keys stable
   to preserve cached data. This does not change the Fotiha ceremony event type or
   add business attribution to invitation templates.
 - Folder audit: packaging scripts must remove source credits rather than inserting

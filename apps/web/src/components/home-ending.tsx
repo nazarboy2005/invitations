@@ -119,7 +119,7 @@ export function HomeFooter() {
                   fill="currentColor"
                 />
               </svg>
-              {BRAND_NAME.toLowerCase()}
+              {BRAND_NAME}
             </Link>
             <p>
               Bir kunlik bayram.

@@ -138,7 +138,7 @@
   .heroFavorites { font-size: 12px; }
   .heroAccount { min-width: 0; padding-inline: 15px; gap: 8px; font-size: 12px; }
   .heroNav {
-    left: 23%;
+    left: max(23%, 220px);
     gap: 28px;
     font-size: 14px;
   }

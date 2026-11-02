@@ -1615,7 +1615,7 @@ export function Studio({
           aria-label="Tahrirlash bo‘limlari"
         >
           <Link href="/dashboard" className={styles.studioBrand}>
-            {BRAND_NAME.toLowerCase()}<span>Yaratish studiyasi</span>
+            {BRAND_NAME}<span>Yaratish studiyasi</span>
           </Link>
           <nav>
             {sections.map((item, index) => (

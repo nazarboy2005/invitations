@@ -63,7 +63,7 @@ export default async function TemplatesPage({
           />
           <footer className={styles.footer}>
             <Link href="/" className={styles.wordmark}>
-              {BRAND_NAME.toLowerCase()}
+              {BRAND_NAME}
             </Link>
             <p>Quvonchli kunlar chiroyli taklifdan boshlanadi.</p>
             <Link href="/#questions">

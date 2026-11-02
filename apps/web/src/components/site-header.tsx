@@ -35,7 +35,7 @@ export async function SiteHeader({
               fill="currentColor"
             />
           </svg>
-          <span>{BRAND_NAME.toLowerCase()}</span>
+          <span>{BRAND_NAME}</span>
         </Link>
         <nav className={styles.heroNav} aria-label="Asosiy menyu">
           <Link href="/templates">Shablonlar</Link>

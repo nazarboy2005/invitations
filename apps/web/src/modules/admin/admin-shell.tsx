@@ -61,7 +61,7 @@ export function AdminShell({
             className={styles.brand}
             aria-label={`${BRAND_NAME} bosh sahifa`}
           >
-            ✦ <span>{BRAND_NAME.toLowerCase()}</span>
+            ✦ <span>{BRAND_NAME}</span>
           </Link>
           <span className={styles.workspaceLabel}>Sayt boshqaruvi</span>
           <nav className={styles.nav} aria-label="Boshqaruv bo‘limlari">
