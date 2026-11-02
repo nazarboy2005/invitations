@@ -10,6 +10,7 @@ import styles from "./home.module.css";
 import { display, script, sans } from "./platform-fonts";
 import { SmoothScroll } from "@/components/smooth-scroll";
 import { LandingHero } from "@/components/landing-hero";
+import { LandingAssetLoader } from "@/components/landing-asset-loader";
 import { OccasionOrbit } from "@/components/occasion-orbit";
 import { WhyUs } from "@/components/why-us";
 import { selectFeaturedTemplates } from "@/modules/catalog/featured-templates";
@@ -58,6 +59,7 @@ export default async function Home() {
       className={`${styles.page} ${display.variable} ${script.variable} ${sans.variable}`}
     >
       <SmoothScroll />
+      <LandingAssetLoader />
       <SiteHeader />
       <main id="main">
         <LandingHero />

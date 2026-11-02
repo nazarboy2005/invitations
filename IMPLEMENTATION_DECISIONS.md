@@ -2394,6 +2394,15 @@ Development agents are distinct from production queue workers. The running app w
 
 ## Public asset caching (2026-10-31)
 
+- Landing loading follow-up (2026-11-02): user approved automatically warming
+  all landing-page assets in section order after the opening screen loads, even
+  without scrolling. Use a small background queue, prioritize artwork scrolled
+  into view, and reuse existing versioned browser caching. Include responsive
+  artwork, animation modules, paper geometry and sound files; keep graphics setup
+  near visibility and sound playback interaction-triggered. Other pages and full
+  invitation previews remain on demand. Reduced motion skips animation-only files;
+  slow/data-saving connections use one queue worker but still finish the queue.
+
 - Approved: implement browser caching for landing/catalog assets and extend it to shared template assets across previews, Studio and public invitations. Use content-versioned URLs so artwork changes do not leave returning visitors with stale files.
 - In production, version packaged public images, audio, fonts, template runtime bundles and paper geometry together under `/_assets/<content-revision>/`. Serve valid production URLs with one-year immutable caching; preserve the original captured files. Development uses original local asset URLs so refresh/HMR never depends on a build revision. Keep ordinary unversioned URLs revalidating and private responses uncached.
 - Preserve dynamic account navigation, authoritative pricing/publication checks, uploaded-media authorization and existing template-artifact restrictions. Public catalog data caching remains a separate optimization; it is not required for asset reuse.

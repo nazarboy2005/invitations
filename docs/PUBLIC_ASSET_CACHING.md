@@ -48,6 +48,23 @@ so a mobile hero used by both `<picture>` and CSS is fetched only once. Existing
 responsive artwork, lazy loading, on-demand previews and audio gesture policy are
 preserved. Next's generated JavaScript/CSS/platform-font caching is unchanged.
 
+## Landing background loading
+
+`LandingAssetLoader` is mounted only on the homepage. After the initial window
+load, an idle callback (maximum 1.5-second delay) starts a queue in DOM section
+order. It switches existing lazy images to eager one at a time per worker, so
+native picture/srcset/sizes selection remains authoritative. Two workers run
+normally; slow/data-saving connections use one. Visible queued items take priority
+when visitors jump ahead, then warming continues without requiring scrolling.
+
+Section-specific tasks warm the water/paper JavaScript modules, paper geometry,
+crease texture and sound files. They do not create graphics contexts or activate
+audio. Reduced motion omits animation modules/geometry. Downloads reuse normal
+HTTP caching, including the production content-revision namespace. Failed images
+and optional requests do not stop the queue; unmounting aborts background fetches
+and removes pending callbacks. No localStorage “already loaded” flag is used,
+because the browser may evict individual cached assets.
+
 ## Privacy and freshness
 
 No blanket public cache policy applies to application pages or APIs. Session,
@@ -72,6 +89,9 @@ pnpm --filter @taklifnoma/web exec next start --hostname 127.0.0.1 --port 3002
 pnpm exec tsx tests/public-assets.browser.mts
 # Against the normal development server on port 3001:
 pnpm exec tsx tests/public-assets-dev.browser.mts
+# Homepage queue: no scrolling, responsive artwork, reduced motion/data saver,
+# offscreen renderer deferral, and fresh/repeat HTTP-cache measurements:
+pnpm exec tsx tests/landing-assets.browser.mts
 ```
 
 The browser audit checks immutable headers, unchanged binary bodies, byte-range
@@ -115,3 +135,15 @@ images on the running localhost server.
 Follow-up verification on port 3001 passed all six desktop/mobile navigation,
 normal-refresh and uncached-refresh cases, with zero failed asset responses.
 The 31 focused unit checks and the production build passed.
+
+### Landing queue verification (2026-11-02)
+
+Production build (including TypeScript and cover-deployment checks) and all four
+public-asset unit checks passed. `tests/landing-assets.browser.mts` verified that
+every homepage image finishes without scrolling, correct desktop/mobile artwork
+is selected, and paper renderers remain uninitialized offscreen. Normal desktop,
+normal mobile and reduced-motion/data-saving mobile all passed with no failed
+public assets. First-visit public-asset transfers were respectively 4,055,412,
+3,717,148 and 3,615,747 bytes; repeat visits transferred zero public-asset network
+bytes in all three cases. These are local production measurements; the server
+reported a database connection timeout and used its existing local catalog fallback.
