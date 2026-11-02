@@ -21,21 +21,30 @@ shared preview JSON through `createTemplatePreviewSample`.
 | Image slot | Invitation source | Top / height (px) |
 | --- | --- | --- |
 | Occasion heading | `content[locale].eventLabel` | 480 / 80 |
-| Greeting | `content[locale].greeting` | 615 / 100 |
-| First name | `content[locale].people[0]` | 740 / 130 |
-| Ampersand | Displayed only when both names exist | 875 / 65 |
-| Second name | `content[locale].people[1]` | 945 / 130 |
-| Invitation text | `content[locale].message` | 1130 / 190 |
-| Event date/time | `startsAt`, `timezone`, active locale | 1370 / 65 |
-| Venue | `content[locale].venueName` | 1470 / 85 |
-| Address and landmark | `content[locale].address`, `.landmark` | 1560 / 125 |
-| Hosts/family | `content[locale].hosts` | 1690 / 95 |
-| Optional telephone | `contacts.phoneNumber` | 1785 / 55 |
+| First name | `content[locale].people[0]` | 650 / 120 |
+| Ampersand | Displayed only when both names exist | 775 / 65 |
+| Second name | `content[locale].people[1]` | 850 / 120 |
+| Invitation text | `content[locale].message` | 1040 / 170 |
+| Prominent date | `startsAt`, `timezone`, default locale | 1260 / 100 |
+| Time | `startsAt` wall-clock time | 1370 / 60 |
+| Venue | `content[locale].venueName` | 1470 / 75 |
+| Address and landmark | `content[locale].address`, `.landmark` | 1545 / 130 |
+| Location QR | Yandex destination from shared `venue`; written-address search fallback | 1710 / 210; x585 |
+
+The artwork is unchanged. This design intentionally omits greeting, hosts and
+contacts; Studio hides those inputs and shared normalization strips them before
+persistence. Supported fields and QR capability are declared in the typed capability
+registry. Required image fields are listed in `IMAGE_REQUIRED_FIELDS`: people,
+event heading, invitation text, date/time, timezone, venue name and location
+(written address or map). Each future design owns its own visual hierarchy.
+The QR is generated locally with a quiet zone and decoded in verification against
+the actual canonical Yandex URL; no external QR service is involved.
 
 Empty optional slots stay blank. Text wraps and shrinks within each slot's readable
 minimum; oversized content produces a 422 error rather than clipping. Dates use
 the shared formatter, including explicit Uzbek Cyrillic month names. Localized
-names remain manually authored; downloads are one enabled locale at a time.
+names remain manually authored; the UI renders/downloads the default locale with
+no language controls. Existing stored translations remain preserved.
 
 ## Ownership and finalization
 

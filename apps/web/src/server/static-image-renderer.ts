@@ -2,10 +2,14 @@ import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { chromium } from "playwright-core";
 import type { Invitation, Locale } from "@taklifnoma/contracts";
+import QRCode from "qrcode";
+import { yandexMapUrl } from "@taklifnoma/contracts/maps";
+import { templateCapabilities } from "@taklifnoma/contracts/capabilities";
 import {
   imageSlots,
   IMAGE_SIZE,
   IMAGE_TEMPLATE_ID,
+  IMAGE_LOCATION_QR,
 } from "../templates/ivory-rose-card/layout";
 import { coverBrowserOptions } from "./cover-runtime";
 import { CoverBrowser } from "./cover-browser";
@@ -69,6 +73,22 @@ export async function renderStaticImage(
   try {
     const a = await loadAssets();
     const slots = imageSlots(invitation, locale);
+    const content = invitation.content[locale];
+    const destination = yandexMapUrl(
+      invitation.venue,
+      [content.venueName, content.address, content.landmark]
+        .filter(Boolean)
+        .join(", "),
+    );
+    const qr =
+      templateCapabilities(invitation.templateId).locationQr && destination
+        ? await QRCode.toDataURL(destination, {
+            errorCorrectionLevel: "M",
+            margin: 4,
+            width: IMAGE_LOCATION_QR.size,
+            color: { dark: "#454337", light: "#fffdf7" },
+          })
+        : "";
     browser = await browserPool.acquire();
     context = await browser.newContext({
       viewport: IMAGE_SIZE,
@@ -84,9 +104,10 @@ export async function renderStaticImage(
       @font-face{font-family:Card;src:url(data:font/ttf;base64,${a.italic});font-style:italic}
       *{box-sizing:border-box}html,body{margin:0;width:1500px;height:2100px;overflow:hidden}body{background:#f6efdf url(data:image/png;base64,${a.background}) center/100% 100%;color:#55513d;font-family:Card,serif}
       .slot{position:absolute;display:flex;align-items:center;justify-content:center;text-align:center;white-space:pre-wrap;overflow-wrap:anywhere;font-weight:400;line-height:1.2}
-      .text{max-width:100%}.rule{position:absolute;left:650px;top:1096px;width:200px;height:1px;background:#a58e5b}
+      .text{max-width:100%}.rule{position:absolute;left:650px;top:1005px;width:200px;height:1px;background:#a58e5b}
+      .location-qr{position:absolute;left:${IMAGE_LOCATION_QR.x}px;top:${IMAGE_LOCATION_QR.y}px;width:${IMAGE_LOCATION_QR.size}px;height:${IMAGE_LOCATION_QR.size}px;image-rendering:pixelated}
       .watermark{position:absolute;color:#786f5d;opacity:.24;font:23px Arial,sans-serif;letter-spacing:4px;transform:rotate(-30deg);white-space:nowrap}
-      </style></head><body><div class="rule"></div>${slots.map((s) => `<div class="slot" data-key="${s.key}" data-size="${s.size}" data-min="${s.min}" style="left:${s.x}px;top:${s.y}px;width:${s.width}px;height:${s.height}px;font-size:${s.size}px;${s.italic ? "font-style:italic;" : ""}letter-spacing:${s.tracking ?? 0}px"><div class="text">${escape(s.text)}</div></div>`).join("")}${preview ? Array.from({ length: 15 }, (_, i) => `<div class="watermark" style="left:${(i % 3) * 520 - 100}px;top:${Math.floor(i / 3) * 420 + 170}px">FOTIHA · NAMUNA</div>`).join("") : ""}</body></html>`,
+      </style></head><body><div class="rule"></div>${qr ? `<img class="location-qr" src="${qr}" alt="">` : ""}${slots.map((s) => `<div class="slot" data-key="${s.key}" data-size="${s.size}" data-min="${s.min}" style="left:${s.x}px;top:${s.y}px;width:${s.width}px;height:${s.height}px;font-size:${s.size}px;${s.italic ? "font-style:italic;" : ""}letter-spacing:${s.tracking ?? 0}px"><div class="text">${escape(s.text)}</div></div>`).join("")}${preview ? Array.from({ length: 15 }, (_, i) => `<div class="watermark" style="left:${(i % 3) * 520 - 100}px;top:${Math.floor(i / 3) * 420 + 170}px">FOTIHA · NAMUNA</div>`).join("") : ""}</body></html>`,
       { waitUntil: "load" },
     );
     const overflow = await page.evaluate(async () => {

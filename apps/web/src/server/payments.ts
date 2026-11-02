@@ -87,7 +87,7 @@ export async function createCheckout(
       );
     const invitation = invitationSchema.parse(row.data);
     if (templateById(invitation.templateId)?.format === "image")
-      throw new ApiError(400, "IMAGE_FREE_TEST", "Rasm taklifnomalar hozir bepul sinovda.");
+      throw new ApiError(400, "IMAGE_FREE_TEST", "Rasm taklifnomani PNG sifatida yuklab oling.");
     if (invitation.revision !== revision)
       throw new ApiError(
         409,

@@ -7,6 +7,17 @@ using the shared canonical preview JSON. No application deployment was performed
 
 ## Passed checks
 
+- Follow-up remap: retained the generated artwork, reduced name size, enlarged the
+  date, separated time and added a locally generated Yandex location QR. Decode
+  checks pass on the exported pixels for the selected venue, a changed point and
+  a written-address search fallback.
+- Format controls contain exactly two options, above event filters. Browser
+  checks cover a new draft switching web/image and changing event compatibility;
+  image mode has no web category tabs, language selectors, greeting or host input.
+  Both web/image popups use the same centered detail column and create-first
+  stacked actions; mobile image dialog is also captured.
+- Crafted image greeting/host/contact values are removed by both shared projection
+  and the actual save API, including a practical edit after first download.
 - Renderer: Uzbek Latin, Uzbek Cyrillic, English and Russian; long names in all
   four scripts; 750 × 1050 preview with pixel-baked watermarks; clean 1500 × 2100
   PNG; oversized wording rejected with 422 rather than clipped. Local fonts and
@@ -23,7 +34,7 @@ using the shared canonical preview JSON. No application deployment was performed
   download, Taklifnomalarim personalized image/status/download, catalog format
   filter, portrait artwork/detail dialog, full preview/back action and no landing
   image/link placement. No page errors in the successful run. Uses reduced motion.
-- 42 related tests pass across invitation contracts/policy, publishing, payments,
+- 43 related tests pass across invitation contracts/policy, publishing, payments,
   Studio capabilities/placeholder projections and event-compatible template order.
 - Typecheck and production build pass. Both static API route traces include private
   artwork/fonts and the required Playwright/Chromium runtime assets.
@@ -46,6 +57,8 @@ web invitation payment flows are unchanged. Publication is committed locally.
 - `studio-download.png`: actual browser-downloaded personalized PNG fixture.
 - `dashboard-desktop.png`, `catalog-desktop.png`, `catalog-detail.png`,
   `preview-mobile.png`: integration screenshots.
+- `catalog-web-detail.png`, `catalog-detail-mobile.png`: shared popup arrangement.
+- `studio-design-choice.png`, `studio-location.png`: format-first choice and Yandex.
 
 All fixture users/invitations/sessions/audits were removed after checks. No Telegram
 messages, real payments or external deployment were used. Static previews deter

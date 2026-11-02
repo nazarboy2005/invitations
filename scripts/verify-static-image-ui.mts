@@ -42,6 +42,52 @@ try {
     if (response.status() >= 400)
       console.log("HTTP", response.status(), new URL(response.url()).pathname);
   });
+  const creation = await context.newPage();
+  creation.on("pageerror", (error) => errors.push(error.message));
+  await creation.goto(origin + "/studio?new=1");
+  const creationFormat = creation.getByRole("group", {
+    name: "Taklifnoma formati",
+  });
+  await creationFormat
+    .getByRole("button", { name: "Rasm taklifnoma", exact: true })
+    .click();
+  await creation
+    .getByRole("combobox", { name: "Tadbir turi", exact: true })
+    .click();
+  assert.deepEqual(
+    (await creation.getByRole("option").allTextContents()).map((s) => s.trim()),
+    ["Nikoh to‘yi", "Fotiha"],
+  );
+  await creation.getByRole("option", { name: "Fotiha", exact: true }).click();
+  await creation
+    .locator('[data-template-id="ivory-rose-card"] button[data-card-art]')
+    .first()
+    .click();
+  await creation.getByText("Tanlangan dizayn", { exact: true }).waitFor();
+  await creationFormat
+    .getByRole("button", { name: "Veb taklifnoma", exact: true })
+    .click();
+  assert.equal(
+    await creation.locator('[data-template-id="ivory-rose-card"]').count(),
+    0,
+  );
+  await creation
+    .getByRole("combobox", { name: "Tadbir turi", exact: true })
+    .click();
+  assert.ok((await creation.getByRole("option").count()) > 2);
+  await creation
+    .getByRole("option", { name: "Tug‘ilgan kun", exact: true })
+    .click();
+  await creationFormat
+    .getByRole("button", { name: "Rasm taklifnoma", exact: true })
+    .click();
+  assert.match(
+    await creation
+      .getByRole("combobox", { name: "Tadbir turi", exact: true })
+      .innerText(),
+    /Nikoh/,
+  );
+  await creation.close();
   console.log("Opening Studio fixture");
   await page.goto(origin + `/studio/${invitation.id}`);
   await page
@@ -57,7 +103,42 @@ try {
       throw e;
     });
   console.log("Studio preview ready");
+  assert.equal(
+    await page.getByRole("region", { name: "Taklifnoma tillari" }).count(),
+    0,
+  );
+  assert.equal(
+    await page.getByText("Oila yoki mezbonlar", { exact: true }).count(),
+    0,
+  );
+  assert.equal(
+    await page.getByText("Mehmonlarga salomlashish", { exact: true }).count(),
+    0,
+  );
   await page.screenshot({ path: out + "studio-desktop.png" });
+  const steps = page
+    .locator('aside[aria-label="Tahrirlash bo‘limlari"]')
+    .getByRole("button");
+  await steps.nth(0).click();
+  const formatChoice = page.getByRole("group", { name: "Taklifnoma formati" });
+  assert.equal(await formatChoice.getByRole("button").count(), 2);
+  assert.equal(
+    await formatChoice
+      .getByRole("button", { name: "Rasm taklifnoma", exact: true })
+      .getAttribute("aria-pressed"),
+    "true",
+  );
+  await page.screenshot({ path: out + "studio-design-choice.png" });
+  await steps.nth(2).click();
+  assert.equal(
+    (await page.getByRole("textbox", { name: /Yandex/ }).count()) > 0 ||
+      (await page
+        .locator('iframe[title="Tanlangan joy — Yandex Maps"]')
+        .count()) > 0 ||
+      (await page.getByText(/Yandex/).count()) > 0,
+    true,
+  );
+  await page.screenshot({ path: out + "studio-location.png" });
   await page
     .locator('aside[aria-label="Tahrirlash bo‘limlari"]')
     .getByRole("button")
@@ -76,7 +157,12 @@ try {
       .getByRole("button", { name: "PNG yuklab olish · Bepul" })
       .click();
     await (await result).saveAs(out + "studio-download.png");
-    await page.getByText("PNG rasm yuklab olindi. Taklifnomangiz “Taklifnomalarim”da saqlangan.", {exact:true}).waitFor({timeout:10000});
+    await page
+      .getByText(
+        "PNG rasm yuklab olindi. Taklifnomangiz “Taklifnomalarim”da saqlangan.",
+        { exact: true },
+      )
+      .waitFor({ timeout: 10000 });
   }
   await page.goto(origin + "/dashboard");
   await page
@@ -85,7 +171,8 @@ try {
   await page
     .getByAltText("Rasm taklifnoma ko‘rinishi")
     .waitFor({ timeout: 60000 });
-  if (template.published) await page.getByText("Rasm tayyor", {exact:true}).waitFor();
+  if (template.published)
+    await page.getByText("Rasm tayyor", { exact: true }).waitFor();
   await page.screenshot({ path: out + "dashboard-desktop.png" });
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto(origin + `/studio/${invitation.id}`);
@@ -111,16 +198,39 @@ try {
   if (template.published) {
     await page.setViewportSize({ width: 1440, height: 1000 });
     await page.goto(origin + "/templates");
+    const catalogFormat = page.getByRole("group", {
+      name: "Taklifnoma formati",
+    });
+    assert.equal(await catalogFormat.getByRole("button").count(), 2);
+    assert.equal(
+      await page
+        .getByRole("navigation", { name: "Dizayn kategoriyalari" })
+        .isVisible(),
+      true,
+    );
     await page
       .getByRole("button", { name: "Rasm taklifnoma", exact: true })
       .click();
+    assert.equal(
+      await page
+        .getByRole("navigation", { name: "Dizayn kategoriyalari" })
+        .isVisible(),
+      false,
+    );
+    assert.equal(await page.getByText(/bepul sinov/i).count(), 0);
     await page
       .getByRole("button", {
         name: "Oq atirgul: batafsil ko‘rish",
         exact: true,
       })
       .waitFor();
-    await page.locator('img[src*="ivory-rose-card"]').evaluateAll(async images => { await Promise.all(images.map(img => (img as HTMLImageElement).decode())); });
+    await page
+      .locator('img[src*="ivory-rose-card"]')
+      .evaluateAll(async (images) => {
+        await Promise.all(
+          images.map((img) => (img as HTMLImageElement).decode()),
+        );
+      });
     await page.screenshot({ path: out + "catalog-desktop.png" });
     await page
       .getByRole("button", {
@@ -129,7 +239,38 @@ try {
       })
       .click();
     await page.getByRole("dialog").waitFor();
+    const dialog = page.getByRole("dialog");
+    const links = await dialog.getByRole("link").allTextContents();
+    assert.deepEqual(
+      links.map((text) => text.trim()),
+      ["Yaratish", "To‘liq ko‘rish"],
+    );
     await page.screenshot({ path: out + "catalog-detail.png" });
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.screenshot({ path: out + "catalog-detail-mobile.png" });
+    await dialog.getByRole("button", { name: "Yopish", exact: true }).click();
+    await page.setViewportSize({ width: 1440, height: 1000 });
+    await catalogFormat
+      .getByRole("button", { name: "Veb taklifnoma", exact: true })
+      .click();
+    assert.equal(
+      await page
+        .getByRole("navigation", { name: "Dizayn kategoriyalari" })
+        .isVisible(),
+      true,
+    );
+    await page
+      .getByRole("button", { name: /batafsil ko‘rish/ })
+      .first()
+      .click();
+    await dialog.waitFor();
+    assert.deepEqual(
+      (await dialog.getByRole("link").allTextContents()).map((text) =>
+        text.trim(),
+      ),
+      ["Yaratish", "To‘liq ko‘rish"],
+    );
+    await page.screenshot({ path: out + "catalog-web-detail.png" });
     await page.goto(origin + "/");
     assert.equal(await page.locator('a[href*="ivory-rose-card"]').count(), 0);
     assert.equal(await page.locator('img[src*="ivory-rose-card"]').count(), 0);

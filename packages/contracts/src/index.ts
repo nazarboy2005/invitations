@@ -459,7 +459,7 @@ export const TEMPLATES: TemplateDefinition[] = [
     imageSize: { width: 1500, height: 2100 },
     capabilities: templateCapabilities("ivory-rose-card"),
     name: "Oq atirgul",
-    description: "Oq atirgullar, zaytun novdalari va nafis qog‘oz. 5:7 rasm taklifnoma — bepul sinov.",
+    description: "Oq atirgullar, zaytun novdalari va nafis qog‘oz. 5:7 rasm taklifnoma.",
     previewImage: "/templates/ivory-rose-card/preview.webp",
     previewEventType: "wedding",
     categoryIds: ["wedding"],

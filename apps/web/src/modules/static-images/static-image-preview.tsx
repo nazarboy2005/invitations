@@ -1,7 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import {
-  LANGUAGE_NAMES,
   type Invitation,
   type Locale,
 } from "@taklifnoma/contracts";
@@ -114,7 +113,6 @@ export function StaticImageFullPreview({
 }: {
   invitation: Invitation;
 }) {
-  const [locale, setLocale] = useState(invitation.defaultLocale);
   return (
     <section
       style={{
@@ -123,21 +121,7 @@ export function StaticImageFullPreview({
         background: "#e9e3d8",
       }}
     >
-      {invitation.enabledLocales.length > 1 && (
-        <nav className={styles.languages} aria-label="Rasm tili">
-          {invitation.enabledLocales.map((item) => (
-            <button
-              type="button"
-              key={item}
-              aria-pressed={locale === item}
-              onClick={() => setLocale(item)}
-            >
-              {LANGUAGE_NAMES[item]}
-            </button>
-          ))}
-        </nav>
-      )}
-      <StaticImagePreview invitation={invitation} locale={locale} />
+      <StaticImagePreview invitation={invitation} locale={invitation.defaultLocale} />
     </section>
   );
 }

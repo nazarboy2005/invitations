@@ -80,11 +80,10 @@ function InvitationCard({
   const isImage = template?.format === "image";
   const [imageBusy, setImageBusy] = useState(false);
   const [imageError, setImageError] = useState("");
-  const [imageLocale, setImageLocale] = useState(invitation.defaultLocale);
   const [imageExported, setImageExported] = useState(!!invitation.imageExportedAt);
   async function downloadImage() {
     setImageBusy(true); setImageError("");
-    try { await downloadInvitationImage(invitation, imageLocale); setImageExported(true); }
+    try { await downloadInvitationImage(invitation, invitation.defaultLocale); setImageExported(true); }
     catch (e) { setImageError(e instanceof Error ? e.message : "Rasm yuklab olinmadi."); }
     finally { setImageBusy(false); }
   }
@@ -202,7 +201,6 @@ function InvitationCard({
         )}
         <div className={styles.cardActions}>
           {isImage && accountSaved && !local ? <div className={styles.imageDownloads}>
-            {invitation.enabledLocales.length > 1 && <select aria-label="Yuklab olish tili" value={imageLocale} onChange={e => setImageLocale(e.target.value as typeof imageLocale)}>{invitation.enabledLocales.map(l => <option key={l} value={l}>{LANGUAGE_NAMES[l]}</option>)}</select>}
             <button type="button" className={styles.imageDownloadButton} onClick={() => void downloadImage()} disabled={imageBusy}>{imageBusy ? "Tayyorlanmoqda…" : "PNG yuklab olish"}</button>
           </div> : invitation.status === "published" && invitation.slug ? (
             <Link

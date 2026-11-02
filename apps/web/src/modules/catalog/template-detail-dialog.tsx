@@ -4,12 +4,15 @@ import { publicTemplateId } from "@taklifnoma/contracts";
 
 import { useEffect, useId, useLayoutEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { ArrowUpRight, Eye, X } from "lucide-react";
+import { ArrowUpRight, Eye, X, Mail, Globe2, ImageIcon } from "lucide-react";
 import { formatPrice, type TemplateDefinition } from "@taklifnoma/contracts";
 import { TemplateCardPreview } from "./template-card-preview";
 import { templatePoster } from "./template-poster";
 import styles from "./template-detail-dialog.module.css";
-import { FavoriteButton, FavoritesStatus } from "@/modules/favorites/favorite-button";
+import {
+  FavoriteButton,
+  FavoritesStatus,
+} from "@/modules/favorites/favorite-button";
 
 export function TemplateDetailDialog({
   template,
@@ -122,7 +125,9 @@ export function TemplateDetailDialog({
         </button>
         <div className={styles.deviceArea}>
           <div
-            className={template.format === "image" ? styles.imageCard : styles.phone}
+            className={
+              template.format === "image" ? styles.imageCard : styles.phone
+            }
             aria-label={`${template.name}: ${template.format === "image" ? "5:7 rasm" : "telefon ko‘rinishi"}`}
           >
             <div className={styles.screen}>
@@ -135,10 +140,17 @@ export function TemplateDetailDialog({
               />
               {!opening && <TemplateCardPreview templateId={template.id} />}
             </div>
-            {template.format !== "image" && <span className={styles.notch} aria-hidden="true" />}
+            {template.format !== "image" && (
+              <span className={styles.notch} aria-hidden="true" />
+            )}
           </div>
         </div>
         <div className={styles.details}>
+          <div className={styles.ornament} aria-hidden="true">
+            <span />
+            <Mail size={28} />
+            <span />
+          </div>
           <p className={styles.eyebrow}>Sizning taklifnomangiz</p>
           <div className={styles.titleRow}>
             <h2 id={titleId}>{template.name}</h2>
@@ -147,10 +159,33 @@ export function TemplateDetailDialog({
           <p id={descriptionId} className={styles.description}>
             {template.description}
           </p>
-          <p className={styles.price}>{template.format === "image" ? "Rasm · 5:7 · Bepul sinov" : formatPrice(template.priceMinor)}</p>
+          <p className={styles.price}>
+            {template.format === "image" ? (
+              <>
+                <ImageIcon size={18} />
+                5:7 · PNG
+              </>
+            ) : (
+              <>
+                <Globe2 size={18} />
+                Veb taklifnoma
+              </>
+            )}
+            <span />
+            {formatPrice(template.priceMinor)}
+          </p>
           <FavoritesStatus />
           {!template.published && <p>Faqat ko‘rib chiqish uchun</p>}
           <div className={styles.actions}>
+            {template.published && (
+              <Link
+                prefetch={false}
+                className={styles.create}
+                href={`/studio?new=1&template=${encodeURIComponent(publicTemplateId(template.id))}`}
+              >
+                Yaratish <ArrowUpRight size={20} />
+              </Link>
+            )}
             <Link
               prefetch={false}
               className={styles.view}
@@ -158,15 +193,6 @@ export function TemplateDetailDialog({
             >
               <Eye size={17} /> To‘liq ko‘rish
             </Link>
-            {template.published && (
-              <Link
-                prefetch={false}
-                className={styles.create}
-                href={`/studio?new=1&template=${encodeURIComponent(publicTemplateId(template.id))}`}
-              >
-                Yaratish <ArrowUpRight size={17} />
-              </Link>
-            )}
           </div>
         </div>
       </section>

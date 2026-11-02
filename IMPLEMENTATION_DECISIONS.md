@@ -15,6 +15,24 @@
   until the user confirms the result and requests that follow-up. Existing web
   payment behavior remains unchanged. Do not place static designs on the landing
   page; expose them only through Templates, Studio and Taklifnomalarim.
+- Follow-up: show only Veb taklifnoma / Rasm taklifnoma, with format selection
+  above event/category controls. Catalog category tabs/counts describe web designs
+  only and disappear in image mode. Studio event choices depend on format.
+- Both formats' detail popup uses artwork left, centered information right,
+  primary Yaratish followed by secondary To‘liq ko‘rish. Use the supplied AI
+  reference for arrangement only. Remove customer-facing “bepul sinov” copy.
+- Image Studio has no language-selection controls; use its default locale and
+  preserve existing stored translations. Do not add translation data to new images.
+- Every image design owns its composition and visual hierarchy; dates/names need
+  not share sizes/positions across designs. Expose and persist only mapped fields.
+  Shared mandatory list: event people, event heading, invitation text, date/time,
+  timezone, venue name and location (written address or map destination).
+- Location selection continues through the existing Yandex APIs. A design may map
+  a QR code to that selected destination; a written-only address uses Yandex search.
+  QR generation must be local, without a third-party QR service.
+- Oq atirgul remap: smaller names, larger separate date/time, venue/address/landmark
+  and a location QR. Greeting, hosts and contacts are unsupported and removed by
+  shared normalization as well as hidden in Studio. Keep its generated artwork.
 - Implementation choices: a distinct image format alongside
   web invitations; 1500 x 2100 PNG export; render reduced-resolution
   previews with a baked-in watermark on the server; keep clean artwork/export
@@ -28,9 +46,10 @@
   retention policy. No external application deployment is authorized.
 - Completed the first design as Oq atirgul (`ivory-rose-card`), wedding/fotiha
   compatibility and wedding category. Scoped migrations 0207/0208 register/publish
-  it at zero price. Four-locale rendering/long names/overflow, 42 regression checks,
+  it at zero price. Four-locale rendering/long names/overflow, 43 regression checks,
   real owned save/download/reopen/correction/re-download, authorization/identity
-  locks, mobile/desktop UI and production packaging pass. Evidence is in
+  locks, Yandex QR decoding, format/event switching, mobile/desktop UI and production
+  packaging pass. Evidence is in
   `docs/templates/ivory-rose-card-verification`. No Click or external deployment.
 
 ## Landing folded paper sizing (2026-11-02)

@@ -3,6 +3,7 @@ import { formatDate } from "../date-format";
 
 export const IMAGE_TEMPLATE_ID = "ivory-rose-card";
 export const IMAGE_SIZE = { width: 1500, height: 2100 };
+export const IMAGE_LOCATION_QR = { x: 585, y: 1710, size: 210 };
 export type ImageSlot = {
   key: string;
   text: string;
@@ -35,14 +36,11 @@ export function imageSlots(
       invitation.startsAt + (invitation.startsAt.length === 16 ? ":00Z" : "Z"),
     );
     if (Number.isFinite(localDate.getTime()))
-      date =
-        formatDate(invitation.startsAt, locale, invitation.timezone, {
-          day: "numeric",
-          month: "long",
-          year: "numeric",
-        }) +
-        "  ·  " +
-        invitation.startsAt.slice(11, 16);
+      date = formatDate(invitation.startsAt, locale, invitation.timezone, {
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+      });
   }
   const slot = (
     key: string,
@@ -73,33 +71,37 @@ export function imageSlots(
       27,
       { tracking: 6 },
     ),
-    slot("greeting", c.greeting, 615, 100, 37, 29),
-    slot("people.0", c.people[0] ?? "", 740, 130, 108, 58, { italic: true }),
+    slot("people.0", c.people[0] ?? "", 650, 120, 88, 50, { italic: true }),
     slot(
       "and",
       c.people[0]?.trim() && c.people[1]?.trim() ? "&" : "",
-      875,
+      775,
       65,
       52,
       52,
       { italic: true },
     ),
-    slot("people.1", c.people[1] ?? "", 945, 130, 108, 58, { italic: true }),
-    slot("message", c.message, 1130, 190, 41, 30),
-    slot("date", date, 1370, 65, 43, 33),
-    slot("venueName", c.venueName, 1470, 85, 46, 32),
+    slot("people.1", c.people[1] ?? "", 850, 120, 88, 50, { italic: true }),
+    slot("message", c.message, 1040, 170, 41, 30),
+    slot("date", date, 1260, 100, 72, 45),
+    slot(
+      "time",
+      date ? invitation.startsAt.slice(11, 16) : "",
+      1370,
+      60,
+      42,
+      36,
+      { tracking: 4 },
+    ),
+    slot("venueName", c.venueName, 1470, 75, 43, 30),
     slot(
       "address",
       [c.address, c.landmark].filter(Boolean).join(" · "),
-      1560,
-      125,
+      1545,
+      130,
       34,
       27,
+      { x: 325, width: 780 },
     ),
-    slot("hosts", c.hosts, 1690, 95, 36, 28, { width: 760, x: 330 }),
-    slot("phone", invitation.contacts.phoneNumber, 1785, 55, 30, 27, {
-      width: 650,
-      x: 330,
-    }),
   ];
 }

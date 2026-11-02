@@ -60,11 +60,20 @@ download instead of silently clipping or truncating names. Optional empty fields
 follow an explicit layout rule. Bundle fonts locally, verify all supported scripts,
 and test long Uzbek Latin/Cyrillic, Russian and English content.
 
-Reuse authored event data and locale variants. Export one image for the selected
-enabled locale; propose a locale chooser, with a multi-file option later. No silent
-translation. Catalog samples come from the shared preview JSON and never become
-saved creator data. Static images have no music, animation, interactive RSVP,
-wishes forms or clickable map. A QR code could be separately scoped later.
+Use the image invitation's default locale without language selectors. Preserve
+existing stored translations; never silently translate. Catalog samples come from
+the shared preview JSON and never become saved creator data. Static images have no
+music, animation, interactive RSVP or wishes forms. Supported designs include a
+locally generated location QR targeting the selected Yandex destination (or a Yandex
+search for a written-only address). Reuse the existing Yandex venue editor/APIs.
+
+Each design declares supported content fields and owns its visual hierarchy; there
+is no universal names/date composition. Oq atirgul omits greeting, hosts and contacts.
+Mandatory: event people, heading, invitation text, date/time, timezone, venue name
+and location (written address or map). Only supported inputs appear or persist.
+Format choice comes first: Veb taklifnoma / Rasm taklifnoma. Web catalog categories
+are hidden for images; Studio event choices depend on the selected format. Both
+formats use the same artwork-left/detail-right popup arrangement with create first.
 
 ## Preview protection and export boundary
 

@@ -42,7 +42,7 @@
   position: relative;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  width: min(780px, 100%);
+  width: min(1040px, 100%);
   margin: auto;
   overflow: hidden;
   border-radius: 26px;
@@ -72,7 +72,11 @@
   justify-content: center;
   align-items: center;
   padding: 36px;
-  background: radial-gradient(ellipse at 50% 30%, var(--accent-soft), var(--surface-soft));
+  background: radial-gradient(
+    ellipse at 50% 30%,
+    var(--accent-soft),
+    var(--surface-soft)
+  );
 }
 .phone {
   position: relative;
@@ -86,9 +90,18 @@
     0 20px 36px -12px rgb(var(--shadow-color) / 40%),
     inset 0 0 0 2px #827b71;
 }
-.imageCard { position:relative;width:100%;aspect-ratio:5/7;box-shadow:0 12px 30px #493e2430; }
-.imageCard .screen { border-radius:0; }
-.imageCard .poster { object-fit:contain; }
+.imageCard {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 5/7;
+  box-shadow: 0 12px 30px #493e2430;
+}
+.imageCard .screen {
+  border-radius: 0;
+}
+.imageCard .poster {
+  object-fit: contain;
+}
 .screen {
   position: relative;
   width: 100%;
@@ -119,7 +132,20 @@
 }
 .details {
   align-self: center;
-  padding: 62px 32px 42px;
+  padding: 68px 40px 48px;
+  text-align: center;
+}
+.ornament {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  color: var(--primary);
+  margin-bottom: 22px;
+}
+.ornament span {
+  flex: 1;
+  height: 1px;
+  background: var(--line);
 }
 .eyebrow {
   margin: 0 0 16px;
@@ -131,7 +157,7 @@
 .details h2 {
   margin: 0 0 14px;
   font-family: var(--font-display);
-  font-size: 39px;
+  font-size: clamp(36px, 4vw, 58px);
   font-weight: 500;
   line-height: 1.05;
   letter-spacing: -1px;
@@ -144,9 +170,23 @@
 }
 .price {
   margin: 26px 0;
-  font-size: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: fit-content;
+  margin: 24px auto 30px;
+  padding: 12px 18px;
+  border-radius: 999px;
+  background: var(--surface-soft);
+  font-size: 14px;
   color: var(--primary);
   font-weight: 600;
+}
+.price span {
+  width: 1px;
+  height: 20px;
+  background: var(--line-strong);
 }
 .actions {
   display: grid;
@@ -157,9 +197,9 @@
   align-items: center;
   justify-content: center;
   gap: 9px;
-  min-height: 48px;
+  min-height: 56px;
   border: 1px solid var(--line-strong);
-  border-radius: 10px;
+  border-radius: 999px;
   font-size: 13px;
   font-weight: 600;
 }
@@ -246,6 +286,9 @@
   .deviceArea {
     padding: 28px 20px 18px;
   }
+  .imageCard {
+    width: min(230px, 65vw);
+  }
   .phone {
     height: clamp(180px, 34dvh, 310px);
     padding: 5px;
@@ -273,11 +316,11 @@
     font-size: 12px;
   }
   .price {
-    margin: 16px 0;
-    font-size: 20px;
+    margin: 16px auto;
+    font-size: 14px;
   }
   .actions {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
   }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -289,4 +332,17 @@
     animation: none;
   }
 }
-.titleRow { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.titleRow {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+.titleRow h2 {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.titleRow > button {
+  flex-shrink: 0;
+}

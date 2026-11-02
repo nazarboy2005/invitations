@@ -3,6 +3,8 @@ import { fileURLToPath } from "node:url";
 import path from "node:path";
 import assert from "node:assert/strict";
 import sharp from "sharp";
+import jsQR from "jsqr";
+import { yandexMapUrl } from "../packages/contracts/src/maps";
 import { LOCALES, type Locale } from "../packages/contracts/src/index";
 import { normalizeInvitation } from "../packages/contracts/src/capabilities";
 import { createTemplatePreviewSample } from "../apps/web/src/modules/catalog/preview-sample";
@@ -15,6 +17,14 @@ await mkdir(out, { recursive: true });
 const sample = normalizeInvitation(
   createTemplatePreviewSample("ivory-rose-card"),
 );
+async function decodeLocation(png: Buffer) {
+  const { data, info } = await sharp(png)
+    .extract({ left: 585, top: 1710, width: 210, height: 210 })
+    .ensureAlpha()
+    .raw()
+    .toBuffer({ resolveWithObject: true });
+  return jsQR(new Uint8ClampedArray(data), info.width, info.height)?.data;
+}
 const preview = await renderStaticImage(sample, "uz-Latn", true);
 assert.equal((await sharp(preview).metadata()).width, 750);
 assert.equal((await sharp(preview).metadata()).height, 1050);
@@ -33,6 +43,7 @@ for (const locale of LOCALES) {
       .webp({ quality: 92 })
       .toFile(path.join(out, `sample-${locale}.webp`));
   if (locale === "uz-Latn") {
+    assert.equal(await decodeLocation(png), yandexMapUrl(sample.venue));
     const poster = path.join(root, "apps/web/public/templates/ivory-rose-card");
     await mkdir(poster, { recursive: true });
     await sharp(png)
@@ -42,6 +53,22 @@ for (const locale of LOCALES) {
     assert.notDeepEqual(png, preview);
   }
 }
+const moved = structuredClone(sample);
+moved.venue = { latitude: 40.12, longitude: 67.83, mapUrl: "" };
+assert.equal(
+  await decodeLocation(await renderStaticImage(moved, "uz-Latn", false)),
+  yandexMapUrl(moved.venue),
+);
+const written = structuredClone(sample);
+written.venue = { latitude: null, longitude: null, mapUrl: "" };
+const c = written.content["uz-Latn"];
+assert.equal(
+  await decodeLocation(await renderStaticImage(written, "uz-Latn", false)),
+  yandexMapUrl(
+    written.venue,
+    [c.venueName, c.address, c.landmark].filter(Boolean).join(", "),
+  ),
+);
 const long = structuredClone(sample);
 for (const locale of LOCALES)
   long.content[locale].people =
@@ -58,5 +85,5 @@ const overflow = structuredClone(sample);
 overflow.content["uz-Latn"].message = "Overflow ".repeat(900);
 await assert.rejects(renderStaticImage(overflow, "uz-Latn", false), /sig‘madi/);
 console.log(
-  "PASS: four locales, long names, protected preview, overflow rejection and 1500×2100 flattened PNG; catalog poster generated.",
+  "PASS: four locales, long names, protected preview, overflow rejection, scannable Yandex QR (selected/changed point and written address) and 1500×2100 flattened PNG; catalog poster generated.",
 );

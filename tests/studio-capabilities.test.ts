@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { addLanguage, createInvitation, invitationSchema, TEMPLATES } from "../packages/contracts/src/index";
-import { normalizeInvitation, templateCapabilities } from "../packages/contracts/src/capabilities";
+import { IMAGE_REQUIRED_FIELDS, normalizeInvitation, templateCapabilities } from "../packages/contracts/src/capabilities";
 import { visitorLocale } from "../packages/contracts/src/visitor-locale";
 import { publicationIssues } from "../packages/contracts/src/publication";
 import { assertManagedImages } from "../apps/web/src/server/publication";
@@ -11,12 +11,34 @@ test("every catalog design explicitly declares supported slots, including maps",
   for (const template of TEMPLATES) {
     const c = templateCapabilities(template.id);
     assert.equal(c, template.capabilities, template.id);
-    assert.equal(c.maps, template.format !== "image", template.id);
+    assert.equal(c.maps, true, template.id);
     assert.ok(c.people >= 1 && c.people <= 20, template.id);
     assert.ok(!c.receipts || c.gift, template.id);
   }
   assert.equal(templateCapabilities("unregistered").gallery, 0);
   assert.equal(templateCapabilities("unregistered").gift, false);
+});
+
+test("image designs declare required slots and discard fields outside their composition", () => {
+  const raw = createInvitation("ivory-rose-card");
+  raw.content["uz-Latn"].hosts = "Unused hosts";
+  raw.content["uz-Latn"].greeting = "Unused greeting";
+  raw.contacts.phoneNumber = "Unused phone";
+  raw.venue = { latitude: 41.31, longitude: 69.28, mapUrl: "" };
+  const saved = normalizeInvitation(raw);
+  assert.equal(saved.content["uz-Latn"].hosts, "");
+  assert.equal(saved.content["uz-Latn"].greeting, "");
+  assert.equal(saved.contacts.phoneNumber, "");
+  assert.equal(saved.venue.latitude, 41.31);
+  assert.match(saved.venue.mapUrl, /^https:\/\/yandex.uz\/maps/);
+  assert.deepEqual(normalizeInvitation(saved), saved);
+  for (const template of TEMPLATES.filter(t => t.format === "image")) {
+    const c = templateCapabilities(template.id);
+    for (const field of ["people", "eventLabel", "message", "venueName"] as const) {
+      assert.ok(IMAGE_REQUIRED_FIELDS.includes(field));
+      assert.ok(c.imageFields?.includes(field), `${template.id}: ${field}`);
+    }
+  }
 });
 
 test("a crafted unsupported payload is stripped by the server's shared projection", () => {

@@ -87,6 +87,7 @@ import {
 } from "@taklifnoma/contracts";
 import styles from "./studio.module.css";
 import { StudioTemplatePicker } from "./studio-template-picker";
+import { TemplateFormatSwitch, type TemplateFormat } from "@/modules/catalog/template-format-switch";
 import { OptionalSection } from "./optional-section";
 import { StudioSection } from "./studio-section";
 import { useStudioPreview, type PreviewTarget } from "./use-studio-preview";
@@ -398,6 +399,7 @@ export function Studio({
     initialInvitation?.defaultLocale ?? "uz-Latn",
   );
   const [section, setSection] = useState(0);
+  const [chosenFormat, setChosenFormat] = useState<TemplateFormat | null>(null);
   const editorScroll = useRef<HTMLDivElement>(null);
   useLayoutEffect(() => {
     // Reset after the next step is committed, before focus/scroll anchoring.
@@ -845,6 +847,8 @@ export function Studio({
     (item) => item.id === invitation.templateId,
   );
   const isImage = templateById(invitation.templateId)?.format === "image";
+  const format = chosenFormat ?? (isImage ? "image" : "web");
+  const formatTemplates = templates.filter(item => (item.format ?? "web") === format);
   const singleCelebrant = capabilities.people === 1 ||
     invitation.eventType === "sunnat-toyi" ||
     invitation.eventType === "beshik-toyi" ||
@@ -893,7 +897,7 @@ export function Studio({
         ? [""]
         : ["", ""];
   const compatibleTemplates = orderEventTemplates(
-    templates,
+    formatTemplates,
     invitation.eventType,
   );
   const readiness = publicationIssues(invitation);
@@ -1768,7 +1772,7 @@ export function Studio({
                 </div>
               )}
             </div>
-              {section === 1 && (
+              {section === 1 && !isImage && (
                 <section className={styles.languageSettings} aria-label="Taklifnoma tillari">
                   <div className={styles.languageHeading}><Globe2 size={16} /><strong>Taklifnoma tillari</strong></div>
                   <div className={styles.languageChoices}>
@@ -1884,7 +1888,7 @@ export function Studio({
                     />
                   </Field>
                 )}
-                <Field label="Oila yoki mezbonlar" hint="Ixtiyoriy">
+                {(!capabilities.imageFields || capabilities.imageFields.includes("hosts")) && <Field label="Oila yoki mezbonlar" hint="Ixtiyoriy">
                   <input
                     value={content.hosts}
                     placeholder={placeholders.family}
@@ -1894,7 +1898,7 @@ export function Studio({
                       updateContent({ hosts: event.target.value })
                     }
                   />
-                </Field>
+                </Field>}
                 {invitation.templateId === "wedivo-pulau-sehati" && (
                   <Field label="Birga taklif etuvchilar">
                     <textarea
@@ -1924,7 +1928,7 @@ export function Studio({
                     }
                   />
                 </Field>
-                <Field label="Mehmonlarga salomlashish">
+                {(!capabilities.imageFields || capabilities.imageFields.includes("greeting")) && <Field label="Mehmonlarga salomlashish">
                   <input
                     value={content.greeting}
                     maxLength={300}
@@ -1932,7 +1936,7 @@ export function Studio({
                       updateContent({ greeting: event.target.value })
                     }
                   />
-                </Field>
+                </Field>}
                 <Field label="Taklif matni">
                   <textarea
                     value={content.message}
@@ -2585,16 +2589,10 @@ export function Studio({
                   </p>
                 )}
                 </section>
-                {isImage && <section className={styles.scheduleCard} aria-labelledby="image-venue-title">
-                  <div className={styles.scheduleHeading}><span><MapPin size={19} /></span><div><h2 id="image-venue-title">Manzil</h2><p>Rasmda ko‘rinadigan joy va manzil.</p></div></div>
-                  <Field label="To‘yxona yoki joy nomi"><input value={content.venueName} maxLength={300} onChange={e => updateContent({ venueName: e.target.value })} /></Field>
-                  <Field label="Manzil"><textarea value={content.address} maxLength={1000} rows={2} onChange={e => updateContent({ address: e.target.value })} /></Field>
-                  <Field label="Mo‘ljal"><input value={content.landmark} maxLength={1000} onChange={e => updateContent({ landmark: e.target.value })} /></Field>
-                </section>}
                 {capabilities.maps && (<section className={styles.scheduleCard} aria-labelledby="studio-venue-title">
                 <div className={styles.scheduleHeading}>
                   <span><MapPin size={19} /></span>
-                  <div><h2 id="studio-venue-title">Manzil</h2><p>Mehmonlar uchun joy va yo‘l-yo‘riq.</p></div>
+                  <div><h2 id="studio-venue-title">Manzil</h2><p>{isImage ? "Tanlangan Yandex manzili rasmga QR kod sifatida tushadi." : "Mehmonlar uchun joy va yo‘l-yo‘riq."}</p></div>
                   <small>Asosiy</small>
                 </div>
                 <VenueLink venue={invitation.venue} name={content.venueName} locale={locale}
@@ -2632,7 +2630,7 @@ export function Studio({
                       content: { ...current.content, [locale]: { ...getContent(current, locale), address: event.target.value } },
                     } : current)} />
                 </Field>
-                <Field label="Mo‘ljal va qo‘shimcha yo‘l-yo‘riq" icon={<Signpost size={14} aria-hidden="true" />}>
+                {(!capabilities.imageFields || capabilities.imageFields.includes("landmark")) && <Field label="Mo‘ljal va qo‘shimcha yo‘l-yo‘riq" icon={<Signpost size={14} aria-hidden="true" />}>
                   <textarea
                     value={content.landmark}
                     rows={2}
@@ -2642,7 +2640,7 @@ export function Studio({
                     }
                     placeholder={placeholders.optional}
                   />
-                </Field>
+                </Field>}
                 </div>
                 {hasVenuePoint(invitation.venue) && <div className={styles.venueSelection}>
                   <iframe key={`${invitation.venue.latitude},${invitation.venue.longitude}`} title="Tanlangan joy — Yandex Maps"
@@ -2930,12 +2928,22 @@ export function Studio({
 
             {section === 0 && (
               <div className={styles.form}>
+                <TemplateFormatSwitch value={format} disabled={identityLocked} onChange={next => {
+                  setChosenFormat(next);
+                  const available = templates.filter(item => (item.format ?? "web") === next);
+                  const eventType = available.some(item => item.supportedEventTypes.includes(invitation.eventType))
+                    ? invitation.eventType : available[0]?.previewEventType ?? available[0]?.supportedEventTypes[0] ?? invitation.eventType;
+                  const sameFormat = (templateById(invitation.templateId)?.format ?? "web") === next;
+                  changeEventType(eventType);
+                  update({ templateId: sameFormat ? invitation.templateId : "" });
+                  setLocale(invitation.defaultLocale);
+                }} />
                 <Field label="Tadbir turi">
                   <SoftSelect
                     label="Tadbir turi"
                     value={invitation.eventType}
                     disabled={identityLocked}
-                    options={EVENT_TYPE_OPTIONS.map((item) => ({
+                    options={EVENT_TYPE_OPTIONS.filter(item => formatTemplates.some(template => template.supportedEventTypes.includes(item.id))).map((item) => ({
                       value: item.id,
                       label: item.name,
                     }))}
@@ -3577,7 +3585,7 @@ export function Studio({
                           </dd>
                         </div>
                       ))}
-                      <div>
+                      {!isImage && <div>
                         <dt>Tillar</dt>
                         <dd className={styles.reviewLanguages}>
                           {invitation.enabledLocales.map((item) => (
@@ -3596,11 +3604,11 @@ export function Studio({
                             </button>
                           ))}
                         </dd>
-                      </div>
+                      </div>}
                       <div>
                         <dt>{isImage ? "Rasm formati" : "Nashr narxi"}</dt>
                         <dd>
-                          {isImage ? "PNG · 1500 × 2100 · Bepul sinov" : paidInvitationId === invitation.id
+                          {isImage ? "PNG · 1500 × 2100" : paidInvitationId === invitation.id
                             ? "To‘lov qabul qilingan"
                             : publishingMode === "paid"
                               ? selectedTemplate
@@ -3614,8 +3622,8 @@ export function Studio({
                       <ReadinessChecklist issues={readiness} onSelect={goToIssue} />
                     )}
                     {isImage ? <ul className={styles.publicationTerms}>
-                      <li>5:7 rasm, tanlangan tilda, suv belgisiz PNG sifatida yuklab olinadi. Hozir bepul sinov.</li>
-                      <li>Birinchi yuklab olishdan keyin ismlar, mezbon, tadbir turi, sana va dizayn qulflanadi.</li>
+                      <li>5:7 rasm suv belgisiz PNG sifatida yuklab olinadi.</li>
+                      <li>Birinchi yuklab olishdan keyin ismlar, tadbir turi, sana va dizayn qulflanadi.</li>
                       <li>Matn va manzilni tadbir kuni tugaguncha tahrirlash va rasmni qayta yuklab olish mumkin.</li>
                     </ul> : <ul className={styles.publicationTerms}>
                       {paidInvitationId === invitation.id ? (

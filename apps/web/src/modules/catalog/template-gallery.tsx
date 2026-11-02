@@ -25,6 +25,7 @@ import { orderCatalogTemplates } from "./template-order";
 import { TemplateCardPreview } from "./template-card-preview";
 import { useCardPlayback } from "./use-card-playback";
 import { useCategoryTransition } from "./use-category-transition";
+import { TemplateFormatSwitch, type TemplateFormat } from "./template-format-switch";
 
 const TemplateDetailDialog = dynamic(() =>
   import("./template-detail-dialog").then(
@@ -77,7 +78,7 @@ export function TemplateGallery({
   const { categoryId, renderedCategoryId, selectCategory } =
     useCategoryTransition(results, initialCategory);
   const [searchQuery, setSearchQuery] = useState("");
-  const [format, setFormat] = useState<"all" | "web" | "image">("all");
+  const [format, setFormat] = useState<TemplateFormat>("web");
   const searchInput = useRef<HTMLInputElement>(null);
   const searchId = useId();
   const categoryNav = useRef<HTMLElement>(null);
@@ -90,12 +91,13 @@ export function TemplateGallery({
     const collection = favoritesOnly
       ? templates.filter((template) => savedIds.has(template.id))
       : templates;
+    const webCollection = collection.filter(template => template.format !== "image");
     return [
-      { id: "all", name: "Barchasi", count: collection.length },
+      { id: "all", name: "Barchasi", count: webCollection.length },
       ...categories
         .map((category) => ({
           ...category,
-          count: collection.filter((template) =>
+          count: webCollection.filter((template) =>
             template.categoryIds.includes(category.id),
           ).length,
         }))
@@ -106,9 +108,9 @@ export function TemplateGallery({
     const filtered = (
       featured
         ? templates
-        : orderCatalogTemplates(templates, renderedCategoryId)
+        : orderCatalogTemplates(templates, format === "image" ? "all" : renderedCategoryId)
     ).filter((template) =>
-      (format === "all" || (template.format ?? "web") === format) && matchesTemplateSearch(template, categories, searchQuery),
+      (featured || (template.format ?? "web") === format) && matchesTemplateSearch(template, categories, searchQuery),
     );
     return favoritesOnly
       ? filtered
@@ -136,7 +138,7 @@ export function TemplateGallery({
   const categoryName =
     availableCategories.find((category) => category.id === renderedCategoryId)
       ?.name ?? "Barchasi";
-  const hasFilters = categoryId !== "all" || searchQuery.trim().length > 0 || format !== "all";
+  const hasFilters = (format === "web" && categoryId !== "all") || searchQuery.trim().length > 0;
   useEffect(() => {
     const nav = categoryNav.current;
     const selected = nav?.querySelector<HTMLElement>('[aria-pressed="true"]');
@@ -172,7 +174,6 @@ export function TemplateGallery({
     selectCategory(next);
   }
   function resetFilters() {
-    setFormat("all");
     setSearchQuery("");
     changeCategory("all");
   }
@@ -236,9 +237,6 @@ export function TemplateGallery({
               </Link>
             </div>
 
-            <div className={galleryStyles.formatFilters} role="group" aria-label="Taklifnoma formati">
-              {([['all', 'Barchasi'], ['web', 'Veb taklifnoma'], ['image', 'Rasm taklifnoma']] as const).map(([value, label]) => <button type="button" key={value} aria-pressed={format === value} onClick={() => setFormat(value)}>{label}</button>)}
-            </div>
             <span
               ref={categoryAnchor}
               className={galleryStyles.filterAnchor}
@@ -246,10 +244,12 @@ export function TemplateGallery({
               aria-hidden="true"
             />
             <div className={galleryStyles.filters} data-catalog-filters>
+              <TemplateFormatSwitch value={format} onChange={setFormat} />
               <div className={galleryStyles.filterTitle}>
                 <h2>Tadbir turi</h2>
               </div>
               <nav
+                hidden={format === "image"}
                 ref={categoryNav}
                 className={galleryStyles.categories}
                 aria-label="Dizayn kategoriyalari"
@@ -281,7 +281,7 @@ export function TemplateGallery({
                     ? "Saralangan dizaynlar"
                     : searchQuery.trim()
                       ? "Qidiruv natijalari"
-                      : renderedCategoryId === "all"
+                      : format === "image" ? "Rasm taklifnomalar" : renderedCategoryId === "all"
                         ? "Barcha dizaynlar"
                         : categoryName}
                 </h2>
@@ -299,7 +299,7 @@ export function TemplateGallery({
               aria-live="polite"
               aria-atomic="true"
             >
-              {categoryName}. {visibleTemplates.length} ta dizayn
+              {format === "image" ? "Rasm taklifnomalar" : categoryName}. {visibleTemplates.length} ta dizayn
               {searchQuery.trim() ? `: ${searchQuery.trim()}` : ""}.
             </p>
           </>
@@ -404,7 +404,7 @@ export function TemplateGallery({
                     )}
                     <span className={cardStyles.caption}>
                       <span className={cardStyles.name}>{template.name}</span>
-                      {template.format === "image" && <span>Rasm · 5:7 · Bepul sinov</span>}
+                      {template.format === "image" && <span>Rasm · 5:7</span>}
                       <span className={cardStyles.description}>
                         {template.description}
                       </span>

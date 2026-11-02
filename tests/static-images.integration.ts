@@ -139,11 +139,17 @@ test("private preview, owned free export, canonical revisions and one-event lock
   );
   const corrected = structuredClone(invitation);
   corrected.content["uz-Latn"].address = "Corrected address";
+  corrected.content["uz-Latn"].hosts = "Unsupported hosts must not be accepted";
+  corrected.content["uz-Latn"].greeting = "Unsupported greeting must not be accepted";
+  corrected.contacts.phoneNumber = "+998901234567";
   delete corrected.imageExportedAt;
   const saved = await request("/api/invitations", { invitation: corrected });
   assert.equal(saved.status, 201);
   invitation = (await saved.json()).invitation;
   assert.equal(invitation.content["uz-Latn"].address, "Corrected address");
+  assert.equal(invitation.content["uz-Latn"].hosts, "");
+  assert.equal(invitation.content["uz-Latn"].greeting, "");
+  assert.equal(invitation.contacts.phoneNumber, "");
   assert.ok(
     invitation.imageExportedAt,
     "Client cannot remove finalization metadata",
