@@ -1,8 +1,26 @@
 .help {
-  background: #f8f6f0;
-  color: #403b32;
-  padding: 112px 0 108px;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: linear-gradient(180deg, var(--bg, #ffffff), #fffcf7);
+  color: #342a22;
+  padding: clamp(90px, 8.7vw, 155px) 0 clamp(80px, 6vw, 110px);
   scroll-margin-top: 80px;
+}
+.helpWaves {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  filter: blur(2px);
+  pointer-events: none;
+  mask-image: linear-gradient(
+    transparent,
+    #000 100px,
+    #000 calc(100% - 80px),
+    transparent
+  );
 }
 .helpInner,
 .footerInner {
@@ -10,9 +28,13 @@
   margin-inline: auto;
 }
 .helpInner {
+  width: min(1720px, calc(100% - 13%));
   display: grid;
-  grid-template-columns: 0.85fr 1.15fr;
-  gap: clamp(48px, 8vw, 128px);
+  grid-template-columns: 0.94fr 1.06fr;
+  gap: clamp(48px, 4.8vw, 86px);
+}
+.introduction {
+  padding-top: 26px;
 }
 .eyebrow {
   display: block;
@@ -22,73 +44,102 @@
   line-height: 1.8;
 }
 .introduction .eyebrow {
-  color: #85684a;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: #8b7967;
+  font-size: clamp(10px, 0.95vw, 17px);
+}
+.introduction .eyebrow::after {
+  content: "";
+  width: clamp(70px, 12vw, 212px);
+  height: 1px;
+  background: #ded5c8;
 }
 .introduction h2 {
-  font-size: clamp(44px, 4.3vw, 64px);
+  font-size: clamp(44px, 5.5vw, 98px);
   line-height: 1.06;
-  letter-spacing: -1.6px;
-  margin: 25px 0 23px;
+  letter-spacing: -0.04em;
+  margin: 34px 0 30px;
 }
 .introduction h2 em {
   font-weight: inherit;
-  color: #85574f;
+  font-style: normal;
+  color: #995f4b;
 }
 .introduction > p {
-  max-width: 305px;
-  font-size: 13px;
-  line-height: 1.95;
-  color: #777064;
+  max-width: 600px;
+  font-family: var(--font-display);
+  font-size: clamp(21px, 1.7vw, 30px);
+  line-height: 1.4;
+  margin: 0;
 }
 .note {
   display: flex;
   align-items: center;
-  gap: 17px;
-  margin-top: 48px;
-  padding-top: 27px;
+  gap: 24px;
+  margin-top: 54px;
+  padding-top: 34px;
   border-top: 1px solid #dcd5c8;
-  max-width: 300px;
+  width: fit-content;
+  max-width: 100%;
 }
-.note svg {
-  color: #987a55;
+.note > svg {
+  color: #544131;
   flex-shrink: 0;
 }
 .note span {
-  font-size: 11px;
+  border-left: 1px solid #9e8876;
+  padding-left: 22px;
+  font-size: clamp(12px, 0.95vw, 17px);
   line-height: 1.9;
-  color: #777064;
+  color: #826c5b;
+}
+.note span svg {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 10px;
+}
+.note:hover span {
+  color: #342a22;
+}
+.note:focus-visible {
+  outline: 2px solid #85574f;
+  outline-offset: 6px;
 }
 .questions {
-  border-top: 1px solid #c9beab;
+  border-top: 1px solid #ded7cb;
 }
 .questions details {
   border-bottom: 1px solid #ded7cb;
 }
 .questions summary {
   display: grid;
-  grid-template-columns: 24px 1fr 32px;
+  grid-template-columns: 34px 1fr clamp(40px, 3.1vw, 56px);
   align-items: center;
-  gap: 16px;
-  padding: 23px 0;
+  gap: 18px;
+  padding: 14px 0;
+  min-height: clamp(74px, 5.1vw, 90px);
   cursor: pointer;
   list-style: none;
-  font-size: 14px;
-  line-height: 1.7;
+  font-family: var(--font-display);
+  font-size: clamp(20px, 1.65vw, 30px);
+  line-height: 1.25;
 }
 .questions summary::-webkit-details-marker {
   display: none;
 }
 .number {
   color: #948571;
-  font-size: 10px;
-  letter-spacing: 1px;
+  font-family: var(--font-body);
+  font-size: clamp(12px, 1.1vw, 20px);
   font-variant-numeric: tabular-nums;
 }
 .toggle {
   display: grid;
   place-items: center;
-  width: 32px;
-  height: 32px;
+  width: clamp(40px, 3.1vw, 56px);
+  height: clamp(40px, 3.1vw, 56px);
   border: 1px solid #ded5c6;
   border-radius: 50%;
   transition:
@@ -111,11 +162,11 @@
   border-radius: 2px;
 }
 .answer {
-  padding: 0 48px 24px 40px;
+  padding: 0 64px 24px 52px;
 }
 .answer p {
   margin: 0;
-  font-size: 13px;
+  font-size: 14px;
   line-height: 2;
   color: #777064;
 }
@@ -137,16 +188,16 @@
   display: flex;
   flex-wrap: wrap;
   gap: 5px 10px;
-  margin: 23px 0 0;
-  font-size: 10px;
+  margin: 32px 0 0;
+  font-size: clamp(13px, 1.1vw, 20px);
   color: #817566;
   line-height: 2;
 }
 .afterword a {
   display: inline-flex;
-  gap: 5px;
+  gap: 14px;
   align-items: center;
-  color: #765046;
+  color: #342a22;
   text-decoration: underline;
   text-underline-offset: 4px;
 }
@@ -154,43 +205,81 @@
   background: #392b29;
   color: #f4ecdd;
 }
+.cta {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: #fffcf7;
+  color: #342a22;
+}
+.ctaWaves {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  filter: blur(2px);
+  pointer-events: none;
+}
 .invitation {
+  width: min(1720px, calc(100% - 16.4%));
+  min-height: clamp(420px, 33.35vw, 683px);
+  margin-inline: auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 40px;
-  padding: 73px 0 66px;
-  border-bottom: 1px solid #65504a;
+  gap: 48px;
+  padding-block: 90px;
 }
-.footer .eyebrow {
-  color: #c7b29b;
+.invitation .eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: #8b7967;
+  font-size: clamp(10px, 0.95vw, 19px);
+  letter-spacing: 0.26em;
+}
+.invitation .eyebrow::after {
+  content: "";
+  width: clamp(60px, 7vw, 144px);
+  height: 1px;
+  background: #b9a693;
 }
 .invitation h2 {
-  font-size: clamp(38px, 4vw, 60px);
-  line-height: 1.08;
-  letter-spacing: -1px;
-  margin: 21px 0 0;
-}
-.invitation h2 em {
-  color: #d8b89e;
-  font-weight: inherit;
+  font-size: clamp(48px, 5vw, 102px);
+  line-height: 0.98;
+  letter-spacing: -0.035em;
+  margin: 30px 0 0;
 }
 .start {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: space-between;
-  gap: 28px;
-  border: 1px solid #b99a7d;
-  border-radius: 50px;
-  padding: 19px 25px;
-  font-size: 12px;
+  flex-shrink: 0;
+  gap: clamp(24px, 2vw, 42px);
+  border: 1px solid #dacbbb;
+  border-radius: 999px;
+  padding: clamp(20px, 1.7vw, 34px) clamp(24px, 2vw, 42px);
+  font-size: clamp(12px, 1.17vw, 24px);
+  font-weight: 500;
+  line-height: 1.4;
+  margin-top: 20px;
   transition:
     background 250ms,
-    color 250ms;
+    border-color 250ms;
+}
+.start svg {
+  flex-shrink: 0;
+  width: clamp(20px, 1.5vw, 30px);
+  height: clamp(20px, 1.5vw, 30px);
 }
 .start:hover {
-  background: #efdfca;
-  color: #392b29;
+  background: #f2eadf;
+  border-color: #b9a693;
+}
+.start:focus-visible {
+  outline: 2px solid #85574f;
+  outline-offset: 5px;
 }
 .footerMiddle {
   display: grid;
@@ -277,16 +366,26 @@
 @media (max-width: 900px) {
   .helpInner {
     gap: 45px;
-    grid-template-columns: 0.85fr 1.15fr;
+    grid-template-columns: 1fr;
+  }
+  .introduction h2 {
+    font-size: clamp(52px, 7vw, 70px);
   }
   .helpInner,
   .footerInner {
     width: calc(100% - 56px);
   }
   .invitation {
+    width: calc(100% - 56px);
     align-items: flex-start;
     flex-direction: column;
     gap: 30px;
+  }
+  .invitation h2 {
+    font-size: clamp(48px, 7.2vw, 65px);
+  }
+  .start {
+    margin-top: 0;
   }
   .footerMiddle {
     grid-template-columns: 1.25fr 1fr 1fr;
@@ -316,44 +415,71 @@
     gap: 32px;
   }
   .introduction h2 {
-    font-size: 46px;
+    font-size: clamp(40px, 10.5vw, 58px);
     margin-block: 19px;
   }
   .introduction > p {
     max-width: 320px;
-    font-size: 12px;
+    font-size: 22px;
   }
   .note {
-    display: none;
+    margin-top: 28px;
+    padding-top: 24px;
+    gap: 16px;
+  }
+  .note > svg {
+    width: 32px;
+  }
+  .note span {
+    padding-left: 16px;
   }
   .questions summary {
-    grid-template-columns: 20px 1fr 29px;
-    gap: 9px;
-    font-size: 13px;
+    grid-template-columns: 20px 1fr 36px;
+    gap: 10px;
+    font-size: 22px;
     padding: 19px 0;
   }
   .toggle {
-    width: 29px;
-    height: 29px;
+    width: 36px;
+    height: 36px;
+  }
+  .toggle svg {
+    width: 23px;
+    height: 23px;
   }
   .answer {
     padding: 0 27px 22px 29px;
   }
   .answer p {
-    font-size: 12px;
+    font-size: 14px;
   }
   .afterword {
-    font-size: 10px;
+    font-size: 14px;
   }
   .invitation {
-    padding: 52px 0 39px;
+    width: calc(100% - 40px);
+    min-height: 410px;
+    justify-content: center;
+    padding-block: 72px;
+    gap: 32px;
+  }
+  .invitation .eyebrow {
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    gap: 12px;
+  }
+  .invitation .eyebrow::after {
+    width: 48px;
   }
   .invitation h2 {
-    font-size: clamp(35px, 8.8vw, 49px);
+    font-size: clamp(36px, 8.7vw, 52px);
+    line-height: 1.05;
+    margin-top: 24px;
   }
   .start {
-    padding: 16px 20px;
-    font-size: 11px;
+    padding: 18px 23px;
+    font-size: 13px;
+    gap: 28px;
   }
   .footerMiddle {
     grid-template-columns: 1fr 1fr;
@@ -387,6 +513,7 @@
 }
 @media (prefers-reduced-motion: reduce) {
   .help *,
+  .cta *,
   .footer *,
   .questions details::details-content {
     transition: none;

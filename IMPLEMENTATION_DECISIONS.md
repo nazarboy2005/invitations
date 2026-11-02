@@ -1,5 +1,30 @@
 # Implementation decisions
 
+## Landing folded paper sizing (2026-11-02)
+
+- User requested smaller papers in the four-column horizontal laptop layout
+  under “Bir taklif. Bir go‘zal hikoya.” Reduce paper width and height by 20%
+  above the existing 700px mobile breakpoint; retain mobile sizing and spacing.
+
+## Landing closing CTA (2026-11-02)
+
+- User requested the supplied reference: warm ivory background with soft layered
+  waves, a large upright serif headline, small spaced eyebrow with a rule, and
+  an outlined pill link to template selection. Keep it a separate section from
+  the dark footer and adapt the layout for phones.
+- Recommendation implemented: retain Help → CTA → footer, answering questions
+  before the final selection prompt. Placement was a recommendation requested
+  by the user, not an independently confirmed requirement.
+- User follow-up: blend Help into its neighboring sections by changing Help
+  only; preserve the CTA. Replace Help's solid contrasting fill with a gradual
+  transition from the paper gallery's page background to the CTA's warm ivory.
+- Latest Help reference: large upright serif heading and question labels, warm
+  terracotta second heading line, soft ivory waves, numbered ruled accordion
+  rows with outlined circular plus controls, all initially closed. Use the
+  reference intro and headset contact prompt linked to the existing contact
+  destination; retain the template link below the questions. Preserve the
+  surrounding background blend and leave the CTA unchanged.
+
 ## Brand identity (2026-11-02)
 
 - User confirmed the permanent brand is Fotiha and the purchased domain is

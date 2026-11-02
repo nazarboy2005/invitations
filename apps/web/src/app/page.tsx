@@ -16,7 +16,7 @@ import { WhyUs } from "@/components/why-us";
 import { selectFeaturedTemplates } from "@/modules/catalog/featured-templates";
 import { PaperShowcase } from "@/components/paper-showcase";
 import { InvitationSteps } from "@/components/invitation-steps";
-import { HomeHelp, HomeFooter } from "@/components/home-ending";
+import { HomeHelp, HomeCta, HomeFooter } from "@/components/home-ending";
 
 export const dynamic = "force-dynamic";
 
@@ -110,6 +110,7 @@ export default async function Home() {
         </InvitationSteps>
 
         <HomeHelp />
+        <HomeCta />
       </main>
 
       <HomeFooter />

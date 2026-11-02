@@ -152,6 +152,12 @@
 .section[data-paper-mode="animated"] .paper[data-rendered] .printCaption {
   opacity: 0;
 }
+@media (min-width: 701px) {
+  .paper {
+    width: 80%;
+    margin-inline: auto;
+  }
+}
 @media (max-width: 700px) {
   .section {
     padding: 45px 0;
