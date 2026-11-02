@@ -2555,7 +2555,7 @@ export function Studio({
                           nameInput={<Field label="Joy nomi">
                           <PlaceSearch value={pulauData.secondaryEvent.venueName} locale={locale} label="Qo‘shimcha tadbir joyi"
                             confirmed={hasVenuePoint({ latitude: pulauData.secondaryEvent.latitude ?? null, longitude: pulauData.secondaryEvent.longitude ?? null })}
-                            onChange={value => updatePulauData({ secondaryEvent: { ...pulauData.secondaryEvent, venueName: value, address: "", mapUrl: "", placeUri: undefined, latitude: null, longitude: null } })}
+                            onChange={venueName => updatePulauData({ secondaryEvent: { ...pulauData.secondaryEvent, venueName } })}
                             onSelect={place => updatePulauData({ secondaryEvent: { ...pulauData.secondaryEvent, venueName: place.name, address: place.address, mapUrl: place.mapUrl, placeUri: place.placeUri, latitude: place.latitude, longitude: place.longitude } })} />
                         </Field>}
                           name={pulauData.secondaryEvent.venueName} locale={locale}
@@ -2603,11 +2603,7 @@ export function Studio({
                     value={content.venueName}
                     locale={locale}
                     confirmed={hasVenuePoint(invitation.venue)}
-                    onChange={(value) => setInvitation(current => current ? {
-                      ...current,
-                      venue: { latitude: null, longitude: null, mapUrl: "" },
-                      content: { ...current.content, [locale]: { ...getContent(current, locale), venueName: value, address: "" } },
-                    } : current)}
+                    onChange={(venueName) => updateContent({ venueName })}
                     onSelect={(place) => setInvitation(current => current ? {
                       ...current,
                       venue: { latitude: place.latitude, longitude: place.longitude, mapUrl: place.mapUrl, placeUri: place.placeUri },

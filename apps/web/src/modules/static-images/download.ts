@@ -1,4 +1,5 @@
 import type { Invitation, Locale } from "@taklifnoma/contracts";
+import { invitationImageFilename } from "./filename";
 export async function downloadInvitationImage(
   invitation: Invitation,
   locale: Locale,
@@ -19,7 +20,12 @@ export async function downloadInvitationImage(
   const url = URL.createObjectURL(await response.blob());
   const link = document.createElement("a");
   link.href = url;
-  link.download = `fotiha-${locale}.png`;
+  const encodedName = response.headers
+    .get("Content-Disposition")
+    ?.match(/filename\*=UTF-8''([^;]+)/i)?.[1];
+  link.download = encodedName
+    ? decodeURIComponent(encodedName)
+    : invitationImageFilename(invitation, locale);
   document.body.append(link);
   link.click();
   link.remove();

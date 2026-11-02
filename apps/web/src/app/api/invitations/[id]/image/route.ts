@@ -4,6 +4,7 @@ import { authenticatedUser } from "@/server/invitations";
 import { verifySameOrigin } from "@/server/auth";
 import { apiError, privateHeaders, readJson } from "@/server/api";
 import { downloadStaticImage, staticImageLimit } from "@/server/static-images";
+import { imageAttachmentHeader } from "@/modules/static-images/filename";
 export const runtime = "nodejs";
 export const maxDuration = 60;
 export async function POST(
@@ -18,7 +19,7 @@ export async function POST(
     const { revision, locale } = z
       .object({ revision: z.number().int().positive(), locale: localeSchema })
       .parse(await readJson(request));
-    const { bytes, exportedAt } = await downloadStaticImage(
+    const { bytes, exportedAt, filename } = await downloadStaticImage(
       id,
       revision,
       locale,
@@ -28,7 +29,7 @@ export async function POST(
       headers: {
         ...privateHeaders,
         "Content-Type": "image/png",
-        "Content-Disposition": `attachment; filename="fotiha-${id}-${locale}.png"`,
+        "Content-Disposition": imageAttachmentHeader(filename),
         "X-Image-Exported-At": exportedAt,
         "X-Content-Type-Options": "nosniff",
       },

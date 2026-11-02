@@ -20,6 +20,12 @@
 
 ## Static image invitations (2026-11-03)
 
+- Follow-up: make both catalog detail popups compact, especially image designs,
+  preserving their artwork-left/details-right arrangement and artwork ratios.
+- PNG downloads use the creator's groom/bride names as the filename, preserving
+  Unicode spelling and sanitizing filesystem/header-unsafe characters.
+- Studio uses one time picker with scrolling hour/minute wheels instead of
+  separate dropdowns, including event and optional program times.
 - User requested a plan before implementation for downloadable static invitation
   templates: supplied or generated artwork, with creator inputs placed in defined
   positions. Show these templates in Templates, Studio and Taklifnomalarim.
@@ -196,7 +202,13 @@
   uses Russian; otherwise select a supported viewer browser language, then
   timezone fallback, without GPS/IP lookup.
   External Yandex Maps links continue to request Uzbek.
-  Name/address replacement clears the old location; landmark notes do not.
+  Follow-up correction (2026-11-03): editing the venue name alone preserves the
+  selected link, coordinates, identity and address, even while new search results
+  appear. Only explicitly selecting another result replaces that destination.
+  A pasted link preserves the authored name; a differing provider name remains
+  an optional suggestion, never a save/download requirement. This also applies
+  to secondary events. Address replacement still clears the old location;
+  landmark notes do not.
 - All invitation maps use the shared Yandex JavaScript API renderer and the same
   saved destination as guest links. Preserve each template's map composition.
   The map itself is the only navigation action: tapping it opens Yandex Maps

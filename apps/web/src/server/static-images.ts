@@ -11,6 +11,7 @@ import { ApiError } from "./api";
 import { getOwnedInvitation } from "./invitations";
 import { assertPublishable } from "./publication";
 import { renderStaticImage } from "./static-image-renderer";
+import { invitationImageFilename } from "@/modules/static-images/filename";
 
 export async function staticImageLimit(
   request: Request,
@@ -95,5 +96,5 @@ export async function downloadStaticImage(
       await tx`INSERT INTO invitation_audit_log(invitation_id,actor_id,action,previous_values,new_values) VALUES(${id},${owner.id},'image_finalized_free',${tx.json({ revision })},${tx.json({ revision, locale, exportedAt })})`;
     } else exportedAt = current.imageExportedAt;
   });
-  return { bytes, exportedAt: exportedAt! };
+  return { bytes, exportedAt: exportedAt!, filename: invitationImageFilename(invitation, locale) };
 }

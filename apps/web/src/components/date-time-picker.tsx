@@ -8,7 +8,7 @@ import {
   Clock3,
   X,
 } from "lucide-react";
-import { SoftSelect } from "./soft-select";
+import { TimeWheel } from "./time-wheel";
 import styles from "./date-time-picker.module.css";
 
 const months = [
@@ -26,14 +26,6 @@ const months = [
   "Dekabr",
 ];
 const weekdays = ["Du", "Se", "Ch", "Pa", "Ju", "Sh", "Ya"];
-const hours = Array.from({ length: 24 }, (_, hour) => ({
-  value: String(hour).padStart(2, "0"),
-  label: String(hour).padStart(2, "0"),
-}));
-const minutes = Array.from({ length: 12 }, (_, index) => ({
-  value: String(index * 5).padStart(2, "0"),
-  label: String(index * 5).padStart(2, "0"),
-}));
 const pad = (value: number) => String(value).padStart(2, "0");
 const toDateValue = (date: Date) =>
   `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`;
@@ -81,18 +73,14 @@ export function DateTimePicker({
   }, [open]);
 
   function selectDateTime(date: string, nextHour: string, nextMinute: string) {
+    nextHour ||= "00";
+    nextMinute ||= "00";
     setSelectedDate(date);
     setHour(nextHour);
     setMinute(nextMinute);
     if (date && nextHour && nextMinute)
       onChange(`${date}T${nextHour}:${nextMinute}`);
   }
-
-  const minuteOptions = useMemo(() => {
-    if (!minute || minutes.some((option) => option.value === minute))
-      return minutes;
-    return [{ value: minute, label: minute }, ...minutes];
-  }, [minute]);
 
   const days = useMemo(() => {
     const offset = (visibleMonth.getDay() + 6) % 7;
@@ -241,29 +229,13 @@ export function DateTimePicker({
                   <Clock3 size={16} />
                   <span>Vaqtni tanlang</span>
                 </div>
-                <div className={styles.timeSelects}>
-                  <SoftSelect
-                    label="Soat"
-                    value={hour}
-                    placeholder="Soat"
-                    options={hours}
-                    menuPlacement="aboveOnMobile"
-                    onChange={(nextHour) =>
-                      selectDateTime(selectedDate, nextHour, minute)
-                    }
-                  />
-                  <span className={styles.timeSeparator}>:</span>
-                  <SoftSelect
-                    label="Daqiqa"
-                    value={minute}
-                    placeholder="Daqiqa"
-                    options={minuteOptions}
-                    menuPlacement="aboveOnMobile"
-                    onChange={(nextMinute) =>
-                      selectDateTime(selectedDate, hour, nextMinute)
-                    }
-                  />
-                </div>
+                <TimeWheel
+                  hour={hour}
+                  minute={minute}
+                  onChange={(nextHour, nextMinute) =>
+                    selectDateTime(selectedDate, nextHour, nextMinute)
+                  }
+                />
               </div>
             </div>
             <div className={styles.footer}>
@@ -298,55 +270,81 @@ export function TimePicker({
   disabled?: boolean;
   compact?: boolean;
 }) {
-  const [hour, setHour] = useState(value.slice(0, 2));
-  const [minute, setMinute] = useState(value.slice(3, 5));
+  const [open, setOpen] = useState(false);
+  const dialog = useRef<HTMLDialogElement>(null);
 
   useEffect(() => {
-    setHour(value.slice(0, 2));
-    setMinute(value.slice(3, 5));
-  }, [value]);
-
-  const minuteOptions = useMemo(() => {
-    if (!minute || minutes.some((option) => option.value === minute))
-      return minutes;
-    return [{ value: minute, label: minute }, ...minutes];
-  }, [minute]);
+    if (open && !disabled) dialog.current?.showModal();
+    else dialog.current?.close();
+  }, [open, disabled]);
 
   return (
     <div
       className={`${styles.timeOnly}${compact ? ` ${styles.timeOnlyCompact}` : ""}`}
     >
-      {!compact && <Clock3 size={16} aria-hidden="true" />}
-      <SoftSelect
-        label="Soat"
-        value={hour}
-        placeholder="Soat"
+      <button
+        type="button"
+        className={styles.trigger}
         disabled={disabled}
-        showSelectedCheck={false}
-        showChevron={!compact}
-        options={hours.map(({ value: optionValue }) => ({
-          value: optionValue,
-          label: optionValue,
-        }))}
-        onChange={(nextHour) => {
-          setHour(nextHour);
-          onChange(`${nextHour}:${minute || "00"}`);
+        aria-label="Vaqtni tanlang"
+        aria-haspopup="dialog"
+        aria-expanded={open}
+        onClick={() => setOpen(true)}
+      >
+        <span className={value ? styles.value : styles.placeholder}>
+          {value || "Vaqt"}
+        </span>
+        <Clock3 size={compact ? 13 : 16} aria-hidden="true" />
+      </button>
+      <dialog
+        ref={dialog}
+        className={styles.popover}
+        aria-label="Vaqtni tanlash"
+        onClose={() => setOpen(false)}
+        onClick={(event) => {
+          if (event.target !== event.currentTarget) return;
+          const bounds = event.currentTarget.getBoundingClientRect();
+          if (
+            event.clientX < bounds.left ||
+            event.clientX > bounds.right ||
+            event.clientY < bounds.top ||
+            event.clientY > bounds.bottom
+          )
+            setOpen(false);
         }}
-      />
-      <span className={styles.timeSeparator}>:</span>
-      <SoftSelect
-        label="Daqiqa"
-        value={minute}
-        placeholder="Daqiqa"
-        disabled={disabled}
-        showSelectedCheck={false}
-        showChevron={!compact}
-        options={minuteOptions}
-        onChange={(nextMinute) => {
-          setMinute(nextMinute);
-          onChange(`${hour || "00"}:${nextMinute}`);
-        }}
-      />
+      >
+        {open && (
+          <>
+            <div className={styles.dialogHeader}>
+              <strong>Vaqtni tanlang</strong>
+              <button
+                type="button"
+                aria-label="Yopish"
+                onClick={() => setOpen(false)}
+              >
+                <X size={18} />
+              </button>
+            </div>
+            <div className={styles.pickerBody}>
+              <TimeWheel
+                hour={value.slice(0, 2)}
+                minute={value.slice(3, 5)}
+                onChange={(hour, minute) => onChange(`${hour}:${minute}`)}
+              />
+            </div>
+            <div className={styles.footer}>
+              <span>{value || "Vaqtni belgilang"}</span>
+              <button
+                type="button"
+                className={styles.apply}
+                onClick={() => setOpen(false)}
+              >
+                Tayyor
+              </button>
+            </div>
+          </>
+        )}
+      </dialog>
     </div>
   );
 }

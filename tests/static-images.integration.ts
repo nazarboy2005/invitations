@@ -110,6 +110,7 @@ test("private preview, owned free export, canonical revisions and one-event lock
       .then((s) => s.slice(0, 200)),
   );
   assert.match(final.headers.get("content-disposition")!, /attachment.*\.png/);
+  assert.equal(decodeURIComponent(final.headers.get("content-disposition")!.split("UTF-8''")[1]), "Nodir test-Madina test.png");
   const png = await sharp(Buffer.from(await final.arrayBuffer())).metadata();
   assert.equal(png.width, 1500);
   assert.equal(png.height, 2100);

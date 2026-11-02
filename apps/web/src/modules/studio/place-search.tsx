@@ -23,13 +23,14 @@ export function PlaceSearch({ value, locale, onChange, onSelect, confirmed = fal
   const [active, setActive] = useState(-1);
   const [open, setOpen] = useState(false);
   const selectedValue = useRef(confirmed ? value : "");
+  const editedValue = useRef<string | null>(null);
   const generation = useRef(0);
   const selectionRequest = useRef<AbortController | null>(null);
 
   useEffect(() => {
     const version = ++generation.current;
     selectionRequest.current?.abort();
-    if (confirmed || value === selectedValue.current || value.trim().length < 2) {
+    if ((confirmed && value !== editedValue.current) || value === selectedValue.current || value.trim().length < 2) {
       setPlaces([]); setStatus(""); setLoading(false); return;
     }
     const controller = new AbortController();
@@ -64,6 +65,7 @@ export function PlaceSearch({ value, locale, onChange, onSelect, confirmed = fal
       if (version !== generation.current || controller.signal.aborted) return;
       if (!response.ok) throw new Error(data.error?.message || "Joy ma’lumotlari olinmadi. Qayta tanlang.");
       selectedValue.current = data.name;
+      editedValue.current = null;
       setStatus(""); onSelect(data as SelectedPlace);
     } catch (error) {
       if (!controller.signal.aborted && version === generation.current) setStatus(error instanceof Error ? error.message : "Joy ma’lumotlari olinmadi.");
@@ -76,7 +78,7 @@ export function PlaceSearch({ value, locale, onChange, onSelect, confirmed = fal
         aria-controls={`${id}-list`} aria-activedescendant={open && active >= 0 ? `${id}-${active}` : undefined}
         aria-describedby={`${id}-status`} value={value} maxLength={300} autoComplete="off" placeholder="Masalan, Versal, Toshkent"
         onFocus={() => setOpen(true)} onBlur={() => setOpen(false)}
-        onChange={event => { generation.current++; selectionRequest.current?.abort(); selectedValue.current = ""; setPlaces([]); setStatus(""); onChange(event.target.value); }}
+        onChange={event => { generation.current++; selectionRequest.current?.abort(); selectedValue.current = ""; editedValue.current = event.target.value; setPlaces([]); setStatus(""); onChange(event.target.value); }}
         onKeyDown={event => {
           if (event.key === "ArrowDown" || event.key === "ArrowUp") {
             event.preventDefault(); setOpen(true);

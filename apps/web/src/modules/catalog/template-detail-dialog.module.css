@@ -42,7 +42,7 @@
   position: relative;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  width: min(1040px, 100%);
+  width: min(760px, 100%);
   margin: auto;
   overflow: hidden;
   border-radius: 26px;
@@ -71,7 +71,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 36px;
+  padding: 24px;
   background: radial-gradient(
     ellipse at 50% 30%,
     var(--accent-soft),
@@ -80,7 +80,7 @@
 }
 .phone {
   position: relative;
-  height: min(500px, 65dvh);
+  height: min(360px, 55dvh);
   aspect-ratio: 406 / 860;
   padding: 7px;
   border: 1px solid #5b5551;
@@ -92,7 +92,7 @@
 }
 .imageCard {
   position: relative;
-  width: 100%;
+  width: min(245px, 100%);
   aspect-ratio: 5/7;
   box-shadow: 0 12px 30px #493e2430;
 }
@@ -132,7 +132,7 @@
 }
 .details {
   align-self: center;
-  padding: 68px 40px 48px;
+  padding: 48px 26px 30px;
   text-align: center;
 }
 .ornament {
@@ -140,7 +140,7 @@
   align-items: center;
   gap: 20px;
   color: var(--primary);
-  margin-bottom: 22px;
+  margin-bottom: 14px;
 }
 .ornament span {
   flex: 1;
@@ -148,7 +148,7 @@
   background: var(--line);
 }
 .eyebrow {
-  margin: 0 0 16px;
+  margin: 0 0 12px;
   font-size: 10px;
   text-transform: uppercase;
   letter-spacing: 1.8px;
@@ -157,7 +157,7 @@
 .details h2 {
   margin: 0 0 14px;
   font-family: var(--font-display);
-  font-size: clamp(36px, 4vw, 58px);
+  font-size: clamp(30px, 3vw, 40px);
   font-weight: 500;
   line-height: 1.05;
   letter-spacing: -1px;
@@ -175,8 +175,8 @@
   justify-content: center;
   gap: 12px;
   width: fit-content;
-  margin: 24px auto 30px;
-  padding: 12px 18px;
+  margin: 18px auto 20px;
+  padding: 10px 14px;
   border-radius: 999px;
   background: var(--surface-soft);
   font-size: 14px;
@@ -197,7 +197,7 @@
   align-items: center;
   justify-content: center;
   gap: 9px;
-  min-height: 56px;
+  min-height: 46px;
   border: 1px solid var(--line-strong);
   border-radius: 999px;
   font-size: 13px;
@@ -284,13 +284,13 @@
     right: 16px;
   }
   .deviceArea {
-    padding: 28px 20px 18px;
+    padding: 28px 20px 12px;
   }
   .imageCard {
-    width: min(230px, 65vw);
+    width: min(150px, 44vw);
   }
   .phone {
-    height: clamp(180px, 34dvh, 310px);
+    height: clamp(150px, 24dvh, 205px);
     padding: 5px;
     border-radius: 22px;
   }
@@ -302,21 +302,24 @@
     height: 6px;
   }
   .details {
-    padding: 22px 24px 24px;
+    padding: 12px 24px 16px;
+  }
+  .ornament {
+    margin-bottom: 10px;
   }
   .eyebrow {
     margin-bottom: 9px;
     font-size: 9px;
   }
   .details h2 {
-    font-size: 30px;
+    font-size: 28px;
     margin-bottom: 9px;
   }
   .description {
     font-size: 12px;
   }
   .price {
-    margin: 16px auto;
+    margin: 12px auto;
     font-size: 14px;
   }
   .actions {
