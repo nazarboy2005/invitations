@@ -122,8 +122,8 @@ export function TemplateDetailDialog({
         </button>
         <div className={styles.deviceArea}>
           <div
-            className={styles.phone}
-            aria-label={`${template.name}: telefon ko‘rinishi`}
+            className={template.format === "image" ? styles.imageCard : styles.phone}
+            aria-label={`${template.name}: ${template.format === "image" ? "5:7 rasm" : "telefon ko‘rinishi"}`}
           >
             <div className={styles.screen}>
               {/* The poster remains visible while the one real renderer loads. */}
@@ -135,7 +135,7 @@ export function TemplateDetailDialog({
               />
               {!opening && <TemplateCardPreview templateId={template.id} />}
             </div>
-            <span className={styles.notch} aria-hidden="true" />
+            {template.format !== "image" && <span className={styles.notch} aria-hidden="true" />}
           </div>
         </div>
         <div className={styles.details}>
@@ -147,7 +147,7 @@ export function TemplateDetailDialog({
           <p id={descriptionId} className={styles.description}>
             {template.description}
           </p>
-          <p className={styles.price}>{formatPrice(template.priceMinor)}</p>
+          <p className={styles.price}>{template.format === "image" ? "Rasm · 5:7 · Bepul sinov" : formatPrice(template.priceMinor)}</p>
           <FavoritesStatus />
           {!template.published && <p>Faqat ko‘rib chiqish uchun</p>}
           <div className={styles.actions}>

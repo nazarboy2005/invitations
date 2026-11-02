@@ -41,6 +41,7 @@ export function StudioTemplatePicker({
   const dialog = useRef<HTMLDialogElement>(null);
   const changeButton = useRef<HTMLButtonElement>(null);
   const [query, setQuery] = useState("");
+  const [format, setFormat] = useState<"all" | "web" | "image">("all");
   const [limit, setLimit] = useState(12);
   const [open, setOpen] = useState(false);
   const inlineGrid = useRef<HTMLDivElement>(null);
@@ -53,7 +54,7 @@ export function StudioTemplatePicker({
   const selected = templates.find(
     (template) => template.id === invitation.templateId,
   );
-  const orderedTemplates = favoritesFirst(templates, favorites);
+  const orderedTemplates = favoritesFirst(templates, favorites).filter(t => format === "all" || (t.format ?? "web") === format);
   const inlineTemplates = orderedTemplates.slice(0, 6);
   const filtered = orderedTemplates.filter((template) =>
     matchesTemplateSearch(
@@ -115,6 +116,7 @@ export function StudioTemplatePicker({
           aria-pressed={template.id === invitation.templateId}
           className={`${cardStyles.art} ${styles.templateSelect}`}
           data-card-art
+          data-format={template.format}
           onClick={() => choose(template)}
         >
           <img
@@ -137,7 +139,7 @@ export function StudioTemplatePicker({
               {studioTemplateDescription(template)}
             </span>
             <span className={styles.templatePrice}>
-              {formatPrice(template.priceMinor)}
+              {template.format === "image" ? "Rasm · 5:7 · Bepul sinov" : formatPrice(template.priceMinor)}
             </span>
           </span>
         </button>
@@ -163,13 +165,14 @@ export function StudioTemplatePicker({
   }
   return (
     <div className={styles.designPicker}>
+      <div className={styles.imageFormatFilters} role="group" aria-label="Taklifnoma formati">{([['all','Barchasi'],['web','Veb'],['image','Rasm · 5:7']] as const).map(([value,label]) => <button type="button" key={value} aria-pressed={format === value} onClick={() => { setFormat(value); setLimit(12); }}>{label}</button>)}</div>
       {selected ? (
         <div className={styles.designSummary}>
           <img src={templatePoster(selected)} alt="" />
           <div>
             <small>Tanlangan dizayn</small>
             <strong>{selected.name}</strong>
-            <span>{formatPrice(selected.priceMinor)}</span>
+            <span>{selected.format === "image" ? "Rasm · 5:7 · Bepul sinov" : formatPrice(selected.priceMinor)}</span>
           </div>
           <button
             ref={changeButton}

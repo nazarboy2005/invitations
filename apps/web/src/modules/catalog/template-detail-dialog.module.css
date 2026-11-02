@@ -86,6 +86,9 @@
     0 20px 36px -12px rgb(var(--shadow-color) / 40%),
     inset 0 0 0 2px #827b71;
 }
+.imageCard { position:relative;width:100%;aspect-ratio:5/7;box-shadow:0 12px 30px #493e2430; }
+.imageCard .screen { border-radius:0; }
+.imageCard .poster { object-fit:contain; }
 .screen {
   position: relative;
   width: 100%;

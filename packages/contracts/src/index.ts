@@ -229,6 +229,8 @@ export const invitationSchema = z
   .object({
     version: z.literal(1),
     revision: z.number().int().min(1).default(1),
+    /** Server-assigned first static export; no public webpage is published. */
+    imageExportedAt: z.string().datetime().optional(),
     id: z.string().min(1).max(100),
     templateId: invitationTemplateIdSchema,
     templateData: z.record(z.string(), z.custom<JsonValue>(isJsonValue)).default({}).superRefine((data, ctx) => {
@@ -433,6 +435,8 @@ export const TEMPLATE_CATEGORIES: TemplateCategory[] = [
   { id: "yangi-uy", name: "Yangi uy", position: 6 },
 ];
 export type TemplateDefinition = {
+  format?: "web" | "image";
+  imageSize?: { width: number; height: number };
   capabilities: TemplateCapabilities;
   id: z.infer<typeof templateIdSchema>;
   name: string;
@@ -449,6 +453,22 @@ export type TemplateDefinition = {
   published: boolean;
 };
 export const TEMPLATES: TemplateDefinition[] = [
+  {
+    id: "ivory-rose-card",
+    format: "image",
+    imageSize: { width: 1500, height: 2100 },
+    capabilities: templateCapabilities("ivory-rose-card"),
+    name: "Oq atirgul",
+    description: "Oq atirgullar, zaytun novdalari va nafis qog‘oz. 5:7 rasm taklifnoma — bepul sinov.",
+    previewImage: "/templates/ivory-rose-card/preview.webp",
+    previewEventType: "wedding",
+    categoryIds: ["wedding"],
+    supportedEventTypes: ["wedding", "fotiha"],
+    priceMinor: 0,
+    currency: "UZS",
+    accent: "#77754e",
+    published: true,
+  },
   {
     id: "wedivo-pulau-sehati",
     capabilities: templateCapabilities("wedivo-pulau-sehati"),

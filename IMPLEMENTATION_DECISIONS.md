@@ -1,5 +1,38 @@
 # Implementation decisions
 
+## Static image invitations (2026-11-03)
+
+- User requested a plan before implementation for downloadable static invitation
+  templates: supplied or generated artwork, with creator inputs placed in defined
+  positions. Show these templates in Templates, Studio and Taklifnomalarim.
+- User wants previews to prevent ordinary Copy Image/download, and final downloads
+  to be flattened images without editable text/layers, to discourage later reuse.
+  These are protection goals, not a guarantee: visible previews can be captured,
+  and downloaded raster images can still be altered with image-editing tools.
+- User approved 5:7 portrait and implementation of one generated image template
+  first, with mapped inputs. Style must be mature/elegant, never childish or sci-fi.
+- User requires free testing now: do not add payment/Click for static invitations
+  until the user confirms the result and requests that follow-up. Existing web
+  payment behavior remains unchanged. Do not place static designs on the landing
+  page; expose them only through Templates, Studio and Taklifnomalarim.
+- Implementation choices: a distinct image format alongside
+  web invitations; 1500 x 2100 PNG export; render reduced-resolution
+  previews with a baked-in watermark on the server; keep clean artwork/export
+  private until authorized download; use fixed typed text slots and one rendering
+  definition for preview/export. See `docs/STATIC_INVITATIONS_PLAN.md`.
+- Apply the existing one-event policy at first successful download in place of
+  web publication: lock identity/design/date and set the event-day editing deadline;
+  allow practical corrections and repeat downloads without payment. This is the
+  implementation mapping of the existing policy, not a newly approved price rule.
+- Open: future static prices/Click activation, multi-language download bundles and
+  retention policy. No external application deployment is authorized.
+- Completed the first design as Oq atirgul (`ivory-rose-card`), wedding/fotiha
+  compatibility and wedding category. Scoped migrations 0207/0208 register/publish
+  it at zero price. Four-locale rendering/long names/overflow, 42 regression checks,
+  real owned save/download/reopen/correction/re-download, authorization/identity
+  locks, mobile/desktop UI and production packaging pass. Evidence is in
+  `docs/templates/ivory-rose-card-verification`. No Click or external deployment.
+
 ## Landing folded paper sizing (2026-11-02)
 
 - User requested smaller papers in the four-column horizontal laptop layout

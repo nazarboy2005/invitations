@@ -1,4 +1,6 @@
 "use client";
+import { StaticImagePreview } from "@/modules/static-images/static-image-preview";
+import { downloadInvitationImage } from "@/modules/static-images/download";
 import { FavoritesLink, FavoritesStatus } from "@/modules/favorites/favorite-button";
 
 import { useEffect, useId, useRef, useState } from "react";
@@ -75,6 +77,17 @@ function InvitationCard({
   const menuButton = useRef<HTMLButtonElement>(null);
   const content = getContent(invitation);
   const template = templateById(invitation.templateId);
+  const isImage = template?.format === "image";
+  const [imageBusy, setImageBusy] = useState(false);
+  const [imageError, setImageError] = useState("");
+  const [imageLocale, setImageLocale] = useState(invitation.defaultLocale);
+  const [imageExported, setImageExported] = useState(!!invitation.imageExportedAt);
+  async function downloadImage() {
+    setImageBusy(true); setImageError("");
+    try { await downloadInvitationImage(invitation, imageLocale); setImageExported(true); }
+    catch (e) { setImageError(e instanceof Error ? e.message : "Rasm yuklab olinmadi."); }
+    finally { setImageBusy(false); }
+  }
   const names =
     content.people.filter(Boolean).join(" & ") || "Yangi taklifnoma";
   const date =
@@ -119,7 +132,7 @@ function InvitationCard({
       }}
     >
       <div className={styles.cardCover}>
-        <div className={styles.cardArt}>
+        <div className={styles.cardArt} data-format={template?.format}>
           <Link
             href={onOpenActivity ? activityUrl : editUrl}
             className={styles.coverLink}
@@ -129,7 +142,7 @@ function InvitationCard({
                 : `${names}: taklifnomani tahrirlash`
             }
           />
-          {template ? (
+          {isImage ? <StaticImagePreview invitation={invitation} compact /> : template ? (
             <InvitationThumbnail
               invitation={invitation}
               cacheScope={cacheScope}
@@ -145,7 +158,7 @@ function InvitationCard({
           className={styles.cardStatus}
           data-published={invitation.status === "published"}
         >
-          {local
+          {isImage && (imageExported || invitation.imageExportedAt) ? "Rasm tayyor" : local
             ? accountSaved
               ? "Saqlanmagan o‘zgarishlar"
               : "Qoralama"
@@ -157,7 +170,7 @@ function InvitationCard({
       <div className={styles.cardBody}>
         <h2 className={styles.invitationName}>{names}</h2>
         <div className={styles.cardName}>
-          <strong>{template?.name ?? "Dizayn tanlanmagan"}</strong>
+          <strong>{template?.name ?? "Dizayn tanlanmagan"}{isImage ? " · Rasm 5:7" : ""}</strong>
           <span>
             {invitation.enabledLocales.length > 1
               ? `${invitation.enabledLocales.length} til`
@@ -188,7 +201,10 @@ function InvitationCard({
           </div>
         )}
         <div className={styles.cardActions}>
-          {invitation.status === "published" && invitation.slug ? (
+          {isImage && accountSaved && !local ? <div className={styles.imageDownloads}>
+            {invitation.enabledLocales.length > 1 && <select aria-label="Yuklab olish tili" value={imageLocale} onChange={e => setImageLocale(e.target.value as typeof imageLocale)}>{invitation.enabledLocales.map(l => <option key={l} value={l}>{LANGUAGE_NAMES[l]}</option>)}</select>}
+            <button type="button" className={styles.imageDownloadButton} onClick={() => void downloadImage()} disabled={imageBusy}>{imageBusy ? "Tayyorlanmoqda…" : "PNG yuklab olish"}</button>
+          </div> : invitation.status === "published" && invitation.slug ? (
             <Link
               className={styles.viewAction}
               href={
@@ -246,7 +262,7 @@ function InvitationCard({
             <Link href={editUrl}>
               <Pencil size={15} /> Tahrirlash
             </Link>
-            {accountSaved && invitation.status === "draft" && (
+            {accountSaved && invitation.status === "draft" && !isImage && (
               <Link href="/payment/return">To‘lov holati</Link>
             )}
             {onDelete && (
@@ -260,6 +276,7 @@ function InvitationCard({
             )}
           </div>
         </div>
+        {imageError && <p role="alert" className={styles.imageDownloadError}>{imageError} <Link href={editUrl}>Studioda tekshirish</Link></p>}
       </div>
     </article>
   );

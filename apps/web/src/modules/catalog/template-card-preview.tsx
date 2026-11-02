@@ -1,6 +1,6 @@
 "use client";
 
-import { publicTemplateId } from "@taklifnoma/contracts";
+import { publicTemplateId, templateById } from "@taklifnoma/contracts";
 
 import { useEffect, useRef, useState } from "react";
 import styles from "@/app/home.module.css";
@@ -64,6 +64,7 @@ export function TemplateCardPreview({ templateId }: { templateId: string }) {
     return () => observer.disconnect();
   }, []);
 
+  if (templateById(templateId)?.format === "image") return null;
   return (
     <span
       ref={host}

@@ -22,6 +22,8 @@
   pointer-events: none;
   cursor: inherit;
 }
+.art[data-format="image"]{aspect-ratio:5/7}
+.art[data-format="image"] .poster{object-fit:contain}
 .poster {
   position: absolute;
   inset: 0;

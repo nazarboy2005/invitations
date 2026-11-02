@@ -50,6 +50,8 @@ export async function saveInvitation(
   if (invitation.templateId && !templateById(invitation.templateId))
     throw new ApiError(409, "TEMPLATE_UNAVAILABLE", "Bu dizayn hozir mavjud emas.");
   invitation = normalizeInvitation(invitation);
+  // Export finalization metadata is assigned only by the owned download service.
+  invitation = { ...invitation, imageExportedAt: undefined };
   assertManagedImages(invitation);
   const sql = getDb();
   let saved = invitation;
@@ -119,6 +121,7 @@ export async function saveInvitation(
       }
       saved = {
         ...invitation,
+        imageExportedAt: previous.imageExportedAt,
         slug: rows[0].slug ?? previous.slug,
         revision: previous.revision + 1,
       };

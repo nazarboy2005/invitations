@@ -810,3 +810,10 @@
     transform: none;
   }
 }
+.cardArt[data-format="image"]{aspect-ratio:5/7}
+.imageDownloads{display:flex;align-items:center;flex-wrap:wrap;gap:6px}
+.imageDownloads select{border:1px solid var(--line);border-radius:6px;background:transparent;padding:5px;color:var(--ink);font:inherit;font-size:11px}
+.imageDownloadButton{border:0;background:transparent;color:#66704e;font:inherit;font-size:12px;font-weight:600;padding:4px 0;cursor:pointer}
+.imageDownloadButton:disabled{opacity:.6;cursor:wait}
+.imageDownloadError{font-size:12px;color:#87394b;line-height:1.5}
+.imageDownloadError a{text-decoration:underline}

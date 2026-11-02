@@ -6,6 +6,7 @@ const common: TemplateCapabilities = {"maps": true, "music": true, "wishes": tru
 const source = (overrides: Partial<TemplateCapabilities> = {}): TemplateCapabilities => ({ ...common, ...overrides });
 
 export const TEMPLATE_CAPABILITIES: Record<string, TemplateCapabilities> = {
+  "ivory-rose-card": source({ maps: false, music: false, wishes: false, gallery: 0, program: false, dressCode: false, story: 0, gift: false, receipts: false, phone: true, telegram: false, rsvp: "none", people: 2, artists: 0, rsvpDeadline: false }),
   "wedivo-pulau-sehati": source({"gift": false, "receipts": false, "people": 2}),
   "oltin-darvoza-ortidagi-baxt": source({"dressCode": false, "story": 0, "receipts": false, "people": 2}),
   "gulli-darvoza": source({"dressCode": false, "story": 0, "receipts": false, "people": 2}),

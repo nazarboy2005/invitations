@@ -77,6 +77,7 @@ export function TemplateGallery({
   const { categoryId, renderedCategoryId, selectCategory } =
     useCategoryTransition(results, initialCategory);
   const [searchQuery, setSearchQuery] = useState("");
+  const [format, setFormat] = useState<"all" | "web" | "image">("all");
   const searchInput = useRef<HTMLInputElement>(null);
   const searchId = useId();
   const categoryNav = useRef<HTMLElement>(null);
@@ -107,7 +108,7 @@ export function TemplateGallery({
         ? templates
         : orderCatalogTemplates(templates, renderedCategoryId)
     ).filter((template) =>
-      matchesTemplateSearch(template, categories, searchQuery),
+      (format === "all" || (template.format ?? "web") === format) && matchesTemplateSearch(template, categories, searchQuery),
     );
     return favoritesOnly
       ? filtered
@@ -125,6 +126,7 @@ export function TemplateGallery({
     featured,
     favoritesOnly,
     savedIds,
+    format,
   ]);
   const playback = useCardPlayback(
     grid,
@@ -134,7 +136,7 @@ export function TemplateGallery({
   const categoryName =
     availableCategories.find((category) => category.id === renderedCategoryId)
       ?.name ?? "Barchasi";
-  const hasFilters = categoryId !== "all" || searchQuery.trim().length > 0;
+  const hasFilters = categoryId !== "all" || searchQuery.trim().length > 0 || format !== "all";
   useEffect(() => {
     const nav = categoryNav.current;
     const selected = nav?.querySelector<HTMLElement>('[aria-pressed="true"]');
@@ -170,6 +172,7 @@ export function TemplateGallery({
     selectCategory(next);
   }
   function resetFilters() {
+    setFormat("all");
     setSearchQuery("");
     changeCategory("all");
   }
@@ -233,6 +236,9 @@ export function TemplateGallery({
               </Link>
             </div>
 
+            <div className={galleryStyles.formatFilters} role="group" aria-label="Taklifnoma formati">
+              {([['all', 'Barchasi'], ['web', 'Veb taklifnoma'], ['image', 'Rasm taklifnoma']] as const).map(([value, label]) => <button type="button" key={value} aria-pressed={format === value} onClick={() => setFormat(value)}>{label}</button>)}
+            </div>
             <span
               ref={categoryAnchor}
               className={galleryStyles.filterAnchor}
@@ -354,6 +360,7 @@ export function TemplateGallery({
                     type="button"
                     className={cardStyles.art}
                     data-card-art
+                    data-format={template.format}
                     onPointerEnter={(event) => {
                       if (event.pointerType !== "touch")
                         playback.start(template.id);
@@ -397,6 +404,7 @@ export function TemplateGallery({
                     )}
                     <span className={cardStyles.caption}>
                       <span className={cardStyles.name}>{template.name}</span>
+                      {template.format === "image" && <span>Rasm · 5:7 · Bepul sinov</span>}
                       <span className={cardStyles.description}>
                         {template.description}
                       </span>

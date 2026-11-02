@@ -11,7 +11,7 @@ test("every catalog design explicitly declares supported slots, including maps",
   for (const template of TEMPLATES) {
     const c = templateCapabilities(template.id);
     assert.equal(c, template.capabilities, template.id);
-    assert.equal(c.maps, true, template.id);
+    assert.equal(c.maps, template.format !== "image", template.id);
     assert.ok(c.people >= 1 && c.people <= 20, template.id);
     assert.ok(!c.receipts || c.gift, template.id);
   }

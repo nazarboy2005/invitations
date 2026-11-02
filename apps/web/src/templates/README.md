@@ -1,5 +1,12 @@
 # Invitation templates
 
+**Oq atirgul** (`ivory-rose-card`) is the first original generated static image
+template: 5:7 artwork, mapped fields, local fonts, a protected preview and a clean
+1500 × 2100 PNG download. It is free for testing and appears only in Templates,
+Studio and Taklifnomalarim. See its package README and
+`docs/templates/ivory-rose-card-verification`; migrations 0207/0208 register/publish
+it. Static image export uses the same layout as preview and has no public webpage.
+
 Latest Uzbek luxury integrations: Taklifla **Tungi Saroy** and **Tovus** use
 complete captured source packages, the shared invitation contract and the same
 renderer across preview/studio/public display. Registration/publication is in

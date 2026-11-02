@@ -144,6 +144,8 @@ export async function publishInvitationInTransaction(
     throw new ApiError(404, "NOT_FOUND", "Taklifnoma topilmadi.");
   const storedInvitation = invitationSchema.parse(row.data);
   const previous = normalizeInvitation(storedInvitation);
+  if (templateById(previous.templateId)?.format === "image")
+    throw new ApiError(400, "IMAGE_DOWNLOAD_ONLY", "Rasm taklifnomani PNG sifatida yuklab oling.");
   // A repeated successful request must not allocate a code or extend the deadline.
   if (row.status === "published" && row.slug)
     return {

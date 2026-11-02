@@ -1,5 +1,7 @@
 "use client";
 import { BRAND_NAME } from "@/lib/brand";
+import { StaticImagePreview } from "@/modules/static-images/static-image-preview";
+import { downloadInvitationImage } from "@/modules/static-images/download";
 
 import { refreshFavorites } from "@/modules/favorites/favorites-store";
 
@@ -410,7 +412,7 @@ export function Studio({
   const [paidInvitationId, setPaidInvitationId] = useState("");
   const [publishIssues, setPublishIssues] = useState<PublicationIssue[]>([]);
   const [publicUrl, setPublicUrl] = useState<string>();
-  const pendingAction = useRef<"save" | "publish">("save");
+  const pendingAction = useRef<"save" | "publish" | "download">("save");
   const operationInFlight = useRef(false);
   const [auth, setAuth] = useState<{
     loginUrl: string;
@@ -842,6 +844,7 @@ export function Studio({
   const selectedTemplate = templates.find(
     (item) => item.id === invitation.templateId,
   );
+  const isImage = templateById(invitation.templateId)?.format === "image";
   const singleCelebrant = capabilities.people === 1 ||
     invitation.eventType === "sunnat-toyi" ||
     invitation.eventType === "beshik-toyi" ||
@@ -919,7 +922,7 @@ export function Studio({
           : browserSnapshot === currentSnapshot
             ? ""
             : "Saqlanmoqda…";
-  const identityLocked = invitation.status !== "draft";
+  const identityLocked = invitation.status !== "draft" || !!invitation.imageExportedAt;
   function update(patch: Partial<Invitation>) {
     setInvitation((current) => (current ? { ...current, ...patch } : current));
   }
@@ -1065,11 +1068,11 @@ export function Studio({
   async function cloudSave() {
     await saveOrPublish("save");
   }
-  async function saveOrPublish(action: "save" | "publish") {
+  async function saveOrPublish(action: "save" | "publish" | "download") {
     const current = invitationRef.current;
     if (!current || operationInFlight.current || uploading) return;
     setPublishIssues([]);
-    if (action === "publish") {
+    if (action === "publish" || action === "download") {
       const issues = publicationIssues(current);
       if (issues.length) {
         setPublishIssues(issues);
@@ -1083,7 +1086,7 @@ export function Studio({
     pendingAction.current = action;
     operationInFlight.current = true;
     setBusy(true);
-    setPublishing(action === "publish");
+    setPublishing(action !== "save");
     setError("");
     setNotice("");
     try {
@@ -1200,6 +1203,16 @@ export function Studio({
             ? `/admin/invitations/${current.id}/edit`
             : `/studio/${current.id}`,
         );
+      }
+      if (action === "download") {
+        const saved = invitationSchema.parse(result.invitation);
+        const imageExportedAt = await downloadInvitationImage(saved, locale, studioFetch);
+        const finalized = { ...saved, imageExportedAt };
+        lastCloudSnapshot.current = JSON.stringify(finalized);
+        setInvitation(finalized);
+        if (!adminContext) saveBrowserDraft(finalized, false, ownerId.current);
+        setNotice("PNG rasm yuklab olindi. Taklifnomangiz “Taklifnomalarim”da saqlangan.");
+        return;
       }
       if (action === "publish") {
         const saved = invitationSchema.parse(result.invitation);
@@ -1538,7 +1551,7 @@ export function Studio({
                 }
               }}
             >
-              <Eye size={14} /> Mehmon sifatida ko‘rish
+              <Eye size={14} /> {isImage ? "Rasmni ko‘rish" : "Mehmon sifatida ko‘rish"}
             </Link>
           )}
         </div>
@@ -1556,7 +1569,7 @@ export function Studio({
             <Save size={16} />
             {busy
               ? publishing
-                ? "Nashr qilinmoqda…"
+                ? isImage ? "Rasm tayyorlanmoqda…" : "Nashr qilinmoqda…"
                 : "Saqlanmoqda…"
               : "Saqlash"}
           </button>
@@ -1853,7 +1866,7 @@ export function Studio({
                 </div>
                 {identityLocked && (
                   <p className={styles.help}>
-                    Nashrdan keyin asosiy ismlar va tadbir turi o‘zgarmaydi.
+                    {isImage ? "Birinchi yuklab olishdan keyin" : "Nashrdan keyin"} asosiy ismlar va tadbir turi o‘zgarmaydi.
                     Tuzatish uchun administratorga murojaat qiling.
                   </p>
                 )}
@@ -2572,6 +2585,12 @@ export function Studio({
                   </p>
                 )}
                 </section>
+                {isImage && <section className={styles.scheduleCard} aria-labelledby="image-venue-title">
+                  <div className={styles.scheduleHeading}><span><MapPin size={19} /></span><div><h2 id="image-venue-title">Manzil</h2><p>Rasmda ko‘rinadigan joy va manzil.</p></div></div>
+                  <Field label="To‘yxona yoki joy nomi"><input value={content.venueName} maxLength={300} onChange={e => updateContent({ venueName: e.target.value })} /></Field>
+                  <Field label="Manzil"><textarea value={content.address} maxLength={1000} rows={2} onChange={e => updateContent({ address: e.target.value })} /></Field>
+                  <Field label="Mo‘ljal"><input value={content.landmark} maxLength={1000} onChange={e => updateContent({ landmark: e.target.value })} /></Field>
+                </section>}
                 {capabilities.maps && (<section className={styles.scheduleCard} aria-labelledby="studio-venue-title">
                 <div className={styles.scheduleHeading}>
                   <span><MapPin size={19} /></span>
@@ -2936,8 +2955,7 @@ export function Studio({
                 />
                 {identityLocked && (
                   <p className={styles.help}>
-                    Nashr qilingan taklifnomada dizaynni almashtirish hozircha
-                    mavjud emas.
+                    {isImage ? "Yuklab olingan rasm taklifnomada dizaynni almashtirib bo‘lmaydi." : "Nashr qilingan taklifnomada dizaynni almashtirish hozircha mavjud emas."}
                   </p>
                 )}
               </div>
@@ -3580,9 +3598,9 @@ export function Studio({
                         </dd>
                       </div>
                       <div>
-                        <dt>Nashr narxi</dt>
+                        <dt>{isImage ? "Rasm formati" : "Nashr narxi"}</dt>
                         <dd>
-                          {paidInvitationId === invitation.id
+                          {isImage ? "PNG · 1500 × 2100 · Bepul sinov" : paidInvitationId === invitation.id
                             ? "To‘lov qabul qilingan"
                             : publishingMode === "paid"
                               ? selectedTemplate
@@ -3595,7 +3613,11 @@ export function Studio({
                     {readiness.length > 0 && (
                       <ReadinessChecklist issues={readiness} onSelect={goToIssue} />
                     )}
-                    <ul className={styles.publicationTerms}>
+                    {isImage ? <ul className={styles.publicationTerms}>
+                      <li>5:7 rasm, tanlangan tilda, suv belgisiz PNG sifatida yuklab olinadi. Hozir bepul sinov.</li>
+                      <li>Birinchi yuklab olishdan keyin ismlar, mezbon, tadbir turi, sana va dizayn qulflanadi.</li>
+                      <li>Matn va manzilni tadbir kuni tugaguncha tahrirlash va rasmni qayta yuklab olish mumkin.</li>
+                    </ul> : <ul className={styles.publicationTerms}>
                       {paidInvitationId === invitation.id ? (
                         <li>
                           To‘lov qabul qilingan. Nashrni yakunlash uchun qayta
@@ -3618,12 +3640,12 @@ export function Studio({
                         Matn, manzil va boshqa tafsilotlarni tadbir kuni
                         tugaguncha tahrirlashingiz mumkin.
                       </li>
-                    </ul>
+                    </ul>}
                   </div>
                   <button
                     type="button"
                     className={styles.saveButton}
-                    onClick={() => void saveOrPublish("publish")}
+                    onClick={() => void saveOrPublish(isImage ? "download" : "publish")}
                     disabled={
                       busy || uploading || !!auth || readiness.length > 0
                     }
@@ -3631,7 +3653,7 @@ export function Studio({
                     <Send size={16} />
                     {publishing
                       ? "Tayyorlanmoqda…"
-                      : paidInvitationId === invitation.id
+                      : isImage ? "PNG yuklab olish · Bepul" : paidInvitationId === invitation.id
                         ? "Nashrni yakunlash"
                         : publishingMode === "paid"
                           ? `To‘lash va nashr qilish${selectedTemplate ? ` · ${formatPrice(selectedTemplate.priceMinor)}` : ""}`
@@ -3666,8 +3688,8 @@ export function Studio({
           className={`${styles.previewPanel} ${!mobilePreview ? styles.previewMobileHidden : ""}`}
           aria-label="Taklifnoma ko‘rinishi"
         >
-          <div className={styles.realPreview} ref={previewHost} key={invitation.templateId}>
-            {invitation.templateId === "oltin-darvoza-ortidagi-baxt" ? (
+          <div className={styles.realPreview} ref={previewHost} key={invitation.templateId} data-format={isImage ? "image" : undefined}>
+            {isImage ? <StaticImagePreview invitation={previewInvitation} locale={locale} /> : invitation.templateId === "oltin-darvoza-ortidagi-baxt" ? (
               <OltinDarvozaInvitation
                 invitation={previewInvitation}
                 invitationId={invitation.id}

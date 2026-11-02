@@ -1,4 +1,5 @@
 "use client";
+import { StaticImageFullPreview } from "@/modules/static-images/static-image-preview";
 import { isTemplateDocument } from "../../lib/public-asset";
 import { FavoriteButton, FavoritesStatus } from "@/modules/favorites/favorite-button";
 
@@ -296,8 +297,9 @@ export function FullTemplatePreview({
     };
   }, [cardPreview, invitation]);
 
+  const controlsVisible = showControls || template.format === "image";
   return (
-    <main className={styles.fullPreview} ref={previewRef} data-card-preview={cardPreview || undefined}>
+    <main className={styles.fullPreview} ref={previewRef} data-card-preview={cardPreview || undefined} data-format={template.format}>
       {invitation && !cardPreview && !posterCapture && (
         <InvitationMusicAutoplay
           musicUrl={
@@ -310,10 +312,11 @@ export function FullTemplatePreview({
         />
       )}
       {!cardPreview && !posterCapture && <nav
+        style={template.format === "image" ? { opacity: 1, visibility: "visible", transform: "none", pointerEvents: "auto" } : undefined}
         className={`${styles.previewControls} ${["taklifla-sharlar","taklifla-yulduzli-tun","taklifla-terracotta"].includes(template.id) ? styles.leftLanguageClearance : ""} ${showControls ? styles.controlsVisible : ""} ${["taklifla-terracotta", "taklifla-yulduzli-tun", "taklifla-sharlar", "taklifla-sakura-guli", "taklifla-qogoz-ertagi", "taklifla-parilar-ertagi", "taklifla-osmon", "taklifla-oltin-yol", "taklifla-toglar-bagrida", "taklifla-zarrin-gullar", "taklifla-gulbog", "taklifla-ertak", "taklifla-fayzli-xonadon", "taklifla-yubiley-sahifasi", "taklifla-barakali", "taklifla-tungi-saroy", "taklifla-tovus"].includes(template.id) ? styles.templateLanguageClearance : ""}`}
         aria-label="Dizayn amallari"
-        aria-hidden={!showControls}
-        inert={!showControls}
+        aria-hidden={!controlsVisible}
+        inert={!controlsVisible}
       >
         <Link
           className={styles.backButton}
@@ -340,6 +343,8 @@ export function FullTemplatePreview({
       </nav>}
       {!invitation ? (
         <div className={styles.loading}>Dizayn ochilmoqda…</div>
+      ) : template.format === "image" ? (
+        <StaticImageFullPreview invitation={invitation} />
       ) : template.id === "oltin-darvoza-ortidagi-baxt" ? (
         <OltinDarvozaInvitation invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} sampleWishes={catalogPreview} silentPlayback={silentPlayback} />
       ) : template.id === "gulli-darvoza" ? (

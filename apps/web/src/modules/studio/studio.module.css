@@ -3171,3 +3171,8 @@
 .venueSelection { animation: venue-reveal .25s ease-out; }
 @keyframes venue-reveal { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
 @media (prefers-reduced-motion: reduce) { .venueSelection { animation: none; } }
+.imageFormatFilters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.imageFormatFilters button{border:1px solid var(--line);border-radius:999px;padding:8px 14px;background:transparent;color:var(--ink);font:inherit;font-size:12px;cursor:pointer}
+.imageFormatFilters button[aria-pressed="true"]{background:#65704f;color:white;border-color:#65704f}
+.realPreview[data-format="image"]{display:grid;place-items:center;background:#e9e3d8;padding:20px}
+.realPreview[data-format="image"]>div{height:auto;max-width:100%;aspect-ratio:5/7;margin:auto}
