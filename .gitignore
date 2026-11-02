@@ -1,16 +1,58 @@
+# Dependencies and package-manager caches
 node_modules/
+.pnpm-store/
+
+# Build output and caches
 .next*/
+/out/
+/dist/
+/build/
+/apps/web/out/
+.cache/
+.turbo/
+*.tsbuildinfo
+
+# Local environment and deployment settings
 .env
 .env.*
 !.env.example
 !.env.*.example
+.vercel/
+
+# Private runtime data and generated test output
 .data/
 coverage/
+.nyc_output/
 test-results/
 playwright-report/
-*.tsbuildinfo
+playwright/.cache/
+blob-report/
+
+# Logs and diagnostic reports
+*.log
+*.log.*
+report.*.json
+
+# Generated public-asset indexes and copies
 apps/web/public/_assets/
 apps/web/src/generated/public-assets.json
 apps/web/src/generated/public-asset-version.json
+
+# Local scratch files
+/tmp/
+/temp/
+/.tmp/
 .tmp-*.png
+
+# Editor and operating-system files
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+._*
+Thumbs.db
+Desktop.ini
+
+# Local reference captures
 Invitations - this folder will be removed from production/
