@@ -1,4 +1,5 @@
 import { LANGUAGE_NAMES, type Invitation, type Locale } from "./index";
+import { secondaryCeremony } from "./policies";
 
 export type PublicationIssue = {
   path: string;
@@ -38,6 +39,12 @@ export function publicationIssues(invitation: Invitation): PublicationIssue[] {
   const minimumPeople = ["wedding", "fotiha"].includes(invitation.eventType)
     ? 2
     : 1;
+  const secondary = secondaryCeremony(invitation);
+  if (secondary.enabled) {
+    const date = new Date(`${secondary.date}T00:00:00Z`);
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(secondary.date) || !Number.isFinite(date.getTime()) || date.toISOString().slice(0,10) !== secondary.date)
+      add("templateData.wedivo-pulau-sehati.secondaryEvent.date", "Ikkinchi marosim sanasini to‘liq va to‘g‘ri kiriting.", 2);
+  }
   for (const locale of invitation.enabledLocales) {
     const content = invitation.content[locale];
     const label = LANGUAGE_NAMES[locale];

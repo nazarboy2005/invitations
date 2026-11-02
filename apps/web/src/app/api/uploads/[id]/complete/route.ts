@@ -1,3 +1,4 @@
+import { templateById } from "@taklifnoma/contracts";
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { getDb } from "@taklifnoma/database";
@@ -58,11 +59,12 @@ export async function POST(
             "Fayl rad etilgan. Qayta yuklang.",
           );
         const [invitation] =
-          await tx`SELECT owner_id,status,identity_locked_at,edit_deadline_at FROM invitations WHERE id=${asset.draft_id} FOR SHARE`;
+          await tx`SELECT owner_id,status,template_id,identity_locked_at,edit_deadline_at FROM invitations WHERE id=${asset.draft_id} FOR SHARE`;
         if (
           invitation &&
           (invitation.owner_id !== user.id ||
             invitation.status === "deleted" ||
+            templateById(invitation.template_id)?.format === "image" ||
             ((invitation.status === "published" ||
               invitation.identity_locked_at) &&
               (!invitation.edit_deadline_at ||

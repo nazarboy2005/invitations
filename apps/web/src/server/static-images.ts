@@ -92,7 +92,7 @@ export async function downloadStaticImage(
       if (new Date(event.deadline) <= new Date(event.exported_at))
         throw new ApiError(400, "EVENT_ENDED", "Tadbir sanasini tekshiring.");
       exportedAt = new Date(event.exported_at).toISOString();
-      await tx`UPDATE invitations SET data=${tx.json({ ...current, imageExportedAt: exportedAt })},identity_locked_at=COALESCE(identity_locked_at,${event.exported_at}),edit_deadline_at=COALESCE(edit_deadline_at,${event.deadline}),updated_at=now() WHERE id=${id}`;
+      await tx`UPDATE invitations SET data=${tx.json({ ...current, imageExportedAt: exportedAt })},identity_locked_at=COALESCE(identity_locked_at,${event.exported_at}),edit_deadline_at=COALESCE(edit_deadline_at,${event.deadline}),approved_event_date=COALESCE(approved_event_date,${invitation.startsAt.slice(0,10)}),updated_at=now() WHERE id=${id}`;
       await tx`INSERT INTO invitation_audit_log(invitation_id,actor_id,action,previous_values,new_values) VALUES(${id},${owner.id},'image_finalized_free',${tx.json({ revision })},${tx.json({ revision, locale, exportedAt })})`;
     } else exportedAt = current.imageExportedAt;
   });

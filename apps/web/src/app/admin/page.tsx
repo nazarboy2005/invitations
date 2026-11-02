@@ -18,6 +18,8 @@ import {
 } from "@/server/admin-management";
 import { listAdminBroadcasts } from "@/server/admin-broadcasts";
 import { z } from "zod";
+import { AdminChangeRequests } from "@/modules/admin/admin-change-requests";
+import { listInvitationChanges } from "@/server/invitation-changes";
 export const dynamic = "force-dynamic";
 export const metadata = {
   title: "Boshqaruv",
@@ -47,6 +49,7 @@ export default async function AdminPage({
   const view = [
     "users",
     "invitations",
+    "requests",
     "payments",
     "broadcasts",
     "templates",
@@ -64,6 +67,7 @@ export default async function AdminPage({
     throw new Error("Admin catalog unavailable");
   return (
     <AdminShell user={user} view={view}>
+      {view === "requests" && <AdminChangeRequests items={await listInvitationChanges()} />}
       {view === "users" && (
         <AdminUsers data={await listAdminUsers(filters)} filters={filters} />
       )}

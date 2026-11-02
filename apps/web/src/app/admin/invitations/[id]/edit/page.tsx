@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import { requireAdminPage } from "@/server/admin-page";
 import { getAdminInvitationOwner } from "@/server/admin-management";
-import { getOwnedInvitation } from "@/server/invitations";
+import { getOwnedInvitation, getInvitationEditAccess } from "@/server/invitations";
 import { Studio } from "@/modules/studio/studio";
 export const dynamic = "force-dynamic";
 export const metadata = {
@@ -26,6 +26,7 @@ export default async function AdminEditPage({
   return (
     <Studio
       initialInvitation={invitation}
+      initialEditAccess={await getInvitationEditAccess(id, owner.id)}
       adminContext={{ ownerId: owner.id, ownerName: owner.displayName }}
     />
   );

@@ -65,7 +65,8 @@ type AdminAction =
   | "invitation.delete"
   | "invitation.extend_deadline"
   | "invitation.moderate"
-  | "invitation.upload";
+  | "invitation.upload"
+  | "invitation.review_correction";
 
 export async function recordAdminChange(
   tx: TransactionSql,

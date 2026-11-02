@@ -121,6 +121,7 @@ export type AdminInvitation = {
   people: string;
   eventType: string;
   startsAt: string;
+  identityLocked: boolean;
   status: string;
   url: string | null;
   createdAt: string;

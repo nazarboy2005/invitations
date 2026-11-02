@@ -2,6 +2,10 @@
 import { BRAND_NAME } from "@/lib/brand";
 import { StaticImagePreview } from "@/modules/static-images/static-image-preview";
 import { downloadInvitationImage } from "@/modules/static-images/download";
+import { InvitationCorrections } from "./invitation-corrections";
+import { eventTimestamp } from "@/lib/event-date";
+import { editingClosed, eventDay, type InvitationEditAccess } from "@taklifnoma/contracts/policies";
+import { Download } from "lucide-react";
 
 import { refreshFavorites } from "@/modules/favorites/favorites-store";
 
@@ -93,7 +97,7 @@ import { StudioSection } from "./studio-section";
 import { useStudioPreview, type PreviewTarget } from "./use-studio-preview";
 import { SoftSelect } from "@/components/soft-select";
 import { DateTimePicker, TimePicker } from "@/components/date-time-picker";
-import { readBrowserDraft, saveBrowserDraft } from "./draft-storage";
+import { readBrowserDraft, saveBrowserDraft, deleteBrowserDraft } from "./draft-storage";
 import { PlaceSearch } from "./place-search";
 import { VenueLink } from "./venue-link";
 import { AnorInvitation } from "@/templates/anor";
@@ -333,11 +337,13 @@ function Toggle({
   description,
   checked,
   onChange,
+  disabled = false,
 }: {
   title: string;
   description: string;
   checked: boolean;
   onChange: (checked: boolean) => void;
+  disabled?: boolean;
 }) {
   return (
     <label className={styles.toggle}>
@@ -347,6 +353,7 @@ function Toggle({
       </span>
       <input
         type="checkbox"
+        disabled={disabled}
         checked={checked}
         onChange={(event) => onChange(event.target.checked)}
       />
@@ -357,9 +364,11 @@ function Toggle({
 
 export function Studio({
   initialInvitation,
+  initialEditAccess,
   adminContext,
 }: {
   initialInvitation?: Invitation;
+  initialEditAccess?: InvitationEditAccess;
   adminContext?: { ownerId: string; ownerName: string };
 }) {
   const [adminReason, setAdminReason] = useState(
@@ -380,6 +389,24 @@ export function Studio({
     return globalThis.fetch(input, init);
   }
   const [invitation, setInvitationState] = useState<Invitation | null>(null);
+  const [editAccess, setEditAccess] = useState<InvitationEditAccess | null>(initialEditAccess ?? null);
+  const [clockNow, setClockNow] = useState(() => new Date());
+  useEffect(() => {
+    const tick = () => setClockNow(new Date());
+    const timer = window.setInterval(tick, 15000);
+    window.addEventListener("focus", tick);
+    return () => { window.clearInterval(timer); window.removeEventListener("focus", tick); };
+  }, []);
+  useEffect(() => {
+    if (!invitation || (!invitation.imageExportedAt && invitation.status !== "published" && !initialEditAccess?.locked)) return;
+    let active = true;
+    const refresh = () => studioFetch(`/api/invitations/${invitation.id}`, { cache: "no-store" })
+      .then(async response => { if (response.ok) { const data = await response.json(); if (active) setEditAccess(data.editAccess); } })
+      .catch(() => { /* Preserve authoritative metadata on transient errors. */ });
+    void refresh();
+    window.addEventListener("focus", refresh);
+    return () => { active = false; window.removeEventListener("focus", refresh); };
+  }, [invitation?.id, invitation?.status, invitation?.imageExportedAt]);
   const setInvitation = useCallback((action: SetStateAction<Invitation | null>) => {
     setInvitationState((current) => {
       const next = typeof action === "function" ? action(current) : action;
@@ -924,7 +951,9 @@ export function Studio({
           : browserSnapshot === currentSnapshot
             ? ""
             : "Saqlanmoqda…";
-  const identityLocked = invitation.status !== "draft" || !!invitation.imageExportedAt;
+  const identityLocked = invitation.status !== "draft" || !!invitation.imageExportedAt || !!editAccess?.locked;
+  const staticLocked = isImage && identityLocked;
+  const contentExpired = identityLocked && (!editAccess || editingClosed({ ...editAccess, locked: true }, clockNow));
   function update(patch: Partial<Invitation>) {
     setInvitation((current) => (current ? { ...current, ...patch } : current));
   }
@@ -1074,7 +1103,9 @@ export function Studio({
     const current = invitationRef.current;
     if (!current || operationInFlight.current || uploading) return;
     setPublishIssues([]);
-    if (action === "publish" || action === "download") {
+    const repeatSavedDownload = action === "download" && !!current.imageExportedAt &&
+      (contentExpired || JSON.stringify(current) === lastCloudSnapshot.current);
+    if (action === "publish" || (action === "download" && !repeatSavedDownload)) {
       const issues = publicationIssues(current);
       if (issues.length) {
         setPublishIssues(issues);
@@ -1092,6 +1123,14 @@ export function Studio({
     setError("");
     setNotice("");
     try {
+      if (repeatSavedDownload) {
+        const response = await studioFetch(`/api/invitations/${current.id}`, { cache: "no-store" });
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.error?.message || "Taklifnoma yuklanmadi.");
+        await downloadInvitationImage(data.invitation, locale, studioFetch);
+        setNotice("Hisobdagi saqlangan PNG rasm qayta yuklab olindi.");
+        return;
+      }
       const sessionResponse = await studioFetch("/api/auth/session", {
         cache: "no-store",
       });
@@ -1566,7 +1605,7 @@ export function Studio({
           <button
             className={styles.saveButton}
             onClick={cloudSave}
-            disabled={busy || uploading || !!auth}
+            disabled={busy || uploading || !!auth || contentExpired}
           >
             <Save size={16} />
             {busy
@@ -1726,6 +1765,24 @@ export function Studio({
             {invitation.status === "published" && invitation.slug && (
               <PublishedLink slug={invitation.slug} canonicalUrl={publicUrl} />
             )}
+            {identityLocked && <section className={styles.editPolicy} aria-label="Tahrirlash qoidalari">
+              <strong>{contentExpired ? "Tahrirlash muddati tugagan" : isImage ? "Rasm yakunlangan" : "Taklifnoma nashr qilingan"}</strong>
+              <p>{contentExpired ? "Ma’lumotlar faqat o‘qish uchun. Tuzatish so‘rovi ochiq." : isImage ? "Faqat manzil va sana/vaqt tahrirlanadi." : "Amaliy tafsilotlar va shu kundagi vaqt tahrirlanadi."}</p>
+              <details className={styles.policyDetails}><summary>Qoidalar va muddat</summary>
+                {editAccess?.deadlineAt && <small>Tahrirlash muddati: {eventTimestamp(editAccess.deadlineAt, invitation.timezone)} · {invitation.timezone}</small>}
+                <p>{isImage ? "Sana tasdiqlangan kundan kech bo‘lmasligi kerak. Ismlar va matnlar himoyalangan. Oldin yuborilgan PNG fayllar yangilanmaydi." : "Ismlar va asosiy tadbir ma’lumotlari himoyalangan. Sana ko‘chishi va ism tuzatishi uchun so‘rov yuboring."}</p>
+              </details>
+              {isImage && <button type="button" className={styles.secondaryButton} disabled={busy || uploading} onClick={() => void saveOrPublish("download")}><Download size={16} />{contentExpired ? "Saqlangan PNG rasmni yuklab olish" : "PNG rasmni qayta yuklab olish"}</button>}
+              {adminContext && <a href="/admin?view=requests">Tuzatish so‘rovlarini ko‘rib chiqish</a>}
+            </section>}
+            {identityLocked && !adminContext && <InvitationCorrections invitationId={invitation.id} onRefresh={() => {
+              if (currentSnapshot !== lastCloudSnapshot.current && !window.confirm("Saqlanmagan o‘zgarishlar bor. Tasdiqlangan nusxani ochasizmi?")) return;
+              try { deleteBrowserDraft(invitation.id); } catch {
+                setError("Brauzerdagi qoralamani yangilab bo‘lmadi. Qayta urinib ko‘ring.");
+                return;
+              }
+              window.location.reload();
+            }} />}
             {publishIssues.length > 0 && (
               <div className={styles.publicationErrors} role="alert">
                 <strong>Nashr qilishdan oldin to‘ldiring</strong>
@@ -1770,6 +1827,7 @@ export function Studio({
                 </div>
               )}
             </div>
+              <fieldset className={styles.lockedFields} disabled={contentExpired}>
               {section === 1 && !isImage && (
                 <section className={styles.languageSettings} aria-label="Taklifnoma tillari">
                   <div className={styles.languageHeading}><Globe2 size={16} /><strong>Taklifnoma tillari</strong></div>
@@ -1851,6 +1909,7 @@ export function Studio({
                       min={1}
                       max={120}
                       value={invitation.celebrantAge ?? ""}
+                      disabled={identityLocked}
                       onChange={(event) => {
                         const value = event.target.value;
                         update({ celebrantAge: value === "" ? null : Math.min(120, Math.max(1, Number(value))) });
@@ -1873,6 +1932,7 @@ export function Studio({
                   <Field label="Birga taklif etuvchilar">
                     <textarea
                       value={pulauData.coInviters}
+                      disabled={identityLocked}
                       maxLength={1000}
                       rows={2}
                       onChange={(event) =>
@@ -1882,7 +1942,7 @@ export function Studio({
                   </Field>
                 )}
                 </StudioSection>
-                <StudioSection id="studio-wording-title" title="Taklif matni" description="Mehmonlarga aytmoqchi bo‘lgan so‘zlaringiz." icon={FileText}>
+                <StudioSection id="studio-wording-title" title="Taklif matni" description="Mehmonlarga aytmoqchi bo‘lgan so‘zlaringiz." icon={FileText} disabled={staticLocked}>
                 <Field
                   label="Tadbir nomi"
                   hint="Bu matn taklifnomada ko‘rinadi."
@@ -2458,7 +2518,9 @@ export function Studio({
                 <Field label="Tadbir boshlanishi">
                   <DateTimePicker
                     value={invitation.startsAt}
-                    disabled={identityLocked}
+                    disabled={contentExpired}
+                    minDate={identityLocked ? isImage ? eventDay(clockNow, invitation.timezone) : invitation.startsAt.slice(0,10) : undefined}
+                    maxDate={identityLocked ? isImage ? editAccess?.approvedEventDate ?? invitation.startsAt.slice(0,10) : invitation.startsAt.slice(0,10) : undefined}
                     onChange={(startsAt) => update({ startsAt })}
                   />
                 </Field>
@@ -2467,6 +2529,7 @@ export function Studio({
                     <div className={styles.divider} />
                     <Toggle
                       title="Ikkinchi marosim"
+                      disabled={identityLocked}
                       description="Masalan, nikoh va ziyofat uchun alohida vaqt va manzil."
                       checked={pulauData.secondaryEvent.enabled}
                       onChange={(enabled) =>
@@ -2497,6 +2560,7 @@ export function Studio({
                         <Field label="Sana">
                           <input
                             type="date"
+                            disabled={identityLocked}
                             value={pulauData.secondaryEvent.date}
                             onChange={(event) =>
                               updatePulauData({
@@ -2554,8 +2618,7 @@ export function Studio({
                 )}
                 {identityLocked && (
                   <p className={styles.help}>
-                    Sanani ko‘chirish administrator tasdig‘i bilan amalga
-                    oshiriladi.
+                    {isImage ? "Sanani tasdiqlangan kundan kechroqqa ko‘chirish uchun so‘rov yuboring." : "Shu kundagi vaqtni o‘zgartirish mumkin. Boshqa kunga ko‘chirish uchun so‘rov yuboring."}
                   </p>
                 )}
                 </section>
@@ -3030,7 +3093,7 @@ export function Studio({
                       <button
                         className={styles.textButton}
                         disabled={
-                          identityLocked || invitation.artistLineup.length >= 50
+                          invitation.artistLineup.length >= 50
                         }
                         onClick={() =>
                           update({
@@ -3063,7 +3126,6 @@ export function Studio({
                             <input
                               value={artist.name[locale] ?? ""}
                               maxLength={300}
-                              disabled={identityLocked}
                               onChange={(event) =>
                                 update({
                                   artistLineup: invitation.artistLineup.map(
@@ -3086,7 +3148,6 @@ export function Studio({
                             <input
                               value={artist.role[locale] ?? ""}
                               maxLength={300}
-                              disabled={identityLocked}
                               onChange={(event) =>
                                 update({
                                   artistLineup: invitation.artistLineup.map(
@@ -3117,7 +3178,7 @@ export function Studio({
                             <input
                               type="file"
                               accept="image/jpeg,image/png,image/webp"
-                              disabled={uploading || identityLocked}
+                              disabled={uploading}
                               onChange={(event) => {
                                 const file = event.target.files?.[0];
                                 if (file) void upload(file, "image", artist.id);
@@ -3129,7 +3190,6 @@ export function Studio({
                             type="button"
                             className={styles.iconButton}
                             aria-label="San’atkorni olib tashlash"
-                            disabled={identityLocked}
                             onClick={() =>
                               update({
                                 artistLineup: invitation.artistLineup.filter(
@@ -3345,10 +3405,10 @@ export function Studio({
                 {invitation.templateId === "taklifla-oltin-yol" && <div className={styles.formGrid}>{(["arrivalNote","giftNote","contactNote","footerNote"] as const).map(key=><Field key={key} label={`${({arrivalNote:"Kelish haqida",giftNote:"Sovg‘alar haqida izoh",contactNote:"Mas’ul shaxs haqida",footerNote:"Yakuniy izoh"})[key]} · ${LANGUAGE_NAMES[locale]}`}><textarea maxLength={4000} rows={3} value={oltinYolData[key][locale] || ""} onChange={e=>updateOltinNote(key,e.target.value)} /></Field>)}</div>}
                 {invitation.templateId === "taklifla-toglar-bagrida" && <div className={styles.formGrid}>{(["ceremonyTime","celebrationTime"] as const).map(key=><Field key={key} label={key === "ceremonyTime" ? "Marosim vaqti" : "Ziyofat vaqti"}><input maxLength={80} value={mountainData[key]} placeholder="Asosiy tadbir vaqti" onChange={e=>updateMountainTime(key,e.target.value)} /></Field>)}</div>}
                 {invitation.templateId === "taklifla-zarrin-gullar" && <div className={styles.formGrid}>
-                  {(["brideFamily","groomFamily","stayText","footerNote","hashtag"] as const).map(key=><Field key={key} label={`${({brideFamily:"Kelin oilasi",groomFamily:"Kuyov oilasi",stayText:"Turar joy haqida",footerNote:"Yakuniy izoh",hashtag:"Heshteg"})[key]} · ${LANGUAGE_NAMES[locale]}`}><textarea maxLength={key==="hashtag"?100:4000} rows={2} value={key==="hashtag"?zarrinData.hashtag:zarrinData[key][locale] || ""} onChange={e=>updateZarrinField(key,e.target.value)}/></Field>)}
+                  {(["brideFamily","groomFamily","stayText","footerNote","hashtag"] as const).map(key=><Field key={key} label={`${({brideFamily:"Kelin oilasi",groomFamily:"Kuyov oilasi",stayText:"Turar joy haqida",footerNote:"Yakuniy izoh",hashtag:"Heshteg"})[key]} · ${LANGUAGE_NAMES[locale]}`}><textarea maxLength={key==="hashtag"?100:4000} rows={2} disabled={identityLocked && (key==="brideFamily" || key==="groomFamily")} value={key==="hashtag"?zarrinData.hashtag:zarrinData[key][locale] || ""} onChange={e=>updateZarrinField(key,e.target.value)}/></Field>)}
                 </div>}
                 {invitation.templateId === "taklifla-gulbog" && <div className={styles.formGrid}>
-                  {(["brideFamily","reminderTitle","reminderText","footerNote"] as const).map(key=><Field key={key} label={`${({brideFamily:"Kelin oilasi satri",reminderTitle:"Eslatma sarlavhasi",reminderText:"Mehmonlarga eslatma",footerNote:"Yakuniy izoh"})[key]} · ${LANGUAGE_NAMES[locale]}`}><textarea maxLength={key==="reminderTitle"?300:4000} rows={3} value={gulbogData[key][locale] || ""} onChange={e=>updateGulbogField(key,e.target.value)}/></Field>)}
+                  {(["brideFamily","reminderTitle","reminderText","footerNote"] as const).map(key=><Field key={key} label={`${({brideFamily:"Kelin oilasi satri",reminderTitle:"Eslatma sarlavhasi",reminderText:"Mehmonlarga eslatma",footerNote:"Yakuniy izoh"})[key]} · ${LANGUAGE_NAMES[locale]}`}><textarea maxLength={key==="reminderTitle"?300:4000} rows={3} disabled={identityLocked && key==="brideFamily"} value={gulbogData[key][locale] || ""} onChange={e=>updateGulbogField(key,e.target.value)}/></Field>)}
                 </div>}
                 {invitation.templateId === "taklifla-fayzli-xonadon" && <div className={styles.formGrid}>
                   {xonadonData.menu.map((item,index)=><div key={item.id}>
@@ -3377,7 +3437,6 @@ export function Studio({
                       value={muhrliMaktubData.flowersNote?.[locale] ?? ""}
                       maxLength={1000}
                       rows={3}
-                      disabled={identityLocked}
                       placeholder="Masalan, gullar o‘rniga samimiy tilaklaringizni qoldiring."
                       onChange={(event) =>
                         updateMuhrliMaktubFlowersNote(event.target.value)
@@ -3497,7 +3556,7 @@ export function Studio({
               </div>
             )}
             {section === sections.length - 1 &&
-              invitation.status === "draft" && (
+              invitation.status === "draft" && !invitation.imageExportedAt && (
                 <section className={styles.publishPanel}>
                   <div>
                     <h2>
@@ -3589,8 +3648,8 @@ export function Studio({
                     )}
                     {isImage ? <ul className={styles.publicationTerms}>
                       <li>5:7 rasm suv belgisiz PNG sifatida yuklab olinadi.</li>
-                      <li>Birinchi yuklab olishdan keyin ismlar, tadbir turi, sana va dizayn qulflanadi.</li>
-                      <li>Matn va manzilni tadbir kuni tugaguncha tahrirlash va rasmni qayta yuklab olish mumkin.</li>
+                      <li>Birinchi yuklab olishdan keyin ismlar, matnlar, tadbir turi va dizayn qulflanadi.</li>
+                      <li>Faqat manzil va sana/vaqt tahrirlanadi; sana tasdiqlangan kundan kech bo‘la olmaydi. Tahrirlash muddati o‘zgarmaydi.</li>
                     </ul> : <ul className={styles.publicationTerms}>
                       {paidInvitationId === invitation.id ? (
                         <li>
@@ -3607,8 +3666,7 @@ export function Studio({
                         )
                       )}
                       <li>
-                        Nashrdan so‘ng ismlar, mezbon, tadbir turi, sana va
-                        dizaynni o‘zgartirib bo‘lmaydi.
+                        Nashrdan so‘ng ismlar, mezbon, tadbir turi va dizayn himoyalanadi. Sana ko‘chishi uchun so‘rov yuboring; shu kundagi vaqt tahrirlanadi.
                       </li>
                       <li>
                         Matn, manzil va boshqa tafsilotlarni tadbir kuni
@@ -3635,6 +3693,7 @@ export function Studio({
                   </button>
                 </section>
               )}
+              </fieldset>
             </div>
             </div>
             <footer className={styles.editorFooter}>

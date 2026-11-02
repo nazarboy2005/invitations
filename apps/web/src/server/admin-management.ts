@@ -83,7 +83,7 @@ export async function listAdminInvitations(
     db = getDb();
   const predicate = db`i.status<>'deleted' AND (${q.status}='' OR i.status=${q.status}) AND (${q.userId}='' OR i.owner_id::text=${q.userId}) AND (i.id::text=${q.q} OR coalesce(i.slug,'') ILIKE ${q.search} OR u.display_name ILIKE ${q.search} OR (i.data->'content'->(i.data->>'defaultLocale')->'people')::text ILIKE ${q.search})`;
   const [rows, [count]] = await Promise.all([
-    db`SELECT i.id,i.owner_id,u.display_name,i.template_id,coalesce(t.name,'Dizayn tanlanmagan') AS template_name,i.data->>'eventType' AS event_type,i.data->>'startsAt' AS starts_at,i.data->'content'->(i.data->>'defaultLocale')->'people' AS people,i.status,i.slug,i.created_at,i.updated_at FROM invitations i JOIN users u ON u.id=i.owner_id LEFT JOIN templates t ON t.id=i.template_id WHERE ${predicate} ORDER BY i.updated_at DESC,i.id DESC LIMIT 20 OFFSET ${q.offset}`,
+    db`SELECT i.id,i.owner_id,u.display_name,i.template_id,coalesce(t.name,'Dizayn tanlanmagan') AS template_name,i.data->>'eventType' AS event_type,i.data->>'startsAt' AS starts_at,i.data->'content'->(i.data->>'defaultLocale')->'people' AS people,i.status,i.slug,i.identity_locked_at,i.created_at,i.updated_at FROM invitations i JOIN users u ON u.id=i.owner_id LEFT JOIN templates t ON t.id=i.template_id WHERE ${predicate} ORDER BY i.updated_at DESC,i.id DESC LIMIT 20 OFFSET ${q.offset}`,
     db`SELECT count(*)::int AS total FROM invitations i JOIN users u ON u.id=i.owner_id WHERE ${predicate}`,
   ]);
   return result(
@@ -96,6 +96,7 @@ export async function listAdminInvitations(
       people: Array.isArray(row.people) ? row.people.join(" & ") : "",
       eventType: row.event_type ?? "",
       startsAt: row.starts_at ?? "",
+      identityLocked: !!row.identity_locked_at || row.status === "published",
       status: row.status,
       url: adminPublicUrl(row.slug),
       createdAt: iso(row.created_at)!,

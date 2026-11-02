@@ -6,7 +6,7 @@ import {
   type Invitation,
   type SessionUser,
 } from "@taklifnoma/contracts";
-import { assertCreatorCanEdit } from "@taklifnoma/contracts/policies";
+import { assertCreatorCanEdit, type InvitationEditAccess } from "@taklifnoma/contracts/policies";
 import { ApiError } from "./api";
 import { getSessionUser } from "./auth";
 import { assertManagedImages, assertPublicMedia, assertPublishable } from "./publication";
@@ -28,6 +28,15 @@ export async function getOwnedInvitation(
   return rows[0]
     ? invitationSchema.parse({ ...rows[0].data, status: rows[0].status })
     : null;
+}
+export async function getInvitationEditAccess(id: string, ownerId: string): Promise<InvitationEditAccess> {
+  const [row] = await getDb()`SELECT status,identity_locked_at,edit_deadline_at,approved_event_date FROM invitations WHERE id=${id} AND owner_id=${ownerId} AND status<>'deleted'`;
+  if (!row) throw new ApiError(404, "NOT_FOUND", "Taklifnoma topilmadi.");
+  return {
+    locked: !!row.identity_locked_at || row.status === "published",
+    deadlineAt: row.edit_deadline_at ? new Date(row.edit_deadline_at).toISOString() : null,
+    approvedEventDate: row.approved_event_date ?? null,
+  };
 }
 export async function listInvitations(
   userId: string,
@@ -107,6 +116,7 @@ export async function saveInvitation(
         assertCreatorCanEdit(previous, invitation, {
           status: rows[0].identity_locked_at ? "published" : rows[0].status,
           editDeadlineAt: rows[0].edit_deadline_at,
+          approvedEventDate: rows[0].approved_event_date,
         });
       } catch (error) {
         throw new ApiError(

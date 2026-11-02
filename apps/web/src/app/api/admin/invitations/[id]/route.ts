@@ -42,7 +42,7 @@ export async function PATCH(request: Request, { params }: Context) {
       input = inputSchema.parse(await readJson(request, 5000));
     await getDb().begin(async (tx) => {
       const [row] =
-        await tx`SELECT id,owner_id,status,edit_deadline_at FROM invitations WHERE id=${id} FOR UPDATE`;
+        await tx`SELECT id,owner_id,status,identity_locked_at,edit_deadline_at FROM invitations WHERE id=${id} FOR UPDATE`;
       if (!row || row.status === "deleted")
         throw new ApiError(404, "NOT_FOUND", "Taklifnoma topilmadi.");
       if (input.action === "delete") {
@@ -50,7 +50,7 @@ export async function PATCH(request: Request, { params }: Context) {
       } else {
         const deadline = new Date(input.deadline);
         if (
-          row.status !== "published" ||
+          (row.status !== "published" && !row.identity_locked_at) ||
           deadline.getTime() <=
             Math.max(Date.now(), new Date(row.edit_deadline_at ?? 0).getTime())
         )

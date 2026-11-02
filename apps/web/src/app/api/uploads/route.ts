@@ -1,3 +1,4 @@
+import { templateById } from "@taklifnoma/contracts";
 import { NextResponse } from "next/server";
 import { randomUUID } from "node:crypto";
 import { z } from "zod";
@@ -98,12 +99,13 @@ export async function POST(request: Request) {
     if (!input.contentType.startsWith(input.kind + "/"))
       throw new ApiError(400, "INVALID_FILE", "Fayl turini tekshiring.");
     const existing = input.draftId
-      ? await getDb()`SELECT owner_id,status,identity_locked_at,edit_deadline_at FROM invitations WHERE id=${input.draftId}`
+      ? await getDb()`SELECT owner_id,status,template_id,identity_locked_at,edit_deadline_at FROM invitations WHERE id=${input.draftId}`
       : [];
     if (
       existing[0] &&
       (existing[0].owner_id !== user.id ||
         existing[0].status === "deleted" ||
+        templateById(existing[0].template_id)?.format === "image" ||
         ((existing[0].status === "published" ||
           existing[0].identity_locked_at) &&
           (!existing[0].edit_deadline_at ||

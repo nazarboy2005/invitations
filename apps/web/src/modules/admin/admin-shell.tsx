@@ -20,6 +20,7 @@ import { AdminNavigationGuard } from "./admin-navigation-guard";
 const sections = [
   { id: "users", label: "Foydalanuvchilar", icon: Users },
   { id: "invitations", label: "Taklifnomalar", icon: FileHeart },
+  { id: "requests", label: "Tuzatish so‘rovlari", icon: ShieldCheck },
   { id: "payments", label: "To‘lovlar", icon: Wallet },
   { id: "broadcasts", label: "Xabarlar", icon: Send },
   { id: "templates", label: "Dizaynlar", icon: LayoutGrid },
@@ -28,6 +29,7 @@ const sections = [
   { id: "activity", label: "O‘zgarishlar tarixi", icon: History },
 ];
 const descriptions: Record<string, string> = {
+  requests: "Ism tuzatishlari va sana ko‘chirish so‘rovlarini tekshiring va qarorni tarixga yozing.",
   users:
     "Hisoblar, foydalanuvchilar taklifnomalari va kirish huquqlarini boshqaring.",
   invitations:

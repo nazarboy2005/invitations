@@ -40,10 +40,14 @@ export function DateTimePicker({
   value,
   onChange,
   disabled = false,
+  minDate,
+  maxDate,
 }: {
   value: string;
   onChange: (value: string) => void;
   disabled?: boolean;
+  minDate?: string;
+  maxDate?: string;
 }) {
   const dialog = useRef<HTMLDialogElement>(null);
   const initialDate = value.slice(0, 10);
@@ -68,11 +72,13 @@ export function DateTimePicker({
   }, [value]);
 
   useEffect(() => {
-    if (open && !dialog.current?.open) dialog.current?.showModal();
-    else if (!open && dialog.current?.open) dialog.current.close();
-  }, [open]);
+    if (open && !disabled && !dialog.current?.open) dialog.current?.showModal();
+    else if ((!open || disabled) && dialog.current?.open) dialog.current.close();
+    if (disabled) setOpen(false);
+  }, [open, disabled]);
 
   function selectDateTime(date: string, nextHour: string, nextMinute: string) {
+    if (disabled || (minDate && date < minDate) || (maxDate && date > maxDate)) return;
     nextHour ||= "00";
     nextMinute ||= "00";
     setSelectedDate(date);
@@ -217,6 +223,7 @@ export function DateTimePicker({
                       aria-label={`${day} ${months[visibleMonth.getMonth()]} ${visibleMonth.getFullYear()}`}
                       className={`${styles.day} ${dateValue === selectedDate ? styles.selectedDay : ""}`}
                       key={dateValue}
+                      disabled={!!((minDate && dateValue < minDate) || (maxDate && dateValue > maxDate))}
                       onClick={() => selectDateTime(dateValue, hour, minute)}
                     >
                       {day}

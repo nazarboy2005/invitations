@@ -1,5 +1,30 @@
 # Implementation decisions
 
+## Published and downloaded invitation edits (2026-11-03)
+
+- User authorized implementation of the earlier editing/correction plan, including
+  server permissions, a polished interface and related security/regression checks.
+- Static designs lock all content after first successful download except location
+  (venue name, address, landmark, map/QR) and start date/time. User explicitly confirmed
+  dates may move to the original approved event day or earlier while editing remains
+  open; later dates need administrator approval. Editing never extends itself.
+- Web practical edits remain available through the fixed deadline; same-day start
+  time and performer changes are allowed. Protect birthday age, anniversary number,
+  family identities and secondary ceremony dates consistently on the server.
+- Name/identity corrections and postponements use owned requests with administrator
+  review, explicit before/after values, reasons and audit history. A different event
+  or different main people requires a new invitation, not an approved correction.
+- Expired content editors are read-only. Requests, moderation, public viewing and
+  repeat downloads of saved static content remain available. Previously downloaded
+  PNG files do not change when the saved invitation is updated.
+- This supersedes static's earlier date lock and practical-text-edit allowance.
+  Implementation plan and field audit: `docs/POST_PUBLICATION_EDITING.md`.
+- Completed: shared editing rules, reviewed corrections/postponements, administrator
+  request queue, immutable approved dates, static upload restrictions, read-only
+  expiry and repeat downloads. Applied migrations 0209/0210. Verification: 76 focused
+  tests, seven integration scenarios, two publication/DST service checks, responsive
+  browser workflow and production build passed. No external deployment or payments.
+
 ## Studio and phone layout refinements (2026-11-03)
 
 - Venue suggestions close on outside mouse/touch interaction or focus loss;

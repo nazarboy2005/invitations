@@ -8,6 +8,7 @@ export function StudioSection({
   description,
   icon: Icon,
   action,
+  disabled = false,
   children,
 }: {
   id: string;
@@ -15,6 +16,7 @@ export function StudioSection({
   description: string;
   icon: LucideIcon;
   action?: ReactNode;
+  disabled?: boolean;
   children: ReactNode;
 }) {
   return (
@@ -29,7 +31,7 @@ export function StudioSection({
         </div>
         {action}
       </header>
-      {children}
+      <fieldset className={styles.lockedFields} disabled={disabled}>{children}</fieldset>
     </section>
   );
 }

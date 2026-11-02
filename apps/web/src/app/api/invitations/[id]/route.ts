@@ -7,6 +7,7 @@ import { deleteInvitation } from "@/server/delete-invitation";
 import {
   authenticatedUser,
   getOwnedInvitation,
+  getInvitationEditAccess,
   saveInvitation,
 } from "@/server/invitations";
 import { verifySameOrigin } from "@/server/auth";
@@ -24,7 +25,7 @@ export async function GET(request: Request, { params }: Context) {
     const invitation = await getOwnedInvitation(id, access.owner.id);
     if (!invitation)
       throw new ApiError(404, "NOT_FOUND", "Taklifnoma topilmadi.");
-    return NextResponse.json({ invitation }, { headers: privateHeaders });
+    return NextResponse.json({ invitation, editAccess: await getInvitationEditAccess(id, access.owner.id) }, { headers: privateHeaders });
   } catch (e) {
     return apiError(e);
   }

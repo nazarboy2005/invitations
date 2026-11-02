@@ -662,7 +662,7 @@ export function AdminInvitations({
                 >
                   To‘lov qo‘shish
                 </Link>
-                {item.status === "published" && (
+                {(item.status === "published" || item.identityLocked) && (
                   <>
                     <button
                       className="button secondary"

@@ -1,4 +1,5 @@
 import { normalizeInvitation } from "@taklifnoma/contracts/capabilities";
+import { lastCeremonyDate } from "@taklifnoma/contracts/policies";
 import { randomInt } from "node:crypto";
 import type postgres from "postgres";
 import { getDb } from "@taklifnoma/database";
@@ -11,6 +12,7 @@ import {
 import { publicationIssues } from "@taklifnoma/contracts/publication";
 import { ApiError } from "./api";
 import { CATALOG_PREVIEW_MUSIC } from "../modules/catalog/catalog-music";
+import { DEFAULT_INVITATION_MUSIC } from "@taklifnoma/contracts/music";
 import { inspectMedia, storageProvider } from "./storage";
 import { requireAdmin, recordAdminChange } from "./admin";
 import type { AdminInvitationAction } from "./admin-invitation-access";
@@ -83,7 +85,7 @@ export async function assertPublicMedia(
   }
   if (invitation.music.enabled && invitation.music.url) {
     if (
-      invitation.music.url !== CATALOG_PREVIEW_MUSIC.url ||
+      ![DEFAULT_INVITATION_MUSIC.url, CATALOG_PREVIEW_MUSIC.url].includes(invitation.music.url) ||
       invitation.music.assetId
     ) {
       const [asset] =
@@ -227,7 +229,7 @@ export async function publishInvitationInTransaction(
   // Compare the resulting instants in PostgreSQL, without relying on the
   // database session's timezone or JS coercion of a timezone-less string.
   const [event] =
-    await tx`SELECT (((${previous.startsAt}::timestamp)::date + 1)::timestamp AT TIME ZONE ${previous.timezone}) <= now() AS ended, now() AS published_at, ((${previous.startsAt}::timestamp)::date + 1)::timestamp AT TIME ZONE ${previous.timezone} AS deadline`;
+    await tx`SELECT (((${lastCeremonyDate(previous)}::date + 1)::timestamp) AT TIME ZONE ${previous.timezone}) <= now() AS ended, now() AS published_at, ((${lastCeremonyDate(previous)}::date + 1)::timestamp) AT TIME ZONE ${previous.timezone} AS deadline`;
   if (event.ended)
     throw new ApiError(
       400,
@@ -244,7 +246,7 @@ export async function publishInvitationInTransaction(
     });
     try {
       await tx.savepoint(async (savepoint) => {
-        await savepoint`UPDATE invitations SET slug=${slug},status='published',data=${savepoint.json(invitation)},first_published_at=${event.published_at},identity_locked_at=${event.published_at},edit_deadline_at=${event.deadline},updated_at=now() WHERE id=${id}`;
+        await savepoint`UPDATE invitations SET slug=${slug},status='published',data=${savepoint.json(invitation)},first_published_at=${event.published_at},identity_locked_at=${event.published_at},edit_deadline_at=${event.deadline},approved_event_date=${previous.startsAt.slice(0,10)},updated_at=now() WHERE id=${id}`;
       });
     } catch (error) {
       if (
