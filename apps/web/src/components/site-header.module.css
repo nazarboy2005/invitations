@@ -246,11 +246,6 @@
   align-items: center;
   gap: 20px;
 }
-.header.catalogHeader,
-.header.catalogHeader[data-scrolled="true"] {
-  background: transparent;
-  backdrop-filter: none;
-}
 .catalogHeader .heroAccount,
 .catalogHeader[data-scrolled="true"] .heroAccount {
   color: #76253b;
@@ -502,19 +497,19 @@
   }
 }
 
-/* Compact desktop navigation; mobile styling and scroll transforms stay intact. */
+/* Match the catalog's frosted panels across desktop and phone navigation. */
+.header.heroHeader,
+.header.heroHeader[data-scrolled="true"] {
+  border-bottom: 1px solid rgb(214 192 164 / 45%);
+  background: rgb(255 248 238 / 28%);
+  -webkit-backdrop-filter: blur(24px) saturate(115%);
+  backdrop-filter: blur(24px) saturate(115%);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 30%);
+}
 @media (min-width: 901px) {
   .header.heroHeader,
   .header.heroHeader[data-scrolled="true"] {
     height: 76px;
-    border-bottom: 1px solid #e9e0d5;
-    /* 1. Higher opacity (around 65%) protects text readability */
-    background: rgba(252, 251, 249, 0.65); 
-  
-  /* 2. Heavy blur (24px) completely obliterates text behind it */
-    backdrop-filter: blur(24px); 
-    -webkit-backdrop-filter: blur(24px); 
-    box-shadow: none;
   }
   .header.heroHeader[data-tone="light"] {
     --hero-ink: #302b29;
@@ -570,10 +565,6 @@
   .header.heroHeader,
   .header.heroHeader[data-scrolled="true"] {
     height: 52px;
-    background: rgba(252, 251, 249, 0.65);
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
-    border-bottom: 1px solid #e9e0d5;
   }
   .header.heroHeader[data-tone="light"] { --hero-ink: #302b29; }
   .header.heroHeader .menuToggle { color: #302b29; }
@@ -587,10 +578,11 @@
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     padding: 8px 12px calc(8px + env(safe-area-inset-bottom));
-    border-top: 1px solid #e9e0d5;
-    background: rgba(252, 251, 249, 0.65);
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
+    border-top: 1px solid rgb(214 192 164 / 45%);
+    background: rgb(255 248 238 / 28%);
+    -webkit-backdrop-filter: blur(24px) saturate(115%);
+    backdrop-filter: blur(24px) saturate(115%);
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 30%);
     color: #51443f;
   }
   .bottomNav a {

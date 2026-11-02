@@ -23,3 +23,10 @@ horizontal overflow and no page errors. `pnpm typecheck` and `pnpm build` pass.
 
 Screenshots: `desktop.png`, `desktop-scrolled.png`, `image-format.png`, `mobile.png`
 and `mobile-scrolled.png`. No external deployment was performed.
+
+Navbar refinement: the shared desktop header, phone header and phone bottom
+navigation now match the pinned category bar's 28% ivory tint, 24px blur and 115%
+saturation, with a subtle glass highlight. Browser checks on `/templates` and `/`
+confirmed the computed tint/blur before and after scrolling, visible navigation
+after scrolling stops, no horizontal overflow and no page errors at 1536×960 and
+390×844. Screenshots: `navbar-desktop.png` and `navbar-mobile.png`.

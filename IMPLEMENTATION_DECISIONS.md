@@ -17,6 +17,9 @@
 - User refinement: the hero intro panel and pinned category bar should look like
   frosted glass with more artwork showing through, rather than white panels.
   Use a light 24–28% ivory tint with stronger blur; keep other styling unchanged.
+- Apply the same light frosted treatment to the shared public navbar on desktop
+  and phones, including the phone bottom navigation: 28% ivory tint, 24px blur,
+  subtle saturation and glass highlight, both initially and while scrolling.
 
 ## Static image invitations (2026-11-03)
 
