@@ -14,6 +14,9 @@
 - Implementation: original generated ivory/peach floral and embossed-envelope
   artwork with Uzbek ornament at the edges; local WebP asset, live accessible
   page content above it, responsive framing and translucent filter controls.
+- User refinement: the hero intro panel and pinned category bar should look like
+  frosted glass with more artwork showing through, rather than white panels.
+  Use a light 24–28% ivory tint with stronger blur; keep other styling unchanged.
 
 ## Static image invitations (2026-11-03)
 
