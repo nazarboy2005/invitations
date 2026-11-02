@@ -5,6 +5,7 @@ import { SiteHeader } from "@/components/site-header";
 import { TemplateGallery } from "@/modules/catalog/template-gallery";
 import { getCatalog } from "@/server/catalog";
 import { display, sans } from "@/app/platform-fonts";
+import { publicAsset } from "@/lib/public-asset";
 import styles from "./templates.module.css";
 
 export const dynamic = "force-dynamic";
@@ -27,7 +28,18 @@ export default async function TemplatesPage({
     ? category
     : "all";
   return (
-    <div data-page-scrollbar="gold" className={`${styles.page} ${display.variable} ${sans.variable}`}>
+    <div
+      data-page-scrollbar="gold"
+      className={`${styles.page} ${display.variable} ${sans.variable}`}
+    >
+      <div
+        className={styles.backdrop}
+        data-catalog-background
+        aria-hidden="true"
+        style={{
+          backgroundImage: `url("${publicAsset("/images/catalog/catalog-background.webp")}")`,
+        }}
+      />
       <SiteHeader catalog />
       <main id="main" className={styles.main}>
         <header className={styles.header}>
@@ -41,6 +53,9 @@ export default async function TemplatesPage({
               <h1>
                 Har bir quvonchga<span>o‘ziga xos dizayn.</span>
               </h1>
+              <p className={styles.subtitle}>
+                Quvonchingizga mos, nafis va o‘ziga xos taklifnomani tanlang.
+              </p>
             </div>
             <div className={styles.intro}>
               <span className={styles.collection}>

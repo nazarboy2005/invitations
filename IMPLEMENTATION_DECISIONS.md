@@ -1,5 +1,20 @@
 # Implementation decisions
 
+## Templates page background and format row (2026-11-03)
+
+- User requested the supplied AI catalog reference's visual direction, keeping
+  Fotiha branding and the existing template display aspect ratios (web 3:5,
+  image 5:7). Do not infer card dimensions or former branding from the reference.
+- Create one complete background image for `/templates`; it stays fixed to the
+  viewport while page content scrolls. Use the same artwork behind hero and catalog,
+  including the favorites view; no separate hero artwork or landing-page change.
+- Catalog Veb taklifnoma / Rasm taklifnoma choices are centered between decorative
+  gold rules above the web category list, with a burgundy selected pill. Keep the
+  Studio format control's existing arrangement. Categories remain web-only.
+- Implementation: original generated ivory/peach floral and embossed-envelope
+  artwork with Uzbek ornament at the edges; local WebP asset, live accessible
+  page content above it, responsive framing and translucent filter controls.
+
 ## Static image invitations (2026-11-03)
 
 - User requested a plan before implementation for downloadable static invitation

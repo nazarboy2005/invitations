@@ -138,6 +138,16 @@ export function TemplateGallery({
   const categoryName =
     availableCategories.find((category) => category.id === renderedCategoryId)
       ?.name ?? "Barchasi";
+  useEffect(() => {
+    const anchor = categoryAnchor.current;
+    const filters = categoryNav.current?.parentElement;
+    if (!anchor || !filters) return;
+    const observer = new IntersectionObserver(([entry]) => {
+      filters.dataset.pinned = String(entry.boundingClientRect.top <= 0);
+    });
+    observer.observe(anchor);
+    return () => observer.disconnect();
+  }, []);
   const hasFilters = (format === "web" && categoryId !== "all") || searchQuery.trim().length > 0;
   useEffect(() => {
     const nav = categoryNav.current;
@@ -244,7 +254,7 @@ export function TemplateGallery({
               aria-hidden="true"
             />
             <div className={galleryStyles.filters} data-catalog-filters>
-              <TemplateFormatSwitch value={format} onChange={setFormat} />
+              <TemplateFormatSwitch value={format} onChange={setFormat} variant="catalog" />
               <div className={galleryStyles.filterTitle}>
                 <h2>Tadbir turi</h2>
               </div>

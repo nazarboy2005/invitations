@@ -9,13 +9,23 @@ export function TemplateFormatSwitch({
   value,
   onChange,
   disabled = false,
+  variant = "studio",
 }: {
   value: TemplateFormat;
   onChange: (value: TemplateFormat) => void;
   disabled?: boolean;
+  variant?: "studio" | "catalog";
 }) {
   return (
-    <div className={styles.switch} role="group" aria-label="Taklifnoma formati">
+    <div
+      className={styles.switch}
+      data-variant={variant}
+      role="group"
+      aria-label="Taklifnoma formati"
+    >
+      {variant === "catalog" && (
+        <span className={styles.rule} aria-hidden="true" />
+      )}
       {(
         [
           ["web", "Veb taklifnoma", Globe2],
@@ -33,6 +43,9 @@ export function TemplateFormatSwitch({
           {label}
         </button>
       ))}
+      {variant === "catalog" && (
+        <span className={styles.rule} aria-hidden="true" />
+      )}
     </div>
   );
 }
