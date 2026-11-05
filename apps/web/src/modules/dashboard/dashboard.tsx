@@ -1,7 +1,7 @@
 "use client";
 import { StaticImagePreview } from "@/modules/static-images/static-image-preview";
 import { downloadInvitationImage } from "@/modules/static-images/download";
-import { FavoritesLink, FavoritesStatus } from "@/modules/favorites/favorite-button";
+import { publicAsset } from "@/lib/public-asset";
 
 import { useEffect, useId, useRef, useState } from "react";
 import Link from "next/link";
@@ -16,7 +16,14 @@ import {
   MoreHorizontal,
   Pencil,
   LoaderCircle,
-  Clock3,
+  Check,
+  ChevronDown,
+  Copy,
+  Download,
+  ExternalLink,
+  Search,
+  SlidersHorizontal,
+  Sparkles,
   Eye,
   Plus,
   Send,
@@ -38,8 +45,8 @@ import {
 } from "@/modules/studio/draft-storage";
 import { formatDate } from "@/templates/date-format";
 import { InvitationThumbnail } from "./invitation-thumbnail";
+import { useGridMotion } from "./use-grid-motion";
 import { useRouter } from "next/navigation";
-import { PublishedLink } from "@/components/published-link";
 import {
   loadClientSession,
   currentTelegramLaunchData,
@@ -52,6 +59,37 @@ let dashboardSnapshot: {
   session: SessionResponse;
   invitations: DashboardInvitation[];
 } | null = null;
+
+function positionPopover(
+  menu: HTMLDivElement,
+  trigger: HTMLButtonElement | null,
+  phoneSheet = false,
+) {
+  if (!menu.matches(":popover-open") || !trigger) return;
+  if (phoneSheet && window.matchMedia("(max-width: 600px)").matches) {
+    menu.style.left = "12px";
+    menu.style.top = "auto";
+    menu.style.bottom = "calc(84px + env(safe-area-inset-bottom))";
+    menu.style.maxHeight = "calc(100dvh - 160px - env(safe-area-inset-bottom))";
+    menu.dataset.placement = "sheet";
+    return;
+  }
+  menu.style.bottom = "";
+  const button = trigger.getBoundingClientRect();
+  const gap = 6;
+  const edge = 12;
+  menu.style.maxHeight = "";
+  const height = menu.offsetHeight;
+  const below = window.innerHeight - button.bottom - gap - edge;
+  const above = button.top - gap - edge;
+  const opensAbove = below < height && above > below;
+  const available = Math.max(0, opensAbove ? above : below);
+  menu.style.maxHeight = `${available}px`;
+  menu.style.left = `${Math.max(edge, Math.min(button.right - menu.offsetWidth, window.innerWidth - menu.offsetWidth - edge))}px`;
+  menu.style.top = `${opensAbove ? Math.max(edge, button.top - gap - Math.min(height, available)) : button.bottom + gap}px`;
+  menu.dataset.placement = opensAbove ? "above" : "below";
+}
+
 function InvitationCard({
   invitation,
   cacheScope,
@@ -80,12 +118,48 @@ function InvitationCard({
   const isImage = template?.format === "image";
   const [imageBusy, setImageBusy] = useState(false);
   const [imageError, setImageError] = useState("");
-  const [imageExported, setImageExported] = useState(!!invitation.imageExportedAt);
+  const [imageExported, setImageExported] = useState(
+    !!invitation.imageExportedAt,
+  );
+  const [shareMessage, setShareMessage] = useState("");
+  const [copied, setCopied] = useState(false);
+  useEffect(() => {
+    if (!copied) return;
+    const timer = window.setTimeout(() => setCopied(false), 2200);
+    return () => window.clearTimeout(timer);
+  }, [copied]);
+  async function shareInvitation(share = false) {
+    if (!invitation.slug) return;
+    const url = new URL(
+      `/i/${encodeURIComponent(invitation.slug)}`,
+      window.location.origin,
+    ).href;
+    try {
+      if (share && navigator.share) {
+        await navigator.share({ title: names, url });
+        setShareMessage("");
+      } else {
+        await navigator.clipboard.writeText(url);
+        setCopied(true);
+        setShareMessage("");
+      }
+    } catch (error) {
+      if (error instanceof Error && error.name === "AbortError") return;
+      setCopied(false);
+      setShareMessage("Havolani menyudan ochib nusxalashingiz mumkin.");
+    }
+  }
   async function downloadImage() {
-    setImageBusy(true); setImageError("");
-    try { await downloadInvitationImage(invitation, invitation.defaultLocale); setImageExported(true); }
-    catch (e) { setImageError(e instanceof Error ? e.message : "Rasm yuklab olinmadi."); }
-    finally { setImageBusy(false); }
+    setImageBusy(true);
+    setImageError("");
+    try {
+      await downloadInvitationImage(invitation, invitation.defaultLocale);
+      setImageExported(true);
+    } catch (e) {
+      setImageError(e instanceof Error ? e.message : "Rasm yuklab olinmadi.");
+    } finally {
+      setImageBusy(false);
+    }
   }
   const names =
     content.people.filter(Boolean).join(" & ") || "Yangi taklifnoma";
@@ -141,7 +215,9 @@ function InvitationCard({
                 : `${names}: taklifnomani tahrirlash`
             }
           />
-          {isImage ? <StaticImagePreview invitation={invitation} compact /> : template ? (
+          {isImage ? (
+            <StaticImagePreview invitation={invitation} compact />
+          ) : template ? (
             <InvitationThumbnail
               invitation={invitation}
               cacheScope={cacheScope}
@@ -157,72 +233,38 @@ function InvitationCard({
           className={styles.cardStatus}
           data-published={invitation.status === "published"}
         >
-          {isImage && (imageExported || invitation.imageExportedAt) ? "Rasm tayyor" : local
-            ? accountSaved
-              ? "Saqlanmagan o‘zgarishlar"
-              : "Qoralama"
-            : invitation.status === "published"
-              ? "Nashr qilingan"
-              : "Qoralama"}
+          {isImage && (imageExported || invitation.imageExportedAt)
+            ? "Rasm tayyor"
+            : local
+              ? accountSaved
+                ? "Saqlanmagan o‘zgarishlar"
+                : "Qoralama"
+              : invitation.status === "published"
+                ? "Nashr qilingan"
+                : "Qoralama"}
         </span>
       </div>
       <div className={styles.cardBody}>
-        <h2 className={styles.invitationName}>{names}</h2>
-        <div className={styles.cardName}>
-          <strong>{template?.name ?? "Dizayn tanlanmagan"}{isImage ? " · Rasm 5:7" : ""}</strong>
-          <span>
-            {invitation.enabledLocales.length > 1
-              ? `${invitation.enabledLocales.length} til`
-              : LANGUAGE_NAMES[invitation.defaultLocale]}
-          </span>
-        </div>
-        <div className={styles.cardMeta}>
-          <p className={styles.cardDate}>
-            <CalendarDays size={14} />
-            {date}
-          </p>
-          {invitation.status === "published" && viewCount !== undefined && (
-            <p
-              className={styles.cardViews}
-              aria-label={`Ko‘rishlar: ${viewCount}`}
-            >
-              <Eye size={14} />
-              {new Intl.NumberFormat("uz-UZ").format(viewCount)} ko‘rish
-            </p>
-          )}
-        </div>
-        {invitation.status === "published" && invitation.slug && (
-          <div
-            className={styles.shareRow}
-            onClick={(event) => event.stopPropagation()}
-          >
-            <PublishedLink slug={invitation.slug} inline />
+        <div className={styles.cardSummary}>
+          <div className={styles.cardDetails}>
+            <h2 className={styles.invitationName} title={names}>
+              {names}
+            </h2>
+            {invitation.status === "published" && viewCount !== undefined && (
+              <p
+                className={styles.cardViews}
+                aria-label={`Ko‘rishlar: ${viewCount}`}
+              >
+                <Eye size={14} />
+                {new Intl.NumberFormat("uz-UZ").format(viewCount)} ko‘rish
+              </p>
+            )}
+            {invitation.status !== "published" && (
+              <p className={styles.cardViews}>
+                {isImage ? "Rasm taklifnoma" : "Veb taklifnoma"}
+              </p>
+            )}
           </div>
-        )}
-        <div className={styles.cardActions}>
-          {isImage && accountSaved && !local ? <div className={styles.imageDownloads}>
-            <button type="button" className={styles.imageDownloadButton} onClick={() => void downloadImage()} disabled={imageBusy}>{imageBusy ? "Tayyorlanmoqda…" : "PNG yuklab olish"}</button>
-          </div> : invitation.status === "published" && invitation.slug ? (
-            <Link
-              className={styles.viewAction}
-              href={
-                accountSaved
-                  ? activityUrl
-                  : `/i/${encodeURIComponent(invitation.slug)}`
-              }
-              aria-label={
-                accountSaved
-                  ? `${names}: javoblar, tilaklar va cheklar`
-                  : `${names}: taklifnomani ko‘rish`
-              }
-            >
-              {accountSaved ? "Javoblar" : "Ko‘rish"} <ArrowRight size={14} />
-            </Link>
-          ) : (
-            <Link className={styles.continueAction} href={editUrl}>
-              Davom etish <ArrowRight size={16} />
-            </Link>
-          )}
           <button
             className={styles.moreButton}
             ref={menuButton}
@@ -235,20 +277,7 @@ function InvitationCard({
             id={menuId}
             popover="auto"
             onToggle={(event) => {
-              const menu = event.currentTarget;
-              if (!menu.matches(":popover-open") || !menuButton.current) return;
-              const button = menuButton.current.getBoundingClientRect();
-              const gap = 6;
-              const edge = 12;
-              menu.style.maxHeight = "";
-              const height = menu.offsetHeight;
-              const below = window.innerHeight - button.bottom - gap - edge;
-              const above = button.top - gap - edge;
-              const opensAbove = below < height && above > below;
-              const available = Math.max(0, opensAbove ? above : below);
-              menu.style.maxHeight = `${available}px`;
-              menu.style.left = `${Math.max(edge, Math.min(button.right - menu.offsetWidth, window.innerWidth - menu.offsetWidth - edge))}px`;
-              menu.style.top = `${opensAbove ? Math.max(edge, button.top - gap - Math.min(height, available)) : button.bottom + gap}px`;
+              positionPopover(event.currentTarget, menuButton.current, true);
             }}
             className={styles.cardMenu}
             onClick={(event) => {
@@ -257,9 +286,49 @@ function InvitationCard({
             }}
           >
             <p className={styles.menuHeading}>{names}</p>
+            <button
+              type="button"
+              className={styles.menuClose}
+              aria-label="Menyuni yopish"
+              onClick={(event) =>
+                event.currentTarget
+                  .closest<HTMLElement>("[popover]")
+                  ?.hidePopover()
+              }
+            >
+              <X size={18} />
+            </button>
+            <div className={styles.menuDetails}>
+              <span>
+                {template?.name ?? "Dizayn tanlanmagan"} ·{" "}
+                {isImage ? "Rasm" : "Veb"}
+              </span>
+              <span>
+                <CalendarDays size={13} /> {date}
+              </span>
+              <span>
+                {invitation.enabledLocales
+                  .map((locale) => LANGUAGE_NAMES[locale])
+                  .join(", ")}
+              </span>
+            </div>
             <Link href={editUrl}>
               <Pencil size={15} /> Tahrirlash
             </Link>
+            {onOpenActivity && (
+              <Link href={activityUrl}>
+                <Eye size={15} /> Javoblar, tilaklar va cheklar
+              </Link>
+            )}
+            {invitation.status === "published" && invitation.slug && (
+              <a
+                href={`/i/${encodeURIComponent(invitation.slug)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <ExternalLink size={15} /> Taklifnomani ochish
+              </a>
+            )}
             {accountSaved && invitation.status === "draft" && !isImage && (
               <Link href="/payment/return">To‘lov holati</Link>
             )}
@@ -274,7 +343,52 @@ function InvitationCard({
             )}
           </div>
         </div>
-        {imageError && <p role="alert" className={styles.imageDownloadError}>{imageError} <Link href={editUrl}>Studioda tekshirish</Link></p>}
+        <div className={styles.cardActions}>
+          {isImage && accountSaved && !local ? (
+            <button
+              type="button"
+              className={styles.mainAction}
+              onClick={() => void downloadImage()}
+              disabled={imageBusy}
+            >
+              <Download size={14} />
+              {imageBusy ? "Tayyorlanmoqda…" : "PNG yuklab olish"}
+            </button>
+          ) : invitation.status === "published" && invitation.slug ? (
+            <>
+              <button
+                type="button"
+                onClick={() => void shareInvitation()}
+                aria-live="polite"
+              >
+                {copied ? <Check size={13} /> : <Copy size={13} />}
+                {copied ? "Nusxalandi" : "Nusxa olish"}
+              </button>
+              <button
+                type="button"
+                className={styles.mainAction}
+                onClick={() => void shareInvitation(true)}
+              >
+                <Send size={13} />
+                Chaqirish
+              </button>
+            </>
+          ) : (
+            <Link href={editUrl}>
+              <Pencil size={14} /> Tahrirlash
+            </Link>
+          )}
+        </div>
+        {shareMessage && (
+          <p className={styles.actionMessage} role="status">
+            {shareMessage}
+          </p>
+        )}
+        {imageError && (
+          <p role="alert" className={styles.imageDownloadError}>
+            {imageError} <Link href={editUrl}>Studioda tekshirish</Link>
+          </p>
+        )}
       </div>
     </article>
   );
@@ -282,6 +396,7 @@ function InvitationCard({
 
 export function Dashboard() {
   const router = useRouter();
+  const { gridRef, updateGrid } = useGridMotion();
   const [session, setSession] = useState<SessionResponse | null>(
     dashboardSnapshot?.session ?? null,
   );
@@ -291,7 +406,11 @@ export function Dashboard() {
   const [browserDrafts, setBrowserDrafts] = useState<BrowserDraft[]>([]);
   const [loading, setLoading] = useState(!dashboardSnapshot);
   const [error, setError] = useState("");
-  const [tab, setTab] = useState<"all" | "draft" | "published">("all");
+  const [statuses, setStatuses] = useState({ draft: true, published: true });
+  const [formats, setFormats] = useState({ web: true, image: true });
+  const [query, setQuery] = useState("");
+  const filterId = useId();
+  const filterButton = useRef<HTMLButtonElement>(null);
   const [retry, setRetry] = useState(0);
   const [loginBusy, setLoginBusy] = useState(false);
   const [loginError, setLoginError] = useState("");
@@ -493,16 +612,35 @@ export function Dashboard() {
         viewCount: undefined,
         createdAt: draft.createdAt || draft.savedAt,
       })),
-  ].sort(
-    (a, b) =>
-      b.createdAt.localeCompare(a.createdAt) ||
-      b.invitation.id.localeCompare(a.invitation.id),
-  );
-  const matchesTab = (invitation: Invitation) =>
-    tab === "all" || invitation.status === tab;
-  const hasVisibleEntries = entries.some(({ invitation }) =>
-    matchesTab(invitation),
-  );
+  ].sort((a, b) => {
+    const comparison =
+      a.createdAt.localeCompare(b.createdAt) ||
+      a.invitation.id.localeCompare(b.invitation.id);
+    return -comparison;
+  });
+  const matchesFilters = (invitation: Invitation) => {
+    const template = templateById(invitation.templateId);
+    const format = template?.format === "image" ? "image" : "web";
+    const searchText = [
+      getContent(invitation).people.join(" "),
+      template?.name ?? "",
+    ]
+      .join(" ")
+      .toLocaleLowerCase("uz");
+    return (
+      statuses[invitation.status] &&
+      formats[format] &&
+      searchText.includes(query.trim().toLocaleLowerCase("uz"))
+    );
+  };
+  const visibleCount = entries.filter(({ invitation }) =>
+    matchesFilters(invitation),
+  ).length;
+  const hasVisibleEntries = visibleCount > 0;
+  const filterCount =
+    Number(!statuses.draft || !statuses.published) +
+    Number(!formats.web || !formats.image);
+  const filtersChanged = !!query.trim() || filterCount > 0;
   const allInvitations = [
     ...invitations,
     ...localDrafts
@@ -519,19 +657,25 @@ export function Dashboard() {
 
   return (
     <div className={styles.dashboard}>
+      <picture className={styles.background} aria-hidden="true">
+        <source
+          media="(max-width: 600px)"
+          srcSet={publicAsset("/images/dashboard/ivory-silk-mobile.webp")}
+        />
+        <img
+          src={publicAsset("/images/dashboard/ivory-silk-desktop.webp")}
+          alt=""
+          fetchPriority="high"
+        />
+      </picture>
       <main id="main" className={styles.main}>
         <div className={styles.pageHeading}>
           <div>
-            <p>
-              {session?.user
-                ? `Xush kelibsiz, ${session.user.displayName}`
-                : "Quvonchli kuningiz shu yerdan boshlanadi"}
-            </p>
+            <p className={styles.eyebrow}>Sizning taklifnomalaringiz</p>
             <h1>Taklifnomalarim</h1>
-            <span>Har bir muhim kun uchun o‘zgacha taklif.</span>
+            <span>Yaratgan taklifnomalaringiz shu yerda saqlanadi.</span>
           </div>
           <div className={styles.headingActions}>
-            <FavoritesLink />
             {session?.user?.isAdmin && (
               <a
                 href="/admin"
@@ -541,13 +685,20 @@ export function Dashboard() {
                 Boshqaruv
               </a>
             )}
-            <Link className={styles.primaryButton} href="/studio?new=1">
-              <Plus size={18} />
-              Yangi taklifnoma
-            </Link>
+            <div className={styles.createPanel}>
+              <div>
+                <strong>
+                  <Sparkles size={17} /> Yangi taklifnoma yaratish
+                </strong>
+                <p>Chiroyli taklifnoma bilan yaqinlaringizni xursand qiling.</p>
+              </div>
+              <Link className={styles.primaryButton} href="/studio?new=1">
+                <Plus size={17} />
+                Yangi taklifnoma
+              </Link>
+            </div>
           </div>
         </div>
-        <FavoritesStatus />
         {!session?.user && !loading && !error && (
           <div className={styles.accountNotice}>
             <span className={styles.noticeIcon}>
@@ -576,34 +727,124 @@ export function Dashboard() {
             className={styles.invitationList}
             aria-label="Taklifnomalar ro‘yxati"
           >
-            <div className={styles.listToolbar}>
-              <div role="group" aria-label="Taklifnomalarni saralash">
-                <button
-                  className={tab === "all" ? styles.activeTab : ""}
-                  aria-pressed={tab === "all"}
-                  onClick={() => setTab("all")}
-                >
-                  Barchasi{!loading && <span>{count}</span>}
-                </button>
-                <button
-                  className={tab === "draft" ? styles.activeTab : ""}
-                  aria-pressed={tab === "draft"}
-                  onClick={() => setTab("draft")}
-                >
-                  Qoralamalar{!loading && <span>{draftCount}</span>}
-                </button>
-                <button
-                  className={tab === "published" ? styles.activeTab : ""}
-                  aria-pressed={tab === "published"}
-                  onClick={() => setTab("published")}
-                >
-                  Nashr qilingan{!loading && <span>{publishedCount}</span>}
-                </button>
+            <div className={styles.listToolbar} data-catalog-pin-boundary>
+              <div className={styles.resultsCount} aria-live="polite">
+                <span className={styles.resultsLabel}>Taklifnomalar</span>
+                <span>
+                  {loading
+                    ? "…"
+                    : filtersChanged
+                      ? `${visibleCount} / ${count}`
+                      : count}
+                </span>
               </div>
-              <span className={styles.privateLabel}>
-                <Clock3 size={12} />
-                Eng yangilari avval
-              </span>
+              <div
+                className={styles.desktopSummary}
+                aria-label="Taklifnoma holatlari bo‘yicha jami"
+              >
+                <span>
+                  <i data-status="draft" />
+                  {draftCount} qoralama
+                </span>
+                <span>
+                  <i data-status="published" />
+                  {publishedCount} nashr qilingan
+                </span>
+              </div>
+              <div className={styles.toolbarControls}>
+                <label className={styles.searchField}>
+                  <Search size={17} />
+                  <input
+                    type="search"
+                    value={query}
+                    onChange={(event) =>
+                      updateGrid(() => setQuery(event.target.value))
+                    }
+                    placeholder="Taklifnomalarni qidirish…"
+                    aria-label="Taklifnomalarni qidirish"
+                  />
+                </label>
+                <button
+                  ref={filterButton}
+                  type="button"
+                  popoverTarget={filterId}
+                  className={styles.filterButton}
+                  aria-label="Taklifnoma filtrlari"
+                >
+                  <SlidersHorizontal size={16} />
+                  <span>Filtrlar</span>
+                  {filterCount > 0 && (
+                    <span className={styles.filterCount}>{filterCount}</span>
+                  )}
+                  <ChevronDown size={14} />
+                </button>
+                <div
+                  id={filterId}
+                  popover="auto"
+                  className={styles.filterMenu}
+                  onToggle={(event) =>
+                    positionPopover(event.currentTarget, filterButton.current)
+                  }
+                >
+                  <fieldset>
+                    <legend>Taklifnoma holati</legend>
+                    {(
+                      [
+                        ["draft", "Qoralamalar", draftCount],
+                        ["published", "Nashr qilingan", publishedCount],
+                      ] as const
+                    ).map(([value, label, amount]) => (
+                      <label key={value}>
+                        <input
+                          type="checkbox"
+                          checked={statuses[value]}
+                          onChange={(event) =>
+                            updateGrid(() =>
+                              setStatuses((current) => ({
+                                ...current,
+                                [value]: event.target.checked,
+                              })),
+                            )
+                          }
+                        />
+                        <span className={styles.selectionMark}>
+                          <Check size={16} />
+                        </span>
+                        {label}
+                        <span className={styles.optionCount}>{amount}</span>
+                      </label>
+                    ))}
+                  </fieldset>
+                  <fieldset>
+                    <legend>Taklifnoma turi</legend>
+                    {(
+                      [
+                        ["web", "Veb taklifnomalar"],
+                        ["image", "Rasm taklifnomalar"],
+                      ] as const
+                    ).map(([value, label]) => (
+                      <label key={value}>
+                        <input
+                          type="checkbox"
+                          checked={formats[value]}
+                          onChange={(event) =>
+                            updateGrid(() =>
+                              setFormats((current) => ({
+                                ...current,
+                                [value]: event.target.checked,
+                              })),
+                            )
+                          }
+                        />
+                        <span className={styles.selectionMark}>
+                          <Check size={16} />
+                        </span>
+                        {label}
+                      </label>
+                    ))}
+                  </fieldset>
+                </div>
+              </div>
             </div>
             {error && (
               <div className={styles.error} role="alert">
@@ -624,11 +865,11 @@ export function Dashboard() {
                 <span>Taklifnomalar yuklanmoqda…</span>
               </div>
             ) : (
-              <div className={styles.cardGrid}>
+              <div className={styles.cardGrid} ref={gridRef}>
                 {entries.map(({ invitation, local, viewCount }) => (
                   <InvitationCard
                     invitation={invitation}
-                    hidden={!matchesTab(invitation)}
+                    hidden={!matchesFilters(invitation)}
                     cacheScope={session?.user?.id ?? "browser-drafts"}
                     local={local}
                     viewCount={viewCount}
@@ -662,26 +903,43 @@ export function Dashboard() {
                       </span>
                     </div>
                     <h2>
-                      {tab === "published"
-                        ? "Hali nashr qilingan taklifnoma yo‘q"
-                        : tab === "draft"
-                          ? "Hali qoralamalar yo‘q"
-                          : "Birinchi taklifingizni yarating"}
+                      {filtersChanged
+                        ? "Mos taklifnoma topilmadi"
+                        : "Birinchi taklifingizni yarating"}
                     </h2>
                     <p>
-                      {tab === "published"
-                        ? "Tayyor taklifnomalar nashr qilingach shu yerda ko‘rinadi."
-                        : tab === "draft"
-                          ? "Yangi taklifnoma yarating. Tugallanmagan taklifnomalaringiz shu yerda saqlanadi."
-                          : "Dizaynni tanlang, ma’lumotlaringizni kiriting va tayyor taklifnomani mehmonlaringizga ulashing."}
+                      {filtersChanged
+                        ? "Qidiruv yoki filtrlarni o‘zgartirib ko‘ring."
+                        : "Dizaynni tanlang, ma’lumotlaringizni kiriting va tayyor taklifnomani mehmonlaringizga ulashing."}
                     </p>
-                    <Link href="/studio?new=1" className={styles.primaryButton}>
-                      <Plus size={16} />
-                      Taklifnoma yaratish
-                    </Link>
-                    <small>
-                      Avval tayyorlashingiz mumkin. Kirish — saqlash paytida.
-                    </small>
+                    {filtersChanged ? (
+                      <button
+                        type="button"
+                        className={styles.primaryButton}
+                        onClick={() => {
+                          updateGrid(() => {
+                            setQuery("");
+                            setFormats({ web: true, image: true });
+                            setStatuses({ draft: true, published: true });
+                          });
+                        }}
+                      >
+                        Filtrlarni tozalash
+                      </button>
+                    ) : (
+                      <Link
+                        href="/studio?new=1"
+                        className={styles.primaryButton}
+                      >
+                        <Plus size={16} />
+                        Taklifnoma yaratish
+                      </Link>
+                    )}
+                    {!filtersChanged && (
+                      <small>
+                        Avval tayyorlashingiz mumkin. Kirish — saqlash paytida.
+                      </small>
+                    )}
                   </div>
                 )}
               </div>

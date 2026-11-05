@@ -1155,7 +1155,9 @@ export function Studio({
         const result = await response.json();
         if (!response.ok || !result.loginUrl)
           throw new Error(
-            "Telegram orqali kirishni boshlab bo‘lmadi. Qayta urinib ko‘ring.",
+            result.error?.code === "INVALID_ORIGIN"
+              ? "Sayt manzili sozlamasi mos kelmadi. Iltimos, qo‘llab-quvvatlash xizmatiga xabar bering."
+              : "Telegram orqali kirishni boshlab bo‘lmadi. Qayta urinib ko‘ring.",
           );
         setAuth(result);
         setAuthIdentity(null);

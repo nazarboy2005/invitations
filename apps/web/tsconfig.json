@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "target": "ES2022",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -13,8 +17,16 @@
     "isolatedModules": true,
     "jsx": "react-jsx",
     "incremental": true,
-    "plugins": [{ "name": "next" }],
-    "paths": { "@/*": ["./src/*"] }
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ]
+    }
   },
   "include": [
     "next-env.d.ts",
@@ -50,7 +62,13 @@
     ".next-einv-template-release-check2/dev/types/**/*.ts",
     ".next-einv-template-release-check3/types/**/*.ts",
     ".next-einv-template-release-check3/dev/types/**/*.ts",
-    ".next-einv-template-release-check4/dev/types/**/*.ts"
+    ".next-einv-template-release-check4/dev/types/**/*.ts",
+    ".next-static-collection/types/**/*.ts",
+    ".next-static-collection/dev/types/**/*.ts",
+    ".next-sahar-ifori/types/**/*.ts",
+    ".next-sahar-ifori/dev/types/**/*.ts"
   ],
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules"
+  ]
 }

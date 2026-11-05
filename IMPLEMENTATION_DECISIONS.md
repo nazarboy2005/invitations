@@ -1,5 +1,36 @@
 # Implementation decisions
 
+## Taklifnomalarim redesign (2026-11-05)
+
+- User requested the supplied ivory floral/silk reference for `/dashboard`, with
+  separately generated laptop/phone artwork fixed to the viewport during scrolling.
+  Preserve the current Fotiha navbar and branding.
+- Compact cards retain full native web 3:5 / image 5:7 artwork and their own natural
+  heights; image cards must not stretch to fill a taller web card's row. Keep primary
+  edit/download/copy/share controls visible; secondary details and management actions
+  belong in the three-dot menu. Remove the dashboard favorites shortcut.
+- Keep search and a pinned filter bar using the navbar's 28% ivory tint, 24px blur,
+  115% saturation and glass highlight. Latest user refinement consolidates status
+  and format choices in one Filtrlar dropdown; all four are selected by default.
+  Keep newest-first ordering automatic and remove newest/oldest choices and the
+  separate status tabs. Preserve mounted cover images while searching/filtering.
+- Laptop toolbar uses its left side for the total and draft/published counts, with
+  a wider search field at right. These counts are informational, not separate
+  filters. Preserve the compact phone toolbar requested by the user.
+- This supersedes the earlier plain-background requirement and the requirement to
+  display the full public URL on each card. Public links remain accessible through
+  the card menu, with visible copy/share feedback.
+- User follow-up: animate menu opening/closing and card movement/fades when
+  searching, filtering or sorting. Use frosted glass for the filter dropdown and
+  show only a plain tick for selected options; unselected options have no mark.
+  Keep keyboard operation, mounted covers and reduced-motion support intact.
+- Phone three-dot actions open in a wide, bounded panel above bottom navigation,
+  with an explicit close button. Successful copy feedback changes only the button
+  text/icon; do not add a separate success-message row.
+- Implemented and verified in development/production at five phone/tablet/laptop
+  widths, including cover-cache regressions. Evidence and generation prompts:
+  `docs/design/dashboard`. No external deployment or live payment activation.
+
 ## Static invitation composition (2026-11-05)
 
 - After approving the revised Oq atirgul, user requested three additional original
@@ -522,11 +553,10 @@
   screenshots or place replacement names over baked-in sample text. Generate
   static WebPs through per-template opening/gesture recipes. Follow the newer
   draft/published cover policy above for persistence and invalidation.
-- User correction: remove the decorative dashboard background image and make
-  the entire page compact. Keep portrait artwork; use smaller cards, tighter
-  spacing and two columns on phones. Published cards must show their public
-  URL and a copy control directly, with clear copy feedback; retain activity
-  access and secondary management actions without duplicating sharing controls.
+- Earlier compact-card direction remains: smaller portrait cards, tighter spacing
+  and two columns on phones, with activity access and secondary management actions.
+  The 2026-11-05 redesign supersedes the former plain background and visible full
+  public URL requirements; retain clear copy feedback.
 - Performance correction: switching dashboard filters must preserve mounted cards
   and ready cover URLs without a loading flash or regeneration. Retain a bounded
   memory cache when browser disk storage is unavailable. Draft covers invalidate

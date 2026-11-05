@@ -105,8 +105,11 @@ test(
           await p.goto(`${origin}/dashboard`);
           await loaded(p, 2);
           assert.equal(f.requests(), 2);
-          for (const label of ["Qoralamalar", "Nashr qilingan", "Barchasi"]) {
-            await p.getByRole("button", { name: new RegExp(label) }).click();
+          await p.getByRole("button", { name: "Taklifnoma filtrlari" }).click();
+          for (const label of [/^Nashr qilingan/, /^Qoralamalar/]) {
+            const choice = p.getByRole("checkbox", { name: label });
+            await choice.uncheck();
+            await choice.check();
             assert.equal(
               await p
                 .getByText("Muqova tayyorlanmoqda…", { exact: true })
@@ -114,6 +117,7 @@ test(
               0,
             );
           }
+          await p.keyboard.press("Escape");
           assert.equal(f.requests(), 2);
           await p.waitForFunction(
             async () =>
