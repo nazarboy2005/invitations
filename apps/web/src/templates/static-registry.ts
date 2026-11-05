@@ -4,6 +4,7 @@ import { zumradNaqshSlots, ZUMRAD_NAQSH_QR } from "./zumrad-naqsh/layout";
 import { lolaMaktubi } from "./lola-maktubi/layout";
 import { moviyRavoq } from "./moviy-ravoq-card/layout";
 import { zarhalOqshom } from "./zarhal-oqshom-card/layout";
+import { saharIfori } from "./sahar-ifori/layout";
 import type { StaticImageDesign } from "./static-design";
 
 /** Server-side, explicit allowlist; private asset paths never come from requests. */
@@ -32,4 +33,5 @@ export const STATIC_IMAGE_DESIGNS: Readonly<Record<string, StaticImageDesign>> =
     "lola-maktubi": lolaMaktubi,
     "moviy-ravoq-card": moviyRavoq,
     "zarhal-oqshom-card": zarhalOqshom,
+    "sahar-ifori": saharIfori,
   };

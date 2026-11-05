@@ -1,5 +1,9 @@
 # Zarhal oqshom
 
+Retired from new selections at the user's request; replaced by the light
+Sahar ifori through migrations 0216/0217. Retain this renderer and its private
+assets so existing invitations continue to open and download correctly.
+
 Original 5:7 Art Deco stationery: charcoal paper, fine gold geometry, staggered
 uppercase Forum names, italic supporting text and a framed QR balancing the
 left-aligned venue. The border/fans/engraved surface are editable, template-owned

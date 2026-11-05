@@ -15,6 +15,7 @@ export const TEMPLATE_CAPABILITIES: Record<string, TemplateCapabilities> = {
   "lola-maktubi": stationery(),
   "moviy-ravoq-card": stationery(),
   "zarhal-oqshom-card": stationery(),
+  "sahar-ifori": stationery(),
   "ivory-rose-card": source({ imageFields: ["people", "eventLabel", "message", "venueName", "address", "landmark"], locationQr: true, maps: true, music: false, wishes: false, gallery: 0, program: false, dressCode: false, story: 0, gift: false, receipts: false, phone: false, telegram: false, rsvp: "none", people: 2, artists: 0, rsvpDeadline: false }),
   "zumrad-naqsh": source({ imageFields: ["people", "eventLabel", "message", "venueName", "address", "landmark"], locationQr: true, maps: true, music: false, wishes: false, gallery: 0, program: false, dressCode: false, story: 0, gift: false, receipts: false, phone: false, telegram: false, rsvp: "none", people: 2, artists: 0, rsvpDeadline: false }),
   "wedivo-pulau-sehati": source({"gift": false, "receipts": false, "people": 2}),

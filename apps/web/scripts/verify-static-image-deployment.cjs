@@ -16,14 +16,14 @@ for (const route of ["static-images/preview", "invitations/[id]/image"]) {
     "src/templates/ivory-rose-card/assets/background.png",
     "src/templates/ivory-rose-card/assets/regular.ttf",
     "src/templates/ivory-rose-card/assets/italic.ttf",
-    ...["lola-maktubi", "moviy-ravoq-card", "zarhal-oqshom-card"].flatMap(
+    ...["lola-maktubi", "moviy-ravoq-card", "zarhal-oqshom-card", "sahar-ifori"].flatMap(
       (id) => [
         `src/templates/${id}/assets/background.${id === "zarhal-oqshom-card" ? "svg" : "png"}`,
         `src/templates/${id}/assets/regular.ttf`,
         `src/templates/${id}/assets/italic.ttf`,
       ],
     ),
-    ...["ivory-rose-card", "lola-maktubi"].flatMap((id) =>
+    ...["ivory-rose-card", "lola-maktubi", "sahar-ifori"].flatMap((id) =>
       ["latin", "latin-ext", "cyrillic", "cyrillic-ext"].map(
         (subset) => `src/templates/${id}/assets/calligraphy-${subset}.woff2`,
       ),

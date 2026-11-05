@@ -82,7 +82,10 @@ export async function downloadStaticImage(
       );
     const [template] =
       await tx`SELECT published,EXISTS(SELECT 1 FROM template_supported_event_types WHERE template_id=${invitation.templateId} AND event_type=${invitation.eventType}) AS compatible FROM templates WHERE id=${invitation.templateId} FOR SHARE`;
-    if (!template?.published || !template.compatible)
+    // Retiring a design removes new selection, but must not strand owned cards.
+    // Unreleased designs still require publication before they can be exported.
+    if (!template?.compatible ||
+      (!template.published && !templateById(invitation.templateId)?.retired))
       throw new ApiError(
         409,
         "TEMPLATE_UNAVAILABLE",

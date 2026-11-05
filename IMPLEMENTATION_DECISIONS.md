@@ -6,9 +6,11 @@
   static designs, with freedom to use completely different arrangements and visual
   identities. Keep the same editorial composition standard; finish and verify all
   three rather than creating variations of the existing card.
-- Selected implementation directions: Lola maktubi (asymmetric burgundy botanical
-  letter), Moviy ravoq (blue porcelain architectural frame), Zarhal oqshom (dark
-  Art Deco stationery with staggered upright names). Each owns its layout/artwork;
+- Current collection: Lola maktubi (asymmetric burgundy botanical letter), Moviy
+  ravoq (blue porcelain architectural frame), and Sahar ifori (light ivory, blush
+  botanicals and sage calligraphy). User rejected the dark Zarhal oqshom and asked
+  for a more beautiful light replacement. Remove Zarhal from new selections;
+  preserve its renderer for existing invitations. Each owns its layout/artwork;
   all support wedding/fotiha and map optional greeting/family signatures in addition
   to the mandatory static fields. The new optional slots do not change Oq atirgul.
 - Completed all three; applied registration/publication migrations 0214/0215 at
@@ -17,6 +19,9 @@
   save/reopen/switch/correction checks, 39 focused tests and production packaging
   pass. Evidence: `docs/templates/static-stationery-verification`. No deployment
   or live payment activation.
+- Sahar ifori replaces Zarhal through additive migrations 0216/0217, retaining
+  zero-price static testing, supported fields and wedding/fotiha compatibility.
+  Generation prompt and untouched artwork live in its isolated template package.
 - User selected Oq atirgul for a complete composition revision before creating
   another static design. Treat each invitation as editorial stationery: deliberate
   reading flow, distinct name/date/venue hierarchy, connected information groups,

@@ -15,7 +15,9 @@ const root = fileURLToPath(new URL("../", import.meta.url));
 process.chdir(path.join(root, "apps/web"));
 const out = path.join(root, "docs/templates/static-stationery-verification");
 await mkdir(out, { recursive: true });
-const ids = ["lola-maktubi", "moviy-ravoq-card", "zarhal-oqshom-card"];
+const ids = process.argv.includes("--sahar-only")
+  ? ["sahar-ifori"]
+  : ["lola-maktubi", "moviy-ravoq-card", "sahar-ifori"];
 const shortUrl = "https://fotiha.uz/Ab12Cd34";
 const posters: Buffer[] = [];
 for (const id of ids) {
@@ -158,7 +160,7 @@ for (const id of ids) {
   );
 }
 await sharp({
-  create: { width: 2250, height: 1050, channels: 3, background: "#ede8df" },
+  create: { width: posters.length * 750, height: 1050, channels: 3, background: "#ede8df" },
 })
   .composite(
     posters.map((input, index) => ({ input, left: index * 750, top: 0 })),

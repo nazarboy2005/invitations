@@ -11,14 +11,15 @@ import { normalizeInvitation } from "../packages/contracts/src/capabilities";
 import { completeInvitation } from "../tests/fixtures/publication";
 
 const release = process.argv.includes("--release");
-const origin = "http://127.0.0.1:3001";
+const catalogOnly = process.argv.includes("--catalog-only");
+const origin = process.env.STATIC_QA_ORIGIN ?? "http://127.0.0.1:3001";
 const out = fileURLToPath(
   new URL("../docs/templates/static-stationery-verification/", import.meta.url),
 );
 await mkdir(out, { recursive: true });
 const sql = getDb();
-const ids = ["lola-maktubi", "moviy-ravoq-card", "zarhal-oqshom-card"];
-const names = ["Lola maktubi", "Moviy ravoq", "Zarhal oqshom"];
+const ids = ["lola-maktubi", "moviy-ravoq-card", "sahar-ifori"];
+const names = ["Lola maktubi", "Moviy ravoq", "Sahar ifori"];
 const owner = randomUUID(),
   token = randomToken();
 const invitations = ids.map((templateId) => {
@@ -26,6 +27,9 @@ const invitations = ids.map((templateId) => {
   i.content["uz-Latn"].greeting = "Assalomu alaykum, aziz mehmon!";
   i.content["uz-Latn"].hosts = "Nodir va Madina oilalari";
   return i;
+});
+const retiredInvitation = normalizeInvitation({
+  ...completeInvitation(), templateId: "zarhal-oqshom-card",
 });
 let browser;
 async function post(route: string, body: unknown) {
@@ -59,6 +63,23 @@ try {
       await sql`INSERT INTO invitations(id,owner_id,template_id,status,data) VALUES(${i.id},${owner},${i.templateId},'draft',${sql.json(i)})`;
     }
   }
+  // Represent a pre-existing owned card, without making the retired design
+  // available for new creation. It must remain downloadable after retirement.
+  await sql`INSERT INTO invitations(id,owner_id,template_id,status,data) VALUES(${retiredInvitation.id},${owner},${retiredInvitation.templateId},'draft',${sql.json(retiredInvitation)})`;
+  const retiredDownload = await post(`/api/invitations/${retiredInvitation.id}/image`, {
+    revision: retiredInvitation.revision, locale: "uz-Latn",
+  });
+  await okay(retiredDownload);
+  assert.equal((await sharp(Buffer.from(await retiredDownload.arrayBuffer())).metadata()).width, 1500);
+  const blockedNewRetired = normalizeInvitation({
+    ...completeInvitation(), templateId: "zarhal-oqshom-card",
+  });
+  await okay(await post("/api/invitations", { invitation: blockedNewRetired }), 409);
+  console.log("PASS retired Zarhal: owned export remains available; new creation rejected");
+  // This compatibility probe is complete; keep the dashboard fixture at its
+  // original three cards rather than adding another simultaneous render.
+  await sql`DELETE FROM invitation_audit_log WHERE invitation_id=${retiredInvitation.id}`;
+  await sql`DELETE FROM invitations WHERE id=${retiredInvitation.id}`;
   browser = await chromium.launch({ headless: true });
   const context = await browser.newContext({
     viewport: { width: 1440, height: 1000 },
@@ -103,6 +124,7 @@ try {
       ]) {
     await page.setViewportSize(viewport);
     for (const [index, id] of ids.entries()) {
+      if (catalogOnly) break;
       await page.goto(`${origin}/preview?template=${id}`);
       await imageReady();
       await page.screenshot({
@@ -127,6 +149,9 @@ try {
       await page
         .getByRole("button", { name: "Rasm taklifnoma", exact: true })
         .click();
+      assert.equal(await page.getByRole("button", {
+        name: "Zarhal oqshom: batafsil ko‘rish", exact: true,
+      }).count(), 0);
       for (const [index, id] of ids.entries()) {
         const card = page.getByRole("button", {
           name: `${names[index]}: batafsil ko‘rish`,
@@ -161,7 +186,7 @@ try {
       });
     }
   }
-  if (release) {
+  if (release && !catalogOnly) {
     await page.setViewportSize({ width: 1440, height: 1000 });
     await page.goto(origin + "/studio?new=1");
     await page
@@ -284,7 +309,7 @@ try {
 } finally {
   await browser?.close();
   await sql.begin(async (tx) => {
-    const invitationIds = invitations.map((i) => i.id);
+    const invitationIds = [...invitations.map((i) => i.id), retiredInvitation.id];
     await tx`DELETE FROM invitation_audit_log WHERE invitation_id IN ${sql(invitationIds)}`;
     await tx`DELETE FROM invitations WHERE owner_id=${owner}`;
     await tx`DELETE FROM sessions WHERE user_id=${owner}`;

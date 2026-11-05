@@ -8,11 +8,13 @@ there is no external reference template or runtime to compare against.
 | --- | --- | --- |
 | Lola maktubi | Burgundy botanical engraving, left-aligned calligraphy, letter-like venue/QR footer | `apps/web/src/templates/lola-maktubi` |
 | Moviy ravoq | Blue porcelain arch, italic serif names, day medallion, family/QR footer | `apps/web/src/templates/moviy-ravoq-card` |
-| Zarhal oqshom | Charcoal/gold Art Deco geometry, staggered uppercase Forum names, framed QR | `apps/web/src/templates/zarhal-oqshom-card` |
+| Sahar ifori | Light ivory/blush botanicals, sage calligraphy, three-part date band and integrated QR/signature | `apps/web/src/templates/sahar-ifori` |
 
-Two backgrounds were generated with the built-in imagegen tool. Their untouched
-original PNGs and exact prompts are saved in their packages. Zarhal oqshom uses
-original editable SVG artwork. Fonts/artwork are local and private. The shared
+All three current backgrounds were generated with the built-in imagegen tool.
+Their untouched original PNGs and exact prompts are saved in their packages.
+Zarhal oqshom was retired at the user's request and replaced by Sahar ifori via
+migrations 0216/0217. See `sahar-ifori.md` for the replacement checks. Its old SVG
+source stays available for owned cards. Fonts/artwork are local and private. The shared
 typed adapter and isolated browser renderer abort all network requests; no
 third-party font, image, QR or template runtime is required.
 

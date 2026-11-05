@@ -451,8 +451,19 @@ export type TemplateDefinition = {
   currency: "UZS";
   accent: string;
   published: boolean;
+  /** Retained for owned invitations only; never offered for new selections. */
+  retired?: boolean;
 };
 export const TEMPLATES: TemplateDefinition[] = [
+  {
+    id: "sahar-ifori", format: "image", imageSize: { width: 1500, height: 2100 },
+    capabilities: templateCapabilities("sahar-ifori"),
+    name: "Sahar ifori",
+    description: "Iliq fil suyagi rangi, mayin pushti gullar va mavrak barglar orasida nafis xattotlik. 5:7 rasm taklifnoma.",
+    previewImage: "/templates/sahar-ifori/preview.webp", previewEventType: "wedding",
+    categoryIds: ["wedding"], supportedEventTypes: ["wedding", "fotiha"],
+    priceMinor: 0, currency: "UZS", accent: "#9aa98c", published: true,
+  },
   {
     id: "lola-maktubi", format: "image", imageSize: { width: 1500, height: 2100 },
     capabilities: templateCapabilities("lola-maktubi"),
@@ -478,7 +489,7 @@ export const TEMPLATES: TemplateDefinition[] = [
     description: "To‘q rang, zarhal chiziqlar va Art Deco tipografik kompozitsiya. 5:7 rasm taklifnoma.",
     previewImage: "/templates/zarhal-oqshom-card/preview.webp", previewEventType: "wedding",
     categoryIds: ["wedding"], supportedEventTypes: ["wedding", "fotiha"],
-    priceMinor: 0, currency: "UZS", accent: "#bf9b5e", published: true,
+    priceMinor: 0, currency: "UZS", accent: "#bf9b5e", published: false, retired: true,
   },
   {
     id: "ivory-rose-card",
