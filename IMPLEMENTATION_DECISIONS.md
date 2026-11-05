@@ -1,5 +1,38 @@
 # Implementation decisions
 
+## Static invitation composition (2026-11-05)
+
+- After approving the revised Oq atirgul, user requested three additional original
+  static designs, with freedom to use completely different arrangements and visual
+  identities. Keep the same editorial composition standard; finish and verify all
+  three rather than creating variations of the existing card.
+- Selected implementation directions: Lola maktubi (asymmetric burgundy botanical
+  letter), Moviy ravoq (blue porcelain architectural frame), Zarhal oqshom (dark
+  Art Deco stationery with staggered upright names). Each owns its layout/artwork;
+  all support wedding/fotiha and map optional greeting/family signatures in addition
+  to the mandatory static fields. The new optional slots do not change Oq atirgul.
+- Completed all three; applied registration/publication migrations 0214/0215 at
+  zero UZS under the existing free static testing policy. Four-locale/long-name/
+  optional/QR renders, desktop/phone catalog and Studio, real owned downloads,
+  save/reopen/switch/correction checks, 39 focused tests and production packaging
+  pass. Evidence: `docs/templates/static-stationery-verification`. No deployment
+  or live payment activation.
+- User selected Oq atirgul for a complete composition revision before creating
+  another static design. Treat each invitation as editorial stationery: deliberate
+  reading flow, distinct name/date/venue hierarchy, connected information groups,
+  complementary typography, intentional spacing and restrained fine ornaments.
+- Balance decorations with the text across corners, edges and the center. Use
+  varied alignment where it improves the composition; integrate the venue and QR
+  as a designed group rather than appending the QR beneath a centered text stack.
+- Preserve culturally appropriate wording and supported creator fields. This
+  revision does not itself add greeting, family signatures or contact inputs to
+  Oq atirgul; its earlier explicit field-support decision remains in force.
+- Implemented with local Latin/Cyrillic calligraphy, a composed date/time band,
+  left-aligned venue group, framed QR/caption and refreshed catalog artwork.
+  Four-locale/long-name/QR rendering, desktop/phone previews, 35 focused tests,
+  TypeScript and production build pass. Evidence:
+  `docs/templates/ivory-rose-card-verification/editorial`.
+
 ## Short links for static location QR codes (2026-11-05)
 
 - User approved shortening the Yandex destination embedded in static invitation
@@ -109,8 +142,9 @@
 - Location selection continues through the existing Yandex APIs. A design may map
   a QR code to that selected destination; a written-only address uses Yandex search.
   QR generation must be local, without a third-party QR service.
-- Oq atirgul remap: smaller names, larger separate date/time, venue/address/landmark
-  and a location QR. Greeting, hosts and contacts are unsupported and removed by
+- Oq atirgul composition: expressive names, a distinct composed date/time band,
+  venue/address/landmark and an integrated location QR. This supersedes the earlier
+  smaller-name remap. Greeting, hosts and contacts are unsupported and removed by
   shared normalization as well as hidden in Studio. Keep its generated artwork.
 - Implementation choices: a distinct image format alongside
   web invitations; 1500 x 2100 PNG export; render reduced-resolution

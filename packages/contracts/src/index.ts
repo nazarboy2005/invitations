@@ -454,6 +454,33 @@ export type TemplateDefinition = {
 };
 export const TEMPLATES: TemplateDefinition[] = [
   {
+    id: "lola-maktubi", format: "image", imageSize: { width: 1500, height: 2100 },
+    capabilities: templateCapabilities("lola-maktubi"),
+    name: "Lola maktubi",
+    description: "Bordo lolalar, qaymoqrang qog‘oz va nafis xattotlik. 5:7 rasm taklifnoma.",
+    previewImage: "/templates/lola-maktubi/preview.webp", previewEventType: "wedding",
+    categoryIds: ["wedding"], supportedEventTypes: ["wedding", "fotiha"],
+    priceMinor: 0, currency: "UZS", accent: "#612735", published: true,
+  },
+  {
+    id: "moviy-ravoq-card", format: "image", imageSize: { width: 1500, height: 2100 },
+    capabilities: templateCapabilities("moviy-ravoq-card"),
+    name: "Moviy ravoq",
+    description: "Chinni kabi moviy islimiy naqshlar va nafis ravoq. 5:7 rasm taklifnoma.",
+    previewImage: "/templates/moviy-ravoq-card/preview.webp", previewEventType: "wedding",
+    categoryIds: ["wedding"], supportedEventTypes: ["wedding", "fotiha"],
+    priceMinor: 0, currency: "UZS", accent: "#23467f", published: true,
+  },
+  {
+    id: "zarhal-oqshom-card", format: "image", imageSize: { width: 1500, height: 2100 },
+    capabilities: templateCapabilities("zarhal-oqshom-card"),
+    name: "Zarhal oqshom",
+    description: "To‘q rang, zarhal chiziqlar va Art Deco tipografik kompozitsiya. 5:7 rasm taklifnoma.",
+    previewImage: "/templates/zarhal-oqshom-card/preview.webp", previewEventType: "wedding",
+    categoryIds: ["wedding"], supportedEventTypes: ["wedding", "fotiha"],
+    priceMinor: 0, currency: "UZS", accent: "#bf9b5e", published: true,
+  },
+  {
     id: "ivory-rose-card",
     format: "image",
     imageSize: { width: 1500, height: 2100 },

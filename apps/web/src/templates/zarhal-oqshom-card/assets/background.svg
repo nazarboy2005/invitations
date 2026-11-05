@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="2100" viewBox="0 0 1500 2100">
+  <defs>
+    <radialGradient id="paper"><stop stop-color="#302e28"/><stop offset="1" stop-color="#171c1d"/></radialGradient>
+    <linearGradient id="foil" x2="1" y2="1"><stop stop-color="#886432"/><stop offset=".32" stop-color="#e6cb90"/><stop offset=".7" stop-color="#af874a"/><stop offset="1" stop-color="#e3c584"/></linearGradient>
+    <pattern id="grain" width="7" height="9" patternUnits="userSpaceOnUse"><path d="M1 2h1m3 4h1" stroke="#f6e9c4" stroke-opacity=".035"/></pattern>
+    <g id="corner" fill="none" stroke="url(#foil)" stroke-width="2">
+      <path d="M80 350V80h270M105 320V105h215M130 285V130h155M80 190h80V80M80 230h120V80"/>
+      <path d="M145 145h60l-60 60Z M145 145l49 11m-49-11 38 22m-38-22 26 34m-26-34 12 47" stroke="#bc985b" stroke-width="1.4"/>
+    </g>
+  </defs>
+  <path fill="url(#paper)" d="M0 0h1500v2100H0Z"/>
+  <path fill="url(#grain)" d="M0 0h1500v2100H0Z"/>
+  <g fill="none" stroke="url(#foil)" stroke-width="1.5">
+    <path d="M80 350v1400m1340-1400v1400M350 80h800M350 2020h800"/>
+    <path d="M105 350v1400m1290-1400v1400M350 105h800M350 1995h800" opacity=".45"/>
+    <path d="M480 310h540 M535 293h430 M590 276h320" opacity=".5"/>
+    <path d="M750 170l60 85h-120Z M750 185v70m-40-60 40 60 40-60m-70 22 30 38 30-38"/>
+    <path d="M750 165v-30m-75 80-28-13m178 13 28-13m-156-27-18-22m142 22 18-22"/>
+    <path d="M145 505l18 18-18 18-18-18Z M1355 1510l18 18-18 18-18-18Z"/>
+  </g>
+  <use href="#corner"/>
+  <use href="#corner" transform="translate(1500 0) scale(-1 1)"/>
+  <use href="#corner" transform="translate(0 2100) scale(1 -1)"/>
+  <use href="#corner" transform="translate(1500 2100) scale(-1 -1)"/>
+</svg>

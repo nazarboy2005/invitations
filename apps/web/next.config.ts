@@ -18,8 +18,24 @@ const config: NextConfig = {
     "sharp",
   ],
   outputFileTracingIncludes: {
-    "/api/static-images/preview": ["./src/templates/ivory-rose-card/assets/**", "./src/templates/zumrad-naqsh/assets/**", "./node_modules/@sparticuz/chromium/bin/**", "./node_modules/playwright-core/**"],
-    "/api/invitations/*/image": ["./src/templates/ivory-rose-card/assets/**", "./src/templates/zumrad-naqsh/assets/**", "./node_modules/@sparticuz/chromium/bin/**", "./node_modules/playwright-core/**"],
+    "/api/static-images/preview": [
+      "./src/templates/ivory-rose-card/assets/**",
+      "./src/templates/zumrad-naqsh/assets/**",
+      "./src/templates/lola-maktubi/assets/**",
+      "./src/templates/moviy-ravoq-card/assets/**",
+      "./src/templates/zarhal-oqshom-card/assets/**",
+      "./node_modules/@sparticuz/chromium/bin/**",
+      "./node_modules/playwright-core/**",
+    ],
+    "/api/invitations/*/image": [
+      "./src/templates/ivory-rose-card/assets/**",
+      "./src/templates/zumrad-naqsh/assets/**",
+      "./src/templates/lola-maktubi/assets/**",
+      "./src/templates/moviy-ravoq-card/assets/**",
+      "./src/templates/zarhal-oqshom-card/assets/**",
+      "./node_modules/@sparticuz/chromium/bin/**",
+      "./node_modules/playwright-core/**",
+    ],
     "/api/invitation-covers": [
       "./node_modules/@sparticuz/chromium/bin/**",
       // Playwright resolves browsers.json and other runtime assets dynamically.

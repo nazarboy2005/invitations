@@ -9,17 +9,29 @@ import { LOCALES, type Locale } from "../packages/contracts/src/index";
 import { normalizeInvitation } from "../packages/contracts/src/capabilities";
 import { createTemplatePreviewSample } from "../apps/web/src/modules/catalog/preview-sample";
 import { renderStaticImage } from "../apps/web/src/server/static-image-renderer";
+import {
+  imageSlots,
+  IMAGE_LOCATION_QR,
+} from "../apps/web/src/templates/ivory-rose-card/layout";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
 process.chdir(path.join(root, "apps/web"));
-const out = path.join(root, "docs/templates/ivory-rose-card-verification");
+const out = path.join(
+  root,
+  "docs/templates/ivory-rose-card-verification/editorial",
+);
 await mkdir(out, { recursive: true });
 const sample = normalizeInvitation(
   createTemplatePreviewSample("ivory-rose-card"),
 );
 async function decodeLocation(png: Buffer) {
   const { data, info } = await sharp(png)
-    .extract({ left: 585, top: 1710, width: 210, height: 210 })
+    .extract({
+      left: IMAGE_LOCATION_QR.x,
+      top: IMAGE_LOCATION_QR.y,
+      width: IMAGE_LOCATION_QR.size,
+      height: IMAGE_LOCATION_QR.size,
+    })
     .ensureAlpha()
     .raw()
     .toBuffer({ resolveWithObject: true });
@@ -54,6 +66,39 @@ for (const locale of LOCALES) {
   }
 }
 const moved = structuredClone(sample);
+const shortUrl = "https://fotiha.uz/Ab12Cd34";
+assert.equal(
+  await decodeLocation(
+    await renderStaticImage(sample, "uz-Latn", false, shortUrl),
+  ),
+  shortUrl,
+);
+const zoned = structuredClone(sample);
+zoned.startsAt = "2027-12-31T22:30:00Z";
+zoned.timezone = "Asia/Tashkent";
+const dateSlots = new Map(
+  imageSlots(zoned, "uz-Latn").map((slot) => [slot.key, slot.text]),
+);
+assert.equal(dateSlots.get("date.day"), "01");
+assert.equal(dateSlots.get("date.month"), "YANVAR");
+assert.equal(dateSlots.get("date.year"), "2028");
+assert.equal(dateSlots.get("time"), "03:30");
+assert.equal(imageSlots(sample, "ru").find((slot) => slot.key === "date.month")?.text, "ИЮНЯ");
+const minimal = normalizeInvitation(
+  createTemplatePreviewSample("ivory-rose-card", {
+    defaultLocale: "uz-Latn",
+    enabledLocales: [...LOCALES],
+    eventType: "fotiha",
+  }),
+);
+for (const locale of LOCALES) {
+  minimal.content[locale].address = "";
+  minimal.content[locale].landmark = "";
+}
+await sharp(await renderStaticImage(minimal, "uz-Latn", false, shortUrl))
+  .resize(900, 1260)
+  .webp({ quality: 92 })
+  .toFile(path.join(out, "fotiha-minimal.webp"));
 moved.venue = { latitude: 40.12, longitude: 67.83, mapUrl: "" };
 assert.equal(
   await decodeLocation(await renderStaticImage(moved, "uz-Latn", false)),
@@ -85,5 +130,5 @@ const overflow = structuredClone(sample);
 overflow.content["uz-Latn"].message = "Overflow ".repeat(900);
 await assert.rejects(renderStaticImage(overflow, "uz-Latn", false), /sig‘madi/);
 console.log(
-  "PASS: four locales, long names, protected preview, overflow rejection, scannable Yandex QR (selected/changed point and written address) and 1500×2100 flattened PNG; catalog poster generated.",
+  "PASS: four locales, long names, Fotiha/empty optionals, timezone rollover, Russian date grammar, protected preview, overflow rejection, short/Yandex QR decoding and 1500×2100 flattened PNG; catalog poster generated.",
 );

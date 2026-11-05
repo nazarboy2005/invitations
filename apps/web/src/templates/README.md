@@ -1,5 +1,14 @@
 # Invitation templates
 
+**Lola maktubi**, **Moviy ravoq** and **Zarhal oqshom** are three original static
+stationery compositions. Their private packages live under `lola-maktubi`,
+`moviy-ravoq-card` and `zarhal-oqshom-card`. Each has its own artwork, typography,
+field layout, local fonts and QR composition; `static-registry.ts` registers their
+render definitions. They reuse the protected-preview/flat-PNG export pipeline.
+They support wedding/fotiha, including optional greeting and family signatures.
+Registration/publication: migrations 0214/0215. Verification:
+`docs/templates/static-stationery-verification`.
+
 **Oq atirgul** (`ivory-rose-card`) is the first original generated static image
 template: 5:7 artwork, mapped fields, local fonts, a protected preview and a clean
 1500 × 2100 PNG download. It is free for testing and appears only in Templates,
