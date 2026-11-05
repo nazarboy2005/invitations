@@ -47,17 +47,37 @@
 .heroBrand {
   display: inline-flex;
   align-items: center;
-  gap: 20px;
+  gap: 0;
   color: var(--hero-ink);
   font-family: "Times New Roman", Times, serif;
   font-size: 50px;
   line-height: 1;
   letter-spacing: 3px;
 }
-.heroBrand svg {
-  width: 31px;
-  height: 34px;
-  color: #b79566;
+.heroMark {
+  width: 56px;
+  height: 56px;
+  flex: 0 0 auto;
+  object-fit: contain;
+}
+.heroBrandName {
+  display: block;
+  font-size: 1em;
+  font-weight: 500;
+  letter-spacing: 0.015em;
+  line-height: 0.86;
+}
+.heroBrandText {
+  display: grid;
+  justify-items: start;
+  gap: 7px;
+}
+.heroBrandTagline {
+  font-family: var(--font-home-body), sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.045em;
 }
 .heroNav {
   position: absolute;
@@ -154,13 +174,13 @@
     margin-right: 10.7%;
   }
   .heroBrand {
-    gap: clamp(10px, 2.5vw, 23px);
+    gap: 0;
     font-size: clamp(28px, 5.8vw, 54px);
     letter-spacing: 3px;
   }
-  .heroBrand svg {
-    width: clamp(17px, 3.8vw, 34px);
-    height: clamp(20px, 4.2vw, 38px);
+  .heroMark {
+    width: clamp(42px, 7vw, 56px);
+    height: clamp(42px, 7vw, 56px);
   }
   .heroNav,
   .heroActions {
@@ -569,8 +589,8 @@
   .header.heroHeader[data-tone="light"] { --hero-ink: #302b29; }
   .header.heroHeader .menuToggle { color: #302b29; }
   .heroInner { width: calc(100% - 36px); margin-inline: 18px; }
-  .heroBrand { font-size: 25px; gap: 9px; }
-  .heroBrand svg { width: 17px; height: 20px; }
+  .heroBrand { font-size: 25px; gap: 0; }
+  .heroMark { width: 42px; height: 42px; }
   .bottomNav {
     position: fixed;
     inset: auto 0 0;

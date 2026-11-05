@@ -7,6 +7,7 @@ const source = (overrides: Partial<TemplateCapabilities> = {}): TemplateCapabili
 
 export const TEMPLATE_CAPABILITIES: Record<string, TemplateCapabilities> = {
   "ivory-rose-card": source({ imageFields: ["people", "eventLabel", "message", "venueName", "address", "landmark"], locationQr: true, maps: true, music: false, wishes: false, gallery: 0, program: false, dressCode: false, story: 0, gift: false, receipts: false, phone: false, telegram: false, rsvp: "none", people: 2, artists: 0, rsvpDeadline: false }),
+  "zumrad-naqsh": source({ imageFields: ["people", "eventLabel", "message", "venueName", "address", "landmark"], locationQr: true, maps: true, music: false, wishes: false, gallery: 0, program: false, dressCode: false, story: 0, gift: false, receipts: false, phone: false, telegram: false, rsvp: "none", people: 2, artists: 0, rsvpDeadline: false }),
   "wedivo-pulau-sehati": source({"gift": false, "receipts": false, "people": 2}),
   "oltin-darvoza-ortidagi-baxt": source({"dressCode": false, "story": 0, "receipts": false, "people": 2}),
   "gulli-darvoza": source({"dressCode": false, "story": 0, "receipts": false, "people": 2}),

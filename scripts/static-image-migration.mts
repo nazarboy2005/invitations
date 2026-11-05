@@ -9,7 +9,7 @@ try {
         migrations:
           await sql`SELECT name FROM schema_migrations ORDER BY name DESC LIMIT 5`,
         template:
-          await sql`SELECT id,name,published,price_minor FROM templates WHERE id='ivory-rose-card'`,
+          await sql`SELECT id,name,published,price_minor,format FROM templates WHERE id IN ('ivory-rose-card','zumrad-naqsh') ORDER BY id`,
       }),
     );
   } else {
@@ -18,8 +18,12 @@ try {
         ? "0207_register_ivory_rose_image.sql"
         : action === "publish"
           ? "0208_publish_ivory_rose_image.sql"
+          : action === "register-zumrad"
+            ? "0211_register_zumrad_naqsh_image.sql"
+            : action === "publish-zumrad"
+              ? "0212_publish_zumrad_naqsh_image.sql"
           : null;
-    if (!name) throw new Error("Expected state, register or publish");
+    if (!name) throw new Error("Expected state, register, publish, register-zumrad or publish-zumrad");
     const source = await readFile(
       new URL(`../packages/database/migrations/${name}`, import.meta.url),
       "utf8",
@@ -37,7 +41,7 @@ try {
       JSON.stringify({
         migration: name,
         template:
-          await sql`SELECT id,name,published,price_minor,format FROM templates WHERE id='ivory-rose-card'`,
+          await sql`SELECT id,name,published,price_minor,format FROM templates WHERE id='${name.includes('zumrad') ? 'zumrad-naqsh' : 'ivory-rose-card'}'`,
       }),
     );
   }

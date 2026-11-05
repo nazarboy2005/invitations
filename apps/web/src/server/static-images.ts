@@ -11,6 +11,7 @@ import { ApiError } from "./api";
 import { getOwnedInvitation } from "./invitations";
 import { assertPublishable } from "./publication";
 import { renderStaticImage } from "./static-image-renderer";
+import { staticInvitationQrUrl } from "./static-location-links";
 import { invitationImageFilename } from "@/modules/static-images/filename";
 
 export async function staticImageLimit(
@@ -61,7 +62,8 @@ export async function downloadStaticImage(
   if (!invitation.enabledLocales.includes(locale))
     throw new ApiError(400, "INVALID_LOCALE", "Bu til yoqilmagan.");
   assertPublishable(invitation);
-  const bytes = await renderStaticImage(invitation, locale, false);
+  const qrUrl = await staticInvitationQrUrl(invitation, locale);
+  const bytes = await renderStaticImage(invitation, locale, false, qrUrl);
   const sql = getDb();
   let exportedAt = stored.imageExportedAt;
   await sql.begin(async (tx) => {

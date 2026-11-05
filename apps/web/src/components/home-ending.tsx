@@ -1,5 +1,6 @@
 import { BRAND_NAME } from "@/lib/brand";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowUp, ArrowUpRight, Flower2, Headset, Plus } from "lucide-react";
 import styles from "./home-ending.module.css";
 
@@ -188,12 +189,14 @@ export function HomeFooter() {
               className={styles.brand}
               aria-label={`${BRAND_NAME} bosh sahifa`}
             >
-              <svg viewBox="0 0 32 36" fill="none" aria-hidden="true">
-                <path
-                  d="m16 1 4.3 12.7L32 18l-11.7 4.3L16 35l-4.3-12.7L0 18l11.7-4.3L16 1Z"
-                  fill="currentColor"
-                />
-              </svg>
+              <Image
+                className={styles.brandMark}
+                src="/images/brand/fotiha-mark.png"
+                alt=""
+                width={1280}
+                height={1169}
+                aria-hidden="true"
+              />
               {BRAND_NAME}
             </Link>
             <p>

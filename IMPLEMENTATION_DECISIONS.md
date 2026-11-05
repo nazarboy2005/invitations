@@ -1,5 +1,18 @@
 # Implementation decisions
 
+## Short links for static location QR codes (2026-11-05)
+
+- User approved shortening the Yandex destination embedded in static invitation
+  QR codes. QR payloads use a full `https://fotiha.uz/{code}` URL for reliable
+  recognition by older phone cameras.
+- Use an eight-character Base62 code and an additive, durable code-to-canonical-
+  Yandex-URL mapping. Redirect only to validated Yandex Maps destinations; keep
+  mappings immutable so already-downloaded PNGs continue to open their original
+  destination after a creator edits the invitation location.
+- Keep Studio's Yandex venue selection and stored destination unchanged. Generate
+  the shortened QR locally in the existing static PNG renderer; do not use an
+  external shortening or QR service.
+
 ## Published and downloaded invitation edits (2026-11-03)
 
 - User authorized implementation of the earlier editing/correction plan, including

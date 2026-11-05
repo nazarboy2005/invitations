@@ -1,10 +1,11 @@
 import { BRAND_NAME } from "@/lib/brand";
 import Link from "next/link";
+import Image from "next/image";
 import { Heart, Home, LayoutGrid, UserRound } from "lucide-react";
 import { getSessionUser } from "@/server/auth";
 import styles from "./site-header.module.css";
 import { ScrollHeader } from "./scroll-header";
-import { sans } from "@/app/platform-fonts";
+import { display, sans } from "@/app/platform-fonts";
 import { AccountLinkLabel } from "@/components/account-link-label";
 import { HeroMobileMenu } from "@/components/hero-mobile-menu";
 import { SiteSounds } from "./site-sounds";
@@ -30,13 +31,21 @@ export async function SiteHeader({
           className={styles.heroBrand}
           aria-label={`${BRAND_NAME} bosh sahifa`}
         >
-          <svg viewBox="0 0 32 36" fill="none" aria-hidden="true">
-            <path
-              d="m16 1 4.3 12.7L32 18l-11.7 4.3L16 35l-4.3-12.7L0 18l11.7-4.3L16 1Z"
-              fill="currentColor"
-            />
-          </svg>
-          <span>{BRAND_NAME}</span>
+          <Image
+            className={styles.heroMark}
+            src="/images/brand/fotiha-mark.png"
+            alt=""
+            width={1280}
+            height={1169}
+            priority
+            aria-hidden="true"
+          />
+          <span className={styles.heroBrandText}>
+            <span className={`${styles.heroBrandName} ${display.className}`}>
+              {BRAND_NAME}
+            </span>
+            <span className={styles.heroBrandTagline}>Go'zal kunlar sari.</span>
+          </span>
         </Link>
         <nav className={styles.heroNav} aria-label="Asosiy menyu">
           <Link href="/templates">Shablonlar</Link>

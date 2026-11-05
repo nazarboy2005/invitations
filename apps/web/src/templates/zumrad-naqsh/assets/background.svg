@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="2100" viewBox="0 0 1500 2100">
+  <defs>
+    <linearGradient id="silk" x2="1" y2="1"><stop stop-color="#0c342d"/><stop offset=".52" stop-color="#16463b"/><stop offset="1" stop-color="#0a3029"/></linearGradient>
+    <pattern id="grain" width="8" height="8" patternUnits="userSpaceOnUse"><path d="M0 1h2M5 6h2" stroke="#d2bc7d" stroke-opacity=".055" stroke-width=".7"/></pattern>
+    <pattern id="girih" width="54" height="54" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><path d="M27 0 54 27 27 54 0 27Z M27 10 44 27 27 44 10 27Z" fill="none" stroke="#c7a96a" stroke-opacity=".48" stroke-width="1.5"/><circle cx="27" cy="27" r="3" fill="#e0c887" fill-opacity=".6"/></pattern>
+    <g id="corner" fill="none" stroke="#d4bb79" stroke-width="2">
+      <path d="M0 195V28Q0 0 28 0h185M0 80h36l18-18 18 18h60M80 0v36l18 18L80 72V136M14 174q34-62 96-96M34 186q34-59 83-83"/>
+      <path d="M39 39l13 13-13 13-13-13zM105 105l11 11-11 11-11-11z" fill="#d4bb79" fill-opacity=".23"/>
+      <circle cx="80" cy="80" r="5" fill="#ead69b"/>
+    </g>
+  </defs>
+  <rect width="1500" height="2100" fill="url(#silk)"/><rect width="1500" height="2100" fill="url(#grain)"/>
+  <rect x="42" y="42" width="1416" height="2016" rx="4" fill="none" stroke="#d5bd7d" stroke-width="3"/>
+  <rect x="57" y="57" width="1386" height="1986" rx="2" fill="none" stroke="#d5bd7d" stroke-opacity=".48" stroke-width="1.5"/>
+  <rect x="73" y="73" width="1354" height="1954" fill="url(#girih)" opacity=".52"/>
+  <rect x="92" y="92" width="1316" height="1916" fill="url(#silk)"/>
+  <rect x="92" y="92" width="1316" height="1916" fill="url(#grain)"/>
+  <rect x="109" y="109" width="1282" height="1882" fill="none" stroke="#d8c68f" stroke-opacity=".7" stroke-width="1.5"/>
+  <use href="#corner" x="108" y="108"/><use href="#corner" x="1392" y="108" transform="rotate(90 1392 108)"/>
+  <use href="#corner" x="108" y="1992" transform="rotate(-90 108 1992)"/><use href="#corner" x="1392" y="1992" transform="rotate(180 1392 1992)"/>
+  <path d="M570 285h120m120 0h120M720 285l30-15 30 15-30 15z" fill="none" stroke="#dbc887" stroke-width="2"/>
+  <path d="M570 1638h120m120 0h120M720 1638l30-15 30 15-30 15z" fill="none" stroke="#dbc887" stroke-width="2"/>
+  <rect x="625" y="1713" width="250" height="250" rx="5" fill="#f8f0dc" stroke="#d6bf83" stroke-width="2"/>
+  <path d="M730 1992h40m-20-20v40" stroke="#dbc887" stroke-width="2"/>
+</svg>
