@@ -954,11 +954,7 @@ The archive contains 28 captured preview snapshots. Each candidate is adapted fr
 | `pink-lotus` | Pink Lotus | Queued |
 | `purple-flower` | Purple Flower | Queued |
 | `red-rose-card` | Red Rose Card | Queued |
-| `royal-blue` | Royal Blue | Queued |
-| `royal-green` | Royal Green | Queued |
 | `royal-purple` | Royal Purple | Queued |
-| `royal-red` | Royal Red | Queued |
-| `spring-bahor` | Spring Bahor | Queued |
 | `stained-glass` | Stained Glass | Queued |
 | `sunset` | Sunset | Queued |
 | `swan-garden` | Swan Garden | Queued |

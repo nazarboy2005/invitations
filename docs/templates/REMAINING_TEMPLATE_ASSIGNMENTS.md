@@ -256,7 +256,7 @@ empty optional details hidden.
   only where that template's specific source file is missing or browser evidence
   cannot be obtained.
 
-- Registry reconciliation (2026-10-25): `CHORLOVE_TEMPLATE_IDS` contains 28 IDs.
+- Registry reconciliation (2026-10-25): `CHORLOVE_TEMPLATE_IDS` contained 28 IDs before the permanent exclusions recorded below; the current registry contains 24 IDs.
   The recovered provider `templates` directory contains 26 template folders
   with 26 `preview-frame.html` captures. `love-sakura` and `royal-purple` have
   no folder/capture there; Love Sakura still has an existing app package and
@@ -266,10 +266,10 @@ empty optional details hidden.
   `jasmine-white`, `lace`, `love-sakura`, `luxury-gold`, `modern-floral`,
   `orchid-amplop`, `osh`, `palace-rose`, and `palov` (12 at the public template
   root; `orchid-amplop`, `osh`, and `palov` under the Chorlove namespace). The
-  other 13 registry IDs
+  other nine registry IDs
   without package directories are `ivory-love`, `pink-lotus`, `purple-flower`,
-  `red-rose-card`, `royal-blue`, `royal-green`, `royal-purple`, `royal-red`,
-  `spring-bahor`, `stained-glass`, `sunset`, `swan-garden`, and `velvet-romance`;
+  `red-rose-card`, `royal-purple`, `stained-glass`, `sunset`, `swan-garden`,
+  and `velvet-romance`;
   this inventory does not claim that all 15 packages passed the full audit.
   Local `/api/catalog` is `configured=false`, so it is not authoritative for
   the full database publication list.
@@ -419,7 +419,8 @@ empty optional details hidden.
 
 A fresh exact-path check confirms three separate inventories:
 
-- The typed Chorlove registry contains 28 IDs; the shared renderer accepts those
+- The typed Chorlove registry contained 28 IDs before the permanent exclusions
+  recorded below; the current registry contains 24 IDs. The shared renderer accepts those
   IDs but selects a template-specific frame path, which only exists for the
   packaged set below. Registry presence alone is not package/source evidence.
 - The recovered Chorlove `templates/` archive has 26 directories with
@@ -432,10 +433,9 @@ A fresh exact-path check confirms three separate inventories:
   `jasmine-white`, `lace`, `love-sakura`, `luxury-gold`, `modern-floral`,
   `palace-rose`) and three namespaced (`orchid-amplop`, `osh`, `palov`).
 
-The other 13 registry IDs have no Chorlove package path:
-`ivory-love`, `pink-lotus`, `purple-flower`, `red-rose-card`, `royal-blue`,
-`royal-green`, `royal-purple`, `royal-red`, `spring-bahor`, `stained-glass`,
-`sunset`, `swan-garden`, `velvet-romance`. Twelve have archive snapshots only;
+The other nine registry IDs have no Chorlove package path:
+`ivory-love`, `pink-lotus`, `purple-flower`, `red-rose-card`, `royal-purple`,
+`stained-glass`, `sunset`, `swan-garden`, `velvet-romance`. Twelve have archive snapshots only;
 Royal Purple has no archive snapshot. Do not count these as implemented source
 fidelity packages based on registry/catalog placeholders alone. Published
 Palov is included in the 15-package count and has its source/cover/motion record
