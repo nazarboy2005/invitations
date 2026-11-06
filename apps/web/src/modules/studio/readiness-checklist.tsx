@@ -10,11 +10,6 @@ const groups = [
   { title: "Qo‘shimcha imkoniyatlar", icon: Settings2 },
 ];
 function fieldLabel(issue: PublicationIssue) {
-  if (
-    issue.path === "startsAt" &&
-    issue.message.startsWith("Tadbir kuni o‘tib ketgan")
-  )
-    return issue.message;
   if (issue.path.startsWith("program.")) return `Dastur · ${Number(issue.path.split(".")[1]) + 1}-band vaqti`;
   if (issue.path.includes(".programTitles.")) return "Dastur bandi nomi";
   const field = issue.path.split(".").at(-1);

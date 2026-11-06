@@ -190,28 +190,6 @@ const sections = [
   },
 ];
 
-function studioPublicationIssues(
-  invitation: Invitation,
-  now: Date,
-): PublicationIssue[] {
-  const issues = publicationIssues(invitation);
-  // Match checkout's server rule: the event remains valid through its local
-  // calendar day and becomes ended at midnight in the invitation timezone.
-  if (!issues.some((issue) => issue.path === "startsAt")) {
-    try {
-      if (invitation.startsAt.slice(0, 10) < eventDay(now, invitation.timezone))
-        issues.push({
-          path: "startsAt",
-          section: 2,
-          message: "Tadbir kuni o‘tib ketgan. Bugun yoki undan keyingi sanani tanlang.",
-        });
-    } catch {
-      // The existing timezone validation issue explains invalid timezone data.
-    }
-  }
-  return issues;
-}
-
 function fillDressCodeDefaults(
   current: Invitation["dressCode"],
 ): Invitation["dressCode"] {
@@ -1106,7 +1084,7 @@ export function Studio({
     formatTemplates,
     invitation.eventType,
   );
-  const readiness = studioPublicationIssues(invitation, clockNow);
+  const readiness = publicationIssues(invitation);
   const startsAtIssue = readiness.find((issue) => issue.path === "startsAt");
   if (
     invitation.status === "draft" &&
@@ -1297,7 +1275,7 @@ export function Studio({
     const repeatSavedDownload = action === "download" && !!current.imageExportedAt &&
       (contentExpired || JSON.stringify(current) === lastCloudSnapshot.current);
     if (action === "publish" || (action === "download" && !repeatSavedDownload)) {
-      const issues = studioPublicationIssues(current, clockNow);
+      const issues = publicationIssues(current);
       if (issues.length) {
         setPublishIssues(issues);
         setNotice("");
