@@ -1,0 +1,19 @@
+{
+  "proposedId": "wedivo-peony-paradise",
+  "name": "Gulbarglar sehri",
+  "defaultLocale": "uz-Latn",
+  "categoryIds": ["wedding"],
+  "supportedEventTypes": ["wedding"],
+  "published": false,
+  "selectable": false,
+  "catalogEligible": false,
+  "openingCover": "/templates/wedivo-peony-paradise/preview.jpg",
+  "migrationNeeded": true,
+  "migrationOwner": "01a1799d-f44a-77b1-8491-802254dc23d2",
+  "sourceFieldGaps": true,
+  "browserVerified": false,
+  "creatorLifecycleVerified": false,
+  "mobileOpeningVerified": true,
+  "desktopOpeningVerified": true,
+  "reducedMotionOpeningVerified": true
+}

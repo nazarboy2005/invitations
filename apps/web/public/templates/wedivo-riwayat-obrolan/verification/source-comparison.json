@@ -1,0 +1,58 @@
+[
+  {
+    "mode": "reference",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "errors": [],
+    "evidence": {
+      "coverGone": true,
+      "heroRevealed": true,
+      "coverOpacityTransition": "0.55s",
+      "font": "Figtree, system-ui, -apple-system, \"Segoe UI\", Roboto, sans-serif"
+    }
+  },
+  {
+    "mode": "package",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "errors": [],
+    "evidence": {
+      "coverGone": true,
+      "heroRevealed": true,
+      "coverOpacityTransition": "0.55s",
+      "font": "Figtree, system-ui, -apple-system, \"Segoe UI\", Roboto, sans-serif"
+    }
+  },
+  {
+    "mode": "reference",
+    "viewport": {
+      "width": 1280,
+      "height": 900
+    },
+    "errors": [],
+    "evidence": {
+      "coverGone": true,
+      "heroRevealed": true,
+      "coverOpacityTransition": "0.55s",
+      "font": "Figtree, system-ui, -apple-system, \"Segoe UI\", Roboto, sans-serif"
+    }
+  },
+  {
+    "mode": "package",
+    "viewport": {
+      "width": 1280,
+      "height": 900
+    },
+    "errors": [],
+    "evidence": {
+      "coverGone": true,
+      "heroRevealed": true,
+      "coverOpacityTransition": "0.55s",
+      "font": "Figtree, system-ui, -apple-system, \"Segoe UI\", Roboto, sans-serif"
+    }
+  }
+]

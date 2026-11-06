@@ -1,0 +1,20 @@
+{
+  "templateId": "wedivo-angin-empat-musim",
+  "type": "actual renderer opening",
+  "viewport": {
+    "width": 450,
+    "height": 800,
+    "deviceScaleFactor": 1
+  },
+  "locale": "uz-Latn",
+  "fixture": "apps/web/src/modules/catalog/preview-sample.json",
+  "fixtureSha256": "98591ce063bd2fa23c2ae508ad19e54ded2f965ac6693aa5a8410fbe497a1f13",
+  "image": "preview.png",
+  "sha256": "5427fd9151063a98fc41855756991f5988e9aab7b4e2b709e814dbed947bbd36",
+  "capture": "450x800 same-origin source iframe with canonical typed preview payload; no personalized guest; after local fonts ready; no app/browser chrome; locale overlay hidden only during screenshot",
+  "sourceCaptureSha256": "65e3ebfe7ae137cade1d2a4c6d7bb94efb8e2d6d219d1035beaec8786fb3b436",
+  "state": "closed locker opening; source art and CSS, Uzbek production copy",
+  "publication": "private; central dispatch/DB integration pending",
+  "rendererAdapterSha256": "6e010891e81d3af24ab7c1e501fe10cfa22bdb5514475b4fe3420b16f5834431",
+  "platformAdapterSha256": "baed67c6136878c4779878d401b9d1602899d55ac8ece2d350b65a6fef67758f"
+}

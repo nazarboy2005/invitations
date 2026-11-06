@@ -1,0 +1,85 @@
+{
+  "cases": [
+    {
+      "locale": "uz-Latn",
+      "reduced": false,
+      "viewport": "390x844",
+      "errors": [],
+      "localAssetsOnly": true
+    },
+    {
+      "locale": "uz-Latn",
+      "reduced": true,
+      "viewport": "390x844",
+      "errors": [],
+      "localAssetsOnly": true
+    },
+    {
+      "locale": "uz-Cyrl",
+      "reduced": false,
+      "viewport": "390x844",
+      "errors": [],
+      "localAssetsOnly": true
+    },
+    {
+      "locale": "uz-Cyrl",
+      "reduced": true,
+      "viewport": "390x844",
+      "errors": [],
+      "localAssetsOnly": true
+    },
+    {
+      "locale": "en",
+      "reduced": false,
+      "viewport": "390x844",
+      "errors": [],
+      "localAssetsOnly": true
+    },
+    {
+      "locale": "en",
+      "reduced": true,
+      "viewport": "390x844",
+      "errors": [],
+      "localAssetsOnly": true
+    },
+    {
+      "locale": "ru",
+      "reduced": false,
+      "viewport": "390x844",
+      "errors": [],
+      "localAssetsOnly": true
+    },
+    {
+      "locale": "ru",
+      "reduced": true,
+      "viewport": "390x844",
+      "errors": [],
+      "localAssetsOnly": true
+    },
+    {
+      "name": "desktop authored",
+      "stories": 7,
+      "preview": false,
+      "mockedServiceContract": true,
+      "errors": []
+    },
+    {
+      "name": "payload locale/content update",
+      "errors": []
+    }
+  ],
+  "errors": [],
+  "cover": {
+    "path": "catalog-opening.png",
+    "width": 480,
+    "height": 860,
+    "sha256": "71dbf5dfeabdaf891bc5d50b4d33e6563e82dfc91cfb5593d32a450b3415b7cc",
+    "fixtureSHA256": "98591ce063bd2fa23c2ae508ad19e54ded2f965ac6693aa5a8410fbe497a1f13"
+  },
+  "music": {
+    "playbackEngine": "mocked HTMLMediaElement.play",
+    "initialPublicAttempt": true,
+    "pausePreservedAfterPayloadUpdate": true,
+    "actualBrowserAutoplayNotAsserted": true
+  }
+}

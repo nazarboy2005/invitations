@@ -1,0 +1,84 @@
+@font-face {
+  font-family: 'Amiri';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(c1ed75c0eada28ab8f8db0ee.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Amiri';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(68199692a9545c97f81dee86.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Figtree';
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url(9b652de5f3c1d4ca74ee22a8.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Figtree';
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+  src: url(2d35120666621545a9183e2d.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Figtree';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(5ba0e240bb32bf9a3a24da50.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Figtree';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(aba48a3c52a959e2b9e71742.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Figtree';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(2711b5ffa4bc4a61e588607c.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Figtree';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(ea611ff711086e9f61e01865.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Figtree';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url(5e72687b0c65bc56d5f8003b.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Figtree';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url(4914420a9e7b8910eb4af1df.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Gloock';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(39867a65c91a441971a57e5e.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Lobster';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(1308599a2db84505e8ed74ff.ttf) format('truetype');
+}

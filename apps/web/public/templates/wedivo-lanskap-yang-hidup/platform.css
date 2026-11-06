@@ -1,0 +1,12 @@
+[hidden], .is-empty { display: none !important; }
+html:not(.lanskap-ready) body { visibility: hidden; }
+#rsvp-pax-row, #rsvp-pax-l, #pax-m, #pax-p, #rsvp-pax, #rsvp-pax-wrap { display: none !important; }
+#cv-names, #hero-names, #close-names { overflow-wrap: anywhere; }
+#cv-bride, #cv-groom, #hero-bride, #hero-groom, #close-bride, #close-groom { max-width: 100%; }
+#cv-names.long-names { font-size: clamp(28px, 7vw, 66px); }
+#hero-names.long-names { font-size: clamp(30px, 7vw, 84px); }
+#close-names.long-names { font-size: clamp(28px, 7vw, 64px); }
+.lanskap-reduced *, .lanskap-reduced *::before, .lanskap-reduced *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+.lanskap-reduced .sec:not(#sec-hero) .rv, .lanskap-reduced .vn, .lanskap-reduced .plot, .lanskap-reduced body.is-open #sec-hero .rv { opacity: 1 !important; transform: none !important; }
+.platform-feedback { padding: 12px 0; font: 400 13px/1.6 Geologica, sans-serif; }
+@media (max-width: 480px) { #cv-card { max-height: calc(100svh - 16px); overflow-y: auto; } }

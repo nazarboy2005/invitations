@@ -1,0 +1,452 @@
+[
+  {
+    "key": "groom_name",
+    "label": "Nama Panggilan Mempelai Pria",
+    "type": "text"
+  },
+  {
+    "key": "bride_name",
+    "label": "Nama Panggilan Mempelai Wanita",
+    "type": "text"
+  },
+  {
+    "key": "groom_full_name",
+    "label": "Nama Lengkap Mempelai Pria",
+    "type": "text"
+  },
+  {
+    "key": "bride_full_name",
+    "label": "Nama Lengkap Mempelai Wanita",
+    "type": "text"
+  },
+  {
+    "key": "groom_parents",
+    "label": "Orang Tua Mempelai Pria",
+    "type": "text"
+  },
+  {
+    "key": "bride_parents",
+    "label": "Orang Tua Mempelai Wanita",
+    "type": "text"
+  },
+  {
+    "key": "groom_photo",
+    "label": "Foto Mempelai Pria",
+    "type": "image"
+  },
+  {
+    "key": "bride_photo",
+    "label": "Foto Mempelai Wanita",
+    "type": "image"
+  },
+  {
+    "key": "couple_photo",
+    "label": "Foto Berdua (di Cincin Penutup)",
+    "type": "image"
+  },
+  {
+    "key": "wedding_date",
+    "label": "Tanggal Pernikahan",
+    "type": "date"
+  },
+  {
+    "key": "wedding_time",
+    "label": "Jam Acara Pertama",
+    "type": "time"
+  },
+  {
+    "key": "time_zone",
+    "label": "Zona Waktu (WIB / WITA / WIT)",
+    "type": "text"
+  },
+  {
+    "key": "venue_name",
+    "label": "Nama Tempat Acara",
+    "type": "text"
+  },
+  {
+    "key": "venue_address",
+    "label": "Alamat Tempat Acara",
+    "type": "text"
+  },
+  {
+    "key": "venue_place_id",
+    "label": "Google Place ID Tempat Acara",
+    "type": "text"
+  },
+  {
+    "key": "maps_api_key",
+    "label": "Kunci Google Maps",
+    "type": "text"
+  },
+  {
+    "key": "venue_note",
+    "label": "Patokan Lokasi",
+    "type": "text"
+  },
+  {
+    "key": "guest_name",
+    "label": "Nama Tamu",
+    "type": "text"
+  },
+  {
+    "key": "background_music_url",
+    "label": "Musik Latar",
+    "type": "audio"
+  },
+  {
+    "key": "rundown_data",
+    "label": "Susunan Acara",
+    "type": "text"
+  },
+  {
+    "key": "gallery_photos",
+    "label": "Foto Galeri (maks. 10)",
+    "type": "images"
+  },
+  {
+    "key": "cover_note",
+    "label": "Catatan di Sampul",
+    "type": "text"
+  },
+  {
+    "key": "hero_line",
+    "label": "Kalimat Pembuka (Hero)",
+    "type": "richtext"
+  },
+  {
+    "key": "salam_opening",
+    "label": "Salam Pembuka",
+    "type": "text"
+  },
+  {
+    "key": "invitation_text",
+    "label": "Kalimat Undangan",
+    "type": "richtext"
+  },
+  {
+    "key": "quote_text",
+    "label": "Kutipan / Ayat",
+    "type": "richtext"
+  },
+  {
+    "key": "quote_source",
+    "label": "Sumber Kutipan",
+    "type": "text"
+  },
+  {
+    "key": "groom_dream",
+    "label": "Mimpi Mempelai Pria",
+    "type": "richtext"
+  },
+  {
+    "key": "bride_dream",
+    "label": "Mimpi Mempelai Wanita",
+    "type": "richtext"
+  },
+  {
+    "key": "groom_instagram",
+    "label": "Instagram Mempelai Pria",
+    "type": "text"
+  },
+  {
+    "key": "bride_instagram",
+    "label": "Instagram Mempelai Wanita",
+    "type": "text"
+  },
+  {
+    "key": "story_1_date",
+    "label": "Kisah 1 — Waktu",
+    "type": "text"
+  },
+  {
+    "key": "story_1_title",
+    "label": "Kisah 1 — Judul",
+    "type": "text"
+  },
+  {
+    "key": "story_1_text",
+    "label": "Kisah 1 — Cerita",
+    "type": "richtext"
+  },
+  {
+    "key": "story_1_photo",
+    "label": "Kisah 1 — Foto",
+    "type": "image"
+  },
+  {
+    "key": "story_2_date",
+    "label": "Kisah 2 — Waktu",
+    "type": "text"
+  },
+  {
+    "key": "story_2_title",
+    "label": "Kisah 2 — Judul",
+    "type": "text"
+  },
+  {
+    "key": "story_2_text",
+    "label": "Kisah 2 — Cerita",
+    "type": "richtext"
+  },
+  {
+    "key": "story_2_photo",
+    "label": "Kisah 2 — Foto",
+    "type": "image"
+  },
+  {
+    "key": "story_3_date",
+    "label": "Kisah 3 — Waktu",
+    "type": "text"
+  },
+  {
+    "key": "story_3_title",
+    "label": "Kisah 3 — Judul",
+    "type": "text"
+  },
+  {
+    "key": "story_3_text",
+    "label": "Kisah 3 — Cerita",
+    "type": "richtext"
+  },
+  {
+    "key": "story_3_photo",
+    "label": "Kisah 3 — Foto",
+    "type": "image"
+  },
+  {
+    "key": "story_4_date",
+    "label": "Kisah 4 — Waktu",
+    "type": "text"
+  },
+  {
+    "key": "story_4_title",
+    "label": "Kisah 4 — Judul",
+    "type": "text"
+  },
+  {
+    "key": "story_4_text",
+    "label": "Kisah 4 — Cerita",
+    "type": "richtext"
+  },
+  {
+    "key": "story_4_photo",
+    "label": "Kisah 4 — Foto",
+    "type": "image"
+  },
+  {
+    "key": "tafsir_1_dream",
+    "label": "Tafsir 1 — Mimpinya (jam meleleh)",
+    "type": "text"
+  },
+  {
+    "key": "tafsir_1_meaning",
+    "label": "Tafsir 1 — Artinya",
+    "type": "richtext"
+  },
+  {
+    "key": "tafsir_2_dream",
+    "label": "Tafsir 2 — Mimpinya (tangga melayang)",
+    "type": "text"
+  },
+  {
+    "key": "tafsir_2_meaning",
+    "label": "Tafsir 2 — Artinya",
+    "type": "richtext"
+  },
+  {
+    "key": "tafsir_3_dream",
+    "label": "Tafsir 3 — Mimpinya (pintu di gurun)",
+    "type": "text"
+  },
+  {
+    "key": "tafsir_3_meaning",
+    "label": "Tafsir 3 — Artinya",
+    "type": "richtext"
+  },
+  {
+    "key": "tafsir_4_dream",
+    "label": "Tafsir 4 — Mimpinya (ikan di langit)",
+    "type": "text"
+  },
+  {
+    "key": "tafsir_4_meaning",
+    "label": "Tafsir 4 — Artinya",
+    "type": "richtext"
+  },
+  {
+    "key": "countdown_note",
+    "label": "Catatan Hitung Mundur",
+    "type": "text"
+  },
+  {
+    "key": "event_1_name",
+    "label": "Nama Acara Pertama",
+    "type": "text"
+  },
+  {
+    "key": "event_1_end_time",
+    "label": "Jam Selesai Acara Pertama",
+    "type": "time"
+  },
+  {
+    "key": "event_1_note",
+    "label": "Catatan Acara Pertama",
+    "type": "text"
+  },
+  {
+    "key": "event_2_name",
+    "label": "Nama Acara Kedua (kosongkan kalau cuma satu acara)",
+    "type": "text"
+  },
+  {
+    "key": "event_2_date",
+    "label": "Tanggal Acara Kedua",
+    "type": "date"
+  },
+  {
+    "key": "event_2_time",
+    "label": "Jam Mulai Acara Kedua",
+    "type": "time"
+  },
+  {
+    "key": "event_2_end_time",
+    "label": "Jam Selesai Acara Kedua",
+    "type": "time"
+  },
+  {
+    "key": "event_2_venue",
+    "label": "Tempat Acara Kedua",
+    "type": "text"
+  },
+  {
+    "key": "event_2_address",
+    "label": "Alamat Acara Kedua",
+    "type": "text"
+  },
+  {
+    "key": "event_2_note",
+    "label": "Catatan Acara Kedua",
+    "type": "text"
+  },
+  {
+    "key": "live_stream_link",
+    "label": "Tautan Siaran Langsung (opsional)",
+    "type": "url"
+  },
+  {
+    "key": "dresscode_text",
+    "label": "Keterangan Busana",
+    "type": "richtext"
+  },
+  {
+    "key": "dresscode_color_1",
+    "label": "Warna Busana 1",
+    "type": "color"
+  },
+  {
+    "key": "dresscode_color_1_name",
+    "label": "Nama Warna 1",
+    "type": "text"
+  },
+  {
+    "key": "dresscode_color_2",
+    "label": "Warna Busana 2",
+    "type": "color"
+  },
+  {
+    "key": "dresscode_color_2_name",
+    "label": "Nama Warna 2",
+    "type": "text"
+  },
+  {
+    "key": "dresscode_color_3",
+    "label": "Warna Busana 3",
+    "type": "color"
+  },
+  {
+    "key": "dresscode_color_3_name",
+    "label": "Nama Warna 3",
+    "type": "text"
+  },
+  {
+    "key": "dresscode_color_4",
+    "label": "Warna Busana 4",
+    "type": "color"
+  },
+  {
+    "key": "dresscode_color_4_name",
+    "label": "Nama Warna 4",
+    "type": "text"
+  },
+  {
+    "key": "realitas_clock_line",
+    "label": "Uji Realitas — Hasil Uji Jam",
+    "type": "text"
+  },
+  {
+    "key": "realitas_text",
+    "label": "Uji Realitas — Tulisan yang Dibaca Dua Kali",
+    "type": "text"
+  },
+  {
+    "key": "realitas_pinch_line",
+    "label": "Uji Realitas — Hasil Cubitan",
+    "type": "text"
+  },
+  {
+    "key": "realitas_jump_line",
+    "label": "Uji Realitas — Hasil Lompatan",
+    "type": "text"
+  },
+  {
+    "key": "gallery_note",
+    "label": "Keterangan Galeri",
+    "type": "text"
+  },
+  {
+    "key": "gift_intro",
+    "label": "Pengantar Tanda Kasih",
+    "type": "richtext"
+  },
+  {
+    "key": "gift_address",
+    "label": "Alamat Kirim Kado Fisik",
+    "type": "text"
+  },
+  {
+    "key": "rsvp_intro",
+    "label": "Pengantar Konfirmasi Kehadiran",
+    "type": "richtext"
+  },
+  {
+    "key": "rsvp_deadline",
+    "label": "Batas Konfirmasi",
+    "type": "text"
+  },
+  {
+    "key": "wishes_intro",
+    "label": "Pengantar Ucapan",
+    "type": "text"
+  },
+  {
+    "key": "closing_text",
+    "label": "Kalimat Penutup",
+    "type": "richtext"
+  },
+  {
+    "key": "closing_family",
+    "label": "Keluarga yang Turut Mengundang",
+    "type": "text"
+  },
+  {
+    "key": "closing_salam",
+    "label": "Salam Penutup",
+    "type": "text"
+  },
+  {
+    "key": "hashtag",
+    "label": "Tagar",
+    "type": "text"
+  }
+]

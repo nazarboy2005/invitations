@@ -1,0 +1,164 @@
+{
+  "source": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/taklifla.uz/templates/yomgir__e1f114296ddf553c.html",
+  "sourceSha256": "8fb8807aca1b498ecfcc0b6a41f56547a6957c6b14330f067636cd0287e6500d",
+  "sourceBytes": 52430,
+  "cssSha256": "88be6a739c6b307edb13d24e6ad87a21b646d9753eb74db55bb17075037e6e8f",
+  "originalScriptSha256": "d1df2d7df9272d24d68eb0417f0c3a1422e3051bbb3cf3856f6bba7204e5a876",
+  "motionSha256": "c8e3843243eb7ef1660796d91ecbe79debbcf1ddcaf887bb4d8512cd3c8fb30e",
+  "wishCloseSha256": "68865a0551e3d058b5490d6359d9f93b0f500e9d92db885e28ff5b4702fd4c43",
+  "fontCssSource": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/fonts.googleapis.com/css2__e3ea24707e214f2c",
+  "fontCssSha256": "abd0d8299a4b6d6f408a6f015a29fe12eee03b2f44dfb11f4947793c7dae1e5c",
+  "assets": [
+    {
+      "file": "yomgir-img/divider-dawn.webp",
+      "bytes": 85614,
+      "sha256": "a3b65584e353c15bcd639bc3987aa57e72023d0433e6269ad9f62a0756c107a3"
+    },
+    {
+      "file": "yomgir-img/frame-dawn.webp",
+      "bytes": 217914,
+      "sha256": "d21c5d3b01b57e82aeec6982955752fb19fce4b876d629a369798deae81fefec"
+    },
+    {
+      "file": "yomgir-img/hero-night.webp",
+      "bytes": 123786,
+      "sha256": "24a6e91907b6d02419609e9d531fefb72b73bc1a6edf4d42799da1171d1a5eeb"
+    },
+    {
+      "file": "yomgir-img/sky-day.webp",
+      "bytes": 175360,
+      "sha256": "e0d58e67aef9b57fbcfdc994e41288ef2aa703c99ac9638827acc30490eeddbd"
+    },
+    {
+      "file": "yomgir-img/strip-dawn.webp",
+      "bytes": 69718,
+      "sha256": "0938157af75fb8d2524c6195743b2a4226379025c539f151b517b100715da9bd"
+    },
+    {
+      "file": "yomgir-img/venue-day.webp",
+      "bytes": 428624,
+      "sha256": "49c464d67fbd307e5150279caf50638bc940a9b66bf4bf692404f0def02a7edb"
+    }
+  ],
+  "fonts": [
+    {
+      "file": "fonts/4UaSrEBBsBhlBjvfkSLk3abBFkvpkARTPlbgv5qsmSW1rw.woff2",
+      "url": "https://fonts.gstatic.com/s/alegreya/v41/4UaSrEBBsBhlBjvfkSLk3abBFkvpkARTPlbgv5qsmSW1rw.woff2",
+      "method": "exact-source-url",
+      "bytes": 11532,
+      "sha256": "7e282523782b2f446235a419412aca5c8e06da831ea72705cf3697a182ac5089"
+    },
+    {
+      "file": "fonts/4UaSrEBBsBhlBjvfkSLk3abBFkvpkARTPlbgv5qlmSW1rw.woff2",
+      "url": "https://fonts.gstatic.com/s/alegreya/v41/4UaSrEBBsBhlBjvfkSLk3abBFkvpkARTPlbgv5qlmSW1rw.woff2",
+      "method": "exact-source-url",
+      "bytes": 13352,
+      "sha256": "40a52a3e53c02a2d45845cf4ae2253745c9d182e2ca347d70ab8f4f8f72bdb0c"
+    },
+    {
+      "file": "fonts/4UaSrEBBsBhlBjvfkSLk3abBFkvpkARTPlbgv5qtmSW1rw.woff2",
+      "url": "https://fonts.gstatic.com/s/alegreya/v41/4UaSrEBBsBhlBjvfkSLk3abBFkvpkARTPlbgv5qtmSW1rw.woff2",
+      "method": "exact-source-url",
+      "bytes": 7508,
+      "sha256": "b0e06617e626b60551f3b5c3339fb4e54a0f5381a5078ca317aec190b44f91cc"
+    },
+    {
+      "file": "fonts/4UaSrEBBsBhlBjvfkSLk3abBFkvpkARTPlbgv5qimSW1rw.woff2",
+      "url": "https://fonts.gstatic.com/s/alegreya/v41/4UaSrEBBsBhlBjvfkSLk3abBFkvpkARTPlbgv5qimSW1rw.woff2",
+      "method": "exact-source-url",
+      "bytes": 8560,
+      "sha256": "46ba1d9670c9f124e01b931068e62e22ea1d6d7727996f6683335fdec5f34bb3"
+    },
+    {
+      "file": "fonts/4UaSrEBBsBhlBjvfkSLk3abBFkvpkARTPlbgv5qumSW1rw.woff2",
+      "url": "https://fonts.gstatic.com/s/alegreya/v41/4UaSrEBBsBhlBjvfkSLk3abBFkvpkARTPlbgv5qumSW1rw.woff2",
+      "method": "exact-source-url",
+      "bytes": 7000,
+      "sha256": "4079de18aef65f325b8385da7cbd0190b5d0df41e2281344c0e0e87c04470c96"
+    },
+    {
+      "file": "fonts/4UaSrEBBsBhlBjvfkSLk3abBFkvpkARTPlbgv5qvmSW1rw.woff2",
+      "url": "https://fonts.gstatic.com/s/alegreya/v41/4UaSrEBBsBhlBjvfkSLk3abBFkvpkARTPlbgv5qvmSW1rw.woff2",
+      "method": "exact-source-url",
+      "bytes": 20524,
+      "sha256": "27550192eeb67db7db1ff877e24b8b5e6acefe351d3b4f1941bc19c31c7029f2"
+    },
+    {
+      "file": "fonts/4UaSrEBBsBhlBjvfkSLk3abBFkvpkARTPlbgv5qhmSU.woff2",
+      "url": "https://fonts.gstatic.com/s/alegreya/v41/4UaSrEBBsBhlBjvfkSLk3abBFkvpkARTPlbgv5qhmSU.woff2",
+      "method": "archive",
+      "bytes": 23156,
+      "sha256": "9be8976a11463895bb4d590973a684c1c96616b7e40a03333151efa8c7210241"
+    },
+    {
+      "file": "fonts/4UaBrEBBsBhlBjvfkSLsx6jx4w.woff2",
+      "url": "https://fonts.gstatic.com/s/alegreya/v41/4UaBrEBBsBhlBjvfkSLsx6jx4w.woff2",
+      "method": "exact-source-url",
+      "bytes": 20924,
+      "sha256": "9468d87825a21f26f30f58f542659c2b282963a6022f1e3fd6c0f4c36200f9cc"
+    },
+    {
+      "file": "fonts/4UaBrEBBsBhlBjvfkSLlx6jx4w.woff2",
+      "url": "https://fonts.gstatic.com/s/alegreya/v41/4UaBrEBBsBhlBjvfkSLlx6jx4w.woff2",
+      "method": "exact-source-url",
+      "bytes": 23180,
+      "sha256": "40774c5b9e27d70acfdcd4f332012537415b1a04ff6496f1541806a0c0d3eaf0"
+    },
+    {
+      "file": "fonts/4UaBrEBBsBhlBjvfkSLtx6jx4w.woff2",
+      "url": "https://fonts.gstatic.com/s/alegreya/v41/4UaBrEBBsBhlBjvfkSLtx6jx4w.woff2",
+      "method": "exact-source-url",
+      "bytes": 12556,
+      "sha256": "b33230d66ac3f29a420094a78173e5cdb170dea34b034150b2cd1c5595fb305f"
+    },
+    {
+      "file": "fonts/4UaBrEBBsBhlBjvfkSLix6jx4w.woff2",
+      "url": "https://fonts.gstatic.com/s/alegreya/v41/4UaBrEBBsBhlBjvfkSLix6jx4w.woff2",
+      "method": "exact-source-url",
+      "bytes": 14760,
+      "sha256": "701419f174341b2372b122bd0fb8198c4bca1a1fed551fd33c47e53140ce75df"
+    },
+    {
+      "file": "fonts/4UaBrEBBsBhlBjvfkSLux6jx4w.woff2",
+      "url": "https://fonts.gstatic.com/s/alegreya/v41/4UaBrEBBsBhlBjvfkSLux6jx4w.woff2",
+      "method": "exact-source-url",
+      "bytes": 12032,
+      "sha256": "c0f8924060a4dfdf19f5d23afa897bdb1ea13f2a68f4e039b6498e17a49d8479"
+    },
+    {
+      "file": "fonts/4UaBrEBBsBhlBjvfkSLvx6jx4w.woff2",
+      "url": "https://fonts.gstatic.com/s/alegreya/v41/4UaBrEBBsBhlBjvfkSLvx6jx4w.woff2",
+      "method": "exact-source-url",
+      "bytes": 37856,
+      "sha256": "16b24f84da5ac12dc79ea1060e3fd4e299f19146f607021f81bcf0b8123fe5bd"
+    },
+    {
+      "file": "fonts/4UaBrEBBsBhlBjvfkSLhx6g.woff2",
+      "url": "https://fonts.gstatic.com/s/alegreya/v41/4UaBrEBBsBhlBjvfkSLhx6g.woff2",
+      "method": "archive",
+      "bytes": 43476,
+      "sha256": "2431eca3ed8ed66e713cf7093d170d77a083a793a5f19a615506d63770abd973"
+    },
+    {
+      "file": "fonts/SZc53FHnIaK9W5kfTzTMkHrS.woff2",
+      "url": "https://fonts.gstatic.com/s/milonga/v24/SZc53FHnIaK9W5kfTzTMkHrS.woff2",
+      "method": "exact-source-url",
+      "bytes": 25808,
+      "sha256": "adabfe8f045e4b3d1102c38319f0513b09fc635afb8e9ac44ba2a9986cd8a747"
+    },
+    {
+      "file": "fonts/SZc53FHnIaK9W5kfTzrMkA.woff2",
+      "url": "https://fonts.gstatic.com/s/milonga/v24/SZc53FHnIaK9W5kfTzrMkA.woff2",
+      "method": "archive",
+      "bytes": 32952,
+      "sha256": "99105f951709facb2e3a875e9a8d038a870d4fe892ccdccfac982fcc2081b924"
+    }
+  ],
+  "excluded": [
+    "Cloudflare analytics beacon",
+    "provider customizer/query/localStorage demo data",
+    "provider guestbook API and persistence",
+    "provider gesture handshake"
+  ],
+  "missing": []
+}

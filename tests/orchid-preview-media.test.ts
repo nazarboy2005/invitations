@@ -44,6 +44,19 @@ test("Orchid source-photo fallbacks require the explicit preview-sample envelope
   assert.match(bridge, /return \(data\.gallery \|\| \[\]\)\.filter/);
 });
 
+test("Orchid music control reflects actual playback, including cover autoplay", () => {
+  const bridge = readFileSync(
+    join(process.cwd(), "apps/web/public/templates/chorlove/orchid-amplop/bridge.js"),
+    "utf8",
+  );
+
+  assert.match(bridge, /const playing = !audio\.paused && !audio\.ended/);
+  assert.match(bridge, /button\.setAttribute\("aria-pressed", String\(playing\)\)/);
+  assert.match(bridge, /musicAudio\.addEventListener\("play", syncMusicControl\)/);
+  assert.match(bridge, /musicAudio\.addEventListener\("pause", syncMusicControl\)/);
+  assert.match(bridge, /show\("\[data-orchid-music\]", !!audio\.src\); syncMusicControl\(\)/);
+});
+
 test("Orchid RSVP keeps the source layout and reveal motion without a guest-count prompt", () => {
   const root = process.cwd();
   const html = readFileSync(

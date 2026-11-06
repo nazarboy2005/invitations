@@ -1,0 +1,87 @@
+/* Maslin: the envelope scene (envelope.js). Everything is laid out on a 390 × 844 design canvas in --u units,
+   so the composition keeps its proportions on every phone; the linen table runs to the edges around it. */
+.ms-stage{--u:1px;--olive:#6f7c58;--olive-d:#55613f;--ivory:#fffdf8;--bordo:#713641;--ink:#4b3a34;position:relative;height:100svh;min-height:600px;overflow:hidden;
+  background:radial-gradient(ellipse at 50% 42%,#fbf8f1 0,#f3ede2 58%,#e6dccb 100%)}
+.ms-stage::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.55;mix-blend-mode:multiply;
+  background:repeating-linear-gradient(0deg,rgba(120,100,70,.035) 0 1px,transparent 1px 3px),repeating-linear-gradient(90deg,rgba(120,100,70,.03) 0 1px,transparent 1px 4px)}
+.ms-scene{position:absolute;left:50%;top:50%;width:calc(390*var(--u));height:calc(844*var(--u));transform:translate(-50%,-50%)}
+.ms-table{display:none}
+
+/* the envelope, at its final size; the closed cover is this world scaled up around the seal */
+.ms-world{position:absolute;inset:0;transform-origin:calc(195*var(--u)) calc(602*var(--u))}
+.ms-body,.ms-flap,.ms-slot,.ms-seal{position:absolute}
+.ms-body{left:calc(15*var(--u));top:calc(470*var(--u));width:calc(360*var(--u));height:calc(240*var(--u));z-index:3;border-radius:calc(3*var(--u));
+  background:url(art/olive-paper.webp) center/calc(260*var(--u)) var(--olive);
+  box-shadow:0 calc(18*var(--u)) calc(30*var(--u)) rgba(60,50,30,.22),0 calc(2*var(--u)) calc(4*var(--u)) rgba(60,50,30,.18),inset 0 calc(1*var(--u)) 0 rgba(255,255,240,.18)}
+.ms-body__folds{position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  background:linear-gradient(180deg,rgba(30,36,18,.16),transparent 30%),linear-gradient(33.7deg,transparent 49.6%,rgba(40,48,25,.22) 49.9%,rgba(255,255,235,.08) 50.4%,transparent 51%),linear-gradient(-33.7deg,transparent 49.6%,rgba(40,48,25,.22) 49.9%,rgba(255,255,235,.08) 50.4%,transparent 51%),radial-gradient(ellipse at 50% 120%,rgba(30,36,18,.25),transparent 62%)}
+.ms-flap{left:calc(15*var(--u));top:calc(470*var(--u));width:calc(360*var(--u));height:calc(132*var(--u));z-index:6;transform-origin:50% 0;transform-style:preserve-3d}
+.ms-flap__face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;filter:drop-shadow(0 calc(5*var(--u)) calc(6*var(--u)) rgba(28,34,16,.42))}
+.ms-flap__back{transform:rotateX(180deg)}
+.ms-flap__paper{position:absolute;inset:0;clip-path:polygon(0 0,100% 0,50% 100%);background:linear-gradient(180deg,rgba(255,255,235,.10),rgba(255,255,235,0) 70%),url(art/olive-paper.webp) center/calc(260*var(--u)) var(--olive)}
+.ms-flap__front .ms-flap__paper{background-color:#76825f}
+.ms-flap__back .ms-flap__paper{background:linear-gradient(180deg,#e9e3d3,#f6f1e6);}
+/* lace along the two lower edges of the flap: edge length 223.2u at 36.25° */
+.ms-lace{position:absolute;top:0;width:calc(226*var(--u));height:calc(17*var(--u));background:url(art/lace.webp) 0 0/100% 100% no-repeat;filter:drop-shadow(0 calc(1.5*var(--u)) calc(1.5*var(--u)) rgba(30,30,15,.35))}
+.ms-lace--l{left:0;transform-origin:0 0;transform:rotate(36.25deg)}
+.ms-lace--r{right:0;transform-origin:100% 0;transform:rotate(-36.25deg)}
+.ms-flap__back .ms-lace{filter:brightness(1.25) saturate(.7) drop-shadow(0 1px 1px rgba(30,30,15,.25))}
+.ms-seal{left:calc(158*var(--u));top:calc(567*var(--u));width:calc(74*var(--u));height:auto;z-index:8;filter:drop-shadow(0 calc(3*var(--u)) calc(4*var(--u)) rgba(40,30,20,.35))}
+
+/* the card waits inside the envelope; the slot keeps it from showing below the envelope */
+.ms-slot{left:0;right:0;top:calc(-300*var(--u));height:calc(1010*var(--u));overflow:hidden;z-index:2}
+.ms-card{position:absolute;left:calc(72*var(--u));top:calc(470*var(--u));width:calc(250*var(--u));height:calc(372*var(--u));padding:calc(15*var(--u));border-radius:calc(2*var(--u));
+  background:linear-gradient(90deg,#fffefb,#fbf7ef);box-shadow:0 calc(12*var(--u)) calc(26*var(--u)) rgba(70,55,35,.2),0 0 0 calc(.5*var(--u)) rgba(120,100,70,.18)}
+.ms-card::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  background:repeating-linear-gradient(90deg,#7a8560 0 calc(4*var(--u)),#f5f1e7 calc(4*var(--u)) calc(8*var(--u)));
+  -webkit-mask:linear-gradient(#000 0 0) top/100% calc(12*var(--u)) no-repeat,linear-gradient(#000 0 0) right/calc(12*var(--u)) 100% no-repeat;mask:linear-gradient(#000 0 0) top/100% calc(12*var(--u)) no-repeat,linear-gradient(#000 0 0) right/calc(12*var(--u)) 100% no-repeat}
+.ms-card__inner{position:relative;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:calc(4*var(--u));padding:calc(20*var(--u)) calc(14*var(--u));border:calc(.8*var(--u)) solid rgba(111,124,88,.55);text-align:center;color:var(--ink)}
+.ms-card__kicker{font:500 calc(8.5*var(--u))/1.4 'Cormorant Garamond',serif;letter-spacing:.32em;color:#8a7a62;margin-bottom:calc(14*var(--u))}
+.ms-card__names{display:grid;gap:0;font:400 calc(40*var(--u))/1.05 'Great Vibes',cursive;color:#5a3f3a;max-width:100%}
+.ms-card__names b{font-weight:400;overflow-wrap:anywhere}
+.ms-card__names i{font:italic 400 calc(22*var(--u))/1 'Cormorant Garamond',serif;color:#9a8566;margin:calc(2*var(--u)) 0}
+.ms-card__event{margin-top:calc(16*var(--u));font:italic 400 calc(12*var(--u))/1.3 'Cormorant Garamond',serif;color:#7e6b58;letter-spacing:.04em}
+
+/* the pieces that arrive around the card */
+.ms-cameo{position:absolute;left:calc(-4*var(--u));top:calc(186*var(--u));width:calc(132*var(--u));height:calc(192*var(--u));margin:0;z-index:7;transform:rotate(-5deg);filter:drop-shadow(0 calc(10*var(--u)) calc(14*var(--u)) rgba(60,45,30,.28))}
+.ms-cameo__photo{position:absolute;left:16.5%;right:16.5%;top:18.5%;bottom:18%;width:67%;height:63.5%;object-fit:cover;border-radius:50%}
+.ms-cameo__frame{position:absolute;inset:0;border-radius:50%;background:none;
+  box-shadow:inset 0 0 0 calc(10*var(--u)) #f7f2ea,inset 0 0 0 calc(11*var(--u)) #d9cfbf,inset 0 0 0 calc(15*var(--u)) #fbf8f2,inset 0 0 0 calc(16.5*var(--u)) #cfc3b0,inset 0 0 calc(22*var(--u)) rgba(80,60,40,.25)}
+.ms-cameo__frame.is-art{box-shadow:none;background:var(--frame) center/100% 100% no-repeat}
+.ms-bouquet{position:absolute;right:calc(-58*var(--u));top:calc(292*var(--u));width:calc(206*var(--u));height:auto;z-index:9;transform-origin:50% 8%;filter:drop-shadow(0 calc(14*var(--u)) calc(16*var(--u)) rgba(50,35,25,.3))}
+.ms-heart{position:absolute;left:calc(40*var(--u));top:calc(396*var(--u));width:calc(96*var(--u));z-index:8;filter:drop-shadow(0 calc(5*var(--u)) calc(6*var(--u)) rgba(60,20,25,.35))}
+.ms-heart img{display:block;width:100%;height:auto}
+.ms-heart span{position:absolute;inset:0;display:grid;place-items:center;padding-bottom:calc(6*var(--u));font:500 calc(11*var(--u))/1 'Cormorant Garamond',serif;letter-spacing:.06em;color:#f6dfe0;text-shadow:0 calc(-.6*var(--u)) 0 rgba(40,8,14,.5)}
+
+/* the closed cover's words, on the flap */
+.ms-cover{position:absolute;left:calc(24*var(--u));right:calc(24*var(--u));top:calc(250*var(--u));z-index:12;text-align:center;color:#f6f1e3;pointer-events:none;text-shadow:0 calc(1*var(--u)) calc(1.5*var(--u)) rgba(30,36,18,.45)}
+.ms-cover__from{margin:0 0 calc(12*var(--u));font:500 calc(10*var(--u))/1.4 'Cormorant Garamond',serif;letter-spacing:.38em}
+.ms-cover__names{margin:0;font:400 calc(46*var(--u))/1.08 'Great Vibes',cursive;overflow-wrap:anywhere}
+.ms-cover__names i{font:italic 400 calc(26*var(--u)) 'Cormorant Garamond',serif;opacity:.85}
+.ms-open{position:absolute;left:50%;bottom:calc(70*var(--u));z-index:12;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:calc(10*var(--u));padding:calc(12*var(--u)) calc(22*var(--u));border:0;background:none;color:#f6f1e3;cursor:pointer;
+  font:500 calc(10.5*var(--u))/1.4 'Cormorant Garamond',serif;letter-spacing:.36em;text-transform:uppercase;text-shadow:0 1px 2px rgba(30,36,18,.5);-webkit-tap-highlight-color:transparent}
+.ms-open::after{content:"";width:calc(1*var(--u));height:calc(30*var(--u));background:linear-gradient(#f6f1e3,transparent);animation:ms-breathe 2.4s ease-in-out infinite}
+@keyframes ms-breathe{0%,100%{opacity:.35;transform:scaleY(.6);transform-origin:top}50%{opacity:1;transform:scaleY(1)}}
+.ms-scroll{position:absolute;left:50%;bottom:calc(26*var(--u));z-index:12;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:calc(4*var(--u));color:#7e6b58;text-decoration:none;
+  font:italic 400 calc(15*var(--u))/1 'Cormorant Garamond',serif;opacity:0;pointer-events:none}
+.ms-scroll i{font-style:normal;font-size:calc(13*var(--u));animation:ms-bob 2s ease-in-out infinite}
+@keyframes ms-bob{50%{transform:translateY(calc(4*var(--u)))}}
+.is-open .ms-scroll{opacity:1;pointer-events:auto;transition:opacity .8s}
+.ms-stage .ms-light{position:absolute;inset:0;z-index:14;pointer-events:none;opacity:0;background:linear-gradient(105deg,transparent 30%,rgba(255,252,240,.55) 46%,transparent 62%);transform:translateX(-60%)}
+
+/* the meet-us section right under the scene, as in the reference */
+.ms-meet{text-align:center;padding:calc(54px + 2vh) 24px 64px}
+.ms-count{display:flex;justify-content:center;align-items:flex-start;gap:10px;margin:26px 0 30px;font-family:'Cormorant Garamond',serif;color:#5a4a40}
+.ms-count div{display:grid;gap:4px;min-width:46px}.ms-count b{font-weight:400;font-size:30px;letter-spacing:.04em}.ms-count span{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:#9a8a76}.ms-count>i{font-style:normal;font-size:24px;color:#b8a98f;padding-top:2px}
+.ms-count p{flex-basis:100%;margin:0}
+.ms-pill{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:0 30px;border-radius:12px;background:#5f6b47;color:#f8f4ea;text-decoration:none;font:500 11px/1 'Cormorant Garamond',serif;letter-spacing:.28em;text-transform:uppercase;box-shadow:0 10px 22px -12px rgba(60,70,40,.8)}
+
+/* state before the guest opens it */
+html.is-locked .ms-stage{touch-action:none}
+@media(prefers-reduced-motion:reduce){.ms-open::after,.ms-scroll i{animation:none}}
+/* the envelope is the page here, so the page is visible from the start (template.css faded it in after the old cover) */
+.page{opacity:1!important;transform:none!important}
+
+/* Preserve the two lace strips as visible absolute image layers in the platform frame. */
+.ms-lace{display:block;background-image:url('./art/lace.webp')}
+

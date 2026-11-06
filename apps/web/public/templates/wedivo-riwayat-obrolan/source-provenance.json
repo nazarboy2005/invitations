@@ -1,0 +1,183 @@
+{
+  "sourcePath": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Wedivo/Web invitations/templates/cl18spIdFB8VbBu1Yiyb/index.html",
+  "sourceSHA256": "4525b2ba58c4f50b4f55bd01f0ed486a708713d2b0d4f3c810418b7afb8a2a29",
+  "captureType": "embedded-source",
+  "sourceTemplateId": "cl18spIdFB8VbBu1Yiyb",
+  "assets": [
+    {
+      "url": "https://wedivo.id/uploads/F3Qioc7zruXqPzTEOAiexTXP76r2/prewedding/1784901487_fdd58e20.jpg",
+      "file": "assets/preview/gallery-1.jpg",
+      "sha256": "62790ac30a8a88b22635db136545fcdcbf65534ce9b6a89bd84816552c5eb3c0",
+      "bytes": 146627
+    },
+    {
+      "url": "https://wedivo.id/uploads/F3Qioc7zruXqPzTEOAiexTXP76r2/prewedding/1784901487_b4f761ec.jpg",
+      "file": "assets/preview/gallery-2.jpg",
+      "sha256": "76fe34cd6eb3ccfdc734b9da47159cb6f942a5e58d0106a0a110ca632e0d4d89",
+      "bytes": 141473
+    },
+    {
+      "url": "https://wedivo.id/uploads/F3Qioc7zruXqPzTEOAiexTXP76r2/prewedding/1784901487_0443a614.jpg",
+      "file": "assets/preview/gallery-3.jpg",
+      "sha256": "097f5694b1bd919a16cabf7f9732182587bfce5f60d28e2b872ed23818936ab1",
+      "bytes": 199427
+    },
+    {
+      "url": "https://wedivo.id/uploads/F3Qioc7zruXqPzTEOAiexTXP76r2/prewedding/1784901519_9a204017.jpg",
+      "file": "assets/preview/gallery-4.jpg",
+      "sha256": "f7790b6523ea30a8c1851d67714791d572a0f72d86d522f446c27a0e006e4407",
+      "bytes": 110395
+    },
+    {
+      "url": "https://wedivo.id/uploads/F3Qioc7zruXqPzTEOAiexTXP76r2/prewedding/1784901519_5465eeef.jpg",
+      "file": "assets/preview/gallery-5.jpg",
+      "sha256": "514e65e51cd9c0fb9655dd0ec079cf9ba2212e0d5434b0d50d19c9a7e1d410ef",
+      "bytes": 99745
+    },
+    {
+      "url": "https://wedivo.id/uploads/F3Qioc7zruXqPzTEOAiexTXP76r2/prewedding/1784901519_0e1affe0.jpg",
+      "file": "assets/preview/gallery-6.jpg",
+      "sha256": "2d4a0c8c948e746d33f8e1aecf2848e6ad3b10a8afb8f070bad2325023e674e7",
+      "bytes": 108636
+    },
+    {
+      "url": "https://wedivo.id/uploads/F3Qioc7zruXqPzTEOAiexTXP76r2/prewedding/1784901519_48ff417d.jpg",
+      "file": "assets/preview/gallery-7.jpg",
+      "sha256": "bc648ea78532de810a22eef101d387c23b438d98a9d2af925c72268ab4378cb9",
+      "bytes": 117095
+    },
+    {
+      "url": "https://wedivo.id/uploads/F3Qioc7zruXqPzTEOAiexTXP76r2/prewedding/1785193274_23b3b14d.jpg",
+      "file": "assets/preview/gallery-8.jpg",
+      "sha256": "9dc17c69e4d72fa44ab10fd9aefcccc7cf09528c4c9df94972fb9d125d2c1c83",
+      "bytes": 187103
+    },
+    {
+      "url": "https://wedivo.id/uploads/F3Qioc7zruXqPzTEOAiexTXP76r2/prewedding/1785193296_c70faf89.jpg",
+      "file": "assets/preview/gallery-9.jpg",
+      "sha256": "ec425f2f706216180a8a3faff9414c6c5f046162e3fa9e3c2ea0723878672202",
+      "bytes": 117596
+    },
+    {
+      "url": "https://wedivo.id/uploads/F3Qioc7zruXqPzTEOAiexTXP76r2/prewedding/1786930149_0fd4203f.jpg",
+      "file": "assets/preview/profile-c.jpg",
+      "sha256": "c3cf5d1f14f9b89581132044d4c6d00487c702c7de9f6c0707b6ac4f8cf43c1b",
+      "bytes": 129652
+    },
+    {
+      "url": "https://wedivo.id/uploads/F3Qioc7zruXqPzTEOAiexTXP76r2/templateGroomPhoto_1784901084.jpg",
+      "file": "assets/preview/profile-g.jpg",
+      "sha256": "69bca42da5b511580905e18ff24892321238c920b889b4eb37ea633946465bf9",
+      "bytes": 81300
+    },
+    {
+      "url": "https://wedivo.id/uploads/F3Qioc7zruXqPzTEOAiexTXP76r2/templateBridePhoto_1784901007.jpg",
+      "file": "assets/preview/profile-b.jpg",
+      "sha256": "689603470007429f597d0332db0c6fb2256f46ec2b3e8e1f54acd3ab1539cf9a",
+      "bytes": 83532
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/figtree/v9/_Xmz-HUzqDCFdgfMsYiV_F7wfS-Bs_d_QF5e.ttf",
+      "file": "assets/5ba0e240bb32bf9a3a24da50.ttf",
+      "sha256": "81f3fc9d8d4e307e5ae0dd43a03d22eb90d50b6cc72241552c460a59b6731b31",
+      "bytes": 35976
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/lobster/v32/neILzCirqoswsqX9_oU.ttf",
+      "file": "assets/1308599a2db84505e8ed74ff.ttf",
+      "sha256": "dfdc22543e8a5188aa6d774aa2e9a1f3c9cb363dc814ba1e919ac9e379daec03",
+      "bytes": 392208
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/figtree/v9/_Xmz-HUzqDCFdgfMsYiV_F7wfS-Bs_fWR15e.ttf",
+      "file": "assets/4914420a9e7b8910eb4af1df.ttf",
+      "sha256": "a77d37f9b02bc18bd55f965dbb2124299fa7a6207a858ea840d834b1f7633a35",
+      "bytes": 36140
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/gloock/v8/Iurb6YFw84WUY4N5jw.ttf",
+      "file": "assets/39867a65c91a441971a57e5e.ttf",
+      "sha256": "c8b0234daef1efc44aa094d2a75bf12afcd6390db6e7f3a6a119fc79abe6905c",
+      "bytes": 93584
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/figtree/v9/_Xm9-HUzqDCFdgfMm4GnA4aZFrUvtOK3A4QdyEU.ttf",
+      "file": "assets/9b652de5f3c1d4ca74ee22a8.ttf",
+      "sha256": "3ddbaecb0562c73965622b5423d5c415e4d217aa848510b59b5cf108e511e087",
+      "bytes": 36160
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/figtree/v9/_Xmz-HUzqDCFdgfMsYiV_F7wfS-Bs_eYR15e.ttf",
+      "file": "assets/ea611ff711086e9f61e01865.ttf",
+      "sha256": "88aad0bfccf47bc631abd1351a0c815be98edf58c2c8706f72deb24a531639d6",
+      "bytes": 36164
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/figtree/v9/_Xmz-HUzqDCFdgfMsYiV_F7wfS-Bs_f_R15e.ttf",
+      "file": "assets/5e72687b0c65bc56d5f8003b.ttf",
+      "sha256": "4084c60c3c24f9fa3fa92b9b557c07d10d2a93eaf51e048e1728719042cb3bf3",
+      "bytes": 36236
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/figtree/v9/_Xm9-HUzqDCFdgfMm4GnA4aZFrUvtOK3A2gayEU.ttf",
+      "file": "assets/2d35120666621545a9183e2d.ttf",
+      "sha256": "2faaac6fd0052d38eedb8c86c555b090161dd172f91a6ac83a9320a6908d2ac2",
+      "bytes": 36428
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/figtree/v9/_Xmz-HUzqDCFdgfMsYiV_F7wfS-Bs_ehR15e.ttf",
+      "file": "assets/2711b5ffa4bc4a61e588607c.ttf",
+      "sha256": "b5d3fe714f8283b072579c9318c6cbe9e028ca51d6ba33eed0412a828ec331da",
+      "bytes": 36216
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/amiri/v30/J7acnpd8CGxBHp2VkZY4.ttf",
+      "file": "assets/68199692a9545c97f81dee86.ttf",
+      "sha256": "65e3e6fe6af66bb6d24959bd537a89ea35de14083f5a2e2290c246136c2b047b",
+      "bytes": 368616
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/amiri/v30/J7aRnpd8CGxBHqUp.ttf",
+      "file": "assets/c1ed75c0eada28ab8f8db0ee.ttf",
+      "sha256": "7f19c4a5dc77b0ef435b430d750759170def15d6e3801006e0704dadc7f220e3",
+      "bytes": 385840
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/figtree/v9/_Xmz-HUzqDCFdgfMsYiV_F7wfS-Bs_dNQF5e.ttf",
+      "file": "assets/aba48a3c52a959e2b9e71742.ttf",
+      "sha256": "f8a90c01bc4c31aa84be5cbff3e80784bfc0da37e5aaa23eb9e05108b9ba0ece",
+      "bytes": 35996
+    },
+    {
+      "url": "https://wedivo.id/uploads/templates/unassigned/1790435040_a62f2849.jpg",
+      "file": "assets/1790435040_a62f2849.jpg",
+      "sha256": "bf36db369a9ddd48fab5986db05985bb35bdc5fce141c1cf793a3c9c87799e7e",
+      "bytes": 26332
+    },
+    {
+      "url": "https://wedivo.id/uploads/templates/unassigned/1790435044_3afab49d.jpg",
+      "file": "assets/1790435044_3afab49d.jpg",
+      "sha256": "d446b16eac7af09901d90058cfeeae9a3224ea5ba972bc322dc43f5117cb8c20",
+      "bytes": 19930
+    },
+    {
+      "url": "https://wedivo.id/uploads/templates/unassigned/1790435046_8bb162d2.jpg",
+      "file": "assets/1790435046_8bb162d2.jpg",
+      "sha256": "c6db10718ed51e42c5149ec568a42e8057bc440d53a6d2f6e7bfaf52a1b20901",
+      "bytes": 46908
+    },
+    {
+      "url": "https://wedivo.id/uploads/templates/unassigned/1790435049_5ef22707.jpg",
+      "file": "assets/1790435049_5ef22707.jpg",
+      "sha256": "ee452113eef646993fe38f97ad26f94a3af956c202aa892a211e501df3362b3d",
+      "bytes": 16626
+    },
+    {
+      "url": "https://wedivo.id/uploads/templates/unassigned/1790435051_e66fc615.jpg",
+      "file": "assets/1790435051_e66fc615.jpg",
+      "sha256": "41f3fda27d140fd6c5a349a3405010ac5bfba051ebadfb79a334787a1a648083",
+      "bytes": 72356
+    }
+  ],
+  "catalogEligible": false
+}

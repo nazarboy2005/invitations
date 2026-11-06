@@ -1,0 +1,242 @@
+{
+  "capturePath": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Wedivo/Web invitations/templates/2Vn0nk5HHqwO4V5FJ6Xg/index.html",
+  "captureSha256": "3b12af27617a9276ea2e6573d969f0b9f4acaea3849f35500e49a9ccc96bd5af",
+  "captureType": "embedded-source",
+  "assets": [
+    {
+      "source": "https://wedivo.id/uploads/templates/2Vn0nk5HHqwO4V5FJ6Xg/1791949727_768134ac.jpg",
+      "path": "assets/1791949727_768134ac.jpg",
+      "bytes": 140577,
+      "sha256": "a6d26023251cd264fd225b5d116398595faaef8bf935e1af11d044382991c7bc"
+    },
+    {
+      "source": "https://wedivo.id/uploads/templates/2Vn0nk5HHqwO4V5FJ6Xg/1791949736_47ea87ca.jpg",
+      "path": "assets/1791949736_47ea87ca.jpg",
+      "bytes": 230465,
+      "sha256": "6e60be352bd7dcb47e381d02d7d25295c8bf2752c3fde07912f5e18973241649"
+    },
+    {
+      "source": "https://wedivo.id/uploads/templates/2Vn0nk5HHqwO4V5FJ6Xg/1791949781_fbdbf9aa.jpg",
+      "path": "assets/1791949781_fbdbf9aa.jpg",
+      "bytes": 22719,
+      "sha256": "67b526e81d73193214016dc99ddcf919e888a51c65907292125d8d33c8c95f66"
+    },
+    {
+      "source": "https://wedivo.id/uploads/templates/2Vn0nk5HHqwO4V5FJ6Xg/1791949788_1948ed02.jpg",
+      "path": "assets/1791949788_1948ed02.jpg",
+      "bytes": 134060,
+      "sha256": "378d25b4ab6b3a446ad440fe645e517c15612f04ccd7728373ea80d117968285"
+    },
+    {
+      "source": "https://wedivo.id/uploads/templates/unassigned/1791945416_fde651d5.jpg",
+      "path": "assets/1791945416_fde651d5.jpg",
+      "bytes": 46691,
+      "sha256": "a31c8df77bd2267b066a8b3bf516b468e121032d95feae1b7beb14581c7315de"
+    },
+    {
+      "source": "https://wedivo.id/uploads/templates/unassigned/1791945418_9471749d.jpg",
+      "path": "assets/1791945418_9471749d.jpg",
+      "bytes": 23276,
+      "sha256": "34586f331e65c52d27934630a377c02881b4a5bdb8eb809ab2138fcf7fa1a59a"
+    },
+    {
+      "source": "https://wedivo.id/uploads/templates/unassigned/1791945420_5d2b8e94.jpg",
+      "path": "assets/1791945420_5d2b8e94.jpg",
+      "bytes": 33249,
+      "sha256": "08b4238e75501df59bfb1e10633d44a56cb4086af3524680ae28186d3988d567"
+    },
+    {
+      "source": "https://wedivo.id/uploads/templates/unassigned/1791945421_7ce0da31.jpg",
+      "path": "assets/1791945421_7ce0da31.jpg",
+      "bytes": 22688,
+      "sha256": "288bda344945124ac3497f8befdd797ec374d4be50854f24a1b37f02ebc9a778"
+    },
+    {
+      "source": "https://wedivo.id/uploads/templates/unassigned/1791945423_ea0966a6.jpg",
+      "path": "assets/1791945423_ea0966a6.jpg",
+      "bytes": 14300,
+      "sha256": "221f2f7524e2fddca12686e9ec20c6b681042098bea7f8662bbb58ec7fcfaf4f"
+    },
+    {
+      "source": "https://wedivo.id/uploads/templates/unassigned/1791945425_f52cde19.jpg",
+      "path": "assets/1791945425_f52cde19.jpg",
+      "bytes": 24899,
+      "sha256": "205c5aaff4442824d7b8e71852f28cffdf01f6e398476703f20310e3fbd55924"
+    },
+    {
+      "source": "https://wedivo.id/uploads/templates/unassigned/1791945426_d7dd3ebc.jpg",
+      "path": "assets/1791945426_d7dd3ebc.jpg",
+      "bytes": 9470,
+      "sha256": "42a3cef669856b8348c344da951e6771e9b43c28f46d3bac5bd330387ad7836a"
+    },
+    {
+      "source": "https://wedivo.id/uploads/templates/unassigned/1791945427_002a35e4.jpg",
+      "path": "assets/1791945427_002a35e4.jpg",
+      "bytes": 16246,
+      "sha256": "c5ae69f2facb263698475dd7db3119cac53d9346f62ab4cf886121fc48bcaf93"
+    },
+    {
+      "source": "https://wedivo.id/uploads/templates/unassigned/1791945429_60d66e9e.jpg",
+      "path": "assets/1791945429_60d66e9e.jpg",
+      "bytes": 12549,
+      "sha256": "a5c25a79b50aeeba36bde2a110086ffbb98f5c1b872b4e57df13357717c8bc4d"
+    },
+    {
+      "source": "https://wedivo.id/uploads/templates/unassigned/1791945430_126320c9.jpg",
+      "path": "assets/1791945430_126320c9.jpg",
+      "bytes": 97110,
+      "sha256": "3cda79dc635841d08dfda066c16958e67d58136423b08ab00ec31c57628f205e"
+    },
+    {
+      "source": "https://wedivo.id/uploads/templates/unassigned/1791945432_3963614b.jpg",
+      "path": "assets/1791945432_3963614b.jpg",
+      "bytes": 44108,
+      "sha256": "1eb53c5af7723034962cdda799fd9ad63ab8727c15f24d66411603d9d359ed4d"
+    },
+    {
+      "source": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3smX5slCNuHLi8bLeY9MK7whWMhyjYrGFEsdtdc62E6zd58jDOjw.ttf",
+      "path": "assets/fonts/font-1.ttf",
+      "bytes": 293036,
+      "sha256": "0b9a8a33cfaa624d30f70f9b6686da769b319b8c37a55af16e29fef690108bbf"
+    },
+    {
+      "source": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3smX5slCNuHLi8bLeY9MK7whWMhyjYrGFEsdtdc62E6zd5FTfOjw.ttf",
+      "path": "assets/fonts/font-2.ttf",
+      "bytes": 293116,
+      "sha256": "33b46553a852ffd5ee5d7c6301a135c779e1d97d8938cc67be14e4060edb6431"
+    },
+    {
+      "source": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3smX5slCNuHLi8bLeY9MK7whWMhyjYrGFEsdtdc62E6zd5LDfOjw.ttf",
+      "path": "assets/fonts/font-3.ttf",
+      "bytes": 293312,
+      "sha256": "8ddad6fd245858b13f48aeb9977c0f2531469571ca6b7a98ef490d7f549ade58"
+    },
+    {
+      "source": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3smX5slCNuHLi8bLeY9MK7whWMhyjYrGFEsdtdc62E6zd5rDDOjw.ttf",
+      "path": "assets/fonts/font-4.ttf",
+      "bytes": 292904,
+      "sha256": "b13a316f34ce9c69f634b729bc733ab21512e823e6f801f1e427ac4be7364979"
+    },
+    {
+      "source": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3smX5slCNuHLi8bLeY9MK7whWMhyjYrGFEsdtdc62E6zd5wDDOjw.ttf",
+      "path": "assets/fonts/font-5.ttf",
+      "bytes": 293244,
+      "sha256": "14efb9443652199ade5bc6ba8637b4084acce40a58368a3808f84f55667e3e90"
+    },
+    {
+      "source": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3umX5slCNuHLi8bLeY9MK7whWMhyjypVO7abI26QOD_hg9GnM.ttf",
+      "path": "assets/fonts/font-6.ttf",
+      "bytes": 289992,
+      "sha256": "440daf036a35abd6d2bdfa92b14ab0f150cce690fe6d767ee5cab15a1a10a87f"
+    },
+    {
+      "source": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3umX5slCNuHLi8bLeY9MK7whWMhyjypVO7abI26QOD_iE9GnM.ttf",
+      "path": "assets/fonts/font-7.ttf",
+      "bytes": 290392,
+      "sha256": "69e7ae35cba23d962227b86f99217c250e642e4c6f6104b4f3ec465039e4e2d8"
+    },
+    {
+      "source": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3umX5slCNuHLi8bLeY9MK7whWMhyjypVO7abI26QOD_qE6GnM.ttf",
+      "path": "assets/fonts/font-8.ttf",
+      "bytes": 289788,
+      "sha256": "63e313fb9c65b6b2e177222010bbea911bfc5c79bee0fb69f8246fcc4e08c93a"
+    },
+    {
+      "source": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3umX5slCNuHLi8bLeY9MK7whWMhyjypVO7abI26QOD_s06GnM.ttf",
+      "path": "assets/fonts/font-9.ttf",
+      "bytes": 290496,
+      "sha256": "1724047c8988ca5155bff667bc48fa52e97d57aabc6b42eebbf986f21a4be20b"
+    },
+    {
+      "source": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3umX5slCNuHLi8bLeY9MK7whWMhyjypVO7abI26QOD_v86GnM.ttf",
+      "path": "assets/fonts/font-10.ttf",
+      "bytes": 290236,
+      "sha256": "6d37a86241a25d63f8fe6018b4c083449886b7165c1acb15edd0f574f690ecf7"
+    },
+    {
+      "source": "https://fonts.gstatic.com/s/marcellussc/v14/ke8iOgUHP1dg-Rmi6RWjbLEPgQ.ttf",
+      "path": "assets/fonts/font-11.ttf",
+      "bytes": 44448,
+      "sha256": "32cb01fde9e5bcb216f9ebaef2d821461c65acbdca72cd76adcb388d455fc31f"
+    },
+    {
+      "source": "https://fonts.gstatic.com/s/mulish/v18/1Ptwg83HX_SGhgqk2hAjQlW_mEuZ0FsS9-SvHg.ttf",
+      "path": "assets/fonts/font-12.ttf",
+      "bytes": 106596,
+      "sha256": "bf67e23f289e9d02e1c626bf65f7a0b46cb1800e07d11a3790fc79e2108cd09e"
+    },
+    {
+      "source": "https://fonts.gstatic.com/s/mulish/v18/1Ptwg83HX_SGhgqk2hAjQlW_mEuZ0FsSG-OvHg.ttf",
+      "path": "assets/fonts/font-13.ttf",
+      "bytes": 106628,
+      "sha256": "aa633372854e2266d3e429b42d295b54fc04d8a80223ac45b1012eff40c78ccf"
+    },
+    {
+      "source": "https://fonts.gstatic.com/s/mulish/v18/1Ptwg83HX_SGhgqk2hAjQlW_mEuZ0FsSKeOvHg.ttf",
+      "path": "assets/fonts/font-14.ttf",
+      "bytes": 106504,
+      "sha256": "1594d840862cd8a7027f4e084e9c8240815432db930c915579ce4d6809a02bbb"
+    },
+    {
+      "source": "https://fonts.gstatic.com/s/mulish/v18/1Ptwg83HX_SGhgqk2hAjQlW_mEuZ0FsSd-OvHg.ttf",
+      "path": "assets/fonts/font-15.ttf",
+      "bytes": 106652,
+      "sha256": "d29621051997a6085c102359b5e72c954f354daf03c841b70615ad9bba1a535a"
+    },
+    {
+      "source": "https://fonts.gstatic.com/s/mulish/v18/1Ptwg83HX_SGhgqk2hAjQlW_mEuZ0FsSqeSvHg.ttf",
+      "path": "assets/fonts/font-16.ttf",
+      "bytes": 106740,
+      "sha256": "d75c3c163d5a0835e465483bee5b8eb80337f43329df00e6d82c757b298a14fc"
+    },
+    {
+      "source": "https://fonts.gstatic.com/s/mulish/v18/1Ptwg83HX_SGhgqk2hAjQlW_mEuZ0FsSzuSvHg.ttf",
+      "path": "assets/fonts/font-17.ttf",
+      "bytes": 106720,
+      "sha256": "5f81e82f4eb6d2a9ba049ad9b79eaf2ab048a9dd070ab7d1898b6e1961f2e2b0"
+    },
+    {
+      "source": "https://fonts.gstatic.com/s/mulish/v18/1Ptyg83HX_SGhgqO0yLcmjzUAuWexRNWwaA.ttf",
+      "path": "assets/fonts/font-18.ttf",
+      "bytes": 103392,
+      "sha256": "6d148793acfc85087253fc46504488b36d31ae15d89259720bd1e05c9e82d89e"
+    },
+    {
+      "source": "https://fonts.gstatic.com/s/mulish/v18/1Ptyg83HX_SGhgqO0yLcmjzUAuWexU1WwaA.ttf",
+      "path": "assets/fonts/font-19.ttf",
+      "bytes": 103360,
+      "sha256": "c97e11561506a43b899685506e54c13c278fc3418da186930f8c705dc63cdbd3"
+    },
+    {
+      "source": "https://fonts.gstatic.com/s/mulish/v18/1Ptyg83HX_SGhgqO0yLcmjzUAuWexXRWwaA.ttf",
+      "path": "assets/fonts/font-20.ttf",
+      "bytes": 103404,
+      "sha256": "528a02bfa16072dedf3014b2c6eb5df7de54f984e313131c412f804da959ddff"
+    },
+    {
+      "source": "https://fonts.gstatic.com/s/mulish/v18/1Ptyg83HX_SGhgqO0yLcmjzUAuWexZNRwaA.ttf",
+      "path": "assets/fonts/font-21.ttf",
+      "bytes": 103364,
+      "sha256": "46ee5f47fed537401cd92c16b666fccd05140bab39a0390a9b90ee1040c31af9"
+    },
+    {
+      "source": "https://fonts.gstatic.com/s/mulish/v18/1Ptyg83HX_SGhgqO0yLcmjzUAuWexaFRwaA.ttf",
+      "path": "assets/fonts/font-22.ttf",
+      "bytes": 103416,
+      "sha256": "7b9f56ecf8b06bcd798a7800ac06b502e982afe668cb7fe61907c37efd35942d"
+    },
+    {
+      "source": "https://fonts.gstatic.com/s/mulish/v18/1Ptyg83HX_SGhgqO0yLcmjzUAuWexc1RwaA.ttf",
+      "path": "assets/fonts/font-23.ttf",
+      "bytes": 103416,
+      "sha256": "f01c187fdb64da0f760a085f08d97b84f211d7e7bc7800ae395aae69ef7fbf82"
+    },
+    {
+      "source": "https://fonts.gstatic.com/s/pinyonscript/v24/6xKpdSJbL9-e9LuoeQiDRQR8aOI.ttf",
+      "path": "assets/fonts/font-24.ttf",
+      "bytes": 144584,
+      "sha256": "3683830e3bb3f1a2138b6098f8663ca5ceb66b1f397a4f30639aae139e344bb8"
+    }
+  ],
+  "catalogEligible": false
+}

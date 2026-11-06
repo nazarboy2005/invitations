@@ -1,0 +1,68 @@
+[
+  {
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "errors": [],
+    "failed": [],
+    "normalOpening": true,
+    "seedFlip": true,
+    "program": 6
+  },
+  {
+    "viewport": {
+      "width": 1440,
+      "height": 1000
+    },
+    "errors": [],
+    "failed": [],
+    "normalOpening": true,
+    "seedFlip": true,
+    "program": 6
+  },
+  {
+    "locale": "uz-Latn",
+    "reducedOpening": true,
+    "gallery": true,
+    "storyCount": 7,
+    "secret": true,
+    "rsvp": true,
+    "wishPending": true,
+    "failureDoesNotClaimSuccess": true,
+    "errors": []
+  },
+  {
+    "locale": "uz-Cyrl",
+    "reducedOpening": true,
+    "gallery": true,
+    "storyCount": 7,
+    "secret": true,
+    "rsvp": true,
+    "wishPending": true,
+    "failureDoesNotClaimSuccess": true,
+    "errors": []
+  },
+  {
+    "locale": "en",
+    "reducedOpening": true,
+    "gallery": true,
+    "storyCount": 7,
+    "secret": true,
+    "rsvp": true,
+    "wishPending": true,
+    "failureDoesNotClaimSuccess": true,
+    "errors": []
+  },
+  {
+    "locale": "ru",
+    "reducedOpening": true,
+    "gallery": true,
+    "storyCount": 7,
+    "secret": true,
+    "rsvp": true,
+    "wishPending": true,
+    "failureDoesNotClaimSuccess": true,
+    "errors": []
+  }
+]

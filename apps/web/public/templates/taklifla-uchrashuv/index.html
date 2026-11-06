@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="uz-Latn" data-awaiting-data><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Uchrashuv maktubi</title><link rel="stylesheet" href="fonts/fonts.css"><link rel="stylesheet" href="source/template.css"><link rel="stylesheet" href="source/music.css"><link rel="stylesheet" href="source/language.css"><link rel="stylesheet" href="platform.css"></head><body data-pending>
+<div class="stage">
+  <div class="shell" id="shell">
+
+    
+    <div class="cover" id="cover" data-uchrashuv-open role="button" tabindex="0" aria-label="Taklifnomani ochish">
+
+      <svg class="stain tl" width="180" height="180" viewBox="0 0 180 180" aria-hidden="true">
+        <defs>
+          <radialGradient id="rs1" cx="40%" cy="40%" r="55%">
+            <stop offset="0" stop-color="#D99584" stop-opacity="0.55"/>
+            <stop offset="0.6" stop-color="#B83F50" stop-opacity="0.18"/>
+            <stop offset="1" stop-color="#B83F50" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <path d="M40 18 C 70 8 110 26 130 56 C 142 78 138 108 116 124 C 86 144 48 132 28 102 C 10 76 14 36 40 18 Z" fill="url(#rs1)"/>
+      </svg>
+      <svg class="stain br" width="200" height="200" viewBox="0 0 200 200" aria-hidden="true">
+        <defs>
+          <radialGradient id="rs2" cx="60%" cy="60%" r="55%">
+            <stop offset="0" stop-color="#D99584" stop-opacity="0.5"/>
+            <stop offset="0.6" stop-color="#6B1F2A" stop-opacity="0.15"/>
+            <stop offset="1" stop-color="#6B1F2A" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <path d="M158 36 C 188 56 196 100 178 132 C 158 168 110 180 76 162 C 44 144 36 102 60 70 C 80 44 124 16 158 36 Z" fill="url(#rs2)"/>
+      </svg>
+
+      <div class="cover-frame"></div>
+
+      <div class="cover-top">
+        <div class="cover-mono"></div>
+        <div class="cover-rule"></div>
+      </div>
+
+      <div class="cover-mid">
+        <div class="seal" aria-hidden="true">
+          <span class="seal-mono"></span>
+        </div>
+        <p class="cover-line">
+          <span class="nm"></span> <span class="cl-text"><br/></span>
+        </p>
+        <div class="cover-recipient"></div>
+      </div>
+
+      <div class="cover-bottom">
+        <button class="pill" type="button" id="open-btn">
+          <span></span>
+          <span class="arr" aria-hidden="true">→</span>
+        </button>
+        <div class="cover-hint"></div>
+      </div>
+    </div>
+
+    
+    <div class="letter" id="letter" aria-hidden="true" inert>
+      <div class="letter-frame"></div>
+
+      <div class="lt-head">
+        <div class="lt-eye"></div>
+        <div class="lt-to"><b></b><span class="lt-to-rest"></span></div>
+      </div>
+
+      <div class="question">
+        <div class="q-line q-1"></div>
+        <div class="q-line q-2"><span class="q2-text"><br/></span><span class="q-mark">?</span></div>
+        <div class="q-sign">— <b></b></div>
+      </div>
+
+      <div class="ornament" aria-hidden="true">
+        <span class="ln"></span>
+        <span class="dot"></span>
+        <span class="ln"></span>
+      </div>
+
+      
+      <div class="proposal">
+        <div class="prop-grid">
+          <div class="prop-cell">
+            <span class="prop-label"></span>
+            <span class="prop-val"><b></b></span>
+          </div>
+          <div class="prop-divider"></div>
+          <div class="prop-cell">
+            <span class="prop-label"></span>
+            <span class="prop-val"><b></b></span>
+          </div>
+          <div class="prop-cell full">
+            <span class="prop-label"></span>
+            <span class="prop-val"></span>
+            <span class="prop-sub"></span>
+          </div>
+        </div>
+      </div>
+
+      
+      <div class="actions">
+        <button class="yes-btn" id="yes-btn" type="button">
+          <span></span>
+          <span class="heart" aria-hidden="true">❤</span>
+        </button>
+        <div class="no-area" id="no-area">
+          <button class="no-btn" id="no-btn" type="button"></button>
+        </div>
+        <p id="reply-status" role="status" aria-live="polite"></p><div class="footer-mark"><span class="dot">·</span> <span class="fm-text"></span>
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="petals" id="petals" aria-hidden="true"></div>
+
+    
+    <div class="confirm" id="confirm" aria-hidden="true" tabindex="-1" role="dialog" aria-modal="true" inert>
+      <div class="confirm-frame"></div>
+      <div class="confirm-eye"></div>
+      <div class="confirm-script"></div>
+      <p class="confirm-msg"><span class="cm-pre"></span><b class="cm-date"></b><span class="cm-mid"></span><b class="cm-venue"></b><span class="cm-post"></span></p>
+      <div class="confirm-meta"><span class="cm-time"></span> <span style="opacity:.5">·</span> <span class="cm-day"></span></div>
+      <a class="confirm-cta" id="confirm-cta" href="#" target="_blank" rel="noopener">
+        <span></span>
+        <span aria-hidden="true">→</span>
+      </a>
+    </div>
+
+  </div>
+</div>
+
+<audio id="bgMusic" loop preload="none"></audio>
+<button id="taklifla-music-btn" class="taklifla-music-btn" type="button" aria-label="Musiqa" hidden>
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+  <span class="taklifla-music-label">Musiqa</span>
+</button><div class="taklifla-lang-switch" role="group" aria-label="Til">
+  <button type="button" class="taklifla-lang-toggle" aria-haspopup="menu" aria-expanded="false">
+    <span class="taklifla-lang-current">Uz</span>
+    <span class="chev" aria-hidden="true">▾</span>
+  </button>
+  <div class="taklifla-lang-menu" role="menu">
+    <button type="button" data-lang="uz-Latn" role="menuitemradio">Uz</button>
+    <hr /><button type="button" data-lang="uz-Cyrl" role="menuitemradio">Уз</button>
+    <button type="button" data-lang="en" role="menuitemradio">En</button>
+    <hr />
+    <button type="button" data-lang="ru" role="menuitemradio">Ru</button>
+  </div>
+</div><script src="copy.js"></script><script src="bridge.js"></script><script src="source/motion.js"></script></body></html>

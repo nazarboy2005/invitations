@@ -1,0 +1,13 @@
+{
+  "id": "wedivo-taman-rahasia",
+  "name": "Sirli Bog‘",
+  "description": "Kalit bilan ochiladigan darvoza ortida muhabbat hikoyasi yashiringan. Nihollar, gullar soati va xotiralar bog‘iga marhamat.",
+  "categoryIds": ["wedding"],
+  "supportedEventTypes": ["wedding"],
+  "previewImage": "/templates/wedivo-taman-rahasia/preview.webp",
+  "rendererExport": "WedivoTamanRahasia",
+  "rendererModule": "apps/web/src/templates/wedivo-taman-rahasia/renderer.tsx",
+  "migrationNeeded": "Coordinator-owned additive registration, initially unpublished. Publication requires acceptance/resolution of documented source-field gaps and app integration checks.",
+  "published": false,
+  "selectable": false
+}

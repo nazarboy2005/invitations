@@ -1,0 +1,123 @@
+[hidden] {
+  display: none !important;
+}
+body:not([data-platform-ready]) {
+  visibility: hidden;
+}
+#cv-names,
+#hr-names,
+.cp-full,
+#cl-names {
+  overflow-wrap: anywhere;
+}
+#cv-name-1,
+#cv-name-2 {
+  max-width: 100%;
+}
+#gr-text,
+.rd-desc,
+.st-text,
+#cl-msg {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+#platform-status {
+  position: fixed;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  background: #fff8f7;
+  color: #633c45;
+  border: 1px solid #c99ba7;
+  border-radius: 16px;
+  padding: 12px 22px;
+  max-width: 90vw;
+  text-align: center;
+  font:
+    14px Jost,
+    sans-serif;
+}
+#gift-card-details {
+  display: grid;
+  gap: 10px;
+  margin: 20px 0;
+}
+#gift-card-number {
+  font-size: clamp(18px, 3vw, 26px);
+  letter-spacing: 0.1em;
+  overflow-wrap: anywhere;
+}
+#platform-languages {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  z-index: 400;
+  display: flex;
+  gap: 4px;
+}
+#platform-languages button {
+  border: 1px solid #d9bcc3;
+  background: #fff7f4ee;
+  color: #714650;
+  border-radius: 50%;
+  width: 34px;
+  height: 34px;
+  font:
+    11px Jost,
+    sans-serif;
+  cursor: pointer;
+}
+#platform-languages button[aria-pressed="true"] {
+  background: #714650;
+  color: white;
+}
+.platform-extra {
+  margin: 20px auto !important;
+  padding: 0 !important;
+}
+.platform-extra h2 {
+  font-family: "Bodoni Moda", serif !important;
+}
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid #7d4356;
+  outline-offset: 4px;
+}
+.platform-file-field {
+  position: relative;
+}
+.platform-file-input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+.platform-file-field:focus-within .f-input {
+  outline: 2px solid #7d4356;
+  outline-offset: 4px;
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto !important;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+.platform-reduced *,
+.platform-reduced *::before,
+.platform-reduced *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+  scroll-behavior: auto !important;
+}

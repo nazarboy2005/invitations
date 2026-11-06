@@ -1,0 +1,1401 @@
+<!DOCTYPE html>
+
+<html lang="uz-Latn">
+<head>
+
+
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
+<meta content="#f6ebe7" name="theme-color"/>
+<meta content="" name="description"/>
+<title>Taklifnoma</title>
+
+<link href="assets/fonts.css" rel="stylesheet"/><link href="source/template.css" rel="stylesheet"/><link href="adapter.css" rel="stylesheet"/></head>
+<body class="is-locked wp-doodle awaiting-data" id="page-body">
+<svg aria-hidden="true" focusable="false" height="0" id="sprite" width="0"></svg>
+<div aria-hidden="true" id="wall">
+<div id="wall-base"></div>
+<div id="wall-blob-1"></div>
+<div id="wall-blob-2"></div>
+<div id="wall-blob-3"></div>
+<div id="wall-img"></div>
+<div id="wall-doodle"></div>
+<div id="wall-grain"></div>
+</div>
+<canvas aria-hidden="true" id="amb"></canvas>
+<div aria-label="Kepala obrolan" id="appbar" role="banner">
+<button aria-label="Buka daftar obrolan" id="ab-back" type="button">
+<svg class="ic" id="ab-back-ic">
+<use href="#i-back" id="ab-back-u"></use></svg><span class="badge" id="ab-back-n">19</span>
+</button>
+<button aria-label="Info obrolan" id="ab-who" type="button">
+<span class="av" id="ab-av"><img alt="" id="ab-av-img"/><span class="ini" id="ab-av-ini"></span></span><span id="ab-txt"><span id="ab-title">Menuju Sah 💍</span><span id="ab-sub"><span id="ab-sub-t"></span></span></span>
+</button>
+<div id="ab-acts">
+<button aria-label="Putar atau jeda musik" class="ab-btn" hidden="" id="ab-music" type="button">
+<span aria-hidden="true" id="ab-eq"><i id="ab-eq-1"></i><i id="ab-eq-2"></i><i id="ab-eq-3"></i><i id="ab-eq-4"></i></span>
+</button>
+<button aria-label="Panggilan video" class="ab-btn" id="ab-video" type="button">
+<svg class="ic" id="ab-video-ic">
+<use href="#i-video" id="ab-video-u"></use>
+</svg>
+</button>
+<button aria-label="Telepon" class="ab-btn" id="ab-call" type="button">
+<svg class="ic" id="ab-call-ic">
+<use href="#i-phone" id="ab-call-u"></use>
+</svg>
+</button>
+<button aria-expanded="false" aria-label="Menu lainnya" class="ab-btn" id="ab-more" type="button">
+<svg class="ic" id="ab-more-ic">
+<use href="#i-more" id="ab-more-u"></use>
+</svg>
+</button>
+</div>
+<div aria-label="Menu obrolan" id="ab-menu" role="menu">
+<button class="mi" id="mi-theme" role="menuitem" type="button">
+<svg class="ic" id="mi-theme-ic">
+<use href="#i-moon" id="mi-theme-u"></use></svg><span id="mi-theme-t">Mode gelap</span><span class="mi-v" id="mi-theme-v">Mati</span>
+</button>
+<button class="mi" id="mi-wall" role="menuitem" type="button">
+<svg class="ic" id="mi-wall-ic">
+<use href="#i-image" id="mi-wall-u"></use></svg><span id="mi-wall-t">Wallpaper</span><span class="mi-v" id="mi-wall-v">Doodle</span>
+</button>
+<button class="mi" id="mi-sound" role="menuitem" type="button">
+<svg class="ic" id="mi-sound-ic">
+<use href="#i-vol" id="mi-sound-u"></use></svg><span id="mi-sound-t">Efek suara</span><span class="mi-v" id="mi-sound-v">Nyala</span>
+</button>
+<button class="mi" id="mi-share" role="menuitem" type="button">
+<svg class="ic" id="mi-share-ic">
+<use href="#i-fwd" id="mi-share-u"></use></svg><span id="mi-share-t">Teruskan undangan</span>
+</button>
+<button class="mi" data-go="hero" id="mi-info" role="menuitem" type="button">
+<svg class="ic" id="mi-info-ic">
+<use href="#i-info" id="mi-info-u"></use></svg><span id="mi-info-t">Info grup</span>
+</button>
+</div>
+</div>
+<section aria-label="Layar kunci undangan" data-section="cover" id="sec-cover">
+<div aria-hidden="true" id="cv-back">
+<div id="cv-back-img"></div>
+<div id="cv-back-tint"></div>
+</div>
+<div id="cv-phone">
+<div id="cv-screen">
+<div aria-hidden="true" id="cv-wall">
+<img alt="" id="cv-wall-img"/>
+<div id="cv-wall-shade"></div>
+</div>
+<div aria-hidden="true" id="cv-bar">
+<span id="cv-bar-time">09.41</span><span id="cv-bar-ic"><svg class="ic ic-f" id="cv-bar-sig">
+<use href="#i-signal" id="cv-bar-sig-u"></use></svg><svg class="ic" id="cv-bar-wifi">
+<use href="#i-wifi" id="cv-bar-wifi-u"></use></svg><span id="cv-bat"><i id="cv-bat-lvl"></i></span></span>
+</div>
+<div id="cv-lockwrap">
+<span aria-hidden="true" id="cv-lock"><svg id="cv-lock-svg" viewbox="0 0 24 24">
+<path d="M8 11V8a4 4 0 0 1 8 0v3" id="cv-lock-shackle"></path>
+<rect height="10" id="cv-lock-body" rx="2.6" width="13" x="5.5" y="11"></rect>
+<circle cx="12" cy="16" id="cv-lock-hole" r="1.4"></circle></svg></span>
+<p id="cv-date">Sabtu, 26 September</p>
+<p id="cv-clock">09.41</p>
+<p id="cv-widget"><svg class="ic" id="cv-widget-ic"><use href="#i-ring" id="cv-widget-u"></use></svg><span id="cv-widget-t">Menuju “Sah”</span></p>
+</div>
+<div id="cv-stack">
+<button aria-label="" class="cv-n" id="cv-n1" type="button">
+<span class="cv-app" id="cv-n1-app"><span class="cv-appic" id="cv-n1-appic"><svg class="ic" id="cv-n1-appic-s">
+<use href="#i-chatheart" id="cv-n1-appic-u"></use></svg></span><b id="cv-n1-appn">KABAR</b><time id="cv-n1-time">sekarang</time></span>
+<span class="cv-row" id="cv-n1-row"><span class="cv-av av" id="cv-n1-av"><img alt="" id="cv-n1-av-img"/><span class="ini" id="cv-n1-av-ini"></span></span><span class="cv-txt" id="cv-n1-txt"><b class="cv-ttl" id="cv-n1-ttl"><span id="cv-n1-g"></span> &amp;
+                    <span id="cv-n1-b"></span> 💍</b><span class="cv-msg" id="cv-n1-msg"><span id="cv-guest">Untuk <b id="cv-guest-name"></b> — </span><span id="cv-n1-body">Ada kabar bahagia buat kamu. Buka, ya! 💌</span></span></span></span>
+</button>
+<button aria-label="Buka undangan" class="cv-n cv-old" id="cv-n2" type="button">
+<span class="cv-app" id="cv-n2-app"><span class="cv-appic" id="cv-n2-appic"><svg class="ic" id="cv-n2-appic-s">
+<use href="#i-chatheart" id="cv-n2-appic-u"></use></svg></span><b id="cv-n2-appn">KABAR</b><time id="cv-n2-time">2 mnt lalu</time></span>
+<span class="cv-row" id="cv-n2-row"><span class="cv-av av" id="cv-n2-av"><img alt="" id="cv-n2-av-img"/><span class="ini" id="cv-n2-av-ini"></span></span><span class="cv-txt" id="cv-n2-txt"><b class="cv-ttl" id="cv-n2-ttl"></b><span class="cv-msg" id="cv-n2-msg">Kamu kami undang ke hari paling bersejarah kami 🥹</span></span></span>
+</button>
+<button aria-label="Buka undangan" class="cv-n cv-old cv-oldest" id="cv-n3" type="button">
+<span class="cv-app" id="cv-n3-app"><span class="cv-appic" id="cv-n3-appic"><svg class="ic" id="cv-n3-appic-s">
+<use href="#i-chatheart" id="cv-n3-appic-u"></use></svg></span><b id="cv-n3-appn">KABAR</b><time id="cv-n3-time"></time></span>
+<span class="cv-row" id="cv-n3-row"><span class="cv-av av" id="cv-n3-av"><img alt="" id="cv-n3-av-img"/><span class="ini" id="cv-n3-av-ini"></span></span><span class="cv-txt" id="cv-n3-txt"><b class="cv-ttl" id="cv-n3-ttl"></b><span class="cv-msg" id="cv-n3-msg">P</span></span></span>
+</button>
+</div>
+<div id="cv-foot">
+<p id="cv-hint"><svg class="ic" id="cv-hint-ic"><use href="#i-up" id="cv-hint-u"></use></svg><span id="cv-hint-t">Ketuk notifikasinya atau geser ke atas</span></p>
+<span aria-hidden="true" id="cv-home"></span>
+</div>
+<div aria-hidden="true" id="cv-launch"></div>
+</div>
+</div>
+</section>
+<section aria-label="Info grup obrolan" data-section="hero" id="sec-hero">
+<div class="col" id="hero-col">
+<div id="hero-card">
+<div aria-hidden="true" id="hero-orbit">
+<span class="orb rv pop" id="hero-orb-1" style="--d: 520"><span class="orb-i" id="hero-orb-1-i">💍</span></span>
+<span class="orb rv pop" id="hero-orb-2" style="--d: 600"><span class="orb-i" id="hero-orb-2-i">🥹</span></span>
+<span class="orb rv pop" id="hero-orb-3" style="--d: 680"><span class="orb-i" id="hero-orb-3-i">❤️</span></span>
+<span class="orb rv pop" id="hero-orb-4" style="--d: 760"><span class="orb-i" id="hero-orb-4-i">✨</span></span>
+<span class="hero-stk rv drop" id="hero-stk-1" style="--d: 640"><svg class="stk" id="hero-stk-1-s">
+<use href="#stk-cincin" id="hero-stk-1-u"></use></svg></span>
+<span class="hero-stk rv drop" id="hero-stk-2" style="--d: 820"><svg class="stk" id="hero-stk-2-s">
+<use href="#stk-amplop" id="hero-stk-2-u"></use></svg></span>
+</div>
+<button aria-label="Lihat status kami" class="rv pop" id="hero-ring" style="--d: 80" type="button">
+<svg aria-hidden="true" id="hero-ring-svg" viewbox="0 0 120 120">
+<circle cx="60" cy="60" id="hero-ring-c" r="56.5"></circle></svg><span class="av" id="hero-av"><img alt="" id="hero-av-img"/><span class="ini" id="hero-av-ini"></span></span><span id="hero-ring-badge"><svg class="ic" id="hero-ring-badge-s">
+<use href="#i-sparkle" id="hero-ring-badge-u"></use></svg></span>
+</button>
+<p class="rv" id="hero-kicker" style="--d:200"><svg class="ic" id="hero-kicker-ic"><use href="#i-users" id="hero-kicker-u"></use></svg><span id="hero-kicker-t">Grup · 3 anggota</span></p>
+<h1 class="rv" id="hero-names" style="--d: 280">
+<span id="hero-g"></span>
+<span id="hero-amp">&amp;</span>
+<span id="hero-b"></span>
+</h1>
+<p class="rv" id="hero-group" style="--d:360">“<span id="hero-group-t">Menuju Sah 💍</span>”</p>
+<p class="rv" id="hero-desc" style="--d:420"></p>
+<div class="rv pop" data-tz="WIB" id="hero-date" style="--d: 500">
+<span id="hero-date-ic"><svg class="ic" id="hero-date-ic-s">
+<use href="#i-ring" id="hero-date-ic-u"></use></svg></span><span id="hero-date-txt"><b id="hero-date-d"></b><span id="hero-date-t"><span id="hero-date-time"></span> ·
+                <span id="hero-date-v"></span></span></span>
+</div>
+<div class="rv" id="hero-acts" style="--d: 580">
+<button class="hact" data-go="terjadwal" id="hero-act-1" type="button">
+<span class="hact-ic g-amber" id="hero-act-1-ic"><svg class="ic" id="hero-act-1-s">
+<use href="#i-clock" id="hero-act-1-u"></use></svg></span><span class="hact-l" id="hero-act-1-l">Hitung mundur</span>
+</button>
+<button class="hact" data-go="acara" id="hero-act-2" type="button">
+<span class="hact-ic g-rose" id="hero-act-2-ic"><svg class="ic" id="hero-act-2-s">
+<use href="#i-cal" id="hero-act-2-u"></use></svg></span><span class="hact-l" id="hero-act-2-l">Acara</span>
+</button>
+<button class="hact" data-go="lokasi" id="hero-act-3" type="button">
+<span class="hact-ic g-teal" id="hero-act-3-ic"><svg class="ic" id="hero-act-3-s">
+<use href="#i-mappin" id="hero-act-3-u"></use></svg></span><span class="hact-l" id="hero-act-3-l">Lokasi</span>
+</button>
+<button class="hact" data-go="rsvp" id="hero-act-4" type="button">
+<span class="hact-ic g-violet" id="hero-act-4-ic"><svg class="ic" id="hero-act-4-s">
+<use href="#i-poll" id="hero-act-4-u"></use></svg></span><span class="hact-l" id="hero-act-4-l">Balas</span>
+</button>
+</div>
+</div>
+<p class="sn rv" id="hero-e2e" style="--d:680"><svg class="ic" id="hero-e2e-ic"><use href="#i-lock" id="hero-e2e-u"></use></svg><span id="hero-e2e-t">Pesan di grup ini dilindungi enkripsi cinta ujung-ke-ujung. Hanya kami, dan kamu, yang bisa membacanya.</span></p>
+<p class="sp rv" id="hero-sys1" style="--d:760"><span id="hero-sys1-t"><b id="hero-sys1-g"></b> membuat grup “<span id="hero-sys1-n">Menuju Sah 💍</span>”</span></p>
+<p class="sp rv" id="hero-sys2" style="--d:840"><span id="hero-sys2-t"><b id="hero-sys2-b"></b> menambahkan <b id="hero-guest"></b><b id="hero-guest-gen">kamu</b></span></p>
+<button class="rv" data-go="next" id="hero-unread" style="--d: 940" type="button">
+<span id="hero-unread-t"><b id="hero-unread-n"></b> pesan belum dibaca</span><svg class="ic" id="hero-unread-ic">
+<use href="#i-down" id="hero-unread-u"></use>
+</svg>
+</button>
+</div>
+</section>
+<section aria-label="Pesan disematkan" data-section="ayat" id="sec-ayat">
+<div class="col" id="ayat-col">
+<article class="rv pop" id="ayat-card">
+<span aria-hidden="true" class="ayat-orn" id="ayat-orn-1"><svg class="ic ic-f" id="ayat-orn-1-s">
+<use href="#i-sparkle" id="ayat-orn-1-u"></use></svg></span>
+<span aria-hidden="true" class="ayat-orn" id="ayat-orn-2"><svg class="ic ic-f" id="ayat-orn-2-s">
+<use href="#i-sparkle" id="ayat-orn-2-u"></use></svg></span>
+<header id="ayat-head">
+<span id="ayat-pin"><svg class="ic" id="ayat-pin-s">
+<use href="#i-pin" id="ayat-pin-u"></use></svg></span><span id="ayat-head-t">Pesan disematkan</span><span id="ayat-head-by">oleh <span id="ayat-head-g"></span></span>
+</header>
+<p id="ayat-salam">Assalamu'alaikum warahmatullahi wabarakatuh</p>
+<p dir="rtl" id="ayat-ar" lang="ar"></p>
+<div id="ayat-tr-box">
+<div aria-hidden="true" id="ayat-shimmer">
+<i id="ayat-sh-1"></i><i id="ayat-sh-2"></i><i id="ayat-sh-3"></i>
+</div>
+<p id="ayat-tr"></p>
+</div>
+<p id="ayat-src"></p>
+<footer id="ayat-foot">
+<button id="ayat-toggle" type="button">
+<svg class="ic" id="ayat-toggle-ic">
+<use href="#i-translate" id="ayat-toggle-u"></use></svg><span id="ayat-toggle-t">Terjemahkan</span></button><span class="m-time" id="ayat-time">09.02</span>
+</footer>
+</article>
+</div>
+</section>
+<section aria-label="Riwayat obrolan" data-era="past" data-owner="wanita" data-section="kisah" id="sec-kisah">
+<div class="col" id="kisah-col">
+<div class="topic" id="kisah-topic">
+<span class="tp-ic g-rose rv pop" id="kisah-tp-ic"><svg class="ic" id="kisah-tp-s1">
+<use href="#i-history" id="kisah-tp-u1"></use></svg></span>
+<h2 class="tp-t rv" id="kisah-tp-t" style="--d: 80">
+            Riwayat Obrolan
+          </h2>
+<p class="tp-s rv" id="kisah-tp-s" style="--d:140">Diimpor dari HP kami</p>
+<span class="tp-stk rv drop" id="kisah-tp-stk" style="--d: 220"><svg class="stk" id="kisah-stk">
+<use href="#stk-p" id="kisah-stk-u"></use></svg></span>
+</div>
+<div class="rv" id="kisah-legend">
+<span class="lg-side" id="kisah-lg-l"><span class="lg-av av" id="kisah-lg-l-av"></span><span class="lg-n" id="kisah-lg-l-n"></span></span><span id="kisah-lg-mid"><svg class="ic" id="kisah-lg-mid-s">
+<use href="#i-swap" id="kisah-lg-mid-u"></use></svg></span><span class="lg-side" id="kisah-lg-r"><span class="lg-n" id="kisah-lg-r-n"></span><span class="lg-av av" id="kisah-lg-r-av"></span></span>
+</div>
+<p class="sp rv" id="kisah-intro"><span id="kisah-intro-t"></span></p>
+<div class="chap" data-date="" data-photo="" id="kisah-c1">
+<p class="dp" id="kisah-c1-dp"></p>
+<p class="chap-t rv pop" id="kisah-c1-t"><svg class="ic ic-f" id="kisah-c1-ic"><use href="#i-sparkle" id="kisah-c1-u"></use></svg><span id="kisah-c1-tt"></span></p>
+<template id="kisah-c1-src"></template>
+<div class="msgs" id="kisah-c1-m"></div>
+</div>
+<div class="chap" data-date="" data-photo="" id="kisah-c2">
+<p class="dp" id="kisah-c2-dp"></p>
+<p class="chap-t rv pop" id="kisah-c2-t"><svg class="ic ic-f" id="kisah-c2-ic"><use href="#i-sparkle" id="kisah-c2-u"></use></svg><span id="kisah-c2-tt"></span></p>
+<template id="kisah-c2-src"></template>
+<div class="msgs" id="kisah-c2-m"></div>
+</div>
+<div class="chap" data-date="" data-photo="" id="kisah-c3">
+<p class="dp" id="kisah-c3-dp"></p>
+<p class="chap-t rv pop" id="kisah-c3-t"><svg class="ic ic-f" id="kisah-c3-ic"><use href="#i-sparkle" id="kisah-c3-u"></use></svg><span id="kisah-c3-tt"></span></p>
+<template id="kisah-c3-src"></template>
+<div class="msgs" id="kisah-c3-m"></div>
+</div>
+<div class="chap" data-date="" data-photo="" id="kisah-c4">
+<p class="dp" id="kisah-c4-dp"></p>
+<p class="chap-t rv pop" id="kisah-c4-t"><svg class="ic ic-f" id="kisah-c4-ic"><use href="#i-sparkle" id="kisah-c4-u"></use></svg><span id="kisah-c4-tt"></span></p>
+<template id="kisah-c4-src"></template>
+<div class="msgs" id="kisah-c4-m"></div>
+</div>
+<div class="chap" data-date="" data-photo="" id="kisah-c5">
+<p class="dp" id="kisah-c5-dp"></p>
+<p class="chap-t rv pop" id="kisah-c5-t"><svg class="ic ic-f" id="kisah-c5-ic"><use href="#i-sparkle" id="kisah-c5-u"></use></svg><span id="kisah-c5-tt"></span></p>
+<template id="kisah-c5-src"></template>
+<div class="msgs" id="kisah-c5-m"></div>
+</div>
+<p class="sp rv" id="kisah-end"><svg class="ic" id="kisah-end-ic"><use href="#i-lock" id="kisah-end-u"></use></svg><span id="kisah-end-t">Akhir riwayat yang diimpor · <span id="kisah-end-n"></span> pesan kemudian…</span></p>
+</div>
+</section>
+<section aria-label="Kamus kita" data-contract-gap="" data-era="today" data-section="kamus" hidden="" id="sec-kamus">
+<div class="col" id="kamus-col">
+<p class="dp dp-today" hidden="" id="kamus-dp"></p>
+<div class="topic" id="kamus-topic">
+<span class="tp-ic g-teal rv pop" id="kamus-tp-ic"><svg class="ic" id="kamus-tp-s1">
+<use href="#i-translate" id="kamus-tp-u1"></use></svg></span>
+<h2 class="tp-t rv" id="kamus-tp-t" style="--d: 80"></h2>
+<p class="tp-s rv" id="kamus-tp-s" style="--d:140"></p>
+<span class="tp-stk rv drop" id="kamus-tp-stk" style="--d: 220"><svg class="stk" id="kamus-stk">
+<use href="#stk-kucing" id="kamus-stk-u"></use></svg></span>
+</div>
+<div class="msg" data-from="b" id="kamus-m0">
+<p class="m-text" id="kamus-m0-t"></p>
+</div>
+<div class="msg km" data-from="b" id="kamus-1">
+<div class="bub km-bub" id="kamus-1-b">
+<p class="km-w" id="kamus-1-w"></p>
+<p class="km-a" id="kamus-1-a"></p>
+</div>
+<button class="km-btn" id="kamus-1-btn" type="button">
+<svg class="ic" id="kamus-1-btn-s">
+<use href="#i-translate" id="kamus-1-btn-u"></use></svg><span id="kamus-1-btn-t"></span>
+</button>
+</div>
+<div class="msg km" data-from="g" id="kamus-2">
+<div class="bub km-bub" id="kamus-2-b">
+<p class="km-w" id="kamus-2-w"></p>
+<p class="km-a" id="kamus-2-a"></p>
+</div>
+<button class="km-btn" id="kamus-2-btn" type="button">
+<svg class="ic" id="kamus-2-btn-s">
+<use href="#i-translate" id="kamus-2-btn-u"></use></svg><span id="kamus-2-btn-t"></span>
+</button>
+</div>
+<div class="msg km" data-from="b" id="kamus-3">
+<div class="bub km-bub" id="kamus-3-b">
+<p class="km-w" id="kamus-3-w"></p>
+<p class="km-a" id="kamus-3-a"></p>
+</div>
+<button class="km-btn" id="kamus-3-btn" type="button">
+<svg class="ic" id="kamus-3-btn-s">
+<use href="#i-translate" id="kamus-3-btn-u"></use></svg><span id="kamus-3-btn-t"></span>
+</button>
+</div>
+<div class="msg km" data-from="g" id="kamus-4">
+<div class="bub km-bub" id="kamus-4-b">
+<p class="km-w" id="kamus-4-w"></p>
+<p class="km-a" id="kamus-4-a"></p>
+</div>
+<button class="km-btn" id="kamus-4-btn" type="button">
+<svg class="ic" id="kamus-4-btn-s">
+<use href="#i-translate" id="kamus-4-btn-u"></use></svg><span id="kamus-4-btn-t"></span>
+</button>
+</div>
+<div class="msg km" data-from="b" id="kamus-5">
+<div class="bub km-bub" id="kamus-5-b">
+<p class="km-w" id="kamus-5-w"></p>
+<p class="km-a" id="kamus-5-a"></p>
+</div>
+<button class="km-btn" id="kamus-5-btn" type="button">
+<svg class="ic" id="kamus-5-btn-s">
+<use href="#i-translate" id="kamus-5-btn-u"></use></svg><span id="kamus-5-btn-t"></span>
+</button>
+</div>
+<div class="msg km" data-from="g" id="kamus-6">
+<div class="bub km-bub" id="kamus-6-b">
+<p class="km-w" id="kamus-6-w"></p>
+<p class="km-a" id="kamus-6-a"></p>
+</div>
+<button class="km-btn" id="kamus-6-btn" type="button">
+<svg class="ic" id="kamus-6-btn-s">
+<use href="#i-translate" id="kamus-6-btn-u"></use></svg><span id="kamus-6-btn-t"></span>
+</button>
+</div>
+<div class="center-row rv" id="kamus-all-row">
+<button class="btn-g" id="kamus-all" type="button">
+<svg class="ic" id="kamus-all-s">
+<use href="#i-translate" id="kamus-all-u"></use></svg><span id="kamus-all-t"></span>
+</button>
+</div>
+</div>
+</section>
+<section aria-label="Disimpan sebagai" data-contract-gap="" data-era="today" data-section="kontak" hidden="" id="sec-kontak">
+<div class="col" id="kontak-col">
+<p class="dp dp-today" hidden="" id="kontak-dp"></p>
+<div class="topic" id="kontak-topic">
+<span class="tp-ic g-violet rv pop" id="kontak-tp-ic"><svg class="ic" id="kontak-tp-s1">
+<use href="#i-card" id="kontak-tp-u1"></use></svg></span>
+<h2 class="tp-t rv" id="kontak-tp-t" style="--d: 80"></h2>
+<p class="tp-s rv" id="kontak-tp-s" style="--d:140"></p>
+<span class="tp-stk rv drop" id="kontak-tp-stk" style="--d: 220"><svg class="stk" id="kontak-stk">
+<use href="#stk-hati" id="kontak-stk-u"></use></svg></span>
+</div>
+<div class="msg" data-from="g" id="kontak-m0">
+<p class="m-text" id="kontak-m0-t"></p>
+</div>
+<div class="rv pop" id="kontak-card">
+<div aria-label="Pilih HP" id="kontak-seg" role="tablist">
+<button aria-selected="true" class="seg is-on" data-who="g" id="kontak-tab-g" role="tab" type="button"><span id="kontak-tab-g-n"></span></button><button aria-selected="false" class="seg" data-who="b" id="kontak-tab-b" role="tab" type="button"><span id="kontak-tab-b-n"></span></button><span aria-hidden="true" id="kontak-seg-pill"></span>
+</div>
+<div id="kontak-phone">
+<div id="kontak-top">
+<span id="kontak-top-l"></span><b id="kontak-top-c"></b><span id="kontak-top-r"></span>
+</div>
+<div class="av" id="kontak-av"></div>
+<div id="kontak-field">
+<span id="kontak-field-l"></span>
+<p aria-live="polite" id="kontak-name"><span id="kontak-name-t"></span><i aria-hidden="true" id="kontak-caret"></i></p>
+</div>
+<div class="kontak-row" id="kontak-row-1">
+<span class="kr-l" id="kontak-row-1-l"></span><span class="kr-v" id="kontak-row-1-v"></span>
+</div>
+<div class="kontak-row" id="kontak-row-2">
+<span class="kr-l" id="kontak-row-2-l"></span><span class="kr-v" id="kontak-row-2-v"></span>
+</div>
+<div aria-hidden="true" id="kontak-acts">
+<span class="ka" id="kontak-a1"><svg class="ic" id="kontak-a1-s">
+<use href="#i-chat" id="kontak-a1-u"></use></svg></span><span class="ka" id="kontak-a2"><svg class="ic" id="kontak-a2-s">
+<use href="#i-phone" id="kontak-a2-u"></use></svg></span><span class="ka" id="kontak-a3"><svg class="ic" id="kontak-a3-s">
+<use href="#i-video" id="kontak-a3-u"></use></svg></span>
+</div>
+</div>
+<div id="kontak-tl">
+<div id="kontak-tl-line"><i id="kontak-tl-fill"></i></div>
+<div id="kontak-tl-stops"></div>
+</div>
+<div class="center-row" id="kontak-play-row">
+<button class="btn" id="kontak-play" type="button">
+<svg class="ic" id="kontak-play-s">
+<use href="#i-play" id="kontak-play-u"></use></svg><span id="kontak-play-t"></span>
+</button>
+</div>
+<template id="kontak-src-g"></template>
+<template id="kontak-src-b"></template>
+</div>
+</div>
+</section>
+<section aria-label="Draf tak terkirim" data-contract-gap="" data-era="today" data-section="draf" hidden="" id="sec-draf">
+<div class="col" id="draf-col">
+<p class="dp dp-today" hidden="" id="draf-dp"></p>
+<div class="topic" id="draf-topic">
+<span class="tp-ic g-amber rv pop" id="draf-tp-ic"><svg class="ic" id="draf-tp-s1">
+<use href="#i-pencil" id="draf-tp-u1"></use></svg></span>
+<h2 class="tp-t rv" id="draf-tp-t" style="--d: 80"></h2>
+<p class="tp-s rv" id="draf-tp-s" style="--d:140"></p>
+<span class="tp-stk rv drop" id="draf-tp-stk" style="--d: 220"><svg class="stk" id="draf-stk">
+<use href="#stk-pesawat" id="draf-stk-u"></use></svg></span>
+</div>
+<div class="msg" data-from="b" id="draf-m0">
+<p class="m-text" id="draf-m0-t"></p>
+</div>
+<div id="draf-grid">
+<article class="draf rv pop" data-date="" data-time="" data-who="g" id="draf-1">
+<header class="draf-h" id="draf-1-h">
+<span class="draf-av av" id="draf-1-av"></span><span class="draf-meta" id="draf-1-meta"><b id="draf-1-who"><span id="draf-1-wn"></span></b><span id="draf-1-when"></span></span><span class="draf-tag" id="draf-1-tag"></span>
+</header>
+<div class="draf-thread" id="draf-1-thread"></div>
+<div class="draf-comp" id="draf-1-comp">
+<p class="draf-in" id="draf-1-in"><span class="draf-typed" id="draf-1-typed"></span><i class="caret" id="draf-1-caret"></i></p>
+<button aria-label="Kirim draf ini sekarang" class="draf-send" id="draf-1-send" type="button">
+<svg class="ic" id="draf-1-send-s">
+<use href="#i-send" id="draf-1-send-u"></use>
+</svg>
+</button>
+</div>
+<p class="draf-src" hidden="" id="draf-1-src"></p>
+<p class="draf-rep" hidden="" id="draf-1-rep"></p>
+<p class="draf-foot" id="draf-1-foot"><svg class="ic" id="draf-1-foot-s"><use href="#i-clock" id="draf-1-foot-u"></use></svg><span id="draf-1-foot-t"></span></p>
+</article>
+<article class="draf rv pop" data-date="" data-time="" data-who="b" id="draf-2" style="--d: 120">
+<header class="draf-h" id="draf-2-h">
+<span class="draf-av av" id="draf-2-av"></span><span class="draf-meta" id="draf-2-meta"><b id="draf-2-who"><span id="draf-2-wn"></span></b><span id="draf-2-when"></span></span><span class="draf-tag" id="draf-2-tag"></span>
+</header>
+<div class="draf-thread" id="draf-2-thread"></div>
+<div class="draf-comp" id="draf-2-comp">
+<p class="draf-in" id="draf-2-in"><span class="draf-typed" id="draf-2-typed"></span><i class="caret" id="draf-2-caret"></i></p>
+<button aria-label="Kirim draf ini sekarang" class="draf-send" id="draf-2-send" type="button">
+<svg class="ic" id="draf-2-send-s">
+<use href="#i-send" id="draf-2-send-u"></use>
+</svg>
+</button>
+</div>
+<p class="draf-src" hidden="" id="draf-2-src"></p>
+<p class="draf-rep" hidden="" id="draf-2-rep"></p>
+<p class="draf-foot" id="draf-2-foot"><svg class="ic" id="draf-2-foot-s"><use href="#i-clock" id="draf-2-foot-u"></use></svg><span id="draf-2-foot-t"></span></p>
+</article>
+</div>
+</div>
+</section>
+<section aria-label="Info kontak mempelai" data-era="today" data-section="mempelai" id="sec-mempelai">
+<div class="col" id="mempelai-col">
+<p class="dp dp-today" hidden="" id="mempelai-dp">Hari ini</p>
+<div class="topic" id="mempelai-topic">
+<span class="tp-ic g-blue rv pop" id="mempelai-tp-ic"><svg class="ic" id="mempelai-tp-s1">
+<use href="#i-user" id="mempelai-tp-u1"></use></svg></span>
+<h2 class="tp-t rv" id="mempelai-tp-t" style="--d: 80">
+            Info Kontak
+          </h2>
+<p class="tp-s rv" id="mempelai-tp-s" style="--d:140">Kenalan resmi dengan kedua mempelai</p>
+<span class="tp-stk rv drop" id="mempelai-tp-stk" style="--d: 220"><svg class="stk" id="mempelai-stk">
+<use href="#stk-kopi" id="mempelai-stk-u"></use></svg></span>
+</div>
+<div class="msg" data-from="g" id="mp-m0">
+<p class="m-text" id="mp-m0-t"></p>
+</div>
+<div id="mp-grid">
+<div class="msg mp-msg" data-from="b" id="mp-g-msg">
+<div class="bub bub-card mp-card" id="mp-g">
+<button aria-label="" class="mp-photo" data-status="g" id="mp-g-photo" type="button">
+<span aria-hidden="true" class="mp-ring" id="mp-g-ring"></span><span class="mp-pic av" id="mp-g-pic"><img alt="" id="mp-g-img"/><span class="ini" id="mp-g-ini"></span></span>
+</button>
+<p class="mp-kind" id="mp-g-kind"><svg class="ic" id="mp-g-kind-s"><use href="#i-card" id="mp-g-kind-u"></use></svg><span id="mp-g-kind-t">Kontak dibagikan</span></p>
+<h3 class="mp-name" id="mp-g-name"></h3>
+<p class="mp-nick" id="mp-g-nick">~<span id="mp-g-nick-t"></span> · <span class="mp-on" id="mp-g-on">online</span></p>
+<p class="mp-info" id="mp-g-info"><span class="mp-lab" id="mp-g-info-l">Info</span><span class="mp-info-t" id="mp-g-info-t"></span></p>
+<p class="mp-par" id="mp-g-par"><svg class="ic" id="mp-g-par-s"><use href="#i-home" id="mp-g-par-u"></use></svg><span id="mp-g-par-t"></span></p>
+<a class="mp-ig" href="#" id="mp-g-ig" rel="noopener" target="_blank"><svg class="ic" id="mp-g-ig-s">
+<use href="#i-ig" id="mp-g-ig-u"></use></svg><span id="mp-g-ig-t"></span></a>
+<div class="mp-acts" id="mp-g-acts">
+<button class="mp-act" data-status="g" id="mp-g-st" type="button">
+<svg class="ic" id="mp-g-st-s">
+<use href="#i-sparkle" id="mp-g-st-u"></use></svg><span id="mp-g-st-t">Lihat status</span>
+</button>
+</div>
+<template id="mp-g-status"></template>
+</div>
+</div>
+<div class="msg mp-msg" data-from="g" id="mp-b-msg">
+<div class="bub bub-card mp-card" id="mp-b">
+<button aria-label="" class="mp-photo" data-status="b" id="mp-b-photo" type="button">
+<span aria-hidden="true" class="mp-ring" id="mp-b-ring"></span><span class="mp-pic av" id="mp-b-pic"><img alt="" id="mp-b-img"/><span class="ini" id="mp-b-ini"></span></span>
+</button>
+<p class="mp-kind" id="mp-b-kind"><svg class="ic" id="mp-b-kind-s"><use href="#i-card" id="mp-b-kind-u"></use></svg><span id="mp-b-kind-t">Kontak dibagikan</span></p>
+<h3 class="mp-name" id="mp-b-name"></h3>
+<p class="mp-nick" id="mp-b-nick">~<span id="mp-b-nick-t"></span> · <span class="mp-on" id="mp-b-on">online</span></p>
+<p class="mp-info" id="mp-b-info"><span class="mp-lab" id="mp-b-info-l">Info</span><span class="mp-info-t" id="mp-b-info-t"></span></p>
+<p class="mp-par" id="mp-b-par"><svg class="ic" id="mp-b-par-s"><use href="#i-home" id="mp-b-par-u"></use></svg><span id="mp-b-par-t"></span></p>
+<a class="mp-ig" href="#" id="mp-b-ig" rel="noopener" target="_blank"><svg class="ic" id="mp-b-ig-s">
+<use href="#i-ig" id="mp-b-ig-u"></use></svg><span id="mp-b-ig-t"></span></a>
+<div class="mp-acts" id="mp-b-acts">
+<button class="mp-act" data-status="b" id="mp-b-st" type="button">
+<svg class="ic" id="mp-b-st-s">
+<use href="#i-sparkle" id="mp-b-st-u"></use></svg><span id="mp-b-st-t">Lihat status</span>
+</button>
+</div>
+<template id="mp-b-status"></template>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section aria-label="Restu keluarga" data-contract-gap="" data-era="today" data-section="keluarga" hidden="" id="sec-keluarga">
+<div class="col" id="keluarga-col">
+<p class="dp dp-today" hidden="" id="keluarga-dp"></p>
+<div class="topic" id="keluarga-topic">
+<span class="tp-ic g-green rv pop" id="keluarga-tp-ic"><svg class="ic" id="keluarga-tp-s1">
+<use href="#i-home" id="keluarga-tp-u1"></use></svg></span>
+<h2 class="tp-t rv" id="keluarga-tp-t" style="--d: 80"></h2>
+<p class="tp-s rv" id="keluarga-tp-s" style="--d:140"></p>
+<span class="tp-stk rv drop" id="keluarga-tp-stk" style="--d: 220"><svg class="stk" id="keluarga-stk">
+<use href="#stk-bunga" id="keluarga-stk-u"></use></svg></span>
+</div>
+<div class="msg" data-from="b" id="kel-m0">
+<p class="m-text" id="kel-m0-t"></p>
+</div>
+<div class="msg" data-from="b" id="kel-msg">
+<div class="bub bub-card kel" id="kel-bub">
+<p class="fwd" id="kel-fwd"><svg class="ic" id="kel-fwd-s"><use href="#i-fwd" id="kel-fwd-u"></use></svg><span id="kel-fwd-t"></span></p>
+<div id="kel-head">
+<span id="kel-av"><svg class="ic" id="kel-av-s">
+<use href="#i-home" id="kel-av-u"></use></svg></span><span id="kel-hd"><b id="kel-name"></b><span id="kel-mem"></span></span>
+</div>
+<div id="kel-list">
+<div class="kl" id="kel-1">
+<b class="kl-n" id="kel-1-n"></b>
+<p class="kl-t" id="kel-1-t"></p>
+<span class="kl-time" id="kel-1-time"></span>
+</div>
+<div class="kl" id="kel-2">
+<b class="kl-n" id="kel-2-n"></b>
+<p class="kl-t" id="kel-2-t"></p>
+<span class="kl-time" id="kel-2-time"></span>
+</div>
+<div class="kl kl-card" id="kel-c">
+<b class="kl-n" id="kel-c-n"></b>
+<div aria-label="Kartu ucapan bergambar mawar" class="kl-img" id="kel-c-img" role="img">
+<span class="kl-wa" id="kel-c-wa"></span><span class="kl-wa2" id="kel-c-wa2"></span><span class="kl-glit" id="kel-c-g1"></span><span class="kl-glit" id="kel-c-g2"></span><span class="kl-glit" id="kel-c-g3"></span>
+</div>
+<template id="kel-c-src"></template>
+<p class="kl-many" id="kel-c-many"><svg class="ic" id="kel-c-many-s1"><use href="#i-fwd2" id="kel-c-many-u1"></use></svg><span id="kel-c-many-t"></span></p>
+<span class="kl-time" id="kel-c-time"></span>
+</div>
+<div class="kl" id="kel-3">
+<b class="kl-n" id="kel-3-n"></b>
+<p class="kl-t" id="kel-3-t"></p>
+<span class="kl-time" id="kel-3-time"></span>
+</div>
+<div class="kl" id="kel-4">
+<b class="kl-n" id="kel-4-n"></b>
+<p class="kl-t" id="kel-4-t"></p>
+<span class="kl-time" id="kel-4-time"></span>
+</div>
+</div>
+<div id="kel-foot">
+<button aria-label="Ikut mengaminkan" class="rx-chip" id="kel-pray" type="button">
+<span id="kel-pray-e"></span><span id="kel-pray-n"></span></button><button class="btn-s" id="kel-amin" type="button">
+<svg class="ic" id="kel-amin-s">
+<use href="#i-reply" id="kel-amin-u"></use></svg><span id="kel-amin-t"></span>
+</button>
+</div>
+<div id="kel-thread"></div>
+</div>
+</div>
+<div class="rv pop" id="kel-formal">
+<p id="kel-formal-h"></p>
+<div class="kf" id="kel-formal-g">
+<b id="kel-formal-g-n"></b><span id="kel-formal-g-p"></span>
+</div>
+<span id="kel-formal-amp"></span>
+<div class="kf" id="kel-formal-b">
+<b id="kel-formal-b-n"></b><span id="kel-formal-b-p"></span>
+</div>
+</div>
+<div class="rv" id="kel-turut">
+<p id="kel-turut-h"><svg class="ic" id="kel-turut-s"><use href="#i-users" id="kel-turut-u"></use></svg><span id="kel-turut-ht"></span></p>
+<ul id="kel-turut-list"></ul>
+<template id="kel-turut-src"></template>
+</div>
+</div>
+</section>
+<section aria-label="Pesan terjadwal" data-era="today" data-section="terjadwal" id="sec-terjadwal">
+<div class="col" id="terjadwal-col">
+<p class="dp dp-today" hidden="" id="terjadwal-dp">Hari ini</p>
+<div class="topic" id="terjadwal-topic">
+<span class="tp-ic g-gold rv pop" id="terjadwal-tp-ic"><svg class="ic" id="terjadwal-tp-s1">
+<use href="#i-clock" id="terjadwal-tp-u1"></use></svg></span>
+<h2 class="tp-t rv" id="terjadwal-tp-t" style="--d: 80">
+            Pesan Terjadwal
+          </h2>
+<p class="tp-s rv" id="terjadwal-tp-s" style="--d:140">Terkirim otomatis di hari itu</p>
+</div>
+<div class="msg" data-from="b" id="tj-m0">
+<p class="m-text" id="tj-m0-t">Dan satu pesan lagi sudah kami jadwalkan. Terkirim otomatis tepat di hari itu 🤭</p>
+</div>
+<div class="rv pop" id="tj">
+<span aria-hidden="true" class="tj-stk" id="tj-stk"><svg class="stk" id="tj-stk-s">
+<use href="#stk-sah" id="tj-stk-u"></use></svg></span>
+<p id="tj-head"><svg class="ic" id="tj-head-s"><use href="#i-clock" id="tj-head-u"></use></svg><span id="tj-head-t">Pesan terjadwal</span></p>
+<div id="tj-bub">
+<p id="tj-msg"></p>
+<span id="tj-meta"><span id="tj-meta-t">09.00</span><svg class="ic" id="tj-meta-s">
+<use href="#i-clock" id="tj-meta-u"></use></svg></span>
+</div>
+<p id="tj-when"><span id="tj-when-l">Terkirim otomatis</span> <b id="tj-when-t"></b></p>
+<div aria-live="off" id="tj-count">
+<div class="tj-u" id="tj-u-d">
+<b id="tj-d">0</b><span id="tj-d-l">hari</span>
+</div>
+<div class="tj-u" id="tj-u-h">
+<b id="tj-h">00</b><span id="tj-h-l">jam</span>
+</div>
+<div class="tj-u" id="tj-u-m">
+<b id="tj-m">00</b><span id="tj-m-l">menit</span>
+</div>
+<div class="tj-u" id="tj-u-s">
+<b id="tj-s">00</b><span id="tj-s-l">detik</span>
+</div>
+</div>
+<div id="tj-road">
+<div class="tj-end" id="tj-road-l">
+<b id="tj-road-a">“P”</b><span id="tj-road-ad"></span>
+</div>
+<div id="tj-bar"><i id="tj-fill"></i><span id="tj-dot"></span></div>
+<div class="tj-end" id="tj-road-r">
+<b id="tj-road-b">“Sah”</b><span id="tj-road-bd"></span>
+</div>
+</div>
+<p id="tj-pct"></p>
+<p id="tj-note"></p>
+<div id="tj-acts">
+<a class="btn" href="#" id="tj-gcal" rel="noopener" target="_blank"><svg class="ic" id="tj-gcal-s">
+<use href="#i-bell" id="tj-gcal-u"></use></svg><span id="tj-gcal-t">Ingatkan saya</span></a><button class="btn-g" id="tj-ics" type="button">
+<svg class="ic" id="tj-ics-s">
+<use href="#i-cal" id="tj-ics-u"></use></svg><span id="tj-ics-t">Simpan ke kalender (.ics)</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<section aria-label="Undangan acara" data-era="today" data-section="acara" id="sec-acara">
+<div class="col" id="acara-col">
+<p class="dp dp-today" hidden="" id="acara-dp">Hari ini</p>
+<div class="topic" id="acara-topic">
+<span class="tp-ic g-rose rv pop" id="acara-tp-ic"><svg class="ic" id="acara-tp-s1">
+<use href="#i-cal" id="acara-tp-u1"></use></svg></span>
+<h2 class="tp-t rv" id="acara-tp-t" style="--d: 80">
+            Undangan Acara
+          </h2>
+<p class="tp-s rv" id="acara-tp-s" style="--d:140">Waktu dan tempat hari bahagia kami</p>
+<span class="tp-stk rv drop" id="acara-tp-stk" style="--d: 220"><svg class="stk" id="acara-stk">
+<use href="#stk-kalender" id="acara-stk-u"></use></svg></span>
+</div>
+<div class="msg" data-from="g" id="ac-m0">
+<p class="m-text" id="ac-m0-t">Catat ya tanggalnya 🗓️</p>
+</div>
+<div class="msg" data-from="b" id="ac-m1">
+<div class="bub bub-doc" id="ac-m1-b">
+<p class="doc-h" id="ac-m1-h"><svg class="ic" id="ac-m1-h-s"><use href="#i-doc" id="ac-m1-h-u"></use></svg><span id="ac-m1-h-t">Undangan resmi</span></p>
+<p class="m-text" id="ac-m1-t"></p>
+</div>
+</div>
+<div class="msg" data-from="g" id="ev1-msg">
+<div class="bub bub-card ev" id="ev1">
+<div class="ev-band" id="ev1-band">
+<div class="ev-cal" id="ev1-cal">
+<span class="ev-mon" id="ev1-mon"></span><b class="ev-day" id="ev1-day"></b><span class="ev-dow" id="ev1-dow"></span>
+</div>
+<div class="ev-hd" id="ev1-hd">
+<span class="ev-k" id="ev1-k"><svg class="ic" id="ev1-k-s">
+<use href="#i-cal" id="ev1-k-u"></use></svg><span id="ev1-k-t">Undangan acara</span></span>
+<h3 class="ev-n" id="ev1-n"></h3>
+<p class="ev-d" id="ev1-d"></p>
+</div>
+</div>
+<ul class="ev-rows" id="ev1-rows">
+<li id="ev1-r1">
+<svg class="ic" id="ev1-r1-s">
+<use href="#i-clock" id="ev1-r1-u"></use></svg><span id="ev1-time"></span>
+</li>
+<li id="ev1-r2">
+<svg class="ic" id="ev1-r2-s">
+<use href="#i-mappin" id="ev1-r2-u"></use></svg><span class="ev-place" id="ev1-place"><b id="ev1-vn"></b><span id="ev1-va"></span></span>
+</li>
+<li id="ev1-r3">
+<svg class="ic" id="ev1-r3-s">
+<use href="#i-info" id="ev1-r3-u"></use></svg><span id="ev1-note"></span>
+</li>
+</ul>
+<div class="ev-acts" id="ev1-acts">
+<a class="btn-s" href="#" id="ev1-cal-a" rel="noopener" target="_blank"><svg class="ic" id="ev1-cal-s">
+<use href="#i-bell" id="ev1-cal-u"></use></svg><span id="ev1-cal-t">Ingatkan saya</span></a><a class="btn-s ghost" href="#" id="ev1-map" rel="noopener" target="_blank"><svg class="ic" id="ev1-map-s">
+<use href="#i-nav" id="ev1-map-u"></use></svg><span id="ev1-map-t">Petunjuk arah</span></a>
+</div>
+<div class="ev-going" id="ev1-going">
+<span id="ev1-going-t">Kamu bisa datang?</span><button class="link" data-go="rsvp" id="ev1-going-b" type="button">
+                Balas di sini
+              </button>
+</div>
+</div>
+</div>
+<div class="msg" data-from="b" data-name="" id="ev2-msg">
+<div class="bub bub-card ev" id="ev2">
+<div class="ev-band" id="ev2-band">
+<div class="ev-cal" id="ev2-cal">
+<span class="ev-mon" id="ev2-mon"></span><b class="ev-day" id="ev2-day"></b><span class="ev-dow" id="ev2-dow"></span>
+</div>
+<div class="ev-hd" id="ev2-hd">
+<span class="ev-k" id="ev2-k"><svg class="ic" id="ev2-k-s">
+<use href="#i-cal" id="ev2-k-u"></use></svg><span id="ev2-k-t">Undangan acara</span></span>
+<h3 class="ev-n" id="ev2-n"></h3>
+<p class="ev-d" id="ev2-d"></p>
+</div>
+</div>
+<ul class="ev-rows" id="ev2-rows">
+<li id="ev2-r1">
+<svg class="ic" id="ev2-r1-s">
+<use href="#i-clock" id="ev2-r1-u"></use></svg><span id="ev2-time"></span>
+</li>
+<li id="ev2-r2">
+<svg class="ic" id="ev2-r2-s">
+<use href="#i-mappin" id="ev2-r2-u"></use></svg><span class="ev-place" id="ev2-place"><b id="ev2-vn"></b><span id="ev2-va"></span></span>
+</li>
+<li id="ev2-r3">
+<svg class="ic" id="ev2-r3-s">
+<use href="#i-info" id="ev2-r3-u"></use></svg><span id="ev2-note"></span>
+</li>
+</ul>
+<div class="ev-acts" id="ev2-acts">
+<a class="btn-s" href="#" id="ev2-cal-a" rel="noopener" target="_blank"><svg class="ic" id="ev2-cal-s">
+<use href="#i-bell" id="ev2-cal-u"></use></svg><span id="ev2-cal-t">Ingatkan saya</span></a><a class="btn-s ghost" href="#" id="ev2-map" rel="noopener" target="_blank"><svg class="ic" id="ev2-map-s">
+<use href="#i-nav" id="ev2-map-u"></use></svg><span id="ev2-map-t">Petunjuk arah</span></a>
+</div>
+<div class="ev-going" id="ev2-going">
+<span id="ev2-going-t">Kamu bisa datang?</span><button class="link" data-go="rsvp" id="ev2-going-b" type="button">
+                Balas di sini
+              </button>
+</div>
+</div>
+</div>
+<span data-date="" data-end="" data-time="" hidden="" id="ev2-raw"></span>
+<span data-end="" hidden="" id="ev1-raw"></span>
+</div>
+</section>
+<section aria-label="Susunan acara" data-era="today" data-section="rundown" id="sec-rundown">
+<div class="col" id="rundown-col">
+<p class="dp dp-today" hidden="" id="rundown-dp">Hari ini</p>
+<div class="topic" id="rundown-topic">
+<span class="tp-ic g-indigo rv pop" id="rundown-tp-ic"><svg class="ic" id="rundown-tp-s1">
+<use href="#i-list" id="rundown-tp-u1"></use></svg></span>
+<h2 class="tp-t rv" id="rundown-tp-t" style="--d: 80">
+            Susunan Acara
+          </h2>
+<p class="tp-s rv" id="rundown-tp-s" style="--d:140">Urutan momen di hari bahagia</p>
+<span class="tp-stk rv drop" id="rundown-tp-stk" style="--d: 220"><svg class="stk" id="rundown-stk">
+<use href="#stk-kue" id="rundown-stk-u"></use></svg></span>
+</div>
+<div class="msg" data-from="b" id="rd-m0">
+<p class="m-text" id="rd-m0-t">Ini susunan acaranya, biar nggak ketinggalan momen 📋</p>
+</div>
+<div class="msg" data-from="b" id="rd-msg">
+<div class="bub bub-card rd" id="rd-bub">
+<p id="rd-h"><svg class="ic" id="rd-h-s"><use href="#i-list" id="rd-h-u"></use></svg><b id="rd-h-t">Susunan acara</b><span id="rd-h-n"></span></p>
+<div id="rd-list"></div>
+</div>
+</div>
+</div>
+</section>
+<section aria-label="Lokasi dibagikan" data-era="today" data-section="lokasi" id="sec-lokasi">
+<div class="col" id="lokasi-col">
+<p class="dp dp-today" hidden="" id="lokasi-dp">Hari ini</p>
+<div class="topic" id="lokasi-topic">
+<span class="tp-ic g-teal rv pop" id="lokasi-tp-ic"><svg class="ic" id="lokasi-tp-s1">
+<use href="#i-mappin" id="lokasi-tp-u1"></use></svg></span>
+<h2 class="tp-t rv" id="lokasi-tp-t" style="--d: 80">
+            Lokasi Dibagikan
+          </h2>
+<p class="tp-s rv" id="lokasi-tp-s" style="--d:140">Supaya kamu tidak nyasar</p>
+<span class="tp-stk rv drop" id="lokasi-tp-stk" style="--d: 220"><svg class="stk" id="lokasi-stk">
+<use href="#stk-pin" id="lokasi-stk-u"></use></svg></span>
+</div>
+<div class="msg" data-from="g" id="lk-m0">
+<p class="m-text" id="lk-m0-t"></p>
+</div>
+<div class="msg" data-from="g" id="lk-msg">
+<div class="bub bub-card loc" id="lk-bub">
+<div id="lk-map">
+<div id="lk-map-svg"></div>
+<iframe data-src="" hidden="" id="lk-iframe" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Peta lokasi The Grand Ballroom Hotel"></iframe><span id="lk-map-tag"><svg class="ic" id="lk-map-tag-s">
+<use href="#i-mappin" id="lk-map-tag-u"></use></svg><span id="lk-map-tag-t">Lokasi dibagikan</span></span>
+</div>
+<div id="lk-info">
+<b id="lk-vn"></b>
+<p id="lk-va"></p>
+<p id="lk-mark"><svg class="ic" id="lk-mark-s"><use href="#i-flag" id="lk-mark-u"></use></svg><span id="lk-mark-t"></span></p>
+</div>
+<div id="lk-acts">
+<a class="btn-s" href="#" id="lk-dir" rel="noopener" target="_blank"><svg class="ic" id="lk-dir-s">
+<use href="#i-nav" id="lk-dir-u"></use></svg><span id="lk-dir-t">Petunjuk arah</span></a><button class="btn-s ghost" id="lk-copy" type="button">
+<svg class="ic" id="lk-copy-s">
+<use href="#i-copy" id="lk-copy-u"></use></svg><span id="lk-copy-t">Salin alamat</span>
+</button>
+</div>
+</div>
+</div>
+<div class="msg" data-from="b" id="lk-live">
+<div class="bub bub-card live-loc" id="lk-live-b">
+<div aria-hidden="true" id="lk-live-map">
+<span class="ll-ring" id="lk-ll-r1"></span><span class="ll-ring" id="lk-ll-r2"></span><span class="ll-dot av" id="lk-ll-dot"></span>
+</div>
+<div id="lk-live-txt">
+<b id="lk-live-h"><span id="lk-live-rec"></span>Lokasi terkini</b><span id="lk-live-s"></span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section aria-label="Tema obrolan dan dress code" data-era="today" data-section="busana" id="sec-busana">
+<div class="col" id="busana-col">
+<p class="dp dp-today" hidden="" id="busana-dp">Hari ini</p>
+<div class="topic" id="busana-topic">
+<span class="tp-ic g-violet rv pop" id="busana-tp-ic"><svg class="ic" id="busana-tp-s1">
+<use href="#i-palette" id="busana-tp-u1"></use></svg></span>
+<h2 class="tp-t rv" id="busana-tp-t" style="--d: 80">Tema Obrolan</h2>
+<p class="tp-s rv" id="busana-tp-s" style="--d:140">Dress code di hari bahagia</p>
+<span class="tp-stk rv drop" id="busana-tp-stk" style="--d: 220"><svg class="stk" id="busana-stk">
+<use href="#stk-baju" id="busana-stk-u"></use></svg></span>
+</div>
+<p class="sp rv" id="bs-sys"><svg class="ic" id="bs-sys-s"><use href="#i-palette" id="bs-sys-u"></use></svg><span id="bs-sys-t"><b id="bs-sys-b"></b> mengubah tema obrolan menjadi “<span id="bs-sys-n"></span>”</span></p>
+<div class="msg" data-from="b" id="bs-m0">
+<p class="m-text" id="bs-m0-t"></p>
+</div>
+<div class="rv pop" id="bs-card">
+<p id="bs-h"><svg class="ic" id="bs-h-s"><use href="#i-sparkle" id="bs-h-u"></use></svg><span id="bs-h-t">Ketuk salah satu warna — seluruh obrolan ikut berganti tema.</span></p>
+<div id="bs-sw">
+<button class="sw" id="bs-sw-1" style="--c:#93a78b" type="button">
+<span class="sw-dot" id="bs-sw-1-d"></span><span class="sw-n" id="bs-sw-1-n">Sage</span>
+</button>
+<button class="sw" id="bs-sw-2" style="--c:#e2d3bb" type="button">
+<span class="sw-dot" id="bs-sw-2-d"></span><span class="sw-n" id="bs-sw-2-n">Krem</span>
+</button>
+<button class="sw" id="bs-sw-3" style="--c:#cf9f99" type="button">
+<span class="sw-dot" id="bs-sw-3-d"></span><span class="sw-n" id="bs-sw-3-n">Dusty Rose</span>
+</button>
+<button class="sw" id="bs-sw-4" style="--c:#7d8fb0" type="button">
+<span class="sw-dot" id="bs-sw-4-d"></span><span class="sw-n" id="bs-sw-4-n">Biru Kabut</span>
+</button>
+</div>
+<div aria-hidden="true" id="bs-prev">
+<p class="bs-pl" id="bs-pl"></p>
+<p class="bs-pr" id="bs-pr"><span id="bs-pr-t"></span></p>
+</div>
+<div class="center-row" id="bs-reset-row">
+<button class="btn-g" hidden="" id="bs-reset" type="button">
+<svg class="ic" id="bs-reset-s">
+<use href="#i-undo" id="bs-reset-u"></use></svg><span id="bs-reset-t">Kembalikan tema awal</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<section aria-label="Media" data-era="today" data-section="galeri" id="sec-galeri">
+<div class="col" id="galeri-col">
+<p class="dp dp-today" hidden="" id="galeri-dp">Hari ini</p>
+<div class="topic" id="galeri-topic">
+<span class="tp-ic g-amber rv pop" id="galeri-tp-ic"><svg class="ic" id="galeri-tp-s1">
+<use href="#i-image" id="galeri-tp-u1"></use></svg></span>
+<h2 class="tp-t rv" id="galeri-tp-t" style="--d: 80">Media</h2>
+<p class="tp-s rv" id="galeri-tp-s" style="--d:140">Foto-foto yang kami bagikan di grup</p>
+<span class="tp-stk rv drop" id="galeri-tp-stk" style="--d: 220"><svg class="stk" id="galeri-stk">
+<use href="#stk-kamera" id="galeri-stk-u"></use></svg></span>
+</div>
+<div class="msg" data-from="b" id="gl-m0">
+<p class="m-text" id="gl-m0-t"></p>
+</div>
+<div id="gl-albums"></div>
+<div class="center-row rv" id="gl-all-row">
+<button class="btn-g" id="gl-all" type="button">
+<svg class="ic" id="gl-all-s">
+<use href="#i-image" id="gl-all-u"></use></svg><span id="gl-all-t">Lihat semua media</span>
+</button>
+</div>
+</div>
+</section>
+<section aria-label="Panggilan video" data-contract-gap="" data-era="today" data-section="video" hidden="" id="sec-video">
+<div class="col" id="video-col">
+<p class="dp dp-today" hidden="" id="video-dp"></p>
+<div class="topic" id="video-topic">
+<span class="tp-ic g-green rv pop" id="video-tp-ic"><svg class="ic" id="video-tp-s1">
+<use href="#i-video" id="video-tp-u1"></use></svg></span>
+<h2 class="tp-t rv" id="video-tp-t" style="--d: 80"></h2>
+<p class="tp-s rv" id="video-tp-s" style="--d:140"></p>
+</div>
+<div class="msg" data-from="g" id="vd-m0">
+<p class="m-text" id="vd-m0-t"></p>
+</div>
+<div class="rv pop" id="vc">
+<div id="vc-ring">
+<div id="vc-avs">
+<i class="vc-pulse" id="vc-p1"></i><i class="vc-pulse" id="vc-p2"></i><span class="vc-av av" id="vc-av-g"></span><span class="vc-av av" id="vc-av-b"></span>
+</div>
+<p id="vc-lbl"><svg class="ic" id="vc-lbl-s"><use href="#i-video" id="vc-lbl-u"></use></svg><span id="vc-lbl-t"></span></p>
+<b id="vc-names"><span id="vc-names-g"></span><span id="vc-names-b"></span></b>
+<div id="vc-btns">
+<span class="vc-bw" id="vc-no-w"><button aria-label="Tolak panggilan" id="vc-no" type="button">
+<svg class="ic" id="vc-no-s">
+<use href="#i-hangup" id="vc-no-u"></use>
+</svg></button><span class="vc-bl" id="vc-no-l"></span></span><span class="vc-bw" id="vc-yes-w"><button aria-label="Terima panggilan" id="vc-yes" type="button">
+<svg class="ic" id="vc-yes-s">
+<use href="#i-video" id="vc-yes-u"></use>
+</svg></button><span class="vc-bl" id="vc-yes-l"></span></span>
+</div>
+</div>
+<div hidden="" id="vc-call">
+<div id="vc-stage">
+<video data-src="" id="vc-video" playsinline="" preload="none"></video>
+<div id="vc-hud">
+<span id="vc-hud-n"><span id="vc-hud-dot"></span><span id="vc-hud-nt"></span></span><span id="vc-hud-t"></span>
+</div>
+<span class="av" id="vc-self"><span id="vc-self-t"></span></span>
+</div>
+<div id="vc-ctrl">
+<button aria-label="Senyapkan" class="vc-c" id="vc-mute" type="button">
+<svg class="ic" id="vc-mute-s">
+<use href="#i-vol" id="vc-mute-u"></use>
+</svg></button><button aria-label="Putar atau jeda" class="vc-c" id="vc-play" type="button">
+<svg class="ic" id="vc-play-s">
+<use href="#i-pause" id="vc-play-u"></use>
+</svg></button><button aria-label="Akhiri panggilan" class="vc-c vc-end" id="vc-end" type="button">
+<svg class="ic" id="vc-end-s">
+<use href="#i-hangup" id="vc-end-u"></use>
+</svg>
+</button>
+</div>
+</div>
+<div id="vc-thread"></div>
+</div>
+<div class="rv pop" id="live">
+<p id="live-h"><span id="live-dot"></span><b id="live-h-t"></b><span id="live-h-s"></span></p>
+<p id="live-d"></p>
+<div id="live-embed"></div>
+<a class="btn" href="#" id="live-a" rel="noopener" target="_blank"><svg class="ic" id="live-a-s">
+<use href="#i-video" id="live-a-u"></use></svg><span id="live-a-t"></span></a>
+</div>
+</div>
+</section>
+<section aria-label="Balas undangan" data-era="today" data-section="rsvp" id="sec-rsvp">
+<div class="col" id="rsvp-col">
+<p class="dp dp-today" hidden="" id="rsvp-dp">Hari ini</p>
+<div class="topic" id="rsvp-topic">
+<span class="tp-ic g-violet rv pop" id="rsvp-tp-ic"><svg class="ic" id="rsvp-tp-s1">
+<use href="#i-poll" id="rsvp-tp-u1"></use></svg></span>
+<h2 class="tp-t rv" id="rsvp-tp-t" style="--d: 80">Balas Undangan</h2>
+<p class="tp-s rv" id="rsvp-tp-s" style="--d:140">Konfirmasi kehadiranmu</p>
+<span class="tp-stk rv drop" id="rsvp-tp-stk" style="--d: 220"><svg class="stk" id="rsvp-stk">
+<use href="#stk-siap" id="rsvp-stk-u"></use></svg></span>
+</div>
+<div class="msg" data-from="b" id="rv-m0">
+<p class="m-text" id="rv-m0-t"></p>
+</div>
+<div class="msg" data-from="b" id="rv-msg">
+<div class="bub bub-card poll" id="rv-bub">
+<p id="rv-h"><svg class="ic" id="rv-h-s"><use href="#i-poll" id="rv-h-u"></use></svg><span id="rv-h-t">Polling</span><span id="rv-dead"> · balas sebelum <b data-date="" id="rv-dead-t"></b></span></p>
+<h3 id="rv-q">
+              Kamu bisa datang<span id="rv-q-g">, <span id="rv-q-gn"></span></span>?
+            </h3>
+<form data-wedivo="rsvp" id="rsvp-form">
+<input autocomplete="name" id="rsvp-name" name="name" placeholder="Nama kamu" required=""/>
+<div id="rsvp-opts">
+<button class="po" data-wedivo-status="attending" id="rsvp-yes" type="button">
+<span class="po-e" id="rsvp-yes-e">🥳</span><span class="po-t" id="rsvp-yes-t">Hadir</span><span class="po-r" id="rsvp-yes-r"></span>
+</button>
+<button class="po" data-wedivo-status="not_attending" id="rsvp-no" type="button">
+<span class="po-e" id="rsvp-no-e">🙏</span><span class="po-t" id="rsvp-no-t">Berhalangan</span><span class="po-r" id="rsvp-no-r"></span>
+</button>
+<button class="po" data-wedivo-status="maybe" id="rsvp-maybe" type="button">
+<span class="po-e" id="rsvp-maybe-e">🤔</span><span class="po-t" id="rsvp-maybe-t">Masih ragu</span><span class="po-r" id="rsvp-maybe-r"></span>
+</button>
+</div>
+<div id="rsvp-pax-w">
+<span id="rsvp-pax-l">Jumlah yang hadir</span>
+<div id="rsvp-pax-s">
+<button aria-label="Kurangi jumlah" class="pax-b" id="rsvp-minus" type="button">
+                    −</button><input aria-label="Jumlah tamu" id="rsvp-pax" inputmode="numeric" max="20" min="1" name="pax" type="number" value="1"/><button aria-label="Tambah jumlah" class="pax-b" id="rsvp-plus" type="button">
+                    +
+                  </button>
+</div>
+</div>
+<textarea id="rsvp-msg" name="message" placeholder="Pesan untuk kami (opsional)" rows="2"></textarea>
+<button id="rsvp-send" type="submit">
+<span id="rsvp-send-t">Kirim balasan</span><svg class="ic" id="rsvp-send-s">
+<use href="#i-send" id="rsvp-send-u"></use>
+</svg>
+</button>
+<p id="rsvp-err" role="alert">Pilih salah satu jawaban dulu, ya 🙏</p>
+</form>
+<p hidden="" id="rv-rep-hadir"></p>
+<p hidden="" id="rv-rep-tidak"></p>
+<p hidden="" id="rv-rep-ragu"></p>
+<p id="rsvp-done"><svg class="ic" id="rsvp-done-s"><use href="#i-dcheck" id="rsvp-done-u"></use></svg><span id="rsvp-done-t">Balasanmu sudah terkirim. Terima kasih!</span></p>
+</div>
+</div>
+<div id="rsvp-thread"></div>
+<div class="center-row rv" id="rsvp-ci-row">
+<button data-wedivo="checkin-cta" id="rsvp-checkin" type="button">
+<svg class="ic" id="rsvp-checkin-s">
+<use href="#i-scan" id="rsvp-checkin-u"></use></svg><span id="rsvp-checkin-t">Check-in di lokasi (hari H)</span>
+</button>
+</div>
+</div>
+</section>
+<section aria-label="Kirim hadiah" data-contract-gap="" data-era="today" data-section="hadiah" hidden="" id="sec-hadiah">
+<div class="col" id="hadiah-col">
+<p class="dp dp-today" hidden="" id="hadiah-dp"></p>
+<div class="topic" id="hadiah-topic">
+<span class="tp-ic g-gold rv pop" id="hadiah-tp-ic"><svg class="ic" id="hadiah-tp-s1">
+<use href="#i-gift" id="hadiah-tp-u1"></use></svg></span>
+<h2 class="tp-t rv" id="hadiah-tp-t" style="--d: 80"></h2>
+<p class="tp-s rv" id="hadiah-tp-s" style="--d:140"></p>
+</div>
+<div class="msg" data-from="g" id="hd-m0">
+<p class="m-text" id="hd-m0-t"></p>
+</div>
+<div class="rv pop" id="gift">
+<div id="gift-top">
+<span aria-hidden="true" id="gift-stk"><svg class="stk" id="gift-stk-s">
+<use href="#stk-hadiah" id="gift-stk-u"></use></svg></span>
+<p id="gift-to"></p>
+<b id="gift-names"><span id="gift-names-g"></span><span id="gift-names-b"></span></b>
+</div>
+<form data-wedivo="gift-form" id="gift-form">
+<label for="gift-amt" id="gift-amt-w"><span id="gift-rp"></span><input id="gift-amt" inputmode="numeric" min="0" name="amount" placeholder="0" required="" type="number"/></label>
+<div id="gift-quick">
+<button class="gq" data-v="100000" id="gq-1" type="button"></button><button class="gq" data-v="250000" id="gq-2" type="button"></button><button class="gq" data-v="500000" id="gq-3" type="button"></button><button class="gq" data-v="1000000" id="gq-4" type="button"></button>
+</div>
+<input autocomplete="name" id="gift-name" name="senderName" placeholder="Nama pengirim" required=""/>
+<textarea id="gift-msg" name="message" placeholder="Pesan (opsional)" rows="2"></textarea>
+<button id="gift-send" type="submit">
+<span id="gift-send-t"></span><svg class="ic" id="gift-send-s">
+<use href="#i-send" id="gift-send-u"></use>
+</svg>
+</button>
+<p id="gift-err" role="alert"></p>
+</form>
+<p id="gift-note"><svg class="ic" id="gift-note-s"><use href="#i-lock" id="gift-note-u"></use></svg><span id="gift-note-t"></span></p>
+<div id="gift-thread"></div>
+</div>
+</div>
+</section>
+<section aria-label="Doa dan ucapan" data-era="today" data-section="ucapan" id="sec-ucapan">
+<div class="col" id="ucapan-col">
+<p class="dp dp-today" hidden="" id="ucapan-dp">Hari ini</p>
+<div class="topic" id="ucapan-topic">
+<span class="tp-ic g-rose rv pop" id="ucapan-tp-ic"><svg class="ic" id="ucapan-tp-s1">
+<use href="#i-chatheart" id="ucapan-tp-u1"></use></svg></span>
+<h2 class="tp-t rv" id="ucapan-tp-t" style="--d: 80">
+            Doa &amp; Ucapan
+          </h2>
+<p class="tp-s rv" id="ucapan-tp-s" style="--d:140">Grup ucapan dari para tamu</p>
+<span class="tp-stk rv drop" id="ucapan-tp-stk" style="--d: 220"><svg class="stk" id="ucapan-stk">
+<use href="#stk-amplop" id="ucapan-stk-u"></use></svg></span>
+</div>
+<div class="msg" data-from="b" id="uc-m0">
+<p class="m-text" id="uc-m0-t">Tinggalkan doa dan ucapan di grup ini. Semuanya kami baca, satu per satu 🥹</p>
+</div>
+<div class="rv pop" id="wish">
+<div id="wish-head">
+<span id="wish-av"><svg class="ic" id="wish-av-s">
+<use href="#i-chatheart" id="wish-av-u"></use></svg></span><span id="wish-hd"><b id="wish-title">Doa &amp; Ucapan</b><span id="wish-count">Belum ada pesan</span></span><span id="wish-live"><i id="wish-live-dot"></i><span id="wish-live-t">langsung</span></span>
+</div>
+<div id="wish-body">
+<div data-wedivo="comments-list" id="wish-list"></div>
+<p id="wish-empty"><span id="wish-empty-e">👋</span><span id="wish-empty-t">Belum ada ucapan. Jadilah yang pertama menyapa!</span></p>
+<div class="center-row" id="wish-more-row">
+<button data-wedivo="comments-more" id="wish-more" type="button">
+                Muat ucapan lainnya
+              </button>
+</div>
+</div>
+<template data-wedivo="comment-template" id="wish-tpl"></template>
+<form data-wedivo="comments-form" id="wish-form">
+<input autocomplete="name" id="wish-name" name="name" placeholder="Nama kamu" required=""/>
+<div id="wish-row">
+<textarea id="wish-msg" name="message" placeholder="Ketik doa &amp; ucapan…" required="" rows="1"></textarea><button aria-label="Kirim ucapan" id="wish-send" type="submit">
+<svg class="ic" id="wish-send-s">
+<use href="#i-send" id="wish-send-u"></use>
+</svg>
+</button>
+</div>
+</form>
+</div>
+</div>
+</section>
+<footer aria-label="Penutup" data-era="today" data-section="penutup" id="sec-penutup">
+<div class="col" id="penutup-col">
+<p class="dp dp-today" hidden="" id="penutup-dp">Hari ini</p>
+<div class="msg" data-from="g" id="pn-auto">
+<div class="bub bub-auto" id="pn-auto-b">
+<p class="auto-h" id="pn-auto-h"><svg class="ic" id="pn-auto-s"><use href="#i-bot" id="pn-auto-u"></use></svg><span id="pn-auto-ht">Balasan otomatis</span></p>
+<p class="m-text" id="pn-auto-t"></p>
+</div>
+</div>
+<div class="rv pop" id="pn-card">
+<div aria-hidden="true" id="pn-bg"></div>
+<span aria-hidden="true" id="pn-stk"><svg class="stk" id="pn-stk-s">
+<use href="#stk-bulan" id="pn-stk-u"></use></svg></span>
+<p id="pn-k">Terima kasih</p>
+<h2 id="pn-names">
+<span id="pn-g"></span> <span id="pn-amp">&amp;</span>
+<span id="pn-b"></span>
+</h2>
+<p id="pn-msg"></p>
+<button id="pn-tag" type="button">
+<span id="pn-tag-t"></span><svg class="ic" id="pn-tag-s">
+<use href="#i-copy" id="pn-tag-u"></use>
+</svg>
+</button>
+<p id="pn-salam"></p>
+</div>
+<div class="rv" id="pn-typing">
+<span class="tdots" id="pn-tdots"><i id="pn-td-1"></i><i id="pn-td-2"></i><i id="pn-td-3"></i></span><span id="pn-typing-t"><b id="pn-typing-n"><span id="pn-typing-g"></span> &amp;
+              <span id="pn-typing-b"></span></b>
+            sedang mengetik bab berikutnya…</span>
+</div>
+<div class="rv" id="pn-acts">
+<button class="pn-a" id="pn-share" type="button">
+<svg class="ic" id="pn-share-s">
+<use href="#i-fwd" id="pn-share-u"></use></svg><span id="pn-share-t">Teruskan undangan</span>
+</button>
+<button class="pn-a" id="pn-mute" type="button">
+<svg class="ic" id="pn-mute-s">
+<use href="#i-belloff" id="pn-mute-u"></use></svg><span id="pn-mute-t">Bisukan grup</span>
+</button>
+<button class="pn-a pn-danger" id="pn-leave" type="button">
+<svg class="ic" id="pn-leave-s">
+<use href="#i-door" id="pn-leave-u"></use></svg><span id="pn-leave-t">Keluar dari grup</span>
+</button>
+</div>
+<p id="pn-foot"><svg class="ic" id="pn-foot-s"><use href="#i-lock" id="pn-foot-u"></use></svg><span id="pn-foot-t">Obrolan ini tersimpan selamanya · <span id="pn-foot-tag"></span></span></p>
+</div>
+</footer>
+<nav aria-label="Daftar obrolan" data-wedivo="nav" id="nav">
+<div id="nav-head">
+<div id="nav-top">
+<span class="av" id="nav-me"><span class="ini" id="nav-me-ini">A</span></span><span id="nav-top-t"><b id="nav-title">Obrolan</b><span id="nav-who"><span id="nav-who-g"></span><span id="nav-who-gen">Tamu istimewa</span></span></span><button aria-label="Tutup daftar obrolan" id="nav-close" type="button">
+<svg class="ic" id="nav-close-s">
+<use href="#i-x" id="nav-close-u"></use>
+</svg>
+</button>
+</div>
+<label for="nav-search" id="nav-search-w"><svg class="ic" id="nav-search-s">
+<use href="#i-search" id="nav-search-u"></use></svg><input aria-label="Cari obrolan" autocomplete="off" id="nav-search" placeholder="Cari obrolan…" type="search"/></label>
+<div aria-label="Saring obrolan" id="nav-chips" role="group">
+<button class="chip is-on" data-f="all" id="nav-f-all" type="button">
+            Semua</button><button class="chip" data-f="unread" id="nav-f-unread" type="button">
+            Belum dibaca</button><button class="chip" data-f="pin" id="nav-f-pin" type="button">
+            Penting
+          </button>
+</div>
+</div>
+<div id="nav-list">
+<button class="ci" data-nav-target="hero" data-pin="1" id="nav-hero" type="button">
+<span class="ci-av av" id="nav-hero-av"><img alt="" id="nav-hero-img"/><span class="ini" id="nav-hero-ini"></span></span><span class="ci-m" id="nav-hero-m"><span class="ci-r1" id="nav-hero-r1"><b class="ci-t" id="nav-hero-t">Menuju Sah 💍</b><span class="ci-tm" id="nav-hero-tm"></span></span><span class="ci-r2" id="nav-hero-r2"><span class="ci-p" id="nav-hero-p">Kamu ditambahkan ke grup</span><span class="ci-b" id="nav-hero-b"></span></span></span>
+</button>
+<button class="ci" data-nav-target="ayat" id="nav-ayat" type="button">
+<span class="ci-av g-gold" id="nav-ayat-av"><svg class="ic" id="nav-ayat-s">
+<use href="#i-pin" id="nav-ayat-u"></use></svg></span><span class="ci-m" id="nav-ayat-m"><span class="ci-r1" id="nav-ayat-r1"><b class="ci-t" id="nav-ayat-t">Pesan Disematkan</b><span class="ci-tm" id="nav-ayat-tm"></span></span><span class="ci-r2" id="nav-ayat-r2"><span class="ci-p" id="nav-ayat-p">Ayat pengingat hari bahagia</span><span class="ci-b" id="nav-ayat-b"></span></span></span>
+</button>
+<button class="ci" data-nav-target="kisah" id="nav-kisah" type="button">
+<span class="ci-av g-rose" id="nav-kisah-av"><svg class="ic" id="nav-kisah-s">
+<use href="#i-history" id="nav-kisah-u"></use></svg></span><span class="ci-m" id="nav-kisah-m"><span class="ci-r1" id="nav-kisah-r1"><b class="ci-t" id="nav-kisah-t">Riwayat Obrolan</b><span class="ci-tm" id="nav-kisah-tm"></span></span><span class="ci-r2" id="nav-kisah-r2"><span class="ci-p" id="nav-kisah-p">Semua berawal dari satu huruf</span><span class="ci-b" id="nav-kisah-b"></span></span></span>
+</button>
+<button class="ci" data-nav-target="kamus" id="nav-kamus" type="button">
+<span class="ci-av g-teal" id="nav-kamus-av"><svg class="ic" id="nav-kamus-s">
+<use href="#i-translate" id="nav-kamus-u"></use></svg></span><span class="ci-m" id="nav-kamus-m"><span class="ci-r1" id="nav-kamus-r1"><b class="ci-t" id="nav-kamus-t">Kamus Kita</b><span class="ci-tm" id="nav-kamus-tm"></span></span><span class="ci-r2" id="nav-kamus-r2"><span class="ci-p" id="nav-kamus-p">Bahasa rahasia kami berdua</span><span class="ci-b" id="nav-kamus-b"></span></span></span>
+</button>
+<button class="ci" data-nav-target="kontak" id="nav-kontak" type="button">
+<span class="ci-av g-violet" id="nav-kontak-av"><svg class="ic" id="nav-kontak-s">
+<use href="#i-card" id="nav-kontak-u"></use></svg></span><span class="ci-m" id="nav-kontak-m"><span class="ci-r1" id="nav-kontak-r1"><b class="ci-t" id="nav-kontak-t">Disimpan Sebagai…</b><span class="ci-tm" id="nav-kontak-tm"></span></span><span class="ci-r2" id="nav-kontak-r2"><span class="ci-p" id="nav-kontak-p">Nama kontak dari tahun ke tahun</span><span class="ci-b" id="nav-kontak-b"></span></span></span>
+</button>
+<button class="ci" data-nav-target="draf" id="nav-draf" type="button">
+<span class="ci-av g-amber" id="nav-draf-av"><svg class="ic" id="nav-draf-s">
+<use href="#i-pencil" id="nav-draf-u"></use></svg></span><span class="ci-m" id="nav-draf-m"><span class="ci-r1" id="nav-draf-r1"><b class="ci-t" id="nav-draf-t">Draf Tak Terkirim</b><span class="ci-tm" id="nav-draf-tm"></span></span><span class="ci-r2" id="nav-draf-r2"><span class="ci-p" id="nav-draf-p">Pesan yang dulu tak berani dikirim</span><span class="ci-b" id="nav-draf-b"></span></span></span>
+</button>
+<button class="ci" data-nav-target="mempelai" data-pin="1" id="nav-mempelai" type="button">
+<span class="ci-av g-blue" id="nav-mempelai-av"><svg class="ic" id="nav-mempelai-s">
+<use href="#i-user" id="nav-mempelai-u"></use></svg></span><span class="ci-m" id="nav-mempelai-m"><span class="ci-r1" id="nav-mempelai-r1"><b class="ci-t" id="nav-mempelai-t">Info Kontak</b><span class="ci-tm" id="nav-mempelai-tm"></span></span><span class="ci-r2" id="nav-mempelai-r2"><span class="ci-p" id="nav-mempelai-p">Kedua mempelai</span><span class="ci-b" id="nav-mempelai-b"></span></span></span>
+</button>
+<button class="ci" data-nav-target="keluarga" id="nav-keluarga" type="button">
+<span class="ci-av g-green" id="nav-keluarga-av"><svg class="ic" id="nav-keluarga-s">
+<use href="#i-home" id="nav-keluarga-u"></use></svg></span><span class="ci-m" id="nav-keluarga-m"><span class="ci-r1" id="nav-keluarga-r1"><b class="ci-t" id="nav-keluarga-t">Restu Keluarga</b><span class="ci-tm" id="nav-keluarga-tm"></span></span><span class="ci-r2" id="nav-keluarga-r2"><span class="ci-p" id="nav-keluarga-p">Diteruskan dari grup keluarga</span><span class="ci-b" id="nav-keluarga-b"></span></span></span>
+</button>
+<button class="ci" data-nav-target="terjadwal" data-pin="1" id="nav-terjadwal" type="button">
+<span class="ci-av g-gold" id="nav-terjadwal-av"><svg class="ic" id="nav-terjadwal-s">
+<use href="#i-clock" id="nav-terjadwal-u"></use></svg></span><span class="ci-m" id="nav-terjadwal-m"><span class="ci-r1" id="nav-terjadwal-r1"><b class="ci-t" id="nav-terjadwal-t">Pesan Terjadwal</b><span class="ci-tm" id="nav-terjadwal-tm"></span></span><span class="ci-r2" id="nav-terjadwal-r2"><span class="ci-p" id="nav-terjadwal-p">Hitung mundur hari bahagia</span><span class="ci-b" id="nav-terjadwal-b"></span></span></span>
+</button>
+<button class="ci" data-nav-target="acara" data-pin="1" id="nav-acara" type="button">
+<span class="ci-av g-rose" id="nav-acara-av"><svg class="ic" id="nav-acara-s">
+<use href="#i-cal" id="nav-acara-u"></use></svg></span><span class="ci-m" id="nav-acara-m"><span class="ci-r1" id="nav-acara-r1"><b class="ci-t" id="nav-acara-t">Undangan Acara</b><span class="ci-tm" id="nav-acara-tm"></span></span><span class="ci-r2" id="nav-acara-r2"><span class="ci-p" id="nav-acara-p">Waktu dan tempat</span><span class="ci-b" id="nav-acara-b"></span></span></span>
+</button>
+<button class="ci" data-nav-target="rundown" id="nav-rundown" type="button">
+<span class="ci-av g-indigo" id="nav-rundown-av"><svg class="ic" id="nav-rundown-s">
+<use href="#i-list" id="nav-rundown-u"></use></svg></span><span class="ci-m" id="nav-rundown-m"><span class="ci-r1" id="nav-rundown-r1"><b class="ci-t" id="nav-rundown-t">Susunan Acara</b><span class="ci-tm" id="nav-rundown-tm"></span></span><span class="ci-r2" id="nav-rundown-r2"><span class="ci-p" id="nav-rundown-p">Urutan momen di hari H</span><span class="ci-b" id="nav-rundown-b"></span></span></span>
+</button>
+<button class="ci" data-nav-target="lokasi" data-pin="1" id="nav-lokasi" type="button">
+<span class="ci-av g-teal" id="nav-lokasi-av"><svg class="ic" id="nav-lokasi-s">
+<use href="#i-mappin" id="nav-lokasi-u"></use></svg></span><span class="ci-m" id="nav-lokasi-m"><span class="ci-r1" id="nav-lokasi-r1"><b class="ci-t" id="nav-lokasi-t">Lokasi</b><span class="ci-tm" id="nav-lokasi-tm"></span></span><span class="ci-r2" id="nav-lokasi-r2"><span class="ci-p" id="nav-lokasi-p">Lokasi dibagikan</span><span class="ci-b" id="nav-lokasi-b"></span></span></span>
+</button>
+<button class="ci" data-nav-target="busana" id="nav-busana" type="button">
+<span class="ci-av g-violet" id="nav-busana-av"><svg class="ic" id="nav-busana-s">
+<use href="#i-palette" id="nav-busana-u"></use></svg></span><span class="ci-m" id="nav-busana-m"><span class="ci-r1" id="nav-busana-r1"><b class="ci-t" id="nav-busana-t">Tema Obrolan</b><span class="ci-tm" id="nav-busana-tm"></span></span><span class="ci-r2" id="nav-busana-r2"><span class="ci-p" id="nav-busana-p">Dress code</span><span class="ci-b" id="nav-busana-b"></span></span></span>
+</button>
+<button class="ci" data-nav-target="galeri" id="nav-galeri" type="button">
+<span class="ci-av g-amber" id="nav-galeri-av"><svg class="ic" id="nav-galeri-s">
+<use href="#i-image" id="nav-galeri-u"></use></svg></span><span class="ci-m" id="nav-galeri-m"><span class="ci-r1" id="nav-galeri-r1"><b class="ci-t" id="nav-galeri-t">Media</b><span class="ci-tm" id="nav-galeri-tm"></span></span><span class="ci-r2" id="nav-galeri-r2"><span class="ci-p" id="nav-galeri-p">Foto-foto kami</span><span class="ci-b" id="nav-galeri-b"></span></span></span>
+</button>
+<button class="ci" data-nav-target="video" id="nav-video" type="button">
+<span class="ci-av g-green" id="nav-video-av"><svg class="ic" id="nav-video-s">
+<use href="#i-video" id="nav-video-u"></use></svg></span><span class="ci-m" id="nav-video-m"><span class="ci-r1" id="nav-video-r1"><b class="ci-t" id="nav-video-t">Panggilan Video</b><span class="ci-tm" id="nav-video-tm"></span></span><span class="ci-r2" id="nav-video-r2"><span class="ci-p" id="nav-video-p">Panggilan video tak terjawab</span><span class="ci-b" id="nav-video-b"></span></span></span>
+</button>
+<button class="ci" data-nav-target="rsvp" data-pin="1" id="nav-rsvp" type="button">
+<span class="ci-av g-violet" id="nav-rsvp-av"><svg class="ic" id="nav-rsvp-s">
+<use href="#i-poll" id="nav-rsvp-u"></use></svg></span><span class="ci-m" id="nav-rsvp-m"><span class="ci-r1" id="nav-rsvp-r1"><b class="ci-t" id="nav-rsvp-t">Balas Undangan</b><span class="ci-tm" id="nav-rsvp-tm"></span></span><span class="ci-r2" id="nav-rsvp-r2"><span class="ci-p" id="nav-rsvp-p">Polling: kamu bisa datang?</span><span class="ci-b" id="nav-rsvp-b"></span></span></span>
+</button>
+<button class="ci" data-nav-target="hadiah" data-pin="1" id="nav-hadiah" type="button">
+<span class="ci-av g-gold" id="nav-hadiah-av"><svg class="ic" id="nav-hadiah-s">
+<use href="#i-gift" id="nav-hadiah-u"></use></svg></span><span class="ci-m" id="nav-hadiah-m"><span class="ci-r1" id="nav-hadiah-r1"><b class="ci-t" id="nav-hadiah-t">Kirim Hadiah</b><span class="ci-tm" id="nav-hadiah-tm"></span></span><span class="ci-r2" id="nav-hadiah-r2"><span class="ci-p" id="nav-hadiah-p">Tanda kasih</span><span class="ci-b" id="nav-hadiah-b"></span></span></span>
+</button>
+<button class="ci" data-nav-target="ucapan" data-pin="1" id="nav-ucapan" type="button">
+<span class="ci-av g-rose" id="nav-ucapan-av"><svg class="ic" id="nav-ucapan-s">
+<use href="#i-chatheart" id="nav-ucapan-u"></use></svg></span><span class="ci-m" id="nav-ucapan-m"><span class="ci-r1" id="nav-ucapan-r1"><b class="ci-t" id="nav-ucapan-t">Doa &amp; Ucapan</b><span class="ci-tm" id="nav-ucapan-tm"></span></span><span class="ci-r2" id="nav-ucapan-r2"><span class="ci-p" id="nav-ucapan-p">Grup ucapan para tamu</span><span class="ci-b" id="nav-ucapan-b"></span></span></span>
+</button>
+<button class="ci" data-nav-target="penutup" id="nav-penutup" type="button">
+<span class="ci-av g-indigo" id="nav-penutup-av"><svg class="ic" id="nav-penutup-s">
+<use href="#i-heart" id="nav-penutup-u"></use></svg></span><span class="ci-m" id="nav-penutup-m"><span class="ci-r1" id="nav-penutup-r1"><b class="ci-t" id="nav-penutup-t">Terima Kasih</b><span class="ci-tm" id="nav-penutup-tm"></span></span><span class="ci-r2" id="nav-penutup-r2"><span class="ci-p" id="nav-penutup-p">Balasan otomatis</span><span class="ci-b" id="nav-penutup-b"></span></span></span>
+</button>
+</div>
+<p id="nav-foot"><svg class="ic" id="nav-foot-s"><use href="#i-lock" id="nav-foot-u"></use></svg><span id="nav-foot-t">Obrolan pribadi · terenkripsi cinta</span></p>
+</nav>
+<div aria-hidden="true" id="nav-scrim"></div>
+<div aria-label="Kolom pesan" id="composer">
+<div id="cp-box">
+<button aria-label="Kirim reaksi" id="cp-emoji" type="button">
+<svg class="ic" id="cp-emoji-s">
+<use href="#i-smile" id="cp-emoji-u"></use>
+</svg></button><button id="cp-field" type="button">
+<span id="cp-field-t">Ketik doa &amp; ucapan…</span></button><button aria-expanded="false" aria-label="Lampiran" id="cp-attach" type="button">
+<svg class="ic" id="cp-attach-s">
+<use href="#i-clip" id="cp-attach-u"></use>
+</svg>
+</button>
+</div>
+<button aria-label="Tulis ucapan" id="cp-send" type="button">
+<svg class="ic" id="cp-send-s">
+<use href="#i-send" id="cp-send-u"></use>
+</svg>
+</button>
+<p id="cp-lock"><svg class="ic" id="cp-lock-s"><use href="#i-lock" id="cp-lock-u"></use></svg><span id="cp-lock-t">Riwayat yang diimpor hanya bisa dibaca</span></p>
+</div>
+<button aria-label="Ke bagian berikutnya" id="fab" type="button">
+<svg class="ic" id="fab-s"><use href="#i-down" id="fab-u"></use></svg><span class="badge" id="fab-n"></span>
+</button>
+<div aria-label="Lampiran" id="att">
+<div id="att-grid">
+<button class="att-i" data-go="galeri" id="att-1" type="button">
+<span class="att-ic g-violet" id="att-1-ic"><svg class="ic" id="att-1-s">
+<use href="#i-image" id="att-1-u"></use></svg></span><span class="att-l" id="att-1-l">Galeri</span>
+</button>
+<button class="att-i" data-go="acara" id="att-2" type="button">
+<span class="att-ic g-rose" id="att-2-ic"><svg class="ic" id="att-2-s">
+<use href="#i-cal" id="att-2-u"></use></svg></span><span class="att-l" id="att-2-l">Acara</span>
+</button>
+<button class="att-i" data-go="lokasi" id="att-3" type="button">
+<span class="att-ic g-green" id="att-3-ic"><svg class="ic" id="att-3-s">
+<use href="#i-mappin" id="att-3-u"></use></svg></span><span class="att-l" id="att-3-l">Lokasi</span>
+</button>
+<button class="att-i" data-go="mempelai" id="att-4" type="button">
+<span class="att-ic g-blue" id="att-4-ic"><svg class="ic" id="att-4-s">
+<use href="#i-user" id="att-4-u"></use></svg></span><span class="att-l" id="att-4-l">Kontak</span>
+</button>
+<button class="att-i" data-go="rsvp" id="att-5" type="button">
+<span class="att-ic g-amber" id="att-5-ic"><svg class="ic" id="att-5-s">
+<use href="#i-poll" id="att-5-u"></use></svg></span><span class="att-l" id="att-5-l">Polling</span>
+</button>
+<button class="att-i" data-go="hadiah" id="att-6" type="button">
+<span class="att-ic g-gold" id="att-6-ic"><svg class="ic" id="att-6-s">
+<use href="#i-gift" id="att-6-u"></use></svg></span><span class="att-l" id="att-6-l">Hadiah</span>
+</button>
+<button class="att-i" data-go="rundown" id="att-7" type="button">
+<span class="att-ic g-indigo" id="att-7-ic"><svg class="ic" id="att-7-s">
+<use href="#i-doc" id="att-7-u"></use></svg></span><span class="att-l" id="att-7-l">Dokumen</span>
+</button>
+<button class="att-i" data-go="video" id="att-8" type="button">
+<span class="att-ic g-teal" id="att-8-ic"><svg class="ic" id="att-8-s">
+<use href="#i-video" id="att-8-u"></use></svg></span><span class="att-l" id="att-8-l">Panggilan</span>
+</button>
+</div>
+</div>
+<div aria-label="Pilih reaksi" id="rbar" role="toolbar">
+<button aria-label="Suka" class="rb" data-e="❤️" id="rb-1" type="button">
+        ❤️</button><button aria-label="Lucu" class="rb" data-e="😂" id="rb-2" type="button">
+        😂</button><button aria-label="Kaget" class="rb" data-e="😮" id="rb-3" type="button">
+        😮</button><button aria-label="Terharu" class="rb" data-e="🥹" id="rb-4" type="button">
+        🥹</button><button aria-label="Aamiin" class="rb" data-e="🙏" id="rb-5" type="button">
+        🙏</button><button aria-label="Rayakan" class="rb" data-e="🎉" id="rb-6" type="button">
+        🎉
+      </button>
+</div>
+<div aria-label="Penampil foto" aria-modal="true" hidden="" id="viewer" role="dialog">
+<div id="vw-top">
+<button aria-label="Tutup penampil" id="vw-close" type="button">
+<svg class="ic" id="vw-close-s">
+<use href="#i-back" id="vw-close-u"></use>
+</svg></button><span id="vw-who"><span class="av" id="vw-av"></span><span id="vw-who-t"><b id="vw-name"></b><span id="vw-date"></span></span></span><button aria-label="Sukai foto ini" id="vw-heart" type="button">
+<svg class="ic" id="vw-heart-s">
+<use href="#i-heart" id="vw-heart-u"></use>
+</svg>
+</button>
+</div>
+<div id="vw-stage">
+<img alt="" id="vw-img"/><span aria-hidden="true" id="vw-pop">❤️</span>
+</div>
+<div id="vw-thumbs"></div>
+<div id="vw-ctrl">
+<button aria-label="Foto sebelumnya" id="vw-prev" type="button">
+<svg class="ic" id="vw-prev-s">
+<use href="#i-chevl" id="vw-prev-u"></use>
+</svg></button><span id="vw-count">1 / 1</span><button aria-label="Foto berikutnya" id="vw-next" type="button">
+<svg class="ic" id="vw-next-s">
+<use href="#i-chevr" id="vw-next-u"></use>
+</svg>
+</button>
+</div>
+</div>
+<div aria-label="Status" aria-modal="true" hidden="" id="stv" role="dialog">
+<div id="stv-bars"></div>
+<div id="stv-top">
+<span class="av" id="stv-av"></span><span id="stv-tt"><b id="stv-name"></b><span id="stv-time"></span></span><button aria-label="Tutup status" id="stv-close" type="button">
+<svg class="ic" id="stv-close-s">
+<use href="#i-x" id="stv-close-u"></use>
+</svg>
+</button>
+</div>
+<div id="stv-stage"></div>
+<button aria-label="Status sebelumnya" id="stv-prev" type="button"></button><button aria-label="Status berikutnya" id="stv-next" type="button"></button>
+<div id="stv-foot">
+<button data-go="ucapan" id="stv-reply" type="button">
+<svg class="ic" id="stv-reply-s">
+<use href="#i-reply" id="stv-reply-u"></use></svg><span id="stv-reply-t">Balas dengan ucapan…</span></button><button aria-label="Sukai status" id="stv-like" type="button">
+<svg class="ic" id="stv-like-s">
+<use href="#i-heart" id="stv-like-u"></use>
+</svg>
+</button>
+</div>
+</div>
+<div aria-label="Panggilan suara" aria-modal="true" hidden="" id="call" role="dialog">
+<div aria-hidden="true" id="call-bg"></div>
+<p id="call-k"><svg class="ic" id="call-k-s"><use href="#i-lock" id="call-k-u"></use></svg><span id="call-k-t">Panggilan suara terenkripsi</span></p>
+<div id="call-avw">
+<i class="call-ring" id="call-r1"></i><i class="call-ring" id="call-r2"></i><span class="av" id="call-av"></span>
+</div>
+<b id="call-n"><span id="call-n-g"></span> &amp;
+        <span id="call-n-b"></span></b>
+<span id="call-s">Memanggil…</span>
+<button aria-label="Akhiri panggilan" id="call-end" type="button">
+<svg class="ic" id="call-end-s">
+<use href="#i-hangup" id="call-end-u"></use>
+</svg>
+</button>
+</div>
+<div aria-labelledby="dlg-t" aria-modal="true" hidden="" id="dlg" role="alertdialog">
+<div id="dlg-box">
+<span aria-hidden="true" id="dlg-e"></span><b id="dlg-t"></b>
+<p id="dlg-p"></p>
+<div id="dlg-btns">
+<button class="btn-g" id="dlg-no" type="button"></button><button class="btn" id="dlg-ok" type="button"></button>
+</div>
+</div>
+</div>
+<div aria-live="polite" id="toast" role="status"></div>
+<canvas aria-hidden="true" id="fx"></canvas>
+<audio data-src="" id="bgm" loop="" preload="none"></audio>
+
+
+
+<script src="i18n.js"></script><script src="adapter.js"></script></body>
+</html>

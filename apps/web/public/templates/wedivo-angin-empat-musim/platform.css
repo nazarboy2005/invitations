@@ -1,0 +1,105 @@
+/* Platform-only boundaries; original template declarations stay in source/. */
+html:not([data-platform-ready]) body {
+  visibility: hidden;
+}
+[hidden],
+[data-unsupported] {
+  display: none !important;
+}
+#hn-bride-name,
+#hn-groom-name,
+.chr-name,
+.chr-full,
+#letter-card-b,
+#lk-4-plate,
+#lk-6-plate,
+#ed-sign-b {
+  overflow-wrap: anywhere;
+}
+#hero-names {
+  flex-wrap: wrap;
+}
+.platform-language {
+  position: fixed;
+  z-index: 10001;
+  top: max(8px, env(safe-area-inset-top));
+  left: 8px;
+  display: flex;
+  gap: 3px;
+  padding: 4px;
+  border-radius: 20px;
+  background: #fff9;
+}
+.platform-language button {
+  border: 0;
+  border-radius: 16px;
+  padding: 6px 7px;
+  background: transparent;
+  color: #30304a;
+  cursor: pointer;
+  font: 700 12px sans-serif;
+}
+.platform-language button[aria-pressed="true"] {
+  background: #fff;
+}
+.platform-language button:focus-visible {
+  outline: 2px solid #e5467a;
+  outline-offset: 2px;
+}
+.platform-status {
+  white-space: pre-line;
+  font: 600 14px/1.6 sans-serif;
+  padding-block: 10px;
+}
+#platform-story-overflow {
+  display: grid;
+  gap: 16px;
+  padding-top: 24px;
+}
+#lk-plate-generic {
+  font-size: 9px;
+  white-space: normal;
+  text-overflow: clip;
+}
+.ep-no-ja {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+html[data-reduced-motion] *,
+html[data-reduced-motion] *::before,
+html[data-reduced-motion] *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+  scroll-behavior: auto !important;
+}
+html[data-reduced-motion] .rv {
+  opacity: 1 !important;
+  transform: none !important;
+  filter: none !important;
+}
+html[data-reduced-motion] #wind-canvas,
+html[data-reduced-motion] #cover-burst,
+html[data-reduced-motion] #ed-confetti,
+html[data-reduced-motion] .petal-field {
+  display: none !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .rv {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+}
+
+#cover-to-generic {
+  white-space: pre-line;
+}

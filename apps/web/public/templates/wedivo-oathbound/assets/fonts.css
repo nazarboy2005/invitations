@@ -1,0 +1,70 @@
+@font-face {
+  font-family: 'Cinzel';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(/templates/wedivo-oathbound/assets/fonts/fa4a331eca8487e04160f9b8.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Cinzel';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(/templates/wedivo-oathbound/assets/fonts/06156eb6e366d18d18f8b5ad.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Cinzel';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(/templates/wedivo-oathbound/assets/fonts/59b1fd4063982492e1dd3636.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Cinzel';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url(/templates/wedivo-oathbound/assets/fonts/dfab259e19875ab54b5ffcc9.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Cinzel Decorative';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(/templates/wedivo-oathbound/assets/fonts/a855b410cc0bf5ce809c44fb.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Cinzel Decorative';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url(/templates/wedivo-oathbound/assets/fonts/33da8aa6a9da648751482741.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'EB Garamond';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/templates/wedivo-oathbound/assets/fonts/0fb425c58bfeabd618cd8103.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'EB Garamond';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/templates/wedivo-oathbound/assets/fonts/09ea70d82d0ff88a25b2b094.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'EB Garamond';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(/templates/wedivo-oathbound/assets/fonts/01985dcde7eef1ad5e0d8ee0.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'EB Garamond';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(/templates/wedivo-oathbound/assets/fonts/28171f661fabac94d7de6058.ttf) format('truetype');
+}

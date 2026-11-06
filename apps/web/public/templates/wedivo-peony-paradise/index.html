@@ -1,0 +1,1353 @@
+<!DOCTYPE html>
+
+<html lang="uz-Latn">
+<head>
+
+
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
+<title>Gulbarglar sehri</title>
+
+<link href="./fonts.css" rel="stylesheet"/><link href="./template.css" rel="stylesheet"/><link href="./platform.css" rel="stylesheet"/><script defer="" src="./i18n.js"></script><script defer="" src="./template-source.js"></script><script defer="" src="./platform-adapter.js"></script></head>
+<body id="page-body">
+<svg aria-hidden="true" focusable="false" height="0" id="pp-defs" style="position: absolute; width: 0; height: 0; overflow: hidden" width="0">
+<symbol id="an-def-ant" viewbox="0 0 48 48">
+<g class="an-legs-a" id="an-def-ant-g1">
+<path d="M28 23Q32 18 35 14.5M24.5 23.5Q20 19 15.5 16M26.5 27Q27 32 25.5 36" fill="none" id="an-def-ant-g1-path1" stroke="#4a2a37" stroke-linecap="round" stroke-width="1.4"></path>
+</g>
+<g class="an-legs-b" id="an-def-ant-g2">
+<path d="M28 27Q32 32 35 35.5M24.5 26.5Q20 31 15.5 34M26.5 23Q27 18 25.5 14" fill="none" id="an-def-ant-g2-path1" stroke="#4a2a37" stroke-linecap="round" stroke-width="1.4"></path>
+</g>
+<ellipse cx="14" cy="25" fill="#4a2a37" id="an-def-ant-ellipse1" rx="8.5" ry="6.2"></ellipse>
+<ellipse cx="12" cy="22.8" fill="#ffffff" fill-opacity="0.22" id="an-def-ant-ellipse2" rx="4" ry="2"></ellipse>
+<circle cx="22.6" cy="25" fill="#4a2a37" id="an-def-ant-circle1" r="1.8"></circle>
+<ellipse cx="27" cy="25" fill="#4a2a37" id="an-def-ant-ellipse3" rx="4.6" ry="3.4"></ellipse>
+<ellipse cx="35" cy="24.6" fill="#4a2a37" id="an-def-ant-ellipse4" rx="4.3" ry="3.9"></ellipse>
+<circle cx="37" cy="23.2" fill="#ffffff" fill-opacity="0.75" id="an-def-ant-circle2" r="0.9"></circle>
+<path d="M38.2 22.4Q41 17 45 16.4M38.4 26.8Q41.5 31.5 45.2 32" fill="none" id="an-def-ant-path1" stroke="#4a2a37" stroke-linecap="round" stroke-width="1.2"></path>
+<path d="M28.5 12.5C25 8 31.5 3 35.5 7.5 38 10.5 34.5 15.5 28.5 12.5z" fill="#f2b6c4" id="an-def-ant-path2" stroke="#c66a85" stroke-width="0.6"></path>
+<path d="M30 11c1.4-2 3.4-2.8 5-2.4" fill="none" id="an-def-ant-path3" stroke="#ffffff" stroke-opacity="0.7" stroke-width="0.7"></path>
+<path d="M31.5 13.5L33.5 21" id="an-def-ant-path4" stroke="#4a2a37" stroke-width="0.9"></path>
+</symbol>
+<symbol id="dc-def-peony" viewbox="0 0 40 40">
+<path d="M20 6c3.4 0 5.4 2.6 5 5.6 3-1 6 1 6 4.4 0 2.3-1.6 3.8-3.4 4.3 1.8.9 2.6 2.7 2 4.8-.8 2.7-3.8 3.6-6.2 2.4-.3 2.4-2 4.2-4.4 4.2s-4.1-1.8-4.4-4.2c-2.4 1.2-5.4.3-6.2-2.4-.6-2.1.2-3.9 2-4.8C8.6 19.8 7 18.3 7 16c0-3.4 3-5.4 6-4.4-.4-3 1.6-5.6 5-5.6z" id="dc-def-peony-path1"></path>
+<path d="M20 12.5c2.5 1.5 4 4 3 6.5M16 15c-1.5 2.5-1 5.5 1.5 7M24.5 20c-.5 3-3 5-6 4.5" fill="none" id="dc-def-peony-path2" stroke="#ffffff" stroke-opacity="0.75" stroke-width="1.1"></path>
+<circle cx="20" cy="19" fill="#ffffff" fill-opacity="0.55" id="dc-def-peony-circle1" r="2.2"></circle>
+</symbol>
+</svg>
+<div aria-hidden="true" id="bg-stage">
+<div id="bg-wash"></div>
+<span class="bg-blob" id="bg-blob-1"></span>
+<span class="bg-blob" id="bg-blob-2"></span>
+<span class="bg-blob" id="bg-blob-3"></span>
+<div id="bg-tint"></div>
+<span class="bg-giant" id="bg-giant-1"><img alt="" class="wc" data-wc="bloom_blush" id="bg-wc-1"/></span>
+<span class="bg-giant" id="bg-giant-2"><img alt="" class="wc" data-wc="lilac" id="bg-wc-2"/></span>
+<div id="bg-silk"></div>
+<canvas id="bg-petals"></canvas>
+<div id="bg-vignette"></div>
+</div>
+<section aria-label="" data-section="cover" id="sec-cover">
+<div id="cv-scene"></div>
+<div id="cv-sheen"></div>
+<div id="cv-scrim"></div>
+<div class="cv-curtain" id="cv-curtain-l">
+<div class="cv-curtain-in" id="cv-curtain-l-in"></div>
+</div>
+<div class="cv-curtain" id="cv-curtain-r">
+<div class="cv-curtain-in" id="cv-curtain-r-in"></div>
+</div>
+<div class="cv-orn" id="cv-orn-1" style="--rd: 0.2s">
+<img alt="" class="wc slowbloom" data-wc="bloom_blush" id="cv-wc-1" style="--dur: 15s"/>
+</div>
+<div class="cv-orn" id="cv-orn-2" style="--rd: 0.5s">
+<img alt="" class="wc breathe" data-wc="lilac" id="cv-wc-2" style="--rot: -18deg; --dur: 11s"/>
+</div>
+<div class="cv-orn" id="cv-orn-3" style="--rd: 0.8s">
+<img alt="" class="wc slowbloom" data-wc="ivory" id="cv-wc-3" style="--dur: 13s; --dl: -4s; --rot: 12deg"/>
+</div>
+<div class="cv-orn" id="cv-orn-4" style="--rd: 1s">
+<img alt="" class="wc sway" data-wc="sprig_1" id="cv-wc-4" style="--rot: -24deg; --dur: 7s"/>
+</div>
+<div class="cv-orn" id="cv-orn-5" style="--rd: 1.2s">
+<img alt="" class="wc sway" data-wc="sprig_2" id="cv-wc-5" style="--rot: 16deg; --dur: 8.5s; --dl: -2s"/>
+</div>
+<div class="cv-orn" id="cv-orn-6" style="--rd: 1.1s">
+<img alt="" class="wc drift" data-wc="coral" id="cv-wc-6" style="--rot: 24deg; --dur: 14s"/>
+</div>
+<div id="cv-card">
+<div id="cv-ribbon">
+<svg aria-hidden="true" id="cv-ribbon-svg1" preserveaspectratio="none" viewbox="0 0 400 28">
+<defs id="cv-ribbon-svg1-defs1">
+<lineargradient id="cv-rb-g" x1="0" x2="0" y1="0" y2="1">
+<stop id="cv-rb-g-stop1" offset="0" stop-color="#f9dfe3"></stop>
+<stop id="cv-rb-g-stop2" offset="0.45" stop-color="#eeb0bf"></stop>
+<stop id="cv-rb-g-stop3" offset="1" stop-color="#d98aa0"></stop>
+</lineargradient>
+<lineargradient id="cv-rb-s" x1="0" x2="1" y1="0" y2="0">
+<stop id="cv-rb-s-stop1" offset="0" stop-color="#fff" stop-opacity="0"></stop>
+<stop id="cv-rb-s-stop2" offset="0.5" stop-color="#fff" stop-opacity="0.55"></stop>
+<stop id="cv-rb-s-stop3" offset="1" stop-color="#fff" stop-opacity="0"></stop>
+</lineargradient>
+</defs>
+<rect fill="url(#cv-rb-g)" height="18" id="cv-ribbon-svg1-rect1" width="400" x="0" y="5"></rect>
+<rect fill="url(#cv-rb-s)" height="18" id="cv-ribbon-svg1-rect2" opacity="0.7" width="400" x="0" y="5"></rect>
+<path d="M0 7.5H400M0 20.5H400" id="cv-ribbon-svg1-path1" stroke="#fff" stroke-opacity="0.55" stroke-width="0.8"></path>
+</svg>
+</div>
+<div id="cv-bow">
+<svg aria-hidden="true" id="cv-bow-svg1" viewbox="0 0 92 80">
+<defs id="cv-bow-svg1-defs1">
+<lineargradient id="cv-bow-g" x1="0" x2="1" y1="0" y2="1">
+<stop id="cv-bow-g-stop1" offset="0" stop-color="#fbe4e8"></stop>
+<stop id="cv-bow-g-stop2" offset="0.55" stop-color="#eba3b2"></stop>
+<stop id="cv-bow-g-stop3" offset="1" stop-color="#c66a85"></stop>
+</lineargradient>
+</defs>
+<path d="M46 36C34 18 10 14 8 26c-2 12 22 16 38 10z" fill="url(#cv-bow-g)" id="cv-bow-svg1-path1"></path>
+<path d="M46 36C58 18 82 14 84 26c2 12-22 16-38 10z" fill="url(#cv-bow-g)" id="cv-bow-svg1-path2"></path>
+<path d="M42 38c-6 12-14 26-22 38l9-1 4 4c6-12 11-26 13-40z" fill="url(#cv-bow-g)" id="cv-bow-svg1-path3"></path>
+<path d="M50 38c6 12 14 26 22 38l-9-1-4 4c-6-12-11-26-13-40z" fill="url(#cv-bow-g)" id="cv-bow-svg1-path4"></path>
+<ellipse cx="46" cy="36" fill="#e597aa" id="cv-bow-svg1-ellipse1" rx="7" ry="8"></ellipse>
+<path d="M16 24c8-4 18-1 26 9M76 24c-8-4-18-1-26 9" fill="none" id="cv-bow-svg1-path5" stroke="#fff" stroke-opacity="0.6" stroke-width="1.2"></path>
+</svg>
+</div>
+<p class="cv-in" id="cv-kicker" style="--rd: 0.1s"></p>
+<button aria-label="" class="cv-in" id="cv-bloom" style="--rd: 0.2s" type="button">
+<svg aria-hidden="true" id="cv-bloom-ring" viewbox="0 0 132 132">
+<circle cx="66" cy="66" fill="none" id="cv-bloom-ring-circle1" r="62" stroke="#b98f55" stroke-dasharray="2 5" stroke-opacity="0.55" stroke-width="0.8"></circle>
+<circle cx="66" cy="66" fill="none" id="cv-bloom-ring-circle2" r="56" stroke="#eba3b2" stroke-opacity="0.6" stroke-width="0.6"></circle>
+<circle cx="66" cy="4" fill="#c66a85" id="cv-bloom-ring-circle3" r="2.4"></circle>
+<circle cx="128" cy="66" fill="#b98f55" id="cv-bloom-ring-circle4" r="1.8"></circle>
+<circle cx="66" cy="128" fill="#c66a85" id="cv-bloom-ring-circle5" r="2.4"></circle>
+<circle cx="4" cy="66" fill="#b98f55" id="cv-bloom-ring-circle6" r="1.8"></circle>
+</svg>
+<span class="cv-stage" id="cv-stage-bud"><img alt="" class="wc" data-wc="bud" id="cv-wc-bud"/></span>
+<span class="cv-stage" id="cv-stage-half"><img alt="" class="wc" data-wc="half" id="cv-wc-half"/></span>
+<span class="cv-stage" id="cv-stage-full"><img alt="" class="wc" data-wc="bloom_blush" id="cv-wc-full"/></span>
+</button>
+<h1 class="cv-in" id="cv-names" style="--rd: 0.35s">
+<span id="cv-name-1"></span><span id="cv-amp"></span><span id="cv-name-2"></span>
+</h1>
+<p class="cv-in" id="cv-date" style="--rd: 0.5s"></p>
+<div class="cv-in" id="cv-guest" style="--rd: 0.65s">
+<p id="cv-guest-label"></p>
+<p id="cv-guest-name"></p>
+<p id="cv-guest-generic"></p>
+</div>
+<p class="cv-in" id="cv-note" style="--rd: 0.8s"></p>
+<button class="btn cv-in" id="cv-open" style="--rd: 0.95s" type="button">
+<svg aria-hidden="true" fill="none" id="cv-open-svg1" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+<path d="M12 4.5c2 0 3.2 1.6 3 3.4 1.8-.6 3.6.6 3.6 2.6 0 1.4-1 2.3-2 2.6 1 .5 1.6 1.6 1.2 2.9-.5 1.6-2.3 2.2-3.7 1.5-.2 1.4-1.2 2.5-2.6 2.5s-2.4-1.1-2.6-2.5c-1.4.7-3.2.1-3.7-1.5-.4-1.3.2-2.4 1.2-2.9-1-.3-2-1.2-2-2.6 0-2 1.8-3.2 3.6-2.6-.2-1.8 1-3.4 3-3.4z" id="cv-open-svg1-path1"></path>
+<circle cx="12" cy="12" id="cv-open-svg1-circle1" r="2.4"></circle>
+</svg>
+<span id="cv-open-t"></span>
+</button>
+<p class="cv-in" id="cv-hint" style="--rd: 1.1s"></p>
+</div>
+</section>
+<section aria-label="" data-section="hero" id="sec-hero">
+<div id="hr-silk-tint"></div>
+<div id="hr-giant">
+<div id="hr-giant-in">
+<img alt="" class="wc" data-wc="bloom_blush" id="hr-wc-giant"/>
+</div>
+</div>
+<span class="orn rv rv-bloom" id="hr-orn-ivory" style="--rd: 1.4s"><img alt="" class="wc breathe" data-wc="ivory" id="hr-wc-ivory" style="--rot: -24deg; --dur: 12s"/></span>
+<span class="orn rv rv-grow" id="hr-orn-sprig" style="--rd: 1.9s"><img alt="" class="wc sway" data-wc="sprig_5" id="hr-wc-sprig" style="--rot: 10deg; --dur: 8s"/></span>
+<div class="wrap" id="hr-wrap">
+<div id="hr-text">
+<p class="rv rv-fade" id="hr-slowmo" style="--rd: 0.2s">
+<span id="hr-rec"></span><span id="hr-slowmo-t"></span>
+</p>
+<p class="rv" id="hr-kicker" style="--rd: 0.4s"></p>
+<h2 id="hr-names">
+<span class="hr-name split" id="hr-name-1" style="--rd: 0.6s"></span>
+<span class="rv rv-bloom" id="hr-amp" style="--rd: 1.3s"></span>
+<span class="hr-name split" id="hr-name-2" style="--rd: 1.5s"></span>
+</h2>
+<div class="rv" id="hr-datebar" style="--rd: 1.9s">
+<div id="hr-day"></div>
+<p id="hr-date-long"></p>
+<p id="hr-date-meta"></p>
+</div>
+<span id="hr-line"></span>
+<p class="rv" id="hr-tagline" style="--rd: 2.2s"></p>
+<button class="btn rv" id="hr-cta" style="--rd: 2.5s" type="button">
+<span id="hr-cta-t"></span>
+<svg aria-hidden="true" fill="none" id="hr-cta-svg1" stroke="currentColor" stroke-width="1.6" viewbox="0 0 24 24">
+<path d="M12 5v14M6 13l6 6 6-6" id="hr-cta-svg1-path1"></path>
+</svg>
+</button>
+</div>
+<div id="hr-photo-col">
+<figure class="rv rv-silk" id="hr-arch" style="--rd: 0.9s">
+<img alt="" id="hr-photo"/>
+<span id="hr-mono"></span>
+</figure>
+<svg aria-hidden="true" id="hr-arch-frame" preserveaspectratio="none" viewbox="0 0 354 464">
+<path d="M6 458V177C6 82 83 6 177 6s171 76 171 171v281z" fill="none" id="hr-arch-frame-path1" stroke="#b98f55" stroke-width="1.2"></path>
+<path d="M14 450V178C14 88 87 14 177 14s163 74 163 164v272z" fill="none" id="hr-arch-frame-path2" stroke="#eba3b2" stroke-width="0.8"></path>
+</svg>
+<span class="orn rv rv-bloom" id="hr-orn-corner" style="--rd: 1.7s"><img alt="" class="wc sway-top" data-wc="corner" id="hr-wc-corner" style="--dur: 9s"/></span>
+<span class="orn rv rv-bloom" id="hr-orn-coral" style="--rd: 2.1s"><img alt="" class="wc breathe" data-wc="coral" id="hr-wc-coral" style="--rot: 18deg; --dur: 10s"/></span>
+<span class="orn rv rv-grow" id="hr-orn-bud" style="--rd: 2.4s"><img alt="" class="wc sway" data-wc="bud" id="hr-wc-bud" style="--rot: -12deg; --dur: 6s"/></span>
+</div>
+</div>
+<div aria-hidden="true" id="hr-scroll">
+<span id="hr-scroll-t"></span><span id="hr-scroll-line"></span>
+</div>
+</section>
+<section aria-labelledby="gr-title" class="sec" data-section="greeting" id="sec-greeting">
+<span class="orn rv rv-drop" id="gr-orn-garland"><img alt="" class="wc sway-top" data-wc="garland" id="gr-wc-garland" style="--amp: 1.2deg; --dur: 10s"/></span>
+<span class="orn rv rv-bloom" id="gr-orn-l" style="--rd: 0.4s"><img alt="" class="wc breathe" data-wc="lilac" id="gr-wc-l" style="--rot: 30deg; --dur: 13s"/></span>
+<span class="orn rv rv-grow" id="gr-orn-r" style="--rd: 0.7s"><img alt="" class="wc sway" data-wc="sprig_3" id="gr-wc-r" style="--rot: -8deg"/></span>
+<span class="orn rv rv-bloom" id="gr-orn-b" style="--rd: 0.9s"><img alt="" class="wc slowbloom" data-wc="coral" id="gr-wc-b" style="--rot: -30deg"/></span>
+<div class="wrap" id="gr-wrap">
+<header class="sec-head" id="gr-head">
+<p class="sec-kicker rv" id="gr-kicker">
+<span class="sec-num" id="gr-num"></span><span class="sec-dot" id="gr-dot"></span><span id="gr-kicker-t"></span>
+</p>
+<h2 class="sec-title split" id="gr-title"></h2>
+<p class="sec-script rv" id="gr-script" style="--rd: 0.5s"></p>
+</header>
+<div class="rv rv-zoom" id="gr-bloom-wrap">
+<button aria-label="" id="gr-bloom" type="button">
+<span class="pp-peony auto" data-palette="blush" data-seed="3" id="gr-peony"></span>
+</button>
+<p id="gr-bloom-hint"></p>
+</div>
+<article class="silk-card rv rv-silk" id="gr-card" style="--rd: 0.3s">
+<p class="gr-line" id="gr-salam"></p>
+<p class="gr-line" id="gr-text"></p>
+<svg aria-hidden="true" class="gold-rule gr-line" id="gr-rule" viewbox="0 0 120 14">
+<path d="M2 7h44M74 7h44" id="gr-rule-path1" stroke="#b98f55" stroke-width="0.8"></path>
+<path d="M60 1.5c2.2 2.6 2.2 8.4 0 11-2.2-2.6-2.2-8.4 0-11zM54 7c2.6-2.2 9.4-2.2 12 0-2.6 2.2-9.4 2.2-12 0z" fill="#eba3b2" id="gr-rule-path2"></path>
+<circle cx="60" cy="7" fill="#b98f55" id="gr-rule-circle1" r="1.6"></circle>
+</svg>
+<blockquote class="gr-line" id="gr-quote">
+<p id="gr-quote-text"></p>
+<cite id="gr-quote-src"></cite>
+</blockquote>
+</article>
+</div>
+</section>
+<section aria-labelledby="cp-title" class="sec" data-section="couple" id="sec-couple">
+<span class="orn rv rv-bloom" id="cp-orn-1" style="--rd: 0.3s"><img alt="" class="wc slowbloom" data-wc="ivory" id="cp-wc-1" style="--rot: -20deg"/></span>
+<span class="orn rv rv-grow" id="cp-orn-2" style="--rd: 0.6s"><img alt="" class="wc sway" data-wc="sprig_6" id="cp-wc-2" style="--rot: 14deg; --dur: 7.5s"/></span>
+<span class="orn rv rv-bloom" id="cp-orn-3" style="--rd: 0.9s"><img alt="" class="wc breathe" data-wc="lilac" id="cp-wc-3" style="--rot: 40deg; --dur: 12s"/></span>
+<div class="wrap" id="cp-wrap">
+<header class="sec-head" id="cp-head">
+<p class="sec-kicker rv" id="cp-kicker">
+<span class="sec-num" id="cp-num"></span><span class="sec-dot" id="cp-dot"></span><span id="cp-kicker-t"></span>
+</p>
+<h2 class="sec-title split" id="cp-title"></h2>
+<p class="sec-script rv" id="cp-script" style="--rd: 0.5s"></p>
+</header>
+<div aria-label="" class="rv" id="cp-switch" role="tablist">
+<button aria-controls="cp-panel-b" aria-selected="true" class="cp-tab is-active" data-who="b" id="cp-tab-b" role="tab" type="button">
+<span id="cp-tab-b-t"></span>
+</button>
+<span aria-hidden="true" id="cp-switch-knot">
+<svg id="cp-knot-svg" viewbox="0 0 40 24">
+<path d="M20 12C14 2 3 2 3 9s11 7 17 3zM20 12c6-10 17-10 17-3s-11 7-17 3z" fill="#f2c3cb" id="cp-knot-svg-path1" stroke="#c66a85" stroke-width="0.8"></path>
+<circle cx="20" cy="12" fill="#e597aa" id="cp-knot-svg-circle1" r="3.2"></circle>
+</svg>
+</span>
+<button aria-controls="cp-panel-g" aria-selected="false" class="cp-tab" data-who="g" id="cp-tab-g" role="tab" type="button">
+<span id="cp-tab-g-t"></span>
+</button>
+</div>
+<div id="cp-body">
+<div class="rv rv-zoom" data-front="b" id="cp-stage" style="--rd: 0.2s">
+<span id="cp-wreath"><img alt="" class="wc breathe" data-wc="wreath" id="cp-wc-wreath" style="--dur: 16s"/></span>
+<svg aria-hidden="true" id="cp-thread" preserveaspectratio="none" viewbox="0 0 300 360">
+<path d="M40 330C90 250 60 160 150 150s70-110 120-130" fill="none" id="cp-thread-path1" stroke="#e597aa" stroke-dasharray="3 6" stroke-width="1.2"></path>
+</svg>
+<figure class="cp-card" data-who="b" id="cp-card-b">
+<div class="cp-photo" id="cp-photo-b">
+<img alt="" class="cp-img" id="cp-img-b"/>
+<span class="cp-initial" id="cp-initial-b"></span>
+</div>
+<figcaption class="cp-cap" id="cp-cap-b"></figcaption>
+<span class="cp-tag" id="cp-tag-b"></span>
+</figure>
+<figure class="cp-card" data-who="g" id="cp-card-g">
+<div class="cp-photo" id="cp-photo-g">
+<img alt="" class="cp-img" id="cp-img-g"/>
+<span class="cp-initial" id="cp-initial-g"></span>
+</div>
+<figcaption class="cp-cap" id="cp-cap-g"></figcaption>
+<span class="cp-tag" id="cp-tag-g"></span>
+</figure>
+<span class="orn" id="cp-orn-half"><img alt="" class="wc sway" data-wc="half" id="cp-wc-half" style="--rot: -10deg; --dur: 7s"/></span>
+<span class="orn" id="cp-orn-petal"><img alt="" class="wc flutter" data-wc="petal_4" id="cp-wc-petal" style="--dur: 5s"/></span>
+</div>
+<div id="cp-panels">
+<article aria-labelledby="cp-tab-b" class="cp-panel is-active" id="cp-panel-b" role="tabpanel">
+<p class="cp-variety" id="cp-variety-b"></p>
+<h3 class="cp-full" id="cp-full-b"></h3>
+<p class="cp-order" id="cp-order-b"></p>
+<p class="cp-parents" id="cp-parents-b"></p>
+<a class="cp-ig" id="cp-ig-b" rel="noopener" target="_blank">
+<svg aria-hidden="true" fill="none" id="cp-ig-b-svg1" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+<rect height="16" id="cp-ig-b-svg1-rect1" rx="5" width="16" x="4" y="4"></rect>
+<circle cx="12" cy="12" id="cp-ig-b-svg1-circle1" r="3.6"></circle>
+<circle cx="16.8" cy="7.2" fill="currentColor" id="cp-ig-b-svg1-circle2" r="0.9"></circle>
+</svg>
+<span id="cp-ig-b-t"></span>
+</a>
+<details class="cp-more" hidden="" id="cp-more-b">
+<summary id="cp-more-b-s"></summary>
+<p class="cp-bio" id="cp-bio-b"></p>
+</details>
+</article>
+<article aria-labelledby="cp-tab-g" class="cp-panel" id="cp-panel-g" role="tabpanel">
+<p class="cp-variety" id="cp-variety-g"></p>
+<h3 class="cp-full" id="cp-full-g"></h3>
+<p class="cp-order" id="cp-order-g"></p>
+<p class="cp-parents" id="cp-parents-g"></p>
+<a class="cp-ig" id="cp-ig-g" rel="noopener" target="_blank">
+<svg aria-hidden="true" fill="none" id="cp-ig-g-svg1" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+<rect height="16" id="cp-ig-g-svg1-rect1" rx="5" width="16" x="4" y="4"></rect>
+<circle cx="12" cy="12" id="cp-ig-g-svg1-circle1" r="3.6"></circle>
+<circle cx="16.8" cy="7.2" fill="currentColor" id="cp-ig-g-svg1-circle2" r="0.9"></circle>
+</svg>
+<span id="cp-ig-g-t"></span>
+</a>
+<details class="cp-more" hidden="" id="cp-more-g">
+<summary id="cp-more-g-s"></summary>
+<p class="cp-bio" id="cp-bio-g"></p>
+</details>
+</article>
+</div>
+</div>
+<p class="rv" id="cp-hint"></p>
+</div>
+</section>
+<section aria-labelledby="st-title" class="sec" data-section="story" id="sec-story">
+<span class="orn rv rv-bloom" id="st-orn-a" style="--rd: 0.3s"><img alt="" class="wc breathe" data-wc="bloom_blush" id="st-wc-a" style="--rot: -30deg; --dur: 14s"/></span>
+<div class="wrap" id="st-wrap">
+<header class="sec-head" id="st-head">
+<p class="sec-kicker rv" id="st-kicker">
+<span class="sec-num" id="st-num"></span><span class="sec-dot" id="st-dot"></span><span id="st-kicker-t"></span>
+</p>
+<h2 class="sec-title split" id="st-title"></h2>
+<p class="sec-script rv" id="st-script" style="--rd: 0.5s"></p>
+<p class="sec-lead rv" id="st-lead" style="--rd: 0.7s"></p>
+</header>
+<div id="st-grid">
+<aside aria-hidden="true" id="st-sticky">
+<div id="st-meter">
+<span class="pp-peony" data-palette="blush" data-seed="11" id="st-peony"></span>
+<div id="st-meter-text">
+<p id="st-meter-stage"></p>
+<p id="st-meter-name"></p>
+<span id="st-meter-bar"><span id="st-meter-fill"></span></span>
+</div>
+</div>
+</aside>
+<ol id="st-list">
+<li class="st-item" id="st-item-1">
+<article class="st-card silk-card rv" id="st-card-1">
+<figure class="st-photo" id="st-photo-1">
+<img alt="" class="st-img" id="st-img-1" loading="lazy"/>
+</figure>
+<div class="st-body" id="st-body-1">
+<p class="st-stage" id="st-stage-1"></p>
+<h3 class="st-title" id="st-title-1"></h3>
+<p class="st-date" id="st-date-1"></p>
+<p class="st-text" id="st-text-1"></p>
+</div>
+</article>
+<span class="orn st-orn rv rv-grow" id="st-orn-1" style="--rd: 0.5s"><img alt="" class="wc sway" data-wc="bud" id="st-wc-1" style="--rot: 8deg; --dur: 6s"/></span>
+</li>
+<li class="st-item" id="st-item-2">
+<article class="st-card silk-card rv" id="st-card-2">
+<figure class="st-photo" id="st-photo-2">
+<img alt="" class="st-img" id="st-img-2" loading="lazy"/>
+</figure>
+<div class="st-body" id="st-body-2">
+<p class="st-stage" id="st-stage-2"></p>
+<h3 class="st-title" id="st-title-2"></h3>
+<p class="st-date" id="st-date-2"></p>
+<p class="st-text" id="st-text-2"></p>
+</div>
+</article>
+<span class="orn st-orn rv rv-grow" id="st-orn-2" style="--rd: 0.5s"><img alt="" class="wc sway" data-wc="sprig_4" id="st-wc-2" style="--rot: -6deg; --dur: 7s"/></span>
+</li>
+<li class="st-item" id="st-item-3">
+<article class="st-card silk-card rv" id="st-card-3">
+<figure class="st-photo" id="st-photo-3">
+<img alt="" class="st-img" id="st-img-3" loading="lazy"/>
+</figure>
+<div class="st-body" id="st-body-3">
+<p class="st-stage" id="st-stage-3"></p>
+<h3 class="st-title" id="st-title-3"></h3>
+<p class="st-date" id="st-date-3"></p>
+<p class="st-text" id="st-text-3"></p>
+</div>
+</article>
+<span class="orn st-orn rv rv-bloom" id="st-orn-3" style="--rd: 0.5s"><img alt="" class="wc breathe" data-wc="half" id="st-wc-3" style="--rot: 10deg; --dur: 9s"/></span>
+</li>
+<li class="st-item" id="st-item-4">
+<article class="st-card silk-card rv" id="st-card-4">
+<figure class="st-photo" id="st-photo-4">
+<img alt="" class="st-img" id="st-img-4" loading="lazy"/>
+</figure>
+<div class="st-body" id="st-body-4">
+<p class="st-stage" id="st-stage-4"></p>
+<h3 class="st-title" id="st-title-4"></h3>
+<p class="st-date" id="st-date-4"></p>
+<p class="st-text" id="st-text-4"></p>
+</div>
+</article>
+<span class="orn st-orn rv rv-bloom" id="st-orn-4" style="--rd: 0.5s"><img alt="" class="wc slowbloom" data-wc="bloom_blush" id="st-wc-4" style="--rot: -14deg"/></span>
+</li>
+</ol>
+</div>
+</div>
+</section>
+<section aria-labelledby="an-title" class="sec" data-section="ants" hidden="" id="sec-ants">
+<span class="orn rv rv-bloom" id="an-orn-a" style="--rd: 0.3s"><img alt="" class="wc slowbloom" data-wc="ivory" id="an-wc-a" style="--rot: 24deg"/></span>
+<span class="orn rv rv-grow" id="an-orn-b" style="--rd: 0.6s"><img alt="" class="wc sway" data-wc="sprig_1" id="an-wc-b" style="--rot: -16deg; --dur: 8s"/></span>
+<div class="wrap" id="an-wrap">
+<header class="sec-head" id="an-head">
+<p class="sec-kicker rv" id="an-kicker">
+<span class="sec-num" id="an-num"></span><span class="sec-dot" id="an-dot"></span><span id="an-kicker-t"></span>
+</p>
+<h2 class="sec-title split" id="an-title"></h2>
+<p class="sec-script rv" id="an-script" style="--rd: 0.5s"></p>
+<p class="sec-lead rv" id="an-intro" style="--rd: 0.7s"></p>
+</header>
+<div id="an-grid">
+<div class="rv rv-zoom" id="an-stage">
+<span id="an-plate"></span>
+<span class="orn" id="an-leaf-1"><img alt="" class="wc sway" data-wc="sprig_1" id="an-wc-leaf-1" style="--rot: -140deg; --dur: 9s"/></span>
+<span class="orn" id="an-leaf-2"><img alt="" class="wc sway" data-wc="sprig_2" id="an-wc-leaf-2" style="--rot: 120deg; --dur: 10s; --dl: -3s"/></span>
+<span class="orn" id="an-leaf-3"><img alt="" class="wc sway" data-wc="sprig_4" id="an-wc-leaf-3" style="--rot: 20deg; --dur: 8.5s; --dl: -5s"/></span>
+<svg aria-hidden="true" id="an-trail" viewbox="0 0 300 300">
+<circle cx="150" cy="150" fill="none" id="an-trail-circle1" r="126" stroke="#c66a85" stroke-dasharray="1 7" stroke-linecap="round" stroke-opacity="0.35" stroke-width="1"></circle>
+<circle cx="150" cy="150" fill="none" id="an-trail-circle2" r="104" stroke="#b98f55" stroke-opacity="0.3" stroke-width="0.6"></circle>
+</svg>
+<span class="pp-peony" data-b0="0.16" data-palette="blush" data-seed="23" id="an-peony"></span>
+<div class="an-orbit" data-ant="1" id="an-orbit-1" style="--start: 0deg">
+<div class="an-spin" id="an-spin-1" style="--dur: 30s">
+<button aria-label="" class="an-ant" data-ant="1" id="an-ant-1" type="button">
+<svg aria-hidden="true" class="an-svg" id="an-svg-1" viewbox="0 0 48 48">
+<use href="#an-def-ant" id="an-svg-1-use1"></use>
+</svg>
+<span class="an-badge" id="an-badge-1"></span>
+</button>
+</div>
+</div>
+<div class="an-orbit" data-ant="2" id="an-orbit-2" style="--start: 90deg">
+<div class="an-spin" id="an-spin-2" style="--dur: 34s">
+<button aria-label="" class="an-ant" data-ant="2" id="an-ant-2" type="button">
+<svg aria-hidden="true" class="an-svg" id="an-svg-2" viewbox="0 0 48 48">
+<use href="#an-def-ant" id="an-svg-2-use1"></use>
+</svg>
+<span class="an-badge" id="an-badge-2"></span>
+</button>
+</div>
+</div>
+<div class="an-orbit" data-ant="3" id="an-orbit-3" style="--start: 180deg">
+<div class="an-spin" id="an-spin-3" style="--dur: 28s">
+<button aria-label="" class="an-ant" data-ant="3" id="an-ant-3" type="button">
+<svg aria-hidden="true" class="an-svg" id="an-svg-3" viewbox="0 0 48 48">
+<use href="#an-def-ant" id="an-svg-3-use1"></use>
+</svg>
+<span class="an-badge" id="an-badge-3"></span>
+</button>
+</div>
+</div>
+<div class="an-orbit" data-ant="4" id="an-orbit-4" style="--start: 270deg">
+<div class="an-spin" id="an-spin-4" style="--dur: 32s">
+<button aria-label="" class="an-ant" data-ant="4" id="an-ant-4" type="button">
+<svg aria-hidden="true" class="an-svg" id="an-svg-4" viewbox="0 0 48 48">
+<use href="#an-def-ant" id="an-svg-4-use1"></use>
+</svg>
+<span class="an-badge" id="an-badge-4"></span>
+</button>
+</div>
+</div>
+</div>
+<div id="an-side">
+<p aria-live="polite" class="rv" id="an-status">
+<span id="an-status-n"></span><span id="an-status-t"></span></p>
+<span class="rv" id="an-progress"><span id="an-progress-fill"></span></span>
+<div id="an-cards">
+<article class="an-card is-active" id="an-card-0">
+<p class="an-role" id="an-role-0"></p>
+<h3 class="an-name" id="an-name-0"></h3>
+<p class="an-note" id="an-note-0"></p>
+</article>
+<article class="an-card" data-ant="1" id="an-card-1">
+<p class="an-role" id="an-role-1"></p>
+<h3 class="an-name" id="an-name-1"></h3>
+<p class="an-note" id="an-note-1"></p>
+</article>
+<article class="an-card" data-ant="2" id="an-card-2">
+<p class="an-role" id="an-role-2"></p>
+<h3 class="an-name" id="an-name-2"></h3>
+<p class="an-note" id="an-note-2"></p>
+</article>
+<article class="an-card" data-ant="3" id="an-card-3">
+<p class="an-role" id="an-role-3"></p>
+<h3 class="an-name" id="an-name-3"></h3>
+<p class="an-note" id="an-note-3"></p>
+</article>
+<article class="an-card" data-ant="4" id="an-card-4">
+<p class="an-role" id="an-role-4"></p>
+<h3 class="an-name" id="an-name-4"></h3>
+<p class="an-note" id="an-note-4"></p>
+</article>
+<article class="an-card" id="an-card-done">
+<p class="an-role" id="an-role-done"></p>
+<h3 class="an-name" id="an-name-done"></h3>
+<p class="an-note" id="an-note-done"></p>
+</article>
+</div>
+<button class="btn btn-ghost rv" id="an-all" type="button">
+<svg aria-hidden="true" fill="none" id="an-all-svg1" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+<path d="M12 3l1.6 5.4L19 10l-5.4 1.6L12 17l-1.6-5.4L5 10l5.4-1.6z" id="an-all-svg1-path1"></path>
+</svg>
+<span id="an-all-t"></span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<section aria-labelledby="sp-title" class="sec" data-section="springs" hidden="" id="sec-springs">
+<span class="orn rv rv-bloom" id="sp-orn-a" style="--rd: 0.3s"><img alt="" class="wc breathe" data-wc="coral" id="sp-wc-a" style="--rot: -30deg; --dur: 12s"/></span>
+<div class="wrap" id="sp-wrap">
+<header class="sec-head" id="sp-head">
+<p class="sec-kicker rv" id="sp-kicker">
+<span class="sec-num" id="sp-num"></span><span class="sec-dot" id="sp-dot"></span><span id="sp-kicker-t"></span>
+</p>
+<h2 class="sec-title split" id="sp-title"></h2>
+<p class="sec-script rv" id="sp-script" style="--rd: 0.5s"></p>
+<p class="sec-lead rv" id="sp-intro" style="--rd: 0.7s"></p>
+</header>
+<div id="sp-grid">
+<div class="rv rv-zoom" id="sp-stage">
+<span id="sp-sun"></span>
+<div id="sp-bush">
+<span class="sp-leaf" id="sp-leaf-1"><img alt="" class="wc sway" data-wc="sprig_1" id="sp-wc-leaf-1" style="--rot: -38deg; --dur: 9s"/></span>
+<span class="sp-leaf" id="sp-leaf-2"><img alt="" class="wc sway" data-wc="sprig_4" id="sp-wc-leaf-2" style="--rot: 34deg; --dur: 10s; --dl: -2s"/></span>
+<span class="sp-leaf" id="sp-leaf-3"><img alt="" class="wc sway" data-wc="sprig_2" id="sp-wc-leaf-3" style="--rot: -8deg; --dur: 8s; --dl: -4s"/></span>
+<span class="sp-leaf" id="sp-leaf-4"><img alt="" class="wc sway" data-wc="sprig_5" id="sp-wc-leaf-4" style="--rot: 16deg; --dur: 11s; --dl: -1s"/></span>
+<span class="sp-flower" data-at="1" id="sp-fl-1" style="left: 41%; top: 44%; width: 22%"><img alt="" class="wc breathe" data-wc="bloom_blush" id="sp-wc-fl-1"/></span>
+<span class="sp-flower" data-at="3" id="sp-fl-2" style="left: 24%; top: 52%; width: 17%"><img alt="" class="wc breathe" data-wc="bud" id="sp-wc-fl-2" style="--dl: -2s"/></span>
+<span class="sp-flower" data-at="6" id="sp-fl-3" style="left: 60%; top: 50%; width: 18%"><img alt="" class="wc breathe" data-wc="ivory" id="sp-wc-fl-3" style="--dl: -4s"/></span>
+<span class="sp-flower" data-at="10" id="sp-fl-4" style="left: 32%; top: 30%; width: 19%"><img alt="" class="wc breathe" data-wc="coral" id="sp-wc-fl-4" style="--dl: -1s"/></span>
+<span class="sp-flower" data-at="15" id="sp-fl-5" style="left: 54%; top: 28%; width: 18%"><img alt="" class="wc breathe" data-wc="lilac" id="sp-wc-fl-5" style="--dl: -3s"/></span>
+<span class="sp-flower" data-at="20" id="sp-fl-6" style="left: 12%; top: 40%; width: 16%"><img alt="" class="wc breathe" data-wc="half" id="sp-wc-fl-6" style="--dl: -5s"/></span>
+<span class="sp-flower" data-at="25" id="sp-fl-7" style="left: 74%; top: 36%; width: 17%"><img alt="" class="wc breathe" data-wc="bloom_blush" id="sp-wc-fl-7" style="--dl: -2.5s"/></span>
+<span class="sp-flower" data-at="33" id="sp-fl-8" style="left: 44%; top: 15%; width: 16%"><img alt="" class="wc breathe" data-wc="ivory" id="sp-wc-fl-8" style="--dl: -6s"/></span>
+<span class="sp-flower" data-at="42" id="sp-fl-9" style="left: 20%; top: 22%; width: 15%"><img alt="" class="wc breathe" data-wc="lilac" id="sp-wc-fl-9" style="--dl: -1.5s"/></span>
+<span class="sp-flower" data-at="50" id="sp-fl-10" style="left: 66%; top: 14%; width: 15%"><img alt="" class="wc breathe" data-wc="coral" id="sp-wc-fl-10" style="--dl: -3.5s"/></span>
+<span class="sp-flower" data-at="70" id="sp-fl-11" style="left: 6%; top: 58%; width: 15%"><img alt="" class="wc breathe" data-wc="bloom_blush" id="sp-wc-fl-11" style="--dl: -4.5s"/></span>
+<span class="sp-flower" data-at="100" id="sp-fl-12" style="left: 82%; top: 56%; width: 15%"><img alt="" class="wc breathe" data-wc="half" id="sp-wc-fl-12" style="--dl: -0.5s"/></span>
+</div>
+<div aria-live="polite" id="sp-counter">
+<span id="sp-counter-label"></span>
+<span id="sp-year"></span>
+</div>
+</div>
+<div id="sp-side">
+<div class="rv" id="sp-control">
+<label class="sr-only" for="sp-range" id="sp-range-label"></label>
+<input id="sp-range" max="1000" min="0" step="1" type="range" value="0"/>
+<div id="sp-ticks">
+<button class="sp-tick" data-year="1" id="sp-tick-1" type="button"></button>
+<button class="sp-tick" data-year="10" id="sp-tick-10" type="button"></button>
+<button class="sp-tick" data-year="25" id="sp-tick-25" type="button"></button>
+<button class="sp-tick" data-year="50" id="sp-tick-50" type="button"></button>
+<button class="sp-tick" data-year="100" id="sp-tick-100" type="button"></button>
+</div>
+</div>
+<div class="rv" id="sp-promises">
+<article class="sp-promise silk-card is-active" data-year="1" id="sp-promise-1">
+<p class="sp-promise-label" id="sp-promise-label-1"></p>
+<p class="sp-promise-text" id="sp-promise-text-1"></p>
+</article>
+<article class="sp-promise silk-card" data-year="10" id="sp-promise-2">
+<p class="sp-promise-label" id="sp-promise-label-2"></p>
+<p class="sp-promise-text" id="sp-promise-text-2"></p>
+</article>
+<article class="sp-promise silk-card" data-year="25" id="sp-promise-3">
+<p class="sp-promise-label" id="sp-promise-label-3"></p>
+<p class="sp-promise-text" id="sp-promise-text-3"></p>
+</article>
+<article class="sp-promise silk-card" data-year="50" id="sp-promise-4">
+<p class="sp-promise-label" id="sp-promise-label-4"></p>
+<p class="sp-promise-text" id="sp-promise-text-4"></p>
+</article>
+<article class="sp-promise silk-card" data-year="100" id="sp-promise-5">
+<p class="sp-promise-label" id="sp-promise-label-5"></p>
+<p class="sp-promise-text" id="sp-promise-text-5"></p>
+</article>
+</div>
+<button class="btn btn-ghost rv" id="sp-play" type="button">
+<svg aria-hidden="true" fill="none" id="sp-play-svg1" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+<path d="M8 5.5v13l10-6.5z" id="sp-play-svg1-path1"></path>
+</svg>
+<span id="sp-play-t"></span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<section aria-labelledby="vd-title" class="sec" data-section="video" hidden="" id="sec-video">
+<span class="orn rv rv-bloom" id="vd-orn-a" style="--rd: 0.3s"><img alt="" class="wc breathe" data-wc="lilac" id="vd-wc-a" style="--rot: 18deg; --dur: 12s"/></span>
+<div class="wrap" id="vd-wrap">
+<header class="sec-head" id="vd-head">
+<p class="sec-kicker rv" id="vd-kicker">
+<span class="sec-num" id="vd-num"></span><span class="sec-dot" id="vd-dot"></span><span id="vd-kicker-t"></span>
+</p>
+<h2 class="sec-title split" id="vd-title"></h2>
+<p class="sec-script rv" id="vd-script" style="--rd: 0.5s"></p>
+</header>
+<div class="rv rv-zoom" id="vd-frame">
+<video id="vd-video" playsinline="" preload="metadata" src=""></video>
+<button aria-label="" id="vd-play" type="button">
+<svg aria-hidden="true" id="vd-play-svg1" viewbox="0 0 24 24">
+<path d="M9 6.5v11l9-5.5z" fill="currentColor" id="vd-play-svg1-path1"></path>
+</svg>
+</button>
+<span class="orn" id="vd-orn-corner"><img alt="" class="wc sway-top" data-wc="corner" id="vd-wc-corner" style="--dur: 9s"/></span>
+<span class="orn" id="vd-orn-bud"><img alt="" class="wc sway" data-wc="bud" id="vd-wc-bud" style="--rot: 20deg"/></span>
+</div>
+<div class="chip-row rv" id="vd-controls">
+<button aria-pressed="false" class="btn btn-ghost" id="vd-speed" type="button">
+<svg aria-hidden="true" fill="none" id="vd-speed-svg1" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+<circle cx="12" cy="13" id="vd-speed-svg1-circle1" r="7.5"></circle>
+<path d="M12 13l3-3M10 3.5h4" id="vd-speed-svg1-path1"></path>
+</svg>
+<span id="vd-speed-t"></span>
+</button>
+</div>
+<p class="rv" id="vd-caption"></p>
+</div>
+</section>
+<section aria-labelledby="cd-title" class="sec" data-section="countdown" id="sec-countdown">
+<div id="cd-bg"></div>
+<span class="orn rv rv-bloom" id="cd-orn-a" style="--rd: 0.2s"><img alt="" class="wc slowbloom" data-wc="bloom_blush" id="cd-wc-a" style="--rot: 20deg"/></span>
+<span class="orn rv rv-bloom" id="cd-orn-b" style="--rd: 0.5s"><img alt="" class="wc breathe" data-wc="ivory" id="cd-wc-b" style="--rot: -30deg; --dur: 13s"/></span>
+<span class="orn rv rv-grow" id="cd-orn-c" style="--rd: 0.8s"><img alt="" class="wc sway" data-wc="sprig_6" id="cd-wc-c" style="--rot: -12deg"/></span>
+<div class="wrap" id="cd-wrap">
+<header class="sec-head" id="cd-head">
+<p class="sec-kicker rv" id="cd-kicker">
+<span class="sec-num" id="cd-num"></span><span class="sec-dot" id="cd-dot"></span><span id="cd-kicker-t"></span>
+</p>
+<h2 class="sec-title split" id="cd-title"></h2>
+<p class="sec-script rv" id="cd-script" style="--rd: 0.5s"></p>
+</header>
+<div class="rv rv-zoom" id="cd-dial">
+<svg aria-hidden="true" id="cd-dial-svg" viewbox="-110 -110 220 220">
+<defs id="cd-dial-svg-defs1">
+<lineargradient id="cd-hand-g" x1="0" x2="0" y1="1" y2="0">
+<stop id="cd-hand-g-stop1" offset="0" stop-color="#c66a85"></stop>
+<stop id="cd-hand-g-stop2" offset="1" stop-color="#fbe4e8"></stop>
+</lineargradient>
+</defs>
+<circle cx="0" cy="0" fill="none" id="cd-dial-svg-circle1" r="104" stroke="#f6d3d6" stroke-opacity="0.35" stroke-width="0.8"></circle>
+<g id="cd-ticks"></g>
+<circle cx="0" cy="0" fill="none" id="cd-sec-arc" r="92" stroke="#eba3b2" stroke-dasharray="578" stroke-dashoffset="578" stroke-linecap="round" stroke-width="2" transform="rotate(-90)"></circle>
+<g id="cd-hand">
+<path d="M0 -88C9 -76 10 -54 0 -30-10 -54-9 -76 0 -88z" fill="url(#cd-hand-g)" id="cd-hand-petal"></path>
+<path d="M0 -30V0" id="cd-hand-stem" stroke="#d8bb8c" stroke-width="1.4"></path>
+</g>
+<circle cx="0" cy="0" fill="#d8bb8c" id="cd-dial-svg-circle2" r="5"></circle>
+</svg>
+<div id="cd-center">
+<span id="cd-center-n"></span>
+<span id="cd-center-l"></span>
+</div>
+</div>
+<div class="rv" id="cd-grid">
+<div class="cd-tile" id="cd-tile-d">
+<span class="cd-n" id="cd-days"></span><span class="cd-l" id="cd-l-d"></span>
+</div>
+<div class="cd-tile" id="cd-tile-h">
+<span class="cd-n" id="cd-hours"></span><span class="cd-l" id="cd-l-h"></span>
+</div>
+<div class="cd-tile" id="cd-tile-m">
+<span class="cd-n" id="cd-mins"></span><span class="cd-l" id="cd-l-m"></span>
+</div>
+<div class="cd-tile" id="cd-tile-s">
+<span class="cd-n" id="cd-secs"></span><span class="cd-l" id="cd-l-s"></span>
+</div>
+</div>
+<p class="rv" id="cd-note"></p>
+<p id="cd-done"></p>
+<div class="chip-row rv" id="cd-cal">
+<a class="btn" id="cd-gcal" rel="noopener" target="_blank">
+<svg aria-hidden="true" fill="none" id="cd-gcal-svg1" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+<rect height="15" id="cd-gcal-svg1-rect1" rx="2.5" width="17" x="3.5" y="5"></rect>
+<path d="M3.5 10h17M8 3v4M16 3v4M12 13v4M10 15h4" id="cd-gcal-svg1-path1"></path>
+</svg>
+<span id="cd-gcal-t"></span>
+</a>
+<button class="btn btn-ghost" id="cd-ics" type="button">
+<svg aria-hidden="true" fill="none" id="cd-ics-svg1" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+<path d="M12 4v11M7 10l5 5 5-5M5 19.5h14" id="cd-ics-svg1-path1"></path>
+</svg>
+<span id="cd-ics-t"></span>
+</button>
+</div>
+</div>
+</section>
+<section aria-labelledby="ev-title" class="sec" data-section="events" id="sec-events">
+<div class="wrap" id="ev-wrap">
+<header class="sec-head" id="ev-head">
+<p class="sec-kicker rv" id="ev-kicker">
+<span class="sec-num" id="ev-num"></span><span class="sec-dot" id="ev-dot"></span><span id="ev-kicker-t"></span>
+</p>
+<h2 class="sec-title split" id="ev-title"></h2>
+<p class="sec-script rv" id="ev-script" style="--rd: 0.5s"></p>
+</header>
+<div id="ev-grid">
+<article class="ev-card silk-card rv rv-left" id="ev-card-1">
+<span class="orn ev-orn" id="ev-orn-1"><img alt="" class="wc breathe" data-wc="ivory" id="ev-wc-1" style="--rot: -8deg; --dur: 10s"/></span>
+<span class="orn ev-orn-s" id="ev-orn-1s"><img alt="" class="wc sway" data-wc="sprig_2" id="ev-wc-1s" style="--rot: 50deg; --dur: 8s"/></span>
+<p class="ev-kicker" id="ev-kicker-1"></p>
+<h3 class="ev-name" id="ev-name-1"></h3>
+<div class="ev-when" id="ev-when-1">
+<p class="ev-date" id="ev-date-1"></p>
+<p class="ev-time" id="ev-time-1"></p>
+</div>
+<div class="ev-where" id="ev-where-1">
+<p class="ev-venue" id="ev-venue-1"></p>
+<p class="ev-addr" id="ev-addr-1"></p>
+</div>
+<p class="ev-note" id="ev-note-1"></p>
+<a class="btn btn-ghost ev-map" id="ev-map-1" rel="noopener" target="_blank">
+<svg aria-hidden="true" fill="none" id="ev-map-1-svg1" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+<path d="M12 21s-6.5-6-6.5-11a6.5 6.5 0 0113 0c0 5-6.5 11-6.5 11z" id="ev-map-1-svg1-path1"></path>
+<circle cx="12" cy="10" id="ev-map-1-svg1-circle1" r="2.4"></circle>
+</svg>
+<span id="ev-map-1-t"></span>
+</a>
+</article>
+<article class="ev-card silk-card rv rv-right" id="ev-card-2" style="--rd: 0.2s">
+<span class="orn ev-orn" id="ev-orn-2"><img alt="" class="wc breathe" data-wc="coral" id="ev-wc-2" style="--rot: 12deg; --dur: 11s"/></span>
+<span class="orn ev-orn-s" id="ev-orn-2s"><img alt="" class="wc sway" data-wc="sprig_6" id="ev-wc-2s" style="--rot: -40deg; --dur: 9s"/></span>
+<p class="ev-kicker" id="ev-kicker-2"></p>
+<h3 class="ev-name" id="ev-name-2"></h3>
+<div class="ev-when" id="ev-when-2">
+<p class="ev-date" id="ev-date-2"></p>
+<p class="ev-time" id="ev-time-2"></p>
+</div>
+<div class="ev-where" id="ev-where-2">
+<p class="ev-venue" id="ev-venue-2"></p>
+<p class="ev-addr" id="ev-addr-2"></p>
+</div>
+<p class="ev-note" id="ev-note-2"></p>
+<a class="btn btn-ghost ev-map" id="ev-map-2" rel="noopener" target="_blank">
+<svg aria-hidden="true" fill="none" id="ev-map-2-svg1" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+<path d="M12 21s-6.5-6-6.5-11a6.5 6.5 0 0113 0c0 5-6.5 11-6.5 11z" id="ev-map-2-svg1-path1"></path>
+<circle cx="12" cy="10" id="ev-map-2-svg1-circle1" r="2.4"></circle>
+</svg>
+<span id="ev-map-2-t"></span>
+</a>
+</article>
+</div>
+<div class="silk-card rv" hidden="" id="ev-live">
+<p id="ev-live-kicker">
+<span id="ev-live-dot"></span></p>
+<p id="ev-live-text"></p>
+<div id="ev-live-embed"></div>
+<a class="btn" id="ev-live-link" rel="noopener" target="_blank"><span id="ev-live-link-t"></span></a>
+</div>
+</div>
+</section>
+<section aria-labelledby="rd-title" class="sec" data-section="rundown" id="sec-rundown">
+<span class="orn rv rv-bloom" id="rd-orn-a" style="--rd: 0.3s"><img alt="" class="wc breathe" data-wc="half" id="rd-wc-a" style="--rot: -18deg; --dur: 10s"/></span>
+<div class="wrap" id="rd-wrap">
+<header class="sec-head" id="rd-head">
+<p class="sec-kicker rv" id="rd-kicker">
+<span class="sec-num" id="rd-num"></span><span class="sec-dot" id="rd-dot"></span><span id="rd-kicker-t"></span>
+</p>
+<h2 class="sec-title split" id="rd-title"></h2>
+<p class="sec-script rv" id="rd-script" style="--rd: 0.5s"></p>
+</header>
+<div id="rd-body">
+<svg aria-hidden="true" id="rd-stem" preserveaspectratio="none">
+<path d="" fill="none" id="rd-stem-path" stroke="#7f9c78" stroke-linecap="round" stroke-width="2"></path>
+</svg>
+<div id="rd-list"></div>
+</div>
+</div>
+</section>
+<section aria-labelledby="vn-title" class="sec" data-section="venue" id="sec-venue">
+<span class="orn rv rv-bloom" id="vn-orn-a" style="--rd: 0.3s"><img alt="" class="wc slowbloom" data-wc="lilac" id="vn-wc-a" style="--rot: -26deg"/></span>
+<div class="wrap" id="vn-wrap">
+<header class="sec-head" id="vn-head">
+<p class="sec-kicker rv" id="vn-kicker">
+<span class="sec-num" id="vn-num"></span><span class="sec-dot" id="vn-dot"></span><span id="vn-kicker-t"></span>
+</p>
+<h2 class="sec-title split" id="vn-title"></h2>
+<p class="sec-script rv" id="vn-script" style="--rd: 0.5s"></p>
+</header>
+<div id="vn-grid">
+<div class="rv rv-zoom" id="vn-mapbox">
+<div id="vn-mapframe">
+<iframe allowfullscreen="" id="vn-map" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title=""></iframe>
+<div id="vn-map-veil">
+<span id="vn-map-veil-t"></span>
+</div>
+</div>
+<span class="orn" id="vn-orn-corner"><img alt="" class="wc sway-top" data-wc="corner" id="vn-wc-corner" style="--dur: 10s"/></span>
+<span class="orn" id="vn-orn-bloom"><img alt="" class="wc breathe" data-wc="bloom_blush" id="vn-wc-bloom" style="--rot: 14deg"/></span>
+</div>
+<article class="silk-card rv rv-right" id="vn-card">
+<p id="vn-label"></p>
+<h3 id="vn-name"></h3>
+<p id="vn-addr"></p>
+<p id="vn-note">
+<svg aria-hidden="true" fill="none" id="vn-note-svg1" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+<path d="M12 3l1.6 5.4L19 10l-5.4 1.6L12 17l-1.6-5.4L5 10l5.4-1.6z" id="vn-note-svg1-path1"></path></svg><span id="vn-note-t"></span>
+</p>
+<div class="chip-row" id="vn-actions">
+<a class="btn" id="vn-go" rel="noopener" target="_blank">
+<svg aria-hidden="true" fill="none" id="vn-go-svg1" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+<path d="M3.5 11.5L20 4l-7.5 16.5-2-7z" id="vn-go-svg1-path1"></path>
+</svg>
+<span id="vn-go-t"></span>
+</a>
+<button class="btn btn-ghost" id="vn-copy" type="button">
+<svg aria-hidden="true" fill="none" id="vn-copy-svg1" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+<rect height="12" id="vn-copy-svg1-rect1" rx="2" width="12" x="8" y="8"></rect>
+<path d="M16 8V5.5A1.5 1.5 0 0014.5 4h-9A1.5 1.5 0 004 5.5v9A1.5 1.5 0 005.5 16H8" id="vn-copy-svg1-path1"></path>
+</svg>
+<span id="vn-copy-t"></span>
+</button>
+</div>
+</article>
+</div>
+</div>
+</section>
+<section aria-labelledby="dc-title" class="sec" data-section="dresscode" id="sec-dresscode">
+<span class="orn rv rv-bloom" id="dc-orn-a" style="--rd: 0.3s"><img alt="" class="wc breathe" data-wc="coral" id="dc-wc-a" style="--rot: 30deg; --dur: 12s"/></span>
+<div class="wrap" id="dc-wrap">
+<header class="sec-head" id="dc-head">
+<p class="sec-kicker rv" id="dc-kicker">
+<span class="sec-num" id="dc-num"></span><span class="sec-dot" id="dc-dot"></span><span id="dc-kicker-t"></span>
+</p>
+<h2 class="sec-title split" id="dc-title"></h2>
+<p class="sec-script rv" id="dc-script" style="--rd: 0.5s"></p>
+</header>
+<div id="dc-grid">
+<div class="rv rv-zoom" id="dc-stage">
+<svg aria-hidden="true" id="dc-silk" viewbox="0 0 300 400">
+<defs id="dc-silk-defs1">
+<clippath id="dc-clip">
+<path d="M52 44h196c4 70 10 150 24 230 6 38 2 70-6 100-26-10-44 6-70 2-24-4-38-16-60-12-24 4-44 18-70 8-12-32-14-66-8-100 12-76 6-150-6-228z" id="dc-clip-path"></path>
+</clippath>
+<lineargradient id="dc-folds" x1="0" x2="1" y1="0" y2="0">
+<stop id="dc-folds-stop1" offset="0" stop-color="#5a2c40" stop-opacity="0.18"></stop>
+<stop id="dc-folds-stop2" offset="0.12" stop-color="#fff" stop-opacity="0.35"></stop>
+<stop id="dc-folds-stop3" offset="0.24" stop-color="#5a2c40" stop-opacity="0.12"></stop>
+<stop id="dc-folds-stop4" offset="0.38" stop-color="#fff" stop-opacity="0.42"></stop>
+<stop id="dc-folds-stop5" offset="0.52" stop-color="#5a2c40" stop-opacity="0.16"></stop>
+<stop id="dc-folds-stop6" offset="0.66" stop-color="#fff" stop-opacity="0.36"></stop>
+<stop id="dc-folds-stop7" offset="0.8" stop-color="#5a2c40" stop-opacity="0.12"></stop>
+<stop id="dc-folds-stop8" offset="0.92" stop-color="#fff" stop-opacity="0.3"></stop>
+<stop id="dc-folds-stop9" offset="1" stop-color="#5a2c40" stop-opacity="0.2"></stop>
+</lineargradient>
+<lineargradient id="dc-shine" x1="0" x2="1" y1="0" y2="0">
+<stop id="dc-shine-stop1" offset="0" stop-color="#fff" stop-opacity="0"></stop>
+<stop id="dc-shine-stop2" offset="0.5" stop-color="#fff" stop-opacity="0.6"></stop>
+<stop id="dc-shine-stop3" offset="1" stop-color="#fff" stop-opacity="0"></stop>
+</lineargradient>
+<lineargradient id="dc-rod-g" x1="0" x2="0" y1="0" y2="1">
+<stop id="dc-rod-g-stop1" offset="0" stop-color="#f1dcb5"></stop>
+<stop id="dc-rod-g-stop2" offset="0.5" stop-color="#c9a066"></stop>
+<stop id="dc-rod-g-stop3" offset="1" stop-color="#9c7744"></stop>
+</lineargradient>
+</defs>
+<g clip-path="url(#dc-clip)" id="dc-fabric">
+<rect fill="#fbf4ee" height="400" id="dc-base" width="300" x="0" y="0"></rect>
+<g id="dc-dyes"></g>
+<rect fill="url(#dc-folds)" height="400" id="dc-fold-layer" width="300" x="0" y="0"></rect>
+<rect fill="url(#dc-shine)" height="400" id="dc-shine-rect" width="140" x="-160" y="0"></rect>
+</g>
+<path d="M52 44h196c4 70 10 150 24 230 6 38 2 70-6 100-26-10-44 6-70 2-24-4-38-16-60-12-24 4-44 18-70 8-12-32-14-66-8-100 12-76 6-150-6-228z" fill="none" id="dc-outline" stroke="#c66a85" stroke-opacity="0.25" stroke-width="1"></path>
+<rect fill="url(#dc-rod-g)" height="12" id="dc-rod" rx="6" width="240" x="30" y="32"></rect>
+<circle cx="28" cy="38" fill="url(#dc-rod-g)" id="dc-rod-l" r="9"></circle>
+<circle cx="272" cy="38" fill="url(#dc-rod-g)" id="dc-rod-r" r="9"></circle>
+<path d="M150 32V8" id="dc-hook-line" stroke="#b98f55" stroke-width="1"></path>
+<circle cx="150" cy="6" fill="none" id="dc-hook" r="4" stroke="#b98f55" stroke-width="1.2"></circle>
+</svg>
+<span class="orn" id="dc-orn-bloom"><img alt="" class="wc breathe" data-wc="bloom_blush" id="dc-wc-bloom" style="--rot: -12deg"/></span>
+<span class="orn" id="dc-orn-sprig"><img alt="" class="wc sway" data-wc="sprig_3" id="dc-wc-sprig" style="--rot: 12deg"/></span>
+</div>
+<div id="dc-side">
+<p class="rv" id="dc-text"></p>
+<div class="rv" id="dc-swatches">
+<button class="dc-sw" data-color="#f2c3cb" id="dc-sw-1" style="--sw: #f2c3cb" type="button">
+<svg aria-hidden="true" class="dc-sw-svg" id="dc-sw-svg-1" viewbox="0 0 40 40">
+<use href="#dc-def-peony" id="dc-sw-svg-1-use1"></use>
+</svg>
+<span class="dc-sw-name" id="dc-sw-name-1"></span>
+</button>
+<button class="dc-sw" data-color="#f3b09c" id="dc-sw-2" style="--sw: #f3b09c" type="button">
+<svg aria-hidden="true" class="dc-sw-svg" id="dc-sw-svg-2" viewbox="0 0 40 40">
+<use href="#dc-def-peony" id="dc-sw-svg-2-use1"></use>
+</svg>
+<span class="dc-sw-name" id="dc-sw-name-2"></span>
+</button>
+<button class="dc-sw" data-color="#f5ead6" id="dc-sw-3" style="--sw: #f5ead6" type="button">
+<svg aria-hidden="true" class="dc-sw-svg" id="dc-sw-svg-3" viewbox="0 0 40 40">
+<use href="#dc-def-peony" id="dc-sw-svg-3-use1"></use>
+</svg>
+<span class="dc-sw-name" id="dc-sw-name-3"></span>
+</button>
+<button class="dc-sw" data-color="#d6c3e8" id="dc-sw-4" style="--sw: #d6c3e8" type="button">
+<svg aria-hidden="true" class="dc-sw-svg" id="dc-sw-svg-4" viewbox="0 0 40 40">
+<use href="#dc-def-peony" id="dc-sw-svg-4-use1"></use>
+</svg>
+<span class="dc-sw-name" id="dc-sw-name-4"></span>
+</button>
+</div>
+<p aria-live="polite" class="rv" id="dc-pick"></p>
+</div>
+</div>
+</div>
+</section>
+<section aria-labelledby="gl-title" class="sec" data-section="gallery" id="sec-gallery">
+<span class="orn rv rv-bloom" id="gl-orn-a" style="--rd: 0.3s"><img alt="" class="wc breathe" data-wc="ivory" id="gl-wc-a" style="--rot: 34deg; --dur: 13s"/></span>
+<span class="orn rv rv-grow" id="gl-orn-b" style="--rd: 0.6s"><img alt="" class="wc sway" data-wc="sprig_5" id="gl-wc-b" style="--rot: -20deg"/></span>
+<div class="wrap" id="gl-wrap">
+<header class="sec-head" id="gl-head">
+<p class="sec-kicker rv" id="gl-kicker">
+<span class="sec-num" id="gl-num"></span><span class="sec-dot" id="gl-dot"></span><span id="gl-kicker-t"></span>
+</p>
+<h2 class="sec-title split" id="gl-title"></h2>
+<p class="sec-script rv" id="gl-script" style="--rd: 0.5s"></p>
+<p class="sec-lead rv" id="gl-note" style="--rd: 0.7s"></p>
+</header>
+<div id="gl-grid"></div>
+</div>
+</section>
+<section aria-labelledby="gf-title" class="sec" data-section="gift" id="sec-gift">
+<span class="orn rv rv-bloom" id="gf-orn-a" style="--rd: 0.3s"><img alt="" class="wc slowbloom" data-wc="bloom_blush" id="gf-wc-a" style="--rot: -22deg"/></span>
+<span class="orn rv rv-grow" id="gf-orn-b" style="--rd: 0.6s"><img alt="" class="wc sway" data-wc="sprig_2" id="gf-wc-b" style="--rot: 24deg"/></span>
+<div class="wrap" id="gf-wrap">
+<header class="sec-head" id="gf-head">
+<p class="sec-kicker rv" id="gf-kicker">
+<span class="sec-num" id="gf-num"></span><span class="sec-dot" id="gf-dot"></span><span id="gf-kicker-t"></span>
+</p>
+<h2 class="sec-title split" id="gf-title"></h2>
+<p class="sec-script rv" id="gf-script" style="--rd: 0.5s"></p>
+<p class="sec-lead rv" id="gf-intro" style="--rd: 0.7s"></p>
+</header>
+<div id="gf-grid">
+<div class="rv rv-zoom" id="gf-stage">
+<button aria-label="" aria-pressed="false" id="gf-wrapbtn" type="button">
+<svg aria-hidden="true" id="gf-svg" viewbox="-160 -160 320 320">
+<defs id="gf-svg-defs1">
+<lineargradient id="gf-g-base" x1="0" x2="1" y1="0" y2="1">
+<stop id="gf-g-base-stop1" offset="0" stop-color="#fff8f3"></stop>
+<stop id="gf-g-base-stop2" offset="1" stop-color="#f6dfe0"></stop>
+</lineargradient>
+<lineargradient id="gf-g-flap" x1="0" x2="1" y1="0" y2="1">
+<stop id="gf-g-flap-stop1" offset="0" stop-color="#fbe2e7"></stop>
+<stop id="gf-g-flap-stop2" offset="0.45" stop-color="#f1b9c6"></stop>
+<stop id="gf-g-flap-stop3" offset="0.7" stop-color="#fbe2e7"></stop>
+<stop id="gf-g-flap-stop4" offset="1" stop-color="#e49cb0"></stop>
+</lineargradient>
+<lineargradient id="gf-g-knot" x1="0" x2="0" y1="0" y2="1">
+<stop id="gf-g-knot-stop1" offset="0" stop-color="#f7d0d9"></stop>
+<stop id="gf-g-knot-stop2" offset="1" stop-color="#d27f98"></stop>
+</lineargradient>
+<pattern height="18" id="gf-pat" patterntransform="rotate(30)" patternunits="userSpaceOnUse" width="18">
+<circle cx="4" cy="4" fill="#fff" fill-opacity="0.55" id="gf-pat-circle1" r="1.3"></circle>
+<circle cx="13" cy="13" fill="#c66a85" fill-opacity="0.18" id="gf-pat-circle2" r="0.9"></circle>
+</pattern>
+</defs>
+<rect fill="url(#gf-g-base)" height="124" id="gf-base" rx="6" stroke="#e7b9c4" stroke-width="1" width="124" x="-62" y="-62"></rect>
+<g class="gf-flap" id="gf-flap-t">
+<path d="M-62 -62H62L8 -150Q0 -158 -8 -150Z" fill="url(#gf-g-flap)" id="gf-flap-t-p"></path>
+<path d="M-62 -62H62L8 -150Q0 -158 -8 -150Z" fill="url(#gf-pat)" id="gf-flap-t-pt"></path>
+</g>
+<g class="gf-flap" id="gf-flap-r">
+<path d="M62 -62V62L150 8Q158 0 150 -8Z" fill="url(#gf-g-flap)" id="gf-flap-r-p"></path>
+<path d="M62 -62V62L150 8Q158 0 150 -8Z" fill="url(#gf-pat)" id="gf-flap-r-pt"></path>
+</g>
+<g class="gf-flap" id="gf-flap-b">
+<path d="M62 62H-62L-8 150Q0 158 8 150Z" fill="url(#gf-g-flap)" id="gf-flap-b-p"></path>
+<path d="M62 62H-62L-8 150Q0 158 8 150Z" fill="url(#gf-pat)" id="gf-flap-b-pt"></path>
+</g>
+<g class="gf-flap" id="gf-flap-l">
+<path d="M-62 62V-62L-150 -8Q-158 0 -150 8Z" fill="url(#gf-g-flap)" id="gf-flap-l-p"></path>
+<path d="M-62 62V-62L-150 -8Q-158 0 -150 8Z" fill="url(#gf-pat)" id="gf-flap-l-pt"></path>
+</g>
+<g id="gf-knot">
+<path d="M-4 -6C-30 -40 -58 -30 -46 -10-38 4-16 2-4 -6z" fill="url(#gf-g-knot)" id="gf-ear-l"></path>
+<path d="M4 -6C30 -40 58 -30 46 -10 38 4 16 2 4 -6z" fill="url(#gf-g-knot)" id="gf-ear-r"></path>
+<path d="M-6 6C-16 24-18 40-30 52l10 2c10-12 14-30 16-46z" fill="url(#gf-g-knot)" id="gf-tail-l"></path>
+<path d="M6 6c10 18 12 34 24 46l-10 2C10 42 6 24 4 8z" fill="url(#gf-g-knot)" id="gf-tail-r"></path>
+<ellipse cx="0" cy="0" fill="#e597aa" id="gf-knot-c" rx="11" ry="10"></ellipse>
+<path d="M-30 -22c8-6 18-5 24 6M30 -22c-8-6-18-5-24 6" fill="none" id="gf-knot-hl" stroke="#fff" stroke-opacity="0.55" stroke-width="1.4"></path>
+</g>
+</svg>
+<span id="gf-bouquet"><img alt="" class="wc" data-wc="bouquet" id="gf-wc-bouquet"/></span>
+</button>
+<p aria-live="polite" id="gf-hint"></p>
+</div>
+<div id="gf-side">
+<form class="silk-card rv" data-wedivo="gift-form" id="gf-form">
+<p class="form-title" id="gf-form-title"></p>
+<p class="form-sub" id="gf-form-sub"></p>
+<label class="f-label" for="gf-name" id="gf-name-l"></label>
+<input class="f-input" id="gf-name" maxlength="100" name="senderName" placeholder="" required=""/>
+<label class="f-label" for="gf-amount" hidden="" id="gf-amount-l"></label>
+<input class="f-input" hidden="" id="gf-amount" inputmode="numeric" name="amount" placeholder="" type="number"/>
+<label class="f-label" for="gf-msg" hidden="" id="gf-msg-l"></label>
+<textarea class="f-input" hidden="" id="gf-msg" name="message" placeholder="" rows="3"></textarea>
+<button class="btn" id="gf-submit" type="submit">
+<span id="gf-submit-t"></span>
+</button>
+<p class="form-ok" id="gf-ok"></p>
+<p class="form-err" id="gf-err"></p>
+</form>
+<div class="silk-card rv" hidden="" id="gf-address">
+<p id="gf-address-label"></p>
+<p id="gf-address-text"></p>
+<button class="btn btn-ghost" id="gf-copy" type="button">
+<svg aria-hidden="true" fill="none" id="gf-copy-svg1" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+<rect height="12" id="gf-copy-svg1-rect1" rx="2" width="12" x="8" y="8"></rect>
+<path d="M16 8V5.5A1.5 1.5 0 0014.5 4h-9A1.5 1.5 0 004 5.5v9A1.5 1.5 0 005.5 16H8" id="gf-copy-svg1-path1"></path>
+</svg>
+<span id="gf-copy-t"></span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section aria-labelledby="rs-title" class="sec" data-section="rsvp" id="sec-rsvp">
+<div id="rs-bg"></div>
+<span class="orn rv rv-bloom" id="rs-orn-a" style="--rd: 0.3s"><img alt="" class="wc breathe" data-wc="lilac" id="rs-wc-a" style="--rot: -30deg; --dur: 12s"/></span>
+<div class="wrap" id="rs-wrap">
+<header class="sec-head" id="rs-head">
+<p class="sec-kicker rv" id="rs-kicker">
+<span class="sec-num" id="rs-num"></span><span class="sec-dot" id="rs-dot"></span><span id="rs-kicker-t"></span>
+</p>
+<h2 class="sec-title split" id="rs-title"></h2>
+<p class="sec-script rv" id="rs-script" style="--rd: 0.5s"></p>
+<p class="sec-lead rv" id="rs-intro" style="--rd: 0.7s"></p>
+</header>
+<div id="rs-grid">
+<div class="rv rv-zoom" id="rs-stage">
+<div id="rs-scene">
+<span class="rs-green" id="rs-green-1"><img alt="" class="wc sway" data-wc="sprig_2" id="rs-wc-green-1" style="--rot: -16deg; --dur: 8s; --amp: 2deg"/></span>
+<span class="rs-green" id="rs-green-2"><img alt="" class="wc sway" data-wc="sprig_6" id="rs-wc-green-2" style="--rot: 18deg; --dur: 9s; --dl: -3s; --amp: 2deg"/></span>
+<div id="rs-stems"></div>
+<svg aria-hidden="true" id="rs-vase" viewbox="0 0 220 240">
+<defs id="rs-vase-defs1">
+<lineargradient id="rs-glass" x1="0" x2="1" y1="0" y2="0">
+<stop id="rs-glass-stop1" offset="0" stop-color="#ffffff" stop-opacity="0.55"></stop>
+<stop id="rs-glass-stop2" offset="0.25" stop-color="#f6e6ea" stop-opacity="0.35"></stop>
+<stop id="rs-glass-stop3" offset="0.7" stop-color="#ffffff" stop-opacity="0.2"></stop>
+<stop id="rs-glass-stop4" offset="1" stop-color="#e9c9d2" stop-opacity="0.6"></stop>
+</lineargradient>
+<lineargradient id="rs-water" x1="0" x2="0" y1="0" y2="1">
+<stop id="rs-water-stop1" offset="0" stop-color="#d9ecef" stop-opacity="0.7"></stop>
+<stop id="rs-water-stop2" offset="1" stop-color="#b9d6dc" stop-opacity="0.55"></stop>
+</lineargradient>
+<clippath id="rs-vase-clip">
+<path d="M70 20h80c-2 18-6 30-2 42 30 26 46 56 46 92 0 46-30 76-84 76S26 200 26 154c0-36 16-66 46-92 4-12 0-24-2-42z" id="rs-vase-clip-p"></path>
+</clippath>
+</defs>
+<g clip-path="url(#rs-vase-clip)" id="rs-vase-in">
+<rect fill="url(#rs-water)" height="120" id="rs-water-r" width="220" x="0" y="120"></rect>
+<path d="M0 120q27-6 55 0t55 0 55 0 55 0v6H0z" fill="#ffffff" fill-opacity="0.5" id="rs-water-top"></path>
+</g>
+<path d="M70 20h80c-2 18-6 30-2 42 30 26 46 56 46 92 0 46-30 76-84 76S26 200 26 154c0-36 16-66 46-92 4-12 0-24-2-42z" fill="url(#rs-glass)" id="rs-vase-body" stroke="#c995a6" stroke-opacity="0.65" stroke-width="1.4"></path>
+<ellipse cx="110" cy="20" fill="#fff" fill-opacity="0.5" id="rs-vase-lip" rx="40" ry="6" stroke="#c995a6" stroke-opacity="0.65" stroke-width="1.2"></ellipse>
+<path d="M48 150c0-30 12-52 34-72" fill="none" id="rs-vase-hl" stroke="#fff" stroke-linecap="round" stroke-opacity="0.8" stroke-width="5"></path>
+</svg>
+<span id="rs-table"></span>
+<span class="rs-base" id="rs-base-1"><img alt="" class="wc sway" data-wc="sprig_4" id="rs-wc-base-1" style="--rot: -64deg; --dur: 10s"/></span>
+<span class="rs-base" id="rs-base-2"><img alt="" class="wc flutter" data-wc="petal_3" id="rs-wc-base-2" style="--pr: 30deg; --dur: 7s"/></span>
+<div id="rs-petals"></div>
+</div>
+<p aria-live="polite" id="rs-caption"></p>
+</div>
+<div id="rs-side">
+<form class="silk-card rv" data-wedivo="rsvp" id="rs-form">
+<p class="form-title" id="rs-form-title"></p>
+<p class="form-sub" id="rs-deadline"><b id="rs-deadline-date"></b>
+</p>
+<label class="f-label" for="rs-name" id="rs-name-l"></label>
+<input class="f-input" id="rs-name" maxlength="100" name="name" placeholder="" required=""/>
+<p class="f-label" id="rs-status-l"></p>
+<div id="rs-status">
+<button class="rs-st" data-wedivo-status="attending" id="rs-st-yes" type="button"></button>
+<button class="rs-st" data-wedivo-status="maybe" id="rs-st-maybe" type="button"></button>
+<button class="rs-st" data-wedivo-status="not_attending" id="rs-st-no" type="button"></button>
+</div>
+<label class="f-label" for="rs-pax" hidden="" id="rs-pax-l"></label>
+<input class="f-input" id="rs-pax" max="20" min="1" name="pax" type="hidden" value="1"/>
+<label class="f-label" for="rs-msg" id="rs-msg-l"></label>
+<textarea class="f-input" id="rs-msg" maxlength="1000" name="message" placeholder="" rows="3"></textarea>
+<button class="btn" id="rs-submit" type="submit">
+<span id="rs-submit-t"></span>
+</button>
+<p class="form-ok" id="rs-ok"></p>
+<p class="form-err" id="rs-err"></p>
+</form>
+<button class="btn btn-ghost rv" data-wedivo="checkin-cta" hidden="" id="rs-checkin" type="button">
+<svg aria-hidden="true" fill="none" id="rs-checkin-svg1" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+<path d="M4 8V5.5A1.5 1.5 0 015.5 4H8M16 4h2.5A1.5 1.5 0 0120 5.5V8M20 16v2.5a1.5 1.5 0 01-1.5 1.5H16M8 20H5.5A1.5 1.5 0 014 18.5V16M8 12h8" id="rs-checkin-svg1-path1"></path>
+</svg>
+<span id="rs-checkin-t"></span>
+</button>
+<p class="rv" hidden="" id="rs-checkin-note"></p>
+</div>
+</div>
+</div>
+</section>
+<section aria-labelledby="ws-title" class="sec" data-section="wishes" id="sec-wishes">
+<span class="orn rv rv-drop" id="ws-orn-garland"><img alt="" class="wc sway-top" data-wc="garland" id="ws-wc-garland" style="--amp: 1deg; --dur: 11s"/></span>
+<span class="orn rv rv-bloom" id="ws-orn-a" style="--rd: 0.4s"><img alt="" class="wc breathe" data-wc="half" id="ws-wc-a" style="--rot: 24deg"/></span>
+<div class="wrap" id="ws-wrap">
+<header class="sec-head" id="ws-head">
+<p class="sec-kicker rv" id="ws-kicker">
+<span class="sec-num" id="ws-num"></span><span class="sec-dot" id="ws-dot"></span><span id="ws-kicker-t"></span>
+</p>
+<h2 class="sec-title split" id="ws-title"></h2>
+<p class="sec-script rv" id="ws-script" style="--rd: 0.5s"></p>
+<p class="sec-lead rv" id="ws-intro" style="--rd: 0.7s"></p>
+</header>
+<div id="ws-grid">
+<div id="ws-formcol">
+<div class="chip-row rv" id="ws-chips">
+<button class="ws-chip" data-text="" id="ws-chip-1" type="button"></button>
+<button class="ws-chip" data-text="" id="ws-chip-2" type="button"></button>
+<button class="ws-chip" data-text="" id="ws-chip-3" type="button"></button>
+</div>
+<form class="silk-card rv" data-wedivo="comments-form" id="ws-form">
+<p class="form-title" id="ws-form-title"></p>
+<label class="f-label" for="ws-name" id="ws-name-l"></label>
+<input class="f-input" id="ws-name" maxlength="100" name="name" placeholder="" required=""/>
+<label class="f-label" for="ws-msg" id="ws-msg-l"></label>
+<textarea class="f-input" id="ws-msg" maxlength="2000" name="message" placeholder="" required="" rows="4"></textarea>
+<button class="btn" id="ws-submit" type="submit">
+<span id="ws-submit-t"></span>
+</button>
+</form>
+</div>
+<div id="ws-wall">
+<p class="rv" id="ws-count">
+<span id="ws-count-full"><span id="ws-count-n"></span></span><span id="ws-count-empty"></span>
+</p>
+<div data-wedivo="comments-list" id="ws-list">
+
+</div>
+<template data-wedivo="comment-template" id="ws-tpl">
+<article class="ws-card">
+<span class="ws-petal"></span>
+<p class="ws-msg" data-field="message"></p>
+<p class="ws-name" data-field="name"></p>
+<p class="ws-date" data-field="date"></p>
+</article>
+</template>
+<button class="btn btn-ghost" data-wedivo="comments-more" id="ws-more" type="button"></button>
+</div>
+</div>
+</div>
+</section>
+<footer aria-labelledby="cl-thanks" class="sec" data-section="closing" id="sec-closing">
+<div id="cl-bg"></div>
+<span class="orn rv rv-drop" id="cl-orn-garland"><img alt="" class="wc sway-top" data-wc="garland" id="cl-wc-garland" style="--amp: 1deg; --dur: 12s"/></span>
+<span class="orn rv rv-bloom" id="cl-orn-l" style="--rd: 0.5s"><img alt="" class="wc slowbloom" data-wc="bloom_blush" id="cl-wc-l" style="--rot: 30deg"/></span>
+<span class="orn rv rv-bloom" id="cl-orn-r" style="--rd: 0.8s"><img alt="" class="wc breathe" data-wc="coral" id="cl-wc-r" style="--rot: -24deg; --dur: 11s"/></span>
+<span class="orn rv rv-grow" id="cl-orn-s" style="--rd: 1s"><img alt="" class="wc sway" data-wc="sprig_1" id="cl-wc-s" style="--rot: 18deg"/></span>
+<div class="wrap" id="cl-wrap">
+<div class="rv rv-zoom" id="cl-bloomwrap">
+<span class="orn" id="cl-wreath"><img alt="" class="wc" data-wc="wreath" id="cl-wc-wreath"/></span>
+<span class="orn" id="cl-bouquet"><img alt="" class="wc sway" data-wc="bouquet" id="cl-wc-bouquet" style="--amp: 2deg; --dur: 9s"/></span>
+</div>
+<p class="rv" id="cl-kicker"></p>
+<h2 class="rv" id="cl-thanks" style="--rd: 0.2s">
+<span id="cl-thanks-named"><span id="cl-guest"></span></span>
+<span id="cl-thanks-generic"></span>
+</h2>
+<p class="rv" id="cl-msg" style="--rd: 0.35s"></p>
+<p class="rv" id="cl-names" style="--rd: 0.5s">
+<span id="cl-name-1"></span><span id="cl-amp"></span><span id="cl-name-2"></span>
+</p>
+<p class="rv" id="cl-fam" style="--rd: 0.6s"></p>
+<p class="rv" id="cl-salam" style="--rd: 0.7s"></p>
+<div class="chip-row rv" id="cl-actions" style="--rd: 0.8s">
+<button class="cl-hashtag" id="cl-tag" type="button">
+<span id="cl-tag-t"></span>
+<svg aria-hidden="true" fill="none" id="cl-tag-svg1" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+<rect height="12" id="cl-tag-svg1-rect1" rx="2" width="12" x="8" y="8"></rect>
+<path d="M16 8V5.5A1.5 1.5 0 0014.5 4h-9A1.5 1.5 0 004 5.5v9A1.5 1.5 0 005.5 16H8" id="cl-tag-svg1-path1"></path>
+</svg>
+</button>
+<button class="btn btn-ghost" id="cl-replay" type="button">
+<svg aria-hidden="true" fill="none" id="cl-replay-svg1" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+<path d="M4.5 12a7.5 7.5 0 102.2-5.3M4.5 4.5v4h4" id="cl-replay-svg1-path1"></path>
+</svg>
+<span id="cl-replay-t"></span>
+</button>
+</div>
+</div>
+</footer>
+<nav aria-label="" data-wedivo="nav" id="pp-nav">
+<div id="nv-sheen"></div>
+<div id="nv-head">
+<p id="nv-head-title"></p>
+<p id="nv-head-sub"></p>
+</div>
+<button aria-expanded="false" aria-label="" class="nv-round" id="nv-meter" type="button">
+<svg aria-hidden="true" id="nv-meter-svg" viewbox="0 0 52 52">
+<circle cx="26" cy="26" fill="none" id="nv-meter-svg-circle1" r="23" stroke="#f6d3d6" stroke-width="2.4"></circle>
+<circle cx="26" cy="26" fill="none" id="nv-meter-arc" r="23" stroke="#c66a85" stroke-dasharray="144.5" stroke-dashoffset="144.5" stroke-linecap="round" stroke-width="2.4"></circle>
+</svg>
+<span class="pp-peony lite" data-palette="blush" data-seed="5" id="nv-meter-peony"></span>
+</button>
+<div id="nv-rail">
+<button class="nv-item" data-nav-target="hero" id="nv-hero" type="button">
+<svg aria-hidden="true" fill="none" id="nv-hero-svg1" stroke="currentColor" stroke-width="1.4" viewbox="0 0 24 24">
+<path d="M12 4.5c2 0 3.2 1.6 3 3.4 1.8-.6 3.6.6 3.6 2.6 0 1.4-1 2.3-2 2.6 1 .5 1.6 1.6 1.2 2.9-.5 1.6-2.3 2.2-3.7 1.5-.2 1.4-1.2 2.5-2.6 2.5s-2.4-1.1-2.6-2.5c-1.4.7-3.2.1-3.7-1.5-.4-1.3.2-2.4 1.2-2.9-1-.3-2-1.2-2-2.6 0-2 1.8-3.2 3.6-2.6-.2-1.8 1-3.4 3-3.4z" id="nv-hero-svg1-path1"></path>
+<circle cx="12" cy="12" id="nv-hero-svg1-circle1" r="2.4"></circle></svg><span id="nv-hero-span1"></span>
+</button>
+<button class="nv-item" data-nav-target="greeting" id="nv-greeting" type="button">
+<svg aria-hidden="true" fill="none" id="nv-greeting-svg1" stroke="currentColor" stroke-width="1.4" viewbox="0 0 24 24">
+<rect height="12.5" id="nv-greeting-svg1-rect1" rx="2" width="17" x="3.5" y="6"></rect>
+<path d="M4 7l8 6 8-6" id="nv-greeting-svg1-path1"></path></svg><span id="nv-greeting-span1"></span>
+</button>
+<button class="nv-item" data-nav-target="couple" id="nv-couple" type="button">
+<svg aria-hidden="true" fill="none" id="nv-couple-svg1" stroke="currentColor" stroke-width="1.4" viewbox="0 0 24 24">
+<circle cx="9" cy="13.5" id="nv-couple-svg1-circle1" r="5"></circle>
+<circle cx="15" cy="13.5" id="nv-couple-svg1-circle2" r="5"></circle>
+<path d="M8 6l1-2.5L10 6M14 6l1-2.5L16 6" id="nv-couple-svg1-path1"></path></svg><span id="nv-couple-span1"></span>
+</button>
+<button class="nv-item" data-nav-target="story" id="nv-story" type="button">
+<svg aria-hidden="true" fill="none" id="nv-story-svg1" stroke="currentColor" stroke-width="1.4" viewbox="0 0 24 24">
+<path d="M12 6.5c-2-1.6-5-2-8-1.5v12.5c3-.5 6-.1 8 1.5 2-1.6 5-2 8-1.5V5c-3-.5-6-.1-8 1.5zM12 6.5V19" id="nv-story-svg1-path1"></path></svg><span id="nv-story-span1"></span>
+</button>
+<button class="nv-item" data-nav-target="ants" id="nv-ants" type="button">
+<svg aria-hidden="true" fill="none" id="nv-ants-svg1" stroke="currentColor" stroke-width="1.4" viewbox="0 0 24 24">
+<ellipse cx="7" cy="12.5" id="nv-ants-svg1-ellipse1" rx="3" ry="2.4"></ellipse>
+<circle cx="12" cy="12.5" id="nv-ants-svg1-circle1" r="1.7"></circle>
+<circle cx="16.4" cy="12" id="nv-ants-svg1-circle2" r="2"></circle>
+<path d="M11.2 11L9.6 7.5M12.8 11l1.2-3.5M11.2 14l-1.6 3.5M12.8 14l1.2 3.5M18 10.4l1.8-2.4M18.3 11.3l2.5-.8" id="nv-ants-svg1-path1"></path></svg><span id="nv-ants-span1"></span>
+</button>
+<button class="nv-item" data-nav-target="springs" id="nv-springs" type="button">
+<svg aria-hidden="true" fill="none" id="nv-springs-svg1" stroke="currentColor" stroke-width="1.4" viewbox="0 0 24 24">
+<path d="M12 21v-9M12 12c0-4 3-6.5 7-6.5 0 4-3 6.5-7 6.5zM12 15c0-3-2.5-5-6-5 0 3 2.5 5 6 5z" id="nv-springs-svg1-path1"></path></svg><span id="nv-springs-span1"></span>
+</button>
+<button class="nv-item" data-nav-target="video" id="nv-video" type="button">
+<svg aria-hidden="true" fill="none" id="nv-video-svg1" stroke="currentColor" stroke-width="1.4" viewbox="0 0 24 24">
+<rect height="12" id="nv-video-svg1-rect1" rx="3" width="17" x="3.5" y="6"></rect>
+<path d="M10.5 9.5v5l4.2-2.5z" id="nv-video-svg1-path1"></path></svg><span id="nv-video-span1"></span>
+</button>
+<button class="nv-item" data-nav-target="countdown" id="nv-countdown" type="button">
+<svg aria-hidden="true" fill="none" id="nv-countdown-svg1" stroke="currentColor" stroke-width="1.4" viewbox="0 0 24 24">
+<path d="M7 3.5h10M7 20.5h10M8 3.5c0 4 4 5.5 4 8.5s-4 4.5-4 8.5M16 3.5c0 4-4 5.5-4 8.5s4 4.5 4 8.5" id="nv-countdown-svg1-path1"></path></svg><span id="nv-countdown-span1"></span>
+</button>
+<button class="nv-item" data-nav-target="events" id="nv-events" type="button">
+<svg aria-hidden="true" fill="none" id="nv-events-svg1" stroke="currentColor" stroke-width="1.4" viewbox="0 0 24 24">
+<rect height="15" id="nv-events-svg1-rect1" rx="2.5" width="17" x="3.5" y="5"></rect>
+<path d="M3.5 10h17M8 3v4M16 3v4" id="nv-events-svg1-path1"></path>
+<circle cx="12" cy="14.8" id="nv-events-svg1-circle1" r="1.6"></circle></svg><span id="nv-events-span1"></span>
+</button>
+<button class="nv-item" data-nav-target="rundown" id="nv-rundown" type="button">
+<svg aria-hidden="true" fill="none" id="nv-rundown-svg1" stroke="currentColor" stroke-width="1.4" viewbox="0 0 24 24">
+<path d="M9 7h11M9 12h11M9 17h11" id="nv-rundown-svg1-path1"></path>
+<circle cx="5" cy="7" id="nv-rundown-svg1-circle1" r="1.3"></circle>
+<circle cx="5" cy="12" id="nv-rundown-svg1-circle2" r="1.3"></circle>
+<circle cx="5" cy="17" id="nv-rundown-svg1-circle3" r="1.3"></circle></svg><span id="nv-rundown-span1"></span>
+</button>
+<button class="nv-item" data-nav-target="venue" id="nv-venue" type="button">
+<svg aria-hidden="true" fill="none" id="nv-venue-svg1" stroke="currentColor" stroke-width="1.4" viewbox="0 0 24 24">
+<path d="M12 21s-6.5-6-6.5-11a6.5 6.5 0 0113 0c0 5-6.5 11-6.5 11z" id="nv-venue-svg1-path1"></path>
+<circle cx="12" cy="10" id="nv-venue-svg1-circle1" r="2.4"></circle></svg><span id="nv-venue-span1"></span>
+</button>
+<button class="nv-item" data-nav-target="dresscode" id="nv-dresscode" type="button">
+<svg aria-hidden="true" fill="none" id="nv-dresscode-svg1" stroke="currentColor" stroke-width="1.4" viewbox="0 0 24 24">
+<path d="M9 3.5c0 1.8 1.4 2.5 3 2.5s3-.7 3-2.5M9.5 6L7 9.5l2 1.5-3 9.5h12l-3-9.5 2-1.5L14.5 6" id="nv-dresscode-svg1-path1"></path></svg><span id="nv-dresscode-span1"></span>
+</button>
+<button class="nv-item" data-nav-target="gallery" id="nv-gallery" type="button">
+<svg aria-hidden="true" fill="none" id="nv-gallery-svg1" stroke="currentColor" stroke-width="1.4" viewbox="0 0 24 24">
+<rect height="15" id="nv-gallery-svg1-rect1" rx="2.5" width="17" x="3.5" y="4.5"></rect>
+<circle cx="9" cy="10" id="nv-gallery-svg1-circle1" r="1.8"></circle>
+<path d="M4 17l5-4.5 3.5 3 3-2.5L20 17" id="nv-gallery-svg1-path1"></path></svg><span id="nv-gallery-span1"></span>
+</button>
+<button class="nv-item" data-nav-target="gift" id="nv-gift" type="button">
+<svg aria-hidden="true" fill="none" id="nv-gift-svg1" stroke="currentColor" stroke-width="1.4" viewbox="0 0 24 24">
+<rect height="11" id="nv-gift-svg1-rect1" rx="1.5" width="16" x="4" y="9"></rect>
+<path d="M3 9h18M12 9v11M12 9c-1.5-3-5-4-5-1.5S10 9 12 9zM12 9c1.5-3 5-4 5-1.5S14 9 12 9z" id="nv-gift-svg1-path1"></path></svg><span id="nv-gift-span1"></span>
+</button>
+<button class="nv-item" data-nav-target="rsvp" id="nv-rsvp" type="button">
+<svg aria-hidden="true" fill="none" id="nv-rsvp-svg1" stroke="currentColor" stroke-width="1.4" viewbox="0 0 24 24">
+<path d="M9 11h6l-.6 2c1.7 1 2.6 2.7 2.6 4.5 0 1.7-.8 2.5-2 2.5h-6c-1.2 0-2-.8-2-2.5 0-1.8.9-3.5 2.6-4.5zM12 11V6.5" id="nv-rsvp-svg1-path1"></path>
+<circle cx="12" cy="4.6" id="nv-rsvp-svg1-circle1" r="1.9"></circle></svg><span id="nv-rsvp-span1"></span>
+</button>
+<button class="nv-item" data-nav-target="wishes" id="nv-wishes" type="button">
+<svg aria-hidden="true" fill="none" id="nv-wishes-svg1" stroke="currentColor" stroke-width="1.4" viewbox="0 0 24 24">
+<path d="M4 5.5h16v10H10l-4 3.5v-3.5H4z" id="nv-wishes-svg1-path1"></path>
+<path d="M12 13.3s-3-1.8-3-3.6c0-1 .8-1.7 1.6-1.7.6 0 1.1.3 1.4.8.3-.5.8-.8 1.4-.8.8 0 1.6.7 1.6 1.7 0 1.8-3 3.6-3 3.6z" id="nv-wishes-svg1-path2"></path></svg><span id="nv-wishes-span1"></span>
+</button>
+<button class="nv-item" data-nav-target="closing" id="nv-closing" type="button">
+<svg aria-hidden="true" fill="none" id="nv-closing-svg1" stroke="currentColor" stroke-width="1.4" viewbox="0 0 24 24">
+<path d="M12 3l1.6 5.4L19 10l-5.4 1.6L12 17l-1.6-5.4L5 10l5.4-1.6z" id="nv-closing-svg1-path1"></path>
+<path d="M18 16l.7 2.3L21 19l-2.3.7L18 22l-.7-2.3L15 19l2.3-.7z" id="nv-closing-svg1-path2"></path></svg><span id="nv-closing-span1"></span>
+</button>
+</div>
+<button aria-label="" class="nv-round" id="nv-music" type="button">
+<span id="nv-music-disc"></span>
+<svg aria-hidden="true" id="nv-music-ico" viewbox="0 0 24 24">
+<path class="ico-play" d="M9 7v10l8-5z" fill="currentColor" id="nv-music-ico-path1"></path>
+<path class="ico-pause" d="M8.5 7h2.5v10H8.5zM13 7h2.5v10H13z" fill="currentColor" id="nv-music-ico-path2"></path>
+</svg>
+</button>
+<button aria-pressed="false" id="nv-slowmo" type="button">
+<span id="nv-slowmo-dot"></span><span id="nv-slowmo-t"></span>
+</button>
+</nav>
+<div id="nv-backdrop"></div>
+<div aria-hidden="true" aria-label="" aria-modal="true" id="lb" role="dialog">
+<div id="lb-bg"></div>
+<span class="orn" id="lb-orn-1"><img alt="" class="wc sway-top" data-wc="corner" id="lb-wc-1"/></span>
+<span class="orn" id="lb-orn-2"><img alt="" class="wc sway-top" data-wc="corner" id="lb-wc-2" style="--fx: -1"/></span>
+<figure id="lb-fig">
+<img alt="" id="lb-img"/>
+<figcaption id="lb-cap"></figcaption>
+</figure>
+<button aria-label="" id="lb-close" type="button">
+<svg aria-hidden="true" fill="none" id="lb-close-svg1" stroke="currentColor" stroke-width="1.6" viewbox="0 0 24 24">
+<path d="M6 6l12 12M18 6L6 18" id="lb-close-svg1-path1"></path>
+</svg>
+</button>
+<div id="lb-bar">
+<button aria-label="" id="lb-prev" type="button">
+<svg aria-hidden="true" fill="none" id="lb-prev-svg1" stroke="currentColor" stroke-width="1.6" viewbox="0 0 24 24">
+<path d="M15 5l-7 7 7 7" id="lb-prev-svg1-path1"></path></svg><span id="lb-prev-t"></span>
+</button>
+<span id="lb-count"></span>
+<button aria-label="" id="lb-next" type="button">
+<span id="lb-next-t"></span><svg aria-hidden="true" fill="none" id="lb-next-svg1" stroke="currentColor" stroke-width="1.6" viewbox="0 0 24 24">
+<path d="M9 5l7 7-7 7" id="lb-next-svg1-path1"></path>
+</svg>
+</button>
+</div>
+</div>
+<div aria-live="polite" id="pp-toast" role="status"></div>
+<canvas aria-hidden="true" id="fx-burst"></canvas>
+<audio id="pp-audio" loop="" preload="none"></audio>
+<div hidden="" id="pp-data"></div>
+
+
+
+</body>
+</html>

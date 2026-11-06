@@ -1,0 +1,69 @@
+{
+  "date": "2026-10-26",
+  "errors": [],
+  "checks": [
+    {
+      "check": "uz-Latn names, reduced motion, RSVP no-send",
+      "pass": true
+    },
+    {
+      "check": "uz-Cyrl names, reduced motion, RSVP no-send",
+      "pass": true
+    },
+    {
+      "check": "en names, reduced motion, RSVP no-send",
+      "pass": true
+    },
+    {
+      "check": "ru names, reduced motion, RSVP no-send",
+      "pass": true
+    },
+    {
+      "check": "Mocked RSVP yes/no fixed 1/0 headcount, wish pending privacy, service failure, inactive gift",
+      "pass": true
+    }
+  ],
+  "requests": [
+    {
+      "path": "/api/public/invitations/mock-only/rsvp",
+      "body": {
+        "name": "QA Guest",
+        "status": "yes",
+        "partySize": 1,
+        "note": "",
+        "guestToken": ""
+      }
+    },
+    {
+      "path": "/api/public/invitations/mock-only/rsvp",
+      "body": {
+        "name": "QA Guest",
+        "status": "no",
+        "partySize": 0,
+        "note": "",
+        "guestToken": ""
+      }
+    },
+    {
+      "path": "/api/public/invitations/mock-only/wishes",
+      "body": {
+        "name": "QA Guest",
+        "message": "Pending QA wish",
+        "guestToken": ""
+      }
+    },
+    {
+      "path": "/api/public/invitations/mock-only/wishes",
+      "body": {
+        "name": "QA Guest",
+        "message": "Failure QA wish",
+        "guestToken": ""
+      }
+    }
+  ],
+  "limitations": [
+    "Normal-motion mobile game passed before Uzbek-copy completion; post-translation normal desktop/source comparison remains unverified after repeated browser/GPU timeouts.",
+    "Service checks use mocks; no real persistence/publication check."
+  ],
+  "uzbekResidualEnglish": []
+}

@@ -40,6 +40,20 @@ The browser dashboard does not edit server environment variables or grant roles.
 Deployment operators manage this allowlist using the hosting provider's access
 controls.
 
+If the bot denies an allowlisted account, first compare Telegram's read-only
+`getWebhookInfo` URL with the website host and the hosting project where the
+variable was saved. Different deployments may have different allowlists even
+when both advertise the same bot. Verify the webhook receiver's configuration,
+not only the website's. Keep `APP_URL`, the intended website origin and the bot
+entry links aligned. On Vercel, changed variables require a new deployment in
+the selected environment. Do not change a webhook until its intended target
+and matching webhook secret are confirmed.
+
+A direct `/admin` response of 404 is intentional for anonymous or unauthorized
+requests; it does not establish that the route is missing. Sign in on the same
+website host and inspect `/api/auth/session` in that browser: HTTP 200 alone
+does not prove login; check that `user` exists and `user.isAdmin` is true.
+
 Opening `/` or `/dashboard` automatically resolves the server session, even
 without the SDK. For Telegram launches, the client passes the SDK's opaque signed
 data, or recovers the same payload from `tgWebAppData` in the URL fragment. The

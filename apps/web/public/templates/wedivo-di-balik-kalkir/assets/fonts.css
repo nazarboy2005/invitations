@@ -1,0 +1,56 @@
+@font-face {
+  font-family: 'Albert Sans';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url(./f39b90e7bfb9a715f02b9be3.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Albert Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(./5e9b210e1eecefe13ad9110d.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Albert Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(./5854383d0e00a961a18e7baf.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Albert Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(./c1a06f915ef6290eef6991ee.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Ballet';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(./32250f1d6b95ee148ac05390.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Bellefair';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(./44bc8348c42f900ddf3e18c9.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Castoro';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(./2f1cf2fde512941dc0f99a30.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Castoro';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(./0a632e55db9003265bef1de7.ttf) format('truetype');
+}

@@ -1,0 +1,13 @@
+body.awaiting-data { visibility: hidden; }
+[hidden] { display: none !important; }
+button:disabled, input:disabled, textarea:disabled { opacity: .6; cursor: not-allowed; }
+#platform-gift-notice, #platform-wish-result { white-space: pre-wrap; color: var(--gold-hi); }
+.platform-reduced *, .platform-reduced *::before, .platform-reduced *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+.platform-reduced .rv { opacity: 1 !important; transform: none !important; filter: none !important; }
+#cv-sub-names, #hero-g, #hero-b, .sheet-name { overflow-wrap: anywhere; }
+.slot.is-new::after { content: var(--oath-new, "New"); }
+.buff-name::before { content: var(--oath-blessing, "Blessing of "); }
+.buff-date::after { content: var(--oath-duration, " · Duration: forever"); }
+#wish-list:empty::before { content: var(--oath-empty, "No approved wishes yet."); }
+.turn.is-now::after { content: var(--oath-current, "Now acting"); }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; } .rv { opacity: 1 !important; transform: none !important; } }

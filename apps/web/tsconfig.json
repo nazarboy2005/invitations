@@ -63,10 +63,10 @@
     ".next-einv-template-release-check3/types/**/*.ts",
     ".next-einv-template-release-check3/dev/types/**/*.ts",
     ".next-einv-template-release-check4/dev/types/**/*.ts",
-    ".next-static-collection/types/**/*.ts",
-    ".next-static-collection/dev/types/**/*.ts",
-    ".next-sahar-ifori/types/**/*.ts",
-    ".next-sahar-ifori/dev/types/**/*.ts"
+    ".next-payments-test/types/**/*.ts",
+    ".next-payments-test/dev/types/**/*.ts",
+    ".next-taklifla/types/**/*.ts",
+    ".next-taklifla/dev/types/**/*.ts"
   ],
   "exclude": [
     "node_modules"

@@ -1,0 +1,1648 @@
+
+<html lang="uz-Latn">
+<head>
+
+
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
+
+
+
+<meta content="#5c0716" name="theme-color"/>
+
+<meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><link href="assets/fonts.css" rel="stylesheet"/><link href="source/template.css" rel="stylesheet"/><link href="adapter.css" rel="stylesheet"/></head>
+<body id="page-body">
+<div aria-hidden="true" id="env">
+<div id="env-sky"></div>
+<div class="env-scene" id="env-scene-dawn"></div>
+<div class="env-scene" id="env-scene-gold"></div>
+<div class="env-scene" id="env-scene-night"></div>
+<div id="env-sun">
+<span id="env-sun-core"></span><span id="env-moon"></span>
+</div>
+<div id="env-rays"></div>
+<div id="env-mist">
+<span id="env-mist-a"></span><span id="env-mist-b"></span>
+</div>
+<canvas id="env-canvas"></canvas>
+<div id="env-wash"></div>
+<div id="env-vignette"></div>
+</div>
+<section aria-label="" data-section="cover" id="sec-cover">
+<div aria-hidden="true" id="cover-bg">
+<div id="cover-scene"></div>
+<div id="cover-glow"></div>
+<div id="cover-rays"></div>
+<div class="cover-mist" id="cover-mist-a"></div>
+<div class="cover-mist" id="cover-mist-b"></div>
+<div id="cover-vignette"></div>
+</div>
+<div aria-hidden="true" id="cover-fall">
+<i class="cf" id="a-cover-i-1" style="--x: 6%; --t: 11s; --d: -1s; --s: 0.9; --c: #9b1028"></i>
+<i class="cf" id="a-cover-i-2" style="--x: 14%; --t: 13s; --d: -6s; --s: 0.7; --c: #e7a39a"></i>
+<i class="cf" id="a-cover-i-3" style="--x: 22%; --t: 10s; --d: -3s; --s: 1; --c: #7c0a1c"></i>
+<i class="cf" id="a-cover-i-4" style="--x: 31%; --t: 14s; --d: -9s; --s: 0.6; --c: #f3cfc6"></i>
+<i class="cf" id="a-cover-i-5" style="--x: 39%; --t: 12s; --d: -2s; --s: 0.85; --c: #b3192f"></i>
+<i class="cf" id="a-cover-i-6" style="--x: 47%; --t: 15s; --d: -11s; --s: 0.65; --c: #f0b8a8"></i>
+<i class="cf" id="a-cover-i-7" style="--x: 55%; --t: 11s; --d: -5s; --s: 1.05; --c: #8e0f24"></i>
+<i class="cf" id="a-cover-i-8" style="--x: 63%; --t: 13s; --d: -8s; --s: 0.75; --c: #f6dcd2"></i>
+<i class="cf" id="a-cover-i-9" style="--x: 71%; --t: 10s; --d: -4s; --s: 0.9; --c: #a3122b"></i>
+<i class="cf" id="a-cover-i-10" style="--x: 79%; --t: 14s; --d: -12s; --s: 0.6; --c: #ec9f8f"></i>
+<i class="cf" id="a-cover-i-11" style="--x: 87%; --t: 12s; --d: -7s; --s: 0.95; --c: #6e0918"></i>
+<i class="cf" id="a-cover-i-12" style="--x: 94%; --t: 15s; --d: -10s; --s: 0.7; --c: #f3c6bd"></i>
+<i class="cf" id="a-cover-i-13" style="--x: 35%; --t: 16s; --d: -14s; --s: 0.55; --c: #d23a52"></i>
+<i class="cf" id="a-cover-i-14" style="--x: 68%; --t: 17s; --d: -15s; --s: 0.5; --c: #fbe6dd"></i>
+</div>
+<div aria-hidden="true" id="cover-deco">
+<span class="cdk" id="cdk-stem" style="--w: clamp(120px, 30vw, 230px)"><img alt="" class="cut a-sway" data-cut="rose_stem" id="a-cover-img-1" style="--dur: 7s"/></span>
+<span class="cdk" id="cdk-white" style="--w: clamp(96px, 24vw, 190px)"><img alt="" class="cut a-sway" data-cut="rose_white" id="a-cover-img-2" style="--dur: 8.5s; --del: -2s"/></span>
+<span class="cdk" id="cdk-red" style="--w: clamp(170px, 46vw, 360px)"><img alt="" class="cut a-breathe" data-cut="rose_red" id="a-cover-img-3" style="--dur: 9s"/></span>
+<span class="cdk" id="cdk-coral" style="--w: clamp(120px, 32vw, 250px)"><img alt="" class="cut a-breathe" data-cut="rose_coral" id="a-cover-img-4" style="--dur: 10s; --del: -3s"/></span>
+<span class="cdk" id="cdk-blush" style="--w: clamp(110px, 28vw, 220px)"><img alt="" class="cut a-breathe" data-cut="rose_blush" id="a-cover-img-5" style="--dur: 11s; --del: -5s"/></span>
+<span class="cdk" id="cdk-bud-a" style="--w: clamp(30px, 8vw, 56px)"><img alt="" class="cut a-float" data-cut="bud_2" id="a-cover-img-6" style="--dur: 6s"/></span>
+<span class="cdk" id="cdk-bud-b" style="--w: clamp(26px, 7vw, 50px)"><img alt="" class="cut a-float" data-cut="bud_5" id="a-cover-img-7" style="--dur: 7.5s; --del: -2s"/></span>
+<span class="cdk" id="cdk-bud-c" style="--w: clamp(28px, 7vw, 52px)"><img alt="" class="cut a-float" data-cut="bud_7" id="a-cover-img-8" style="--dur: 6.8s; --del: -4s"/></span>
+</div>
+<div aria-hidden="true" id="cover-bloom-wrap">
+<div class="bloom bloom-cover is-half" data-preset="cover" id="cover-bloom">
+<div class="bloom-core" id="cover-bloom-core">
+<span id="cover-core-mono"></span>
+</div>
+</div>
+</div>
+<div aria-hidden="true" id="cover-flash"></div>
+<div id="cover-content">
+<div id="cover-top">
+<p id="cover-kicker">
+<span class="ck-line" id="cover-kicker-line-l"></span><span id="cover-kicker-text"></span><span class="ck-line" id="cover-kicker-line-r"></span>
+</p>
+<h1 id="cover-names">
+<span id="cover-name-b"></span><span id="cover-amp">&amp;</span><span id="cover-name-g"></span>
+</h1>
+<p class="js-date-long" id="cover-date"></p>
+</div>
+<div id="cover-spacer"></div>
+<div id="cover-bottom">
+<div id="cover-guest">
+<p id="guest-greeting">
+<span id="guest-greeting-label"></span><span id="guest-greeting-name"></span>
+</p>
+<p id="guest-greeting-generic">
+<span id="guest-generic-label"></span><span id="guest-generic-name"></span>
+</p>
+</div>
+<p id="cover-note"></p>
+<button id="cover-open" type="button">
+<span aria-hidden="true" id="cover-open-ico"></span><span id="cover-open-text"></span>
+</button>
+<p id="cover-hint"></p>
+</div>
+</div>
+</section>
+<header class="sec" data-section="hero" id="sec-hero">
+<div aria-hidden="true" id="hero-deco">
+<span class="dk rv rv-left" id="hdk-stem" style="--d: 0.5s; --w: clamp(110px, 26vw, 220px)"><img alt="" class="cut a-sway" data-cut="rose_dark" id="a-hero-img-1" style="--dur: 8s"/></span>
+<span class="dk rv rv-right" id="hdk-white" style="--d: 0.6s; --w: clamp(90px, 22vw, 180px)"><img alt="" class="cut a-sway" data-cut="rose_white" id="a-hero-img-2" style="--dur: 9s; --del: -3s"/></span>
+<span class="dk rv rv-zoom" id="hdk-red" style="--d: 0.7s; --w: clamp(150px, 38vw, 300px)"><img alt="" class="cut a-breathe" data-cut="rose_red" id="a-hero-img-3" style="--dur: 10s"/></span>
+<span class="dk rv rv-zoom" id="hdk-blush" style="--d: 0.8s; --w: clamp(120px, 30vw, 240px)"><img alt="" class="cut a-breathe" data-cut="rose_blush" id="a-hero-img-4" style="--dur: 12s; --del: -4s"/></span>
+<span class="dk rv rv-zoom" id="hdk-bud-a" style="--d: 0.9s; --w: clamp(26px, 6vw, 46px)"><img alt="" class="cut a-float" data-cut="bud_1" id="a-hero-img-5" style="--dur: 7s"/></span>
+<span class="dk rv rv-zoom" id="hdk-bud-b" style="--d: 1s; --w: clamp(24px, 6vw, 44px)"><img alt="" class="cut a-float" data-cut="bud_4" id="a-hero-img-6" style="--dur: 8s; --del: -3s"/></span>
+</div>
+<div class="wrap" id="hero-wrap">
+<div id="hero-arch-col">
+<figure class="rv rv-rise-big" id="hero-arch">
+<div id="hero-arch-glow"></div>
+<div id="hero-arch-photo">
+<img alt="" id="hero-photo" src=""/>
+<div id="hero-mono">
+<span id="hero-mono-text"></span><span id="hero-mono-sub"></span>
+</div>
+<div id="hero-arch-shine"></div>
+</div>
+<svg aria-hidden="true" id="hero-arch-frame" preserveaspectratio="none" viewbox="0 0 300 420">
+<defs id="a-hero-defs-1">
+<lineargradient id="haf-gold" x1="0" x2="1" y1="0" y2="1">
+<stop id="a-hero-stop-1" offset="0" stop-color="#f1d9a4"></stop>
+<stop id="a-hero-stop-2" offset=".5" stop-color="#b98d47"></stop>
+<stop id="a-hero-stop-3" offset="1" stop-color="#e9cd8f"></stop>
+</lineargradient>
+</defs>
+<path d="M14 420 V160 A136 136 0 0 1 286 160 V420" fill="none" id="haf-outer" stroke="url(#haf-gold)" stroke-width="3.2"></path>
+<path d="M28 420 V164 A122 122 0 0 1 272 164 V420" fill="none" id="haf-inner" opacity=".8" stroke="url(#haf-gold)" stroke-width="1.2"></path>
+<path d="M21 420 V162 A129 129 0 0 1 279 162 V420" fill="none" id="haf-dash" opacity=".8" stroke="#f6e7c4" stroke-dasharray="2 6" stroke-width=".8"></path>
+<g class="vine-draw" id="haf-vine-l">
+<path d="M10 420 C 30 380 0 350 18 310 C 34 274 4 246 22 206 C 36 176 30 140 60 104 C 84 76 110 60 150 50" fill="none" id="haf-vl-1" stroke="#3f5b3c" stroke-linecap="round" stroke-width="2.2"></path>
+</g>
+<g class="vine-draw" id="haf-vine-r">
+<path d="M290 420 C 270 384 300 352 282 312 C 266 276 296 246 278 206 C 264 174 270 140 240 104 C 216 76 190 60 150 50" fill="none" id="haf-vr-1" stroke="#3f5b3c" stroke-linecap="round" stroke-width="2.2"></path>
+</g>
+<g fill="#4e6d47" id="haf-leaves">
+<path class="leaf-sway" d="M18 310 c -14 -6 -22 -18 -20 -30 c 12 4 20 14 20 30 z" id="haf-lf-1"></path>
+<path class="leaf-sway" d="M22 206 c 14 -4 22 -14 22 -28 c -12 4 -20 14 -22 28 z" id="haf-lf-2"></path>
+<path class="leaf-sway" d="M60 104 c -4 -14 2 -26 14 -30 c 2 12 -4 24 -14 30 z" id="haf-lf-3"></path>
+<path class="leaf-sway" d="M282 312 c 14 -6 22 -18 20 -30 c -12 4 -20 14 -20 30 z" id="haf-lf-4"></path>
+<path class="leaf-sway" d="M278 206 c -14 -4 -22 -14 -22 -28 c 12 4 20 14 22 28 z" id="haf-lf-5"></path>
+<path class="leaf-sway" d="M240 104 c 4 -14 -2 -26 -14 -30 c -2 12 4 24 14 30 z" id="haf-lf-6"></path>
+<path class="leaf-sway" d="M30 380 c -16 0 -26 -8 -28 -20 c 14 0 24 8 28 20 z" id="haf-lf-7"></path>
+<path class="leaf-sway" d="M270 380 c 16 0 26 -8 28 -20 c -14 0 -24 8 -28 20 z" id="haf-lf-8"></path>
+</g>
+</svg>
+<div aria-hidden="true" id="hero-arch-roses">
+<span class="ar" id="ar-1" style="--x: 50%; --y: 9%; --w: 30%; --del: -1s"><img alt="" class="cut a-breathe" data-cut="rose_red" id="a-hero-img-7"/></span>
+<span class="ar" id="ar-2" style="--x: 30%; --y: 15%; --w: 20%; --del: -3s"><img alt="" class="cut a-breathe" data-cut="rose_blush" id="a-hero-img-8"/></span>
+<span class="ar" id="ar-3" style="--x: 70%; --y: 15%; --w: 21%; --del: -5s"><img alt="" class="cut a-breathe" data-cut="rose_coral" id="a-hero-img-9"/></span>
+<span class="ar" id="ar-4" style="--x: 13%; --y: 30%; --w: 15%; --del: -2s"><img alt="" class="cut a-breathe" data-cut="rose_red" id="a-hero-img-10"/></span>
+<span class="ar" id="ar-5" style="--x: 87%; --y: 31%; --w: 15%; --del: -4s"><img alt="" class="cut a-breathe" data-cut="rose_blush" id="a-hero-img-11"/></span>
+<span class="ar" id="ar-6" style="--x: 5%; --y: 56%; --w: 10%; --del: -6s"><img alt="" class="cut a-float" data-cut="bud_3" id="a-hero-img-12"/></span>
+<span class="ar" id="ar-7" style="--x: 95%; --y: 60%; --w: 10%; --del: -2s"><img alt="" class="cut a-float" data-cut="bud_6" id="a-hero-img-13"/></span>
+<span class="ar" id="ar-8" style="--x: 8%; --y: 92%; --w: 24%; --del: -7s"><img alt="" class="cut a-breathe" data-cut="rose_coral" id="a-hero-img-14"/></span>
+<span class="ar" id="ar-9" style="--x: 92%; --y: 93%; --w: 26%; --del: -1s"><img alt="" class="cut a-breathe" data-cut="rose_red" id="a-hero-img-15"/></span>
+</div>
+</figure>
+</div>
+<div id="hero-text-col">
+<p class="tod-tag rv" id="hero-tod" style="--d: 0.05s">
+<span class="tod-ico" id="a-hero-span-1"></span><span class="tod-time" id="a-hero-span-2"></span><span class="tod-name" id="a-hero-span-3"></span>
+</p>
+<p class="rv" id="hero-kicker" style="--d: 0.15s"></p>
+<h2 class="rv rv-blur" id="hero-names" style="--d: 0.28s">
+<span id="hero-name-b"></span><span id="hero-amp">&amp;</span><span id="hero-name-g"></span>
+</h2>
+<div class="rv rv-zoom" id="hero-bloom-wrap" style="--d: 0.45s">
+<div class="bloom" data-preset="date" id="hero-bloom">
+<div class="bloom-core" id="hero-bloom-core">
+<span class="js-weekday" id="hb-day"></span>
+<span class="js-daynum" id="hb-num"></span>
+<span class="js-monthyear" id="hb-month"></span>
+</div>
+</div>
+<p id="hero-bloom-hint"></p>
+</div>
+<p class="rv" id="hero-time" style="--d: 0.6s">
+<span id="hero-time-lbl"></span>
+<span class="js-time" id="hero-time-val"></span>
+<span id="hero-time-tz"></span>
+<span id="hero-time-dot">·</span>
+<span id="hero-time-venue"></span>
+</p>
+<p class="rv" id="hero-tagline" style="--d:.72s"></p>
+<button class="btn btn-velvet rv" id="hero-cta" style="--d: 0.84s" type="button">
+<span id="hero-cta-text"></span><span aria-hidden="true" id="hero-cta-ico">↓</span>
+</button>
+</div>
+</div>
+</header>
+<section class="sec" data-section="greeting" id="sec-greeting">
+<div aria-hidden="true" class="sec-deco" id="greeting-deco">
+<span class="dk rv rv-right" id="gdk-stem" style="--d: 0.2s; --w: clamp(90px, 22vw, 170px)"><img alt="" class="cut a-sway" data-cut="rose_stem" id="a-greeting-img-1" style="--dur: 9s"/></span>
+<span class="dk rv rv-zoom" id="gdk-blush" style="--d: 0.35s; --w: clamp(110px, 26vw, 200px)"><img alt="" class="cut a-breathe" data-cut="rose_blush" id="a-greeting-img-2" style="--dur: 11s"/></span>
+<span class="dk rv rv-zoom" id="gdk-bud" style="--d: 0.5s; --w: clamp(24px, 6vw, 42px)"><img alt="" class="cut a-float" data-cut="bud_8" id="a-greeting-img-3"/></span>
+</div>
+<div class="wrap" id="greeting-wrap">
+<header class="sec-head" id="greeting-head">
+<p class="tod-tag rv" id="greeting-tod">
+<span class="tod-ico" id="a-greeting-span-1"></span><span class="tod-time" id="a-greeting-span-2"></span><span class="tod-name" id="a-greeting-span-3"></span>
+</p>
+<p class="kicker rv" id="greeting-kicker" style="--d: 0.08s"></p>
+<h2 class="sec-title rv rv-petal" id="greeting-title" style="--d: 0.16s"><em id="a-greeting-em-1"></em>
+</h2>
+<svg aria-hidden="true" class="divider rv" id="greeting-divider" style="--d: 0.24s" viewbox="0 0 240 28">
+<path class="dv-line" d="M6 14 C 40 14 60 8 92 14" id="a-greeting-path-1"></path>
+<path class="dv-line" d="M234 14 C 200 14 180 8 148 14" id="a-greeting-path-2"></path>
+<path class="dv-leaf" d="M84 13 C 76 4 66 4 60 8 C 68 14 76 16 84 13 Z" id="a-greeting-path-3"></path>
+<path class="dv-leaf" d="M156 13 C 164 4 174 4 180 8 C 172 14 164 16 156 13 Z" id="a-greeting-path-4"></path>
+<circle class="dv-rose" cx="120" cy="14" id="a-greeting-circle-1" r="10"></circle>
+<path class="dv-curl" d="M116 14 a4 4 0 1 1 4 4 a6.5 6.5 0 1 1 -6.5 -6.5" id="a-greeting-path-5"></path>
+<circle class="dv-dot" cx="100" cy="14" id="a-greeting-circle-2" r="2"></circle>
+<circle class="dv-dot" cx="140" cy="14" id="a-greeting-circle-3" r="2"></circle>
+</svg>
+<p class="sec-lead rv" id="greeting-lead" style="--d:.3s"></p>
+</header>
+<div id="dew-grid">
+<div class="rv rv-zoom" id="dew-stage" style="--d: 0.2s">
+<svg aria-hidden="true" id="dew-svg" viewbox="0 0 360 250">
+<defs id="a-greeting-defs-1">
+<lineargradient id="dew-leaf-g" x1="0" x2="1" y1="0" y2="1">
+<stop id="a-greeting-stop-1" offset="0" stop-color="#6f8f62"></stop>
+<stop id="a-greeting-stop-2" offset=".55" stop-color="#46663f"></stop>
+<stop id="a-greeting-stop-3" offset="1" stop-color="#2f4a2c"></stop>
+</lineargradient>
+<radialgradient cx=".35" cy=".3" id="dew-drop-g" r=".75">
+<stop id="a-greeting-stop-4" offset="0" stop-color="#ffffff" stop-opacity=".95"></stop>
+<stop id="a-greeting-stop-5" offset=".35" stop-color="#e9f4f1" stop-opacity=".55"></stop>
+<stop id="a-greeting-stop-6" offset=".8" stop-color="#9fc3bd" stop-opacity=".35"></stop>
+<stop id="a-greeting-stop-7" offset="1" stop-color="#5d8a82" stop-opacity=".6"></stop>
+</radialgradient>
+</defs>
+<path d="M8 236 C 80 200 150 150 236 104 C 280 80 318 60 352 40" fill="none" id="dew-twig" stroke="#3b5434" stroke-linecap="round" stroke-width="5"></path>
+<g class="dew-leaflet" id="dew-leaflet-1" style="--del: -1s">
+<path d="M70 202 C 60 150 92 104 150 92 C 156 146 124 192 70 202 Z" fill="url(#dew-leaf-g)" id="dew-lf-1"></path>
+<path d="M72 199 C 96 160 118 128 148 95" fill="none" id="dew-lf-1v" opacity=".7" stroke="#a8c49a" stroke-width="1.4"></path>
+</g>
+<g class="dew-leaflet" id="dew-leaflet-2" style="--del: -2.5s">
+<path d="M170 140 C 176 88 220 52 280 56 C 272 110 226 144 170 140 Z" fill="url(#dew-leaf-g)" id="dew-lf-2"></path>
+<path d="M172 138 C 204 112 236 86 278 58" fill="none" id="dew-lf-2v" opacity=".7" stroke="#a8c49a" stroke-width="1.4"></path>
+</g>
+<g class="dew-leaflet" id="dew-leaflet-3" style="--del: -4s">
+<path d="M150 132 C 108 120 82 84 90 34 C 138 52 160 88 150 132 Z" fill="url(#dew-leaf-g)" id="dew-lf-3"></path>
+<path d="M148 129 C 128 100 108 72 92 38" fill="none" id="dew-lf-3v" opacity=".7" stroke="#a8c49a" stroke-width="1.4"></path>
+</g>
+<g class="dew-leaflet" id="dew-leaflet-4" style="--del: -3s">
+<path d="M286 80 C 300 44 330 26 356 30 C 346 62 318 82 286 80 Z" fill="url(#dew-leaf-g)" id="dew-lf-4"></path>
+</g>
+</svg>
+<button aria-label="" class="dew-drop" data-line="1" id="dew-1" style="--x: 31%; --y: 62%; --fx: -6px; --fy: 120px" type="button">
+<span class="dd-shine" id="dew-1-shine"></span>
+</button>
+<button aria-label="" class="dew-drop" data-line="2" id="dew-2" style="--x: 62%; --y: 34%; --fx: -14px; --fy: 150px" type="button">
+<span class="dd-shine" id="dew-2-shine"></span>
+</button>
+<button aria-label="" class="dew-drop" data-line="3" id="dew-3" style="--x: 33%; --y: 28%; --fx: 10px; --fy: 170px" type="button">
+<span class="dd-shine" id="dew-3-shine"></span>
+</button>
+<p id="dew-hint"></p>
+</div>
+<div class="card rv" id="dew-card" style="--d: 0.3s">
+<span class="card-corner cc-tl" id="dew-cc-tl"></span><span class="card-corner cc-br" id="dew-cc-br"></span>
+<p class="dew-line" id="dew-line-1">
+<span class="dew-ripple" id="dew-ripple-1"></span><span id="dew-greet"></span>
+</p>
+<p class="dew-line" id="dew-line-2">
+<span class="dew-ripple" id="dew-ripple-2"></span><span id="dew-text"></span>
+</p>
+<blockquote class="dew-line" id="dew-line-3">
+<span class="dew-ripple" id="dew-ripple-3"></span><span id="dew-quote"></span><cite id="dew-cite"></cite>
+</blockquote>
+<button class="btn-link" id="dew-skip" type="button"></button>
+</div>
+</div>
+</div>
+</section>
+<section class="sec" data-section="couple" id="sec-couple">
+<div aria-hidden="true" class="sec-deco" id="couple-deco">
+<span class="dk rv rv-left" id="cpdk-coral" style="--d: 0.2s; --w: clamp(110px, 26vw, 210px)"><img alt="" class="cut a-breathe" data-cut="rose_coral" id="a-couple-img-1" style="--dur: 12s"/></span>
+<span class="dk rv rv-right" id="cpdk-white" style="--d: 0.3s; --w: clamp(80px, 20vw, 160px)"><img alt="" class="cut a-sway" data-cut="rose_white" id="a-couple-img-2" style="--dur: 9s"/></span>
+</div>
+<div class="wrap" id="couple-wrap">
+<header class="sec-head" id="couple-head">
+<p class="tod-tag rv" id="couple-tod">
+<span class="tod-ico" id="a-couple-span-1"></span><span class="tod-time" id="a-couple-span-2"></span><span class="tod-name" id="a-couple-span-3"></span>
+</p>
+<p class="kicker rv" id="couple-kicker" style="--d: 0.08s"></p>
+<h2 class="sec-title rv rv-petal" id="couple-title" style="--d: 0.16s"><em id="a-couple-em-1"></em>
+</h2>
+<svg aria-hidden="true" class="divider rv" id="couple-divider" style="--d: 0.24s" viewbox="0 0 240 28">
+<path class="dv-line" d="M6 14 C 40 14 60 8 92 14" id="a-couple-path-1"></path>
+<path class="dv-line" d="M234 14 C 200 14 180 8 148 14" id="a-couple-path-2"></path>
+<path class="dv-leaf" d="M84 13 C 76 4 66 4 60 8 C 68 14 76 16 84 13 Z" id="a-couple-path-3"></path>
+<path class="dv-leaf" d="M156 13 C 164 4 174 4 180 8 C 172 14 164 16 156 13 Z" id="a-couple-path-4"></path>
+<circle class="dv-rose" cx="120" cy="14" id="a-couple-circle-1" r="10"></circle>
+<path class="dv-curl" d="M116 14 a4 4 0 1 1 4 4 a6.5 6.5 0 1 1 -6.5 -6.5" id="a-couple-path-5"></path>
+<circle class="dv-dot" cx="100" cy="14" id="a-couple-circle-2" r="2"></circle>
+<circle class="dv-dot" cx="140" cy="14" id="a-couple-circle-3" r="2"></circle>
+</svg>
+<p class="sec-lead rv" id="couple-lead" style="--d:.3s"></p>
+</header>
+<div id="couple-grid">
+<article class="pc pc-bride rv rv-left" id="couple-bride" style="--d: 0.1s">
+<div class="pc-wreath" id="pc-wreath-b">
+<span class="pc-halo" id="pc-halo-b"></span>
+<svg aria-hidden="true" class="pc-ring" id="pc-ring-b" viewbox="0 0 200 240">
+<ellipse cx="100" cy="120" fill="none" id="pc-ring-b-1" rx="88" ry="108" stroke="#c9a25e" stroke-width="1.6"></ellipse>
+<ellipse cx="100" cy="120" fill="none" id="pc-ring-b-2" rx="95" ry="115" stroke="#c9a25e" stroke-dasharray="1.5 5" stroke-width=".7"></ellipse>
+</svg>
+<button aria-label="" class="pc-portrait" id="pc-portrait-b" type="button">
+<img alt="" class="pc-photo" id="pc-photo-b" src=""/>
+<span class="pc-initial" id="pc-initial-b"></span>
+</button>
+<div aria-hidden="true" class="pc-roses" id="pc-roses-b">
+<span class="pcr" id="pcr-b-1" style="--x: 16%; --y: 12%; --w: 34%"><img alt="" class="cut a-breathe" data-cut="rose_blush" id="a-couple-img-3" style="--dur: 9s"/></span>
+<span class="pcr" id="pcr-b-2" style="--x: 4%; --y: 34%; --w: 20%"><img alt="" class="cut a-breathe" data-cut="rose_white" id="a-couple-img-4" style="--dur: 11s; --del: -2s"/></span>
+<span class="pcr" id="pcr-b-3" style="--x: 36%; --y: 2%; --w: 15%"><img alt="" class="cut a-float" data-cut="bud_1" id="a-couple-img-5"/></span>
+<span class="pcr" id="pcr-b-4" style="--x: 86%; --y: 80%; --w: 36%"><img alt="" class="cut a-breathe" data-cut="rose_coral" id="a-couple-img-6" style="--dur: 10s; --del: -4s"/></span>
+<span class="pcr" id="pcr-b-5" style="--x: 96%; --y: 58%; --w: 18%"><img alt="" class="cut a-breathe" data-cut="rose_blush" id="a-couple-img-7" style="--dur: 12s; --del: -6s"/></span>
+<span class="pcr" id="pcr-b-6" style="--x: 66%; --y: 98%; --w: 14%"><img alt="" class="cut a-float" data-cut="bud_9" id="a-couple-img-8"/></span>
+</div>
+</div>
+<p class="pc-role" id="pc-role-b"></p>
+<h3 class="pc-name" id="pc-name-b"></h3>
+<p class="pc-parents" id="pc-parents-b">
+<span class="pc-order" id="pc-order-b"></span>
+<strong id="pc-par-b"></strong>
+</p>
+<a class="pc-ig" href="" id="pc-ig-b" rel="noopener" target="_blank"><span aria-hidden="true" class="pc-ig-ico" id="pc-ig-b-ico"></span>@<span id="pc-ig-b-handle"></span></a>
+<button aria-controls="pc-detail-b" aria-expanded="false" class="pc-more" id="pc-more-b" type="button"></button>
+<div class="pc-detail" id="pc-detail-b">
+<div class="pc-detail-in" id="pc-detail-b-in">
+<p class="pc-trait" id="pc-trait-b">
+<span class="pc-trait-lbl" id="pc-trait-b-lbl"></span><span id="pc-trait-b-val"></span>
+</p>
+<p class="pc-bio" id="pc-bio-b"></p>
+</div>
+</div>
+</article>
+<div aria-hidden="true" class="rv rv-zoom" id="couple-knot" style="--d: 0.3s">
+<svg id="knot-svg" viewbox="0 0 120 220">
+<path d="M40 220 C 40 170 84 150 80 110 C 76 70 34 60 44 10" fill="none" id="knot-stem-a" stroke="#46663f" stroke-linecap="round" stroke-width="3"></path>
+<path d="M80 220 C 80 170 36 150 40 110 C 44 70 86 60 76 10" fill="none" id="knot-stem-b" stroke="#5c7d52" stroke-linecap="round" stroke-width="3"></path>
+<path d="M38 112 C 52 96 70 96 84 112 C 70 126 52 126 38 112 Z" fill="#8e0f24" id="knot-ribbon-a" opacity=".92"></path>
+<path d="M60 112 C 46 130 40 150 30 168 M60 112 C 74 130 82 150 92 166" fill="none" id="knot-ribbon-b" stroke="#8e0f24" stroke-linecap="round" stroke-width="3"></path>
+<circle cx="61" cy="112" fill="#c9a25e" id="knot-center" r="7"></circle>
+<path class="leaf-sway" d="M44 168 c -16 -2 -24 -12 -26 -22 c 14 2 22 10 26 22 z" fill="#5c7d52" id="knot-lf-1"></path>
+<path class="leaf-sway" d="M78 62 c 16 -2 24 -12 26 -22 c -14 2 -22 10 -26 22 z" fill="#46663f" id="knot-lf-2"></path>
+</svg>
+<span id="knot-amp">&amp;</span>
+</div>
+<article class="pc pc-groom rv rv-right" id="couple-groom" style="--d: 0.2s">
+<div class="pc-wreath" id="pc-wreath-g">
+<span class="pc-halo" id="pc-halo-g"></span>
+<svg aria-hidden="true" class="pc-ring" id="pc-ring-g" viewbox="0 0 200 240">
+<ellipse cx="100" cy="120" fill="none" id="pc-ring-g-1" rx="88" ry="108" stroke="#c9a25e" stroke-width="1.6"></ellipse>
+<ellipse cx="100" cy="120" fill="none" id="pc-ring-g-2" rx="95" ry="115" stroke="#c9a25e" stroke-dasharray="1.5 5" stroke-width=".7"></ellipse>
+</svg>
+<button aria-label="" class="pc-portrait" id="pc-portrait-g" type="button">
+<img alt="" class="pc-photo" id="pc-photo-g" src=""/>
+<span class="pc-initial" id="pc-initial-g"></span>
+</button>
+<div aria-hidden="true" class="pc-roses" id="pc-roses-g">
+<span class="pcr" id="pcr-g-1" style="--x: 84%; --y: 12%; --w: 34%"><img alt="" class="cut a-breathe" data-cut="rose_red" id="a-couple-img-9" style="--dur: 9s"/></span>
+<span class="pcr" id="pcr-g-2" style="--x: 96%; --y: 34%; --w: 20%"><img alt="" class="cut a-breathe" data-cut="rose_red" id="a-couple-img-10" style="--dur: 11s; --del: -2s"/></span>
+<span class="pcr" id="pcr-g-3" style="--x: 64%; --y: 2%; --w: 15%"><img alt="" class="cut a-float" data-cut="bud_2" id="a-couple-img-11"/></span>
+<span class="pcr" id="pcr-g-4" style="--x: 14%; --y: 80%; --w: 36%"><img alt="" class="cut a-breathe" data-cut="rose_red" id="a-couple-img-12" style="--dur: 10s; --del: -4s"/></span>
+<span class="pcr" id="pcr-g-5" style="--x: 4%; --y: 58%; --w: 18%"><img alt="" class="cut a-breathe" data-cut="rose_coral" id="a-couple-img-13" style="--dur: 12s; --del: -6s"/></span>
+<span class="pcr" id="pcr-g-6" style="--x: 34%; --y: 98%; --w: 14%"><img alt="" class="cut a-float" data-cut="bud_4" id="a-couple-img-14"/></span>
+</div>
+</div>
+<p class="pc-role" id="pc-role-g"></p>
+<h3 class="pc-name" id="pc-name-g"></h3>
+<p class="pc-parents" id="pc-parents-g">
+<span class="pc-order" id="pc-order-g"></span>
+<strong id="pc-par-g"></strong>
+</p>
+<a class="pc-ig" href="" id="pc-ig-g" rel="noopener" target="_blank"><span aria-hidden="true" class="pc-ig-ico" id="pc-ig-g-ico"></span>@<span id="pc-ig-g-handle"></span></a>
+<button aria-controls="pc-detail-g" aria-expanded="false" class="pc-more" id="pc-more-g" type="button"></button>
+<div class="pc-detail" id="pc-detail-g">
+<div class="pc-detail-in" id="pc-detail-g-in">
+<p class="pc-trait" id="pc-trait-g">
+<span class="pc-trait-lbl" id="pc-trait-g-lbl"></span><span id="pc-trait-g-val"></span>
+</p>
+<p class="pc-bio" id="pc-bio-g"></p>
+</div>
+</div>
+</article>
+</div>
+</div>
+</section>
+<section class="sec" data-section="story" id="sec-story">
+<div aria-hidden="true" class="sec-deco" id="story-deco">
+<span class="dk rv rv-zoom" id="stdk-red" style="--d: 0.2s; --w: clamp(110px, 26vw, 220px)"><img alt="" class="cut a-breathe" data-cut="rose_red" id="a-story-img-1" style="--dur: 12s"/></span>
+<span class="dk rv rv-zoom" id="stdk-bud-a" style="--d: 0.3s; --w: clamp(24px, 6vw, 44px)"><img alt="" class="cut a-float" data-cut="bud_5" id="a-story-img-2"/></span>
+</div>
+<div class="wrap" id="story-wrap">
+<header class="sec-head" id="story-head">
+<p class="tod-tag rv" id="story-tod">
+<span class="tod-ico" id="a-story-span-1"></span><span class="tod-time" id="a-story-span-2"></span><span class="tod-name" id="a-story-span-3"></span>
+</p>
+<p class="kicker rv" id="story-kicker" style="--d: 0.08s"></p>
+<h2 class="sec-title rv rv-petal" id="story-title" style="--d: 0.16s"><em id="a-story-em-1"></em>
+</h2>
+<svg aria-hidden="true" class="divider rv" id="story-divider" style="--d: 0.24s" viewbox="0 0 240 28">
+<path class="dv-line" d="M6 14 C 40 14 60 8 92 14" id="a-story-path-1"></path>
+<path class="dv-line" d="M234 14 C 200 14 180 8 148 14" id="a-story-path-2"></path>
+<path class="dv-leaf" d="M84 13 C 76 4 66 4 60 8 C 68 14 76 16 84 13 Z" id="a-story-path-3"></path>
+<path class="dv-leaf" d="M156 13 C 164 4 174 4 180 8 C 172 14 164 16 156 13 Z" id="a-story-path-4"></path>
+<circle class="dv-rose" cx="120" cy="14" id="a-story-circle-1" r="10"></circle>
+<path class="dv-curl" d="M116 14 a4 4 0 1 1 4 4 a6.5 6.5 0 1 1 -6.5 -6.5" id="a-story-path-5"></path>
+<circle class="dv-dot" cx="100" cy="14" id="a-story-circle-2" r="2"></circle>
+<circle class="dv-dot" cx="140" cy="14" id="a-story-circle-3" r="2"></circle>
+</svg>
+<p class="sec-lead rv" id="story-lead" style="--d:.3s"></p>
+</header>
+<div id="story-garden">
+<svg aria-hidden="true" id="story-vine">
+<path d="" id="story-vine-path"></path>
+<path d="" id="story-vine-glow"></path>
+<g id="story-vine-leaves"></g>
+</svg>
+<article class="ch" id="ch-1">
+<div class="ch-bud" id="ch-1-bud">
+<div class="bloom bloom-mini" data-preset="mini" id="ch-1-bloom">
+<div class="bloom-core" id="ch-1-core">
+<span class="ch-num" id="ch-1-num">01</span>
+</div>
+</div>
+</div>
+<div class="ch-card card rv" id="ch-1-card">
+<figure class="ch-photo" id="ch-1-fig">
+<img alt="" id="ch-1-img" loading="lazy" src=""/>
+</figure>
+<p class="ch-date" id="ch-1-date"></p>
+<h3 class="ch-title" id="ch-1-title"></h3>
+<p class="ch-text" id="ch-1-text"></p>
+</div>
+</article>
+<article class="ch" id="ch-2">
+<div class="ch-bud" id="ch-2-bud">
+<div class="bloom bloom-mini" data-preset="mini" id="ch-2-bloom">
+<div class="bloom-core" id="ch-2-core">
+<span class="ch-num" id="ch-2-num">02</span>
+</div>
+</div>
+</div>
+<div class="ch-card card rv" id="ch-2-card">
+<figure class="ch-photo" id="ch-2-fig">
+<img alt="" id="ch-2-img" loading="lazy" src=""/>
+</figure>
+<p class="ch-date" id="ch-2-date"></p>
+<h3 class="ch-title" id="ch-2-title"></h3>
+<p class="ch-text" id="ch-2-text"></p>
+</div>
+</article>
+<article class="ch" id="ch-3">
+<div class="ch-bud" id="ch-3-bud">
+<div class="bloom bloom-mini" data-preset="mini" id="ch-3-bloom">
+<div class="bloom-core" id="ch-3-core">
+<span class="ch-num" id="ch-3-num">03</span>
+</div>
+</div>
+</div>
+<div class="ch-card card rv" id="ch-3-card">
+<figure class="ch-photo" id="ch-3-fig">
+<img alt="" id="ch-3-img" loading="lazy" src=""/>
+</figure>
+<p class="ch-date" id="ch-3-date"></p>
+<h3 class="ch-title" id="ch-3-title"></h3>
+<p class="ch-text" id="ch-3-text"></p>
+</div>
+</article>
+<article class="ch" id="ch-4">
+<div class="ch-bud" id="ch-4-bud">
+<div class="bloom bloom-mini" data-preset="mini" id="ch-4-bloom">
+<div class="bloom-core" id="ch-4-core">
+<span class="ch-num" id="ch-4-num">04</span>
+</div>
+</div>
+</div>
+<div class="ch-card card rv" id="ch-4-card">
+<figure class="ch-photo" id="ch-4-fig">
+<img alt="" id="ch-4-img" loading="lazy" src=""/>
+</figure>
+<p class="ch-date" id="ch-4-date"></p>
+<h3 class="ch-title" id="ch-4-title"></h3>
+<p class="ch-text" id="ch-4-text"></p>
+</div>
+</article>
+</div>
+</div>
+</section>
+<section class="sec" data-section="graft" id="sec-graft">
+<div aria-hidden="true" class="sec-deco" id="graft-deco">
+<span class="dk rv rv-left" id="grdk-stem" style="--d: 0.2s; --w: clamp(80px, 20vw, 160px)"><img alt="" class="cut a-sway" data-cut="rose_stem" id="a-graft-img-1" style="--dur: 10s"/></span>
+<span class="dk rv rv-zoom" id="grdk-bud" style="--d: 0.3s; --w: clamp(24px, 6vw, 44px)"><img alt="" class="cut a-float" data-cut="bud_3" id="a-graft-img-2"/></span>
+</div>
+<div class="wrap" id="graft-wrap">
+<header class="sec-head" id="graft-head">
+<p class="tod-tag rv" id="graft-tod">
+<span class="tod-ico" id="a-graft-span-1"></span><span class="tod-time" id="a-graft-span-2"></span><span class="tod-name" id="a-graft-span-3"></span>
+</p>
+<p class="kicker rv" id="graft-kicker" style="--d: 0.08s"></p>
+<h2 class="sec-title rv rv-petal" id="graft-title" style="--d: 0.16s"><em id="a-graft-em-1"></em>
+</h2>
+<svg aria-hidden="true" class="divider rv" id="graft-divider" style="--d: 0.24s" viewbox="0 0 240 28">
+<path class="dv-line" d="M6 14 C 40 14 60 8 92 14" id="a-graft-path-1"></path>
+<path class="dv-line" d="M234 14 C 200 14 180 8 148 14" id="a-graft-path-2"></path>
+<path class="dv-leaf" d="M84 13 C 76 4 66 4 60 8 C 68 14 76 16 84 13 Z" id="a-graft-path-3"></path>
+<path class="dv-leaf" d="M156 13 C 164 4 174 4 180 8 C 172 14 164 16 156 13 Z" id="a-graft-path-4"></path>
+<circle class="dv-rose" cx="120" cy="14" id="a-graft-circle-1" r="10"></circle>
+<path class="dv-curl" d="M116 14 a4 4 0 1 1 4 4 a6.5 6.5 0 1 1 -6.5 -6.5" id="a-graft-path-5"></path>
+<circle class="dv-dot" cx="100" cy="14" id="a-graft-circle-2" r="2"></circle>
+<circle class="dv-dot" cx="140" cy="14" id="a-graft-circle-3" r="2"></circle>
+</svg>
+<p class="sec-lead rv" id="graft-lead" style="--d:.3s"></p>
+</header>
+<div id="graft-grid">
+<div class="rv rv-zoom" id="graft-stage" style="--d: 0.15s">
+<div aria-hidden="true" id="graft-sun"></div>
+<svg aria-hidden="true" id="graft-svg" viewbox="0 0 320 400">
+<defs id="a-graft-defs-1">
+<lineargradient id="gs-pot" x1="0" x2="1" y1="0" y2="0">
+<stop id="a-graft-stop-1" offset="0" stop-color="#9a4a2e"></stop>
+<stop id="a-graft-stop-2" offset=".45" stop-color="#c8704a"></stop>
+<stop id="a-graft-stop-3" offset="1" stop-color="#8a3f26"></stop>
+</lineargradient>
+<lineargradient id="gs-rim" x1="0" x2="1" y1="0" y2="0">
+<stop id="a-graft-stop-4" offset="0" stop-color="#a95436"></stop>
+<stop id="a-graft-stop-5" offset=".5" stop-color="#dd8a60"></stop>
+<stop id="a-graft-stop-6" offset="1" stop-color="#94442a"></stop>
+</lineargradient>
+</defs>
+<ellipse cx="160" cy="388" fill="rgba(40,10,10,.25)" id="gs-shadow" rx="92" ry="10"></ellipse>
+<path d="M92 318 L110 384 Q160 396 210 384 L228 318 Z" fill="url(#gs-pot)" id="gs-pot-body"></path>
+<rect fill="url(#gs-rim)" height="24" id="gs-pot-rim" rx="6" width="156" x="82" y="300"></rect>
+<ellipse cx="160" cy="303" fill="#3b2418" id="gs-soil" rx="70" ry="7"></ellipse>
+<path d="M98 340 Q160 350 222 340" fill="none" id="gs-pot-band" opacity=".5" stroke="#f0c39d" stroke-width="1.5"></path>
+<path d="M160 304 C 160 286 158 268 160 246" fill="none" id="gs-root" stroke="#3f5b3c" stroke-linecap="round" stroke-width="7"></path>
+<path class="leaf-sway" d="M158 284 c -18 -4 -28 -16 -28 -28 c 14 2 26 12 28 28 z" fill="#4e6d47" id="gs-root-lf"></path>
+<path d="M160 248 C 162 214 156 180 160 146 C 163 120 158 100 160 86" fill="none" id="gs-merged" stroke="#46663f" stroke-linecap="round" stroke-width="6"></path>
+<path class="gs-grow-lf" d="M160 200 c 18 -6 30 -18 30 -32 c -16 4 -28 16 -30 32 z" fill="#5c7d52" id="gs-merged-lf-1"></path>
+<path class="gs-grow-lf" d="M159 160 c -18 -4 -30 -16 -30 -30 c 16 4 28 14 30 30 z" fill="#46663f" id="gs-merged-lf-2"></path>
+<path d="M146 252 C 156 242 168 244 174 250 C 166 258 152 258 146 252 M146 244 C 156 236 168 238 174 244 C 166 250 152 250 146 244" fill="none" id="gs-ribbon" stroke="#c22a42" stroke-linecap="round" stroke-width="4"></path>
+<path d="M172 248 C 186 256 190 270 186 282 M172 248 C 190 244 200 252 204 262" fill="none" id="gs-ribbon-tail" stroke="#c22a42" stroke-linecap="round" stroke-width="2.4"></path>
+<g fill="#f4d58d" id="gs-sparks">
+<circle class="gs-spark" cx="128" cy="236" id="gs-sp-1" r="2.4"></circle>
+<circle class="gs-spark" cx="196" cy="230" id="gs-sp-2" r="2"></circle>
+<circle class="gs-spark" cx="140" cy="214" id="gs-sp-3" r="1.6"></circle>
+<circle class="gs-spark" cx="186" cy="262" id="gs-sp-4" r="2.2"></circle>
+<circle class="gs-spark" cx="160" cy="226" id="gs-sp-5" r="1.8"></circle>
+</g>
+</svg>
+<div class="graft-scion" id="scion-g">
+<svg aria-hidden="true" class="scion-stem" id="scion-g-stem" viewbox="0 0 60 200">
+<path d="M30 200 C 26 160 36 120 30 70 C 28 50 30 30 30 18" fill="none" id="scion-g-path" stroke="#46663f" stroke-linecap="round" stroke-width="5"></path>
+<path class="leaf-sway" d="M30 120 c -16 -4 -26 -16 -26 -28 c 14 2 24 12 26 28 z" fill="#4e6d47" id="scion-g-lf"></path>
+<path d="M33 150 l 8 -4 l -7 9 z" fill="#3b5434" id="scion-g-thorn"></path>
+</svg>
+<span class="scion-rose" id="scion-g-rose"><img alt="" class="cut a-breathe" data-cut="rose_red" id="a-graft-img-3"/></span>
+<span class="scion-name" id="scion-g-name"></span>
+</div>
+<div class="graft-scion" id="scion-b">
+<svg aria-hidden="true" class="scion-stem" id="scion-b-stem" viewbox="0 0 60 200">
+<path d="M30 200 C 34 160 24 120 30 70 C 32 50 30 30 30 18" fill="none" id="scion-b-path" stroke="#5c7d52" stroke-linecap="round" stroke-width="5"></path>
+<path class="leaf-sway" d="M30 112 c 16 -4 26 -16 26 -28 c -14 2 -24 12 -26 28 z" fill="#5c7d52" id="scion-b-lf"></path>
+<path d="M27 146 l -8 -4 l 7 9 z" fill="#3b5434" id="scion-b-thorn"></path>
+</svg>
+<span class="scion-rose" id="scion-b-rose"><img alt="" class="cut a-breathe" data-cut="rose_blush" id="a-graft-img-4"/></span>
+<span class="scion-name" id="scion-b-name"></span>
+</div>
+<div id="graft-bloom-wrap">
+<div class="bloom" data-preset="graft" id="graft-bloom">
+<div class="bloom-core" id="graft-bloom-core">
+<span id="graft-core-text"></span>
+</div>
+</div>
+</div>
+<p aria-live="polite" id="graft-status"></p>
+</div>
+<div id="graft-side">
+<div id="graft-actions">
+<button class="btn btn-velvet" id="graft-btn" type="button">
+<span aria-hidden="true" id="graft-btn-ico">✂</span><span id="graft-btn-text"></span>
+</button>
+<button class="btn-link" id="graft-reset" type="button"></button>
+</div>
+<article class="card rv" id="graft-cert" style="--d: 0.25s">
+<span class="card-corner cc-tl" id="graft-cc-tl"></span><span class="card-corner cc-br" id="graft-cc-br"></span>
+<p id="cert-kicker"></p>
+<h3 id="cert-name"></h3>
+<dl id="cert-dl">
+<div class="cert-row" id="cert-row-1">
+<dt id="cert-dt-1"></dt>
+<dd id="cert-dd-1">
+<span id="cert-par-g"></span> ×
+                    <span id="cert-par-b"></span>
+</dd>
+</div>
+<div class="cert-row" id="cert-row-2">
+<dt id="cert-dt-2"></dt>
+<dd class="js-date-long" id="cert-dd-2"></dd>
+</div>
+<div class="cert-row" id="cert-row-3">
+<dt id="cert-dt-3"></dt>
+<dd id="cert-dd-3"></dd>
+</div>
+</dl>
+<p id="cert-traits-lbl"></p>
+<p hidden="" id="cert-traits-src"></p>
+<ul id="cert-traits"></ul>
+<div aria-hidden="true" id="cert-seal">
+<svg id="cert-seal-svg" viewbox="0 0 120 120">
+<path d="M60 6 C 74 4 82 14 94 16 C 108 20 112 34 114 46 C 118 60 110 70 112 82 C 112 98 98 106 86 110 C 72 116 62 112 50 114 C 36 114 24 106 16 96 C 6 86 8 72 6 60 C 4 46 10 34 18 24 C 28 12 44 8 60 6 Z" fill="#8e0f24" id="cert-seal-blob"></path>
+<circle cx="60" cy="60" fill="none" id="cert-seal-ring" r="38" stroke="#5c0716" stroke-width="2"></circle>
+<circle cx="60" cy="60" fill="none" id="cert-seal-ring2" r="32" stroke="#c22a42" stroke-dasharray="2 3" stroke-width=".8"></circle>
+<path d="M60 46 c 10 0 16 7 16 15 c 0 9 -8 15 -16 15 c -9 0 -16 -6 -16 -15 c 0 -8 6 -15 16 -15 z M56 56 a5 5 0 1 1 5 5 a8 8 0 1 1 -8 -8" fill="none" id="cert-seal-rose" stroke="#f2c4bd" stroke-linecap="round" stroke-width="2"></path>
+</svg>
+<span id="cert-seal-text"></span>
+</div>
+</article>
+</div>
+</div>
+</div>
+</section>
+<section class="sec" data-section="video" id="sec-video">
+<div aria-hidden="true" class="sec-deco" id="video-deco">
+<span class="dk rv rv-zoom" id="vdk-coral" style="--d: 0.2s; --w: clamp(100px, 24vw, 200px)"><img alt="" class="cut a-breathe" data-cut="rose_coral" id="a-video-img-1" style="--dur: 11s"/></span>
+</div>
+<div class="wrap" id="video-wrap">
+<header class="sec-head" id="video-head">
+<p class="tod-tag rv" id="video-tod">
+<span class="tod-ico" id="a-video-span-1"></span><span class="tod-time" id="a-video-span-2"></span><span class="tod-name" id="a-video-span-3"></span>
+</p>
+<p class="kicker rv" id="video-kicker" style="--d: 0.08s"></p>
+<h2 class="sec-title rv rv-petal" id="video-title" style="--d: 0.16s"><em id="a-video-em-1"></em>
+</h2>
+<svg aria-hidden="true" class="divider rv" id="video-divider" style="--d: 0.24s" viewbox="0 0 240 28">
+<path class="dv-line" d="M6 14 C 40 14 60 8 92 14" id="a-video-path-1"></path>
+<path class="dv-line" d="M234 14 C 200 14 180 8 148 14" id="a-video-path-2"></path>
+<path class="dv-leaf" d="M84 13 C 76 4 66 4 60 8 C 68 14 76 16 84 13 Z" id="a-video-path-3"></path>
+<path class="dv-leaf" d="M156 13 C 164 4 174 4 180 8 C 172 14 164 16 156 13 Z" id="a-video-path-4"></path>
+<circle class="dv-rose" cx="120" cy="14" id="a-video-circle-1" r="10"></circle>
+<path class="dv-curl" d="M116 14 a4 4 0 1 1 4 4 a6.5 6.5 0 1 1 -6.5 -6.5" id="a-video-path-5"></path>
+<circle class="dv-dot" cx="100" cy="14" id="a-video-circle-2" r="2"></circle>
+<circle class="dv-dot" cx="140" cy="14" id="a-video-circle-3" r="2"></circle>
+</svg>
+<p class="sec-lead rv" id="video-lead" style="--d:.3s"></p>
+</header>
+<div class="rv rv-rise-big" id="gh" style="--d: 0.15s">
+<div id="gh-house">
+<div id="gh-glass">
+<video controls="" id="gh-video" playsinline="" preload="metadata" src=""></video>
+<div aria-hidden="true" id="gh-fog"></div>
+<button id="gh-play" type="button">
+<span aria-hidden="true" id="gh-play-ico"></span><span id="gh-play-text"></span>
+</button>
+</div>
+<svg aria-hidden="true" id="gh-frame" preserveaspectratio="none" viewbox="0 0 400 300">
+<path d="M8 296 V96 Q200 -26 392 96 V296 Z" fill="none" id="gh-f-outer" stroke="#2f4a2c" stroke-width="7"></path>
+<path d="M20 296 V102 Q200 -10 380 102" fill="none" id="gh-f-inner" opacity=".8" stroke="#c9a25e" stroke-width="1.4"></path>
+<path d="M104 296 V60 M200 296 V36 M296 296 V60 M8 190 H392" fill="none" id="gh-f-mull" stroke="#2f4a2c" stroke-width="3.2"></path>
+<path d="M8 96 Q200 30 392 96" fill="none" id="gh-f-arc" stroke="#2f4a2c" stroke-width="2.4"></path>
+<circle cx="200" cy="30" fill="#c9a25e" id="gh-f-finial" r="7"></circle>
+</svg>
+</div>
+<span class="ghr" id="ghr-1" style="--x: 3%; --y: 4%; --w: 26%"><img alt="" class="cut a-breathe" data-cut="rose_red" id="a-video-img-2"/></span>
+<span class="ghr" id="ghr-2" style="--x: 14%; --y: -3%; --w: 15%"><img alt="" class="cut a-breathe" data-cut="rose_blush" id="a-video-img-3" style="--del: -3s"/></span>
+<span class="ghr" id="ghr-3" style="--x: 97%; --y: 96%; --w: 28%"><img alt="" class="cut a-breathe" data-cut="rose_coral" id="a-video-img-4" style="--del: -5s"/></span>
+<span class="ghr" id="ghr-4" style="--x: 86%; --y: 104%; --w: 12%"><img alt="" class="cut a-float" data-cut="bud_7" id="a-video-img-5"/></span>
+</div>
+</div>
+</section>
+<section class="sec" data-section="countdown" id="sec-countdown">
+<div aria-hidden="true" class="sec-deco" id="countdown-deco">
+<span class="dk rv rv-right" id="cddk-white" style="--d: 0.2s; --w: clamp(80px, 20vw, 160px)"><img alt="" class="cut a-sway" data-cut="rose_white" id="a-countdown-img-1" style="--dur: 10s"/></span>
+<span class="dk rv rv-zoom" id="cddk-blush" style="--d: 0.3s; --w: clamp(100px, 24vw, 190px)"><img alt="" class="cut a-breathe" data-cut="rose_blush" id="a-countdown-img-2" style="--dur: 12s"/></span>
+</div>
+<div class="wrap" id="countdown-wrap">
+<header class="sec-head" id="countdown-head">
+<p class="tod-tag rv" id="countdown-tod">
+<span class="tod-ico" id="a-countdown-span-1"></span><span class="tod-time" id="a-countdown-span-2"></span><span class="tod-name" id="a-countdown-span-3"></span>
+</p>
+<p class="kicker rv" id="countdown-kicker" style="--d: 0.08s"></p>
+<h2 class="sec-title rv rv-petal" id="countdown-title" style="--d: 0.16s"><em id="a-countdown-em-1"></em>
+</h2>
+<svg aria-hidden="true" class="divider rv" id="countdown-divider" style="--d: 0.24s" viewbox="0 0 240 28">
+<path class="dv-line" d="M6 14 C 40 14 60 8 92 14" id="a-countdown-path-1"></path>
+<path class="dv-line" d="M234 14 C 200 14 180 8 148 14" id="a-countdown-path-2"></path>
+<path class="dv-leaf" d="M84 13 C 76 4 66 4 60 8 C 68 14 76 16 84 13 Z" id="a-countdown-path-3"></path>
+<path class="dv-leaf" d="M156 13 C 164 4 174 4 180 8 C 172 14 164 16 156 13 Z" id="a-countdown-path-4"></path>
+<circle class="dv-rose" cx="120" cy="14" id="a-countdown-circle-1" r="10"></circle>
+<path class="dv-curl" d="M116 14 a4 4 0 1 1 4 4 a6.5 6.5 0 1 1 -6.5 -6.5" id="a-countdown-path-5"></path>
+<circle class="dv-dot" cx="100" cy="14" id="a-countdown-circle-2" r="2"></circle>
+<circle class="dv-dot" cx="140" cy="14" id="a-countdown-circle-3" r="2"></circle>
+</svg>
+<p class="sec-lead rv" id="countdown-lead" style="--d:.3s"></p>
+</header>
+<div id="cd-grid">
+<div class="rv rv-zoom" id="sundial" style="--d: 0.15s">
+<svg aria-hidden="true" id="sundial-svg" viewbox="0 0 300 300">
+<defs id="a-countdown-defs-1">
+<radialgradient cx=".42" cy=".38" id="sd-stone" r=".7">
+<stop id="a-countdown-stop-1" offset="0" stop-color="#fbf3e6"></stop>
+<stop id="a-countdown-stop-2" offset=".7" stop-color="#ead9c0"></stop>
+<stop id="a-countdown-stop-3" offset="1" stop-color="#d6bf9c"></stop>
+</radialgradient>
+<lineargradient id="sd-brass" x1="0" x2="1" y1="0" y2="1">
+<stop id="a-countdown-stop-4" offset="0" stop-color="#f3dca8"></stop>
+<stop id="a-countdown-stop-5" offset=".5" stop-color="#b48a45"></stop>
+<stop id="a-countdown-stop-6" offset="1" stop-color="#e2c27f"></stop>
+</lineargradient>
+</defs>
+<circle cx="150" cy="150" fill="url(#sd-stone)" id="sd-base" r="146" stroke="#c9a25e" stroke-width="2"></circle>
+<circle cx="150" cy="150" fill="none" id="sd-ring-1" r="128" stroke="#b48a45" stroke-width="1.2"></circle>
+<circle cx="150" cy="150" fill="none" id="sd-ring-2" r="104" stroke="#b48a45" stroke-dasharray="2 4" stroke-width=".8"></circle>
+<g id="sd-ticks"></g>
+<g fill="#6d4247" font-family="Cormorant Garamond, serif" font-size="15" id="sd-numerals" text-anchor="middle"></g>
+<g id="sd-rose" transform="translate(150 150)">
+<path d="M0 -78 L10 -14 L0 -4 L-10 -14 Z" fill="#8e0f24" id="sd-rose-n"></path>
+<path d="M0 78 L10 14 L0 4 L-10 14 Z" fill="#c22a42" id="sd-rose-s" opacity=".8"></path>
+<path d="M78 0 L14 10 L4 0 L14 -10 Z" fill="#c22a42" id="sd-rose-e" opacity=".8"></path>
+<path d="M-78 0 L-14 10 L-4 0 L-14 -10 Z" fill="#c22a42" id="sd-rose-w" opacity=".8"></path>
+<circle fill="#f2c4bd" id="sd-rose-c" r="14" stroke="#8e0f24" stroke-width="1.5"></circle>
+<path d="M-4 0 a4 4 0 1 1 4 4 a7 7 0 1 1 -7 -7" fill="none" id="sd-rose-curl" stroke="#8e0f24" stroke-width="1.6"></path>
+</g>
+<g id="sd-shadow-g" transform="translate(150 150)">
+<path d="M-3 0 L0 -112 L3 0 Z" fill="rgba(58,18,25,.28)" id="sd-shadow"></path>
+</g>
+<g id="sd-gnomon" transform="translate(150 150)">
+<path d="M-2 6 L0 -96 L2 6 Z" fill="url(#sd-brass)" id="sd-gnomon-blade"></path>
+<circle fill="url(#sd-brass)" id="sd-gnomon-cap" r="5"></circle>
+</g>
+</svg>
+<p id="sundial-cap"><span id="sundial-now"></span>
+</p>
+</div>
+<div id="cd-right">
+<div aria-live="off" id="cd-tiles" role="timer">
+<div class="cd-tile" id="cd-t-days">
+<span aria-hidden="true" class="cd-petal" id="cd-p-days"></span><span class="cd-num" id="cd-days">00</span><span class="cd-lbl" id="cd-l-days"></span>
+</div>
+<div class="cd-tile" id="cd-t-hours">
+<span aria-hidden="true" class="cd-petal" id="cd-p-hours"></span><span class="cd-num" id="cd-hours">00</span><span class="cd-lbl" id="cd-l-hours"></span>
+</div>
+<div class="cd-tile" id="cd-t-mins">
+<span aria-hidden="true" class="cd-petal" id="cd-p-mins"></span><span class="cd-num" id="cd-mins">00</span><span class="cd-lbl" id="cd-l-mins"></span>
+</div>
+<div class="cd-tile" id="cd-t-secs">
+<span aria-hidden="true" class="cd-petal" id="cd-p-secs"></span><span class="cd-num" id="cd-secs">00</span><span class="cd-lbl" id="cd-l-secs"></span>
+</div>
+</div>
+<p id="cd-done"></p>
+<p id="cd-date-line">
+<span id="cd-date-lbl"></span>
+<span class="js-date-long" id="cd-date-val"></span>
+</p>
+<div id="cd-actions">
+<a class="btn btn-velvet" href="#" id="cal-google" rel="noopener" target="_blank"><span aria-hidden="true" id="cal-google-ico">✿</span><span id="cal-google-text"></span></a>
+<button class="btn btn-ghost" id="cal-ics" type="button">
+<span id="cal-ics-text"></span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="sec" data-section="events" id="sec-events">
+<div aria-hidden="true" class="sec-deco" id="events-deco">
+<span class="dk rv rv-left" id="evdk-stem" style="--d: 0.2s; --w: clamp(80px, 20vw, 160px)"><img alt="" class="cut a-sway" data-cut="rose_dark" id="a-events-img-1" style="--dur: 9s"/></span>
+<span class="dk rv rv-zoom" id="evdk-red" style="--d: 0.3s; --w: clamp(110px, 26vw, 210px)"><img alt="" class="cut a-breathe" data-cut="rose_red" id="a-events-img-2" style="--dur: 12s"/></span>
+</div>
+<div class="wrap" id="events-wrap">
+<header class="sec-head" id="events-head">
+<p class="tod-tag rv" id="events-tod">
+<span class="tod-ico" id="a-events-span-1"></span><span class="tod-time" id="a-events-span-2"></span><span class="tod-name" id="a-events-span-3"></span>
+</p>
+<p class="kicker rv" id="events-kicker" style="--d: 0.08s"></p>
+<h2 class="sec-title rv rv-petal" id="events-title" style="--d: 0.16s"><em id="a-events-em-1"></em>
+</h2>
+<svg aria-hidden="true" class="divider rv" id="events-divider" style="--d: 0.24s" viewbox="0 0 240 28">
+<path class="dv-line" d="M6 14 C 40 14 60 8 92 14" id="a-events-path-1"></path>
+<path class="dv-line" d="M234 14 C 200 14 180 8 148 14" id="a-events-path-2"></path>
+<path class="dv-leaf" d="M84 13 C 76 4 66 4 60 8 C 68 14 76 16 84 13 Z" id="a-events-path-3"></path>
+<path class="dv-leaf" d="M156 13 C 164 4 174 4 180 8 C 172 14 164 16 156 13 Z" id="a-events-path-4"></path>
+<circle class="dv-rose" cx="120" cy="14" id="a-events-circle-1" r="10"></circle>
+<path class="dv-curl" d="M116 14 a4 4 0 1 1 4 4 a6.5 6.5 0 1 1 -6.5 -6.5" id="a-events-path-5"></path>
+<circle class="dv-dot" cx="100" cy="14" id="a-events-circle-2" r="2"></circle>
+<circle class="dv-dot" cx="140" cy="14" id="a-events-circle-3" r="2"></circle>
+</svg>
+<p class="sec-lead rv" id="events-lead" style="--d:.3s"></p>
+</header>
+<div id="ev-grid">
+<article class="ev-card card rv" id="ev-1" style="--d: 0.1s">
+<span class="card-corner cc-tl" id="ev-1-cc-tl"></span><span class="card-corner cc-br" id="ev-1-cc-br"></span>
+<div class="ev-bloom-wrap" id="ev-1-bw">
+<div class="bloom" data-preset="event" data-tone="blush" id="ev-1-bloom">
+<div class="bloom-core" id="ev-1-core">
+<span class="evb-lbl" id="ev-1-lbl"></span><span class="evb-time" id="ev-1-time"></span><span class="evb-tz" id="ev-1-tz"></span>
+</div>
+</div>
+</div>
+<p class="ev-kicker" id="ev-1-kicker">
+<span aria-hidden="true" class="ev-ico ev-ico-sun" id="ev-1-ico"></span></p>
+<h3 class="ev-name" id="ev-1-name"></h3>
+<p class="ev-date" id="ev-1-date"></p>
+<p class="ev-range" id="ev-1-range"></p>
+<div class="ev-place" id="ev-1-place">
+<p class="ev-venue" id="ev-1-venue"></p>
+<p class="ev-addr" id="ev-1-addr"></p>
+</div>
+<p class="ev-note" id="ev-1-note"></p>
+<div class="ev-actions" id="ev-1-actions">
+<a class="btn btn-velvet btn-sm" href="" id="ev-1-map" rel="noopener" target="_blank"></a>
+</div>
+</article>
+<article class="ev-card card rv" id="ev-2" style="--d: 0.2s">
+<span class="card-corner cc-tl" id="ev-2-cc-tl"></span><span class="card-corner cc-br" id="ev-2-cc-br"></span>
+<span aria-hidden="true" class="ev-candle" id="ev-2-candle-a"><img alt="" class="cut" data-cut="candle_pillar" id="a-events-img-3"/><span class="flame-glow" id="ev-2-glow-a"></span></span>
+<span aria-hidden="true" class="ev-candle" id="ev-2-candle-b"><img alt="" class="cut" data-cut="candle_red" id="a-events-img-4"/><span class="flame-glow" id="ev-2-glow-b"></span></span>
+<div class="ev-bloom-wrap" id="ev-2-bw">
+<div class="bloom" data-preset="event" data-tone="crimson" id="ev-2-bloom">
+<div class="bloom-core" id="ev-2-core">
+<span class="evb-lbl" id="ev-2-lbl"></span><span class="evb-time" id="ev-2-time"></span><span class="evb-tz" id="ev-2-tz"></span>
+</div>
+</div>
+</div>
+<p class="ev-kicker" id="ev-2-kicker">
+<span aria-hidden="true" class="ev-ico ev-ico-moon" id="ev-2-ico"></span></p>
+<h3 class="ev-name" id="ev-2-name"></h3>
+<p class="ev-date" data-date="" data-end="" data-start="" id="ev-2-date"></p>
+<p class="ev-range" id="ev-2-range"></p>
+<div class="ev-place" id="ev-2-place">
+<p class="ev-venue" id="ev-2-venue"></p>
+<p class="ev-addr" id="ev-2-addr"></p>
+</div>
+<p class="ev-note" id="ev-2-note"></p>
+<div class="ev-actions" id="ev-2-actions">
+<a class="btn btn-velvet btn-sm" href="#" id="ev-2-map" rel="noopener" target="_blank"></a>
+</div>
+</article>
+</div>
+<div class="card rv" id="ev-live" style="--d: 0.15s">
+<p id="ev-live-kicker">
+<span aria-hidden="true" id="ev-live-dot"></span></p>
+<p id="ev-live-text"></p>
+<div id="ev-live-frame"></div>
+<a class="btn btn-ghost btn-sm" href="" id="ev-live-link" rel="noopener" target="_blank"></a>
+</div>
+</div>
+</section>
+<section class="sec" data-section="rundown" id="sec-rundown">
+<div aria-hidden="true" class="sec-deco" id="rundown-deco">
+<span class="dk rv rv-zoom" id="rddk-coral" style="--d: 0.2s; --w: clamp(100px, 24vw, 200px)"><img alt="" class="cut a-breathe" data-cut="rose_coral" id="a-rundown-img-1" style="--dur: 11s"/></span>
+<span class="dk rv rv-zoom" id="rddk-bud" style="--d: 0.3s; --w: clamp(22px, 5vw, 40px)"><img alt="" class="cut a-float" data-cut="bud_6" id="a-rundown-img-2"/></span>
+</div>
+<div class="wrap" id="rundown-wrap">
+<header class="sec-head" id="rundown-head">
+<p class="tod-tag rv" id="rundown-tod">
+<span class="tod-ico" id="a-rundown-span-1"></span><span class="tod-time" id="a-rundown-span-2"></span><span class="tod-name" id="a-rundown-span-3"></span>
+</p>
+<p class="kicker rv" id="rundown-kicker" style="--d: 0.08s"></p>
+<h2 class="sec-title rv rv-petal" id="rundown-title" style="--d: 0.16s"><em id="a-rundown-em-1"></em>
+</h2>
+<svg aria-hidden="true" class="divider rv" id="rundown-divider" style="--d: 0.24s" viewbox="0 0 240 28">
+<path class="dv-line" d="M6 14 C 40 14 60 8 92 14" id="a-rundown-path-1"></path>
+<path class="dv-line" d="M234 14 C 200 14 180 8 148 14" id="a-rundown-path-2"></path>
+<path class="dv-leaf" d="M84 13 C 76 4 66 4 60 8 C 68 14 76 16 84 13 Z" id="a-rundown-path-3"></path>
+<path class="dv-leaf" d="M156 13 C 164 4 174 4 180 8 C 172 14 164 16 156 13 Z" id="a-rundown-path-4"></path>
+<circle class="dv-rose" cx="120" cy="14" id="a-rundown-circle-1" r="10"></circle>
+<path class="dv-curl" d="M116 14 a4 4 0 1 1 4 4 a6.5 6.5 0 1 1 -6.5 -6.5" id="a-rundown-path-5"></path>
+<circle class="dv-dot" cx="100" cy="14" id="a-rundown-circle-2" r="2"></circle>
+<circle class="dv-dot" cx="140" cy="14" id="a-rundown-circle-3" r="2"></circle>
+</svg>
+<p class="sec-lead rv" id="rundown-lead" style="--d:.3s"></p>
+</header>
+<div id="rd-grid">
+<div aria-hidden="true" class="rv rv-zoom" id="rd-clock" style="--d: 0.15s">
+<svg id="rd-clock-svg" viewbox="0 0 240 240">
+<circle cx="120" cy="120" id="rdc-face" r="112"></circle>
+<circle cx="120" cy="120" id="rdc-ring" r="96"></circle>
+<g id="rdc-ticks"></g>
+<g id="rdc-petals"></g>
+<g id="rdc-dots"></g>
+<g id="rdc-hand-g" transform="translate(120 120)">
+<path d="M-2 8 L0 -80 L2 8 Z" id="rdc-hand"></path>
+<circle id="rdc-hub" r="6"></circle>
+</g>
+</svg>
+<p id="rd-clock-cap">
+<span id="rd-clock-time">--.--</span><span id="rd-clock-title"></span>
+</p>
+</div>
+<div id="rd-list"></div>
+</div>
+</div>
+</section>
+<section class="sec" data-section="location" id="sec-location">
+<div aria-hidden="true" class="sec-deco" id="location-deco">
+<span class="dk rv rv-right" id="lcdk-stem" style="--d: 0.2s; --w: clamp(80px, 20vw, 160px)"><img alt="" class="cut a-sway" data-cut="rose_stem" id="a-location-img-1" style="--dur: 9s"/></span>
+</div>
+<div class="wrap" id="location-wrap">
+<header class="sec-head" id="location-head">
+<p class="tod-tag rv" id="location-tod">
+<span class="tod-ico" id="a-location-span-1"></span><span class="tod-time" id="a-location-span-2"></span><span class="tod-name" id="a-location-span-3"></span>
+</p>
+<p class="kicker rv" id="location-kicker" style="--d: 0.08s"></p>
+<h2 class="sec-title rv rv-petal" id="location-title" style="--d: 0.16s"><em id="a-location-em-1"></em>
+</h2>
+<svg aria-hidden="true" class="divider rv" id="location-divider" style="--d: 0.24s" viewbox="0 0 240 28">
+<path class="dv-line" d="M6 14 C 40 14 60 8 92 14" id="a-location-path-1"></path>
+<path class="dv-line" d="M234 14 C 200 14 180 8 148 14" id="a-location-path-2"></path>
+<path class="dv-leaf" d="M84 13 C 76 4 66 4 60 8 C 68 14 76 16 84 13 Z" id="a-location-path-3"></path>
+<path class="dv-leaf" d="M156 13 C 164 4 174 4 180 8 C 172 14 164 16 156 13 Z" id="a-location-path-4"></path>
+<circle class="dv-rose" cx="120" cy="14" id="a-location-circle-1" r="10"></circle>
+<path class="dv-curl" d="M116 14 a4 4 0 1 1 4 4 a6.5 6.5 0 1 1 -6.5 -6.5" id="a-location-path-5"></path>
+<circle class="dv-dot" cx="100" cy="14" id="a-location-circle-2" r="2"></circle>
+<circle class="dv-dot" cx="140" cy="14" id="a-location-circle-3" r="2"></circle>
+</svg>
+<p class="sec-lead rv" id="location-lead" style="--d:.3s"></p>
+</header>
+<div id="loc-grid">
+<div class="rv rv-zoom" id="loc-map-col" style="--d: 0.12s">
+<div aria-label="" id="loc-tabs" role="tablist">
+<button aria-controls="loc-panel-art" aria-selected="true" class="loc-tab is-active" id="loc-tab-art" role="tab" type="button"></button>
+<button aria-controls="loc-panel-real" aria-selected="false" class="loc-tab" id="loc-tab-real" role="tab" type="button"></button>
+</div>
+<div id="loc-stage">
+<div aria-labelledby="loc-tab-art" class="loc-panel is-active" id="loc-panel-art" role="tabpanel">
+<svg aria-hidden="true" id="garden-map" viewbox="0 0 360 300">
+<defs id="a-location-defs-1">
+<pattern height="12" id="gm-grass" patternunits="userSpaceOnUse" width="12">
+<rect fill="#cfdcb7" height="12" id="gm-grass-bg" width="12"></rect>
+<path d="M2 10 l2 -5 l1 5 M8 6 l1 -4 l1 4" fill="none" id="gm-grass-t" stroke="#a9bf8c" stroke-width=".8"></path>
+</pattern>
+</defs>
+<rect fill="url(#gm-grass)" height="300" id="gm-bg" rx="18" width="360" x="0" y="0"></rect>
+<path d="M30 284 C 60 240 40 210 90 196 C 150 180 120 140 170 122 C 220 104 210 70 260 60 C 290 54 300 46 312 40" fill="none" id="gm-path" stroke="#efe2c8" stroke-linecap="round" stroke-width="18"></path>
+<path d="M30 284 C 60 240 40 210 90 196 C 150 180 120 140 170 122 C 220 104 210 70 260 60 C 290 54 300 46 312 40" fill="none" id="gm-path-edge" opacity=".45" stroke="#d8c39c" stroke-linecap="round" stroke-width="20"></path>
+<g fill="#5c7d52" id="gm-hedges">
+<rect height="22" id="gm-h-1" rx="11" width="120" x="196" y="170"></rect>
+<rect height="20" id="gm-h-2" rx="10" width="96" x="20" y="120"></rect>
+<rect height="70" id="gm-h-3" rx="10" width="20" x="210" y="214"></rect>
+<rect height="62" id="gm-h-4" rx="10" width="20" x="40" y="40"></rect>
+</g>
+<g id="gm-beds">
+<circle cx="250" cy="250" fill="#7a9a6b" id="gm-b-1" r="26"></circle>
+<circle cx="110" cy="62" fill="#7a9a6b" id="gm-b-2" r="24"></circle>
+<circle cx="300" cy="120" fill="#7a9a6b" id="gm-b-3" r="20"></circle>
+</g>
+<g id="gm-roses"></g>
+<g id="gm-fountain" transform="translate(150 238)">
+<circle fill="#bfdcdc" id="gm-f-pool" r="26" stroke="#e8dcc4" stroke-width="5"></circle>
+<circle class="gm-ripple" fill="none" id="gm-f-ripple-1" r="10" stroke="#ffffff" stroke-width="1.4"></circle>
+<circle class="gm-ripple" fill="none" id="gm-f-ripple-2" r="10" stroke="#ffffff" stroke-width="1.4" style="animation-delay: -1.5s"></circle>
+<circle fill="#e8dcc4" id="gm-f-center" r="5"></circle>
+</g>
+<path d="M30 284 C 60 240 40 210 90 196 C 150 180 120 140 170 122 C 220 104 210 70 260 60 C 290 54 300 46 312 40" fill="none" id="gm-route" stroke="#8e0f24" stroke-dasharray="6 7" stroke-linecap="round" stroke-width="3"></path>
+<g id="gm-gate" transform="translate(30 284)">
+<path d="M-16 6 V-10 A16 16 0 0 1 16 -10 V6" fill="none" id="gm-gate-arch" stroke="#2f4a2c" stroke-width="3"></path>
+<circle cx="-12" cy="-16" fill="#b3192f" id="gm-gate-r1" r="4"></circle>
+<circle cx="8" cy="-22" fill="#e9a9a2" id="gm-gate-r2" r="3.4"></circle>
+<circle cx="14" cy="-10" fill="#8e0f24" id="gm-gate-r3" r="3.6"></circle>
+</g>
+<g id="gm-you" transform="translate(30 270)">
+<circle fill="#8e0f24" id="gm-you-pulse" opacity=".25" r="9"></circle>
+<circle fill="#8e0f24" id="gm-you-dot" r="5" stroke="#fff" stroke-width="2"></circle>
+</g>
+<g id="gm-pergola" transform="translate(312 40)">
+<circle fill="#f4d58d" id="gm-pg-glow" opacity=".35" r="30"></circle>
+<path d="M-22 -4 L0 -20 L22 -4 Z" fill="#c9a25e" id="gm-pg-roof"></path>
+<rect fill="#fbf4ea" height="20" id="gm-pg-base" rx="3" stroke="#c9a25e" stroke-width="2" width="36" x="-18" y="-4"></rect>
+<path d="M0 12 C -9 4 -8 -2 -3 -2 C -1 -2 0 0 0 1 C 0 0 1 -2 3 -2 C 8 -2 9 4 0 12 Z" fill="#8e0f24" id="gm-pg-heart"></path>
+</g>
+<g id="gm-walker">
+<circle fill="#fbf4ea" id="gm-walker-dot" r="6" stroke="#8e0f24" stroke-width="2.4"></circle>
+<circle fill="#8e0f24" id="gm-walker-in" r="2.2"></circle>
+</g>
+<g fill="#3a1219" font-family="Mulish, sans-serif" font-size="11" font-weight="700" id="gm-labels">
+<text id="gm-l-you" x="48" y="276"></text>
+<text id="gm-l-venue" text-anchor="end" x="300" y="78"></text>
+<text fill="#4c6a46" font-weight="600" id="gm-l-fountain" text-anchor="middle" x="150" y="282"></text>
+</g>
+<g id="gm-compass" transform="translate(328 266)">
+<circle fill="#fbf4ea" id="gm-c-ring" r="17" stroke="#c9a25e" stroke-width="1.5"></circle>
+<path d="M0 -13 L4 0 L0 13 L-4 0 Z" fill="#8e0f24" id="gm-c-needle"></path>
+<text fill="#6d4247" font-family="Marcellus SC, serif" font-size="9" id="gm-c-n" text-anchor="middle" y="-20"></text>
+</g>
+</svg>
+</div>
+<div aria-labelledby="loc-tab-real" class="loc-panel" id="loc-panel-real" role="tabpanel">
+<iframe data-src="" id="loc-iframe" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title=""></iframe>
+</div>
+</div>
+</div>
+<div class="card rv" id="loc-card" style="--d: 0.2s">
+<span class="card-corner cc-tl" id="loc-cc-tl"></span><span class="card-corner cc-br" id="loc-cc-br"></span>
+<p id="loc-kicker"></p>
+<h3 id="loc-name"></h3>
+<p id="loc-addr"></p>
+<p id="loc-note">
+<span aria-hidden="true" id="loc-note-ico">❀</span><span id="loc-note-text"></span>
+</p>
+<div id="loc-actions">
+<a class="btn btn-velvet" href="" id="loc-dir" rel="noopener" target="_blank"></a>
+<button class="btn btn-ghost" id="loc-copy" type="button"></button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="sec" data-section="dresscode" id="sec-dresscode">
+<div aria-hidden="true" class="sec-deco" id="dresscode-deco">
+<span class="dk rv rv-zoom" id="dcdk-blush" style="--d: 0.2s; --w: clamp(100px, 24vw, 200px)"><img alt="" class="cut a-breathe" data-cut="rose_blush" id="a-dresscode-img-1" style="--dur: 11s"/></span>
+<span class="dk rv rv-zoom" id="dcdk-bud" style="--d: 0.3s; --w: clamp(22px, 5vw, 40px)"><img alt="" class="cut a-float" data-cut="bud_9" id="a-dresscode-img-2"/></span>
+</div>
+<div class="wrap" id="dresscode-wrap">
+<header class="sec-head" id="dresscode-head">
+<p class="tod-tag rv" id="dresscode-tod">
+<span class="tod-ico" id="a-dresscode-span-1"></span><span class="tod-time" id="a-dresscode-span-2"></span><span class="tod-name" id="a-dresscode-span-3"></span>
+</p>
+<p class="kicker rv" id="dresscode-kicker" style="--d: 0.08s"></p>
+<h2 class="sec-title rv rv-petal" id="dresscode-title" style="--d: 0.16s"><em id="a-dresscode-em-1"></em>
+</h2>
+<svg aria-hidden="true" class="divider rv" id="dresscode-divider" style="--d: 0.24s" viewbox="0 0 240 28">
+<path class="dv-line" d="M6 14 C 40 14 60 8 92 14" id="a-dresscode-path-1"></path>
+<path class="dv-line" d="M234 14 C 200 14 180 8 148 14" id="a-dresscode-path-2"></path>
+<path class="dv-leaf" d="M84 13 C 76 4 66 4 60 8 C 68 14 76 16 84 13 Z" id="a-dresscode-path-3"></path>
+<path class="dv-leaf" d="M156 13 C 164 4 174 4 180 8 C 172 14 164 16 156 13 Z" id="a-dresscode-path-4"></path>
+<circle class="dv-rose" cx="120" cy="14" id="a-dresscode-circle-1" r="10"></circle>
+<path class="dv-curl" d="M116 14 a4 4 0 1 1 4 4 a6.5 6.5 0 1 1 -6.5 -6.5" id="a-dresscode-path-5"></path>
+<circle class="dv-dot" cx="100" cy="14" id="a-dresscode-circle-2" r="2"></circle>
+<circle class="dv-dot" cx="140" cy="14" id="a-dresscode-circle-3" r="2"></circle>
+</svg>
+<p class="sec-lead rv" id="dresscode-lead" style="--d:.3s"></p>
+</header>
+<div id="dc-grid">
+<div class="rv rv-zoom" id="dc-stage" style="--d: 0.12s">
+<svg aria-hidden="true" id="dc-svg" viewbox="0 0 320 340">
+<defs id="a-dresscode-defs-1">
+<clippath id="dc-clip-dress">
+<path d="M96 92 C 86 92 80 100 80 112 L 76 170 C 70 210 52 270 40 324 L 152 324 C 140 270 122 210 116 170 L 112 112 C 112 100 106 92 96 92 Z" id="dc-cp-dress"></path>
+</clippath>
+<clippath id="dc-clip-suit">
+<path d="M224 92 C 206 92 196 100 194 116 L 190 200 L 196 324 L 220 324 L 224 214 L 228 324 L 252 324 L 258 200 L 254 116 C 252 100 242 92 224 92 Z" id="dc-cp-suit"></path>
+</clippath>
+<radialgradient cx=".5" cy=".3" id="dc-shade" r=".8">
+<stop id="a-dresscode-stop-1" offset="0" stop-color="#ffffff" stop-opacity=".25"></stop>
+<stop id="a-dresscode-stop-2" offset="1" stop-color="#000000" stop-opacity=".25"></stop>
+</radialgradient>
+</defs>
+<ellipse cx="160" cy="326" fill="rgba(58,18,25,.12)" id="dc-floor" rx="140" ry="10"></ellipse>
+<circle cx="96" cy="62" fill="#e9cdb5" id="dc-head-b" r="20"></circle>
+<path d="M76 60 C 74 36 118 30 118 58 C 120 70 112 78 110 92 C 106 80 108 70 100 64 C 92 72 84 70 76 60 Z" fill="#3a1d16" id="dc-hair-b"></path>
+<circle cx="108" cy="44" fill="#3a1d16" id="dc-bun" r="9"></circle>
+<circle cx="224" cy="60" fill="#e3c1a6" id="dc-head-g" r="20"></circle>
+<path d="M204 56 C 204 36 244 34 244 54 C 238 48 226 46 214 50 C 210 52 206 56 204 56 Z" fill="#2a1712" id="dc-hair-g"></path>
+<g clip-path="url(#dc-clip-dress)" id="dc-dress-g">
+<rect fill="#8e0f24" height="250" id="dc-dress-base" width="140" x="30" y="80"></rect>
+<circle class="dc-wash" cx="100" cy="120" fill="#8e0f24" id="dc-dress-wash" r="230"></circle>
+<rect fill="url(#dc-shade)" height="250" id="dc-dress-shade" width="140" x="30" y="80"></rect>
+<path d="M86 180 C 80 230 70 280 64 324 M106 180 C 112 230 122 280 128 324 M96 190 V324" fill="none" id="dc-dress-folds" stroke="rgba(0,0,0,.15)" stroke-width="2"></path>
+</g>
+<g clip-path="url(#dc-clip-suit)" id="dc-suit-g">
+<rect fill="#556f4c" height="250" id="dc-suit-base" width="90" x="180" y="80"></rect>
+<circle class="dc-wash" cx="224" cy="120" fill="#556f4c" id="dc-suit-wash" r="230"></circle>
+<rect fill="url(#dc-shade)" height="250" id="dc-suit-shade" width="90" x="180" y="80"></rect>
+<path d="M210 96 L224 140 L238 96" fill="none" id="dc-suit-lapel" stroke="rgba(255,255,255,.55)" stroke-width="2"></path>
+<path d="M224 140 V204" id="dc-suit-mid" stroke="rgba(0,0,0,.2)" stroke-width="2"></path>
+</g>
+<path d="M104 104 c 6 -6 14 -2 12 6 c -2 6 -10 8 -14 4 c -3 -3 -2 -7 2 -10 z" fill="#f2c4bd" id="dc-corsage-b" stroke="#8e0f24" stroke-width="1.2"></path>
+<path d="M238 112 c 5 -5 12 -2 10 5 c -1 5 -8 7 -11 3 c -3 -2 -2 -6 1 -8 z" fill="#c22a42" id="dc-bout-g" stroke="#5c0716" stroke-width="1.2"></path>
+<path d="M240 122 c -6 4 -12 4 -14 0 c 4 -4 10 -4 14 0 z" fill="#46663f" id="dc-bout-lf"></path>
+</svg>
+<p id="dc-picked">
+<span id="dc-picked-lbl"></span><strong id="dc-picked-name"></strong>
+</p>
+</div>
+<div id="dc-swatches">
+<button class="dc-sw" data-color="#8e0f24" id="dc-sw-1" type="button">
+<span aria-hidden="true" class="dc-sw-rose" id="dc-sw-1-rose"></span><span class="dc-sw-name" id="dc-sw-1-name"></span>
+</button>
+<button class="dc-sw" data-color="#f0bdb4" id="dc-sw-2" type="button">
+<span aria-hidden="true" class="dc-sw-rose" id="dc-sw-2-rose"></span><span class="dc-sw-name" id="dc-sw-2-name"></span>
+</button>
+<button class="dc-sw" data-color="#f3e7d3" id="dc-sw-3" type="button">
+<span aria-hidden="true" class="dc-sw-rose" id="dc-sw-3-rose"></span><span class="dc-sw-name" id="dc-sw-3-name"></span>
+</button>
+<button class="dc-sw" data-color="#556f4c" id="dc-sw-4" type="button">
+<span aria-hidden="true" class="dc-sw-rose" id="dc-sw-4-rose"></span><span class="dc-sw-name" id="dc-sw-4-name"></span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<section class="sec" data-section="rose-language" id="sec-roselang">
+<div aria-hidden="true" class="sec-deco" id="roselang-deco">
+<span class="dk rv rv-left" id="rldk-white" style="--d: 0.2s; --w: clamp(80px, 20vw, 160px)"><img alt="" class="cut a-sway" data-cut="rose_white" id="a-rose-language-img-1" style="--dur: 10s"/></span>
+<span class="dk rv rv-zoom" id="rldk-red" style="--d: 0.3s; --w: clamp(110px, 26vw, 220px)"><img alt="" class="cut a-breathe" data-cut="rose_red" id="a-rose-language-img-2" style="--dur: 12s"/></span>
+</div>
+<div class="wrap" id="roselang-wrap">
+<header class="sec-head" id="roselang-head">
+<p class="tod-tag rv" id="roselang-tod">
+<span class="tod-ico" id="a-rose-language-span-1"></span><span class="tod-time" id="a-rose-language-span-2"></span><span class="tod-name" id="a-rose-language-span-3"></span>
+</p>
+<p class="kicker rv" id="roselang-kicker" style="--d: 0.08s"></p>
+<h2 class="sec-title rv rv-petal" id="roselang-title" style="--d: 0.16s"><em id="a-rose-language-em-1"></em>
+</h2>
+<svg aria-hidden="true" class="divider rv" id="roselang-divider" style="--d: 0.24s" viewbox="0 0 240 28">
+<path class="dv-line" d="M6 14 C 40 14 60 8 92 14" id="a-rose-language-path-1"></path>
+<path class="dv-line" d="M234 14 C 200 14 180 8 148 14" id="a-rose-language-path-2"></path>
+<path class="dv-leaf" d="M84 13 C 76 4 66 4 60 8 C 68 14 76 16 84 13 Z" id="a-rose-language-path-3"></path>
+<path class="dv-leaf" d="M156 13 C 164 4 174 4 180 8 C 172 14 164 16 156 13 Z" id="a-rose-language-path-4"></path>
+<circle class="dv-rose" cx="120" cy="14" id="a-rose-language-circle-1" r="10"></circle>
+<path class="dv-curl" d="M116 14 a4 4 0 1 1 4 4 a6.5 6.5 0 1 1 -6.5 -6.5" id="a-rose-language-path-5"></path>
+<circle class="dv-dot" cx="100" cy="14" id="a-rose-language-circle-2" r="2"></circle>
+<circle class="dv-dot" cx="140" cy="14" id="a-rose-language-circle-3" r="2"></circle>
+</svg>
+<p class="sec-lead rv" id="roselang-lead" style="--d:.3s"></p>
+</header>
+<div id="rl-grid">
+<div class="rv rv-zoom" id="rl-bouquet" style="--d: 0.12s">
+<svg aria-hidden="true" id="rl-wrap-svg" viewbox="0 0 300 300">
+<defs id="a-rose-language-defs-1">
+<lineargradient id="rl-paper" x1="0" x2="1" y1="0" y2="0">
+<stop id="a-rose-language-stop-1" offset="0" stop-color="#d9b48a"></stop>
+<stop id="a-rose-language-stop-2" offset=".5" stop-color="#f0d6b2"></stop>
+<stop id="a-rose-language-stop-3" offset="1" stop-color="#cfa77a"></stop>
+</lineargradient>
+</defs>
+<path d="M150 290 L120 170 M150 290 L140 160 M150 290 L162 160 M150 290 L182 170" fill="none" id="rl-stems" stroke="#46663f" stroke-linecap="round" stroke-width="4"></path>
+<path class="leaf-sway" d="M112 184 c -26 -6 -40 -24 -40 -40 c 22 4 36 20 40 40 z" fill="#5c7d52" id="rl-lf-1"></path>
+<path class="leaf-sway" d="M190 184 c 26 -6 40 -24 40 -40 c -22 4 -36 20 -40 40 z" fill="#46663f" id="rl-lf-2"></path>
+<path d="M84 176 L150 296 L216 176 Q150 196 84 176 Z" fill="url(#rl-paper)" id="rl-cone"></path>
+<path d="M84 176 Q150 196 216 176 L208 190 Q150 208 92 190 Z" fill="#c99d6e" id="rl-cone-fold" opacity=".7"></path>
+<path d="M150 296 L118 182 M150 296 L184 182" id="rl-cone-line" opacity=".6" stroke="#b88c5c" stroke-width="1"></path>
+<g class="rl-ribbon" id="rl-ribbon">
+<path d="M120 236 Q150 246 180 236 L176 248 Q150 258 124 248 Z" fill="#8e0f24" id="rl-rib-band"></path>
+<path d="M150 244 C 130 226 112 230 114 244 C 116 258 134 256 150 244 Z" fill="#a3122b" id="rl-rib-bow-l"></path>
+<path d="M150 244 C 170 226 188 230 186 244 C 184 258 166 256 150 244 Z" fill="#a3122b" id="rl-rib-bow-r"></path>
+<path d="M150 246 C 144 262 136 274 128 286 M150 246 C 158 262 168 272 176 284" fill="none" id="rl-rib-tails" stroke="#8e0f24" stroke-linecap="round" stroke-width="4"></path>
+<circle cx="150" cy="245" fill="#5c0716" id="rl-rib-knot" r="5"></circle>
+</g>
+</svg>
+<button aria-label="" class="rl-rose" data-color="#9e1229" data-idx="1" id="rl-rose-1" type="button">
+<span class="bloom is-half" data-preset="lang" id="rl-bloom-1"><span class="bloom-core" id="rl-core-1"><span class="rl-core-n" id="rl-core-1-n"></span></span></span>
+</button>
+<button aria-label="" class="rl-rose" data-color="#f1b9b0" data-idx="2" id="rl-rose-2" type="button">
+<span class="bloom is-half" data-preset="lang" id="rl-bloom-2"><span class="bloom-core" id="rl-core-2"><span class="rl-core-n" id="rl-core-2-n"></span></span></span>
+</button>
+<button aria-label="" class="rl-rose" data-color="#f4ead8" data-idx="3" id="rl-rose-3" type="button">
+<span class="bloom is-half" data-preset="lang" id="rl-bloom-3"><span class="bloom-core" id="rl-core-3"><span class="rl-core-n" id="rl-core-3-n"></span></span></span>
+</button>
+<button aria-label="" class="rl-rose" data-color="#ef9f7c" data-idx="4" id="rl-rose-4" type="button">
+<span class="bloom is-half" data-preset="lang" id="rl-bloom-4"><span class="bloom-core" id="rl-core-4"><span class="rl-core-n" id="rl-core-4-n"></span></span></span>
+</button>
+<p id="rl-tap-hint"></p>
+</div>
+<div class="card rv" id="rl-dict" style="--d: 0.2s">
+<span class="card-corner cc-tl" id="rl-cc-tl"></span><span class="card-corner cc-br" id="rl-cc-br"></span>
+<p id="rl-dict-kicker"></p>
+<div id="rl-entries">
+<p id="rl-empty"></p>
+<article class="rl-entry" data-idx="1" id="rl-entry-1">
+<p class="rl-name" id="rl-name-1">
+<span class="rl-chip" id="rl-chip-1"></span><span id="rl-name-1-t"></span>
+</p>
+<h3 class="rl-meaning" id="rl-meaning-1"></h3>
+<p class="rl-story" id="rl-story-1"></p>
+</article>
+<article class="rl-entry" data-idx="2" id="rl-entry-2">
+<p class="rl-name" id="rl-name-2">
+<span class="rl-chip" id="rl-chip-2"></span><span id="rl-name-2-t"></span>
+</p>
+<h3 class="rl-meaning" id="rl-meaning-2"></h3>
+<p class="rl-story" id="rl-story-2"></p>
+</article>
+<article class="rl-entry" data-idx="3" id="rl-entry-3">
+<p class="rl-name" id="rl-name-3">
+<span class="rl-chip" id="rl-chip-3"></span><span id="rl-name-3-t"></span>
+</p>
+<h3 class="rl-meaning" id="rl-meaning-3"></h3>
+<p class="rl-story" id="rl-story-3"></p>
+</article>
+<article class="rl-entry" data-idx="4" id="rl-entry-4">
+<p class="rl-name" id="rl-name-4">
+<span class="rl-chip" id="rl-chip-4"></span><span id="rl-name-4-t"></span>
+</p>
+<h3 class="rl-meaning" id="rl-meaning-4"></h3>
+<p class="rl-story" id="rl-story-4"></p>
+</article>
+</div>
+<div id="rl-progress"><span id="rl-progress-bar"></span></div>
+<p id="rl-count">
+<span id="rl-count-n">0</span><span id="rl-count-t">4</span></p>
+<p id="rl-done"></p>
+</div>
+</div>
+</div>
+</section>
+<section class="sec" data-section="gallery" id="sec-gallery">
+<div aria-hidden="true" class="sec-deco" id="gallery-deco">
+<span class="dk rv rv-zoom" id="gldk-coral" style="--d: 0.2s; --w: clamp(100px, 24vw, 200px)"><img alt="" class="cut a-breathe" data-cut="rose_coral" id="a-gallery-img-1" style="--dur: 12s"/></span>
+<span class="dk rv rv-right" id="gldk-stem" style="--d: 0.3s; --w: clamp(80px, 20vw, 160px)"><img alt="" class="cut a-sway" data-cut="rose_dark" id="a-gallery-img-2" style="--dur: 9s"/></span>
+</div>
+<div class="wrap" id="gallery-wrap">
+<header class="sec-head" id="gallery-head">
+<p class="tod-tag rv" id="gallery-tod">
+<span class="tod-ico" id="a-gallery-span-1"></span><span class="tod-time" id="a-gallery-span-2"></span><span class="tod-name" id="a-gallery-span-3"></span>
+</p>
+<p class="kicker rv" id="gallery-kicker" style="--d: 0.08s"></p>
+<h2 class="sec-title rv rv-petal" id="gallery-title" style="--d: 0.16s"><em id="a-gallery-em-1"></em>
+</h2>
+<svg aria-hidden="true" class="divider rv" id="gallery-divider" style="--d: 0.24s" viewbox="0 0 240 28">
+<path class="dv-line" d="M6 14 C 40 14 60 8 92 14" id="a-gallery-path-1"></path>
+<path class="dv-line" d="M234 14 C 200 14 180 8 148 14" id="a-gallery-path-2"></path>
+<path class="dv-leaf" d="M84 13 C 76 4 66 4 60 8 C 68 14 76 16 84 13 Z" id="a-gallery-path-3"></path>
+<path class="dv-leaf" d="M156 13 C 164 4 174 4 180 8 C 172 14 164 16 156 13 Z" id="a-gallery-path-4"></path>
+<circle class="dv-rose" cx="120" cy="14" id="a-gallery-circle-1" r="10"></circle>
+<path class="dv-curl" d="M116 14 a4 4 0 1 1 4 4 a6.5 6.5 0 1 1 -6.5 -6.5" id="a-gallery-path-5"></path>
+<circle class="dv-dot" cx="100" cy="14" id="a-gallery-circle-2" r="2"></circle>
+<circle class="dv-dot" cx="140" cy="14" id="a-gallery-circle-3" r="2"></circle>
+</svg>
+<p class="sec-lead rv" id="gallery-lead" style="--d:.3s"></p>
+</header>
+<div id="gal-grid"></div>
+</div>
+</section>
+<section class="sec" data-section="gift" id="sec-gift">
+<div aria-hidden="true" class="sec-deco" id="gift-deco">
+<span class="dk rv rv-left" id="gfdk-stem" style="--d: 0.2s; --w: clamp(80px, 20vw, 160px)"><img alt="" class="cut a-sway" data-cut="rose_stem" id="a-gift-img-1" style="--dur: 10s"/></span>
+<span class="dk rv rv-zoom" id="gfdk-bud" style="--d: 0.3s; --w: clamp(22px, 5vw, 40px)"><img alt="" class="cut a-float" data-cut="bud_8" id="a-gift-img-2"/></span>
+</div>
+<div class="wrap" id="gift-wrap">
+<header class="sec-head" id="gift-head">
+<p class="tod-tag rv" id="gift-tod">
+<span class="tod-ico" id="a-gift-span-1"></span><span class="tod-time" id="a-gift-span-2"></span><span class="tod-name" id="a-gift-span-3"></span>
+</p>
+<p class="kicker rv" id="gift-kicker" style="--d: 0.08s"></p>
+<h2 class="sec-title rv rv-petal" id="gift-title" style="--d: 0.16s"><em id="a-gift-em-1"></em>
+</h2>
+<svg aria-hidden="true" class="divider rv" id="gift-divider" style="--d: 0.24s" viewbox="0 0 240 28">
+<path class="dv-line" d="M6 14 C 40 14 60 8 92 14" id="a-gift-path-1"></path>
+<path class="dv-line" d="M234 14 C 200 14 180 8 148 14" id="a-gift-path-2"></path>
+<path class="dv-leaf" d="M84 13 C 76 4 66 4 60 8 C 68 14 76 16 84 13 Z" id="a-gift-path-3"></path>
+<path class="dv-leaf" d="M156 13 C 164 4 174 4 180 8 C 172 14 164 16 156 13 Z" id="a-gift-path-4"></path>
+<circle class="dv-rose" cx="120" cy="14" id="a-gift-circle-1" r="10"></circle>
+<path class="dv-curl" d="M116 14 a4 4 0 1 1 4 4 a6.5 6.5 0 1 1 -6.5 -6.5" id="a-gift-path-5"></path>
+<circle class="dv-dot" cx="100" cy="14" id="a-gift-circle-2" r="2"></circle>
+<circle class="dv-dot" cx="140" cy="14" id="a-gift-circle-3" r="2"></circle>
+</svg>
+<p class="sec-lead rv" id="gift-lead" style="--d:.3s"></p>
+</header>
+<div id="gift-grid">
+<div class="rv rv-zoom" id="gift-stage" style="--d: 0.12s">
+<button aria-label="" id="gift-bouquet" type="button">
+<svg aria-hidden="true" id="gift-cone-back" viewbox="0 0 260 300">
+<path d="M40 120 Q130 92 220 120 L130 296 Z" fill="#c7a07a" id="gb-back"></path>
+<path d="M130 290 L96 150 M130 290 L118 140 M130 290 L142 140 M130 290 L164 150 M130 290 L108 160 M130 290 L152 160" fill="none" id="gb-stems" stroke="#46663f" stroke-linecap="round" stroke-width="3.2"></path>
+<path class="leaf-sway" d="M70 140 c -22 -10 -32 -28 -30 -44 c 20 8 30 24 30 44 z" fill="#5c7d52" id="gb-lf-1"></path>
+<path class="leaf-sway" d="M190 140 c 22 -10 32 -28 30 -44 c -20 8 -30 24 -30 44 z" fill="#46663f" id="gb-lf-2"></path>
+<path class="leaf-sway" d="M130 112 c -6 -20 0 -38 14 -46 c 4 18 -2 36 -14 46 z" fill="#4e6d47" id="gb-lf-3"></path>
+</svg>
+<span id="gift-roses">
+<span class="gr" id="gr-1" style="--x: 50%; --y: 30%; --w: 34%"><img alt="" class="cut" data-cut="rose_red" id="a-gift-img-3"/></span>
+<span class="gr" id="gr-2" style="--x: 28%; --y: 38%; --w: 28%"><img alt="" class="cut" data-cut="rose_blush" id="a-gift-img-4"/></span>
+<span class="gr" id="gr-3" style="--x: 72%; --y: 38%; --w: 28%"><img alt="" class="cut" data-cut="rose_coral" id="a-gift-img-5"/></span>
+<span class="gr" id="gr-4" style="--x: 38%; --y: 18%; --w: 24%"><img alt="" class="cut" data-cut="rose_coral" id="a-gift-img-6"/></span>
+<span class="gr" id="gr-5" style="--x: 63%; --y: 17%; --w: 25%"><img alt="" class="cut" data-cut="rose_blush" id="a-gift-img-7"/></span>
+<span class="gr" id="gr-6" style="--x: 18%; --y: 22%; --w: 20%"><img alt="" class="cut" data-cut="rose_red" id="a-gift-img-8"/></span>
+<span class="gr" id="gr-7" style="--x: 82%; --y: 22%; --w: 20%"><img alt="" class="cut" data-cut="rose_red" id="a-gift-img-9"/></span>
+</span>
+<svg aria-hidden="true" id="gift-cone-front" viewbox="0 0 260 300">
+<defs id="a-gift-defs-1">
+<lineargradient id="gb-paper" x1="0" x2="1" y1="0" y2="0">
+<stop id="a-gift-stop-1" offset="0" stop-color="#d7b087"></stop>
+<stop id="a-gift-stop-2" offset=".5" stop-color="#f3dcbd"></stop>
+<stop id="a-gift-stop-3" offset="1" stop-color="#c99f72"></stop>
+</lineargradient>
+</defs>
+<path d="M30 150 Q130 186 230 150 L130 298 Z" fill="url(#gb-paper)" id="gb-front"></path>
+<path d="M30 150 Q130 186 230 150" fill="none" id="gb-front-edge" stroke="#b78a5b" stroke-width="2"></path>
+<path d="M130 298 L86 168 M130 298 L176 168" id="gb-front-lines" opacity=".55" stroke="#b88c5c" stroke-width="1"></path>
+<g class="gb-bow" id="gb-bow">
+<path d="M130 222 C 104 196 82 204 86 222 C 90 240 112 236 130 222 Z" fill="#a3122b" id="gb-bow-l"></path>
+<path d="M130 222 C 156 196 178 204 174 222 C 170 240 148 236 130 222 Z" fill="#a3122b" id="gb-bow-r"></path>
+<path d="M130 224 C 124 244 114 260 104 274 M130 224 C 138 244 148 258 158 272" fill="none" id="gb-bow-tails" stroke="#8e0f24" stroke-linecap="round" stroke-width="5"></path>
+<circle cx="130" cy="223" fill="#5c0716" id="gb-bow-knot" r="7"></circle>
+</g>
+</svg>
+</button>
+<p id="gift-count">
+<span id="gift-count-n">3</span></p>
+<p id="gift-hint"></p>
+</div>
+<div id="gift-side">
+<form class="card form rv" data-wedivo="gift-form" id="gift-form" style="--d: 0.2s">
+<span class="card-corner cc-tl" id="gift-cc-tl"></span><span class="card-corner cc-br" id="gift-cc-br"></span>
+<p class="form-kicker" id="gift-form-kicker"></p>
+<label class="f-lbl" for="gift-name" id="gift-lbl-name"></label>
+<input id="gift-name" name="senderName" placeholder="" required=""/>
+<label class="f-lbl" for="gift-amount" id="gift-lbl-amount"></label>
+<input id="gift-amount" name="amount" placeholder="" required="" type="number"/>
+<label class="f-lbl" for="gift-msg" id="gift-lbl-msg"></label>
+<textarea id="gift-msg" name="message" placeholder=""></textarea>
+<button class="btn btn-velvet btn-block" id="gift-submit" type="submit"></button>
+<p class="form-ok" id="gift-ok"></p>
+<p class="form-err" id="gift-err"></p>
+</form>
+<div class="card rv" id="gift-address" style="--d: 0.3s">
+<p id="gift-addr-kicker"></p>
+<p id="gift-addr-text"></p>
+<button class="btn btn-ghost btn-sm" id="gift-copy" type="button"></button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="sec" data-section="rsvp" id="sec-rsvp">
+<div aria-hidden="true" id="rsvp-bg"></div>
+<div aria-hidden="true" class="sec-deco" id="rsvp-deco">
+<span class="dk rv rv-zoom" id="rsdk-candle" style="--d: 0.2s; --w: clamp(70px, 16vw, 130px)"><img alt="" class="cut" data-cut="candle_pillar" id="a-rsvp-img-1"/><span class="flame-glow" id="rsdk-glow"></span></span>
+<span class="dk rv rv-zoom" id="rsdk-red" style="--d: 0.3s; --w: clamp(100px, 24vw, 200px)"><img alt="" class="cut a-breathe" data-cut="rose_red" id="a-rsvp-img-2" style="--dur: 12s"/></span>
+</div>
+<div class="wrap" id="rsvp-wrap">
+<header class="sec-head" id="rsvp-head">
+<p class="tod-tag rv" id="rsvp-tod">
+<span class="tod-ico" id="a-rsvp-span-1"></span><span class="tod-time" id="a-rsvp-span-2"></span><span class="tod-name" id="a-rsvp-span-3"></span>
+</p>
+<p class="kicker rv" id="rsvp-kicker" style="--d: 0.08s"></p>
+<h2 class="sec-title rv rv-petal" id="rsvp-title" style="--d: 0.16s"><em id="a-rsvp-em-1"></em>
+</h2>
+<svg aria-hidden="true" class="divider rv" id="rsvp-divider" style="--d: 0.24s" viewbox="0 0 240 28">
+<path class="dv-line" d="M6 14 C 40 14 60 8 92 14" id="a-rsvp-path-1"></path>
+<path class="dv-line" d="M234 14 C 200 14 180 8 148 14" id="a-rsvp-path-2"></path>
+<path class="dv-leaf" d="M84 13 C 76 4 66 4 60 8 C 68 14 76 16 84 13 Z" id="a-rsvp-path-3"></path>
+<path class="dv-leaf" d="M156 13 C 164 4 174 4 180 8 C 172 14 164 16 156 13 Z" id="a-rsvp-path-4"></path>
+<circle class="dv-rose" cx="120" cy="14" id="a-rsvp-circle-1" r="10"></circle>
+<path class="dv-curl" d="M116 14 a4 4 0 1 1 4 4 a6.5 6.5 0 1 1 -6.5 -6.5" id="a-rsvp-path-5"></path>
+<circle class="dv-dot" cx="100" cy="14" id="a-rsvp-circle-2" r="2"></circle>
+<circle class="dv-dot" cx="140" cy="14" id="a-rsvp-circle-3" r="2"></circle>
+</svg>
+<p class="sec-lead rv" id="rsvp-lead" style="--d:.3s"></p>
+<p class="rv" id="rsvp-deadline" style="--d: 0.36s">
+<span id="rsvp-dl-lbl"></span>
+<strong data-date="" id="rsvp-dl-val"></strong>
+</p>
+</header>
+<div id="rsvp-grid">
+<div class="rv rv-zoom" id="candle-stage" style="--d: 0.12s">
+<div aria-hidden="true" id="candle-row"></div>
+<div aria-hidden="true" id="candle-table"></div>
+<p aria-live="polite" id="candle-caption"></p>
+</div>
+<form class="card form rv" data-wedivo="rsvp" id="rsvp-form" style="--d: 0.2s">
+<span class="card-corner cc-tl" id="rsvp-cc-tl"></span><span class="card-corner cc-br" id="rsvp-cc-br"></span>
+<p class="form-kicker" id="rsvp-form-kicker"></p>
+<label class="f-lbl" for="rsvp-name" id="rsvp-lbl-name"></label>
+<input id="rsvp-name" name="name" placeholder="" required=""/>
+<span class="f-lbl" id="rsvp-lbl-status"></span>
+<div class="status-row" id="rsvp-status">
+<button class="status-btn" data-wedivo-status="attending" id="rsvp-yes" type="button">
+<span aria-hidden="true" class="st-ico st-ico-yes" id="rsvp-yes-ico"></span><span id="rsvp-yes-t"></span>
+</button>
+<button class="status-btn" data-wedivo-status="maybe" id="rsvp-maybe" type="button">
+<span aria-hidden="true" class="st-ico st-ico-maybe" id="rsvp-maybe-ico"></span><span id="rsvp-maybe-t"></span>
+</button>
+<button class="status-btn" data-wedivo-status="not_attending" id="rsvp-no" type="button">
+<span aria-hidden="true" class="st-ico st-ico-no" id="rsvp-no-ico"></span><span id="rsvp-no-t"></span>
+</button>
+</div>
+<label class="f-lbl" for="rsvp-pax" id="rsvp-lbl-pax"></label>
+<input id="rsvp-pax" max="20" min="1" name="pax" type="number" value="1"/>
+<label class="f-lbl" for="rsvp-msg" id="rsvp-lbl-msg"></label>
+<textarea id="rsvp-msg" name="message" placeholder=""></textarea>
+<button class="btn btn-velvet btn-block" id="rsvp-submit" type="submit"></button>
+<p class="form-ok" id="rsvp-ok"></p>
+<p class="form-err" id="rsvp-err"></p>
+<button class="btn btn-ghost btn-block" data-wedivo="checkin-cta" id="rsvp-checkin" type="button">
+<span aria-hidden="true" id="rsvp-checkin-ico">⌖</span><span id="rsvp-checkin-t"></span>
+</button>
+</form>
+</div>
+</div>
+</section>
+<section class="sec" data-section="wishes" id="sec-wishes">
+<div aria-hidden="true" class="sec-deco" id="wishes-deco">
+<span class="dk rv rv-zoom" id="wsdk-coral" style="--d: 0.2s; --w: clamp(100px, 24vw, 200px)"><img alt="" class="cut a-breathe" data-cut="rose_coral" id="a-wishes-img-1" style="--dur: 12s"/></span>
+<span class="dk rv rv-left" id="wsdk-stem" style="--d: 0.3s; --w: clamp(80px, 20vw, 160px)"><img alt="" class="cut a-sway" data-cut="rose_dark" id="a-wishes-img-2" style="--dur: 9s"/></span>
+</div>
+<div class="wrap" id="wishes-wrap">
+<header class="sec-head" id="wishes-head">
+<p class="tod-tag rv" id="wishes-tod">
+<span class="tod-ico" id="a-wishes-span-1"></span><span class="tod-time" id="a-wishes-span-2"></span><span class="tod-name" id="a-wishes-span-3"></span>
+</p>
+<p class="kicker rv" id="wishes-kicker" style="--d: 0.08s"></p>
+<h2 class="sec-title rv rv-petal" id="wishes-title" style="--d: 0.16s"><em id="a-wishes-em-1"></em>
+</h2>
+<svg aria-hidden="true" class="divider rv" id="wishes-divider" style="--d: 0.24s" viewbox="0 0 240 28">
+<path class="dv-line" d="M6 14 C 40 14 60 8 92 14" id="a-wishes-path-1"></path>
+<path class="dv-line" d="M234 14 C 200 14 180 8 148 14" id="a-wishes-path-2"></path>
+<path class="dv-leaf" d="M84 13 C 76 4 66 4 60 8 C 68 14 76 16 84 13 Z" id="a-wishes-path-3"></path>
+<path class="dv-leaf" d="M156 13 C 164 4 174 4 180 8 C 172 14 164 16 156 13 Z" id="a-wishes-path-4"></path>
+<circle class="dv-rose" cx="120" cy="14" id="a-wishes-circle-1" r="10"></circle>
+<path class="dv-curl" d="M116 14 a4 4 0 1 1 4 4 a6.5 6.5 0 1 1 -6.5 -6.5" id="a-wishes-path-5"></path>
+<circle class="dv-dot" cx="100" cy="14" id="a-wishes-circle-2" r="2"></circle>
+<circle class="dv-dot" cx="140" cy="14" id="a-wishes-circle-3" r="2"></circle>
+</svg>
+<p class="sec-lead rv" id="wishes-lead" style="--d:.3s"></p>
+</header>
+<div id="wish-grid">
+<div id="wish-form-col">
+<div class="rv" id="wish-chips" style="--d: 0.1s">
+<p id="wish-chips-lbl"></p>
+<button class="wish-chip" data-text="" id="wish-chip-1" type="button"></button>
+<button class="wish-chip" data-text="" id="wish-chip-2" type="button"></button>
+<button class="wish-chip" data-text="" id="wish-chip-3" type="button"></button>
+</div>
+<form class="card form rv" data-wedivo="comments-form" id="wish-form" style="--d: 0.18s">
+<span class="card-corner cc-tl" id="wish-cc-tl"></span><span class="card-corner cc-br" id="wish-cc-br"></span>
+<p class="form-kicker" id="wish-form-kicker"></p>
+<label class="f-lbl" for="wish-name" id="wish-lbl-name"></label>
+<input id="wish-name" name="name" placeholder="" required=""/>
+<label class="f-lbl" for="wish-msg" id="wish-lbl-msg"></label>
+<textarea id="wish-msg" name="message" placeholder="" required=""></textarea>
+<button class="btn btn-velvet btn-block" id="wish-submit" type="submit"></button>
+<p class="form-ok" id="wish-ok"></p>
+<p class="form-err" id="wish-err"></p>
+</form>
+</div>
+<div id="wish-wall-col">
+<p class="rv" id="wish-count" style="--d: 0.1s">
+<span id="wish-count-n">0</span></p>
+<div aria-hidden="true" id="wish-trellis">
+<svg id="wish-trellis-svg" preserveaspectratio="none" viewbox="0 0 400 40">
+<path d="M0 20 C 60 4 120 34 200 18 C 280 4 340 32 400 16" fill="none" id="wt-line" stroke="#46663f" stroke-width="3"></path>
+<path class="leaf-sway" d="M70 14 c -10 -8 -12 -16 -8 -22 c 8 6 10 14 8 22 z" fill="#5c7d52" id="wt-lf-1"></path>
+<path class="leaf-sway" d="M250 10 c 10 -8 12 -16 8 -22 c -8 6 -10 14 -8 22 z" fill="#46663f" id="wt-lf-2"></path>
+<path class="leaf-sway" d="M340 26 c 12 2 18 10 16 16 c -10 -2 -16 -8 -16 -16 z" fill="#5c7d52" id="wt-lf-3"></path>
+</svg>
+<span class="wt-rose" id="wt-rose-1"><img alt="" class="cut a-breathe" data-cut="rose_red" id="a-wishes-img-3"/></span>
+<span class="wt-rose" id="wt-rose-2"><img alt="" class="cut a-breathe" data-cut="rose_blush" id="a-wishes-img-4" style="--del: -4s"/></span>
+<span class="wt-rose" id="wt-rose-3"><img alt="" class="cut a-breathe" data-cut="rose_coral" id="a-wishes-img-5" style="--del: -7s"/></span>
+</div>
+<div data-wedivo="comments-list" id="wish-list">
+
+</div>
+<template data-wedivo="comment-template" id="wish-template">
+<div class="wish-card">
+<span aria-hidden="true" class="wish-pin"></span>
+<p class="wish-name" data-field="name"></p>
+<p class="wish-msg" data-field="message"></p>
+<p class="wish-date" data-field="date"></p>
+</div>
+</template>
+<button class="btn btn-ghost btn-sm" data-wedivo="comments-more" id="wish-more" type="button"></button>
+</div>
+</div>
+</div>
+</section>
+<footer class="sec" data-section="closing" id="sec-closing">
+<div aria-hidden="true" id="close-scene"></div>
+<div aria-hidden="true" id="close-fireflies">
+<i class="ff" id="a-closing-i-1" style="--x: 8%; --y: 30%; --t: 7s; --d: -1s"></i><i class="ff" id="a-closing-i-2" style="--x: 18%; --y: 62%; --t: 9s; --d: -4s"></i><i class="ff" id="a-closing-i-3" style="--x: 30%; --y: 22%; --t: 8s; --d: -2s"></i><i class="ff" id="a-closing-i-4" style="--x: 44%; --y: 70%; --t: 10s; --d: -6s"></i><i class="ff" id="a-closing-i-5" style="--x: 58%; --y: 18%; --t: 7.5s; --d: -3s"></i><i class="ff" id="a-closing-i-6" style="--x: 70%; --y: 54%; --t: 9.5s; --d: -5s"></i><i class="ff" id="a-closing-i-7" style="--x: 82%; --y: 28%; --t: 8.5s; --d: -7s"></i><i class="ff" id="a-closing-i-8" style="--x: 92%; --y: 66%; --t: 11s; --d: -2s"></i><i class="ff" id="a-closing-i-9" style="--x: 52%; --y: 44%; --t: 12s; --d: -8s"></i><i class="ff" id="a-closing-i-10" style="--x: 24%; --y: 84%; --t: 10s; --d: -3s"></i>
+</div>
+<div aria-hidden="true" class="sec-deco" id="closing-deco">
+<span class="dk rv rv-left" id="cldk-stem-l" style="--d: 0.2s; --w: clamp(90px, 22vw, 180px)"><img alt="" class="cut a-sway" data-cut="rose_dark" id="a-closing-img-1" style="--dur: 10s"/></span>
+<span class="dk rv rv-right" id="cldk-stem-r" style="--d: 0.3s; --w: clamp(80px, 20vw, 160px)"><img alt="" class="cut a-sway" data-cut="rose_stem" id="a-closing-img-2" style="--dur: 11s; --del: -3s"/></span>
+<span class="dk rv rv-zoom" id="cldk-candle-a" style="--d: 0.4s; --w: clamp(60px, 14vw, 110px)"><img alt="" class="cut" data-cut="candle_pillar" id="a-closing-img-3"/><span class="flame-glow" id="cldk-glow-a"></span></span>
+<span class="dk rv rv-zoom" id="cldk-candle-b" style="--d: 0.5s; --w: clamp(70px, 16vw, 130px)"><img alt="" class="cut" data-cut="candle_red" id="a-closing-img-4"/><span class="flame-glow" id="cldk-glow-b"></span></span>
+<span class="dk rv rv-zoom" id="cldk-red" style="--d: 0.6s; --w: clamp(110px, 26vw, 220px)"><img alt="" class="cut a-breathe" data-cut="rose_red" id="a-closing-img-5" style="--dur: 12s"/></span>
+</div>
+<div class="wrap" id="closing-wrap">
+<div id="close-card">
+<p class="tod-tag rv" id="closing-tod">
+<span class="tod-ico" id="a-closing-span-1"></span><span class="tod-time" id="a-closing-span-2"></span><span class="tod-name" id="a-closing-span-3"></span>
+</p>
+<p class="rv" id="close-thanks" style="--d: 0.1s">
+<span id="close-thanks-named"><span id="close-thanks-lbl"></span>
+<span id="close-guest"></span></span><span id="close-thanks-generic"></span>
+</p>
+<p class="rv" id="close-msg" style="--d:.2s"></p>
+<h2 class="rv rv-blur" id="close-names" style="--d: 0.3s">
+<span id="close-name-b"></span><span id="close-amp">&amp;</span><span id="close-name-g"></span>
+</h2>
+<svg aria-hidden="true" class="divider rv" id="closing-divider" style="--d: 0.36s" viewbox="0 0 240 28">
+<path class="dv-line" d="M6 14 C 40 14 60 8 92 14" id="a-closing-path-1"></path>
+<path class="dv-line" d="M234 14 C 200 14 180 8 148 14" id="a-closing-path-2"></path>
+<path class="dv-leaf" d="M84 13 C 76 4 66 4 60 8 C 68 14 76 16 84 13 Z" id="a-closing-path-3"></path>
+<path class="dv-leaf" d="M156 13 C 164 4 174 4 180 8 C 172 14 164 16 156 13 Z" id="a-closing-path-4"></path>
+<circle class="dv-rose" cx="120" cy="14" id="a-closing-circle-1" r="10"></circle>
+<path class="dv-curl" d="M116 14 a4 4 0 1 1 4 4 a6.5 6.5 0 1 1 -6.5 -6.5" id="a-closing-path-5"></path>
+<circle class="dv-dot" cx="100" cy="14" id="a-closing-circle-2" r="2"></circle>
+<circle class="dv-dot" cx="140" cy="14" id="a-closing-circle-3" r="2"></circle>
+</svg>
+<p class="rv" id="close-fam-lbl" style="--d: 0.42s"></p>
+<p class="rv" id="close-fam" style="--d: 0.48s"></p>
+<p class="rv" id="close-salam" style="--d: 0.54s"></p>
+<div class="rv" id="close-actions" style="--d: 0.6s">
+<button class="btn btn-ghost" id="close-hashtag" type="button">
+<span id="close-hashtag-t"></span><span aria-hidden="true" id="close-hashtag-ico">⧉</span>
+</button>
+<button class="btn btn-velvet" id="close-top" type="button">
+<span aria-hidden="true" id="close-top-ico">☀</span><span id="close-top-t"></span>
+</button>
+</div>
+<p class="rv" id="close-sign" style="--d: 0.66s"></p>
+</div>
+</div>
+</footer>
+<nav aria-label="" data-wedivo="nav" id="garden-nav">
+<div id="nav-sheet-head">
+<p id="nav-sheet-title"></p>
+<p id="nav-sheet-sub"></p>
+</div>
+<div id="nav-clock">
+<span aria-hidden="true" id="nav-clock-ico"></span>
+<span id="nav-clock-time">05.30</span>
+<span id="nav-clock-period"></span>
+<span id="nav-clock-sec"></span>
+<span aria-hidden="true" id="nav-sky"><span id="nav-sky-fill"></span><span id="nav-sky-dot"></span></span>
+</div>
+<div id="nav-row">
+<div id="nav-rail">
+<button class="nav-item" data-nav-target="hero" id="nav-hero" type="button">
+<span class="ni-ico" id="ni-hero"><svg id="a-closing-svg-1" viewbox="0 0 24 24">
+<path d="M3 17h18M6 17a6 6 0 0 1 12 0M12 5v2M5 9l1.5 1.5M19 9l-1.5 1.5" id="a-closing-path-6"></path></svg></span><span class="ni-label" id="nl-hero"></span><small class="ni-time" id="nt-hero"></small>
+</button>
+<button class="nav-item" data-nav-target="greeting" id="nav-greeting" type="button">
+<span class="ni-ico" id="ni-greeting"><svg id="a-closing-svg-2" viewbox="0 0 24 24">
+<path d="M12 3c3 4.5 5 7.4 5 10a5 5 0 0 1-10 0c0-2.6 2-5.5 5-10z" id="a-closing-path-7"></path>
+<path d="M10 14a2 2 0 0 0 2 2" id="a-closing-path-8"></path></svg></span><span class="ni-label" id="nl-greeting"></span><small class="ni-time" id="nt-greeting"></small>
+</button>
+<button class="nav-item" data-nav-target="couple" id="nav-couple" type="button">
+<span class="ni-ico" id="ni-couple"><svg id="a-closing-svg-3" viewbox="0 0 24 24">
+<path d="M8 21c0-6 4-8 4-13M16 21c0-6-4-8-4-13" id="a-closing-path-9"></path>
+<circle cx="8" cy="6" id="a-closing-circle-4" r="2.6"></circle>
+<circle cx="16" cy="6" id="a-closing-circle-5" r="2.6"></circle></svg></span><span class="ni-label" id="nl-couple"></span><small class="ni-time" id="nt-couple"></small>
+</button>
+<button class="nav-item" data-nav-target="story" id="nav-story" type="button">
+<span class="ni-ico" id="ni-story"><svg id="a-closing-svg-4" viewbox="0 0 24 24">
+<path d="M12 21V9M12 13c-4 0-6-2-6-5 3 0 6 2 6 5zM12 10c3 0 5-2 5-5-3 0-5 2-5 5z" id="a-closing-path-10"></path></svg></span><span class="ni-label" id="nl-story"></span><small class="ni-time" id="nt-story"></small>
+</button>
+<button class="nav-item" data-nav-target="graft" id="nav-graft" type="button">
+<span class="ni-ico" id="ni-graft"><svg id="a-closing-svg-5" viewbox="0 0 24 24">
+<path d="M12 22v-8M7 4c0 5 5 6 5 10M17 4c0 5-5 6-5 10M9 15h6" id="a-closing-path-11"></path></svg></span><span class="ni-label" id="nl-graft"></span><small class="ni-time" id="nt-graft"></small>
+</button>
+<button class="nav-item" data-nav-target="video" id="nav-video" type="button">
+<span class="ni-ico" id="ni-video"><svg id="a-closing-svg-6" viewbox="0 0 24 24">
+<path d="M3 20V10l9-6 9 6v10zM12 4v16M3 14h18" id="a-closing-path-12"></path></svg></span><span class="ni-label" id="nl-video"></span><small class="ni-time" id="nt-video"></small>
+</button>
+<button class="nav-item" data-nav-target="countdown" id="nav-countdown" type="button">
+<span class="ni-ico" id="ni-countdown"><svg id="a-closing-svg-7" viewbox="0 0 24 24">
+<circle cx="12" cy="12" id="a-closing-circle-6" r="9"></circle>
+<path d="M12 12L12 6M12 12l4 3" id="a-closing-path-13"></path></svg></span><span class="ni-label" id="nl-countdown"></span><small class="ni-time" id="nt-countdown"></small>
+</button>
+<button class="nav-item" data-nav-target="events" id="nav-events" type="button">
+<span class="ni-ico" id="ni-events"><svg id="a-closing-svg-8" viewbox="0 0 24 24">
+<circle cx="9" cy="14" id="a-closing-circle-7" r="5"></circle>
+<circle cx="15" cy="14" id="a-closing-circle-8" r="5"></circle>
+<path d="M9 9l1-3h-2zM15 9l1-3h-2z" id="a-closing-path-14"></path></svg></span><span class="ni-label" id="nl-events"></span><small class="ni-time" id="nt-events"></small>
+</button>
+<button class="nav-item" data-nav-target="rundown" id="nav-rundown" type="button">
+<span class="ni-ico" id="ni-rundown"><svg id="a-closing-svg-9" viewbox="0 0 24 24">
+<circle cx="5" cy="6" id="a-closing-circle-9" r="1.6"></circle>
+<circle cx="5" cy="12" id="a-closing-circle-10" r="1.6"></circle>
+<circle cx="5" cy="18" id="a-closing-circle-11" r="1.6"></circle>
+<path d="M9 6h11M9 12h11M9 18h11" id="a-closing-path-15"></path></svg></span><span class="ni-label" id="nl-rundown"></span><small class="ni-time" id="nt-rundown"></small>
+</button>
+<button class="nav-item" data-nav-target="location" id="nav-location" type="button">
+<span class="ni-ico" id="ni-location"><svg id="a-closing-svg-10" viewbox="0 0 24 24">
+<path d="M12 21s-6-6-6-11a6 6 0 0 1 12 0c0 5-6 11-6 11z" id="a-closing-path-16"></path>
+<circle cx="12" cy="10" id="a-closing-circle-12" r="2.2"></circle></svg></span><span class="ni-label" id="nl-location"></span><small class="ni-time" id="nt-location"></small>
+</button>
+<button class="nav-item" data-nav-target="dresscode" id="nav-dresscode" type="button">
+<span class="ni-ico" id="ni-dresscode"><svg id="a-closing-svg-11" viewbox="0 0 24 24">
+<path d="M9 3l3 3 3-3M9 3l-4 5 3 2-2 11h12l-2-11 3-2-4-5" id="a-closing-path-17"></path></svg></span><span class="ni-label" id="nl-dresscode"></span><small class="ni-time" id="nt-dresscode"></small>
+</button>
+<button class="nav-item" data-nav-target="rose-language" id="nav-rose-language" type="button">
+<span class="ni-ico" id="ni-rose-language"><svg id="a-closing-svg-12" viewbox="0 0 24 24">
+<path d="M12 13c-4 0-6-3-6-6 2 0 3 1 4 2 0-2 1-4 2-5 1 1 2 3 2 5 1-1 2-2 4-2 0 3-2 6-6 6zM12 13v8M12 17c-2 0-4-1-4-3" id="a-closing-path-18"></path></svg></span><span class="ni-label" id="nl-rose-language"></span><small class="ni-time" id="nt-rose-language"></small>
+</button>
+<button class="nav-item" data-nav-target="gallery" id="nav-gallery" type="button">
+<span class="ni-ico" id="ni-gallery"><svg id="a-closing-svg-13" viewbox="0 0 24 24">
+<rect height="14" id="a-closing-rect-1" rx="2" width="18" x="3" y="5"></rect>
+<path d="M3 16l5-5 4 4 3-3 6 6" id="a-closing-path-19"></path>
+<circle cx="16" cy="9" id="a-closing-circle-13" r="1.6"></circle></svg></span><span class="ni-label" id="nl-gallery"></span><small class="ni-time" id="nt-gallery"></small>
+</button>
+<button class="nav-item" data-nav-target="gift" id="nav-gift" type="button">
+<span class="ni-ico" id="ni-gift"><svg id="a-closing-svg-14" viewbox="0 0 24 24">
+<path d="M5 10h14l-7 11z" id="a-closing-path-20"></path>
+<circle cx="9" cy="7" id="a-closing-circle-14" r="2.4"></circle>
+<circle cx="15" cy="7" id="a-closing-circle-15" r="2.4"></circle>
+<circle cx="12" cy="5" id="a-closing-circle-16" r="2.4"></circle></svg></span><span class="ni-label" id="nl-gift"></span><small class="ni-time" id="nt-gift"></small>
+</button>
+<button class="nav-item" data-nav-target="rsvp" id="nav-rsvp" type="button">
+<span class="ni-ico" id="ni-rsvp"><svg id="a-closing-svg-15" viewbox="0 0 24 24">
+<path d="M9 21V11h6v10M12 11V9M12 3c1.6 2 2 3.2 2 4a2 2 0 0 1-4 0c0-.8.4-2 2-4z" id="a-closing-path-21"></path></svg></span><span class="ni-label" id="nl-rsvp"></span><small class="ni-time" id="nt-rsvp"></small>
+</button>
+<button class="nav-item" data-nav-target="wishes" id="nav-wishes" type="button">
+<span class="ni-ico" id="ni-wishes"><svg id="a-closing-svg-16" viewbox="0 0 24 24">
+<path d="M4 5h16v11H9l-5 4z" id="a-closing-path-22"></path>
+<path d="M12 9c-1-1.4-3-.8-3 .6 0 1.2 3 3 3 3s3-1.8 3-3c0-1.4-2-2-3-.6z" id="a-closing-path-23"></path></svg></span><span class="ni-label" id="nl-wishes"></span><small class="ni-time" id="nt-wishes"></small>
+</button>
+<button class="nav-item" data-nav-target="closing" id="nav-closing" type="button">
+<span class="ni-ico" id="ni-closing"><svg id="a-closing-svg-17" viewbox="0 0 24 24">
+<path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z" id="a-closing-path-24"></path></svg></span><span class="ni-label" id="nl-closing"></span><small class="ni-time" id="nt-closing"></small>
+</button>
+</div>
+<button aria-controls="nav-rail" aria-expanded="false" id="nav-expand" type="button">
+<span aria-hidden="true" id="nav-expand-ico"></span><span id="nav-expand-t"></span>
+</button>
+</div>
+</nav>
+<div aria-hidden="true" id="nav-backdrop"></div>
+<button aria-label="" aria-pressed="false" id="music-toggle" type="button">
+<span aria-hidden="true" id="music-disc"><span id="music-disc-rose"></span></span><span aria-hidden="true" id="music-bars"><i id="mb-1"></i><i id="mb-2"></i><i id="mb-3"></i></span>
+</button>
+<audio id="bg-music" loop="" preload="none" src=""></audio>
+<div aria-hidden="true" aria-label="" aria-modal="true" id="lb" role="dialog">
+<div id="lb-backdrop"></div>
+<div aria-hidden="true" id="lb-petals"></div>
+<figure id="lb-figure">
+<img alt="" id="lb-img" src=""/>
+<figcaption id="lb-count"></figcaption>
+</figure>
+<button aria-label="" id="lb-close" type="button">×</button>
+<div id="lb-bar">
+<button aria-label="" id="lb-prev" type="button">
+          ‹
+        </button>
+<span aria-hidden="true" id="lb-bar-rose"></span>
+<button aria-label="" id="lb-next" type="button">
+          ›
+        </button>
+</div>
+</div>
+<div aria-live="polite" id="toast" role="status"></div>
+
+
+
+<script src="adapter.js"></script></body>
+</html>

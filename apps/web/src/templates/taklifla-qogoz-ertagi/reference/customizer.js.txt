@@ -1,0 +1,503 @@
+
+/* ══ Qog'oz ertagi (w43) customizer + i18n + guestbook + book-open splash ══
+   Architecture ported from tovus.html (n03) / sakura.html (w42): base DOM
+   language is Uzbek; apply() captures el.__uz once and swaps in EN/RU from
+   DICT, skipping any element the owner filled (data-user-set). The book-open
+   splash + scene-centered parallax + desk-gradient scroll interpolation are
+   ported ~1:1 from the "Paper Meadow" design source's own
+   Component.ensureInit()/applyScroll()/openCover(). */
+(function () {
+  "use strict";
+  var q = new URLSearchParams(location.search);
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var esc = function (s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
+    return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); };
+  var setTxt = function (el, v) { if (el) { el.textContent = v; el.setAttribute("data-user-set", "1"); } };
+  var hide = function (el) { if (el) el.style.display = "none"; };
+
+  /* ── i18n dictionary: key -> [en, ru]; uz is read from the DOM ── */
+  var DICT = {
+    cover_kicker: ["THE WEDDING OF", "СВАДЬБА"],
+    cover_inner: ["for you", "для вас"],
+    cover_open: ["Open Invitation", "Открыть приглашение"],
+    hero_kicker: ["WE ARE GETTING MARRIED", "МЫ СОЗДАЁМ СЕМЬЮ"],
+    hero_hint: ["OPEN THE PAGES", "ЛИСТАЙТЕ СТРАНИЦЫ"],
+    inv_header: ["The Invitation", "Приглашение"],
+    frame_cursive: ["With joyful hearts", "С радостью в сердце"],
+    frame_sentence: ["Together with our families, we invite you to share the day we become one.", "Вместе с нашими семьями мы приглашаем вас разделить день, когда мы станем одним целым."],
+    events_header: ["Our Wedding Day", "День нашей свадьбы"],
+    ev1_title: ["Guests are welcomed", "Встреча гостей"],
+    ev1_desc: ["Sherbet, sweets and first hugs in the garden court.", "Шербет, сладости и первые объятия в саду"],
+    ev2_title: ["The ceremony", "Церемония никох"],
+    ev2_desc: ["We say yes beneath the blossom arch.", "Клятвы произносим под цветущей аркой"],
+    ev3_title: ["The feast", "Праздничный ужин"],
+    ev3_desc: ["The dastarkhan is served — osh, toasts and laughter.", "Накрывается дастархан — плов, тосты и смех"],
+    ev4_title: ["Dancing till the stars", "Танцы до звёзд"],
+    ev4_desc: ["Until the paper stars come out over the meadow.", "Пока над лугом не взойдут бумажные звёзды"],
+    venue_header: ["The Place", "Место"],
+    map_btn: ["OPEN THE MAP", "ОТКРЫТЬ КАРТУ"],
+    venue_note_default: ["Doors open at 4 PM · parking inside the court", "Двери открываются в 16:00 · парковка во дворе"],
+    info_dress_label: ["DRESS CODE", "ДРЕСС-КОД"],
+    info_contact_label: ["QUESTIONS", "ВОПРОСЫ"],
+    info_dress_default: ["Garden pastels and light fabrics — the evening is warm.", "Садовые пастельные тона и лёгкие ткани — вечер будет тёплым."],
+    info_contact_default: ["Aziza, our organizer — +998 90 000 00 00", "Азиза, организатор торжества — +998 90 000 00 00"],
+    wish_header: ["Wishes", "Пожелания"],
+    wish_sub: ["Leave a warm word for the couple", "Оставьте тёплые слова молодожёнам"],
+    wish_send: ["SEND A WISH", "ОТПРАВИТЬ ПОЖЕЛАНИЕ"],
+    wish_thanks: ["Thank you — your wish has been saved ♡", "Спасибо — ваше пожелание сохранено ♡"],
+    wish_empty: ["No wishes yet — yours will open the book.", "Пока нет пожеланий — ваше станет первым."],
+    cd_kicker: ["THE DEEPEST PAGE", "САМАЯ ГЛУБОКАЯ СТРАНИЦА"],
+    cd_cursive: ["Counting the days", "Считаем дни"],
+    cd_days: ["DAYS", "ДНИ"], cd_hours: ["HOURS", "ЧАСЫ"], cd_mins: ["MINUTES", "МИНУТЫ"], cd_secs: ["SECONDS", "СЕКУНДЫ"],
+    footer_note_default: ["The end — and the beginning.<br>Folded with love, paper and glue.", "Конец — и начало.<br>Создано с любовью, бумагой и клеем."]
+  };
+  var PH = {
+    wish_name_ph: ["Your name", "Ваше имя"],
+    wish_msg_ph: ["Your wish for the couple…", "Ваше пожелание молодожёнам…"]
+  };
+  /* localized month names + full weekday names, index 0 = Jan / Sunday */
+  var MON = {
+    uz: ["yanvar","fevral","mart","aprel","may","iyun","iyul","avgust","sentabr","oktabr","noyabr","dekabr"],
+    en: ["January","February","March","April","May","June","July","August","September","October","November","December"],
+    ru: ["января","февраля","марта","апреля","мая","июня","июля","августа","сентября","октября","ноября","декабря"]
+  };
+  var DOWFULL = {
+    uz: ["Yakshanba","Dushanba","Seshanba","Chorshanba","Payshanba","Juma","Shanba"],
+    en: ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
+    ru: ["Воскресенье","Понедельник","Вторник","Среда","Четверг","Пятница","Суббота"]
+  };
+
+  /* ── language state ── */
+  function norm(l) { l = (l || "").toLowerCase(); return l === "en" || l === "ru" ? l : "uz"; }
+  var initLang = norm(q.get("lang") || q.get("default_lang") ||
+    (function () { try { return localStorage.getItem("takliflaLang"); } catch (e) { return null; } })() ||
+    document.documentElement.lang || "uz");
+  window.__takliflaLang = initLang;
+
+  /* MW stash of date/venue parts for re-localisation, seeded with the demo
+     date (26.09.2026, 17:00 — Saturday, dow 6) so localized slots read
+     correctly in EN/RU even when the owner hasn't set ?date yet. MW.city is
+     seeded to the demo venue's city ("Toshkent") so the frame card's
+     "Venue · City" line has a sensible default; the venue-only guard below
+     clears it back to "" when the owner sets ?venue without ?address. */
+  var MW = { dd: 26, mm: 9, yy: 2026, dow: 6, time: "17:00", city: "Toshkent" };
+
+  function p2(n) { return (n < 10 ? "0" : "") + n; }
+  function dshort(dd, mm, yy) { return p2(dd) + " · " + p2(mm) + " · " + yy; }
+
+  function frameVenueCity() {
+    var vNameEl = $("#qg-venue-name");
+    var vName = (vNameEl && vNameEl.textContent) || "";
+    var el = $("#qg-frame-venuecity");
+    if (el) el.textContent = vName + (MW.city ? " · " + MW.city : "");
+  }
+
+  function localizeDate(lang) {
+    var months = MON[lang] || MON.uz;
+    var dows = DOWFULL[lang] || DOWFULL.uz;
+    var sep = lang === "uz" ? "-" : " ";
+    var h = $("#qg-hero-dateline");
+    if (h) h.textContent = dows[MW.dow] + " · " + MW.dd + sep + (months[MW.mm - 1] || "") + " " + MW.yy;
+    var invText = MW.dd + sep + (months[MW.mm - 1] || "") + " " + MW.yy + " · " + MW.time;
+    var f = $("#qg-frame-invdate"); if (f) f.textContent = invText;
+    var c = $("#qg-cd-invdate"); if (c) c.textContent = invText;
+    frameVenueCity();
+  }
+
+  function apply() {
+    var lang = norm(window.__takliflaLang);
+    var nodes = document.querySelectorAll("[data-i18n]");
+    for (var i = 0; i < nodes.length; i++) {
+      var el = nodes[i];
+      if (el.getAttribute("data-user-set") === "1") continue;
+      if (el.__uz == null) el.__uz = el.innerHTML;
+      var pair = DICT[el.getAttribute("data-i18n")];
+      el.innerHTML = lang === "uz" || !pair ? el.__uz : (lang === "en" ? pair[0] : pair[1]);
+    }
+    var phs = document.querySelectorAll("[data-i18n-ph]");
+    for (var j = 0; j < phs.length; j++) {
+      var pe = phs[j];
+      if (pe.__uzph == null) pe.__uzph = pe.getAttribute("placeholder") || "";
+      var pp = PH[pe.getAttribute("data-i18n-ph")];
+      pe.setAttribute("placeholder", lang === "uz" || !pp ? pe.__uzph : (lang === "en" ? pp[0] : pp[1]));
+    }
+    localizeDate(lang);
+    var btns = document.querySelectorAll(".qg-lang button");
+    for (var k = 0; k < btns.length; k++) btns[k].classList.toggle("on", btns[k].getAttribute("data-lang") === lang);
+    document.documentElement.lang = lang;
+  }
+
+  /* ── language switcher ── */
+  (function () {
+    var wrap = $(".qg-lang");
+    if (!wrap) return;
+    wrap.addEventListener("click", function (e) {
+      var b = e.target.closest("button[data-lang]");
+      if (!b) return;
+      var lang = norm(b.getAttribute("data-lang"));
+      window.__takliflaLang = lang;
+      try { localStorage.setItem("takliflaLang", lang); } catch (er) {}
+      document.dispatchEvent(new CustomEvent("taklifla:langchange", { detail: { lang: lang } }));
+    });
+  })();
+  document.addEventListener("taklifla:langchange", apply);
+
+  /* ── names (fixed bounded split, verbatim from tovus/sakura). Cover-plate,
+     hero and footer names are each a SINGLE combined "A & B" line (no split
+     spans / no separate ampersand element to hide for a lone name). ── */
+  var names = q.get("names");
+  var n1 = "", n2 = "";
+  if (names && names.trim()) {
+    // word separators (va/и) require surrounding whitespace so names that
+    // contain them as substrings (Avazbek, Anvar, Дилшод) don't get split
+    var parts = names.split(/\s*[&+—]\s*|\s+(?:va|и)\s+/i).filter(Boolean);
+    n1 = (parts[0] || names).trim();
+    n2 = (parts[1] || "").trim();
+    var pair = n2 ? n1 + " & " + n2 : n1;
+    setTxt($("#qg-cover-names"), pair);
+    setTxt($("#qg-hero-names"), pair);
+    setTxt($("#qg-foot-names"), pair);
+  }
+
+  /* ── long names must never clip: shrink the cover-plate/hero/footer name
+     type until the widest line fits (Muhammadyusuf-class names overflow at
+     390px viewports). Re-run once webfonts land — metrics change. ── */
+  (function () {
+    function fit(el, base, min) {
+      if (!el) return;
+      var size = base;
+      el.style.fontSize = size + "px";
+      var guard = 24;
+      while (guard-- > 0 && size > min && el.scrollWidth > el.clientWidth + 1) {
+        size -= 2;
+        el.style.fontSize = size + "px";
+      }
+    }
+    function run() {
+      fit($("#qg-cover-names"), 31, 16);
+      fit($("#qg-hero-names"), 57, 30);
+      fit($("#qg-foot-names"), 42, 22);
+    }
+    run();
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(run);
+    window.addEventListener("resize", run);
+  })();
+
+  /* ── venue / address / map (city-first heuristic, verbatim from tovus/sakura) ── */
+  var venue = q.get("venue");
+  var city = "";
+  var addr = q.get("address");
+  if (addr && addr.trim()) {
+    setTxt($("#qg-venue-addr"), addr.trim());
+    // Uzbek addresses are city-FIRST ("Toshkent sh., Yunusobod tumani"):
+    // prefer a leading segment carrying a city marker; otherwise take the
+    // last segment only if it doesn't look like a street/district.
+    var segs = addr.split(",").map(function (s) { return s.trim(); }).filter(Boolean);
+    var cm = segs[0] && (segs[0].match(/^(.+?)\s+(?:sh\.?|shahri|шаҳри|ш\.)$/i) || segs[0].match(/^(?:г|g)\.\s*(.+)$/i));
+    if (cm) city = cm[1].trim();
+    else {
+      var tail = segs[segs.length - 1] || "";
+      city = /(tuman|ko'?cha|kuchasi|mavze|mahalla|MFY|uy\b|ул\.|улиц|дом|туман|кўча|street|district|avenue)/i.test(tail) ? "" : tail;
+    }
+    // address explicitly given -> always overrides MW.city (even to ""),
+    // since a custom address with no parseable city shouldn't keep showing
+    // the stale demo city on the frame card
+    MW.city = city;
+  }
+  if (venue && venue.trim()) {
+    setTxt($("#qg-venue-name"), venue.trim());
+    // owner named a venue but gave no address to derive a city from — don't
+    // pair their venue with the stale demo "Toshkent" on the frame card
+    if (addr == null || !addr.trim()) MW.city = city;
+  }
+  var mapUrl = q.get("map_url");
+  var mapEl = $("#qg-map");
+  if (mapEl) {
+    // only http(s) — blocks javascript:/data: schemes from the owner param
+    if (mapUrl && /^https?:\/\//i.test(mapUrl.trim())) mapEl.setAttribute("href", mapUrl.trim());
+    else if (addr && addr.trim()) mapEl.setAttribute("href", "https://maps.google.com/?q=" + encodeURIComponent(addr.trim()));
+    else if (venue && venue.trim()) mapEl.setAttribute("href", "https://maps.google.com/?q=" + encodeURIComponent(venue.trim()));
+  }
+  /* frame-card "Venue · City" line reflects current venue+city, but only
+     recomputed when the owner actually touched venue/address — leaves the
+     baked-in demo default line completely untouched otherwise */
+  if (venue || addr) frameVenueCity();
+
+  /* ── venue_note (owner; empty hides the line, keeps the address) ── */
+  var vnote = q.get("venue_note");
+  if (vnote != null) { if (vnote.trim()) setTxt($("#qg-venue-note"), vnote.trim()); else hide($("#qg-venue-note-wrap")); }
+
+  /* ── info rows (owner; empty hides the row + its hairline divider;
+     both-empty hides the whole card) ── */
+  (function () {
+    var dRow = $("#qg-info-dress"), cRow = $("#qg-info-contact"), divider = $("#qg-info-divider"), card = $("#qg-info-card");
+    var dv = q.get("info_dress"), cv = q.get("info_contact");
+    var dHidden = false, cHidden = false;
+    if (dv != null) {
+      if (dv.trim()) { var de = $("#qg-info-dress-text"); if (de) { de.textContent = dv.trim(); de.setAttribute("data-user-set", "1"); } }
+      else { hide(dRow); dHidden = true; }
+    }
+    if (cv != null) {
+      if (cv.trim()) {
+        var ce = $("#qg-info-contact-text");
+        if (ce) {
+          var html = esc(cv.trim()).replace(/\n/g, "<br>").replace(/\+?\d[\d\s-]{7,}\d/g, function (m) {
+            return '<a href="tel:' + m.replace(/[^\d+]/g, "") + '" style="font-weight:700;">' + m + '</a>';
+          });
+          ce.innerHTML = html; ce.setAttribute("data-user-set", "1");
+        }
+      } else { hide(cRow); cHidden = true; }
+    }
+    if (dHidden && cHidden) hide(card);
+    else if (dHidden || cHidden) hide(divider);
+  })();
+
+  /* ── footer note (owner) ── */
+  var fnote = q.get("footer_note");
+  if (fnote != null) { if (fnote.trim()) { var fe = $("#qg-foot-note"); if (fe) { fe.innerHTML = esc(fnote.trim()).replace(/\n/g, "<br>"); fe.setAttribute("data-user-set", "1"); } } else hide($("#qg-foot-note")); }
+
+  /* ── date + time (17:00 fallback, matching the design's default) ── */
+  var rawDate = q.get("date");
+  var rawTime = q.get("time");
+  var target = null;
+  if (rawDate) {
+    var m = rawDate.match(/^(\d{1,2})\.(\d{1,2})\.(\d{4})$/);
+    var iso = rawDate.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/);
+    var dd, mm, yy;
+    if (m) { dd = +m[1]; mm = +m[2]; yy = +m[3]; }
+    else if (iso) { yy = +iso[1]; mm = +iso[2]; dd = +iso[3]; }
+    if (dd) {
+      var hh = 17, mi = 0;
+      if (rawTime) { var tp = rawTime.split(":"); hh = parseInt(tp[0], 10); mi = parseInt(tp[1], 10) || 0; if (isNaN(hh)) hh = 17; }
+      var dObj = new Date(yy, mm - 1, dd, hh, mi, 0);
+      MW.dd = dd; MW.mm = mm; MW.yy = yy; MW.dow = dObj.getDay(); MW.time = p2(hh) + ":" + p2(mi);
+      target = dObj;
+      window.__INV_TARGET__ = dObj.getTime();
+      setTxt($("#qg-cover-dots"), dshort(dd, mm, yy));
+      setTxt($("#qg-foot-dots"), dshort(dd, mm, yy));
+    }
+  }
+
+  /* ── events timeline (owner list overrides defaults; [] hides the section
+     + its header — the strip cards around it are scenery and stay) ── */
+  (function () {
+    var raw = q.get("events");
+    if (raw == null) return;
+    var rows;
+    try { rows = JSON.parse(raw); } catch (e) { return; }
+    if (!Array.isArray(rows)) return;
+    var section = $("#qg-events-section");
+    var live = rows.filter(function (r) { return r && (r.title || r.description || r.time || r.place); });
+    if (!live.length) { hide(section); return; }
+    var host = $("#qg-events");
+    host.innerHTML = "";
+    live.forEach(function (r) {
+      var desc = [r.place, r.description].filter(Boolean).join(" · ");
+      var row = document.createElement("div");
+      row.setAttribute("data-pop", "");
+      row.style.position = "relative";
+      row.innerHTML =
+        '<div style="position:absolute;left:-32px;top:3px;width:13px;height:13px;border-radius:50%;background:#c9a24b;border:3px solid #fffdf4;box-shadow:0 2px 6px rgba(120,80,30,.35)"></div>' +
+        (r.time ? '<div style="font-family:Amarante,serif;font-size:14px;letter-spacing:2px;color:#b98d3e;">' + esc(r.time) + '</div>' : '') +
+        (r.title ? '<div style="font-weight:700;font-size:17px;margin-top:2px;">' + esc(r.title) + '</div>' : '') +
+        (desc ? '<div style="font-size:13.5px;line-height:1.6;color:#7a654a;margin-top:3px;">' + esc(desc) + '</div>' : '');
+      host.appendChild(row);
+    });
+    // freshly-built rows have no prior IO observation — reveal immediately
+    Array.prototype.forEach.call(host.querySelectorAll("[data-pop]"), function (n) { n.style.opacity = "1"; });
+  })();
+
+  /* ── countdown (clamped at zero) ── */
+  (function () {
+    var cd = { d: $("#qg-cd-d"), h: $("#qg-cd-h"), m: $("#qg-cd-m"), s: $("#qg-cd-s") };
+    if (!cd.d) return;
+    var when = target || new Date(2026, 8, 26, 17, 0, 0);
+    function tick() {
+      var diff = Math.max(0, when.getTime() - Date.now());
+      var day = 86400000;
+      cd.d.textContent = Math.floor(diff / day);
+      cd.h.textContent = ("0" + Math.floor(diff % day / 3600000)).slice(-2);
+      cd.m.textContent = ("0" + Math.floor(diff % 3600000 / 60000)).slice(-2);
+      cd.s.textContent = ("0" + Math.floor(diff % 60000 / 1000)).slice(-2);
+    }
+    tick();
+    setInterval(tick, 1000);
+  })();
+
+  /* ── scene-centered parallax + desk-gradient scroll interpolation, ported
+     ~1:1 from the design's own ensureInit()/wire()/applyScroll() ── */
+  (function () {
+    var desk = $("#qg-desk");
+    var scenes = [];
+    function buildScenes() {
+      scenes = Array.prototype.map.call(document.querySelectorAll("[data-scene]"), function (sc) {
+        return { sc: sc, ls: Array.prototype.map.call(sc.querySelectorAll("[data-par]"), function (el) {
+          return { el: el, sp: parseFloat(el.getAttribute("data-par")) || 0 };
+        }) };
+      });
+    }
+    function applyScroll() {
+      var vh = window.innerHeight || 1;
+      scenes.forEach(function (o) {
+        var rc = o.sc.getBoundingClientRect();
+        if (rc.bottom < -100 || rc.top > vh + 100) return;
+        var p = Math.max(-1.2, Math.min(1.2, ((rc.top + rc.height / 2) - vh / 2) / vh));
+        o.ls.forEach(function (l) { l.el.style.transform = "translate3d(0," + (p * l.sp).toFixed(1) + "px,0)"; });
+      });
+      if (desk) {
+        var doc = document.documentElement;
+        var t = Math.max(0, Math.min(1, (window.scrollY || 0) / Math.max(1, doc.scrollHeight - vh)));
+        var S = [[181,124,78,138,90,56],[199,146,90,152,102,60],[122,74,46,84,50,32]];
+        var seg = t < .5 ? [S[0], S[1], t * 2] : [S[1], S[2], (t - .5) * 2];
+        var mm = seg[0].map(function (v, i) { return Math.round(v + (seg[1][i] - v) * seg[2]); });
+        desk.style.background = "radial-gradient(130% 90% at 50% 12%, rgb(" + mm[0] + "," + mm[1] + "," + mm[2] + ") 0%, rgb(" + mm[3] + "," + mm[4] + "," + mm[5] + ") 82%)";
+      }
+    }
+    var tick = false;
+    function onScroll() { if (tick) return; tick = true; requestAnimationFrame(function () { tick = false; applyScroll(); }); }
+    buildScenes();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", function () { buildScenes(); onScroll(); }, { passive: true });
+    applyScroll();
+  })();
+
+  /* ── pmPop reveal (3D flip-in via IntersectionObserver) ── */
+  (function () {
+    var els = document.querySelectorAll("[data-pop]");
+    var reduced = false;
+    try { reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches; } catch (e) {}
+    if (reduced || !("IntersectionObserver" in window)) {
+      for (var i = 0; i < els.length; i++) els[i].style.opacity = "1";
+      return;
+    }
+    var io = new IntersectionObserver(function (ents) {
+      ents.forEach(function (en) {
+        if (en.isIntersecting) {
+          var el = en.target;
+          el.style.transformOrigin = "50% 100%";
+          el.style.animation = "pmPop .85s cubic-bezier(.22,.85,.3,1.02) both";
+          io.unobserve(el);
+        }
+      });
+    }, { threshold: .16 });
+    for (var j = 0; j < els.length; j++) io.observe(els[j]);
+  })();
+
+  /* ── music (?audio) + book-open splash (autoplay-compliant: playback
+     starts on the open tap, a genuine user gesture); cover rotateY(-148deg)
+     page-turn, splash fade, scroll unlock — ported from the design's
+     openCover()/startMusic() ── */
+  (function () {
+    var audio = $("#qg-audio"), btn = $("#qg-music"), offIcon = $("#qg-music-off");
+    var url = q.get("audio");
+    var playing = false;
+    function setIcon() { if (offIcon) offIcon.style.display = playing ? "none" : "block"; }
+    function tryPlay() {
+      if (!audio || !url) return;
+      audio.play().then(function () { playing = true; setIcon(); }).catch(function () { playing = false; setIcon(); });
+    }
+    if (url && audio && btn) {
+      audio.src = url;
+      btn.style.display = "flex";
+      btn.addEventListener("click", function () {
+        if (playing) { audio.pause(); playing = false; setIcon(); }
+        else tryPlay();
+      });
+    }
+
+    var cover = $("#qg-cover"), splash = $("#qg-splash");
+    var opening = false, opened = false;
+    if (splash) document.body.style.overflow = "hidden";
+    function open() {
+      if (opening || opened) return;
+      opening = true;
+      if (cover) cover.style.transform = "perspective(1500px) rotateY(-148deg)";
+      if (splash) { splash.style.opacity = "0"; splash.style.pointerEvents = "none"; }
+      tryPlay();
+      setTimeout(function () {
+        opened = true;
+        if (splash) splash.style.display = "none";
+        document.body.style.overflow = "";
+      }, 1250);
+    }
+    var ob = $("#qg-open");
+    if (ob) ob.addEventListener("click", open);
+    if (!splash) document.body.style.overflow = "";
+  })();
+
+  /* ── gesture handshake with the parent shell (tovus/sakura verbatim) ── */
+  (function () {
+    var fired = false;
+    var evs = ["pointerdown", "touchstart", "keydown"];
+    function once() {
+      if (fired) return; fired = true;
+      try { if (window.parent && window.parent !== window) window.parent.postMessage("taklifla:gesture", "*"); } catch (e) {}
+      evs.forEach(function (x) { window.removeEventListener(x, once, true); });
+    }
+    evs.forEach(function (x) { window.addEventListener(x, once, { capture: true, passive: true }); });
+  })();
+
+  /* ── guestbook (wishes) — ported from tovus/sakura's block (slug+fetch
+     primary, localStorage-only demo fallback when no slug); no date chips
+     and no 'A guest' fallback — name is required, per spec ── */
+  (function () {
+    var slug = q.get("slug");
+    var form = $("#qg-wish-form"), list = $("#qg-wish-list");
+    var empty = $("#qg-wish-empty"), confirm = $("#qg-wish-confirm");
+    if (!form || !list) return;
+    var KEY = "takliflaWishSubmitted:" + (slug || "demo");
+
+    function render(items) {
+      list.innerHTML = "";
+      if (!items || !items.length) { if (empty) empty.style.display = "block"; return; }
+      if (empty) empty.style.display = "none";
+      items.forEach(function (w) {
+        var name = w.name || w.n || "";
+        var msg = w.message || w.m || "";
+        var c = document.createElement("div");
+        c.style.cssText = "background:#fffdf4;border:1px solid #e6d6b4;border-radius:12px;padding:14px 16px;box-shadow:0 3px 10px rgba(120,85,40,.12);";
+        c.innerHTML = '<div style="font-family:Amarante,serif;font-size:14px;color:#8a6238;">' + esc(name) + '</div>' +
+          '<div style="font-size:14px;line-height:1.6;color:#5d4a32;margin-top:5px;overflow-wrap:anywhere;white-space:pre-wrap;">' + esc(msg) + '</div>';
+        list.appendChild(c);
+      });
+    }
+    function lock() { form.style.display = "none"; if (confirm) confirm.style.display = "block"; }
+
+    if (!slug) {
+      var demo = [];
+      try { demo = JSON.parse(localStorage.getItem("qgDemoWishes") || "[]"); } catch (e) {}
+      render(demo);
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        var n = form.elements.wname.value.trim(), msg = form.elements.wmsg.value.trim();
+        if (!n || !msg) return;
+        demo.unshift({ name: n, message: msg });
+        try { localStorage.setItem("qgDemoWishes", JSON.stringify(demo)); } catch (er) {}
+        render(demo); form.reset();
+      });
+      return;
+    }
+
+    var URL = "/api/v1/public/i/" + encodeURIComponent(slug) + "/guestbook";
+    function load() {
+      fetch(URL, { credentials: "omit" }).then(function (r) { return r.ok ? r.json() : []; })
+        .then(function (items) { render(items || []); }).catch(function () {});
+    }
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var n = form.elements.wname.value.trim(), msg = form.elements.wmsg.value.trim();
+      if (!n || !msg) return;
+      var btn = form.querySelector('button[type="submit"]');
+      if (btn) btn.disabled = true;
+      fetch(URL, { method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name: n, message: msg }), credentials: "omit" })
+        .then(function (r) { if (!r.ok) throw new Error("http_" + r.status); return r.json(); })
+        .then(function () { try { localStorage.setItem(KEY, "1"); } catch (er) {} form.reset(); lock(); load(); })
+        .catch(function () { if (btn) btn.disabled = false; });
+    });
+    load();
+    try { if (localStorage.getItem(KEY) === "1") lock(); } catch (e) {}
+  })();
+
+  apply();
+})();

@@ -1,8 +1,4 @@
-import { resolveTemplateId } from "./template-identity";
-export { publicTemplateId, publicTemplateName, resolveTemplateId } from "./template-identity";
 import { z } from "zod";
-import { DEFAULT_INVITATION_MUSIC } from "./music";
-import { templateCapabilities, type TemplateCapabilities } from "./capabilities";
 
 export const LOCALES = ["uz-Latn", "uz-Cyrl", "en", "ru"] as const;
 export const localeSchema = z.enum(LOCALES);
@@ -190,7 +186,7 @@ export const pulauSehatiDataSchema = z.object({
   hotels: z.array(z.object({ name: short, address: z.string().max(1000), distance: short, price: short, bookingUrl: safeUrl, note: z.string().max(1000) })).max(2).default([]),
   media: z.object({ videoUrl: safeUrl, liveUrl: safeUrl, intro: z.string().max(1000) }).default({ videoUrl: "", liveUrl: "", intro: "" }),
   giftWell: z.object({ enabled: z.boolean(), currencyLabel: short }).default({ enabled: false, currencyLabel: "UZS" }),
-  secondaryEvent: z.object({ enabled: z.boolean(), date: z.string().max(50), time: z.string().max(10), label: short, venueName: short, address: z.string().max(1000), mapUrl: safeUrl, placeUri: z.string().max(2000).regex(/^ymapsbm1:\/\/(?:org|geo)\?/).optional(), latitude: z.number().min(-90).max(90).nullable().optional(), longitude: z.number().min(-180).max(180).nullable().optional() }).default({ enabled: false, date: "", time: "", label: "", venueName: "", address: "", mapUrl: "" }),
+  secondaryEvent: z.object({ enabled: z.boolean(), date: z.string().max(50), time: z.string().max(10), label: short, venueName: short, address: z.string().max(1000), mapUrl: safeUrl }).default({ enabled: false, date: "", time: "", label: "", venueName: "", address: "", mapUrl: "" }),
   storyDates: z.record(z.string().max(100), z.string().max(50)).default({}),
   coInviters: z.string().max(1000).default(""),
   missions: z.array(z.object({ title: short, description: z.string().max(1000), reward: short })).max(5).default([]),
@@ -229,8 +225,6 @@ export const invitationSchema = z
   .object({
     version: z.literal(1),
     revision: z.number().int().min(1).default(1),
-    /** Server-assigned first static export; no public webpage is published. */
-    imageExportedAt: z.string().datetime().optional(),
     id: z.string().min(1).max(100),
     templateId: invitationTemplateIdSchema,
     templateData: z.record(z.string(), z.custom<JsonValue>(isJsonValue)).default({}).superRefine((data, ctx) => {
@@ -273,7 +267,6 @@ export const invitationSchema = z
       latitude: z.number().min(-90).max(90).nullable(),
       longitude: z.number().min(-180).max(180).nullable(),
       mapUrl: safeUrl,
-      placeUri: z.string().max(2000).regex(/^ymapsbm1:\/\/(?:org|geo)\?/).optional(),
     }),
     program: z
       .array(z.object({ id: z.string().max(100), time: z.string().max(10) }))
@@ -440,9 +433,6 @@ export const TEMPLATE_CATEGORIES: TemplateCategory[] = [
   { id: "yangi-uy", name: "Yangi uy", position: 6 },
 ];
 export type TemplateDefinition = {
-  format?: "web" | "image";
-  imageSize?: { width: number; height: number };
-  capabilities: TemplateCapabilities;
   id: z.infer<typeof templateIdSchema>;
   name: string;
   description: string;
@@ -456,81 +446,10 @@ export type TemplateDefinition = {
   currency: "UZS";
   accent: string;
   published: boolean;
-  /** Retained for owned invitations only; never offered for new selections. */
-  retired?: boolean;
 };
 export const TEMPLATES: TemplateDefinition[] = [
   {
-    id: "sahar-ifori", format: "image", imageSize: { width: 1500, height: 2100 },
-    capabilities: templateCapabilities("sahar-ifori"),
-    name: "Sahar ifori",
-    description: "Iliq fil suyagi rangi, mayin pushti gullar va mavrak barglar orasida nafis xattotlik. 5:7 rasm taklifnoma.",
-    previewImage: "/templates/sahar-ifori/preview.webp", previewEventType: "wedding",
-    categoryIds: ["wedding"], supportedEventTypes: ["wedding", "fotiha"],
-    priceMinor: 0, currency: "UZS", accent: "#9aa98c", published: true,
-  },
-  {
-    id: "lola-maktubi", format: "image", imageSize: { width: 1500, height: 2100 },
-    capabilities: templateCapabilities("lola-maktubi"),
-    name: "Lola maktubi",
-    description: "Bordo lolalar, qaymoqrang qog‘oz va nafis xattotlik. 5:7 rasm taklifnoma.",
-    previewImage: "/templates/lola-maktubi/preview.webp", previewEventType: "wedding",
-    categoryIds: ["wedding"], supportedEventTypes: ["wedding", "fotiha"],
-    priceMinor: 0, currency: "UZS", accent: "#612735", published: true,
-  },
-  {
-    id: "moviy-ravoq-card", format: "image", imageSize: { width: 1500, height: 2100 },
-    capabilities: templateCapabilities("moviy-ravoq-card"),
-    name: "Moviy ravoq",
-    description: "Chinni kabi moviy islimiy naqshlar va nafis ravoq. 5:7 rasm taklifnoma.",
-    previewImage: "/templates/moviy-ravoq-card/preview.webp", previewEventType: "wedding",
-    categoryIds: ["wedding"], supportedEventTypes: ["wedding", "fotiha"],
-    priceMinor: 0, currency: "UZS", accent: "#23467f", published: true,
-  },
-  {
-    id: "zarhal-oqshom-card", format: "image", imageSize: { width: 1500, height: 2100 },
-    capabilities: templateCapabilities("zarhal-oqshom-card"),
-    name: "Zarhal oqshom",
-    description: "To‘q rang, zarhal chiziqlar va Art Deco tipografik kompozitsiya. 5:7 rasm taklifnoma.",
-    previewImage: "/templates/zarhal-oqshom-card/preview.webp", previewEventType: "wedding",
-    categoryIds: ["wedding"], supportedEventTypes: ["wedding", "fotiha"],
-    priceMinor: 0, currency: "UZS", accent: "#bf9b5e", published: false, retired: true,
-  },
-  {
-    id: "ivory-rose-card",
-    format: "image",
-    imageSize: { width: 1500, height: 2100 },
-    capabilities: templateCapabilities("ivory-rose-card"),
-    name: "Oq atirgul",
-    description: "Oq atirgullar, zaytun novdalari va nafis qog‘oz. 5:7 rasm taklifnoma.",
-    previewImage: "/templates/ivory-rose-card/preview.webp",
-    previewEventType: "wedding",
-    categoryIds: ["wedding"],
-    supportedEventTypes: ["wedding", "fotiha"],
-    priceMinor: 0,
-    currency: "UZS",
-    accent: "#77754e",
-    published: true,
-  },
-  {
-    id: "zumrad-naqsh",
-    format: "image",
-    imageSize: { width: 1500, height: 2100 },
-    capabilities: templateCapabilities("zumrad-naqsh"),
-    name: "Zumrad naqsh",
-    description: "Zumrad rang, nafis zarhal girih naqshlari va 5:7 rasm taklifnoma.",
-    previewImage: "/templates/zumrad-naqsh/preview.webp",
-    previewEventType: "wedding",
-    categoryIds: ["wedding"],
-    supportedEventTypes: ["wedding", "fotiha"],
-    priceMinor: 0,
-    currency: "UZS",
-    accent: "#16463b",
-    published: false,
-  },
-  {
     id: "wedivo-pulau-sehati",
-    capabilities: templateCapabilities("wedivo-pulau-sehati"),
     name: "Ko‘ngillar oroli",
     description: "Sayr, kashfiyot va o‘z hikoyangiz bilan bezatilgan interaktiv to‘y taklifnomasi.",
     previewImage: "/templates/wedivo-pulau-sehati/preview.png",
@@ -544,7 +463,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "oltin-darvoza-ortidagi-baxt",
-    capabilities: templateCapabilities("oltin-darvoza-ortidagi-baxt"),
     name: "Oltin darvoza ortidagi baxt",
     description:
       "Oltin naqshli darvoza, gullar va kinematik ochilish bilan bezatilgan taklifnoma.",
@@ -560,7 +478,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "gulli-darvoza",
-    capabilities: templateCapabilities("gulli-darvoza"),
     name: "Gulli darvoza",
     description:
       "Gulli darvoza va romantik video ochilishiga ega to‘y taklifnomasi.",
@@ -576,7 +493,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "ming-bir-kecha",
-    capabilities: templateCapabilities("ming-bir-kecha"),
     name: "Ming bir kecha",
     description:
       "Tungi binafsha ranglar, oltin yoysimon naqsh va yulduzlar ostidagi taklifnoma.",
@@ -592,7 +508,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "andalus-darvozasi",
-    capabilities: templateCapabilities("andalus-darvozasi"),
     name: "Andalus darvozasi",
     description: "A source-faithful Andalusian doorway wedding invitation.",
     previewImage:
@@ -607,7 +522,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "samarqand-peshtoqi",
-    capabilities: templateCapabilities("samarqand-peshtoqi"),
     name: "Samarqand peshtoqi",
     description: "A source-faithful Registan portal wedding invitation.",
     previewImage:
@@ -622,7 +536,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "shisha-bog",
-    capabilities: templateCapabilities("shisha-bog"),
     name: "Shisha bogʻ",
     description:
       "A source-faithful candlelit glass conservatory wedding invitation.",
@@ -638,7 +551,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "kapadokiya-tongi",
-    capabilities: templateCapabilities("kapadokiya-tongi"),
     name: "Kapadokiya tongi",
     description:
       "A source-faithful rose-and-burgundy Cappadocia sunrise invitation.",
@@ -654,7 +566,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "buxoro-ravoq",
-    capabilities: templateCapabilities("buxoro-ravoq"),
     name: "Buxoro ravoq",
     description:
       "A source-faithful Bukhara blue-and-gold portal wedding invitation.",
@@ -670,7 +581,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "jannat-bogi",
-    capabilities: templateCapabilities("jannat-bogi"),
     name: "Jannat bogʻi",
     description: "A source-faithful floral paradise gate wedding invitation.",
     previewImage:
@@ -685,7 +595,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "tojmahal-oltin-darvozasi",
-    capabilities: templateCapabilities("tojmahal-oltin-darvozasi"),
     name: "Tojmahal oltin darvozasi",
     description:
       "A source-faithful Taj Mahal gate invitation in midnight blue and pale gold.",
@@ -701,7 +610,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "zarrin-doppi",
-    capabilities: templateCapabilities("zarrin-doppi"),
     name: "Zarrin do‘ppi",
     description:
       "To‘q ko‘k doppi girihi, yulduzlar va tillarang naqshlar bilan sunnat to‘yi taklifnomasi.",
@@ -717,7 +625,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "fairy",
-    capabilities: templateCapabilities("fairy"),
     name: "Fairy",
     description:
       "Olive va oltin ranglar, nafis yurak bezaklari va romantik to‘y taklifnomasi.",
@@ -732,7 +639,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "butterfly",
-    capabilities: templateCapabilities("butterfly"),
     name: "Butterfly",
     description:
       "Pushti kapalaklar, nafis gullar va romantik to‘y taklifnomasi.",
@@ -747,7 +653,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "girlsparty",
-    capabilities: templateCapabilities("girlsparty"),
     name: "Girls Party",
     description:
       "Qizlar bazmi uchun video va gul yaproqlari bilan bezatilgan taklifnoma.",
@@ -762,7 +667,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "estelle",
-    capabilities: templateCapabilities("estelle"),
     name: "Estelle",
     description:
       "Классический дизайн со скретч-открытием даты и видео-приглашением.",
@@ -777,7 +681,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "velora",
-    capabilities: templateCapabilities("velora"),
     name: "Velora",
     description: "Moviy ohanglar va nafis bezaklardagi to‘y taklifnomasi.",
     previewImage: "/templates/velora/preview.png",
@@ -791,7 +694,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "velvet",
-    capabilities: templateCapabilities("velvet"),
     name: "Velvet",
     description: "Velvet ranglar va video ochilishiga ega to‘y taklifnomasi.",
     previewImage: "/templates/velvet/preview.webp",
@@ -805,7 +707,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "aurelia",
-    capabilities: templateCapabilities("aurelia"),
     name: "Aurelia",
     description:
       "Tillarang bezaklar va nafis bulutlar orasidagi to‘y taklifnomasi.",
@@ -820,7 +721,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "evelina",
-    capabilities: templateCapabilities("evelina"),
     name: "Evelina",
     description: "Nozik gul naqshlari, shaffof kristallar va romantik oqshom.",
     previewImage: "/templates/evelina/preview.webp",
@@ -834,7 +734,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "anor",
-    capabilities: templateCapabilities("anor"),
     name: "Anor",
     description: "Anor gullari va Rishton naqshlari uyg‘unligi.",
     previewImage: "preview.webp",
@@ -847,7 +746,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "oltin-nur",
-    capabilities: templateCapabilities("oltin-nur"),
     name: "Oltin Nur",
     description: "Qora baxmal va oltin nur.",
     previewImage: "/templates/oltin-nur/preview.webp",
@@ -860,7 +758,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "samarqand-kechasi",
-    capabilities: templateCapabilities("samarqand-kechasi"),
     name: "Samarqand Kechasi",
     description: "Registon oqshomi va oltin salyut.",
     previewImage: "/templates/samarqand-kechasi/preview.webp",
@@ -873,7 +770,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "bogi-eram",
-    capabilities: templateCapabilities("bogi-eram"),
     name: "Bog‘i Eram",
     description: "O‘ymakor darvoza va jannat bog‘i.",
     previewImage: "/templates/bogi-eram/preview.webp",
@@ -886,7 +782,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "atlas",
-    capabilities: templateCapabilities("atlas"),
     name: "Atlas",
     description: "Zamonaviy atlas va adras ranglari.",
     previewImage: "/templates/atlas/preview.webp",
@@ -899,7 +794,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "uchar-gilam",
-    capabilities: templateCapabilities("uchar-gilam"),
     name: "Uchar Gilam",
     description: "Gilam ustida Buxoro uzra parvoz.",
     previewImage: "/templates/uchar-gilam/preview.webp",
@@ -912,7 +806,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "oq-kabutar",
-    capabilities: templateCapabilities("oq-kabutar"),
     name: "Oq Kabutar",
     description: "Oq kabutarlar va ipak lenta.",
     previewImage: "/templates/oq-kabutar/preview-opening.png",
@@ -925,7 +818,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "kuzgi-chinor",
-    capabilities: templateCapabilities("kuzgi-chinor"),
     name: "Kuzgi Chinor",
     description: "Oltin kuz va chinor barglari.",
     previewImage: "/templates/kuzgi-chinor/preview.webp",
@@ -938,7 +830,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "muhabbat-kitobi",
-    capabilities: templateCapabilities("muhabbat-kitobi"),
     name: "Muhabbat Kitobi",
     description: "Sevgi hikoyasi kitob sahifalarida.",
     previewImage: "/templates/muhabbat-kitobi/preview.webp",
@@ -951,7 +842,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "sahifa",
-    capabilities: templateCapabilities("sahifa"),
     name: "Sahifa",
     description: "Jurnal muqovasidan ilhomlangan taklifnoma.",
     previewImage: "/templates/sahifa/preview.webp",
@@ -964,7 +854,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "oltin-uzuk",
-    capabilities: templateCapabilities("oltin-uzuk"),
     name: "Oltin Uzuk",
     description: "Haqiqiy 3D oltin uzuklar.",
     previewImage: "/templates/oltin-uzuk/catalog-cover-opening.png",
@@ -977,7 +866,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "oynavand",
-    capabilities: templateCapabilities("oynavand"),
     name: "Oynavand",
     description: "Oynakori gumbaz va ko‘zgu parchalari.",
     previewImage: "/templates/oynavand/preview.webp",
@@ -990,7 +878,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "somon-yoli",
-    capabilities: templateCapabilities("somon-yoli"),
     name: "Somon Yo‘li",
     description: "Ismlaringiz yulduzlar turkumida.",
     previewImage: "/templates/somon-yoli/preview.webp",
@@ -1003,7 +890,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "qogoz-turna",
-    capabilities: templateCapabilities("qogoz-turna"),
     name: "Qog‘oz Turna",
     description: "Qat-qat ochiladigan nafis taklifnoma.",
     previewImage: "/templates/qogoz-turna/preview.webp",
@@ -1016,7 +902,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "nilufar",
-    capabilities: templateCapabilities("nilufar"),
     name: "Nilufar",
     description: "Nilufar hovuzi va sokin suv manzarasi.",
     previewImage: "/templates/nilufar/preview.webp",
@@ -1030,7 +915,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "monogram",
-    capabilities: templateCapabilities("monogram"),
     name: "Monogram",
     description: "Qora galstuk uslubidagi nafis monogramma.",
     previewImage: "/templates/monogram/preview.webp",
@@ -1043,7 +927,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "retro-kino",
-    capabilities: templateCapabilities("retro-kino"),
     name: "Retro Kino",
     description: "Kino tasmasi va klassik premyera muhiti.",
     previewImage: "/templates/retro-kino/preview.webp",
@@ -1056,7 +939,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "suzani",
-    capabilities: templateCapabilities("suzani"),
     name: "Suzani",
     description: "Har bir chokda mehr, har bir naqshda xotira.",
     previewImage: "/templates/suzani/preview.webp",
@@ -1069,7 +951,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "orik-guli",
-    capabilities: templateCapabilities("orik-guli"),
     name: "O‘rik Guli",
     description: "Bahoriy bog‘ va o‘rik gullaridan ilhomlangan taklifnoma.",
     previewImage: "/templates/orik-guli/preview.webp",
@@ -1082,7 +963,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "paxta",
-    capabilities: templateCapabilities("paxta"),
     name: "Paxta",
     description: "Oq oltin — sokin hashamat.",
     previewImage: "/templates/paxta/preview.webp",
@@ -1095,7 +975,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "sahro-fonusi",
-    capabilities: templateCapabilities("sahro-fonusi"),
     name: "Sahro Fonusi",
     description: "Oltin qumlar uzra chiroqlar oqshomi.",
     previewImage: "/templates/sahro-fonusi/preview.webp",
@@ -1108,7 +987,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "vals",
-    capabilities: templateCapabilities("vals"),
     name: "Vals",
     description: "Kinematik vals va oy nuridagi bal zali.",
     previewImage: "/templates/vals/preview.webp",
@@ -1121,7 +999,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "toscana",
-    capabilities: templateCapabilities("toscana"),
     name: "Toscana",
     description: "Gul archadan boshlanadigan romantik Toskana to‘y kuni.",
     previewImage: "/templates/toscana/art/aisle.webp",
@@ -1134,7 +1011,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "muhr",
-    capabilities: templateCapabilities("muhr"),
     name: "Muhr",
     description: "Bo‘rtma muhrli maktub tonggi bog‘ga ochiladi.",
     previewImage: "/templates/muhr/preview.webp",
@@ -1147,7 +1023,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "bulbul",
-    capabilities: templateCapabilities("bulbul"),
     name: "Bulbul",
     description: "Tonggi bulbul va oltin qafas gullagan bog‘ga yo‘l ochadi.",
     previewImage: "/templates/bulbul/catalog-cover-opening.png",
@@ -1160,7 +1035,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "kozgu",
-    capabilities: templateCapabilities("kozgu"),
     name: "Ko‘zgu",
     description:
       "Qadimiy ko‘zguda ismlar paydo bo‘lib, oy bog‘iga yo‘l ochiladi.",
@@ -1174,7 +1048,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "doira",
-    capabilities: templateCapabilities("doira"),
     name: "Doira",
     description: "Uch zarb. Unutilmas oqshom.",
     previewImage: "/templates/doira/preview.png",
@@ -1187,7 +1060,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "qandil",
-    capabilities: templateCapabilities("qandil"),
     name: "Qandil",
     description: "Mis naqshlari va yulduzlar yog‘dusidagi Buxoro oqshomi.",
     previewImage: "/templates/qandil/preview.webp",
@@ -1200,7 +1072,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "parda",
-    capabilities: templateCapabilities("parda"),
     name: "Parda",
     description: "Oltin kashtali parda ortida bog‘ oqshomi ochiladi.",
     previewImage: "/templates/parda/preview-browser-capture.jpg",
@@ -1213,7 +1084,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "ganch",
-    capabilities: templateCapabilities("ganch"),
     name: "Ganch",
     description: "Naqshli eshiklardan quyoshli Buxoro hovlisiga.",
     previewImage: "/templates/ganch/preview-browser-capture.jpg",
@@ -1226,7 +1096,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "qatlam",
-    capabilities: templateCapabilities("qatlam"),
     name: "Qatlam",
     description: "Zarhal kitob muqovasidan qatlam-qatlam Samarqand ochiladi.",
     previewImage: "/templates/qatlam/preview.webp",
@@ -1239,7 +1108,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "lola",
-    capabilities: templateCapabilities("lola"),
     name: "Lola",
     description:
       "Lolalar va bahor ranglaridan ilhomlangan qiz uzatish taklifnomasi.",
@@ -1253,7 +1121,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "qiz-bazmi",
-    capabilities: templateCapabilities("qiz-bazmi"),
     name: "Qiz Bazmi",
     description: "Xina naqshlari va atlas jilosi bilan kelin oqshomi.",
     previewImage: "/templates/qiz-bazmi/preview.webp",
@@ -1267,7 +1134,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "shahzoda",
-    capabilities: templateCapabilities("shahzoda"),
     name: "Shahzoda",
     description: "Ko‘k va oltin ranglardagi sunnat to‘yi taklifnomasi.",
     previewImage: "/templates/shahzoda/preview.webp",
@@ -1280,7 +1146,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "chavandoz",
-    capabilities: templateCapabilities("chavandoz"),
     name: "Chavandoz",
     description: "Atlas chodiridagi sehrli sunnat to‘yi taklifnomasi.",
     previewImage: "/templates/chavandoz/preview.webp",
@@ -1293,7 +1158,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "beshik",
-    capabilities: templateCapabilities("beshik"),
     name: "Beshik",
     description: "Alla ohangidagi beshik to‘yi taklifnomasi.",
     previewImage: "/templates/beshik/preview.webp",
@@ -1306,7 +1170,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "shirin-bayram",
-    capabilities: templateCapabilities("shirin-bayram"),
     name: "Shirin Bayram",
     description: "Shamlar, sharlar va shirin tabassumlar.",
     previewImage: "/templates/shirin-bayram/preview.webp",
@@ -1319,7 +1182,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "oltin-kuz",
-    capabilities: templateCapabilities("oltin-kuz"),
     name: "Oltin Kuz",
     description: "Oltin kuz ohangidagi yubiley taklifnomasi.",
     previewImage: "/templates/oltin-kuz/preview.webp",
@@ -1333,7 +1195,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "oltin-yosh",
-    capabilities: templateCapabilities("oltin-yosh"),
     name: "Oltin Yosh",
     description: "Yorqin va quvnoq yubiley taklifnomasi.",
     previewImage: "/templates/oltin-yosh/preview.webp",
@@ -1346,7 +1207,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "konfetti",
-    capabilities: templateCapabilities("konfetti"),
     name: "Konfetti",
     description: "Shamlar va konfetti bilan zamonaviy bayram taklifnomasi.",
     previewImage: "/templates/konfetti/preview.webp",
@@ -1359,7 +1219,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "nahor",
-    capabilities: templateCapabilities("nahor"),
     name: "Nahor",
     description: "Tonggi mahalla fayzidagi nahorgi osh taklifnomasi.",
     previewImage: "/templates/nahor/preview.webp",
@@ -1372,7 +1231,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "nahorgi-osh",
-    capabilities: templateCapabilities("nahorgi-osh"),
     name: "Nahorgi Osh",
     description: "Tong nafasi bilan boshlangan ezgu davra.",
     previewImage: "/templates/nahorgi-osh/preview.webp",
@@ -1386,7 +1244,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "hilol",
-    capabilities: templateCapabilities("hilol"),
     name: "Hilol",
     description: "Hilol naqshlari bilan fayzli iftorlik taklifnomasi.",
     previewImage: "/templates/hilol/preview.webp",
@@ -1400,7 +1257,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "bitiruv",
-    capabilities: templateCapabilities("bitiruv"),
     name: "Bitiruv",
     description: "Yilnomadek unutilmas bitiruv oqshomi.",
     previewImage: "/templates/bitiruv/preview.webp",
@@ -1414,7 +1270,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "korporativ",
-    capabilities: templateCapabilities("korporativ"),
     name: "Korporativ",
     description: "Aniq, texnologik va tantanavor tadbir taklifnomasi.",
     previewImage: "/templates/korporativ/preview.webp",
@@ -1428,7 +1283,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "yangi-uy",
-    capabilities: templateCapabilities("yangi-uy"),
     name: "Yangi Uy",
     description: "Yangi xonadon quvonchini yaqinlaringiz bilan nishonlang.",
     previewImage: "/templates/yangi-uy/catalog-cover-opening.png",
@@ -1442,7 +1296,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "golden-card",
-    capabilities: templateCapabilities("golden-card"),
     name: "Golden Card",
     description:
       "Midnight blue and gold ornamental invitation with a folding-card reveal.",
@@ -1457,7 +1310,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "green-garden",
-    capabilities: templateCapabilities("green-garden"),
     name: "Green Garden",
     description: "Shisha bog‘, nafis gullar va yashil ranglardagi taklifnoma.",
     previewImage: "/templates/green-garden/catalog-cover-opening.png",
@@ -1471,7 +1323,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "green-gold",
-    capabilities: templateCapabilities("green-gold"),
     name: "Green Gold",
     description:
       "Gold ornaments and deep green tones for a wedding invitation.",
@@ -1486,7 +1337,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "green-white",
-    capabilities: templateCapabilities("green-white"),
     name: "Green White",
     description:
       "A botanical white-and-green wedding invitation with a dress-code palette.",
@@ -1501,7 +1351,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "jasmine-white",
-    capabilities: templateCapabilities("jasmine-white"),
     name: "Jasmine White",
     description:
       "An ivory and botanical wedding invitation with jasmine ornaments.",
@@ -1516,7 +1365,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "lace",
-    capabilities: templateCapabilities("lace"),
     name: "Lace",
     description:
       "A burgundy lace wedding invitation with pearl details and an animated cover.",
@@ -1531,7 +1379,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "love-sakura",
-    capabilities: templateCapabilities("love-sakura"),
     name: "Love Sakura",
     description: "A romantic sakura wedding invitation with a blush palette.",
     previewEventType: "wedding",
@@ -1545,7 +1392,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "luxury-gold",
-    capabilities: templateCapabilities("luxury-gold"),
     name: "Luxury Gold",
     description:
       "A dark, gold-accented wedding invitation with a refined layout.",
@@ -1560,7 +1406,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "modern-floral",
-    capabilities: templateCapabilities("modern-floral"),
     name: "Modern Floral",
     description:
       "A soft floral wedding invitation with a modern botanical style.",
@@ -1575,7 +1420,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "taklifla-zarhal-sahifa",
-    capabilities: templateCapabilities("taklifla-zarhal-sahifa"),
     name: "Zarhal Sahifa",
     description: "Zarhal bezaklar, nafis gullar va sayohat ohangidagi nikoh taklifnomasi.",
     previewImage: "/templates/taklifla-zarhal-sahifa/preview.webp",
@@ -1589,7 +1433,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "taklifla-muhrli-maktub",
-    capabilities: templateCapabilities("taklifla-muhrli-maktub"),
     name: "Muhrli Maktub",
     description: "Muhrli konvert, nafis maktub va klassik nikoh taklifnomasi.",
     previewImage: "/templates/taklifla-muhrli-maktub/preview.webp",
@@ -1603,7 +1446,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "taklifla-asalari",
-    capabilities: templateCapabilities("taklifla-asalari"),
     name: "Asalari",
     description: "Quvnoq, asalrang bezakli tug‘ilgan kun taklifnomasi.",
     previewImage: "/templates/taklifla-asalari/preview.webp",
@@ -1616,99 +1458,91 @@ export const TEMPLATES: TemplateDefinition[] = [
     published: true,
   },
   {
-    id: "taklifla-fayzli-xonadon",
-    capabilities: templateCapabilities("taklifla-fayzli-xonadon"), name: "Fayzli Xonadon", description: "Terrakota jilolari, xonadon chizmasi va samimiy uy to‘yi taklifnomasi.",
+    id: "taklifla-fayzli-xonadon", name: "Fayzli Xonadon", description: "Terrakota jilolari, xonadon chizmasi va samimiy uy to‘yi taklifnomasi.",
     previewImage: "/templates/taklifla-fayzli-xonadon/preview.webp", previewEventType: "yangi-uy",
     categoryIds: ["other"], supportedEventTypes: ["yangi-uy"],
     priceMinor: 100000, currency: "UZS", accent: "#b5523a", published: true,
   },
   {
-    id: "taklifla-ertak",
-    capabilities: templateCapabilities("taklifla-ertak"), name: "Ertak", description: "Sehrli qal’a, ertak darvozasi va qatlamli bog manzarasi.",
+    id: "taklifla-ertak", name: "Ertak", description: "Sehrli qal’a, ertak darvozasi va qatlamli bog manzarasi.",
     previewImage: "/templates/taklifla-ertak/preview.webp", previewEventType: "wedding",
     categoryIds: ["wedding"], supportedEventTypes: ["wedding"],
     priceMinor: 100000, currency: "UZS", accent: "#c9a24a", published: true,
   },
   {
-    id: "taklifla-gulbog",
-    capabilities: templateCapabilities("taklifla-gulbog"), name: "Gulbog", description: "Gullar darvozasi va nafis bog manzarasidagi nikoh taklifnomasi.",
+    id: "taklifla-gulbog", name: "Gulbog", description: "Gullar darvozasi va nafis bog manzarasidagi nikoh taklifnomasi.",
     previewImage: "/templates/taklifla-gulbog/preview.webp", previewEventType: "wedding",
     categoryIds: ["wedding"], supportedEventTypes: ["wedding"],
     priceMinor: 100000, currency: "UZS", accent: "#6b8f5e", published: true,
   },
   {
-    id: "taklifla-zarrin-gullar",
-    capabilities: templateCapabilities("taklifla-zarrin-gullar"), name: "Zarrin gullar", description: "Iliq zarrin gullar, nafis bezaklar va bahoriy nikoh taklifnomasi.",
+    id: "taklifla-zarrin-gullar", name: "Zarrin gullar", description: "Iliq zarrin gullar, nafis bezaklar va bahoriy nikoh taklifnomasi.",
     previewImage: "/templates/taklifla-zarrin-gullar/preview.webp", previewEventType: "wedding",
     categoryIds: ["wedding"], supportedEventTypes: ["wedding"],
     priceMinor: 100000, currency: "UZS", accent: "#c67139", published: true,
   },
   {
-    id: "taklifla-toglar-bagrida",
-    capabilities: templateCapabilities("taklifla-toglar-bagrida"), name: "Tog‘lar bag‘rida", description: "Tog‘lar manzarasi, nafis gullar va qatlamli harakatli nikoh taklifnomasi.",
+    id: "taklifla-toglar-bagrida", name: "Tog‘lar bag‘rida", description: "Tog‘lar manzarasi, nafis gullar va qatlamli harakatli nikoh taklifnomasi.",
     previewImage: "/templates/taklifla-toglar-bagrida/preview.webp", previewEventType: "wedding",
     categoryIds: ["wedding"], supportedEventTypes: ["wedding"],
     priceMinor: 100000, currency: "UZS", accent: "#819480", published: true,
   },
   {
-    id: "taklifla-oltin-yol",
-    capabilities: templateCapabilities("taklifla-oltin-yol"), name: "Oltin Yo‘l", description: "Oltin poyezd sayohati, nafis chiptalar va harakatli temiryo‘l taklifnomasi.",
+    id: "taklifla-oltin-yol", name: "Oltin Yo‘l", description: "Oltin poyezd sayohati, nafis chiptalar va harakatli temiryo‘l taklifnomasi.",
     previewImage: "/templates/taklifla-oltin-yol/preview.webp", previewEventType: "wedding",
     categoryIds: ["wedding"], supportedEventTypes: ["wedding"],
     priceMinor: 100000, currency: "UZS", accent: "#b3552f", published: true,
   },
   {
-    id: "taklifla-osmon",
-    capabilities: templateCapabilities("taklifla-osmon"), name: "Cheksiz Osmon", description: "Bulutlar orasidagi sayohat, uchuvchi bezaklar va moviy nikoh taklifnomasi.",
+    id: "taklifla-osmon", name: "Cheksiz Osmon", description: "Bulutlar orasidagi sayohat, uchuvchi bezaklar va moviy nikoh taklifnomasi.",
     previewImage: "/templates/taklifla-osmon/preview.webp", previewEventType: "wedding",
     categoryIds: ["wedding"], supportedEventTypes: ["wedding"],
     priceMinor: 100000, currency: "UZS", accent: "#3d6a99", published: true,
   },
   {
-    id: "taklifla-parilar-ertagi",
-    capabilities: templateCapabilities("taklifla-parilar-ertagi"), name: "Parilar ertagi", description: "Qasrlar, ertaknamo arka qatlamlari va nafis harakatli nikoh taklifnomasi.",
+    id: "taklifla-parilar-ertagi", name: "Parilar ertagi", description: "Qasrlar, ertaknamo arka qatlamlari va nafis harakatli nikoh taklifnomasi.",
     previewImage: "/templates/taklifla-parilar-ertagi/preview.webp", previewEventType: "wedding",
     categoryIds: ["wedding"], supportedEventTypes: ["wedding"],
     priceMinor: 100000, currency: "UZS", accent: "#b8a4c9", published: true,
   },
   {
-    id: "taklifla-qogoz-ertagi",
-    capabilities: templateCapabilities("taklifla-qogoz-ertagi"), name: "Qog‘oz ertagi", description: "Qog‘oz kitob sahifalari, ochiluvchi muqova va qatlamli nikoh manzaralari.",
+    id: "taklifla-qogoz-ertagi", name: "Qog‘oz ertagi", description: "Qog‘oz kitob sahifalari, ochiluvchi muqova va qatlamli nikoh manzaralari.",
     previewImage: "/templates/taklifla-qogoz-ertagi/preview.webp", previewEventType: "wedding",
     categoryIds: ["wedding"], supportedEventTypes: ["wedding"],
     priceMinor: 100000, currency: "UZS", accent: "#c9a24b", published: true,
   },
   {
-    id: "taklifla-sakura-guli",
-    capabilities: templateCapabilities("taklifla-sakura-guli"), name: "Sakura Guli", description: "Sakura gullari, nafis sharshara manzarasi va harakatli gulbargli nikoh taklifnomasi.",
+    id: "taklifla-sakura-guli", name: "Sakura Guli", description: "Sakura gullari, nafis sharshara manzarasi va harakatli gulbargli nikoh taklifnomasi.",
     previewImage: "/templates/taklifla-sakura-guli/preview.webp", previewEventType: "wedding",
     categoryIds: ["wedding"], supportedEventTypes: ["wedding"],
     priceMinor: 100000, currency: "UZS", accent: "#c2637f", published: true,
   },
   {
-    id: "taklifla-sharlar",
-    capabilities: templateCapabilities("taklifla-sharlar"), name: "Sharlar", description: "Burgund rangli karnaval, oltin sharlar va harakatli bayram sahnasi.",
+    id: "taklifla-sharlar", name: "Sharlar", description: "Burgund rangli karnaval, oltin sharlar va harakatli bayram sahnasi.",
     previewImage: "/templates/taklifla-sharlar/preview.webp", previewEventType: "birthday",
     categoryIds: ["birthday"], supportedEventTypes: ["birthday"],
     priceMinor: 100000, currency: "UZS", accent: "#7a1a26", published: true,
   },
   {
-    id: "taklifla-yulduzli-tun",
-    capabilities: templateCapabilities("taklifla-yulduzli-tun"), name: "Yulduzli Tun", description: "Yulduzli osmon, zarhal oy bezaklari va saroy manzarali nikoh taklifnomasi.",
+    id: "taklifla-yulduzli-tun", name: "Yulduzli Tun", description: "Yulduzli osmon, zarhal oy bezaklari va saroy manzarali nikoh taklifnomasi.",
     previewImage: "/templates/taklifla-yulduzli-tun/preview.webp", previewEventType: "wedding",
     categoryIds: ["wedding"], supportedEventTypes: ["wedding"],
     priceMinor: 100000, currency: "UZS", accent: "#c8a951", published: true,
   },
   {
-    id: "taklifla-terracotta",
-    capabilities: templateCapabilities("taklifla-terracotta"), name: "Terracotta", description: "Sopol tuslari, nafis botanika qatlamlari va iliq nikoh manzaralari.",
+    id: "taklifla-terracotta", name: "Terracotta", description: "Sopol tuslari, nafis botanika qatlamlari va iliq nikoh manzaralari.",
     previewImage: "/templates/taklifla-terracotta/preview.webp", previewEventType: "wedding",
     categoryIds: ["wedding"], supportedEventTypes: ["wedding"],
     priceMinor: 100000, currency: "UZS", accent: "#bb7657", published: true,
   },
   {
-    id: "taklifla-yubiley-sahifasi",
-    capabilities: templateCapabilities("taklifla-yubiley-sahifasi"), name: "Yubiley Sahifasi",
+    id: "taklifla-uchrashuv", name: "Uchrashuv", description: "Ochilib yoziladigan sevgi maktubi, o‘ynoqi javob tugmalari va gulbarglar.",
+    previewImage: "/templates/taklifla-uchrashuv/preview.webp", previewEventType: "other",
+    categoryIds: ["other"], supportedEventTypes: ["other"],
+    priceMinor: 100000, currency: "UZS", accent: "#6b1f2a", published: false,
+  },
+  {
+    id: "taklifla-yubiley-sahifasi", name: "Yubiley Sahifasi",
     description: "To‘q moviy va oltin bezaklar, korxona tarixi va tantanali yubiley.",
     previewImage: "/templates/taklifla-yubiley-sahifasi/preview.webp",
     previewEventType: "korporativ", categoryIds: ["other"], supportedEventTypes: ["korporativ"],
@@ -1716,7 +1550,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "taklifla-barakali",
-    capabilities: templateCapabilities("taklifla-barakali"),
     name: "Barakali",
     description: "Nafis gul bezaklari, moviy-yashil jilolar va bayram xotiralari.",
     previewImage: "/templates/taklifla-barakali/preview.webp",
@@ -1730,7 +1563,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "taklifla-tungi-saroy",
-    capabilities: templateCapabilities("taklifla-tungi-saroy"),
     name: "Tungi Saroy",
     description: "Yulduzli tun, oltin bezaklar va muhtasham saroy manzarasi.",
     previewImage: "/templates/taklifla-tungi-saroy/preview.webp",
@@ -1744,7 +1576,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "taklifla-tovus",
-    capabilities: templateCapabilities("taklifla-tovus"),
     name: "Tovus",
     description: "Zumrad va oltin jilolar, tovus patlari va nafis saroy taklifnomasi.",
     previewImage: "/templates/taklifla-tovus/preview.webp",
@@ -1758,7 +1589,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "taklifla-tort-fasl",
-    capabilities: templateCapabilities("taklifla-tort-fasl"),
     name: "To‘rt fasl",
     description: "Bahor, yoz, kuz va qish manzaralari bo‘ylab nafis nikoh taklifnomasi.",
     previewImage: "/templates/taklifla-tort-fasl/preview.webp",
@@ -1772,7 +1602,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "glass-pink",
-    capabilities: templateCapabilities("glass-pink"),
     name: "Glass Pink",
     description: "Nafis pushti gullar, nozik naqshlar va nafis taklifnoma.",
     previewImage: "/templates/glass-pink/catalog-cover-opening.png",
@@ -1786,7 +1615,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "manor-edition",
-    capabilities: templateCapabilities("manor-edition"),
     name: "Manor",
     description:
       "Qo‘lda chizilgan gullar, xalqalar va romantik manor bezaklari.",
@@ -1802,7 +1630,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "olive-manor-edition",
-    capabilities: templateCapabilities("olive-manor-edition"),
     name: "Olive Manor",
     description: "Zaytun ranglari, nafis gullar va sokin manor muhiti.",
     previewImage:
@@ -1817,7 +1644,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "islamic-edition",
-    capabilities: templateCapabilities("islamic-edition"),
     name: "Islamic Edition",
     description:
       "Tungi ko‘k ranglar, islomiy naqshlar va sokin hilol bezaklari.",
@@ -1833,7 +1659,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "osh-edition-v1",
-    capabilities: templateCapabilities("osh-edition-v1"),
     name: "Osh Edition",
     description: "Iliq naqshlar, nafis xat va anʼanaviy osh dasturxoni.",
     previewImage:
@@ -1848,7 +1673,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "osh",
-    capabilities: templateCapabilities("osh"),
     name: "Osh",
     description:
       "Sharob rang va oltin suzani naqshlari bilan bezatilgan nahorgi osh taklifnomasi.",
@@ -1863,8 +1687,7 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "palov",
-    capabilities: templateCapabilities("palov"),
-    name: "Palov",
+    name: "Chorlove Palov",
     description:
       "An’anaviy nahorgi osh taklifnomasi palov bezagi va nafis naqshlar bilan.",
     previewImage: "/templates/chorlove/palov/catalog-opening.png",
@@ -1878,7 +1701,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "orchid-amplop",
-    capabilities: templateCapabilities("orchid-amplop"),
     name: "Orchid Amplop",
     description:
       "O‘rmon manzarasi, nafis gul ramzi va ochiladigan konvertli nikoh taklifnomasi.",
@@ -1893,8 +1715,7 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "invitate-palov",
-    capabilities: templateCapabilities("invitate-palov"),
-    name: "Osh ziyofati",
+    name: "Invitate Palov",
     description:
       "Peshtoq naqshlari, palov bezagi va nahorgi osh uchun taklifnoma.",
     previewEventType: "osh",
@@ -1908,7 +1729,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "golden-hour",
-    capabilities: templateCapabilities("golden-hour"),
     name: "Golden Hour",
     description:
       "A warm birthday invitation with a cinematic floral opening, countdown, and celebration timeline.",
@@ -1923,7 +1743,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "bloom",
-    capabilities: templateCapabilities("bloom"),
     name: "Bloom",
     description:
       "A floral birthday invitation with layered curtains, a countdown, and an event timeline.",
@@ -1938,8 +1757,7 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "invitate-nahorgi-osh",
-    capabilities: templateCapabilities("invitate-nahorgi-osh"),
-    name: "Sahar ziyofati",
+    name: "Invitate Nahorgi Osh",
     description:
       "Yashil girih naqshlari, tillarang bezaklar va nahorgi osh uchun taklifnoma.",
     previewEventType: "osh",
@@ -1953,8 +1771,7 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "invitate-wedding",
-    capabilities: templateCapabilities("invitate-wedding"),
-    name: "Gulchambar",
+    name: "Invitate Wedding",
     description:
       "A dark cinematic wedding invitation with golden details, countdown, schedule, and RSVP.",
     previewImage: "/templates/invitate-wedding/preview.jpg",
@@ -1968,7 +1785,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "whiteless",
-    capabilities: templateCapabilities("whiteless"),
     name: "Whiteless",
     description:
       "A white, cinematic invitation with a lock opening, soft bokeh, and editorial details.",
@@ -1983,7 +1799,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "safir",
-    capabilities: templateCapabilities("safir"),
     name: "Safir",
     description:
       "Yashil fon, nafis oq gulli bezaklar va konvert ochilishiga ega to‘y taklifnomasi.",
@@ -1998,7 +1813,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "amru-maruf-edition-v1",
-    capabilities: templateCapabilities("amru-maruf-edition-v1"),
     name: "Amru Maruf Edition",
     description:
       "Chuqur zumrad ranglar, islomiy ravoq va tillarang bezakli nikoh taklifnomasi.",
@@ -2013,7 +1827,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "monochrome-editorial-edition",
-    capabilities: templateCapabilities("monochrome-editorial-edition"),
     name: "Monochrome Editorial",
     description:
       "Qora-oq fotografiya, yirtilgan qog‘oz chetlari va nafis tipografika.",
@@ -2029,7 +1842,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "xatna-edition",
-    capabilities: templateCapabilities("xatna-edition"),
     name: "Xatna Edition",
     description:
       "Samarqand hovlisi, islimiy naqsh va nafis oq-yashil bezaklar.",
@@ -2045,7 +1857,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "cloud-castle",
-    capabilities: templateCapabilities("cloud-castle"),
     name: "Cloud Castle",
     description:
       "Oq bulutlar, nozik gul bezaklari va nafis saroyona taklifnoma.",
@@ -2060,7 +1871,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "orchid-amplop",
-    capabilities: templateCapabilities("orchid-amplop"),
     name: "Orchid Amplop",
     description:
       "O‘rmon manzarasi, nafis gul ramzi va ochiladigan konvertli nikoh taklifnomasi.",
@@ -2075,7 +1885,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "palace-rose",
-    capabilities: templateCapabilities("palace-rose"),
     name: "Palace Rose",
     description:
       "Bordo muhr, nafis atirgullar va saroy manzaralari bilan bezatilgan to‘y taklifnomasi.",
@@ -2090,7 +1899,6 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "royal-burgundy-edition",
-    capabilities: templateCapabilities("royal-burgundy-edition"),
     name: "Velvet Royale",
     description:
       "Bordo baxmal pardalar, zarhal bezaklar va nafis saroyona uslub.",
@@ -2106,8 +1914,7 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "taklifnomachi-1",
-    capabilities: templateCapabilities("taklifnomachi-1"),
-    name: "Klassik nafis",
+    name: "Taklifnomachi · Klassik",
     description: "Bordo ranglar, nafis kalligrafiya va marosim sahifalari.",
     previewImage: "/templates/taklifnomachi-1/preview.png",
     previewEventType: "wedding",
@@ -2120,8 +1927,7 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "taklifnomachi-12",
-    capabilities: templateCapabilities("taklifnomachi-12"),
-    name: "Moviy osmon",
+    name: "Taklifnomachi · Moviy osmon",
     description: "Moviy bulutlar, nafis muhr va ochiladigan taklifnoma.",
     previewImage:
       "/templates/taklifnomachi-12/source/templates/12/assets/hero.png",
@@ -2135,8 +1941,7 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "taklifnomachi-13",
-    capabilities: templateCapabilities("taklifnomachi-13"),
-    name: "Oltin atirgul",
+    name: "Taklifnomachi - Oltin atirgul",
     description: "Golden silk, botanical details, and a rose calendar.",
     previewImage:
       "/templates/taklifnomachi-13/source/taklifnomachi.uz/templates/13/assets/p2/intro-golden.png",
@@ -2150,8 +1955,7 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "taklifnomachi-15",
-    capabilities: templateCapabilities("taklifnomachi-15"),
-    name: "Monoxrom",
+    name: "Taklifnomachi - Monoxrom swap",
     description: "A cinematic charcoal invitation with a swipe-to-open reveal.",
     previewImage:
       "/templates/taklifnomachi-15/source/taklifnomachi.uz/templates/15/assets/main-bg.png",
@@ -2165,8 +1969,7 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "taklifnomachi-16",
-    capabilities: templateCapabilities("taklifnomachi-16"),
-    name: "Zaytun guli",
+    name: "Taklifnomachi - Zaytun guli",
     description: "An ivory envelope opens into an olive floral invitation.",
     previewImage:
       "/templates/taklifnomachi-16/source/taklifnomachi.uz/templates/16/assets/couple-top.png",
@@ -2180,8 +1983,7 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "taklifnomachi-17",
-    capabilities: templateCapabilities("taklifnomachi-17"),
-    name: "Atlas ipak",
+    name: "Taklifnomachi - Atlas va atlas ipak",
     description: "A walnut-toned floral invitation framed by flowing satin.",
     previewImage:
       "/templates/taklifnomachi-17/source/taklifnomachi.uz/templates/17/assets/main-bg.jpg",
@@ -2195,8 +1997,7 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "taklifnomachi-18",
-    capabilities: templateCapabilities("taklifnomachi-18"),
-    name: "Gul naqshli marosim",
+    name: "Taklifnomachi - Gul naqshli marosim",
     description:
       "A wide floral artboard with a detailed program and soft sage accents.",
     previewImage:
@@ -2211,8 +2012,7 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
   {
     id: "taklifnomachi-19",
-    capabilities: templateCapabilities("taklifnomachi-19"),
-    name: "Zaytun bogi",
+    name: "Taklifnomachi - Zaytun bogi",
     description:
       "A sage botanical invitation with an illustrated three-day calendar.",
     previewImage:
@@ -2227,7 +2027,7 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
 ];
 export const templateById = (id: string) =>
-  TEMPLATES.find((item) => item.id === resolveTemplateId(id));
+  TEMPLATES.find((item) => item.id === id);
 // Some browser builds lack Uzbek ICU data. Keep SSR and hydration identical.
 export function formatPrice(minor: number): string {
   const absolute = Math.abs(minor);
@@ -2432,7 +2232,7 @@ export function createInvitation(
     templateData: {},
     story: [],
     gallery: [],
-    music: { ...DEFAULT_INVITATION_MUSIC },
+    music: { enabled: false, assetId: null, url: "", filename: "" },
     gift: {
       enabled: false,
       receiptUploadEnabled: false,
@@ -2440,7 +2240,7 @@ export function createInvitation(
       cardHolder: "",
     },
     contacts: { phoneNumber: "", telegramUsername: "", instagramUrl: "" },
-    rsvp: { enabled: true, deadline: "", maxPartySize: 1 },
+    rsvp: { enabled: true, deadline: "", maxPartySize: 5 },
     wishes: { enabled: true, requireApproval: true },
     dressCode: {
       enabled: false,
@@ -2488,6 +2288,7 @@ export function removeLanguage(
 ): Invitation {
   if (
     invitation.enabledLocales.length <= 1 ||
+    locale === invitation.defaultLocale ||
     !invitation.enabledLocales.includes(locale)
   )
     return invitation;
@@ -2503,7 +2304,6 @@ export function removeLanguage(
   };
   return {
     ...invitation,
-    defaultLocale: locale === invitation.defaultLocale ? invitation.enabledLocales.find((item) => item !== locale)! : invitation.defaultLocale,
     enabledLocales: invitation.enabledLocales.filter((item) => item !== locale),
     content,
     story: invitation.story.map((chapter) => ({

@@ -1,0 +1,17 @@
+{
+  "templateId": "wedivo-oathbound",
+  "displayName": "Ahd yo‘li",
+  "viewport": {
+    "width": 450,
+    "height": 800
+  },
+  "image": "preview.png",
+  "imageSha256": "9d98dcebcbc2721482f7d14065d49afb9ccc9af9dd0b38e0e72109971af9ab7b",
+  "fixture": "apps/web/src/modules/catalog/preview-sample.json",
+  "fixtureSha256": "98591ce063bd2fa23c2ae508ad19e54ded2f965ac6693aa5a8410fbe497a1f13",
+  "locale": "uz-Latn",
+  "state": "Actual source closed opening, original WebGL2 dice, localized source copy and canonical preview data.",
+  "captureOnlyOverride": "Hidden world initialization skipped by removing the WebGL2RenderingContext global in QA; canvas.getContext remains available to the original dice renderer. No production override; no scene redraw.",
+  "sourceScriptSha256": "f52f598403dfc01b896c27cec8367dd7b3f963f1e31f8ce9d0c1480374e525e9",
+  "sourceStyleSha256": "fc6db6d52f45443a268c18d8d0a4efbbd4964b567c977f296b0c57e10e15ee23"
+}

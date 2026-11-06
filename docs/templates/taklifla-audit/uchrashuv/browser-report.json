@@ -1,0 +1,79 @@
+{
+  "date": "2026-10-29",
+  "viewports": [
+    {
+      "width": 320,
+      "reference": {
+        "width": 320,
+        "font": "\"Pinyon Script\", cursive",
+        "stains": 2
+      },
+      "actual": {
+        "width": 320,
+        "font": "\"Pinyon Script\", cursive",
+        "stains": 2
+      },
+      "sourceOpening": true,
+      "nativeDodgeAndSurrender": true,
+      "petals": 22,
+      "previewNoPost": true,
+      "locales": 4,
+      "googleMap": true,
+      "failureSurvivesLocale": true,
+      "longData": true,
+      "reducedMotionDecline": true,
+      "deadline": true,
+      "emptyCreator": true
+    },
+    {
+      "width": 390,
+      "reference": {
+        "width": 390,
+        "font": "\"Pinyon Script\", cursive",
+        "stains": 2
+      },
+      "actual": {
+        "width": 390,
+        "font": "\"Pinyon Script\", cursive",
+        "stains": 2
+      },
+      "sourceOpening": true,
+      "nativeDodgeAndSurrender": true,
+      "petals": 22,
+      "previewNoPost": true,
+      "locales": 4,
+      "googleMap": true,
+      "failureSurvivesLocale": true,
+      "longData": true,
+      "reducedMotionDecline": true,
+      "deadline": true,
+      "emptyCreator": true
+    },
+    {
+      "width": 1280,
+      "reference": {
+        "width": 420,
+        "font": "\"Pinyon Script\", cursive",
+        "stains": 2
+      },
+      "actual": {
+        "width": 420,
+        "font": "\"Pinyon Script\", cursive",
+        "stains": 2
+      },
+      "sourceOpening": true,
+      "nativeDodgeAndSurrender": true,
+      "petals": 22,
+      "previewNoPost": true,
+      "locales": 4,
+      "googleMap": true,
+      "failureSurvivesLocale": true,
+      "longData": true,
+      "reducedMotionDecline": true,
+      "deadline": true,
+      "emptyCreator": true
+    }
+  ],
+  "errors": [],
+  "mockTransport": true
+}

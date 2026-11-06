@@ -1,0 +1,2506 @@
+<!DOCTYPE html>
+
+<html lang="uz-Latn">
+<head>
+
+
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
+<title>Invitation</title>
+
+
+
+<meta content="#ffc6d6" name="theme-color"/>
+
+<link href="source/template.css" rel="stylesheet"/><link href="platform.css" rel="stylesheet"/></head>
+<body id="page-body">
+<svg aria-hidden="true" focusable="false" id="svg-sprite" xmlns="http://www.w3.org/2000/svg">
+<defs id="sprite-defs">
+<lineargradient id="grad-petal" x1="0" x2="0" y1="0" y2="1">
+<stop id="grad-petal-s1" offset="0" stop-color="#ffe3ec"></stop>
+<stop id="grad-petal-s2" offset="0.55" stop-color="#ffb3c9"></stop>
+<stop id="grad-petal-s3" offset="1" stop-color="#ff8fb0"></stop>
+</lineargradient>
+<radialgradient cx="0.5" cy="0.5" id="grad-blossom" r="0.5">
+<stop id="grad-blossom-s1" offset="0" stop-color="#ff7fa6"></stop>
+<stop id="grad-blossom-s2" offset="0.35" stop-color="#ffc2d4"></stop>
+<stop id="grad-blossom-s3" offset="1" stop-color="#fff1f5"></stop>
+</radialgradient>
+<lineargradient id="grad-maple" x1="0" x2="1" y1="0" y2="1">
+<stop id="grad-maple-s1" offset="0" stop-color="#ffb347"></stop>
+<stop id="grad-maple-s2" offset="1" stop-color="#e2452f"></stop>
+</lineargradient>
+<filter height="110%" id="sb-pencil" width="110%" x="-5%" y="-5%">
+<feturbulence basefrequency="0.9" id="sb-pencil-n" numoctaves="2" result="n" seed="3" type="fractalNoise"></feturbulence>
+<fedisplacementmap id="sb-pencil-d" in="SourceGraphic" in2="n" scale="1.6" xchannelselector="R" ychannelselector="G"></fedisplacementmap>
+</filter>
+<filter color-interpolation-filters="sRGB" height="100%" id="fx-toon" width="100%" x="0" y="0">
+<fegaussianblur id="fx-toon-b" in="SourceGraphic" result="s0" stddeviation="0.9"></fegaussianblur>
+<fecolormatrix id="fx-toon-s" in="s0" result="sat" type="saturate" values="1.45"></fecolormatrix>
+<fecomponenttransfer id="fx-toon-p" in="sat" result="post">
+<fefuncr id="fx-toon-r" tablevalues="0.06 0.16 0.27 0.38 0.5 0.62 0.73 0.84 0.93 1" type="discrete"></fefuncr>
+<fefuncg id="fx-toon-g" tablevalues="0.08 0.18 0.29 0.4 0.52 0.64 0.75 0.86 0.94 1" type="discrete"></fefuncg>
+<fefuncb id="fx-toon-bb" tablevalues="0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.88 0.95 1" type="discrete"></fefuncb>
+</fecomponenttransfer>
+<fegaussianblur id="fx-toon-gl" in="post" result="bl" stddeviation="6"></fegaussianblur>
+<fecomponenttransfer id="fx-toon-gt" in="bl" result="bl2">
+<fefuncr id="fx-toon-gr" slope="0.45" type="linear"></fefuncr>
+<fefuncg id="fx-toon-gg" slope="0.42" type="linear"></fefuncg>
+<fefuncb id="fx-toon-gb" slope="0.48" type="linear"></fefuncb>
+</fecomponenttransfer>
+<feblend id="fx-toon-sc" in="post" in2="bl2" mode="screen" result="glow"></feblend>
+<feconvolvematrix id="fx-toon-e" in="s0" kernelmatrix="-1 -1 -1 -1 8 -1 -1 -1 -1" order="3" preservealpha="true" result="edge"></feconvolvematrix>
+<fecolormatrix id="fx-toon-eg" in="edge" result="eg" type="matrix" values="0.33 0.33 0.33 0 0  0.33 0.33 0.33 0 0  0.33 0.33 0.33 0 0  0 0 0 1 0"></fecolormatrix>
+<fecomponenttransfer id="fx-toon-i" in="eg" result="ink">
+<fefuncr id="fx-toon-ir" tablevalues="1 1 1 0.55 0.35" type="discrete"></fefuncr>
+<fefuncg id="fx-toon-ig" tablevalues="1 1 1 0.52 0.33" type="discrete"></fefuncg>
+<fefuncb id="fx-toon-ib" tablevalues="1 1 1 0.62 0.45" type="discrete"></fefuncb>
+</fecomponenttransfer>
+<feblend id="fx-toon-m" in="glow" in2="ink" mode="multiply"></feblend>
+</filter>
+</defs>
+<symbol id="sym-petal" viewbox="0 0 24 24">
+<path d="M12 22.5C5.2 17.6 3 10.6 5.8 5.3 7.3 2.6 9.9 2.3 11 4.5l1 1.8 1-1.8c1.1-2.2 3.7-1.9 5.2.8 2.8 5.3.6 12.3-6.2 17.2z" fill="url(#grad-petal)" id="pg-path-1"></path>
+<path d="M12 21c-.3-4.6-.6-9.1-.9-13.4" fill="none" id="pg-path-2" opacity=".55" stroke="#ff7fa6" stroke-linecap="round" stroke-width=".6"></path>
+</symbol>
+<symbol id="sym-blossom" viewbox="0 0 24 24">
+<g fill="url(#grad-blossom)" id="sym-blossom-petals" stroke="#ff9dbb" stroke-width=".35">
+<path d="M12 12C9.2 10.2 7.7 6.8 9 4c.8-1.5 2-1.4 2.6-.2l.4.8.4-.8c.6-1.2 1.8-1.3 2.6.2 1.3 2.8-.2 6.2-3 8z" id="pg-path-3"></path>
+<path d="M12 12C9.2 10.2 7.7 6.8 9 4c.8-1.5 2-1.4 2.6-.2l.4.8.4-.8c.6-1.2 1.8-1.3 2.6.2 1.3 2.8-.2 6.2-3 8z" id="pg-path-4" transform="rotate(72 12 12)"></path>
+<path d="M12 12C9.2 10.2 7.7 6.8 9 4c.8-1.5 2-1.4 2.6-.2l.4.8.4-.8c.6-1.2 1.8-1.3 2.6.2 1.3 2.8-.2 6.2-3 8z" id="pg-path-5" transform="rotate(144 12 12)"></path>
+<path d="M12 12C9.2 10.2 7.7 6.8 9 4c.8-1.5 2-1.4 2.6-.2l.4.8.4-.8c.6-1.2 1.8-1.3 2.6.2 1.3 2.8-.2 6.2-3 8z" id="pg-path-6" transform="rotate(216 12 12)"></path>
+<path d="M12 12C9.2 10.2 7.7 6.8 9 4c.8-1.5 2-1.4 2.6-.2l.4.8.4-.8c.6-1.2 1.8-1.3 2.6.2 1.3 2.8-.2 6.2-3 8z" id="pg-path-7" transform="rotate(288 12 12)"></path>
+</g>
+<circle cx="12" cy="12" fill="#ff5c8a" id="pg-circle-1" r="1.7"></circle>
+<g fill="#ffd36c" id="sym-blossom-stamen">
+<circle cx="12" cy="8.9" id="pg-circle-2" r=".55"></circle>
+<circle cx="14.9" cy="11" id="pg-circle-3" r=".55"></circle>
+<circle cx="13.8" cy="14.5" id="pg-circle-4" r=".55"></circle>
+<circle cx="10.2" cy="14.5" id="pg-circle-5" r=".55"></circle>
+<circle cx="9.1" cy="11" id="pg-circle-6" r=".55"></circle>
+</g>
+</symbol>
+<symbol id="sym-kira" viewbox="0 0 24 24">
+<path d="M12 0c.8 7.5 4.5 11.2 12 12-7.5.8-11.2 4.5-12 12-.8-7.5-4.5-11.2-12-12C7.5 11.2 11.2 7.5 12 0z" fill="currentColor" id="pg-path-8"></path>
+</symbol>
+<symbol id="sym-heart" viewbox="0 0 24 24">
+<path d="M12 21.2C5 16.3 2 12.3 2 8.3 2 5.2 4.4 3 7.1 3c2 0 3.8 1.1 4.9 2.9C13.1 4.1 14.9 3 16.9 3 19.6 3 22 5.2 22 8.3c0 4-3 8-10 12.9z" fill="currentColor" id="pg-path-9"></path>
+</symbol>
+<symbol id="sym-maple" viewbox="0 0 24 24">
+<path d="M12 1.8l1.7 4.5 3.2-1.4-.8 3.9 4.6-.7-2.3 3.5 3.3 1.4-4.5 1.9 1 2.9-5-1.3-.6 5.6h-1.2l-.6-5.6-5 1.3 1-2.9-4.5-1.9 3.3-1.4-2.3-3.5 4.6.7-.8-3.9 3.2 1.4z" fill="url(#grad-maple)" id="pg-path-10"></path>
+<path d="M12 21.6V8.2M12 13.5l-4.2-2.4M12 13.5l4.2-2.4" fill="none" id="pg-path-11" opacity=".6" stroke="#a8321f" stroke-width=".6"></path>
+</symbol>
+<symbol id="sym-snow" viewbox="0 0 24 24">
+<g fill="none" id="sym-snow-g" stroke="#fff" stroke-linecap="round" stroke-width="1.6">
+<path d="M12 2v20M3.3 7l17.4 10M3.3 17L20.7 7" id="pg-path-12"></path>
+<path d="M9.6 3.8L12 6.2l2.4-2.4M9.6 20.2L12 17.8l2.4 2.4M4 10.4l3.2-.8-.8-3.2M20 13.6l-3.2.8.8 3.2M4 13.6l3.2.8-.8 3.2M20 10.4l-3.2-.8.8-3.2" id="pg-path-13"></path>
+</g>
+</symbol>
+<symbol id="sym-leaf" viewbox="0 0 24 24">
+<path d="M4 20C4 10 10 4 21 3c-.6 10.4-6.6 17-17 17z" fill="#8fd98c" id="pg-path-14"></path>
+<path d="M4 20L16 8" fill="none" id="pg-path-15" stroke="#4f9e57" stroke-width="1"></path>
+</symbol>
+<symbol id="sym-branch" viewbox="0 0 220 140">
+<g fill="none" id="sym-branch-wood" stroke="#5e3b46" stroke-linecap="round">
+<path d="M-6 16C34 20 66 30 100 48s64 32 118 38" id="pg-path-16" stroke-width="7"></path>
+<path d="M58 28c10-14 24-20 40-22" id="pg-path-17" stroke-width="3.6"></path>
+<path d="M116 57c6 22 2 42-10 60" id="pg-path-18" stroke-width="3.4"></path>
+<path d="M160 74c10-14 24-20 42-22" id="pg-path-19" stroke-width="3"></path>
+<path d="M30 21c4 12 2 22-6 32" id="pg-path-20" stroke-width="2.6"></path>
+</g>
+<use height="26" href="#sym-blossom" id="pg-use-1" width="26" x="86" y="-8"></use>
+<use height="20" href="#sym-blossom" id="pg-use-2" width="20" x="44" y="8"></use>
+<use height="22" href="#sym-blossom" id="pg-use-3" width="22" x="12" y="42"></use>
+<use height="28" href="#sym-blossom" id="pg-use-4" width="28" x="94" y="32"></use>
+<use height="24" href="#sym-blossom" id="pg-use-5" width="24" x="98" y="98"></use>
+<use height="18" href="#sym-blossom" id="pg-use-6" width="18" x="118" y="70"></use>
+<use height="25" href="#sym-blossom" id="pg-use-7" width="25" x="148" y="56"></use>
+<use height="22" href="#sym-blossom" id="pg-use-8" width="22" x="188" y="36"></use>
+<use height="21" href="#sym-blossom" id="pg-use-9" width="21" x="194" y="74"></use>
+<use height="15" href="#sym-blossom" id="pg-use-10" width="15" x="66" y="27"></use>
+<g fill="#ff8fb0" id="sym-branch-buds">
+<ellipse cx="208" cy="50" id="pg-ellipse-1" rx="3.4" ry="4.4"></ellipse>
+<ellipse cx="102" cy="126" id="pg-ellipse-2" rx="3" ry="4"></ellipse>
+<ellipse cx="34" cy="60" id="pg-ellipse-3" rx="2.8" ry="3.8"></ellipse>
+<ellipse cx="176" cy="92" id="pg-ellipse-4" rx="3" ry="3.6"></ellipse>
+</g>
+<use height="13" href="#sym-petal" id="pg-use-11" transform="rotate(34 166 110)" width="13" x="160" y="104"></use>
+<use height="11" href="#sym-petal" id="pg-use-12" transform="rotate(-40 65 75)" width="11" x="60" y="70"></use>
+</symbol>
+<symbol id="sb-heart" viewbox="0 0 48 36">
+<path d="M24 31C14 24 9 18.5 9 13c0-4.2 3.2-7 6.8-7 3.3 0 5.7 1.8 8.2 5 2.5-3.2 4.9-5 8.2-5 3.6 0 6.8 2.8 6.8 7 0 5.5-5 11-15 18z" id="pg-path-21"></path>
+<path d="M37 5l1.2 2.8L41 9l-2.8 1.2L37 13l-1.2-2.8L33 9l2.8-1.2z" id="pg-path-22"></path>
+</symbol>
+<symbol id="sb-users" viewbox="0 0 48 36">
+<circle cx="17" cy="11" id="pg-circle-7" r="5.5"></circle>
+<path d="M6 31c1-6.5 5.4-10 11-10s10 3.5 11 10" id="pg-path-23"></path>
+<circle cx="32" cy="12" id="pg-circle-8" r="4.6"></circle>
+<path d="M29 20.5c1-.3 2-.5 3-.5 4.8 0 8.6 3 9.6 9" id="pg-path-24"></path>
+</symbol>
+<symbol id="sb-utensils" viewbox="0 0 48 36">
+<path d="M16 4v10c0 2.6 1.8 4 4 4s4-1.4 4-4V4M20 4v28" id="pg-path-25"></path>
+<path d="M32 32V4c-3.6 2.2-5.4 6.6-5.4 12 0 3 1.6 4.6 5.4 4.6" id="pg-path-26"></path>
+</symbol>
+<symbol id="sb-camera" viewbox="0 0 48 36">
+<path d="M8 11h7l3-5h12l3 5h7v19H8z" id="pg-path-27"></path>
+<circle cx="24" cy="19" id="pg-circle-9" r="6.5"></circle>
+<circle cx="24" cy="19" id="pg-circle-10" r="2.4"></circle>
+<path d="M35 14.5h2" id="pg-path-28"></path>
+</symbol>
+<symbol id="sb-mic2" viewbox="0 0 48 36">
+<rect height="17" id="pg-rect-1" rx="5" width="10" x="19" y="3"></rect>
+<path d="M14 16c0 6 4.4 9.6 10 9.6S34 22 34 16M24 25.6V32M18 32h12" id="pg-path-29"></path>
+</symbol>
+<symbol id="sb-cake" viewbox="0 0 48 36">
+<path d="M10 32h28M12 32V22h24v10M16 22v-6h16v6" id="pg-path-30"></path>
+<path d="M12 26c3 2 5 2 8 0s5-2 8 0 5 2 8 0M24 16v-6" id="pg-path-31"></path>
+<path d="M24 4c1.6 1.8 1.6 3.6 0 5-1.6-1.4-1.6-3.2 0-5z" id="pg-path-32"></path>
+</symbol>
+<symbol id="sb-music" viewbox="0 0 48 36">
+<path d="M19 27V8l18-4v19" id="pg-path-33"></path>
+<ellipse cx="15" cy="27" id="pg-ellipse-5" rx="4.5" ry="3.6"></ellipse>
+<ellipse cx="33" cy="23" id="pg-ellipse-6" rx="4.5" ry="3.6"></ellipse>
+<path d="M19 13l18-4" id="pg-path-34"></path>
+</symbol>
+<symbol id="sb-gift" viewbox="0 0 48 36">
+<rect height="7" id="pg-rect-2" width="28" x="10" y="13"></rect>
+<path d="M12 20v12h24V20M24 13v19" id="pg-path-35"></path>
+<path d="M24 13c-3-6-10-6-8-1 1 1.8 4 1 8 1zm0 0c3-6 10-6 8-1-1 1.8-4 1-8 1z" id="pg-path-36"></path>
+</symbol>
+<symbol id="sb-party-popper" viewbox="0 0 48 36">
+<path d="M9 32l7-20 13 13z" id="pg-path-37"></path>
+<path d="M16 12l13 13" id="pg-path-38"></path>
+<path d="M30 6c-1 3 1 5 4 4M36 12l5-2M33 17c3-1 6 0 7 3M26 4l1-2" id="pg-path-39"></path>
+<circle cx="39" cy="5" id="pg-circle-11" r="1"></circle>
+<circle cx="42" cy="16" id="pg-circle-12" r="1"></circle>
+</symbol>
+<symbol id="sb-sparkles" viewbox="0 0 48 36">
+<path d="M20 6l2.4 8 8 2.4-8 2.4L20 27l-2.4-8.2-8-2.4 8-2.4z" id="pg-path-40"></path>
+<path d="M35 4l1.2 3.6L40 9l-3.8 1.2L35 14l-1.2-3.8L30 9l3.8-1.4zM34 22l1 3 3 1-3 1-1 3-1-3-3-1 3-1z" id="pg-path-41"></path>
+</symbol>
+<symbol id="sb-flower2" viewbox="0 0 48 36">
+<circle cx="24" cy="12" id="pg-circle-13" r="3.4"></circle>
+<path d="M24 8.6c-1.2-4.6 3.4-6.4 4.4-2.6s-2 5.4-4.4 6c2.2-.2 6.8 1.2 5 4.8-1.6 3-5 .6-5-1.6 0 2.2-3.4 4.6-5 1.6-1.8-3.6 2.8-5 5-4.8-2.4-.6-5.4-2.2-4.4-6s5.6-2 4.4 2.6z" id="pg-path-42"></path>
+<path d="M24 15.4V33M24 27c-3-4-7-4-9-2 3 1 6 2 9 2zm0-3c3-4 7-4 9-2-3 1-6 2-9 2z" id="pg-path-43"></path>
+</symbol>
+<symbol id="sb-home" viewbox="0 0 48 36">
+<path d="M8 17L24 5l16 12M12 14v18h24V14" id="pg-path-44"></path>
+<path d="M20 32v-9h8v9" id="pg-path-45"></path>
+</symbol>
+<symbol id="sb-car" viewbox="0 0 48 36">
+<path d="M6 25v-6l4-1 4-7h17l6 7 5 1v6h-4M13 25h19" id="pg-path-46"></path>
+<circle cx="17" cy="26" id="pg-circle-14" r="3.6"></circle>
+<circle cx="35" cy="26" id="pg-circle-15" r="3.6"></circle>
+<path d="M16 18h19M24 11v7" id="pg-path-47"></path>
+</symbol>
+<symbol id="sb-shirt" viewbox="0 0 48 36">
+<path d="M18 4l-10 5 3 8 5-2v17h16V15l5 2 3-8-10-5c-1 3-3.4 4.6-6 4.6S19 7 18 4z" id="pg-path-48"></path>
+</symbol>
+<symbol id="sb-clock" viewbox="0 0 48 36">
+<circle cx="24" cy="18" id="pg-circle-16" r="13"></circle>
+<path d="M24 10v8l6 4" id="pg-path-49"></path>
+</symbol>
+<symbol id="sb-star" viewbox="0 0 48 36">
+<path d="M24 4l4 8.4 9.2 1.3-6.6 6.4 1.6 9.1L24 25l-8.2 4.2 1.6-9.1-6.6-6.4 9.2-1.3z" id="pg-path-50"></path>
+</symbol>
+<symbol id="sb-sakura" viewbox="0 0 48 36">
+<path d="M24 17c-4-3-6-8-3.4-11.4 1.4-1.8 3-1 3.4.4.4-1.4 2-2.2 3.4-.4C30 9 28 14 24 17zm0 0c4-2 9.4-2.2 11 1.6.8 2-.6 3.2-2 3 1 1.2.8 3-1.4 3.6-4 1-6.6-3.6-7.6-8.2zm0 0c1 4.6-1.6 9.4-5.8 9-2.2-.2-2.4-2-1.4-3.2-1.4.2-2.8-1-2-3C16.4 16 21 15.4 24 17z" id="pg-path-51"></path>
+</symbol>
+<symbol id="ic-play" viewbox="0 0 24 24">
+<path d="M8 5.5v13l10.5-6.5z" fill="currentColor" id="pg-path-52"></path>
+</symbol>
+<symbol id="ic-thread" viewbox="0 0 24 24">
+<path d="M3 15c3-7 7 3 10-2s-1-9 3-9 3 6-1 9-9 7-5 9 8-4 11-3" fill="none" id="pg-path-53" stroke="currentColor" stroke-linecap="round" stroke-width="2"></path>
+</symbol>
+<symbol id="ic-user" viewbox="0 0 24 24">
+<circle cx="12" cy="8" fill="none" id="pg-circle-17" r="4" stroke="currentColor" stroke-width="2"></circle>
+<path d="M4 21c.8-4.4 4-6.8 8-6.8s7.2 2.4 8 6.8" fill="none" id="pg-path-54" stroke="currentColor" stroke-linecap="round" stroke-width="2"></path>
+</symbol>
+<symbol id="ic-web" viewbox="0 0 24 24">
+<circle cx="6" cy="7" fill="none" id="pg-circle-18" r="2.6" stroke="currentColor" stroke-width="1.8"></circle>
+<circle cx="18" cy="7" fill="none" id="pg-circle-19" r="2.6" stroke="currentColor" stroke-width="1.8"></circle>
+<circle cx="12" cy="18" fill="none" id="pg-circle-20" r="2.6" stroke="currentColor" stroke-width="1.8"></circle>
+<path d="M8.6 7h6.8M7.3 9.3l3.4 6.4M16.7 9.3l-3.4 6.4" fill="none" id="pg-path-55" stroke="currentColor" stroke-linecap="round" stroke-width="1.8"></path>
+</symbol>
+<symbol id="ic-film" viewbox="0 0 24 24">
+<rect fill="none" height="13" id="pg-rect-3" rx="2.5" stroke="currentColor" stroke-width="2" width="18" x="3" y="5"></rect>
+<path d="M8 21h8M10.5 9.5v5l4-2.5z" fill="none" id="pg-path-56" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path>
+</symbol>
+<symbol id="ic-heart" viewbox="0 0 24 24">
+<path d="M12 20.5C6 16.3 3.5 12.9 3.5 9.4 3.5 6.8 5.5 5 7.8 5c1.7 0 3.2.9 4.2 2.5C13 5.9 14.5 5 16.2 5c2.3 0 4.3 1.8 4.3 4.4 0 3.5-2.5 6.9-8.5 11.1z" fill="none" id="pg-path-57" stroke="currentColor" stroke-linejoin="round" stroke-width="2"></path>
+<path d="M19 1.8l.5 1.6 1.6.5-1.6.5-.5 1.6-.5-1.6-1.6-.5 1.6-.5z" fill="currentColor" id="pg-path-58"></path>
+</symbol>
+<symbol id="ic-cal" viewbox="0 0 24 24">
+<rect fill="none" height="15.5" id="pg-rect-4" rx="2.5" stroke="currentColor" stroke-width="2" width="17" x="3.5" y="5"></rect>
+<path d="M3.5 10h17M8 3v4M16 3v4" fill="none" id="pg-path-59" stroke="currentColor" stroke-linecap="round" stroke-width="2"></path>
+<path d="M12 12.6l.9 1.9 2 .3-1.5 1.4.4 2-1.8-1-1.8 1 .4-2-1.5-1.4 2-.3z" fill="currentColor" id="pg-path-60"></path>
+</symbol>
+<symbol id="ic-train" viewbox="0 0 24 24">
+<rect fill="none" height="14" id="pg-rect-5" rx="3.5" stroke="currentColor" stroke-width="2" width="14" x="5" y="3"></rect>
+<path d="M5 11h14M9 20.5l-2 1.5M15 20.5l2 1.5M8.5 7h7" fill="none" id="pg-path-61" stroke="currentColor" stroke-linecap="round" stroke-width="1.8"></path>
+<circle cx="8.8" cy="14" fill="currentColor" id="pg-circle-21" r="1.2"></circle>
+<circle cx="15.2" cy="14" fill="currentColor" id="pg-circle-22" r="1.2"></circle>
+</symbol>
+<symbol id="ic-board" viewbox="0 0 24 24">
+<rect fill="none" height="17" id="pg-rect-6" rx="2" stroke="currentColor" stroke-width="2" width="18" x="3" y="3.5"></rect>
+<path d="M3 9h18M3 15h18M10 3.5v17" fill="none" id="pg-path-62" stroke="currentColor" stroke-width="1.8"></path>
+</symbol>
+<symbol id="ic-pin" viewbox="0 0 24 24">
+<path d="M12 21.5s-6.5-6-6.5-11.2a6.5 6.5 0 0113 0C18.5 15.5 12 21.5 12 21.5z" fill="none" id="pg-path-63" stroke="currentColor" stroke-linejoin="round" stroke-width="2"></path>
+<circle cx="12" cy="10" fill="currentColor" id="pg-circle-23" r="2.4"></circle>
+</symbol>
+<symbol id="ic-palette" viewbox="0 0 24 24">
+<path d="M12 3.2c-5 0-9 3.7-9 8.4 0 4.5 3.7 8.2 8.4 8.2 1.5 0 2-1 1.6-2.1-.5-1.3.3-2.5 1.7-2.5h2.2c2.6 0 4.1-1.6 4.1-4 0-4.4-4-8-9-8z" fill="none" id="pg-path-64" stroke="currentColor" stroke-linejoin="round" stroke-width="2"></path>
+<circle cx="7.8" cy="11" fill="currentColor" id="pg-circle-24" r="1.3"></circle>
+<circle cx="11" cy="7.4" fill="currentColor" id="pg-circle-25" r="1.3"></circle>
+<circle cx="15.4" cy="8.2" fill="currentColor" id="pg-circle-26" r="1.3"></circle>
+</symbol>
+<symbol id="ic-video" viewbox="0 0 24 24">
+<rect fill="none" height="13" id="pg-rect-7" rx="2.5" stroke="currentColor" stroke-width="2" width="13.5" x="2.5" y="5.5"></rect>
+<path d="M16 10.2l5.5-3.2v10l-5.5-3.2" fill="none" id="pg-path-65" stroke="currentColor" stroke-linejoin="round" stroke-width="2"></path>
+</symbol>
+<symbol id="ic-image" viewbox="0 0 24 24">
+<rect fill="none" height="16" id="pg-rect-8" rx="2.5" stroke="currentColor" stroke-width="2" width="18" x="3" y="4"></rect>
+<circle cx="8.5" cy="9.5" fill="currentColor" id="pg-circle-27" r="1.8"></circle>
+<path d="M4 18l5.5-5.5 3.5 3.5 2.5-2.5L20 18" fill="none" id="pg-path-66" stroke="currentColor" stroke-linejoin="round" stroke-width="1.8"></path>
+</symbol>
+<symbol id="ic-chat" viewbox="0 0 24 24">
+<path d="M4 5.5h16a1.5 1.5 0 011.5 1.5v9a1.5 1.5 0 01-1.5 1.5H10l-4.5 3.5v-3.5H4A1.5 1.5 0 012.5 16V7A1.5 1.5 0 014 5.5z" fill="none" id="pg-path-67" stroke="currentColor" stroke-linejoin="round" stroke-width="2"></path>
+<path d="M7 11.5h10M7 8.8h6" id="pg-path-68" stroke="currentColor" stroke-linecap="round" stroke-width="1.8"></path>
+</symbol>
+<symbol id="ic-comment" viewbox="0 0 24 24">
+<path d="M2.5 7h12M6.5 11.5h15M2.5 16h10" fill="none" id="pg-path-69" stroke="currentColor" stroke-linecap="round" stroke-width="2.2"></path>
+<path d="M17.5 4.5l1 2 2 .4-1.5 1.4.4 2-1.9-1-1.9 1 .4-2-1.5-1.4 2-.4z" fill="currentColor" id="pg-path-70"></path>
+</symbol>
+<symbol id="ic-gift" viewbox="0 0 24 24">
+<rect fill="none" height="13" id="pg-rect-9" rx="2" stroke="currentColor" stroke-width="2" width="17" x="3.5" y="6"></rect>
+<path d="M3.5 10.5h17" id="pg-path-71" stroke="currentColor" stroke-width="1.8"></path>
+<path d="M12 6c-2.6-3.6-6-2.2-4.6 0H12zm0 0c2.6-3.6 6-2.2 4.6 0H12z" fill="none" id="pg-path-72" stroke="currentColor" stroke-linejoin="round" stroke-width="1.8"></path>
+<path d="M9 19c1-3 2-5 3-8.5 1 3.5 2 5.5 3 8.5" fill="none" id="pg-path-73" stroke="currentColor" stroke-linecap="round" stroke-width="1.6"></path>
+</symbol>
+<symbol id="ic-star" viewbox="0 0 24 24">
+<path d="M12 2.8l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 16.8l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z" fill="none" id="pg-path-74" stroke="currentColor" stroke-linejoin="round" stroke-width="2"></path>
+</symbol>
+<symbol id="ic-sound" viewbox="0 0 24 24">
+<path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z" fill="currentColor" id="pg-path-75"></path>
+<path d="M15.5 8.5a5 5 0 010 7M18 6a8.5 8.5 0 010 12" fill="none" id="pg-path-76" stroke="currentColor" stroke-linecap="round" stroke-width="2"></path>
+</symbol>
+<symbol id="ic-mute" viewbox="0 0 24 24">
+<path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z" fill="currentColor" id="pg-path-77"></path>
+<path d="M16 9.5l5 5M21 9.5l-5 5" fill="none" id="pg-path-78" stroke="currentColor" stroke-linecap="round" stroke-width="2"></path>
+</symbol>
+<symbol id="ic-music" viewbox="0 0 24 24">
+<circle cx="12" cy="12" fill="none" id="pg-circle-28" r="9.5" stroke="currentColor" stroke-width="2"></circle>
+<circle cx="12" cy="12" fill="currentColor" id="pg-circle-29" r="3"></circle>
+<path d="M12 2.5v3M21.5 12h-3" id="pg-path-79" stroke="currentColor" stroke-linecap="round" stroke-width="1.6"></path>
+</symbol>
+<symbol id="ic-close" viewbox="0 0 24 24">
+<path d="M6 6l12 12M18 6L6 18" fill="none" id="pg-path-80" stroke="currentColor" stroke-linecap="round" stroke-width="2.4"></path>
+</symbol>
+<symbol id="ic-prev" viewbox="0 0 24 24">
+<path d="M15 5l-7 7 7 7" fill="none" id="pg-path-81" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4"></path>
+</symbol>
+<symbol id="ic-next" viewbox="0 0 24 24">
+<path d="M9 5l7 7-7 7" fill="none" id="pg-path-82" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4"></path>
+</symbol>
+<symbol id="ic-copy" viewbox="0 0 24 24">
+<rect fill="none" height="12.5" id="pg-rect-10" rx="2" stroke="currentColor" stroke-width="2" width="12" x="8" y="8"></rect>
+<path d="M16 5.5V5a1.5 1.5 0 00-1.5-1.5h-9A1.5 1.5 0 004 5v9a1.5 1.5 0 001.5 1.5H6" fill="none" id="pg-path-83" stroke="currentColor" stroke-width="2"></path>
+</symbol>
+<symbol id="ic-map" viewbox="0 0 24 24">
+<path d="M3 6.5l6-2.5 6 2.5 6-2.5v13.5l-6 2.5-6-2.5-6 2.5z" fill="none" id="pg-path-84" stroke="currentColor" stroke-linejoin="round" stroke-width="2"></path>
+<path d="M9 4v13.5M15 6.5V20" id="pg-path-85" stroke="currentColor" stroke-width="1.8"></path>
+</symbol>
+<symbol id="ic-calplus" viewbox="0 0 24 24">
+<rect fill="none" height="15.5" id="pg-rect-11" rx="2.5" stroke="currentColor" stroke-width="2" width="17" x="3.5" y="5"></rect>
+<path d="M3.5 10h17M8 3v4M16 3v4M12 12.5v6M9 15.5h6" fill="none" id="pg-path-86" stroke="currentColor" stroke-linecap="round" stroke-width="2"></path>
+</symbol>
+<symbol id="ic-down" viewbox="0 0 24 24">
+<path d="M12 4v14M6 12.5l6 6 6-6" fill="none" id="pg-path-87" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4"></path>
+</symbol>
+<symbol id="ic-replay" viewbox="0 0 24 24">
+<path d="M4.5 12a7.5 7.5 0 107.5-7.5H8" fill="none" id="pg-path-88" stroke="currentColor" stroke-linecap="round" stroke-width="2.2"></path>
+<path d="M9.5 1.8L6.8 4.5l2.7 2.7" fill="none" id="pg-path-89" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2"></path>
+</symbol>
+<symbol id="ic-skip" viewbox="0 0 24 24">
+<path d="M5 5.5v13l8.5-6.5zM13 5.5v13l8.5-6.5z" fill="currentColor" id="pg-path-90"></path>
+</symbol>
+<symbol id="ic-pause" viewbox="0 0 24 24">
+<rect fill="currentColor" height="14" id="pg-rect-12" rx="1" width="4" x="6" y="5"></rect>
+<rect fill="currentColor" height="14" id="pg-rect-13" rx="1" width="4" x="14" y="5"></rect>
+</symbol>
+<symbol id="ic-list" viewbox="0 0 24 24">
+<path d="M9 6.5h11M9 12h11M9 17.5h11" id="pg-path-91" stroke="currentColor" stroke-linecap="round" stroke-width="2.2"></path>
+<circle cx="4.5" cy="6.5" fill="currentColor" id="pg-circle-30" r="1.4"></circle>
+<circle cx="4.5" cy="12" fill="currentColor" id="pg-circle-31" r="1.4"></circle>
+<circle cx="4.5" cy="17.5" fill="currentColor" id="pg-circle-32" r="1.4"></circle>
+</symbol>
+</svg>
+<div aria-hidden="true" id="bg-sky">
+<div class="sky-l is-on" id="sky-semi"></div>
+<div class="sky-l" id="sky-panas"></div>
+<div class="sky-l" id="sky-gugur"></div>
+<div class="sky-l" id="sky-dingin"></div>
+<div id="sky-sun"></div>
+<div class="cloud" id="cloud-1" style="
+          --cw: 340px;
+          --cx: 4%;
+          --cy: 9%;
+          --cd: 120s;
+          --cdl: -30s;
+          --co: 0.8;
+        "></div>
+<div class="cloud" id="cloud-2" style="
+          --cw: 230px;
+          --cx: 40%;
+          --cy: 26%;
+          --cd: 150s;
+          --cdl: -90s;
+          --co: 0.65;
+        "></div>
+<div class="cloud" id="cloud-3" style="
+          --cw: 420px;
+          --cx: -20%;
+          --cy: 58%;
+          --cd: 180s;
+          --cdl: -40s;
+          --co: 0.5;
+        "></div>
+<div class="cloud" id="cloud-4" style="
+          --cw: 180px;
+          --cx: 60%;
+          --cy: 74%;
+          --cd: 110s;
+          --cdl: -70s;
+          --co: 0.55;
+        "></div>
+</div>
+<canvas aria-hidden="true" id="bg-wind"></canvas>
+<div id="hud">
+<div aria-live="polite" id="hud-ep">
+<span id="hud-rec">EP. FINAL</span>
+<span id="hud-scene">OP</span>
+<span id="hud-title">Pembuka</span>
+<span id="hud-time">00:00 / 24:00</span>
+</div>
+<div id="hud-tools">
+<span id="hud-season" lang="ja" title="Musim semi">春</span>
+<button aria-label="Efek suara" aria-pressed="true" class="hud-btn" id="btn-sfx" type="button">
+<svg class="ic-on" id="btn-sfx-on" viewbox="0 0 24 24">
+<use href="#ic-sound" id="btn-sfx-on-u"></use>
+</svg>
+<svg class="ic-off" id="btn-sfx-off" viewbox="0 0 24 24">
+<use href="#ic-mute" id="btn-sfx-off-u"></use>
+</svg>
+</button>
+<button aria-label="Musik latar" aria-pressed="false" class="hud-btn" hidden="" id="btn-bgm" type="button">
+<svg id="btn-bgm-ic" viewbox="0 0 24 24">
+<use href="#ic-music" id="btn-bgm-u"></use>
+</svg>
+</button>
+</div>
+</div>
+<section aria-label="Sampul undangan" data-section="cover" id="sec-cover">
+<div aria-hidden="true" id="cover-bg"></div>
+<div aria-hidden="true" id="cover-rays">
+<span class="cv-ray" id="cv-ray-1" style="--rl: 30%; --rw: 70px; --rd: 7s; --rdl: -1s"></span>
+<span class="cv-ray" id="cv-ray-2" style="--rl: 44%; --rw: 40px; --rd: 9s; --rdl: -4s"></span>
+<span class="cv-ray" id="cv-ray-3" style="--rl: 55%; --rw: 90px; --rd: 8s; --rdl: -2s"></span>
+<span class="cv-ray" id="cv-ray-4" style="--rl: 68%; --rw: 34px; --rd: 10s; --rdl: -6s"></span>
+</div>
+<div aria-hidden="true" id="cover-dust"></div>
+<svg aria-hidden="true" class="cv-branch sway" id="cover-branch-l" style="--so: 0% 10%; --sa: 2.2deg; --sd: 5.2s" viewbox="0 0 220 140">
+<use href="#sym-branch" id="cover-branch-l-u"></use>
+</svg>
+<svg aria-hidden="true" class="cv-branch sway" id="cover-branch-r" style="--so: 100% 10%; --sa: 2.6deg; --sd: 4.4s; --sdl: -1.3s" viewbox="0 0 220 140">
+<use href="#sym-branch" id="cover-branch-r-u" transform="translate(220 0) scale(-1 1)"></use>
+</svg>
+<div aria-hidden="true" id="cover-vignette"></div>
+<div id="cover-inner">
+<header id="cover-top">
+<p id="cover-chip">
+<span id="cover-chip-a">Episode Final</span><span aria-hidden="true" id="cover-chip-dot">·</span><span id="cover-chip-b" lang="ja">最終話</span>
+</p>
+<h1 id="cover-logo">
+<span id="cover-logo-jp" lang="ja">君を運んだ風</span>
+<span id="cover-logo-main">Angin yang Membawamu</span>
+</h1>
+</header>
+<div id="cover-stage">
+<div id="cover-lockers">
+<div class="lk" id="lk-1">
+<span class="lk-plate" id="lk-1-plate">No. 11</span><span class="lk-vent" id="lk-1-vent"></span><span class="lk-knob" id="lk-1-knob"></span>
+</div>
+<div class="lk" id="lk-2">
+<span class="lk-plate" id="lk-2-plate">No. 12</span><span class="lk-vent" id="lk-2-vent"></span><span class="lk-knob" id="lk-2-knob"></span>
+</div>
+<div class="lk" id="lk-3">
+<span class="lk-plate" id="lk-3-plate">No. 13</span><span class="lk-vent" id="lk-3-vent"></span><span class="lk-knob" id="lk-3-knob"></span>
+</div>
+<div class="lk lk-name" id="lk-4">
+<span class="lk-plate" id="lk-4-plate"></span><span class="lk-vent" id="lk-4-vent"></span><span class="lk-knob" id="lk-4-knob"></span><svg aria-hidden="true" class="lk-heart" id="lk-4-heart" viewbox="0 0 24 24">
+<use href="#sym-heart" id="lk-4-heart-u"></use>
+</svg>
+</div>
+<button aria-label="Buka loker dan ambil suratnya" class="lk lk-ours" id="lk-ours" type="button">
+<span aria-hidden="true" class="lk-inside" id="lk-inside">
+<span class="lk-inside-glow" id="lk-inside-glow"></span>
+<span class="lk-shoes" id="lk-shoes"><span class="lk-shoe" id="lk-shoe-1"></span><span class="lk-shoe" id="lk-shoe-2"></span></span>
+</span>
+<span class="lk-door" id="lk-door">
+<span class="lk-face lk-front" id="lk-front">
+<span class="lk-plate lk-plate-guest" id="lk-plate-guest"><span id="lk-plate-named"></span><span id="lk-plate-generic">Tamu Kehormatan</span></span>
+<span class="lk-vent" id="lk-ours-vent"></span>
+<span class="lk-knob" id="lk-ours-knob"></span>
+<span aria-hidden="true" class="lk-peek" id="lk-peek"><svg id="lk-peek-heart" viewbox="0 0 24 24">
+<use href="#sym-heart" id="lk-peek-heart-u"></use></svg></span>
+</span>
+<span class="lk-face lk-back" id="lk-back"></span>
+</span>
+<span class="kira" id="lk-kira-1" style="left: -8px; top: -10px; --kd: -0.4s"><svg id="lk-kira-1-s" viewbox="0 0 24 24">
+<use href="#sym-kira" id="lk-kira-1-u"></use></svg></span>
+<span class="kira" id="lk-kira-2" style="
+                  right: -10px;
+                  top: 40%;
+                  width: 16px;
+                  height: 16px;
+                  --kd: -1.4s;
+                "><svg id="lk-kira-2-s" viewbox="0 0 24 24">
+<use href="#sym-kira" id="lk-kira-2-u"></use></svg></span>
+<span class="kira" id="lk-kira-3" style="
+                  left: 20%;
+                  bottom: -12px;
+                  width: 14px;
+                  height: 14px;
+                  --kd: -2s;
+                "><svg id="lk-kira-3-s" viewbox="0 0 24 24">
+<use href="#sym-kira" id="lk-kira-3-u"></use></svg></span>
+</button>
+<div class="lk lk-name" id="lk-6">
+<span class="lk-plate" id="lk-6-plate"></span><span class="lk-vent" id="lk-6-vent"></span><span class="lk-knob" id="lk-6-knob"></span><svg aria-hidden="true" class="lk-heart" id="lk-6-heart" viewbox="0 0 24 24">
+<use href="#sym-heart" id="lk-6-heart-u"></use>
+</svg>
+</div>
+<div class="lk" id="lk-7">
+<span class="lk-plate" id="lk-7-plate">No. 17</span><span class="lk-vent" id="lk-7-vent"></span><span class="lk-knob" id="lk-7-knob"></span>
+</div>
+<div class="lk" id="lk-8">
+<span class="lk-plate" id="lk-8-plate">No. 18</span><span class="lk-vent" id="lk-8-vent"></span><span class="lk-knob" id="lk-8-knob"></span>
+</div>
+<div class="lk" id="lk-9">
+<span class="lk-plate" id="lk-9-plate">No. 19</span><span class="lk-vent" id="lk-9-vent"></span><span class="lk-knob" id="lk-9-knob"></span>
+</div>
+</div>
+<p aria-hidden="true" class="sfx" id="cover-sfx" lang="ja">ドキッ</p>
+</div>
+<div id="cover-bottom">
+<p id="cover-to">
+<span id="cover-to-named">Ada surat untuk <b id="cover-guest"></b> di loker
+              ini…</span>
+<span id="cover-to-generic">Ada sepucuk surat untukmu di loker ini…</span>
+</p>
+<button class="btn" id="cover-open" type="button">
+<svg aria-hidden="true" id="cover-open-ic" viewbox="0 0 24 24">
+<use href="#sym-heart" id="cover-open-u"></use>
+</svg>
+<span id="cover-open-t">Buka Lokernya</span>
+</button>
+<p id="cover-hint">
+            Ketuk loker atau tombolnya — angin akan membawamu masuk ke cerita
+            kami.
+          </p>
+</div>
+</div>
+<div aria-hidden="true" id="cover-letter">
+<div id="letter-body">
+<div id="letter-card">
+<p class="hand" id="letter-card-a">Kamu diundang ♡</p>
+<p id="letter-card-b"></p>
+</div>
+<div id="letter-pocket"></div>
+<div id="letter-flap"></div>
+<p class="hand" id="letter-to">
+<span id="letter-to-named">Untuk: </span><span id="letter-to-generic">Untukmu ♡</span>
+</p>
+<span id="letter-seal"><svg id="letter-seal-s" viewbox="0 0 24 24">
+<use href="#sym-heart" id="letter-seal-u"></use></svg></span>
+</div>
+</div>
+<canvas aria-hidden="true" id="cover-burst"></canvas>
+<div aria-hidden="true" id="cover-flash"></div>
+</section>
+<header class="scn-hero" data-season="semi" data-section="hero" data-title="Pembuka (OP)" id="sec-hero">
+<div aria-hidden="true" id="hero-bg"></div>
+<div aria-hidden="true" id="hero-flare"></div>
+<div aria-hidden="true" class="petal-field" data-count="16" id="hero-petals"></div>
+<div aria-hidden="true" class="wind-lines" id="hero-wind">
+<svg id="hero-wind-1" style="top: 18%; --wd: 7s; --wdl: -1s" viewbox="0 0 300 40">
+<path d="M2 30C80 4 160 36 298 10" id="hero-wind-1-p" stroke-width="2"></path>
+</svg>
+<svg id="hero-wind-2" style="top: 42%; --wd: 9s; --wdl: -4s" viewbox="0 0 300 40">
+<path d="M2 20C90 36 190 2 298 22" id="hero-wind-2-p" stroke-width="1.6"></path>
+</svg>
+<svg id="hero-wind-3" style="top: 66%; --wd: 8s; --wdl: -6.5s" viewbox="0 0 300 40">
+<path d="M2 14C100 30 170 4 298 26" id="hero-wind-3-p" stroke-width="1.8"></path>
+</svg>
+</div>
+<svg aria-hidden="true" class="sway" id="hero-branch" style="--so: 0% 10%; --sa: 2deg; --sd: 5.6s" viewbox="0 0 220 140">
+<use href="#sym-branch" id="hero-branch-u"></use>
+</svg>
+<div aria-hidden="true" id="hero-scrim"></div>
+<div id="hero-inner">
+<div class="rv rv-slash" id="hero-kv" style="--d: 0.15s">
+<div id="hero-kv-frame">
+<img alt="" decoding="async" id="hero-photo"/>
+<svg aria-hidden="true" id="hero-kv-fallback" preserveaspectratio="xMidYMid slice" viewbox="0 0 300 375">
+<defs id="hkf-defs">
+<lineargradient id="hkf-sky" x1="0" x2="0" y1="0" y2="1">
+<stop id="hkf-sky-1" offset="0" stop-color="#7cc3ff"></stop>
+<stop id="hkf-sky-2" offset="0.55" stop-color="#ffd7e4"></stop>
+<stop id="hkf-sky-3" offset="1" stop-color="#ffb58a"></stop>
+</lineargradient>
+</defs>
+<rect fill="url(#hkf-sky)" height="375" id="hkf-bg" width="300"></rect>
+<circle cx="150" cy="210" fill="#fff5e6" id="hkf-sun" opacity=".8" r="70"></circle>
+<path d="M0 300c60-40 120-50 150-46s110 14 150 40v81H0z" fill="#7f6a8f" id="hkf-hill"></path>
+<path d="M0 330c80-30 180-34 300-6v51H0z" fill="#5a4a6e" id="hkf-hill2"></path>
+<g fill="#2d2447" id="hkf-girl">
+<circle cx="112" cy="206" id="hkf-girl-head" r="15"></circle>
+<path d="M97 204c-2 18 2 34-4 46 10-2 18-10 20-22" id="hkf-girl-hair"></path>
+<path d="M102 222h20l14 76H90z" id="hkf-girl-body"></path>
+<path d="M112 191l-9-7v12zm0 0l9-7v12z" fill="#ff6f96" id="hkf-girl-bow"></path>
+</g>
+<g fill="#2d2447" id="hkf-boy">
+<circle cx="190" cy="198" id="hkf-boy-head" r="16"></circle>
+<path d="M176 216h28l6 84h-40z" id="hkf-boy-body"></path>
+</g>
+<path d="M126 250C140 290 162 290 176 246" fill="none" id="hkf-string" stroke="#e0263f" stroke-linecap="round" stroke-width="2.6"></path>
+<use color="#e0263f" height="18" href="#sym-heart" id="hkf-heart" width="18" x="141" y="262"></use>
+</svg>
+<span aria-hidden="true" class="speedlines" id="hero-kv-lines"></span>
+<span aria-hidden="true" id="hero-kv-shine"></span>
+<span aria-hidden="true" id="hero-kv-tag">VISUAL UTAMA</span>
+</div>
+<p aria-hidden="true" class="kana-v" id="hero-kana-b" lang="ja"></p>
+<p aria-hidden="true" class="kana-v" id="hero-kana-g" lang="ja"></p>
+<span class="kira" id="hero-kira-1" style="left: -14px; top: 12%; --kd: -0.3s"><svg id="hero-kira-1-s" viewbox="0 0 24 24">
+<use href="#sym-kira" id="hero-kira-1-u"></use></svg></span>
+<span class="kira" id="hero-kira-2" style="
+              right: -10px;
+              top: 58%;
+              width: 28px;
+              height: 28px;
+              --kd: -1.2s;
+            "><svg id="hero-kira-2-s" viewbox="0 0 24 24">
+<use href="#sym-kira" id="hero-kira-2-u"></use></svg></span>
+<span class="kira" id="hero-kira-3" style="
+              left: 30%;
+              bottom: -14px;
+              width: 16px;
+              height: 16px;
+              --kd: -2.1s;
+            "><svg id="hero-kira-3-s" viewbox="0 0 24 24">
+<use href="#sym-kira" id="hero-kira-3-u"></use></svg></span>
+</div>
+<div id="hero-copy">
+<p class="rv" id="hero-presents" style="--d: 0.5s">
+            Serial anime orisinal
+            <span aria-hidden="true" id="hero-presents-dot">✦</span> Episode
+            Final
+          </p>
+<h1 class="rv rv-pop" id="hero-logo" style="--d: 0.85s">
+<span id="hero-logo-jp" lang="ja">君を運んだ風</span>
+<span id="hero-logo-main">Angin yang Membawamu</span>
+<span aria-hidden="true" id="hero-logo-shine"></span>
+</h1>
+<p id="hero-names">
+<span class="hn rv rv-l" id="hn-bride" style="--d: 1.25s"><span aria-hidden="true" class="hn-kana" id="hn-bride-kana" lang="ja"></span><span class="hn-name" id="hn-bride-name"></span></span>
+<span class="hn-amp rv rv-pop" id="hn-amp" style="--d: 1.45s"><svg aria-hidden="true" id="hn-amp-s" viewbox="0 0 24 24">
+<use href="#sym-heart" id="hn-amp-u"></use></svg><span class="sr" id="hn-amp-t">dan</span></span>
+<span class="hn rv rv-r" id="hn-groom" style="--d: 1.35s"><span aria-hidden="true" class="hn-kana" id="hn-groom-kana" lang="ja"></span><span class="hn-name" id="hn-groom-name"></span></span>
+</p>
+<p class="rv" id="hero-ep" style="--d: 1.7s">
+<span id="hero-ep-k">Episode Final</span>
+<b id="hero-ep-t"></b>
+</p>
+<p class="rv" id="hero-date" style="--d: 1.85s">
+<span id="hero-date-l">Tayang perdana</span>
+<time datetime="" id="hero-date-t"></time>
+<span aria-hidden="true" id="hero-date-sep">·</span>
+<span id="hero-time-t"></span>
+</p>
+<p class="rv" id="hero-tagline" style="--d: 2s"></p>
+<p class="rv" id="hero-guest" style="--d: 2.1s">
+<span id="hero-guest-named">Diputar khusus untuk
+              <b id="hero-guest-name"></b></span>
+<span id="hero-guest-generic">Diputar khusus untukmu, penonton setia kami</span>
+</p>
+<div class="rv" id="hero-actions" style="--d: 2.25s">
+<button class="btn btn-ghost btn-sm" id="hero-skip" type="button">
+<svg aria-hidden="true" id="hero-skip-ic" viewbox="0 0 24 24">
+<use href="#ic-skip" id="hero-skip-u"></use></svg><span id="hero-skip-t">Lewati OP</span>
+</button>
+<button class="btn btn-sm" id="hero-next" type="button">
+<span id="hero-next-t">Mulai Menonton</span><svg aria-hidden="true" id="hero-next-ic" viewbox="0 0 24 24">
+<use href="#ic-down" id="hero-next-u"></use>
+</svg>
+</button>
+</div>
+</div>
+</div>
+<div id="hero-credits">
+<p class="op-cr" id="op-cr-1">
+<span class="op-cr-k" id="op-cr-1-k" lang="ja">原作</span><span class="op-cr-l" id="op-cr-1-l">Cerita asli</span><span class="op-cr-v" id="op-cr-1-v">Takdir</span>
+</p>
+<p class="op-cr" id="op-cr-2">
+<span class="op-cr-k" id="op-cr-2-k" lang="ja">監督</span><span class="op-cr-l" id="op-cr-2-l">Sutradara</span><span class="op-cr-v" id="op-cr-2-v">Waktu</span>
+</p>
+<p class="op-cr" id="op-cr-3">
+<span class="op-cr-k" id="op-cr-3-k" lang="ja">音楽</span><span class="op-cr-l" id="op-cr-3-l">Musik</span><span class="op-cr-v" id="op-cr-3-v">Detak jantung kami berdua</span>
+</p>
+<p class="op-cr" id="op-cr-4">
+<span class="op-cr-k" id="op-cr-4-k" lang="ja">主題歌</span><span class="op-cr-l" id="op-cr-4-l">Lagu pembuka</span><span class="op-cr-v" id="op-cr-4-v">「Angin Musim Semi」</span>
+</p>
+</div>
+<div id="hero-lyric">
+<p id="op-lyric">
+<span id="op-lyric-base">Angin musim semi membawamu pulang kepadaku</span><span aria-hidden="true" id="op-lyric-fill"></span>
+</p>
+</div>
+<p aria-hidden="true" id="hero-scroll">
+<span id="hero-scroll-t">Gulir</span><svg id="hero-scroll-ic" viewbox="0 0 24 24">
+<use href="#ic-down" id="hero-scroll-u"></use>
+</svg>
+</p>
+</header>
+<section class="scn scn-dark" data-nav="Prolog" data-season="semi" data-section="prolog" data-title="Legenda Benang Merah" id="sec-prolog">
+<div aria-hidden="true" id="prolog-bg">
+<div id="prolog-stars"></div>
+<div id="prolog-glow"></div>
+</div>
+<div class="wrap" id="prolog-wrap">
+<header class="ep-head" id="prolog-head">
+<span aria-hidden="true" class="ep-slash" id="prolog-slash"></span>
+<p class="ep-no rv rv-pop" id="prolog-no">
+<span class="ep-no-badge" id="prolog-no-b">01</span><span id="prolog-no-t">Adegan</span><span class="ep-no-ja" id="prolog-no-ja" lang="ja">序章</span>
+</p>
+<h2 class="ep-title rv" id="prolog-title" style="--d: 0.1s">
+            Legenda Benang Merah
+          </h2>
+<p class="ep-sub rv" id="prolog-sub" lang="ja" style="--d: 0.2s">
+            運命の赤い糸
+          </p>
+</header>
+<div class="rv rv-zoom" data-unsupported="" hidden="" id="prolog-film">
+<div id="prolog-screen">
+<span aria-hidden="true" class="pf-bar" id="prolog-bar-t"></span>
+<span aria-hidden="true" class="pf-bar" id="prolog-bar-b"></span>
+<p aria-hidden="true" id="prolog-tc">
+<span id="prolog-tc-rec">●</span>
+<span id="prolog-tc-t">00:01:24</span>
+</p>
+<p aria-hidden="true" id="prolog-label">
+<span id="prolog-label-ja" lang="ja">序章</span></p>
+<svg aria-hidden="true" id="prolog-svg" viewbox="0 0 360 200">
+<defs id="prolog-defs">
+<filter height="200%" id="prolog-glowf" width="140%" x="-20%" y="-50%">
+<fegaussianblur id="prolog-glowf-b" result="b" stddeviation="3"></fegaussianblur>
+<femerge id="prolog-glowf-m">
+<femergenode id="prolog-glowf-m1" in="b"></femergenode>
+<femergenode id="prolog-glowf-m2" in="SourceGraphic"></femergenode>
+</femerge>
+</filter>
+<lineargradient id="prolog-skin" x1="0" x2="0" y1="0" y2="1">
+<stop id="prolog-skin-1" offset="0" stop-color="#ffe7dc"></stop>
+<stop id="prolog-skin-2" offset="1" stop-color="#f6c9b6"></stop>
+</lineargradient>
+</defs>
+<g id="prolog-hand-l">
+<path d="M-20 88c30-8 58-6 74 6 10 8 10 26 0 34-18 14-48 16-74 10z" fill="url(#prolog-skin)" id="prolog-hand-l-palm" stroke="#2a2552" stroke-width="2.2"></path>
+<path d="M50 104c12-5 26-5 34-1 5 3 4 9-1 11-9 3-22 3-33 1" fill="url(#prolog-skin)" id="prolog-hand-l-pinky" stroke="#2a2552" stroke-linejoin="round" stroke-width="2.2"></path>
+<path d="M22 118c8 3 18 3 26 0" fill="none" id="prolog-hand-l-crease" stroke="#c98f7d" stroke-linecap="round" stroke-width="1.6"></path>
+<ellipse cx="72" cy="108.5" fill="none" id="prolog-ring-l" rx="3.2" ry="7.4" stroke="#e0263f" stroke-width="2.6"></ellipse>
+</g>
+<g id="prolog-hand-r" transform="translate(360 0) scale(-1 1)">
+<path d="M-20 88c30-8 58-6 74 6 10 8 10 26 0 34-18 14-48 16-74 10z" fill="url(#prolog-skin)" id="prolog-hand-r-palm" stroke="#2a2552" stroke-width="2.2"></path>
+<path d="M50 104c12-5 26-5 34-1 5 3 4 9-1 11-9 3-22 3-33 1" fill="url(#prolog-skin)" id="prolog-hand-r-pinky" stroke="#2a2552" stroke-linejoin="round" stroke-width="2.2"></path>
+<path d="M22 118c8 3 18 3 26 0" fill="none" id="prolog-hand-r-crease" stroke="#c98f7d" stroke-linecap="round" stroke-width="1.6"></path>
+<ellipse cx="72" cy="108.5" fill="none" id="prolog-ring-r" rx="3.2" ry="7.4" stroke="#e0263f" stroke-width="2.6"></ellipse>
+</g>
+<path d="M74 108C108 150 122 158 146 132 164 112 150 82 132 96 116 108 142 146 176 140 204 135 206 88 232 84 262 80 262 128 286 108" fill="none" filter="url(#prolog-glowf)" id="prolog-thread-a" pathlength="100" stroke="#e0263f" stroke-linecap="round" stroke-width="2.6"></path>
+<g class="pl-tight" id="prolog-thread-bg">
+<path d="M74 108C130 146 230 146 286 108" fill="none" filter="url(#prolog-glowf)" id="prolog-thread-b" stroke="#ff3a55" stroke-linecap="round" stroke-width="3"></path>
+<g id="prolog-bow" transform="translate(180 136)">
+<path d="M0 0C-10-12-24-10-22 0-20 8-8 6 0 0z" fill="#e0263f" id="prolog-bow-l" stroke="#8d1024" stroke-width="1.2"></path>
+<path d="M0 0C10-12 24-10 22 0 20 8 8 6 0 0z" fill="#e0263f" id="prolog-bow-r" stroke="#8d1024" stroke-width="1.2"></path>
+<path d="M-1 1L-7 16M1 1L8 15" id="prolog-bow-t" stroke="#e0263f" stroke-linecap="round" stroke-width="2.4"></path>
+<circle fill="#ff5a73" id="prolog-bow-c" r="3.2" stroke="#8d1024" stroke-width="1"></circle>
+</g>
+</g>
+<g fill="#ffe7a3" id="prolog-sparks">
+<use height="14" href="#sym-kira" id="prolog-spark-1" width="14" x="170" y="104"></use>
+<use height="10" href="#sym-kira" id="prolog-spark-2" width="10" x="196" y="116"></use>
+<use height="9" href="#sym-kira" id="prolog-spark-3" width="9" x="150" y="120"></use>
+</g>
+</svg>
+<ol aria-label="Narasi prolog" id="prolog-lines"></ol>
+<p hidden="" id="prolog-src"></p>
+</div>
+<div id="prolog-ctrl">
+<button class="btn btn-sm btn-ghost" id="prolog-pluck" type="button">
+<svg aria-hidden="true" id="prolog-pluck-ic" viewbox="0 0 24 24">
+<use href="#ic-thread" id="prolog-pluck-u"></use></svg><span id="prolog-pluck-t"></span>
+</button>
+<button class="btn btn-sm btn-ghost" id="prolog-replay" type="button">
+<svg aria-hidden="true" id="prolog-replay-ic" viewbox="0 0 24 24">
+<use href="#ic-replay" id="prolog-replay-u"></use></svg><span id="prolog-replay-t"></span>
+</button>
+</div>
+</div>
+<div id="prolog-cards">
+<article class="cel rv rv-l" id="prolog-salam">
+<span aria-hidden="true" class="pl-corner" id="prolog-salam-c1"></span>
+<span aria-hidden="true" class="pl-corner" id="prolog-salam-c2"></span>
+<p id="prolog-salam-t"></p>
+<p id="prolog-intro"></p>
+</article>
+<figure class="rv rv-r" data-unsupported="" hidden="" id="prolog-quote">
+<span aria-hidden="true" id="prolog-quote-o" lang="ja">「</span>
+<blockquote id="prolog-quote-t"></blockquote>
+<figcaption id="prolog-quote-s"></figcaption>
+<span aria-hidden="true" id="prolog-quote-c" lang="ja">」</span>
+</figure>
+</div>
+</div>
+</section>
+<section class="scn" data-nav="Karakter" data-season="semi" data-section="mempelai" data-title="Profil Karakter" id="sec-mempelai">
+<div class="wrap" id="chr-wrap">
+<header class="ep-head" id="chr-head">
+<span aria-hidden="true" class="ep-slash" id="chr-slash"></span>
+<p class="ep-no rv rv-pop" id="chr-no">
+<span class="ep-no-badge" id="chr-no-b">02</span><span id="chr-no-t">Adegan</span><span class="ep-no-ja" id="chr-no-ja" lang="ja">登場人物</span>
+</p>
+<h2 class="ep-title rv" id="chr-title" style="--d: 0.1s">
+            Profil Karakter
+          </h2>
+<p class="ep-sub rv" id="chr-sub" lang="ja" style="--d: 0.2s">
+            キャラクター紹介
+          </p>
+<p class="ep-lead rv" id="chr-lead" style="--d: 0.3s">
+            Dua tokoh utama kisah ini. Ketuk fotonya untuk menyapa, geser atau
+            pilih tab untuk berganti karakter.
+          </p>
+</header>
+<div aria-label="Pilih karakter" class="rv" id="chr-switch" role="tablist" style="--d: 0.35s">
+<button aria-controls="chr-panel-b" aria-selected="true" class="chr-tab is-active" data-chr="b" id="chr-tab-b" role="tab" type="button">
+<span class="chr-tab-av" id="chr-tab-b-av"><img alt="" decoding="async" id="chr-tab-b-img"/><span class="chr-tab-ini" id="chr-tab-b-ini"></span></span>
+<span class="chr-tab-t" id="chr-tab-b-t"></span>
+</button>
+<button aria-controls="chr-panel-g" aria-selected="false" class="chr-tab" data-chr="g" id="chr-tab-g" role="tab" type="button">
+<span class="chr-tab-av" id="chr-tab-g-av"><img alt="" decoding="async" id="chr-tab-g-img"/><span class="chr-tab-ini" id="chr-tab-g-ini"></span></span>
+<span class="chr-tab-t" id="chr-tab-g-t"></span>
+</button>
+</div>
+<div class="rv rv-zoom" id="chr-stage" style="--d: 0.2s">
+<div aria-hidden="true" id="chr-wipe">
+<span id="chr-wipe-a"></span><span id="chr-wipe-b"></span>
+</div>
+<article aria-labelledby="chr-tab-b" class="chr-panel is-active" data-chr="b" id="chr-panel-b" role="tabpanel" style="--cc: #e5467a; --cc2: #ffc8d8">
+<div class="chr-art" id="chr-art-b">
+<div aria-hidden="true" class="chr-fx" id="chr-fx-b">
+<span class="chr-bub" id="chr-bub-b1" style="--bx: 8%; --by: 14%; --bs: 70px; --bd: 7s"></span>
+<span class="chr-bub" id="chr-bub-b2" style="--bx: 70%; --by: 8%; --bs: 42px; --bd: 9s"></span>
+<span class="chr-bub" id="chr-bub-b3" style="--bx: 80%; --by: 60%; --bs: 90px; --bd: 8s"></span>
+<span class="chr-bub" id="chr-bub-b4" style="--bx: 4%; --by: 70%; --bs: 36px; --bd: 6s"></span>
+<svg class="chr-flw" id="chr-flw-b1" style="--fx: 14%; --fy: 40%; --fs: 34px" viewbox="0 0 24 24">
+<use href="#sym-blossom" id="chr-flw-b1-u"></use>
+</svg>
+<svg class="chr-flw" id="chr-flw-b2" style="--fx: 78%; --fy: 30%; --fs: 26px" viewbox="0 0 24 24">
+<use href="#sym-blossom" id="chr-flw-b2-u"></use>
+</svg>
+<svg class="chr-flw" id="chr-flw-b3" style="--fx: 66%; --fy: 84%; --fs: 40px" viewbox="0 0 24 24">
+<use href="#sym-blossom" id="chr-flw-b3-u"></use>
+</svg>
+<span class="kira" id="chr-kira-b1" style="left: 22%; top: 12%; --kd: -0.6s"><svg id="chr-kira-b1-s" viewbox="0 0 24 24">
+<use href="#sym-kira" id="chr-kira-b1-u"></use></svg></span>
+<span class="kira" id="chr-kira-b2" style="
+                    left: 86%;
+                    top: 46%;
+                    width: 16px;
+                    height: 16px;
+                    --kd: -1.6s;
+                  "><svg id="chr-kira-b2-s" viewbox="0 0 24 24">
+<use href="#sym-kira" id="chr-kira-b2-u"></use></svg></span>
+</div>
+<button aria-label="Ketuk untuk menyapa " class="chr-portrait" id="chr-portrait-b" type="button">
+<span class="chr-pframe" id="chr-pframe-b">
+<img alt="" class="chr-img" decoding="async" id="chr-img-b"/>
+<span aria-hidden="true" class="chr-ph" id="chr-ph-b"><span class="chr-ph-ini" id="chr-ph-b-ini"></span></span>
+</span>
+<span class="blush" id="chr-blush-b1" style="left: 22%; top: 50%"></span>
+<span class="blush" id="chr-blush-b2" style="right: 22%; top: 50%"></span>
+</button>
+<p aria-hidden="true" class="kana-v chr-kana" id="chr-kana-b" lang="ja"></p>
+<p aria-hidden="true" class="sfx chr-sfx" id="chr-sfx-b" lang="ja">
+                ドキッ
+              </p>
+<div class="chr-bubble" data-unsupported="" hidden="" id="chr-bubble-b">
+<p class="chr-say" id="chr-say-b"></p>
+<p class="chr-tapline" hidden="" id="chr-tap-b"></p>
+</div>
+</div>
+<div class="chr-info cel" id="chr-info-b">
+<p class="chr-role" id="chr-role-b">
+<span id="chr-role-b-a">Tokoh Utama</span>
+<span class="chr-role-ja" id="chr-role-b-ja" lang="ja">ヒロイン</span>
+</p>
+<h3 class="chr-name" id="chr-name-b"></h3>
+<p class="chr-full" id="chr-full-b"></p>
+<p class="chr-parents" data-unsupported="" hidden="" id="chr-parents-b">
+<span id="chr-parents-b-l"></span>
+<b id="chr-parents-b-n"></b>
+</p>
+<dl class="chr-dl" id="chr-dl-b">
+<div class="chr-dli" data-unsupported="" hidden="" id="chr-dli-b1">
+<dt id="chr-dt-b1"></dt>
+<dd id="chr-dd-b1"></dd>
+</div>
+<div class="chr-dli" data-unsupported="" hidden="" id="chr-dli-b2">
+<dt id="chr-dt-b2"></dt>
+<dd id="chr-dd-b2"></dd>
+</div>
+<div class="chr-dli chr-wide" data-unsupported="" hidden="" id="chr-dli-b3">
+<dt id="chr-dt-b3"></dt>
+<dd id="chr-dd-b3"></dd>
+</div>
+<div class="chr-dli chr-wide" data-unsupported="" hidden="" id="chr-dli-b4">
+<dt id="chr-dt-b4"></dt>
+<dd id="chr-dd-b4"></dd>
+</div>
+<div class="chr-dli chr-wide" data-unsupported="" hidden="" id="chr-dli-b5">
+<dt id="chr-dt-b5"></dt>
+<dd id="chr-dd-b5"></dd>
+</div>
+<div class="chr-dli" data-unsupported="" hidden="" id="chr-dli-b6">
+<dt id="chr-dt-b6"></dt>
+<dd id="chr-dd-b6"></dd>
+</div>
+</dl>
+<div class="chr-stats" data-unsupported="" hidden="" id="chr-stats-b">
+<p class="chr-stats-h" id="chr-stats-b-h"><span id="chr-stats-b-ja" lang="ja">能力値</span>
+</p>
+<svg aria-label="Statistik " class="chr-radar" id="chr-radar-b" role="img" viewbox="-150 -108 300 220"></svg>
+<p class="chr-stat-src" hidden="" id="chr-stat-b"></p>
+</div>
+<a class="chr-ig" href="#" id="chr-ig-b" rel="noopener" target="_blank"><svg aria-hidden="true" id="chr-ig-b-ic" viewbox="0 0 24 24">
+<rect fill="none" height="18" id="chr-ig-b-r" rx="5" stroke="currentColor" stroke-width="2" width="18" x="3" y="3"></rect>
+<circle cx="12" cy="12" fill="none" id="chr-ig-b-c" r="4" stroke="currentColor" stroke-width="2"></circle>
+<circle cx="17.3" cy="6.7" fill="currentColor" id="chr-ig-b-d" r="1.2"></circle></svg><span id="chr-ig-b-t"></span></a>
+</div>
+</article>
+<article aria-hidden="true" aria-labelledby="chr-tab-g" class="chr-panel" data-chr="g" id="chr-panel-g" role="tabpanel" style="--cc: #3e92e6; --cc2: #c7e4ff">
+<div class="chr-art" id="chr-art-g">
+<div aria-hidden="true" class="chr-fx" id="chr-fx-g">
+<span class="chr-bub" id="chr-bub-g1" style="--bx: 70%; --by: 12%; --bs: 76px; --bd: 8s"></span>
+<span class="chr-bub" id="chr-bub-g2" style="--bx: 6%; --by: 20%; --bs: 40px; --bd: 7s"></span>
+<span class="chr-bub" id="chr-bub-g3" style="--bx: 4%; --by: 62%; --bs: 84px; --bd: 9s"></span>
+<span class="chr-bub" id="chr-bub-g4" style="--bx: 84%; --by: 74%; --bs: 34px; --bd: 6s"></span>
+<svg class="chr-flw" id="chr-flw-g1" style="--fx: 80%; --fy: 42%; --fs: 30px" viewbox="0 0 24 24">
+<use href="#sym-kira" id="chr-flw-g1-u"></use>
+</svg>
+<svg class="chr-flw" id="chr-flw-g2" style="--fx: 12%; --fy: 34%; --fs: 24px" viewbox="0 0 24 24">
+<use href="#sym-kira" id="chr-flw-g2-u"></use>
+</svg>
+<svg class="chr-flw" id="chr-flw-g3" style="--fx: 26%; --fy: 86%; --fs: 36px" viewbox="0 0 24 24">
+<use href="#sym-blossom" id="chr-flw-g3-u"></use>
+</svg>
+<span class="kira" id="chr-kira-g1" style="left: 70%; top: 10%; --kd: -0.9s"><svg id="chr-kira-g1-s" viewbox="0 0 24 24">
+<use href="#sym-kira" id="chr-kira-g1-u"></use></svg></span>
+<span class="kira" id="chr-kira-g2" style="
+                    left: 10%;
+                    top: 50%;
+                    width: 16px;
+                    height: 16px;
+                    --kd: -2s;
+                  "><svg id="chr-kira-g2-s" viewbox="0 0 24 24">
+<use href="#sym-kira" id="chr-kira-g2-u"></use></svg></span>
+</div>
+<button aria-label="Ketuk untuk menyapa " class="chr-portrait" id="chr-portrait-g" type="button">
+<span class="chr-pframe" id="chr-pframe-g">
+<img alt="" class="chr-img" decoding="async" id="chr-img-g"/>
+<span aria-hidden="true" class="chr-ph" id="chr-ph-g"><span class="chr-ph-ini" id="chr-ph-g-ini"></span></span>
+</span>
+<span class="blush" id="chr-blush-g1" style="left: 22%; top: 50%"></span>
+<span class="blush" id="chr-blush-g2" style="right: 22%; top: 50%"></span>
+</button>
+<p aria-hidden="true" class="kana-v chr-kana" id="chr-kana-g" lang="ja"></p>
+<p aria-hidden="true" class="sfx chr-sfx" id="chr-sfx-g" lang="ja">
+                ドキッ
+              </p>
+<div class="chr-bubble" data-unsupported="" hidden="" id="chr-bubble-g">
+<p class="chr-say" id="chr-say-g"></p>
+<p class="chr-tapline" hidden="" id="chr-tap-g"></p>
+</div>
+</div>
+<div class="chr-info cel" id="chr-info-g">
+<p class="chr-role" id="chr-role-g">
+<span id="chr-role-g-a">Tokoh Utama</span>
+<span class="chr-role-ja" id="chr-role-g-ja" lang="ja">ヒーロー</span>
+</p>
+<h3 class="chr-name" id="chr-name-g"></h3>
+<p class="chr-full" id="chr-full-g"></p>
+<p class="chr-parents" data-unsupported="" hidden="" id="chr-parents-g">
+<span id="chr-parents-g-l"></span>
+<b id="chr-parents-g-n"></b>
+</p>
+<dl class="chr-dl" id="chr-dl-g">
+<div class="chr-dli" data-unsupported="" hidden="" id="chr-dli-g1">
+<dt id="chr-dt-g1"></dt>
+<dd id="chr-dd-g1"></dd>
+</div>
+<div class="chr-dli" data-unsupported="" hidden="" id="chr-dli-g2">
+<dt id="chr-dt-g2"></dt>
+<dd id="chr-dd-g2"></dd>
+</div>
+<div class="chr-dli chr-wide" data-unsupported="" hidden="" id="chr-dli-g3">
+<dt id="chr-dt-g3"></dt>
+<dd id="chr-dd-g3"></dd>
+</div>
+<div class="chr-dli chr-wide" data-unsupported="" hidden="" id="chr-dli-g4">
+<dt id="chr-dt-g4"></dt>
+<dd id="chr-dd-g4"></dd>
+</div>
+<div class="chr-dli chr-wide" data-unsupported="" hidden="" id="chr-dli-g5">
+<dt id="chr-dt-g5"></dt>
+<dd id="chr-dd-g5"></dd>
+</div>
+<div class="chr-dli" data-unsupported="" hidden="" id="chr-dli-g6">
+<dt id="chr-dt-g6"></dt>
+<dd id="chr-dd-g6"></dd>
+</div>
+</dl>
+<div class="chr-stats" data-unsupported="" hidden="" id="chr-stats-g">
+<p class="chr-stats-h" id="chr-stats-g-h"><span id="chr-stats-g-ja" lang="ja">能力値</span>
+</p>
+<svg aria-label="Statistik " class="chr-radar" id="chr-radar-g" role="img" viewbox="-150 -108 300 220"></svg>
+<p class="chr-stat-src" hidden="" id="chr-stat-g"></p>
+</div>
+<a class="chr-ig" href="#" id="chr-ig-g" rel="noopener" target="_blank"><svg aria-hidden="true" id="chr-ig-g-ic" viewbox="0 0 24 24">
+<rect fill="none" height="18" id="chr-ig-g-r" rx="5" stroke="currentColor" stroke-width="2" width="18" x="3" y="3"></rect>
+<circle cx="12" cy="12" fill="none" id="chr-ig-g-c" r="4" stroke="currentColor" stroke-width="2"></circle>
+<circle cx="17.3" cy="6.7" fill="currentColor" id="chr-ig-g-d" r="1.2"></circle></svg><span id="chr-ig-g-t"></span></a>
+</div>
+</article>
+</div>
+<div class="rv" id="chr-nav" style="--d: 0.3s">
+<button aria-label="Karakter sebelumnya" class="btn btn-sm btn-ghost" id="chr-prev" type="button">
+<svg aria-hidden="true" id="chr-prev-ic" viewbox="0 0 24 24">
+<use href="#ic-prev" id="chr-prev-u"></use>
+</svg>
+</button>
+<p id="chr-count"><b id="chr-count-n">1</b> / 2</p>
+<button aria-label="Karakter berikutnya" class="btn btn-sm btn-ghost" id="chr-next" type="button">
+<svg aria-hidden="true" id="chr-next-ic" viewbox="0 0 24 24">
+<use href="#ic-next" id="chr-next-u"></use>
+</svg>
+</button>
+</div>
+</div>
+</section>
+<section class="scn" data-nav="Hubungan" data-season="semi" data-section="hubungan" data-title="Diagram Hubungan" data-unsupported="" hidden="" id="sec-hubungan">
+<div class="wrap" id="rel-wrap">
+<header class="ep-head" id="rel-head">
+<span aria-hidden="true" class="ep-slash" id="rel-slash"></span>
+<p class="ep-no rv rv-pop" id="rel-no">
+<span class="ep-no-badge" id="rel-no-b">03</span><span id="rel-no-t"></span><span class="ep-no-ja" id="rel-no-ja" lang="ja">相関図</span>
+</p>
+<h2 class="ep-title rv" id="rel-title" style="--d: 0.1s"></h2>
+<p class="ep-sub rv" id="rel-sub" lang="ja" style="--d: 0.2s">
+            人物相関図
+          </p>
+<p class="ep-lead rv" id="rel-lead" style="--d: 0.3s"></p>
+</header>
+<div class="rv rv-zoom" id="rel-board">
+<p aria-hidden="true" id="rel-board-tag">
+<span id="rel-board-tag-ja" lang="ja">人物相関図</span></p>
+<svg aria-hidden="true" id="rel-lines">
+<defs id="rel-defs">
+<marker id="rel-arrow" markerheight="7" markerwidth="7" orient="auto-start-reverse" refx="8.5" refy="5" viewbox="0 0 10 10">
+<path d="M0 0L10 5 0 10z" fill="#1f2247" id="rel-arrow-p"></path>
+</marker>
+<marker id="rel-arrow-red" markerheight="6" markerwidth="6" orient="auto-start-reverse" refx="8.5" refy="5" viewbox="0 0 10 10">
+<path d="M0 0L10 5 0 10z" fill="#e0263f" id="rel-arrow-red-p"></path>
+</marker>
+</defs>
+<g id="rel-paths"></g>
+</svg>
+<button class="rel-node rel-main" data-rel="bride" id="rel-n-bride" style="--nc: #e5467a" type="button">
+<span class="rel-av" id="rel-av-bride"><img alt="" decoding="async" id="rel-img-bride"/><span class="rel-ini" id="rel-ini-bride"></span></span>
+<span class="rel-name" id="rel-name-bride"></span>
+<span class="rel-role" id="rel-role-bride"></span>
+</button>
+<button class="rel-node rel-main" data-rel="groom" id="rel-n-groom" style="--nc: #3e92e6" type="button">
+<span class="rel-av" id="rel-av-groom"><img alt="" decoding="async" id="rel-img-groom"/><span class="rel-ini" id="rel-ini-groom"></span></span>
+<span class="rel-name" id="rel-name-groom"></span>
+<span class="rel-role" id="rel-role-groom"></span>
+</button>
+<div class="rel-heart" id="rel-heart">
+<svg aria-hidden="true" id="rel-heart-s" viewbox="0 0 24 24">
+<use href="#sym-heart" id="rel-heart-u"></use>
+</svg>
+<span class="rel-heart-t" id="rel-heart-t"></span>
+</div>
+<button class="rel-node rel-fam" data-rel="pb" id="rel-n-pb" style="--nc: #f07a9c" type="button">
+<span aria-hidden="true" class="rel-av rel-av-fam" id="rel-av-pb"><span class="rel-fam-a" id="rel-fam-pb-a"></span><span class="rel-fam-b" id="rel-fam-pb-b"></span></span>
+<span class="rel-name" id="rel-name-pb"></span>
+<span class="rel-role" id="rel-role-pb"></span>
+</button>
+<button class="rel-node rel-fam" data-rel="pg" id="rel-n-pg" style="--nc: #5aa4ec" type="button">
+<span aria-hidden="true" class="rel-av rel-av-fam" id="rel-av-pg"><span class="rel-fam-a" id="rel-fam-pg-a"></span><span class="rel-fam-b" id="rel-fam-pg-b"></span></span>
+<span class="rel-name" id="rel-name-pg"></span>
+<span class="rel-role" id="rel-role-pg"></span>
+</button>
+<button class="rel-node rel-sup" data-rel="t1" id="rel-n-t1" style="--nc: #ffb347" type="button">
+<span class="rel-av" id="rel-av-t1"><img alt="" decoding="async" id="rel-img-t1"/><span class="rel-ini" id="rel-ini-t1"></span></span>
+<span class="rel-name" id="rel-name-t1"></span>
+<span class="rel-role" id="rel-role-t1"></span>
+</button>
+<button class="rel-node rel-sup" data-rel="t2" id="rel-n-t2" style="--nc: #7ccf8b" type="button">
+<span class="rel-av" id="rel-av-t2"><img alt="" decoding="async" id="rel-img-t2"/><span class="rel-ini" id="rel-ini-t2"></span></span>
+<span class="rel-name" id="rel-name-t2"></span>
+<span class="rel-role" id="rel-role-t2"></span>
+</button>
+<button class="rel-node rel-sup" data-rel="t3" id="rel-n-t3" style="--nc: #b58cff" type="button">
+<span class="rel-av" id="rel-av-t3"><img alt="" decoding="async" id="rel-img-t3"/><span class="rel-ini" id="rel-ini-t3"></span></span>
+<span class="rel-name" id="rel-name-t3"></span>
+<span class="rel-role" id="rel-role-t3"></span>
+</button>
+<div aria-hidden="true" id="rel-labels">
+<span class="rel-lbl" data-for="pb" id="rel-lbl-pb"></span>
+<span class="rel-lbl" data-for="pg" id="rel-lbl-pg"></span>
+<span class="rel-lbl" data-for="t1" id="rel-lbl-t1"></span>
+<span class="rel-lbl" data-for="t2" id="rel-lbl-t2"></span>
+<span class="rel-lbl" data-for="t3" id="rel-lbl-t3"></span>
+</div>
+<div aria-live="polite" id="rel-say" role="status">
+<p id="rel-say-who"></p>
+<p id="rel-say-t"></p>
+</div>
+<div hidden="" id="rel-quotes">
+<p data-for="bride" id="rel-q-bride"></p>
+<p data-for="groom" id="rel-q-groom"></p>
+<p data-for="t1" id="rel-q-t1"></p>
+<p data-for="t2" id="rel-q-t2"></p>
+<p data-for="t3" id="rel-q-t3"></p>
+</div>
+</div>
+<p class="rv" id="rel-hint"></p>
+</div>
+</section>
+<section class="scn" data-nav="Episode" data-season="semi" data-section="kisah" data-title="Kilas Balik Empat Musim" id="sec-kisah">
+<div class="wrap" id="ep-wrap">
+<header class="ep-head" id="ep-head">
+<span aria-hidden="true" class="ep-slash" id="ep-slash"></span>
+<p class="ep-no rv rv-pop" id="ep-no">
+<span class="ep-no-badge" id="ep-no-b">04</span><span id="ep-no-t">Adegan</span><span class="ep-no-ja" id="ep-no-ja" lang="ja">回想</span>
+</p>
+<h2 class="ep-title rv" id="ep-title" style="--d: 0.1s">
+            Kilas Balik Empat Musim
+          </h2>
+<p class="ep-sub rv" id="ep-sub" lang="ja" style="--d: 0.2s">
+            前回までのあらすじ
+          </p>
+<p class="ep-lead rv" id="ep-lead" style="--d: 0.3s">
+            Sebelum episode final diputar, mari tonton lagi episode-episode yang
+            membawa mereka sampai di sini.
+          </p>
+</header>
+<div id="ep-layout">
+<div class="rv rv-zoom" id="ep-player">
+<div aria-label="Pemutar episode" id="ep-screen" role="region" tabindex="0">
+<div class="ep-scene" data-season="semi" id="ep-scene-1">
+<div class="ep-scene-bg" id="ep-scene-1-bg"></div>
+<div aria-hidden="true" class="ep-fx" id="ep-fx-1"></div>
+<figure class="ep-mem" id="ep-mem-1">
+<img alt="" class="ep-mem-img" decoding="async" id="ep-mem-1-img"/>
+</figure>
+</div>
+<div class="ep-scene" data-season="panas" id="ep-scene-2">
+<div class="ep-scene-bg" id="ep-scene-2-bg"></div>
+<div aria-hidden="true" class="ep-fx" id="ep-fx-2"></div>
+<figure class="ep-mem" id="ep-mem-2">
+<img alt="" class="ep-mem-img" decoding="async" id="ep-mem-2-img"/>
+</figure>
+</div>
+<div class="ep-scene" data-season="gugur" id="ep-scene-3">
+<div class="ep-scene-bg" id="ep-scene-3-bg"></div>
+<div aria-hidden="true" class="ep-fx" id="ep-fx-3"></div>
+<figure class="ep-mem" id="ep-mem-3">
+<img alt="" class="ep-mem-img" decoding="async" id="ep-mem-3-img"/>
+</figure>
+</div>
+<div class="ep-scene" data-season="dingin" id="ep-scene-4">
+<div class="ep-scene-bg" id="ep-scene-4-bg"></div>
+<div aria-hidden="true" class="ep-fx" id="ep-fx-4"></div>
+<figure class="ep-mem" id="ep-mem-4">
+<img alt="" class="ep-mem-img" decoding="async" id="ep-mem-4-img"/>
+</figure>
+</div>
+<div aria-hidden="true" id="ep-grain"></div>
+<span aria-hidden="true" class="ep-lb" id="ep-lb-t"></span>
+<span aria-hidden="true" class="ep-lb" id="ep-lb-b"></span>
+<p aria-hidden="true" id="ep-hud-l">
+<span id="ep-hud-ep">EP 1</span><span id="ep-hud-season" lang="ja">春</span>
+</p>
+<p aria-hidden="true" id="ep-hud-r">
+<span id="ep-hud-hd">HD</span><span id="ep-hud-tc">00:00</span>
+</p>
+<div aria-hidden="true" id="ep-card">
+<p id="ep-card-ja" lang="ja">第1話</p>
+<p id="ep-card-no">Episode 1</p>
+<h3 id="ep-card-title"></h3>
+<p id="ep-card-time"></p>
+</div>
+<div aria-live="polite" id="ep-subs">
+<p id="ep-subs-t"></p>
+<span aria-hidden="true" id="ep-subs-more">▼</span>
+</div>
+<div aria-hidden="true" id="ep-eye">
+<p id="ep-eye-logo">Angin yang Membawamu</p>
+<p id="ep-eye-ja" lang="ja">アイキャッチ</p>
+<svg id="ep-eye-heart" viewbox="0 0 24 24">
+<use href="#sym-heart" id="ep-eye-heart-u"></use>
+</svg>
+</div>
+<div id="ep-next">
+<p id="ep-next-ja" lang="ja">次回予告</p>
+<p id="ep-next-k">Episode berikutnya</p>
+<p id="ep-next-title"></p>
+<div id="ep-next-btns">
+<button class="btn btn-sm" id="ep-next-go" type="button">
+<span id="ep-next-go-t">Lanjut</span><svg aria-hidden="true" id="ep-next-go-ic" viewbox="0 0 24 24">
+<use href="#ic-next" id="ep-next-go-u"></use>
+</svg>
+</button>
+<button class="btn btn-sm btn-ghost" id="ep-next-re" type="button">
+<svg aria-hidden="true" id="ep-next-re-ic" viewbox="0 0 24 24">
+<use href="#ic-replay" id="ep-next-re-u"></use></svg><span id="ep-next-re-t">Ulangi</span>
+</button>
+</div>
+</div>
+<div aria-hidden="true" id="ep-trans">
+<span id="ep-trans-flash"></span>
+<span id="ep-trans-wipe"></span>
+<span id="ep-trans-iris"></span>
+<span id="ep-trans-petals"></span>
+</div>
+<button id="ep-start" type="button">
+<span aria-hidden="true" id="ep-start-ring"><svg id="ep-start-ic" viewbox="0 0 24 24">
+<use href="#ic-play" id="ep-start-u"></use></svg></span>
+<span id="ep-start-t">Putar Kilas Balik</span>
+<span id="ep-start-s">4 episode · ± 1 menit</span>
+</button>
+</div>
+<div id="ep-ctrl">
+<button aria-label="Episode sebelumnya" class="ep-cbtn" id="ep-c-prev" type="button">
+<svg aria-hidden="true" id="ep-c-prev-ic" viewbox="0 0 24 24">
+<use href="#ic-prev" id="ep-c-prev-u"></use>
+</svg>
+</button>
+<button aria-label="Putar atau jeda" class="ep-cbtn ep-cbtn-main" id="ep-c-play" type="button">
+<svg aria-hidden="true" class="ic-play" id="ep-c-play-ic" viewbox="0 0 24 24">
+<use href="#ic-play" id="ep-c-play-u"></use></svg><svg aria-hidden="true" class="ic-pause" id="ep-c-pause-ic" viewbox="0 0 24 24">
+<use href="#ic-pause" id="ep-c-pause-u"></use>
+</svg>
+</button>
+<button aria-label="Kalimat atau episode berikutnya" class="ep-cbtn" id="ep-c-next" type="button">
+<svg aria-hidden="true" id="ep-c-next-ic" viewbox="0 0 24 24">
+<use href="#ic-next" id="ep-c-next-u"></use>
+</svg>
+</button>
+<div aria-hidden="true" id="ep-prog">
+<span id="ep-prog-bar"></span>
+</div>
+<p aria-hidden="true" id="ep-c-count">
+<b id="ep-c-cur">1</b>/<span id="ep-c-tot">4</span>
+</p>
+</div>
+</div>
+<div id="ep-side">
+<p class="rv" id="ep-list-h">
+<svg aria-hidden="true" id="ep-list-h-ic" viewbox="0 0 24 24">
+<use href="#ic-list" id="ep-list-h-u"></use>
+</svg>
+              Daftar Episode
+            </p>
+<ol class="rv" id="ep-list" style="--d: 0.1s">
+<li class="ep-li" data-ep="1" id="ep-li-1">
+<button class="ep-li-btn" id="ep-li-1-btn" type="button">
+<span class="ep-li-th" id="ep-li-1-th"></span><span class="ep-li-info" id="ep-li-1-info"><span class="ep-li-no" id="ep-li-1-no">EP 1 · <span id="ep-li-1-s" lang="ja">春</span></span><span class="ep-li-t" id="ep-li-1-t"></span><span class="ep-li-w" id="ep-li-1-w"></span></span><span class="ep-li-bar" id="ep-li-1-bar"></span>
+</button>
+</li>
+<li class="ep-li" data-ep="2" id="ep-li-2">
+<button class="ep-li-btn" id="ep-li-2-btn" type="button">
+<span class="ep-li-th" id="ep-li-2-th"></span><span class="ep-li-info" id="ep-li-2-info"><span class="ep-li-no" id="ep-li-2-no">EP 2 · <span id="ep-li-2-s" lang="ja">夏</span></span><span class="ep-li-t" id="ep-li-2-t"></span><span class="ep-li-w" id="ep-li-2-w"></span></span><span class="ep-li-bar" id="ep-li-2-bar"></span>
+</button>
+</li>
+<li class="ep-li" data-ep="3" id="ep-li-3">
+<button class="ep-li-btn" id="ep-li-3-btn" type="button">
+<span class="ep-li-th" id="ep-li-3-th"></span><span class="ep-li-info" id="ep-li-3-info"><span class="ep-li-no" id="ep-li-3-no">EP 3 · <span id="ep-li-3-s" lang="ja">秋</span></span><span class="ep-li-t" id="ep-li-3-t"></span><span class="ep-li-w" id="ep-li-3-w"></span></span><span class="ep-li-bar" id="ep-li-3-bar"></span>
+</button>
+</li>
+<li class="ep-li" data-ep="4" id="ep-li-4">
+<button class="ep-li-btn" id="ep-li-4-btn" type="button">
+<span class="ep-li-th" id="ep-li-4-th"></span><span class="ep-li-info" id="ep-li-4-info"><span class="ep-li-no" id="ep-li-4-no">EP 4 · <span id="ep-li-4-s" lang="ja">冬</span></span><span class="ep-li-t" id="ep-li-4-t"></span><span class="ep-li-w" id="ep-li-4-w"></span></span><span class="ep-li-bar" id="ep-li-4-bar"></span>
+</button>
+</li>
+</ol>
+<details class="rv" id="ep-tr" style="--d: 0.15s">
+<summary id="ep-tr-sum">Baca transkrip lengkap</summary>
+<div id="ep-tr-body">
+<article class="ep-d" data-ep="1" id="ep-d-1">
+<h3 class="ep-d-t" id="ep-d-1-t"></h3>
+<p class="ep-d-w" id="ep-d-1-w"></p>
+<p class="ep-d-x" id="ep-d-1-x"></p>
+</article>
+<article class="ep-d" data-ep="2" id="ep-d-2">
+<h3 class="ep-d-t" id="ep-d-2-t"></h3>
+<p class="ep-d-w" id="ep-d-2-w"></p>
+<p class="ep-d-x" id="ep-d-2-x"></p>
+</article>
+<article class="ep-d" data-ep="3" id="ep-d-3">
+<h3 class="ep-d-t" id="ep-d-3-t"></h3>
+<p class="ep-d-w" id="ep-d-3-w"></p>
+<p class="ep-d-x" id="ep-d-3-x"></p>
+</article>
+<article class="ep-d" data-ep="4" id="ep-d-4">
+<h3 class="ep-d-t" id="ep-d-4-t"></h3>
+<p class="ep-d-w" id="ep-d-4-w"></p>
+<p class="ep-d-x" id="ep-d-4-x"></p>
+</article>
+</div>
+</details>
+</div>
+</div>
+</div>
+</section>
+<section class="scn scn-dark" data-nav="Pengakuan" data-season="panas" data-section="pengakuan" data-title="Adegan Pengakuan" data-unsupported="" hidden="" id="sec-pengakuan">
+<div aria-hidden="true" id="pk-bg"></div>
+<canvas aria-hidden="true" id="pk-fw"></canvas>
+<div aria-hidden="true" id="pk-vig"></div>
+<div class="wrap" id="pk-wrap">
+<header class="ep-head" id="pk-head">
+<span aria-hidden="true" class="ep-slash" id="pk-slash"></span>
+<p class="ep-no rv rv-pop" id="pk-no">
+<span class="ep-no-badge" id="pk-no-b">05</span><span id="pk-no-t"></span><span class="ep-no-ja" id="pk-no-ja" lang="ja">告白</span>
+</p>
+<h2 class="ep-title rv" id="pk-title" style="--d: 0.1s"></h2>
+<p class="ep-sub rv" id="pk-sub" lang="ja" style="--d: 0.2s">
+            花火の夜の告白
+          </p>
+<p class="ep-lead rv" id="pk-lead" style="--d: 0.3s"><b id="pk-lead-b"></b>.
+          </p>
+</header>
+<div class="rv rv-zoom" id="pk-stage">
+<p id="pk-intro"></p>
+<div id="pk-chars">
+<figure class="pk-chr" data-who="g" id="pk-chr-g">
+<span class="pk-av" id="pk-av-g"><img alt="" decoding="async" id="pk-img-g"/><span class="pk-ini" id="pk-ini-g"></span></span>
+<span class="blush" id="pk-blush-g1" style="left: 12%; top: 58%"></span>
+<span class="blush" id="pk-blush-g2" style="right: 12%; top: 58%"></span>
+<span aria-hidden="true" class="pk-sweat" id="pk-sweat"></span>
+<figcaption class="pk-plate" id="pk-plate-g">
+                
+              </figcaption>
+</figure>
+<div aria-hidden="true" id="pk-mid">
+<svg id="pk-mid-heart" viewbox="0 0 24 24">
+<use href="#sym-heart" id="pk-mid-heart-u"></use>
+</svg>
+<span id="pk-mid-q">?</span>
+</div>
+<figure class="pk-chr" data-who="b" id="pk-chr-b">
+<span class="pk-av" id="pk-av-b"><img alt="" decoding="async" id="pk-img-b"/><span class="pk-ini" id="pk-ini-b"></span></span>
+<span class="blush" id="pk-blush-b1" style="left: 12%; top: 58%"></span>
+<span class="blush" id="pk-blush-b2" style="right: 12%; top: 58%"></span>
+<figcaption class="pk-plate" id="pk-plate-b">
+                
+              </figcaption>
+</figure>
+</div>
+<div aria-hidden="true" id="pk-meter">
+<div id="pk-meter-track">
+<span id="pk-zone"><span id="pk-zone-t"></span></span>
+<span id="pk-fill"></span>
+<span id="pk-needle"></span>
+</div>
+<p id="pk-meter-l">
+<span id="pk-meter-a"></span><span id="pk-meter-b" lang="ja">ドキドキ</span><span id="pk-meter-c"></span>
+</p>
+</div>
+<div aria-live="polite" id="pk-dialog">
+<p id="pk-dialog-name"></p>
+<p id="pk-dialog-t"></p>
+<span aria-hidden="true" id="pk-dialog-more">▼</span>
+</div>
+<div id="pk-actions">
+<button aria-describedby="pk-hold-h" id="pk-hold" type="button">
+<span aria-hidden="true" id="pk-hold-ring"></span>
+<svg aria-hidden="true" id="pk-hold-ic" viewbox="0 0 24 24">
+<use href="#sym-heart" id="pk-hold-u"></use>
+</svg>
+<span id="pk-hold-t"></span>
+</button>
+<p id="pk-hold-h"><b id="pk-hold-hb"></b>
+</p>
+<div id="pk-btns">
+<button class="btn btn-sm btn-ghost" id="pk-skip" type="button">
+<svg aria-hidden="true" id="pk-skip-ic" viewbox="0 0 24 24">
+<use href="#ic-skip" id="pk-skip-u"></use></svg><span id="pk-skip-t"></span>
+</button>
+<button class="btn btn-sm btn-ghost" hidden="" id="pk-again" type="button">
+<svg aria-hidden="true" id="pk-again-ic" viewbox="0 0 24 24">
+<use href="#ic-replay" id="pk-again-u"></use></svg><span id="pk-again-t"></span>
+</button>
+</div>
+<p aria-live="polite" id="pk-tries"></p>
+</div>
+<div id="pk-result">
+<p id="pk-stamp">
+<span id="pk-stamp-ja" lang="ja">成就</span><span id="pk-stamp-t"></span>
+</p>
+<p id="pk-when">
+<svg aria-hidden="true" id="pk-when-ic" viewbox="0 0 24 24">
+<use href="#ic-cal" id="pk-when-u"></use></svg><span id="pk-when-t"></span>
+</p>
+<p id="pk-where">
+<svg aria-hidden="true" id="pk-where-ic" viewbox="0 0 24 24">
+<use href="#ic-pin" id="pk-where-u"></use></svg><span id="pk-where-t"></span>
+</p>
+</div>
+<p aria-hidden="true" class="sfx pk-sfx" id="pk-sfx-1" lang="ja">
+            ドキ
+          </p>
+<p aria-hidden="true" class="sfx pk-sfx" id="pk-sfx-2" lang="ja">
+            ドキ
+          </p>
+<p aria-hidden="true" class="sfx pk-sfx" id="pk-sfx-3" lang="ja">
+            ドーン!!
+          </p>
+<div aria-hidden="true" id="pk-lines">
+<span class="speedlines" id="pk-lines-s"></span>
+</div>
+</div>
+<div hidden="" id="pk-data">
+<p id="pk-line-q"></p>
+<p id="pk-line-a"></p>
+</div>
+</div>
+</section>
+<section class="scn" data-nav="Hitung" data-season="panas" data-section="hitung" data-title="Cuplikan Episode Final" id="sec-hitung">
+<div class="wrap" id="yk-wrap">
+<header class="ep-head" id="yk-head">
+<span aria-hidden="true" class="ep-slash" id="yk-slash"></span>
+<p class="ep-no rv rv-pop" id="yk-no">
+<span class="ep-no-badge" id="yk-no-b">06</span><span id="yk-no-t">Adegan</span><span class="ep-no-ja" id="yk-no-ja" lang="ja">次回予告</span>
+</p>
+<h2 class="ep-title rv" id="yk-title" style="--d: 0.1s">
+            Cuplikan Episode Final
+          </h2>
+<p class="ep-sub rv" id="yk-sub" lang="ja" style="--d: 0.2s">
+            最終話・予告
+          </p>
+</header>
+<div id="yk-grid">
+<div class="rv rv-l" id="yk-card">
+<p aria-hidden="true" id="yk-stamp" lang="ja">次回予告</p>
+<div aria-hidden="true" id="yk-screen">
+<div id="yk-cuts"></div>
+<span class="speedlines" id="yk-lines"></span>
+<span id="yk-flash"></span>
+<p id="yk-cap"><span id="yk-cap-a">Episode Final</span></p>
+</div>
+<div data-a="assets/1790402900_a291aaa9.jpg" data-b="assets/1790402894_efcca39f.jpg" data-c="assets/1790402946_a511758a.jpg" data-d="assets/1790402940_58fe76a4.jpg" data-e="assets/1790402989_58917fe3.jpg" hidden="" id="yk-src"></div>
+<p id="yk-narr"></p>
+<p id="yk-final">
+<span id="yk-final-k">Episode Final</span>
+<b id="yk-final-t"></b>
+</p>
+<button class="btn btn-sm btn-ghost" id="yk-voice" type="button">
+<svg aria-hidden="true" id="yk-voice-ic" viewbox="0 0 24 24">
+<use href="#ic-sound" id="yk-voice-u"></use></svg><span id="yk-voice-t">Dengarkan narator</span>
+</button>
+</div>
+<div class="rv rv-r" id="cd-card">
+<p id="cd-lead">Episode final tayang dalam</p>
+<div id="cd-cal">
+<span aria-hidden="true" class="cd-ring" id="cd-ring-1"></span>
+<span aria-hidden="true" class="cd-ring" id="cd-ring-2"></span>
+<span aria-hidden="true" class="cd-ring" id="cd-ring-3"></span>
+<div id="cd-pad">
+<div class="cd-page" id="cd-main">
+<p class="cd-mon" id="cd-mon">APRIL 2027</p>
+<p aria-live="polite" class="cd-big" id="cd-days">0</p>
+<p class="cd-unit" id="cd-unit">hari lagi</p>
+<p class="cd-wd" id="cd-wd">Sabtu</p>
+</div>
+<div aria-hidden="true" id="cd-fly"></div>
+</div>
+<p aria-hidden="true" class="sfx" id="cd-sfx" lang="ja">
+                ビュウゥ
+              </p>
+</div>
+<div id="cd-units">
+<div class="cd-u" id="cd-u-h">
+<p class="cd-u-v" id="cd-h">00</p>
+<p class="cd-u-l" id="cd-h-l">Jam</p>
+</div>
+<div class="cd-u" id="cd-u-m">
+<p class="cd-u-v" id="cd-m">00</p>
+<p class="cd-u-l" id="cd-m-l">Menit</p>
+</div>
+<div class="cd-u" id="cd-u-s">
+<p class="cd-u-v" id="cd-s">00</p>
+<p class="cd-u-l" id="cd-s-l">Detik</p>
+</div>
+</div>
+<p id="cd-when">
+<time datetime="" id="cd-when-d"></time>
+<span id="cd-when-sep">·</span> <span id="cd-when-t"></span>
+</p>
+<p hidden="" id="cd-state"></p>
+<div class="btn-row" id="cd-btns">
+<a class="btn btn-sm" href="#" id="cd-gcal" rel="noopener" target="_blank"><svg aria-hidden="true" id="cd-gcal-ic" viewbox="0 0 24 24">
+<use href="#ic-calplus" id="cd-gcal-u"></use></svg><span id="cd-gcal-t">Google Kalender</span></a>
+<button class="btn btn-sm btn-ghost" id="cd-ics" type="button">
+<svg aria-hidden="true" id="cd-ics-ic" viewbox="0 0 24 24">
+<use href="#ic-down" id="cd-ics-u"></use></svg><span id="cd-ics-t">Unduh .ics</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="scn scn-dark" data-nav="Acara" data-season="gugur" data-section="acara" data-title="Stasiun Akad &amp; Resepsi" id="sec-acara">
+<div aria-hidden="true" id="ac-bg"></div>
+<div aria-hidden="true" class="petal-field" data-count="12" id="ac-petals"></div>
+<div aria-hidden="true" id="ac-train">
+<svg id="ac-train-s" preserveaspectratio="none" viewbox="0 0 900 120">
+<defs id="ac-train-defs">
+<lineargradient id="ac-train-g" x1="0" x2="0" y1="0" y2="1">
+<stop id="ac-train-g1" offset="0" stop-color="#f4f1ea"></stop>
+<stop id="ac-train-g2" offset="1" stop-color="#c9c3b8"></stop>
+</lineargradient>
+</defs>
+<path d="M40 20h820q30 0 36 30v48H0V58Q4 20 40 20z" fill="url(#ac-train-g)" id="ac-train-body" stroke="#1f2247" stroke-width="3"></path>
+<rect fill="#e5467a" height="10" id="ac-train-band" width="896" x="0" y="72"></rect>
+<rect fill="#3e92e6" height="4" id="ac-train-band2" width="896" x="0" y="84"></rect>
+<g fill="#ffe7a8" id="ac-train-win" stroke="#1f2247" stroke-width="2">
+<rect height="30" id="acara-rect-1" rx="5" width="70" x="70" y="32"></rect>
+<rect height="30" id="acara-rect-2" rx="5" width="70" x="160" y="32"></rect>
+<rect height="30" id="acara-rect-3" rx="5" width="70" x="250" y="32"></rect>
+<rect height="30" id="acara-rect-4" rx="5" width="70" x="360" y="32"></rect>
+<rect height="30" id="acara-rect-5" rx="5" width="70" x="450" y="32"></rect>
+<rect height="30" id="acara-rect-6" rx="5" width="70" x="540" y="32"></rect>
+<rect height="30" id="acara-rect-7" rx="5" width="70" x="650" y="32"></rect>
+<rect height="30" id="acara-rect-8" rx="5" width="70" x="740" y="32"></rect>
+</g>
+<g fill="none" id="ac-train-doors" stroke="#1f2247" stroke-width="2">
+<path d="M335 24v72M615 24v72" id="acara-path-1"></path>
+</g>
+<path d="M860 44c-4-5-12-2-10 4 1 4 10 9 10 9s9-5 10-9c2-6-6-9-10-4z" fill="#e0263f" id="ac-train-heart"></path>
+</svg>
+<span id="ac-train-blur"></span>
+</div>
+<div aria-hidden="true" class="wind-lines" id="ac-wind">
+<svg id="ac-wind-1" style="top: 30%; --wd: 6s; --wdl: -2s" viewbox="0 0 300 40">
+<path d="M2 30C80 4 160 36 298 10" id="ac-wind-1-p" stroke-width="2"></path>
+</svg>
+<svg id="ac-wind-2" style="top: 62%; --wd: 8s; --wdl: -5s" viewbox="0 0 300 40">
+<path d="M2 20C90 36 190 2 298 22" id="ac-wind-2-p" stroke-width="1.6"></path>
+</svg>
+</div>
+<div class="wrap" id="ac-wrap">
+<header class="ep-head" id="ac-head">
+<span aria-hidden="true" class="ep-slash" id="ac-slash"></span>
+<p class="ep-no rv rv-pop" id="ac-no">
+<span class="ep-no-badge" id="ac-no-b">07</span><span id="ac-no-t">Adegan</span><span class="ep-no-ja" id="ac-no-ja" lang="ja">駅</span>
+</p>
+<h2 class="ep-title rv" id="ac-title" style="--d: 0.1s">
+            Stasiun Akad &amp; Resepsi
+          </h2>
+<p class="ep-sub rv" id="ac-sub" lang="ja" style="--d: 0.2s">
+            次は、しあわせ駅
+          </p>
+</header>
+<div aria-hidden="true" class="rv" id="ac-led">
+<span id="ac-led-l">Berikutnya</span>
+<div id="ac-led-view"><p id="ac-led-t"></p></div>
+</div>
+<div id="ac-list">
+<article class="st rv rv-zoom" id="st-1">
+<div class="st-sign sway" id="st-1-sign" style="--so: 50% 0%; --sa: 1.4deg; --sd: 4.2s">
+<span aria-hidden="true" class="st-pole" id="st-1-pole-l"></span>
+<span aria-hidden="true" class="st-pole st-pole-r" id="st-1-pole-r"></span>
+<div class="st-board" id="st-1-board">
+<p aria-hidden="true" class="st-code" id="st-1-code">
+<span class="st-code-l" id="st-1-code-l">E</span><span class="st-code-n" id="st-1-code-n">01</span>
+</p>
+<p aria-hidden="true" class="st-kana" id="st-1-kana" lang="ja"></p>
+<h3 class="st-name" id="st-1-name">Akad Nikah</h3>
+<p aria-hidden="true" class="st-roma" id="st-1-roma"></p>
+<div aria-hidden="true" class="st-band" id="st-1-band"></div>
+<p aria-hidden="true" class="st-prev" id="st-1-prev">
+<span id="st-1-prev-a">◀</span>
+<span id="st-1-prev-t">Kemarin</span>
+</p>
+<p aria-hidden="true" class="st-next" id="st-1-next">
+<span id="st-1-next-t">Selamanya</span>
+<span id="st-1-next-a">▶</span>
+</p>
+</div>
+</div>
+<div class="st-info cel" id="st-1-info">
+<p class="st-row" id="st-1-date">
+<svg aria-hidden="true" id="st-1-date-ic" viewbox="0 0 24 24">
+<use href="#ic-cal" id="st-1-date-u"></use></svg><time datetime="" id="st-1-date-t"></time>
+</p>
+<p class="st-row" id="st-1-time">
+<svg aria-hidden="true" id="st-1-time-ic" viewbox="0 0 24 24">
+<use href="#ic-train" id="st-1-time-u"></use></svg><span id="st-1-time-t"><span id="st-1-t0">10:00</span><span id="st-1-dash"> – </span><span id="st-1-t1"></span>
+<span id="st-1-tz"></span></span>
+</p>
+<p class="st-row" id="st-1-venue">
+<svg aria-hidden="true" id="st-1-venue-ic" viewbox="0 0 24 24">
+<use href="#ic-pin" id="st-1-venue-u"></use></svg><span id="st-1-venue-t"><b id="st-1-venue-n"></b><span id="st-1-venue-a"></span></span>
+</p>
+<p class="st-note" id="st-1-note"></p>
+<div class="btn-row st-btns" id="st-1-btns">
+<a class="btn btn-sm"  id="st-1-map" rel="noopener" target="_blank"><svg aria-hidden="true" id="st-1-map-ic" viewbox="0 0 24 24">
+<use href="#ic-map" id="st-1-map-u"></use></svg><span id="st-1-map-t">Petunjuk Arah</span></a>
+<a class="btn btn-sm btn-ghost" href="#" id="st-1-cal" rel="noopener" target="_blank"><svg aria-hidden="true" id="st-1-cal-ic" viewbox="0 0 24 24">
+<use href="#ic-calplus" id="st-1-cal-u"></use></svg><span id="st-1-cal-t">Simpan</span></a>
+</div>
+<p aria-hidden="true" class="st-ticket" id="st-1-ticket">
+<span id="st-1-ticket-a">KARCIS</span><span id="st-1-ticket-b">1 × Tamu Kehormatan</span>
+</p>
+</div>
+</article>
+<article class="st rv rv-zoom" data-unsupported="" hidden="" id="st-2">
+<div class="st-sign sway" id="st-2-sign" style="--so: 50% 0%; --sa: 1.6deg; --sd: 4.8s; --sdl: -1.4s">
+<span aria-hidden="true" class="st-pole" id="st-2-pole-l"></span>
+<span aria-hidden="true" class="st-pole st-pole-r" id="st-2-pole-r"></span>
+<div class="st-board st-board-2" id="st-2-board">
+<p aria-hidden="true" class="st-code" id="st-2-code">
+<span class="st-code-l" id="st-2-code-l"></span><span class="st-code-n" id="st-2-code-n">02</span>
+</p>
+<p aria-hidden="true" class="st-kana" id="st-2-kana" lang="ja"></p>
+<h3 class="st-name" id="st-2-name"></h3>
+<p aria-hidden="true" class="st-roma" id="st-2-roma"></p>
+<div aria-hidden="true" class="st-band" id="st-2-band"></div>
+<p aria-hidden="true" class="st-prev" id="st-2-prev">
+<span id="st-2-prev-a">◀</span> <span id="st-2-prev-t"></span>
+</p>
+<p aria-hidden="true" class="st-next" id="st-2-next">
+<span id="st-2-next-t"></span>
+<span id="st-2-next-a">▶</span>
+</p>
+</div>
+</div>
+<div class="st-info cel" id="st-2-info">
+<p class="st-row" id="st-2-date">
+<svg aria-hidden="true" id="st-2-date-ic" viewbox="0 0 24 24">
+<use href="#ic-cal" id="st-2-date-u"></use></svg><time datetime="" id="st-2-date-t"></time>
+</p>
+<p class="st-row" id="st-2-time">
+<svg aria-hidden="true" id="st-2-time-ic" viewbox="0 0 24 24">
+<use href="#ic-train" id="st-2-time-u"></use></svg><span id="st-2-time-t"><span id="st-2-t0"></span><span id="st-2-dash"> – </span><span id="st-2-t1"></span>
+<span id="st-2-tz"></span></span>
+</p>
+<p class="st-row" id="st-2-venue">
+<svg aria-hidden="true" id="st-2-venue-ic" viewbox="0 0 24 24">
+<use href="#ic-pin" id="st-2-venue-u"></use></svg><span id="st-2-venue-t"><b id="st-2-venue-n"></b><span id="st-2-venue-a"></span></span>
+</p>
+<p class="st-note" id="st-2-note"></p>
+<div class="btn-row st-btns" id="st-2-btns">
+<a class="btn btn-sm" href="#" id="st-2-map" rel="noopener" target="_blank"><svg aria-hidden="true" id="st-2-map-ic" viewbox="0 0 24 24">
+<use href="#ic-map" id="st-2-map-u"></use></svg><span id="st-2-map-t"></span></a>
+<a class="btn btn-sm btn-ghost" href="#" id="st-2-cal" rel="noopener" target="_blank"><svg aria-hidden="true" id="st-2-cal-ic" viewbox="0 0 24 24">
+<use href="#ic-calplus" id="st-2-cal-u"></use></svg><span id="st-2-cal-t"></span></a>
+</div>
+<p aria-hidden="true" class="st-ticket" id="st-2-ticket">
+<span id="st-2-ticket-a"></span><span id="st-2-ticket-b"></span>
+</p>
+</div>
+</article>
+</div>
+<p class="rv" data-unsupported="" hidden="" id="ac-announce">
+<svg aria-hidden="true" id="ac-announce-ic" viewbox="0 0 24 24">
+<use href="#ic-sound" id="ac-announce-u"></use></svg><span id="ac-announce-t"></span>
+</p>
+</div>
+</section>
+<section class="scn" data-nav="Susunan" data-season="gugur" data-section="rundown" data-title="Papan Cerita Hari-H" id="sec-rundown">
+<div class="wrap" id="sb-wrap">
+<header class="ep-head" id="sb-head">
+<span aria-hidden="true" class="ep-slash" id="sb-slash"></span>
+<p class="ep-no rv rv-pop" id="sb-no">
+<span class="ep-no-badge" id="sb-no-b">08</span><span id="sb-no-t">Adegan</span><span class="ep-no-ja" id="sb-no-ja" lang="ja">絵コンテ</span>
+</p>
+<h2 class="ep-title rv" id="sb-title" style="--d: 0.1s">
+            Papan Cerita Hari-H
+          </h2>
+<p class="ep-sub rv" id="sb-sub" lang="ja" style="--d: 0.2s">
+            当日の絵コンテ
+          </p>
+<p class="ep-lead rv" id="sb-lead" style="--d: 0.3s">
+            Setiap adegan di hari pernikahan sudah digambar di papan cerita.
+            Inilah urutan potongan yang akan kita jalani bersama.
+          </p>
+</header>
+<div class="rv" id="sb-sheet">
+<span aria-hidden="true" class="sb-hole" id="sb-hole-1"></span>
+<span aria-hidden="true" class="sb-hole" id="sb-hole-2"></span>
+<div id="sb-top">
+<p class="sb-meta" id="sb-meta-1">
+<span class="sb-meta-k" id="sb-meta-1-k" lang="ja">作品名</span><span class="sb-meta-v" id="sb-meta-1-v">Angin yang Membawamu</span>
+</p>
+<p class="sb-meta" id="sb-meta-2">
+<span class="sb-meta-k" id="sb-meta-2-k" lang="ja">話数</span><span class="sb-meta-v" id="sb-meta-2-v">Episode Final</span>
+</p>
+<p class="sb-meta" id="sb-meta-3">
+<span class="sb-meta-k" id="sb-meta-3-k" lang="ja">監督</span><span class="sb-meta-v" id="sb-meta-3-v">Waktu</span>
+</p>
+<p aria-hidden="true" id="sb-ok">
+<span id="sb-ok-a" lang="ja">監督</span><span id="sb-ok-b">OK</span>
+</p>
+</div>
+<div aria-hidden="true" id="sb-cols">
+<span id="sb-col-1">No.</span><span id="sb-col-2">Gambar</span><span id="sb-col-3">Adegan &amp; waktu</span><span id="sb-col-4">Waktu</span>
+</div>
+<div id="sb-body" role="list"></div>
+<p aria-hidden="true" id="sb-foot">
+<span id="sb-foot-a" lang="ja">つづく</span> · Halaman
+            <span id="sb-foot-n">1</span>
+</p>
+</div>
+</div>
+</section>
+<section class="scn" data-nav="Lokasi" data-season="gugur" data-section="lokasi" data-title="Lokasi Syuting" id="sec-lokasi">
+<div class="wrap" id="lc-wrap">
+<header class="ep-head" id="lc-head">
+<span aria-hidden="true" class="ep-slash" id="lc-slash"></span>
+<p class="ep-no rv rv-pop" id="lc-no">
+<span class="ep-no-badge" id="lc-no-b">09</span><span id="lc-no-t">Adegan</span><span class="ep-no-ja" id="lc-no-ja" lang="ja">聖地</span>
+</p>
+<h2 class="ep-title rv" id="lc-title" style="--d: 0.1s">
+            Lokasi Syuting
+          </h2>
+<p class="ep-sub rv" id="lc-sub" lang="ja" style="--d: 0.2s">
+            聖地巡礼
+          </p>
+<p class="ep-lead rv" id="lc-lead" style="--d: 0.3s">
+            Penggemar anime suka mengunjungi lokasi nyata dari adegan
+            favoritnya. Di sinilah episode final akan diambil — datanglah dan
+            jadi bagian dari adegannya.
+          </p>
+</header>
+<div id="lc-grid">
+<figure class="rv rv-zoom" id="sj">
+<div id="sj-view">
+<img alt="" decoding="async" id="sj-real"/>
+<div aria-hidden="true" id="sj-anime">
+<img alt="" decoding="async" id="sj-toon"/>
+<span id="sj-glow"></span>
+<span class="kira" id="sj-kira-1" style="left: 16%; top: 18%; --kd: -0.4s"><svg id="sj-kira-1-s" viewbox="0 0 24 24">
+<use href="#sym-kira" id="sj-kira-1-u"></use></svg></span>
+<span class="kira" id="sj-kira-2" style="
+                    left: 62%;
+                    top: 12%;
+                    width: 16px;
+                    height: 16px;
+                    --kd: -1.3s;
+                  "><svg id="sj-kira-2-s" viewbox="0 0 24 24">
+<use href="#sym-kira" id="sj-kira-2-u"></use></svg></span>
+<span class="kira" id="sj-kira-3" style="
+                    left: 34%;
+                    top: 58%;
+                    width: 14px;
+                    height: 14px;
+                    --kd: -2.2s;
+                  "><svg id="sj-kira-3-s" viewbox="0 0 24 24">
+<use href="#sym-kira" id="sj-kira-3-u"></use></svg></span>
+</div>
+<p aria-hidden="true" class="sj-lbl" id="sj-lbl-a">Versi Anime</p>
+<p aria-hidden="true" class="sj-lbl" id="sj-lbl-r">Dunia Nyata</p>
+<div aria-label="Geser perbandingan versi anime dan dunia nyata" aria-valuemax="100" aria-valuemin="0" aria-valuenow="50" id="sj-handle" role="slider" tabindex="0">
+<span aria-hidden="true" id="sj-knob"><svg id="sj-knob-l" viewbox="0 0 24 24">
+<use href="#ic-prev" id="sj-knob-l-u"></use></svg><svg id="sj-knob-r" viewbox="0 0 24 24">
+<use href="#ic-next" id="sj-knob-r-u"></use></svg></span>
+</div>
+</div>
+<figcaption id="sj-cap">
+              Geser untuk membandingkan adegan anime dengan lokasi aslinya.
+            </figcaption>
+</figure>
+<div aria-hidden="true" class="rv rv-zoom" id="sj-art">
+<svg id="sj-art-s" preserveaspectratio="xMidYMid slice" viewbox="0 0 400 300">
+<defs id="sj-art-defs">
+<lineargradient id="sj-art-sky" x1="0" x2="0" y1="0" y2="1">
+<stop id="sj-art-sky-1" offset="0" stop-color="#ffb07a"></stop>
+<stop id="sj-art-sky-2" offset="0.6" stop-color="#ffe0c2"></stop>
+<stop id="sj-art-sky-3" offset="1" stop-color="#fff4e6"></stop>
+</lineargradient>
+</defs>
+<rect fill="url(#sj-art-sky)" height="300" id="sj-art-bg" width="400"></rect>
+<circle cx="300" cy="90" fill="#fff6e0" id="sj-art-sun" opacity=".85" r="40"></circle>
+<path d="M0 220c80-40 150-50 210-40s130 20 190 0v120H0z" fill="#e8a27c" id="sj-art-hill"></path>
+<g fill="#fff" id="sj-art-hall" stroke="#1f2247" stroke-linejoin="round" stroke-width="3">
+<path d="M110 150l90-50 90 50z" fill="#e5467a" id="sj-art-roof"></path>
+<rect height="80" id="sj-art-wall" width="150" x="125" y="150"></rect>
+<path d="M185 230v-40a15 15 0 0130 0v40" fill="#ffd36c" id="sj-art-door"></path>
+<rect fill="#bfe3ff" height="24" id="sj-art-w1" rx="4" width="26" x="140" y="165"></rect>
+<rect fill="#bfe3ff" height="24" id="sj-art-w2" rx="4" width="26" x="234" y="165"></rect>
+</g>
+<path d="M200 300c-10-30 0-50 0-70" fill="none" id="sj-art-path" opacity=".7" stroke="#fff" stroke-linecap="round" stroke-width="14"></path>
+<use height="40" href="#sym-blossom" id="sj-art-b1" width="40" x="60" y="170"></use>
+<use height="34" href="#sym-blossom" id="sj-art-b2" width="34" x="300" y="180"></use>
+<use height="26" href="#sym-maple" id="sj-art-b3" width="26" x="40" y="60"></use>
+<use height="22" href="#sym-maple" id="sj-art-b4" width="22" x="350" y="40"></use>
+</svg>
+<p id="sj-art-cap">Lokasi adegan final · </p>
+</div>
+<div class="cel rv rv-r" id="lc-card">
+<p id="lc-tag">
+<svg aria-hidden="true" id="lc-tag-ic" viewbox="0 0 24 24">
+<use href="#ic-pin" id="lc-tag-u"></use></svg>Lokasi adegan final
+            </p>
+<h3 id="lc-name"></h3>
+<p id="lc-addr"></p>
+<p id="lc-note"></p>
+<div data-unsupported="" hidden="" id="lc-map">
+<iframe id="lc-iframe" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Peta lokasi The Grand Ballroom Hotel"></iframe>
+</div>
+<div class="btn-row" id="lc-btns">
+<a class="btn btn-sm"  id="lc-go" rel="noopener" target="_blank"><svg aria-hidden="true" id="lc-go-ic" viewbox="0 0 24 24">
+<use href="#ic-map" id="lc-go-u"></use></svg><span id="lc-go-t">Buka Peta</span></a>
+<button class="btn btn-sm btn-ghost" id="lc-copy" type="button">
+<svg aria-hidden="true" id="lc-copy-ic" viewbox="0 0 24 24">
+<use href="#ic-copy" id="lc-copy-u"></use></svg><span id="lc-copy-t">Salin Alamat</span>
+</button>
+</div>
+<button aria-label="Cap kenangan lokasi" id="lc-stamp" type="button">
+<span aria-hidden="true" id="lc-stamp-ink">
+<svg id="lc-stamp-svg" viewbox="0 0 120 120">
+<defs id="lc-stamp-defs">
+<path d="M60 60m-42 0a42 42 0 1184 0 42 42 0 11-84 0" id="lc-stamp-arc"></path>
+</defs>
+<circle cx="60" cy="60" fill="none" id="lc-stamp-c1" r="54" stroke="currentColor" stroke-width="4"></circle>
+<circle cx="60" cy="60" fill="none" id="lc-stamp-c2" r="31" stroke="currentColor" stroke-width="2"></circle>
+<text fill="currentColor" font-size="10.5" font-weight="800" id="lc-stamp-arc-t" letter-spacing="1.5">
+<textpath href="#lc-stamp-arc" id="lc-stamp-tp" startoffset="0"></textpath>
+</text>
+<use height="32" href="#sym-blossom" id="lc-stamp-heart" width="32" x="44" y="36"></use>
+<text fill="currentColor" font-size="10" font-weight="900" id="lc-stamp-date" text-anchor="middle" x="60" y="80"></text>
+</svg>
+</span>
+<span id="lc-stamp-t">Ketuk untuk cap kenangan
+                <span id="lc-stamp-ja" lang="ja">記念スタンプ</span></span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<section class="scn" data-nav="Busana" data-season="gugur" data-section="busana" data-title="Lembar Warna Busana" id="sec-busana">
+<div class="wrap" id="bs-wrap">
+<header class="ep-head" id="bs-head">
+<span aria-hidden="true" class="ep-slash" id="bs-slash"></span>
+<p class="ep-no rv rv-pop" id="bs-no">
+<span class="ep-no-badge" id="bs-no-b">10</span><span id="bs-no-t">Adegan</span><span class="ep-no-ja" id="bs-no-ja" lang="ja">色指定</span>
+</p>
+<h2 class="ep-title rv" id="bs-title" style="--d: 0.1s">
+            Lembar Warna Busana
+          </h2>
+<p class="ep-sub rv" id="bs-sub" lang="ja" style="--d: 0.2s">
+            色指定表・ゲスト衣装
+          </p>
+</header>
+<div class="rv" id="bs-sheet">
+<span aria-hidden="true" class="bs-reg" id="bs-reg-1"></span>
+<span aria-hidden="true" class="bs-reg" id="bs-reg-2"></span>
+<span aria-hidden="true" class="bs-reg" id="bs-reg-3"></span>
+<span aria-hidden="true" class="bs-reg" id="bs-reg-4"></span>
+<div id="bs-top">
+<p id="bs-top-a">
+<span id="bs-top-ja" lang="ja">色指定表</span> Lembar warna · Tamu
+              undangan
+            </p>
+<p id="bs-top-b">Ketuk sebuah cat untuk mewarnai busana</p>
+</div>
+<div id="bs-grid">
+<div id="bs-figs">
+<svg aria-label="Contoh busana tamu dengan warna pilihan" id="bs-svg" role="img" viewbox="0 0 250 330">
+<g id="bs-fig-a">
+<path class="bs-fill-main" d="M44 88c8-6 24-6 32 0l12 70 10 150H22l10-150z" id="bs-a-dress"></path>
+<path class="bs-fill-shade" d="M60 90c8 0 13 2 16-2l12 70 10 150H64c4-60 2-130-4-218z" id="bs-a-dress-sh"></path>
+<path class="bs-fill-acc" d="M33 150h54l1 11H32z" id="bs-a-belt"></path>
+<path class="bs-fill-main" d="M44 90l-14 60 8 4 12-44z" id="bs-a-arm-l"></path>
+<path class="bs-fill-shade" d="M76 90l14 60-8 4-12-44z" id="bs-a-arm-r"></path>
+<path class="bs-fill-sec" d="M36 60c0-22 11-36 24-36s24 14 24 36c0 12-6 22-14 28l-10 6-10-6c-8-6-14-16-14-28z" id="bs-a-hijab"></path>
+<path class="bs-fill-sec-sh" d="M60 24c13 0 24 14 24 36 0 12-6 22-14 28l-10 6c6-18 8-50 0-70z" id="bs-a-hijab-sh"></path>
+<ellipse cx="60" cy="58" fill="#ffe6d8" id="bs-a-face" rx="12" ry="14"></ellipse>
+<path class="bs-line" d="M51 57c2-2 4-2 6 0" id="bs-a-eye-l"></path>
+<path class="bs-line" d="M63 57c2-2 4-2 6 0" id="bs-a-eye-r"></path>
+<path class="bs-line" d="M56 65c2.5 2 5.5 2 8 0" id="bs-a-smile"></path>
+<ellipse cx="51" cy="63" fill="#ff9dbb" id="bs-a-blush-l" opacity=".7" rx="3.2" ry="1.8"></ellipse>
+<ellipse cx="69" cy="63" fill="#ff9dbb" id="bs-a-blush-r" opacity=".7" rx="3.2" ry="1.8"></ellipse>
+<path class="bs-ol" d="M44 88c8-6 24-6 32 0l12 70 10 150H22l10-150z" id="bs-a-outline"></path>
+</g>
+<g id="bs-fig-b">
+<path class="bs-fill-dark" d="M160 176h58l-5 132h-21l-4-104-4 104h-21z" id="bs-b-legs"></path>
+<path class="bs-fill-main" d="M162 84h54l12 96h-78z" id="bs-b-shirt"></path>
+<path class="bs-fill-shade" d="M189 84h27l12 96h-39z" id="bs-b-shirt-sh"></path>
+<path class="bs-fill-main" d="M162 86l-16 70 9 3 13-50z" id="bs-b-arm-l"></path>
+<path class="bs-fill-shade" d="M216 86l16 70-9 3-13-50z" id="bs-b-arm-r"></path>
+<path class="bs-fill-acc" d="M178 84l11 16 11-16z" id="bs-b-collar"></path>
+<path d="M168 120l8-8 8 8-8 8zM194 132l8-8 8 8-8 8zM172 152l8-8 8 8-8 8zM200 104l6-6 6 6-6 6z" fill="#fff" id="bs-b-pattern" opacity=".35"></path>
+<circle cx="189" cy="56" fill="#ffe6d8" id="bs-b-head" r="18"></circle>
+<path d="M170 54c0-16 10-24 20-24s19 7 19 21c-6-6-14-8-21-8-6 3-12 7-18 11z" fill="#2d2447" id="bs-b-hair"></path>
+<path class="bs-line" d="M181 58c2-2 4-2 6 0" id="bs-b-eye-l"></path>
+<path class="bs-line" d="M192 58c2-2 4-2 6 0" id="bs-b-eye-r"></path>
+<path class="bs-line" d="M185 66c2.5 2 5.5 2 8 0" id="bs-b-smile"></path>
+<path class="bs-ol" d="M162 84h54l12 96h-78z" id="bs-b-outline"></path>
+</g>
+<g aria-hidden="true" id="bs-callouts">
+<path class="bs-co" d="M98 210l30-20" id="bs-co-1"></path>
+<circle cx="98" cy="210" fill="#1f2247" id="bs-co-1d" r="3"></circle>
+<path class="bs-co" d="M84 50l40-18" id="bs-co-2"></path>
+<circle cx="84" cy="50" fill="#1f2247" id="bs-co-2d" r="3"></circle>
+</g>
+</svg>
+<p aria-hidden="true" class="sfx" id="bs-sfx" lang="ja">ペタッ</p>
+</div>
+<div aria-label="Warna busana" id="bs-swatches" role="group"></div>
+</div>
+<p id="bs-text"></p>
+<div hidden="" id="bs-data"></div>
+</div>
+</div>
+</section>
+<section class="scn scn-dark" data-nav="PV" data-season="dingin" data-section="video" data-title="Video Promosi (PV)" data-unsupported="" hidden="" id="sec-video">
+<div aria-hidden="true" id="pv-bg"></div>
+<div class="wrap" id="pv-wrap">
+<header class="ep-head" id="pv-head">
+<span aria-hidden="true" class="ep-slash" id="pv-slash"></span>
+<p class="ep-no rv rv-pop" id="pv-no">
+<span class="ep-no-badge" id="pv-no-b">11</span><span id="pv-no-t"></span><span class="ep-no-ja" id="pv-no-ja" lang="ja"></span>
+</p>
+<h2 class="ep-title rv" id="pv-title" style="--d: 0.1s"></h2>
+<p class="ep-sub rv" id="pv-sub" lang="ja" style="--d: 0.2s">
+            プロモーション映像 第1弾
+          </p>
+</header>
+<div class="rv rv-zoom" id="pv-frame">
+<p aria-hidden="true" id="pv-tag">
+<span id="pv-tag-a"></span><span id="pv-tag-b" lang="ja">第1弾</span>
+</p>
+<div id="pv-screen">
+<video controls="" id="pv-video" playsinline="" preload="metadata" src=""></video>
+<button aria-label="Putar video" id="pv-play" type="button">
+<span aria-hidden="true" id="pv-play-ring"><svg id="pv-play-ic" viewbox="0 0 24 24">
+<use href="#ic-play" id="pv-play-u"></use></svg></span>
+<span id="pv-play-t"></span>
+</button>
+</div>
+<p id="pv-cap"></p>
+</div>
+<div class="rv" id="pv-live">
+<p id="pv-live-h">
+<span aria-hidden="true" id="pv-live-dot"></span></p>
+<div id="pv-live-frame">
+<iframe allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen="" id="pv-live-if" loading="lazy" title="Siaran langsung pernikahan"></iframe>
+</div>
+<a class="btn btn-sm" id="pv-live-a" rel="noopener" target="_blank"><svg aria-hidden="true" id="pv-live-a-ic" viewbox="0 0 24 24">
+<use href="#ic-video" id="pv-live-a-u"></use></svg><span id="pv-live-a-t"></span></a>
+</div>
+</div>
+</section>
+<section class="scn" data-nav="Galeri" data-season="dingin" data-section="galeri" data-title="Tangkapan Layar" id="sec-galeri">
+<div class="wrap" id="gl-wrap">
+<header class="ep-head" id="gl-head">
+<span aria-hidden="true" class="ep-slash" id="gl-slash"></span>
+<p class="ep-no rv rv-pop" id="gl-no">
+<span class="ep-no-badge" id="gl-no-b">12</span><span id="gl-no-t">Adegan</span><span class="ep-no-ja" id="gl-no-ja" lang="ja">セル画</span>
+</p>
+<h2 class="ep-title rv" id="gl-title" style="--d: 0.1s">
+            Tangkapan Layar
+          </h2>
+<p class="ep-sub rv" id="gl-sub" lang="ja" style="--d: 0.2s">
+            名場面セル画コレクション
+          </p>
+<p class="ep-lead rv" id="gl-lead" style="--d: 0.3s">
+            Setiap foto adalah sel animasi dari adegan favorit kami. Coba ubah
+            gaya gambarnya, lalu ketuk sel untuk melihat lebih dekat.
+          </p>
+</header>
+<div aria-label="Gaya gambar" class="rv" id="gl-filters" role="radiogroup">
+<button aria-checked="true" class="gl-f is-on" data-f="asli" id="gl-f-asli" role="radio" type="button">
+            Asli
+          </button>
+<button aria-checked="false" class="gl-f" data-f="anime" id="gl-f-anime" role="radio" type="button">
+            Anime <span id="gl-f-anime-ja" lang="ja">アニメ</span>
+</button>
+<button aria-checked="false" class="gl-f" data-f="manga" id="gl-f-manga" role="radio" type="button">
+            Manga <span id="gl-f-manga-ja" lang="ja">漫画</span>
+</button>
+</div>
+<div class="rv rv-zoom" id="gl-table">
+<div id="gl-grid"></div>
+</div>
+</div>
+</section>
+<section class="scn" data-nav="Kehadiran" data-season="dingin" data-section="rsvp" data-title="Pilih Rutemu" id="sec-rsvp">
+<div class="wrap" id="vn-wrap">
+<header class="ep-head" id="vn-head">
+<span aria-hidden="true" class="ep-slash" id="vn-slash"></span>
+<p class="ep-no rv rv-pop" id="vn-no">
+<span class="ep-no-badge" id="vn-no-b">13</span><span id="vn-no-t">Adegan</span><span class="ep-no-ja" id="vn-no-ja" lang="ja">選択肢</span>
+</p>
+<h2 class="ep-title rv" id="vn-title" style="--d: 0.1s">
+            Pilih Rutemu
+          </h2>
+<p class="ep-sub rv" id="vn-sub" lang="ja" style="--d: 0.2s">
+            ルート選択 · 出欠確認
+          </p>
+</header>
+<div class="rv rv-zoom" id="vn-box">
+<div aria-hidden="true" id="vn-scene">
+<div id="vn-scene-bg"></div>
+<div id="vn-sprite">
+<img alt="" decoding="async" id="vn-sprite-img"/>
+<span id="vn-sprite-ini"></span>
+</div>
+<span class="kira" id="vn-kira-1" style="left: 12%; top: 18%; --kd: -0.3s"><svg id="vn-kira-1-s" viewbox="0 0 24 24">
+<use href="#sym-kira" id="vn-kira-1-u"></use></svg></span>
+<span class="kira" id="vn-kira-2" style="
+                right: 14%;
+                top: 30%;
+                width: 16px;
+                height: 16px;
+                --kd: -1.5s;
+              "><svg id="vn-kira-2-s" viewbox="0 0 24 24">
+<use href="#sym-kira" id="vn-kira-2-u"></use></svg></span>
+<p id="vn-aff">
+<span id="vn-aff-l">Kedekatan</span><span id="vn-aff-hearts"><svg class="vn-h" id="vn-h1" viewbox="0 0 24 24">
+<use href="#sym-heart" id="vn-h1-u"></use></svg><svg class="vn-h" id="vn-h2" viewbox="0 0 24 24">
+<use href="#sym-heart" id="vn-h2-u"></use></svg><svg class="vn-h" id="vn-h3" viewbox="0 0 24 24">
+<use href="#sym-heart" id="vn-h3-u"></use></svg><svg class="vn-h" id="vn-h4" viewbox="0 0 24 24">
+<use href="#sym-heart" id="vn-h4-u"></use></svg><svg class="vn-h" id="vn-h5" viewbox="0 0 24 24">
+<use href="#sym-heart" id="vn-h5-u"></use></svg></span>
+</p>
+<p class="sfx" id="vn-pop" lang="ja">+♡</p>
+</div>
+<div aria-live="polite" id="vn-say">
+<p id="vn-say-name"></p>
+<p id="vn-say-t">Kamu… akan datang ke hari spesial kami, kan?</p>
+<p hidden="" id="vn-say-src"></p>
+<span aria-hidden="true" id="vn-say-more">▼</span>
+</div>
+<form data-wedivo="rsvp" id="rsvp-form">
+<p id="vn-guest-hi">
+<span id="vn-guest-named">Halo, <b id="vn-guest-name"></b>! Rute ini khusus
+                untukmu.</span><span id="vn-guest-generic">Masukkan namamu seperti di layar awal gim ♡</span>
+</p>
+<label class="vn-lbl" for="rsvp-name" id="rsvp-name-l">Nama tokoh (namamu)</label>
+<input autocomplete="name" id="rsvp-name" name="name" placeholder="Tulis namamu di sini" required=""/>
+<p class="vn-lbl" id="rsvp-status-l">Pilih jawabanmu</p>
+<div aria-labelledby="rsvp-status-l" id="vn-choices" role="group">
+<button class="vn-ch" data-wedivo-status="attending" id="vn-ch-yes" type="button">
+<span aria-hidden="true" class="vn-ch-a" id="vn-ch-yes-a">▶</span><span id="vn-ch-yes-t">Pasti datang!</span>
+</button>
+<button class="vn-ch" data-wedivo-status="not_attending" id="vn-ch-no" type="button">
+<span aria-hidden="true" class="vn-ch-a" id="vn-ch-no-a">▶</span><span id="vn-ch-no-t">Maaf, berhalangan</span>
+</button>
+<button class="vn-ch" data-wedivo-status="maybe" id="vn-ch-maybe" type="button">
+<span aria-hidden="true" class="vn-ch-a" id="vn-ch-maybe-a">▶</span><span id="vn-ch-maybe-t">Masih ragu…</span>
+</button>
+</div>
+<label class="vn-lbl" data-unsupported="" for="rsvp-pax" hidden="" id="rsvp-pax-l"></label>
+<div data-unsupported="" hidden="" id="vn-pax">
+<button aria-label="Kurangi jumlah tamu" class="vn-step" id="vn-pax-minus" type="button">
+                −
+              </button>
+<input id="rsvp-pax" inputmode="numeric" max="20" min="1" name="pax" type="number" value="1"/>
+<button aria-label="Tambah jumlah tamu" class="vn-step" id="vn-pax-plus" type="button">
+                +
+              </button>
+</div>
+<label class="vn-lbl" for="rsvp-msg" id="rsvp-msg-l">Pesan untuk kedua tokoh utama</label>
+<textarea id="rsvp-msg" name="message" placeholder="Pesan untuk mempelai (opsional)" rows="3"></textarea>
+<button id="rsvp-submit" type="submit">
+<span id="rsvp-submit-t">Kirim Jawaban</span><svg aria-hidden="true" id="rsvp-submit-ic" viewbox="0 0 24 24">
+<use href="#sym-heart" id="rsvp-submit-u"></use>
+</svg>
+</button>
+<p id="vn-err" role="alert">
+              Eh, pilih salah satu jawaban dulu, ya! Lalu coba kirim lagi.
+            </p>
+<div aria-live="polite" id="vn-clear">
+<p id="vn-clear-a" lang="ja">ルート解放!</p>
+<p id="vn-clear-b">Rute Tamu Kehormatan Terbuka</p>
+<p id="vn-clear-c">Terima kasih, jawabanmu sudah kami terima ♡</p>
+<div data-unsupported="" hidden="" id="vn-cg">
+<span id="vn-cg-tag"></span><span id="vn-cg-name"></span><span id="vn-cg-st"></span>
+</div>
+</div>
+</form>
+<p id="vn-deadline"></p>
+<button data-unsupported="" data-wedivo="checkin-cta" hidden="" id="rsvp-checkin" type="button">
+<svg aria-hidden="true" id="rsvp-checkin-ic" viewbox="0 0 24 24">
+<use href="#ic-pin" id="rsvp-checkin-u"></use></svg><span id="rsvp-checkin-t"></span>
+</button>
+</div>
+</div>
+</section>
+<section class="scn" data-nav="Ucapan" data-season="dingin" data-section="ucapan" data-title="Komentar Penonton" id="sec-ucapan">
+<div class="wrap" id="dm-wrap">
+<header class="ep-head" id="dm-head">
+<span aria-hidden="true" class="ep-slash" id="dm-slash"></span>
+<p class="ep-no rv rv-pop" id="dm-no">
+<span class="ep-no-badge" id="dm-no-b">14</span><span id="dm-no-t">Adegan</span><span class="ep-no-ja" id="dm-no-ja" lang="ja">弾幕</span>
+</p>
+<h2 class="ep-title rv" id="dm-title" style="--d: 0.1s">
+            Komentar Penonton
+          </h2>
+<p class="ep-sub rv" id="dm-sub" lang="ja" style="--d: 0.2s">
+            視聴者コメント
+          </p>
+<p class="ep-lead rv" id="dm-lead" style="--d: 0.3s">
+            Tinggalkan komentarmu — setiap ucapan akan melintas di layar seperti komentar penonton.
+          </p>
+</header>
+<div id="dm-grid">
+<div class="rv rv-zoom" id="dm-player">
+<div aria-hidden="true" id="dm-screen">
+<div id="dm-bg"></div>
+<div id="dm-lanes"></div>
+<p id="dm-live"><span id="dm-live-dot"></span>LIVE</p>
+<p data-unsupported="" hidden="" id="dm-viewers">
+<svg id="dm-viewers-ic" viewbox="0 0 24 24">
+<use href="#ic-user" id="dm-viewers-u"></use></svg><span id="dm-viewers-n">1.204</span></p>
+<p class="mincho" id="dm-caption">
+<span id="dm-caption-t">Selamat menempuh hidup baru</span>
+</p>
+</div>
+<div id="dm-bar">
+<button aria-pressed="true" class="dm-btn" id="dm-toggle" type="button">
+<span id="dm-toggle-t">Komentar melintas: ON</span>
+</button>
+<button class="dm-btn" data-unsupported="" hidden="" id="dm-clap" type="button">
+<span id="dm-clap-t" lang="ja">👏 8888</span>
+</button>
+<button aria-label="Kirim hati" class="dm-btn" data-unsupported="" hidden="" id="dm-heart" type="button">
+<svg aria-hidden="true" id="dm-heart-ic" viewbox="0 0 24 24">
+<use href="#sym-heart" id="dm-heart-u"></use></svg><span id="dm-heart-n">0</span>
+</button>
+</div>
+</div>
+<div id="dm-side">
+<form class="cel rv" data-wedivo="comments-form" id="wish-form">
+<p id="wish-form-h">
+<svg aria-hidden="true" id="wish-form-h-ic" viewbox="0 0 24 24">
+<use href="#ic-comment" id="wish-form-h-u"></use></svg>Tulis komentar
+              </p>
+<input autocomplete="name" id="wish-name" name="name" placeholder="Namamu" required=""/>
+<textarea id="wish-msg" name="message" placeholder="Tulis ucapan &amp; doa untuk mereka…" required="" rows="3"></textarea>
+<button id="wish-send" type="submit">
+<span id="wish-send-t">Kirim Komentar</span><svg aria-hidden="true" id="wish-send-ic" viewbox="0 0 24 24">
+<use href="#ic-next" id="wish-send-u"></use>
+</svg>
+</button>
+</form>
+<p class="rv" id="wish-list-h">
+<span id="wish-list-h-a">Semua komentar</span>
+<span id="wish-count"></span>
+</p>
+<div data-wedivo="comments-list" id="wish-list"></div>
+<template data-wedivo="comment-template" id="wish-tpl">
+<div class="comment-card wcard">
+<p class="comment-name wcard-name" data-field="name"></p>
+<p class="comment-message wcard-msg" data-field="message"></p>
+<p class="comment-date wcard-date" data-field="date"></p>
+</div>
+</template>
+<button class="btn btn-sm btn-ghost" data-unsupported="" data-wedivo="comments-more" hidden="" id="wish-more" type="button"></button>
+</div>
+</div>
+</div>
+</section>
+<section class="scn" data-nav="Kado" data-season="semi" data-section="kado" data-title="Amplop Tanda Kasih" data-unsupported="" hidden="" id="sec-kado">
+<div class="wrap" id="gf-wrap">
+<header class="ep-head" id="gf-head">
+<span aria-hidden="true" class="ep-slash" id="gf-slash"></span>
+<p class="ep-no rv rv-pop" id="gf-no">
+<span class="ep-no-badge" id="gf-no-b">15</span><span id="gf-no-t"></span><span class="ep-no-ja" id="gf-no-ja" lang="ja">ご祝儀</span>
+</p>
+<h2 class="ep-title rv" id="gf-title" style="--d: 0.1s"></h2>
+<p class="ep-sub rv" id="gf-sub" lang="ja" style="--d: 0.2s">
+            ご祝儀袋・あわじ結び
+          </p>
+<p class="ep-lead rv" id="gf-lead" style="--d: 0.3s"></p>
+</header>
+<div id="gf-grid">
+<div class="rv rv-l" id="gf-env-wrap">
+<svg aria-label="Amplop hadiah pernikahan bersimpul mizuhiki" id="gf-env" role="img" viewbox="0 0 220 320">
+<defs id="gf-defs">
+<pattern height="18" id="gf-washi" patternunits="userSpaceOnUse" width="18">
+<rect fill="#fffdf8" height="18" id="gf-washi-bg" width="18"></rect>
+<path d="M2 4c4 1 7 0 10 2M8 13c3-1 6 0 9 1M1 15c2 0 3 1 5 1" fill="none" id="gf-washi-f1" stroke="#efe6d8" stroke-width=".8"></path>
+</pattern>
+<lineargradient id="gf-gold" x1="0" x2="1" y1="0" y2="1">
+<stop id="gf-gold-1" offset="0" stop-color="#f7dc8a"></stop>
+<stop id="gf-gold-2" offset=".5" stop-color="#d7a93c"></stop>
+<stop id="gf-gold-3" offset="1" stop-color="#f5d37a"></stop>
+</lineargradient>
+</defs>
+<rect fill="#f1e7d8" height="292" id="gf-back" rx="6" width="172" x="24" y="16"></rect>
+<rect fill="url(#gf-washi)" height="292" id="gf-paper" rx="6" stroke="#1f2247" stroke-width="2.5" width="172" x="18" y="10"></rect>
+<path d="M18 16a6 6 0 016-6h160a6 6 0 016 6v44l-86 22-86-22z" fill="#fff" id="gf-fold" opacity=".96" stroke="#1f2247" stroke-width="2"></path>
+<path d="M18 60l86 22 86-22v6l-86 22-86-22z" fill="#e9dfcf" id="gf-fold-sh"></path>
+<g id="gf-noshi" transform="translate(150 20) rotate(8)">
+<path d="M0 0l22-6 10 16-8 30-20-4z" fill="#e0263f" id="gf-noshi-o" stroke="#1f2247" stroke-width="1.6"></path>
+<path d="M5 4l13-3 6 10-5 20-12-2z" fill="#fff" id="gf-noshi-i"></path>
+<path d="M11 6l3 22" id="gf-noshi-y" stroke="#f5c518" stroke-linecap="round" stroke-width="3"></path>
+</g>
+<text fill="#1f2247" font-family="Shippori Mincho B1, serif" font-size="46" font-weight="800" id="gf-kotobuki" lang="ja" text-anchor="middle" x="104" y="138">
+                寿
+              </text>
+<g fill="none" id="gf-knot" stroke-linecap="round" stroke-linejoin="round">
+<path class="gf-cord" d="M18 190c34 0 48-2 60-10 14-10 10-30-6-28-16 2-12 26 32 38 44-12 48-36 32-38-16-2-20 18-6 28 12 8 26 10 60 10" id="gf-c1" stroke="#c8102e" stroke-width="3.4"></path>
+<path class="gf-cord" d="M18 195c34 0 48-2 60-10 14-10 10-30-6-28-16 2-12 26 32 38 44-12 48-36 32-38-16-2-20 18-6 28 12 8 26 10 60 10" id="gf-c2" stroke="url(#gf-gold)" stroke-width="3.4"></path>
+<path class="gf-cord" d="M18 200c34 0 48-2 60-10 14-10 10-30-6-28-16 2-12 26 32 38 44-12 48-36 32-38-16-2-20 18-6 28 12 8 26 10 60 10" id="gf-c3" stroke="#c8102e" stroke-width="3.4"></path>
+<path class="gf-cord" d="M104 190c-10 14-12 34 0 42 12-8 10-28 0-42z" id="gf-c4" stroke="url(#gf-gold)" stroke-width="3.2"></path>
+<path class="gf-cord" d="M104 196c-6 10-8 24 0 30 8-6 6-20 0-30z" id="gf-c5" stroke="#c8102e" stroke-width="3"></path>
+</g>
+<text fill="#1f2247" font-family="Shippori Mincho B1, serif" font-size="13" font-weight="800" id="gf-to" text-anchor="middle" x="104" y="262"></text>
+<text fill="#8a7f70" font-family="M PLUS Rounded 1c, sans-serif" font-size="9.5" font-weight="700" id="gf-from" text-anchor="middle" x="104" y="284"></text>
+</svg>
+<p aria-hidden="true" class="sfx" id="gf-sfx" lang="ja">キュッ</p>
+<p aria-hidden="true" id="gf-stamp">
+<span id="gf-stamp-ja" lang="ja">受領</span><span id="gf-stamp-t"></span>
+</p>
+<span class="kira" id="gf-kira-1" style="left: 6%; top: 20%; --kd: -0.5s"><svg id="gf-kira-1-s" viewbox="0 0 24 24">
+<use href="#sym-kira" id="gf-kira-1-u"></use></svg></span>
+<span class="kira" id="gf-kira-2" style="
+                right: 8%;
+                top: 60%;
+                width: 16px;
+                height: 16px;
+                --kd: -1.6s;
+              "><svg id="gf-kira-2-s" viewbox="0 0 24 24">
+<use href="#sym-kira" id="gf-kira-2-u"></use></svg></span>
+</div>
+<form class="cel rv rv-r" data-wedivo="gift-form" id="gift-form">
+<p id="gf-form-h">
+<svg aria-hidden="true" id="gf-form-h-ic" viewbox="0 0 24 24">
+<use href="#ic-gift" id="gf-form-h-u"></use></svg></p>
+<label class="gf-lbl" for="gift-name" id="gift-name-l"></label>
+<input autocomplete="name" id="gift-name" name="senderName" placeholder="Namamu" required=""/>
+<label class="gf-lbl" for="gift-amount" id="gift-amount-l"></label>
+<input id="gift-amount" inputmode="numeric" min="1" name="amount" placeholder="Contoh: 500000" required="" type="number"/>
+<p aria-live="polite" id="gf-amount-view"></p>
+<label class="gf-lbl" for="gift-msg" id="gift-msg-l"></label>
+<textarea id="gift-msg" name="message" placeholder="Pesan untuk mempelai (opsional)" rows="3"></textarea>
+<button id="gift-send" type="submit">
+<span id="gift-send-t"></span><svg aria-hidden="true" id="gift-send-ic" viewbox="0 0 24 24">
+<use href="#sym-heart" id="gift-send-u"></use>
+</svg>
+</button>
+<p id="gf-note"></p>
+<p id="gf-err" role="alert"></p>
+<div aria-live="polite" id="gf-thanks">
+<p id="gf-thanks-a" lang="ja">ありがとう!</p>
+<p id="gf-thanks-b"></p>
+<p id="gf-thanks-c"><i id="gf-thanks-i"></i></p>
+</div>
+</form>
+</div>
+</div>
+</section>
+<footer class="scn scn-dark" data-nav="Penutup" data-season="semi" data-section="penutup" data-title="Penutup (ED)" id="sec-penutup">
+<div aria-hidden="true" id="ed-bg"></div>
+<div aria-hidden="true" class="petal-field" data-count="18" id="ed-petals"></div>
+<canvas aria-hidden="true" id="ed-confetti"></canvas>
+<div class="wrap" id="ed-wrap">
+<header class="ep-head" id="ed-head">
+<span aria-hidden="true" class="ep-slash" id="ed-slash"></span>
+<p class="ep-no rv rv-pop" id="ed-no">
+<span class="ep-no-badge" id="ed-no-b">ED</span><span id="ed-no-t">Penutup</span><span class="ep-no-ja" id="ed-no-ja" lang="ja">エンディング</span>
+</p>
+<h2 class="ep-title rv" id="ed-title" style="--d: 0.1s">
+            Terima Kasih Sudah Menonton
+          </h2>
+<p class="ep-sub rv" id="ed-sub" lang="ja" style="--d: 0.2s">
+            ご視聴ありがとうございました
+          </p>
+</header>
+<div id="ed-grid">
+<figure class="rv rv-blur" id="ed-still">
+<div id="ed-frame">
+<img alt="" decoding="async" id="ed-photo"/>
+<svg aria-hidden="true" id="ed-fb" preserveaspectratio="xMidYMid slice" viewbox="0 0 300 380">
+<rect fill="#1c1f55" height="380" id="ed-fb-bg" width="300"></rect>
+<circle cx="210" cy="90" fill="#fff4dc" id="ed-fb-moon" r="36"></circle>
+<path d="M0 300c70-50 160-60 300-20v100H0z" fill="#2b2566" id="ed-fb-hill"></path>
+<g fill="#0f1236" id="ed-fb-pair">
+<circle cx="128" cy="236" id="ed-fb-h1" r="13"></circle>
+<path d="M118 250h20l10 60h-40z" id="ed-fb-b1"></path>
+<circle cx="170" cy="230" id="ed-fb-h2" r="14"></circle>
+<path d="M158 246h24l6 64h-36z" id="ed-fb-b2"></path>
+</g>
+<path d="M140 272c10 12 18 12 26-2" fill="none" id="ed-fb-str" stroke="#e0263f" stroke-linecap="round" stroke-width="2.4"></path>
+<use height="40" href="#sym-blossom" id="ed-fb-b" width="40" x="30" y="40"></use>
+</svg>
+<span aria-hidden="true" id="ed-frame-glow"></span>
+</div>
+<figcaption data-unsupported="" hidden="" id="ed-song">
+<span id="ed-song-ja" lang="ja">♪ エンディングテーマ</span><span id="ed-song-t"></span>
+</figcaption>
+</figure>
+<div class="rv rv-r" id="ed-roll-box">
+<p id="ed-roll-h">
+<span id="ed-roll-h-ja" lang="ja">スタッフ</span> Staf &amp;
+              Pemeran
+            </p>
+<div id="ed-roll-view">
+<div id="ed-roll">
+<dl id="ed-cr">
+<div class="cr" data-unsupported="" hidden="" id="cr-1">
+<dt id="cr-1-t"></dt>
+<dd id="cr-1-d"></dd>
+</div>
+<div class="cr" data-unsupported="" hidden="" id="cr-2">
+<dt id="cr-2-t"></dt>
+<dd id="cr-2-d"></dd>
+</div>
+<div class="cr" id="cr-3">
+<dt id="cr-3-t">Pemeran utama</dt>
+<dd id="cr-3-d">
+<span class="cr-l" id="cr-3-a"></span><span class="cr-l" id="cr-3-b"></span>
+</dd>
+</div>
+<div class="cr" id="cr-4">
+<dt id="cr-4-t">Diproduksi oleh</dt>
+<dd id="cr-4-d">
+<span class="cr-l" id="cr-4-a"></span><span class="cr-l" id="cr-4-b"></span>
+</dd>
+</div>
+<div class="cr" data-unsupported="" hidden="" id="cr-5">
+<dt id="cr-5-t"></dt>
+<dd id="cr-5-d">
+<span id="cr-5-src"></span>
+</dd>
+</div>
+<div class="cr" data-unsupported="" hidden="" id="cr-6">
+<dt id="cr-6-t"></dt>
+<dd id="cr-6-d"></dd>
+</div>
+<div class="cr" data-unsupported="" hidden="" id="cr-7">
+<dt id="cr-7-t"></dt>
+<dd id="cr-7-d"></dd>
+</div>
+<div class="cr" data-unsupported="" hidden="" id="cr-8">
+<dt id="cr-8-t"></dt>
+<dd id="cr-8-d"></dd>
+</div>
+<div class="cr" id="cr-9">
+<dt id="cr-9-t">Penonton kehormatan</dt>
+<dd id="cr-9-d">
+<span id="cr-guest-named"></span><span id="cr-guest-generic">Kamu yang menonton sampai akhir</span>
+</dd>
+</div>
+</dl>
+<p id="cr-end">
+<span id="cr-end-a">Angin yang Membawamu</span><span id="cr-end-b">Episode Final · Tamat</span>
+</p>
+</div>
+</div>
+<button class="btn btn-sm btn-ghost" id="ed-roll-btn" type="button">
+<svg aria-hidden="true" class="ic-pause" id="ed-roll-pause" viewbox="0 0 24 24">
+<use href="#ic-pause" id="ed-roll-pause-u"></use></svg><svg aria-hidden="true" class="ic-play" id="ed-roll-play" viewbox="0 0 24 24">
+<use href="#ic-play" id="ed-roll-play-u"></use></svg><span id="ed-roll-btn-t">Jeda kredit</span>
+</button>
+</div>
+</div>
+<article class="cel rv" id="ed-msg">
+<p id="ed-msg-t"></p>
+<p id="ed-salam"></p>
+<p id="ed-sign">
+<span id="ed-sign-a">Kami yang berbahagia,</span><b id="ed-sign-b"></b>
+</p>
+</article>
+<div class="rv rv-pop" data-unsupported="" hidden="" id="s2">
+<span aria-hidden="true" class="speedlines" id="s2-lines"></span>
+<p id="s2-flash" lang="ja">続編制作決定!</p>
+<p id="s2-k"></p>
+<h3 id="s2-title">
+<span id="s2-title-a"></span><span id="s2-title-b"></span>
+</h3>
+<p id="s2-tag"></p>
+<p id="s2-date">
+<span id="s2-date-l"></span>
+<time datetime="" id="s2-date-t"></time>
+</p>
+<button class="btn" id="s2-btn" type="button">
+<span id="s2-btn-t"></span>
+</button>
+</div>
+<p class="rv" data-unsupported="" hidden="" id="omake">
+<span id="omake-k" lang="ja">おまけ</span><span id="omake-l"></span><span id="omake-t"></span>
+</p>
+<div class="rv" id="ed-tags">
+<button class="btn btn-sm btn-ghost" data-unsupported="" hidden="" id="ed-hash" type="button">
+<svg aria-hidden="true" id="ed-hash-ic" viewbox="0 0 24 24">
+<use href="#ic-copy" id="ed-hash-u"></use></svg><span id="ed-hash-t"></span>
+</button>
+<button class="btn btn-sm" id="ed-replay" type="button">
+<svg aria-hidden="true" id="ed-replay-ic" viewbox="0 0 24 24">
+<use href="#ic-replay" id="ed-replay-u"></use></svg><span id="ed-replay-t">Tonton ulang dari OP</span>
+</button>
+</div>
+<p aria-hidden="true" class="rv" id="tbc">
+<span id="tbc-ja" lang="ja">つづく</span><span id="tbc-t">Bersambung… selamanya ♡</span>
+</p>
+</div>
+</footer>
+<nav aria-label="Navigasi adegan" data-wedivo="nav" id="nav-benang">
+<div id="nav-rail">
+<button class="nav-it" data-nav-target="hero" id="nav-hero" type="button">
+<span class="nav-knot" id="nav-hero-k"><svg aria-hidden="true" id="nav-hero-s" viewbox="0 0 24 24">
+<use href="#ic-play" id="nav-hero-u"></use></svg></span><span class="nav-lbl" id="nav-hero-l">Pembuka</span>
+</button>
+<button class="nav-it" data-nav-target="prolog" id="nav-prolog" type="button">
+<span class="nav-knot" id="nav-prolog-k"><svg aria-hidden="true" id="nav-prolog-s" viewbox="0 0 24 24">
+<use href="#ic-thread" id="nav-prolog-u"></use></svg></span><span class="nav-lbl" id="nav-prolog-l">Prolog</span>
+</button>
+<button class="nav-it" data-nav-target="mempelai" id="nav-mempelai" type="button">
+<span class="nav-knot" id="nav-mempelai-k"><svg aria-hidden="true" id="nav-mempelai-s" viewbox="0 0 24 24">
+<use href="#ic-user" id="nav-mempelai-u"></use></svg></span><span class="nav-lbl" id="nav-mempelai-l">Karakter</span>
+</button>
+<button class="nav-it" data-nav-target="hubungan" hidden="" id="nav-hubungan" type="button">
+<span class="nav-knot" id="nav-hubungan-k"><svg aria-hidden="true" id="nav-hubungan-s" viewbox="0 0 24 24">
+<use href="#ic-web" id="nav-hubungan-u"></use></svg></span><span class="nav-lbl" id="nav-hubungan-l">Hubungan</span>
+</button>
+<button class="nav-it" data-nav-target="kisah" id="nav-kisah" type="button">
+<span class="nav-knot" id="nav-kisah-k"><svg aria-hidden="true" id="nav-kisah-s" viewbox="0 0 24 24">
+<use href="#ic-film" id="nav-kisah-u"></use></svg></span><span class="nav-lbl" id="nav-kisah-l">Episode</span>
+</button>
+<button class="nav-it" data-nav-target="pengakuan" hidden="" id="nav-pengakuan" type="button">
+<span class="nav-knot" id="nav-pengakuan-k"><svg aria-hidden="true" id="nav-pengakuan-s" viewbox="0 0 24 24">
+<use href="#ic-heart" id="nav-pengakuan-u"></use></svg></span><span class="nav-lbl" id="nav-pengakuan-l">Pengakuan</span>
+</button>
+<button class="nav-it" data-nav-target="hitung" id="nav-hitung" type="button">
+<span class="nav-knot" id="nav-hitung-k"><svg aria-hidden="true" id="nav-hitung-s" viewbox="0 0 24 24">
+<use href="#ic-cal" id="nav-hitung-u"></use></svg></span><span class="nav-lbl" id="nav-hitung-l">Hitung</span>
+</button>
+<button class="nav-it" data-nav-target="acara" id="nav-acara" type="button">
+<span class="nav-knot" id="nav-acara-k"><svg aria-hidden="true" id="nav-acara-s" viewbox="0 0 24 24">
+<use href="#ic-train" id="nav-acara-u"></use></svg></span><span class="nav-lbl" id="nav-acara-l">Acara</span>
+</button>
+<button class="nav-it" data-nav-target="rundown" id="nav-rundown" type="button">
+<span class="nav-knot" id="nav-rundown-k"><svg aria-hidden="true" id="nav-rundown-s" viewbox="0 0 24 24">
+<use href="#ic-board" id="nav-rundown-u"></use></svg></span><span class="nav-lbl" id="nav-rundown-l">Susunan</span>
+</button>
+<button class="nav-it" data-nav-target="lokasi" id="nav-lokasi" type="button">
+<span class="nav-knot" id="nav-lokasi-k"><svg aria-hidden="true" id="nav-lokasi-s" viewbox="0 0 24 24">
+<use href="#ic-pin" id="nav-lokasi-u"></use></svg></span><span class="nav-lbl" id="nav-lokasi-l">Lokasi</span>
+</button>
+<button class="nav-it" data-nav-target="busana" id="nav-busana" type="button">
+<span class="nav-knot" id="nav-busana-k"><svg aria-hidden="true" id="nav-busana-s" viewbox="0 0 24 24">
+<use href="#ic-palette" id="nav-busana-u"></use></svg></span><span class="nav-lbl" id="nav-busana-l">Busana</span>
+</button>
+<button class="nav-it" data-nav-target="video" hidden="" id="nav-video" type="button">
+<span class="nav-knot" id="nav-video-k"><svg aria-hidden="true" id="nav-video-s" viewbox="0 0 24 24">
+<use href="#ic-video" id="nav-video-u"></use></svg></span><span class="nav-lbl" id="nav-video-l">Video</span>
+</button>
+<button class="nav-it" data-nav-target="galeri" id="nav-galeri" type="button">
+<span class="nav-knot" id="nav-galeri-k"><svg aria-hidden="true" id="nav-galeri-s" viewbox="0 0 24 24">
+<use href="#ic-image" id="nav-galeri-u"></use></svg></span><span class="nav-lbl" id="nav-galeri-l">Galeri</span>
+</button>
+<button class="nav-it" data-nav-target="rsvp" id="nav-rsvp" type="button">
+<span class="nav-knot" id="nav-rsvp-k"><svg aria-hidden="true" id="nav-rsvp-s" viewbox="0 0 24 24">
+<use href="#ic-chat" id="nav-rsvp-u"></use></svg></span><span class="nav-lbl" id="nav-rsvp-l">Kehadiran</span>
+</button>
+<button class="nav-it" data-nav-target="ucapan" id="nav-ucapan" type="button">
+<span class="nav-knot" id="nav-ucapan-k"><svg aria-hidden="true" id="nav-ucapan-s" viewbox="0 0 24 24">
+<use href="#ic-comment" id="nav-ucapan-u"></use></svg></span><span class="nav-lbl" id="nav-ucapan-l">Ucapan</span>
+</button>
+<button class="nav-it" data-nav-target="kado" hidden="" id="nav-kado" type="button">
+<span class="nav-knot" id="nav-kado-k"><svg aria-hidden="true" id="nav-kado-s" viewbox="0 0 24 24">
+<use href="#ic-gift" id="nav-kado-u"></use></svg></span><span class="nav-lbl" id="nav-kado-l">Kado</span>
+</button>
+<button class="nav-it" data-nav-target="penutup" id="nav-penutup" type="button">
+<span class="nav-knot" id="nav-penutup-k"><svg aria-hidden="true" id="nav-penutup-s" viewbox="0 0 24 24">
+<use href="#ic-star" id="nav-penutup-u"></use></svg></span><span class="nav-lbl" id="nav-penutup-l">Penutup</span>
+</button>
+</div>
+</nav>
+<div aria-hidden="true" id="eyecatch">
+<div class="ec-panel" id="ec-a"></div>
+<div class="ec-panel" id="ec-b"></div>
+<div id="ec-card">
+<p class="sfx" id="ec-sfx" lang="ja">シュッ</p>
+<p id="ec-logo">Angin yang Membawamu</p>
+<p id="ec-scene">#01</p>
+<p id="ec-title">Adegan</p>
+</div>
+<svg class="ec-petal" id="ec-p1" style="--bx: -160px; --by: -120px; --br: 200deg" viewbox="0 0 24 24">
+<use href="#sym-blossom" id="ec-p1-u"></use>
+</svg>
+<svg class="ec-petal" id="ec-p2" style="--bx: 170px; --by: -90px; --br: -160deg" viewbox="0 0 24 24">
+<use href="#sym-petal" id="ec-p2-u"></use>
+</svg>
+<svg class="ec-petal" id="ec-p3" style="--bx: -120px; --by: 150px; --br: 120deg" viewbox="0 0 24 24">
+<use href="#sym-petal" id="ec-p3-u"></use>
+</svg>
+<svg class="ec-petal" id="ec-p4" style="--bx: 150px; --by: 140px; --br: -220deg" viewbox="0 0 24 24">
+<use href="#sym-blossom" id="ec-p4-u"></use>
+</svg>
+<svg class="ec-petal" id="ec-p5" style="--bx: 10px; --by: -190px; --br: 90deg" viewbox="0 0 24 24">
+<use href="#sym-petal" id="ec-p5-u"></use>
+</svg>
+<svg class="ec-petal" id="ec-p6" style="--bx: -20px; --by: 200px; --br: -90deg" viewbox="0 0 24 24">
+<use href="#sym-petal" id="ec-p6-u"></use>
+</svg>
+</div>
+<div aria-hidden="true" aria-label="Penampil tangkapan layar" aria-modal="true" id="gv" role="dialog">
+<div id="gv-bg"></div>
+<figure id="gv-fig">
+<img alt="" decoding="async" id="gv-img"/>
+<figcaption id="gv-cap"></figcaption>
+</figure>
+<button aria-label="Tutup penampil" id="gv-close" type="button">
+<svg aria-hidden="true" id="gv-close-ic" viewbox="0 0 24 24">
+<use href="#ic-close" id="gv-close-u"></use>
+</svg>
+</button>
+<div id="gv-bar">
+<button aria-label="Foto sebelumnya" class="gv-nav" id="gv-prev" type="button">
+<svg aria-hidden="true" id="gv-prev-ic" viewbox="0 0 24 24">
+<use href="#ic-prev" id="gv-prev-u"></use>
+</svg>
+</button>
+<p id="gv-count">1 / 1</p>
+<button aria-label="Foto berikutnya" class="gv-nav" id="gv-next" type="button">
+<svg aria-hidden="true" id="gv-next-ic" viewbox="0 0 24 24">
+<use href="#ic-next" id="gv-next-u"></use>
+</svg>
+</button>
+</div>
+</div>
+<audio id="bgm" loop="" preload="none"></audio>
+
+
+
+<script id="wedivo-rundown-data" type="application/json">[]</script><script src="platform-adapter.js"></script></body>
+</html>

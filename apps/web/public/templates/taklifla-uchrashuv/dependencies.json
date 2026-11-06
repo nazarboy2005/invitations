@@ -1,0 +1,123 @@
+{
+  "source": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/taklifla.uz/templates/uchrashuv__8cc334380e8e249e.html",
+  "sourceSha256": "b9a922d0ec983a4e630d1afcb3297f0ed34af2d346719fbabb7b3910951d073e",
+  "htmlReferences": [
+    "https://fonts.googleapis.com",
+    "https://fonts.gstatic.com",
+    "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Manrope:wght@400;500;600;700&family=Pinyon+Script&family=Caveat:wght@400;500&family=DM+Mono:wght@400;500&display=swap",
+    "#",
+    "https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092"
+  ],
+  "cssUrls": [],
+  "assets": [
+    {
+      "file": "fonts/co3bmX5slCNuHLi8bLeY9MK7whWMhyjYqXtK.woff2",
+      "capture": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjYqXtK.woff2",
+      "sha256": "d80df8ff5aecd299a61549f9e29ab1ed0b9b05f4ea71d50fe978e07d5240b235",
+      "bytes": 37640,
+      "family": "Cormorant Garamond",
+      "style": "normal",
+      "weights": [
+        300.0,
+        700.0
+      ],
+      "cyrillic": false
+    },
+    {
+      "file": "fonts/co3ZmX5slCNuHLi8bLeY9MK7whWMhyjYrEtImSo.woff2",
+      "capture": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/fonts.gstatic.com/s/cormorantgaramond/v21/co3ZmX5slCNuHLi8bLeY9MK7whWMhyjYrEtImSo.woff2",
+      "sha256": "6f2f5c3b1abc3d0bb035a927f66a90ca873f94fc31c4966c8d024142c2036e55",
+      "bytes": 39260,
+      "family": "Cormorant Garamond",
+      "style": "italic",
+      "weights": [
+        300.0,
+        700.0
+      ],
+      "cyrillic": false
+    },
+    {
+      "file": "fonts/xn7gYHE41ni1AdIRggexSg.woff2",
+      "capture": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/fonts.gstatic.com/s/manrope/v20/xn7gYHE41ni1AdIRggexSg.woff2",
+      "sha256": "a30ddcd349703aff7464c34bef3fffdff405ee50c113440d7c8693c02d210972",
+      "bytes": 24836,
+      "family": "Manrope",
+      "style": "normal",
+      "weights": [
+        200.0,
+        800.0
+      ],
+      "cyrillic": false
+    },
+    {
+      "file": "fonts/6xKpdSJbL9-e9LuoeQiDRQR8WOXaOg.woff2",
+      "capture": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/fonts.gstatic.com/s/pinyonscript/v24/6xKpdSJbL9-e9LuoeQiDRQR8WOXaOg.woff2",
+      "sha256": "3e1f69a201572cad4aabea7ccf720f093a7dbc005380b2a1b89e0b94476d3e42",
+      "bytes": 39044,
+      "family": "Pinyon Script",
+      "style": "normal",
+      "weights": [
+        400,
+        400
+      ],
+      "cyrillic": false
+    },
+    {
+      "file": "fonts/Wnz6HAc5bAfYB2Q7ZjYY.woff2",
+      "capture": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/fonts.gstatic.com/s/caveat/v23/Wnz6HAc5bAfYB2Q7ZjYY.woff2",
+      "sha256": "891951df5e8b5b0f0bc760d31375405e795c666b5add70437de12d4a6482b33f",
+      "bytes": 74932,
+      "family": "Caveat",
+      "style": "normal",
+      "weights": [
+        400.0,
+        700.0
+      ],
+      "cyrillic": false
+    },
+    {
+      "file": "fonts/aFTR7PB1QTsUX8KYvumzEYOtbQ.woff2",
+      "capture": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Taklifla/Web invitations/fonts.gstatic.com/s/dmmono/v16/aFTR7PB1QTsUX8KYvumzEYOtbQ.woff2",
+      "sha256": "9964608a849396bd00c4bfd7034afe03486469dcf20b4f6b8cbdfdd310369951",
+      "bytes": 14988,
+      "family": "DM Mono",
+      "style": "normal",
+      "weights": [
+        500,
+        500
+      ],
+      "cyrillic": false
+    }
+  ],
+  "requestedImageDirectoryExists": false,
+  "requestedImageDirectoryReferences": false,
+  "sourceScripts": 5,
+  "sourceStyles": 3,
+  "exclusions": [
+    "Customizer/query-string sample substitutions",
+    "Provider locale/localStorage runtime (replaced with enabled invitation variants)",
+    "Provider audio URL/query plumbing (replaced with typed music adapter)",
+    "Cloudflare analytics beacon",
+    "Source sample names, date, venue and address"
+  ],
+  "gaps": [
+    "No uchrashuv-img directory anywhere in this archive; no reference to it in this HTML.",
+    "Captured Latin fonts lack Cyrillic; source system fallback is retained for uncovered glyphs.",
+    "DM Mono 400 is requested by the font link but absent locally and unused by template CSS; captured 500 retained."
+  ],
+  "classification": "Personal date invitation under existing Other event type/category; no wedding classification.",
+  "sourceParts": {
+    "source/template.css": "6a13afdcb9dfb3169aa46a507e4ed7d07ea7aa6d50a343f2f2d0cf0ffbf6faa5",
+    "source/music.css": "d5d1f4c87d86121983461e435ba3050567e5bd9288412afac9b7ebd3c7c3af10",
+    "source/language.css": "63d867eb99a48076d594b1494c1ae84017c1e1cc35f9909332601e8949b25b6b",
+    "source/motion.js": "e4090d3f170ef8161c8c1fc67bbe47937353d9b96e47d08f89c34de563af9f74",
+    "source/motion.original.js": "05e347f5fa74bd586bf227004ecce221eac21ff77d15217fce7a9c2f8d152e64",
+    "fonts/fonts.css": "c06185effaa5ce3e2620651a4618a1afaed9e6722744f84d56c1e817896ec50f"
+  },
+  "adaptations": [
+    "Google venue uses shared saved URL, coordinates or authored-address search.",
+    "Native animation gates confirmation/petals on real RSVP acknowledgement; reduced-motion No records decline.",
+    "Opened letter can grow; unopened envelope height does not depend on authored question length.",
+    "Source footer brand replaced by shared sender signature."
+  ]
+}

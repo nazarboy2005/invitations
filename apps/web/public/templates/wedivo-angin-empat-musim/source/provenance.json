@@ -1,0 +1,214 @@
+{
+  "templateId": "wedivo-angin-empat-musim",
+  "providerTemplateId": "mY6OrlB3cqA84nHvvBKq",
+  "capture": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Wedivo/Web invitations/templates/mY6OrlB3cqA84nHvvBKq/index.html",
+  "captureSha256": "65e3ebfe7ae137cade1d2a4c6d7bb94efb8e2d6d219d1035beaec8786fb3b436",
+  "status": "private; coordinator registration pending",
+  "assets": [
+    {
+      "url": "https://wedivo.id/uploads/templates/mY6OrlB3cqA84nHvvBKq/1790402855_4b513ea0.jpg",
+      "file": "assets/1790402855_4b513ea0.jpg",
+      "bytes": 98743,
+      "sha256": "2450715d2f4e2a15ac22990caf3955d9059fd73bcc934319b1c15363aac40f70"
+    },
+    {
+      "url": "https://wedivo.id/uploads/templates/mY6OrlB3cqA84nHvvBKq/1790402855_a9baff28.jpg",
+      "file": "assets/1790402855_a9baff28.jpg",
+      "bytes": 92490,
+      "sha256": "4620b505d01c30f55681808af8b90fa04d5e122c56bd29704b4013b28b0b2b14"
+    },
+    {
+      "url": "https://wedivo.id/uploads/templates/mY6OrlB3cqA84nHvvBKq/1790402894_efcca39f.jpg",
+      "file": "assets/1790402894_efcca39f.jpg",
+      "bytes": 71023,
+      "sha256": "018399ffedcc6866c3997d2c37ef2e64317e970b264859d78671a94b54835ef6"
+    },
+    {
+      "url": "https://wedivo.id/uploads/templates/mY6OrlB3cqA84nHvvBKq/1790402900_a291aaa9.jpg",
+      "file": "assets/1790402900_a291aaa9.jpg",
+      "bytes": 82900,
+      "sha256": "77e699e67ac90639e91c205a45084c7a42b3735322f332bd37624add6ff08450"
+    },
+    {
+      "url": "https://wedivo.id/uploads/templates/mY6OrlB3cqA84nHvvBKq/1790402940_58fe76a4.jpg",
+      "file": "assets/1790402940_58fe76a4.jpg",
+      "bytes": 64621,
+      "sha256": "e7754cbc57c7399e47fc7bf90634fbab42d03a65c23a0f5e35a6df20c1b8b203"
+    },
+    {
+      "url": "https://wedivo.id/uploads/templates/mY6OrlB3cqA84nHvvBKq/1790402946_a511758a.jpg",
+      "file": "assets/1790402946_a511758a.jpg",
+      "bytes": 88695,
+      "sha256": "0ab2075b33160520aa24a3857b439be6d487a3753c81b50326728bb497f8b67b"
+    },
+    {
+      "url": "https://wedivo.id/uploads/templates/mY6OrlB3cqA84nHvvBKq/1790402989_58917fe3.jpg",
+      "file": "assets/1790402989_58917fe3.jpg",
+      "bytes": 88662,
+      "sha256": "4846c56b280de501c67afd9799b5ccd2e2d0abb21d647b4aa4af419c6e1819ae"
+    },
+    {
+      "url": "https://wedivo.id/uploads/templates/mY6OrlB3cqA84nHvvBKq/1790402990_c438cfaf.jpg",
+      "file": "assets/1790402990_c438cfaf.jpg",
+      "bytes": 82415,
+      "sha256": "f59bd7e65273f3c622c94af708a936f509d2157339d44c90aa6491f3c79685aa"
+    },
+    {
+      "url": "https://wedivo.id/uploads/templates/mY6OrlB3cqA84nHvvBKq/1790403029_133bf985.jpg",
+      "file": "assets/1790403029_133bf985.jpg",
+      "bytes": 31396,
+      "sha256": "60ec83016851abf0a69381822c83c4c6731eef90f41118619b5c42664550021d"
+    },
+    {
+      "url": "https://wedivo.id/uploads/templates/mY6OrlB3cqA84nHvvBKq/1790403033_181ffbe6.jpg",
+      "file": "assets/1790403033_181ffbe6.jpg",
+      "bytes": 111308,
+      "sha256": "98ccfdd568a95b75bdc0766e402ab4ab58664be43d8b13e86fe68bb0d52bb58b"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/delagothicone/v19/hESp6XxvMDRA-2eD0lXpDa6QkBAGRQ.ttf",
+      "file": "assets/fonts/font-0.subset.woff2",
+      "bytes": 47972,
+      "sha256": "1ce4ec0b8e8dcf033d4252ec72b48844ada606b4be1497162dcae28320763049",
+      "sourceBytes": 2477372,
+      "sourceSha256": "e0aafdb03049609bf3a9cffd339449198d3b5432dcb722ad59e3a0ad59ce0d2b",
+      "transform": "Exact glyph-preserving WOFF2 subset: Latin/extended Latin, Cyrillic, punctuation, source-authored Japanese and all source characters"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/hachimarupop/v23/HI_TiYoRLqpLrEiMAuO9Ysfz7rW1.ttf",
+      "file": "assets/fonts/font-1.subset.woff2",
+      "bytes": 76424,
+      "sha256": "a2e93b4a7ba1b9c381f742d903b22a7da1d27c43eac26904c1be37097ba89ca2",
+      "sourceBytes": 4374644,
+      "sourceSha256": "88bb6ab35c64d4b2c4e4dbff81940660bbfe878d23a0cf06e08904654ea30e4f",
+      "transform": "Exact glyph-preserving WOFF2 subset: Latin/extended Latin, Cyrillic, punctuation, source-authored Japanese and all source characters"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/mplusrounded1c/v22/VdGBAYIAV6gnpUpoWwNkYvrugw9RuM064ZsK.ttf",
+      "file": "assets/fonts/font-2.subset.woff2",
+      "bytes": 83208,
+      "sha256": "adc6f2f6be24000bc9370e82074a6caf5e261b0cbf52ca76bfc8fcc1e678a5c3",
+      "sourceBytes": 3532960,
+      "sourceSha256": "d045dc991115f466e32b9e1460484814e01ef20621036904da214cdf6e12c740",
+      "transform": "Exact glyph-preserving WOFF2 subset: Latin/extended Latin, Cyrillic, punctuation, source-authored Japanese and all source characters"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/mplusrounded1c/v22/VdGBAYIAV6gnpUpoWwNkYvrugw9RuM0C45sK.ttf",
+      "file": "assets/fonts/font-3.subset.woff2",
+      "bytes": 78308,
+      "sha256": "93f1d50a5b3db3eab8c913b592f899f1cacf1942c3ef0f272864ea315e50bcb0",
+      "sourceBytes": 3625452,
+      "sourceSha256": "6dd095cb9b6b9eec73784ecd410dbad67117f723d76303300e9e11d9054e3f3d",
+      "transform": "Exact glyph-preserving WOFF2 subset: Latin/extended Latin, Cyrillic, punctuation, source-authored Japanese and all source characters"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/mplusrounded1c/v22/VdGBAYIAV6gnpUpoWwNkYvrugw9RuM0m4psK.ttf",
+      "file": "assets/fonts/font-4.subset.woff2",
+      "bytes": 83768,
+      "sha256": "55fc88fcd26d432040a89cbdb901ae38e312a46b97b3957d8ad6b2337c0994e4",
+      "sourceBytes": 3618576,
+      "sourceSha256": "b239feed63f479929c584c4c297ae466253eac408d8748208bc69b9dd5ea81b6",
+      "transform": "Exact glyph-preserving WOFF2 subset: Latin/extended Latin, Cyrillic, punctuation, source-authored Japanese and all source characters"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/mplusrounded1c/v22/VdGBAYIAV6gnpUpoWwNkYvrugw9RuM1y55sK.ttf",
+      "file": "assets/fonts/font-5.subset.woff2",
+      "bytes": 80568,
+      "sha256": "e14453c8dc8a37c81913a295ac74b48437fa6fb0f46d29a3f148c6aeeeac13bf",
+      "sourceBytes": 3423112,
+      "sourceSha256": "5fb38fb1d606b1942e590a00fb7c38fd9a8045e3a94c6a267d2a2a772ab6896e",
+      "transform": "Exact glyph-preserving WOFF2 subset: Latin/extended Latin, Cyrillic, punctuation, source-authored Japanese and all source characters"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/mplusrounded1c/v22/VdGEAYIAV6gnpUpoWwNkYvrugw9RuPWG.ttf",
+      "file": "assets/fonts/font-6.subset.woff2",
+      "bytes": 81048,
+      "sha256": "d5070abaa5069d2e8562f3455cf072c13c00b1eb156f10d448c19971124653e3",
+      "sourceBytes": 3380464,
+      "sourceSha256": "86f9847b02207adec9963476146b606c302b56906cb41336e7f759346c3e35b3",
+      "transform": "Exact glyph-preserving WOFF2 subset: Latin/extended Latin, Cyrillic, punctuation, source-authored Japanese and all source characters"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/shipporiminchob1/v24/wXK1E2wCr44tulPdnn-xbIpJ9RgT9-nKLoxP3g.ttf",
+      "file": "assets/fonts/font-7.subset.woff2",
+      "bytes": 98228,
+      "sha256": "d97b6a383d5fba28ba27f47985e158a6599fa1d4e4b6a16a60738df00a3cfb66",
+      "sourceBytes": 14537056,
+      "sourceSha256": "048d9f10697dedfeef013b4508408615e93a9e633e1da0550c3dd7637c028804",
+      "transform": "Exact glyph-preserving WOFF2 subset: Latin/extended Latin, Cyrillic, punctuation, source-authored Japanese and all source characters"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/shipporiminchob1/v24/wXK1E2wCr44tulPdnn-xbIpJ9RgT9-nKMo9P3g.ttf",
+      "file": "assets/fonts/font-8.subset.woff2",
+      "bytes": 98996,
+      "sha256": "ce7c3971d83c2b524ab2ae9f820d383f94840351a71e1f2dde234dd4b89795c0",
+      "sourceBytes": 14538268,
+      "sourceSha256": "86f5887fe804375f80b91973656e412af27b0312becf7e489e2156d06360dfbf",
+      "transform": "Exact glyph-preserving WOFF2 subset: Latin/extended Latin, Cyrillic, punctuation, source-authored Japanese and all source characters"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/shipporiminchob1/v24/wXK1E2wCr44tulPdnn-xbIpJ9RgT9-nKeolP3g.ttf",
+      "file": "assets/fonts/font-9.subset.woff2",
+      "bytes": 97380,
+      "sha256": "f90227c48d6e02891032829737d022e510ebe61caf172cc95da8ebaf65d6db09",
+      "sourceBytes": 14631404,
+      "sourceSha256": "bfbfcbe6a3965518234f2381bbd9b6e107dd8eb02fa7e8f3a39fcf33959a43f7",
+      "transform": "Exact glyph-preserving WOFF2 subset: Latin/extended Latin, Cyrillic, punctuation, source-authored Japanese and all source characters"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/yuseimagic/v17/yYLt0hbAyuCmoo5wlhPkpjHR.ttf",
+      "file": "assets/fonts/font-10.subset.woff2",
+      "bytes": 45664,
+      "sha256": "3b0ab2e3c14f18008cc44f3b465b60fbc108876037ed4be3bbcaf8c2e0e2f8e6",
+      "sourceBytes": 3129936,
+      "sourceSha256": "941f2e8484c81297c9e971ac741664eb60aee15534b3a4a5439b18c35b262f3d",
+      "transform": "Exact glyph-preserving WOFF2 subset: Latin/extended Latin, Cyrillic, punctuation, source-authored Japanese and all source characters"
+    }
+  ],
+  "sourceParts": {
+    "styleSha256": "ee7e7f3b28c4834c261765642a549c46afcc3cd63a10a16a9bc536bbedb7602f",
+    "runtimeSha256": "00d14288480cd71f89c3e47b90840291fc3cfa54a695cf1300e76a3c4fd02f2b"
+  },
+  "transformations": [
+    "Strip provider parameter/sample JSON and preview shim; no provider app runtime or analytics.",
+    "Keep source DOM, CSS, SVG, canvas/motion and control engine; localize all ten template-owned artwork URLs and five exact font families (eleven weights).",
+    "Clear source invitation names/dates/venues/photos/music/wishes and unsupported biography/anecdote/video/gift values before rendering.",
+    "Run adapter before source initialization; provide gallery, authored story slots, event instant/timezone and reduced-motion hooks.",
+    "Hide source headcount controls and check-in; RSVP adapter supplies fixed party size.",
+    "Gift amount-confirmation has no platform service/card-number UI and stays hidden; no new card or receipt section.",
+    "Add scoped localization, overflow/reduced-motion rules outside source CSS."
+  ],
+  "catalogProposal": {
+    "name": "Seni olib kelgan shamol",
+    "category": "wedding",
+    "supportedEventTypes": [
+      "wedding"
+    ],
+    "published": false,
+    "migration": "required; central coordinator owns numbering, price and application"
+  },
+  "defaultLocale": "uz-Latn",
+  "translations": "Uzbek-first default mandated by user 2026-10-26; meaningful Japanese labels and source kana name readings are localized too; other three approved locales remain supported.",
+  "packagedSource": [
+    {
+      "file": "index.html",
+      "sha256": "f40a5fcb9a72d05cce800f76a202d7e37074e2d8a68f0664f1a9cedb3659e5cb"
+    },
+    {
+      "file": "source/template.css",
+      "sha256": "35bec0891fcfbae3e01b2740cb20b9014b9e9d270694ad7acc76c1b20b290857"
+    },
+    {
+      "file": "source/template.js",
+      "sha256": "0b330014effaea33a0c644644d4ee29c4c8bb110daa0661176cd2031b5a6d0a1"
+    },
+    {
+      "file": "platform-adapter.js",
+      "sha256": "baed67c6136878c4779878d401b9d1602899d55ac8ece2d350b65a6fef67758f"
+    },
+    {
+      "file": "platform.css",
+      "sha256": "233811716087fc13d8c6fe156a8bc9dc00f15092a424fefff7a5ac4430751fde"
+    }
+  ]
+}

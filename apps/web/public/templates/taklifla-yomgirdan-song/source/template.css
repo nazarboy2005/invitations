@@ -1,0 +1,17 @@
+
+  * { box-sizing: border-box; }
+  :root { --accent:#d98e3f; /* alias for shared _wish-close.js */ }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; background: #0a1428; font-family: 'Alegreya', Georgia, serif; }
+  a { color: #b3722f; } a:hover { color: #8a5620; }
+  input, textarea, button { font-family: 'Alegreya', Georgia, serif; }
+  @keyframes rainFall { from { transform: translateY(0); } to { transform: translateY(135vh); } }
+  @keyframes driftX { from { transform: translateX(-180px); } to { transform: translateX(620px); } }
+  @keyframes riseIn { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: none; } }
+  @keyframes shimmer { to { background-position: -220% 0; } }
+  @keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(7px); } }
+  @media (prefers-reduced-motion: reduce) { * { animation-duration: .001ms !important; animation-iteration-count: 1 !important; } }
+  [data-reveal] { opacity: 0; transform: translateY(26px); }
+  .yg-lang { position:fixed; top:14px; left:max(14px, calc(50vw - 201px)); z-index:60; display:flex; gap:2px; background:rgba(10,20,40,.82); border:1px solid rgba(217,142,63,.4); border-radius:999px; padding:3px; box-shadow:0 8px 22px -10px rgba(0,0,0,.6); }
+  .yg-lang button { border:0; background:transparent; cursor:pointer; font-family:'Alegreya',serif; font-size:11px; font-weight:700; letter-spacing:.08em; color:#f7ecd9; padding:5px 9px; border-radius:999px; line-height:1; text-transform:uppercase; }
+  .yg-lang button.on { background:linear-gradient(180deg,#f0c069,#d98e3f); color:#241608; }

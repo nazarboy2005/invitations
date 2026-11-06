@@ -1,0 +1,32 @@
+[
+  {
+    "viewport": [1280, 800],
+    "mode": "normal",
+    "opening": "passed",
+    "sharedNames": "passed",
+    "programItems": 6,
+    "headcount": "absent",
+    "giftCard": "absent",
+    "previewRsvpGuard": "passed",
+    "errors": [],
+    "httpErrors": []
+  },
+  {
+    "viewport": [390, 844],
+    "mode": "normal",
+    "opening": "passed",
+    "sharedNames": "passed",
+    "programItems": 6,
+    "headcount": "absent",
+    "giftCard": "absent",
+    "previewRsvpGuard": "passed",
+    "errors": [],
+    "httpErrors": []
+  },
+  {
+    "viewport": [390, 844],
+    "mode": "native-reduced-motion",
+    "opening": "passed",
+    "errors": []
+  }
+]

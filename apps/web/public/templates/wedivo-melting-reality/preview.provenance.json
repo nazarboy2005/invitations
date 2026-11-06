@@ -1,0 +1,22 @@
+{
+  "kind": "rendered-opening",
+  "catalogName": "Tush va haqiqat",
+  "locale": "uz-Latn",
+  "viewport": {
+    "width": 390,
+    "height": 844
+  },
+  "imageDimensions": {
+    "width": 390,
+    "height": 843
+  },
+  "imageSha256": "1b74cc4e3be8e1ab11413c0f89abeebeddae0ca792ca4d4cf108bcc4f7ff9141",
+  "fixtureSha256": "98591ce063bd2fa23c2ae508ad19e54ded2f965ac6693aa5a8410fbe497a1f13",
+  "captureRoute": "/qa-wedivo-melting-reality.html?mobile&poster",
+  "excluded": [
+    "platform language chooser",
+    "browser/app chrome"
+  ],
+  "state": "closed opening, normal motion, muted QA playback",
+  "sourceSha256": "4644febe08d45fc689cfbdd4b096f4cbf436acd5aa7f8ac847321f36862ef82e"
+}

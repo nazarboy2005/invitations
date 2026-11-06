@@ -1,0 +1,121 @@
+{
+  "capture": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Wedivo/Web invitations/templates/gLoUUgh7ocbBu09nZsFQ/index.html",
+  "captureSha256": "4f06ac5741a77d9edabcfbdd1f653b3682c47a9c3beb83d7ef47579ad00fbce3",
+  "captureType": "embedded-source",
+  "assets": [
+    {
+      "url": "https://wedivo.id/uploads/templates/unassigned/1790504088_624a7596.jpg",
+      "file": "assets/art-01.jpg",
+      "sha256": "dbcbc1360fa9998308b0fd609208f68253cb3f93053fad7b9846580f6af24feb",
+      "bytes": 183307
+    },
+    {
+      "url": "https://wedivo.id/uploads/templates/unassigned/1790504089_19c62296.jpg",
+      "file": "assets/art-02.jpg",
+      "sha256": "e84fb940590cd80522712f522e61faed2082bfa98dd382c54ee85ca3b40b1b21",
+      "bytes": 268239
+    },
+    {
+      "url": "https://wedivo.id/uploads/templates/unassigned/1790504090_d0a28793.jpg",
+      "file": "assets/art-03.jpg",
+      "sha256": "764f10e70e71881110d3cd5151ca4f41f33b7acb4be0f71011cb73138e26e63f",
+      "bytes": 89791
+    },
+    {
+      "url": "https://wedivo.id/uploads/templates/unassigned/1790504091_fd748a98.jpg",
+      "file": "assets/art-04.jpg",
+      "sha256": "d7bc5db876ca17a53c1e371ef38a1ebc7e60241b3613b4ea9c0928c29d7703cf",
+      "bytes": 123427
+    },
+    {
+      "url": "https://wedivo.id/uploads/templates/unassigned/1790504092_1c6da46b.jpg",
+      "file": "assets/art-05.jpg",
+      "sha256": "cfcb3799c58a8bc8522ddd3fbc59019cccc61f2027d28df0262c6cc2c1b66eca",
+      "bytes": 102987
+    },
+    {
+      "url": "https://wedivo.id/uploads/templates/unassigned/1790504093_80887c6c.jpg",
+      "file": "assets/art-06.jpg",
+      "sha256": "9336aa2e1b7c26b3f0d851e06cebe922931788f48dba013b473534425e063f0f",
+      "bytes": 137840
+    },
+    {
+      "url": "https://wedivo.id/uploads/templates/unassigned/1790504122_4897fef8.jpg",
+      "file": "assets/art-07.jpg",
+      "sha256": "cf87ade63b7dfbc7434cef3475e6ea58c0509cf7ccf42099897b6a392ad90066",
+      "bytes": 245766
+    },
+    {
+      "url": "https://wedivo.id/uploads/templates/unassigned/1790504123_f3da59c7.jpg",
+      "file": "assets/art-08.jpg",
+      "sha256": "812b2f9bb8ce69357dc5421c4e0cb4dde42f6315377c1b1067fd96f53e138ed3",
+      "bytes": 284398
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/cinzel/v26/8vIU7ww63mVu7gtR-kwKxNvkNOjw-uTnTYo.ttf",
+      "file": "assets/fonts/font-01.ttf",
+      "sha256": "bd933cb739b5125a1fda907d61ea237beadb4ac382ac7a5f9af0a8bbedaf48b7",
+      "bytes": 46048
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/cinzel/v26/8vIU7ww63mVu7gtR-kwKxNvkNOjw-gjgTYo.ttf",
+      "file": "assets/fonts/font-02.ttf",
+      "sha256": "5150b3609eeaaa9c6d7e093cb9b16ab8ec2f7110ddf0cbe751887e6f158398af",
+      "bytes": 46116
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/cinzel/v26/8vIU7ww63mVu7gtR-kwKxNvkNOjw-jHgTYo.ttf",
+      "file": "assets/fonts/font-03.ttf",
+      "sha256": "2c6b1ff0d368efb73636700b69dbef707fa5602a06d085a4e91e5125082651f0",
+      "bytes": 46124
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/ebgaramond/v33/SlGFmQSNjdsmc35JDF1K5GRwUjcdlttVFm-rI7e8QI96.ttf",
+      "file": "assets/fonts/font-04.ttf",
+      "sha256": "9d2ca86044b885d085059c7e3bed21d6e31456a81a47761e7ade8cd390ebe71d",
+      "bytes": 339240
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/ebgaramond/v33/SlGFmQSNjdsmc35JDF1K5GRwUjcdlttVFm-rI7eOQI96.ttf",
+      "file": "assets/fonts/font-05.ttf",
+      "sha256": "1051266691bf470e46920bb64e81c901cf82111caa81ff45fcbe50e2bccb274e",
+      "bytes": 341640
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/ebgaramond/v33/SlGDmQSNjdsmc35JDF1K5E55YMjF_7DPuGi-6_RUAw.ttf",
+      "file": "assets/fonts/font-06.ttf",
+      "sha256": "934aa932b4bc1a75d883f7c3d4d5bbc8278e5e7fcc96d5440bbffd61050cf958",
+      "bytes": 389868
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/ebgaramond/v33/SlGDmQSNjdsmc35JDF1K5E55YMjF_7DPuGi-2fRUAw.ttf",
+      "file": "assets/fonts/font-07.ttf",
+      "sha256": "45fad23db0ff6cc8f2ce5a6f9802d499e8ab737c039a7944a6f2f617d224af14",
+      "bytes": 392064
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/ebgaramond/v33/SlGDmQSNjdsmc35JDF1K5E55YMjF_7DPuGi-NfNUAw.ttf",
+      "file": "assets/fonts/font-08.ttf",
+      "sha256": "b536adfa0f5746cfbd148d8a1a669540366edef2c85c4b49450798a037bd928c",
+      "bytes": 392328
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/imfellenglish/v14/Ktk3ALSLW8zDe0rthJysWrnLsAzHFaOd.ttf",
+      "file": "assets/fonts/font-09.ttf",
+      "sha256": "ae0d17a0342d6ce0e07f491b9db04cab9e357e6f06859529f503b2303d0065e9",
+      "bytes": 197028
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/imfellenglish/v14/Ktk1ALSLW8zDe0rthJysWrnLsAz3Fw.ttf",
+      "file": "assets/fonts/font-10.ttf",
+      "sha256": "725a44824e534dfb26af2bf135dd6fab577ec7f0781c5be17bd89e7ce22f035a",
+      "bytes": 189680
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/pinyonscript/v24/6xKpdSJbL9-e9LuoeQiDRQR8aOI.ttf",
+      "file": "assets/fonts/font-11.ttf",
+      "sha256": "3683830e3bb3f1a2138b6098f8663ca5ceb66b1f397a4f30639aae139e344bb8",
+      "bytes": 144584
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "date": "2026-10-26",
+  "state": "Closed original cover. Hidden world initialization skipped for capture only; real source WebGL dice and CSS motion retained.",
+  "errors": [],
+  "checks": [
+    {
+      "check": "mobile original/package opening and actual dice",
+      "pass": true,
+      "sourceDiceBounds": {
+        "x": 74.09375,
+        "y": 242.8125,
+        "width": 241.796875,
+        "height": 241.796875
+      },
+      "packageDiceBounds": {
+        "x": 74.09375,
+        "y": 255.203125,
+        "width": 241.796875,
+        "height": 241.796875
+      },
+      "intentionalDifference": "Uzbek name and copy, canonical preview names/date instead of source demo"
+    },
+    {
+      "check": "desktop original/package opening and actual dice",
+      "pass": true,
+      "sourceDiceBounds": {
+        "x": 515,
+        "y": 222.40625,
+        "width": 250,
+        "height": 250
+      },
+      "packageDiceBounds": {
+        "x": 515,
+        "y": 222.40625,
+        "width": 250,
+        "height": 250
+      },
+      "intentionalDifference": "Uzbek name and copy, canonical preview names/date instead of source demo"
+    }
+  ]
+}

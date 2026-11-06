@@ -1,0 +1,778 @@
+[
+  {
+    "id": "cover-eyebrow",
+    "text": "Nikoh to‘yi"
+  },
+  {
+    "id": "cover-guest-name",
+    "text": "Assalomu alaykum, aziz mehmon!"
+  },
+  {
+    "id": "keystone-mono",
+    "text": "M·J"
+  },
+  {
+    "id": "key-tag-text",
+    "text": "Oching"
+  },
+  {
+    "id": "cover-bride",
+    "text": "Madina"
+  },
+  {
+    "id": "cover-amp",
+    "text": "&"
+  },
+  {
+    "id": "cover-groom",
+    "text": "Javohir"
+  },
+  {
+    "id": "cover-hint-text",
+    "text": "Kirish uchun kalitni bosing"
+  },
+  {
+    "id": "hero-plaque-k",
+    "text": "Muqaddima"
+  },
+  {
+    "id": "hero-welcome",
+    "text": "Bog‘imizga xush kelibsiz"
+  },
+  {
+    "id": "hero-bride",
+    "text": "Madina"
+  },
+  {
+    "id": "hero-amp",
+    "text": "&"
+  },
+  {
+    "id": "hero-groom",
+    "text": "Javohir"
+  },
+  {
+    "id": "hero-date-text",
+    "text": "Shanba, 12 iyun 2027"
+  },
+  {
+    "id": "hero-count-label",
+    "text": "Gullash fasligacha"
+  },
+  {
+    "id": "cd-days-n",
+    "text": "228"
+  },
+  {
+    "id": "cd-days-l",
+    "text": "Kun"
+  },
+  {
+    "id": "cd-hours-n",
+    "text": "15"
+  },
+  {
+    "id": "cd-hours-l",
+    "text": "Soat"
+  },
+  {
+    "id": "cd-mins-n",
+    "text": "40"
+  },
+  {
+    "id": "cd-mins-l",
+    "text": "Daqiqa"
+  },
+  {
+    "id": "cd-secs-n",
+    "text": "21"
+  },
+  {
+    "id": "cd-secs-l",
+    "text": "Soniya"
+  },
+  {
+    "id": "hero-cue-text",
+    "text": "Bog‘ yo‘lidan yuramiz"
+  },
+  {
+    "id": "quote-plaque-k",
+    "text": "Bob"
+  },
+  {
+    "id": "quote-num",
+    "text": "I"
+  },
+  {
+    "id": "quote-title",
+    "text": "Darvoza ostonasida"
+  },
+  {
+    "id": "quote-opening",
+    "text": "Hayotimizdagi quvonchli kunimizda sizni yonimizda ko‘rishdan mamnun bo‘lamiz."
+  },
+  {
+    "id": "couple-plaque-k",
+    "text": "Bob"
+  },
+  {
+    "id": "couple-num",
+    "text": "II"
+  },
+  {
+    "id": "couple-title",
+    "text": "Ikki nihol"
+  },
+  {
+    "id": "couple-lead",
+    "text": "Har bir bog‘ niholdan boshlanadi. Urug‘ qopchalarini bosib, ularning orqa tomonini ko‘ring."
+  },
+  {
+    "id": "packet-bride-no",
+    "text": "Urug‘ 01"
+  },
+  {
+    "id": "packet-bride-kind",
+    "text": "Noyob nav"
+  },
+  {
+    "id": "packet-bride-role",
+    "text": "Kelin"
+  },
+  {
+    "id": "packet-bride-name",
+    "text": "Madina"
+  },
+  {
+    "id": "packet-bride-parents-names",
+    "text": "Javohir va Madina oilalari"
+  },
+  {
+    "id": "packet-bride-hint",
+    "text": "Qopchani aylantirish"
+  },
+  {
+    "id": "packet-bride-back-title",
+    "text": "Parvarish yo‘riqnomasi"
+  },
+  {
+    "id": "packet-bride-back-sub",
+    "text": "Madina"
+  },
+  {
+    "id": "pd-bride-1-t",
+    "text": "Eking"
+  },
+  {
+    "id": "pd-bride-2-t",
+    "text": "Asrang"
+  },
+  {
+    "id": "pd-bride-3-t",
+    "text": "Gul"
+  },
+  {
+    "id": "pbm-1-k",
+    "text": "Yorug‘lik"
+  },
+  {
+    "id": "pbm-1-v",
+    "text": "Quyoshli"
+  },
+  {
+    "id": "pbm-2-k",
+    "text": "Sug‘orish"
+  },
+  {
+    "id": "pbm-2-v",
+    "text": "Har kuni"
+  },
+  {
+    "id": "pbm-3-k",
+    "text": "Gul"
+  },
+  {
+    "id": "pbm-3-v",
+    "text": "Abadiy"
+  },
+  {
+    "id": "packet-bride-hint-back",
+    "text": "Orqaga aylantirish"
+  },
+  {
+    "id": "couple-amp-char",
+    "text": "&"
+  },
+  {
+    "id": "packet-groom-no",
+    "text": "Urug‘ 02"
+  },
+  {
+    "id": "packet-groom-kind",
+    "text": "Noyob nav"
+  },
+  {
+    "id": "packet-groom-role",
+    "text": "Kuyov"
+  },
+  {
+    "id": "packet-groom-name",
+    "text": "Javohir"
+  },
+  {
+    "id": "packet-groom-parents-names",
+    "text": "Javohir va Madina oilalari"
+  },
+  {
+    "id": "packet-groom-hint",
+    "text": "Qopchani aylantirish"
+  },
+  {
+    "id": "packet-groom-back-title",
+    "text": "Parvarish yo‘riqnomasi"
+  },
+  {
+    "id": "packet-groom-back-sub",
+    "text": "Javohir"
+  },
+  {
+    "id": "pd-groom-1-t",
+    "text": "Eking"
+  },
+  {
+    "id": "pd-groom-2-t",
+    "text": "Asrang"
+  },
+  {
+    "id": "pd-groom-3-t",
+    "text": "Gul"
+  },
+  {
+    "id": "pgm-1-k",
+    "text": "Yorug‘lik"
+  },
+  {
+    "id": "pgm-1-v",
+    "text": "Quyoshli"
+  },
+  {
+    "id": "pgm-2-k",
+    "text": "Sug‘orish"
+  },
+  {
+    "id": "pgm-2-v",
+    "text": "Har kuni"
+  },
+  {
+    "id": "pgm-3-k",
+    "text": "Gul"
+  },
+  {
+    "id": "pgm-3-v",
+    "text": "Abadiy"
+  },
+  {
+    "id": "packet-groom-hint-back",
+    "text": "Orqaga aylantirish"
+  },
+  {
+    "id": "events-plaque-k",
+    "text": "Bob"
+  },
+  {
+    "id": "events-num",
+    "text": "III"
+  },
+  {
+    "id": "events-title",
+    "text": "Gulzor soyasida"
+  },
+  {
+    "id": "events-lead",
+    "text": "Gullar soyasida baxtli kunimizni birga nishonlaymiz."
+  },
+  {
+    "id": "event-1-kicker",
+    "text": "Tadbir"
+  },
+  {
+    "id": "event-1-name",
+    "text": "Nikoh to‘yi"
+  },
+  {
+    "id": "event-1-date",
+    "text": "Shanba, 12 iyun 2027"
+  },
+  {
+    "id": "event-1-time",
+    "text": "17:00"
+  },
+  {
+    "id": "event-1-venue",
+    "text": "Zarafshon tantanalar saroyi"
+  },
+  {
+    "id": "event-1-address",
+    "text": "Toshkent shahri, Yunusobod tumani · Amir Temur xiyoboni yaqinida"
+  },
+  {
+    "id": "event-1-cal",
+    "text": "Taqvimga saqlash"
+  },
+  {
+    "id": "event-1-map",
+    "text": "Yo‘lni ko‘rsatish"
+  },
+  {
+    "id": "rundown-plaque-k",
+    "text": "Bob"
+  },
+  {
+    "id": "rundown-num",
+    "text": "IV"
+  },
+  {
+    "id": "rundown-title",
+    "text": "To‘y dasturi"
+  },
+  {
+    "id": "rundown-lead",
+    "text": "Gullar soati kunimiz dasturini ko‘rsatadi. Vaqtni tanlang."
+  },
+  {
+    "id": "",
+    "text": "XII"
+  },
+  {
+    "id": "",
+    "text": "I"
+  },
+  {
+    "id": "",
+    "text": "II"
+  },
+  {
+    "id": "",
+    "text": "III"
+  },
+  {
+    "id": "",
+    "text": "IV"
+  },
+  {
+    "id": "",
+    "text": "V"
+  },
+  {
+    "id": "",
+    "text": "VI"
+  },
+  {
+    "id": "",
+    "text": "VII"
+  },
+  {
+    "id": "",
+    "text": "VIII"
+  },
+  {
+    "id": "",
+    "text": "IX"
+  },
+  {
+    "id": "",
+    "text": "X"
+  },
+  {
+    "id": "",
+    "text": "XI"
+  },
+  {
+    "id": "clock-caption-time",
+    "text": "17:30"
+  },
+  {
+    "id": "clock-caption-title",
+    "text": "Mehmonlarni kutib olish"
+  },
+  {
+    "id": "rd-item-1-time",
+    "text": "17.30"
+  },
+  {
+    "id": "rd-item-1-end",
+    "text": "Asia/Tashkent"
+  },
+  {
+    "id": "rd-item-1-title",
+    "text": "Mehmonlarni kutib olish"
+  },
+  {
+    "id": "rd-item-2-time",
+    "text": "18.00"
+  },
+  {
+    "id": "rd-item-2-end",
+    "text": "Asia/Tashkent"
+  },
+  {
+    "id": "rd-item-2-title",
+    "text": "Kelin-kuyovning kirib kelishi"
+  },
+  {
+    "id": "rd-item-3-time",
+    "text": "18.30"
+  },
+  {
+    "id": "rd-item-3-end",
+    "text": "Asia/Tashkent"
+  },
+  {
+    "id": "rd-item-3-title",
+    "text": "Tabriklar va dasturxon"
+  },
+  {
+    "id": "rd-item-4-time",
+    "text": "20.00"
+  },
+  {
+    "id": "rd-item-4-end",
+    "text": "Asia/Tashkent"
+  },
+  {
+    "id": "rd-item-4-title",
+    "text": "Raqs va kuy-qo‘shiqlar"
+  },
+  {
+    "id": "rd-item-5-time",
+    "text": "21.30"
+  },
+  {
+    "id": "rd-item-5-end",
+    "text": "Asia/Tashkent"
+  },
+  {
+    "id": "rd-item-5-title",
+    "text": "To‘y torti"
+  },
+  {
+    "id": "rd-item-6-time",
+    "text": "22.30"
+  },
+  {
+    "id": "rd-item-6-end",
+    "text": "Asia/Tashkent"
+  },
+  {
+    "id": "rd-item-6-title",
+    "text": "Yakuniy so‘z"
+  },
+  {
+    "id": "venue-plaque-k",
+    "text": "Bob"
+  },
+  {
+    "id": "venue-num",
+    "text": "V"
+  },
+  {
+    "id": "venue-title",
+    "text": "Bog‘ sari yo‘l"
+  },
+  {
+    "id": "venue-lead",
+    "text": "Manzilimizni topish uchun xaritadagi yo‘ldan boring."
+  },
+  {
+    "id": "",
+    "text": "Sh"
+  },
+  {
+    "id": "",
+    "text": "J"
+  },
+  {
+    "id": "",
+    "text": "Shq"
+  },
+  {
+    "id": "",
+    "text": "G‘"
+  },
+  {
+    "id": "map-venue",
+    "text": "Zarafshon tantanalar saroyi"
+  },
+  {
+    "id": "map-address",
+    "text": "Toshkent shahri, Yunusobod tumani · Amir Temur xiyoboni yaqinida"
+  },
+  {
+    "id": "map-btn",
+    "text": "Yo‘lni ko‘rsatish"
+  },
+  {
+    "id": "dress-plaque-k",
+    "text": "Bob"
+  },
+  {
+    "id": "dress-num",
+    "text": "VI"
+  },
+  {
+    "id": "dress-title",
+    "text": "Kechki libos"
+  },
+  {
+    "id": "dress-text",
+    "text": "Ayollar uchun uzun kechki ko‘ylak, erkaklar uchun klassik kostyum. Quyidagi ranglardan tanlasangiz, suratlar yanada chiroyli chiqadi.\nIltimos, oq libosdan saqlaning — bu kun oq rang kelinniki."
+  },
+  {
+    "id": "secret-plaque-k",
+    "text": "Bob"
+  },
+  {
+    "id": "secret-num",
+    "text": "VII"
+  },
+  {
+    "id": "secret-title",
+    "text": "Moxli tosh ostida"
+  },
+  {
+    "id": "secret-lead",
+    "text": "Har bir sirli bog‘da nimadir yashiringan. Moxli toshni ko‘tarib ko‘ring."
+  },
+  {
+    "id": "secret-letter-to",
+    "text": "Bu maktubni topgan aziz mehmonimizga,"
+  },
+  {
+    "id": "secret-letter-text",
+    "text": "Hayotimizdagi quvonchli kunimizda sizni yonimizda ko‘rishdan mamnun bo‘lamiz."
+  },
+  {
+    "id": "secret-letter-sign",
+    "text": "Hurmat bilan · Javohir · Madina"
+  },
+  {
+    "id": "secret-stone-hint",
+    "text": "Ko‘taring"
+  },
+  {
+    "id": "secret-hint",
+    "text": "Toshni bosing yoki yuqoriga suring."
+  },
+  {
+    "id": "rsvp-plaque-k",
+    "text": "Bob"
+  },
+  {
+    "id": "rsvp-num",
+    "text": "VIII"
+  },
+  {
+    "id": "rsvp-title",
+    "text": "Mehmonlar lavhasi"
+  },
+  {
+    "id": "rsvp-name-label",
+    "text": "Ismingiz"
+  },
+  {
+    "id": "rsvp-status-label",
+    "text": "Kelishingiz"
+  },
+  {
+    "id": "rsvp-yes-t",
+    "text": "Kelaman"
+  },
+  {
+    "id": "rsvp-no-t",
+    "text": "Kela olmayman"
+  },
+  {
+    "id": "rsvp-maybe-t",
+    "text": "Hali bilmayman"
+  },
+  {
+    "id": "rsvp-message-label",
+    "text": "Xabaringiz"
+  },
+  {
+    "id": "rsvp-submit",
+    "text": "Yuborish"
+  },
+  {
+    "id": "rsvp-err",
+    "text": "Ko‘rish rejimida yuborish o‘chirilgan."
+  },
+  {
+    "id": "wishes-plaque-k",
+    "text": "Bob"
+  },
+  {
+    "id": "wishes-num",
+    "text": "IX"
+  },
+  {
+    "id": "wishes-title",
+    "text": "Tilaklar daraxti"
+  },
+  {
+    "id": "wishes-lead",
+    "text": "Daraxtimizga ezgu niyat va tilaklaringizni qoldiring."
+  },
+  {
+    "id": "wish-name-label",
+    "text": "Ismingiz"
+  },
+  {
+    "id": "wish-message-label",
+    "text": "Xabaringiz"
+  },
+  {
+    "id": "wish-submit",
+    "text": "Yuborish"
+  },
+  {
+    "id": "wish-err",
+    "text": "Ko‘rish rejimida yuborish o‘chirilgan."
+  },
+  {
+    "id": "",
+    "text": "Baxtingiz abadiy bo‘lsin! Bir umr bir-biringizni qadrlab yashang."
+  },
+  {
+    "id": "",
+    "text": "Dilnoza opa"
+  },
+  {
+    "id": "",
+    "text": "Jasur, do‘stim, tabriklayman! Oilangiz mustahkam bo‘lsin."
+  },
+  {
+    "id": "",
+    "text": "Sardor"
+  },
+  {
+    "id": "",
+    "text": "Malikajon, sizga eng go‘zal kunlar tilayman!"
+  },
+  {
+    "id": "",
+    "text": "Nilufar"
+  },
+  {
+    "id": "closing-plaque-k",
+    "text": "Xotima"
+  },
+  {
+    "id": "closing-title",
+    "text": "Bog‘dagi oqshom"
+  },
+  {
+    "id": "closing-sign",
+    "text": "Javohir va Madina oilalari"
+  },
+  {
+    "id": "closing-bride",
+    "text": "Madina"
+  },
+  {
+    "id": "closing-amp",
+    "text": "&"
+  },
+  {
+    "id": "closing-groom",
+    "text": "Javohir"
+  },
+  {
+    "id": "closing-bye",
+    "text": "Bog‘imizda ko‘rishguncha."
+  },
+  {
+    "id": "closing-top",
+    "text": "Darvozaga qaytish"
+  },
+  {
+    "id": "path-found",
+    "text": "0"
+  },
+  {
+    "id": "path-count",
+    "text": "/"
+  },
+  {
+    "id": "path-total",
+    "text": "11"
+  },
+  {
+    "id": "path-count",
+    "text": "bob topildi"
+  },
+  {
+    "id": "stone-hero-label",
+    "text": "Muqaddima"
+  },
+  {
+    "id": "stone-quote-label",
+    "text": "Darvoza ostonasida"
+  },
+  {
+    "id": "stone-couple-label",
+    "text": "Ikki nihol"
+  },
+  {
+    "id": "stone-events-label",
+    "text": "Gulzor soyasida"
+  },
+  {
+    "id": "stone-rundown-label",
+    "text": "Gullar soati"
+  },
+  {
+    "id": "stone-venue-label",
+    "text": "Bog‘ sari yo‘l"
+  },
+  {
+    "id": "stone-dresscode-label",
+    "text": "Bog‘ ranglari"
+  },
+  {
+    "id": "stone-secret-label",
+    "text": "Moxli tosh ostida"
+  },
+  {
+    "id": "stone-rsvp-label",
+    "text": "Mehmonlar lavhasi"
+  },
+  {
+    "id": "stone-wishes-label",
+    "text": "Tilaklar daraxti"
+  },
+  {
+    "id": "stone-closing-label",
+    "text": "Xotima"
+  },
+  {
+    "id": "viewer-count",
+    "text": "1 / 1"
+  },
+  {
+    "id": "",
+    "text": "Uz"
+  },
+  {
+    "id": "",
+    "text": "Уз"
+  },
+  {
+    "id": "",
+    "text": "En"
+  },
+  {
+    "id": "",
+    "text": "Ru"
+  }
+]

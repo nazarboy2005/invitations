@@ -1,0 +1,98 @@
+@font-face {
+  font-family: 'Bodoni Moda';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/templates/wedivo-peony-paradise/fonts/44d8dcab26c0fd12d5d3ff2e.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Bodoni Moda';
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url(/templates/wedivo-peony-paradise/fonts/1a01d0fd6d764b07523d6ff2.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Bodoni Moda';
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+  src: url(/templates/wedivo-peony-paradise/fonts/e7694af0d0bf03a6e9f91134.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Bodoni Moda';
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url(/templates/wedivo-peony-paradise/fonts/94deea1be978344e7be07af5.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Bodoni Moda';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/templates/wedivo-peony-paradise/fonts/2602fc9a7c82d3ac8ea7c5e7.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Bodoni Moda';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(/templates/wedivo-peony-paradise/fonts/533523277c6d1f75ddaf41d6.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Bodoni Moda';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(/templates/wedivo-peony-paradise/fonts/2506b3f650a9da9a82cd1398.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Bodoni Moda';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(/templates/wedivo-peony-paradise/fonts/3ddb25707a4bb29801dc6237.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Jost';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url(/templates/wedivo-peony-paradise/fonts/96c4eb9a3598b03eb118a11e.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Jost';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/templates/wedivo-peony-paradise/fonts/c691cba30ce11f40694ccdff.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Jost';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(/templates/wedivo-peony-paradise/fonts/342cc85702c087df3222111d.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Jost';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(/templates/wedivo-peony-paradise/fonts/181d254f9a8972336195fb79.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'WindSong';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/templates/wedivo-peony-paradise/fonts/ca8cd0b0c724d17db3735f11.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'WindSong';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(/templates/wedivo-peony-paradise/fonts/b94cc6ec18e142be9de6c825.ttf) format('truetype');
+}

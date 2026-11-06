@@ -1,0 +1,253 @@
+{
+  "provider": "Wedivo",
+  "sourceId": "XkAzuF8SSX5Pplof0P2d",
+  "capture": "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production/Wedivo/Web invitations/templates/XkAzuF8SSX5Pplof0P2d/index.html",
+  "captureSha256": "41676d872a592c0fe058ba6aff9963cc0a251b399a8a2f958b25cee13b4deeb8",
+  "landscapeEngineSha256": "3d98eef481e833c4c652fadfd93be92d9f2765e90856c7d9fd6ec99834048428",
+  "dependencies": [
+    {
+      "url": "https://fonts.gstatic.com/s/geologica/v5/oY1o8evIr7j9P3TN9YwNAdyjzUyDKkKdAGOJh1UlCDUIhAIdhCZOn1fLsig7jfvCCPHZckU8H3G11_z-_OZqDx_rQ-M.ttf",
+      "capture": "Web invitations/_assets/fonts.gstatic.com/e05262d60a6f045b3bc31875.ttf",
+      "file": "assets/e05262d60a6f045b3bc31875.ttf",
+      "bytes": 130144,
+      "sha256": "773bddac159927dae877ff223f42e34ef9422073387ea047f0c1b8d0c767cf0e"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/geologica/v5/oY1o8evIr7j9P3TN9YwNAdyjzUyDKkKdAGOJh1UlCDUIhAIdhCZOn1fLsig7jfvCCPHZckU8H3G11_z-_OZqD_jsQ-M.ttf",
+      "capture": "Web invitations/_assets/fonts.gstatic.com/54884abcec65028733726eba.ttf",
+      "file": "assets/54884abcec65028733726eba.ttf",
+      "bytes": 130876,
+      "sha256": "42b1e96bc88107a25a8de8573a44ea7780b40b1db7cb8fc7f379d590d7437d46"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/geologica/v5/oY1o8evIr7j9P3TN9YwNAdyjzUyDKkKdAGOJh1UlCDUIhAIdhCZOn1fLsig7jfvCCPHZckU8H3G11_z-_OZqDy3rQ-M.ttf",
+      "capture": "Web invitations/_assets/fonts.gstatic.com/8063f141c16ea1b06d790486.ttf",
+      "file": "assets/8063f141c16ea1b06d790486.ttf",
+      "bytes": 130416,
+      "sha256": "ae82115f5594cf2e7652e83cbf3f36f8f820af00bf02ade01d2d90156804f3e9"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/notoserifdisplay/v29/buERppa9f8_vkXaZLAgP0G5Wi6QmA1QaeYah2sovLCDq_ZgLyt3idQfktOG-PVpd4tgK.ttf",
+      "capture": "Web invitations/_assets/fonts.gstatic.com/97e498a91512586a3ecd6f3e.ttf",
+      "file": "assets/97e498a91512586a3ecd6f3e.ttf",
+      "bytes": 397456,
+      "sha256": "9a162cc89a868b4b006c260d984ee22bbf8226d391ce539fb130a2d8dcf66f0a"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/notoserifdisplay/v29/buERppa9f8_vkXaZLAgP0G5Wi6QmA1QaeYah2sovLCDq_ZgLyt3idQfktOG-PVqD5dgK.ttf",
+      "capture": "Web invitations/_assets/fonts.gstatic.com/ca7eb51a7006a215f6c45471.ttf",
+      "file": "assets/ca7eb51a7006a215f6c45471.ttf",
+      "bytes": 398064,
+      "sha256": "571ffec1cd34102ea9a579c49b936d151f0e07fbabdfc2204f72b981d5b5f53c"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/notoserifdisplay/v29/buEPppa9f8_vkXaZLAgP0G5Wi6QmA1QwcLRCOrN8uo7t6FBJOJTQit-N33sQOk-VoW5JYjE.ttf",
+      "capture": "Web invitations/_assets/fonts.gstatic.com/84e88b3942cb9b12e8c96287.ttf",
+      "file": "assets/84e88b3942cb9b12e8c96287.ttf",
+      "bytes": 416100,
+      "sha256": "e199a7652abdbabfc1f42d7440002e763c11f5ab7f012c3f51ccc3fb7fc1cb86"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/waitingforthesunrise/v23/WBL1rFvOYl9CEv2i1mO6KUW8RKWJ2zoXoz5JsYZQ.ttf",
+      "capture": "Web invitations/_assets/fonts.gstatic.com/f9f83d31fe589ca191dc06fc.ttf",
+      "file": "assets/f9f83d31fe589ca191dc06fc.ttf",
+      "bytes": 44396,
+      "sha256": "87ce3fa1b9a1ed60430a27aa994c1b58212ad5a3068eaad026d139dfb349d39b"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/notoserifdisplay/v29/buEPppa9f8_vkXaZLAgP0G5Wi6QmA1QwcLRCOrN8uo7t6FBJOJTQit-N33sQOk-VoTBJYjE.ttf",
+      "capture": "Web invitations/_assets/fonts.gstatic.com/c15a92a8d8b93a9ed6bd732e.ttf",
+      "file": "assets/c15a92a8d8b93a9ed6bd732e.ttf",
+      "bytes": 414800,
+      "sha256": "62dcc41099b2ebf317b86a8d625b062c9e9687c01060aaf287ee331d30243028"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/notoserifdisplay/v29/buERppa9f8_vkXaZLAgP0G5Wi6QmA1QaeYah2sovLCDq_ZgLyt3idQfktOG-PVoD4tgK.ttf",
+      "capture": "Web invitations/_assets/fonts.gstatic.com/161a0c54eacf06c267bba0ef.ttf",
+      "file": "assets/161a0c54eacf06c267bba0ef.ttf",
+      "bytes": 398412,
+      "sha256": "a19dccc188b7ae29f69fcef33d5c31c2de8fd3451ee5666aff1066cc85da0c6f"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/geologica/v5/oY1o8evIr7j9P3TN9YwNAdyjzUyDKkKdAGOJh1UlCDUIhAIdhCZOn1fLsig7jfvCCPHZckU8H3G11_z-_OZqD0HrQ-M.ttf",
+      "capture": "Web invitations/_assets/fonts.gstatic.com/a3a31d13fbcc338288fb69a4.ttf",
+      "file": "assets/a3a31d13fbcc338288fb69a4.ttf",
+      "bytes": 130176,
+      "sha256": "6ad816f3edad69a03c447ef9a649d7e93b84b0bea1b4e0b350ebdd0454ec3411"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/notoserifdisplay/v29/buERppa9f8_vkXaZLAgP0G5Wi6QmA1QaeYah2sovLCDq_ZgLyt3idQfktOG-PVpv4tgK.ttf",
+      "capture": "Web invitations/_assets/fonts.gstatic.com/ee3c9ee995c21d7d8a0bc88d.ttf",
+      "file": "assets/ee3c9ee995c21d7d8a0bc88d.ttf",
+      "bytes": 398416,
+      "sha256": "e8837ed1854971c52136aaa97ef213c3c2139b236f93d4e2d7fd0b1b03d47c11"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/fragmentmono/v6/4iC16K5wfMRRjxp0DA6-2CLnB4ZHgw.ttf",
+      "capture": "Web invitations/_assets/fonts.gstatic.com/910abe3fec74715313fde3fe.ttf",
+      "file": "assets/910abe3fec74715313fde3fe.ttf",
+      "bytes": 111328,
+      "sha256": "48cc0c295fd5bb153da785ecad1efbadde015d0468941fd7b1d180dae988f40a"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/fragmentmono/v6/4iCr6K5wfMRRjxp0DA6-2CLnN4Q.ttf",
+      "capture": "Web invitations/_assets/fonts.gstatic.com/d3cb901af65bf837218a2c33.ttf",
+      "file": "assets/d3cb901af65bf837218a2c33.ttf",
+      "bytes": 108980,
+      "sha256": "b0fd072ccd55acf0930dbb3d150cf24b2ff1e588ffb938f882a7fdffbd7c0efc"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/geologica/v5/oY1o8evIr7j9P3TN9YwNAdyjzUyDKkKdAGOJh1UlCDUIhAIdhCZOn1fLsig7jfvCCPHZckU8H3G11_z-_OZqD8HsQ-M.ttf",
+      "capture": "Web invitations/_assets/fonts.gstatic.com/9fda2bd3b19064c592ad1959.ttf",
+      "file": "assets/9fda2bd3b19064c592ad1959.ttf",
+      "bytes": 130764,
+      "sha256": "197b9f8715a1dcdd1d0161018edcc06219f1c304d5042c4d96b6386f2f113be2"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/amiri/v30/J7aRnpd8CGxBHqUp.ttf",
+      "capture": "Web invitations/_assets/fonts.gstatic.com/c1ed75c0eada28ab8f8db0ee.ttf",
+      "file": "assets/c1ed75c0eada28ab8f8db0ee.ttf",
+      "bytes": 385840,
+      "sha256": "7f19c4a5dc77b0ef435b430d750759170def15d6e3801006e0704dadc7f220e3"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/amiri/v30/J7acnpd8CGxBHp2VkZY4.ttf",
+      "capture": "Web invitations/_assets/fonts.gstatic.com/68199692a9545c97f81dee86.ttf",
+      "file": "assets/68199692a9545c97f81dee86.ttf",
+      "bytes": 368616,
+      "sha256": "65e3e6fe6af66bb6d24959bd537a89ea35de14083f5a2e2290c246136c2b047b"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/notoserifdisplay/v29/buEPppa9f8_vkXaZLAgP0G5Wi6QmA1QwcLRCOrN8uo7t6FBJOJTQit-N33sQOk-VoQJJYjE.ttf",
+      "capture": "Web invitations/_assets/fonts.gstatic.com/4c4c4679d523b72bc392933b.ttf",
+      "file": "assets/4c4c4679d523b72bc392933b.ttf",
+      "bytes": 415708,
+      "sha256": "6095fca05d0ba90db7d07ba1c2bbcc9320b42c537dc5f797b03375062b2f05a0"
+    },
+    {
+      "url": "https://wedivo.id/uploads/templates/unassigned/1790656548_2b3d5f76.jpg",
+      "capture": "Web invitations/_assets/wedivo.id/12fa4071a8658a65de9760dd.jpg",
+      "file": "assets/12fa4071a8658a65de9760dd.jpg",
+      "bytes": 50336,
+      "sha256": "0add33be2f7c8978304ed6ce5300db20ba071f878f90e9cb0d50a04e94a6039e"
+    },
+    {
+      "url": "https://wedivo.id/uploads/templates/unassigned/1790656545_e10ad493.jpg",
+      "capture": "Web invitations/_assets/wedivo.id/7c471d1faaae7438517799ba.jpg",
+      "file": "assets/7c471d1faaae7438517799ba.jpg",
+      "bytes": 14317,
+      "sha256": "723ef56a8f502cfb5a2f024b9b7656c01cd1922e1328e0f08114ddc78aaa0390"
+    },
+    {
+      "url": "https://wedivo.id/uploads/templates/unassigned/1790656543_48a290f4.jpg",
+      "capture": "Web invitations/_assets/wedivo.id/4458020731279a23f7b279f6.jpg",
+      "file": "assets/4458020731279a23f7b279f6.jpg",
+      "bytes": 137397,
+      "sha256": "3aa033f7d5747046404399fa197d13c89c4282d1478c9acdfc557215ae866d2e"
+    },
+    {
+      "url": "https://wedivo.id/uploads/templates/unassigned/1790656538_4e25d464.jpg",
+      "capture": "Web invitations/_assets/wedivo.id/6ba8e60b2d8b37b7400cf06d.jpg",
+      "file": "assets/6ba8e60b2d8b37b7400cf06d.jpg",
+      "bytes": 42959,
+      "sha256": "784e3c7fa033bc15aa3858c4c48ac1ae8b7641b32b623b362ba2fa0020062776"
+    },
+    {
+      "url": "https://wedivo.id/uploads/F3Qioc7zruXqPzTEOAiexTXP76r2/prewedding/1786930149_0fd4203f.jpg",
+      "capture": "Web invitations/_assets/wedivo.id/66578f838c3d6b85ecee5755.jpg",
+      "file": "preview-only/66578f838c3d6b85ecee5755.jpg",
+      "previewOnly": true,
+      "bytes": 129652,
+      "sha256": "c3cf5d1f14f9b89581132044d4c6d00487c702c7de9f6c0707b6ac4f8cf43c1b"
+    },
+    {
+      "url": "https://wedivo.id/uploads/F3Qioc7zruXqPzTEOAiexTXP76r2/templateBridePhoto_1784901007.jpg",
+      "capture": "Web invitations/_assets/wedivo.id/edf39742382ac66b91ff3c84.jpg",
+      "file": "preview-only/edf39742382ac66b91ff3c84.jpg",
+      "previewOnly": true,
+      "bytes": 83532,
+      "sha256": "689603470007429f597d0332db0c6fb2256f46ec2b3e8e1f54acd3ab1539cf9a"
+    },
+    {
+      "url": "https://wedivo.id/uploads/F3Qioc7zruXqPzTEOAiexTXP76r2/templateGroomPhoto_1784901084.jpg",
+      "capture": "Web invitations/_assets/wedivo.id/efa51c5d3489503f3f844fc9.jpg",
+      "file": "preview-only/efa51c5d3489503f3f844fc9.jpg",
+      "previewOnly": true,
+      "bytes": 81300,
+      "sha256": "69bca42da5b511580905e18ff24892321238c920b889b4eb37ea633946465bf9"
+    },
+    {
+      "url": "https://wedivo.id/uploads/F3Qioc7zruXqPzTEOAiexTXP76r2/prewedding/1785193296_c70faf89.jpg",
+      "capture": "Web invitations/_assets/wedivo.id/41e89e43e27b3628eeb42f39.jpg",
+      "file": "preview-only/41e89e43e27b3628eeb42f39.jpg",
+      "previewOnly": true,
+      "bytes": 117596,
+      "sha256": "ec425f2f706216180a8a3faff9414c6c5f046162e3fa9e3c2ea0723878672202"
+    },
+    {
+      "url": "https://wedivo.id/uploads/F3Qioc7zruXqPzTEOAiexTXP76r2/prewedding/1785193274_23b3b14d.jpg",
+      "capture": "Web invitations/_assets/wedivo.id/d7c2bc54df698eaa2a0eb30f.jpg",
+      "file": "preview-only/d7c2bc54df698eaa2a0eb30f.jpg",
+      "previewOnly": true,
+      "bytes": 187103,
+      "sha256": "9dc17c69e4d72fa44ab10fd9aefcccc7cf09528c4c9df94972fb9d125d2c1c83"
+    },
+    {
+      "url": "https://wedivo.id/uploads/F3Qioc7zruXqPzTEOAiexTXP76r2/prewedding/1784901519_48ff417d.jpg",
+      "capture": "Web invitations/_assets/wedivo.id/c6ad762859c070e270ae5ccf.jpg",
+      "file": "preview-only/c6ad762859c070e270ae5ccf.jpg",
+      "previewOnly": true,
+      "bytes": 117095,
+      "sha256": "bc648ea78532de810a22eef101d387c23b438d98a9d2af925c72268ab4378cb9"
+    },
+    {
+      "url": "https://wedivo.id/uploads/F3Qioc7zruXqPzTEOAiexTXP76r2/prewedding/1784901519_0e1affe0.jpg",
+      "capture": "Web invitations/_assets/wedivo.id/f1bc4ba8d9367baaf80bc54b.jpg",
+      "file": "preview-only/f1bc4ba8d9367baaf80bc54b.jpg",
+      "previewOnly": true,
+      "bytes": 108636,
+      "sha256": "2d4a0c8c948e746d33f8e1aecf2848e6ad3b10a8afb8f070bad2325023e674e7"
+    },
+    {
+      "url": "https://wedivo.id/uploads/F3Qioc7zruXqPzTEOAiexTXP76r2/prewedding/1784901487_fdd58e20.jpg",
+      "capture": "Web invitations/_assets/wedivo.id/fe8888373dd36d27981061d3.jpg",
+      "file": "preview-only/fe8888373dd36d27981061d3.jpg",
+      "previewOnly": true,
+      "bytes": 146627,
+      "sha256": "62790ac30a8a88b22635db136545fcdcbf65534ce9b6a89bd84816552c5eb3c0"
+    },
+    {
+      "url": "https://wedivo.id/uploads/F3Qioc7zruXqPzTEOAiexTXP76r2/prewedding/1784901487_b4f761ec.jpg",
+      "capture": "Web invitations/_assets/wedivo.id/3564de63889b8a2d7a251ba8.jpg",
+      "file": "preview-only/3564de63889b8a2d7a251ba8.jpg",
+      "previewOnly": true,
+      "bytes": 141473,
+      "sha256": "76fe34cd6eb3ccfdc734b9da47159cb6f942a5e58d0106a0a110ca632e0d4d89"
+    },
+    {
+      "url": "https://wedivo.id/uploads/F3Qioc7zruXqPzTEOAiexTXP76r2/prewedding/1784901487_0443a614.jpg",
+      "capture": "Web invitations/_assets/wedivo.id/019289a9c89374b0fedad5b8.jpg",
+      "file": "preview-only/019289a9c89374b0fedad5b8.jpg",
+      "previewOnly": true,
+      "bytes": 199427,
+      "sha256": "097f5694b1bd919a16cabf7f9732182587bfce5f60d28e2b872ed23818936ab1"
+    },
+    {
+      "url": "https://wedivo.id/uploads/F3Qioc7zruXqPzTEOAiexTXP76r2/prewedding/1784901519_9a204017.jpg",
+      "capture": "Web invitations/_assets/wedivo.id/8c81116edf474831e4a7ebfa.jpg",
+      "file": "preview-only/8c81116edf474831e4a7ebfa.jpg",
+      "previewOnly": true,
+      "bytes": 110395,
+      "sha256": "f7790b6523ea30a8c1851d67714791d572a0f72d86d522f446c27a0e006e4407"
+    },
+    {
+      "url": "https://wedivo.id/uploads/F3Qioc7zruXqPzTEOAiexTXP76r2/prewedding/1784901519_5465eeef.jpg",
+      "capture": "Web invitations/_assets/wedivo.id/82bcd84120b1457d9b3c9cc4.jpg",
+      "file": "preview-only/82bcd84120b1457d9b3c9cc4.jpg",
+      "previewOnly": true,
+      "bytes": 99745,
+      "sha256": "514e65e51cd9c0fb9655dd0ec079cf9ba2212e0d5434b0d50d19c9a7e1d410ef"
+    }
+  ],
+  "publicationReady": false
+}

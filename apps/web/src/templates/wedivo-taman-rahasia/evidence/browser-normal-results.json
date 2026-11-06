@@ -1,0 +1,24 @@
+[
+  {
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "errors": [],
+    "failed": [],
+    "normalOpening": true,
+    "seedFlip": true,
+    "program": 6
+  },
+  {
+    "viewport": {
+      "width": 1440,
+      "height": 1000
+    },
+    "errors": [],
+    "failed": [],
+    "normalOpening": true,
+    "seedFlip": true,
+    "program": 6
+  }
+]

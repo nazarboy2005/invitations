@@ -174,9 +174,13 @@ test("Velora RSVP adapter matches the public RSVP request contract", () => {
 
 test("Velora refreshes keep guest music playback stable unless its URL changes", () => {
   const adapter = readPackage("assets/js/velora-adapter.js");
+  const motion = readPackage("assets/js/velora.js");
   assert.match(adapter, /audio\.getAttribute\("src"\)\|\|""\)!==music/);
   assert.match(adapter, /audio\.pause\(\);if\(music\)audio\.src=music;else audio\.removeAttribute\("src"\);audio\.load\(\)/);
-  assert.match(adapter, /button\.dataset\.onIcon\)button\.src=button\.dataset\.onIcon/);
+  assert.match(adapter, /button\.dataset\.offIcon\)button\.src=button\.dataset\.offIcon/);
+  assert.match(motion, /audio\.paused\s*\?\s*button\.dataset\.offIcon\s*:\s*button\.dataset\.onIcon/);
+  assert.match(motion, /addEventListener\("play",\s*syncMusicIcon\)/);
+  assert.match(motion, /addEventListener\("pause",\s*syncMusicIcon\)/);
 });
 
 test("Velora registration and publication migrations preserve wedding-only support", () => {

@@ -1,0 +1,1 @@
+export { WedivoLanskapYangHidup } from "./renderer";

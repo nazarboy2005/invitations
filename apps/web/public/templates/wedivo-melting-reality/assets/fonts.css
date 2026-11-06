@@ -1,0 +1,175 @@
+@font-face {
+  font-family: 'Caveat';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(/templates/wedivo-melting-reality/assets/22833467f99fe0e822b10353.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Caveat';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(/templates/wedivo-melting-reality/assets/fd9ecc6cc938147162e03edd.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Fraunces';
+  font-style: italic;
+  font-weight: 300;
+  font-display: swap;
+  src: url(/templates/wedivo-melting-reality/assets/386dc5bed03b557b55e37d90.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Fraunces';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/templates/wedivo-melting-reality/assets/1c362fdb15e3810b68589344.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Fraunces';
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url(/templates/wedivo-melting-reality/assets/8bb5d7badc0189c17647cb8c.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Fraunces';
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+  src: url(/templates/wedivo-melting-reality/assets/00633b031b7bb8d71597b5d5.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Fraunces';
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url(/templates/wedivo-melting-reality/assets/1e6087c3a14b13b4ae479a21.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Fraunces';
+  font-style: italic;
+  font-weight: 800;
+  font-display: swap;
+  src: url(/templates/wedivo-melting-reality/assets/4457b78e4c881d8e72e4481d.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Fraunces';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url(/templates/wedivo-melting-reality/assets/68db300b3e14e7a304ca7112.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Fraunces';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/templates/wedivo-melting-reality/assets/79347ed53aa14e8b77ee572e.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Fraunces';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(/templates/wedivo-melting-reality/assets/72025d9b68a7dd0b68ebc1d5.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Fraunces';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(/templates/wedivo-melting-reality/assets/959364b06f81af7e1c72b4fe.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Fraunces';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(/templates/wedivo-melting-reality/assets/db7c5771335b7af9ea097413.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Fraunces';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url(/templates/wedivo-melting-reality/assets/9f3561849ac5150fef55b40d.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Newsreader';
+  font-style: italic;
+  font-weight: 300;
+  font-display: swap;
+  src: url(/templates/wedivo-melting-reality/assets/463b9785306ce85ececcb055.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Newsreader';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/templates/wedivo-melting-reality/assets/289d2aa8e0ed6731529209b3.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Newsreader';
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url(/templates/wedivo-melting-reality/assets/e365077394b3cd598cba1dc3.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Newsreader';
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+  src: url(/templates/wedivo-melting-reality/assets/c9a12dfcdb6c891db6d19bb5.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Newsreader';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url(/templates/wedivo-melting-reality/assets/dfe936d7a3e5c58fb24b2756.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Newsreader';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/templates/wedivo-melting-reality/assets/d6c65600eb0149bc0e2d25af.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Newsreader';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(/templates/wedivo-melting-reality/assets/3208926ba69d6886481d3ee0.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Newsreader';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(/templates/wedivo-melting-reality/assets/151ae355673a29361ba9f706.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Syne';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(/templates/wedivo-melting-reality/assets/30efed446465534fc866f21c.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Syne';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(/templates/wedivo-melting-reality/assets/14ee125de9afe230a727e485.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Syne';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(/templates/wedivo-melting-reality/assets/ceb080c99bbea3a86686a304.ttf) format('truetype');
+}

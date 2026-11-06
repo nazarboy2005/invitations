@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="uz-Latn" data-awaiting-content>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Yomg‘irdan so‘ng — Taklifnoma</title>
+<link rel="stylesheet" href="fonts/fonts.css">
+<link rel="stylesheet" href="source/template.css">
+<link rel="stylesheet" href="platform.css">
+</head>
+<body>
+
+<div id="yg-root" style="min-height:100vh;">
+
+  <audio id="yg-audio" loop preload="none"></audio>
+
+  <!-- ── Language switcher (top-left, avoids the music glyph top-right) ── -->
+  <div class="yg-lang" role="group" aria-label="Til / Language">
+    <button type="button" data-lang="uz-Latn" class="on">Uz</button>
+    <button type="button" data-lang="uz-Cyrl">Уз</button>
+    <button type="button" data-lang="en">En</button>
+    <button type="button" data-lang="ru">Ru</button>
+  </div>
+
+  <!-- ── Music toggle (hidden entirely without ?audio) ── -->
+  <button type="button" id="yg-music" aria-label="Musiqa" style="display:none; align-items:center; justify-content:center; position:fixed; z-index:60; top:14px; right:max(14px, calc(50vw - 201px)); width:44px; height:44px; border-radius:50%; border:1px solid rgba(247,236,217,.35); background:rgba(16,26,48,.55); backdrop-filter:blur(6px); color:#f7ecd9; font-size:19px; cursor:pointer;">♪</button>
+
+  <!-- ============ SPLASH ============ -->
+  <div id="yg-splash" style="position:fixed; inset:0; z-index:100; background:#050c18; transition:opacity .9s ease; opacity:1; pointer-events:auto; overflow:hidden;">
+    <img src="yomgir-img/hero-night.webp" alt="" style="position:absolute; left:-4%; top:-4%; width:108%; height:108%; object-fit:cover; filter:blur(6px) brightness(.72);">
+    <div aria-hidden="true" style="position:absolute; inset:0; background:radial-gradient(ellipse at 50% 40%, rgba(5,12,24,0) 30%, rgba(5,12,24,.6) 100%), linear-gradient(rgba(5,12,24,.2), rgba(5,12,24,.55));"></div>
+    <div aria-hidden="true" id="yg-splash-rain" style="position:absolute; inset:-20%; transform:rotate(7deg);"></div>
+    <div style="position:relative; height:100%; display:flex; align-items:center; justify-content:center;">
+      <div style="max-width:430px; padding:24px; text-align:center; color:#f7ecd9;">
+        <div style="width:150px; height:150px; margin:0 auto 28px; border:1px solid rgba(233,180,92,.55); outline:1px solid rgba(247,236,217,.16); outline-offset:7px; border-radius:50%; display:flex; align-items:center; justify-content:center; background:rgba(8,16,32,.32); backdrop-filter:blur(2px); box-shadow:0 0 80px rgba(233,180,92,.22);">
+          <span id="yg-splash-mono" style="font-family:'Milonga',serif; font-size:46px; letter-spacing:3px;"></span>
+        </div>
+        <div data-i18n="splash_kicker" style="font-size:13px; letter-spacing:6px; text-transform:uppercase; opacity:.85; text-shadow:0 2px 12px rgba(5,12,24,.8);">TO'Y TAKLIFNOMASI</div>
+        <div id="yg-splash-date" style="font-family:'Milonga',serif; font-size:22px; margin-top:10px; text-shadow:0 2px 12px rgba(5,12,24,.8);"></div>
+        <button type="button" id="yg-open" style="margin-top:36px; padding:16px 40px; border:none; border-radius:999px; background:linear-gradient(#f0c069,#dfa04a); color:#3a2a10; font-size:17px; font-weight:700; letter-spacing:1px; cursor:pointer; box-shadow:0 10px 34px rgba(233,180,92,.4);"><span data-i18n="splash_open">Taklifnomani ochish</span></button>
+        <div data-i18n="splash_promise" style="margin-top:16px; font-size:13px; opacity:.6; font-style:italic; text-shadow:0 2px 10px rgba(5,12,24,.8);">yomg'ir tinadi — va'da beramiz</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width:430px; margin:0 auto; position:relative; overflow:hidden; box-shadow:0 0 70px rgba(6,12,26,.45);">
+
+    <!-- ============ HERO ============ -->
+    <section style="position:relative; min-height:100svh; display:flex; flex-direction:column;">
+      <img src="yomgir-img/hero-night.webp" alt="" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;">
+      <div aria-hidden="true" style="position:absolute; inset:0; background:linear-gradient(rgba(8,16,32,.35), rgba(8,16,32,0) 40%, rgba(5,11,24,.2) 75%, #050c18);"></div>
+      <div aria-hidden="true" style="position:absolute; inset:0; overflow:hidden;">
+        <div id="yg-hero-rain" style="position:absolute; inset:-20%; transform:rotate(7deg);"></div>
+      </div>
+      <div style="position:relative; margin-top:auto; padding:0 24px 34px; text-align:center; color:#f7ecd9;">
+        <div data-i18n="hero_kicker" style="font-size:12px; letter-spacing:5px; text-transform:uppercase; opacity:.85;">NIKOH TO'YI</div>
+        <h1 id="yg-hero-names" style="margin:14px 0 0; font-family:'Milonga',serif; font-weight:400; font-size:clamp(42px,12vw,54px); line-height:1.15; background:linear-gradient(110deg,#f7ecd2 30%,#ffe9a8 45%,#d8b36a 50%,#f7ecd2 65%); background-size:220% 100%; -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:transparent; animation:shimmer 5s linear infinite;"></h1>
+        <div style="margin-top:12px; font-size:17px; letter-spacing:3px;"><span id="yg-hero-date"></span><span id="yg-hero-city-wrap"> — <span id="yg-hero-city"></span></span></div>
+        <div style="margin-top:30px; display:flex; flex-direction:column; align-items:center; gap:4px; opacity:.75;">
+          <span data-i18n="scroll_hint" style="font-size:11px; letter-spacing:4px; text-transform:uppercase;">PASTGA</span>
+          <span aria-hidden="true" style="font-size:18px; animation:bob 1.7s ease-in-out infinite;">▾</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ TRANSITION STRIP ============ -->
+    <section style="position:relative; background:#050c18;">
+      <img src="yomgir-img/strip-dawn.webp" alt="" style="display:block; width:100%;">
+      <div aria-hidden="true" style="position:absolute; inset:0; background:linear-gradient(#050c18, rgba(5,12,24,0) 35%, rgba(44,42,77,0) 70%, #2c2a4d);"></div>
+    </section>
+
+    <!-- ============ INVITATION CARD ============ -->
+    <section style="background:linear-gradient(#2c2a4d,#4b3f68); padding:54px 22px 60px; text-align:center; color:#f0e6da;">
+      <div data-i18n="inv_kicker" style="font-size:12px; letter-spacing:5px; text-transform:uppercase; opacity:.8;">Tong arafasida</div>
+      <h2 data-i18n="inv_title" style="margin:10px 0 30px; font-family:'Milonga',serif; font-weight:400; font-size:27px;">Sizni taklif etamiz</h2>
+      <div data-reveal style="position:relative; max-width:372px; margin:0 auto;">
+        <img src="yomgir-img/frame-dawn.webp" alt="Tongotar romli taklifnoma ramkasi" style="display:block; width:100%; border-radius:10px; box-shadow:0 18px 50px rgba(10,12,30,.4);">
+        <div style="position:absolute; inset:24% 24%; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:12px; color:#4a3247; text-align:center;">
+          <div id="yg-frame-kicker" data-i18n="frame_kicker" style="font-size:11px; letter-spacing:3px; text-transform:uppercase; color:#8a6a56;">Oilalari bilan birgalikda</div>
+          <div id="yg-frame-parents-wrap" style="font-size:13.5px; line-height:1.55; color:#5c4a42;">
+            <div id="yg-frame-groom-parents" data-i18n="groom_parents_default"></div>
+            <div id="yg-frame-joiner" data-i18n="parents_joiner">va</div>
+            <div id="yg-frame-bride-parents" data-i18n="bride_parents_default"></div>
+          </div>
+          <div id="yg-frame-names" style="font-family:'Milonga',serif; font-size:24px; line-height:1.2; color:#3f2c3f;"></div>
+          <p data-i18n="inv_request" style="margin:0; font-size:13.5px; line-height:1.55; font-style:italic; color:#5c4a42;"></p>
+          <div style="font-size:13px; letter-spacing:1px; color:#8a6a56;">
+            <div id="yg-frame-when"></div>
+            <div id="yg-frame-where"><span id="yg-frame-venue"></span><span id="yg-frame-city-wrap">, <span id="yg-frame-city"></span></span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ DIVIDER (dawn) ============ -->
+    <section id="yg-divider-1" style="position:relative; background:#4b3f68;">
+      <img src="yomgir-img/divider-dawn.webp" alt="" style="display:block; width:100%;">
+      <div aria-hidden="true" style="position:absolute; inset:0; background:linear-gradient(#4b3f68, rgba(75,63,104,0) 40%, rgba(223,130,137,0) 70%, #df8089);"></div>
+    </section>
+
+    <!-- ============ EVENTS ============ -->
+    <section id="yg-events-section" style="background:linear-gradient(#df8089,#e8a893 45%,#eab699); padding:54px 24px 60px; color:#fdf6ea;">
+      <div data-reveal style="text-align:center;">
+        <div data-i18n="ev_kicker" style="font-size:12px; letter-spacing:5px; text-transform:uppercase; opacity:.85;">Kun ochilmoqda</div>
+        <h2 data-i18n="ev_title" style="margin:10px 0 34px; font-family:'Milonga',serif; font-weight:400; font-size:27px; text-shadow:0 2px 14px rgba(90,50,70,.3);">To'y marosimlari</h2>
+      </div>
+      <div id="yg-events" style="position:relative; padding-left:30px; display:flex; flex-direction:column; gap:18px;">
+      </div>
+    </section>
+
+    <!-- ============ DIVIDER (morning, flipped) ============ -->
+    <section id="yg-divider-2" style="position:relative; background:#eab699;">
+      <img src="yomgir-img/divider-dawn.webp" alt="" style="display:block; width:100%; transform:scaleX(-1);">
+      <div aria-hidden="true" style="position:absolute; inset:0; background:linear-gradient(#eab699, rgba(234,182,153,.8) 35%, rgba(243,221,192,.7) 70%, #f3ddc0);"></div>
+    </section>
+
+    <!-- ============ VENUE ============ -->
+    <section id="yg-venue-section" style="background:linear-gradient(#f3ddc0,#d9e9f0); padding:54px 24px 60px; text-align:center; color:#4a3b2c;">
+      <div data-i18n="venue_kicker" style="font-size:12px; letter-spacing:5px; text-transform:uppercase; color:#a5764a;">Tong yog'dusi</div>
+      <h2 data-i18n="venue_title" style="margin:10px 0 26px; font-family:'Milonga',serif; font-weight:400; font-size:27px; color:#5c4632;">Manzil</h2>
+      <div data-reveal>
+        <img src="yomgir-img/venue-day.webp" alt="To'y saroyi manzarasi" style="display:block; width:100%; border-radius:18px; border:5px solid rgba(255,252,244,.85); box-shadow:0 16px 44px rgba(90,110,130,.3); box-sizing:border-box;">
+        <div id="yg-venue-name" style="margin-top:20px; font-size:21px; font-weight:700; color:#4a3b2c;"></div>
+        <p id="yg-venue-addr" style="margin:5px 0 0; font-size:15px; color:#7a6650;"></p>
+        <a id="yg-map" href="#" target="_blank" rel="noopener noreferrer" style="display:inline-block; margin-top:20px; padding:13px 32px; border-radius:999px; background:linear-gradient(#e8a95c,#d98e3f); color:#3a2610; font-size:16px; font-weight:700; text-decoration:none; box-shadow:0 8px 24px rgba(217,142,63,.35);"><span data-i18n="btn_map">Xaritada ochish</span></a>
+      </div>
+    </section>
+
+    <!-- ============ GUEST INFO ============ -->
+    <section id="yg-info-section" style="background:linear-gradient(#d9e9f0,#c3e0f0); padding:46px 24px 56px; color:#33506b;">
+      <h2 data-i18n="info_title" style="margin:0 0 22px; text-align:center; font-family:'Milonga',serif; font-weight:400; font-size:27px; color:#2d4a63;">Bilib qo'ying</h2>
+      <div data-reveal style="background:rgba(255,252,244,.85); border-radius:16px; padding:22px; display:flex; flex-direction:column; gap:16px; box-shadow:0 12px 34px rgba(90,120,150,.18);">
+        <div id="yg-info-dress" style="display:flex; gap:12px; align-items:baseline;"><span aria-hidden="true" style="color:#d98e3f; font-size:15px;">✦</span><div style="font-size:15px; line-height:1.5;"><strong data-i18n="info_dress_label">Kiyim</strong> — <span id="yg-info-dress-text" data-i18n="info_dress_default"></span></div></div>
+        <div id="yg-info-arrival" style="display:flex; gap:12px; align-items:baseline;"><span aria-hidden="true" style="color:#d98e3f; font-size:15px;">✦</span><div style="font-size:15px; line-height:1.5;"><strong data-i18n="info_arrival_label">Kelish vaqti</strong> — <span id="yg-info-arrival-text" data-i18n="info_arrival_default"></span></div></div>
+        <div id="yg-info-gifts" style="display:flex; gap:12px; align-items:baseline;"><span aria-hidden="true" style="color:#d98e3f; font-size:15px;">✦</span><div style="font-size:15px; line-height:1.5;"><strong data-i18n="info_gifts_label">Sovg'alar</strong> — <span id="yg-info-gifts-text" data-i18n="info_gifts_default"></span></div></div>
+        <div id="yg-info-contact" style="display:flex; gap:12px; align-items:baseline;"><span aria-hidden="true" style="color:#d98e3f; font-size:15px;">✦</span><div style="font-size:15px; line-height:1.5;"><strong data-i18n="info_contact_label">Savollar</strong> — <span id="yg-info-contact-text" data-i18n="info_contact_default"></span></div></div>
+      </div>
+    </section>
+
+    <!-- ============ WISHES ============ -->
+    <section id="yg-wishes-section" style="background:linear-gradient(#c3e0f0,#abd6ee); padding:46px 24px 56px; color:#2d4a63;">
+      <h2 data-i18n="wish_title" style="margin:0 0 6px; text-align:center; font-family:'Milonga',serif; font-weight:400; font-size:27px;">Iliq tilaklar</h2>
+      <div data-i18n="wish_sub" style="text-align:center; font-size:14.5px; color:#4d6a84; margin-bottom:22px;">Kelin-kuyov uchun bir-ikki og'iz so'z qoldiring</div>
+      <form id="yg-wish-form" class="wish-form" data-reveal style="background:rgba(255,252,244,.9); border-radius:16px; padding:18px; display:flex; flex-direction:column; gap:12px; box-shadow:0 12px 34px rgba(90,120,150,.18);">
+        <input name="wname" required maxlength="100" aria-label="Ismingiz" data-i18n-ph="wish_name_ph" placeholder="Ismingiz" style="padding:12px 14px; border:1px solid #cbb99f; border-radius:10px; font-size:15px; background:#fffdf8; color:#3a3226; outline-color:#d98e3f;">
+        <textarea name="wmsg" required maxlength="2000" aria-label="Tilagingiz" rows="3" data-i18n-ph="wish_msg_ph" placeholder="Tilagingiz…" style="padding:12px 14px; border:1px solid #cbb99f; border-radius:10px; font-size:15px; background:#fffdf8; color:#3a3226; resize:vertical; outline-color:#d98e3f;"></textarea>
+        <button type="submit" style="padding:13px; border:none; border-radius:999px; background:linear-gradient(#e8a95c,#d98e3f); color:#3a2610; font-size:16px; font-weight:700; cursor:pointer;"><span data-i18n="btn_send">Tilak yo'llash</span></button>
+      </form>
+      <div id="yg-wish-confirm" role="status" aria-live="polite" data-i18n="wish_thanks" style="display:none; text-align:center; font-size:15px; font-style:italic; color:#2d4a63; margin-top:18px;">Rahmat — tilagingiz saqlandi ♡</div>
+      <div id="yg-wish-empty" data-i18n="wish_empty" style="display:none; text-align:center; font-size:15px; font-style:italic; color:#4d6a84; opacity:.8; padding:14px 0;">Birinchi bo'lib tilak yo'llang.</div>
+      <div id="yg-wish-list" style="margin-top:18px; display:flex; flex-direction:column; gap:10px;"></div>
+    </section>
+
+    <!-- ============ COUNTDOWN ============ -->
+    <section id="yg-countdown-section" style="position:relative; background:#abd6ee; padding:60px 24px 70px; overflow:hidden;">
+      <img src="yomgir-img/sky-day.webp" alt="" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;">
+      <div aria-hidden="true" style="position:absolute; inset:0; background:linear-gradient(#abd6ee, rgba(171,214,238,0) 30%, rgba(138,196,234,0) 75%, #8ac4ea);"></div>
+      <div aria-hidden="true" style="position:absolute; inset:0; pointer-events:none;">
+        <div style="position:absolute; top:10%; left:0; width:320px; height:120px; background:radial-gradient(ellipse at 50% 60%, rgba(255,255,255,.6), rgba(255,255,255,0) 70%); filter:blur(10px); animation:driftX 130s linear infinite; animation-delay:-50s;"></div>
+        <div style="position:absolute; top:62%; left:0; width:260px; height:100px; background:radial-gradient(ellipse at 50% 60%, rgba(255,255,255,.45), rgba(255,255,255,0) 70%); filter:blur(10px); animation:driftX 170s linear infinite; animation-delay:-110s;"></div>
+      </div>
+      <div style="position:relative; text-align:center; color:#1f3a55;">
+        <div data-i18n="cd_kicker" style="font-size:12px; letter-spacing:5px; text-transform:uppercase; color:#33608a;">Quyoshli kun yaqin</div>
+        <h2 data-i18n="cd_title" style="margin:10px 0 26px; font-family:'Milonga',serif; font-weight:400; font-size:27px;">Sanoq boshlandi</h2>
+        <div id="yg-cd-grid" data-reveal style="display:flex; justify-content:center; gap:10px;">
+          <div style="flex:1; max-width:86px; background:rgba(255,255,255,.82); border-radius:14px; padding:14px 6px; box-shadow:0 10px 26px rgba(60,110,150,.22);"><div id="yg-cd-d" style="font-family:'Milonga',serif; font-size:32px; line-height:1;">–</div><div data-i18n="cd_days" style="margin-top:6px; font-size:10.5px; letter-spacing:2px; text-transform:uppercase; color:#33608a;">KUN</div></div>
+          <div style="flex:1; max-width:86px; background:rgba(255,255,255,.82); border-radius:14px; padding:14px 6px; box-shadow:0 10px 26px rgba(60,110,150,.22);"><div id="yg-cd-h" style="font-family:'Milonga',serif; font-size:32px; line-height:1;">–</div><div data-i18n="cd_hours" style="margin-top:6px; font-size:10.5px; letter-spacing:2px; text-transform:uppercase; color:#33608a;">SOAT</div></div>
+          <div style="flex:1; max-width:86px; background:rgba(255,255,255,.82); border-radius:14px; padding:14px 6px; box-shadow:0 10px 26px rgba(60,110,150,.22);"><div id="yg-cd-m" style="font-family:'Milonga',serif; font-size:32px; line-height:1;">–</div><div data-i18n="cd_mins" style="margin-top:6px; font-size:10.5px; letter-spacing:2px; text-transform:uppercase; color:#33608a;">DAQIQA</div></div>
+          <div style="flex:1; max-width:86px; background:rgba(255,255,255,.82); border-radius:14px; padding:14px 6px; box-shadow:0 10px 26px rgba(60,110,150,.22);"><div id="yg-cd-s" style="font-family:'Milonga',serif; font-size:32px; line-height:1;">–</div><div data-i18n="cd_secs" style="margin-top:6px; font-size:10.5px; letter-spacing:2px; text-transform:uppercase; color:#33608a;">SONIYA</div></div>
+        </div>
+        <div data-i18n="cd_foot" style="margin-top:22px; font-size:15px; font-style:italic; color:#33608a;">musaffo osmon ostidagi bazmimizgacha</div>
+      </div>
+    </section>
+
+    <!-- ============ FOOTER ============ -->
+    <footer style="position:relative; background:linear-gradient(#8ac4ea,#6cb2e0); padding:56px 24px 46px; text-align:center; color:#1f3a55; overflow:hidden;">
+      <div aria-hidden="true" style="position:absolute; inset:0; pointer-events:none;">
+        <div style="position:absolute; top:14%; left:0; width:300px; height:110px; background:radial-gradient(ellipse at 50% 60%, rgba(255,255,255,.7), rgba(255,255,255,0) 70%); filter:blur(9px); animation:driftX 150s linear infinite; animation-delay:-70s;"></div>
+        <div style="position:absolute; top:58%; left:0; width:240px; height:90px; background:radial-gradient(ellipse at 50% 60%, rgba(255,255,255,.55), rgba(255,255,255,0) 70%); filter:blur(9px); animation:driftX 190s linear infinite; animation-delay:-120s;"></div>
+      </div>
+      <div data-reveal style="position:relative;">
+        <div id="yg-foot-names" style="font-family:'Milonga',serif; font-size:34px;"></div>
+        <div style="margin-top:8px; font-size:15px; letter-spacing:3px;"><span id="yg-foot-date"></span><span id="yg-foot-city-wrap"> — <span id="yg-foot-city"></span></span></div>
+        <div aria-hidden="true" style="margin:18px auto 0; width:60px; height:1px; background:rgba(31,58,85,.4);"></div>
+        <p id="yg-foot-note" data-i18n="footer_note_default" style="margin:18px 0 0; font-size:15.5px; font-style:italic; color:#2d4a63;">Har yomg'irdan so'ng quyosh chiqadi — eng yorug' kunimizni siz bilan baham ko'rishga oshiqamiz.</p>
+      </div>
+    </footer>
+
+  </div>
+</div>
+
+<script src="source/events.js"></script>
+<script src="source/wishes.js"></script>
+<script src="source/wish-close.js"></script>
+<script src="source/motion.js"></script>
+<script src="ui-copy.js"></script>
+<script src="bridge.js"></script>
+</body>
+</html>

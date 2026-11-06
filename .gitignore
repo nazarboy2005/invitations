@@ -42,7 +42,17 @@ apps/web/src/generated/public-asset-version.json
 /tmp/
 /temp/
 /.tmp/
+.tmp-*/
+.tmp-*
 .tmp-*.png
+
+# Python and browser automation caches
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
 
 # Editor and operating-system files
 .idea/

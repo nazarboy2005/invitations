@@ -2022,6 +2022,26 @@
           }
         }
       ]
+    },
+    "other": {
+      "eventLabel": {
+        "uz-Latn": "",
+        "uz-Cyrl": "",
+        "en": "",
+        "ru": ""
+      },
+      "hosts": {
+        "uz-Latn": "",
+        "uz-Cyrl": "",
+        "en": "",
+        "ru": ""
+      },
+      "message": {
+        "uz-Latn": "Sizni ko‘rish va birga yoqimli vaqt o‘tkazishni intizorlik bilan kutamiz.",
+        "uz-Cyrl": "Сизни кўриш ва бирга ёқимли вақт ўтказишни интизорлик билан кутамиз.",
+        "en": "We look forward to seeing you and sharing a wonderful time together.",
+        "ru": "Будем рады встрече и приятному времени вместе."
+      }
     }
   }
 }

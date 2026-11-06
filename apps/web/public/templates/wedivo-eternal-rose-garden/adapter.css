@@ -1,0 +1,9 @@
+html:not(.rose-ready) body { visibility: hidden; }
+[hidden] { display: none !important; }
+.rose-no-date .js-date-long, .rose-no-date .js-weekday, .rose-no-date .js-monthyear, .rose-no-date .js-time, .rose-no-date #hero-time { display: none !important; }
+#cover-names, #hero-names, #close-names { overflow-wrap: anywhere; }
+#cover-name-b, #cover-name-g, #hero-name-b, #hero-name-g { max-width: 100%; }
+:focus-visible { outline: 2px solid #9b2440; outline-offset: 4px; }
+.rose-reduced-motion *, .rose-reduced-motion *::before, .rose-reduced-motion *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; scroll-behavior: auto !important; }
+.rose-reduced-motion .rv { opacity: 1 !important; transform: none !important; filter: none !important; }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; } }

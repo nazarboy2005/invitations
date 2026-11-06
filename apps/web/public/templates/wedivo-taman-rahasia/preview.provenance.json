@@ -1,0 +1,26 @@
+{
+  "templateId": "wedivo-taman-rahasia",
+  "proposedUzbekCatalogName": "Sirli Bog‘",
+  "method": "rendered locked source opening",
+  "viewport": {
+    "width": 450,
+    "height": 800,
+    "deviceScaleFactor": 1
+  },
+  "locale": "uz-Latn",
+  "sourceSelector": "#sec-cover",
+  "sourceCaptureSha256": "4f06ac5741a77d9edabcfbdd1f653b3682c47a9c3beb83d7ef47579ad00fbce3",
+  "fixture": "apps/web/src/modules/catalog/preview-sample.json",
+  "fixtureSha256": "98591ce063bd2fa23c2ae508ad19e54ded2f965ac6693aa5a8410fbe497a1f13",
+  "sourceIndexSha256": "dfaddae2f150c92880dd22ff1f388e5aed6ae1467223c4eed6ef7812177f75b8",
+  "sourceCssSha256": "43824524ffa9ef382f7fcb6be076da8a1b0a49228d9c74b701cafcf838736451",
+  "sourceScriptSha256": "79b855a53cec8d76d444d73c1f7083e2e84a4c3c7991309857dc1b221e3515b5",
+  "bridgeSha256": "60a343549c6ceb9bb3037ec74e38291745e1c6e6e60d7e70fea878cb77763fce",
+  "rawPngSha256": "d2383356e4968992ad457ab0eb8d27d0c112c025cf06ab1229e5b65fd82fe1eb",
+  "previewWebpSha256": "4b4b938381e963775b479df5d35c5c317425a69c60339dfc201786e2652584b2",
+  "exclusions": [
+    "platform locale selector (capture session only)"
+  ],
+  "state": "gate locked; no opening interaction; canonical sample only; no personalized guest",
+  "originalCaptureChanged": false
+}

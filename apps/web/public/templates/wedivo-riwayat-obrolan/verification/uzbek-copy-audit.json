@@ -1,0 +1,241 @@
+{
+  "errors": [],
+  "labels": [
+    {
+      "id": "appbar",
+      "label": "Suhbat sarlavhasi"
+    },
+    {
+      "id": "ab-back",
+      "label": "Suhbatlarni ochish"
+    },
+    {
+      "id": "ab-who",
+      "label": "Suhbat haqida"
+    },
+    {
+      "id": "ab-call",
+      "label": "Qo‘ng‘iroq qilish"
+    },
+    {
+      "id": "ab-more",
+      "label": "Qo‘shimcha menyu"
+    },
+    {
+      "id": "ab-menu",
+      "label": "Suhbat menyusi"
+    },
+    {
+      "id": "sec-hero",
+      "label": "Guruh haqida"
+    },
+    {
+      "id": "hero-ring",
+      "label": "Holatimizni ko‘rish"
+    },
+    {
+      "id": "sec-ayat",
+      "label": "Mahkamlangan xabar"
+    },
+    {
+      "id": "sec-mempelai",
+      "label": "Kelin-kuyov haqida"
+    },
+    {
+      "id": "mp-g-photo",
+      "label": "Tadbir"
+    },
+    {
+      "id": "mp-b-photo",
+      "label": "Tadbir"
+    },
+    {
+      "id": "sec-keluarga",
+      "label": "Restu keluarga"
+    },
+    {
+      "id": "sec-terjadwal",
+      "label": "Rejalashtirilgan xabar"
+    },
+    {
+      "id": "sec-acara",
+      "label": "Taklifnoma"
+    },
+    {
+      "id": "sec-rundown",
+      "label": "Tadbir dasturi"
+    },
+    {
+      "id": "sec-lokasi",
+      "label": "Tadbir manzili"
+    },
+    {
+      "id": "sec-busana",
+      "label": "Suhbat rangi va kiyinish uslubi"
+    },
+    {
+      "id": "bs-sw-1",
+      "label": "Suhbat mavzusi Shampan"
+    },
+    {
+      "id": "bs-sw-2",
+      "label": "Suhbat mavzusi Pudra"
+    },
+    {
+      "id": "bs-sw-3",
+      "label": "Suhbat mavzusi Zaytun"
+    },
+    {
+      "id": "bs-sw-4",
+      "label": "Suhbat mavzusi To‘q ko‘k"
+    },
+    {
+      "id": "bs-sw-5",
+      "label": "Suhbat mavzusi Bordo"
+    },
+    {
+      "id": "sec-galeri",
+      "label": "Lahzalar"
+    },
+    {
+      "id": "b-r108",
+      "label": "Lahzalar 1 / 6"
+    },
+    {
+      "id": "b-r110",
+      "label": "Lahzalar 2 / 6"
+    },
+    {
+      "id": "b-r112",
+      "label": "Lahzalar 3 / 6"
+    },
+    {
+      "id": "b-r114",
+      "label": "Lahzalar 4 / 6"
+    },
+    {
+      "id": "b-r131",
+      "label": "Lahzalar 5 / 6"
+    },
+    {
+      "id": "b-r133",
+      "label": "Lahzalar 6 / 6"
+    },
+    {
+      "id": "sec-rsvp",
+      "label": "Taklifnomaga javob"
+    },
+    {
+      "id": "sec-ucapan",
+      "label": "Ezgu tilaklar"
+    },
+    {
+      "id": "wish-send",
+      "label": "Tilak yuborish"
+    },
+    {
+      "id": "sec-penutup",
+      "label": "Yakun"
+    },
+    {
+      "id": "nav",
+      "label": "Suhbatlar ro‘yxati"
+    },
+    {
+      "id": "nav-close",
+      "label": "Suhbatlarni yopish"
+    },
+    {
+      "id": "nav-search",
+      "label": "Suhbatlarni izlash"
+    },
+    {
+      "id": "nav-chips",
+      "label": "Suhbatlarni saralash"
+    },
+    {
+      "id": "composer",
+      "label": "Xabar maydoni"
+    },
+    {
+      "id": "cp-emoji",
+      "label": "Munosabat bildirish"
+    },
+    {
+      "id": "cp-attach",
+      "label": "Ilovalar"
+    },
+    {
+      "id": "cp-send",
+      "label": "Tilak yozish"
+    },
+    {
+      "id": "fab",
+      "label": "Keyingi bo‘lim"
+    },
+    {
+      "id": "att",
+      "label": "Ilovalar"
+    },
+    {
+      "id": "rbar",
+      "label": "Munosabatni tanlash"
+    },
+    {
+      "id": "rb-1",
+      "label": "Yoqdi"
+    },
+    {
+      "id": "rb-2",
+      "label": "Kulgili"
+    },
+    {
+      "id": "rb-3",
+      "label": "Hayrat"
+    },
+    {
+      "id": "rb-4",
+      "label": "Ta’sirlandi"
+    },
+    {
+      "id": "rb-5",
+      "label": "Aamiin"
+    },
+    {
+      "id": "rb-6",
+      "label": "Tabrik"
+    }
+  ],
+  "placeholders": [
+    {
+      "id": "rsvp-name",
+      "placeholder": "Ismingiz"
+    },
+    {
+      "id": "rsvp-msg",
+      "placeholder": "Izoh (ixtiyoriy)"
+    },
+    {
+      "id": "wish-name",
+      "placeholder": "Ismingiz"
+    },
+    {
+      "id": "wish-msg",
+      "placeholder": "Tilagingizni yozing…"
+    },
+    {
+      "id": "nav-search",
+      "placeholder": "Suhbatni izlash…"
+    }
+  ],
+  "weekdays": [
+    "Yakshanba",
+    "Dushanba",
+    "Seshanba",
+    "Chorshanba",
+    "Payshanba",
+    "Juma",
+    "Shanba"
+  ],
+  "residualSourceCopy": false
+}

@@ -1,0 +1,15 @@
+exec(open('scripts/templates/package-wedivo-melting-reality.py',encoding='utf-8').read())
+reference=raw
+reference=re.sub(r'<script type="application/json" id="wedivo-parameters">[\s\S]*?</script>','',reference)
+reference=re.sub(r'<script data-wedivo-preview-stub>[\s\S]*?</script>','',reference)
+reference=re.sub(r'<iframe\b[^>]*>[\s\S]*?</iframe>','',reference)
+reference=re.sub(r'@import\s+url\([^)]*\)\s*;',f'@import url("{base}assets/fonts.css");',reference)
+for asset in provenance['assets']: reference=reference.replace(asset['url'],base+asset['file'])
+reference=re.sub(r'https://wedivo.id/uploads/[^\s\"<>\)]+','',reference)
+reference=reference.replace('soundOn = true;','soundOn = false;')
+(root/'apps/web/public/qa-wedivo-melting-reality-reference.html').write_text(reference,'utf-8')
+qa=root/'apps/web/public/qa-wedivo-melting-reality.html'
+host=qa.read_text('utf-8')
+host=host.replace('html,body{margin:0;background:#ddd}','html,body{margin:0;background:#ddd;height:100%;overflow:hidden}')
+host=host.replace('frame.onload=()=>{','frame.onload=()=>{if(query.has("poster")){const style=frame.contentDocument.createElement("style");style.textContent=".platform-languages{display:none!important}";frame.contentDocument.head.append(style);}')
+qa.write_text(host,'utf-8')

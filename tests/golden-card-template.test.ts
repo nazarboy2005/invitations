@@ -163,5 +163,9 @@ test("Golden Card keeps source-absent sections hidden and uses count-free opt-in
   assert.match(styles, /\.golden-music-toggle:hover\{transform:scale\(1\.1\)\}/);
   assert.match(styles, /\.golden-music-toggle:active\{transform:scale\(\.9\)\}/);
   assert.match(styles, /prefers-reduced-motion:reduce\).*golden-music-toggle/);
-  assert.match(bridge, /musicEnabled\s*\?\s*'<path/);
+  assert.match(bridge, /const playing = !audio\.paused && !audio\.ended/);
+  assert.match(bridge, /icon\.innerHTML = playing\s*\?/);
+  assert.match(bridge, /audio\.addEventListener\("play", syncMusicLabel\)/);
+  assert.match(bridge, /audio\.addEventListener\("pause", syncMusicLabel\)/);
+  assert.match(bridge, /if \(!audio\.paused && !audio\.ended\)[\s\S]*?musicEnabled = false[\s\S]*?else \{\s*musicEnabled = true/);
 });

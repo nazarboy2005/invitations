@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Qog'oz ertagi — Taklifnoma</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amarante&family=Averia+Serif+Libre:ital,wght@0,300;0,400;0,700;1,400&family=MonteCarlo&family=Marck+Script&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  :root { --accent:#c9a24b; /* alias for shared _wish-close.js */ }
+  html, body { margin: 0; padding: 0; }
+  body { background: #f6ecd6; font-family: 'Averia Serif Libre', Georgia, serif; color: #4a3a28; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; overflow-x: hidden; }
+  a { color: #8a6238; } a:hover { color: #5f9c4a; }
+  input, textarea, button { font-family: inherit; }
+  input::placeholder, textarea::placeholder { color: #b7a684; opacity: 1; }
+  [data-pop] { opacity: 0; }
+  @keyframes pmPop { from { opacity:0; transform:perspective(900px) rotateX(16deg) translateY(26px) scale(.985); } to { opacity:1; transform:perspective(900px) rotateX(0deg) translateY(0) scale(1); } }
+  @keyframes pmShimmer { 0% { background-position:0% 50%; } 100% { background-position:200% 50%; } }
+  @keyframes pmBobA { from { transform:translateY(-8px) rotate(-5deg); } to { transform:translateY(10px) rotate(4deg); } }
+  @keyframes pmBobB { from { transform:translateY(9px) rotate(6deg); } to { transform:translateY(-9px) rotate(-4deg); } }
+  @keyframes pmBobC { from { transform:translateY(-6px) translateX(-5px) rotate(3deg); } to { transform:translateY(8px) translateX(6px) rotate(-6deg); } }
+  @keyframes pmHint { 0%, 100% { transform:translateY(0); } 50% { transform:translateY(7px); } }
+  @media (prefers-reduced-motion: reduce) { * { animation-duration: .001ms !important; animation-iteration-count: 1 !important; } }
+  .qg-lang { position:fixed; top:14px; left:max(14px, calc(50vw - 199px)); z-index:70; display:flex; gap:2px; background:rgba(251,243,226,.92); border:1px solid rgba(201,162,75,.5); border-radius:999px; padding:3px; box-shadow:0 8px 22px -10px rgba(90,55,20,.3); }
+  .qg-lang button { border:0; background:transparent; cursor:pointer; font-family:Amarante,serif; font-size:11px; font-weight:700; letter-spacing:.06em; color:#8a6238; padding:5px 9px; border-radius:999px; line-height:1; text-transform:uppercase; }
+  .qg-lang button.on { background:linear-gradient(180deg,#d9b25f,#bd9440); color:#fff9ea; }
+</style>
+</head>
+<body>
+
+<div id="qg-desk" style="position:fixed;inset:0;z-index:0;background:radial-gradient(130% 90% at 50% 12%, #b5804e 0%, #8a5a38 82%)"></div>
+
+<!-- ============ SPLASH — 3D book cover ============ -->
+<div id="qg-splash" style="position:fixed;inset:0;z-index:50;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;background:radial-gradient(120% 90% at 50% 24%, #aa7b50 0%, #7c4e2c 80%);opacity:1;pointer-events:auto;transition:opacity .6s ease .55s">
+  <div style="perspective:1500px;width:min(78vw,330px)">
+    <div style="position:relative;aspect-ratio:2/3">
+      <div style="position:absolute;inset:0;background:#fbf3e2;border-radius:6px 14px 14px 6px;box-shadow:inset 0 0 0 1px #e6d6b4, inset -14px 0 24px rgba(140,100,50,.18), 0 18px 50px rgba(50,25,5,.5);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px">
+        <img src="qogoz-img/gen-petal-2.webp" alt="" style="width:22px;transform:rotate(28deg)">
+        <div data-i18n="cover_inner" style="font-family:'MonteCarlo','Marck Script',cursive;font-size:26px;color:#a88a4e">siz uchun</div>
+      </div>
+      <div id="qg-cover" style="position:absolute;inset:0;transform-origin:0% 50%;transform:perspective(1500px) rotateY(0deg);transition:transform 1.15s cubic-bezier(.7,.05,.3,1);border-radius:6px 14px 14px 6px;overflow:hidden;box-shadow:0 20px 55px rgba(50,25,5,.55)">
+        <img src="qogoz-img/cover.webp" alt="Kitob muqovasi" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+        <div style="position:absolute;left:0;top:0;bottom:0;width:16px;background:linear-gradient(90deg, rgba(90,55,20,.35), rgba(255,255,255,0))"></div>
+        <div style="position:absolute;left:10%;right:10%;bottom:8%;padding:15px 10px 13px;text-align:center;background:rgba(251,243,226,.94);border:1.5px solid #c9a24b;border-radius:10px;box-shadow:inset 0 2px 0 rgba(255,255,255,.65), inset 0 -2px 8px rgba(120,80,30,.16), 0 8px 22px rgba(60,30,5,.28)">
+          <div data-i18n="cover_kicker" style="font-family:Amarante,serif;font-size:10px;letter-spacing:3.5px;color:#8a6238">NIKOH TO'YI</div>
+          <div id="qg-cover-names" style="font-family:'MonteCarlo','Marck Script',cursive;font-size:31px;line-height:1.15;color:#6b4f2a;margin-top:2px;white-space:nowrap;overflow:hidden">Timur &amp; Madina</div>
+          <div style="width:52px;height:1.5px;background:#c9a24b;margin:7px auto"></div>
+          <div id="qg-cover-dots" style="font-family:Amarante,serif;font-size:12px;letter-spacing:2.5px;color:#8a6238">26 · 09 · 2026</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button type="button" id="qg-open" style="font-family:Amarante,serif;font-size:15px;letter-spacing:2px;color:#fff9ea;background:linear-gradient(180deg,#d9b25f,#bd9440);border:1px solid rgba(255,246,220,.55);border-radius:999px;padding:14px 34px;cursor:pointer;box-shadow:0 8px 22px rgba(50,25,5,.4)"><span data-i18n="cover_open">Taklifnomani ochish</span></button>
+</div>
+
+<!-- ── Language switcher (top-left) ── -->
+<div class="qg-lang" role="group" aria-label="Til / Language">
+  <button type="button" data-lang="uz" class="on">UZ</button>
+  <button type="button" data-lang="en">EN</button>
+  <button type="button" data-lang="ru">RU</button>
+</div>
+
+<!-- ── Music toggle (hidden entirely without ?audio) ── -->
+<button type="button" id="qg-music" title="Musiqa" style="display:none;position:fixed;bottom:16px;right:max(16px, calc(50% - 199px));z-index:60;width:46px;height:46px;border-radius:50%;background:#fffdf4;border:1.5px solid #d0b06a;box-shadow:0 8px 20px rgba(70,40,10,.38);align-items:center;justify-content:center;cursor:pointer;padding:0">
+  <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#8a6238" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
+  <div id="qg-music-off" style="position:absolute;width:26px;height:2px;background:#b0532e;transform:rotate(-45deg);border-radius:2px"></div>
+</button>
+
+<div style="position:relative;z-index:1;max-width:430px;margin:0 auto;min-height:100vh;background:#f6ecd6;box-shadow:0 0 0 1px rgba(120,90,50,.3), 10px 0 0 -4px #e7d8b6, -10px 0 0 -4px #e7d8b6, 18px 0 0 -9px #d9c79f, -18px 0 0 -9px #d9c79f, 0 34px 80px rgba(55,28,8,.5)">
+
+  <audio id="qg-audio" loop preload="none"></audio>
+
+  <!-- ============ HERO SCENE ============ -->
+  <div data-scene="hero" style="position:relative;min-height:100svh;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end">
+    <img data-par="26" src="qogoz-img/hero-back.webp" alt="" style="position:absolute;left:-5%;top:-13%;width:110%;height:122%;object-fit:cover">
+    <div data-par="16" style="position:absolute;left:7%;top:8%;width:104px;filter:drop-shadow(0 10px 14px rgba(90,55,20,.32));pointer-events:none">
+      <img src="qogoz-img/gen-sun.webp" alt="" style="width:100%;animation:pmBobB 9s ease-in-out -2s infinite alternate">
+    </div>
+    <div data-par="12" style="position:absolute;left:74%;top:21%;width:62px;filter:drop-shadow(0 8px 10px rgba(90,55,20,.32));pointer-events:none">
+      <img src="qogoz-img/bird.webp" alt="" style="width:100%;animation:pmBobC 6.5s ease-in-out infinite alternate">
+    </div>
+    <div data-par="14" style="position:absolute;left:10%;top:26%;width:24px;pointer-events:none"><img src="qogoz-img/gen-petal-1.webp" alt="" style="width:100%;animation:pmBobA 7s ease-in-out -1s infinite alternate"></div>
+    <div data-par="8" style="position:absolute;left:78%;top:13%;width:18px;pointer-events:none"><img src="qogoz-img/gen-petal-2.webp" alt="" style="width:100%;animation:pmBobB 8.5s ease-in-out -3s infinite alternate"></div>
+    <div data-par="6" style="position:absolute;left:31%;top:8%;width:14px;pointer-events:none"><img src="qogoz-img/gen-petal-3.webp" alt="" style="width:100%;animation:pmBobC 9.5s ease-in-out -2s infinite alternate"></div>
+    <div data-par="18" style="position:absolute;left:85%;top:41%;width:20px;pointer-events:none"><img src="qogoz-img/gen-petal-2.webp" alt="" style="width:100%;animation:pmBobA 8s ease-in-out -4s infinite alternate"></div>
+    <div data-par="10" style="position:absolute;left:5%;top:49%;width:16px;pointer-events:none"><img src="qogoz-img/gen-petal-1.webp" alt="" style="width:100%;animation:pmBobB 7.5s ease-in-out -2.5s infinite alternate"></div>
+    <img data-par="-10" src="qogoz-img/hills.webp" alt="" style="position:absolute;left:-9%;bottom:18%;width:118%;filter:drop-shadow(0 -8px 18px rgba(90,55,20,.3));pointer-events:none">
+    <img data-par="-30" src="qogoz-img/arch.webp" alt="" style="position:absolute;left:-8%;top:-6%;width:116%;height:112%;object-fit:cover;filter:drop-shadow(0 14px 26px rgba(80,45,15,.38));pointer-events:none">
+    <div style="position:relative;z-index:6;padding:38px 28px 30px;text-align:center;background:linear-gradient(180deg, rgba(246,236,214,0) 0%, rgba(246,236,214,.8) 30%, rgba(246,236,214,.97) 72%, #f6ecd6 100%)">
+      <div data-i18n="hero_kicker" style="font-family:Amarante,serif;font-size:12px;letter-spacing:4.5px;color:#8a6238">BIZ TURMUSH QURAMIZ</div>
+      <h1 id="qg-hero-names" style="margin:4px 0 0;font-family:'MonteCarlo','Marck Script',cursive;font-weight:400;font-size:57px;line-height:1.08;background:linear-gradient(105deg,#6b4f2a 0%,#b98d3e 38%,#ffe9ae 50%,#b98d3e 62%,#6b4f2a 100%);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;animation:pmShimmer 5.5s linear infinite;white-space:nowrap;overflow:hidden">Timur &amp; Madina</h1>
+      <div id="qg-hero-dateline" style="margin-top:8px;font-size:15px;color:#6b563c;letter-spacing:.5px">Shanba · 26-sentabr 2026</div>
+      <div style="margin-top:22px;display:flex;flex-direction:column;align-items:center;gap:3px;color:#8a6238;animation:pmHint 2.2s ease-in-out infinite">
+        <div data-i18n="hero_hint" style="font-family:Amarante,serif;font-size:11px;letter-spacing:3px">SAHIFALARNI OCHING</div>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ PAGE-TURN STRIP ============ -->
+  <div style="position:relative">
+    <div style="height:24px;background:linear-gradient(180deg,#f6ecd6,#c8e6f2)"></div>
+    <img src="qogoz-img/strip.webp" alt="" style="display:block;width:100%;height:172px;object-fit:cover">
+    <div style="height:24px;background:linear-gradient(180deg,#6b8c3f,#f6ecd6)"></div>
+  </div>
+
+  <!-- ============ INVITATION ============ -->
+  <div style="padding:44px 26px 8px">
+    <div data-pop style="text-align:center;margin-bottom:24px">
+      <img src="qogoz-img/gen-petal-2.webp" alt="" style="width:20px;transform:rotate(24deg)">
+      <div data-i18n="inv_header" style="font-family:Amarante,serif;font-size:22px;letter-spacing:2.5px;color:#4a3a28;margin-top:4px">Taklifnoma</div>
+      <div style="width:54px;height:1.5px;background:#c9a24b;margin:10px auto 0"></div>
+    </div>
+    <div data-pop style="position:relative">
+      <img src="qogoz-img/frame.webp" alt="" style="display:block;width:100%;border-radius:8px;box-shadow:0 14px 34px rgba(120,80,30,.22)">
+      <div style="position:absolute;left:22%;right:22%;top:23%;bottom:23%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:9px">
+        <div data-i18n="frame_cursive" style="font-family:'MonteCarlo','Marck Script',cursive;font-size:25px;line-height:1;color:#b98d3e">Quvnoq qalb bilan</div>
+        <div data-i18n="frame_sentence" style="font-size:13px;line-height:1.7;color:#5d4a32">Oilalarimiz bilan birgalikda sizni bir butun bo'ladigan kunimizni baham ko'rishga taklif etamiz.</div>
+        <div style="display:flex;gap:6px;align-items:center"><div style="width:4px;height:4px;border-radius:50%;background:#c9a24b"></div><div style="width:4px;height:4px;border-radius:50%;background:#c9a24b"></div><div style="width:4px;height:4px;border-radius:50%;background:#c9a24b"></div></div>
+        <div id="qg-frame-invdate" style="font-family:Amarante,serif;font-size:15px;letter-spacing:1px;color:#4a3a28">26-sentabr 2026 · 17:00</div>
+        <div id="qg-frame-venuecity" style="font-size:12px;color:#8a7357">Navro'z Saroyi · Toshkent</div>
+      </div>
+    </div>
+  </div>
+
+  <div data-pop style="margin:34px 26px;height:76px;border-radius:14px;overflow:hidden;position:relative;box-shadow:0 8px 20px rgba(120,80,30,.22)">
+    <img src="qogoz-img/strip.webp" alt="" style="width:100%;height:100%;object-fit:cover;object-position:50% 82%;transform:scaleX(-1)">
+  </div>
+
+  <!-- ============ EVENTS ============ -->
+  <div id="qg-events-section" style="padding:10px 30px 12px">
+    <div data-pop style="text-align:center;margin-bottom:26px">
+      <img src="qogoz-img/gen-petal-1.webp" alt="" style="width:20px;transform:rotate(-18deg)">
+      <div data-i18n="events_header" style="font-family:Amarante,serif;font-size:22px;letter-spacing:2.5px;color:#4a3a28;margin-top:4px">To'y kunimiz</div>
+      <div style="width:54px;height:1.5px;background:#c9a24b;margin:10px auto 0"></div>
+    </div>
+    <div id="qg-events" style="border-left:2px dashed #d5bf94;padding-left:24px;margin-left:6px;display:flex;flex-direction:column;gap:26px">
+      <div data-pop style="position:relative">
+        <div style="position:absolute;left:-32px;top:3px;width:13px;height:13px;border-radius:50%;background:#c9a24b;border:3px solid #fffdf4;box-shadow:0 2px 6px rgba(120,80,30,.35)"></div>
+        <div style="font-family:Amarante,serif;font-size:14px;letter-spacing:2px;color:#b98d3e">16:00</div>
+        <div data-i18n="ev1_title" style="font-weight:700;font-size:17px;margin-top:2px">Mehmonlarni kutib olish</div>
+        <div data-i18n="ev1_desc" style="font-size:13.5px;line-height:1.6;color:#7a654a;margin-top:3px">Bog' hovlisida sharbat, shirinliklar va ilk quchoqlashuvlar</div>
+      </div>
+      <div data-pop style="position:relative">
+        <div style="position:absolute;left:-32px;top:3px;width:13px;height:13px;border-radius:50%;background:#c9a24b;border:3px solid #fffdf4;box-shadow:0 2px 6px rgba(120,80,30,.35)"></div>
+        <div style="font-family:Amarante,serif;font-size:14px;letter-spacing:2px;color:#b98d3e">17:00</div>
+        <div data-i18n="ev2_title" style="font-weight:700;font-size:17px;margin-top:2px">Nikoh marosimi</div>
+        <div data-i18n="ev2_desc" style="font-size:13.5px;line-height:1.6;color:#7a654a;margin-top:3px">Gullagan ravoq ostida ahdu paymon</div>
+      </div>
+      <div data-pop style="position:relative">
+        <div style="position:absolute;left:-32px;top:3px;width:13px;height:13px;border-radius:50%;background:#c9a24b;border:3px solid #fffdf4;box-shadow:0 2px 6px rgba(120,80,30,.35)"></div>
+        <div style="font-family:Amarante,serif;font-size:14px;letter-spacing:2px;color:#b98d3e">18:30</div>
+        <div data-i18n="ev3_title" style="font-weight:700;font-size:17px;margin-top:2px">Ziyofat</div>
+        <div data-i18n="ev3_desc" style="font-size:13.5px;line-height:1.6;color:#7a654a;margin-top:3px">Dasturxon yoziladi — osh, tabriklar va kulgu</div>
+      </div>
+      <div data-pop style="position:relative">
+        <div style="position:absolute;left:-32px;top:3px;width:13px;height:13px;border-radius:50%;background:#c9a24b;border:3px solid #fffdf4;box-shadow:0 2px 6px rgba(120,80,30,.35)"></div>
+        <div style="font-family:Amarante,serif;font-size:14px;letter-spacing:2px;color:#b98d3e">21:00</div>
+        <div data-i18n="ev4_title" style="font-weight:700;font-size:17px;margin-top:2px">Yulduzlargacha raqs</div>
+        <div data-i18n="ev4_desc" style="font-size:13.5px;line-height:1.6;color:#7a654a;margin-top:3px">Qog'oz yulduzlar chiqquniga qadar davom etamiz</div>
+      </div>
+    </div>
+  </div>
+
+  <div data-pop style="margin:34px 26px;height:76px;border-radius:14px;overflow:hidden;position:relative;box-shadow:0 8px 20px rgba(120,80,30,.22)">
+    <img src="qogoz-img/strip.webp" alt="" style="width:100%;height:100%;object-fit:cover;object-position:50% 26%">
+  </div>
+
+  <!-- ============ VENUE ============ -->
+  <div style="padding:10px 26px 12px">
+    <div data-pop style="text-align:center;margin-bottom:24px">
+      <img src="qogoz-img/gen-petal-3.webp" alt="" style="width:20px;transform:rotate(40deg)">
+      <div data-i18n="venue_header" style="font-family:Amarante,serif;font-size:22px;letter-spacing:2.5px;color:#4a3a28;margin-top:4px">Manzil</div>
+      <div style="width:54px;height:1.5px;background:#c9a24b;margin:10px auto 0"></div>
+    </div>
+    <div data-pop style="background:#fffdf4;border:1px solid #e6d6b4;border-radius:16px;padding:26px 22px;box-shadow:0 10px 26px rgba(120,85,40,.16);text-align:center">
+      <div id="qg-venue-name" style="font-family:Amarante,serif;font-size:21px;letter-spacing:1px">Navro'z Saroyi</div>
+      <div id="qg-venue-addr" style="font-size:14px;color:#7a654a;margin-top:6px;line-height:1.6">Toshkent sh., Bog' ko'chasi 12</div>
+      <div id="qg-venue-note-wrap"><div id="qg-venue-note" data-i18n="venue_note_default" style="font-size:12.5px;color:#a08b68;margin-top:4px">Eshiklar 16:00 da ochiladi · hovlida avtoturargoh</div></div>
+      <a id="qg-map" href="https://maps.google.com/?q=Navro%27z+Saroyi+Toshkent" target="_blank" rel="noopener noreferrer" style="display:inline-block;margin-top:18px;text-decoration:none;font-family:Amarante,serif;font-size:14px;letter-spacing:2px;color:#fff9ea;background:linear-gradient(180deg,#d9b25f,#bd9440);border-radius:999px;padding:13px 30px;box-shadow:0 8px 20px rgba(140,100,40,.35)"><span data-i18n="map_btn">XARITANI OCHISH</span></a>
+    </div>
+  </div>
+
+  <!-- ============ GOOD TO KNOW ============ -->
+  <div style="padding:26px 26px 8px">
+    <div id="qg-info-card" data-pop style="background:#fffdf4;border:1px solid #e6d6b4;border-radius:16px;padding:24px 22px;box-shadow:0 10px 26px rgba(120,85,40,.16)">
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div id="qg-info-dress">
+          <div data-i18n="info_dress_label" style="font-family:Amarante,serif;font-size:13px;letter-spacing:2.5px;color:#b98d3e">KIYIM</div>
+          <div id="qg-info-dress-text" data-i18n="info_dress_default" style="font-size:14px;line-height:1.6;color:#5d4a32;margin-top:3px">Bog' pastellari va yengil matolar — oqshom iliq bo'ladi.</div>
+        </div>
+        <div id="qg-info-divider" style="height:1px;background:#eee0c2"></div>
+        <div id="qg-info-contact">
+          <div data-i18n="info_contact_label" style="font-family:Amarante,serif;font-size:13px;letter-spacing:2.5px;color:#b98d3e">SAVOLLAR</div>
+          <div id="qg-info-contact-text" data-i18n="info_contact_default" style="font-size:14px;line-height:1.6;color:#5d4a32;margin-top:3px">Aziza, tadbir tashkilotchisi — +998 90 000 00 00</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ WISHES ============ -->
+  <div style="padding:40px 26px 46px">
+    <div data-pop style="text-align:center;margin-bottom:24px">
+      <img src="qogoz-img/gen-petal-2.webp" alt="" style="width:20px;transform:rotate(-30deg)">
+      <div data-i18n="wish_header" style="font-family:Amarante,serif;font-size:22px;letter-spacing:2.5px;color:#4a3a28;margin-top:4px">Tilaklar</div>
+      <div data-i18n="wish_sub" style="font-size:13px;color:#8a7357;margin-top:6px">Kelin-kuyov uchun iliq so'z qoldiring</div>
+      <div style="width:54px;height:1.5px;background:#c9a24b;margin:10px auto 0"></div>
+    </div>
+    <form id="qg-wish-form" class="wish-form" data-pop style="background:#fffdf4;border:1px solid #e6d6b4;border-radius:16px;padding:20px 18px;box-shadow:0 10px 26px rgba(120,85,40,.16);display:flex;flex-direction:column;gap:12px">
+      <input name="wname" data-i18n-ph="wish_name_ph" placeholder="Ismingiz" style="width:100%;box-sizing:border-box;background:#fbf5e6;border:1.5px solid #decba0;border-radius:12px;padding:12px 14px;font-family:'Averia Serif Libre',Georgia,serif;font-size:14px;color:#4a3a28;outline:none">
+      <textarea name="wmsg" rows="3" data-i18n-ph="wish_msg_ph" placeholder="Kelin-kuyov uchun tilagingiz…" style="width:100%;box-sizing:border-box;background:#fbf5e6;border:1.5px solid #decba0;border-radius:12px;padding:12px 14px;font-family:'Averia Serif Libre',Georgia,serif;font-size:14px;color:#4a3a28;outline:none;resize:vertical"></textarea>
+      <button type="submit" style="font-family:Amarante,serif;font-size:14px;letter-spacing:2px;color:#fff9ea;background:linear-gradient(180deg,#d9b25f,#bd9440);border:none;border-radius:999px;padding:13px 20px;cursor:pointer;box-shadow:0 8px 20px rgba(140,100,40,.35)"><span data-i18n="wish_send">TILAK YO'LLASH</span></button>
+    </form>
+    <div id="qg-wish-confirm" data-i18n="wish_thanks" style="display:none;text-align:center;font-style:italic;font-size:13px;color:#a08b68;margin-top:18px">Rahmat — tilagingiz saqlandi ♡</div>
+    <div id="qg-wish-empty" data-i18n="wish_empty" style="text-align:center;font-style:italic;font-size:13px;color:#a08b68;margin-top:18px">Hozircha tilaklar yo'q — siznikisi kitobni ochadi.</div>
+    <div id="qg-wish-list" style="display:flex;flex-direction:column;gap:12px;margin-top:18px"></div>
+  </div>
+
+  <div style="height:28px;background:linear-gradient(180deg,#f6ecd6,#fdc065)"></div>
+
+  <!-- ============ COUNTDOWN SCENE ============ -->
+  <div data-scene="count" style="position:relative;min-height:104svh;overflow:hidden;display:flex;align-items:center;justify-content:center">
+    <img data-par="30" src="qogoz-img/count-back.webp" alt="" style="position:absolute;left:-5%;top:-13%;width:110%;height:122%;object-fit:cover">
+    <div data-par="18" style="position:absolute;left:-9%;bottom:26%;width:118%;pointer-events:none">
+      <img src="qogoz-img/hills.webp" alt="" style="width:100%;transform:scaleX(-1);filter:drop-shadow(0 -8px 18px rgba(90,45,15,.35)) brightness(.92) saturate(.9)">
+    </div>
+    <div data-par="10" style="position:absolute;inset:-2%;pointer-events:none">
+      <img src="qogoz-img/arch.webp" alt="" style="width:100%;height:100%;object-fit:cover;transform:scale(.8);opacity:.94;filter:brightness(.9)">
+    </div>
+    <div data-par="8" style="position:absolute;left:72%;top:16%;width:54px;filter:drop-shadow(0 8px 10px rgba(90,45,15,.35));pointer-events:none">
+      <img src="qogoz-img/bird.webp" alt="" style="width:100%;animation:pmBobC 7s ease-in-out -1s infinite alternate">
+    </div>
+    <div data-par="16" style="position:absolute;left:12%;top:20%;width:20px;pointer-events:none"><img src="qogoz-img/gen-petal-1.webp" alt="" style="width:100%;animation:pmBobA 7.5s ease-in-out infinite alternate"></div>
+    <div data-par="6" style="position:absolute;left:82%;top:34%;width:15px;pointer-events:none"><img src="qogoz-img/gen-petal-2.webp" alt="" style="width:100%;animation:pmBobB 8s ease-in-out -2s infinite alternate"></div>
+    <div data-par="22" style="position:absolute;left:8%;top:64%;width:22px;pointer-events:none"><img src="qogoz-img/gen-petal-3.webp" alt="" style="width:100%;animation:pmBobC 9s ease-in-out -4s infinite alternate"></div>
+    <div data-par="12" style="position:absolute;left:66%;top:74%;width:17px;pointer-events:none"><img src="qogoz-img/gen-petal-1.webp" alt="" style="width:100%;animation:pmBobB 7s ease-in-out -3s infinite alternate"></div>
+    <img data-par="-36" src="qogoz-img/arch.webp" alt="" style="position:absolute;left:-9%;top:-7%;width:118%;height:114%;object-fit:cover;filter:drop-shadow(0 16px 30px rgba(70,35,10,.42));pointer-events:none">
+    <div data-pop style="position:relative;z-index:6;background:rgba(255,251,240,.94);border:1.5px solid #d9bc7a;border-radius:18px;padding:26px 22px;margin:0 30px;text-align:center;box-shadow:0 18px 44px rgba(80,40,10,.38)">
+      <div data-i18n="cd_kicker" style="font-family:Amarante,serif;font-size:10px;letter-spacing:3.5px;color:#8a6238">ENG TERAN SAHIFA</div>
+      <div data-i18n="cd_cursive" style="font-family:'MonteCarlo','Marck Script',cursive;font-size:31px;line-height:1.1;color:#6b4f2a;margin-top:4px">Kunlarni sanayapmiz</div>
+      <div style="display:flex;justify-content:center;gap:9px;margin-top:16px">
+        <div style="min-width:62px;background:#f6ecd6;border:1px solid #d9bc7a;border-radius:12px;padding:10px 6px 8px">
+          <div id="qg-cd-d" style="font-family:Amarante,serif;font-size:29px;line-height:1;color:#4a3a28">–</div>
+          <div data-i18n="cd_days" style="font-size:9px;letter-spacing:2px;color:#8a6238;margin-top:5px">KUN</div>
+        </div>
+        <div style="min-width:62px;background:#f6ecd6;border:1px solid #d9bc7a;border-radius:12px;padding:10px 6px 8px">
+          <div id="qg-cd-h" style="font-family:Amarante,serif;font-size:29px;line-height:1;color:#4a3a28">–</div>
+          <div data-i18n="cd_hours" style="font-size:9px;letter-spacing:2px;color:#8a6238;margin-top:5px">SOAT</div>
+        </div>
+        <div style="min-width:62px;background:#f6ecd6;border:1px solid #d9bc7a;border-radius:12px;padding:10px 6px 8px">
+          <div id="qg-cd-m" style="font-family:Amarante,serif;font-size:29px;line-height:1;color:#4a3a28">–</div>
+          <div data-i18n="cd_mins" style="font-size:9px;letter-spacing:2px;color:#8a6238;margin-top:5px">DAQIQA</div>
+        </div>
+        <div style="min-width:62px;background:#f6ecd6;border:1px solid #d9bc7a;border-radius:12px;padding:10px 6px 8px">
+          <div id="qg-cd-s" style="font-family:Amarante,serif;font-size:29px;line-height:1;color:#4a3a28">–</div>
+          <div data-i18n="cd_secs" style="font-size:9px;letter-spacing:2px;color:#8a6238;margin-top:5px">SONIYA</div>
+        </div>
+      </div>
+      <div id="qg-cd-invdate" style="font-family:Amarante,serif;font-size:13px;letter-spacing:1.5px;color:#8a6238;margin-top:16px">26-sentabr 2026 · 17:00</div>
+    </div>
+  </div>
+  <div style="height:26px;background:linear-gradient(180deg,#482a13,#4a3a28)"></div>
+
+  <!-- ============ FOOTER — back cover ============ -->
+  <div style="background:linear-gradient(180deg,#4a3a28,#3b2d1e);padding:42px 26px 40px;text-align:center;color:#e7d8b6">
+    <div data-pop style="border:1.5px solid rgba(201,162,75,.6);border-radius:8px;padding:30px 20px">
+      <div id="qg-foot-names" style="font-family:'MonteCarlo','Marck Script',cursive;font-size:42px;line-height:1;color:#d9bc7a;white-space:nowrap;overflow:hidden">Timur &amp; Madina</div>
+      <div id="qg-foot-dots" style="font-family:Amarante,serif;font-size:12px;letter-spacing:3.5px;color:rgba(231,216,182,.85);margin-top:10px">26 · 09 · 2026</div>
+      <div style="width:44px;height:1.5px;background:rgba(201,162,75,.6);margin:16px auto"></div>
+      <div id="qg-foot-note" data-i18n="footer_note_default" style="font-size:12.5px;font-style:italic;color:rgba(231,216,182,.72);line-height:1.6">Nihoya — va ibtido.<br>Mehr, qog'oz va yelim bilan yaratildi.</div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+/* ══ Qog'oz ertagi (w43) customizer + i18n + guestbook + book-open splash ══
+   Architecture ported from tovus.html (n03) / sakura.html (w42): base DOM
+   language is Uzbek; apply() captures el.__uz once and swaps in EN/RU from
+   DICT, skipping any element the owner filled (data-user-set). The book-open
+   splash + scene-centered parallax + desk-gradient scroll interpolation are
+   ported ~1:1 from the "Paper Meadow" design source's own
+   Component.ensureInit()/applyScroll()/openCover(). */
+(function () {
+  "use strict";
+  var q = new URLSearchParams(location.search);
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var esc = function (s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
+    return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); };
+  var setTxt = function (el, v) { if (el) { el.textContent = v; el.setAttribute("data-user-set", "1"); } };
+  var hide = function (el) { if (el) el.style.display = "none"; };
+
+  /* ── i18n dictionary: key -> [en, ru]; uz is read from the DOM ── */
+  var DICT = {
+    cover_kicker: ["THE WEDDING OF", "СВАДЬБА"],
+    cover_inner: ["for you", "для вас"],
+    cover_open: ["Open Invitation", "Открыть приглашение"],
+    hero_kicker: ["WE ARE GETTING MARRIED", "МЫ СОЗДАЁМ СЕМЬЮ"],
+    hero_hint: ["OPEN THE PAGES", "ЛИСТАЙТЕ СТРАНИЦЫ"],
+    inv_header: ["The Invitation", "Приглашение"],
+    frame_cursive: ["With joyful hearts", "С радостью в сердце"],
+    frame_sentence: ["Together with our families, we invite you to share the day we become one.", "Вместе с нашими семьями мы приглашаем вас разделить день, когда мы станем одним целым."],
+    events_header: ["Our Wedding Day", "День нашей свадьбы"],
+    ev1_title: ["Guests are welcomed", "Встреча гостей"],
+    ev1_desc: ["Sherbet, sweets and first hugs in the garden court.", "Шербет, сладости и первые объятия в саду"],
+    ev2_title: ["The ceremony", "Церемония никох"],
+    ev2_desc: ["We say yes beneath the blossom arch.", "Клятвы произносим под цветущей аркой"],
+    ev3_title: ["The feast", "Праздничный ужин"],
+    ev3_desc: ["The dastarkhan is served — osh, toasts and laughter.", "Накрывается дастархан — плов, тосты и смех"],
+    ev4_title: ["Dancing till the stars", "Танцы до звёзд"],
+    ev4_desc: ["Until the paper stars come out over the meadow.", "Пока над лугом не взойдут бумажные звёзды"],
+    venue_header: ["The Place", "Место"],
+    map_btn: ["OPEN THE MAP", "ОТКРЫТЬ КАРТУ"],
+    venue_note_default: ["Doors open at 4 PM · parking inside the court", "Двери открываются в 16:00 · парковка во дворе"],
+    info_dress_label: ["DRESS CODE", "ДРЕСС-КОД"],
+    info_contact_label: ["QUESTIONS", "ВОПРОСЫ"],
+    info_dress_default: ["Garden pastels and light fabrics — the evening is warm.", "Садовые пастельные тона и лёгкие ткани — вечер будет тёплым."],
+    info_contact_default: ["Aziza, our organizer — +998 90 000 00 00", "Азиза, организатор торжества — +998 90 000 00 00"],
+    wish_header: ["Wishes", "Пожелания"],
+    wish_sub: ["Leave a warm word for the couple", "Оставьте тёплые слова молодожёнам"],
+    wish_send: ["SEND A WISH", "ОТПРАВИТЬ ПОЖЕЛАНИЕ"],
+    wish_thanks: ["Thank you — your wish has been saved ♡", "Спасибо — ваше пожелание сохранено ♡"],
+    wish_empty: ["No wishes yet — yours will open the book.", "Пока нет пожеланий — ваше станет первым."],
+    cd_kicker: ["THE DEEPEST PAGE", "САМАЯ ГЛУБОКАЯ СТРАНИЦА"],
+    cd_cursive: ["Counting the days", "Считаем дни"],
+    cd_days: ["DAYS", "ДНИ"], cd_hours: ["HOURS", "ЧАСЫ"], cd_mins: ["MINUTES", "МИНУТЫ"], cd_secs: ["SECONDS", "СЕКУНДЫ"],
+    footer_note_default: ["The end — and the beginning.<br>Folded with love, paper and glue.", "Конец — и начало.<br>Создано с любовью, бумагой и клеем."]
+  };
+  var PH = {
+    wish_name_ph: ["Your name", "Ваше имя"],
+    wish_msg_ph: ["Your wish for the couple…", "Ваше пожелание молодожёнам…"]
+  };
+  /* localized month names + full weekday names, index 0 = Jan / Sunday */
+  var MON = {
+    uz: ["yanvar","fevral","mart","aprel","may","iyun","iyul","avgust","sentabr","oktabr","noyabr","dekabr"],
+    en: ["January","February","March","April","May","June","July","August","September","October","November","December"],
+    ru: ["января","февраля","марта","апреля","мая","июня","июля","августа","сентября","октября","ноября","декабря"]
+  };
+  var DOWFULL = {
+    uz: ["Yakshanba","Dushanba","Seshanba","Chorshanba","Payshanba","Juma","Shanba"],
+    en: ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
+    ru: ["Воскресенье","Понедельник","Вторник","Среда","Четверг","Пятница","Суббота"]
+  };
+
+  /* ── language state ── */
+  function norm(l) { l = (l || "").toLowerCase(); return l === "en" || l === "ru" ? l : "uz"; }
+  var initLang = norm(q.get("lang") || q.get("default_lang") ||
+    (function () { try { return localStorage.getItem("takliflaLang"); } catch (e) { return null; } })() ||
+    document.documentElement.lang || "uz");
+  window.__takliflaLang = initLang;
+
+  /* MW stash of date/venue parts for re-localisation, seeded with the demo
+     date (26.09.2026, 17:00 — Saturday, dow 6) so localized slots read
+     correctly in EN/RU even when the owner hasn't set ?date yet. MW.city is
+     seeded to the demo venue's city ("Toshkent") so the frame card's
+     "Venue · City" line has a sensible default; the venue-only guard below
+     clears it back to "" when the owner sets ?venue without ?address. */
+  var MW = { dd: 26, mm: 9, yy: 2026, dow: 6, time: "17:00", city: "Toshkent" };
+
+  function p2(n) { return (n < 10 ? "0" : "") + n; }
+  function dshort(dd, mm, yy) { return p2(dd) + " · " + p2(mm) + " · " + yy; }
+
+  function frameVenueCity() {
+    var vNameEl = $("#qg-venue-name");
+    var vName = (vNameEl && vNameEl.textContent) || "";
+    var el = $("#qg-frame-venuecity");
+    if (el) el.textContent = vName + (MW.city ? " · " + MW.city : "");
+  }
+
+  function localizeDate(lang) {
+    var months = MON[lang] || MON.uz;
+    var dows = DOWFULL[lang] || DOWFULL.uz;
+    var sep = lang === "uz" ? "-" : " ";
+    var h = $("#qg-hero-dateline");
+    if (h) h.textContent = dows[MW.dow] + " · " + MW.dd + sep + (months[MW.mm - 1] || "") + " " + MW.yy;
+    var invText = MW.dd + sep + (months[MW.mm - 1] || "") + " " + MW.yy + " · " + MW.time;
+    var f = $("#qg-frame-invdate"); if (f) f.textContent = invText;
+    var c = $("#qg-cd-invdate"); if (c) c.textContent = invText;
+    frameVenueCity();
+  }
+
+  function apply() {
+    var lang = norm(window.__takliflaLang);
+    var nodes = document.querySelectorAll("[data-i18n]");
+    for (var i = 0; i < nodes.length; i++) {
+      var el = nodes[i];
+      if (el.getAttribute("data-user-set") === "1") continue;
+      if (el.__uz == null) el.__uz = el.innerHTML;
+      var pair = DICT[el.getAttribute("data-i18n")];
+      el.innerHTML = lang === "uz" || !pair ? el.__uz : (lang === "en" ? pair[0] : pair[1]);
+    }
+    var phs = document.querySelectorAll("[data-i18n-ph]");
+    for (var j = 0; j < phs.length; j++) {
+      var pe = phs[j];
+      if (pe.__uzph == null) pe.__uzph = pe.getAttribute("placeholder") || "";
+      var pp = PH[pe.getAttribute("data-i18n-ph")];
+      pe.setAttribute("placeholder", lang === "uz" || !pp ? pe.__uzph : (lang === "en" ? pp[0] : pp[1]));
+    }
+    localizeDate(lang);
+    var btns = document.querySelectorAll(".qg-lang button");
+    for (var k = 0; k < btns.length; k++) btns[k].classList.toggle("on", btns[k].getAttribute("data-lang") === lang);
+    document.documentElement.lang = lang;
+  }
+
+  /* ── language switcher ── */
+  (function () {
+    var wrap = $(".qg-lang");
+    if (!wrap) return;
+    wrap.addEventListener("click", function (e) {
+      var b = e.target.closest("button[data-lang]");
+      if (!b) return;
+      var lang = norm(b.getAttribute("data-lang"));
+      window.__takliflaLang = lang;
+      try { localStorage.setItem("takliflaLang", lang); } catch (er) {}
+      document.dispatchEvent(new CustomEvent("taklifla:langchange", { detail: { lang: lang } }));
+    });
+  })();
+  document.addEventListener("taklifla:langchange", apply);
+
+  /* ── names (fixed bounded split, verbatim from tovus/sakura). Cover-plate,
+     hero and footer names are each a SINGLE combined "A & B" line (no split
+     spans / no separate ampersand element to hide for a lone name). ── */
+  var names = q.get("names");
+  var n1 = "", n2 = "";
+  if (names && names.trim()) {
+    // word separators (va/и) require surrounding whitespace so names that
+    // contain them as substrings (Avazbek, Anvar, Дилшод) don't get split
+    var parts = names.split(/\s*[&+—]\s*|\s+(?:va|и)\s+/i).filter(Boolean);
+    n1 = (parts[0] || names).trim();
+    n2 = (parts[1] || "").trim();
+    var pair = n2 ? n1 + " & " + n2 : n1;
+    setTxt($("#qg-cover-names"), pair);
+    setTxt($("#qg-hero-names"), pair);
+    setTxt($("#qg-foot-names"), pair);
+  }
+
+  /* ── long names must never clip: shrink the cover-plate/hero/footer name
+     type until the widest line fits (Muhammadyusuf-class names overflow at
+     390px viewports). Re-run once webfonts land — metrics change. ── */
+  (function () {
+    function fit(el, base, min) {
+      if (!el) return;
+      var size = base;
+      el.style.fontSize = size + "px";
+      var guard = 24;
+      while (guard-- > 0 && size > min && el.scrollWidth > el.clientWidth + 1) {
+        size -= 2;
+        el.style.fontSize = size + "px";
+      }
+    }
+    function run() {
+      fit($("#qg-cover-names"), 31, 16);
+      fit($("#qg-hero-names"), 57, 30);
+      fit($("#qg-foot-names"), 42, 22);
+    }
+    run();
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(run);
+    window.addEventListener("resize", run);
+  })();
+
+  /* ── venue / address / map (city-first heuristic, verbatim from tovus/sakura) ── */
+  var venue = q.get("venue");
+  var city = "";
+  var addr = q.get("address");
+  if (addr && addr.trim()) {
+    setTxt($("#qg-venue-addr"), addr.trim());
+    // Uzbek addresses are city-FIRST ("Toshkent sh., Yunusobod tumani"):
+    // prefer a leading segment carrying a city marker; otherwise take the
+    // last segment only if it doesn't look like a street/district.
+    var segs = addr.split(",").map(function (s) { return s.trim(); }).filter(Boolean);
+    var cm = segs[0] && (segs[0].match(/^(.+?)\s+(?:sh\.?|shahri|шаҳри|ш\.)$/i) || segs[0].match(/^(?:г|g)\.\s*(.+)$/i));
+    if (cm) city = cm[1].trim();
+    else {
+      var tail = segs[segs.length - 1] || "";
+      city = /(tuman|ko'?cha|kuchasi|mavze|mahalla|MFY|uy\b|ул\.|улиц|дом|туман|кўча|street|district|avenue)/i.test(tail) ? "" : tail;
+    }
+    // address explicitly given -> always overrides MW.city (even to ""),
+    // since a custom address with no parseable city shouldn't keep showing
+    // the stale demo city on the frame card
+    MW.city = city;
+  }
+  if (venue && venue.trim()) {
+    setTxt($("#qg-venue-name"), venue.trim());
+    // owner named a venue but gave no address to derive a city from — don't
+    // pair their venue with the stale demo "Toshkent" on the frame card
+    if (addr == null || !addr.trim()) MW.city = city;
+  }
+  var mapUrl = q.get("map_url");
+  var mapEl = $("#qg-map");
+  if (mapEl) {
+    // only http(s) — blocks javascript:/data: schemes from the owner param
+    if (mapUrl && /^https?:\/\//i.test(mapUrl.trim())) mapEl.setAttribute("href", mapUrl.trim());
+    else if (addr && addr.trim()) mapEl.setAttribute("href", "https://maps.google.com/?q=" + encodeURIComponent(addr.trim()));
+    else if (venue && venue.trim()) mapEl.setAttribute("href", "https://maps.google.com/?q=" + encodeURIComponent(venue.trim()));
+  }
+  /* frame-card "Venue · City" line reflects current venue+city, but only
+     recomputed when the owner actually touched venue/address — leaves the
+     baked-in demo default line completely untouched otherwise */
+  if (venue || addr) frameVenueCity();
+
+  /* ── venue_note (owner; empty hides the line, keeps the address) ── */
+  var vnote = q.get("venue_note");
+  if (vnote != null) { if (vnote.trim()) setTxt($("#qg-venue-note"), vnote.trim()); else hide($("#qg-venue-note-wrap")); }
+
+  /* ── info rows (owner; empty hides the row + its hairline divider;
+     both-empty hides the whole card) ── */
+  (function () {
+    var dRow = $("#qg-info-dress"), cRow = $("#qg-info-contact"), divider = $("#qg-info-divider"), card = $("#qg-info-card");
+    var dv = q.get("info_dress"), cv = q.get("info_contact");
+    var dHidden = false, cHidden = false;
+    if (dv != null) {
+      if (dv.trim()) { var de = $("#qg-info-dress-text"); if (de) { de.textContent = dv.trim(); de.setAttribute("data-user-set", "1"); } }
+      else { hide(dRow); dHidden = true; }
+    }
+    if (cv != null) {
+      if (cv.trim()) {
+        var ce = $("#qg-info-contact-text");
+        if (ce) {
+          var html = esc(cv.trim()).replace(/\n/g, "<br>").replace(/\+?\d[\d\s-]{7,}\d/g, function (m) {
+            return '<a href="tel:' + m.replace(/[^\d+]/g, "") + '" style="font-weight:700;">' + m + '</a>';
+          });
+          ce.innerHTML = html; ce.setAttribute("data-user-set", "1");
+        }
+      } else { hide(cRow); cHidden = true; }
+    }
+    if (dHidden && cHidden) hide(card);
+    else if (dHidden || cHidden) hide(divider);
+  })();
+
+  /* ── footer note (owner) ── */
+  var fnote = q.get("footer_note");
+  if (fnote != null) { if (fnote.trim()) { var fe = $("#qg-foot-note"); if (fe) { fe.innerHTML = esc(fnote.trim()).replace(/\n/g, "<br>"); fe.setAttribute("data-user-set", "1"); } } else hide($("#qg-foot-note")); }
+
+  /* ── date + time (17:00 fallback, matching the design's default) ── */
+  var rawDate = q.get("date");
+  var rawTime = q.get("time");
+  var target = null;
+  if (rawDate) {
+    var m = rawDate.match(/^(\d{1,2})\.(\d{1,2})\.(\d{4})$/);
+    var iso = rawDate.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/);
+    var dd, mm, yy;
+    if (m) { dd = +m[1]; mm = +m[2]; yy = +m[3]; }
+    else if (iso) { yy = +iso[1]; mm = +iso[2]; dd = +iso[3]; }
+    if (dd) {
+      var hh = 17, mi = 0;
+      if (rawTime) { var tp = rawTime.split(":"); hh = parseInt(tp[0], 10); mi = parseInt(tp[1], 10) || 0; if (isNaN(hh)) hh = 17; }
+      var dObj = new Date(yy, mm - 1, dd, hh, mi, 0);
+      MW.dd = dd; MW.mm = mm; MW.yy = yy; MW.dow = dObj.getDay(); MW.time = p2(hh) + ":" + p2(mi);
+      target = dObj;
+      window.__INV_TARGET__ = dObj.getTime();
+      setTxt($("#qg-cover-dots"), dshort(dd, mm, yy));
+      setTxt($("#qg-foot-dots"), dshort(dd, mm, yy));
+    }
+  }
+
+  /* ── events timeline (owner list overrides defaults; [] hides the section
+     + its header — the strip cards around it are scenery and stay) ── */
+  (function () {
+    var raw = q.get("events");
+    if (raw == null) return;
+    var rows;
+    try { rows = JSON.parse(raw); } catch (e) { return; }
+    if (!Array.isArray(rows)) return;
+    var section = $("#qg-events-section");
+    var live = rows.filter(function (r) { return r && (r.title || r.description || r.time || r.place); });
+    if (!live.length) { hide(section); return; }
+    var host = $("#qg-events");
+    host.innerHTML = "";
+    live.forEach(function (r) {
+      var desc = [r.place, r.description].filter(Boolean).join(" · ");
+      var row = document.createElement("div");
+      row.setAttribute("data-pop", "");
+      row.style.position = "relative";
+      row.innerHTML =
+        '<div style="position:absolute;left:-32px;top:3px;width:13px;height:13px;border-radius:50%;background:#c9a24b;border:3px solid #fffdf4;box-shadow:0 2px 6px rgba(120,80,30,.35)"></div>' +
+        (r.time ? '<div style="font-family:Amarante,serif;font-size:14px;letter-spacing:2px;color:#b98d3e;">' + esc(r.time) + '</div>' : '') +
+        (r.title ? '<div style="font-weight:700;font-size:17px;margin-top:2px;">' + esc(r.title) + '</div>' : '') +
+        (desc ? '<div style="font-size:13.5px;line-height:1.6;color:#7a654a;margin-top:3px;">' + esc(desc) + '</div>' : '');
+      host.appendChild(row);
+    });
+    // freshly-built rows have no prior IO observation — reveal immediately
+    Array.prototype.forEach.call(host.querySelectorAll("[data-pop]"), function (n) { n.style.opacity = "1"; });
+  })();
+
+  /* ── countdown (clamped at zero) ── */
+  (function () {
+    var cd = { d: $("#qg-cd-d"), h: $("#qg-cd-h"), m: $("#qg-cd-m"), s: $("#qg-cd-s") };
+    if (!cd.d) return;
+    var when = target || new Date(2026, 8, 26, 17, 0, 0);
+    function tick() {
+      var diff = Math.max(0, when.getTime() - Date.now());
+      var day = 86400000;
+      cd.d.textContent = Math.floor(diff / day);
+      cd.h.textContent = ("0" + Math.floor(diff % day / 3600000)).slice(-2);
+      cd.m.textContent = ("0" + Math.floor(diff % 3600000 / 60000)).slice(-2);
+      cd.s.textContent = ("0" + Math.floor(diff % 60000 / 1000)).slice(-2);
+    }
+    tick();
+    setInterval(tick, 1000);
+  })();
+
+  /* ── scene-centered parallax + desk-gradient scroll interpolation, ported
+     ~1:1 from the design's own ensureInit()/wire()/applyScroll() ── */
+  (function () {
+    var desk = $("#qg-desk");
+    var scenes = [];
+    function buildScenes() {
+      scenes = Array.prototype.map.call(document.querySelectorAll("[data-scene]"), function (sc) {
+        return { sc: sc, ls: Array.prototype.map.call(sc.querySelectorAll("[data-par]"), function (el) {
+          return { el: el, sp: parseFloat(el.getAttribute("data-par")) || 0 };
+        }) };
+      });
+    }
+    function applyScroll() {
+      var vh = window.innerHeight || 1;
+      scenes.forEach(function (o) {
+        var rc = o.sc.getBoundingClientRect();
+        if (rc.bottom < -100 || rc.top > vh + 100) return;
+        var p = Math.max(-1.2, Math.min(1.2, ((rc.top + rc.height / 2) - vh / 2) / vh));
+        o.ls.forEach(function (l) { l.el.style.transform = "translate3d(0," + (p * l.sp).toFixed(1) + "px,0)"; });
+      });
+      if (desk) {
+        var doc = document.documentElement;
+        var t = Math.max(0, Math.min(1, (window.scrollY || 0) / Math.max(1, doc.scrollHeight - vh)));
+        var S = [[181,124,78,138,90,56],[199,146,90,152,102,60],[122,74,46,84,50,32]];
+        var seg = t < .5 ? [S[0], S[1], t * 2] : [S[1], S[2], (t - .5) * 2];
+        var mm = seg[0].map(function (v, i) { return Math.round(v + (seg[1][i] - v) * seg[2]); });
+        desk.style.background = "radial-gradient(130% 90% at 50% 12%, rgb(" + mm[0] + "," + mm[1] + "," + mm[2] + ") 0%, rgb(" + mm[3] + "," + mm[4] + "," + mm[5] + ") 82%)";
+      }
+    }
+    var tick = false;
+    function onScroll() { if (tick) return; tick = true; requestAnimationFrame(function () { tick = false; applyScroll(); }); }
+    buildScenes();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", function () { buildScenes(); onScroll(); }, { passive: true });
+    applyScroll();
+  })();
+
+  /* ── pmPop reveal (3D flip-in via IntersectionObserver) ── */
+  (function () {
+    var els = document.querySelectorAll("[data-pop]");
+    var reduced = false;
+    try { reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches; } catch (e) {}
+    if (reduced || !("IntersectionObserver" in window)) {
+      for (var i = 0; i < els.length; i++) els[i].style.opacity = "1";
+      return;
+    }
+    var io = new IntersectionObserver(function (ents) {
+      ents.forEach(function (en) {
+        if (en.isIntersecting) {
+          var el = en.target;
+          el.style.transformOrigin = "50% 100%";
+          el.style.animation = "pmPop .85s cubic-bezier(.22,.85,.3,1.02) both";
+          io.unobserve(el);
+        }
+      });
+    }, { threshold: .16 });
+    for (var j = 0; j < els.length; j++) io.observe(els[j]);
+  })();
+
+  /* ── music (?audio) + book-open splash (autoplay-compliant: playback
+     starts on the open tap, a genuine user gesture); cover rotateY(-148deg)
+     page-turn, splash fade, scroll unlock — ported from the design's
+     openCover()/startMusic() ── */
+  (function () {
+    var audio = $("#qg-audio"), btn = $("#qg-music"), offIcon = $("#qg-music-off");
+    var url = q.get("audio");
+    var playing = false;
+    function setIcon() { if (offIcon) offIcon.style.display = playing ? "none" : "block"; }
+    function tryPlay() {
+      if (!audio || !url) return;
+      audio.play().then(function () { playing = true; setIcon(); }).catch(function () { playing = false; setIcon(); });
+    }
+    if (url && audio && btn) {
+      audio.src = url;
+      btn.style.display = "flex";
+      btn.addEventListener("click", function () {
+        if (playing) { audio.pause(); playing = false; setIcon(); }
+        else tryPlay();
+      });
+    }
+
+    var cover = $("#qg-cover"), splash = $("#qg-splash");
+    var opening = false, opened = false;
+    if (splash) document.body.style.overflow = "hidden";
+    function open() {
+      if (opening || opened) return;
+      opening = true;
+      if (cover) cover.style.transform = "perspective(1500px) rotateY(-148deg)";
+      if (splash) { splash.style.opacity = "0"; splash.style.pointerEvents = "none"; }
+      tryPlay();
+      setTimeout(function () {
+        opened = true;
+        if (splash) splash.style.display = "none";
+        document.body.style.overflow = "";
+      }, 1250);
+    }
+    var ob = $("#qg-open");
+    if (ob) ob.addEventListener("click", open);
+    if (!splash) document.body.style.overflow = "";
+  })();
+
+  /* ── gesture handshake with the parent shell (tovus/sakura verbatim) ── */
+  (function () {
+    var fired = false;
+    var evs = ["pointerdown", "touchstart", "keydown"];
+    function once() {
+      if (fired) return; fired = true;
+      try { if (window.parent && window.parent !== window) window.parent.postMessage("taklifla:gesture", "*"); } catch (e) {}
+      evs.forEach(function (x) { window.removeEventListener(x, once, true); });
+    }
+    evs.forEach(function (x) { window.addEventListener(x, once, { capture: true, passive: true }); });
+  })();
+
+  /* ── guestbook (wishes) — ported from tovus/sakura's block (slug+fetch
+     primary, localStorage-only demo fallback when no slug); no date chips
+     and no 'A guest' fallback — name is required, per spec ── */
+  (function () {
+    var slug = q.get("slug");
+    var form = $("#qg-wish-form"), list = $("#qg-wish-list");
+    var empty = $("#qg-wish-empty"), confirm = $("#qg-wish-confirm");
+    if (!form || !list) return;
+    var KEY = "takliflaWishSubmitted:" + (slug || "demo");
+
+    function render(items) {
+      list.innerHTML = "";
+      if (!items || !items.length) { if (empty) empty.style.display = "block"; return; }
+      if (empty) empty.style.display = "none";
+      items.forEach(function (w) {
+        var name = w.name || w.n || "";
+        var msg = w.message || w.m || "";
+        var c = document.createElement("div");
+        c.style.cssText = "background:#fffdf4;border:1px solid #e6d6b4;border-radius:12px;padding:14px 16px;box-shadow:0 3px 10px rgba(120,85,40,.12);";
+        c.innerHTML = '<div style="font-family:Amarante,serif;font-size:14px;color:#8a6238;">' + esc(name) + '</div>' +
+          '<div style="font-size:14px;line-height:1.6;color:#5d4a32;margin-top:5px;overflow-wrap:anywhere;white-space:pre-wrap;">' + esc(msg) + '</div>';
+        list.appendChild(c);
+      });
+    }
+    function lock() { form.style.display = "none"; if (confirm) confirm.style.display = "block"; }
+
+    if (!slug) {
+      var demo = [];
+      try { demo = JSON.parse(localStorage.getItem("qgDemoWishes") || "[]"); } catch (e) {}
+      render(demo);
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        var n = form.elements.wname.value.trim(), msg = form.elements.wmsg.value.trim();
+        if (!n || !msg) return;
+        demo.unshift({ name: n, message: msg });
+        try { localStorage.setItem("qgDemoWishes", JSON.stringify(demo)); } catch (er) {}
+        render(demo); form.reset();
+      });
+      return;
+    }
+
+    var URL = "/api/v1/public/i/" + encodeURIComponent(slug) + "/guestbook";
+    function load() {
+      fetch(URL, { credentials: "omit" }).then(function (r) { return r.ok ? r.json() : []; })
+        .then(function (items) { render(items || []); }).catch(function () {});
+    }
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var n = form.elements.wname.value.trim(), msg = form.elements.wmsg.value.trim();
+      if (!n || !msg) return;
+      var btn = form.querySelector('button[type="submit"]');
+      if (btn) btn.disabled = true;
+      fetch(URL, { method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name: n, message: msg }), credentials: "omit" })
+        .then(function (r) { if (!r.ok) throw new Error("http_" + r.status); return r.json(); })
+        .then(function () { try { localStorage.setItem(KEY, "1"); } catch (er) {} form.reset(); lock(); load(); })
+        .catch(function () { if (btn) btn.disabled = false; });
+    });
+    load();
+    try { if (localStorage.getItem(KEY) === "1") lock(); } catch (e) {}
+  })();
+
+  apply();
+})();
+</script>
+<script src="_wish-close.js" defer></script>
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092" integrity="sha512-UKNk8GbxkABxKcXYuLkO16EleLGUkcvJWtpSNmExE0Too3ZaFAxTscNWEc1OdAv5/BikHawapSCaiD2XCmp+Bw==" data-cf-beacon='{"version":"2024.11.0","token":"6431f953c96a4463ae9db5f7f0ad549e","r":1,"spa":2}' crossorigin="anonymous"></script>
+</body>
+</html>

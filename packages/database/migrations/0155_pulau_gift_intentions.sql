@@ -9,3 +9,4 @@ CREATE TABLE pulau_gift_intentions (
   created_at timestamptz NOT NULL DEFAULT now()
 );
 CREATE INDEX pulau_gift_intentions_recent_idx ON pulau_gift_intentions(invitation_id, created_at DESC, id DESC);
+

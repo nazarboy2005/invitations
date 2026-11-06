@@ -1,0 +1,13 @@
+/* Contract visibility and accessibility only; source composition is in source/template.css. */
+[hidden], [data-contract-gap] { display: none !important; }
+.awaiting-data { visibility: hidden; }
+[data-authored] { white-space: pre-line; overflow-wrap: anywhere; }
+#rsvp-pax-row, #rsvp-checkin, #wish-more, #wish-live, #ab-video, #pn-tag, #pn-mute, #pn-leave, #pn-foot-tag { display: none !important; }
+#rsvp-pax-w { display: none !important; }
+.platform-feedback { margin: 8px 0; font: 500 13px/1.5 Figtree, sans-serif; color: var(--ink); }
+#cv-n1-ttl, #cv-n2-ttl, #cv-n3-ttl, #hero-g, #hero-b, #mp-g-name, #mp-b-name { overflow-wrap: anywhere; }
+.reduced-motion *, .reduced-motion *::before, .reduced-motion *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; scroll-behavior: auto !important; }
+.reduced-motion canvas { display: none !important; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; scroll-behavior: auto !important; }
+}

@@ -1,0 +1,126 @@
+@font-face {
+  font-family: 'Amiri';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(c1ed75c0eada28ab8f8db0ee.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Amiri';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(68199692a9545c97f81dee86.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Fragment Mono';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(910abe3fec74715313fde3fe.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Fragment Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(d3cb901af65bf837218a2c33.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Geologica';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url(a3a31d13fbcc338288fb69a4.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Geologica';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(e05262d60a6f045b3bc31875.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Geologica';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(8063f141c16ea1b06d790486.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Geologica';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(9fda2bd3b19064c592ad1959.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Geologica';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(54884abcec65028733726eba.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Noto Serif Display';
+  font-style: italic;
+  font-weight: 300;
+  font-stretch: normal;
+  font-display: swap;
+  src: url(84e88b3942cb9b12e8c96287.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Noto Serif Display';
+  font-style: italic;
+  font-weight: 400;
+  font-stretch: normal;
+  font-display: swap;
+  src: url(c15a92a8d8b93a9ed6bd732e.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Noto Serif Display';
+  font-style: italic;
+  font-weight: 500;
+  font-stretch: normal;
+  font-display: swap;
+  src: url(4c4c4679d523b72bc392933b.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Noto Serif Display';
+  font-style: normal;
+  font-weight: 300;
+  font-stretch: normal;
+  font-display: swap;
+  src: url(161a0c54eacf06c267bba0ef.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Noto Serif Display';
+  font-style: normal;
+  font-weight: 400;
+  font-stretch: normal;
+  font-display: swap;
+  src: url(97e498a91512586a3ecd6f3e.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Noto Serif Display';
+  font-style: normal;
+  font-weight: 500;
+  font-stretch: normal;
+  font-display: swap;
+  src: url(ee3c9ee995c21d7d8a0bc88d.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Noto Serif Display';
+  font-style: normal;
+  font-weight: 600;
+  font-stretch: normal;
+  font-display: swap;
+  src: url(ca7eb51a7006a215f6c45471.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Waiting for the Sunrise';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(f9f83d31fe589ca191dc06fc.ttf) format('truetype');
+}

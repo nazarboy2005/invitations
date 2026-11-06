@@ -1,0 +1,33 @@
+{
+  "uzbekCopy": "No source-language strings in the complete visible source DOM, including source-generated labels",
+  "uz-Latn": {
+    "names": "passed",
+    "program": 6,
+    "controls": "passed"
+  },
+  "uz-Cyrl": {
+    "names": "passed",
+    "program": 6,
+    "controls": "passed"
+  },
+  "en": {
+    "names": "passed",
+    "program": 6,
+    "controls": "passed"
+  },
+  "ru": {
+    "names": "passed",
+    "program": 6,
+    "controls": "passed"
+  },
+  "syntheticPublicApis": {
+    "rsvpPartySize": [1, 0, 0],
+    "wishModeration": "pending wish stays private",
+    "emptyGallery": "hidden",
+    "network": "mocked; no database lifecycle claimed"
+  },
+  "longNamesAndSevenChapters": "passed: no horizontal overflow; all stable chapter IDs present",
+  "pageErrors": [],
+  "httpErrors": [],
+  "sourceMotionComparison": "Original and package locker opening reaches open state after the authored sequence; artwork and original fonts localized only in QA server response"
+}

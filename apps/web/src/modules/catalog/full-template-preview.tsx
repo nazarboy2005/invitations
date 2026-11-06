@@ -1,9 +1,4 @@
 "use client";
-import { StaticImageFullPreview } from "@/modules/static-images/static-image-preview";
-import { isTemplateDocument } from "../../lib/public-asset";
-import { FavoriteButton, FavoritesStatus } from "@/modules/favorites/favorite-button";
-
-import { publicTemplateId } from "@taklifnoma/contracts";
 
 import Link from "next/link";
 import dynamic from "next/dynamic";
@@ -45,6 +40,7 @@ const SakuraGuliInvitation = dynamic(() => import("@/templates/taklifla-sakura-g
 const TakliflaSharlarInvitation = dynamic(() => import("@/templates/taklifla-sharlar/renderer").then(m=>m.TakliflaSharlarInvitation));
 const TakliflaYulduzliTun = dynamic(() => import("@/templates/taklifla-yulduzli-tun/renderer").then(m=>m.TakliflaYulduzliTun));
 const TakliflaTerracottaInvitation = dynamic(() => import("@/templates/taklifla-terracotta/renderer").then(m=>m.TakliflaTerracottaInvitation));
+const TakliflaUchrashuv = dynamic(() => import("@/templates/taklifla-uchrashuv/renderer").then(m=>m.TakliflaUchrashuv));
 const TakliflaYubileySahifasi = dynamic(() => import("@/templates/taklifla-yubiley-sahifasi/renderer").then(m=>m.TakliflaYubileySahifasi));
 const TakliflaBarakali = dynamic(() => import("@/templates/taklifla-barakali/renderer").then(m => m.TakliflaBarakali));
 const TakliflaZarhalSahifa = dynamic(() => import("@/templates/taklifla-zarhal-sahifa/renderer").then((module) => module.TakliflaZarhalSahifaInvitation));
@@ -181,7 +177,7 @@ export function FullTemplatePreview({
     function start(frame: HTMLIFrameElement) {
       timers.push(setTimeout(() => {
         const doc = frame.contentDocument;
-        if (!doc || !isTemplateDocument(doc.URL, window.location.origin) || doc.readyState !== "complete" || opened.has(doc)) return;
+        if (!doc || !doc.URL.startsWith(`${window.location.origin}/templates/`) || doc.readyState !== "complete" || opened.has(doc)) return;
         opened.add(doc);
         // Only catalog embeds hide scrollbar chrome; full previews remain scrollable.
         const scrollbarStyle = doc.createElement("style");
@@ -197,7 +193,7 @@ export function FullTemplatePreview({
         observer.observe(doc.documentElement, { childList: true, subtree: true });
         cleanups.push(() => { observer.disconnect(); doc.removeEventListener("volumechange", mute, true); });
         // Only invitation-opening controls; never submit RSVP, wishes, or links.
-        const opener = doc.querySelector<HTMLElement>("#openInvite, #sk-open, #qg-open, #splash-open, #os-open, #oy-open, #mw-open, #splash.splash[onclick], #fs-open, #mp-open, #tv-open, #open-invitation, #open-prompt, #open-btn, #openBtn, #openEnvelope, #si-opener, [data-open], [data-gg-source-opening], [data-landing-screenshot-id='invite-envelope']");
+        const opener = doc.querySelector<HTMLElement>("[data-uchrashuv-open], #openInvite, #sk-open, #qg-open, #splash-open, #os-open, #oy-open, #mw-open, #splash.splash[onclick], #fs-open, #mp-open, #tv-open, #open-invitation, #open-prompt, #open-btn, #openBtn, #openEnvelope, #si-opener, [data-open], [data-gg-source-opening], [data-landing-screenshot-id='invite-envelope']");
         opener?.click();
         window.parent.postMessage({ type: "catalog-preview:ready" }, window.location.origin);
         if (template.id === "doira") {
@@ -297,9 +293,8 @@ export function FullTemplatePreview({
     };
   }, [cardPreview, invitation]);
 
-  const controlsVisible = showControls || template.format === "image";
   return (
-    <main className={styles.fullPreview} ref={previewRef} data-card-preview={cardPreview || undefined} data-format={template.format}>
+    <main className={styles.fullPreview} ref={previewRef} data-card-preview={cardPreview || undefined}>
       {invitation && !cardPreview && !posterCapture && (
         <InvitationMusicAutoplay
           musicUrl={
@@ -312,11 +307,10 @@ export function FullTemplatePreview({
         />
       )}
       {!cardPreview && !posterCapture && <nav
-        style={template.format === "image" ? { opacity: 1, visibility: "visible", transform: "none", pointerEvents: "auto" } : undefined}
-        className={`${styles.previewControls} ${["taklifla-sharlar","taklifla-yulduzli-tun","taklifla-terracotta"].includes(template.id) ? styles.leftLanguageClearance : ""} ${showControls ? styles.controlsVisible : ""} ${["taklifla-terracotta", "taklifla-yulduzli-tun", "taklifla-sharlar", "taklifla-sakura-guli", "taklifla-qogoz-ertagi", "taklifla-parilar-ertagi", "taklifla-osmon", "taklifla-oltin-yol", "taklifla-toglar-bagrida", "taklifla-zarrin-gullar", "taklifla-gulbog", "taklifla-ertak", "taklifla-fayzli-xonadon", "taklifla-yubiley-sahifasi", "taklifla-barakali", "taklifla-tungi-saroy", "taklifla-tovus"].includes(template.id) ? styles.templateLanguageClearance : ""}`}
+        className={`${styles.previewControls} ${["taklifla-sharlar","taklifla-yulduzli-tun","taklifla-terracotta","taklifla-uchrashuv"].includes(template.id) ? styles.leftLanguageClearance : ""} ${showControls ? styles.controlsVisible : ""} ${["taklifla-uchrashuv", "taklifla-terracotta", "taklifla-yulduzli-tun", "taklifla-sharlar", "taklifla-sakura-guli", "taklifla-qogoz-ertagi", "taklifla-parilar-ertagi", "taklifla-osmon", "taklifla-oltin-yol", "taklifla-toglar-bagrida", "taklifla-zarrin-gullar", "taklifla-gulbog", "taklifla-ertak", "taklifla-fayzli-xonadon", "taklifla-yubiley-sahifasi", "taklifla-barakali", "taklifla-tungi-saroy", "taklifla-tovus"].includes(template.id) ? styles.templateLanguageClearance : ""}`}
         aria-label="Dizayn amallari"
-        aria-hidden={!controlsVisible}
-        inert={!controlsVisible}
+        aria-hidden={!showControls}
+        inert={!showControls}
       >
         <Link
           className={styles.backButton}
@@ -329,22 +323,14 @@ export function FullTemplatePreview({
         {canSelect && canCreate && (
           <Link
             className={styles.createButton}
-            href={`/studio?new=1&template=${encodeURIComponent(publicTemplateId(template.id))}`}
+            href={`/studio?new=1&template=${encodeURIComponent(template.id)}`}
           >
             Yaratish <ArrowUpRight size={16} aria-hidden="true" />
           </Link>
         )}
-        {canSelect && (
-          <div className={styles.favoriteAction}>
-            <FavoriteButton templateId={template.id} name={template.name} />
-            <FavoritesStatus />
-          </div>
-        )}
       </nav>}
       {!invitation ? (
         <div className={styles.loading}>Dizayn ochilmoqda…</div>
-      ) : template.format === "image" ? (
-        <StaticImageFullPreview invitation={invitation} />
       ) : template.id === "oltin-darvoza-ortidagi-baxt" ? (
         <OltinDarvozaInvitation invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} sampleWishes={catalogPreview} silentPlayback={silentPlayback} />
       ) : template.id === "gulli-darvoza" ? (
@@ -395,6 +381,8 @@ export function FullTemplatePreview({
         <TakliflaYulduzliTun invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} silentPlayback={silentPlayback} qaReducedMotion={qaReducedMotion} />
       ) : template.id === "taklifla-terracotta" ? (
         <TakliflaTerracottaInvitation invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} silentPlayback={silentPlayback} qaReducedMotion={qaReducedMotion} />
+      ) : template.id === "taklifla-uchrashuv" ? (
+        <TakliflaUchrashuv invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} silentPlayback={silentPlayback} qaReducedMotion={qaReducedMotion} />
       ) : template.id === "taklifla-yubiley-sahifasi" ? (
         <TakliflaYubileySahifasi invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} silentPlayback={silentPlayback} qaReducedMotion={qaReducedMotion} />
       ) : template.id === "taklifla-barakali" ? (

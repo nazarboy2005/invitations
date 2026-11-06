@@ -150,3 +150,4 @@
   let initial;try{initial=JSON.parse(window.name);}catch{/* The host supplies the first payload after frame load. */}
   if(initial?.type===ID+':update')accept(initial.payload);
 })();
+

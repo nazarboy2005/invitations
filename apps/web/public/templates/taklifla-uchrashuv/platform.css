@@ -1,0 +1,25 @@
+/* Binding/accessibility only; source design and responsive rules stay in source/. */
+[hidden] { display: none !important; }
+body[data-pending] .stage, body[data-pending] .taklifla-lang-switch { visibility: hidden; }
+.cover-line .cl-text, .q2-text { white-space: pre-line; }
+.cover-mid { width: 100%; }
+.cover-recipient, .cover-line .nm, .q-sign b, .lt-to, .prop-val, .prop-sub { overflow-wrap: anywhere; max-width: 100%; }
+.cover-recipient { font-size: var(--recipient-size, clamp(46px,13vw,62px)); }
+.q-sign b { display: inline-block; }
+.footer-mark { white-space: normal; }
+#reply-status { font: 13px/1.5 'Manrope',sans-serif; text-align: center; max-width: 320px; color: var(--wine); }
+#reply-status:empty { display: none; }
+.yes-btn:disabled { opacity: .6; cursor: wait; }
+:focus-visible { outline: 2px solid var(--mauve); outline-offset: 4px; }
+.confirm:focus { outline: none; }
+.reduce-motion *, .reduce-motion *::before, .reduce-motion *::after { animation: none !important; transition: none !important; }
+.reduce-motion .cover.open { opacity: 0; transform: none; }
+/* A long authored question replaces both source question lines in the same block. */
+.question.authored .q-1 { display: none; }
+.question.authored .q-line.q-2 { font-size: clamp(30px,9vw,48px); line-height: 1.15; }
+.confirm { overflow-y: auto; }
+
+/* Keep the unopened envelope independent of the authored letter length. */
+.shell:has(.cover:not(.open)) .letter{height:100dvh;max-height:100dvh;overflow:hidden}
+.cover{overflow-y:auto}
+@media(min-width:768px){.shell:has(.cover:not(.open)) .letter{height:min(840px,90dvh);min-height:min(840px,90dvh);max-height:min(840px,90dvh)}}
