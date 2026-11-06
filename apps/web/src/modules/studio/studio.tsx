@@ -11,7 +11,7 @@ import { refreshFavorites } from "@/modules/favorites/favorites-store";
 
 import { publicTemplateId, resolveTemplateId } from "@taklifnoma/contracts";
 
-import { normalizeInvitation, templateCapabilities } from "@taklifnoma/contracts/capabilities";
+import { applyOptionalFeatureVisibility, normalizeInvitation, templateCapabilities } from "@taklifnoma/contracts/capabilities";
 import { hasVenuePoint, yandexMapUrl } from "@taklifnoma/contracts/maps";
 import { DEFAULT_INVITATION_MUSIC } from "@taklifnoma/contracts/music";
 import { ReadinessChecklist } from "./readiness-checklist";
@@ -417,12 +417,12 @@ export function Studio({
     });
   }, []);
   const previewInvitation = useMemo(
-    () => invitation ? {
+    () => invitation ? applyOptionalFeatureVisibility({
       ...createStudioPreviewInvitation(invitation),
       // Preview projection only: keep the creator's saved soundtrack selected,
       // but never send playable audio to an automatically opened Studio frame.
       music: { ...invitation.music, enabled: false, url: "" },
-    } : null,
+    }) : null,
     [invitation],
   );
   const [locale, setLocale] = useState<Locale>(
@@ -1624,16 +1624,24 @@ export function Studio({
         : null;
     if (target)
       requestAnimationFrame(() => {
-        const details = document.querySelector<HTMLDetailsElement>(
-          `main details[data-preview-target="${target}"]`,
+        const section = document.querySelector<HTMLElement>(
+          `main section[data-preview-target="${target}"]`,
         );
-        if (!details) return;
-        details.open = true;
+        const disclosure = section?.querySelector<HTMLButtonElement>(
+          "button[aria-controls]",
+        );
+        if (!section || !disclosure) return;
+        if (disclosure.getAttribute("aria-expanded") !== "true")
+          disclosure.click();
         setPreviewTarget(target);
-        details.scrollIntoView({ block: "center", behavior: "instant" });
-        details
-          .querySelector<HTMLElement>("input, select, textarea, button")
-          ?.focus({ preventScroll: true });
+        section.scrollIntoView({ block: "center", behavior: "instant" });
+        requestAnimationFrame(() => {
+          const contentId = disclosure.getAttribute("aria-controls");
+          document
+            .getElementById(contentId ?? "")
+            ?.querySelector<HTMLElement>("input, select, textarea, button")
+            ?.focus({ preventScroll: true });
+        });
       });
   }
 
@@ -3077,6 +3085,15 @@ export function Studio({
                   icon={ImagePlus}
                   summary={`${invitation.gallery.length} ta rasm`}
                   target="gallery"
+                  enabled={invitation.optionalFeatures.gallery}
+                  onEnabledChange={(gallery) => update({ optionalFeatures: { ...invitation.optionalFeatures, gallery } })}
+                  onLeave={() => {
+                    if (invitation.optionalFeatures.gallery && invitation.gallery.length === 0) {
+                      update({ optionalFeatures: { ...invitation.optionalFeatures, gallery: false } });
+                      return true;
+                    }
+                    return false;
+                  }}
                 >
                   <div className={styles.groupHeader}>
                     <h2>
@@ -3156,6 +3173,18 @@ export function Studio({
                     title="San’atkorlar va boshlovchilar"
                     icon={Users}
                     summary={`${invitation.artistLineup.length} ta ishtirokchi`}
+                    enabled={invitation.optionalFeatures.artists}
+                    onEnabledChange={(artists) => update({ optionalFeatures: { ...invitation.optionalFeatures, artists } })}
+                    onLeave={() => {
+                      const hasNamedArtist = invitation.artistLineup.some((artist) =>
+                        invitation.enabledLocales.some((item) => artist.name[item]?.trim()),
+                      );
+                      if (invitation.optionalFeatures.artists && !hasNamedArtist) {
+                        update({ optionalFeatures: { ...invitation.optionalFeatures, artists: false } });
+                        return true;
+                      }
+                      return false;
+                    }}
                   >
                     <div className={styles.divider} />
                     <div className={styles.groupHeader}>
@@ -3287,21 +3316,23 @@ export function Studio({
                       : "O‘chirilgan"
                   }
                   target="music"
+                  enabled={invitation.music.enabled}
+                  onEnabledChange={(enabled) => {
+                    if (!enabled) {
+                      musicPreviewRef.current?.pause();
+                      setMusicPreviewPlaying(false);
+                    }
+                    update({ music: { ...(enabled && !invitation.music.url ? DEFAULT_INVITATION_MUSIC : invitation.music), enabled } });
+                  }}
+                  onLeave={() => {
+                    if (invitation.music.enabled && !invitation.music.url.trim()) {
+                      update({ music: { ...invitation.music, enabled: false } });
+                      return true;
+                    }
+                    return false;
+                  }}
                 >
-                  <Toggle
-                    title="Fon musiqasi"
-                    description="Mehmon taklifnomani ochganda musiqa tinglashi mumkin."
-                    checked={invitation.music.enabled}
-                    onChange={(enabled) => {
-                      if (!enabled) {
-                        musicPreviewRef.current?.pause();
-                        setMusicPreviewPlaying(false);
-                      }
-                      update({ music: { ...(enabled && !invitation.music.url ? DEFAULT_INVITATION_MUSIC : invitation.music), enabled } });
-                    }}
-                  />
-                  {invitation.music.enabled && (
-                    <div className={`${styles.optionBody} ${styles.musicPickerBody}`}>
+                  <div className={`${styles.optionBody} ${styles.musicPickerBody}`}>
                       <div className={styles.classicalLibrary} ref={musicPickerRef}>
                         <div className={styles.musicSearch}>
                           <Search size={16} aria-hidden="true" />
@@ -3500,8 +3531,7 @@ export function Studio({
                         onLoadedMetadata={(event) => setMusicPreviewDuration(event.currentTarget.duration)}
                       />
 
-                    </div>
-                  )}
+                  </div>
                 </OptionalSection>)}
                 <div className={styles.divider} />
                 {(capabilities.gift) && (<OptionalSection
@@ -3509,24 +3539,19 @@ export function Studio({
                   icon={Gift}
                   summary={invitation.gift.enabled ? "Yoqilgan" : "O‘chirilgan"}
                   target="gift"
-                >
-                  <Toggle
-                    title="To‘yona kartasi"
-                    description="Istasangiz, mehmonlar uchun karta ma’lumotlarini ko‘rsating."
-                    checked={invitation.gift.enabled}
-                    onChange={(enabled) =>
-                      update({
-                        gift: {
-                          ...invitation.gift,
-                          enabled,
-                          receiptUploadEnabled:
-                            enabled && invitation.gift.receiptUploadEnabled,
-                        },
-                      })
+                  enabled={invitation.gift.enabled}
+                  onEnabledChange={(enabled) =>
+                    update({ gift: { ...invitation.gift, enabled, receiptUploadEnabled: enabled && invitation.gift.receiptUploadEnabled } })
+                  }
+                  onLeave={() => {
+                    if (invitation.gift.enabled && (!invitation.gift.cardNumber.trim() || !invitation.gift.cardHolder.trim())) {
+                      update({ gift: { ...invitation.gift, enabled: false, receiptUploadEnabled: false } });
+                      return true;
                     }
-                  />
-                  {invitation.gift.enabled && (
-                    <div className={styles.optionBody}>
+                    return false;
+                  }}
+                >
+                  <div className={styles.optionBody}>
                       <Field label="Karta raqami">
                         <input
                           inputMode="numeric"
@@ -3556,7 +3581,8 @@ export function Studio({
                           }
                         />
                       </Field>
-{capabilities.receipts && (                      <Toggle
+                    {invitation.gift.enabled && capabilities.receipts && (
+                      <Toggle
                         title="Chek yuborishga ruxsat"
                         description="Chek faqat sizga ko‘rinadi. Pul tushganini o‘zingiz tekshirasiz."
                         checked={invitation.gift.receiptUploadEnabled}
@@ -3565,9 +3591,9 @@ export function Studio({
                             gift: { ...invitation.gift, receiptUploadEnabled },
                           })
                         }
-                      />)}
-                    </div>
-                  )}
+                      />
+                    )}
+                  </div>
                 </OptionalSection>)}
                 <div className={styles.divider} />
                 {invitation.templateId === "taklifla-terracotta" && <div className={styles.formGrid}>{(["infoNote","footerNote"] as const).map(key=><Field key={key} label={`${key === "infoNote" ? "Mehmonlarga eslatma" : "Yakuniy izoh"} · ${LANGUAGE_NAMES[locale]}`}><textarea maxLength={4000} rows={3} value={terracottaData[key][locale] || ""} onChange={e=>updateTerracottaNote(key,e.target.value)} /></Field>)}</div>}
@@ -3624,16 +3650,27 @@ export function Studio({
                   icon={UserCheck}
                   summary={invitation.rsvp.enabled ? "Yoqilgan" : "O‘chirilgan"}
                   target="rsvp"
-                >
-                  <Toggle
-                    title={capabilities.rsvp === "form" ? "Qatnashishni tasdiqlash" : capabilities.rsvp === "phone" ? "Telefon orqali javob" : "Javob berish muddati"}
-                    description={capabilities.rsvp === "form" ? "Mehmonlar javoblari hisobingizda saqlanadi." : capabilities.rsvp === "phone" ? "Mehmonlar sizga telefon orqali xabar beradi." : "Javob berish sanasini taklifnomada ko‘rsating."}
-                    checked={invitation.rsvp.enabled}
-                    onChange={(enabled) =>
-                      update({ rsvp: { ...invitation.rsvp, enabled } })
+                  enabled={invitation.rsvp.enabled}
+                  onEnabledChange={(enabled) => update({ rsvp: { ...invitation.rsvp, enabled } })}
+                  onLeave={() => {
+                    const missingDeadline =
+                      capabilities.rsvp === "deadline" && !invitation.rsvp.deadline.trim();
+                    const missingPhoneResponse =
+                      capabilities.rsvp === "phone" &&
+                      (!invitation.contacts.phoneNumber.trim() || !invitation.optionalFeatures.contacts);
+                    if (invitation.rsvp.enabled && (missingDeadline || missingPhoneResponse)) {
+                      update({ rsvp: { ...invitation.rsvp, enabled: false } });
+                      return true;
                     }
-                  />
-                  {invitation.rsvp.enabled && capabilities.rsvpDeadline && (
+                    return false;
+                  }}
+                >
+                  {capabilities.rsvp === "phone" && (
+                    <p className={styles.help}>
+                      Javoblar telefon orqali qabul qilinadi. Bog‘lanish bo‘limida telefon raqamini kiriting va yoqing.
+                    </p>
+                  )}
+                  {invitation.rsvp.enabled && (capabilities.rsvpDeadline || capabilities.rsvp === "deadline") && (
                     <div
                       className={`${styles.optionBody} ${styles.twoColumns}`}
                     >
@@ -3663,15 +3700,10 @@ export function Studio({
                     invitation.wishes.enabled ? "Yoqilgan" : "O‘chirilgan"
                   }
                   target="rsvp"
+                  enabled={invitation.wishes.enabled}
+                  onEnabledChange={(enabled) => update({ wishes: { ...invitation.wishes, enabled } })}
                 >
-                  <Toggle
-                    title="Mehmonlar tilaklari"
-                    description="Tilaklar faqat siz tasdiqlaganingizdan keyin ko‘rinadi."
-                    checked={invitation.wishes.enabled}
-                    onChange={(enabled) =>
-                      update({ wishes: { ...invitation.wishes, enabled } })
-                    }
-                  />
+                  <p className={styles.help}>Tilaklar faqat siz tasdiqlaganingizdan keyin ko‘rinadi.</p>
                 </OptionalSection>)}
                 <div className={styles.divider} />
                 {(capabilities.phone || capabilities.telegram) && (<OptionalSection
@@ -3686,6 +3718,20 @@ export function Studio({
                       : "Ixtiyoriy"
                   }
                   target="contacts"
+                  enabled={invitation.optionalFeatures.contacts}
+                  onEnabledChange={(contacts) => update({ optionalFeatures: { ...invitation.optionalFeatures, contacts } })}
+                  onLeave={() => {
+                    const hasContact = [
+                      invitation.contacts.phoneNumber,
+                      invitation.contacts.telegramUsername,
+                      invitation.contacts.instagramUrl,
+                    ].some((value) => value.trim());
+                    if (invitation.optionalFeatures.contacts && !hasContact) {
+                      update({ optionalFeatures: { ...invitation.optionalFeatures, contacts: false } });
+                      return true;
+                    }
+                    return false;
+                  }}
                 >
                   <div className={styles.groupHeader}>
                     <h2>Bog‘lanish</h2>

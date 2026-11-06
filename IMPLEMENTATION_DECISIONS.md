@@ -8,6 +8,7 @@ This file records durable, user-approved product requirements and a small number
 - Support Uzbek Latin (`uz-Latn`), Uzbek Cyrillic (`uz-Cyrl`), English (`en`), and Russian (`ru`). An invitation may enable only the languages its creator needs; its language variants share one invitation, owner, URL, event data, and media.
 - Authored names and text are locale-specific. Never silently transliterate or overwrite another locale. Wedding starter wording may be localized; other event types must not receive wedding wording. Sample preview content is presentation-only and must never be saved or published. See the shared preview-data requirements in `AGENTS.md`.
 - Optional repeated content stays optional and repeatable; do not impose fixed item counts or invent unsupported creator fields. Preserve optional content when changing templates, even when a template cannot display it natively.
+- Studio optional sections show their enable switch in the section row, independently of opening the editor. Enabling opens its settings; leaving a feature that requires creator content without usable content turns it back off. Turning a feature off hides it from guests while preserving its authored data.
 
 ## Venue and maps
 

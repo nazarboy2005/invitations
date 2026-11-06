@@ -279,6 +279,11 @@ export const invitationSchema = z
       .array(z.object({ id: z.string().max(100), time: z.string().max(10) }))
       .max(100),
     artistLineup: z.array(invitationArtistSchema).max(50).default([]),
+    optionalFeatures: z.object({
+      gallery: z.boolean().default(true),
+      artists: z.boolean().default(true),
+      contacts: z.boolean().default(true),
+    }).default({ gallery: true, artists: true, contacts: true }),
     story: z.array(storyChapterSchema).max(20).default([]),
     gallery: z
       .array(
@@ -2423,6 +2428,7 @@ export function createInvitation(
     venue: { latitude: null, longitude: null, mapUrl: "" },
     program: [],
     artistLineup: [],
+    optionalFeatures: { gallery: false, artists: false, contacts: false },
     templateData: {},
     story: [],
     gallery: [],

@@ -171,3 +171,17 @@ export function normalizeInvitation(invitation: Invitation): Invitation {
     },
   };
 }
+
+/** Hide optional creator sections from guest-facing renderers without deleting saved content. */
+export function applyOptionalFeatureVisibility(invitation: Invitation): Invitation {
+  const features = invitation.optionalFeatures;
+  if (features.gallery && features.artists && features.contacts) return invitation;
+  return {
+    ...invitation,
+    gallery: features.gallery ? invitation.gallery : [],
+    artistLineup: features.artists ? invitation.artistLineup : [],
+    contacts: features.contacts
+      ? invitation.contacts
+      : { phoneNumber: "", telegramUsername: "", instagramUrl: "" },
+  };
+}
