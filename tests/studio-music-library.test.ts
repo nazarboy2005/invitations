@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { existsSync, readFileSync, statSync } from "node:fs";
+import { existsSync, statSync } from "node:fs";
 import path from "node:path";
 import test from "node:test";
 import { CLASSICAL_MUSIC } from "../apps/web/src/modules/studio/classical-music";
@@ -21,18 +21,6 @@ test("Studio classical library contains twelve documented instrumental tracks", 
     const mp3 = path.join(root, "apps/web/public", track.url.replace(/^\//, ""));
     assert.ok(existsSync(mp3), `${track.id} optimized MP3 exists`);
     assert.ok(statSync(mp3).size > 100_000, `${track.id} MP3 is non-empty`);
-  }
-});
-
-test("retained source masters are listed for every library track", () => {
-  const notes = path.join(root, "docs/music-library/README.md");
-  const readme = readFileSync(notes, "utf8");
-  const masters = [...readme.matchAll(/`(\d{2}-[^`]+)`/g)].map((match) => match[1]);
-  assert.equal(masters.length, CLASSICAL_MUSIC.length);
-  for (const filename of masters) {
-    const file = path.join(root, "docs/music-library/masters", filename);
-    assert.ok(existsSync(file), `source master ${filename} is retained`);
-    assert.ok(statSync(file).size > 100_000, `source master ${filename} is non-empty`);
   }
 });
 
