@@ -1307,7 +1307,16 @@ export function Studio({
         return;
       }
     }
-    if (action === "publish" && publishingMode === "paid" && !adminContext)
+    const paymentAlreadyVerified =
+      paidInvitationId === current.id ||
+      (paymentOrder?.invitationId === current.id &&
+        paymentOrder.status === "SUCCEEDED");
+    if (
+      action === "publish" &&
+      publishingMode === "paid" &&
+      !adminContext &&
+      !paymentAlreadyVerified
+    )
       checkoutWindow = window.open("about:blank", "_blank");
     pendingAction.current = action;
     operationInFlight.current = true;
@@ -3914,91 +3923,6 @@ export function Studio({
             {section === sections.length - 1 &&
               invitation.status === "draft" && !invitation.imageExportedAt && (
                 <section className={styles.publishPanel}>
-                  {paymentOrder?.invitationId === invitation.id && (
-                    <div className={styles.paymentStatusPanel} aria-live="polite">
-                      <div className={styles.paymentStatusTop}>
-                        <div>
-                          <span>To‘lov holati</span>
-                          <strong>{paymentStateLabels[paymentOrder.status]}</strong>
-                        </div>
-                        <b>{formatPrice(paymentOrder.amountMinor)}</b>
-                      </div>
-                      {paymentOrder.status === "SUCCEEDED" ? (
-                        <p>To‘lov tasdiqlandi. Nashrni yakunlash uchun pastdagi tugmani bosing.</p>
-                      ) : ["CREATED", "PENDING", "PROCESSING", "REJECTED"].includes(paymentOrder.status) ? (
-                        <>
-                          <p>Click’da to‘lovni yakunlang. Holat avtomatik tekshiriladi.</p>
-                          <div className={styles.paymentActions}>
-                            {paymentOrder.checkoutUrl && (
-                              <button
-                                type="button"
-                                className={styles.openPaymentButton}
-                                onClick={() => {
-                                  try {
-                                    openCheckout(paymentOrder.checkoutUrl!);
-                                    setPaymentLinkNotice("Click ochildi.");
-                                  } catch {
-                                    setPaymentLinkNotice(
-                                      "Click ochilmadi. Havolani nusxalab Chrome’da oching.",
-                                    );
-                                  }
-                                }}
-                              >
-                                Click’da to‘lash
-                              </button>
-                            )}
-                            <button
-                              type="button"
-                              className={styles.paymentCheckButton}
-                              disabled={checkingPayment}
-                              onClick={() => void refreshPayment(paymentOrder.id)}
-                            >
-                              {checkingPayment ? "Tekshirilmoqda…" : "Holatni tekshirish"}
-                            </button>
-                          </div>
-                          <small>To‘lagan bo‘lsangiz, qayta to‘lamang.</small>
-                          {paymentOrder.checkoutUrl && (
-                            <details className={styles.paymentHelp}>
-                              <summary>Click ochilmayaptimi?</summary>
-                              <button
-                                type="button"
-                                onClick={async () => {
-                                  try {
-                                    await navigator.clipboard.writeText(paymentOrder.checkoutUrl!);
-                                    setManualPaymentLink(false);
-                                    setPaymentLinkNotice("To‘lov havolasi nusxalandi.");
-                                  } catch {
-                                    setManualPaymentLink(true);
-                                    setPaymentLinkNotice("Havolani quyidagi maydondan nusxalang.");
-                                  }
-                                }}
-                              >
-                                Havolani nusxalash
-                              </button>
-                              {manualPaymentLink && (
-                                <input
-                                  aria-label="To‘lov havolasi"
-                                  readOnly
-                                  value={paymentOrder.checkoutUrl}
-                                  onFocus={(event) => event.currentTarget.select()}
-                                />
-                              )}
-                              <p>Telegram yoki brauzer menyusidan “Brauzerda ochish”ni tanlang, yoki shu havolani Chrome’da oching.</p>
-                            </details>
-                          )}
-                          {paymentLinkNotice && <small role="status">{paymentLinkNotice}</small>}
-                        </>
-                      ) : (
-                        <p>Bu urinish yakunlanmadi. Pastdagi tugma orqali qayta urinib ko‘rishingiz mumkin.</p>
-                      )}
-                      {paymentOrder.publicationError && (
-                        <p role="alert">{paymentOrder.publicationError}</p>
-                      )}
-                      {paymentOrder.url && (
-                        <Link href={paymentOrder.url}>Nashr qilingan taklifnomani ochish</Link>
-                      )}
-                    </div>
-                  )}
                   <div>
                     <h2>
                       <CheckCircle2 size={22} aria-hidden="true" />
@@ -4073,15 +3997,25 @@ export function Studio({
                         </dd>
                       </div>}
                       <div>
-                        <dt>{isImage ? "Rasm formati" : "Nashr narxi"}</dt>
+                        <dt>
+                          {paymentOrder?.invitationId === invitation.id && paymentOrder.url
+                            ? "Nashr holati"
+                            : isImage
+                              ? "Rasm formati"
+                              : "Nashr narxi"}
+                        </dt>
                         <dd>
-                          {isImage ? "PNG · 1500 × 2100" : paidInvitationId === invitation.id
-                            ? "To‘lov qabul qilingan"
-                            : publishingMode === "paid"
-                              ? selectedTemplate
-                                ? formatPrice(selectedTemplate.priceMinor)
-                                : "Dizayn tanlang"
-                              : "Bepul"}
+                          {paymentOrder?.invitationId === invitation.id && paymentOrder.url
+                            ? "Nashr qilingan"
+                            : isImage
+                              ? "PNG · 1500 × 2100"
+                              : paidInvitationId === invitation.id
+                                ? "To‘lov qabul qilingan"
+                                : publishingMode === "paid"
+                                  ? selectedTemplate
+                                    ? formatPrice(selectedTemplate.priceMinor)
+                                    : "Dizayn tanlang"
+                                  : "Bepul"}
                         </dd>
                       </div>
                     </dl>
@@ -4093,7 +4027,9 @@ export function Studio({
                       <li>Birinchi yuklab olishdan keyin ismlar, matnlar, tadbir turi va dizayn qulflanadi.</li>
                       <li>Faqat manzil va sana/vaqt tahrirlanadi; sana tasdiqlangan kundan kech bo‘la olmaydi. Tahrirlash muddati o‘zgarmaydi.</li>
                     </ul> : <ul className={styles.publicationTerms}>
-                      {paidInvitationId === invitation.id ? (
+                      {paymentOrder?.invitationId === invitation.id && paymentOrder.url ? (
+                        <li>To‘lov qabul qilindi va taklifnoma nashr qilindi.</li>
+                      ) : paidInvitationId === invitation.id ? (
                         <li>
                           To‘lov qabul qilingan. Nashrni yakunlash uchun qayta
                           to‘lov talab qilinmaydi.
@@ -4116,6 +4052,106 @@ export function Studio({
                       </li>
                     </ul>}
                   </div>
+                  {paymentOrder?.invitationId === invitation.id && (
+                    <div
+                      className={styles.paymentStatusPanel}
+                      data-success={paymentOrder.status === "SUCCEEDED"}
+                      aria-live="polite"
+                    >
+                      <div className={styles.paymentStatusTop}>
+                        <div>
+                          <span>To‘lov holati</span>
+                          <strong>{paymentStateLabels[paymentOrder.status]}</strong>
+                        </div>
+                        <b>{formatPrice(paymentOrder.amountMinor)}</b>
+                      </div>
+                      {paymentOrder.status === "SUCCEEDED" ? (
+                        <p>
+                          {paymentOrder.url
+                            ? "To‘lov qabul qilindi va taklifnomangiz nashr qilindi."
+                            : "To‘lov tasdiqlandi. Nashr hali yakunlanmagan; pastdagi tugma orqali davom eting."}
+                        </p>
+                      ) : ["CREATED", "PENDING", "PROCESSING", "REJECTED"].includes(paymentOrder.status) ? (
+                        <>
+                          <p>Click’da to‘lovni yakunlang. Holat avtomatik tekshiriladi.</p>
+                          <div className={styles.paymentActions}>
+                            {paymentOrder.checkoutUrl && (
+                              <button
+                                type="button"
+                                className={styles.openPaymentButton}
+                                onClick={() => {
+                                  try {
+                                    openCheckout(paymentOrder.checkoutUrl!);
+                                    setPaymentLinkNotice("Click ochildi.");
+                                  } catch {
+                                    setPaymentLinkNotice(
+                                      "Click ochilmadi. Havolani nusxalab Chrome’da oching.",
+                                    );
+                                  }
+                                }}
+                              >
+                                Click’da to‘lash
+                              </button>
+                            )}
+                            <button
+                              type="button"
+                              className={styles.paymentCheckButton}
+                              disabled={checkingPayment}
+                              onClick={() => void refreshPayment(paymentOrder.id)}
+                            >
+                              {checkingPayment ? "Tekshirilmoqda…" : "Holatni tekshirish"}
+                            </button>
+                          </div>
+                          <small>To‘lagan bo‘lsangiz, qayta to‘lamang.</small>
+                          {paymentOrder.checkoutUrl && (
+                            <details className={styles.paymentHelp}>
+                              <summary>Click ochilmayaptimi?</summary>
+                              <button
+                                type="button"
+                                onClick={async () => {
+                                  try {
+                                    await navigator.clipboard.writeText(paymentOrder.checkoutUrl!);
+                                    setManualPaymentLink(false);
+                                    setPaymentLinkNotice("To‘lov havolasi nusxalandi.");
+                                  } catch {
+                                    setManualPaymentLink(true);
+                                    setPaymentLinkNotice("Havolani quyidagi maydondan nusxalang.");
+                                  }
+                                }}
+                              >
+                                Havolani nusxalash
+                              </button>
+                              {manualPaymentLink && (
+                                <input
+                                  aria-label="To‘lov havolasi"
+                                  readOnly
+                                  value={paymentOrder.checkoutUrl}
+                                  onFocus={(event) => event.currentTarget.select()}
+                                />
+                              )}
+                              <p>Telegram yoki brauzer menyusidan “Brauzerda ochish”ni tanlang, yoki shu havolani Chrome’da oching.</p>
+                            </details>
+                          )}
+                          {paymentLinkNotice && <small role="status">{paymentLinkNotice}</small>}
+                        </>
+                      ) : (
+                        <p>Bu urinish yakunlanmadi. Pastdagi tugma orqali qayta urinib ko‘rishingiz mumkin.</p>
+                      )}
+                      {paymentOrder.publicationError && (
+                        <p role="alert">{paymentOrder.publicationError}</p>
+                      )}
+                    </div>
+                  )}
+                  {paymentOrder?.invitationId === invitation.id && paymentOrder.url ? (
+                    <Link
+                      className={styles.saveButton}
+                      href={paymentOrder.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <Eye size={16} /> Nashr qilingan taklifnomani ochish
+                    </Link>
+                  ) : (
                   <button
                     type="button"
                     className={styles.saveButton}
@@ -4138,6 +4174,7 @@ export function Studio({
                           ? `To‘lash va nashr qilish${selectedTemplate ? ` · ${formatPrice(selectedTemplate.priceMinor)}` : ""}`
                           : "Nashr qilish"}
                   </button>
+                  )}
                 </section>
               )}
               </fieldset>

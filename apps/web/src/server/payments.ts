@@ -366,13 +366,16 @@ export async function getInvitationPayment(
     throw new ApiError(404, "NOT_FOUND", "Taklifnoma topilmadi.");
   const [template] =
     await getDb()`SELECT name,price_minor FROM templates WHERE id=${invitation.templateId}`;
-  const [row] = await getDb()<
-    Order[]
-  >`SELECT p.*,CASE WHEN i.status='published' THEN i.slug END AS slug
-      FROM payment_orders p JOIN invitations i ON i.id=p.invitation_id
-      WHERE p.invitation_id=${invitationId} AND p.owner_id=${userId}
-      ORDER BY p.created_at DESC,p.id DESC LIMIT 1`;
-  const order = row ? orderView(row) : null;
+  let order = explicitOrder ?? null;
+  if (!order) {
+    const [row] = await getDb()<
+      Order[]
+    >`SELECT p.*,CASE WHEN i.status='published' THEN i.slug END AS slug
+        FROM payment_orders p JOIN invitations i ON i.id=p.invitation_id
+        WHERE p.invitation_id=${invitationId} AND p.owner_id=${userId}
+        ORDER BY p.created_at DESC,p.id DESC LIMIT 1`;
+    order = row ? orderView(row) : null;
+  }
   return {
     invitation,
     order,

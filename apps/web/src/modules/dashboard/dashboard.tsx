@@ -30,6 +30,7 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import {
+  formatPrice,
   getContent,
   invitationSchema,
   LANGUAGE_NAMES,
@@ -37,6 +38,10 @@ import {
   type Invitation,
   type SessionResponse,
 } from "@taklifnoma/contracts";
+import {
+  paymentStateLabels,
+  type InvitationPaymentContext,
+} from "@taklifnoma/contracts/payment";
 import styles from "./dashboard.module.css";
 import {
   deleteBrowserDraft,
@@ -416,11 +421,145 @@ export function Dashboard() {
   const [loginError, setLoginError] = useState("");
   const [actionBusy, setActionBusy] = useState<string | null>(null);
   const [actionError, setActionError] = useState("");
+  const [paymentReturnOrderId, setPaymentReturnOrderId] = useState("");
+  const [paymentReturn, setPaymentReturn] = useState<InvitationPaymentContext | null>(null);
+  const [paymentReturnLoading, setPaymentReturnLoading] = useState(false);
+  const [paymentReturnChecking, setPaymentReturnChecking] = useState(false);
+  const [paymentReturnError, setPaymentReturnError] = useState("");
+  const [paymentReturnCopied, setPaymentReturnCopied] = useState(false);
+  const paymentReturnDialog = useRef<HTMLDialogElement>(null);
   const [deleteTarget, setDeleteTarget] = useState<{
     invitation: Invitation;
     local: boolean;
     accountSaved: boolean;
   } | null>(null);
+
+  useEffect(() => {
+    const url = new URL(window.location.href);
+    const isPaymentReturn = url.searchParams.get("payment_return") === "1";
+    let orderId = isPaymentReturn ? url.searchParams.get("order") ?? "" : "";
+    if (!orderId) {
+      try {
+        orderId = sessionStorage.getItem("fotiha:payment-return-order") ?? "";
+      } catch {
+        // Ignore unavailable storage and rely on the callback URL if present.
+      }
+    }
+    if (!orderId) return;
+    if (/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(orderId)) {
+      setPaymentReturnOrderId(orderId);
+      setPaymentReturnLoading(true);
+      try {
+        sessionStorage.setItem("fotiha:payment-return-order", orderId);
+      } catch {
+        // The callback's query is still enough for this page visit.
+      }
+    }
+    if (isPaymentReturn) {
+      url.searchParams.delete("payment_return");
+      url.searchParams.delete("order");
+      window.history.replaceState(
+        window.history.state,
+        "",
+        `${url.pathname}${url.search}${url.hash}`,
+      );
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!paymentReturnOrderId || !session) return;
+    if (!session.user) {
+      setPaymentReturnLoading(false);
+      setPaymentReturnError("To‘lov tafsilotlarini ko‘rish uchun hisobingizga kiring.");
+      return;
+    }
+    const controller = new AbortController();
+    setPaymentReturnLoading(true);
+    setPaymentReturnError("");
+    void fetch(`/api/payments/${encodeURIComponent(paymentReturnOrderId)}`, {
+      cache: "no-store",
+      signal: controller.signal,
+    })
+      .then(async (response) => {
+        const result = await response.json();
+        if (!response.ok)
+          throw new Error(result.error?.message ?? "To‘lov tafsilotlari olinmadi.");
+        if (!controller.signal.aborted) {
+          setPaymentReturn(result);
+          try {
+            sessionStorage.removeItem("fotiha:payment-return-order");
+          } catch {
+            // The query has already been removed from the address bar.
+          }
+        }
+      })
+      .catch((cause) => {
+        if (!controller.signal.aborted)
+          setPaymentReturnError(
+            cause instanceof Error ? cause.message : "Ulanishni tekshiring.",
+          );
+      })
+      .finally(() => {
+        if (!controller.signal.aborted) setPaymentReturnLoading(false);
+      });
+    return () => controller.abort();
+  }, [paymentReturnOrderId, session]);
+
+  useEffect(() => {
+    const dialog = paymentReturnDialog.current;
+    if (paymentReturnOrderId && dialog && !dialog.open) dialog.showModal();
+    else if (!paymentReturnOrderId && dialog?.open) dialog.close();
+  }, [paymentReturnOrderId]);
+
+  async function checkPaymentReturn() {
+    if (!paymentReturn?.order || paymentReturnChecking) return;
+    setPaymentReturnChecking(true);
+    setPaymentReturnError("");
+    try {
+      const response = await fetch(
+        `/api/payments/${encodeURIComponent(paymentReturn.order.id)}/refresh`,
+        { method: "POST" },
+      );
+      const result = await response.json();
+      if (!response.ok)
+        throw new Error(result.error?.message ?? "To‘lov holatini yangilab bo‘lmadi.");
+      setPaymentReturn((current) =>
+        current ? { ...current, order: result.order } : current,
+      );
+    } catch (cause) {
+      setPaymentReturnError(
+        cause instanceof Error ? cause.message : "Ulanishni tekshiring.",
+      );
+    } finally {
+      setPaymentReturnChecking(false);
+    }
+  }
+
+  function closePaymentReturn() {
+    paymentReturnDialog.current?.close();
+    setPaymentReturnOrderId("");
+    setPaymentReturn(null);
+    setPaymentReturnError("");
+    setPaymentReturnCopied(false);
+    try {
+      sessionStorage.removeItem("fotiha:payment-return-order");
+    } catch {
+      // Dismissing the dialog does not depend on browser storage.
+    }
+  }
+
+  async function copyPaymentReturnLink() {
+    if (!paymentReturnPublicUrl) return;
+    try {
+      await navigator.clipboard.writeText(
+        new URL(paymentReturnPublicUrl, window.location.origin).href,
+      );
+      setPaymentReturnCopied(true);
+      setPaymentReturnError("");
+    } catch {
+      setPaymentReturnError("Havolani quyidagi maydondan tanlab nusxalang.");
+    }
+  }
   async function removeInvitation(
     invitation: Invitation,
     local: boolean,
@@ -654,6 +793,17 @@ export function Dashboard() {
   const publishedCount = allInvitations.filter(
     (item) => item.status === "published",
   ).length;
+  const paymentReturnInvitation = paymentReturn?.invitation ?? null;
+  const paymentReturnOrder = paymentReturn?.order ?? null;
+  const paymentReturnContent = paymentReturnInvitation
+    ? getContent(paymentReturnInvitation)
+    : null;
+  const paymentReturnPublicUrl = paymentReturnOrder?.url ??
+    (paymentReturnInvitation?.status === "published" && paymentReturnInvitation.slug
+      ? `/i/${encodeURIComponent(paymentReturnInvitation.slug)}`
+      : null);
+  const paymentReturnIsPublished =
+    paymentReturnOrder?.status === "SUCCEEDED" && !!paymentReturnPublicUrl;
 
   return (
     <div className={styles.dashboard}>
@@ -955,6 +1105,199 @@ export function Dashboard() {
           </p>
         </div>
       </main>
+      {paymentReturnOrderId && (
+        <dialog
+          ref={paymentReturnDialog}
+          className={styles.paymentReturnDialog}
+          aria-labelledby="payment-return-title"
+          onCancel={(event) => {
+            event.preventDefault();
+            closePaymentReturn();
+          }}
+          onClick={(event) => {
+            if (event.target === event.currentTarget) closePaymentReturn();
+          }}
+        >
+          <button
+            type="button"
+            className={styles.paymentReturnClose}
+            aria-label="Yopish"
+            onClick={closePaymentReturn}
+          >
+            <X size={18} />
+          </button>
+          <div className={styles.paymentReturnLayout}>
+            {paymentReturnInvitation && (
+              <div
+                className={styles.paymentReturnArt}
+                data-format={templateById(paymentReturnInvitation.templateId)?.format}
+              >
+                {templateById(paymentReturnInvitation.templateId)?.format === "image" ? (
+                  <StaticImagePreview invitation={paymentReturnInvitation} compact />
+                ) : templateById(paymentReturnInvitation.templateId) ? (
+                  <InvitationThumbnail
+                    invitation={paymentReturnInvitation}
+                    cacheScope={session?.user?.id ?? "payment-return"}
+                  />
+                ) : (
+                  <FileHeart size={42} />
+                )}
+                {paymentReturnIsPublished && (
+                  <span className={styles.paymentArtBadge}>
+                    <CheckCircle2 size={14} /> Nashr qilindi
+                  </span>
+                )}
+              </div>
+            )}
+            <div className={styles.paymentReturnContent}>
+              <div
+                className={styles.paymentReturnSeal}
+                data-success={paymentReturnOrder?.status === "SUCCEEDED"}
+              >
+                {paymentReturnLoading ? (
+                  <LoaderCircle size={25} className={styles.paymentReturnSpinner} />
+                ) : paymentReturnOrder?.status === "SUCCEEDED" ? (
+                  <CheckCircle2 size={26} />
+                ) : (
+                  <ShieldCheck size={24} />
+                )}
+              </div>
+              <span className={styles.paymentReturnEyebrow}>
+                {paymentReturnOrder
+                  ? paymentStateLabels[paymentReturnOrder.status]
+                  : "Click orqali to‘lov"}
+              </span>
+              <h2 id="payment-return-title">
+                {paymentReturnLoading
+                  ? "To‘lov holatini tekshiryapmiz"
+                  : paymentReturnIsPublished
+                    ? "To‘lov muvaffaqiyatli tasdiqlandi!"
+                    : paymentReturnOrder?.status === "SUCCEEDED"
+                      ? "To‘lov qabul qilindi"
+                      : paymentReturnOrder && ["FAILED", "CANCELLED", "EXPIRED"].includes(paymentReturnOrder.status)
+                        ? "To‘lov yakunlanmadi"
+                        : paymentReturnOrder
+                          ? "To‘lov tasdig‘i kutilmoqda"
+                          : "To‘lov ma’lumotlari topilmadi"}
+              </h2>
+              <p className={styles.paymentReturnDescription}>
+                {paymentReturnLoading
+                  ? "Nodze’dagi buyurtmangizning serverda tasdiqlangan holati olinmoqda."
+                  : paymentReturnIsPublished
+                    ? "Taklifnomangiz nashr qilindi va mehmonlarga yuborishga tayyor."
+                    : paymentReturnOrder?.status === "SUCCEEDED"
+                      ? "To‘lov tasdiqlandi. Taklifnomani yakunlash uchun studioda davom eting; qayta to‘lash shart emas."
+                      : paymentReturnOrder && ["FAILED", "CANCELLED", "EXPIRED"].includes(paymentReturnOrder.status)
+                        ? "To‘lov tasdiqlanmadi. Taklifnomangiz saqlangan, uni studioda ko‘rib chiqishingiz mumkin."
+                        : paymentReturnOrder
+                          ? "Hozircha to‘lov tasdiqlanmadi. Biroz kuting yoki holatni qayta tekshiring."
+                          : paymentReturnError || "Buyurtma ushbu hisob bilan topilmadi."}
+              </p>
+              {paymentReturnInvitation && paymentReturnContent && (
+                <>
+                  <div className={styles.paymentReturnNames}>
+                    {paymentReturnContent.people.filter(Boolean).join(" & ") || "Taklifnomangiz"}
+                  </div>
+                  <dl className={styles.paymentReturnDetails}>
+                    <div>
+                      <dt>Sana</dt>
+                      <dd>
+                        {formatDate(
+                          paymentReturnInvitation.startsAt,
+                          "uz-Latn",
+                          paymentReturnInvitation.timezone,
+                          { day: "numeric", month: "long", year: "numeric" },
+                        ) || "Kiritilmagan"}
+                      </dd>
+                    </div>
+                    <div>
+                      <dt>Dizayn</dt>
+                      <dd>{paymentReturnOrder?.templateName ?? templateById(paymentReturnInvitation.templateId)?.name}</dd>
+                    </div>
+                    {paymentReturnOrder && (
+                      <div>
+                        <dt>To‘lov</dt>
+                        <dd>{formatPrice(paymentReturnOrder.amountMinor)}</dd>
+                      </div>
+                    )}
+                  </dl>
+                </>
+              )}
+              {paymentReturnPublicUrl && paymentReturnIsPublished && (
+                <label className={styles.paymentReturnUrl}>
+                  Taklifnoma havolasi
+                  <input
+                    readOnly
+                    value={paymentReturnOrder?.url ?? paymentReturnPublicUrl}
+                    onFocus={(event) => event.currentTarget.select()}
+                    aria-label="Taklifnoma havolasi"
+                  />
+                </label>
+              )}
+              {paymentReturnError && (
+                <p className={styles.paymentReturnError} role="alert">
+                  {paymentReturnError}
+                </p>
+              )}
+              <div className={styles.paymentReturnActions}>
+                {paymentReturnPublicUrl && paymentReturnIsPublished ? (
+                  <>
+                    <button
+                      type="button"
+                      className={styles.paymentCopyButton}
+                      onClick={() => void copyPaymentReturnLink()}
+                    >
+                      <Copy size={16} />
+                      {paymentReturnCopied ? "Havola nusxalandi" : "Havolani nusxalash"}
+                    </button>
+                    <a
+                      className={styles.paymentOpenButton}
+                      href={paymentReturnPublicUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Taklifnomani ko‘rish <ExternalLink size={15} />
+                    </a>
+                  </>
+                ) : paymentReturnOrder && paymentReturnOrder.status !== "SUCCEEDED" && !["FAILED", "CANCELLED", "EXPIRED"].includes(paymentReturnOrder.status) ? (
+                  <button
+                    type="button"
+                    className={styles.paymentCopyButton}
+                    onClick={() => void checkPaymentReturn()}
+                    disabled={paymentReturnChecking}
+                  >
+                    {paymentReturnChecking ? "Tekshirilmoqda…" : "Holatni tekshirish"}
+                  </button>
+                ) : paymentReturnInvitation ? (
+                  <Link
+                    className={styles.paymentCopyButton}
+                    href={`/studio/${encodeURIComponent(paymentReturnInvitation.id)}`}
+                    onClick={closePaymentReturn}
+                  >
+                    Studioda davom etish <ArrowRight size={16} />
+                  </Link>
+                ) : !session?.user ? (
+                  <button
+                    type="button"
+                    className={styles.paymentCopyButton}
+                    onClick={() => void startLogin()}
+                    disabled={loginBusy}
+                  >
+                    {loginBusy ? "Telegram ochilmoqda…" : "Hisobga kirish"}
+                  </button>
+                ) : null}
+                <button
+                  type="button"
+                  className={styles.paymentLaterButton}
+                  onClick={closePaymentReturn}
+                >
+                  Yopish
+                </button>
+              </div>
+            </div>
+          </div>
+        </dialog>
+      )}
       {deleteTarget && (
         <div
           className={styles.dialogBackdrop}

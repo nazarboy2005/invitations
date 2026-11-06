@@ -2661,6 +2661,13 @@
   background: linear-gradient(135deg, #fffefa, #f8f3e9);
   font-size: 13px;
 }
+.paymentStatusPanel[data-success="true"] {
+  border-color: #a6c9ad;
+  background: linear-gradient(135deg, #f5fbf4, #eaf5e9);
+}
+.paymentStatusPanel[data-success="true"] .paymentStatusTop strong {
+  color: #286a43;
+}
 .paymentStatusTop {
   display: flex;
   align-items: center;
@@ -2692,6 +2699,9 @@
 .paymentStatusPanel > a {
   color: var(--primary);
   font-weight: 600;
+}
+.paymentStatusPanel[data-success="true"] > a {
+  color: #286a43;
 }
 .paymentActions {
   display: flex;
