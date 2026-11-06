@@ -7,6 +7,7 @@ import styles from "./place-search.module.css";
 
 type Suggestion = { id: string; name: string; address: string };
 export type SelectedPlace = Suggestion & { latitude: number; longitude: number; mapUrl: string; placeUri?: string };
+const SEARCH_DEBOUNCE_MS = 500;
 
 export function PlaceSearch({ value, locale, onChange, onSelect, confirmed = false, label = "To‘yxona yoki joy nomi" }: {
   value: string;
@@ -51,7 +52,7 @@ export function PlaceSearch({ value, locale, onChange, onSelect, confirmed = fal
           setPlaces([]); setStatus(error instanceof Error ? error.message : "Joy qidiruvi ishlamadi.");
         }
       } finally { if (version === generation.current && !controller.signal.aborted) setLoading(false); }
-    }, 280);
+    }, SEARCH_DEBOUNCE_MS);
     return () => { clearTimeout(timer); controller.abort(); };
   }, [value, locale, confirmed]);
   useEffect(() => {
