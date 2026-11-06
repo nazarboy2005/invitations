@@ -74,6 +74,7 @@ export async function personalizedCover(
   invitation: Invitation,
   address: string,
   cookie: string,
+  ownerId?: string,
 ) {
   // Analytics/dev cookies can rotate on navigation. Only the private session
   // distinguishes access to uploaded media; other cookies must not invalidate art.
@@ -82,7 +83,10 @@ export async function personalizedCover(
       .split(";")
       .map((part) => part.trim())
       .find((part) => part.startsWith(`${SESSION_COOKIE}=`)) ?? "";
-  const key = coverKey(invitation, session);
+  const key = coverKey(
+    invitation,
+    ownerId ? `${session}\0${ownerId}` : session,
+  );
   const root = cacheRoot();
   const file = path.join(root, `${key}.webp`);
   try {
