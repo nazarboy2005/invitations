@@ -394,6 +394,13 @@
   line-height: 1.7;
   color: var(--muted);
 }
+.fieldError {
+  margin: 0;
+  color: #863e2b;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.5;
+}
 .twoColumns {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);

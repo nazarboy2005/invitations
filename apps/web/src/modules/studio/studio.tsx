@@ -188,6 +188,28 @@ const sections = [
   },
 ];
 
+function studioPublicationIssues(
+  invitation: Invitation,
+  now: Date,
+): PublicationIssue[] {
+  const issues = publicationIssues(invitation);
+  // Match checkout's server rule: the event remains valid through its local
+  // calendar day and becomes ended at midnight in the invitation timezone.
+  if (!issues.some((issue) => issue.path === "startsAt")) {
+    try {
+      if (invitation.startsAt.slice(0, 10) < eventDay(now, invitation.timezone))
+        issues.push({
+          path: "startsAt",
+          section: 2,
+          message: "Tadbir kuni o‘tib ketgan. Bugun yoki undan keyingi sanani tanlang.",
+        });
+    } catch {
+      // The existing timezone validation issue explains invalid timezone data.
+    }
+  }
+  return issues;
+}
+
 function fillDressCodeDefaults(
   current: Invitation["dressCode"],
 ): Invitation["dressCode"] {
@@ -1001,7 +1023,8 @@ export function Studio({
     formatTemplates,
     invitation.eventType,
   );
-  const readiness = publicationIssues(invitation);
+  const readiness = studioPublicationIssues(invitation, clockNow);
+  const startsAtIssue = readiness.find((issue) => issue.path === "startsAt");
   if (
     invitation.status === "draft" &&
     invitation.templateId &&
@@ -1028,6 +1051,14 @@ export function Studio({
             ? ""
             : "Saqlanmoqda…";
   const identityLocked = invitation.status !== "draft" || !!invitation.imageExportedAt || !!editAccess?.locked;
+  let earliestDraftEventDate: string | undefined;
+  if (!identityLocked) {
+    try {
+      earliestDraftEventDate = eventDay(clockNow, invitation.timezone);
+    } catch {
+      // The timezone validation issue will ask the creator to correct it.
+    }
+  }
   const staticLocked = isImage && identityLocked;
   const contentExpired = identityLocked && (!editAccess || editingClosed({ ...editAccess, locked: true }, clockNow));
   function update(patch: Partial<Invitation>) {
@@ -1182,7 +1213,7 @@ export function Studio({
     const repeatSavedDownload = action === "download" && !!current.imageExportedAt &&
       (contentExpired || JSON.stringify(current) === lastCloudSnapshot.current);
     if (action === "publish" || (action === "download" && !repeatSavedDownload)) {
-      const issues = publicationIssues(current);
+      const issues = studioPublicationIssues(current, clockNow);
       if (issues.length) {
         setPublishIssues(issues);
         setNotice("");
@@ -2599,10 +2630,18 @@ export function Studio({
                   <DateTimePicker
                     value={invitation.startsAt}
                     disabled={contentExpired}
-                    minDate={identityLocked ? isImage ? eventDay(clockNow, invitation.timezone) : invitation.startsAt.slice(0,10) : undefined}
+                    minDate={identityLocked ? isImage ? eventDay(clockNow, invitation.timezone) : invitation.startsAt.slice(0,10) : earliestDraftEventDate}
                     maxDate={identityLocked ? isImage ? editAccess?.approvedEventDate ?? invitation.startsAt.slice(0,10) : invitation.startsAt.slice(0,10) : undefined}
-                    onChange={(startsAt) => update({ startsAt })}
+                    onChange={(startsAt) => {
+                      setPublishIssues([]);
+                      update({ startsAt });
+                    }}
                   />
+                  {startsAtIssue && (
+                    <p className={styles.fieldError} role="alert">
+                      {startsAtIssue.message}
+                    </p>
+                  )}
                 </Field>
                 {invitation.templateId === "wedivo-pulau-sehati" && (
                   <>
@@ -3800,13 +3839,14 @@ export function Studio({
                         ],
                         [
                           "Sana va vaqt",
-                          readiness.some((issue) => issue.path === "startsAt")
-                            ? "Kiritilmagan"
+                          startsAtIssue?.message ??
+                            (readiness.some((issue) => issue.path === "startsAt")
+                              ? "Kiritilmagan"
                             : new Intl.DateTimeFormat("uz-UZ", {
                                 dateStyle: "long",
                                 timeStyle: "short",
                                 timeZone: "UTC",
-                              }).format(new Date(`${invitation.startsAt}Z`)),
+                              }).format(new Date(`${invitation.startsAt}Z`))),
                           2,
                         ],
                         [
