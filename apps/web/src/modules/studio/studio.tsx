@@ -152,6 +152,9 @@ import { createStudioPreviewInvitation } from "./preview-invitation";
 import { CATALOG_MUSIC_CREDIT, CATALOG_PREVIEW_MUSIC } from "@/modules/catalog/catalog-music";
 import { orderEventTemplates } from "@/modules/catalog/template-order";
 import { PublishedLink } from "@/components/published-link";
+import { CheckoutActions } from "@/modules/payments/checkout-actions";
+import { openCheckout } from "@/modules/payments/open-checkout";
+import { paymentStateLabels, type PaymentOrderView } from "@taklifnoma/contracts/payment";
 import {
   publicationIssues,
   type PublicationIssue,
@@ -464,10 +467,13 @@ export function Studio({
   const [publishing, setPublishing] = useState(false);
   const [publishingMode, setPublishingMode] = useState("free");
   const [paidInvitationId, setPaidInvitationId] = useState("");
+  const [paymentOrder, setPaymentOrder] = useState<PaymentOrderView | null>(null);
+  const [checkingPayment, setCheckingPayment] = useState(false);
   const [publishIssues, setPublishIssues] = useState<PublicationIssue[]>([]);
   const [publicUrl, setPublicUrl] = useState<string>();
   const pendingAction = useRef<"save" | "publish" | "download">("save");
   const operationInFlight = useRef(false);
+  const paymentCheckInFlight = useRef(false);
   const [auth, setAuth] = useState<{
     loginUrl: string;
     requestId: string;
@@ -632,6 +638,80 @@ export function Studio({
       });
     return () => controller.abort();
   }, [invitation?.id, invitation?.music.enabled]);
+
+  useEffect(() => {
+    const invitationId = invitation?.id;
+    if (!invitationId || adminContext) return;
+    const controller = new AbortController();
+    setPaymentOrder(null);
+    void studioFetch(
+      `/api/invitations/${encodeURIComponent(invitationId)}/payment`,
+      { cache: "no-store", signal: controller.signal },
+    )
+      .then(async (response) => (response.ok ? response.json() : null))
+      .then((result) => {
+        if (controller.signal.aborted || result?.invitation?.id !== invitationId)
+          return;
+        const order = result.order as PaymentOrderView | null;
+        setPaymentOrder(order);
+        if (order?.status === "SUCCEEDED") setPaidInvitationId(invitationId);
+      })
+      .catch(() => {
+        // Checkout state is optional here; publishing rechecks payment server-side.
+      });
+    return () => controller.abort();
+  }, [invitation?.id, adminContext]);
+
+  const refreshPayment = useCallback(
+    async (orderId: string, signal?: AbortSignal) => {
+      if (paymentCheckInFlight.current) return;
+      paymentCheckInFlight.current = true;
+      setCheckingPayment(true);
+      try {
+        const response = await studioFetch(
+          `/api/payments/${encodeURIComponent(orderId)}/refresh`,
+          { method: "POST", signal },
+        );
+        const result = await response.json();
+        if (!response.ok)
+          throw new Error(result.error?.message ?? "To‘lovni tekshirib bo‘lmadi.");
+        if (signal?.aborted) return;
+        const order = result.order as PaymentOrderView;
+        setPaymentOrder(order);
+        if (order.status === "SUCCEEDED" && invitation?.id === order.invitationId)
+          setPaidInvitationId(order.invitationId);
+        if (order.url) setPublicUrl(order.url);
+      } catch (cause) {
+        if (!signal?.aborted)
+          setError(cause instanceof Error ? cause.message : "Ulanishni tekshiring.");
+      } finally {
+        paymentCheckInFlight.current = false;
+        if (!signal?.aborted) setCheckingPayment(false);
+      }
+    },
+    [invitation?.id],
+  );
+
+  useEffect(() => {
+    if (
+      !paymentOrder ||
+      !["CREATED", "PENDING", "PROCESSING", "REJECTED"].includes(paymentOrder.status)
+    )
+      return;
+    const controller = new AbortController();
+    const checkWhenVisible = () => {
+      if (!document.hidden) void refreshPayment(paymentOrder.id, controller.signal);
+    };
+    const timer = window.setInterval(checkWhenVisible, 15000);
+    window.addEventListener("focus", checkWhenVisible);
+    document.addEventListener("visibilitychange", checkWhenVisible);
+    return () => {
+      controller.abort();
+      window.clearInterval(timer);
+      window.removeEventListener("focus", checkWhenVisible);
+      document.removeEventListener("visibilitychange", checkWhenVisible);
+    };
+  }, [paymentOrder?.id, paymentOrder?.status, refreshPayment]);
 
   useEffect(() => {
     let alive = true;
@@ -1209,6 +1289,7 @@ export function Studio({
   async function saveOrPublish(action: "save" | "publish" | "download") {
     const current = invitationRef.current;
     if (!current || operationInFlight.current || uploading) return;
+    let checkoutWindow: Window | null = null;
     setPublishIssues([]);
     const repeatSavedDownload = action === "download" && !!current.imageExportedAt &&
       (contentExpired || JSON.stringify(current) === lastCloudSnapshot.current);
@@ -1223,6 +1304,8 @@ export function Studio({
         return;
       }
     }
+    if (action === "publish" && publishingMode === "paid" && !adminContext)
+      checkoutWindow = window.open("about:blank", "_blank");
     pendingAction.current = action;
     operationInFlight.current = true;
     setBusy(true);
@@ -1408,11 +1491,17 @@ export function Studio({
               result.error?.message ??
                 "To‘lovni boshlab bo‘lmadi. Qoralamangiz saqlangan.",
             );
-          // Checkout was prepared asynchronously. Keep the order in our app and
-          // let a fresh user tap open its saved URL through Telegram's SDK.
-          window.location.assign(
-            `/payment/return?order=${encodeURIComponent(result.order.id)}${window.location.hash}`,
-          );
+          const order = result.order as PaymentOrderView;
+          setPaymentOrder(order);
+          if (order.status === "SUCCEEDED") setPaidInvitationId(saved.id);
+          if (order.checkoutUrl) {
+            openCheckout(order.checkoutUrl, checkoutWindow);
+            checkoutWindow = null;
+            setNotice("To‘lov oynasi ochildi. Holat shu sahifada tekshiriladi.");
+          } else {
+            checkoutWindow?.close();
+            checkoutWindow = null;
+          }
           return;
         }
         if (!publishedResponse.ok) {
@@ -1459,6 +1548,7 @@ export function Studio({
         "Taklifnomangiz hisobingizga saqlandi. Uni “Taklifnomalarim” bo‘limidan topasiz.",
       );
     } catch (cause) {
+      checkoutWindow?.close();
       setError(
         cause instanceof TypeError
           ? "Ulanish uzildi. Qoralamangiz brauzerda saqlangan. Nashr holatini tekshirish uchun sahifani qayta oching."
@@ -1469,6 +1559,7 @@ export function Studio({
       setMobilePreview(false);
       window.scrollTo({ top: 0, behavior: "instant" });
     } finally {
+      checkoutWindow?.close();
       setBusy(false);
       setPublishing(false);
       operationInFlight.current = false;
@@ -3935,12 +4026,55 @@ export function Studio({
                       </li>
                     </ul>}
                   </div>
+                  {paymentOrder?.invitationId === invitation.id && (
+                      <div className={styles.paymentStatusPanel} aria-live="polite">
+                        <strong>{paymentStateLabels[paymentOrder.status]}</strong>
+                        {paymentOrder.status === "SUCCEEDED" ? (
+                          <p>
+                            To‘lov qabul qilindi. Nashrni yakunlash uchun pastdagi
+                            tugmani bosing.
+                          </p>
+                        ) : ["CREATED", "PENDING", "PROCESSING", "REJECTED"].includes(paymentOrder.status) ? (
+                          <>
+                            <p>
+                              Click’da to‘lovni yakunlang. Holat avtomatik tekshiriladi;
+                              bu yerda qo‘lda ham tekshirishingiz mumkin.
+                            </p>
+                            {paymentOrder.checkoutUrl && (
+                              <CheckoutActions checkoutUrl={paymentOrder.checkoutUrl} />
+                            )}
+                            <button
+                              type="button"
+                              className={styles.paymentCheckButton}
+                              disabled={checkingPayment}
+                              onClick={() => void refreshPayment(paymentOrder.id)}
+                            >
+                              {checkingPayment ? "Tekshirilmoqda…" : "To‘lovni tekshirish"}
+                            </button>
+                            <small>To‘lagan bo‘lsangiz, qayta to‘lamang.</small>
+                          </>
+                        ) : (
+                          <p>
+                            Bu urinish yakunlanmadi. Shu sahifadagi to‘lov tugmasi
+                            orqali qayta urinib ko‘rishingiz mumkin.
+                          </p>
+                        )}
+                        {paymentOrder.publicationError && (
+                          <p role="alert">{paymentOrder.publicationError}</p>
+                        )}
+                        {paymentOrder.url && (
+                          <Link href={paymentOrder.url}>Nashr qilingan taklifnomani ochish</Link>
+                        )}
+                      </div>
+                    )}
                   <button
                     type="button"
                     className={styles.saveButton}
                     onClick={() => void saveOrPublish(isImage ? "download" : "publish")}
                     disabled={
-                      busy || uploading || !!auth || readiness.length > 0
+                      busy || uploading || !!auth || readiness.length > 0 ||
+                      (paymentOrder?.invitationId === invitation.id &&
+                        ["CREATED", "PENDING", "PROCESSING", "REJECTED"].includes(paymentOrder.status))
                     }
                   >
                     <Send size={16} />
@@ -3948,7 +4082,10 @@ export function Studio({
                       ? "Tayyorlanmoqda…"
                       : isImage ? "PNG yuklab olish · Bepul" : paidInvitationId === invitation.id
                         ? "Nashrni yakunlash"
-                        : publishingMode === "paid"
+                        : paymentOrder?.invitationId === invitation.id &&
+                            ["CREATED", "PENDING", "PROCESSING", "REJECTED"].includes(paymentOrder.status)
+                          ? "To‘lov kutilmoqda"
+                          : publishingMode === "paid"
                           ? `To‘lash va nashr qilish${selectedTemplate ? ` · ${formatPrice(selectedTemplate.priceMinor)}` : ""}`
                           : "Nashr qilish"}
                   </button>

@@ -1,7 +1,10 @@
 import { currentTelegramLaunchData } from "../session/client-session";
 
 /** Synchronous: call only from a user click, never after awaiting a request. */
-export function openCheckout(checkoutUrl: string): void {
+export function openCheckout(
+  checkoutUrl: string,
+  reservedWindow?: Window | null,
+): void {
   const url = new URL(checkoutUrl);
   if (url.protocol !== "https:" || url.username || url.password)
     throw new Error("To‘lov havolasi noto‘g‘ri. Holatni qayta tekshiring.");
@@ -20,10 +23,16 @@ export function openCheckout(checkoutUrl: string): void {
         "Telegram havolani ocholmadi. Havolani nusxalab Chrome’da oching yoki Telegramni yangilang.",
       );
     // Pass Nodze's exact HTTPS URL. Never guess a Click scheme or intent URL.
+    reservedWindow?.close();
     app.openLink(checkoutUrl);
     return;
   }
-  // Keep the status page available. Browser/Telegram settings control the actual
-  // destination; a new tab is not proof of an external browser or app launch.
+  // A window reserved synchronously from the initiating click avoids popup
+  // blockers after the checkout request finishes.
+  if (reservedWindow) {
+    reservedWindow.opener = null;
+    reservedWindow.location.replace(checkoutUrl);
+    return;
+  }
   window.open(checkoutUrl, "_blank", "noopener,noreferrer");
 }
