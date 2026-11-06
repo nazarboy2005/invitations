@@ -450,7 +450,7 @@ test("publication rejects deleted records and permits built-in music and manual 
     music: {
       enabled: true,
       assetId: null,
-      url: "/music/catalog/emotional-piano.wav",
+      url: "/music/catalog/emotional-piano.mp3",
       filename: "Built-in music",
     },
   });
@@ -1050,7 +1050,7 @@ test("every published template preserves every editor field across four-language
         invitation.music = {
           enabled: true,
           assetId: null,
-          url: "/music/catalog/emotional-piano.wav",
+          url: "/music/catalog/emotional-piano.mp3",
           filename: "Built-in music",
         };
         invitation.gallery = [

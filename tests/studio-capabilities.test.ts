@@ -106,7 +106,7 @@ test("RSVP, receipt, age and story limits match different real designs", () => {
 test("music defaults on, explicit off survives, and an empty selection is silent without a blocker", () => {
   const draft = createInvitation("anor");
   assert.equal(draft.music.enabled, true);
-  assert.equal(draft.music.url, "/music/catalog/emotional-piano.wav");
+  assert.equal(draft.music.url, "/music/catalog/emotional-piano.mp3");
   draft.music.enabled = false;
   assert.equal(normalizeInvitation(draft).music.enabled, false);
   assert.ok(normalizeInvitation(draft).music.url);

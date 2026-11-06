@@ -62,7 +62,7 @@ test("four-language payload is read-only and personalized; fixtures are opt-in o
   assert.deepEqual(publicPayload.payload.music, { enabled: invitation.music.enabled, url: invitation.music.url });
   const preview = makeBarakaliPayload(invitation, "uz-Latn", { invitationId: "preview", preview: true, sampleWishes: true, catalogMusic: true });
   assert.equal(preview.payload.variants["uz-Latn"].wishes.length, 3);
-  assert.equal(preview.payload.music.url, "/music/catalog/emotional-piano.wav");
+  assert.equal(preview.payload.music.url, "/music/catalog/emotional-piano.mp3");
 });
 
 test("empty authored content stays empty; unsupported/source-absent data is not fabricated", () => {

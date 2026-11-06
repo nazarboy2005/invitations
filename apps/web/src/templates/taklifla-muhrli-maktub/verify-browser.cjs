@@ -110,7 +110,7 @@ async function main(){
   await page.evaluate(p=>updateEnvelope(p),expired);await f.getByText('Daftar yopildi',{exact:true}).waitFor();assert.equal(await f.locator('#env-wish-form').isVisible(),false);
   // Gesture music and pause intent are checked with deterministic media API hooks.
   await f.locator('body').evaluate(()=>{window.mediaCalls={play:0,pause:0};HTMLMediaElement.prototype.play=function(){window.mediaCalls.play++;return Promise.resolve();};HTMLMediaElement.prototype.pause=function(){window.mediaCalls.pause++;};});
-  const musical=structuredClone(publicProps);musical.invitation.music={enabled:true,url:'/music/catalog/emotional-piano.wav',assetId:null,filename:'QA'};
+  const musical=structuredClone(publicProps);musical.invitation.music={enabled:true,url:'/music/catalog/emotional-piano.mp3',assetId:null,filename:'QA'};
   await page.evaluate(p=>updateEnvelope(p),musical);await f.locator('#env-music[aria-pressed=true]').waitFor();
   await f.locator('#env-music').click();const calls=await f.locator('body').evaluate(()=>mediaCalls.play);
   await f.locator('[data-lang=en]').click();await f.locator('[data-lang=uz-Latn]').click();

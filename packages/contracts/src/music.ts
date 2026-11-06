@@ -2,6 +2,6 @@
 export const DEFAULT_INVITATION_MUSIC = {
   enabled: true,
   assetId: null,
-  url: "/music/catalog/emotional-piano.wav",
+  url: "/music/catalog/emotional-piano.mp3",
   filename: "Emotional piano",
 } as const;

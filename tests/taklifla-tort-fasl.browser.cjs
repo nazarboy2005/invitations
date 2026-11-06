@@ -199,7 +199,7 @@ const fixture = JSON.parse(
   music.payload.silentPlayback = false;
   music.payload.music = {
     enabled: true,
-    url: "/music/catalog/emotional-piano.wav",
+    url: "/music/catalog/emotional-piano.mp3",
   };
   await page.evaluate(
     (p) => frame.contentWindow.postMessage(p, location.origin),

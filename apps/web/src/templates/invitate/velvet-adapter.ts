@@ -187,7 +187,7 @@ export function makeVelvetData(
     music: invitation.music.enabled
       ? publicAsset(invitation.music.url)
       : preview && catalogMusic
-        ? publicAsset("/music/catalog/emotional-piano.wav")
+        ? publicAsset("/music/catalog/emotional-piano.mp3")
         : "",
     silentPlayback: preview && silentPlayback,
     qaReducedMotion: preview && qaReducedMotion,

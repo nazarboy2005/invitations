@@ -63,11 +63,11 @@ const base = {
  await page.locator('.section-rsvp__submit').click(); await page.waitForTimeout(200);
  assert.equal(requests.length,2); assert.equal(requests[0].body.partySize,1); assert.equal(requests[0].body.guestToken,'guest-test-token'); assert.ok(requests[0].body.note.includes('+998 90 111 22 33')); assert.equal(requests[1].body.message,'Browser wish');
  checks.push('RSVP and wishes use shared API shape with one-person attendance, phone note and guest token (transport mocked)');
- await update({...base,music:'/music/catalog/emotional-piano.wav'});
+ await update({...base,music:'/music/catalog/emotional-piano.mp3'});
  await page.waitForFunction(()=>!document.getElementById('velvet-music')?.paused);
  await page.locator('.velvet-music-toggle').click();
  assert.equal(await page.locator('#velvet-music').evaluate(x=>x.paused),true);
- await update({...base,locale:'en',music:'/music/catalog/emotional-piano.wav'});
+ await update({...base,locale:'en',music:'/music/catalog/emotional-piano.mp3'});
  await page.locator('.section-hero__scroll').click();
  assert.equal(await page.locator('#velvet-music').evaluate(x=>x.paused),true);
  await page.locator('.velvet-music-toggle').click(); await page.waitForFunction(()=>!document.getElementById('velvet-music')?.paused);

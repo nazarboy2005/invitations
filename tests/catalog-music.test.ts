@@ -15,7 +15,7 @@ test("every full-template preview uses the shared Emotional Piano default", () =
   const anorRenderer = read("apps/web/src/templates/anor/renderer.tsx");
   const marxabaRenderer = read("apps/web/src/templates/marxaba/renderer.tsx");
 
-  assert.equal(CATALOG_PREVIEW_MUSIC.url, publicAsset("/music/catalog/emotional-piano.wav"));
+  assert.equal(CATALOG_PREVIEW_MUSIC.url, publicAsset("/music/catalog/emotional-piano.mp3"));
   assert.ok(
     existsSync(path.join(root, "apps/web/public", CATALOG_PREVIEW_MUSIC.url.slice(publicAssetPrefix.length))),
     "the default preview track must be packaged locally",

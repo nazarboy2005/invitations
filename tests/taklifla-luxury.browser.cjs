@@ -301,7 +301,7 @@ const blank = (value) =>
       music.payload.silentPlayback = false;
       music.payload.music = {
         enabled: true,
-        url: "/music/catalog/emotional-piano.wav",
+        url: "/music/catalog/emotional-piano.mp3",
       };
       await send(music);
       const audio = frame.locator(`#${prefix}-audio`);
