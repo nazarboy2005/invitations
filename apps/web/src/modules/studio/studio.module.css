@@ -2653,41 +2653,103 @@
 }
 .paymentStatusPanel {
   display: grid;
-  gap: 10px;
-  margin: 18px 0;
-  padding: 16px;
-  border: 1px solid #d7c9bc99;
-  border-radius: 12px;
-  background: #fffefa;
+  gap: 12px;
+  margin: 0 0 22px;
+  padding: 16px 18px;
+  border: 1px solid #d7c9bc;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #fffefa, #f8f3e9);
   font-size: 13px;
 }
-.paymentStatusPanel > strong {
+.paymentStatusTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.paymentStatusTop > div {
+  display: grid;
+  gap: 4px;
+}
+.paymentStatusTop span {
+  color: var(--muted);
+  font-size: 11px;
+}
+.paymentStatusTop strong {
   color: var(--primary);
+  font-size: 15px;
+}
+.paymentStatusTop b {
+  white-space: nowrap;
+  font-size: 17px;
 }
 .paymentStatusPanel > p,
 .paymentStatusPanel small {
   margin: 0;
   color: var(--muted);
-  line-height: 1.6;
+  line-height: 1.55;
 }
 .paymentStatusPanel > a {
   color: var(--primary);
   font-weight: 600;
 }
+.paymentActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+.openPaymentButton,
 .paymentCheckButton {
-  justify-self: start;
   min-height: 40px;
-  padding: 8px 12px;
+  padding: 8px 14px;
   border: 1px solid var(--line);
   border-radius: 9px;
   background: var(--surface);
   color: var(--ink);
   font: inherit;
+  font-weight: 600;
   cursor: pointer;
+}
+.openPaymentButton {
+  border-color: var(--primary);
+  background: var(--primary);
+  color: #fff;
 }
 .paymentCheckButton:disabled {
   opacity: 0.6;
   cursor: wait;
+}
+.paymentHelp summary {
+  width: fit-content;
+  color: var(--primary);
+  font-size: 12px;
+  cursor: pointer;
+}
+.paymentHelp button {
+  margin-top: 10px;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: var(--primary);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+.paymentHelp input {
+  width: 100%;
+  margin-top: 8px;
+  padding: 9px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+  font: inherit;
+  font-size: 11px;
+}
+.paymentHelp p {
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.5;
 }
 .designPicker {
   display: grid;

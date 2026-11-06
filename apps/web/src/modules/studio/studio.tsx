@@ -152,7 +152,6 @@ import { createStudioPreviewInvitation } from "./preview-invitation";
 import { CATALOG_MUSIC_CREDIT, CATALOG_PREVIEW_MUSIC } from "@/modules/catalog/catalog-music";
 import { orderEventTemplates } from "@/modules/catalog/template-order";
 import { PublishedLink } from "@/components/published-link";
-import { CheckoutActions } from "@/modules/payments/checkout-actions";
 import { openCheckout } from "@/modules/payments/open-checkout";
 import { paymentStateLabels, type PaymentOrderView } from "@taklifnoma/contracts/payment";
 import {
@@ -469,6 +468,8 @@ export function Studio({
   const [paidInvitationId, setPaidInvitationId] = useState("");
   const [paymentOrder, setPaymentOrder] = useState<PaymentOrderView | null>(null);
   const [checkingPayment, setCheckingPayment] = useState(false);
+  const [manualPaymentLink, setManualPaymentLink] = useState(false);
+  const [paymentLinkNotice, setPaymentLinkNotice] = useState("");
   const [publishIssues, setPublishIssues] = useState<PublicationIssue[]>([]);
   const [publicUrl, setPublicUrl] = useState<string>();
   const pendingAction = useRef<"save" | "publish" | "download">("save");
@@ -644,6 +645,8 @@ export function Studio({
     if (!invitationId || adminContext) return;
     const controller = new AbortController();
     setPaymentOrder(null);
+    setManualPaymentLink(false);
+    setPaymentLinkNotice("");
     void studioFetch(
       `/api/invitations/${encodeURIComponent(invitationId)}/payment`,
       { cache: "no-store", signal: controller.signal },
@@ -1493,6 +1496,8 @@ export function Studio({
             );
           const order = result.order as PaymentOrderView;
           setPaymentOrder(order);
+          setManualPaymentLink(false);
+          setPaymentLinkNotice("");
           if (order.status === "SUCCEEDED") setPaidInvitationId(saved.id);
           if (order.checkoutUrl) {
             openCheckout(order.checkoutUrl, checkoutWindow);
@@ -3909,6 +3914,91 @@ export function Studio({
             {section === sections.length - 1 &&
               invitation.status === "draft" && !invitation.imageExportedAt && (
                 <section className={styles.publishPanel}>
+                  {paymentOrder?.invitationId === invitation.id && (
+                    <div className={styles.paymentStatusPanel} aria-live="polite">
+                      <div className={styles.paymentStatusTop}>
+                        <div>
+                          <span>To‘lov holati</span>
+                          <strong>{paymentStateLabels[paymentOrder.status]}</strong>
+                        </div>
+                        <b>{formatPrice(paymentOrder.amountMinor)}</b>
+                      </div>
+                      {paymentOrder.status === "SUCCEEDED" ? (
+                        <p>To‘lov tasdiqlandi. Nashrni yakunlash uchun pastdagi tugmani bosing.</p>
+                      ) : ["CREATED", "PENDING", "PROCESSING", "REJECTED"].includes(paymentOrder.status) ? (
+                        <>
+                          <p>Click’da to‘lovni yakunlang. Holat avtomatik tekshiriladi.</p>
+                          <div className={styles.paymentActions}>
+                            {paymentOrder.checkoutUrl && (
+                              <button
+                                type="button"
+                                className={styles.openPaymentButton}
+                                onClick={() => {
+                                  try {
+                                    openCheckout(paymentOrder.checkoutUrl!);
+                                    setPaymentLinkNotice("Click ochildi.");
+                                  } catch {
+                                    setPaymentLinkNotice(
+                                      "Click ochilmadi. Havolani nusxalab Chrome’da oching.",
+                                    );
+                                  }
+                                }}
+                              >
+                                Click’da to‘lash
+                              </button>
+                            )}
+                            <button
+                              type="button"
+                              className={styles.paymentCheckButton}
+                              disabled={checkingPayment}
+                              onClick={() => void refreshPayment(paymentOrder.id)}
+                            >
+                              {checkingPayment ? "Tekshirilmoqda…" : "Holatni tekshirish"}
+                            </button>
+                          </div>
+                          <small>To‘lagan bo‘lsangiz, qayta to‘lamang.</small>
+                          {paymentOrder.checkoutUrl && (
+                            <details className={styles.paymentHelp}>
+                              <summary>Click ochilmayaptimi?</summary>
+                              <button
+                                type="button"
+                                onClick={async () => {
+                                  try {
+                                    await navigator.clipboard.writeText(paymentOrder.checkoutUrl!);
+                                    setManualPaymentLink(false);
+                                    setPaymentLinkNotice("To‘lov havolasi nusxalandi.");
+                                  } catch {
+                                    setManualPaymentLink(true);
+                                    setPaymentLinkNotice("Havolani quyidagi maydondan nusxalang.");
+                                  }
+                                }}
+                              >
+                                Havolani nusxalash
+                              </button>
+                              {manualPaymentLink && (
+                                <input
+                                  aria-label="To‘lov havolasi"
+                                  readOnly
+                                  value={paymentOrder.checkoutUrl}
+                                  onFocus={(event) => event.currentTarget.select()}
+                                />
+                              )}
+                              <p>Telegram yoki brauzer menyusidan “Brauzerda ochish”ni tanlang, yoki shu havolani Chrome’da oching.</p>
+                            </details>
+                          )}
+                          {paymentLinkNotice && <small role="status">{paymentLinkNotice}</small>}
+                        </>
+                      ) : (
+                        <p>Bu urinish yakunlanmadi. Pastdagi tugma orqali qayta urinib ko‘rishingiz mumkin.</p>
+                      )}
+                      {paymentOrder.publicationError && (
+                        <p role="alert">{paymentOrder.publicationError}</p>
+                      )}
+                      {paymentOrder.url && (
+                        <Link href={paymentOrder.url}>Nashr qilingan taklifnomani ochish</Link>
+                      )}
+                    </div>
+                  )}
                   <div>
                     <h2>
                       <CheckCircle2 size={22} aria-hidden="true" />
@@ -4026,47 +4116,6 @@ export function Studio({
                       </li>
                     </ul>}
                   </div>
-                  {paymentOrder?.invitationId === invitation.id && (
-                      <div className={styles.paymentStatusPanel} aria-live="polite">
-                        <strong>{paymentStateLabels[paymentOrder.status]}</strong>
-                        {paymentOrder.status === "SUCCEEDED" ? (
-                          <p>
-                            To‘lov qabul qilindi. Nashrni yakunlash uchun pastdagi
-                            tugmani bosing.
-                          </p>
-                        ) : ["CREATED", "PENDING", "PROCESSING", "REJECTED"].includes(paymentOrder.status) ? (
-                          <>
-                            <p>
-                              Click’da to‘lovni yakunlang. Holat avtomatik tekshiriladi;
-                              bu yerda qo‘lda ham tekshirishingiz mumkin.
-                            </p>
-                            {paymentOrder.checkoutUrl && (
-                              <CheckoutActions checkoutUrl={paymentOrder.checkoutUrl} />
-                            )}
-                            <button
-                              type="button"
-                              className={styles.paymentCheckButton}
-                              disabled={checkingPayment}
-                              onClick={() => void refreshPayment(paymentOrder.id)}
-                            >
-                              {checkingPayment ? "Tekshirilmoqda…" : "To‘lovni tekshirish"}
-                            </button>
-                            <small>To‘lagan bo‘lsangiz, qayta to‘lamang.</small>
-                          </>
-                        ) : (
-                          <p>
-                            Bu urinish yakunlanmadi. Shu sahifadagi to‘lov tugmasi
-                            orqali qayta urinib ko‘rishingiz mumkin.
-                          </p>
-                        )}
-                        {paymentOrder.publicationError && (
-                          <p role="alert">{paymentOrder.publicationError}</p>
-                        )}
-                        {paymentOrder.url && (
-                          <Link href={paymentOrder.url}>Nashr qilingan taklifnomani ochish</Link>
-                        )}
-                      </div>
-                    )}
                   <button
                     type="button"
                     className={styles.saveButton}
