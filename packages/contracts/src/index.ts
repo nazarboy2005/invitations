@@ -1726,20 +1726,6 @@ export const TEMPLATES: TemplateDefinition[] = [
     published: false,
   },
   {
-    id: "osh-edition-v1",
-    name: "Osh Edition",
-    description: "Iliq naqshlar, nafis xat va anʼanaviy osh dasturxoni.",
-    previewImage:
-      "/templates/osh-edition-v1/source/reference/assets/intro-osh-premium.webp",
-    previewEventType: "osh",
-    categoryIds: ["osh"],
-    supportedEventTypes: ["osh"],
-    priceMinor: 100000,
-    currency: "UZS",
-    accent: "#8c6845",
-    published: false,
-  },
-  {
     id: "osh",
     name: "Osh",
     description:

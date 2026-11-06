@@ -118,7 +118,6 @@ export const TEMPLATE_CAPABILITIES: Record<string, TemplateCapabilities> = {
   "manor-edition": source({"dressCode": false, "receipts": false, "people": 2}),
   "olive-manor-edition": source({"dressCode": false, "story": 0, "receipts": false, "people": 2}),
   "islamic-edition": source({"dressCode": false, "story": 0, "receipts": false, "people": 2}),
-  "osh-edition-v1": source({"wishes": false, "gallery": 0, "program": false, "dressCode": false, "story": 0, "gift": false, "receipts": false, "phone": false, "telegram": false, "rsvp": "none", "people": 2, "rsvpDeadline": false}),
   "osh": source({"wishes": false, "program": false, "dressCode": false, "story": 0, "gift": false, "receipts": false, "people": 2}),
   "palov": source({"wishes": false, "program": false, "dressCode": false, "story": 0, "gift": false, "receipts": false, "people": 2}),
   "orchid-amplop": source({"dressCode": false, "people": 2}),

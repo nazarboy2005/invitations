@@ -268,11 +268,6 @@
     "fit": "contain",
     "background": "#152d36"
   },
-  "osh-edition-v1": {
-    "source": "osh-edition-v1/source/reference/assets/osh.webp",
-    "fit": "contain",
-    "background": "#f0e6d7"
-  },
   "osh": {
     "source": "chorlove/osh/palov.png",
     "fit": "contain",
