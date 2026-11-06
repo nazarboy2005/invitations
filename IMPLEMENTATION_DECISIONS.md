@@ -42,6 +42,7 @@ This file records durable, user-approved product requirements and a small number
 
 - **Amru Maruf Edition** (`amru-maruf-edition-v1`) is permanently removed at the user's request. Do not recreate, restore, register, publish, or adapt this template in future work. Its source/runtime assets and application integrations have been deleted; the removal migration deletes its catalog row. The original registration migration remains only as immutable migration history.
 - **E-invitation Osh Edition** (`osh-edition-v1`) is permanently removed at the user's request. Do not recreate, restore, register, publish, or adapt this template in future work. This applies only to this exact ID; other Osh and Nahorgi Osh templates remain distinct. Its source/runtime assets and application integrations have been deleted; the removal migration deletes its catalog row. The original registration migration remains only as immutable migration history.
+- **Manor** (`manor-edition`) is permanently removed at the user's request. Do not recreate, restore, register, publish, or adapt this template in future work. This applies only to this exact ID; Olive Manor and other similarly named designs remain distinct. Its source/runtime assets and application integrations have been deleted; the removal migration deletes its catalog row. The original registration migration remains only as immutable migration history.
 
 ## Pricing and payments
 

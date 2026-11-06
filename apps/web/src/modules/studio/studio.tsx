@@ -109,7 +109,6 @@ import { isInvitateTemplate, InvitateInvitation } from "@/templates/invitate";
 import { VelvetRoyaleInvitation } from "@/templates/velvet-royale/renderer";
 import { OliveManorInvitation } from "@/templates/olive-manor/renderer";
 import { IslamicEditionInvitation } from "@/templates/islamic-edition/renderer";
-import { ManorInvitation } from "@/templates/manor-edition/renderer";
 import { MonochromeEditorialInvitation } from "@/templates/monochrome-editorial-edition/renderer";
 import { XatnaEditionInvitation } from "@/templates/xatna-edition/renderer";
 import { GulliDarvozaInvitation } from "@/templates/onlinetaklifnoma/gulli-darvoza";
@@ -4321,15 +4320,6 @@ export function Studio({
               />
             ) : invitation.templateId === "islamic-edition" ? (
               <IslamicEditionInvitation
-                invitation={previewInvitation}
-                invitationId={invitation.id}
-                locale={locale}
-                preview
-                catalogMusic={false}
-                sampleWishes={false}
-              />
-            ) : invitation.templateId === "manor-edition" ? (
-              <ManorInvitation
                 invitation={previewInvitation}
                 invitationId={invitation.id}
                 locale={locale}

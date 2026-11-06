@@ -38,7 +38,6 @@ import { isInvitateTemplate, InvitateInvitation } from "@/templates/invitate";
 import { VelvetRoyaleInvitation } from "@/templates/velvet-royale/renderer";
 import { OliveManorInvitation } from "@/templates/olive-manor/renderer";
 import { IslamicEditionInvitation } from "@/templates/islamic-edition/renderer";
-import { ManorInvitation } from "@/templates/manor-edition/renderer";
 import { MonochromeEditorialInvitation } from "@/templates/monochrome-editorial-edition/renderer";
 import { XatnaEditionInvitation } from "@/templates/xatna-edition/renderer";
 import { GulliDarvozaInvitation } from "@/templates/onlinetaklifnoma/gulli-darvoza";
@@ -282,19 +281,6 @@ export default async function InvitationPage({
       <>
         <InvitationViewTracker invitationId={result.id} musicUrl={invitation.music.enabled ? invitation.music.url : ""} />
         <IslamicEditionInvitation
-          invitation={invitation}
-          invitationId={result.id}
-          locale={locale}
-          guestName={guestName}
-          guestToken={query.g}
-        />
-      </>
-    );
-  if (invitation.templateId === "manor-edition")
-    return (
-      <>
-        <InvitationViewTracker invitationId={result.id} musicUrl={invitation.music.enabled ? invitation.music.url : ""} />
-        <ManorInvitation
           invitation={invitation}
           invitationId={result.id}
           locale={locale}

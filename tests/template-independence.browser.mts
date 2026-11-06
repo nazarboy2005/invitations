@@ -24,7 +24,6 @@ try {
     "/templates/velora/source/velora.html",
     "/templates/safir/source/safir.html",
     "/templates/lace/source/preview-frame.html",
-    "/templates/manor-edition/source/reference/manor-edition.html",
     "/templates/taklifnomachi-1/source/index.html",
     "/templates/invitate-wedding/assets/captured/5b73decb38ff5c8c.js",
     "/templates/taklifnomachi-1/source/templates/1/js/QJtgeIS73Tgv.js",

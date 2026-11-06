@@ -1682,21 +1682,6 @@ export const TEMPLATES: TemplateDefinition[] = [
     published: true,
   },
   {
-    id: "manor-edition",
-    name: "Manor",
-    description:
-      "Qo‘lda chizilgan gullar, xalqalar va romantik manor bezaklari.",
-    previewImage:
-      "/templates/manor-edition/source/reference/assets/intro-poster.jpg",
-    previewEventType: "wedding",
-    categoryIds: ["wedding"],
-    supportedEventTypes: ["wedding"],
-    priceMinor: 100000,
-    currency: "UZS",
-    accent: "#8a6840",
-    published: false,
-  },
-  {
     id: "olive-manor-edition",
     name: "Olive Manor",
     description: "Zaytun ranglari, nafis gullar va sokin manor muhiti.",

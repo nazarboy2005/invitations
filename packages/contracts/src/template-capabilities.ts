@@ -115,7 +115,6 @@ export const TEMPLATE_CAPABILITIES: Record<string, TemplateCapabilities> = {
   "taklifla-tovus": source({"gallery": 0, "gift": false, "receipts": false, "phone": false, "telegram": false, "rsvp": "deadline", "people": 2}),
   "taklifla-tort-fasl": source({"gallery": 0, "story": 0, "gift": false, "receipts": false, "telegram": false, "rsvp": "phone", "people": 2}),
   "glass-pink": source(),
-  "manor-edition": source({"dressCode": false, "receipts": false, "people": 2}),
   "olive-manor-edition": source({"dressCode": false, "story": 0, "receipts": false, "people": 2}),
   "islamic-edition": source({"dressCode": false, "story": 0, "receipts": false, "people": 2}),
   "osh": source({"wishes": false, "program": false, "dressCode": false, "story": 0, "gift": false, "receipts": false, "people": 2}),

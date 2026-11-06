@@ -54,7 +54,6 @@ const InvitateInvitation = dynamic(() => import("@/templates/invitate/renderer")
 const VelvetRoyaleInvitation = dynamic(() => import("@/templates/velvet-royale/renderer").then((module) => module.VelvetRoyaleInvitation));
 const OliveManorInvitation = dynamic(() => import("@/templates/olive-manor/renderer").then((module) => module.OliveManorInvitation));
 const IslamicEditionInvitation = dynamic(() => import("@/templates/islamic-edition/renderer").then((module) => module.IslamicEditionInvitation));
-const ManorInvitation = dynamic(() => import("@/templates/manor-edition/renderer").then((module) => module.ManorInvitation));
 const MonochromeEditorialInvitation = dynamic(() => import("@/templates/monochrome-editorial-edition/renderer").then((module) => module.MonochromeEditorialInvitation));
 const XatnaEditionInvitation = dynamic(() => import("@/templates/xatna-edition/renderer").then((module) => module.XatnaEditionInvitation));
 const GulliDarvozaInvitation = dynamic(() => import("@/templates/onlinetaklifnoma/gulli-darvoza").then((module) => module.GulliDarvozaInvitation));
@@ -440,8 +439,6 @@ export function FullTemplatePreview({
           <OliveManorInvitation invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} sampleWishes={catalogPreview} silentPlayback={silentPlayback} qaReducedMotion={qaReducedMotion} qaMobile={qaMobile} />
       ) : template.id === "islamic-edition" ? (
           <IslamicEditionInvitation invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} sampleWishes={catalogPreview} silentPlayback={silentPlayback} qaReducedMotion={qaReducedMotion} qaMobile={qaMobile} />
-      ) : template.id === "manor-edition" ? (
-          <ManorInvitation invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} sampleWishes={catalogPreview} silentPlayback={silentPlayback} qaReducedMotion={qaReducedMotion} qaMobile={qaMobile} />
       ) : template.id === "monochrome-editorial-edition" ? (
           <MonochromeEditorialInvitation invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} silentPlayback={silentPlayback} qaReducedMotion={qaReducedMotion} qaMobile={qaMobile} />
       ) : template.id === "xatna-edition" ? (

@@ -253,11 +253,6 @@
     "fit": "contain",
     "background": "#f6e5e8"
   },
-  "manor-edition": {
-    "source": "manor-edition/source/reference/assets/wreath.webp",
-    "fit": "contain",
-    "background": "#f3ebdf"
-  },
   "olive-manor-edition": {
     "source": "olive-manor-edition/source/reference/assets/holding-hands-watercolor-v20260920.webp",
     "fit": "contain",

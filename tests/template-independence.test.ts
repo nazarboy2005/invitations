@@ -35,7 +35,6 @@ test("archived pages and trackers are private while real source frames and artwo
     "/templates/velora/source/velora.html",
     "/templates/safir/source/safir.html",
     "/templates/green-white/source/preview-frame.html",
-    "/templates/manor-edition/source/reference/manor-edition.html",
     "/templates/taklifnomachi-1/source/index.html",
     "/templates/taklifnomachi-15/source/taklifnomachi.uz/demo/15/index.html",
     "/templates/invitate-wedding/assets/captured/5b73decb38ff5c8c.js",
@@ -44,7 +43,6 @@ test("archived pages and trackers are private while real source frames and artwo
   for (const path of [
     "/templates/anor/source/index.html",
     "/templates/anor/source/bridge.js",
-    "/templates/manor-edition/source/reference/assets/intro-poster.jpg",
     "/templates/velora/index.html",
     "/templates/shared/yandex-maps.js",
   ]) assert.equal(isPrivateTemplateArtifact(path), false, path);
