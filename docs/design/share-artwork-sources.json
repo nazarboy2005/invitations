@@ -311,7 +311,6 @@
     "fit": "contain",
     "background": "#f0eee4"
   },
-  "amru-maruf-edition-v1": { "motif": "arch", "background": "#f6eddf" },
   "monochrome-editorial-edition": {
     "source": "monochrome-editorial-edition/source/reference/assets/hero-hands.webp",
     "fit": "cover"

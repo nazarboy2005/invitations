@@ -58,7 +58,6 @@ const ManorInvitation = dynamic(() => import("@/templates/manor-edition/renderer
 const OshEditionInvitation = dynamic(() => import("@/templates/osh-edition-v1/renderer").then((module) => module.OshEditionInvitation));
 const MonochromeEditorialInvitation = dynamic(() => import("@/templates/monochrome-editorial-edition/renderer").then((module) => module.MonochromeEditorialInvitation));
 const XatnaEditionInvitation = dynamic(() => import("@/templates/xatna-edition/renderer").then((module) => module.XatnaEditionInvitation));
-const AmruMarufEditionInvitation = dynamic(() => import("@/templates/amru-maruf-edition-v1/renderer").then((module) => module.AmruMarufEditionInvitation));
 const GulliDarvozaInvitation = dynamic(() => import("@/templates/onlinetaklifnoma/gulli-darvoza").then((module) => module.GulliDarvozaInvitation));
 const OltinDarvozaInvitation = dynamic(() => import("@/templates/onlinetaklifnoma/oltin-darvoza-ortidagi-baxt").then((module) => module.OltinDarvozaInvitation));
 const MingBirKechaInvitation = dynamic(() => import("@/templates/onlinetaklifnoma/ming-bir-kecha").then((module) => module.MingBirKechaInvitation));
@@ -448,8 +447,6 @@ export function FullTemplatePreview({
           <OshEditionInvitation invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} silentPlayback={silentPlayback} qaReducedMotion={qaReducedMotion} qaMobile={qaMobile} />
       ) : template.id === "monochrome-editorial-edition" ? (
           <MonochromeEditorialInvitation invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} silentPlayback={silentPlayback} qaReducedMotion={qaReducedMotion} qaMobile={qaMobile} />
-      ) : template.id === "amru-maruf-edition-v1" ? (
-        <AmruMarufEditionInvitation invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} silentPlayback={silentPlayback} qaReducedMotion={qaReducedMotion} qaMobile={qaMobile} />
       ) : template.id === "xatna-edition" ? (
         <XatnaEditionInvitation invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} silentPlayback={silentPlayback} qaReducedMotion={qaReducedMotion} qaMobile={qaMobile} />
       ) : isMarxabaTemplate(template.id) ? (

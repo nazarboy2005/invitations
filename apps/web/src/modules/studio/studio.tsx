@@ -113,7 +113,6 @@ import { ManorInvitation } from "@/templates/manor-edition/renderer";
 import { OshEditionInvitation } from "@/templates/osh-edition-v1/renderer";
 import { MonochromeEditorialInvitation } from "@/templates/monochrome-editorial-edition/renderer";
 import { XatnaEditionInvitation } from "@/templates/xatna-edition/renderer";
-import { AmruMarufEditionInvitation } from "@/templates/amru-maruf-edition-v1/renderer";
 import { GulliDarvozaInvitation } from "@/templates/onlinetaklifnoma/gulli-darvoza";
 import { OltinDarvozaInvitation } from "@/templates/onlinetaklifnoma/oltin-darvoza-ortidagi-baxt";
 import { MingBirKechaInvitation } from "@/templates/onlinetaklifnoma/ming-bir-kecha";
@@ -4349,14 +4348,6 @@ export function Studio({
               />
             ) : invitation.templateId === "monochrome-editorial-edition" ? (
               <MonochromeEditorialInvitation
-                invitation={previewInvitation}
-                invitationId={invitation.id}
-                locale={locale}
-                preview
-                catalogMusic={false}
-              />
-            ) : invitation.templateId === "amru-maruf-edition-v1" ? (
-              <AmruMarufEditionInvitation
                 invitation={previewInvitation}
                 invitationId={invitation.id}
                 locale={locale}

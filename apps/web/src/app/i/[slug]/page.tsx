@@ -42,7 +42,6 @@ import { ManorInvitation } from "@/templates/manor-edition/renderer";
 import { OshEditionInvitation } from "@/templates/osh-edition-v1/renderer";
 import { MonochromeEditorialInvitation } from "@/templates/monochrome-editorial-edition/renderer";
 import { XatnaEditionInvitation } from "@/templates/xatna-edition/renderer";
-import { AmruMarufEditionInvitation } from "@/templates/amru-maruf-edition-v1/renderer";
 import { GulliDarvozaInvitation } from "@/templates/onlinetaklifnoma/gulli-darvoza";
 import { OltinDarvozaInvitation } from "@/templates/onlinetaklifnoma/oltin-darvoza-ortidagi-baxt";
 import { MingBirKechaInvitation } from "@/templates/onlinetaklifnoma/ming-bir-kecha";
@@ -323,13 +322,6 @@ export default async function InvitationPage({
       <>
         <InvitationViewTracker invitationId={result.id} musicUrl={invitation.music.enabled ? invitation.music.url : ""} />
         <MonochromeEditorialInvitation invitation={invitation} invitationId={result.id} locale={locale} guestName={guestName} guestToken={query.g} />
-      </>
-    );
-  if (invitation.templateId === "amru-maruf-edition-v1")
-    return (
-      <>
-        <InvitationViewTracker invitationId={result.id} musicUrl={invitation.music.enabled ? invitation.music.url : ""} />
-        <AmruMarufEditionInvitation invitation={invitation} invitationId={result.id} locale={locale} guestName={guestName} />
       </>
     );
   if (invitation.templateId === "xatna-edition")

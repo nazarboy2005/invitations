@@ -1880,20 +1880,6 @@ export const TEMPLATES: TemplateDefinition[] = [
     published: false,
   },
   {
-    id: "amru-maruf-edition-v1",
-    name: "Amru Maruf Edition",
-    description:
-      "Chuqur zumrad ranglar, islomiy ravoq va tillarang bezakli nikoh taklifnomasi.",
-    previewImage: "/templates/amru-maruf-edition-v1/preview.svg",
-    previewEventType: "wedding",
-    categoryIds: ["wedding"],
-    supportedEventTypes: ["wedding"],
-    priceMinor: 100000,
-    currency: "UZS",
-    accent: "#c9a96e",
-    published: false,
-  },
-  {
     id: "monochrome-editorial-edition",
     name: "Monochrome Editorial",
     description:

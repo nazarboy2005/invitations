@@ -129,7 +129,6 @@ export const TEMPLATE_CAPABILITIES: Record<string, TemplateCapabilities> = {
   "invitate-wedding": source({"wishes": false, "story": 0, "gift": false, "receipts": false, "people": 2, "artists": 50}),
   "whiteless": source({"dressCode": false, "story": 0, "gift": false, "receipts": false, "people": 2}),
   "safir": source({"story": 0, "gift": false, "receipts": false, "people": 2}),
-  "amru-maruf-edition-v1": source({"wishes": false, "gallery": 0, "program": false, "dressCode": false, "story": 0, "gift": false, "receipts": false, "phone": false, "telegram": false, "rsvp": "none", "people": 2, "rsvpDeadline": false}),
   "monochrome-editorial-edition": source({"program": false, "dressCode": false, "story": 0, "receipts": false, "people": 2}),
   "xatna-edition": source({"dressCode": false, "story": 0, "receipts": false, "people": 2}),
   "cloud-castle": source(),

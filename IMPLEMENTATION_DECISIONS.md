@@ -38,6 +38,10 @@ This file records durable, user-approved product requirements and a small number
 - Platform administrators control template publication and pricing. If a template is retired, an administrator may choose a replacement for existing invitations while preserving their identity, URL, content, and history. Retirement must not unlock creator edits or silently move invitations back if the old template is republished. Ordinary creator switching after publication, refund rules for retirement, and some replacement pricing details remain undecided.
 - Template source integration, publication gates, database authorization, and deployment limits are maintained in `AGENTS.md` and the template implementation prompt; do not duplicate per-template status or verification reports here.
 
+### Removed templates — do not reimplement
+
+- **Amru Maruf Edition** (`amru-maruf-edition-v1`) is permanently removed at the user's request. Do not recreate, restore, register, publish, or adapt this template in future work. Its source/runtime assets and application integrations have been deleted; the removal migration deletes its catalog row. The original registration migration remains only as immutable migration history.
+
 ## Pricing and payments
 
 - Platform administrators set each template's price; creators and tenant administrators cannot change it. Preserve the quoted price, currency, template, and order identity in durable order records.
