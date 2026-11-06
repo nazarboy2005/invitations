@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { getDb } from "@taklifnoma/database";
 import { apiError, privateHeaders } from "@/server/api";
+import { CLASSICAL_MUSIC } from "@/modules/studio/classical-music";
 
 export async function GET() {
   try {
@@ -12,12 +13,23 @@ export async function GET() {
       ORDER BY t.position, t.created_at, t.id`;
     return NextResponse.json(
       {
-        tracks: tracks.map((track) => ({
-          id: track.id,
-          assetId: track.asset_id,
-          url: track.url,
-          filename: track.title,
-        })),
+        tracks: [
+          ...CLASSICAL_MUSIC.map((track) => ({ ...track, assetId: null })),
+          ...tracks.map((track) => ({
+            id: track.id,
+            assetId: track.asset_id,
+            url: track.url,
+            filename: track.title,
+            composer: "",
+            performer: "",
+            instrument: "",
+            durationSeconds: null,
+            license: "",
+            attribution: "",
+            sourceUrl: "",
+            licenseUrl: "",
+          })),
+        ],
       },
       { headers: privateHeaders },
     );

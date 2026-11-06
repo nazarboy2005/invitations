@@ -6,10 +6,10 @@ import styles from "./site-header.module.css";
 import { FavoritesLink } from "@/modules/favorites/favorite-button";
 
 export function HeroMobileMenu({
-  accountLabel,
+  accountLink,
   isAdmin = false,
 }: {
-  accountLabel: ReactNode;
+  accountLink: ReactNode;
   isAdmin?: boolean;
 }) {
   const [open, setOpen] = useState(false);
@@ -62,7 +62,7 @@ export function HeroMobileMenu({
           <a href="https://t.me/HyperLean">Bog‘lanish</a>
           <Link href="/#why-us">Biz haqimizda</Link>
           <FavoritesLink />
-          <Link href="/dashboard">{accountLabel}</Link>
+          {accountLink}
           {isAdmin && <a href="/admin">Boshqaruv</a>}
         </nav>
       )}

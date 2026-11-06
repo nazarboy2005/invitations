@@ -96,7 +96,7 @@ function continueKeyboard() {
         inline_keyboard: [
           [
             {
-              text: "💌 Sayt / Mini Appga qaytish",
+              text: "Sayt yoki Mini Appni ochish",
               web_app: { url },
             },
           ],
@@ -108,7 +108,7 @@ async function askContact(chatId: number) {
   await telegramCall("sendMessage", {
     chat_id: chatId,
     parse_mode: "HTML",
-    text: "📱 <b>Telefon raqamingizni tasdiqlang</b>\n\nDavom etish uchun shaxsiy Telegram raqamingizni quyidagi tugma orqali yuboring. Raqam akkauntingizni himoyalash va tiklash uchun ishlatiladi. So‘ng ishni sayt yoki Mini App’da davom ettirish uchun quyidagi havolani bosing.",
+    text: "<b>Telefon raqamingizni ulashing</b>\n\nDavom etish uchun o‘z raqamingizni tugma orqali yuboring.",
     reply_markup: {
       ...contactKeyboard,
       ...(continueKeyboard()
@@ -126,7 +126,7 @@ async function confirmSiteLogin(
   await telegramCall("sendMessage", {
     chat_id: chatId,
     parse_mode: "HTML",
-    text: "✅ <b>Kirish tasdiqlandi</b>\n\nSayt yoki Mini App’ga qayting — ishni davom ettirishingiz mumkin.",
+    text: "<b>Kirish tasdiqlandi.</b> Saytga qayting.",
     reply_markup: {
       remove_keyboard: true,
       ...(continueKeyboard()
@@ -245,7 +245,7 @@ async function processLocked(update: Update, db: postgres.TransactionSql) {
         await telegramCall("sendMessage", {
           parse_mode: "HTML",
           chat_id: message.chat.id,
-          text: "⌛ <b>Kirish havolasi eskirgan</b>\n\nSaytga qaytib, yangi kirish so‘rovini boshlang.",
+          text: "Kirish havolasi eskirgan. Saytda qayta urinib ko‘ring.",
         });
       else if (!user.phone_shared_at) await askContact(message.chat.id);
       else await confirmSiteLogin(message.chat.id, auth.id, db);
@@ -269,7 +269,7 @@ async function processLocked(update: Update, db: postgres.TransactionSql) {
         await telegramCall("sendMessage", {
           parse_mode: "HTML",
           chat_id: message.chat.id,
-          text: "✅ <b>Telefon raqamingiz qabul qilindi</b>\n\nQuyidagi havola orqali sayt yoki Mini App’ga qaytib ishingizni davom ettiring.",
+          text: "Raqamingiz saqlandi. Saytga qayting.",
           reply_markup: {
             remove_keyboard: true,
             ...(continueKeyboard()
@@ -284,7 +284,7 @@ async function processLocked(update: Update, db: postgres.TransactionSql) {
           await telegramCall("sendMessage", {
             chat_id: message.chat.id,
             parse_mode: "HTML",
-            text: "🎉 <b>Tayyor!</b>\n\nQuyidagi havola orqali Mini App yoki saytga qaytib davom eting.",
+            text: "Tayyor. Davom etish uchun saytni oching.",
             reply_markup: continueKeyboard(),
           });
       }
@@ -298,14 +298,14 @@ async function processLocked(update: Update, db: postgres.TransactionSql) {
       await telegramCall("sendMessage", {
         parse_mode: "HTML",
         chat_id: message.chat.id,
-        text: `✨ <b>${BRAND_NAME}</b>\n\nSalom, ${escapeHtml(identity.first_name)}!\n\nYaqinlaringiz uchun chiroyli taklifnoma yarating, mehmonlar javobi va tilaklarini bir joyda kuzating. 💌`,
+        text: `<b>${BRAND_NAME}</b>\n\nSalom, ${escapeHtml(identity.first_name)}. Taklifnoma yarating va mehmonlar javobi hamda tilaklarini kuzating.`,
         reply_markup: {
           inline_keyboard: [
             [
               {
                 text: hasAdminRole(user)
-                  ? "🛡 Boshqaruvga kirish"
-                  : "💌 Taklifnoma yaratish",
+                  ? "Boshqaruvni ochish"
+                  : "Taklifnoma yaratish",
                 web_app: {
                   url: hasAdminRole(user)
                     ? new URL("/dashboard", process.env.APP_URL).href

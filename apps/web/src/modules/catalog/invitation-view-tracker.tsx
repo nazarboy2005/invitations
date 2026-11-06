@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { CLASSICAL_MUSIC } from "@/modules/studio/classical-music";
 
 type PlaybackState = {
   source: string;
@@ -191,6 +192,9 @@ export function InvitationViewTracker({
   musicUrl?: string;
 }) {
   const sent = useRef(false);
+  const credit = CLASSICAL_MUSIC.find(
+    (track) => musicUrl === track.url || !!musicUrl?.includes(track.url),
+  );
 
   useEffect(() => {
     if (sent.current) return;
@@ -207,5 +211,42 @@ export function InvitationViewTracker({
     });
   }, [invitationId]);
 
-  return <InvitationMusicAutoplay musicUrl={musicUrl} />;
+  return (
+    <>
+      <InvitationMusicAutoplay musicUrl={musicUrl} />
+      {credit && (
+        <details
+          style={{
+            position: "fixed",
+            zIndex: 20,
+            left: "max(10px, env(safe-area-inset-left))",
+            bottom: "max(10px, env(safe-area-inset-bottom))",
+            maxWidth: "min(360px, calc(100vw - 20px))",
+            color: "#292526",
+            background: "rgba(255,255,255,.92)",
+            border: "1px solid rgba(80,60,60,.18)",
+            borderRadius: 9,
+            boxShadow: "0 4px 18px rgba(35,20,20,.12)",
+            font: "12px/1.5 system-ui,sans-serif",
+            backdropFilter: "blur(12px)",
+          }}
+        >
+          <summary style={{ cursor: "pointer", padding: "7px 10px" }}>
+            Audio credits
+          </summary>
+          <div style={{ display: "grid", gap: 4, padding: "0 10px 9px" }}>
+            <strong>{credit.attribution}</strong>
+            <span>
+              {credit.license} ·{" "}
+              <a href={credit.licenseUrl} target="_blank" rel="noreferrer">license</a>
+            </span>
+            <a href={credit.sourceUrl} target="_blank" rel="noreferrer">Recording source</a>
+            {credit.license.includes("BY-SA") && (
+              <span>Adaptations of this recording must use the same or a compatible license.</span>
+            )}
+          </div>
+        </details>
+      )}
+    </>
+  );
 }

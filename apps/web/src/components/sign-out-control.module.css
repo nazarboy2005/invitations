@@ -1,0 +1,220 @@
+.trigger {
+  display: inline-grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  border: 1px solid rgb(134 96 72 / 16%);
+  border-radius: 50%;
+  background: rgb(255 250 244 / 22%);
+  color: #79645a;
+  cursor: pointer;
+  transition:
+    color 180ms ease,
+    background-color 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
+}
+
+.trigger:hover {
+  color: #76253b;
+  background: rgb(255 250 244 / 72%);
+  border-color: rgb(118 37 59 / 26%);
+  transform: translateY(-1px);
+}
+
+.trigger:focus-visible,
+.close:focus-visible,
+.actions button:focus-visible {
+  outline: 2px solid #a87954;
+  outline-offset: 3px;
+}
+
+.phoneTrigger { display: none; }
+
+.overlay {
+  position: fixed;
+  z-index: 200;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  overflow-y: auto;
+  background:
+    radial-gradient(ellipse at 16% 20%, rgb(233 206 167 / 36%), transparent 42%),
+    radial-gradient(ellipse at 84% 78%, rgb(171 115 117 / 26%), transparent 42%),
+    rgb(38 28 29 / 48%);
+  -webkit-backdrop-filter: blur(12px) saturate(110%);
+  backdrop-filter: blur(12px) saturate(110%);
+  animation: veilIn 260ms ease both;
+}
+
+.overlayClosing { animation: veilOut 220ms ease both; }
+
+.dialog {
+  position: relative;
+  width: min(100%, 432px);
+  padding: 32px 34px 30px;
+  overflow: hidden;
+  border: 1px solid rgb(255 255 255 / 76%);
+  border-radius: 28px;
+  background:
+    radial-gradient(ellipse at 50% -8%, rgb(255 255 255 / 86%), transparent 54%),
+    linear-gradient(145deg, #fffaf3 0%, #f8f0e7 50%, #f6ece9 100%);
+  box-shadow:
+    0 32px 90px rgb(26 18 19 / 28%),
+    inset 0 1px 0 rgb(255 255 255 / 85%);
+  text-align: center;
+  animation: cardIn 420ms cubic-bezier(.2, .8, .2, 1) both;
+}
+
+.dialog::before,
+.dialog::after {
+  position: absolute;
+  width: 170px;
+  height: 170px;
+  border: 1px solid rgb(166 126 91 / 13%);
+  border-radius: 50%;
+  content: "";
+  pointer-events: none;
+}
+
+.dialog::before { top: -116px; left: -88px; }
+.dialog::after { right: -108px; bottom: -126px; width: 220px; height: 220px; }
+.dialogClosing { animation: cardOut 210ms ease both; }
+
+.close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border: 1px solid rgb(111 83 70 / 12%);
+  border-radius: 50%;
+  background: rgb(255 255 255 / 48%);
+  color: #79645a;
+  cursor: pointer;
+  transition: background-color 160ms ease, color 160ms ease;
+}
+
+.close:hover { background: #fff; color: #76253b; }
+.close:disabled { cursor: default; opacity: .45; }
+
+.art {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 92px;
+  height: 92px;
+  margin: 0 auto 13px;
+}
+
+.orbit {
+  position: absolute;
+  inset: 3px;
+  border: 1px solid rgb(157 116 83 / 28%);
+  border-radius: 45% 55% 52% 48%;
+  transform: rotate(-28deg);
+}
+
+.orbit::before,
+.orbit::after {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border: 1px solid #b69373;
+  border-radius: 50%;
+  background: #fbf5ed;
+  content: "";
+}
+
+.orbit::before { top: 8px; left: 15px; }
+.orbit::after { right: 6px; bottom: 20px; width: 5px; height: 5px; }
+
+.seal {
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 58px;
+  height: 58px;
+  border: 1px solid rgb(141 93 78 / 24%);
+  border-radius: 50%;
+  background: linear-gradient(145deg, #fffaf5, #f0e2d6);
+  color: #865b52;
+  box-shadow: 0 7px 22px rgb(97 65 53 / 11%), inset 0 1px 0 #fff;
+}
+
+.sparkle,
+.sparkleSmall {
+  position: absolute;
+  color: #b2936c;
+  line-height: 1;
+}
+
+.sparkle { top: 1px; right: 8px; font-size: 15px; }
+.sparkleSmall { bottom: 8px; left: 4px; font-size: 18px; }
+.eyebrow { margin: 0 0 9px; color: #a07e65; font-size: 9px; font-weight: 650; letter-spacing: .2em; }
+.dialog h2 { margin: 0; color: #382c2b; font-family: var(--font-display, Georgia, serif); font-size: clamp(25px, 6vw, 30px); font-weight: 500; letter-spacing: -.025em; line-height: 1.18; }
+.description { max-width: 300px; margin: 12px auto 0; color: #766a64; font-size: 13px; line-height: 1.65; }
+.error { margin: 14px 0 0; color: #8a4050; font-size: 12px; line-height: 1.5; }
+
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 25px;
+}
+
+.actions button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 17px;
+  border-radius: 999px;
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+  transition: transform 160ms ease, box-shadow 160ms ease, background-color 160ms ease;
+}
+
+.actions button:hover:not(:disabled) { transform: translateY(-1px); }
+.actions button:disabled { cursor: wait; opacity: .72; }
+.cancel { border: 1px solid rgb(118 91 77 / 19%); background: rgb(255 255 255 / 52%); color: #6a5c55; }
+.cancel:hover:not(:disabled) { background: #fff; }
+.confirm { border: 1px solid #743b48; background: linear-gradient(135deg, #804454, #692f40); color: #fffaf6; box-shadow: 0 6px 18px rgb(111 50 66 / 18%); }
+.confirm:hover:not(:disabled) { box-shadow: 0 9px 22px rgb(111 50 66 / 25%); }
+.spinner { animation: spin 900ms linear infinite; }
+
+@keyframes veilIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes veilOut { from { opacity: 1; } to { opacity: 0; } }
+@keyframes cardIn { from { opacity: 0; transform: translateY(14px) scale(.97); } to { opacity: 1; transform: translateY(0) scale(1); } }
+@keyframes cardOut { to { opacity: 0; transform: translateY(8px) scale(.985); } }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+@media (max-width: 900px) {
+  .desktopTrigger { display: none; }
+  .phoneTrigger { display: inline-grid; margin-left: auto; width: 36px; height: 36px; }
+}
+
+@media (max-width: 480px) {
+  .overlay { padding: 18px; }
+  .dialog { padding: 28px 22px 23px; border-radius: 24px; }
+  .actions { gap: 8px; }
+  .actions button { padding-inline: 14px; font-size: 11px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .trigger,
+  .close,
+  .actions button { transition: none; }
+  .overlay,
+  .overlayClosing,
+  .dialog,
+  .dialogClosing,
+  .spinner { animation-duration: 1ms; animation-iteration-count: 1; }
+}

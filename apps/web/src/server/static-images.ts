@@ -1,4 +1,3 @@
-import { createHmac } from "node:crypto";
 import { getDb } from "@taklifnoma/database";
 import {
   invitationSchema,
@@ -13,32 +12,20 @@ import { assertPublishable } from "./publication";
 import { renderStaticImage } from "./static-image-renderer";
 import { staticInvitationQrUrl } from "./static-location-links";
 import { invitationImageFilename } from "@/modules/static-images/filename";
+import { clientAddress, enforceRateLimit } from "./rate-limit";
 
 export async function staticImageLimit(
   request: Request,
   kind: "preview" | "download",
   userId?: string,
 ) {
-  const secret = process.env.SESSION_SECRET;
-  if (!secret) throw new ApiError(503, "NOT_CONFIGURED", "Xizmat sozlanmagan.");
-  const address =
-    request.headers
-      .get(process.env.VERCEL ? "x-vercel-forwarded-for" : "x-forwarded-for")
-      ?.split(",")[0]
-      ?.trim() || "local";
-  const key =
-    "static-image:" +
-    createHmac("sha256", secret)
-      .update(`${kind}:${userId || address}`)
-      .digest("hex");
-  const [row] =
-    await getDb()`INSERT INTO rate_limits(key,count) VALUES(${key},1) ON CONFLICT(key) DO UPDATE SET count=CASE WHEN rate_limits.window_start<now()-interval '1 minute' THEN 1 ELSE rate_limits.count+1 END,window_start=CASE WHEN rate_limits.window_start<now()-interval '1 minute' THEN now() ELSE rate_limits.window_start END RETURNING count`;
-  if (row.count > (kind === "preview" ? 90 : 12))
-    throw new ApiError(
-      429,
-      "RATE_LIMITED",
-      "Juda ko‘p so‘rov. Birozdan so‘ng qayta urining.",
-    );
+  await enforceRateLimit({
+    scope: `static-image:${kind}`,
+    identity: userId || clientAddress(request),
+    maximum: 12,
+    windowSeconds: 60,
+    message: "Juda ko‘p so‘rov. Birozdan so‘ng qayta urining.",
+  });
 }
 
 /** Free testing only: deliberately separate from Click and web publication. */

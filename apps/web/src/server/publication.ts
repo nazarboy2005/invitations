@@ -12,6 +12,7 @@ import {
 import { publicationIssues } from "@taklifnoma/contracts/publication";
 import { ApiError } from "./api";
 import { CATALOG_PREVIEW_MUSIC } from "../modules/catalog/catalog-music";
+import { CLASSICAL_MUSIC } from "../modules/studio/classical-music";
 import { DEFAULT_INVITATION_MUSIC } from "@taklifnoma/contracts/music";
 import { inspectMedia, storageProvider } from "./storage";
 import { requireAdmin, recordAdminChange } from "./admin";
@@ -36,6 +37,11 @@ export function assertPublishable(invitation: Invitation) {
       "PUBLICATION_INCOMPLETE",
       issues.map((issue) => issue.message).join(" "),
     );
+}
+
+export function isBundledMusicUrl(url: string) {
+  return [DEFAULT_INVITATION_MUSIC.url, CATALOG_PREVIEW_MUSIC.url].includes(url) ||
+    CLASSICAL_MUSIC.some((track) => track.url === url);
 }
 
 // Creator images use verified uploads, avoiding protected/expired external URLs.
@@ -85,7 +91,7 @@ export async function assertPublicMedia(
   }
   if (invitation.music.enabled && invitation.music.url) {
     if (
-      ![DEFAULT_INVITATION_MUSIC.url, CATALOG_PREVIEW_MUSIC.url].includes(invitation.music.url) ||
+      !isBundledMusicUrl(invitation.music.url) ||
       invitation.music.assetId
     ) {
       const [asset] =

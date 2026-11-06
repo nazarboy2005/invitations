@@ -37,8 +37,8 @@ and cloud-service verification remain separate from local renderer checks.
 Keep every future template in its own renderer, styles, assets, and motion
 implementation. When a reference source exists, integrate that exact complete
 HTML/CSS/JavaScript/assets implementation; do not recreate it from screenshots.
-Map controls must use the shared invitation venue's Google Maps link or coordinates.
-Verify a Google Places selection and a manually pasted map URL in preview and
+Map controls must use the shared invitation venue's Yandex Maps link or coordinates.
+Verify a Yandex venue selection and a manually pasted map URL in preview and
 public rendering; never copy a source template's sample map API key or location.
 Keep platform data and API adapters separate from the template source. Register
 only complete designs in the shared catalog. A renderer consumes the shared
@@ -51,7 +51,7 @@ public invitations, and authored invitation content always replaces it.
 The canonical fixture is `apps/web/src/modules/catalog/preview-sample.json`;
 keep sample copy and repeatable program entries there for the four supported
 locales rather than defining template-specific examples.
-The fixture also owns the Google Maps mock URL and coordinates. Apply event
+The fixture also owns the Yandex Maps mock URL and coordinates. Apply event
 profiles consistently across designs; template overrides may contain visual
 media only. Do not add guest-count inputs; attendance uses the existing
 one-person API value when a source attendance control is present.

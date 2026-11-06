@@ -65,6 +65,12 @@ export function telegramLaunchData(
 }
 
 export function currentTelegramLaunchData(): string {
+  try {
+    if (window.sessionStorage.getItem("taklifnoma:manual-signout") === "1")
+      return "";
+  } catch {
+    /* Telegram launch data can still be used when storage is unavailable. */
+  }
   return telegramLaunchData(
     window.Telegram?.WebApp?.initData,
     window.location.hash,

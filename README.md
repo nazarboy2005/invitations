@@ -69,6 +69,6 @@ Remaining product work includes the complete Telegram Mini App launch experience
 
 Schema tests use PGlite. `pnpm test:publishing` additionally runs disposable PostgreSQL and localhost HTTP fixtures using `apps/web/.env.local`; start `pnpm dev` first. It never calls Telegram messaging APIs and removes its generated database fixtures afterward. Human Telegram login and real R2 transfers are separate live checks. The current release/check results are in [`docs/IMPLEMENTATION_STATUS.md`](docs/IMPLEMENTATION_STATUS.md), [`docs/PUBLISHING_VERIFICATION.md`](docs/PUBLISHING_VERIFICATION.md), and [`docs/templates/TEMPLATE_ROADMAP.md`](docs/templates/TEMPLATE_ROADMAP.md).
 
-Read `IMPLEMENTATION_DECISIONS.md` before changing product behavior.
+Before changing product behavior, scan the headings in `IMPLEMENTATION_DECISIONS.md` and read the relevant sections and any cross-cutting requirements. Do not read the whole file by default.
 
 The homepage features eight curated published designs, followed by a visual explanation of invitation features, the three creation steps, FAQ, and a final invitation to create. `/templates` is the full published catalog with search, categories, and the existing preview/action dialogs. Legacy `/preview` list visits redirect there; individual template-preview URLs continue to work. The Why us illustration is static sample content and does not load an additional live renderer.

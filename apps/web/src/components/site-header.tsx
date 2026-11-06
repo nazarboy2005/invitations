@@ -1,15 +1,16 @@
 import { BRAND_NAME } from "@/lib/brand";
 import Link from "next/link";
 import Image from "next/image";
-import { Heart, Home, LayoutGrid, UserRound } from "lucide-react";
+import { Home, LayoutGrid } from "lucide-react";
 import { getSessionUser } from "@/server/auth";
 import styles from "./site-header.module.css";
 import { ScrollHeader } from "./scroll-header";
 import { display, sans } from "@/app/platform-fonts";
-import { AccountLinkLabel } from "@/components/account-link-label";
 import { HeroMobileMenu } from "@/components/hero-mobile-menu";
 import { SiteSounds } from "./site-sounds";
-import { FavoritesLink } from "@/modules/favorites/favorite-button";
+import { FavoritesLink, MobileFavoritesLink } from "@/modules/favorites/favorite-button";
+import { AccountNavLink } from "@/components/account-nav-link";
+import { SignOutControl } from "@/components/sign-out-control";
 export async function SiteHeader({
   dashboard = false,
   catalog = false,
@@ -47,6 +48,9 @@ export async function SiteHeader({
             <span className={styles.heroBrandTagline}>Go'zal kunlar sari.</span>
           </span>
         </Link>
+        {dashboard && user && (
+          <SignOutControl enabled placement="phone" />
+        )}
         <nav className={styles.heroNav} aria-label="Asosiy menyu">
           <Link href="/templates">Shablonlar</Link>
           <a href="https://t.me/HyperLean">Bog‘lanish</a>
@@ -55,17 +59,18 @@ export async function SiteHeader({
         <SiteSounds />
         <div className={styles.heroActions}>
           <FavoritesLink className={styles.heroFavorites} />
-          <Link
-            href="/dashboard"
+          <AccountNavLink
+            signedIn={Boolean(user)}
             className={styles.heroAccount}
-            aria-current={dashboard ? "page" : undefined}
-          >
-            <UserRound size={19} strokeWidth={1.2} aria-hidden="true" />
-            <AccountLinkLabel signedIn={Boolean(user)} />
-          </Link>
+            dashboard={dashboard}
+            icon
+          />
+          {dashboard && user && (
+            <SignOutControl enabled placement="desktop" />
+          )}
         </div>
         <HeroMobileMenu
-          accountLabel={<AccountLinkLabel signedIn={Boolean(user)} />}
+          accountLink={<AccountNavLink signedIn={Boolean(user)} />}
           isAdmin={user?.isAdmin ?? false}
         />
       </div>
@@ -73,10 +78,8 @@ export async function SiteHeader({
       <nav className={`${styles.bottomNav} ${sans.className}`} aria-label="Mobil asosiy menyu">
         <Link href="/"><Home size={21} aria-hidden="true" />Asosiy</Link>
         <Link href="/templates"><LayoutGrid size={21} aria-hidden="true" />Shablonlar</Link>
-        <Link href="/templates?favorites=1"><Heart size={21} aria-hidden="true" />Saqlangan</Link>
-        <Link href="/dashboard" aria-current={dashboard ? "page" : undefined}>
-          <UserRound size={21} aria-hidden="true" />Taklifnomalarim
-        </Link>
+        <MobileFavoritesLink />
+        <AccountNavLink signedIn={Boolean(user)} dashboard={dashboard} icon />
       </nav>
     </>
   );

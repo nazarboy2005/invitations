@@ -3,7 +3,7 @@ import test from "node:test";
 import { createInvitation, invitationSchema } from "../packages/contracts/src/index";
 import { normalizeInvitation } from "../packages/contracts/src/capabilities";
 import { hasVenuePoint, normalizeVenue, yandexMapUrl } from "../packages/contracts/src/maps";
-import { readSuggestion, resolvePlace, resolveMapLink, signSuggestion, suggestPlaces, limitPlaceSearch } from "../apps/web/src/server/yandex-places";
+import { readSuggestion, resolvePlace, resolveMapLink, signSuggestion, suggestPlaces, verifyPlaceSearchOrigin } from "../apps/web/src/server/yandex-places";
 
 const venue = { latitude: 41.328372, longitude: 69.224814, mapUrl: "https://yandex.uz/maps/?ll=1,2", placeUri: "ymapsbm1://org?oid=178096015422" };
 
@@ -73,8 +73,8 @@ test("provider failures expose no key or upstream URL", async () => {
 });
 
 test("public venue search accepts the actual same host and rejects cross-site use", () => {
-  assert.doesNotThrow(() => limitPlaceSearch(new Request("http://localhost:3001/api/places", { headers: { host: "127.0.0.1:3001", origin: "http://127.0.0.1:3001", "x-real-ip": "test-same-host" } })));
-  assert.throws(() => limitPlaceSearch(new Request("http://localhost:3001/api/places", { headers: { origin: "https://elsewhere.example", "sec-fetch-site": "cross-site" } })));
+  assert.doesNotThrow(() => verifyPlaceSearchOrigin(new Request("http://localhost:3001/api/places", { headers: { host: "127.0.0.1:3001", origin: "http://127.0.0.1:3001", "x-real-ip": "test-same-host" } })));
+  assert.throws(() => verifyPlaceSearchOrigin(new Request("http://localhost:3001/api/places", { headers: { origin: "https://elsewhere.example", "sec-fetch-site": "cross-site" } })));
 });
 
 test("pasted organization and short share links resolve the exact identity and fetched name", async () => {

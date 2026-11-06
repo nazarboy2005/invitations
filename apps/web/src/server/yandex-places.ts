@@ -2,6 +2,7 @@ import { createHmac, randomBytes, timingSafeEqual } from "node:crypto";
 import { z } from "zod";
 import { ApiError } from "./api";
 import { yandexMapUrl } from "@taklifnoma/contracts/maps";
+import { clientAddress, enforceRateLimit } from "./rate-limit";
 
 const tokenSecret = process.env.SESSION_SECRET || randomBytes(32).toString("hex");
 const suggestionSchema = z.object({
@@ -10,22 +11,27 @@ const suggestionSchema = z.object({
 });
 type Suggestion = z.infer<typeof suggestionSchema>;
 type Fetch = typeof fetch;
-const usage = new Map<string, { count: number; until: number }>();
 
 /** Public Studio search is available before sign-in, with bounded provider usage. */
-export function limitPlaceSearch(request: Request) {
+export function verifyPlaceSearchOrigin(request: Request) {
   const origin = request.headers.get("origin");
   const requestOrigin = new URL(request.url).origin;
   let sameHost = false;
   try { sameHost = !!origin && new URL(origin).host === request.headers.get("host"); } catch { /* Reject malformed origins below. */ }
   if ((origin && origin !== requestOrigin && !sameHost) || request.headers.get("sec-fetch-site") === "cross-site")
     throw new ApiError(403, "FORBIDDEN", "Joy qidiruvini studiyadan oching.");
-  const key = request.headers.get("x-real-ip") || request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "local";
-  const now = Date.now(), previous = usage.get(key);
-  if (previous && previous.until > now && previous.count >= 45)
-    throw new ApiError(429, "PLACES_RATE_LIMIT", "Joy qidiruvi limiti tugadi. Bir daqiqadan so‘ng urinib ko‘ring.");
-  usage.set(key, previous && previous.until > now ? { ...previous, count: previous.count + 1 } : { count: 1, until: now + 60_000 });
-  if (usage.size > 1000) for (const [id, item] of usage) if (item.until < now) usage.delete(id);
+}
+
+export async function limitPlaceSearch(request: Request) {
+  verifyPlaceSearchOrigin(request);
+  await enforceRateLimit({
+    scope: "places-provider",
+    identity: clientAddress(request),
+    maximum: 30,
+    windowSeconds: 60,
+    code: "PLACES_RATE_LIMIT",
+    message: "Joy qidiruvi limiti tugadi. Bir daqiqadan so‘ng urinib ko‘ring.",
+  });
 }
 
 export function signSuggestion(value: Omit<Suggestion, "expires">): string {

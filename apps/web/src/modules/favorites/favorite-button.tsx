@@ -46,10 +46,21 @@ export function FavoriteButton({
 
 export function FavoritesLink({ className }: { className?: string }) {
   const { favorites, ready } = useFavorites();
+  if (ready && favorites.length === 0) return null;
   return (
     <Link href="/templates?favorites=1" className={className ?? styles.link}>
       <Heart size={17} aria-hidden="true" /> Saralanganlar
       {ready && favorites.length > 0 ? ` · ${favorites.length}` : ""}
+    </Link>
+  );
+}
+
+export function MobileFavoritesLink() {
+  const { favorites, ready } = useFavorites();
+  if (ready && favorites.length === 0) return null;
+  return (
+    <Link href="/templates?favorites=1" aria-label={`Saqlangan: ${favorites.length}`}>
+      <Heart size={21} aria-hidden="true" />Saqlangan
     </Link>
   );
 }

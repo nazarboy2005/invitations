@@ -35,6 +35,8 @@ import {
   MapPin,
   MapPinned,
   Music2,
+  Pause,
+  Play,
   MessageSquare,
   Phone,
   Plus,
@@ -48,6 +50,7 @@ import {
   Trash2,
   ListOrdered,
   Users,
+  Search,
   X,
 } from "lucide-react";
 import {
@@ -146,7 +149,7 @@ import { TakliflaZarhalSahifaInvitation } from "@/templates/taklifla-zarhal-sahi
 import { MuhrliMaktubInvitation } from "@/templates/taklifla-muhrli-maktub/renderer";
 import { isChorloveTemplate, ChorloveInvitation } from "@/templates/chorlove";
 import { createStudioPreviewInvitation } from "./preview-invitation";
-import { CATALOG_PREVIEW_MUSIC } from "@/modules/catalog/catalog-music";
+import { CATALOG_MUSIC_CREDIT, CATALOG_PREVIEW_MUSIC } from "@/modules/catalog/catalog-music";
 import { orderEventTemplates } from "@/modules/catalog/template-order";
 import { PublishedLink } from "@/components/published-link";
 import {
@@ -451,11 +454,22 @@ export function Studio({
     displayName: string;
   } | null>(null);
   const [authStatus, setAuthStatus] = useState("");
-  const [audioPreview, setAudioPreview] = useState("");
-  const [audioName, setAudioName] = useState("");
   const [savedMusic, setSavedMusic] = useState<
-    Array<{ id: string; assetId: string | null; url: string; filename: string }>
+    Array<{
+      id: string; assetId: string | null; url: string; filename: string;
+      composer?: string; performer?: string; instrument?: string;
+      durationSeconds?: number | null; license?: string; attribution?: string;
+      sourceUrl?: string; licenseUrl?: string;
+    }>
   >([]);
+  const [musicLibrarySearch, setMusicLibrarySearch] = useState("");
+  const [musicLibraryOpen, setMusicLibraryOpen] = useState(false);
+  const [musicPreviewUrl, setMusicPreviewUrl] = useState("");
+  const [musicPreviewPlaying, setMusicPreviewPlaying] = useState(false);
+  const [musicPreviewTime, setMusicPreviewTime] = useState(0);
+  const [musicPreviewDuration, setMusicPreviewDuration] = useState(0);
+  const musicPickerRef = useRef<HTMLDivElement>(null);
+  const musicPreviewRef = useRef<HTMLAudioElement>(null);
   const [musicLibraryLoading, setMusicLibraryLoading] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [catalogVersion, setCatalogVersion] = useState(0);
@@ -479,6 +493,72 @@ export function Studio({
   const dialogRef = useRef<HTMLDivElement>(null);
   const previousFocus = useRef<HTMLElement | null>(null);
   invitationRef.current = invitation;
+  const libraryTracks = savedMusic.map((track) =>
+    track.id === CATALOG_PREVIEW_MUSIC.id
+      ? {
+          ...track,
+          composer: "Fotiha kutubxonasi",
+          performer: CATALOG_MUSIC_CREDIT.creator,
+          instrument: "Piano",
+          license: CATALOG_MUSIC_CREDIT.license,
+          licenseUrl: CATALOG_MUSIC_CREDIT.licenseUrl,
+          sourceUrl: CATALOG_MUSIC_CREDIT.source,
+        }
+      : track,
+  );
+  const selectedMusicTrack = libraryTracks.find((track) =>
+    invitation?.music.assetId
+      ? track.assetId === invitation.music.assetId
+      : track.url === invitation?.music.url,
+  );
+  const selectedMusicPreviewPlaying = !!selectedMusicTrack && musicPreviewUrl === selectedMusicTrack.url && musicPreviewPlaying;
+  const selectedMusicDuration = musicPreviewDuration || selectedMusicTrack?.durationSeconds || 0;
+  const filteredLibraryTracks = libraryTracks.filter((track) =>
+    `${track.filename} ${track.composer} ${track.performer} ${track.instrument}`
+      .toLocaleLowerCase()
+      .includes(musicLibrarySearch.trim().toLocaleLowerCase()),
+  );
+
+  function toggleMusicPreview(url: string) {
+    const audio = musicPreviewRef.current;
+    if (!audio) return;
+    if (musicPreviewUrl === url && musicPreviewPlaying) {
+      audio.pause();
+      setMusicPreviewPlaying(false);
+      return;
+    }
+    if (musicPreviewUrl !== url) {
+      audio.src = url;
+      audio.currentTime = 0;
+      setMusicPreviewTime(0);
+      setMusicPreviewDuration(0);
+      setMusicPreviewUrl(url);
+    }
+    void audio.play().then(
+      () => setMusicPreviewPlaying(true),
+      () => setMusicPreviewPlaying(false),
+    );
+  }
+
+  useEffect(() => {
+    if (!musicLibraryOpen) return;
+    const closeOnOutsideClick = (event: PointerEvent) => {
+      if (!musicPickerRef.current?.contains(event.target as Node)) {
+        setMusicLibraryOpen(false);
+        if (musicPreviewUrl !== invitation?.music.url) {
+          musicPreviewRef.current?.pause();
+          setMusicPreviewPlaying(false);
+        }
+      }
+    };
+    document.addEventListener("pointerdown", closeOnOutsideClick);
+    return () => document.removeEventListener("pointerdown", closeOnOutsideClick);
+  }, [invitation?.music.url, musicLibraryOpen, musicPreviewUrl]);
+
+  function formatMusicTime(seconds: number) {
+    const safeSeconds = Math.max(0, Math.floor(seconds));
+    return `${Math.floor(safeSeconds / 60)}:${String(safeSeconds % 60).padStart(2, "0")}`;
+  }
 
   useEffect(() => {
     if (!invitation?.music.enabled) return;
@@ -491,9 +571,12 @@ export function Studio({
           const result = (await response.json()) as {
             tracks?: Array<{
               id: string;
-              assetId: string;
+              assetId: string | null;
               url: string;
               filename: string;
+              composer?: string; performer?: string; instrument?: string;
+              durationSeconds?: number | null; license?: string; attribution?: string;
+              sourceUrl?: string; licenseUrl?: string;
             }>;
           };
           return result.tracks ?? [];
@@ -766,13 +849,6 @@ export function Studio({
       flush();
     };
   }, []);
-
-  useEffect(
-    () => () => {
-      if (audioPreview) URL.revokeObjectURL(audioPreview);
-    },
-    [audioPreview],
-  );
 
   useEffect(() => {
     if (!auth) return;
@@ -1437,10 +1513,6 @@ export function Studio({
       setError("Fayl 15 MB dan kichik bo‘lishi kerak.");
       return;
     }
-    if (kind === "audio") {
-      setAudioPreview(URL.createObjectURL(file));
-      setAudioName(file.name);
-    }
     setUploading(true);
     try {
       const response = await studioFetch("/api/uploads", {
@@ -1499,7 +1571,6 @@ export function Studio({
             filename: file.name,
           },
         });
-        setAudioPreview("");
       } else if (artistId) {
         update({
           artistLineup: current.artistLineup.map((artist) =>
@@ -1526,7 +1597,6 @@ export function Studio({
         });
       setNotice("Fayl yuklandi. Taklifnomani hisobingizga saqlashni unutmang.");
     } catch (cause) {
-      if (kind === "audio") { setAudioPreview(""); setAudioName(""); }
       setError(cause instanceof Error ? cause.message : "Fayl yuklanmadi.");
     } finally {
       setUploading(false);
@@ -3222,63 +3292,191 @@ export function Studio({
                     title="Fon musiqasi"
                     description="Mehmon taklifnomani ochganda musiqa tinglashi mumkin."
                     checked={invitation.music.enabled}
-                    onChange={(enabled) =>
-                      update({ music: { ...(enabled && !invitation.music.url ? DEFAULT_INVITATION_MUSIC : invitation.music), enabled } })
-                    }
+                    onChange={(enabled) => {
+                      if (!enabled) {
+                        musicPreviewRef.current?.pause();
+                        setMusicPreviewPlaying(false);
+                      }
+                      update({ music: { ...(enabled && !invitation.music.url ? DEFAULT_INVITATION_MUSIC : invitation.music), enabled } });
+                    }}
                   />
                   {invitation.music.enabled && (
-                    <div className={styles.optionBody}>
-                      <Field label="Musiqa kutubxonasi">
-                        <SoftSelect
-                          label="Musiqa kutubxonasi"
-                          value={
-                            savedMusic.find((item) =>
-                              invitation.music.assetId
-                                ? item.assetId === invitation.music.assetId
-                                : item.url === invitation.music.url,
-                            )?.id ?? ""
-                          }
-                          disabled={
-                            musicLibraryLoading || savedMusic.length === 0
-                          }
-                          placeholder={
-                            musicLibraryLoading
-                              ? placeholders.musicLoading
-                              : savedMusic.length
-                                ? placeholders.chooseMusic
-                                : placeholders.noMusic
-                          }
-                          options={savedMusic.map((track) => ({
-                            value: track.id,
-                            label: track.filename,
-                          }))}
-                          onChange={(value) => {
-                            const track = savedMusic.find(
-                              (item) => item.id === value,
-                            );
-                            if (!track) return;
-                            setAudioPreview("");
-                            setAudioName("");
-                            update({
-                              music: {
-                                enabled: true,
-                                assetId: track.assetId,
-                                url: track.url,
-                                filename: track.filename,
-                              },
-                            });
-                          }}
-                        />
-                      </Field>
-                      <p className={styles.help}>
-                        Kutubxonadagi tayyor musiqani tanlang yoki
-                        o‘zingiznikini yuklang.
-                      </p>
-                      <label className={styles.audioUpload}>
+                    <div className={`${styles.optionBody} ${styles.musicPickerBody}`}>
+                      <div className={styles.classicalLibrary} ref={musicPickerRef}>
+                        <div className={styles.musicSearch}>
+                          <Search size={16} aria-hidden="true" />
+                          <input
+                            type="search"
+                            aria-label="Musiqa qidirish"
+                            value={musicLibrarySearch}
+                            onFocus={() => setMusicLibraryOpen(true)}
+                            onChange={(event) => {
+                              setMusicLibrarySearch(event.target.value);
+                              setMusicLibraryOpen(true);
+                            }}
+                            onKeyDown={(event) => {
+                              if (event.key === "Escape") {
+                                setMusicLibraryOpen(false);
+                                setMusicLibrarySearch("");
+                              }
+                            }}
+                            placeholder="Kutubxonadan musiqa tanlang…"
+                          />
+                          {musicLibraryOpen && (
+                            <button
+                              type="button"
+                              className={styles.clearMusicSearch}
+                              aria-label={musicLibrarySearch ? "Qidiruvni tozalash" : "Musiqa ro‘yxatini yopish"}
+                              onClick={() => {
+                                if (musicLibrarySearch) {
+                                  setMusicLibrarySearch("");
+                                } else {
+                                  setMusicLibraryOpen(false);
+                                  if (musicPreviewUrl !== invitation.music.url) {
+                                    musicPreviewRef.current?.pause();
+                                    setMusicPreviewPlaying(false);
+                                  }
+                                }
+                              }}
+                            >
+                              <X size={15} />
+                            </button>
+                          )}
+                        </div>
+                        <div
+                          className={`${styles.classicalTrackList} ${musicLibraryOpen ? styles.classicalTrackListOpen : styles.classicalTrackListClosed}`}
+                          aria-hidden={!musicLibraryOpen}
+                        >
+                            {filteredLibraryTracks.map((track) => {
+                              const selected = invitation.music.assetId
+                                ? track.assetId === invitation.music.assetId
+                                : track.url === invitation.music.url;
+                              const activePreview = musicPreviewUrl === track.url;
+                              const playing = activePreview && musicPreviewPlaying;
+                              const byline = track.composer && track.performer
+                                ? `${track.composer} · ${track.performer}`
+                                : "Yuklangan musiqa";
+                              const trackDuration = activePreview && musicPreviewDuration
+                                ? musicPreviewDuration
+                                : track.durationSeconds ?? 0;
+                              return (
+                                <div
+                                  key={track.id}
+                                  className={`${styles.classicalTrack}${selected ? ` ${styles.classicalTrackSelected}` : ""}`}
+                                >
+                                  <button
+                                    type="button"
+                                    className={styles.musicPlayButton}
+                                    aria-label={`${playing ? "To‘xtatish" : "Tinglash"}: ${track.filename}`}
+                                    aria-pressed={playing}
+                                    onClick={() => toggleMusicPreview(track.url)}
+                                  >
+                                    {playing ? <Pause size={15} fill="currentColor" /> : <Play size={15} fill="currentColor" />}
+                                  </button>
+                                  <div className={styles.classicalTrackInfo}>
+                                    <button
+                                      type="button"
+                                      className={styles.classicalTrackChoose}
+                                      aria-pressed={selected}
+                                      onClick={() => {
+                                        musicPreviewRef.current?.pause();
+                                        setMusicPreviewPlaying(false);
+                                        setMusicLibraryOpen(false);
+                                        setMusicLibrarySearch("");
+                                        update({ music: { enabled: true, assetId: track.assetId, url: track.url, filename: track.filename } });
+                                      }}
+                                    >
+                                      <span className={styles.classicalTrackTitle}>
+                                        <span>{track.filename}</span>
+                                        {selected && <Check size={15} aria-label="Tanlangan" />}
+                                      </span>
+                                    </button>
+                                    <div className={`${styles.classicalTrackSubline}${playing ? ` ${styles.classicalTrackSublinePlaying}` : ""}`}>
+                                      <span className={styles.classicalTrackByline} aria-hidden={playing}>{byline}</span>
+                                      <input
+                                        className={styles.musicTrackScrubber}
+                                        type="range"
+                                        min="0"
+                                        max={musicPreviewDuration || trackDuration || 1}
+                                        step="0.1"
+                                        value={Math.min(musicPreviewTime, musicPreviewDuration || trackDuration || 0)}
+                                        aria-label={`${track.filename} musiqasidagi vaqt`}
+                                        aria-hidden={!playing}
+                                        tabIndex={playing ? 0 : -1}
+                                        onChange={(event) => {
+                                          const nextTime = Number(event.target.value);
+                                          if (musicPreviewRef.current) musicPreviewRef.current.currentTime = nextTime;
+                                          setMusicPreviewTime(nextTime);
+                                        }}
+                                      />
+                                    </div>
+                                    <span className={styles.classicalTrackDuration}>
+                                      {formatMusicTime(activePreview ? musicPreviewTime : 0)} / {formatMusicTime(trackDuration)}
+                                    </span>
+                                  </div>
+                                </div>
+                              );
+                            })}
+                            {!filteredLibraryTracks.length && (
+                              <p className={styles.musicEmptyState}>
+                                {musicLibraryLoading ? placeholders.musicLoading : "Mos musiqa topilmadi."}
+                              </p>
+                            )}
+                        </div>
+                        {selectedMusicTrack && !musicLibraryOpen ? (
+                          <div className={`${styles.classicalTrack} ${styles.classicalTrackSelected}`}>
+                            <button
+                              type="button"
+                              className={styles.musicPlayButton}
+                              aria-label={`${selectedMusicPreviewPlaying ? "To‘xtatish" : "Tinglash"}: ${selectedMusicTrack.filename}`}
+                              aria-pressed={selectedMusicPreviewPlaying}
+                              onClick={() => toggleMusicPreview(selectedMusicTrack.url)}
+                            >
+                              {selectedMusicPreviewPlaying
+                                ? <Pause size={15} fill="currentColor" />
+                                : <Play size={15} fill="currentColor" />}
+                            </button>
+                            <div className={styles.classicalTrackInfo}>
+                              <span className={styles.classicalTrackTitle}><span>{selectedMusicTrack.filename}</span></span>
+                              <div className={`${styles.classicalTrackSubline}${selectedMusicPreviewPlaying ? ` ${styles.classicalTrackSublinePlaying}` : ""}`}>
+                                <span className={styles.classicalTrackByline} aria-hidden={selectedMusicPreviewPlaying}>
+                                  {selectedMusicTrack.composer && selectedMusicTrack.performer
+                                    ? `${selectedMusicTrack.composer} · ${selectedMusicTrack.performer}`
+                                    : "Yuklangan musiqa"}
+                                </span>
+                                <input
+                                  className={styles.musicTrackScrubber}
+                                  type="range"
+                                  min="0"
+                                  max={selectedMusicDuration || 1}
+                                  step="0.1"
+                                  value={Math.min(musicPreviewTime, selectedMusicDuration || 0)}
+                                  aria-label={`${selectedMusicTrack.filename} musiqasidagi vaqt`}
+                                  aria-hidden={!selectedMusicPreviewPlaying}
+                                  tabIndex={selectedMusicPreviewPlaying ? 0 : -1}
+                                  onChange={(event) => {
+                                    const nextTime = Number(event.target.value);
+                                    if (musicPreviewRef.current) musicPreviewRef.current.currentTime = nextTime;
+                                    setMusicPreviewTime(nextTime);
+                                  }}
+                                />
+                              </div>
+                              <span className={styles.classicalTrackDuration}>
+                                {formatMusicTime(musicPreviewUrl === selectedMusicTrack.url ? musicPreviewTime : 0)} / {formatMusicTime(selectedMusicDuration)}
+                              </span>
+                            </div>
+                          </div>
+                        ) : !selectedMusicTrack && !musicLibraryOpen ? (
+                          <p className={styles.musicEmptyState}>
+                            {musicLibraryLoading ? placeholders.musicLoading : "Musiqa tanlanmagan."}
+                          </p>
+                        ) : null}
+                      </div>
+                      <label className={`${styles.audioUpload} ${styles.musicAudioUpload}`}>
                         <Music2 size={20} />
                         <span>
-                          {uploading ? "Yuklanmoqda…" : "Yangi musiqa yuklang"}
-                          <small>Audio fayl · 15 MB gacha</small>
+                          {uploading ? "Yuklanmoqda…" : "O‘z musiqangizni yuklang"}
+                          <small>MP3, WAV yoki M4A · 15 MB gacha</small>
                         </span>
                         <input
                           type="file"
@@ -3291,41 +3489,16 @@ export function Studio({
                           }}
                         />
                       </label>
-                      {(audioPreview || invitation.music.url) && (
-                        <>
-                          <p className={styles.help}>
-                            {audioPreview
-                              ? `${audioName} — faqat shu oynadagi sinov, hali yuklanmagan.`
-                              : invitation.music.filename}
-                          </p>
-                          <audio
-                            controls
-                            loop
-                            preload="none"
-                            src={audioPreview || invitation.music.url}
-                            className={styles.audio}
-                          />
-                          <button
-                            className={styles.textButton}
-                            onClick={() => {
-                              update({
-                                music: {
-                                  ...invitation.music,
-                                  enabled: false,
-                                  assetId: null,
-                                  url: "",
-                                  filename: "",
-                                },
-                              });
-                              setAudioPreview("");
-                              setAudioName("");
-                            }}
-                          >
-                            <Trash2 size={14} />
-                            Musiqani olib tashlash
-                          </button>
-                        </>
-                      )}
+                      <audio
+                        ref={musicPreviewRef}
+                        className={styles.hiddenAudioPreview}
+                        preload="none"
+                        loop
+                        onEnded={() => setMusicPreviewPlaying(false)}
+                        onPause={() => setMusicPreviewPlaying(false)}
+                        onTimeUpdate={(event) => setMusicPreviewTime(event.currentTarget.currentTime)}
+                        onLoadedMetadata={(event) => setMusicPreviewDuration(event.currentTarget.duration)}
+                      />
 
                     </div>
                   )}

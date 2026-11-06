@@ -1,12 +1,12 @@
 # Project instructions
 
-Before implementing invitation creation, publication, editing, authentication, payments, personalization, language variants, template selection/switching, template pricing, RSVP, guest wishes/moderation, or to'yona features, read `IMPLEMENTATION_DECISIONS.md` in this project root. It records the user's approved editing/reuse policy and established product requirements. Preserve those decisions unless the user changes them.
+Before implementing invitation creation, publication, editing, authentication, payments, personalization, language variants, template selection/switching, template pricing, RSVP, guest wishes/moderation, or to'yona features, scan the headings in `IMPLEMENTATION_DECISIONS.md` and read the relevant sections plus any cross-cutting requirements that apply. Do not read the whole file by default. Preserve approved decisions unless the user changes them.
 
-The user has requested an ongoing project decision record. As requirements are discussed, update `IMPLEMENTATION_DECISIONS.md` with important confirmed decisions and corrections. Keep it concise, distinguish user requirements from recommendations and unresolved questions, and revise superseded decisions rather than accumulating contradictions.
+Keep `IMPLEMENTATION_DECISIONS.md` as a concise record of durable product decisions. Add only important, confirmed requirements or corrections that are likely to affect future work; distinguish user requirements from recommendations and unresolved questions, and revise or remove superseded decisions. Do not add typo fixes, routine UI polish, per-task implementation notes, test results, completion reports, or other changelog entries. Put detailed implementation plans and verification evidence in the relevant code, task documentation, or status report. When unsure whether a detail is durable and broadly useful, leave it out.
 
 ## New invitation templates
 
-For each task to add a template, read `IMPLEMENTATION_DECISIONS.md`, `apps/web/src/templates/README.md`, and any nested `AGENTS.md` files. Follow the reusable full-fidelity implementation prompt in `docs/templates/new-template-implementation-prompt.md`.
+For each task to add a template, scan the headings in `IMPLEMENTATION_DECISIONS.md` and read relevant template/product requirements, `apps/web/src/templates/README.md`, and any nested `AGENTS.md` files. Follow the reusable full-fidelity implementation prompt in `docs/templates/new-template-implementation-prompt.md`.
 
 The required approach is to package the selected reference's complete template-level source (HTML, CSS, JavaScript, fonts, assets, animation, and interactions) and adapt it to the shared typed invitation contract. Do not redraw or approximate the design from screenshots. Keep original reference captures untouched, keep the template source isolated, and keep data/API adapters separate. Do not copy the reference site's app runtime, analytics, or sample invitation data.
 
