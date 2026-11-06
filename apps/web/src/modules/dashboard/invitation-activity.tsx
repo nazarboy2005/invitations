@@ -3,19 +3,29 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import {
   ArrowLeft,
+  ArrowUpRight,
   Check,
+  CircleDashed,
   Clock3,
-  MessageCircle,
+  Copy,
+  Gift,
+  Heart,
+  MoreHorizontal,
   Pencil,
+  ReceiptText,
   RefreshCw,
+  Search,
   Trash2,
   UserRound,
+  UsersRound,
+  X,
 } from "lucide-react";
 import { getContent, type Invitation } from "@taklifnoma/contracts";
 import styles from "./invitation-activity.module.css";
 import { formatDate } from "@/templates/date-format";
 import { SoftSelect } from "@/components/soft-select";
 import { ConfirmationDialog } from "@/components/confirmation-dialog";
+import { publicAsset } from "@/lib/public-asset";
 type Activity = {
   responses: Array<{
     id: string;
@@ -23,6 +33,7 @@ type Activity = {
     status: "yes" | "no" | "maybe";
     partySize: number;
     note: string;
+    createdAt: string;
   }>;
   wishes: Array<{
     id: string;
@@ -48,7 +59,15 @@ type Activity = {
     message: string;
     createdAt: string;
   }>;
-  totals: { responses: number; guests: number; pending: number };
+  totals: {
+    responses: number;
+    guests: number;
+    pending: number;
+    attending: number;
+    maybe: number;
+    notAttending: number;
+  };
+  responseHasMore: boolean;
   hasMore: boolean;
 };
 const activitySnapshots = new Map<string, Activity>();
@@ -62,7 +81,7 @@ export function InvitationActivity({
   const [adminReason, setAdminReason] = useState(
     "Administrator tomonidan moderatsiya",
   );
-  const cacheKey = `${adminContext ? "admin:" : ""}${invitation.id}:0`;
+  const cacheKey = `${adminContext ? "admin:" : ""}${invitation.id}:0:all:`;
   const [data, setData] = useState<Activity | null>(
     () => activitySnapshots.get(cacheKey) ?? null,
   );
@@ -70,6 +89,11 @@ export function InvitationActivity({
   const [busy, setBusy] = useState(false);
   const [refresh, setRefresh] = useState(0);
   const [page, setPage] = useState(0);
+  const [responseQuery, setResponseQuery] = useState("");
+  const [responseStatus, setResponseStatus] = useState<
+    "all" | "yes" | "maybe" | "no"
+  >("all");
+  const [copiedResponseId, setCopiedResponseId] = useState<string | null>(null);
   const [section, setSection] = useState<
     "responses" | "wishes" | "receipts" | "intentions"
   >("responses");
@@ -79,10 +103,16 @@ export function InvitationActivity({
   const [deleteWishId, setDeleteWishId] = useState<string | null>(null);
   useEffect(() => {
     const controller = new AbortController();
-    const key = `${adminContext ? "admin:" : ""}${invitation.id}:${page}`;
+    const query = responseQuery.trim();
+    const key = `${adminContext ? "admin:" : ""}${invitation.id}:${page}:${responseStatus}:${query}`;
     setData(activitySnapshots.get(key) ?? null);
     setError("");
-    fetch(`/api/invitations/${invitation.id}/activity?page=${page}`, {
+    const params = new URLSearchParams({
+      page: String(page),
+      status: responseStatus,
+    });
+    if (query) params.set("q", query);
+    fetch(`/api/invitations/${invitation.id}/activity?${params}`, {
       cache: "no-store",
       signal: controller.signal,
       headers: adminContext
@@ -100,7 +130,7 @@ export function InvitationActivity({
         if (!controller.signal.aborted) setError(error.message);
       });
     return () => controller.abort();
-  }, [invitation.id, page, refresh]);
+  }, [invitation.id, page, refresh, responseQuery, responseStatus]);
   async function moderate(
     id: string,
     status: "approved" | "deleted" | "received" | "issue",
@@ -138,8 +168,39 @@ export function InvitationActivity({
       setBusy(false);
     }
   }
+  async function copyResponse(item: Activity["responses"][number]) {
+    const statusLabel = {
+      yes: "Kelaman",
+      maybe: "Aniq emasman",
+      no: "Kela olmayman",
+    }[item.status];
+    const lines = [item.name, statusLabel, item.note].filter(Boolean);
+    try {
+      await navigator.clipboard.writeText(lines.join("\n"));
+      setCopiedResponseId(item.id);
+      window.setTimeout(() => setCopiedResponseId(null), 1800);
+    } catch {
+      setError("Javob ma’lumotini nusxalab bo‘lmadi.");
+    }
+  }
   return (
-    <main id="main" className={styles.page}>
+    <main
+      id="main"
+      className={`${styles.page} ${adminContext ? "" : styles.ownerPage}`}
+    >
+      {!adminContext && (
+        <picture className={styles.background} aria-hidden="true">
+          <source
+            media="(max-width: 600px)"
+            srcSet={publicAsset("/images/dashboard/ivory-silk-mobile.webp")}
+          />
+          <img
+            src={publicAsset("/images/catalog/floral-header.webp")}
+            alt=""
+            fetchPriority="high"
+          />
+        </picture>
+      )}
       {adminContext && (
         <section
           className="inline-note"
@@ -169,16 +230,19 @@ export function InvitationActivity({
         <div className={styles.titleRow}>
           <Link
             href={adminContext ? "/admin?view=invitations" : "/dashboard"}
-            className={styles.headerIconButton}
+            className={`${styles.headerIconButton} ${styles.backButton}`}
             aria-label="Taklifnomalarimga qaytish"
             title="Taklifnomalarimga qaytish"
           >
             <ArrowLeft size={19} />
+            {!adminContext && <span>Barcha taklifnomalar</span>}
           </Link>
-          <h1>
-            {getContent(invitation).people.filter(Boolean).join(" & ") ||
-              "Taklifnoma"}
-          </h1>
+          <div className={styles.titleCopy}>
+            <h1>
+              {getContent(invitation).people.filter(Boolean).join(" & ") ||
+                "Taklifnoma"}
+            </h1>
+          </div>
           <Link
             href={
               adminContext
@@ -203,10 +267,11 @@ export function InvitationActivity({
           </button>
         </div>
       </div>
-      <p className={styles.description}>
-        Mehmonlar faolligi va shaxsiy to‘yona cheklari. Tasdiqlangan tilaklar
-        taklifnomada ko‘rinadi.
-      </p>
+      <div className={styles.introRow}>
+        <p className={styles.description}>
+          Mehmonlar javoblari, tashrifi va boshqa ma’lumotlar.
+        </p>
+      </div>
       {error && <p role="alert">{error}</p>}
       {!data && !error && <p role="status">Yuklanmoqda…</p>}
       {data && (
@@ -221,62 +286,231 @@ export function InvitationActivity({
               aria-selected={section === "responses"}
               onClick={() => setSection("responses")}
             >
-              Javoblar <span>{data.totals.responses}</span>
+              <UsersRound size={16} /> Javoblar{" "}
+              <span>{data.totals.responses}</span>
             </button>
             <button
               role="tab"
               aria-selected={section === "wishes"}
               onClick={() => setSection("wishes")}
             >
-              Tilaklar <span>{data.wishes.length}</span>
+              <Heart size={16} /> Tilaklar <span>{data.wishes.length}</span>
             </button>
             <button
               role="tab"
               aria-selected={section === "receipts"}
               onClick={() => setSection("receipts")}
             >
-              To‘yona <span>{data.receipts.length}</span>
+              <ReceiptText size={16} /> To‘yona{" "}
+              <span>{data.receipts.length}</span>
             </button>
             <button
               role="tab"
               aria-selected={section === "intentions"}
               onClick={() => setSection("intentions")}
             >
-              Sovg‘a niyatlari <span>{data.giftIntentions?.length ?? 0}</span>
+              <Gift size={16} /> Sovg‘a niyatlari{" "}
+              <span>{data.giftIntentions?.length ?? 0}</span>
             </button>
           </nav>
+          {!adminContext && (
+            <section className={styles.overview} aria-label="Faollik xulosasi">
+              <div className={styles.statGrid}>
+                <div className={styles.statCard}>
+                  <span className={styles.statIcon}>
+                    <UsersRound size={18} />
+                  </span>
+                  <span className={styles.statLabel}>Javoblar</span>
+                  <strong>{data.totals.responses}</strong>
+                  <small>Mehmonlardan kelgan javob</small>
+                </div>
+                <div className={styles.statCard}>
+                  <span className={styles.statIcon}>
+                    <Check size={19} />
+                  </span>
+                  <span className={styles.statLabel}>Kelaman</span>
+                  <strong>{data.totals.attending}</strong>
+                  <small>Qatnashishini tasdiqladi</small>
+                </div>
+                <div className={styles.statCard}>
+                  <span className={styles.statIcon}>
+                    <CircleDashed size={18} />
+                  </span>
+                  <span className={styles.statLabel}>Aniq emas</span>
+                  <strong>{data.totals.maybe}</strong>
+                  <small>Hali qaror qilmagan</small>
+                </div>
+                <div className={styles.statCard}>
+                  <span className={styles.statIcon}>
+                    <X size={19} />
+                  </span>
+                  <span className={styles.statLabel}>Kela olmayman</span>
+                  <strong>{data.totals.notAttending}</strong>
+                  <small>Qatnasha olmaydi</small>
+                </div>
+              </div>
+            </section>
+          )}
           {section === "responses" && (
             <section className={styles.sectionPanel} role="tabpanel">
-              <h2>
-                Qatnashish javoblari <small>({data.totals.responses})</small>
-              </h2>
-              {!data.responses.length && <p>Hozircha javob yo‘q.</p>}
-              {data.responses.map((item) => (
-                <article key={item.id}>
-                  <strong>{item.name}</strong>
-                  <p>
-                    {
-                      {
-                        yes: "Kelaman",
-                        no: "Kelmayman",
-                        maybe: "Hali bilmayman",
-                      }[item.status]
-                    }
-                    {item.status === "yes" ? ` · ${item.partySize} kishi` : ""}
-                  </p>
-                  {item.note && (
-                    <p className={styles.wishMessage}>{item.note}</p>
-                  )}
-                </article>
-              ))}
+              <div className={styles.responseToolbar}>
+                <div className={styles.panelHeading}>
+                  <div className={styles.panelHeadingIcon}>
+                    <UsersRound size={19} />
+                  </div>
+                  <div>
+                    <h2>
+                      Qatnashish javoblari{" "}
+                      <small>({data.totals.responses})</small>
+                    </h2>
+                    <p>Mehmonlarning kelishi haqidagi javoblari.</p>
+                  </div>
+                </div>
+                <div className={styles.responseControls}>
+                  <label className={styles.responseSearch}>
+                    <Search size={17} aria-hidden="true" />
+                    <input
+                      type="search"
+                      aria-label="Mehmon nomi yoki izohi bo‘yicha qidirish"
+                      value={responseQuery}
+                      placeholder="Mehmon nomi yoki izohi bo‘yicha qidiring…"
+                      onChange={(event) => {
+                        setResponseQuery(event.target.value);
+                        setPage(0);
+                      }}
+                    />
+                  </label>
+                  <div className={styles.responseFilter}>
+                    <SoftSelect
+                      value={responseStatus}
+                      label="Javob holati"
+                      squareOptions
+                      options={[
+                        { value: "all", label: "Barchasi" },
+                        { value: "yes", label: "Kelaman" },
+                        { value: "maybe", label: "Aniq emas" },
+                        { value: "no", label: "Kela olmayman" },
+                      ]}
+                      onChange={(value) => {
+                        setResponseStatus(value as typeof responseStatus);
+                        setPage(0);
+                      }}
+                    />
+                  </div>
+                </div>
+              </div>
+              {!data.responses.length && (
+                <p>
+                  {responseQuery.trim() || responseStatus !== "all"
+                    ? "Bu qidiruv yoki holat bo‘yicha javob topilmadi."
+                    : "Hozircha javob yo‘q."}
+                </p>
+              )}
+              {data.responses.length > 0 && (
+                <div
+                  className={styles.responseTable}
+                  role="table"
+                  aria-label="Qatnashish javoblari"
+                >
+                  <div className={styles.responseTableHead} role="row">
+                    <span role="columnheader">Mehmon</span>
+                    <span role="columnheader">Javob</span>
+                    <span role="columnheader">Qo‘shimcha izoh</span>
+                    <span role="columnheader">Vaqt</span>
+                    <span aria-hidden="true" />
+                  </div>
+                  {data.responses.map((item) => (
+                    <div
+                      className={styles.responseRow}
+                      role="row"
+                      key={item.id}
+                    >
+                      <div className={styles.guestCell} role="cell">
+                        <span className={styles.guestAvatar} aria-hidden="true">
+                          {item.name
+                            .trim()
+                            .split(/\s+/)
+                            .map((part) => part[0])
+                            .slice(0, 2)
+                            .join("")
+                            .toUpperCase()}
+                        </span>
+                        <strong>{item.name}</strong>
+                      </div>
+                      <div role="cell">
+                        <span
+                          className={`${styles.responseStatus} ${styles[`status_${item.status}`]}`}
+                        >
+                          {item.status === "yes" ? (
+                            <Check size={15} />
+                          ) : item.status === "no" ? (
+                            <span className={styles.statusCross}>×</span>
+                          ) : (
+                            <span className={styles.statusQuestion}>?</span>
+                          )}
+                          {item.status === "yes"
+                            ? "Kelaman"
+                            : item.status === "no"
+                              ? "Kela olmayman"
+                              : "Aniq emasman"}
+                        </span>
+                      </div>
+                      <div className={styles.responseNote} role="cell">
+                        {item.note || <span className={styles.noNote}>—</span>}
+                      </div>
+                      <time
+                        role="cell"
+                        className={styles.responseTime}
+                        dateTime={item.createdAt}
+                      >
+                        {formatDate(
+                          item.createdAt,
+                          "uz-Latn",
+                          invitation.timezone,
+                          {
+                            day: "numeric",
+                            month: "short",
+                            hour: "2-digit",
+                            minute: "2-digit",
+                          },
+                        )}
+                      </time>
+                      <details className={styles.responseMenu} role="cell">
+                        <summary aria-label={`${item.name} javobi amallari`}>
+                          <MoreHorizontal size={18} />
+                        </summary>
+                        <div>
+                          <button
+                            type="button"
+                            onClick={() => void copyResponse(item)}
+                          >
+                            <Copy size={15} />
+                            {copiedResponseId === item.id
+                              ? "Nusxalandi"
+                              : "Javobni nusxalash"}
+                          </button>
+                        </div>
+                      </details>
+                    </div>
+                  ))}
+                </div>
+              )}
             </section>
           )}
           {section === "wishes" && (
             <section className={styles.sectionPanel} role="tabpanel">
               <div className={styles.sectionHeading}>
-                <h2>
-                  Mehmonlar tilaklari <small>({data.wishes.length})</small>
-                </h2>
+                <div className={styles.panelHeading}>
+                  <div className={styles.panelHeadingIcon}>
+                    <Heart size={19} />
+                  </div>
+                  <div>
+                    <span className={styles.panelEyebrow}>SAMIMIY SO‘ZLAR</span>
+                    <h2>
+                      Mehmonlar tilaklari <small>({data.wishes.length})</small>
+                    </h2>
+                  </div>
+                </div>
                 <div className={styles.filter}>
                   <span>Ko‘rsatish</span>
                   <div className={styles.filterSelect}>
@@ -313,10 +547,9 @@ export function InvitationActivity({
                 )
                 .map((item) => (
                   <article className={styles.wishCard} key={item.id}>
-                    <header className={styles.wishHeader}></header>
                     <div className={styles.wishMessage}>
                       <div className={styles.wishMessageHeading}>
-                        <span>
+                        <span className={styles.wishAuthor}>
                           <UserRound size={15} /> {item.name}
                         </span>
                         <time dateTime={item.createdAt}>
@@ -337,6 +570,19 @@ export function InvitationActivity({
                       </div>
                       <p className={styles.message}>{item.message}</p>
                     </div>
+                    <span
+                      className={`${styles.wishStatus} ${item.status === "pending" ? styles.pending : styles.approved}`}
+                    >
+                      {item.status === "pending" ? (
+                        <>
+                          <CircleDashed size={14} /> Kutilmoqda
+                        </>
+                      ) : (
+                        <>
+                          <Check size={14} /> Tasdiqlangan
+                        </>
+                      )}
+                    </span>
                     <div
                       className={`${styles.wishActions} ${item.status === "pending" ? "" : styles.singleWishAction}`}
                     >
@@ -369,7 +615,19 @@ export function InvitationActivity({
           )}
           {section === "receipts" && (
             <section className={styles.sectionPanel} role="tabpanel">
-              <h2>To‘yona cheklari · faqat sizga ko‘rinadi</h2>
+              <div className={styles.panelHeading}>
+                <div className={styles.panelHeadingIcon}>
+                  <ReceiptText size={19} />
+                </div>
+                <div>
+                  <span className={styles.panelEyebrow}>
+                    SHAXSIY VA XAVFSIZ
+                  </span>
+                  <h2>
+                    To‘yona cheklari <small>· faqat sizga</small>
+                  </h2>
+                </div>
+              </div>
               <p>
                 AI va bank tekshiruvi yo‘q. Pul hisobingizga tushganini o‘zingiz
                 tekshirib, belgi qo‘ying.
@@ -377,18 +635,21 @@ export function InvitationActivity({
               {!data.receipts.length && <p>Hozircha chek yo‘q.</p>}
               <div className={styles.receiptGrid}>
                 {data.receipts.map((item) => (
-                  <article key={item.id}>
+                  <article className={styles.receiptCard} key={item.id}>
                     <strong>{item.giverNames}</strong>
                     <p>
                       {item.cardHolder} · •••• {item.cardLast4}
                     </p>
                     <p>
                       <a
+                        className={styles.receiptLink}
                         href={item.url}
                         target="_blank"
                         rel="noopener noreferrer"
                       >
-                        {item.filename || "Chekni ochish"} ↗
+                        <ReceiptText size={16} />{" "}
+                        {item.filename || "Chekni ochish"}{" "}
+                        <ArrowUpRight size={15} />
                       </a>
                     </p>
                     <small>
@@ -421,7 +682,19 @@ export function InvitationActivity({
           )}
           {section === "intentions" && (
             <section className={styles.sectionPanel} role="tabpanel">
-              <h2>Sovg‘a niyatlari · pul o‘tkazilmagan</h2>
+              <div className={styles.panelHeading}>
+                <div className={styles.panelHeadingIcon}>
+                  <Gift size={19} />
+                </div>
+                <div>
+                  <span className={styles.panelEyebrow}>
+                    MEHMONLAR E’TIBORI
+                  </span>
+                  <h2>
+                    Sovg‘a niyatlari <small>· pul o‘tkazilmagan</small>
+                  </h2>
+                </div>
+              </div>
               <p>
                 Bu yozuvlar mehmonlarning niyatidir. Platforma pul qabul
                 qilmaydi yoki o‘tkazmaydi.
@@ -430,7 +703,7 @@ export function InvitationActivity({
                 <p>Hozircha sovg‘a niyati yo‘q.</p>
               )}
               {data.giftIntentions?.map((item) => (
-                <article key={item.id}>
+                <article className={styles.intentionCard} key={item.id}>
                   <strong>{item.senderName}</strong>
                   <p>
                     {Number(item.amount).toLocaleString("uz-UZ")}{" "}
@@ -456,9 +729,13 @@ export function InvitationActivity({
             >
               Oldingi
             </button>
-            <span>{page + 1}-sahifa</span>
+            <span className={styles.pageIndicator}>{page + 1}-sahifa</span>
             <button
-              disabled={!data.hasMore || busy}
+              disabled={
+                !(section === "responses"
+                  ? data.responseHasMore
+                  : data.hasMore) || busy
+              }
               onClick={() => setPage((value) => value + 1)}
             >
               Keyingi
