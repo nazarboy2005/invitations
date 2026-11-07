@@ -2858,7 +2858,7 @@ export function Studio({
                       content: { ...current.content, [locale]: { ...getContent(current, locale), address: event.target.value } },
                     } : current)} />
                 </Field>
-                {(!capabilities.imageFields || capabilities.imageFields.includes("landmark")) && <Field label="Mo‘ljal va qo‘shimcha yo‘l-yo‘riq" icon={<Signpost size={14} aria-hidden="true" />}>
+                {(!capabilities.imageFields || capabilities.imageFields.includes("landmark")) && <Field label="Mo‘ljal va yo‘l-yo‘riq" icon={<Signpost size={14} aria-hidden="true" />}>
                   <textarea
                     value={content.landmark}
                     rows={2}

@@ -29,6 +29,11 @@ const weekdays = ["Du", "Se", "Ch", "Pa", "Ju", "Sh", "Ya"];
 const pad = (value: number) => String(value).padStart(2, "0");
 const toDateValue = (date: Date) =>
   `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`;
+const suggestedDateValue = () => {
+  const date = new Date();
+  date.setDate(date.getDate() + 10);
+  return toDateValue(date);
+};
 
 function displayDate(value: string) {
   const [year, month, day] = value.split("-").map(Number);
@@ -53,20 +58,28 @@ export function DateTimePicker({
   const initialDate = value.slice(0, 10);
   const [open, setOpen] = useState(false);
   const [selectedDate, setSelectedDate] = useState(initialDate);
+  const [draftDate, setDraftDate] = useState(initialDate);
+  const [draftHour, setDraftHour] = useState(value.slice(11, 13));
+  const [draftMinute, setDraftMinute] = useState(value.slice(14, 16));
   const [hour, setHour] = useState(value.slice(11, 13));
   const [minute, setMinute] = useState(value.slice(14, 16));
   const [visibleMonth, setVisibleMonth] = useState(() => {
-    const [year, month] = initialDate.split("-").map(Number);
+    const viewDate = initialDate || suggestedDateValue();
+    const [year, month] = viewDate.split("-").map(Number);
     return year && month
       ? new Date(year, month - 1, 1)
       : new Date(new Date().getFullYear(), new Date().getMonth(), 1);
   });
+  const todayValue = toDateValue(new Date());
 
   useEffect(() => {
     const date = value.slice(0, 10);
     setSelectedDate(date);
+    setDraftDate(date);
     setHour(value.slice(11, 13));
     setMinute(value.slice(14, 16));
+    setDraftHour(value.slice(11, 13));
+    setDraftMinute(value.slice(14, 16));
     const [year, month] = date.split("-").map(Number);
     if (year && month) setVisibleMonth(new Date(year, month - 1, 1));
   }, [value]);
@@ -78,14 +91,15 @@ export function DateTimePicker({
   }, [open, disabled]);
 
   function selectDateTime(date: string, nextHour: string, nextMinute: string) {
-    if (disabled || (minDate && date < minDate) || (maxDate && date > maxDate)) return;
+    const now = new Date();
+    const today = toDateValue(now);
+    const currentMinute = `${pad(now.getHours())}:${pad(now.getMinutes())}`;
+    if (disabled || (minDate && date < minDate) || (maxDate && date > maxDate) || (date === today && `${nextHour}:${nextMinute}` <= currentMinute)) return;
     nextHour ||= "00";
     nextMinute ||= "00";
-    setSelectedDate(date);
-    setHour(nextHour);
-    setMinute(nextMinute);
-    if (date && nextHour && nextMinute)
-      onChange(`${date}T${nextHour}:${nextMinute}`);
+    setDraftDate(date);
+    setDraftHour(nextHour);
+    setDraftMinute(nextMinute);
   }
 
   const days = useMemo(() => {
@@ -223,8 +237,8 @@ export function DateTimePicker({
                       aria-label={`${day} ${months[visibleMonth.getMonth()]} ${visibleMonth.getFullYear()}`}
                       className={`${styles.day} ${dateValue === selectedDate ? styles.selectedDay : ""}`}
                       key={dateValue}
-                      disabled={!!((minDate && dateValue < minDate) || (maxDate && dateValue > maxDate))}
-                      onClick={() => selectDateTime(dateValue, hour, minute)}
+                      disabled={!!((minDate && dateValue < minDate) || (maxDate && dateValue > maxDate) || dateValue < todayValue)}
+                      onClick={() => selectDateTime(dateValue, draftHour || "12", draftMinute || "00")}
                     >
                       {day}
                     </button>
@@ -237,10 +251,10 @@ export function DateTimePicker({
                   <span>Vaqtni tanlang</span>
                 </div>
                 <TimeWheel
-                  hour={hour}
-                  minute={minute}
+                  hour={draftHour}
+                  minute={draftMinute}
                   onChange={(nextHour, nextMinute) =>
-                    selectDateTime(selectedDate, nextHour, nextMinute)
+                    selectDateTime(draftDate, nextHour, nextMinute)
                   }
                 />
               </div>
@@ -254,7 +268,15 @@ export function DateTimePicker({
               <button
                 type="button"
                 className={styles.apply}
-                onClick={() => setOpen(false)}
+                onClick={() => {
+                  if (draftDate && draftHour && draftMinute) {
+                    setSelectedDate(draftDate);
+                    setHour(draftHour);
+                    setMinute(draftMinute);
+                    onChange(`${draftDate}T${draftHour}:${draftMinute}`);
+                  }
+                  setOpen(false);
+                }}
               >
                 Tayyor
               </button>
