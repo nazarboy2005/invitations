@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { resolveTemplateId } from "./template-identity";
 
 export const LOCALES = ["uz-Latn", "uz-Cyrl", "en", "ru"] as const;
 export const localeSchema = z.enum(LOCALES);
@@ -2051,8 +2052,10 @@ export const TEMPLATES: TemplateDefinition[] = [
     published: false,
   },
 ];
-export const templateById = (id: string) =>
-  TEMPLATES.find((item) => item.id === id);
+export const templateById = (id: string) => {
+  const templateId = resolveTemplateId(id);
+  return TEMPLATES.find((item) => item.id === templateId);
+};
 // Some browser builds lack Uzbek ICU data. Keep SSR and hydration identical.
 export function formatPrice(minor: number): string {
   const absolute = Math.abs(minor);
