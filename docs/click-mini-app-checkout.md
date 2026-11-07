@@ -103,8 +103,10 @@ per-order query strings to the registered provider return URL.
 
 The public return page now offers **Telegram’da davom etish**. A read-only
 Telegram `getMe` check found `has_main_web_app=false` for the configured bot
-`taklifnomayasagichbot`. The default link now opens
-`https://t.me/taklifnomayasagichbot` without sending another `/start` command.
+at the time of that check. The active bot is now
+[`Fotiha_Taklifnoma_bot`](https://t.me/Fotiha_Taklifnoma_bot); see
+[bot setup](telegram-bot-setup.md). The default link opens the configured bot
+without sending another `/start` command.
 The verified-payment confirmation and real invitation link arrive automatically
 in that chat. Legacy `payment_return` commands remain supported and now display
 the actual owned order's result using the same formatted message. They do not
@@ -147,7 +149,7 @@ Optional one-tap Main Mini App setup:
 
 1. In BotFather, select this bot and configure/enable its **Main Mini App** with
    the canonical HTTPS `APP_URL` (currently the approved live site is
-   `https://invitations-wk6h.vercel.app`). This differs from its existing menu button.
+   `https://fotiha.uz`). This differs from its existing menu button.
 2. Set server configuration `TELEGRAM_MAIN_MINI_APP_ENABLED=true` and redeploy
    the new code. The return action then uses `?startapp=payment_return`.
 3. Verify on Android that the link opens the configured Mini App and reaches
