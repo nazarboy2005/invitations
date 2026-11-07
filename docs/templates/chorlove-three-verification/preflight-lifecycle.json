@@ -1,0 +1,50 @@
+[
+  {
+    "id": "stained-glass",
+    "saveReopen": true,
+    "creatorUploads": true,
+    "fourLocales": true,
+    "programItems": 4,
+    "story": true,
+    "dressCode": true,
+    "receiptUi": true,
+    "eventCompatibility": true,
+    "switched": false,
+    "publicRender": false,
+    "rsvp": false,
+    "pausePreserved": false,
+    "cover": false
+  },
+  {
+    "id": "sunset",
+    "saveReopen": true,
+    "creatorUploads": true,
+    "fourLocales": true,
+    "programItems": 4,
+    "story": true,
+    "dressCode": true,
+    "receiptUi": true,
+    "eventCompatibility": true,
+    "switched": false,
+    "publicRender": false,
+    "rsvp": false,
+    "pausePreserved": false,
+    "cover": false
+  },
+  {
+    "id": "swan-garden",
+    "saveReopen": true,
+    "creatorUploads": true,
+    "fourLocales": true,
+    "programItems": 4,
+    "story": true,
+    "dressCode": true,
+    "receiptUi": true,
+    "eventCompatibility": true,
+    "switched": false,
+    "publicRender": false,
+    "rsvp": false,
+    "pausePreserved": false,
+    "cover": false
+  }
+]

@@ -7,7 +7,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import type { Invitation, Locale } from "@taklifnoma/contracts";
 import { makeLegacyData } from "@/templates/anor/renderer";
 import { useInvitationExtras } from "@/templates/use-invitation-extras";
-import { getTemplatePreviewVenuePhoto } from "@/modules/catalog/preview-sample";
+import { getTemplatePreviewVenuePhoto, getTemplatePreviewScratchPhoto } from "@/modules/catalog/preview-sample";
 import { CATALOG_PREVIEW_MUSIC } from "@/modules/catalog/catalog-music";
 import { isChorloveTemplate } from "./registry";
 import styles from "./renderer.module.css";
@@ -55,7 +55,7 @@ export function ChorloveInvitation({
   }
 
   const frame = useRef<HTMLIFrameElement>(null);
-  useInvitationMaps(frame);
+  useInvitationMaps(frame, !["stained-glass", "sunset", "swan-garden"].includes(templateId));
   const [frameLocale, setFrameLocale] = useState(locale);
   useEffect(() => setFrameLocale(locale), [locale]);
 
@@ -122,6 +122,11 @@ export function ChorloveInvitation({
             dressCode: false,
             extraPeople: false,
           }
+      : ["stained-glass", "sunset", "swan-garden"].includes(templateId)
+        ? {
+            dressCode: false,
+            receiptHostSelector: '[data-section="gift"]',
+          }
       : undefined,
   );
   const message = useMemo(() => {
@@ -138,9 +143,12 @@ export function ChorloveInvitation({
           music: { enabled: Boolean(music), url: music },
         },
         templateId,
+        sampleScratchPhoto: preview && sampleWishes
+          ? getTemplatePreviewScratchPhoto(templateId)
+          : undefined,
         locale: frameLocale,
         sampleGallery:
-          (templateId === "orchid-amplop" || templateId === "green-gold") &&
+          (["orchid-amplop", "green-gold", "stained-glass", "sunset", "swan-garden"].includes(templateId)) &&
           preview &&
           sampleWishes,
         enabledLocales: invitation.enabledLocales,
@@ -172,7 +180,12 @@ export function ChorloveInvitation({
   const latest = useRef(message);
   latest.current = message;
 
-  const query = new URLSearchParams({ lang: sourceLocale[frameLocale] });
+  // These bridges update their labels in place. Keep the frame URL stable so
+  // switching language preserves the opening, scroll, forms and music choice.
+  const inPlaceLocale = ["stained-glass", "sunset", "swan-garden"].includes(templateId);
+  const query = new URLSearchParams({
+    lang: sourceLocale[inPlaceLocale ? invitation.defaultLocale : frameLocale],
+  });
   if (preview && qaReducedMotion) query.set("qaReducedMotion", "1");
   const namespaced =
     templateId === "osh" ||

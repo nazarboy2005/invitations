@@ -1,0 +1,109 @@
+{
+  "id": "swan-garden",
+  "captureSha256": "4cd5ee12eac4d14f8876120c197f41f8ef94ef2ef83ecf633ce956821dce0b31",
+  "moduleSha256": "6f20457e00f98d3abf233558855566d50b171c5bd25f799e61de4387a5544b18",
+  "assets": [
+    {
+      "file": "assets/bg-loop.mp4",
+      "archiveFile": "images/swan-garden/bg-loop.mp4",
+      "origin": "archive",
+      "sha256": "c13b50251cb878682b3d3dbbd0b10463f627c1e3d2ff6836f09d08a59682a099"
+    },
+    {
+      "file": "assets/bg-poster.webp",
+      "archiveFile": "images/swan-garden/bg-poster.webp",
+      "origin": "archive",
+      "sha256": "ffd9fc76a41f4f9e971bfa6365a7638fa8471c027b94ec9e5eca11d4652ac5bc"
+    },
+    {
+      "file": "assets/envelope.mp4",
+      "archiveFile": "images/swan-garden/envelope.mp4",
+      "origin": "archive",
+      "sha256": "9502297c3bfeab3a73c3dd11ec29db99b4e3359d2093e91d36605952731c17a8"
+    },
+    {
+      "file": "assets/envelope-poster.webp",
+      "archiveFile": "images/swan-garden/envelope-poster.webp",
+      "origin": "archive",
+      "sha256": "e3a21dc884a47d71afb60eac66a4ee188406ff218e3abf9088c8f5a7eb66ec09"
+    },
+    {
+      "file": "assets/hero.mp4",
+      "archiveFile": "images/swan-garden/hero.mp4",
+      "origin": "archive",
+      "sha256": "22470dab8affd10b3937af8c469918ce429a3f9c5bc9d0cc59035294c07c64b2"
+    },
+    {
+      "file": "assets/hero-poster.webp",
+      "archiveFile": "images/swan-garden/hero-poster.webp",
+      "origin": "archive",
+      "sha256": "fdf51d74ed1a579828f36b3341098291d7129740c7883e446c04efc7dbf3dd1f"
+    },
+    {
+      "file": "assets/icon-timeline.webp",
+      "archiveFile": "images/swan-garden/icon-timeline.webp",
+      "origin": "recovered-original",
+      "sha256": "06a623e0e89cc61a6b8ce9adf2671944be4d614f09037cf18f4ccaea78837ba9"
+    },
+    {
+      "file": "assets/timeline-champagne.webp",
+      "archiveFile": "images/swan-garden/timeline-champagne.webp",
+      "origin": "recovered-original",
+      "sha256": "afc7ed578d47e46c7c49454553df696ec1d1daea3b42c6ff141e770424345886"
+    },
+    {
+      "file": "assets/timeline-car.webp",
+      "archiveFile": "images/swan-garden/timeline-car.webp",
+      "origin": "recovered-original",
+      "sha256": "9c2f33e4ad52383ba6702b2f68d205cfb10d8a5ecbabd504025c7c7f81122d7d"
+    },
+    {
+      "file": "assets/icon-dresscode.webp",
+      "archiveFile": "images/swan-garden/icon-dresscode.webp",
+      "origin": "recovered-original",
+      "sha256": "e0af3b91ffa7732f19958f6de06d0e04d1d4b32431e1bcb8dbf87bc937e36d21"
+    },
+    {
+      "file": "assets/icon-gift.webp",
+      "archiveFile": "images/swan-garden/icon-gift.webp",
+      "origin": "recovered-original",
+      "sha256": "6c375a8bbe4e21b02164a0f74272f16e43bbc35796dc6e3a469ac071172e99c7"
+    },
+    {
+      "file": "assets/gallery-2.webp",
+      "archiveFile": "images/templates/orchid-amplop/gallery-2.webp",
+      "origin": "archive",
+      "sha256": "bcfd6989e53e220164e8d39368a848eed1185c07af73f934c81181af2a690d45"
+    },
+    {
+      "file": "assets/gallery-1.webp",
+      "archiveFile": "images/templates/orchid-amplop/gallery-1.webp",
+      "origin": "archive",
+      "sha256": "8578f6d5f3c2ddc1759c5116dfb4b68cd47f86ea700bfa3777a75fb916734a0b"
+    },
+    {
+      "file": "assets/gallery-3.webp",
+      "archiveFile": "images/templates/orchid-amplop/gallery-3.webp",
+      "origin": "archive",
+      "sha256": "c747d5f2c007ec78d46196fcbf157da871fd4bebd9f0a07863087e9a5787e320"
+    },
+    {
+      "file": "assets/gallery-6.webp",
+      "archiveFile": "images/templates/orchid-amplop/gallery-6.webp",
+      "origin": "archive",
+      "sha256": "35c81b38de8fb85f182b1c1c6149bf9926b2a55c10e845f617fc87605ec63e11"
+    },
+    {
+      "file": "assets/gallery-4.webp",
+      "archiveFile": "images/templates/orchid-amplop/gallery-4.webp",
+      "origin": "archive",
+      "sha256": "c3d590110524cb7b0148c08aa1543d569f16f54b4672d802bebcf778776df558"
+    },
+    {
+      "file": "assets/gallery-5.webp",
+      "archiveFile": "images/templates/orchid-amplop/gallery-5.webp",
+      "origin": "archive",
+      "sha256": "bb3c25700cc2aa81a40c46bb20c22cd13403d3e9bcf196c175a94fb7b49c8a2e"
+    }
+  ]
+}

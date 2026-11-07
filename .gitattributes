@@ -1,0 +1,4 @@
+# Preserve exact captured-source hashes across Windows and Unix checkouts.
+apps/web/public/templates/stained-glass/source/** -text
+apps/web/public/templates/sunset/source/** -text
+apps/web/public/templates/swan-garden/source/** -text

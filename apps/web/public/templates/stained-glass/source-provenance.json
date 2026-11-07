@@ -1,0 +1,451 @@
+{
+  "id": "stained-glass",
+  "captureSha256": "ea4e682d9f592ecef5305e853b9af439ada8a7ce6ac22e7d507402549622a94d",
+  "moduleSha256": "bed0f81144641c32c46488f1316815d33e3c1f2175042659052b6e5671ab1f51",
+  "assets": [
+    {
+      "file": "assets/intro-doors-c.mp4",
+      "archiveFile": "images/stained-glass/intro-doors-c.mp4",
+      "origin": "archive",
+      "sha256": "b73a9f94b8659685a92a14cde98d9d074eed757186673b1adc9b18dc8c236e9d"
+    },
+    {
+      "file": "assets/intro-closed.webp",
+      "archiveFile": "images/stained-glass/intro-closed.webp",
+      "origin": "archive",
+      "sha256": "91889c1e79ac36fe69c9dca7448dd928c2b7c1c5c445d5e6f5212893d239f6ac"
+    },
+    {
+      "file": "assets/hero-final.webp",
+      "archiveFile": "images/stained-glass/hero-final.webp",
+      "origin": "archive",
+      "sha256": "2d0d6a0cd2943059a0797aa99a7cabbe340b881b97279361cd643b63c5d5e02b"
+    },
+    {
+      "file": "assets/countdown-flourish.png",
+      "archiveFile": "images/stained-glass/countdown-flourish.png",
+      "origin": "archive",
+      "sha256": "8a39d4102c1bf38a5cb6dbecc2bb885af08527dfa173652fe305b6ce6a685ab6"
+    },
+    {
+      "file": "assets/hourglass.webp",
+      "archiveFile": "images/stained-glass/hourglass.webp",
+      "origin": "archive",
+      "sha256": "79daafe55e0813938c9e74effbf3b9ba2b314a4fe524d96b3147469368ab316a"
+    },
+    {
+      "file": "assets/countdown-ornament.webp",
+      "archiveFile": "images/stained-glass/countdown-ornament.webp",
+      "origin": "archive",
+      "sha256": "dcee6dab94c96738f4516e683327eb9c5a774256defb63e8f6125205109071bb"
+    },
+    {
+      "file": "assets/couple-scratch-inspo.webp",
+      "archiveFile": "images/stained-glass/couple-scratch-inspo.webp",
+      "origin": "archive",
+      "sha256": "bed3f86265a08d453f302b36c247289bd9dc0a32f6a8e92366c8f4bfc8f8f323"
+    },
+    {
+      "file": "assets/glass-frame.webp",
+      "archiveFile": "images/stained-glass/glass-frame.webp",
+      "origin": "archive",
+      "sha256": "93b714a13af5e9363b97d4bcdb643c6e078f1bde0ab2ae6ba8df5ee02b7a8d93"
+    },
+    {
+      "file": "assets/dove-left-base.webp",
+      "archiveFile": "images/stained-glass/dove-left-base.webp",
+      "origin": "archive",
+      "sha256": "16aa39bcdd8aa998a7c02292363a60d2811eb526e8bf5eb846396faef59a5e7c"
+    },
+    {
+      "file": "assets/dove-left-leaf9.png",
+      "archiveFile": "images/stained-glass/dove-left-leaf9.png",
+      "origin": "archive",
+      "sha256": "6b8bd08c9f88b362cf2b450ac2565da946dc891a5b07a922dc71a3c5261b8e93"
+    },
+    {
+      "file": "assets/dove-left-leaf8.png",
+      "archiveFile": "images/stained-glass/dove-left-leaf8.png",
+      "origin": "archive",
+      "sha256": "915ecc557105ce865ad3dd89135efde9784d345a8c874051f8bf45952e5f7be5"
+    },
+    {
+      "file": "assets/dove-left-leaf2.png",
+      "archiveFile": "images/stained-glass/dove-left-leaf2.png",
+      "origin": "archive",
+      "sha256": "91fe57d0aa3c50c9cd9a09d5038562c4f1bd01d3a663259ef36f8f6ffc20c3b2"
+    },
+    {
+      "file": "assets/dove-left-leaf10.png",
+      "archiveFile": "images/stained-glass/dove-left-leaf10.png",
+      "origin": "archive",
+      "sha256": "df7504a799d497e4e2b14c396eef1b08ba3d9fe6f8906aa013efd0de1b3d6695"
+    },
+    {
+      "file": "assets/dove-right-base.webp",
+      "archiveFile": "images/stained-glass/dove-right-base.webp",
+      "origin": "archive",
+      "sha256": "245a055fc1f72d39743ad9cb745934b243b21389757ad408ff65153b563d8bb1"
+    },
+    {
+      "file": "assets/dove-right-leaf5.png",
+      "archiveFile": "images/stained-glass/dove-right-leaf5.png",
+      "origin": "archive",
+      "sha256": "fe5754639b5ecc27801b727773084a3e3eb197e498b8395f0b09e79f881df863"
+    },
+    {
+      "file": "assets/dove-right-leaf3.png",
+      "archiveFile": "images/stained-glass/dove-right-leaf3.png",
+      "origin": "archive",
+      "sha256": "3560d67f904bf10402a2bb19da8fcef7aad8b3e694a479f6a5cc459ca2412a46"
+    },
+    {
+      "file": "assets/dove-right-leaf2.png",
+      "archiveFile": "images/stained-glass/dove-right-leaf2.png",
+      "origin": "archive",
+      "sha256": "8c9c37fd6e746dfcecd8383166ca2137fda2c7e49d9a50c43e64ec22cdaf57d3"
+    },
+    {
+      "file": "assets/dove-right-leaf4.png",
+      "archiveFile": "images/stained-glass/dove-right-leaf4.png",
+      "origin": "archive",
+      "sha256": "f130b75d30ec19efadbaf72559f70aefb4c7dc60409a5d75a5a444088149f07b"
+    },
+    {
+      "file": "assets/venue-frame-glass.webp",
+      "archiveFile": "images/stained-glass/venue-frame-glass.webp",
+      "origin": "archive",
+      "sha256": "d99113e2f5d9e69718cefab72a6fb7bb6b609dc32cc92d6b3e68fbe4b0cbd548"
+    },
+    {
+      "file": "assets/venue-palace-ivy-glass.webp",
+      "archiveFile": "images/stained-glass/venue-palace-ivy-glass.webp",
+      "origin": "archive",
+      "sha256": "06a7172483228fe3476a8e02bf84a56f075a0d73808e86220fbace4154f23197"
+    },
+    {
+      "file": "assets/dancing-couple-glass.webp",
+      "archiveFile": "images/stained-glass/dancing-couple-glass.webp",
+      "origin": "archive",
+      "sha256": "ec93cdf98d36621fc7f40f25a6277d93ffd0685e4d1633bdbc54e9fc173ee990"
+    },
+    {
+      "file": "assets/garland-chains.webp",
+      "archiveFile": "images/stained-glass/garland-chains.webp",
+      "origin": "archive",
+      "sha256": "edb86ba162cdc23751e055dbd613abe08a348f38a7fc1e4cc87cff6b2726d3bd"
+    },
+    {
+      "file": "assets/garland-pendant-01.png",
+      "archiveFile": "images/stained-glass/garland-pendant-01.png",
+      "origin": "archive",
+      "sha256": "b22ed78e65be48125702d4e85165d752fbeb6604e42543c439ae1c818a169ed9"
+    },
+    {
+      "file": "assets/garland-pendant-02.png",
+      "archiveFile": "images/stained-glass/garland-pendant-02.png",
+      "origin": "archive",
+      "sha256": "1fa64e8b5913f0209c36d3bfd0a5759fb7bdb809967f5e98a00e5b6add650825"
+    },
+    {
+      "file": "assets/garland-pendant-03.png",
+      "archiveFile": "images/stained-glass/garland-pendant-03.png",
+      "origin": "archive",
+      "sha256": "faa82b3de3e58dcad9a3edacff79fcf32a9c256474d0747c96165ae2a0dc5d69"
+    },
+    {
+      "file": "assets/garland-pendant-04.png",
+      "archiveFile": "images/stained-glass/garland-pendant-04.png",
+      "origin": "archive",
+      "sha256": "d37217ad385167a496d335eaca679cef1cbb50fc8522a80698d95d9be7b67fc1"
+    },
+    {
+      "file": "assets/garland-pendant-05.png",
+      "archiveFile": "images/stained-glass/garland-pendant-05.png",
+      "origin": "archive",
+      "sha256": "78d1a36ea2ad60e39f3e3c7fee4b47d09cd5afcf0e5ed4d5424fb35b79645d6c"
+    },
+    {
+      "file": "assets/garland-pendant-06.png",
+      "archiveFile": "images/stained-glass/garland-pendant-06.png",
+      "origin": "archive",
+      "sha256": "03100d18770e24252f417a94e1bdd72257ff410fdcd75b62ed42245d390b7da7"
+    },
+    {
+      "file": "assets/garland-pendant-07.png",
+      "archiveFile": "images/stained-glass/garland-pendant-07.png",
+      "origin": "archive",
+      "sha256": "cbd0898edc26ac7271e230b92f5adbee935fbe6d2d2194d9264ac3b74160f673"
+    },
+    {
+      "file": "assets/garland-pendant-08.png",
+      "archiveFile": "images/stained-glass/garland-pendant-08.png",
+      "origin": "archive",
+      "sha256": "0d58d9f72e5e70075701091cb624679e623f69db71749eb4f82957a528d79fc3"
+    },
+    {
+      "file": "assets/garland-pendant-09.png",
+      "archiveFile": "images/stained-glass/garland-pendant-09.png",
+      "origin": "archive",
+      "sha256": "9532be700a0d13d3b3b939b757831b7a057a021aa3930ea5208d685cb7305770"
+    },
+    {
+      "file": "assets/garland-pendant-10.png",
+      "archiveFile": "images/stained-glass/garland-pendant-10.png",
+      "origin": "archive",
+      "sha256": "a972723c2948a7b566aaa7b445dbaefc17433b585ca7e70e00679c090ff167e2"
+    },
+    {
+      "file": "assets/garland-pendant-11.png",
+      "archiveFile": "images/stained-glass/garland-pendant-11.png",
+      "origin": "archive",
+      "sha256": "14e89c9e5b7958445a18adb91b0373f672788c03f6d109934b8ba72eb8c28bb9"
+    },
+    {
+      "file": "assets/garland-pendant-12.png",
+      "archiveFile": "images/stained-glass/garland-pendant-12.png",
+      "origin": "archive",
+      "sha256": "2e6af556de4ca820a7ba9fb7a5c3778201c1ddb6281fc565cc5f65cc58d1bdaa"
+    },
+    {
+      "file": "assets/garland-pendant-13.png",
+      "archiveFile": "images/stained-glass/garland-pendant-13.png",
+      "origin": "archive",
+      "sha256": "bcac9ca0b368f6cbb74a46ac9544d6470f01ee276f574ee48cbc6057cbe6118e"
+    },
+    {
+      "file": "assets/garland-pendant-14.png",
+      "archiveFile": "images/stained-glass/garland-pendant-14.png",
+      "origin": "archive",
+      "sha256": "68be6d34099d8f97285a7e19426265a7ad736de8c895a3a81b3541b1111d7c80"
+    },
+    {
+      "file": "assets/garland-pendant-15.png",
+      "archiveFile": "images/stained-glass/garland-pendant-15.png",
+      "origin": "archive",
+      "sha256": "9bc71147ceda317ababefec51577144afbe7ba8cde7caf97d14528469a47717b"
+    },
+    {
+      "file": "assets/garland-pendant-16.png",
+      "archiveFile": "images/stained-glass/garland-pendant-16.png",
+      "origin": "archive",
+      "sha256": "66652c29c7124f17e02a3316e93b42a7ff6f3cb59b3b4b71c8a9d88009dde48a"
+    },
+    {
+      "file": "assets/garland-pendant-17.png",
+      "archiveFile": "images/stained-glass/garland-pendant-17.png",
+      "origin": "archive",
+      "sha256": "810c5bad90fd9b810d1636f61eb3b4448a1d4db05b43b8ba5d4d034de302a33a"
+    },
+    {
+      "file": "assets/garland-pendant-18.png",
+      "archiveFile": "images/stained-glass/garland-pendant-18.png",
+      "origin": "archive",
+      "sha256": "448599b2f8fcee0ae69d6fcaefaf223aecd45d17f7a3ab451ff2237e59e1c5a6"
+    },
+    {
+      "file": "assets/garland-pendant-19.png",
+      "archiveFile": "images/stained-glass/garland-pendant-19.png",
+      "origin": "archive",
+      "sha256": "f8fea8d13d5120ccfe99bf3347786bb69fa69224703afad3144e002d52a9f754"
+    },
+    {
+      "file": "assets/garland-pendant-20.png",
+      "archiveFile": "images/stained-glass/garland-pendant-20.png",
+      "origin": "archive",
+      "sha256": "e80d2baba2d396a504804c9488334b8d9163abe5ebe1ebea5f7246f5d8508820"
+    },
+    {
+      "file": "assets/garland-pendant-21.png",
+      "archiveFile": "images/stained-glass/garland-pendant-21.png",
+      "origin": "archive",
+      "sha256": "cf72bb9da3cf94041e50b9a8ff7224c2d0ca9b76025257bb163ede04812d3e74"
+    },
+    {
+      "file": "assets/garland-pendant-22.png",
+      "archiveFile": "images/stained-glass/garland-pendant-22.png",
+      "origin": "archive",
+      "sha256": "9e00efef84c76d64f2755d2308110104c4531bded45209ba4cb9020d23ce6f68"
+    },
+    {
+      "file": "assets/champagne-pour.webp",
+      "archiveFile": "images/stained-glass/champagne-pour.webp",
+      "origin": "archive",
+      "sha256": "09d9952543fe3ddc1f8442da1497febf0561991f2bbdb1f97fb6e7ad959771c5"
+    },
+    {
+      "file": "assets/icon-arrival.webp",
+      "archiveFile": "images/stained-glass/icon-arrival.webp",
+      "origin": "archive",
+      "sha256": "a28f8a5c1211e988f6b40ab522a65e6727d7dbb6de4471ce71190d957724aed6"
+    },
+    {
+      "file": "assets/icon-ceremony.webp",
+      "archiveFile": "images/stained-glass/icon-ceremony.webp",
+      "origin": "archive",
+      "sha256": "f5e7c9bcba8fcd21d5711818e543814a83c349ddf2c519ea305ab01168caf8b5"
+    },
+    {
+      "file": "assets/icon-cocktail.webp",
+      "archiveFile": "images/stained-glass/icon-cocktail.webp",
+      "origin": "archive",
+      "sha256": "91ba29b9d1296ccccb879533ac5103ccb888b3ee709409e4011d3bc2e3257109"
+    },
+    {
+      "file": "assets/gallery-2.webp",
+      "archiveFile": "images/templates/orchid-amplop/gallery-2.webp",
+      "origin": "archive",
+      "sha256": "bcfd6989e53e220164e8d39368a848eed1185c07af73f934c81181af2a690d45"
+    },
+    {
+      "file": "assets/gallery-1.webp",
+      "archiveFile": "images/templates/orchid-amplop/gallery-1.webp",
+      "origin": "archive",
+      "sha256": "8578f6d5f3c2ddc1759c5116dfb4b68cd47f86ea700bfa3777a75fb916734a0b"
+    },
+    {
+      "file": "assets/gallery-3.webp",
+      "archiveFile": "images/templates/orchid-amplop/gallery-3.webp",
+      "origin": "archive",
+      "sha256": "c747d5f2c007ec78d46196fcbf157da871fd4bebd9f0a07863087e9a5787e320"
+    },
+    {
+      "file": "assets/gallery-6.webp",
+      "archiveFile": "images/templates/orchid-amplop/gallery-6.webp",
+      "origin": "archive",
+      "sha256": "35c81b38de8fb85f182b1c1c6149bf9926b2a55c10e845f617fc87605ec63e11"
+    },
+    {
+      "file": "assets/gallery-4.webp",
+      "archiveFile": "images/templates/orchid-amplop/gallery-4.webp",
+      "origin": "archive",
+      "sha256": "c3d590110524cb7b0148c08aa1543d569f16f54b4672d802bebcf778776df558"
+    },
+    {
+      "file": "assets/gallery-5.webp",
+      "archiveFile": "images/templates/orchid-amplop/gallery-5.webp",
+      "origin": "archive",
+      "sha256": "bb3c25700cc2aa81a40c46bb20c22cd13403d3e9bcf196c175a94fb7b49c8a2e"
+    },
+    {
+      "file": "assets/glass-texture.webp",
+      "archiveFile": "images/stained-glass/glass-texture.webp",
+      "origin": "archive",
+      "sha256": "57b215bcc423ff649268a1fb73cd54245461505029c8279d66ef46539e8daad1"
+    },
+    {
+      "file": "assets/leaf-01.png",
+      "archiveFile": "images/stained-glass/leaf-01.png",
+      "origin": "recovered-original",
+      "sha256": "f83cc13f1d723c72badf6fb0408a187798066d544129d091407c3748c530d301"
+    },
+    {
+      "file": "assets/leaf-09.png",
+      "archiveFile": "images/stained-glass/leaf-09.png",
+      "origin": "recovered-original",
+      "sha256": "876beb9c8935b931f6d336d12a76c80663e024b8fee5da7db852e95adf763bc9"
+    },
+    {
+      "file": "assets/leaf-13.png",
+      "archiveFile": "images/stained-glass/leaf-13.png",
+      "origin": "recovered-original",
+      "sha256": "ad7ef40897763730ce064699f8f6d28af3d2434b79ccca4b67f1cee0cb3f359d"
+    },
+    {
+      "file": "assets/leaf-02.png",
+      "archiveFile": "images/stained-glass/leaf-02.png",
+      "origin": "recovered-original",
+      "sha256": "11656aa8fe2b2dbace9ece3f6bc222950affb7c1316e2927fc93af3dc2a2dbea"
+    },
+    {
+      "file": "assets/leaf-10.png",
+      "archiveFile": "images/stained-glass/leaf-10.png",
+      "origin": "recovered-original",
+      "sha256": "beeb40b0bdda3c2e9ebb51f39396a3d9500f86678bf93eb8727d332e3d68c31a"
+    },
+    {
+      "file": "assets/leaf-14.png",
+      "archiveFile": "images/stained-glass/leaf-14.png",
+      "origin": "recovered-original",
+      "sha256": "7096c279035a26eb5f3a12a5fbcaca1c2a85f07ffb0deadd4a871da56a3b1461"
+    },
+    {
+      "file": "assets/leaf-06.png",
+      "archiveFile": "images/stained-glass/leaf-06.png",
+      "origin": "recovered-original",
+      "sha256": "f2e3d7e1f4cc15a38a56458166e541f1c0c25bf873c86189ef16131295c88649"
+    },
+    {
+      "file": "assets/leaf-16.png",
+      "archiveFile": "images/stained-glass/leaf-16.png",
+      "origin": "recovered-original",
+      "sha256": "2222177e7249f97b0dd62849abf492b452094f9212fee04256ca9bee19835685"
+    },
+    {
+      "file": "assets/leaf-04.png",
+      "archiveFile": "images/stained-glass/leaf-04.png",
+      "origin": "recovered-original",
+      "sha256": "025c783d7a21c90f6a79dadf4b8642f2cb5a6c8becb31ebfcaa6b79dce79f9bf"
+    },
+    {
+      "file": "assets/gift-glass.webp",
+      "archiveFile": "images/stained-glass/gift-glass.webp",
+      "origin": "recovered-original",
+      "sha256": "4224787f7078c65d3847edcd36768a2d087ad72e174e17d933e5d0a2ab04dcfb"
+    },
+    {
+      "file": "assets/wedding-car-glass.webp",
+      "archiveFile": "images/stained-glass/wedding-car-glass.webp",
+      "origin": "recovered-original",
+      "sha256": "0fd1089a9fd1e22b65e02fb7229e76f1986a2b3100a586477452c51fa569368e"
+    },
+    {
+      "file": "assets/gazebo-glass.webp",
+      "archiveFile": "images/stained-glass/gazebo-glass.webp",
+      "origin": "recovered-original",
+      "sha256": "d8cb73bbac9da12a213f8f99e092979991b471f7148f3a813cec24ac8cc2f90e"
+    },
+    {
+      "file": "assets/gazebo-vines.webp",
+      "archiveFile": "images/stained-glass/gazebo-vines.webp",
+      "origin": "archive",
+      "sha256": "fd1cf4fef14fc4830f76a674aee50960fd7ff33735637784631b5d53d7fc682e"
+    },
+    {
+      "file": "assets/key-main.webp",
+      "archiveFile": "images/stained-glass/key-main.webp",
+      "origin": "recovered-original",
+      "sha256": "383235d0fad96de558ab429c9a9fe918ebef9672205e689b6021709a0724efe5"
+    },
+    {
+      "file": "assets/key-pendant.webp",
+      "archiveFile": "images/stained-glass/key-pendant.webp",
+      "origin": "recovered-original",
+      "sha256": "0f063fd46c6c31314a4778ae5ebf26bd64126ed81108fc268488e3acb9bbea5d"
+    },
+    {
+      "file": "assets/rsvp-arch.webp",
+      "archiveFile": "images/stained-glass/rsvp-arch.webp",
+      "origin": "recovered-original",
+      "sha256": "9b3d02c3c555bdef52392a3c2321f0449f1613dcf204725c2ae1b7f795d98170"
+    },
+    {
+      "file": "assets/leaf-sway-1.png",
+      "archiveFile": "images/stained-glass/leaf-sway-1.png",
+      "origin": "recovered-original",
+      "sha256": "dcbfd851ec285bd8bdacce0b208f4192f4f0c57c381a161137898562f8a775d3"
+    },
+    {
+      "file": "assets/leaf-sway-2.png",
+      "archiveFile": "images/stained-glass/leaf-sway-2.png",
+      "origin": "recovered-original",
+      "sha256": "1d16a44ba4543f739a58e8241e200160bdf5482398563c16a7d1e05ad0c8e6f6"
+    },
+    {
+      "file": "assets/leaf-sway-3.png",
+      "archiveFile": "images/stained-glass/leaf-sway-3.png",
+      "origin": "recovered-original",
+      "sha256": "913421ea64fdacb4b7c8404c52662efeaf3f7b836f6df0905e32f405278b7b46"
+    }
+  ]
+}

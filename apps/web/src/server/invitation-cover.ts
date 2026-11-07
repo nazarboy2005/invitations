@@ -146,6 +146,9 @@ export async function captureCover(invitation: Invitation, cookie = "") {
   });
   const context = await browser.newContext({
     viewport: recipe.viewport,
+    ...(["stained-glass", "sunset", "swan-garden"].includes(invitation.templateId)
+      ? { reducedMotion: "reduce" as const }
+      : {}),
     deviceScaleFactor: 1,
     serviceWorkers: "block",
   });

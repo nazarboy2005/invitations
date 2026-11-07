@@ -1,0 +1,108 @@
+/* Platform controls and motion bindings; captured template styles stay intact. */
+html,
+body {
+  margin: 0;
+  width: 100%;
+  min-height: 100%;
+  background: #faf6ee;
+}
+[data-chorlove-template] [hidden] {
+  display: none !important;
+}
+[data-chorlove-template="stained-glass"] {
+  height: auto !important;
+  min-height: 100dvh;
+  overflow-x: clip !important;
+  overflow-y: visible !important;
+}
+[data-copy],
+[data-field] {
+  overflow-wrap: anywhere;
+}
+[data-reveal] {
+  opacity: 0;
+  will-change: opacity, transform;
+}
+[data-hero-reveal] {
+  opacity: 0;
+}
+[data-opening] {
+  transition:
+    opacity 0.9s ease-in-out,
+    transform 0.9s ease-in-out;
+}
+[data-opening].opening-done {
+  opacity: 0;
+  transform: scale(1.04);
+  pointer-events: none;
+}
+[data-languages] {
+  position: fixed;
+  z-index: 130;
+  top: max(0.5rem, env(safe-area-inset-top));
+  right: 0.5rem;
+  display: flex;
+  gap: 0.15rem;
+  border-radius: 2rem;
+  padding: 0.2rem;
+  background: #fff9edee;
+  color: #4c5b47;
+  box-shadow: 0 3px 18px #0002;
+  font: 600 12px/1.2 sans-serif;
+}
+[data-languages] button {
+  min-width: 2rem;
+  min-height: 2rem;
+  border-radius: 2rem;
+  padding: 0.25rem;
+}
+[data-languages] [aria-pressed="true"] {
+  background: #4c5b47;
+  color: #fff9ed;
+}
+[data-status] {
+  min-height: 1.2em;
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+  overflow-wrap: anywhere;
+}
+[data-chorlove-template] :is(button, a, input, textarea, canvas):focus-visible {
+  outline: 3px solid #c9a46a;
+  outline-offset: 3px;
+}
+[role="radio"][aria-checked="true"] > span:first-child {
+  background: currentColor;
+  box-shadow: inset 0 0 0 3px #fff8;
+}
+[data-gallery-viewport] {
+  touch-action: pan-y;
+}
+[data-gallery-track] {
+  transition: transform 0.5s ease-out;
+  will-change: transform;
+}
+.three-lightbox-open {
+  overflow: hidden !important;
+}
+.yarl__portal [hidden] {
+  display: none !important;
+}
+.three-reduced-motion * {
+  animation: none !important;
+  transition: none !important;
+  scroll-behavior: auto !important;
+}
+.three-reduced-motion [data-reveal] {
+  opacity: 1 !important;
+  filter: none !important;
+}
+[data-program-list].expanded-program {
+  min-height: var(--program-height);
+}
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}

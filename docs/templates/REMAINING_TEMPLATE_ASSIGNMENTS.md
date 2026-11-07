@@ -10,6 +10,10 @@ packaged faithfully; screenshots are comparison evidence, never implementation
 substitutes. Verify original versus packaged source in a browser with normal and
 reduced motion, and verify the catalog art shows the authentic opening.
 
+## Chorlove additions — 8 November 2026
+
+`stained-glass`, `sunset` and `swan-garden` are published additions, not queued work. They now have complete isolated website packages and typed/database registration. Chorlove has 18 website packages and 18 typed catalog entries; 15 have local published flags. The configured database specifically confirms these three additions, with all 131 other catalog rows unchanged by their migrations. See [verification and screenshots](chorlove-three-verification/README.md). Older dated inventories below describe their historical snapshots.
+
 ## Existing assignments and workers dispatched 2026-10-23
 
 | Template | Provider / exact source | Assigned chat | Status | Shared ID / migration | Verification / publication | Notes |

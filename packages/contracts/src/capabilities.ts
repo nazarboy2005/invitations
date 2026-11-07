@@ -23,6 +23,8 @@ export const IMAGE_REQUIRED_FIELDS = [
 ] as const;
 
 export type TemplateCapabilities = {
+  /** Retain authored fields which this renderer does not display when switching. */
+  preserveUnrenderedContent?: boolean;
   imageFields?: readonly ImageContentField[];
   locationQr?: boolean;
   maps: boolean;
@@ -169,6 +171,14 @@ export function normalizeInvitation(invitation: Invitation): Invitation {
       enabled: c.wishes && invitation.wishes.enabled,
       requireApproval: true,
     },
+    ...(c.preserveUnrenderedContent
+      ? {
+          templateData: invitation.templateData,
+          celebrantAge: invitation.celebrantAge,
+          artistLineup: invitation.artistLineup,
+          contacts: invitation.contacts,
+        }
+      : {}),
   };
 }
 

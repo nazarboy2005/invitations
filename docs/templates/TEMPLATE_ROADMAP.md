@@ -955,9 +955,9 @@ The archive contains 28 captured preview snapshots. Each candidate is adapted fr
 | `purple-flower` | Purple Flower | Queued |
 | `red-rose-card` | Red Rose Card | Queued |
 | `royal-purple` | Royal Purple | Queued |
-| `stained-glass` | Stained Glass | Queued |
-| `sunset` | Sunset | Queued |
-| `swan-garden` | Swan Garden | Queued |
+| `stained-glass` | Stained Glass | Published through migrations 0222/0223. Complete isolated source, local assets/videos, typed contract, four locales and reduced motion; mobile/desktop and authenticated lifecycle evidence in [Chorlove three-template verification](chorlove-three-verification/README.md). Other designs retained. |
+| `sunset` | Sunset | Published through migrations 0222/0223. Complete isolated source, local assets/videos, typed contract, four locales and reduced motion; mobile/desktop and authenticated lifecycle evidence in [Chorlove three-template verification](chorlove-three-verification/README.md). Other designs retained. |
+| `swan-garden` | Swan Garden | Published through migrations 0222/0223. Complete isolated source, local assets/videos, typed contract, four locales and reduced motion; mobile/desktop and authenticated lifecycle evidence in [Chorlove three-template verification](chorlove-three-verification/README.md). Other designs retained. |
 | `velvet-romance` | Velvet Romance | Queued |
 
 

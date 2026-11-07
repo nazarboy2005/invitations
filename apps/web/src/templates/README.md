@@ -1,5 +1,12 @@
 # Invitation templates
 
+**Stained Glass**, **Sunset** and **Swan Garden** are complete, published Chorlove
+additions. Their exact source packages, original videos/artwork, local fonts,
+standalone motion and typed contract adapters are under `public/templates`.
+Migrations 0222/0223 register and publish only these three. See
+`docs/templates/chorlove-three-verification/README.md` for browser, source,
+catalog and authenticated lifecycle evidence. Existing templates are retained.
+
 **Lola maktubi**, **Moviy ravoq** and **Sahar ifori** are three original static
 stationery compositions. Their private packages live under `lola-maktubi`,
 `moviy-ravoq-card` and `sahar-ifori`. Each has its own artwork, typography,
@@ -24,15 +31,13 @@ renderer across preview/studio/public display. Registration/publication is in
 migrations 0171/0172; template READMEs and
 `docs/templates/luxury-uzbek-verification` record source adaptations and checks.
 
-This directory contains 34 template renderer folders at different stages of
-integration and review. Static assets and captured source packages are also
-stored under `apps/web/public/templates`; their presence does not make a design
-available in the catalog. Without `DATABASE_URL`, the local typed fallback
-catalog currently exposes 38 published templates. A configured database can
-have a different catalog state. Check the typed catalog and applied migrations
-for current publication status, and see `docs/templates/TEMPLATE_ROADMAP.md`
-for template-by-template integration and release notes. External deployment
-and cloud-service verification remain separate from local renderer checks.
+Renderer folders and public source packages are at different integration stages.
+Their presence does not make a design available in the catalog. The typed
+fallback applies without `DATABASE_URL`; a configured database determines the
+active catalog's publication state. Check the current registry, scoped database
+state and verification records for accurate counts and readiness. Older roadmap
+entries may describe historical stages. External application deployment remains
+separate from catalog publication and local renderer checks.
 
 Keep every future template in its own renderer, styles, assets, and motion
 implementation. When a reference source exists, integrate that exact complete

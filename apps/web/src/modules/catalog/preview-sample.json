@@ -162,6 +162,37 @@
   "startsAt": "2027-06-12T17:00",
   "timezone": "Asia/Tashkent",
   "templateSamples": {
+    "stained-glass": {
+      "scratchPhoto": "/templates/stained-glass/assets/couple-scratch-inspo.webp",
+      "gallery": [
+        {"id": "stained-glass-source-preview-2", "url": "/templates/stained-glass/assets/gallery-2.webp", "alt": "", "caption": ""},
+        {"id": "stained-glass-source-preview-1", "url": "/templates/stained-glass/assets/gallery-1.webp", "alt": "", "caption": ""},
+        {"id": "stained-glass-source-preview-3", "url": "/templates/stained-glass/assets/gallery-3.webp", "alt": "", "caption": ""},
+        {"id": "stained-glass-source-preview-6", "url": "/templates/stained-glass/assets/gallery-6.webp", "alt": "", "caption": ""},
+        {"id": "stained-glass-source-preview-4", "url": "/templates/stained-glass/assets/gallery-4.webp", "alt": "", "caption": ""},
+        {"id": "stained-glass-source-preview-5", "url": "/templates/stained-glass/assets/gallery-5.webp", "alt": "", "caption": ""}
+      ]
+    },
+    "sunset": {
+      "gallery": [
+        {"id": "sunset-source-preview-2", "url": "/templates/sunset/assets/gallery-2.webp", "alt": "", "caption": ""},
+        {"id": "sunset-source-preview-1", "url": "/templates/sunset/assets/gallery-1.webp", "alt": "", "caption": ""},
+        {"id": "sunset-source-preview-3", "url": "/templates/sunset/assets/gallery-3.webp", "alt": "", "caption": ""},
+        {"id": "sunset-source-preview-6", "url": "/templates/sunset/assets/gallery-6.webp", "alt": "", "caption": ""},
+        {"id": "sunset-source-preview-4", "url": "/templates/sunset/assets/gallery-4.webp", "alt": "", "caption": ""},
+        {"id": "sunset-source-preview-5", "url": "/templates/sunset/assets/gallery-5.webp", "alt": "", "caption": ""}
+      ]
+    },
+    "swan-garden": {
+      "gallery": [
+        {"id": "swan-garden-source-preview-2", "url": "/templates/swan-garden/assets/gallery-2.webp", "alt": "", "caption": ""},
+        {"id": "swan-garden-source-preview-1", "url": "/templates/swan-garden/assets/gallery-1.webp", "alt": "", "caption": ""},
+        {"id": "swan-garden-source-preview-3", "url": "/templates/swan-garden/assets/gallery-3.webp", "alt": "", "caption": ""},
+        {"id": "swan-garden-source-preview-6", "url": "/templates/swan-garden/assets/gallery-6.webp", "alt": "", "caption": ""},
+        {"id": "swan-garden-source-preview-4", "url": "/templates/swan-garden/assets/gallery-4.webp", "alt": "", "caption": ""},
+        {"id": "swan-garden-source-preview-5", "url": "/templates/swan-garden/assets/gallery-5.webp", "alt": "", "caption": ""}
+      ]
+    },
     "lace": {
       "gallery": [
         { "id": "lace-source-preview-1", "url": "/templates/lace/assets/gallery-2.webp", "alt": "", "caption": "" },

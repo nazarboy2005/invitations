@@ -1,0 +1,44 @@
+[
+  {
+    "id": "stained-glass",
+    "width": 390,
+    "published": true,
+    "selectable": true,
+    "completePortraitArtwork": true
+  },
+  {
+    "id": "sunset",
+    "width": 390,
+    "published": true,
+    "selectable": true,
+    "completePortraitArtwork": true
+  },
+  {
+    "id": "swan-garden",
+    "width": 390,
+    "published": true,
+    "selectable": true,
+    "completePortraitArtwork": true
+  },
+  {
+    "id": "stained-glass",
+    "width": 1280,
+    "published": true,
+    "selectable": true,
+    "completePortraitArtwork": true
+  },
+  {
+    "id": "sunset",
+    "width": 1280,
+    "published": true,
+    "selectable": true,
+    "completePortraitArtwork": true
+  },
+  {
+    "id": "swan-garden",
+    "width": 1280,
+    "published": true,
+    "selectable": true,
+    "completePortraitArtwork": true
+  }
+]

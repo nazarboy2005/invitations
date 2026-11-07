@@ -24,6 +24,9 @@
 }
 .art[data-format="image"]{aspect-ratio:5/7}
 .art[data-format="image"] .poster{object-fit:contain}
+[data-template-id="stained-glass"] > .art { aspect-ratio: 1046 / 1920; }
+[data-template-id="sunset"] > .art,
+[data-template-id="swan-garden"] > .art { aspect-ratio: 768 / 1364; }
 .poster {
   position: absolute;
   inset: 0;

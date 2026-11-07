@@ -38,6 +38,8 @@ type EventSample = {
 };
 
 type TemplateSample = {
+  /** Preview-only source photo behind a template's scratch reveal. */
+  scratchPhoto?: string;
   /** Preview-only photo captured in a source template without a shared contract field. */
   venuePhoto?: string;
   gallery?: Invitation["gallery"];
@@ -53,6 +55,9 @@ const TEMPLATE_SAMPLES = previewSample.templateSamples as Partial<
 /** Source-only template media for catalog and blank template-selection previews. */
 export function getTemplatePreviewVenuePhoto(templateId: string): string | undefined {
   return TEMPLATE_SAMPLES[templateId]?.venuePhoto;
+}
+export function getTemplatePreviewScratchPhoto(templateId: string): string | undefined {
+  return TEMPLATE_SAMPLES[templateId]?.scratchPhoto;
 }
 /**
  * A presentation-only fixture for catalog and empty template-selection previews.

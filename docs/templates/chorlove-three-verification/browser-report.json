@@ -1,0 +1,232 @@
+[
+  {
+    "id": "stained-glass",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "revealMs": 7596,
+    "motion": {
+      "duration": 7.041667,
+      "time": 7.041667,
+      "frames": 169
+    },
+    "sections": [
+      "hero",
+      "countdown",
+      "scratch",
+      "invitation",
+      "venue",
+      "dress",
+      "program",
+      "gallery",
+      "gift",
+      "contacts",
+      "rsvp",
+      "wishes"
+    ],
+    "locales": [
+      "en",
+      "ru",
+      "uz-Cyrl",
+      "uz-Latn"
+    ],
+    "missing": [],
+    "errors": [],
+    "providerRequests": [],
+    "emptyOptionals": true,
+    "previewForms": true,
+    "reducedMotion": true
+  },
+  {
+    "id": "sunset",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "revealMs": 5698,
+    "motion": {
+      "duration": 5.875,
+      "time": 5.6362,
+      "frames": 140
+    },
+    "sections": [
+      "hero",
+      "countdown",
+      "venue",
+      "program",
+      "dress",
+      "gift",
+      "gallery",
+      "wishes",
+      "rsvp",
+      "contacts",
+      "footer"
+    ],
+    "locales": [
+      "en",
+      "ru",
+      "uz-Cyrl",
+      "uz-Latn"
+    ],
+    "missing": [],
+    "errors": [],
+    "providerRequests": [],
+    "emptyOptionals": true,
+    "previewForms": true,
+    "reducedMotion": true
+  },
+  {
+    "id": "swan-garden",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "revealMs": 5947,
+    "motion": {
+      "duration": 5.875,
+      "time": 5.875,
+      "frames": 141
+    },
+    "sections": [
+      "hero",
+      "countdown",
+      "venue",
+      "program",
+      "dress",
+      "gift",
+      "gallery",
+      "wishes",
+      "rsvp",
+      "contacts",
+      "footer"
+    ],
+    "locales": [
+      "en",
+      "ru",
+      "uz-Cyrl",
+      "uz-Latn"
+    ],
+    "missing": [],
+    "errors": [],
+    "providerRequests": [],
+    "emptyOptionals": true,
+    "previewForms": true,
+    "reducedMotion": true
+  },
+  {
+    "id": "stained-glass",
+    "viewport": {
+      "width": 1280,
+      "height": 800
+    },
+    "revealMs": 7570,
+    "motion": {
+      "duration": 7.041667,
+      "time": 7.041667,
+      "frames": 169
+    },
+    "sections": [
+      "hero",
+      "countdown",
+      "scratch",
+      "invitation",
+      "venue",
+      "dress",
+      "program",
+      "gallery",
+      "gift",
+      "contacts",
+      "rsvp",
+      "wishes"
+    ],
+    "locales": [
+      "en",
+      "ru",
+      "uz-Cyrl",
+      "uz-Latn"
+    ],
+    "missing": [],
+    "errors": [],
+    "providerRequests": [],
+    "emptyOptionals": true,
+    "previewForms": true,
+    "reducedMotion": true
+  },
+  {
+    "id": "sunset",
+    "viewport": {
+      "width": 1280,
+      "height": 800
+    },
+    "revealMs": 5687,
+    "motion": {
+      "duration": 5.875,
+      "time": 5.6193,
+      "frames": 139
+    },
+    "sections": [
+      "hero",
+      "countdown",
+      "venue",
+      "program",
+      "dress",
+      "gift",
+      "gallery",
+      "wishes",
+      "rsvp",
+      "contacts",
+      "footer"
+    ],
+    "locales": [
+      "en",
+      "ru",
+      "uz-Cyrl",
+      "uz-Latn"
+    ],
+    "missing": [],
+    "errors": [],
+    "providerRequests": [],
+    "emptyOptionals": true,
+    "previewForms": true,
+    "reducedMotion": true
+  },
+  {
+    "id": "swan-garden",
+    "viewport": {
+      "width": 1280,
+      "height": 800
+    },
+    "revealMs": 5586,
+    "motion": {
+      "duration": 5.875,
+      "time": 5.5376,
+      "frames": 137
+    },
+    "sections": [
+      "hero",
+      "countdown",
+      "venue",
+      "program",
+      "dress",
+      "gift",
+      "gallery",
+      "wishes",
+      "rsvp",
+      "contacts",
+      "footer"
+    ],
+    "locales": [
+      "en",
+      "ru",
+      "uz-Cyrl",
+      "uz-Latn"
+    ],
+    "missing": [],
+    "errors": [],
+    "providerRequests": [],
+    "emptyOptionals": true,
+    "previewForms": true,
+    "reducedMotion": true
+  }
+]

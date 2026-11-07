@@ -4,8 +4,9 @@ import { publicAsset } from "../lib/public-asset";
 import { useEffect, type RefObject } from "react";
 
 /** Install shared guest actions without changing a template's source composition. */
-export function useInvitationMaps(frame: RefObject<HTMLIFrameElement | null>) {
+export function useInvitationMaps(frame: RefObject<HTMLIFrameElement | null>, enabled = true) {
   useEffect(() => {
+    if (!enabled) return;
     const element = frame.current;
     if (!element) return;
     const install = () => {
@@ -19,5 +20,5 @@ export function useInvitationMaps(frame: RefObject<HTMLIFrameElement | null>) {
     element.addEventListener("load", install);
     install();
     return () => element.removeEventListener("load", install);
-  }, [frame]);
+  }, [frame, enabled]);
 }

@@ -1,0 +1,63 @@
+{
+  "action": "register",
+  "otherTemplatesUnchanged": 131,
+  "migrations": [
+    {
+      "name": "0222_register_chorlove_three.sql"
+    }
+  ],
+  "templates": [
+    {
+      "id": "stained-glass",
+      "name": "Stained Glass",
+      "published": false,
+      "price_minor": "15000000",
+      "currency": "UZS",
+      "format": "web"
+    },
+    {
+      "id": "sunset",
+      "name": "Sunset",
+      "published": false,
+      "price_minor": "15000000",
+      "currency": "UZS",
+      "format": "web"
+    },
+    {
+      "id": "swan-garden",
+      "name": "Swan Garden",
+      "published": false,
+      "price_minor": "15000000",
+      "currency": "UZS",
+      "format": "web"
+    }
+  ],
+  "events": [
+    {
+      "template_id": "stained-glass",
+      "event_type": "wedding"
+    },
+    {
+      "template_id": "sunset",
+      "event_type": "wedding"
+    },
+    {
+      "template_id": "swan-garden",
+      "event_type": "wedding"
+    }
+  ],
+  "categories": [
+    {
+      "template_id": "stained-glass",
+      "category_id": "wedding"
+    },
+    {
+      "template_id": "sunset",
+      "category_id": "wedding"
+    },
+    {
+      "template_id": "swan-garden",
+      "category_id": "wedding"
+    }
+  ]
+}

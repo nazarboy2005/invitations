@@ -1,0 +1,109 @@
+{
+  "id": "sunset",
+  "captureSha256": "97a98bf81d2301b2150d3c22cb5f0f9c7cb5a545721506e04981fd2c035d3d76",
+  "moduleSha256": "b23aedb15c0bc6dd4f765e4048ab9c0c3dca7a807681b98a74f074ac38f7b9ae",
+  "assets": [
+    {
+      "file": "assets/bg-loop.mp4",
+      "archiveFile": "images/sunset/bg-loop.mp4",
+      "origin": "archive",
+      "sha256": "ecc03def60958e7bcb84a66bc947b417051c44b6b70be72483599e37e29f96b5"
+    },
+    {
+      "file": "assets/bg-poster.webp",
+      "archiveFile": "images/sunset/bg-poster.webp",
+      "origin": "archive",
+      "sha256": "a2f41b8fef421ef9a496100a4de64e55a1af63354bfcbda417ad0b1d0415aa13"
+    },
+    {
+      "file": "assets/envelope.mp4",
+      "archiveFile": "images/sunset/envelope.mp4",
+      "origin": "archive",
+      "sha256": "2fa2c625edb346c51129845e2db2377809de4aa5ce1853a9709fb8aeb0ea5574"
+    },
+    {
+      "file": "assets/envelope-poster.webp",
+      "archiveFile": "images/sunset/envelope-poster.webp",
+      "origin": "archive",
+      "sha256": "b23300600b4eb406d7a78a0ae4aa1f82f288f5cf6d229a365b4d2f0e76355f37"
+    },
+    {
+      "file": "assets/hero.mp4",
+      "archiveFile": "images/sunset/hero.mp4",
+      "origin": "archive",
+      "sha256": "792b6f1f0f57fda038fe1096a00ac60ea9d89c0d905b373f5b064dc7a8ab8ff9"
+    },
+    {
+      "file": "assets/hero-poster.webp",
+      "archiveFile": "images/sunset/hero-poster.webp",
+      "origin": "archive",
+      "sha256": "60f308a865bd960abcc7e76c359485912feac0535a3e5917ad7f4b9616e171e6"
+    },
+    {
+      "file": "assets/icon-timeline.webp",
+      "archiveFile": "images/sunset/icon-timeline.webp",
+      "origin": "recovered-original",
+      "sha256": "06a623e0e89cc61a6b8ce9adf2671944be4d614f09037cf18f4ccaea78837ba9"
+    },
+    {
+      "file": "assets/timeline-champagne.webp",
+      "archiveFile": "images/sunset/timeline-champagne.webp",
+      "origin": "recovered-original",
+      "sha256": "afc7ed578d47e46c7c49454553df696ec1d1daea3b42c6ff141e770424345886"
+    },
+    {
+      "file": "assets/timeline-car.webp",
+      "archiveFile": "images/sunset/timeline-car.webp",
+      "origin": "recovered-original",
+      "sha256": "9c2f33e4ad52383ba6702b2f68d205cfb10d8a5ecbabd504025c7c7f81122d7d"
+    },
+    {
+      "file": "assets/icon-dresscode.webp",
+      "archiveFile": "images/sunset/icon-dresscode.webp",
+      "origin": "recovered-original",
+      "sha256": "e0af3b91ffa7732f19958f6de06d0e04d1d4b32431e1bcb8dbf87bc937e36d21"
+    },
+    {
+      "file": "assets/icon-gift.webp",
+      "archiveFile": "images/sunset/icon-gift.webp",
+      "origin": "recovered-original",
+      "sha256": "6c375a8bbe4e21b02164a0f74272f16e43bbc35796dc6e3a469ac071172e99c7"
+    },
+    {
+      "file": "assets/gallery-2.webp",
+      "archiveFile": "images/templates/orchid-amplop/gallery-2.webp",
+      "origin": "archive",
+      "sha256": "bcfd6989e53e220164e8d39368a848eed1185c07af73f934c81181af2a690d45"
+    },
+    {
+      "file": "assets/gallery-1.webp",
+      "archiveFile": "images/templates/orchid-amplop/gallery-1.webp",
+      "origin": "archive",
+      "sha256": "8578f6d5f3c2ddc1759c5116dfb4b68cd47f86ea700bfa3777a75fb916734a0b"
+    },
+    {
+      "file": "assets/gallery-3.webp",
+      "archiveFile": "images/templates/orchid-amplop/gallery-3.webp",
+      "origin": "archive",
+      "sha256": "c747d5f2c007ec78d46196fcbf157da871fd4bebd9f0a07863087e9a5787e320"
+    },
+    {
+      "file": "assets/gallery-6.webp",
+      "archiveFile": "images/templates/orchid-amplop/gallery-6.webp",
+      "origin": "archive",
+      "sha256": "35c81b38de8fb85f182b1c1c6149bf9926b2a55c10e845f617fc87605ec63e11"
+    },
+    {
+      "file": "assets/gallery-4.webp",
+      "archiveFile": "images/templates/orchid-amplop/gallery-4.webp",
+      "origin": "archive",
+      "sha256": "c3d590110524cb7b0148c08aa1543d569f16f54b4672d802bebcf778776df558"
+    },
+    {
+      "file": "assets/gallery-5.webp",
+      "archiveFile": "images/templates/orchid-amplop/gallery-5.webp",
+      "origin": "archive",
+      "sha256": "bb3c25700cc2aa81a40c46bb20c22cd13403d3e9bcf196c175a94fb7b49c8a2e"
+    }
+  ]
+}
