@@ -2,11 +2,20 @@ import type { JSONValue, TransactionSql } from "postgres";
 import { getDb } from "@taklifnoma/database";
 import { currentSession, toSessionUser, verifySameOrigin } from "./auth";
 import { ApiError, apiError, privateHeaders } from "./api";
-import { assertAdminSession } from "./admin-policy";
+import { assertAdminSession, isAdminSessionFresh } from "./admin-policy";
 
 /** Re-read database session/identity and evaluate server role policy; never cache authority. */
 export async function requireAdmin(fresh = true) {
   return toSessionUser(assertAdminSession(await currentSession(), fresh));
+}
+
+/** Verification status is tied to this browser's live session, not an old bot request. */
+export async function getAdminVerification() {
+  const session = assertAdminSession(await currentSession(), false);
+  return {
+    user: toSessionUser(session),
+    verified: isAdminSessionFresh(session),
+  };
 }
 
 export async function requireAdminMutation(request: Request, fresh = true) {

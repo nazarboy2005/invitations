@@ -1,4 +1,5 @@
-import { requireAdminPage } from "@/server/admin-page";
+import { notFound, redirect } from "next/navigation";
+import { getAdminVerification } from "@/server/admin";
 import { AdminVerify } from "@/modules/admin/admin-verify";
 import { display, sans } from "@/app/platform-fonts";
 import styles from "@/modules/admin/admin.module.css";
@@ -8,7 +9,14 @@ export const metadata = {
   robots: { index: false, follow: false },
 };
 export default async function VerifyPage() {
-  const user = await requireAdminPage(false);
+  let verification;
+  try {
+    verification = await getAdminVerification();
+  } catch {
+    notFound();
+  }
+  if (verification.verified) redirect("/admin");
+  const { user } = verification;
   return (
     <main
       id="main"

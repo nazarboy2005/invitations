@@ -14,10 +14,10 @@ export function AdminVerify({
   const [pending, setPending] = useState<{ id: string; url: string } | null>(
     null,
   );
-  const [confirmed, setConfirmed] = useState(false);
-  const [busy, setBusy] = useState(false);
+  const [busy, setBusy] = useState<"starting" | "completing" | null>(null);
   const [error, setError] = useState("");
   const alive = useRef(true);
+  const exchanging = useRef(false);
   useEffect(() => {
     alive.current = true;
     return () => {
@@ -25,16 +25,73 @@ export function AdminVerify({
     };
   }, []);
   useEffect(() => {
-    if (!pending || confirmed) return;
+    const controller = new AbortController();
+    let checking = false;
+    async function checkSession() {
+      if (checking || exchanging.current || document.hidden) return;
+      checking = true;
+      try {
+        const response = await fetch("/api/admin/reauth", {
+          cache: "no-store",
+          signal: AbortSignal.any([
+            controller.signal,
+            AbortSignal.timeout(10_000),
+          ]),
+        });
+        if (controller.signal.aborted || exchanging.current) return;
+        if (response.status === 401 || response.status === 403) {
+          window.location.replace("/admin");
+          return;
+        }
+        if (!response.ok) return;
+        const result = await response.json();
+        if (controller.signal.aborted || exchanging.current) return;
+        if (result.verified) window.location.replace("/admin");
+        else if (result.user?.id !== userId) window.location.reload();
+      } catch {
+        // A temporary connection failure must not clear the pending bot confirmation.
+      } finally {
+        checking = false;
+      }
+    }
+    void checkSession();
+    const timer = setInterval(checkSession, 15_000);
+    window.addEventListener("focus", checkSession);
+    window.addEventListener("pageshow", checkSession);
+    window.addEventListener("session-changed", checkSession);
+    window.addEventListener("taklifnoma:session-changed", checkSession);
+    document.addEventListener("visibilitychange", checkSession);
+    return () => {
+      controller.abort();
+      clearInterval(timer);
+      window.removeEventListener("focus", checkSession);
+      window.removeEventListener("pageshow", checkSession);
+      window.removeEventListener("session-changed", checkSession);
+      window.removeEventListener("taklifnoma:session-changed", checkSession);
+      document.removeEventListener("visibilitychange", checkSession);
+    };
+  }, [userId]);
+  useEffect(() => {
+    if (!pending) return;
     const controller = new AbortController();
     let stopped = false;
+    let polling = false;
     let timer: ReturnType<typeof setTimeout>;
     const deadline = Date.now() + 5 * 60_000;
     async function poll() {
+      if (stopped || polling || exchanging.current) return;
+      polling = true;
+      clearTimeout(timer);
       try {
         const response = await fetch(
           `/api/auth/telegram/status?requestId=${encodeURIComponent(pending!.id)}`,
-          { cache: "no-store", signal: controller.signal },
+          {
+            cache: "no-store",
+            signal: AbortSignal.any([
+              controller.signal,
+              AbortSignal.timeout(15_000),
+            ]),
+          },
         );
         if (!response.ok)
           throw new Error("Tasdiqlashni tekshirib bo‘lmadi. Qayta boshlang.");
@@ -45,10 +102,34 @@ export function AdminVerify({
             throw new Error(
               "Joriy administratorning Telegram hisobidan tasdiqlang.",
             );
-          setConfirmed(true);
+          // Bot confirmation alone does not renew the administrator's session.
+          exchanging.current = true;
+          setBusy("completing");
+          const complete = await fetch("/api/admin/reauth", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ requestId: pending!.id }),
+            signal: AbortSignal.any([
+              controller.signal,
+              AbortSignal.timeout(15_000),
+            ]),
+          });
+          const completion = await complete.json();
+          if (!complete.ok)
+            throw new Error(
+              completion.error?.message ?? "Hisob tasdiqlanmadi.",
+            );
+          if (!stopped) {
+            stopped = true;
+            window.location.replace("/admin");
+          }
           return;
         }
-        if (result.state === "expired" || Date.now() >= deadline)
+        if (
+          result.state === "expired" ||
+          result.state === "consumed" ||
+          Date.now() >= deadline
+        )
           throw new Error("Tasdiqlash vaqti tugadi. Qayta boshlang.");
         timer = setTimeout(poll, 2000);
       } catch (cause) {
@@ -57,53 +138,49 @@ export function AdminVerify({
             cause instanceof Error ? cause.message : "Ulanishni tekshiring.",
           );
           setPending(null);
+          setBusy(null);
         }
+      } finally {
+        polling = false;
+        exchanging.current = false;
       }
     }
-    timer = setTimeout(poll, 2000);
+    const resume = () => {
+      if (!document.hidden) void poll();
+    };
+    void poll();
+    window.addEventListener("focus", resume);
+    document.addEventListener("visibilitychange", resume);
     return () => {
       stopped = true;
       clearTimeout(timer);
       controller.abort();
+      window.removeEventListener("focus", resume);
+      document.removeEventListener("visibilitychange", resume);
     };
-  }, [pending, confirmed, userId]);
+  }, [pending, userId]);
   async function start() {
-    setBusy(true);
+    if (busy) return;
+    setPending(null);
+    setBusy("starting");
     setError("");
-    setConfirmed(false);
     try {
       const response = await fetch("/api/auth/telegram/start", {
         method: "POST",
+        signal: AbortSignal.timeout(15_000),
       });
       const result = await response.json();
       if (!response.ok || !result.requestId || !result.loginUrl)
-        throw new Error("Tasdiqlash boshlanmadi. Biroz kutib qayta urining.");
+        throw new Error(
+          result.error?.message ??
+            "Tasdiqlash boshlanmadi. Biroz kutib qayta urining.",
+        );
       if (alive.current)
         setPending({ id: result.requestId, url: result.loginUrl });
     } catch (cause) {
       if (alive.current) setError((cause as Error).message);
     } finally {
-      if (alive.current) setBusy(false);
-    }
-  }
-  async function complete() {
-    setBusy(true);
-    setError("");
-    try {
-      const response = await fetch("/api/admin/reauth", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ requestId: pending!.id }),
-      });
-      const result = await response.json();
-      if (!response.ok)
-        throw new Error(result.error?.message ?? "Hisob tasdiqlanmadi.");
-      window.location.assign("/admin");
-    } catch (cause) {
-      if (alive.current) {
-        setError((cause as Error).message);
-        setBusy(false);
-      }
+      if (alive.current) setBusy(null);
     }
   }
   return (
@@ -119,15 +196,8 @@ export function AdminVerify({
           {error}
         </p>
       )}
-      {confirmed ? (
-        <>
-          <p role="status">
-            Telegram hisobi tasdiqlandi. Boshqaruvni davom ettirishingiz mumkin.
-          </p>
-          <button className="button" disabled={busy} onClick={complete}>
-            {busy ? "Tekshirilmoqda…" : "Boshqaruvga kirish"}
-          </button>
-        </>
+      {busy === "completing" ? (
+        <p role="status">Boshqaruvga kirilmoqda…</p>
       ) : pending ? (
         <>
           <a
@@ -140,12 +210,16 @@ export function AdminVerify({
             Telegramni ochish
           </a>
           <p role="status">Botdagi tasdiqni kutyapmiz…</p>
-          <button className="button secondary" disabled={busy} onClick={start}>
+          <button
+            className="button secondary"
+            disabled={!!busy}
+            onClick={start}
+          >
             Qayta boshlash
           </button>
         </>
       ) : (
-        <button className="button" disabled={busy} onClick={start}>
+        <button className="button" disabled={!!busy} onClick={start}>
           {busy ? "Boshlanmoqda…" : "Telegram orqali tasdiqlash"}
         </button>
       )}

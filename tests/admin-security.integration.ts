@@ -189,6 +189,7 @@ test("all admin reads and writes enforce live roles before parsing body or resou
     ["/api/admin/categories", "POST"],
     ["/api/admin/music", "POST"],
     ["/api/admin/reauth", "POST"],
+    ["/api/admin/reauth", "GET"],
   ];
   for (const [path, method] of endpoints) {
     await code(
@@ -216,6 +217,20 @@ test("stale admin sessions redirect to verification and creator-session renewal 
   assert.equal(page.status, 307);
   assert.equal(page.headers.get("Location"), "/admin/verify");
   assert.equal((await request("/admin/verify", "stale")).status, 200);
+  const staleStatus = await code(
+    await request("/api/admin/reauth", "stale"),
+    200,
+  );
+  assert.equal(staleStatus.verified, false);
+  assert.equal(staleStatus.user.id, users.admin);
+  const freshStatus = await code(
+    await request("/api/admin/reauth", "admin"),
+    200,
+  );
+  assert.equal(freshStatus.verified, true);
+  const freshPage = await request("/admin/verify", "admin");
+  assert.equal(freshPage.status, 307);
+  assert.equal(freshPage.headers.get("Location"), "/admin");
   await code(
     await request("/api/admin/templates", "stale"),
     401,

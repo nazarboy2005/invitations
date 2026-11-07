@@ -1,7 +1,11 @@
 import { cookies } from "next/headers";
 import { z } from "zod";
 import { getDb } from "@taklifnoma/database";
-import { requireAdminMutation, adminError } from "@/server/admin";
+import {
+  requireAdminMutation,
+  getAdminVerification,
+  adminError,
+} from "@/server/admin";
 import { ApiError, readJson } from "@/server/api";
 import {
   browserHash,
@@ -11,6 +15,14 @@ import {
 } from "@/server/auth";
 import { digest, randomToken } from "@/server/auth/crypto";
 import { hasAdminRole } from "@/server/auth/admin-role";
+
+export async function GET() {
+  try {
+    return json(await getAdminVerification());
+  } catch (error) {
+    return adminError(error);
+  }
+}
 
 export async function POST(request: Request) {
   try {
