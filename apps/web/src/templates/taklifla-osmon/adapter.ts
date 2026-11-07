@@ -3,7 +3,7 @@ import { yandexMapUrl } from "@taklifnoma/contracts/maps";
 import { osmonDataSchema, getContent, type Invitation, type Locale } from "@taklifnoma/contracts";
 import { getTemplatePreviewWishes } from "../../modules/catalog/preview-sample";
 import { eventInstant, formatDate } from "../date-format";
-import { CATALOG_PREVIEW_MUSIC } from "@/modules/catalog/catalog-music";
+import { catalogPreviewMusic } from "@/modules/catalog/catalog-music";
 
 export type OsmonOptions = {
   invitationId: string;
@@ -80,7 +80,7 @@ export function makeOsmonPayload(invitation: Invitation, locale: Locale, options
       phone: invitation.rsvp.enabled ? invitation.contacts.phoneNumber : "",
       wishes: invitation.wishes.enabled,
       music: options.preview && options.catalogMusic
-        ? {enabled: true, url: CATALOG_PREVIEW_MUSIC.url}
+        ? {enabled: true, url: catalogPreviewMusic(invitation).url}
         : {enabled: invitation.music.enabled, url: publicAsset(invitation.music.url)},
       silentPlayback: !!options.silentPlayback || (!!options.preview && !options.catalogMusic && !options.fullPreview),
     },

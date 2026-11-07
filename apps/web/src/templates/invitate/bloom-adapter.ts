@@ -4,7 +4,7 @@ import type { Invitation, Locale } from "@taklifnoma/contracts";
 import { getContent } from "@taklifnoma/contracts";
 import { eventInstant, formatDate } from "../date-format";
 import { makeLegacyData } from "../anor/renderer";
-import { CATALOG_PREVIEW_MUSIC } from "@/modules/catalog/catalog-music";
+import { catalogPreviewMusic } from "@/modules/catalog/catalog-music";
 
 const localeNames: Record<Locale, string> = {
   "uz-Latn": "uz-Latn", "uz-Cyrl": "uz-Cyrl", en: "en", ru: "ru",
@@ -63,7 +63,7 @@ export function makeBloomData(
     music: invitation.music.enabled
       ? publicAsset(invitation.music.url)
       : preview && catalogMusic
-        ? CATALOG_PREVIEW_MUSIC.url
+        ? catalogPreviewMusic(invitation).url
         : "",
     rsvpEnabled: invitation.rsvp.enabled,
     guestName,

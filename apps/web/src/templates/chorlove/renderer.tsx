@@ -8,7 +8,7 @@ import type { Invitation, Locale } from "@taklifnoma/contracts";
 import { makeLegacyData } from "@/templates/anor/renderer";
 import { useInvitationExtras } from "@/templates/use-invitation-extras";
 import { getTemplatePreviewVenuePhoto, getTemplatePreviewScratchPhoto } from "@/modules/catalog/preview-sample";
-import { CATALOG_PREVIEW_MUSIC } from "@/modules/catalog/catalog-music";
+import { catalogPreviewMusic } from "@/modules/catalog/catalog-music";
 import { isChorloveTemplate } from "./registry";
 import styles from "./renderer.module.css";
 
@@ -131,7 +131,7 @@ export function ChorloveInvitation({
   );
   const message = useMemo(() => {
     const music = catalogMusic
-      ? CATALOG_PREVIEW_MUSIC.url
+      ? catalogPreviewMusic(invitation).url
       : data.music.enabled
         ? data.music.url
         : "";

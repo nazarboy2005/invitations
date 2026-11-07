@@ -1,6 +1,6 @@
 import type { Invitation, Locale } from "@taklifnoma/contracts";
 import { makeLegacyData } from "@/templates/anor/renderer";
-import { CATALOG_PREVIEW_MUSIC } from "@/modules/catalog/catalog-music";
+import { catalogPreviewMusic } from "@/modules/catalog/catalog-music";
 
 export function makeEternalRosePayload(
   invitation: Invitation,
@@ -30,7 +30,7 @@ export function makeEternalRosePayload(
           description: content?.programDescriptions[entry.id] ?? "",
         })),
         music: options.silentPlayback ? { enabled: false, url: "" }
-          : options.preview && options.catalogMusic ? { enabled: true, url: CATALOG_PREVIEW_MUSIC.url } : data.music,
+          : options.preview && options.catalogMusic ? { enabled: true, url: catalogPreviewMusic(invitation).url } : data.music,
       },
       locale,
       enabledLocales: invitation.enabledLocales,

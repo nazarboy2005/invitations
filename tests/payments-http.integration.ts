@@ -190,6 +190,12 @@ test("HTTP checkout requires login/origin, verified webhook publishes, return pa
     ).status,
     402,
   );
+  const tampered = await req(`/api/invitations/${saved.id}/checkout`, {
+    revision: saved.revision,
+    expectedAmountMinor: 1,
+  });
+  assert.equal(tampered.status, 409);
+  assert.equal((await tampered.json()).error.code, "PRICE_CHANGED");
   const checkout = await req(`/api/invitations/${saved.id}/checkout`, {
     revision: saved.revision,
     expectedAmountMinor: 100000,

@@ -27,7 +27,7 @@ test("Tojmahal app adapter retains source artwork and dynamic invitation links",
   assert.match(html, /247f19e46f38efab\.webp/);
   assert.match(html, /4249201962cd0fe9\.webp/);
   assert.match(html, /b5f8df5b9f0a1a26\.mp4/);
-  assert.match(adapter, /CATALOG_PREVIEW_MUSIC/);
+  assert.match(adapter, /catalogPreviewMusic/);
   assert.match(contracts, /id: "tojmahal-oltin-darvozasi"[\s\S]*?published: false/);
   assert.doesNotMatch(bridge, /formspree|webhook|gtag\(/i);
 });

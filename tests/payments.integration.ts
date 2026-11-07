@@ -295,6 +295,16 @@ test("wrong amount, payment ID and mutated duplicate event cannot grant publicat
     p = await paymentFor(order.id);
   const bad = event({ ...p, status: "SUCCEEDED", amount: "1000.01" });
   await fails(consumeWebhook(bad.body, bad.headers), "PAYMENT_MISMATCH");
+  // Even an authentic provider notification must not fulfill an underpaid link.
+  for (const amount of ["0.01", "1.00", "999.99"]) {
+    const underpaid = event({ ...p, status: "SUCCEEDED", amount });
+    await fails(consumeWebhook(underpaid.body, underpaid.headers), "PAYMENT_MISMATCH");
+    assert.equal((await getPaymentOrder(order.id, owner.id)).status, "PENDING");
+  }
+  const [unpaid] = await sql`SELECT status FROM invitations WHERE id=${d.id}`;
+  assert.equal(unpaid.status, "draft");
+  const [entitlements] = await sql`SELECT count(*)::int AS count FROM platform_payments WHERE invitation_id=${d.id}`;
+  assert.equal(entitlements.count, 0);
   await fails(
     applyPayment({ ...p, id: randomUUID(), status: "SUCCEEDED" }),
     "PAYMENT_MISMATCH",

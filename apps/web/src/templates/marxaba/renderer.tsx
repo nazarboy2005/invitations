@@ -7,7 +7,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import type { Invitation, Locale } from "@taklifnoma/contracts";
 import { makeLegacyData } from "@/templates/anor/renderer";
 import styles from "./renderer.module.css";
-import { CATALOG_PREVIEW_MUSIC } from "@/modules/catalog/catalog-music";
+import { catalogPreviewMusic } from "@/modules/catalog/catalog-music";
 import { useInvitationExtras } from "../use-invitation-extras";
 
 type Props = {
@@ -291,7 +291,7 @@ export function MarxabaInvitation({
     const musicUrl = sourceData.music.enabled
       ? sourceData.music.url
       : catalogMusic
-        ? CATALOG_PREVIEW_MUSIC.url
+        ? catalogPreviewMusic(invitation).url
         : "";
     return {
       ...sourceData,

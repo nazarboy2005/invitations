@@ -5,7 +5,7 @@ import { useInvitationMaps } from "@/templates/use-invitation-maps";
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { Invitation, Locale } from "@taklifnoma/contracts";
-import { CATALOG_PREVIEW_MUSIC } from "@/modules/catalog/catalog-music";
+import { catalogPreviewMusic } from "@/modules/catalog/catalog-music";
 import { makeYubileySahifasiPayload } from "./adapter";
 import styles from "./renderer.module.css";
 
@@ -48,7 +48,7 @@ export function TakliflaYubileySahifasi({
     });
     return { ...base, payload: {
       ...base.payload,
-      music: preview && catalogMusic ? { enabled: true, url: CATALOG_PREVIEW_MUSIC.url } : base.payload.music,
+      music: preview && catalogMusic ? { enabled: true, url: catalogPreviewMusic(invitation).url } : base.payload.music,
       silentPlayback: preview && (silentPlayback || (!catalogMusic && !fullPreview)),
       reducedMotion: preview && qaReducedMotion,
     } };

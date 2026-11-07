@@ -7,7 +7,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import type { Invitation, Locale } from "@taklifnoma/contracts";
 import { makeLegacyData } from "@/templates/anor/renderer";
 import styles from "./renderer.module.css";
-import { CATALOG_PREVIEW_MUSIC } from "@/modules/catalog/catalog-music";
+import { catalogPreviewMusic } from "@/modules/catalog/catalog-music";
 
 export type ChavandozInvitationProps = {
   invitation: Invitation;
@@ -54,7 +54,7 @@ export function ChavandozInvitation({
     const musicUrl = active.music.enabled
       ? active.music.url
       : catalogMusic
-        ? CATALOG_PREVIEW_MUSIC.url
+        ? catalogPreviewMusic(invitation).url
         : "";
     const enrich = (data: ReturnType<typeof makeLegacyData>) => ({
       ...data,

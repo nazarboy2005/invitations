@@ -2,7 +2,7 @@ import { publicAsset } from "../../lib/public-asset";
 import { yandexMapUrl } from "@taklifnoma/contracts/maps";
 import { defaultEventLabel, getContent, muhrliMaktubDataSchema, type Invitation, type Locale } from "@taklifnoma/contracts";
 import { eventInstant, eventWallDate, formatDate } from "../date-format";
-import { CATALOG_PREVIEW_MUSIC } from "../../modules/catalog/catalog-music";
+import { catalogPreviewMusic } from "../../modules/catalog/catalog-music";
 
 import { getTemplatePreviewWishes } from "../../modules/catalog/preview-sample";
 
@@ -67,7 +67,7 @@ export function makeEnvelopePayload(invitation: Invitation, locale: Locale, opti
       phone: invitation.rsvp.enabled ? invitation.contacts.phoneNumber : "",
       wishesEnabled: invitation.wishes.enabled,
       music: options.preview && options.catalogMusic
-        ? { enabled: true, url: CATALOG_PREVIEW_MUSIC.url }
+        ? { enabled: true, url: catalogPreviewMusic(invitation).url }
         : { enabled: invitation.music.enabled, url: publicAsset(invitation.music.url) },
     },
   };

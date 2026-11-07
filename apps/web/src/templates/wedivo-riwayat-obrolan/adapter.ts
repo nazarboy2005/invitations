@@ -6,7 +6,7 @@ import {
   eventWallDate,
   formatDate,
 } from "@/templates/date-format";
-import { CATALOG_PREVIEW_MUSIC } from "@/modules/catalog/catalog-music";
+import { catalogPreviewMusic } from "@/modules/catalog/catalog-music";
 
 export function makeRiwayatPayload(
   invitation: Invitation,
@@ -53,7 +53,7 @@ export function makeRiwayatPayload(
         gallery,
         music:
           options.catalogMusic && options.preview
-            ? { enabled: true, url: CATALOG_PREVIEW_MUSIC.url }
+            ? { enabled: true, url: catalogPreviewMusic(invitation).url }
             : data.music,
       },
       locale,

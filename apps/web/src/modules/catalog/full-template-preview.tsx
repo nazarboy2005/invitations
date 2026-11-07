@@ -15,14 +15,16 @@ import { isInvitateTemplate } from "@/templates/invitate/registry";
 
 import { isChorloveTemplate } from "@/templates/chorlove/registry";
 import { readBrowserDraft } from "@/modules/studio/draft-storage";
-import { CATALOG_PREVIEW_MUSIC } from "./catalog-music";
-import { InvitationMusicAutoplay } from "./invitation-view-tracker";
+import { pickPreviewMusic, type PreviewMusicTrack } from "./catalog-music";
+import { DEFAULT_INVITATION_MUSIC } from "@taklifnoma/contracts/music";
+import { InvitationMusicAutoplay, InvitationMusicCredits } from "./invitation-view-tracker";
 import {
   createTemplatePreviewSample,
   createLongNamePreview,
   hasAuthoredInvitationContent,
 } from "./preview-sample";
 import styles from "./full-template-preview.module.css";
+import { observeTemplateDocuments } from "../../templates/observe-template-documents";
 
 // Load only the renderer selected by this preview, rather than every design.
 const AnorInvitation = dynamic(() => import("@/templates/anor/renderer").then((module) => module.AnorInvitation));
@@ -104,6 +106,27 @@ export function FullTemplatePreview({
   const [catalogPreview, setCatalogPreview] = useState(true);
   const [showControls, setShowControls] = useState(false);
   const previewRef = useRef<HTMLElement>(null);
+  const [readyTemplate, setReadyTemplate] = useState("");
+
+  useEffect(() => {
+    if (cardPreview || posterCapture || !previewRef.current) return;
+    let active = true;
+    setReadyTemplate("");
+    const cleanup = observeTemplateDocuments(previewRef.current, (doc) => {
+      const images = Array.from(doc.images).filter(image => {
+        const rect = image.getBoundingClientRect();
+        return rect.width > 0 && rect.height > 0 && rect.top < innerHeight && rect.bottom > 0;
+      });
+      // Keep the loader over the frame while fonts and visible images decode.
+      void Promise.race([
+        Promise.allSettled([doc.fonts.ready, ...images.map(image => image.decode())]),
+        new Promise(resolve => setTimeout(resolve, 8000)),
+      ]).then(() => requestAnimationFrame(() => requestAnimationFrame(() => {
+        if (active) setReadyTemplate(template.id);
+      })));
+    });
+    return () => { active = false; cleanup(); };
+  }, [cardPreview, posterCapture, template.id]);
 
   useEffect(() => {
     let active = true;
@@ -154,6 +177,22 @@ export function FullTemplatePreview({
           : createTemplatePreviewSample(template.id, candidate ?? undefined);
       setCatalogPreview(!candidateHasContent && !cardPreview && !posterCapture);
       const result = longNames && !candidateHasContent ? createLongNamePreview(resolved) : resolved;
+      if (!candidateHasContent && !cardPreview && !posterCapture && !coverCapture) {
+        let tracks: PreviewMusicTrack[] | undefined;
+        try {
+          const response = await fetch("/api/music", { signal: AbortSignal.timeout(3000) });
+          if (response.ok) {
+            const data = await response.json();
+            if (Array.isArray(data.tracks) && data.tracks.length) tracks = [DEFAULT_INVITATION_MUSIC, ...data.tracks];
+          }
+        } catch { /* The bundled library is available even if the API is offline. */ }
+        if (!active) return;
+        let previous = "";
+        try { previous = sessionStorage.getItem("fotiha:preview-music") || ""; } catch {}
+        result.music = pickPreviewMusic(tracks, previous);
+        try { sessionStorage.setItem("fotiha:preview-music", result.music.url); } catch {}
+      }
+      if (!active) return;
       setInvitation({
         ...result,
         ...(posterCapture ? { enabledLocales: [result.defaultLocale] } : {}),
@@ -292,6 +331,13 @@ export function FullTemplatePreview({
 
   return (
     <main className={styles.fullPreview} ref={previewRef} data-card-preview={cardPreview || undefined}>
+      {!cardPreview && !posterCapture && template.format !== "image" && readyTemplate !== template.id && (
+        <div className={styles.previewLoader} role="status">
+          <span className={styles.spinner} aria-hidden="true" />
+          <span>Taklifnoma ochilmoqda…</span>
+        </div>
+      )}
+      {invitation && !cardPreview && !posterCapture && <InvitationMusicCredits musicUrl={invitation.music.enabled ? invitation.music.url : ""} />}
       {invitation && !cardPreview && !posterCapture && (
         <InvitationMusicAutoplay
           musicUrl={

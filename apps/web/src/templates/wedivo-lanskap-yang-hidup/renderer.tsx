@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useRef } from "react";
 import type { Invitation, Locale } from "@taklifnoma/contracts";
-import { CATALOG_PREVIEW_MUSIC } from "@/modules/catalog/catalog-music";
+import { catalogPreviewMusic } from "@/modules/catalog/catalog-music";
 import { makeLanskapPayload } from "./adapter";
 import styles from "./renderer.module.css";
 
@@ -28,7 +28,7 @@ export function WedivoLanskapYangHidup({ invitation, invitationId, locale, guest
       ...base,
       payload: {
         ...base.payload,
-        data: { ...base.payload.data, music: preview && catalogMusic ? { enabled: true, url: CATALOG_PREVIEW_MUSIC.url } : base.payload.data.music },
+        data: { ...base.payload.data, music: preview && catalogMusic ? { enabled: true, url: catalogPreviewMusic(invitation).url } : base.payload.data.music },
         silentPlayback: preview && (silentPlayback || !catalogMusic),
         reducedMotion: preview && qaReducedMotion,
       },

@@ -4,7 +4,7 @@ import {
   type Locale,
 } from "@taklifnoma/contracts";
 import { makeLegacyData } from "@/templates/anor/renderer";
-import { CATALOG_PREVIEW_MUSIC } from "@/modules/catalog/catalog-music";
+import { catalogPreviewMusic } from "@/modules/catalog/catalog-music";
 import { eventInstant, eventWallDate } from "@/templates/date-format";
 
 export const ANGIN_TEMPLATE_ID = "wedivo-angin-empat-musim";
@@ -71,7 +71,7 @@ export function makeAnginPayload(
     dressCode: mapped.dressCode,
     music:
       options.catalogMusic && options.preview
-        ? { enabled: true, url: CATALOG_PREVIEW_MUSIC.url }
+        ? { enabled: true, url: catalogPreviewMusic(invitation).url }
         : mapped.music,
     timezone: invitation.timezone,
   };

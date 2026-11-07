@@ -5,7 +5,7 @@ import { useInvitationMaps } from "@/templates/use-invitation-maps";
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { Invitation, Locale } from "@taklifnoma/contracts";
-import { CATALOG_PREVIEW_MUSIC } from "@/modules/catalog/catalog-music";
+import { catalogPreviewMusic } from "@/modules/catalog/catalog-music";
 import { makeMountainPayload } from "./adapter";
 import styles from "./renderer.module.css";
 
@@ -30,7 +30,7 @@ export function ToglarBagridaInvitation({ invitation, invitationId, locale, gues
   useEffect(() => setActiveLocale(locale), [locale]);
   const message = useMemo(() => {
     const result = makeMountainPayload(invitation, activeLocale, guestName, { invitationId, guestToken, preview, silentPlayback, reducedMotion: qaReducedMotion, sampleWishes: preview && catalogMusic });
-    if (preview && catalogMusic) result.payload.music = { enabled: true, url: CATALOG_PREVIEW_MUSIC.url };
+    if (preview && catalogMusic) result.payload.music = { enabled: true, url: catalogPreviewMusic(invitation).url };
     return result;
   }, [invitation, activeLocale, guestName, invitationId, guestToken, preview, silentPlayback, qaReducedMotion, catalogMusic]);
   const latest = useRef(message);

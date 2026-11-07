@@ -129,7 +129,7 @@ test("Velvet Royale renderer binds contract fields and application RSVP APIs", (
     "utf8",
   );
   assert.match(adapter, /makeLegacyData\(invitation, frameLocale, guestName/);
-  assert.match(adapter, /catalog-emotional-piano|CATALOG_PREVIEW_MUSIC/);
+  assert.match(adapter, /catalogPreviewMusic/);
   assert.match(adapter, /api\/public\/invitations/);
   assert.match(renderer, /\/rsvp/);
   assert.match(renderer, /\/wishes/);

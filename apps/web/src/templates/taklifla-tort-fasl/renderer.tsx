@@ -5,7 +5,7 @@ import { useInvitationMaps } from "@/templates/use-invitation-maps";
 
 import { useEffect, useMemo, useRef } from "react";
 import type { Invitation, Locale } from "@taklifnoma/contracts";
-import { CATALOG_PREVIEW_MUSIC } from "@/modules/catalog/catalog-music";
+import { catalogPreviewMusic } from "@/modules/catalog/catalog-music";
 import { FASLLAR_ID, FASLLAR_NAME, makeFasllarPayload } from "./adapter";
 import styles from "./renderer.module.css";
 
@@ -47,7 +47,7 @@ export function TakliflaTortFasl({
       reducedMotion: preview && qaReducedMotion,
     });
     if (preview && catalogMusic)
-      value.payload.music = { enabled: true, url: CATALOG_PREVIEW_MUSIC.url };
+      value.payload.music = { enabled: true, url: catalogPreviewMusic(invitation).url };
     return value;
   }, [
     invitation,

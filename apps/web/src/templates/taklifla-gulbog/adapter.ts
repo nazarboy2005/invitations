@@ -4,7 +4,7 @@ import { gulbogDataSchema, getContent, type Invitation, type Locale } from "@tak
 import { eventInstant, eventWallDate, formatDate } from "../date-format";
 
 import { getTemplatePreviewWishes } from "../../modules/catalog/preview-sample";
-import { CATALOG_PREVIEW_MUSIC } from "../../modules/catalog/catalog-music";
+import { catalogPreviewMusic } from "../../modules/catalog/catalog-music";
 
 export type GulbogOptions = {
   invitationId: string;
@@ -49,7 +49,7 @@ export function makeGulbogPayload(invitation: Invitation, locale: Locale, option
         id: item.id, time: item.time, title: c.programTitles[item.id] || "",
         description: c.programDescriptions[item.id] || "",
       })),
-      music: options.preview && options.catalogMusic ? {enabled:true,url:CATALOG_PREVIEW_MUSIC.url} : { enabled: invitation.music.enabled, url: publicAsset(invitation.music.url) },
+      music: options.preview && options.catalogMusic ? {enabled:true,url:catalogPreviewMusic(invitation).url} : { enabled: invitation.music.enabled, url: publicAsset(invitation.music.url) },
       wishesEnabled: invitation.wishes.enabled,
     }];
   }));

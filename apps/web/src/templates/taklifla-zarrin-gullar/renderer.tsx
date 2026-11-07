@@ -4,7 +4,7 @@ import { publicAsset } from "../../lib/public-asset";
 
 import { useEffect, useMemo, useRef } from "react";
 import type { Invitation, Locale } from "@taklifnoma/contracts";
-import { CATALOG_PREVIEW_MUSIC } from "../../modules/catalog/catalog-music";
+import { catalogPreviewMusic } from "../../modules/catalog/catalog-music";
 import { makeZarrinPayload } from "./adapter";
 import styles from "./renderer.module.css";
 
@@ -15,7 +15,7 @@ export function TakliflaZarrinGullar(props:Props) {
   const frame=useRef<HTMLIFrameElement>(null);
   const message=useMemo(()=>{
     const value=makeZarrinPayload(props.invitation,props.locale,{...props,reducedMotion:props.preview && props.qaReducedMotion,sampleWishes:props.preview && props.catalogMusic});
-    if(props.preview && props.catalogMusic)value.payload.music=CATALOG_PREVIEW_MUSIC.url;
+    if(props.preview && props.catalogMusic)value.payload.music=catalogPreviewMusic(props.invitation).url;
     return value;
   },[props.invitation,props.locale,props.invitationId,props.guestName,props.guestToken,props.preview,props.qaReducedMotion,props.silentPlayback,props.sampleWishes,props.catalogMusic]);
   const latest=useRef(message); latest.current=message;

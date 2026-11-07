@@ -14,11 +14,26 @@ const assetBackgrounds = Object.fromEntries(
   ].map(([name, path]) => [name, `url("${publicAsset(path)}")`]),
 ) as CSSProperties;
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.APP_URL || "https://fotiha.uz"),
   title: {
     default: `${BRAND_NAME} — Yaxshi kunlar birga`,
     template: `%s | ${BRAND_NAME}`,
   },
   description: "Unutilmas kuningiz uchun shaxsiy elektron taklifnoma yarating.",
+  openGraph: {
+    type: "website",
+    siteName: BRAND_NAME,
+    title: "Fotiha — Elektron taklifnomalar",
+    description: "Yaxshi kunlar uchun chiroyli taklifnomalar.",
+    images: [{ url: "/share/fotiha-logo-v1.png", width: 256, height: 256, alt: "Fotiha logotipi" }],
+    locale: "uz_UZ",
+  },
+  twitter: {
+    card: "summary",
+    title: "Fotiha — Elektron taklifnomalar",
+    description: "Yaxshi kunlar uchun chiroyli taklifnomalar.",
+    images: ["/share/fotiha-logo-v1.png"],
+  },
 };
 export default function RootLayout({
   children,

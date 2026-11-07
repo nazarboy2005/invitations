@@ -6,7 +6,7 @@ import { useInvitationMaps } from "@/templates/use-invitation-maps";
 import { useEffect, useMemo, useRef } from "react";
 import type { Invitation, Locale } from "@taklifnoma/contracts";
 import { makeLegacyData } from "@/templates/anor/renderer";
-import { CATALOG_PREVIEW_MUSIC } from "@/modules/catalog/catalog-music";
+import { catalogPreviewMusic } from "@/modules/catalog/catalog-music";
 import styles from "./renderer.module.css";
 
 type Props = {
@@ -48,7 +48,7 @@ export function ChorloveOshInvitation({
       ...mapped,
       title: invitation.content[locale]?.eventLabel.trim() || localizedOshTitle[locale],
       ...(catalogMusic
-        ? { music: { enabled: true, url: CATALOG_PREVIEW_MUSIC.url } }
+        ? { music: { enabled: true, url: catalogPreviewMusic(invitation).url } }
         : {}),
     };
   }, [invitation, locale, guestName, catalogMusic]);

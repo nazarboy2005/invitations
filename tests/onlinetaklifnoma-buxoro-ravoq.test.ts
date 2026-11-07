@@ -27,7 +27,7 @@ test("Buxoro adapter retains source artwork and connects invitation APIs", async
   assert.match(html, /portal\.a4bda8eccc9cfdff\.webp/);
   assert.match(html, /couple\.e5dc4431698d979a\.webp/);
   assert.match(html, /intro\.61293985d7707931\.mp4/);
-  assert.match(adapter, /CATALOG_PREVIEW_MUSIC/);
+  assert.match(adapter, /catalogPreviewMusic/);
   assert.match(contracts, /id: "buxoro-ravoq"[\s\S]*?published: false/);
   assert.doesNotMatch(bridge, /formspree|webhook|gtag\(/i);
 });

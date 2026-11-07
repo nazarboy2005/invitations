@@ -9,6 +9,7 @@ This file records durable, user-approved product requirements and a small number
 - Authored names and text are locale-specific. Never silently transliterate or overwrite another locale. Wedding starter wording may be localized; other event types must not receive wedding wording. Sample preview content is presentation-only and must never be saved or published. See the shared preview-data requirements in `AGENTS.md`.
 - Optional repeated content stays optional and repeatable; do not impose fixed item counts or invent unsupported creator fields. Preserve optional content when changing templates, even when a template cannot display it natively.
 - Studio optional sections show their enable switch in the section row, independently of opening the editor. Enabling opens its settings; leaving a feature that requires creator content without usable content turns it back off. Turning a feature off hides it from guests while preserving its authored data.
+- Keep template-native calendar actions, including direct `.ics` downloads. Do not add a shared calendar-provider chooser.
 
 ## Venue and maps
 
@@ -59,6 +60,7 @@ This file records durable, user-approved product requirements and a small number
 
 ## Approved Studio music library
 
+- Sample template previews choose a random track from the available music library on each opening; the selection is temporary and must never replace a creator's chosen or uploaded music.
 - Studio offers the approved bundled instrumental library alongside creator audio uploads. Library music is opt-in and never replaces creator-selected music automatically; bundled tracks remain valid through save, edit, and publication.
 - Keep the Step 4 music picker compact and unified: search opens one list containing bundled and creator-uploaded tracks, with preview controls beside each title and no separate player after selection. Keep chooser details to title, creator, and duration; show a scrubber instead of creator/duration while a track plays. Keep source and license records with the library and public credits rather than in the picker.
 - Preserve each track's source record and required attribution. Composition status alone does not establish recording rights; exclude recordings whose source permissions are unclear. Track-level metadata and assets live with the music library rather than in this decision record.

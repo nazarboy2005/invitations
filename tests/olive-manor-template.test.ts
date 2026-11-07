@@ -51,7 +51,7 @@ test("Olive Manor app renderer uses the shared invitation APIs and no source dem
   assert.ok(renderer.indexOf("const venue = data.venue || {}") < renderer.indexOf("const calendarHref ="), "calendar link reads an initialized venue");
   assert.match(renderer, /\\u041f\\u043d/);
   assert.doesNotMatch(renderer, /ÐŸÐ½/);
-  assert.match(adapter, /CATALOG_PREVIEW_MUSIC/);
+  assert.match(adapter, /catalogPreviewMusic/);
   assert.match(adapter, /source\.music\.url/);
   assert.match(adapter, /olive-manor-edition:update/);
   assert.doesNotMatch(renderer, /Akmal|Madina|2030|Navruz|0000 0000/);

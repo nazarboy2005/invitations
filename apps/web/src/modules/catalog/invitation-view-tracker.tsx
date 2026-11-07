@@ -77,7 +77,7 @@ function manageInvitationAudio(doc: Document, expectedSource: string) {
       if (mutation.type === "attributes") {
         const target = mutation.target;
         const audio =
-          (AudioElement && target instanceof AudioElement)
+          AudioElement && target instanceof AudioElement
             ? target
             : SourceElement && target instanceof SourceElement
               ? target.closest("audio")
@@ -151,7 +151,10 @@ function manageInvitationFrames(expectedSource: string) {
   };
   scan();
   const observer = new MutationObserver(scan);
-  observer.observe(document.documentElement, { subtree: true, childList: true });
+  observer.observe(document.documentElement, {
+    subtree: true,
+    childList: true,
+  });
   const onLoad = (event: Event) => {
     const frame = event.target;
     if (frame instanceof HTMLIFrameElement) {
@@ -192,9 +195,6 @@ export function InvitationViewTracker({
   musicUrl?: string;
 }) {
   const sent = useRef(false);
-  const credit = CLASSICAL_MUSIC.find(
-    (track) => musicUrl === track.url || !!musicUrl?.includes(track.url),
-  );
 
   useEffect(() => {
     if (sent.current) return;
@@ -214,6 +214,18 @@ export function InvitationViewTracker({
   return (
     <>
       <InvitationMusicAutoplay musicUrl={musicUrl} />
+      <InvitationMusicCredits musicUrl={musicUrl} />
+    </>
+  );
+}
+
+export function InvitationMusicCredits({ musicUrl }: { musicUrl?: string }) {
+  const credit = CLASSICAL_MUSIC.find(
+    (track) => musicUrl === track.url || !!musicUrl?.includes(track.url),
+  );
+  return (
+    <>
+      {" "}
       {credit && (
         <details
           style={{
@@ -238,15 +250,22 @@ export function InvitationViewTracker({
             <strong>{credit.attribution}</strong>
             <span>
               {credit.license} ·{" "}
-              <a href={credit.licenseUrl} target="_blank" rel="noreferrer">license</a>
+              <a href={credit.licenseUrl} target="_blank" rel="noreferrer">
+                license
+              </a>
             </span>
-            <a href={credit.sourceUrl} target="_blank" rel="noreferrer">Recording source</a>
+            <a href={credit.sourceUrl} target="_blank" rel="noreferrer">
+              Recording source
+            </a>
             {credit.license.includes("BY-SA") && (
-              <span>Adaptations of this recording must use the same or a compatible license.</span>
+              <span>
+                Adaptations of this recording must use the same or a compatible
+                license.
+              </span>
             )}
           </div>
         </details>
-      )}
+      )}{" "}
     </>
   );
 }

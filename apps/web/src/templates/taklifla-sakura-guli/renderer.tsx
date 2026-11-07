@@ -4,7 +4,7 @@ import { publicAsset } from "../../lib/public-asset";
 import { useInvitationMaps } from "@/templates/use-invitation-maps";
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { Invitation, Locale } from "@taklifnoma/contracts";
-import {CATALOG_PREVIEW_MUSIC} from "../../modules/catalog/catalog-music";
+import {catalogPreviewMusic} from "../../modules/catalog/catalog-music";
 import { makeSakuraPayload } from "./adapter";
 import styles from "./renderer.module.css";
 
@@ -14,7 +14,7 @@ export function SakuraGuliInvitation(props: Props) {
   useInvitationMaps(frame);
   const [locale, setLocale] = useState(props.locale);
   useEffect(() => setLocale(props.locale), [props.locale]);
-  const payload=useMemo(()=>{const value=makeSakuraPayload(props.invitation,locale,{...props,reducedMotion:props.qaReducedMotion,sampleWishes:props.preview&&props.catalogMusic});if(props.preview&&props.catalogMusic)value.musicUrl=CATALOG_PREVIEW_MUSIC.url;return value;},[props.invitation,locale,props.invitationId,props.guestName,props.guestToken,props.preview,props.catalogMusic,props.silentPlayback,props.qaReducedMotion]);
+  const payload=useMemo(()=>{const value=makeSakuraPayload(props.invitation,locale,{...props,reducedMotion:props.qaReducedMotion,sampleWishes:props.preview&&props.catalogMusic});if(props.preview&&props.catalogMusic)value.musicUrl=catalogPreviewMusic(props.invitation).url;return value;},[props.invitation,locale,props.invitationId,props.guestName,props.guestToken,props.preview,props.catalogMusic,props.silentPlayback,props.qaReducedMotion]);
   const latest = useRef(payload); latest.current = payload;
   const send = () => frame.current?.contentWindow?.postMessage({ type: "sakura:update", payload: latest.current }, window.location.origin);
   useEffect(send, [payload]);

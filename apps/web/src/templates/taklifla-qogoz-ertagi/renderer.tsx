@@ -5,7 +5,7 @@ import { useInvitationMaps } from "@/templates/use-invitation-maps";
 
 import { useEffect, useMemo, useRef } from "react";
 import type { Invitation, Locale } from "@taklifnoma/contracts";
-import { CATALOG_PREVIEW_MUSIC } from "../../modules/catalog/catalog-music";
+import { catalogPreviewMusic } from "../../modules/catalog/catalog-music";
 import { makeQogozPayload } from "./adapter";
 import styles from "./renderer.module.css";
 
@@ -31,7 +31,7 @@ export function TakliflaQogozErtagiInvitation({
       reducedMotion: preview && qaReducedMotion,
     });
     if (preview && catalogMusic) value.payload.music = {
-      ...value.payload.music, enabled: true, url: CATALOG_PREVIEW_MUSIC.url,
+      ...value.payload.music, enabled: true, url: catalogPreviewMusic(invitation).url,
     };
     return value;
   }, [invitation, invitationId, locale, guestName, guestToken, preview,

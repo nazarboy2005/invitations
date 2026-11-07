@@ -5,7 +5,7 @@ import { useInvitationMaps } from "@/templates/use-invitation-maps";
 
 import { useEffect, useMemo, useRef } from "react";
 import type { Invitation, Locale } from "@taklifnoma/contracts";
-import { CATALOG_PREVIEW_MUSIC } from "@/modules/catalog/catalog-music";
+import { catalogPreviewMusic } from "@/modules/catalog/catalog-music";
 import { makeStarryPayload } from "./adapter";
 import styles from "./renderer.module.css";
 
@@ -21,7 +21,7 @@ export function TakliflaYulduzliTun({ invitation, invitationId, locale, guestNam
   useInvitationMaps(frame);
   const message = useMemo(() => makeStarryPayload(invitation, locale, {
     invitationId, guestName, guestToken, preview, sampleWishes:preview&&catalogMusic,silentPlayback, reducedMotion: qaReducedMotion,
-    catalogMusicUrl: preview && catalogMusic ? CATALOG_PREVIEW_MUSIC.url : undefined,
+    catalogMusicUrl: preview && catalogMusic ? catalogPreviewMusic(invitation).url : undefined,
   }), [invitation, invitationId, locale, guestName, guestToken, preview, catalogMusic, silentPlayback, qaReducedMotion]);
   const latest = useRef(message);
   latest.current = message;

@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useRef } from "react";
 import type { Invitation, Locale } from "@taklifnoma/contracts";
-import { CATALOG_PREVIEW_MUSIC } from "@/modules/catalog/catalog-music";
+import { catalogPreviewMusic } from "@/modules/catalog/catalog-music";
 import { makeTamanPayload } from "./adapter";
 import styles from "./renderer.module.css";
 
@@ -48,12 +48,12 @@ export function WedivoTamanRahasia({
         data: {
           ...base.payload.data,
           music: catalogMusic
-            ? { enabled: true, url: CATALOG_PREVIEW_MUSIC.url }
+            ? { enabled: true, url: catalogPreviewMusic(invitation).url }
             : base.payload.data.music,
         },
         variants: Object.fromEntries(Object.entries(base.payload.variants).map(([language, data]) => [language, {
           ...data,
-          music: catalogMusic ? { enabled: true, url: CATALOG_PREVIEW_MUSIC.url } : data.music,
+          music: catalogMusic ? { enabled: true, url: catalogPreviewMusic(invitation).url } : data.music,
         }])),
         catalogMusic,
         silentPlayback: preview && silentPlayback,

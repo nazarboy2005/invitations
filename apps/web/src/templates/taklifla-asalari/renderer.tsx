@@ -7,7 +7,7 @@ import { useEffect, useMemo, useRef } from "react";
 import type { Invitation, Locale } from "@taklifnoma/contracts";
 import { makeAsalariPayload } from "./adapter";
 import styles from "./renderer.module.css";
-import { CATALOG_PREVIEW_MUSIC } from "../../modules/catalog/catalog-music";
+import { catalogPreviewMusic } from "../../modules/catalog/catalog-music";
 
 type Props = { invitation: Invitation; invitationId: string; locale: Locale; guestName?: string; guestToken?: string; preview?: boolean; fullPreview?: boolean; sampleWishes?: boolean; silentPlayback?: boolean; qaReducedMotion?: boolean };
 
@@ -17,7 +17,7 @@ export function TakliflaAsalari({ invitation, invitationId, locale, guestName = 
   useInvitationMaps(frame);
   const message = useMemo(() => {
     const value=makeAsalariPayload(invitation, locale, guestName, { invitationId, guestToken, preview, sampleWishes, silentPlayback, reducedMotion: qaReducedMotion });
-    if(preview && sampleWishes) value.payload.music={enabled:true,url:CATALOG_PREVIEW_MUSIC.url};
+    if(preview && sampleWishes) value.payload.music={enabled:true,url:catalogPreviewMusic(invitation).url};
     return value;
   }, [invitation, invitationId, locale, guestName, guestToken, preview, sampleWishes, silentPlayback, qaReducedMotion]);
   const latest = useRef(message);

@@ -2,7 +2,7 @@ import { publicAsset } from "../../lib/public-asset";
 import { yandexMapUrl } from "@taklifnoma/contracts/maps";
 import type { Invitation, Locale } from "@taklifnoma/contracts";
 import { getContent } from "@taklifnoma/contracts";
-import { CATALOG_PREVIEW_MUSIC } from "@/modules/catalog/catalog-music";
+import { catalogPreviewMusic } from "@/modules/catalog/catalog-music";
 import { makeLegacyData } from "@/templates/anor/renderer";
 
 const sourceLocale: Record<Locale, string> = {
@@ -69,7 +69,7 @@ export function makeSafirData(
     music: invitation.music.enabled
       ? publicAsset(invitation.music.url)
       : preview && catalogMusic
-        ? CATALOG_PREVIEW_MUSIC.url
+        ? catalogPreviewMusic(invitation).url
         : "",
     silentPlayback: preview && silentPlayback,
     preview,

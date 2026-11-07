@@ -5,7 +5,7 @@ import { useInvitationMaps } from "@/templates/use-invitation-maps";
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { Invitation, Locale } from "@taklifnoma/contracts";
-import { CATALOG_PREVIEW_MUSIC } from "../../modules/catalog/catalog-music";
+import { catalogPreviewMusic } from "../../modules/catalog/catalog-music";
 import { makePariPayload } from "./adapter";
 import styles from "./renderer.module.css";
 
@@ -37,7 +37,7 @@ export function TakliflaParilarErtagiInvitation({ invitation, invitationId, loca
     const value = makePariPayload(invitation, language, { invitationId, guestName, guestToken,
       preview, sampleWishes:sampleWishes||catalogMusic, silentPlayback: preview && (silentPlayback || (!catalogMusic && !fullPreview)),
       reducedMotion: preview && qaReducedMotion });
-    if (preview && catalogMusic) value.payload.music = { ...value.payload.music, enabled: true, url: CATALOG_PREVIEW_MUSIC.url };
+    if (preview && catalogMusic) value.payload.music = { ...value.payload.music, enabled: true, url: catalogPreviewMusic(invitation).url };
     return value;
   }, [invitation, invitationId, language, guestName, guestToken, preview, sampleWishes, silentPlayback, catalogMusic, qaReducedMotion]);
   const latest = useRef(message);

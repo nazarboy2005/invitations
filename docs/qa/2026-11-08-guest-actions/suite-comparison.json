@@ -1,0 +1,17 @@
+{
+  "current": {
+    "total": 888,
+    "pass": 708,
+    "fail": 179,
+    "skip": 1
+  },
+  "baseline": {
+    "total": 885,
+    "pass": 705,
+    "fail": 179,
+    "skip": 1
+  },
+  "newFailures": [],
+  "resolvedFailures": [],
+  "unchangedFailures": 179
+}

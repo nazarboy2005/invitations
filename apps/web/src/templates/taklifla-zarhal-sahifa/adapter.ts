@@ -3,7 +3,7 @@ import { yandexMapUrl } from "@taklifnoma/contracts/maps";
 import { getContent, type Invitation, type Locale } from "@taklifnoma/contracts";
 import { eventInstant, formatDate } from "../date-format";
 import { createTemplatePreviewSample, getTemplatePreviewWishes } from "@/modules/catalog/preview-sample";
-import { CATALOG_PREVIEW_MUSIC } from "@/modules/catalog/catalog-music";
+import { catalogPreviewMusic } from "@/modules/catalog/catalog-music";
 
 export const ZARHAL_SAHIFA_ID = "taklifla-zarhal-sahifa";
 export type ZarhalOptions = {
@@ -50,7 +50,7 @@ export function makeZarhalPayload(invitation: Invitation, locale: Locale, option
     ? createTemplatePreviewSample(ZARHAL_SAHIFA_ID).gallery.filter((photo) => photo.url.trim())
     : creatorPhotos;
   const music = options.preview && options.catalogMusic
-    ? { enabled: true, url: CATALOG_PREVIEW_MUSIC.url }
+    ? { enabled: true, url: catalogPreviewMusic(invitation).url }
     : { enabled: invitation.music.enabled, url: publicAsset(invitation.music.url) };
   return {
     type: "zarhal-sahifa:update" as const,

@@ -1,6 +1,6 @@
 import type { Invitation, Locale } from "@taklifnoma/contracts";
 import type { LegacyData } from "../anor/renderer";
-import { CATALOG_PREVIEW_MUSIC } from "../../modules/catalog/catalog-music";
+import { catalogPreviewMusic } from "../../modules/catalog/catalog-music";
 import { eventWallDate, eventInstant, formatDate } from "../date-format";
 import { defaultEventLabel, getContent } from "@taklifnoma/contracts";
 import { getTemplatePreviewWishes } from "../../modules/catalog/preview-sample";
@@ -144,7 +144,7 @@ export function makePeonyPayload(
   data.gallery = data.gallery.filter((image) => Boolean(image.src));
   if (options.silentPlayback) data.music = { enabled: false, url: "" };
   else if (options.preview && options.catalogMusic)
-    data.music = { enabled: true, url: CATALOG_PREVIEW_MUSIC.url };
+    data.music = { enabled: true, url: catalogPreviewMusic(invitation).url };
   return {
     type: "wedivo-peony-paradise:update" as const,
     payload: {

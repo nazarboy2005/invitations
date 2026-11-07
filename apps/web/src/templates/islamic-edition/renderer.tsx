@@ -6,7 +6,7 @@ import { useInvitationMaps } from "@/templates/use-invitation-maps";
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { Invitation, Locale } from "@taklifnoma/contracts";
 import { makeLegacyData } from "@/templates/anor/renderer";
-import { CATALOG_PREVIEW_MUSIC } from "@/modules/catalog/catalog-music";
+import { catalogPreviewMusic } from "@/modules/catalog/catalog-music";
 import styles from "./renderer.module.css";
 
 type Props = { invitation: Invitation; invitationId: string; locale: Locale; guestName?: string; guestToken?: string; preview?: boolean; fullPreview?: boolean; catalogMusic?: boolean; sampleWishes?: boolean; silentPlayback?: boolean; qaReducedMotion?: boolean; qaMobile?: boolean };
@@ -19,7 +19,7 @@ export function IslamicEditionInvitation({ invitation, invitationId, locale, gue
   useEffect(() => setFrameLocale(locale), [locale]);
   const message = useMemo(() => {
     const source = makeLegacyData(invitation, frameLocale, guestName, sampleWishes);
-    return { ...source, locale: sourceLocale[frameLocale], defaultLang: sourceLocale[frameLocale], languages: invitation.enabledLocales.map(item => sourceLocale[item]), guestName, guestToken, music: preview && catalogMusic ? CATALOG_PREVIEW_MUSIC.url : source.music.enabled ? source.music.url : "", silentPlayback: preview && silentPlayback, catalogPreview: preview && catalogMusic, preview, apiBase: `/api/public/invitations/${encodeURIComponent(invitationId)}`, rsvp: invitation.rsvp, wishesEnabled: invitation.wishes.enabled };
+    return { ...source, locale: sourceLocale[frameLocale], defaultLang: sourceLocale[frameLocale], languages: invitation.enabledLocales.map(item => sourceLocale[item]), guestName, guestToken, music: preview && catalogMusic ? catalogPreviewMusic(invitation).url : source.music.enabled ? source.music.url : "", silentPlayback: preview && silentPlayback, catalogPreview: preview && catalogMusic, preview, apiBase: `/api/public/invitations/${encodeURIComponent(invitationId)}`, rsvp: invitation.rsvp, wishesEnabled: invitation.wishes.enabled };
   }, [invitation, invitationId, frameLocale, guestName, guestToken, preview, catalogMusic, sampleWishes, silentPlayback]);
   const latest = useRef(message); latest.current = message;
   const flags = [qaReducedMotion ? "qaReducedMotion=1" : "", qaMobile ? "qaMobile=1" : ""].filter(Boolean).join("&");

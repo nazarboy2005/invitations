@@ -5,7 +5,7 @@ import { useInvitationMaps } from "@/templates/use-invitation-maps";
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { Invitation, Locale } from "@taklifnoma/contracts";
-import { CATALOG_PREVIEW_MUSIC } from "@/modules/catalog/catalog-music";
+import { catalogPreviewMusic } from "@/modules/catalog/catalog-music";
 import { makeErtakPayload } from "./adapter";
 import styles from "./renderer.module.css";
 
@@ -34,7 +34,7 @@ export function TakliflaErtak({ invitation, invitationId, locale, guestName,
     invitationId, guestName, guestToken, preview,
     sampleWishes: preview && catalogMusic,
     reducedMotion: qaReducedMotion,
-    catalogMusicUrl: preview && catalogMusic ? CATALOG_PREVIEW_MUSIC.url : "",
+    catalogMusicUrl: preview && catalogMusic ? catalogPreviewMusic(invitation).url : "",
     silentPlayback: preview && (silentPlayback || (!catalogMusic && !fullPreview)),
   }), [invitation, activeLocale, invitationId, guestName, guestToken, preview,
     qaReducedMotion, catalogMusic, fullPreview, silentPlayback]);

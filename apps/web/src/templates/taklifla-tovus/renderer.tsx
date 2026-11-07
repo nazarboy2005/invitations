@@ -6,7 +6,7 @@ import { useInvitationMaps } from "@/templates/use-invitation-maps";
 import { useEffect, useMemo, useRef } from "react";
 import type { Invitation, Locale } from "@taklifnoma/contracts";
 import { makeTovusPayload } from "./adapter";
-import { CATALOG_PREVIEW_MUSIC } from "@/modules/catalog/catalog-music";
+import { catalogPreviewMusic } from "@/modules/catalog/catalog-music";
 import styles from "./renderer.module.css";
 
 type Props = {
@@ -49,7 +49,7 @@ export function TakliflaTovus({
       reducedMotion: qaReducedMotion,
     });
     if (preview && catalogMusic)
-      value.payload.music = { enabled: true, url: CATALOG_PREVIEW_MUSIC.url };
+      value.payload.music = { enabled: true, url: catalogPreviewMusic(invitation).url };
     return value;
   }, [
     invitation,

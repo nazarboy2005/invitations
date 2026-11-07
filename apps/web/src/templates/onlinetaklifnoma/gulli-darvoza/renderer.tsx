@@ -6,7 +6,7 @@ import { useInvitationMaps } from "@/templates/use-invitation-maps";
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { Invitation, Locale } from "@taklifnoma/contracts";
 import { makeLegacyData } from "@/templates/anor/renderer";
-import { CATALOG_PREVIEW_MUSIC } from "@/modules/catalog/catalog-music";
+import { catalogPreviewMusic } from "@/modules/catalog/catalog-music";
 import styles from "./renderer.module.css";
 
 type Props = {
@@ -55,7 +55,7 @@ export function GulliDarvozaInvitation({
       sampleWishes,
     );
     const musicUrl = preview && catalogMusic
-      ? CATALOG_PREVIEW_MUSIC.url
+      ? catalogPreviewMusic(invitation).url
       : source.music.enabled
         ? source.music.url
         : "";

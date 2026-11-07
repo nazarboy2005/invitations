@@ -1,0 +1,37 @@
+{
+  "report": [
+    {
+      "template": "anor",
+      "music": "/music/catalog/classical/04-vivaldi-spring.mp3",
+      "nativeCalendarRestored": true
+    },
+    {
+      "template": "atlas",
+      "music": "/music/catalog/classical/08-tchaikovsky-waltz-flowers.mp3",
+      "nativeCalendarRestored": true
+    },
+    {
+      "template": "oq-kabutar",
+      "music": "/music/catalog/classical/11-brahms-hungarian-dance-5.mp3",
+      "nativeCalendarRestored": true
+    },
+    {
+      "template": "stained-glass",
+      "music": "/music/catalog/classical/02-debussy-clair-de-lune.mp3",
+      "nativeCalendarRestored": true
+    },
+    {
+      "template": "royal-burgundy-edition",
+      "music": "/music/catalog/classical/01-pachelbel-canon.mp3",
+      "nativeCalendarRestored": true
+    },
+    {
+      "template": "wedivo-pulau-sehati",
+      "music": "/music/catalog/classical/04-vivaldi-spring.mp3",
+      "nativeCalendarRestored": true
+    }
+  ],
+  "errors": [],
+  "metadata": "passed",
+  "creatorMusicAndCalendar": "passed"
+}

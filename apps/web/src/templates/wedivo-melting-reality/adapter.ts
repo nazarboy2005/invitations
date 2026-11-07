@@ -1,6 +1,6 @@
 import { defaultEventLabel, getContent, type Invitation, type Locale } from "@taklifnoma/contracts";
 import { eventInstant, eventWallDate, formatDate } from "../date-format";
-import { CATALOG_PREVIEW_MUSIC } from "../../modules/catalog/catalog-music";
+import { catalogPreviewMusic } from "../../modules/catalog/catalog-music";
 import { getTemplatePreviewWishes } from "../../modules/catalog/preview-sample";
 import sourcePreviewMedia from "../../../public/templates/wedivo-melting-reality/assets/preview-media.json";
 
@@ -58,7 +58,7 @@ export function makeMeltingRealityPayload(invitation: Invitation, locale: Locale
           ? sourcePreviewMedia.map((item, index) => ({ ...item, id: `preview-source-${index}` }))
           : data.gallery,
         music: options.preview && options.catalogMusic
-          ? { enabled: true, url: CATALOG_PREVIEW_MUSIC.url }
+          ? { enabled: true, url: catalogPreviewMusic(invitation).url }
           : data.music,
       },
     },

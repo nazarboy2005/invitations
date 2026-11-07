@@ -5,7 +5,7 @@ import { useInvitationMaps } from "@/templates/use-invitation-maps";
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { Invitation, Locale } from "@taklifnoma/contracts";
-import { CATALOG_PREVIEW_MUSIC } from "@/modules/catalog/catalog-music";
+import { catalogPreviewMusic } from "@/modules/catalog/catalog-music";
 import { makePulauSehatiPayload } from "./adapter";
 import styles from "./renderer.module.css";
 
@@ -68,7 +68,7 @@ export function WedivoPulauSehati({
         data: {
           ...base.payload.data,
           music: catalogMusic
-            ? { enabled: true, url: CATALOG_PREVIEW_MUSIC.url }
+            ? { enabled: true, url: catalogPreviewMusic(invitation).url }
             : base.payload.data.music,
         },
         catalogMusic,

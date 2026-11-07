@@ -53,7 +53,7 @@ test("the app renderer uses invitation APIs, real data, and no source site track
   assert.match(renderer, /\/wishes/);
   assert.doesNotMatch(renderer, /gift\.webp/);
   assert.match(renderer, /bouquet\.webp/);
-  assert.match(adapter, /CATALOG_PREVIEW_MUSIC/);
+  assert.match(adapter, /catalogPreviewMusic/);
   assert.match(adapter, /source\.music\.url/);
   assert.match(adapter, /islamic-edition:update/);
   assert.doesNotMatch(renderer, /demo@example|0000 0000|2030|cloudflareinsights|webhook/i);

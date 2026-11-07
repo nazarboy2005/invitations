@@ -13,6 +13,38 @@
 }
 .fullPreview[data-card-preview]::-webkit-scrollbar { display: none; }
 
+.previewLoader {
+  position: absolute;
+  inset: 0;
+  z-index: 30;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 14px;
+  padding: 24px;
+  background: #fffaf4;
+  color: #6f6770;
+  font: 14px/1.5 system-ui, sans-serif;
+  text-align: center;
+}
+
+.spinner {
+  width: 30px;
+  height: 30px;
+  border: 2px solid #ead7dc;
+  border-top-color: #b8324a;
+  border-radius: 50%;
+  animation: previewSpin 800ms linear infinite;
+}
+
+@keyframes previewSpin {
+  to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spinner { animation: none; }
+}
+
 .previewControls {
   position: fixed;
   z-index: 20;

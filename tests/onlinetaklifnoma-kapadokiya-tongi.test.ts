@@ -30,7 +30,7 @@ test("Kapadokiya adapter uses source art and real invitation fields", async () =
   assert.match(html, /assets\/e924b6a0555070ae\.webp/);
   assert.match(html, /assets\/6ab2a48da7e608b2\.webp/);
   assert.match(html, /assets\/97296127a2ca46ee\.mp4/);
-  assert.match(adapter, /CATALOG_PREVIEW_MUSIC/);
+  assert.match(adapter, /catalogPreviewMusic/);
   assert.match(contracts, /id: "kapadokiya-tongi"[\s\S]*?published: false/);
   assert.doesNotMatch(bridge, /formspree|webhook|gtag\(/i);
 });

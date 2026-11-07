@@ -9,7 +9,7 @@ import type { Invitation, Locale } from "@taklifnoma/contracts";
 import { getContent } from "@taklifnoma/contracts";
 import { eventInstant, eventWallDate, formatDate } from "../date-format";
 import styles from "./template.module.css";
-import { CATALOG_PREVIEW_MUSIC } from "@/modules/catalog/catalog-music";
+import { catalogPreviewMusic } from "@/modules/catalog/catalog-music";
 import { getTemplatePreviewWishes } from "@/modules/catalog/preview-sample";
 import { useInvitationExtras } from "../use-invitation-extras";
 
@@ -402,7 +402,7 @@ export function AnorInvitation({
       catalogMusic
         ? {
             ...data,
-            music: { enabled: true, url: CATALOG_PREVIEW_MUSIC.url },
+            music: { enabled: true, url: catalogPreviewMusic(invitation).url },
           }
         : data,
     [catalogMusic, data],

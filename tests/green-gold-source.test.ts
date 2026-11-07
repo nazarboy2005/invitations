@@ -468,7 +468,7 @@ test("Green Gold uses the shared Emotional Piano in the full preview path", asyn
     "utf8",
   );
   assert.match(preview, /isChorloveTemplate\(template\.id\)[\s\S]*?<ChorloveInvitation[\s\S]*?catalogMusic=\{catalogPreview\}/);
-  assert.match(renderer, /catalogMusic\s*\?\s*CATALOG_PREVIEW_MUSIC\.url/);
+  assert.match(renderer, /catalogMusic\s*\?\s*catalogPreviewMusic\(invitation\)\.url/);
   assert.match(renderer, /silentPlayback: preview && silentPlayback/);
   assert.match(
     renderer,

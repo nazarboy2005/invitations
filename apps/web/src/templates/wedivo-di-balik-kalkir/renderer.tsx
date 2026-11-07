@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useRef } from "react";
 import type { Invitation, Locale } from "@taklifnoma/contracts";
-import { CATALOG_PREVIEW_MUSIC } from "@/modules/catalog/catalog-music";
+import { catalogPreviewMusic } from "@/modules/catalog/catalog-music";
 import { makeWedivoPayload } from "./adapter";
 import styles from "./renderer.module.css";
 
@@ -48,7 +48,7 @@ export function WedivoDiBalikKalkir({
         data: {
           ...base.payload.data,
           music: catalogMusic
-            ? { enabled: true, url: CATALOG_PREVIEW_MUSIC.url }
+            ? { enabled: true, url: catalogPreviewMusic(invitation).url }
             : base.payload.data.music,
         },
         catalogMusic,

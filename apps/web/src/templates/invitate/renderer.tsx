@@ -10,7 +10,7 @@ import { makeLegacyData } from "@/templates/anor/renderer";
 import { getContent } from "@taklifnoma/contracts";
 import { getTemplatePreviewWishes } from "@/modules/catalog/preview-sample";
 import { eventInstant, formatDate } from "../date-format";
-import { CATALOG_PREVIEW_MUSIC } from "@/modules/catalog/catalog-music";
+import { catalogPreviewMusic } from "@/modules/catalog/catalog-music";
 import { makeNahorgiOshData } from "./nahorgi-osh-adapter";
 import styles from "./renderer.module.css";
 import { makeBloomData } from "./bloom-adapter";
@@ -103,7 +103,7 @@ export function InvitateInvitation({
     const music = source.music.enabled
       ? source.music.url
       : preview && catalogMusic
-        ? CATALOG_PREVIEW_MUSIC.url
+        ? catalogPreviewMusic(invitation).url
         : "";
     return {
       ...source,
@@ -194,7 +194,7 @@ export function InvitateInvitation({
       music: invitation.music.enabled
         ? publicAsset(invitation.music.url)
         : preview && catalogMusic
-          ? CATALOG_PREVIEW_MUSIC.url
+          ? catalogPreviewMusic(invitation).url
           : "",
       apiBase: `/api/public/invitations/${encodeURIComponent(invitationId)}`,
       contacts: source.contacts,
@@ -262,7 +262,7 @@ export function InvitateInvitation({
       music: invitation.music.enabled
         ? publicAsset(invitation.music.url)
         : preview && catalogMusic
-          ? CATALOG_PREVIEW_MUSIC.url
+          ? catalogPreviewMusic(invitation).url
           : "",
       guestName,
       guestToken,
@@ -337,7 +337,7 @@ export function InvitateInvitation({
       preview && sampleWishes,
     );
     if (!message.music.enabled && preview && catalogMusic)
-      message.music = { enabled: true, url: CATALOG_PREVIEW_MUSIC.url };
+      message.music = { enabled: true, url: catalogPreviewMusic(invitation).url };
     return message;
   }, [
     catalogMusic,

@@ -27,7 +27,7 @@ test("Jannat app adapter retains its garden art and maps creator invitation data
   assert.match(html, /e32742ca7893c3a2\.webp/);
   assert.match(html, /8791c73ad8c6e6e6\.webp/);
   assert.match(html, /bfe5519451ae0076\.mp4/);
-  assert.match(adapter, /CATALOG_PREVIEW_MUSIC/);
+  assert.match(adapter, /catalogPreviewMusic/);
   assert.match(contracts, /id: "jannat-bogi"[\s\S]*?published: false/);
   assert.doesNotMatch(bridge, /formspree|webhook|gtag\(/i);
 });
