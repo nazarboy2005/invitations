@@ -24,6 +24,7 @@ This file records durable, user-approved product requirements and a small number
 - Telegram user ID is the account identity for creators and administrators. Authenticate with verified Telegram identity; do not request, integrate, or store account phone numbers for sign-in, invitation creation, purchases, or administrative access. Optional creator-authored invitation contacts and guest RSVP fields remain separate from account identity.
 - Ordinary bot `/start` sends one complete personalized welcome with an inline Mini App button and never asks for a phone number.
 - Authenticate and authorize protected actions on the server. Do not trust client-supplied user IDs, public invitation links, Telegram usernames, or callback data as proof of ownership.
+- User requirement: public invitation responses, rendered payloads, and media URLs must exclude credentials and creator account identifiers. Keep secrets and private invitation/account data out of application logs and unexpected error responses.
 - Keep creator sessions persistent across ordinary browser restarts while valid, server-managed, revocable, and separate per browser/device. Preserve recoverable drafts through login recovery. Exact session lifetime and sensitive-action reauthentication rules remain implementation choices.
 
 ## Editing and publication
@@ -35,6 +36,8 @@ This file records durable, user-approved product requirements and a small number
 - Keep the creator editing deadline, RSVP deadline, receipt-upload deadline, and public-view retention as separate policies. Exact public-view retention and some guest-submission closing controls remain undecided.
 
 ## Template catalog and switching
+
+- User requirement: Taklifnomalarim cards and payment-result artwork use the same static template cover and exact versioned image URL as the template catalog, sharing the browser cache in both directions. Sample names inside this artwork are acceptable; show the creator's actual names in the card text. Do not generate personalized dashboard screenshots or schedule cover generation after saving, publication, or payment.
 
 - Catalog categories organize discovery and are independent of event types. A template may belong to multiple shared categories. Event compatibility is separately declared per template, managed in the database, checked when saving, and used to filter creator choices.
 - Store a template's stable ID with the invitation; display-name changes must not change the selected renderer. Keep authored invitation data independent of the template.
@@ -62,6 +65,7 @@ This file records durable, user-approved product requirements and a small number
 - User requirement: notify the owner through Telegram when visitor submissions are saved, using short, clean messages. Keep website activity as the durable record and keep receipt files private; bot messages link to activity.
 - RSVP attendance is one person per response; do not add a guest-count field unless the user approves a contract change.
 - User requirement: each visitor may keep one RSVP per invitation and submit at most two wishes. Editing an RSVP updates that same response; enforce both limits on the server, restore the saved RSVP after refresh, and hide the wish input after the second submission. Use the server-issued visitor cookie for anonymous visitors and the invitation guest identity when present. A shared anonymous link cannot guarantee one identity per human after cookies are cleared.
+- User requirement: template previews must never submit visitor RSVPs or wishes. Preview interactions stay local and are discarded; only published invitation pages accept visitor submissions.
 - Persist guest wishes against the invitation. New wishes remain private and pending until the owner approves them. Only approved, non-deleted wishes appear publicly. Owners can moderate them through the website; bot notifications are supplementary. Verify ownership server-side for every moderation action and safely render guest text.
 - To'yona card details are optional and creator-controlled. Receipt uploads are a separate optional feature. Keep uploaded receipts private to the owner and authorized administrators; a receipt is not proof of money received. The owner reviews it manually. AI receipt screening was explicitly declined.
 

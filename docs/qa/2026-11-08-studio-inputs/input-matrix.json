@@ -2960,9 +2960,9 @@
         "eventLabel": false,
         "programHeading": true,
         "programDescriptions": true,
-        "dressStyle": true,
+        "dressStyle": false,
         "dressText": true,
-        "dressNote": true,
+        "dressNote": false,
         "dressColorNames": true,
         "dressColorHex": true
       },
@@ -3015,9 +3015,9 @@
       "telegram": true,
       "simultaneousContacts": 2,
       "dressEnable": true,
-      "dressStyle": true,
+      "dressStyle": false,
       "dressText": true,
-      "dressNote": true,
+      "dressNote": false,
       "colorNames": true,
       "colorHex": true,
       "colors": 12,
@@ -4087,7 +4087,7 @@
         "programDescriptions": false,
         "dressStyle": true,
         "dressText": true,
-        "dressNote": false,
+        "dressNote": true,
         "dressColorNames": true,
         "dressColorHex": true
       },
@@ -4142,7 +4142,7 @@
       "dressEnable": true,
       "dressStyle": true,
       "dressText": true,
-      "dressNote": false,
+      "dressNote": true,
       "colorNames": true,
       "colorHex": true,
       "colors": 12,
@@ -6377,8 +6377,8 @@
       "inputs": {
         "hosts": true,
         "greeting": true,
-        "eventLabel": true,
-        "programHeading": true,
+        "eventLabel": false,
+        "programHeading": false,
         "programDescriptions": false,
         "dressStyle": true,
         "dressText": true,
@@ -6402,7 +6402,7 @@
       "people": 2,
       "age": false,
       "hosts": true,
-      "eventLabel": true,
+      "eventLabel": false,
       "greeting": true,
       "invitationText": true,
       "startsAt": true,
@@ -6412,7 +6412,7 @@
       "landmark": true,
       "map": true,
       "program": 100,
-      "programHeading": true,
+      "programHeading": false,
       "programTime": true,
       "programTitle": true,
       "programDescription": false,
@@ -7830,14 +7830,14 @@
       "maps": true,
       "music": true,
       "wishes": true,
-      "gallery": 50,
+      "gallery": 1,
       "program": true,
       "dressCode": true,
       "story": 0,
       "gift": false,
       "receipts": false,
       "phone": true,
-      "telegram": true,
+      "telegram": false,
       "rsvp": "form",
       "age": false,
       "people": 2,
@@ -7846,7 +7846,7 @@
       "inputs": {
         "hosts": false,
         "greeting": true,
-        "eventLabel": true,
+        "eventLabel": false,
         "programHeading": true,
         "programDescriptions": false,
         "dressStyle": true,
@@ -7871,7 +7871,7 @@
       "people": 2,
       "age": false,
       "hosts": false,
-      "eventLabel": true,
+      "eventLabel": false,
       "greeting": true,
       "invitationText": true,
       "startsAt": true,
@@ -7888,7 +7888,7 @@
       "story": 0,
       "storyTitle": false,
       "storyText": false,
-      "gallery": 50,
+      "gallery": 1,
       "galleryCaptionAndAlt": true,
       "artists": 0,
       "artistNameRoleAndImage": false,
@@ -7901,8 +7901,8 @@
       "wishes": true,
       "moderation": "Always required",
       "phone": true,
-      "telegram": true,
-      "simultaneousContacts": 2,
+      "telegram": false,
+      "simultaneousContacts": 1,
       "dressEnable": true,
       "dressStyle": true,
       "dressText": true,
@@ -10011,7 +10011,7 @@
         "dressText": true,
         "dressNote": true,
         "dressColorNames": true,
-        "dressColorHex": true
+        "dressColorHex": false
       },
       "programLimit": 100,
       "dressColorLimit": 12,
@@ -10066,7 +10066,7 @@
       "dressText": true,
       "dressNote": true,
       "colorNames": true,
-      "colorHex": true,
+      "colorHex": false,
       "colors": 12,
       "templateSpecific": [
         "arrivalNote",
@@ -10221,7 +10221,7 @@
         "dressText": true,
         "dressNote": true,
         "dressColorNames": true,
-        "dressColorHex": true
+        "dressColorHex": false
       },
       "programLimit": 100,
       "dressColorLimit": 12,
@@ -10276,7 +10276,7 @@
       "dressText": true,
       "dressNote": true,
       "colorNames": true,
-      "colorHex": true,
+      "colorHex": false,
       "colors": 12,
       "templateSpecific": [
         "arrivalNote",
@@ -10324,7 +10324,7 @@
         "dressText": true,
         "dressNote": true,
         "dressColorNames": true,
-        "dressColorHex": true
+        "dressColorHex": false
       },
       "programLimit": 100,
       "dressColorLimit": 12,
@@ -10379,7 +10379,7 @@
       "dressText": true,
       "dressNote": true,
       "colorNames": true,
-      "colorHex": true,
+      "colorHex": false,
       "colors": 12,
       "templateSpecific": [
         "contactNote",
@@ -10431,7 +10431,7 @@
         "dressText": true,
         "dressNote": true,
         "dressColorNames": true,
-        "dressColorHex": true
+        "dressColorHex": false
       },
       "programLimit": 100,
       "dressColorLimit": 12,
@@ -10486,7 +10486,7 @@
       "dressText": true,
       "dressNote": true,
       "colorNames": true,
-      "colorHex": true,
+      "colorHex": false,
       "colors": 12,
       "templateSpecific": [
         "contactNote",
@@ -10535,7 +10535,7 @@
         "dressText": true,
         "dressNote": true,
         "dressColorNames": true,
-        "dressColorHex": true
+        "dressColorHex": false
       },
       "programLimit": 100,
       "dressColorLimit": 12,
@@ -10590,7 +10590,7 @@
       "dressText": true,
       "dressNote": true,
       "colorNames": true,
-      "colorHex": true,
+      "colorHex": false,
       "colors": 12,
       "templateSpecific": [
         "doorsAt"
@@ -11047,7 +11047,7 @@
         "dressText": true,
         "dressNote": true,
         "dressColorNames": true,
-        "dressColorHex": true
+        "dressColorHex": false
       },
       "programLimit": 100,
       "dressColorLimit": 12,
@@ -11102,7 +11102,7 @@
       "dressText": true,
       "dressNote": true,
       "colorNames": true,
-      "colorHex": true,
+      "colorHex": false,
       "colors": 12,
       "templateSpecific": []
     },
@@ -11555,7 +11555,7 @@
         "dressText": true,
         "dressNote": true,
         "dressColorNames": true,
-        "dressColorHex": true
+        "dressColorHex": false
       },
       "programLimit": 100,
       "dressColorLimit": 12,
@@ -11610,7 +11610,7 @@
       "dressText": true,
       "dressNote": true,
       "colorNames": true,
-      "colorHex": true,
+      "colorHex": false,
       "colors": 12,
       "templateSpecific": [
         "brideFamily",

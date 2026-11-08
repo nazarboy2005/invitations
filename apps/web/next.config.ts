@@ -11,6 +11,9 @@ const config: NextConfig = {
   distDir: process.env.TAKLIFNOMA_BUILD_DIST_DIR ?? ".next",
   transpilePackages: ["@taklifnoma/contracts", "@taklifnoma/database"],
   poweredByHeader: false,
+  // URLs can contain guest/login tokens; fetch paths can contain bot tokens.
+  // Also prevent automatic logging of Server Function arguments/browser data.
+  logging: false,
   serverExternalPackages: [
     "playwright",
     "playwright-core",
@@ -72,7 +75,7 @@ const config: NextConfig = {
         source: "/(.*)",
         headers: [
           { key: "X-Content-Type-Options", value: "nosniff" },
-          { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+          { key: "Referrer-Policy", value: "no-referrer" },
           { key: "X-Frame-Options", value: "SAMEORIGIN" },
           ...(process.env.NODE_ENV === "production"
             ? [{ key: "Strict-Transport-Security", value: "max-age=31536000" }]

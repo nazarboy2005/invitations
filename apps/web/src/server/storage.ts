@@ -177,18 +177,29 @@ export async function sealMedia(key: string) {
   );
   return sealed;
 }
-export async function mediaReadUrl(key: string, mime: string) {
-  return getSignedUrl(
-    storageClient(),
-    new GetObjectCommand({
-      Bucket: process.env.R2_BUCKET_NAME,
-      Key: key,
-      ResponseContentType: mime,
-      ResponseContentDisposition:
-        mime === "application/pdf" ? "attachment" : "inline",
-    }),
-    { expiresIn: 300 },
-  );
+
+function publicMediaStream(stream: ReadableStream<Uint8Array>) {
+  const reader = stream.getReader();
+  return new ReadableStream<Uint8Array>({
+    async pull(controller) {
+      try {
+        const { done, value } = await reader.read();
+        if (done) {
+          reader.releaseLock();
+          controller.close();
+        } else controller.enqueue(value);
+      } catch {
+        reader.releaseLock();
+        // Stream failures happen after the API error handler has returned.
+        // Prevent framework logs from receiving raw storage diagnostics.
+        controller.error(new Error("Media stream interrupted"));
+      }
+    },
+    async cancel() {
+      await reader.cancel().catch(() => {});
+      reader.releaseLock();
+    },
+  });
 }
 
 export async function mediaResponse(
@@ -196,15 +207,6 @@ export async function mediaResponse(
   key: string,
   mime: string,
 ) {
-  if (!key.startsWith("local/"))
-    return new Response(null, {
-      status: 302,
-      headers: {
-        Location: await mediaReadUrl(key, mime),
-        "Cache-Control": "private, no-store",
-      },
-    });
-  const bytes = await readLocalMedia(key);
   const headers = {
     "Content-Type": mime,
     "Cache-Control": "private, no-store",
@@ -213,6 +215,48 @@ export async function mediaResponse(
     "Content-Disposition": mime === "application/pdf" ? "attachment" : "inline",
   };
   const range = request.headers.get("range");
+  // Storage keys contain creator IDs. Stream through this authorized route
+  // instead of exposing keys, account endpoints, or signed URLs in redirects.
+  if (!key.startsWith("local/")) {
+    if (range && !/^bytes=(?:\d+-\d*|-\d+)$/.test(range))
+      return new Response(null, { status: 416, headers });
+    try {
+      const object = await storageClient().send(
+        new GetObjectCommand({
+          Bucket: process.env.R2_BUCKET_NAME,
+          Key: key,
+          ...(range ? { Range: range } : {}),
+        }),
+        { abortSignal: request.signal },
+      );
+      if (!object.Body) throw new Error("Media body unavailable");
+      return new Response(
+        publicMediaStream(object.Body.transformToWebStream()),
+        {
+          status: object.ContentRange ? 206 : 200,
+          headers: {
+            ...headers,
+            ...(object.ContentLength !== undefined
+              ? { "Content-Length": String(object.ContentLength) }
+              : {}),
+            ...(object.ContentRange
+              ? { "Content-Range": object.ContentRange }
+              : {}),
+          },
+        },
+      );
+    } catch (error) {
+      if (
+        error &&
+        typeof error === "object" &&
+        "$metadata" in error &&
+        (error.$metadata as { httpStatusCode?: number })?.httpStatusCode === 416
+      )
+        return new Response(null, { status: 416, headers });
+      throw error;
+    }
+  }
+  const bytes = await readLocalMedia(key);
   if (range) {
     const match = /^bytes=(\d*)-(\d*)$/.exec(range);
     let start = match?.[1] ? Number(match[1]) : 0;

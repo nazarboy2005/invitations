@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { ZodError } from "zod";
+import { AuthError } from "./auth";
 export class ApiError extends Error {
   constructor(
     public status: number,
@@ -31,19 +32,17 @@ function errorResponse(error: unknown) {
       },
       { status: 400 },
     );
-  if (
-    error &&
-    typeof error === "object" &&
-    "status" in error &&
-    typeof error.status === "number"
-  )
+  // Only our deliberately public errors may supply response text. SDK/HTTP
+  // errors also carry `status`, but their messages can contain credentials.
+  if (error instanceof ApiError || error instanceof AuthError)
     return NextResponse.json(
       {
         error: {
-          code: "code" in error ? error.code : "REQUEST_FAILED",
-          message:
-            error instanceof Error ? error.message : "So‘rov bajarilmadi.",
-          ...("fields" in error && Array.isArray(error.fields) ? { fields: error.fields } : {}),
+          code: error.code,
+          message: error.message,
+          ...(error instanceof ApiError && error.fields
+            ? { fields: error.fields }
+            : {}),
         },
       },
       { status: error.status },
@@ -58,10 +57,7 @@ function errorResponse(error: unknown) {
       },
       { status: 400 },
     );
-  console.error(
-    "Request failed",
-    error instanceof Error ? error.name : "UnknownError",
-  );
+  console.error("Request failed");
   return NextResponse.json(
     {
       error: {

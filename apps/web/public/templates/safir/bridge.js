@@ -98,7 +98,7 @@
     const musicUrl = p.silentPlayback ? "" : p.music;
     const audio = document.querySelector("#bgMusic"); if (audio) { if (audio.src !== new URL(musicUrl || "about:blank", location.href).href) audio.src = musicUrl || ""; audio.hidden = !musicUrl; const musicButton = document.querySelector("#soundToggle"); musicButton.hidden = !musicUrl; musicButton.title = l.music; musicButton.setAttribute("aria-label", l.music); if (!musicUrl) audio.pause(); }
     document.querySelector("#soundToggle")?.setAttribute("aria-label", l.music);
-    const heroImg = document.querySelector(".card-main-img"); const firstPhoto = p.gallery?.[0]; if (heroImg && firstPhoto?.src) heroImg.src = firstPhoto.src;
+    const heroImg = document.querySelector(".card-main-img"); const firstPhoto = p.gallery?.[0]; if (heroImg && firstPhoto?.src) { heroImg.src = firstPhoto.src; heroImg.alt = firstPhoto.alt || firstPhoto.caption || ""; }
     window.__safirPayload = p;
   }
   function textWithin(parent, selector, value) { const el = parent.querySelector(selector); if (el) el.textContent = value || ""; }

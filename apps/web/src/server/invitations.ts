@@ -14,6 +14,7 @@ import { assertManagedImages, assertPublicMedia, assertPublishable } from "./pub
 import { requireAdmin, recordAdminChange } from "./admin";
 import type { AdminInvitationAction } from "./admin-invitation-access";
 import { paymentIdentity } from "@taklifnoma/contracts/payment";
+import { publicInvitationData } from "./public-invitation-data";
 export async function authenticatedUser(): Promise<SessionUser> {
   const user = await getSessionUser();
   if (!user)
@@ -176,12 +177,18 @@ export async function saveInvitation(
   return saved;
 }
 export async function getPublishedInvitation(idOrSlug: string) {
-  const rows =
-    await getDb()`SELECT id,data FROM invitations WHERE (id::text=${idOrSlug} OR slug=${idOrSlug}) AND status='published' LIMIT 1`;
-  return rows[0]
-    ? {
-        id: rows[0].id as string,
-        invitation: normalizeInvitation(invitationSchema.parse(rows[0].data)),
-      }
-    : null;
+  try {
+    const rows =
+      await getDb()`SELECT id,data FROM invitations WHERE (id::text=${idOrSlug} OR slug=${idOrSlug}) AND status='published' LIMIT 1`;
+    return rows[0]
+      ? {
+          id: rows[0].id as string,
+          invitation: publicInvitationData(rows[0].data),
+        }
+      : null;
+  } catch {
+    // This loader also runs outside API handlers in metadata/RSC rendering.
+    // Never let Next log raw database errors or validation payloads there.
+    throw new ApiError(503, "SERVICE_UNAVAILABLE", "Taklifnoma vaqtincha mavjud emas.");
+  }
 }

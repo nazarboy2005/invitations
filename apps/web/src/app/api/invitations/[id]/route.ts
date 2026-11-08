@@ -1,5 +1,4 @@
-import { NextResponse, after } from "next/server";
-import { preparePublishedCover } from "@/server/published-cover";
+import { NextResponse } from "next/server";
 import { z } from "zod";
 import { invitationSchema } from "@taklifnoma/contracts";
 import { getDb } from "@taklifnoma/database";
@@ -45,8 +44,6 @@ export async function PUT(request: Request, { params }: Context) {
     if (!(await getOwnedInvitation(id, access.owner.id)))
       throw new ApiError(404, "NOT_FOUND", "Taklifnoma topilmadi.");
     const saved = await saveInvitation(invitation, access.owner, access.admin);
-    if (saved.status === "published")
-      after(() => preparePublishedCover({ invitationId: id }));
     return NextResponse.json(
       {
         invitation: saved,

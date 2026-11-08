@@ -39,7 +39,7 @@
   function fill(payload) {
     if (!payload) return;
     data = payload;
-    currentLocale = payload.locale || "uz-Latn";
+    currentLocale = payload.locale === "uz" ? "uz-Latn" : payload.locale || "uz-Latn";
     document.documentElement.lang = currentLocale === "uz-Latn" ? "uz" : currentLocale;
     const l = labels[currentLocale] || labels["uz-Latn"];
     const date = payload.date || {};

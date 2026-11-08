@@ -1,5 +1,4 @@
 "use client";
-import { StaticImagePreview } from "@/modules/static-images/static-image-preview";
 import { downloadInvitationImage } from "@/modules/static-images/download";
 import { publicAsset } from "@/lib/public-asset";
 
@@ -97,7 +96,6 @@ function positionPopover(
 
 function InvitationCard({
   invitation,
-  cacheScope,
   hidden = false,
   local = false,
   accountSaved = !local,
@@ -107,7 +105,6 @@ function InvitationCard({
   viewCount,
 }: {
   invitation: Invitation;
-  cacheScope: string;
   hidden?: boolean;
   local?: boolean;
   accountSaved?: boolean;
@@ -220,13 +217,8 @@ function InvitationCard({
                 : `${names}: taklifnomani tahrirlash`
             }
           />
-          {isImage ? (
-            <StaticImagePreview invitation={invitation} compact />
-          ) : template ? (
-            <InvitationThumbnail
-              invitation={invitation}
-              cacheScope={cacheScope}
-            />
+          {template ? (
+            <InvitationThumbnail template={template} />
           ) : (
             <span className={styles.noTemplateLabel}>
               <FileHeart size={26} />
@@ -1020,7 +1012,6 @@ export function Dashboard() {
                   <InvitationCard
                     invitation={invitation}
                     hidden={!matchesFilters(invitation)}
-                    cacheScope={session?.user?.id ?? "browser-drafts"}
                     local={local}
                     viewCount={viewCount}
                     accountSaved={cloudIds.has(invitation.id)}
@@ -1132,13 +1123,8 @@ export function Dashboard() {
                 className={styles.paymentReturnArt}
                 data-format={templateById(paymentReturnInvitation.templateId)?.format}
               >
-                {templateById(paymentReturnInvitation.templateId)?.format === "image" ? (
-                  <StaticImagePreview invitation={paymentReturnInvitation} compact />
-                ) : templateById(paymentReturnInvitation.templateId) ? (
-                  <InvitationThumbnail
-                    invitation={paymentReturnInvitation}
-                    cacheScope={session?.user?.id ?? "payment-return"}
-                  />
+                {templateById(paymentReturnInvitation.templateId) ? (
+                  <InvitationThumbnail template={templateById(paymentReturnInvitation.templateId)!} />
                 ) : (
                   <FileHeart size={42} />
                 )}

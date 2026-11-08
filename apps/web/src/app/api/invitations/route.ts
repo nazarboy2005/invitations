@@ -1,5 +1,4 @@
-import { NextResponse, after } from "next/server";
-import { preparePublishedCover } from "@/server/published-cover";
+import { NextResponse } from "next/server";
 import { z } from "zod";
 import { getDb } from "@taklifnoma/database";
 import { invitationSchema } from "@taklifnoma/contracts";
@@ -44,8 +43,6 @@ export async function POST(request: Request) {
       true,
     );
     const saved = await saveInvitation(invitation, access.owner, access.admin);
-    if (saved.status === "published")
-      after(() => preparePublishedCover({ invitationId: saved.id }));
     return NextResponse.json(
       { invitation: saved },
       { status: 201, headers: privateHeaders },

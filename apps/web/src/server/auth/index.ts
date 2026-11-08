@@ -167,10 +167,7 @@ export async function authRoute(action: () => Promise<Response>) {
   } catch (error) {
     const known = error instanceof AuthError;
     if (!known)
-      console.error(
-        "Authentication backend unavailable",
-        error instanceof Error ? error.name : "Error",
-      );
+      console.error("Authentication backend unavailable");
     return NextResponse.json(
       {
         error: {

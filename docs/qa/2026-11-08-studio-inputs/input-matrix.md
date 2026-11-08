@@ -68,7 +68,7 @@ No publication flags, prices, migrations, or deployments were changed by this au
 | oltin-uzuk | Unpublished | 50 | 20 | 100 | 20 | Yes | Yes | Yes / Yes | form | Yes / Yes |  |
 | oltin-yosh | Unpublished | 50 | 20 | 100 | 20 | Yes | Yes | Yes / Yes | form | Yes / Yes |  |
 | oq-kabutar | Unpublished | 50 | 20 | 100 | 20 | Yes | Yes | Yes / Yes | form | Yes / Yes |  |
-| orchid-amplop | Unpublished | 50 | 2 | 100 | 20 | No | Yes | Yes / Yes | form | Yes / Yes |  |
+| orchid-amplop | Unpublished | 50 | 2 | 100 | 20 | No | Yes | Yes / Yes | form | Yes / Yes | eventLabel |
 | orik-guli | Published | 50 | 20 | 100 | 20 | Yes | Yes | Yes / Yes | form | Yes / Yes |  |
 | osh | Unpublished | 1 | 2 | 0 | 0 | No | Yes | No / No | form | Yes / Yes | greeting, eventLabel |
 | oynavand | Unpublished | 50 | 20 | 100 | 20 | Yes | Yes | Yes / Yes | form | Yes / Yes |  |
@@ -82,7 +82,7 @@ No publication flags, prices, migrations, or deployments were changed by this au
 | qogoz-turna | Unpublished | 50 | 20 | 100 | 20 | Yes | Yes | Yes / Yes | form | Yes / Yes |  |
 | retro-kino | Unpublished | 50 | 20 | 100 | 20 | Yes | Yes | Yes / Yes | form | Yes / Yes |  |
 | royal-burgundy-edition | Published | 50 | 2 | 100 | 20 | No | Yes | Yes / No | form | Yes / Yes | eventLabel |
-| safir | Unpublished | 50 | 2 | 100 | 0 | Yes | Yes | No / No | form | Yes / Yes | hosts |
+| safir | Unpublished | 1 | 2 | 100 | 0 | Yes | Yes | No / No | form | Yes / No | hosts, eventLabel |
 | sahar-ifori | Published | 0 | 2 | 0 | 0 | No | No | No / No | none | No / No |  |
 | sahifa | Unpublished | 50 | 20 | 100 | 20 | Yes | Yes | Yes / Yes | form | Yes / Yes |  |
 | sahro-fonusi | Unpublished | 50 | 20 | 100 | 20 | Yes | Yes | Yes / Yes | form | Yes / Yes |  |

@@ -82,15 +82,9 @@ export async function getCatalog(includeUnpublished = false): Promise<{
       })),
       configured: true,
     };
-  } catch (error) {
-    const code =
-      error && typeof error === "object" && "code" in error
-        ? String(error.code)
-        : "UNKNOWN_ERROR";
+  } catch {
     if (!catalogFallbackWarningLogged)
-      console.warn(
-        `Catalog database unavailable (${code}); using local catalog.`,
-      );
+      console.warn("Catalog database unavailable; using local catalog.");
     catalogFallbackWarningLogged = true;
     return { ...localCatalog(includeUnpublished), configured: false };
   }

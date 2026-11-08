@@ -33,6 +33,30 @@ export const TemplateFrame = forwardRef<HTMLIFrameElement, Props>(function Templ
       if (!active || frame.contentDocument !== doc || initialized.has(doc)) return;
       initialized.add(doc);
       cleanups.push(pauseOffscreenEffects(doc));
+      // Template previews run outside the public invitation route. Keep a
+      // frame-level safety net so a template form cannot post visitor data if
+      // its own preview handler is missing or regresses.
+      if (!/^\/i\/[^/]+\/?$/.test(window.location.pathname)) {
+        const frameWindow = doc.defaultView;
+        if (frameWindow) {
+          const nativeFetch = frameWindow.fetch.bind(frameWindow);
+          frameWindow.fetch = (input, init) => {
+            const requestUrl = input instanceof frameWindow.Request ? input.url : String(input);
+            const method = (init?.method || (input instanceof frameWindow.Request ? input.method : "GET")).toUpperCase();
+            let path = requestUrl;
+            try { path = new URL(requestUrl, doc.baseURI).pathname; } catch { /* Keep the original value for matching. */ }
+            const visitorSubmission = /\/api\/(?:public\/invitations\/[^/]+|i\/[^/]+)\/(?:rsvp|wishes)(?:\/|$)/i.test(path)
+              || /\/api\/(?:rsvp|wishes)$/i.test(path);
+            if (method === "POST" && visitorSubmission) {
+              return Promise.resolve(new frameWindow.Response(
+                JSON.stringify({ ok: false, code: "PREVIEW_ONLY", message: "Bu namuna. Ma’lumot yuborilmadi." }),
+                { status: 403, headers: { "Content-Type": "application/json" } },
+              ));
+            }
+            return nativeFetch(input, init);
+          };
+        }
+      }
       latest.current(frame);
       const injectVisitorControls = () => {
         if (!active || frame.contentDocument !== doc || !doc.body) return true;

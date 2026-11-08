@@ -29,16 +29,11 @@ export function coverFailureCode(error: unknown, stage: string) {
 export function coverFailure(error: unknown, stage: string) {
   if (error instanceof ApiError) return error;
   const code = coverFailureCode(error, stage);
-  // The first line identifies packaging/launch failures without logging the
-  // invitation, cookies, URL query data, or Playwright's DOM/call-log excerpts.
-  const detail = (error instanceof Error ? error.message : String(error))
-    .split("\n")[0]
-    .replace(/https?:\/\/\S+/g, "[url]")
-    .slice(0, 500);
+  // Raw error text can contain tokens, SQL, invitation content, or cookies,
+  // including on its first line. Keep only classified diagnostics.
   console.error("Invitation cover failed", {
     code,
     stage,
-    detail,
     node: process.version,
     platform: process.platform,
     arch: process.arch,

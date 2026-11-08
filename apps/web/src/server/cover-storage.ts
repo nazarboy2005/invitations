@@ -81,7 +81,7 @@ export function coverStorage() {
     provider = storageProvider();
   } catch {
     console.error("Invitation cover storage is not configured", {
-      provider: process.env.MEDIA_STORAGE || "auto",
+      provider: process.env.MEDIA_STORAGE === "local" ? "local" : "r2-or-unconfigured",
       missing: [
         "R2_ACCOUNT_ID",
         "R2_ACCESS_KEY_ID",

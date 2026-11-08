@@ -19,9 +19,6 @@ test(
     const browser = await chromium.launch({ headless: true });
     const output = "docs/design/dashboard";
     await mkdir(output, { recursive: true });
-    const webCover = await readFile(
-      "docs/templates/luxury-uzbek-verification/taklifla-tovus-personalized-cover.webp",
-    );
     const imageCover = await readFile(
       "apps/web/public/templates/ivory-rose-card/preview.webp",
     );
@@ -69,7 +66,7 @@ test(
         );
         await page.route("**/api/invitation-covers", (route: any) => {
           coverRequests++;
-          return route.fulfill({ contentType: "image/webp", body: webCover });
+          return route.abort();
         });
         await page.route("**/api/static-images/preview", (route: any) =>
           route.fulfill({ contentType: "image/webp", body: imageCover }),
@@ -336,6 +333,7 @@ test(
           0,
         );
         await page.keyboard.press("Escape");
+        assert.equal(coverRequests, 0, "dashboard uses static catalog covers");
         assert.deepEqual(errors, []);
         console.log(
           `${width}px: responsive layout, unified multi-select, search, mounted covers, clipboard, menus, deletion cancel and sticky background passed (${coverRequests} cover requests)`,
