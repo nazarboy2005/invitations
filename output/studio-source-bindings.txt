@@ -1,0 +1,723 @@
+
+## ivory-rose-card
+
+
+## lola-maktubi
+
+
+## moviy-ravoq-card
+
+
+## sahar-ifori
+
+
+## wedivo-pulau-sehati
+const image = (id,item) => {const n=$(id);if(n){n.removeAttribute('src');n.setAttribute('data-src',safeUrl(item?.src));n.alt=item?.alt || item?.caption || '';}};
+window.PULAU={...p,invitationId:progressId,compass:({'uz-Latn':['Sh','Shq','J','G‘'],'uz-Cyrl':['Ш','Шқ','Ж','Ғ'],en:['N','E','S','W'],ru:['С','В','Ю','З']}[p.locale]),gallery:d.gallery.filter(item=>safeUrl(item.src)),deadline:d.rsvp.deadline || '',timeLabel:d.date.time,secondaryEvent:{...d.pulau?.secondaryEvent,timeLabel:d.pulau?.secondaryEvent?.time || ''},translate:t,storyIds:d.story.map((_,i)=>i+1)};
+text('cs-'+who+'-parents',d.hosts);text('cs-'+who+'-initial',d[who]?.slice(0,1));
+for(const id of ['hero-greeting'])text(id,d.greeting);
+text('hero-initials',d.monogram);text('cover-kicker-text',d.eventType);text('cover-foot',couple+' · ');const year=document.createElement('span');year.id='cover-year';year.textContent=d.date.year;$('cover-foot').append(year);
+text('hero-venue-name',d.venue.name);text('ev-1-name',d.eventType);text('ev-1-venue-name',d.venue.name);text('ev-1-addr',d.venue.address);
+text('cr-family',d.hosts);text('tz-src',d.timezone);
+for(const [index,who] of ['groom','bride'].entries()) {const profile=extra.profiles?.[index] || {};text('cs-'+who+'-parents',profile.bio || d.hosts);text('cs-'+who+'-class-text',profile.characterClass);text('cs-'+who+'-origin-text',profile.origin);text('cs-'+who+'-skill',profile.skill);text('cs-'+who+'-item',profile.item);text('cs-'+who+'-stats-src',profile.stats);show('cs-'+who+'-class',!!profile.characterClass);show('cs-'+who+'-origin
+for(let n=1;n<=5;n++){const item=extra.missions?.[n-1];text(`mq-${n}-title`,item?.title);text(`mq-${n}-desc`,item?.description);text(`mq-${n}-reward`,item?.reward);}
+section('misi',(extra.missions || []).some(m=>m.title || m.description));
+text('wedivo-rundown-data',JSON.stringify(d.program.map(row=>({id:row.id,title:row.title,description:row.description,date:p.date,startTime:row.time,isAllDay:false}))));
+section('dresscode',d.dressCode.enabled);text('dresscode-intro',d.dressCode.text);text('dc-note',d.dressCode.note);text('dresscode-kick-place',d.dressCode.style);
+for(let n=swatches.length;n<d.dressCode.colors.length;n++) {const clone=swatchPrototype.cloneNode(true);for(const node of [clone,...clone.querySelectorAll('[id]')])node.id=node.id.replace(/dc-sw-\d+/,`dc-sw-${n+1}`);swatchPrototype.parentNode.append(clone);swatches.push(clone);}
+swatches.forEach((node,i)=>{const color=d.dressCode.colors[i];node.hidden=!color;if(color){node.dataset.color=color.hex;node.style.setProperty('--sw',color.hex);node.querySelector('.swatch-fab')?.style.setProperty('--sw',color.hex);node.style.setProperty('--c',color.hex);node.setAttribute('aria-label',color.name);text('dc-sw-'+(i+1)+'-name',color.name);}});
+
+## oltin-darvoza-ortidagi-baxt
+set('invocation',t('invocation')); set('groom',data.groom); set('bride',data.bride); set('message',data.message); set('hostsLabel',t('hosts')); set('hosts',data.hosts); set('date',date?[day,'·',month,'·',year].join(' '):''); set('dateHeading',t('date')); set('month',month); set('day',day); set('year',year); set('weekdayTime',date?[fmt(date,{weekday:'long'}),data.date?.time].filter(Boolean).join(', '):''); set('countdownHeading',t('count
+const greeting = data.guestName ? data.greeting.replaceAll('{name}',data.guestName) : ""; if(greeting) set('message',`${greeting}\n\n${data.message}`);
+const gl=$('[data-list="gallery"]'); if(gl){gl.replaceChildren(...(data.gallery||[]).filter(x=>x.src).map(photo=>{const figure=document.createElement('figure');const img=document.createElement('img');img.src=photo.src;img.alt=photo.alt||photo.caption||'';figure.append(img);if(photo.caption){const cap=document.createElement('figcaption');cap.textContent=photo.caption;figure.append(cap);}return figure;}));}
+const closingHosts=$('.closing .hosts'); if(closingHosts)closingHosts.textContent=data.hosts||'';
+
+## gulli-darvoza
+set('invocation',t('invocation')); set('groom',data.groom); set('bride',data.bride); set('message',data.message); set('hostsLabel',t('hosts')); set('hosts',data.hosts); set('date',date?[day,'·',month,'·',year].join(' '):''); set('dateHeading',t('date')); set('month',month); set('day',day); set('year',year); set('weekdayTime',date?[fmt(date,{weekday:'long'}),data.date?.time].filter(Boolean).join(', '):''); set('countdownHeading',t('count
+const greeting = data.guestName ? data.greeting.replaceAll('{name}',data.guestName) : ""; if(greeting) set('message',`${greeting}\n\n${data.message}`);
+const gl=$('[data-list="gallery"]'); if(gl){gl.replaceChildren(...(data.gallery||[]).filter(x=>x.src).map(photo=>{const figure=document.createElement('figure');const img=document.createElement('img');img.src=photo.src;img.alt=photo.alt||photo.caption||'';figure.append(img);if(photo.caption){const cap=document.createElement('figcaption');cap.textContent=photo.caption;figure.append(cap);}return figure;}));}
+const closingHosts=$('.closing .hosts'); if(closingHosts)closingHosts.textContent=data.hosts||'';
+
+## ming-bir-kecha
+set('invocation',t('invocation')); set('groom',data.groom); set('bride',data.bride); set('message',data.message); set('hostsLabel',t('hosts')); set('hosts',data.hosts); set('date',date?[day,'·',month,'·',year].join(' '):''); set('dateHeading',t('date')); set('month',month); set('day',day); set('year',year); set('weekdayTime',date?[fmt(date,{weekday:'long'}),data.date?.time].filter(Boolean).join(', '):''); set('countdownHeading',t('count
+const greeting = data.guestName ? data.greeting.replaceAll('{name}',data.guestName) : ""; if(greeting) set('message',`${greeting}\n\n${data.message}`);
+const gl=$('[data-list="gallery"]'); if(gl){gl.replaceChildren(...(data.gallery||[]).filter(x=>x.src).map(photo=>{const figure=document.createElement('figure');const img=document.createElement('img');img.src=photo.src;img.alt=photo.alt||photo.caption||'';figure.append(img);if(photo.caption){const cap=document.createElement('figcaption');cap.textContent=photo.caption;figure.append(cap);}return figure;}));}
+const closingHosts=$('.closing .hosts'); if(closingHosts)closingHosts.textContent=data.hosts||'';
+
+## andalus-darvozasi
+set('invocation',t('invocation')); set('groom',data.groom); set('bride',data.bride); set('message',data.message); set('hostsLabel',t('hosts'));$('[data-pair]').forEach(n=>n.hidden=!data.bride); set('hosts',data.hosts); set('date',date?[day,'·',month,'·',year].join(' '):''); set('dateHeading',t('date')); set('month',month); set('day',day); set('year',year); set('weekdayTime',date?[fmt(date,{weekday:'long'}),data.date?.time].filter(Boolea
+const greeting = data.guestName ? data.greeting.replaceAll('{name}',data.guestName) : ""; if(greeting) set('message',`${greeting}\n\n${data.message}`);
+const gl=$('[data-list="gallery"]'); if(gl){gl.replaceChildren(...(data.gallery||[]).filter(x=>x.src).map(photo=>{const figure=document.createElement('figure');const img=document.createElement('img');img.src=photo.src;img.alt=photo.alt||photo.caption||'';figure.append(img);if(photo.caption){const cap=document.createElement('figcaption');cap.textContent=photo.caption;figure.append(cap);}return figure;}));}
+const closingHosts=$('.closing .hosts'); if(closingHosts)closingHosts.textContent=data.hosts||'';
+
+## samarqand-peshtoqi
+set('invocation',t('invocation')); set('groom',data.groom); set('bride',data.bride); set('message',data.message); set('hostsLabel',t('hosts'));$('[data-pair]').forEach(n=>n.hidden=!data.bride); set('hosts',data.hosts); set('date',date?[day,'·',month,'·',year].join(' '):''); set('dateHeading',t('date')); set('month',month); set('day',day); set('year',year); set('weekdayTime',date?[fmt(date,{weekday:'long'}),data.date?.time].filter(Boolea
+const greeting = data.guestName ? data.greeting.replaceAll('{name}',data.guestName) : ""; if(greeting) set('message',`${greeting}\n\n${data.message}`);
+const gl=$('[data-list="gallery"]'); if(gl){gl.replaceChildren(...(data.gallery||[]).filter(x=>x.src).map(photo=>{const figure=document.createElement('figure');const img=document.createElement('img');img.src=photo.src;img.alt=photo.alt||photo.caption||'';figure.append(img);if(photo.caption){const cap=document.createElement('figcaption');cap.textContent=photo.caption;figure.append(cap);}return figure;}));}
+const closingHosts=$('.closing .hosts'); if(closingHosts)closingHosts.textContent=data.hosts||'';
+
+## shisha-bog
+set('invocation',t('invocation')); set('groom',data.groom); set('bride',data.bride); set('message',data.message); set('hostsLabel',t('hosts'));$('[data-pair]').forEach(n=>n.hidden=!data.bride); set('hosts',data.hosts); set('date',date?[day,'·',month,'·',year].join(' '):''); set('dateHeading',t('date')); set('month',month); set('day',day); set('year',year); set('weekdayTime',date?[fmt(date,{weekday:'long'}),data.date?.time].filter(Boolea
+const greeting = data.guestName ? data.greeting.replaceAll('{name}',data.guestName) : ""; if(greeting) set('message',`${greeting}\n\n${data.message}`);
+const gl=$('[data-list="gallery"]'); if(gl){gl.replaceChildren(...(data.gallery||[]).filter(x=>x.src).map(photo=>{const figure=document.createElement('figure');const img=document.createElement('img');img.src=photo.src;img.alt=photo.alt||photo.caption||'';figure.append(img);if(photo.caption){const cap=document.createElement('figcaption');cap.textContent=photo.caption;figure.append(cap);}return figure;}));}
+const closingHosts=$('.closing .hosts'); if(closingHosts)closingHosts.textContent=data.hosts||'';
+
+## kapadokiya-tongi
+set('invocation',t('invocation')); set('groom',data.groom); set('bride',data.bride); set('message',data.message); set('hostsLabel',t('hosts'));$('[data-pair]').forEach(n=>n.hidden=!data.bride); set('hosts',data.hosts); set('date',date?[day,'·',month,'·',year].join(' '):''); set('dateHeading',t('date')); set('month',month); set('day',day); set('year',year); set('weekdayTime',date?[fmt(date,{weekday:'long'}),data.date?.time].filter(Boolea
+const greeting = data.guestName ? data.greeting.replaceAll('{name}',data.guestName) : ""; if(greeting) set('message',`${greeting}\n\n${data.message}`);
+const gl=$('[data-list="gallery"]'); if(gl){gl.replaceChildren(...(data.gallery||[]).filter(x=>x.src).map(photo=>{const figure=document.createElement('figure');const img=document.createElement('img');img.src=photo.src;img.alt=photo.alt||photo.caption||'';figure.append(img);if(photo.caption){const cap=document.createElement('figcaption');cap.textContent=photo.caption;figure.append(cap);}return figure;}));}
+const closingHosts=$('.closing .hosts'); if(closingHosts)closingHosts.textContent=data.hosts||'';
+
+## buxoro-ravoq
+set('invocation',t('invocation')); set('groom',data.groom); set('bride',data.bride); set('message',data.message); set('hostsLabel',t('hosts'));$('[data-pair]').forEach(n=>n.hidden=!data.bride); set('hosts',data.hosts); set('date',date?[day,'·',month,'·',year].join(' '):''); set('dateHeading',t('date')); set('month',month); set('day',day); set('year',year); set('weekdayTime',date?[fmt(date,{weekday:'long'}),data.date?.time].filter(Boolea
+const greeting = data.guestName ? data.greeting.replaceAll('{name}',data.guestName) : ""; if(greeting) set('message',`${greeting}\n\n${data.message}`);
+const gl=$('[data-list="gallery"]'); if(gl){gl.replaceChildren(...(data.gallery||[]).filter(x=>x.src).map(photo=>{const figure=document.createElement('figure');const img=document.createElement('img');img.src=photo.src;img.alt=photo.alt||photo.caption||'';figure.append(img);if(photo.caption){const cap=document.createElement('figcaption');cap.textContent=photo.caption;figure.append(cap);}return figure;}));}
+const closingHosts=$('.closing .hosts'); if(closingHosts)closingHosts.textContent=data.hosts||'';
+
+## jannat-bogi
+set('invocation',t('invocation')); set('groom',data.groom); set('bride',data.bride); set('message',data.message); set('hostsLabel',t('hosts'));$('[data-pair]').forEach(n=>n.hidden=!data.bride); set('hosts',data.hosts); set('date',date?[day,'·',month,'·',year].join(' '):''); set('dateHeading',t('date')); set('month',month); set('day',day); set('year',year); set('weekdayTime',date?[fmt(date,{weekday:'long'}),data.date?.time].filter(Boolea
+const greeting = data.guestName ? data.greeting.replaceAll('{name}',data.guestName) : ""; if(greeting) set('message',`${greeting}\n\n${data.message}`);
+const gl=$('[data-list="gallery"]'); if(gl){gl.replaceChildren(...(data.gallery||[]).filter(x=>x.src).map(photo=>{const figure=document.createElement('figure');const img=document.createElement('img');img.src=photo.src;img.alt=photo.alt||photo.caption||'';figure.append(img);if(photo.caption){const cap=document.createElement('figcaption');cap.textContent=photo.caption;figure.append(cap);}return figure;}));}
+const closingHosts=$('.closing .hosts'); if(closingHosts)closingHosts.textContent=data.hosts||'';
+
+## tojmahal-oltin-darvozasi
+set('invocation',t('invocation')); set('groom',data.groom); set('bride',data.bride); set('message',data.message); set('hostsLabel',t('hosts'));$('[data-pair]').forEach(n=>n.hidden=!data.bride); set('hosts',data.hosts); set('date',date?[day,'·',month,'·',year].join(' '):''); set('dateHeading',t('date')); set('month',month); set('day',day); set('year',year); set('weekdayTime',date?[fmt(date,{weekday:'long'}),data.date?.time].filter(Boolea
+const greeting = data.guestName ? data.greeting.replaceAll('{name}',data.guestName) : ""; if(greeting) set('message',`${greeting}\n\n${data.message}`);
+const gl=$('[data-list="gallery"]'); if(gl){gl.replaceChildren(...(data.gallery||[]).filter(x=>x.src).map(photo=>{const figure=document.createElement('figure');const img=document.createElement('img');img.src=photo.src;img.alt=photo.alt||photo.caption||'';figure.append(img);if(photo.caption){const cap=document.createElement('figcaption');cap.textContent=photo.caption;figure.append(cap);}return figure;}));}
+const closingHosts=$('.closing .hosts'); if(closingHosts)closingHosts.textContent=data.hosts||'';
+
+## zarrin-doppi
+set('invocation',t('invocation')); set('groom',data.groom); set('eventType',data.eventType); set('bride',data.bride); set('message',data.message); set('hostsLabel',t('hosts')); set('hosts',data.hosts); set('date',date?[day,'·',month,'·',year].join(' '):''); set('dateHeading',t('date')); set('month',month); set('day',day); set('year',year); set('weekdayTime',date?[fmt(date,{weekday:'long'}),data.date?.time].filter(Boolean).join(', '):'')
+const greeting = data.guestName ? data.greeting.replaceAll('{name}',data.guestName) : ""; if(greeting) set('message',`${greeting}\n\n${data.message}`);
+const gl=$('[data-list="gallery"]'); if(gl){gl.replaceChildren(...(data.gallery||[]).filter(x=>x.src).map(photo=>{const figure=document.createElement('figure');const img=document.createElement('img');img.src=photo.src;img.alt=photo.alt||photo.caption||'';figure.append(img);if(photo.caption){const cap=document.createElement('figcaption');cap.textContent=photo.caption;figure.append(cap);}return figure;}));}
+const closingHosts=$('.closing .hosts'); if(closingHosts)closingHosts.textContent=data.hosts||'';
+
+## fairy
+text(".hero-eyebrow", data.eventType || t.invite);
+text(".friends-title", data.greeting || t.dear);
+text(".await-text", data.greeting || t.dear);
+text(".program-title", data.programHeading || t.program);
+const dress = data.dressCode || {};
+if (dress.colors?.length) { const blobs = $(".dresscode-blobs"); blobs.replaceChildren(); dress.colors.slice(0, 5).forEach((c) => { const swatch = document.createElement("span"); swatch.className = "blob"; swatch.style.background = c.hex; swatch.setAttribute("aria-label", c.name || ""); blobs.append(swatch); }); }
+text(".anketa-title", t.rsvp); text(".anketa-desc", data.rsvp?.deadline || "");
+text(".anketa-desc", data.rsvp?.deadline || t.deadline);
+
+## butterfly
+const gallery = document.querySelector(".gallery-grid"); if (gallery) { gallery.replaceChildren(); (invitationData.gallery || []).filter(item => item.src).forEach(item => { const card=document.createElement("div"); card.className="gallery-card"; const image=document.createElement("img"); image.src=item.src; image.alt=item.alt || item.caption || ""; card.append(image); gallery.append(card); }); gallery.closest(".gallery-section").hidden 
+const statement = document.querySelector(".statement-panel"); if (statement) { put(".statement-panel .section-tag", t.invitation); put(".statement-panel h2", invitationData.greeting || t.dear); put(".statement-panel > p:last-child", [invitationData.message, invitationData.hosts].filter(Boolean).join(" ")); statement.hidden = !(invitationData.greeting || invitationData.message || invitationData.hosts); }
+put(".footer p", invitationData.hosts || [invitationData.groom, invitationData.bride].filter(Boolean).join(" & "));
+
+## velora
+const localDate=valid?dateParts(at,zone):{};set("#date-main-small",valid?`${Number(localDate.day)} ${t.months[Number(localDate.month)-1]} ${localDate.year}`:"");set(".welcome_title_text",data.greeting||data.welcome||t.greeting);set("#welcome-text",data.invitationText||data.message||"");
+set(".timetable_title_text",data.programHeading||t.plan);const rows=[...document.querySelectorAll(".timetable__block-stroke")],list=data.program||[];
+const palette=document.querySelector(".dresscode__row");if(palette){palette.replaceChildren();(data.dressCode?.colors||[]).forEach(c=>{const sw=document.createElement("div");sw.className="dresscode__color";sw.style.cssText=`width:${100/Math.max(data.dressCode.colors.length,1)}%;background-color:${c.hex}`;sw.title=c.name||c.hex;sw.setAttribute("aria-label",sw.title);palette.append(sw)});const colors=palette.closest(".dresscode__colors");
+set(".dresscode_title_text",data.dressCode?.style||t.dress);set("#dresscode__description",data.dressCode?.text||data.dressCode?.note||"");visible("#dresscode",!!data.dressCode?.enabled);const gallery=[...(data.gallery||[])].filter(item=>item.src),strip=document.querySelector("#dresscode-foto-woman");if(strip){strip.replaceChildren(...gallery.map(item=>{const figure=document.createElement("figure");figure.className="velora-gallery-card";
+const audio=document.querySelector("#backgroundAudio"),button=document.querySelector("#playButton"),music=data.music||"";if(audio&&(audio.getAttribute("src")||"")!==music){audio.pause();if(music)audio.src=music;else audio.removeAttribute("src");audio.load();if(button&&button.dataset.offIcon)button.src=button.dataset.offIcon}if(button)button.hidden=!music;visible("#music",!!music);set("#music-text-path",t.music);set(".names-footer",data.
+
+## velvet
+set("greeting", d.greeting);
+set("program-heading", d.programHeading || t.program);
+set("dress-code", d.dressCode);
+if (dress) dress.hidden = !d.dressCode;
+image.alt = item.alt || item.caption || "";
+if (dressImage) dressImage.hidden = !d.dressCode;
+
+## aurelia
+put('[data-field="greeting"]', data.greeting);
+put('[data-field="programHeading"]', data.programHeading);
+venuePhoto.alt = venueImage?.alt || venueImage?.caption || t.venuePhoto;
+galleryPhoto.alt = featureImage?.alt || featureImage?.caption || t.featurePhoto;
+
+## evelina
+const greeting = document.querySelector('[data-copy="greeting"]'); if(greeting) greeting.textContent=data.greeting || t.greeting;
+const eventLabel = document.querySelector('[data-copy="event"]'); if(eventLabel) eventLabel.textContent=data.eventType || t.event;
+const heading = document.querySelector("[data-field=programHeading]"); if (heading) heading.textContent = data.programHeading || "";
+text("dressHeading", data.dressCode?.style);
+text("dressText", data.dressCode?.text);
+text("dressNote", data.dressCode?.note);
+text("hosts", data.hosts);const hosts=$("hosts");if(hosts)hosts.hidden=!data.hosts;
+if (photo && photoWrap) { photo.src = currentPhoto?.src || ""; photo.alt = currentPhoto?.alt || currentPhoto?.caption || ""; photoWrap.hidden = !currentPhoto; }
+const sw=$("dressColors"); if(sw){ clear(sw); const colors=data.dressCode?.enabled ? data.dressCode.colors || [] : []; sw.closest(".dress").hidden=!data.dressCode?.enabled; colors.forEach((color)=>{const dot=document.createElement("span");dot.style.background=color.hex;dot.title=color.name||"";dot.setAttribute("aria-label",color.name||"");sw.append(dot);}); }
+
+## anor
+
+
+## oltin-nur
+
+
+## samarqand-kechasi
+
+
+## bogi-eram
+{const couple=[data.groom,data.bride].filter(Boolean).join(' & '),copy=({uz:{title:'Bog‘i Eram taklifnomasi',description:'Bog‘i Eram — jannat bog‘i darvozasi ortidagi nafis taklifnoma'},'uz-Cyrl':{title:'Боғи Эрам таклифномаси',description:'Боғи Эрам — жаннат боғи дарвозаси ортидаги нафис таклифнома'},ru:{title:'приглашение Bog‘i Eram',description:'Приглашение в цветущем саду за резными воротами'},en:{title:'Bog‘i Eram invitation',descr
+
+## atlas
+document.querySelector('meta[name="description"]')?.setAttribute("content", copy.description);
+document.querySelector('meta[property="og:description"]')?.setAttribute("content", copy.description);
+const event = text(data.eventType);
+
+## uchar-gilam
+document.title = `${couple.join(' & ')} — ${data?.eventType || 'Uchar Gilam'}`;
+if (desc) desc.content = [couple.join(' & '), data?.eventType, data?.date?.long, data?.venue?.name].filter(Boolean).join(' · ');
+
+## oq-kabutar
+
+
+## kuzgi-chinor
+
+
+## muhabbat-kitobi
+
+
+## sahifa
+if (window.Marhamat?.guestParam) greeting.textContent = window.Marhamat.data.greeting;
+
+## oltin-uzuk
+
+
+## oynavand
+
+
+## somon-yoli
+
+
+## qogoz-turna
+
+
+## nilufar
+
+
+## monogram
+
+
+## retro-kino
+
+
+## suzani
+
+
+## orik-guli
+if (names) document.title = `${names} — ${data.eventType || 'Taklifnoma'}`;
+if (meta) meta.content = [names, data.eventType, data.date?.long, data.venue?.name].filter(Boolean).join(' · ');
+
+## paxta
+
+
+## sahro-fonusi
+
+
+## vals
+document.title = [couple, data.eventType].filter(Boolean).join(' — ') || document.title;
+if (meta) meta.content = [data.eventType, couple, data.date?.long, data.venue?.name].filter(Boolean).join(' · ');
+if (!data.message && !data.hosts) $('#invitation-text').hidden = true;
+
+## toscana
+if (meta) meta.content = [names, data.eventType, data.date?.long, data.venue?.name].filter(Boolean).join(' · ');
+
+## muhr
+
+
+## bulbul
+
+
+## kozgu
+$('.intro__greeting').classList.toggle('is-long', String(data.greeting || '').length > 28 || $('.intro__greeting').textContent.length > 28);
+
+## doira
+
+
+## qandil
+
+
+## parda
+
+
+## ganch
+gs.from(".letter__greeting,.letter__message,.hosts", { opacity: 0, y: 14, duration: 1, stagger: .17, ease: "power2.out", scrollTrigger: { trigger: "#invitation-text", start: "top 78%", once: true } });
+
+## qatlam
+
+
+## lola
+
+
+## qiz-bazmi
+
+
+## shahzoda
+
+
+## chavandoz
+
+
+## beshik
+
+
+## shirin-bayram
+
+
+## oltin-kuz
+
+
+## oltin-yosh
+
+
+## konfetti
+
+
+## nahor
+document.title = [name, data.eventType].filter(Boolean).join(' — ') || document.title;
+if (meta) meta.content = [data.eventType, name, data.date?.long, data.venue?.name].filter(Boolean).join(' · ');
+if (!data.message && !data.hosts) $('#invitation-text').hidden = true;
+
+## nahorgi-osh
+
+
+## hilol
+
+
+## bitiruv
+
+
+## korporativ
+
+
+## yangi-uy
+gsap.fromTo(section.querySelectorAll(".eyebrow,.section__title,.section__note,.hosts-card,.calendar-frame,.program__item,.venue-card,.dresscode,.gallery__item,.rsvp__fields,.wishes__item,.gift,.contacts li"),
+
+## stained-glass
+
+
+## sunset
+
+
+## swan-garden
+
+
+## golden-card
+text('[data-golden="openingGreeting"]', data.greeting || words.greeting);
+
+## green-garden
+txt(opening.querySelector('[data-gg-opening-greeting]'), data.greeting || words.greeting || "Assalomu alaykum, aziz mehmon");
+const fields={groom:d.groom,bride:d.bride,eventLabel:d.eventType,dateTime:d.date?.long || dateValue(d),message:d.message,hosts:d.hosts,venueName:d.venue?.name,venueAddress:d.venue?.address,weekday:d.date?.weekday,day:d.date?.day,monthYear:[d.date?.month,d.date?.year].filter(Boolean).join(" "),time:d.date?.time,greeting:d.greeting,programTitle:d.programHeading,calendarTitle:c.calendarTitle,calendarMessage:d.calendarMessage||c.calendarMes
+if(item?.src){let img=$("img",slot);if(!img){img=document.createElement("img");img.className="h-full w-full object-cover select-none";slot.append(img);}img.src=item.src;img.alt=item.alt||item.caption||`Wedding photo ${i+1}`;img.loading="lazy";img.decoding="async";img.style.objectPosition="50% 50%";slot.setAttribute("aria-label",img.alt||`Wedding photo ${i+1}`);slot.tabIndex=0;slot.setAttribute("role","button");const open=()=>{const dial
+
+## green-gold
+tx(sections[0]?.querySelector("p"), d.greeting || c.welcome);
+const hostLabel=contactSection?.querySelector("p.text-gold\\/50"); tx(hostLabel,c.hosts);
+const hostNodes=contactSection?.querySelectorAll("p.text-xl")||[]; tx(hostNodes[0],d.hosts);
+hide(contactSection,!contacts.length&&!d.hosts);
+const alt = item.alt || item.caption || `${c.photo} ${index % visibleGallery.length + 1}`;
+
+## green-white
+tx(section(0)?.querySelector("p.text-xs"), d.greeting || c.welcome);
+renderDressCode(d.dressCode || {}, c);
+incoming.alt = slideItem.alt || slideItem.caption || "";
+image.alt = slideItem.alt || slideItem.caption || "";
+swipePreview.alt = item.alt || item.caption || "";
+tx(headings, c.dressCode); tx(paragraphs[0], c.dressIntro);
+const colors = dress.colors || [];
+tx(paragraphs[0], d.greeting || c.welcome);
+tx(paragraphs[3], c.hosts); tx(paragraphs[4], d.hosts);
+
+## jasmine-white
+tx(intro.querySelector("p"), d.greeting || c.welcome);
+tx(paragraphs[0], d.eventType || c.event); tx(paragraphs[1], c.couple);
+tx(paragraphs[6], c.hosts); tx(paragraphs[7], d.hosts || "");
+card.replaceChildren(); card.setAttribute("role", "group"); card.setAttribute("aria-label", item.alt || item.caption || `${c.photo} ${index + 1}`);
+image.src = item.src; image.alt = item.alt || item.caption || `${c.photo} ${index + 1}`;
+const show = () => { image.src = items[index].src; image.alt = items[index].alt || items[index].caption || `${c.photo} ${index + 1}`; };
+link.href = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(`${couple} ${d.eventType || c.event}`)}&dates=${format(start)}/${format(end)}&location=${encodeURIComponent(location)}`;
+if (paragraphs[2]) tx(paragraphs[2], d.hosts || "");
+
+## lace
+image.alt = item.alt || item.caption || "";
+put(hosts, d.hosts || ""); hide(hosts, !d.hosts);
+const message = sections[8]?.querySelector("p"); if (message) put(message, d.greeting || c().message);
+const section=sections[5], dress=d.dressCode||{}; if(!section)return;
+for(const color of dress.colors||[]){const swatch=document.createElement("span");swatch.className="h-5 w-5 rounded-full border border-lace-ink/30";swatch.style.backgroundColor=color.hex;swatch.title=color.name||"";swatch.setAttribute("aria-label",color.name||color.hex);colorBox.append(swatch);}
+if(dress.colors?.length) ps[1]?.after(colorBox);
+const image=card.querySelector("img"); card.setAttribute("aria-label",item.alt||item.caption||`${c().photo} ${index+1}`); card.replaceChildren();
+const img=image||document.createElement("img");img.src=item.src;img.alt=item.alt||item.caption||`${c().photo} ${index+1}`;card.append(img);card.onclick=()=>window.LaceGalleryLightbox.open(entries,index,card);
+link.href=`https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(`${d.groom||""} & ${d.bride||""} ${d.eventType||"Wedding"}`)}&dates=${fmt(start)}/${fmt(end)}&location=${encodeURIComponent(location)}`;link.target="_blank";link.rel="noopener noreferrer";link.classList.add("lace-body");put(link,c().calendar);hide(link,false);
+if(paragraphs[0])put(paragraphs[0],d.greeting||c().message);
+const hostLine=paragraphs[1];if(hostLine){const host=hostLine.querySelector("span");if(host)put(host,d.hosts||"");const direct=[...hostLine.childNodes].find(n=>n.nodeType===Node.TEXT_NODE&&n.textContent.trim());if(direct)direct.textContent=`${c().withFamilies}\n`;hide(hostLine,!d.hosts);}
+
+## love-sakura
+put(q("h2",sections[5]),t().story);const story=data.story||[];const storyPs=all("p",sections[5]);storyPs.forEach((p,i)=>{const item=story[i];if(item){put(p,[item.title,item.description||item.text].filter(Boolean).join(" "));hide(p,false);}else hide(p,true);});hide(sections[5],!story.length);
+put(q("h2",sections[6]),t().gallery);const gallery=(data.gallery||[]).filter(item=>typeof item?.src==="string"&&item.src.trim());hide(sections[6],!gallery.length);const imgs=all("img",sections[6]);imgs.forEach((img,i)=>{const item=gallery[i],card=img.closest(".aspect-square")||img.closest("a")||img.parentElement;if(item?.src){img.src=item.src;img.alt=item.alt||item.caption||`${t().gallery} ${i+1}`;hide(card,false);}else hide(card,true);
+
+## luxury-gold
+put(q("p", sections[2]), x.message || x.greeting || c().invite);
+const dc = x.dressCode || {},
+put(q("p", ds), dc.note || dc.description || "");
+const color = dc.colors?.[i];
+img.alt = item.alt || item.caption || c().gallery;
+put(ps[0], x.greeting || "");
+put(ps[4], x.hosts || "");
+image.alt = item.alt || item.caption || c().gallery;
+
+## modern-floral
+function render(x){p=x;root.hidden=false;root.lang=({"uz-Latn":"uz","uz-Cyrl":"uz",en:"en",ru:"ru"})[x.locale];const z=d(),when=z.dateTime||z.date?.dateTime||"",venue=z.venue||{};const nameNodes=all("h2",sec[1]);put(nameNodes[0],z.groom||"");put(nameNodes[1],z.bride||"");const openingName=all("h2",root).find(n=>n.classList.contains("text-4xl"));if(openingName){const textNodes=[...openingName.childNodes].filter(n=>n.nodeType===Node.TEXT_
+const hostParagraphs=all("p",sec[6]);put(hostParagraphs[0],c().hostSignoff);put(q("h3",sec[6]),z.hosts||"");put(hostParagraphs[1],z.greeting||c().invite);hide(sec[6],!z.hosts);renderContacts(z.contacts||[]);renderGift(z.toyona||{});renderGallery(z.gallery||[]);renderWishes(sec[10],x);renderRsvp(sec[11],x);renderFooter(z);renderStaticCopy();installControls(x);if(x.reducedMotion||matchMedia("(prefers-reduced-motion: reduce)").matches)root
+function renderStaticCopy(){const x=fixed();put(q("h2",sec[0]),x.intro);put(q("h1",sec[0]),x.title);const scroll=all("span",sec[0]).find(n=>n.classList.contains("tracking-[0.3em]"));put(scroll,x.scroll);put(q("h2",sec[4]),x.countdown);const timerCopy=all("p",sec[4]);put(timerCopy[0],d().greeting||x.countdownSubline);put(timerCopy[1],x.countdownNote);const venueLabel=all("span",sec[5]).find(n=>n.classList.contains("tracking-[0.5em]"));pu
+for(const grid of grids){const cards=[...grid.querySelectorAll(':scope > div')];grid.replaceChildren();const entries=slots;entries.forEach((item,index)=>{const card=cards[index%Math.max(1,cards.length)]?.cloneNode(true)||document.createElement('div');const button=q('button',card);if(!button)return;button.replaceChildren();button.setAttribute('aria-label',item.alt||item.caption||`${c().gallery} ${index+1}`);const url=item.url||item.src;i
+image.src=item.url||item.src;image.alt=item.alt||item.caption||'';image.className='max-h-[88dvh] max-w-[94vw] rounded-2xl object-contain shadow-2xl';lightbox.append(closeButton,image);if(root.classList.contains('mf-reduced')||matchMedia('(prefers-reduced-motion: reduce)').matches)lightbox.dataset.mfReduced='';document.body.append(lightbox);
+function renderFooter(z){const ps=all("p",sec[12]);put(ps[0],z.greeting||"");put(ps[1],[z.groom,z.bride].filter(Boolean).join(" & "));const brand=q("a[href*='chorlove']",sec[12]);hide(brand,true);}
+
+## taklifla-zarhal-sahifa
+text('.hero-tagline', d.eventLabel || labels.tagline);
+text('.invite-quote', [d.greeting, d.message].filter(Boolean).join('\n\n'));
+$('.invite').hidden = !d.greeting && !d.message;
+const img = cell.querySelector('img'); img.src = url; img.alt = photo.alt || photo.caption || `${labels.photo} ${i+1}`; img.loading = 'lazy';
+if (photo.caption) img.title = photo.caption;
+
+## taklifla-muhrli-maktub
+text('[data-i18n=hero_kicker]',data.eventLabel);
+text('[data-i18n=inv_title]',data.greeting);
+title.textContent=[item.title,item.description].filter(Boolean).join('\n');
+if(data.programHeading)text('[data-i18n=prog_title]',data.programHeading);
+data.dress.colors.forEach(color=>{
+
+## taklifla-asalari
+text('.splash .top-line', data.greeting || window.ASALARI_COPY[language]['.splash .top-line']);
+text('.splash h1', data.title || data.child || data.eventLabel);
+text('.timeline h2', data.programHeading || window.ASALARI_COPY[language]['.timeline h2']);
+const desc = document.createElement('p'); desc.textContent = item.description; desc.hidden = !item.description;
+const dress = data.dressCode; show('.info li:nth-of-type(1)', dress.enabled && !!(dress.style || dress.text || dress.note || dress.colors.length));
+text('.info li:nth-of-type(1) span', [dress.style,dress.text,dress.note,dress.colors.join(' · ')].filter(Boolean).join('\n'));
+text('.foot .date', data.date.long); text('.foot .line', data.hosts || l.footer);
+
+## taklifla-fayzli-xonadon
+document.title = [c.hosts, c.eventLabel || copy.event, data.dateLabel].filter(Boolean).join(" — ");
+text(".hero-eyebrow", c.eventLabel || copy.event); text(".hero-occasion", copy.occasion);
+text(".hero-names", c.hosts); text(".welcome-attr", c.hosts);
+text(".scroll-hint", copy.scroll); text(".welcome .eyebrow", c.greeting || copy.welcome);
+text(".welcome-quote", c.message); $(".welcome").hidden = !c.greeting && !c.message && !c.hosts;
+const dress = data.dressCode;
+$(".dress").hidden = !dress.enabled || !(dress.style || dress.text || dress.note || dress.colors.length);
+$(".dress-swatches").replaceChildren(...dress.colors.map(color => {
+text(".rsvp-sub", data.rsvp.deadlineLabel ? copy.deadline.replace("{date}", data.rsvp.deadlineLabel) : copy.invite);
+const closed = data.rsvp.deadline && Date.now() > Date.parse(data.rsvp.deadline) + 86400000;
+text(".closing-mono", Array.from(c.hosts || "")[0]?.toLocaleUpperCase() || "");
+
+## taklifla-ertak
+text(".splash-eyebrow", data.greeting || window.ERTAK_LABELS[0][languageIndex]);
+if (data.eventLabel) text(".splash-script", data.eventLabel);
+if (data.hosts) text(".invite-mono", data.hosts);
+const description = document.createElement("p"); description.className = "event-desc"; description.textContent = item.description; description.hidden = !item.description;
+if (data.programHeading) text(".events-section .section-title", data.programHeading);
+
+## taklifla-gulbog
+'.splash-btn span':t.open, '.hero-pre':t.pre, '.hero-date-label':data.eventLabel || t.tag,
+'.hero-scroll-hint span':t.scroll, '.inv-bless':data.greeting || t.bless, '.inv-family':data.hosts,
+'.events .section-title':data.programHeading || t.events, '.events .section-subtitle':t.program,
+hide('.inv-family', !data.hosts); hide('.inv-invite-text', !data.message);
+el.querySelector('.tc-desc').textContent = row.description;
+el.querySelector('.tc-desc').hidden = !row.description;
+
+## taklifla-zarrin-gullar
+show("#mw-inv-bride-wrap",!!(d.brideFamily||d.hosts));show("#mw-inv-groom-wrap",!!d.groomFamily);text("#mw-bride-parents",d.brideFamily||d.hosts);text("#mw-groom-parents",d.groomFamily);if(!d.brideFamily)text('[data-i18n="inv_bride_side"]',c.hosts);
+if(d.greeting)text('[data-i18n="inv_blessing"]',d.greeting);
+if(d.eventLabel)text('[data-i18n="kicker_weddingof"]',d.eventLabel);
+if(d.programHeading)text('[data-i18n="ev_title"]',d.programHeading);
+show("#mw-info-rsvp",!!(d.deadline||d.phone));text("#mw-info-rsvp-text",[c.confirm,d.deadline?(locale.startsWith("uz")?d.deadline+c.until:c.until+" "+d.deadline):"",d.phone].filter(Boolean).join(" — "));
+[["h3",r.title,"margin:0;font-size:22px;font-weight:400;color:var(--color-accent-800)"],["div",r.time,"font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--color-accent-700)"],["p",r.description,"margin:0;font-size:13.5px;line-height:1.6;color:var(--color-neutral-700)"]].forEach(function(spec){if(spec[1]){var e=document.createElement(spec[0]);e.textContent=spec[1];e.style.cssText=spec[2];card.append
+
+## taklifla-toglar-bagrida
+text('.opening .eyebrow', c.greeting || u.invitation);
+text('.frame__inner .eyebrow', c.eventLabel || u.wedding);
+text('.programme .eyebrow', c.programHeading || u.program);
+if (item.description) { var small = document.createElement('small'); small.textContent = item.description; title.append(small); }
+text('.footer__note', c.hosts || u.footer);
+
+## taklifla-oltin-yol
+if(d.greeting)text('[data-i18n="ticket_greeting"]',d.greeting);if(d.message)text('[data-i18n="ticket_lead"]',d.message);if(d.eventLabel)text('[data-i18n="hero_sub"]',d.eventLabel);
+window.renderOltinTimetable(d.program);if(d.programHeading)text('[data-i18n="stop2_title"]',d.programHeading);
+var rows=[["dress",d.dress,"#oy-info-dress"],["arrival",d.arrivalNote,"#oy-div-arrival"],["gifts",d.giftNote,"#oy-div-gifts"],["contact",[d.contactNote||d.hosts,d.phone,d.telegram?"@"+d.telegram.replace(/^@/,""):""].filter(Boolean).join("\n"),"#oy-div-contact"]],visible=0;
+
+## taklifla-osmon
+[[r.time,"font-weight:700;font-size:12.5px;letter-spacing:.14em;color:#3d6a99"],[r.title,"font-family:'Yeseva One',serif;font-size:19px;margin:3px 0"],[r.description,"font-size:13.5px;opacity:.8;line-height:1.5"]].forEach(([value,style])=>{if(value){const el=document.createElement("div");el.style.cssText=style;el.textContent=value;row.lastChild.append(el);}});
+if(data.eventLabel)text('[data-i18n="splash_kicker"]',data.eventLabel);
+if(data.greeting)text('[data-i18n="inv_kicker"]',data.greeting);
+text("#os-parents",data.hosts);visible("#os-parents-wrap",!!data.hosts);
+programme(data.program);if(data.programHeading)text('[data-i18n="tadbirlar_title"]',data.programHeading);
+if(state.phone){if(data.rsvpNote===null)phone.append(ui[locale].phone+": ");const link=document.createElement("a");link.href="tel:"+state.phone.replace(/[^\d+]/g,"");link.textContent=state.phone;link.style.fontWeight="700";phone.append(link);if(data.deadline)phone.append(" · "+ui[locale].by+" "+data.deadline);}
+
+## taklifla-parilar-ertagi
+function programme(rows){const host=$('.timeline');host.replaceChildren();rows.forEach(r=>{const card=document.createElement('div');card.className='event reveal';card.dataset.itemId=r.id;const dot=document.createElement('div');dot.className='event-dot';card.append(dot);for(const [name,value] of [['event-script',r.label],['event-time',r.time],['event-title',r.title],['event-desc',r.description]]){const n=document.createElement(name==='ev
+if(c.eventLabel)text('.splash-eyebrow',c.eventLabel);if(c.greeting)text('.invite-script',c.greeting);if(c.hosts)text('.invite-eyebrow',c.hosts);if(c.message)text('.invite-poem em',c.message);
+programme(d.program);if(c.programHeading)text('.events-header .eyebrow',c.programHeading);
+
+## taklifla-qogoz-ertagi
+if(c.eventLabel)text('[data-i18n="cover_kicker"]',c.eventLabel);if(c.greeting)text('[data-i18n="inv_header"]',c.greeting);if(c.hosts)text('[data-i18n="frame_cursive"]',c.hosts);text('[data-i18n="frame_sentence"]',c.message);
+window.renderQogozProgram(d.program);if(c.programHeading)text('[data-i18n="events_header"]',c.programHeading);
+text("#qg-info-dress-text",d.dressText);show("#qg-info-dress",!!d.dressText);var contact=[d.contactNote||c.hosts,state.contacts.phoneNumber,state.contacts.telegramUsername?"@"+state.contacts.telegramUsername.replace(/^@/,""):""].filter(Boolean).join("\n");text("#qg-info-contact-text",contact);show("#qg-info-contact",!!contact);show("#qg-info-divider",!!(contact&&d.dressText));show("#qg-info-section",!!(contact||d.dressText));
+
+## taklifla-sakura-guli
+text('[data-i18n="hero_kicker"]',p.eventLabel);text('[data-i18n="splash_kicker"]',p.eventLabel);
+text('[data-i18n="inv_kicker"]',p.greeting);show('[data-i18n="inv_kicker"]',!!p.greeting);
+text("#sk-frame_kicker",p.hosts);show("#sk-frame_kicker",!!p.hosts);text("#sk-frame_request",p.message);
+window.sakuraTimeline(p.program);show("#sk-events-section",p.program.some(e=>e.time || e.title || e.description));
+if(p.programHeading)text('[data-i18n="events_h2"]',p.programHeading);
+$("#sk-events").querySelectorAll(".sk-ev-row").forEach((row,i)=>row.dataset.itemId=p.program.filter(e=>e.time || e.title || e.description)[i]?.id || "");
+
+## taklifla-sharlar
+text('#invite .kicker',c.greeting||c.eventLabel);text('#invite .invite-text',[c.message,c.hosts].filter(Boolean).join('\n\n'));
+if(c.programHeading)text('#timeline .head .h2',c.programHeading);
+const timeline=$('.tl');timeline.replaceChildren();v.program.filter(e=>e.time||e.title||e.description).forEach((item,i)=>{const row=document.createElement('div');row.className='ev reveal d'+(i%3+1);row.dataset.itemId=item.id;row.innerHTML='<div class="dot"><b></b></div><div class="body"><div class="time"></div><div class="what"></div><div class="sub"></div></div>';row.querySelector('b').textContent=String(i+1).padStart(2,'0');for(const 
+text('#info .d3 .lbl',l.dress);text('#info .d3 .val',v.dressCode);show('#info .d3',!!v.dressCode);show('#info',!!(p.doorsAt||p.phone||v.dressCode));
+
+## taklifla-yulduzli-tun
+text('.splash-sub', data.greeting || copy.splash_sub);
+text('.hero-tag', data.eventLabel || copy.hero_tag);
+text('.invite-fam', data.hosts); $('.invite-fam').hidden = !data.hosts;
+text('.events .sec-title', data.programHeading || copy.events_title);
+for (const [tag, cls, value] of [['h3', '', item.title], ['p', 'tl-time', item.time], ['p', 'tl-desc', item.description]]) {
+
+## taklifla-terracotta
+text('#openBtn',l.open);text('.scroll-hint span',l.scroll);text('.hero-subtitle',c.eventLabel);
+text('.invitation-message',[c.greeting,c.message,c.hosts].filter(Boolean).join('\n\n'));text('.invitation-date-formal',p.formalDate);text('.invitation-venue',c.venueName);
+if(c.programHeading)text('.events .section-title',c.programHeading);
+const timeline=$('[data-program]');timeline.replaceChildren();p.program.filter(e=>e.time||e.title||e.description).forEach(item=>{const row=document.createElement('div');row.className='timeline-item reveal';row.dataset.itemId=item.id;row.innerHTML='<div class="timeline-dot"></div><div class="timeline-time"></div><div class="timeline-event"></div><div class="timeline-desc"></div>';for(const [selector,value]of [['.timeline-time',item.time]
+
+## taklifla-uchrashuv
+text('.lt-eye', data.eventLabel || l().letter);
+if(data.greeting) to.textContent = data.greeting;
+
+## taklifla-yubiley-sahifasi
+text(".hero-eyebrow", data.greeting);
+text(".hero-25-sub", data.eventLabel);
+text(".founder-sig", data.hosts);
+visible(".founder", data.message || data.hosts);
+text(".agenda-head h2", data.programHeading || t.stages);
+const content = row("ag-content", [["div", "ag-time", item.time], ["div", "ag-title", item.title], ["div", "ag-desc", item.description]], item.id);
+text(".rsvp-head .body", t.description + (data.rsvp.deadline ? " " + t.deadline + data.rsvp.deadline : ""));
+const closed = data.rsvp.deadline && data.rsvp.deadline < today;
+text(".closing-25-sub", data.eventLabel);
+
+## taklifla-barakali
+".hero-mono": [data.monogram, data.year].filter(Boolean).join(" · "), ".hero-eye": data.eventLabel,
+".greet-eye": data.greeting, ".greet-quote": data.message, ".greet-sign": data.hosts || u.closing,
+".photo-eye": u.photo, ".photo-cap": data.photo?.caption || data.names,
+visible(".greet", Boolean(data.greeting || data.message || data.hosts));
+
+## taklifla-tungi-saroy
+text("#mp-inv-groom-parents", content.hosts);
+show("#mp-inv-groom-parents-wrap", Boolean(content.hosts));
+text("#mp-greeting", content.greeting, true);
+if (content.eventLabel)
+text('[data-i18n="splash_kicker"]', content.eventLabel);
+text("#mp-program-heading", content.programHeading || t("events_title"));
+return item.time || item.title || item.description;
+[item.time, item.title, item.description].forEach(
+
+## taklifla-tovus
+card.children[2].textContent = item.description;
+card.children[2].hidden = !item.description;
+text('[data-i18n="ev_title"]', data.programHeading || copy.ev_title);
+text('[data-i18n="splash_kicker"]', data.eventLabel || copy.splash_kicker);
+text('[data-i18n="hero_kicker"]', data.eventLabel || copy.hero_kicker);
+[data.greeting, data.hosts].filter(Boolean).join("\n"),
+text("#tv-foot-note", data.greeting);
+show("#tv-foot-note", !!data.greeting);
+text("#tv-info-dress-text", data.dressCode);
+show("#tv-info-dress", !!data.dressCode);
+copy.deadline.replace("{date}", data.rsvpDeadline),
+show("#tv-info-section", !!(data.dressCode || timing || data.rsvpDeadline));
+
+## taklifla-tort-fasl
+greeting.textContent = v.greeting || t("invite_heading");
+if (v.eventLabel) ["hero_kicker","splash_kicker"].forEach((key) => { document.querySelector(`[data-i18n="${key}"]`).textContent = v.eventLabel; });
+text("fs-detail-dress-text", v.dressText); visible("fs-detail-dress", Boolean(v.dressText || v.colors.length));
+v.colors.forEach((color) => {
+if (current.replyEnabled && v.deadline) reply.append(t("replyBy") + v.deadline + (current.phone ? " — " : ""));
+visible("fs-detail-rsvp", Boolean(current.phone || current.replyEnabled && v.deadline));
+const rows = v.program.filter((row) => row.title || row.time || row.description);
+el.querySelector("[data-event-description]").textContent = row.description;
+if (v.programHeading) document.querySelector('[data-i18n="program_title"]').textContent = v.programHeading;
+
+## glass-pink
+text(greeting, payload.data.greeting || localCopy().openingGreeting);
+bindField(data, "eventLabel", data.eventType);
+bindField(data, "hosts", data.hosts);
+bindField(data, "personalGreeting", data.greeting || data.title);
+if (data.programHeading) text(programHeading, data.programHeading);
+image.alt = item.alt || item.caption || "";
+img.alt = image.alt || image.caption || `Gallery photo ${index + 1}`;
+dialog.querySelector("img").alt = nextImage.alt || nextImage.caption || "";
+root.querySelectorAll('[data-gp-footer-hosts]').forEach(node => node.textContent = data.hosts || "");
+
+## olive-manor-edition
+program.append(el('h2', '', data.programHeading));
+image.src = safe(photo.src); image.alt = photo.alt || photo.caption || ''; image.loading = 'lazy';
+const caption = item.querySelector('figcaption'); if (caption) caption.textContent = photo.caption || `${String(index + 1).padStart(2, '0')}`;
+function syncPhoto() { const item = activePhotos[photoIndex]; if (!item) return; photo.src = safe(item.src); photo.alt = item.alt || item.caption || ''; caption.textContent = item.caption || `${photoIndex + 1} / ${activePhotos.length}`; close.setAttribute('aria-label', words.close); previous.setAttribute('aria-label', words.previous); next.setAttribute('aria-label', words.next); }
+attendanceEnabled = !!data.rsvp?.enabled && !(data.rsvp.deadline && data.rsvp.deadline < today);
+const computed = { ...data, empty: '', date: { ...data.date, monthYear: [data.date?.month, data.date?.year].filter(Boolean).join(', ') }, pair: people.join(' & '), child: (data.people || [data.groom, data.bride]).filter(Boolean).join(' & '), groomInitial: data.groom?.trim()[0] || '', brideInitial: data.bride?.trim()[0] || '', initials: people.map(p => p.trim()[0]).join('&'), hostInitial: data.hosts?.trim()[0] || '', deadline: data.rsvp?
+
+## islamic-edition
+program.append(el('h2', '', data.programHeading));
+image.src = safe(photo.src); image.alt = photo.alt || photo.caption || ''; image.loading = 'lazy';
+const caption = item.querySelector('figcaption'); if (caption) caption.textContent = photo.caption || `${String(index + 1).padStart(2, '0')}`;
+function syncPhoto() { const item = activePhotos[photoIndex]; if (!item) return; photo.src = safe(item.src); photo.alt = item.alt || item.caption || ''; caption.textContent = item.caption || `${photoIndex + 1} / ${activePhotos.length}`; close.setAttribute('aria-label', words.close); previous.setAttribute('aria-label', words.previous); next.setAttribute('aria-label', words.next); }
+attendanceEnabled = !!data.rsvp?.enabled && !(data.rsvp.deadline && data.rsvp.deadline < today);
+const computed = { ...data, empty: '', date: { ...data.date, monthYear: [data.date?.month, data.date?.year].filter(Boolean).join(', ') }, pair: people.join(' & '), child: (data.people || [data.groom, data.bride]).filter(Boolean).join(' & '), groomInitial: data.groom?.trim()[0] || '', brideInitial: data.bride?.trim()[0] || '', initials: people.map(p => p.trim()[0]).join('&'), hostInitial: data.hosts?.trim()[0] || '', deadline: data.rsvp?
+
+## osh
+put(q(".osh-intro-sign"), d.hosts || "");
+hide(q(".osh-intro-sign-pre"), !d.hosts);
+hide(q(".osh-intro-sign"), !d.hosts);
+image.alt = gallery[0].alt || gallery[0].caption || "";
+put(q(".osh-footer-name"), d.hosts || "");
+hide(q(".osh-footer .osh-label"), !d.hosts);
+
+## palov
+const hosts = data.hosts?.trim() ?? "";
+setText(".palov-intro-title", data.greeting?.trim() || text("dear"));
+plateImage.alt = uploaded?.alt || uploaded?.caption || "";
+
+## orchid-amplop
+return (data.gallery || []).filter((item) => safeUrl(item.src)).map((item) => ({ src: safeUrl(item.src), alt: item.alt || item.caption || "" }));
+put("[data-orchid-hosts]", data.hosts || "");
+put("[data-copy='guestGreeting']", personalGreeting || data.greeting || text("guestGreeting"));
+
+## invitate-palov
+set($(".hosts-label"), l.hosts); set($(".hosts-name"), payload.hosts);
+set($(".intro-title"), payload.greeting || l.greeting); set($(".intro-text"), payload.message);
+set($(".intro-sign-pre"), l.footer); set($(".intro-sign"), payload.hosts);
+if(photo){if(creatorPhoto){const item=payload.gallery.find((entry)=>entry.src);photo.src=creatorPhoto;photo.alt=item.alt || item.caption || "";}else{photo.alt=currentLocale==="en"?"Palov served on a traditional Uzbek platter":currentLocale==="ru"?"Плов на традиционном узбекском блюде":currentLocale==="uz-Cyrl"?"Анъанавий ўзбек лаганидаги палов":"An’anaviy o‘zbek laganidagi palov";}}
+set($(".photo-caption"), l.caption);
+set($(".footer-label"),l.footer);set($(".footer-name"),payload.hosts);set($(".footer-date"),dateText);
+
+## golden-hour
+".party-label": data.eventType || t.party,
+const subtitleWords = (data.programHeading || t.timingParts?.filter(Boolean).join(" ") || "").split(/\s+/).filter(Boolean);
+const media = photos.length ? photos.map((photo) => ({ src: photo.src, alt: photo.alt || photo.caption || "", caption: photo.caption || "" })) : preview ? previewAssets.map((file) => ({ src: src(file), alt: "", caption: "" })) : [];
+if (heroCaption) { text(heroCaption, media[0]?.caption); heroCaption.hidden = !media[0]?.caption; }
+setCaptionAfter(image, media[index + 1]?.caption, "guest-photo-caption");
+if (locationCaption) { text(locationCaption, media[3]?.caption); locationCaption.hidden = !media[3]?.caption; }
+if (closingCaption) { text(closingCaption, media[4]?.caption); closingCaption.hidden = !media[4]?.caption; }
+if (photo.caption) {
+text(caption, photo.caption);
+const dress = data.dressCode || {};
+const visible = Boolean(dress.enabled && (dress.style || dress.text || dress.note || dress.colors?.length));
+(dress.colors || []).forEach((color) => {
+swatches.hidden = !(dress.colors || []).length;
+document.title = data.title || data.eventType || "Golden Hour";
+const title = data.title || data.eventType || t.party;
+text(sig, [person, data.eventType || t.edition].filter(Boolean).join(" · "));
+text($(".dear"), data.greeting || t.dear);
+text($(".closing-text"), [data.hosts, t.closing].filter(Boolean).join(" · "));
+
+## invitate-nahorgi-osh
+put(heroNodes[0], l.hosts);
+put(heroNodes[1], (payload.people || []).filter(Boolean).join(" & ") || payload.hosts);
+const introHeading = q("h2", firstSection); put(introHeading, payload.greeting || l.greeting);
+if (introParas[2]) put(introParas[2], payload.hosts);
+if (introParas[1]) introParas[1].hidden = !payload.hosts;
+if (introParas[2]) introParas[2].hidden = !payload.hosts;
+const caption = document.querySelectorAll(".device > section")[2]?.querySelector("p.rv"); put(caption, l.caption);
+if (divs[1]) put(divs[1], payload.hosts);
+
+## invitate-wedding
+setText("#invitation .section-title", data.greeting || tr("guests"));
+setText("#program .section-title", data.programHeading || tr("programTitle"));
+if (copy) copy.textContent = data.message || data.greeting || "";
+(data.program || []).filter((item) => item.title || item.time || item.description).forEach((item) => {
+row.querySelector(".prog-desc").textContent = item.description || "";
+const image = card.querySelector("img"); image.src = item.src; image.alt = item.alt || item.caption || ""; image.loading = "lazy";
+const dress = data.dressCode || {};
+(dress.colors || []).forEach((color) => { const item = document.createElement("div"); item.className = "swatch vis"; const circle = document.createElement("div"); circle.className = "sw-circle"; circle.style.backgroundColor = color.hex || "#c9a84c"; const name = document.createElement("span"); name.className = "sw-lbl"; name.textContent = color.name || ""; item.append(circle, name); palette.append(item); });
+
+## safir
+text(".hero-desctitle", date); text(".name-title", p.greeting || l.welcome);
+if (programHeading) programHeading.textContent = p.programHeading || l.program;
+const dress = document.querySelector(".dresscode-block"); dress.hidden = !p.dressCode?.enabled;
+if (p.dressCode?.enabled) { text(".dresscode-content .main-title", l.dress); const copy = dress.querySelectorAll(".subtitle"); if (copy[0]) copy[0].textContent = [p.dressCode.style, p.dressCode.text].filter(Boolean).join(" · "); if (copy[1]) copy[1].textContent = p.dressCode.note || ""; }
+if (palette) { palette.replaceChildren(...(p.dressCode?.colors || []).map((color) => { const swatch = document.createElement("span"); swatch.className = "color-circle"; swatch.style.background = color.hex; swatch.title = color.name || color.hex; swatch.setAttribute("aria-label", swatch.title); return swatch; })); }
+if (cardBlocks[0]) textWithin(cardBlocks[0], ".main-title", p.programHeading || l.program);
+
+## monochrome-editorial-edition
+program.append(el('h2', '', data.programHeading));
+image.src = safe(photo.src); image.alt = photo.alt || photo.caption || ''; image.loading = 'lazy';
+const caption = item.querySelector('figcaption'); if (caption) caption.textContent = photo.caption || `${String(index + 1).padStart(2, '0')}`;
+function syncPhoto() { const item = activePhotos[photoIndex]; if (!item) return; photo.src = safe(item.src); photo.alt = item.alt || item.caption || ''; caption.textContent = item.caption || `${photoIndex + 1} / ${activePhotos.length}`; close.setAttribute('aria-label', words.close); previous.setAttribute('aria-label', words.previous); next.setAttribute('aria-label', words.next); }
+attendanceEnabled = !!data.rsvp?.enabled && !(data.rsvp.deadline && data.rsvp.deadline < today);
+const computed = { ...data, empty: '', date: { ...data.date, monthYear: [data.date?.month, data.date?.year].filter(Boolean).join(', ') }, pair: people.join(' & '), child: (data.people || [data.groom, data.bride]).filter(Boolean).join(' & '), groomInitial: data.groom?.trim()[0] || '', brideInitial: data.bride?.trim()[0] || '', initials: people.map(p => p.trim()[0]).join('&'), hostInitial: data.hosts?.trim()[0] || '', deadline: data.rsvp?
+
+## xatna-edition
+program.append(el('h2', '', data.programHeading));
+image.src = safe(photo.src); image.alt = photo.alt || photo.caption || ''; image.loading = 'lazy';
+const caption = item.querySelector('figcaption'); if (caption) caption.textContent = photo.caption || `${String(index + 1).padStart(2, '0')}`;
+function syncPhoto() { const item = activePhotos[photoIndex]; if (!item) return; photo.src = safe(item.src); photo.alt = item.alt || item.caption || ''; caption.textContent = item.caption || `${photoIndex + 1} / ${activePhotos.length}`; close.setAttribute('aria-label', words.close); previous.setAttribute('aria-label', words.previous); next.setAttribute('aria-label', words.next); }
+attendanceEnabled = !!data.rsvp?.enabled && !(data.rsvp.deadline && data.rsvp.deadline < today);
+const computed = { ...data, empty: '', date: { ...data.date, monthYear: [data.date?.month, data.date?.year].filter(Boolean).join(', ') }, pair: people.join(' & '), child: (data.people || [data.groom, data.bride]).filter(Boolean).join(' & '), groomInitial: data.groom?.trim()[0] || '', brideInitial: data.bride?.trim()[0] || '', initials: people.map(p => p.trim()[0]).join('&'), hostInitial: data.hosts?.trim()[0] || '', deadline: data.rsvp?
+
+## cloud-castle
+bindField(data, "eventLabel", data.eventType);
+bindField(data, "hosts", data.hosts);
+bindField(data, "personalGreeting", data.greeting || data.title);
+if (data.programHeading) text(programHeading, data.programHeading);
+image.alt = item.alt || item.caption || "";
+dialog.querySelector("img").alt = nextImage.alt || nextImage.caption || "";
+
+## palace-rose
+const greet = q("p", overlay); set(greet, data().greeting || text().greeting);
+set(p[0], (data().eventType || text().event).toLocaleUpperCase(dateFormatterLocale())); set(p[1], text().couple);
+set(p[6], data().hosts ? hostLabel : ""); set(p[7], data().hosts);
+hide(p[6], !data().hosts); hide(p[7], !data().hosts);
+hide(details, ![data().groom, data().bride, data().message, data().hosts].some(Boolean));
+const ps = all("p", footer); if (ps.length > 1) set(ps[1], data().date?.long || ""); if (ps.length > 2) set(ps[2], data().hosts);
+set(q("h2", section), data().programHeading || text().program);
+if (item?.src || item?.url) { img.src = item.src || item.url; img.alt = item.alt || item.caption || `${text().gallery} ${i+1}`; card.onclick = () => { const target=(galleryPosition+i)%items.length; if (i === 0) showImage(items, target); else if (items.length > 1) { galleryPosition=target; paint(); } }; }
+let pos=index;const paint=()=>{const item=items[pos];img.src=item.src||item.url;img.alt=item.alt||item.caption||text().gallery;};
+
+## royal-burgundy-edition
+const opening = q(".section-photo-story__opening img"); opening.src = photos[0].src; opening.alt = photos[0].alt || photos[0].caption || "";
+if (photos[0].caption) q(".section-photo-story__opening").after(element("p", "velvet-gallery-opening-caption", photos[0].caption));
+chapter.querySelector("img").src = photo.src; chapter.querySelector("img").alt = photo.alt || photo.caption || "";
+if (photo.caption) chapter.querySelector("figcaption").append(element("span", "velvet-gallery-caption", photo.caption));
+const attendanceEnabled = !!data.rsvp?.enabled && !(data.rsvp.deadline && data.rsvp.deadline < today);
+put("couple-invitation", [data.greeting || (data.guestName ? `${label.guest} ${data.guestName}` : label.guest), data.message].filter(Boolean).join(", "));
+put("family-respect", `— ${label.source.sections.withRespect} —`); put("family-name", data.hosts); show(".section-family", !!data.hosts);
+
+## taklifnomachi-1
+setText("rec2049114373", "tn_text_176340398328864790", payload.eventType || "");
+setText("rec2003869491", "tn_text_1772813849329000001", payload.hosts || people.join(" & "));
+setText("rec2002273681", "tn_text_1763405219328", payload.greeting || "");
+setText("rec2002506421", "tn_text_1763405219328", payload.programHeading || "");
+const dress = payload.dressCode || {};
+image.src = item.src; image.alt = item.alt || item.caption || "";
+if (rsvpForm && payload.rsvpDetails?.deadline) {
+deadline.textContent = `${labelsForLocale.deadline}: ${new Intl.DateTimeFormat(locale, { dateStyle: "long", timeZone: payload.timezone || "Asia/Tashkent" }).format(new Date(`${payload.rsvpDetails.deadline}T12:00:00Z`))}`;
+for (const item of payload.gallery.slice(photos.length)) { const figure = document.createElement("figure"); const image = document.createElement("img"); image.src = item.src; image.alt = item.alt || item.caption || ""; figure.append(image); gallery.append(figure); }
+
+## taklifnomachi-12
+set(".hero__event", data.eventType || labels.event);
+set(".greet", data.greeting || "");
+set(".greet-title", data.greeting || "");
+const startTime = data.rsvpDetails?.deadline;
+photos.forEach((item) => { const figure = document.createElement("figure"); const image = document.createElement("img"); image.src = item.src; image.alt = item.alt || item.caption || ""; figure.append(image); grid.append(figure); });
+
+## taklifnomachi-13
+set(".hero-event", data.eventType || "");
+set(".greeting", data.greeting || "");
+const section = addSection("tm-program", data.programHeading || labels.program);
+photos.forEach(item => { const figure = document.createElement("figure"); const image = document.createElement("img"); image.src = item.src; image.alt = item.alt || item.caption || ""; figure.append(image); grid.append(figure); });
+
+## taklifnomachi-15
+(()=>{const d=(()=>{try{return JSON.parse(window.name||"{}")}catch{return {}}})();window.__taklifnomaPayload=d;const q=s=>document.querySelector(s),all=s=>[...document.querySelectorAll(s)],put=(n,v)=>{if(n)n.textContent=v||""};const names=[d.groom,d.bride].filter(Boolean);const date=d.date||{};const full=date.long||date.short||"";document.documentElement.lang=d.defaultLang||"uz";document.title=d.title||names.join(" & ");const intro=all(
+
+## taklifnomachi-16
+(()=>{const d=(()=>{try{return JSON.parse(window.name||"{}")}catch{return {}}})();window.__taklifnomaPayload=d;const q=s=>document.querySelector(s),all=s=>[...document.querySelectorAll(s)],put=(n,v)=>{if(n)n.textContent=v||""};const full=d.date?.long||d.date?.short||"",names=[d.groom,d.bride].filter(Boolean);document.documentElement.lang=d.defaultLang||"uz";document.title=d.title||names.join(" & ");put(q(".hero-groom"),names[0]);put(q("
+
+## taklifnomachi-17
+(()=>{const d=(()=>{try{return JSON.parse(window.name||"{}")}catch{return {}}})();window.__taklifnomaPayload=d;const q=s=>document.querySelector(s),all=s=>[...document.querySelectorAll(s)],put=(n,v)=>{if(n)n.textContent=v||""};const full=d.date?.long||d.date?.short||"",names=[d.groom,d.bride].filter(Boolean);document.documentElement.lang=d.defaultLang||"uz";document.title=d.title||names.join(" & ");put(q(".hero-groom"),names[0]);put(q("
+
+## taklifnomachi-18
+(()=>{const d=(()=>{try{return JSON.parse(window.name||"{}")}catch{return {}}})();window.__taklifnomaPayload=d;const q=s=>document.querySelector(s),all=s=>[...document.querySelectorAll(s)],put=(n,v)=>{if(n)n.textContent=v||""},art=q("#si-artboard");const dt=d.dateTime?new Date(d.dateTime):null,full=d.date?.long||d.date?.short||"",people=[d.groom,d.bride].filter(Boolean);document.documentElement.lang=d.defaultLang||"uz";document.title=d.
+
+## taklifnomachi-19
+(()=>{const d=(()=>{try{return JSON.parse(window.name||"{}")}catch{return {}}})();window.__taklifnomaPayload=d;const q=s=>document.querySelector(s),all=s=>[...document.querySelectorAll(s)],put=(n,v)=>{if(n)n.textContent=v||""},art=q("#si-artboard"),dt=d.dateTime?new Date(d.dateTime):null,names=[d.groom,d.bride].filter(Boolean),full=d.date?.long||d.date?.short||"";document.documentElement.lang=d.defaultLang||"uz";document.title=d.title||

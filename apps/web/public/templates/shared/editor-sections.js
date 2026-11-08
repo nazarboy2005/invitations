@@ -72,7 +72,7 @@
   }
   function section(key, title, visible) {
     let element = sections.get(key);
-    if (!element) {
+    if (!element || !element.isConnected) {
       element = node("section");
       element.className = "platform-extra";
       element.dataset.platformExtra = key;

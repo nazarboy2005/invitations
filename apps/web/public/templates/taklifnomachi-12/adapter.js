@@ -36,7 +36,6 @@
     heroNames.append(lineBreak, ampersand, document.createElement("br"));
     if (people[1]) heroNames.append(document.createTextNode(people[1]));
   }
-  set(".greet", data.greeting || "");
   set(".invite-copy", data.message || "");
   set(".venue__name", data.venue?.name || "");
   set(".venue__city", data.venue?.address || "");

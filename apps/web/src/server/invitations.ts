@@ -1,4 +1,5 @@
-import { normalizeInvitation } from "@taklifnoma/contracts/capabilities";
+import { normalizeInvitation, templateCapabilities } from "@taklifnoma/contracts/capabilities";
+import { invitationForStorage, unsupportedInvitationInputs } from "@taklifnoma/contracts/studio-inputs";
 import { getDb } from "@taklifnoma/database";
 import {
   invitationSchema,
@@ -56,9 +57,8 @@ export async function saveInvitation(
 ): Promise<Invitation> {
   if (admin && (await requireAdmin()).id !== admin.actorId)
     throw new ApiError(403, "FORBIDDEN", "Administrator tasdig‘i kerak.");
-  if (invitation.templateId && !templateById(invitation.templateId))
+  if (invitation.templateId && (!templateById(invitation.templateId) || !templateCapabilities(invitation.templateId).hasRenderer))
     throw new ApiError(409, "TEMPLATE_UNAVAILABLE", "Bu dizayn hozir mavjud emas.");
-  invitation = normalizeInvitation(invitation);
   // Export finalization metadata is assigned only by the owned download service.
   invitation = { ...invitation, imageExportedAt: undefined };
   assertManagedImages(invitation);
@@ -72,6 +72,11 @@ export async function saveInvitation(
       (rows[0].owner_id !== user.id || rows[0].status === "deleted")
     )
       throw new ApiError(404, "NOT_FOUND", "Taklifnoma topilmadi.");
+    const stored = rows[0] ? invitationSchema.parse(rows[0].data) : null;
+    const unsupported = unsupportedInvitationInputs(invitation, stored);
+    if (unsupported.length)
+      throw new ApiError(400, "UNSUPPORTED_TEMPLATE_INPUT", "Tanlangan dizayn qo‘llamaydigan maydonlar yuborildi.", unsupported);
+    invitation = invitationForStorage(invitation);
     const templates = invitation.templateId
       ? await tx`SELECT t.published, EXISTS (SELECT 1 FROM template_supported_event_types s WHERE s.template_id=t.id AND s.event_type=${invitation.eventType}) AS supports_event FROM templates t WHERE t.id=${invitation.templateId}`
       : [];
@@ -92,7 +97,7 @@ export async function saveInvitation(
         "Tanlangan dizayn bu tadbir turini qo‘llamaydi. Mos dizaynni tanlang.",
       );
     if (rows[0]) {
-      const previous = normalizeInvitation(invitationSchema.parse(rows[0].data));
+      const previous = stored!;
       if (
         rows[0].status === "draft" &&
         paymentIdentity(previous) !== paymentIdentity(invitation)
@@ -126,8 +131,9 @@ export async function saveInvitation(
         );
       }
       if (rows[0].status === "published") {
-        assertPublishable(invitation);
-        await assertPublicMedia(tx, invitation, user.id);
+        const visible = normalizeInvitation(invitation);
+        assertPublishable(visible);
+        await assertPublicMedia(tx, visible, user.id);
       }
       saved = {
         ...invitation,

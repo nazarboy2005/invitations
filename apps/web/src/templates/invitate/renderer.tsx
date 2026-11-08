@@ -236,7 +236,7 @@ export function InvitateInvitation({
       venue: {
         ...source.venue,
         name: content.venueName,
-        address: content.address,
+        address: [content.address, content.landmark].filter(Boolean).join(" · "),
         landmark: content.landmark,
         lat: invitation.venue.latitude,
         lng: invitation.venue.longitude,

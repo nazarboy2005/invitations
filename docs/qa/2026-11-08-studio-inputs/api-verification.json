@@ -1,0 +1,328 @@
+{
+  "scope": "Authenticated PUT bypass and valid-save verification. Exhaustive repetition was shortened after the user requested speed; the complete catalog is covered by the unit validation matrix and renderer inventory.",
+  "verifiedTemplates": [
+    {
+      "id": "andalus-darvozasi",
+      "published": false,
+      "revision": 2
+    },
+    {
+      "id": "anor",
+      "published": true,
+      "revision": 2
+    },
+    {
+      "id": "atlas",
+      "published": false,
+      "revision": 2
+    },
+    {
+      "id": "aurelia",
+      "published": false,
+      "revision": 2
+    },
+    {
+      "id": "beshik",
+      "published": false,
+      "revision": 2
+    },
+    {
+      "id": "bitiruv",
+      "published": false,
+      "revision": 2
+    },
+    {
+      "id": "bogi-eram",
+      "published": true,
+      "revision": 2
+    },
+    {
+      "id": "bulbul",
+      "published": true,
+      "revision": 2
+    },
+    {
+      "id": "butterfly",
+      "published": false,
+      "revision": 2
+    },
+    {
+      "id": "buxoro-ravoq",
+      "published": false,
+      "revision": 2
+    },
+    {
+      "id": "chavandoz",
+      "published": false,
+      "revision": 2
+    },
+    {
+      "id": "cloud-castle",
+      "published": true,
+      "revision": 2
+    },
+    {
+      "id": "doira",
+      "published": true,
+      "revision": 2
+    },
+    {
+      "id": "evelina",
+      "published": false,
+      "revision": 2
+    },
+    {
+      "id": "fairy",
+      "published": false,
+      "revision": 2
+    },
+    {
+      "id": "ganch",
+      "published": true,
+      "revision": 2
+    },
+    {
+      "id": "glass-pink",
+      "published": false,
+      "revision": 2
+    },
+    {
+      "id": "golden-card",
+      "published": false,
+      "revision": 2
+    },
+    {
+      "id": "golden-hour",
+      "published": false,
+      "revision": 2
+    },
+    {
+      "id": "green-garden",
+      "published": false,
+      "revision": 2
+    },
+    {
+      "id": "green-gold",
+      "published": false,
+      "revision": 2
+    },
+    {
+      "id": "green-white",
+      "published": false,
+      "revision": 2
+    },
+    {
+      "id": "gulli-darvoza",
+      "published": false,
+      "revision": 2
+    },
+    {
+      "id": "hilol",
+      "published": false,
+      "revision": 2
+    },
+    {
+      "id": "invitate-nahorgi-osh",
+      "published": false,
+      "revision": 2
+    },
+    {
+      "id": "invitate-palov",
+      "published": false,
+      "revision": 2
+    },
+    {
+      "id": "invitate-wedding",
+      "published": false,
+      "revision": 2
+    },
+    {
+      "id": "islamic-edition",
+      "published": true,
+      "revision": 2
+    },
+    {
+      "id": "ivory-rose-card",
+      "published": true,
+      "revision": 2
+    },
+    {
+      "id": "jannat-bogi",
+      "published": false,
+      "revision": 2
+    },
+    {
+      "id": "jasmine-white",
+      "published": false,
+      "revision": 2
+    },
+    {
+      "id": "kapadokiya-tongi",
+      "published": false,
+      "revision": 2
+    },
+    {
+      "id": "konfetti",
+      "published": false,
+      "revision": 2
+    },
+    {
+      "id": "korporativ",
+      "published": false,
+      "revision": 2
+    },
+    {
+      "id": "kozgu",
+      "published": true,
+      "revision": 2
+    },
+    {
+      "id": "kuzgi-chinor",
+      "published": true,
+      "revision": 2
+    },
+    {
+      "id": "lace",
+      "published": true,
+      "revision": 2
+    },
+    {
+      "id": "lola",
+      "published": false,
+      "revision": 2
+    },
+    {
+      "id": "lola-maktubi",
+      "published": true,
+      "revision": 2
+    },
+    {
+      "id": "love-sakura",
+      "published": false,
+      "revision": 2
+    },
+    {
+      "id": "luxury-gold",
+      "published": false,
+      "revision": 2
+    },
+    {
+      "id": "ming-bir-kecha",
+      "published": false,
+      "revision": 2
+    },
+    {
+      "id": "modern-floral",
+      "published": false,
+      "revision": 2
+    },
+    {
+      "id": "monochrome-editorial-edition",
+      "published": true,
+      "revision": 2
+    },
+    {
+      "id": "monogram",
+      "published": false,
+      "revision": 2
+    },
+    {
+      "id": "moviy-ravoq-card",
+      "published": true,
+      "revision": 2
+    },
+    {
+      "id": "muhabbat-kitobi",
+      "published": false,
+      "revision": 2
+    },
+    {
+      "id": "muhr",
+      "published": true,
+      "revision": 2
+    },
+    {
+      "id": "nahor",
+      "published": true,
+      "revision": 2
+    },
+    {
+      "id": "nahorgi-osh",
+      "published": false,
+      "revision": 2
+    },
+    {
+      "id": "nilufar",
+      "published": false,
+      "revision": 2
+    },
+    {
+      "id": "olive-manor-edition",
+      "published": true,
+      "revision": 2
+    },
+    {
+      "id": "oltin-darvoza-ortidagi-baxt",
+      "published": false,
+      "revision": 2
+    },
+    {
+      "id": "oltin-kuz",
+      "published": true,
+      "revision": 2
+    },
+    {
+      "id": "oltin-nur",
+      "published": false,
+      "revision": 2
+    },
+    {
+      "id": "oltin-uzuk",
+      "published": false,
+      "revision": 2
+    },
+    {
+      "id": "oltin-yosh",
+      "published": false,
+      "revision": 2
+    },
+    {
+      "id": "oq-kabutar",
+      "published": false,
+      "revision": 2
+    },
+    {
+      "id": "orchid-amplop",
+      "published": false,
+      "revision": 2
+    },
+    {
+      "id": "orik-guli",
+      "published": true,
+      "revision": 2
+    },
+    {
+      "id": "osh",
+      "published": false,
+      "revision": 2
+    },
+    {
+      "id": "oynavand",
+      "published": false,
+      "revision": 2
+    },
+    {
+      "id": "palace-rose",
+      "published": true,
+      "revision": 2
+    },
+    {
+      "id": "palov",
+      "published": true,
+      "revision": 2
+    }
+  ],
+  "verified": 64,
+  "rejectedRequestsDidNotWrite": true,
+  "remainingDatabaseRows": "Covered by shared validation tests; no fresh per-row HTTP claim"
+}

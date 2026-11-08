@@ -12,6 +12,7 @@ import { refreshFavorites } from "@/modules/favorites/favorites-store";
 import { publicTemplateId, resolveTemplateId } from "@taklifnoma/contracts";
 
 import { applyOptionalFeatureVisibility, normalizeInvitation, templateCapabilities } from "@taklifnoma/contracts/capabilities";
+import { studioSavePayload } from "@taklifnoma/contracts/studio-inputs";
 import { hasVenuePoint, yandexMapUrl } from "@taklifnoma/contracts/maps";
 import { DEFAULT_INVITATION_MUSIC } from "@taklifnoma/contracts/music";
 import { ReadinessChecklist } from "./readiness-checklist";
@@ -391,6 +392,10 @@ export function Studio({
     return globalThis.fetch(input, init);
   }
   const [invitation, setInvitationState] = useState<Invitation | null>(null);
+  const [singleContactType, setSingleContactType] = useState("phone");
+  useEffect(() => {
+    if (invitation) setSingleContactType(invitation.contacts.telegramUsername.trim() ? "telegram" : "phone");
+  }, [invitation?.id, invitation?.templateId]);
   const [editAccess, setEditAccess] = useState<InvitationEditAccess | null>(initialEditAccess ?? null);
   const [clockNow, setClockNow] = useState(() => new Date());
   useEffect(() => {
@@ -412,12 +417,12 @@ export function Studio({
   const setInvitation = useCallback((action: SetStateAction<Invitation | null>) => {
     setInvitationState((current) => {
       const next = typeof action === "function" ? action(current) : action;
-      return next ? normalizeInvitation(next) : null;
+      return next;
     });
   }, []);
   const previewInvitation = useMemo(
     () => invitation ? applyOptionalFeatureVisibility({
-      ...createStudioPreviewInvitation(invitation),
+      ...normalizeInvitation(createStudioPreviewInvitation(invitation)),
       // Preview projection only: keep the creator's saved soundtrack selected,
       // but never send playable audio to an automatically opened Studio frame.
       music: { ...invitation.music, enabled: false, url: "" },
@@ -490,6 +495,7 @@ export function Studio({
   const lastCloudSnapshot = useRef(
     initialInvitation ? JSON.stringify(initialInvitation) : "",
   );
+  const cloudInvitation = useRef<Invitation | null>(initialInvitation ?? null);
   const ownerId = useRef<string | null>(
     initialInvitation ? "unavailable-private-owner" : null,
   );
@@ -1023,6 +1029,7 @@ export function Studio({
       </div>
     );
   const capabilities = templateCapabilities(invitation.templateId);
+  const inputs = capabilities.inputs;
   const content = getContent(invitation, locale);
   // Placeholder copy follows the Uzbek Latin editor UI, independently of the
   // invitation language currently being authored.
@@ -1081,7 +1088,7 @@ export function Studio({
     formatTemplates,
     invitation.eventType,
   );
-  const readiness = publicationIssues(invitation);
+  const readiness = publicationIssues(normalizeInvitation(invitation));
   const startsAtIssue = readiness.find((issue) => issue.path === "startsAt");
   if (
     invitation.status === "draft" &&
@@ -1357,10 +1364,11 @@ export function Studio({
         throw new Error(
           "Ma’lumotlar saqlashga tayyor emas. Xarita va rasm havolalarini hamda kiritilgan maydonlarni tekshiring.",
         );
+      const payload = studioSavePayload(current, cloudInvitation.current);
       const response = await studioFetch("/api/invitations", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ invitation: current }),
+        body: JSON.stringify({ invitation: payload }),
       });
       if (!response.ok) {
         const result = await response.json().catch(() => ({}));
@@ -1379,10 +1387,18 @@ export function Studio({
       }
       const result = await response.json();
       if (result.invitation) {
+        cloudInvitation.current = result.invitation;
+        // Unsaved fields hidden by a switch remain recoverable in this browser.
+        // Previously saved hidden fields already round-trip through the server.
+        const localSaved = { ...current, ...result.invitation,
+          ...Object.fromEntries(Object.keys(current).filter(key =>
+            JSON.stringify(current[key as keyof Invitation]) !== JSON.stringify(payload[key as keyof Invitation]),
+          ).map(key => [key, current[key as keyof Invitation]])),
+        } as Invitation;
         lastCloudSnapshot.current = JSON.stringify(result.invitation);
         const changedDuringSave =
           JSON.stringify(invitationRef.current) !== JSON.stringify(current);
-        if (!changedDuringSave) setInvitation(result.invitation);
+        if (!changedDuringSave) setInvitation(localSaved);
         else if (invitationRef.current)
           setInvitation({
             ...invitationRef.current,
@@ -1396,8 +1412,8 @@ export function Studio({
                     ...invitationRef.current,
                     revision: result.invitation.revision,
                   }
-                : result.invitation,
-              changedDuringSave,
+                : localSaved,
+              changedDuringSave || JSON.stringify(localSaved) !== lastCloudSnapshot.current,
               ownerId.current,
             );
         } catch {
@@ -1530,7 +1546,9 @@ export function Studio({
         return;
       }
       setNotice(
-        "Taklifnomangiz hisobingizga saqlandi. Uni “Taklifnomalarim” bo‘limidan topasiz.",
+        JSON.stringify(current) !== JSON.stringify(payload)
+          ? "Tanlangan dizayn maydonlari hisobingizga saqlandi. Boshqa dizaynga tegishli yangi ma’lumotlar shu brauzerdagi qoralamada saqlanadi."
+          : "Taklifnomangiz hisobingizga saqlandi. Uni “Taklifnomalarim” bo‘limidan topasiz.",
       );
     } catch (cause) {
       checkoutWindow?.close();
@@ -2044,7 +2062,7 @@ export function Studio({
                 </section>
               )}
 
-            {section === 1 && (
+            {section === 1 && capabilities.hasRenderer && (
               <div className={styles.scheduleSections}>
                 <StudioSection id="studio-people-title" title="Tadbir egalari" description="Ismlar va taklif etuvchi mezbonlar." icon={Users}>
                 <div className={styles.twoColumns}>
@@ -2104,7 +2122,7 @@ export function Studio({
                     />
                   </Field>
                 )}
-                {(!capabilities.imageFields || capabilities.imageFields.includes("hosts")) && <Field label="Oila yoki mezbonlar" hint="Ixtiyoriy">
+                {inputs.hosts && <Field label="Oila yoki mezbonlar" hint="Ixtiyoriy">
                   <input
                     value={content.hosts}
                     placeholder={placeholders.family}
@@ -2130,7 +2148,7 @@ export function Studio({
                 )}
                 </StudioSection>
                 <StudioSection id="studio-wording-title" title="Taklif matni" description="Mehmonlarga aytmoqchi bo‘lgan so‘zlaringiz." icon={FileText} disabled={staticLocked}>
-                <Field
+                {inputs.eventLabel && <Field
                   label="Tadbir nomi"
                   hint="Bu matn taklifnomada ko‘rinadi."
                 >
@@ -2144,8 +2162,8 @@ export function Studio({
                       updateContent({ eventLabel: event.target.value })
                     }
                   />
-                </Field>
-                {(!capabilities.imageFields || capabilities.imageFields.includes("greeting")) && <Field label="Mehmonlarga salomlashish">
+                </Field>}
+                {inputs.greeting && <Field label="Mehmonlarga salomlashish">
                   <input
                     value={content.greeting}
                     maxLength={300}
@@ -2184,7 +2202,7 @@ export function Studio({
                         Bob qo‘shish
                       </button>
                     </div>
-                    {invitation.story.map((chapter, index) => (
+                    {invitation.story.slice(0, capabilities.story).map((chapter, index) => (
                       <div className={styles.storyItem} key={chapter.id}>
                         <div className={styles.groupHeader}>
                           <h3>{index + 1}-bob</h3>
@@ -2878,7 +2896,7 @@ export function Studio({
                   <div><h2 id="studio-program-title">Tadbir dasturi</h2><p>Kun tartibi va har bir bosqich vaqti.</p></div>
                   <small>Ixtiyoriy</small>
                 </div>
-                <Field label="Dastur sarlavhasi">
+                {inputs.programHeading && <Field label="Dastur sarlavhasi">
                   <input
                     value={content.programHeading}
                     maxLength={300}
@@ -2886,7 +2904,7 @@ export function Studio({
                       updateContent({ programHeading: event.target.value })
                     }
                   />
-                </Field>
+                </Field>}
                 {invitation.program.length === 0 && (
                   <section className={styles.programExample} aria-labelledby="studio-program-example-title">
                     <div className={styles.programExampleHeading}>
@@ -2904,7 +2922,7 @@ export function Studio({
                   </section>
                 )}
                 {invitation.program.length > 0 && <div className={styles.program}>
-                  {invitation.program.map((item) => (
+                  {invitation.program.slice(0, capabilities.programLimit).map((item) => (
                     <div key={item.id} className={styles.programItem}>
                       <span className={styles.timelineDot} />
                       <div className={styles.programPreview}>
@@ -2950,7 +2968,7 @@ export function Studio({
                             <Trash2 size={14} />
                           </button>
                         </div>
-                        {capabilities.artists > 0 && (
+                        {inputs.programDescriptions && (
                           <textarea
                             className={styles.programDescriptionInput}
                             aria-label="Dastur bandi izohi"
@@ -2979,7 +2997,7 @@ export function Studio({
                 <button
                   type="button"
                   className={styles.addButton}
-                  disabled={invitation.program.length >= 100}
+                  disabled={invitation.program.length >= capabilities.programLimit}
                   onClick={() =>
                     setInvitation(addStarterProgramItem(invitation))
                   }
@@ -2997,7 +3015,7 @@ export function Studio({
                   </span>
                   <h3>{content.programHeading || "To‘y dasturi"}</h3>
                   <ol>
-                      {invitation.program.map((item) => (
+                      {invitation.program.slice(0, capabilities.programLimit).map((item) => (
                         <li key={item.id}>
                           <time>{item.time || "--:--"}</time>
                           <span>
@@ -3037,7 +3055,7 @@ export function Studio({
                 />
                 {invitation.dressCode.enabled && (
                   <div className={styles.optionBody}>
-                    <Field label="Kiyinish uslubi">
+                    {inputs.dressStyle && <Field label="Kiyinish uslubi">
                       <input
                         value={invitation.dressCode.style[locale] ?? ""}
                         maxLength={300}
@@ -3045,8 +3063,8 @@ export function Studio({
                           updateDressCodeText("style", event.target.value)
                         }
                       />
-                    </Field>
-                    <Field label="Mehmonlar uchun izoh">
+                    </Field>}
+                    {inputs.dressText && <Field label="Mehmonlar uchun izoh">
                       <textarea
                         value={invitation.dressCode.text[locale] ?? ""}
                         maxLength={10000}
@@ -3055,8 +3073,8 @@ export function Studio({
                           updateDressCodeText("text", event.target.value)
                         }
                       />
-                    </Field>
-                    <Field label="Qo‘shimcha eslatma" hint="Ixtiyoriy">
+                    </Field>}
+                    {inputs.dressNote && <Field label="Qo‘shimcha eslatma" hint="Ixtiyoriy">
                       <textarea
                         value={invitation.dressCode.note[locale] ?? ""}
                         maxLength={10000}
@@ -3065,14 +3083,15 @@ export function Studio({
                           updateDressCodeText("note", event.target.value)
                         }
                       />
-                    </Field>
+                    </Field>}
+                    {(inputs.dressColorNames || inputs.dressColorHex) && <>
                     <div className={styles.sectionHeading}>
                       <strong>Ranglar palitrasi</strong>
-                      <span>{invitation.dressCode.colors.length}/12</span>
+                      <span>{invitation.dressCode.colors.length}/{capabilities.dressColorLimit}</span>
                     </div>
-                    {invitation.dressCode.colors.map((color, index) => (
+                    {invitation.dressCode.colors.slice(0, capabilities.dressColorLimit).map((color, index) => (
                       <div key={color.id} className={styles.twoColumns}>
-                        <Field label={`${index + 1}-rang nomi`}>
+                        {inputs.dressColorNames && <Field label={`${index + 1}-rang nomi`}>
                           <input
                             value={color.name[locale] ?? ""}
                             maxLength={300}
@@ -3093,8 +3112,8 @@ export function Studio({
                               })
                             }
                           />
-                        </Field>
-                        <Field label="Rang kodi">
+                        </Field>}
+                        {inputs.dressColorHex && <Field label="Rang kodi">
                           <input
                             type="color"
                             value={color.hex}
@@ -3109,7 +3128,7 @@ export function Studio({
                               })
                             }
                           />
-                        </Field>
+                        </Field>}
                         <button
                           className={styles.textButton}
                           type="button"
@@ -3128,7 +3147,7 @@ export function Studio({
                     <button
                       className={styles.addButton}
                       type="button"
-                      disabled={invitation.dressCode.colors.length >= 12}
+                      disabled={invitation.dressCode.colors.length >= capabilities.dressColorLimit}
                       onClick={() =>
                         updateDressCode({
                           colors: [
@@ -3136,7 +3155,7 @@ export function Studio({
                             {
                               id: crypto.randomUUID(),
                               name: { [locale]: "" },
-                              hex: "#c9a55c",
+                              hex: inputs.dressColorHex ? "#c9a55c" : "#000000",
                             },
                           ],
                         })
@@ -3144,6 +3163,7 @@ export function Studio({
                     >
                       <Plus size={17} /> Rang qo‘shish
                     </button>
+                    </>}
                   </div>
                 )}
                 </section>)}
@@ -3238,7 +3258,7 @@ export function Studio({
                     />
                   </label>
 
-                  {invitation.gallery.map((image, index) => (
+                  {invitation.gallery.slice(0, capabilities.gallery).map((image, index) => (
                     <div className={styles.galleryRow} key={image.id}>
                       <div
                         className={styles.imageThumb}
@@ -3333,7 +3353,7 @@ export function Studio({
                       Ism, vazifa va suratni kiriting. Har bir yoqilgan tilda
                       ism va vazifani alohida yozishingiz mumkin.
                     </p>
-                    {invitation.artistLineup.map((artist, index) => (
+                    {invitation.artistLineup.slice(0, capabilities.artists).map((artist, index) => (
                       <div className={styles.storyItem} key={artist.id}>
                         <div className={styles.twoColumns}>
                           <Field
@@ -3851,8 +3871,19 @@ export function Studio({
                   <div className={styles.groupHeader}>
                     <h2>Bog‘lanish</h2>
                   </div>
+                  {capabilities.contactLimit === 1 && capabilities.phone && capabilities.telegram && <Field label="Aloqa usuli" hint="Bu dizaynda bitta aloqa ko‘rsatiladi.">
+                    <SoftSelect label="Aloqa usuli" value={singleContactType}
+                      options={[{ value: "phone", label: "Telefon" }, { value: "telegram", label: "Telegram" }]}
+                      onChange={value => {
+                        setSingleContactType(value);
+                        update({ contacts: { ...invitation.contacts,
+                          phoneNumber: value === "phone" ? invitation.contacts.phoneNumber : "",
+                          telegramUsername: value === "telegram" ? invitation.contacts.telegramUsername : "",
+                        } });
+                      }} />
+                  </Field>}
                   <div className={styles.twoColumns}>
-                    {capabilities.phone && (<Field label="Telefon raqami">
+                    {capabilities.phone && (capabilities.contactLimit !== 1 || singleContactType === "phone") && (<Field label="Telefon raqami">
                       <input
                         type="tel"
                         autoComplete="tel"
@@ -3870,7 +3901,7 @@ export function Studio({
                         }
                       />
                     </Field>)}
-                    {capabilities.telegram && (<Field label="Telegram nomi">
+                    {capabilities.telegram && (capabilities.contactLimit !== 1 || singleContactType === "telegram") && (<Field label="Telegram nomi">
                       <input
                         type="text"
                         autoComplete="username"

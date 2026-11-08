@@ -23,8 +23,7 @@ export const IMAGE_REQUIRED_FIELDS = [
 ] as const;
 
 export type TemplateCapabilities = {
-  /** Retain authored fields which this renderer does not display when switching. */
-  preserveUnrenderedContent?: boolean;
+  hasRenderer: boolean;
   imageFields?: readonly ImageContentField[];
   locationQr?: boolean;
   maps: boolean;
@@ -43,9 +42,26 @@ export type TemplateCapabilities = {
   age: boolean;
   people: number;
   artists: number;
+  contactLimit: number;
+  /** Individual editable slots, beyond section-level support. */
+  inputs: {
+    hosts: boolean;
+    greeting: boolean;
+    eventLabel: boolean;
+    programHeading: boolean;
+    programDescriptions: boolean;
+    dressStyle: boolean;
+    dressText: boolean;
+    dressNote: boolean;
+    dressColorNames: boolean;
+    dressColorHex: boolean;
+  };
+  programLimit: number;
+  dressColorLimit: number;
 };
 
 const unsupported: TemplateCapabilities = {
+  hasRenderer: false,
   maps: false,
   music: false,
   wishes: false,
@@ -62,6 +78,10 @@ const unsupported: TemplateCapabilities = {
   age: false,
   people: 2,
   artists: 0,
+  contactLimit: 0,
+  inputs: { hosts: false, greeting: false, eventLabel: false, programHeading: false, programDescriptions: false, dressStyle: false, dressText: false, dressNote: false, dressColorNames: false, dressColorHex: false },
+  programLimit: 0,
+  dressColorLimit: 0,
 };
 
 export function templateCapabilities(id: string): TemplateCapabilities {
@@ -98,15 +118,14 @@ export function invitationActivityFeatures(invitation: Invitation, counts = { re
   };
 }
 
-/** Project content onto the chosen design's actual slots before any persistence.
- * Pure and idempotent; also used by Studio, never dependent on client metadata.
+/** Project authored content onto the chosen design's actual rendering slots.
+ * Pure and idempotent; persistence validates separately before any projection.
  */
 export function normalizeInvitation(invitation: Invitation): Invitation {
   if (!invitation.templateId) return invitation;
   const c = templateCapabilities(invitation.templateId);
   const content = Object.fromEntries(
-    invitation.enabledLocales.map((locale) => {
-      const value = invitation.content[locale];
+    Object.entries(invitation.content).map(([locale, value]) => {
       if (!value) return [locale, value];
       return [
         locale,
@@ -133,6 +152,12 @@ export function normalizeInvitation(invitation: Invitation): Invitation {
               )
             : {}),
           people: value.people.slice(0, c.people),
+          hosts: c.inputs.hosts ? value.hosts : "",
+          greeting: c.inputs.greeting ? value.greeting : "",
+          personalGreeting: c.inputs.greeting ? value.personalGreeting : "",
+          eventLabel: c.inputs.eventLabel ? value.eventLabel : "",
+          programHeading: c.program && c.inputs.programHeading ? value.programHeading : "",
+          programDescriptions: c.program && c.inputs.programDescriptions ? value.programDescriptions : {},
           ...(!c.program
             ? { programHeading: "", programTitles: {}, programDescriptions: {} }
             : {}),
@@ -150,16 +175,25 @@ export function normalizeInvitation(invitation: Invitation): Invitation {
             [invitation.templateId]:
               invitation.templateData[invitation.templateId],
           },
-    celebrantAge: c.age ? invitation.celebrantAge : null,
+    celebrantAge: c.age && invitation.eventType === "birthday" ? invitation.celebrantAge : null,
     gallery: invitation.gallery.slice(0, c.gallery),
-    program: c.program ? invitation.program : [],
+    program: c.program ? invitation.program.slice(0, c.programLimit) : [],
     story: invitation.story.slice(0, c.story),
     artistLineup: invitation.artistLineup.slice(0, c.artists),
     venue: c.maps
       ? normalizeVenue(invitation.venue)
       : { latitude: null, longitude: null, mapUrl: "" },
     dressCode: c.dressCode
-      ? invitation.dressCode
+      ? { ...invitation.dressCode,
+          style: c.inputs.dressStyle ? invitation.dressCode.style : {},
+          text: c.inputs.dressText ? invitation.dressCode.text : {},
+          note: c.inputs.dressNote ? invitation.dressCode.note : {},
+          colors: c.inputs.dressColorNames || c.inputs.dressColorHex
+            ? invitation.dressCode.colors.slice(0, c.dressColorLimit).map(color => ({ ...color,
+                name: c.inputs.dressColorNames ? color.name : {},
+                hex: c.inputs.dressColorHex ? color.hex : "#000000",
+              })) : [],
+        }
       : { enabled: false, style: {}, text: {}, note: {}, colors: [] },
     music: c.music
       ? {
@@ -185,7 +219,7 @@ export function normalizeInvitation(invitation: Invitation): Invitation {
           cardHolder: "",
         },
     contacts: {
-      phoneNumber: c.phone ? invitation.contacts.phoneNumber : "",
+      phoneNumber: c.phone && !(c.contactLimit === 1 && c.telegram && invitation.contacts.telegramUsername.trim()) ? invitation.contacts.phoneNumber : "",
       telegramUsername: c.telegram ? invitation.contacts.telegramUsername : "",
       instagramUrl: "",
     },
@@ -201,14 +235,6 @@ export function normalizeInvitation(invitation: Invitation): Invitation {
       enabled: c.wishes && invitation.wishes.enabled,
       requireApproval: true,
     },
-    ...(c.preserveUnrenderedContent
-      ? {
-          templateData: invitation.templateData,
-          celebrantAge: invitation.celebrantAge,
-          artistLineup: invitation.artistLineup,
-          contacts: invitation.contacts,
-        }
-      : {}),
   };
 }
 

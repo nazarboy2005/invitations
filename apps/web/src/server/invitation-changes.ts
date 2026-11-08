@@ -1,6 +1,7 @@
 import { getDb } from "@taklifnoma/database";
 import { invitationSchema, type Invitation } from "@taklifnoma/contracts";
 import { normalizeInvitation } from "@taklifnoma/contracts/capabilities";
+import { invitationForStorage, unsupportedInvitationInputs } from "@taklifnoma/contracts/studio-inputs";
 import {
   applyChange,
   changeBase,
@@ -23,18 +24,18 @@ function validatedChange(invitation: Invitation, input: ChangeInput) {
       )
         throw new Error("INVALID_CEREMONY_DATE");
     }
-    const next = invitationSchema.parse(
-      normalizeInvitation(applyChange(invitation, input)),
-    );
+    const applied = invitationSchema.parse(applyChange(invitation, input));
+    if (unsupportedInvitationInputs(applied, invitation).length) throw new Error("UNSUPPORTED_CHANGE");
+    const next = invitationForStorage(applied);
     if (
-      publicationIssues(next).length ||
+      publicationIssues(normalizeInvitation(next)).length ||
       sameValue(
         changeBase(invitation, input.type),
         changeBase(next, input.type),
       )
     )
       throw new Error("NO_VALID_CHANGE");
-    // Normalization must never silently turn an unsupported requested value into approval.
+    // Approval must match the requested identity without silently dropping fields.
     if (
       input.type === "identity" &&
       !sameValue(changeBase(next, "identity"), input.values)
@@ -61,7 +62,7 @@ export async function createInvitationChange(
     if (!row) throw new ApiError(404, "NOT_FOUND", "Taklifnoma topilmadi.");
     if (!row.identity_locked_at && row.status !== "published")
       throw new ApiError(409, "NOT_LOCKED", "Qoralamani bevosita tahrirlang.");
-    const invitation = normalizeInvitation(invitationSchema.parse(row.data));
+    const invitation = invitationSchema.parse(row.data);
     validatedChange(invitation, input);
     const [pending] =
       await tx`SELECT id FROM invitation_change_requests WHERE invitation_id=${id} AND change_type=${input.type} AND status='pending'`;
@@ -150,7 +151,7 @@ export async function reviewInvitationChange(
         "ALREADY_REVIEWED",
         "So‘rov allaqachon ko‘rib chiqilgan.",
       );
-    const previous = normalizeInvitation(invitationSchema.parse(row.data));
+    const previous = invitationSchema.parse(row.data);
     let next = previous;
     let deadline = row.edit_deadline_at;
     if (decision === "approve") {

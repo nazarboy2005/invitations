@@ -218,8 +218,8 @@
   const dressPaint = all('[style*="background"]', section("dress")).filter(
     (n) => !n.querySelector('[style*="background"]'),
   )[0];
-  const dressTemplate = dressPaint?.parentElement.cloneNode(true),
-    dressList = dressPaint?.parentElement.parentElement;
+  const dressTemplate = (id === "stained-glass" ? dressPaint?.parentElement : dressPaint)?.cloneNode(true),
+    dressList = id === "stained-glass" ? dressPaint?.parentElement.parentElement : dressPaint?.parentElement;
   const contactTemplates = new Map(
     all("[data-contact]").map((n) => [
       n.dataset.contact,

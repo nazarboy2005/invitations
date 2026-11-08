@@ -1,0 +1,7032 @@
+[
+  {
+    "id": "andalus-darvozasi",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": false,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": true,
+      "programTitle": true,
+      "programDescriptions": false,
+      "story": false,
+      "dressStyle": false,
+      "dressText": false,
+      "dressNote": false,
+      "dressColorNames": false,
+      "phone": true,
+      "telegram": true,
+      "gift": true
+    },
+    "colors": false,
+    "photos": [
+      "QA_PHOTO_1",
+      "QA_PHOTO_2",
+      "QA_PHOTO_3",
+      "QA_PHOTO_4",
+      "QA_PHOTO_5",
+      "QA_PHOTO_6",
+      "QA_PHOTO_7",
+      "QA_PHOTO_8"
+    ],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/onlinetaklifnoma-andalus-darvozasi/index.html?qaSilent=1",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "anor",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": true,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": true,
+      "programTitle": true,
+      "programDescriptions": false,
+      "story": true,
+      "dressStyle": true,
+      "dressText": true,
+      "dressNote": true,
+      "dressColorNames": true,
+      "phone": true,
+      "telegram": true,
+      "gift": true
+    },
+    "colors": true,
+    "photos": [
+      "QA_PHOTO_1",
+      "QA_PHOTO_2",
+      "QA_PHOTO_3",
+      "QA_PHOTO_4",
+      "QA_PHOTO_5",
+      "QA_PHOTO_6",
+      "QA_PHOTO_7",
+      "QA_PHOTO_8"
+    ],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/anor/source/index.html?locale=uz-Latn",
+        "script": true,
+        "payload": true,
+        "story": [
+          {
+            "id": "s",
+            "title": "QA_STORY_TITLE",
+            "text": "QA_STORY_TEXT"
+          }
+        ],
+        "sections": [
+          "story",
+          "people",
+          "receipt"
+        ],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "atlas",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": true,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": false,
+      "programTitle": true,
+      "programDescriptions": false,
+      "story": true,
+      "dressStyle": true,
+      "dressText": true,
+      "dressNote": true,
+      "dressColorNames": true,
+      "phone": true,
+      "telegram": true,
+      "gift": true
+    },
+    "colors": true,
+    "photos": [
+      "QA_PHOTO_1",
+      "QA_PHOTO_2",
+      "QA_PHOTO_3",
+      "QA_PHOTO_4",
+      "QA_PHOTO_5",
+      "QA_PHOTO_6",
+      "QA_PHOTO_7",
+      "QA_PHOTO_8"
+    ],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/atlas/index.html?lang=uz&qaReducedMotion=1",
+        "script": true,
+        "payload": true,
+        "story": [
+          {
+            "id": "s",
+            "title": "QA_STORY_TITLE",
+            "text": "QA_STORY_TEXT"
+          }
+        ],
+        "sections": [
+          "story",
+          "people",
+          "receipt"
+        ],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "aurelia",
+    "fields": {
+      "hosts": false,
+      "greeting": true,
+      "eventLabel": false,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": true,
+      "programTitle": true,
+      "programDescriptions": false,
+      "story": false,
+      "dressStyle": false,
+      "dressText": false,
+      "dressNote": false,
+      "dressColorNames": false,
+      "phone": true,
+      "telegram": true,
+      "gift": true
+    },
+    "colors": false,
+    "photos": [
+      "QA_PHOTO_1",
+      "QA_PHOTO_2"
+    ],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/aurelia/index.html?lang=uz",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "beshik",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": true,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": true,
+      "programTitle": true,
+      "programDescriptions": false,
+      "story": true,
+      "dressStyle": true,
+      "dressText": true,
+      "dressNote": true,
+      "dressColorNames": true,
+      "phone": true,
+      "telegram": true,
+      "gift": true
+    },
+    "colors": true,
+    "photos": [
+      "QA_PHOTO_1",
+      "QA_PHOTO_2",
+      "QA_PHOTO_3",
+      "QA_PHOTO_4",
+      "QA_PHOTO_5",
+      "QA_PHOTO_6",
+      "QA_PHOTO_7",
+      "QA_PHOTO_8"
+    ],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/beshik/index.html?lang=uz&qaReducedMotion=1",
+        "script": true,
+        "payload": true,
+        "story": [
+          {
+            "id": "s",
+            "title": "QA_STORY_TITLE",
+            "text": "QA_STORY_TEXT"
+          }
+        ],
+        "sections": [
+          "story",
+          "people",
+          "receipt"
+        ],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "bitiruv",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": true,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": false,
+      "programTitle": true,
+      "programDescriptions": false,
+      "story": true,
+      "dressStyle": true,
+      "dressText": true,
+      "dressNote": true,
+      "dressColorNames": true,
+      "phone": true,
+      "telegram": true,
+      "gift": true
+    },
+    "colors": true,
+    "photos": [
+      "QA_PHOTO_1",
+      "QA_PHOTO_2",
+      "QA_PHOTO_3",
+      "QA_PHOTO_4",
+      "QA_PHOTO_5",
+      "QA_PHOTO_6",
+      "QA_PHOTO_7",
+      "QA_PHOTO_8"
+    ],
+    "extras": [
+      {
+        "url": "about:blank",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/bitiruv/index.html?lang=uz&qaReducedMotion=1",
+        "script": true,
+        "payload": true,
+        "story": [
+          {
+            "id": "s",
+            "title": "QA_STORY_TITLE",
+            "text": "QA_STORY_TEXT"
+          }
+        ],
+        "sections": [
+          "story",
+          "people",
+          "receipt"
+        ],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "bogi-eram",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": true,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": false,
+      "programTitle": true,
+      "programDescriptions": false,
+      "story": true,
+      "dressStyle": true,
+      "dressText": true,
+      "dressNote": true,
+      "dressColorNames": true,
+      "phone": true,
+      "telegram": true,
+      "gift": true
+    },
+    "colors": true,
+    "photos": [
+      "QA_PHOTO_1",
+      "QA_PHOTO_2",
+      "QA_PHOTO_3",
+      "QA_PHOTO_4",
+      "QA_PHOTO_5",
+      "QA_PHOTO_6",
+      "QA_PHOTO_7",
+      "QA_PHOTO_8"
+    ],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/bogi-eram/index.html?lang=uz&qaReducedMotion=1",
+        "script": true,
+        "payload": true,
+        "story": [
+          {
+            "id": "s",
+            "title": "QA_STORY_TITLE",
+            "text": "QA_STORY_TEXT"
+          }
+        ],
+        "sections": [
+          "story",
+          "people",
+          "receipt"
+        ],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "bulbul",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": true,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": false,
+      "programTitle": true,
+      "programDescriptions": false,
+      "story": true,
+      "dressStyle": true,
+      "dressText": true,
+      "dressNote": true,
+      "dressColorNames": true,
+      "phone": true,
+      "telegram": true,
+      "gift": true
+    },
+    "colors": true,
+    "photos": [
+      "QA_PHOTO_1",
+      "QA_PHOTO_2",
+      "QA_PHOTO_3",
+      "QA_PHOTO_4",
+      "QA_PHOTO_5",
+      "QA_PHOTO_6",
+      "QA_PHOTO_7",
+      "QA_PHOTO_8"
+    ],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/bulbul/index.html?lang=uz&qaReducedMotion=1",
+        "script": true,
+        "payload": true,
+        "story": [
+          {
+            "id": "s",
+            "title": "QA_STORY_TITLE",
+            "text": "QA_STORY_TEXT"
+          }
+        ],
+        "sections": [
+          "story",
+          "people",
+          "receipt"
+        ],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "butterfly",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": false,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": false,
+      "programTitle": false,
+      "programDescriptions": false,
+      "story": false,
+      "dressStyle": false,
+      "dressText": false,
+      "dressNote": false,
+      "dressColorNames": false,
+      "phone": false,
+      "telegram": false,
+      "gift": false
+    },
+    "colors": false,
+    "photos": [
+      "QA_PHOTO_1",
+      "QA_PHOTO_2",
+      "QA_PHOTO_3",
+      "QA_PHOTO_4",
+      "QA_PHOTO_5",
+      "QA_PHOTO_6",
+      "QA_PHOTO_7",
+      "QA_PHOTO_8"
+    ],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/butterfly/index.html?lang=uz",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "buxoro-ravoq",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": false,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": true,
+      "programTitle": true,
+      "programDescriptions": false,
+      "story": false,
+      "dressStyle": false,
+      "dressText": false,
+      "dressNote": false,
+      "dressColorNames": false,
+      "phone": true,
+      "telegram": true,
+      "gift": true
+    },
+    "colors": false,
+    "photos": [
+      "QA_PHOTO_1",
+      "QA_PHOTO_2",
+      "QA_PHOTO_3",
+      "QA_PHOTO_4",
+      "QA_PHOTO_5",
+      "QA_PHOTO_6",
+      "QA_PHOTO_7",
+      "QA_PHOTO_8"
+    ],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/onlinetaklifnoma-buxoro-ravoq/index.html?qaSilent=1",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "chavandoz",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": true,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": false,
+      "programTitle": true,
+      "programDescriptions": false,
+      "story": true,
+      "dressStyle": true,
+      "dressText": true,
+      "dressNote": true,
+      "dressColorNames": true,
+      "phone": true,
+      "telegram": true,
+      "gift": true
+    },
+    "colors": true,
+    "photos": [
+      "QA_PHOTO_1",
+      "QA_PHOTO_2",
+      "QA_PHOTO_3",
+      "QA_PHOTO_4",
+      "QA_PHOTO_5",
+      "QA_PHOTO_6",
+      "QA_PHOTO_7",
+      "QA_PHOTO_8"
+    ],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/chavandoz/index.html?lang=uz&qaReducedMotion=1",
+        "script": true,
+        "payload": true,
+        "story": [
+          {
+            "id": "s",
+            "title": "QA_STORY_TITLE",
+            "text": "QA_STORY_TEXT"
+          }
+        ],
+        "sections": [
+          "story",
+          "people",
+          "receipt"
+        ],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "cloud-castle",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": true,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": false,
+      "programTitle": true,
+      "programDescriptions": false,
+      "story": true,
+      "dressStyle": true,
+      "dressText": true,
+      "dressNote": true,
+      "dressColorNames": true,
+      "phone": true,
+      "telegram": true,
+      "gift": true
+    },
+    "colors": true,
+    "photos": [
+      "QA_PHOTO_1",
+      "QA_PHOTO_2",
+      "QA_PHOTO_3",
+      "QA_PHOTO_4",
+      "QA_PHOTO_5"
+    ],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&lang=uz-Latn&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/cloud-castle/index.html?lang=uz-Latn&qaReducedMotion=1",
+        "script": true,
+        "payload": true,
+        "story": [
+          {
+            "id": "s",
+            "title": "QA_STORY_TITLE",
+            "text": "QA_STORY_TEXT"
+          }
+        ],
+        "sections": [
+          "story",
+          "dress",
+          "people",
+          "receipt"
+        ],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "doira",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": true,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": false,
+      "programTitle": true,
+      "programDescriptions": false,
+      "story": true,
+      "dressStyle": true,
+      "dressText": true,
+      "dressNote": true,
+      "dressColorNames": true,
+      "phone": true,
+      "telegram": true,
+      "gift": true
+    },
+    "colors": true,
+    "photos": [
+      "QA_PHOTO_1",
+      "QA_PHOTO_2",
+      "QA_PHOTO_3",
+      "QA_PHOTO_4",
+      "QA_PHOTO_5",
+      "QA_PHOTO_6",
+      "QA_PHOTO_7",
+      "QA_PHOTO_8"
+    ],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/doira/index.html?lang=uz&qaReducedMotion=1",
+        "script": true,
+        "payload": true,
+        "story": [
+          {
+            "id": "s",
+            "title": "QA_STORY_TITLE",
+            "text": "QA_STORY_TEXT"
+          }
+        ],
+        "sections": [
+          "story",
+          "people",
+          "receipt"
+        ],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "evelina",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": true,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": true,
+      "programTitle": true,
+      "programDescriptions": false,
+      "story": false,
+      "dressStyle": true,
+      "dressText": true,
+      "dressNote": true,
+      "dressColorNames": true,
+      "phone": true,
+      "telegram": true,
+      "gift": true
+    },
+    "colors": true,
+    "photos": [
+      "QA_PHOTO_1"
+    ],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/evelina/index.html?lang=uz",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "fairy",
+    "fields": {
+      "hosts": false,
+      "greeting": true,
+      "eventLabel": true,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": true,
+      "programTitle": true,
+      "programDescriptions": false,
+      "story": false,
+      "dressStyle": true,
+      "dressText": true,
+      "dressNote": true,
+      "dressColorNames": true,
+      "phone": true,
+      "telegram": true,
+      "gift": false
+    },
+    "colors": true,
+    "photos": [],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/fairy/index.html?lang=uz",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "ganch",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": true,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": false,
+      "programTitle": true,
+      "programDescriptions": false,
+      "story": true,
+      "dressStyle": true,
+      "dressText": true,
+      "dressNote": true,
+      "dressColorNames": true,
+      "phone": true,
+      "telegram": true,
+      "gift": true
+    },
+    "colors": true,
+    "photos": [
+      "QA_PHOTO_1",
+      "QA_PHOTO_2",
+      "QA_PHOTO_3",
+      "QA_PHOTO_4",
+      "QA_PHOTO_5",
+      "QA_PHOTO_6",
+      "QA_PHOTO_7",
+      "QA_PHOTO_8"
+    ],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/ganch/index.html?lang=uz&qaReducedMotion=1",
+        "script": true,
+        "payload": true,
+        "story": [
+          {
+            "id": "s",
+            "title": "QA_STORY_TITLE",
+            "text": "QA_STORY_TEXT"
+          }
+        ],
+        "sections": [
+          "story",
+          "people",
+          "receipt"
+        ],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "glass-pink",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": true,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": true,
+      "programTitle": true,
+      "programDescriptions": false,
+      "story": true,
+      "dressStyle": true,
+      "dressText": true,
+      "dressNote": true,
+      "dressColorNames": true,
+      "phone": true,
+      "telegram": true,
+      "gift": true
+    },
+    "colors": true,
+    "photos": [
+      "QA_PHOTO_1",
+      "QA_PHOTO_2",
+      "QA_PHOTO_3",
+      "QA_PHOTO_4",
+      "QA_PHOTO_5",
+      "QA_PHOTO_6"
+    ],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/glass-pink/index.html?lang=uz-Latn&qaReducedMotion=1",
+        "script": true,
+        "payload": true,
+        "story": [
+          {
+            "id": "s",
+            "title": "QA_STORY_TITLE",
+            "text": "QA_STORY_TEXT"
+          }
+        ],
+        "sections": [
+          "story",
+          "dress",
+          "people",
+          "receipt"
+        ],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "golden-card",
+    "fields": {
+      "hosts": false,
+      "greeting": true,
+      "eventLabel": false,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": false,
+      "programTitle": false,
+      "programDescriptions": false,
+      "story": true,
+      "dressStyle": true,
+      "dressText": true,
+      "dressNote": true,
+      "dressColorNames": true,
+      "phone": false,
+      "telegram": false,
+      "gift": false
+    },
+    "colors": true,
+    "photos": [],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/golden-card/index.html?lang=uz-Latn&qaReducedMotion=1",
+        "script": true,
+        "payload": true,
+        "story": [
+          {
+            "id": "s",
+            "title": "QA_STORY_TITLE",
+            "text": "QA_STORY_TEXT"
+          }
+        ],
+        "sections": [
+          "story",
+          "dress",
+          "people",
+          "receipt"
+        ],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "golden-hour",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": true,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": true,
+      "programTitle": true,
+      "programDescriptions": false,
+      "story": true,
+      "dressStyle": true,
+      "dressText": true,
+      "dressNote": true,
+      "dressColorNames": true,
+      "phone": true,
+      "telegram": true,
+      "gift": false
+    },
+    "colors": true,
+    "photos": [
+      "QA_PHOTO_1",
+      "QA_PHOTO_2",
+      "QA_PHOTO_3",
+      "QA_PHOTO_4",
+      "QA_PHOTO_5",
+      "QA_PHOTO_6",
+      "QA_PHOTO_7",
+      "QA_PHOTO_8"
+    ],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/golden-hour/index.html?lang=uz",
+        "script": true,
+        "payload": true,
+        "story": [
+          {
+            "id": "s",
+            "title": "QA_STORY_TITLE",
+            "text": "QA_STORY_TEXT"
+          }
+        ],
+        "sections": [
+          "story",
+          "people",
+          "receipt"
+        ],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "green-garden",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": true,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": true,
+      "programTitle": true,
+      "programDescriptions": false,
+      "story": true,
+      "dressStyle": true,
+      "dressText": true,
+      "dressNote": true,
+      "dressColorNames": true,
+      "phone": true,
+      "telegram": true,
+      "gift": true
+    },
+    "colors": true,
+    "photos": [
+      "QA_PHOTO_1",
+      "QA_PHOTO_2",
+      "QA_PHOTO_3",
+      "QA_PHOTO_4",
+      "QA_PHOTO_5",
+      "QA_PHOTO_6",
+      "QA_PHOTO_7",
+      "QA_PHOTO_8"
+    ],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?z=15&latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/green-garden/index.html?lang=uz-Latn&qaReducedMotion=1",
+        "script": true,
+        "payload": true,
+        "story": [
+          {
+            "id": "s",
+            "title": "QA_STORY_TITLE",
+            "text": "QA_STORY_TEXT"
+          }
+        ],
+        "sections": [
+          "story",
+          "dress",
+          "people",
+          "receipt"
+        ],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "green-gold",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": false,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": false,
+      "programTitle": false,
+      "programDescriptions": false,
+      "story": false,
+      "dressStyle": false,
+      "dressText": false,
+      "dressNote": false,
+      "dressColorNames": false,
+      "phone": true,
+      "telegram": true,
+      "gift": true
+    },
+    "colors": false,
+    "photos": [
+      "QA_PHOTO_1",
+      "QA_PHOTO_2",
+      "QA_PHOTO_3",
+      "QA_PHOTO_4",
+      "QA_PHOTO_5",
+      "QA_PHOTO_6",
+      "QA_PHOTO_7",
+      "QA_PHOTO_8"
+    ],
+    "extras": [
+      {
+        "url": "about:blank",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/green-gold/index.html?lang=uz-Latn&qaReducedMotion=1",
+        "script": true,
+        "payload": true,
+        "story": [
+          {
+            "id": "s",
+            "title": "QA_STORY_TITLE",
+            "text": "QA_STORY_TEXT"
+          }
+        ],
+        "sections": [
+          "receipt"
+        ],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "green-white",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": false,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": false,
+      "programTitle": false,
+      "programDescriptions": false,
+      "story": true,
+      "dressStyle": true,
+      "dressText": true,
+      "dressNote": true,
+      "dressColorNames": true,
+      "phone": true,
+      "telegram": true,
+      "gift": true
+    },
+    "colors": true,
+    "photos": [
+      "QA_PHOTO_1",
+      "QA_PHOTO_2",
+      "QA_PHOTO_3",
+      "QA_PHOTO_4",
+      "QA_PHOTO_5",
+      "QA_PHOTO_6",
+      "QA_PHOTO_7",
+      "QA_PHOTO_8"
+    ],
+    "extras": [
+      {
+        "url": "about:blank",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/green-white/index.html?lang=uz-Latn&qaReducedMotion=1",
+        "script": true,
+        "payload": true,
+        "story": [
+          {
+            "id": "s",
+            "title": "QA_STORY_TITLE",
+            "text": "QA_STORY_TEXT"
+          }
+        ],
+        "sections": [
+          "story",
+          "dress",
+          "people",
+          "receipt"
+        ],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "gulli-darvoza",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": false,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": true,
+      "programTitle": true,
+      "programDescriptions": false,
+      "story": false,
+      "dressStyle": false,
+      "dressText": false,
+      "dressNote": false,
+      "dressColorNames": false,
+      "phone": true,
+      "telegram": true,
+      "gift": true
+    },
+    "colors": false,
+    "photos": [
+      "QA_PHOTO_1",
+      "QA_PHOTO_2",
+      "QA_PHOTO_3",
+      "QA_PHOTO_4",
+      "QA_PHOTO_5",
+      "QA_PHOTO_6",
+      "QA_PHOTO_7",
+      "QA_PHOTO_8"
+    ],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/onlinetaklifnoma-gulli-darvoza/index.html?qaSilent=1",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "hilol",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": true,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": false,
+      "programTitle": true,
+      "programDescriptions": false,
+      "story": true,
+      "dressStyle": true,
+      "dressText": true,
+      "dressNote": true,
+      "dressColorNames": true,
+      "phone": true,
+      "telegram": true,
+      "gift": true
+    },
+    "colors": true,
+    "photos": [
+      "QA_PHOTO_1",
+      "QA_PHOTO_2",
+      "QA_PHOTO_3",
+      "QA_PHOTO_4",
+      "QA_PHOTO_5",
+      "QA_PHOTO_6",
+      "QA_PHOTO_7",
+      "QA_PHOTO_8"
+    ],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/hilol/index.html?lang=uz&qaReducedMotion=1",
+        "script": true,
+        "payload": true,
+        "story": [
+          {
+            "id": "s",
+            "title": "QA_STORY_TITLE",
+            "text": "QA_STORY_TEXT"
+          }
+        ],
+        "sections": [
+          "story",
+          "people",
+          "receipt"
+        ],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "invitate-nahorgi-osh",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": false,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": false,
+      "programTitle": false,
+      "programDescriptions": false,
+      "story": false,
+      "dressStyle": false,
+      "dressText": false,
+      "dressNote": false,
+      "dressColorNames": false,
+      "phone": true,
+      "telegram": true,
+      "gift": false
+    },
+    "colors": false,
+    "photos": [],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/invitate-nahorgi-osh/index.html?lang=uz",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "invitate-palov",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": false,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": false,
+      "programTitle": false,
+      "programDescriptions": false,
+      "story": false,
+      "dressStyle": false,
+      "dressText": false,
+      "dressNote": false,
+      "dressColorNames": false,
+      "phone": true,
+      "telegram": true,
+      "gift": false
+    },
+    "colors": false,
+    "photos": [
+      "QA_PHOTO_1"
+    ],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/invitate-palov/index.html?lang=uz",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": [
+      "Cannot read properties of undefined (reading 'musicOn')",
+      "Cannot read properties of undefined (reading 'musicOn')",
+      "Cannot read properties of undefined (reading 'musicOn')",
+      "Cannot read properties of undefined (reading 'musicOn')",
+      "Cannot read properties of undefined (reading 'musicOn')"
+    ]
+  },
+  {
+    "id": "invitate-wedding",
+    "fields": {
+      "hosts": false,
+      "greeting": true,
+      "eventLabel": false,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": true,
+      "programTitle": true,
+      "programDescriptions": true,
+      "story": false,
+      "dressStyle": false,
+      "dressText": true,
+      "dressNote": false,
+      "dressColorNames": true,
+      "phone": true,
+      "telegram": true,
+      "gift": false
+    },
+    "colors": true,
+    "photos": [
+      "QA_PHOTO_1",
+      "QA_PHOTO_2",
+      "QA_PHOTO_3",
+      "QA_PHOTO_4",
+      "QA_PHOTO_5",
+      "QA_PHOTO_6",
+      "QA_PHOTO_7",
+      "QA_PHOTO_8"
+    ],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/invitate-wedding/index.html?lang=uz",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      }
+    ],
+    "missing": [
+      "dressStyle",
+      "dressNote"
+    ],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "islamic-edition",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": true,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": true,
+      "programTitle": true,
+      "programDescriptions": false,
+      "story": true,
+      "dressStyle": true,
+      "dressText": true,
+      "dressNote": true,
+      "dressColorNames": true,
+      "phone": true,
+      "telegram": true,
+      "gift": true
+    },
+    "colors": true,
+    "photos": [
+      "QA_PHOTO_1",
+      "QA_PHOTO_2",
+      "QA_PHOTO_3",
+      "QA_PHOTO_4",
+      "QA_PHOTO_5",
+      "QA_PHOTO_6",
+      "QA_PHOTO_7",
+      "QA_PHOTO_8"
+    ],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/islamic-edition/index.html?qaReducedMotion=1",
+        "script": true,
+        "payload": true,
+        "story": [
+          {
+            "id": "s",
+            "title": "QA_STORY_TITLE",
+            "text": "QA_STORY_TEXT"
+          }
+        ],
+        "sections": [
+          "receipt",
+          "story",
+          "dress",
+          "people"
+        ],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "jannat-bogi",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": false,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": true,
+      "programTitle": true,
+      "programDescriptions": false,
+      "story": false,
+      "dressStyle": false,
+      "dressText": false,
+      "dressNote": false,
+      "dressColorNames": false,
+      "phone": true,
+      "telegram": true,
+      "gift": true
+    },
+    "colors": false,
+    "photos": [
+      "QA_PHOTO_1",
+      "QA_PHOTO_2",
+      "QA_PHOTO_3",
+      "QA_PHOTO_4",
+      "QA_PHOTO_5",
+      "QA_PHOTO_6",
+      "QA_PHOTO_7",
+      "QA_PHOTO_8"
+    ],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/onlinetaklifnoma-jannat-bogi/index.html?qaSilent=1",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "jasmine-white",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": true,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": false,
+      "programTitle": true,
+      "programDescriptions": false,
+      "story": false,
+      "dressStyle": false,
+      "dressText": false,
+      "dressNote": false,
+      "dressColorNames": false,
+      "phone": true,
+      "telegram": true,
+      "gift": true
+    },
+    "colors": false,
+    "photos": [
+      "QA_PHOTO_1",
+      "QA_PHOTO_2",
+      "QA_PHOTO_3",
+      "QA_PHOTO_4",
+      "QA_PHOTO_5",
+      "QA_PHOTO_6",
+      "QA_PHOTO_7",
+      "QA_PHOTO_8"
+    ],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?z=15&latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/jasmine-white/index.html?lang=uz-Latn&qaReducedMotion=1",
+        "script": true,
+        "payload": true,
+        "story": [
+          {
+            "id": "s",
+            "title": "QA_STORY_TITLE",
+            "text": "QA_STORY_TEXT"
+          }
+        ],
+        "sections": [
+          "receipt"
+        ],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "kapadokiya-tongi",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": false,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": true,
+      "programTitle": true,
+      "programDescriptions": false,
+      "story": false,
+      "dressStyle": false,
+      "dressText": false,
+      "dressNote": false,
+      "dressColorNames": false,
+      "phone": true,
+      "telegram": true,
+      "gift": true
+    },
+    "colors": false,
+    "photos": [
+      "QA_PHOTO_1",
+      "QA_PHOTO_2",
+      "QA_PHOTO_3",
+      "QA_PHOTO_4",
+      "QA_PHOTO_5",
+      "QA_PHOTO_6",
+      "QA_PHOTO_7",
+      "QA_PHOTO_8"
+    ],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/onlinetaklifnoma-kapadokiya-tongi/index.html?qaSilent=1",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "konfetti",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": true,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": false,
+      "programTitle": true,
+      "programDescriptions": false,
+      "story": true,
+      "dressStyle": true,
+      "dressText": true,
+      "dressNote": true,
+      "dressColorNames": true,
+      "phone": true,
+      "telegram": true,
+      "gift": true
+    },
+    "colors": true,
+    "photos": [
+      "QA_PHOTO_1",
+      "QA_PHOTO_2",
+      "QA_PHOTO_3",
+      "QA_PHOTO_4",
+      "QA_PHOTO_5",
+      "QA_PHOTO_6",
+      "QA_PHOTO_7",
+      "QA_PHOTO_8"
+    ],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/konfetti/index.html?lang=uz&qaReducedMotion=1",
+        "script": true,
+        "payload": true,
+        "story": [
+          {
+            "id": "s",
+            "title": "QA_STORY_TITLE",
+            "text": "QA_STORY_TEXT"
+          }
+        ],
+        "sections": [
+          "story",
+          "people",
+          "receipt"
+        ],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "korporativ",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": true,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": false,
+      "programTitle": true,
+      "programDescriptions": false,
+      "story": true,
+      "dressStyle": true,
+      "dressText": true,
+      "dressNote": true,
+      "dressColorNames": true,
+      "phone": true,
+      "telegram": true,
+      "gift": true
+    },
+    "colors": true,
+    "photos": [
+      "QA_PHOTO_1",
+      "QA_PHOTO_2",
+      "QA_PHOTO_3",
+      "QA_PHOTO_4",
+      "QA_PHOTO_5",
+      "QA_PHOTO_6",
+      "QA_PHOTO_7",
+      "QA_PHOTO_8"
+    ],
+    "extras": [
+      {
+        "url": "about:blank",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/korporativ/index.html?lang=uz&qaReducedMotion=1",
+        "script": true,
+        "payload": true,
+        "story": [
+          {
+            "id": "s",
+            "title": "QA_STORY_TITLE",
+            "text": "QA_STORY_TEXT"
+          }
+        ],
+        "sections": [
+          "story",
+          "people",
+          "receipt"
+        ],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "kozgu",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": true,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": false,
+      "programTitle": true,
+      "programDescriptions": false,
+      "story": true,
+      "dressStyle": true,
+      "dressText": true,
+      "dressNote": true,
+      "dressColorNames": true,
+      "phone": true,
+      "telegram": true,
+      "gift": true
+    },
+    "colors": true,
+    "photos": [
+      "QA_PHOTO_1",
+      "QA_PHOTO_2",
+      "QA_PHOTO_3",
+      "QA_PHOTO_4",
+      "QA_PHOTO_5",
+      "QA_PHOTO_6",
+      "QA_PHOTO_7",
+      "QA_PHOTO_8"
+    ],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/kozgu/index.html?lang=uz&qaReducedMotion=1",
+        "script": true,
+        "payload": true,
+        "story": [
+          {
+            "id": "s",
+            "title": "QA_STORY_TITLE",
+            "text": "QA_STORY_TEXT"
+          }
+        ],
+        "sections": [
+          "story",
+          "people",
+          "receipt"
+        ],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "kuzgi-chinor",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": true,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": false,
+      "programTitle": true,
+      "programDescriptions": false,
+      "story": true,
+      "dressStyle": true,
+      "dressText": true,
+      "dressNote": true,
+      "dressColorNames": true,
+      "phone": true,
+      "telegram": true,
+      "gift": true
+    },
+    "colors": true,
+    "photos": [
+      "QA_PHOTO_1",
+      "QA_PHOTO_2",
+      "QA_PHOTO_3",
+      "QA_PHOTO_4",
+      "QA_PHOTO_5",
+      "QA_PHOTO_6",
+      "QA_PHOTO_7",
+      "QA_PHOTO_8"
+    ],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/kuzgi-chinor/index.html?lang=uz&qaReducedMotion=1",
+        "script": true,
+        "payload": true,
+        "story": [
+          {
+            "id": "s",
+            "title": "QA_STORY_TITLE",
+            "text": "QA_STORY_TEXT"
+          }
+        ],
+        "sections": [
+          "story",
+          "people",
+          "receipt"
+        ],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "lace",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": true,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": false,
+      "programTitle": true,
+      "programDescriptions": false,
+      "story": true,
+      "dressStyle": true,
+      "dressText": true,
+      "dressNote": true,
+      "dressColorNames": true,
+      "phone": true,
+      "telegram": true,
+      "gift": true
+    },
+    "colors": true,
+    "photos": [
+      "QA_PHOTO_1",
+      "QA_PHOTO_2",
+      "QA_PHOTO_3",
+      "QA_PHOTO_4",
+      "QA_PHOTO_5",
+      "QA_PHOTO_6",
+      "QA_PHOTO_7",
+      "QA_PHOTO_8"
+    ],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/lace/index.html?lang=uz-Latn&qaReducedMotion=1",
+        "script": true,
+        "payload": true,
+        "story": [
+          {
+            "id": "s",
+            "title": "QA_STORY_TITLE",
+            "text": "QA_STORY_TEXT"
+          }
+        ],
+        "sections": [
+          "story",
+          "dress",
+          "people",
+          "receipt"
+        ],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "lola",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": true,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": false,
+      "programTitle": true,
+      "programDescriptions": false,
+      "story": true,
+      "dressStyle": true,
+      "dressText": true,
+      "dressNote": true,
+      "dressColorNames": true,
+      "phone": true,
+      "telegram": true,
+      "gift": true
+    },
+    "colors": true,
+    "photos": [
+      "QA_PHOTO_1",
+      "QA_PHOTO_2",
+      "QA_PHOTO_3",
+      "QA_PHOTO_4",
+      "QA_PHOTO_5",
+      "QA_PHOTO_6",
+      "QA_PHOTO_7",
+      "QA_PHOTO_8"
+    ],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/lola/index.html?lang=uz&qaReducedMotion=1",
+        "script": true,
+        "payload": true,
+        "story": [
+          {
+            "id": "s",
+            "title": "QA_STORY_TITLE",
+            "text": "QA_STORY_TEXT"
+          }
+        ],
+        "sections": [
+          "story",
+          "people",
+          "receipt"
+        ],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "love-sakura",
+    "fields": {
+      "hosts": false,
+      "greeting": false,
+      "eventLabel": false,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": false,
+      "programTitle": true,
+      "programDescriptions": false,
+      "story": true,
+      "dressStyle": true,
+      "dressText": true,
+      "dressNote": true,
+      "dressColorNames": true,
+      "phone": false,
+      "telegram": false,
+      "gift": true
+    },
+    "colors": true,
+    "photos": [
+      "QA_PHOTO_1",
+      "QA_PHOTO_2",
+      "QA_PHOTO_3",
+      "QA_PHOTO_4",
+      "QA_PHOTO_5",
+      "QA_PHOTO_6"
+    ],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/love-sakura/index.html?lang=uz-Latn&qaReducedMotion=1",
+        "script": true,
+        "payload": true,
+        "story": [
+          {
+            "id": "s",
+            "title": "QA_STORY_TITLE",
+            "text": "QA_STORY_TEXT"
+          }
+        ],
+        "sections": [
+          "story",
+          "dress",
+          "people",
+          "receipt"
+        ],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "luxury-gold",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": false,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": false,
+      "programTitle": false,
+      "programDescriptions": false,
+      "story": true,
+      "dressStyle": true,
+      "dressText": true,
+      "dressNote": true,
+      "dressColorNames": true,
+      "phone": true,
+      "telegram": true,
+      "gift": true
+    },
+    "colors": true,
+    "photos": [
+      "QA_PHOTO_1",
+      "QA_PHOTO_2",
+      "QA_PHOTO_3",
+      "QA_PHOTO_4",
+      "QA_PHOTO_5",
+      "QA_PHOTO_6",
+      "QA_PHOTO_7",
+      "QA_PHOTO_8"
+    ],
+    "extras": [
+      {
+        "url": "about:blank",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/luxury-gold/index.html?lang=uz-Latn&qaReducedMotion=1",
+        "script": true,
+        "payload": true,
+        "story": [
+          {
+            "id": "s",
+            "title": "QA_STORY_TITLE",
+            "text": "QA_STORY_TEXT"
+          }
+        ],
+        "sections": [
+          "story",
+          "dress",
+          "people",
+          "receipt"
+        ],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "ming-bir-kecha",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": false,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": true,
+      "programTitle": true,
+      "programDescriptions": false,
+      "story": false,
+      "dressStyle": false,
+      "dressText": false,
+      "dressNote": false,
+      "dressColorNames": false,
+      "phone": true,
+      "telegram": true,
+      "gift": true
+    },
+    "colors": false,
+    "photos": [
+      "QA_PHOTO_1",
+      "QA_PHOTO_2",
+      "QA_PHOTO_3",
+      "QA_PHOTO_4",
+      "QA_PHOTO_5",
+      "QA_PHOTO_6",
+      "QA_PHOTO_7",
+      "QA_PHOTO_8"
+    ],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/onlinetaklifnoma-ming-bir-kecha/index.html?qaSilent=1",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "modern-floral",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": false,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": false,
+      "programTitle": false,
+      "programDescriptions": false,
+      "story": true,
+      "dressStyle": true,
+      "dressText": true,
+      "dressNote": true,
+      "dressColorNames": true,
+      "phone": true,
+      "telegram": true,
+      "gift": true
+    },
+    "colors": true,
+    "photos": [
+      "QA_PHOTO_1",
+      "QA_PHOTO_2",
+      "QA_PHOTO_3",
+      "QA_PHOTO_4",
+      "QA_PHOTO_5",
+      "QA_PHOTO_6",
+      "QA_PHOTO_7",
+      "QA_PHOTO_8"
+    ],
+    "extras": [
+      {
+        "url": "about:blank",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/modern-floral/index.html?lang=uz-Latn&qaReducedMotion=1",
+        "script": true,
+        "payload": true,
+        "story": [
+          {
+            "id": "s",
+            "title": "QA_STORY_TITLE",
+            "text": "QA_STORY_TEXT"
+          }
+        ],
+        "sections": [
+          "story",
+          "dress",
+          "people",
+          "receipt"
+        ],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "monochrome-editorial-edition",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": false,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": true,
+      "programTitle": true,
+      "programDescriptions": false,
+      "story": true,
+      "dressStyle": true,
+      "dressText": true,
+      "dressNote": true,
+      "dressColorNames": true,
+      "phone": true,
+      "telegram": true,
+      "gift": true
+    },
+    "colors": true,
+    "photos": [
+      "QA_PHOTO_1",
+      "QA_PHOTO_2",
+      "QA_PHOTO_3",
+      "QA_PHOTO_4",
+      "QA_PHOTO_5",
+      "QA_PHOTO_6",
+      "QA_PHOTO_7",
+      "QA_PHOTO_8"
+    ],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/monochrome-editorial-edition/index.html?qaReducedMotion=1",
+        "script": true,
+        "payload": true,
+        "story": [
+          {
+            "id": "s",
+            "title": "QA_STORY_TITLE",
+            "text": "QA_STORY_TEXT"
+          }
+        ],
+        "sections": [
+          "story",
+          "dress",
+          "people",
+          "receipt"
+        ],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "monogram",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": true,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": false,
+      "programTitle": true,
+      "programDescriptions": false,
+      "story": true,
+      "dressStyle": true,
+      "dressText": true,
+      "dressNote": true,
+      "dressColorNames": true,
+      "phone": true,
+      "telegram": true,
+      "gift": true
+    },
+    "colors": true,
+    "photos": [
+      "QA_PHOTO_1",
+      "QA_PHOTO_2",
+      "QA_PHOTO_3",
+      "QA_PHOTO_4",
+      "QA_PHOTO_5",
+      "QA_PHOTO_6",
+      "QA_PHOTO_7",
+      "QA_PHOTO_8"
+    ],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/monogram/index.html?lang=uz&qaReducedMotion=1",
+        "script": true,
+        "payload": true,
+        "story": [
+          {
+            "id": "s",
+            "title": "QA_STORY_TITLE",
+            "text": "QA_STORY_TEXT"
+          }
+        ],
+        "sections": [
+          "story",
+          "people",
+          "receipt"
+        ],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "muhabbat-kitobi",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": true,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": false,
+      "programTitle": true,
+      "programDescriptions": false,
+      "story": true,
+      "dressStyle": true,
+      "dressText": true,
+      "dressNote": true,
+      "dressColorNames": true,
+      "phone": true,
+      "telegram": true,
+      "gift": true
+    },
+    "colors": true,
+    "photos": [
+      "QA_PHOTO_1",
+      "QA_PHOTO_2",
+      "QA_PHOTO_3",
+      "QA_PHOTO_4",
+      "QA_PHOTO_5",
+      "QA_PHOTO_6",
+      "QA_PHOTO_7",
+      "QA_PHOTO_8"
+    ],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/muhabbat-kitobi/index.html?lang=uz&qaReducedMotion=1",
+        "script": true,
+        "payload": true,
+        "story": [
+          {
+            "id": "s",
+            "title": "QA_STORY_TITLE",
+            "text": "QA_STORY_TEXT"
+          }
+        ],
+        "sections": [
+          "people",
+          "receipt"
+        ],
+        "nativeStory": true
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "muhr",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": true,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": false,
+      "programTitle": true,
+      "programDescriptions": false,
+      "story": true,
+      "dressStyle": true,
+      "dressText": true,
+      "dressNote": true,
+      "dressColorNames": true,
+      "phone": true,
+      "telegram": true,
+      "gift": true
+    },
+    "colors": true,
+    "photos": [
+      "QA_PHOTO_1",
+      "QA_PHOTO_2",
+      "QA_PHOTO_3",
+      "QA_PHOTO_4",
+      "QA_PHOTO_5",
+      "QA_PHOTO_6",
+      "QA_PHOTO_7",
+      "QA_PHOTO_8"
+    ],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/muhr/index.html?lang=uz&qaReducedMotion=1",
+        "script": true,
+        "payload": true,
+        "story": [
+          {
+            "id": "s",
+            "title": "QA_STORY_TITLE",
+            "text": "QA_STORY_TEXT"
+          }
+        ],
+        "sections": [
+          "story",
+          "people",
+          "receipt"
+        ],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "nahor",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": true,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": false,
+      "programTitle": true,
+      "programDescriptions": false,
+      "story": true,
+      "dressStyle": true,
+      "dressText": true,
+      "dressNote": true,
+      "dressColorNames": true,
+      "phone": true,
+      "telegram": true,
+      "gift": true
+    },
+    "colors": true,
+    "photos": [
+      "QA_PHOTO_1",
+      "QA_PHOTO_2",
+      "QA_PHOTO_3",
+      "QA_PHOTO_4",
+      "QA_PHOTO_5",
+      "QA_PHOTO_6",
+      "QA_PHOTO_7",
+      "QA_PHOTO_8"
+    ],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/nahor/index.html?lang=uz&qaReducedMotion=1",
+        "script": true,
+        "payload": true,
+        "story": [
+          {
+            "id": "s",
+            "title": "QA_STORY_TITLE",
+            "text": "QA_STORY_TEXT"
+          }
+        ],
+        "sections": [
+          "story",
+          "people",
+          "receipt"
+        ],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "nahorgi-osh",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": false,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": false,
+      "programTitle": true,
+      "programDescriptions": false,
+      "story": true,
+      "dressStyle": true,
+      "dressText": true,
+      "dressNote": true,
+      "dressColorNames": true,
+      "phone": true,
+      "telegram": true,
+      "gift": true
+    },
+    "colors": true,
+    "photos": [
+      "QA_PHOTO_1",
+      "QA_PHOTO_2",
+      "QA_PHOTO_3",
+      "QA_PHOTO_4",
+      "QA_PHOTO_5",
+      "QA_PHOTO_6",
+      "QA_PHOTO_7",
+      "QA_PHOTO_8"
+    ],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/nahorgi-osh/index.html?lang=uz&qaReducedMotion=1",
+        "script": true,
+        "payload": true,
+        "story": [
+          {
+            "id": "s",
+            "title": "QA_STORY_TITLE",
+            "text": "QA_STORY_TEXT"
+          }
+        ],
+        "sections": [
+          "story",
+          "people",
+          "receipt"
+        ],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "nilufar",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": true,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": false,
+      "programTitle": true,
+      "programDescriptions": false,
+      "story": true,
+      "dressStyle": true,
+      "dressText": true,
+      "dressNote": true,
+      "dressColorNames": true,
+      "phone": true,
+      "telegram": true,
+      "gift": true
+    },
+    "colors": true,
+    "photos": [
+      "QA_PHOTO_1",
+      "QA_PHOTO_2",
+      "QA_PHOTO_3",
+      "QA_PHOTO_4",
+      "QA_PHOTO_5",
+      "QA_PHOTO_6",
+      "QA_PHOTO_7",
+      "QA_PHOTO_8"
+    ],
+    "extras": [
+      {
+        "url": "about:blank",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/nilufar/index.html?lang=uz&qaReducedMotion=1",
+        "script": true,
+        "payload": true,
+        "story": [
+          {
+            "id": "s",
+            "title": "QA_STORY_TITLE",
+            "text": "QA_STORY_TEXT"
+          }
+        ],
+        "sections": [
+          "story",
+          "people",
+          "receipt"
+        ],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "olive-manor-edition",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": false,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": true,
+      "programTitle": true,
+      "programDescriptions": false,
+      "story": true,
+      "dressStyle": true,
+      "dressText": true,
+      "dressNote": true,
+      "dressColorNames": true,
+      "phone": true,
+      "telegram": true,
+      "gift": true
+    },
+    "colors": true,
+    "photos": [
+      "QA_PHOTO_1",
+      "QA_PHOTO_2",
+      "QA_PHOTO_3",
+      "QA_PHOTO_4",
+      "QA_PHOTO_5",
+      "QA_PHOTO_6",
+      "QA_PHOTO_7",
+      "QA_PHOTO_8"
+    ],
+    "extras": [
+      {
+        "url": "about:blank",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/olive-manor-edition/index.html?qaReducedMotion=1",
+        "script": true,
+        "payload": true,
+        "story": [
+          {
+            "id": "s",
+            "title": "QA_STORY_TITLE",
+            "text": "QA_STORY_TEXT"
+          }
+        ],
+        "sections": [
+          "receipt",
+          "story",
+          "dress",
+          "people"
+        ],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "oltin-darvoza-ortidagi-baxt",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": false,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": true,
+      "programTitle": true,
+      "programDescriptions": false,
+      "story": false,
+      "dressStyle": false,
+      "dressText": false,
+      "dressNote": false,
+      "dressColorNames": false,
+      "phone": true,
+      "telegram": true,
+      "gift": true
+    },
+    "colors": false,
+    "photos": [
+      "QA_PHOTO_1",
+      "QA_PHOTO_2",
+      "QA_PHOTO_3",
+      "QA_PHOTO_4",
+      "QA_PHOTO_5",
+      "QA_PHOTO_6",
+      "QA_PHOTO_7",
+      "QA_PHOTO_8"
+    ],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/onlinetaklifnoma-oltin-darvoza-ortidagi-baxt/index.html?qaSilent=1",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "oltin-kuz",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": true,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": false,
+      "programTitle": true,
+      "programDescriptions": false,
+      "story": true,
+      "dressStyle": true,
+      "dressText": true,
+      "dressNote": true,
+      "dressColorNames": true,
+      "phone": true,
+      "telegram": true,
+      "gift": true
+    },
+    "colors": true,
+    "photos": [
+      "QA_PHOTO_1",
+      "QA_PHOTO_2",
+      "QA_PHOTO_3",
+      "QA_PHOTO_4",
+      "QA_PHOTO_5",
+      "QA_PHOTO_6",
+      "QA_PHOTO_7",
+      "QA_PHOTO_8"
+    ],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/oltin-kuz/index.html?lang=uz&qaReducedMotion=1",
+        "script": true,
+        "payload": true,
+        "story": [
+          {
+            "id": "s",
+            "title": "QA_STORY_TITLE",
+            "text": "QA_STORY_TEXT"
+          }
+        ],
+        "sections": [
+          "story",
+          "people",
+          "receipt"
+        ],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "oltin-nur",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": true,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": false,
+      "programTitle": true,
+      "programDescriptions": false,
+      "story": true,
+      "dressStyle": true,
+      "dressText": true,
+      "dressNote": true,
+      "dressColorNames": true,
+      "phone": true,
+      "telegram": true,
+      "gift": true
+    },
+    "colors": true,
+    "photos": [
+      "QA_PHOTO_1",
+      "QA_PHOTO_2",
+      "QA_PHOTO_3",
+      "QA_PHOTO_4",
+      "QA_PHOTO_5",
+      "QA_PHOTO_6",
+      "QA_PHOTO_7",
+      "QA_PHOTO_8"
+    ],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/oltin-nur/index.html?lang=uz&qaReducedMotion=1",
+        "script": true,
+        "payload": true,
+        "story": [
+          {
+            "id": "s",
+            "title": "QA_STORY_TITLE",
+            "text": "QA_STORY_TEXT"
+          }
+        ],
+        "sections": [
+          "story",
+          "people",
+          "receipt"
+        ],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "oltin-uzuk",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": true,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": false,
+      "programTitle": true,
+      "programDescriptions": false,
+      "story": true,
+      "dressStyle": true,
+      "dressText": true,
+      "dressNote": true,
+      "dressColorNames": true,
+      "phone": true,
+      "telegram": true,
+      "gift": true
+    },
+    "colors": true,
+    "photos": [
+      "QA_PHOTO_1",
+      "QA_PHOTO_2",
+      "QA_PHOTO_3",
+      "QA_PHOTO_4",
+      "QA_PHOTO_5",
+      "QA_PHOTO_6",
+      "QA_PHOTO_7",
+      "QA_PHOTO_8"
+    ],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/oltin-uzuk/index.html?lang=uz&qaReducedMotion=1",
+        "script": true,
+        "payload": true,
+        "story": [
+          {
+            "id": "s",
+            "title": "QA_STORY_TITLE",
+            "text": "QA_STORY_TEXT"
+          }
+        ],
+        "sections": [
+          "story",
+          "people",
+          "receipt"
+        ],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "oltin-yosh",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": true,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": false,
+      "programTitle": true,
+      "programDescriptions": false,
+      "story": true,
+      "dressStyle": true,
+      "dressText": true,
+      "dressNote": true,
+      "dressColorNames": true,
+      "phone": true,
+      "telegram": true,
+      "gift": true
+    },
+    "colors": true,
+    "photos": [
+      "QA_PHOTO_1",
+      "QA_PHOTO_2",
+      "QA_PHOTO_3",
+      "QA_PHOTO_4",
+      "QA_PHOTO_5",
+      "QA_PHOTO_6",
+      "QA_PHOTO_7",
+      "QA_PHOTO_8"
+    ],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/oltin-yosh/index.html?lang=uz&qaReducedMotion=1",
+        "script": true,
+        "payload": true,
+        "story": [
+          {
+            "id": "s",
+            "title": "QA_STORY_TITLE",
+            "text": "QA_STORY_TEXT"
+          }
+        ],
+        "sections": [
+          "story",
+          "people",
+          "receipt"
+        ],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "oq-kabutar",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": true,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": false,
+      "programTitle": true,
+      "programDescriptions": false,
+      "story": true,
+      "dressStyle": true,
+      "dressText": true,
+      "dressNote": true,
+      "dressColorNames": true,
+      "phone": true,
+      "telegram": true,
+      "gift": true
+    },
+    "colors": true,
+    "photos": [
+      "QA_PHOTO_1",
+      "QA_PHOTO_2",
+      "QA_PHOTO_3",
+      "QA_PHOTO_4",
+      "QA_PHOTO_5",
+      "QA_PHOTO_6",
+      "QA_PHOTO_7",
+      "QA_PHOTO_8"
+    ],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/oq-kabutar/index.html?lang=uz&qaReducedMotion=1",
+        "script": true,
+        "payload": true,
+        "story": [
+          {
+            "id": "s",
+            "title": "QA_STORY_TITLE",
+            "text": "QA_STORY_TEXT"
+          }
+        ],
+        "sections": [
+          "story",
+          "people",
+          "receipt"
+        ],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "orchid-amplop",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": false,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": false,
+      "programTitle": true,
+      "programDescriptions": false,
+      "story": true,
+      "dressStyle": false,
+      "dressText": false,
+      "dressNote": false,
+      "dressColorNames": false,
+      "phone": true,
+      "telegram": true,
+      "gift": true
+    },
+    "colors": false,
+    "photos": [
+      "QA_PHOTO_1",
+      "QA_PHOTO_2",
+      "QA_PHOTO_3",
+      "QA_PHOTO_4",
+      "QA_PHOTO_5",
+      "QA_PHOTO_6"
+    ],
+    "extras": [
+      {
+        "url": "about:blank",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/chorlove/orchid-amplop/index.html?lang=uz-Latn&qaReducedMotion=1",
+        "script": true,
+        "payload": true,
+        "story": [
+          {
+            "id": "s",
+            "title": "QA_STORY_TITLE",
+            "text": "QA_STORY_TEXT"
+          }
+        ],
+        "sections": [
+          "receipt"
+        ],
+        "nativeStory": true
+      }
+    ],
+    "missing": [
+      "eventLabel",
+      "programHeading"
+    ],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "orik-guli",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": true,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": false,
+      "programTitle": true,
+      "programDescriptions": false,
+      "story": true,
+      "dressStyle": true,
+      "dressText": true,
+      "dressNote": true,
+      "dressColorNames": true,
+      "phone": true,
+      "telegram": true,
+      "gift": true
+    },
+    "colors": true,
+    "photos": [
+      "QA_PHOTO_1",
+      "QA_PHOTO_2",
+      "QA_PHOTO_3",
+      "QA_PHOTO_4",
+      "QA_PHOTO_5",
+      "QA_PHOTO_6",
+      "QA_PHOTO_7",
+      "QA_PHOTO_8"
+    ],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/orik-guli/index.html?lang=uz&qaReducedMotion=1",
+        "script": true,
+        "payload": true,
+        "story": [
+          {
+            "id": "s",
+            "title": "QA_STORY_TITLE",
+            "text": "QA_STORY_TEXT"
+          }
+        ],
+        "sections": [
+          "story",
+          "people",
+          "receipt"
+        ],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "osh",
+    "fields": {
+      "hosts": true,
+      "greeting": false,
+      "eventLabel": false,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": false,
+      "programTitle": false,
+      "programDescriptions": false,
+      "story": false,
+      "dressStyle": false,
+      "dressText": false,
+      "dressNote": false,
+      "dressColorNames": false,
+      "phone": true,
+      "telegram": true,
+      "gift": false
+    },
+    "colors": false,
+    "photos": [
+      "QA_PHOTO_1"
+    ],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/chorlove/osh/index.html?lang=uz-Latn&qaReducedMotion=1",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "oynavand",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": true,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": false,
+      "programTitle": true,
+      "programDescriptions": false,
+      "story": true,
+      "dressStyle": true,
+      "dressText": true,
+      "dressNote": true,
+      "dressColorNames": true,
+      "phone": true,
+      "telegram": true,
+      "gift": true
+    },
+    "colors": true,
+    "photos": [
+      "QA_PHOTO_1",
+      "QA_PHOTO_2",
+      "QA_PHOTO_3",
+      "QA_PHOTO_4",
+      "QA_PHOTO_5",
+      "QA_PHOTO_6",
+      "QA_PHOTO_7",
+      "QA_PHOTO_8"
+    ],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/oynavand/index.html?lang=uz&qaReducedMotion=1",
+        "script": true,
+        "payload": true,
+        "story": [
+          {
+            "id": "s",
+            "title": "QA_STORY_TITLE",
+            "text": "QA_STORY_TEXT"
+          }
+        ],
+        "sections": [
+          "story",
+          "people",
+          "receipt"
+        ],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "palace-rose",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": true,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": true,
+      "programTitle": true,
+      "programDescriptions": false,
+      "story": false,
+      "dressStyle": false,
+      "dressText": false,
+      "dressNote": false,
+      "dressColorNames": false,
+      "phone": true,
+      "telegram": true,
+      "gift": true
+    },
+    "colors": false,
+    "photos": [
+      "QA_PHOTO_1",
+      "QA_PHOTO_2",
+      "QA_PHOTO_3",
+      "QA_PHOTO_4",
+      "QA_PHOTO_5",
+      "QA_PHOTO_6"
+    ],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&lang=uz-Latn&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/palace-rose/index.html?lang=uz-Latn&qaReducedMotion=1",
+        "script": true,
+        "payload": true,
+        "story": [
+          {
+            "id": "s",
+            "title": "QA_STORY_TITLE",
+            "text": "QA_STORY_TEXT"
+          }
+        ],
+        "sections": [
+          "receipt"
+        ],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "palov",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": false,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": false,
+      "programTitle": false,
+      "programDescriptions": false,
+      "story": false,
+      "dressStyle": false,
+      "dressText": false,
+      "dressNote": false,
+      "dressColorNames": false,
+      "phone": true,
+      "telegram": true,
+      "gift": false
+    },
+    "colors": false,
+    "photos": [
+      "QA_PHOTO_1"
+    ],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/chorlove/palov/index.html?lang=uz-Latn&qaReducedMotion=1",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "parda",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": true,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": false,
+      "programTitle": true,
+      "programDescriptions": false,
+      "story": true,
+      "dressStyle": true,
+      "dressText": true,
+      "dressNote": true,
+      "dressColorNames": true,
+      "phone": true,
+      "telegram": true,
+      "gift": true
+    },
+    "colors": true,
+    "photos": [
+      "QA_PHOTO_1",
+      "QA_PHOTO_2",
+      "QA_PHOTO_3",
+      "QA_PHOTO_4",
+      "QA_PHOTO_5",
+      "QA_PHOTO_6",
+      "QA_PHOTO_7",
+      "QA_PHOTO_8"
+    ],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/parda/index.html?lang=uz&qaReducedMotion=1",
+        "script": true,
+        "payload": true,
+        "story": [
+          {
+            "id": "s",
+            "title": "QA_STORY_TITLE",
+            "text": "QA_STORY_TEXT"
+          }
+        ],
+        "sections": [
+          "story",
+          "people",
+          "receipt"
+        ],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "paxta",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": true,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": false,
+      "programTitle": true,
+      "programDescriptions": false,
+      "story": true,
+      "dressStyle": true,
+      "dressText": true,
+      "dressNote": true,
+      "dressColorNames": true,
+      "phone": true,
+      "telegram": true,
+      "gift": true
+    },
+    "colors": true,
+    "photos": [
+      "QA_PHOTO_1",
+      "QA_PHOTO_2",
+      "QA_PHOTO_3",
+      "QA_PHOTO_4",
+      "QA_PHOTO_5",
+      "QA_PHOTO_6",
+      "QA_PHOTO_7",
+      "QA_PHOTO_8"
+    ],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/paxta/index.html?lang=uz&qaReducedMotion=1",
+        "script": true,
+        "payload": true,
+        "story": [
+          {
+            "id": "s",
+            "title": "QA_STORY_TITLE",
+            "text": "QA_STORY_TEXT"
+          }
+        ],
+        "sections": [
+          "story",
+          "people",
+          "receipt"
+        ],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "qandil",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": true,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": false,
+      "programTitle": true,
+      "programDescriptions": false,
+      "story": true,
+      "dressStyle": true,
+      "dressText": true,
+      "dressNote": true,
+      "dressColorNames": true,
+      "phone": true,
+      "telegram": true,
+      "gift": true
+    },
+    "colors": true,
+    "photos": [
+      "QA_PHOTO_1",
+      "QA_PHOTO_2",
+      "QA_PHOTO_3",
+      "QA_PHOTO_4",
+      "QA_PHOTO_5",
+      "QA_PHOTO_6",
+      "QA_PHOTO_7",
+      "QA_PHOTO_8"
+    ],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/qandil/index.html?lang=uz&qaReducedMotion=1",
+        "script": true,
+        "payload": true,
+        "story": [
+          {
+            "id": "s",
+            "title": "QA_STORY_TITLE",
+            "text": "QA_STORY_TEXT"
+          }
+        ],
+        "sections": [
+          "story",
+          "people",
+          "receipt"
+        ],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "qatlam",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": true,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": false,
+      "programTitle": true,
+      "programDescriptions": false,
+      "story": true,
+      "dressStyle": true,
+      "dressText": true,
+      "dressNote": true,
+      "dressColorNames": true,
+      "phone": true,
+      "telegram": true,
+      "gift": true
+    },
+    "colors": true,
+    "photos": [
+      "QA_PHOTO_1",
+      "QA_PHOTO_2",
+      "QA_PHOTO_3",
+      "QA_PHOTO_4",
+      "QA_PHOTO_5",
+      "QA_PHOTO_6",
+      "QA_PHOTO_7",
+      "QA_PHOTO_8"
+    ],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/qatlam/index.html?lang=uz&qaReducedMotion=1",
+        "script": true,
+        "payload": true,
+        "story": [
+          {
+            "id": "s",
+            "title": "QA_STORY_TITLE",
+            "text": "QA_STORY_TEXT"
+          }
+        ],
+        "sections": [
+          "story",
+          "people",
+          "receipt"
+        ],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "qiz-bazmi",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": true,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": false,
+      "programTitle": true,
+      "programDescriptions": false,
+      "story": true,
+      "dressStyle": true,
+      "dressText": true,
+      "dressNote": true,
+      "dressColorNames": true,
+      "phone": true,
+      "telegram": true,
+      "gift": true
+    },
+    "colors": true,
+    "photos": [
+      "QA_PHOTO_1",
+      "QA_PHOTO_2",
+      "QA_PHOTO_3",
+      "QA_PHOTO_4",
+      "QA_PHOTO_5",
+      "QA_PHOTO_6",
+      "QA_PHOTO_7",
+      "QA_PHOTO_8"
+    ],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/qiz-bazmi/index.html?lang=uz&qaReducedMotion=1",
+        "script": true,
+        "payload": true,
+        "story": [
+          {
+            "id": "s",
+            "title": "QA_STORY_TITLE",
+            "text": "QA_STORY_TEXT"
+          }
+        ],
+        "sections": [
+          "story",
+          "people",
+          "receipt"
+        ],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "qogoz-turna",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": true,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": false,
+      "programTitle": true,
+      "programDescriptions": false,
+      "story": true,
+      "dressStyle": true,
+      "dressText": true,
+      "dressNote": true,
+      "dressColorNames": true,
+      "phone": true,
+      "telegram": true,
+      "gift": true
+    },
+    "colors": true,
+    "photos": [
+      "QA_PHOTO_1",
+      "QA_PHOTO_2",
+      "QA_PHOTO_3",
+      "QA_PHOTO_4",
+      "QA_PHOTO_5",
+      "QA_PHOTO_6",
+      "QA_PHOTO_7",
+      "QA_PHOTO_8"
+    ],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/qogoz-turna/index.html?lang=uz&qaReducedMotion=1",
+        "script": true,
+        "payload": true,
+        "story": [
+          {
+            "id": "s",
+            "title": "QA_STORY_TITLE",
+            "text": "QA_STORY_TEXT"
+          }
+        ],
+        "sections": [
+          "story",
+          "people",
+          "receipt"
+        ],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "retro-kino",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": true,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": false,
+      "programTitle": true,
+      "programDescriptions": false,
+      "story": true,
+      "dressStyle": true,
+      "dressText": true,
+      "dressNote": true,
+      "dressColorNames": true,
+      "phone": true,
+      "telegram": true,
+      "gift": true
+    },
+    "colors": true,
+    "photos": [
+      "QA_PHOTO_1",
+      "QA_PHOTO_2",
+      "QA_PHOTO_3",
+      "QA_PHOTO_4",
+      "QA_PHOTO_5",
+      "QA_PHOTO_6",
+      "QA_PHOTO_7",
+      "QA_PHOTO_8"
+    ],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/retro-kino/index.html?lang=uz&qaReducedMotion=1",
+        "script": true,
+        "payload": true,
+        "story": [
+          {
+            "id": "s",
+            "title": "QA_STORY_TITLE",
+            "text": "QA_STORY_TEXT"
+          }
+        ],
+        "sections": [
+          "story",
+          "people",
+          "receipt"
+        ],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "royal-burgundy-edition",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": false,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": false,
+      "programTitle": true,
+      "programDescriptions": false,
+      "story": true,
+      "dressStyle": false,
+      "dressText": false,
+      "dressNote": false,
+      "dressColorNames": false,
+      "phone": true,
+      "telegram": true,
+      "gift": true
+    },
+    "colors": false,
+    "photos": [
+      "QA_PHOTO_1",
+      "QA_PHOTO_2",
+      "QA_PHOTO_3",
+      "QA_PHOTO_4",
+      "QA_PHOTO_5",
+      "QA_PHOTO_6",
+      "QA_PHOTO_7",
+      "QA_PHOTO_8"
+    ],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/velvet-royale/index.html?qaReducedMotion=1",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "safir",
+    "fields": {
+      "hosts": false,
+      "greeting": true,
+      "eventLabel": false,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": true,
+      "programTitle": true,
+      "programDescriptions": false,
+      "story": false,
+      "dressStyle": true,
+      "dressText": true,
+      "dressNote": true,
+      "dressColorNames": true,
+      "phone": true,
+      "telegram": false,
+      "gift": false
+    },
+    "colors": true,
+    "photos": [
+      "QA_PHOTO_1"
+    ],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/safir/index.html?lang=uz",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      }
+    ],
+    "missing": [
+      "eventLabel",
+      "telegram"
+    ],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "sahifa",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": true,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": false,
+      "programTitle": true,
+      "programDescriptions": false,
+      "story": true,
+      "dressStyle": true,
+      "dressText": true,
+      "dressNote": true,
+      "dressColorNames": true,
+      "phone": true,
+      "telegram": true,
+      "gift": true
+    },
+    "colors": true,
+    "photos": [
+      "QA_PHOTO_1",
+      "QA_PHOTO_2",
+      "QA_PHOTO_3",
+      "QA_PHOTO_4",
+      "QA_PHOTO_5",
+      "QA_PHOTO_6",
+      "QA_PHOTO_7",
+      "QA_PHOTO_8"
+    ],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/sahifa/index.html?lang=uz&qaReducedMotion=1",
+        "script": true,
+        "payload": true,
+        "story": [
+          {
+            "id": "s",
+            "title": "QA_STORY_TITLE",
+            "text": "QA_STORY_TEXT"
+          }
+        ],
+        "sections": [
+          "story",
+          "people",
+          "receipt"
+        ],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "sahro-fonusi",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": true,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": false,
+      "programTitle": true,
+      "programDescriptions": false,
+      "story": true,
+      "dressStyle": true,
+      "dressText": true,
+      "dressNote": true,
+      "dressColorNames": true,
+      "phone": true,
+      "telegram": true,
+      "gift": true
+    },
+    "colors": true,
+    "photos": [
+      "QA_PHOTO_1",
+      "QA_PHOTO_2",
+      "QA_PHOTO_3",
+      "QA_PHOTO_4",
+      "QA_PHOTO_5",
+      "QA_PHOTO_6",
+      "QA_PHOTO_7",
+      "QA_PHOTO_8"
+    ],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/sahro-fonusi/index.html?lang=uz&qaReducedMotion=1",
+        "script": true,
+        "payload": true,
+        "story": [
+          {
+            "id": "s",
+            "title": "QA_STORY_TITLE",
+            "text": "QA_STORY_TEXT"
+          }
+        ],
+        "sections": [
+          "story",
+          "people",
+          "receipt"
+        ],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "samarqand-kechasi",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": true,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": false,
+      "programTitle": true,
+      "programDescriptions": false,
+      "story": true,
+      "dressStyle": true,
+      "dressText": true,
+      "dressNote": true,
+      "dressColorNames": true,
+      "phone": true,
+      "telegram": true,
+      "gift": true
+    },
+    "colors": true,
+    "photos": [
+      "QA_PHOTO_1",
+      "QA_PHOTO_2",
+      "QA_PHOTO_3",
+      "QA_PHOTO_4",
+      "QA_PHOTO_5",
+      "QA_PHOTO_6",
+      "QA_PHOTO_7",
+      "QA_PHOTO_8"
+    ],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/samarqand-kechasi/index.html?lang=uz&qaReducedMotion=1",
+        "script": true,
+        "payload": true,
+        "story": [
+          {
+            "id": "s",
+            "title": "QA_STORY_TITLE",
+            "text": "QA_STORY_TEXT"
+          }
+        ],
+        "sections": [
+          "story",
+          "people",
+          "receipt"
+        ],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "samarqand-peshtoqi",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": false,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": true,
+      "programTitle": true,
+      "programDescriptions": false,
+      "story": false,
+      "dressStyle": false,
+      "dressText": false,
+      "dressNote": false,
+      "dressColorNames": false,
+      "phone": true,
+      "telegram": true,
+      "gift": true
+    },
+    "colors": false,
+    "photos": [
+      "QA_PHOTO_1",
+      "QA_PHOTO_2",
+      "QA_PHOTO_3",
+      "QA_PHOTO_4",
+      "QA_PHOTO_5",
+      "QA_PHOTO_6",
+      "QA_PHOTO_7",
+      "QA_PHOTO_8"
+    ],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/onlinetaklifnoma-samarqand-peshtoqi/index.html?qaSilent=1",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "shahzoda",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": true,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": false,
+      "programTitle": true,
+      "programDescriptions": false,
+      "story": true,
+      "dressStyle": true,
+      "dressText": true,
+      "dressNote": true,
+      "dressColorNames": true,
+      "phone": true,
+      "telegram": true,
+      "gift": true
+    },
+    "colors": true,
+    "photos": [
+      "QA_PHOTO_1",
+      "QA_PHOTO_2",
+      "QA_PHOTO_3",
+      "QA_PHOTO_4",
+      "QA_PHOTO_5",
+      "QA_PHOTO_6",
+      "QA_PHOTO_7",
+      "QA_PHOTO_8"
+    ],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/shahzoda/index.html?lang=uz&qaReducedMotion=1",
+        "script": true,
+        "payload": true,
+        "story": [
+          {
+            "id": "s",
+            "title": "QA_STORY_TITLE",
+            "text": "QA_STORY_TEXT"
+          }
+        ],
+        "sections": [
+          "story",
+          "people",
+          "receipt"
+        ],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "shirin-bayram",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": true,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": false,
+      "programTitle": true,
+      "programDescriptions": false,
+      "story": true,
+      "dressStyle": true,
+      "dressText": true,
+      "dressNote": true,
+      "dressColorNames": true,
+      "phone": true,
+      "telegram": true,
+      "gift": true
+    },
+    "colors": true,
+    "photos": [
+      "QA_PHOTO_1",
+      "QA_PHOTO_2",
+      "QA_PHOTO_3",
+      "QA_PHOTO_4",
+      "QA_PHOTO_5",
+      "QA_PHOTO_6",
+      "QA_PHOTO_7",
+      "QA_PHOTO_8"
+    ],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/shirin-bayram/index.html?lang=uz&qaReducedMotion=1",
+        "script": true,
+        "payload": true,
+        "story": [
+          {
+            "id": "s",
+            "title": "QA_STORY_TITLE",
+            "text": "QA_STORY_TEXT"
+          }
+        ],
+        "sections": [
+          "story",
+          "people",
+          "receipt"
+        ],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "shisha-bog",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": false,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": true,
+      "programTitle": true,
+      "programDescriptions": false,
+      "story": false,
+      "dressStyle": false,
+      "dressText": false,
+      "dressNote": false,
+      "dressColorNames": false,
+      "phone": true,
+      "telegram": true,
+      "gift": true
+    },
+    "colors": false,
+    "photos": [
+      "QA_PHOTO_1",
+      "QA_PHOTO_2",
+      "QA_PHOTO_3",
+      "QA_PHOTO_4",
+      "QA_PHOTO_5",
+      "QA_PHOTO_6",
+      "QA_PHOTO_7",
+      "QA_PHOTO_8"
+    ],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/onlinetaklifnoma-shisha-bog/index.html?qaSilent=1",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "somon-yoli",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": true,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": false,
+      "programTitle": true,
+      "programDescriptions": false,
+      "story": true,
+      "dressStyle": true,
+      "dressText": true,
+      "dressNote": true,
+      "dressColorNames": true,
+      "phone": true,
+      "telegram": true,
+      "gift": true
+    },
+    "colors": true,
+    "photos": [
+      "QA_PHOTO_1",
+      "QA_PHOTO_2",
+      "QA_PHOTO_3",
+      "QA_PHOTO_4",
+      "QA_PHOTO_5",
+      "QA_PHOTO_6",
+      "QA_PHOTO_7",
+      "QA_PHOTO_8"
+    ],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/somon-yoli/index.html?lang=uz&qaReducedMotion=1",
+        "script": true,
+        "payload": true,
+        "story": [
+          {
+            "id": "s",
+            "title": "QA_STORY_TITLE",
+            "text": "QA_STORY_TEXT"
+          }
+        ],
+        "sections": [
+          "story",
+          "people",
+          "receipt"
+        ],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "stained-glass",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": true,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": true,
+      "programTitle": true,
+      "programDescriptions": false,
+      "story": true,
+      "dressStyle": true,
+      "dressText": true,
+      "dressNote": true,
+      "dressColorNames": true,
+      "phone": true,
+      "telegram": true,
+      "gift": true
+    },
+    "colors": true,
+    "photos": [
+      "QA_PHOTO_1",
+      "QA_PHOTO_2",
+      "QA_PHOTO_3",
+      "QA_PHOTO_4",
+      "QA_PHOTO_5",
+      "QA_PHOTO_6",
+      "QA_PHOTO_7",
+      "QA_PHOTO_8"
+    ],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/templates/stained-glass/index.html?lang=uz-Latn&qaReducedMotion=1",
+        "script": true,
+        "payload": true,
+        "story": [
+          {
+            "id": "s",
+            "title": "QA_STORY_TITLE",
+            "text": "QA_STORY_TEXT"
+          }
+        ],
+        "sections": [
+          "receipt",
+          "story",
+          "people"
+        ],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "sunset",
+    "fields": {
+      "hosts": true,
+      "greeting": false,
+      "eventLabel": false,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": true,
+      "programTitle": true,
+      "programDescriptions": false,
+      "story": true,
+      "dressStyle": true,
+      "dressText": true,
+      "dressNote": true,
+      "dressColorNames": true,
+      "phone": true,
+      "telegram": true,
+      "gift": true
+    },
+    "colors": true,
+    "photos": [
+      "QA_PHOTO_1",
+      "QA_PHOTO_2",
+      "QA_PHOTO_3",
+      "QA_PHOTO_4",
+      "QA_PHOTO_5",
+      "QA_PHOTO_6",
+      "QA_PHOTO_7",
+      "QA_PHOTO_8"
+    ],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm&latitude=41.31&longitude=69.28",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/sunset/index.html?lang=uz-Latn&qaReducedMotion=1",
+        "script": true,
+        "payload": true,
+        "story": [
+          {
+            "id": "s",
+            "title": "QA_STORY_TITLE",
+            "text": "QA_STORY_TEXT"
+          }
+        ],
+        "sections": [
+          "receipt",
+          "story",
+          "people"
+        ],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "suzani",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": true,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": false,
+      "programTitle": true,
+      "programDescriptions": false,
+      "story": true,
+      "dressStyle": true,
+      "dressText": true,
+      "dressNote": true,
+      "dressColorNames": true,
+      "phone": true,
+      "telegram": true,
+      "gift": true
+    },
+    "colors": true,
+    "photos": [
+      "QA_PHOTO_1",
+      "QA_PHOTO_2",
+      "QA_PHOTO_3",
+      "QA_PHOTO_4",
+      "QA_PHOTO_5",
+      "QA_PHOTO_6",
+      "QA_PHOTO_7",
+      "QA_PHOTO_8"
+    ],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/suzani/index.html?lang=uz&qaReducedMotion=1",
+        "script": true,
+        "payload": true,
+        "story": [
+          {
+            "id": "s",
+            "title": "QA_STORY_TITLE",
+            "text": "QA_STORY_TEXT"
+          }
+        ],
+        "sections": [
+          "story",
+          "people",
+          "receipt"
+        ],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "swan-garden",
+    "fields": {
+      "hosts": true,
+      "greeting": false,
+      "eventLabel": false,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": true,
+      "programTitle": true,
+      "programDescriptions": false,
+      "story": true,
+      "dressStyle": true,
+      "dressText": true,
+      "dressNote": true,
+      "dressColorNames": true,
+      "phone": true,
+      "telegram": true,
+      "gift": true
+    },
+    "colors": true,
+    "photos": [
+      "QA_PHOTO_1",
+      "QA_PHOTO_2",
+      "QA_PHOTO_3",
+      "QA_PHOTO_4",
+      "QA_PHOTO_5",
+      "QA_PHOTO_6",
+      "QA_PHOTO_7",
+      "QA_PHOTO_8"
+    ],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm&latitude=41.31&longitude=69.28",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/swan-garden/index.html?lang=uz-Latn&qaReducedMotion=1",
+        "script": true,
+        "payload": true,
+        "story": [
+          {
+            "id": "s",
+            "title": "QA_STORY_TITLE",
+            "text": "QA_STORY_TEXT"
+          }
+        ],
+        "sections": [
+          "receipt",
+          "story",
+          "people"
+        ],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "taklifla-asalari",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": false,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": true,
+      "programTitle": true,
+      "programDescriptions": true,
+      "story": false,
+      "dressStyle": true,
+      "dressText": true,
+      "dressNote": true,
+      "dressColorNames": true,
+      "phone": false,
+      "telegram": false,
+      "gift": false
+    },
+    "colors": false,
+    "photos": [],
+    "extras": [
+      {
+        "url": "about:blank",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/taklifla-asalari/index.html",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "taklifla-barakali",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": true,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": false,
+      "programTitle": false,
+      "programDescriptions": false,
+      "story": false,
+      "dressStyle": false,
+      "dressText": false,
+      "dressNote": false,
+      "dressColorNames": false,
+      "phone": true,
+      "telegram": false,
+      "gift": false
+    },
+    "colors": false,
+    "photos": [
+      "QA_PHOTO_1"
+    ],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Fll%3D69.28%252C41.31%26lang%3Duz_UZ",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/taklifla-barakali/index.html",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "taklifla-ertak",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": true,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": true,
+      "programTitle": true,
+      "programDescriptions": true,
+      "story": false,
+      "dressStyle": false,
+      "dressText": false,
+      "dressNote": false,
+      "dressColorNames": false,
+      "phone": false,
+      "telegram": false,
+      "gift": false
+    },
+    "colors": false,
+    "photos": [],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/taklifla-ertak/index.html",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "taklifla-fayzli-xonadon",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": true,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": false,
+      "programTitle": false,
+      "programDescriptions": false,
+      "story": false,
+      "dressStyle": true,
+      "dressText": true,
+      "dressNote": true,
+      "dressColorNames": true,
+      "phone": false,
+      "telegram": false,
+      "gift": false
+    },
+    "colors": true,
+    "photos": [],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/taklifla-fayzli-xonadon/index.html",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "taklifla-gulbog",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": true,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": true,
+      "programTitle": true,
+      "programDescriptions": true,
+      "story": false,
+      "dressStyle": false,
+      "dressText": false,
+      "dressNote": false,
+      "dressColorNames": false,
+      "phone": false,
+      "telegram": false,
+      "gift": false
+    },
+    "colors": false,
+    "photos": [],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/taklifla-gulbog/index.html",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "taklifla-muhrli-maktub",
+    "fields": {
+      "hosts": false,
+      "greeting": true,
+      "eventLabel": true,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": true,
+      "programTitle": true,
+      "programDescriptions": true,
+      "story": false,
+      "dressStyle": true,
+      "dressText": true,
+      "dressNote": true,
+      "dressColorNames": true,
+      "phone": true,
+      "telegram": true,
+      "gift": false
+    },
+    "colors": true,
+    "photos": [],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/taklifla-muhrli-maktub/index.html",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "taklifla-oltin-yol",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": true,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": true,
+      "programTitle": true,
+      "programDescriptions": true,
+      "story": false,
+      "dressStyle": true,
+      "dressText": true,
+      "dressNote": true,
+      "dressColorNames": true,
+      "phone": true,
+      "telegram": true,
+      "gift": false
+    },
+    "colors": false,
+    "photos": [],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/templates/taklifla-oltin-yol/index.html",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "taklifla-osmon",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": true,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": true,
+      "programTitle": true,
+      "programDescriptions": true,
+      "story": false,
+      "dressStyle": true,
+      "dressText": true,
+      "dressNote": true,
+      "dressColorNames": true,
+      "phone": true,
+      "telegram": false,
+      "gift": false
+    },
+    "colors": false,
+    "photos": [],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/taklifla-osmon/index.html",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "taklifla-parilar-ertagi",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": true,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": true,
+      "programTitle": true,
+      "programDescriptions": true,
+      "story": false,
+      "dressStyle": true,
+      "dressText": true,
+      "dressNote": true,
+      "dressColorNames": true,
+      "phone": true,
+      "telegram": false,
+      "gift": false
+    },
+    "colors": false,
+    "photos": [],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/taklifla-parilar-ertagi/index.html",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "taklifla-qogoz-ertagi",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": true,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": true,
+      "programTitle": true,
+      "programDescriptions": true,
+      "story": false,
+      "dressStyle": true,
+      "dressText": true,
+      "dressNote": true,
+      "dressColorNames": true,
+      "phone": true,
+      "telegram": true,
+      "gift": false
+    },
+    "colors": false,
+    "photos": [],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/taklifla-qogoz-ertagi/index.html",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "taklifla-sakura-guli",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": true,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": true,
+      "programTitle": true,
+      "programDescriptions": true,
+      "story": false,
+      "dressStyle": true,
+      "dressText": true,
+      "dressNote": true,
+      "dressColorNames": true,
+      "phone": true,
+      "telegram": true,
+      "gift": false
+    },
+    "colors": false,
+    "photos": [],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/taklifla-sakura-guli/index.html",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "taklifla-sharlar",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": false,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": true,
+      "programTitle": true,
+      "programDescriptions": true,
+      "story": false,
+      "dressStyle": true,
+      "dressText": true,
+      "dressNote": true,
+      "dressColorNames": true,
+      "phone": true,
+      "telegram": false,
+      "gift": false
+    },
+    "colors": false,
+    "photos": [],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/taklifla-sharlar/index.html",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "taklifla-terracotta",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": true,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": true,
+      "programTitle": true,
+      "programDescriptions": true,
+      "story": false,
+      "dressStyle": false,
+      "dressText": false,
+      "dressNote": false,
+      "dressColorNames": false,
+      "phone": false,
+      "telegram": false,
+      "gift": false
+    },
+    "colors": false,
+    "photos": [],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/taklifla-terracotta/index.html",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "taklifla-toglar-bagrida",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": true,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": true,
+      "programTitle": true,
+      "programDescriptions": true,
+      "story": true,
+      "dressStyle": false,
+      "dressText": false,
+      "dressNote": false,
+      "dressColorNames": false,
+      "phone": false,
+      "telegram": false,
+      "gift": false
+    },
+    "colors": false,
+    "photos": [],
+    "extras": [
+      {
+        "url": "about:blank",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/taklifla-toglar-bagrida/index.html",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "taklifla-tort-fasl",
+    "fields": {
+      "hosts": false,
+      "greeting": true,
+      "eventLabel": true,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": true,
+      "programTitle": true,
+      "programDescriptions": true,
+      "story": false,
+      "dressStyle": true,
+      "dressText": true,
+      "dressNote": true,
+      "dressColorNames": true,
+      "phone": true,
+      "telegram": false,
+      "gift": false
+    },
+    "colors": true,
+    "photos": [],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/taklifla-tort-fasl/index.html",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "taklifla-tovus",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": true,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": true,
+      "programTitle": true,
+      "programDescriptions": true,
+      "story": true,
+      "dressStyle": true,
+      "dressText": true,
+      "dressNote": true,
+      "dressColorNames": true,
+      "phone": false,
+      "telegram": false,
+      "gift": false
+    },
+    "colors": false,
+    "photos": [],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/taklifla-tovus/index.html",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "taklifla-tungi-saroy",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": true,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": true,
+      "programTitle": true,
+      "programDescriptions": true,
+      "story": false,
+      "dressStyle": true,
+      "dressText": true,
+      "dressNote": true,
+      "dressColorNames": true,
+      "phone": true,
+      "telegram": false,
+      "gift": false
+    },
+    "colors": false,
+    "photos": [],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/taklifla-tungi-saroy/index.html",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "taklifla-uchrashuv",
+    "fields": {
+      "hosts": false,
+      "greeting": true,
+      "eventLabel": true,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": false,
+      "programTitle": false,
+      "programDescriptions": false,
+      "story": false,
+      "dressStyle": false,
+      "dressText": false,
+      "dressNote": false,
+      "dressColorNames": false,
+      "phone": false,
+      "telegram": false,
+      "gift": false
+    },
+    "colors": false,
+    "photos": [],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/templates/taklifla-uchrashuv/index.html",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "taklifla-yubiley-sahifasi",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": true,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": true,
+      "programTitle": true,
+      "programDescriptions": true,
+      "story": true,
+      "dressStyle": false,
+      "dressText": false,
+      "dressNote": false,
+      "dressColorNames": false,
+      "phone": false,
+      "telegram": false,
+      "gift": false
+    },
+    "colors": false,
+    "photos": [],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/taklifla-yubiley-sahifasi/index.html",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "taklifla-yulduzli-tun",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": true,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": true,
+      "programTitle": true,
+      "programDescriptions": true,
+      "story": false,
+      "dressStyle": false,
+      "dressText": false,
+      "dressNote": false,
+      "dressColorNames": false,
+      "phone": false,
+      "telegram": false,
+      "gift": false
+    },
+    "colors": false,
+    "photos": [],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/taklifla-yulduzli-tun/index.html",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "taklifla-zarhal-sahifa",
+    "fields": {
+      "hosts": false,
+      "greeting": true,
+      "eventLabel": true,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": false,
+      "programTitle": false,
+      "programDescriptions": false,
+      "story": false,
+      "dressStyle": true,
+      "dressText": true,
+      "dressNote": true,
+      "dressColorNames": false,
+      "phone": false,
+      "telegram": false,
+      "gift": false
+    },
+    "colors": false,
+    "photos": [
+      "QA_PHOTO_1",
+      "QA_PHOTO_2",
+      "QA_PHOTO_3",
+      "QA_PHOTO_4",
+      "QA_PHOTO_5",
+      "QA_PHOTO_6",
+      "QA_PHOTO_7",
+      "QA_PHOTO_8"
+    ],
+    "extras": [
+      {
+        "url": "about:blank",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/taklifla-zarhal-sahifa/index.html",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "taklifla-zarrin-gullar",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": true,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": true,
+      "programTitle": true,
+      "programDescriptions": true,
+      "story": false,
+      "dressStyle": true,
+      "dressText": true,
+      "dressNote": true,
+      "dressColorNames": true,
+      "phone": true,
+      "telegram": false,
+      "gift": false
+    },
+    "colors": false,
+    "photos": [],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/templates/taklifla-zarrin-gullar/template.html",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "taklifnomachi-1",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": true,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": true,
+      "programTitle": true,
+      "programDescriptions": false,
+      "story": true,
+      "dressStyle": true,
+      "dressText": true,
+      "dressNote": true,
+      "dressColorNames": true,
+      "phone": true,
+      "telegram": true,
+      "gift": true
+    },
+    "colors": true,
+    "photos": [
+      "QA_PHOTO_1",
+      "QA_PHOTO_2",
+      "QA_PHOTO_3",
+      "QA_PHOTO_4",
+      "QA_PHOTO_5",
+      "QA_PHOTO_6",
+      "QA_PHOTO_7",
+      "QA_PHOTO_8"
+    ],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/taklifnomachi-1/index.html?lang=uz&qaReducedMotion=1",
+        "script": true,
+        "payload": true,
+        "story": [
+          {
+            "id": "s",
+            "title": "QA_STORY_TITLE",
+            "text": "QA_STORY_TEXT"
+          }
+        ],
+        "sections": [
+          "story",
+          "dress",
+          "people",
+          "receipt"
+        ],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "taklifnomachi-12",
+    "fields": {
+      "hosts": false,
+      "greeting": true,
+      "eventLabel": true,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": false,
+      "programTitle": true,
+      "programDescriptions": false,
+      "story": true,
+      "dressStyle": true,
+      "dressText": true,
+      "dressNote": true,
+      "dressColorNames": true,
+      "phone": true,
+      "telegram": true,
+      "gift": true
+    },
+    "colors": true,
+    "photos": [
+      "QA_PHOTO_1",
+      "QA_PHOTO_2",
+      "QA_PHOTO_3",
+      "QA_PHOTO_4",
+      "QA_PHOTO_5",
+      "QA_PHOTO_6",
+      "QA_PHOTO_7",
+      "QA_PHOTO_8"
+    ],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/taklifnomachi-12/index.html?lang=uz&qaReducedMotion=1",
+        "script": true,
+        "payload": true,
+        "story": [
+          {
+            "id": "s",
+            "title": "QA_STORY_TITLE",
+            "text": "QA_STORY_TEXT"
+          }
+        ],
+        "sections": [
+          "story",
+          "dress",
+          "people",
+          "receipt"
+        ],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "taklifnomachi-13",
+    "fields": {
+      "hosts": false,
+      "greeting": true,
+      "eventLabel": true,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": true,
+      "programTitle": true,
+      "programDescriptions": false,
+      "story": true,
+      "dressStyle": true,
+      "dressText": true,
+      "dressNote": true,
+      "dressColorNames": true,
+      "phone": true,
+      "telegram": true,
+      "gift": true
+    },
+    "colors": true,
+    "photos": [
+      "QA_PHOTO_1",
+      "QA_PHOTO_2",
+      "QA_PHOTO_3",
+      "QA_PHOTO_4",
+      "QA_PHOTO_5",
+      "QA_PHOTO_6",
+      "QA_PHOTO_7",
+      "QA_PHOTO_8"
+    ],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/taklifnomachi-13/index.html?lang=uz&qaReducedMotion=1",
+        "script": true,
+        "payload": true,
+        "story": [
+          {
+            "id": "s",
+            "title": "QA_STORY_TITLE",
+            "text": "QA_STORY_TEXT"
+          }
+        ],
+        "sections": [
+          "story",
+          "dress",
+          "people",
+          "receipt"
+        ],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "taklifnomachi-15",
+    "fields": {
+      "hosts": false,
+      "greeting": true,
+      "eventLabel": false,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": false,
+      "programTitle": true,
+      "programDescriptions": false,
+      "story": true,
+      "dressStyle": true,
+      "dressText": true,
+      "dressNote": true,
+      "dressColorNames": true,
+      "phone": true,
+      "telegram": true,
+      "gift": true
+    },
+    "colors": true,
+    "photos": [
+      "QA_PHOTO_1",
+      "QA_PHOTO_2",
+      "QA_PHOTO_3",
+      "QA_PHOTO_4",
+      "QA_PHOTO_5",
+      "QA_PHOTO_6",
+      "QA_PHOTO_7",
+      "QA_PHOTO_8"
+    ],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/taklifnomachi-15/index.html?lang=uz&qaReducedMotion=1",
+        "script": true,
+        "payload": true,
+        "story": [
+          {
+            "id": "s",
+            "title": "QA_STORY_TITLE",
+            "text": "QA_STORY_TEXT"
+          }
+        ],
+        "sections": [
+          "story",
+          "dress",
+          "people",
+          "receipt"
+        ],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "taklifnomachi-16",
+    "fields": {
+      "hosts": false,
+      "greeting": false,
+      "eventLabel": false,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": true,
+      "programTitle": true,
+      "programDescriptions": false,
+      "story": true,
+      "dressStyle": true,
+      "dressText": true,
+      "dressNote": true,
+      "dressColorNames": true,
+      "phone": true,
+      "telegram": true,
+      "gift": true
+    },
+    "colors": true,
+    "photos": [
+      "QA_PHOTO_1",
+      "QA_PHOTO_2",
+      "QA_PHOTO_3",
+      "QA_PHOTO_4",
+      "QA_PHOTO_5",
+      "QA_PHOTO_6",
+      "QA_PHOTO_7",
+      "QA_PHOTO_8"
+    ],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/taklifnomachi-16/index.html?lang=uz&qaReducedMotion=1",
+        "script": true,
+        "payload": true,
+        "story": [
+          {
+            "id": "s",
+            "title": "QA_STORY_TITLE",
+            "text": "QA_STORY_TEXT"
+          }
+        ],
+        "sections": [
+          "story",
+          "dress",
+          "people",
+          "receipt"
+        ],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "taklifnomachi-17",
+    "fields": {
+      "hosts": false,
+      "greeting": true,
+      "eventLabel": false,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": true,
+      "programTitle": true,
+      "programDescriptions": false,
+      "story": true,
+      "dressStyle": true,
+      "dressText": true,
+      "dressNote": true,
+      "dressColorNames": true,
+      "phone": true,
+      "telegram": true,
+      "gift": true
+    },
+    "colors": true,
+    "photos": [
+      "QA_PHOTO_1",
+      "QA_PHOTO_2",
+      "QA_PHOTO_3",
+      "QA_PHOTO_4",
+      "QA_PHOTO_5",
+      "QA_PHOTO_6",
+      "QA_PHOTO_7",
+      "QA_PHOTO_8"
+    ],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/taklifnomachi-17/index.html?lang=uz&qaReducedMotion=1",
+        "script": true,
+        "payload": true,
+        "story": [
+          {
+            "id": "s",
+            "title": "QA_STORY_TITLE",
+            "text": "QA_STORY_TEXT"
+          }
+        ],
+        "sections": [
+          "story",
+          "dress",
+          "people",
+          "receipt"
+        ],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "taklifnomachi-18",
+    "fields": {
+      "hosts": false,
+      "greeting": true,
+      "eventLabel": false,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": false,
+      "programTitle": true,
+      "programDescriptions": false,
+      "story": true,
+      "dressStyle": true,
+      "dressText": true,
+      "dressNote": true,
+      "dressColorNames": true,
+      "phone": true,
+      "telegram": true,
+      "gift": true
+    },
+    "colors": true,
+    "photos": [
+      "QA_PHOTO_1",
+      "QA_PHOTO_2",
+      "QA_PHOTO_3",
+      "QA_PHOTO_4",
+      "QA_PHOTO_5",
+      "QA_PHOTO_6",
+      "QA_PHOTO_7",
+      "QA_PHOTO_8"
+    ],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/taklifnomachi-18/index.html?lang=uz&qaReducedMotion=1",
+        "script": true,
+        "payload": true,
+        "story": [
+          {
+            "id": "s",
+            "title": "QA_STORY_TITLE",
+            "text": "QA_STORY_TEXT"
+          }
+        ],
+        "sections": [
+          "story",
+          "dress",
+          "people",
+          "receipt"
+        ],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "taklifnomachi-19",
+    "fields": {
+      "hosts": false,
+      "greeting": true,
+      "eventLabel": false,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": false,
+      "programTitle": true,
+      "programDescriptions": false,
+      "story": true,
+      "dressStyle": true,
+      "dressText": true,
+      "dressNote": true,
+      "dressColorNames": true,
+      "phone": true,
+      "telegram": true,
+      "gift": true
+    },
+    "colors": true,
+    "photos": [
+      "QA_PHOTO_1",
+      "QA_PHOTO_2",
+      "QA_PHOTO_3",
+      "QA_PHOTO_4",
+      "QA_PHOTO_5",
+      "QA_PHOTO_6",
+      "QA_PHOTO_7",
+      "QA_PHOTO_8"
+    ],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/taklifnomachi-19/index.html?lang=uz&qaReducedMotion=1",
+        "script": true,
+        "payload": true,
+        "story": [
+          {
+            "id": "s",
+            "title": "QA_STORY_TITLE",
+            "text": "QA_STORY_TEXT"
+          }
+        ],
+        "sections": [
+          "story",
+          "dress",
+          "people",
+          "receipt"
+        ],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "tojmahal-oltin-darvozasi",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": false,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": true,
+      "programTitle": true,
+      "programDescriptions": false,
+      "story": false,
+      "dressStyle": false,
+      "dressText": false,
+      "dressNote": false,
+      "dressColorNames": false,
+      "phone": true,
+      "telegram": true,
+      "gift": true
+    },
+    "colors": false,
+    "photos": [
+      "QA_PHOTO_1",
+      "QA_PHOTO_2",
+      "QA_PHOTO_3",
+      "QA_PHOTO_4",
+      "QA_PHOTO_5",
+      "QA_PHOTO_6",
+      "QA_PHOTO_7",
+      "QA_PHOTO_8"
+    ],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/onlinetaklifnoma-tojmahal-oltin-darvozasi/index.html?qaSilent=1",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "toscana",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": true,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": false,
+      "programTitle": true,
+      "programDescriptions": false,
+      "story": true,
+      "dressStyle": true,
+      "dressText": true,
+      "dressNote": true,
+      "dressColorNames": true,
+      "phone": true,
+      "telegram": true,
+      "gift": true
+    },
+    "colors": true,
+    "photos": [
+      "QA_PHOTO_1",
+      "QA_PHOTO_2",
+      "QA_PHOTO_3",
+      "QA_PHOTO_4",
+      "QA_PHOTO_5",
+      "QA_PHOTO_6",
+      "QA_PHOTO_7",
+      "QA_PHOTO_8"
+    ],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/toscana/index.html?lang=uz&qaReducedMotion=1",
+        "script": true,
+        "payload": true,
+        "story": [
+          {
+            "id": "s",
+            "title": "QA_STORY_TITLE",
+            "text": "QA_STORY_TEXT"
+          }
+        ],
+        "sections": [
+          "story",
+          "people",
+          "receipt"
+        ],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "uchar-gilam",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": true,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": false,
+      "programTitle": true,
+      "programDescriptions": false,
+      "story": true,
+      "dressStyle": true,
+      "dressText": true,
+      "dressNote": true,
+      "dressColorNames": true,
+      "phone": true,
+      "telegram": true,
+      "gift": true
+    },
+    "colors": true,
+    "photos": [
+      "QA_PHOTO_1",
+      "QA_PHOTO_2",
+      "QA_PHOTO_3",
+      "QA_PHOTO_4",
+      "QA_PHOTO_5",
+      "QA_PHOTO_6",
+      "QA_PHOTO_7",
+      "QA_PHOTO_8"
+    ],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/uchar-gilam/index.html?lang=uz&qaReducedMotion=1",
+        "script": true,
+        "payload": true,
+        "story": [
+          {
+            "id": "s",
+            "title": "QA_STORY_TITLE",
+            "text": "QA_STORY_TEXT"
+          }
+        ],
+        "sections": [
+          "story",
+          "people",
+          "receipt"
+        ],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "vals",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": true,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": false,
+      "programTitle": true,
+      "programDescriptions": false,
+      "story": true,
+      "dressStyle": true,
+      "dressText": true,
+      "dressNote": true,
+      "dressColorNames": true,
+      "phone": true,
+      "telegram": true,
+      "gift": true
+    },
+    "colors": true,
+    "photos": [
+      "QA_PHOTO_1",
+      "QA_PHOTO_2",
+      "QA_PHOTO_3",
+      "QA_PHOTO_4",
+      "QA_PHOTO_5",
+      "QA_PHOTO_6",
+      "QA_PHOTO_7",
+      "QA_PHOTO_8"
+    ],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/vals/index.html?lang=uz&qaReducedMotion=1",
+        "script": true,
+        "payload": true,
+        "story": [
+          {
+            "id": "s",
+            "title": "QA_STORY_TITLE",
+            "text": "QA_STORY_TEXT"
+          }
+        ],
+        "sections": [
+          "story",
+          "people",
+          "receipt"
+        ],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "velora",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": false,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": true,
+      "programTitle": true,
+      "programDescriptions": false,
+      "story": true,
+      "dressStyle": true,
+      "dressText": true,
+      "dressNote": false,
+      "dressColorNames": true,
+      "phone": false,
+      "telegram": true,
+      "gift": false
+    },
+    "colors": true,
+    "photos": [
+      "QA_PHOTO_1",
+      "QA_PHOTO_2",
+      "QA_PHOTO_3",
+      "QA_PHOTO_4",
+      "QA_PHOTO_5",
+      "QA_PHOTO_6",
+      "QA_PHOTO_7",
+      "QA_PHOTO_8"
+    ],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/velora/index.html?lang=uz",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "velvet",
+    "fields": {
+      "hosts": false,
+      "greeting": true,
+      "eventLabel": false,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": true,
+      "programTitle": true,
+      "programDescriptions": false,
+      "story": false,
+      "dressStyle": false,
+      "dressText": true,
+      "dressNote": false,
+      "dressColorNames": false,
+      "phone": false,
+      "telegram": true,
+      "gift": true
+    },
+    "colors": false,
+    "photos": [
+      "QA_PHOTO_1",
+      "QA_PHOTO_2",
+      "QA_PHOTO_3",
+      "QA_PHOTO_4",
+      "QA_PHOTO_5",
+      "QA_PHOTO_6",
+      "QA_PHOTO_7",
+      "QA_PHOTO_8"
+    ],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/velvet/index.html?lang=uz",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "wedivo-pulau-sehati",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": true,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": false,
+      "programTitle": true,
+      "programDescriptions": true,
+      "story": true,
+      "dressStyle": true,
+      "dressText": true,
+      "dressNote": false,
+      "dressColorNames": true,
+      "phone": false,
+      "telegram": false,
+      "gift": false
+    },
+    "colors": true,
+    "photos": [
+      "QA_PHOTO_1",
+      "QA_PHOTO_2",
+      "QA_PHOTO_3",
+      "QA_PHOTO_4",
+      "QA_PHOTO_5",
+      "QA_PHOTO_6",
+      "QA_PHOTO_7",
+      "QA_PHOTO_8"
+    ],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "about:blank",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/wedivo-pulau-sehati/index.html",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "xatna-edition",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": true,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": true,
+      "programTitle": true,
+      "programDescriptions": false,
+      "story": true,
+      "dressStyle": true,
+      "dressText": true,
+      "dressNote": true,
+      "dressColorNames": true,
+      "phone": true,
+      "telegram": true,
+      "gift": true
+    },
+    "colors": true,
+    "photos": [
+      "QA_PHOTO_1",
+      "QA_PHOTO_2",
+      "QA_PHOTO_3",
+      "QA_PHOTO_4",
+      "QA_PHOTO_5",
+      "QA_PHOTO_6",
+      "QA_PHOTO_7",
+      "QA_PHOTO_8"
+    ],
+    "extras": [
+      {
+        "url": "about:blank",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/xatna-edition/index.html?qaReducedMotion=1",
+        "script": true,
+        "payload": true,
+        "story": [
+          {
+            "id": "s",
+            "title": "QA_STORY_TITLE",
+            "text": "QA_STORY_TEXT"
+          }
+        ],
+        "sections": [
+          "receipt",
+          "story",
+          "dress"
+        ],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "yangi-uy",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": true,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": false,
+      "programTitle": true,
+      "programDescriptions": false,
+      "story": true,
+      "dressStyle": true,
+      "dressText": true,
+      "dressNote": true,
+      "dressColorNames": true,
+      "phone": true,
+      "telegram": true,
+      "gift": true
+    },
+    "colors": true,
+    "photos": [
+      "QA_PHOTO_1",
+      "QA_PHOTO_2",
+      "QA_PHOTO_3",
+      "QA_PHOTO_4",
+      "QA_PHOTO_5",
+      "QA_PHOTO_6",
+      "QA_PHOTO_7",
+      "QA_PHOTO_8"
+    ],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/yangi-uy/index.html?lang=uz&qaReducedMotion=1",
+        "script": true,
+        "payload": true,
+        "story": [
+          {
+            "id": "s",
+            "title": "QA_STORY_TITLE",
+            "text": "QA_STORY_TEXT"
+          }
+        ],
+        "sections": [
+          "story",
+          "people",
+          "receipt"
+        ],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  },
+  {
+    "id": "zarrin-doppi",
+    "fields": {
+      "hosts": true,
+      "greeting": true,
+      "eventLabel": true,
+      "message": true,
+      "venueName": true,
+      "address": true,
+      "landmark": true,
+      "programHeading": true,
+      "programTitle": true,
+      "programDescriptions": false,
+      "story": false,
+      "dressStyle": false,
+      "dressText": false,
+      "dressNote": false,
+      "dressColorNames": false,
+      "phone": true,
+      "telegram": true,
+      "gift": true
+    },
+    "colors": false,
+    "photos": [
+      "QA_PHOTO_1",
+      "QA_PHOTO_2",
+      "QA_PHOTO_3",
+      "QA_PHOTO_4",
+      "QA_PHOTO_5",
+      "QA_PHOTO_6",
+      "QA_PHOTO_7",
+      "QA_PHOTO_8"
+    ],
+    "extras": [
+      {
+        "url": "http://127.0.0.1:3001/maps/venue?latitude=41.31&longitude=69.28&destination=https%3A%2F%2Fyandex.uz%2Fmaps%2F%3Flang%3Duz_UZ%26ll%3D69.28%252C41.31%26z%3D16%26pt%3D69.28%252C41.31%252Cpm2rdm",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      },
+      {
+        "url": "http://127.0.0.1:3001/templates/onlinetaklifnoma-zarrin-doppi/index.html?qaSilent=1",
+        "script": false,
+        "payload": false,
+        "sections": [],
+        "nativeStory": false
+      }
+    ],
+    "missing": [],
+    "unexpected": [],
+    "errors": []
+  }
+]

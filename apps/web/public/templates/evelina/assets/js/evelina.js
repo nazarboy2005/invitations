@@ -24,6 +24,7 @@
     document.documentElement.lang = lang;
     document.querySelectorAll("[data-copy]").forEach((node) => { node.textContent = t[node.dataset.copy] || ""; });
     const greeting = document.querySelector('[data-copy="greeting"]'); if(greeting) greeting.textContent=data.greeting || t.greeting;
+    const message = document.querySelector('[data-copy="message"]'); if(message) message.textContent=data.message || "";
     const eventLabel = document.querySelector('[data-copy="event"]'); if(eventLabel) eventLabel.textContent=data.eventType || t.event;
     document.querySelectorAll("[data-field=names]").forEach((node) => { node.textContent = [data.groom,data.bride].filter(Boolean).join(" & "); });
     document.querySelectorAll("[data-field=date]").forEach((node) => { node.textContent = data.date?.short || ""; });

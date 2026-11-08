@@ -212,7 +212,7 @@ export async function publishInvitationInTransaction(
   await assertPublicMedia(tx, previous, user.id);
   if (republishing) {
     const invitation = invitationSchema.parse({
-      ...previous,
+      ...storedInvitation,
       status: "published",
       slug: row.slug,
       revision: previous.revision + 1,
@@ -245,7 +245,7 @@ export async function publishInvitationInTransaction(
   for (let attempt = 0; attempt < 10; attempt++) {
     const slug = allocateCode();
     const invitation = invitationSchema.parse({
-      ...previous,
+      ...storedInvitation,
       status: "published",
       slug,
       revision: previous.revision + 1,

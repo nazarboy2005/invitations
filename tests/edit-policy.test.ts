@@ -261,6 +261,7 @@ test("built-in music accepts its canonical and versioned paths but still verifie
   const transaction = (() => Promise.resolve([])) as never;
   await assertPublicMedia(transaction, value, "owner");
   value.music.url = CATALOG_PREVIEW_MUSIC.url;
+  value.music.enabled = true;
   await assertPublicMedia(transaction, value, "owner");
   value.music.assetId = "forged";
   await assert.rejects(

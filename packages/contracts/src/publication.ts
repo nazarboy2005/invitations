@@ -1,5 +1,6 @@
 import { LANGUAGE_NAMES, type Invitation, type Locale } from "./index";
 import { secondaryCeremony } from "./policies";
+import { templateCapabilities } from "./capabilities";
 
 export type PublicationIssue = {
   path: string;
@@ -10,6 +11,7 @@ export type PublicationIssue = {
 
 // Drafts may be incomplete. These requirements apply only to public content.
 export function publicationIssues(invitation: Invitation): PublicationIssue[] {
+  const capabilities = templateCapabilities(invitation.templateId);
   const issues: PublicationIssue[] = [];
   const add = (
     path: string,
@@ -18,6 +20,7 @@ export function publicationIssues(invitation: Invitation): PublicationIssue[] {
     locale?: Locale,
   ) => issues.push({ path, message, section, ...(locale ? { locale } : {}) });
   if (!invitation.templateId) add("templateId", "Avval dizaynni tanlang.", 0);
+  else if (!capabilities.hasRenderer) add("templateId", "Bu dizayn hali tayyor emas. Boshqa dizaynni tanlang.", 0);
   const start = invitation.startsAt;
   const parsed = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})(?::(\d{2}))?$/.exec(
     start,
@@ -59,7 +62,7 @@ export function publicationIssues(invitation: Invitation): PublicationIssue[] {
         1,
         locale,
       );
-    if (!content?.eventLabel.trim())
+    if (capabilities.inputs.eventLabel && !content?.eventLabel.trim())
       add(
         `content.${locale}.eventLabel`,
         `${label}: tadbir nomini kiriting.`,

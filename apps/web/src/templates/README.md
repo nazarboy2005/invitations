@@ -1,5 +1,12 @@
 # Invitation templates
 
+Every design must declare its real Studio sections, individual text/dress-code
+slots, and repeatable-item limits in the shared capability registry. Studio hides
+unsupported inputs; save validation rejects unsupported additions/edits before
+projection. Previously saved hidden content survives unchanged when switching.
+The exhaustive source, renderer, and API audit is documented in
+`docs/qa/2026-11-08-studio-inputs/README.md`.
+
 Every catalog definition declares `visitorFeatures` (RSVP mode, wishes, private
 receipt uploads and gift intentions), derived from the explicit source capability
 registry. Persist these four fields in `templates.visitor_features` in the

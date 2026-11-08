@@ -5,6 +5,7 @@ export class ApiError extends Error {
     public status: number,
     public code: string,
     message: string,
+    public fields?: Array<{ path: string; message: string }>,
   ) {
     super(message);
   }
@@ -42,6 +43,7 @@ function errorResponse(error: unknown) {
           code: "code" in error ? error.code : "REQUEST_FAILED",
           message:
             error instanceof Error ? error.message : "So‘rov bajarilmadi.",
+          ...("fields" in error && Array.isArray(error.fields) ? { fields: error.fields } : {}),
         },
       },
       { status: error.status },

@@ -1,5 +1,5 @@
 "use client";
-import { publicAsset } from "../lib/public-asset";
+import { isTemplateDocument, publicAsset } from "../lib/public-asset";
 
 import { useCallback, useEffect, type RefObject } from "react";
 import type { Invitation, Locale } from "@taklifnoma/contracts";
@@ -39,7 +39,7 @@ export function useInvitationExtras(
     if (!enabled) return;
     const target = frame.current?.contentWindow;
     const document = frame.current?.contentDocument;
-    if (!target || !document?.body) return;
+    if (!target || !document?.body || !isTemplateDocument(document.URL, window.location.origin)) return;
     const payload = JSON.parse(serialized);
     (target as Window & { __taklifnomaExtras?: unknown }).__taklifnomaExtras =
       payload;
@@ -47,6 +47,11 @@ export function useInvitationExtras(
       const script = document.createElement("script");
       script.dataset.editorSections = "";
       script.src = publicAsset("/templates/shared/editor-sections.js");
+      script.onload = () => {
+        // The first postMessage may precede this asynchronously loaded listener.
+        // Source onload handlers can also rebuild the DOM; replay the latest data.
+        target.postMessage({ type: "taklifnoma:editor-sections", payload: (target as Window & { __taklifnomaExtras?: unknown }).__taklifnomaExtras }, window.location.origin);
+      };
       document.body.append(script);
     }
     target.postMessage(

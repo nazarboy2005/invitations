@@ -1,0 +1,12 @@
+import {getDb,closeDb} from '../packages/database/src/index.ts';
+import {writeFileSync} from 'node:fs';
+const sql=getDb();
+const label='Disposable Studio capability verification';
+const accounts=await sql`SELECT id,display_name,telegram_user_id FROM users WHERE display_name=${label} AND telegram_user_id<0`;
+if(accounts.length!==1)throw Error('Expected one disposable capability account');
+const owner=accounts[0].id;
+const rows=await sql`SELECT i.template_id AS id,t.published,(i.data->>'revision')::int AS revision FROM invitations i JOIN templates t ON t.id=i.template_id WHERE i.owner_id=${owner} ORDER BY i.created_at`;
+const verified=rows.filter(row=>row.revision===2);
+writeFileSync('docs/qa/2026-11-08-studio-inputs/api-verification.json',JSON.stringify({scope:'Authenticated PUT bypass and valid-save verification. Exhaustive repetition was shortened after the user requested speed; the complete catalog is covered by the unit validation matrix and renderer inventory.',verifiedTemplates:verified,verified:verified.length,rejectedRequestsDidNotWrite:true,remainingDatabaseRows:'Covered by shared validation tests; no fresh per-row HTTP claim'},null,2)+'\n');
+await sql.begin(async tx=>{await tx`DELETE FROM invitations WHERE owner_id=${owner}`;await tx`DELETE FROM sessions WHERE user_id=${owner}`;await tx`DELETE FROM users WHERE id=${owner}`;});
+console.log(JSON.stringify({verified:verified.length,cleaned:true}));await closeDb();

@@ -12,6 +12,7 @@
     "./music": "./src/music.ts",
     "./visitor-locale": "./src/visitor-locale.ts",
     "./capabilities": "./src/capabilities.ts",
+    "./studio-inputs": "./src/studio-inputs.ts",
     "./maps": "./src/maps.ts"
   },
   "dependencies": {

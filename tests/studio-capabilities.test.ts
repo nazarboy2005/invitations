@@ -11,7 +11,7 @@ test("every catalog design explicitly declares supported slots, including maps",
   for (const template of TEMPLATES) {
     const c = templateCapabilities(template.id);
     assert.deepEqual(template.visitorFeatures, templateVisitorFeatures(template.id), template.id);
-    assert.equal(c.maps, true, template.id);
+    assert.equal(c.maps, !["girlsparty", "estelle", "bloom", "whiteless"].includes(template.id), template.id);
     assert.ok(c.people >= 1 && c.people <= 20, template.id);
     assert.ok(!c.receipts || c.gift, template.id);
   }
@@ -103,10 +103,11 @@ test("RSVP, receipt, age and story limits match different real designs", () => {
   assert.equal(normalizeInvitation(source).story.length, 2);
 });
 
-test("music defaults on, explicit off survives, and an empty selection is silent without a blocker", () => {
+test("music is opt-in, explicit off survives, and an empty selection is silent without a blocker", () => {
   const draft = createInvitation("anor");
-  assert.equal(draft.music.enabled, true);
-  assert.equal(draft.music.url, "/music/catalog/emotional-piano.mp3");
+  assert.equal(draft.music.enabled, false);
+  assert.equal(draft.music.url, "");
+  draft.music.url = "/music/catalog/emotional-piano.mp3";
   draft.music.enabled = false;
   assert.equal(normalizeInvitation(draft).music.enabled, false);
   assert.ok(normalizeInvitation(draft).music.url);

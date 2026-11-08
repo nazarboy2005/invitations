@@ -8,6 +8,7 @@ import {
 } from "../packages/contracts/src/index";
 import { createTemplatePreviewSample, hasAuthoredInvitationContent } from "../apps/web/src/modules/catalog/preview-sample";
 import { normalizeInvitation } from "../packages/contracts/src/capabilities";
+import { invitationForStorage, unsupportedInvitationInputs } from "../packages/contracts/src/studio-inputs";
 
 const hash = (bytes: Buffer) =>
   createHash("sha256").update(bytes).digest("hex");
@@ -73,10 +74,18 @@ for (const id of ["stained-glass", "sunset", "swan-garden"]) {
         imageAssetId: null,
       },
     ];
-    const normalized = normalizeInvitation(authored);
-    assert.deepEqual(normalized.templateData, authored.templateData);
-    assert.deepEqual(normalized.artistLineup, authored.artistLineup);
-    assert.deepEqual(normalized.contacts, authored.contacts);
+    // Previously saved content survives in storage; guest projection exposes
+    // only this design's supported slots. New hidden values are rejected.
+    assert.deepEqual(unsupportedInvitationInputs(authored, authored), []);
+    const stored = invitationForStorage(authored);
+    assert.deepEqual(stored.templateData, authored.templateData);
+    assert.deepEqual(stored.artistLineup, authored.artistLineup);
+    assert.deepEqual(stored.contacts, authored.contacts);
+    assert.ok(unsupportedInvitationInputs(authored).length > 0);
+    const visible = normalizeInvitation(stored);
+    assert.deepEqual(visible.templateData, {});
+    assert.deepEqual(visible.artistLineup, []);
+    assert.equal(visible.contacts.instagramUrl, "");
   });
 }
 test("standalone carousel reuses captured source engine without provider/React runtime", async () => {
