@@ -1,4 +1,5 @@
 "use client";
+import { TemplateFrame } from "@/templates/template-frame";
 
 import { useEffect, useMemo, useRef } from "react";
 import type { Invitation, Locale } from "@taklifnoma/contracts";
@@ -85,12 +86,12 @@ export function WedivoDiBalikKalkir({
       : styles.public;
   return (
     <div className={mode}>
-      <iframe
+      <TemplateFrame
         ref={frame}
         title={`${invitation.content[locale]?.people.slice(0, 2).join(" va ")} — Taklifnoma`}
         src="/templates/wedivo-di-balik-kalkir/index.html"
-        onLoad={(event) => {
-          const target = event.currentTarget.contentWindow;
+        onReady={(event) => {
+          const target = event.contentWindow;
           if (!target) return;
           target.name = JSON.stringify(latest.current);
           target.postMessage(latest.current, window.location.origin);

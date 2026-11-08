@@ -1,4 +1,5 @@
 "use client";
+import { TemplateFrame } from "@/templates/template-frame";
 
 import { useEffect, useMemo, useRef } from "react";
 import type { Invitation, Locale } from "@taklifnoma/contracts";
@@ -15,7 +16,7 @@ export function YomgirdanSongInvitation(props: YomgirdanSongProps) {
   latest.current = message;
   function send() { frame.current?.contentWindow?.postMessage(latest.current, window.location.origin); }
   useEffect(send,[message]);
-  return <div className={styles.frame}><iframe ref={frame}
+  return <div className={styles.frame}><TemplateFrame ref={frame}
     title={props.invitation.content[props.locale]?.title || "Yomg‘irdan so‘ng — Taklifnoma"}
-    src="/templates/taklifla-yomgirdan-song/index.html" onLoad={send} allow="autoplay" /></div>;
+    src="/templates/taklifla-yomgirdan-song/index.html" onReady={send} allow="autoplay" /></div>;
 }

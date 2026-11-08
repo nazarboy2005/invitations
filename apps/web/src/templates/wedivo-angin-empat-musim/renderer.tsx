@@ -1,4 +1,5 @@
 "use client";
+import { TemplateFrame } from "@/templates/template-frame";
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { Invitation, Locale } from "@taklifnoma/contracts";
@@ -95,11 +96,11 @@ export function WedivoAnginEmpatMusim({
         fullPreview ? styles.full : preview ? styles.preview : styles.public
       }
     >
-      <iframe
+      <TemplateFrame
         ref={frame}
         title={`${invitation.content[frameLocale]?.people.slice(0, 2).join(" & ")} ${{ "uz-Latn": "taklifnomasi", "uz-Cyrl": "таклифномаси", en: "invitation", ru: "приглашение" }[frameLocale]}`}
         src={`/templates/${ANGIN_TEMPLATE_ID}/index.html`}
-        onLoad={send}
+        onReady={send}
         allow="autoplay; fullscreen; clipboard-write"
         loading="eager"
       />

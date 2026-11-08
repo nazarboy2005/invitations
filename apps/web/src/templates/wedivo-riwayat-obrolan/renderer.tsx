@@ -1,4 +1,5 @@
 "use client";
+import { TemplateFrame } from "@/templates/template-frame";
 
 import { useCallback, useEffect, useMemo, useRef } from "react";
 import type { Invitation, Locale } from "@taklifnoma/contracts";
@@ -73,12 +74,12 @@ export function WedivoRiwayatObrolanInvitation({
         fullPreview ? styles.full : preview ? styles.preview : styles.public
       }
     >
-      <iframe
+      <TemplateFrame
         ref={frame}
         name={JSON.stringify(message)}
         title={`${message.payload.data.groom} & ${message.payload.data.bride} ${{ "uz-Latn": "taklifnomasi", "uz-Cyrl": "таклифномаси", en: "invitation", ru: "приглашение" }[locale]}`}
         src="/templates/wedivo-riwayat-obrolan/index.html"
-        onLoad={send}
+        onReady={send}
         allow="autoplay; fullscreen; clipboard-write"
         loading="eager"
       />

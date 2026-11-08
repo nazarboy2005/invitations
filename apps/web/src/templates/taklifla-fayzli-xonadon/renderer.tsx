@@ -1,4 +1,5 @@
 "use client";
+import { TemplateFrame } from "@/templates/template-frame";
 import { publicAsset } from "../../lib/public-asset";
 
 import { useInvitationMaps } from "@/templates/use-invitation-maps";
@@ -65,10 +66,10 @@ export function TakliflaFayzliXonadonInvitation({
     frame.current?.contentWindow?.postMessage(message, window.location.origin);
   }, [message]);
   return <div className={fullPreview ? styles.full : preview ? styles.preview : styles.public}>
-    <iframe ref={frame} name={JSON.stringify(message)}
+    <TemplateFrame ref={frame} name={JSON.stringify(message)}
       src={publicAsset("/templates/taklifla-fayzli-xonadon/index.html")}
       title={`${message.payload.content.hosts || "Fayzli Xonadon"} — taklifnoma`}
-      onLoad={() => frame.current?.contentWindow?.postMessage(latest.current, window.location.origin)}
+      onReady={() => frame.current?.contentWindow?.postMessage(latest.current, window.location.origin)}
       allow="autoplay" loading="eager" />
   </div>;
 }

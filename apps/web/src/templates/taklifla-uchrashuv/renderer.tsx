@@ -1,4 +1,5 @@
 "use client";
+import { TemplateFrame } from "@/templates/template-frame";
 
 import { useEffect, useMemo, useRef } from "react";
 import type { Invitation, Locale } from "@taklifnoma/contracts";
@@ -18,6 +19,6 @@ export function TakliflaUchrashuv({ invitation, invitationId, locale, guestName 
   useEffect(() => { send(); }, [message]);
   useEffect(()=>{const receive=(e:MessageEvent)=>{if(e.origin===window.location.origin && e.source===frame.current?.contentWindow && e.data?.type==="uchrashuv:ready")send();};addEventListener("message",receive);return()=>removeEventListener("message",receive);},[]);
   return <div className={fullPreview ? styles.full : preview ? styles.preview : styles.public}>
-    <iframe ref={frame} src="/templates/taklifla-uchrashuv/index.html" title={invitation.content[locale]?.title || "Uchrashuv maktubi"} onLoad={send} allow="autoplay" />
+    <TemplateFrame ref={frame} src="/templates/taklifla-uchrashuv/index.html" title={invitation.content[locale]?.title || "Uchrashuv maktubi"} onReady={send} allow="autoplay" />
   </div>;
 }

@@ -1,4 +1,5 @@
 "use client";
+import { TemplateFrame } from "@/templates/template-frame";
 
 import { useEffect, useMemo, useRef } from "react";
 import type { Invitation, Locale } from "@taklifnoma/contracts";
@@ -45,10 +46,10 @@ export function WedivoOathboundInvitation({
     frame.current?.contentWindow?.postMessage(message, window.location.origin);
   }, [message]);
   return <div className={fullPreview ? styles.full : preview ? styles.preview : styles.public}>
-    <iframe ref={frame} name={JSON.stringify(message)}
+    <TemplateFrame ref={frame} name={JSON.stringify(message)}
       title={`${message.payload.content.people.join(" & ")} — Ahd yo‘li`}
       src="/templates/wedivo-oathbound/index.html"
-      onLoad={() => frame.current?.contentWindow?.postMessage(latest.current, window.location.origin)}
+      onReady={() => frame.current?.contentWindow?.postMessage(latest.current, window.location.origin)}
       allow="autoplay; fullscreen; clipboard-write" loading="eager" />
   </div>;
 }

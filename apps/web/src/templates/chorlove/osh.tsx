@@ -1,4 +1,5 @@
 "use client";
+import { TemplateFrame } from "@/templates/template-frame";
 import { publicAsset } from "../../lib/public-asset";
 
 import { useInvitationMaps } from "@/templates/use-invitation-maps";
@@ -75,11 +76,11 @@ export function ChorloveOshInvitation({
 
   return (
     <div className={`${fullPreview ? styles.full : preview ? styles.preview : styles.public}${preview && qaMobile ? ` ${styles.qaMobile}` : ""}`}>
-      <iframe
+      <TemplateFrame
         ref={frame}
         title={`${data.groom} ${data.bride} Nahorgi osh taklifnomasi`}
         src={publicAsset("/templates/chorlove/osh/index.html")}
-        onLoad={() => frame.current?.contentWindow?.postMessage(latest.current, window.location.origin)}
+        onReady={() => frame.current?.contentWindow?.postMessage(latest.current, window.location.origin)}
         allow="autoplay; fullscreen"
         loading="eager"
       />

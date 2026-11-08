@@ -1,4 +1,5 @@
 "use client";
+import { TemplateFrame } from "@/templates/template-frame";
 import { publicAsset } from "../../lib/public-asset";
 
 import { useInvitationMaps } from "@/templates/use-invitation-maps";
@@ -31,8 +32,8 @@ export function MuhrliMaktubInvitation(props: MuhrliMaktubProps) {
   }
   useEffect(send, [message]);
   return <div className={styles.frame}>
-    <iframe ref={frame} title={props.invitation.content[props.locale]?.title || "Taklifnoma"}
-      src={publicAsset("/templates/taklifla-muhrli-maktub/index.html")} onLoad={send}
+    <TemplateFrame ref={frame} title={props.invitation.content[props.locale]?.title || "Taklifnoma"}
+      src={publicAsset("/templates/taklifla-muhrli-maktub/index.html")} onReady={send}
       allow="autoplay" loading="eager" />
   </div>;
 }

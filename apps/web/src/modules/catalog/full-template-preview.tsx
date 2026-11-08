@@ -15,8 +15,8 @@ import { isInvitateTemplate } from "@/templates/invitate/registry";
 
 import { isChorloveTemplate } from "@/templates/chorlove/registry";
 import { readBrowserDraft } from "@/modules/studio/draft-storage";
-import { pickPreviewMusic, type PreviewMusicTrack } from "./catalog-music";
-import { DEFAULT_INVITATION_MUSIC } from "@taklifnoma/contracts/music";
+import { pickPreviewMusic } from "./catalog-music";
+import { previewMusicLibrary, warmPreviewMusicLibrary } from "./preview-music-library";
 import { InvitationMusicAutoplay, InvitationMusicCredits } from "./invitation-view-tracker";
 import {
   createTemplatePreviewSample,
@@ -25,6 +25,7 @@ import {
 } from "./preview-sample";
 import styles from "./full-template-preview.module.css";
 import { observeTemplateDocuments } from "../../templates/observe-template-documents";
+import { prepareTemplateOpening } from "../../templates/prepare-template-opening";
 
 // Load only the renderer selected by this preview, rather than every design.
 const AnorInvitation = dynamic(() => import("@/templates/anor/renderer").then((module) => module.AnorInvitation));
@@ -109,28 +110,23 @@ export function FullTemplatePreview({
   const [readyTemplate, setReadyTemplate] = useState("");
 
   useEffect(() => {
-    if (cardPreview || posterCapture || !previewRef.current) return;
+    if (cardPreview || posterCapture || !previewRef.current || invitation?.templateId !== template.id) return;
     let active = true;
     setReadyTemplate("");
-    const cleanup = observeTemplateDocuments(previewRef.current, (doc) => {
-      const images = Array.from(doc.images).filter(image => {
-        const rect = image.getBoundingClientRect();
-        return rect.width > 0 && rect.height > 0 && rect.top < innerHeight && rect.bottom > 0;
-      });
-      // Keep the loader over the frame while fonts and visible images decode.
-      void Promise.race([
-        Promise.allSettled([doc.fonts.ready, ...images.map(image => image.decode())]),
-        new Promise(resolve => setTimeout(resolve, 8000)),
-      ]).then(() => requestAnimationFrame(() => requestAnimationFrame(() => {
+    const cleanup = observeTemplateDocuments(previewRef.current, (doc) =>
+      prepareTemplateOpening(doc, () => {
         if (active) setReadyTemplate(template.id);
-      })));
-    });
+      }),
+    );
     return () => { active = false; cleanup(); };
-  }, [cardPreview, posterCapture, template.id]);
+  }, [cardPreview, posterCapture, template.id, invitation?.templateId]);
 
   useEffect(() => {
     let active = true;
     async function load() {
+      // An abandoned StrictMode effect must not consume this opening's track.
+      await Promise.resolve();
+      if (!active) return;
       let candidate: Invitation | null = null;
       // Only the isolated cover worker injects this value. Never fall back to
       // catalog fixtures when rendering a creator's personalized cover.
@@ -178,18 +174,10 @@ export function FullTemplatePreview({
       setCatalogPreview(!candidateHasContent && !cardPreview && !posterCapture);
       const result = longNames && !candidateHasContent ? createLongNamePreview(resolved) : resolved;
       if (!candidateHasContent && !cardPreview && !posterCapture && !coverCapture) {
-        let tracks: PreviewMusicTrack[] | undefined;
-        try {
-          const response = await fetch("/api/music", { signal: AbortSignal.timeout(3000) });
-          if (response.ok) {
-            const data = await response.json();
-            if (Array.isArray(data.tracks) && data.tracks.length) tracks = [DEFAULT_INVITATION_MUSIC, ...data.tracks];
-          }
-        } catch { /* The bundled library is available even if the API is offline. */ }
-        if (!active) return;
+        void warmPreviewMusicLibrary();
         let previous = "";
         try { previous = sessionStorage.getItem("fotiha:preview-music") || ""; } catch {}
-        result.music = pickPreviewMusic(tracks, previous);
+        result.music = pickPreviewMusic(previewMusicLibrary(), previous);
         try { sessionStorage.setItem("fotiha:preview-music", result.music.url); } catch {}
       }
       if (!active) return;
@@ -372,7 +360,7 @@ export function FullTemplatePreview({
           </Link>
         )}
       </nav>}
-      {!invitation ? (
+      {!invitation || invitation.templateId !== template.id ? (
         <div className={styles.loading}>Dizayn ochilmoqda…</div>
       ) : template.id === "oltin-darvoza-ortidagi-baxt" ? (
         <OltinDarvozaInvitation invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} sampleWishes={catalogPreview} silentPlayback={silentPlayback} />

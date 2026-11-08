@@ -1,4 +1,5 @@
 "use client";
+import { TemplateFrame } from "@/templates/template-frame";
 
 import { useEffect, useMemo, useRef } from "react";
 import type { Invitation, Locale } from "@taklifnoma/contracts";
@@ -29,6 +30,6 @@ export function WedivoEternalRoseGarden({ fullPreview = false, qaMobile = false,
   useEffect(send, [message]);
   const mode = fullPreview ? styles.full : props.preview ? styles.preview : styles.public;
   return <div className={`${mode}${qaMobile && props.preview ? ` ${styles.mobile}` : ""}`}>
-    <iframe ref={frame} title={props.invitation.content[props.locale]?.title || "So‘lmas atirgullar"} src="/templates/wedivo-eternal-rose-garden/index.html" onLoad={send} allow="autoplay; fullscreen; clipboard-write" loading="eager" />
+    <TemplateFrame ref={frame} title={props.invitation.content[props.locale]?.title || "So‘lmas atirgullar"} src="/templates/wedivo-eternal-rose-garden/index.html" onReady={send} allow="autoplay; fullscreen; clipboard-write" loading="eager" />
   </div>;
 }

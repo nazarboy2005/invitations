@@ -1,4 +1,5 @@
 "use client";
+import { TemplateFrame } from "@/templates/template-frame";
 import { publicAsset } from "../../../lib/public-asset";
 
 import { useInvitationMaps } from "@/templates/use-invitation-maps";
@@ -80,11 +81,11 @@ export function SamarqandPeshtoqInvitation({
   const mode = fullPreview ? styles.full : preview ? styles.preview : styles.public;
   return (
     <div className={mode}>
-      <iframe
+      <TemplateFrame
         ref={frame}
         title={`${message.groom} & ${message.bride} invitation`}
         src={frameUrl}
-        onLoad={() => {
+        onReady={() => {
           const target = frame.current?.contentWindow;
           if (!target) return;
           target.name = JSON.stringify(latest.current);

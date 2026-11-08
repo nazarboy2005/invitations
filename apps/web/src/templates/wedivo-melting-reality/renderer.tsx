@@ -1,4 +1,5 @@
 "use client";
+import { TemplateFrame } from "@/templates/template-frame";
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { Invitation, Locale } from "@taklifnoma/contracts";
@@ -29,9 +30,9 @@ export function WedivoMeltingRealityInvitation({ invitation, locale, fullPreview
     frame.current?.contentWindow?.postMessage(message, window.location.origin);
   }, [message]);
   return <div className={`${fullPreview ? styles.full : options.preview ? styles.preview : styles.public}${qaMobile && options.preview ? ` ${styles.mobile}` : ""}`}>
-    <iframe ref={frame} title={invitation.content[frameLocale]?.people.filter(Boolean).join(" & ") || "Tush va haqiqat"}
+    <TemplateFrame ref={frame} title={invitation.content[frameLocale]?.people.filter(Boolean).join(" & ") || "Tush va haqiqat"}
       src="/templates/wedivo-melting-reality/index.html"
-      onLoad={() => frame.current?.contentWindow?.postMessage(latest.current, window.location.origin)}
+      onReady={() => frame.current?.contentWindow?.postMessage(latest.current, window.location.origin)}
       allow="autoplay; fullscreen; clipboard-write" loading="eager" />
   </div>;
 }

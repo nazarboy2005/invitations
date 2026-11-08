@@ -1,0 +1,1356 @@
+{
+  "/templates/atlas/preview.webp": {
+    "url": "/templates/_optimized/1eecc5effb889a3b70dce3a4.webp",
+    "kind": "image",
+    "originalBytes": 1039432,
+    "bytes": 229888
+  },
+  "/templates/aurelia/assets/images/0310/1.png": {
+    "url": "/templates/_optimized/6e3166d155b919188b360ac2.webp",
+    "kind": "image",
+    "originalBytes": 786042,
+    "bytes": 41496
+  },
+  "/templates/aurelia/assets/previews/template/aurelia/hands.mp4": {
+    "url": "/templates/_optimized/5012cf23f83b695a42b21aac.mp4",
+    "kind": "video",
+    "originalBytes": 3416309,
+    "bytes": 1717960
+  },
+  "/templates/aurelia/preview.png": {
+    "url": "/templates/_optimized/2734d5fa1dfc8e64e701a4cd.webp",
+    "kind": "image",
+    "originalBytes": 299096,
+    "bytes": 35944
+  },
+  "/templates/bulbul/catalog-cover-opening.png": {
+    "url": "/templates/_optimized/70b4d564e7bfedcab2c56a8c.webp",
+    "kind": "image",
+    "originalBytes": 386032,
+    "bytes": 28352
+  },
+  "/templates/bulbul/preview-350.png": {
+    "url": "/templates/_optimized/5717ac87aa33b7a509694572.webp",
+    "kind": "image",
+    "originalBytes": 422444,
+    "bytes": 27944
+  },
+  "/templates/bulbul/preview-550.png": {
+    "url": "/templates/_optimized/4fd84a9693736f796ba7019b.webp",
+    "kind": "image",
+    "originalBytes": 710925,
+    "bytes": 103014
+  },
+  "/templates/bulbul/preview-750.png": {
+    "url": "/templates/_optimized/75662e1b17993a292cc06f6e.webp",
+    "kind": "image",
+    "originalBytes": 712152,
+    "bytes": 103560
+  },
+  "/templates/bulbul/preview.png": {
+    "url": "/templates/_optimized/5717ac87aa33b7a509694572.webp",
+    "kind": "image",
+    "originalBytes": 422444,
+    "bytes": 27944
+  },
+  "/templates/butterfly/assets/images/afina/image.png": {
+    "url": "/templates/_optimized/4f90352ab8151c6680cdb343.webp",
+    "kind": "image",
+    "originalBytes": 614213,
+    "bytes": 48888
+  },
+  "/templates/butterfly/assets/images/afina/image2.png": {
+    "url": "/templates/_optimized/dd4e10382d616ccce3a2aed2.webp",
+    "kind": "image",
+    "originalBytes": 757254,
+    "bytes": 50834
+  },
+  "/templates/butterfly/assets/images/afina/image3.png": {
+    "url": "/templates/_optimized/9acaf363c91991a6d8d9574a.webp",
+    "kind": "image",
+    "originalBytes": 734650,
+    "bytes": 46906
+  },
+  "/templates/butterfly/assets/images/afina/image4.png": {
+    "url": "/templates/_optimized/862b52bfd076c4ab80af48e0.webp",
+    "kind": "image",
+    "originalBytes": 550997,
+    "bytes": 50710
+  },
+  "/templates/butterfly/assets/images/opening/rasm1.png": {
+    "url": "/templates/_optimized/76cbfaa44be142a3c65b5324.webp",
+    "kind": "image",
+    "originalBytes": 1890041,
+    "bytes": 120506
+  },
+  "/templates/butterfly/assets/images/rasm1.png": {
+    "url": "/templates/_optimized/76cbfaa44be142a3c65b5324.webp",
+    "kind": "image",
+    "originalBytes": 1890041,
+    "bytes": 120506
+  },
+  "/templates/chorlove/orchid-amplop/assets/catalog-opening.png": {
+    "url": "/templates/_optimized/8d2f65295c8d1259b8a723ff.webp",
+    "kind": "image",
+    "originalBytes": 603628,
+    "bytes": 114498
+  },
+  "/templates/chorlove/osh/palov.png": {
+    "url": "/templates/_optimized/a48bb6e14b33bcdb81bae79a.webp",
+    "kind": "image",
+    "originalBytes": 344148,
+    "bytes": 53214
+  },
+  "/templates/chorlove/palov/assets/palov.png": {
+    "url": "/templates/_optimized/a48bb6e14b33bcdb81bae79a.webp",
+    "kind": "image",
+    "originalBytes": 344148,
+    "bytes": 53214
+  },
+  "/templates/cloud-castle/assets/gift/gift.webp": {
+    "url": "/templates/_optimized/2a7bf298a16b4b251c243a6a.webp",
+    "kind": "image",
+    "originalBytes": 643712,
+    "bytes": 519910
+  },
+  "/templates/cloud-castle/preview-opening.png": {
+    "url": "/templates/_optimized/4070a91c3bb6571ed9f8aa60.webp",
+    "kind": "image",
+    "originalBytes": 543270,
+    "bytes": 84052
+  },
+  "/templates/doira/preview.png": {
+    "url": "/templates/_optimized/f2edf49956e5e4fda3d96744.webp",
+    "kind": "image",
+    "originalBytes": 474882,
+    "bytes": 35212
+  },
+  "/templates/evelina/assets/previews/template/evelina/dresscode.png": {
+    "url": "/templates/_optimized/cd33a7037bc00e0e2810bdab.webp",
+    "kind": "image",
+    "originalBytes": 1269489,
+    "bytes": 82834
+  },
+  "/templates/evelina/assets/previews/template/evelina/hero.png": {
+    "url": "/templates/_optimized/4d21f9a0330942e7148dcd62.webp",
+    "kind": "image",
+    "originalBytes": 990883,
+    "bytes": 69470
+  },
+  "/templates/evelina/assets/previews/template/evelina/location.png": {
+    "url": "/templates/_optimized/215f3762e65c5b54f3f1c76c.webp",
+    "kind": "image",
+    "originalBytes": 1809849,
+    "bytes": 229786
+  },
+  "/templates/evelina/assets/previews/template/evelina/lock-cover.mp4": {
+    "url": "/templates/_optimized/de5d72e18172c9f1259dfbe8.mp4",
+    "kind": "video",
+    "originalBytes": 3875841,
+    "bytes": 1993366
+  },
+  "/templates/fairy/assets/images/fairy/circleback.png": {
+    "url": "/templates/_optimized/e0dd60ebb510b38a27acf83c.webp",
+    "kind": "image",
+    "originalBytes": 1631017,
+    "bytes": 303140
+  },
+  "/templates/fairy/assets/images/fairy/couple.png": {
+    "url": "/templates/_optimized/273bb75aed67fec5dcd2b5f9.webp",
+    "kind": "image",
+    "originalBytes": 273476,
+    "bytes": 99818
+  },
+  "/templates/fairy/assets/images/fairy/dresscode.png": {
+    "url": "/templates/_optimized/1de2ab8bb87495f75b2eceea.webp",
+    "kind": "image",
+    "originalBytes": 1170586,
+    "bytes": 189972
+  },
+  "/templates/fairy/assets/images/fairy/heart.png": {
+    "url": "/templates/_optimized/37c48eaf254d61be34d8704c.webp",
+    "kind": "image",
+    "originalBytes": 1515942,
+    "bytes": 160672
+  },
+  "/templates/fairy/assets/images/fairy/heroback.png": {
+    "url": "/templates/_optimized/4565341626ab253879c93eb6.webp",
+    "kind": "image",
+    "originalBytes": 2251374,
+    "bytes": 210766
+  },
+  "/templates/fairy/assets/images/fairy/heroram.png": {
+    "url": "/templates/_optimized/436b5f78ad74409624f69334.webp",
+    "kind": "image",
+    "originalBytes": 597394,
+    "bytes": 152180
+  },
+  "/templates/fairy/assets/images/fairy/location.png": {
+    "url": "/templates/_optimized/bd7f4835a35ca61b2f2127b7.webp",
+    "kind": "image",
+    "originalBytes": 913328,
+    "bytes": 111162
+  },
+  "/templates/fairy/assets/images/fairy/programm.png": {
+    "url": "/templates/_optimized/6d3b4ee7e6f79a70f144a7b7.webp",
+    "kind": "image",
+    "originalBytes": 1900715,
+    "bytes": 196158
+  },
+  "/templates/fairy/assets/images/fairy/qandil.png": {
+    "url": "/templates/_optimized/770759b4626231e2cbd6aca0.webp",
+    "kind": "image",
+    "originalBytes": 329204,
+    "bytes": 115180
+  },
+  "/templates/fairy/preview.png": {
+    "url": "/templates/_optimized/21bae0f22dfd89b26b2598fe.webp",
+    "kind": "image",
+    "originalBytes": 621544,
+    "bytes": 74924
+  },
+  "/templates/ganch/preview-browser-capture.jpg": {
+    "url": "/templates/_optimized/1fa91bba3c18646edeb3040e.webp",
+    "kind": "image",
+    "originalBytes": 201670,
+    "bytes": 114732
+  },
+  "/templates/golden-card/assets/corner.png": {
+    "url": "/templates/_optimized/0df6dacac7508d082edb3513.webp",
+    "kind": "image",
+    "originalBytes": 313703,
+    "bytes": 149814
+  },
+  "/templates/golden-card/assets/mandala.png": {
+    "url": "/templates/_optimized/6012d6f4a3728dba5476ac06.webp",
+    "kind": "image",
+    "originalBytes": 441719,
+    "bytes": 162196
+  },
+  "/templates/golden-hour/assets/images/golden-hour/flocake.png": {
+    "url": "/templates/_optimized/08962cc5153da4c3cded740e.webp",
+    "kind": "image",
+    "originalBytes": 796446,
+    "bytes": 88996
+  },
+  "/templates/golden-hour/assets/images/golden-hour/flowers.png": {
+    "url": "/templates/_optimized/9fd6dab731c18857993434fb.webp",
+    "kind": "image",
+    "originalBytes": 634299,
+    "bytes": 75844
+  },
+  "/templates/golden-hour/assets/images/golden-hour/footerimage.png": {
+    "url": "/templates/_optimized/1d7e3983d0f8955236b7f694.webp",
+    "kind": "image",
+    "originalBytes": 3024606,
+    "bytes": 341008
+  },
+  "/templates/golden-hour/assets/images/golden-hour/location.png": {
+    "url": "/templates/_optimized/0f374c1a3414f0041c68840b.webp",
+    "kind": "image",
+    "originalBytes": 727267,
+    "bytes": 80992
+  },
+  "/templates/golden-hour/assets/images/golden-hour/pink.png": {
+    "url": "/templates/_optimized/dc3c533e628a30588aceb6eb.webp",
+    "kind": "image",
+    "originalBytes": 1496939,
+    "bytes": 98798
+  },
+  "/templates/green-garden/assets/flower1-decoration.webp": {
+    "url": "/templates/_optimized/4c87347317928e67d87b5fac.webp",
+    "kind": "image",
+    "originalBytes": 395060,
+    "bytes": 331122
+  },
+  "/templates/green-garden/assets/flower2-decoration.webp": {
+    "url": "/templates/_optimized/a1995ad9c500aea79cf44d62.webp",
+    "kind": "image",
+    "originalBytes": 373694,
+    "bytes": 290794
+  },
+  "/templates/green-garden/assets/flower3-decoration.webp": {
+    "url": "/templates/_optimized/a52dd96a8106a676dcde75e3.webp",
+    "kind": "image",
+    "originalBytes": 274778,
+    "bytes": 228270
+  },
+  "/templates/green-garden/assets/flower4-decoration.webp": {
+    "url": "/templates/_optimized/2f2c0fbef527725a9b055f48.webp",
+    "kind": "image",
+    "originalBytes": 392526,
+    "bytes": 314188
+  },
+  "/templates/green-garden/assets/flower5-bottom.webp": {
+    "url": "/templates/_optimized/f4358878f96bc1cb10f6cb0d.webp",
+    "kind": "image",
+    "originalBytes": 440580,
+    "bytes": 315366
+  },
+  "/templates/green-garden/catalog-cover-opening.png": {
+    "url": "/templates/_optimized/a109fb732d6b8797660e5abf.webp",
+    "kind": "image",
+    "originalBytes": 340223,
+    "bytes": 35714
+  },
+  "/templates/green-gold/catalog-cover-opening.png": {
+    "url": "/templates/_optimized/a6b4788bcc5561e8c1093706.webp",
+    "kind": "image",
+    "originalBytes": 230928,
+    "bytes": 37996
+  },
+  "/templates/green-white/assets/header-pic.webp": {
+    "url": "/templates/_optimized/c57a25cea96432ceef2581f7.webp",
+    "kind": "image",
+    "originalBytes": 348244,
+    "bytes": 299206
+  },
+  "/templates/invitate-nahorgi-osh/assets/images/palov.png": {
+    "url": "/templates/_optimized/a48bb6e14b33bcdb81bae79a.webp",
+    "kind": "image",
+    "originalBytes": 344148,
+    "bytes": 53214
+  },
+  "/templates/invitate-palov/assets/images/palov.png": {
+    "url": "/templates/_optimized/a48bb6e14b33bcdb81bae79a.webp",
+    "kind": "image",
+    "originalBytes": 344148,
+    "bytes": 53214
+  },
+  "/templates/invitate-wedding/assets/images/wedding/davron.png": {
+    "url": "/templates/_optimized/aafacc039d3bd97c7af673e5.webp",
+    "kind": "image",
+    "originalBytes": 276516,
+    "bytes": 34712
+  },
+  "/templates/invitate-wedding/assets/images/wedding/fano.png": {
+    "url": "/templates/_optimized/0bf428cb361504c8c36d5672.webp",
+    "kind": "image",
+    "originalBytes": 270333,
+    "bytes": 25672
+  },
+  "/templates/invitate-wedding/assets/images/wedding/munisa.png": {
+    "url": "/templates/_optimized/63d8637bca35e26b0f175d18.webp",
+    "kind": "image",
+    "originalBytes": 235076,
+    "bytes": 19248
+  },
+  "/templates/invitate-wedding/assets/images/wedding/nilufar.png": {
+    "url": "/templates/_optimized/e14373247359a0c728fe463e.webp",
+    "kind": "image",
+    "originalBytes": 237103,
+    "bytes": 20362
+  },
+  "/templates/invitate-wedding/assets/images/wedding/yulduz.png": {
+    "url": "/templates/_optimized/bc7b9cd8266efee0233c980a.webp",
+    "kind": "image",
+    "originalBytes": 204730,
+    "bytes": 19224
+  },
+  "/templates/invitate-wedding/assets/video/banner.mp4": {
+    "url": "/templates/_optimized/e228be90d0fd53f12c104016.mp4",
+    "kind": "video",
+    "originalBytes": 3874929,
+    "bytes": 2000759
+  },
+  "/templates/jasmine-white/assets/90085094-65d3-45d4-82da-de8d127a859c.webp": {
+    "url": "/templates/_optimized/1434f9781474ef23929759e1.webp",
+    "kind": "image",
+    "originalBytes": 221524,
+    "bytes": 116054
+  },
+  "/templates/jasmine-white/assets/d0db2a4e-83f8-4b84-a46d-fc2fefe45cfa.webp": {
+    "url": "/templates/_optimized/52c6b9afaaf4a4dea67bc355.webp",
+    "kind": "image",
+    "originalBytes": 253014,
+    "bytes": 152270
+  },
+  "/templates/jasmine-white/assets/fcd26341-5041-40ad-9cc9-d69a47422378.webp": {
+    "url": "/templates/_optimized/652b2306550778f7c5038825.webp",
+    "kind": "image",
+    "originalBytes": 285398,
+    "bytes": 254390
+  },
+  "/templates/konfetti/preview-capture.png": {
+    "url": "/templates/_optimized/a1ccd3ac3ec4430087fcc14f.webp",
+    "kind": "image",
+    "originalBytes": 245291,
+    "bytes": 14830
+  },
+  "/templates/lace/assets/countdown-bows-ivory.png": {
+    "url": "/templates/_optimized/fba9c72d0ba1f4a472610025.webp",
+    "kind": "image",
+    "originalBytes": 377102,
+    "bytes": 204430
+  },
+  "/templates/lace/assets/dress-code-frame.png": {
+    "url": "/templates/_optimized/3ecc0b1c89a6607345fcdce2.webp",
+    "kind": "image",
+    "originalBytes": 1170089,
+    "bytes": 155948
+  },
+  "/templates/lace/assets/event-ceremony.png": {
+    "url": "/templates/_optimized/ba2391c5ab2bee571865f0b2.webp",
+    "kind": "image",
+    "originalBytes": 513298,
+    "bytes": 78184
+  },
+  "/templates/lace/assets/event-cocktail.png": {
+    "url": "/templates/_optimized/c1e6edf0fa03273296661e17.webp",
+    "kind": "image",
+    "originalBytes": 333850,
+    "bytes": 43606
+  },
+  "/templates/lace/assets/event-welcome.png": {
+    "url": "/templates/_optimized/61429493e523921257ec61a3.webp",
+    "kind": "image",
+    "originalBytes": 525979,
+    "bytes": 87272
+  },
+  "/templates/lace/assets/hero-bg.mp4": {
+    "url": "/templates/_optimized/9ec252d736ecbbde98e6da33.mp4",
+    "kind": "video",
+    "originalBytes": 584229,
+    "bytes": 500809
+  },
+  "/templates/lace/assets/hotel-ornament.png": {
+    "url": "/templates/_optimized/99511e18385bc135b1572c33.webp",
+    "kind": "image",
+    "originalBytes": 331049,
+    "bytes": 79364,
+    "width": 902,
+    "height": 267
+  },
+  "/templates/lace/assets/pearl-garland-2-base.png": {
+    "url": "/templates/_optimized/92225eca3fab69ac87a6ccc4.webp",
+    "kind": "image",
+    "originalBytes": 326635,
+    "bytes": 134436,
+    "width": 1774,
+    "height": 887
+  },
+  "/templates/love-sakura/assets/cherry-7.png": {
+    "url": "/templates/_optimized/7ab95890b8d7d5ab8fe6e9f3.webp",
+    "kind": "image",
+    "originalBytes": 203666,
+    "bytes": 49624,
+    "width": 360,
+    "height": 354
+  },
+  "/templates/love-sakura/assets/pngwing-medium.png": {
+    "url": "/templates/_optimized/91f72cd903c4363a594ad233.webp",
+    "kind": "image",
+    "originalBytes": 234613,
+    "bytes": 78712,
+    "width": 315,
+    "height": 402
+  },
+  "/templates/love-sakura/catalog-opening.png": {
+    "url": "/templates/_optimized/a99bba38fc940db26396fe25.webp",
+    "kind": "image",
+    "originalBytes": 1202710,
+    "bytes": 118658,
+    "width": 900,
+    "height": 1444
+  },
+  "/templates/luxury-gold/assets/bride-groom.jpg": {
+    "url": "/templates/_optimized/f38d48cb414078319f9632f1.webp",
+    "kind": "image",
+    "originalBytes": 658786,
+    "bytes": 393246,
+    "width": 1920,
+    "height": 1280
+  },
+  "/templates/moviy-ravoq-card/preview.webp": {
+    "url": "/templates/_optimized/a03ed9e1deb02c5b03d6a29a.webp",
+    "kind": "image",
+    "originalBytes": 226972,
+    "bytes": 180742,
+    "width": 750,
+    "height": 1050
+  },
+  "/templates/nahor/preview-capture.png": {
+    "url": "/templates/_optimized/58f26e11972002f6f4fbd5df.webp",
+    "kind": "image",
+    "originalBytes": 580239,
+    "bytes": 85302,
+    "width": 480,
+    "height": 720
+  },
+  "/templates/oltin-uzuk/catalog-cover-opening.png": {
+    "url": "/templates/_optimized/fbe3898ffe05dea7cbafc651.webp",
+    "kind": "image",
+    "originalBytes": 228642,
+    "bytes": 17850,
+    "width": 450,
+    "height": 800
+  },
+  "/templates/oq-kabutar/preview-opening.png": {
+    "url": "/templates/_optimized/60abd7bdd49190c425761da7.webp",
+    "kind": "image",
+    "originalBytes": 243021,
+    "bytes": 21738,
+    "width": 450,
+    "height": 800
+  },
+  "/templates/oynavand/preview.png": {
+    "url": "/templates/_optimized/a28c4c1be5c82b212f03cdcc.webp",
+    "kind": "image",
+    "originalBytes": 1193045,
+    "bytes": 137634,
+    "width": 640,
+    "height": 1280
+  },
+  "/templates/oynavand/preview.webp": {
+    "url": "/templates/_optimized/1c801a9fec57db57326ccc86.webp",
+    "kind": "image",
+    "originalBytes": 210962,
+    "bytes": 141792,
+    "width": 640,
+    "height": 1280
+  },
+  "/templates/palace-rose/preview.webp": {
+    "url": "/templates/_optimized/3883e1199316d7e91a58e5ba.webp",
+    "kind": "image",
+    "originalBytes": 380016,
+    "bytes": 34904,
+    "width": 450,
+    "height": 800
+  },
+  "/templates/parda/preview.webp": {
+    "url": "/templates/_optimized/79861ed09737f9316930597a.webp",
+    "kind": "image",
+    "originalBytes": 512182,
+    "bytes": 103864,
+    "width": 480,
+    "height": 853
+  },
+  "/templates/safir/assets/images/0310/1.png": {
+    "url": "/templates/_optimized/6e3166d155b919188b360ac2.webp",
+    "kind": "image",
+    "originalBytes": 786042,
+    "bytes": 41496
+  },
+  "/templates/safir/assets/images/0310/3.png": {
+    "url": "/templates/_optimized/c3509133c6b6d1a3c97672f3.webp",
+    "kind": "image",
+    "originalBytes": 1192486,
+    "bytes": 113316,
+    "width": 800,
+    "height": 1200
+  },
+  "/templates/safir/assets/images/safir/bottom.png": {
+    "url": "/templates/_optimized/03e2ec154863ce777622f9bc.webp",
+    "kind": "image",
+    "originalBytes": 629051,
+    "bytes": 251086,
+    "width": 1220,
+    "height": 600
+  },
+  "/templates/safir/assets/images/safir/heartbackground.png": {
+    "url": "/templates/_optimized/210fa2b2b601c7c9a49c7535.webp",
+    "kind": "image",
+    "originalBytes": 1226246,
+    "bytes": 161420,
+    "width": 764,
+    "height": 1009
+  },
+  "/templates/safir/assets/images/safir/image.png": {
+    "url": "/templates/_optimized/1b388d9a6684ff8f150af3ee.webp",
+    "kind": "image",
+    "originalBytes": 1531700,
+    "bytes": 137936,
+    "width": 871,
+    "height": 1216
+  },
+  "/templates/safir/assets/images/safir/top.png": {
+    "url": "/templates/_optimized/7c934582e2c10e214200ce39.webp",
+    "kind": "image",
+    "originalBytes": 630243,
+    "bytes": 251416,
+    "width": 1220,
+    "height": 600
+  },
+  "/templates/safir/catalog-cover-opening.png": {
+    "url": "/templates/_optimized/1aabf1845d5ca1d2e065da2a.webp",
+    "kind": "image",
+    "originalBytes": 463119,
+    "bytes": 35788,
+    "width": 430,
+    "height": 931
+  },
+  "/templates/sahro-fonusi/preview-capture.png": {
+    "url": "/templates/_optimized/7152e74dda179ba5ada89797.webp",
+    "kind": "image",
+    "originalBytes": 965222,
+    "bytes": 74846,
+    "width": 720,
+    "height": 1280
+  },
+  "/templates/samarqand-kechasi/preview-capture.png": {
+    "url": "/templates/_optimized/b4f7548b6bcdfc77b9f3ca25.webp",
+    "kind": "image",
+    "originalBytes": 1176025,
+    "bytes": 66492,
+    "width": 560,
+    "height": 1280
+  },
+  "/templates/shahzoda/art/balloons.png": {
+    "url": "/templates/_optimized/e96715dde3d5d6c6f18092f1.webp",
+    "kind": "image",
+    "originalBytes": 372434,
+    "bytes": 106536,
+    "width": 960,
+    "height": 480
+  },
+  "/templates/stained-glass/assets/dancing-couple-glass.webp": {
+    "url": "/templates/_optimized/3ab1efb5ecf07cdf23a31e6b.webp",
+    "kind": "image",
+    "originalBytes": 577966,
+    "bytes": 456612,
+    "width": 1672,
+    "height": 941
+  },
+  "/templates/stained-glass/assets/gift-glass.webp": {
+    "url": "/templates/_optimized/741b91c2e4f7e50596ddcc5b.webp",
+    "kind": "image",
+    "originalBytes": 209398,
+    "bytes": 170254,
+    "width": 1010,
+    "height": 848
+  },
+  "/templates/stained-glass/assets/glass-frame.webp": {
+    "url": "/templates/_optimized/3682b114d4b26d08e5440979.webp",
+    "kind": "image",
+    "originalBytes": 459784,
+    "bytes": 153612,
+    "width": 682,
+    "height": 1024
+  },
+  "/templates/stained-glass/assets/hero-final.webp": {
+    "url": "/templates/_optimized/c21c6767e267d41768394cc5.webp",
+    "kind": "image",
+    "originalBytes": 759914,
+    "bytes": 282770,
+    "width": 1046,
+    "height": 1920
+  },
+  "/templates/stained-glass/assets/hourglass.webp": {
+    "url": "/templates/_optimized/0ecd4ee795badd1d2526cf29.webp",
+    "kind": "image",
+    "originalBytes": 1139092,
+    "bytes": 297516,
+    "width": 1024,
+    "height": 1536
+  },
+  "/templates/stained-glass/assets/intro-doors-c.mp4": {
+    "url": "/templates/_optimized/47f327bbc31379724a5ceec4.mp4",
+    "kind": "video",
+    "originalBytes": 2216600,
+    "bytes": 1751597
+  },
+  "/templates/stained-glass/assets/venue-frame-glass.webp": {
+    "url": "/templates/_optimized/9e5a754fad9b503930405ab0.webp",
+    "kind": "image",
+    "originalBytes": 887180,
+    "bytes": 185454,
+    "width": 941,
+    "height": 1672
+  },
+  "/templates/stained-glass/assets/venue-palace-ivy-glass.webp": {
+    "url": "/templates/_optimized/3745225a78f3b91187e920e8.webp",
+    "kind": "image",
+    "originalBytes": 1450934,
+    "bytes": 534778,
+    "width": 1536,
+    "height": 1024
+  },
+  "/templates/suzani/preview-capture.png": {
+    "url": "/templates/_optimized/d11edfc87eecc0d8d5f9b8d7.webp",
+    "kind": "image",
+    "originalBytes": 587410,
+    "bytes": 96378,
+    "width": 450,
+    "height": 800
+  },
+  "/templates/taklifla-asalari/preview.webp": {
+    "url": "/templates/_optimized/217c3634f7ea3805f5098d6f.webp",
+    "kind": "image",
+    "originalBytes": 370156,
+    "bytes": 48318,
+    "width": 430,
+    "height": 717
+  },
+  "/templates/taklifla-fayzli-xonadon/assets/art/house.jpg": {
+    "url": "/templates/_optimized/b312b8045cfbb4fa906dea05.webp",
+    "kind": "image",
+    "originalBytes": 215720,
+    "bytes": 168404,
+    "width": 1200,
+    "height": 800
+  },
+  "/templates/taklifla-muhrli-maktub/envelope-img/01-desk-splash.webp": {
+    "url": "/templates/_optimized/d5a0ecf683d51a0f291cc4cf.webp",
+    "kind": "image",
+    "originalBytes": 234544,
+    "bytes": 205132,
+    "width": 941,
+    "height": 1672
+  },
+  "/templates/taklifla-muhrli-maktub/envelope-img/06-footer-desk.webp": {
+    "url": "/templates/_optimized/6f0fd9199c1d23cdeee27261.webp",
+    "kind": "image",
+    "originalBytes": 220310,
+    "bytes": 187536,
+    "width": 1536,
+    "height": 1024
+  },
+  "/templates/taklifla-muhrli-maktub/envelope-img/09-ribbon.webp": {
+    "url": "/templates/_optimized/b53c3cbb7651358130dca83d.webp",
+    "kind": "image",
+    "originalBytes": 256512,
+    "bytes": 167986,
+    "width": 1920,
+    "height": 640
+  },
+  "/templates/taklifla-muhrli-maktub/preview.webp": {
+    "url": "/templates/_optimized/4edb1082ea82ccba3e506b45.webp",
+    "kind": "image",
+    "originalBytes": 883050,
+    "bytes": 112194,
+    "width": 720,
+    "height": 1200
+  },
+  "/templates/taklifla-oltin-yol/oltin-yol-img/fields.webp": {
+    "url": "/templates/_optimized/6746abcdd0190dedd0b5bf1e.webp",
+    "kind": "image",
+    "originalBytes": 289826,
+    "bytes": 255276,
+    "width": 1495,
+    "height": 1052
+  },
+  "/templates/taklifla-oltin-yol/oltin-yol-img/hero.webp": {
+    "url": "/templates/_optimized/5d2c0db62b209b34ff094996.webp",
+    "kind": "image",
+    "originalBytes": 282434,
+    "bytes": 239618,
+    "width": 1024,
+    "height": 1536
+  },
+  "/templates/taklifla-oltin-yol/oltin-yol-img/ticket.webp": {
+    "url": "/templates/_optimized/b30ab102ab7178ab20499b7d.webp",
+    "kind": "image",
+    "originalBytes": 279744,
+    "bytes": 236626,
+    "width": 1060,
+    "height": 1484
+  },
+  "/templates/taklifla-oltin-yol/oltin-yol-img/train-side.webp": {
+    "url": "/templates/_optimized/f79e24b17e9d673813815642.webp",
+    "kind": "image",
+    "originalBytes": 248576,
+    "bytes": 186178,
+    "width": 1920,
+    "height": 640
+  },
+  "/templates/taklifla-oltin-yol/oltin-yol-img/viaduct.webp": {
+    "url": "/templates/_optimized/98f2cea847e4170e6f02ec0e.webp",
+    "kind": "image",
+    "originalBytes": 327498,
+    "bytes": 290162,
+    "width": 1494,
+    "height": 1052
+  },
+  "/templates/taklifla-qogoz-ertagi/qogoz-img/count-back.webp": {
+    "url": "/templates/_optimized/4e8b51e1fa99915323275584.webp",
+    "kind": "image",
+    "originalBytes": 348220,
+    "bytes": 308538,
+    "width": 1024,
+    "height": 1536
+  },
+  "/templates/taklifla-qogoz-ertagi/qogoz-img/hero-back.webp": {
+    "url": "/templates/_optimized/29a337dd89f6625e202408cb.webp",
+    "kind": "image",
+    "originalBytes": 324426,
+    "bytes": 288146,
+    "width": 1024,
+    "height": 1536
+  },
+  "/templates/taklifla-sakura-guli/sakura-img/waterfall.webp": {
+    "url": "/templates/_optimized/a2ebc813022105045715efde.webp",
+    "kind": "image",
+    "originalBytes": 402048,
+    "bytes": 350494,
+    "width": 1024,
+    "height": 1536
+  },
+  "/templates/taklifla-tort-fasl/fasllar-img/divider-autumn.webp": {
+    "url": "/templates/_optimized/8f0dc7dd33b1b9559babeffe.webp",
+    "kind": "image",
+    "originalBytes": 321820,
+    "bytes": 283690,
+    "width": 1774,
+    "height": 887
+  },
+  "/templates/taklifla-tort-fasl/fasllar-img/divider-summer.webp": {
+    "url": "/templates/_optimized/a458382eb2073c4c7af83886.webp",
+    "kind": "image",
+    "originalBytes": 363130,
+    "bytes": 324720,
+    "width": 1774,
+    "height": 887
+  },
+  "/templates/taklifla-tort-fasl/fasllar-img/spring-hero.webp": {
+    "url": "/templates/_optimized/a911327fa32d47544a620f84.webp",
+    "kind": "image",
+    "originalBytes": 268234,
+    "bytes": 236498,
+    "width": 941,
+    "height": 1672
+  },
+  "/templates/taklifla-tort-fasl/fasllar-img/transition-spring-summer.webp": {
+    "url": "/templates/_optimized/e6375ddcd47be231515871e4.webp",
+    "kind": "image",
+    "originalBytes": 345438,
+    "bytes": 306198,
+    "width": 1536,
+    "height": 1024
+  },
+  "/templates/taklifla-tort-fasl/fasllar-img/winter-sky.webp": {
+    "url": "/templates/_optimized/eb61ad3180ff0f675b501e7e.webp",
+    "kind": "image",
+    "originalBytes": 218446,
+    "bytes": 185162,
+    "width": 941,
+    "height": 1672
+  },
+  "/templates/taklifla-tungi-saroy/assets/garland.webp": {
+    "url": "/templates/_optimized/45460ff23a1251e069c48b85.webp",
+    "kind": "image",
+    "originalBytes": 412308,
+    "bytes": 281924,
+    "width": 1920,
+    "height": 711
+  },
+  "/templates/taklifla-yulduzli-tun/starry-night-img/divider-moon.webp": {
+    "url": "/templates/_optimized/82c48a346d593975c6092a5f.webp",
+    "kind": "image",
+    "originalBytes": 236606,
+    "bytes": 199714,
+    "width": 1920,
+    "height": 711
+  },
+  "/templates/taklifla-yulduzli-tun/starry-night-img/divider-stars.webp": {
+    "url": "/templates/_optimized/3adc0900a493e35ea5298104.webp",
+    "kind": "image",
+    "originalBytes": 226644,
+    "bytes": 191458,
+    "width": 1920,
+    "height": 711
+  },
+  "/templates/taklifla-zarhal-sahifa/preview.webp": {
+    "url": "/templates/_optimized/f9b9b625bfa80eff3bbe2ed0.webp",
+    "kind": "image",
+    "originalBytes": 252986,
+    "bytes": 13440,
+    "width": 390,
+    "height": 844
+  },
+  "/templates/taklifnomachi-12/source/templates/12/assets/0521.mp4": {
+    "url": "/templates/_optimized/9991d27454ababdfe79b28d2.mp4",
+    "kind": "video",
+    "originalBytes": 9530182,
+    "bytes": 2319506
+  },
+  "/templates/taklifnomachi-12/source/templates/12/assets/ceremony.png": {
+    "url": "/templates/_optimized/9c2a5681458dd332c40a61d6.webp",
+    "kind": "image",
+    "originalBytes": 678017,
+    "bytes": 78956,
+    "width": 393,
+    "height": 699
+  },
+  "/templates/taklifnomachi-12/source/templates/12/assets/cloud-l.png": {
+    "url": "/templates/_optimized/41c652f5ea1469b72a602d9c.webp",
+    "kind": "image",
+    "originalBytes": 321963,
+    "bytes": 34558,
+    "width": 957,
+    "height": 474
+  },
+  "/templates/taklifnomachi-12/source/templates/12/assets/cloud-r.png": {
+    "url": "/templates/_optimized/ab3835016a8656716ce41b3a.webp",
+    "kind": "image",
+    "originalBytes": 307363,
+    "bytes": 33392,
+    "width": 957,
+    "height": 360
+  },
+  "/templates/taklifnomachi-12/source/templates/12/assets/hero.png": {
+    "url": "/templates/_optimized/321541808f634a1c068f6390.webp",
+    "kind": "image",
+    "originalBytes": 313547,
+    "bytes": 267182,
+    "width": 864,
+    "height": 1536
+  },
+  "/templates/taklifnomachi-13/source/taklifnomachi.uz/templates/13/assets/p2/0522.mp4": {
+    "url": "/templates/_optimized/f56254d4e57988521223d7fc.mp4",
+    "kind": "video",
+    "originalBytes": 10393191,
+    "bytes": 2332680
+  },
+  "/templates/taklifnomachi-13/source/taklifnomachi.uz/templates/13/assets/p2/intro-golden.png": {
+    "url": "/templates/_optimized/a858ce54f8c5870ebd5193ba.webp",
+    "kind": "image",
+    "originalBytes": 1188986,
+    "bytes": 80360,
+    "width": 1079,
+    "height": 1920
+  },
+  "/templates/taklifnomachi-13/source/taklifnomachi.uz/templates/13/assets/p2/sprig-top.png": {
+    "url": "/templates/_optimized/a7963cc86143c6dd9aadb15f.webp",
+    "kind": "image",
+    "originalBytes": 3058358,
+    "bytes": 41872,
+    "width": 1920,
+    "height": 1764
+  },
+  "/templates/taklifnomachi-13/source/taklifnomachi.uz/templates/13/assets/p2/venue2.png": {
+    "url": "/templates/_optimized/703b91b6140a1407d2b68e98.webp",
+    "kind": "image",
+    "originalBytes": 939183,
+    "bytes": 117042,
+    "width": 524,
+    "height": 699
+  },
+  "/templates/taklifnomachi-15/source/taklifnomachi.uz/templates/15/assets/countdown-bg.png": {
+    "url": "/templates/_optimized/4813864bd9e02aab88b50518.webp",
+    "kind": "image",
+    "originalBytes": 325675,
+    "bytes": 27140,
+    "width": 736,
+    "height": 1104
+  },
+  "/templates/taklifnomachi-15/source/taklifnomachi.uz/templates/15/assets/video.mp4": {
+    "url": "/templates/_optimized/d3f1cd2165addcecbd43fcad.mp4",
+    "kind": "video",
+    "originalBytes": 10200983,
+    "bytes": 3436241
+  },
+  "/templates/taklifnomachi-16/source/taklifnomachi.uz/templates/16/assets/couple-top.png": {
+    "url": "/templates/_optimized/7c8a998ff206ec1b137170ab.webp",
+    "kind": "image",
+    "originalBytes": 712658,
+    "bytes": 78558,
+    "width": 736,
+    "height": 1104
+  },
+  "/templates/taklifnomachi-16/source/taklifnomachi.uz/templates/16/assets/flower-big.png": {
+    "url": "/templates/_optimized/7432d29710ec0ef3dfabdff7.webp",
+    "kind": "image",
+    "originalBytes": 807326,
+    "bytes": 67698,
+    "width": 1728,
+    "height": 1152
+  },
+  "/templates/taklifnomachi-16/source/taklifnomachi.uz/templates/16/assets/flower-bottom.png": {
+    "url": "/templates/_optimized/a651f53a959374a52b812488.webp",
+    "kind": "image",
+    "originalBytes": 782594,
+    "bytes": 67674,
+    "width": 1728,
+    "height": 834
+  },
+  "/templates/taklifnomachi-16/source/taklifnomachi.uz/templates/16/assets/venue.png": {
+    "url": "/templates/_optimized/35bbb448d2886993eb934af9.webp",
+    "kind": "image",
+    "originalBytes": 1162498,
+    "bytes": 141438,
+    "width": 736,
+    "height": 1104
+  },
+  "/templates/taklifnomachi-17/source/taklifnomachi.uz/templates/17/assets/cd-bg.png": {
+    "url": "/templates/_optimized/544d609d2f84a5610559060e.webp",
+    "kind": "image",
+    "originalBytes": 244494,
+    "bytes": 13352,
+    "width": 429,
+    "height": 900
+  },
+  "/templates/taklifnomachi-17/source/taklifnomachi.uz/templates/17/assets/couple-top.png": {
+    "url": "/templates/_optimized/e1f038324d745282a8d6aa68.webp",
+    "kind": "image",
+    "originalBytes": 414040,
+    "bytes": 34102,
+    "width": 736,
+    "height": 1104
+  },
+  "/templates/taklifnomachi-17/source/taklifnomachi.uz/templates/17/assets/envelope.jpg": {
+    "url": "/templates/_optimized/37dfa95e5e2732c9e249b55e.webp",
+    "kind": "image",
+    "originalBytes": 282076,
+    "bytes": 28720,
+    "width": 1025,
+    "height": 753
+  },
+  "/templates/taklifnomachi-17/source/taklifnomachi.uz/templates/17/assets/satin2x.png": {
+    "url": "/templates/_optimized/fef24df80cfd78c2b46baa2a.webp",
+    "kind": "image",
+    "originalBytes": 371296,
+    "bytes": 48274,
+    "width": 1600,
+    "height": 871
+  },
+  "/templates/taklifnomachi-17/source/taklifnomachi.uz/templates/17/assets/venue.png": {
+    "url": "/templates/_optimized/35bbb448d2886993eb934af9.webp",
+    "kind": "image",
+    "originalBytes": 1162498,
+    "bytes": 141438
+  },
+  "/templates/taklifnomachi-18/source/taklifnomachi.uz/templates-source/18/assets/bg.png": {
+    "url": "/templates/_optimized/1a0b3d79efe9287e78fe257b.webp",
+    "kind": "image",
+    "originalBytes": 1103972,
+    "bytes": 35302,
+    "width": 846,
+    "height": 1920
+  },
+  "/templates/taklifnomachi-18/source/taklifnomachi.uz/templates-source/18/assets/floral-left.png": {
+    "url": "/templates/_optimized/8dd1a1c182e1ac42075ff894.webp",
+    "kind": "image",
+    "originalBytes": 243855,
+    "bytes": 129830,
+    "width": 682,
+    "height": 741
+  },
+  "/templates/taklifnomachi-18/source/taklifnomachi.uz/templates-source/18/assets/floral-manzil.png": {
+    "url": "/templates/_optimized/5a53053bf8da878fad58fe28.webp",
+    "kind": "image",
+    "originalBytes": 204283,
+    "bytes": 114698,
+    "width": 563,
+    "height": 677
+  },
+  "/templates/taklifnomachi-18/source/taklifnomachi.uz/templates-source/18/assets/floral-survey.png": {
+    "url": "/templates/_optimized/3aa7d801500fc3c87db5f000.webp",
+    "kind": "image",
+    "originalBytes": 785669,
+    "bytes": 420712,
+    "width": 1162,
+    "height": 1248
+  },
+  "/templates/taklifnomachi-18/source/taklifnomachi.uz/templates-source/18/assets/floral-tr.png": {
+    "url": "/templates/_optimized/099943203e3fda389c5cf564.webp",
+    "kind": "image",
+    "originalBytes": 228027,
+    "bytes": 126478,
+    "width": 604,
+    "height": 672
+  },
+  "/templates/taklifnomachi-18/source/taklifnomachi.uz/templates-source/18/assets/footer.png": {
+    "url": "/templates/_optimized/9082e1755a5d1f6f9faacc1c.webp",
+    "kind": "image",
+    "originalBytes": 414558,
+    "bytes": 27088,
+    "width": 1920,
+    "height": 503
+  },
+  "/templates/taklifnomachi-18/source/taklifnomachi.uz/templates-source/18/assets/hero-floral.png": {
+    "url": "/templates/_optimized/5ede9f9f56fcb62c736159ff.webp",
+    "kind": "image",
+    "originalBytes": 366116,
+    "bytes": 239812,
+    "width": 1686,
+    "height": 1002
+  },
+  "/templates/taklifnomachi-19/source/taklifnomachi.uz/templates-source/19/assets/greeting.png": {
+    "url": "/templates/_optimized/564bd2770bc5b72cb6923669.webp",
+    "kind": "image",
+    "originalBytes": 351383,
+    "bytes": 49792,
+    "width": 844,
+    "height": 805
+  },
+  "/templates/taklifnomachi-19/source/taklifnomachi.uz/templates-source/19/assets/hero.png": {
+    "url": "/templates/_optimized/ee2f38e48b2c3daad6702da8.webp",
+    "kind": "image",
+    "originalBytes": 260933,
+    "bytes": 22364,
+    "width": 688,
+    "height": 854
+  },
+  "/templates/taklifnomachi-19/source/taklifnomachi.uz/templates-source/19/assets/venue.png": {
+    "url": "/templates/_optimized/cda9d893aec4d23f8f277379.webp",
+    "kind": "image",
+    "originalBytes": 581048,
+    "bytes": 106584,
+    "width": 737,
+    "height": 1046
+  },
+  "/templates/taklifnomachi-1/source/templates/1/cdn/tild3036-6339-4661-b266-303136653461_ChatGPT_Image_Nov_17.png": {
+    "url": "/templates/_optimized/ffbccfed5b11ac99656e97e2.webp",
+    "kind": "image",
+    "originalBytes": 642540,
+    "bytes": 119532,
+    "width": 876,
+    "height": 884
+  },
+  "/templates/taklifnomachi-1/source/templates/1/cdn/tild3433-3734-4762-a164-666138626132_Group_170.png": {
+    "url": "/templates/_optimized/257fe5ebd6b067b15662bbb9.webp",
+    "kind": "image",
+    "originalBytes": 1569734,
+    "bytes": 247020,
+    "width": 849,
+    "height": 1094
+  },
+  "/templates/taklifnomachi-1/source/templates/1/cdn/tild3435-3731-4464-a537-636664626563_ChatGPT_Image_Aug_3_.png": {
+    "url": "/templates/_optimized/afe8d520853d07a147881748.webp",
+    "kind": "image",
+    "originalBytes": 1364866,
+    "bytes": 281416,
+    "width": 963,
+    "height": 963
+  },
+  "/templates/taklifnomachi-1/source/templates/1/cdn/tild3530-3262-4233-b530-616132323935_Rectangle_230.png": {
+    "url": "/templates/_optimized/b06ab2762a94b109a4a7a4d6.webp",
+    "kind": "image",
+    "originalBytes": 399497,
+    "bytes": 203844,
+    "width": 900,
+    "height": 1190
+  },
+  "/templates/taklifnomachi-1/source/templates/1/cdn/tild3732-6333-4264-b465-666237366336_Group_169.png": {
+    "url": "/templates/_optimized/2acad96340bc7547c26de846.webp",
+    "kind": "image",
+    "originalBytes": 1867674,
+    "bytes": 303918,
+    "width": 909,
+    "height": 1079
+  },
+  "/templates/taklifnomachi-1/source/templates/1/cdn/tild6161-3933-4132-b732-303939666537_image-gen_1-Photoroo.png": {
+    "url": "/templates/_optimized/1b553ca03d4649b2dde6e626.webp",
+    "kind": "image",
+    "originalBytes": 790371,
+    "bytes": 133038,
+    "width": 900,
+    "height": 750
+  },
+  "/templates/taklifnomachi-1/source/templates/1/cdn/tild6262-6339-4933-b833-343039643037_Polygon_2_1.png": {
+    "url": "/templates/_optimized/1e748769a55179d4e38b037d.webp",
+    "kind": "image",
+    "originalBytes": 249798,
+    "bytes": 68356,
+    "width": 1011,
+    "height": 581
+  },
+  "/templates/taklifnomachi-1/source/templates/1/media/fountain.mp4": {
+    "url": "/templates/_optimized/d00830e322544d58dc0c782b.mp4",
+    "kind": "video",
+    "originalBytes": 7611752,
+    "bytes": 2826944
+  },
+  "/templates/velora/preview.png": {
+    "url": "/templates/_optimized/31b4e272b40cc3b6a58ad62a.webp",
+    "kind": "image",
+    "originalBytes": 516431,
+    "bytes": 99944,
+    "width": 480,
+    "height": 860
+  },
+  "/templates/velora/source/assets/previews/template/velora/back.png": {
+    "url": "/templates/_optimized/09518ba8b836fec9287447ca.webp",
+    "kind": "image",
+    "originalBytes": 2177349,
+    "bytes": 364566,
+    "width": 800,
+    "height": 1200
+  },
+  "/templates/velora/source/assets/previews/template/velora/desktop.png": {
+    "url": "/templates/_optimized/3bd5caaea1adffcd8b02815a.webp",
+    "kind": "image",
+    "originalBytes": 3654664,
+    "bytes": 598854,
+    "width": 1600,
+    "height": 1054
+  },
+  "/templates/velora/source/assets/previews/template/velora/place-2.png": {
+    "url": "/templates/_optimized/97514d4155b5f35400312589.webp",
+    "kind": "image",
+    "originalBytes": 683127,
+    "bytes": 86752,
+    "width": 917,
+    "height": 606
+  },
+  "/templates/velvet-royale/source/reference/hero-upscale-v1-20260927-c4fec8e94c.mp4": {
+    "url": "/templates/_optimized/3f3dd04905a550772f2ecbab.mp4",
+    "kind": "video",
+    "originalBytes": 2598594,
+    "bytes": 1485801
+  },
+  "/templates/velvet-royale/source/reference/intro-v4-20261014-blank-envelope-cf28b7812a.mp4": {
+    "url": "/templates/_optimized/cc9936ff2d566fe2e22dce09.mp4",
+    "kind": "video",
+    "originalBytes": 1704814,
+    "bytes": 1451581
+  },
+  "/templates/velvet-royale/source/reference/intro-v4-20261014-blank-poster-c521108180.webp": {
+    "url": "/templates/_optimized/0bada0cc94d82f9710629f6a.webp",
+    "kind": "image",
+    "originalBytes": 444440,
+    "bytes": 68122,
+    "width": 720,
+    "height": 1280
+  },
+  "/templates/velvet-royale/source/reference/v3-20260927-divider.webp": {
+    "url": "/templates/_optimized/29eeeeaa90ee22595efbacf4.webp",
+    "kind": "image",
+    "originalBytes": 260666,
+    "bytes": 204938,
+    "width": 1920,
+    "height": 642
+  },
+  "/templates/velvet/assets/images/curtain.jpg": {
+    "url": "/templates/_optimized/b7ecbf15538d0887177ece8b.webp",
+    "kind": "image",
+    "originalBytes": 576649,
+    "bytes": 78728,
+    "width": 1080,
+    "height": 1920
+  },
+  "/templates/velvet/assets/images/velvet/image1.png": {
+    "url": "/templates/_optimized/4ddc17c967f27943092199f4.webp",
+    "kind": "image",
+    "originalBytes": 2684562,
+    "bytes": 287288,
+    "width": 1500,
+    "height": 1500
+  },
+  "/templates/velvet/assets/images/velvet/look.png": {
+    "url": "/templates/_optimized/5cf9c3f34aa5e87604073004.webp",
+    "kind": "image",
+    "originalBytes": 801174,
+    "bytes": 159920,
+    "width": 1077,
+    "height": 766
+  },
+  "/templates/velvet/assets/previews/template/velvet/pink.mp4": {
+    "url": "/templates/_optimized/bbee53ff23e19a0876762041.mp4",
+    "kind": "video",
+    "originalBytes": 5443119,
+    "bytes": 2928217
+  },
+  "/templates/wedivo-angin-empat-musim/preview.png": {
+    "url": "/templates/_optimized/67d32f9c27c9e116d07d9f00.webp",
+    "kind": "image",
+    "originalBytes": 362798,
+    "bytes": 57742,
+    "width": 450,
+    "height": 800
+  },
+  "/templates/wedivo-oathbound/preview.png": {
+    "url": "/templates/_optimized/5d71beb4d90b29332c961806.webp",
+    "kind": "image",
+    "originalBytes": 463307,
+    "bytes": 43684,
+    "width": 450,
+    "height": 800
+  },
+  "/templates/wedivo-pulau-sehati/preview.png": {
+    "url": "/templates/_optimized/f540e1ca313bdde22a76e6db.webp",
+    "kind": "image",
+    "originalBytes": 943310,
+    "bytes": 85000,
+    "width": 720,
+    "height": 1280
+  },
+  "/templates/wedivo-riwayat-obrolan/catalog-opening.png": {
+    "url": "/templates/_optimized/b74af13baaab1cc80cd5a73a.webp",
+    "kind": "image",
+    "originalBytes": 416791,
+    "bytes": 46378,
+    "width": 480,
+    "height": 860
+  },
+  "/templates/wedivo-riwayat-obrolan/verification/package-1280x900-opened.png": {
+    "url": "/templates/_optimized/8579b3d426e747d6e827352d.webp",
+    "kind": "image",
+    "originalBytes": 505184,
+    "bytes": 80154,
+    "width": 1280,
+    "height": 900
+  },
+  "/templates/wedivo-riwayat-obrolan/verification/package-1280x900-opening.png": {
+    "url": "/templates/_optimized/d96f764549c5405c9074a5f8.webp",
+    "kind": "image",
+    "originalBytes": 822495,
+    "bytes": 45914,
+    "width": 1280,
+    "height": 900
+  },
+  "/templates/wedivo-riwayat-obrolan/verification/package-390x844-opened.png": {
+    "url": "/templates/_optimized/a9d21cc37abc3f18acac3812.webp",
+    "kind": "image",
+    "originalBytes": 200794,
+    "bytes": 35510,
+    "width": 390,
+    "height": 844
+  },
+  "/templates/wedivo-riwayat-obrolan/verification/package-390x844-opening.png": {
+    "url": "/templates/_optimized/35a65db9f73388f11c270466.webp",
+    "kind": "image",
+    "originalBytes": 327998,
+    "bytes": 39490,
+    "width": 390,
+    "height": 844
+  },
+  "/templates/wedivo-riwayat-obrolan/verification/reference-1280x900-opened.png": {
+    "url": "/templates/_optimized/620a4d7cd6aab4b15ccc8229.webp",
+    "kind": "image",
+    "originalBytes": 513622,
+    "bytes": 87992,
+    "width": 1280,
+    "height": 900
+  },
+  "/templates/wedivo-riwayat-obrolan/verification/reference-1280x900-opening.png": {
+    "url": "/templates/_optimized/955e448aa723ddbac2f2a6eb.webp",
+    "kind": "image",
+    "originalBytes": 810651,
+    "bytes": 46896,
+    "width": 1280,
+    "height": 900
+  },
+  "/templates/wedivo-riwayat-obrolan/verification/reference-390x844-opened.png": {
+    "url": "/templates/_optimized/744fcce52bce6c1c309f9558.webp",
+    "kind": "image",
+    "originalBytes": 203091,
+    "bytes": 38682,
+    "width": 390,
+    "height": 844
+  },
+  "/templates/wedivo-riwayat-obrolan/verification/reference-390x844-opening.png": {
+    "url": "/templates/_optimized/8a1fb345ad1b9ba6049e9359.webp",
+    "kind": "image",
+    "originalBytes": 318261,
+    "bytes": 40328,
+    "width": 390,
+    "height": 844
+  },
+  "/templates/wedivo-taman-rahasia/preview.png": {
+    "url": "/templates/_optimized/aac5a0319c45485938c94115.webp",
+    "kind": "image",
+    "originalBytes": 490125,
+    "bytes": 68724,
+    "width": 450,
+    "height": 800
+  },
+  "/templates/yangi-uy/catalog-cover-opening.png": {
+    "url": "/templates/_optimized/39d93b925851b76dac853a7a.webp",
+    "kind": "image",
+    "originalBytes": 244833,
+    "bytes": 30732,
+    "width": 478,
+    "height": 668
+  }
+}

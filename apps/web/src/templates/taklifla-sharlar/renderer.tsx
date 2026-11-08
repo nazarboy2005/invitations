@@ -1,4 +1,5 @@
 "use client";
+import { TemplateFrame } from "@/templates/template-frame";
 import { publicAsset } from "../../lib/public-asset";
 
 import { useInvitationMaps } from "@/templates/use-invitation-maps";
@@ -36,8 +37,8 @@ export function TakliflaSharlarInvitation({ invitation, invitationId, locale,
   useEffect(() => { frame.current?.contentWindow?.postMessage(message, window.location.origin); }, [message]);
   useEffect(()=>{const receive=(e:MessageEvent)=>{if(e.origin===window.location.origin && e.source===frame.current?.contentWindow && e.data?.type==="sharlar:ready") frame.current?.contentWindow?.postMessage(latest.current,window.location.origin);};window.addEventListener("message",receive);return()=>window.removeEventListener("message",receive);},[]);
   return <div className={fullPreview ? styles.full : preview ? styles.preview : styles.public}>
-    <iframe ref={frame} title="Sharlar — taklifnoma"
+    <TemplateFrame ref={frame} title="Sharlar — taklifnoma"
       src={publicAsset("/templates/taklifla-sharlar/index.html")} allow="autoplay"
-      onLoad={() => frame.current?.contentWindow?.postMessage(latest.current, window.location.origin)} />
+      onReady={() => frame.current?.contentWindow?.postMessage(latest.current, window.location.origin)} />
   </div>;
 }

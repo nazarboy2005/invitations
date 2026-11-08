@@ -37,6 +37,7 @@ This file records durable, user-approved product requirements and a small number
 - Store a template's stable ID with the invitation; display-name changes must not change the selected renderer. Keep authored invitation data independent of the template.
 - Before publication, creators may switch among published templates without re-entering content. Preview the existing content with the target design and its price. Preserve all data and uploaded asset references when switching, including optional content that the target design cannot currently show.
 - Platform administrators control template publication and pricing. If a template is retired, an administrator may choose a replacement for existing invitations while preserving their identity, URL, content, and history. Retirement must not unlock creator edits or silently move invitations back if the old template is republished. Ordinary creator switching after publication, refund rules for retirement, and some replacement pricing details remain undecided.
+- Preserve every template animation when improving performance. Optimize large images/videos and pause effects outside the screen, resuming them when they return; do not remove animations as a performance shortcut.
 - Template source integration, publication gates, database authorization, and deployment limits are maintained in `AGENTS.md` and the template implementation prompt; do not duplicate per-template status or verification reports here.
 
 ### Removed templates — do not reimplement

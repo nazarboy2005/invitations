@@ -1,4 +1,5 @@
 "use client";
+import { TemplateFrame } from "@/templates/template-frame";
 import { publicAsset } from "../../lib/public-asset";
 
 import { useInvitationMaps } from "@/templates/use-invitation-maps";
@@ -88,11 +89,11 @@ export function TakliflaTortFasl({
         fullPreview ? styles.full : preview ? styles.preview : styles.public
       }
     >
-      <iframe
+      <TemplateFrame
         ref={frame}
         title={`${invitation.content[locale]?.title || FASLLAR_NAME} — ${FASLLAR_NAME}`}
         src={publicAsset(`/templates/${FASLLAR_ID}/index.html`)}
-        onLoad={() =>
+        onReady={() =>
           frame.current?.contentWindow?.postMessage(
             latest.current,
             window.location.origin,

@@ -1,0 +1,227 @@
+{
+  "assets": 189,
+  "images": 177,
+  "videos": 12,
+  "originalBytes": 178989854,
+  "optimizedBytes": 49626643,
+  "videoChecks": [
+    {
+      "source": "/templates/aurelia/assets/previews/template/aurelia/hands.mp4",
+      "original": [
+        1906,
+        1080
+      ],
+      "optimized": [
+        1280,
+        726
+      ],
+      "fps": "24/1",
+      "frames": "192",
+      "duration": "8.000000",
+      "originalBytes": 3416309,
+      "bytes": 1717960
+    },
+    {
+      "source": "/templates/evelina/assets/previews/template/evelina/lock-cover.mp4",
+      "original": [
+        720,
+        1280
+      ],
+      "optimized": [
+        720,
+        1280
+      ],
+      "fps": "24/1",
+      "frames": "205",
+      "duration": "8.541667",
+      "originalBytes": 3875841,
+      "bytes": 1993366
+    },
+    {
+      "source": "/templates/invitate-wedding/assets/video/banner.mp4",
+      "original": [
+        1920,
+        1080
+      ],
+      "optimized": [
+        1280,
+        720
+      ],
+      "fps": "60/1",
+      "frames": "893",
+      "duration": "14.883333",
+      "originalBytes": 3874929,
+      "bytes": 2000759
+    },
+    {
+      "source": "/templates/lace/assets/hero-bg.mp4",
+      "original": [
+        720,
+        1280
+      ],
+      "optimized": [
+        720,
+        1280
+      ],
+      "fps": "24/1",
+      "frames": "58",
+      "duration": "2.416667",
+      "originalBytes": 584229,
+      "bytes": 500809
+    },
+    {
+      "source": "/templates/stained-glass/assets/intro-doors-c.mp4",
+      "original": [
+        1046,
+        1920
+      ],
+      "optimized": [
+        698,
+        1280
+      ],
+      "fps": "24/1",
+      "frames": "169",
+      "duration": "7.041667",
+      "originalBytes": 2216600,
+      "bytes": 1751597
+    },
+    {
+      "source": "/templates/taklifnomachi-12/source/templates/12/assets/0521.mp4",
+      "original": [
+        1080,
+        1920
+      ],
+      "optimized": [
+        720,
+        1280
+      ],
+      "fps": "30/1",
+      "frames": "240",
+      "duration": "8.000000",
+      "originalBytes": 9530182,
+      "bytes": 2319506
+    },
+    {
+      "source": "/templates/taklifnomachi-13/source/taklifnomachi.uz/templates/13/assets/p2/0522.mp4",
+      "original": [
+        1080,
+        1922
+      ],
+      "optimized": [
+        720,
+        1280
+      ],
+      "fps": "30/1",
+      "frames": "240",
+      "duration": "8.000000",
+      "originalBytes": 10393191,
+      "bytes": 2332680
+    },
+    {
+      "source": "/templates/taklifnomachi-15/source/taklifnomachi.uz/templates/15/assets/video.mp4",
+      "original": [
+        1080,
+        1440
+      ],
+      "optimized": [
+        960,
+        1280
+      ],
+      "fps": "30/1",
+      "frames": "240",
+      "duration": "8.000000",
+      "originalBytes": 10200983,
+      "bytes": 3436241
+    },
+    {
+      "source": "/templates/taklifnomachi-1/source/templates/1/media/fountain.mp4",
+      "original": [
+        720,
+        1280
+      ],
+      "optimized": [
+        720,
+        1280
+      ],
+      "fps": "24/1",
+      "frames": "192",
+      "duration": "8.000000",
+      "originalBytes": 7611752,
+      "bytes": 2826944
+    },
+    {
+      "source": "/templates/velvet-royale/source/reference/hero-upscale-v1-20260927-c4fec8e94c.mp4",
+      "original": [
+        1080,
+        1920
+      ],
+      "optimized": [
+        720,
+        1280
+      ],
+      "fps": "24/1",
+      "frames": "193",
+      "duration": "8.041667",
+      "originalBytes": 2598594,
+      "bytes": 1485801
+    },
+    {
+      "source": "/templates/velvet-royale/source/reference/intro-v4-20261014-blank-envelope-cf28b7812a.mp4",
+      "original": [
+        720,
+        1280
+      ],
+      "optimized": [
+        720,
+        1280
+      ],
+      "fps": "24/1",
+      "frames": "145",
+      "duration": "6.041667",
+      "originalBytes": 1704814,
+      "bytes": 1451581
+    },
+    {
+      "source": "/templates/velvet/assets/previews/template/velvet/pink.mp4",
+      "original": [
+        1080,
+        1920
+      ],
+      "optimized": [
+        720,
+        1280
+      ],
+      "fps": "30/1",
+      "frames": "476",
+      "duration": "15.866667",
+      "originalBytes": 5443119,
+      "bytes": 2928217
+    }
+  ],
+  "examples": [
+    {
+      "source": "/templates/butterfly/assets/images/rasm1.png",
+      "url": "/templates/_optimized/76cbfaa44be142a3c65b5324.webp",
+      "kind": "image",
+      "originalBytes": 1890041,
+      "bytes": 120506
+    },
+    {
+      "source": "/templates/golden-hour/assets/images/golden-hour/footerimage.png",
+      "url": "/templates/_optimized/1d7e3983d0f8955236b7f694.webp",
+      "kind": "image",
+      "originalBytes": 3024606,
+      "bytes": 341008
+    },
+    {
+      "source": "/templates/stained-glass/assets/hero-final.webp",
+      "url": "/templates/_optimized/c21c6767e267d41768394cc5.webp",
+      "kind": "image",
+      "originalBytes": 759914,
+      "bytes": 282770,
+      "width": 1046,
+      "height": 1920
+    }
+  ],
+  "savedBytes": 129363211
+}

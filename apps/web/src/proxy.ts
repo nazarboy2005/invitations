@@ -2,6 +2,7 @@ import { randomBytes } from "node:crypto";
 import { NextResponse, type NextRequest } from "next/server";
 import { isPrivateTemplateArtifact } from "./server/template-artifacts";
 import publicAssets from "./generated/public-assets.json";
+import { optimizedTemplateMedia } from "./lib/template-media";
 
 const publicAssetFiles = new Set(publicAssets.files);
 const publicAssetPrefix = `/_assets/${publicAssets.version}`;
@@ -28,7 +29,10 @@ export function proxy(request: NextRequest) {
         headers: { "Cache-Control": "no-store", "X-Robots-Tag": "noindex" },
       });
     }
-    const response = NextResponse.next();
+    const optimized = optimizedTemplateMedia(originalPath);
+    const response = optimized
+      ? NextResponse.rewrite(new URL(optimized, request.url))
+      : NextResponse.next();
     response.headers.set(
       "Cache-Control",
       process.env.NODE_ENV === "production"
@@ -38,11 +42,20 @@ export function proxy(request: NextRequest) {
     return response;
   }
   if (pathname.startsWith("/templates/")) {
-    return isPrivateTemplateArtifact(pathname)
-      ? new NextResponse(null, {
-          status: 404,
-          headers: { "Cache-Control": "no-store", "X-Robots-Tag": "noindex" },
-        })
+    if (isPrivateTemplateArtifact(pathname))
+      return new NextResponse(null, {
+        status: 404,
+        headers: { "Cache-Control": "no-store", "X-Robots-Tag": "noindex" },
+      });
+    let decoded: string;
+    try {
+      decoded = decodeURIComponent(pathname);
+    } catch {
+      return new NextResponse(null, { status: 404 });
+    }
+    const optimized = optimizedTemplateMedia(decoded);
+    return optimized
+      ? NextResponse.rewrite(new URL(optimized, request.url))
       : NextResponse.next();
   }
   const nonce = randomBytes(32).toString("base64");

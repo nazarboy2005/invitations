@@ -1,4 +1,5 @@
 "use client";
+import { TemplateFrame } from "@/templates/template-frame";
 import { publicAsset } from "../../lib/public-asset";
 
 import { useInvitationMaps } from "@/templates/use-invitation-maps";
@@ -454,11 +455,11 @@ export function MarxabaInvitation({
 
   return (
     <div className={frameClass}>
-      <iframe
+      <TemplateFrame
         ref={frame}
         title={`${sourceData.title || sourceData.eventType} invitation`}
         src={initialFrameUrl.current}
-        onLoad={() => {
+        onReady={() => {
           sendExtras();
           frame.current?.contentWindow?.postMessage(
             { type: "marxaba:update", payload: latestMessage.current },

@@ -1,4 +1,5 @@
 "use client";
+import { TemplateFrame } from "@/templates/template-frame";
 import { publicAsset } from "../../lib/public-asset";
 
 import { useInvitationMaps } from "@/templates/use-invitation-maps";
@@ -45,8 +46,8 @@ export function TakliflaParilarErtagiInvitation({ invitation, invitationId, loca
   useEffect(() => { frame.current?.contentWindow?.postMessage(message, window.location.origin); }, [message]);
   useEffect(()=>{const receive=(e:MessageEvent)=>{if(e.origin===location.origin&&e.source===frame.current?.contentWindow&&e.data?.type==="taklifla-parilar-ertagi:ready")frame.current?.contentWindow?.postMessage(latest.current,location.origin);};window.addEventListener("message",receive);return()=>window.removeEventListener("message",receive);},[]);
   return <div className={fullPreview ? styles.full : preview ? styles.preview : styles.public}>
-    <iframe ref={frame} src={publicAsset("/templates/taklifla-parilar-ertagi/index.html")}
+    <TemplateFrame ref={frame} src={publicAsset("/templates/taklifla-parilar-ertagi/index.html")}
       title="Parilar ertagi — taklifnoma" allow="autoplay"
-      onLoad={() => frame.current?.contentWindow?.postMessage(latest.current, window.location.origin)} />
+      onReady={() => frame.current?.contentWindow?.postMessage(latest.current, window.location.origin)} />
   </div>;
 }

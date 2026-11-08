@@ -1,4 +1,5 @@
 "use client";
+import { TemplateFrame } from "@/templates/template-frame";
 import { publicAsset } from "../../lib/public-asset";
 
 import { useInvitationMaps } from "@/templates/use-invitation-maps";
@@ -28,6 +29,6 @@ export function SakuraGuliInvitation(props: Props) {
     return () => window.removeEventListener("message", receive);
   }, [props.invitation.enabledLocales]);
   return <div className={props.fullPreview ? styles.full : props.preview ? styles.preview : styles.public}>
-    <iframe ref={frame} title={props.invitation.content[locale]?.title || "Sakura Guli"} src={publicAsset("/templates/taklifla-sakura-guli/index.html")} onLoad={send} allow="autoplay" />
+    <TemplateFrame ref={frame} title={props.invitation.content[locale]?.title || "Sakura Guli"} src={publicAsset("/templates/taklifla-sakura-guli/index.html")} onReady={send} allow="autoplay" />
   </div>;
 }

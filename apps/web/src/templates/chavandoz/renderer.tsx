@@ -1,4 +1,5 @@
 "use client";
+import { TemplateFrame } from "@/templates/template-frame";
 import { publicAsset } from "../../lib/public-asset";
 
 import { useInvitationMaps } from "@/templates/use-invitation-maps";
@@ -127,13 +128,13 @@ export function ChavandozInvitation({
   const className = fullPreview ? styles.full : preview ? styles.preview : styles.public;
   return (
     <div className={className}>
-      <iframe
+      <TemplateFrame
         ref={frame}
         title={`${message.title || message.eventType} invitation`}
         src={initialUrl.current}
         allow="autoplay; fullscreen"
         loading="eager"
-        onLoad={() => frame.current?.contentWindow?.postMessage({ type: "marxaba:update", payload: latestMessage.current }, window.location.origin)}
+        onReady={() => frame.current?.contentWindow?.postMessage({ type: "marxaba:update", payload: latestMessage.current }, window.location.origin)}
       />
     </div>
   );

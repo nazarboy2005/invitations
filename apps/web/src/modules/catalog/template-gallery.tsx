@@ -26,6 +26,7 @@ import { TemplateCardPreview } from "./template-card-preview";
 import { useCardPlayback } from "./use-card-playback";
 import { useCategoryTransition } from "./use-category-transition";
 import { TemplateFormatSwitch, type TemplateFormat } from "./template-format-switch";
+import { warmPreviewMusicLibrary } from "./preview-music-library";
 
 const TemplateDetailDialog = dynamic(() =>
   import("./template-detail-dialog").then(
@@ -46,6 +47,7 @@ export function TemplateGallery({
   initialCategory?: string;
   favoritesOnly?: boolean;
 }) {
+  useEffect(() => { void warmPreviewMusicLibrary(); }, []);
   const favorites = useFavorites();
   // Keep this visit's cards available for undo; persistence still changes
   // immediately. A new visit (or account switch) gets a fresh collection.

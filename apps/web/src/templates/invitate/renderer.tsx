@@ -1,4 +1,5 @@
 "use client";
+import { TemplateFrame } from "@/templates/template-frame";
 import { publicAsset } from "../../lib/public-asset";
 
 import { useInvitationMaps } from "@/templates/use-invitation-maps";
@@ -57,7 +58,6 @@ export function InvitateInvitation({
 }: Props) {
   const frame = useRef<HTMLIFrameElement>(null);
   useInvitationMaps(frame);
-  const initialized = useRef<string | null>(null);
   const [frameLocale, setFrameLocale] = useState(locale);
   const templateId = invitation.templateId;
   useEffect(() => setFrameLocale(locale), [locale]);
@@ -557,7 +557,7 @@ export function InvitateInvitation({
       {templateId === "aurelia" && invitation.music.enabled && publicAsset(invitation.music.url) && !(preview && silentPlayback) && (
         <AureliaSoundtrack key={publicAsset(invitation.music.url)} url={publicAsset(invitation.music.url)} locale={frameLocale} />
       )}
-      <iframe
+      <TemplateFrame
         key={templateId}
         ref={frame}
         title={
@@ -566,19 +566,15 @@ export function InvitateInvitation({
             : `${activeMessage.groom} & ${activeMessage.bride} invitation`
         }
         src={frameUrl}
-        onLoad={() => {
+        name={JSON.stringify(activeMessage)}
+        onReady={() => {
           const target = frame.current?.contentWindow;
           if (!target) return;
-          if (initialized.current !== templateId) {
-            target.name = JSON.stringify(latest.current);
-            target.location.replace(frameUrl);
-            initialized.current = templateId;
-          } else {
-            target.postMessage(
-              { type: `${templateId}:update`, payload: latest.current },
-              window.location.origin,
-            );
-          }
+          target.name = JSON.stringify(latest.current);
+          target.postMessage(
+            { type: `${templateId}:update`, payload: latest.current },
+            window.location.origin,
+          );
           if (templateId === "golden-hour") sendGoldenHourExtras();
         }}
         allow="autoplay; fullscreen; clipboard-write"

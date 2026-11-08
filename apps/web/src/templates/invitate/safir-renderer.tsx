@@ -1,4 +1,5 @@
 "use client";
+import { TemplateFrame } from "@/templates/template-frame";
 import { publicAsset } from "../../lib/public-asset";
 
 import { useInvitationMaps } from "@/templates/use-invitation-maps";
@@ -42,7 +43,6 @@ export function SafirInvitation({
 }: Props) {
   const frame = useRef<HTMLIFrameElement>(null);
   useInvitationMaps(frame);
-  const initialized = useRef(false);
   const [frameLocale, setFrameLocale] = useState(locale);
   useEffect(() => setFrameLocale(locale), [locale]);
 
@@ -106,20 +106,16 @@ export function SafirInvitation({
       : styles.public;
   return (
     <div className={classes}>
-      <iframe
+      <TemplateFrame
         key="safir"
         ref={frame}
         title={`${payload.groom} & ${payload.bride} invitation`}
         src={frameUrl}
-        onLoad={() => {
+        name={JSON.stringify(payload)}
+        onReady={() => {
           const target = frame.current?.contentWindow;
           if (!target) return;
-          if (!initialized.current) {
-            target.name = JSON.stringify(latest.current);
-            target.location.replace(frameUrl);
-            initialized.current = true;
-            return;
-          }
+          target.name = JSON.stringify(latest.current);
           target.postMessage(
             { type: "safir:update", payload: latest.current },
             window.location.origin,

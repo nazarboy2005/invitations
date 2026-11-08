@@ -98,6 +98,16 @@ test("asset snapshots invalidate dependencies when bytes change and preserve ori
       ),
       /fetch\("\/api\/media\/private-id"\)/,
     );
+    const mediaManifest = join(root, "src/generated/template-media.json");
+    writeFileSync(
+      mediaManifest,
+      '{"/templates/demo/art.webp":{"url":"/templates/_optimized/demo.webp"}}',
+    );
+    assert.notEqual(
+      preparePublicAssets(root).version,
+      second.version,
+      "media routing changes invalidate immutable source URLs",
+    );
   } finally {
     assert.ok(
       resolve(root).startsWith(resolve(tmpdir()) + "\\") ||

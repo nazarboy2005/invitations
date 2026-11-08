@@ -1,4 +1,5 @@
 "use client";
+import { TemplateFrame } from "@/templates/template-frame";
 import { publicAsset } from "../../lib/public-asset";
 
 import { useInvitationMaps } from "@/templates/use-invitation-maps";
@@ -106,12 +107,12 @@ export function WedivoPulauSehati({
       : styles.public;
   return (
     <div className={mode}>
-      <iframe
+      <TemplateFrame
         ref={frame}
         title={`${invitation.content[activeLocale]?.people.slice(0, 2).join(" & ")} · ${{ "uz-Latn": "Taklifnoma", "uz-Cyrl": "Таклифнома", en: "Invitation", ru: "Приглашение" }[activeLocale]}`}
         src={publicAsset("/templates/wedivo-pulau-sehati/index.html")}
-        onLoad={(event) => {
-          const target = event.currentTarget.contentWindow;
+        onReady={(event) => {
+          const target = event.contentWindow;
           if (!target) return;
           target.name = JSON.stringify(latest.current);
           target.postMessage(latest.current, window.location.origin);

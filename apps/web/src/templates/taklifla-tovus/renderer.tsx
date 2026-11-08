@@ -1,4 +1,5 @@
 "use client";
+import { TemplateFrame } from "@/templates/template-frame";
 import { publicAsset } from "../../lib/public-asset";
 
 import { useInvitationMaps } from "@/templates/use-invitation-maps";
@@ -79,11 +80,11 @@ export function TakliflaTovus({
         fullPreview ? styles.full : preview ? styles.preview : styles.public
       }
     >
-      <iframe
+      <TemplateFrame
         ref={frame}
         src={publicAsset("/templates/taklifla-tovus/index.html")}
         title={invitation.content[locale]?.title || "Tovus"}
-        onLoad={send}
+        onReady={send}
         allow="autoplay"
       />
     </div>

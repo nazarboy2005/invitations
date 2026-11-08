@@ -10,6 +10,6 @@ test("Anor initializes frames on hydration as well as subsequent loads", () => {
     source,
     /useEffect\(\(\) => \{[\s\S]*?sendData\(\);\s*\}, \[sendData\]\)/,
   );
-  assert.match(source, /onLoad=\{sendData\}/);
+  assert.match(source, /onReady=\{sendData\}/);
   assert.doesNotMatch(source, /if \(loadedLocale !== frameLocale\) return/);
 });

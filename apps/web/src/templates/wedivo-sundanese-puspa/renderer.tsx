@@ -1,4 +1,5 @@
 "use client";
+import { TemplateFrame } from "@/templates/template-frame";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { Invitation, Locale } from "@taklifnoma/contracts";
 import { makeLegacyData } from "@/templates/anor/renderer";
@@ -19,5 +20,5 @@ export function WedivoSundanesePuspaInvitation({invitation,invitationId,locale,g
  useEffect(()=>{const onMessage=(event:MessageEvent)=>{if(event.origin!==window.location.origin||event.source!==frame.current?.contentWindow||event.data?.type!=="wedivo-sundanese-puspa:language")return;const next=event.data.locale as Locale;if(invitation.enabledLocales.includes(next))setFrameLocale(next);};window.addEventListener("message",onMessage);return()=>window.removeEventListener("message",onMessage);},[invitation.enabledLocales]);
  useEffect(send,[envelope,sendReceiptAdapter]);
  const frameUrl=`/templates/wedivo-sundanese-puspa/source/index.html${preview&&qaReducedMotion?"?qaReducedMotion=1":""}`;
- return <div className={`${fullPreview?styles.full:preview?styles.preview:styles.public}${preview&&qaMobile?` ${styles.qaMobile}`:""}`}><iframe ref={frame} name={JSON.stringify(envelope)} title={`${legacy.groom}${legacy.bride?` & ${legacy.bride}`:""} invitation`} src={frameUrl} onLoad={send} allow="autoplay; fullscreen" loading="eager"/></div>;
+ return <div className={`${fullPreview?styles.full:preview?styles.preview:styles.public}${preview&&qaMobile?` ${styles.qaMobile}`:""}`}><TemplateFrame ref={frame} name={JSON.stringify(envelope)} title={`${legacy.groom}${legacy.bride?` & ${legacy.bride}`:""} invitation`} src={frameUrl} onReady={send} allow="autoplay; fullscreen" loading="eager"/></div>;
 }

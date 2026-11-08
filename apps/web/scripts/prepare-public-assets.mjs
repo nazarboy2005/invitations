@@ -15,7 +15,7 @@ import {
 } from "../src/lib/public-asset-policy.mjs";
 
 // Bump this when changing output transformation, even if source assets are unchanged.
-const formatVersion = "public-assets-v2";
+const formatVersion = "public-assets-v3-template-media";
 const webRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 
 function writeIfChanged(path, contents) {
@@ -61,6 +61,10 @@ export function preparePublicAssets(root = webRoot) {
   // script also invalidates the CSS/HTML that refers to it. Code-only deploys
   // preserve this revision. Source captures themselves are never modified.
   const hash = createHash("sha256").update(formatVersion);
+  // The same source URL can now serve an optimized derivative. Its mapping is
+  // part of the dependency graph, so immutable URLs must change with that map.
+  const mediaManifest = join(root, "src/generated/template-media.json");
+  if (existsSync(mediaManifest)) hash.update(readFileSync(mediaManifest));
   for (const entry of entries) {
     const bytes = readFileSync(entry.file);
     hash

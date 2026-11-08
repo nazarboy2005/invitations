@@ -1,4 +1,5 @@
 "use client";
+import { TemplateFrame } from "@/templates/template-frame";
 
 import { useEffect, useMemo, useRef } from "react";
 import type { Invitation, Locale } from "@taklifnoma/contracts";
@@ -46,6 +47,6 @@ export function WedivoLanskapYangHidup({ invitation, invitationId, locale, guest
     return () => window.removeEventListener("message", receive);
   }, [invitation.enabledLocales]);
   return <div className={fullPreview ? styles.full : preview ? styles.preview : styles.public}>
-    <iframe ref={frame} title={`${invitation.content[locale]?.title || "Taklifnoma"} — Jonli vodiy`} src="/templates/wedivo-lanskap-yang-hidup/index.html" onLoad={() => frame.current?.contentWindow?.postMessage(latest.current, window.location.origin)} allow="autoplay; fullscreen; clipboard-write" />
+    <TemplateFrame ref={frame} title={`${invitation.content[locale]?.title || "Taklifnoma"} — Jonli vodiy`} src="/templates/wedivo-lanskap-yang-hidup/index.html" onReady={() => frame.current?.contentWindow?.postMessage(latest.current, window.location.origin)} allow="autoplay; fullscreen; clipboard-write" />
   </div>;
 }

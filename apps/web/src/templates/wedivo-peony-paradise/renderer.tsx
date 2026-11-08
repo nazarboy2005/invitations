@@ -1,4 +1,5 @@
 "use client";
+import { TemplateFrame } from "@/templates/template-frame";
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { Invitation, Locale } from "@taklifnoma/contracts";
@@ -57,7 +58,7 @@ export function WedivoPeonyParadiseInvitation({
     <div
       className={`${mode}${options.preview && qaMobile ? ` ${styles.mobile}` : ""}`}
     >
-      <iframe
+      <TemplateFrame
         key={serialized}
         ref={frame}
         title={
@@ -69,7 +70,7 @@ export function WedivoPeonyParadiseInvitation({
           }[presentationLocale]
         }
         src="/templates/wedivo-peony-paradise/index.html"
-        onLoad={() =>
+        onReady={() =>
           frame.current?.contentWindow?.postMessage(
             message,
             window.location.origin,

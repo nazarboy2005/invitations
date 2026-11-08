@@ -1,4 +1,5 @@
 "use client";
+import { TemplateFrame } from "@/templates/template-frame";
 
 import { useEffect, useMemo, useRef } from "react";
 import type { Invitation, Locale } from "@taklifnoma/contracts";
@@ -89,12 +90,12 @@ export function WedivoTamanRahasia({
       : styles.public;
   return (
     <div className={mode}>
-      <iframe
+      <TemplateFrame
         ref={frame}
         title={`${invitation.content[locale]?.people.slice(0, 2).join(" & ")} invitation`}
         src="/templates/wedivo-taman-rahasia/index.html"
-        onLoad={(event) => {
-          const target = event.currentTarget.contentWindow;
+        onReady={(event) => {
+          const target = event.contentWindow;
           if (!target) return;
           // The source engine initializes once. Its bridge reloads for language
           // or content changes, carrying the open/scroll/music state in name.

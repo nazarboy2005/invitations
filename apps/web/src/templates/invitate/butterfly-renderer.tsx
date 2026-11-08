@@ -1,4 +1,5 @@
 "use client";
+import { TemplateFrame } from "@/templates/template-frame";
 import { publicAsset } from "../../lib/public-asset";
 
 import { useInvitationMaps } from "@/templates/use-invitation-maps";
@@ -51,12 +52,12 @@ export function ButterflyInvitation({
 
   const classes = fullPreview ? styles.full : preview ? styles.preview : styles.public;
   return <div className={classes}>
-    <iframe
+    <TemplateFrame
       key={templateId}
       ref={frame}
       title={`${message.groom} & ${message.bride} invitation`}
       src={frameUrl}
-      onLoad={() => {
+      onReady={() => {
         const target = frame.current?.contentWindow;
         if (!target) return;
         target.postMessage({ type: "butterfly:update", payload: latest.current }, window.location.origin);

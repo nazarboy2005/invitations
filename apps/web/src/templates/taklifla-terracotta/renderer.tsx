@@ -1,4 +1,5 @@
 "use client";
+import { TemplateFrame } from "@/templates/template-frame";
 import { publicAsset } from "../../lib/public-asset";
 
 import { useInvitationMaps } from "@/templates/use-invitation-maps";
@@ -45,9 +46,9 @@ export function TakliflaTerracottaInvitation({ invitation, invitationId, locale,
     return () => window.removeEventListener("message", receive);
   }, [invitation.enabledLocales]);
   return <div className={fullPreview ? styles.full : preview ? styles.preview : styles.public}>
-    <iframe ref={frame} src={publicAsset("/templates/taklifla-terracotta/index.html")}
+    <TemplateFrame ref={frame} src={publicAsset("/templates/taklifla-terracotta/index.html")}
       title={`${message.payload.content.title || message.payload.content.people.join(" & ")} — Sopol jilosi`}
-      onLoad={() => frame.current?.contentWindow?.postMessage(latest.current, window.location.origin)}
+      onReady={() => frame.current?.contentWindow?.postMessage(latest.current, window.location.origin)}
       allow="autoplay" loading="eager" />
   </div>;
 }

@@ -1,5 +1,7 @@
 import { isTemplateDocument } from "../lib/public-asset";
 
+export const TEMPLATE_READY_EVENT = "fotiha:template-ready";
+
 /** Watch lazy renderers and frame navigations, with one subscription per document. */
 export function observeTemplateDocuments(
   root: HTMLElement,
@@ -17,6 +19,7 @@ export function observeTemplateDocuments(
         if (
           !doc?.body ||
           !isTemplateDocument(doc.URL, location.origin) ||
+          doc.documentElement.dataset.fotihaInitialized !== "true" ||
           documents.has(doc)
         )
           return;
@@ -26,8 +29,12 @@ export function observeTemplateDocuments(
         watch(doc.body);
       };
       frame.addEventListener("load", loaded);
-      cleanups.push(() => frame.removeEventListener("load", loaded));
-      if (frame.contentDocument?.readyState === "complete") loaded();
+      frame.addEventListener(TEMPLATE_READY_EVENT, loaded);
+      cleanups.push(() => {
+        frame.removeEventListener("load", loaded);
+        frame.removeEventListener(TEMPLATE_READY_EVENT, loaded);
+      });
+      loaded();
     }
   }
   function watch(host: HTMLElement) {

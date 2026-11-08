@@ -1,4 +1,5 @@
 "use client";
+import { TemplateFrame } from "@/templates/template-frame";
 import { publicAsset } from "../../lib/public-asset";
 
 import { useInvitationMaps } from "@/templates/use-invitation-maps";
@@ -443,7 +444,7 @@ export function AnorInvitation({
   useEffect(() => {
     // On public SSR pages the iframe can load before hydration attaches onLoad.
     // Sending on mount also initializes that already-loaded frame. If it is
-    // still loading, onLoad below delivers the same current authored content.
+    // still loading, onReady below delivers the same current authored content.
     sendData();
   }, [sendData]);
 
@@ -474,12 +475,12 @@ export function AnorInvitation({
             : styles.sourcePublic
       }
     >
-      <iframe
+      <TemplateFrame
         key={frameLocale}
         ref={frame}
         title={`${data.title || data.eventType} invitation`}
         src={publicAsset(`/templates/anor/source/index.html?locale=${encodeURIComponent(frameLocale)}`)}
-        onLoad={sendData}
+        onReady={sendData}
         allow="autoplay; fullscreen"
         loading="eager"
       />

@@ -1,4 +1,5 @@
 "use client";
+import { TemplateFrame } from "@/templates/template-frame";
 import { publicAsset } from "../../lib/public-asset";
 
 
@@ -27,5 +28,5 @@ export function TakliflaOltinYol(props:Props) {
     };
     window.addEventListener("message",ready);return()=>window.removeEventListener("message",ready);
   },[]);
-  return <div className={props.fullPreview ? styles.full : props.preview ? styles.preview : styles.public}><iframe ref={frame} className={styles.frame} title="Oltin Yo‘l" src={publicAsset("/templates/taklifla-oltin-yol/index.html")} onLoad={()=>frame.current?.contentWindow?.postMessage(latest.current,window.location.origin)} allow="autoplay" /></div>;
+  return <div className={props.fullPreview ? styles.full : props.preview ? styles.preview : styles.public}><TemplateFrame ref={frame} className={styles.frame} title="Oltin Yo‘l" src={publicAsset("/templates/taklifla-oltin-yol/index.html")} onReady={()=>frame.current?.contentWindow?.postMessage(latest.current,window.location.origin)} allow="autoplay" /></div>;
 }

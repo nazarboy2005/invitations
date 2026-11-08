@@ -1,4 +1,5 @@
 "use client";
+import { TemplateFrame } from "@/templates/template-frame";
 import { publicAsset } from "../../lib/public-asset";
 
 
@@ -27,5 +28,5 @@ export function TakliflaZarrinGullar(props:Props) {
     };
     window.addEventListener("message",ready);return()=>window.removeEventListener("message",ready);
   },[]);
-  return <div className={props.fullPreview ? styles.full : props.preview ? styles.preview : styles.public}><iframe ref={frame} className={styles.frame} title="Zarrin gullar" src={publicAsset("/templates/taklifla-zarrin-gullar/template.html")} onLoad={()=>frame.current?.contentWindow?.postMessage(latest.current,window.location.origin)} allow="autoplay" /></div>;
+  return <div className={props.fullPreview ? styles.full : props.preview ? styles.preview : styles.public}><TemplateFrame ref={frame} className={styles.frame} title="Zarrin gullar" src={publicAsset("/templates/taklifla-zarrin-gullar/template.html")} onReady={()=>frame.current?.contentWindow?.postMessage(latest.current,window.location.origin)} allow="autoplay" /></div>;
 }

@@ -1,4 +1,5 @@
 "use client";
+import { TemplateFrame } from "@/templates/template-frame";
 import { publicAsset } from "../../lib/public-asset";
 
 import { useInvitationMaps } from "@/templates/use-invitation-maps";
@@ -32,5 +33,5 @@ export function OliveManorInvitation({ invitation, invitationId, locale, guestNa
     };
     window.addEventListener("message", onMessage); return () => window.removeEventListener("message", onMessage);
   }, [invitation.enabledLocales]);
-  return <div className={`${fullPreview ? styles.full : preview ? styles.preview : styles.public}${preview && qaMobile ? ` ${styles.qaMobile}` : ""}`}><iframe ref={frame} name={JSON.stringify(message)} title={`${message.groom} & ${message.bride} — Olive Manor`} src={frameUrl} onLoad={() => { const target = frame.current?.contentWindow; if (!target) return; target.name = JSON.stringify(latest.current); target.postMessage({ type: "olive-manor-edition:update", payload: latest.current }, window.location.origin); }} allow="autoplay; fullscreen" loading="eager" /></div>;
+  return <div className={`${fullPreview ? styles.full : preview ? styles.preview : styles.public}${preview && qaMobile ? ` ${styles.qaMobile}` : ""}`}><TemplateFrame ref={frame} name={JSON.stringify(message)} title={`${message.groom} & ${message.bride} — Olive Manor`} src={frameUrl} onReady={() => { const target = frame.current?.contentWindow; if (!target) return; target.name = JSON.stringify(latest.current); target.postMessage({ type: "olive-manor-edition:update", payload: latest.current }, window.location.origin); }} allow="autoplay; fullscreen" loading="eager" /></div>;
 }

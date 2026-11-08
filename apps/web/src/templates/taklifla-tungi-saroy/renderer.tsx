@@ -1,4 +1,5 @@
 "use client";
+import { TemplateFrame } from "@/templates/template-frame";
 import { publicAsset } from "../../lib/public-asset";
 
 import { useInvitationMaps } from "@/templates/use-invitation-maps";
@@ -81,14 +82,14 @@ export function TungiSaroyInvitation({
         fullPreview ? styles.full : preview ? styles.preview : styles.public
       }
     >
-      <iframe
+      <TemplateFrame
         ref={frame}
         name={JSON.stringify(message)}
         src={publicAsset("/templates/taklifla-tungi-saroy/index.html")}
         title="Tungi Saroy — Taklifnoma"
         loading="eager"
         allow="autoplay"
-        onLoad={() =>
+        onReady={() =>
           frame.current?.contentWindow?.postMessage(
             latest.current,
             window.location.origin,
