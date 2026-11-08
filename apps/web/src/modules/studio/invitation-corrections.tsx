@@ -1,6 +1,13 @@
 "use client";
-import { useEffect, useState, type FormEvent } from "react";
-import { RefreshCw, PencilLine, CheckCircle2 } from "lucide-react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
+import {
+  CalendarDays,
+  CheckCircle2,
+  PencilLine,
+  RefreshCw,
+  ShieldCheck,
+  X,
+} from "lucide-react";
 import { LANGUAGE_NAMES, type Invitation } from "@taklifnoma/contracts";
 import {
   identityValues,
@@ -109,6 +116,12 @@ export function InvitationCorrections({
   const [startsAt, setStartsAt] = useState("");
   const [secondaryDate, setSecondaryDate] = useState("");
   const [reason, setReason] = useState("");
+  const dialog = useRef<HTMLDialogElement>(null);
+  useEffect(() => {
+    const element = dialog.current;
+    if (open && element && !element.open) element.showModal();
+    else if (!open && element?.open) element.close();
+  }, [open]);
   async function refresh() {
     const response = await fetch(`/api/invitations/${invitationId}/changes`, {
       cache: "no-store",
@@ -195,60 +208,61 @@ export function InvitationCorrections({
     }
   }
   return (
-    <section className={styles.panel} aria-label="Tuzatish so‘rovlari">
-      <div className={styles.heading}>
-        <div>
-          <PencilLine size={18} aria-hidden="true" />
-          <h3>Tuzatish kerakmi?</h3>
-        </div>
-        <div className={styles.actions}>
-          {!open && (
-            <button
-              type="button"
-              className={styles.outline}
-              aria-label="Tuzatish so‘rovi"
-              disabled={busy}
-              onClick={() => void start()}
-            >
-              So‘rov
-            </button>
-          )}
-          {items.length > 0 && (
-            <button
-              type="button"
-              className={styles.iconButton}
-              aria-label="So‘rovlar holatini yangilash"
-              disabled={busy}
-              onClick={async () => {
-                setBusy(true);
-                setError("");
-                try {
-                  await refresh();
-                } catch (e) {
-                  setError(e instanceof Error ? e.message : "Yuklanmadi.");
-                } finally {
-                  setBusy(false);
-                }
-              }}
-            >
-              <RefreshCw size={16} />
-            </button>
-          )}
-        </div>
-      </div>
-      {error && (
+    <section className={styles.toolbarRequest} aria-label="Tuzatish so‘rovlari">
+      <button
+        type="button"
+        className={styles.toolbarButton}
+        aria-label="Tuzatish so‘rovi"
+        disabled={busy}
+        onClick={() => void start()}
+      >
+        <PencilLine size={15} aria-hidden="true" /> So‘rov
+      </button>
+      {!open && error && (
         <p role="alert" className={styles.error}>
           {error}
         </p>
       )}
-      {message && (
+      {!open && message && (
         <p role="status" className={styles.success}>
           <CheckCircle2 size={16} />
           {message}
         </p>
       )}
-      {open && (
-        <form onSubmit={submit} className={styles.form}>
+      <dialog
+        ref={dialog}
+        className={styles.dialog}
+        aria-labelledby="correction-dialog-title"
+        onClose={() => setOpen(false)}
+      >
+        <div className={styles.dialogHead}>
+          <div className={styles.dialogIcon}>
+            <PencilLine size={19} aria-hidden="true" />
+          </div>
+          <div>
+            <span className={styles.eyebrow}>TAKLIFNOMA TAHRIRI</span>
+            <h2 id="correction-dialog-title">Tuzatish so‘rovi</h2>
+            <p>Ma’lumotlarni tekshirib, kerakli o‘zgarishni yuboring.</p>
+          </div>
+          <button
+            type="button"
+            className={styles.closeButton}
+            aria-label="Yopish"
+            onClick={() => setOpen(false)}
+          >
+            <X size={19} />
+          </button>
+        </div>
+        <div className={styles.dialogBody}>
+          <div className={styles.notice}>
+            <ShieldCheck size={17} />
+            <span>
+              Ismlar va tadbir sanasi administrator ko‘rib chiqqanidan keyin
+              yangilanadi.
+            </span>
+          </div>
+          {open && error && <p role="alert" className={styles.dialogError}>{error}</p>}
+          <form onSubmit={submit} className={styles.form}>
           <p>
             Ism xatosi yoki sana ko‘chishi uchun so‘rov yuboring. Yangi tadbir
             yoki boshqa odamlar uchun yangi taklifnoma kerak.
@@ -463,38 +477,79 @@ export function InvitationCorrections({
           {items.some(
             (item) => item.status === "pending" && item.type === type,
           ) && <p>Shu turdagi so‘rovingiz ko‘rib chiqilmoqda.</p>}
-        </form>
-      )}
+          </form>
+          {items.length > 0 && (
+            <details className={styles.history}>
+              <summary>So‘rovlar tarixi · {items.length}</summary>
+              <button
+                type="button"
+                className={styles.refreshButton}
+                disabled={busy}
+                onClick={async () => {
+                  setBusy(true);
+                  setError("");
+                  try {
+                    await refresh();
+                  } catch (e) {
+                    setError(e instanceof Error ? e.message : "Yuklanmadi.");
+                  } finally {
+                    setBusy(false);
+                  }
+                }}
+              >
+                <RefreshCw size={14} /> Yangilash
+              </button>
+              {items.map((item) => (
+                <article key={item.id}>
+                  <div className={styles.heading}>
+                    <strong>{requestTypeLabel(item.type)}</strong>
+                    <span className={styles.badge} data-status={item.status}>
+                      {statusLabel[item.status] ?? item.status}
+                    </span>
+                  </div>
+                  <RequestValues item={item} />
+                  <p>{item.reason}</p>
+                  {item.reviewNote && (
+                    <p>
+                      <strong>Administrator:</strong> {item.reviewNote}
+                    </p>
+                  )}
+                  {item.status === "approved" && (
+                    <button
+                      type="button"
+                      className={styles.outline}
+                      onClick={onRefresh}
+                    >
+                      Tasdiqlangan nusxani ochish
+                    </button>
+                  )}
+                </article>
+              ))}
+            </details>
+          )}
+        </div>
+        <div className={styles.dialogFooter}>
+          <span>
+            <CalendarDays size={15} /> So‘rov yuborilgach, holatini shu oynada
+            kuzatishingiz mumkin.
+          </span>
+          <button
+            type="button"
+            className={styles.footerClose}
+            onClick={() => setOpen(false)}
+          >
+            Yopish
+          </button>
+        </div>
+      </dialog>
       {items.length > 0 && (
-        <details className={styles.history}>
-          <summary>So‘rovlar tarixi · {items.length}</summary>
-          {items.map((item) => (
-            <article key={item.id}>
-              <div className={styles.heading}>
-                <strong>{requestTypeLabel(item.type)}</strong>
-                <span className={styles.badge} data-status={item.status}>
-                  {statusLabel[item.status] ?? item.status}
-                </span>
-              </div>
-              <RequestValues item={item} />
-              <p>{item.reason}</p>
-              {item.reviewNote && (
-                <p>
-                  <strong>Administrator:</strong> {item.reviewNote}
-                </p>
-              )}
-              {item.status === "approved" && (
-                <button
-                  type="button"
-                  className={styles.outline}
-                  onClick={onRefresh}
-                >
-                  Tasdiqlangan nusxani ochish
-                </button>
-              )}
-            </article>
-          ))}
-        </details>
+        <span
+          className={styles.pendingBadge}
+          aria-label={`${items.filter((item) => item.status === "pending").length} ta ko‘rib chiqilayotgan so‘rov`}
+          hidden={!items.some((item) => item.status === "pending")}
+        >
+          So‘rov ko‘rib chiqilmoqda
+        </span>
       )}
     </section>
   );

@@ -3090,6 +3090,75 @@
 .toolbarPreview {
   margin-left: auto;
 }
+.publishedToolbar {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  align-items: center;
+  gap: clamp(10px, 1.2vw, 20px);
+  margin-left: 10px;
+}
+.publishedReady {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  min-width: 210px;
+  padding-right: clamp(10px, 1.2vw, 20px);
+  border-right: 1px solid var(--line);
+}
+.readyIcon {
+  display: grid;
+  width: 28px;
+  height: 28px;
+  flex: 0 0 28px;
+  place-items: center;
+  border-radius: 50%;
+  background: #e7f0e5;
+  color: #527a51;
+}
+.publishedReady strong,
+.publishedReady small { display: block; }
+.publishedReady strong { font-size: 12px; font-weight: 650; }
+.publishedReady small { margin-top: 4px; color: var(--muted); font-size: 9px; line-height: 1.35; }
+.publishedToolbar :global(section[aria-label="Taklifnoma havolasi"]) {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  flex: 1 1 260px;
+  max-width: 405px;
+}
+.publishedToolbar :global(section[aria-label="Taklifnoma havolasi"] input) {
+  flex: 1;
+  width: 100px;
+  height: 34px;
+  padding: 7px 9px;
+  border-color: var(--line);
+  border-radius: 8px;
+  background: #fffdf9;
+  font-size: 10px;
+}
+.publishedToolbar :global(section[aria-label="Taklifnoma havolasi"] > div) { margin: 0; flex-wrap: nowrap; gap: 5px; }
+.publishedToolbar :global(section[aria-label="Taklifnoma havolasi"] > div button),
+.publishedToolbar :global(section[aria-label="Taklifnoma havolasi"] > div a) {
+  min-height: 34px;
+  padding: 7px 9px;
+  border-color: var(--line);
+  border-radius: 8px;
+  background: #fffdf9;
+  font-size: 10px;
+  white-space: nowrap;
+}
+.publishedToolbar :global(section[aria-label="Taklifnoma havolasi"] > span[role="status"]) { display: none; }
+.publishedStatus {
+  display: grid;
+  gap: 4px;
+  flex: 0 0 auto;
+  padding: 2px clamp(10px, 1.1vw, 18px);
+  border-left: 1px solid var(--line);
+}
+.publishedStatus > span { display: flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 600; white-space: nowrap; }
+.publishedStatus i { width: 7px; height: 7px; border-radius: 50%; background: #60936a; }
+.publishedStatus small { color: var(--muted); font-size: 9px; white-space: nowrap; }
 .fullPreviewLink {
   min-height: 40px;
   padding: 9px 13px;
@@ -3161,6 +3230,13 @@
     min-height: 36px;
     white-space: normal;
   }
+  .topbar:has(.publishedToolbar) { height: auto; min-height: var(--toolbar-height); padding: 7px 12px; align-items: flex-start; }
+  .publishedToolbar { overflow-x: auto; gap: 10px; margin-left: 0; padding: 1px 0 5px; scrollbar-width: none; }
+  .publishedToolbar::-webkit-scrollbar { display: none; }
+  .publishedReady { min-width: 175px; padding-right: 10px; }
+  .publishedReady small { max-width: 155px; }
+  .publishedToolbar :global(section[aria-label="Taklifnoma havolasi"]) { flex: 0 0 265px; }
+  .publishedStatus { padding-inline: 10px; }
   .mobileTabs,
   .mobileStepMenu {
     flex-shrink: 0;

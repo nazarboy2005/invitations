@@ -1116,6 +1116,7 @@ export function Studio({
             ? ""
             : "Saqlanmoqda…";
   const identityLocked = invitation.status !== "draft" || !!invitation.imageExportedAt || !!editAccess?.locked;
+  const publishedInvitation = invitation.status === "published" && !!invitation.slug;
   let earliestDraftEventDate: string | undefined;
   if (!identityLocked) {
     try {
@@ -1781,26 +1782,74 @@ export function Studio({
           <ArrowLeft size={19} />
           <span>Taklifnomalarim</span>
         </Link>
-        <div className={styles.toolbarPreview}>
-          {invitation.templateId && (
-            <Link
-              className={styles.fullPreviewLink}
-              href={`/preview?template=${encodeURIComponent(publicTemplateId(invitation.templateId))}&draft=${encodeURIComponent(invitation.id)}`}
-              onClick={() => {
-                try {
-                  sessionStorage.setItem(
-                    `taklifnoma:full-preview:v1:${invitation.id}`,
-                    JSON.stringify(invitation),
-                  );
-                } catch {
-                  // The full preview can recover the last saved browser draft.
-                }
-              }}
-            >
-              <Eye size={14} /> {isImage ? "Rasmni ko‘rish" : "Mehmon sifatida ko‘rish"}
-            </Link>
-          )}
-        </div>
+        {publishedInvitation ? (
+          <div className={styles.publishedToolbar}>
+            <div className={styles.publishedReady}>
+              <span className={styles.readyIcon}>
+                <CheckCircle2 size={17} />
+              </span>
+              <span>
+                <strong>Taklifnomangiz tayyor</strong>
+                <small>Havolani mehmonlaringizga yuborishingiz mumkin.</small>
+              </span>
+            </div>
+            <PublishedLink slug={invitation.slug!} canonicalUrl={publicUrl} compact />
+            <div className={styles.publishedStatus}>
+              <span>
+                <i /> Nashr qilingan
+              </span>
+              {editAccess?.deadlineAt && (
+                <small>
+                  Tahrirlash muddati: {eventTimestamp(editAccess.deadlineAt, invitation.timezone)} · {invitation.timezone}
+                </small>
+              )}
+            </div>
+            {!adminContext && (
+              <InvitationCorrections
+                invitationId={invitation.id}
+                onRefresh={() => {
+                  if (
+                    currentSnapshot !== lastCloudSnapshot.current &&
+                    !window.confirm(
+                      "Saqlanmagan o‘zgarishlar bor. Tasdiqlangan nusxani ochasizmi?",
+                    )
+                  )
+                    return;
+                  try {
+                    deleteBrowserDraft(invitation.id);
+                  } catch {
+                    setError(
+                      "Brauzerdagi qoralamani yangilab bo‘lmadi. Qayta urinib ko‘ring.",
+                    );
+                    return;
+                  }
+                  window.location.reload();
+                }}
+              />
+            )}
+          </div>
+        ) : (
+          <div className={styles.toolbarPreview}>
+            {invitation.templateId && (
+              <Link
+                className={styles.fullPreviewLink}
+                href={`/preview?template=${encodeURIComponent(publicTemplateId(invitation.templateId))}&draft=${encodeURIComponent(invitation.id)}`}
+                onClick={() => {
+                  try {
+                    sessionStorage.setItem(
+                      `taklifnoma:full-preview:v1:${invitation.id}`,
+                      JSON.stringify(invitation),
+                    );
+                  } catch {
+                    // The full preview can recover the last saved browser draft.
+                  }
+                }}
+              >
+                <Eye size={14} /> {isImage ? "Rasmni ko‘rish" : "Mehmon sifatida ko‘rish"}
+              </Link>
+            )}
+          </div>
+        )}
         <div className={styles.toolbarSave}>
           {saveStatus && (
             <span className={styles.saveStatus} role="status">
@@ -1967,10 +2016,10 @@ export function Studio({
                 </a>
               </section>
             )}
-            {invitation.status === "published" && invitation.slug && (
+            {!publishedInvitation && invitation.status === "published" && invitation.slug && (
               <PublishedLink slug={invitation.slug} canonicalUrl={publicUrl} />
             )}
-            {identityLocked && <section className={styles.editPolicy} aria-label="Tahrirlash qoidalari">
+            {identityLocked && !publishedInvitation && <section className={styles.editPolicy} aria-label="Tahrirlash qoidalari">
               <strong>{contentExpired ? "Tahrirlash muddati tugagan" : isImage ? "Rasm yakunlangan" : "Taklifnoma nashr qilingan"}</strong>
               <p>{contentExpired ? "Ma’lumotlar faqat o‘qish uchun. Tuzatish so‘rovi ochiq." : isImage ? "Faqat manzil va sana/vaqt tahrirlanadi." : "Amaliy tafsilotlar va shu kundagi vaqt tahrirlanadi."}</p>
               <details className={styles.policyDetails}><summary>Qoidalar va muddat</summary>
@@ -1980,7 +2029,7 @@ export function Studio({
               {isImage && <button type="button" className={styles.secondaryButton} disabled={busy || uploading} onClick={() => void saveOrPublish("download")}><Download size={16} />{contentExpired ? "Saqlangan PNG rasmni yuklab olish" : "PNG rasmni qayta yuklab olish"}</button>}
               {adminContext && <a href="/admin?view=requests">Tuzatish so‘rovlarini ko‘rib chiqish</a>}
             </section>}
-            {identityLocked && !adminContext && <InvitationCorrections invitationId={invitation.id} onRefresh={() => {
+            {identityLocked && !publishedInvitation && !adminContext && <InvitationCorrections invitationId={invitation.id} onRefresh={() => {
               if (currentSnapshot !== lastCloudSnapshot.current && !window.confirm("Saqlanmagan o‘zgarishlar bor. Tasdiqlangan nusxani ochasizmi?")) return;
               try { deleteBrowserDraft(invitation.id); } catch {
                 setError("Brauzerdagi qoralamani yangilab bo‘lmadi. Qayta urinib ko‘ring.");

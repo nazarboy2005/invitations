@@ -166,6 +166,94 @@
   text-decoration: none;
   font-weight: 600;
 }
+.toolbarRequest { position: relative; flex: 0 0 auto; }
+.toolbarButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 38px;
+  padding: 8px 13px;
+  border: 1px solid #c98e94;
+  border-radius: 9px;
+  background: #fffaf8;
+  color: #873b4a;
+  font: inherit;
+  font-size: 11px;
+  font-weight: 650;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background .18s ease, box-shadow .18s ease, transform .18s ease;
+}
+.toolbarButton:hover { background: #fff1ef; box-shadow: 0 5px 14px #8a3c4b1a; transform: translateY(-1px); }
+.toolbarButton:focus-visible,
+.closeButton:focus-visible,
+.footerClose:focus-visible { outline: 2px solid #903b4b; outline-offset: 3px; }
+.toolbarButton:disabled { opacity: .55; cursor: default; transform: none; }
+.pendingBadge { display: block; position: absolute; top: calc(100% + 5px); right: 0; z-index: 2; width: max-content; color: #8a5b2a; font-size: 9px; }
+.pendingBadge[hidden] { display: none; }
+.toolbarRequest > .error,
+.toolbarRequest > .success { position: absolute; top: calc(100% + 4px); right: 0; z-index: 2; width: max-content; max-width: min(340px, 80vw); margin: 0; padding: 7px 10px; border: 1px solid #d9e9dc; border-radius: 8px; background: #fff; box-shadow: 0 8px 25px #342f2c18; font-size: 11px; }
+.dialog {
+  width: min(610px, calc(100vw - 28px));
+  max-width: none;
+  max-height: min(860px, calc(100dvh - 28px));
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid #eadfd7;
+  border-radius: 22px;
+  color: #342f2c;
+  background: #fffdf9;
+  box-shadow: 0 32px 100px #211b2652;
+}
+.dialog[open] { animation: correctionDialogIn .24s cubic-bezier(.2,.75,.25,1) both; }
+.dialog::backdrop { background: #211b266b; backdrop-filter: blur(5px); }
+.dialogHead { display: flex; align-items: center; gap: 14px; padding: 22px 24px 19px; border-bottom: 1px solid #eee5df; background: radial-gradient(ellipse at top left, #f8ece8, transparent 63%), #fffdf9; }
+.dialogIcon { display: grid; width: 46px; height: 46px; flex: 0 0 46px; place-items: center; border: 1px solid #ead1ce; border-radius: 15px; background: #fff8f4; color: #903b4b; }
+.dialogHead > div:nth-child(2) { min-width: 0; }
+.eyebrow { color: #a06e6b; font-size: 9px; font-weight: 750; letter-spacing: .14em; }
+.dialogHead h2 { margin: 4px 0 3px; color: #382c2b; font-family: var(--font-display, Georgia, serif); font-size: 25px; font-weight: 500; letter-spacing: -.025em; }
+.dialogHead p { margin: 0; color: #887c75; font-size: 12px; line-height: 1.5; }
+.closeButton { display: grid; width: 38px; height: 38px; flex: 0 0 38px; margin-left: auto; place-items: center; border: 1px solid #eee5df; border-radius: 11px; background: #fff; color: #71645d; cursor: pointer; }
+.closeButton:hover { color: #903b4b; border-color: #d6b7b2; }
+.dialogBody { max-height: calc(100dvh - 180px); overflow-y: auto; overscroll-behavior: contain; padding: 18px 24px 22px; }
+.notice { display: flex; align-items: flex-start; gap: 9px; margin-bottom: 17px; padding: 11px 13px; border: 1px solid #e6e8d9; border-radius: 11px; background: #faf9f1; color: #72694d; font-size: 11px; line-height: 1.55; }
+.notice svg { flex: 0 0 auto; color: #7d885c; }
+.dialog .form { gap: 13px; margin-top: 0; }
+.dialog .form > p { margin: 0; color: #786e68; font-size: 12px; line-height: 1.6; }
+.dialog .form label { gap: 7px; color: #554b46; font-size: 12px; font-weight: 650; }
+.dialog .form input,
+.dialog .form textarea,
+.dialog .form select { min-height: 44px; border-color: #e1d7cf; border-radius: 10px; background: #fff; padding: 11px 13px; color: #3d3532; font-size: 13px; box-shadow: 0 1px 2px #382c2b08; }
+.dialog .form input:focus,
+.dialog .form textarea:focus,
+.dialog .form select:focus { outline: 2px solid #bc7c84; outline-offset: 1px; border-color: transparent; }
+.dialog .form fieldset { border-color: #eee5df; border-radius: 12px; background: #fffefa; padding: 14px; }
+.dialog .form legend { color: #8d706c; font-size: 11px; font-weight: 700; }
+.dialog .actions { padding-top: 5px; }
+.dialog .actions button { min-height: 43px; border-radius: 10px; padding-inline: 15px; font-size: 12px; font-weight: 650; }
+.dialog .primary { background: linear-gradient(135deg, #984656, #7f3443); border-color: #843747; box-shadow: 0 5px 12px #903b4b25; }
+.dialog .outline { border-color: #e3d8d2; background: #fff; }
+.dialog .error { margin: 0; }
+.dialogError { margin: 0; color: #a52937; font-size: 12px; line-height: 1.5; }
+.dialog .history { margin-top: 17px; border-top-color: #eee5df; }
+.dialog .history summary { color: #7e3848; font-size: 12px; font-weight: 650; }
+.refreshButton { display: inline-flex; align-items: center; gap: 6px; margin-top: 8px; border: 0; background: none; color: #7e3848; font: inherit; font-size: 11px; cursor: pointer; }
+.dialogFooter { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 13px 24px; border-top: 1px solid #eee5df; background: #fffaf5; }
+.dialogFooter > span { display: flex; align-items: center; gap: 7px; color: #8a7c73; font-size: 10px; line-height: 1.45; }
+.dialogFooter > span svg { flex: 0 0 auto; color: #a37a71; }
+.footerClose { min-height: 36px; padding: 7px 15px; border: 1px solid #e4d8d2; border-radius: 9px; background: white; color: #625650; font: inherit; font-size: 11px; font-weight: 600; cursor: pointer; }
+@keyframes correctionDialogIn { from { opacity: 0; transform: translateY(12px) scale(.985); } to { opacity: 1; transform: translateY(0) scale(1); } }
+@media (max-width: 600px) {
+  .dialog { width: calc(100vw - 20px); max-height: calc(100dvh - 20px); border-radius: 18px; }
+  .dialogHead { padding: 17px 17px 15px; gap: 11px; }
+  .dialogIcon { width: 40px; height: 40px; flex-basis: 40px; border-radius: 13px; }
+  .dialogHead h2 { font-size: 22px; }
+  .dialogBody { max-height: calc(100dvh - 160px); padding: 15px 17px 18px; }
+  .dialogFooter { padding: 11px 17px; }
+  .dialogFooter > span { max-width: 70%; }
+}
+@media (prefers-reduced-motion: reduce) { .dialog[open], .toolbarButton { animation: none; transition: none; } }
 @media (max-width: 600px) {
   .panel {
     padding: 15px;
