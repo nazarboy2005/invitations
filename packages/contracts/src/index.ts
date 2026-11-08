@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { resolveTemplateId } from "./template-identity";
+import { templateVisitorFeatures, type TemplateVisitorFeatures } from "./capabilities";
 
 export const LOCALES = ["uz-Latn", "uz-Cyrl", "en", "ru"] as const;
 export const localeSchema = z.enum(LOCALES);
@@ -436,6 +437,12 @@ export function defaultDressCode(): Invitation["dressCode"] {
 }
 
 export type TemplateCategory = { id: string; name: string; position: number };
+export const templateVisitorFeaturesSchema = z.object({
+  rsvp: z.enum(["none", "deadline", "phone", "form"]),
+  wishes: z.boolean(),
+  receipts: z.boolean(),
+  giftIntentions: z.boolean(),
+}).strict();
 export const TEMPLATE_CATEGORIES: TemplateCategory[] = [
   { id: "wedding", name: "Nikoh to‘yi", position: 0 },
   { id: "birthday", name: "Tug‘ilgan kun", position: 1 },
@@ -463,8 +470,9 @@ export type TemplateDefinition = {
   /** Retired designs can remain usable by invitations that already selected them. */
   retired?: boolean;
   published: boolean;
+  visitorFeatures: TemplateVisitorFeatures;
 };
-export const TEMPLATES: TemplateDefinition[] = [
+const TEMPLATE_DEFINITIONS: Omit<TemplateDefinition, "visitorFeatures">[] = [
   {
     id: "ivory-rose-card",
     name: "Oq atirgul",
@@ -1935,20 +1943,6 @@ export const TEMPLATES: TemplateDefinition[] = [
     published: true,
   },
   {
-    id: "orchid-amplop",
-    name: "Orchid Amplop",
-    description:
-      "O‘rmon manzarasi, nafis gul ramzi va ochiladigan konvertli nikoh taklifnomasi.",
-    previewImage: "/templates/chorlove/orchid-amplop/assets/catalog-opening.png",
-    previewEventType: "wedding",
-    categoryIds: ["wedding"],
-    supportedEventTypes: ["wedding"],
-    priceMinor: 100000,
-    currency: "UZS",
-    accent: "#e382d3",
-    published: true,
-  },
-  {
     id: "palace-rose",
     name: "Palace Rose",
     description:
@@ -2091,6 +2085,10 @@ export const TEMPLATES: TemplateDefinition[] = [
     published: false,
   },
 ];
+export const TEMPLATES: TemplateDefinition[] = TEMPLATE_DEFINITIONS.map((template) => ({
+  ...template,
+  visitorFeatures: templateVisitorFeatures(template.id),
+}));
 export const templateById = (id: string) => {
   const templateId = resolveTemplateId(id);
   return TEMPLATES.find((item) => item.id === templateId);

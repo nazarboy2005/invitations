@@ -1,5 +1,14 @@
 # Invitation templates
 
+Every catalog definition declares `visitorFeatures` (RSVP mode, wishes, private
+receipt uploads and gift intentions), derived from the explicit source capability
+registry. Persist these four fields in `templates.visitor_features` in the
+template's additive registration migration. New database rows default to no
+visitor forms until support is declared. Phone/deadline instructions are not
+online RSVP forms. Keep source handlers, metadata and activity visibility in
+agreement; `scripts/templates/audit-visitor-features.mts` records the complete
+catalog inventory, including unpublished designs.
+
 The four requested E-invitation designs—**Olive Manor**, **Islamic Edition**,
 **Monochrome Editorial** and **Xatna Edition**—now use the complete source DOM,
 original scoped CSS, local fonts/artwork and dedicated motion with a separate

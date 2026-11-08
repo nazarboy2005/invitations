@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { addLanguage, createInvitation, invitationSchema, TEMPLATES } from "../packages/contracts/src/index";
-import { IMAGE_REQUIRED_FIELDS, normalizeInvitation, templateCapabilities } from "../packages/contracts/src/capabilities";
+import { IMAGE_REQUIRED_FIELDS, normalizeInvitation, templateCapabilities, templateVisitorFeatures } from "../packages/contracts/src/capabilities";
 import { visitorLocale } from "../packages/contracts/src/visitor-locale";
 import { publicationIssues } from "../packages/contracts/src/publication";
 import { assertManagedImages } from "../apps/web/src/server/publication";
@@ -10,7 +10,7 @@ import { paymentIdentity, paymentIdentityMatches } from "../packages/contracts/s
 test("every catalog design explicitly declares supported slots, including maps", () => {
   for (const template of TEMPLATES) {
     const c = templateCapabilities(template.id);
-    assert.equal(c, template.capabilities, template.id);
+    assert.deepEqual(template.visitorFeatures, templateVisitorFeatures(template.id), template.id);
     assert.equal(c.maps, true, template.id);
     assert.ok(c.people >= 1 && c.people <= 20, template.id);
     assert.ok(!c.receipts || c.gift, template.id);

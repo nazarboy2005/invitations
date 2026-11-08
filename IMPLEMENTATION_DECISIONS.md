@@ -56,6 +56,8 @@ This file records durable, user-approved product requirements and a small number
 
 ## RSVP, guest wishes, and to'yona
 
+- User requirement: save source-supported visitor features on every template, including unpublished templates. Activity shows only supported, enabled submission sections; retain access to existing submissions when an owner disables an optional form. Phone/deadline RSVP information is not an online attendance response form.
+- User requirement: notify the owner through Telegram when visitor submissions are saved, using short, clean messages. Keep website activity as the durable record and keep receipt files private; bot messages link to activity.
 - RSVP attendance is one person per response; do not add a guest-count field unless the user approves a contract change.
 - Persist guest wishes against the invitation. New wishes remain private and pending until the owner approves them. Only approved, non-deleted wishes appear publicly. Owners can moderate them through the website; bot notifications are supplementary. Verify ownership server-side for every moderation action and safely render guest text.
 - To'yona card details are optional and creator-controlled. Receipt uploads are a separate optional feature. Keep uploaded receipts private to the owner and authorized administrators; a receipt is not proof of money received. The owner reviews it manually. AI receipt screening was explicitly declined.

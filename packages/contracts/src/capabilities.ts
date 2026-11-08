@@ -68,6 +68,36 @@ export function templateCapabilities(id: string): TemplateCapabilities {
   return TEMPLATE_CAPABILITIES[id] ?? unsupported;
 }
 
+/** Source-supported visitor interactions; stored on every catalog template. */
+export type TemplateVisitorFeatures = {
+  rsvp: TemplateCapabilities["rsvp"];
+  wishes: boolean;
+  receipts: boolean;
+  giftIntentions: boolean;
+};
+
+export function templateVisitorFeatures(id: string): TemplateVisitorFeatures {
+  const c = templateCapabilities(id);
+  return {
+    rsvp: c.rsvp,
+    wishes: c.wishes,
+    receipts: c.gift && c.receipts,
+    giftIntentions: id === "wedivo-pulau-sehati",
+  };
+}
+
+export function invitationActivityFeatures(invitation: Invitation, counts = { responses: 0, wishes: 0, receipts: 0, intentions: 0 }) {
+  const f = templateVisitorFeatures(invitation.templateId);
+  const giftWell = (invitation.templateData["wedivo-pulau-sehati"] as { giftWell?: { enabled?: boolean } } | undefined)?.giftWell;
+  // Keep previous submissions accessible after the owner turns an optional form off.
+  return {
+    responses: f.rsvp === "form" && (invitation.rsvp.enabled || counts.responses > 0),
+    wishes: f.wishes && (invitation.wishes.enabled || counts.wishes > 0),
+    receipts: f.receipts && ((invitation.gift.enabled && invitation.gift.receiptUploadEnabled) || counts.receipts > 0),
+    intentions: f.giftIntentions && (!!giftWell?.enabled || counts.intentions > 0),
+  };
+}
+
 /** Project content onto the chosen design's actual slots before any persistence.
  * Pure and idempotent; also used by Studio, never dependent on client metadata.
  */

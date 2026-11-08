@@ -9,8 +9,13 @@ import {
 } from "@/server/public";
 import { verifySameOrigin } from "@/server/auth";
 import { digest, randomToken } from "@/server/auth/crypto";
+import { randomUUID } from "node:crypto";
+import { templateVisitorFeatures } from "@taklifnoma/contracts/capabilities";
+import { enqueueGuestNotification } from "@/server/guest-notifications";
+import { scheduleGuestNotification } from "@/server/schedule-guest-notification";
 type Context = { params: Promise<{ id: string }> };
 export const runtime = "nodejs";
+export const maxDuration = 60;
 export async function POST(request: Request, { params }: Context) {
   try {
     verifySameOrigin(request);
@@ -23,6 +28,7 @@ export async function POST(request: Request, { params }: Context) {
       day: "2-digit",
     }).format(new Date());
     if (
+      templateVisitorFeatures(invitation.templateId).rsvp !== "form" ||
       !invitation.rsvp.enabled ||
       (invitation.rsvp.deadline && invitation.rsvp.deadline < today)
     )
@@ -59,13 +65,16 @@ export async function POST(request: Request, { params }: Context) {
     );
     if (input.status === "yes" && (party < 1 || party > maximum))
       throw new ApiError(400, "PARTY_SIZE", "Mehmonlar sonini tekshiring.");
-    await getDb().begin(async (tx) => {
+    const jobId = await getDb().begin(async (tx) => {
       if (guest) {
         await tx`SELECT id FROM invitation_guests WHERE id=${guest.id} FOR UPDATE`;
-        await tx`DELETE FROM rsvp_responses WHERE invitation_id=${invitationId} AND guest_id=${guest.id}`;
       }
-      await tx`INSERT INTO rsvp_responses(invitation_id,guest_id,name,status,party_size,note,response_token_hash) VALUES(${invitationId},${guest?.id ?? null},${input.name},${input.status},${party},${input.note},${responseHash}) ON CONFLICT(response_token_hash) DO UPDATE SET name=EXCLUDED.name,status=EXCLUDED.status,party_size=EXCLUDED.party_size,note=EXCLUDED.note,created_at=now()`;
+      const [saved] = await tx`INSERT INTO rsvp_responses(invitation_id,guest_id,name,status,party_size,note,response_token_hash) VALUES(${invitationId},${guest?.id ?? null},${input.name},${input.status},${party},${input.note},${responseHash}) ON CONFLICT(response_token_hash) DO UPDATE SET name=EXCLUDED.name,status=EXCLUDED.status,party_size=EXCLUDED.party_size,note=EXCLUDED.note,created_at=now()
+        WHERE (rsvp_responses.name,rsvp_responses.status,rsvp_responses.party_size,COALESCE(rsvp_responses.note,'')) IS DISTINCT FROM (EXCLUDED.name,EXCLUDED.status,EXCLUDED.party_size,EXCLUDED.note) RETURNING id`;
+      if (!saved) return;
+      return enqueueGuestNotification(tx, { kind: "response", invitationId, recordId: saved.id, name: input.name, status: input.status, note: input.note }, `response:${saved.id}:${randomUUID()}`);
     });
+    scheduleGuestNotification(jobId);
     const response = NextResponse.json(
       { ok: true, message: "Javobingiz saqlandi. Rahmat!" },
       { status: 201 },

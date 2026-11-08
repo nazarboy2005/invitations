@@ -1,0 +1,11 @@
+{
+  "immediateTelegramMessages": 6,
+  "repeatSubmissionsDeduplicated": true,
+  "allFourSubmissionTypes": true,
+  "retryAndConcurrencyChecks": true,
+  "ownerAuthorizationAndPrivateReceipts": true,
+  "activityLayouts": 5,
+  "browserErrors": [],
+  "telegram": "All calls intercepted; no real messages sent",
+  "cleanup": "Disposable rows and uploaded receipt removed in finally"
+}

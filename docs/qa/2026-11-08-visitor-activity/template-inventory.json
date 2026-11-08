@@ -1,0 +1,2619 @@
+[
+  {
+    "id": "ivory-rose-card",
+    "name": "Oq atirgul",
+    "features": {
+      "rsvp": "none",
+      "wishes": false,
+      "receipts": false,
+      "giftIntentions": false
+    },
+    "evidence": "Static image; no visitor submission page",
+    "files": [],
+    "issues": []
+  },
+  {
+    "id": "lola-maktubi",
+    "name": "Lola maktubi",
+    "features": {
+      "rsvp": "none",
+      "wishes": false,
+      "receipts": false,
+      "giftIntentions": false
+    },
+    "evidence": "Static image; no visitor submission page",
+    "files": [],
+    "issues": []
+  },
+  {
+    "id": "moviy-ravoq-card",
+    "name": "Moviy ravoq",
+    "features": {
+      "rsvp": "none",
+      "wishes": false,
+      "receipts": false,
+      "giftIntentions": false
+    },
+    "evidence": "Static image; no visitor submission page",
+    "files": [],
+    "issues": []
+  },
+  {
+    "id": "sahar-ifori",
+    "name": "Sahar ifori",
+    "features": {
+      "rsvp": "none",
+      "wishes": false,
+      "receipts": false,
+      "giftIntentions": false
+    },
+    "evidence": "Static image; no visitor submission page",
+    "files": [],
+    "issues": []
+  },
+  {
+    "id": "wedivo-pulau-sehati",
+    "name": "Ko‘ngillar oroli",
+    "features": {
+      "rsvp": "form",
+      "wishes": true,
+      "receipts": false,
+      "giftIntentions": true
+    },
+    "evidence": "Packaged page/script dependency graph",
+    "files": [
+      "apps/web/public/templates/wedivo-pulau-sehati/index.html",
+      "apps/web/public/templates/wedivo-pulau-sehati/ui-copy.js",
+      "apps/web/public/templates/wedivo-pulau-sehati/adapter.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "oltin-darvoza-ortidagi-baxt",
+    "name": "Oltin darvoza ortidagi baxt",
+    "features": {
+      "rsvp": "form",
+      "wishes": true,
+      "receipts": false,
+      "giftIntentions": false
+    },
+    "evidence": "Packaged page/script dependency graph",
+    "files": [
+      "apps/web/public/templates/onlinetaklifnoma-oltin-darvoza-ortidagi-baxt/index.html",
+      "apps/web/public/templates/onlinetaklifnoma-oltin-darvoza-ortidagi-baxt/bridge.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "gulli-darvoza",
+    "name": "Gulli darvoza",
+    "features": {
+      "rsvp": "form",
+      "wishes": true,
+      "receipts": false,
+      "giftIntentions": false
+    },
+    "evidence": "Packaged page/script dependency graph",
+    "files": [
+      "apps/web/public/templates/onlinetaklifnoma-gulli-darvoza/index.html",
+      "apps/web/public/templates/onlinetaklifnoma-gulli-darvoza/bridge.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "ming-bir-kecha",
+    "name": "Ming bir kecha",
+    "features": {
+      "rsvp": "form",
+      "wishes": true,
+      "receipts": false,
+      "giftIntentions": false
+    },
+    "evidence": "Packaged page/script dependency graph",
+    "files": [
+      "apps/web/public/templates/onlinetaklifnoma-ming-bir-kecha/index.html",
+      "apps/web/public/templates/onlinetaklifnoma-ming-bir-kecha/bridge.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "andalus-darvozasi",
+    "name": "Andalus darvozasi",
+    "features": {
+      "rsvp": "form",
+      "wishes": true,
+      "receipts": false,
+      "giftIntentions": false
+    },
+    "evidence": "Packaged page/script dependency graph",
+    "files": [
+      "apps/web/public/templates/onlinetaklifnoma-andalus-darvozasi/index.html",
+      "apps/web/public/templates/onlinetaklifnoma-andalus-darvozasi/bridge.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "samarqand-peshtoqi",
+    "name": "Samarqand peshtoqi",
+    "features": {
+      "rsvp": "form",
+      "wishes": true,
+      "receipts": false,
+      "giftIntentions": false
+    },
+    "evidence": "Packaged page/script dependency graph",
+    "files": [
+      "apps/web/public/templates/onlinetaklifnoma-samarqand-peshtoqi/index.html",
+      "apps/web/public/templates/onlinetaklifnoma-samarqand-peshtoqi/bridge.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "shisha-bog",
+    "name": "Shisha bogʻ",
+    "features": {
+      "rsvp": "form",
+      "wishes": true,
+      "receipts": false,
+      "giftIntentions": false
+    },
+    "evidence": "Packaged page/script dependency graph",
+    "files": [
+      "apps/web/public/templates/onlinetaklifnoma-shisha-bog/index.html",
+      "apps/web/public/templates/onlinetaklifnoma-shisha-bog/bridge.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "kapadokiya-tongi",
+    "name": "Kapadokiya tongi",
+    "features": {
+      "rsvp": "form",
+      "wishes": true,
+      "receipts": false,
+      "giftIntentions": false
+    },
+    "evidence": "Packaged page/script dependency graph",
+    "files": [
+      "apps/web/public/templates/onlinetaklifnoma-kapadokiya-tongi/index.html",
+      "apps/web/public/templates/onlinetaklifnoma-kapadokiya-tongi/bridge.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "buxoro-ravoq",
+    "name": "Buxoro ravoq",
+    "features": {
+      "rsvp": "form",
+      "wishes": true,
+      "receipts": false,
+      "giftIntentions": false
+    },
+    "evidence": "Packaged page/script dependency graph",
+    "files": [
+      "apps/web/public/templates/onlinetaklifnoma-buxoro-ravoq/index.html",
+      "apps/web/public/templates/onlinetaklifnoma-buxoro-ravoq/bridge.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "jannat-bogi",
+    "name": "Jannat bogʻi",
+    "features": {
+      "rsvp": "form",
+      "wishes": true,
+      "receipts": false,
+      "giftIntentions": false
+    },
+    "evidence": "Packaged page/script dependency graph",
+    "files": [
+      "apps/web/public/templates/onlinetaklifnoma-jannat-bogi/index.html",
+      "apps/web/public/templates/onlinetaklifnoma-jannat-bogi/bridge.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "tojmahal-oltin-darvozasi",
+    "name": "Tojmahal oltin darvozasi",
+    "features": {
+      "rsvp": "form",
+      "wishes": true,
+      "receipts": false,
+      "giftIntentions": false
+    },
+    "evidence": "Packaged page/script dependency graph",
+    "files": [
+      "apps/web/public/templates/onlinetaklifnoma-tojmahal-oltin-darvozasi/index.html",
+      "apps/web/public/templates/onlinetaklifnoma-tojmahal-oltin-darvozasi/bridge.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "zarrin-doppi",
+    "name": "Zarrin do‘ppi",
+    "features": {
+      "rsvp": "form",
+      "wishes": true,
+      "receipts": false,
+      "giftIntentions": false
+    },
+    "evidence": "Packaged page/script dependency graph",
+    "files": [
+      "apps/web/public/templates/onlinetaklifnoma-zarrin-doppi/index.html",
+      "apps/web/public/templates/onlinetaklifnoma-zarrin-doppi/bridge.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "fairy",
+    "name": "Fairy",
+    "features": {
+      "rsvp": "form",
+      "wishes": true,
+      "receipts": false,
+      "giftIntentions": false
+    },
+    "evidence": "Packaged page/script dependency graph",
+    "files": [
+      "apps/web/public/templates/fairy/index.html",
+      "apps/web/public/templates/fairy/assets/js/fairy.js",
+      "apps/web/public/templates/fairy/assets/js/fairy-adapter.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "butterfly",
+    "name": "Butterfly",
+    "features": {
+      "rsvp": "none",
+      "wishes": false,
+      "receipts": false,
+      "giftIntentions": false
+    },
+    "evidence": "Packaged page/script dependency graph",
+    "files": [
+      "apps/web/public/templates/butterfly/index.html",
+      "apps/web/public/templates/butterfly/assets/js/butterfly.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "girlsparty",
+    "name": "Girls Party",
+    "features": {
+      "rsvp": "none",
+      "wishes": false,
+      "receipts": false,
+      "giftIntentions": false
+    },
+    "evidence": "No packaged entry",
+    "files": [],
+    "issues": [
+      "Queued design: entry document absent; visitor forms disabled"
+    ]
+  },
+  {
+    "id": "estelle",
+    "name": "Estelle",
+    "features": {
+      "rsvp": "none",
+      "wishes": false,
+      "receipts": false,
+      "giftIntentions": false
+    },
+    "evidence": "No packaged entry",
+    "files": [],
+    "issues": [
+      "Queued design: entry document absent; visitor forms disabled"
+    ]
+  },
+  {
+    "id": "velora",
+    "name": "Velora",
+    "features": {
+      "rsvp": "form",
+      "wishes": false,
+      "receipts": false,
+      "giftIntentions": false
+    },
+    "evidence": "Packaged page/script dependency graph",
+    "files": [
+      "apps/web/public/templates/velora/index.html",
+      "apps/web/public/templates/velora/assets/vendor/aos.js",
+      "apps/web/public/templates/velora/assets/js/velora.js",
+      "apps/web/public/templates/velora/assets/js/velora-adapter.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "velvet",
+    "name": "Velvet",
+    "features": {
+      "rsvp": "form",
+      "wishes": false,
+      "receipts": false,
+      "giftIntentions": false
+    },
+    "evidence": "Packaged page/script dependency graph",
+    "files": [
+      "apps/web/public/templates/velvet/index.html",
+      "apps/web/public/templates/velvet/bridge.js",
+      "apps/web/public/templates/velvet/assets/js/velvet.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "aurelia",
+    "name": "Aurelia",
+    "features": {
+      "rsvp": "form",
+      "wishes": true,
+      "receipts": false,
+      "giftIntentions": false
+    },
+    "evidence": "Packaged page/script dependency graph",
+    "files": [
+      "apps/web/public/templates/aurelia/index.html",
+      "apps/web/public/templates/aurelia/assets/js/aurelia-adapter.js",
+      "apps/web/public/templates/aurelia/assets/js/aurelia.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "evelina",
+    "name": "Evelina",
+    "features": {
+      "rsvp": "form",
+      "wishes": true,
+      "receipts": false,
+      "giftIntentions": false
+    },
+    "evidence": "Packaged page/script dependency graph",
+    "files": [
+      "apps/web/public/templates/evelina/index.html",
+      "apps/web/public/templates/evelina/assets/js/evelina.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "anor",
+    "name": "Anor",
+    "features": {
+      "rsvp": "form",
+      "wishes": true,
+      "receipts": true,
+      "giftIntentions": false
+    },
+    "evidence": "Page handlers + shared private-receipt adapter",
+    "files": [
+      "apps/web/public/templates/anor/source/index.html",
+      "apps/web/public/templates/anor/source/i18n-shared.js",
+      "apps/web/public/templates/anor/source/i18n.js",
+      "apps/web/public/templates/anor/source/vendor/gsap.min.js",
+      "apps/web/public/templates/anor/source/vendor/ScrollTrigger.min.js",
+      "apps/web/public/templates/anor/source/seeds.js",
+      "apps/web/public/templates/anor/source/meta.js",
+      "apps/web/public/templates/anor/source/bridge.js",
+      "apps/web/public/templates/anor/source/template.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "oltin-nur",
+    "name": "Oltin Nur",
+    "features": {
+      "rsvp": "form",
+      "wishes": true,
+      "receipts": true,
+      "giftIntentions": false
+    },
+    "evidence": "Page handlers + shared private-receipt adapter",
+    "files": [
+      "apps/web/public/templates/oltin-nur/index.html",
+      "apps/web/public/templates/shared/nikoh/vendor/gsap.min.js",
+      "apps/web/public/templates/shared/nikoh/vendor/ScrollTrigger.min.js",
+      "apps/web/public/templates/shared/nikoh/vendor/lz-string.min.js",
+      "apps/web/public/templates/shared/nikoh/invite-codec.js",
+      "apps/web/public/templates/shared/nikoh/i18n.js",
+      "apps/web/public/templates/shared/nikoh/platform-bridge.js",
+      "apps/web/public/templates/shared/nikoh/core.js",
+      "apps/web/public/templates/oltin-nur/meta.js",
+      "apps/web/public/templates/oltin-nur/entrance.js",
+      "apps/web/public/templates/oltin-nur/template.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "samarqand-kechasi",
+    "name": "Samarqand Kechasi",
+    "features": {
+      "rsvp": "form",
+      "wishes": true,
+      "receipts": true,
+      "giftIntentions": false
+    },
+    "evidence": "Page handlers + shared private-receipt adapter",
+    "files": [
+      "apps/web/public/templates/samarqand-kechasi/index.html",
+      "apps/web/public/templates/shared/nikoh/vendor/gsap.min.js",
+      "apps/web/public/templates/shared/nikoh/vendor/ScrollTrigger.min.js",
+      "apps/web/public/templates/shared/nikoh/vendor/lz-string.min.js",
+      "apps/web/public/templates/shared/nikoh/invite-codec.js",
+      "apps/web/public/templates/shared/nikoh/i18n.js",
+      "apps/web/public/templates/shared/nikoh/platform-bridge.js",
+      "apps/web/public/templates/shared/nikoh/core.js",
+      "apps/web/public/templates/samarqand-kechasi/meta.js",
+      "apps/web/public/templates/samarqand-kechasi/fireworks.js",
+      "apps/web/public/templates/samarqand-kechasi/template.js",
+      "apps/web/public/templates/samarqand-kechasi/motion.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "bogi-eram",
+    "name": "Bog‘i Eram",
+    "features": {
+      "rsvp": "form",
+      "wishes": true,
+      "receipts": true,
+      "giftIntentions": false
+    },
+    "evidence": "Page handlers + shared private-receipt adapter",
+    "files": [
+      "apps/web/public/templates/bogi-eram/index.html",
+      "apps/web/public/templates/shared/nikoh/vendor/gsap.min.js",
+      "apps/web/public/templates/shared/nikoh/vendor/ScrollTrigger.min.js",
+      "apps/web/public/templates/shared/nikoh/vendor/lz-string.min.js",
+      "apps/web/public/templates/shared/nikoh/invite-codec.js",
+      "apps/web/public/templates/shared/nikoh/i18n.js",
+      "apps/web/public/templates/bogi-eram/i18n.js",
+      "apps/web/public/templates/shared/nikoh/platform-bridge.js",
+      "apps/web/public/templates/shared/nikoh/core.js",
+      "apps/web/public/templates/bogi-eram/meta.js",
+      "apps/web/public/templates/bogi-eram/template.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "atlas",
+    "name": "Atlas",
+    "features": {
+      "rsvp": "form",
+      "wishes": true,
+      "receipts": true,
+      "giftIntentions": false
+    },
+    "evidence": "Page handlers + shared private-receipt adapter",
+    "files": [
+      "apps/web/public/templates/atlas/index.html",
+      "apps/web/public/templates/shared/nikoh/vendor/gsap.min.js",
+      "apps/web/public/templates/shared/nikoh/vendor/ScrollTrigger.min.js",
+      "apps/web/public/templates/shared/nikoh/vendor/lz-string.min.js",
+      "apps/web/public/templates/shared/nikoh/invite-codec.js",
+      "apps/web/public/templates/shared/nikoh/i18n.js",
+      "apps/web/public/templates/shared/nikoh/platform-bridge.js",
+      "apps/web/public/templates/shared/nikoh/core.js",
+      "apps/web/public/templates/atlas/meta.js",
+      "apps/web/public/templates/atlas/platform-adapter.js",
+      "apps/web/public/templates/atlas/template.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "uchar-gilam",
+    "name": "Uchar Gilam",
+    "features": {
+      "rsvp": "form",
+      "wishes": true,
+      "receipts": true,
+      "giftIntentions": false
+    },
+    "evidence": "Page handlers + shared private-receipt adapter",
+    "files": [
+      "apps/web/public/templates/uchar-gilam/index.html",
+      "apps/web/public/templates/shared/nikoh/vendor/gsap.min.js",
+      "apps/web/public/templates/shared/nikoh/vendor/ScrollTrigger.min.js",
+      "apps/web/public/templates/shared/nikoh/vendor/MotionPathPlugin.min.js",
+      "apps/web/public/templates/shared/nikoh/vendor/lz-string.min.js",
+      "apps/web/public/templates/shared/nikoh/invite-codec.js",
+      "apps/web/public/templates/shared/nikoh/i18n.js",
+      "apps/web/public/templates/uchar-gilam/i18n.js",
+      "apps/web/public/templates/shared/nikoh/platform-bridge.js",
+      "apps/web/public/templates/shared/nikoh/core.js",
+      "apps/web/public/templates/uchar-gilam/meta.js",
+      "apps/web/public/templates/uchar-gilam/template.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "oq-kabutar",
+    "name": "Oq Kabutar",
+    "features": {
+      "rsvp": "form",
+      "wishes": true,
+      "receipts": true,
+      "giftIntentions": false
+    },
+    "evidence": "Page handlers + shared private-receipt adapter",
+    "files": [
+      "apps/web/public/templates/oq-kabutar/index.html",
+      "apps/web/public/templates/shared/nikoh/vendor/gsap.min.js",
+      "apps/web/public/templates/shared/nikoh/vendor/ScrollTrigger.min.js",
+      "apps/web/public/templates/shared/nikoh/vendor/lz-string.min.js",
+      "apps/web/public/templates/shared/nikoh/invite-codec.js",
+      "apps/web/public/templates/shared/nikoh/i18n.js",
+      "apps/web/public/templates/shared/nikoh/platform-bridge.js",
+      "apps/web/public/templates/shared/nikoh/core.js",
+      "apps/web/public/templates/oq-kabutar/meta.js",
+      "apps/web/public/templates/oq-kabutar/template.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "kuzgi-chinor",
+    "name": "Kuzgi Chinor",
+    "features": {
+      "rsvp": "form",
+      "wishes": true,
+      "receipts": true,
+      "giftIntentions": false
+    },
+    "evidence": "Page handlers + shared private-receipt adapter",
+    "files": [
+      "apps/web/public/templates/kuzgi-chinor/index.html",
+      "apps/web/public/templates/shared/nikoh/vendor/gsap.min.js",
+      "apps/web/public/templates/shared/nikoh/vendor/ScrollTrigger.min.js",
+      "apps/web/public/templates/shared/nikoh/vendor/lz-string.min.js",
+      "apps/web/public/templates/shared/nikoh/invite-codec.js",
+      "apps/web/public/templates/shared/nikoh/i18n.js",
+      "apps/web/public/templates/shared/nikoh/platform-bridge.js",
+      "apps/web/public/templates/shared/nikoh/core.js",
+      "apps/web/public/templates/kuzgi-chinor/meta.js",
+      "apps/web/public/templates/kuzgi-chinor/template.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "muhabbat-kitobi",
+    "name": "Muhabbat Kitobi",
+    "features": {
+      "rsvp": "form",
+      "wishes": true,
+      "receipts": true,
+      "giftIntentions": false
+    },
+    "evidence": "Page handlers + shared private-receipt adapter",
+    "files": [
+      "apps/web/public/templates/muhabbat-kitobi/index.html",
+      "apps/web/public/templates/shared/nikoh/vendor/gsap.min.js",
+      "apps/web/public/templates/shared/nikoh/vendor/ScrollTrigger.min.js",
+      "apps/web/public/templates/shared/nikoh/vendor/lz-string.min.js",
+      "apps/web/public/templates/shared/nikoh/invite-codec.js",
+      "apps/web/public/templates/shared/nikoh/i18n.js",
+      "apps/web/public/templates/shared/nikoh/platform-bridge.js",
+      "apps/web/public/templates/shared/nikoh/core.js",
+      "apps/web/public/templates/muhabbat-kitobi/meta.js",
+      "apps/web/public/templates/muhabbat-kitobi/template.js",
+      "apps/web/public/templates/muhabbat-kitobi/motion.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "sahifa",
+    "name": "Sahifa",
+    "features": {
+      "rsvp": "form",
+      "wishes": true,
+      "receipts": true,
+      "giftIntentions": false
+    },
+    "evidence": "Page handlers + shared private-receipt adapter",
+    "files": [
+      "apps/web/public/templates/sahifa/index.html",
+      "apps/web/public/templates/shared/nikoh/vendor/gsap.min.js",
+      "apps/web/public/templates/shared/nikoh/vendor/ScrollTrigger.min.js",
+      "apps/web/public/templates/shared/nikoh/vendor/lz-string.min.js",
+      "apps/web/public/templates/shared/nikoh/invite-codec.js",
+      "apps/web/public/templates/shared/nikoh/i18n.js",
+      "apps/web/public/templates/shared/nikoh/platform-bridge.js",
+      "apps/web/public/templates/shared/nikoh/core.js",
+      "apps/web/public/templates/sahifa/meta.js",
+      "apps/web/public/templates/sahifa/template.js",
+      "apps/web/public/templates/sahifa/motion.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "oltin-uzuk",
+    "name": "Oltin Uzuk",
+    "features": {
+      "rsvp": "form",
+      "wishes": true,
+      "receipts": true,
+      "giftIntentions": false
+    },
+    "evidence": "Page handlers + shared private-receipt adapter",
+    "files": [
+      "apps/web/public/templates/oltin-uzuk/index.html",
+      "apps/web/public/templates/shared/nikoh/vendor/gsap.min.js",
+      "apps/web/public/templates/shared/nikoh/vendor/ScrollTrigger.min.js",
+      "apps/web/public/templates/shared/nikoh/vendor/lz-string.min.js",
+      "apps/web/public/templates/shared/nikoh/invite-codec.js",
+      "apps/web/public/templates/shared/nikoh/i18n.js",
+      "apps/web/public/templates/oltin-uzuk/i18n.js",
+      "apps/web/public/templates/shared/nikoh/platform-bridge.js",
+      "apps/web/public/templates/shared/nikoh/core.js",
+      "apps/web/public/templates/oltin-uzuk/meta.js",
+      "apps/web/public/templates/oltin-uzuk/template.js",
+      "apps/web/public/templates/oltin-uzuk/rings.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "oynavand",
+    "name": "Oynavand",
+    "features": {
+      "rsvp": "form",
+      "wishes": true,
+      "receipts": true,
+      "giftIntentions": false
+    },
+    "evidence": "Page handlers + shared private-receipt adapter",
+    "files": [
+      "apps/web/public/templates/oynavand/index.html",
+      "apps/web/public/templates/shared/nikoh/vendor/gsap.min.js",
+      "apps/web/public/templates/shared/nikoh/vendor/ScrollTrigger.min.js",
+      "apps/web/public/templates/shared/nikoh/vendor/SplitText.min.js",
+      "apps/web/public/templates/shared/nikoh/vendor/DrawSVGPlugin.min.js",
+      "apps/web/public/templates/shared/nikoh/vendor/lz-string.min.js",
+      "apps/web/public/templates/shared/nikoh/invite-codec.js",
+      "apps/web/public/templates/shared/nikoh/i18n.js",
+      "apps/web/public/templates/oynavand/i18n.js",
+      "apps/web/public/templates/shared/nikoh/platform-bridge.js",
+      "apps/web/public/templates/shared/nikoh/core.js",
+      "apps/web/public/templates/oynavand/meta.js",
+      "apps/web/public/templates/oynavand/template.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "somon-yoli",
+    "name": "Somon Yo‘li",
+    "features": {
+      "rsvp": "form",
+      "wishes": true,
+      "receipts": true,
+      "giftIntentions": false
+    },
+    "evidence": "Page handlers + shared private-receipt adapter",
+    "files": [
+      "apps/web/public/templates/somon-yoli/index.html",
+      "apps/web/public/templates/shared/nikoh/vendor/gsap.min.js",
+      "apps/web/public/templates/shared/nikoh/vendor/ScrollTrigger.min.js",
+      "apps/web/public/templates/shared/nikoh/vendor/DrawSVGPlugin.min.js",
+      "apps/web/public/templates/shared/nikoh/vendor/SplitText.min.js",
+      "apps/web/public/templates/shared/nikoh/vendor/lz-string.min.js",
+      "apps/web/public/templates/shared/nikoh/invite-codec.js",
+      "apps/web/public/templates/shared/nikoh/i18n.js",
+      "apps/web/public/templates/somon-yoli/i18n.js",
+      "apps/web/public/templates/shared/nikoh/platform-bridge.js",
+      "apps/web/public/templates/shared/nikoh/core.js",
+      "apps/web/public/templates/somon-yoli/meta.js",
+      "apps/web/public/templates/somon-yoli/template.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "qogoz-turna",
+    "name": "Qog‘oz Turna",
+    "features": {
+      "rsvp": "form",
+      "wishes": true,
+      "receipts": true,
+      "giftIntentions": false
+    },
+    "evidence": "Page handlers + shared private-receipt adapter",
+    "files": [
+      "apps/web/public/templates/qogoz-turna/index.html",
+      "apps/web/public/templates/shared/nikoh/vendor/gsap.min.js",
+      "apps/web/public/templates/shared/nikoh/vendor/ScrollTrigger.min.js",
+      "apps/web/public/templates/shared/nikoh/vendor/lz-string.min.js",
+      "apps/web/public/templates/shared/nikoh/invite-codec.js",
+      "apps/web/public/templates/shared/nikoh/i18n.js",
+      "apps/web/public/templates/qogoz-turna/i18n.js",
+      "apps/web/public/templates/shared/nikoh/platform-bridge.js",
+      "apps/web/public/templates/shared/nikoh/core.js",
+      "apps/web/public/templates/qogoz-turna/meta.js",
+      "apps/web/public/templates/qogoz-turna/template.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "nilufar",
+    "name": "Nilufar",
+    "features": {
+      "rsvp": "form",
+      "wishes": true,
+      "receipts": true,
+      "giftIntentions": false
+    },
+    "evidence": "Page handlers + shared private-receipt adapter",
+    "files": [
+      "apps/web/public/templates/nilufar/index.html",
+      "apps/web/public/templates/shared/nikoh/vendor/gsap.min.js",
+      "apps/web/public/templates/shared/nikoh/vendor/ScrollTrigger.min.js",
+      "apps/web/public/templates/shared/nikoh/vendor/MotionPathPlugin.min.js",
+      "apps/web/public/templates/shared/nikoh/vendor/MorphSVGPlugin.min.js",
+      "apps/web/public/templates/shared/nikoh/vendor/lz-string.min.js",
+      "apps/web/public/templates/shared/nikoh/invite-codec.js",
+      "apps/web/public/templates/shared/nikoh/i18n.js",
+      "apps/web/public/templates/nilufar/i18n.js",
+      "apps/web/public/templates/shared/nikoh/platform-bridge.js",
+      "apps/web/public/templates/shared/nikoh/core.js",
+      "apps/web/public/templates/nilufar/meta.js",
+      "apps/web/public/templates/nilufar/template.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "monogram",
+    "name": "Monogram",
+    "features": {
+      "rsvp": "form",
+      "wishes": true,
+      "receipts": true,
+      "giftIntentions": false
+    },
+    "evidence": "Page handlers + shared private-receipt adapter",
+    "files": [
+      "apps/web/public/templates/monogram/index.html",
+      "apps/web/public/templates/shared/nikoh/vendor/gsap.min.js",
+      "apps/web/public/templates/shared/nikoh/vendor/ScrollTrigger.min.js",
+      "apps/web/public/templates/shared/nikoh/vendor/lz-string.min.js",
+      "apps/web/public/templates/shared/nikoh/invite-codec.js",
+      "apps/web/public/templates/shared/nikoh/i18n.js",
+      "apps/web/public/templates/monogram/i18n.js",
+      "apps/web/public/templates/shared/nikoh/platform-bridge.js",
+      "apps/web/public/templates/shared/nikoh/core.js",
+      "apps/web/public/templates/monogram/meta.js",
+      "apps/web/public/templates/monogram/template.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "retro-kino",
+    "name": "Retro Kino",
+    "features": {
+      "rsvp": "form",
+      "wishes": true,
+      "receipts": true,
+      "giftIntentions": false
+    },
+    "evidence": "Page handlers + shared private-receipt adapter",
+    "files": [
+      "apps/web/public/templates/retro-kino/index.html",
+      "apps/web/public/templates/shared/nikoh/vendor/gsap.min.js",
+      "apps/web/public/templates/shared/nikoh/vendor/ScrollTrigger.min.js",
+      "apps/web/public/templates/shared/nikoh/vendor/lz-string.min.js",
+      "apps/web/public/templates/shared/nikoh/invite-codec.js",
+      "apps/web/public/templates/shared/nikoh/i18n.js",
+      "apps/web/public/templates/retro-kino/i18n.js",
+      "apps/web/public/templates/shared/nikoh/platform-bridge.js",
+      "apps/web/public/templates/shared/nikoh/core.js",
+      "apps/web/public/templates/retro-kino/meta.js",
+      "apps/web/public/templates/retro-kino/template.js",
+      "apps/web/public/templates/retro-kino/uz-cyrl-copy.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "suzani",
+    "name": "Suzani",
+    "features": {
+      "rsvp": "form",
+      "wishes": true,
+      "receipts": true,
+      "giftIntentions": false
+    },
+    "evidence": "Page handlers + shared private-receipt adapter",
+    "files": [
+      "apps/web/public/templates/suzani/index.html",
+      "apps/web/public/templates/shared/nikoh/vendor/gsap.min.js",
+      "apps/web/public/templates/shared/nikoh/vendor/ScrollTrigger.min.js",
+      "apps/web/public/templates/shared/nikoh/vendor/lz-string.min.js",
+      "apps/web/public/templates/shared/nikoh/invite-codec.js",
+      "apps/web/public/templates/shared/nikoh/i18n.js",
+      "apps/web/public/templates/suzani/i18n.js",
+      "apps/web/public/templates/shared/nikoh/platform-bridge.js",
+      "apps/web/public/templates/shared/nikoh/core.js",
+      "apps/web/public/templates/suzani/meta.js",
+      "apps/web/public/templates/suzani/template.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "orik-guli",
+    "name": "O‘rik Guli",
+    "features": {
+      "rsvp": "form",
+      "wishes": true,
+      "receipts": true,
+      "giftIntentions": false
+    },
+    "evidence": "Page handlers + shared private-receipt adapter",
+    "files": [
+      "apps/web/public/templates/orik-guli/index.html",
+      "apps/web/public/templates/shared/nikoh/vendor/gsap.min.js",
+      "apps/web/public/templates/shared/nikoh/vendor/ScrollTrigger.min.js",
+      "apps/web/public/templates/shared/nikoh/vendor/lz-string.min.js",
+      "apps/web/public/templates/shared/nikoh/invite-codec.js",
+      "apps/web/public/templates/shared/nikoh/i18n.js",
+      "apps/web/public/templates/orik-guli/i18n.js",
+      "apps/web/public/templates/shared/nikoh/platform-bridge.js",
+      "apps/web/public/templates/shared/nikoh/core.js",
+      "apps/web/public/templates/orik-guli/meta.js",
+      "apps/web/public/templates/orik-guli/fx.js",
+      "apps/web/public/templates/orik-guli/fog.js",
+      "apps/web/public/templates/orik-guli/template.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "paxta",
+    "name": "Paxta",
+    "features": {
+      "rsvp": "form",
+      "wishes": true,
+      "receipts": true,
+      "giftIntentions": false
+    },
+    "evidence": "Page handlers + shared private-receipt adapter",
+    "files": [
+      "apps/web/public/templates/paxta/index.html",
+      "apps/web/public/templates/shared/nikoh/vendor/gsap.min.js",
+      "apps/web/public/templates/shared/nikoh/vendor/ScrollTrigger.min.js",
+      "apps/web/public/templates/shared/nikoh/vendor/lz-string.min.js",
+      "apps/web/public/templates/shared/nikoh/invite-codec.js",
+      "apps/web/public/templates/shared/nikoh/i18n.js",
+      "apps/web/public/templates/shared/nikoh/platform-bridge.js",
+      "apps/web/public/templates/paxta/i18n.js",
+      "apps/web/public/templates/shared/nikoh/core.js",
+      "apps/web/public/templates/paxta/meta.js",
+      "apps/web/public/templates/paxta/social.js",
+      "apps/web/public/templates/paxta/template.js",
+      "apps/web/public/templates/paxta/localized-caption.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "sahro-fonusi",
+    "name": "Sahro Fonusi",
+    "features": {
+      "rsvp": "form",
+      "wishes": true,
+      "receipts": true,
+      "giftIntentions": false
+    },
+    "evidence": "Page handlers + shared private-receipt adapter",
+    "files": [
+      "apps/web/public/templates/sahro-fonusi/index.html",
+      "apps/web/public/templates/shared/nikoh/vendor/gsap.min.js",
+      "apps/web/public/templates/shared/nikoh/vendor/ScrollTrigger.min.js",
+      "apps/web/public/templates/shared/nikoh/vendor/lz-string.min.js",
+      "apps/web/public/templates/shared/nikoh/invite-codec.js",
+      "apps/web/public/templates/shared/nikoh/i18n.js",
+      "apps/web/public/templates/sahro-fonusi/i18n.js",
+      "apps/web/public/templates/shared/nikoh/platform-bridge.js",
+      "apps/web/public/templates/shared/nikoh/core.js",
+      "apps/web/public/templates/sahro-fonusi/meta.js",
+      "apps/web/public/templates/sahro-fonusi/template.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "vals",
+    "name": "Vals",
+    "features": {
+      "rsvp": "form",
+      "wishes": true,
+      "receipts": true,
+      "giftIntentions": false
+    },
+    "evidence": "Page handlers + shared private-receipt adapter",
+    "files": [
+      "apps/web/public/templates/vals/index.html",
+      "apps/web/public/templates/shared/nikoh/vendor/gsap.min.js",
+      "apps/web/public/templates/shared/nikoh/vendor/ScrollTrigger.min.js",
+      "apps/web/public/templates/shared/nikoh/vendor/lz-string.min.js",
+      "apps/web/public/templates/shared/nikoh/invite-codec.js",
+      "apps/web/public/templates/shared/nikoh/i18n.js",
+      "apps/web/public/templates/vals/i18n.js",
+      "apps/web/public/templates/shared/nikoh/platform-bridge.js",
+      "apps/web/public/templates/shared/nikoh/core.js",
+      "apps/web/public/templates/vals/meta.js",
+      "apps/web/public/templates/vals/waltz.js",
+      "apps/web/public/templates/vals/template.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "toscana",
+    "name": "Toscana",
+    "features": {
+      "rsvp": "form",
+      "wishes": true,
+      "receipts": true,
+      "giftIntentions": false
+    },
+    "evidence": "Page handlers + shared private-receipt adapter",
+    "files": [
+      "apps/web/public/templates/toscana/index.html",
+      "apps/web/public/templates/shared/nikoh/vendor/gsap.min.js",
+      "apps/web/public/templates/shared/nikoh/vendor/ScrollTrigger.min.js",
+      "apps/web/public/templates/shared/nikoh/vendor/lz-string.min.js",
+      "apps/web/public/templates/shared/nikoh/invite-codec.js",
+      "apps/web/public/templates/shared/nikoh/i18n.js",
+      "apps/web/public/templates/toscana/i18n.js",
+      "apps/web/public/templates/shared/nikoh/platform-bridge.js",
+      "apps/web/public/templates/shared/nikoh/core.js",
+      "apps/web/public/templates/toscana/meta.js",
+      "apps/web/public/templates/toscana/aisle3d.js",
+      "apps/web/public/templates/toscana/template.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "muhr",
+    "name": "Muhr",
+    "features": {
+      "rsvp": "form",
+      "wishes": true,
+      "receipts": true,
+      "giftIntentions": false
+    },
+    "evidence": "Page handlers + shared private-receipt adapter",
+    "files": [
+      "apps/web/public/templates/muhr/index.html",
+      "apps/web/public/templates/shared/nikoh/vendor/gsap.min.js",
+      "apps/web/public/templates/shared/nikoh/vendor/ScrollTrigger.min.js",
+      "apps/web/public/templates/shared/nikoh/vendor/lz-string.min.js",
+      "apps/web/public/templates/shared/nikoh/invite-codec.js",
+      "apps/web/public/templates/shared/nikoh/i18n.js",
+      "apps/web/public/templates/muhr/i18n.js",
+      "apps/web/public/templates/shared/nikoh/platform-bridge.js",
+      "apps/web/public/templates/shared/nikoh/core.js",
+      "apps/web/public/templates/muhr/meta.js",
+      "apps/web/public/templates/muhr/seal.js",
+      "apps/web/public/templates/muhr/template.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "bulbul",
+    "name": "Bulbul",
+    "features": {
+      "rsvp": "form",
+      "wishes": true,
+      "receipts": true,
+      "giftIntentions": false
+    },
+    "evidence": "Page handlers + shared private-receipt adapter",
+    "files": [
+      "apps/web/public/templates/bulbul/index.html",
+      "apps/web/public/templates/shared/nikoh/vendor/gsap.min.js",
+      "apps/web/public/templates/shared/nikoh/vendor/ScrollTrigger.min.js",
+      "apps/web/public/templates/shared/nikoh/vendor/lz-string.min.js",
+      "apps/web/public/templates/shared/nikoh/invite-codec.js",
+      "apps/web/public/templates/shared/nikoh/i18n.js",
+      "apps/web/public/templates/bulbul/i18n.js",
+      "apps/web/public/templates/shared/nikoh/platform-bridge.js",
+      "apps/web/public/templates/shared/nikoh/core.js",
+      "apps/web/public/templates/bulbul/meta.js",
+      "apps/web/public/templates/bulbul/plaque.js",
+      "apps/web/public/templates/bulbul/template.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "kozgu",
+    "name": "Ko‘zgu",
+    "features": {
+      "rsvp": "form",
+      "wishes": true,
+      "receipts": true,
+      "giftIntentions": false
+    },
+    "evidence": "Page handlers + shared private-receipt adapter",
+    "files": [
+      "apps/web/public/templates/kozgu/index.html",
+      "apps/web/public/templates/shared/nikoh/vendor/gsap.min.js",
+      "apps/web/public/templates/shared/nikoh/vendor/ScrollTrigger.min.js",
+      "apps/web/public/templates/shared/nikoh/vendor/lz-string.min.js",
+      "apps/web/public/templates/shared/nikoh/invite-codec.js",
+      "apps/web/public/templates/shared/nikoh/i18n.js",
+      "apps/web/public/templates/kozgu/i18n.js",
+      "apps/web/public/templates/kozgu/platform-i18n.js",
+      "apps/web/public/templates/shared/nikoh/platform-bridge.js",
+      "apps/web/public/templates/shared/nikoh/core.js",
+      "apps/web/public/templates/kozgu/art/src/common.js",
+      "apps/web/public/templates/kozgu/meta.js",
+      "apps/web/public/templates/kozgu/mirror.js",
+      "apps/web/public/templates/kozgu/template.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "doira",
+    "name": "Doira",
+    "features": {
+      "rsvp": "form",
+      "wishes": true,
+      "receipts": true,
+      "giftIntentions": false
+    },
+    "evidence": "Page handlers + shared private-receipt adapter",
+    "files": [
+      "apps/web/public/templates/doira/index.html",
+      "apps/web/public/templates/shared/nikoh/vendor/gsap.min.js",
+      "apps/web/public/templates/shared/nikoh/vendor/ScrollTrigger.min.js",
+      "apps/web/public/templates/shared/nikoh/vendor/lz-string.min.js",
+      "apps/web/public/templates/shared/nikoh/invite-codec.js",
+      "apps/web/public/templates/shared/nikoh/i18n.js",
+      "apps/web/public/templates/doira/i18n.js",
+      "apps/web/public/templates/shared/nikoh/platform-bridge.js",
+      "apps/web/public/templates/shared/nikoh/core.js",
+      "apps/web/public/templates/doira/meta.js",
+      "apps/web/public/templates/doira/sound.js",
+      "apps/web/public/templates/doira/drum.js",
+      "apps/web/public/templates/doira/effects.js",
+      "apps/web/public/templates/doira/scene.js",
+      "apps/web/public/templates/doira/template.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "qandil",
+    "name": "Qandil",
+    "features": {
+      "rsvp": "form",
+      "wishes": true,
+      "receipts": true,
+      "giftIntentions": false
+    },
+    "evidence": "Page handlers + shared private-receipt adapter",
+    "files": [
+      "apps/web/public/templates/qandil/index.html",
+      "apps/web/public/templates/shared/nikoh/vendor/gsap.min.js",
+      "apps/web/public/templates/shared/nikoh/vendor/ScrollTrigger.min.js",
+      "apps/web/public/templates/shared/nikoh/vendor/lz-string.min.js",
+      "apps/web/public/templates/shared/nikoh/invite-codec.js",
+      "apps/web/public/templates/shared/nikoh/i18n.js",
+      "apps/web/public/templates/qandil/i18n.js",
+      "apps/web/public/templates/qandil/platform-i18n.js",
+      "apps/web/public/templates/shared/nikoh/platform-bridge.js",
+      "apps/web/public/templates/shared/nikoh/core.js",
+      "apps/web/public/templates/qandil/platform-names.js",
+      "apps/web/public/templates/qandil/meta.js",
+      "apps/web/public/templates/qandil/lantern.js",
+      "apps/web/public/templates/qandil/lightfield.js",
+      "apps/web/public/templates/qandil/template.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "parda",
+    "name": "Parda",
+    "features": {
+      "rsvp": "form",
+      "wishes": true,
+      "receipts": true,
+      "giftIntentions": false
+    },
+    "evidence": "Page handlers + shared private-receipt adapter",
+    "files": [
+      "apps/web/public/templates/parda/index.html",
+      "apps/web/public/templates/shared/nikoh/vendor/gsap.min.js",
+      "apps/web/public/templates/shared/nikoh/vendor/ScrollTrigger.min.js",
+      "apps/web/public/templates/shared/nikoh/vendor/lz-string.min.js",
+      "apps/web/public/templates/shared/nikoh/invite-codec.js",
+      "apps/web/public/templates/shared/nikoh/i18n.js",
+      "apps/web/public/templates/parda/i18n.js",
+      "apps/web/public/templates/parda/app-i18n.js",
+      "apps/web/public/templates/shared/nikoh/platform-bridge.js",
+      "apps/web/public/templates/shared/nikoh/core.js",
+      "apps/web/public/templates/parda/meta.js",
+      "apps/web/public/templates/parda/embroidery.js",
+      "apps/web/public/templates/parda/curtain-mesh.js",
+      "apps/web/public/templates/parda/template.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "ganch",
+    "name": "Ganch",
+    "features": {
+      "rsvp": "form",
+      "wishes": true,
+      "receipts": true,
+      "giftIntentions": false
+    },
+    "evidence": "Page handlers + shared private-receipt adapter",
+    "files": [
+      "apps/web/public/templates/ganch/index.html",
+      "apps/web/public/templates/shared/nikoh/vendor/gsap.min.js",
+      "apps/web/public/templates/shared/nikoh/vendor/ScrollTrigger.min.js",
+      "apps/web/public/templates/shared/nikoh/vendor/lz-string.min.js",
+      "apps/web/public/templates/shared/nikoh/invite-codec.js",
+      "apps/web/public/templates/shared/nikoh/i18n.js",
+      "apps/web/public/templates/ganch/i18n.js",
+      "apps/web/public/templates/ganch/platform-i18n.js",
+      "apps/web/public/templates/shared/nikoh/platform-bridge.js",
+      "apps/web/public/templates/shared/nikoh/core.js",
+      "apps/web/public/templates/ganch/meta.js",
+      "apps/web/public/templates/ganch/scene-motion.js",
+      "apps/web/public/templates/ganch/template.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "qatlam",
+    "name": "Qatlam",
+    "features": {
+      "rsvp": "form",
+      "wishes": true,
+      "receipts": true,
+      "giftIntentions": false
+    },
+    "evidence": "Page handlers + shared private-receipt adapter",
+    "files": [
+      "apps/web/public/templates/qatlam/index.html",
+      "apps/web/public/templates/shared/nikoh/vendor/gsap.min.js",
+      "apps/web/public/templates/shared/nikoh/vendor/ScrollTrigger.min.js",
+      "apps/web/public/templates/shared/nikoh/vendor/lz-string.min.js",
+      "apps/web/public/templates/shared/nikoh/invite-codec.js",
+      "apps/web/public/templates/shared/nikoh/i18n.js",
+      "apps/web/public/templates/qatlam/i18n.js",
+      "apps/web/public/templates/qatlam/locale-copy.js",
+      "apps/web/public/templates/shared/nikoh/platform-bridge.js",
+      "apps/web/public/templates/shared/nikoh/core.js",
+      "apps/web/public/templates/qatlam/meta.js",
+      "apps/web/public/templates/qatlam/template.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "lola",
+    "name": "Lola",
+    "features": {
+      "rsvp": "form",
+      "wishes": true,
+      "receipts": true,
+      "giftIntentions": false
+    },
+    "evidence": "Page handlers + shared private-receipt adapter",
+    "files": [
+      "apps/web/public/templates/lola/index.html",
+      "apps/web/public/templates/shared/nikoh/vendor/gsap.min.js",
+      "apps/web/public/templates/shared/nikoh/vendor/ScrollTrigger.min.js",
+      "apps/web/public/templates/shared/nikoh/vendor/lz-string.min.js",
+      "apps/web/public/templates/shared/nikoh/invite-codec.js",
+      "apps/web/public/templates/shared/nikoh/i18n.js",
+      "apps/web/public/templates/lola/lola-i18n.js",
+      "apps/web/public/templates/shared/nikoh/platform-bridge.js",
+      "apps/web/public/templates/lola/lola-data.js",
+      "apps/web/public/templates/shared/nikoh/core.js",
+      "apps/web/public/templates/lola/meta.js",
+      "apps/web/public/templates/lola/template.js",
+      "apps/web/public/templates/lola/motion.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "qiz-bazmi",
+    "name": "Qiz Bazmi",
+    "features": {
+      "rsvp": "form",
+      "wishes": true,
+      "receipts": true,
+      "giftIntentions": false
+    },
+    "evidence": "Page handlers + shared private-receipt adapter",
+    "files": [
+      "apps/web/public/templates/qiz-bazmi/index.html",
+      "apps/web/public/templates/shared/nikoh/vendor/gsap.min.js",
+      "apps/web/public/templates/shared/nikoh/vendor/ScrollTrigger.min.js",
+      "apps/web/public/templates/shared/nikoh/vendor/lz-string.min.js",
+      "apps/web/public/templates/shared/nikoh/invite-codec.js",
+      "apps/web/public/templates/shared/nikoh/i18n.js",
+      "apps/web/public/templates/qiz-bazmi/i18n.js",
+      "apps/web/public/templates/shared/nikoh/platform-bridge.js",
+      "apps/web/public/templates/shared/nikoh/core.js",
+      "apps/web/public/templates/qiz-bazmi/meta.js",
+      "apps/web/public/templates/qiz-bazmi/template.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "shahzoda",
+    "name": "Shahzoda",
+    "features": {
+      "rsvp": "form",
+      "wishes": true,
+      "receipts": true,
+      "giftIntentions": false
+    },
+    "evidence": "Page handlers + shared private-receipt adapter",
+    "files": [
+      "apps/web/public/templates/shahzoda/index.html",
+      "apps/web/public/templates/shared/nikoh/vendor/gsap.min.js",
+      "apps/web/public/templates/shared/nikoh/vendor/ScrollTrigger.min.js",
+      "apps/web/public/templates/shared/nikoh/vendor/lz-string.min.js",
+      "apps/web/public/templates/shared/nikoh/invite-codec.js",
+      "apps/web/public/templates/shared/nikoh/i18n.js",
+      "apps/web/public/templates/shared/nikoh/platform-bridge.js",
+      "apps/web/public/templates/shahzoda/locale-copy.js",
+      "apps/web/public/templates/shared/nikoh/core.js",
+      "apps/web/public/templates/shahzoda/meta.js",
+      "apps/web/public/templates/shahzoda/template.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "chavandoz",
+    "name": "Chavandoz",
+    "features": {
+      "rsvp": "form",
+      "wishes": true,
+      "receipts": true,
+      "giftIntentions": false
+    },
+    "evidence": "Page handlers + shared private-receipt adapter",
+    "files": [
+      "apps/web/public/templates/chavandoz/index.html",
+      "apps/web/public/templates/shared/nikoh/vendor/gsap.min.js",
+      "apps/web/public/templates/shared/nikoh/vendor/ScrollTrigger.min.js",
+      "apps/web/public/templates/shared/nikoh/vendor/lz-string.min.js",
+      "apps/web/public/templates/shared/nikoh/invite-codec.js",
+      "apps/web/public/templates/shared/nikoh/i18n.js",
+      "apps/web/public/templates/chavandoz/i18n.js",
+      "apps/web/public/templates/shared/nikoh/platform-bridge.js",
+      "apps/web/public/templates/shared/nikoh/core.js",
+      "apps/web/public/templates/chavandoz/meta.js",
+      "apps/web/public/templates/chavandoz/template.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "beshik",
+    "name": "Beshik",
+    "features": {
+      "rsvp": "form",
+      "wishes": true,
+      "receipts": true,
+      "giftIntentions": false
+    },
+    "evidence": "Page handlers + shared private-receipt adapter",
+    "files": [
+      "apps/web/public/templates/beshik/index.html",
+      "apps/web/public/templates/shared/nikoh/vendor/gsap.min.js",
+      "apps/web/public/templates/shared/nikoh/vendor/ScrollTrigger.min.js",
+      "apps/web/public/templates/shared/nikoh/vendor/lz-string.min.js",
+      "apps/web/public/templates/shared/nikoh/invite-codec.js",
+      "apps/web/public/templates/shared/nikoh/i18n.js",
+      "apps/web/public/templates/beshik/i18n.js",
+      "apps/web/public/templates/shared/nikoh/platform-bridge.js",
+      "apps/web/public/templates/shared/nikoh/core.js",
+      "apps/web/public/templates/beshik/locale-copy.js",
+      "apps/web/public/templates/beshik/meta.js",
+      "apps/web/public/templates/beshik/template.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "shirin-bayram",
+    "name": "Shirin Bayram",
+    "features": {
+      "rsvp": "form",
+      "wishes": true,
+      "receipts": true,
+      "giftIntentions": false
+    },
+    "evidence": "Page handlers + shared private-receipt adapter",
+    "files": [
+      "apps/web/public/templates/shirin-bayram/index.html",
+      "apps/web/public/templates/shirin-bayram/vendor/gsap.min.js",
+      "apps/web/public/templates/shirin-bayram/vendor/ScrollTrigger.min.js",
+      "apps/web/public/templates/shirin-bayram/vendor/lz-string.min.js",
+      "apps/web/public/templates/shared/nikoh/invite-codec.js",
+      "apps/web/public/templates/shared/nikoh/i18n.js",
+      "apps/web/public/templates/shirin-bayram/i18n.js",
+      "apps/web/public/templates/shared/nikoh/platform-bridge.js",
+      "apps/web/public/templates/shared/nikoh/core.js",
+      "apps/web/public/templates/shirin-bayram/locale-copy.js",
+      "apps/web/public/templates/shirin-bayram/meta.js",
+      "apps/web/public/templates/shirin-bayram/template.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "oltin-kuz",
+    "name": "Oltin Kuz",
+    "features": {
+      "rsvp": "form",
+      "wishes": true,
+      "receipts": true,
+      "giftIntentions": false
+    },
+    "evidence": "Page handlers + shared private-receipt adapter",
+    "files": [
+      "apps/web/public/templates/oltin-kuz/index.html",
+      "apps/web/public/templates/shared/nikoh/vendor/gsap.min.js",
+      "apps/web/public/templates/shared/nikoh/vendor/ScrollTrigger.min.js",
+      "apps/web/public/templates/shared/nikoh/vendor/lz-string.min.js",
+      "apps/web/public/templates/shared/nikoh/invite-codec.js",
+      "apps/web/public/templates/shared/nikoh/i18n.js",
+      "apps/web/public/templates/oltin-kuz/i18n.js",
+      "apps/web/public/templates/shared/nikoh/platform-bridge.js",
+      "apps/web/public/templates/shared/nikoh/core.js",
+      "apps/web/public/templates/oltin-kuz/meta.js",
+      "apps/web/public/templates/oltin-kuz/template.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "oltin-yosh",
+    "name": "Oltin Yosh",
+    "features": {
+      "rsvp": "form",
+      "wishes": true,
+      "receipts": true,
+      "giftIntentions": false
+    },
+    "evidence": "Page handlers + shared private-receipt adapter",
+    "files": [
+      "apps/web/public/templates/oltin-yosh/index.html",
+      "apps/web/public/templates/shared/nikoh/vendor/gsap.min.js",
+      "apps/web/public/templates/shared/nikoh/vendor/ScrollTrigger.min.js",
+      "apps/web/public/templates/shared/nikoh/i18n.js",
+      "apps/web/public/templates/oltin-yosh/i18n.js",
+      "apps/web/public/templates/shared/nikoh/platform-bridge.js",
+      "apps/web/public/templates/shared/nikoh/core.js",
+      "apps/web/public/templates/oltin-yosh/meta.js",
+      "apps/web/public/templates/oltin-yosh/template.js",
+      "apps/web/public/templates/oltin-yosh/gallery-accessibility.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "konfetti",
+    "name": "Konfetti",
+    "features": {
+      "rsvp": "form",
+      "wishes": true,
+      "receipts": true,
+      "giftIntentions": false
+    },
+    "evidence": "Page handlers + shared private-receipt adapter",
+    "files": [
+      "apps/web/public/templates/konfetti/index.html",
+      "apps/web/public/templates/shared/nikoh/vendor/gsap.min.js",
+      "apps/web/public/templates/shared/nikoh/vendor/ScrollTrigger.min.js",
+      "apps/web/public/templates/shared/nikoh/i18n.js",
+      "apps/web/public/templates/konfetti/i18n.js",
+      "apps/web/public/templates/shared/nikoh/platform-bridge.js",
+      "apps/web/public/templates/shared/nikoh/core.js",
+      "apps/web/public/templates/konfetti/meta.js",
+      "apps/web/public/templates/konfetti/template.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "nahor",
+    "name": "Nahor",
+    "features": {
+      "rsvp": "form",
+      "wishes": true,
+      "receipts": true,
+      "giftIntentions": false
+    },
+    "evidence": "Page handlers + shared private-receipt adapter",
+    "files": [
+      "apps/web/public/templates/nahor/index.html",
+      "apps/web/public/templates/nahor/vendor/gsap.min.js",
+      "apps/web/public/templates/nahor/vendor/ScrollTrigger.min.js",
+      "apps/web/public/templates/nahor/vendor/lz-string.min.js",
+      "apps/web/public/templates/shared/nikoh/invite-codec.js",
+      "apps/web/public/templates/shared/nikoh/i18n.js",
+      "apps/web/public/templates/nahor/i18n.js",
+      "apps/web/public/templates/shared/nikoh/platform-bridge.js",
+      "apps/web/public/templates/shared/nikoh/core.js",
+      "apps/web/public/templates/nahor/meta.js",
+      "apps/web/public/templates/nahor/template.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "nahorgi-osh",
+    "name": "Nahorgi Osh",
+    "features": {
+      "rsvp": "form",
+      "wishes": true,
+      "receipts": true,
+      "giftIntentions": false
+    },
+    "evidence": "Page handlers + shared private-receipt adapter",
+    "files": [
+      "apps/web/public/templates/nahorgi-osh/index.html",
+      "apps/web/public/templates/shared/nikoh/vendor/gsap.min.js",
+      "apps/web/public/templates/shared/nikoh/vendor/ScrollTrigger.min.js",
+      "apps/web/public/templates/shared/nikoh/vendor/lz-string.min.js",
+      "apps/web/public/templates/shared/nikoh/invite-codec.js",
+      "apps/web/public/templates/shared/nikoh/i18n.js",
+      "apps/web/public/templates/nahorgi-osh/i18n.js",
+      "apps/web/public/templates/nahorgi-osh/platform-i18n.js",
+      "apps/web/public/templates/shared/nikoh/platform-bridge.js",
+      "apps/web/public/templates/shared/nikoh/core.js",
+      "apps/web/public/templates/nahorgi-osh/meta.js",
+      "apps/web/public/templates/nahorgi-osh/template.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "hilol",
+    "name": "Hilol",
+    "features": {
+      "rsvp": "form",
+      "wishes": true,
+      "receipts": true,
+      "giftIntentions": false
+    },
+    "evidence": "Page handlers + shared private-receipt adapter",
+    "files": [
+      "apps/web/public/templates/hilol/index.html",
+      "apps/web/public/templates/shared/nikoh/vendor/gsap.min.js",
+      "apps/web/public/templates/shared/nikoh/vendor/ScrollTrigger.min.js",
+      "apps/web/public/templates/shared/nikoh/i18n.js",
+      "apps/web/public/templates/hilol/i18n.js",
+      "apps/web/public/templates/shared/nikoh/platform-bridge.js",
+      "apps/web/public/templates/shared/nikoh/core.js",
+      "apps/web/public/templates/hilol/meta.js",
+      "apps/web/public/templates/hilol/template.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "bitiruv",
+    "name": "Bitiruv",
+    "features": {
+      "rsvp": "form",
+      "wishes": true,
+      "receipts": true,
+      "giftIntentions": false
+    },
+    "evidence": "Page handlers + shared private-receipt adapter",
+    "files": [
+      "apps/web/public/templates/bitiruv/index.html",
+      "apps/web/public/templates/bitiruv/vendor/gsap.min.js",
+      "apps/web/public/templates/bitiruv/vendor/ScrollTrigger.min.js",
+      "apps/web/public/templates/bitiruv/vendor/lz-string.min.js",
+      "apps/web/public/templates/shared/nikoh/invite-codec.js",
+      "apps/web/public/templates/shared/nikoh/i18n.js",
+      "apps/web/public/templates/bitiruv/i18n.js",
+      "apps/web/public/templates/shared/nikoh/platform-bridge.js",
+      "apps/web/public/templates/shared/nikoh/core.js",
+      "apps/web/public/templates/bitiruv/meta.js",
+      "apps/web/public/templates/bitiruv/template.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "korporativ",
+    "name": "Korporativ",
+    "features": {
+      "rsvp": "form",
+      "wishes": true,
+      "receipts": true,
+      "giftIntentions": false
+    },
+    "evidence": "Page handlers + shared private-receipt adapter",
+    "files": [
+      "apps/web/public/templates/korporativ/index.html",
+      "apps/web/public/templates/shared/nikoh/vendor/gsap.min.js",
+      "apps/web/public/templates/shared/nikoh/vendor/ScrollTrigger.min.js",
+      "apps/web/public/templates/shared/nikoh/vendor/lz-string.min.js",
+      "apps/web/public/templates/shared/nikoh/invite-codec.js",
+      "apps/web/public/templates/shared/nikoh/i18n.js",
+      "apps/web/public/templates/korporativ/i18n.js",
+      "apps/web/public/templates/shared/nikoh/platform-bridge.js",
+      "apps/web/public/templates/shared/nikoh/core.js",
+      "apps/web/public/templates/korporativ/meta.js",
+      "apps/web/public/templates/korporativ/template.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "yangi-uy",
+    "name": "Yangi Uy",
+    "features": {
+      "rsvp": "form",
+      "wishes": true,
+      "receipts": true,
+      "giftIntentions": false
+    },
+    "evidence": "Page handlers + shared private-receipt adapter",
+    "files": [
+      "apps/web/public/templates/yangi-uy/index.html",
+      "apps/web/public/templates/yangi-uy/vendor/gsap.min.js",
+      "apps/web/public/templates/yangi-uy/vendor/ScrollTrigger.min.js",
+      "apps/web/public/templates/yangi-uy/vendor/lz-string.min.js",
+      "apps/web/public/templates/shared/nikoh/invite-codec.js",
+      "apps/web/public/templates/shared/nikoh/i18n.js",
+      "apps/web/public/templates/yangi-uy/i18n.js",
+      "apps/web/public/templates/shared/nikoh/platform-bridge.js",
+      "apps/web/public/templates/shared/nikoh/core.js",
+      "apps/web/public/templates/yangi-uy/meta.js",
+      "apps/web/public/templates/yangi-uy/template.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "stained-glass",
+    "name": "Stained Glass",
+    "features": {
+      "rsvp": "form",
+      "wishes": true,
+      "receipts": true,
+      "giftIntentions": false
+    },
+    "evidence": "Page handlers + shared private-receipt adapter",
+    "files": [
+      "apps/web/public/templates/stained-glass/index.html",
+      "apps/web/public/templates/stained-glass/motion.js",
+      "apps/web/public/templates/chorlove/shared/three-carousel.js",
+      "apps/web/public/templates/chorlove/shared/three-lightbox.js",
+      "apps/web/public/templates/chorlove/shared/three-bridge.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "sunset",
+    "name": "Sunset",
+    "features": {
+      "rsvp": "form",
+      "wishes": true,
+      "receipts": true,
+      "giftIntentions": false
+    },
+    "evidence": "Page handlers + shared private-receipt adapter",
+    "files": [
+      "apps/web/public/templates/sunset/index.html",
+      "apps/web/public/templates/sunset/motion.js",
+      "apps/web/public/templates/chorlove/shared/three-carousel.js",
+      "apps/web/public/templates/chorlove/shared/three-lightbox.js",
+      "apps/web/public/templates/chorlove/shared/three-bridge.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "swan-garden",
+    "name": "Swan Garden",
+    "features": {
+      "rsvp": "form",
+      "wishes": true,
+      "receipts": true,
+      "giftIntentions": false
+    },
+    "evidence": "Page handlers + shared private-receipt adapter",
+    "files": [
+      "apps/web/public/templates/swan-garden/index.html",
+      "apps/web/public/templates/swan-garden/motion.js",
+      "apps/web/public/templates/chorlove/shared/three-carousel.js",
+      "apps/web/public/templates/chorlove/shared/three-lightbox.js",
+      "apps/web/public/templates/chorlove/shared/three-bridge.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "golden-card",
+    "name": "Golden Card",
+    "features": {
+      "rsvp": "form",
+      "wishes": false,
+      "receipts": false,
+      "giftIntentions": false
+    },
+    "evidence": "Packaged page/script dependency graph",
+    "files": [
+      "apps/web/public/templates/golden-card/index.html",
+      "apps/web/public/templates/golden-card/bridge.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "green-garden",
+    "name": "Green Garden",
+    "features": {
+      "rsvp": "form",
+      "wishes": true,
+      "receipts": true,
+      "giftIntentions": false
+    },
+    "evidence": "Page handlers + shared private-receipt adapter",
+    "files": [
+      "apps/web/public/templates/green-garden/index.html",
+      "apps/web/public/templates/green-garden/bridge.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "green-gold",
+    "name": "Green Gold",
+    "features": {
+      "rsvp": "form",
+      "wishes": true,
+      "receipts": true,
+      "giftIntentions": false
+    },
+    "evidence": "Page handlers + shared private-receipt adapter",
+    "files": [
+      "apps/web/public/templates/green-gold/index.html",
+      "apps/web/public/templates/green-gold/source-motion.js",
+      "apps/web/public/templates/green-gold/bridge.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "green-white",
+    "name": "Green White",
+    "features": {
+      "rsvp": "form",
+      "wishes": true,
+      "receipts": true,
+      "giftIntentions": false
+    },
+    "evidence": "Page handlers + shared private-receipt adapter",
+    "files": [
+      "apps/web/public/templates/green-white/index.html",
+      "apps/web/public/templates/green-white/bridge.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "jasmine-white",
+    "name": "Jasmine White",
+    "features": {
+      "rsvp": "form",
+      "wishes": true,
+      "receipts": true,
+      "giftIntentions": false
+    },
+    "evidence": "Page handlers + shared private-receipt adapter",
+    "files": [
+      "apps/web/public/templates/jasmine-white/index.html",
+      "apps/web/public/templates/jasmine-white/bridge.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "lace",
+    "name": "Lace",
+    "features": {
+      "rsvp": "form",
+      "wishes": true,
+      "receipts": true,
+      "giftIntentions": false
+    },
+    "evidence": "Page handlers + shared private-receipt adapter",
+    "files": [
+      "apps/web/public/templates/lace/index.html",
+      "apps/web/public/templates/lace/gallery-lightbox.js",
+      "apps/web/public/templates/lace/bridge.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "love-sakura",
+    "name": "Love Sakura",
+    "features": {
+      "rsvp": "form",
+      "wishes": true,
+      "receipts": true,
+      "giftIntentions": false
+    },
+    "evidence": "Page handlers + shared private-receipt adapter",
+    "files": [
+      "apps/web/public/templates/love-sakura/index.html",
+      "apps/web/public/templates/love-sakura/bridge.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "luxury-gold",
+    "name": "Luxury Gold",
+    "features": {
+      "rsvp": "form",
+      "wishes": true,
+      "receipts": true,
+      "giftIntentions": false
+    },
+    "evidence": "Page handlers + shared private-receipt adapter",
+    "files": [
+      "apps/web/public/templates/luxury-gold/index.html",
+      "apps/web/public/templates/luxury-gold/bridge.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "modern-floral",
+    "name": "Modern Floral",
+    "features": {
+      "rsvp": "form",
+      "wishes": true,
+      "receipts": true,
+      "giftIntentions": false
+    },
+    "evidence": "Page handlers + shared private-receipt adapter",
+    "files": [
+      "apps/web/public/templates/modern-floral/index.html",
+      "apps/web/public/templates/modern-floral/bridge.js",
+      "apps/web/public/templates/modern-floral/source-motion.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "taklifla-zarhal-sahifa",
+    "name": "Zarhal Sahifa",
+    "features": {
+      "rsvp": "none",
+      "wishes": true,
+      "receipts": false,
+      "giftIntentions": false
+    },
+    "evidence": "Packaged page/script dependency graph",
+    "files": [
+      "apps/web/public/templates/taklifla-zarhal-sahifa/index.html",
+      "apps/web/public/templates/taklifla-zarhal-sahifa/source/music.js",
+      "apps/web/public/templates/taklifla-zarhal-sahifa/source/countdown.js",
+      "apps/web/public/templates/taklifla-zarhal-sahifa/bridge.js",
+      "apps/web/public/templates/taklifla-zarhal-sahifa/source/reveal.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "taklifla-muhrli-maktub",
+    "name": "Muhrli Maktub",
+    "features": {
+      "rsvp": "phone",
+      "wishes": true,
+      "receipts": false,
+      "giftIntentions": false
+    },
+    "evidence": "Packaged page/script dependency graph",
+    "files": [
+      "apps/web/public/templates/taklifla-muhrli-maktub/index.html",
+      "apps/web/public/templates/taklifla-muhrli-maktub/source/motion.js",
+      "apps/web/public/templates/taklifla-muhrli-maktub/source/wish-cards.js",
+      "apps/web/public/templates/taklifla-muhrli-maktub/source/wish-close.js",
+      "apps/web/public/templates/taklifla-muhrli-maktub/ui-copy.js",
+      "apps/web/public/templates/taklifla-muhrli-maktub/bridge.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "taklifla-asalari",
+    "name": "Asalari",
+    "features": {
+      "rsvp": "none",
+      "wishes": true,
+      "receipts": false,
+      "giftIntentions": false
+    },
+    "evidence": "Packaged page/script dependency graph",
+    "files": [
+      "apps/web/public/templates/taklifla-asalari/index.html",
+      "apps/web/public/templates/taklifla-asalari/source/motion.js",
+      "apps/web/public/templates/taklifla-asalari/copy.js",
+      "apps/web/public/templates/taklifla-asalari/bridge.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "taklifla-fayzli-xonadon",
+    "name": "Fayzli Xonadon",
+    "features": {
+      "rsvp": "form",
+      "wishes": false,
+      "receipts": false,
+      "giftIntentions": false
+    },
+    "evidence": "Packaged page/script dependency graph",
+    "files": [
+      "apps/web/public/templates/taklifla-fayzli-xonadon/index.html",
+      "apps/web/public/templates/taklifla-fayzli-xonadon/source/reveal.js",
+      "apps/web/public/templates/taklifla-fayzli-xonadon/platform-i18n.js",
+      "apps/web/public/templates/taklifla-fayzli-xonadon/platform-adapter.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "taklifla-ertak",
+    "name": "Ertak",
+    "features": {
+      "rsvp": "none",
+      "wishes": true,
+      "receipts": false,
+      "giftIntentions": false
+    },
+    "evidence": "Packaged page/script dependency graph",
+    "files": [
+      "apps/web/public/templates/taklifla-ertak/index.html",
+      "apps/web/public/templates/taklifla-ertak/source/localization.js",
+      "apps/web/public/templates/taklifla-ertak/platform-adapter.js",
+      "apps/web/public/templates/taklifla-ertak/source/motion.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "taklifla-gulbog",
+    "name": "Gulbog",
+    "features": {
+      "rsvp": "none",
+      "wishes": true,
+      "receipts": false,
+      "giftIntentions": false
+    },
+    "evidence": "Packaged page/script dependency graph",
+    "files": [
+      "apps/web/public/templates/taklifla-gulbog/index.html",
+      "apps/web/public/templates/taklifla-gulbog/source/motion.js",
+      "apps/web/public/templates/taklifla-gulbog/platform-adapter.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "taklifla-zarrin-gullar",
+    "name": "Zarrin gullar",
+    "features": {
+      "rsvp": "phone",
+      "wishes": true,
+      "receipts": false,
+      "giftIntentions": false
+    },
+    "evidence": "Packaged page/script dependency graph",
+    "files": [
+      "apps/web/public/templates/taklifla-zarrin-gullar/template.html",
+      "apps/web/public/templates/taklifla-zarrin-gullar/source-engine.js",
+      "apps/web/public/templates/taklifla-zarrin-gullar/i18n.js",
+      "apps/web/public/templates/taklifla-zarrin-gullar/platform-adapter.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "taklifla-toglar-bagrida",
+    "name": "Tog‘lar bag‘rida",
+    "features": {
+      "rsvp": "deadline",
+      "wishes": true,
+      "receipts": false,
+      "giftIntentions": false
+    },
+    "evidence": "Packaged page/script dependency graph",
+    "files": [
+      "apps/web/public/templates/taklifla-toglar-bagrida/index.html",
+      "apps/web/public/templates/taklifla-toglar-bagrida/platform-adapter.js",
+      "apps/web/public/templates/taklifla-toglar-bagrida/source/motion.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "taklifla-oltin-yol",
+    "name": "Oltin Yo‘l",
+    "features": {
+      "rsvp": "phone",
+      "wishes": true,
+      "receipts": false,
+      "giftIntentions": false
+    },
+    "evidence": "Packaged page/script dependency graph",
+    "files": [
+      "apps/web/public/templates/taklifla-oltin-yol/index.html",
+      "apps/web/public/templates/taklifla-oltin-yol/labels.js",
+      "apps/web/public/templates/taklifla-oltin-yol/source/motion.js",
+      "apps/web/public/templates/taklifla-oltin-yol/source/render.js",
+      "apps/web/public/templates/taklifla-oltin-yol/source/wish-close.js",
+      "apps/web/public/templates/taklifla-oltin-yol/bridge.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "taklifla-osmon",
+    "name": "Cheksiz Osmon",
+    "features": {
+      "rsvp": "phone",
+      "wishes": true,
+      "receipts": false,
+      "giftIntentions": false
+    },
+    "evidence": "Packaged page/script dependency graph",
+    "files": [
+      "apps/web/public/templates/taklifla-osmon/index.html",
+      "apps/web/public/templates/taklifla-osmon/source/template.js",
+      "apps/web/public/templates/taklifla-osmon/source/wish-close.js",
+      "apps/web/public/templates/taklifla-osmon/bridge.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "taklifla-parilar-ertagi",
+    "name": "Parilar ertagi",
+    "features": {
+      "rsvp": "phone",
+      "wishes": true,
+      "receipts": false,
+      "giftIntentions": false
+    },
+    "evidence": "Packaged page/script dependency graph",
+    "files": [
+      "apps/web/public/templates/taklifla-parilar-ertagi/index.html",
+      "apps/web/public/templates/taklifla-parilar-ertagi/locales.js",
+      "apps/web/public/templates/taklifla-parilar-ertagi/bridge.js",
+      "apps/web/public/templates/taklifla-parilar-ertagi/motion.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "taklifla-qogoz-ertagi",
+    "name": "Qog‘oz ertagi",
+    "features": {
+      "rsvp": "none",
+      "wishes": true,
+      "receipts": false,
+      "giftIntentions": false
+    },
+    "evidence": "Packaged page/script dependency graph",
+    "files": [
+      "apps/web/public/templates/taklifla-qogoz-ertagi/index.html",
+      "apps/web/public/templates/taklifla-qogoz-ertagi/source-labels.js",
+      "apps/web/public/templates/taklifla-qogoz-ertagi/source/fit.js",
+      "apps/web/public/templates/taklifla-qogoz-ertagi/source/render.js",
+      "apps/web/public/templates/taklifla-qogoz-ertagi/source/wish-close.js",
+      "apps/web/public/templates/taklifla-qogoz-ertagi/cyrillic.js",
+      "apps/web/public/templates/taklifla-qogoz-ertagi/bridge.js",
+      "apps/web/public/templates/taklifla-qogoz-ertagi/motion.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "taklifla-sakura-guli",
+    "name": "Sakura Guli",
+    "features": {
+      "rsvp": "none",
+      "wishes": true,
+      "receipts": false,
+      "giftIntentions": false
+    },
+    "evidence": "Packaged page/script dependency graph",
+    "files": [
+      "apps/web/public/templates/taklifla-sakura-guli/index.html",
+      "apps/web/public/templates/taklifla-sakura-guli/source/design.js",
+      "apps/web/public/templates/taklifla-sakura-guli/source/wish-close.js",
+      "apps/web/public/templates/taklifla-sakura-guli/bridge.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "taklifla-sharlar",
+    "name": "Sharlar",
+    "features": {
+      "rsvp": "none",
+      "wishes": true,
+      "receipts": false,
+      "giftIntentions": false
+    },
+    "evidence": "Packaged page/script dependency graph",
+    "files": [
+      "apps/web/public/templates/taklifla-sharlar/index.html",
+      "apps/web/public/templates/taklifla-sharlar/cyrillic.js",
+      "apps/web/public/templates/taklifla-sharlar/source/text.js",
+      "apps/web/public/templates/taklifla-sharlar/source/motion.js",
+      "apps/web/public/templates/taklifla-sharlar/platform-i18n.js",
+      "apps/web/public/templates/taklifla-sharlar/platform-adapter.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "taklifla-yulduzli-tun",
+    "name": "Yulduzli Tun",
+    "features": {
+      "rsvp": "none",
+      "wishes": true,
+      "receipts": false,
+      "giftIntentions": false
+    },
+    "evidence": "Packaged page/script dependency graph",
+    "files": [
+      "apps/web/public/templates/taklifla-yulduzli-tun/index.html",
+      "apps/web/public/templates/taklifla-yulduzli-tun/cyrillic.js",
+      "apps/web/public/templates/taklifla-yulduzli-tun/bridge.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "taklifla-terracotta",
+    "name": "Terracotta",
+    "features": {
+      "rsvp": "none",
+      "wishes": true,
+      "receipts": false,
+      "giftIntentions": false
+    },
+    "evidence": "Packaged page/script dependency graph",
+    "files": [
+      "apps/web/public/templates/taklifla-terracotta/index.html",
+      "apps/web/public/templates/taklifla-terracotta/source/motion.js",
+      "apps/web/public/templates/taklifla-terracotta/cyrillic.js",
+      "apps/web/public/templates/taklifla-terracotta/copy.js",
+      "apps/web/public/templates/taklifla-terracotta/bridge.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "taklifla-uchrashuv",
+    "name": "Uchrashuv",
+    "features": {
+      "rsvp": "form",
+      "wishes": false,
+      "receipts": false,
+      "giftIntentions": false
+    },
+    "evidence": "Packaged page/script dependency graph",
+    "files": [
+      "apps/web/public/templates/taklifla-uchrashuv/index.html",
+      "apps/web/public/templates/taklifla-uchrashuv/copy.js",
+      "apps/web/public/templates/taklifla-uchrashuv/bridge.js",
+      "apps/web/public/templates/taklifla-uchrashuv/source/motion.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "taklifla-yubiley-sahifasi",
+    "name": "Yubiley Sahifasi",
+    "features": {
+      "rsvp": "form",
+      "wishes": false,
+      "receipts": false,
+      "giftIntentions": false
+    },
+    "evidence": "Packaged page/script dependency graph",
+    "files": [
+      "apps/web/public/templates/taklifla-yubiley-sahifasi/index.html",
+      "apps/web/public/templates/taklifla-yubiley-sahifasi/bridge.js",
+      "apps/web/public/templates/taklifla-yubiley-sahifasi/source/motion.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "taklifla-barakali",
+    "name": "Barakali",
+    "features": {
+      "rsvp": "none",
+      "wishes": true,
+      "receipts": false,
+      "giftIntentions": false
+    },
+    "evidence": "Packaged page/script dependency graph",
+    "files": [
+      "apps/web/public/templates/taklifla-barakali/index.html",
+      "apps/web/public/templates/taklifla-barakali/bridge.js",
+      "apps/web/public/templates/taklifla-barakali/source/motion.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "taklifla-tungi-saroy",
+    "name": "Tungi Saroy",
+    "features": {
+      "rsvp": "phone",
+      "wishes": true,
+      "receipts": false,
+      "giftIntentions": false
+    },
+    "evidence": "Packaged page/script dependency graph",
+    "files": [
+      "apps/web/public/templates/taklifla-tungi-saroy/index.html",
+      "apps/web/public/templates/taklifla-tungi-saroy/source/template-motion.js",
+      "apps/web/public/templates/taklifla-tungi-saroy/source/wish-panel.js",
+      "apps/web/public/templates/taklifla-tungi-saroy/labels.js",
+      "apps/web/public/templates/taklifla-tungi-saroy/platform-adapter.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "taklifla-tovus",
+    "name": "Tovus",
+    "features": {
+      "rsvp": "deadline",
+      "wishes": true,
+      "receipts": false,
+      "giftIntentions": false
+    },
+    "evidence": "Packaged page/script dependency graph",
+    "files": [
+      "apps/web/public/templates/taklifla-tovus/index.html",
+      "apps/web/public/templates/taklifla-tovus/copy.js",
+      "apps/web/public/templates/taklifla-tovus/source/motion.js",
+      "apps/web/public/templates/taklifla-tovus/source/closing-panel.js",
+      "apps/web/public/templates/taklifla-tovus/bridge.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "taklifla-tort-fasl",
+    "name": "To‘rt fasl",
+    "features": {
+      "rsvp": "phone",
+      "wishes": true,
+      "receipts": false,
+      "giftIntentions": false
+    },
+    "evidence": "Packaged page/script dependency graph",
+    "files": [
+      "apps/web/public/templates/taklifla-tort-fasl/index.html",
+      "apps/web/public/templates/taklifla-tort-fasl/source/motion.js",
+      "apps/web/public/templates/taklifla-tort-fasl/source/closing-panel.js",
+      "apps/web/public/templates/taklifla-tort-fasl/labels.js",
+      "apps/web/public/templates/taklifla-tort-fasl/platform-adapter.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "glass-pink",
+    "name": "Glass Pink",
+    "features": {
+      "rsvp": "form",
+      "wishes": true,
+      "receipts": true,
+      "giftIntentions": false
+    },
+    "evidence": "Page handlers + shared private-receipt adapter",
+    "files": [
+      "apps/web/public/templates/glass-pink/index.html",
+      "apps/web/public/templates/glass-pink/bridge.js",
+      "apps/web/public/templates/glass-pink/source-adapter.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "olive-manor-edition",
+    "name": "Olive Manor",
+    "features": {
+      "rsvp": "form",
+      "wishes": true,
+      "receipts": true,
+      "giftIntentions": false
+    },
+    "evidence": "Page handlers + shared private-receipt adapter",
+    "files": [
+      "apps/web/public/templates/olive-manor-edition/index.html",
+      "apps/web/public/templates/olive-manor-edition/renderer.js",
+      "apps/web/public/templates/e-invitation-shared/runtime.js",
+      "apps/web/public/templates/olive-manor-edition/motion.js",
+      "apps/web/public/templates/e-invitation-shared/calendar-motion.js",
+      "apps/web/public/templates/e-invitation-shared/confetti.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "islamic-edition",
+    "name": "Islamic Edition",
+    "features": {
+      "rsvp": "form",
+      "wishes": true,
+      "receipts": true,
+      "giftIntentions": false
+    },
+    "evidence": "Page handlers + shared private-receipt adapter",
+    "files": [
+      "apps/web/public/templates/islamic-edition/index.html",
+      "apps/web/public/templates/islamic-edition/renderer.js",
+      "apps/web/public/templates/e-invitation-shared/runtime.js",
+      "apps/web/public/templates/islamic-edition/motion.js",
+      "apps/web/public/templates/e-invitation-shared/calendar-motion.js",
+      "apps/web/public/templates/e-invitation-shared/confetti.js",
+      "apps/web/public/templates/islamic-edition/stars.js",
+      "apps/web/public/templates/e-invitation-shared/greeting-motion.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "osh",
+    "name": "Osh",
+    "features": {
+      "rsvp": "form",
+      "wishes": false,
+      "receipts": false,
+      "giftIntentions": false
+    },
+    "evidence": "Packaged page/script dependency graph",
+    "files": [
+      "apps/web/public/templates/chorlove/osh/index.html",
+      "apps/web/public/templates/chorlove/osh/bridge.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "palov",
+    "name": "Chorlove Palov",
+    "features": {
+      "rsvp": "form",
+      "wishes": false,
+      "receipts": false,
+      "giftIntentions": false
+    },
+    "evidence": "Packaged page/script dependency graph",
+    "files": [
+      "apps/web/public/templates/chorlove/palov/index.html",
+      "apps/web/public/templates/chorlove/palov/bridge.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "orchid-amplop",
+    "name": "Orchid Amplop",
+    "features": {
+      "rsvp": "form",
+      "wishes": true,
+      "receipts": true,
+      "giftIntentions": false
+    },
+    "evidence": "Page handlers + shared private-receipt adapter",
+    "files": [
+      "apps/web/public/templates/chorlove/orchid-amplop/index.html",
+      "apps/web/public/templates/chorlove/orchid-amplop/bridge.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "invitate-palov",
+    "name": "Invitate Palov",
+    "features": {
+      "rsvp": "form",
+      "wishes": false,
+      "receipts": false,
+      "giftIntentions": false
+    },
+    "evidence": "Packaged page/script dependency graph",
+    "files": [
+      "apps/web/public/templates/invitate-palov/index.html",
+      "apps/web/public/templates/invitate-palov/assets/js/palov-adapter.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "golden-hour",
+    "name": "Golden Hour",
+    "features": {
+      "rsvp": "form",
+      "wishes": true,
+      "receipts": false,
+      "giftIntentions": false
+    },
+    "evidence": "Packaged page/script dependency graph",
+    "files": [
+      "apps/web/public/templates/golden-hour/index.html",
+      "apps/web/public/templates/golden-hour/assets/js/golden-hour-source.js",
+      "apps/web/public/templates/golden-hour/assets/js/golden-hour-adapter.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "bloom",
+    "name": "Bloom",
+    "features": {
+      "rsvp": "none",
+      "wishes": false,
+      "receipts": false,
+      "giftIntentions": false
+    },
+    "evidence": "No packaged entry",
+    "files": [],
+    "issues": [
+      "Queued design: entry document absent; visitor forms disabled"
+    ]
+  },
+  {
+    "id": "invitate-nahorgi-osh",
+    "name": "Invitate Nahorgi Osh",
+    "features": {
+      "rsvp": "form",
+      "wishes": false,
+      "receipts": false,
+      "giftIntentions": false
+    },
+    "evidence": "Packaged page/script dependency graph",
+    "files": [
+      "apps/web/public/templates/invitate-nahorgi-osh/index.html",
+      "apps/web/public/templates/invitate-nahorgi-osh/assets/js/nahorgi-osh-adapter.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "invitate-wedding",
+    "name": "Invitate Wedding",
+    "features": {
+      "rsvp": "form",
+      "wishes": false,
+      "receipts": false,
+      "giftIntentions": false
+    },
+    "evidence": "Packaged page/script dependency graph",
+    "files": [
+      "apps/web/public/templates/invitate-wedding/index.html",
+      "apps/web/public/templates/invitate-wedding/assets/js/wedding.js",
+      "apps/web/public/templates/invitate-wedding/wedding-adapter.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "whiteless",
+    "name": "Whiteless",
+    "features": {
+      "rsvp": "none",
+      "wishes": false,
+      "receipts": false,
+      "giftIntentions": false
+    },
+    "evidence": "No packaged entry",
+    "files": [],
+    "issues": [
+      "Queued design: entry document absent; visitor forms disabled"
+    ]
+  },
+  {
+    "id": "safir",
+    "name": "Safir",
+    "features": {
+      "rsvp": "form",
+      "wishes": true,
+      "receipts": false,
+      "giftIntentions": false
+    },
+    "evidence": "Packaged page/script dependency graph",
+    "files": [
+      "apps/web/public/templates/safir/index.html",
+      "apps/web/public/templates/safir/bridge.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "monochrome-editorial-edition",
+    "name": "Monochrome Editorial",
+    "features": {
+      "rsvp": "form",
+      "wishes": true,
+      "receipts": true,
+      "giftIntentions": false
+    },
+    "evidence": "Page handlers + shared private-receipt adapter",
+    "files": [
+      "apps/web/public/templates/monochrome-editorial-edition/index.html",
+      "apps/web/public/templates/monochrome-editorial-edition/renderer.js",
+      "apps/web/public/templates/e-invitation-shared/runtime.js",
+      "apps/web/public/templates/monochrome-editorial-edition/motion.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "xatna-edition",
+    "name": "Xatna Edition",
+    "features": {
+      "rsvp": "form",
+      "wishes": true,
+      "receipts": true,
+      "giftIntentions": false
+    },
+    "evidence": "Page handlers + shared private-receipt adapter",
+    "files": [
+      "apps/web/public/templates/xatna-edition/index.html",
+      "apps/web/public/templates/xatna-edition/renderer.js",
+      "apps/web/public/templates/e-invitation-shared/runtime.js",
+      "apps/web/public/templates/xatna-edition/motion.js",
+      "apps/web/public/templates/e-invitation-shared/calendar-motion.js",
+      "apps/web/public/templates/e-invitation-shared/confetti.js",
+      "apps/web/public/templates/e-invitation-shared/greeting-motion.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "cloud-castle",
+    "name": "Cloud Castle",
+    "features": {
+      "rsvp": "form",
+      "wishes": true,
+      "receipts": true,
+      "giftIntentions": false
+    },
+    "evidence": "Page handlers + shared private-receipt adapter",
+    "files": [
+      "apps/web/public/templates/cloud-castle/index.html",
+      "apps/web/public/templates/cloud-castle/bridge.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "palace-rose",
+    "name": "Palace Rose",
+    "features": {
+      "rsvp": "form",
+      "wishes": true,
+      "receipts": true,
+      "giftIntentions": false
+    },
+    "evidence": "Page handlers + shared private-receipt adapter",
+    "files": [
+      "apps/web/public/templates/palace-rose/index.html",
+      "apps/web/public/templates/palace-rose/bridge.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "royal-burgundy-edition",
+    "name": "Velvet Royale",
+    "features": {
+      "rsvp": "form",
+      "wishes": true,
+      "receipts": false,
+      "giftIntentions": false
+    },
+    "evidence": "Packaged page/script dependency graph",
+    "files": [
+      "apps/web/public/templates/velvet-royale/index.html",
+      "apps/web/public/templates/velvet-royale/renderer.js",
+      "apps/web/public/templates/velvet-royale/source/reference/C94ZD2ww.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "taklifnomachi-1",
+    "name": "Taklifnomachi · Klassik",
+    "features": {
+      "rsvp": "form",
+      "wishes": true,
+      "receipts": true,
+      "giftIntentions": false
+    },
+    "evidence": "Page handlers + shared private-receipt adapter",
+    "files": [
+      "apps/web/public/templates/taklifnomachi-1/index.html",
+      "apps/web/public/templates/taklifnomachi-1/source/templates/1/js/SNbtDp1dwnpq.js",
+      "apps/web/public/templates/taklifnomachi-1/source/templates/1/js/2GkumtHb38KM.js",
+      "apps/web/public/templates/taklifnomachi-1/source/templates/1/js/ZepeMZAgRNBQ.js",
+      "apps/web/public/templates/taklifnomachi-1/source/templates/1/js/PjG8exCoJy4L.js",
+      "apps/web/public/templates/taklifnomachi-1/source/templates/1/js/0Fu2yc92ZQmh.js",
+      "apps/web/public/templates/taklifnomachi-1/source/templates/1/js/P5JuNsoXOAqQ.js",
+      "apps/web/public/templates/taklifnomachi-1/source/templates/1/js/v2TF23otHfMv.js",
+      "apps/web/public/templates/taklifnomachi-1/source/templates/1/js/oFcdyhszWLFq.js",
+      "apps/web/public/templates/taklifnomachi-1/source/templates/1/js/F39UyVMQ16db.js",
+      "apps/web/public/templates/taklifnomachi-1/source/templates/1/js/QwbHDlJL3Qem.js",
+      "apps/web/public/templates/taklifnomachi-1/adapter.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "taklifnomachi-12",
+    "name": "Taklifnomachi · Moviy osmon",
+    "features": {
+      "rsvp": "form",
+      "wishes": true,
+      "receipts": true,
+      "giftIntentions": false
+    },
+    "evidence": "Page handlers + shared private-receipt adapter",
+    "files": [
+      "apps/web/public/templates/taklifnomachi-12/index.html",
+      "apps/web/public/templates/taklifnomachi-12/adapter.js",
+      "apps/web/public/templates/taklifnomachi-12/app.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "taklifnomachi-13",
+    "name": "Taklifnomachi - Oltin atirgul",
+    "features": {
+      "rsvp": "form",
+      "wishes": true,
+      "receipts": true,
+      "giftIntentions": false
+    },
+    "evidence": "Page handlers + shared private-receipt adapter",
+    "files": [
+      "apps/web/public/templates/taklifnomachi-13/index.html",
+      "apps/web/public/templates/taklifnomachi-13/adapter.js",
+      "apps/web/public/templates/taklifnomachi-13/app.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "taklifnomachi-15",
+    "name": "Taklifnomachi - Monoxrom swap",
+    "features": {
+      "rsvp": "form",
+      "wishes": true,
+      "receipts": true,
+      "giftIntentions": false
+    },
+    "evidence": "Page handlers + shared private-receipt adapter",
+    "files": [
+      "apps/web/public/templates/taklifnomachi-15/index.html",
+      "apps/web/public/templates/taklifnomachi-15/app.js",
+      "apps/web/public/templates/taklifnomachi-15/adapter.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "taklifnomachi-16",
+    "name": "Taklifnomachi - Zaytun guli",
+    "features": {
+      "rsvp": "form",
+      "wishes": true,
+      "receipts": true,
+      "giftIntentions": false
+    },
+    "evidence": "Page handlers + shared private-receipt adapter",
+    "files": [
+      "apps/web/public/templates/taklifnomachi-16/index.html",
+      "apps/web/public/templates/taklifnomachi-16/app.js",
+      "apps/web/public/templates/taklifnomachi-16/adapter.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "taklifnomachi-17",
+    "name": "Taklifnomachi - Atlas va atlas ipak",
+    "features": {
+      "rsvp": "form",
+      "wishes": true,
+      "receipts": true,
+      "giftIntentions": false
+    },
+    "evidence": "Page handlers + shared private-receipt adapter",
+    "files": [
+      "apps/web/public/templates/taklifnomachi-17/index.html",
+      "apps/web/public/templates/taklifnomachi-17/app.js",
+      "apps/web/public/templates/taklifnomachi-17/adapter.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "taklifnomachi-18",
+    "name": "Taklifnomachi - Gul naqshli marosim",
+    "features": {
+      "rsvp": "form",
+      "wishes": true,
+      "receipts": true,
+      "giftIntentions": false
+    },
+    "evidence": "Page handlers + shared private-receipt adapter",
+    "files": [
+      "apps/web/public/templates/taklifnomachi-18/index.html",
+      "apps/web/public/templates/taklifnomachi-18/adapter.js"
+    ],
+    "issues": []
+  },
+  {
+    "id": "taklifnomachi-19",
+    "name": "Taklifnomachi - Zaytun bogi",
+    "features": {
+      "rsvp": "form",
+      "wishes": true,
+      "receipts": true,
+      "giftIntentions": false
+    },
+    "evidence": "Page handlers + shared private-receipt adapter",
+    "files": [
+      "apps/web/public/templates/taklifnomachi-19/index.html",
+      "apps/web/public/templates/taklifnomachi-19/adapter.js"
+    ],
+    "issues": []
+  }
+]

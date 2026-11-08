@@ -27,6 +27,8 @@ import { SoftSelect } from "@/components/soft-select";
 import { ConfirmationDialog } from "@/components/confirmation-dialog";
 import { publicAsset } from "@/lib/public-asset";
 type Activity = {
+  features: Record<"responses" | "wishes" | "receipts" | "intentions", boolean>;
+  sectionHasMore: Record<"responses" | "wishes" | "receipts" | "intentions", boolean>;
   responses: Array<{
     id: string;
     name: string;
@@ -101,6 +103,12 @@ export function InvitationActivity({
     "all",
   );
   const [deleteWishId, setDeleteWishId] = useState<string | null>(null);
+  const activeSection = data?.features[section] ? section :
+    (["responses", "wishes", "receipts", "intentions"] as const).find((key) => data?.features[key]) ?? null;
+  function selectSection(value: typeof section) {
+    setSection(value);
+    setPage(0);
+  }
   useEffect(() => {
     const controller = new AbortController();
     const query = responseQuery.trim();
@@ -269,51 +277,52 @@ export function InvitationActivity({
       </div>
       <div className={styles.introRow}>
         <p className={styles.description}>
-          Mehmonlar javoblari, tashrifi va boshqa ma’lumotlar.
+          Mehmonlardan kelgan ma’lumotlar.
         </p>
       </div>
       {error && <p role="alert">{error}</p>}
       {!data && !error && <p role="status">Yuklanmoqda…</p>}
       {data && (
         <>
-          <nav
+          {activeSection && <nav
             className={styles.sectionTabs}
             aria-label="Faollik bo‘limlari"
             role="tablist"
           >
-            <button
+            {data.features.responses && <button
               role="tab"
-              aria-selected={section === "responses"}
-              onClick={() => setSection("responses")}
+              aria-selected={activeSection === "responses"}
+              onClick={() => selectSection("responses")}
             >
               <UsersRound size={16} /> Javoblar{" "}
               <span>{data.totals.responses}</span>
-            </button>
-            <button
+            </button>}
+            {data.features.wishes && <button
               role="tab"
-              aria-selected={section === "wishes"}
-              onClick={() => setSection("wishes")}
+              aria-selected={activeSection === "wishes"}
+              onClick={() => selectSection("wishes")}
             >
               <Heart size={16} /> Tilaklar <span>{data.wishes.length}</span>
-            </button>
-            <button
+            </button>}
+            {data.features.receipts && <button
               role="tab"
-              aria-selected={section === "receipts"}
-              onClick={() => setSection("receipts")}
+              aria-selected={activeSection === "receipts"}
+              onClick={() => selectSection("receipts")}
             >
               <ReceiptText size={16} /> To‘yona{" "}
               <span>{data.receipts.length}</span>
-            </button>
-            <button
+            </button>}
+            {data.features.intentions && <button
               role="tab"
-              aria-selected={section === "intentions"}
-              onClick={() => setSection("intentions")}
+              aria-selected={activeSection === "intentions"}
+              onClick={() => selectSection("intentions")}
             >
               <Gift size={16} /> Sovg‘a niyatlari{" "}
               <span>{data.giftIntentions?.length ?? 0}</span>
-            </button>
-          </nav>
-          {!adminContext && (
+            </button>}
+          </nav>}
+          {!activeSection && <p>Bu taklifnomada mehmonlardan ma’lumot qabul qilinmaydi.</p>}
+          {!adminContext && data.features.responses && (
             <section className={styles.overview} aria-label="Faollik xulosasi">
               <div className={styles.statGrid}>
                 <div className={styles.statCard}>
@@ -351,7 +360,7 @@ export function InvitationActivity({
               </div>
             </section>
           )}
-          {section === "responses" && (
+          {activeSection === "responses" && (
             <section className={styles.sectionPanel} role="tabpanel">
               <div className={styles.responseToolbar}>
                 <div className={styles.panelHeading}>
@@ -497,7 +506,7 @@ export function InvitationActivity({
               )}
             </section>
           )}
-          {section === "wishes" && (
+          {activeSection === "wishes" && (
             <section className={styles.sectionPanel} role="tabpanel">
               <div className={styles.sectionHeading}>
                 <div className={styles.panelHeading}>
@@ -613,7 +622,7 @@ export function InvitationActivity({
                 ))}
             </section>
           )}
-          {section === "receipts" && (
+          {activeSection === "receipts" && (
             <section className={styles.sectionPanel} role="tabpanel">
               <div className={styles.panelHeading}>
                 <div className={styles.panelHeadingIcon}>
@@ -680,7 +689,7 @@ export function InvitationActivity({
               </div>
             </section>
           )}
-          {section === "intentions" && (
+          {activeSection === "intentions" && (
             <section className={styles.sectionPanel} role="tabpanel">
               <div className={styles.panelHeading}>
                 <div className={styles.panelHeadingIcon}>
@@ -722,7 +731,7 @@ export function InvitationActivity({
               ))}
             </section>
           )}
-          <nav aria-label="Javoblar sahifalari" className={styles.actions}>
+          {activeSection && <nav aria-label="Faollik sahifalari" className={styles.actions}>
             <button
               disabled={page === 0 || busy}
               onClick={() => setPage((value) => value - 1)}
@@ -732,15 +741,13 @@ export function InvitationActivity({
             <span className={styles.pageIndicator}>{page + 1}-sahifa</span>
             <button
               disabled={
-                !(section === "responses"
-                  ? data.responseHasMore
-                  : data.hasMore) || busy
+                !data.sectionHasMore[activeSection] || busy
               }
               onClick={() => setPage((value) => value + 1)}
             >
               Keyingi
             </button>
-          </nav>
+          </nav>}
         </>
       )}
       {deleteWishId && (

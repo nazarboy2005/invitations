@@ -8,8 +8,11 @@ import {
   submissionLimit,
 } from "@/server/public";
 import { verifySameOrigin } from "@/server/auth";
+import { enqueueGuestNotification } from "@/server/guest-notifications";
+import { scheduleGuestNotification } from "@/server/schedule-guest-notification";
 type Context = { params: Promise<{ id: string }> };
 export const runtime = "nodejs";
+export const maxDuration = 60;
 export async function GET(_request: Request, { params }: Context) {
   try {
     const { id } = await params;
@@ -45,11 +48,12 @@ export async function POST(request: Request, { params }: Context) {
       .parse(await readJson(request, 12000));
     await submissionLimit(request, invitationId, "wish");
     const guest = await resolveGuest(invitationId, input.guestToken);
-    await getDb().begin(async (tx) => {
+    const jobId = await getDb().begin(async (tx) => {
       const [wish] =
         await tx`INSERT INTO wishes(invitation_id,guest_id,name,message,status) VALUES(${invitationId},${guest?.id ?? null},${input.name},${input.message},'pending') RETURNING id`;
-      await tx`INSERT INTO jobs(type,payload,idempotency_key) VALUES('wish-notification',${tx.json({ wishId: wish.id })},${`wish:${wish.id}`})`;
+      return enqueueGuestNotification(tx, { kind: "wish", invitationId, recordId: wish.id, name: input.name, message: input.message }, `wish:${wish.id}`);
     });
+    scheduleGuestNotification(jobId);
     return NextResponse.json(
       {
         ok: true,

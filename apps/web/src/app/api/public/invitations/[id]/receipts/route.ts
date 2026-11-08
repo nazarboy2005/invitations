@@ -3,6 +3,8 @@ import { z } from "zod";
 import { getDb } from "@taklifnoma/database";
 import { ApiError, apiError, privateHeaders, readBytes } from "@/server/api";
 import { verifySameOrigin } from "@/server/auth";
+import { enqueueGuestNotification } from "@/server/guest-notifications";
+import { scheduleGuestNotification } from "@/server/schedule-guest-notification";
 import {
   publicInvitation,
   resolveGuest,
@@ -15,6 +17,7 @@ import {
   removeMedia,
 } from "@/server/storage";
 export const runtime = "nodejs";
+export const maxDuration = 60;
 const MAX_SIZE = 5 * 1024 * 1024;
 export async function POST(
   request: Request,
@@ -88,14 +91,16 @@ export async function POST(
       writtenKey = key;
       await putMedia(key, content, format.mime);
       await tx`INSERT INTO media_assets(id,owner_id,draft_id,object_key,url,filename,mime_type,size_bytes,visibility,status) VALUES(${assetId},${row.owner_id},${invitationId},${key},${`/api/media/${assetId}`},${file.name.slice(0, 200)},${format.mime},${content.length},'private','ready')`;
-      await tx`INSERT INTO gift_receipts(invitation_id,guest_id,asset_id,giver_names,file_hash,destination) VALUES(${invitationId},${guest?.id ?? null},${assetId},${giverNames},${hash},${tx.json({ cardNumber: row.data.gift.cardNumber, cardHolder: row.data.gift.cardHolder })})`;
-      return { duplicate: false };
+      const [receipt] = await tx`INSERT INTO gift_receipts(invitation_id,guest_id,asset_id,giver_names,file_hash,destination) VALUES(${invitationId},${guest?.id ?? null},${assetId},${giverNames},${hash},${tx.json({ cardNumber: row.data.gift.cardNumber, cardHolder: row.data.gift.cardHolder })}) RETURNING id`;
+      const jobId = await enqueueGuestNotification(tx, { kind: "receipt", invitationId, recordId: receipt.id, name: giverNames }, `receipt:${receipt.id}`);
+      return { duplicate: false, jobId };
     });
     writtenKey = undefined;
+    scheduleGuestNotification(result.jobId);
     return Response.json(
       {
         ok: true,
-        ...result,
+        duplicate: result.duplicate,
         message:
           "Chek saqlandi. Taklifnoma egasi ko‘rib chiqadi. Bu to‘lov tasdig‘i emas.",
       },
