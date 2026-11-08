@@ -177,7 +177,7 @@ function InvitationCard({
   const editUrl = local
     ? `/studio?draft=${encodeURIComponent(invitation.id)}`
     : `/studio/${encodeURIComponent(invitation.id)}`;
-  const activityUrl = `/dashboard/${encodeURIComponent(invitation.id)}/activity`;
+  const activityUrl = `/dashboard/${encodeURIComponent(invitation.status === "published" && invitation.slug ? invitation.slug : invitation.id)}/activity`;
   return (
     <article
       hidden={hidden}
@@ -1037,7 +1037,7 @@ export function Dashboard() {
                       cloudIds.has(invitation.id)
                         ? () =>
                             router.push(
-                              `/dashboard/${encodeURIComponent(invitation.id)}/activity`,
+                              `/dashboard/${encodeURIComponent(invitation.status === "published" && invitation.slug ? invitation.slug : invitation.id)}/activity`,
                             )
                         : undefined
                     }

@@ -20,7 +20,27 @@ export type GuestNotification = {
 function escape(value: string, limit: number) {
   return value
     .slice(0, limit)
-    .replace(/[&<>]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" })[c]!);
+    .replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]!);
+}
+
+function eventEmoji(eventType: string | undefined) {
+  const emoji: Record<string, string> = {
+    wedding: "💍",
+    birthday: "🎂",
+    yubiley: "🎉",
+    osh: "🍽️",
+    iftorlik: "🌙",
+    "qiz-bazmi": "💃",
+    fotiha: "💍",
+    "qiz-uzatish": "👰",
+    "sunnat-toyi": "🧸",
+    "beshik-toyi": "👶",
+    bitiruv: "🎓",
+    korporativ: "🥂",
+    "yangi-uy": "🏡",
+    other: "🎉",
+  };
+  return emoji[eventType ?? ""] ?? "🎉";
 }
 
 /** Keep guest text escaped and messages small. Private receipt files stay on the website. */
@@ -28,28 +48,48 @@ export function guestTelegramMessage(
   input: GuestNotification,
   invitationName: string,
   appUrl: string,
-  pendingWish = true,
+  wishStatus: "pending" | "approved" | "hidden" | "deleted" = "pending",
+  invitationSlug?: string,
+  eventType?: string,
 ) {
-  const titles = {
-    response: "Yangi javob",
-    wish: "Yangi tilak",
-    receipt: "To‘yona cheki",
-    intention: "Sovg‘a niyati",
-  };
-  const lines = [
-    `<b>${titles[input.kind]}</b> · ${escape(invitationName, 100)}`,
-    escape(input.name, 100),
-  ];
+  const event = eventEmoji(eventType);
+  const invitationUrl = invitationSlug
+    ? new URL(`/i/${encodeURIComponent(invitationSlug)}`, appUrl).href
+    : undefined;
+  const invitation = invitationUrl
+    ? `<a href="${escape(invitationUrl, 500)}"><b>${escape(invitationName, 100)}</b></a>`
+    : `<b>${escape(invitationName, 100)}</b>`;
+  const lines: string[] = [];
   if (input.kind === "response") {
     lines.push(
-      { yes: "Kelaman", no: "Kela olmayman", maybe: "Aniq emas" }[input.status],
+      "💌 <b>Taklifnomangizga yangi javob!</b>",
+      "",
+      `${event} ${invitation}`,
+      `👤 Mehmon: <b>${escape(input.name, 100)}</b>`,
     );
-    if (input.note) lines.push(escape(input.note, 500));
+    lines.push(
+      `${input.status === "no" ? "❌" : "✅"} Javob: <b>${escape({ yes: "Kelaman", no: "Kela olmayman", maybe: "Aniq emas" }[input.status], 100)}</b>`,
+    );
+  } else if (input.kind === "wish") {
+    lines.push(
+      "💌 <b>Sizga yangi tilak keldi!</b>",
+      "",
+      `${event} ${invitation}`,
+      `👤 Mehmon: <b>${escape(input.name, 100)}</b>`,
+      "💬 <b>Tilak:</b>",
+      "",
+      `<blockquote>${escape(input.message, 1000)}</blockquote>`,
+      "",
+      wishStatus === "approved"
+        ? "✅ Tilak veb-sahifada ko‘rsatiladi."
+        : wishStatus === "hidden" || wishStatus === "deleted"
+          ? "🗑 Tilak veb-sahifada ko‘rsatilmaydi."
+          : "❓Bu tilakni veb-sahifada ko'rsatilishini xohlaysizmi?",
+    );
   }
-  if (input.kind === "wish") lines.push(escape(input.message, 1000));
-  if (input.kind === "receipt")
-    lines.push("Chek yuborildi. Pul tushganini tekshiring.");
+  if (input.kind === "receipt") lines.push(`<b>To‘yona cheki</b> · ${invitation}`, "Chek yuborildi. Pul tushganini tekshiring.");
   if (input.kind === "intention") {
+    lines.push(`<b>Sovg‘a niyati</b> · ${invitation}`);
     lines.push(
       `${escape(input.amount, 30)} ${escape(input.currencyLabel, 30)} · niyat, pul o‘tkazilmagan`,
     );
@@ -68,16 +108,16 @@ export function guestTelegramMessage(
     text: lines.join("\n"),
     reply_markup: {
       inline_keyboard: [
-        ...(input.kind === "wish" && pendingWish
+        ...(input.kind === "wish"
           ? [
               [
                 {
-                  text: "Tasdiqlash",
+                  text: "✅ Ha, ko‘rsatilsin",
                   callback_data: `wish_approve:${input.recordId}`,
                 },
                 {
-                  text: "O‘chirish",
-                  callback_data: `wish_delete:${input.recordId}`,
+                  text: "🗑 Yo‘q, o‘chirilsin",
+                  callback_data: `wish_hide:${input.recordId}`,
                 },
               ],
             ]
@@ -116,7 +156,7 @@ export async function sendGuestNotification(
       body.ok === false &&
       (body.error_code === 429 || response.status === 429)
     )
-      return {
+    return {
         state: "retry",
         after: Math.min(
           86400,
@@ -189,7 +229,7 @@ export async function processGuestNotifications(
       const [target] =
         await tx`SELECT i.data,tc.telegram_chat_id AS chat_id,u.disabled_at,
         EXISTS(SELECT 1 FROM wishes WHERE id::text=${input.recordId} AND invitation_id=i.id AND deleted_at IS NULL AND status<>'deleted') AS wish_exists,
-        EXISTS(SELECT 1 FROM wishes WHERE id::text=${input.recordId} AND status='pending') AS pending_wish,
+        (SELECT status FROM wishes WHERE id::text=${input.recordId}) AS wish_status,
         EXISTS(SELECT 1 FROM rsvp_responses WHERE id::text=${input.recordId} AND invitation_id=i.id) AS response_exists,
         EXISTS(SELECT 1 FROM gift_receipts WHERE id::text=${input.recordId} AND invitation_id=i.id) AS receipt_exists,
         EXISTS(SELECT 1 FROM pulau_gift_intentions WHERE id::text=${input.recordId} AND invitation_id=i.id) AS intention_exists
@@ -228,7 +268,13 @@ export async function processGuestNotifications(
           input,
           invitationName,
           process.env.APP_URL!,
-          target.pending_wish,
+          (target.wish_status ?? "pending") as
+            | "pending"
+            | "approved"
+            | "hidden"
+            | "deleted",
+          target.data.slug,
+          target.data.eventType,
         ),
       };
     });

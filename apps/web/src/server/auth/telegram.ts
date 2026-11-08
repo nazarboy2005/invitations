@@ -9,6 +9,7 @@ import {
   botPaymentOrder,
   paymentTelegramMessage,
 } from "../payment-notifications";
+import { guestTelegramMessage } from "../guest-notifications";
 
 type TelegramMessage = {
   message_id?: number;
@@ -254,7 +255,7 @@ Boshlaymizmi?`;
     }
   }
   const moderation = callback?.data?.match(
-    /^wish_(approve|delete):([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$/i,
+    /^wish_(approve|hide|delete):([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$/i,
   );
   if (callback && moderation) {
     const privateActor =
@@ -269,7 +270,7 @@ Boshlaymizmi?`;
       });
     } else {
       const [wish] =
-        await db`SELECT w.*,u.id AS actor_id,u.telegram_user_id,u.is_admin,i.owner_id FROM wishes w JOIN invitations i ON i.id=w.invitation_id JOIN users u ON u.telegram_user_id=${String(callback.from.id)} WHERE w.id=${moderation[2]} AND i.status<>'deleted' AND u.disabled_at IS NULL FOR UPDATE OF w`;
+        await db`SELECT w.*,u.id AS actor_id,u.telegram_user_id,u.is_admin,i.owner_id,i.data AS invitation_data FROM wishes w JOIN invitations i ON i.id=w.invitation_id JOIN users u ON u.telegram_user_id=${String(callback.from.id)} WHERE w.id=${moderation[2]} AND i.status<>'deleted' AND u.disabled_at IS NULL FOR UPDATE OF w`;
       if (!wish || (wish.owner_id !== wish.actor_id && !hasAdminRole(wish)))
         await telegramCall("answerCallbackQuery", {
           callback_query_id: callback.id,
@@ -277,24 +278,30 @@ Boshlaymizmi?`;
           show_alert: true,
         });
       else {
-        const status = moderation[1] === "approve" ? "approved" : "deleted";
-        const canChange = wish.status !== "deleted" && wish.status !== status;
+        const status = moderation[1] === "approve" ? "approved" : moderation[1] === "hide" ? "hidden" : "deleted";
+        const canChange = wish.status !== status;
         if (canChange) {
           await db`UPDATE wishes SET status=${status},moderated_by=${wish.actor_id},moderated_at=now(),deleted_at=${status === "deleted" ? new Date() : null} WHERE id=${wish.id}`;
           await db`INSERT INTO invitation_audit_log(invitation_id,actor_id,action,previous_values,new_values) VALUES(${wish.invitation_id},${wish.actor_id},${"wish_" + moderation[1]},${db.json({ wishId: wish.id, status: wish.status })},${db.json({ wishId: wish.id, status })})`;
           if (callback.message?.message_id) {
-            await telegramCall("editMessageReplyMarkup", {
+            const invitationData = wish.invitation_data;
+            const locale = invitationData.defaultLocale;
+            const invitationName =
+              (invitationData.content?.[locale]?.people ?? invitationData.content?.["uz-Latn"]?.people ?? [])
+                .filter(Boolean)
+                .join(" & ") || "Taklifnoma";
+            const notification = guestTelegramMessage(
+              { kind: "wish", invitationId: wish.invitation_id, recordId: wish.id, name: wish.name, message: wish.message },
+              invitationName,
+              process.env.APP_URL!,
+              status,
+              invitationData.slug,
+              invitationData.eventType,
+            );
+            await telegramCall("editMessageText", {
               chat_id: callback.message.chat.id,
               message_id: callback.message.message_id,
-              reply_markup: { inline_keyboard: [] },
-            });
-            await telegramCall("sendMessage", {
-              parse_mode: "HTML",
-              chat_id: callback.message.chat.id,
-              text:
-                status === "approved"
-                  ? "🌟 <b>Tilak tasdiqlandi</b>\nEndi u ommaviy taklifnomada ko‘rinadi."
-                  : "🗑️ <b>Tilak rad etildi va o‘chirildi</b>\nU ommaviy taklifnomada ko‘rinmaydi.",
+              ...notification,
             });
           }
         }
@@ -304,7 +311,9 @@ Boshlaymizmi?`;
             ? "Bu xabar allaqachon ko‘rib chiqilgan."
             : status === "approved"
               ? "Tilak taklifnomada e’lon qilindi."
-              : "Tilak rad etildi va o‘chirildi.",
+              : status === "hidden"
+                ? "Tilak taklifnomada ko‘rsatilmaydi."
+                : "Tilak o‘chirildi.",
         });
       }
     }

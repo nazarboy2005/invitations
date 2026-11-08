@@ -30,6 +30,15 @@ export async function getOwnedInvitation(
     ? invitationSchema.parse({ ...rows[0].data, status: rows[0].status })
     : null;
 }
+export async function getOwnedPublishedInvitationBySlug(
+  slug: string,
+  userId: string,
+): Promise<Invitation | null> {
+  const rows = await getDb()`SELECT data,status FROM invitations WHERE slug=${slug} AND owner_id=${userId} AND status='published'`;
+  return rows[0]
+    ? invitationSchema.parse({ ...rows[0].data, status: rows[0].status })
+    : null;
+}
 export async function getInvitationEditAccess(id: string, ownerId: string): Promise<InvitationEditAccess> {
   const [row] = await getDb()`SELECT status,identity_locked_at,edit_deadline_at,approved_event_date FROM invitations WHERE id=${id} AND owner_id=${ownerId} AND status<>'deleted'`;
   if (!row) throw new ApiError(404, "NOT_FOUND", "Taklifnoma topilmadi.");
