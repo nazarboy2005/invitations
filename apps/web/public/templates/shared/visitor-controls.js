@@ -35,12 +35,14 @@
     if (!state || !state.wishesEnabled || state.wishCount < state.wishLimit) return;
     const inspected = new Set();
     for (const form of document.querySelectorAll("form")) {
+      const isWishForm = form.matches("[data-wishes-form],[data-wish-form],.wish-form");
       const fields = [...form.querySelectorAll("input,textarea,[contenteditable='true']")]
-        .filter((field) => isWishControl(field, form));
+        .filter((field) => isWishForm || isWishControl(field, form));
       if (!fields.length) continue;
       fields.forEach((field) => inspected.add(field));
       if (!isRsvpForm(form)) {
         form.hidden = true;
+        form.style.setProperty("display", "none", "important");
         form.setAttribute("aria-hidden", "true");
       } else {
         for (const field of fields) {
@@ -75,6 +77,23 @@
     if (!state?.response) return;
     const form = [...document.querySelectorAll("form")].find(isRsvpForm);
     if (!form) return;
+    const nativeForm = form.querySelector("[data-rsvp-form]");
+    const nativeDone = form.querySelector("[data-rsvp-done]");
+    if (nativeForm && nativeDone) {
+      nativeForm.hidden = true;
+      nativeDone.hidden = false;
+      const summary = nativeDone.querySelector("[data-rsvp-summary]");
+      if (summary) {
+        const status = state.response.status;
+        summary.textContent = status === "yes"
+          ? `Kelaman · ${state.response.partySize || 1} kishi`
+          : responseLabel(state.response);
+      }
+      for (const choice of form.querySelectorAll("[data-rsvp-choice]")) {
+        choice.setAttribute("aria-pressed", String(choice.dataset.rsvpChoice === state.response.status));
+      }
+      return;
+    }
     for (const field of form.querySelectorAll("input,select,textarea")) {
       const key = `${field.name} ${field.id}`.toLowerCase();
       if (/name|guest|mehmon|ism/.test(key) && field.type !== "radio" && field.type !== "checkbox") {
