@@ -196,6 +196,20 @@ export function InvitationViewTracker({
   const sent = useRef(false);
 
   useEffect(() => {
+    const visitorState: {
+      invitationId: string;
+      guestToken: string;
+      state?: unknown;
+    } = {
+      invitationId,
+      guestToken: new URLSearchParams(window.location.search).get("g") ?? "",
+    };
+    (window as Window & { __fotihaVisitorState?: typeof visitorState }).__fotihaVisitorState = visitorState;
+    const stateUrl = `/api/public/invitations/${encodeURIComponent(invitationId)}/visitor-state${visitorState.guestToken ? `?guestToken=${encodeURIComponent(visitorState.guestToken)}` : ""}`;
+    void fetch(stateUrl, { credentials: "same-origin", cache: "no-store" })
+      .then((response) => response.ok ? response.json() : null)
+      .then((state) => { if (state) visitorState.state = state; })
+      .catch(() => {});
     if (sent.current) return;
     sent.current = true;
     void fetch(

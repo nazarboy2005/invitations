@@ -3,6 +3,32 @@ import { getDb } from "@taklifnoma/database";
 import { getPublishedInvitation } from "./invitations";
 import { ApiError } from "./api";
 import { clientAddress, enforceRateLimit } from "./rate-limit";
+import { digest, randomToken } from "./auth/crypto";
+
+export const PUBLIC_VISITOR_COOKIE = "taklifnoma_rsvp";
+
+export function publicVisitorToken(request: Request) {
+  const prefix = `${PUBLIC_VISITOR_COOKIE}=`;
+  const raw = request.headers
+    .get("cookie")
+    ?.split(";")
+    .map((value) => value.trim())
+    .find((value) => value.startsWith(prefix))
+    ?.slice(prefix.length);
+  return raw && /^[a-zA-Z0-9_-]{43}$/.test(raw) ? raw : undefined;
+}
+
+export function publicVisitorIdentity(
+  invitationId: string,
+  guest: { id?: unknown } | null,
+  token: string,
+) {
+  return digest(`${invitationId}:${guest ? `guest:${guest.id}` : token}`);
+}
+
+export function newPublicVisitorToken() {
+  return randomToken();
+}
 export async function publicInvitation(id: string) {
   const result = await getPublishedInvitation(id);
   if (!result) throw new ApiError(404, "NOT_FOUND", "Taklifnoma topilmadi.");

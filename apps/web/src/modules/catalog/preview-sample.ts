@@ -45,6 +45,42 @@ type TemplateSample = {
   gallery?: Invitation["gallery"];
 };
 
+function rollingPreviewStart(timezone: string, reference: string): string {
+  const formatter = new Intl.DateTimeFormat("en", {
+    timeZone: timezone,
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  });
+  const localNow = Object.fromEntries(
+    formatter.formatToParts(new Date()).map((part) => [part.type, part.value]),
+  );
+  const localDate = new Date(
+    Date.UTC(Number(localNow.year), Number(localNow.month) - 1, Number(localNow.day) + 10),
+  );
+  const [hour = "18", minute = "00"] = reference.slice(11, 16).split(":");
+  const desiredUtc = Date.UTC(
+    localDate.getUTCFullYear(), localDate.getUTCMonth(), localDate.getUTCDate(),
+    Number(hour), Number(minute),
+  );
+  let instant = desiredUtc;
+  for (let attempt = 0; attempt < 2; attempt++) {
+    const parts = Object.fromEntries(
+      new Intl.DateTimeFormat("en-GB", {
+        timeZone: timezone,
+        year: "numeric", month: "2-digit", day: "2-digit",
+        hour: "2-digit", minute: "2-digit", second: "2-digit", hourCycle: "h23",
+      }).formatToParts(new Date(instant)).map((part) => [part.type, part.value]),
+    );
+    const representedUtc = Date.UTC(
+      Number(parts.year), Number(parts.month) - 1, Number(parts.day),
+      Number(parts.hour), Number(parts.minute), Number(parts.second),
+    );
+    instant = desiredUtc - (representedUtc - instant);
+  }
+  return new Date(instant).toISOString();
+}
+
 const EVENT_SAMPLES = previewSample.eventSamples as Partial<
   Record<EventType, EventSample>
 >;
@@ -67,6 +103,7 @@ export function createTemplatePreviewSample(
   templateId: string,
   localeSettings?: Pick<Invitation, "defaultLocale" | "enabledLocales"> &
     Partial<Pick<Invitation, "eventType">>,
+  previewTimezone?: string,
 ): Invitation {
   const template = templateById(templateId);
   const sampleEventType = (
@@ -87,6 +124,7 @@ export function createTemplatePreviewSample(
   const dressCode = structuredClone(previewSample.dressCode);
   const program = previewSample.program.map((entry) => ({ ...entry }));
   let startsAt = previewSample.startsAt;
+  let timezone = previewSample.timezone;
   {
     const eventSample = EVENT_SAMPLES[sampleEventType];
     if (eventSample) {
@@ -134,6 +172,14 @@ export function createTemplatePreviewSample(
       }
     }
   }
+  if (previewTimezone) {
+    try {
+      startsAt = rollingPreviewStart(previewTimezone, startsAt);
+      timezone = previewTimezone;
+    } catch {
+      // Keep the stable fixture date when the browser reports an invalid zone.
+    }
+  }
   return invitationSchema.parse({
     ...createInvitation(templateId),
     defaultLocale: localeSettings?.defaultLocale ?? previewSample.defaultLocale,
@@ -143,7 +189,7 @@ export function createTemplatePreviewSample(
     eventType: sampleEventType,
     celebrantAge: EVENT_SAMPLES[sampleEventType]?.celebrantAge ?? null,
     startsAt,
-    timezone: previewSample.timezone,
+    timezone,
     venue: structuredClone(EVENT_SAMPLES[sampleEventType]?.venue ?? previewSample.venue),
     gift: structuredClone(previewSample.gift),
     contacts: structuredClone(previewSample.contacts),

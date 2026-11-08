@@ -170,7 +170,11 @@ export function FullTemplatePreview({
       const resolved =
         candidate && (!demo || candidateHasContent)
           ? { ...candidate, templateId: template.id }
-          : createTemplatePreviewSample(template.id, candidate ?? undefined);
+          : createTemplatePreviewSample(
+              template.id,
+              candidate ?? undefined,
+              Intl.DateTimeFormat().resolvedOptions().timeZone,
+            );
       setCatalogPreview(!candidateHasContent && !cardPreview && !posterCapture);
       const result = longNames && !candidateHasContent ? createLongNamePreview(resolved) : resolved;
       if (!candidateHasContent && !cardPreview && !posterCapture && !coverCapture) {

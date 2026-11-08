@@ -34,6 +34,33 @@ export const TemplateFrame = forwardRef<HTMLIFrameElement, Props>(function Templ
       initialized.add(doc);
       cleanups.push(pauseOffscreenEffects(doc));
       latest.current(frame);
+      const injectVisitorControls = () => {
+        if (!active || frame.contentDocument !== doc || !doc.body) return true;
+        const visitor = (window as Window & {
+          __fotihaVisitorState?: { invitationId: string; guestToken: string; state?: unknown };
+        }).__fotihaVisitorState;
+        if (!visitor?.state) return false;
+        const existing = doc.querySelector<HTMLScriptElement>("script[data-fotiha-visitor-controls]");
+        if (existing) return true;
+        const script = doc.createElement("script");
+        script.dataset.fotihaVisitorControls = "";
+        script.src = "/templates/shared/visitor-controls.js";
+        script.dataset.invitationId = visitor.invitationId;
+        script.dataset.guestToken = visitor.guestToken;
+        script.dataset.visitorState = JSON.stringify(visitor.state);
+        doc.body.append(script);
+        return true;
+      };
+      if (!injectVisitorControls()) {
+        const visitorTimer = window.setInterval(() => {
+          if (injectVisitorControls()) window.clearInterval(visitorTimer);
+        }, 100);
+        const visitorTimeout = window.setTimeout(() => window.clearInterval(visitorTimer), 15_000);
+        cleanups.push(() => {
+          window.clearInterval(visitorTimer);
+          window.clearTimeout(visitorTimeout);
+        });
+      }
       // postMessage adapters and source layout effects must run before measuring.
       requestAnimationFrame(() => requestAnimationFrame(() => {
         if (!active || frame.contentDocument !== doc) return;

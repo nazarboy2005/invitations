@@ -6,9 +6,12 @@ import {
   publicInvitation,
   resolveGuest,
   submissionLimit,
+  publicVisitorIdentity,
+  publicVisitorToken,
+  newPublicVisitorToken,
+  PUBLIC_VISITOR_COOKIE,
 } from "@/server/public";
 import { verifySameOrigin } from "@/server/auth";
-import { digest, randomToken } from "@/server/auth/crypto";
 import { randomUUID } from "node:crypto";
 import { templateVisitorFeatures } from "@taklifnoma/contracts/capabilities";
 import { enqueueGuestNotification } from "@/server/guest-notifications";
@@ -44,20 +47,9 @@ export async function POST(request: Request, { params }: Context) {
       .parse(await readJson(request, 5000));
     await submissionLimit(request, invitationId, "rsvp");
     const guest = await resolveGuest(invitationId, input.guestToken);
-    const cookieName = "taklifnoma_rsvp";
-    const previousToken = request.headers
-      .get("cookie")
-      ?.split(";")
-      .map((value) => value.trim())
-      .find((value) => value.startsWith(cookieName + "="))
-      ?.slice(cookieName.length + 1);
-    const responseToken =
-      previousToken && /^[a-zA-Z0-9_-]{43}$/.test(previousToken)
-        ? previousToken
-        : randomToken();
-    const responseHash = digest(
-      `${invitationId}:${guest ? `guest:${guest.id}` : responseToken}`,
-    );
+    const previousToken = publicVisitorToken(request);
+    const responseToken = previousToken ?? newPublicVisitorToken();
+    const responseHash = publicVisitorIdentity(invitationId, guest, responseToken);
     const party = input.status === "yes" ? input.partySize : 0;
     const maximum = Math.min(
       invitation.rsvp.maxPartySize,
@@ -79,7 +71,7 @@ export async function POST(request: Request, { params }: Context) {
       { ok: true, message: "Javobingiz saqlandi. Rahmat!" },
       { status: 201 },
     );
-    response.cookies.set(cookieName, responseToken, {
+    response.cookies.set(PUBLIC_VISITOR_COOKIE, responseToken, {
       httpOnly: true,
       sameSite: "lax",
       secure: new URL(request.url).protocol === "https:",

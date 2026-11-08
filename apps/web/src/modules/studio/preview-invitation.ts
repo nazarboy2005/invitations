@@ -7,7 +7,11 @@ export function createStudioPreviewInvitation(
 ): Invitation {
   if (!invitation.templateId || invitation.status !== "draft")
     return invitation;
-  const sample = createTemplatePreviewSample(invitation.templateId, invitation);
+  const sample = createTemplatePreviewSample(
+    invitation.templateId,
+    invitation,
+    Intl.DateTimeFormat().resolvedOptions().timeZone,
+  );
   const minimumPeople = ["wedding", "fotiha"].includes(invitation.eventType)
     ? 2
     : 1;

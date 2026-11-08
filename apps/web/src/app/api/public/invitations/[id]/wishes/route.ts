@@ -6,6 +6,10 @@ import {
   publicInvitation,
   resolveGuest,
   submissionLimit,
+  publicVisitorIdentity,
+  publicVisitorToken,
+  newPublicVisitorToken,
+  PUBLIC_VISITOR_COOKIE,
 } from "@/server/public";
 import { verifySameOrigin } from "@/server/auth";
 import { enqueueGuestNotification } from "@/server/guest-notifications";
@@ -23,7 +27,7 @@ export async function GET(_request: Request, { params }: Context) {
         { headers: { "Cache-Control": "no-store" } },
       );
     const rows =
-      await getDb()`SELECT id,name,message,created_at AS "submittedAt" FROM wishes WHERE invitation_id=${invitationId} AND status='approved' AND deleted_at IS NULL ORDER BY created_at DESC LIMIT 100`;
+      await getDb()`SELECT id,name,message,created_at AS "submittedAt" FROM wishes WHERE invitation_id=${invitationId} AND status='approved' AND deleted_at IS NULL ORDER BY created_at DESC LIMIT 6`;
     return NextResponse.json(
       { wishes: rows },
       { headers: { "Cache-Control": "no-store" } },
@@ -48,20 +52,39 @@ export async function POST(request: Request, { params }: Context) {
       .parse(await readJson(request, 12000));
     await submissionLimit(request, invitationId, "wish");
     const guest = await resolveGuest(invitationId, input.guestToken);
-    const jobId = await getDb().begin(async (tx) => {
+    const previousToken = publicVisitorToken(request);
+    const visitorToken = previousToken ?? newPublicVisitorToken();
+    const visitorHash = publicVisitorIdentity(invitationId, guest, visitorToken);
+    const result = await getDb().begin(async (tx) => {
+      await tx`SELECT pg_advisory_xact_lock(hashtextextended(${visitorHash}, 0))`;
+      const [existing] = await tx`SELECT count(*)::int AS count FROM wishes
+        WHERE invitation_id=${invitationId}
+          AND (visitor_token_hash=${visitorHash} OR (${guest?.id ?? null}::uuid IS NOT NULL AND guest_id=${guest?.id ?? null}::uuid))`;
+      if (Number(existing?.count ?? 0) >= 2)
+        throw new ApiError(429, "WISH_LIMIT_REACHED", "Har bir mehmon ko‘pi bilan ikki marta tilak yuborishi mumkin.");
       const [wish] =
-        await tx`INSERT INTO wishes(invitation_id,guest_id,name,message,status) VALUES(${invitationId},${guest?.id ?? null},${input.name},${input.message},'pending') RETURNING id`;
-      return enqueueGuestNotification(tx, { kind: "wish", invitationId, recordId: wish.id, name: input.name, message: input.message }, `wish:${wish.id}`);
+        await tx`INSERT INTO wishes(invitation_id,guest_id,visitor_token_hash,name,message,status) VALUES(${invitationId},${guest?.id ?? null},${visitorHash},${input.name},${input.message},'pending') RETURNING id`;
+      const jobId = await enqueueGuestNotification(tx, { kind: "wish", invitationId, recordId: wish.id, name: input.name, message: input.message }, `wish:${wish.id}`);
+      return { jobId, wishCount: Number(existing.count) + 1 };
     });
-    scheduleGuestNotification(jobId);
-    return NextResponse.json(
+    scheduleGuestNotification(result.jobId);
+    const response = NextResponse.json(
       {
         ok: true,
+        wishCount: result.wishCount,
         message:
           "Tilagingiz yuborildi. Taklifnoma egasi tasdiqlagach ko‘rinadi.",
       },
       { status: 201 },
     );
+    response.cookies.set(PUBLIC_VISITOR_COOKIE, visitorToken, {
+      httpOnly: true,
+      sameSite: "lax",
+      secure: new URL(request.url).protocol === "https:",
+      path: "/api/public/invitations",
+      maxAge: 365 * 24 * 60 * 60,
+    });
+    return response;
   } catch (e) {
     return apiError(e);
   }
