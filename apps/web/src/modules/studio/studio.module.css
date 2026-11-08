@@ -3230,13 +3230,64 @@
     min-height: 36px;
     white-space: normal;
   }
-  .topbar:has(.publishedToolbar) { height: auto; min-height: var(--toolbar-height); padding: 7px 12px; align-items: flex-start; }
-  .publishedToolbar { overflow-x: auto; gap: 10px; margin-left: 0; padding: 1px 0 5px; scrollbar-width: none; }
-  .publishedToolbar::-webkit-scrollbar { display: none; }
-  .publishedReady { min-width: 175px; padding-right: 10px; }
-  .publishedReady small { max-width: 155px; }
-  .publishedToolbar :global(section[aria-label="Taklifnoma havolasi"]) { flex: 0 0 265px; }
-  .publishedStatus { padding-inline: 10px; }
+  .topbar:has(.publishedToolbar) {
+    display: grid;
+    grid-template-columns: 24px minmax(0, 1fr) auto;
+    grid-template-areas:
+      "back ready save"
+      "link link link"
+      "status status request";
+    align-items: center;
+    column-gap: 10px;
+    row-gap: 9px;
+    height: auto;
+    min-height: 0;
+    padding: 10px 14px;
+  }
+  .topbar:has(.publishedToolbar) > .back { grid-area: back; }
+  .topbar:has(.publishedToolbar) > .toolbarSave { grid-area: save; }
+  .publishedToolbar { display: contents; }
+  .publishedReady {
+    grid-area: ready;
+    min-width: 0;
+    gap: 8px;
+    padding: 0;
+    border: 0;
+  }
+  .readyIcon { width: 25px; height: 25px; flex-basis: 25px; }
+  .publishedReady strong { font-size: 11px; }
+  .publishedReady small { max-width: none; margin-top: 2px; font-size: 9px; }
+  .publishedToolbar :global(section[aria-label="Taklifnoma havolasi"]) {
+    grid-area: link;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    width: 100%;
+    max-width: none;
+    gap: 6px;
+  }
+  .publishedToolbar :global(section[aria-label="Taklifnoma havolasi"] input) {
+    width: 100%;
+    min-width: 0;
+    height: 36px;
+    font-size: 11px;
+  }
+  .publishedToolbar :global(section[aria-label="Taklifnoma havolasi"] > div) { gap: 4px; }
+  .publishedToolbar :global(section[aria-label="Taklifnoma havolasi"] > div button),
+  .publishedToolbar :global(section[aria-label="Taklifnoma havolasi"] > div a) {
+    min-height: 36px;
+    padding: 7px 8px;
+    font-size: 10px;
+  }
+  .publishedStatus { grid-area: status; gap: 3px; padding: 0; border: 0; }
+  .publishedStatus > span { font-size: 10px; }
+  .publishedStatus small { max-width: 100%; white-space: normal; font-size: 9px; line-height: 1.35; }
+  .publishedToolbar :global(section[aria-label="Tuzatish so‘rovlari"]) {
+    grid-area: request;
+    justify-self: end;
+  }
+  .publishedToolbar :global(section[aria-label="Tuzatish so‘rovlari"] button) { min-height: 36px; }
+  .publishedToolbar :global(section[aria-label="Tuzatish so‘rovlari"] > span[aria-label]) { display: none; }
+  .topbar:has(.publishedToolbar) .toolbarSave { align-items: flex-end; }
   .mobileTabs,
   .mobileStepMenu {
     flex-shrink: 0;
