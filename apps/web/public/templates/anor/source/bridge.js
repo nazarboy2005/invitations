@@ -398,11 +398,7 @@
       }));
       const form = rsvp;
       const submit = $(`[data-rsvp-submit]`, rsvp);
-      if (config.preview) {
-        form.addEventListener("submit", (event) => event.preventDefault());
-        if (submit) submit.disabled = true;
-        rsvp.querySelectorAll("input,button[data-rsvp-choice],button[data-party-step]").forEach((control) => { control.disabled = true; });
-      } else form.addEventListener("submit", async (event) => {
+      form.addEventListener("submit", async (event) => {
         event.preventDefault();
         if (!selectedStatus || !nameInput?.value.trim()) { showToast(localized[config.locale].error); return; }
         if (submit) submit.disabled = true;
@@ -414,6 +410,7 @@
           });
           const summary = $(`[data-rsvp-summary]`, rsvp);
           if (summary) summary.textContent = selectedStatus === "yes" ? localized[config.locale].coming(partySize) : selectedStatus === "no" ? localized[config.locale].decline : localized[config.locale].maybe;
+          if (config.preview && nameInput) nameInput.value = "";
           $(`[data-rsvp-form]`, rsvp).hidden = true;
           $(`[data-rsvp-done]`, rsvp).hidden = false;
           app.emit("rsvp", { status: selectedStatus, partySize, response: answer });
@@ -433,11 +430,7 @@
       if (config.guestName && nameInput) nameInput.value = config.guestName;
       const feedback = $(`[data-wishes-feedback]`, wishForm);
       const submit = wishForm.querySelector('[type="submit"]');
-      if (config.preview) {
-        if (feedback) feedback.textContent = localized[config.locale].preview;
-        if (submit) submit.disabled = true;
-        wishForm.querySelectorAll("input,textarea").forEach((control) => { control.disabled = true; });
-      } else wishForm.addEventListener("submit", async (event) => {
+      wishForm.addEventListener("submit", async (event) => {
         event.preventDefault();
         const form = new FormData(wishForm);
         if (submit) submit.disabled = true;

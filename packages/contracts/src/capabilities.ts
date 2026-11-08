@@ -38,6 +38,8 @@ export type TemplateCapabilities = {
   phone: boolean;
   telegram: boolean;
   rsvp: "none" | "deadline" | "phone" | "form";
+  /** The RSVP adapter saves an additional note or source-supported contact detail. */
+  rsvpNotes: boolean;
   rsvpDeadline: boolean;
   age: boolean;
   people: number;
@@ -74,6 +76,7 @@ const unsupported: TemplateCapabilities = {
   phone: false,
   telegram: false,
   rsvp: "none",
+  rsvpNotes: false,
   rsvpDeadline: false,
   age: false,
   people: 2,

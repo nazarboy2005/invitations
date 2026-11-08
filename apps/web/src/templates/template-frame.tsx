@@ -39,6 +39,63 @@ export const TemplateFrame = forwardRef<HTMLIFrameElement, Props>(function Templ
       if (!/^\/i\/[^/]+\/?$/.test(window.location.pathname)) {
         const frameWindow = doc.defaultView;
         if (frameWindow) {
+          const previewPayloads: Array<Record<string, unknown>> = [];
+          const findPreviewPayloads = (value: unknown, depth = 0) => {
+            if (depth > 5 || value == null) return;
+            if (typeof value === "string") {
+              try { findPreviewPayloads(JSON.parse(value), depth + 1); } catch { /* Ignore non-JSON message strings. */ }
+              return;
+            }
+            if (typeof value !== "object") return;
+            if (Array.isArray(value)) {
+              value.forEach((entry) => findPreviewPayloads(entry, depth + 1));
+              return;
+            }
+            const record = value as Record<string, unknown>;
+            if (record.preview === true) previewPayloads.push(record);
+            for (const key of ["payload", "data", "invitation", "message", "options", "config"]) {
+              findPreviewPayloads(record[key], depth + 1);
+            }
+          };
+          const rememberPreviewPayload = (event: MessageEvent) => findPreviewPayloads(event.data);
+          frameWindow.addEventListener("message", rememberPreviewPayload, true);
+          cleanups.push(() => frameWindow.removeEventListener("message", rememberPreviewPayload, true));
+
+          let previewRestoreTimer = 0;
+          const allowLocalPreviewSubmission = () => {
+            if (!previewPayloads.length) return;
+            previewPayloads.forEach((payload) => {
+              try { payload.preview = false; } catch { /* Some integrations may freeze their message payload. */ }
+            });
+            frameWindow.clearTimeout(previewRestoreTimer);
+            // Preview handlers commonly await the mocked request before showing
+            // their normal success state. Restore preview-only rendering after
+            // that local success flow has completed.
+            previewRestoreTimer = frameWindow.setTimeout(() => {
+              previewPayloads.forEach((payload) => {
+                try { payload.preview = true; } catch { /* Keep preview sandboxing best-effort per payload. */ }
+              });
+            }, 2000);
+          };
+          const previewSubmit = (event: Event) => {
+            const target = event.target;
+            if (target instanceof frameWindow.HTMLFormElement) allowLocalPreviewSubmission();
+          };
+          const previewSubmitClick = (event: MouseEvent) => {
+            const target = event.target;
+            if (!(target instanceof frameWindow.Element)) return;
+            if (target.closest("button[type='submit'],input[type='submit'],[data-rsvp-submit],[data-wish-submit],[data-wishes-submit]")) {
+              allowLocalPreviewSubmission();
+            }
+          };
+          doc.addEventListener("submit", previewSubmit, true);
+          doc.addEventListener("click", previewSubmitClick, true);
+          cleanups.push(() => {
+            doc.removeEventListener("submit", previewSubmit, true);
+            doc.removeEventListener("click", previewSubmitClick, true);
+            frameWindow.clearTimeout(previewRestoreTimer);
+          });
+
           const nativeFetch = frameWindow.fetch.bind(frameWindow);
           frameWindow.fetch = (input, init) => {
             const requestUrl = input instanceof frameWindow.Request ? input.url : String(input);
@@ -48,9 +105,15 @@ export const TemplateFrame = forwardRef<HTMLIFrameElement, Props>(function Templ
             const visitorSubmission = /\/api\/(?:public\/invitations\/[^/]+|i\/[^/]+)\/(?:rsvp|wishes)(?:\/|$)/i.test(path)
               || /\/api\/(?:rsvp|wishes)$/i.test(path);
             if (method === "POST" && visitorSubmission) {
+              const kind = /\/wishes(?:\/|$)/i.test(path) ? "wish" : "rsvp";
               return Promise.resolve(new frameWindow.Response(
-                JSON.stringify({ ok: false, code: "PREVIEW_ONLY", message: "Bu namuna. Ma’lumot yuborilmadi." }),
-                { status: 403, headers: { "Content-Type": "application/json" } },
+                JSON.stringify({
+                  ok: true,
+                  preview: true,
+                  message: kind === "wish" ? "Tilagingiz yuborildi." : "Javobingiz saqlandi. Rahmat!",
+                  ...(kind === "wish" ? { wishCount: 1 } : {}),
+                }),
+                { status: 201, headers: { "Content-Type": "application/json", "Cache-Control": "no-store" } },
               ));
             }
             return nativeFetch(input, init);

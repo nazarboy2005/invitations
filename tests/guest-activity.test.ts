@@ -11,6 +11,7 @@ import { TEMPLATE_CAPABILITIES } from "../packages/contracts/src/template-capabi
 import {
   invitationActivityFeatures,
   normalizeInvitation,
+  templateCapabilities,
   templateVisitorFeatures,
 } from "../packages/contracts/src/capabilities";
 import {
@@ -73,6 +74,34 @@ test("every template has explicit visitor metadata; migration persists the same 
     );
   } finally {
     await db.close();
+  }
+});
+
+test("RSVP note support follows the template form independently of public wishes", () => {
+  for (const id of [
+    "anor",
+    "gulli-darvoza",
+    "ming-bir-kecha",
+    "safir",
+    "taklifla-uchrashuv",
+    "unregistered",
+  ]) {
+    assert.equal(templateCapabilities(id).rsvpNotes, false, id);
+  }
+  for (const id of [
+    "wedivo-pulau-sehati",
+    "velora",
+    "velvet",
+    "andalus-darvozasi",
+    "taklifla-yubiley-sahifasi",
+    "olive-manor-edition",
+  ]) {
+    assert.equal(templateCapabilities(id).rsvpNotes, true, id);
+  }
+  for (const template of TEMPLATES) {
+    const c = templateCapabilities(template.id);
+    assert.equal(typeof c.rsvpNotes, "boolean", template.id);
+    if (c.rsvp !== "form") assert.equal(c.rsvpNotes, false, template.id);
   }
 });
 

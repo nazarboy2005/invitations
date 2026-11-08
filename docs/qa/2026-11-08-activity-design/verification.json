@@ -1,0 +1,38 @@
+{
+  "checks": [
+    "1440px: layout, all tabs, search focus, attendance filters, clipboard, keyboard navigation",
+    "1024px: layout, all tabs, search focus, attendance filters, clipboard, keyboard navigation",
+    "768px: layout, all tabs, search focus, attendance filters, clipboard, keyboard navigation",
+    "390px: layout, all tabs, search focus, attendance filters, clipboard, keyboard navigation",
+    "320px: layout, all tabs, search focus, attendance filters, clipboard, keyboard navigation",
+    "Wish approval, delete confirmation and receipt review send the correct mocked PATCH payloads",
+    "Pagination is shown only when needed and resets on tab change",
+    "Empty, unsupported-section, no-interaction and recoverable-error states",
+    "Reduced motion disables loading animation",
+    "Administrator controls and moderation context remain functional"
+  ],
+  "browserErrors": [],
+  "mutations": [
+    {
+      "wishId": "wish-1",
+      "status": "approved"
+    },
+    {
+      "wishId": "wish-1",
+      "status": "deleted"
+    },
+    {
+      "receiptId": "receipt-1",
+      "status": "received"
+    },
+    {
+      "receiptId": "receipt-1",
+      "status": "issue"
+    },
+    {
+      "wishId": "wish-1",
+      "status": "approved"
+    }
+  ],
+  "transport": "Synthetic browser-intercepted data only; no database writes or real guest actions"
+}

@@ -62,6 +62,7 @@ This file records durable, user-approved product requirements and a small number
 ## RSVP, guest wishes, and to'yona
 
 - User requirement: save source-supported visitor features on every template, including unpublished templates. Activity shows only supported, enabled submission sections; retain access to existing submissions when an owner disables an optional form. Phone/deadline RSVP information is not an online attendance response form.
+- User requirement: show the Activity RSVP notes column only for templates whose RSVP form saves additional notes or details.
 - User requirement: notify the owner through Telegram when visitor submissions are saved, using short, clean messages. Keep website activity as the durable record and keep receipt files private; bot messages link to activity.
 - RSVP attendance is one person per response; do not add a guest-count field unless the user approves a contract change.
 - User requirement: each visitor may keep one RSVP per invitation and submit at most two wishes. Editing an RSVP updates that same response; enforce both limits on the server, restore the saved RSVP after refresh, and hide the wish input after the second submission. Use the server-issued visitor cookie for anonymous visitors and the invitation guest identity when present. A shared anonymous link cannot guarantee one identity per human after cookies are cleared.
