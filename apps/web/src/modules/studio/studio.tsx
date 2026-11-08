@@ -1339,14 +1339,10 @@ export function Studio({
         setAuth(result);
         setAuthIdentity(null);
         setAuthStatus(
-          "Telegram botida o‘z telefon raqamingizni ulashing. Keyin saytga qayting.",
+          "Telegram botida kirishni tasdiqlang. Keyin saytga qayting.",
         );
         return;
       }
-      if (!session.user.phoneShared)
-        throw new Error(
-          "Saqlash uchun Telegram botimizda o‘z telefon raqamingizni ulashing.",
-        );
       if (
         ownerId.current &&
         ownerId.current !== "unavailable-private-owner" &&
@@ -1565,7 +1561,7 @@ export function Studio({
       });
       if (!response.ok)
         throw new Error(
-          "Kirish yakunlanmadi. Botdagi tasdiqlash va telefon ulashishni tekshiring.",
+          "Kirish yakunlanmadi. Telegram botidagi tasdiqlashni tekshiring.",
         );
       void refreshFavorites();
       setAuth(null);

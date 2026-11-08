@@ -74,7 +74,7 @@ async function campaign(
 before(async () => {
   assert.ok(["127.0.0.1", "localhost"].includes(new URL(origin).hostname));
   for (const [role, id] of Object.entries(ids)) {
-    await db`INSERT INTO users(id,telegram_user_id,display_name,phone_shared_at,is_admin) VALUES(${id},${Math.floor(Math.random() * 1e12) + 1},${"Management QA " + role},now(),${role === "admin"})`;
+    await db`INSERT INTO users(id,telegram_user_id,display_name,is_admin) VALUES(${id},${Math.floor(Math.random() * 1e12) + 1},${"Management QA " + role},${role === "admin"})`;
     tokens[role] = randomToken();
     await db`INSERT INTO sessions(user_id,token_hash,expires_at,absolute_expires_at) VALUES(${id},${digest(tokens[role])},now()+interval '1 hour',now()+interval '1 hour')`;
     if (role !== "admin")

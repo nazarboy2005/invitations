@@ -37,7 +37,7 @@ const image = () => `/api/invitations/${invitation.id}/image`;
 before(async () => {
   assert.ok(["127.0.0.1", "localhost"].includes(new URL(origin).hostname));
   for (const [i, id] of accounts.entries()) {
-    await sql`INSERT INTO users(id,telegram_user_id,display_name,phone_number,phone_source,phone_shared_at) VALUES(${id},${-Math.floor(Math.random() * 1e12) - 1},'Disposable image test','+000000000','telegram_contact',now())`;
+    await sql`INSERT INTO users(id,telegram_user_id,display_name) VALUES(${id},${-Math.floor(Math.random() * 1e12) - 1},'Disposable image test')`;
     await sql`INSERT INTO sessions(user_id,token_hash,user_agent,expires_at,absolute_expires_at) VALUES(${id},${digest(tokens[i])},'Image integration',now()+interval '1 hour',now()+interval '1 hour')`;
   }
   await sql`INSERT INTO invitations(id,owner_id,template_id,status,data) VALUES(${invitation.id},${accounts[0]},'ivory-rose-card','draft',${sql.json(invitation)})`;

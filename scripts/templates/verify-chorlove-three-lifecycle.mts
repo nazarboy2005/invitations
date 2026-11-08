@@ -78,7 +78,7 @@ async function upload(
   return (await json(await request(prepared.upload.completeUrl, {}))).asset;
 }
 try {
-  await sql`INSERT INTO users(id,telegram_user_id,display_name,phone_number,phone_source,phone_shared_at) VALUES(${owner},${-Math.floor(Math.random() * 1e12) - 1},'Disposable three-template QA','+000000000','telegram_contact',now())`;
+  await sql`INSERT INTO users(id,telegram_user_id,display_name) VALUES(${owner},${-Math.floor(Math.random() * 1e12) - 1},'Disposable three-template QA')`;
   await sql`INSERT INTO sessions(user_id,token_hash,user_agent,expires_at,absolute_expires_at) VALUES(${owner},${digest(token)},'Chorlove three QA',now()+interval '2 hours',now()+interval '2 hours')`;
   assert.equal((await json(await request("/api/auth/session"))).user.id, owner);
   browser = await chromium.launch({ headless: true });
@@ -292,7 +292,6 @@ try {
             id: owner,
             telegramUserId: "",
             displayName: "Disposable QA",
-            phoneShared: true,
             isAdmin: false,
           });
         } finally {

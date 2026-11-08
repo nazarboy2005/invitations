@@ -19,8 +19,9 @@ This file records durable, user-approved product requirements and a small number
 
 ## Creator identity and access
 
-- Telegram user ID is the creator account identity. Complete the approved Telegram identity and phone-sharing onboarding before granting creator access; phone numbers are private account data and are not automatically invitation contacts.
-- Authenticate and authorize protected actions on the server. Do not trust client-supplied user IDs, public invitation links, Telegram usernames, or callback data as proof of ownership. Do not merge or transfer accounts based on matching phone numbers.
+- Telegram user ID is the account identity for creators and administrators. Authenticate with verified Telegram identity; do not request, integrate, or store account phone numbers for sign-in, invitation creation, purchases, or administrative access. Optional creator-authored invitation contacts and guest RSVP fields remain separate from account identity.
+- Ordinary bot `/start` sends one complete personalized welcome with an inline Mini App button and never asks for a phone number.
+- Authenticate and authorize protected actions on the server. Do not trust client-supplied user IDs, public invitation links, Telegram usernames, or callback data as proof of ownership.
 - Keep creator sessions persistent across ordinary browser restarts while valid, server-managed, revocable, and separate per browser/device. Preserve recoverable drafts through login recovery. Exact session lifetime and sensitive-action reauthentication rules remain implementation choices.
 
 ## Editing and publication

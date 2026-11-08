@@ -49,7 +49,7 @@ const linkedPlace = {
 };
 let browser;
 try {
-  await sql`INSERT INTO users(id,telegram_user_id,display_name,phone_number,phone_source,phone_shared_at) VALUES(${userId},${-Math.floor(Math.random() * 1e12) - 1},'Disposable refinement test','+000000000','telegram_contact',now())`;
+  await sql`INSERT INTO users(id,telegram_user_id,display_name) VALUES(${userId},${-Math.floor(Math.random() * 1e12) - 1},'Disposable refinement test')`;
   await sql`INSERT INTO sessions(user_id,token_hash,user_agent,expires_at,absolute_expires_at) VALUES(${userId},${digest(token)},'Studio refinement verification',now()+interval '1 hour',now()+interval '1 hour')`;
   for (const invitation of [image, web])
     await sql`INSERT INTO invitations(id,owner_id,template_id,status,data) VALUES(${invitation.id},${userId},${invitation.templateId},'draft',${sql.json(invitation)})`;

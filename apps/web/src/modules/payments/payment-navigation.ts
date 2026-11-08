@@ -37,7 +37,7 @@ export function miniAppPaymentDestination(
   initData: string,
   user: SessionUser | null,
 ): string | null {
-  if (!user?.phoneShared || !initData) return null;
+  if (!user || !initData) return null;
   return paymentReturnPath(new URLSearchParams(initData).get("start_param"));
 }
 

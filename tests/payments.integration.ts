@@ -28,7 +28,6 @@ const owner: SessionUser = {
   id: randomUUID(),
   telegramUserId: "",
   displayName: "Payment test",
-  phoneShared: true,
   isAdmin: false,
 };
 const stranger = { ...owner, id: randomUUID() };
@@ -91,7 +90,7 @@ before(async () => {
     });
   };
   for (const user of [owner, stranger]) {
-    await sql`INSERT INTO users(id,telegram_user_id,display_name,phone_shared_at) VALUES(${user.id},${-Math.floor(Math.random() * 1e13) - 1},'Disposable payment test',now())`;
+    await sql`INSERT INTO users(id,telegram_user_id,display_name) VALUES(${user.id},${-Math.floor(Math.random() * 1e13) - 1},'Disposable payment test')`;
   }
 });
 after(async () => {

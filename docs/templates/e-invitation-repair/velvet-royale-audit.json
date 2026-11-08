@@ -1,0 +1,26 @@
+[
+  {
+    "width": 390,
+    "video": {
+      "time": 6.041667,
+      "duration": 6.041667,
+      "frames": 145
+    },
+    "calendar": true,
+    "sections": true,
+    "errors": [],
+    "missing": []
+  },
+  {
+    "width": 1280,
+    "video": {
+      "time": 6.041667,
+      "duration": 6.041667,
+      "frames": 145
+    },
+    "calendar": true,
+    "sections": true,
+    "errors": [],
+    "missing": []
+  }
+]

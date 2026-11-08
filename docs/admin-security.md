@@ -25,8 +25,9 @@ or expose it through client configuration.
 
 Restart/redeploy **every web, Telegram and broadcast worker process** after an
 environment change. Existing signed-in accounts are checked on subsequent
-requests, so an existing account does not need to be recreated. The usual phone
-verification, suspension and 12-hour admin reconfirmation rules still apply.
+requests, so an existing account does not need to be recreated. Suspension and
+12-hour admin reconfirmation rules still apply. Account phone numbers are not
+collected or required.
 
 Environment grants are not copied into `users.is_admin`. Removing an ID removes
 that source of access when every process has reloaded configuration. A separate
@@ -64,8 +65,8 @@ using a full document navigation, so the privileged page loads its own CSP and
 excludes the remote SDK. Existing sessions are not silently renewed: an admin
 session older than 12 hours still goes to `/admin/verify`. Login exchanges share
 in-flight work to avoid consuming the same launch twice when the SDK and account
-page initialize together. Phone verification and server role checks remain
-required; unsigned Mini App identity fields never grant access. Older signed
+page initialize together. Server role checks remain required; unsigned Mini App
+identity fields never grant access. Older signed
 launch data is accepted only to identify its matching already-authenticated
 session; it cannot create a new login, switch identity or renew admin access.
 Fresh launch fingerprints remain single-use for creating a session in a new
@@ -73,7 +74,7 @@ browser, while repeated requests from the matching authenticated browser retain
 the original session and authentication time.
 
 In the bot, `/admin` replies privately with **Boshqaruvga kirish** for an active,
-phone-verified administrator. Recognized admins also see that button after
+administrator. Recognized admins also receive the Mini App button after
 `/start`. These buttons open `/dashboard`, where authentication precedes the
 admin redirect. Ordinary accounts receive a permission denial with only their
 own Telegram ID. The command grants no roles and sends nothing until a user

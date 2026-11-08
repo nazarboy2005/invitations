@@ -158,7 +158,6 @@ test(
             id: "fixture-creator",
             telegramUserId: "123",
             displayName: "Creator",
-            phoneShared: true,
             isAdmin: false,
           };
           if (url.pathname === "/api/auth/telegram/mini-app") {
@@ -311,7 +310,6 @@ test(
         id: "ux-owner",
         displayName: "Nodir",
         telegramUserId: "123",
-        phoneShared: true,
         isAdmin: false,
       };
       const paidDraft = {
@@ -679,7 +677,6 @@ test(
         id: "returning-owner",
         telegramUserId: "456",
         displayName: "Returning owner",
-        phoneShared: true,
         isAdmin: true,
       };
       await context.route("**/*", async (route) => {

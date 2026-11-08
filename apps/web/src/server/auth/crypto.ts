@@ -90,22 +90,3 @@ export function verifyMiniAppLaunch(
   );
   return { user, replayKey };
 }
-export function isOwnContact(
-  senderId: number,
-  contact: { user_id?: number; phone_number?: string },
-  forwarded = false,
-) {
-  if (
-    forwarded ||
-    !Number.isSafeInteger(senderId) ||
-    senderId <= 0 ||
-    contact.user_id !== senderId ||
-    typeof contact.phone_number !== "string"
-  )
-    return false;
-  const digits = contact.phone_number.replace(/\D/g, "");
-  return (
-    /^\+?\d[\d\s()-]*$/.test(contact.phone_number) &&
-    /^[1-9]\d{6,14}$/.test(digits)
-  );
-}

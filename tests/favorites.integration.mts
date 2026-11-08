@@ -40,7 +40,7 @@ async function expectStatus(response: Response, status: number) {
 }
 try {
   for (let index = 0; index < users.length; index++) {
-    await db`INSERT INTO users(id,telegram_user_id,display_name,phone_shared_at) VALUES(${users[index]},${String(Date.now()) + index},'Favorites disposable QA',now())`;
+    await db`INSERT INTO users(id,telegram_user_id,display_name) VALUES(${users[index]},${String(Date.now()) + index},'Favorites disposable QA')`;
     await db`INSERT INTO sessions(user_id,token_hash,expires_at,absolute_expires_at) VALUES(${users[index]},${digest(tokens[index])},now()+interval '1 hour',now()+interval '1 hour')`;
   }
   const catalog = await (await fetch(origin + "/api/catalog")).json();

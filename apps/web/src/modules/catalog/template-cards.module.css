@@ -24,6 +24,7 @@
 }
 .art[data-format="image"]{aspect-ratio:5/7}
 .art[data-format="image"] .poster{object-fit:contain}
+.card:is([data-template-id="olive-manor-edition"],[data-template-id="islamic-edition"],[data-template-id="monochrome-editorial-edition"],[data-template-id="xatna-edition"]) .art{aspect-ratio:390/844}
 .poster {
   position: absolute;
   inset: 0;

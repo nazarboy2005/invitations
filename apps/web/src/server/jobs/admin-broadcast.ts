@@ -94,7 +94,7 @@ export async function processAdminBroadcasts(
           return { skip: true as const };
         }
         const [target] =
-          await tx`SELECT tc.telegram_chat_id FROM users u JOIN telegram_connections tc ON tc.user_id=u.id WHERE u.id=${row.user_id} AND u.disabled_at IS NULL AND u.phone_shared_at IS NOT NULL AND tc.status='active' AND tc.broadcast_opt_out_at IS NULL AND tc.telegram_chat_id=u.telegram_user_id`;
+          await tx`SELECT tc.telegram_chat_id FROM users u JOIN telegram_connections tc ON tc.user_id=u.id WHERE u.id=${row.user_id} AND u.disabled_at IS NULL AND tc.status='active' AND tc.broadcast_opt_out_at IS NULL AND tc.telegram_chat_id=u.telegram_user_id`;
         if (!target) {
           await tx`UPDATE admin_broadcast_recipients SET status='skipped',last_error='Recipient unavailable or unsubscribed' WHERE broadcast_id=${row.broadcast_id} AND user_id=${row.user_id}`;
           return { skip: true as const };

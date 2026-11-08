@@ -146,7 +146,7 @@ export async function captureCover(invitation: Invitation, cookie = "") {
   });
   const context = await browser.newContext({
     viewport: recipe.viewport,
-    ...(["stained-glass", "sunset", "swan-garden"].includes(invitation.templateId)
+    ...(["stained-glass", "sunset", "swan-garden", "olive-manor-edition", "islamic-edition", "monochrome-editorial-edition", "xatna-edition"].includes(invitation.templateId)
       ? { reducedMotion: "reduce" as const }
       : {}),
     deviceScaleFactor: 1,
@@ -225,7 +225,7 @@ export async function captureCover(invitation: Invitation, cookie = "") {
           "html.rx-on #intro .intro__fallback-scene{display:block!important;opacity:1!important}.rx--intro,#intro .scene-canvas,.mh-lang{display:none!important}",
       });
     }
-    if (recipe.scene !== "opening") {
+    if (recipe.scene !== "opening" && !(await frame.locator('[data-e-template][data-opened="true"]').count())) {
       const selector =
         recipe.scene === "lid"
           ? "#lid"

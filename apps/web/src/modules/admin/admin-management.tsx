@@ -277,7 +277,6 @@ export function AdminUsers({
                     </Link>
                     <small>
                       {user.username ? "@" + user.username : user.telegramId}
-                      {user.phoneLast4 ? ` · •••• ${user.phoneLast4}` : ""}
                     </small>
                   </td>
                   <td>
@@ -389,10 +388,6 @@ export function AdminUserDetails({
               {user.username ? "@" + user.username : "—"}{" "}
               <small>{user.telegramId}</small>
             </dd>
-          </div>
-          <div>
-            <dt>Telefon</dt>
-            <dd>{user.phone ?? "Ulashilmagan"}</dd>
           </div>
           <div>
             <dt>Ro‘yxatdan o‘tgan</dt>

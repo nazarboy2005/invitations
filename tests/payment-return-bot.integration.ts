@@ -35,7 +35,7 @@ test("payment return bot entry opens the local Mini App without login confirmati
     });
   }
   try {
-    await db`INSERT INTO users(id,telegram_user_id,display_name,phone_shared_at) VALUES(${userId},${telegramId},'Payment return QA',now())`;
+    await db`INSERT INTO users(id,telegram_user_id,display_name) VALUES(${userId},${telegramId},'Payment return QA')`;
     await command("payment_return");
     let button = bodies.at(-1).reply_markup.inline_keyboard[0][0];
     assert.equal(button.text, "📱 Buyurtmani ko‘rish");

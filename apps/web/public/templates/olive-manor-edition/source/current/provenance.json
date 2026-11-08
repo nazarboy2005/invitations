@@ -1,0 +1,302 @@
+{
+  "captured": "2026-11-08T06:00:28.115Z",
+  "reference": "https://e-invitation.uz/demo/olive-manor-edition/",
+  "files": [
+    {
+      "url": "https://e-invitation.uz/_nuxt/InvitationEdition.BccB26fE.css",
+      "file": "invitation.css",
+      "sha256": "4c36d2a04557ae566852c9e0780d770427d3073475937c82418a13568b49864d"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2",
+      "file": "fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2",
+      "sha256": "3100e775e8616cd2611beecfa23a4263d7037586789b43f035236a2e6fbd4c62"
+    },
+    {
+      "url": "https://e-invitation.uz/_nuxt/OliveManorEdition.Bvbi4H5Y.css",
+      "file": "template.css",
+      "sha256": "b4e8cd1fa4865f0e76aa3e5ce12791f9ca6c0e39e547a40e0a4f8fd15c69db01"
+    },
+    {
+      "url": "https://e-invitation.uz/_nuxt/CRjUFVHV.js",
+      "file": "template.module.js",
+      "sha256": "98a6c3dba61be90c020cba2622a04fbf2b63231097e202f2a780d4f80f3736f8"
+    },
+    {
+      "url": "https://assets.e-invitation.uz/olive-manor-edition/hero-bg.webp",
+      "file": "assets/hero-bg.webp",
+      "sha256": "1424a20a09584e4d430ad3f2fb55e705f067db1913f211b65279d24f90fb2d33"
+    },
+    {
+      "url": "https://assets.e-invitation.uz/olive-manor-edition/envelope.webp",
+      "file": "assets/envelope.webp",
+      "sha256": "c62b0cbc9314707e50af0a116b4c0f782b565d8a096adcdbfb53782437bb8e59"
+    },
+    {
+      "url": "https://assets.e-invitation.uz/olive-manor-edition/wax.webp",
+      "file": "assets/wax.webp",
+      "sha256": "e1a732e6603f63179479534322e79119ed7772293a83d9cd78627672e9bfd9ca"
+    },
+    {
+      "url": "https://assets.e-invitation.uz/olive-manor-edition/intro-start-v2.jpg",
+      "file": "assets/intro-start-v2.jpg",
+      "sha256": "d990311bea7b4741717256c0a0b01b1eed16fe73f1b315c1f9aad909ff886f5d"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjYqXtK.woff2",
+      "file": "fonts/co3bmX5slCNuHLi8bLeY9MK7whWMhyjYqXtK.woff2",
+      "sha256": "d80df8ff5aecd299a61549f9e29ab1ed0b9b05f4ea71d50fe978e07d5240b235"
+    },
+    {
+      "url": "https://assets.e-invitation.uz/olive-manor-edition/calendar-flowers.webp",
+      "file": "assets/calendar-flowers.webp",
+      "sha256": "4d7c8506dbec4dfc24289a6dc5175bbae86534e5c3ba2f9f2a47930f674bc2d2"
+    },
+    {
+      "url": "https://assets.e-invitation.uz/olive-manor-edition/contact-bg.webp",
+      "file": "assets/contact-bg.webp",
+      "sha256": "1ce7629ea2e496e9f66f7b28223438d3f8a26cdf5eb588c0ac154ca51dd559d2"
+    },
+    {
+      "url": "https://assets.e-invitation.uz/olive-manor-edition/holding-hands-watercolor-v20260920.webp",
+      "file": "assets/holding-hands-watercolor-v20260920.webp",
+      "sha256": "a8f70b295cf9a86dd2120c4f5b1bd363c388b30251f15243adbbfdbd98a58a38"
+    },
+    {
+      "url": "https://assets.e-invitation.uz/olive-manor-edition/couple-gallery-v20261007-01.webp",
+      "file": "assets/couple-gallery-v20261007-01.webp",
+      "sha256": "674cccddea949914893a8c5fa765b32529adf85c379f37375cacc4394b37e80d"
+    },
+    {
+      "url": "https://assets.e-invitation.uz/olive-manor-edition/couple-gallery-v20261007-03.webp",
+      "file": "assets/couple-gallery-v20261007-03.webp",
+      "sha256": "5f0e7ebff32a7637bf8d8f163ec0f4a9e3f21046bba583015bb3494e79c889fb"
+    },
+    {
+      "url": "https://assets.e-invitation.uz/olive-manor-edition/couple-gallery-v20261007-02.webp",
+      "file": "assets/couple-gallery-v20261007-02.webp",
+      "sha256": "c8e012bb4bdb567d0f70b5ef1361d3d84e309505352c29022c49a32d212db7d6"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/marckscript/v22/nwpTtK2oNgBA3Or78gapdwuyyCg_.woff2",
+      "file": "fonts/nwpTtK2oNgBA3Or78gapdwuyyCg_.woff2",
+      "sha256": "b32acf77642711e18c14d57aabeefa02ee25664a7f40929ee5f72396557b6e76"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/playfairdisplay/v40/nuFkD-vYSZviVYUb_rj3ij__anPXDTnogkk7.woff2",
+      "file": "fonts/nuFkD-vYSZviVYUb_rj3ij__anPXDTnogkk7.woff2",
+      "sha256": "54af24bd0f911f0fd7399d5445ea2023ff501d6a69f2d728f1213072f977ab14"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/playfairdisplay/v40/nuFiD-vYSZviVYUb_rj3ij__anPXDTjYgFE_.woff2",
+      "file": "fonts/nuFiD-vYSZviVYUb_rj3ij__anPXDTjYgFE_.woff2",
+      "sha256": "c108681cba6a9820bff52f4a1a4a1d9edf356b347bd79b7c61e916028e8a8b54"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/outfit/v15/QGYvz_MVcBeNP4NJtEtq.woff2",
+      "file": "fonts/QGYvz_MVcBeNP4NJtEtq.woff2",
+      "sha256": "6c18d579fd87c3776be068b762cbc83fde3acb543d49eabd3ade842eb987e887"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/playfairdisplay/v40/nuFiD-vYSZviVYUb_rj3ij__anPXDTzYgA.woff2",
+      "file": "fonts/nuFiD-vYSZviVYUb_rj3ij__anPXDTzYgA.woff2",
+      "sha256": "e0c764a8e9e1cce92163c55bac4b2ad6cd4cf8c696ce2289ab5c41565e65b7e2"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/italianno/v18/dg4n_p3sv6gCJkwzT6RXiJwo.woff2",
+      "file": "fonts/dg4n_p3sv6gCJkwzT6RXiJwo.woff2",
+      "sha256": "518325fe367d195cd5e8e120a219f5d83440eddd4c9b6be9321a8c44f7450a9b"
+    },
+    {
+      "url": "https://assets.e-invitation.uz/olive-manor-edition/couple-gallery-v20261007-04.webp",
+      "file": "assets/couple-gallery-v20261007-04.webp",
+      "sha256": "159bb7b7b98c5e9a0159f6b31089ddd4fedf1c66d3268d24e1cb3b1089cbf95c"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3ZmX5slCNuHLi8bLeY9MK7whWMhyjYrEtFmSq17w.woff2",
+      "file": "fonts/co3ZmX5slCNuHLi8bLeY9MK7whWMhyjYrEtFmSq17w.woff2",
+      "sha256": "ae25de0507a445fd9e953e90432ae75b1ee2eccb48370a6ced4934551eb56fc3"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3ZmX5slCNuHLi8bLeY9MK7whWMhyjYrEtMmSq17w.woff2",
+      "file": "fonts/co3ZmX5slCNuHLi8bLeY9MK7whWMhyjYrEtMmSq17w.woff2",
+      "sha256": "cb13c04533ee98c94e49a053b9f4d39bf616fd7ba6360d71aead92a78dc571f7"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3ZmX5slCNuHLi8bLeY9MK7whWMhyjYrEtHmSq17w.woff2",
+      "file": "fonts/co3ZmX5slCNuHLi8bLeY9MK7whWMhyjYrEtHmSq17w.woff2",
+      "sha256": "b8ecb4ae898cd9ccae2f2d18fd364f6593bb67776060f9b5d833cec65d34d112"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3ZmX5slCNuHLi8bLeY9MK7whWMhyjYrEtGmSq17w.woff2",
+      "file": "fonts/co3ZmX5slCNuHLi8bLeY9MK7whWMhyjYrEtGmSq17w.woff2",
+      "sha256": "cd5bf126b2c84ab41b254a6a9a1ffb5c326a0f9f82c22fb4704daa31c9aaa415"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3ZmX5slCNuHLi8bLeY9MK7whWMhyjYrEtImSo.woff2",
+      "file": "fonts/co3ZmX5slCNuHLi8bLeY9MK7whWMhyjYrEtImSo.woff2",
+      "sha256": "6f2f5c3b1abc3d0bb035a927f66a90ca873f94fc31c4966c8d024142c2036e55"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjYpHtKgS4.woff2",
+      "file": "fonts/co3bmX5slCNuHLi8bLeY9MK7whWMhyjYpHtKgS4.woff2",
+      "sha256": "a4d7cf345b8091e1d2c8c5c8fa3bd0f9bb9d00bc8988185471db398ddb5ae4c4"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjYrXtKgS4.woff2",
+      "file": "fonts/co3bmX5slCNuHLi8bLeY9MK7whWMhyjYrXtKgS4.woff2",
+      "sha256": "017fab69b4be8ffc08ca312823327989ade6dc3d948f0afa125e12ec2e5e7ca1"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjYpntKgS4.woff2",
+      "file": "fonts/co3bmX5slCNuHLi8bLeY9MK7whWMhyjYpntKgS4.woff2",
+      "sha256": "6252e819a7665ae512c2d046308a9016ada63c06d0d8f96984c4b29f6c9e1bd2"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjYp3tKgS4.woff2",
+      "file": "fonts/co3bmX5slCNuHLi8bLeY9MK7whWMhyjYp3tKgS4.woff2",
+      "sha256": "cfa9a397d86f66c5c51775a2500a712d5f632a04f0c5eca6930dfaf612d4566d"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/greatvibes/v21/RWmMoKWR9v4ksMfaWd_JN9XIiaQ6DQ.woff2",
+      "file": "fonts/RWmMoKWR9v4ksMfaWd_JN9XIiaQ6DQ.woff2",
+      "sha256": "6b071406bf0cb2c4a84a01ffbabe275032dca341733fe7f4ece8a1d4a615e44b"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/greatvibes/v21/RWmMoKWR9v4ksMfaWd_JN9XBiaQ6DQ.woff2",
+      "file": "fonts/RWmMoKWR9v4ksMfaWd_JN9XBiaQ6DQ.woff2",
+      "sha256": "80b935e653c6426a8780daca822409f546c8a9bc0ea41fd3c0f98dcf456463f5"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/greatvibes/v21/RWmMoKWR9v4ksMfaWd_JN9XJiaQ6DQ.woff2",
+      "file": "fonts/RWmMoKWR9v4ksMfaWd_JN9XJiaQ6DQ.woff2",
+      "sha256": "36cccce6b2eb27eba45a96660f52d4a1d4a0a30822150b9600eebd67be9462a8"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/greatvibes/v21/RWmMoKWR9v4ksMfaWd_JN9XKiaQ6DQ.woff2",
+      "file": "fonts/RWmMoKWR9v4ksMfaWd_JN9XKiaQ6DQ.woff2",
+      "sha256": "9b624180d019ee43faf972e083bf81dfafabf43234ac9e80ba2d93013f25a3d0"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/greatvibes/v21/RWmMoKWR9v4ksMfaWd_JN9XLiaQ6DQ.woff2",
+      "file": "fonts/RWmMoKWR9v4ksMfaWd_JN9XLiaQ6DQ.woff2",
+      "sha256": "b63469c752efac950ef0497a345e3823d70211b70f60d61887066a87bc3b62f3"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/greatvibes/v21/RWmMoKWR9v4ksMfaWd_JN9XFiaQ.woff2",
+      "file": "fonts/RWmMoKWR9v4ksMfaWd_JN9XFiaQ.woff2",
+      "sha256": "c59dc73d29daf142ef2431f455d21464172374aa750d793a79d608735db2d856"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa2JL7SUc.woff2",
+      "file": "fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa2JL7SUc.woff2",
+      "sha256": "ca157063339ac4ad418f214f3abfed119b0798ab4d377386ce5c9e5a7a435ebd"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa0ZL7SUc.woff2",
+      "file": "fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa0ZL7SUc.woff2",
+      "sha256": "71d5ee93cc1e9f1d520a3a8b66456de18c7879d8df09d57fcd2eaff75fef0075"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa2ZL7SUc.woff2",
+      "file": "fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa2ZL7SUc.woff2",
+      "sha256": "6e9e020a25f9b56d418f2c085b1d3c09725a4da23fe693a5b463064606732190"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1pL7SUc.woff2",
+      "file": "fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1pL7SUc.woff2",
+      "sha256": "1be3448e292fbf05ffe176fe1e43f135013d50b1e7d324ad1a558f623d3bb6f6"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa2pL7SUc.woff2",
+      "file": "fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa2pL7SUc.woff2",
+      "sha256": "5c66f9e07e90c6d4ac4922cc68d60de26c17b1858e677fb5e603fce3952b3ff2"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa25L7SUc.woff2",
+      "file": "fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa25L7SUc.woff2",
+      "sha256": "34b9c504cab7a73e37b746343a449132e56cf7b5481af2cb81dc74dcff25c956"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/italianno/v18/dg4n_p3sv6gCJkwzT6RXh5wocwM.woff2",
+      "file": "fonts/dg4n_p3sv6gCJkwzT6RXh5wocwM.woff2",
+      "sha256": "aa7e1c44428d7327ffe4cae593ffbe06a1ea7fc5aa07fed96eea80efd5ba2de1"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/italianno/v18/dg4n_p3sv6gCJkwzT6RXhpwocwM.woff2",
+      "file": "fonts/dg4n_p3sv6gCJkwzT6RXhpwocwM.woff2",
+      "sha256": "d04a57cca66ff5a51551d562c57fc2848e043788a8957a7ad82320e5d5af4c41"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/marckscript/v22/nwpTtK2oNgBA3Or78gapdwuyzCg_WMM.woff2",
+      "file": "fonts/nwpTtK2oNgBA3Or78gapdwuyzCg_WMM.woff2",
+      "sha256": "457f5ae9dd211fb276e605a4ce3ecb35cbe1aee8bb1a54698c81d7834873ed06"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/marckscript/v22/nwpTtK2oNgBA3Or78gapdwuyxig_WMM.woff2",
+      "file": "fonts/nwpTtK2oNgBA3Or78gapdwuyxig_WMM.woff2",
+      "sha256": "0b81e24db3e626c58446fc2ea58dbeaa5d4edb219856afe36ad902c95248d18d"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/outfit/v15/QGYvz_MVcBeNP4NJuktqQ4E.woff2",
+      "file": "fonts/QGYvz_MVcBeNP4NJuktqQ4E.woff2",
+      "sha256": "0f53d1c03b3918d744a843b5039001ee31695ca1e255e3914188df81beb461e9"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/playfairdisplay/v40/nuFkD-vYSZviVYUb_rj3ij__anPXDTnohkk72xU.woff2",
+      "file": "fonts/nuFkD-vYSZviVYUb_rj3ij__anPXDTnohkk72xU.woff2",
+      "sha256": "51b2dac698333379dc3a3486393fba787d17f1dcbcb50f46582ca759d53c25fc"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/playfairdisplay/v40/nuFkD-vYSZviVYUb_rj3ij__anPXDTnojUk72xU.woff2",
+      "file": "fonts/nuFkD-vYSZviVYUb_rj3ij__anPXDTnojUk72xU.woff2",
+      "sha256": "6b8bfd228577635a5f45bee13c8dd4a900eba6aeb36af1680838aea3cbd7e412"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/playfairdisplay/v40/nuFkD-vYSZviVYUb_rj3ij__anPXDTnojEk72xU.woff2",
+      "file": "fonts/nuFkD-vYSZviVYUb_rj3ij__anPXDTnojEk72xU.woff2",
+      "sha256": "b9dff4aec6d8ef27af595330c808c455fcc3ff46881642aa6028ed4e27a96f89"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/playfairdisplay/v40/nuFiD-vYSZviVYUb_rj3ij__anPXDTPYgFE_.woff2",
+      "file": "fonts/nuFiD-vYSZviVYUb_rj3ij__anPXDTPYgFE_.woff2",
+      "sha256": "ef6446229b59773e671021650ef3882cf35806dae723ce047de87c0a6633039a"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/playfairdisplay/v40/nuFiD-vYSZviVYUb_rj3ij__anPXDTLYgFE_.woff2",
+      "file": "fonts/nuFiD-vYSZviVYUb_rj3ij__anPXDTLYgFE_.woff2",
+      "sha256": "42898ad49a6b23f32b109243e1df596edf831015ed685f429e4dafbb181d599d"
+    },
+    {
+      "url": "https://assets.e-invitation.uz/olive-manor-edition/intro-v3.mp4",
+      "file": "assets/intro-v3.mp4",
+      "sha256": "284d648173e8bdc7fcab07aa4fe2bb21379cceda9cfdde41e006c59cf5d625a8"
+    },
+    {
+      "url": "https://assets.e-invitation.uz/olive-manor-edition/couple-gallery-v20261007-05.webp",
+      "file": "assets/couple-gallery-v20261007-05.webp",
+      "sha256": "5f6460ab14cb011e4b2f6e8b2a7287c6cc46e0dd526f5212cc60431bc851d0f6"
+    },
+    {
+      "url": "https://assets.e-invitation.uz/olive-manor-edition/table-watercolor-v20260906.webp",
+      "file": "assets/table-watercolor-v20260906.webp",
+      "sha256": "c04b0b28dabf7875dc1fba544a9bfd1505d4149526daf56b6e6a76deee7b894c"
+    },
+    {
+      "url": "https://assets.e-invitation.uz/olive-manor-edition/farewell-doves.webp",
+      "file": "assets/farewell-doves.webp",
+      "sha256": "3aa44c912eb404d84db9305768f5bd1ac1d00215429210968afd4f7c767c3148"
+    },
+    {
+      "url": "https://e-invitation.uz/demo/olive-manor-edition/",
+      "file": "inline.css",
+      "sha256": "ac91f2f95e07c8c3ecd5dc7f55d83f3a84ae221bf0f983de2d7474143c784f9d",
+      "note": "Template-scoped inline styles emitted by the original component"
+    },
+    {
+      "url": "https://e-invitation.uz/demo/olive-manor-edition/",
+      "file": "rendered-reference.html",
+      "sha256": "a4c18bb4b79c6607583e4b8133c37b55b8f835b094d5884b63677f7083b288a0"
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "checked": "2026-11-08T06:46:05.365Z",
+  "url": "https://fotiha.uz",
+  "templates": [
+    {
+      "id": "olive-manor-edition",
+      "status": 200,
+      "liveRendererMatchesLocal": false,
+      "liveUsesRepairedBridge": false,
+      "livePublished": false
+    },
+    {
+      "id": "islamic-edition",
+      "status": 200,
+      "liveRendererMatchesLocal": false,
+      "liveUsesRepairedBridge": false,
+      "livePublished": false
+    },
+    {
+      "id": "monochrome-editorial-edition",
+      "status": 200,
+      "liveRendererMatchesLocal": false,
+      "liveUsesRepairedBridge": false,
+      "livePublished": false
+    },
+    {
+      "id": "xatna-edition",
+      "status": 200,
+      "liveRendererMatchesLocal": false,
+      "liveUsesRepairedBridge": false,
+      "livePublished": false
+    }
+  ]
+}

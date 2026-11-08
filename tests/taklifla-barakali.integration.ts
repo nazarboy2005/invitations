@@ -37,7 +37,6 @@ test(
       id: randomUUID(),
       telegramUserId: "",
       displayName: "Disposable Barakali verification",
-      phoneShared: true,
       isAdmin: false,
     };
     let invitation = createInvitation("taklifla-barakali");
@@ -56,7 +55,7 @@ test(
       });
     try {
       const [user] =
-        await db`INSERT INTO users(id,telegram_user_id,display_name,phone_number,phone_source,phone_shared_at) VALUES(${owner.id},${-Math.floor(Math.random() * 1e12) - 1},${owner.displayName},'+000000000','telegram_contact',now()) RETURNING telegram_user_id`;
+        await db`INSERT INTO users(id,telegram_user_id,display_name) VALUES(${owner.id},${-Math.floor(Math.random() * 1e12) - 1},${owner.displayName}) RETURNING telegram_user_id`;
       owner.telegramUserId = String(user.telegram_user_id);
       await db`INSERT INTO sessions(user_id,token_hash,user_agent,expires_at,absolute_expires_at) VALUES(${owner.id},${digest(token)},'Disposable Barakali verification',now()+interval '1 hour',now()+interval '1 hour')`;
       await db`INSERT INTO invitations(id,owner_id,template_id,status,data) VALUES(${invitation.id},${owner.id},'taklifla-barakali','draft',${db.json(invitation)})`;

@@ -1,5 +1,12 @@
 # Invitation templates
 
+The four requested E-invitation designs—**Olive Manor**, **Islamic Edition**,
+**Monochrome Editorial** and **Xatna Edition**—now use the complete source DOM,
+original scoped CSS, local fonts/artwork and dedicated motion with a separate
+typed Fotiha adapter. The previous simplified renderers are replaced. Source
+adaptations, browser/lifecycle evidence and the scoped publication migration
+0224 are documented in `docs/templates/e-invitation-repair/README.md`.
+
 **Stained Glass**, **Sunset** and **Swan Garden** are complete, published Chorlove
 additions. Their exact source packages, original videos/artwork, local fonts,
 standalone motion and typed contract adapters are under `public/templates`.

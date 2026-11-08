@@ -21,7 +21,7 @@ const output = new URL("../.tmp/editing-qa/", import.meta.url);
 await mkdir(output, { recursive: true });
 try {
   for (const [index, id] of users.entries()) {
-    await db`INSERT INTO users(id,telegram_user_id,display_name,phone_shared_at,is_admin) VALUES(${id},${-Math.floor(Math.random() * 1e12) - 1},'Disposable editing UI QA',now(),${index === 1})`;
+    await db`INSERT INTO users(id,telegram_user_id,display_name,is_admin) VALUES(${id},${-Math.floor(Math.random() * 1e12) - 1},'Disposable editing UI QA',${index === 1})`;
     await db`INSERT INTO sessions(user_id,token_hash,expires_at,absolute_expires_at) VALUES(${id},${digest(tokens[index])},now()+interval '1 hour',now()+interval '1 hour')`;
   }
   await db`INSERT INTO invitations(id,owner_id,template_id,status,data,identity_locked_at,edit_deadline_at,approved_event_date) VALUES(${invitation.id},${users[0]},'ivory-rose-card','draft',${db.json(invitation)},now(),'2027-06-14T19:00:00Z','2027-06-14')`;

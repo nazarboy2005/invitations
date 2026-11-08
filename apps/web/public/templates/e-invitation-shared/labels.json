@@ -1,0 +1,1098 @@
+{
+  "uz": {
+    "ui": {
+      "greeting": "Assalomu alaykum!",
+      "dear": "Hurmatli",
+      "guestFallback": "Mehmonimiz",
+      "scrollDown": "Pastga tushiring",
+      "loading": "Kutib turing...",
+      "openInvitation": "Taklifnomani ochish",
+      "venueLabel": "Manzil",
+      "mapOpen": "Xaritada ochish",
+      "mapTitle": "To'yxona xaritasi",
+      "oshMapTitle": "Osh xaritasi",
+      "xatnaMapTitle": "Xatna marosimi xaritasi",
+      "qizbazmMapTitle": "Qizbazm xaritasi",
+      "closing": "Tashrifingizni kutib qolamiz!",
+      "contact": {
+        "label": "Ma'lumot uchun",
+        "phone": "Telefon"
+      },
+      "gift": {
+        "title": "To'yona",
+        "desc": "Qalban to'yona atamoqchi bo'lsangiz, quyidagi karta raqamidan foydalanishingiz mumkin",
+        "cardHolder": "Karta egasi",
+        "copyBtn": "Raqamni nusxalash",
+        "copied": "Nusxalandi!"
+      },
+      "family": {
+        "subtitle": "Hurmat bilan"
+      },
+      "couple": {
+        "intro": "Sizni farzandlarimiz",
+        "label": "nikoh to'ylari munosabati bilan\nlutfan taklif etamiz",
+        "connector": "va"
+      },
+      "venueName": "To'yxona",
+      "countdown": {
+        "label": "To'ygacha qolgan vaqt",
+        "days": "Kun",
+        "hours": "Soat",
+        "minutes": "Daqiqa",
+        "seconds": "Soniya",
+        "past": "Biz shuncha vaqtdan beri baxtli hayot kechirmoqdamiz"
+      },
+      "events": {
+        "osh": "Osh",
+        "oshDesc": "Ertalabki ziyofat",
+        "xatna": "Xatna",
+        "xatnaDesc": "Xatna marosimi",
+        "qizbazm": "Qizbazm",
+        "qizbazmDesc": "Qiz bazmi",
+        "visol": "Visol Oqshomi",
+        "visolDesc": "Kechki bazm",
+        "timePrefix": "Soat "
+      },
+      "months": [
+        "Yanvar",
+        "Fevral",
+        "Mart",
+        "Aprel",
+        "May",
+        "Iyun",
+        "Iyul",
+        "Avgust",
+        "Sentabr",
+        "Oktabr",
+        "Noyabr",
+        "Dekabr"
+      ],
+      "weekdays": [
+        "Du",
+        "Se",
+        "Ch",
+        "Pa",
+        "Ju",
+        "Sh",
+        "Ya"
+      ],
+      "weekdaysFull": [
+        "Yakshanba",
+        "Dushanba",
+        "Seshanba",
+        "Chorshanba",
+        "Payshanba",
+        "Juma",
+        "Shanba"
+      ]
+    },
+    "manor": {
+      "envelope": {
+        "open": "Taklifnomani ochish"
+      },
+      "byCeremony": {
+        "nikoh": {
+          "heroQuote": "Ikki qalbning eng go'zal uchrashuvi — nikohdir.",
+          "heroSubtitle": "muhabbat ila boshlangan yo'limizning eng unutilmas kuniga sizni chorlaymiz",
+          "envelopeGroom": "Kuyov",
+          "envelopeBride": "Kelin",
+          "coupleTitle": "— Kuyov va Kelin —",
+          "familyNote": "Oilalari nomidan",
+          "inviteText": "sizni nikoh to'yi marosimida ishtirok etishga samimiy taklif qiladilar",
+          "storyTitle": "— Bizning hikoyamiz —",
+          "quote1": {
+            "text": "Ba'zi uchrashuvlar tasodif emas… Qalbimizni birlashtirgan muhabbat bizni eng baxtli kunimiz sari yetakladi.\nShu unutilmas onlarimizga sizni ham guvoh bo'lishga chorlaymiz.",
+            "source": ""
+          },
+          "quote2": {
+            "text": "Umrimizning eng yorqin kuniga siz ham guvoh bo'lishingizni istaymiz. Quvonchimiz siz bilan bo'lsa, u yanada to'kis bo'ladi.",
+            "source": ""
+          }
+        },
+        "qizbazm": {
+          "heroQuote": "Qiz bola — oilaning eng go'zal bayrami.",
+          "heroSubtitle": "qizbazmimizga taklif qilamiz",
+          "envelopeGroom": "",
+          "envelopeBride": "Qizimiz",
+          "coupleTitle": "— Aziz qizimiz —",
+          "familyNote": "Oilamiz nomidan",
+          "inviteText": "qizimiz {bride}ning nikoh to'yi munosabati bilan o'tkaziladigan qizbazmimizga sizlarni samimiy taklif qilamiz",
+          "storyTitle": "— Hayot lavhalari —",
+          "quote1": {
+            "text": "Qiz bola — uyning quyoshi, oilaning shukronasi. Uning kulgisi qalblarga nur olib kiradi, mehrini esa hech nima bilan o'lchab bo'lmaydi.",
+            "source": "Xalq donishmandligi"
+          },
+          "quote2": {
+            "text": "Hayotning eng go'zal lahzalari — yaqinlar bilan birga o'tkaziladigan onlar. Bugun shu quvonchli kunda biz bilan bo'lishingizni so'raymiz.",
+            "source": "Samimiy taklif"
+          }
+        }
+      },
+      "sections": {
+        "details": "Tafsilotlar",
+        "remember": "Sanani eslab qoling",
+        "ceremony": "— Marosim —",
+        "venueAddress": "To'yxona manzili",
+        "location": "Manzil",
+        "osh": "— Osh —",
+        "xatna": "— Xatna —",
+        "qizbazm": "— Qizbazm —",
+        "visol": "— Visol Oqshomi —",
+        "transport": "Yo'l ko'rsatkichi",
+        "waitingText": "Sizni kutib olamiz",
+        "parkingText": "Bizning to'yxonamizda avtomobil turar joyi mavjud. Tashrifingizni kutib qolamiz.",
+        "gift": "— Samimiy tilak —",
+        "contact": "— Bog'lanish —",
+        "closing": "— Chin qalbimizdan —",
+        "closingText": "Tashrifingizni\nkutib qolamiz",
+        "withRespect": "Hurmat bilan",
+        "countdown": "— Kunlar sanalmoqda —",
+        "table": "— Sizning joyingiz —",
+        "tableTitle": "Stol",
+        "tableSubtitle": "Marosimda Sizni shu joyda kutib qolamiz"
+      },
+      "music": {
+        "pause": "Pauza",
+        "play": "Ijro"
+      },
+      "xatnaInvite": {
+        "eyebrow": "— Shuningdek —",
+        "introOne": "Aziz farzandimiz",
+        "introMany": "Aziz farzandlarimiz",
+        "inviteText": "xatna marosimiga sizlarni chin qalbimizdan taklif etamiz"
+      }
+    },
+    "oliveManor": {
+      "intro": {
+        "title": "To'y\ntaklifnomasi",
+        "sealHint": "Muhrni bosib,\ntaklifnomani oching"
+      },
+      "hero": {
+        "scrollDown": "Pastga suring",
+        "dateLabel": "To'y sanasi"
+      },
+      "invitation": {
+        "guestLead": "Aziz",
+        "bodyOne": "Sizni mehr va hayajon ila hayotimizning eng muhim kuni — nikoh to'yimizga taklif etamiz.",
+        "bodyTwo": "Ushbu bayram barchamiz uchun yangi hikoyaning yorug' va quvonchli boshlanishi bo'lsin."
+      },
+      "countdown": {
+        "ariaLabel": "To'ygacha teskari sanoq",
+        "kicker": "Birga sanaymiz",
+        "title": "To'yimizgacha",
+        "days": "kun",
+        "hours": "soat",
+        "minutes": "daqiqa",
+        "seconds": "soniya",
+        "note": "Har bir soniya bizni ushbu baxtli kunga yaqinlashtiradi",
+        "past": "Baxtli kunimiz yetib keldi"
+      },
+      "gallery": {
+        "kicker": "— Birga yozilgan hikoya —",
+        "title": "Xotira lavhalari",
+        "imageAlt": "Juftlikning xotira surati"
+      },
+      "program": {
+        "defaultTitle": "Oqshom dasturi"
+      },
+      "dressWishes": {
+        "ariaLabel": "Libos uslubi va tilaklar",
+        "dressTitle": "Libos uslubi",
+        "dressText": "Libosingiz oqshom ruhiga mos bo'lsa, xursand bo'lamiz, ammo qat'iy cheklovlar yo'q — o'zingizga ma'qul uslubni tanlang.",
+        "wishesTitle": "Tilaklar",
+        "wishesText": "Ushbu unutilmas kunda sizning ishtirokingiz biz uchun ayniqsa muhim. Biz bilan birga ekaningiz uchun rahmat!"
+      }
+    },
+    "xatna": {
+      "childIntro": "Farzandimiz",
+      "childLabel": "xatna to'yi munosabati bilan\nsamimiy taklif etamiz",
+      "eventLabel": "Xatna marosimi",
+      "pathTitle": "Xotiralar",
+      "quote1": {
+        "text": "Farzand — Allohning inoyati, hayotning eng go'zal in'omi. Uni mehr bilan parvarishlaganingizda, dunyoga nur ulashgan bo'lasiz.",
+        "source": "Xalq donoligi"
+      },
+      "quote2": {
+        "text": "Bolaga bergan eng qimmatli meros — yaxshi tarbiya va sobit iymondir. Mol-mulk tugaydi, ammo mehr va odob abadiy qoladi.",
+        "source": "Xalq donoligi"
+      },
+      "closingDua": "Barakallahu fiykum",
+      "closingMeaning": "Alloh sizlarga baraka bersin"
+    },
+    "islamic": {
+      "contactNote": "Savollaringiz bo'lsa, biz bilan bog'laning",
+      "byCeremony": {
+        "nikoh": {
+          "coupleIntro": "Sizni farzandlarimiz",
+          "coupleConnector": "va",
+          "coupleLabel": "muborak nikoh kechasiga\nchin qalb ila chorlaymiz",
+          "familyInvite": "bu muborak kechani siz azizlar bilan\nbirga nishonlashni iltimos etamiz",
+          "closingArabic": "Barakallahu lakuma",
+          "closingMeaning": "Allohning barakasi sizlarga bo'lsin",
+          "quote1": {
+            "text": "Va Uning belgilaridan biri — sizlar uchun o'zlaringizdan juftlar yaratganidirki, ularga sukun toping. U oraliqlaringizga muhabbat va rahmat qo'ydi.",
+            "source": "Rum surasi, 21-oyat"
+          },
+          "quote2": {
+            "text": "Nikoh mening sunnatimdir. Kim mening sunnatimga amal qilsa, u mendan.",
+            "source": "Hadisi Sharif"
+          }
+        },
+        "fotiha": {
+          "coupleIntro": "Sizni farzandlarimiz",
+          "coupleConnector": "va",
+          "coupleLabel": "muborak fotiha to'yiga\nchin qalb ila chorlaymiz",
+          "familyInvite": "bu muborak fotiha marosimini siz azizlar bilan\nbirga nishonlashni iltimos etamiz",
+          "closingArabic": "Barakallahu lakuma",
+          "closingMeaning": "Allohning barakasi sizlarga bo'lsin",
+          "quote1": {
+            "text": "Ikki oila o'rtasidagi mehr va rozilik — xayrli hayot yo'lining go'zal boshlanishidir.",
+            "source": "Samimiy tilak"
+          },
+          "quote2": {
+            "text": "Duolar bilan boshlangan yo'l barakali bo'ladi. Shu quvonchli kunda yonimizda bo'lishingizni istaymiz.",
+            "source": "Samimiy taklif"
+          }
+        },
+        "qizbazm": {
+          "coupleIntro": "Sizni qizimiz",
+          "coupleConnector": "",
+          "coupleLabel": "nikoh to'yi munosabati bilan\nqizbazmimizga lutfan taklif etamiz",
+          "familyInvite": "Qizimiz {bride}ning nikoh to'yi munosabati bilan\nqizbazmimizga sizni samimiy taklif etamiz",
+          "closingArabic": "Barakallahu laki",
+          "closingMeaning": "Allohning barakasi sizga bo'lsin",
+          "quote1": {
+            "text": "Kim ikki qiz farzandni voyaga yetkazib, ularga go'zal tarbiya bersa, qiyomat kuni men u bilan birga bo'laman.",
+            "source": "Hadisi Sharif"
+          },
+          "quote2": {
+            "text": "Qiz bola — uydagi ne'mat, oilaning fayzli mehmoni. Uning kulgisi qalblarni yumshatadi, mehri esa abadiy qoladi.",
+            "source": "Xalq donishmandligi"
+          }
+        }
+      }
+    }
+  },
+  "oz": {
+    "ui": {
+      "greeting": "Ассалому алайкум!",
+      "dear": "Ҳурматли",
+      "guestFallback": "Меҳмонимиз",
+      "scrollDown": "Пастга туширинг",
+      "loading": "Кутиб туринг...",
+      "openInvitation": "Таклифномани очиш",
+      "venueLabel": "Манзил",
+      "mapOpen": "Харитада очиш",
+      "mapTitle": "Тойхона харитаси",
+      "oshMapTitle": "Ош харитаси",
+      "xatnaMapTitle": "Хатна маросими харитаси",
+      "qizbazmMapTitle": "Қиз базм харитаси",
+      "closing": "Ташрифингизни кутиб қоламиз!",
+      "contact": {
+        "label": "Маълумот учун",
+        "phone": "Телефон"
+      },
+      "gift": {
+        "title": "Тўёна",
+        "desc": "Қалбан тўёна атамоқчи бўлсангиз, қуйидаги карта рақамидан фойдаланишингиз мумкин",
+        "cardHolder": "Карта эгаси",
+        "copyBtn": "Рақамни нусхалаш",
+        "copied": "Нусхаланди!"
+      },
+      "family": {
+        "subtitle": "Ҳурмат билан"
+      },
+      "couple": {
+        "intro": "Сизларни фарзандларимиз",
+        "label": "никоҳ тўйлари муносабати билан\nлутфан таклиф этамиз",
+        "connector": "ва"
+      },
+      "venueName": "Тойхона",
+      "countdown": {
+        "label": "Тўйгача қолган вақт",
+        "days": "Кун",
+        "hours": "Соат",
+        "minutes": "Дақиқа",
+        "seconds": "Сония",
+        "past": "Биз шунча вақтдан бери бахтли ҳаёт кечирмоқдамиз"
+      },
+      "events": {
+        "osh": "Ош",
+        "oshDesc": "Эрталабки зиёфат",
+        "xatna": "Хатна",
+        "xatnaDesc": "Хатна маросими",
+        "qizbazm": "Қиз базм",
+        "qizbazmDesc": "Қиз базми",
+        "visol": "Висол Оқшоми",
+        "visolDesc": "Кечки базм",
+        "timePrefix": "Соат "
+      },
+      "months": [
+        "Январ",
+        "Феврал",
+        "Март",
+        "Апрел",
+        "Май",
+        "Июн",
+        "Июл",
+        "Август",
+        "Сентябр",
+        "Октябр",
+        "Ноябр",
+        "Декабр"
+      ],
+      "weekdays": [
+        "Дш",
+        "Сш",
+        "Чш",
+        "Пш",
+        "Жм",
+        "Шб",
+        "Як"
+      ],
+      "weekdaysFull": [
+        "Якшанба",
+        "Душанба",
+        "Сешанба",
+        "Чоршанба",
+        "Пайшанба",
+        "Жума",
+        "Шанба"
+      ]
+    },
+    "manor": {
+      "envelope": {
+        "open": "Таклифномани очиш"
+      },
+      "byCeremony": {
+        "nikoh": {
+          "heroQuote": "Икки қалбнинг энг гўзал учрашуви — никоҳдир.",
+          "heroSubtitle": "сизни тўйимизга таклиф қиламиз",
+          "envelopeGroom": "Куёв",
+          "envelopeBride": "Келин",
+          "coupleTitle": "— Куёв ва Келин —",
+          "familyNote": "Оилалари номидан",
+          "inviteText": "сизни никоҳ тўйи маросимида иштирок этишга самимий таклиф қиладилар",
+          "storyTitle": "— Бизнинг ҳикоямиз —",
+          "quote1": {
+            "text": "Севги — икки қалбнинг битта ҳикояни бирга ёзишга қарор қилиши. Ва бу ҳикоянинг энг гўзал саҳифаси бугун бошланади.",
+            "source": "Бизнинг ҳикоямиз"
+          },
+          "quote2": {
+            "text": "Умримизнинг энг ёрқин кунига сиз ҳам гувоҳ бўлишингизни истаймиз. Қувончимиз сиз билан бўлса, у янада тўкис бўлади.",
+            "source": "Самимий таклиф"
+          }
+        },
+        "qizbazm": {
+          "heroQuote": "Қиз бола — оиланинг энг гўзал байрами.",
+          "heroSubtitle": "қизбазмимизга таклиф қиламиз",
+          "envelopeGroom": "",
+          "envelopeBride": "Қизимиз",
+          "coupleTitle": "— Азиз қизимиз —",
+          "familyNote": "Оиламиз номидан",
+          "inviteText": "қизимиз {bride}нинг никоҳ тўйи муносабати билан ўтказиладиган қизбазмимизга сизларни самимий таклиф қиламиз",
+          "storyTitle": "— Ҳаёт лавҳалари —",
+          "quote1": {
+            "text": "Қиз бола — уйнинг қуёши, оиланинг шукронаси. Унинг кулгуси қалбларга нур олиб киради, меҳрини эса ҳеч нима билан ўлчаб бўлмайди.",
+            "source": "Халқ донишмандлиги"
+          },
+          "quote2": {
+            "text": "Ҳаётнинг энг гўзал лаҳзалари — яқинлар билан бирга ўтказиладиган онлар. Бугун шу қувончли кунда биз билан бўлишингизни сўраймиз.",
+            "source": "Самимий таклиф"
+          }
+        }
+      },
+      "sections": {
+        "details": "Тафсилотлар",
+        "remember": "Санани эслаб қолинг",
+        "ceremony": "— Маросим —",
+        "venueAddress": "Тойхона манзили",
+        "location": "Манзил",
+        "osh": "— Ош —",
+        "xatna": "— Хатна —",
+        "qizbazm": "— Қиз базм —",
+        "visol": "— Висол Оқшоми —",
+        "transport": "Йўл кўрсаткичи",
+        "waitingText": "Сизни кутиб оламиз",
+        "parkingText": "Бизнинг тойхонамизда автомобил турар жойи мавжуд. Ташрифингизни кутиб қоламиз.",
+        "gift": "— Самимий тилак —",
+        "contact": "— Боғланиш —",
+        "closing": "— Чин қалбимиздан —",
+        "closingText": "Ташрифингизни\nкутиб қоламиз",
+        "withRespect": "Ҳурмат билан",
+        "countdown": "— Кунлар саналмоқда —",
+        "table": "— Сизнинг жойингиз —",
+        "tableTitle": "Стол",
+        "tableSubtitle": "Маросимда Сизни шу жойда кутиб қоламиз"
+      },
+      "music": {
+        "pause": "Пауза",
+        "play": "Ижро"
+      },
+      "xatnaInvite": {
+        "eyebrow": "— Шунингдек —",
+        "introOne": "Азиз фарзандимиз",
+        "introMany": "Азиз фарзандларимиз",
+        "inviteText": "хатна маросимига сизларни чин қалбимиздан таклиф этамиз"
+      }
+    },
+    "oliveManor": {
+      "intro": {
+        "title": "Тўй\nтаклифномаси",
+        "sealHint": "Муҳрни босиб,\nтаклифномани очинг"
+      },
+      "hero": {
+        "scrollDown": "Пастга суринг",
+        "dateLabel": "Тўй санаси"
+      },
+      "invitation": {
+        "guestLead": "Азиз",
+        "bodyOne": "Сизни меҳр ва ҳаяжон ила ҳаётимизнинг энг муҳим куни — никоҳ тўйимизга таклиф этамиз.",
+        "bodyTwo": "Ушбу байрам барчамиз учун янги ҳикоянинг ёруғ ва қувончли бошланиши бўлсин."
+      },
+      "countdown": {
+        "ariaLabel": "Тўйгача тескари саноқ",
+        "kicker": "Бирга санаймиз",
+        "title": "Тўйимизгача",
+        "days": "кун",
+        "hours": "соат",
+        "minutes": "дақиқа",
+        "seconds": "сония",
+        "note": "Ҳар бир сония бизни ушбу бахтли кунга яқинлаштиради",
+        "past": "Бахтли кунимиз етиб келди"
+      },
+      "gallery": {
+        "kicker": "— Бирга ёзилган ҳикоя —",
+        "title": "Хотира лавҳалари",
+        "imageAlt": "Жуфтликнинг хотира сурати"
+      },
+      "program": {
+        "defaultTitle": "Оқшом дастури"
+      },
+      "dressWishes": {
+        "ariaLabel": "Либос услуби ва тилаклар",
+        "dressTitle": "Либос услуби",
+        "dressText": "Либосингиз оқшом руҳига мос бўлса, хурсанд бўламиз, аммо қатъий чекловлар йўқ — ўзингизга маъқул услубни танланг.",
+        "wishesTitle": "Тилаклар",
+        "wishesText": "Ушбу унутилмас кунда сизнинг иштирокингиз биз учун айниқса муҳим. Биз билан бирга эканингиз учун раҳмат!"
+      }
+    },
+    "xatna": {
+      "childIntro": "Фарзандимиз",
+      "childLabel": "хатна тўйи муносабати билан\nсамимий таклиф этамиз",
+      "eventLabel": "Хатна маросими",
+      "pathTitle": "Хотиралар",
+      "quote1": {
+        "text": "Фарзанд — Аллоҳнинг иноятидир, ҳаётнинг энг гўзал ин'омидир. Уни меҳр билан парвариш қилганингизда, дунёга нур улашган бўласиз.",
+        "source": "Халқ донолиги"
+      },
+      "quote2": {
+        "text": "Болага берган энг қимматли мерос — яхши тарбия ва собит иймондир. Мол-мулк тугайди, аммо меҳр ва одоб абадий қолади.",
+        "source": "Халқ донолиги"
+      },
+      "closingDua": "Barakallahu fiykum",
+      "closingMeaning": "Аллоҳ сизларга барака берсин"
+    },
+    "islamic": {
+      "contactNote": "Саволларингиз бўлса, биз билан боғланинг",
+      "byCeremony": {
+        "nikoh": {
+          "coupleIntro": "Сизни фарзандларимиз",
+          "coupleConnector": "ва",
+          "coupleLabel": "никоҳ тўйлари муносабати билан\nлутфан таклиф этамиз",
+          "familyInvite": "Сизни қутлуғ никоҳ тўйимизга\nсамимий таклиф этамиз",
+          "closingArabic": "Barakallahu lakuma",
+          "closingMeaning": "Оллоҳнинг баракаси сизларга бўлсин",
+          "quote1": {
+            "text": "Ва Унинг белгиларидан бири — сизлар учун ўзларингиздан жуфтлар яратганидирки, уларга сукун топинг. У оралиқларингизга муҳаббат ва раҳмат қўйди.",
+            "source": "Рум сураси, 21-оят"
+          },
+          "quote2": {
+            "text": "Никоҳ менинг суннатимдир. Ким менинг суннатимга амал қилса, у мендан.",
+            "source": "Ҳадиси Шариф"
+          }
+        },
+        "fotiha": {
+          "coupleIntro": "Сизни фарзандларимиз",
+          "coupleConnector": "ва",
+          "coupleLabel": "муборак фотиҳа тўйига\nчин қалб ила чорлаймиз",
+          "familyInvite": "бу муборак фотиҳа маросимини сиз азизлар билан\nбирга нишонлашни илтимос этамиз",
+          "closingArabic": "Barakallahu lakuma",
+          "closingMeaning": "Оллоҳнинг баракаси сизларга бўлсин",
+          "quote1": {
+            "text": "Икки оила ўртасидаги меҳр ва розилик — хайрли ҳаёт йўлининг гўзал бошланишидир.",
+            "source": "Самимий тилак"
+          },
+          "quote2": {
+            "text": "Дуолар билан бошланган йўл баракали бўлади. Шу қувончли кунда ёнимизда бўлишингизни истаймиз.",
+            "source": "Самимий таклиф"
+          }
+        },
+        "qizbazm": {
+          "coupleIntro": "Сизни қизимиз",
+          "coupleConnector": "",
+          "coupleLabel": "никоҳ тўйи муносабати билан\nқизбазмимизга лутфан таклиф этамиз",
+          "familyInvite": "Қизимиз {bride}нинг никоҳ тўйи муносабати билан\nқизбазмимизга сизни самимий таклиф этамиз",
+          "closingArabic": "Barakallahu laki",
+          "closingMeaning": "Оллоҳнинг баракаси сизга бўлсин",
+          "quote1": {
+            "text": "Ким икки қиз фарзандни вояга етказиб, уларга гўзал тарбия берса, қиёмат куни мен у билан бирга бўламан.",
+            "source": "Ҳадиси Шариф"
+          },
+          "quote2": {
+            "text": "Қиз бола — уйдаги неъмат, оиланинг файзли меҳмони. Унинг кулгуси қалбларни юмшатади, меҳри эса абадий қолади.",
+            "source": "Халқ донишмандлиги"
+          }
+        }
+      }
+    }
+  },
+  "ru": {
+    "ui": {
+      "greeting": "Здравствуйте!",
+      "dear": "Уважаемый(-ая)",
+      "guestFallback": "Гость",
+      "scrollDown": "Пролистайте вниз",
+      "loading": "Загрузка...",
+      "openInvitation": "Открыть приглашение",
+      "venueLabel": "Адрес",
+      "mapOpen": "Открыть на карте",
+      "mapTitle": "Карта тойхоны",
+      "oshMapTitle": "Карта утреннего торжества",
+      "xatnaMapTitle": "Карта суннат-тоя",
+      "qizbazmMapTitle": "Карта кыз базма",
+      "closing": "Ждём вас!",
+      "contact": {
+        "label": "Контакты",
+        "phone": "Телефон"
+      },
+      "gift": {
+        "title": "Подарок",
+        "desc": "Если вы хотите сделать подарок, воспользуйтесь реквизитами карты ниже",
+        "cardHolder": "Владелец карты",
+        "copyBtn": "Скопировать номер",
+        "copied": "Скопировано!"
+      },
+      "family": {
+        "subtitle": "С уважением и почтением"
+      },
+      "couple": {
+        "intro": "Наш сын",
+        "label": "приглашает вас на своё свадебное торжество",
+        "connector": "и"
+      },
+      "venueName": "Тойхона",
+      "countdown": {
+        "label": "До свадьбы осталось",
+        "days": "Дней",
+        "hours": "Часов",
+        "minutes": "Минут",
+        "seconds": "Секунд",
+        "past": "Столько времени мы живём счастливо"
+      },
+      "events": {
+        "osh": "Нахор Оши",
+        "oshDesc": "Утреннее торжество",
+        "xatna": "Суннат-той",
+        "xatnaDesc": "Обряд обрезания",
+        "qizbazm": "Кыз базм",
+        "qizbazmDesc": "Кыз базм",
+        "visol": "Вечерний банкет",
+        "visolDesc": "Вечернее торжество",
+        "timePrefix": "в "
+      },
+      "months": [
+        "Январь",
+        "Февраль",
+        "Март",
+        "Апрель",
+        "Май",
+        "Июнь",
+        "Июль",
+        "Август",
+        "Сентябрь",
+        "Октябрь",
+        "Ноябрь",
+        "Декабрь"
+      ],
+      "weekdays": [
+        "Пн",
+        "Вт",
+        "Ср",
+        "Чт",
+        "Пт",
+        "Сб",
+        "Вс"
+      ],
+      "weekdaysFull": [
+        "Воскресенье",
+        "Понедельник",
+        "Вторник",
+        "Среда",
+        "Четверг",
+        "Пятница",
+        "Суббота"
+      ]
+    },
+    "manor": {
+      "envelope": {
+        "open": "Открыть приглашение"
+      },
+      "byCeremony": {
+        "nikoh": {
+          "heroQuote": "Самая прекрасная встреча двух сердец — это никах.",
+          "heroSubtitle": "приглашают вас на свадьбу",
+          "envelopeGroom": "Жених",
+          "envelopeBride": "Невеста",
+          "coupleTitle": "— Жених и Невеста —",
+          "familyNote": "От имени семей",
+          "inviteText": "сердечно приглашают вас на свадебное торжество",
+          "storyTitle": "— Наша история —",
+          "quote1": {
+            "text": "Любовь — это решение двух сердец писать одну историю вместе. И самая прекрасная страница этой истории начинается сегодня.",
+            "source": "Наша история"
+          },
+          "quote2": {
+            "text": "Мы хотим, чтобы вы стали свидетелем самого яркого дня нашей жизни. Наша радость будет полнее, если вы будете рядом.",
+            "source": "Сердечное приглашение"
+          }
+        },
+        "qizbazm": {
+          "heroQuote": "Дочь — самый прекрасный праздник семьи.",
+          "heroSubtitle": "приглашаем вас на девичник",
+          "envelopeGroom": "",
+          "envelopeBride": "Наша дочь",
+          "coupleTitle": "— Наша дорогая дочь —",
+          "familyNote": "От имени нашей семьи",
+          "inviteText": "по случаю свадебного торжества нашей дочери {bride} сердечно приглашаем вас на наш девичник",
+          "storyTitle": "— Странички жизни —",
+          "quote1": {
+            "text": "Дочь — солнце дома, благодарность семьи. Её улыбка озаряет сердца, а её любовь не измерить ничем.",
+            "source": "Народная мудрость"
+          },
+          "quote2": {
+            "text": "Самые прекрасные мгновения жизни — те, что проведены с близкими. В этот радостный день мы просим вас быть с нами.",
+            "source": "Сердечное приглашение"
+          }
+        }
+      },
+      "sections": {
+        "details": "Подробности",
+        "remember": "Запомните дату",
+        "ceremony": "— Торжество —",
+        "venueAddress": "Адрес тойхоны",
+        "location": "Адрес",
+        "osh": "— Нахор Оши —",
+        "xatna": "— Суннат-той —",
+        "qizbazm": "— Кыз базм —",
+        "visol": "— Вечерний банкет —",
+        "transport": "Как добраться",
+        "waitingText": "Мы вас ждём",
+        "parkingText": "На нашей площадке есть парковка. Ждём вас!",
+        "gift": "— С пожеланиями —",
+        "contact": "— Контакты —",
+        "closing": "— От всего сердца —",
+        "closingText": "Ждём\nвас",
+        "withRespect": "С уважением и почтением",
+        "countdown": "— Обратный отсчёт —",
+        "table": "— Ваше место —",
+        "tableTitle": "Стол",
+        "tableSubtitle": "Мы будем рады встретить Вас за этим столом"
+      },
+      "music": {
+        "pause": "Пауза",
+        "play": "Воспроизвести"
+      },
+      "xatnaInvite": {
+        "eyebrow": "— А также —",
+        "introOne": "Нашего любимого сына",
+        "introMany": "Наших любимых сыновей",
+        "inviteText": "от всего сердца приглашаем вас на обряд суннат-тоя"
+      }
+    },
+    "oliveManor": {
+      "intro": {
+        "title": "Свадебное\nприглашение",
+        "sealHint": "Нажмите на печать,\nчтобы открыть приглашение"
+      },
+      "hero": {
+        "scrollDown": "Листайте вниз",
+        "dateLabel": "Дата свадьбы"
+      },
+      "invitation": {
+        "guestLead": "Дорогой",
+        "bodyOne": "С любовью и трепетом приглашаем вас на наш самый важный день — свадебную церемонию.",
+        "bodyTwo": "Пусть этот праздник станет для всех нас светлым и радостным началом новой истории."
+      },
+      "countdown": {
+        "ariaLabel": "Обратный отсчёт до свадьбы",
+        "kicker": "Считаем вместе",
+        "title": "До нашей свадьбы",
+        "days": "дней",
+        "hours": "часов",
+        "minutes": "минут",
+        "seconds": "секунд",
+        "note": "Каждая секунда приближает нас к этому дню",
+        "past": "Наш счастливый день настал"
+      },
+      "gallery": {
+        "kicker": "— История, написанная вдвоём —",
+        "title": "Мгновения памяти",
+        "imageAlt": "Памятный снимок пары"
+      },
+      "program": {
+        "defaultTitle": "Программа вечера"
+      },
+      "dressWishes": {
+        "ariaLabel": "Дресс-код и пожелания",
+        "dressTitle": "Дресс-код",
+        "dressText": "Мы будем рады, если ваш наряд будет в духе вечера, но нет строгих ограничений — выберите стиль, который вам по душе.",
+        "wishesTitle": "Пожелания",
+        "wishesText": "В этот незабываемый день нам особенно важно ваше присутствие. Спасибо, что вы с нами!"
+      }
+    },
+    "xatna": {
+      "childIntro": "Наш ребёнок",
+      "childLabel": "приглашаем вас на\nхатна-той",
+      "eventLabel": "Церемония хатна",
+      "pathTitle": "Воспоминания",
+      "quote1": {
+        "text": "Ребёнок — дар Аллаха, прекраснейший дар жизни. Воспитывая его с любовью, вы дарите миру свет.",
+        "source": "Народная мудрость"
+      },
+      "quote2": {
+        "text": "Лучшее наследство, которое вы можете оставить ребёнку — хорошее воспитание и твёрдая вера. Богатство иссякнет, но любовь и нравственность останутся вечно.",
+        "source": "Народная мудрость"
+      },
+      "closingDua": "Barakallahu fiykum",
+      "closingMeaning": "Да благословит вас Аллах"
+    },
+    "islamic": {
+      "contactNote": "Если есть вопросы, свяжитесь с нами",
+      "byCeremony": {
+        "nikoh": {
+          "coupleIntro": "Приглашаем вас на свадьбу наших детей",
+          "coupleConnector": "и",
+          "coupleLabel": "по случаю никаха\nсердечно приглашаем вас",
+          "familyInvite": "Мы сердечно приглашаем вас на\nнаш благословенный свадебный пир",
+          "closingArabic": "Barakallahu lakuma",
+          "closingMeaning": "Да благословит вас Аллах",
+          "quote1": {
+            "text": "И среди Его знамений — то, что Он создал из вас самих жён для вас, чтобы вы находили в них покой, и установил между вами любовь и милосердие.",
+            "source": "Сура ар-Рум, 21-й аят"
+          },
+          "quote2": {
+            "text": "Никах — это моя сунна. Кто следует моей сунне, тот следует мне.",
+            "source": "Хадис"
+          }
+        },
+        "fotiha": {
+          "coupleIntro": "Приглашаем вас на фатиха-туй",
+          "coupleConnector": "и",
+          "coupleLabel": "на благословенный фатиха-туй\nсердечно приглашаем вас",
+          "familyInvite": "Просим разделить с нами этот благословенный фатиха-туй",
+          "closingArabic": "Barakallahu lakuma",
+          "closingMeaning": "Да благословит вас Аллах",
+          "quote1": {
+            "text": "Согласие и добрые молитвы двух семей — красивое начало счастливого пути.",
+            "source": "Доброе пожелание"
+          },
+          "quote2": {
+            "text": "Путь, начатый с молитв, бывает благословенным. Будем рады видеть вас рядом в этот светлый день.",
+            "source": "Искреннее приглашение"
+          }
+        },
+        "qizbazm": {
+          "coupleIntro": "Приглашаем вас на торжество нашей дочери",
+          "coupleConnector": "",
+          "coupleLabel": "по случаю свадьбы\nсердечно приглашаем вас на наш девичник",
+          "familyInvite": "По случаю свадебного торжества нашей дочери {bride}\nсердечно приглашаем вас на наш девичник",
+          "closingArabic": "Barakallahu laki",
+          "closingMeaning": "Да благословит вас Аллах",
+          "quote1": {
+            "text": "Кто воспитает двух дочерей и даст им прекрасное воспитание, в Судный день будет рядом со мной.",
+            "source": "Хадис"
+          },
+          "quote2": {
+            "text": "Дочь — благословение в доме, гостья, наполняющая семью благодатью. Её улыбка смягчает сердца, а любовь остаётся навечно.",
+            "source": "Народная мудрость"
+          }
+        }
+      }
+    }
+  },
+  "en": {
+    "ui": {
+      "greeting": "Welcome!",
+      "dear": "Dear",
+      "guestFallback": "Guest",
+      "scrollDown": "Scroll down",
+      "loading": "Please wait...",
+      "openInvitation": "Open invitation",
+      "venueLabel": "Venue",
+      "mapOpen": "Open map",
+      "mapTitle": "Venue map",
+      "oshMapTitle": "Osh map",
+      "xatnaMapTitle": "Celebration map",
+      "qizbazmMapTitle": "Qizbazm map",
+      "closing": "We look forward to seeing you!",
+      "contact": {
+        "label": "Contact",
+        "phone": "Phone"
+      },
+      "gift": {
+        "title": "Gift",
+        "desc": "If you would like to send a gift, you may use the card number below",
+        "cardHolder": "Card holder",
+        "copyBtn": "Copy number",
+        "copied": "Copied!"
+      },
+      "family": {
+        "subtitle": "With respect"
+      },
+      "couple": {
+        "intro": "Sizni farzandlarimiz",
+        "label": "nikoh to'ylari munosabati bilan\nlutfan taklif etamiz",
+        "connector": "and"
+      },
+      "venueName": "To'yxona",
+      "countdown": {
+        "label": "Time until the wedding",
+        "days": "Days",
+        "hours": "Hours",
+        "minutes": "Minutes",
+        "seconds": "Seconds",
+        "past": "We have been happily celebrating since then"
+      },
+      "events": {
+        "osh": "Osh",
+        "oshDesc": "Morning celebration",
+        "xatna": "Celebration",
+        "xatnaDesc": "Celebration ceremony",
+        "qizbazm": "Qizbazm",
+        "qizbazmDesc": "Bride's celebration",
+        "visol": "Wedding Evening",
+        "visolDesc": "Evening celebration",
+        "timePrefix": "Time "
+      },
+      "months": [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December"
+      ],
+      "weekdays": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri",
+        "Sat",
+        "Sun"
+      ],
+      "weekdaysFull": [
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday"
+      ]
+    },
+    "manor": {
+      "envelope": {
+        "open": "Open invitation"
+      },
+      "byCeremony": {
+        "nikoh": {
+          "heroQuote": "Marriage is the most beautiful meeting of two hearts.",
+          "heroSubtitle": "we invite you to the most unforgettable day of our journey, begun with love",
+          "envelopeGroom": "Groom",
+          "envelopeBride": "Bride",
+          "coupleTitle": "— Groom and Bride —",
+          "familyNote": "On behalf of the families",
+          "inviteText": "warmly invite you to attend their wedding celebration",
+          "storyTitle": "— Our Story —",
+          "quote1": {
+            "text": "Some meetings are not accidental... The love that united our hearts has led us to our happiest day.\nWe invite you to witness these unforgettable moments with us.",
+            "source": ""
+          },
+          "quote2": {
+            "text": "We would be honored to have you witness the brightest day of our lives. Our joy will be complete with your presence.",
+            "source": ""
+          }
+        },
+        "qizbazm": {
+          "heroQuote": "A daughter is a family's most beautiful celebration.",
+          "heroSubtitle": "we invite you to our qizbazm celebration",
+          "envelopeGroom": "",
+          "envelopeBride": "Our daughter",
+          "coupleTitle": "— Our Dear Daughter —",
+          "familyNote": "On behalf of our family",
+          "inviteText": "warmly invite you to the qizbazm celebration held in honor of our daughter {bride}'s wedding",
+          "storyTitle": "— Moments of Her Life —",
+          "quote1": {
+            "text": "A daughter is the sunshine of a home and a family's greatest blessing. Her smile fills hearts with light, and her love is beyond measure.",
+            "source": "Folk wisdom"
+          },
+          "quote2": {
+            "text": "Life's most beautiful moments are those shared with loved ones. We would be delighted to have you with us on this joyful day.",
+            "source": "A heartfelt invitation"
+          }
+        }
+      },
+      "sections": {
+        "details": "Details",
+        "remember": "Save the Date",
+        "ceremony": "— Ceremony —",
+        "venueAddress": "Venue Address",
+        "location": "Location",
+        "osh": "— Osh —",
+        "xatna": "— Celebration —",
+        "qizbazm": "— Qizbazm —",
+        "visol": "— Wedding Evening —",
+        "transport": "Directions",
+        "waitingText": "We are waiting for you",
+        "parkingText": "Parking is available at the venue. We look forward to your visit.",
+        "gift": "— Gift —",
+        "contact": "— Contact —",
+        "closing": "— With All Our Hearts —",
+        "closingText": "We look forward\nto seeing you",
+        "withRespect": "With respect",
+        "countdown": "— Counting the Days —",
+        "table": "— Your Seat —",
+        "tableTitle": "Table",
+        "tableSubtitle": "Your seat is reserved here for the celebration"
+      },
+      "music": {
+        "pause": "Pause",
+        "play": "Play"
+      },
+      "xatnaInvite": {
+        "eyebrow": "— Shuningdek —",
+        "introOne": "Aziz farzandimiz",
+        "introMany": "Aziz farzandlarimiz",
+        "inviteText": "xatna marosimiga sizlarni chin qalbimizdan taklif etamiz"
+      }
+    },
+    "oliveManor": {
+      "intro": {
+        "title": "Wedding\ninvitation",
+        "sealHint": "Press the seal\nto open the invitation"
+      },
+      "hero": {
+        "scrollDown": "Scroll down",
+        "dateLabel": "Wedding date"
+      },
+      "invitation": {
+        "guestLead": "Dear",
+        "bodyOne": "With love and excitement, we invite you to the most important day of our lives — our wedding celebration.",
+        "bodyTwo": "May this celebration be a bright and joyful beginning to a new chapter for all of us."
+      },
+      "countdown": {
+        "ariaLabel": "Countdown to the wedding",
+        "kicker": "Counting together",
+        "title": "Until our wedding",
+        "days": "days",
+        "hours": "hours",
+        "minutes": "minutes",
+        "seconds": "seconds",
+        "note": "Every second brings us closer to this special day",
+        "past": "Our happy day has arrived"
+      },
+      "gallery": {
+        "kicker": "— A story written together —",
+        "title": "Memorable Moments",
+        "imageAlt": "A cherished photo of the couple"
+      },
+      "program": {
+        "defaultTitle": "Evening Program"
+      },
+      "dressWishes": {
+        "ariaLabel": "Dress code and wishes",
+        "dressTitle": "Dress Code",
+        "dressText": "We would be delighted if your outfit reflects the spirit of the evening, but there are no strict rules — choose a style you feel comfortable in.",
+        "wishesTitle": "Wishes",
+        "wishesText": "Your presence means so much to us on this unforgettable day. Thank you for celebrating with us!"
+      }
+    },
+    "xatna": {
+      "childIntro": "Farzandimiz",
+      "childLabel": "xatna to'yi munosabati bilan\nsamimiy taklif etamiz",
+      "eventLabel": "Xatna marosimi",
+      "pathTitle": "Xotiralar",
+      "quote1": {
+        "text": "Farzand — Allohning inoyati, hayotning eng go'zal in'omi. Uni mehr bilan parvarishlaganingizda, dunyoga nur ulashgan bo'lasiz.",
+        "source": "Xalq donoligi"
+      },
+      "quote2": {
+        "text": "Bolaga bergan eng qimmatli meros — yaxshi tarbiya va sobit iymondir. Mol-mulk tugaydi, ammo mehr va odob abadiy qoladi.",
+        "source": "Xalq donoligi"
+      },
+      "closingDua": "Barakallahu fiykum",
+      "closingMeaning": "Alloh sizlarga baraka bersin"
+    },
+    "islamic": {
+      "contactNote": "Savollaringiz bo'lsa, biz bilan bog'laning",
+      "byCeremony": {
+        "nikoh": {
+          "coupleIntro": "Sizni farzandlarimiz",
+          "coupleConnector": "va",
+          "coupleLabel": "muborak nikoh kechasiga\nchin qalb ila chorlaymiz",
+          "familyInvite": "bu muborak kechani siz azizlar bilan\nbirga nishonlashni iltimos etamiz",
+          "closingArabic": "Barakallahu lakuma",
+          "closingMeaning": "Allohning barakasi sizlarga bo'lsin",
+          "quote1": {
+            "text": "Va Uning belgilaridan biri — sizlar uchun o'zlaringizdan juftlar yaratganidirki, ularga sukun toping. U oraliqlaringizga muhabbat va rahmat qo'ydi.",
+            "source": "Rum surasi, 21-oyat"
+          },
+          "quote2": {
+            "text": "Nikoh mening sunnatimdir. Kim mening sunnatimga amal qilsa, u mendan.",
+            "source": "Hadisi Sharif"
+          }
+        },
+        "fotiha": {
+          "coupleIntro": "Sizni farzandlarimiz",
+          "coupleConnector": "va",
+          "coupleLabel": "muborak fotiha to'yiga\nchin qalb ila chorlaymiz",
+          "familyInvite": "bu muborak fotiha marosimini siz azizlar bilan\nbirga nishonlashni iltimos etamiz",
+          "closingArabic": "Barakallahu lakuma",
+          "closingMeaning": "Allohning barakasi sizlarga bo'lsin",
+          "quote1": {
+            "text": "Ikki oila o'rtasidagi mehr va rozilik — xayrli hayot yo'lining go'zal boshlanishidir.",
+            "source": "Samimiy tilak"
+          },
+          "quote2": {
+            "text": "Duolar bilan boshlangan yo'l barakali bo'ladi. Shu quvonchli kunda yonimizda bo'lishingizni istaymiz.",
+            "source": "Samimiy taklif"
+          }
+        },
+        "qizbazm": {
+          "coupleIntro": "Sizni qizimiz",
+          "coupleConnector": "",
+          "coupleLabel": "nikoh to'yi munosabati bilan\nqizbazmimizga lutfan taklif etamiz",
+          "familyInvite": "Qizimiz {bride}ning nikoh to'yi munosabati bilan\nqizbazmimizga sizni samimiy taklif etamiz",
+          "closingArabic": "Barakallahu laki",
+          "closingMeaning": "Allohning barakasi sizga bo'lsin",
+          "quote1": {
+            "text": "Kim ikki qiz farzandni voyaga yetkazib, ularga go'zal tarbiya bersa, qiyomat kuni men u bilan birga bo'laman.",
+            "source": "Hadisi Sharif"
+          },
+          "quote2": {
+            "text": "Qiz bola — uydagi ne'mat, oilaning fayzli mehmoni. Uning kulgisi qalblarni yumshatadi, mehri esa abadiy qoladi.",
+            "source": "Xalq donishmandligi"
+          }
+        }
+      }
+    }
+  }
+}

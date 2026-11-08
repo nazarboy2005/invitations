@@ -17,7 +17,7 @@ import { isChorloveTemplate } from "@/templates/chorlove/registry";
 import { readBrowserDraft } from "@/modules/studio/draft-storage";
 import { pickPreviewMusic } from "./catalog-music";
 import { previewMusicLibrary, warmPreviewMusicLibrary } from "./preview-music-library";
-import { InvitationMusicAutoplay, InvitationMusicCredits } from "./invitation-view-tracker";
+import { InvitationMusicAutoplay } from "./invitation-view-tracker";
 import {
   createTemplatePreviewSample,
   createLongNamePreview,
@@ -325,7 +325,6 @@ export function FullTemplatePreview({
           <span>Taklifnoma ochilmoqda…</span>
         </div>
       )}
-      {invitation && !cardPreview && !posterCapture && <InvitationMusicCredits musicUrl={invitation.music.enabled ? invitation.music.url : ""} />}
       {invitation && !cardPreview && !posterCapture && (
         <InvitationMusicAutoplay
           musicUrl={

@@ -64,13 +64,14 @@ test("admin access expires at twelve hours regardless of creator session renewal
   );
 });
 test("reauth entry permits stale admins but never grants role elevation", () => {
-  assert.ok(assertAdminSession({ is_admin: true }, false, now));
+  assert.ok(assertAdminSession(admin, false, now));
   rejectsCode(
     () => assertAdminSession({ is_admin: false }, false, now),
     "FORBIDDEN",
   );
   rejectsCode(() => assertAdminSession(null, false, now), "LOGIN_REQUIRED");
 });
+
 test("same-origin validation rejects missing, null, sibling and attacker origins", () => {
   const previous = process.env.APP_URL;
   process.env.APP_URL = "https://fotiha.example";

@@ -2,7 +2,6 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { createHmac } from "node:crypto";
 import {
-  isOwnContact,
   verifyInitData,
   verifyMiniAppLaunch,
   randomToken,
@@ -95,33 +94,6 @@ test("Mini App replay identity survives parameter reordering and equivalent URL 
   );
   assert.throws(() =>
     verifyMiniAppLaunch(raw.replace("Nazar", "Attacker"), bot, now),
-  );
-});
-test("Phone onboarding accepts only sender's own unforwarded contact", () => {
-  assert.equal(
-    isOwnContact(123, { user_id: 123, phone_number: "+998901234567" }),
-    true,
-  );
-  assert.equal(
-    isOwnContact(123, { user_id: 456, phone_number: "+998901234567" }),
-    false,
-  );
-  assert.equal(isOwnContact(123, { phone_number: "+998901234567" }), false);
-  assert.equal(
-    isOwnContact(123, { user_id: 123, phone_number: "+998901234567" }, true),
-    false,
-  );
-  assert.equal(
-    isOwnContact(123, { user_id: 123, phone_number: "123----" }),
-    false,
-  );
-  assert.equal(
-    isOwnContact(123, { user_id: 123, phone_number: "+1234567890123456" }),
-    false,
-  );
-  assert.equal(
-    isOwnContact(123, { user_id: 123, phone_number: "+0001234567" }),
-    false,
   );
 });
 test("Opaque login tokens fit Telegram start payload and store only fingerprints", () => {

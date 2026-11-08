@@ -14,8 +14,8 @@ const db = getDb(),
   origin = process.env.APP_URL!,
   admin = randomUUID(),
   creator = randomUUID(),
-  unverified = randomUUID(),
-  users = [admin, creator, unverified],
+  anotherCreator = randomUUID(),
+  users = [admin, creator, anotherCreator],
   telegram = new Map<string, number>(),
   launchKeys: string[] = [],
   updates: number[] = [];
@@ -24,7 +24,7 @@ before(async () => {
   for (const id of users) {
     const tg = Math.floor(Math.random() * 1e12) + 1;
     telegram.set(id, tg);
-    await db`INSERT INTO users(id,telegram_user_id,display_name,is_admin,phone_shared_at) VALUES(${id},${tg},'Mini App binding QA',${id === admin},${id === unverified ? null : new Date()})`;
+    await db`INSERT INTO users(id,telegram_user_id,display_name,is_admin) VALUES(${id},${tg},'Mini App binding QA',${id === admin})`;
   }
 });
 after(async () => {
@@ -137,15 +137,17 @@ test("fresh launch replay cannot create another session in an unrelated browser"
   assert.equal((await post(raw, cookie)).status, 200);
   assert.equal(await total(admin), count);
 });
-test("a verified switch to an unverified phone account clears the previous browser identity", async () => {
-  const response = await post(signed(unverified), await session(admin));
-  assert.equal(response.status, 403);
-  assert.equal((await response.json()).phoneRequired, true);
-  assert.match(
-    response.headers.get("set-cookie") ?? "",
-    /taklifnoma_session=;/,
-  );
-  assert.match(response.headers.get("set-cookie") ?? "", /Max-Age=0/i);
+test("a verified Telegram account switch replaces the previous browser identity", async () => {
+  const response = await post(signed(anotherCreator), await session(admin));
+  assert.equal(response.status, 200);
+  const result = await response.json();
+  assert.equal(result.user.id, anotherCreator);
+  assert.equal(result.user.isAdmin, false);
+  const cookie = response.headers
+    .get("set-cookie")!
+    .match(/taklifnoma_session=([^;]+)/)![1];
+  const current = await (await request("/api/auth/session", cookie)).json();
+  assert.equal(current.user.id, anotherCreator);
 });
 test("bot admin entry uses the authenticated account route and stays silent for unauthorized users", async () => {
   const original = globalThis.fetch,
@@ -175,7 +177,7 @@ test("bot admin entry uses the authenticated account route and stays silent for 
     assert.equal(entry.web_app.url, origin + "/dashboard");
     assert.match(entry.text, /Boshqaruv/);
     const adminReplies = bodies.length;
-    for (const id of [creator, unverified]) {
+    for (const id of [creator, anotherCreator]) {
       for (const text of ["/admin", "/admin@TaklifnomaBot", "/admin  "]) {
         await command(id, text);
         assert.equal(bodies.length, adminReplies);

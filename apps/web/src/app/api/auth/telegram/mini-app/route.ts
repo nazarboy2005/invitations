@@ -47,20 +47,20 @@ export async function POST(request: Request) {
         expires: new Date(0),
       });
     const db = getDb();
+    const name = `${identity.first_name} ${identity.last_name ?? ""}`
+      .trim()
+      .slice(0, 300);
     const [user] =
-      await db`SELECT * FROM users WHERE telegram_user_id=${String(identity.id)}`;
-    if (!user?.phone_shared_at)
-      return json(
-        {
-          user: null,
-          phoneRequired: true,
-          botUrl: `https://t.me/${process.env.TELEGRAM_BOT_USERNAME!.replace(/^@/, "")}?start=phone`,
-        },
+      await db`INSERT INTO users(telegram_user_id,display_name,telegram_username) VALUES(${String(identity.id)},${name},${identity.username ?? null}) ON CONFLICT(telegram_user_id) DO UPDATE SET display_name=EXCLUDED.display_name,telegram_username=EXCLUDED.telegram_username,updated_at=now() RETURNING *`;
+    if (user.disabled_at)
+      throw new AuthError(
+        "ACCOUNT_UNAVAILABLE",
+        "Hisobga kirish cheklangan.",
         403,
       );
     const used =
       await db`INSERT INTO miniapp_exchanges(init_hash,expires_at) VALUES(${launch.replayKey},now()+interval '5 minutes') ON CONFLICT DO NOTHING RETURNING init_hash`;
-    if (sameAccount) return json({ user: toSessionUser(existing) });
+    if (sameAccount) return json({ user: toSessionUser(user) });
     if (!used.length)
       throw new AuthError(
         "LAUNCH_ALREADY_USED",

@@ -42,7 +42,7 @@ test(
       });
     }
     try {
-      await sql`INSERT INTO users(id,telegram_user_id,display_name,phone_number,phone_source,phone_shared_at) VALUES(${owner},${-Math.floor(Math.random() * 1e12) - 1},'Cover publication fixture','+000000000','telegram_contact',now())`;
+      await sql`INSERT INTO users(id,telegram_user_id,display_name) VALUES(${owner},${-Math.floor(Math.random() * 1e12) - 1},'Cover publication fixture')`;
       await sql`INSERT INTO sessions(user_id,token_hash,user_agent,expires_at,absolute_expires_at) VALUES(${owner},${digest(token)},'Cover publication fixture',now()+interval '1 hour',now()+interval '1 hour')`;
       await sql`INSERT INTO invitations(id,owner_id,template_id,status,data) VALUES(${draft.id},${owner},${draft.templateId},'draft',${sql.json(draft)})`;
       const before = await readdir(coverCacheRoot()).catch(() => []);
@@ -70,7 +70,6 @@ test(
         id: owner,
         telegramUserId: "0",
         displayName: "Cover fixture",
-        phoneShared: true,
         isAdmin: false,
       });
       const published = publication.invitation;

@@ -53,7 +53,7 @@ async function okay(response: Response, status = 200) {
   );
 }
 try {
-  await sql`INSERT INTO users(id,telegram_user_id,display_name,phone_number,phone_source,phone_shared_at) VALUES(${owner},${-Math.floor(Math.random() * 1e12) - 1},'Disposable stationery verification','+000000000','telegram_contact',now())`;
+  await sql`INSERT INTO users(id,telegram_user_id,display_name) VALUES(${owner},${-Math.floor(Math.random() * 1e12) - 1},'Disposable stationery verification')`;
   await sql`INSERT INTO sessions(user_id,token_hash,user_agent,expires_at,absolute_expires_at) VALUES(${owner},${digest(token)},'Static collection QA',now()+interval '1 hour',now()+interval '1 hour')`;
   for (const i of invitations) {
     if (release) {

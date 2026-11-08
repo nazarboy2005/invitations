@@ -1,0 +1,267 @@
+{
+  "captured": "2026-11-08T06:01:41.082Z",
+  "reference": "https://e-invitation.uz/demo/monochrome-editorial-edition/",
+  "files": [
+    {
+      "url": "https://e-invitation.uz/_nuxt/InvitationEdition.BccB26fE.css",
+      "file": "invitation.css",
+      "sha256": "4c36d2a04557ae566852c9e0780d770427d3073475937c82418a13568b49864d"
+    },
+    {
+      "url": "https://e-invitation.uz/_nuxt/DCeitKYC.js",
+      "file": "template.module.js",
+      "sha256": "3c092a7d23877e2b7d1b922372bf58ef738ab3a6ef9eb460d4af2d2b92296438"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2",
+      "file": "fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2",
+      "sha256": "3100e775e8616cd2611beecfa23a4263d7037586789b43f035236a2e6fbd4c62"
+    },
+    {
+      "url": "https://e-invitation.uz/_nuxt/MonochromeEditorialEdition.DqREToCZ.css",
+      "file": "template.css",
+      "sha256": "b7f6e7e8038011149949fc114d683ed17c05d42408338213740b7c618bb7eb84"
+    },
+    {
+      "url": "https://assets.e-invitation.uz/monochrome-editorial-edition/tear-edge-top-a-v4.png",
+      "file": "assets/tear-edge-top-a-v4.png",
+      "sha256": "e83eb03deefc022b4501e8fbbe6827660905d6837644b511a12145de8fe16b0d"
+    },
+    {
+      "url": "https://assets.e-invitation.uz/monochrome-editorial-edition/floral-corner-alpha-v4.webp",
+      "file": "assets/floral-corner-alpha-v4.webp",
+      "sha256": "10ef835c3fc539742d95dee5f07a16825f8d3841ba4c086dc9d4aab1865a2202"
+    },
+    {
+      "url": "https://assets.e-invitation.uz/monochrome-editorial-edition/tear-edge-bottom-a-v4.png",
+      "file": "assets/tear-edge-bottom-a-v4.png",
+      "sha256": "a645cb7faee26ba93ddad9e7757f8ebfc8d24692a155edbbd8d97c5d2ec5aa7f"
+    },
+    {
+      "url": "https://assets.e-invitation.uz/monochrome-editorial-edition/hero-hands.webp",
+      "file": "assets/hero-hands.webp",
+      "sha256": "6a86b1902e2312ecccd472aa43d56d3457b7b83dacfbd91a2c0f3c6417c1d66f"
+    },
+    {
+      "url": "https://assets.e-invitation.uz/monochrome-editorial-edition/tear-edge-bottom-b-v4.png",
+      "file": "assets/tear-edge-bottom-b-v4.png",
+      "sha256": "5295ed80df7867a92c94ea6f278c88e20c8cba9199050f8c577f56da0056c6cc"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/marckscript/v22/nwpTtK2oNgBA3Or78gapdwuyyCg_.woff2",
+      "file": "fonts/nwpTtK2oNgBA3Or78gapdwuyyCg_.woff2",
+      "sha256": "b32acf77642711e18c14d57aabeefa02ee25664a7f40929ee5f72396557b6e76"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/prata/v22/6xKhdSpbNNCT-sWPCm4.woff2",
+      "file": "fonts/6xKhdSpbNNCT-sWPCm4.woff2",
+      "sha256": "1b85a8c794709747c9f689b791984c430a2d9716a5cf9440d955bd7d20dad9d0"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/manrope/v23/xn7gYHE41ni1AdIRggexSg.woff2",
+      "file": "fonts/xn7gYHE41ni1AdIRggexSg.woff2",
+      "sha256": "8c2def024c1bf31aacf3624ae3c4d701269b4ec3dc765c04830839f0d36b2d9e"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/manrope/v23/xn7gYHE41ni1AdIRggOxSuXd.woff2",
+      "file": "fonts/xn7gYHE41ni1AdIRggOxSuXd.woff2",
+      "sha256": "447c49583b1b735cc6f566151db1d24354cec41076c55dd98455cfbde9e806c1"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3ZmX5slCNuHLi8bLeY9MK7whWMhyjYrEtFmSq17w.woff2",
+      "file": "fonts/co3ZmX5slCNuHLi8bLeY9MK7whWMhyjYrEtFmSq17w.woff2",
+      "sha256": "ae25de0507a445fd9e953e90432ae75b1ee2eccb48370a6ced4934551eb56fc3"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3ZmX5slCNuHLi8bLeY9MK7whWMhyjYrEtMmSq17w.woff2",
+      "file": "fonts/co3ZmX5slCNuHLi8bLeY9MK7whWMhyjYrEtMmSq17w.woff2",
+      "sha256": "cb13c04533ee98c94e49a053b9f4d39bf616fd7ba6360d71aead92a78dc571f7"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3ZmX5slCNuHLi8bLeY9MK7whWMhyjYrEtHmSq17w.woff2",
+      "file": "fonts/co3ZmX5slCNuHLi8bLeY9MK7whWMhyjYrEtHmSq17w.woff2",
+      "sha256": "b8ecb4ae898cd9ccae2f2d18fd364f6593bb67776060f9b5d833cec65d34d112"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3ZmX5slCNuHLi8bLeY9MK7whWMhyjYrEtGmSq17w.woff2",
+      "file": "fonts/co3ZmX5slCNuHLi8bLeY9MK7whWMhyjYrEtGmSq17w.woff2",
+      "sha256": "cd5bf126b2c84ab41b254a6a9a1ffb5c326a0f9f82c22fb4704daa31c9aaa415"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3ZmX5slCNuHLi8bLeY9MK7whWMhyjYrEtImSo.woff2",
+      "file": "fonts/co3ZmX5slCNuHLi8bLeY9MK7whWMhyjYrEtImSo.woff2",
+      "sha256": "6f2f5c3b1abc3d0bb035a927f66a90ca873f94fc31c4966c8d024142c2036e55"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjYpHtKgS4.woff2",
+      "file": "fonts/co3bmX5slCNuHLi8bLeY9MK7whWMhyjYpHtKgS4.woff2",
+      "sha256": "a4d7cf345b8091e1d2c8c5c8fa3bd0f9bb9d00bc8988185471db398ddb5ae4c4"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjYrXtKgS4.woff2",
+      "file": "fonts/co3bmX5slCNuHLi8bLeY9MK7whWMhyjYrXtKgS4.woff2",
+      "sha256": "017fab69b4be8ffc08ca312823327989ade6dc3d948f0afa125e12ec2e5e7ca1"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjYpntKgS4.woff2",
+      "file": "fonts/co3bmX5slCNuHLi8bLeY9MK7whWMhyjYpntKgS4.woff2",
+      "sha256": "6252e819a7665ae512c2d046308a9016ada63c06d0d8f96984c4b29f6c9e1bd2"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjYp3tKgS4.woff2",
+      "file": "fonts/co3bmX5slCNuHLi8bLeY9MK7whWMhyjYp3tKgS4.woff2",
+      "sha256": "cfa9a397d86f66c5c51775a2500a712d5f632a04f0c5eca6930dfaf612d4566d"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjYqXtK.woff2",
+      "file": "fonts/co3bmX5slCNuHLi8bLeY9MK7whWMhyjYqXtK.woff2",
+      "sha256": "d80df8ff5aecd299a61549f9e29ab1ed0b9b05f4ea71d50fe978e07d5240b235"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/greatvibes/v21/RWmMoKWR9v4ksMfaWd_JN9XIiaQ6DQ.woff2",
+      "file": "fonts/RWmMoKWR9v4ksMfaWd_JN9XIiaQ6DQ.woff2",
+      "sha256": "6b071406bf0cb2c4a84a01ffbabe275032dca341733fe7f4ece8a1d4a615e44b"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/greatvibes/v21/RWmMoKWR9v4ksMfaWd_JN9XBiaQ6DQ.woff2",
+      "file": "fonts/RWmMoKWR9v4ksMfaWd_JN9XBiaQ6DQ.woff2",
+      "sha256": "80b935e653c6426a8780daca822409f546c8a9bc0ea41fd3c0f98dcf456463f5"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/greatvibes/v21/RWmMoKWR9v4ksMfaWd_JN9XJiaQ6DQ.woff2",
+      "file": "fonts/RWmMoKWR9v4ksMfaWd_JN9XJiaQ6DQ.woff2",
+      "sha256": "36cccce6b2eb27eba45a96660f52d4a1d4a0a30822150b9600eebd67be9462a8"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/greatvibes/v21/RWmMoKWR9v4ksMfaWd_JN9XKiaQ6DQ.woff2",
+      "file": "fonts/RWmMoKWR9v4ksMfaWd_JN9XKiaQ6DQ.woff2",
+      "sha256": "9b624180d019ee43faf972e083bf81dfafabf43234ac9e80ba2d93013f25a3d0"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/greatvibes/v21/RWmMoKWR9v4ksMfaWd_JN9XLiaQ6DQ.woff2",
+      "file": "fonts/RWmMoKWR9v4ksMfaWd_JN9XLiaQ6DQ.woff2",
+      "sha256": "b63469c752efac950ef0497a345e3823d70211b70f60d61887066a87bc3b62f3"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/greatvibes/v21/RWmMoKWR9v4ksMfaWd_JN9XFiaQ.woff2",
+      "file": "fonts/RWmMoKWR9v4ksMfaWd_JN9XFiaQ.woff2",
+      "sha256": "c59dc73d29daf142ef2431f455d21464172374aa750d793a79d608735db2d856"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa2JL7SUc.woff2",
+      "file": "fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa2JL7SUc.woff2",
+      "sha256": "ca157063339ac4ad418f214f3abfed119b0798ab4d377386ce5c9e5a7a435ebd"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa0ZL7SUc.woff2",
+      "file": "fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa0ZL7SUc.woff2",
+      "sha256": "71d5ee93cc1e9f1d520a3a8b66456de18c7879d8df09d57fcd2eaff75fef0075"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa2ZL7SUc.woff2",
+      "file": "fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa2ZL7SUc.woff2",
+      "sha256": "6e9e020a25f9b56d418f2c085b1d3c09725a4da23fe693a5b463064606732190"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1pL7SUc.woff2",
+      "file": "fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1pL7SUc.woff2",
+      "sha256": "1be3448e292fbf05ffe176fe1e43f135013d50b1e7d324ad1a558f623d3bb6f6"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa2pL7SUc.woff2",
+      "file": "fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa2pL7SUc.woff2",
+      "sha256": "5c66f9e07e90c6d4ac4922cc68d60de26c17b1858e677fb5e603fce3952b3ff2"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa25L7SUc.woff2",
+      "file": "fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa25L7SUc.woff2",
+      "sha256": "34b9c504cab7a73e37b746343a449132e56cf7b5481af2cb81dc74dcff25c956"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/manrope/v23/xn7gYHE41ni1AdIRggqxSuXd.woff2",
+      "file": "fonts/xn7gYHE41ni1AdIRggqxSuXd.woff2",
+      "sha256": "3c09135e88bbfcd848e99be137710afbb615a8d9a73c5c48e6cb0245a162af1d"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/manrope/v23/xn7gYHE41ni1AdIRggSxSuXd.woff2",
+      "file": "fonts/xn7gYHE41ni1AdIRggSxSuXd.woff2",
+      "sha256": "e507c109c31789b33994646b457ee288639324516357250607c9b1398186e069"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/manrope/v23/xn7gYHE41ni1AdIRggixSuXd.woff2",
+      "file": "fonts/xn7gYHE41ni1AdIRggixSuXd.woff2",
+      "sha256": "dbf64d973b3987844df30992c93f47d24ac8935ee8c9b1e320942aeb1b367703"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/manrope/v23/xn7gYHE41ni1AdIRggmxSuXd.woff2",
+      "file": "fonts/xn7gYHE41ni1AdIRggmxSuXd.woff2",
+      "sha256": "2f7335119075b2079f1d882530bbc18728461612bf90743203d73a74a48f4d9b"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/marckscript/v22/nwpTtK2oNgBA3Or78gapdwuyzCg_WMM.woff2",
+      "file": "fonts/nwpTtK2oNgBA3Or78gapdwuyzCg_WMM.woff2",
+      "sha256": "457f5ae9dd211fb276e605a4ce3ecb35cbe1aee8bb1a54698c81d7834873ed06"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/marckscript/v22/nwpTtK2oNgBA3Or78gapdwuyxig_WMM.woff2",
+      "file": "fonts/nwpTtK2oNgBA3Or78gapdwuyxig_WMM.woff2",
+      "sha256": "0b81e24db3e626c58446fc2ea58dbeaa5d4edb219856afe36ad902c95248d18d"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/prata/v22/6xKhdSpbNNCT-sWCCm7JLQ.woff2",
+      "file": "fonts/6xKhdSpbNNCT-sWCCm7JLQ.woff2",
+      "sha256": "1a71ca94e943aac8154d195f9ea21959d374ebf3a3a9420651d0dbb46253f897"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/prata/v22/6xKhdSpbNNCT-sWLCm7JLQ.woff2",
+      "file": "fonts/6xKhdSpbNNCT-sWLCm7JLQ.woff2",
+      "sha256": "3392de5a383deac60effcad2beb8b847f40eb0eb200ffd4888c3e13d6e40845f"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/prata/v22/6xKhdSpbNNCT-sWACm7JLQ.woff2",
+      "file": "fonts/6xKhdSpbNNCT-sWACm7JLQ.woff2",
+      "sha256": "60aab7caa7ea16a76672583f1db7f2e7ea17ee205e00e1c1027a06cc548a6a9b"
+    },
+    {
+      "url": "https://assets.e-invitation.uz/monochrome-editorial-edition/couple-gallery-v20261007-01.webp",
+      "file": "assets/couple-gallery-v20261007-01.webp",
+      "sha256": "28995e143b3256f95faa60a00ff0f23167a8d2cd4ee30f92402279c9805902dd"
+    },
+    {
+      "url": "https://assets.e-invitation.uz/monochrome-editorial-edition/couple-gallery-v20261007-02.webp",
+      "file": "assets/couple-gallery-v20261007-02.webp",
+      "sha256": "8a23816882cbd0725e4306642ebd6cd1eae110f0b9dfd44fb5aca2c8de18f482"
+    },
+    {
+      "url": "https://assets.e-invitation.uz/monochrome-editorial-edition/couple-gallery-v20261007-03.webp",
+      "file": "assets/couple-gallery-v20261007-03.webp",
+      "sha256": "a7b775a60a5ba28c311977a96c2201b9ea75a1ce7d427e965102c4ca96292e0c"
+    },
+    {
+      "url": "https://assets.e-invitation.uz/monochrome-editorial-edition/couple-gallery-v20261007-04.webp",
+      "file": "assets/couple-gallery-v20261007-04.webp",
+      "sha256": "086c84d1171862092b782799e23226059d9681e1b68ff55f352b0c423a3fc976"
+    },
+    {
+      "url": "https://assets.e-invitation.uz/monochrome-editorial-edition/couple-gallery-v20261007-05.webp",
+      "file": "assets/couple-gallery-v20261007-05.webp",
+      "sha256": "c9ab709bd2a8ef84caaddb1fdebedff9d94ccd0777172257494d084c6ba93226"
+    },
+    {
+      "url": "https://assets.e-invitation.uz/monochrome-editorial-edition/couple-gallery-v20261007-06.webp",
+      "file": "assets/couple-gallery-v20261007-06.webp",
+      "sha256": "29ca9251e5a4af6ef04a7438c5414a658463d64d63bba61e8ef06e5b8ee3a35a"
+    },
+    {
+      "url": "https://e-invitation.uz/demo/monochrome-editorial-edition/",
+      "file": "inline.css",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "note": "Template-scoped inline styles emitted by the original component"
+    },
+    {
+      "url": "https://e-invitation.uz/demo/monochrome-editorial-edition/",
+      "file": "rendered-reference.html",
+      "sha256": "2016a9546955e8677a1e3aa2beed0d0d9793b0fb28c28ba563bad5604041e6e9"
+    }
+  ]
+}

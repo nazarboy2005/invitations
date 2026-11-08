@@ -25,7 +25,6 @@ test("verified payment delivers one formatted invitation confirmation, with safe
     id: userId,
     telegramUserId: telegramId,
     displayName: "Payment confirmation QA",
-    phoneShared: true,
     isAdmin: false,
   };
   const provider = new Map<string, NodzePayment>();
@@ -85,7 +84,7 @@ test("verified payment delivers one formatted invitation confirmation, with safe
     });
   }
   try {
-    await sql`INSERT INTO users(id,telegram_user_id,display_name,phone_shared_at) VALUES(${userId},${telegramId},'Payment confirmation QA',now())`;
+    await sql`INSERT INTO users(id,telegram_user_id,display_name) VALUES(${userId},${telegramId},'Payment confirmation QA')`;
     await sql`INSERT INTO telegram_connections(user_id,telegram_chat_id,status) VALUES(${userId},${telegramId},'active')`;
     const first = await draft();
     assert.equal(

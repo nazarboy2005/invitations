@@ -1,0 +1,79 @@
+{
+  "action": "publish",
+  "otherTemplatesUnchanged": 130,
+  "migrations": [
+    {
+      "name": "0224_publish_complete_e_invitation_four.sql"
+    }
+  ],
+  "templates": [
+    {
+      "id": "islamic-edition",
+      "name": "Islamic",
+      "published": true,
+      "price_minor": "100000",
+      "currency": "UZS",
+      "format": "web"
+    },
+    {
+      "id": "monochrome-editorial-edition",
+      "name": "Monochrome Editorial",
+      "published": true,
+      "price_minor": "100000",
+      "currency": "UZS",
+      "format": "web"
+    },
+    {
+      "id": "olive-manor-edition",
+      "name": "Olive Manor",
+      "published": true,
+      "price_minor": "100000",
+      "currency": "UZS",
+      "format": "web"
+    },
+    {
+      "id": "xatna-edition",
+      "name": "Xatna Edition",
+      "published": true,
+      "price_minor": "100000",
+      "currency": "UZS",
+      "format": "web"
+    }
+  ],
+  "events": [
+    {
+      "template_id": "islamic-edition",
+      "event_type": "wedding"
+    },
+    {
+      "template_id": "monochrome-editorial-edition",
+      "event_type": "wedding"
+    },
+    {
+      "template_id": "olive-manor-edition",
+      "event_type": "wedding"
+    },
+    {
+      "template_id": "xatna-edition",
+      "event_type": "sunnat-toyi"
+    }
+  ],
+  "categories": [
+    {
+      "template_id": "islamic-edition",
+      "category_id": "wedding"
+    },
+    {
+      "template_id": "monochrome-editorial-edition",
+      "category_id": "wedding"
+    },
+    {
+      "template_id": "olive-manor-edition",
+      "category_id": "wedding"
+    },
+    {
+      "template_id": "xatna-edition",
+      "category_id": "other"
+    }
+  ]
+}

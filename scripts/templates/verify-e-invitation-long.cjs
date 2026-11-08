@@ -1,0 +1,8 @@
+const assert=require('node:assert/strict'),fs=require('node:fs/promises'),{chromium}=require('../../apps/web/node_modules/playwright');
+(async()=>{const b=await chromium.launch(),report=[];try{for(const id of ['olive-manor-edition','islamic-edition','monochrome-editorial-edition','xatna-edition']){
+ const p=await b.newPage({viewport:{width:390,height:844},reducedMotion:'reduce'});await p.goto(`http://127.0.0.1:3001/preview?template=${id}&qaSilent=1&qaLongNames=1`,{waitUntil:'domcontentloaded'});const f=p.frameLocator('iframe').first();await f.locator('[data-opened=true]').waitFor({timeout:60000});await f.locator('body').evaluate(()=>document.fonts.ready);await p.waitForTimeout(500);
+ const lines=await f.locator('[data-e-field=groom],[data-e-field=bride],[data-e-field=child]').evaluateAll(es=>es.filter(e=>e.getClientRects().length).map(e=>{const range=document.createRange();range.selectNodeContents(e);return {text:e.textContent,overflow:e.scrollWidth-e.clientWidth,rects:[...range.getClientRects()].map(r=>({top:r.top,bottom:r.bottom}))}}));
+ await p.screenshot({path:`docs/templates/e-invitation-repair/${id}-reduced-long.png`});
+ for(const field of lines){assert.ok(field.overflow<=2);for(let i=1;i<field.rects.length;i++)assert.ok(field.rects[i].top>=field.rects[i-1].bottom-1,`${id} wrapped name lines must not overlap: ${JSON.stringify(field)}`)}
+ await p.screenshot({path:`docs/templates/e-invitation-repair/${id}-reduced-long.png`});report.push({id,fields:lines,noOverlap:true});console.log('PASS long names',id);await p.close();
+}await fs.writeFile('docs/templates/e-invitation-repair/long-name-report.json',JSON.stringify(report,null,2))}finally{await b.close()}})().catch(e=>{console.error(e);process.exitCode=1});

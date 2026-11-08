@@ -214,7 +214,7 @@ export async function processPaymentNotifications(
         FROM payment_orders p JOIN users u ON u.id=p.owner_id
         JOIN telegram_connections tc ON tc.user_id=u.id AND tc.status='active' AND tc.telegram_chat_id=u.telegram_user_id
         WHERE p.id=${row.payload.orderId} AND p.status='SUCCEEDED' AND p.verified_at IS NOT NULL
-          AND u.disabled_at IS NULL AND u.phone_shared_at IS NOT NULL`;
+          AND u.disabled_at IS NULL`;
       const order = target
         ? await botPaymentOrder(tx, target.owner_id, row.payload.orderId)
         : null;

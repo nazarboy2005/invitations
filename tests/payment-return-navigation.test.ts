@@ -13,7 +13,6 @@ const user = {
   id: "creator",
   telegramUserId: "123",
   displayName: "Creator",
-  phoneShared: true,
   isAdmin: false,
 };
 
@@ -64,7 +63,7 @@ test("payment destinations are allowlisted navigation hints, with no arbitrary r
     assert.equal(paymentReturnPath(param), null);
 });
 
-test("payment launches need a verified session/phone and can route admins to their own payment workspace", () => {
+test("payment launches need a verified session and can route admins to their own payment workspace", () => {
   const data = `start_param=payment_return_${id}&user=opaque&hash=opaque`;
   assert.equal(
     miniAppPaymentDestination(data, user),
@@ -75,10 +74,6 @@ test("payment launches need a verified session/phone and can route admins to the
     `/payment/return?order=${id}`,
   );
   assert.equal(miniAppPaymentDestination(data, null), null);
-  assert.equal(
-    miniAppPaymentDestination(data, { ...user, phoneShared: false }),
-    null,
-  );
   assert.equal(miniAppPaymentDestination("", user), null);
   assert.equal(miniAppPaymentDestination("start_param=/admin", user), null);
 });

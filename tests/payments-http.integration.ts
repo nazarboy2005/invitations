@@ -7,15 +7,21 @@ import { spawn, type ChildProcess } from "node:child_process";
 import { readFile, writeFile } from "node:fs/promises";
 import { createRequire } from "node:module";
 import { getDb, closeDb } from "../packages/database/src/index";
-import { digest, randomToken } from "../apps/web/src/server/auth/crypto";
+import {
+  digest,
+  randomToken,
+  verifyMiniAppLaunch,
+} from "../apps/web/src/server/auth/crypto";
 import { completeInvitation } from "./fixtures/publication";
 
 const sql = getDb(),
   userId = randomUUID(),
+  telegramId = Math.floor(Math.random() * 1e12) + 1,
   token = randomToken(),
   origin = "http://127.0.0.1:3102";
 const secret = "http-fixture-webhook-secret-only";
 const payments = new Map<string, Record<string, unknown>>();
+const launchKeys: string[] = [];
 let app: ChildProcess | undefined;
 let appOutput = "";
 const generatedFiles = ["next-env.d.ts", "tsconfig.json"].map(
@@ -58,7 +64,7 @@ before(async () => {
   );
   await new Promise<void>((resolve) => mock.listen(0, "127.0.0.1", resolve));
   const port = (mock.address() as { port: number }).port;
-  await sql`INSERT INTO users(id,telegram_user_id,display_name,phone_shared_at) VALUES(${userId},${-Math.floor(Math.random() * 1e13) - 1},'Disposable payment HTTP fixture',now())`;
+  await sql`INSERT INTO users(id,telegram_user_id,display_name) VALUES(${userId},${telegramId},'Disposable payment HTTP fixture')`;
   await sql`INSERT INTO sessions(user_id,token_hash,user_agent,expires_at,absolute_expires_at) VALUES(${userId},${digest(token)},'Payment HTTP fixture',now()+interval '1 hour',now()+interval '1 hour')`;
   const require = createRequire(
     new URL("../apps/web/package.json", import.meta.url),
@@ -117,6 +123,9 @@ after(async () => {
     );
   await new Promise<void>((resolve) => mock.close(() => resolve()));
   await sql.begin(async (tx) => {
+    await tx`DELETE FROM auth_requests WHERE user_id=${userId}`;
+    for (const key of launchKeys)
+      await tx`DELETE FROM miniapp_exchanges WHERE init_hash=${key}`;
     await tx`DELETE FROM jobs WHERE type='payment-confirmation' AND payload->>'orderId' IN (SELECT id::text FROM payment_orders WHERE owner_id=${userId})`;
     await tx`DELETE FROM payment_webhook_events WHERE order_id IN(SELECT id FROM payment_orders WHERE owner_id=${userId})`;
     await tx`DELETE FROM payment_orders WHERE owner_id=${userId}`;
@@ -145,6 +154,61 @@ function req(
 }
 test("HTTP checkout requires login/origin, verified webhook publishes, return parameters cannot forge success", async () => {
   const invitation = completeInvitation();
+  const fields = {
+    auth_date: String(Math.floor(Date.now() / 1000)),
+    query_id: randomUUID(),
+    user: JSON.stringify({
+      id: telegramId,
+      first_name: "Telegram identity QA",
+    }),
+  };
+  const params = new URLSearchParams(fields);
+  const signingSecret = createHmac("sha256", "WebAppData")
+    .update("http-fixture-telegram-token")
+    .digest();
+  params.set(
+    "hash",
+    createHmac("sha256", signingSecret)
+      .update(
+        Object.entries(fields)
+          .sort(([a], [b]) => a.localeCompare(b, "en"))
+          .map(([key, value]) => `${key}=${value}`)
+          .join("\n"),
+      )
+      .digest("hex"),
+  );
+  launchKeys.push(
+    verifyMiniAppLaunch(params.toString(), "http-fixture-telegram-token")
+      .replayKey,
+  );
+  const miniAppLogin = await req(
+    "/api/auth/telegram/mini-app",
+    { initData: params.toString() },
+    false,
+  );
+  assert.equal(miniAppLogin.status, 200, await miniAppLogin.clone().text());
+  assert.equal((await miniAppLogin.json()).user.id, userId);
+  const miniAppCookie = miniAppLogin.headers
+    .get("set-cookie")!
+    .match(/taklifnoma_session=([^;]+)/)![1];
+  const miniAppSession = await fetch(origin + "/api/auth/session", {
+    headers: { Cookie: `taklifnoma_session=${miniAppCookie}` },
+  });
+  assert.equal((await miniAppSession.json()).user.id, userId);
+  const browserToken = randomToken();
+  const [auth] =
+    await sql`INSERT INTO auth_requests(token_hash,browser_hash,user_id,state,expires_at,confirmed_at) VALUES(${digest(randomToken())},${digest(browserToken)},${userId},'confirmed',now()+interval '5 minutes',now()) RETURNING id`;
+  const webLogin = await fetch(origin + "/api/auth/telegram/complete", {
+    method: "POST",
+    headers: {
+      Origin: origin,
+      "Content-Type": "application/json",
+      Cookie: `taklifnoma_auth_browser=${browserToken}`,
+    },
+    body: JSON.stringify({ requestId: auth.id }),
+  });
+  assert.equal(webLogin.status, 200, await webLogin.clone().text());
+  assert.equal((await webLogin.json()).user.id, userId);
   assert.equal((await req("/api/payments", undefined, false)).status, 401);
   assert.equal(
     (
@@ -170,6 +234,10 @@ test("HTTP checkout requires login/origin, verified webhook publishes, return pa
   const savedResponse = await req("/api/invitations", { invitation });
   assert.equal(savedResponse.status, 201, await savedResponse.clone().text());
   const saved = (await savedResponse.json()).invitation;
+  // The same Telegram account can save and purchase without account phone data.
+  const session = await (await req("/api/auth/session")).json();
+  assert.equal(session.user.id, userId);
+  assert.equal("phoneShared" in session.user, false);
   assert.equal(
     (await req(`/api/invitations/${saved.id}/payment`, undefined, false))
       .status,
@@ -203,6 +271,13 @@ test("HTTP checkout requires login/origin, verified webhook publishes, return pa
   assert.equal(checkout.status, 200, await checkout.clone().text());
   assert.match(checkout.headers.get("cache-control")!, /no-store/);
   const order = (await checkout.json()).order;
+  const repeatedCheckout = await req(`/api/invitations/${saved.id}/checkout`, {
+    revision: saved.revision,
+    expectedAmountMinor: 100000,
+  });
+  assert.equal(repeatedCheckout.status, 200);
+  assert.equal((await repeatedCheckout.json()).order.id, order.id);
+  assert.equal(payments.size, 1);
   assert.equal(
     (await req(`/api/payments/${order.id}`, undefined, false)).status,
     401,

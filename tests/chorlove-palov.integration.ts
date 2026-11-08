@@ -17,7 +17,6 @@ const owner: SessionUser = {
   id: randomUUID(),
   telegramUserId: "",
   displayName: "Disposable Palov integration test",
-  phoneShared: true,
   isAdmin: false,
 };
 const token = randomToken();
@@ -46,8 +45,7 @@ before(async () => {
     "Integration requests must target a local app.",
   );
   const [user] = await sql`
-    INSERT INTO users(id,telegram_user_id,display_name,phone_number,phone_source,phone_shared_at)
-    VALUES(${owner.id},${-Math.floor(Math.random() * 1e12) - 1},${owner.displayName},'+000000000','telegram_contact',now())
+    INSERT INTO users(id,telegram_user_id,display_name) VALUES(${owner.id},${-Math.floor(Math.random() * 1e12) - 1},${owner.displayName})
     RETURNING telegram_user_id
   `;
   owner.telegramUserId = String(user.telegram_user_id);

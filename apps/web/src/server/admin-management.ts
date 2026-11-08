@@ -50,7 +50,7 @@ export async function listAdminUsers(
   const db = getDb();
   const predicate = db`(u.display_name ILIKE ${q.search} OR coalesce(u.telegram_username,'') ILIKE ${q.search} OR u.telegram_user_id::text ILIKE ${q.search} OR u.id::text=${q.q}) AND (${q.status}='' OR (${q.status}='active' AND u.disabled_at IS NULL) OR (${q.status}='suspended' AND u.disabled_at IS NOT NULL))`;
   const [rows, [count]] = await Promise.all([
-    db`SELECT u.id,u.display_name,u.telegram_username,u.telegram_user_id,right(u.phone_number,4) AS phone_last4,u.is_admin,u.disabled_at,u.created_at,
+    db`SELECT u.id,u.display_name,u.telegram_username,u.telegram_user_id,u.is_admin,u.disabled_at,u.created_at,
       (SELECT count(*)::int FROM invitations i WHERE i.owner_id=u.id AND i.status<>'deleted') AS invitations,
       (SELECT count(*)::int FROM invitations i WHERE i.owner_id=u.id AND i.status='published') AS published,
       EXISTS(SELECT 1 FROM telegram_connections tc WHERE tc.user_id=u.id AND tc.status='active' AND tc.broadcast_opt_out_at IS NULL AND tc.telegram_chat_id=u.telegram_user_id) AS reachable
@@ -63,7 +63,6 @@ export async function listAdminUsers(
       name: row.display_name,
       username: row.telegram_username,
       telegramId: String(row.telegram_user_id),
-      phoneLast4: row.phone_last4,
       isAdmin: hasAdminRole(row),
       disabledAt: iso(row.disabled_at),
       createdAt: iso(row.created_at)!,
@@ -110,14 +109,13 @@ export async function getAdminUser(id: string) {
   await requireAdmin();
   z.uuid().parse(id);
   const [row] =
-    await getDb()`SELECT u.id,u.display_name,u.telegram_user_id,u.telegram_username,u.phone_number,u.disabled_at,u.disabled_reason,u.is_admin,u.created_at,tc.status AS telegram_status,tc.broadcast_opt_out_at FROM users u LEFT JOIN telegram_connections tc ON tc.user_id=u.id WHERE u.id=${id}`;
+    await getDb()`SELECT u.id,u.display_name,u.telegram_user_id,u.telegram_username,u.disabled_at,u.disabled_reason,u.is_admin,u.created_at,tc.status AS telegram_status,tc.broadcast_opt_out_at FROM users u LEFT JOIN telegram_connections tc ON tc.user_id=u.id WHERE u.id=${id}`;
   if (!row) throw new ApiError(404, "NOT_FOUND", "Foydalanuvchi topilmadi.");
   return {
     id: row.id as string,
     name: String(row.display_name),
     telegramId: String(row.telegram_user_id),
     username: row.telegram_username as string | null,
-    phone: row.phone_number as string | null,
     disabledAt: iso(row.disabled_at),
     disabledReason: row.disabled_reason as string | null,
     isAdmin: hasAdminRole(row),

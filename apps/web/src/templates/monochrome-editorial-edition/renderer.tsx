@@ -1,11 +1,3 @@
 "use client";
-import { TemplateFrame } from "@/templates/template-frame";
-import { publicAsset } from "../../lib/public-asset";
-
-import {useMemo,useRef} from "react";
-import type {Invitation,Locale} from "@taklifnoma/contracts";
-import {makeLegacyData} from "@/templates/anor/renderer";
-import {catalogPreviewMusic} from "@/modules/catalog/catalog-music";
-import styles from "./renderer.module.css";
-type Props={invitation:Invitation;invitationId:string;locale:Locale;guestName?:string;guestToken?:string;preview?:boolean;fullPreview?:boolean;catalogMusic?:boolean;sampleWishes?:boolean;silentPlayback?:boolean;qaReducedMotion?:boolean;qaMobile?:boolean};
-export function MonochromeEditorialInvitation({invitation,invitationId,locale,guestName="",guestToken="",preview=false,fullPreview=false,catalogMusic=false,silentPlayback=false,qaReducedMotion=false,qaMobile=false}:Props){const frame=useRef<HTMLIFrameElement>(null);const base=useMemo(()=>makeLegacyData(invitation,locale,guestName),[invitation,locale,guestName]);const data=useMemo(()=>({...base,locale,invitationId,guestName,guestToken,preview,catalogMusic,silentPlayback:preview&&silentPlayback,music:catalogMusic?catalogPreviewMusic(invitation).url:(base.music.enabled?base.music.url:""),rsvp:invitation.rsvp,wishesEnabled:invitation.wishes.enabled}),[base,locale,invitationId,guestName,guestToken,preview,catalogMusic,silentPlayback,invitation.rsvp,invitation.wishes.enabled]);const latest=useRef(data);latest.current=data;const flags=[qaReducedMotion?"qaReducedMotion=1":"",qaMobile?"qaMobile=1":""].filter(Boolean).join("&");const src=publicAsset(`/templates/monochrome-editorial-edition/index.html${preview&&flags?`?${flags}`:""}`);return <div className={`${fullPreview?styles.full:preview?styles.preview:styles.public}${preview&&qaMobile?` ${styles.qaMobile}`:""}`}><TemplateFrame ref={frame} name={JSON.stringify(data)} title={`${base.groom}${base.bride?` & ${base.bride}`:""} ? Monochrome Editorial`} src={src} onReady={()=>{const w=frame.current?.contentWindow;if(w){w.name=JSON.stringify(latest.current);w.postMessage({type:"monochrome-editorial-edition:update",payload:latest.current},window.location.origin)}}} allow="autoplay; fullscreen" loading="eager"/></div>}
+import { EInvitation, type EInvitationProps } from "@/templates/e-invitation/renderer";
+export function MonochromeEditorialInvitation(props: EInvitationProps) { return <EInvitation {...props} templateId="monochrome-editorial-edition" name="Monochrome Editorial" />; }

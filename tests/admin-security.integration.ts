@@ -88,8 +88,7 @@ before(async () => {
     "Admin tests must target a local app",
   );
   for (const [role, id] of Object.entries(users)) {
-    await db`INSERT INTO users(id,telegram_user_id,display_name,phone_shared_at,is_admin)
-      VALUES(${id},${-Math.floor(Math.random() * 1e12) - 1},${"Disposable admin QA " + role},now(),${role !== "creator"})`;
+    await db`INSERT INTO users(id,telegram_user_id,display_name,is_admin) VALUES(${id},${-Math.floor(Math.random() * 1e12) - 1},${"Disposable admin QA " + role},${role !== "creator"})`;
     await session(role, id);
   }
   await session("stale", users.admin, "13 hours");

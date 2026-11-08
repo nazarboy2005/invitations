@@ -28,7 +28,6 @@ const owner: SessionUser = {
   id: randomUUID(),
   telegramUserId: "",
   displayName: "Publication test",
-  phoneShared: true,
   isAdmin: false,
 };
 const stranger: SessionUser = { ...owner, id: randomUUID() };
@@ -39,7 +38,7 @@ before(async () => {
   );
   for (const user of [owner, stranger]) {
     const [row] =
-      await sql`INSERT INTO users(id,telegram_user_id,display_name,phone_number,phone_source,phone_shared_at) VALUES(${user.id},${-Math.floor(Math.random() * 1e12) - 1},'Disposable publishing test','+000000000','telegram_contact',now()) RETURNING telegram_user_id`;
+      await sql`INSERT INTO users(id,telegram_user_id,display_name) VALUES(${user.id},${-Math.floor(Math.random() * 1e12) - 1},'Disposable publishing test') RETURNING telegram_user_id`;
     user.telegramUserId = String(row.telegram_user_id);
   }
   await sql`INSERT INTO sessions(user_id,token_hash,user_agent,expires_at,absolute_expires_at) VALUES(${owner.id},${digest(token)},'Publishing integration test',now()+interval '1 hour',now()+interval '1 hour')`;

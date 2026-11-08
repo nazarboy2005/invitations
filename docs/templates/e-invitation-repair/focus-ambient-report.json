@@ -1,0 +1,33 @@
+[
+  {
+    "id": "olive-manor-edition",
+    "openingFocusTrap": true,
+    "keyboardOpen": true,
+    "unlockedContent": true,
+    "ambient": null
+  },
+  {
+    "id": "islamic-edition",
+    "openingFocusTrap": true,
+    "keyboardOpen": true,
+    "unlockedContent": true,
+    "ambient": {
+      "time": 1.6148,
+      "paused": false
+    }
+  },
+  {
+    "id": "monochrome-editorial-edition",
+    "openingFocusTrap": true,
+    "keyboardOpen": true,
+    "unlockedContent": true,
+    "ambient": null
+  },
+  {
+    "id": "xatna-edition",
+    "openingFocusTrap": true,
+    "keyboardOpen": true,
+    "unlockedContent": true,
+    "ambient": null
+  }
+]

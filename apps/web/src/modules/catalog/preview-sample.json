@@ -162,6 +162,34 @@
   "startsAt": "2027-06-12T17:00",
   "timezone": "Asia/Tashkent",
   "templateSamples": {
+    "olive-manor-edition": {
+      "gallery": [
+        {"id":"olive-source-1","url":"/templates/olive-manor-edition/source/current/assets/couple-gallery-v20261007-01.webp","alt":"","caption":""},
+        {"id":"olive-source-2","url":"/templates/olive-manor-edition/source/current/assets/couple-gallery-v20261007-02.webp","alt":"","caption":""},
+        {"id":"olive-source-3","url":"/templates/olive-manor-edition/source/current/assets/couple-gallery-v20261007-03.webp","alt":"","caption":""},
+        {"id":"olive-source-4","url":"/templates/olive-manor-edition/source/current/assets/couple-gallery-v20261007-04.webp","alt":"","caption":""},
+        {"id":"olive-source-5","url":"/templates/olive-manor-edition/source/current/assets/couple-gallery-v20261007-05.webp","alt":"","caption":""}
+      ]
+    },
+    "islamic-edition": {
+      "gallery": [
+        {"id":"islamic-source-1","url":"/templates/islamic-edition/source/current/assets/gallery-romance-v1-01.webp","alt":"","caption":""},
+        {"id":"islamic-source-2","url":"/templates/islamic-edition/source/current/assets/gallery-romance-v2-02.webp","alt":"","caption":""},
+        {"id":"islamic-source-3","url":"/templates/islamic-edition/source/current/assets/gallery-romance-v1-03.webp","alt":"","caption":""},
+        {"id":"islamic-source-4","url":"/templates/islamic-edition/source/current/assets/gallery-romance-v1-04.webp","alt":"","caption":""},
+        {"id":"islamic-source-5","url":"/templates/islamic-edition/source/current/assets/gallery-romance-v1-05.webp","alt":"","caption":""}
+      ]
+    },
+    "monochrome-editorial-edition": {
+      "gallery": [
+        {"id":"mono-source-1","url":"/templates/monochrome-editorial-edition/source/current/assets/couple-gallery-v20261007-01.webp","alt":"","caption":""},
+        {"id":"mono-source-2","url":"/templates/monochrome-editorial-edition/source/current/assets/couple-gallery-v20261007-02.webp","alt":"","caption":""},
+        {"id":"mono-source-3","url":"/templates/monochrome-editorial-edition/source/current/assets/couple-gallery-v20261007-03.webp","alt":"","caption":""},
+        {"id":"mono-source-4","url":"/templates/monochrome-editorial-edition/source/current/assets/couple-gallery-v20261007-04.webp","alt":"","caption":""},
+        {"id":"mono-source-5","url":"/templates/monochrome-editorial-edition/source/current/assets/couple-gallery-v20261007-05.webp","alt":"","caption":""},
+        {"id":"mono-source-6","url":"/templates/monochrome-editorial-edition/source/current/assets/couple-gallery-v20261007-06.webp","alt":"","caption":""}
+      ]
+    },
     "stained-glass": {
       "scratchPhoto": "/templates/stained-glass/assets/couple-scratch-inspo.webp",
       "gallery": [

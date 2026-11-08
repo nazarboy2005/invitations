@@ -5,6 +5,10 @@ export const COVER_VERSION = "portrait-4";
 export const COVER_VIEWPORT = { width: 480, height: 800 };
 export type CoverScene = "opening" | "opened" | "lid" | "book";
 const openedHeroes = new Set([
+  "olive-manor-edition",
+  "islamic-edition",
+  "monochrome-editorial-edition",
+  "xatna-edition",
   "stained-glass",
   "sunset",
   "swan-garden",

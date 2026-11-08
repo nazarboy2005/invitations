@@ -56,7 +56,7 @@ export async function POST(request: Request) {
           "Joriy administratorning Telegram hisobidan tasdiqlang.",
         );
       const [admin] =
-        await tx`SELECT id,telegram_user_id,is_admin FROM users WHERE id=${user.id} AND phone_shared_at IS NOT NULL AND disabled_at IS NULL FOR SHARE`;
+        await tx`SELECT id,telegram_user_id,is_admin FROM users WHERE id=${user.id} AND disabled_at IS NULL FOR SHARE`;
       const [session] =
         await tx`UPDATE sessions SET revoked_at=now() WHERE token_hash=${digest(previousToken)} AND user_id=${user.id} AND revoked_at IS NULL AND expires_at>now() AND absolute_expires_at>now() RETURNING id`;
       if (!admin || !hasAdminRole(admin) || !session)

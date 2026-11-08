@@ -9,11 +9,11 @@ const template = templateById("islamic-edition");
 const source = resolve(root, "apps/web/public/templates/islamic-edition/source/reference");
 const runtime = resolve(root, "apps/web/public/templates/islamic-edition");
 
-test("Islamic Edition is registered as an unpublished E-invitation wedding template", () => {
+test("Islamic Edition is published as a complete E-invitation wedding template", () => {
   assert.ok(template);
   assert.equal(template.name, "Islamic Edition");
-  assert.equal(template.published, false);
-  assert.equal(template.previewImage, "/templates/islamic-edition/source/reference/assets/video-start.jpg");
+  assert.equal(template.published, true);
+  assert.equal(template.previewImage, "/templates/islamic-edition/catalog.webp");
   assert.deepEqual(template.categoryIds, ["wedding"]);
   assert.deepEqual(template.supportedEventTypes, ["wedding"]);
 });
@@ -47,14 +47,14 @@ test("the registration migration keeps Islamic Edition unpublished", () => {
 });
 
 test("the app renderer uses invitation APIs, real data, and no source site tracking", () => {
-  const renderer = readFileSync(resolve(runtime, "renderer.js"), "utf8");
-  const adapter = readFileSync(resolve(root, "apps/web/src/templates/islamic-edition/renderer.tsx"), "utf8");
+  const renderer = readFileSync(resolve(root, "apps/web/public/templates/e-invitation-shared/runtime.js"), "utf8");
+  const adapter = readFileSync(resolve(root, "apps/web/src/templates/e-invitation/renderer.tsx"), "utf8");
   assert.match(renderer, /\/rsvp/);
   assert.match(renderer, /\/wishes/);
   assert.doesNotMatch(renderer, /gift\.webp/);
-  assert.match(renderer, /bouquet\.webp/);
+  assert.match(readFileSync(resolve(runtime, "template.html"), "utf8"), /bouquet\.webp/);
   assert.match(adapter, /catalogPreviewMusic/);
-  assert.match(adapter, /source\.music\.url/);
-  assert.match(adapter, /islamic-edition:update/);
+  assert.match(adapter, /data\.music\.url/);
+  assert.match(adapter, /templateId}:update/);
   assert.doesNotMatch(renderer, /demo@example|0000 0000|2030|cloudflareinsights|webhook/i);
 });

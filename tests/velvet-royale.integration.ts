@@ -17,7 +17,7 @@ test("Velvet Royale saves, publishes, renders all locales and persists real gues
   assert.ok(["localhost", "127.0.0.1"].includes(new URL(origin).hostname));
   assert.equal(process.env.PUBLISHING_MODE || "free", "free", "This check never starts a payment.");
   const db = getDb(), token = randomToken(), guestToken = randomToken();
-  const owner: SessionUser = { id: randomUUID(), telegramUserId: "", displayName: "Disposable Royale verification", phoneShared: true, isAdmin: false };
+  const owner: SessionUser = { id: randomUUID(), telegramUserId: "", displayName: "Disposable Royale verification", isAdmin: false };
   let invitation = createInvitation("royal-burgundy-edition");
   invitation.eventType = "wedding";
   let browser: any;
@@ -28,7 +28,7 @@ test("Velvet Royale saves, publishes, renders all locales and persists real gues
     ...(body === undefined ? {} : { body: JSON.stringify(body) }),
   });
   try {
-    const [user] = await db`INSERT INTO users(id,telegram_user_id,display_name,phone_number,phone_source,phone_shared_at) VALUES(${owner.id},${-Math.floor(Math.random()*1e12)-1},${owner.displayName},'+000000000','telegram_contact',now()) RETURNING telegram_user_id`;
+    const [user] = await db`INSERT INTO users(id,telegram_user_id,display_name) VALUES(${owner.id},${-Math.floor(Math.random()*1e12)-1},${owner.displayName}) RETURNING telegram_user_id`;
     owner.telegramUserId = String(user.telegram_user_id);
     await db`INSERT INTO sessions(user_id,token_hash,user_agent,expires_at,absolute_expires_at) VALUES(${owner.id},${digest(token)},'Disposable Royale verification',now()+interval '1 hour',now()+interval '1 hour')`;
     await db`INSERT INTO invitations(id,owner_id,template_id,status,data) VALUES(${invitation.id},${owner.id},'royal-burgundy-edition','draft',${db.json(invitation)})`;

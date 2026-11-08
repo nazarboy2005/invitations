@@ -55,7 +55,6 @@ test(
               user: {
                 id: "dashboard-qa",
                 displayName: "Dashboard QA",
-                phoneShared: true,
                 isAdmin: false,
               },
               configured: true,

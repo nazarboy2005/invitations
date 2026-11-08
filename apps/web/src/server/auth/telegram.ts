@@ -2,7 +2,7 @@ import { BRAND_NAME } from "../../lib/brand";
 import { getDb } from "@taklifnoma/database";
 import type postgres from "postgres";
 import { AuthError } from "./index";
-import { digest, isOwnContact, type TelegramIdentity } from "./crypto";
+import { digest, type TelegramIdentity } from "./crypto";
 import { hasAdminRole } from "./admin-role";
 import { paymentReturnPath } from "../../modules/payments/payment-navigation";
 import {
@@ -15,9 +15,6 @@ type TelegramMessage = {
   from?: TelegramIdentity;
   chat: { id: number; type: string };
   text?: string;
-  contact?: { user_id?: number; phone_number?: string };
-  forward_origin?: unknown;
-  forward_date?: number;
 };
 type Update = {
   update_id: number;
@@ -63,14 +60,6 @@ function escapeHtml(value: string) {
       })[character]!,
   );
 }
-async function sendSticker(chatId: number, stickerId: string | undefined) {
-  if (!stickerId) return;
-  try {
-    await telegramCall("sendSticker", { chat_id: chatId, sticker: stickerId });
-  } catch {
-    // Stickers are optional decoration; they must not block login or onboarding.
-  }
-}
 async function identify(
   identity: TelegramIdentity,
   chatId: number,
@@ -84,55 +73,34 @@ async function identify(
   await db`INSERT INTO telegram_connections(user_id,telegram_chat_id,status) VALUES(${user.id},${String(chatId)},'active') ON CONFLICT(user_id) DO UPDATE SET telegram_chat_id=EXCLUDED.telegram_chat_id,status='active',updated_at=now()`;
   return user;
 }
-const contactKeyboard = {
-  keyboard: [[{ text: "Telefon raqamimni yuborish", request_contact: true }]],
-  resize_keyboard: true,
-  one_time_keyboard: true,
-};
-function continueKeyboard() {
+function continueKeyboard(isAdmin = false) {
   const url = process.env.APP_URL;
   return url
     ? {
         inline_keyboard: [
           [
             {
-              text: "Sayt yoki Mini Appni ochish",
-              web_app: { url },
+              text: "🌸 Taklifnoma yaratish",
+              web_app: {
+                url: isAdmin ? new URL("/dashboard", url).href : url,
+              },
             },
           ],
         ],
       }
     : undefined;
 }
-async function askContact(chatId: number) {
-  await telegramCall("sendMessage", {
-    chat_id: chatId,
-    parse_mode: "HTML",
-    text: "<b>Telefon raqamingizni ulashing</b>\n\nDavom etish uchun o‘z raqamingizni tugma orqali yuboring.",
-    reply_markup: {
-      ...contactKeyboard,
-      ...(continueKeyboard()
-        ? { inline_keyboard: continueKeyboard()!.inline_keyboard }
-        : {}),
-    },
-  });
-}
 async function confirmSiteLogin(
   chatId: number,
   requestId: string,
   db: postgres.TransactionSql,
 ) {
-  await db`UPDATE auth_requests a SET state='confirmed',confirmed_at=now() FROM users u WHERE a.id=${requestId} AND a.user_id=u.id AND u.phone_shared_at IS NOT NULL AND a.state='identified' AND a.expires_at>now() AND EXISTS(SELECT 1 FROM telegram_connections c WHERE c.user_id=u.id AND c.telegram_chat_id=${String(chatId)} AND c.status='active')`;
+  await db`UPDATE auth_requests a SET state='confirmed',confirmed_at=now() FROM users u WHERE a.id=${requestId} AND a.user_id=u.id AND u.disabled_at IS NULL AND a.state='identified' AND a.expires_at>now() AND EXISTS(SELECT 1 FROM telegram_connections c WHERE c.user_id=u.id AND c.telegram_chat_id=${String(chatId)} AND c.status='active')`;
   await telegramCall("sendMessage", {
     chat_id: chatId,
     parse_mode: "HTML",
     text: "<b>Kirish tasdiqlandi.</b> Saytga qayting.",
-    reply_markup: {
-      remove_keyboard: true,
-      ...(continueKeyboard()
-        ? { inline_keyboard: continueKeyboard()!.inline_keyboard }
-        : {}),
-    },
+    reply_markup: continueKeyboard(),
   });
 }
 export async function processTelegramUpdate(raw: Record<string, unknown>) {
@@ -201,41 +169,36 @@ async function processLocked(update: Update, db: postgres.TransactionSql) {
       return;
     }
     if (adminCommand) {
-      if (!user.phone_shared_at) await askContact(message.chat.id);
-      else
-        await telegramCall("sendMessage", {
-          chat_id: message.chat.id,
-          text: "Boshqaruvni ochish uchun quyidagi tugmani bosing. Kirish Telegram hisobingiz orqali tekshiriladi.",
-          reply_markup: {
-            inline_keyboard: [
-              [
-                {
-                  text: "🛡 Boshqaruvga kirish",
-                  web_app: {
-                    url: new URL("/dashboard", process.env.APP_URL).href,
-                  },
+      await telegramCall("sendMessage", {
+        chat_id: message.chat.id,
+        text: "Boshqaruvni ochish uchun quyidagi tugmani bosing. Kirish Telegram hisobingiz orqali tekshiriladi.",
+        reply_markup: {
+          inline_keyboard: [
+            [
+              {
+                text: "🛡 Boshqaruvga kirish",
+                web_app: {
+                  url: new URL("/dashboard", process.env.APP_URL).href,
                 },
-              ],
+              },
             ],
-          },
-        });
+          ],
+        },
+      });
       await db`INSERT INTO telegram_updates(update_id) VALUES(${update.update_id}) ON CONFLICT DO NOTHING`;
       return;
     }
     const start = message.text?.match(/^\/start(?:@\w+)?(?:\s+(\S+))?$/);
     const paymentPath = paymentReturnPath(start?.[1]);
     if (paymentPath) {
-      if (!user.phone_shared_at) await askContact(message.chat.id);
-      else {
-        const requested =
-          new URL(paymentPath, process.env.APP_URL).searchParams.get("order") ??
-          undefined;
-        const order = await botPaymentOrder(db, String(user.id), requested);
-        await telegramCall("sendMessage", {
-          chat_id: message.chat.id,
-          ...paymentTelegramMessage(order, paymentPath),
-        });
-      }
+      const requested =
+        new URL(paymentPath, process.env.APP_URL).searchParams.get("order") ??
+        undefined;
+      const order = await botPaymentOrder(db, String(user.id), requested);
+      await telegramCall("sendMessage", {
+        chat_id: message.chat.id,
+        ...paymentTelegramMessage(order, paymentPath),
+      });
     } else if (start?.[1]?.startsWith("auth_")) {
       const token = start[1].slice(5);
       const [auth] = /^[A-Za-z0-9_-]{43}$/.test(token)
@@ -247,74 +210,28 @@ async function processLocked(update: Update, db: postgres.TransactionSql) {
           chat_id: message.chat.id,
           text: "Kirish havolasi eskirgan. Saytda qayta urinib ko‘ring.",
         });
-      else if (!user.phone_shared_at) await askContact(message.chat.id);
       else await confirmSiteLogin(message.chat.id, auth.id, db);
-    } else if (message.contact) {
-      if (
-        !isOwnContact(
-          identity.id,
-          message.contact,
-          !!message.forward_origin || !!message.forward_date,
-        )
-      )
-        await askContact(message.chat.id);
-      else {
-        const normalized =
-          "+" + message.contact.phone_number!.replace(/\D/g, "");
-        await db`UPDATE users SET phone_number=${normalized},phone_source='telegram_contact',phone_shared_at=now(),updated_at=now() WHERE id=${user.id}`;
-        await sendSticker(
-          message.chat.id,
-          process.env.TELEGRAM_SUCCESS_STICKER_ID,
-        );
-        await telegramCall("sendMessage", {
-          parse_mode: "HTML",
-          chat_id: message.chat.id,
-          text: "Raqamingiz saqlandi. Saytga qayting.",
-          reply_markup: {
-            remove_keyboard: true,
-            ...(continueKeyboard()
-              ? { inline_keyboard: continueKeyboard()!.inline_keyboard }
-              : {}),
-          },
-        });
-        const [auth] =
-          await db`SELECT * FROM auth_requests WHERE user_id=${user.id} AND state='identified' AND expires_at>now() ORDER BY created_at DESC LIMIT 1`;
-        if (auth) await confirmSiteLogin(message.chat.id, auth.id, db);
-        else
-          await telegramCall("sendMessage", {
-            chat_id: message.chat.id,
-            parse_mode: "HTML",
-            text: "Tayyor. Davom etish uchun saytni oching.",
-            reply_markup: continueKeyboard(),
-          });
-      }
     } else if (start) {
-      if (!user.phone_shared_at) await askContact(message.chat.id);
-      else
-        await sendSticker(
-          message.chat.id,
-          process.env.TELEGRAM_WELCOME_STICKER_ID,
-        );
+      const welcome = `<b>${BRAND_NAME}</b> ♡
+
+Assalomu alaykum, <b>${escapeHtml(identity.first_name)}</b>! 👋
+
+<blockquote><i><b>Baxt</b> — quvonchingizni siz uchun eng aziz insonlar bilan baham ko‘rishdir.</i></blockquote>
+
+<blockquote><i><b>To‘y</b> esa ana shunday baxt ulashuvchi unutilmas kunlardan biridir.</i></blockquote>
+
+<b>🌿<a href="https://fotiha.uz/">${BRAND_NAME}</a></b> bilan o‘zingizga mos, nafis va o‘ziga xos taklifnoma yarating. Uni yaqinlaringiz bilan baham ko‘ring, ularning tashrif javoblari, to'yona va samimiy tilaklarini bir joyda jamlang.
+
+🤫 Kichik bir sir: <tg-spoiler>Eng go‘zal xotiralar eng samimiy taklifdan boshlanadi.</tg-spoiler>
+
+Boshlaymizmi?`;
+      const miniAppKeyboard = continueKeyboard(hasAdminRole(user));
       await telegramCall("sendMessage", {
         parse_mode: "HTML",
         chat_id: message.chat.id,
-        text: `<b>${BRAND_NAME}</b>\n\nSalom, ${escapeHtml(identity.first_name)}. Taklifnoma yarating va mehmonlar javobi hamda tilaklarini kuzating.`,
-        reply_markup: {
-          inline_keyboard: [
-            [
-              {
-                text: hasAdminRole(user)
-                  ? "Boshqaruvni ochish"
-                  : "Taklifnoma yaratish",
-                web_app: {
-                  url: hasAdminRole(user)
-                    ? new URL("/dashboard", process.env.APP_URL).href
-                    : process.env.APP_URL,
-                },
-              },
-            ],
-          ],
-        },
+        text: welcome,
+        link_preview_options: { is_disabled: true },
+        reply_markup: miniAppKeyboard,
       });
     }
   }
@@ -327,7 +244,7 @@ async function processLocked(update: Update, db: postgres.TransactionSql) {
       callback.message.chat.id === callback.from.id
     ) {
       const [auth] =
-        await db`UPDATE auth_requests a SET state='confirmed',confirmed_at=now() FROM users u WHERE a.id=${id} AND a.user_id=u.id AND u.telegram_user_id=${String(callback.from.id)} AND u.phone_shared_at IS NOT NULL AND u.disabled_at IS NULL AND a.state='identified' AND a.expires_at>now() RETURNING a.id`;
+        await db`UPDATE auth_requests a SET state='confirmed',confirmed_at=now() FROM users u WHERE a.id=${id} AND a.user_id=u.id AND u.telegram_user_id=${String(callback.from.id)} AND u.disabled_at IS NULL AND a.state='identified' AND a.expires_at>now() RETURNING a.id`;
       await telegramCall("answerCallbackQuery", {
         callback_query_id: callback.id,
         text: auth

@@ -25,7 +25,7 @@ export async function POST(
         .parse(await readJson(request, 5000));
     await getAdminUser(id);
     const [row] =
-      await getDb()`SELECT * FROM users WHERE id=${id} AND disabled_at IS NULL AND phone_shared_at IS NOT NULL`;
+      await getDb()`SELECT * FROM users WHERE id=${id} AND disabled_at IS NULL`;
     if (!row)
       throw new ApiError(
         409,

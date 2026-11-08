@@ -22,7 +22,6 @@ const account = {
   telegram_user_id: "123456789",
   is_admin: false,
   disabled_at: null,
-  phone_shared_at: new Date(),
   authenticated_at: new Date().toISOString(),
 };
 

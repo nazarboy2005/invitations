@@ -1,0 +1,148 @@
+[
+  {
+    "id": "olive-manor-edition",
+    "fields": [
+      {
+        "text": "Gulbahor-Marguba Sayyidabonu",
+        "overflow": 0,
+        "rects": [
+          {
+            "top": 253,
+            "bottom": 300
+          }
+        ]
+      },
+      {
+        "text": "Jahongir-Shohruhbek Mirzohid",
+        "overflow": 0,
+        "rects": [
+          {
+            "top": 296.59375,
+            "bottom": 346.59375
+          }
+        ]
+      }
+    ],
+    "noOverlap": true
+  },
+  {
+    "id": "islamic-edition",
+    "fields": [
+      {
+        "text": "Gulbahor-Marguba Sayyidabonu",
+        "overflow": 0,
+        "rects": [
+          {
+            "top": 976,
+            "bottom": 1013
+          }
+        ]
+      },
+      {
+        "text": "Jahongir-Shohruhbek Mirzohid",
+        "overflow": 0,
+        "rects": [
+          {
+            "top": 1036.4375,
+            "bottom": 1074.4375
+          }
+        ]
+      }
+    ],
+    "noOverlap": true
+  },
+  {
+    "id": "monochrome-editorial-edition",
+    "fields": [
+      {
+        "text": "Gulbahor-Marguba Sayyidabonu",
+        "overflow": 0,
+        "rects": [
+          {
+            "top": 477.40625,
+            "bottom": 504.40625
+          },
+          {
+            "top": 507.40625,
+            "bottom": 534.40625
+          }
+        ]
+      },
+      {
+        "text": "Jahongir-Shohruhbek Mirzohid",
+        "overflow": 0,
+        "rects": [
+          {
+            "top": 590.40625,
+            "bottom": 617.40625
+          },
+          {
+            "top": 620.40625,
+            "bottom": 647.40625
+          }
+        ]
+      },
+      {
+        "text": "Gulbahor-Marguba Sayyidabonu",
+        "overflow": 0,
+        "rects": [
+          {
+            "top": 7997.4375,
+            "bottom": 8024.4375
+          },
+          {
+            "top": 8027.4375,
+            "bottom": 8054.4375
+          },
+          {
+            "top": 8057.4375,
+            "bottom": 8084.4375
+          },
+          {
+            "top": 8087.4375,
+            "bottom": 8114.4375
+          }
+        ]
+      },
+      {
+        "text": "Jahongir-Shohruhbek Mirzohid",
+        "overflow": 0,
+        "rects": [
+          {
+            "top": 7997.4375,
+            "bottom": 8024.4375
+          },
+          {
+            "top": 8027.4375,
+            "bottom": 8054.4375
+          },
+          {
+            "top": 8057.4375,
+            "bottom": 8084.4375
+          },
+          {
+            "top": 8087.4375,
+            "bottom": 8114.4375
+          }
+        ]
+      }
+    ],
+    "noOverlap": true
+  },
+  {
+    "id": "xatna-edition",
+    "fields": [
+      {
+        "text": "Gulbahor-Marguba Sayyidabonu",
+        "overflow": 0,
+        "rects": [
+          {
+            "top": 1361.734375,
+            "bottom": 1396.734375
+          }
+        ]
+      }
+    ],
+    "noOverlap": true
+  }
+]

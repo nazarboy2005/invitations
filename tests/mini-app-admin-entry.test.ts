@@ -11,7 +11,6 @@ const admin = {
   id: "fixture-admin",
   telegramUserId: "123456789",
   displayName: "Admin",
-  phoneShared: true,
   isAdmin: true,
 };
 const authenticated: SessionResponse = { user: admin, configured: true };
@@ -23,10 +22,6 @@ test("Mini App admin entry requires a verified server role and preserves persona
     assert.equal(miniAppAdminDestination(path, "", null), null);
     assert.equal(
       miniAppAdminDestination(path, "", { ...admin, isAdmin: false }),
-      null,
-    );
-    assert.equal(
-      miniAppAdminDestination(path, "", { ...admin, phoneShared: false }),
       null,
     );
     assert.equal(miniAppAdminDestination(path, "?mode=personal", admin), null);
@@ -106,14 +101,20 @@ test("concurrent Mini App bootstraps exchange a launch only once and use the res
   }
 });
 
-test("phone verification and blocked accounts never gain an admin redirect", async () => {
+test("blocked accounts never gain an admin redirect", async () => {
   const original = globalThis.fetch;
   globalThis.fetch = async (input) =>
     String(input) === "/api/auth/session"
       ? Response.json(authenticated)
-      : Response.json({ phoneRequired: true }, { status: 403 });
+      : Response.json(
+          { error: { code: "ACCOUNT_UNAVAILABLE" } },
+          { status: 403 },
+        );
   try {
-    assert.equal((await loadClientSession("phone-required-launch")).user, null);
+    assert.equal(
+      (await loadClientSession("blocked-account-launch")).user,
+      null,
+    );
   } finally {
     globalThis.fetch = original;
   }

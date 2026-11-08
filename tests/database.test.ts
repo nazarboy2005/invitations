@@ -92,17 +92,11 @@ test("Korporativ event compatibility is additive and published", async () => {
     /check constraint/i,
   );
 });
-async function user(phone = true) {
+async function user() {
   const id = randomUUID();
   await db.query(
-    "INSERT INTO users(id,telegram_user_id,display_name,phone_number,phone_source,phone_shared_at) VALUES($1,$2,'Nazar',$3,$4,$5)",
-    [
-      id,
-      ++telegramId,
-      phone ? "+998901234567" : null,
-      phone ? "telegram_contact" : null,
-      phone ? new Date() : null,
-    ],
+    "INSERT INTO users(id,telegram_user_id,display_name) VALUES($1,$2,'Nazar')",
+    [id, ++telegramId],
   );
   return id;
 }
@@ -284,9 +278,9 @@ test("contact migration keeps phone and Telegram values and removes legacy cards
     telegramUsername: "@taklifnoma",
   });
 });
-test("session lookup excludes incomplete phone onboarding, revoked, idle-expired, and absolute-expired sessions", async () => {
+test("session lookup excludes revoked, idle-expired, and absolute-expired sessions", async () => {
   const complete = await user(),
-    incomplete = await user(false);
+    incomplete = await user();
   const insert = (
     owner: string,
     token: string,
@@ -301,22 +295,18 @@ test("session lookup excludes incomplete phone onboarding, revoked, idle-expired
   const future = new Date(Date.now() + 86400000).toISOString(),
     past = new Date(Date.now() - 86400000).toISOString();
   await insert(complete, "valid", future, future);
-  await insert(incomplete, "no-phone", future, future);
+  await insert(incomplete, "another-user", future, future);
   await insert(complete, "revoked", future, future, new Date().toISOString());
   await insert(complete, "idle-expired", past, future);
   await insert(complete, "absolute-expired", future, past);
   const lookup = (token: string) =>
     db.query(
-      "SELECT s.id FROM sessions s JOIN users u ON u.id=s.user_id WHERE s.token_hash=$1 AND s.revoked_at IS NULL AND s.expires_at>now() AND s.absolute_expires_at>now() AND u.phone_shared_at IS NOT NULL",
+      "SELECT s.id FROM sessions s JOIN users u ON u.id=s.user_id WHERE s.token_hash=$1 AND s.revoked_at IS NULL AND s.expires_at>now() AND s.absolute_expires_at>now() AND u.disabled_at IS NULL",
       [token],
     );
   assert.equal((await lookup("valid")).rows.length, 1);
-  for (const token of [
-    "no-phone",
-    "revoked",
-    "idle-expired",
-    "absolute-expired",
-  ])
+  assert.equal((await lookup("another-user")).rows.length, 1);
+  for (const token of ["revoked", "idle-expired", "absolute-expired"])
     assert.equal((await lookup(token)).rows.length, 0, token);
 });
 test("pending wishes stay private; approval publishes; soft deletion keeps dashboard evidence", async () => {
@@ -666,15 +656,25 @@ test("template migrations publish completed designs while keeping unfinished des
   ]) {
     assert.ok(
       assignments.rows.some(
-        (row) => row.template_id === templateId && row.category_id === "wedding",
+        (row) =>
+          row.template_id === templateId && row.category_id === "wedding",
       ),
       `${templateId} must have a wedding category assignment`,
     );
   }
-  if (existsSync(new URL("../packages/database/migrations/0090_register_olive_manor.sql", import.meta.url))) {
+  if (
+    existsSync(
+      new URL(
+        "../packages/database/migrations/0090_register_olive_manor.sql",
+        import.meta.url,
+      ),
+    )
+  ) {
     assert.ok(
       assignments.rows.some(
-        (row) => row.template_id === "olive-manor-edition" && row.category_id === "wedding",
+        (row) =>
+          row.template_id === "olive-manor-edition" &&
+          row.category_id === "wedding",
       ),
       "Olive Manor registration must add its wedding category assignment",
     );

@@ -39,13 +39,9 @@ export async function POST(request: Request) {
           409,
         );
       const [row] =
-        await tx`SELECT * FROM users WHERE id=${auth.user_id} AND phone_shared_at IS NOT NULL FOR SHARE`;
+        await tx`SELECT * FROM users WHERE id=${auth.user_id} FOR SHARE`;
       if (!row)
-        throw new AuthError(
-          "PHONE_REQUIRED",
-          "Share your own Telegram phone number",
-          403,
-        );
+        throw new AuthError("ACCOUNT_UNAVAILABLE", "Hisob topilmadi.", 403);
       if (row.disabled_at)
         throw new AuthError(
           "ACCOUNT_UNAVAILABLE",

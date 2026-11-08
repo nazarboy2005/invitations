@@ -22,7 +22,6 @@ const owner: SessionUser = {
   id: randomUUID(),
   telegramUserId: "",
   displayName: "Disposable Wedding integration test",
-  phoneShared: true,
   isAdmin: false,
 };
 const invitation = createInvitation("invitate-wedding");
@@ -92,8 +91,7 @@ before(async () => {
   );
 
   const [user] = await sql`
-    INSERT INTO users(id,telegram_user_id,display_name,phone_number,phone_source,phone_shared_at)
-    VALUES(${owner.id},${-Math.floor(Math.random() * 1e12) - 1},${owner.displayName},'+000000000','telegram_contact',now())
+    INSERT INTO users(id,telegram_user_id,display_name) VALUES(${owner.id},${-Math.floor(Math.random() * 1e12) - 1},${owner.displayName})
     RETURNING telegram_user_id
   `;
   insertedUser = true;

@@ -104,7 +104,6 @@ export type AdminUser = {
   name: string;
   username: string | null;
   telegramId: string;
-  phoneLast4: string | null;
   isAdmin: boolean;
   disabledAt: string | null;
   createdAt: string;

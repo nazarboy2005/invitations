@@ -42,7 +42,7 @@ const out = fileURLToPath(
 await mkdir(out, { recursive: true });
 let browser;
 try {
-  await sql`INSERT INTO users(id,telegram_user_id,display_name,phone_number,phone_source,phone_shared_at) VALUES(${userId},${-Math.floor(Math.random() * 1e12) - 1},'Mobile verification with a long display name','+000000000','telegram_contact',now())`;
+  await sql`INSERT INTO users(id,telegram_user_id,display_name) VALUES(${userId},${-Math.floor(Math.random() * 1e12) - 1},'Mobile verification with a long display name')`;
   await sql`INSERT INTO sessions(user_id,token_hash,user_agent,expires_at,absolute_expires_at) VALUES(${userId},${digest(token)},'Mobile polish verification',now()+interval '1 hour',now()+interval '1 hour')`;
   for (const invitation of invitations)
     await sql`INSERT INTO invitations(id,owner_id,template_id,status,data) VALUES(${invitation.id},${userId},${invitation.templateId},'draft',${sql.json(invitation)})`;

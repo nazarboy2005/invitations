@@ -63,7 +63,7 @@ export async function createAdminBroadcast(
     }
     const recipients =
       await tx`SELECT u.id FROM users u JOIN telegram_connections tc ON tc.user_id=u.id
-      WHERE u.phone_shared_at IS NOT NULL AND u.disabled_at IS NULL AND tc.status='active' AND tc.broadcast_opt_out_at IS NULL AND tc.telegram_chat_id=u.telegram_user_id
+      WHERE u.disabled_at IS NULL AND tc.status='active' AND tc.broadcast_opt_out_at IS NULL AND tc.telegram_chat_id=u.telegram_user_id
       AND (${input.audience}='all' OR (${input.audience}='published' AND EXISTS(SELECT 1 FROM invitations i WHERE i.owner_id=u.id AND i.status='published'))
       OR (${input.audience}='drafts' AND EXISTS(SELECT 1 FROM invitations i WHERE i.owner_id=u.id AND i.status='draft'))
       OR (${input.audience}='selected' AND u.id=ANY(${tx.array(input.userIds)}::uuid[])))

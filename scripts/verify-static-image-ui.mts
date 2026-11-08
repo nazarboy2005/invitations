@@ -23,7 +23,7 @@ const invitation = normalizeInvitation({
 invitation.content["uz-Latn"].people = ["Abdulaziz", "Madinaxon"];
 let browser;
 try {
-  await sql`INSERT INTO users(id,telegram_user_id,display_name,phone_number,phone_source,phone_shared_at) VALUES(${userId},${-Math.floor(Math.random() * 1e12) - 1},'Disposable image UI test','+000000000','telegram_contact',now())`;
+  await sql`INSERT INTO users(id,telegram_user_id,display_name) VALUES(${userId},${-Math.floor(Math.random() * 1e12) - 1},'Disposable image UI test')`;
   await sql`INSERT INTO sessions(user_id,token_hash,user_agent,expires_at,absolute_expires_at) VALUES(${userId},${digest(token)},'Image UI verification',now()+interval '1 hour',now()+interval '1 hour')`;
   await sql`INSERT INTO invitations(id,owner_id,template_id,status,data) VALUES(${invitation.id},${userId},'ivory-rose-card','draft',${sql.json(invitation)})`;
   browser = await chromium.launch({ headless: true });

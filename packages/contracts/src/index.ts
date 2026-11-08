@@ -1726,29 +1726,29 @@ export const TEMPLATES: TemplateDefinition[] = [
     name: "Olive Manor",
     description: "Zaytun ranglari, nafis gullar va sokin manor muhiti.",
     previewImage:
-      "/templates/olive-manor-edition/source/reference/assets/intro-start-v2.jpg",
+      "/templates/olive-manor-edition/catalog.webp",
     previewEventType: "wedding",
     categoryIds: ["wedding"],
     supportedEventTypes: ["wedding"],
     priceMinor: 100000,
     currency: "UZS",
     accent: "#6e7556",
-    published: false,
+    published: true,
   },
   {
     id: "islamic-edition",
     name: "Islamic Edition",
     description:
-      "Tungi ko‘k ranglar, islomiy naqshlar va sokin hilol bezaklari.",
+      "Yashil va oltin ranglar, nafis darvoza va islomiy naqshlar.",
     previewImage:
-      "/templates/islamic-edition/source/reference/assets/video-start.jpg",
+      "/templates/islamic-edition/catalog.webp",
     previewEventType: "wedding",
     categoryIds: ["wedding"],
     supportedEventTypes: ["wedding"],
     priceMinor: 100000,
     currency: "UZS",
     accent: "#d7b66a",
-    published: false,
+    published: true,
   },
   {
     id: "osh",
@@ -1896,14 +1896,14 @@ export const TEMPLATES: TemplateDefinition[] = [
     description:
       "Qora-oq fotografiya, yirtilgan qog‘oz chetlari va nafis tipografika.",
     previewImage:
-      "/templates/monochrome-editorial-edition/source/reference/assets/hero-hands.webp",
+      "/templates/monochrome-editorial-edition/catalog.webp",
     previewEventType: "wedding",
     categoryIds: ["wedding"],
     supportedEventTypes: ["wedding"],
     priceMinor: 100000,
     currency: "UZS",
     accent: "#171717",
-    published: false,
+    published: true,
   },
   {
     id: "xatna-edition",
@@ -1911,14 +1911,14 @@ export const TEMPLATES: TemplateDefinition[] = [
     description:
       "Samarqand hovlisi, islimiy naqsh va nafis oq-yashil bezaklar.",
     previewImage:
-      "/templates/xatna-edition/source/reference/assets/intro-ivory-doors.webp",
+      "/templates/xatna-edition/catalog.webp",
     previewEventType: "sunnat-toyi",
     categoryIds: ["other"],
     supportedEventTypes: ["sunnat-toyi"],
     priceMinor: 100000,
     currency: "UZS",
     accent: "#52644b",
-    published: false,
+    published: true,
   },
   {
     id: "cloud-castle",
@@ -2310,7 +2310,7 @@ export function createInvitation(
     rsvp: {
       enabled: true,
       deadline: "",
-      maxPartySize: ["stained-glass", "sunset", "swan-garden"].includes(templateId) ? 1 : 5,
+      maxPartySize: ["stained-glass", "sunset", "swan-garden", "olive-manor-edition", "islamic-edition", "monochrome-editorial-edition", "xatna-edition"].includes(templateId) ? 1 : 5,
     },
     wishes: { enabled: true, requireApproval: true },
     dressCode: {
@@ -2398,7 +2398,6 @@ export type SessionUser = {
   id: string;
   telegramUserId: string;
   displayName: string;
-  phoneShared: boolean;
   isAdmin: boolean;
 };
 export type SessionResponse = {

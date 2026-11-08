@@ -1,0 +1,170 @@
+[
+  {
+    "id": "olive-manor-edition",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "openedMs": 8016,
+    "video": [
+      {
+        "duration": 7.041667,
+        "time": 7.041667,
+        "frames": 169
+      }
+    ],
+    "sectionsChecked": 16,
+    "galleryCount": 5,
+    "fourLocales": true,
+    "preservedForm": true,
+    "emptyOptionals": true,
+    "noSourceSample": true,
+    "errors": [],
+    "missing": [],
+    "external": []
+  },
+  {
+    "id": "islamic-edition",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "openedMs": 8447,
+    "video": [
+      {
+        "duration": 8.041667,
+        "time": 8.041667,
+        "frames": 193
+      }
+    ],
+    "sectionsChecked": 16,
+    "galleryCount": 5,
+    "fourLocales": true,
+    "preservedForm": true,
+    "emptyOptionals": true,
+    "noSourceSample": true,
+    "errors": [],
+    "missing": [],
+    "external": []
+  },
+  {
+    "id": "monochrome-editorial-edition",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "openedMs": 1922,
+    "video": [],
+    "sectionsChecked": 11,
+    "galleryCount": 6,
+    "fourLocales": true,
+    "preservedForm": true,
+    "emptyOptionals": true,
+    "noSourceSample": true,
+    "errors": [],
+    "missing": [],
+    "external": []
+  },
+  {
+    "id": "olive-manor-edition",
+    "viewport": {
+      "width": 1280,
+      "height": 800
+    },
+    "openedMs": 7948,
+    "video": [
+      {
+        "duration": 7.041667,
+        "time": 7.041667,
+        "frames": 169
+      }
+    ],
+    "sectionsChecked": 16,
+    "galleryCount": 5,
+    "fourLocales": true,
+    "preservedForm": true,
+    "emptyOptionals": true,
+    "noSourceSample": true,
+    "errors": [],
+    "missing": [],
+    "external": []
+  },
+  {
+    "id": "xatna-edition",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "openedMs": 1531,
+    "video": [],
+    "sectionsChecked": 12,
+    "galleryCount": 0,
+    "fourLocales": true,
+    "preservedForm": true,
+    "emptyOptionals": true,
+    "noSourceSample": true,
+    "errors": [],
+    "missing": [],
+    "external": []
+  },
+  {
+    "id": "islamic-edition",
+    "viewport": {
+      "width": 1280,
+      "height": 800
+    },
+    "openedMs": 8511,
+    "video": [
+      {
+        "duration": 8.041667,
+        "time": 8.041667,
+        "frames": 193
+      }
+    ],
+    "sectionsChecked": 16,
+    "galleryCount": 5,
+    "fourLocales": true,
+    "preservedForm": true,
+    "emptyOptionals": true,
+    "noSourceSample": true,
+    "errors": [],
+    "missing": [],
+    "external": []
+  },
+  {
+    "id": "monochrome-editorial-edition",
+    "viewport": {
+      "width": 1280,
+      "height": 800
+    },
+    "openedMs": 2087,
+    "video": [],
+    "sectionsChecked": 11,
+    "galleryCount": 6,
+    "fourLocales": true,
+    "preservedForm": true,
+    "emptyOptionals": true,
+    "noSourceSample": true,
+    "errors": [],
+    "missing": [],
+    "external": []
+  },
+  {
+    "id": "xatna-edition",
+    "viewport": {
+      "width": 1280,
+      "height": 800
+    },
+    "openedMs": 1267,
+    "video": [],
+    "sectionsChecked": 12,
+    "galleryCount": 0,
+    "fourLocales": true,
+    "preservedForm": true,
+    "emptyOptionals": true,
+    "noSourceSample": true,
+    "errors": [],
+    "missing": [],
+    "external": []
+  }
+]

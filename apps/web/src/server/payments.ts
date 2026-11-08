@@ -79,6 +79,14 @@ export async function createCheckout(
       await tx`SELECT * FROM invitations WHERE id=${id} AND owner_id=${user.id} FOR UPDATE`;
     if (!row || row.status === "deleted")
       throw new ApiError(404, "NOT_FOUND", "Taklifnoma topilmadi.");
+    const [account] =
+      await tx`SELECT disabled_at FROM users WHERE id=${user.id} FOR SHARE`;
+    if (!account || account.disabled_at)
+      throw new ApiError(
+        403,
+        "ACCOUNT_UNAVAILABLE",
+        "Hisobga kirish cheklangan.",
+      );
     if (row.status !== "draft")
       throw new ApiError(
         409,
@@ -87,7 +95,11 @@ export async function createCheckout(
       );
     const invitation = invitationSchema.parse(row.data);
     if (templateById(invitation.templateId)?.format === "image")
-      throw new ApiError(400, "IMAGE_FREE_TEST", "Rasm taklifnomani PNG sifatida yuklab oling.");
+      throw new ApiError(
+        400,
+        "IMAGE_FREE_TEST",
+        "Rasm taklifnomani PNG sifatida yuklab oling.",
+      );
     if (invitation.revision !== revision)
       throw new ApiError(
         409,
@@ -222,7 +234,7 @@ export async function applyPayment(
       updated_at=now(),sync_after=GREATEST(sync_after,now()+interval '30 seconds') WHERE id=${order.id}`;
     if (next === "SUCCEEDED" && !order.fulfilled_at) {
       const [owner] =
-        await tx`SELECT * FROM users WHERE id=${order.owner_id} AND disabled_at IS NULL AND phone_shared_at IS NOT NULL FOR SHARE`;
+        await tx`SELECT * FROM users WHERE id=${order.owner_id} AND disabled_at IS NULL FOR SHARE`;
       try {
         if (!owner)
           throw new ApiError(

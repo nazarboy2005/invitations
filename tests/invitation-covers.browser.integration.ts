@@ -52,7 +52,6 @@ test(
             user: {
               id: owner,
               displayName: "Cover test",
-              phoneShared: true,
               isAdmin: false,
             },
             configured: true,

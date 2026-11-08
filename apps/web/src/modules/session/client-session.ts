@@ -84,5 +84,5 @@ export function miniAppAdminDestination(
 ): "/admin" | null {
   if (pathname !== "/" && pathname !== "/dashboard") return null;
   if (new URLSearchParams(search).get("mode") === "personal") return null;
-  return user?.isAdmin === true && user.phoneShared === true ? "/admin" : null;
+  return user?.isAdmin === true ? "/admin" : null;
 }

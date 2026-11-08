@@ -75,7 +75,6 @@ export function toSessionUser(row: Record<string, unknown>): SessionUser {
     id: String(row.id),
     telegramUserId: String(row.telegram_user_id),
     displayName: String(row.display_name),
-    phoneShared: !!row.phone_shared_at,
     isAdmin: hasAdminRole(row),
   };
 }
@@ -84,7 +83,7 @@ export async function currentSession() {
   const token = (await cookies()).get(SESSION_COOKIE)?.value;
   if (!token || token.length > 100) return null;
   const rows =
-    await getDb()`SELECT s.id AS session_id, s.created_at AS authenticated_at, s.expires_at, s.absolute_expires_at, u.* FROM sessions s JOIN users u ON u.id=s.user_id WHERE s.token_hash=${digest(token)} AND s.revoked_at IS NULL AND s.expires_at>now() AND s.absolute_expires_at>now() AND u.phone_shared_at IS NOT NULL AND u.disabled_at IS NULL`;
+    await getDb()`SELECT s.id AS session_id, s.created_at AS authenticated_at, s.expires_at, s.absolute_expires_at, u.* FROM sessions s JOIN users u ON u.id=s.user_id WHERE s.token_hash=${digest(token)} AND s.revoked_at IS NULL AND s.expires_at>now() AND s.absolute_expires_at>now() AND u.disabled_at IS NULL`;
   return rows[0] ?? null;
 }
 export async function getSessionUser(): Promise<SessionUser | null> {
@@ -101,7 +100,7 @@ export async function issueSession(userId: string) {
   const agent = (await headers()).get("user-agent")?.slice(0, 500) ?? "";
   await getDb().begin(async (tx) => {
     const [user] =
-      await tx`SELECT id FROM users WHERE id=${userId} AND disabled_at IS NULL AND phone_shared_at IS NOT NULL FOR SHARE`;
+      await tx`SELECT id FROM users WHERE id=${userId} AND disabled_at IS NULL FOR SHARE`;
     if (!user)
       throw new AuthError(
         "ACCOUNT_UNAVAILABLE",

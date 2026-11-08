@@ -52,7 +52,7 @@ test(
     }
     try {
       // No upsert: fail rather than touching an existing account if the fixture ID collides.
-      await db`INSERT INTO users(id,telegram_user_id,display_name,phone_shared_at,is_admin) VALUES(${userId},${telegramId!},'Allowlist QA admin',now(),false),(${ordinary},${Math.floor(Math.random() * 1e12) + 1},'Allowlist QA creator',now(),false)`;
+      await db`INSERT INTO users(id,telegram_user_id,display_name,is_admin) VALUES(${userId},${telegramId!},'Allowlist QA admin',false),(${ordinary},${Math.floor(Math.random() * 1e12) + 1},'Allowlist QA creator',false)`;
       for (const [value, age] of [
         [token, "0 hours"],
         [stale, "13 hours"],
