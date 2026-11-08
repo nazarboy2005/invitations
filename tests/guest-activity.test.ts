@@ -83,18 +83,18 @@ test("RSVP note support follows the template form independently of public wishes
     "gulli-darvoza",
     "ming-bir-kecha",
     "safir",
-    "taklifla-uchrashuv",
+    "uchrashuv",
     "unregistered",
   ]) {
     assert.equal(templateCapabilities(id).rsvpNotes, false, id);
   }
   for (const id of [
-    "wedivo-pulau-sehati",
+    "kongillar-oroli",
     "velora",
     "velvet",
     "andalus-darvozasi",
-    "taklifla-yubiley-sahifasi",
-    "olive-manor-edition",
+    "umr-bahori",
+    "zaytun",
   ]) {
     assert.equal(templateCapabilities(id).rsvpNotes, true, id);
   }
@@ -107,20 +107,20 @@ test("RSVP note support follows the template form independently of public wishes
 
 test("activity sections follow actual forms, owner toggles and retained history", () => {
   assert.deepEqual(
-    invitationActivityFeatures(createInvitation("ivory-rose-card")),
+    invitationActivityFeatures(createInvitation("oq-atirgul")),
     { responses: false, wishes: false, receipts: false, intentions: false },
   );
   for (const id of [
-    "taklifla-muhrli-maktub",
-    "taklifla-tovus",
-    "taklifla-asalari",
+    "muhrli-maktub",
+    "tovus",
+    "asalari",
   ]) {
     const features = invitationActivityFeatures(createInvitation(id));
     assert.equal(features.responses, false, id);
     assert.equal(features.wishes, true, id);
   }
   assert.equal(
-    normalizeInvitation(createInvitation("taklifla-uchrashuv")).rsvp.enabled,
+    normalizeInvitation(createInvitation("uchrashuv")).rsvp.enabled,
     true,
   );
   assert.equal(
@@ -148,8 +148,8 @@ test("activity sections follow actual forms, owner toggles and retained history"
   invitation.gift.enabled = true;
   invitation.gift.receiptUploadEnabled = true;
   assert.equal(invitationActivityFeatures(invitation).receipts, true);
-  const pulau = createInvitation("wedivo-pulau-sehati");
-  pulau.templateData["wedivo-pulau-sehati"] = { giftWell: { enabled: true } };
+  const pulau = createInvitation("kongillar-oroli");
+  pulau.templateData["kongillar-oroli"] = { giftWell: { enabled: true } };
   assert.equal(invitationActivityFeatures(pulau).intentions, true);
   assert.equal(
     invitationActivityFeatures(invitation, {

@@ -17,7 +17,7 @@ import styles from "./renderer.module.css";
 import { makeBloomData } from "./bloom-adapter";
 import { makeVelvetData } from "./velvet-adapter";
 import { makeWeddingData } from "./wedding-adapter";
-import { makeGoldenHourData } from "./golden-hour/adapter";
+import { makeGoldenHourData } from "./oltin-lahza/adapter";
 import { useInvitationExtras } from "@/templates/use-invitation-extras";
 import { AureliaSoundtrack } from "./aurelia-soundtrack";
 import { SafirInvitation } from "./safir-renderer";
@@ -76,22 +76,22 @@ export function InvitateInvitation({
       preview &&
       sampleWishes &&
       !hasCreatorPhotos &&
-      templateId === "evelina"
+      templateId === "baxt-kaliti"
     ) {
       source.gallery = [
         {
           id: "evelina-source-preview",
-          src: publicAsset("/templates/evelina/assets/previews/template/evelina/hero.png"),
+          src: publicAsset("/templates/baxt-kaliti/assets/previews/template/baxt-kaliti/hero.png"),
           alt: "Evelina manba fotosurati",
           caption: "Evelina manba fotosurati",
         },
       ];
     }
-    if (preview && sampleWishes && !hasCreatorPhotos && templateId === "swan") {
+    if (preview && sampleWishes && !hasCreatorPhotos && templateId === "oqqush") {
       source.gallery = [
         {
           id: "swan-source-preview",
-          src: publicAsset("/templates/swan/assets/images/0310/1.png"),
+          src: publicAsset("/templates/oqqush/assets/images/0310/1.png"),
           alt: "Swan source preview photo",
           caption: "Swan source preview photo",
         },
@@ -408,7 +408,7 @@ export function InvitateInvitation({
     invitationId,
     guestToken,
     preview,
-    templateId === "golden-hour",
+    templateId === "oltin-lahza",
   );
   const bloomMessage = useMemo(
     () =>
@@ -456,7 +456,7 @@ export function InvitateInvitation({
     ],
   );
   const activeMessage =
-    templateId === "girlsparty"
+    templateId === "dugonalar"
       ? {
           ...message,
           wishes:
@@ -484,9 +484,9 @@ export function InvitateInvitation({
           rsvp: invitation.rsvp,
           wishesEnabled: invitation.wishes.enabled,
         }
-      : templateId === "invitate-wedding"
+      : templateId === "gulchambar"
         ? weddingMessage
-        : templateId === "bloom"
+        : templateId === "gullar-bayrami"
           ? bloomMessage
           : templateId === "estelle"
             ? estelleMessage
@@ -494,11 +494,11 @@ export function InvitateInvitation({
               ? veloraMessage
               : templateId === "velvet"
                 ? velvetMessage
-                : templateId === "invitate-nahorgi-osh"
+                : templateId === "sahar-ziyofati"
                   ? nahorgiOshMessage
-                  : templateId === "golden-hour"
+                  : templateId === "oltin-lahza"
                     ? goldenHourMessage
-                    : templateId === "whiteless"
+                    : templateId === "orzular"
                       ? whitelessMessage
                       : message;
   const latest = useRef(activeMessage);
@@ -561,7 +561,7 @@ export function InvitateInvitation({
         key={templateId}
         ref={frame}
         title={
-          templateId === "golden-hour"
+          templateId === "oltin-lahza"
             ? `${activeMessage.title || activeMessage.eventType} invitation`
             : `${activeMessage.groom} & ${activeMessage.bride} invitation`
         }
@@ -575,7 +575,7 @@ export function InvitateInvitation({
             { type: `${templateId}:update`, payload: latest.current },
             window.location.origin,
           );
-          if (templateId === "golden-hour") sendGoldenHourExtras();
+          if (templateId === "oltin-lahza") sendGoldenHourExtras();
         }}
         allow="autoplay; fullscreen; clipboard-write"
         loading="eager"

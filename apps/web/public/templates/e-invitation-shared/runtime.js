@@ -42,7 +42,7 @@ export async function mount(id, motion) {
 
   const intro = q('.section-intro,.section-xatna-intro');
   const locked = qa('[inert]');
-  if (id === 'islamic-edition') qa('section:not(.section-hero),.quote-block').forEach(section => { section.inert = true; locked.push(section); });
+  if (id === 'islomiy') qa('section:not(.section-hero),.quote-block').forEach(section => { section.inert = true; locked.push(section); });
   document.documentElement.classList.add('e-opening');
   function finish() {
     if (opened) return;
@@ -92,8 +92,8 @@ export async function mount(id, motion) {
 
   // Calendar cells are cloned from the original component, retaining its SVGs and Vue scope attributes.
   const grid = q('.calendar-card__days,.section-calendar__grid,.section-calendar__calendar');
-  const cellSelector = id === 'olive-manor-edition' ? '.calendar-card__day' : id === 'monochrome-editorial-edition' ? '.section-calendar__day' : '.section-calendar__cell';
-  const selectedClass = id === 'olive-manor-edition' ? 'calendar-card__day--active' : id === 'monochrome-editorial-edition' ? 'section-calendar__day--selected' : id === 'xatna-edition' ? 'is-event' : 'is-wedding';
+  const cellSelector = id === 'zaytun' ? '.calendar-card__day' : id === 'oq-qora-lavha' ? '.section-calendar__day' : '.section-calendar__cell';
+  const selectedClass = id === 'zaytun' ? 'calendar-card__day--active' : id === 'oq-qora-lavha' ? 'section-calendar__day--selected' : id === 'xatna' ? 'is-event' : 'is-wedding';
   const activePrototype = grid?.querySelector(`.${selectedClass}`)?.cloneNode(true);
   const normalPrototype = [...(grid?.querySelectorAll(`${cellSelector}:not(.${selectedClass}):not(.is-inactive):not(.calendar-card__day--empty)`) || [])].at(-1)?.cloneNode(true);
   function calendar() {
@@ -118,12 +118,12 @@ export async function mount(id, motion) {
       const cell = (active ? activePrototype : normalPrototype).cloneNode(true);
       cell.classList.remove('is-lit', 'is-current', 'is-revealed', 'calendar-card__day--lit', 'calendar-card__day--revealed');
       cell.classList.toggle(selectedClass, active); cell.classList.toggle('is-inactive', inactive);
-      if (id === 'olive-manor-edition') { cell.textContent = inactive ? '' : String(value); cell.classList.toggle('calendar-card__day--empty', inactive); }
+      if (id === 'zaytun') { cell.textContent = inactive ? '' : String(value); cell.classList.toggle('calendar-card__day--empty', inactive); }
       else {
         let text = cell.querySelector('.section-calendar__num,span');
         if (!text) { text = el('span'); [...cell.attributes].filter(a => a.name.startsWith('data-v-')).forEach(a => text.setAttribute(a.name, '')); cell.prepend(text); }
-        text.textContent = inactive && id === 'monochrome-editorial-edition' ? '' : String(value);
-        if (id === 'xatna-edition' && !inactive && number <= day && !cell.querySelector('.section-calendar__trail-star')) {
+        text.textContent = inactive && id === 'oq-qora-lavha' ? '' : String(value);
+        if (id === 'xatna' && !inactive && number <= day && !cell.querySelector('.section-calendar__trail-star')) {
           const star = el('span', 'section-calendar__trail-star', '✦'); star.setAttribute('aria-hidden', 'true');
           [...cell.attributes].filter(a => a.name.startsWith('data-v-')).forEach(a => star.setAttribute(a.name, '')); cell.append(star);
         }
@@ -133,7 +133,7 @@ export async function mount(id, motion) {
     }
     motionApi.calendar?.(grid, cellSelector, selectedClass);
   }
-  const calendarFooter = id === 'monochrome-editorial-edition' ? q('.section-calendar__footer') : null;
+  const calendarFooter = id === 'oq-qora-lavha' ? q('.section-calendar__footer') : null;
   let calendarLink = q('.section-calendar__add');
   if (!calendarLink && calendarFooter) { calendarLink = document.createElement('a'); for (const attr of calendarFooter.attributes) calendarLink.setAttribute(attr.name, attr.value); calendarLink.append(...calendarFooter.childNodes); calendarFooter.replaceWith(calendarLink); }
   calendarLink ||= el('a', 'e-calendar');
@@ -322,7 +322,7 @@ export async function mount(id, motion) {
     controls.replaceChildren(); controls.hidden = (data.languages || []).length < 2;
     (data.languages || []).forEach(code => { const button = el('button', '', ({ uz: 'UZ', 'uz-Latn': 'UZ', 'uz-Cyrl': 'ЎЗ', en: 'EN', ru: 'RU' })[code] || code); button.type = 'button'; button.setAttribute('aria-pressed', String(code === data.locale)); button.onclick = () => parent.postMessage({ type: `${id}:language`, locale: code }, location.origin); controls.append(button); });
     calendar(); calendarDownload(); renderProgram(); renderGallery(); contacts(); venue(); renderGift(); configureForm(); renderWishes(version);
-    if (id === 'monochrome-editorial-edition') {
+    if (id === 'oq-qora-lavha') {
       put('.section-invitation__monogram span:first-child', computed.groomInitial); put('.section-invitation__monogram span:last-child', computed.brideInitial);
       put('.section-calendar__date-card time', [data.date?.short, data.date?.time].filter(Boolean).join(' / '));
       const stamp = qa('.section-final__seal span'), numbers = [data.date?.day, data.date?.monthNumber, String(data.date?.year || '').slice(-2)];

@@ -1,0 +1,1257 @@
+[
+  {
+    "name": "Love Sakura preview uses the exact captured gallery photo order only in its preview sample",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\apps\\\\web\\\\src\\\\modules\\\\catalog\\\\preview-sample.test.ts:210:1'"
+  },
+  {
+    "name": "only empty template-selection previews may fall back to sample content",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\apps\\\\web\\\\src\\\\modules\\\\catalog\\\\preview-sample.test.ts:572:1'"
+  },
+  {
+    "name": "Glass Pink source gallery photos stay in its preview sample only",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\apps\\\\web\\\\src\\\\modules\\\\catalog\\\\preview-sample.test.ts:632:1'"
+  },
+  {
+    "name": "Anor keeps the complete captured Lahzalar markup and gallery behavior",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Marxaba\\\\Nikoh\\\\templates\\\\anor\\\\index.html'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\anor-gallery-source.test.ts:16:1'"
+  },
+  {
+    "name": "Anor adapter maps contract data while keeping sample wishes preview-only",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\anor-preview-contract.test.ts:9:1'"
+  },
+  {
+    "name": "Atlas preview samples stay out of blank drafts and empty To‘yona slots collapse",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\atlas-preview.test.ts:70:1'"
+  },
+  {
+    "name": "Aurelia is a published wedding catalog template",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\aurelia-template.test.ts:14:1'"
+  },
+  {
+    "name": "Aurelia preserves captured art, motion, fonts, and local dependencies",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Invitate\\\\Web invitations\\\\invitate.uz\\\\assets\\\\js\\\\aurelia.js'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\aurelia-template.test.ts:37:1'"
+  },
+  {
+    "name": "Beshik retains its complete captured structure, styling, scripts, and art",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Marxaba\\\\Beshik to'yi\\\\templates\\\\beshik\\\\index.html'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\beshik-template.test.ts:55:1'"
+  },
+  {
+    "name": "Bitiruv's three compatible event types render one localized honoree through the shared adapter",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\bitiruv-preview-contract.test.ts:26:1'"
+  },
+  {
+    "name": "Bitiruv is published with the exact supported events",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\bitiruv-template.test.ts:35:1'"
+  },
+  {
+    "name": "event labels, default copy, and sample content cover every locale",
+    "error": "\"Cannot read properties of undefined (reading 'uz-Latn')\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\bitiruv-template.test.ts:54:1'"
+  },
+  {
+    "name": "Bitiruv maps only one person's initial and hides unsupported venue photography",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\bitiruv-template.test.ts:91:1'"
+  },
+  {
+    "name": "Bitiruv retains the captured structure, styling, translations, metadata, and artwork",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Marxaba\\\\Boshqa tadbirlar\\\\templates\\\\bitiruv\\\\index.html'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\bitiruv-template.test.ts:136:1'"
+  },
+  {
+    "name": "Bitiruv uses local source animation dependencies and no captured sample payload",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Marxaba\\\\Boshqa tadbirlar\\\\shared\\\\vendor\\\\gsap.min.js'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\bitiruv-template.test.ts:213:1'"
+  },
+  {
+    "name": "Bitiruv metadata preserves its source declarations and records resolved adaptations",
+    "error": "'missing documented contract adaptation: anjuman'",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\bitiruv-template.test.ts:437:1'"
+  },
+  {
+    "name": "tests\\\\bulbul-template.test.ts",
+    "error": "'test failed'",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\bulbul-template.test.ts:1:1'"
+  },
+  {
+    "name": "curated covers exist, have matching provenance, and fit portrait card bounds",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\catalog-covers.test.ts:10:1'"
+  },
+  {
+    "name": "Chavandoz keeps the captured body, styles, metadata, translations, and artwork",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Marxaba\\\\Sunnat to'yi\\\\templates\\\\chavandoz\\\\index.html'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\chavandoz-template.test.ts:43:1'"
+  },
+  {
+    "name": "tests\\\\chorlove-lace-motion.test.ts",
+    "error": "'test failed'",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\chorlove-lace-motion.test.ts:1:1'"
+  },
+  {
+    "name": "Chorlove Osh uses its namespaced source renderer without platform extras",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\chorlove-osh-template.test.ts:56:1'"
+  },
+  {
+    "name": "Osh preview keeps its source-owned Palov art without sample gallery or story photos",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\chorlove-osh-template.test.ts:62:1'"
+  },
+  {
+    "name": "Chorlove route keeps Palov in its provider namespace",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\chorlove-palov-template.test.ts:101:1'"
+  },
+  {
+    "name": "shisha-naqshi: immutable capture, complete local assets and catalog artwork",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\chorlove-three-source.test.ts:17:3'"
+  },
+  {
+    "name": "oqqushlar: immutable capture, complete local assets and catalog artwork",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\chorlove-three-source.test.ts:17:3'"
+  },
+  {
+    "name": "Cloud Castle package contains only sanitized markup and no captured website runtime",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\cloud-castle-template.test.ts:47:1'"
+  },
+  {
+    "name": "Cloud Castle preview uses only gallery artwork referenced by its captured source",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\cloud-castle-template.test.ts:90:1'"
+  },
+  {
+    "name": "Cloud Castle gift modal matches source interaction, card styling and image",
+    "error": "'the archived Cloud Castle source capture is available for comparison'",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\cloud-castle-template.test.ts:163:1'"
+  },
+  {
+    "name": "Cloud Castle starts configured public music on opening and leaves pause under guest control",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\cloud-castle-template.test.ts:195:1'"
+  },
+  {
+    "name": "Cloud Castle contact hover and press use the source spring interaction",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Chorlove\\\\Web invitations\\\\_next\\\\static\\\\chunks\\\\14t58uni224ve.js'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\cloud-castle-template.test.ts:255:1'"
+  },
+  {
+    "name": "login requests rely on the opaque Telegram start token, not a numeric code",
+    "error": "'Orchid Amplop must remain wedding-category and wedding-only'",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\database.test.ts:42:1'"
+  },
+  {
+    "name": "Bitiruv event compatibility is additive and published",
+    "error": "'Orchid Amplop must remain wedding-category and wedding-only'",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\database.test.ts:49:1'"
+  },
+  {
+    "name": "Korporativ event compatibility is additive and published",
+    "error": "'Orchid Amplop must remain wedding-category and wedding-only'",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\database.test.ts:72:1'"
+  },
+  {
+    "name": "migration enforces ownership, template references, and unique Telegram identities",
+    "error": "'Orchid Amplop must remain wedding-category and wedding-only'",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\database.test.ts:112:1'"
+  },
+  {
+    "name": "voice-removal migration strips invitation data and preserves shared music media",
+    "error": "'Orchid Amplop must remain wedding-category and wedding-only'",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\database.test.ts:144:1'"
+  },
+  {
+    "name": "gift migration removes only the saved bank name",
+    "error": "'Orchid Amplop must remain wedding-category and wedding-only'",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\database.test.ts:209:1'"
+  },
+  {
+    "name": "contact migration keeps phone and Telegram values and removes legacy cards",
+    "error": "'Orchid Amplop must remain wedding-category and wedding-only'",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\database.test.ts:245:1'"
+  },
+  {
+    "name": "session lookup excludes revoked, idle-expired, and absolute-expired sessions",
+    "error": "'Orchid Amplop must remain wedding-category and wedding-only'",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\database.test.ts:281:1'"
+  },
+  {
+    "name": "pending wishes stay private; approval publishes; soft deletion keeps dashboard evidence",
+    "error": "'Orchid Amplop must remain wedding-category and wedding-only'",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\database.test.ts:312:1'"
+  },
+  {
+    "name": "invitation JSON snapshot retains language variants and stable media IDs through template switching",
+    "error": "'Orchid Amplop must remain wedding-category and wedding-only'",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\database.test.ts:347:1'"
+  },
+  {
+    "name": "template migrations publish completed designs while keeping unfinished designs private",
+    "error": "'Orchid Amplop must remain wedding-category and wedding-only'",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\database.test.ts:400:1'"
+  },
+  {
+    "name": "template event compatibility is constrained and independently assignable",
+    "error": "'Orchid Amplop must remain wedding-category and wedding-only'",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\database.test.ts:694:1'"
+  },
+  {
+    "name": "any template can have multiple categories or none without changing invitation content",
+    "error": "'Orchid Amplop must remain wedding-category and wedding-only'",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\database.test.ts:737:1'"
+  },
+  {
+    "name": "category foreign keys, uniqueness and transaction rollback preserve prior assignments",
+    "error": "'Orchid Amplop must remain wedding-category and wedding-only'",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\database.test.ts:791:1'"
+  },
+  {
+    "name": "Anor reopens multilingual content and admin replacements preserve linked guests and event locks",
+    "error": "'Orchid Amplop must remain wedding-category and wedding-only'",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\database.test.ts:848:1'"
+  },
+  {
+    "name": "tests\\\\doira-template.test.ts",
+    "error": "'test failed'",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\doira-template.test.ts:1:1'"
+  },
+  {
+    "name": "zaytun: active page uses complete scoped source and local assets",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\e-invitation-repair.test.ts:10:3'"
+  },
+  {
+    "name": "islomiy: active page uses complete scoped source and local assets",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\e-invitation-repair.test.ts:10:3'"
+  },
+  {
+    "name": "oq-qora-lavha: active page uses complete scoped source and local assets",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\e-invitation-repair.test.ts:10:3'"
+  },
+  {
+    "name": "xatna: active page uses complete scoped source and local assets",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\e-invitation-repair.test.ts:10:3'"
+  },
+  {
+    "name": "Evelina preview provenance points to packaged files and matching artwork hashes",
+    "error": "'provenance path exists: apps/web/public/templates/evelina/preview.webp'",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\evelina-template.test.ts:18:1'"
+  },
+  {
+    "name": "Evelina is a published wedding-only catalog template",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\evelina-template.test.ts:51:1'"
+  },
+  {
+    "name": "the adapted frame retains source artwork, videos, and local font files",
+    "error": "'assets/previews/template/baxt-kaliti/hero.png is packaged'",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\evelina-template.test.ts:62:1'"
+  },
+  {
+    "name": "frame is localized and uses contract-backed fields and APIs",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\evelina-template.test.ts:86:1'"
+  },
+  {
+    "name": "Ganch catalog art represents its captured closed-door opening",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Marxaba\\\\Nikoh\\\\templates\\\\ganch\\\\index.html'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\ganch-preview-art.test.ts:35:1'"
+  },
+  {
+    "name": "Ganch preserves the captured source composition, motion code, styles, metadata and artwork",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Marxaba\\\\Nikoh\\\\templates\\\\ganch\\\\index.html'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\ganch-template.test.ts:31:1'"
+  },
+  {
+    "name": "Glass Pink source fonts resolve from its isolated asset package",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Chorlove\\\\Web invitations\\\\fonts\\\\Qellia.otf'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\glass-pink-template.test.ts:57:1'"
+  },
+  {
+    "name": "Glass Pink preserves its canonical source snapshot byte-for-byte",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Invitations - this folder will be removed from production\\\\Chorlove\\\\Web invitations\\\\templates\\\\pushti-gulbarg\\\\preview-frame.html'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\glass-pink-template.test.ts:80:1'"
+  },
+  {
+    "name": "Glass Pink uses only its own artwork and keeps sample gallery content ephemeral",
+    "error": "\"ENOENT: no such file or directory, scandir 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Invitations - this folder will be removed from production'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\glass-pink-template.test.ts:91:1'"
+  },
+  {
+    "name": "Glass Pink ships its captured page without the Chorlove site runtime",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\glass-pink-template.test.ts:130:1'"
+  },
+  {
+    "name": "Glass Pink runtime binds all four locales and reduced motion",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\glass-pink-template.test.ts:140:1'"
+  },
+  {
+    "name": "Glass Pink restores its captured venue image and source-styled map action",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\glass-pink-template.test.ts:186:1'"
+  },
+  {
+    "name": "Glass Pink gift box opens the source body-portal modal instead of inline details",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Invitations - this folder will be removed from production\\\\Chorlove\\\\Web invitations\\\\_next\\\\static\\\\chunks\\\\0wvjbn--75n3p.js'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\glass-pink-template.test.ts:220:1'"
+  },
+  {
+    "name": "Glass Pink guest wish cards preserve the source stagger and reveal easing",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Invitations - this folder will be removed from production\\\\Chorlove\\\\Web invitations\\\\_next\\\\static\\\\chunks\\\\0wvjbn--75n3p.js'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\glass-pink-template.test.ts:273:1'"
+  },
+  {
+    "name": "Glass Pink schedule retains the original illustrated timeline markers",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Invitations - this folder will be removed from production\\\\Chorlove\\\\Web invitations\\\\_next\\\\static\\\\chunks\\\\0wvjbn--75n3p.js'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\glass-pink-template.test.ts:280:1'"
+  },
+  {
+    "name": "Glass Pink opener keeps the original timed exit instead of hiding on click",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Chorlove\\\\Web invitations\\\\_next\\\\static\\\\chunks\\\\0wvjbn--75n3p.js'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\glass-pink-template.test.ts:313:1'"
+  },
+  {
+    "name": "Glass Pink restores source carousel and floating To'yona ornament motion",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Chorlove\\\\Web invitations\\\\_next\\\\static\\\\chunks\\\\0wvjbn--75n3p.js'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\glass-pink-template.test.ts:335:1'"
+  },
+  {
+    "name": "Glass Pink section reveals retain the source transforms, delays, durations, and viewport thresholds",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Chorlove\\\\Web invitations\\\\_next\\\\static\\\\chunks\\\\0wvjbn--75n3p.js'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\glass-pink-template.test.ts:356:1'"
+  },
+  {
+    "name": "Golden Card preserves the captured page CSS and opening choreography",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\golden-card-template.test.ts:73:1'"
+  },
+  {
+    "name": "Golden Card keeps source artwork in the renderer and preview gallery data out of drafts",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\golden-card-template.test.ts:109:1'"
+  },
+  {
+    "name": "Golden Hour is published for birthday events",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\golden-hour-template.test.ts:18:1'"
+  },
+  {
+    "name": "catalog artwork is the exact portrait hero image from the capture",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\apps\\\\web\\\\public\\\\templates\\\\oltin-lahza\\\\assets\\\\images\\\\oltin-lahza\\\\pink.png'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\golden-hour-template.test.ts:36:1'"
+  },
+  {
+    "name": "local package keeps the captured structure and avoids site runtime requests",
+    "error": "'assets/images/oltin-lahza/flowers.png is packaged'",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\golden-hour-template.test.ts:51:1'"
+  },
+  {
+    "name": "source stylesheet, script, and five artwork files are preserved exactly",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Invitate\\\\Web invitations\\\\invitate.uz\\\\assets\\\\css\\\\golden-hour.css'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\golden-hour-template.test.ts:107:1'"
+  },
+  {
+    "name": "Golden Hour omits unsupported gift fields absent from its source",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\golden-hour-template.test.ts:142:1'"
+  },
+  {
+    "name": "Green Garden app page excludes reference sample content and runtime",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\green-garden-template.test.ts:55:1'"
+  },
+  {
+    "name": "Green Garden restores available source motion and schedule assets",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\green-garden-template.test.ts:117:1'"
+  },
+  {
+    "name": "Green Garden does not add source-absent optional sections",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\green-garden-template.test.ts:269:1'"
+  },
+  {
+    "name": "Green Gold stages exact design assets and keeps source gallery photos preview-only",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\green-gold-source.test.ts:39:1'"
+  },
+  {
+    "name": "Green Gold runnable adapter isolates the source sections from site runtime and sample data",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\green-gold-source.test.ts:223:1'"
+  },
+  {
+    "name": "Green Gold restores source opening, scroll, ornament, sparkle, wishes, and gallery motion",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Chorlove\\\\Web invitations\\\\_next\\\\static\\\\chunks\\\\09cpm7sbnsw7i.js'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\green-gold-source.test.ts:280:1'"
+  },
+  {
+    "name": "Green Gold is internally registered but remains unpublished",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\green-gold-source.test.ts:419:1'"
+  },
+  {
+    "name": "Green Gold uses the shared Emotional Piano in the full preview path",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\green-gold-source.test.ts:461:1'"
+  },
+  {
+    "name": "Green White preserves its captured page and original design assets",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\green-white-template.test.ts:19:1'"
+  },
+  {
+    "name": "Green White source gallery photos are preview-only and byte-identical to the capture",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Chorlove\\\\Web invitations\\\\templates\\\\green-white\\\\preview-frame.html'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\green-white-template.test.ts:59:1'"
+  },
+  {
+    "name": "Green White runtime is isolated and maps the captured sections to the shared contract",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\green-white-template.test.ts:87:1'"
+  },
+  {
+    "name": "Green White motion follows the archived source page module",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\green-white-template.test.ts:152:1'"
+  },
+  {
+    "name": "Green White catalog cover is a source-rendered portrait with recorded provenance",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\green-white-template.test.ts:428:1'"
+  },
+  {
+    "name": "Green White is published for wedding events",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\green-white-template.test.ts:487:1'"
+  },
+  {
+    "name": "every template has explicit visitor metadata; migration persists the same support without changing publication",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\guest-activity.test.ts:22:1'"
+  },
+  {
+    "name": "Telegram messages are short, escaped, sticker-free and link to private activity",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\guest-activity.test.ts:170:1'"
+  },
+  {
+    "name": "Hilol preserves the captured body, CSS, metadata, interactions, and translation strings",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Marxaba\\\\Osh va iftorlik\\\\templates\\\\hilol\\\\index.html'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\hilol-template.test.ts:51:1'"
+  },
+  {
+    "name": "Hilol keeps its captured decorative artwork byte-identical",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Marxaba\\\\Osh va iftorlik\\\\templates\\\\hilol\\\\art\\\\city-silhouette.svg'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\hilol-template.test.ts:291:1'"
+  },
+  {
+    "name": "Butterfly is a published wedding-only catalog template",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\invitate-butterfly-template.test.ts:6:1'"
+  },
+  {
+    "name": "Butterfly keeps gift/to'yana UI absent because it is absent from the Invitate source",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Invitations - this folder will be removed from production\\\\Invitate\\\\Web invitations\\\\invitate.uz\\\\butterfly.html'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\invitate-butterfly-template.test.ts:74:1'"
+  },
+  {
+    "name": "Fairy is a published wedding-only Invitate source package",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\invitate-fairy-template.test.ts:9:1'"
+  },
+  {
+    "name": "Fairy keeps gift/card UI out because it was added during adaptation",
+    "error": "'authoritative Fairy source capture is present'",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\invitate-fairy-template.test.ts:61:1'"
+  },
+  {
+    "name": "Fairy preview artwork provenance uses the canonical preview fixture",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\invitate-fairy-template.test.ts:84:1'"
+  },
+  {
+    "name": "Nahorgi Osh renderer maps the shared fixture and four locales",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\invitate-nahorgi-osh-template.test.ts:45:1'"
+  },
+  {
+    "name": "Velora is a published wedding design in the shared typed catalog",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\invitate-velora-template.test.ts:15:1'"
+  },
+  {
+    "name": "Velora keeps gift/to'yona UI absent because it is absent from the captured source",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Invitations - this folder will be removed from production\\\\Invitate\\\\Web invitations\\\\invitate.uz\\\\velora.html'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\invitate-velora-template.test.ts:78:1'"
+  },
+  {
+    "name": "Invitate Velvet is registered as unpublished wedding-only design",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\invitate-velvet-template.test.ts:10:1'"
+  },
+  {
+    "name": "catalog sample keeps source artists and descriptions in the shared fixture",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\invitate-wedding-template.test.ts:28:1'"
+  },
+  {
+    "name": "all registered templates have a bounded, content-hashed 1200-square JPEG, with no catalog capture source",
+    "error": "'oq-atirgul: missing share artwork'",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\invitation-share.test.ts:155:1'"
+  },
+  {
+    "name": "removing a language deletes that locale and automatically retains an enabled fallback",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\invitation.test.ts:218:1'"
+  },
+  {
+    "name": "receipt switch requires gift details; music and gifts are optional",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\invitation.test.ts:241:1'"
+  },
+  {
+    "name": "Islamic Edition is published as a complete E-invitation wedding template",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\islamic-edition-template.test.ts:12:1'"
+  },
+  {
+    "name": "Jasmine White preserves its captured page, stylesheets, and design artwork",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\jasmine-white-source.test.ts:30:1'"
+  },
+  {
+    "name": "Konfetti preserves captured markup, styles, translations, metadata and artwork",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Marxaba\\\\Nikoh\\\\templates\\\\konfetti\\\\index.html'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\konfetti-template.test.ts:69:1'"
+  },
+  {
+    "name": "Korporativ is registered published with exact source event compatibility",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\korporativ-template.test.ts:43:1'"
+  },
+  {
+    "name": "central sample and default contract content cover corporate locales",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\korporativ-template.test.ts:66:1'"
+  },
+  {
+    "name": "captured body, source files, metadata, and SVG artworks are preserved",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Marxaba\\\\Boshqa tadbirlar\\\\templates\\\\korporativ\\\\index.html'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\korporativ-template.test.ts:108:1'"
+  },
+  {
+    "name": "Korporativ packages the official metadata-declared catalog image",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Marxaba\\\\Boshqa tadbirlar\\\\templates\\\\korporativ\\\\meta.js'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\korporativ-template.test.ts:169:1'"
+  },
+  {
+    "name": "Korporativ source gallery art is ephemeral preview content and creator photos take precedence",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\korporativ-template.test.ts:299:1'"
+  },
+  {
+    "name": "Ko‘zgu keeps its full captured HTML composition, art helpers, motion scripts, styles and media",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Marxaba\\\\Nikoh\\\\templates\\\\kozgu\\\\index.html'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\kozgu-template.test.ts:31:1'"
+  },
+  {
+    "name": "Ko‘zgu catalog artwork is the exact preview asset declared by source metadata",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Marxaba\\\\Nikoh\\\\templates\\\\kozgu\\\\meta.js'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\kozgu-template.test.ts:43:1'"
+  },
+  {
+    "name": "Ko‘zgu hides unsupported gift fields and empty venue photos while retaining coordinate maps",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Marxaba\\\\Nikoh\\\\templates\\\\kozgu\\\\template.css'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\kozgu-template.test.ts:145:1'"
+  },
+  {
+    "name": "Kuzgi Chinor preserves captured source and bundles the referenced assets locally",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Marxaba\\\\Nikoh\\\\templates\\\\kuzgi-chinor\\\\index.html'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\kuzgi-chinor-localization.test.ts:54:1'"
+  },
+  {
+    "name": "Kuzgi Chinor blank invitations do not contain preview sample details",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\kuzgi-chinor-localization.test.ts:148:1'"
+  },
+  {
+    "name": "Lace preserves its source and packages every design asset with provenance",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Chorlove\\\\Web invitations\\\\templates\\\\marvarid\\\\preview-frame.html'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\lace-template.test.ts:12:1'"
+  },
+  {
+    "name": "Lace retains the opening animation and maps the complete shared invitation",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\lace-template.test.ts:61:1'"
+  },
+  {
+    "name": "tests\\\\lola-template.test.ts",
+    "error": "'test failed'",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\lola-template.test.ts:1:1'"
+  },
+  {
+    "name": "Love Sakura preserves its full captured page and source asset checksums",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\love-sakura-source.test.ts:15:1'"
+  },
+  {
+    "name": "Love Sakura package removes sample site runtime and binds the shared contract",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\love-sakura-source.test.ts:58:1'"
+  },
+  {
+    "name": "Luxury Gold preserves captured layout, source styles and original assets with provenance",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\luxury-gold-source.test.ts:13:1'"
+  },
+  {
+    "name": "Luxury Gold excludes unrelated gallery/sample data and connects the shared contract",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\luxury-gold-source.test.ts:200:1'"
+  },
+  {
+    "name": "registered Marxaba designs reflect their release state and additive migrations",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\marxaba-queued-integration.test.ts:203:1'"
+  },
+  {
+    "name": "Modern Floral preserves the captured page and exact floral artwork",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Chorlove\\\\Web invitations\\\\templates\\\\modern-floral\\\\preview-frame.html'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\modern-floral-source.test.ts:12:1'"
+  },
+  {
+    "name": "Modern Floral removes Next/site samples and maps the shared invitation services",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\modern-floral-source.test.ts:28:1'"
+  },
+  {
+    "name": "Modern Floral page loads its source motion runner and preserves source reveal states",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\modern-floral-template.test.ts:196:1'"
+  },
+  {
+    "name": "Modern Floral reacts to live reduced-motion preference changes",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\modern-floral-template.test.ts:225:1'"
+  },
+  {
+    "name": "Modern Floral controls respond to pointer and Enter press states",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\modern-floral-template.test.ts:287:1'"
+  },
+  {
+    "name": "Modern Floral preview sample packages the captured default gallery images",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Chorlove\\\\Web invitations\\\\_next\\\\static\\\\chunks\\\\0d2h69c7a3snv.js'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\modern-floral-template.test.ts:367:1'"
+  },
+  {
+    "name": "all exact local source font files resolve",
+    "error": "'/templates/monochrome-editorial-edition/source/reference/fonts/xn7_YHE41ni1AdIRqAuZuw1Bx9mbZk6jFO_F.ttf'",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\monochrome-editorial-template.test.ts:4:1'"
+  },
+  {
+    "name": "catalog is published with wedding support while the original registration remains private",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\monochrome-editorial-template.test.ts:6:1'"
+  },
+  {
+    "name": "Monogram preserves the captured template body, styles, animation, and metadata",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Marxaba\\\\Nikoh\\\\templates\\\\monogram\\\\index.html'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\monogram-template.test.ts:21:1'"
+  },
+  {
+    "name": "Muhabbat Kitobi keeps its captured layout, motion, and art assets",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Marxaba\\\\Nikoh\\\\templates\\\\muhabbat-kitobi\\\\index.html'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\muhabbat-kitobi-localization.test.ts:57:1'"
+  },
+  {
+    "name": "Muhabbat Kitobi sample data stays out of blank saved drafts and empty gift slots",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\muhabbat-kitobi-preview.test.ts:130:1'"
+  },
+  {
+    "name": "Muhr preserves the captured layout, styles, wax-seal rendering, motion, and art",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Marxaba\\\\Nikoh\\\\templates\\\\muhr\\\\index.html'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\muhr-template.test.ts:32:1'"
+  },
+  {
+    "name": "Nahor is published, osh-compatible, and one-person in the creator",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\nahor-template.test.ts:40:1'"
+  },
+  {
+    "name": "Nahor retains the captured page, styles, copy, and opening animation",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Marxaba\\\\Osh va iftorlik\\\\templates\\\\nahor\\\\index.html'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\nahor-template.test.ts:159:1'"
+  },
+  {
+    "name": "Nahor uses the app runtime and captured animation engines without sample code",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Marxaba\\\\Osh va iftorlik\\\\shared\\\\vendor\\\\gsap.min.js'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\nahor-template.test.ts:174:1'"
+  },
+  {
+    "name": "Nahor opening artwork is a checksummed portrait capture of the central fixture",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Marxaba\\\\Osh va iftorlik\\\\templates\\\\nahor\\\\index.html'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\nahor-template.test.ts:213:1'"
+  },
+  {
+    "name": "captured body, visual source, localized copy, metadata, and artwork are preserved",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Invitations - this folder will be removed from production\\\\Marxaba\\\\Osh va iftorlik\\\\templates\\\\nahorgi-osh\\\\index.html'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\nahorgi-osh-template.test.ts:146:1'"
+  },
+  {
+    "name": "Nahorgi Osh gift section and reveal are present in its original source",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Invitations - this folder will be removed from production\\\\Marxaba\\\\Osh va iftorlik\\\\templates\\\\nahorgi-osh\\\\index.html'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\nahorgi-osh-template.test.ts:178:1'"
+  },
+  {
+    "name": "catalog artwork is a fixture-rendered portrait of the authentic opening",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Invitations - this folder will be removed from production\\\\Marxaba\\\\Osh va iftorlik\\\\templates\\\\nahorgi-osh\\\\index.html'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\nahorgi-osh-template.test.ts:276:1'"
+  },
+  {
+    "name": "Nilufar preserves the captured composition, art, styles, and interactive motion",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Marxaba\\\\Nikoh\\\\templates\\\\nilufar\\\\index.html'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\nilufar-template.test.ts:39:1'"
+  },
+  {
+    "name": "Nilufar uses the exact portrait opening artwork for its catalog image",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Marxaba\\\\Nikoh\\\\templates\\\\nilufar\\\\art\\\\poster-pond.webp'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\nilufar-template.test.ts:69:1'"
+  },
+  {
+    "name": "Olive Manor is published for weddings with its complete opening artwork",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\olive-manor-template.test.ts:11:1'"
+  },
+  {
+    "name": "Oltin Kuz keeps the captured invitation body, styles, motion, and artwork",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Marxaba\\\\Tug'ilgan kun va Yubiley\\\\templates\\\\oltin-kuz\\\\index.html'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\oltin-kuz-package.test.ts:46:1'"
+  },
+  {
+    "name": "Oltin Kuz uses only local runtime/font assets and keeps sample data out",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Marxaba\\\\Tug'ilgan kun va Yubiley\\\\templates\\\\oltin-kuz\\\\index.html'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\oltin-kuz-package.test.ts:99:1'"
+  },
+  {
+    "name": "Oltin Kuz source photos are preview-only, localized, and yield to creator uploads",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Marxaba\\\\Tug'ilgan kun va Yubiley\\\\templates\\\\oltin-kuz\\\\art\\\\venue.svg'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\oltin-kuz-package.test.ts:239:1'"
+  },
+  {
+    "name": "Oltin Kuz supports both declared events and keeps the preview fixture out of blank drafts",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\oltin-kuz-package.test.ts:316:1'"
+  },
+  {
+    "name": "tests\\\\oltin-nur-preview.test.ts",
+    "error": "'test failed'",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\oltin-nur-preview.test.ts:1:1'"
+  },
+  {
+    "name": "Oltin Uzuk keeps its captured artwork, styles, and ring animation",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Marxaba\\\\Nikoh\\\\templates\\\\oltin-uzuk\\\\index.html'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\oltin-uzuk-localization.test.ts:44:1'"
+  },
+  {
+    "name": "Oltin Uzuk retains its captured opening and invitation sections",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Marxaba\\\\Nikoh\\\\templates\\\\oltin-uzuk\\\\index.html'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\oltin-uzuk-preview.test.ts:53:1'"
+  },
+  {
+    "name": "Oltin Uzuk catalog cover captures the clean source opening with pinned provenance",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Marxaba\\\\Nikoh\\\\templates\\\\oltin-uzuk\\\\index.html'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\oltin-uzuk-preview.test.ts:75:1'"
+  },
+  {
+    "name": "Oltin Uzuk samples remain ephemeral and unsupported To'yona rows collapse",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\oltin-uzuk-preview.test.ts:160:1'"
+  },
+  {
+    "name": "Oltin Yosh retains its captured sections, controls, and responsive motion",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Marxaba\\\\Tug'ilgan kun va Yubiley\\\\templates\\\\oltin-yosh\\\\index.html'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\oltin-yosh-template.test.ts:41:1'"
+  },
+  {
+    "name": "Buxoro source files match recorded URLs and checksums",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\onlinetaklifnoma-buxoro-ravoq.test.ts:9:1'"
+  },
+  {
+    "name": "Buxoro adapter retains source artwork and connects invitation APIs",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\onlinetaklifnoma-buxoro-ravoq.test.ts:20:1'"
+  },
+  {
+    "name": "Oltin Darvoza exact source art and fonts are packaged with their origins",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\onlinetaklifnoma-oltin-darvoza-ortidagi-baxt.test.ts:9:1'"
+  },
+  {
+    "name": "Oltin Darvoza is registered unpublished for weddings",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\onlinetaklifnoma-oltin-darvoza-ortidagi-baxt.test.ts:37:1'"
+  },
+  {
+    "name": "Tojmahal source art and font subsets match recorded checksums",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\onlinetaklifnoma-tojmahal-oltin-darvozasi.test.ts:9:1'"
+  },
+  {
+    "name": "Tojmahal app adapter retains source artwork and dynamic invitation links",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\onlinetaklifnoma-tojmahal-oltin-darvozasi.test.ts:20:1'"
+  },
+  {
+    "name": "Oq Kabutar catalog art is the fixture-rendered portrait opening",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Marxaba\\\\Nikoh\\\\templates\\\\oq-kabutar\\\\index.html'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\oq-kabutar-catalog-cover.test.ts:16:1'"
+  },
+  {
+    "name": "Oq Kabutar preserves its captured opening and clothing section source",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Marxaba\\\\Nikoh\\\\templates\\\\oq-kabutar\\\\index.html'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\oq-kabutar-localization.test.ts:66:1'"
+  },
+  {
+    "name": "Oq Kabutar does not put catalog-only samples into a blank invitation",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\oq-kabutar-localization.test.ts:137:1'"
+  },
+  {
+    "name": "Orchid source photos and story copy exist only in its preview sample",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\orchid-preview-media.test.ts:15:1'"
+  },
+  {
+    "name": "Orchid RSVP keeps the source layout and reveal motion without a guest-count prompt",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Chorlove\\\\Web invitations\\\\_next\\\\static\\\\chunks\\\\0aexcrombk~7o.js'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\orchid-preview-media.test.ts:60:1'"
+  },
+  {
+    "name": "O‘rik Guli retains captured source and uses renderer-generated opening art",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Marxaba\\\\Nikoh\\\\templates\\\\orik-guli\\\\index.html'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\orik-guli-template.test.ts:87:1'"
+  },
+  {
+    "name": "Oynavand keeps captured markup, visual source, and interactions",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Marxaba\\\\Nikoh\\\\templates\\\\oynavand\\\\index.html'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\oynavand-localization.test.ts:49:1'"
+  },
+  {
+    "name": "Oynavand's preview samples never enter blank invitations and empty gift slots hide",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\oynavand-preview.test.ts:91:1'"
+  },
+  {
+    "name": "Palace Rose is published and supports wedding events only",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\palace-rose-template.test.ts:13:1'"
+  },
+  {
+    "name": "Palace Rose preview media matches its archived photos and stays preview-only",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\palace-rose-template.test.ts:25:1'"
+  },
+  {
+    "name": "isolated page packages the captured Palace Rose DOM and only its source art",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\palace-rose-template.test.ts:59:1'"
+  },
+  {
+    "name": "Palace Rose bridge binds creator fields, service actions, locales, and reduced motion",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Chorlove\\\\Web invitations\\\\_next\\\\static\\\\chunks\\\\0dg.9_70mpb0j.js'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\palace-rose-template.test.ts:115:1'"
+  },
+  {
+    "name": "Palace Rose limits shared extras to its native To'yona modal",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\palace-rose-template.test.ts:142:1'"
+  },
+  {
+    "name": "Palace Rose packages its captured styles and source motion timings locally",
+    "error": "'0.u3j0~_2ygfx.css'",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\palace-rose-template.test.ts:165:1'"
+  },
+  {
+    "name": "Palov does not add a To'yana or gift-card section absent from its Invitate source",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Invitations - this folder will be removed from production\\\\Invitate\\\\Web invitations\\\\invitate.uz\\\\palov.html'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\palov-template.test.ts:30:1'"
+  },
+  {
+    "name": "Palov local font stylesheet has no remote font requests",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Invitations - this folder will be removed from production\\\\Invitate\\\\Web invitations\\\\fonts.googleapis.com\\\\css2__8254095ff41b2a53'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\palov-template.test.ts:62:1'"
+  },
+  {
+    "name": "Palov is wired through the shared catalog preview and public invitation renderer",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\palov-template.test.ts:90:1'"
+  },
+  {
+    "name": "Parda retains the complete captured source and embroidered artwork",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Marxaba\\\\Nikoh\\\\templates\\\\parda\\\\index.html'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\parda-template.test.ts:19:1'"
+  },
+  {
+    "name": "Paxta retains the captured layout, styles, motion, and artwork",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Marxaba\\\\Nikoh\\\\templates\\\\paxta\\\\index.html'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\paxta-localization.test.ts:98:1'"
+  },
+  {
+    "name": "Paxta source adapter hides unsupported venue and gift rows without changing captured CSS",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Marxaba\\\\Nikoh\\\\templates\\\\paxta\\\\template.css'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\paxta-localization.test.ts:254:1'"
+  },
+  {
+    "name": "Paxta catalog artwork is a portrait capture of the source opening with provenance",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Marxaba\\\\Nikoh\\\\templates\\\\paxta\\\\index.html'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\paxta-localization.test.ts:268:1'"
+  },
+  {
+    "name": "Qandil retains the captured page, source scripts, style, and illustration assets",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Marxaba\\\\Nikoh\\\\templates\\\\qandil\\\\index.html'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\qandil-template.test.ts:29:1'"
+  },
+  {
+    "name": "Qandil uses the shared four-locale preview data for all supported sections",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\qandil-template.test.ts:295:1'"
+  },
+  {
+    "name": "Qatlam keeps the full captured body, source scripts, styles, metadata, and art",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Marxaba\\\\Nikoh\\\\templates\\\\qatlam\\\\index.html'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\qatlam-template.test.ts:22:1'"
+  },
+  {
+    "name": "tests\\\\qiz-bazmi-template.test.ts",
+    "error": "'test failed'",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\qiz-bazmi-template.test.ts:1:1'"
+  },
+  {
+    "name": "Qog‘oz Turna keeps its captured design and motion source",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Marxaba\\\\Nikoh\\\\templates\\\\qogoz-turna\\\\index.html'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\qogoz-turna-template.test.ts:21:1'"
+  },
+  {
+    "name": "Qog‘oz Turna catalog cover matches the original metadata-declared source artwork",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Marxaba\\\\Nikoh\\\\templates\\\\qogoz-turna\\\\meta.js'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\qogoz-turna-template.test.ts:86:1'"
+  },
+  {
+    "name": "Qog‘oz Turna blank invitations exclude catalog-only sample content",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\qogoz-turna-template.test.ts:180:1'"
+  },
+  {
+    "name": "Retro Kino catalog artwork matches the original metadata-declared source cover",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Marxaba\\\\Nikoh\\\\templates\\\\retro-kino\\\\meta.js'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\retro-kino-preview-contract.test.ts:93:1'"
+  },
+  {
+    "name": "Retro Kino keeps the captured invitation markup, styling, and motion",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Marxaba\\\\Nikoh\\\\templates\\\\retro-kino\\\\index.html'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\retro-kino-template.test.ts:31:1'"
+  },
+  {
+    "name": "Sahifa retains the captured page, scripts, styles, and local fonts",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Marxaba\\\\Nikoh\\\\templates\\\\sahifa\\\\index.html'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\sahifa-localization.test.ts:48:1'"
+  },
+  {
+    "name": "Sahifa's typed catalog release flag matches its additive publish migration",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\sahifa-preview-contract.test.ts:27:1'"
+  },
+  {
+    "name": "Sahro Fonusi keeps its captured source composition, styling, behavior, and art",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Marxaba\\\\Nikoh\\\\templates\\\\sahro-fonusi\\\\index.html'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\sahro-fonusi-template.test.ts:31:1'"
+  },
+  {
+    "name": "Sahro Fonusi catalog artwork is a fixture-rendered portrait opening",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Marxaba\\\\Nikoh\\\\templates\\\\sahro-fonusi\\\\index.html'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\sahro-fonusi-template.test.ts:47:1'"
+  },
+  {
+    "name": "Sahro Fonusi hides empty unsupported gift fields without changing captured styling",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Marxaba\\\\Nikoh\\\\templates\\\\sahro-fonusi\\\\template.css'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\sahro-fonusi-template.test.ts:201:1'"
+  },
+  {
+    "name": "Shahzoda preserves captured source files and artwork with only documented body bindings",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Marxaba\\\\Sunnat to'yi\\\\templates\\\\shahzoda\\\\index.html'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\shahzoda-template.test.ts:33:1'"
+  },
+  {
+    "name": "Shirin Bayram retains its complete captured body, style, copy, and motion",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Marxaba\\\\Tug'ilgan kun va Yubiley\\\\templates\\\\shirin-bayram\\\\index.html'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\shirin-bayram-template.test.ts:191:1'"
+  },
+  {
+    "name": "Shirin Bayram packages local Latin/Cyrillic fonts and all runtime assets",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Marxaba\\\\Tug'ilgan kun va Yubiley\\\\shared\\\\vendor\\\\gsap.min.js'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\shirin-bayram-template.test.ts:258:1'"
+  },
+  {
+    "name": "Somon Yo‘li preserves captured layout, source styles, and artwork",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Marxaba\\\\Nikoh\\\\templates\\\\somon-yoli\\\\index.html'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\somon-yoli-template.test.ts:32:1'"
+  },
+  {
+    "name": "Suzani keeps its original markup, art, styles, and opening animation",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Marxaba\\\\Nikoh\\\\templates\\\\suzani\\\\index.html'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\suzani-template.test.ts:48:1'"
+  },
+  {
+    "name": "Suzani packages local fonts and a provenance-checked portrait opening cover",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Marxaba\\\\capture-manifest.json'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\suzani-template.test.ts:135:1'"
+  },
+  {
+    "name": "tungi-saroy: exact captured CSS, artwork and fonts; no provider runtime",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Invitations - this folder will be removed from production\\\\Taklifla\\\\Web invitations\\\\taklifla.uz\\\\templates\\\\midnight-palace__40820cc7bb626b43.html'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\taklifla-luxury-source.test.ts:57:3'"
+  },
+  {
+    "name": "tovus: exact captured CSS, artwork and fonts; no provider runtime",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Invitations - this folder will be removed from production\\\\Taklifla\\\\Web invitations\\\\taklifla.uz\\\\templates\\\\tovus__c7e8ea90968ad140.html'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\taklifla-luxury-source.test.ts:57:3'"
+  },
+  {
+    "name": "Taklifnomachi demo 1 is registered as an unpublished Marxaba source adapter",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\taklifnomachi-1-template.test.ts:13:1'"
+  },
+  {
+    "name": "demo 12 stays unpublished and joins the Marxaba renderer",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\taklifnomachi-12-template.test.ts:13:1'"
+  },
+  {
+    "name": "demo 13 is unpublished and registered as a Marxaba template",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\taklifnomachi-13-template.test.ts:16:1'"
+  },
+  {
+    "name": "the capture is intact and production uses captured local resources",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Taklifnomachi\\\\Web invitations\\\\taklifnomachi.uz\\\\demo\\\\13\\\\index.html'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\taklifnomachi-13-template.test.ts:27:1'"
+  },
+  {
+    "name": "demo 15 source capture is retained and production references local source assets",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Taklifnomachi\\\\Web invitations\\\\taklifnomachi.uz\\\\demo\\\\15\\\\index.html'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\taklifnomachi-15-template.test.ts:6:1'"
+  },
+  {
+    "name": "demo 15 is registered unpublished",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\taklifnomachi-15-template.test.ts:15:1'"
+  },
+  {
+    "name": "demo 16 catalog entry starts unpublished",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\taklifnomachi-16-template.test.ts:5:1'"
+  },
+  {
+    "name": "demo 17 catalog registration is unpublished",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\taklifnomachi-17-template.test.ts:5:1'"
+  },
+  {
+    "name": "demo 18 catalog contract starts unpublished",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\taklifnomachi-18-template.test.ts:5:1'"
+  },
+  {
+    "name": "demo 19 is registered unpublished",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\taklifnomachi-19-template.test.ts:5:1'"
+  },
+  {
+    "name": "packaged derivatives exist, save useful bytes, and never target uploaded media",
+    "error": "\"ENOENT: no such file or directory, stat 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\apps\\\\web\\\\public\\\\templates\\\\baxt-kaliti\\\\assets\\\\previews\\\\template\\\\baxt-kaliti\\\\dresscode.png'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\template-media.test.ts:18:1'"
+  },
+  {
+    "name": "Toscana catalog art is the complete portrait poster used by its captured opening",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Marxaba\\\\Nikoh\\\\templates\\\\toscana\\\\index.html'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\toscana-preview-art.test.ts:13:1'"
+  },
+  {
+    "name": "Toscana is registered for publication at the verified release gate",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\toscana-template.test.ts:21:1'"
+  },
+  {
+    "name": "Toscana keeps the captured page structure, styling, motion, and local art",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Marxaba\\\\Nikoh\\\\templates\\\\toscana\\\\index.html'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\toscana-template.test.ts:35:1'"
+  },
+  {
+    "name": "Toscana static copy is translated and the wrapper uses the shared typed contract",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Marxaba\\\\Nikoh\\\\templates\\\\toscana\\\\i18n.js'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\toscana-template.test.ts:141:1'"
+  },
+  {
+    "name": "Vals preserves the full captured design, animation, and artwork",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Marxaba\\\\Nikoh\\\\templates\\\\vals\\\\index.html'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\vals-template.test.ts:55:1'"
+  },
+  {
+    "name": "Velvet Royale publishes the exact E-invitation source ID after release",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\velvet-royale-template.test.ts:15:1'"
+  },
+  {
+    "name": "Velvet Royale uses its own renderer across preview and public routes",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\velvet-royale-template.test.ts:149:1'"
+  },
+  {
+    "name": "keeps the capture intact and packages all exact local design dependencies",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Invitations - this folder will be removed from production\\\\Wedivo\\\\Web invitations\\\\templates\\\\mY6OrlB3cqA84nHvvBKq\\\\index.html'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\wedivo-angin-empat-musim-template.test.ts:20:1'"
+  },
+  {
+    "name": "catalog art is a clean complete portrait opening tied to the canonical fixture",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\wedivo-angin-empat-musim-template.test.ts:161:1'"
+  },
+  {
+    "name": "keeps the captured source byte-exact and packages local type assets",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Invitations - this folder will be removed from production\\\\Wedivo\\\\Web invitations\\\\templates\\\\3EzL4d2Ra0jKGgi2xNCr\\\\index.html'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\wedivo-di-balik-kalkir-template.test.ts:14:1'"
+  },
+  {
+    "name": "Eternal Rose provenance identifies the untouched embedded capture",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Invitations - this folder will be removed from production\\\\Wedivo\\\\Web invitations\\\\templates\\\\2Vn0nk5HHqwO4V5FJ6Xg\\\\index.html'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\wedivo-eternal-rose-garden-template.test.ts:11:1'"
+  },
+  {
+    "name": "the exact captured CSS is retained with local artwork URLs",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Invitations - this folder will be removed from production\\\\Wedivo\\\\Web invitations\\\\templates\\\\2Vn0nk5HHqwO4V5FJ6Xg\\\\index.html'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\wedivo-eternal-rose-garden-template.test.ts:19:1'"
+  },
+  {
+    "name": "source bloom, cutout, cover, environment and scroll algorithms remain exact",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Invitations - this folder will be removed from production\\\\Wedivo\\\\Web invitations\\\\templates\\\\2Vn0nk5HHqwO4V5FJ6Xg\\\\index.html'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\wedivo-eternal-rose-garden-template.test.ts:26:1'"
+  },
+  {
+    "name": "preserves the original captured landscape engine and exact local dependency bytes",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Invitations - this folder will be removed from production\\\\Wedivo\\\\Web invitations\\\\templates\\\\XkAzuF8SSX5Pplof0P2d\\\\index.html'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\wedivo-lanskap-yang-hidup-template.test.ts:13:1'"
+  },
+  {
+    "name": "typed adapter preserves authored content, fractional event timezone and preview-only isolation",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\wedivo-lanskap-yang-hidup-template.test.ts:78:1'"
+  },
+  {
+    "name": "capture is unchanged and every packaged source dependency matches captured bytes",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Invitations - this folder will be removed from production\\\\Wedivo\\\\Web invitations\\\\templates\\\\zkIhLR9Uv1c8xwbW76Sw\\\\index.html'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\wedivo-melting-reality-template.test.ts:14:1'"
+  },
+  {
+    "name": "source painting CSS and melt geometry are reused rather than redrawn",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Invitations - this folder will be removed from production\\\\Wedivo\\\\Web invitations\\\\templates\\\\zkIhLR9Uv1c8xwbW76Sw\\\\index.html'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\wedivo-melting-reality-template.test.ts:38:1'"
+  },
+  {
+    "name": "Uzbek default and portrait artwork use the canonical rendered opening",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\wedivo-melting-reality-template.test.ts:99:1'"
+  },
+  {
+    "name": "Oathbound preserves its original capture and exact procedural game engine",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Invitations - this folder will be removed from production\\\\Wedivo\\\\Web invitations\\\\templates\\\\uVaSW0h4UZuI8iAo9SdV\\\\index.html'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\wedivo-oathbound-template.test.ts:16:1'"
+  },
+  {
+    "name": "catalog art is the actual 450x800 Uzbek source opening with reproducible fixture and source hashes",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\wedivo-oathbound-template.test.ts:91:1'"
+  },
+  {
+    "name": "Pulau Sehati keeps the capture untouched and every exact design dependency local",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Invitations - this folder will be removed from production\\\\Wedivo\\\\Web invitations\\\\templates\\\\ds2ytTMWiepahvAu6cOB\\\\index.html'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\wedivo-pulau-sehati-template.test.ts:40:1'"
+  },
+  {
+    "name": "source CSS retains complete theme variables after localizing dependencies",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Invitations - this folder will be removed from production\\\\Wedivo\\\\Web invitations\\\\templates\\\\ds2ytTMWiepahvAu6cOB\\\\index.html'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\wedivo-pulau-sehati-template.test.ts:73:1'"
+  },
+  {
+    "name": "the original embedded texture, shader programs and procedural geometry are reused",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Invitations - this folder will be removed from production\\\\Wedivo\\\\Web invitations\\\\templates\\\\ds2ytTMWiepahvAu6cOB\\\\index.html'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\wedivo-pulau-sehati-template.test.ts:96:1'"
+  },
+  {
+    "name": "source identity and all exact captured dependencies are verifiable",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Invitations - this folder will be removed from production\\\\Wedivo\\\\Web invitations\\\\templates\\\\cl18spIdFB8VbBu1Yiyb\\\\index.html'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\wedivo-riwayat-obrolan-template.test.ts:14:1'"
+  },
+  {
+    "name": "packages the captured embedded design with local fonts and art, without invitation demo records",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Invitations - this folder will be removed from production\\\\Wedivo\\\\Web invitations\\\\templates\\\\5PsJ7Q60mxwx5sKxkGSY\\\\index.html'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\wedivo-sundanese-puspa-template.test.ts:8:1'"
+  },
+  {
+    "name": "Taman Rahasia preserves the capture and verifies all exact localized dependencies",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Invitations - this folder will be removed from production\\\\Wedivo\\\\Web invitations\\\\templates\\\\gLoUUgh7ocbBu09nZsFQ\\\\index.html'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\wedivo-taman-rahasia-template.test.ts:10:1'"
+  },
+  {
+    "name": "Sirli Bog‘ has a canonical portrait opening cover and Uzbek default copy",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\wedivo-taman-rahasia-template.test.ts:51:1'"
+  },
+  {
+    "name": "typed catalog is published and supports the exact event type while the original registration remains private",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\xatna-edition-template.test.ts:6:1'"
+  },
+  {
+    "name": "venue identity survives the shared contract and rejects unrelated URI schemes",
+    "error": "|-",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\yandex-maps.test.ts:30:1'"
+  },
+  {
+    "name": "Yangi Uy retains the captured body, CSS, translations, metadata, and art",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Marxaba\\\\Boshqa tadbirlar\\\\templates\\\\yangi-uy\\\\index.html'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\yangi-uy-template.test.ts:37:1'"
+  },
+  {
+    "name": "Yangi Uy excludes captured sample data and resolves only local production dependencies",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Marxaba\\\\Boshqa tadbirlar\\\\shared\\\\vendor\\\\gsap.min.js'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\yangi-uy-template.test.ts:62:1'"
+  },
+  {
+    "name": "Yangi Uy source gallery retains controls, wrapped navigation, and empty media fallback",
+    "error": "\"ENOENT: no such file or directory, open 'D:\\\\Projects\\\\Fotiha\\\\Website\\\\Invitations - this folder will be removed from production\\\\Marxaba\\\\Boshqa tadbirlar\\\\templates\\\\yangi-uy\\\\index.html'\"",
+    "location": "'D:\\\\Projects\\\\Fotiha\\\\Website\\\\tests\\\\yangi-uy-template.test.ts:222:1'"
+  }
+]

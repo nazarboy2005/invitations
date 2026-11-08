@@ -3,7 +3,7 @@ import { readFileSync, existsSync } from "node:fs";
 import test from "node:test";
 import { TEMPLATES } from "../packages/contracts/src/index.ts";
 
-const root = new URL("../apps/web/public/templates/onlinetaklifnoma-zarrin-doppi/", import.meta.url);
+const root = new URL("../apps/web/public/templates/zarrin-doppi/", import.meta.url);
 const file = (name: string) => readFileSync(new URL(name, root), "utf8");
 
 test("Zarrin do‘ppi uses the exact captured embroidery and source fonts", () => {

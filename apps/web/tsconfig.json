@@ -66,7 +66,9 @@
     ".next-payments-test/types/**/*.ts",
     ".next-payments-test/dev/types/**/*.ts",
     ".next-taklifla/types/**/*.ts",
-    ".next-taklifla/dev/types/**/*.ts"
+    ".next-taklifla/dev/types/**/*.ts",
+    ".next-template-renaming-build/types/**/*.ts",
+    ".next-template-renaming-build/dev/types/**/*.ts"
   ],
   "exclude": [
     "node_modules"

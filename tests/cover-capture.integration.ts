@@ -44,7 +44,7 @@ test(
     draft.content["uz-Latn"].people[0] = "Aziz personalized";
     assert.notDeepEqual(await capture("anor"), first);
     await capture("somon-yoli");
-    await capture("butterfly");
+    await capture("kapalak");
     await capture("aurelia");
   },
 );

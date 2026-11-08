@@ -155,7 +155,7 @@ export function AdminTemplates({
   const filtered = templates.filter(
     (template) =>
       (status === "all" || template.published === (status === "published")) &&
-      `${template.name} ${template.id}`
+      `${template.name} ${publicTemplateId(template.id)} ${template.id}`
         .toLocaleLowerCase()
         .includes(query.trim().toLocaleLowerCase()),
   );
@@ -380,7 +380,7 @@ export function AdminTemplates({
                 <TemplateArtwork template={template} />
                 <span className={styles.templateName}>
                   <strong>{template.name}</strong>
-                  <small>{template.id}</small>
+                  <small>{publicTemplateId(template.id)}</small>
                 </span>
                 <span
                   className={

@@ -23,10 +23,10 @@ try {
   for (const source of [
     "/templates/velora/source/velora.html",
     "/templates/safir/source/safir.html",
-    "/templates/lace/source/preview-frame.html",
-    "/templates/taklifnomachi-1/source/index.html",
-    "/templates/invitate-wedding/assets/captured/5b73decb38ff5c8c.js",
-    "/templates/taklifnomachi-1/source/templates/1/js/QJtgeIS73Tgv.js",
+    "/templates/marvarid/source/preview-frame.html",
+    "/templates/nafosat/source/index.html",
+    "/templates/gulchambar/assets/captured/5b73decb38ff5c8c.js",
+    "/templates/nafosat/source/templates/1/js/QJtgeIS73Tgv.js",
   ]) assert.equal((await fetch(origin + source)).status, 404, source);
   assert.equal((await fetch(`${origin}/templates/anor/source/index.html`)).status, 200);
 

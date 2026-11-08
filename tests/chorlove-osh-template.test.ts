@@ -6,7 +6,7 @@ import { TEMPLATES } from "../packages/contracts/src/index";
 import { createTemplatePreviewSample } from "../apps/web/src/modules/catalog/preview-sample";
 
 const root = process.cwd();
-const packageRoot = path.join(root, "apps/web/public/templates/chorlove/osh");
+const packageRoot = path.join(root, "apps/web/public/templates/osh");
 const readPackage = (file: string) =>
   readFileSync(path.join(packageRoot, file), "utf8");
 const chorloveRenderer = readFileSync(
@@ -47,10 +47,10 @@ test("Chorlove Osh is a distinct published Osh template", () => {
   assert.ok(osh);
   assert.deepEqual(osh.categoryIds, ["osh"]);
   assert.deepEqual(osh.supportedEventTypes, ["osh"]);
-  assert.equal(osh.previewImage, "/templates/chorlove/osh/preview.jpg");
+  assert.equal(osh.previewImage, "/templates/osh/preview.jpg");
   assert.equal(osh.published, true);
   assert.notEqual(osh.id, "palov");
-  assert.notEqual(osh.id, "invitate-palov");
+  assert.notEqual(osh.id, "osh-ziyofati");
 });
 
 test("Chorlove Osh uses its namespaced source renderer without platform extras", () => {

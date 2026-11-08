@@ -1,0 +1,16 @@
+/* Platform data and controls; the reference CSS owns the visual design. */
+html,body{margin:0;padding:0;background:#160d0e}body{min-height:100dvh}
+html.velvet-opening{overflow:hidden;overscroll-behavior:none}
+@font-face{font-family:'Marck Script';font-style:normal;font-weight:400;font-display:swap;src:url('/templates/baxmal-saroy/source/reference/fonts/cyrillic-script.ttf') format('truetype')}
+.velvet-royale{width:min(100%,450px);margin-inline:auto;min-height:100dvh;--invitation-canvas-width:450px}
+.velvet-royale [hidden]{display:none!important}
+.royal-language{position:fixed;z-index:120;top:12px;right:max(calc((100vw - 450px)/2 + 12px),12px);display:flex;gap:5px}
+.royal-language button,.velvet-music-toggle{border:1px solid #ba9b6d;background:rgba(22,13,14,.8);color:#ead2a6;border-radius:50%;min-width:34px;min-height:34px;font:500 11px 'Outfit',sans-serif}
+.royal-language button[aria-pressed=true]{background:#ba9b6d;color:#160d0e}
+.velvet-music-toggle{position:fixed;z-index:110;right:max(calc((100vw - 450px)/2 + 12px),12px);bottom:18px;font-size:20px;cursor:pointer}
+.velvet-calendar-action{display:block;width:max-content;margin:18px auto 0;color:#8b623a;text-decoration:underline}
+.velvet-program{list-style:none;padding:0;margin:24px auto;max-width:360px}.velvet-program li{display:flex;gap:18px;justify-content:center;padding:10px;border-bottom:1px solid #a5805a}
+.section-family__name{max-width:100%;overflow-wrap:anywhere}
+.velvet-gallery-opening-caption{margin:12px 24px;text-align:center;color:#ddc7ad;font:400 14px/1.5 'Cormorant Garamond',serif}
+.velvet-reduced-motion *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+@media(prefers-reduced-motion:reduce){.velvet-royale *{animation:none!important;transition:none!important;scroll-behavior:auto!important}}

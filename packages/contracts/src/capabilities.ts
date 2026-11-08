@@ -1,6 +1,7 @@
 import type { Invitation, InvitationContent } from "./index";
 import { TEMPLATE_CAPABILITIES } from "./template-capabilities";
 import { normalizeVenue } from "./maps";
+import { resolveTemplateId } from "./template-identity";
 
 export type ImageContentField =
   | "eventLabel"
@@ -88,7 +89,7 @@ const unsupported: TemplateCapabilities = {
 };
 
 export function templateCapabilities(id: string): TemplateCapabilities {
-  return TEMPLATE_CAPABILITIES[id] ?? unsupported;
+  return TEMPLATE_CAPABILITIES[resolveTemplateId(id)] ?? unsupported;
 }
 
 /** Source-supported visitor interactions; stored on every catalog template. */
@@ -105,13 +106,13 @@ export function templateVisitorFeatures(id: string): TemplateVisitorFeatures {
     rsvp: c.rsvp,
     wishes: c.wishes,
     receipts: c.gift && c.receipts,
-    giftIntentions: id === "wedivo-pulau-sehati",
+    giftIntentions: resolveTemplateId(id) === "kongillar-oroli",
   };
 }
 
 export function invitationActivityFeatures(invitation: Invitation, counts = { responses: 0, wishes: 0, receipts: 0, intentions: 0 }) {
   const f = templateVisitorFeatures(invitation.templateId);
-  const giftWell = (invitation.templateData["wedivo-pulau-sehati"] as { giftWell?: { enabled?: boolean } } | undefined)?.giftWell;
+  const giftWell = (invitation.templateData["kongillar-oroli"] as { giftWell?: { enabled?: boolean } } | undefined)?.giftWell;
   // Keep previous submissions accessible after the owner turns an optional form off.
   return {
     responses: f.rsvp === "form" && (invitation.rsvp.enabled || counts.responses > 0),

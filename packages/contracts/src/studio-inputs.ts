@@ -36,22 +36,22 @@ function write(value: unknown, path: Path, replacement: unknown) {
 /** Keep this allowlist aligned with the template-specific Studio editors. */
 export function templateDataSchema(id: string) {
   return ({
-    "taklifla-terracotta": terracottaDataSchema,
-    "taklifla-yulduzli-tun": starryDataSchema,
-    "taklifla-sharlar": sharlarDataSchema,
-    "taklifla-sakura-guli": sakuraDataSchema,
-    "taklifla-qogoz-ertagi": qogozDataSchema,
-    "taklifla-parilar-ertagi": pariDataSchema,
-    "taklifla-osmon": osmonDataSchema,
-    "taklifla-oltin-yol": oltinYolDataSchema,
-    "taklifla-toglar-bagrida": mountainDataSchema,
-    "taklifla-zarrin-gullar": zarrinDataSchema,
-    "taklifla-gulbog": gulbogDataSchema,
-    "taklifla-fayzli-xonadon": fayzliXonadonDataSchema,
-    "taklifla-yubiley-sahifasi": yubileySahifasiDataSchema,
-    "taklifla-muhrli-maktub": muhrliMaktubDataSchema,
-    "wedivo-pulau-sehati": pulauSehatiDataSchema,
-  } as const)[id as "wedivo-pulau-sehati"];
+    "terrakota": terracottaDataSchema,
+    "yulduzli-tun": starryDataSchema,
+    "sharlar": sharlarDataSchema,
+    "sakura-guli": sakuraDataSchema,
+    "qogoz-ertagi": qogozDataSchema,
+    "parilar-ertagi": pariDataSchema,
+    "osmon": osmonDataSchema,
+    "oltin-yol": oltinYolDataSchema,
+    "toglar-bagrida": mountainDataSchema,
+    "zarrin-gullar": zarrinDataSchema,
+    "gulbog": gulbogDataSchema,
+    "fayzli-xonadon": fayzliXonadonDataSchema,
+    "umr-bahori": yubileySahifasiDataSchema,
+    "muhrli-maktub": muhrliMaktubDataSchema,
+    "kongillar-oroli": pulauSehatiDataSchema,
+  } as const)[id as "kongillar-oroli"];
 }
 
 function unsupportedSlots(invitation: Invitation): Slot[] {

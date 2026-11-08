@@ -1312,23 +1312,23 @@
             spots.push([
               96 * Math.cos(a),
               -204 - 96 * Math.sin(a),
-              i % 3 === 1 ? "bloom" : "rose",
+              i % 3 === 1 ? "gullar-bayrami" : "rose",
               0.9 + (i % 2) * 0.35,
             ]);
           }
           spots.push(
             [-92, -200, "rose", 1.4],
             [92, -200, "rose", 1.4],
-            [-70, -126, "bloom", 0.9],
-            [70, -96, "bloom", 0.9],
+            [-70, -126, "gullar-bayrami", 0.9],
+            [70, -96, "gullar-bayrami", 0.9],
             [-66, -60, "rose", 1],
             [66, -150, "rose", 1],
           );
           spots.push(
             [-104, -6, "rose", 1.5],
             [104, -6, "rose", 1.5],
-            [-118, 2, "bloom", 1.1],
-            [118, 2, "bloom", 1.1],
+            [-118, 2, "gullar-bayrami", 1.1],
+            [118, 2, "gullar-bayrami", 1.1],
           );
           spots.forEach(function (sp, k) {
             var g = sv(

@@ -43,9 +43,9 @@ const path = require("node:path");
       "anor",
       "atlas",
       "oq-kabutar",
-      "stained-glass",
-      "royal-burgundy-edition",
-      "wedivo-pulau-sehati",
+      "shisha-naqshi",
+      "baxmal-saroy",
+      "kongillar-oroli",
     ]) {
       await page.goto(
         `http://127.0.0.1:3001/preview?template=${template}&qaSilent=1`,

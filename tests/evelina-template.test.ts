@@ -7,7 +7,7 @@ import { templateById } from "../packages/contracts/src/index";
 import { createTemplatePreviewSample } from "../apps/web/src/modules/catalog/preview-sample";
 
 const root = process.cwd();
-const pub = path.join(root, "apps/web/public/templates/evelina");
+const pub = path.join(root, "apps/web/public/templates/baxt-kaliti");
 const source = path.join(
   root,
   "Invitations - this folder will be removed from production/Invitate/Web invitations/invitate.uz",
@@ -49,9 +49,9 @@ test("Evelina preview provenance points to packaged files and matching artwork h
 });
 
 test("Evelina is a published wedding-only catalog template", () => {
-  const template = templateById("evelina");
+  const template = templateById("baxt-kaliti");
   assert.ok(template);
-  assert.equal(template.name, "Evelina");
+  assert.equal(template.name, "Baxt kaliti");
   assert.equal(template.published, true);
   assert.equal(template.previewEventType, "wedding");
   assert.deepEqual(template.categoryIds, ["wedding"]);
@@ -63,12 +63,12 @@ test("the adapted frame retains source artwork, videos, and local font files", (
   const html = read(pub, "index.html");
   const css = read(pub, "assets/css/evelina.css");
   for (const file of [
-    "assets/previews/template/evelina/hero.png",
-    "assets/previews/template/evelina/hero.mp4",
-    "assets/previews/template/evelina/lock-cover.mp4",
-    "assets/previews/template/evelina/crystals.webp",
-    "assets/previews/template/evelina/inner-video.gif",
-    "assets/previews/template/evelina/location.png",
+    "assets/previews/template/baxt-kaliti/hero.png",
+    "assets/previews/template/baxt-kaliti/hero.mp4",
+    "assets/previews/template/baxt-kaliti/lock-cover.mp4",
+    "assets/previews/template/baxt-kaliti/crystals.webp",
+    "assets/previews/template/baxt-kaliti/inner-video.gif",
+    "assets/previews/template/baxt-kaliti/location.png",
     "assets/fonts/BIKHAM.TTF",
     "assets/fonts/standart.otf",
   ])
@@ -140,7 +140,7 @@ test("frame is localized and uses contract-backed fields and APIs", () => {
 
 test("Cyrillic lookalike glyphs keep Evelina calligraphy while accessible text stays correct", () => {
   const script = read(
-    "apps/web/public/templates/evelina/assets/js",
+    "apps/web/public/templates/baxt-kaliti/assets/js",
     "evelina.js",
   );
   assert.match(script, /"Ҳ":"Х","ҳ":"х","Қ":"К","қ":"к"/);
@@ -149,7 +149,7 @@ test("Cyrillic lookalike glyphs keep Evelina calligraphy while accessible text s
 });
 
 test("all supported sample locales flow through the shared preview fixture", () => {
-  const sample = createTemplatePreviewSample("evelina");
+  const sample = createTemplatePreviewSample("baxt-kaliti");
   assert.equal(sample.eventType, "wedding");
   for (const locale of ["uz-Latn", "uz-Cyrl", "en", "ru"] as const) {
     assert.ok(sample.content[locale].people.length >= 2);

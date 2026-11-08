@@ -5,17 +5,17 @@ import test from "node:test";
 import { TEMPLATES } from "@taklifnoma/contracts";
 
 const root = process.cwd();
-const templateRoot = path.join(root, "apps/web/public/templates/taklifnomachi-1");
+const templateRoot = path.join(root, "apps/web/public/templates/nafosat");
 const html = readFileSync(path.join(templateRoot, "index.html"), "utf8");
 const captured = readFileSync(path.join(templateRoot, "source/index.html"), "utf8");
 const adapter = readFileSync(path.join(templateRoot, "adapter.js"), "utf8");
 
 test("Taklifnomachi demo 1 is registered as an unpublished Marxaba source adapter", () => {
-  const template = TEMPLATES.find((item) => item.id === "taklifnomachi-1");
+  const template = TEMPLATES.find((item) => item.id === "nafosat");
   assert.ok(template);
   assert.equal(template.published, false);
   assert.deepEqual(template.supportedEventTypes, ["wedding"]);
-  assert.equal(template.previewImage, "/templates/taklifnomachi-1/preview.png");
+  assert.equal(template.previewImage, "/templates/nafosat/preview.png");
   const registry = readFileSync(path.join(root, "apps/web/src/templates/marxaba/registry.ts"), "utf8");
   assert.match(registry, /"taklifnomachi-1"/);
   assert.ok(existsSync(path.join(templateRoot, "preview.png")));

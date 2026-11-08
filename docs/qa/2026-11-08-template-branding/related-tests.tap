@@ -1,0 +1,443 @@
+TAP version 13
+# Subtest: Chavandoz keeps the captured body, styles, metadata, translations, and artwork
+not ok 1 - Chavandoz keeps the captured body, styles, metadata, translations, and artwork
+  ---
+  duration_ms: 1.9621
+  type: 'test'
+  location: 'D:\\Projects\\Fotiha\\Website\\tests\\chavandoz-template.test.ts:2:2721'
+  failureType: 'testCodeFailure'
+  error: "ENOENT: no such file or directory, open 'D:\\Projects\\Fotiha\\Website\\Invitations - this folder will be removed from production\\Marxaba\\Sunnat to'yi\\templates\\chavandoz\\index.html'"
+  code: 'ENOENT'
+  stack: |-
+    readFileSync (node:fs:440:20)
+    readFileSync (D:\Projects\Fotiha\Website\tests\helpers\source-files.ts:55:23)
+    captured (D:\Projects\Fotiha\Website\tests\chavandoz-template.test.ts:36:36)
+    TestContext.<anonymous> (D:\Projects\Fotiha\Website\tests\chavandoz-template.test.ts:44:22)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.start (node:internal/test_runner/test:944:17)
+    startSubtestAfterBootstrap (node:internal/test_runner/harness:296:17)
+  ...
+# Subtest: Chavandoz retains its captured invitation structure, art, and interactions
+ok 2 - Chavandoz retains its captured invitation structure, art, and interactions
+  ---
+  duration_ms: 1.5442
+  type: 'test'
+  ...
+# Subtest: the source package uses the local platform runtime and excludes captured sample invitations
+ok 3 - the source package uses the local platform runtime and excludes captured sample invitations
+  ---
+  duration_ms: 3.5346
+  type: 'test'
+  ...
+# Subtest: Chavandoz packages its metadata preview as an actual portrait WebP render
+ok 4 - Chavandoz packages its metadata preview as an actual portrait WebP render
+  ---
+  duration_ms: 11.2063
+  type: 'test'
+  ...
+# Subtest: the adapter maps contract data and documents source-only fields without inventing creator data
+ok 5 - the adapter maps contract data and documents source-only fields without inventing creator data
+  ---
+  duration_ms: 3.4869
+  type: 'test'
+  ...
+# Subtest: Chavandoz maps its sunnat celebration fixture through all four locales
+ok 6 - Chavandoz maps its sunnat celebration fixture through all four locales
+  ---
+  duration_ms: 195.511
+  type: 'test'
+  ...
+# Subtest: Chavandoz keeps the wishes section connected to the contract and preview fixture
+ok 7 - Chavandoz keeps the wishes section connected to the contract and preview fixture
+  ---
+  duration_ms: 14.6325
+  type: 'test'
+  ...
+# Subtest: blank Chavandoz invitations do not receive catalog sample content
+ok 8 - blank Chavandoz invitations do not receive catalog sample content
+  ---
+  duration_ms: 5.3079
+  type: 'test'
+  ...
+# Subtest: Chorlove Palov package keeps its source design isolated and self contained
+ok 9 - Chorlove Palov package keeps its source design isolated and self contained
+  ---
+  duration_ms: 7.8242
+  type: 'test'
+  ...
+# Subtest: Chorlove Palov adapter maps approved locales, RSVP, and reduced motion
+ok 10 - Chorlove Palov adapter maps approved locales, RSVP, and reduced motion
+  ---
+  duration_ms: 20.2192
+  type: 'test'
+  ...
+# Subtest: Chorlove route keeps Palov in its provider namespace
+ok 11 - Chorlove route keeps Palov in its provider namespace
+  ---
+  duration_ms: 1.1196
+  type: 'test'
+  ...
+# Subtest: Chorlove Palov is published for nahorgi osh
+ok 12 - Chorlove Palov is published for nahorgi osh
+  ---
+  duration_ms: 12.0418
+  type: 'test'
+  ...
+# Subtest: legacy invitations default to no artist lineup and empty program descriptions
+ok 13 - legacy invitations default to no artist lineup and empty program descriptions
+  ---
+  duration_ms: 34.4717
+  type: 'test'
+  ...
+# Subtest: catalog sample keeps source artists and descriptions in the shared fixture
+not ok 14 - catalog sample keeps source artists and descriptions in the shared fixture
+  ---
+  duration_ms: 19.2922
+  type: 'test'
+  location: 'D:\\Projects\\Fotiha\\Website\\tests\\invitate-wedding-template.test.ts:2:1696'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    true !== false
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: false
+  actual: true
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (D:\Projects\Fotiha\Website\tests\invitate-wedding-template.test.ts:49:10)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+  ...
+# Subtest: artist-only or description-only edits disable the sample-preview replacement
+ok 15 - artist-only or description-only edits disable the sample-preview replacement
+  ---
+  duration_ms: 0.6139
+  type: 'test'
+  ...
+# Subtest: creator content maps localized artist and program fields into the public renderer
+ok 16 - creator content maps localized artist and program fields into the public renderer
+  ---
+  duration_ms: 2.1021
+  type: 'test'
+  ...
+# Subtest: artist source markup has no hardcoded creator-facing lineup and renders only supplied entries
+ok 17 - artist source markup has no hardcoded creator-facing lineup and renders only supplied entries
+  ---
+  duration_ms: 2.0823
+  type: 'test'
+  ...
+# Subtest: Islamic Edition is published as a complete E-invitation wedding template
+ok 18 - Islamic Edition is published as a complete E-invitation wedding template
+  ---
+  duration_ms: 4.0903
+  type: 'test'
+  ...
+# Subtest: the exact source page, compiled Vue chunk, CSS, artwork, and fonts are packaged
+ok 19 - the exact source page, compiled Vue chunk, CSS, artwork, and fonts are packaged
+  ---
+  duration_ms: 32.0066
+  type: 'test'
+  ...
+# Subtest: the registration migration keeps Islamic Edition unpublished
+ok 20 - the registration migration keeps Islamic Edition unpublished
+  ---
+  duration_ms: 2.1057
+  type: 'test'
+  ...
+# Subtest: the app renderer uses invitation APIs, real data, and no source site tracking
+ok 21 - the app renderer uses invitation APIs, real data, and no source site tracking
+  ---
+  duration_ms: 3.6269
+  type: 'test'
+  ...
+# Subtest: Shirin Bayram has an isolated typed birthday renderer
+ok 22 - Shirin Bayram has an isolated typed birthday renderer
+  ---
+  duration_ms: 16.3893
+  type: 'test'
+  ...
+# Subtest: Shirin Bayram compatibility follows its birthday-only source metadata
+ok 23 - Shirin Bayram compatibility follows its birthday-only source metadata
+  ---
+  duration_ms: 7.833
+  type: 'test'
+  ...
+# Subtest: Shirin Bayram birthday sample is localized in all four canonical locales
+ok 24 - Shirin Bayram birthday sample is localized in all four canonical locales
+  ---
+  duration_ms: 4.8662
+  type: 'test'
+  ...
+# Subtest: Shirin Bayram maps the shared birthday fixture and keeps blank drafts empty
+ok 25 - Shirin Bayram maps the shared birthday fixture and keeps blank drafts empty
+  ---
+  duration_ms: 180.2947
+  type: 'test'
+  ...
+# Subtest: fixed visible and accessibility copy has Russian and English mappings
+ok 26 - fixed visible and accessibility copy has Russian and English mappings
+  ---
+  duration_ms: 2.5448
+  type: 'test'
+  ...
+# Subtest: Shirin Bayram retains its complete captured body, style, copy, and motion
+not ok 27 - Shirin Bayram retains its complete captured body, style, copy, and motion
+  ---
+  duration_ms: 0.4231
+  type: 'test'
+  location: 'D:\\Projects\\Fotiha\\Website\\tests\\shirin-bayram-template.test.ts:2:10098'
+  failureType: 'testCodeFailure'
+  error: "ENOENT: no such file or directory, open 'D:\\Projects\\Fotiha\\Website\\Invitations - this folder will be removed from production\\Marxaba\\Tug'ilgan kun va Yubiley\\templates\\shirin-bayram\\index.html'"
+  code: 'ENOENT'
+  stack: |-
+    readFileSync (node:fs:440:20)
+    readFileSync (D:\Projects\Fotiha\Website\tests\helpers\source-files.ts:55:23)
+    read (D:\Projects\Fotiha\Website\tests\shirin-bayram-template.test.ts:35:3)
+    TestContext.<anonymous> (D:\Projects\Fotiha\Website\tests\shirin-bayram-template.test.ts:192:25)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: Shirin Bayram uses the platform runtime without source samples or remote fonts
+ok 28 - Shirin Bayram uses the platform runtime without source samples or remote fonts
+  ---
+  duration_ms: 2.2649
+  type: 'test'
+  ...
+# Subtest: Shirin Bayram packages local Latin/Cyrillic fonts and all runtime assets
+not ok 29 - Shirin Bayram packages local Latin/Cyrillic fonts and all runtime assets
+  ---
+  duration_ms: 3.0466
+  type: 'test'
+  location: 'D:\\Projects\\Fotiha\\Website\\tests\\shirin-bayram-template.test.ts:2:12734'
+  failureType: 'testCodeFailure'
+  error: "ENOENT: no such file or directory, open 'D:\\Projects\\Fotiha\\Website\\Invitations - this folder will be removed from production\\Marxaba\\Tug'ilgan kun va Yubiley\\shared\\vendor\\gsap.min.js'"
+  code: 'ENOENT'
+  stack: |-
+    Object.openSync (node:fs:560:18)
+    readFileSync (node:fs:444:35)
+    readFileSync (D:\Projects\Fotiha\Website\tests\helpers\source-files.ts:55:23)
+    TestContext.<anonymous> (D:\Projects\Fotiha\Website\tests\shirin-bayram-template.test.ts:279:7)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: Shirin Bayram preview is a checksummed portrait opening from the canonical fixture
+ok 30 - Shirin Bayram preview is a checksummed portrait opening from the canonical fixture
+  ---
+  duration_ms: 5.1874
+  type: 'test'
+  ...
+# Subtest: public template identities are neutral, unique and preserve saved invitation IDs
+ok 31 - public template identities are neutral, unique and preserve saved invitation IDs
+  ---
+  duration_ms: 48.9114
+  type: 'test'
+  ...
+# Subtest: hidden and edition links resolve without changing saved template IDs
+ok 32 - hidden and edition links resolve without changing saved template IDs
+  ---
+  duration_ms: 0.6574
+  type: 'test'
+  ...
+# Subtest: localized titles, draft watermarks and calendar downloads do not restore provider credits
+ok 33 - localized titles, draft watermarks and calendar downloads do not restore provider credits
+  ---
+  duration_ms: 5.8821
+  type: 'test'
+  ...
+# Subtest: archived pages and trackers are private while real source frames and artwork stay accessible
+ok 34 - archived pages and trackers are private while real source frames and artwork stay accessible
+  ---
+  duration_ms: 0.793
+  type: 'test'
+  ...
+# Subtest: entry pages contain no remote source assets, captured maps or business credits
+ok 35 - entry pages contain no remote source assets, captured maps or business credits
+  ---
+  duration_ms: 68.993
+  type: 'test'
+  ...
+# Subtest: every catalog preview link resolves to its original renderer definition
+ok 36 - every catalog preview link resolves to its original renderer definition
+  ---
+  duration_ms: 10.878
+  type: 'test'
+  ...
+# Subtest: To‘rt fasl resolves through both public and historical links
+ok 37 - To‘rt fasl resolves through both public and historical links
+  ---
+  duration_ms: 0.4331
+  type: 'test'
+  ...
+# Subtest: unknown template links do not resolve to an unrelated design
+ok 38 - unknown template links do not resolve to an unrelated design
+  ---
+  duration_ms: 0.3849
+  type: 'test'
+  ...
+# Subtest: Oathbound preserves its original capture and exact procedural game engine
+not ok 39 - Oathbound preserves its original capture and exact procedural game engine
+  ---
+  duration_ms: 1.8359
+  type: 'test'
+  location: 'D:\\Projects\\Fotiha\\Website\\tests\\wedivo-oathbound-template.test.ts:2:1759'
+  failureType: 'testCodeFailure'
+  error: "ENOENT: no such file or directory, open 'D:\\Projects\\Fotiha\\Website\\Invitations - this folder will be removed from production\\Invitations - this folder will be removed from production\\Wedivo\\Web invitations\\templates\\uVaSW0h4UZuI8iAo9SdV\\index.html'"
+  code: 'ENOENT'
+  stack: |-
+    Object.openSync (node:fs:560:18)
+    readFileSync (node:fs:444:35)
+    TestContext.<anonymous> (D:\Projects\Fotiha\Website\tests\wedivo-oathbound-template.test.ts:17:19)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.start (node:internal/test_runner/test:944:17)
+    startSubtestAfterBootstrap (node:internal/test_runner/harness:296:17)
+  ...
+# Subtest: all source textures, exact font weights and preview media are local and hash verified
+ok 40 - all source textures, exact font weights and preview media are local and hash verified
+  ---
+  duration_ms: 13.0408
+  type: 'test'
+  ...
+# Subtest: production HTML excludes provider runtime, sample invitation data, keys, headcount and card UI
+ok 41 - production HTML excludes provider runtime, sample invitation data, keys, headcount and card UI
+  ---
+  duration_ms: 10.1285
+  type: 'test'
+  ...
+# Subtest: canonical gallery is ephemeral, authored media wins and empty public invitations stay empty
+ok 42 - canonical gallery is ephemeral, authored media wins and empty public invitations stay empty
+  ---
+  duration_ms: 72.7425
+  type: 'test'
+  ...
+# Subtest: locale, personalized greeting, all repeatable rows and timezone instant map without changing content
+ok 43 - locale, personalized greeting, all repeatable rows and timezone instant map without changing content
+  ---
+  duration_ms: 19.1229
+  type: 'test'
+  ...
+# Subtest: Uzbek default includes the game, narrative, accessible UI and CSS labels without translating authored data
+ok 44 - Uzbek default includes the game, narrative, accessible UI and CSS labels without translating authored data
+  ---
+  duration_ms: 7.4516
+  type: 'test'
+  ...
+# Subtest: catalog art is the actual 450x800 Uzbek source opening with reproducible fixture and source hashes
+not ok 45 - catalog art is the actual 450x800 Uzbek source opening with reproducible fixture and source hashes
+  ---
+  duration_ms: 4.5632
+  type: 'test'
+  location: 'D:\\Projects\\Fotiha\\Website\\tests\\wedivo-oathbound-template.test.ts:2:7551'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + '77be5b4d0ea6a4b93803e5efc989ade0889d0838f74dee7c767ebdd4b1c1cc1e'
+    - '98591ce063bd2fa23c2ae508ad19e54ded2f965ac6693aa5a8410fbe497a1f13'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: '98591ce063bd2fa23c2ae508ad19e54ded2f965ac6693aa5a8410fbe497a1f13'
+  actual: '77be5b4d0ea6a4b93803e5efc989ade0889d0838f74dee7c767ebdd4b1c1cc1e'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (D:\Projects\Fotiha\Website\tests\wedivo-oathbound-template.test.ts:97:10)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: Peony keeps its original capture untouched and packages all exact artwork/fonts
+ok 46 - Peony keeps its original capture untouched and packages all exact artwork/fonts
+  ---
+  duration_ms: 15.0712
+  type: 'test'
+  ...
+# Subtest: Peony ships the source opening, watercolor keying, motion and interaction engines without the provider runtime
+ok 47 - Peony ships the source opening, watercolor keying, motion and interaction engines without the provider runtime
+  ---
+  duration_ms: 6.7653
+  type: 'test'
+  ...
+# Subtest: Peony binds authored content, stable ordering and timezone without mutation or sample fallback
+ok 48 - Peony binds authored content, stable ordering and timezone without mutation or sample fallback
+  ---
+  duration_ms: 57.9037
+  type: 'test'
+  ...
+# Subtest: Peony localizes every supported language and only uses ephemeral preview wishes/music
+ok 49 - Peony localizes every supported language and only uses ephemeral preview wishes/music
+  ---
+  duration_ms: 35.8027
+  type: 'test'
+  ...
+# Subtest: Gulbarglar sehri defaults to Uzbek and removes source-language runtime, browser-validation and file-picker copy
+ok 50 - Gulbarglar sehri defaults to Uzbek and removes source-language runtime, browser-validation and file-picker copy
+  ---
+  duration_ms: 5.7952
+  type: 'test'
+  ...
+# Subtest: Peony RSVP uses real endpoints, fixed headcounts, preview guards and accurate failure states
+ok 51 - Peony RSVP uses real endpoints, fixed headcounts, preview guards and accurate failure states
+  ---
+  duration_ms: 41.9812
+  type: 'test'
+  ...
+# Subtest: Peony receipts never claim payment, skip previews, and tie the source gift knot only after API acceptance
+ok 52 - Peony receipts never claim payment, skip previews, and tie the source gift knot only after API acceptance
+  ---
+  duration_ms: 18.1603
+  type: 'test'
+  ...
+# Subtest: preserves the exact E-invitation source and captured artwork
+ok 53 - preserves the exact E-invitation source and captured artwork
+  ---
+  duration_ms: 2.5945
+  type: 'test'
+  ...
+# Subtest: all local source font stylesheet URLs resolve
+ok 54 - all local source font stylesheet URLs resolve
+  ---
+  duration_ms: 11.2671
+  type: 'test'
+  ...
+# Subtest: app renderer binds real invitation fields and app RSVP/wishes APIs
+ok 55 - app renderer binds real invitation fields and app RSVP/wishes APIs
+  ---
+  duration_ms: 1.4696
+  type: 'test'
+  ...
+# Subtest: typed catalog is published and supports the exact event type while the original registration remains private
+ok 56 - typed catalog is published and supports the exact event type while the original registration remains private
+  ---
+  duration_ms: 4.1878
+  type: 'test'
+  ...
+1..56
+# tests 56
+# suites 0
+# pass 50
+# fail 6
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1715.6113

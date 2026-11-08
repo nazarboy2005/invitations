@@ -1,0 +1,1137 @@
+(() => {
+  "use strict";
+
+  const templateId = "bulutlar-qasri";
+  const copy = {
+    "uz-Latn": {
+      openInvitation: "Taklifnomani ochish",
+      languageLabel: "Tilni tanlang",
+      musicToggleLabel: "Musiqani yoqish yoki o?chirish",
+      openingGreeting: "Assalomu alaykum, aziz mehmon",
+      invitationTitle: "Taklifnoma",
+      storyTitle: "Bizning hikoyamiz",
+      eventDetailsTitle: "To‘y tantanasi haqida",
+      countdownTitle: "Sanoq boshlandi",
+      venueTitle: "To‘y manzili",
+      programTitle: "To‘y kuni dasturi",
+      wishesTitle: "Tilaklar",
+      rsvpTitle: "Kelasizmi?",
+      rsvpPrompt: "Iltimos, javobingizni bildiring.",
+      giftTitle: "Sovg‘a yuborish",
+      contactsTitle: "Bog‘lanish uchun",
+      footerNote: "Tashrifingiz biz uchun katta baxt.",
+      hostsLabel: "Hurmat bilan:",
+      giftOpenHint: "Ochish uchun bosing",
+      rsvpYes: "Kelaman",
+      rsvpNo: "Kela olmayman",
+      submit: "Yuborish",
+      sendWish: "Tilak yuborish",
+      dayUnit: "Kun",
+      hourUnit: "Soat",
+      minuteUnit: "Daqiqa",
+      secondUnit: "Soniya",
+      coupleLabel: "Kuyov va kelin",
+      responseLabel: "Javobingiz",
+      calendarAction: "Kalendariga qo‘shish",
+      invitationMessage: "Sizni tantanamizga taklif etamiz:",
+      name: "Ismingiz",
+      wish: "Kelin-kuyovga tilagingiz",
+      galleryMore: "Yana {count} ta suratni ochish",
+      party: "Mehmonlar soni",
+      phone: "Telefon",
+      telegram: "Telegram",
+      map: "Xaritada ko‘rish",
+      giftNumber: "Karta raqami",
+      giftHolder: "Karta egasi",
+      wishSent: "Tilagingiz taklifnoma egasiga yuborildi.",
+      rsvpSent: "Javobingiz saqlandi. Rahmat!",
+      previewOnly: "Ko‘rish rejimida yuborish o‘chiq.",
+      failure: "Yubarrishda xatolik. Qayta urinib ko‘ring.",
+      noProgram: "",
+      weekdays: ["Du", "Se", "Cho", "Pay", "Ju", "Sha", "Ya"],
+      months: ["Yanvar", "Fevral", "Mart", "Aprel", "May", "Iyun", "Iyul", "Avgust", "Sentabr", "Oktabr", "Noyabr", "Dekabr"],
+    },
+    "uz-Cyrl": {
+      openInvitation: "???????????? ????",
+      languageLabel: "????? ???????",
+      musicToggleLabel: "???????? ???? ??? ??????",
+      openingGreeting: "Ассалому алайкум, азиз меҳмон",
+      invitationTitle: "Таклифнома",
+      storyTitle: "Бизнинг ҳикоямиз",
+      eventDetailsTitle: "Тўй тантанаси ҳақида",
+      countdownTitle: "Тўйга қолган вақт",
+      venueTitle: "Тўй манзили",
+      programTitle: "Тўй куни дастури",
+      wishesTitle: "Тилаклар",
+      rsvpTitle: "Келасизми?",
+      rsvpPrompt: "Илтимос, жавобингизни билдиринг.",
+      giftTitle: "Совға юбориш",
+      contactsTitle: "Боғланиш учун",
+      footerNote: "Ташрифингиз биз учун катта бахт.",
+      hostsLabel: "Ҳурмат билан:",
+      giftOpenHint: "Очилиши учун босинг",
+      rsvpYes: "Келаман",
+      rsvpNo: "Кела олмайман",
+      submit: "Юбориш",
+      sendWish: "Тилак юбориш",
+      dayUnit: "Кун",
+      hourUnit: "Соат",
+      minuteUnit: "Дақиқа",
+      secondUnit: "Сония",
+      coupleLabel: "Куёв ва келин",
+      responseLabel: "Жавобингиз",
+      calendarAction: "Тақвимга қўшиш",
+      invitationMessage: "Сизни тантанамизга таклиф этамиз:",
+      name: "Исмингиз",
+      wish: "Келин-куёвга тилагингиз",
+      galleryMore: "Яна {count} та суратни очиш",
+      party: "Меҳмонлар сони",
+      phone: "Телефон",
+      telegram: "Телеграм",
+      map: "Харитада кўриш",
+      giftNumber: "Карта рақами",
+      giftHolder: "Карта эгаси",
+      wishSent: "Тилагингиз таклифнома эгасига юборилди.",
+      rsvpSent: "Жавобингиз сақланди. Раҳмат!",
+      previewOnly: "Кўриш режимида юбориш ўчиқ.",
+      failure: "Юборишда хатолик. Қайта уриниб кўринг.",
+      noProgram: "",
+      weekdays: ["Ду", "Се", "Чо", "Пай", "Жу", "Ша", "Як"],
+      months: ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"],
+    },
+    en: {
+      openInvitation: "Open invitation",
+      languageLabel: "Choose language",
+      musicToggleLabel: "Toggle music",
+      openingGreeting: "Welcome, dear guest",
+      invitationTitle: "Invitation",
+      storyTitle: "Our story",
+      eventDetailsTitle: "About the celebration",
+      countdownTitle: "Counting down",
+      venueTitle: "Venue",
+      programTitle: "Event program",
+      wishesTitle: "Wishes",
+      rsvpTitle: "Will you attend?",
+      rsvpPrompt: "Please let us know if you can join us.",
+      giftTitle: "Send a gift",
+      contactsTitle: "Contact us",
+      footerNote: "Your presence would mean so much to us.",
+      hostsLabel: "With love from:",
+      giftOpenHint: "Tap to open",
+      rsvpYes: "I’ll attend",
+      rsvpNo: "I can’t attend",
+      submit: "Submit",
+      sendWish: "Send a wish",
+      dayUnit: "Days",
+      hourUnit: "Hours",
+      minuteUnit: "Minutes",
+      secondUnit: "Seconds",
+      coupleLabel: "The couple",
+      responseLabel: "Your response",
+      calendarAction: "Add to calendar",
+      invitationMessage: "You are warmly invited to celebrate with us:",
+      name: "Your name",
+      wish: "Your message to the couple",
+      galleryMore: "Open {count} more photos",
+      party: "Guest count",
+      phone: "Phone",
+      telegram: "Telegram",
+      map: "Open map",
+      giftNumber: "Card number",
+      giftHolder: "Cardholder",
+      wishSent: "Your wish was sent to the invitation owner.",
+      rsvpSent: "Your response was saved. Thank you!",
+      previewOnly: "Submissions are disabled in preview.",
+      failure: "Could not submit. Please try again.",
+      noProgram: "",
+      weekdays: ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"],
+      months: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+    },
+    ru: {
+      openInvitation: "??????? ???????????",
+      languageLabel: "??????? ????",
+      musicToggleLabel: "???????? ??? ????????? ??????",
+      openingGreeting: "Здравствуйте, дорогой гость",
+      invitationTitle: "Приглашение",
+      storyTitle: "Наша история",
+      eventDetailsTitle: "О торжестве",
+      countdownTitle: "До торжества осталось",
+      venueTitle: "Место проведения",
+      programTitle: "Программа дня",
+      wishesTitle: "Пожелания",
+      rsvpTitle: "Вы придёте?",
+      rsvpPrompt: "Пожалуйста, сообщите, сможете ли вы прийти.",
+      giftTitle: "Отправить подарок",
+      contactsTitle: "Связаться с нами",
+      footerNote: "Ваше присутствие будет для нас большой радостью.",
+      hostsLabel: "С уважением:",
+      giftOpenHint: "Нажмите, чтобы открыть",
+      rsvpYes: "Я приду",
+      rsvpNo: "Не смогу прийти",
+      submit: "Отправить",
+      sendWish: "Отправить пожелание",
+      dayUnit: "Дней",
+      hourUnit: "Часов",
+      minuteUnit: "Минут",
+      secondUnit: "Секунд",
+      coupleLabel: "Жених и невеста",
+      responseLabel: "Ваш ответ",
+      calendarAction: "Добавить в календарь",
+      invitationMessage: "Приглашаем вас разделить с нами этот счастливый день:",
+      name: "Ваше имя",
+      wish: "Ваше пожелание паре",
+      galleryMore: "Открыть ещё фото: {count}",
+      party: "Количество гостей",
+      phone: "Телефон",
+      telegram: "Телеграм",
+      map: "Открыть карту",
+      giftNumber: "Номер карты",
+      giftHolder: "Владелец карты",
+      wishSent: "Ваше пожелание отправлено владельцу приглашения.",
+      rsvpSent: "Ваш ответ сохранён. Спасибо!",
+      previewOnly: "Отправка в режиме просмотра отключена.",
+      failure: "Не удалось отправить. Попробуйте ещё раз.",
+      noProgram: "",
+      weekdays: ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"],
+      months: ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"],
+    },
+  };
+  const locales = ["uz-Latn", "uz-Cyrl", "en", "ru"];
+  const root = document.querySelector('[data-chorlove-template="bulutlar-qasri"]');
+  if (!root) return;
+  const hideUnsupportedDressCode = () => document.querySelectorAll('[data-platform-extra="dress"]').forEach((section) => { section.hidden = true; });
+  new MutationObserver(hideUnsupportedDressCode).observe(document.body, { childList: true, subtree: true });
+  hideUnsupportedDressCode();
+
+  let state = null;
+  let countdownTimer = 0;
+  const text = (node, value) => { if (node) node.textContent = value == null ? "" : String(value); };
+  const hide = (node, hidden) => { if (node) node.hidden = Boolean(hidden); };
+  let sourceOpeningBound = false;
+  let sourceHeroBound = false;
+  let sourceGiftMotionBound = false;
+  let sourcePageOpened = false;
+  let sourceRevealBound = false;
+  let sourceContactInteractionsBound = false;
+  const sourceContactAnimations = new WeakMap();
+
+  function sourceReducedMotion() {
+    return Boolean(state?.reducedMotion) || matchMedia("(prefers-reduced-motion: reduce)").matches || new URLSearchParams(location.search).get("qaReducedMotion") === "1";
+  }
+
+  function bindSourceOpening() {
+    if (sourceOpeningBound) return;
+    const opening = document.querySelector('[data-landing-screenshot-id="invite-envelope"]');
+    if (!opening) return;
+    sourceOpeningBound = true;
+    const page = root.querySelector("main");
+    if (page) page.style.visibility = "hidden";
+    const card = opening.querySelector(".z-10.relative");
+    const heart = opening.querySelector('[class*="left-1/2"][class*="top-0"]');
+    const floralEdges = [...opening.querySelectorAll('img[src*="/assets/hoa.webp"]')];
+    const button = opening.querySelector("[data-chorlove-open]");
+    const sheen = button?.querySelector(".absolute.top-0.h-full.w-8");
+    const particleLayer = opening.querySelector(".absolute.inset-0.pointer-events-none.overflow-hidden");
+    let opened = false;
+    const particles = [];
+    const fraction = (value) => value - Math.floor(value);
+    for (let index = 0; index < 32; index += 1) {
+      const random = (seed) => fraction(43758.5453 * Math.sin(12.9898 * (17 * index + seed)));
+      const angle = index / 32 * 2 * Math.PI + (random(1) - 0.5) * 0.4;
+      const radius = 250 + 350 * random(2);
+      const item = {
+        left: `${index / 32 * 100 + (6 * random(3) - 3)}%`,
+        initialY: 120 * random(4) - 20,
+        size: Math.floor(14 + 18 * random(5)),
+        duration: 7 + 7 * random(6),
+        delay: 5 * random(7),
+        sway: 60 * random(8) - 30,
+        burstX: Math.cos(angle) * radius,
+        burstY: Math.sin(angle) * radius,
+        opacity: 0.35 + 0.45 * random(9),
+      };
+      const outer = document.createElement("span");
+      const inner = document.createElement("span");
+      outer.className = "cc-source-petal";
+      outer.style.left = item.left;
+      outer.style.top = `${item.initialY}vh`;
+      outer.style.fontSize = `${item.size}px`;
+      outer.style.opacity = String(item.opacity);
+      outer.setAttribute("aria-hidden", "true");
+      inner.className = "cc-source-petal-inner";
+      inner.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em"><g><ellipse cx="12" cy="5" rx="2.2" ry="4.5"></ellipse><ellipse cx="12" cy="5" rx="2.2" ry="4.5" transform="rotate(60 12 12)"></ellipse><ellipse cx="12" cy="5" rx="2.2" ry="4.5" transform="rotate(120 12 12)"></ellipse><ellipse cx="12" cy="5" rx="2.2" ry="4.5" transform="rotate(180 12 12)"></ellipse><ellipse cx="12" cy="5" rx="2.2" ry="4.5" transform="rotate(240 12 12)"></ellipse><ellipse cx="12" cy="5" rx="2.2" ry="4.5" transform="rotate(300 12 12)"></ellipse></g><circle cx="12" cy="12" r="1.8" fill-opacity=".45"></circle></svg>';
+      outer.append(inner);
+      particleLayer?.append(outer);
+      particles.push({ ...item, outer, inner });
+    }
+    const reduced = sourceReducedMotion();
+    if (!reduced) {
+      for (const particle of particles) {
+        const { outer, inner, duration, delay, sway, opacity } = particle;
+        outer.animate([{ translate: "0 0" }, { translate: "0 110vh" }], { duration: duration * 1000, delay: delay * 1000, iterations: Infinity, easing: "linear" });
+        inner.animate([{ translate: "0 0" }, { translate: `${sway}px 0` }, { translate: "0 0" }], { duration: duration * 500, direction: "alternate", iterations: Infinity, easing: "ease-in-out" });
+        inner.animate([{ rotate: "0deg" }, { rotate: "360deg" }], { duration: duration * 1000, iterations: Infinity, easing: "linear" });
+      }
+      heart?.animate([{ scale: 1 }, { scale: 1.12 }, { scale: 1 }], { duration: 2000, iterations: Infinity, easing: "ease-in-out" });
+      sheen?.animate([{ translate: "-100px 0" }, { translate: "260px 0" }], { duration: 3000, iterations: Infinity, easing: "ease-in-out" });
+    }
+    const open = (event) => {
+      if (opened) return;
+      if (event?.target === button || button?.contains(event?.target)) event.stopPropagation();
+      opened = true;
+      sourcePageOpened = true;
+      if (page) page.style.visibility = "";
+      window.scrollTo({ top: 0, behavior: reduced ? "auto" : "smooth" });
+      const audio = root.querySelector("audio[data-chorlove-audio]");
+      if (audio && state?.data.music?.url && !state.silentPlayback) audio.play().catch(() => {});
+      if (reduced) {
+        opening.hidden = true;
+        bindSourceHeroMotion();
+        restoreCapturedMotion();
+        return;
+      }
+      for (const particle of particles) {
+        const { outer, inner, burstX, burstY, sway, opacity } = particle;
+        outer.getAnimations().forEach((animation) => animation.cancel());
+        inner.getAnimations().forEach((animation) => animation.cancel());
+        outer.animate([{ translate: "0 0" }, { translate: `${burstX}px ${burstY}px` }], { duration: 850, easing: "ease-out", fill: "forwards" });
+        outer.animate([{ opacity }, { opacity: 1, offset: 0.5 }, { opacity: 0 }], { duration: 850, easing: "ease-out", fill: "forwards" });
+        inner.animate([{ scale: 1, offset: 0 }, { scale: 2.2, offset: 0.5 }, { scale: 0, offset: 1 }], { duration: 850, easing: "ease-out", fill: "forwards" });
+        inner.animate([{ rotate: "0deg" }, { rotate: `${12 * sway}deg` }], { duration: 850, easing: "ease-out", fill: "forwards" });
+      }
+      card?.animate([{ transform: "translateY(0) scale(1)", opacity: 1 }, { transform: "translateY(-35px) scale(1.08)", opacity: 0 }], { duration: 800, easing: "cubic-bezier(.22,1,.36,1)", fill: "forwards" });
+      for (const flower of floralEdges) flower.animate([{ scale: 1, opacity: 0.18 }, { scale: 3.2, opacity: 0 }], { duration: 800, easing: "ease-out", fill: "forwards" });
+      opening.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 600, delay: 450, easing: "ease-in-out", fill: "forwards" });
+      window.setTimeout(() => { opening.hidden = true; }, 1050);
+      bindSourceHeroMotion();
+      restoreCapturedMotion();
+    };
+    opening.addEventListener("click", open);
+    button?.addEventListener("click", open);
+  }
+
+  function bindSourceHeroMotion() {
+    if (sourceHeroBound) return;
+    sourceHeroBound = true;
+    const hero = root.querySelector("[data-cloud-castle-hero]");
+    if (!hero) return;
+    const header = hero.querySelector("header");
+    const logo = header?.querySelector('img[src*="asset-2.webp"]');
+    const greeting = header?.children[1];
+    const names = header?.children[2];
+    const page = root.querySelector("main");
+    const reveal = (element, duration, delay, initial, targetOpacity = 1, amount = 0.5) => {
+      if (!element) return;
+      const observer = new IntersectionObserver((entries) => {
+        for (const entry of entries) {
+          const inView = entry.isIntersecting && entry.intersectionRatio >= amount;
+          if (inView === (element.dataset.ccRevealVisible === "true")) continue;
+          element.dataset.ccRevealVisible = String(inView);
+          if (sourceReducedMotion()) { element.style.opacity = String(inView ? targetOpacity : 0); element.style.transform = inView ? "none" : initial; continue; }
+          animateSourceReveal(element, inView, 0, initial, targetOpacity, duration, delay, "ease-out");
+        }
+      }, { threshold: amount });
+      observer.observe(element);
+    };
+    const reduced = sourceReducedMotion();
+    if (reduced) {
+      [logo, greeting, names].forEach((element, index) => { if (element) { element.style.opacity = index === 0 ? ".95" : "1"; element.style.transform = "none"; } });
+      return;
+    }
+    reveal(logo, 0.75, 0, "translateY(-24px) scale(.9)", 0.95, 0.5);
+    reveal(greeting, 0.75, 0.08, "translateY(24px)", 1, 0.5);
+    reveal(names, 0.9, 0.14, "translateY(38px) scale(.92)", 1, 0.35);
+    bindSourceGiftMotion();
+    const clouds = [...hero.querySelectorAll('img[src*="/assets/cloud-"]')];
+    const castle = hero.querySelector('img[src*="/assets/home.webp"]');
+    clouds.forEach((cloud) => { cloud.style.transform = "none"; });
+    if (castle) castle.style.transform = "none";
+    const ornaments = [...(page?.querySelectorAll('img[src*="/assets/hoa.webp"]') || [])];
+    let frame = 0;
+    const sync = () => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => {
+        const rect = hero.getBoundingClientRect();
+        const progress = Math.max(0, Math.min(1, -rect.top / Math.max(rect.height, 1)));
+        if (castle) { castle.style.translate = `0 ${90 * progress}px`; castle.style.scale = String(0.8 + 0.7 * progress); }
+        [-90 + 330 * progress, 145 - 405 * progress, -320 + 510 * progress].forEach((x, index) => { if (clouds[index]) clouds[index].style.translate = `${x}px 0`; });
+        const viewport = window.innerHeight;
+        ornaments.forEach((ornament, index) => {
+          const box = ornament.getBoundingClientRect();
+          const priorOffset = Number(ornament.dataset.ccParallaxY || 0);
+          const p = Math.max(0, Math.min(1, (viewport - (box.top - priorOffset)) / (viewport + Math.max(box.height, 1))));
+          const nextOffset = -80 + 260 * p;
+          ornament.style.translate = `0 ${nextOffset}px`;
+          ornament.dataset.ccParallaxY = String(nextOffset);
+        });
+      });
+    };
+    window.addEventListener("scroll", sync, { passive: true, capture: true });
+    window.addEventListener("resize", sync);
+    sync();
+  }
+
+  function animateSourceReveal(element, inView, initialOpacity, initialTransform, targetOpacity, duration, delay, easing) {
+    const current = getComputedStyle(element);
+    const from = { opacity: Number(current.opacity), transform: current.transform };
+    const to = inView
+      ? { opacity: targetOpacity, transform: "none" }
+      : { opacity: initialOpacity, transform: initialTransform };
+    element.getAnimations().forEach((animation) => animation.cancel());
+    element.animate([from, to], { duration: duration * 1000, delay: delay * 1000, easing, fill: "both" });
+  }
+
+  function bindSourceGiftMotion() {
+    if (sourceGiftMotionBound || sourceReducedMotion()) return;
+    sourceGiftMotionBound = true;
+    const motion = {
+      "qasr_green.webp": [6, -22, -18, 3.2, 0],
+      "brocade_flower_red.webp": [7, 20, 24, 3.6, 0.3],
+      "double_dragon_green.webp": [5, -18, -14, 2.9, 0.6],
+      "chibi_red.webp": [6, 14, 18, 3.4, 0.2],
+      "boho_floral_green.webp": [5, 8, 12, 3.1, 0.4],
+      "silk_flora_brown.webp": [6, -10, -6, 3.5, 0.7],
+      "spring_garden_red.webp": [5, -14, -10, 3.3, 0.1],
+    };
+    for (const image of root.querySelectorAll('img[src*="/assets/gift/"]')) {
+      const file = image.getAttribute("src")?.split("/").pop();
+      const config = motion[file];
+      if (!config) continue;
+      const [lift, startAngle, endAngle, duration, delay] = config;
+      image.animate([
+        { translate: "0 0", rotate: `${startAngle}deg` },
+        { translate: `0 ${-lift}px`, rotate: `${endAngle}deg` },
+        { translate: "0 0", rotate: `${startAngle}deg` },
+      ], { duration: duration * 1000, delay: delay * 1000, iterations: Infinity, easing: "ease-in-out" });
+    }
+  }
+
+  function sourceRevealProfile(element) {
+    const transform = (element.dataset.ccInitialTransform || "").replace(/\s+/g, "").toLowerCase();
+    const section = element.closest("[data-chorlove-gallery], [data-chorlove-wishes], [data-chorlove-rsvp], [data-chorlove-gift], [data-landing-screenshot-id]");
+    if (/translatey\(18px\)scale\(0\.96\)/.test(transform)) {
+      const links = [...(element.parentElement?.querySelectorAll("a") || [])];
+      return { duration: 0.55, threshold: 0.3, delay: 0.12 + 0.1 * Math.max(0, links.indexOf(element)), easing: "ease-out" };
+    }
+    if (/translatey\(20px\)/.test(transform)) return { duration: 0.75, threshold: 0.2, delay: 0, easing: "ease-out" };
+    if (/scale\(0\.86\)/.test(transform)) {
+      const field = element.matches('[data-chorlove-field^="program"]') ? element : element.querySelector('[data-chorlove-field^="program"]');
+      const programIndex = Number(field?.dataset.chorloveField?.match(/^program(\d+)/)?.[1]);
+      if (field && Number.isFinite(programIndex)) return { duration: 0.45, threshold: 0.2, delay: 0.09 * Math.max(0, programIndex - 1), easing: "cubic-bezier(.22,1,.36,1)" };
+      const galleryItem = element.matches("[data-chorlove-gallery-item]") ? element : element.querySelector("[data-chorlove-gallery-item]");
+      if (galleryItem) {
+        const items = [...root.querySelectorAll("[data-chorlove-gallery-item]")];
+        return { duration: 0.45, threshold: 0.2, delay: [0.06, 0.14, 0.22, 0.3, 0.38][Math.max(0, items.indexOf(galleryItem))] || 0, easing: "cubic-bezier(.22,1,.36,1)" };
+      }
+      return { duration: 0.45, threshold: 0.2, delay: 0, easing: "cubic-bezier(.22,1,.36,1)" };
+    }
+    if (/translatey\(24px\)/.test(transform)) return { duration: 0.75, threshold: 0.2, delay: 0, easing: "ease-out" };
+    if (/scale\(0\.88\)/.test(transform) && element.closest("[data-chorlove-gift]")) {
+      return { duration: 1, threshold: 0.5, delay: 0, easing: "cubic-bezier(.22,1,.36,1)" };
+    }
+    if (element.closest("[data-cc-contact-group]")) {
+      if (element.querySelector('[data-chorlove-i18n="contactsTitle"]')) return { duration: 0.48, threshold: 0.5, delay: 0.08, easing: "cubic-bezier(.22,1,.36,1)" };
+      if (element.querySelector('[data-chorlove-i18n="footerNote"]')) return { duration: 0.48, threshold: 0.5, delay: 0.1, easing: "cubic-bezier(.22,1,.36,1)" };
+      if (element.classList.contains("py-4")) return { duration: 0.48, threshold: 0.5, delay: 0.12, easing: "cubic-bezier(.22,1,.36,1)" };
+      return { duration: 0.48, threshold: 0.5, delay: 0, easing: "cubic-bezier(.22,1,.36,1)" };
+    }
+    if (element.closest("[data-chorlove-wishes]")) {
+      const revealNodes = [...element.closest("[data-chorlove-wishes]").querySelectorAll('[style*="opacity:0"], [style*="opacity: 0"]')];
+      const index = revealNodes.indexOf(element);
+      return { duration: 0.48, threshold: 0.5, delay: index === 0 ? 0 : index === 1 ? 0.08 : 0.14 + Math.max(0, index - 2) * 0.08, easing: "cubic-bezier(.22,1,.36,1)" };
+    }
+    if (section?.getAttribute("data-landing-screenshot-id") === "invite-map") return { duration: 0.48, threshold: 0.5, delay: 0, easing: "cubic-bezier(.22,1,.36,1)" };
+    if ((element.matches('img[src$="/hoa-ngang.webp"]') || element.querySelector('img[src$="/hoa-ngang.webp"]')) && element.classList.contains("py-2")) {
+      return { duration: 0.48, threshold: 0.2, delay: 0.18, easing: "cubic-bezier(.22,1,.36,1)" };
+    }
+    if (element.querySelector("[data-chorlove-gallery-item]")) return { duration: 0.48, threshold: 0.2, delay: 0.18, easing: "cubic-bezier(.22,1,.36,1)" };
+    if (element.closest("[data-chorlove-gift]")) return { duration: 1, threshold: 0.5, delay: 0, easing: "cubic-bezier(.22,1,.36,1)" };
+    return { duration: 0.48, threshold: 0.5, delay: 0, easing: "cubic-bezier(.22,1,.36,1)" };
+  }
+
+  function sourceSpringFrames(fromScale, fromY, toScale, toY) {
+    const stiffness = 500;
+    const damping = 25;
+    const restSpeed = 10;
+    const naturalFrequency = Math.sqrt(stiffness);
+    const dampingRatio = damping / (2 * naturalFrequency);
+    const dampedFrequency = naturalFrequency * Math.sqrt(1 - dampingRatio * dampingRatio);
+    const envelopeRate = dampingRatio * naturalFrequency;
+    const progressAt = (time) => 1 - Math.exp(-envelopeRate * time) * (
+      Math.cos(dampedFrequency * time) + (envelopeRate / dampedFrequency) * Math.sin(dampedFrequency * time)
+    );
+    const speedAt = (time) => Math.exp(-envelopeRate * time) * (naturalFrequency * naturalFrequency / dampedFrequency) * Math.sin(dampedFrequency * time);
+    let duration = 1 / 120;
+    for (; duration < 1; duration += 1 / 120) {
+      const progress = progressAt(duration);
+      const speed = speedAt(duration);
+      const scaleSettled = Math.abs((1 - progress) * (toScale - fromScale)) < 0.01 && Math.abs(speed * (toScale - fromScale)) < restSpeed;
+      const ySettled = Math.abs((1 - progress) * (toY - fromY)) < 0.01 && Math.abs(speed * (toY - fromY)) < restSpeed;
+      if (scaleSettled && ySettled) break;
+    }
+    const frames = [];
+    for (let time = 0; time < duration; time += 1 / 120) {
+      const progress = progressAt(time);
+      frames.push({
+        scale: String(fromScale + (toScale - fromScale) * progress),
+        translate: `0 ${fromY + (toY - fromY) * progress}px`,
+        offset: time / duration,
+      });
+    }
+    frames.push({ scale: String(toScale), translate: `0 ${toY}px`, offset: 1 });
+    return { frames, duration: duration * 1000 };
+  }
+
+  function bindSourceContactInteractions() {
+    if (sourceContactInteractionsBound || sourceReducedMotion()) return;
+    const links = [...root.querySelectorAll("[data-cc-contact-group] a")];
+    if (!links.length) return;
+    sourceContactInteractionsBound = true;
+    for (const link of links) {
+      let hovered = false;
+      let pressed = false;
+      const animate = () => {
+        if (sourceReducedMotion()) return;
+        const computed = getComputedStyle(link);
+        const scale = computed.scale === "none" ? 1 : Number.parseFloat(computed.scale) || 1;
+        const translation = computed.translate.split(/\s+/);
+        const y = translation.length > 1 ? Number.parseFloat(translation[1]) || 0 : 0;
+        sourceContactAnimations.get(link)?.cancel();
+        const targetScale = pressed ? 0.98 : hovered ? 1.03 : 1;
+        const targetY = hovered ? -2 : 0;
+        const animation = sourceSpringFrames(scale, y, targetScale, targetY);
+        const player = link.animate(animation.frames, { duration: animation.duration, easing: "linear", fill: "both" });
+        sourceContactAnimations.set(link, player);
+      };
+      link.addEventListener("pointerenter", (event) => { hovered = event.pointerType !== "touch"; animate(); });
+      link.addEventListener("pointerleave", () => { hovered = false; pressed = false; animate(); });
+      link.addEventListener("pointerdown", (event) => { pressed = true; hovered ||= event.pointerType !== "touch"; animate(); });
+      for (const eventName of ["pointerup", "pointercancel"]) {
+        link.addEventListener(eventName, () => { pressed = false; animate(); });
+      }
+      link.addEventListener("keydown", (event) => {
+        if ((event.key === "Enter" || event.key === " ") && !pressed) { pressed = true; animate(); }
+      });
+      link.addEventListener("keyup", (event) => {
+        if (event.key === "Enter" || event.key === " ") { pressed = false; animate(); }
+      });
+      link.addEventListener("blur", () => { pressed = false; hovered = false; animate(); });
+    }
+  }
+
+  function restoreCapturedMotion() {
+    const reduce = sourceReducedMotion();
+    document.documentElement.classList.toggle("cc-reduced-motion", reduce);
+    if (!sourcePageOpened || sourceRevealBound) return;
+    sourceRevealBound = true;
+    const hero = root.querySelector("[data-cloud-castle-hero]");
+    root.querySelector('img[src$="/chim.webp"]')?.closest(".relative.flex.flex-col.items-center.overflow-hidden")?.setAttribute("data-cc-contact-group", "");
+    bindSourceContactInteractions();
+    const observer = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        const element = entry.target;
+        if (reduce) { element.style.opacity = ""; element.style.transform = ""; continue; }
+        const profile = sourceRevealProfile(element);
+        const inView = entry.isIntersecting && entry.intersectionRatio >= profile.threshold;
+        if (inView === (element.dataset.ccRevealVisible === "true")) continue;
+        element.dataset.ccRevealVisible = String(inView);
+        const initialTransform = element.dataset.ccInitialTransform || "translateY(10px)";
+        const initialOpacity = Number(element.dataset.ccInitialOpacity || 0);
+        animateSourceReveal(element, inView, initialOpacity, initialTransform, 1, profile.duration, profile.delay, profile.easing);
+      }
+    }, { threshold: [0.2, 0.3, 0.35, 0.5] });
+    root.querySelectorAll('[style*="opacity:0"]:not(.cc-source-petal), [style*="opacity: 0"]:not(.cc-source-petal)').forEach((element) => {
+      if (hero?.contains(element)) return;
+      element.dataset.ccInitialTransform = element.style.transform || "translateY(10px)";
+      element.dataset.ccInitialOpacity = element.style.opacity || "0";
+      observer.observe(element);
+    });
+  }
+
+  function localCopy() { return copy[state?.locale] || copy["uz-Latn"]; }
+  function bindField(data, key, value) {
+    for (const node of root.querySelectorAll(`[data-chorlove-field="${key}"]`)) text(node, value);
+  }
+  function setVisibleFields(data) {
+    bindField(data, "groom", data.groom);
+    bindField(data, "bride", data.bride);
+    bindField(data, "eventLabel", data.eventType);
+    bindField(data, "coupleLabel", localCopy().coupleLabel);
+    bindField(data, "weekday", data.date?.weekday || "");
+    bindField(data, "day", data.date?.day || "");
+    bindField(data, "month", data.date?.month || "");
+    bindField(data, "year", data.date?.year || "");
+    bindField(data, "eventTime", data.date?.time || "");
+    bindField(data, "message", data.message);
+    bindField(data, "title", data.title || localCopy().invitationTitle);
+    bindField(data, "hosts", data.hosts);
+    bindField(data, "personalGreeting", data.greeting || data.title);
+    bindField(data, "venueName", data.venue?.name);
+    bindField(data, "address", data.venue?.address);
+    bindField(data, "calendarAction", localCopy().calendarAction);
+    const responseLabel = root.querySelector('[data-chorlove-i18n="responseLabel"]');
+    if (responseLabel) text(responseLabel, localCopy().responseLabel);
+    const programHeading = root.querySelector('[data-chorlove-i18n="programTitle"]');
+    if (data.programHeading) text(programHeading, data.programHeading);
+    for (const node of root.querySelectorAll('[data-chorlove-i18n]')) {
+      const key = node.dataset.chorloveI18n;
+      text(node, localCopy()[key] ?? node.textContent);
+    }
+    const openInvitation = root.querySelector("[data-chorlove-open]");
+    if (openInvitation) openInvitation.setAttribute("aria-label", localCopy().openInvitation);
+    for (const field of root.querySelectorAll('[data-chorlove-field="calendarMonth"]')) {
+      const date = data.date;
+      const monthIndex = Number(date?.monthNumber) - 1;
+      const month = Number.isInteger(monthIndex) && monthIndex >= 0
+        ? localCopy().months[monthIndex]
+        : date?.month || "";
+      text(field, [month, date?.year].filter(Boolean).join(" "));
+    }
+    const start = data.dateTime ? new Date(data.dateTime) : null;
+    const hasDate = start && Number.isFinite(start.getTime());
+    const dateBlock = root.querySelector('[data-chorlove-field="day"]')?.closest(".flex.flex-col.items-center.gap-4");
+    hide(dateBlock, !hasDate);
+    const dateSection = root.querySelector('[data-chorlove-field="eventTime"]')?.closest("section");
+    if (dateSection) dateSection.hidden = !hasDate;
+  }
+
+  function renderCalendar(data) {
+    const start = data.dateTime ? new Date(data.dateTime) : null;
+    if (!start || !Number.isFinite(start.getTime())) return;
+    const cells = root.querySelectorAll("[data-chorlove-calendar-cell]");
+    if (!cells.length) return;
+    const grid = cells[0].parentElement;
+    const allCells = [...grid.children];
+    const dayTemplate = allCells.find((cell) => cell.querySelector("[data-chorlove-calendar-number]"));
+    const blankTemplate = allCells.find((cell) => !cell.querySelector("[data-chorlove-calendar-number]")) || dayTemplate;
+    if (!dayTemplate) return;
+    const year = Number(data.date.year);
+    const monthIndex = Number(data.date.monthNumber) - 1;
+    if (!Number.isInteger(year) || monthIndex < 0 || monthIndex > 11) return;
+    const offset = (new Date(Date.UTC(year, monthIndex, 1)).getUTCDay() + 6) % 7;
+    const days = new Date(Date.UTC(year, monthIndex + 1, 0)).getUTCDate();
+    const count = Math.ceil((offset + days) / 7) * 7;
+    const fragment = document.createDocumentFragment();
+    for (let index = 0; index < count; index += 1) {
+      const day = index - offset + 1;
+      const cell = (day < 1 || day > days ? blankTemplate : dayTemplate).cloneNode(true);
+      cell.removeAttribute("data-chorlove-calendar-cell");
+      cell.setAttribute("data-chorlove-calendar-cell", "");
+      cell.removeAttribute("data-event-day");
+      const number = cell.querySelector("[data-chorlove-calendar-number]");
+      if (number) {
+        number.textContent = day >= 1 && day <= days ? String(day) : "";
+        number.removeAttribute("data-chorlove-calendar-number");
+        number.setAttribute("data-chorlove-calendar-number", "");
+        if (day === Number(data.date.day)) cell.dataset.eventDay = "true";
+      }
+      fragment.append(cell);
+    }
+    grid.replaceChildren(fragment);
+    const weekdayGrid = root.querySelector(".grid.grid-cols-7.border-b-2");
+    if (weekdayGrid) [...weekdayGrid.children].forEach((node, index) => text(node, localCopy().weekdays[index]));
+  }
+
+  function renderProgram(data) {
+    const first = root.querySelector('[data-chorlove-field="program1Time"]');
+    const grid = root.querySelector("[data-chorlove-program-grid]") || first?.parentElement;
+    if (!grid) return;
+    grid.dataset.chorloveProgramGrid = "";
+    const original = [...grid.children];
+    const groups = [];
+    for (let i = 0; i < original.length; i += 3) groups.push(original.slice(i, i + 3));
+    if (!groups.length) return;
+    const rows = data.program || [];
+    const fragment = document.createDocumentFragment();
+    rows.forEach((item, index) => {
+      const group = groups[index % groups.length];
+      for (const source of group) {
+        const cell = source.cloneNode(true);
+        const time = cell.querySelector('[data-chorlove-field$="Time"]');
+        const title = cell.querySelector('[data-chorlove-field$="Title"]');
+        if (time) text(time, item.time);
+        if (title) text(title, item.title);
+        fragment.append(cell);
+      }
+    });
+    grid.replaceChildren(fragment);
+    const section = grid.closest("section");
+    hide(section, rows.length === 0);
+  }
+
+  function renderStoryAndGallery(data) {
+    const storySection = root.querySelector("[data-chorlove-story]");
+    if (!storySection) return;
+    storySection.querySelectorAll(".cc-story-copy").forEach((node) => node.remove());
+    const chapters = data.story || [];
+    if (chapters.length) {
+      const copyHost = document.createElement("div");
+      copyHost.className = "cc-story-copy";
+      for (const chapter of chapters) {
+        const card = document.createElement("article");
+        const title = document.createElement("h3");
+        const body = document.createElement("p");
+        title.textContent = chapter.title || "";
+        body.textContent = chapter.text || "";
+        card.append(title, body);
+        copyHost.append(card);
+      }
+      storySection.append(copyHost);
+    }
+    const slots = [...storySection.querySelectorAll("[data-chorlove-gallery-item]")];
+    const gallery = data.gallery || [];
+    const usableGallery = gallery.filter((item) => item?.src);
+    slots.forEach((image, index) => {
+      const item = usableGallery[index];
+      if (item?.src) {
+        image.src = item.src;
+        image.alt = item.alt || item.caption || "";
+        image.classList.remove("cc-gallery-empty");
+        image.dataset.galleryLightbox = "";
+      } else {
+        image.removeAttribute("src");
+        image.alt = "";
+        image.classList.add("cc-gallery-empty");
+        image.removeAttribute("data-gallery-lightbox");
+      }
+      hide(image.parentElement || image, !item);
+    });
+    const more = storySection.querySelector("[data-chorlove-gallery-more]");
+    if (more) {
+      const remaining = Math.max(0, usableGallery.length - slots.length);
+      text(more, remaining ? `+${remaining}` : "");
+      hide(more, remaining === 0);
+      more.tabIndex = remaining ? 0 : -1;
+      more.setAttribute("role", remaining ? "button" : "presentation");
+      more.setAttribute("aria-label", localCopy().galleryMore.replace("{count}", String(remaining)));
+    }
+    const showGallery = usableGallery.length > 0;
+    hide(storySection, !chapters.length && !showGallery);
+  }
+
+  function renderContacts(data) {
+    const section = root.querySelector("[data-chorlove-contacts]");
+    if (!section) return;
+    const host = section.querySelector("[data-chorlove-contact-links]") || section;
+    host.replaceChildren();
+    const contacts = data.contacts || [];
+    hide(section, contacts.length === 0);
+    if (!contacts.length) return;
+    for (const contact of contacts) {
+      const a = document.createElement("a");
+      a.href = contact.href;
+      a.className = "w-full flex items-center gap-3 px-4 py-2.5 rounded-xl border transition-shadow duration-200 hover:shadow-md";
+      a.style.cssText = "color:rgb(18, 52, 103);font-family:Baskerville, 'Libre Baskerville', 'Times New Roman', serif;border-color:rgba(18, 52, 103, 0.12);background-color:rgba(255, 255, 255, 0.7);backdrop-filter:blur(4px);box-shadow:0 1px 4px rgba(18, 52, 103, 0.06);opacity:0;transform:translateY(18px) scale(0.96)";
+      a.tabIndex = 0;
+      if (contact.type !== "phone") {
+        a.target = "_blank";
+        a.rel = "noopener noreferrer";
+      }
+      const icon = document.createElement("span");
+      icon.className = "flex items-center justify-center w-8 h-8 rounded-full shrink-0";
+      icon.style.backgroundColor = "rgba(18, 52, 103, 0.07)";
+      const paths = {
+        phone: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>',
+        telegram: '<svg viewBox="0 0 24 24" fill="currentColor" class="w-3.5 h-3.5"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"></path></svg>',
+        instagram: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>',
+      };
+      icon.innerHTML = paths[contact.type] || "";
+      const value = document.createElement("span");
+      value.className = "text-[13px] md:text-sm font-medium tracking-wide";
+      value.textContent = contact.value;
+      a.append(icon, value);
+      host.append(a);
+    }
+  }
+
+  async function renderWishes(data) {
+    const section = root.querySelector("[data-chorlove-wishes]");
+    if (!section) return;
+    const list = section.querySelector("[data-chorlove-wish-list]") || document.createElement("div");
+    list.dataset.chorloveWishList = "";
+    if (!list.isConnected) section.append(list);
+    const form = section.querySelector("form");
+    if (form) form.dataset.chorloveWishForm = "";
+    const status = section.querySelector(".cc-status") || document.createElement("p");
+    status.className = "cc-status";
+    if (!status.isConnected) section.append(status);
+    hide(section, !data.wishesEnabled);
+    if (!data.wishesEnabled) return;
+    const wishes = state.preview
+      ? (data.wishes || []).map((wish) => ({ name: wish.name, message: wish.text, submittedAt: wish.submittedAt || wish.createdAt || wish.date }))
+      : await fetch(`${state.apiBase}/wishes`, { cache: "no-store" })
+          .then((response) => response.ok ? response.json() : { wishes: [] })
+          .then((body) => body.wishes || [])
+          .catch(() => []);
+    list.replaceChildren();
+    for (const wish of wishes) {
+      const card = document.createElement("article");
+      card.className = "rounded-xl border p-4 text-sm shadow-sm transition-all hover:border-[#123467]/40";
+      card.style.borderColor = "rgba(18, 52, 103, 0.2)";
+      card.style.backgroundColor = "rgba(255, 255, 255, 0.45)";
+      const header = document.createElement("div");
+      header.className = "flex items-start justify-between";
+      const name = document.createElement("span");
+      name.className = "font-semibold text-base";
+      name.style.color = "rgb(18, 52, 103)";
+      name.textContent = wish.name;
+      const date = document.createElement("span");
+      date.className = "text-xs opacity-65";
+      const submittedAt = wish.submittedAt || wish.createdAt || wish.date;
+      const submittedDate = submittedAt ? new Date(submittedAt) : null;
+      date.textContent = submittedDate && !Number.isNaN(submittedDate.getTime()) ? submittedDate.toLocaleDateString() : "";
+      header.append(name, date);
+      const message = document.createElement("p");
+      message.className = "mt-2 text-sm leading-relaxed text-[#123467]";
+      message.textContent = wish.message;
+      card.append(header, message);
+      list.append(card);
+    }
+    if (form) {
+      const submit = form.querySelector('button[type="submit"]');
+      if (submit) text(submit, localCopy().sendWish);
+      const name = form.querySelector("input");
+      const message = form.querySelector("textarea");
+      if (name) { name.value = state.guestName || ""; name.placeholder = `${localCopy().name}*`; name.setAttribute("aria-label", localCopy().name); name.autocomplete = "name"; }
+      if (message) message.placeholder = `${localCopy().wish}*`;
+      form.onsubmit = async (event) => {
+        event.preventDefault();
+        if (state.preview) { text(status, localCopy().previewOnly); return; }
+        const button = form.querySelector('button[type="submit"]');
+        if (button) button.disabled = true;
+        try {
+          const response = await fetch(`${state.apiBase}/wishes`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ name: name.value, message: message.value, guestToken: state.guestToken || undefined }),
+          });
+          if (!response.ok) throw new Error("wish submission failed");
+          form.reset();
+          text(status, localCopy().wishSent);
+        } catch { text(status, localCopy().failure); }
+        finally { if (button) button.disabled = false; }
+      };
+    }
+  }
+
+  function renderRsvp(data) {
+    const section = root.querySelector("[data-chorlove-rsvp]");
+    if (!section) return;
+    hide(section, !data.rsvp?.enabled);
+    if (!data.rsvp?.enabled) return;
+    const form = section.querySelector("form");
+    const name = form?.querySelector("input");
+    const submit = section.querySelector("[data-chorlove-submit-rsvp]");
+    const responseGroup = section.querySelector('[role="radiogroup"]');
+    if (responseGroup) responseGroup.setAttribute("aria-label", localCopy().responseLabel);
+    const status = section.querySelector(".cc-status") || document.createElement("p");
+    status.className = "cc-status";
+    if (!status.isConnected) section.append(status);
+    if (name) { name.value = state.guestName || ""; name.placeholder = `${localCopy().name}*`; name.setAttribute("aria-label", localCopy().name); name.autocomplete = "name"; }
+    for (const button of section.querySelectorAll("[data-chorlove-rsvp]")) {
+      text(button, button.dataset.chorloveRsvp === "yes" ? localCopy().rsvpYes : localCopy().rsvpNo);
+      button.setAttribute("aria-pressed", button.dataset.selected === "true" ? "true" : "false");
+      button.onclick = () => {
+        section.querySelectorAll("[data-chorlove-rsvp]").forEach((candidate) => {
+          candidate.dataset.selected = String(candidate === button);
+          candidate.setAttribute("aria-pressed", String(candidate === button));
+        });
+      };
+    }
+    form?.querySelectorAll(".cc-party-size, [name='partySize']").forEach((node) => node.closest("label")?.remove() || node.remove());
+    if (submit) text(submit, localCopy().submit);
+    if (form) form.onsubmit = async (event) => {
+      event.preventDefault();
+      if (state.preview) { text(status, localCopy().previewOnly); return; }
+      const selected = section.querySelector('[data-chorlove-rsvp][data-selected="true"]');
+      if (!selected) { text(status, localCopy().failure); return; }
+      if (submit) submit.disabled = true;
+      try {
+        const response = await fetch(`${state.apiBase}/rsvp`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name: name?.value || state.guestName || "Guest", status: selected.dataset.chorloveRsvp, partySize: selected.dataset.chorloveRsvp === "yes" ? 1 : 0, guestToken: state.guestToken || undefined }),
+        });
+        if (!response.ok) throw new Error("rsvp submission failed");
+        text(status, localCopy().rsvpSent);
+      } catch { text(status, localCopy().failure); }
+      finally { if (submit) submit.disabled = false; }
+    };
+  }
+
+  function renderGift(data) {
+    const section = root.querySelector("[data-chorlove-gift]");
+    if (!section) return;
+    hide(section, !data.toyona?.enabled);
+    if (!data.toyona?.enabled) return;
+    const hint = section.querySelector('[data-chorlove-i18n="giftOpenHint"]');
+    const trigger = hint?.closest("button") || section.querySelector('button[aria-label="Open gift box"]');
+    if (trigger) trigger.onclick = () => openGiftDialog(trigger, data.toyona);
+  }
+
+  function openGiftDialog(trigger, gift) {
+    if (document.querySelector("[data-cc-gift-dialog]")) return;
+    const reduced = Boolean(state?.reducedMotion || document.documentElement.classList.contains("cc-reduced-motion") || window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+    const overlay = document.createElement("div");
+    overlay.dataset.ccGiftDialog = "";
+    overlay.className = "fixed inset-0 z-[130] flex items-center justify-center bg-black/75 backdrop-blur-sm p-4 select-none";
+    // The source dialog is fixed to the viewport. `inset-0` alone resolves to
+    // the document's scrollbar-reduced width in the app renderer; use the
+    // viewport width so its 16px gutters and max-width match the source.
+    overlay.style.width = "100vw";
+    overlay.style.opacity = "0";
+    overlay.style.transition = reduced ? "none" : "opacity 250ms ease";
+    const dialog = document.createElement("div");
+    dialog.className = "relative w-full max-w-md rounded-2xl bg-[#FFF7F3] p-6 shadow-2xl text-center border border-[#123467]/20 overflow-hidden";
+    dialog.setAttribute("role", "dialog");
+    dialog.setAttribute("aria-modal", "true");
+    dialog.setAttribute("aria-labelledby", "cc-gift-dialog-title");
+    dialog.tabIndex = -1;
+    dialog.style.outline = "none";
+    dialog.style.color = "rgb(18, 52, 103)";
+    dialog.style.opacity = "0";
+    dialog.style.transform = "scale(.92) translateY(20px)";
+    dialog.style.transition = reduced ? "none" : "opacity 250ms ease, transform 250ms ease";
+    const close = document.createElement("button");
+    close.type = "button";
+    close.className = "absolute right-3.5 top-3.5 p-1.5 rounded-full text-[#123467]/70 hover:text-[#123467] hover:bg-[#123467]/10 transition-colors z-10";
+    close.setAttribute("aria-label", "Close gift details");
+    close.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>';
+    const heading = document.createElement("div");
+    heading.className = "flex flex-col items-center gap-2 pt-2 pb-4 border-b border-[#123467]/15";
+    const image = document.createElement("img");
+    image.alt = "Gift box";
+    image.src = "/templates/bulutlar-qasri/assets/gift/gift.webp";
+    image.className = "w-16 h-16 object-contain drop-shadow-md";
+    const title = document.createElement("h3");
+    title.id = "cc-gift-dialog-title";
+    title.className = "uppercase font-bold text-lg md:text-xl tracking-wide";
+    title.style.fontFamily = '"Times New Roman", serif';
+    title.textContent = localCopy().giftTitle;
+    heading.append(image, title);
+    const content = document.createElement("div");
+    content.className = "py-6 flex flex-col items-center gap-4";
+    if (gift.cardNumber) {
+      const card = document.createElement("div");
+      card.className = "w-full rounded-xl border border-[#123467]/20 bg-white/70 p-4 shadow-sm flex flex-col items-center gap-2";
+      const kind = document.createElement("div");
+      kind.className = "flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#123467]/80";
+      kind.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="14" x="2" y="5" rx="2"></rect><line x1="2" x2="22" y1="10" y2="10"></line><path d="M6 14h2"></path></svg><span>Bank Card</span>';
+      const number = document.createElement("div");
+      number.className = "font-mono text-lg md:text-xl font-bold tracking-widest text-[#123467] my-1";
+      number.textContent = gift.cardNumber;
+      const holder = document.createElement("div");
+      holder.className = "text-xs font-medium text-[#123467]/80";
+      holder.textContent = gift.cardHolder || "";
+      holder.hidden = !gift.cardHolder;
+      const copy = document.createElement("button");
+      copy.type = "button";
+      copy.className = "mt-2 inline-flex items-center gap-2 rounded-full px-5 py-2 text-xs font-semibold text-white transition-all hover:scale-105 active:scale-95 shadow-md";
+      copy.style.backgroundColor = "rgb(18, 52, 103)";
+      const icon = document.createElement("span");
+      icon.setAttribute("aria-hidden", "true");
+      icon.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg>';
+      const copyText = document.createElement("span");
+      copyText.textContent = "Copy Card Number";
+      copy.append(icon, copyText);
+      copy.onclick = async () => {
+        try {
+          if (!navigator.clipboard?.writeText) return;
+          await navigator.clipboard.writeText(String(gift.cardNumber).replaceAll(" ", ""));
+          icon.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m20 6-11 11-5-5"></path></svg>';
+          copyText.textContent = "Copied!";
+          window.setTimeout(() => {
+            icon.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg>';
+            copyText.textContent = "Copy Card Number";
+          }, 2500);
+        } catch { /* Match source behavior when clipboard access is unavailable. */ }
+      };
+      card.append(kind, number, holder, copy);
+      content.append(card);
+    } else {
+      const fallback = document.createElement("div");
+      fallback.className = "text-sm text-[#123467]/80 italic px-4";
+      fallback.textContent = gift.note || "Your presence is the greatest gift for us.";
+      content.append(fallback);
+    }
+    dialog.append(close, heading, content);
+    overlay.append(dialog);
+    document.body.append(overlay);
+    let closing = false;
+    const dismiss = () => {
+      if (closing) return;
+      closing = true;
+      document.removeEventListener("keydown", keydown);
+      overlay.style.opacity = "0";
+      dialog.style.opacity = "0";
+      dialog.style.transform = "scale(.92) translateY(20px)";
+      window.setTimeout(() => { overlay.remove(); trigger.focus(); }, reduced ? 0 : 250);
+    };
+    const keydown = (event) => { if (event.key === "Escape") dismiss(); };
+    overlay.onclick = (event) => { if (event.target === overlay) dismiss(); };
+    dialog.onclick = (event) => event.stopPropagation();
+    close.onclick = dismiss;
+    document.addEventListener("keydown", keydown);
+    requestAnimationFrame(() => { overlay.style.opacity = "1"; dialog.style.opacity = "1"; dialog.style.transform = "scale(1) translateY(0)"; });
+    dialog.focus();
+  }
+
+  function renderVenue(data) {
+    const section = root.querySelector('[data-landing-screenshot-id="invite-map"]') || root.querySelector('[data-chorlove-field="address"]')?.closest("section");
+    if (!section) return;
+    const venue = data.venue || {};
+    const present = Boolean(venue.name || venue.address);
+    hide(section, !present);
+    if (!present) return;
+    const mapHost = section.querySelector("[data-chorlove-map-host]");
+    let mapFrame = mapHost?.querySelector(".cc-venue-map");
+    const hasCoordinates = Number.isFinite(venue.lat) && Number.isFinite(venue.lng) && Math.abs(venue.lat) <= 90 && Math.abs(venue.lng) <= 180;
+    if (mapHost && hasCoordinates) {
+      if (!mapFrame) {
+        mapFrame = document.createElement("iframe");
+        mapFrame.className = "cc-venue-map h-[280px] md:h-[380px] w-full max-w-[340px] md:max-w-[560px] rounded-2xl overflow-hidden";
+        mapFrame.title = localCopy().venueTitle;
+        mapFrame.loading = "lazy";
+        mapFrame.allowFullscreen = true;
+        mapFrame.referrerPolicy = "no-referrer-when-downgrade";
+        mapFrame.style.borderColor = "rgb(18, 52, 103)";
+        mapHost.append(mapFrame);
+      }
+      const next = `/maps/venue?latitude=${venue.lat}&longitude=${venue.lng}&lang=${state.locale || "uz-Latn"}&destination=${encodeURIComponent(venue.mapUrl || "")}`;
+      if (mapFrame.getAttribute("src") !== next) mapFrame.src = next;
+    } else if (mapFrame) {
+      mapFrame.remove();
+    }
+    section.querySelector(".cc-map-link")?.remove();
+  }
+
+  function renderCalendarLink(data) {
+    const link = root.querySelector("[data-chorlove-calendar]");
+    const start = data.dateTime ? new Date(data.dateTime) : null;
+    if (!link || !start || !Number.isFinite(start.getTime())) return;
+    const end = new Date(start.getTime() + 2 * 60 * 60 * 1000);
+    const stamp = (date) => date.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
+    const location = [data.venue?.name, data.venue?.address].filter(Boolean).join(", ");
+    const url = new URL("https://calendar.google.com/calendar/render");
+    url.search = new URLSearchParams({ action: "TEMPLATE", text: [data.groom, data.bride].filter(Boolean).join(" & "), dates: `${stamp(start)}/${stamp(end)}`, location }).toString();
+    link.href = url.toString();
+    link.target = "_blank";
+    link.rel = "noreferrer";
+  }
+
+  function renderCountdown(data) {
+    window.clearInterval(countdownTimer);
+    const heading = root.querySelector('[data-chorlove-i18n="countdownTitle"]');
+    const holder = heading?.parentElement?.parentElement;
+    const start = data.dateTime ? new Date(data.dateTime).getTime() : 0;
+    const update = () => {
+      const remaining = Math.max(0, start - Date.now());
+      const values = [Math.floor(remaining / 86400000), Math.floor(remaining / 3600000) % 24, Math.floor(remaining / 60000) % 60, Math.floor(remaining / 1000) % 60];
+      const nodes = holder?.querySelectorAll("[data-countdown-value]") || [];
+      values.forEach((value, index) => { if (nodes[index]) text(nodes[index], value); });
+    };
+    const values = holder ? [...holder.querySelectorAll("span")].filter((node) => node.classList.contains("text-xl") && node.classList.contains("font-bold") && /^\d+$/.test(node.textContent.trim())) : [];
+    values.slice(0, 4).forEach((node) => node.setAttribute("data-countdown-value", ""));
+    if (start) { update(); countdownTimer = window.setInterval(update, 1000); }
+  }
+
+  function renderMusic(payload) {
+    let audio = root.querySelector("audio[data-chorlove-audio]");
+    if (!audio) { audio = document.createElement("audio"); audio.loop = true; audio.preload = "metadata"; audio.dataset.chorloveAudio = ""; root.append(audio); }
+    const source = payload.data.music?.url || "";
+    if (audio.getAttribute("src") !== source) audio.src = source;
+    const toggle = root.querySelector('[aria-label="Toggle music"]') || document.createElement("button");
+    toggle.className = "cc-music-toggle";
+    toggle.type = "button";
+    toggle.setAttribute("aria-label", payload.locale === "en" ? "Toggle music" : payload.locale === "ru" ? "Включить или выключить музыку" : "Musiqani yoqish yoki o‘chirish");
+    const syncMusic = () => { const playing = !audio.paused && !audio.ended; toggle.textContent = playing ? "Ⅱ" : "♫"; toggle.setAttribute("aria-pressed", String(playing)); };
+    audio.onplay = syncMusic; audio.onpause = syncMusic; audio.onended = syncMusic; audio.onerror = syncMusic;
+    syncMusic();
+    hide(toggle, !audio.src);
+    if (!toggle.isConnected) root.append(toggle);
+    toggle.onclick = async () => {
+      if (audio.paused) { try { await audio.play(); } catch { toggle.setAttribute("aria-label", "Music unavailable"); } }
+      else audio.pause();
+      syncMusic();
+    };
+    if (payload.silentPlayback) { audio.pause(); audio.muted = true; }
+    else audio.muted = false;
+    if (!payload.preview) audio.volume = 0.35;
+    if (payload.reducedMotion) document.documentElement.classList.add("cc-reduced-motion");
+    else document.documentElement.classList.remove("cc-reduced-motion");
+  }
+
+  function renderLanguages(payload) {
+    let picker = root.querySelector(".cc-language-picker");
+    if (!picker) { picker = document.createElement("nav"); picker.className = "cc-language-picker"; root.append(picker); }
+    picker.setAttribute("aria-label", localCopy().languageLabel);
+    picker.replaceChildren();
+    const available = payload.enabledLocales?.length ? payload.enabledLocales : locales;
+    picker.style.display = available.length > 1 ? "" : "none";
+    for (const locale of available) {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.textContent = ({ "uz-Latn": "Uz", "uz-Cyrl": "Ўз", en: "En", ru: "Ru" })[locale] || locale;
+      button.setAttribute("aria-pressed", String(payload.locale === locale));
+      button.onclick = () => parent.postMessage({ type: `${templateId}:language`, locale }, location.origin);
+      picker.append(button);
+    }
+  }
+
+  function ensureGalleryLightbox() {
+    let dialog = root.querySelector(".cc-gallery-lightbox");
+    if (!dialog) {
+      dialog = document.createElement("div"); dialog.className = "cc-gallery-lightbox"; dialog.hidden = true;
+      const image = document.createElement("img"); image.alt = "";
+      const close = document.createElement("button"); close.type = "button"; close.textContent = "×"; close.setAttribute("aria-label", "Close image");
+      close.onclick = () => { dialog.hidden = true; };
+      dialog.onclick = (event) => { if (event.target === dialog) dialog.hidden = true; };
+      dialog.append(image, close); root.append(dialog);
+    }
+    root.querySelectorAll("[data-gallery-lightbox]").forEach((image) => { image.onclick = () => { dialog.querySelector("img").src = image.src; dialog.hidden = false; }; });
+    root.querySelectorAll("[data-chorlove-gallery-more]").forEach((more) => {
+      const openNext = () => {
+        const images = (state?.data?.gallery || []).filter((item) => item?.src);
+        const visibleSlotCount = root.querySelectorAll("[data-chorlove-gallery-item]").length;
+        const nextImage = images[visibleSlotCount];
+        if (!nextImage?.src) return;
+        dialog.querySelector("img").src = nextImage.src;
+        dialog.querySelector("img").alt = nextImage.alt || nextImage.caption || "";
+        dialog.hidden = false;
+      };
+      more.onclick = openNext;
+      more.onkeydown = (event) => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); openNext(); } };
+    });
+  }
+
+  function render(payload) {
+    if (!payload?.data || payload.templateId !== templateId) return;
+    state = { ...payload, apiBase: `/api/public/invitations/${encodeURIComponent(payload.invitationId || "")}` };
+    document.documentElement.lang = payload.locale || "uz-Latn";
+    setVisibleFields(payload.data);
+    renderCalendar(payload.data);
+    renderProgram(payload.data);
+    renderStoryAndGallery(payload.data);
+    renderContacts(payload.data);
+    renderRsvp(payload.data);
+    renderGift(payload.data);
+    renderVenue(payload.data);
+    renderCalendarLink(payload.data);
+    renderCountdown(payload.data);
+    renderMusic(payload);
+    renderLanguages(payload);
+    ensureGalleryLightbox();
+    renderWishes(payload.data);
+    restoreCapturedMotion();
+  }
+
+  bindSourceOpening();
+
+  const initial = (() => { try { return JSON.parse(window.name); } catch { return null; } })();
+  restoreCapturedMotion();
+  if (initial?.type === `${templateId}:update`) render(initial.payload);
+  window.addEventListener("message", (event) => {
+    if (event.origin !== location.origin || event.data?.type !== `${templateId}:update`) return;
+    render(event.data.payload);
+  });
+})();

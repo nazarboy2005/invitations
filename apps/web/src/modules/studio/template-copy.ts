@@ -1,12 +1,12 @@
 import type { TemplateDefinition } from "@taklifnoma/contracts";
 
 const descriptions: Record<string, string> = {
-  "golden-card": "To‘q moviy va oltin naqshlar, nafis ochiladigan taklifnoma.",
-  "green-white": "Oq va yashil ranglar, nozik o‘simlik bezaklari.",
-  "jasmine-white": "Fil suyagi ranglari va nafis yasmin gullari.",
+  "zarvaraq": "To‘q moviy va oltin naqshlar, nafis ochiladigan taklifnoma.",
+  "oq-chechak": "Oq va yashil ranglar, nozik o‘simlik bezaklari.",
+  "oq-yasmin": "Fil suyagi ranglari va nafis yasmin gullari.",
   lace: "Bordo to‘r, marvaridlar va nafis ochilish.",
-  "love-sakura": "Sakura gullari va mayin pushti ranglar.",
-  "modern-floral": "Zamonaviy gul bezaklari va mayin ranglar.",
+  "sakura-sehri": "Sakura gullari va mayin pushti ranglar.",
+  "gul-ifori": "Zamonaviy gul bezaklari va mayin ranglar.",
 };
 
 export function studioTemplateDescription(template: TemplateDefinition) {

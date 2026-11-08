@@ -1,0 +1,573 @@
+[
+  {
+    "previousId": "ivory-rose-card",
+    "id": "oq-atirgul",
+    "name": "Oq atirgul",
+    "aliases": [
+      "ivory-rose-card"
+    ]
+  },
+  {
+    "previousId": "moviy-ravoq-card",
+    "id": "moviy-ravoq",
+    "name": "Moviy ravoq",
+    "aliases": [
+      "moviy-ravoq-card"
+    ]
+  },
+  {
+    "previousId": "wedivo-pulau-sehati",
+    "id": "kongillar-oroli",
+    "name": "Ko‘ngillar oroli",
+    "aliases": [
+      "wedivo-pulau-sehati"
+    ]
+  },
+  {
+    "previousId": "oltin-darvoza-ortidagi-baxt",
+    "id": "baxt-darvozasi",
+    "name": "Baxt darvozasi",
+    "aliases": [
+      "oltin-darvoza-ortidagi-baxt"
+    ]
+  },
+  {
+    "previousId": "buxoro-ravoq",
+    "id": "buxoro-ravogi",
+    "name": "Buxoro ravog‘i",
+    "aliases": [
+      "buxoro-ravoq"
+    ]
+  },
+  {
+    "previousId": "tojmahal-oltin-darvozasi",
+    "id": "tojmahal-darvozasi",
+    "name": "Tojmahal darvozasi",
+    "aliases": [
+      "tojmahal-oltin-darvozasi"
+    ]
+  },
+  {
+    "previousId": "fairy",
+    "id": "sehrli-oqshom",
+    "name": "Sehrli oqshom",
+    "aliases": [
+      "fairy"
+    ]
+  },
+  {
+    "previousId": "butterfly",
+    "id": "kapalak",
+    "name": "Kapalak",
+    "aliases": [
+      "butterfly"
+    ]
+  },
+  {
+    "previousId": "girlsparty",
+    "id": "dugonalar",
+    "name": "Dugonalar",
+    "aliases": [
+      "girlsparty"
+    ]
+  },
+  {
+    "previousId": "evelina",
+    "id": "baxt-kaliti",
+    "name": "Baxt kaliti",
+    "aliases": [
+      "evelina"
+    ]
+  },
+  {
+    "previousId": "toscana",
+    "id": "gulzor",
+    "name": "Gulzor",
+    "aliases": [
+      "toscana"
+    ]
+  },
+  {
+    "previousId": "korporativ",
+    "id": "anjuman",
+    "name": "Anjuman",
+    "aliases": [
+      "korporativ"
+    ]
+  },
+  {
+    "previousId": "stained-glass",
+    "id": "shisha-naqshi",
+    "name": "Shisha naqshi",
+    "aliases": [
+      "stained-glass"
+    ]
+  },
+  {
+    "previousId": "swan-garden",
+    "id": "oqqushlar",
+    "name": "Oqqushlar",
+    "aliases": [
+      "swan-garden"
+    ]
+  },
+  {
+    "previousId": "golden-card",
+    "id": "zarvaraq",
+    "name": "Zarvaraq",
+    "aliases": [
+      "golden-card"
+    ]
+  },
+  {
+    "previousId": "green-garden",
+    "id": "yashil-makon",
+    "name": "Yashil Makon",
+    "aliases": [
+      "green-garden"
+    ]
+  },
+  {
+    "previousId": "green-gold",
+    "id": "zumrad",
+    "name": "Zumrad",
+    "aliases": [
+      "green-gold"
+    ]
+  },
+  {
+    "previousId": "green-white",
+    "id": "oq-chechak",
+    "name": "Oq chechak",
+    "aliases": [
+      "green-white"
+    ]
+  },
+  {
+    "previousId": "jasmine-white",
+    "id": "oq-yasmin",
+    "name": "Oq yasmin",
+    "aliases": [
+      "jasmine-white"
+    ]
+  },
+  {
+    "previousId": "lace",
+    "id": "marvarid",
+    "name": "Marvarid",
+    "aliases": [
+      "lace"
+    ]
+  },
+  {
+    "previousId": "love-sakura",
+    "id": "sakura-sehri",
+    "name": "Sakura sehri",
+    "aliases": [
+      "love-sakura"
+    ]
+  },
+  {
+    "previousId": "luxury-gold",
+    "id": "zar-jilosi",
+    "name": "Zar jilosi",
+    "aliases": [
+      "luxury-gold"
+    ]
+  },
+  {
+    "previousId": "modern-floral",
+    "id": "gul-ifori",
+    "name": "Gul ifori",
+    "aliases": [
+      "modern-floral"
+    ]
+  },
+  {
+    "previousId": "taklifla-zarhal-sahifa",
+    "id": "zarhal-sahifa",
+    "name": "Zarhal Sahifa",
+    "aliases": [
+      "taklifla-zarhal-sahifa"
+    ]
+  },
+  {
+    "previousId": "taklifla-muhrli-maktub",
+    "id": "muhrli-maktub",
+    "name": "Muhrli Maktub",
+    "aliases": [
+      "taklifla-muhrli-maktub"
+    ]
+  },
+  {
+    "previousId": "taklifla-asalari",
+    "id": "asalari",
+    "name": "Asalari",
+    "aliases": [
+      "taklifla-asalari"
+    ]
+  },
+  {
+    "previousId": "taklifla-fayzli-xonadon",
+    "id": "fayzli-xonadon",
+    "name": "Fayzli Xonadon",
+    "aliases": [
+      "taklifla-fayzli-xonadon"
+    ]
+  },
+  {
+    "previousId": "taklifla-ertak",
+    "id": "ertak",
+    "name": "Ertak",
+    "aliases": [
+      "taklifla-ertak"
+    ]
+  },
+  {
+    "previousId": "taklifla-gulbog",
+    "id": "gulbog",
+    "name": "Gulbog",
+    "aliases": [
+      "taklifla-gulbog"
+    ]
+  },
+  {
+    "previousId": "taklifla-zarrin-gullar",
+    "id": "zarrin-gullar",
+    "name": "Zarrin gullar",
+    "aliases": [
+      "taklifla-zarrin-gullar"
+    ]
+  },
+  {
+    "previousId": "taklifla-toglar-bagrida",
+    "id": "toglar-bagrida",
+    "name": "Tog‘lar bag‘rida",
+    "aliases": [
+      "taklifla-toglar-bagrida"
+    ]
+  },
+  {
+    "previousId": "taklifla-oltin-yol",
+    "id": "oltin-yol",
+    "name": "Oltin Yo‘l",
+    "aliases": [
+      "taklifla-oltin-yol"
+    ]
+  },
+  {
+    "previousId": "taklifla-osmon",
+    "id": "osmon",
+    "name": "Cheksiz Osmon",
+    "aliases": [
+      "taklifla-osmon"
+    ]
+  },
+  {
+    "previousId": "taklifla-parilar-ertagi",
+    "id": "parilar-ertagi",
+    "name": "Parilar ertagi",
+    "aliases": [
+      "taklifla-parilar-ertagi"
+    ]
+  },
+  {
+    "previousId": "taklifla-qogoz-ertagi",
+    "id": "qogoz-ertagi",
+    "name": "Qog‘oz ertagi",
+    "aliases": [
+      "taklifla-qogoz-ertagi"
+    ]
+  },
+  {
+    "previousId": "taklifla-sakura-guli",
+    "id": "sakura-guli",
+    "name": "Sakura Guli",
+    "aliases": [
+      "taklifla-sakura-guli"
+    ]
+  },
+  {
+    "previousId": "taklifla-sharlar",
+    "id": "sharlar",
+    "name": "Sharlar",
+    "aliases": [
+      "taklifla-sharlar"
+    ]
+  },
+  {
+    "previousId": "taklifla-yulduzli-tun",
+    "id": "yulduzli-tun",
+    "name": "Yulduzli Tun",
+    "aliases": [
+      "taklifla-yulduzli-tun"
+    ]
+  },
+  {
+    "previousId": "taklifla-terracotta",
+    "id": "terrakota",
+    "name": "Terrakota",
+    "aliases": [
+      "taklifla-terracotta",
+      "terracotta"
+    ]
+  },
+  {
+    "previousId": "taklifla-uchrashuv",
+    "id": "uchrashuv",
+    "name": "Uchrashuv",
+    "aliases": [
+      "taklifla-uchrashuv"
+    ]
+  },
+  {
+    "previousId": "taklifla-yubiley-sahifasi",
+    "id": "umr-bahori",
+    "name": "Umr bahori",
+    "aliases": [
+      "taklifla-yubiley-sahifasi",
+      "yubiley-sahifasi"
+    ]
+  },
+  {
+    "previousId": "taklifla-barakali",
+    "id": "baraka",
+    "name": "Baraka",
+    "aliases": [
+      "taklifla-barakali",
+      "barakali"
+    ]
+  },
+  {
+    "previousId": "taklifla-tungi-saroy",
+    "id": "tungi-saroy",
+    "name": "Tungi Saroy",
+    "aliases": [
+      "taklifla-tungi-saroy"
+    ]
+  },
+  {
+    "previousId": "taklifla-tovus",
+    "id": "tovus",
+    "name": "Tovus",
+    "aliases": [
+      "taklifla-tovus"
+    ]
+  },
+  {
+    "previousId": "taklifla-tort-fasl",
+    "id": "tort-fasl",
+    "name": "To‘rt fasl",
+    "aliases": [
+      "taklifla-tort-fasl"
+    ]
+  },
+  {
+    "previousId": "glass-pink",
+    "id": "pushti-gulbarg",
+    "name": "Pushti gulbarg",
+    "aliases": [
+      "glass-pink"
+    ]
+  },
+  {
+    "previousId": "olive-manor-edition",
+    "id": "zaytun",
+    "name": "Zaytun",
+    "aliases": [
+      "olive-manor-edition",
+      "olive-manor"
+    ]
+  },
+  {
+    "previousId": "islamic-edition",
+    "id": "islomiy",
+    "name": "Islomiy",
+    "aliases": [
+      "islamic-edition",
+      "islamic"
+    ]
+  },
+  {
+    "previousId": "orchid-amplop",
+    "id": "ormon-maktubi",
+    "name": "O‘rmon maktubi",
+    "aliases": [
+      "orchid-amplop"
+    ]
+  },
+  {
+    "previousId": "invitate-palov",
+    "id": "osh-ziyofati",
+    "name": "Osh ziyofati",
+    "aliases": [
+      "invitate-palov"
+    ]
+  },
+  {
+    "previousId": "golden-hour",
+    "id": "oltin-lahza",
+    "name": "Oltin lahza",
+    "aliases": [
+      "golden-hour"
+    ]
+  },
+  {
+    "previousId": "bloom",
+    "id": "gullar-bayrami",
+    "name": "Gullar bayrami",
+    "aliases": [
+      "bloom"
+    ]
+  },
+  {
+    "previousId": "invitate-nahorgi-osh",
+    "id": "sahar-ziyofati",
+    "name": "Sahar ziyofati",
+    "aliases": [
+      "invitate-nahorgi-osh"
+    ]
+  },
+  {
+    "previousId": "invitate-wedding",
+    "id": "gulchambar",
+    "name": "Gulchambar",
+    "aliases": [
+      "invitate-wedding"
+    ]
+  },
+  {
+    "previousId": "whiteless",
+    "id": "orzular",
+    "name": "Orzular",
+    "aliases": [
+      "whiteless"
+    ]
+  },
+  {
+    "previousId": "monochrome-editorial-edition",
+    "id": "oq-qora-lavha",
+    "name": "Oq-qora lavha",
+    "aliases": [
+      "monochrome-editorial-edition",
+      "monochrome-editorial"
+    ]
+  },
+  {
+    "previousId": "xatna-edition",
+    "id": "xatna",
+    "name": "Xatna",
+    "aliases": [
+      "xatna-edition"
+    ]
+  },
+  {
+    "previousId": "cloud-castle",
+    "id": "bulutlar-qasri",
+    "name": "Bulutlar qasri",
+    "aliases": [
+      "cloud-castle"
+    ]
+  },
+  {
+    "previousId": "palace-rose",
+    "id": "saroy-atirguli",
+    "name": "Saroy atirguli",
+    "aliases": [
+      "palace-rose"
+    ]
+  },
+  {
+    "previousId": "royal-burgundy-edition",
+    "id": "baxmal-saroy",
+    "name": "Baxmal saroy",
+    "aliases": [
+      "royal-burgundy-edition",
+      "velvet-royale"
+    ]
+  },
+  {
+    "previousId": "taklifnomachi-1",
+    "id": "nafosat",
+    "name": "Nafosat",
+    "aliases": [
+      "taklifnomachi-1",
+      "klassik-nafis"
+    ]
+  },
+  {
+    "previousId": "taklifnomachi-12",
+    "id": "moviy-osmon",
+    "name": "Moviy osmon",
+    "aliases": [
+      "taklifnomachi-12"
+    ]
+  },
+  {
+    "previousId": "taklifnomachi-13",
+    "id": "oltin-atirgul",
+    "name": "Oltin atirgul",
+    "aliases": [
+      "taklifnomachi-13"
+    ]
+  },
+  {
+    "previousId": "taklifnomachi-15",
+    "id": "tun-jilosi",
+    "name": "Tun jilosi",
+    "aliases": [
+      "taklifnomachi-15",
+      "monoxrom"
+    ]
+  },
+  {
+    "previousId": "taklifnomachi-16",
+    "id": "zaytun-guli",
+    "name": "Zaytun guli",
+    "aliases": [
+      "taklifnomachi-16"
+    ]
+  },
+  {
+    "previousId": "taklifnomachi-17",
+    "id": "ipak-jilosi",
+    "name": "Ipak jilosi",
+    "aliases": [
+      "taklifnomachi-17",
+      "atlas-ipak"
+    ]
+  },
+  {
+    "previousId": "taklifnomachi-18",
+    "id": "guldasta",
+    "name": "Guldasta",
+    "aliases": [
+      "taklifnomachi-18",
+      "gul-naqshli-marosim"
+    ]
+  },
+  {
+    "previousId": "taklifnomachi-19",
+    "id": "zaytun-bogi",
+    "name": "Zaytun bog‘i",
+    "aliases": [
+      "taklifnomachi-19"
+    ]
+  },
+  {
+    "previousId": "ivory-love",
+    "id": "oppoq-tuygu",
+    "name": "Oppoq tuyg‘u",
+    "aliases": [
+      "ivory-love"
+    ]
+  },
+  {
+    "previousId": "swan",
+    "id": "oqqush",
+    "name": "Oqqush",
+    "aliases": [
+      "swan"
+    ]
+  }
+]

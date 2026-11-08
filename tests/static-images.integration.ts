@@ -14,7 +14,7 @@ const accounts = [randomUUID(), randomUUID()];
 const tokens = [randomToken(), randomToken()];
 let invitation = normalizeInvitation({
   ...completeInvitation(),
-  templateId: "ivory-rose-card",
+  templateId: "oq-atirgul",
 });
 async function request(
   route: string,

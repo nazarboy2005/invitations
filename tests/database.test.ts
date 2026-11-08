@@ -480,15 +480,15 @@ test("template migrations publish completed designs while keeping unfinished des
         "orik-guli",
         "paxta",
         "sahro-fonusi",
-        "toscana",
+        "gulzor",
         "vals",
         "muhr",
         "doira",
         "qandil",
         "parda",
         "ganch",
-        "glass-pink",
-        "green-gold",
+        "pushti-gulbarg",
+        "zumrad",
         "hilol",
         "qatlam",
         "lola",
@@ -504,7 +504,7 @@ test("template migrations publish completed designs while keeping unfinished des
         "nahorgi-osh",
         "bitiruv",
         "korporativ",
-        "evelina",
+        "baxt-kaliti",
         "aurelia",
       ],
     ],
@@ -520,10 +520,10 @@ test("template migrations publish completed designs while keeping unfinished des
       ["bulbul", true],
       ["chavandoz", true],
       ["doira", true],
-      ["evelina", true],
+      ["baxt-kaliti", true],
       ["ganch", true],
-      ["glass-pink", true],
-      ["green-gold", false],
+      ["pushti-gulbarg", true],
+      ["zumrad", false],
       ["hilol", true],
       ["konfetti", true],
       ["korporativ", true],
@@ -557,7 +557,7 @@ test("template migrations publish completed designs while keeping unfinished des
       ["shirin-bayram", true],
       ["somon-yoli", true],
       ["suzani", true],
-      ["toscana", true],
+      ["gulzor", true],
       ["uchar-gilam", false],
       ["vals", true],
     ],
@@ -648,11 +648,11 @@ test("template migrations publish completed designs while keeping unfinished des
     [{ template_id: "anor", category_id: "wedding" }],
   );
   for (const templateId of [
-    "royal-burgundy-edition",
-    "cloud-castle",
-    "glass-pink",
-    "green-garden",
-    "green-gold",
+    "baxmal-saroy",
+    "bulutlar-qasri",
+    "pushti-gulbarg",
+    "yashil-makon",
+    "zumrad",
   ]) {
     assert.ok(
       assignments.rows.some(
@@ -673,7 +673,7 @@ test("template migrations publish completed designs while keeping unfinished des
     assert.ok(
       assignments.rows.some(
         (row) =>
-          row.template_id === "olive-manor-edition" &&
+          row.template_id === "zaytun" &&
           row.category_id === "wedding",
       ),
       "Olive Manor registration must add its wedding category assignment",
@@ -682,12 +682,12 @@ test("template migrations publish completed designs while keeping unfinished des
   assert.ok(
     assignments.rows.some(
       (row) =>
-        row.template_id === "royal-burgundy-edition" &&
+        row.template_id === "baxmal-saroy" &&
         row.category_id === "wedding",
     ),
   );
   const royalBurgundy = await db.query<{ published: boolean }>(
-    "SELECT published FROM templates WHERE id='royal-burgundy-edition'",
+    "SELECT published FROM templates WHERE id='baxmal-saroy'",
   );
   assert.deepEqual(royalBurgundy.rows, [{ published: true }]);
 });

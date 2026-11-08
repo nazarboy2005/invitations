@@ -39,7 +39,7 @@ test(
       displayName: "Disposable Sharlar verification",
       isAdmin: false,
     };
-    let invitation = createInvitation("taklifla-sharlar");
+    let invitation = createInvitation("sharlar");
     invitation.eventType = "birthday";
     let browser: any;
     const checks: string[] = [];
@@ -80,7 +80,7 @@ test(
       invitation.startsAt = "2027-07-14T18:00";
       invitation.timezone = "Asia/Tashkent";
       invitation.celebrantAge = 5;
-      invitation.templateData["taklifla-sharlar"]={doorsAt:"16:45"};
+      invitation.templateData["sharlar"]={doorsAt:"16:45"};
       invitation.venue = {
         latitude: 41.31,
         longitude: 69.28,
@@ -112,9 +112,9 @@ test(
       checks.push(
         "Authenticated four-locale save/reopen preserves authored fields, authored story chapters and venue",
       );
-      assert.deepEqual(reopened.templateData["taklifla-sharlar"],{doorsAt:"16:45"});
+      assert.deepEqual(reopened.templateData["sharlar"],{doorsAt:"16:45"});
       const originalShared = structuredClone(invitation);
-      for (const templateId of (process.env.TAKLIFLA_PRIVATE_QA ? [] : ["konfetti", "taklifla-sharlar"])) {
+      for (const templateId of (process.env.TAKLIFLA_PRIVATE_QA ? [] : ["konfetti", "sharlar"])) {
         response = await request(
           `/api/invitations/${invitation.id}`,
           { invitation: { ...invitation, templateId } },

@@ -24,7 +24,7 @@ const owner: SessionUser = {
   displayName: "Disposable Wedding integration test",
   isAdmin: false,
 };
-const invitation = createInvitation("invitate-wedding");
+const invitation = createInvitation("gulchambar");
 let insertedUser = false;
 let insertedSession = false;
 let insertedInvitation = false;
@@ -140,7 +140,7 @@ test("Wedding draft saves and reopens, while its catalog entry stays private", a
   const opened = await request(`/api/invitations/${invitation.id}`);
   assert.equal(opened.status, 200);
   const openedInvitation = (await opened.json()).invitation as Invitation;
-  assert.equal(openedInvitation.templateId, "invitate-wedding");
+  assert.equal(openedInvitation.templateId, "gulchambar");
   assert.equal(
     openedInvitation.content["uz-Latn"].message,
     "Initial invitation message",

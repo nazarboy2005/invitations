@@ -12,7 +12,7 @@ import { invitationForStorage, unsupportedInvitationInputs } from "../packages/c
 
 const hash = (bytes: Buffer) =>
   createHash("sha256").update(bytes).digest("hex");
-for (const id of ["stained-glass", "sunset", "swan-garden"]) {
+for (const id of ["shisha-naqshi", "sunset", "oqqushlar"]) {
   const root = new URL(`../apps/web/public/templates/${id}/`, import.meta.url);
   test(`${id}: immutable capture, complete local assets and catalog artwork`, async () => {
     const provenance = JSON.parse(

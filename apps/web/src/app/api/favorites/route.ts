@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
+import { resolveTemplateId } from "@taklifnoma/contracts";
 import { getDb } from "@taklifnoma/database";
 import {
   getSessionUser,
@@ -12,7 +13,7 @@ import { listFavorites, mergeFavorites } from "@/server/favorites";
 export const runtime = "nodejs";
 const inputSchema = z.object({
   userId: z.uuid(),
-  templateIds: z.array(z.string().regex(/^[a-z0-9-]{1,100}$/)).max(500),
+  templateIds: z.array(z.string().regex(/^[a-z0-9-]{1,100}$/).transform(resolveTemplateId)).max(500),
   savedAt: z
     .record(z.string().regex(/^[a-z0-9-]{1,100}$/), z.iso.datetime())
     .optional(),

@@ -41,7 +41,7 @@ test("public invitation projection excludes account fields, disabled content and
     },
     templateData: {
       anor: { ownerId: secret },
-      "wedivo-pulau-sehati": { private: secret },
+      "kongillar-oroli": { private: secret },
     },
   };
   const before = JSON.stringify(data);
@@ -57,7 +57,7 @@ test("public invitation projection excludes account fields, disabled content and
 });
 
 test("public projection retains intentional public contacts/gifts and typed template content", () => {
-  const invitation = createInvitation("taklifla-terracotta");
+  const invitation = createInvitation("terrakota");
   invitation.templateData[invitation.templateId] = {
     infoNote: { "uz-Latn": "Authored public note" },
     privateOwnerId: secret,

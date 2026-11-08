@@ -5,14 +5,14 @@ import { readFileSync } from "node:fs";
 import { createHash } from "node:crypto";
 import { resolve } from "node:path";
 import { createInvitation, LOCALES } from "../packages/contracts/src/index";
-import { makeTungiSaroyPayload } from "../apps/web/src/templates/taklifla-tungi-saroy/adapter";
-import { makeTovusPayload } from "../apps/web/src/templates/taklifla-tovus/adapter";
+import { makeTungiSaroyPayload } from "../apps/web/src/templates/tungi-saroy/adapter";
+import { makeTovusPayload } from "../apps/web/src/templates/tovus/adapter";
 import { createTemplatePreviewSample } from "../apps/web/src/modules/catalog/preview-sample";
 import { getTemplatePreviewWishes } from "../apps/web/src/modules/catalog/preview-sample";
 
 const designs = [
   {
-    id: "taklifla-tungi-saroy",
+    id: "tungi-saroy",
     project: (i: any, l: any, o: any) =>
       makeTungiSaroyPayload(i, l, { ...o, guestName: "<Mehmon>" }),
     manifest: "source/provenance.json",
@@ -24,7 +24,7 @@ const designs = [
     ],
   },
   {
-    id: "taklifla-tovus",
+    id: "tovus",
     project: (i: any, l: any, o: any) => makeTovusPayload(i, l, "<Mehmon>", o),
     manifest: "dependencies.json",
     runtime: ["bridge.js", "copy.js", "index.html", "source/motion.js"],

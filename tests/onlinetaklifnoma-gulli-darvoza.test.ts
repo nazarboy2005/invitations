@@ -3,7 +3,7 @@ import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
 import { test } from "node:test";
 
-const root = new URL("../apps/web/public/templates/onlinetaklifnoma-gulli-darvoza/", import.meta.url);
+const root = new URL("../apps/web/public/templates/gulli-darvoza/", import.meta.url);
 
 test("Gulli Darvoza source assets are locally packaged with verified origins", async () => {
   const entries = JSON.parse(await readFile(new URL("source/assets-provenance.json", root), "utf8")) as Array<{ file: string; url: string; sha256: string; bytes: number }>;

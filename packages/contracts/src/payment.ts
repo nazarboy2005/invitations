@@ -1,5 +1,6 @@
 import type { Invitation } from "./index";
 import { templateCapabilities } from "./capabilities";
+import { resolveTemplateId } from "./template-identity";
 
 // Content may be corrected while checkout is pending; its purchased event may not change.
 export function paymentIdentity(invitation: Invitation): string {
@@ -29,7 +30,7 @@ export function paymentIdentityMatches(invitation: Invitation, snapshot: string)
     const canonical = (value: Identity) => {
       const limit = templateCapabilities(value.templateId).people;
       return JSON.stringify({
-        templateId: value.templateId, eventType: value.eventType,
+        templateId: resolveTemplateId(value.templateId), eventType: value.eventType,
         startsAt: value.startsAt, timezone: value.timezone,
         people: value.people.map((item) => ({
           locale: item.locale, people: item.people.slice(0, limit), hosts: item.hosts,

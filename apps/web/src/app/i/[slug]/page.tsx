@@ -10,47 +10,47 @@ import { publicInvitationUrl } from "@/server/publication";
 import { invitationShareMetadata } from "@/modules/catalog/invitation-share";
 import { resolveGuest } from "@/server/public";
 import { AnorInvitation } from "@/templates/anor";
-import { WedivoPulauSehati } from "@/templates/wedivo-pulau-sehati/renderer";
-import { TakliflaFayzliXonadonInvitation } from "@/templates/taklifla-fayzli-xonadon/renderer";
-import { TakliflaErtak } from "@/templates/taklifla-ertak/renderer";
-import { TakliflaGulbog } from "@/templates/taklifla-gulbog/renderer";
-import { TakliflaZarrinGullar } from "@/templates/taklifla-zarrin-gullar/renderer";
-import { ToglarBagridaInvitation } from "@/templates/taklifla-toglar-bagrida/renderer";
-import { TakliflaOltinYol } from "@/templates/taklifla-oltin-yol/renderer";
-import { TakliflaOsmonInvitation } from "@/templates/taklifla-osmon/renderer";
-import { TakliflaParilarErtagiInvitation } from "@/templates/taklifla-parilar-ertagi/renderer";
-import { TakliflaQogozErtagiInvitation } from "@/templates/taklifla-qogoz-ertagi/renderer";
-import { SakuraGuliInvitation } from "@/templates/taklifla-sakura-guli/renderer";
-import { TakliflaSharlarInvitation } from "@/templates/taklifla-sharlar/renderer";
-import { TakliflaYulduzliTun } from "@/templates/taklifla-yulduzli-tun/renderer";
-import { TakliflaTerracottaInvitation } from "@/templates/taklifla-terracotta/renderer";
-import { TakliflaUchrashuv } from "@/templates/taklifla-uchrashuv/renderer";
-import { TakliflaYubileySahifasi } from "@/templates/taklifla-yubiley-sahifasi/renderer";
-import { TakliflaBarakali } from "@/templates/taklifla-barakali/renderer";
-import { TakliflaZarhalSahifaInvitation } from "@/templates/taklifla-zarhal-sahifa/renderer";
-import { TakliflaAsalari } from "@/templates/taklifla-asalari/renderer";
-import { TungiSaroyInvitation } from "@/templates/taklifla-tungi-saroy/renderer";
-import { TakliflaTovus } from "@/templates/taklifla-tovus/renderer";
-import { TakliflaTortFasl } from "@/templates/taklifla-tort-fasl/renderer";
-import { MuhrliMaktubInvitation } from "@/templates/taklifla-muhrli-maktub/renderer";
+import { WedivoPulauSehati } from "@/templates/kongillar-oroli/renderer";
+import { TakliflaFayzliXonadonInvitation } from "@/templates/fayzli-xonadon/renderer";
+import { TakliflaErtak } from "@/templates/ertak/renderer";
+import { TakliflaGulbog } from "@/templates/gulbog/renderer";
+import { TakliflaZarrinGullar } from "@/templates/zarrin-gullar/renderer";
+import { ToglarBagridaInvitation } from "@/templates/toglar-bagrida/renderer";
+import { TakliflaOltinYol } from "@/templates/oltin-yol/renderer";
+import { TakliflaOsmonInvitation } from "@/templates/osmon/renderer";
+import { TakliflaParilarErtagiInvitation } from "@/templates/parilar-ertagi/renderer";
+import { TakliflaQogozErtagiInvitation } from "@/templates/qogoz-ertagi/renderer";
+import { SakuraGuliInvitation } from "@/templates/sakura-guli/renderer";
+import { TakliflaSharlarInvitation } from "@/templates/sharlar/renderer";
+import { TakliflaYulduzliTun } from "@/templates/yulduzli-tun/renderer";
+import { TakliflaTerracottaInvitation } from "@/templates/terrakota/renderer";
+import { TakliflaUchrashuv } from "@/templates/uchrashuv/renderer";
+import { TakliflaYubileySahifasi } from "@/templates/umr-bahori/renderer";
+import { TakliflaBarakali } from "@/templates/baraka/renderer";
+import { TakliflaZarhalSahifaInvitation } from "@/templates/zarhal-sahifa/renderer";
+import { TakliflaAsalari } from "@/templates/asalari/renderer";
+import { TungiSaroyInvitation } from "@/templates/tungi-saroy/renderer";
+import { TakliflaTovus } from "@/templates/tovus/renderer";
+import { TakliflaTortFasl } from "@/templates/tort-fasl/renderer";
+import { MuhrliMaktubInvitation } from "@/templates/muhrli-maktub/renderer";
 import { isMarxabaTemplate, MarxabaInvitation } from "@/templates/marxaba";
 import { isInvitateTemplate, InvitateInvitation } from "@/templates/invitate";
-import { VelvetRoyaleInvitation } from "@/templates/velvet-royale/renderer";
-import { OliveManorInvitation } from "@/templates/olive-manor/renderer";
-import { IslamicEditionInvitation } from "@/templates/islamic-edition/renderer";
-import { MonochromeEditorialInvitation } from "@/templates/monochrome-editorial-edition/renderer";
-import { XatnaEditionInvitation } from "@/templates/xatna-edition/renderer";
+import { VelvetRoyaleInvitation } from "@/templates/baxmal-saroy/renderer";
+import { OliveManorInvitation } from "@/templates/zaytun/renderer";
+import { IslamicEditionInvitation } from "@/templates/islomiy/renderer";
+import { MonochromeEditorialInvitation } from "@/templates/oq-qora-lavha/renderer";
+import { XatnaEditionInvitation } from "@/templates/xatna/renderer";
 import { GulliDarvozaInvitation } from "@/templates/onlinetaklifnoma/gulli-darvoza";
-import { OltinDarvozaInvitation } from "@/templates/onlinetaklifnoma/oltin-darvoza-ortidagi-baxt";
+import { OltinDarvozaInvitation } from "@/templates/onlinetaklifnoma/baxt-darvozasi";
 import { MingBirKechaInvitation } from "@/templates/onlinetaklifnoma/ming-bir-kecha";
 import { ZarrinDoppiInvitation } from "@/templates/onlinetaklifnoma/zarrin-doppi";
 import { AndalusDarvozasiInvitation } from "@/templates/onlinetaklifnoma/andalus-darvozasi";
 import { SamarqandPeshtoqInvitation } from "@/templates/onlinetaklifnoma/samarqand-peshtoqi";
 import { ShishaBogInvitation } from "@/templates/onlinetaklifnoma/shisha-bog";
 import { KapadokiyaTongiInvitation } from "@/templates/onlinetaklifnoma/kapadokiya-tongi";
-import { BuxoroRavoqInvitation } from "@/templates/onlinetaklifnoma/buxoro-ravoq";
+import { BuxoroRavoqInvitation } from "@/templates/onlinetaklifnoma/buxoro-ravogi";
 import { JannatBogiInvitation } from "@/templates/onlinetaklifnoma/jannat-bogi";
-import { TojmahalOltinDarvozasiInvitation } from "@/templates/onlinetaklifnoma/tojmahal-oltin-darvozasi";
+import { TojmahalOltinDarvozasiInvitation } from "@/templates/onlinetaklifnoma/tojmahal-darvozasi";
 import { isChorloveTemplate, ChorloveInvitation } from "@/templates/chorlove";
 import { InvitationViewTracker } from "@/modules/catalog/invitation-view-tracker";
 export const dynamic = "force-dynamic";
@@ -89,7 +89,7 @@ export default async function InvitationPage({
       guestName = "";
     }
   }
-  if (invitation.templateId === "oltin-darvoza-ortidagi-baxt")
+  if (invitation.templateId === "baxt-darvozasi")
     return (
       <>
         <InvitationViewTracker invitationId={result.id} musicUrl={invitation.music.enabled ? invitation.music.url : ""} />
@@ -126,11 +126,11 @@ export default async function InvitationPage({
     return <><InvitationViewTracker invitationId={result.id} musicUrl={invitation.music.enabled ? invitation.music.url : ""} /><ShishaBogInvitation invitation={invitation} invitationId={result.id} locale={locale} guestName={guestName} guestToken={query.g} /></>;
   if (invitation.templateId === "kapadokiya-tongi")
     return <><InvitationViewTracker invitationId={result.id} musicUrl={invitation.music.enabled ? invitation.music.url : ""} /><KapadokiyaTongiInvitation invitation={invitation} invitationId={result.id} locale={locale} guestName={guestName} guestToken={query.g} /></>;
-  if (invitation.templateId === "buxoro-ravoq")
+  if (invitation.templateId === "buxoro-ravogi")
     return <><InvitationViewTracker invitationId={result.id} musicUrl={invitation.music.enabled ? invitation.music.url : ""} /><BuxoroRavoqInvitation invitation={invitation} invitationId={result.id} locale={locale} guestName={guestName} guestToken={query.g} /></>;
   if (invitation.templateId === "jannat-bogi")
     return <><InvitationViewTracker invitationId={result.id} musicUrl={invitation.music.enabled ? invitation.music.url : ""} /><JannatBogiInvitation invitation={invitation} invitationId={result.id} locale={locale} guestName={guestName} guestToken={query.g} /></>;
-  if (invitation.templateId === "tojmahal-oltin-darvozasi")
+  if (invitation.templateId === "tojmahal-darvozasi")
     return <><InvitationViewTracker invitationId={result.id} musicUrl={invitation.music.enabled ? invitation.music.url : ""} /><TojmahalOltinDarvozasiInvitation invitation={invitation} invitationId={result.id} locale={locale} guestName={guestName} guestToken={query.g} /></>;
   if (invitation.templateId === "samarqand-peshtoqi")
     return <><InvitationViewTracker invitationId={result.id} musicUrl={invitation.music.enabled ? invitation.music.url : ""} /><SamarqandPeshtoqInvitation invitation={invitation} invitationId={result.id} locale={locale} guestName={guestName} guestToken={query.g} /></>;
@@ -161,51 +161,51 @@ export default async function InvitationPage({
         />
       </>
     );
-  if (invitation.templateId === "wedivo-pulau-sehati")
+  if (invitation.templateId === "kongillar-oroli")
     return <><InvitationViewTracker invitationId={result.id} musicUrl={invitation.music.enabled ? invitation.music.url : ""} /><WedivoPulauSehati invitation={invitation} invitationId={result.id} locale={locale} guestName={guestName} guestToken={query.g} /></>;
-  if (invitation.templateId === "taklifla-fayzli-xonadon")
+  if (invitation.templateId === "fayzli-xonadon")
     return <><InvitationViewTracker invitationId={result.id} musicUrl={invitation.music.enabled ? invitation.music.url : ""} /><TakliflaFayzliXonadonInvitation invitation={invitation} invitationId={result.id} locale={locale} guestName={guestName} guestToken={query.g} /></>;
-  if (invitation.templateId === "taklifla-ertak")
+  if (invitation.templateId === "ertak")
     return <><InvitationViewTracker invitationId={result.id} musicUrl={invitation.music.enabled ? invitation.music.url : ""} /><TakliflaErtak invitation={invitation} invitationId={result.id} locale={locale} guestName={guestName} guestToken={query.g} /></>;
-  if (invitation.templateId === "taklifla-gulbog")
+  if (invitation.templateId === "gulbog")
     return <><InvitationViewTracker invitationId={result.id} musicUrl={invitation.music.enabled ? invitation.music.url : ""} /><TakliflaGulbog invitation={invitation} invitationId={result.id} locale={locale} guestName={guestName} guestToken={query.g} /></>;
-  if (invitation.templateId === "taklifla-zarrin-gullar")
+  if (invitation.templateId === "zarrin-gullar")
     return <><InvitationViewTracker invitationId={result.id} musicUrl={invitation.music.enabled ? invitation.music.url : ""} /><TakliflaZarrinGullar invitation={invitation} invitationId={result.id} locale={locale} guestName={guestName} guestToken={query.g} /></>;
-  if (invitation.templateId === "taklifla-toglar-bagrida")
+  if (invitation.templateId === "toglar-bagrida")
     return <><InvitationViewTracker invitationId={result.id} musicUrl={invitation.music.enabled ? invitation.music.url : ""} /><ToglarBagridaInvitation invitation={invitation} invitationId={result.id} locale={locale} guestName={guestName} guestToken={query.g} /></>;
-  if (invitation.templateId === "taklifla-oltin-yol")
+  if (invitation.templateId === "oltin-yol")
     return <><InvitationViewTracker invitationId={result.id} musicUrl={invitation.music.enabled ? invitation.music.url : ""} /><TakliflaOltinYol invitation={invitation} invitationId={result.id} locale={locale} guestName={guestName} guestToken={query.g} /></>;
-  if (invitation.templateId === "taklifla-osmon")
+  if (invitation.templateId === "osmon")
     return <><InvitationViewTracker invitationId={result.id} musicUrl={invitation.music.enabled ? invitation.music.url : ""} /><TakliflaOsmonInvitation invitation={invitation} invitationId={result.id} locale={locale} guestName={guestName} guestToken={query.g} /></>;
-  if (invitation.templateId === "taklifla-parilar-ertagi")
+  if (invitation.templateId === "parilar-ertagi")
     return <><InvitationViewTracker invitationId={result.id} musicUrl={invitation.music.enabled ? invitation.music.url : ""} /><TakliflaParilarErtagiInvitation invitation={invitation} invitationId={result.id} locale={locale} guestName={guestName} guestToken={query.g} /></>;
-  if (invitation.templateId === "taklifla-qogoz-ertagi")
+  if (invitation.templateId === "qogoz-ertagi")
     return <><InvitationViewTracker invitationId={result.id} musicUrl={invitation.music.enabled ? invitation.music.url : ""} /><TakliflaQogozErtagiInvitation invitation={invitation} invitationId={result.id} locale={locale} guestName={guestName} guestToken={query.g} /></>;
-  if (invitation.templateId === "taklifla-sakura-guli")
+  if (invitation.templateId === "sakura-guli")
     return <><InvitationViewTracker invitationId={result.id} musicUrl={invitation.music.enabled ? invitation.music.url : ""} /><SakuraGuliInvitation invitation={invitation} invitationId={result.id} locale={locale} guestName={guestName} guestToken={query.g} /></>;
-  if (invitation.templateId === "taklifla-sharlar")
+  if (invitation.templateId === "sharlar")
     return <><InvitationViewTracker invitationId={result.id} musicUrl={invitation.music.enabled ? invitation.music.url : ""} /><TakliflaSharlarInvitation invitation={invitation} invitationId={result.id} locale={locale} guestName={guestName} guestToken={query.g} /></>;
-  if (invitation.templateId === "taklifla-yulduzli-tun")
+  if (invitation.templateId === "yulduzli-tun")
     return <><InvitationViewTracker invitationId={result.id} musicUrl={invitation.music.enabled ? invitation.music.url : ""} /><TakliflaYulduzliTun invitation={invitation} invitationId={result.id} locale={locale} guestName={guestName} guestToken={query.g} /></>;
-  if (invitation.templateId === "taklifla-terracotta")
+  if (invitation.templateId === "terrakota")
     return <><InvitationViewTracker invitationId={result.id} musicUrl={invitation.music.enabled ? invitation.music.url : ""} /><TakliflaTerracottaInvitation invitation={invitation} invitationId={result.id} locale={locale} guestName={guestName} guestToken={query.g} /></>;
-  if (invitation.templateId === "taklifla-uchrashuv")
+  if (invitation.templateId === "uchrashuv")
     return <><InvitationViewTracker invitationId={result.id} musicUrl={invitation.music.enabled ? invitation.music.url : ""} /><TakliflaUchrashuv invitation={invitation} invitationId={result.id} locale={locale} guestName={guestName} guestToken={query.g} /></>;
-  if (invitation.templateId === "taklifla-yubiley-sahifasi")
+  if (invitation.templateId === "umr-bahori")
     return <><InvitationViewTracker invitationId={result.id} musicUrl={invitation.music.enabled ? invitation.music.url : ""} /><TakliflaYubileySahifasi invitation={invitation} invitationId={result.id} locale={locale} guestName={guestName} guestToken={query.g} /></>;
-  if (invitation.templateId === "taklifla-barakali")
+  if (invitation.templateId === "baraka")
     return <><InvitationViewTracker invitationId={result.id} musicUrl={invitation.music.enabled ? invitation.music.url : ""} /><TakliflaBarakali invitation={invitation} invitationId={result.id} locale={locale} guestName={guestName} guestToken={query.g} /></>;
-  if (invitation.templateId === "taklifla-zarhal-sahifa")
+  if (invitation.templateId === "zarhal-sahifa")
     return <><InvitationViewTracker invitationId={result.id} musicUrl={invitation.music.enabled ? invitation.music.url : ""} /><TakliflaZarhalSahifaInvitation invitation={invitation} invitationId={result.id} locale={locale} guestName={guestName} guestToken={query.g} /></>;
-  if (invitation.templateId === "taklifla-tungi-saroy")
+  if (invitation.templateId === "tungi-saroy")
     return <><InvitationViewTracker invitationId={result.id} musicUrl={invitation.music.enabled ? invitation.music.url : ""} /><TungiSaroyInvitation invitation={invitation} invitationId={result.id} locale={locale} guestName={guestName} guestToken={query.g} /></>;
-  if (invitation.templateId === "taklifla-tovus")
+  if (invitation.templateId === "tovus")
     return <><InvitationViewTracker invitationId={result.id} musicUrl={invitation.music.enabled ? invitation.music.url : ""} /><TakliflaTovus invitation={invitation} invitationId={result.id} locale={locale} guestName={guestName} guestToken={query.g} /></>;
-  if (invitation.templateId === "taklifla-tort-fasl")
+  if (invitation.templateId === "tort-fasl")
     return <><InvitationViewTracker invitationId={result.id} musicUrl={invitation.music.enabled ? invitation.music.url : ""} /><TakliflaTortFasl invitation={invitation} invitationId={result.id} locale={locale} guestName={guestName} guestToken={query.g} /></>;
-  if (invitation.templateId === "taklifla-asalari")
+  if (invitation.templateId === "asalari")
     return <><InvitationViewTracker invitationId={result.id} musicUrl={invitation.music.enabled ? invitation.music.url : ""} /><TakliflaAsalari invitation={invitation} invitationId={result.id} locale={locale} guestName={guestName} guestToken={query.g} preview={false} silentPlayback={false} /></>;
-  if (invitation.templateId === "taklifla-muhrli-maktub")
+  if (invitation.templateId === "muhrli-maktub")
     return <><InvitationViewTracker invitationId={result.id} musicUrl={invitation.music.enabled ? invitation.music.url : ""} /><MuhrliMaktubInvitation invitation={invitation} invitationId={result.id} locale={locale} guestName={guestName} guestToken={query.g} preview={false} silentPlayback={false} /></>;
   if (isMarxabaTemplate(invitation.templateId))
     return (
@@ -250,7 +250,7 @@ export default async function InvitationPage({
       </>
     );
 
-  if (invitation.templateId === "royal-burgundy-edition")
+  if (invitation.templateId === "baxmal-saroy")
     return (
       <>
         <InvitationViewTracker invitationId={result.id} musicUrl={invitation.music.enabled ? invitation.music.url : ""} />
@@ -263,7 +263,7 @@ export default async function InvitationPage({
         />
       </>
     );
-  if (invitation.templateId === "olive-manor-edition")
+  if (invitation.templateId === "zaytun")
     return (
       <>
         <InvitationViewTracker invitationId={result.id} musicUrl={invitation.music.enabled ? invitation.music.url : ""} />
@@ -276,7 +276,7 @@ export default async function InvitationPage({
         />
       </>
     );
-  if (invitation.templateId === "islamic-edition")
+  if (invitation.templateId === "islomiy")
     return (
       <>
         <InvitationViewTracker invitationId={result.id} musicUrl={invitation.music.enabled ? invitation.music.url : ""} />
@@ -289,14 +289,14 @@ export default async function InvitationPage({
         />
       </>
     );
-  if (invitation.templateId === "monochrome-editorial-edition")
+  if (invitation.templateId === "oq-qora-lavha")
     return (
       <>
         <InvitationViewTracker invitationId={result.id} musicUrl={invitation.music.enabled ? invitation.music.url : ""} />
         <MonochromeEditorialInvitation invitation={invitation} invitationId={result.id} locale={locale} guestName={guestName} guestToken={query.g} />
       </>
     );
-  if (invitation.templateId === "xatna-edition")
+  if (invitation.templateId === "xatna")
     return (
       <>
         <InvitationViewTracker invitationId={result.id} musicUrl={invitation.music.enabled ? invitation.music.url : ""} />

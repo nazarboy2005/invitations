@@ -1,0 +1,266 @@
+(() => {
+  "use strict";
+  const id = "yashil-makon";
+  const root = document.querySelector('[data-chorlove-template="yashil-makon"]');
+  if (!root) return;
+  const opening = document.querySelector('[data-gg-source-opening]');
+  const hero = root.querySelector('[data-gg-source-hero]');
+  let openingBound = false;
+  let heroAnimated = false;
+  let heroParallaxBound = false;
+  function bindSourceOpening(payload, data, words) {
+    if (!opening) return;
+    const openingReduced=Boolean(payload.reducedMotion)||matchMedia("(prefers-reduced-motion: reduce)").matches;
+    opening.classList.toggle("gg-reduced-motion",openingReduced);
+    if(openingReduced)opening.getAnimations({subtree:true}).forEach(animation=>animation.cancel());
+    const localize = {"uz-Latn":"Taklifnoma","uz-Cyrl":"Таклифнома",en:"Invitation",ru:"Приглашение"};
+    txt(opening.querySelector('[data-gg-opening-greeting]'), data.greeting || words.greeting || "Assalomu alaykum, aziz mehmon");
+    txt(opening.querySelector('[data-gg-opening-title]'), localize[payload.locale] || localize["uz-Latn"]);
+    txt(opening.querySelector('[data-gg-opening-groom]'), data.groom || "");
+    txt(opening.querySelector('[data-gg-opening-bride]'), data.bride || "");
+    txt(opening.querySelector('[data-gg-opening-date]'), data.date?.long || dateValue(data));
+    const openButton = opening.querySelector('[data-gg-opening-open]');
+    if (openButton) { txt(openButton.querySelector('span'), words.open); openButton.setAttribute("aria-label", words.open); }
+    const heart = opening.querySelector('[data-gg-opening-heart]');
+    if (heart) heart.setAttribute("aria-label", words.open);
+    if (!openingBound) {
+      const close = () => {
+        if (opening.classList.contains("gg-opening-exit")) return;
+        const reduced=Boolean(state?.reducedMotion)||matchMedia("(prefers-reduced-motion: reduce)").matches;
+        animateSourceHero(reduced);
+        if(!reduced)opening.querySelectorAll('img[src*="flower2-decoration"], img[src*="flower5-bottom"]').forEach(image => image.animate([{ transform: getComputedStyle(image).transform, opacity: .9 }, { transform: "scale(2.5)", opacity: 0 }], { duration: 800, easing: "ease-out", fill: "forwards" }));
+        opening.classList.add("gg-opening-exit", "gg-leaves-leaving");
+        if(!reduced)opening.querySelectorAll(".gg-opening-petal").forEach(petal => {
+          const opacity = getComputedStyle(petal).opacity;
+          petal.getAnimations().forEach(animation => animation.cancel());
+          petal.animate([
+            { translate: "0 0px", scale: "1" },
+            { translate: "0 150px", scale: "2" },
+            { translate: "0 300px", scale: "0" },
+          ], { duration: 850, easing: "ease-out", fill: "forwards" });
+          petal.animate([{ opacity }, { opacity: 0 }], { duration: 850, easing: "ease-out", fill: "forwards" });
+        });
+        window.setTimeout(() => { opening.hidden = true; }, reduced?0:1050);
+      };
+      openButton?.addEventListener("click", close);
+      heart?.addEventListener("click", close);
+      heart?.addEventListener("keydown", event => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); close(); } });
+      const petals = [
+        ["18.42%","#e7eede","10.9px",12.2,.24],["26.67%","#ffffff","19px",12.4,1.93],
+        ["82.40%","#e7eede","20.7px",10.1,2.32],["30.79%","#e7eede","15.8px",10.2,2.35],
+        ["62.95%","#e7eede","18px",10.6,1.25],["68.27%","#dbe6d0","12.4px",9.8,1.72],
+        ["81.03%","#dbe6d0","18.7px",8.4,.36],["50.03%","#c4d4b3","15.1px",10.5,.73],
+        ["87.25%","#c4d4b3","17px",9.2,2.5],["87.94%","#c4d4b3","22.2px",11.7,2.48],
+        ["7.02%","#dbe6d0","13.5px",8.7,.23],["40.78%","#e7eede","17.9px",9.3,2.5],
+      ];
+      const petalLayer = opening.querySelector('[data-gg-petal-layer]');
+      if (petalLayer) for (const [left,color,size,duration,delay] of petals) {
+        const petal = document.createElement("span"); petal.className = "gg-opening-petal";
+        petal.style.left = left; petal.style.color = color; petal.style.fontSize = size;
+        petal.style.setProperty("--gg-duration", `${duration}s`); petal.style.setProperty("--gg-delay", `${delay}s`);
+        petal.setAttribute("aria-hidden", "true");
+        petal.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em"><g><ellipse cx="12" cy="5" rx="2.2" ry="4.5"/><ellipse cx="12" cy="5" rx="2.2" ry="4.5" transform="rotate(60 12 12)"/><ellipse cx="12" cy="5" rx="2.2" ry="4.5" transform="rotate(120 12 12)"/><ellipse cx="12" cy="5" rx="2.2" ry="4.5" transform="rotate(180 12 12)"/><ellipse cx="12" cy="5" rx="2.2" ry="4.5" transform="rotate(240 12 12)"/><ellipse cx="12" cy="5" rx="2.2" ry="4.5" transform="rotate(300 12 12)"/></g><circle cx="12" cy="12" r="1.8" fill-opacity=".45"/></svg>';
+        petalLayer?.append(petal);
+        if (!payload.reducedMotion && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+          petal.animate([{ translate: "0 -10vh" }, { translate: "0 110vh" }], { duration: duration * 1000, delay: delay * 1000, iterations: Infinity, easing: "linear" });
+          petal.animate([{ opacity: 0 }, { opacity: .8, offset: 1 / 3 }, { opacity: .8, offset: 2 / 3 }, { opacity: 0 }], { duration: duration * 1000, delay: delay * 1000, iterations: Infinity, easing: "ease-in-out" });
+          petal.animate([{ rotate: "0deg" }, { rotate: "360deg" }], { duration: duration * 1200, delay: delay * 1000, iterations: Infinity, easing: "linear" });
+        }
+      }
+      openingBound = true;
+    }
+  }
+  function animateSourceHero(reduced) {
+    if (!hero) return;
+    if(reduced){
+      hero.getAnimations({subtree:true}).forEach(animation=>animation.cancel());
+      const leaves=hero.querySelectorAll(':scope > div > img');
+      const card=hero.querySelector(':scope > div > div[style*="opacity:0"]');
+      [leaves[0],leaves[1],card,card?.children?.[0],card?.children?.[1],card?.children?.[2],leaves[2]].forEach((node,index)=>{if(!node)return;node.style.opacity=index===0||index===1||index===6?".9":"1";node.style.transform="none";});
+      heroAnimated=true;
+      return;
+    }
+    if(heroAnimated)return;
+    heroAnimated = true;
+    const leaves = hero.querySelectorAll(':scope > div > img');
+    const card = hero.querySelector(':scope > div > div[style*="opacity:0"]');
+      const reveal = (node, frames, duration, delay, easing="ease-out") => {
+      if (!node) return;
+      if (reduced) { const last = frames[frames.length - 1]; for (const [key,value] of Object.entries(last)) node.style[key] = typeof value === "number" && key === "opacity" ? String(value) : typeof value === "number" ? `${value}px` : value; return; }
+      node.animate(frames, { duration: duration * 1000, delay: delay * 1000, easing, fill: "both" });
+    };
+    reveal(leaves[0],[{opacity:0,transform:"scale(.8)"},{opacity:.9,transform:"scale(1)"}],1,.2);
+    reveal(leaves[1],[{opacity:0,transform:"scale(.8)"},{opacity:.9,transform:"scale(1)"}],1,.35);
+    reveal(card,[{opacity:0,transform:"translateY(30px) scale(.85)"},{opacity:1,transform:"translateY(0) scale(1)"}],.9,.25,"cubic-bezier(.22,1,.36,1)");
+    const names = card?.children || [];
+    reveal(names[0],[{opacity:0,transform:"translateY(15px)"},{opacity:1,transform:"translateY(0)"}],.7,.4);
+    reveal(names[1],[{opacity:0,transform:"scale(.5)"},{opacity:.9,transform:"scale(1)"}],.7,.55);
+    reveal(names[2],[{opacity:0,transform:"translateY(15px)"},{opacity:1,transform:"translateY(0)"}],.7,.7);
+    reveal(leaves[2],[{opacity:0,transform:"scale(.7)"},{opacity:1,transform:"scale(1)"}],.9,.55);
+    if (!reduced && !heroParallaxBound && leaves.length >= 3) {
+      let scroller = window;
+      for (let node = hero; node; node = node.parentElement) {
+        if (/(auto|scroll)/.test(getComputedStyle(node).overflowY)) { scroller = node; break; }
+      }
+      const baseTranslations = [...leaves].slice(0, 3).map((leaf) => {
+        const value = getComputedStyle(leaf).translate;
+        const parts = value === "none" ? [] : value.split(/\s+/);
+        return [parts[0] || "0px", parts[1] || "0px"];
+      });
+      const sync = () => {
+        const amount = Math.max(0, Math.min(1, (scroller === window ? window.scrollY : scroller.scrollTop) / 600));
+        [ -180, -140, -40 ].forEach((distance, index) => {
+          const offset = distance * amount;
+          const [x, y] = baseTranslations[index];
+          const adjustedY = offset === 0 ? y : `calc(${y} ${offset < 0 ? "-" : "+"} ${Math.abs(offset)}px)`;
+          leaves[index].style.translate = `${x} ${adjustedY}`;
+        });
+      };
+      if (scroller !== window) scroller.addEventListener("scroll", sync, { passive: true });
+      window.addEventListener("scroll", sync, { passive: true });
+      window.addEventListener("resize", sync);
+      sync();
+      heroParallaxBound = true;
+    }
+  }
+  const locales = ["uz-Latn", "uz-Cyrl", "en", "ru"];
+  const copy = {"uz-Latn":{"title":"Tilni tanlang","open":"Taklifnomani ochish","guest":"Ismingiz","wish":"Tilagingiz","send":"Yuborish","yes":"Kelaman","no":"Kela olmayman","wishes":"Mehmonlar tilaklari","response":"Javobingiz saqlandi. Rahmat!","sent":"Tilagingiz taklifnoma egasiga yuborildi.","error":"Yuborilmadi. Qayta urinib ko?ring.","preview":"Ko'rish rejimida yuborish o?chiq.","weekdays":["Du","Se","Cho","Pa","Ju","Sha","Ya"],"months":["Yanvar","Fevral","Mart","Aprel","May","Iyun","Iyul","Avgust","Sentabr","Oktabr","Noyabr","Dekabr"],"calendarTitle":"Sanamizni eslab qoling","calendarMessage":"Bu kunni kalendaringizda belgilab qo'ying — sizni kutamiz.","calendarAction":"Kalendariga qo'shish","coupleLabel":"Kuyov va kelin","timeLabel":"Vaqt","hostsLabel":"Hurmat bilan:","countdownTitle":"Eng baxtli kungacha","daysUnit":"Kun","hoursUnit":"Soat","minutesUnit":"Daqiqa","secondsUnit":"Soniya","wishesPrompt":"To'y egalariga ezgu tilaklaringizni qoldiring","wishSubmit":"Tilak yuborish","rsvpTitle":"Kelasizmi?","rsvpPrompt":"Iltimos, javobingizni bildiring.","rsvpSubmit":"Yuborish","giftOpenHint":"Ochish uchun bosing","contactsTitle":"Bog'lanish uchun","contactsPrompt":"Savol va tabriklar uchun biz bilan bog'laning.","phoneLabel":"Telefon raqam","phonePrompt":"Savollar uchun qo'ng'iroq qiling","footerNote":"Tashrifingiz biz uchun katta baxt.","footerTagline":"Abadiy baxtli hayot boshlanishi","map":"Xaritada ko'rish","galleryTitle":"Foto galereya","giftTitle":"Sovg'a yuborish","programNote":"To'y kuni tartibi","party":"Mehmonlar soni","galleryPrev":"Oldingi surat","galleryNext":"Keyingi surat","telegramLabel":"Telegram","telegramPrompt":"Telegram orqali yozing","responseLabel":"Javobingiz","venueTitle":"To'y manzili"},"uz-Cyrl":{"title":"\u0422\u0438\u043b\u043d\u0438 \u0442\u0430\u043d\u043b\u0430\u043d\u0433","open":"\u0422\u0430\u043a\u043b\u0438\u0444\u043d\u043e\u043c\u0430\u043d\u0438 \u043e\u0447\u0438\u0448","guest":"\u0418\u0441\u043c\u0438\u043d\u0433\u0438\u0437","wish":"\u0422\u0438\u043b\u0430\u0433\u0438\u043d\u0433\u0438\u0437","send":"\u042e\u0431\u043e\u0440\u0438\u0448","yes":"\u041a\u0435\u043b\u0430\u043c\u0430\u043d","no":"\u041a\u0435\u043b\u0430 \u043e\u043b\u043c\u0430\u0439\u043c\u0430\u043d","wishes":"\u041c\u0435\u04b3\u043c\u043e\u043d\u043b\u0430\u0440 \u0442\u0438\u043b\u0430\u043a\u043b\u0430\u0440\u0438","response":"\u0416\u0430\u0432\u043e\u0431\u0438\u043d\u0433\u0438\u0437 \u0441\u0430\u049b\u043b\u0430\u043d\u0434\u0438. \u0420\u0430\u04b3\u043c\u0430\u0442!","sent":"\u0422\u0438\u043b\u0430\u0433\u0438\u043d\u0433\u0438\u0437 \u0442\u0430\u043a\u043b\u0438\u0444\u043d\u043e\u043c\u0430 \u044d\u0433\u0430\u0441\u0438\u0433\u0430 \u044e\u0431\u043e\u0440\u0438\u043b\u0434\u0438.","error":"\u042e\u0431\u043e\u0440\u0438\u043b\u043c\u0430\u0434\u0438. \u049a\u0430\u0439\u0442\u0430 \u0443\u0440\u0438\u043d\u0438\u0431 \u043a\u045e\u0440\u0438\u043d\u0433.","preview":"\u041a\u045e\u0440\u0438\u0448 \u0440\u0435\u0436\u0438\u043c\u0438\u0434\u0430 \u044e\u0431\u043e\u0440\u0438\u0448 \u045e\u0447\u0438\u049b.","weekdays":["\u0414\u0443","\u0421\u0435","\u0427\u043e","\u041f\u0430","\u0416\u0443","\u0428\u0430","\u042f\u043a"],"months":["\u042f\u043d\u0432\u0430\u0440","\u0424\u0435\u0432\u0440\u0430\u043b","\u041c\u0430\u0440\u0442","\u0410\u043f\u0440\u0435\u043b","\u041c\u0430\u0439","\u0418\u044e\u043d","\u0418\u044e\u043b","\u0410\u0432\u0433\u0443\u0441\u0442","\u0421\u0435\u043d\u0442\u044f\u0431\u0440","\u041e\u043a\u0442\u044f\u0431\u0440","\u041d\u043e\u044f\u0431\u0440","\u0414\u0435\u043a\u0430\u0431\u0440"],"calendarTitle":"\u0421\u0430\u043d\u0430\u043c\u0438\u0437\u043d\u0438 \u044d\u0441\u043b\u0430\u0431 \u049b\u043e\u043b\u0438\u043d\u0433","calendarMessage":"\u0411\u0443 \u043a\u0443\u043d\u043d\u0438 \u043a\u0430\u043b\u0435\u043d\u0434\u0430\u0440\u0438\u043d\u0433\u0438\u0437\u0434\u0430 \u0431\u0435\u043b\u0433\u0438\u043b\u0430\u0431 \u049b\u043e\u0439\u0438\u043d\u0433 \u2014 \u0441\u0438\u0437\u043d\u0438 \u043a\u0443\u0442\u0430\u043c\u0438\u0437.","calendarAction":"\u0422\u0430\u049b\u0432\u0438\u043c\u0433\u0430 \u049b\u045e\u0448\u0438\u0448","coupleLabel":"\u041a\u0443\u0451\u0432 \u0432\u0430 \u043a\u0435\u043b\u0438\u043d","timeLabel":"\u0412\u0430\u049b\u0442","hostsLabel":"\u04b2\u0443\u0440\u043c\u0430\u0442 \u0431\u0438\u043b\u0430\u043d:","countdownTitle":"\u042d\u043d\u0433 \u0431\u0430\u0445\u0442\u043b\u0438 \u043a\u0443\u043d\u0433\u0430\u0447\u0430","daysUnit":"\u041a\u0443\u043d","hoursUnit":"\u0421\u043e\u0430\u0442","minutesUnit":"\u0414\u0430\u049b\u0438\u049b\u0430","secondsUnit":"\u0421\u043e\u043d\u0438\u044f","wishesPrompt":"\u0422\u045e\u0439 \u044d\u0433\u0430\u043b\u0430\u0440\u0438\u0433\u0430 \u044d\u0437\u0433\u0443 \u0442\u0438\u043b\u0430\u043a\u043b\u0430\u0440\u0438\u043d\u0433\u0438\u0437\u043d\u0438 \u049b\u043e\u043b\u0434\u0438\u0440\u0438\u043d\u0433","wishSubmit":"\u0422\u0438\u043b\u0430\u043a \u044e\u0431\u043e\u0440\u0438\u0448","rsvpTitle":"\u041a\u0435\u043b\u0430\u0441\u0438\u0437\u043c\u0438?","rsvpPrompt":"\u0418\u043b\u0442\u0438\u043c\u043e\u0441, \u0436\u0430\u0432\u043e\u0431\u0438\u043d\u0433\u0438\u0437\u043d\u0438 \u0431\u0438\u043b\u0434\u0438\u0440\u0438\u043d\u0433.","rsvpSubmit":"\u042e\u0431\u043e\u0440\u0438\u0448","giftOpenHint":"\u041e\u0447\u0438\u0448 \u0443\u0447\u0443\u043d \u0431\u043e\u0441\u0438\u043d\u0433","contactsTitle":"\u0411\u043e\u0493\u043b\u0430\u043d\u0438\u0448 \u0443\u0447\u0443\u043d","contactsPrompt":"\u0421\u0430\u0432\u043e\u043b \u0432\u0430 \u0442\u0430\u0431\u0440\u0438\u043a\u043b\u0430\u0440 \u0443\u0447\u0443\u043d \u0431\u0438\u0437 \u0431\u0438\u043b\u0430\u043d \u0431\u043e\u0493\u043b\u0430\u043d\u0438\u043d\u0433.","phoneLabel":"\u0422\u0435\u043b\u0435\u0444\u043e\u043d \u0440\u0430\u049b\u0430\u043c\u0438","phonePrompt":"\u0421\u0430\u0432\u043e\u043b\u043b\u0430\u0440 \u0443\u0447\u0443\u043d \u049b\u045e\u043d\u0493\u0438\u0440\u043e\u049b \u049b\u0438\u043b\u0438\u043d\u0433","footerNote":"\u0422\u0430\u0448\u0440\u0438\u0444\u0438\u043d\u0433\u0438\u0437 \u0431\u0438\u0437 \u0443\u0447\u0443\u043d \u043a\u0430\u0442\u0442\u0430 \u0431\u0430\u0445\u0442.","footerTagline":"\u0410\u0431\u0430\u0434\u0438\u0439 \u0431\u0430\u0445\u0442\u043b\u0438 \u04b3\u0430\u0451\u0442 \u0431\u043e\u0448\u043b\u0430\u043d\u0438\u0448\u0438","map":"\u0425\u0430\u0440\u0438\u0442\u0430\u0434\u0430 \u043a\u045e\u0440\u0438\u0448","galleryTitle":"\u0424\u043e\u0442\u043e \u0433\u0430\u043b\u0435\u0440\u0435\u044f","giftTitle":"\u0421\u043e\u0432\u0493\u0430 \u044e\u0431\u043e\u0440\u0438\u0448","programNote":"\u0422\u045e\u0439 \u043a\u0443\u043d\u0438 \u0442\u0430\u0440\u0442\u0438\u0431\u0438","party":"\u041c\u0435\u04b3\u043c\u043e\u043d\u043b\u0430\u0440 \u0441\u043e\u043d\u0438","galleryPrev":"\u041e\u043b\u0434\u0438\u043d\u0433\u0438 \u0441\u0443\u0440\u0430\u0442","galleryNext":"\u041a\u0435\u0439\u0438\u043d\u0433\u0438 \u0441\u0443\u0440\u0430\u0442","telegramLabel":"Telegram","telegramPrompt":"Telegram \u043e\u0440\u049b\u0430\u043b\u0438 \u0451\u0437\u0438\u043d\u0433","responseLabel":"\u0416\u0430\u0432\u043e\u0431\u0438\u043d\u0433\u0438\u0437","venueTitle":"\u0422\u045e\u0439 \u043c\u0430\u043d\u0437\u0438\u043b\u0438"},"en":{"title":"Choose language","open":"Open invitation","guest":"Your name","wish":"Your message","send":"Submit","yes":"I'll attend","no":"I can't attend","wishes":"Guest wishes","response":"Your response was saved. Thank you!","sent":"Your wish was sent to the invitation owner.","error":"Could not submit. Please try again.","preview":"Submissions are disabled in preview.","weekdays":["Mo","Tu","We","Th","Fr","Sa","Su"],"months":["January","February","March","April","May","June","July","August","September","October","November","December"],"calendarTitle":"Save our date","calendarMessage":"Mark this day on your calendar — we look forward to seeing you.","calendarAction":"Add to calendar","coupleLabel":"The couple","timeLabel":"Time","hostsLabel":"With love from:","countdownTitle":"Counting down to our day","daysUnit":"Days","hoursUnit":"Hours","minutesUnit":"Minutes","secondsUnit":"Seconds","wishesPrompt":"Leave a kind wish for the couple","wishSubmit":"Send a wish","rsvpTitle":"Will you join us?","rsvpPrompt":"Please let us know if you can attend.","rsvpSubmit":"Submit","giftOpenHint":"Tap to open","contactsTitle":"Contact us","contactsPrompt":"Contact us with any questions or congratulations.","phoneLabel":"Phone number","phonePrompt":"Call us with your questions","footerNote":"Your presence would mean so much to us.","footerTagline":"The beginning of a happy life together","map":"Open map","galleryTitle":"Photo gallery","giftTitle":"Send a gift","programNote":"Order of the day","party":"Number of guests","galleryPrev":"Previous photo","galleryNext":"Next photo","telegramLabel":"Telegram","telegramPrompt":"Message us on Telegram","responseLabel":"Your response","venueTitle":"Venue"},"ru":{"title":"\u0412\u044b\u0431\u0435\u0440\u0438\u0442\u0435 \u044f\u0437\u044b\u043a","open":"\u041e\u0442\u043a\u0440\u044b\u0442\u044c \u043f\u0440\u0438\u0433\u043b\u0430\u0448\u0435\u043d\u0438\u0435","guest":"\u0412\u0430\u0448\u0435 \u0438\u043c\u044f","wish":"\u0412\u0430\u0448\u0435 \u043f\u043e\u0436\u0435\u043b\u0430\u043d\u0438\u0435","send":"\u041e\u0442\u043f\u0440\u0430\u0432\u0438\u0442\u044c","yes":"\u041f\u0440\u0438\u0434\u0443","no":"\u041d\u0435 \u0441\u043c\u043e\u0433\u0443 \u043f\u0440\u0438\u0439\u0442\u0438","wishes":"\u041f\u043e\u0436\u0435\u043b\u0430\u043d\u0438\u044f \u0433\u043e\u0441\u0442\u0435\u0439","response":"\u0412\u0430\u0448 \u043e\u0442\u0432\u0435\u0442 \u0441\u043e\u0445\u0440\u0430\u043d\u0451\u043d. \u0421\u043f\u0430\u0441\u0438\u0431\u043e!","sent":"\u0412\u0430\u0448\u0435 \u043f\u043e\u0436\u0435\u043b\u0430\u043d\u0438\u0435 \u043e\u0442\u043f\u0440\u0430\u0432\u043b\u0435\u043d\u043e \u0432\u043b\u0430\u0434\u0435\u043b\u044c\u0446\u0443 \u043f\u0440\u0438\u0433\u043b\u0430\u0448\u0435\u043d\u0438\u044f.","error":"\u041d\u0435 \u0443\u0434\u0430\u043b\u043e\u0441\u044c \u043e\u0442\u043f\u0440\u0430\u0432\u0438\u0442\u044c. \u041f\u043e\u043f\u0440\u043e\u0431\u0443\u0439\u0442\u0435 \u0435\u0449\u0451 \u0440\u0430\u0437.","preview":"\u041e\u0442\u043f\u0440\u0430\u0432\u043a\u0430 \u0432 \u0440\u0435\u0436\u0438\u043c\u0435 \u043f\u0440\u043e\u0441\u043c\u043e\u0442\u0440\u0430 \u043e\u0442\u043a\u043b\u044e\u0447\u0435\u043d\u0430.","weekdays":["\u041f\u043d","\u0412\u0442","\u0421\u0440","\u0427\u0442","\u041f\u0442","\u0421\u0431","\u0412\u0441"],"months":["\u042f\u043d\u0432\u0430\u0440\u044c","\u0424\u0435\u0432\u0440\u0430\u043b\u044c","\u041c\u0430\u0440\u0442","\u0410\u043f\u0440\u0435\u043b\u044c","\u041c\u0430\u0439","\u0418\u044e\u043d\u044c","\u0418\u044e\u043b\u044c","\u0410\u0432\u0433\u0443\u0441\u0442","\u0421\u0435\u043d\u0442\u044f\u0431\u0440\u044c","\u041e\u043a\u0442\u044f\u0431\u0440\u044c","\u041d\u043e\u044f\u0431\u0440\u044c","\u0414\u0435\u043a\u0430\u0431\u0440\u044c"],"calendarTitle":"\u0417\u0430\u043f\u043e\u043c\u043d\u0438\u0442\u0435 \u044d\u0442\u0443 \u0434\u0430\u0442\u0443","calendarMessage":"\u041e\u0442\u043c\u0435\u0442\u044c\u0442\u0435 \u044d\u0442\u043e\u0442 \u0434\u0435\u043d\u044c \u0432 \u043a\u0430\u043b\u0435\u043d\u0434\u0430\u0440\u0435 \u2014 \u043c\u044b \u0431\u0443\u0434\u0435\u043c \u0432\u0430\u0441 \u0436\u0434\u0430\u0442\u044c.","calendarAction":"\u0414\u043e\u0431\u0430\u0432\u0438\u0442\u044c \u0432 \u043a\u0430\u043b\u0435\u043d\u0434\u0430\u0440\u044c","coupleLabel":"\u0416\u0435\u043d\u0438\u0445 \u0438 \u043d\u0435\u0432\u0435\u0441\u0442\u0430","timeLabel":"\u0412\u0440\u0435\u043c\u044f","hostsLabel":"\u0421 \u0443\u0432\u0430\u0436\u0435\u043d\u0438\u0435\u043c:","countdownTitle":"\u0414\u043e \u0441\u0430\u043c\u043e\u0433\u043e \u0441\u0447\u0430\u0441\u0442\u043b\u0438\u0432\u043e\u0433\u043e \u0434\u043d\u044f","daysUnit":"\u0414\u043d\u0435\u0439","hoursUnit":"\u0427\u0430\u0441\u043e\u0432","minutesUnit":"\u041c\u0438\u043d\u0443\u0442","secondsUnit":"\u0421\u0435\u043a\u0443\u043d\u0434","wishesPrompt":"\u041e\u0441\u0442\u0430\u0432\u044c\u0442\u0435 \u043f\u043e\u0436\u0435\u043b\u0430\u043d\u0438\u0435 \u043c\u043e\u043b\u043e\u0434\u043e\u0436\u0451\u043d\u0430\u043c","wishSubmit":"\u041e\u0442\u043f\u0440\u0430\u0432\u0438\u0442\u044c \u043f\u043e\u0436\u0435\u043b\u0430\u043d\u0438\u0435","rsvpTitle":"\u0412\u044b \u043f\u0440\u0438\u0434\u0451\u0442\u0435?","rsvpPrompt":"\u041f\u043e\u0436\u0430\u043b\u0443\u0439\u0441\u0442\u0430, \u0441\u043e\u043e\u0431\u0449\u0438\u0442\u0435, \u0441\u043c\u043e\u0436\u0435\u0442\u0435 \u043b\u0438 \u0432\u044b \u043f\u0440\u0438\u0439\u0442\u0438.","rsvpSubmit":"\u041e\u0442\u043f\u0440\u0430\u0432\u0438\u0442\u044c","giftOpenHint":"\u041d\u0430\u0436\u043c\u0438\u0442\u0435, \u0447\u0442\u043e\u0431\u044b \u043e\u0442\u043a\u0440\u044b\u0442\u044c","contactsTitle":"\u0421\u0432\u044f\u0437\u0430\u0442\u044c\u0441\u044f \u0441 \u043d\u0430\u043c\u0438","contactsPrompt":"\u0421\u0432\u044f\u0436\u0438\u0442\u0435\u0441\u044c \u0441 \u043d\u0430\u043c\u0438 \u043f\u043e \u0432\u043e\u043f\u0440\u043e\u0441\u0430\u043c \u0438 \u043f\u043e\u0437\u0434\u0440\u0430\u0432\u043b\u0435\u043d\u0438\u044f\u043c.","phoneLabel":"\u041d\u043e\u043c\u0435\u0440 \u0442\u0435\u043b\u0435\u0444\u043e\u043d\u0430","phonePrompt":"\u041f\u043e\u0437\u0432\u043e\u043d\u0438\u0442\u0435 \u043d\u0430\u043c \u0441 \u0432\u043e\u043f\u0440\u043e\u0441\u0430\u043c\u0438","footerNote":"\u0412\u0430\u0448\u0435 \u043f\u0440\u0438\u0441\u0443\u0442\u0441\u0442\u0432\u0438\u0435 \u0441\u0442\u0430\u043d\u0435\u0442 \u0434\u043b\u044f \u043d\u0430\u0441 \u0431\u043e\u043b\u044c\u0448\u043e\u0439 \u0440\u0430\u0434\u043e\u0441\u0442\u044c\u044e.","footerTagline":"\u041d\u0430\u0447\u0430\u043b\u043e \u0441\u0447\u0430\u0441\u0442\u043b\u0438\u0432\u043e\u0439 \u0441\u043e\u0432\u043c\u0435\u0441\u0442\u043d\u043e\u0439 \u0436\u0438\u0437\u043d\u0438","map":"\u041e\u0442\u043a\u0440\u044b\u0442\u044c \u043a\u0430\u0440\u0442\u0443","galleryTitle":"\u0424\u043e\u0442\u043e\u0433\u0430\u043b\u0435\u0440\u0435\u044f","giftTitle":"\u041e\u0442\u043f\u0440\u0430\u0432\u0438\u0442\u044c \u043f\u043e\u0434\u0430\u0440\u043e\u043a","programNote":"\u041f\u043b\u0430\u043d \u0442\u043e\u0440\u0436\u0435\u0441\u0442\u0432\u0430","party":"\u041a\u043e\u043b\u0438\u0447\u0435\u0441\u0442\u0432\u043e \u0433\u043e\u0441\u0442\u0435\u0439","galleryPrev":"\u041f\u0440\u0435\u0434\u044b\u0434\u0443\u0449\u0435\u0435 \u0444\u043e\u0442\u043e","galleryNext":"\u0421\u043b\u0435\u0434\u0443\u044e\u0449\u0435\u0435 \u0444\u043e\u0442\u043e","telegramLabel":"Telegram","telegramPrompt":"\u041d\u0430\u043f\u0438\u0448\u0438\u0442\u0435 \u043d\u0430\u043c \u0432 Telegram","responseLabel":"\u0412\u0430\u0448 \u043e\u0442\u0432\u0435\u0442","venueTitle":"\u041c\u0435\u0441\u0442\u043e \u043f\u0440\u043e\u0432\u0435\u0434\u0435\u043d\u0438\u044f"}};
+  let state;
+  let countdownTimer = 0;
+  let galleryTimer = 0;
+  let galleryAutoAdvance = null;
+  let galleryAutoCount = 0;
+  let galleryTimerCount = 0;
+  let galleryAutoEnabled = false;
+  const $ = (s, base=root) => base.querySelector(s);
+  const $$ = (s, base=root) => [...base.querySelectorAll(s)];
+  const txt = (node, value) => { if (!node) return; const text = value == null ? "" : String(value); node.textContent = text; if (node.matches?.("[data-gg-status]")) node.hidden = !text.trim(); };
+  const hide = (node, value) => { if (node) node.hidden = Boolean(value); };
+  const stopGalleryTimer = () => { if (galleryTimer) window.clearInterval(galleryTimer); galleryTimer = 0; galleryTimerCount = 0; };
+  const startGalleryTimer = () => { if (!galleryTimer && galleryAutoEnabled && galleryAutoCount > 1 && galleryAutoAdvance) { galleryTimerCount = galleryAutoCount; galleryTimer = window.setInterval(() => galleryAutoAdvance(), 3500); } };
+  const dateValue = (data) => { const d=data.date || {}; return [d.weekday,d.day,d.month,d.year].filter(Boolean).join(" · "); };
+  function renderCalendar(data) {
+    const date=data.date || {}, year=Number(date.year), month=Number(date.monthNumber)-1;
+    const calendar=$("[data-gg-calendar]")?.closest("section");const grids=calendar?$$(".grid-cols-7",calendar):[];
+    const monthHeading=calendar?.querySelector("[data-gg-calendar-month]");if(monthHeading)txt(monthHeading,[date.month,date.year].filter(Boolean).join(" "));
+    if (grids.length < 2 || !Number.isInteger(year) || month<0 || month>11) return;
+    const weekdays=grids[0];
+    weekdays.replaceChildren(...(copy[state.locale]?.weekdays || []).map(label=>{const node=document.createElement("span");node.textContent=label;return node;}));
+    const grid=grids[1], blankTemplate=grid.firstElementChild, dayTemplate=grid.children[1];
+    if (!blankTemplate || !dayTemplate) return;
+    const offset=(new Date(Date.UTC(year,month,1)).getUTCDay()+6)%7, count=new Date(Date.UTC(year,month+1,0)).getUTCDate();
+    const frag=document.createDocumentFragment();
+    const total=Math.ceil((offset+count)/7)*7;
+    for(let i=0;i<total;i++){const day=i-offset+1,cell=(day<1||day>count?blankTemplate:dayTemplate).cloneNode(true),label=cell.querySelector("span");txt(label,day>0&&day<=count?day:"");cell.classList.toggle("gg-selected-day",day===Number(date.day));if(day===Number(date.day))cell.setAttribute("aria-current","date");else cell.removeAttribute("aria-current");frag.append(cell);}
+    grid.replaceChildren(frag);
+  }
+  function renderCountdown(data) {
+    if (countdownTimer) clearInterval(countdownTimer);
+    const eventAt = data.dateTime ? new Date(data.dateTime).getTime() : NaN;
+    const nodes = $$("[data-gg-countdown]");
+    if (!nodes.length) return;
+    if (!Number.isFinite(eventAt)) { nodes.forEach(n=>hide(n,true)); return; }
+    nodes.forEach(n=>hide(n,false));
+    const update=()=>{let seconds=Math.max(0,Math.floor((eventAt-Date.now())/1000));const values=[Math.floor(seconds/86400),Math.floor(seconds%86400/3600),Math.floor(seconds%3600/60),seconds%60];nodes.forEach((n,i)=>txt(n,values[i]));};
+    update(); countdownTimer=setInterval(update,1000);
+  }
+  function renderMusic(data) {
+    const url=data.music?.url || ""; let audio=$("audio[data-gg-music]");
+    if (!url) { audio?.remove(); $(".gg-music-toggle")?.remove(); return; }
+    if (!audio) { audio=document.createElement("audio");audio.dataset.ggMusic="";audio.loop=true;root.append(audio); }
+    if (audio.src!==new URL(url,location.href).href) audio.src=url;
+    let button=$(".gg-music-toggle");if(!button){button=document.createElement("button");button.type="button";button.className="gg-music-toggle";button.textContent="♫";button.setAttribute("aria-label","Music");button.onclick=()=>{if(audio.paused)audio.play().catch(()=>{});else audio.pause();};root.append(button);}
+    button.hidden=Boolean(state.preview && state.silentPlayback);
+  }
+  async function render(payload) {
+    if (!payload?.data || payload.templateId!==id) return;
+    state=payload; const d=payload.data, c=copy[payload.locale] || copy["uz-Latn"];
+    document.documentElement.lang=payload.locale || "uz-Latn";
+    const fields={groom:d.groom,bride:d.bride,eventLabel:d.eventType,dateTime:d.date?.long || dateValue(d),message:d.message,hosts:d.hosts,venueName:d.venue?.name,venueAddress:d.venue?.address,weekday:d.date?.weekday,day:d.date?.day,monthYear:[d.date?.month,d.date?.year].filter(Boolean).join(" "),time:d.date?.time,greeting:d.greeting,programTitle:d.programHeading,calendarTitle:c.calendarTitle,calendarMessage:d.calendarMessage||c.calendarMessage,rsvpTitle:c.rsvpTitle,contactsTitle:c.contactsTitle,venueTitle:c.venueTitle,mapLabel:c.map,galleryTitle:c.galleryTitle,wishesTitle:c.wishes,giftTitle:c.giftTitle};
+    bindSourceOpening(payload,d,c);
+    for(const [key,value] of Object.entries(fields)) $$(`[data-gg-field="${key}"]`).forEach(n=>txt(n,value));
+    for(const node of $$('[data-gg-copy]')) txt(node,c[node.dataset.ggCopy] || node.textContent);
+    const contactsPrompt=$("[data-gg-contacts-prompt]");if(contactsPrompt)txt(contactsPrompt,c.contactsPrompt);
+    const calendar=$("[data-gg-calendar]"); if(calendar && d.dateTime){const u=new URL("https://calendar.google.com/calendar/render");const start=new Date(d.dateTime),end=new Date(start.getTime()+2*60*60*1000),stamp=x=>x.toISOString().replace(/[-:]/g,"").replace(/\.\d{3}Z$/,"Z");u.searchParams.set("action","TEMPLATE");u.searchParams.set("text",d.title || `${d.groom} & ${d.bride}`);u.searchParams.set("dates",`${stamp(start)}/${stamp(end)}`);calendar.href=u.toString();}
+    renderCalendar(d);
+    const rows=d.program || [], items=$$("[data-gg-program-item]");
+    const programIcons=$$("[data-gg-program-icon]");["welcome.webp","cake.webp","dish.webp"].forEach((file,index)=>{if(programIcons[index])programIcons[index].src=`/templates/yashil-makon/assets/${file}`;});const programGrid=items[0]?.parentElement;while(programGrid&&items.length<rows.length){const clone=items[0].cloneNode(true);programGrid.append(clone);items.push(clone);}
+    items.forEach((row,i)=>{const item=rows[i];hide(row,!item); if(!item)return; txt($("[data-gg-program-time]",row),item.time);txt($('[data-gg-program-title]',row),item.title);});
+    let lightbox=$("[data-gg-lightbox]");if(!lightbox){lightbox=document.createElement("dialog");lightbox.dataset.ggLightbox="";lightbox.className="gg-lightbox";lightbox.innerHTML='<button type="button" aria-label="Close image" data-gg-lightbox-close>×</button><img alt="">';root.append(lightbox);lightbox.addEventListener("click",e=>{if(e.target===lightbox||e.target.closest("[data-gg-lightbox-close]"))lightbox.close();});lightbox.addEventListener("close",startGalleryTimer);}
+    const gallery=d.gallery || [], galleryFrame=$$("[data-gg-gallery-item]")[0]?.parentElement, gallerySection=galleryFrame?.closest("section"), slots=galleryFrame?$$('[data-gg-gallery-item]',galleryFrame):[];
+    while(galleryFrame&&slots.length<gallery.length){const clone=slots[0].cloneNode(true);galleryFrame.append(clone);slots.push(clone);}
+    let galleryOffset=((Number(root.dataset.ggGalleryOffset||0)%Math.max(gallery.length,1))+Math.max(gallery.length,1))%Math.max(gallery.length,1);
+    const rotate=delta=>{if(!gallery.length)return;galleryOffset=(galleryOffset+delta+gallery.length)%gallery.length;root.dataset.ggGalleryOffset=String(galleryOffset);void render(state);};
+    slots.forEach((slot,i)=>{
+      const item=gallery[i],showEmpty=payload.preview&&Boolean(item),available=Boolean(item&&(item.src||showEmpty));
+      let relative=i-galleryOffset;if(relative>gallery.length/2)relative-=gallery.length;if(relative<-gallery.length/2)relative+=gallery.length;
+      const center=relative===0,adjacent=Math.abs(relative)===1,positionX=Math.max(-140,Math.min(140,60*relative)),depth=-150*Math.abs(relative),rotation=45*relative,scale=center?1:adjacent?.85:.7,opacity=center?1:adjacent?.75:Math.abs(relative)===2?.5:.3;
+      hide(slot,!available||i>=gallery.length);slot.classList.toggle("gg-gallery-empty",Boolean(item&&!item.src));
+      slot.style.transform=`translateX(${positionX}%) translateZ(${depth}px) rotateY(${rotation}deg) scale(${scale})`;slot.style.opacity=String(opacity);slot.style.zIndex=String(100-Math.abs(relative));slot.style.transformStyle="preserve-3d";slot.style.display=available&&i<gallery.length&&opacity>0?"block":"none";
+      if(item?.src){let img=$("img",slot);if(!img){img=document.createElement("img");img.className="h-full w-full object-cover select-none";slot.append(img);}img.src=item.src;img.alt=item.alt||item.caption||`Wedding photo ${i+1}`;img.loading="lazy";img.decoding="async";img.style.objectPosition="50% 50%";slot.setAttribute("aria-label",img.alt||`Wedding photo ${i+1}`);slot.tabIndex=0;slot.setAttribute("role","button");const open=()=>{const dialog=$("[data-gg-lightbox]");if(!dialog)return;if(center){stopGalleryTimer();const view=$("img",dialog);view.src=item.src;view.alt=item.alt||item.caption||`Wedding photo ${i+1}`;dialog.showModal();}else rotate(i-galleryOffset);};slot.onclick=open;slot.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();open();}};}else{slot.querySelector("img")?.remove();slot.style.backgroundColor=showEmpty?"rgba(255,255,255,.56)":"transparent";slot.setAttribute("aria-label",c.galleryTitle);slot.tabIndex=-1;slot.removeAttribute("role");slot.onclick=null;slot.onkeydown=null;}
+    });
+    const counter=gallerySection?.querySelector("[data-gg-gallery-counter]");if(counter){txt(counter,`${gallery.length?galleryOffset+1:0} / ${gallery.length}`);hide(counter,gallery.length<2);}hide(gallerySection,!gallery.some(item=>item?.src));
+    const prev=gallerySection?.querySelector("[data-gg-gallery-prev]"),next=gallerySection?.querySelector("[data-gg-gallery-next]");if(prev){prev.setAttribute("aria-label",c.galleryPrev);hide(prev,gallery.length<2);prev.onclick=()=>rotate(-1);}if(next){next.setAttribute("aria-label",c.galleryNext);hide(next,gallery.length<2);next.onclick=()=>rotate(1);}
+    if(gallerySection){let startX=0;gallerySection.ontouchstart=e=>{startX=e.changedTouches[0]?.clientX||0;};gallerySection.ontouchend=e=>{const diff=(e.changedTouches[0]?.clientX||startX)-startX;if(Math.abs(diff)>40)rotate(diff<0?1:-1);}}
+    galleryAutoCount=gallery.length;galleryAutoAdvance=()=>rotate(1);const galleryReduced=Boolean(payload.reducedMotion)||matchMedia("(prefers-reduced-motion: reduce)").matches;galleryAutoEnabled=!galleryReduced;if(galleryTimer&&galleryTimerCount!==gallery.length)stopGalleryTimer();if(gallery.length>1&&!galleryReduced)startGalleryTimer();else stopGalleryTimer();
+    const venue=d.venue || {}, map=$("[data-gg-map]");
+    const venueSection=map?.closest("section");if(venueSection){venueSection.dataset.ggVenueSection="";venueSection.querySelectorAll("h2").forEach(n=>txt(n,c.venueTitle));const venueOverline=venueSection.querySelector("p:not([data-gg-field])");if(venueOverline)txt(venueOverline,c.venueTitle);const photo=$("[data-gg-authored-image]",venueSection);if(photo){const holder=photo.parentElement;hide(holder,!d.venue?.photo);if(d.venue?.photo){photo.src=d.venue.photo;photo.alt=venue.name||"";}}} const query=[venue.name,venue.address].filter(Boolean).join(" ");const mapUrl=venue.mapUrl || (venue.lat!=null&&venue.lng!=null?`https://yandex.uz/maps/?text=${venue.lat},${venue.lng}`:query?`https://yandex.uz/maps/?text=${encodeURIComponent(query)}`:""); if(map){map.href=mapUrl;hide(map,!mapUrl);}
+    const mapFrame=venueSection?.querySelector("iframe");if(mapFrame){const query=[venue.name,venue.address].filter(Boolean).join(" ");if(venue.lat!=null&&venue.lng!=null)mapFrame.src=`/maps/venue?point=${venue.lat},${venue.lng}&z=15`;else if(query)mapFrame.src=`/maps/venue?point=${encodeURIComponent(query)}&z=15`;else{mapFrame.removeAttribute("src");mapFrame.hidden=true;}}
+    if(map){map.href=venue.mapUrl||mapUrl;map.setAttribute("aria-label",c.map);}
+    const contacts=d.contacts || [];let contactNodes=$$('[data-gg-contact]');const contactHost=contactNodes[0]?.closest("a")?.parentElement;while(contactHost&&contactNodes.length<contacts.length){const clone=contactNodes[0].closest("a").cloneNode(true);contactHost.append(clone);const value=clone.querySelector("[data-gg-contact]");if(value)contactNodes.push(value);}contactNodes.forEach((node,i)=>{const item=contacts[i],a=node.closest("a"),paragraphs=a?.querySelectorAll("p");txt(node,item?.value);if(paragraphs?.length){txt(paragraphs[0],item?.type==="telegram"?c.telegramLabel:c.phoneLabel);txt(paragraphs[2],item?.type==="telegram"?c.telegramPrompt:c.phonePrompt);}if(a){a.href=item?.href || "#";hide(a,!item);}});
+    const wishesSection=$("[data-gg-wishes]"); if(wishesSection) hide(wishesSection,!d.wishesEnabled);
+    const wishesList=$("[data-gg-wishes-list]"); if(wishesList){wishesList.replaceChildren();const wishes=payload.preview?(d.wishes||[]):await fetch(`/api/public/invitations/${encodeURIComponent(payload.invitationId||"")}/wishes`,{cache:"no-store"}).then(r=>r.ok?r.json():{wishes:[]}).then(x=>x.wishes||[]).catch(()=>[]);for(const wish of wishes){const card=document.createElement("article");card.className="gg-source-wish-card rounded-xl border p-4 text-sm text-left shadow-sm transition-all";card.style.borderColor="rgba(71, 97, 62, 0.35)";card.style.backgroundColor="rgba(255, 255, 255, 0.8)";card.style.opacity="0";card.style.transform="translateY(15px)";const header=document.createElement("div");header.className="flex items-start justify-between";const n=document.createElement("span"),date=document.createElement("span"),m=document.createElement("p");n.className="font-semibold";n.style.color="rgb(71, 97, 62)";date.className="text-xs opacity-70";date.style.color="rgb(53, 69, 47)";date.textContent=wish.submittedAt?new Date(wish.submittedAt).toLocaleDateString(payload.locale||"uz-Latn"):"";m.className="mt-2 leading-relaxed";m.style.cssText='color:rgb(53, 69, 47);font-family:Baskerville, "Cormorant Garamond", serif';n.textContent=wish.name; m.textContent=wish.text||wish.message;header.append(n,date);card.append(header,m);wishesList.append(card);}}
+    const rsvpSection=$("[data-gg-rsvp]");if(rsvpSection)hide(rsvpSection,!d.rsvp?.enabled);
+    const rsvpForm=$("[data-gg-rsvp-form]"); const wishForm=$("[data-gg-wish-form]");
+    const bindForm=(form,kind)=>{if(!form)return; const input=form.querySelector("input"), area=form.querySelector("textarea"), submit=form.querySelector('button[type="submit"]'), status=form.closest("section")?.querySelector("[data-gg-status]");if(status)txt(status,""); if(input){input.value=payload.guestName||"";input.placeholder=c.guest;input.setAttribute("aria-label",c.guest);} if(area){area.placeholder=c.wish;area.setAttribute("aria-label",c.wish);} if(submit)txt(submit,kind==="wish"?c.wishSubmit:c.rsvpSubmit); form.onsubmit=async e=>{e.preventDefault(); if(payload.preview){txt(status,c.preview);return;} if(submit)submit.disabled=true; try{const choice=$('[data-gg-rsvp-choice][aria-pressed="true"]')?.dataset.ggRsvpChoice||"yes";const body=kind==="wish"?{name:input?.value,message:area?.value,guestToken:payload.guestToken||undefined}:{name:input?.value||payload.guestName||"Guest",status:choice,partySize:choice==="no"?0:1,guestToken:payload.guestToken||undefined};const path=kind==="wish"?"wishes":"rsvp";const res=await fetch(`/api/public/invitations/${encodeURIComponent(payload.invitationId||"")}/${path}`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)});if(!res.ok)throw Error();txt(status,kind==="wish"?c.sent:c.response);form.reset();}catch{txt(status,c.error);}finally{if(submit)submit.disabled=false;}};};
+    bindForm(rsvpForm,"rsvp");bindForm(wishForm,"wish");
+    const responseGroup=$$('[data-gg-rsvp-choice]')[0]?.closest('[role="radiogroup"]');if(responseGroup)responseGroup.setAttribute("aria-label",c.responseLabel);
+    for(const button of $$('[data-gg-rsvp-choice]')){if(button.type==="submit")continue;txt(button,button.dataset.ggRsvpChoice==="yes"?c.yes:c.no);button.setAttribute("aria-checked","false");button.setAttribute("aria-pressed","false");button.onclick=()=>{for(const b of $$('[data-gg-rsvp-choice]'))if(b.type!=="submit"){b.setAttribute("aria-checked",String(b===button));b.setAttribute("aria-pressed",String(b===button));}};}
+    const picker=$("[data-gg-language-picker]") || document.createElement("nav");picker.dataset.ggLanguagePicker="";picker.setAttribute("aria-label",c.title);if(!picker.isConnected)root.append(picker);picker.style.display=(payload.enabledLocales||locales).length>1?"":"none";picker.replaceChildren();for(const locale of (payload.enabledLocales||locales)){const b=document.createElement("button");b.type="button";b.textContent=({"uz-Latn":"Uz","uz-Cyrl":"Уз",en:"En",ru:"Ru"})[locale];b.setAttribute("aria-pressed",String(locale===payload.locale));b.onclick=()=>parent.postMessage({type:`${id}:language`,locale},location.origin);picker.append(b);}
+    const gift=$("[data-gg-gift-section]");if(gift)hide(gift,!d.toyona?.enabled);const giftToggle=$("[data-gg-gift-toggle]");
+    if(gift&&giftToggle){
+      const giftCopy=({"uz-Latn":{close:"Yopish",bankCard:"Bank kartasi",copy:"Karta raqamini nusxalash",copied:"Nusxalandi",note:"Sizning tashrifingiz biz uchun eng katta sovg'a."},"uz-Cyrl":{close:"Ёпиш",bankCard:"Банк картаси",copy:"Карта рақамини нусхалаш",copied:"Нусхаланди",note:"Сизнинг ташрифингиз биз учун энг катта совға."},en:{close:"Close",bankCard:"Bank Card",copy:"Copy Card Number",copied:"Copied!",note:"Your presence is the greatest gift for us."},ru:{close:"Закрыть",bankCard:"Банковская карта",copy:"Скопировать номер карты",copied:"Скопировано",note:"Ваше присутствие — самый большой подарок для нас."}})[payload.locale]||{close:"Close",bankCard:"Bank Card",copy:"Copy Card Number",copied:"Copied!",note:"Your presence is the greatest gift for us."};
+      $("dialog[data-gg-gift-dialog]")?.remove();const dialog=document.createElement("dialog");dialog.dataset.ggGiftDialog="";dialog.className="gg-source-gift-modal";dialog.setAttribute("aria-label",c.giftTitle);
+      const panel=document.createElement("div");panel.className="gg-source-gift-panel";
+      const svgIcon=(paths,size=20)=>{const svg=document.createElementNS("http://www.w3.org/2000/svg","svg");svg.setAttribute("viewBox","0 0 24 24");svg.setAttribute("width",String(size));svg.setAttribute("height",String(size));svg.setAttribute("fill","none");svg.setAttribute("stroke","currentColor");svg.setAttribute("stroke-width","2");svg.setAttribute("stroke-linecap","round");svg.setAttribute("stroke-linejoin","round");svg.setAttribute("aria-hidden","true");for(const [tag,attrs] of paths){const node=document.createElementNS("http://www.w3.org/2000/svg",tag);for(const [key,value] of Object.entries(attrs))node.setAttribute(key,value);svg.append(node);}return svg;};
+      const close=document.createElement("button");close.type="button";close.className="gg-source-gift-close";close.setAttribute("aria-label",giftCopy.close);close.append(svgIcon([["path",{d:"M18 6 6 18"}],["path",{d:"m6 6 12 12"}]]));
+      const header=document.createElement("header"),box=document.createElement("img"),title=document.createElement("h3");header.className="gg-source-gift-header";box.src="/templates/yashil-makon/assets/glass_garden_green.webp";box.alt="Gift box";title.textContent=c.giftTitle;header.append(box,title);
+      const content=document.createElement("div");content.className="gg-source-gift-content";
+      const card=document.createElement("div");card.className="gg-source-gift-card";
+      const cardLabel=document.createElement("div"),label=document.createElement("span");cardLabel.className="gg-source-gift-card-label";cardLabel.append(svgIcon([["rect",{width:"20",height:"14",x:"2",y:"5",rx:"2"}],["line",{x1:"2",x2:"22",y1:"10",y2:"10"}]],18));label.textContent=giftCopy.bankCard;cardLabel.append(label);
+      const number=document.createElement("div"),copy=document.createElement("button"),copyText=document.createElement("span");number.className="gg-source-gift-number";copy.type="button";copy.className="gg-source-gift-copy";number.textContent=d.toyona?.cardNumber||"";copy.append(svgIcon([["rect",{width:"14",height:"14",x:"8",y:"8",rx:"2",ry:"2"}],["path",{d:"M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"}]],14),copyText);copyText.textContent=giftCopy.copy;card.append(cardLabel,number);if(d.toyona?.cardHolder){const holder=document.createElement("div");holder.className="gg-source-gift-holder";holder.textContent=d.toyona.cardHolder;card.append(holder);}card.append(copy);content.append(card);
+      if(!d.toyona?.cardNumber){const note=document.createElement("p");note.className="gg-source-gift-note";note.textContent=giftCopy.note;content.replaceChildren(note);}
+      panel.append(close,header,content);dialog.append(panel);document.body.append(dialog);
+      const dismiss=()=>dialog.close();close.onclick=dismiss;dialog.addEventListener("click",event=>{if(event.target===dialog)dismiss();});
+      copy.onclick=async()=>{try{await navigator.clipboard.writeText(d.toyona?.cardNumber||"");copy.replaceChildren(svgIcon([["path",{d:"M20 6 9 17l-5-5"}]],14),copyText);copyText.textContent=giftCopy.copied;}catch{const selection=document.createElement("textarea");selection.value=d.toyona?.cardNumber||"";selection.style.position="fixed";selection.style.opacity="0";document.body.append(selection);selection.select();document.execCommand("copy");selection.remove();copy.replaceChildren(svgIcon([["path",{d:"M20 6 9 17l-5-5"}]],14),copyText);copyText.textContent=giftCopy.copied;}};
+      giftToggle.setAttribute("aria-label",c.giftOpenHint);giftToggle.setAttribute("aria-haspopup","dialog");giftToggle.onclick=()=>{if(!dialog.open)dialog.showModal();};
+    }
+    const section=$("[data-gg-calendar]")?.closest("section");if(section){const cards=$$(".mt-12 > .mt-5 > div",section).slice(0,4);cards.forEach((card,i)=>{const number=card.querySelector("span");if(number)number.dataset.ggCountdown=String(i);});}renderCountdown(d);
+    const reduced=Boolean(payload.reducedMotion)||matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if(reduced&&heroAnimated)animateSourceHero(true);
+    renderMusic(d);
+    if(!reduced){const giftMotion=[["jasmine_white",-6,-22,3.2,0],["spring_garden_green",-7,20,3.6,.3],["boho_floral_pink",-5,-18,2.9,.6],["brocade_flower_red",-6,14,3.4,.2],["baroque_gold",-5,8,3.1,.4],["minimalism_brown",-6,-10,3.5,.7],["spring_garden_blue",-5,-14,3.3,.1]];for(const [asset,y,rotation,duration,delay] of giftMotion){const image=$(`[data-gg-gift-section] img[src$="/${asset}.webp"]`);if(image&&!image.dataset.ggMotionBound){image.dataset.ggMotionBound="1";image.animate([{transform:`translateY(0px) rotate(${rotation}deg)`},{transform:`translateY(${y}px) rotate(${rotation+4}deg)`},{transform:`translateY(0px) rotate(${rotation}deg)`}],{duration:duration*1000,delay:delay*1000,iterations:Infinity,easing:"ease-in-out"});}}}
+    root.classList.toggle("gg-reduced-motion",Boolean(payload.reducedMotion)||matchMedia("(prefers-reduced-motion: reduce)").matches);
+    const resetReveal=(node,frames)=>{node.getAnimations().forEach(animation=>animation.cancel());const first=frames[0]||{};if(first.opacity!==undefined)node.style.opacity=String(first.opacity);if(first.transform!==undefined)node.style.transform=first.transform;};
+    const reveal=(node,frames,duration=.3,delay=0)=>{if(!node)return;if(reduced){node.getAnimations().forEach(animation=>animation.cancel());node.style.opacity="1";node.style.transform="none";return;}node.getAnimations().forEach(animation=>animation.cancel());node.animate(frames,{duration:duration*1000,delay:delay*1000,easing:"ease-out",fill:"both"});};
+    const revealTargets=$$('[style*="opacity:0"], [style*="opacity: 0"]').filter(node=>!node.closest('[data-gg-source-hero]')&&!node.matches('[data-gg-gallery-item],[data-gg-program-icon],[data-gg-contact-link],[data-gg-countdown],[data-gg-gallery-heading]')&&!node.closest('[data-gg-program-item]')&&!node.querySelector('[data-gg-countdown]'));
+    const observeMotion=(node,frames,duration,delay,threshold)=>{if(!node||node.dataset.ggMotionBound)return;node.dataset.ggMotionBound="1";if(reduced||!window.IntersectionObserver){reveal(node,frames,duration,delay);return;}resetReveal(node,frames);let visible=false;const observer=new IntersectionObserver(entries=>{for(const entry of entries){if(entry.isIntersecting&&!visible){visible=true;reveal(node,frames,duration,delay);}else if(!entry.isIntersecting&&visible){visible=false;resetReveal(node,frames);}}},{threshold});observer.observe(node);};
+    revealTargets.forEach(node=>observeMotion(node,[{opacity:0,transform:"translateY(20px)"},{opacity:1,transform:"translateY(0px)"}],.3,0,.25));
+    const animateProgramIcon=(icon,index)=>{if(icon.dataset.ggIconMotionBound)return;icon.dataset.ggIconMotionBound="1";reveal(icon,[{opacity:0,transform:"scale(.8)"},{opacity:.9,transform:"scale(1)"}],.6,index*.15);};
+    programIcons.forEach((icon,index)=>observeMotion(icon,[{opacity:0,transform:"scale(.8)"},{opacity:.9,transform:"scale(1)"}],.6,index*.15,.3));
+    items.forEach((row,index)=>{
+      if(!rows[index])return;
+      const time=$("[data-gg-program-time]",row),marker=row.children[1],dot=marker?.querySelector("[data-gg-program-dot]"),line=marker?.querySelector("[data-gg-program-line]"),title=row.children[2],delay=index*.08;
+      if(line)line.className=`absolute left-1/2 -translate-x-1/2 w-px ${index===0?"top-1/2 -bottom-8 md:-bottom-10":index===rows.length-1?"-top-8 md:-top-10 bottom-1/2":"-top-8 md:-top-10 -bottom-8 md:-bottom-10"}`;
+      observeMotion(time,[{opacity:0,transform:"translateX(-20px)"},{opacity:1,transform:"translateX(0px)"}],.5,delay,.5);
+      observeMotion(dot,[{transform:"scale(0)"},{transform:"scale(1)"}],.4,delay,.5);
+      observeMotion(title,[{opacity:0,transform:"translateX(20px)"},{opacity:1,transform:"translateX(0px)"}],.5,delay,.5);
+    });
+    $$('[data-gg-wishes-list] article').forEach((card,index)=>observeMotion(card,[{opacity:0,transform:"translateY(15px)"},{opacity:1,transform:"translateY(0px)"}],.4,index*.05,.2));
+    $$('[data-gg-contact-link]').forEach((link,index)=>observeMotion(link,[{opacity:0,transform:"translateY(20px)"},{opacity:1,transform:"translateY(0px)"}],.5,index*.1,.2));
+    $$('[data-gg-countdown]').forEach((number,index)=>observeMotion(number.parentElement,[{opacity:0,transform:"translateY(16px)"},{opacity:1,transform:"translateY(0px)"}],.5,index*.1,.3));
+    $$('[data-gg-gallery-heading]').forEach(node=>observeMotion(node,[{opacity:0,transform:"translateY(20px)"},{opacity:1,transform:"translateY(0px)"}],.6,0,.3));
+  }
+  window.addEventListener("message",e=>{if(e.origin===location.origin&&e.data?.type===`${id}:update`)void render(e.data.payload);});
+  try{const initial=JSON.parse(window.name);if(initial?.type===`${id}:update`)void render(initial.payload);}catch{}
+})();

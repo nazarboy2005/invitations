@@ -12,7 +12,7 @@ import { renderStaticImage } from "../apps/web/src/server/static-image-renderer"
 import {
   imageSlots,
   IMAGE_LOCATION_QR,
-} from "../apps/web/src/templates/ivory-rose-card/layout";
+} from "../apps/web/src/templates/oq-atirgul/layout";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
 process.chdir(path.join(root, "apps/web"));
@@ -56,7 +56,7 @@ for (const locale of LOCALES) {
       .toFile(path.join(out, `sample-${locale}.webp`));
   if (locale === "uz-Latn") {
     assert.equal(await decodeLocation(png), yandexMapUrl(sample.venue));
-    const poster = path.join(root, "apps/web/public/templates/ivory-rose-card");
+    const poster = path.join(root, "apps/web/public/templates/oq-atirgul");
     await mkdir(poster, { recursive: true });
     await sharp(png)
       .resize(750, 1050)

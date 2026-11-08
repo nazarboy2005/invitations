@@ -31,8 +31,8 @@ const source = path.join(
   root,
   "Invitations - this folder will be removed from production/Marxaba/Boshqa tadbirlar/templates/korporativ",
 );
-const pkg = path.join(root, "apps/web/public/templates/korporativ");
-const renderer = path.join(root, "apps/web/src/templates/korporativ");
+const pkg = path.join(root, "apps/web/public/templates/anjuman");
+const renderer = path.join(root, "apps/web/src/templates/anjuman");
 const read = (base: string, file: string) =>
   readFileSync(path.join(base, file), "utf8");
 const normalize = (value: string) =>
@@ -153,7 +153,7 @@ test("captured body, source files, metadata, and SVG artworks are preserved", ()
       matchesCanonicalFixture: boolean;
     };
   };
-  assert.equal(provenance.remoteDeclaredAsset.url, "https://www.marxaba.uz/templates/korporativ/preview.webp");
+  assert.equal(provenance.remoteDeclaredAsset.url, "https://www.marxaba.uz/templates/anjuman/preview.webp");
   assert.equal(
     createHash("sha256").update(preview).digest("hex"),
     provenance.remoteDeclaredAsset.sha256,
@@ -184,7 +184,7 @@ test("Korporativ packages the official metadata-declared catalog image", () => {
     ),
   ) as { resources: Record<string, unknown> };
   const capturedImages = Object.keys(manifest.resources).filter(
-    (url) => url.includes("/templates/korporativ/") && /\.(?:webp|png|jpe?g)$/i.test(url),
+    (url) => url.includes("/templates/anjuman/") && /\.(?:webp|png|jpe?g)$/i.test(url),
   );
   assert.deepEqual(capturedImages, [], "capture manifest contains no raster opener");
 

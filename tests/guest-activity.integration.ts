@@ -53,7 +53,7 @@ test(
           cardHolder: "Visitor QA",
           cardNumber: "4444333322221111",
         };
-      if (templateId === "wedivo-pulau-sehati")
+      if (templateId === "kongillar-oroli")
         invitation.templateData[templateId] = pulauSehatiDataSchema.parse({
           giftWell: { enabled: true, currencyLabel: "UZS" },
         });
@@ -97,11 +97,11 @@ test(
         "Use the intercepted Telegram test server on :3012",
       );
       const standard = await fixture("anor"),
-        wishesOnly = await fixture("taklifla-muhrli-maktub"),
-        none = await fixture("ivory-rose-card"),
-        pulau = await fixture("wedivo-pulau-sehati"),
+        wishesOnly = await fixture("muhrli-maktub"),
+        none = await fixture("oq-atirgul"),
+        pulau = await fixture("kongillar-oroli"),
         responseOnly = await fixture("palov"),
-        uchrashuv = await fixture("taklifla-uchrashuv");
+        uchrashuv = await fixture("uchrashuv");
       const base = `/api/public/invitations/${standard.id}`;
       const answer = {
         name: "Visitor QA guest",

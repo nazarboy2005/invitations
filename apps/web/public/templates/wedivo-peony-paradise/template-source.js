@@ -160,7 +160,7 @@
             var notes =
               kind === "chime"
                 ? [784, 988, 1175, 1568]
-                : kind === "bloom"
+                : kind === "gullar-bayrami"
                   ? [523, 659, 784, 1046, 1318]
                   : kind === "drop"
                     ? [880, 659]
@@ -170,7 +170,7 @@
               var g = actx.createGain();
               o.type = "sine";
               o.frequency.value = f;
-              var t0 = now + i * (kind === "bloom" ? 0.14 : 0.08);
+              var t0 = now + i * (kind === "gullar-bayrami" ? 0.14 : 0.08);
               g.gain.setValueAtTime(0.0001, t0);
               g.gain.linearRampToValueAtTime(
                 kind === "pop" ? 0.04 : 0.035,
@@ -1903,7 +1903,7 @@
                     peony.to(1, 5200, 0);
                   }
                   burstAt($("an-peony"), 34, 1.1);
-                  sfx("bloom");
+                  sfx("gullar-bayrami");
                   list.forEach(function (m) {
                     $("an-spin-" + m).classList.remove("is-paused");
                     $("an-ant-" + m).classList.remove("is-current");
@@ -2071,7 +2071,7 @@
               $("sp-play").classList.remove("is-playing");
               $("sp-play-t").textContent = payload.ui.seasonsReplay;
               burstAt($("sp-stage"), 24, 0.9);
-              sfx("bloom");
+              sfx("gullar-bayrami");
             });
           });
           var touched = false;
@@ -2806,7 +2806,7 @@ var e2Name = ""; var e2At = null;
                 btn.classList.add("is-tied");
                 hint.textContent = payload.ui.thanks;
                 burstAt(btn, 30, 1);
-                sfx("bloom");
+                sfx("gullar-bayrami");
               }
             }).observe(form, { attributes: true, attributeFilter: ["class"] });
           }
@@ -3007,7 +3007,7 @@ var e2Name = ""; var e2At = null;
               ) {
                 form.setAttribute("data-celebrated", "1");
                 burstAt($("rs-vase"), 34, 1.1);
-                sfx("bloom");
+                sfx("gullar-bayrami");
                 cap.textContent = payload.ui.saved;
               }
             }).observe(form, {
@@ -3125,7 +3125,7 @@ var e2Name = ""; var e2At = null;
                 setTimeout(function () {
                   heroRegion.classList.add("in-view");
                   burst(win.innerWidth * 0.7, win.innerHeight * 0.3, 26, 1);
-                  sfx("bloom");
+                  sfx("gullar-bayrami");
                 }, 120);
               },
               reduceMotion ? 0 : 1100,
@@ -3385,7 +3385,7 @@ var e2Name = ""; var e2At = null;
           }
           opened = true;
           startAudio();
-          sfx("bloom");
+          sfx("gullar-bayrami");
           var bloom = $("cv-bloom");
           var br = bloom.getBoundingClientRect();
           bloom.style.setProperty(

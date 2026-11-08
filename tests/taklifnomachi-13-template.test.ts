@@ -7,20 +7,20 @@ import test from "node:test";
 import { TEMPLATES } from "@taklifnoma/contracts";
 
 const root = process.cwd();
-const dir = path.join(root, "apps/web/public/templates/taklifnomachi-13");
+const dir = path.join(root, "apps/web/public/templates/oltin-atirgul");
 const html = readFileSync(path.join(dir, "index.html"), "utf8");
 const adapter = readFileSync(path.join(dir, "adapter.js"), "utf8");
 const app = readFileSync(path.join(dir, "app.js"), "utf8");
 const source = readFileSync(path.join(dir, "source/taklifnomachi.uz/demo/13/index.html"));
 
 test("demo 13 is unpublished and registered as a Marxaba template", () => {
-  const template = TEMPLATES.find(entry => entry.id === "taklifnomachi-13");
+  const template = TEMPLATES.find(entry => entry.id === "oltin-atirgul");
   assert.ok(template);
   assert.equal(template.published, false);
-  assert.equal(template.previewImage, "/templates/taklifnomachi-13/source/taklifnomachi.uz/templates/13/assets/p2/intro-golden.png");
-  assert.ok(readFileSync(path.join(root, "apps/web/src/templates/marxaba/registry.ts"), "utf8").includes('"taklifnomachi-13"'));
+  assert.equal(template.previewImage, "/templates/oltin-atirgul/source/taklifnomachi.uz/templates/13/assets/p2/intro-golden.png");
+  assert.ok(readFileSync(path.join(root, "apps/web/src/templates/marxaba/registry.ts"), "utf8").includes('"oltin-atirgul"'));
   const migration = readFileSync(path.join(root, "packages/database/migrations/0101_register_taklifnomachi_13.sql"), "utf8");
-  assert.ok(migration.includes("taklifnomachi-13"));
+  assert.ok(migration.includes("oltin-atirgul"));
   assert.ok(migration.includes("false"));
 });
 

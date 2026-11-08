@@ -2,15 +2,15 @@ import type { EventType, TemplateDefinition } from "@taklifnoma/contracts";
 
 const NIKOH_TEMPLATE_IDS = [
   "anor",
-  "cloud-castle",
+  "bulutlar-qasri",
   "bogi-eram",
   "ganch",
-  "green-garden",
+  "yashil-makon",
   "kuzgi-chinor",
   "muhr",
   "orik-guli",
   "samarqand-kechasi",
-  "evelina",
+  "baxt-kaliti",
   "kozgu",
 ];
 

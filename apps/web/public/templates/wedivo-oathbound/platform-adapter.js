@@ -150,7 +150,7 @@
     $("cal-google").href = "https://calendar.google.com/calendar/render?" + new URLSearchParams({ action: "TEMPLATE", text: title, dates: stamp(start) + "/" + stamp(end), location: where, details: p.content.message }).toString();
     $("cal-ics").addEventListener("click", function () {
       function escape(s) { return String(s).replace(/\\/g, "\\\\").replace(/\r?\n/g, "\\n").replace(/,/g, "\\,").replace(/;/g, "\\;"); }
-      var lines = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Visol//Oathbound//EN", "BEGIN:VEVENT", "UID:" + p.invitationId + "@visol", "DTSTAMP:" + stamp(new Date()), "DTSTART:" + stamp(start), "DTEND:" + stamp(end), "SUMMARY:" + escape(title), "LOCATION:" + escape(where), "DESCRIPTION:" + escape(p.content.message), "END:VEVENT", "END:VCALENDAR"];
+      var lines = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Taklifnoma//Invitation//EN", "BEGIN:VEVENT", "UID:" + p.invitationId + "@taklifnoma", "DTSTAMP:" + stamp(new Date()), "DTSTART:" + stamp(start), "DTEND:" + stamp(end), "SUMMARY:" + escape(title), "LOCATION:" + escape(where), "DESCRIPTION:" + escape(p.content.message), "END:VEVENT", "END:VCALENDAR"];
       lines = lines.map(function (line) {
         var parts = [], part = "", length = 0, encoder = new TextEncoder();
         Array.from(line).forEach(function (character) {

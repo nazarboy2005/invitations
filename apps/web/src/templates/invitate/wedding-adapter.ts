@@ -37,7 +37,7 @@ export function makeWeddingData(
     gallery.push(
       ...Array.from({ length: 6 }, (_, index) => ({
         id: `wedding-preview-${index + 1}`,
-        src: publicAsset(`/templates/invitate-wedding/assets/captured/${[
+        src: publicAsset(`/templates/gulchambar/assets/captured/${[
           "7419a394e8fcdc1a.jpg",
           "9df50deadd54b10f.jpg",
           "508106ed635af865.jpg",

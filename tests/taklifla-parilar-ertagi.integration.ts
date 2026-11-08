@@ -39,7 +39,7 @@ test(
       displayName: "Disposable Pari verification",
       isAdmin: false,
     };
-    let invitation = createInvitation("taklifla-parilar-ertagi");
+    let invitation = createInvitation("parilar-ertagi");
     invitation.eventType = "wedding";
     let browser: any;
     const checks: string[] = [];
@@ -96,7 +96,7 @@ test(
       }));
       invitation.program=[{id:"program-qa",time:"18:00"}];
       for(const l of LOCALES){invitation.content[l].programTitles["program-qa"]=`Authored program ${l}`;invitation.content[l].programDescriptions["program-qa"]=`Authored description ${l}`;}
-      invitation.templateData["taklifla-parilar-ertagi"]={arrivalNote:Object.fromEntries(LOCALES.map(l=>[l,`Authored arrival ${l}`])),programLabels:{"program-qa":Object.fromEntries(LOCALES.map(l=>[l,`Authored label ${l}`]))}};
+      invitation.templateData["parilar-ertagi"]={arrivalNote:Object.fromEntries(LOCALES.map(l=>[l,`Authored arrival ${l}`])),programLabels:{"program-qa":Object.fromEntries(LOCALES.map(l=>[l,`Authored label ${l}`]))}};
       invitation.rsvp = { enabled: true, deadline: "", maxPartySize: 4 };
       invitation.wishes.enabled = true;
       let response = await request(
@@ -114,7 +114,7 @@ test(
         "Authenticated four-locale save/reopen preserves authored fields, authored story chapters and venue",
       );
       const originalShared = structuredClone(invitation);
-      for (const templateId of (process.env.TAKLIFLA_PRIVATE_QA ? [] : ["taklifla-tungi-saroy", "taklifla-parilar-ertagi"])) {
+      for (const templateId of (process.env.TAKLIFLA_PRIVATE_QA ? [] : ["tungi-saroy", "parilar-ertagi"])) {
         response = await request(
           `/api/invitations/${invitation.id}`,
           { invitation: { ...invitation, templateId } },

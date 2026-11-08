@@ -99,7 +99,7 @@ test("each language gets localized required placeholders and preserves edits", (
 });
 
 test("single-person events and published invitations retain their meaning", () => {
-  const invitation = createInvitation("taklifla-asalari");
+  const invitation = createInvitation("asalari");
   invitation.eventType = "birthday";
   const preview = createStudioPreviewInvitation(invitation);
   assert.equal(preview.content["uz-Latn"].people.length, 1);

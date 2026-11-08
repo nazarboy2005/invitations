@@ -16,7 +16,7 @@ const { chromium } = webRequire("playwright");
 const upstream = process.env.COVER_TEST_URL || "http://127.0.0.1:3002";
 assert.ok(["127.0.0.1", "localhost"].includes(new URL(upstream).hostname));
 
-const templates = ["anor", "ganch", "ivory-rose-card"].map((id) =>
+const templates = ["anor", "ganch", "oq-atirgul"].map((id) =>
   templateById(id)!,
 );
 

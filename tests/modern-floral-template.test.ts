@@ -8,7 +8,7 @@ import { readdir } from "node:fs/promises";
 import { test } from "node:test";
 import { templateById } from "@taklifnoma/contracts";
 
-const root = new URL("../apps/web/public/templates/modern-floral/", import.meta.url);
+const root = new URL("../apps/web/public/templates/gul-ifori/", import.meta.url);
 const sourceRoot = process.env.MODERN_FLORAL_SOURCE_ROOT
   ? pathToFileURL(`${resolve(process.env.MODERN_FLORAL_SOURCE_ROOT)}${sep}`)
   : new URL("../Invitations - this folder will be removed from production/Chorlove/Web invitations/", import.meta.url);
@@ -23,14 +23,14 @@ const sourceMotionRuntimeUrl = new URL("_next/static/chunks/0ceoe4zwq362f.js", s
 const sourcePreviewDataUrl = new URL("_next/static/chunks/0d2h69c7a3snv.js", sourceRoot);
 const sourceGalleryChunkUrl = new URL("_next/static/chunks/09cpm7sbnsw7i.js", sourceRoot);
 const sourceWishesChunkUrl = new URL("_next/static/chunks/0q0gfl1vec0ef.js", sourceRoot);
-const sourceCaptureUrl = new URL("templates/modern-floral/preview-frame.html", sourceRoot);
-const packagedCaptureUrl = new URL("../apps/web/public/templates/modern-floral/source/preview-frame.html", import.meta.url);
+const sourceCaptureUrl = new URL("templates/gul-ifori/preview-frame.html", sourceRoot);
+const packagedCaptureUrl = new URL("../apps/web/public/templates/gul-ifori/source/preview-frame.html", import.meta.url);
 const sourceStylesDir = new URL("_next/static/chunks/", sourceRoot);
 const packagedStylesDir = new URL("../apps/web/public/templates/chorlove/shared/_next/static/chunks/", import.meta.url);
 const sourceMediaDir = new URL("_next/static/media/", sourceRoot);
 const packagedMediaDir = new URL("../apps/web/public/templates/chorlove/shared/_next/static/media/", import.meta.url);
-const sourceDefaultGalleryDir = new URL("images/templates/orchid-amplop/", sourceRoot);
-const packagedPreviewGalleryDir = new URL("../chorlove/orchid-amplop/assets/", root);
+const sourceDefaultGalleryDir = new URL("images/templates/ormon-maktubi/", sourceRoot);
+const packagedPreviewGalleryDir = new URL("../ormon-maktubi/assets/", root);
 
 async function readIfPresent(path: URL) {
   try {
@@ -358,7 +358,7 @@ test("Modern Floral controls respond to pointer and Enter press states", async (
 test("Modern Floral catalog artwork has the source image hash and portrait dimensions", async () => {
   const cover = await readFile(coverUrl);
   const provenance = JSON.parse(await readFile(provenanceUrl, "utf8"));
-  assert.equal(templateById("modern-floral")?.previewImage, "/templates/modern-floral/catalog-opening.jpg");
+  assert.equal(templateById("gul-ifori")?.previewImage, "/templates/gul-ifori/catalog-opening.jpg");
   assert.equal(provenance.catalogArtwork.sha256, createHash("sha256").update(cover).digest("hex"));
   assert.deepEqual(provenance.catalogArtwork.dimensions, [810, 1754]);
   assert.equal(provenance.catalogArtwork.file, "catalog-opening.jpg");

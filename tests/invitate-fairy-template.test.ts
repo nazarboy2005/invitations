@@ -7,13 +7,13 @@ import test from "node:test";
 import { templateById } from "@taklifnoma/contracts";
 
 test("Fairy is a published wedding-only Invitate source package", () => {
-  const template = templateById("fairy");
+  const template = templateById("sehrli-oqshom");
   assert.ok(template);
   assert.deepEqual(template.categoryIds, ["wedding"]);
   assert.deepEqual(template.supportedEventTypes, ["wedding"]);
   assert.equal(template.priceMinor, 15000000);
   assert.equal(template.published, true);
-  assert.equal(template.previewImage, "/templates/fairy/preview.png");
+  assert.equal(template.previewImage, "/templates/sehrli-oqshom/preview.png");
 
   const index = readFileSync("apps/web/src/templates/invitate/registry.ts", "utf8");
   assert.match(index, /"fairy"/);
@@ -27,18 +27,18 @@ test("Fairy is a published wedding-only Invitate source package", () => {
 });
 
 test("Fairy source adapter excludes captured invitation data and binds reduced motion", () => {
-  const html = readFileSync("apps/web/public/templates/fairy/index.html", "utf8");
+  const html = readFileSync("apps/web/public/templates/sehrli-oqshom/index.html", "utf8");
   const script = readFileSync(
-    "apps/web/public/templates/fairy/assets/js/fairy-adapter.js",
+    "apps/web/public/templates/sehrli-oqshom/assets/js/fairy-adapter.js",
     "utf8",
   );
   const sourceScript = readFileSync(
-    "apps/web/public/templates/fairy/assets/js/fairy.js",
+    "apps/web/public/templates/sehrli-oqshom/assets/js/fairy.js",
     "utf8",
   );
-  const css = readFileSync("apps/web/public/templates/fairy/assets/css/fairy.css", "utf8");
+  const css = readFileSync("apps/web/public/templates/sehrli-oqshom/assets/css/fairy.css", "utf8");
   const capturedFonts = readFileSync(
-    "apps/web/public/templates/fairy/assets/fonts/fairy-captured-subsets.css",
+    "apps/web/public/templates/sehrli-oqshom/assets/fonts/fairy-captured-subsets.css",
     "utf8",
   );
   assert.doesNotMatch(html, /Baxrom|Sayyora|10\.10\.2026|stats\.tolipov|fonts\.googleapis/);
@@ -65,10 +65,10 @@ test("Fairy keeps gift/card UI out because it was added during adaptation", () =
   const sourceHtml = readFileSync(`${sourcePath}/fairy.html`, "utf8");
   const sourceCss = readFileSync(`${sourcePath}/assets/css/fairy.css`, "utf8");
   const sourceScript = readFileSync(`${sourcePath}/assets/js/fairy.js`, "utf8");
-  const html = readFileSync("apps/web/public/templates/fairy/index.html", "utf8");
-  const css = readFileSync("apps/web/public/templates/fairy/assets/css/fairy.css", "utf8");
+  const html = readFileSync("apps/web/public/templates/sehrli-oqshom/index.html", "utf8");
+  const css = readFileSync("apps/web/public/templates/sehrli-oqshom/assets/css/fairy.css", "utf8");
   const script = readFileSync(
-    "apps/web/public/templates/fairy/assets/js/fairy-adapter.js",
+    "apps/web/public/templates/sehrli-oqshom/assets/js/fairy-adapter.js",
     "utf8",
   );
 
@@ -83,7 +83,7 @@ test("Fairy keeps gift/card UI out because it was added during adaptation", () =
 
 test("Fairy preview artwork provenance uses the canonical preview fixture", () => {
   const provenance = JSON.parse(
-    readFileSync("apps/web/public/templates/fairy/preview.provenance.json", "utf8"),
+    readFileSync("apps/web/public/templates/sehrli-oqshom/preview.provenance.json", "utf8"),
   );
   assert.equal(provenance.fixture, "apps/web/src/modules/catalog/preview-sample.json");
   assert.equal(provenance.originalCaptureModified, false);
@@ -93,14 +93,14 @@ test("Fairy preview artwork provenance uses the canonical preview fixture", () =
     "fcc576b051845d0aecb8182e9480d0f8d657b0081f2b8e94ad940b6ef24cd7e3",
   );
   const packagedScript = readFileSync(
-    "apps/web/public/templates/fairy/assets/js/fairy.js",
+    "apps/web/public/templates/sehrli-oqshom/assets/js/fairy.js",
   );
   assert.equal(
     createHash("sha256").update(packagedScript).digest("hex").toUpperCase(),
     provenance.packageSha256.javascript,
   );
   const packagedAdapter = readFileSync(
-    "apps/web/public/templates/fairy/assets/js/fairy-adapter.js",
+    "apps/web/public/templates/sehrli-oqshom/assets/js/fairy-adapter.js",
   );
   assert.equal(
     createHash("sha256").update(packagedAdapter).digest("hex").toUpperCase(),

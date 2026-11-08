@@ -45,8 +45,8 @@ export async function PATCH(
 ) {
   try {
     const user = await requireAdminMutation(request);
-    const { id } = await params;
-    templateIdSchema.parse(id);
+    const { id: requestedId } = await params;
+    const id = templateIdSchema.parse(requestedId);
     const input = inputSchema.parse(await readJson(request, 5000));
     let replaced = 0;
     await getDb().begin(async (tx) => {

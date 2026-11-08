@@ -157,6 +157,22 @@
       "captureSha256": "91bcaf26fa48497de2f1341674e54920e26438cc20fdcd680aa868c2a1c21815",
       "action": "click garden gate; verify name spans and parent opacity 1, no remaining name transforms",
       "quality": 86
+    },
+    {
+      "id": "umr-bahori",
+      "captured": "2026-11-08",
+      "route": "/preview?template=umr-bahori&poster=1&qaSilent=1&qaReducedMotion=1",
+      "scene": "original opening with current neutral corporate sample",
+      "viewport": {
+        "width": 480,
+        "height": 800
+      },
+      "file": "apps/web/public/templates/umr-bahori/preview.webp",
+      "bytes": 24020,
+      "sha256": "93c4e708e6fd56817e00e1b81332d1c6616e0470f149909dd0ae1b305746fc84",
+      "captureSha256": "adfd12191cccdda2630eead59c8930cf5b2e7461d016088b5c5329b73ad2cb83",
+      "action": "none; first page, fonts settled, local framework indicator hidden",
+      "source": "Local real-renderer preview screenshot; current canonical corporate fixture"
     }
   ]
 }

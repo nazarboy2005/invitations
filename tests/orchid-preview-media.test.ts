@@ -13,13 +13,13 @@ const assets = [2, 1, 3, 6, 4, 5].map(
 );
 
 test("Orchid source photos and story copy exist only in its preview sample", () => {
-  const sample = createTemplatePreviewSample("orchid-amplop");
-  const creator = createInvitation("orchid-amplop");
+  const sample = createTemplatePreviewSample("ormon-maktubi");
+  const creator = createInvitation("ormon-maktubi");
 
   assert.deepEqual(sample.gallery.map((photo) => photo.url), assets);
   assert.equal(
-    getTemplatePreviewVenuePhoto("orchid-amplop"),
-    "/templates/chorlove/orchid-amplop/assets/gallery-5.webp",
+    getTemplatePreviewVenuePhoto("ormon-maktubi"),
+    "/templates/ormon-maktubi/assets/gallery-5.webp",
   );
   assert.equal(sample.story.length, 2);
   for (const locale of ["uz-Latn", "uz-Cyrl", "en", "ru"] as const) {
@@ -32,7 +32,7 @@ test("Orchid source photos and story copy exist only in its preview sample", () 
 
 test("Orchid source-photo fallbacks require the explicit preview-sample envelope", () => {
   const bridge = readFileSync(
-    join(process.cwd(), "apps/web/public/templates/chorlove/orchid-amplop/bridge.js"),
+    join(process.cwd(), "apps/web/public/templates/ormon-maktubi/bridge.js"),
     "utf8",
   );
 
@@ -46,7 +46,7 @@ test("Orchid source-photo fallbacks require the explicit preview-sample envelope
 
 test("Orchid music control reflects actual playback, including cover autoplay", () => {
   const bridge = readFileSync(
-    join(process.cwd(), "apps/web/public/templates/chorlove/orchid-amplop/bridge.js"),
+    join(process.cwd(), "apps/web/public/templates/ormon-maktubi/bridge.js"),
     "utf8",
   );
 
@@ -60,15 +60,15 @@ test("Orchid music control reflects actual playback, including cover autoplay", 
 test("Orchid RSVP keeps the source layout and reveal motion without a guest-count prompt", () => {
   const root = process.cwd();
   const html = readFileSync(
-    join(root, "apps/web/public/templates/chorlove/orchid-amplop/index.html"),
+    join(root, "apps/web/public/templates/ormon-maktubi/index.html"),
     "utf8",
   );
   const bridge = readFileSync(
-    join(root, "apps/web/public/templates/chorlove/orchid-amplop/bridge.js"),
+    join(root, "apps/web/public/templates/ormon-maktubi/bridge.js"),
     "utf8",
   );
   const platformCss = readFileSync(
-    join(root, "apps/web/public/templates/chorlove/orchid-amplop/source/platform.css"),
+    join(root, "apps/web/public/templates/ormon-maktubi/source/platform.css"),
     "utf8",
   );
   const sourceRsvpChunk = readFileSync(

@@ -56,27 +56,27 @@ export function ChorloveInvitation({
   }
 
   const frame = useRef<HTMLIFrameElement>(null);
-  useInvitationMaps(frame, !["stained-glass", "sunset", "swan-garden"].includes(templateId));
+  useInvitationMaps(frame, !["shisha-naqshi", "sunset", "oqqushlar"].includes(templateId));
   const [frameLocale, setFrameLocale] = useState(locale);
   useEffect(() => setFrameLocale(locale), [locale]);
 
   const data = useMemo(() => {
     const mapped = makeLegacyData(invitation, frameLocale, guestName, sampleWishes, templateId);
-    if (templateId === "palace-rose") {
+    if (templateId === "saroy-atirguli") {
       const venuePhoto = preview && sampleWishes
         ? getTemplatePreviewVenuePhoto(templateId)
         : undefined;
       if (venuePhoto) mapped.venueImage = publicAsset(venuePhoto);
     } else if (
-      templateId === "green-garden" ||
-      templateId === "orchid-amplop"
+      templateId === "yashil-makon" ||
+      templateId === "ormon-maktubi"
     ) {
       const venuePhoto = preview && sampleWishes
         ? getTemplatePreviewVenuePhoto(templateId)
         : undefined;
       if (venuePhoto) mapped.venue.photo = publicAsset(venuePhoto);
     }
-    if (templateId === "jasmine-white" && preview && sampleWishes) {
+    if (templateId === "oq-yasmin" && preview && sampleWishes) {
       const venuePhoto = getTemplatePreviewVenuePhoto(templateId);
       if (venuePhoto) mapped.venueImage = publicAsset(venuePhoto);
     }
@@ -97,33 +97,33 @@ export function ChorloveInvitation({
           dressCode: false,
           extraPeople: false,
         }
-      : templateId === "orchid-amplop"
+      : templateId === "ormon-maktubi"
       ? {
           dressCode: false,
           extraPeople: false,
           receiptHostSelector: "[data-orchid-receipt-host]",
         }
-      : templateId === "jasmine-white"
+      : templateId === "oq-yasmin"
         ? {
             story: false,
             dressCode: false,
             extraPeople: false,
             receiptHostSelector: ".jw-gift-modal-content",
           }
-      : templateId === "palace-rose"
+      : templateId === "saroy-atirguli"
         ? {
             story: false,
             dressCode: false,
             extraPeople: false,
             receiptHostSelector: "[data-pr-gift-receipt-host]",
           }
-      : templateId === "green-gold"
+      : templateId === "zumrad"
         ? {
             story: false,
             dressCode: false,
             extraPeople: false,
           }
-      : ["stained-glass", "sunset", "swan-garden"].includes(templateId)
+      : ["shisha-naqshi", "sunset", "oqqushlar"].includes(templateId)
         ? {
             dressCode: false,
             receiptHostSelector: '[data-section="gift"]',
@@ -149,7 +149,7 @@ export function ChorloveInvitation({
           : undefined,
         locale: frameLocale,
         sampleGallery:
-          (["orchid-amplop", "green-gold", "stained-glass", "sunset", "swan-garden"].includes(templateId)) &&
+          (["ormon-maktubi", "zumrad", "shisha-naqshi", "sunset", "oqqushlar"].includes(templateId)) &&
           preview &&
           sampleWishes,
         enabledLocales: invitation.enabledLocales,
@@ -183,18 +183,12 @@ export function ChorloveInvitation({
 
   // These bridges update their labels in place. Keep the frame URL stable so
   // switching language preserves the opening, scroll, forms and music choice.
-  const inPlaceLocale = ["stained-glass", "sunset", "swan-garden"].includes(templateId);
+  const inPlaceLocale = ["shisha-naqshi", "sunset", "oqqushlar"].includes(templateId);
   const query = new URLSearchParams({
     lang: sourceLocale[inPlaceLocale ? invitation.defaultLocale : frameLocale],
   });
   if (preview && qaReducedMotion) query.set("qaReducedMotion", "1");
-  const namespaced =
-    templateId === "osh" ||
-    templateId === "palov" ||
-    templateId === "orchid-amplop";
-  const frameUrl = namespaced
-    ? publicAsset(`/templates/chorlove/${templateId}/index.html?${query}`)
-    : publicAsset(`/templates/${templateId}/index.html?${query}`);
+  const frameUrl = publicAsset(`/templates/${templateId}/index.html?${query}`);
 
   useEffect(() => {
     const onMessage = (event: MessageEvent) => {

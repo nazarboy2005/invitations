@@ -5,15 +5,15 @@ import { test } from "node:test";
 import { templateById } from "../packages/contracts/src/index";
 
 const root = resolve(process.cwd());
-const template = templateById("islamic-edition");
-const source = resolve(root, "apps/web/public/templates/islamic-edition/source/reference");
-const runtime = resolve(root, "apps/web/public/templates/islamic-edition");
+const template = templateById("islomiy");
+const source = resolve(root, "apps/web/public/templates/islomiy/source/reference");
+const runtime = resolve(root, "apps/web/public/templates/islomiy");
 
 test("Islamic Edition is published as a complete E-invitation wedding template", () => {
   assert.ok(template);
-  assert.equal(template.name, "Islamic Edition");
+  assert.equal(template.name, "Islomiy");
   assert.equal(template.published, true);
-  assert.equal(template.previewImage, "/templates/islamic-edition/catalog.webp");
+  assert.equal(template.previewImage, "/templates/islomiy/catalog.webp");
   assert.deepEqual(template.categoryIds, ["wedding"]);
   assert.deepEqual(template.supportedEventTypes, ["wedding"]);
 });
@@ -32,7 +32,7 @@ test("the exact source page, compiled Vue chunk, CSS, artwork, and fonts are pac
     assert.ok(readFileSync(resolve(source, "assets", asset)), `${asset} must be present`);
   }
   assert.throws(() => readFileSync(resolve(source, "assets", "gift.webp")), { code: "ENOENT" });
-  assert.match(readFileSync(resolve(root, "apps/web/public/templates/islamic-edition/SOURCE_CAPTURE.md"), "utf8"), /gift\.webp.*404/);
+  assert.match(readFileSync(resolve(root, "apps/web/public/templates/islomiy/SOURCE_CAPTURE.md"), "utf8"), /gift\.webp.*404/);
   const fontsCss = readFileSync(resolve(source, "google-fonts.css"), "utf8");
   const fonts = [...fontsCss.matchAll(/url\("\/templates\/islamic-edition\/source\/reference\/fonts\/([^"?]+)"\)/g)];
   assert.ok(fonts.length >= 13, "all referenced font variants are included locally");

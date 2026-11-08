@@ -91,7 +91,7 @@ const previewGalleryAssets: Record<
       },
     ],
   ],
-  korporativ: [
+  anjuman: [
     [
       "event-01.svg",
       {

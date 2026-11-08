@@ -39,7 +39,7 @@ test(
       displayName: "Disposable Muhrli verification",
       isAdmin: false,
     };
-    let invitation = createInvitation("taklifla-muhrli-maktub");
+    let invitation = createInvitation("muhrli-maktub");
     invitation.eventType = "wedding";
     let browser: any;
     const checks: string[] = [];
@@ -94,7 +94,7 @@ test(
           LOCALES.map((locale) => [locale, `Authored chapter ${i} ${locale}`]),
         ),
       }));
-      invitation.templateData["taklifla-muhrli-maktub"] = {flowersNote: Object.fromEntries(LOCALES.map(locale=>[locale, `Authored flowers ${locale}`]))};
+      invitation.templateData["muhrli-maktub"] = {flowersNote: Object.fromEntries(LOCALES.map(locale=>[locale, `Authored flowers ${locale}`]))};
       invitation.rsvp = { enabled: true, deadline: "", maxPartySize: 4 };
       invitation.wishes.enabled = true;
       let response = await request(
@@ -113,7 +113,7 @@ test(
       );
       assert.deepEqual(reopened.templateData, invitation.templateData);
       const originalShared = structuredClone(invitation);
-      for (const templateId of ["taklifla-tungi-saroy", "taklifla-muhrli-maktub"]) {
+      for (const templateId of ["tungi-saroy", "muhrli-maktub"]) {
         response = await request(
           `/api/invitations/${invitation.id}`,
           { invitation: { ...invitation, templateId } },

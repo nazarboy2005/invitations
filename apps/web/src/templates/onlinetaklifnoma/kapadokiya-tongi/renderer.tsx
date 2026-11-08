@@ -77,7 +77,7 @@ export function KapadokiyaTongiInvitation({
     frame.current?.contentWindow?.postMessage({ type: "kapadokiya-tongi:update", payload: message }, window.location.origin);
   }, [message]);
 
-  const frameUrl = publicAsset(`/templates/onlinetaklifnoma-kapadokiya-tongi/index.html${preview && silentPlayback ? "?qaSilent=1" : ""}`);
+  const frameUrl = publicAsset(`/templates/kapadokiya-tongi/index.html${preview && silentPlayback ? "?qaSilent=1" : ""}`);
   const mode = fullPreview ? styles.full : preview ? styles.preview : styles.public;
   return (
     <div className={mode}>

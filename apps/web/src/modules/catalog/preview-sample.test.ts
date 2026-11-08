@@ -99,8 +99,8 @@ test("template samples are illustrative complete invitations", () => {
 });
 
 test("Palace Rose source photos are confined to catalog and initial-selection previews", () => {
-  const preview = createTemplatePreviewSample("palace-rose");
-  const creatorDraft = createInvitation("palace-rose");
+  const preview = createTemplatePreviewSample("saroy-atirguli");
+  const creatorDraft = createInvitation("saroy-atirguli");
   const galleryFiles = [
     "gallery-2.webp",
     "gallery-1.webp",
@@ -112,30 +112,30 @@ test("Palace Rose source photos are confined to catalog and initial-selection pr
   assert.deepEqual(
     preview.gallery.map(({ url, alt }) => [url, alt]),
     galleryFiles.map((file, index) => [
-      `/templates/chorlove/orchid-amplop/assets/${file}`,
+      `/templates/ormon-maktubi/assets/${file}`,
       `Wedding photo ${index + 1}`,
     ]),
   );
   assert.equal(
-    getTemplatePreviewVenuePhoto("palace-rose"),
+    getTemplatePreviewVenuePhoto("saroy-atirguli"),
     "/images/preview/venue.jpg",
   );
   assert.ok(creatorDraft.gallery.every((photo) => !photo.url && !photo.alt && !photo.caption));
 });
 
 test("Modern Floral preview uses its captured gallery images only in its preview sample", () => {
-  const modernFloral = createTemplatePreviewSample("modern-floral");
+  const modernFloral = createTemplatePreviewSample("gul-ifori");
   const otherTemplate = createTemplatePreviewSample("anor");
-  const floralWishes = getTemplatePreviewWishes("uz-Latn", "modern-floral");
+  const floralWishes = getTemplatePreviewWishes("uz-Latn", "gul-ifori");
   assert.deepEqual(
     modernFloral.gallery.map((item) => item.url),
     [
-      "/templates/chorlove/orchid-amplop/assets/gallery-2.webp",
-      "/templates/chorlove/orchid-amplop/assets/gallery-1.webp",
-      "/templates/chorlove/orchid-amplop/assets/gallery-3.webp",
-      "/templates/chorlove/orchid-amplop/assets/gallery-6.webp",
-      "/templates/chorlove/orchid-amplop/assets/gallery-4.webp",
-      "/templates/chorlove/orchid-amplop/assets/gallery-5.webp",
+      "/templates/ormon-maktubi/assets/gallery-2.webp",
+      "/templates/ormon-maktubi/assets/gallery-1.webp",
+      "/templates/ormon-maktubi/assets/gallery-3.webp",
+      "/templates/ormon-maktubi/assets/gallery-6.webp",
+      "/templates/ormon-maktubi/assets/gallery-4.webp",
+      "/templates/ormon-maktubi/assets/gallery-5.webp",
     ],
   );
   assert.equal(floralWishes.length, 3);
@@ -145,62 +145,62 @@ test("Modern Floral preview uses its captured gallery images only in its preview
 });
 
 test("Lace source gallery is provided by the preview fixture only", () => {
-  const sample = createTemplatePreviewSample("lace");
-  const emptyCreatorInvitation = createInvitation("lace");
+  const sample = createTemplatePreviewSample("marvarid");
+  const emptyCreatorInvitation = createInvitation("marvarid");
   assert.deepEqual(
     sample.gallery.map(({ url }) => url),
     [
-      "/templates/lace/assets/gallery-2.webp",
-      "/templates/lace/assets/gallery-1.webp",
-      "/templates/lace/assets/gallery-3.webp",
-      "/templates/lace/assets/gallery-6.webp",
-      "/templates/lace/assets/gallery-4.webp",
-      "/templates/lace/assets/gallery-5.webp",
+      "/templates/marvarid/assets/gallery-2.webp",
+      "/templates/marvarid/assets/gallery-1.webp",
+      "/templates/marvarid/assets/gallery-3.webp",
+      "/templates/marvarid/assets/gallery-6.webp",
+      "/templates/marvarid/assets/gallery-4.webp",
+      "/templates/marvarid/assets/gallery-5.webp",
     ],
   );
   assert.ok(emptyCreatorInvitation.gallery.every((photo) => !photo.url));
 });
 
 test("Green Gold gallery photos come only from the catalog and initial-selection sample", () => {
-  const sample = createTemplatePreviewSample("green-gold");
-  const creatorDraft = createInvitation("green-gold");
+  const sample = createTemplatePreviewSample("zumrad");
+  const creatorDraft = createInvitation("zumrad");
   assert.deepEqual(
     sample.gallery.map((item) => [item.id, item.url]),
     [2, 1, 3, 6, 4, 5].map((number, index) => [
       `green-gold-source-preview-${index + 1}`,
-      `/templates/chorlove/orchid-amplop/assets/gallery-${number}.webp`,
+      `/templates/ormon-maktubi/assets/gallery-${number}.webp`,
     ]),
   );
   assert.ok(creatorDraft.gallery.every((item) => !item.url));
 });
 
 test("Luxury Gold uses the captured demo gallery only in catalog preview samples", () => {
-  const preview = createTemplatePreviewSample("luxury-gold");
-  const creatorInvitation = createInvitation("luxury-gold");
+  const preview = createTemplatePreviewSample("zar-jilosi");
+  const creatorInvitation = createInvitation("zar-jilosi");
   assert.deepEqual(
     preview.gallery.map((item) => item.url),
-    [2, 1, 3, 6, 4, 5].map((index) => `/templates/chorlove/orchid-amplop/assets/gallery-${index}.webp`),
+    [2, 1, 3, 6, 4, 5].map((index) => `/templates/ormon-maktubi/assets/gallery-${index}.webp`),
   );
   assert.ok(creatorInvitation.gallery.every((item) => !item.url));
 });
 
 test("Green Garden preview uses its captured gallery and venue photos only as sample media", () => {
-  const sample = createTemplatePreviewSample("green-garden");
-  const blankInvitation = createInvitation("green-garden");
+  const sample = createTemplatePreviewSample("yashil-makon");
+  const blankInvitation = createInvitation("yashil-makon");
   assert.deepEqual(
     sample.gallery.map((item) => item.url),
     [
-      "/templates/chorlove/orchid-amplop/assets/gallery-2.webp",
-      "/templates/chorlove/orchid-amplop/assets/gallery-1.webp",
-      "/templates/chorlove/orchid-amplop/assets/gallery-3.webp",
-      "/templates/chorlove/orchid-amplop/assets/gallery-6.webp",
-      "/templates/chorlove/orchid-amplop/assets/gallery-4.webp",
-      "/templates/chorlove/orchid-amplop/assets/gallery-5.webp",
+      "/templates/ormon-maktubi/assets/gallery-2.webp",
+      "/templates/ormon-maktubi/assets/gallery-1.webp",
+      "/templates/ormon-maktubi/assets/gallery-3.webp",
+      "/templates/ormon-maktubi/assets/gallery-6.webp",
+      "/templates/ormon-maktubi/assets/gallery-4.webp",
+      "/templates/ormon-maktubi/assets/gallery-5.webp",
     ],
   );
   assert.equal(
-    getTemplatePreviewVenuePhoto("green-garden"),
-    "/templates/green-garden/assets/preview-venue.jpg",
+    getTemplatePreviewVenuePhoto("yashil-makon"),
+    "/templates/yashil-makon/assets/preview-venue.jpg",
   );
   assert.equal("venuePhoto" in sample, false);
   assert.equal(getTemplatePreviewVenuePhoto("anor"), undefined);
@@ -208,33 +208,33 @@ test("Green Garden preview uses its captured gallery and venue photos only as sa
 });
 
 test("Love Sakura preview uses the exact captured gallery photo order only in its preview sample", () => {
-  const loveSakura = createTemplatePreviewSample("love-sakura");
+  const loveSakura = createTemplatePreviewSample("sakura-sehri");
   const otherTemplate = createTemplatePreviewSample("anor");
   assert.deepEqual(
     loveSakura.gallery.map((item) => item.url),
     [
-      "/templates/love-sakura/assets/hero-couple.webp",
-      "/templates/love-sakura/assets/bride.webp",
-      "/templates/love-sakura/assets/groom.webp",
-      "/templates/love-sakura/assets/hero-couple.webp",
-      "/templates/love-sakura/assets/bride.webp",
-      "/templates/love-sakura/assets/groom.webp",
+      "/templates/sakura-sehri/assets/hero-couple.webp",
+      "/templates/sakura-sehri/assets/bride.webp",
+      "/templates/sakura-sehri/assets/groom.webp",
+      "/templates/sakura-sehri/assets/hero-couple.webp",
+      "/templates/sakura-sehri/assets/bride.webp",
+      "/templates/sakura-sehri/assets/groom.webp",
     ],
   );
   assert.ok(otherTemplate.gallery.every((item) => !item.url));
-  assert.equal(hasAuthoredInvitationContent(createInvitation("love-sakura")), false);
+  assert.equal(hasAuthoredInvitationContent(createInvitation("sakura-sehri")), false);
 });
 
 test("Jasmine White previews use its captured gallery and venue photos only as preview media", () => {
-  const preview = createTemplatePreviewSample("jasmine-white");
-  const creatorDraft = createInvitation("jasmine-white");
+  const preview = createTemplatePreviewSample("oq-yasmin");
+  const creatorDraft = createInvitation("oq-yasmin");
   assert.deepEqual(
     preview.gallery.map((item) => item.url),
     [
-      "/templates/jasmine-white/assets/fcd26341-5041-40ad-9cc9-d69a47422378.webp",
-      "/templates/jasmine-white/assets/d1c749b4-edb3-4312-84b6-414459c3d89c.webp",
-      "/templates/jasmine-white/assets/90085094-65d3-45d4-82da-de8d127a859c.webp",
-      "/templates/jasmine-white/assets/d0db2a4e-83f8-4b84-a46d-fc2fefe45cfa.webp",
+      "/templates/oq-yasmin/assets/fcd26341-5041-40ad-9cc9-d69a47422378.webp",
+      "/templates/oq-yasmin/assets/d1c749b4-edb3-4312-84b6-414459c3d89c.webp",
+      "/templates/oq-yasmin/assets/90085094-65d3-45d4-82da-de8d127a859c.webp",
+      "/templates/oq-yasmin/assets/d0db2a4e-83f8-4b84-a46d-fc2fefe45cfa.webp",
     ],
   );
   assert.deepEqual(
@@ -242,7 +242,7 @@ test("Jasmine White previews use its captured gallery and venue photos only as p
     ["Wedding photo 1", "Wedding photo 2", "Wedding photo 3", "Wedding photo 4"],
   );
   assert.equal(
-    getTemplatePreviewVenuePhoto("jasmine-white"),
+    getTemplatePreviewVenuePhoto("oq-yasmin"),
     "/images/preview/venue.jpg",
   );
   assert.ok(creatorDraft.gallery.every((item) => !item.url));
@@ -630,17 +630,17 @@ test("legacy contact cards migrate to optional phone and Telegram fields", () =>
 });
 
 test("Glass Pink source gallery photos stay in its preview sample only", () => {
-  const preview = createTemplatePreviewSample("glass-pink");
-  const emptyDraft = createInvitation("glass-pink");
+  const preview = createTemplatePreviewSample("pushti-gulbarg");
+  const emptyDraft = createInvitation("pushti-gulbarg");
   assert.deepEqual(
     preview.gallery.map(({ url, alt }) => [url, alt]),
     [
-      ["/templates/chorlove/orchid-amplop/assets/gallery-2.webp", "Gallery photo 1"],
-      ["/templates/chorlove/orchid-amplop/assets/gallery-1.webp", "Gallery photo 2"],
-      ["/templates/chorlove/orchid-amplop/assets/gallery-3.webp", "Gallery photo 3"],
-      ["/templates/chorlove/orchid-amplop/assets/gallery-6.webp", "Gallery photo 4"],
-      ["/templates/chorlove/orchid-amplop/assets/gallery-4.webp", "Gallery photo 5"],
-      ["/templates/chorlove/orchid-amplop/assets/gallery-5.webp", "Gallery photo 6"],
+      ["/templates/ormon-maktubi/assets/gallery-2.webp", "Gallery photo 1"],
+      ["/templates/ormon-maktubi/assets/gallery-1.webp", "Gallery photo 2"],
+      ["/templates/ormon-maktubi/assets/gallery-3.webp", "Gallery photo 3"],
+      ["/templates/ormon-maktubi/assets/gallery-6.webp", "Gallery photo 4"],
+      ["/templates/ormon-maktubi/assets/gallery-4.webp", "Gallery photo 5"],
+      ["/templates/ormon-maktubi/assets/gallery-5.webp", "Gallery photo 6"],
     ],
   );
   assert.deepEqual(emptyDraft.gallery, []);
@@ -651,11 +651,11 @@ test("Glass Pink source gallery photos stay in its preview sample only", () => {
 
   const sourceRoot = join(
     process.cwd(),
-    "Invitations - this folder will be removed from production/Chorlove/Web invitations/images/templates/orchid-amplop",
+    "Invitations - this folder will be removed from production/Chorlove/Web invitations/images/templates/ormon-maktubi",
   );
   const packagedRoot = join(
     process.cwd(),
-    "apps/web/public/templates/chorlove/orchid-amplop/assets",
+    "apps/web/public/templates/ormon-maktubi/assets",
   );
   for (const { url } of preview.gallery) {
     const file = url.split("/").at(-1)!;

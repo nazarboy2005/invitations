@@ -37,7 +37,7 @@ const fs = require("node:fs");
       const section = document.createElement("section");
       section.id = "qa-effects";
       section.innerHTML =
-        '<div id="qa-css"></div><div id="qa-waapi"></div><div id="qa-paused"></div><div id="qa-gsap"></div><video id="qa-video" muted loop playsinline style="width:220px;height:200px" src="/templates/swan-garden/assets/bg-loop.mp4"></video>';
+        '<div id="qa-css"></div><div id="qa-waapi"></div><div id="qa-paused"></div><div id="qa-gsap"></div><video id="qa-video" muted loop playsinline style="width:220px;height:200px" src="/templates/oqqushlar/assets/bg-loop.mp4"></video>';
       document.body.append(section);
       const waapi = document
         .getElementById("qa-waapi")
@@ -169,8 +169,8 @@ const fs = require("node:fs");
       fs.readFileSync("apps/web/src/generated/template-media.json", "utf8"),
     );
     for (const path of [
-      "/templates/golden-hour/assets/images/golden-hour/footerimage.png",
-      "/templates/stained-glass/assets/intro-doors-c.mp4",
+      "/templates/oltin-lahza/assets/images/oltin-lahza/footerimage.png",
+      "/templates/shisha-naqshi/assets/intro-doors-c.mp4",
     ]) {
       const entry = media[path];
       assert.ok(
@@ -215,7 +215,7 @@ const fs = require("node:fs");
         assert.equal((await range.body()).length, 1024);
       }
     }
-    for (const template of ["stained-glass", "sunset", "swan-garden"]) {
+    for (const template of ["shisha-naqshi", "sunset", "oqqushlar"]) {
       await page.goto(
         `http://127.0.0.1:3001/preview?template=${template}&qaSilent=1`,
         { waitUntil: "domcontentloaded" },
@@ -247,7 +247,7 @@ const fs = require("node:fs");
       .waitFor({ state: "detached", timeout: 30000 });
     const evelina = page
       .frames()
-      .find((frame) => frame.url().includes("/templates/evelina/"));
+      .find((frame) => frame.url().includes("/templates/baxt-kaliti/"));
     assert.equal(
       await evelina
         .locator('img[src$="inner-video.gif"]')

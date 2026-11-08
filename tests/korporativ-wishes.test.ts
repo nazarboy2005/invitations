@@ -7,7 +7,7 @@ import { createInvitation } from "../packages/contracts/src/index";
 import { createTemplatePreviewSample } from "../apps/web/src/modules/catalog/preview-sample";
 
 const root = process.cwd();
-const templateRoot = path.join(root, "apps/web/public/templates/korporativ");
+const templateRoot = path.join(root, "apps/web/public/templates/anjuman");
 const require = createRequire(import.meta.url);
 require.extensions[".css"] = (module) => { module.exports = {}; };
 const moduleRuntime = require("node:module") as { _resolveFilename: (...args: any[]) => string };

@@ -11,7 +11,7 @@ test("every catalog design explicitly declares supported slots, including maps",
   for (const template of TEMPLATES) {
     const c = templateCapabilities(template.id);
     assert.deepEqual(template.visitorFeatures, templateVisitorFeatures(template.id), template.id);
-    assert.equal(c.maps, !["girlsparty", "estelle", "bloom", "whiteless"].includes(template.id), template.id);
+    assert.equal(c.maps, !["dugonalar", "estelle", "gullar-bayrami", "orzular"].includes(template.id), template.id);
     assert.ok(c.people >= 1 && c.people <= 20, template.id);
     assert.ok(!c.receipts || c.gift, template.id);
   }
@@ -20,7 +20,7 @@ test("every catalog design explicitly declares supported slots, including maps",
 });
 
 test("image designs declare required slots and discard fields outside their composition", () => {
-  const raw = createInvitation("ivory-rose-card");
+  const raw = createInvitation("oq-atirgul");
   raw.content["uz-Latn"].hosts = "Unused hosts";
   raw.content["uz-Latn"].greeting = "Unused greeting";
   raw.contacts.phoneNumber = "Unused phone";
@@ -42,7 +42,7 @@ test("image designs declare required slots and discard fields outside their comp
 });
 
 test("a crafted unsupported payload is stripped by the server's shared projection", () => {
-  const raw = addLanguage(createInvitation("taklifla-asalari"), "ru");
+  const raw = addLanguage(createInvitation("asalari"), "ru");
   raw.content["uz-Latn"].people = ["Bola", "Not rendered"];
   raw.content.ru.people = ["Ребёнок", "Not rendered"];
   raw.gallery = [{ id: "private", url: "https://example.com/protected.jpg", alt: "", caption: "" }];
@@ -68,7 +68,7 @@ test("a crafted unsupported payload is stripped by the server's shared projectio
 });
 
 test("Barakali stores one portrait, no program/dress, and only its phone contact", () => {
-  const raw = createInvitation("taklifla-barakali");
+  const raw = createInvitation("baraka");
   raw.gallery = [1, 2].map((i) => ({ id: String(i), url: `/api/media/${i}`, alt: "", caption: "" }));
   raw.program = [{ id: "hidden", time: "19:00" }];
   raw.content["uz-Latn"].programTitles.hidden = "unused";
@@ -86,7 +86,7 @@ test("Barakali stores one portrait, no program/dress, and only its phone contact
 });
 
 test("RSVP, receipt, age and story limits match different real designs", () => {
-  const source = createInvitation("taklifla-tovus");
+  const source = createInvitation("tovus");
   source.gift = { enabled: true, receiptUploadEnabled: true, cardNumber: "unused", cardHolder: "unused" };
   source.rsvp = { enabled: true, deadline: "2027-05-01", maxPartySize: 20 };
   source.celebrantAge = 10;
@@ -96,9 +96,9 @@ test("RSVP, receipt, age and story limits match different real designs", () => {
   assert.equal(saved.rsvp.maxPartySize, 1);
   assert.equal(saved.gift.enabled, false);
   assert.equal(saved.celebrantAge, null);
-  source.templateId = "taklifla-parilar-ertagi";
+  source.templateId = "parilar-ertagi";
   assert.equal(normalizeInvitation(source).rsvp.deadline, "");
-  source.templateId = "taklifla-toglar-bagrida";
+  source.templateId = "toglar-bagrida";
   source.story = [1, 2, 3].map((id) => ({ id: String(id), title: {}, text: {} }));
   assert.equal(normalizeInvitation(source).story.length, 2);
 });
@@ -125,7 +125,7 @@ test("creator images require verified uploads instead of protected or expiring r
 });
 
 test("removing unused identity slots preserves checkout, while visible identity changes remain locked", () => {
-  const old = createInvitation("taklifla-asalari");
+  const old = createInvitation("asalari");
   old.content["uz-Latn"].people = ["Bola", "Unused old slot"];
   const snapshot = paymentIdentity(old);
   const normalized = normalizeInvitation(old);

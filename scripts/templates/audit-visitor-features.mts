@@ -6,11 +6,11 @@ import { templateVisitorFeatures } from "../../packages/contracts/src/capabiliti
 const base = resolve("apps/web/public");
 const aliases: Record<string, string> = {
   anor: "templates/anor/source/index.html",
-  "royal-burgundy-edition": "templates/velvet-royale/index.html",
-  osh: "templates/chorlove/osh/index.html",
-  palov: "templates/chorlove/palov/index.html",
-  "orchid-amplop": "templates/chorlove/orchid-amplop/index.html",
-  "taklifla-zarrin-gullar": "templates/taklifla-zarrin-gullar/template.html",
+  "royal-burgundy-edition": "templates/baxmal-saroy/index.html",
+  osh: "templates/osh/index.html",
+  palov: "templates/palov/index.html",
+  "orchid-amplop": "templates/ormon-maktubi/index.html",
+  "taklifla-zarrin-gullar": "templates/zarrin-gullar/template.html",
 };
 function sources(
   entry: string,

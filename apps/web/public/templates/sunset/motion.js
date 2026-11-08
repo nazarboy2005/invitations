@@ -35,7 +35,7 @@
     scroll.classList.add("overflow-y-auto");
     const nodes = all("[data-hero-reveal]");
     const delays =
-      root.dataset.chorloveTemplate === "swan-garden"
+      root.dataset.chorloveTemplate === "oqqushlar"
         ? [200, 450, 700, 1000, 1250, 1450, 2200]
         : [200, 600, 900, 1150, 2200];
     nodes.forEach((node, index) =>

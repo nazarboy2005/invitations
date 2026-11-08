@@ -3,6 +3,7 @@ import { NextResponse, type NextRequest } from "next/server";
 import { isPrivateTemplateArtifact } from "./server/template-artifacts";
 import publicAssets from "./generated/public-assets.json";
 import { optimizedTemplateMedia } from "./lib/template-media";
+import { canonicalTemplateAssetPath } from "./lib/template-asset-aliases.mjs";
 
 const publicAssetFiles = new Set(publicAssets.files);
 const publicAssetPrefix = `/_assets/${publicAssets.version}`;
@@ -42,11 +43,17 @@ export function proxy(request: NextRequest) {
     return response;
   }
   if (pathname.startsWith("/templates/")) {
-    if (isPrivateTemplateArtifact(pathname))
+    const canonical = canonicalTemplateAssetPath(pathname);
+    if (isPrivateTemplateArtifact(canonical))
       return new NextResponse(null, {
         status: 404,
         headers: { "Cache-Control": "no-store", "X-Robots-Tag": "noindex" },
       });
+    if (canonical !== pathname) {
+      const destination = new URL(request.url);
+      destination.pathname = canonical;
+      return NextResponse.redirect(destination, 308);
+    }
     let decoded: string;
     try {
       decoded = decodeURIComponent(pathname);

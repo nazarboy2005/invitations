@@ -1,3 +1,5 @@
+import { resolveTemplateId } from "@taklifnoma/contracts";
+
 export type Favorite = { templateId: string; savedAt: string };
 export const GUEST_FAVORITES_KEY = "taklifnoma:favorites:guest:v1";
 
@@ -15,15 +17,15 @@ export function parseFavorites(raw: string | null): Favorite[] {
           !/^[a-z0-9-]{1,100}$/.test(item.templateId) ||
           typeof item.savedAt !== "string" ||
           !Number.isFinite(Date.parse(item.savedAt)) ||
-          seen.has(item.templateId)
+          seen.has(resolveTemplateId(item.templateId))
         )
           return false;
-        seen.add(item.templateId);
+        seen.add(resolveTemplateId(item.templateId));
         return true;
       })
       .slice(0, 500)
       .map((item) => ({
-        templateId: item.templateId,
+        templateId: resolveTemplateId(item.templateId),
         savedAt: new Date(item.savedAt).toISOString(),
       }));
   } catch {

@@ -39,7 +39,7 @@ test(
       displayName: "Disposable Terracotta verification",
       isAdmin: false,
     };
-    let invitation = createInvitation("taklifla-terracotta");
+    let invitation = createInvitation("terrakota");
     invitation.eventType = "wedding";
     let browser: any;
     const checks: string[] = [];
@@ -94,7 +94,7 @@ test(
           LOCALES.map((locale) => [locale, `Authored chapter ${i} ${locale}`]),
         ),
       }));
-      invitation.templateData["taklifla-terracotta"]={...Object.fromEntries(["infoNote","footerNote"].map(key=>[key,Object.fromEntries(LOCALES.map(l=>[l,`Authored ${key} ${l}`]))]))};
+      invitation.templateData["terrakota"]={...Object.fromEntries(["infoNote","footerNote"].map(key=>[key,Object.fromEntries(LOCALES.map(l=>[l,`Authored ${key} ${l}`]))]))};
       invitation.rsvp = { enabled: true, deadline: "", maxPartySize: 4 };
       invitation.wishes.enabled = true;
       let response = await request(
@@ -112,7 +112,7 @@ test(
         "Authenticated four-locale save/reopen preserves authored fields, authored story chapters and venue",
       );
       const originalShared = structuredClone(invitation);
-      for (const templateId of (process.env.TAKLIFLA_PRIVATE_QA ? [] : ["taklifla-tungi-saroy", "taklifla-terracotta"])) {
+      for (const templateId of (process.env.TAKLIFLA_PRIVATE_QA ? [] : ["tungi-saroy", "terrakota"])) {
         response = await request(
           `/api/invitations/${invitation.id}`,
           { invitation: { ...invitation, templateId } },

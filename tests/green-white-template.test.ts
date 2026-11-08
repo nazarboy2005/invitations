@@ -6,12 +6,12 @@ import { runInNewContext } from "node:vm";
 import { createInvitation, templateById } from "../packages/contracts/src/index";
 import { createTemplatePreviewSample } from "../apps/web/src/modules/catalog/preview-sample";
 
-const root = new URL("../apps/web/public/templates/green-white/", import.meta.url);
+const root = new URL("../apps/web/public/templates/oq-chechak/", import.meta.url);
 
 function packagedSourceFile(archiveFile: string) {
   const file = archiveFile.replace(/^Chorlove\/Web invitations\//, "");
-  if (file === "templates/green-white/preview-frame.html") return new URL("source/preview-frame.html", root);
-  if (file.startsWith("images/green-white/")) return new URL(`assets/${file.split("/").at(-1)}`, root);
+  if (file === "templates/oq-chechak/preview-frame.html") return new URL("source/preview-frame.html", root);
+  if (file.startsWith("images/oq-chechak/")) return new URL(`assets/${file.split("/").at(-1)}`, root);
   if (file.startsWith("_next/static/chunks/")) return new URL(`source/styles/${file.split("/").at(-1)}`, root);
   throw new Error(`No packaged source mapping for ${archiveFile}`);
 }
@@ -38,7 +38,7 @@ test("Green White preserves its captured page and original design assets", async
   }
   assert.equal(manifest.copiedDesignAssets.length, 9);
   assert.deepEqual(manifest.missingSourceAssets, []);
-  assert.deepEqual(manifest.archiveMissingAssets, ["images/green-white/arka2.webp"]);
+  assert.deepEqual(manifest.archiveMissingAssets, ["images/oq-chechak/arka2.webp"]);
   const recovered = manifest.sourceAssetsFromLive.find((asset: { file: string }) => asset.file === "assets/arka2.webp");
   assert.ok(recovered);
   const recoveredBytes = await readFile(new URL(recovered.file, root));
@@ -69,16 +69,16 @@ test("Green White source gallery photos are preview-only and byte-identical to t
   const capturedFiles = [...capturedGallery.matchAll(/\/images\/templates\/orchid-amplop\/(gallery-[1-6]\.webp)/g)].map((match) => match[1]);
   assert.deepEqual(capturedFiles, ["gallery-2.webp", "gallery-1.webp", "gallery-3.webp", "gallery-6.webp", "gallery-4.webp", "gallery-5.webp"]);
 
-  const preview = createTemplatePreviewSample("green-white");
+  const preview = createTemplatePreviewSample("oq-chechak");
   assert.deepEqual(preview.gallery.map((photo) => photo.url), capturedFiles.map((file) => `/templates/chorlove/orchid-amplop/assets/${file}`));
   const sourceAssets = new URL("../Invitations - this folder will be removed from production/Chorlove/Web invitations/images/templates/orchid-amplop/", import.meta.url);
-  const packageAssets = new URL("../apps/web/public/templates/chorlove/orchid-amplop/assets/", import.meta.url);
+  const packageAssets = new URL("../apps/web/public/templates/ormon-maktubi/assets/", import.meta.url);
   for (const file of [...new Set(capturedFiles)]) {
     const sourceBytes = await readFile(new URL(file, sourceAssets));
     const packageBytes = await readFile(new URL(file, packageAssets));
     assert.deepEqual(packageBytes, sourceBytes, file);
   }
-  assert.deepEqual(createInvitation("green-white").gallery, []);
+  assert.deepEqual(createInvitation("oq-chechak").gallery, []);
   const bridge = await readFile(new URL("bridge.js", root), "utf8");
   assert.match(bridge, /const photos = gallery\.filter\(\(photo\) => photo\?\.src\)/);
   assert.match(bridge, /hide\(node, !photos\.length\)/);
@@ -430,7 +430,7 @@ test("Green White catalog cover is a source-rendered portrait with recorded prov
   const cover = manifest.catalogArtwork;
   assert.ok(cover);
   assert.equal(cover.file, "preview-opening.png");
-  assert.equal(cover.registryPreviewImage, "/templates/green-white/preview-opening.png");
+  assert.equal(cover.registryPreviewImage, "/templates/oq-chechak/preview-opening.png");
   const bytes = await readFile(new URL(cover.file, root));
   assert.equal(bytes.length, cover.bytes);
   assert.equal(createHash("sha256").update(bytes).digest("hex"), cover.sha256);
@@ -485,7 +485,7 @@ test("Green White RSVP honors the fixed party-size platform rule over the source
 });
 
 test("Green White is published for wedding events", async () => {
-  const item = templateById("green-white");
+  const item = templateById("oq-chechak");
   assert.ok(item);
   assert.equal(item.published, true);
   assert.equal(item.priceMinor, 15000000);

@@ -1,0 +1,690 @@
+{
+  "migration": "0228_clean_template_display_names.sql",
+  "alreadyApplied": false,
+  "checked": 134,
+  "unchangedExceptNames": true,
+  "renamed": [
+    {
+      "id": "taklifnomachi-19",
+      "before": "Zaytun bogi",
+      "after": "Zaytun bog‘i"
+    },
+    {
+      "id": "xatna-edition",
+      "before": "Xatna Edition",
+      "after": "Xatna"
+    }
+  ],
+  "templates": [
+    {
+      "id": "andalus-darvozasi",
+      "name": "Andalus darvozasi",
+      "published": false
+    },
+    {
+      "id": "anor",
+      "name": "Anor",
+      "published": true
+    },
+    {
+      "id": "atlas",
+      "name": "Atlas",
+      "published": false
+    },
+    {
+      "id": "aurelia",
+      "name": "Aurelia",
+      "published": false
+    },
+    {
+      "id": "beshik",
+      "name": "Beshik",
+      "published": false
+    },
+    {
+      "id": "bitiruv",
+      "name": "Bitiruv",
+      "published": false
+    },
+    {
+      "id": "bloom",
+      "name": "Bloom",
+      "published": false
+    },
+    {
+      "id": "bogi-eram",
+      "name": "Bog‘i Eram",
+      "published": true
+    },
+    {
+      "id": "bulbul",
+      "name": "Bulbul",
+      "published": true
+    },
+    {
+      "id": "butterfly",
+      "name": "Butterfly",
+      "published": false
+    },
+    {
+      "id": "buxoro-ravoq",
+      "name": "Buxoro ravoq",
+      "published": false
+    },
+    {
+      "id": "chavandoz",
+      "name": "Chavandoz",
+      "published": false
+    },
+    {
+      "id": "cloud-castle",
+      "name": "Cloud Castle",
+      "published": true
+    },
+    {
+      "id": "doira",
+      "name": "Doira",
+      "published": true
+    },
+    {
+      "id": "estelle",
+      "name": "Estelle",
+      "published": false
+    },
+    {
+      "id": "evelina",
+      "name": "Evelina",
+      "published": false
+    },
+    {
+      "id": "fairy",
+      "name": "Fairy",
+      "published": false
+    },
+    {
+      "id": "ganch",
+      "name": "Ganch",
+      "published": true
+    },
+    {
+      "id": "girlsparty",
+      "name": "Girls Party",
+      "published": false
+    },
+    {
+      "id": "glass-pink",
+      "name": "Glass Pink",
+      "published": false
+    },
+    {
+      "id": "golden-card",
+      "name": "Golden Card",
+      "published": false
+    },
+    {
+      "id": "golden-hour",
+      "name": "Golden Hour",
+      "published": false
+    },
+    {
+      "id": "green-garden",
+      "name": "Green Garden",
+      "published": false
+    },
+    {
+      "id": "green-gold",
+      "name": "Green Gold",
+      "published": false
+    },
+    {
+      "id": "green-white",
+      "name": "Green White",
+      "published": false
+    },
+    {
+      "id": "gulli-darvoza",
+      "name": "Gulli darvoza",
+      "published": false
+    },
+    {
+      "id": "hilol",
+      "name": "Hilol",
+      "published": false
+    },
+    {
+      "id": "invitate-nahorgi-osh",
+      "name": "Sahar ziyofati",
+      "published": false
+    },
+    {
+      "id": "invitate-palov",
+      "name": "Osh ziyofati",
+      "published": false
+    },
+    {
+      "id": "invitate-wedding",
+      "name": "Gulchambar",
+      "published": false
+    },
+    {
+      "id": "islamic-edition",
+      "name": "Islamic",
+      "published": true
+    },
+    {
+      "id": "ivory-love",
+      "name": "Ivory Love",
+      "published": false
+    },
+    {
+      "id": "ivory-rose-card",
+      "name": "Oq atirgul",
+      "published": true
+    },
+    {
+      "id": "jannat-bogi",
+      "name": "Jannat bogʻi",
+      "published": false
+    },
+    {
+      "id": "jasmine-white",
+      "name": "Jasmine White",
+      "published": false
+    },
+    {
+      "id": "kapadokiya-tongi",
+      "name": "Kapadokiya tongi",
+      "published": false
+    },
+    {
+      "id": "konfetti",
+      "name": "Konfetti",
+      "published": false
+    },
+    {
+      "id": "korporativ",
+      "name": "Korporativ",
+      "published": false
+    },
+    {
+      "id": "kozgu",
+      "name": "Ko‘zgu",
+      "published": true
+    },
+    {
+      "id": "kuzgi-chinor",
+      "name": "Kuzgi Chinor",
+      "published": true
+    },
+    {
+      "id": "lace",
+      "name": "Lace",
+      "published": true
+    },
+    {
+      "id": "lola",
+      "name": "Lola",
+      "published": false
+    },
+    {
+      "id": "lola-maktubi",
+      "name": "Lola maktubi",
+      "published": true
+    },
+    {
+      "id": "love-sakura",
+      "name": "Love Sakura",
+      "published": false
+    },
+    {
+      "id": "luxury-gold",
+      "name": "Luxury Gold",
+      "published": false
+    },
+    {
+      "id": "ming-bir-kecha",
+      "name": "Ming bir kecha",
+      "published": false
+    },
+    {
+      "id": "modern-floral",
+      "name": "Modern Floral",
+      "published": false
+    },
+    {
+      "id": "monochrome-editorial-edition",
+      "name": "Monochrome Editorial",
+      "published": true
+    },
+    {
+      "id": "monogram",
+      "name": "Monogram",
+      "published": false
+    },
+    {
+      "id": "moviy-ravoq-card",
+      "name": "Moviy ravoq",
+      "published": true
+    },
+    {
+      "id": "muhabbat-kitobi",
+      "name": "Muhabbat Kitobi",
+      "published": false
+    },
+    {
+      "id": "muhr",
+      "name": "Muhr",
+      "published": true
+    },
+    {
+      "id": "nahor",
+      "name": "Nahor",
+      "published": true
+    },
+    {
+      "id": "nahorgi-osh",
+      "name": "Nahorgi Osh",
+      "published": false
+    },
+    {
+      "id": "nilufar",
+      "name": "Nilufar",
+      "published": false
+    },
+    {
+      "id": "olive-manor-edition",
+      "name": "Olive Manor",
+      "published": true
+    },
+    {
+      "id": "oltin-darvoza-ortidagi-baxt",
+      "name": "Oltin darvoza ortidagi baxt",
+      "published": false
+    },
+    {
+      "id": "oltin-kuz",
+      "name": "Oltin Kuz",
+      "published": true
+    },
+    {
+      "id": "oltin-nur",
+      "name": "Oltin Nur",
+      "published": false
+    },
+    {
+      "id": "oltin-uzuk",
+      "name": "Oltin Uzuk",
+      "published": false
+    },
+    {
+      "id": "oltin-yosh",
+      "name": "Oltin Yosh",
+      "published": false
+    },
+    {
+      "id": "oq-kabutar",
+      "name": "Oq Kabutar",
+      "published": false
+    },
+    {
+      "id": "orchid-amplop",
+      "name": "Orchid Amplop",
+      "published": false
+    },
+    {
+      "id": "orik-guli",
+      "name": "O‘rik Guli",
+      "published": true
+    },
+    {
+      "id": "osh",
+      "name": "Osh",
+      "published": false
+    },
+    {
+      "id": "oynavand",
+      "name": "Oynavand",
+      "published": false
+    },
+    {
+      "id": "palace-rose",
+      "name": "Palace Rose",
+      "published": true
+    },
+    {
+      "id": "palov",
+      "name": "Palov",
+      "published": true
+    },
+    {
+      "id": "parda",
+      "name": "Parda",
+      "published": false
+    },
+    {
+      "id": "paxta",
+      "name": "Paxta",
+      "published": false
+    },
+    {
+      "id": "qandil",
+      "name": "Qandil",
+      "published": false
+    },
+    {
+      "id": "qatlam",
+      "name": "Qatlam",
+      "published": false
+    },
+    {
+      "id": "qiz-bazmi",
+      "name": "Qiz Bazmi",
+      "published": false
+    },
+    {
+      "id": "qogoz-turna",
+      "name": "Qog‘oz Turna",
+      "published": false
+    },
+    {
+      "id": "retro-kino",
+      "name": "Retro Kino",
+      "published": false
+    },
+    {
+      "id": "royal-burgundy-edition",
+      "name": "Velvet Royale",
+      "published": true
+    },
+    {
+      "id": "safir",
+      "name": "Safir",
+      "published": false
+    },
+    {
+      "id": "sahar-ifori",
+      "name": "Sahar ifori",
+      "published": true
+    },
+    {
+      "id": "sahifa",
+      "name": "Sahifa",
+      "published": false
+    },
+    {
+      "id": "sahro-fonusi",
+      "name": "Sahro Fonusi",
+      "published": false
+    },
+    {
+      "id": "samarqand-kechasi",
+      "name": "Samarqand Kechasi",
+      "published": false
+    },
+    {
+      "id": "samarqand-peshtoqi",
+      "name": "Samarqand peshtoqi",
+      "published": false
+    },
+    {
+      "id": "shahzoda",
+      "name": "Shahzoda",
+      "published": false
+    },
+    {
+      "id": "shirin-bayram",
+      "name": "Shirin Bayram",
+      "published": true
+    },
+    {
+      "id": "shisha-bog",
+      "name": "Shisha bog",
+      "published": false
+    },
+    {
+      "id": "somon-yoli",
+      "name": "Somon Yo‘li",
+      "published": false
+    },
+    {
+      "id": "stained-glass",
+      "name": "Stained Glass",
+      "published": true
+    },
+    {
+      "id": "sunset",
+      "name": "Sunset",
+      "published": true
+    },
+    {
+      "id": "suzani",
+      "name": "Suzani",
+      "published": false
+    },
+    {
+      "id": "swan",
+      "name": "Swan",
+      "published": false
+    },
+    {
+      "id": "swan-garden",
+      "name": "Swan Garden",
+      "published": true
+    },
+    {
+      "id": "taklifla-asalari",
+      "name": "Asalari",
+      "published": true
+    },
+    {
+      "id": "taklifla-barakali",
+      "name": "Barakali",
+      "published": false
+    },
+    {
+      "id": "taklifla-ertak",
+      "name": "Ertak",
+      "published": false
+    },
+    {
+      "id": "taklifla-fayzli-xonadon",
+      "name": "Fayzli Xonadon",
+      "published": false
+    },
+    {
+      "id": "taklifla-gulbog",
+      "name": "Gulbog",
+      "published": false
+    },
+    {
+      "id": "taklifla-muhrli-maktub",
+      "name": "Muhrli Maktub",
+      "published": true
+    },
+    {
+      "id": "taklifla-oltin-yol",
+      "name": "Oltin Yo‘l",
+      "published": true
+    },
+    {
+      "id": "taklifla-osmon",
+      "name": "Cheksiz Osmon",
+      "published": true
+    },
+    {
+      "id": "taklifla-parilar-ertagi",
+      "name": "Parilar ertagi",
+      "published": false
+    },
+    {
+      "id": "taklifla-qogoz-ertagi",
+      "name": "Qog‘oz ertagi",
+      "published": false
+    },
+    {
+      "id": "taklifla-sakura-guli",
+      "name": "Sakura Guli",
+      "published": false
+    },
+    {
+      "id": "taklifla-sharlar",
+      "name": "Sharlar",
+      "published": false
+    },
+    {
+      "id": "taklifla-terracotta",
+      "name": "Terracotta",
+      "published": false
+    },
+    {
+      "id": "taklifla-toglar-bagrida",
+      "name": "Tog‘lar bag‘rida",
+      "published": false
+    },
+    {
+      "id": "taklifla-tort-fasl",
+      "name": "To‘rt fasl",
+      "published": true
+    },
+    {
+      "id": "taklifla-tovus",
+      "name": "Tovus",
+      "published": false
+    },
+    {
+      "id": "taklifla-tungi-saroy",
+      "name": "Tungi Saroy",
+      "published": false
+    },
+    {
+      "id": "taklifla-uchrashuv",
+      "name": "Uchrashuv",
+      "published": false
+    },
+    {
+      "id": "taklifla-yubiley-sahifasi",
+      "name": "Yubiley Sahifasi",
+      "published": false
+    },
+    {
+      "id": "taklifla-yulduzli-tun",
+      "name": "Yulduzli Tun",
+      "published": false
+    },
+    {
+      "id": "taklifla-zarhal-sahifa",
+      "name": "Zarhal Sahifa",
+      "published": false
+    },
+    {
+      "id": "taklifla-zarrin-gullar",
+      "name": "Zarrin gullar",
+      "published": false
+    },
+    {
+      "id": "taklifnomachi-1",
+      "name": "Klassik nafis",
+      "published": false
+    },
+    {
+      "id": "taklifnomachi-12",
+      "name": "Moviy osmon",
+      "published": false
+    },
+    {
+      "id": "taklifnomachi-13",
+      "name": "Oltin atirgul",
+      "published": false
+    },
+    {
+      "id": "taklifnomachi-15",
+      "name": "Monoxrom",
+      "published": false
+    },
+    {
+      "id": "taklifnomachi-16",
+      "name": "Zaytun guli",
+      "published": false
+    },
+    {
+      "id": "taklifnomachi-17",
+      "name": "Atlas ipak",
+      "published": false
+    },
+    {
+      "id": "taklifnomachi-18",
+      "name": "Gul naqshli marosim",
+      "published": false
+    },
+    {
+      "id": "taklifnomachi-19",
+      "name": "Zaytun bog‘i",
+      "published": false
+    },
+    {
+      "id": "tojmahal-oltin-darvozasi",
+      "name": "Tojmahal oltin darvozasi",
+      "published": false
+    },
+    {
+      "id": "toscana",
+      "name": "Toscana",
+      "published": true
+    },
+    {
+      "id": "uchar-gilam",
+      "name": "Uchar Gilam",
+      "published": false
+    },
+    {
+      "id": "vals",
+      "name": "Vals",
+      "published": false
+    },
+    {
+      "id": "velora",
+      "name": "Velora",
+      "published": false
+    },
+    {
+      "id": "velvet",
+      "name": "Velvet",
+      "published": false
+    },
+    {
+      "id": "wedivo-pulau-sehati",
+      "name": "Ko‘ngillar oroli",
+      "published": false
+    },
+    {
+      "id": "whiteless",
+      "name": "Whiteless",
+      "published": false
+    },
+    {
+      "id": "xatna-edition",
+      "name": "Xatna",
+      "published": true
+    },
+    {
+      "id": "yangi-uy",
+      "name": "Yangi Uy",
+      "published": true
+    },
+    {
+      "id": "zarhal-oqshom-card",
+      "name": "Zarhal oqshom",
+      "published": false
+    },
+    {
+      "id": "zarrin-doppi",
+      "name": "Zarrin do‘ppi",
+      "published": false
+    },
+    {
+      "id": "zumrad-naqsh",
+      "name": "Zumrad naqsh",
+      "published": false
+    }
+  ]
+}

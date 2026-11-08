@@ -20,13 +20,13 @@ moduleRuntime._resolveFilename = function (request: string, ...args: any[]) {
   return resolveFilename.call(this, resolved, ...args);
 };
 
-const templateRoot = new URL("../apps/web/public/templates/toscana/", import.meta.url);
+const templateRoot = new URL("../apps/web/public/templates/gulzor/", import.meta.url);
 const read = (file: string) => readFileSync(new URL(file, templateRoot), "utf8");
 const html = read("index.html");
 
 test("Toscana maps the canonical sample across four locales and keeps blank drafts sample-free", async () => {
   const { makeLegacyData } = await import("../apps/web/src/templates/anor/renderer");
-  const fixture = createTemplatePreviewSample("toscana");
+  const fixture = createTemplatePreviewSample("gulzor");
   const locales: Locale[] = ["uz-Latn", "uz-Cyrl", "en", "ru"];
   for (const locale of locales) {
     const data = makeLegacyData(fixture, locale, "", true);
@@ -51,7 +51,7 @@ test("Toscana maps the canonical sample across four locales and keeps blank draf
     assert.ok(data.gallery.every((item) => item.src === "" && item.alt === "" && item.caption === ""));
   }
 
-  const blankInvitation = createInvitation("toscana");
+  const blankInvitation = createInvitation("gulzor");
   const blank = makeLegacyData(blankInvitation, "uz-Latn", "", false);
   assert.equal(blank.groom, "");
   assert.equal(blank.bride, "");

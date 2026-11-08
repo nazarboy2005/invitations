@@ -5,16 +5,16 @@ import test from 'node:test';
 import { TEMPLATES } from '@taklifnoma/contracts';
 
 const root = process.cwd();
-const dir = path.join(root, 'apps/web/public/templates/taklifnomachi-12');
+const dir = path.join(root, 'apps/web/public/templates/moviy-osmon');
 const html = readFileSync(path.join(dir, 'index.html'), 'utf8');
 const adapter = readFileSync(path.join(dir, 'adapter.js'), 'utf8');
 const source = readFileSync(path.join(dir, 'source/demo/12/index.html'), 'utf8');
 
 test('demo 12 stays unpublished and joins the Marxaba renderer', () => {
-  const template = TEMPLATES.find((entry) => entry.id === 'taklifnomachi-12');
+  const template = TEMPLATES.find((entry) => entry.id === 'moviy-osmon');
   assert.ok(template);
   assert.equal(template.published, false);
-  assert.equal(template.previewImage, '/templates/taklifnomachi-12/source/templates/12/assets/hero.png');
+  assert.equal(template.previewImage, '/templates/moviy-osmon/source/templates/12/assets/hero.png');
   assert.match(readFileSync(path.join(root, 'apps/web/src/templates/marxaba/registry.ts'), 'utf8'), /"taklifnomachi-12"/);
   assert.match(readFileSync(path.join(root, 'packages/database/migrations/0099_register_taklifnomachi_12.sql'), 'utf8'), /published\)\s*VALUES\s*\([^\n]+false/i);
 });

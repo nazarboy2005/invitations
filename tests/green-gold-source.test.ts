@@ -10,7 +10,7 @@ import { runInNewContext } from "node:vm";
 import { createInvitation, templateById } from "../packages/contracts/src/index";
 import { createTemplatePreviewSample } from "../apps/web/src/modules/catalog/preview-sample";
 
-const root = new URL("../apps/web/public/templates/green-gold/", import.meta.url);
+const root = new URL("../apps/web/public/templates/zumrad/", import.meta.url);
 const archive = new URL(
   "../Invitations - this folder will be removed from production/Chorlove/Web invitations/",
   import.meta.url,
@@ -23,10 +23,10 @@ test("Green Gold preserves the captured snapshot byte-for-byte", async () => {
   const manifest = JSON.parse(
     await readFile(new URL("source-assets.provenance.json", root), "utf8"),
   );
-  if (archiveHasFile("templates/green-gold/preview-frame.html")) {
+  if (archiveHasFile("templates/zumrad/preview-frame.html")) {
     assert.deepEqual(
       preserved,
-      await readFile(new URL("templates/green-gold/preview-frame.html", archive)),
+      await readFile(new URL("templates/zumrad/preview-frame.html", archive)),
     );
   }
   assert.equal(
@@ -67,7 +67,7 @@ test("Green Gold stages exact design assets and keeps source gallery photos prev
   const recoveredBytes = await readFile(new URL(recovered.file, root));
   assert.equal(recoveredBytes.length, recovered.bytes);
   assert.equal(createHash("sha256").update(recoveredBytes).digest("hex"), recovered.sha256);
-  assert.equal(recovered.sourceUrl, "https://chorlove.uz/images/green-gold/vertical-line.png");
+  assert.equal(recovered.sourceUrl, "https://chorlove.uz/images/zumrad/vertical-line.png");
   assert.match(recovered.transformation, /exact original PNG response/);
   for (const observed of manifest.sourceAssetsFromLive) {
     const bytes = await readFile(new URL(observed.file, root));
@@ -90,7 +90,7 @@ test("Green Gold stages exact design assets and keeps source gallery photos prev
     "gallery-2.webp", "gallery-1.webp", "gallery-3.webp",
     "gallery-6.webp", "gallery-4.webp", "gallery-5.webp",
   ]);
-  const orchidAssets = new URL("../chorlove/orchid-amplop/assets/", root);
+  const orchidAssets = new URL("../ormon-maktubi/assets/", root);
   for (const [index, imageNumber] of [2, 1, 3, 6, 4, 5].entries()) {
     const servedFile = `gallery-${imageNumber}.webp`;
     const bytes = await readFile(new URL(servedFile, orchidAssets));
@@ -202,8 +202,8 @@ test("shared Chorlove stylesheet dependencies resolve to exact local assets", as
     ...[...html.matchAll(/(?:src|href)="(\/[^\"?#]+)"/g)].map((match) => [match[1], root] as const),
   ];
   for (const stylesheet of linkedStylesheets) {
-    const stylesheetUrl = stylesheet.startsWith("/templates/green-gold/")
-      ? new URL(stylesheet.slice("/templates/green-gold/".length), root)
+    const stylesheetUrl = stylesheet.startsWith("/templates/zumrad/")
+      ? new URL(stylesheet.slice("/templates/zumrad/".length), root)
       : new URL(`../${stylesheet.slice("/templates/".length)}`, root);
     const css = await readFile(stylesheetUrl, "utf8");
     for (const [, resource] of css.matchAll(/url\([\"']?([^\)\"']+)/g)) {
@@ -417,17 +417,17 @@ test("Green Gold localized control copy decodes in all four locales", async () =
 
 
 test("Green Gold is internally registered but remains unpublished", async () => {
-  const definition = templateById("green-gold");
+  const definition = templateById("zumrad");
   assert.ok(definition);
   assert.equal(definition.published, false);
   assert.equal(
     definition.previewImage,
-    "/templates/green-gold/catalog-cover-opening.png",
+    "/templates/zumrad/catalog-cover-opening.png",
   );
   assert.equal(definition.previewEventType, "wedding");
   assert.deepEqual(definition.categoryIds, ["wedding"]);
-  const fixture = createTemplatePreviewSample("green-gold");
-  assert.equal(fixture.templateId, "green-gold");
+  const fixture = createTemplatePreviewSample("zumrad");
+  assert.equal(fixture.templateId, "zumrad");
   assert.equal(fixture.eventType, "wedding");
   assert.deepEqual(Object.keys(fixture.content).sort(), ["en", "ru", "uz-Cyrl", "uz-Latn"]);
   assert.deepEqual(
@@ -439,7 +439,7 @@ test("Green Gold is internally registered but remains unpublished", async () => 
     "utf8",
   );
   assert.match(chorloveRenderer, /templateId === "green-gold"\) &&\s*preview &&\s*sampleWishes/);
-  const emptyDraft = createInvitation("green-gold");
+  const emptyDraft = createInvitation("zumrad");
   assert.ok(emptyDraft.gallery.every((item) => !item.url));
   const contracts = await readFile(
     new URL("../../../../../packages/contracts/src/index.ts", root),

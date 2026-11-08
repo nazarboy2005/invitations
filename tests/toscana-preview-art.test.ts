@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import test from "node:test";
 
-const packageRoot = new URL("../apps/web/public/templates/toscana/", import.meta.url);
+const packageRoot = new URL("../apps/web/public/templates/gulzor/", import.meta.url);
 const captureRoot = new URL(
   "../Invitations - this folder will be removed from production/Marxaba/Nikoh/templates/toscana/",
   import.meta.url,

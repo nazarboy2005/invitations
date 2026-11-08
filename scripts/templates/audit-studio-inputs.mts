@@ -8,9 +8,9 @@ import { getDb, closeDb } from "../../packages/database/src/index.ts";
 const output = resolve("docs/qa/2026-11-08-studio-inputs");
 mkdirSync(output, { recursive: true });
 const aliases: Record<string, string> = {
-  anor: "templates/anor/source/index.html", "royal-burgundy-edition": "templates/velvet-royale/index.html",
-  osh: "templates/chorlove/osh/index.html", palov: "templates/chorlove/palov/index.html",
-  "orchid-amplop": "templates/chorlove/orchid-amplop/index.html", "taklifla-zarrin-gullar": "templates/taklifla-zarrin-gullar/template.html",
+  anor: "templates/anor/source/index.html", "royal-burgundy-edition": "templates/baxmal-saroy/index.html",
+  osh: "templates/osh/index.html", palov: "templates/palov/index.html",
+  "orchid-amplop": "templates/ormon-maktubi/index.html", "taklifla-zarrin-gullar": "templates/zarrin-gullar/template.html",
 };
 const base = resolve("apps/web/public");
 function graph(entry: string, files = new Set<string>()) {

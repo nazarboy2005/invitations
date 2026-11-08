@@ -4,7 +4,7 @@ import { readFileSync, existsSync } from "node:fs";
 import { createHash } from "node:crypto";
 import { createInvitation, templateById } from "../packages/contracts/src/index";
 
-const ids = ["olive-manor-edition", "islamic-edition", "monochrome-editorial-edition", "xatna-edition"];
+const ids = ["zaytun", "islomiy", "oq-qora-lavha", "xatna"];
 for (const id of ids) {
   const base = `apps/web/public/templates/${id}`;
   test(`${id}: active page uses complete scoped source and local assets`, () => {
@@ -39,7 +39,7 @@ for (const id of ids) {
     assert.ok(t);
     assert.equal(t.published, true);
     assert.equal(t.previewImage, `/templates/${id}/catalog.webp`);
-    assert.deepEqual(t.supportedEventTypes, [id === "xatna-edition" ? "sunnat-toyi" : "wedding"]);
+    assert.deepEqual(t.supportedEventTypes, [id === "xatna" ? "sunnat-toyi" : "wedding"]);
     assert.equal(createInvitation(id).rsvp.maxPartySize, 1);
   });
 }

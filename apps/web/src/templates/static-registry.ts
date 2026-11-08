@@ -1,8 +1,8 @@
-import { imageSlots, IMAGE_LOCATION_QR } from "./ivory-rose-card/layout";
-import { ivoryRoseComposition } from "./ivory-rose-card/composition";
+import { imageSlots, IMAGE_LOCATION_QR } from "./oq-atirgul/layout";
+import { ivoryRoseComposition } from "./oq-atirgul/composition";
 import { zumradNaqshSlots, ZUMRAD_NAQSH_QR } from "./zumrad-naqsh/layout";
 import { lolaMaktubi } from "./lola-maktubi/layout";
-import { moviyRavoq } from "./moviy-ravoq-card/layout";
+import { moviyRavoq } from "./moviy-ravoq/layout";
 import { zarhalOqshom } from "./zarhal-oqshom-card/layout";
 import { saharIfori } from "./sahar-ifori/layout";
 import type { StaticImageDesign } from "./static-design";
@@ -10,8 +10,8 @@ import type { StaticImageDesign } from "./static-design";
 /** Server-side, explicit allowlist; private asset paths never come from requests. */
 export const STATIC_IMAGE_DESIGNS: Readonly<Record<string, StaticImageDesign>> =
   {
-    "ivory-rose-card": {
-      folder: "ivory-rose-card",
+    "oq-atirgul": {
+      folder: "oq-atirgul",
       background: "background.png",
       ink: "#55513d",
       qrInk: "#454337",
@@ -31,7 +31,7 @@ export const STATIC_IMAGE_DESIGNS: Readonly<Record<string, StaticImageDesign>> =
       slots: zumradNaqshSlots,
     },
     "lola-maktubi": lolaMaktubi,
-    "moviy-ravoq-card": moviyRavoq,
+    "moviy-ravoq": moviyRavoq,
     "zarhal-oqshom-card": zarhalOqshom,
     "sahar-ifori": saharIfori,
   };

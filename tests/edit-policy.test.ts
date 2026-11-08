@@ -27,7 +27,7 @@ const state = {
 const image = () =>
   normalizeInvitation({
     ...completeInvitation(),
-    templateId: "ivory-rose-card",
+    templateId: "oq-atirgul",
     imageExportedAt: "2027-06-01T10:00:00Z",
   });
 const web = () => ({ ...completeInvitation(), status: "published" as const });
@@ -89,7 +89,7 @@ test("static only permits mapped location and bounded date/time after export", (
     );
   assert.throws(
     edit(base, (i) => {
-      i.templateData = { "ivory-rose-card": { extra: "bypass" } };
+      i.templateData = { "oq-atirgul": { extra: "bypass" } };
     }),
     /STATIC_CONTENT/,
   );
@@ -194,9 +194,9 @@ test("all saves close at the deadline, including static drafts locked on export"
 });
 test("secondary ceremony dates/enablement and source family identities are protected", () => {
   const base = web();
-  base.templateId = "wedivo-pulau-sehati";
+  base.templateId = "kongillar-oroli";
   base.templateData = {
-    "wedivo-pulau-sehati": {
+    "kongillar-oroli": {
       coInviters: "Family",
       secondaryEvent: { enabled: true, date: "2027-06-16", time: "12:00" },
     },
@@ -204,21 +204,21 @@ test("secondary ceremony dates/enablement and source family identities are prote
   assert.equal(lastCeremonyDate(base), "2027-06-16");
   assert.throws(
     edit(base, (i) => {
-      (i.templateData["wedivo-pulau-sehati"] as any).secondaryEvent.date =
+      (i.templateData["kongillar-oroli"] as any).secondaryEvent.date =
         "2028-01-01";
     }),
     /CEREMONY/,
   );
   assert.throws(
     edit(base, (i) => {
-      (i.templateData["wedivo-pulau-sehati"] as any).coInviters =
+      (i.templateData["kongillar-oroli"] as any).coInviters =
         "Another family";
     }),
     /NAME/,
   );
   assert.doesNotThrow(
     edit(base, (i) => {
-      (i.templateData["wedivo-pulau-sehati"] as any).secondaryEvent.time =
+      (i.templateData["kongillar-oroli"] as any).secondaryEvent.time =
         "13:00";
     }),
   );

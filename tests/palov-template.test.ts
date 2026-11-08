@@ -6,7 +6,7 @@ import path from "node:path";
 import test from "node:test";
 
 const root = process.cwd();
-const template = path.join(root, "apps/web/public/templates/invitate-palov");
+const template = path.join(root, "apps/web/public/templates/osh-ziyofati");
 const read = (relative: string) => readFileSync(path.join(template, relative), "utf8");
 
 test("Palov package preserves the source opening and loads only local source assets", () => {
@@ -75,13 +75,13 @@ test("Palov local font stylesheet has no remote font requests", () => {
 });
 
 test("Invitate Palov registration publishes only for morning osh compatibility", () => {
-  const template = TEMPLATES.find((item) => item.id === "invitate-palov");
+  const template = TEMPLATES.find((item) => item.id === "osh-ziyofati");
   assert.ok(template);
   assert.deepEqual(template.categoryIds, ["osh"]);
   assert.deepEqual(template.supportedEventTypes, ["osh"]);
   assert.equal(template.published, false, "runtime catalog publication comes from the database");
-  assert.equal(template.previewImage, "/templates/invitate-palov/preview.png");
-  assert.ok(existsSync(path.join(root, "apps/web/public/templates/invitate-palov/preview.png")));
+  assert.equal(template.previewImage, "/templates/osh-ziyofati/preview.png");
+  assert.ok(existsSync(path.join(root, "apps/web/public/templates/osh-ziyofati/preview.png")));
   assert.match(read("source-provenance.json"), /"dimensions": "480x860"/);
   assert.match(readFileSync(path.join(root, "packages/database/migrations/0122_register_invitate_palov.sql"), "utf8"), /VALUES \('invitate-palov', 'osh'\)/);
   assert.match(readFileSync(path.join(root, "packages/database/migrations/0132_publish_invitate_palov.sql"), "utf8"), /SET published = true/);

@@ -1,7 +1,7 @@
 const { chromium } = require("../apps/web/node_modules/playwright");
 const fs = require("fs"),
   assert = require("assert/strict");
-const out = "apps/web/src/templates/taklifla-tort-fasl/qa";
+const out = "apps/web/src/templates/tort-fasl/qa";
 fs.mkdirSync(out, { recursive: true });
 const fixture = JSON.parse(
   fs.readFileSync(".tmp-fasllar-fixture.json", "utf8"),

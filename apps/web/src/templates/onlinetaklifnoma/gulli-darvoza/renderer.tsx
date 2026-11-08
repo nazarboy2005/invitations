@@ -109,7 +109,7 @@ export function GulliDarvozaInvitation({
     );
   }, [message]);
 
-  const frameUrl = publicAsset(`/templates/onlinetaklifnoma-gulli-darvoza/index.html${preview && silentPlayback ? "?qaSilent=1" : ""}`);
+  const frameUrl = publicAsset(`/templates/gulli-darvoza/index.html${preview && silentPlayback ? "?qaSilent=1" : ""}`);
   const mode = fullPreview ? styles.full : preview ? styles.preview : styles.public;
   return (
     <div className={mode}>

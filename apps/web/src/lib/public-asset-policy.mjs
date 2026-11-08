@@ -1,8 +1,10 @@
+import { canonicalTemplateAssetPath } from "./template-asset-aliases.mjs";
+
 /** Preserved captures are evidence, not additional runnable invitation pages. */
 export function isPrivateTemplateArtifact(pathname) {
   let path;
   try {
-    path = decodeURIComponent(pathname);
+    path = canonicalTemplateAssetPath(decodeURIComponent(pathname));
   } catch {
     return true;
   }
@@ -11,10 +13,10 @@ export function isPrivateTemplateArtifact(pathname) {
   return (
     (/\/source\//.test(path) && /\.html?\/?$/i.test(path)) ||
     path ===
-      "/templates/invitate-wedding/assets/captured/5b73decb38ff5c8c.js" ||
+      "/templates/gulchambar/assets/captured/5b73decb38ff5c8c.js" ||
     path ===
-      "/templates/taklifnomachi-1/source/templates/1/js/QJtgeIS73Tgv.js" ||
-    path === "/templates/taklifnomachi-1/source/templates/1/js/Q362wQYV0bJ4.js"
+      "/templates/nafosat/source/templates/1/js/QJtgeIS73Tgv.js" ||
+    path === "/templates/nafosat/source/templates/1/js/Q362wQYV0bJ4.js"
   );
 }
 

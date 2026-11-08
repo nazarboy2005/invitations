@@ -46,7 +46,7 @@ export function editingClosed(
   );
 }
 export function secondaryCeremony(invitation: Invitation) {
-  const data = invitation.templateData["wedivo-pulau-sehati"] as
+  const data = invitation.templateData["kongillar-oroli"] as
     { secondaryEvent?: { enabled?: boolean; date?: string } } | undefined;
   return {
     enabled: data?.secondaryEvent?.enabled ?? false,
@@ -62,7 +62,7 @@ export function lastCeremonyDate(invitation: Invitation): string {
 export function anniversaryYears(invitation: Invitation) {
   return (
     (
-      invitation.templateData["taklifla-yubiley-sahifasi"] as
+      invitation.templateData["umr-bahori"] as
         { years?: number | null } | undefined
     )?.years ?? null
   );
@@ -137,9 +137,9 @@ export function assertCreatorCanEdit(
       throw new Error("NAME_CHANGE_REQUIRES_REVIEW");
   }
   for (const id of [
-    "taklifla-gulbog",
-    "taklifla-zarrin-gullar",
-    "wedivo-pulau-sehati",
+    "gulbog",
+    "zarrin-gullar",
+    "kongillar-oroli",
   ]) {
     const before = previous.templateData[id] as
       Record<string, unknown> | undefined;

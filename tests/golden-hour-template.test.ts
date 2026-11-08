@@ -7,7 +7,7 @@ import { templateById } from "../packages/contracts/src/index";
 import { createTemplatePreviewSample } from "../apps/web/src/modules/catalog/preview-sample";
 
 const root = process.cwd();
-const pub = path.join(root, "apps/web/public/templates/golden-hour");
+const pub = path.join(root, "apps/web/public/templates/oltin-lahza");
 const source = path.join(
   root,
   "Invitations - this folder will be removed from production/Invitate/Web invitations/invitate.uz",
@@ -16,7 +16,7 @@ const read = (base: string, file: string) =>
   readFileSync(path.join(base, file), "utf8");
 
 test("Golden Hour is published for birthday events", () => {
-  const template = templateById("golden-hour");
+  const template = templateById("oltin-lahza");
   assert.ok(template);
   assert.equal(template.published, true);
   assert.equal(template.previewEventType, "birthday");
@@ -25,20 +25,20 @@ test("Golden Hour is published for birthday events", () => {
   assert.equal(template.priceMinor, 15_000_000);
   assert.equal(
     template.previewImage,
-    "/templates/golden-hour/assets/images/golden-hour/pink.png",
+    "/templates/oltin-lahza/assets/images/oltin-lahza/pink.png",
   );
   assert.equal(
-    createTemplatePreviewSample("golden-hour").eventType,
+    createTemplatePreviewSample("oltin-lahza").eventType,
     "birthday",
   );
 });
 
 test("catalog artwork is the exact portrait hero image from the capture", () => {
   const packaged = readFileSync(
-    path.join(pub, "assets/images/golden-hour/pink.png"),
+    path.join(pub, "assets/images/oltin-lahza/pink.png"),
   );
   const original = readFileSync(
-    path.join(source, "assets/images/golden-hour/pink.png"),
+    path.join(source, "assets/images/oltin-lahza/pink.png"),
   );
   assert.equal(packaged.readUInt32BE(16), 744);
   assert.equal(packaged.readUInt32BE(20), 1280);
@@ -58,10 +58,10 @@ test("local package keeps the captured structure and avoids site runtime request
     "assets/css/contract-adapter.css",
     "assets/js/golden-hour-source.js",
     "assets/fonts",
-    "assets/images/golden-hour/flowers.png",
-    "assets/images/golden-hour/flocake.png",
-    "assets/images/golden-hour/location.png",
-    "assets/images/golden-hour/footerimage.png",
+    "assets/images/oltin-lahza/flowers.png",
+    "assets/images/oltin-lahza/flocake.png",
+    "assets/images/oltin-lahza/location.png",
+    "assets/images/oltin-lahza/footerimage.png",
   ])
     assert.ok(existsSync(path.join(pub, file)), `${file} is packaged`);
   assert.match(html, /class="hero"/);
@@ -110,24 +110,24 @@ test("source stylesheet, script, and five artwork files are preserved exactly", 
     ["assets/js/golden-hour.js", "assets/js/golden-hour-reference.js"],
     ["assets/audio/lanadel.mp3", "assets/audio/lanadel.mp3"],
     [
-      "assets/images/golden-hour/pink.png",
-      "assets/images/golden-hour/pink.png",
+      "assets/images/oltin-lahza/pink.png",
+      "assets/images/oltin-lahza/pink.png",
     ],
     [
-      "assets/images/golden-hour/flowers.png",
-      "assets/images/golden-hour/flowers.png",
+      "assets/images/oltin-lahza/flowers.png",
+      "assets/images/oltin-lahza/flowers.png",
     ],
     [
-      "assets/images/golden-hour/flocake.png",
-      "assets/images/golden-hour/flocake.png",
+      "assets/images/oltin-lahza/flocake.png",
+      "assets/images/oltin-lahza/flocake.png",
     ],
     [
-      "assets/images/golden-hour/location.png",
-      "assets/images/golden-hour/location.png",
+      "assets/images/oltin-lahza/location.png",
+      "assets/images/oltin-lahza/location.png",
     ],
     [
-      "assets/images/golden-hour/footerimage.png",
-      "assets/images/golden-hour/footerimage.png",
+      "assets/images/oltin-lahza/footerimage.png",
+      "assets/images/oltin-lahza/footerimage.png",
     ],
   ];
   for (const [captured, packaged] of assets) {
@@ -143,7 +143,7 @@ test("Golden Hour omits unsupported gift fields absent from its source", () => {
   const renderer = read(root, "apps/web/src/templates/invitate/renderer.tsx");
   const adapter = read(
     root,
-    "apps/web/src/templates/invitate/golden-hour/adapter.ts",
+    "apps/web/src/templates/invitate/oltin-lahza/adapter.ts",
   );
   const sharedMapper = read(root, "apps/web/src/templates/anor/renderer.tsx");
   const registry = read(root, "apps/web/src/templates/invitate/registry.ts");

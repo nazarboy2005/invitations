@@ -4,7 +4,7 @@ import { readFile } from "node:fs/promises";
 import { createHash } from "node:crypto";
 import { existsSync } from "node:fs";
 
-const base = "apps/web/public/templates/onlinetaklifnoma-jannat-bogi";
+const base = "apps/web/public/templates/jannat-bogi";
 
 test("Jannat source art and fonts match recorded source URLs and hashes", async () => {
   const manifest = JSON.parse(await readFile(`${base}/source/assets-provenance.json`, "utf8"));

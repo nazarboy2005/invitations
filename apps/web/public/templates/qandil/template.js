@@ -25,7 +25,7 @@
     if(!window.QandilLantern)return;var col=Math.min(innerWidth,480),w=Math.min(380,Math.max(190,Math.round(Math.min(col*.48,innerHeight*.235)*(Math.min(devicePixelRatio||1,tierLite()?1:2)))));
     trigger.innerHTML='<i class="intro__chain" aria-hidden="true"></i><span class="qandil__lamp" aria-hidden="true"><canvas class="qandil__cold"></canvas><canvas class="qandil__warm"></canvas><canvas class="qandil__bloom"></canvas><canvas class="qandil__glow"></canvas></span>';
     lantern=window.QandilLantern.render({px:w,letters:letters,font:'"Great Vibes", "Cormorant Garamond", cursive'});
-    ["cold","warm","glow","bloom"].forEach(function(layer){var ctx=lantern[layer].getContext("2d");});
+    ["cold","warm","glow","gullar-bayrami"].forEach(function(layer){var ctx=lantern[layer].getContext("2d");});
     $$(".qandil__cold").forEach(function(c){copyCanvas(c,lantern.cold)});$$(".qandil__warm").forEach(function(c){copyCanvas(c,lantern.warm)});$$(".qandil__glow").forEach(function(c){copyCanvas(c,lantern.glow)});
     var bloom=d.createElement("canvas");bloom.width=lantern.glow.width;bloom.height=lantern.glow.height;var bg=bloom.getContext("2d");bg.filter="blur("+Math.max(5,w*.045)+"px)";bg.drawImage(lantern.glow,0,0);bg.filter="none";lantern.bloom=bloom;$$(".qandil__bloom").forEach(function(c){copyCanvas(c,bloom)});
     var chain=window.QandilLantern.chain(Math.max(48,Math.round(w*.28))).toDataURL("image/png");$$('.qandil__chain,.intro__chain').forEach(function(el){el.style.backgroundImage='url("'+chain+'")'});

@@ -1,6 +1,6 @@
 import type { Invitation, Locale } from "@taklifnoma/contracts";
 import { formatDate } from "../date-format";
-import type { ImageSlot } from "../ivory-rose-card/layout";
+import type { ImageSlot } from "../oq-atirgul/layout";
 
 export const ZUMRAD_NAQSH_ID = "zumrad-naqsh";
 export const ZUMRAD_NAQSH_QR = { x: 645, y: 1733, size: 210 };

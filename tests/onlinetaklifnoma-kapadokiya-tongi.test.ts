@@ -4,7 +4,7 @@ import { readFile } from "node:fs/promises";
 import { createHash } from "node:crypto";
 import { existsSync } from "node:fs";
 
-const base = "apps/web/public/templates/onlinetaklifnoma-kapadokiya-tongi";
+const base = "apps/web/public/templates/kapadokiya-tongi";
 
 test("Kapadokiya source assets match their source URLs and checksums", async () => {
   const manifest = JSON.parse(await readFile(`${base}/source/assets-provenance.json`, "utf8"));

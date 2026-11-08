@@ -5,25 +5,25 @@ import { test } from "node:test";
 import { createInvitation, templateById } from "@taklifnoma/contracts";
 import { createTemplatePreviewSample } from "../apps/web/src/modules/catalog/preview-sample";
 
-const source = new URL("../apps/web/public/templates/cloud-castle/index.html", import.meta.url);
-const bridge = new URL("../apps/web/public/templates/cloud-castle/bridge.js", import.meta.url);
-const preview = new URL("../apps/web/public/templates/cloud-castle/preview-opening.png", import.meta.url);
-const provenance = new URL("../apps/web/public/templates/cloud-castle/source/provenance.json", import.meta.url);
+const source = new URL("../apps/web/public/templates/bulutlar-qasri/index.html", import.meta.url);
+const bridge = new URL("../apps/web/public/templates/bulutlar-qasri/bridge.js", import.meta.url);
+const preview = new URL("../apps/web/public/templates/bulutlar-qasri/preview-opening.png", import.meta.url);
+const provenance = new URL("../apps/web/public/templates/bulutlar-qasri/source/provenance.json", import.meta.url);
 const pageModule = new URL("../Invitations - this folder will be removed from production/Chorlove/Web invitations/_next/static/chunks/14t58uni224ve.js", import.meta.url);
 const motionRuntime = new URL("../Invitations - this folder will be removed from production/Chorlove/Web invitations/_next/static/chunks/0ceoe4zwq362f.js", import.meta.url);
 const sourceCapture = new URL("../Invitations - this folder will be removed from production/Chorlove/Web invitations/templates/cloud-castle/preview-frame.html", import.meta.url);
 const sourceGift = new URL("../Invitations - this folder will be removed from production/Chorlove/Web invitations/images/cloud-castle/gift/gift.webp", import.meta.url);
-const packagedGift = new URL("../apps/web/public/templates/cloud-castle/assets/gift/gift.webp", import.meta.url);
+const packagedGift = new URL("../apps/web/public/templates/bulutlar-qasri/assets/gift/gift.webp", import.meta.url);
 const sourceGallery = new URL("../Invitations - this folder will be removed from production/Chorlove/Web invitations/images/templates/orchid-amplop/", import.meta.url);
-const packagedGallery = new URL("../apps/web/public/templates/cloud-castle/assets/gallery/", import.meta.url);
+const packagedGallery = new URL("../apps/web/public/templates/bulutlar-qasri/assets/gallery/", import.meta.url);
 const optionalSourceText = async (url: URL) => readFile(url, "utf8").catch((error: NodeJS.ErrnoException) => error.code === "ENOENT" ? null : Promise.reject(error));
 
 test("Cloud Castle is published for weddings independently of category", () => {
-  const template = templateById("cloud-castle");
+  const template = templateById("bulutlar-qasri");
   assert.equal(template?.published, true);
   assert.deepEqual(template?.categoryIds, ["wedding"]);
   assert.deepEqual(template?.supportedEventTypes, ["wedding"]);
-  assert.equal(template?.previewImage, "/templates/cloud-castle/preview-opening.png");
+  assert.equal(template?.previewImage, "/templates/bulutlar-qasri/preview-opening.png");
 });
 
 test("Cloud Castle catalog artwork is a clean portrait capture with recorded provenance", async () => {
@@ -46,7 +46,7 @@ test("Cloud Castle catalog artwork is a clean portrait capture with recorded pro
 
 test("Cloud Castle package contains only sanitized markup and no captured website runtime", async () => {
   const html = await readFile(source, "utf8");
-  for (const capturedValue of ["Muhammad", "Xadicha", "Abdurahmonovlar", "Azizbek", "Madina", "chorlove.uz", "orchid-amplop", "Patrick Watson"]) {
+  for (const capturedValue of ["Muhammad", "Xadicha", "Abdurahmonovlar", "Azizbek", "Madina", "chorlove.uz", "ormon-maktubi", "Patrick Watson"]) {
     assert.equal(html.includes(capturedValue), false, `unexpected captured value: ${capturedValue}`);
   }
   assert.equal(/<script[^>]+src="\/_next\//.test(html), false);
@@ -91,8 +91,8 @@ test("Cloud Castle preview uses only gallery artwork referenced by its captured 
   const renderer = await readFile(new URL("../apps/web/src/templates/chorlove/renderer.tsx", import.meta.url), "utf8");
   const details = JSON.parse(await readFile(provenance, "utf8"));
   const files = ["gallery-2.webp", "gallery-1.webp", "gallery-3.webp", "gallery-6.webp", "gallery-4.webp"];
-  const previewSample = createTemplatePreviewSample("cloud-castle");
-  const creatorInvitation = createInvitation("cloud-castle");
+  const previewSample = createTemplatePreviewSample("bulutlar-qasri");
+  const creatorInvitation = createInvitation("bulutlar-qasri");
   assert.deepEqual(details.galleryPreviewSamples.sourceAssets, files.map((file) => `images/templates/orchid-amplop/${file}`));
   assert.equal(details.galleryPreviewSamples.packageAssetDirectory, "../assets/gallery/");
   assert.deepEqual(

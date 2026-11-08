@@ -13,7 +13,7 @@ import {
 import { makeWeddingFields } from "../apps/web/src/templates/invitate/wedding-fields";
 
 test("legacy invitations default to no artist lineup and empty program descriptions", () => {
-  const invitation = createInvitation("invitate-wedding");
+  const invitation = createInvitation("gulchambar");
   const legacy = structuredClone(invitation) as Record<string, any>;
   delete legacy.artistLineup;
   for (const content of Object.values(legacy.content) as Record<string, any>[]) {
@@ -26,7 +26,7 @@ test("legacy invitations default to no artist lineup and empty program descripti
 });
 
 test("catalog sample keeps source artists and descriptions in the shared fixture", () => {
-  const sample = createTemplatePreviewSample("invitate-wedding");
+  const sample = createTemplatePreviewSample("gulchambar");
   assert.deepEqual(sample.program, createTemplatePreviewSample("anor").program);
   assert.equal(sample.artistLineup.length, 8);
   assert.equal(
@@ -43,21 +43,21 @@ test("catalog sample keeps source artists and descriptions in the shared fixture
   assert.equal(sampleFields.artists[0].name, "Davron Kabulov");
   assert.equal(sampleFields.program[0].description, sample.content["uz-Latn"].programDescriptions[sample.program[0].id]);
 
-  const invitation = createInvitation("invitate-wedding");
+  const invitation = createInvitation("gulchambar");
   assert.deepEqual(invitation.artistLineup, []);
   assert.deepEqual(invitation.content[invitation.defaultLocale].programDescriptions, {});
   assert.equal(hasAuthoredInvitationContent(invitation), false);
 });
 
 test("artist-only or description-only edits disable the sample-preview replacement", () => {
-  const descriptionOnly = createInvitation("invitate-wedding");
+  const descriptionOnly = createInvitation("gulchambar");
   descriptionOnly.program = [{ id: "details", time: "18:00" }];
   descriptionOnly.content[descriptionOnly.defaultLocale].programDescriptions = {
     details: "A creator-authored description.",
   };
   assert.equal(hasAuthoredInvitationContent(descriptionOnly), true);
 
-  const artistOnly = createInvitation("invitate-wedding");
+  const artistOnly = createInvitation("gulchambar");
   artistOnly.artistLineup = [
     {
       id: "artist",
@@ -71,7 +71,7 @@ test("artist-only or description-only edits disable the sample-preview replaceme
 });
 
 test("creator content maps localized artist and program fields into the public renderer", () => {
-  const invitation = createInvitation("invitate-wedding");
+  const invitation = createInvitation("gulchambar");
   invitation.eventType = "wedding";
   invitation.enabledLocales = ["uz-Latn", "ru"];
   invitation.content["uz-Latn"] = {
@@ -128,8 +128,8 @@ test("creator content maps localized artist and program fields into the public r
 });
 
 test("artist source markup has no hardcoded creator-facing lineup and renders only supplied entries", () => {
-  const html = readFileSync("apps/web/public/templates/invitate-wedding/index.html", "utf8");
-  const bridge = readFileSync("apps/web/public/templates/invitate-wedding/wedding-adapter.js", "utf8");
+  const html = readFileSync("apps/web/public/templates/gulchambar/index.html", "utf8");
+  const bridge = readFileSync("apps/web/public/templates/gulchambar/wedding-adapter.js", "utf8");
   const artistSection = html.match(/<section id="artists"[\s\S]*?<\/section>/)?.[0] ?? "";
   assert.match(artistSection, /<section id="artists" hidden>/);
   assert.doesNotMatch(artistSection, /Davron Kabulov|Yulduz Usmonova|Boshlovchi/);

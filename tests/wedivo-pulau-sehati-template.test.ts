@@ -6,7 +6,7 @@ import { resolve } from "node:path";
 import test from "node:test";
 import { runInNewContext } from "node:vm";
 
-const root = resolve("apps/web/public/templates/wedivo-pulau-sehati");
+const root = resolve("apps/web/public/templates/kongillar-oroli");
 const read = (file: string) => readFileSync(resolve(root, file), "utf8");
 const digest = (bytes: Buffer | string) =>
   createHash("sha256").update(bytes).digest("hex");
@@ -134,32 +134,7 @@ test("real typed adapter preserves authored values, stable item IDs, timezone an
     process.execPath,
     [
       "-e",
-      `
-    process.env.TSX_TSCONFIG_PATH=require('path').resolve('apps/web/tsconfig.json');
-    require('tsx/cjs');require.extensions['.css']=m=>m.exports={};
-    const assert=require('node:assert/strict');
-    const {makePulauSehatiPayload}=require('./apps/web/src/templates/wedivo-pulau-sehati/adapter.ts');
-    const {createInvitation,addLanguage}=require('./packages/contracts/src/index.ts');
-    const {createTemplatePreviewSample}=require('./apps/web/src/modules/catalog/preview-sample.ts');
-    let blank=createInvitation();
-    let payload=makePulauSehatiPayload(blank,'uz-Latn','',{invitationId:'private-test',preview:false}).payload;
-    assert.equal(payload.data.groom,'');assert.equal(payload.data.bride,'');assert.equal(payload.date,'');assert.deepEqual(payload.data.gallery,[]);assert.deepEqual(payload.data.program,[]);
-    for(const locale of ['uz-Latn','uz-Cyrl','en','ru']) {
-      const invitation=createTemplatePreviewSample('anor');
-      invitation.startsAt='2027-06-12T17:00';invitation.timezone='Asia/Tashkent';
-      invitation.content[locale].people=['Authored A','Authored B'];
-      invitation.content[locale].personalGreeting='Welcome, {name}';
-      invitation.content[locale].programDescriptions={'sample-arrival':'Authored description'};
-      const snapshot=JSON.stringify(invitation);
-      const mapped=makePulauSehatiPayload(invitation,locale,'Personal guest',{invitationId:'public-test',guestToken:'opaque-test-token',preview:false,sampleWishes:true}).payload;
-      assert.equal(mapped.data.groom,'Authored A');assert.equal(mapped.data.bride,'Authored B');
-      assert.equal(mapped.data.greeting,'Welcome, Personal guest');assert.equal(mapped.time,'17:00');assert.equal(mapped.date,'2027-06-12');assert.equal(mapped.timezoneOffset,5);
-      assert.deepEqual(mapped.data.program.map(x=>x.id),invitation.program.map(x=>x.id));
-      assert.equal(mapped.data.program[0].description,'Authored description');
-      assert.equal(mapped.data.wishes.length,0,'public data cannot include preview wishes');
-      assert.equal(JSON.stringify(invitation),snapshot,'adapter must not mutate or persist fixtures');
-    }
-  `,
+      `\n    process.env.TSX_TSCONFIG_PATH=require('path').resolve('apps/web/tsconfig.json');\n    require('tsx/cjs');require.extensions['.css']=m=>m.exports={};\n    const assert=require('node:assert/strict');\n    const {makePulauSehatiPayload}=require('./apps/web/src/templates/kongillar-oroli/adapter.ts');\n    const {createInvitation,addLanguage}=require('./packages/contracts/src/index.ts');\n    const {createTemplatePreviewSample}=require('./apps/web/src/modules/catalog/preview-sample.ts');\n    let blank=createInvitation();\n    let payload=makePulauSehatiPayload(blank,'uz-Latn','',{invitationId:'private-test',preview:false}).payload;\n    assert.equal(payload.data.groom,'');assert.equal(payload.data.bride,'');assert.equal(payload.date,'');assert.deepEqual(payload.data.gallery,[]);assert.deepEqual(payload.data.program,[]);\n    for(const locale of ['uz-Latn','uz-Cyrl','en','ru']) {\n      const invitation=createTemplatePreviewSample('anor');\n      invitation.startsAt='2027-06-12T17:00';invitation.timezone='Asia/Tashkent';\n      invitation.content[locale].people=['Authored A','Authored B'];\n      invitation.content[locale].personalGreeting='Welcome, {name}';\n      invitation.content[locale].programDescriptions={'sample-arrival':'Authored description'};\n      const snapshot=JSON.stringify(invitation);\n      const mapped=makePulauSehatiPayload(invitation,locale,'Personal guest',{invitationId:'public-test',guestToken:'opaque-test-token',preview:false,sampleWishes:true}).payload;\n      assert.equal(mapped.data.groom,'Authored A');assert.equal(mapped.data.bride,'Authored B');\n      assert.equal(mapped.data.greeting,'Welcome, Personal guest');assert.equal(mapped.time,'17:00');assert.equal(mapped.date,'2027-06-12');assert.equal(mapped.timezoneOffset,5);\n      assert.deepEqual(mapped.data.program.map(x=>x.id),invitation.program.map(x=>x.id));\n      assert.equal(mapped.data.program[0].description,'Authored description');\n      assert.equal(mapped.data.wishes.length,0,'public data cannot include preview wishes');\n      assert.equal(JSON.stringify(invitation),snapshot,'adapter must not mutate or persist fixtures');\n    }\n  `,
     ],
     { cwd: resolve("."), encoding: "utf8", timeout: 60_000 },
   );

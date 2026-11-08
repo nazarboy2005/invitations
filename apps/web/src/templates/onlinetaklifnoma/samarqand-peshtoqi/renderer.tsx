@@ -77,7 +77,7 @@ export function SamarqandPeshtoqInvitation({
     frame.current?.contentWindow?.postMessage({ type: "samarqand-peshtoqi:update", payload: message }, window.location.origin);
   }, [message]);
 
-  const frameUrl = publicAsset(`/templates/onlinetaklifnoma-samarqand-peshtoqi/index.html${preview && silentPlayback ? "?qaSilent=1" : ""}`);
+  const frameUrl = publicAsset(`/templates/samarqand-peshtoqi/index.html${preview && silentPlayback ? "?qaSilent=1" : ""}`);
   const mode = fullPreview ? styles.full : preview ? styles.preview : styles.public;
   return (
     <div className={mode}>

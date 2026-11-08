@@ -39,7 +39,7 @@ test(
       displayName: "Disposable Barakali verification",
       isAdmin: false,
     };
-    let invitation = createInvitation("taklifla-barakali");
+    let invitation = createInvitation("baraka");
     invitation.eventType = "birthday";
     let browser: any;
     const checks: string[] = [];
@@ -112,7 +112,7 @@ test(
         "Authenticated four-locale save/reopen preserves authored fields, authored story chapters and venue",
       );
       const originalShared = structuredClone(invitation);
-      for (const templateId of (process.env.TAKLIFLA_PRIVATE_QA ? [] : ["konfetti", "taklifla-barakali"])) {
+      for (const templateId of (process.env.TAKLIFLA_PRIVATE_QA ? [] : ["konfetti", "baraka"])) {
         response = await request(
           `/api/invitations/${invitation.id}`,
           { invitation: { ...invitation, templateId } },

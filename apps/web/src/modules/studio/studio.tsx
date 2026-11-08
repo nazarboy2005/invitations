@@ -107,44 +107,44 @@ import { VenueLink } from "./venue-link";
 import { AnorInvitation } from "@/templates/anor";
 import { isMarxabaTemplate, MarxabaInvitation } from "@/templates/marxaba";
 import { isInvitateTemplate, InvitateInvitation } from "@/templates/invitate";
-import { VelvetRoyaleInvitation } from "@/templates/velvet-royale/renderer";
-import { OliveManorInvitation } from "@/templates/olive-manor/renderer";
-import { IslamicEditionInvitation } from "@/templates/islamic-edition/renderer";
-import { MonochromeEditorialInvitation } from "@/templates/monochrome-editorial-edition/renderer";
-import { XatnaEditionInvitation } from "@/templates/xatna-edition/renderer";
+import { VelvetRoyaleInvitation } from "@/templates/baxmal-saroy/renderer";
+import { OliveManorInvitation } from "@/templates/zaytun/renderer";
+import { IslamicEditionInvitation } from "@/templates/islomiy/renderer";
+import { MonochromeEditorialInvitation } from "@/templates/oq-qora-lavha/renderer";
+import { XatnaEditionInvitation } from "@/templates/xatna/renderer";
 import { GulliDarvozaInvitation } from "@/templates/onlinetaklifnoma/gulli-darvoza";
-import { OltinDarvozaInvitation } from "@/templates/onlinetaklifnoma/oltin-darvoza-ortidagi-baxt";
+import { OltinDarvozaInvitation } from "@/templates/onlinetaklifnoma/baxt-darvozasi";
 import { MingBirKechaInvitation } from "@/templates/onlinetaklifnoma/ming-bir-kecha";
 import { ZarrinDoppiInvitation } from "@/templates/onlinetaklifnoma/zarrin-doppi";
 import { AndalusDarvozasiInvitation } from "@/templates/onlinetaklifnoma/andalus-darvozasi";
 import { SamarqandPeshtoqInvitation } from "@/templates/onlinetaklifnoma/samarqand-peshtoqi";
 import { ShishaBogInvitation } from "@/templates/onlinetaklifnoma/shisha-bog";
 import { KapadokiyaTongiInvitation } from "@/templates/onlinetaklifnoma/kapadokiya-tongi";
-import { BuxoroRavoqInvitation } from "@/templates/onlinetaklifnoma/buxoro-ravoq";
+import { BuxoroRavoqInvitation } from "@/templates/onlinetaklifnoma/buxoro-ravogi";
 import { JannatBogiInvitation } from "@/templates/onlinetaklifnoma/jannat-bogi";
-import { TojmahalOltinDarvozasiInvitation } from "@/templates/onlinetaklifnoma/tojmahal-oltin-darvozasi";
-import { WedivoPulauSehati } from "@/templates/wedivo-pulau-sehati/renderer";
-import { TakliflaAsalari } from "@/templates/taklifla-asalari/renderer";
-import { TungiSaroyInvitation } from "@/templates/taklifla-tungi-saroy/renderer";
-import { TakliflaTovus } from "@/templates/taklifla-tovus/renderer";
-import { TakliflaTortFasl } from "@/templates/taklifla-tort-fasl/renderer";
-import { TakliflaFayzliXonadonInvitation } from "@/templates/taklifla-fayzli-xonadon/renderer";
-import { TakliflaErtak } from "@/templates/taklifla-ertak/renderer";
-import { TakliflaGulbog } from "@/templates/taklifla-gulbog/renderer";
-import { TakliflaZarrinGullar } from "@/templates/taklifla-zarrin-gullar/renderer";
-import { ToglarBagridaInvitation } from "@/templates/taklifla-toglar-bagrida/renderer";
-import { TakliflaOltinYol } from "@/templates/taklifla-oltin-yol/renderer";
-import { TakliflaOsmonInvitation } from "@/templates/taklifla-osmon/renderer";
-import { TakliflaParilarErtagiInvitation } from "@/templates/taklifla-parilar-ertagi/renderer";
-import { TakliflaQogozErtagiInvitation } from "@/templates/taklifla-qogoz-ertagi/renderer";
-import { SakuraGuliInvitation } from "@/templates/taklifla-sakura-guli/renderer";
-import { TakliflaSharlarInvitation } from "@/templates/taklifla-sharlar/renderer";
-import { TakliflaYulduzliTun } from "@/templates/taklifla-yulduzli-tun/renderer";
-import { TakliflaTerracottaInvitation } from "@/templates/taklifla-terracotta/renderer";
-import { TakliflaYubileySahifasi } from "@/templates/taklifla-yubiley-sahifasi/renderer";
-import { TakliflaBarakali } from "@/templates/taklifla-barakali/renderer";
-import { TakliflaZarhalSahifaInvitation } from "@/templates/taklifla-zarhal-sahifa/renderer";
-import { MuhrliMaktubInvitation } from "@/templates/taklifla-muhrli-maktub/renderer";
+import { TojmahalOltinDarvozasiInvitation } from "@/templates/onlinetaklifnoma/tojmahal-darvozasi";
+import { WedivoPulauSehati } from "@/templates/kongillar-oroli/renderer";
+import { TakliflaAsalari } from "@/templates/asalari/renderer";
+import { TungiSaroyInvitation } from "@/templates/tungi-saroy/renderer";
+import { TakliflaTovus } from "@/templates/tovus/renderer";
+import { TakliflaTortFasl } from "@/templates/tort-fasl/renderer";
+import { TakliflaFayzliXonadonInvitation } from "@/templates/fayzli-xonadon/renderer";
+import { TakliflaErtak } from "@/templates/ertak/renderer";
+import { TakliflaGulbog } from "@/templates/gulbog/renderer";
+import { TakliflaZarrinGullar } from "@/templates/zarrin-gullar/renderer";
+import { ToglarBagridaInvitation } from "@/templates/toglar-bagrida/renderer";
+import { TakliflaOltinYol } from "@/templates/oltin-yol/renderer";
+import { TakliflaOsmonInvitation } from "@/templates/osmon/renderer";
+import { TakliflaParilarErtagiInvitation } from "@/templates/parilar-ertagi/renderer";
+import { TakliflaQogozErtagiInvitation } from "@/templates/qogoz-ertagi/renderer";
+import { SakuraGuliInvitation } from "@/templates/sakura-guli/renderer";
+import { TakliflaSharlarInvitation } from "@/templates/sharlar/renderer";
+import { TakliflaYulduzliTun } from "@/templates/yulduzli-tun/renderer";
+import { TakliflaTerracottaInvitation } from "@/templates/terrakota/renderer";
+import { TakliflaYubileySahifasi } from "@/templates/umr-bahori/renderer";
+import { TakliflaBarakali } from "@/templates/baraka/renderer";
+import { TakliflaZarhalSahifaInvitation } from "@/templates/zarhal-sahifa/renderer";
+import { MuhrliMaktubInvitation } from "@/templates/muhrli-maktub/renderer";
 import { isChorloveTemplate, ChorloveInvitation } from "@/templates/chorlove";
 import { createStudioPreviewInvitation } from "./preview-invitation";
 import { CATALOG_MUSIC_CREDIT, CATALOG_PREVIEW_MUSIC } from "@/modules/catalog/catalog-music";
@@ -1047,7 +1047,7 @@ export function Studio({
     invitation.eventType === "bitiruv" ||
     invitation.eventType === "korporativ" ||
     invitation.templateId === "bitiruv" ||
-    invitation.templateId === "korporativ" ||
+    invitation.templateId === "anjuman" ||
     invitation.eventType === "yangi-uy" ||
     invitation.templateId === "yangi-uy";
   const singleCelebrantLabel =
@@ -1057,7 +1057,7 @@ export function Studio({
       : invitation.eventType === "bitiruv"
         ? "Bitiruvchining ismi"
         : invitation.eventType === "korporativ" ||
-            invitation.templateId === "korporativ"
+            invitation.templateId === "anjuman"
           ? "Tashkilot yoki shaxs nomi"
           : invitation.eventType === "yangi-uy" ||
               invitation.templateId === "yangi-uy"
@@ -1072,7 +1072,7 @@ export function Studio({
       : invitation.eventType === "bitiruv"
         ? "Bitiruvchining ismi"
         : invitation.eventType === "korporativ" ||
-            invitation.templateId === "korporativ"
+            invitation.templateId === "anjuman"
           ? "Tashkilot yoki shaxs nomi"
           : invitation.eventType === "yangi-uy" ||
               invitation.templateId === "yangi-uy"
@@ -1144,7 +1144,7 @@ export function Studio({
     );
   }
   const pulauData = pulauSehatiDataSchema.parse(
-    invitation.templateData["wedivo-pulau-sehati"] ?? {},
+    invitation.templateData["kongillar-oroli"] ?? {},
   );
   function updatePulauData(patch: Partial<typeof pulauData>) {
     setInvitation((current) =>
@@ -1153,53 +1153,53 @@ export function Studio({
             ...current,
             templateData: {
               ...current.templateData,
-              "wedivo-pulau-sehati": { ...pulauData, ...patch },
+              "kongillar-oroli": { ...pulauData, ...patch },
             },
           }
         : current,
     );
   }
-  const terracottaData=terracottaDataSchema.parse(invitation.templateData["taklifla-terracotta"] ?? {});
-  function updateTerracottaNote(key:keyof typeof terracottaData,value:string){setInvitation(current=>current?{...current,templateData:{...current.templateData,"taklifla-terracotta":{...terracottaData,[key]:{...terracottaData[key],[locale]:value}}}}:current);}
-  const starryData=starryDataSchema.parse(invitation.templateData["taklifla-yulduzli-tun"] ?? {});
-  function updateStarryNote(key:keyof typeof starryData,value:string){setInvitation(current=>current?{...current,templateData:{...current.templateData,"taklifla-yulduzli-tun":{...starryData,[key]:{...starryData[key],[locale]:value}}}}:current);}
-  const sharlarData=sharlarDataSchema.parse(invitation.templateData["taklifla-sharlar"] ?? {});
-  const sakuraData=sakuraDataSchema.parse(invitation.templateData["taklifla-sakura-guli"] ?? {});
-  function updateSakuraNote(key:keyof typeof sakuraData,value:string){setInvitation(current=>current?{...current,templateData:{...current.templateData,"taklifla-sakura-guli":{...sakuraData,[key]:{...sakuraData[key],[locale]:value}}}}:current);}
-  const qogozData=qogozDataSchema.parse(invitation.templateData["taklifla-qogoz-ertagi"] ?? {});
-  function updateQogozNote(key:keyof typeof qogozData,value:string){setInvitation(current=>current?{...current,templateData:{...current.templateData,"taklifla-qogoz-ertagi":{...qogozData,[key]:{...qogozData[key],[locale]:value}}}}:current);}
-  const pariData=pariDataSchema.parse(invitation.templateData["taklifla-parilar-ertagi"] ?? {});
-  function updatePariDetail(value:string,id?:string){setInvitation(current=>current?{...current,templateData:{...current.templateData,"taklifla-parilar-ertagi":id?{...pariData,programLabels:{...pariData.programLabels,[id]:{...pariData.programLabels[id],[locale]:value}}}:{...pariData,arrivalNote:{...pariData.arrivalNote,[locale]:value}}}}:current);}
-  const osmonData=osmonDataSchema.parse(invitation.templateData["taklifla-osmon"] ?? {});
-  function updateOsmonNote(key:keyof typeof osmonData,value:string){setInvitation(current=>current?{...current,templateData:{...current.templateData,"taklifla-osmon":{...osmonData,[key]:{...osmonData[key],[locale]:value}}}}:current);}
-  const oltinYolData=oltinYolDataSchema.parse(invitation.templateData["taklifla-oltin-yol"] ?? {});
-  function updateOltinNote(key:keyof typeof oltinYolData,value:string){setInvitation(current=>current?{...current,templateData:{...current.templateData,"taklifla-oltin-yol":{...oltinYolData,[key]:{...oltinYolData[key],[locale]:value}}}}:current);}
-  const mountainData=mountainDataSchema.parse(invitation.templateData["taklifla-toglar-bagrida"] ?? {});
-  function updateMountainTime(key:"ceremonyTime"|"celebrationTime",value:string){setInvitation(current=>current?{...current,templateData:{...current.templateData,"taklifla-toglar-bagrida":{...mountainData,[key]:value}}}:current);}
-  const zarrinData=zarrinDataSchema.parse(invitation.templateData["taklifla-zarrin-gullar"] ?? {});
-  function updateZarrinField(key:"brideFamily"|"groomFamily"|"stayText"|"footerNote"|"hashtag",value:string){setInvitation(current=>current?{...current,templateData:{...current.templateData,"taklifla-zarrin-gullar":{...zarrinData,[key]:key==="hashtag"?value:{...zarrinData[key],[locale]:value}}}}:current);}
-  const gulbogData=gulbogDataSchema.parse(invitation.templateData["taklifla-gulbog"] ?? {});
-  function updateGulbogField(key:keyof typeof gulbogData,value:string){setInvitation(current=>current?{...current,templateData:{...current.templateData,"taklifla-gulbog":{...gulbogData,[key]:{...gulbogData[key],[locale]:value}}}}:current);}
-  const xonadonData=fayzliXonadonDataSchema.parse(invitation.templateData["taklifla-fayzli-xonadon"] ?? {});
-  function updateXonadonMenu(menu: typeof xonadonData.menu) {setInvitation(current=>current?{...current,templateData:{...current.templateData,"taklifla-fayzli-xonadon":{menu}}}:current);}
-  const yubileyData = yubileySahifasiDataSchema.parse(invitation.templateData["taklifla-yubiley-sahifasi"] ?? {});
+  const terracottaData=terracottaDataSchema.parse(invitation.templateData["terrakota"] ?? {});
+  function updateTerracottaNote(key:keyof typeof terracottaData,value:string){setInvitation(current=>current?{...current,templateData:{...current.templateData,"terrakota":{...terracottaData,[key]:{...terracottaData[key],[locale]:value}}}}:current);}
+  const starryData=starryDataSchema.parse(invitation.templateData["yulduzli-tun"] ?? {});
+  function updateStarryNote(key:keyof typeof starryData,value:string){setInvitation(current=>current?{...current,templateData:{...current.templateData,"yulduzli-tun":{...starryData,[key]:{...starryData[key],[locale]:value}}}}:current);}
+  const sharlarData=sharlarDataSchema.parse(invitation.templateData["sharlar"] ?? {});
+  const sakuraData=sakuraDataSchema.parse(invitation.templateData["sakura-guli"] ?? {});
+  function updateSakuraNote(key:keyof typeof sakuraData,value:string){setInvitation(current=>current?{...current,templateData:{...current.templateData,"sakura-guli":{...sakuraData,[key]:{...sakuraData[key],[locale]:value}}}}:current);}
+  const qogozData=qogozDataSchema.parse(invitation.templateData["qogoz-ertagi"] ?? {});
+  function updateQogozNote(key:keyof typeof qogozData,value:string){setInvitation(current=>current?{...current,templateData:{...current.templateData,"qogoz-ertagi":{...qogozData,[key]:{...qogozData[key],[locale]:value}}}}:current);}
+  const pariData=pariDataSchema.parse(invitation.templateData["parilar-ertagi"] ?? {});
+  function updatePariDetail(value:string,id?:string){setInvitation(current=>current?{...current,templateData:{...current.templateData,"parilar-ertagi":id?{...pariData,programLabels:{...pariData.programLabels,[id]:{...pariData.programLabels[id],[locale]:value}}}:{...pariData,arrivalNote:{...pariData.arrivalNote,[locale]:value}}}}:current);}
+  const osmonData=osmonDataSchema.parse(invitation.templateData["osmon"] ?? {});
+  function updateOsmonNote(key:keyof typeof osmonData,value:string){setInvitation(current=>current?{...current,templateData:{...current.templateData,"osmon":{...osmonData,[key]:{...osmonData[key],[locale]:value}}}}:current);}
+  const oltinYolData=oltinYolDataSchema.parse(invitation.templateData["oltin-yol"] ?? {});
+  function updateOltinNote(key:keyof typeof oltinYolData,value:string){setInvitation(current=>current?{...current,templateData:{...current.templateData,"oltin-yol":{...oltinYolData,[key]:{...oltinYolData[key],[locale]:value}}}}:current);}
+  const mountainData=mountainDataSchema.parse(invitation.templateData["toglar-bagrida"] ?? {});
+  function updateMountainTime(key:"ceremonyTime"|"celebrationTime",value:string){setInvitation(current=>current?{...current,templateData:{...current.templateData,"toglar-bagrida":{...mountainData,[key]:value}}}:current);}
+  const zarrinData=zarrinDataSchema.parse(invitation.templateData["zarrin-gullar"] ?? {});
+  function updateZarrinField(key:"brideFamily"|"groomFamily"|"stayText"|"footerNote"|"hashtag",value:string){setInvitation(current=>current?{...current,templateData:{...current.templateData,"zarrin-gullar":{...zarrinData,[key]:key==="hashtag"?value:{...zarrinData[key],[locale]:value}}}}:current);}
+  const gulbogData=gulbogDataSchema.parse(invitation.templateData["gulbog"] ?? {});
+  function updateGulbogField(key:keyof typeof gulbogData,value:string){setInvitation(current=>current?{...current,templateData:{...current.templateData,"gulbog":{...gulbogData,[key]:{...gulbogData[key],[locale]:value}}}}:current);}
+  const xonadonData=fayzliXonadonDataSchema.parse(invitation.templateData["fayzli-xonadon"] ?? {});
+  function updateXonadonMenu(menu: typeof xonadonData.menu) {setInvitation(current=>current?{...current,templateData:{...current.templateData,"fayzli-xonadon":{menu}}}:current);}
+  const yubileyData = yubileySahifasiDataSchema.parse(invitation.templateData["umr-bahori"] ?? {});
   function updateYubileyData(next: typeof yubileyData) {
-    setInvitation(current=>current ? {...current,templateData:{...current.templateData,"taklifla-yubiley-sahifasi":next}} : current);
+    setInvitation(current=>current ? {...current,templateData:{...current.templateData,"umr-bahori":next}} : current);
   }
   const muhrliMaktubData = muhrliMaktubDataSchema.parse(
-    invitation.templateData["taklifla-muhrli-maktub"] ?? {},
+    invitation.templateData["muhrli-maktub"] ?? {},
   );
   function updateMuhrliMaktubFlowersNote(value: string) {
     setInvitation((current) => {
       if (!current) return current;
       const data = muhrliMaktubDataSchema.parse(
-        current.templateData["taklifla-muhrli-maktub"] ?? {},
+        current.templateData["muhrli-maktub"] ?? {},
       );
       return {
         ...current,
         templateData: {
           ...current.templateData,
-          "taklifla-muhrli-maktub": {
+          "muhrli-maktub": {
             ...data,
             flowersNote: { ...data.flowersNote, [locale]: value },
           },
@@ -2182,7 +2182,7 @@ export function Studio({
                     }
                   />
                 </Field>}
-                {invitation.templateId === "wedivo-pulau-sehati" && (
+                {invitation.templateId === "kongillar-oroli" && (
                   <Field label="Birga taklif etuvchilar">
                     <textarea
                       value={pulauData.coInviters}
@@ -2312,7 +2312,7 @@ export function Studio({
                             }
                           />
                         </Field>
-                        {invitation.templateId === "wedivo-pulau-sehati" && (
+                        {invitation.templateId === "kongillar-oroli" && (
                           <Field label="Hikoya sanasi">
                             <input
                               type="date"
@@ -2334,7 +2334,7 @@ export function Studio({
                 )}
               </div>
             )}
-            {invitation.templateId === "wedivo-pulau-sehati" && (
+            {invitation.templateId === "kongillar-oroli" && (
               <div className={styles.form}>
                 <h2>Pulau Sehati — ma’lumotlar</h2>
                 <Field label="Arabcha bitik">
@@ -2786,7 +2786,7 @@ export function Studio({
                     </p>
                   )}
                 </Field>
-                {invitation.templateId === "wedivo-pulau-sehati" && (
+                {invitation.templateId === "kongillar-oroli" && (
                   <>
                     <div className={styles.divider} />
                     <Toggle
@@ -3070,7 +3070,7 @@ export function Studio({
                           <span>
                             {content.programTitles[item.id]?.trim() ||
                               placeholders.programItem}
-                            {invitation.templateId === "invitate-wedding" &&
+                            {invitation.templateId === "gulchambar" &&
                               content.programDescriptions[item.id]?.trim() && (
                                 <small>
                                   {content.programDescriptions[item.id]}
@@ -3780,29 +3780,29 @@ export function Studio({
                   </div>
                 </OptionalSection>)}
                 <div className={styles.divider} />
-                {invitation.templateId === "taklifla-terracotta" && <div className={styles.formGrid}>{(["infoNote","footerNote"] as const).map(key=><Field key={key} label={`${key === "infoNote" ? "Mehmonlarga eslatma" : "Yakuniy izoh"} · ${LANGUAGE_NAMES[locale]}`}><textarea maxLength={4000} rows={3} value={terracottaData[key][locale] || ""} onChange={e=>updateTerracottaNote(key,e.target.value)} /></Field>)}</div>}
-                {invitation.templateId === "taklifla-yulduzli-tun" && <div className={styles.formGrid}>{(["infoNote","footerNote"] as const).map(key=><Field key={key} label={`${key === "infoNote" ? "Mehmonlarga eslatma" : "Yakuniy izoh"} · ${LANGUAGE_NAMES[locale]}`}><textarea maxLength={4000} rows={3} value={starryData[key][locale] || ""} onChange={e=>updateStarryNote(key,e.target.value)} /></Field>)}</div>}
-                {invitation.templateId === "taklifla-sharlar" && <Field label="Eshiklar ochilish vaqti"><input type="time" value={sharlarData.doorsAt} onChange={e=>{const doorsAt=e.target.value;setInvitation(current=>current?{...current,templateData:{...current.templateData,"taklifla-sharlar":{doorsAt}}}:current);}} /></Field>}
-                {invitation.templateId === "taklifla-sakura-guli" && <div className={styles.formGrid}>{(["contactNote","infoNote","footerNote"] as const).map(key=><Field key={key} label={`${({contactNote:"Aloqa haqida izoh",infoNote:"Mehmonlarga eslatma",footerNote:"Yakuniy izoh"})[key]} · ${LANGUAGE_NAMES[locale]}`}><textarea maxLength={4000} rows={3} value={sakuraData[key][locale] || ""} onChange={e=>updateSakuraNote(key,e.target.value)} /></Field>)}</div>}
-                {invitation.templateId === "taklifla-qogoz-ertagi" && <div className={styles.formGrid}>{(["contactNote","footerNote"] as const).map(key=><Field key={key} label={`${key === "contactNote" ? "Aloqa haqida izoh" : "Yakuniy izoh"} · ${LANGUAGE_NAMES[locale]}`}><textarea maxLength={4000} rows={3} value={qogozData[key][locale] || ""} onChange={e=>updateQogozNote(key,e.target.value)} /></Field>)}</div>}
-                {invitation.templateId === "taklifla-parilar-ertagi" && <div className={styles.formGrid}><Field label={`Kelish haqida · ${LANGUAGE_NAMES[locale]}`}><textarea maxLength={4000} rows={3} value={pariData.arrivalNote[locale] || ""} onChange={e=>updatePariDetail(e.target.value)} /></Field>{invitation.program.map(item=><Field key={item.id} label={`${item.time} · Qisqa dastur yorlig‘i · ${LANGUAGE_NAMES[locale]}`}><input maxLength={300} value={pariData.programLabels[item.id]?.[locale] || ""} onChange={e=>updatePariDetail(e.target.value,item.id)} /></Field>)}</div>}
-                {invitation.templateId === "taklifla-osmon" && <div className={styles.formGrid}>{(["rsvpNote","giftNote"] as const).map(key=><Field key={key} label={`${key === "rsvpNote" ? "Ishtirok haqida izoh" : "Sovg‘alar haqida izoh"} · ${LANGUAGE_NAMES[locale]}`}><textarea maxLength={4000} rows={3} value={osmonData[key][locale] || ""} onChange={e=>updateOsmonNote(key,e.target.value)} /></Field>)}</div>}
-                {invitation.templateId === "taklifla-oltin-yol" && <div className={styles.formGrid}>{(["arrivalNote","giftNote","contactNote","footerNote"] as const).map(key=><Field key={key} label={`${({arrivalNote:"Kelish haqida",giftNote:"Sovg‘alar haqida izoh",contactNote:"Mas’ul shaxs haqida",footerNote:"Yakuniy izoh"})[key]} · ${LANGUAGE_NAMES[locale]}`}><textarea maxLength={4000} rows={3} value={oltinYolData[key][locale] || ""} onChange={e=>updateOltinNote(key,e.target.value)} /></Field>)}</div>}
-                {invitation.templateId === "taklifla-toglar-bagrida" && <div className={styles.formGrid}>{(["ceremonyTime","celebrationTime"] as const).map(key=><Field key={key} label={key === "ceremonyTime" ? "Marosim vaqti" : "Ziyofat vaqti"}><input maxLength={80} value={mountainData[key]} placeholder="Asosiy tadbir vaqti" onChange={e=>updateMountainTime(key,e.target.value)} /></Field>)}</div>}
-                {invitation.templateId === "taklifla-zarrin-gullar" && <div className={styles.formGrid}>
+                {invitation.templateId === "terrakota" && <div className={styles.formGrid}>{(["infoNote","footerNote"] as const).map(key=><Field key={key} label={`${key === "infoNote" ? "Mehmonlarga eslatma" : "Yakuniy izoh"} · ${LANGUAGE_NAMES[locale]}`}><textarea maxLength={4000} rows={3} value={terracottaData[key][locale] || ""} onChange={e=>updateTerracottaNote(key,e.target.value)} /></Field>)}</div>}
+                {invitation.templateId === "yulduzli-tun" && <div className={styles.formGrid}>{(["infoNote","footerNote"] as const).map(key=><Field key={key} label={`${key === "infoNote" ? "Mehmonlarga eslatma" : "Yakuniy izoh"} · ${LANGUAGE_NAMES[locale]}`}><textarea maxLength={4000} rows={3} value={starryData[key][locale] || ""} onChange={e=>updateStarryNote(key,e.target.value)} /></Field>)}</div>}
+                {invitation.templateId === "sharlar" && <Field label="Eshiklar ochilish vaqti"><input type="time" value={sharlarData.doorsAt} onChange={e=>{const doorsAt=e.target.value;setInvitation(current=>current?{...current,templateData:{...current.templateData,"sharlar":{doorsAt}}}:current);}} /></Field>}
+                {invitation.templateId === "sakura-guli" && <div className={styles.formGrid}>{(["contactNote","infoNote","footerNote"] as const).map(key=><Field key={key} label={`${({contactNote:"Aloqa haqida izoh",infoNote:"Mehmonlarga eslatma",footerNote:"Yakuniy izoh"})[key]} · ${LANGUAGE_NAMES[locale]}`}><textarea maxLength={4000} rows={3} value={sakuraData[key][locale] || ""} onChange={e=>updateSakuraNote(key,e.target.value)} /></Field>)}</div>}
+                {invitation.templateId === "qogoz-ertagi" && <div className={styles.formGrid}>{(["contactNote","footerNote"] as const).map(key=><Field key={key} label={`${key === "contactNote" ? "Aloqa haqida izoh" : "Yakuniy izoh"} · ${LANGUAGE_NAMES[locale]}`}><textarea maxLength={4000} rows={3} value={qogozData[key][locale] || ""} onChange={e=>updateQogozNote(key,e.target.value)} /></Field>)}</div>}
+                {invitation.templateId === "parilar-ertagi" && <div className={styles.formGrid}><Field label={`Kelish haqida · ${LANGUAGE_NAMES[locale]}`}><textarea maxLength={4000} rows={3} value={pariData.arrivalNote[locale] || ""} onChange={e=>updatePariDetail(e.target.value)} /></Field>{invitation.program.map(item=><Field key={item.id} label={`${item.time} · Qisqa dastur yorlig‘i · ${LANGUAGE_NAMES[locale]}`}><input maxLength={300} value={pariData.programLabels[item.id]?.[locale] || ""} onChange={e=>updatePariDetail(e.target.value,item.id)} /></Field>)}</div>}
+                {invitation.templateId === "osmon" && <div className={styles.formGrid}>{(["rsvpNote","giftNote"] as const).map(key=><Field key={key} label={`${key === "rsvpNote" ? "Ishtirok haqida izoh" : "Sovg‘alar haqida izoh"} · ${LANGUAGE_NAMES[locale]}`}><textarea maxLength={4000} rows={3} value={osmonData[key][locale] || ""} onChange={e=>updateOsmonNote(key,e.target.value)} /></Field>)}</div>}
+                {invitation.templateId === "oltin-yol" && <div className={styles.formGrid}>{(["arrivalNote","giftNote","contactNote","footerNote"] as const).map(key=><Field key={key} label={`${({arrivalNote:"Kelish haqida",giftNote:"Sovg‘alar haqida izoh",contactNote:"Mas’ul shaxs haqida",footerNote:"Yakuniy izoh"})[key]} · ${LANGUAGE_NAMES[locale]}`}><textarea maxLength={4000} rows={3} value={oltinYolData[key][locale] || ""} onChange={e=>updateOltinNote(key,e.target.value)} /></Field>)}</div>}
+                {invitation.templateId === "toglar-bagrida" && <div className={styles.formGrid}>{(["ceremonyTime","celebrationTime"] as const).map(key=><Field key={key} label={key === "ceremonyTime" ? "Marosim vaqti" : "Ziyofat vaqti"}><input maxLength={80} value={mountainData[key]} placeholder="Asosiy tadbir vaqti" onChange={e=>updateMountainTime(key,e.target.value)} /></Field>)}</div>}
+                {invitation.templateId === "zarrin-gullar" && <div className={styles.formGrid}>
                   {(["brideFamily","groomFamily","stayText","footerNote","hashtag"] as const).map(key=><Field key={key} label={`${({brideFamily:"Kelin oilasi",groomFamily:"Kuyov oilasi",stayText:"Turar joy haqida",footerNote:"Yakuniy izoh",hashtag:"Heshteg"})[key]} · ${LANGUAGE_NAMES[locale]}`}><textarea maxLength={key==="hashtag"?100:4000} rows={2} disabled={identityLocked && (key==="brideFamily" || key==="groomFamily")} value={key==="hashtag"?zarrinData.hashtag:zarrinData[key][locale] || ""} onChange={e=>updateZarrinField(key,e.target.value)}/></Field>)}
                 </div>}
-                {invitation.templateId === "taklifla-gulbog" && <div className={styles.formGrid}>
+                {invitation.templateId === "gulbog" && <div className={styles.formGrid}>
                   {(["brideFamily","reminderTitle","reminderText","footerNote"] as const).map(key=><Field key={key} label={`${({brideFamily:"Kelin oilasi satri",reminderTitle:"Eslatma sarlavhasi",reminderText:"Mehmonlarga eslatma",footerNote:"Yakuniy izoh"})[key]} · ${LANGUAGE_NAMES[locale]}`}><textarea maxLength={key==="reminderTitle"?300:4000} rows={3} disabled={identityLocked && key==="brideFamily"} value={gulbogData[key][locale] || ""} onChange={e=>updateGulbogField(key,e.target.value)}/></Field>)}
                 </div>}
-                {invitation.templateId === "taklifla-fayzli-xonadon" && <div className={styles.formGrid}>
+                {invitation.templateId === "fayzli-xonadon" && <div className={styles.formGrid}>
                   {xonadonData.menu.map((item,index)=><div key={item.id}>
                     {(["label","name","description"] as const).map(key=><Field key={key} label={`${({label:"Taom turi",name:"Taom",description:"Izoh"})[key]} · ${LANGUAGE_NAMES[locale]}`}><textarea maxLength={key==="description"?4000:300} rows={2} value={item[key][locale] || ""} onChange={e=>updateXonadonMenu(xonadonData.menu.map((s,i)=>i===index?{...s,[key]:{...s[key],[locale]:e.target.value}}:s))}/></Field>)}
                     <button type="button" onClick={()=>updateXonadonMenu(xonadonData.menu.filter(s=>s.id!==item.id))}>O‘chirish</button>
                   </div>)}
                   {xonadonData.menu.length<12 && <button type="button" onClick={()=>updateXonadonMenu([...xonadonData.menu,{id:crypto.randomUUID(),label:{},name:{},description:{}}])}>Taom qo‘shish</button>}
                 </div>}
-                {invitation.templateId === "taklifla-yubiley-sahifasi" && <div className={styles.formGrid}>
+                {invitation.templateId === "umr-bahori" && <div className={styles.formGrid}>
                   <Field label="Yubiley yili"><input type="number" min={1} max={999} value={yubileyData.years ?? ""} disabled={identityLocked} onChange={e=>updateYubileyData({...yubileyData,years:e.target.value ? Math.min(999,Math.max(1,Number(e.target.value))) : null})}/></Field>
                   <Field label={`Asoschining lavozimi · ${LANGUAGE_NAMES[locale]}`}><input maxLength={300} value={yubileyData.founderRole[locale] || ""} onChange={e=>updateYubileyData({...yubileyData,founderRole:{...yubileyData.founderRole,[locale]:e.target.value}})}/></Field>
                   {invitation.story.map(chapter=><Field key={chapter.id} label={`Tarix sanasi · ${chapter.title[locale] || chapter.id}`}><input maxLength={30} value={yubileyData.storyYears[chapter.id] || ""} onChange={e=>updateYubileyData({...yubileyData,storyYears:{...yubileyData.storyYears,[chapter.id]:e.target.value}})}/></Field>)}
@@ -3813,7 +3813,7 @@ export function Studio({
                   </div>)}
                   {yubileyData.statistics.length<8 && <button type="button" onClick={()=>updateYubileyData({...yubileyData,statistics:[...yubileyData.statistics,{id:crypto.randomUUID(),value:"",label:{}}]})}>Ko‘rsatkich qo‘shish</button>}
                 </div>}
-                {invitation.templateId === "taklifla-muhrli-maktub" && (
+                {invitation.templateId === "muhrli-maktub" && (
                   <Field
                     label={`Gullar o‘rniga izoh · ${LANGUAGE_NAMES[locale]}`}
                     hint="Mehmonlarga ko‘rinadi. Bo‘sh qoldirsangiz, dizaynning boshlang‘ich matni ishlatiladi."
@@ -4257,7 +4257,7 @@ export function Studio({
           aria-label="Taklifnoma ko‘rinishi"
         >
           <div className={styles.realPreview} ref={previewHost} key={invitation.templateId} data-format={isImage ? "image" : undefined}>
-            {isImage ? <StaticImagePreview invitation={previewInvitation} locale={locale} /> : invitation.templateId === "oltin-darvoza-ortidagi-baxt" ? (
+            {isImage ? <StaticImagePreview invitation={previewInvitation} locale={locale} /> : invitation.templateId === "baxt-darvozasi" ? (
               <OltinDarvozaInvitation
                 invitation={previewInvitation}
                 invitationId={invitation.id}
@@ -4302,7 +4302,7 @@ export function Studio({
                 catalogMusic={false}
                 sampleWishes={false}
               />
-            ) : invitation.templateId === "buxoro-ravoq" ? (
+            ) : invitation.templateId === "buxoro-ravogi" ? (
               <BuxoroRavoqInvitation
                 invitation={previewInvitation}
                 invitationId={invitation.id}
@@ -4320,7 +4320,7 @@ export function Studio({
                 catalogMusic={false}
                 sampleWishes={false}
               />
-            ) : invitation.templateId === "tojmahal-oltin-darvozasi" ? (
+            ) : invitation.templateId === "tojmahal-darvozasi" ? (
               <TojmahalOltinDarvozasiInvitation
                 invitation={previewInvitation}
                 invitationId={invitation.id}
@@ -4356,7 +4356,7 @@ export function Studio({
                 catalogMusic={false}
                 sampleWishes={false}
               />
-            ) : invitation.templateId === "wedivo-pulau-sehati" ? (
+            ) : invitation.templateId === "kongillar-oroli" ? (
               <WedivoPulauSehati
                 invitation={previewInvitation}
                 invitationId={invitation.id}
@@ -4376,7 +4376,7 @@ export function Studio({
                 catalogMusic={false}
                 sampleWishes={false}
               />
-            ) : invitation.templateId === "royal-burgundy-edition" ? (
+            ) : invitation.templateId === "baxmal-saroy" ? (
               <VelvetRoyaleInvitation
                 invitation={previewInvitation}
                 invitationId={invitation.id}
@@ -4385,7 +4385,7 @@ export function Studio({
                 catalogMusic={false}
                 sampleWishes={false}
               />
-            ) : invitation.templateId === "olive-manor-edition" ? (
+            ) : invitation.templateId === "zaytun" ? (
               <OliveManorInvitation
                 invitation={previewInvitation}
                 invitationId={invitation.id}
@@ -4394,7 +4394,7 @@ export function Studio({
                 catalogMusic={false}
                 sampleWishes={false}
               />
-            ) : invitation.templateId === "islamic-edition" ? (
+            ) : invitation.templateId === "islomiy" ? (
               <IslamicEditionInvitation
                 invitation={previewInvitation}
                 invitationId={invitation.id}
@@ -4403,7 +4403,7 @@ export function Studio({
                 catalogMusic={false}
                 sampleWishes={false}
               />
-            ) : invitation.templateId === "monochrome-editorial-edition" ? (
+            ) : invitation.templateId === "oq-qora-lavha" ? (
               <MonochromeEditorialInvitation
                 invitation={previewInvitation}
                 invitationId={invitation.id}
@@ -4411,7 +4411,7 @@ export function Studio({
                 preview
                 catalogMusic={false}
               />
-            ) : invitation.templateId === "xatna-edition" ? (
+            ) : invitation.templateId === "xatna" ? (
               <XatnaEditionInvitation
                 invitation={previewInvitation}
                 invitationId={invitation.id}
@@ -4419,45 +4419,45 @@ export function Studio({
                 preview
                 catalogMusic={false}
               />
-            ) : invitation.templateId === "taklifla-fayzli-xonadon" ? (
+            ) : invitation.templateId === "fayzli-xonadon" ? (
               <TakliflaFayzliXonadonInvitation invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview fullPreview catalogMusic={false} silentPlayback />
-            ) : invitation.templateId === "taklifla-ertak" ? (
+            ) : invitation.templateId === "ertak" ? (
               <TakliflaErtak invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview fullPreview catalogMusic={false} silentPlayback />
-            ) : invitation.templateId === "taklifla-gulbog" ? (
+            ) : invitation.templateId === "gulbog" ? (
               <TakliflaGulbog invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview fullPreview catalogMusic={false} silentPlayback />
-            ) : invitation.templateId === "taklifla-zarrin-gullar" ? (
+            ) : invitation.templateId === "zarrin-gullar" ? (
               <TakliflaZarrinGullar invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview fullPreview catalogMusic={false} silentPlayback />
-            ) : invitation.templateId === "taklifla-toglar-bagrida" ? (
+            ) : invitation.templateId === "toglar-bagrida" ? (
               <ToglarBagridaInvitation invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview fullPreview catalogMusic={false} silentPlayback />
-            ) : invitation.templateId === "taklifla-oltin-yol" ? (
+            ) : invitation.templateId === "oltin-yol" ? (
               <TakliflaOltinYol invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview fullPreview catalogMusic={false} silentPlayback />
-            ) : invitation.templateId === "taklifla-osmon" ? (
+            ) : invitation.templateId === "osmon" ? (
               <TakliflaOsmonInvitation invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview fullPreview catalogMusic={false} silentPlayback />
-            ) : invitation.templateId === "taklifla-parilar-ertagi" ? (
+            ) : invitation.templateId === "parilar-ertagi" ? (
               <TakliflaParilarErtagiInvitation invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview fullPreview catalogMusic={false} silentPlayback />
-            ) : invitation.templateId === "taklifla-qogoz-ertagi" ? (
+            ) : invitation.templateId === "qogoz-ertagi" ? (
               <TakliflaQogozErtagiInvitation invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview fullPreview catalogMusic={false} silentPlayback />
-            ) : invitation.templateId === "taklifla-sakura-guli" ? (
+            ) : invitation.templateId === "sakura-guli" ? (
               <SakuraGuliInvitation invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview fullPreview catalogMusic={false} silentPlayback />
-            ) : invitation.templateId === "taklifla-sharlar" ? (
+            ) : invitation.templateId === "sharlar" ? (
               <TakliflaSharlarInvitation invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview fullPreview catalogMusic={false} silentPlayback />
-            ) : invitation.templateId === "taklifla-yulduzli-tun" ? (
+            ) : invitation.templateId === "yulduzli-tun" ? (
               <TakliflaYulduzliTun invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview fullPreview catalogMusic={false} silentPlayback />
-            ) : invitation.templateId === "taklifla-terracotta" ? (
+            ) : invitation.templateId === "terrakota" ? (
               <TakliflaTerracottaInvitation invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview fullPreview catalogMusic={false} silentPlayback />
-            ) : invitation.templateId === "taklifla-yubiley-sahifasi" ? (
+            ) : invitation.templateId === "umr-bahori" ? (
               <TakliflaYubileySahifasi invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview fullPreview catalogMusic={false} silentPlayback />
-            ) : invitation.templateId === "taklifla-barakali" ? (
+            ) : invitation.templateId === "baraka" ? (
               <TakliflaBarakali invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview fullPreview catalogMusic={false} sampleWishes={false} silentPlayback />
-            ) : invitation.templateId === "taklifla-zarhal-sahifa" ? (
+            ) : invitation.templateId === "zarhal-sahifa" ? (
               <TakliflaZarhalSahifaInvitation invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview fullPreview catalogMusic={false} sampleWishes={false} silentPlayback />
-            ) : invitation.templateId === "taklifla-tungi-saroy" ? (
+            ) : invitation.templateId === "tungi-saroy" ? (
               <TungiSaroyInvitation invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview fullPreview catalogMusic={false} silentPlayback />
-            ) : invitation.templateId === "taklifla-tovus" ? (
+            ) : invitation.templateId === "tovus" ? (
               <TakliflaTovus invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview fullPreview catalogMusic={false} silentPlayback />
-            ) : invitation.templateId === "taklifla-tort-fasl" ? (
+            ) : invitation.templateId === "tort-fasl" ? (
               <TakliflaTortFasl invitation={previewInvitation} invitationId={invitation.id} locale={locale} preview fullPreview catalogMusic={false} silentPlayback />
-            ) : invitation.templateId === "taklifla-asalari" ? (
+            ) : invitation.templateId === "asalari" ? (
               <TakliflaAsalari
                 invitation={previewInvitation}
                 invitationId={invitation.id}
@@ -4466,7 +4466,7 @@ export function Studio({
                 sampleWishes={false}
                 silentPlayback
               />
-            ) : invitation.templateId === "taklifla-muhrli-maktub" ? (
+            ) : invitation.templateId === "muhrli-maktub" ? (
               <MuhrliMaktubInvitation
                 sampleWishes={false}
                 invitation={previewInvitation}

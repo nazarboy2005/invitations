@@ -36,8 +36,8 @@ export function makeButterflyData(
   if (options.preview && !gallery.length) {
     // These source photographs are presentation-only and never enter invitation data.
     gallery.push(
-      { id: "butterfly-preview-memory-1", src: publicAsset("/templates/butterfly/assets/images/afina/image2.png"), alt: "Preview memory", caption: "" },
-      { id: "butterfly-preview-memory-2", src: publicAsset("/templates/butterfly/assets/images/afina/image3.png"), alt: "Preview memory", caption: "" },
+      { id: "butterfly-preview-memory-1", src: publicAsset("/templates/kapalak/assets/images/afina/image2.png"), alt: "Preview memory", caption: "" },
+      { id: "butterfly-preview-memory-2", src: publicAsset("/templates/kapalak/assets/images/afina/image3.png"), alt: "Preview memory", caption: "" },
     );
   }
   const music = invitation.music.enabled ? publicAsset(invitation.music.url) : "";

@@ -34,15 +34,15 @@ test("studio Nikoh choices retain the full curated ranking before other compatib
     result.slice(0, 11).map((template) => template.id),
     [
       "anor",
-      "cloud-castle",
+      "bulutlar-qasri",
       "bogi-eram",
       "ganch",
-      "green-garden",
+      "yashil-makon",
       "kuzgi-chinor",
       "muhr",
       "orik-guli",
       "samarqand-kechasi",
-      "evelina",
+      "baxt-kaliti",
       "kozgu",
     ],
   );

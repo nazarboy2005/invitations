@@ -1,0 +1,15 @@
+{
+  "captured": "2026-11-08",
+  "route": "/preview?template=yubiley-sahifasi&poster=1&qaSilent=1&qaReducedMotion=1",
+  "viewport": {
+    "width": 480,
+    "height": 800
+  },
+  "state": "Original first-page composition, real renderer with current shared corporate preview fixture; no provider sample company",
+  "image": "preview.webp",
+  "imageSha256": "93c4e708e6fd56817e00e1b81332d1c6616e0470f149909dd0ae1b305746fc84",
+  "captureSha256": "adfd12191cccdda2630eead59c8930cf5b2e7461d016088b5c5329b73ad2cb83",
+  "fixture": "apps/web/src/modules/catalog/preview-sample.json",
+  "fixtureSha256": "77be5b4d0ea6a4b93803e5efc989ade0889d0838f74dee7c767ebdd4b1c1cc1e",
+  "encoding": "WebP quality 90, effort 6; no image synthesis or editing"
+}

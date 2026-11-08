@@ -4,7 +4,7 @@ import type { TemplateDefinition } from "@taklifnoma/contracts";
 const FEATURED_TEMPLATE_IDS = [
   "anor",
   "bogi-eram",
-  "cloud-castle",
+  "bulutlar-qasri",
   "ganch",
   "kuzgi-chinor",
   "nahor",

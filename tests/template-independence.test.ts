@@ -17,7 +17,9 @@ test("public template identities are neutral, unique and preserve saved invitati
   for (const template of TEMPLATES) {
     const slug = publicTemplateId(template.id);
     assert.doesNotMatch(slug, providers);
+    assert.doesNotMatch(slug, /(?:^|-)edition(?:-|$)/i);
     assert.doesNotMatch(template.name, providers);
+    assert.doesNotMatch(template.name, /\bedition\b/i);
     assert.equal(resolveTemplateId(slug), template.id);
     assert.equal(templateById(slug)?.id, template.id);
     assert.ok(!slugs.has(slug) || slugs.get(slug) === template.id, slug);
@@ -28,6 +30,40 @@ test("public template identities are neutral, unique and preserve saved invitati
   assert.equal(publicTemplateName("Taklifnomachi · Klassik"), "Klassik");
   assert.equal(publicTemplateName("Invitate Wedding"), "Wedding");
   assert.equal(publicTemplateName("Golden Hour"), "Golden Hour");
+  assert.equal(publicTemplateName("Taklifla-Uchrashuv Edition"), "Uchrashuv");
+  assert.equal(publicTemplateName("E-invitation · Xatna Edition"), "Xatna");
+  assert.equal(publicTemplateName("Islamic Edition"), "Islamic");
+  assert.equal(publicTemplateId("__proto__"), "__proto__");
+  assert.equal(publicTemplateId("toString"), "toString");
+});
+
+test("hidden and edition links resolve without changing saved template IDs", () => {
+  for (const [id, slug] of Object.entries({
+    "taklifla-uchrashuv": "uchrashuv",
+    "olive-manor-edition": "zaytun",
+    "islamic-edition": "islomiy",
+    "monochrome-editorial-edition": "oq-qora-lavha",
+    "xatna-edition": "xatna",
+    "royal-burgundy-edition": "baxmal-saroy",
+    "ivory-rose-card": "oq-atirgul",
+    "moviy-ravoq-card": "moviy-ravoq",
+  })) {
+    assert.equal(publicTemplateId(id), slug);
+    assert.equal(templateById(slug)?.id, slug);
+    assert.equal(templateById(id)?.id, slug);
+  }
+});
+
+test("localized titles, draft watermarks and calendar downloads do not restore provider credits", () => {
+  for (const file of ["shirin-bayram/locale-copy.js", "chavandoz/template.js", "maslin/i18n.js", "anor/source/i18n-shared.js"]) {
+    assert.doesNotMatch(readFileSync(join(root, file), "utf8"), /Marxaba|Made with|bilan yaratildi/i, file);
+  }
+  const core = readFileSync(join(root, "shared/nikoh/core.js"), "utf8");
+  assert.doesNotMatch(core, /NAMUNA[^;]*Marxaba|PRODID:-\/\/Marxaba/i);
+  assert.match(core, /NAMUNA/);
+  for (const file of ["wedivo-oathbound/platform-adapter.js", "wedivo-peony-paradise/platform-adapter.js"]) {
+    assert.doesNotMatch(readFileSync(join(root, file), "utf8"), /PRODID:-\/\/Visol|@visol/i, file);
+  }
 });
 
 test("archived pages and trackers are private while real source frames and artwork stay accessible", () => {
@@ -60,8 +96,9 @@ test("entry pages contain no remote source assets, captured maps or business cre
     assert.doesNotMatch(html, /<(?:img|source|video|audio|iframe|script|link)\b[^>]*(?:src|href)=["']https?:\/\//i, entry);
     assert.doesNotMatch(html, /powered by|Made with (?:Visol|Fotiha|Фотиҳа|Фотиха|Marxaba)|(?:Visol|Fotiha|Фотиҳа|Фотиха|Marxaba|Marhamat) bilan yaratildi|data-slot="footer"/i, entry);
     assert.doesNotMatch(html, /href="https:\/\/(?:chorlove\.uz|t\.me\/chorlove_uz|instagram\.com\/chorlove\.uz)/i, entry);
+    assert.doesNotMatch(html, /<link\b[^>]*href=["'][^"']*(?:logo|favicon)[^"']*["'][^>]*>/i, entry);
   }
-  for (const id of ["palace-rose", "jasmine-white"] as const) {
+  for (const id of ["saroy-atirguli", "oq-yasmin"] as const) {
     const url = preview.templateSamples[id].venuePhoto;
     assert.equal(url, "/images/preview/venue.jpg");
     assert.ok(existsSync(join("apps/web/public", url)));

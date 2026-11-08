@@ -10,7 +10,7 @@ import { TEMPLATES } from "../packages/contracts/src/index";
 import { createTemplatePreviewSample } from "../apps/web/src/modules/catalog/preview-sample";
 
 const root = process.cwd();
-const pkg = path.join(root, "apps/web/public/templates/invitate-nahorgi-osh");
+const pkg = path.join(root, "apps/web/public/templates/sahar-ziyofati");
 const read = (relative: string) => readFileSync(path.join(pkg, relative), "utf8");
 const require = createRequire(import.meta.url);
 require.extensions[".css"] = (module) => { module.exports = {}; };
@@ -43,7 +43,7 @@ test("Invitate Nahorgi Osh package is distinct from Peshtoq and local-only", () 
 });
 
 test("Nahorgi Osh renderer maps the shared fixture and four locales", () => {
-  const fixture = createTemplatePreviewSample("invitate-nahorgi-osh");
+  const fixture = createTemplatePreviewSample("sahar-ziyofati");
   assert.equal(fixture.eventType, "osh");
   assert.equal(fixture.startsAt, "2027-06-12T07:00");
   const adapter = readFileSync(path.join(root, "apps/web/src/templates/invitate/nahorgi-osh-adapter.ts"), "utf8");
@@ -80,13 +80,13 @@ test("Nahorgi Osh font paths are local and complete", () => {
 });
 
 test("Invitate Nahorgi Osh is published with osh support and portrait artwork", () => {
-  const template = TEMPLATES.find((item) => item.id === "invitate-nahorgi-osh");
+  const template = TEMPLATES.find((item) => item.id === "sahar-ziyofati");
   assert.ok(template);
   assert.deepEqual(template.categoryIds, ["osh"]);
   assert.deepEqual(template.supportedEventTypes, ["osh"]);
   assert.equal(template.previewEventType, "osh");
   assert.equal(template.published, true);
-  assert.equal(template.previewImage, "/templates/invitate-nahorgi-osh/preview.png");
+  assert.equal(template.previewImage, "/templates/sahar-ziyofati/preview.png");
   assert.notEqual(template.id, "nahorgi-osh");
   const provenance = JSON.parse(read("source-provenance.json"));
   assert.equal(provenance.catalogArtwork.status, "complete");

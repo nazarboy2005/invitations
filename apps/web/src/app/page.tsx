@@ -28,7 +28,7 @@ export default async function Home() {
   const featuredTemplates = selectFeaturedTemplates(visibleTemplates);
   const showcasePapers = [
     "anor",
-    "cloud-castle",
+    "bulutlar-qasri",
     "kuzgi-chinor",
     "bogi-eram",
   ].flatMap((id) => {

@@ -7,7 +7,7 @@ import { test } from "node:test";
 import { createTemplatePreviewSample } from "../apps/web/src/modules/catalog/preview-sample.ts";
 import { templateById } from "../packages/contracts/src/index";
 
-const root = new URL("../apps/web/public/templates/green-garden/", import.meta.url);
+const root = new URL("../apps/web/public/templates/yashil-makon/", import.meta.url);
 
 test("Green Garden keeps its original capture byte-for-byte", async () => {
   const source = await readFile(new URL("source/preview-frame.html", root));
@@ -35,11 +35,11 @@ test("Green Garden preview capture matches its canonical fixture provenance", as
     operation: "none; full source opening viewport preserved",
   });
   assert.match(provenance.captureMethod, /archived Chorlove Green Garden server-rendered source opening/);
-  assert.equal(templateById("green-garden")?.previewImage, "/templates/green-garden/catalog-cover-opening.png");
+  assert.equal(templateById("yashil-makon")?.previewImage, "/templates/yashil-makon/catalog-cover-opening.png");
 });
 
 test("Green Garden gallery photos stay ephemeral and authored photos replace placeholders", async () => {
-  const invitation = createTemplatePreviewSample("green-garden");
+  const invitation = createTemplatePreviewSample("yashil-makon");
   assert.equal(invitation.gallery.length, 6);
 
   const bridge = await readFile(new URL("bridge.js", root), "utf8");
@@ -54,7 +54,7 @@ test("Green Garden gallery photos stay ephemeral and authored photos replace pla
 
 test("Green Garden app page excludes reference sample content and runtime", async () => {
   const html = await readFile(new URL("index.html", root), "utf8");
-  for (const sample of ["Muhammad", "Xadicha", "Abdurahmonovlar", "Azizbek", "orchid-amplop", "unsplash.com", "chorlove.uz"]) {
+  for (const sample of ["Muhammad", "Xadicha", "Abdurahmonovlar", "Azizbek", "ormon-maktubi", "unsplash.com", "chorlove.uz"]) {
     assert.equal(html.toLowerCase().includes(sample.toLowerCase()), false, `unexpected source content: ${sample}`);
   }
   assert.match(html, /data-chorlove-template="green-garden"/);
@@ -107,7 +107,7 @@ test("Green Garden local asset references resolve within its package", async () 
   const html = await readFile(new URL("index.html", root), "utf8");
   const refs = [...html.matchAll(/(?:src|url\()=["']?(\/templates\/green-garden\/[^"')\s]+)/g)].map((match) => match[1]);
   const files = await readdir(new URL(".", root), { recursive: true });
-  const publicPrefix = "/templates/green-garden/";
+  const publicPrefix = "/templates/yashil-makon/";
   for (const ref of refs) {
     const relative = ref.slice(publicPrefix.length).replaceAll("/", path.sep);
     assert.ok(files.includes(relative) || relative.startsWith(`assets${path.sep}`), `missing package reference ${ref}`);
@@ -158,10 +158,10 @@ test("Green Garden restores available source motion and schedule assets", async 
     const packaged = manifest.assets.find((asset: { file: string }) => asset.file === file);
     assert.deepEqual({ bytes: source?.bytes, sha256: source?.sha256 }, { bytes: packaged?.bytes, sha256: packaged?.sha256 });
   }
-  assert.equal(manifest.sourceReferencedMissingAsset.file, "/images/green-garden/leaf1-bloom.webp");
+  assert.equal(manifest.sourceReferencedMissingAsset.file, "/images/yashil-makon/leaf1-bloom.webp");
   assert.equal(manifest.sourceReferencedMissingAsset.liveHttpStatus, 404);
   assert.deepEqual(manifest.sourceReferencedMissingAsset.canonicalSourceResponse, {
-    url: "https://chorlove.uz/images/green-garden/leaf1-bloom.webp",
+    url: "https://chorlove.uz/images/yashil-makon/leaf1-bloom.webp",
     method: "GET",
     status: 404,
     checkedAt: "2026-10-26",
@@ -183,7 +183,7 @@ test("Green Garden restores available source motion and schedule assets", async 
   assert.match(manifest.sourceReferencedMissingAsset.alternateNameAudit.conclusion, /not a reliable replacement/);
   assert.deepEqual(manifest.sourceHydrationRecheck, {
     checkedAt: "2026-10-26",
-    url: "http://localhost:3003/templates/green-garden/preview-frame.html",
+    url: "http://localhost:3003/templates/yashil-makon/preview-frame.html",
     httpStatus: 200,
     captureSha256: "d7ba584a7aa9cee59f786191e8c4be0cf57796edbe285fcc35ba890a4be204a8",
     waitAfterDomContentLoadedMs: 2500,

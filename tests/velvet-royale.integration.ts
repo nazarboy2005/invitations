@@ -18,7 +18,7 @@ test("Velvet Royale saves, publishes, renders all locales and persists real gues
   assert.equal(process.env.PUBLISHING_MODE || "free", "free", "This check never starts a payment.");
   const db = getDb(), token = randomToken(), guestToken = randomToken();
   const owner: SessionUser = { id: randomUUID(), telegramUserId: "", displayName: "Disposable Royale verification", isAdmin: false };
-  let invitation = createInvitation("royal-burgundy-edition");
+  let invitation = createInvitation("baxmal-saroy");
   invitation.eventType = "wedding";
   let browser: any;
   const checks: string[] = [];

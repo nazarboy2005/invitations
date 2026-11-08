@@ -39,7 +39,7 @@ test(
       displayName: "Disposable Asalari verification",
       isAdmin: false,
     };
-    let invitation = createInvitation("taklifla-asalari");
+    let invitation = createInvitation("asalari");
     invitation.eventType = "birthday";
     let browser: any;
     const checks: string[] = [];
@@ -112,7 +112,7 @@ test(
         "Authenticated four-locale save/reopen preserves authored fields, authored story chapters and venue",
       );
       const originalShared = structuredClone(invitation);
-      for (const templateId of ["konfetti", "taklifla-asalari"]) {
+      for (const templateId of ["konfetti", "asalari"]) {
         response = await request(
           `/api/invitations/${invitation.id}`,
           { invitation: { ...invitation, templateId } },

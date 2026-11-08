@@ -9,7 +9,7 @@ body {
 [data-chorlove-template] [hidden] {
   display: none !important;
 }
-[data-chorlove-template="stained-glass"] {
+[data-chorlove-template="shisha-naqshi"] {
   height: auto !important;
   min-height: 100dvh;
   overflow-x: clip !important;

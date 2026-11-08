@@ -29,47 +29,47 @@ import { prepareTemplateOpening } from "../../templates/prepare-template-opening
 
 // Load only the renderer selected by this preview, rather than every design.
 const AnorInvitation = dynamic(() => import("@/templates/anor/renderer").then((module) => module.AnorInvitation));
-const WedivoPulauSehati = dynamic(() => import("@/templates/wedivo-pulau-sehati/renderer").then((module) => module.WedivoPulauSehati));
-const TakliflaFayzliXonadonInvitation = dynamic(() => import("@/templates/taklifla-fayzli-xonadon/renderer").then(m=>m.TakliflaFayzliXonadonInvitation));
-const TakliflaErtak = dynamic(() => import("@/templates/taklifla-ertak/renderer").then(m=>m.TakliflaErtak));
-const TakliflaGulbog = dynamic(() => import("@/templates/taklifla-gulbog/renderer").then(m=>m.TakliflaGulbog));
-const TakliflaZarrinGullar = dynamic(() => import("@/templates/taklifla-zarrin-gullar/renderer").then(m=>m.TakliflaZarrinGullar));
-const ToglarBagridaInvitation = dynamic(() => import("@/templates/taklifla-toglar-bagrida/renderer").then(m=>m.ToglarBagridaInvitation));
-const TakliflaOltinYol = dynamic(() => import("@/templates/taklifla-oltin-yol/renderer").then(m=>m.TakliflaOltinYol));
-const TakliflaOsmonInvitation = dynamic(() => import("@/templates/taklifla-osmon/renderer").then(m=>m.TakliflaOsmonInvitation));
-const TakliflaParilarErtagiInvitation = dynamic(() => import("@/templates/taklifla-parilar-ertagi/renderer").then(m=>m.TakliflaParilarErtagiInvitation));
-const TakliflaQogozErtagiInvitation = dynamic(() => import("@/templates/taklifla-qogoz-ertagi/renderer").then(m=>m.TakliflaQogozErtagiInvitation));
-const SakuraGuliInvitation = dynamic(() => import("@/templates/taklifla-sakura-guli/renderer").then(m=>m.SakuraGuliInvitation));
-const TakliflaSharlarInvitation = dynamic(() => import("@/templates/taklifla-sharlar/renderer").then(m=>m.TakliflaSharlarInvitation));
-const TakliflaYulduzliTun = dynamic(() => import("@/templates/taklifla-yulduzli-tun/renderer").then(m=>m.TakliflaYulduzliTun));
-const TakliflaTerracottaInvitation = dynamic(() => import("@/templates/taklifla-terracotta/renderer").then(m=>m.TakliflaTerracottaInvitation));
-const TakliflaUchrashuv = dynamic(() => import("@/templates/taklifla-uchrashuv/renderer").then(m=>m.TakliflaUchrashuv));
-const TakliflaYubileySahifasi = dynamic(() => import("@/templates/taklifla-yubiley-sahifasi/renderer").then(m=>m.TakliflaYubileySahifasi));
-const TakliflaBarakali = dynamic(() => import("@/templates/taklifla-barakali/renderer").then(m => m.TakliflaBarakali));
-const TakliflaZarhalSahifa = dynamic(() => import("@/templates/taklifla-zarhal-sahifa/renderer").then((module) => module.TakliflaZarhalSahifaInvitation));
-const TakliflaAsalari = dynamic(() => import("@/templates/taklifla-asalari/renderer").then((module) => module.TakliflaAsalari));
-const TungiSaroyInvitation = dynamic(() => import("@/templates/taklifla-tungi-saroy/renderer").then((module) => module.TungiSaroyInvitation));
-const TakliflaTovus = dynamic(() => import("@/templates/taklifla-tovus/renderer").then((module) => module.TakliflaTovus));
-const TakliflaTortFasl = dynamic(() => import("@/templates/taklifla-tort-fasl/renderer").then((module) => module.TakliflaTortFasl));
-const MuhrliMaktubInvitation = dynamic(() => import("@/templates/taklifla-muhrli-maktub/renderer").then((module) => module.MuhrliMaktubInvitation));
+const WedivoPulauSehati = dynamic(() => import("@/templates/kongillar-oroli/renderer").then((module) => module.WedivoPulauSehati));
+const TakliflaFayzliXonadonInvitation = dynamic(() => import("@/templates/fayzli-xonadon/renderer").then(m=>m.TakliflaFayzliXonadonInvitation));
+const TakliflaErtak = dynamic(() => import("@/templates/ertak/renderer").then(m=>m.TakliflaErtak));
+const TakliflaGulbog = dynamic(() => import("@/templates/gulbog/renderer").then(m=>m.TakliflaGulbog));
+const TakliflaZarrinGullar = dynamic(() => import("@/templates/zarrin-gullar/renderer").then(m=>m.TakliflaZarrinGullar));
+const ToglarBagridaInvitation = dynamic(() => import("@/templates/toglar-bagrida/renderer").then(m=>m.ToglarBagridaInvitation));
+const TakliflaOltinYol = dynamic(() => import("@/templates/oltin-yol/renderer").then(m=>m.TakliflaOltinYol));
+const TakliflaOsmonInvitation = dynamic(() => import("@/templates/osmon/renderer").then(m=>m.TakliflaOsmonInvitation));
+const TakliflaParilarErtagiInvitation = dynamic(() => import("@/templates/parilar-ertagi/renderer").then(m=>m.TakliflaParilarErtagiInvitation));
+const TakliflaQogozErtagiInvitation = dynamic(() => import("@/templates/qogoz-ertagi/renderer").then(m=>m.TakliflaQogozErtagiInvitation));
+const SakuraGuliInvitation = dynamic(() => import("@/templates/sakura-guli/renderer").then(m=>m.SakuraGuliInvitation));
+const TakliflaSharlarInvitation = dynamic(() => import("@/templates/sharlar/renderer").then(m=>m.TakliflaSharlarInvitation));
+const TakliflaYulduzliTun = dynamic(() => import("@/templates/yulduzli-tun/renderer").then(m=>m.TakliflaYulduzliTun));
+const TakliflaTerracottaInvitation = dynamic(() => import("@/templates/terrakota/renderer").then(m=>m.TakliflaTerracottaInvitation));
+const TakliflaUchrashuv = dynamic(() => import("@/templates/uchrashuv/renderer").then(m=>m.TakliflaUchrashuv));
+const TakliflaYubileySahifasi = dynamic(() => import("@/templates/umr-bahori/renderer").then(m=>m.TakliflaYubileySahifasi));
+const TakliflaBarakali = dynamic(() => import("@/templates/baraka/renderer").then(m => m.TakliflaBarakali));
+const TakliflaZarhalSahifa = dynamic(() => import("@/templates/zarhal-sahifa/renderer").then((module) => module.TakliflaZarhalSahifaInvitation));
+const TakliflaAsalari = dynamic(() => import("@/templates/asalari/renderer").then((module) => module.TakliflaAsalari));
+const TungiSaroyInvitation = dynamic(() => import("@/templates/tungi-saroy/renderer").then((module) => module.TungiSaroyInvitation));
+const TakliflaTovus = dynamic(() => import("@/templates/tovus/renderer").then((module) => module.TakliflaTovus));
+const TakliflaTortFasl = dynamic(() => import("@/templates/tort-fasl/renderer").then((module) => module.TakliflaTortFasl));
+const MuhrliMaktubInvitation = dynamic(() => import("@/templates/muhrli-maktub/renderer").then((module) => module.MuhrliMaktubInvitation));
 const MarxabaInvitation = dynamic(() => import("@/templates/marxaba/renderer").then((module) => module.MarxabaInvitation));
 const InvitateInvitation = dynamic(() => import("@/templates/invitate/renderer").then((module) => module.InvitateInvitation));
-const VelvetRoyaleInvitation = dynamic(() => import("@/templates/velvet-royale/renderer").then((module) => module.VelvetRoyaleInvitation));
-const OliveManorInvitation = dynamic(() => import("@/templates/olive-manor/renderer").then((module) => module.OliveManorInvitation));
-const IslamicEditionInvitation = dynamic(() => import("@/templates/islamic-edition/renderer").then((module) => module.IslamicEditionInvitation));
-const MonochromeEditorialInvitation = dynamic(() => import("@/templates/monochrome-editorial-edition/renderer").then((module) => module.MonochromeEditorialInvitation));
-const XatnaEditionInvitation = dynamic(() => import("@/templates/xatna-edition/renderer").then((module) => module.XatnaEditionInvitation));
+const VelvetRoyaleInvitation = dynamic(() => import("@/templates/baxmal-saroy/renderer").then((module) => module.VelvetRoyaleInvitation));
+const OliveManorInvitation = dynamic(() => import("@/templates/zaytun/renderer").then((module) => module.OliveManorInvitation));
+const IslamicEditionInvitation = dynamic(() => import("@/templates/islomiy/renderer").then((module) => module.IslamicEditionInvitation));
+const MonochromeEditorialInvitation = dynamic(() => import("@/templates/oq-qora-lavha/renderer").then((module) => module.MonochromeEditorialInvitation));
+const XatnaEditionInvitation = dynamic(() => import("@/templates/xatna/renderer").then((module) => module.XatnaEditionInvitation));
 const GulliDarvozaInvitation = dynamic(() => import("@/templates/onlinetaklifnoma/gulli-darvoza").then((module) => module.GulliDarvozaInvitation));
-const OltinDarvozaInvitation = dynamic(() => import("@/templates/onlinetaklifnoma/oltin-darvoza-ortidagi-baxt").then((module) => module.OltinDarvozaInvitation));
+const OltinDarvozaInvitation = dynamic(() => import("@/templates/onlinetaklifnoma/baxt-darvozasi").then((module) => module.OltinDarvozaInvitation));
 const MingBirKechaInvitation = dynamic(() => import("@/templates/onlinetaklifnoma/ming-bir-kecha").then((module) => module.MingBirKechaInvitation));
 const ZarrinDoppiInvitation = dynamic(() => import("@/templates/onlinetaklifnoma/zarrin-doppi").then((module) => module.ZarrinDoppiInvitation));
 const AndalusDarvozasiInvitation = dynamic(() => import("@/templates/onlinetaklifnoma/andalus-darvozasi").then((module) => module.AndalusDarvozasiInvitation));
 const SamarqandPeshtoqInvitation = dynamic(() => import("@/templates/onlinetaklifnoma/samarqand-peshtoqi").then((module) => module.SamarqandPeshtoqInvitation));
 const ShishaBogInvitation = dynamic(() => import("@/templates/onlinetaklifnoma/shisha-bog").then((module) => module.ShishaBogInvitation));
 const KapadokiyaTongiInvitation = dynamic(() => import("@/templates/onlinetaklifnoma/kapadokiya-tongi").then((module) => module.KapadokiyaTongiInvitation));
-const BuxoroRavoqInvitation = dynamic(() => import("@/templates/onlinetaklifnoma/buxoro-ravoq").then((module) => module.BuxoroRavoqInvitation));
+const BuxoroRavoqInvitation = dynamic(() => import("@/templates/onlinetaklifnoma/buxoro-ravogi").then((module) => module.BuxoroRavoqInvitation));
 const JannatBogiInvitation = dynamic(() => import("@/templates/onlinetaklifnoma/jannat-bogi").then((module) => module.JannatBogiInvitation));
-const TojmahalOltinDarvozasiInvitation = dynamic(() => import("@/templates/onlinetaklifnoma/tojmahal-oltin-darvozasi").then((module) => module.TojmahalOltinDarvozasiInvitation));
+const TojmahalOltinDarvozasiInvitation = dynamic(() => import("@/templates/onlinetaklifnoma/tojmahal-darvozasi").then((module) => module.TojmahalOltinDarvozasiInvitation));
 const ChorloveInvitation = dynamic(() => import("@/templates/chorlove/renderer").then((module) => module.ChorloveInvitation));
 
 function previewDraftKey(id: string) {
@@ -341,7 +341,7 @@ export function FullTemplatePreview({
         />
       )}
       {!cardPreview && !posterCapture && <nav
-        className={`${styles.previewControls} ${["taklifla-sharlar","taklifla-yulduzli-tun","taklifla-terracotta","taklifla-uchrashuv"].includes(template.id) ? styles.leftLanguageClearance : ""} ${showControls ? styles.controlsVisible : ""} ${["taklifla-uchrashuv", "taklifla-terracotta", "taklifla-yulduzli-tun", "taklifla-sharlar", "taklifla-sakura-guli", "taklifla-qogoz-ertagi", "taklifla-parilar-ertagi", "taklifla-osmon", "taklifla-oltin-yol", "taklifla-toglar-bagrida", "taklifla-zarrin-gullar", "taklifla-gulbog", "taklifla-ertak", "taklifla-fayzli-xonadon", "taklifla-yubiley-sahifasi", "taklifla-barakali", "taklifla-tungi-saroy", "taklifla-tovus"].includes(template.id) ? styles.templateLanguageClearance : ""}`}
+        className={`${styles.previewControls} ${["sharlar","yulduzli-tun","terrakota","uchrashuv"].includes(template.id) ? styles.leftLanguageClearance : ""} ${showControls ? styles.controlsVisible : ""} ${["uchrashuv", "terrakota", "yulduzli-tun", "sharlar", "sakura-guli", "qogoz-ertagi", "parilar-ertagi", "osmon", "oltin-yol", "toglar-bagrida", "zarrin-gullar", "gulbog", "ertak", "fayzli-xonadon", "umr-bahori", "baraka", "tungi-saroy", "tovus"].includes(template.id) ? styles.templateLanguageClearance : ""}`}
         aria-label="Dizayn amallari"
         aria-hidden={!showControls}
         inert={!showControls}
@@ -365,7 +365,7 @@ export function FullTemplatePreview({
       </nav>}
       {!invitation || invitation.templateId !== template.id ? (
         <div className={styles.loading}>Dizayn ochilmoqda…</div>
-      ) : template.id === "oltin-darvoza-ortidagi-baxt" ? (
+      ) : template.id === "baxt-darvozasi" ? (
         <OltinDarvozaInvitation invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} sampleWishes={catalogPreview} silentPlayback={silentPlayback} />
       ) : template.id === "gulli-darvoza" ? (
         <GulliDarvozaInvitation invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} sampleWishes={catalogPreview} silentPlayback={silentPlayback} />
@@ -377,61 +377,61 @@ export function FullTemplatePreview({
         <ShishaBogInvitation invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} sampleWishes={catalogPreview} silentPlayback={silentPlayback} />
       ) : template.id === "kapadokiya-tongi" ? (
         <KapadokiyaTongiInvitation invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} sampleWishes={catalogPreview} silentPlayback={silentPlayback} />
-      ) : template.id === "buxoro-ravoq" ? (
+      ) : template.id === "buxoro-ravogi" ? (
         <BuxoroRavoqInvitation invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} sampleWishes={catalogPreview} silentPlayback={silentPlayback} />
       ) : template.id === "jannat-bogi" ? (
         <JannatBogiInvitation invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} sampleWishes={catalogPreview} silentPlayback={silentPlayback} />
-      ) : template.id === "tojmahal-oltin-darvozasi" ? (
+      ) : template.id === "tojmahal-darvozasi" ? (
         <TojmahalOltinDarvozasiInvitation invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} sampleWishes={catalogPreview} silentPlayback={silentPlayback} />
       ) : template.id === "andalus-darvozasi" ? (
         <AndalusDarvozasiInvitation invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} sampleWishes={catalogPreview} silentPlayback={silentPlayback} />
       ) : template.id === "zarrin-doppi" ? (
         <ZarrinDoppiInvitation invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} sampleWishes={catalogPreview} silentPlayback={silentPlayback} />
-      ) : template.id === "wedivo-pulau-sehati" ? (
+      ) : template.id === "kongillar-oroli" ? (
         <WedivoPulauSehati invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} silentPlayback={silentPlayback} qaReducedMotion={qaReducedMotion} />
-      ) : template.id === "taklifla-fayzli-xonadon" ? (
+      ) : template.id === "fayzli-xonadon" ? (
         <TakliflaFayzliXonadonInvitation invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} silentPlayback={silentPlayback} qaReducedMotion={qaReducedMotion} />
-      ) : template.id === "taklifla-ertak" ? (
+      ) : template.id === "ertak" ? (
         <TakliflaErtak invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} silentPlayback={silentPlayback} qaReducedMotion={qaReducedMotion} />
-      ) : template.id === "taklifla-gulbog" ? (
+      ) : template.id === "gulbog" ? (
         <TakliflaGulbog invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} silentPlayback={silentPlayback} qaReducedMotion={qaReducedMotion} />
-      ) : template.id === "taklifla-zarrin-gullar" ? (
+      ) : template.id === "zarrin-gullar" ? (
         <TakliflaZarrinGullar invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} silentPlayback={silentPlayback} qaReducedMotion={qaReducedMotion} />
-      ) : template.id === "taklifla-toglar-bagrida" ? (
+      ) : template.id === "toglar-bagrida" ? (
         <ToglarBagridaInvitation invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} silentPlayback={silentPlayback} qaReducedMotion={qaReducedMotion} />
-      ) : template.id === "taklifla-oltin-yol" ? (
+      ) : template.id === "oltin-yol" ? (
         <TakliflaOltinYol invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} silentPlayback={silentPlayback} qaReducedMotion={qaReducedMotion} />
-      ) : template.id === "taklifla-osmon" ? (
+      ) : template.id === "osmon" ? (
         <TakliflaOsmonInvitation invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} silentPlayback={silentPlayback} qaReducedMotion={qaReducedMotion} />
-      ) : template.id === "taklifla-parilar-ertagi" ? (
+      ) : template.id === "parilar-ertagi" ? (
         <TakliflaParilarErtagiInvitation invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} silentPlayback={silentPlayback} qaReducedMotion={qaReducedMotion} />
-      ) : template.id === "taklifla-qogoz-ertagi" ? (
+      ) : template.id === "qogoz-ertagi" ? (
         <TakliflaQogozErtagiInvitation invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} silentPlayback={silentPlayback} qaReducedMotion={qaReducedMotion} />
-      ) : template.id === "taklifla-sakura-guli" ? (
+      ) : template.id === "sakura-guli" ? (
         <SakuraGuliInvitation invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} silentPlayback={silentPlayback} qaReducedMotion={qaReducedMotion} />
-      ) : template.id === "taklifla-sharlar" ? (
+      ) : template.id === "sharlar" ? (
         <TakliflaSharlarInvitation invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} silentPlayback={silentPlayback} qaReducedMotion={qaReducedMotion} />
-      ) : template.id === "taklifla-yulduzli-tun" ? (
+      ) : template.id === "yulduzli-tun" ? (
         <TakliflaYulduzliTun invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} silentPlayback={silentPlayback} qaReducedMotion={qaReducedMotion} />
-      ) : template.id === "taklifla-terracotta" ? (
+      ) : template.id === "terrakota" ? (
         <TakliflaTerracottaInvitation invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} silentPlayback={silentPlayback} qaReducedMotion={qaReducedMotion} />
-      ) : template.id === "taklifla-uchrashuv" ? (
+      ) : template.id === "uchrashuv" ? (
         <TakliflaUchrashuv invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} silentPlayback={silentPlayback} qaReducedMotion={qaReducedMotion} />
-      ) : template.id === "taklifla-yubiley-sahifasi" ? (
+      ) : template.id === "umr-bahori" ? (
         <TakliflaYubileySahifasi invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} silentPlayback={silentPlayback} qaReducedMotion={qaReducedMotion} />
-      ) : template.id === "taklifla-barakali" ? (
+      ) : template.id === "baraka" ? (
         <TakliflaBarakali invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} sampleWishes={catalogPreview} silentPlayback={silentPlayback} qaReducedMotion={qaReducedMotion} />
-      ) : template.id === "taklifla-zarhal-sahifa" ? (
+      ) : template.id === "zarhal-sahifa" ? (
         <TakliflaZarhalSahifa invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} sampleWishes={catalogPreview} silentPlayback={silentPlayback} qaReducedMotion={qaReducedMotion} />
-      ) : template.id === "taklifla-tungi-saroy" ? (
+      ) : template.id === "tungi-saroy" ? (
         <TungiSaroyInvitation invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} silentPlayback={silentPlayback} qaReducedMotion={qaReducedMotion} />
-      ) : template.id === "taklifla-tovus" ? (
+      ) : template.id === "tovus" ? (
         <TakliflaTovus invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} silentPlayback={silentPlayback} qaReducedMotion={qaReducedMotion} />
-      ) : template.id === "taklifla-tort-fasl" ? (
+      ) : template.id === "tort-fasl" ? (
         <TakliflaTortFasl invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} silentPlayback={silentPlayback} qaReducedMotion={qaReducedMotion} />
-      ) : template.id === "taklifla-asalari" ? (
+      ) : template.id === "asalari" ? (
         <TakliflaAsalari invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview sampleWishes={catalogPreview} silentPlayback={silentPlayback} qaReducedMotion={qaReducedMotion} />
-      ) : template.id === "taklifla-muhrli-maktub" ? (
+      ) : template.id === "muhrli-maktub" ? (
         <MuhrliMaktubInvitation sampleWishes={catalogPreview} invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} silentPlayback={silentPlayback} />
       ) : template.id === "anor" ? (
         <AnorInvitation
@@ -468,17 +468,17 @@ export function FullTemplatePreview({
           qaReducedMotion={qaReducedMotion}
           qaMobile={qaMobile}
         />
-      ) : template.id === "wedivo-pulau-sehati" ? (
+      ) : template.id === "kongillar-oroli" ? (
         <WedivoPulauSehati invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} silentPlayback={silentPlayback} qaReducedMotion={qaReducedMotion} />
-      ) : template.id === "royal-burgundy-edition" ? (
+      ) : template.id === "baxmal-saroy" ? (
           <VelvetRoyaleInvitation invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} sampleWishes={catalogPreview} silentPlayback={silentPlayback} qaReducedMotion={qaReducedMotion} qaMobile={qaMobile} />
-      ) : template.id === "olive-manor-edition" ? (
+      ) : template.id === "zaytun" ? (
           <OliveManorInvitation invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} sampleWishes={catalogPreview} silentPlayback={silentPlayback} qaReducedMotion={qaReducedMotion} qaMobile={qaMobile} />
-      ) : template.id === "islamic-edition" ? (
+      ) : template.id === "islomiy" ? (
           <IslamicEditionInvitation invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} sampleWishes={catalogPreview} silentPlayback={silentPlayback} qaReducedMotion={qaReducedMotion} qaMobile={qaMobile} />
-      ) : template.id === "monochrome-editorial-edition" ? (
+      ) : template.id === "oq-qora-lavha" ? (
           <MonochromeEditorialInvitation invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} silentPlayback={silentPlayback} qaReducedMotion={qaReducedMotion} qaMobile={qaMobile} />
-      ) : template.id === "xatna-edition" ? (
+      ) : template.id === "xatna" ? (
         <XatnaEditionInvitation invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} silentPlayback={silentPlayback} qaReducedMotion={qaReducedMotion} qaMobile={qaMobile} />
       ) : isMarxabaTemplate(template.id) ? (
         <MarxabaInvitation

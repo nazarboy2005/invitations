@@ -5,14 +5,14 @@ import { test } from "node:test";
 import { templateById } from "../packages/contracts/src/index";
 
 const root = resolve(process.cwd());
-const template = templateById("olive-manor-edition");
-const source = resolve(root, "apps/web/public/templates/olive-manor-edition/source/reference");
+const template = templateById("zaytun");
+const source = resolve(root, "apps/web/public/templates/zaytun/source/reference");
 
 test("Olive Manor is published for weddings with its complete opening artwork", () => {
   assert.ok(template);
-  assert.equal(template.name, "Olive Manor");
+  assert.equal(template.name, "Zaytun");
   assert.equal(template.published, true);
-  assert.equal(template.previewImage, "/templates/olive-manor-edition/catalog.webp");
+  assert.equal(template.previewImage, "/templates/zaytun/catalog.webp");
   assert.deepEqual(template.categoryIds, ["wedding"]);
   assert.deepEqual(template.supportedEventTypes, ["wedding"]);
 });
@@ -28,7 +28,7 @@ test("Olive Manor source identity and distinctive assets are captured locally", 
   for (const asset of ["intro-start-v2.jpg", "intro-v3.mp4", "hero-bg.webp", "calendar-flowers.webp", "envelope.webp"]) {
     assert.ok(readFileSync(resolve(source, "assets", asset)), `${asset} must be present in the source package`);
   }
-  const fonts = readFileSync(resolve(root, "apps/web/public/templates/olive-manor-edition/source/current/fonts.css"), "utf8");
+  const fonts = readFileSync(resolve(root, "apps/web/public/templates/zaytun/source/current/fonts.css"), "utf8");
   for (const match of fonts.matchAll(/url\(([^)]+)\)/g)) {
     const path = new URL(match[1].replace(/^\//, "https://local.invalid/")).pathname;
     assert.ok(readFileSync(resolve(root, "apps/web/public", path.slice(1))), `${path} must be packaged locally`);

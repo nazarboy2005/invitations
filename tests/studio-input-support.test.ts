@@ -87,7 +87,7 @@ test("color names, swatches, and the actual palette count are independent inputs
 });
 
 test("unsupported values in disabled features and inactive translations cannot bypass validation", () => {
-  const i = addLanguage(blank("taklifla-asalari"), "ru");
+  const i = addLanguage(blank("asalari"), "ru");
   i.enabledLocales = ["uz-Latn"];
   i.content.ru.people = ["Child", "Hidden extra name"];
   i.optionalFeatures.gallery = false;
@@ -103,7 +103,7 @@ test("switches preserve server-owned hidden content but reject additions and cha
   previous.gallery = [photo()];
   previous.gift = { enabled: true, receiptUploadEnabled: true, cardNumber: "8600123456789012", cardHolder: "Owner" };
   previous.content["uz-Latn"].hosts = "Family";
-  const next = structuredClone(switchTemplate(previous, "taklifla-asalari"));
+  const next = structuredClone(switchTemplate(previous, "asalari"));
   assert.deepEqual(unsupportedInvitationInputs(next, previous), []);
   const stored = invitationForStorage(next);
   assert.deepEqual(stored.gallery, previous.gallery);
@@ -118,29 +118,29 @@ test("switches preserve server-owned hidden content but reject additions and cha
 });
 
 test("template-specific input schemas reject unknown, foreign and nested unsupported keys", () => {
-  const i = blank("taklifla-terracotta");
-  i.templateData = { "taklifla-terracotta": { infoNote: { en: "Allowed" }, footerNote: {}, hiddenApiKey: "Forged" } };
+  const i = blank("terrakota");
+  i.templateData = { "terrakota": { infoNote: { en: "Allowed" }, footerNote: {}, hiddenApiKey: "Forged" } };
   assert.ok(invitationSchema.safeParse(i).success);
   assert.ok(unsupportedInvitationInputs(i).some(f => f.path.endsWith("hiddenApiKey")));
   i.templateData = { "other-template": { text: "Unsupported" } };
   assert.ok(unsupportedInvitationInputs(i).some(f => f.path === "templateData.other-template"));
-  i.templateId = "wedivo-pulau-sehati";
-  i.templateData = { "wedivo-pulau-sehati": { media: { videoUrl: "", liveUrl: "", intro: "", hiddenApiKey: "Forged" } } };
+  i.templateId = "kongillar-oroli";
+  i.templateData = { "kongillar-oroli": { media: { videoUrl: "", liveUrl: "", intro: "", hiddenApiKey: "Forged" } } };
   assert.ok(unsupportedInvitationInputs(i).some(f => f.path.endsWith("media.hiddenApiKey")));
   assert.deepEqual(unsupportedInvitationInputs(studioSavePayload(i)), []);
 });
 
 test("source regressions: Zarhal photos, Aurelia two slots, prose colors, and Velvet text only", () => {
-  assert.match(readFileSync("apps/web/public/templates/taklifla-zarhal-sahifa/bridge.js", "utf8"), /state\.gallery/);
-  assert.equal(templateCapabilities("taklifla-zarhal-sahifa").gallery, 50);
+  assert.match(readFileSync("apps/web/public/templates/zarhal-sahifa/bridge.js", "utf8"), /state\.gallery/);
+  assert.equal(templateCapabilities("zarhal-sahifa").gallery, 50);
   assert.match(readFileSync("apps/web/public/templates/aurelia/assets/js/aurelia-adapter.js", "utf8"), /gallery\[1\]/);
   assert.equal(templateCapabilities("aurelia").gallery, 2);
-  assert.equal(templateCapabilities("taklifla-asalari").inputs.dressColorHex, false);
-  assert.equal(templateCapabilities("taklifla-asalari").inputs.dressColorNames, true);
+  assert.equal(templateCapabilities("asalari").inputs.dressColorHex, false);
+  assert.equal(templateCapabilities("asalari").inputs.dressColorNames, true);
   assert.equal(templateCapabilities("velvet").inputs.dressText, true);
   assert.equal(templateCapabilities("velvet").inputs.dressStyle, false);
   assert.equal(templateCapabilities("velvet").inputs.hosts, false);
-  assert.equal(templateCapabilities("taklifla-qogoz-ertagi").telegram, true);
+  assert.equal(templateCapabilities("qogoz-ertagi").telegram, true);
 });
 
 test("publication never demands a hidden event-label input", () => {

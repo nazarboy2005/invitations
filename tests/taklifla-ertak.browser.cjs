@@ -1,5 +1,5 @@
 const {chromium}=require('../apps/web/node_modules/playwright'),fs=require('node:fs'),http=require('node:http'),path=require('node:path'),assert=require('node:assert/strict'),{execFileSync}=require('node:child_process');
-const id='taklifla-ertak',base=path.resolve('apps/web/public/templates/'+id),out=path.resolve('docs/templates/taklifla-audit/ertak');fs.mkdirSync(out,{recursive:true});
+const id='ertak',base=path.resolve('apps/web/public/templates/'+id),out=path.resolve('docs/templates/taklifla-audit/ertak');fs.mkdirSync(out,{recursive:true});
 const fixture=JSON.parse(execFileSync(process.execPath,['--import','tsx','tests/taklifla-ertak.fixture.ts'],{encoding:'utf8'})),meta=JSON.parse(fs.readFileSync(base+'/source/provenance.json'));
 let source=fs.readFileSync(meta.source,'utf8').replace(/<script\b[^>]*>[\s\S]*?<\/script>/g,'').replace(/<link[^>]*href="https:\/\/fonts[^>]*>/g,'');
 source=source.replace('</head>','<link rel="stylesheet" href="/fonts/fonts.css"><link rel="icon" href="data:,"></head>').replace('</body>','<script src="/source/motion.js"></script></body>');

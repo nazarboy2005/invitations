@@ -295,7 +295,7 @@
           if (sfxMuted || !AC) {
             return;
           }
-          if (name === "bloom") {
+          if (name === "gullar-bayrami") {
             tone(659.25, 0, 1.4, 0.05);
             tone(987.77, 0.08, 1.2, 0.035);
             tone(1318.5, 0.16, 1.1, 0.025);
@@ -1524,7 +1524,7 @@
           el.classList.remove("is-half");
           el.classList.add("is-open");
           if (!silent) {
-            sfx("bloom");
+            sfx("gullar-bayrami");
           }
         }
         function closeBloom(el) {
@@ -2653,7 +2653,7 @@
             }
             var card = make("div", "rd-item card rv", "rd-item-" + i, rdList);
             card.style.setProperty("--d", "0s");
-            var bl = make("span", "bloom", "rd-bloom-" + i, card);
+            var bl = make("span", "gullar-bayrami", "rd-bloom-" + i, card);
             bl.setAttribute("data-preset", "mini");
             bl.setAttribute("data-tone", i % 2 ? "crimson" : "blush");
             bl.setAttribute("data-auto", "350");
@@ -3129,7 +3129,7 @@
           body.classList.add("is-locked");
           lbOpen = true;
           lbBurst();
-          sfx("bloom");
+          sfx("gullar-bayrami");
           $("lb-close").focus({ preventScroll: true });
         }
         function closeViewer() {

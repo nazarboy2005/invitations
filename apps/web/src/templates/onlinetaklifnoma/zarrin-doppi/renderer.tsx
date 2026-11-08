@@ -77,7 +77,7 @@ export function ZarrinDoppiInvitation({
     frame.current?.contentWindow?.postMessage({ type: "zarrin-doppi:update", payload: message }, window.location.origin);
   }, [message]);
 
-  const frameUrl = publicAsset(`/templates/onlinetaklifnoma-zarrin-doppi/index.html${preview && silentPlayback ? "?qaSilent=1" : ""}`);
+  const frameUrl = publicAsset(`/templates/zarrin-doppi/index.html${preview && silentPlayback ? "?qaSilent=1" : ""}`);
   const mode = fullPreview ? styles.full : preview ? styles.preview : styles.public;
   return (
     <div className={mode}>

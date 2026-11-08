@@ -15,7 +15,7 @@ for(const id of ids){
 import motion from './motion.js';
 mount('${id}', motion).catch(error => { console.error(error); document.body.style.visibility = 'visible'; document.getElementById('invitation').textContent = 'Taklifnoma yuklanmadi. Sahifani yangilang.'; });\n`);
 }
-const file='apps/web/public/templates/islamic-edition/source/current/template.module.js';
+const file='apps/web/public/templates/islomiy/source/current/template.module.js';
 const source=await fs.readFile(file,'utf8'),sf=ts.createSourceFile(file,source,99,true);
 const particle=sf.statements.find(n=>ts.isClassDeclaration(n)&&n.name?.text==='Ra');
 if(!particle)throw Error('Source star engine changed; inspect before extracting.');
@@ -28,4 +28,4 @@ export function stars(root,reduced){
   function draw(){if(!document.hidden){context.clearRect(0,0,canvas.width,canvas.height);particles.forEach(p=>{p.update();p.draw(context)});}frame=requestAnimationFrame(draw);}
   draw();window.addEventListener('pagehide',()=>cancelAnimationFrame(frame),{once:true});
 }\n`;
-await fs.writeFile('apps/web/public/templates/islamic-edition/stars.js',engine);
+await fs.writeFile('apps/web/public/templates/islomiy/stars.js',engine);

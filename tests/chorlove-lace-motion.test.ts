@@ -11,7 +11,7 @@ const sourceRoot = [
   String.raw`D:\$RECYCLE.BIN\S-1-5-21-3366971363-407715079-3029606043-1001\$R4OL8GR\Chorlove\Web invitations`,
 ].find((candidate) => candidate && existsSync(`${candidate}/_next/static/chunks/0j~ix342hy.sg.js`));
 if (!sourceRoot) throw new Error("Set CHORLOVE_LACE_SOURCE_ROOT to the recovered Chorlove/Web invitations archive.");
-const packageRoot = "apps/web/public/templates/lace";
+const packageRoot = "apps/web/public/templates/marvarid";
 const provenance = JSON.parse(readFileSync(`${packageRoot}/source-assets.provenance.json`, "utf8")) as {
   copiedDesignAssets: Array<{ archiveFile: string; file: string; sha256: string }>;
   capturedStylesheets: Array<{ archiveFile: string; file: string; sha256: string }>;
@@ -123,23 +123,23 @@ test("Lace gallery photo files match the exact source image bytes and active ord
     assert.equal(sha256(packaged), expectedHash, `${file} package hash`);
   }
   assert.deepEqual(previewSample.templateSamples.lace?.gallery?.map(({ url }) => url), [
-    "/templates/lace/assets/gallery-2.webp",
-    "/templates/lace/assets/gallery-1.webp",
-    "/templates/lace/assets/gallery-3.webp",
-    "/templates/lace/assets/gallery-6.webp",
-    "/templates/lace/assets/gallery-4.webp",
-    "/templates/lace/assets/gallery-5.webp",
+    "/templates/marvarid/assets/gallery-2.webp",
+    "/templates/marvarid/assets/gallery-1.webp",
+    "/templates/marvarid/assets/gallery-3.webp",
+    "/templates/marvarid/assets/gallery-6.webp",
+    "/templates/marvarid/assets/gallery-4.webp",
+    "/templates/marvarid/assets/gallery-5.webp",
   ]);
 });
 
 test("Lace initial selection preview uses the source sample gallery and creator photos replace it", () => {
   assert.deepEqual(previewSample.templateSamples.lace?.gallery?.map(({ url }) => url), [
-    "/templates/lace/assets/gallery-2.webp",
-    "/templates/lace/assets/gallery-1.webp",
-    "/templates/lace/assets/gallery-3.webp",
-    "/templates/lace/assets/gallery-6.webp",
-    "/templates/lace/assets/gallery-4.webp",
-    "/templates/lace/assets/gallery-5.webp",
+    "/templates/marvarid/assets/gallery-2.webp",
+    "/templates/marvarid/assets/gallery-1.webp",
+    "/templates/marvarid/assets/gallery-3.webp",
+    "/templates/marvarid/assets/gallery-6.webp",
+    "/templates/marvarid/assets/gallery-4.webp",
+    "/templates/marvarid/assets/gallery-5.webp",
   ]);
   assert.doesNotMatch(chorloveRenderer, /templateId === "lace"/);
   assert.match(chorloveRenderer, /makeLegacyData\(invitation, frameLocale, guestName, sampleWishes\)/);

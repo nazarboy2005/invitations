@@ -4,7 +4,7 @@ import { existsSync, readFileSync } from "node:fs";
 import { createHash } from "node:crypto";
 import { resolve, join } from "node:path";
 
-const root = resolve("apps/web/public/templates/luxury-gold");
+const root = resolve("apps/web/public/templates/zar-jilosi");
 const html = readFileSync(join(root, "index.html"), "utf8");
 const bridge = readFileSync(join(root, "bridge.js"), "utf8");
 const manifest = JSON.parse(readFileSync(join(root, "source-assets.provenance.json"), "utf8"));
@@ -13,11 +13,11 @@ const previewSample = JSON.parse(readFileSync(resolve("apps/web/src/modules/cata
 test("Luxury Gold preserves captured layout, source styles and original assets with provenance", () => {
   const source = readFileSync(join(root, "source/preview-frame.html"));
   const sourceRootCandidate = process.env.CHORLOVE_SOURCE_ROOT || resolve("Invitations - this folder will be removed from production/Chorlove/Web invitations");
-  const sourceRoot = existsSync(join(sourceRootCandidate, "templates/luxury-gold/preview-frame.html"))
+  const sourceRoot = existsSync(join(sourceRootCandidate, "templates/zar-jilosi/preview-frame.html"))
     ? sourceRootCandidate
     : null;
   const capturedSource = sourceRoot
-    ? readFileSync(join(sourceRoot, "templates/luxury-gold/preview-frame.html"))
+    ? readFileSync(join(sourceRoot, "templates/zar-jilosi/preview-frame.html"))
     : source;
   const normalizeLines = (bytes: Buffer) => Buffer.from(bytes.toString("utf8").replace(/\r\n/g, "\n"));
   if (sourceRoot) {
@@ -62,7 +62,7 @@ test("Luxury Gold preserves captured layout, source styles and original assets w
       assert.equal(createHash("sha256").update(capturedAsset).digest("hex"), asset.sha256);
     }
   }
-  const previewGallery = previewSample.templateSamples["luxury-gold"].gallery;
+  const previewGallery = previewSample.templateSamples["zar-jilosi"].gallery;
   assert.deepEqual(
     previewGallery.map((item: { url: string }) => item.url),
     [2, 1, 3, 6, 4, 5].map((index) => `/templates/chorlove/orchid-amplop/assets/gallery-${index}.webp`),
@@ -198,15 +198,15 @@ test("Luxury Gold restores the source opening, section motion, loops and reduced
 });
 
 test("Luxury Gold excludes unrelated gallery/sample data and connects the shared contract", () => {
-  assert.ok(html.includes('data-chorlove-template="luxury-gold" hidden'));
+  assert.ok(html.includes('data-chorlove-template="zar-jilosi" hidden'));
   assert.ok(!html.includes("_next/image") && !/_next\/static\/chunks\/[\w~.-]+\.js/.test(html));
-  for (const excluded of ["orchid-amplop", "gallery-1.webp", "gallery-2.webp", "gallery-3.webp", "gallery-4.webp", "gallery-5.webp", "gallery-6.webp", "ChorLove.uz", "Patrick Watson"]) assert.ok(!html.includes(excluded));
+  for (const excluded of ["ormon-maktubi", "gallery-1.webp", "gallery-2.webp", "gallery-3.webp", "gallery-4.webp", "gallery-5.webp", "gallery-6.webp", "ChorLove.uz", "Patrick Watson"]) assert.ok(!html.includes(excluded));
   for (const field of ["groom", "bride", "dateTime", "venue", "toyona", "gallery", "dressCode", "wishes", "contacts", "rsvp", "enabledLocales", "reducedMotion", "music"]) {
     assert.ok(bridge.includes(field), `missing ${field}`);
   }
   assert.ok(bridge.includes("api/public/invitations"));
   const contract = readFileSync("packages/contracts/src/index.ts", "utf8");
   const migration = readFileSync("packages/database/migrations/0117_register_luxury_gold.sql", "utf8");
-  assert.ok(contract.includes('id: "luxury-gold"'));
-  assert.ok(migration.includes("VALUES ('luxury-gold', 'Luxury Gold', 15000000, 'UZS', false)"));
+  assert.ok(contract.includes('id: "zar-jilosi"'));
+  assert.ok(migration.includes("VALUES ('zar-jilosi', 'Luxury Gold', 15000000, 'UZS', false)"));
 });

@@ -30,7 +30,7 @@ export function EInvitation({ templateId, name, invitation, invitationId, locale
   const [ready, setReady] = useState(false);
   useEffect(() => setFrameLocale(locale), [locale]);
   const data = useMemo(() => makeLegacyData(invitation, frameLocale, guestName, sampleWishes, templateId), [invitation, frameLocale, guestName, sampleWishes, templateId]);
-  const sendExtras = useInvitationExtras(frame, invitation, data, frameLocale, invitationId, guestToken, preview, ready, { receiptHostSelector: ".section-payment,.section-card,.section-gift", extraPeople: templateId !== "xatna-edition" });
+  const sendExtras = useInvitationExtras(frame, invitation, data, frameLocale, invitationId, guestToken, preview, ready, { receiptHostSelector: ".section-payment,.section-card,.section-gift", extraPeople: templateId !== "xatna" });
   const message = useMemo(() => ({
     ...data,
     people: invitation.content[frameLocale]?.people ?? [],

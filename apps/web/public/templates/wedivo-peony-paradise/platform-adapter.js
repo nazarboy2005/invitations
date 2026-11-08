@@ -55,7 +55,7 @@
       "gr-kicker-t": "greeting",
       "gr-title": "first",
       "gr-script": "before",
-      "gr-bloom-hint": "bloom",
+      "gr-bloom-hint": "gullar-bayrami",
       "cp-kicker-t": "couple",
       "cp-title": "couple",
       "cp-script": "coupleSub",
@@ -160,7 +160,7 @@
     text("vn-map-veil-t", ui.map);
     for (const [id, key] of Object.entries({
       "cv-bloom": "open",
-      "gr-bloom": "bloom",
+      "gr-bloom": "gullar-bayrami",
       "nv-music": "music",
       "nv-meter": "first",
       "lb-close": "close",
@@ -476,9 +476,9 @@
       const lines = [
         "BEGIN:VCALENDAR",
         "VERSION:2.0",
-        "PRODID:-//Visol//Peony Paradise//EN",
+        "PRODID:-//Taklifnoma//Invitation//EN",
         "BEGIN:VEVENT",
-        "UID:" + escape(p.invitationId) + "@visol",
+        "UID:" + escape(p.invitationId) + "@taklifnoma",
         "DTSTAMP:" + stamp(new Date()),
         "DTSTART:" + stamp(start),
         "DTEND:" + stamp(end),

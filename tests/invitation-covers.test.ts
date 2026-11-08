@@ -24,7 +24,7 @@ test("draft thumbnail identity changes only with names/design/locale; publicatio
   draft.content["uz-Latn"].people[0] = "New name";
   assert.notEqual(thumbnailContent(draft), key);
   const named = thumbnailContent(draft);
-  draft.templateId = "cloud-castle";
+  draft.templateId = "bulutlar-qasri";
   assert.notEqual(thumbnailContent(draft), named);
   draft.status = "published";
   const published = thumbnailContent(draft);
@@ -45,7 +45,7 @@ test("cover cache distinguishes edited content, language, template and private s
     original,
   );
   assert.notEqual(
-    coverKey({ ...invitation, templateId: "cloud-castle" }, "account-one"),
+    coverKey({ ...invitation, templateId: "bulutlar-qasri" }, "account-one"),
     original,
   );
   assert.notEqual(
@@ -98,7 +98,7 @@ test("portrait recipes preserve the curated opening states and special gestures"
   for (const id of Object.keys(CATALOG_COVERS))
     assert.notEqual(coverRecipe(id).scene, "opening", id);
   assert.equal(coverRecipe("anor").scene, "opened");
-  assert.equal(coverRecipe("cloud-castle").scene, "opened");
+  assert.equal(coverRecipe("bulutlar-qasri").scene, "opened");
   assert.equal(coverRecipe("nahor").scene, "lid");
   assert.equal(coverRecipe("qatlam").scene, "book");
   assert.equal(coverRecipe("muhabbat-kitobi").scene, "opening");
@@ -110,7 +110,7 @@ test("portrait recipes preserve the curated opening states and special gestures"
     "retro-kino",
     "sahifa",
     "somon-yoli",
-    "toscana",
+    "gulzor",
   ]) {
     assert.equal(coverRecipe(id).scene, "opened", id);
   }

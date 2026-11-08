@@ -5,26 +5,26 @@ import { join } from "node:path";
 import test from "node:test";
 import { TEMPLATES } from "../packages/contracts/src/index";
 
-const base = "apps/web/public/templates/palace-rose";
+const base = "apps/web/public/templates/saroy-atirguli";
 const read = (path: string) => readFileSync(join(process.cwd(), path), "utf8");
 const sha256 = (value: Buffer | string) =>
   createHash("sha256").update(value).digest("hex");
 
 test("Palace Rose is published and supports wedding events only", () => {
-  const entry = TEMPLATES.find((template) => template.id === "palace-rose");
+  const entry = TEMPLATES.find((template) => template.id === "saroy-atirguli");
   assert.ok(entry);
   assert.equal(entry.published, true);
   assert.deepEqual(entry.categoryIds, ["wedding"]);
   assert.deepEqual(entry.supportedEventTypes, ["wedding"]);
   assert.equal(entry.priceMinor, 15_000_000);
-  assert.equal(entry.previewImage, "/templates/palace-rose/preview.webp");
+  assert.equal(entry.previewImage, "/templates/saroy-atirguli/preview.webp");
   assert.ok(existsSync(join(base, "preview.webp")));
   assert.match(read("packages/database/migrations/0119_register_palace_rose.sql"), /published\)\s*\nVALUES \('palace-rose',[^\n]+false\)/);
 });
 
 test("Palace Rose preview media matches its archived photos and stays preview-only", () => {
   const sample = JSON.parse(read("apps/web/src/modules/catalog/preview-sample.json"));
-  const gallery = sample.templateSamples["palace-rose"].gallery;
+  const gallery = sample.templateSamples["saroy-atirguli"].gallery;
   const files = [
     "gallery-2.webp",
     "gallery-1.webp",
@@ -37,7 +37,7 @@ test("Palace Rose preview media matches its archived photos and stays preview-on
     (file) => `/templates/chorlove/orchid-amplop/assets/${file}`,
   ));
   assert.equal(
-    sample.templateSamples["palace-rose"].venuePhoto,
+    sample.templateSamples["saroy-atirguli"].venuePhoto,
     "/images/preview/venue.jpg",
   );
   const archiveRoot = "Invitations - this folder will be removed from production/Chorlove/Web invitations";
@@ -58,7 +58,7 @@ test("Palace Rose preview media matches its archived photos and stays preview-on
 
 test("isolated page packages the captured Palace Rose DOM and only its source art", () => {
   const provenance = JSON.parse(read(`${base}/source/provenance.json`));
-  assert.equal(provenance.capture.path, "Web invitations/templates/palace-rose/preview-frame.html");
+  assert.equal(provenance.capture.path, "Web invitations/templates/saroy-atirguli/preview-frame.html");
   assert.equal(
     provenance.capture.sha256,
     "a0adfef8355a20c0b3a2e4eddb9b5b04ea46525ae993dd6a3ced8ab157fd513f",
@@ -108,7 +108,7 @@ test("isolated page packages the captured Palace Rose DOM and only its source ar
   assert.equal(provenance.archiveAudit.manifestArtworkSummary.matchingCount, 17);
   assert.equal(provenance.archiveGap.exactHashFoundElsewhere.length, 4);
   assert.equal(provenance.archiveGap.exactHashAbsentFromArchive.length, 4);
-  assert.equal(provenance.catalogPreview.contractPreviewImage, "/templates/palace-rose/preview.webp");
+  assert.equal(provenance.catalogPreview.contractPreviewImage, "/templates/saroy-atirguli/preview.webp");
   assert.ok(provenance.checks.nonRsvpReleaseBlockers.length > 0);
 });
 

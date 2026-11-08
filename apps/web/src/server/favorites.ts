@@ -1,5 +1,5 @@
 import { getDb } from "@taklifnoma/database";
-import { TEMPLATES } from "@taklifnoma/contracts";
+import { TEMPLATES, resolveTemplateId } from "@taklifnoma/contracts";
 
 export async function listFavorites(userId: string, db = getDb()) {
   const rows =
@@ -17,15 +17,16 @@ export async function mergeFavorites(
   db = getDb(),
 ) {
   // Retain known designs that became unpublished between a guest save and login.
-  const known = [...new Set(ids)].filter((id) =>
+  const known = [...new Set(ids.map(resolveTemplateId))].filter((id) =>
     TEMPLATES.some((template) => template.id === id),
   );
+  const canonicalSavedAt = Object.fromEntries(Object.entries(savedAt).map(([id, time]) => [resolveTemplateId(id), time]));
   const entries = known.map((id, index) => ({
     id,
     saved_at: new Date(
       Math.min(
         Date.now() - index,
-        savedAt[id] ? Date.parse(savedAt[id]) : Date.now() - index,
+        canonicalSavedAt[id] ? Date.parse(canonicalSavedAt[id]) : Date.now() - index,
       ),
     ).toISOString(),
   }));

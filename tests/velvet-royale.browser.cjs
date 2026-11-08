@@ -18,10 +18,10 @@ const base = {
  const browser=await chromium.launch({executablePath:process.env.CHROME_EXECUTABLE || 'C:/Program Files/Google/Chrome/Application/chrome.exe',headless:true});
  const checks=[], errors=[],missing=[];
  const page=await browser.newPage({viewport:{width:390,height:844}});
- page.on('pageerror',e=>errors.push(e.message)); page.on('response',r=>{if(r.status()===404 && r.url().includes('/templates/velvet-royale/'))missing.push(r.url());});
+ page.on('pageerror',e=>errors.push(e.message)); page.on('response',r=>{if(r.status()===404 && r.url().includes('/templates/baxmal-saroy/'))missing.push(r.url());});
  await page.route('**/api/public/invitations/qa/**',async route=>route.fulfill({status:201,contentType:'application/json',body:'{"ok":true}'}));
  const update=async data=>{ await page.evaluate(payload=>postMessage({type:'royal-burgundy-edition:update',payload},location.origin),data); await page.waitForFunction(name=>document.querySelector('[data-editable-id="hero-groom"]')?.textContent===name,data.groom); await page.waitForTimeout(150); };
- await page.goto('http://127.0.0.1:8765/templates/velvet-royale/index.html'); await update(base);
+ await page.goto('http://127.0.0.1:8765/templates/baxmal-saroy/index.html'); await update(base);
  assert.equal(await page.locator('.section-intro').isVisible(),true);
  assert.equal(await page.locator('.section-envelope-motion').evaluate(x=>x.classList.contains('section-envelope-motion--paused')),false);
  assert.equal(await page.locator('.invitation__main').evaluate(x=>x.inert),true);
@@ -106,7 +106,7 @@ const base = {
  checks.push('Desktop canvas remains centered at source 450 px width');
  const reduced=await browser.newPage({viewport:{width:390,height:844},reducedMotion:'reduce'});
  reduced.on('pageerror',e=>errors.push(e.message));
- await reduced.goto('http://127.0.0.1:8765/templates/velvet-royale/index.html');
+ await reduced.goto('http://127.0.0.1:8765/templates/baxmal-saroy/index.html');
  await reduced.evaluate(payload=>postMessage({type:'royal-burgundy-edition:update',payload},location.origin),base);
  await reduced.locator('.section-intro__seal').click(); await reduced.waitForFunction(()=>document.querySelector('.section-intro')?.hidden);
  assert.equal(await reduced.locator('.section-hero__video').count(),0);

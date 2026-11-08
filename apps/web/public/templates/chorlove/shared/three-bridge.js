@@ -208,22 +208,22 @@
     n.cloneNode(true),
   );
   const programBackdrop =
-    id === "stained-glass"
+    id === "shisha-naqshi"
       ? q("[data-program-list] > div:not([data-program-row])")?.cloneNode(true)
       : null;
   const galleryTemplates = all("[data-gallery-card]").map((n) =>
-    (id === "stained-glass" ? n : n.parentElement).cloneNode(true),
+    (id === "shisha-naqshi" ? n : n.parentElement).cloneNode(true),
   );
   const wishTemplate = q("[data-wish-row]")?.cloneNode(true);
   const dressPaint = all('[style*="background"]', section("dress")).filter(
     (n) => !n.querySelector('[style*="background"]'),
   )[0];
-  const dressTemplate = (id === "stained-glass" ? dressPaint?.parentElement : dressPaint)?.cloneNode(true),
-    dressList = id === "stained-glass" ? dressPaint?.parentElement.parentElement : dressPaint?.parentElement;
+  const dressTemplate = (id === "shisha-naqshi" ? dressPaint?.parentElement : dressPaint)?.cloneNode(true),
+    dressList = id === "shisha-naqshi" ? dressPaint?.parentElement.parentElement : dressPaint?.parentElement;
   const contactTemplates = new Map(
     all("[data-contact]").map((n) => [
       n.dataset.contact,
-      (id === "stained-glass" ? n : n.closest("li")).cloneNode(true),
+      (id === "shisha-naqshi" ? n : n.closest("li")).cloneNode(true),
     ]),
   );
   const audio = document.createElement("audio");
@@ -334,14 +334,14 @@
     const list = q("[data-program-list]");
     if (!list) return;
     const heading =
-      id === "stained-glass"
+      id === "shisha-naqshi"
         ? q('[data-copy="To\'y dasturi"]', section("program"))
         : q("h2", section("program"));
     if (d.programHeading) set(heading, d.programHeading);
     list.replaceChildren();
     let block = list;
     (d.program || []).forEach((item, index) => {
-      if (id === "stained-glass" && index % 3 === 0) {
+      if (id === "shisha-naqshi" && index % 3 === 0) {
         block = document.createElement("div");
         block.className = "relative";
         if (programBackdrop) block.append(programBackdrop.cloneNode(true));
@@ -636,7 +636,7 @@
     all('[data-dynamic-contact="true"]', sec).forEach((n) => n.remove());
     for (const [kind, template] of contactTemplates) {
       const old = q(`[data-contact="${kind}"]`, sec);
-      const host = id === "stained-glass" ? old : old?.closest("li");
+      const host = id === "shisha-naqshi" ? old : old?.closest("li");
       if (host) host.hidden = true;
       const values = (d.contacts || []).filter((c) => c.type === kind);
       values.forEach((value, index) => {
@@ -756,7 +756,7 @@
     });
     section("venue").hidden =
       !d.venue?.name && !d.venue?.address && !d.venue?.mapUrl;
-    if (id === "stained-glass") {
+    if (id === "shisha-naqshi") {
       const label = q('[data-copy="sizni to\'ylariga taklif qiladi"]');
       if (label) set(label, d.eventType);
     }
@@ -803,7 +803,7 @@
           set(
             n,
             String(values[i] || 0).padStart(
-              id === "stained-glass" ? 1 : 2,
+              id === "shisha-naqshi" ? 1 : 2,
               "0",
             ),
           ),
@@ -839,7 +839,7 @@
         "aria-label",
         copy("Ko'rish uchun\nsuring").replace("\n", " "),
       );
-    if (id !== "stained-glass") {
+    if (id !== "shisha-naqshi") {
       const intro = q("[data-opening] video")?.nextElementSibling;
       if (intro) {
         let guest = q("[data-personal-guest]", intro);
@@ -867,7 +867,7 @@
             observer.unobserve(entry.target);
           }
         }),
-      { root: scroll || null, threshold: id === "stained-glass" ? 0.25 : 0.3 },
+      { root: scroll || null, threshold: id === "shisha-naqshi" ? 0.25 : 0.3 },
     );
     all("[data-reveal]:not([data-hero-reveal])").forEach((n) =>
       observer.observe(n),

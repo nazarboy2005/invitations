@@ -7,7 +7,7 @@ import { test } from "node:test";
 import { templateById } from "../packages/contracts/src/index";
 
 const root = new URL(
-  "../apps/web/public/templates/jasmine-white/",
+  "../apps/web/public/templates/oq-yasmin/",
   import.meta.url,
 );
 const archive = process.env.CHORLOVE_SOURCE_ROOT
@@ -20,7 +20,7 @@ const archive = process.env.CHORLOVE_SOURCE_ROOT
     );
 
 test("Jasmine White is published for wedding events", () => {
-  const template = templateById("jasmine-white");
+  const template = templateById("oq-yasmin");
   assert.ok(template);
   assert.equal(template.published, true);
   assert.deepEqual(template.categoryIds, ["wedding"]);
@@ -43,11 +43,11 @@ test("Jasmine White preserves its captured page, stylesheets, and design artwork
   assert.equal(previewManifest.artwork.dimensions, "432x768");
   assert.equal(
     previewManifest.catalogImage,
-    "/templates/jasmine-white/preview.png",
+    "/templates/oq-yasmin/preview.png",
   );
   const source = await readFile(new URL("source/preview-frame.html", root));
   const sourceArchiveRoot = new URL(
-    "templates/jasmine-white/preview-frame.html",
+    "templates/oq-yasmin/preview-frame.html",
     archive,
   );
   const archiveAvailable = await stat(archive).then(
@@ -108,7 +108,7 @@ test("Jasmine White preserves its captured page, stylesheets, and design artwork
   assert.ok(fontUrls.length > 0);
   for (const url of fontUrls) {
     assert.match(url, /^\/templates\/jasmine-white\/assets\/fonts\//);
-    await readFile(new URL(url.replace("/templates/jasmine-white/", ""), root));
+    await readFile(new URL(url.replace("/templates/oq-yasmin/", ""), root));
   }
 
   const runtimeHtml = await readFile(new URL("index.html", root), "utf8");
@@ -311,7 +311,7 @@ test("Jasmine White preserves its captured page, stylesheets, and design artwork
   }
   assert.deepEqual(
     await readFile(new URL("assets/dish.webp", root)),
-    await readFile(new URL("../green-garden/assets/dish.webp", root)),
+    await readFile(new URL("../yashil-makon/assets/dish.webp", root)),
   );
   assert.equal(manifest.excludedRelatedTemplateAssets.length, 7);
 });

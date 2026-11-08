@@ -1,52 +1,31 @@
-/** Public design identities are independent of historical renderer/storage IDs. */
-const aliases: Record<string, string> = {
-  "taklifla-zarhal-sahifa": "zarhal-sahifa",
-  "taklifla-muhrli-maktub": "muhrli-maktub",
-  "taklifla-asalari": "asalari",
-  "taklifla-fayzli-xonadon": "fayzli-xonadon",
-  "taklifla-ertak": "ertak",
-  "taklifla-gulbog": "gulbog",
-  "taklifla-zarrin-gullar": "zarrin-gullar",
-  "taklifla-toglar-bagrida": "toglar-bagrida",
-  "taklifla-oltin-yol": "oltin-yol",
-  "taklifla-osmon": "osmon",
-  "taklifla-parilar-ertagi": "parilar-ertagi",
-  "taklifla-qogoz-ertagi": "qogoz-ertagi",
-  "taklifla-sakura-guli": "sakura-guli",
-  "taklifla-sharlar": "sharlar",
-  "taklifla-yulduzli-tun": "yulduzli-tun",
-  "taklifla-terracotta": "terracotta",
-  "taklifla-yubiley-sahifasi": "yubiley-sahifasi",
-  "taklifla-barakali": "barakali",
-  "taklifla-tungi-saroy": "tungi-saroy",
-  "taklifla-tovus": "tovus",
-  "taklifla-tort-fasl": "tort-fasl",
-  "wedivo-pulau-sehati": "kongillar-oroli",
-  "invitate-palov": "osh-ziyofati",
-  "invitate-nahorgi-osh": "sahar-ziyofati",
-  "invitate-wedding": "gulchambar",
-  "taklifnomachi-1": "klassik-nafis",
-  "taklifnomachi-12": "moviy-osmon",
-  "taklifnomachi-13": "oltin-atirgul",
-  "taklifnomachi-15": "monoxrom",
-  "taklifnomachi-16": "zaytun-guli",
-  "taklifnomachi-17": "atlas-ipak",
-  "taklifnomachi-18": "gul-naqshli-marosim",
-  "taklifnomachi-19": "zaytun-bogi",
-};
+import renames from "./template-renames.json";
 
-export function publicTemplateId(id: string): string {
-  return aliases[id] ?? id;
+/** Canonical IDs are shared by storage, renderers and public links. Old IDs are input aliases only. */
+const aliases = new Map<string, string>(renames.flatMap(item => item.aliases.map(alias => [alias, item.id] as [string, string])));
+
+export function resolveTemplateId(id: string): string {
+  return aliases.get(id) ?? id;
 }
 
-/** Resolve both new public links and historical bookmarks without changing drafts. */
-export function resolveTemplateId(id: string): string {
-  const match = Object.entries(aliases).find(([, slug]) => slug === id);
-  return match?.[0] ?? id;
+export const publicTemplateId = resolveTemplateId;
+
+/** Upgrade recovered browser drafts without changing authored values. Canonical keys win conflicts. */
+export function normalizeTemplateData(value: unknown): unknown {
+  if (!value || typeof value !== "object" || Array.isArray(value)) return value;
+  const entries = Object.entries(value);
+  const result = new Map<string, unknown>();
+  const object = (item: unknown): item is Record<string, unknown> => !!item && typeof item === "object" && !Array.isArray(item);
+  for (const [key, data] of entries.sort(([a], [b]) => Number(resolveTemplateId(a) === a) - Number(resolveTemplateId(b) === b))) {
+    const id = resolveTemplateId(key);
+    const previous = result.get(id);
+    result.set(id, object(previous) && object(data) ? { ...previous, ...data } : data);
+  }
+  return Object.fromEntries(result);
 }
 
 export function publicTemplateName(name: string): string {
   return name
-    .replace(/^(?:Taklifnomachi|Taklifla|Invitate|Chorlove|Wedivo|Marxaba|Onlinetaklifnoma)(?:\s*[\u00b7\u2014\u2013-]\s*|\s+)/i, "")
+    .replace(/^(?:Taklifnomachi|Taklifla|Invitate|Chorlove|Wedivo|Marxaba|Onlinetaklifnoma|E-invitation)(?:\s*[\u00b7\u2014\u2013-]\s*|\s+)/i, "")
+    .replace(/(?:\s*[\u00b7\u2014\u2013-]\s*|\s+)edition$/i, "")
     .trim();
 }

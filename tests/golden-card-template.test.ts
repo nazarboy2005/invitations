@@ -6,16 +6,16 @@ import { test } from "node:test";
 import { createInvitation, templateById } from "@taklifnoma/contracts";
 import { createTemplatePreviewSample } from "../apps/web/src/modules/catalog/preview-sample";
 
-const root = new URL("../apps/web/public/templates/golden-card/", import.meta.url);
+const root = new URL("../apps/web/public/templates/zarvaraq/", import.meta.url);
 const read = (file: string) => readFile(new URL(file, root));
 
 test("Golden Card is published for weddings after its additive release migration", async () => {
-  const template = templateById("golden-card");
+  const template = templateById("zarvaraq");
   assert.ok(template);
   assert.equal(template.published, true);
   assert.deepEqual(template.categoryIds, ["wedding"]);
   assert.deepEqual(template.supportedEventTypes, ["wedding"]);
-  assert.equal(template.previewImage, "/templates/golden-card/preview-browser-capture.jpg");
+  assert.equal(template.previewImage, "/templates/zarvaraq/preview-browser-capture.jpg");
 
   const registration = await readFile(
     new URL("../packages/database/migrations/0092_register_golden_card.sql", import.meta.url),
@@ -122,8 +122,8 @@ test("Golden Card keeps source artwork in the renderer and preview gallery data 
     );
   }
 
-  const preview = createTemplatePreviewSample("golden-card");
-  const draft = createInvitation("golden-card");
+  const preview = createTemplatePreviewSample("zarvaraq");
+  const draft = createInvitation("zarvaraq");
   assert.ok(preview.gallery.length > 0);
   assert.ok(preview.gallery.every((item) => item.url === ""));
   assert.deepEqual(draft.gallery, []);

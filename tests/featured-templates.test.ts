@@ -6,7 +6,7 @@ import { selectFeaturedTemplates } from "../apps/web/src/modules/catalog/feature
 const requested = [
   "anor",
   "bogi-eram",
-  "cloud-castle",
+  "bulutlar-qasri",
   "ganch",
   "kuzgi-chinor",
   "nahor",

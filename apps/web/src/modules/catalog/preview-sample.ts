@@ -3,6 +3,7 @@ import {
   createInvitation,
   invitationSchema,
   templateById,
+  resolveTemplateId,
   type Invitation,
   type Locale,
   type EventType,
@@ -105,6 +106,7 @@ export function createTemplatePreviewSample(
     Partial<Pick<Invitation, "eventType">>,
   previewTimezone?: string,
 ): Invitation {
+  templateId = resolveTemplateId(templateId);
   const template = templateById(templateId);
   const sampleEventType = (
     localeSettings?.eventType &&
@@ -197,28 +199,28 @@ export function createTemplatePreviewSample(
     artistLineup: sampleEventType === "wedding" ? structuredClone(previewSample.artistLineup) : [],
     gallery: structuredClone(templateSample?.gallery ?? previewSample.gallery),
     story: structuredClone(EVENT_SAMPLES[sampleEventType]?.story ?? (sampleEventType === "wedding" ? previewSample.story : [])),
-    templateData: templateId === "taklifla-terracotta" && EVENT_SAMPLES[sampleEventType]?.details ? {"taklifla-terracotta":structuredClone({infoNote:EVENT_SAMPLES[sampleEventType]!.details!.reminderText,footerNote:EVENT_SAMPLES[sampleEventType]!.details!.footerNote})} : templateId === "taklifla-yulduzli-tun" && EVENT_SAMPLES[sampleEventType]?.details ? {"taklifla-yulduzli-tun":structuredClone({infoNote:EVENT_SAMPLES[sampleEventType]!.details!.reminderText,footerNote:EVENT_SAMPLES[sampleEventType]!.details!.footerNote})} : templateId === "taklifla-sharlar" ? {"taklifla-sharlar":{doorsAt:previewSample.program[0]?.time || ""}} : templateId === "taklifla-sakura-guli" && EVENT_SAMPLES[sampleEventType]?.details
-      ? { "taklifla-sakura-guli": structuredClone({infoNote:EVENT_SAMPLES[sampleEventType]!.details!.reminderText,footerNote:EVENT_SAMPLES[sampleEventType]!.details!.footerNote}) }
-      : templateId === "taklifla-qogoz-ertagi" && EVENT_SAMPLES[sampleEventType]?.details
-      ? { "taklifla-qogoz-ertagi": structuredClone({footerNote:EVENT_SAMPLES[sampleEventType]!.details!.footerNote}) }
-      : templateId === "taklifla-parilar-ertagi" && EVENT_SAMPLES[sampleEventType]?.details
-      ? { "taklifla-parilar-ertagi": structuredClone({arrivalNote:EVENT_SAMPLES[sampleEventType]!.details!.reminderText,programLabels:EVENT_SAMPLES[sampleEventType]!.details!.programLabels}) }
-      : templateId === "taklifla-osmon" && EVENT_SAMPLES[sampleEventType]?.details
-      ? { "taklifla-osmon": structuredClone({giftNote:EVENT_SAMPLES[sampleEventType]!.details!.giftNote}) }
-      : templateId === "taklifla-oltin-yol" && EVENT_SAMPLES[sampleEventType]?.details
-      ? { "taklifla-oltin-yol": structuredClone({arrivalNote:EVENT_SAMPLES[sampleEventType]!.details!.reminderText,giftNote:EVENT_SAMPLES[sampleEventType]!.details!.giftNote,footerNote:EVENT_SAMPLES[sampleEventType]!.details!.footerNote}) }
-      : templateId === "taklifla-toglar-bagrida"
-      ? { "taklifla-toglar-bagrida": {ceremonyTime:previewSample.program[0]?.time || "",celebrationTime:previewSample.program[1]?.time || ""} }
-      : templateId === "taklifla-zarrin-gullar" && EVENT_SAMPLES[sampleEventType]?.details
-      ? { "taklifla-zarrin-gullar": structuredClone({brideFamily:EVENT_SAMPLES[sampleEventType]!.details!.families.bride,groomFamily:EVENT_SAMPLES[sampleEventType]!.details!.families.groom,stayText:EVENT_SAMPLES[sampleEventType]!.details!.stayText,footerNote:EVENT_SAMPLES[sampleEventType]!.details!.footerNote,hashtag:EVENT_SAMPLES[sampleEventType]!.details!.hashtag}) }
-      : templateId === "taklifla-gulbog" && EVENT_SAMPLES[sampleEventType]?.details
-      ? { "taklifla-gulbog": structuredClone({brideFamily:EVENT_SAMPLES[sampleEventType]!.details!.families.bride,reminderTitle:EVENT_SAMPLES[sampleEventType]!.details!.reminderTitle,reminderText:EVENT_SAMPLES[sampleEventType]!.details!.reminderText,footerNote:EVENT_SAMPLES[sampleEventType]!.details!.footerNote}) }
-      : templateId === "taklifla-fayzli-xonadon" && EVENT_SAMPLES[sampleEventType]?.housewarmingDetails
-      ? { "taklifla-fayzli-xonadon": structuredClone(EVENT_SAMPLES[sampleEventType]!.housewarmingDetails!) }
-      : templateId === "taklifla-yubiley-sahifasi" && EVENT_SAMPLES[sampleEventType]?.anniversaryDetails
-      ? { "taklifla-yubiley-sahifasi": structuredClone(EVENT_SAMPLES[sampleEventType]!.anniversaryDetails!) }
-      : templateId === "wedivo-pulau-sehati"
-      ? { "wedivo-pulau-sehati": {
+    templateData: templateId === "terrakota" && EVENT_SAMPLES[sampleEventType]?.details ? {"terrakota":structuredClone({infoNote:EVENT_SAMPLES[sampleEventType]!.details!.reminderText,footerNote:EVENT_SAMPLES[sampleEventType]!.details!.footerNote})} : templateId === "yulduzli-tun" && EVENT_SAMPLES[sampleEventType]?.details ? {"yulduzli-tun":structuredClone({infoNote:EVENT_SAMPLES[sampleEventType]!.details!.reminderText,footerNote:EVENT_SAMPLES[sampleEventType]!.details!.footerNote})} : templateId === "sharlar" ? {"sharlar":{doorsAt:previewSample.program[0]?.time || ""}} : templateId === "sakura-guli" && EVENT_SAMPLES[sampleEventType]?.details
+      ? { "sakura-guli": structuredClone({infoNote:EVENT_SAMPLES[sampleEventType]!.details!.reminderText,footerNote:EVENT_SAMPLES[sampleEventType]!.details!.footerNote}) }
+      : templateId === "qogoz-ertagi" && EVENT_SAMPLES[sampleEventType]?.details
+      ? { "qogoz-ertagi": structuredClone({footerNote:EVENT_SAMPLES[sampleEventType]!.details!.footerNote}) }
+      : templateId === "parilar-ertagi" && EVENT_SAMPLES[sampleEventType]?.details
+      ? { "parilar-ertagi": structuredClone({arrivalNote:EVENT_SAMPLES[sampleEventType]!.details!.reminderText,programLabels:EVENT_SAMPLES[sampleEventType]!.details!.programLabels}) }
+      : templateId === "osmon" && EVENT_SAMPLES[sampleEventType]?.details
+      ? { "osmon": structuredClone({giftNote:EVENT_SAMPLES[sampleEventType]!.details!.giftNote}) }
+      : templateId === "oltin-yol" && EVENT_SAMPLES[sampleEventType]?.details
+      ? { "oltin-yol": structuredClone({arrivalNote:EVENT_SAMPLES[sampleEventType]!.details!.reminderText,giftNote:EVENT_SAMPLES[sampleEventType]!.details!.giftNote,footerNote:EVENT_SAMPLES[sampleEventType]!.details!.footerNote}) }
+      : templateId === "toglar-bagrida"
+      ? { "toglar-bagrida": {ceremonyTime:previewSample.program[0]?.time || "",celebrationTime:previewSample.program[1]?.time || ""} }
+      : templateId === "zarrin-gullar" && EVENT_SAMPLES[sampleEventType]?.details
+      ? { "zarrin-gullar": structuredClone({brideFamily:EVENT_SAMPLES[sampleEventType]!.details!.families.bride,groomFamily:EVENT_SAMPLES[sampleEventType]!.details!.families.groom,stayText:EVENT_SAMPLES[sampleEventType]!.details!.stayText,footerNote:EVENT_SAMPLES[sampleEventType]!.details!.footerNote,hashtag:EVENT_SAMPLES[sampleEventType]!.details!.hashtag}) }
+      : templateId === "gulbog" && EVENT_SAMPLES[sampleEventType]?.details
+      ? { "gulbog": structuredClone({brideFamily:EVENT_SAMPLES[sampleEventType]!.details!.families.bride,reminderTitle:EVENT_SAMPLES[sampleEventType]!.details!.reminderTitle,reminderText:EVENT_SAMPLES[sampleEventType]!.details!.reminderText,footerNote:EVENT_SAMPLES[sampleEventType]!.details!.footerNote}) }
+      : templateId === "fayzli-xonadon" && EVENT_SAMPLES[sampleEventType]?.housewarmingDetails
+      ? { "fayzli-xonadon": structuredClone(EVENT_SAMPLES[sampleEventType]!.housewarmingDetails!) }
+      : templateId === "umr-bahori" && EVENT_SAMPLES[sampleEventType]?.anniversaryDetails
+      ? { "umr-bahori": structuredClone(EVENT_SAMPLES[sampleEventType]!.anniversaryDetails!) }
+      : templateId === "kongillar-oroli"
+      ? { "kongillar-oroli": {
           inscription: { arabic: "", text: {}, attribution: {} },
           profiles: [
             { bio: {}, characterClass: "", origin: "", stats: [], skill: "", item: "" },

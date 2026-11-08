@@ -77,7 +77,7 @@ export function AndalusDarvozasiInvitation({
     frame.current?.contentWindow?.postMessage({ type: "andalus-darvozasi:update", payload: message }, window.location.origin);
   }, [message]);
 
-  const frameUrl = publicAsset(`/templates/onlinetaklifnoma-andalus-darvozasi/index.html${preview && silentPlayback ? "?qaSilent=1" : ""}`);
+  const frameUrl = publicAsset(`/templates/andalus-darvozasi/index.html${preview && silentPlayback ? "?qaSilent=1" : ""}`);
   const mode = fullPreview ? styles.full : preview ? styles.preview : styles.public;
   return (
     <div className={mode}>

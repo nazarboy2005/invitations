@@ -39,7 +39,7 @@ test(
       displayName: "Disposable Uchrashuv verification",
       isAdmin: false,
     };
-    let invitation = createInvitation("taklifla-uchrashuv");
+    let invitation = createInvitation("uchrashuv");
     invitation.eventType = "other";
     let browser: any;
     const checks: string[] = [];
@@ -112,9 +112,9 @@ test(
       checks.push(
         "Authenticated four-locale save/reopen preserves authored fields, authored story chapters and venue",
       );
-      const incompatible=await request(`/api/invitations/${invitation.id}`,{invitation:{...invitation,templateId:"taklifla-tungi-saroy"}},"PUT");assert.equal(incompatible.status,409);
+      const incompatible=await request(`/api/invitations/${invitation.id}`,{invitation:{...invitation,templateId:"tungi-saroy"}},"PUT");assert.equal(incompatible.status,409);
       const originalShared = structuredClone(invitation);
-      for (const templateId of (process.env.TAKLIFLA_PRIVATE_QA ? [] : ["taklifla-uchrashuv"])) {
+      for (const templateId of (process.env.TAKLIFLA_PRIVATE_QA ? [] : ["uchrashuv"])) {
         response = await request(
           `/api/invitations/${invitation.id}`,
           { invitation: { ...invitation, templateId } },

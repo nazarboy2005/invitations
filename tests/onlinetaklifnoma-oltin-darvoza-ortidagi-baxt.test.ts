@@ -4,7 +4,7 @@ import { createHash } from "node:crypto";
 
 import { test } from "node:test";
 
-const root = new URL("../apps/web/public/templates/onlinetaklifnoma-oltin-darvoza-ortidagi-baxt/", import.meta.url);
+const root = new URL("../apps/web/public/templates/baxt-darvozasi/", import.meta.url);
 
 test("Oltin Darvoza exact source art and fonts are packaged with their origins", async () => {
   for (const manifest of ["source/assets-provenance.json", "source/font-provenance.json"]) {

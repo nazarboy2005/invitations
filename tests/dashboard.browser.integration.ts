@@ -20,12 +20,12 @@ test(
     const output = "docs/design/dashboard";
     await mkdir(output, { recursive: true });
     const imageCover = await readFile(
-      "apps/web/public/templates/ivory-rose-card/preview.webp",
+      "apps/web/public/templates/oq-atirgul/preview.webp",
     );
     const items = Array.from({ length: 15 }, (_, index) => {
       const invitation = completeInvitation();
       invitation.id = `dashboard-qa-${index}`;
-      invitation.templateId = index % 3 === 1 ? "ivory-rose-card" : "anor";
+      invitation.templateId = index % 3 === 1 ? "oq-atirgul" : "anor";
       invitation.status = index % 3 === 0 ? "published" : "draft";
       if (invitation.status === "published")
         invitation.slug = `qa${String(index).padStart(2, "0")}ab`;

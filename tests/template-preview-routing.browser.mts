@@ -4,15 +4,15 @@ import {
   TEMPLATES,
   publicTemplateId,
 } from "../packages/contracts/src/index.ts";
+import renames from "../packages/contracts/src/template-renames.json";
 
 const require = createRequire(
   new URL("../apps/web/package.json", import.meta.url),
 );
 const { chromium } = require("playwright");
 const origin = process.env.TEMPLATE_AUDIT_ORIGIN || "http://127.0.0.1:3001";
-const renamed = TEMPLATES.filter(
-  (template) => publicTemplateId(template.id) !== template.id,
-);
+const renamed = renames.filter(row => TEMPLATES.some(t => t.id === row.id))
+  .flatMap(row => row.aliases.map(alias => ({ id: alias, canonicalId: row.id })));
 
 // Check every renamed link, including the canonical redirect from old bookmarks.
 for (const template of renamed) {

@@ -74,7 +74,7 @@ const assert = require("node:assert/strict");
     assert.ok(["/music/catalog/emotional-piano.mp3", "/music/catalog/classical/01-pachelbel-canon.mp3"].includes(next), `next opening uses refreshed library: ${next}`);
 
     // These families use different initialization protocols and opening styles.
-    for (const template of ["invitate-wedding", "golden-hour", "safir", "butterfly", "taklifla-yulduzli-tun", "taklifla-fayzli-xonadon", "zarrin-doppi", "islamic-edition"]) {
+    for (const template of ["gulchambar", "oltin-lahza", "safir", "kapalak", "yulduzli-tun", "fayzli-xonadon", "zarrin-doppi", "islomiy"]) {
       const navigations = [];
       const navigated = frame => { if (/\/templates\//.test(frame.url())) navigations.push(frame.url()); };
       page.on("framenavigated", navigated);
@@ -82,7 +82,7 @@ const assert = require("node:assert/strict");
       await page.waitForFunction(() => !!document.querySelector("main iframe")?.contentDocument?.documentElement?.dataset.fotihaInitialized, { timeout: 20000 });
       await page.getByRole("status").waitFor({ state: "detached", timeout: 15000 });
       assert.ok(await page.locator("main iframe").evaluate(frame => frame.contentDocument.body.innerText.trim().length > 20), `${template}: initialized source content`);
-      if (["invitate-wedding", "golden-hour", "safir"].includes(template)) assert.equal(navigations.length, 1, `${template}: no redundant initialization reload`);
+      if (["gulchambar", "oltin-lahza", "safir"].includes(template)) assert.equal(navigations.length, 1, `${template}: no redundant initialization reload`);
       page.off("framenavigated", navigated);
     }
     assert.deepEqual(errors, []);

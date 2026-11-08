@@ -9,13 +9,13 @@ import { templateById } from "../packages/contracts/src/index";
 const root = process.cwd();
 const reference = path.join(
   root,
-  "apps/web/public/templates/velvet-royale/source/reference",
+  "apps/web/public/templates/baxmal-saroy/source/reference",
 );
 
 test("Velvet Royale publishes the exact E-invitation source ID after release", () => {
-  const template = templateById("royal-burgundy-edition");
+  const template = templateById("baxmal-saroy");
   assert.ok(template);
-  assert.equal(template.name, "Velvet Royale");
+  assert.equal(template.name, "Baxmal saroy");
   assert.equal(template.published, true);
   assert.equal(template.previewEventType, "wedding");
   assert.deepEqual(template.categoryIds, ["wedding"]);
@@ -23,7 +23,7 @@ test("Velvet Royale publishes the exact E-invitation source ID after release", (
   assert.equal(template.priceMinor, 100_000);
   assert.equal(
     template.previewImage,
-    "/templates/velvet-royale/source/reference/intro-v4-20261014-blank-poster-c521108180.webp",
+    "/templates/baxmal-saroy/source/reference/intro-v4-20261014-blank-poster-c521108180.webp",
   );
 });
 
@@ -34,7 +34,7 @@ test("Velvet Royale retains its captured source module and page assets", () => {
     path.join(reference, "VelvetRoyale.Bur_z5Os.css"),
     "utf8",
   );
-  const sourceHtml = readFileSync(path.join(root, "apps/web/public/templates/velvet-royale/template.html"), "utf8");
+  const sourceHtml = readFileSync(path.join(root, "apps/web/public/templates/baxmal-saroy/template.html"), "utf8");
   assert.match(sourceHtml, /data-v-965f1a66/);
   for (const section of ["section-intro", "section-hero", "section-couple", "section-story", "section-photo-story", "section-datetime", "section-countdown", "section-venue", "section-table", "section-card", "section-contact", "section-rsvp", "section-family", "section-closing"]) assert.match(sourceHtml, new RegExp(section));
   assert.doesNotMatch(sourceHtml, /Akmal|Madina|Navruz tantanalar saroyi|Karimovlar|0000 0000 0000 0000|assets\.e-invitation\.uz/);
@@ -117,15 +117,15 @@ test("Velvet Royale has a separate explicit publication migration", () => {
 
 test("Velvet Royale renderer binds contract fields and application RSVP APIs", () => {
   const renderer = readFileSync(
-    path.join(root, "apps/web/public/templates/velvet-royale/renderer.js"),
+    path.join(root, "apps/web/public/templates/baxmal-saroy/renderer.js"),
     "utf8",
   );
   const adapter = readFileSync(
-    path.join(root, "apps/web/src/templates/velvet-royale/renderer.tsx"),
+    path.join(root, "apps/web/src/templates/baxmal-saroy/renderer.tsx"),
     "utf8",
   );
   const sourceHtml = readFileSync(
-    path.join(root, "apps/web/public/templates/velvet-royale/index.html"),
+    path.join(root, "apps/web/public/templates/baxmal-saroy/index.html"),
     "utf8",
   );
   assert.match(adapter, /makeLegacyData\(invitation, frameLocale, guestName/);
@@ -148,7 +148,7 @@ test("Velvet Royale renderer binds contract fields and application RSVP APIs", (
 
 test("Velvet Royale uses its own renderer across preview and public routes", () => {
   const rendererPath =
-    "apps/web/src/templates/velvet-royale/renderer";
+    "apps/web/src/templates/baxmal-saroy/renderer";
   const renderer = readFileSync(
     path.join(root, `${rendererPath}.tsx`),
     "utf8",

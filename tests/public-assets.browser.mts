@@ -20,20 +20,20 @@ for (const asset of [
   "/images/home/invitation-scene.webp",
   "/audio/site/water-drop.mp3",
   "/templates/anor/source/index.html",
-  "/templates/cloud-castle/index.html",
+  "/templates/bulutlar-qasri/index.html",
   "/templates/anor/fonts.css",
   "/templates/anor/source/art/stage.webp",
 ]) {
   const response = await fetch(origin + publicAsset(asset));
   assert.equal(response.status, 200, asset);
   assert.equal(response.headers.get("cache-control"), immutable, asset);
-  if (asset === "/templates/cloud-castle/index.html")
+  if (asset === "/templates/bulutlar-qasri/index.html")
     assert.ok((await response.text()).includes(publicAssetPrefix));
 }
 for (const asset of [
   "/templates/velora/source/velora.html",
   "/templates/velora/source/velora%2ehtml",
-  "/templates/invitate-wedding/assets/captured/5b73decb38ff5c8c.js",
+  "/templates/gulchambar/assets/captured/5b73decb38ff5c8c.js",
   "/images/home/missing.webp",
   "/api/auth/session",
 ]) {
@@ -157,8 +157,8 @@ try {
   for (const id of [
     "anor",
     "aurelia",
-    "cloud-castle",
-    "taklifla-qogoz-ertagi",
+    "bulutlar-qasri",
+    "qogoz-ertagi",
   ]) {
     await page.goto(
       `${origin}/preview?template=${encodeURIComponent(publicTemplateId(id))}&card=1`,

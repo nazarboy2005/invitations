@@ -79,7 +79,7 @@ export function ChorloveOshInvitation({
       <TemplateFrame
         ref={frame}
         title={`${data.groom} ${data.bride} Nahorgi osh taklifnomasi`}
-        src={publicAsset("/templates/chorlove/osh/index.html")}
+        src={publicAsset("/templates/osh/index.html")}
         onReady={() => frame.current?.contentWindow?.postMessage(latest.current, window.location.origin)}
         allow="autoplay; fullscreen"
         loading="eager"

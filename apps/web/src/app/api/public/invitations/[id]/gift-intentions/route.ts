@@ -18,7 +18,7 @@ export async function POST(request: Request, { params }: Context) {
     verifySameOrigin(request);
     const { id } = await params;
     const { invitation, id: invitationId } = await publicInvitation(id);
-    const parsed = pulauSehatiDataSchema.safeParse(invitation.templateData["wedivo-pulau-sehati"] ?? {});
+    const parsed = pulauSehatiDataSchema.safeParse(invitation.templateData["kongillar-oroli"] ?? {});
     const settings = parsed.success ? parsed.data.giftWell : null;
     if (!templateVisitorFeatures(invitation.templateId).giftIntentions || !settings?.enabled)
       throw new ApiError(403, "GIFT_INTENTIONS_CLOSED", "Bu taklifnomada niyat yuborish yopiq.");

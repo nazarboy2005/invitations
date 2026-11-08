@@ -359,7 +359,7 @@ export function InvitationCorrections({
                   />
                 </label>
               )}
-              {canonical?.templateId === "taklifla-yubiley-sahifasi" && (
+              {canonical?.templateId === "umr-bahori" && (
                 <label>
                   Yubiley yili
                   <input

@@ -8,24 +8,24 @@ import { createInvitation, TEMPLATES } from "@taklifnoma/contracts";
 import { createTemplatePreviewSample } from "../apps/web/src/modules/catalog/preview-sample";
 
 const root = resolve(process.cwd());
-const htmlPath = resolve(root, "apps/web/public/templates/glass-pink/index.html");
+const htmlPath = resolve(root, "apps/web/public/templates/pushti-gulbarg/index.html");
 const html = readFileSync(htmlPath, "utf8");
-const bridge = readFileSync(resolve(root, "apps/web/public/templates/glass-pink/bridge.js"), "utf8");
-const adapter = readFileSync(resolve(root, "apps/web/public/templates/glass-pink/source-adapter.js"), "utf8");
-const adapterCss = readFileSync(resolve(root, "apps/web/public/templates/glass-pink/adapter.css"), "utf8");
-const previewPath = resolve(root, "apps/web/public/templates/glass-pink/catalog-cover-opening.png");
-const provenancePath = resolve(root, "apps/web/public/templates/glass-pink/source/provenance.json");
-const sourceSnapshotPath = resolve(root, "apps/web/public/templates/glass-pink/source/preserved-preview-frame.html");
+const bridge = readFileSync(resolve(root, "apps/web/public/templates/pushti-gulbarg/bridge.js"), "utf8");
+const adapter = readFileSync(resolve(root, "apps/web/public/templates/pushti-gulbarg/source-adapter.js"), "utf8");
+const adapterCss = readFileSync(resolve(root, "apps/web/public/templates/pushti-gulbarg/adapter.css"), "utf8");
+const previewPath = resolve(root, "apps/web/public/templates/pushti-gulbarg/catalog-cover-opening.png");
+const provenancePath = resolve(root, "apps/web/public/templates/pushti-gulbarg/source/provenance.json");
+const sourceSnapshotPath = resolve(root, "apps/web/public/templates/pushti-gulbarg/source/preserved-preview-frame.html");
 const sourceArchiveRoot = resolve(root, "Invitations - this folder will be removed from production/Invitations - this folder will be removed from production");
 const chorloveSourceRoot = resolve(sourceArchiveRoot, "Chorlove");
-const archivedSourcePath = resolve(chorloveSourceRoot, "Web invitations/templates/glass-pink/preview-frame.html");
+const archivedSourcePath = resolve(chorloveSourceRoot, "Web invitations/templates/pushti-gulbarg/preview-frame.html");
 const sourcePageModulePath = resolve(chorloveSourceRoot, "Web invitations/_next/static/chunks/0wvjbn--75n3p.js");
 
 test("Glass Pink is published with its additive release migration", () => {
-  const entry = TEMPLATES.find((template) => template.id === "glass-pink");
+  const entry = TEMPLATES.find((template) => template.id === "pushti-gulbarg");
   assert.ok(entry);
   assert.equal(entry.published, true);
-  assert.equal(entry.previewImage, "/templates/glass-pink/catalog-cover-opening.png");
+  assert.equal(entry.previewImage, "/templates/pushti-gulbarg/catalog-cover-opening.png");
   assert.deepEqual(entry.categoryIds, ["wedding"]);
   assert.deepEqual(entry.supportedEventTypes, ["wedding"]);
   const publication = readFileSync(resolve(root, "packages/database/migrations/0091_publish_glass_pink.sql"), "utf8");
@@ -56,8 +56,8 @@ test("Glass Pink catalog cover is a settled, clean source opening capture", () =
 
 test("Glass Pink source fonts resolve from its isolated asset package", () => {
   const sourceFonts = resolve(root, "Invitations - this folder will be removed from production/Chorlove/Web invitations/fonts");
-  const assetFonts = resolve(root, "apps/web/public/templates/glass-pink/assets");
-  const css = readFileSync(resolve(root, "apps/web/public/templates/glass-pink/adapter.css"), "utf8");
+  const assetFonts = resolve(root, "apps/web/public/templates/pushti-gulbarg/assets");
+  const css = readFileSync(resolve(root, "apps/web/public/templates/pushti-gulbarg/adapter.css"), "utf8");
   const names = [
     "Qellia.otf",
     "CormorantGaramond-Regular.ttf",
@@ -96,7 +96,7 @@ test("Glass Pink uses only its own artwork and keeps sample gallery content ephe
     const manifestPath = resolve(sourceArchiveRoot, provider, "capture-manifest.json");
     try {
       const manifest = JSON.parse(readFileSync(manifestPath, "utf8"));
-      return manifest.pages?.some((page: { title?: string; file?: string }) => page.title === "Glass Pink" || page.file?.includes("glass-pink"));
+      return manifest.pages?.some((page: { title?: string; file?: string }) => page.title === "Pushti gulbarg" || page.file?.includes("pushti-gulbarg"));
     } catch {
       return false;
     }
@@ -105,16 +105,16 @@ test("Glass Pink uses only its own artwork and keeps sample gallery content ephe
 
   const provenance = JSON.parse(readFileSync(provenancePath, "utf8"));
   const fixture = JSON.parse(readFileSync(resolve(root, "apps/web/src/modules/catalog/preview-sample.json"), "utf8"));
-  assert.equal(fixture.templateSamples["glass-pink"].gallery.length, 6);
-  const previewInvitation = createTemplatePreviewSample("glass-pink");
-  assert.equal(previewInvitation.templateId, "glass-pink");
+  assert.equal(fixture.templateSamples["pushti-gulbarg"].gallery.length, 6);
+  const previewInvitation = createTemplatePreviewSample("pushti-gulbarg");
+  assert.equal(previewInvitation.templateId, "pushti-gulbarg");
   assert.deepEqual(
     previewInvitation.gallery.map((item) => item.url),
     [2, 1, 3, 6, 4, 5].map((number) => `/templates/chorlove/orchid-amplop/assets/gallery-${number}.webp`),
   );
-  const blankCreatorInvitation = createInvitation("glass-pink");
+  const blankCreatorInvitation = createInvitation("pushti-gulbarg");
   assert.deepEqual(blankCreatorInvitation.gallery, []);
-  assert.equal(JSON.stringify(blankCreatorInvitation).includes("orchid-amplop"), false);
+  assert.equal(JSON.stringify(blankCreatorInvitation).includes("ormon-maktubi"), false);
   assert.deepEqual(provenance.gallerySourceAudit.eligibleGlassPinkGalleryPhotos, []);
   assert.equal(provenance.gallerySourceAudit.excludedCrossTemplateGalleryPhotos.length, 6);
   const renderer = readFileSync(resolve(root, "apps/web/src/templates/anor/renderer.tsx"), "utf8");
@@ -186,7 +186,7 @@ test("Glass Pink wish cards retain the captured layout, timestamp, and wand inte
 test("Glass Pink restores its captured venue image and source-styled map action", () => {
   const source = readFileSync(sourceSnapshotPath, "utf8");
   const provenance = JSON.parse(readFileSync(provenancePath, "utf8"));
-  const venue = readFileSync(resolve(root, "apps/web/public/templates/glass-pink/assets/venue-photo.webp"));
+  const venue = readFileSync(resolve(root, "apps/web/public/templates/pushti-gulbarg/assets/venue-photo.webp"));
   const record = provenance.recoveredSourceAssets.find((asset: { file: string }) => asset.file === "venue-photo.webp");
   assert.ok(source.includes("photo-1712314947761-a8d718bd8c32"));
   assert.ok(record);
@@ -289,7 +289,7 @@ test("Glass Pink schedule retains the original illustrated timeline markers", ()
     assert.ok(html.includes(`src=\"/templates/glass-pink/assets/${file}\"`), `${file} is wired into the packaged timeline`);
     assert.ok(source.includes(`src=\"${asset.originalReference}\" style=\"opacity:0;transform:scale(0.8)\"`), `${file} keeps its source reveal start state`);
     assert.ok(html.includes(`src=\"/templates/glass-pink/assets/${file}\" style=\"opacity:0;transform:scale(0.8)\"`), `${file} starts in the source reveal state`);
-    const bytes = readFileSync(resolve(root, "apps/web/public/templates/glass-pink/assets", file));
+    const bytes = readFileSync(resolve(root, "apps/web/public/templates/pushti-gulbarg/assets", file));
     assert.equal(bytes.length, asset.bytes);
     assert.equal(createHash("sha256").update(bytes).digest("hex"), asset.sha256);
     assert.match(asset.sourceUrl, new RegExp(`/images/glass-pink/${file.replace(".", "\\.")}$`));
@@ -340,8 +340,8 @@ test("Glass Pink restores source carousel and floating To'yona ornament motion",
     'style:{perspective:"1000px"}',
     'm=55*r',
     'transform:`translateX(${m}%) translateZ(${x}px) rotateY(${p}deg) scale(${u})`',
-    'src:"/images/glass-pink/saraya_gold.webp",animate:{y:[0,-6,0],rotate:[-22,-18,-22]}',
-    'src:"/images/glass-pink/porcelain_blue.webp",animate:{y:[0,-6,0],rotate:[-10,-6,-10]}',
+    'src:"/images/pushti-gulbarg/saraya_gold.webp",animate:{y:[0,-6,0],rotate:[-22,-18,-22]}',
+    'src:"/images/pushti-gulbarg/porcelain_blue.webp",animate:{y:[0,-6,0],rotate:[-10,-6,-10]}',
   ]) assert.ok(sourceModule.includes(source), `captured source must retain ${source}`);
   assert.match(bridge, /function galleryPosition\(index, activeIndex, total\)/);
   assert.match(bridge, /translateX\(\$\{x\}%\) translateZ\(\$\{-140 \* distance\}px\) rotateY\(\$\{35 \* offset\}deg\)/);
@@ -384,7 +384,7 @@ test("Glass Pink section reveals retain the source transforms, delays, durations
 test("Glass Pink has no missing packaged image requests", () => {
   const imagePaths = [...html.matchAll(/<img\b[^>]*\bsrc="([^"]+)"|url\(["']?([^"')]+)["']?\)/g)]
     .map((match) => match[1] ?? match[2])
-    .filter((src) => src.startsWith("/templates/glass-pink/"));
+    .filter((src) => src.startsWith("/templates/pushti-gulbarg/"));
   assert.ok(imagePaths.length > 0);
   for (const src of imagePaths) {
     assert.ok(

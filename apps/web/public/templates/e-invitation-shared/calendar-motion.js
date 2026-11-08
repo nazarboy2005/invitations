@@ -5,9 +5,9 @@ export function calendarMotion({ id, root, reduced, isOpened }) {
   return (grid, selector, selectedClass) => {
     observer?.disconnect(); const current = ++generation;
     const active = grid.querySelector(`.${selectedClass}`); if (!active) return;
-    const olive = id === 'olive-manor-edition', islamic = id === 'islamic-edition';
+    const olive = id === 'zaytun', islamic = id === 'islomiy';
     const reveal = () => active.classList.add(olive ? 'calendar-card__day--revealed' : 'is-revealed');
-    if (reduced || id === 'monochrome-editorial-edition') { reveal(); return; }
+    if (reduced || id === 'oq-qora-lavha') { reveal(); return; }
     let done = false;
     const start = () => {
       if (done || !isOpened()) return; done = true; observer?.disconnect();

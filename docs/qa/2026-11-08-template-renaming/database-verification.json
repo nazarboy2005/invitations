@@ -1,0 +1,16 @@
+{
+  "migration": "0229_canonical_template_identities.sql",
+  "renamedIds": 70,
+  "counts": {
+    "templates": 134,
+    "invitations": 32,
+    "template_category_assignments": 133,
+    "template_supported_event_types": 180,
+    "template_favorites": 3,
+    "platform_payments": 0,
+    "payment_orders": 19,
+    "invitation_change_requests": 0
+  },
+  "verifiedOnlyApprovedIdentityChanges": true,
+  "paymentSnapshotsAndProtectionPreserved": true
+}

@@ -23,8 +23,8 @@ test("every catalog preview link resolves to its original renderer definition", 
 });
 
 test("To‘rt fasl resolves through both public and historical links", () => {
-  assert.equal(templateById("tort-fasl")?.id, "taklifla-tort-fasl");
-  assert.equal(templateById("taklifla-tort-fasl")?.id, "taklifla-tort-fasl");
+  assert.equal(templateById("tort-fasl")?.id, "tort-fasl");
+  assert.equal(templateById("taklifla-tort-fasl")?.id, "tort-fasl");
 });
 
 test("unknown template links do not resolve to an unrelated design", () => {

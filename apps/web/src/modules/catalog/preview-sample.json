@@ -19,7 +19,7 @@
         "en": "Host",
         "ru": "Ведущий"
       },
-      "imageUrl": "/templates/invitate-wedding/assets/images/wedding/davron.png"
+      "imageUrl": "/templates/gulchambar/assets/images/wedding/davron.png"
     },
     {
       "id": "sample-artist-nilufar",
@@ -35,7 +35,7 @@
         "en": "Host",
         "ru": "Ведущая"
       },
-      "imageUrl": "/templates/invitate-wedding/assets/images/wedding/nilufar.png"
+      "imageUrl": "/templates/gulchambar/assets/images/wedding/nilufar.png"
     },
     {
       "id": "sample-artist-fano",
@@ -51,7 +51,7 @@
         "en": "Music group",
         "ru": "Музыкальная группа"
       },
-      "imageUrl": "/templates/invitate-wedding/assets/images/wedding/fano.png"
+      "imageUrl": "/templates/gulchambar/assets/images/wedding/fano.png"
     },
     {
       "id": "sample-artist-yulduz",
@@ -67,7 +67,7 @@
         "en": "Singer",
         "ru": "Певица"
       },
-      "imageUrl": "/templates/invitate-wedding/assets/images/wedding/yulduz.png"
+      "imageUrl": "/templates/gulchambar/assets/images/wedding/yulduz.png"
     },
     {
       "id": "sample-artist-tohir",
@@ -83,7 +83,7 @@
         "en": "Afsonaviy Bolalar",
         "ru": "Афсонавий Болалар"
       },
-      "imageUrl": "/templates/invitate-wedding/assets/images/wedding/toxir.png"
+      "imageUrl": "/templates/gulchambar/assets/images/wedding/toxir.png"
     },
     {
       "id": "sample-artist-jahongir",
@@ -99,7 +99,7 @@
         "en": "Live music performer",
         "ru": "Исполнитель живой музыки"
       },
-      "imageUrl": "/templates/invitate-wedding/assets/images/wedding/jahongir.png"
+      "imageUrl": "/templates/gulchambar/assets/images/wedding/jahongir.png"
     },
     {
       "id": "sample-artist-sevara",
@@ -115,7 +115,7 @@
         "en": "Singer",
         "ru": "Певица"
       },
-      "imageUrl": "/templates/invitate-wedding/assets/images/wedding/sevar.png"
+      "imageUrl": "/templates/gulchambar/assets/images/wedding/sevar.png"
     },
     {
       "id": "sample-artist-munisa",
@@ -131,7 +131,7 @@
         "en": "Singer",
         "ru": "Певица"
       },
-      "imageUrl": "/templates/invitate-wedding/assets/images/wedding/munisa.png"
+      "imageUrl": "/templates/gulchambar/assets/images/wedding/munisa.png"
     }
   ],
   "story": [
@@ -162,43 +162,43 @@
   "startsAt": "2027-06-12T17:00",
   "timezone": "Asia/Tashkent",
   "templateSamples": {
-    "olive-manor-edition": {
+    "zaytun": {
       "gallery": [
-        {"id":"olive-source-1","url":"/templates/olive-manor-edition/source/current/assets/couple-gallery-v20261007-01.webp","alt":"","caption":""},
-        {"id":"olive-source-2","url":"/templates/olive-manor-edition/source/current/assets/couple-gallery-v20261007-02.webp","alt":"","caption":""},
-        {"id":"olive-source-3","url":"/templates/olive-manor-edition/source/current/assets/couple-gallery-v20261007-03.webp","alt":"","caption":""},
-        {"id":"olive-source-4","url":"/templates/olive-manor-edition/source/current/assets/couple-gallery-v20261007-04.webp","alt":"","caption":""},
-        {"id":"olive-source-5","url":"/templates/olive-manor-edition/source/current/assets/couple-gallery-v20261007-05.webp","alt":"","caption":""}
+        {"id":"olive-source-1","url":"/templates/zaytun/source/current/assets/couple-gallery-v20261007-01.webp","alt":"","caption":""},
+        {"id":"olive-source-2","url":"/templates/zaytun/source/current/assets/couple-gallery-v20261007-02.webp","alt":"","caption":""},
+        {"id":"olive-source-3","url":"/templates/zaytun/source/current/assets/couple-gallery-v20261007-03.webp","alt":"","caption":""},
+        {"id":"olive-source-4","url":"/templates/zaytun/source/current/assets/couple-gallery-v20261007-04.webp","alt":"","caption":""},
+        {"id":"olive-source-5","url":"/templates/zaytun/source/current/assets/couple-gallery-v20261007-05.webp","alt":"","caption":""}
       ]
     },
-    "islamic-edition": {
+    "islomiy": {
       "gallery": [
-        {"id":"islamic-source-1","url":"/templates/islamic-edition/source/current/assets/gallery-romance-v1-01.webp","alt":"","caption":""},
-        {"id":"islamic-source-2","url":"/templates/islamic-edition/source/current/assets/gallery-romance-v2-02.webp","alt":"","caption":""},
-        {"id":"islamic-source-3","url":"/templates/islamic-edition/source/current/assets/gallery-romance-v1-03.webp","alt":"","caption":""},
-        {"id":"islamic-source-4","url":"/templates/islamic-edition/source/current/assets/gallery-romance-v1-04.webp","alt":"","caption":""},
-        {"id":"islamic-source-5","url":"/templates/islamic-edition/source/current/assets/gallery-romance-v1-05.webp","alt":"","caption":""}
+        {"id":"islamic-source-1","url":"/templates/islomiy/source/current/assets/gallery-romance-v1-01.webp","alt":"","caption":""},
+        {"id":"islamic-source-2","url":"/templates/islomiy/source/current/assets/gallery-romance-v2-02.webp","alt":"","caption":""},
+        {"id":"islamic-source-3","url":"/templates/islomiy/source/current/assets/gallery-romance-v1-03.webp","alt":"","caption":""},
+        {"id":"islamic-source-4","url":"/templates/islomiy/source/current/assets/gallery-romance-v1-04.webp","alt":"","caption":""},
+        {"id":"islamic-source-5","url":"/templates/islomiy/source/current/assets/gallery-romance-v1-05.webp","alt":"","caption":""}
       ]
     },
-    "monochrome-editorial-edition": {
+    "oq-qora-lavha": {
       "gallery": [
-        {"id":"mono-source-1","url":"/templates/monochrome-editorial-edition/source/current/assets/couple-gallery-v20261007-01.webp","alt":"","caption":""},
-        {"id":"mono-source-2","url":"/templates/monochrome-editorial-edition/source/current/assets/couple-gallery-v20261007-02.webp","alt":"","caption":""},
-        {"id":"mono-source-3","url":"/templates/monochrome-editorial-edition/source/current/assets/couple-gallery-v20261007-03.webp","alt":"","caption":""},
-        {"id":"mono-source-4","url":"/templates/monochrome-editorial-edition/source/current/assets/couple-gallery-v20261007-04.webp","alt":"","caption":""},
-        {"id":"mono-source-5","url":"/templates/monochrome-editorial-edition/source/current/assets/couple-gallery-v20261007-05.webp","alt":"","caption":""},
-        {"id":"mono-source-6","url":"/templates/monochrome-editorial-edition/source/current/assets/couple-gallery-v20261007-06.webp","alt":"","caption":""}
+        {"id":"mono-source-1","url":"/templates/oq-qora-lavha/source/current/assets/couple-gallery-v20261007-01.webp","alt":"","caption":""},
+        {"id":"mono-source-2","url":"/templates/oq-qora-lavha/source/current/assets/couple-gallery-v20261007-02.webp","alt":"","caption":""},
+        {"id":"mono-source-3","url":"/templates/oq-qora-lavha/source/current/assets/couple-gallery-v20261007-03.webp","alt":"","caption":""},
+        {"id":"mono-source-4","url":"/templates/oq-qora-lavha/source/current/assets/couple-gallery-v20261007-04.webp","alt":"","caption":""},
+        {"id":"mono-source-5","url":"/templates/oq-qora-lavha/source/current/assets/couple-gallery-v20261007-05.webp","alt":"","caption":""},
+        {"id":"mono-source-6","url":"/templates/oq-qora-lavha/source/current/assets/couple-gallery-v20261007-06.webp","alt":"","caption":""}
       ]
     },
-    "stained-glass": {
-      "scratchPhoto": "/templates/stained-glass/assets/couple-scratch-inspo.webp",
+    "shisha-naqshi": {
+      "scratchPhoto": "/templates/shisha-naqshi/assets/couple-scratch-inspo.webp",
       "gallery": [
-        {"id": "stained-glass-source-preview-2", "url": "/templates/stained-glass/assets/gallery-2.webp", "alt": "", "caption": ""},
-        {"id": "stained-glass-source-preview-1", "url": "/templates/stained-glass/assets/gallery-1.webp", "alt": "", "caption": ""},
-        {"id": "stained-glass-source-preview-3", "url": "/templates/stained-glass/assets/gallery-3.webp", "alt": "", "caption": ""},
-        {"id": "stained-glass-source-preview-6", "url": "/templates/stained-glass/assets/gallery-6.webp", "alt": "", "caption": ""},
-        {"id": "stained-glass-source-preview-4", "url": "/templates/stained-glass/assets/gallery-4.webp", "alt": "", "caption": ""},
-        {"id": "stained-glass-source-preview-5", "url": "/templates/stained-glass/assets/gallery-5.webp", "alt": "", "caption": ""}
+        {"id": "stained-glass-source-preview-2", "url": "/templates/shisha-naqshi/assets/gallery-2.webp", "alt": "", "caption": ""},
+        {"id": "stained-glass-source-preview-1", "url": "/templates/shisha-naqshi/assets/gallery-1.webp", "alt": "", "caption": ""},
+        {"id": "stained-glass-source-preview-3", "url": "/templates/shisha-naqshi/assets/gallery-3.webp", "alt": "", "caption": ""},
+        {"id": "stained-glass-source-preview-6", "url": "/templates/shisha-naqshi/assets/gallery-6.webp", "alt": "", "caption": ""},
+        {"id": "stained-glass-source-preview-4", "url": "/templates/shisha-naqshi/assets/gallery-4.webp", "alt": "", "caption": ""},
+        {"id": "stained-glass-source-preview-5", "url": "/templates/shisha-naqshi/assets/gallery-5.webp", "alt": "", "caption": ""}
       ]
     },
     "sunset": {
@@ -211,203 +211,203 @@
         {"id": "sunset-source-preview-5", "url": "/templates/sunset/assets/gallery-5.webp", "alt": "", "caption": ""}
       ]
     },
-    "swan-garden": {
+    "oqqushlar": {
       "gallery": [
-        {"id": "swan-garden-source-preview-2", "url": "/templates/swan-garden/assets/gallery-2.webp", "alt": "", "caption": ""},
-        {"id": "swan-garden-source-preview-1", "url": "/templates/swan-garden/assets/gallery-1.webp", "alt": "", "caption": ""},
-        {"id": "swan-garden-source-preview-3", "url": "/templates/swan-garden/assets/gallery-3.webp", "alt": "", "caption": ""},
-        {"id": "swan-garden-source-preview-6", "url": "/templates/swan-garden/assets/gallery-6.webp", "alt": "", "caption": ""},
-        {"id": "swan-garden-source-preview-4", "url": "/templates/swan-garden/assets/gallery-4.webp", "alt": "", "caption": ""},
-        {"id": "swan-garden-source-preview-5", "url": "/templates/swan-garden/assets/gallery-5.webp", "alt": "", "caption": ""}
+        {"id": "swan-garden-source-preview-2", "url": "/templates/oqqushlar/assets/gallery-2.webp", "alt": "", "caption": ""},
+        {"id": "swan-garden-source-preview-1", "url": "/templates/oqqushlar/assets/gallery-1.webp", "alt": "", "caption": ""},
+        {"id": "swan-garden-source-preview-3", "url": "/templates/oqqushlar/assets/gallery-3.webp", "alt": "", "caption": ""},
+        {"id": "swan-garden-source-preview-6", "url": "/templates/oqqushlar/assets/gallery-6.webp", "alt": "", "caption": ""},
+        {"id": "swan-garden-source-preview-4", "url": "/templates/oqqushlar/assets/gallery-4.webp", "alt": "", "caption": ""},
+        {"id": "swan-garden-source-preview-5", "url": "/templates/oqqushlar/assets/gallery-5.webp", "alt": "", "caption": ""}
       ]
     },
-    "lace": {
+    "marvarid": {
       "gallery": [
-        { "id": "lace-source-preview-1", "url": "/templates/lace/assets/gallery-2.webp", "alt": "", "caption": "" },
-        { "id": "lace-source-preview-2", "url": "/templates/lace/assets/gallery-1.webp", "alt": "", "caption": "" },
-        { "id": "lace-source-preview-3", "url": "/templates/lace/assets/gallery-3.webp", "alt": "", "caption": "" },
-        { "id": "lace-source-preview-4", "url": "/templates/lace/assets/gallery-6.webp", "alt": "", "caption": "" },
-        { "id": "lace-source-preview-5", "url": "/templates/lace/assets/gallery-4.webp", "alt": "", "caption": "" },
-        { "id": "lace-source-preview-6", "url": "/templates/lace/assets/gallery-5.webp", "alt": "", "caption": "" }
+        { "id": "lace-source-preview-1", "url": "/templates/marvarid/assets/gallery-2.webp", "alt": "", "caption": "" },
+        { "id": "lace-source-preview-2", "url": "/templates/marvarid/assets/gallery-1.webp", "alt": "", "caption": "" },
+        { "id": "lace-source-preview-3", "url": "/templates/marvarid/assets/gallery-3.webp", "alt": "", "caption": "" },
+        { "id": "lace-source-preview-4", "url": "/templates/marvarid/assets/gallery-6.webp", "alt": "", "caption": "" },
+        { "id": "lace-source-preview-5", "url": "/templates/marvarid/assets/gallery-4.webp", "alt": "", "caption": "" },
+        { "id": "lace-source-preview-6", "url": "/templates/marvarid/assets/gallery-5.webp", "alt": "", "caption": "" }
       ]
     },
-    "green-gold": {
+    "zumrad": {
       "gallery": [
-        { "id": "green-gold-source-preview-1", "url": "/templates/chorlove/orchid-amplop/assets/gallery-2.webp", "alt": "", "caption": "" },
-        { "id": "green-gold-source-preview-2", "url": "/templates/chorlove/orchid-amplop/assets/gallery-1.webp", "alt": "", "caption": "" },
-        { "id": "green-gold-source-preview-3", "url": "/templates/chorlove/orchid-amplop/assets/gallery-3.webp", "alt": "", "caption": "" },
-        { "id": "green-gold-source-preview-4", "url": "/templates/chorlove/orchid-amplop/assets/gallery-6.webp", "alt": "", "caption": "" },
-        { "id": "green-gold-source-preview-5", "url": "/templates/chorlove/orchid-amplop/assets/gallery-4.webp", "alt": "", "caption": "" },
-        { "id": "green-gold-source-preview-6", "url": "/templates/chorlove/orchid-amplop/assets/gallery-5.webp", "alt": "", "caption": "" }
+        { "id": "green-gold-source-preview-1", "url": "/templates/ormon-maktubi/assets/gallery-2.webp", "alt": "", "caption": "" },
+        { "id": "green-gold-source-preview-2", "url": "/templates/ormon-maktubi/assets/gallery-1.webp", "alt": "", "caption": "" },
+        { "id": "green-gold-source-preview-3", "url": "/templates/ormon-maktubi/assets/gallery-3.webp", "alt": "", "caption": "" },
+        { "id": "green-gold-source-preview-4", "url": "/templates/ormon-maktubi/assets/gallery-6.webp", "alt": "", "caption": "" },
+        { "id": "green-gold-source-preview-5", "url": "/templates/ormon-maktubi/assets/gallery-4.webp", "alt": "", "caption": "" },
+        { "id": "green-gold-source-preview-6", "url": "/templates/ormon-maktubi/assets/gallery-5.webp", "alt": "", "caption": "" }
       ]
     },
-    "luxury-gold": {
+    "zar-jilosi": {
       "gallery": [
-        { "id": "luxury-gold-source-preview-1", "url": "/templates/chorlove/orchid-amplop/assets/gallery-2.webp", "alt": "", "caption": "" },
-        { "id": "luxury-gold-source-preview-2", "url": "/templates/chorlove/orchid-amplop/assets/gallery-1.webp", "alt": "", "caption": "" },
-        { "id": "luxury-gold-source-preview-3", "url": "/templates/chorlove/orchid-amplop/assets/gallery-3.webp", "alt": "", "caption": "" },
-        { "id": "luxury-gold-source-preview-4", "url": "/templates/chorlove/orchid-amplop/assets/gallery-6.webp", "alt": "", "caption": "" },
-        { "id": "luxury-gold-source-preview-5", "url": "/templates/chorlove/orchid-amplop/assets/gallery-4.webp", "alt": "", "caption": "" },
-        { "id": "luxury-gold-source-preview-6", "url": "/templates/chorlove/orchid-amplop/assets/gallery-5.webp", "alt": "", "caption": "" }
+        { "id": "luxury-gold-source-preview-1", "url": "/templates/ormon-maktubi/assets/gallery-2.webp", "alt": "", "caption": "" },
+        { "id": "luxury-gold-source-preview-2", "url": "/templates/ormon-maktubi/assets/gallery-1.webp", "alt": "", "caption": "" },
+        { "id": "luxury-gold-source-preview-3", "url": "/templates/ormon-maktubi/assets/gallery-3.webp", "alt": "", "caption": "" },
+        { "id": "luxury-gold-source-preview-4", "url": "/templates/ormon-maktubi/assets/gallery-6.webp", "alt": "", "caption": "" },
+        { "id": "luxury-gold-source-preview-5", "url": "/templates/ormon-maktubi/assets/gallery-4.webp", "alt": "", "caption": "" },
+        { "id": "luxury-gold-source-preview-6", "url": "/templates/ormon-maktubi/assets/gallery-5.webp", "alt": "", "caption": "" }
       ]
     },
-    "palace-rose": {
+    "saroy-atirguli": {
       "venuePhoto": "/images/preview/venue.jpg",
       "gallery": [
-        { "id": "palace-rose-source-preview-1", "url": "/templates/chorlove/orchid-amplop/assets/gallery-2.webp", "alt": "Wedding photo 1", "caption": "" },
-        { "id": "palace-rose-source-preview-2", "url": "/templates/chorlove/orchid-amplop/assets/gallery-1.webp", "alt": "Wedding photo 2", "caption": "" },
-        { "id": "palace-rose-source-preview-3", "url": "/templates/chorlove/orchid-amplop/assets/gallery-3.webp", "alt": "Wedding photo 3", "caption": "" },
-        { "id": "palace-rose-source-preview-4", "url": "/templates/chorlove/orchid-amplop/assets/gallery-6.webp", "alt": "Wedding photo 4", "caption": "" },
-        { "id": "palace-rose-source-preview-5", "url": "/templates/chorlove/orchid-amplop/assets/gallery-4.webp", "alt": "Wedding photo 5", "caption": "" },
-        { "id": "palace-rose-source-preview-6", "url": "/templates/chorlove/orchid-amplop/assets/gallery-5.webp", "alt": "Wedding photo 6", "caption": "" }
+        { "id": "palace-rose-source-preview-1", "url": "/templates/ormon-maktubi/assets/gallery-2.webp", "alt": "Wedding photo 1", "caption": "" },
+        { "id": "palace-rose-source-preview-2", "url": "/templates/ormon-maktubi/assets/gallery-1.webp", "alt": "Wedding photo 2", "caption": "" },
+        { "id": "palace-rose-source-preview-3", "url": "/templates/ormon-maktubi/assets/gallery-3.webp", "alt": "Wedding photo 3", "caption": "" },
+        { "id": "palace-rose-source-preview-4", "url": "/templates/ormon-maktubi/assets/gallery-6.webp", "alt": "Wedding photo 4", "caption": "" },
+        { "id": "palace-rose-source-preview-5", "url": "/templates/ormon-maktubi/assets/gallery-4.webp", "alt": "Wedding photo 5", "caption": "" },
+        { "id": "palace-rose-source-preview-6", "url": "/templates/ormon-maktubi/assets/gallery-5.webp", "alt": "Wedding photo 6", "caption": "" }
       ]
     },
-    "green-white": {
+    "oq-chechak": {
       "gallery": [
-        { "id": "green-white-source-preview-1", "url": "/templates/chorlove/orchid-amplop/assets/gallery-2.webp", "alt": "", "caption": "" },
-        { "id": "green-white-source-preview-2", "url": "/templates/chorlove/orchid-amplop/assets/gallery-1.webp", "alt": "", "caption": "" },
-        { "id": "green-white-source-preview-3", "url": "/templates/chorlove/orchid-amplop/assets/gallery-3.webp", "alt": "", "caption": "" },
-        { "id": "green-white-source-preview-4", "url": "/templates/chorlove/orchid-amplop/assets/gallery-6.webp", "alt": "", "caption": "" },
-        { "id": "green-white-source-preview-5", "url": "/templates/chorlove/orchid-amplop/assets/gallery-4.webp", "alt": "", "caption": "" },
-        { "id": "green-white-source-preview-6", "url": "/templates/chorlove/orchid-amplop/assets/gallery-5.webp", "alt": "", "caption": "" }
+        { "id": "green-white-source-preview-1", "url": "/templates/ormon-maktubi/assets/gallery-2.webp", "alt": "", "caption": "" },
+        { "id": "green-white-source-preview-2", "url": "/templates/ormon-maktubi/assets/gallery-1.webp", "alt": "", "caption": "" },
+        { "id": "green-white-source-preview-3", "url": "/templates/ormon-maktubi/assets/gallery-3.webp", "alt": "", "caption": "" },
+        { "id": "green-white-source-preview-4", "url": "/templates/ormon-maktubi/assets/gallery-6.webp", "alt": "", "caption": "" },
+        { "id": "green-white-source-preview-5", "url": "/templates/ormon-maktubi/assets/gallery-4.webp", "alt": "", "caption": "" },
+        { "id": "green-white-source-preview-6", "url": "/templates/ormon-maktubi/assets/gallery-5.webp", "alt": "", "caption": "" }
       ]
     },
-    "green-garden": {
+    "yashil-makon": {
       "gallery": [
-        { "id": "green-garden-source-preview-1", "url": "/templates/chorlove/orchid-amplop/assets/gallery-2.webp", "alt": "", "caption": "" },
-        { "id": "green-garden-source-preview-2", "url": "/templates/chorlove/orchid-amplop/assets/gallery-1.webp", "alt": "", "caption": "" },
-        { "id": "green-garden-source-preview-3", "url": "/templates/chorlove/orchid-amplop/assets/gallery-3.webp", "alt": "", "caption": "" },
-        { "id": "green-garden-source-preview-4", "url": "/templates/chorlove/orchid-amplop/assets/gallery-6.webp", "alt": "", "caption": "" },
-        { "id": "green-garden-source-preview-5", "url": "/templates/chorlove/orchid-amplop/assets/gallery-4.webp", "alt": "", "caption": "" },
-        { "id": "green-garden-source-preview-6", "url": "/templates/chorlove/orchid-amplop/assets/gallery-5.webp", "alt": "", "caption": "" }
+        { "id": "green-garden-source-preview-1", "url": "/templates/ormon-maktubi/assets/gallery-2.webp", "alt": "", "caption": "" },
+        { "id": "green-garden-source-preview-2", "url": "/templates/ormon-maktubi/assets/gallery-1.webp", "alt": "", "caption": "" },
+        { "id": "green-garden-source-preview-3", "url": "/templates/ormon-maktubi/assets/gallery-3.webp", "alt": "", "caption": "" },
+        { "id": "green-garden-source-preview-4", "url": "/templates/ormon-maktubi/assets/gallery-6.webp", "alt": "", "caption": "" },
+        { "id": "green-garden-source-preview-5", "url": "/templates/ormon-maktubi/assets/gallery-4.webp", "alt": "", "caption": "" },
+        { "id": "green-garden-source-preview-6", "url": "/templates/ormon-maktubi/assets/gallery-5.webp", "alt": "", "caption": "" }
       ],
-      "venuePhoto": "/templates/green-garden/assets/preview-venue.jpg"
+      "venuePhoto": "/templates/yashil-makon/assets/preview-venue.jpg"
     },
-    "cloud-castle": {
+    "bulutlar-qasri": {
       "gallery": [
-        { "id": "cloud-castle-source-preview-1", "url": "/templates/cloud-castle/assets/gallery/gallery-2.webp", "alt": "", "caption": "" },
-        { "id": "cloud-castle-source-preview-2", "url": "/templates/cloud-castle/assets/gallery/gallery-1.webp", "alt": "", "caption": "" },
-        { "id": "cloud-castle-source-preview-3", "url": "/templates/cloud-castle/assets/gallery/gallery-3.webp", "alt": "", "caption": "" },
-        { "id": "cloud-castle-source-preview-4", "url": "/templates/cloud-castle/assets/gallery/gallery-6.webp", "alt": "", "caption": "" },
-        { "id": "cloud-castle-source-preview-5", "url": "/templates/cloud-castle/assets/gallery/gallery-4.webp", "alt": "", "caption": "" }
+        { "id": "cloud-castle-source-preview-1", "url": "/templates/bulutlar-qasri/assets/gallery/gallery-2.webp", "alt": "", "caption": "" },
+        { "id": "cloud-castle-source-preview-2", "url": "/templates/bulutlar-qasri/assets/gallery/gallery-1.webp", "alt": "", "caption": "" },
+        { "id": "cloud-castle-source-preview-3", "url": "/templates/bulutlar-qasri/assets/gallery/gallery-3.webp", "alt": "", "caption": "" },
+        { "id": "cloud-castle-source-preview-4", "url": "/templates/bulutlar-qasri/assets/gallery/gallery-6.webp", "alt": "", "caption": "" },
+        { "id": "cloud-castle-source-preview-5", "url": "/templates/bulutlar-qasri/assets/gallery/gallery-4.webp", "alt": "", "caption": "" }
       ]
     },
-    "modern-floral": {
+    "gul-ifori": {
       "gallery": [
         {
           "id": "modern-floral-source-preview-1",
-          "url": "/templates/chorlove/orchid-amplop/assets/gallery-2.webp",
+          "url": "/templates/ormon-maktubi/assets/gallery-2.webp",
           "alt": "",
           "caption": ""
         },
         {
           "id": "modern-floral-source-preview-2",
-          "url": "/templates/chorlove/orchid-amplop/assets/gallery-1.webp",
+          "url": "/templates/ormon-maktubi/assets/gallery-1.webp",
           "alt": "",
           "caption": ""
         },
         {
           "id": "modern-floral-source-preview-3",
-          "url": "/templates/chorlove/orchid-amplop/assets/gallery-3.webp",
+          "url": "/templates/ormon-maktubi/assets/gallery-3.webp",
           "alt": "",
           "caption": ""
         },
         {
           "id": "modern-floral-source-preview-4",
-          "url": "/templates/chorlove/orchid-amplop/assets/gallery-6.webp",
+          "url": "/templates/ormon-maktubi/assets/gallery-6.webp",
           "alt": "",
           "caption": ""
         },
         {
           "id": "modern-floral-source-preview-5",
-          "url": "/templates/chorlove/orchid-amplop/assets/gallery-4.webp",
+          "url": "/templates/ormon-maktubi/assets/gallery-4.webp",
           "alt": "",
           "caption": ""
         },
         {
           "id": "modern-floral-source-preview-6",
-          "url": "/templates/chorlove/orchid-amplop/assets/gallery-5.webp",
+          "url": "/templates/ormon-maktubi/assets/gallery-5.webp",
           "alt": "",
           "caption": ""
         }
       ]
     },
-    "orchid-amplop": {
-      "venuePhoto": "/templates/chorlove/orchid-amplop/assets/gallery-5.webp",
+    "ormon-maktubi": {
+      "venuePhoto": "/templates/ormon-maktubi/assets/gallery-5.webp",
       "gallery": [
         {
           "id": "orchid-amplop-source-preview-1",
-          "url": "/templates/chorlove/orchid-amplop/assets/gallery-2.webp",
+          "url": "/templates/ormon-maktubi/assets/gallery-2.webp",
           "alt": "",
           "caption": ""
         },
         {
           "id": "orchid-amplop-source-preview-2",
-          "url": "/templates/chorlove/orchid-amplop/assets/gallery-1.webp",
+          "url": "/templates/ormon-maktubi/assets/gallery-1.webp",
           "alt": "",
           "caption": ""
         },
         {
           "id": "orchid-amplop-source-preview-3",
-          "url": "/templates/chorlove/orchid-amplop/assets/gallery-3.webp",
+          "url": "/templates/ormon-maktubi/assets/gallery-3.webp",
           "alt": "",
           "caption": ""
         },
         {
           "id": "orchid-amplop-source-preview-4",
-          "url": "/templates/chorlove/orchid-amplop/assets/gallery-6.webp",
+          "url": "/templates/ormon-maktubi/assets/gallery-6.webp",
           "alt": "",
           "caption": ""
         },
         {
           "id": "orchid-amplop-source-preview-5",
-          "url": "/templates/chorlove/orchid-amplop/assets/gallery-4.webp",
+          "url": "/templates/ormon-maktubi/assets/gallery-4.webp",
           "alt": "",
           "caption": ""
         },
         {
           "id": "orchid-amplop-source-preview-6",
-          "url": "/templates/chorlove/orchid-amplop/assets/gallery-5.webp",
+          "url": "/templates/ormon-maktubi/assets/gallery-5.webp",
           "alt": "",
           "caption": ""
         }
       ]
     },
-    "taklifla-zarhal-sahifa": {
+    "zarhal-sahifa": {
       "gallery": [
-        { "id": "zarhal-source-preview-1", "url": "/templates/taklifla-zarhal-sahifa/assets/preview/photo-1519741497674-611481863552.avif", "alt": "", "caption": "" },
-        { "id": "zarhal-source-preview-2", "url": "/templates/taklifla-zarhal-sahifa/assets/preview/photo-1606800052052-a08af7148866.avif", "alt": "", "caption": "" },
-        { "id": "zarhal-source-preview-3", "url": "/templates/taklifla-zarhal-sahifa/assets/preview/photo-1525772764200-be829a350797.avif", "alt": "", "caption": "" }
+        { "id": "zarhal-source-preview-1", "url": "/templates/zarhal-sahifa/assets/preview/photo-1519741497674-611481863552.avif", "alt": "", "caption": "" },
+        { "id": "zarhal-source-preview-2", "url": "/templates/zarhal-sahifa/assets/preview/photo-1606800052052-a08af7148866.avif", "alt": "", "caption": "" },
+        { "id": "zarhal-source-preview-3", "url": "/templates/zarhal-sahifa/assets/preview/photo-1525772764200-be829a350797.avif", "alt": "", "caption": "" }
       ]
     },
-    "love-sakura": {
+    "sakura-sehri": {
       "gallery": [
-        { "id": "love-sakura-source-preview-1", "url": "/templates/love-sakura/assets/hero-couple.webp", "alt": "", "caption": "" },
-        { "id": "love-sakura-source-preview-2", "url": "/templates/love-sakura/assets/bride.webp", "alt": "", "caption": "" },
-        { "id": "love-sakura-source-preview-3", "url": "/templates/love-sakura/assets/groom.webp", "alt": "", "caption": "" },
-        { "id": "love-sakura-source-preview-4", "url": "/templates/love-sakura/assets/hero-couple.webp", "alt": "", "caption": "" },
-        { "id": "love-sakura-source-preview-5", "url": "/templates/love-sakura/assets/bride.webp", "alt": "", "caption": "" },
-        { "id": "love-sakura-source-preview-6", "url": "/templates/love-sakura/assets/groom.webp", "alt": "", "caption": "" }
+        { "id": "love-sakura-source-preview-1", "url": "/templates/sakura-sehri/assets/hero-couple.webp", "alt": "", "caption": "" },
+        { "id": "love-sakura-source-preview-2", "url": "/templates/sakura-sehri/assets/bride.webp", "alt": "", "caption": "" },
+        { "id": "love-sakura-source-preview-3", "url": "/templates/sakura-sehri/assets/groom.webp", "alt": "", "caption": "" },
+        { "id": "love-sakura-source-preview-4", "url": "/templates/sakura-sehri/assets/hero-couple.webp", "alt": "", "caption": "" },
+        { "id": "love-sakura-source-preview-5", "url": "/templates/sakura-sehri/assets/bride.webp", "alt": "", "caption": "" },
+        { "id": "love-sakura-source-preview-6", "url": "/templates/sakura-sehri/assets/groom.webp", "alt": "", "caption": "" }
       ]
     },
-    "jasmine-white": {
+    "oq-yasmin": {
       "gallery": [
-        { "id": "jasmine-white-source-preview-1", "url": "/templates/jasmine-white/assets/fcd26341-5041-40ad-9cc9-d69a47422378.webp", "alt": "Wedding photo 1", "caption": "" },
-        { "id": "jasmine-white-source-preview-2", "url": "/templates/jasmine-white/assets/d1c749b4-edb3-4312-84b6-414459c3d89c.webp", "alt": "Wedding photo 2", "caption": "" },
-        { "id": "jasmine-white-source-preview-3", "url": "/templates/jasmine-white/assets/90085094-65d3-45d4-82da-de8d127a859c.webp", "alt": "Wedding photo 3", "caption": "" },
-        { "id": "jasmine-white-source-preview-4", "url": "/templates/jasmine-white/assets/d0db2a4e-83f8-4b84-a46d-fc2fefe45cfa.webp", "alt": "Wedding photo 4", "caption": "" }
+        { "id": "jasmine-white-source-preview-1", "url": "/templates/oq-yasmin/assets/fcd26341-5041-40ad-9cc9-d69a47422378.webp", "alt": "Wedding photo 1", "caption": "" },
+        { "id": "jasmine-white-source-preview-2", "url": "/templates/oq-yasmin/assets/d1c749b4-edb3-4312-84b6-414459c3d89c.webp", "alt": "Wedding photo 2", "caption": "" },
+        { "id": "jasmine-white-source-preview-3", "url": "/templates/oq-yasmin/assets/90085094-65d3-45d4-82da-de8d127a859c.webp", "alt": "Wedding photo 3", "caption": "" },
+        { "id": "jasmine-white-source-preview-4", "url": "/templates/oq-yasmin/assets/d0db2a4e-83f8-4b84-a46d-fc2fefe45cfa.webp", "alt": "Wedding photo 4", "caption": "" }
       ],
       "venuePhoto": "/images/preview/venue.jpg"
     },
-    "invitate-wedding": {},
-    "glass-pink": {
+    "gulchambar": {},
+    "pushti-gulbarg": {
       "gallery": [
-        { "id": "glass-pink-source-preview-1", "url": "/templates/chorlove/orchid-amplop/assets/gallery-2.webp", "alt": "Gallery photo 1", "caption": "" },
-        { "id": "glass-pink-source-preview-2", "url": "/templates/chorlove/orchid-amplop/assets/gallery-1.webp", "alt": "Gallery photo 2", "caption": "" },
-        { "id": "glass-pink-source-preview-3", "url": "/templates/chorlove/orchid-amplop/assets/gallery-3.webp", "alt": "Gallery photo 3", "caption": "" },
-        { "id": "glass-pink-source-preview-4", "url": "/templates/chorlove/orchid-amplop/assets/gallery-6.webp", "alt": "Gallery photo 4", "caption": "" },
-        { "id": "glass-pink-source-preview-5", "url": "/templates/chorlove/orchid-amplop/assets/gallery-4.webp", "alt": "Gallery photo 5", "caption": "" },
-        { "id": "glass-pink-source-preview-6", "url": "/templates/chorlove/orchid-amplop/assets/gallery-5.webp", "alt": "Gallery photo 6", "caption": "" }
+        { "id": "glass-pink-source-preview-1", "url": "/templates/ormon-maktubi/assets/gallery-2.webp", "alt": "Gallery photo 1", "caption": "" },
+        { "id": "glass-pink-source-preview-2", "url": "/templates/ormon-maktubi/assets/gallery-1.webp", "alt": "Gallery photo 2", "caption": "" },
+        { "id": "glass-pink-source-preview-3", "url": "/templates/ormon-maktubi/assets/gallery-3.webp", "alt": "Gallery photo 3", "caption": "" },
+        { "id": "glass-pink-source-preview-4", "url": "/templates/ormon-maktubi/assets/gallery-6.webp", "alt": "Gallery photo 4", "caption": "" },
+        { "id": "glass-pink-source-preview-5", "url": "/templates/ormon-maktubi/assets/gallery-4.webp", "alt": "Gallery photo 5", "caption": "" },
+        { "id": "glass-pink-source-preview-6", "url": "/templates/ormon-maktubi/assets/gallery-5.webp", "alt": "Gallery photo 6", "caption": "" }
       ]
     }
   },

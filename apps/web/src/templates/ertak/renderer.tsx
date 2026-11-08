@@ -1,0 +1,61 @@
+"use client";
+import { TemplateFrame } from "@/templates/template-frame";
+import { publicAsset } from "../../lib/public-asset";
+
+import { useInvitationMaps } from "@/templates/use-invitation-maps";
+
+import { useEffect, useMemo, useRef, useState } from "react";
+import type { Invitation, Locale } from "@taklifnoma/contracts";
+import { catalogPreviewMusic } from "@/modules/catalog/catalog-music";
+import { makeErtakPayload } from "./adapter";
+import styles from "./renderer.module.css";
+
+type Props = {
+  invitation: Invitation;
+  invitationId: string;
+  locale: Locale;
+  guestName?: string;
+  guestToken?: string;
+  preview?: boolean;
+  fullPreview?: boolean;
+  catalogMusic?: boolean;
+  silentPlayback?: boolean;
+  qaReducedMotion?: boolean;
+};
+
+/** Complete source renderer shared by catalog, studio and public routes. */
+export function TakliflaErtak({ invitation, invitationId, locale, guestName,
+  guestToken, preview = false, fullPreview = false, catalogMusic = false,
+  silentPlayback = false, qaReducedMotion = false }: Props) {
+  const frame = useRef<HTMLIFrameElement>(null);
+  useInvitationMaps(frame);
+  const [activeLocale, setActiveLocale] = useState(locale);
+  useEffect(() => setActiveLocale(locale), [locale]);
+  const message = useMemo(() => makeErtakPayload(invitation, activeLocale, {
+    invitationId, guestName, guestToken, preview,
+    sampleWishes: preview && catalogMusic,
+    reducedMotion: qaReducedMotion,
+    catalogMusicUrl: preview && catalogMusic ? catalogPreviewMusic(invitation).url : "",
+    silentPlayback: preview && (silentPlayback || (!catalogMusic && !fullPreview)),
+  }), [invitation, activeLocale, invitationId, guestName, guestToken, preview,
+    qaReducedMotion, catalogMusic, fullPreview, silentPlayback]);
+  const latest = useRef(message);
+  latest.current = message;
+  const send = () => frame.current?.contentWindow?.postMessage(latest.current, window.location.origin);
+  useEffect(() => { send(); }, [message]);
+  useEffect(() => {
+    const receive = (event: MessageEvent) => {
+      if (event.source !== frame.current?.contentWindow || event.origin !== window.location.origin) return;
+      if (event.data?.type === "ertak:ready") send();
+      if (event.data?.type === "ertak:locale" && invitation.enabledLocales.includes(event.data.locale))
+        setActiveLocale(event.data.locale);
+    };
+    window.addEventListener("message", receive);
+    return () => window.removeEventListener("message", receive);
+  }, [invitation.enabledLocales]);
+  return <div className={fullPreview ? styles.full : preview ? styles.preview : styles.public}>
+    <TemplateFrame ref={frame} src={publicAsset("/templates/ertak/index.html")} onReady={send}
+      title={`Ertak · ${invitation.content[activeLocale]?.title ?? ""}`}
+      allow="autoplay" loading="eager" />
+  </div>;
+}

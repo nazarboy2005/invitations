@@ -146,7 +146,7 @@ export async function captureCover(invitation: Invitation, cookie = "") {
   });
   const context = await browser.newContext({
     viewport: recipe.viewport,
-    ...(["stained-glass", "sunset", "swan-garden", "olive-manor-edition", "islamic-edition", "monochrome-editorial-edition", "xatna-edition"].includes(invitation.templateId)
+    ...(["shisha-naqshi", "sunset", "oqqushlar", "zaytun", "islomiy", "oq-qora-lavha", "xatna"].includes(invitation.templateId)
       ? { reducedMotion: "reduce" as const }
       : {}),
     deviceScaleFactor: 1,
@@ -276,7 +276,7 @@ export async function captureCover(invitation: Invitation, cookie = "") {
     } else {
       // Some selected covers follow an automatic door reveal rather than a tap.
       await page.waitForTimeout(
-        invitation.templateId === "butterfly" ? 6500 : 2000,
+        invitation.templateId === "kapalak" ? 6500 : 2000,
       );
     }
     trace("settle images");

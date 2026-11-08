@@ -5,14 +5,14 @@ import { createHash } from "node:crypto";
 import { test } from "node:test";
 import { templateById } from "@taklifnoma/contracts";
 
-const root = new URL("../apps/web/public/templates/lace/", import.meta.url);
+const root = new URL("../apps/web/public/templates/marvarid/", import.meta.url);
 const archive = new URL("../Invitations - this folder will be removed from production/Chorlove/Web invitations/", import.meta.url);
 const digest = (bytes: Buffer) => createHash("sha256").update(bytes).digest("hex");
 
 test("Lace preserves its source and packages every design asset with provenance", async () => {
   const manifest = JSON.parse(await readFile(new URL("source-assets.provenance.json", root), "utf8"));
   const source = await readFile(new URL("source/preview-frame.html", root));
-  const original = await readFile(new URL("templates/lace/preview-frame.html", archive));
+  const original = await readFile(new URL("templates/marvarid/preview-frame.html", archive));
   assert.deepEqual(source, original);
   assert.equal(source.length, manifest.source.bytes);
   assert.equal(digest(source), manifest.source.sha256);
@@ -74,10 +74,10 @@ test("Lace retains the opening animation and maps the complete shared invitation
     ...[...html.matchAll(/(?:src|href|poster)="([^"]+)"/g)].map((m) => m[1]),
     ...[...style.matchAll(/url\(["']?([^)'"\s]+)["']?\)/g)].map((m) => m[1]),
     ...[...fonts.matchAll(/url\(["']?([^)'"\s]+)["']?\)/g)].map((m) => m[1]),
-  ].filter((path) => path.startsWith("/templates/lace/assets/")));
+  ].filter((path) => path.startsWith("/templates/marvarid/assets/")));
   assert.ok(localPaths.size >= 30);
   for (const path of localPaths) {
-    await readFile(new URL(path.replace("/templates/lace/", ""), root));
+    await readFile(new URL(path.replace("/templates/marvarid/", ""), root));
   }
   assert.match(bridge, /d\.eventType/);
   assert.match(bridge, /dateTime/);
@@ -88,6 +88,6 @@ test("Lace retains the opening animation and maps the complete shared invitation
   assert.match(bridge, /lace-reduced-motion/);
   assert.match(bridge, /postMessage\(\{type:`\$\{id\}:language`/);
   assert.match(bridge, /brand,true/);
-  assert.equal(templateById("lace")?.published, true);
+  assert.equal(templateById("marvarid")?.published, true);
   assert.match(await readFile(new URL("../packages/database/migrations/0115_register_lace.sql", import.meta.url), "utf8"), /published\s*=\s*false/);
 });

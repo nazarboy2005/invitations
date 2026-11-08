@@ -4,13 +4,13 @@ import test from "node:test";
 import { templateById } from "../packages/contracts/src/index";
 
 test("Butterfly is a published wedding-only catalog template", () => {
-  const template = templateById("butterfly");
+  const template = templateById("kapalak");
   assert.ok(template);
   assert.equal(template.published, true);
   assert.equal(template.priceMinor, 15_000_000);
   assert.deepEqual(template.categoryIds, ["wedding"]);
   assert.deepEqual(template.supportedEventTypes, ["wedding"]);
-  assert.equal(template.previewImage, "/templates/butterfly/preview.png");
+  assert.equal(template.previewImage, "/templates/kapalak/preview.png");
 
   const migration = readFileSync(
     "packages/database/migrations/0129_register_butterfly_template.sql",
@@ -42,18 +42,18 @@ test("Butterfly adapter maps authored content and keeps preview-only gallery ass
 });
 
 test("Butterfly opening artwork and source package are present and locally bound", () => {
-  const html = readFileSync("apps/web/public/templates/butterfly/index.html", "utf8");
+  const html = readFileSync("apps/web/public/templates/kapalak/index.html", "utf8");
   const script = readFileSync(
-    "apps/web/public/templates/butterfly/assets/js/butterfly.js",
+    "apps/web/public/templates/kapalak/assets/js/butterfly.js",
     "utf8",
   );
   const css = readFileSync(
-    "apps/web/public/templates/butterfly/assets/css/butterfly.css",
+    "apps/web/public/templates/kapalak/assets/css/butterfly.css",
     "utf8",
   );
-  const image = statSync("apps/web/public/templates/butterfly/preview.png");
+  const image = statSync("apps/web/public/templates/kapalak/preview.png");
   const provenance = JSON.parse(
-    readFileSync("apps/web/public/templates/butterfly/preview.provenance.json", "utf8"),
+    readFileSync("apps/web/public/templates/kapalak/preview.provenance.json", "utf8"),
   );
   assert.match(html, /assets\/css\/butterfly\.css/);
   assert.match(html, /assets\/js\/butterfly\.js/);
@@ -77,9 +77,9 @@ test("Butterfly keeps gift/to'yana UI absent because it is absent from the Invit
   const sourceHtml = readFileSync(`${sourceRoot}/butterfly.html`, "utf8");
   const sourceScript = readFileSync(`${sourceRoot}/assets/js/butterfly.js`, "utf8");
   const sourceCss = readFileSync(`${sourceRoot}/assets/css/butterfly.css`, "utf8");
-  const packagedHtml = readFileSync("apps/web/public/templates/butterfly/index.html", "utf8");
+  const packagedHtml = readFileSync("apps/web/public/templates/kapalak/index.html", "utf8");
   const packagedScript = readFileSync(
-    "apps/web/public/templates/butterfly/assets/js/butterfly.js",
+    "apps/web/public/templates/kapalak/assets/js/butterfly.js",
     "utf8",
   );
   const renderer = readFileSync(

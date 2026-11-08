@@ -172,7 +172,7 @@ function setup() {
     });
   return {
     first: paper("anor"),
-    second: paper("cloud-castle"),
+    second: paper("bulutlar-qasri"),
     selected: () => selected,
     keyboard: () => {
       keyboard = true;
@@ -209,11 +209,11 @@ test("hover opens only that paper and click follows its preview", () => {
   assert.equal(action.prevented(), false);
   state.first.onPointerLeave(leave("mouse"));
   state.second.onPointerEnter({ pointerType: "mouse" });
-  assert.equal(state.selected(), "cloud-castle");
+  assert.equal(state.selected(), "bulutlar-qasri");
   state.first.onPointerLeave(leave("mouse"));
   assert.equal(
     state.selected(),
-    "cloud-castle",
+    "bulutlar-qasri",
     "stale leave cannot close a different paper",
   );
 });
@@ -246,7 +246,7 @@ test("tapping another paper folds the old one and does not navigate", () => {
   const action = click();
   state.second.onClick(action.event);
   assert.equal(action.prevented(), true);
-  assert.equal(state.selected(), "cloud-castle");
+  assert.equal(state.selected(), "bulutlar-qasri");
 });
 
 test("keyboard focus unfolds and incidental hover cannot override it", () => {
@@ -260,7 +260,7 @@ test("keyboard focus unfolds and incidental hover cannot override it", () => {
   assert.equal(action.prevented(), false);
   state.first.onBlur();
   state.second.onFocus();
-  assert.equal(state.selected(), "cloud-castle");
+  assert.equal(state.selected(), "bulutlar-qasri");
   state.first.onPointerMove({ pointerType: "mouse" });
   assert.equal(
     state.selected(),

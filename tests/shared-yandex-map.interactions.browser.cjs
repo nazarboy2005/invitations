@@ -8,7 +8,7 @@ const assert = require("node:assert/strict");
   try {
     const page = await browser.newPage({ reducedMotion: "reduce" });
     await page.route("https://**/*", route => route.abort());
-    for (const template of ["anor", "cloud-castle"]) {
+    for (const template of ["anor", "bulutlar-qasri"]) {
       await page.goto(`http://127.0.0.1:3001/preview?template=${template}&qaSilent=1&qaReducedMotion=1`, { waitUntil: "domcontentloaded" });
       const source = page.frameLocator(`iframe[src*="${template}/"]`);
       const map = source.frameLocator('iframe[src*="/maps/venue?"]');

@@ -77,7 +77,7 @@ export function ShishaBogInvitation({
     frame.current?.contentWindow?.postMessage({ type: "shisha-bog:update", payload: message }, window.location.origin);
   }, [message]);
 
-  const frameUrl = publicAsset(`/templates/onlinetaklifnoma-shisha-bog/index.html${preview && silentPlayback ? "?qaSilent=1" : ""}`);
+  const frameUrl = publicAsset(`/templates/shisha-bog/index.html${preview && silentPlayback ? "?qaSilent=1" : ""}`);
   const mode = fullPreview ? styles.full : preview ? styles.preview : styles.public;
   return (
     <div className={mode}>

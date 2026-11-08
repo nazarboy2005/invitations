@@ -39,7 +39,7 @@ test(
       displayName: "Disposable Yubiley verification",
       isAdmin: false,
     };
-    let invitation = createInvitation("taklifla-yubiley-sahifasi");
+    let invitation = createInvitation("umr-bahori");
     invitation.eventType = "korporativ";
     let browser: any;
     const checks: string[] = [];
@@ -95,7 +95,7 @@ test(
           LOCALES.map((locale) => [locale, `Authored chapter ${i} ${locale}`]),
         ),
       }));
-      invitation.templateData["taklifla-yubiley-sahifasi"]={years:30,founderRole:Object.fromEntries(LOCALES.map(l=>[l,`Role ${l}`])),storyYears:{"chapter-0":"2001"},statistics:[{id:"stable-stat",value:"30+",label:Object.fromEntries(LOCALES.map(l=>[l,`Stat ${l}`]))}]};
+      invitation.templateData["umr-bahori"]={years:30,founderRole:Object.fromEntries(LOCALES.map(l=>[l,`Role ${l}`])),storyYears:{"chapter-0":"2001"},statistics:[{id:"stable-stat",value:"30+",label:Object.fromEntries(LOCALES.map(l=>[l,`Stat ${l}`]))}]};
       invitation.rsvp = { enabled: true, deadline: "", maxPartySize: 4 };
       invitation.wishes.enabled = true;
       let response = await request(
@@ -114,7 +114,7 @@ test(
         "Authenticated four-locale save/reopen preserves authored fields, authored story chapters and venue",
       );
       const originalShared = structuredClone(invitation);
-      for (const templateId of (process.env.TAKLIFLA_PRIVATE_QA ? [] : ["korporativ", "taklifla-yubiley-sahifasi"])) {
+      for (const templateId of (process.env.TAKLIFLA_PRIVATE_QA ? [] : ["korporativ", "umr-bahori"])) {
         response = await request(
           `/api/invitations/${invitation.id}`,
           { invitation: { ...invitation, templateId } },

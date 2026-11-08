@@ -1,5 +1,5 @@
 const {chromium}=require('../apps/web/node_modules/playwright'),fs=require('node:fs'),http=require('node:http'),path=require('node:path'),assert=require('node:assert/strict'),{execFileSync}=require('node:child_process');
-const id='taklifla-gulbog',base=path.resolve('apps/web/public/templates/'+id),out=path.resolve('docs/templates/taklifla-audit/gulbog');fs.mkdirSync(out,{recursive:true});
+const id='gulbog',base=path.resolve('apps/web/public/templates/'+id),out=path.resolve('docs/templates/taklifla-audit/gulbog');fs.mkdirSync(out,{recursive:true});
 const fixture=JSON.parse(execFileSync(process.execPath,['--import','tsx','tests/taklifla-gulbog.fixture.ts'],{encoding:'utf8'})),meta=JSON.parse(fs.readFileSync(base+'/dependencies.json'));
 let source=fs.readFileSync(meta.capture,'utf8').replace(/<script\b[^>]*>[\s\S]*?<\/script>/g,'').replace(/<link[^>]*href="https:\/\/fonts[^>]*>/g,'');
 source=source.replaceAll('garden-arch-img/','/source/garden-arch-img/').replace('</head>','<link rel="stylesheet" href="/fonts.css"><link rel="icon" href="data:,"></head>').replace('</body>','<script src="/source/motion.js"></script><script>startGardenSource()</script></body>');

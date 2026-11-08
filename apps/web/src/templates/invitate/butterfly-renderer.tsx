@@ -42,7 +42,7 @@ export function ButterflyInvitation({
 
   useEffect(() => {
     const onMessage = (event: MessageEvent) => {
-      if (event.origin !== window.location.origin || event.source !== frame.current?.contentWindow || event.data?.type !== "butterfly:language") return;
+      if (event.origin !== window.location.origin || event.source !== frame.current?.contentWindow || event.data?.type !== "kapalak:language") return;
       const next = invitation.enabledLocales.find((item) => localeCode(item) === event.data.locale);
       if (next) setFrameLocale(next);
     };
@@ -60,7 +60,7 @@ export function ButterflyInvitation({
       onReady={() => {
         const target = frame.current?.contentWindow;
         if (!target) return;
-        target.postMessage({ type: "butterfly:update", payload: latest.current }, window.location.origin);
+        target.postMessage({ type: "kapalak:update", payload: latest.current }, window.location.origin);
       }}
       allow="autoplay; fullscreen"
       loading="eager"

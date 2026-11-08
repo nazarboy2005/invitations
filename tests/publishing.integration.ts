@@ -763,12 +763,12 @@ test("RSVP limits and wish moderation reach the owner and approved public list",
 
 test("published Modern Floral draft saves and reopens while remaining in the public catalog", async () => {
   const invitation = completeInvitation();
-  invitation.templateId = "modern-floral";
+  invitation.templateId = "gul-ifori";
   await sql`INSERT INTO invitations(id,owner_id,template_id,status,data) VALUES(${invitation.id},${owner.id},${invitation.templateId},'draft',${sql.json(invitation)})`;
   const savedResponse = await request("/api/invitations", { invitation });
   assert.equal(savedResponse.status, 201, await savedResponse.clone().text());
   const saved = (await savedResponse.json()).invitation as Invitation;
-  assert.equal(saved.templateId, "modern-floral");
+  assert.equal(saved.templateId, "gul-ifori");
   const reopenedResponse = await request(`/api/invitations/${invitation.id}`);
   assert.equal(reopenedResponse.status, 200);
   const reopened = (await reopenedResponse.json()).invitation as Invitation;
@@ -794,7 +794,7 @@ test("published Modern Floral draft saves and reopens while remaining in the pub
   assert.ok(
     catalog.templates.some(
       (template: { id: string; published: boolean }) =>
-        template.id === "modern-floral" && template.published,
+        template.id === "gul-ifori" && template.published,
     ),
   );
   assert.equal((await fetch(`${origin}/i/${invitation.id}`)).status, 404);
@@ -802,10 +802,10 @@ test("published Modern Floral draft saves and reopens while remaining in the pub
 
 test("published Pulau Sehati preserves source fields across authenticated save, reopen, and template switch", async () => {
   const invitation = completeInvitation();
-  invitation.templateId = "wedivo-pulau-sehati";
+  invitation.templateId = "kongillar-oroli";
   invitation.eventType = "wedding";
   invitation.templateData = {
-    "wedivo-pulau-sehati": {
+    "kongillar-oroli": {
       inscription: {
         arabic: "نص",
         text: { "uz-Latn": "Tarjima", en: "Translation" },
@@ -906,7 +906,7 @@ test("published Pulau Sehati preserves source fields across authenticated save, 
   assert.ok(
     catalog.templates.some(
       (template: { id: string; published: boolean }) =>
-        template.id === "wedivo-pulau-sehati" && template.published,
+        template.id === "kongillar-oroli" && template.published,
     ),
   );
   assert.equal((await fetch(`${origin}/i/${invitation.id}`)).status, 404);
@@ -915,8 +915,8 @@ test("published Pulau Sehati preserves source fields across authenticated save, 
 test("Taklifla Asalari and Muhrli Maktub save, reopen, publish, and render publicly", async () => {
   const catalog = await (await request("/api/catalog", undefined, false)).json();
   for (const [templateId, eventType, people] of [
-    ["taklifla-asalari", "birthday", ["Asal Qiz"]],
-    ["taklifla-muhrli-maktub", "wedding", ["Aziza", "Jahongir"]],
+    ["asalari", "birthday", ["Asal Qiz"]],
+    ["muhrli-maktub", "wedding", ["Aziza", "Jahongir"]],
   ] as const) {
     const definition = catalog.templates.find((item: { id: string }) => item.id === templateId);
     const typed = templateById(templateId);
@@ -932,7 +932,7 @@ test("Taklifla Asalari and Muhrli Maktub save, reopen, publish, and render publi
     const invitation = completeInvitation();
     invitation.templateId = templateId;
     invitation.eventType = eventType;
-    if (templateId === "taklifla-asalari") invitation.celebrantAge = 3;
+    if (templateId === "asalari") invitation.celebrantAge = 3;
     invitation.enabledLocales = [...LOCALES];
     invitation.defaultLocale = "uz-Latn";
     for (const locale of LOCALES) {
@@ -942,7 +942,7 @@ test("Taklifla Asalari and Muhrli Maktub save, reopen, publish, and render publi
       invitation.content[locale].venueName = "Test venue";
       invitation.content[locale].address = "Test address";
     }
-    if (templateId === "taklifla-muhrli-maktub")
+    if (templateId === "muhrli-maktub")
       invitation.templateData[templateId] = {
         flowersNote: Object.fromEntries(LOCALES.map((locale) => [locale, "A creator-authored flowers note."])),
       };
@@ -957,7 +957,7 @@ test("Taklifla Asalari and Muhrli Maktub save, reopen, publish, and render publi
     assert.deepEqual(reopened.content, saved.content);
     assert.deepEqual(reopened.program, saved.program);
     assert.deepEqual(reopened.templateData, saved.templateData);
-    if (templateId === "taklifla-asalari") assert.equal(reopened.celebrantAge, 3);
+    if (templateId === "asalari") assert.equal(reopened.celebrantAge, 3);
 
     const incompatible = { ...reopened, eventType: eventType === "wedding" ? "birthday" as const : "wedding" as const };
     assert.equal((await request(`/api/invitations/${saved.id}`, { invitation: incompatible }, true, origin, "PUT")).status, 409);
@@ -972,7 +972,7 @@ test("Taklifla Asalari and Muhrli Maktub save, reopen, publish, and render publi
     assert.equal(publicPage.status, 200, `${templateId} public page failed`);
     const html = await publicPage.text();
     assert.ok(html.includes(`/templates/${templateId}/index.html`), `${templateId} source renderer is missing from public route`);
-    if (templateId === "taklifla-muhrli-maktub")
+    if (templateId === "muhrli-maktub")
       assert.ok(html.includes("A creator-authored flowers note."), "Muhrli Maktub public payload must include the saved source-specific note");
   }
 });
@@ -1145,7 +1145,7 @@ test("HTTP save → publish → public render → reopen and allowed edits prese
       invitation.content["uz-Latn"].address = "Test address";
       invitation.content["uz-Latn"].people = ["Nodir test", "Madina test"];
     }
-    if (invitation.templateId === "golden-hour") {
+    if (invitation.templateId === "oltin-lahza") {
       invitation.eventType = "birthday";
       invitation.content["uz-Latn"] = defaultLocalizedInvitationContent(
         "birthday",

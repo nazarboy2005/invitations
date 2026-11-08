@@ -52,7 +52,7 @@ async function fixture(image = true) {
     ...completeInvitation(),
     ...(image
       ? {
-          templateId: "ivory-rose-card" as const,
+          templateId: "oq-atirgul" as const,
           imageExportedAt: new Date().toISOString(),
         }
       : {}),

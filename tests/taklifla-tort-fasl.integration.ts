@@ -39,7 +39,7 @@ test(
       displayName: "Disposable Fasllar verification",
       isAdmin: false,
     };
-    let invitation = createInvitation("taklifla-tort-fasl");
+    let invitation = createInvitation("tort-fasl");
     invitation.eventType = "wedding";
     let browser: any;
     const checks: string[] = [];
@@ -111,7 +111,7 @@ test(
         "Authenticated four-locale save/reopen preserves authored fields, authored story chapters and venue",
       );
       const originalShared = structuredClone(invitation);
-      for (const templateId of ["taklifla-tungi-saroy", "taklifla-tort-fasl"]) {
+      for (const templateId of ["tungi-saroy", "tort-fasl"]) {
         response = await request(
           `/api/invitations/${invitation.id}`,
           { invitation: { ...invitation, templateId } },

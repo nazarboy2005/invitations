@@ -39,7 +39,7 @@ test(
       displayName: "Disposable Xonadon verification",
       isAdmin: false,
     };
-    let invitation = createInvitation("taklifla-fayzli-xonadon");
+    let invitation = createInvitation("fayzli-xonadon");
     invitation.eventType = "yangi-uy";
     let browser: any;
     const checks: string[] = [];
@@ -95,7 +95,7 @@ test(
           LOCALES.map((locale) => [locale, `Authored chapter ${i} ${locale}`]),
         ),
       }));
-      invitation.templateData["taklifla-fayzli-xonadon"]={menu:[{id:"stable-course",label:Object.fromEntries(LOCALES.map(l=>[l,`Course ${l}`])),name:Object.fromEntries(LOCALES.map(l=>[l,`Meal ${l}`])),description:Object.fromEntries(LOCALES.map(l=>[l,`Details ${l}`]))}]};
+      invitation.templateData["fayzli-xonadon"]={menu:[{id:"stable-course",label:Object.fromEntries(LOCALES.map(l=>[l,`Course ${l}`])),name:Object.fromEntries(LOCALES.map(l=>[l,`Meal ${l}`])),description:Object.fromEntries(LOCALES.map(l=>[l,`Details ${l}`]))}]};
       invitation.rsvp = { enabled: true, deadline: "", maxPartySize: 4 };
       invitation.wishes.enabled = true;
       let response = await request(
@@ -114,7 +114,7 @@ test(
         "Authenticated four-locale save/reopen preserves authored fields, authored story chapters and venue",
       );
       const originalShared = structuredClone(invitation);
-      for (const templateId of (process.env.TAKLIFLA_PRIVATE_QA ? [] : ["yangi-uy", "taklifla-fayzli-xonadon"])) {
+      for (const templateId of (process.env.TAKLIFLA_PRIVATE_QA ? [] : ["yangi-uy", "fayzli-xonadon"])) {
         response = await request(
           `/api/invitations/${invitation.id}`,
           { invitation: { ...invitation, templateId } },

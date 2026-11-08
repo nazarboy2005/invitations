@@ -111,7 +111,7 @@ export function applyChange(
       next.content[locale] = { ...next.content[locale], ...content };
     }
     next.celebrantAge = value.celebrantAge;
-    if (invitation.templateId === "taklifla-yubiley-sahifasi") {
+    if (invitation.templateId === "umr-bahori") {
       const data = next.templateData[invitation.templateId] as Record<
         string,
         never
@@ -150,10 +150,10 @@ export function applyChange(
     if (input.values.secondaryDate !== undefined) {
       if (!secondaryCeremony(invitation).enabled)
         throw new Error("INVALID_CEREMONY");
-      const data = next.templateData["wedivo-pulau-sehati"] as {
+      const data = next.templateData["kongillar-oroli"] as {
         secondaryEvent: Record<string, string>;
       };
-      next.templateData["wedivo-pulau-sehati"] = {
+      next.templateData["kongillar-oroli"] = {
         ...data,
         secondaryEvent: {
           ...data.secondaryEvent,

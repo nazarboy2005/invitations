@@ -4,7 +4,7 @@ import assert from "node:assert/strict";
 
 import { createHash } from "node:crypto";
 import { resolve, join } from "node:path";
-const root=resolve("apps/web/public/templates/modern-floral");
+const root=resolve("apps/web/public/templates/gul-ifori");
 const html=readFileSync(join(root,"index.html"),"utf8");
 const bridge=readFileSync(join(root,"bridge.js"),"utf8");
 const manifest=JSON.parse(readFileSync(join(root,"source-assets.provenance.json"),"utf8"));
@@ -19,10 +19,10 @@ test("Modern Floral preserves the captured page and exact floral artwork",()=>{
  assert.equal((html.match(/<section\b/g)||[]).length,13);
  assert.equal(createHash("sha256").update(asset).digest("hex"),manifest.assets[0].sha256);
  assert.equal(asset.length,manifest.assets[0].bytes);
- const previewGallery=previewSample.templateSamples["modern-floral"].gallery;
+ const previewGallery=previewSample.templateSamples["gul-ifori"].gallery;
  assert.equal(manifest.previewSampleGallery.previewOnly,true);
  assert.equal(previewGallery.length,6);
- assert.deepEqual(previewGallery.map(item=>item.url),manifest.previewSampleGallery.images.map(image=>image.packagedPath.replace("../chorlove/orchid-amplop/assets","/templates/chorlove/orchid-amplop/assets")));
+ assert.deepEqual(previewGallery.map(item=>item.url),manifest.previewSampleGallery.images.map(image=>image.packagedPath.replace("../ormon-maktubi/assets","/templates/ormon-maktubi/assets")));
  assert.equal((html.match(/aria-label="Ko\'rish"/g)||[]).length,12);
 });
 test("Modern Floral removes Next/site samples and maps the shared invitation services",()=>{

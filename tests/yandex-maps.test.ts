@@ -12,7 +12,7 @@ test("maps and normalized saves share one Uzbek destination despite a conflictin
   assert.equal(map.searchParams.get("pt"), "69.224814,41.328372,pm2rdm");
   assert.equal(map.searchParams.get("lang"), "uz_UZ");
   assert.equal(map.pathname, "/maps/org/178096015422/");
-  const invitation = createInvitation("cloud-castle"); invitation.venue = venue;
+  const invitation = createInvitation("bulutlar-qasri"); invitation.venue = venue;
   const saved = normalizeInvitation(invitation);
   assert.equal(saved.venue.mapUrl, map.href);
   assert.equal(saved.venue.placeUri, venue.placeUri);
@@ -28,7 +28,7 @@ test("zero coordinates are real; incomplete/invalid points are cleared", () => {
 });
 
 test("venue identity survives the shared contract and rejects unrelated URI schemes", () => {
-  const invitation = createInvitation("cloud-castle"); invitation.venue = venue;
+  const invitation = createInvitation("bulutlar-qasri"); invitation.venue = venue;
   assert.equal(invitationSchema.parse(invitation).venue.placeUri, venue.placeUri);
   assert.equal(invitationSchema.safeParse({ ...invitation, venue: { ...venue, placeUri: "https://attacker.example/" } }).success, false);
 });

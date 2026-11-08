@@ -7,7 +7,7 @@ import path from "node:path";
 import test from "node:test";
 
 const root = process.cwd();
-const template = path.join(root, "apps/web/public/templates/chorlove/palov");
+const template = path.join(root, "apps/web/public/templates/palov");
 const read = (relative: string) => readFileSync(path.join(template, relative), "utf8");
 
 test("Chorlove Palov package keeps its source design isolated and self contained", () => {
@@ -117,7 +117,7 @@ test("Chorlove Palov is published for nahorgi osh", () => {
   assert.deepEqual(entry.categoryIds, ["osh"]);
   assert.deepEqual(entry.supportedEventTypes, ["osh"]);
   assert.equal(entry.published, true);
-  assert.equal(entry.previewImage, "/templates/chorlove/palov/catalog-opening.png");
+  assert.equal(entry.previewImage, "/templates/palov/catalog-opening.png");
   assert.equal(createTemplatePreviewSample("palov").content["uz-Latn"].title, "Nahorgi osh");
 
   const migration = readFileSync(

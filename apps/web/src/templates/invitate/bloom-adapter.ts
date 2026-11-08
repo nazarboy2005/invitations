@@ -52,7 +52,7 @@ export function makeBloomData(
       text: invitation.dressCode.text[locale] ?? "",
     },
     gallery: preview ? [{
-      url: publicAsset("/templates/bloom/source/assets/previews/template/bloom/pink.png"),
+      url: publicAsset("/templates/gullar-bayrami/source/assets/previews/template/gullar-bayrami/pink.png"),
       alt: "",
       caption: "",
     }] : invitation.gallery.map((photo) => ({

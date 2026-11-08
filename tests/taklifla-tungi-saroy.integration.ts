@@ -39,7 +39,7 @@ test(
       displayName: "Disposable Tungi Saroy verification",
       isAdmin: false,
     };
-    let invitation = createInvitation("taklifla-tungi-saroy");
+    let invitation = createInvitation("tungi-saroy");
     invitation.eventType = "wedding";
     let browser: any;
     const checks: string[] = [];
@@ -114,7 +114,7 @@ test(
         "Authenticated four-locale save/reopen preserves authored fields, authored story chapters and venue",
       );
       const originalShared = structuredClone(invitation);
-      for (const templateId of ["taklifla-tovus", "taklifla-tungi-saroy"]) {
+      for (const templateId of ["tovus", "tungi-saroy"]) {
         response = await request(
           `/api/invitations/${invitation.id}`,
           { invitation: { ...invitation, templateId } },

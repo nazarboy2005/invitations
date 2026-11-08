@@ -44,7 +44,7 @@ test("asset snapshots invalidate dependencies when bytes change and preserve ori
     write("templates/demo/source/reference.html", "private captured page");
     write("templates/demo/README.md", "source evidence");
     write(
-      "templates/invitate-wedding/assets/captured/5b73decb38ff5c8c.js",
+      "templates/gulchambar/assets/captured/5b73decb38ff5c8c.js",
       "private tracker",
     );
     const first = preparePublicAssets(root);

@@ -27,21 +27,21 @@ import type { ZodType } from "zod";
 // Match the template-specific authoring contracts. Never serialize the open
 // templateData record directly: it can retain data from previous templates.
 const publicTemplateSchemas: Record<string, ZodType> = {
-  "taklifla-terracotta": terracottaDataSchema,
-  "taklifla-yulduzli-tun": starryDataSchema,
-  "taklifla-sharlar": sharlarDataSchema,
-  "taklifla-sakura-guli": sakuraDataSchema,
-  "taklifla-qogoz-ertagi": qogozDataSchema,
-  "taklifla-parilar-ertagi": pariDataSchema,
-  "taklifla-osmon": osmonDataSchema,
-  "taklifla-oltin-yol": oltinYolDataSchema,
-  "taklifla-toglar-bagrida": mountainDataSchema,
-  "taklifla-zarrin-gullar": zarrinDataSchema,
-  "taklifla-gulbog": gulbogDataSchema,
-  "taklifla-fayzli-xonadon": fayzliXonadonDataSchema,
-  "taklifla-yubiley-sahifasi": yubileySahifasiDataSchema,
-  "taklifla-muhrli-maktub": muhrliMaktubDataSchema,
-  "wedivo-pulau-sehati": pulauSehatiDataSchema,
+  "terrakota": terracottaDataSchema,
+  "yulduzli-tun": starryDataSchema,
+  "sharlar": sharlarDataSchema,
+  "sakura-guli": sakuraDataSchema,
+  "qogoz-ertagi": qogozDataSchema,
+  "parilar-ertagi": pariDataSchema,
+  "osmon": osmonDataSchema,
+  "oltin-yol": oltinYolDataSchema,
+  "toglar-bagrida": mountainDataSchema,
+  "zarrin-gullar": zarrinDataSchema,
+  "gulbog": gulbogDataSchema,
+  "fayzli-xonadon": fayzliXonadonDataSchema,
+  "umr-bahori": yubileySahifasiDataSchema,
+  "muhrli-maktub": muhrliMaktubDataSchema,
+  "kongillar-oroli": pulauSehatiDataSchema,
 };
 
 /** Guest-facing data only; never mutate the creator's recoverable saved data. */

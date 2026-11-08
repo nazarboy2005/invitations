@@ -1,0 +1,3261 @@
+{
+  "checkedSources": 140,
+  "checkedPackages": 133,
+  "expectedPackages": 133,
+  "catalog": [
+    {
+      "id": "ivory-rose-card",
+      "name": "Oq atirgul",
+      "slug": "oq-atirgul",
+      "fallbackPublished": true
+    },
+    {
+      "id": "lola-maktubi",
+      "name": "Lola maktubi",
+      "slug": "lola-maktubi",
+      "fallbackPublished": true
+    },
+    {
+      "id": "moviy-ravoq-card",
+      "name": "Moviy ravoq",
+      "slug": "moviy-ravoq",
+      "fallbackPublished": true
+    },
+    {
+      "id": "sahar-ifori",
+      "name": "Sahar ifori",
+      "slug": "sahar-ifori",
+      "fallbackPublished": true
+    },
+    {
+      "id": "wedivo-pulau-sehati",
+      "name": "Ko‘ngillar oroli",
+      "slug": "kongillar-oroli",
+      "fallbackPublished": false
+    },
+    {
+      "id": "oltin-darvoza-ortidagi-baxt",
+      "name": "Oltin darvoza ortidagi baxt",
+      "slug": "oltin-darvoza-ortidagi-baxt",
+      "fallbackPublished": false
+    },
+    {
+      "id": "gulli-darvoza",
+      "name": "Gulli darvoza",
+      "slug": "gulli-darvoza",
+      "fallbackPublished": false
+    },
+    {
+      "id": "ming-bir-kecha",
+      "name": "Ming bir kecha",
+      "slug": "ming-bir-kecha",
+      "fallbackPublished": false
+    },
+    {
+      "id": "andalus-darvozasi",
+      "name": "Andalus darvozasi",
+      "slug": "andalus-darvozasi",
+      "fallbackPublished": false
+    },
+    {
+      "id": "samarqand-peshtoqi",
+      "name": "Samarqand peshtoqi",
+      "slug": "samarqand-peshtoqi",
+      "fallbackPublished": false
+    },
+    {
+      "id": "shisha-bog",
+      "name": "Shisha bogʻ",
+      "slug": "shisha-bog",
+      "fallbackPublished": false
+    },
+    {
+      "id": "kapadokiya-tongi",
+      "name": "Kapadokiya tongi",
+      "slug": "kapadokiya-tongi",
+      "fallbackPublished": false
+    },
+    {
+      "id": "buxoro-ravoq",
+      "name": "Buxoro ravoq",
+      "slug": "buxoro-ravoq",
+      "fallbackPublished": false
+    },
+    {
+      "id": "jannat-bogi",
+      "name": "Jannat bogʻi",
+      "slug": "jannat-bogi",
+      "fallbackPublished": false
+    },
+    {
+      "id": "tojmahal-oltin-darvozasi",
+      "name": "Tojmahal oltin darvozasi",
+      "slug": "tojmahal-oltin-darvozasi",
+      "fallbackPublished": false
+    },
+    {
+      "id": "zarrin-doppi",
+      "name": "Zarrin do‘ppi",
+      "slug": "zarrin-doppi",
+      "fallbackPublished": false
+    },
+    {
+      "id": "fairy",
+      "name": "Fairy",
+      "slug": "fairy",
+      "fallbackPublished": true
+    },
+    {
+      "id": "butterfly",
+      "name": "Butterfly",
+      "slug": "butterfly",
+      "fallbackPublished": true
+    },
+    {
+      "id": "girlsparty",
+      "name": "Girls Party",
+      "slug": "girlsparty",
+      "fallbackPublished": false
+    },
+    {
+      "id": "estelle",
+      "name": "Estelle",
+      "slug": "estelle",
+      "fallbackPublished": false
+    },
+    {
+      "id": "velora",
+      "name": "Velora",
+      "slug": "velora",
+      "fallbackPublished": true
+    },
+    {
+      "id": "velvet",
+      "name": "Velvet",
+      "slug": "velvet",
+      "fallbackPublished": false
+    },
+    {
+      "id": "aurelia",
+      "name": "Aurelia",
+      "slug": "aurelia",
+      "fallbackPublished": true
+    },
+    {
+      "id": "evelina",
+      "name": "Evelina",
+      "slug": "evelina",
+      "fallbackPublished": true
+    },
+    {
+      "id": "anor",
+      "name": "Anor",
+      "slug": "anor",
+      "fallbackPublished": true
+    },
+    {
+      "id": "oltin-nur",
+      "name": "Oltin Nur",
+      "slug": "oltin-nur",
+      "fallbackPublished": true
+    },
+    {
+      "id": "samarqand-kechasi",
+      "name": "Samarqand Kechasi",
+      "slug": "samarqand-kechasi",
+      "fallbackPublished": true
+    },
+    {
+      "id": "bogi-eram",
+      "name": "Bog‘i Eram",
+      "slug": "bogi-eram",
+      "fallbackPublished": true
+    },
+    {
+      "id": "atlas",
+      "name": "Atlas",
+      "slug": "atlas",
+      "fallbackPublished": true
+    },
+    {
+      "id": "uchar-gilam",
+      "name": "Uchar Gilam",
+      "slug": "uchar-gilam",
+      "fallbackPublished": false
+    },
+    {
+      "id": "oq-kabutar",
+      "name": "Oq Kabutar",
+      "slug": "oq-kabutar",
+      "fallbackPublished": false
+    },
+    {
+      "id": "kuzgi-chinor",
+      "name": "Kuzgi Chinor",
+      "slug": "kuzgi-chinor",
+      "fallbackPublished": false
+    },
+    {
+      "id": "muhabbat-kitobi",
+      "name": "Muhabbat Kitobi",
+      "slug": "muhabbat-kitobi",
+      "fallbackPublished": false
+    },
+    {
+      "id": "sahifa",
+      "name": "Sahifa",
+      "slug": "sahifa",
+      "fallbackPublished": true
+    },
+    {
+      "id": "oltin-uzuk",
+      "name": "Oltin Uzuk",
+      "slug": "oltin-uzuk",
+      "fallbackPublished": false
+    },
+    {
+      "id": "oynavand",
+      "name": "Oynavand",
+      "slug": "oynavand",
+      "fallbackPublished": true
+    },
+    {
+      "id": "somon-yoli",
+      "name": "Somon Yo‘li",
+      "slug": "somon-yoli",
+      "fallbackPublished": true
+    },
+    {
+      "id": "qogoz-turna",
+      "name": "Qog‘oz Turna",
+      "slug": "qogoz-turna",
+      "fallbackPublished": true
+    },
+    {
+      "id": "nilufar",
+      "name": "Nilufar",
+      "slug": "nilufar",
+      "fallbackPublished": true
+    },
+    {
+      "id": "monogram",
+      "name": "Monogram",
+      "slug": "monogram",
+      "fallbackPublished": true
+    },
+    {
+      "id": "retro-kino",
+      "name": "Retro Kino",
+      "slug": "retro-kino",
+      "fallbackPublished": true
+    },
+    {
+      "id": "suzani",
+      "name": "Suzani",
+      "slug": "suzani",
+      "fallbackPublished": true
+    },
+    {
+      "id": "orik-guli",
+      "name": "O‘rik Guli",
+      "slug": "orik-guli",
+      "fallbackPublished": true
+    },
+    {
+      "id": "paxta",
+      "name": "Paxta",
+      "slug": "paxta",
+      "fallbackPublished": true
+    },
+    {
+      "id": "sahro-fonusi",
+      "name": "Sahro Fonusi",
+      "slug": "sahro-fonusi",
+      "fallbackPublished": true
+    },
+    {
+      "id": "vals",
+      "name": "Vals",
+      "slug": "vals",
+      "fallbackPublished": true
+    },
+    {
+      "id": "toscana",
+      "name": "Toscana",
+      "slug": "toscana",
+      "fallbackPublished": true
+    },
+    {
+      "id": "muhr",
+      "name": "Muhr",
+      "slug": "muhr",
+      "fallbackPublished": true
+    },
+    {
+      "id": "bulbul",
+      "name": "Bulbul",
+      "slug": "bulbul",
+      "fallbackPublished": true
+    },
+    {
+      "id": "kozgu",
+      "name": "Ko‘zgu",
+      "slug": "kozgu",
+      "fallbackPublished": true
+    },
+    {
+      "id": "doira",
+      "name": "Doira",
+      "slug": "doira",
+      "fallbackPublished": true
+    },
+    {
+      "id": "qandil",
+      "name": "Qandil",
+      "slug": "qandil",
+      "fallbackPublished": true
+    },
+    {
+      "id": "parda",
+      "name": "Parda",
+      "slug": "parda",
+      "fallbackPublished": true
+    },
+    {
+      "id": "ganch",
+      "name": "Ganch",
+      "slug": "ganch",
+      "fallbackPublished": true
+    },
+    {
+      "id": "qatlam",
+      "name": "Qatlam",
+      "slug": "qatlam",
+      "fallbackPublished": true
+    },
+    {
+      "id": "lola",
+      "name": "Lola",
+      "slug": "lola",
+      "fallbackPublished": true
+    },
+    {
+      "id": "qiz-bazmi",
+      "name": "Qiz Bazmi",
+      "slug": "qiz-bazmi",
+      "fallbackPublished": true
+    },
+    {
+      "id": "shahzoda",
+      "name": "Shahzoda",
+      "slug": "shahzoda",
+      "fallbackPublished": true
+    },
+    {
+      "id": "chavandoz",
+      "name": "Chavandoz",
+      "slug": "chavandoz",
+      "fallbackPublished": true
+    },
+    {
+      "id": "beshik",
+      "name": "Beshik",
+      "slug": "beshik",
+      "fallbackPublished": true
+    },
+    {
+      "id": "shirin-bayram",
+      "name": "Shirin Bayram",
+      "slug": "shirin-bayram",
+      "fallbackPublished": true
+    },
+    {
+      "id": "oltin-kuz",
+      "name": "Oltin Kuz",
+      "slug": "oltin-kuz",
+      "fallbackPublished": true
+    },
+    {
+      "id": "oltin-yosh",
+      "name": "Oltin Yosh",
+      "slug": "oltin-yosh",
+      "fallbackPublished": true
+    },
+    {
+      "id": "konfetti",
+      "name": "Konfetti",
+      "slug": "konfetti",
+      "fallbackPublished": true
+    },
+    {
+      "id": "nahor",
+      "name": "Nahor",
+      "slug": "nahor",
+      "fallbackPublished": true
+    },
+    {
+      "id": "nahorgi-osh",
+      "name": "Nahorgi Osh",
+      "slug": "nahorgi-osh",
+      "fallbackPublished": true
+    },
+    {
+      "id": "hilol",
+      "name": "Hilol",
+      "slug": "hilol",
+      "fallbackPublished": true
+    },
+    {
+      "id": "bitiruv",
+      "name": "Bitiruv",
+      "slug": "bitiruv",
+      "fallbackPublished": true
+    },
+    {
+      "id": "korporativ",
+      "name": "Korporativ",
+      "slug": "korporativ",
+      "fallbackPublished": true
+    },
+    {
+      "id": "yangi-uy",
+      "name": "Yangi Uy",
+      "slug": "yangi-uy",
+      "fallbackPublished": true
+    },
+    {
+      "id": "stained-glass",
+      "name": "Stained Glass",
+      "slug": "stained-glass",
+      "fallbackPublished": true
+    },
+    {
+      "id": "sunset",
+      "name": "Sunset",
+      "slug": "sunset",
+      "fallbackPublished": true
+    },
+    {
+      "id": "swan-garden",
+      "name": "Swan Garden",
+      "slug": "swan-garden",
+      "fallbackPublished": true
+    },
+    {
+      "id": "golden-card",
+      "name": "Golden Card",
+      "slug": "golden-card",
+      "fallbackPublished": true
+    },
+    {
+      "id": "green-garden",
+      "name": "Green Garden",
+      "slug": "green-garden",
+      "fallbackPublished": false
+    },
+    {
+      "id": "green-gold",
+      "name": "Green Gold",
+      "slug": "green-gold",
+      "fallbackPublished": false
+    },
+    {
+      "id": "green-white",
+      "name": "Green White",
+      "slug": "green-white",
+      "fallbackPublished": true
+    },
+    {
+      "id": "jasmine-white",
+      "name": "Jasmine White",
+      "slug": "jasmine-white",
+      "fallbackPublished": true
+    },
+    {
+      "id": "lace",
+      "name": "Lace",
+      "slug": "lace",
+      "fallbackPublished": true
+    },
+    {
+      "id": "love-sakura",
+      "name": "Love Sakura",
+      "slug": "love-sakura",
+      "fallbackPublished": true
+    },
+    {
+      "id": "luxury-gold",
+      "name": "Luxury Gold",
+      "slug": "luxury-gold",
+      "fallbackPublished": false
+    },
+    {
+      "id": "modern-floral",
+      "name": "Modern Floral",
+      "slug": "modern-floral",
+      "fallbackPublished": true
+    },
+    {
+      "id": "taklifla-zarhal-sahifa",
+      "name": "Zarhal Sahifa",
+      "slug": "zarhal-sahifa",
+      "fallbackPublished": true
+    },
+    {
+      "id": "taklifla-muhrli-maktub",
+      "name": "Muhrli Maktub",
+      "slug": "muhrli-maktub",
+      "fallbackPublished": true
+    },
+    {
+      "id": "taklifla-asalari",
+      "name": "Asalari",
+      "slug": "asalari",
+      "fallbackPublished": true
+    },
+    {
+      "id": "taklifla-fayzli-xonadon",
+      "name": "Fayzli Xonadon",
+      "slug": "fayzli-xonadon",
+      "fallbackPublished": true
+    },
+    {
+      "id": "taklifla-ertak",
+      "name": "Ertak",
+      "slug": "ertak",
+      "fallbackPublished": true
+    },
+    {
+      "id": "taklifla-gulbog",
+      "name": "Gulbog",
+      "slug": "gulbog",
+      "fallbackPublished": true
+    },
+    {
+      "id": "taklifla-zarrin-gullar",
+      "name": "Zarrin gullar",
+      "slug": "zarrin-gullar",
+      "fallbackPublished": true
+    },
+    {
+      "id": "taklifla-toglar-bagrida",
+      "name": "Tog‘lar bag‘rida",
+      "slug": "toglar-bagrida",
+      "fallbackPublished": true
+    },
+    {
+      "id": "taklifla-oltin-yol",
+      "name": "Oltin Yo‘l",
+      "slug": "oltin-yol",
+      "fallbackPublished": true
+    },
+    {
+      "id": "taklifla-osmon",
+      "name": "Cheksiz Osmon",
+      "slug": "osmon",
+      "fallbackPublished": true
+    },
+    {
+      "id": "taklifla-parilar-ertagi",
+      "name": "Parilar ertagi",
+      "slug": "parilar-ertagi",
+      "fallbackPublished": true
+    },
+    {
+      "id": "taklifla-qogoz-ertagi",
+      "name": "Qog‘oz ertagi",
+      "slug": "qogoz-ertagi",
+      "fallbackPublished": true
+    },
+    {
+      "id": "taklifla-sakura-guli",
+      "name": "Sakura Guli",
+      "slug": "sakura-guli",
+      "fallbackPublished": true
+    },
+    {
+      "id": "taklifla-sharlar",
+      "name": "Sharlar",
+      "slug": "sharlar",
+      "fallbackPublished": true
+    },
+    {
+      "id": "taklifla-yulduzli-tun",
+      "name": "Yulduzli Tun",
+      "slug": "yulduzli-tun",
+      "fallbackPublished": true
+    },
+    {
+      "id": "taklifla-terracotta",
+      "name": "Terracotta",
+      "slug": "terracotta",
+      "fallbackPublished": true
+    },
+    {
+      "id": "taklifla-uchrashuv",
+      "name": "Uchrashuv",
+      "slug": "uchrashuv",
+      "fallbackPublished": false
+    },
+    {
+      "id": "taklifla-yubiley-sahifasi",
+      "name": "Yubiley Sahifasi",
+      "slug": "yubiley-sahifasi",
+      "fallbackPublished": true
+    },
+    {
+      "id": "taklifla-barakali",
+      "name": "Barakali",
+      "slug": "barakali",
+      "fallbackPublished": true
+    },
+    {
+      "id": "taklifla-tungi-saroy",
+      "name": "Tungi Saroy",
+      "slug": "tungi-saroy",
+      "fallbackPublished": true
+    },
+    {
+      "id": "taklifla-tovus",
+      "name": "Tovus",
+      "slug": "tovus",
+      "fallbackPublished": true
+    },
+    {
+      "id": "taklifla-tort-fasl",
+      "name": "To‘rt fasl",
+      "slug": "tort-fasl",
+      "fallbackPublished": true
+    },
+    {
+      "id": "glass-pink",
+      "name": "Glass Pink",
+      "slug": "glass-pink",
+      "fallbackPublished": true
+    },
+    {
+      "id": "olive-manor-edition",
+      "name": "Olive Manor",
+      "slug": "olive-manor",
+      "fallbackPublished": true
+    },
+    {
+      "id": "islamic-edition",
+      "name": "Islamic",
+      "slug": "islamic",
+      "fallbackPublished": true
+    },
+    {
+      "id": "osh",
+      "name": "Osh",
+      "slug": "osh",
+      "fallbackPublished": true
+    },
+    {
+      "id": "palov",
+      "name": "Palov",
+      "slug": "palov",
+      "fallbackPublished": true
+    },
+    {
+      "id": "orchid-amplop",
+      "name": "Orchid Amplop",
+      "slug": "orchid-amplop",
+      "fallbackPublished": true
+    },
+    {
+      "id": "invitate-palov",
+      "name": "Osh ziyofati",
+      "slug": "osh-ziyofati",
+      "fallbackPublished": false
+    },
+    {
+      "id": "golden-hour",
+      "name": "Golden Hour",
+      "slug": "golden-hour",
+      "fallbackPublished": true
+    },
+    {
+      "id": "bloom",
+      "name": "Bloom",
+      "slug": "bloom",
+      "fallbackPublished": false
+    },
+    {
+      "id": "invitate-nahorgi-osh",
+      "name": "Sahar ziyofati",
+      "slug": "sahar-ziyofati",
+      "fallbackPublished": true
+    },
+    {
+      "id": "invitate-wedding",
+      "name": "Gulchambar",
+      "slug": "gulchambar",
+      "fallbackPublished": false
+    },
+    {
+      "id": "whiteless",
+      "name": "Whiteless",
+      "slug": "whiteless",
+      "fallbackPublished": false
+    },
+    {
+      "id": "safir",
+      "name": "Safir",
+      "slug": "safir",
+      "fallbackPublished": false
+    },
+    {
+      "id": "monochrome-editorial-edition",
+      "name": "Monochrome Editorial",
+      "slug": "monochrome-editorial",
+      "fallbackPublished": true
+    },
+    {
+      "id": "xatna-edition",
+      "name": "Xatna",
+      "slug": "xatna",
+      "fallbackPublished": true
+    },
+    {
+      "id": "cloud-castle",
+      "name": "Cloud Castle",
+      "slug": "cloud-castle",
+      "fallbackPublished": true
+    },
+    {
+      "id": "palace-rose",
+      "name": "Palace Rose",
+      "slug": "palace-rose",
+      "fallbackPublished": true
+    },
+    {
+      "id": "royal-burgundy-edition",
+      "name": "Velvet Royale",
+      "slug": "velvet-royale",
+      "fallbackPublished": true
+    },
+    {
+      "id": "taklifnomachi-1",
+      "name": "Klassik nafis",
+      "slug": "klassik-nafis",
+      "fallbackPublished": false
+    },
+    {
+      "id": "taklifnomachi-12",
+      "name": "Moviy osmon",
+      "slug": "moviy-osmon",
+      "fallbackPublished": false
+    },
+    {
+      "id": "taklifnomachi-13",
+      "name": "Oltin atirgul",
+      "slug": "oltin-atirgul",
+      "fallbackPublished": false
+    },
+    {
+      "id": "taklifnomachi-15",
+      "name": "Monoxrom",
+      "slug": "monoxrom",
+      "fallbackPublished": false
+    },
+    {
+      "id": "taklifnomachi-16",
+      "name": "Zaytun guli",
+      "slug": "zaytun-guli",
+      "fallbackPublished": false
+    },
+    {
+      "id": "taklifnomachi-17",
+      "name": "Atlas ipak",
+      "slug": "atlas-ipak",
+      "fallbackPublished": false
+    },
+    {
+      "id": "taklifnomachi-18",
+      "name": "Gul naqshli marosim",
+      "slug": "gul-naqshli-marosim",
+      "fallbackPublished": false
+    },
+    {
+      "id": "taklifnomachi-19",
+      "name": "Zaytun bog‘i",
+      "slug": "zaytun-bogi",
+      "fallbackPublished": false
+    }
+  ],
+  "failures": [],
+  "visuals": [
+    {
+      "phase": "source",
+      "file": "apps\\web\\public\\templates\\chorlove\\osh\\index.html",
+      "candidates": [
+        "<svg class=\"osh-card-badge\" aria-hidden=\"true\" viewBox=\"0 0 100 100\"><circle cx=\"50\" cy=\"50\" r=\"48\" fill=\"none\" stroke=\"#C89B4A\" stroke-width=\"1.2\"></circle><ellipse cx=\"50\" cy=\"18\" rx=\"6\" ry=\"12\" fill=\"none\" stroke=\"#C89B4A\" stroke-width=\"1.2\" transform=\"rotate(0 50 50)\"></ellipse><ellipse cx=\"50\" cy=\"18\" rx=\"6\" ry=\"12\" fill=\"none\" stroke=\"#C89B4A\" stroke-width=\"1.2\" transform=\"rotate(30 50 50)\"></ellipse><ellipse cx=\"50\" cy=\"18\" rx=\"6\" ry=\"12\" fill=\"none\" stroke=\"#C89B4A\" stroke-width=\"1.2\" transform=\"rotate(60 50 50)\"></ellipse><ellipse cx=\"50\" cy=\"18\" rx=\"6\" ry=\"12\" fill=\"none\" stroke=\"#C8",
+        "<svg class=\"osh-card-badge\" aria-hidden=\"true\" viewBox=\"0 0 100 100\"><circle cx=\"50\" cy=\"50\" r=\"48\" fill=\"none\" stroke=\"#C89B4A\" stroke-width=\"1.2\"></circle><ellipse cx=\"50\" cy=\"18\" rx=\"6\" ry=\"12\" fill=\"none\" stroke=\"#C89B4A\" stroke-width=\"1.2\" transform=\"rotate(0 50 50)\"></ellipse><ellipse cx=\"50\" cy=\"18\" rx=\"6\" ry=\"12\" fill=\"none\" stroke=\"#C89B4A\" stroke-width=\"1.2\" transform=\"rotate(30 50 50)\"></ellipse><ellipse cx=\"50\" cy=\"18\" rx=\"6\" ry=\"12\" fill=\"none\" stroke=\"#C89B4A\" stroke-width=\"1.2\" transform=\"rotate(60 50 50)\"></ellipse><ellipse cx=\"50\" cy=\"18\" rx=\"6\" ry=\"12\" fill=\"none\" stroke=\"#C8"
+      ]
+    },
+    {
+      "phase": "source",
+      "file": "apps\\web\\public\\templates\\wedivo-riwayat-obrolan\\index.html",
+      "candidates": [
+        "<svg class=\"ic\" id=\"hero-ring-badge-s\">\n<use href=\"#i-sparkle\" id=\"hero-ring-badge-u\"></use></svg>"
+      ]
+    },
+    {
+      "phase": "runtime",
+      "url": "/templates/chorlove/osh/index.html",
+      "candidates": [
+        "<svg class=\"osh-card-badge\" aria-hidden=\"true\" viewBox=\"0 0 100 100\"><circle cx=\"50\" cy=\"50\" r=\"48\" fill=\"none\" stroke=\"#C89B4A\" stroke-width=\"1.2\"></circle><ellipse cx=\"50\" cy=\"18\" rx=\"6\" ry=\"12\" fill=\"none\" stroke=\"#C89B4A\" stroke-width=\"1.2\" transform=\"rotate(0 50 50)\"></ellipse><ellipse cx=\"50\" cy=\"18\" rx=\"6\" ry=\"12\" fill=\"none\" stroke=\"#C89B4A\" stroke-width=\"1.2\" transform=\"rotate(30 50 50)\"></ellipse><ellipse cx=\"50\" cy=\"18\" rx=\"6\" ry=\"12\" fill=\"none\" stroke=\"#C89B4A\" stroke-width=\"1.2\" transform=\"rotate(60 50 50)\"></ellipse><ellipse cx=\"50\" cy=\"18\" rx=\"6\" ry=\"12\" fill=\"none\" stroke=\"#C8",
+        "<svg class=\"osh-card-badge\" aria-hidden=\"true\" viewBox=\"0 0 100 100\"><circle cx=\"50\" cy=\"50\" r=\"48\" fill=\"none\" stroke=\"#C89B4A\" stroke-width=\"1.2\"></circle><ellipse cx=\"50\" cy=\"18\" rx=\"6\" ry=\"12\" fill=\"none\" stroke=\"#C89B4A\" stroke-width=\"1.2\" transform=\"rotate(0 50 50)\"></ellipse><ellipse cx=\"50\" cy=\"18\" rx=\"6\" ry=\"12\" fill=\"none\" stroke=\"#C89B4A\" stroke-width=\"1.2\" transform=\"rotate(30 50 50)\"></ellipse><ellipse cx=\"50\" cy=\"18\" rx=\"6\" ry=\"12\" fill=\"none\" stroke=\"#C89B4A\" stroke-width=\"1.2\" transform=\"rotate(60 50 50)\"></ellipse><ellipse cx=\"50\" cy=\"18\" rx=\"6\" ry=\"12\" fill=\"none\" stroke=\"#C8"
+      ]
+    },
+    {
+      "phase": "runtime",
+      "url": "/templates/wedivo-riwayat-obrolan/index.html",
+      "candidates": [
+        "<svg class=\"ic\" id=\"hero-ring-badge-s\">\n<use href=\"#i-sparkle\" id=\"hero-ring-badge-u\"></use></svg>"
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "file": "apps\\web\\public\\templates\\atlas\\index.html",
+      "title": "Atlas taklifnomasi",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\aurelia\\index.html",
+      "title": "Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\beshik\\index.html",
+      "title": "Beshik",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\bitiruv\\index.html",
+      "title": "Bitiruv",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\bogi-eram\\index.html",
+      "title": "Bog‘i Eram · Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\bulbul\\index.html",
+      "title": "Bulbul · Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\butterfly\\index.html",
+      "title": "Wedding invitation",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\chavandoz\\index.html",
+      "title": "Chavandoz",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\chorlove\\orchid-amplop\\index.html",
+      "title": "Orchid Amplop",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\chorlove\\osh\\index.html",
+      "title": "",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [
+        "<svg class=\"osh-card-badge\" aria-hidden=\"true\" viewBox=\"0 0 100 100\"><circle cx=\"50\" cy=\"50\" r=\"48\" fill=\"none\" stroke=\"#C89B4A\" stroke-width=\"1.2\"></circle><ellipse cx=\"50\" cy=\"18\" rx=\"6\" ry=\"12\" fill=\"none\" stroke=\"#C89B4A\" stroke-width=\"1.2\" transform=\"rotate(0 50 50)\"></ellipse><ellipse cx=\"50\" cy=\"18\" rx=\"6\" ry=\"12\" fill=\"none\" stroke=\"#C89B4A\" stroke-width=\"1.2\" transform=\"rotate(30 50 50)\"></ellipse><ellipse cx=\"50\" cy=\"18\" rx=\"6\" ry=\"12\" fill=\"none\" stroke=\"#C89B4A\" stroke-width=\"1.2\" transform=\"rotate(60 50 50)\"></ellipse><ellipse cx=\"50\" cy=\"18\" rx=\"6\" ry=\"12\" fill=\"none\" stroke=\"#C8",
+        "<svg class=\"osh-card-badge\" aria-hidden=\"true\" viewBox=\"0 0 100 100\"><circle cx=\"50\" cy=\"50\" r=\"48\" fill=\"none\" stroke=\"#C89B4A\" stroke-width=\"1.2\"></circle><ellipse cx=\"50\" cy=\"18\" rx=\"6\" ry=\"12\" fill=\"none\" stroke=\"#C89B4A\" stroke-width=\"1.2\" transform=\"rotate(0 50 50)\"></ellipse><ellipse cx=\"50\" cy=\"18\" rx=\"6\" ry=\"12\" fill=\"none\" stroke=\"#C89B4A\" stroke-width=\"1.2\" transform=\"rotate(30 50 50)\"></ellipse><ellipse cx=\"50\" cy=\"18\" rx=\"6\" ry=\"12\" fill=\"none\" stroke=\"#C89B4A\" stroke-width=\"1.2\" transform=\"rotate(60 50 50)\"></ellipse><ellipse cx=\"50\" cy=\"18\" rx=\"6\" ry=\"12\" fill=\"none\" stroke=\"#C8"
+      ]
+    },
+    {
+      "file": "apps\\web\\public\\templates\\chorlove\\palov\\index.html",
+      "title": "",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\chorlove\\palov\\source-fragment.html",
+      "title": "",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\cloud-castle\\index.html",
+      "title": "Cloud Castle invitation",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\doira\\index.html",
+      "title": "Doira · Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\evelina\\index.html",
+      "title": "Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\fairy\\index.html",
+      "title": "Приглашение на свадьбу",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\ganch\\index.html",
+      "title": "Ganch",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\glass-pink\\index.html",
+      "title": "Glass Pink",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\golden-card\\index.html",
+      "title": "Golden Card invitation",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\golden-hour\\index.html",
+      "title": "Golden Hour",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\green-garden\\index.html",
+      "title": "Green Garden invitation",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\green-gold\\index.html",
+      "title": "Green Gold invitation",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\green-white\\index.html",
+      "title": "Green White invitation",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\hilol\\index.html",
+      "title": "Hilol · Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\invitate-nahorgi-osh\\index.html",
+      "title": "Nahorgi osh taklifnomasi",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\invitate-palov\\index.html",
+      "title": "Nahorgi osh — Peshtoq",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\invitate-wedding\\index.html",
+      "title": "Gulchambar",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\islamic-edition\\index.html",
+      "title": "Islamic",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\islamic-edition\\template.html",
+      "title": "",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\jasmine-white\\index.html",
+      "title": "Jasmine White",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\konfetti\\index.html",
+      "title": "Konfetti",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\korporativ\\index.html",
+      "title": "Korporativ",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\kozgu\\index.html",
+      "title": "Ko‘zgu",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\kuzgi-chinor\\index.html",
+      "title": "Kuzgi Chinor · Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\lace\\index.html",
+      "title": "Lace invitation",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\lola\\index.html",
+      "title": "Lola invitation",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\love-sakura\\index.html",
+      "title": "Love Sakura",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\luxury-gold\\index.html",
+      "title": "Luxury Gold",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\maslin\\index.html",
+      "title": "Zaytun maktubi",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\modern-floral\\index.html",
+      "title": "Modern Floral",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\monochrome-editorial-edition\\index.html",
+      "title": "Monochrome Editorial",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\monochrome-editorial-edition\\template.html",
+      "title": "",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\monogram\\index.html",
+      "title": "Monogram",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\muhabbat-kitobi\\index.html",
+      "title": "Muhabbat Kitobi · Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\muhr\\index.html",
+      "title": "Muhr",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\nahor\\index.html",
+      "title": "Nahorgi osh",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\nahorgi-osh\\index.html",
+      "title": "Nahorgi osh",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\nilufar\\index.html",
+      "title": "Nilufar · Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\olive-manor-edition\\index.html",
+      "title": "Olive Manor",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\olive-manor-edition\\template.html",
+      "title": "",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\oltin-kuz\\index.html",
+      "title": "Oltin Kuz",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\oltin-nur\\index.html",
+      "title": "oltin-nur · Invitation",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\oltin-uzuk\\index.html",
+      "title": "Oltin Uzuk · Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\oltin-yosh\\index.html",
+      "title": "Oltin Yosh",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\onlinetaklifnoma-andalus-darvozasi\\index.html",
+      "title": "Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\onlinetaklifnoma-buxoro-ravoq\\index.html",
+      "title": "Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\onlinetaklifnoma-gulli-darvoza\\index.html",
+      "title": "Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\onlinetaklifnoma-jannat-bogi\\index.html",
+      "title": "Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\onlinetaklifnoma-kapadokiya-tongi\\index.html",
+      "title": "Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\onlinetaklifnoma-ming-bir-kecha\\index.html",
+      "title": "Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\onlinetaklifnoma-oltin-darvoza-ortidagi-baxt\\index.html",
+      "title": "Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\onlinetaklifnoma-samarqand-peshtoqi\\index.html",
+      "title": "Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\onlinetaklifnoma-shisha-bog\\index.html",
+      "title": "Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\onlinetaklifnoma-tojmahal-oltin-darvozasi\\index.html",
+      "title": "Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\onlinetaklifnoma-zarrin-doppi\\index.html",
+      "title": "Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\oq-kabutar\\index.html",
+      "title": "Oq Kabutar · Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\orik-guli\\index.html",
+      "title": "O‘rik Guli taklifnomasi",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\oynavand\\index.html",
+      "title": "Oynavand",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\palace-rose\\index.html",
+      "title": "Palace Rose",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\parda\\index.html",
+      "title": "Parda",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\paxta\\index.html",
+      "title": "Paxta · Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\qandil\\index.html",
+      "title": "Qandil",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\qatlam\\index.html",
+      "title": "Qatlam · Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\qiz-bazmi\\index.html",
+      "title": "Qiz bazmi",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\qogoz-turna\\index.html",
+      "title": "Qog‘oz Turna · Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\retro-kino\\index.html",
+      "title": "Retro Kino · Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\safir\\index.html",
+      "title": "Safir Invitation",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\sahifa\\index.html",
+      "title": "Sahifa · Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\sahro-fonusi\\index.html",
+      "title": "Sahro Fonusi · Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\samarqand-kechasi\\index.html",
+      "title": "Samarqand Kechasi · Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\shahzoda\\index.html",
+      "title": "Shahzoda · Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\shirin-bayram\\index.html",
+      "title": "Shirin Bayram",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\somon-yoli\\index.html",
+      "title": "Somon Yo‘li · Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\stained-glass\\index.html",
+      "title": "stained-glass invitation",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\sunset\\index.html",
+      "title": "sunset invitation",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\suzani\\index.html",
+      "title": "Suzani",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\swan-garden\\index.html",
+      "title": "swan-garden invitation",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\taklifla-asalari\\index.html",
+      "title": "Asalari",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\taklifla-barakali\\index.html",
+      "title": "Barakali",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\taklifla-ertak\\index.html",
+      "title": "Ertak",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\taklifla-fayzli-xonadon\\index.html",
+      "title": "Fayzli Xonadon",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\taklifla-gulbog\\index.html",
+      "title": "Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\taklifla-muhrli-maktub\\index.html",
+      "title": "Muhrli Maktub — Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\taklifla-oltin-yol\\index.html",
+      "title": "Oltin Yo‘l — Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\taklifla-osmon\\index.html",
+      "title": "Cheksiz Osmon — Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\taklifla-parilar-ertagi\\index.html",
+      "title": "Parilar ertagi",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\taklifla-qogoz-ertagi\\index.html",
+      "title": "Qog‘oz Ertagi",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\taklifla-sakura-guli\\index.html",
+      "title": "Sakura Guli",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\taklifla-sharlar\\index.html",
+      "title": "Sharlar",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\taklifla-terracotta\\index.html",
+      "title": "Sopol nafosi",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\taklifla-toglar-bagrida\\index.html",
+      "title": "Tog‘lar bag‘rida — Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\taklifla-tort-fasl\\index.html",
+      "title": "To‘rt fasl",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\taklifla-tovus\\index.html",
+      "title": "Tovus",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\taklifla-tungi-saroy\\index.html",
+      "title": "Tungi Saroy — Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\taklifla-uchrashuv\\index.html",
+      "title": "Uchrashuv maktubi",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\taklifla-yomgirdan-song\\index.html",
+      "title": "Yomg‘irdan so‘ng — Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\taklifla-yubiley-sahifasi\\index.html",
+      "title": "Yubiley sahifasi",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\taklifla-yulduzli-tun\\index.html",
+      "title": "Yulduzli Tun",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\taklifla-zarhal-sahifa\\index.html",
+      "title": "Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\taklifla-zarrin-gullar\\template.html",
+      "title": "Zarrin gullar — Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\taklifnomachi-1\\index.html",
+      "title": "&",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\taklifnomachi-12\\index.html",
+      "title": "Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\taklifnomachi-13\\index.html",
+      "title": "Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\taklifnomachi-15\\index.html",
+      "title": "Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\taklifnomachi-16\\index.html",
+      "title": "Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\taklifnomachi-17\\index.html",
+      "title": "Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\taklifnomachi-18\\index.html",
+      "title": "Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\taklifnomachi-19\\index.html",
+      "title": "Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\toscana\\index.html",
+      "title": "Toscana · Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\uchar-gilam\\index.html",
+      "title": "uchar-gilam · Invitation",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\vals\\index.html",
+      "title": "Vals · Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\velora\\index.html",
+      "title": "Velora",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\velvet\\index.html",
+      "title": "Velvet invitation",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\velvet-royale\\index.html",
+      "title": "Velvet Royale",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\velvet-royale\\template.html",
+      "title": "",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\wedivo-angin-empat-musim\\index.html",
+      "title": "Invitation",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\wedivo-di-balik-kalkir\\index.html",
+      "title": "Ravshan Muhabbat — Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\wedivo-eternal-rose-garden\\index.html",
+      "title": "",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\wedivo-lanskap-yang-hidup\\index.html",
+      "title": "Jonli vodiy",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\wedivo-melting-reality\\index.html",
+      "title": "Tush va haqiqat",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\wedivo-oathbound\\index.html",
+      "title": "Ahd yo‘li",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\wedivo-peony-paradise\\index.html",
+      "title": "Gulbarglar sehri",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\wedivo-pulau-sehati\\index.html",
+      "title": "Ko‘ngillar oroli",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\wedivo-riwayat-obrolan\\index.html",
+      "title": "Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [
+        "<svg class=\"ic\" id=\"hero-ring-badge-s\">\n<use href=\"#i-sparkle\" id=\"hero-ring-badge-u\"></use></svg>"
+      ]
+    },
+    {
+      "file": "apps\\web\\public\\templates\\wedivo-sundanese-puspa\\index.html",
+      "title": "",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\wedivo-taman-rahasia\\index.html",
+      "title": "Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\xatna-edition\\index.html",
+      "title": "Xatna",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\xatna-edition\\template.html",
+      "title": "",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\yangi-uy\\index.html",
+      "title": "Yangi uy to‘yi · Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "file": "apps\\web\\public\\templates\\anor\\source\\index.html",
+      "title": "Sizga taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    }
+  ],
+  "packages": [
+    {
+      "url": "/templates/atlas/index.html",
+      "title": "Atlas taklifnomasi",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/beshik/index.html",
+      "title": "Beshik · Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/aurelia/index.html",
+      "title": "Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/bitiruv/index.html",
+      "title": "Bitiruv",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/bogi-eram/index.html",
+      "title": "Bog‘i Eram taklifnomasi",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/bulbul/index.html",
+      "title": "Bulbul · Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/butterfly/index.html",
+      "title": "Invitation",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/chavandoz/index.html",
+      "title": "Chavandoz",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/chorlove/orchid-amplop/index.html",
+      "title": "Orchid Amplop",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/chorlove/osh/index.html",
+      "title": "",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [
+        "<svg class=\"osh-card-badge\" aria-hidden=\"true\" viewBox=\"0 0 100 100\"><circle cx=\"50\" cy=\"50\" r=\"48\" fill=\"none\" stroke=\"#C89B4A\" stroke-width=\"1.2\"></circle><ellipse cx=\"50\" cy=\"18\" rx=\"6\" ry=\"12\" fill=\"none\" stroke=\"#C89B4A\" stroke-width=\"1.2\" transform=\"rotate(0 50 50)\"></ellipse><ellipse cx=\"50\" cy=\"18\" rx=\"6\" ry=\"12\" fill=\"none\" stroke=\"#C89B4A\" stroke-width=\"1.2\" transform=\"rotate(30 50 50)\"></ellipse><ellipse cx=\"50\" cy=\"18\" rx=\"6\" ry=\"12\" fill=\"none\" stroke=\"#C89B4A\" stroke-width=\"1.2\" transform=\"rotate(60 50 50)\"></ellipse><ellipse cx=\"50\" cy=\"18\" rx=\"6\" ry=\"12\" fill=\"none\" stroke=\"#C8",
+        "<svg class=\"osh-card-badge\" aria-hidden=\"true\" viewBox=\"0 0 100 100\"><circle cx=\"50\" cy=\"50\" r=\"48\" fill=\"none\" stroke=\"#C89B4A\" stroke-width=\"1.2\"></circle><ellipse cx=\"50\" cy=\"18\" rx=\"6\" ry=\"12\" fill=\"none\" stroke=\"#C89B4A\" stroke-width=\"1.2\" transform=\"rotate(0 50 50)\"></ellipse><ellipse cx=\"50\" cy=\"18\" rx=\"6\" ry=\"12\" fill=\"none\" stroke=\"#C89B4A\" stroke-width=\"1.2\" transform=\"rotate(30 50 50)\"></ellipse><ellipse cx=\"50\" cy=\"18\" rx=\"6\" ry=\"12\" fill=\"none\" stroke=\"#C89B4A\" stroke-width=\"1.2\" transform=\"rotate(60 50 50)\"></ellipse><ellipse cx=\"50\" cy=\"18\" rx=\"6\" ry=\"12\" fill=\"none\" stroke=\"#C8"
+      ],
+      "external": []
+    },
+    {
+      "url": "/templates/chorlove/palov/index.html",
+      "title": "",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/cloud-castle/index.html",
+      "title": "Cloud Castle invitation",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/doira/index.html",
+      "title": "— Doira",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/evelina/index.html",
+      "title": "Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/fairy/index.html",
+      "title": "Wedding invitation",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/ganch/index.html",
+      "title": "Ganch",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/glass-pink/index.html",
+      "title": "Glass Pink",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/golden-card/index.html",
+      "title": "Golden Card invitation",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/golden-hour/index.html",
+      "title": "Golden Hour",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/green-garden/index.html",
+      "title": "Green Garden invitation",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/green-gold/index.html",
+      "title": "Green Gold invitation",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/green-white/index.html",
+      "title": "Green White invitation",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/hilol/index.html",
+      "title": "Hilol · Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/invitate-nahorgi-osh/index.html",
+      "title": "Nahorgi osh taklifnomasi",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/invitate-palov/index.html",
+      "title": "Nahorgi osh — Peshtoq",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/invitate-wedding/index.html",
+      "title": "Gulchambar",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/islamic-edition/index.html",
+      "title": "Islamic",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/jasmine-white/index.html",
+      "title": "Jasmine White",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/konfetti/index.html",
+      "title": "Konfetti",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/korporativ/index.html",
+      "title": "Korporativ",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/kozgu/index.html",
+      "title": "Ko‘zgu",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/kuzgi-chinor/index.html",
+      "title": "Kuzgi Chinor · Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/love-sakura/index.html",
+      "title": "Love Sakura",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/lola/index.html",
+      "title": "Lola invitation",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/lace/index.html",
+      "title": "Lace invitation",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/luxury-gold/index.html",
+      "title": "Luxury Gold",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/modern-floral/index.html",
+      "title": "Modern Floral",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/maslin/index.html",
+      "title": "Zaytun maktubi",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/monochrome-editorial-edition/index.html",
+      "title": "Monochrome Editorial",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/monogram/index.html",
+      "title": "Monogram",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/muhabbat-kitobi/index.html",
+      "title": "Muhabbat Kitobi · Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/muhr/index.html",
+      "title": "Muhr",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/nahor/index.html",
+      "title": "Nahorgi osh",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/nahorgi-osh/index.html",
+      "title": "Nahorgi osh",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/nilufar/index.html",
+      "title": "Nilufar · Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/olive-manor-edition/index.html",
+      "title": "Olive Manor",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/oltin-kuz/index.html",
+      "title": "Oltin Kuz",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/oltin-nur/index.html",
+      "title": "oltin-nur · Invitation",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/oltin-uzuk/index.html",
+      "title": "Oltin Uzuk · Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/oltin-yosh/index.html",
+      "title": "Oltin Yosh",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/onlinetaklifnoma-andalus-darvozasi/index.html",
+      "title": "Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/onlinetaklifnoma-buxoro-ravoq/index.html",
+      "title": "Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/onlinetaklifnoma-gulli-darvoza/index.html",
+      "title": "Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/onlinetaklifnoma-jannat-bogi/index.html",
+      "title": "Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/onlinetaklifnoma-kapadokiya-tongi/index.html",
+      "title": "Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/onlinetaklifnoma-ming-bir-kecha/index.html",
+      "title": "Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/onlinetaklifnoma-oltin-darvoza-ortidagi-baxt/index.html",
+      "title": "Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/onlinetaklifnoma-samarqand-peshtoqi/index.html",
+      "title": "Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/onlinetaklifnoma-shisha-bog/index.html",
+      "title": "Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/onlinetaklifnoma-tojmahal-oltin-darvozasi/index.html",
+      "title": "Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/onlinetaklifnoma-zarrin-doppi/index.html",
+      "title": "Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/oq-kabutar/index.html",
+      "title": "Oq Kabutar · Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/oynavand/index.html",
+      "title": "Oynavand",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/orik-guli/index.html",
+      "title": "O‘rik Guli taklifnomasi",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/palace-rose/index.html",
+      "title": "Palace Rose",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/paxta/index.html",
+      "title": "Paxta · Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/qandil/index.html",
+      "title": "Qandil",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/parda/index.html",
+      "title": "Parda",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/qatlam/index.html",
+      "title": "Qatlam · Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/qiz-bazmi/index.html",
+      "title": "Qiz bazmi",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/qogoz-turna/index.html",
+      "title": "Qog‘oz Turna · Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/retro-kino/index.html",
+      "title": "Retro Kino · Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/safir/index.html",
+      "title": "Safir Invitation",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/sahifa/index.html",
+      "title": "Sahifa · Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/sahro-fonusi/index.html",
+      "title": "Sahro Fonusi · Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/samarqand-kechasi/index.html",
+      "title": "Samarqand Kechasi · Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/shahzoda/index.html",
+      "title": "Shahzoda · Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/shirin-bayram/index.html",
+      "title": "Shirin Bayram",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/somon-yoli/index.html",
+      "title": "Somon Yo‘li · Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/stained-glass/index.html",
+      "title": "stained-glass invitation",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/sunset/index.html",
+      "title": "sunset invitation",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/swan-garden/index.html",
+      "title": "swan-garden invitation",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/suzani/index.html",
+      "title": "Suzani",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/taklifla-asalari/index.html",
+      "title": "Asalari",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/taklifla-barakali/index.html",
+      "title": "Barakali",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/taklifla-ertak/index.html",
+      "title": "Ertak",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/taklifla-fayzli-xonadon/index.html",
+      "title": "Fayzli Xonadon",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/taklifla-gulbog/index.html",
+      "title": "Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/taklifla-muhrli-maktub/index.html",
+      "title": "Muhrli Maktub — Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/taklifla-osmon/index.html",
+      "title": "Cheksiz Osmon — Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/taklifla-oltin-yol/index.html",
+      "title": "Oltin Yo‘l — Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/taklifla-parilar-ertagi/index.html",
+      "title": "Parilar ertagi",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/taklifla-qogoz-ertagi/index.html",
+      "title": "Qog‘oz Ertagi",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/taklifla-sakura-guli/index.html",
+      "title": "Sakura Guli",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/taklifla-sharlar/index.html",
+      "title": "Sharlar",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/taklifla-terracotta/index.html",
+      "title": "Sopol nafosi",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/taklifla-toglar-bagrida/index.html",
+      "title": "Tog‘lar bag‘rida — Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/taklifla-tort-fasl/index.html",
+      "title": "To‘rt fasl",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/taklifla-tovus/index.html",
+      "title": "Tovus",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/taklifla-tungi-saroy/index.html",
+      "title": "Tungi Saroy — Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/taklifla-uchrashuv/index.html",
+      "title": "Uchrashuv maktubi",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/taklifla-yomgirdan-song/index.html",
+      "title": "Yomg‘irdan so‘ng — Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/taklifla-yubiley-sahifasi/index.html",
+      "title": "Yubiley sahifasi",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/taklifla-yulduzli-tun/index.html",
+      "title": "Yulduzli Tun",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/taklifla-zarhal-sahifa/index.html",
+      "title": "Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/taklifnomachi-12/index.html",
+      "title": "Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/taklifnomachi-1/index.html",
+      "title": "Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/taklifnomachi-13/index.html",
+      "title": "Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/taklifnomachi-15/index.html",
+      "title": "",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/taklifnomachi-16/index.html",
+      "title": "",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/taklifnomachi-17/index.html",
+      "title": "",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/taklifnomachi-19/index.html",
+      "title": "",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/taklifnomachi-18/index.html",
+      "title": "",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/toscana/index.html",
+      "title": "Toscana · Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/uchar-gilam/index.html",
+      "title": "— Uchar Gilam",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/velora/index.html",
+      "title": "Velora",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/vals/index.html",
+      "title": "Vals · Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/velvet/index.html",
+      "title": "Velvet invitation",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/velvet-royale/index.html",
+      "title": "Velvet Royale",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/wedivo-angin-empat-musim/index.html",
+      "title": "Invitation",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/wedivo-di-balik-kalkir/index.html",
+      "title": "Ravshan Muhabbat — Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/wedivo-eternal-rose-garden/index.html",
+      "title": "",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/wedivo-lanskap-yang-hidup/index.html",
+      "title": "Jonli vodiy",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/wedivo-melting-reality/index.html",
+      "title": "Tush va haqiqat",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/wedivo-oathbound/index.html",
+      "title": "Ahd yo‘li",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/wedivo-peony-paradise/index.html",
+      "title": "Gulbarglar sehri",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/wedivo-pulau-sehati/index.html",
+      "title": "Ko‘ngillar oroli",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/wedivo-riwayat-obrolan/index.html",
+      "title": "Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [
+        "<svg class=\"ic\" id=\"hero-ring-badge-s\">\n<use href=\"#i-sparkle\" id=\"hero-ring-badge-u\"></use></svg>"
+      ],
+      "external": []
+    },
+    {
+      "url": "/templates/wedivo-sundanese-puspa/index.html",
+      "title": "",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/wedivo-taman-rahasia/index.html",
+      "title": "Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/xatna-edition/index.html",
+      "title": "Xatna",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/yangi-uy/index.html",
+      "title": "Yangi uy to‘yi · Taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    },
+    {
+      "url": "/templates/anor/source/index.html",
+      "title": "Sizga taklifnoma",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": [],
+      "external": []
+    }
+  ],
+  "localizedDrafts": [
+    {
+      "id": "atlas",
+      "lang": "uz",
+      "title": "Javohir & Madina — Atlas taklifnomasi",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "id": "atlas",
+      "lang": "uz-Cyrl",
+      "title": "Javohir & Madina — Атлас таклифномаси",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "id": "atlas",
+      "lang": "en",
+      "title": "Javohir & Madina — Atlas invitation",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "id": "atlas",
+      "lang": "ru",
+      "title": "Javohir & Madina — Приглашение Atlas",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "id": "shirin-bayram",
+      "lang": "uz",
+      "title": "Shirin Bayram",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "id": "shirin-bayram",
+      "lang": "uz-Cyrl",
+      "title": "Ширин байрам",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "id": "shirin-bayram",
+      "lang": "en",
+      "title": "Sweet Celebration",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "id": "shirin-bayram",
+      "lang": "ru",
+      "title": "Сладкий праздник",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "id": "chavandoz",
+      "lang": "uz",
+      "title": "Chavandoz",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "id": "chavandoz",
+      "lang": "uz-Cyrl",
+      "title": "Чавандоз",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "id": "chavandoz",
+      "lang": "en",
+      "title": "Chavandoz",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    },
+    {
+      "id": "chavandoz",
+      "lang": "ru",
+      "title": "Чавандоз",
+      "mentions": [],
+      "attributes": [],
+      "remoteLinks": [],
+      "visualCandidates": []
+    }
+  ]
+}

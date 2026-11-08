@@ -2,7 +2,7 @@
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { readFileSync as read } from './helpers/source-files';
-const root='apps/web/public/templates/taklifnomachi-15/';
+const root='apps/web/public/templates/tun-jilosi/';
 test('demo 15 source capture is retained and production references local source assets',()=>{
  const capture=read(root+'source/taklifnomachi.uz/demo/15/index.html');
  assert.deepEqual(capture,read('Invitations - this folder will be removed from production/Taklifnomachi/Web invitations/taklifnomachi.uz/demo/15/index.html'));
@@ -13,6 +13,6 @@ test('demo 15 adapter maps app names, date, venue, audio and API-backed RSVP',()
  const js=read(root+'adapter.js','utf8'); for(const value of ['d.groom','d.bride','d.dateTime','d.venue','d.music','/rsvp','/wishes','d.toyona']) assert.ok(js.includes(value),value);
 });
 test('demo 15 is registered unpublished',()=>{
- const contract=read('packages/contracts/src/index.ts','utf8'); const row=contract.slice(contract.indexOf('id: "taklifnomachi-15"'),contract.indexOf('id: "taklifnomachi-15"')+800);
+ const contract=read('packages/contracts/src/index.ts','utf8'); const row=contract.slice(contract.indexOf('id: "tun-jilosi"'),contract.indexOf('id: "tun-jilosi"')+800);
  assert.match(row,/published: false/);
 });

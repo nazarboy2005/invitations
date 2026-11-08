@@ -3,7 +3,7 @@ import { readFileSync, existsSync } from "node:fs";
 import test from "node:test";
 import { TEMPLATES } from "../packages/contracts/src/index.ts";
 
-const root = new URL("../apps/web/public/templates/onlinetaklifnoma-ming-bir-kecha/", import.meta.url);
+const root = new URL("../apps/web/public/templates/ming-bir-kecha/", import.meta.url);
 const file = (name: string) => readFileSync(new URL(name, root), "utf8");
 
 test("Ming bir kecha packages the exact recovered source artwork and fonts", () => {
