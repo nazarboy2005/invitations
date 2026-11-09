@@ -3,6 +3,7 @@ import { BRAND_NAME } from "@/lib/brand";
 import { StaticImagePreview } from "@/modules/static-images/static-image-preview";
 import { downloadInvitationImage } from "@/modules/static-images/download";
 import { InvitationCorrections } from "./invitation-corrections";
+import { switchEventType } from "./event-switch";
 import { eventTimestamp } from "@/lib/event-date";
 import { editingClosed, eventDay, type InvitationEditAccess } from "@taklifnoma/contracts/policies";
 import { Download } from "lucide-react";
@@ -1208,47 +1209,17 @@ export function Studio({
     });
   }
   function changeEventType(value: string) {
-    const currentInvitation = invitation;
-    if (!currentInvitation) return;
     const eventType = value as Invitation["eventType"];
-    const currentContent = getContent(currentInvitation, locale);
-    const previousDefaults = defaultLocalizedInvitationContent(
-      currentInvitation.eventType,
-      locale,
-    );
-    const nextDefaults = defaultLocalizedInvitationContent(eventType, locale);
-    const defaultFields = [
-      "title",
-      "greeting",
-      "message",
-      "eventLabel",
-      "programHeading",
-    ] as const;
-    const localizedPatch = Object.fromEntries(
-      defaultFields
-        .filter(
-          (field) =>
-            !currentContent[field].trim() ||
-            currentContent[field] === previousDefaults[field],
-        )
-        .map((field) => [field, nextDefaults[field]]),
-    ) as Partial<InvitationContent>;
-    const contentPatch =
-      Object.keys(localizedPatch).length === 0
-        ? {}
-        : {
-            content: {
-              ...currentInvitation.content,
-              [locale]: { ...currentContent, ...localizedPatch },
-            },
-          };
-    const selected =
-      templates.find((item) => item.id === currentInvitation.templateId) ??
-      templateById(currentInvitation.templateId);
     setNotice("");
-    if (selected && !selected.supportedEventTypes.includes(eventType)) {
-      update({ eventType, templateId: "", ...contentPatch });
-    } else update({ eventType, ...contentPatch });
+    setInvitation((current) => {
+      if (!current) return current;
+      const next = switchEventType(current, eventType);
+      const selected = templates.find((item) => item.id === current.templateId) ??
+        templateById(current.templateId);
+      return selected && !selected.supportedEventTypes.includes(eventType)
+        ? { ...next, templateId: "" }
+        : next;
+    });
   }
   function updateDressCode(patch: Partial<Invitation["dressCode"]>) {
     const current = invitation;

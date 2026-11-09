@@ -1,6 +1,12 @@
 import assert from "node:assert/strict";
 import { beforeEach, test } from "node:test";
-import { createInvitation } from "@taklifnoma/contracts";
+import {
+  addLanguage,
+  createInvitation,
+  defaultLocalizedInvitationContent,
+  switchTemplate,
+} from "@taklifnoma/contracts";
+import { switchEventType } from "./event-switch";
 import {
   DRAFT_KEY,
   deleteBrowserDraft,
@@ -106,4 +112,91 @@ test("malformed content is never recovered as an invitation", () => {
   localStorage.setItem(`${DRAFT_KEY}:bad`, '{"invitation":{"id":"bad"}}');
   assert.equal(readBrowserDraft(), null);
   assert.deepEqual(listBrowserDrafts(), []);
+});
+
+test("switching templates and recovering locally preserves the complete authored draft", () => {
+  const draft = addLanguage(createInvitation("anor"), "ru");
+  draft.eventType = "wedding";
+  draft.content["uz-Latn"].people = ["Ali", "Malika"];
+  draft.content.ru.people = ["Али", "Малика"];
+  draft.startsAt = "2027-05-20T18:00";
+  draft.content["uz-Latn"].venueName = "Our venue";
+  draft.music = {
+    enabled: true,
+    assetId: "audio",
+    url: "/api/media/audio",
+    filename: "song.mp3",
+  };
+  draft.gallery = [
+    { id: "photo", url: "/api/media/photo", alt: "Our photo", caption: "" },
+  ];
+  saveBrowserDraft(draft, true);
+
+  const switched = switchTemplate(
+    readBrowserDraft(draft.id)!.invitation,
+    "asalari",
+  );
+  saveBrowserDraft(switched, true);
+  const recovered = readBrowserDraft(draft.id)!.invitation;
+  assert.deepEqual({ ...recovered, templateId: draft.templateId }, draft);
+  assert.deepEqual(switchTemplate(recovered, draft.templateId), draft);
+});
+
+test("changing event type reuses shared details without mapping wedding names to a celebrant", () => {
+  const draft = addLanguage(createInvitation("anor"), "ru");
+  draft.eventType = "wedding";
+  for (const locale of draft.enabledLocales) {
+    draft.content[locale] = {
+      ...defaultLocalizedInvitationContent("wedding", locale),
+      people: ["First", "Second"],
+      venueName: `Venue ${locale}`,
+      address: `Address ${locale}`,
+    };
+  }
+  draft.content.ru.greeting = "Our custom greeting";
+  draft.content.ru.message = "Our custom message";
+  draft.startsAt = "2027-05-20T18:00";
+  draft.venue.mapUrl = "https://yandex.com/maps/?pt=69.2,41.3&z=16&l=map";
+  draft.music = {
+    enabled: true,
+    assetId: "audio",
+    url: "/api/media/audio",
+    filename: "song.mp3",
+  };
+  const snapshot = structuredClone(draft);
+  const next = switchEventType(draft, "birthday");
+  saveBrowserDraft(switchTemplate(next, "sharlar"), true);
+  const recovered = readBrowserDraft(draft.id)!.invitation;
+
+  assert.equal(recovered.eventType, "birthday");
+  for (const locale of draft.enabledLocales) {
+    assert.deepEqual(recovered.content[locale].people, []);
+    assert.equal(
+      recovered.content[locale].venueName,
+      draft.content[locale].venueName,
+    );
+    assert.equal(
+      recovered.content[locale].address,
+      draft.content[locale].address,
+    );
+    assert.equal(
+      recovered.content[locale].eventLabel,
+      defaultLocalizedInvitationContent("birthday", locale).eventLabel,
+    );
+  }
+  assert.equal(recovered.content["uz-Latn"].message, "");
+  assert.equal(recovered.content.ru.message, "Our custom message");
+  assert.equal(recovered.content.ru.greeting, "Our custom greeting");
+  assert.deepEqual(recovered.venue, draft.venue);
+  assert.deepEqual(recovered.music, draft.music);
+  assert.equal(recovered.startsAt, draft.startsAt);
+  assert.deepEqual(draft, snapshot);
+});
+
+test("selecting the same event type leaves names and all other details intact", () => {
+  const draft = createInvitation("sharlar");
+  draft.eventType = "birthday";
+  draft.content["uz-Latn"].people = ["Aziza"];
+  draft.celebrantAge = 20;
+  assert.equal(switchEventType(draft, "birthday"), draft);
 });
