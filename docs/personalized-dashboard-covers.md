@@ -6,7 +6,7 @@ Both pages render a plain image with the identical source URL. Curated catalog c
 
 Dashboard covers have no account/content cache key, image proxy, blob URL, fetch queue, retry loop, or screenshot request. Edits, publication status, and account changes do not change the poster URL. Native lazy loading defers offscreen images. Save, publication, payment and administrator-review routes no longer prepare personalized screenshots in the background. Actual static-image previews and downloads in Studio retain their existing behavior.
 
-The older screenshot endpoint and capture utilities are legacy infrastructure, no longer used by the dashboard or publication flow. Previous personalized images in browser CacheStorage are not used for template posters.
+The older screenshot endpoint now returns HTTP 410 and its personalized renderer has been deleted. Shared Chromium utilities remain for real static invitation previews/exports. Previous personalized images in browser CacheStorage are not used for template posters.
 
 Verify cross-page reuse against a local production server with:
 

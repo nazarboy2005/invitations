@@ -10,6 +10,7 @@ import {
   publicVisitorToken,
   newPublicVisitorToken,
   PUBLIC_VISITOR_COOKIE,
+  verifiedSubmissionLimit,
 } from "@/server/public";
 import { verifySameOrigin } from "@/server/auth";
 import { randomUUID } from "node:crypto";
@@ -39,6 +40,7 @@ export async function POST(request: Request, { params }: Context) {
       throw new ApiError(403, "RSVP_CLOSED", "Javob yuborish muddati tugagan.");
     await submissionLimit(request, invitationId, "rsvp");
     await verifyTurnstile(request, "guest_rsvp");
+    await verifiedSubmissionLimit(request, invitationId, "rsvp");
     const input = z
       .object({
         name: z.string().trim().min(1).max(100),

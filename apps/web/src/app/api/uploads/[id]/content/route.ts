@@ -7,6 +7,7 @@ import { ApiError, apiError, privateHeaders, readBytes } from "@/server/api";
 import { detectMedia, putMedia } from "@/server/storage";
 import { requireAdminMutation } from "@/server/admin";
 import { invitationRequestActor } from "@/server/admin-invitation-access";
+import { enforceRateLimit } from "@/server/rate-limit";
 export const runtime = "nodejs";
 
 export async function PUT(
@@ -16,6 +17,12 @@ export async function PUT(
   try {
     verifySameOrigin(request);
     const actor = await authenticatedUser();
+    await enforceRateLimit({
+      scope: "media-content",
+      identity: actor.id,
+      maximum: 40,
+      windowSeconds: 60,
+    });
     const target = request.headers.get("x-admin-invitation");
     const user = target
       ? (await invitationRequestActor(request, target, actor, true)).owner
@@ -45,7 +52,10 @@ export async function PUT(
           "ADMIN_CONTEXT_MISMATCH",
           "Fayl tanlangan taklifnomaga tegishli emas.",
         );
-      if (asset.status !== "pending")
+      if (
+        asset.status !== "pending" ||
+        new Date(asset.created_at).getTime() < Date.now() - 60 * 60_000
+      )
         throw new ApiError(
           409,
           "UPLOAD_CLOSED",
@@ -57,7 +67,7 @@ export async function PUT(
         invitation &&
         (invitation.owner_id !== user.id ||
           invitation.status === "deleted" ||
-            templateById(invitation.template_id)?.format === "image" ||
+          templateById(invitation.template_id)?.format === "image" ||
           ((invitation.status === "published" ||
             invitation.identity_locked_at) &&
             (!invitation.edit_deadline_at ||

@@ -10,7 +10,6 @@ import {
   removeMedia,
   mediaResponse,
   storageProvider,
-  sealMedia,
 } from "../apps/web/src/server/storage";
 
 test("local storage validates paths, preserves bytes, serves byte ranges, and removes files", async () => {
@@ -30,10 +29,6 @@ test("local storage validates paths, preserves bytes, serves byte ranges, and re
       assert.throws(() => localMediaPath(key));
     const bytes = Buffer.from("RIFF1234WAVEcontent for range tests");
     await putMedia("local/test/media.wav", bytes, "audio/wav");
-    assert.equal(
-      await sealMedia("local/test/media.wav"),
-      "local/test/media.wav",
-    );
     assert.equal(
       (await inspectMedia("local/test/media.wav")).size,
       bytes.length,

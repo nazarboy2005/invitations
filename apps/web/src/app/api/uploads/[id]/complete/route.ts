@@ -9,19 +9,31 @@ import { requireAdminMutation } from "@/server/admin";
 import { invitationRequestActor } from "@/server/admin-invitation-access";
 import { recordAdminChange } from "@/server/admin";
 import {
-  detectMedia,
-  inspectMedia,
   removeMedia,
-  sealMedia,
+  readUploadBytes,
+  verifiedMediaKey,
+  putMedia,
 } from "@/server/storage";
+import { validateCreatorMedia } from "@/server/media-validation";
+import { assertMediaBudget } from "@/server/media-policy";
+import { enforceRateLimit } from "@/server/rate-limit";
 export const runtime = "nodejs";
+export const maxDuration = 60;
 export async function POST(
   request: Request,
   { params }: { params: Promise<{ id: string }> },
 ) {
+  let writtenKey: string | undefined;
+  let committed = false;
   try {
     verifySameOrigin(request);
     const actor = await authenticatedUser();
+    await enforceRateLimit({
+      scope: "media-complete",
+      identity: actor.id,
+      maximum: 40,
+      windowSeconds: 60,
+    });
     const target = request.headers.get("x-admin-invitation");
     const access = target
       ? await invitationRequestActor(request, target, actor, true)
@@ -52,7 +64,10 @@ export async function POST(
           "Fayl tanlangan taklifnomaga tegishli emas.",
         );
       if (asset.status !== "ready") {
-        if (asset.status !== "pending")
+        if (
+          asset.status !== "pending" ||
+          new Date(asset.created_at).getTime() < Date.now() - 60 * 60_000
+        )
           throw new ApiError(
             409,
             "UPLOAD_CLOSED",
@@ -75,24 +90,34 @@ export async function POST(
             "UPLOAD_FORBIDDEN",
             "Tahrirlash muddati tugagan.",
           );
-        const inspection = await inspectMedia(asset.object_key);
-        const format = detectMedia(
-          inspection.bytes,
-          asset.mime_type.startsWith("image/") ? "image" : "audio",
-        );
-        if (
-          inspection.size !== Number(asset.size_bytes) ||
-          inspection.size > 15 * 1024 * 1024 ||
-          !format ||
-          format.mime !== asset.mime_type
-        ) {
+        let validated;
+        try {
+          if (Number(asset.size_bytes) > 15 * 1024 * 1024)
+            throw new ApiError(400, "INVALID_FILE", "Fayl hajmi juda katta.");
+          validated = await validateCreatorMedia(
+            await readUploadBytes(asset.object_key, Number(asset.size_bytes)),
+            asset.mime_type,
+          );
+        } catch (error) {
+          if (!(error instanceof ApiError) || error.code !== "INVALID_FILE")
+            throw error;
           await removeMedia(asset.object_key);
           await tx`UPDATE media_assets SET status='rejected' WHERE id=${id}`;
           return { invalid: true as const, asset };
         }
-        const sealedKey = await sealMedia(asset.object_key);
-        if (sealedKey !== asset.object_key) originalKey = asset.object_key;
-        await tx`UPDATE media_assets SET status='ready',object_key=${sealedKey} WHERE id=${id} AND owner_id=${user.id}`;
+        await assertMediaBudget(tx, user.id, validated.content.length, {
+          exceptId: id,
+        });
+        const sealedKey = verifiedMediaKey(asset.object_key);
+        writtenKey = sealedKey;
+        await putMedia(sealedKey, validated.content, validated.mime);
+        originalKey = asset.object_key;
+        await tx`UPDATE media_assets SET status='ready',object_key=${sealedKey},size_bytes=${validated.content.length} WHERE id=${id} AND owner_id=${user.id}`;
+        // A signed PUT can recreate the original until its URL expires. Delete
+        // again after that window, including when the client abandons the page.
+        await tx`INSERT INTO jobs(type,payload,idempotency_key,available_at)
+          VALUES('media-cleanup',${tx.json({ key: asset.object_key, ownerId: user.id })},${`upload-source:${id}`},now()+interval '10 minutes')
+          ON CONFLICT(idempotency_key) DO NOTHING`;
         if (access.admin)
           await recordAdminChange(
             tx,
@@ -109,6 +134,7 @@ export async function POST(
       }
       return { invalid: false as const, asset };
     });
+    committed = true;
     if (result.invalid)
       throw new ApiError(
         400,
@@ -122,6 +148,7 @@ export async function POST(
       { headers: privateHeaders },
     );
   } catch (e) {
+    if (writtenKey && !committed) await removeMedia(writtenKey).catch(() => {});
     return apiError(e);
   }
 }

@@ -1,5 +1,6 @@
 import type postgres from "postgres";
 import { getDb } from "@taklifnoma/database";
+import { deliveryCooldown } from "./rate-limit";
 
 export type GuestNotification = {
   invitationId: string;
@@ -20,7 +21,17 @@ export type GuestNotification = {
 function escape(value: string, limit: number) {
   return value
     .slice(0, limit)
-    .replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]!);
+    .replace(
+      /[&<>"']/g,
+      (c) =>
+        ({
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          '"': "&quot;",
+          "'": "&#39;",
+        })[c]!,
+    );
 }
 
 function eventEmoji(eventType: string | undefined) {
@@ -87,7 +98,11 @@ export function guestTelegramMessage(
           : "❓Bu tilakni veb-sahifada ko'rsatilishini xohlaysizmi?",
     );
   }
-  if (input.kind === "receipt") lines.push(`<b>To‘yona cheki</b> · ${invitation}`, "Chek yuborildi. Pul tushganini tekshiring.");
+  if (input.kind === "receipt")
+    lines.push(
+      `<b>To‘yona cheki</b> · ${invitation}`,
+      "Chek yuborildi. Pul tushganini tekshiring.",
+    );
   if (input.kind === "intention") {
     lines.push(`<b>Sovg‘a niyati</b> · ${invitation}`);
     lines.push(
@@ -156,7 +171,7 @@ export async function sendGuestNotification(
       body.ok === false &&
       (body.error_code === 429 || response.status === 429)
     )
-    return {
+      return {
         state: "retry",
         after: Math.min(
           86400,
@@ -252,6 +267,20 @@ export async function processGuestNotifications(
         await tx`UPDATE jobs SET status='failed',locked_at=NULL,last_error=${!target.chat_id ? "Owner has no active Telegram connection" : "Retry limit reached"} WHERE id=${job.id}`;
         return { skip: true as const };
       }
+      const retryAt =
+        (await deliveryCooldown(
+          tx,
+          "guest-notification-chat",
+          String(target.chat_id),
+          1,
+        )) ??
+        (await deliveryCooldown(tx, "guest-notification-global", "all", 0.05));
+      if (retryAt) {
+        // Keep the durable notification, but let the background runner deliver
+        // it later. Deferral does not consume attempts or fail the submission.
+        await tx`UPDATE jobs SET status='queued',available_at=${retryAt},locked_at=NULL WHERE id=${job.id}`;
+        return { skip: true as const };
+      }
       const content = target.data.content;
       const locale = target.data.defaultLocale;
       const invitationName =
@@ -269,10 +298,7 @@ export async function processGuestNotifications(
           invitationName,
           process.env.APP_URL!,
           (target.wish_status ?? "pending") as
-            | "pending"
-            | "approved"
-            | "hidden"
-            | "deleted",
+            "pending" | "approved" | "hidden" | "deleted",
           target.data.slug,
           target.data.eventType,
         ),

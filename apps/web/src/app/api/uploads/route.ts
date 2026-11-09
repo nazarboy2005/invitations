@@ -9,6 +9,11 @@ import { ApiError, apiError, privateHeaders, readJson } from "@/server/api";
 import { presignMedia, mediaObjectKey } from "@/server/storage";
 import { requireAdminMutation } from "@/server/admin";
 import { invitationRequestActor } from "@/server/admin-invitation-access";
+import {
+  assertMediaBudget,
+  cleanupAbandonedMedia,
+} from "@/server/media-policy";
+import { enforceRateLimit } from "@/server/rate-limit";
 export const runtime = "nodejs";
 
 export async function GET(request: Request) {
@@ -68,6 +73,12 @@ export async function POST(request: Request) {
   try {
     verifySameOrigin(request);
     const actor = await authenticatedUser();
+    await enforceRateLimit({
+      scope: "media-prepare",
+      identity: actor.id,
+      maximum: 30,
+      windowSeconds: 60,
+    });
     const input = inputSchema.parse(await readJson(request, 5000));
     const access = input.draftId
       ? await invitationRequestActor(request, input.draftId, actor, true)
@@ -116,14 +127,8 @@ export async function POST(request: Request) {
         "UPLOAD_FORBIDDEN",
         "Bu taklifnomaga fayl yuklash mumkin emas.",
       );
-    const [pending] =
-      await getDb()`SELECT count(*)::int AS count FROM media_assets WHERE owner_id=${user.id} AND status='pending' AND created_at>now()-interval '10 minutes'`;
-    if (pending.count >= 10)
-      throw new ApiError(
-        429,
-        "UPLOAD_LIMIT",
-        "Yuklashlar tugashini kuting va qayta urining.",
-      );
+    // Keep expiry cleanup bounded; storage errors must not prevent a normal upload.
+    await cleanupAbandonedMedia(user.id).catch(() => {});
     const extension = {
       "image/png": "png",
       "image/jpeg": "jpg",
@@ -144,10 +149,13 @@ export async function POST(request: Request) {
         input.contentType === "audio/x-m4a" ? "audio/mp4" : input.contentType;
     const uploadUrl = key.startsWith("local/")
       ? `/api/uploads/${id}/content`
-      : await presignMedia(key, mime);
+      : await presignMedia(key, mime, input.size);
     // A public media asset is only anonymously readable when currently referenced
     // by its owner's published invitation; drafts remain authenticated.
-    await getDb()`INSERT INTO media_assets(id,owner_id,draft_id,object_key,url,filename,mime_type,size_bytes,visibility,status) VALUES(${id},${user.id},${input.draftId ?? null},${key},${url},${input.filename},${mime},${input.size},'public','pending')`;
+    await getDb().begin(async (tx) => {
+      await assertMediaBudget(tx, user.id, input.size, { preparing: true });
+      await tx`INSERT INTO media_assets(id,owner_id,draft_id,object_key,url,filename,mime_type,size_bytes,visibility,status) VALUES(${id},${user.id},${input.draftId ?? null},${key},${url},${input.filename},${mime},${input.size},'public','pending')`;
+    });
     return NextResponse.json(
       {
         upload: {

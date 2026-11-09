@@ -1,9 +1,10 @@
-import { createHmac, createHash } from "node:crypto";
+import { createHash } from "node:crypto";
 import { getDb } from "@taklifnoma/database";
 import { getPublishedInvitation } from "./invitations";
 import { ApiError } from "./api";
 import { clientAddress, enforceRateLimit } from "./rate-limit";
 import { digest, randomToken } from "./auth/crypto";
+import { mediaBudget } from "./media-policy";
 
 export const PUBLIC_VISITOR_COOKIE = "taklifnoma_rsvp";
 
@@ -16,6 +17,36 @@ export function publicVisitorToken(request: Request) {
     .find((value) => value.startsWith(prefix))
     ?.slice(prefix.length);
   return raw && /^[a-zA-Z0-9_-]{43}$/.test(raw) ? raw : undefined;
+}
+
+// Consume aggregate budgets only after Turnstile succeeds: unverified requests
+// must not exhaust the shared invitation budget for legitimate guests.
+export async function verifiedSubmissionLimit(
+  request: Request,
+  invitationId: string,
+  kind: string,
+) {
+  await enforceRateLimit({
+    scope: "verified-guest-ip",
+    identity: clientAddress(request),
+    maximum: 60,
+    windowSeconds: 60,
+  });
+  await enforceRateLimit({
+    scope: `verified-guests:${kind}`,
+    identity: invitationId,
+    maximum:
+      kind === "receipt"
+        ? mediaBudget("RECEIPTS_PER_INVITATION_MINUTE", 60)
+        : mediaBudget("SUBMISSIONS_PER_INVITATION_MINUTE", 300),
+    windowSeconds: 60,
+  });
+  await enforceRateLimit({
+    scope: "verified-guests-daily",
+    identity: invitationId,
+    maximum: mediaBudget("SUBMISSIONS_PER_INVITATION_DAY", 10_000),
+    windowSeconds: 86400,
+  });
 }
 
 export function publicVisitorIdentity(

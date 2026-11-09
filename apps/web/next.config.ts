@@ -1,7 +1,37 @@
 import type { NextConfig } from "next";
 import { HTML_LIMITED_BOT_UA_RE } from "next/dist/shared/lib/router/utils/html-bots";
 import { preparePublicAssets } from "./scripts/prepare-public-assets.mjs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+import { createRequire } from "node:module";
 const publicAssets = preparePublicAssets();
+const appRoot = path.dirname(fileURLToPath(import.meta.url));
+const pdfRequire = createRequire(
+  createRequire(import.meta.url).resolve("pdf-lib"),
+);
+const pdfWorkerFiles = [
+  "./src/server/pdf-receipt-worker.cjs",
+  ...[
+    "pdf-lib",
+    "@pdf-lib/standard-fonts",
+    "@pdf-lib/upng",
+    "pako",
+    "tslib",
+  ].map(
+    (name) =>
+      path
+        .relative(
+          appRoot,
+          path.dirname(
+            pdfRequire.resolve(
+              name === "tslib" ? name : `${name}/package.json`,
+            ),
+          ),
+        )
+        .split(path.sep)
+        .join("/") + "/**",
+  ),
+];
 const config: NextConfig = {
   // Keep Next's defaults and include Telegram, whose crawler needs metadata in <head>.
   htmlLimitedBots: new RegExp(
@@ -11,6 +41,19 @@ const config: NextConfig = {
   distDir: process.env.TAKLIFNOMA_BUILD_DIST_DIR ?? ".next",
   transpilePackages: ["@taklifnoma/contracts", "@taklifnoma/database"],
   poweredByHeader: false,
+  // Optimize only bundled raster artwork, never uploads, SVGs or API responses.
+  images: {
+    localPatterns: ["png", "jpg", "jpeg", "webp", "avif", "gif"].flatMap(
+      (extension) =>
+        ["/images", `/_assets/${publicAssets.version}/images`].map((root) => ({
+          pathname: `${root}/**/*.${extension}`,
+          search: "",
+        })),
+    ),
+    remotePatterns: [],
+    dangerouslyAllowSVG: false,
+    maximumRedirects: 0,
+  },
   // URLs can contain guest/login tokens; fetch paths can contain bot tokens.
   // Also prevent automatic logging of Server Function arguments/browser data.
   logging: false,
@@ -21,6 +64,7 @@ const config: NextConfig = {
     "sharp",
   ],
   outputFileTracingIncludes: {
+    "/api/public/invitations/*/receipts": pdfWorkerFiles,
     "/api/static-images/preview": [
       "./src/templates/oq-atirgul/assets/**",
       "./src/templates/zumrad-naqsh/assets/**",
@@ -41,16 +85,6 @@ const config: NextConfig = {
       "./node_modules/@sparticuz/chromium/bin/**",
       "./node_modules/playwright-core/**",
     ],
-    "/api/invitation-covers": [
-      "./node_modules/@sparticuz/chromium/bin/**",
-      // Playwright resolves browsers.json and other runtime assets dynamically.
-      // Tracing only its JS entry points produces a broken serverless package.
-      "./node_modules/playwright-core/**",
-    ],
-  },
-  outputFileTracingExcludes: {
-    // Capture loads template artwork over HTTP; these files stay on the CDN.
-    "/api/invitation-covers": ["./public/**", "./src/templates/**"],
   },
   async rewrites() {
     // Production asset routing is pinned to the build's revision. Development

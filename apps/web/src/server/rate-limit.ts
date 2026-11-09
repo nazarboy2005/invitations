@@ -2,6 +2,16 @@ import { isIP } from "node:net";
 import { createHmac } from "node:crypto";
 import { getDb } from "@taklifnoma/database";
 import { ApiError } from "./api";
+import type postgres from "postgres";
+
+export function rateLimitKey(scope: string, identity: string) {
+  const secret = process.env.SESSION_SECRET;
+  if (!secret)
+    throw new ApiError(503, "NOT_CONFIGURED", "Xizmat hozircha mavjud emas.");
+  return createHmac("sha256", secret)
+    .update(`${scope}:${identity}`)
+    .digest("hex");
+}
 
 type Limit = {
   scope: string;
@@ -36,7 +46,8 @@ async function cleanExpiredLimits() {
   // Multiple app instances may enter here together. The transaction lock keeps
   // cleanup to one bounded batch per interval across the deployment.
   await getDb().begin(async (tx) => {
-    const [lock] = await tx`SELECT pg_try_advisory_xact_lock(74920319) AS acquired`;
+    const [lock] =
+      await tx`SELECT pg_try_advisory_xact_lock(74920319) AS acquired`;
     if (!lock?.acquired) return;
     await tx`
       WITH stale AS (
@@ -62,6 +73,11 @@ async function cleanExpiredLimits() {
       )
       DELETE FROM miniapp_exchanges WHERE init_hash IN (SELECT init_hash FROM stale)
     `;
+    await tx`WITH stale AS (
+      SELECT invitation_id,visitor_hash FROM invitation_viewers
+      WHERE last_viewed_at<now()-interval '90 days' LIMIT 1000
+    ) DELETE FROM invitation_viewers v USING stale s
+      WHERE v.invitation_id=s.invitation_id AND v.visitor_hash=s.visitor_hash`;
   });
 }
 
@@ -74,13 +90,7 @@ export async function enforceRateLimit({
   code = "RATE_LIMITED",
   message = "Juda ko‘p so‘rov yuborildi. Biroz kutib qayta urining.",
 }: Limit) {
-  const secret = process.env.SESSION_SECRET;
-  if (!secret)
-    throw new ApiError(503, "NOT_CONFIGURED", "Xizmat hozircha mavjud emas.");
-
-  const key = createHmac("sha256", secret)
-    .update(`${scope}:${identity}`)
-    .digest("hex");
+  const key = rateLimitKey(scope, identity);
   const [row] = await getDb()`
     INSERT INTO rate_limits(key,count) VALUES(${key},1)
     ON CONFLICT(key) DO UPDATE SET
@@ -96,6 +106,23 @@ export async function enforceRateLimit({
   `;
 
   await cleanExpiredLimits();
-  if (row.count > maximum)
-    throw new ApiError(429, code, message);
+  if (row.count > maximum) throw new ApiError(429, code, message);
+}
+
+/** Return the retry instant when another worker owns this delivery interval. */
+export async function deliveryCooldown(
+  tx: postgres.TransactionSql,
+  scope: string,
+  identity: string,
+  seconds: number,
+) {
+  const key = rateLimitKey(scope, identity);
+  const granted = await tx`INSERT INTO rate_limits(key,count,window_start)
+    VALUES(${key},1,now()+make_interval(secs => ${seconds}))
+    ON CONFLICT(key) DO UPDATE SET window_start=now()+make_interval(secs => ${seconds})
+      WHERE rate_limits.window_start<=now()
+    RETURNING key`;
+  if (granted.length) return null;
+  const [row] = await tx`SELECT window_start FROM rate_limits WHERE key=${key}`;
+  return row.window_start as Date;
 }

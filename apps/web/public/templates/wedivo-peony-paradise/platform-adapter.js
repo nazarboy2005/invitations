@@ -655,7 +655,7 @@
       file.className = "platform-file-input";
       file.name = "file";
       file.type = "file";
-      file.accept = "image/jpeg,image/png,image/webp,application/pdf";
+      file.accept = "image/jpeg,image/png,image/webp,image/gif,image/avif,image/tiff,.tif,.tiff,application/pdf";
       file.required = true;
       file.title = ui.chooseReceipt;
       const fileCaption = make("span", ui.chooseReceipt, "f-input");

@@ -159,7 +159,7 @@
     namesLabel.append(names);
     file.type = "file";
     file.name = "file";
-    file.accept = "image/jpeg,image/png,image/webp,application/pdf";
+    file.accept = "image/jpeg,image/png,image/webp,image/gif,image/avif,image/tiff,.tif,.tiff,application/pdf";
     file.required = true;
     fileLabel.append(file);
     button.type = "submit";

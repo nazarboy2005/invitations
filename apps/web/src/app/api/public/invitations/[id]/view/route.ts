@@ -5,6 +5,8 @@ import { getDb } from "@taklifnoma/database";
 import { digest } from "@/server/auth/crypto";
 import { verifySameOrigin } from "@/server/auth";
 import { apiError } from "@/server/api";
+import { ApiError } from "@/server/api";
+import { clientAddress, enforceRateLimit } from "@/server/rate-limit";
 
 export const runtime = "nodejs";
 const VIEWER_COOKIE = "taklifnoma_viewer";
@@ -16,6 +18,28 @@ export async function POST(request: Request, { params }: Context) {
     verifySameOrigin(request);
     const { id } = await params;
     z.uuid().parse(id);
+    try {
+      await enforceRateLimit({
+        scope: "invitation-view-ip",
+        identity: clientAddress(request),
+        maximum: 120,
+        windowSeconds: 60,
+      });
+      await enforceRateLimit({
+        scope: "invitation-view",
+        identity: `${id}:${clientAddress(request)}`,
+        maximum: 30,
+        windowSeconds: 60,
+      });
+    } catch (error) {
+      // Analytics must never interrupt opening an invitation or display a CAPTCHA.
+      if (error instanceof ApiError && error.status === 429)
+        return new NextResponse(null, {
+          status: 204,
+          headers: { "Cache-Control": "no-store" },
+        });
+      throw error;
+    }
 
     const match = request.headers
       .get("cookie")

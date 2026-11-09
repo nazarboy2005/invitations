@@ -10,6 +10,7 @@ import {
   publicVisitorToken,
   newPublicVisitorToken,
   PUBLIC_VISITOR_COOKIE,
+  verifiedSubmissionLimit,
 } from "@/server/public";
 import { verifySameOrigin } from "@/server/auth";
 import { enqueueGuestNotification } from "@/server/guest-notifications";
@@ -46,6 +47,7 @@ export async function POST(request: Request, { params }: Context) {
       throw new ApiError(403, "WISHES_CLOSED", "Tilak yuborish yopilgan.");
     await submissionLimit(request, invitationId, "wish");
     await verifyTurnstile(request, "guest_wish");
+    await verifiedSubmissionLimit(request, invitationId, "wish");
     const input = z
       .object({
         name: z.string().trim().min(1).max(100),

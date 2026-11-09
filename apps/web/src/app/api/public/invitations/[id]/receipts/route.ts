@@ -10,13 +10,11 @@ import {
   publicInvitation,
   resolveGuest,
   submissionLimit,
+  verifiedSubmissionLimit,
 } from "@/server/public";
-import {
-  detectMedia,
-  mediaObjectKey,
-  putMedia,
-  removeMedia,
-} from "@/server/storage";
+import { mediaObjectKey, putMedia, removeMedia } from "@/server/storage";
+import { normalizeReceipt } from "@/server/media-validation";
+import { assertMediaBudget } from "@/server/media-policy";
 export const runtime = "nodejs";
 export const maxDuration = 60;
 const MAX_SIZE = 5 * 1024 * 1024;
@@ -33,6 +31,7 @@ export async function POST(
       throw new ApiError(403, "RECEIPTS_CLOSED", "Chek yuborish yopilgan.");
     await submissionLimit(request, invitationId, "receipt");
     await verifyTurnstile(request, "guest_receipt");
+    await verifiedSubmissionLimit(request, invitationId, "receipt");
     if (
       !request.headers.get("content-type")?.startsWith("multipart/form-data;")
     )
@@ -60,21 +59,10 @@ export async function POST(
       throw new ApiError(
         400,
         "INVALID_FILE",
-        "JPG, PNG, WebP yoki PDF fayl tanlang (5 MB gacha).",
+        "Rasm yoki PDF fayl tanlang (5 MB gacha).",
       );
     const content = Buffer.from(await file.arrayBuffer());
-    const format =
-      detectMedia(content, "image") ||
-      (content.subarray(0, 5).toString() === "%PDF-" &&
-      content.subarray(-1024).includes(Buffer.from("%%EOF"))
-        ? { mime: "application/pdf", extension: "pdf" }
-        : null);
-    if (!format)
-      throw new ApiError(
-        400,
-        "INVALID_FILE",
-        "Fayl turi mos kelmadi. JPG, PNG, WebP yoki PDF tanlang.",
-      );
+    const format = await normalizeReceipt(content);
     const hash = createHash("sha256").update(content).digest("hex");
     const assetId = randomUUID();
     const key = mediaObjectKey(
@@ -90,11 +78,23 @@ export async function POST(
       const [duplicate] =
         await tx`SELECT id FROM gift_receipts WHERE invitation_id=${invitationId} AND file_hash=${hash}`;
       if (duplicate) return { duplicate: true };
+      await assertMediaBudget(tx, row.owner_id, format.content.length);
       writtenKey = key;
-      await putMedia(key, content, format.mime);
-      await tx`INSERT INTO media_assets(id,owner_id,draft_id,object_key,url,filename,mime_type,size_bytes,visibility,status) VALUES(${assetId},${row.owner_id},${invitationId},${key},${`/api/media/${assetId}`},${file.name.slice(0, 200)},${format.mime},${content.length},'private','ready')`;
-      const [receipt] = await tx`INSERT INTO gift_receipts(invitation_id,guest_id,asset_id,giver_names,file_hash,destination) VALUES(${invitationId},${guest?.id ?? null},${assetId},${giverNames},${hash},${tx.json({ cardNumber: row.data.gift.cardNumber, cardHolder: row.data.gift.cardHolder })}) RETURNING id`;
-      const jobId = await enqueueGuestNotification(tx, { kind: "receipt", invitationId, recordId: receipt.id, name: giverNames }, `receipt:${receipt.id}`);
+      await putMedia(key, format.content, format.mime);
+      const filename = `${file.name.replace(/\.[^.]*$/, "").slice(0, 180)}.${format.extension}`;
+      await tx`INSERT INTO media_assets(id,owner_id,draft_id,object_key,url,filename,mime_type,size_bytes,visibility,status) VALUES(${assetId},${row.owner_id},${invitationId},${key},${`/api/media/${assetId}`},${filename},${format.mime},${format.content.length},'private','ready')`;
+      const [receipt] =
+        await tx`INSERT INTO gift_receipts(invitation_id,guest_id,asset_id,giver_names,file_hash,destination) VALUES(${invitationId},${guest?.id ?? null},${assetId},${giverNames},${hash},${tx.json({ cardNumber: row.data.gift.cardNumber, cardHolder: row.data.gift.cardHolder })}) RETURNING id`;
+      const jobId = await enqueueGuestNotification(
+        tx,
+        {
+          kind: "receipt",
+          invitationId,
+          recordId: receipt.id,
+          name: giverNames,
+        },
+        `receipt:${receipt.id}`,
+      );
       return { duplicate: false, jobId };
     });
     writtenKey = undefined;

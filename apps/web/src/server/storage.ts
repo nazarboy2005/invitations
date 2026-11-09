@@ -4,7 +4,6 @@ import {
   GetObjectCommand,
   HeadObjectCommand,
   DeleteObjectCommand,
-  CopyObjectCommand,
 } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import { ApiError } from "./api";
@@ -68,6 +67,7 @@ export function storageClient() {
       accessKeyId: R2_ACCESS_KEY_ID,
       secretAccessKey: R2_SECRET_ACCESS_KEY,
     },
+    requestChecksumCalculation: "WHEN_REQUIRED",
   });
 }
 export function detectMedia(
@@ -128,15 +128,19 @@ export async function readMedia(key: string) {
     new GetObjectCommand({ Bucket: process.env.R2_BUCKET_NAME, Key: key }),
   );
 }
-export async function presignMedia(key: string, mime: string) {
+export async function presignMedia(key: string, mime: string, size: number) {
   return getSignedUrl(
     storageClient(),
     new PutObjectCommand({
       Bucket: process.env.R2_BUCKET_NAME,
       Key: key,
       ContentType: mime,
+      ContentLength: size,
     }),
-    { expiresIn: 300 },
+    {
+      expiresIn: 300,
+      signableHeaders: new Set(["content-length", "content-type"]),
+    },
   );
 }
 export async function inspectMedia(key: string) {
@@ -163,19 +167,53 @@ export async function removeMedia(key: string) {
     new DeleteObjectCommand({ Bucket: process.env.R2_BUCKET_NAME, Key: key }),
   );
 }
-// A still-valid presigned PUT must not be able to replace an approved object.
-export async function sealMedia(key: string) {
-  if (key.startsWith("local/") || key.startsWith("verified/")) return key;
-  const sealed = `verified/${key}`;
-  await storageClient().send(
-    new CopyObjectCommand({
-      Bucket: process.env.R2_BUCKET_NAME,
-      Key: sealed,
-      CopySource: `${process.env.R2_BUCKET_NAME}/${key.split("/").map(encodeURIComponent).join("/")}`,
-      MetadataDirective: "COPY",
-    }),
+/** Read one object snapshot; never validate HEAD/range then copy a mutable key. */
+export async function readUploadBytes(
+  key: string,
+  size: number,
+): Promise<Buffer> {
+  if (key.startsWith("local/")) {
+    const bytes = await readLocalMedia(key);
+    if (bytes.length !== size)
+      throw new ApiError(400, "INVALID_FILE", "Fayl hajmi mos kelmadi.");
+    return bytes;
+  }
+  const object = await storageClient().send(
+    new GetObjectCommand({ Bucket: process.env.R2_BUCKET_NAME, Key: key }),
+    { abortSignal: AbortSignal.timeout(30_000) },
   );
-  return sealed;
+  if (object.ContentLength !== size || !object.Body) {
+    object.Body?.transformToWebStream()
+      .cancel()
+      .catch(() => {});
+    throw new ApiError(400, "INVALID_FILE", "Fayl hajmi mos kelmadi.");
+  }
+  const reader = object.Body.transformToWebStream().getReader();
+  const chunks: Uint8Array[] = [];
+  let total = 0;
+  try {
+    for (;;) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      total += value.byteLength;
+      if (total > size) {
+        await reader.cancel();
+        throw new ApiError(400, "INVALID_FILE", "Fayl hajmi mos kelmadi.");
+      }
+      chunks.push(value);
+    }
+  } finally {
+    reader.releaseLock();
+  }
+  if (total !== size)
+    throw new ApiError(400, "INVALID_FILE", "Fayl hajmi mos kelmadi.");
+  return Buffer.concat(chunks);
+}
+
+export function verifiedMediaKey(key: string) {
+  return key.startsWith("local/")
+    ? `local/verified/${key.slice(6)}`
+    : `verified/${key}`;
 }
 
 function publicMediaStream(stream: ReadableStream<Uint8Array>) {
@@ -213,6 +251,9 @@ export async function mediaResponse(
     "X-Content-Type-Options": "nosniff",
     "Accept-Ranges": "bytes",
     "Content-Disposition": mime === "application/pdf" ? "attachment" : "inline",
+    ...(mime === "application/pdf"
+      ? { "Content-Security-Policy": "sandbox; default-src 'none'" }
+      : {}),
   };
   const range = request.headers.get("range");
   // Storage keys contain creator IDs. Stream through this authorized route
