@@ -3,6 +3,7 @@ import { z } from "zod";
 import { getDb } from "@taklifnoma/database";
 import { ApiError, apiError, privateHeaders, readBytes } from "@/server/api";
 import { verifySameOrigin } from "@/server/auth";
+import { verifyTurnstile } from "@/server/turnstile";
 import { enqueueGuestNotification } from "@/server/guest-notifications";
 import { scheduleGuestNotification } from "@/server/schedule-guest-notification";
 import {
@@ -31,6 +32,7 @@ export async function POST(
     if (!invitation.gift.enabled || !invitation.gift.receiptUploadEnabled)
       throw new ApiError(403, "RECEIPTS_CLOSED", "Chek yuborish yopilgan.");
     await submissionLimit(request, invitationId, "receipt");
+    await verifyTurnstile(request, "guest_receipt");
     if (
       !request.headers.get("content-type")?.startsWith("multipart/form-data;")
     )

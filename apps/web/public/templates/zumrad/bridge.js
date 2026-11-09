@@ -295,7 +295,7 @@
       card.append(initial, content);
       list.append(card);
     }
-    hide(section, !p.preview && !p.data?.wishesEnabled);
+    hide(section, !p.data?.wishesEnabled);
   }
   function installLocales(p,c){let nav=$("[data-gg-languages]");if(!nav){nav=document.createElement("nav");nav.dataset.ggLanguages="";nav.className="gg-language-picker";root.append(nav);}nav.setAttribute("aria-label",c.language);nav.style.display=(p.enabledLocales||[]).length>1?"":"none";nav.replaceChildren();for(const locale of p.enabledLocales||["uz-Latn","uz-Cyrl","en","ru"]){const button=document.createElement("button");button.type="button";button.textContent=({"uz-Latn":"Uz","uz-Cyrl":"\u040e\u0437",en:"En",ru:"Ru"})[locale]||locale;button.setAttribute("aria-pressed",String(locale===p.locale));button.onclick=()=>parent.postMessage({type:`${id}:language`,locale},location.origin);nav.append(button);}}
   function wireForm(section, kind) {

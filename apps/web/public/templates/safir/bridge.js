@@ -93,7 +93,7 @@
     text("#rsvpSubmitBtn", l.send); text("#rsvpSuccessView .rsvp-title", l.sent); text("#rsvpSuccessView .rsvp-subtitle", l.thanks); text(".final-text", l.final);
     const cardBlocks = document.querySelectorAll(".time-card-block");
     if (cardBlocks[0]) textWithin(cardBlocks[0], ".main-title", p.programHeading || l.program);
-    if (cardBlocks[1]) { const ambience = cardBlocks[1].querySelectorAll(":scope > .main-title,:scope > .block-desc"); ambience.forEach((el) => { el.hidden = true; }); }
+    if (cardBlocks[1]) { const ambience = cardBlocks[1].querySelectorAll(":scope > .main-title,:scope > .block-desc"); ambience.forEach((el) => { el.hidden = true; }); cardBlocks[1].hidden = !phone && !p.rsvp?.enabled; }
     const closing = document.querySelector(".final-title"); if (closing) closing.hidden = true;
     const musicUrl = p.silentPlayback ? "" : p.music;
     const audio = document.querySelector("#bgMusic"); if (audio) { if (audio.src !== new URL(musicUrl || "about:blank", location.href).href) audio.src = musicUrl || ""; audio.hidden = !musicUrl; const musicButton = document.querySelector("#soundToggle"); musicButton.hidden = !musicUrl; musicButton.title = l.music; musicButton.setAttribute("aria-label", l.music); if (!musicUrl) audio.pause(); }

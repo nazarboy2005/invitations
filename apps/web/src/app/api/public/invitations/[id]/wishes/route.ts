@@ -14,6 +14,7 @@ import {
 import { verifySameOrigin } from "@/server/auth";
 import { enqueueGuestNotification } from "@/server/guest-notifications";
 import { scheduleGuestNotification } from "@/server/schedule-guest-notification";
+import { verifyTurnstile } from "@/server/turnstile";
 type Context = { params: Promise<{ id: string }> };
 export const runtime = "nodejs";
 export const maxDuration = 60;
@@ -43,6 +44,8 @@ export async function POST(request: Request, { params }: Context) {
     const { invitation, id: invitationId } = await publicInvitation(id);
     if (!invitation.wishes.enabled)
       throw new ApiError(403, "WISHES_CLOSED", "Tilak yuborish yopilgan.");
+    await submissionLimit(request, invitationId, "wish");
+    await verifyTurnstile(request, "guest_wish");
     const input = z
       .object({
         name: z.string().trim().min(1).max(100),
@@ -50,7 +53,6 @@ export async function POST(request: Request, { params }: Context) {
         guestToken: z.string().max(128).optional(),
       })
       .parse(await readJson(request, 12000));
-    await submissionLimit(request, invitationId, "wish");
     const guest = await resolveGuest(invitationId, input.guestToken);
     const previousToken = publicVisitorToken(request);
     const visitorToken = previousToken ?? newPublicVisitorToken();

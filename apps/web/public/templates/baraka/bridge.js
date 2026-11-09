@@ -128,7 +128,7 @@
     $("#map-yandex").hidden = $("#map-primary").hidden = !(query || safeUrl(data.venue.mapUrl));
     visible(".det-actions", Boolean(query || safeUrl(data.venue.mapUrl)));
     visible(".details", Boolean(data.date || !rows[1].hidden || state.phone || safeUrl(data.venue.mapUrl)));
-    const photo = safeUrl(data.photo?.url); visible(".photo-sec", Boolean(photo || state.preview));
+    const photo = safeUrl(data.photo?.url); visible(".photo-sec", Boolean(photo));
     let image = $(".photo-frame img");
     if (photo) {
       if (!image) { image = document.createElement("img"); image.loading = "lazy"; $(".photo-frame").prepend(image); }

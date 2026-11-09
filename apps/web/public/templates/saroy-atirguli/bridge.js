@@ -242,7 +242,7 @@
     if(payload?.preview) wishes=data().wishes||[];
     else if(data().wishesEnabled) wishes=await fetch(`/api/public/invitations/${encodeURIComponent(payload.invitationId||"")}/wishes`,{cache:"no-store"}).then((response)=>response.ok?response.json():{}).then((result)=>result.wishes||[]).catch(()=>[]);
     cards.forEach((card,i)=>{const w=wishes[i],ps=all("p",card),spans=all("span",card);set(ps.at(-1),w?.text||"");set(spans[0],w?.name||"");hide(spans[1]);hide(card,!w);});
-    hide(section,!payload?.preview&&!data().wishesEnabled);
+    hide(section,!data().wishesEnabled);
     form.onsubmit=async(e)=>{e.preventDefault();status.textContent="";if(payload?.preview){set(status,text().preview);return;}const name=input?.value.trim(),message=area?.value.trim();if(!name||!message){set(status,!name?text().guest:text().wishText);return;}button.disabled=true;try{const res=await fetch(`/api/public/invitations/${encodeURIComponent(payload.invitationId||"")}/wishes`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({name,message,guestToken:payload.guestToken||undefined})});if(!res.ok)throw Error();set(status,text().sent);form.reset();}catch{set(status,text().error);}finally{button.disabled=false;}};
   }
 
@@ -252,7 +252,7 @@
     if(input){input.placeholder=text().guest;input.value=payload?.guestName||"";}
     const choices=buttons.slice(0,2);choices.forEach((button,i)=>{set(button,i?text().decline:text().attend);button.type="button";button.onclick=()=>{answer=i?"no":"yes";choices.forEach((b,j)=>b.setAttribute("aria-pressed",String((j===1)===(answer==="no"))));};});if(submit)set(submit,text().send);
     let status=q(".pr-status",form);if(!status){status=document.createElement("p");status.className="pr-status";status.setAttribute("role","status");status.setAttribute("aria-live","polite");form.append(status);}
-    hide(section,!data().rsvp?.enabled&&!payload?.preview);
+    hide(section,!data().rsvp?.enabled);
     form.onsubmit=async(e)=>{e.preventDefault();if(payload?.preview){set(status,text().preview);return;}if(!input?.value.trim()||!answer){set(status,!input?.value.trim()?text().guest:text().rsvpHint);return;}submit.disabled=true;try{const yes=answer==="yes",res=await fetch(`/api/public/invitations/${encodeURIComponent(payload.invitationId||"")}/rsvp`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({name:input.value.trim(),status:yes?"yes":"no",partySize:yes?1:0,guestToken:payload.guestToken||undefined})});if(!res.ok)throw Error();set(status,text().sent);}catch{set(status,text().error);}finally{submit.disabled=false;}};
   }
 

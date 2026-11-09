@@ -156,12 +156,13 @@
     let status=form.querySelector("[data-lace-status]");if(!status){status=document.createElement("p");status.dataset.laceStatus="";status.className="lace-status";status.setAttribute("role","status");status.setAttribute("aria-live","polite");form.append(status);}
     const values=p.preview?wishes:await fetch(`/api/public/invitations/${encodeURIComponent(p.invitationId||"")}/wishes`,{cache:"no-store"}).then(r=>r.ok?r.json():{wishes:[]}).then(r=>r.wishes||[]).catch(()=>[]);
     for(const wish of values){const item=sourceWishRow?.cloneNode(true)||document.createElement("li");const ps=all("p",item);put(ps[0],wish.name||"");put(ps[1],wish.message||wish.text||"");list.append(item);}
-    hide(section,!p.preview&&!p.data?.wishesEnabled);
+    hide(section,!p.data?.wishesEnabled);
     form.onsubmit=async(e)=>{e.preventDefault();if(p.preview){put(status,c().preview);return;}const name=input.value.trim(),message=area.value.trim();if(!name){put(status,c().guestRequired);input.focus();return;}if(!message){put(status,c().wishRequired);area.focus();return;}submit.disabled=true;try{const response=await fetch(`/api/public/invitations/${encodeURIComponent(p.invitationId||"")}/wishes`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({name,message,guestToken:p.guestToken||undefined})});if(!response.ok)throw Error();put(status,c().submitted);form.reset();}catch{put(status,c().error);}finally{submit.disabled=false;}};
   }
 
   function renderRsvp(d,p) {
     const section=sections[10],form=section?.querySelector("form");if(!form)return;
+    hide(section,!d.rsvp?.enabled);
     put(section.querySelector("h2"),c().rsvp);put(section.querySelector("h2")?.nextElementSibling,c().rsvpHint);
     const input=form.querySelector("input"),submit=form.querySelector('[type="submit"]'),choices=all('[role="radio"]',form);
     input.placeholder=c().guest;input.value=p.guestName||"";input.required=!p.preview;input.setAttribute("aria-label",c().guest);

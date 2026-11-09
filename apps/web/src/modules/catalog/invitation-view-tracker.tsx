@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { installTurnstileFetch } from "@/lib/turnstile-client";
 
 type PlaybackState = {
   source: string;
@@ -194,6 +195,8 @@ export function InvitationViewTracker({
   musicUrl?: string;
 }) {
   const sent = useRef(false);
+
+  useEffect(() => installTurnstileFetch(window, window.location.href), []);
 
   useEffect(() => {
     const visitorState: {

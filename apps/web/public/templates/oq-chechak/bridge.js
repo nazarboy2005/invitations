@@ -788,7 +788,7 @@
       const name = document.createElement("p"), message = document.createElement("p"); name.className = "font-serif text-sm italic text-green-100 [overflow-wrap:anywhere]"; message.className = "mt-1 text-xs leading-relaxed text-white/85 [overflow-wrap:anywhere]"; name.textContent = wish.name || ""; message.textContent = wish.text || wish.message || ""; item.append(name, message); list.append(item);
       if (motionPrepared) observeDynamicSourceReveal(item, { duration: 600, easing: "ease-out" });
     });
-    hide(node, !p.preview && !p.data?.wishesEnabled);
+    hide(node, !p.data?.wishesEnabled);
   }
 
   function renderContacts(contacts, c) {
@@ -826,6 +826,7 @@
 
   function wireForm(node, kind, c) {
     const form = node?.querySelector("form"); if (!form) return;
+    hide(node, kind === "rsvp" ? !payload.data?.rsvp?.enabled : !payload.data?.wishesEnabled);
     const input = form.querySelector("input"), area = form.querySelector("textarea"), submit = form.querySelector('button[type="submit"]');
     if (input) { input.disabled = false; input.required = !payload.preview; if (!input.dataset.gwInitialized) { input.value = payload.guestName || ""; input.dataset.gwInitialized = "true"; } input.placeholder = kind === "rsvp" ? c.guestFull : c.guest; input.setAttribute("aria-label", input.placeholder); input.setAttribute("aria-invalid", "false"); input.oninput = () => input.setAttribute("aria-invalid", "false"); }
     if (area) { area.disabled = false; area.required = !payload.preview; area.maxLength = 2000; area.placeholder = c.wish; area.setAttribute("aria-label", c.wish); area.setAttribute("aria-invalid", "false"); area.oninput = () => area.setAttribute("aria-invalid", "false"); }

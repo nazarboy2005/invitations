@@ -31,7 +31,7 @@ test("Anor keeps the complete captured Lahzalar markup and gallery behavior", ()
   );
 
   const bridge = readFileSync(new URL("bridge.js", appRoot), "utf8");
-  assert.match(bridge, /gallery:\s*config\.preview\s*\|\|\s*data\.gallery\?\.length/);
+  assert.match(bridge, /gallery:\s*data\.gallery\?\.some\(\(photo\) => photo\.src\?\.trim\(\)\)/);
   assert.match(bridge, /placeholder\.textContent = "✦"/);
   assert.match(bridge, /slides\[\(current \+ direction \+ slides\.length\) % slides\.length\]/);
   assert.match(bridge, /behavior: app\.reducedMotion \? "auto" : "smooth"/);

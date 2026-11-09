@@ -308,7 +308,7 @@
     const has = {
       program: data.program?.length,
       dresscode: data.dressCode?.enabled && Boolean(data.dressCode.style || data.dressCode.text || data.dressCode.note || data.dressCode.colors?.length),
-      gallery: config.preview || data.gallery?.length,
+      gallery: data.gallery?.some((photo) => photo.src?.trim()),
       contacts: data.contacts?.length,
       wishes: data.wishesEnabled,
       rsvp: data.rsvp?.enabled,

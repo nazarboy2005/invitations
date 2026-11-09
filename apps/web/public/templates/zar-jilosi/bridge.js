@@ -245,6 +245,7 @@
     renderGallery(sections[8], x.gallery || []);
     const dc = x.dressCode || {},
       ds = sections[9];
+    hide(ds, !dc.enabled || !(dc.style || dc.text || dc.note || dc.colors?.length));
     put(q("h2", ds), c().dress);
     put(q("p", ds), dc.note || dc.description || "");
     const swatches = all("[style*='background']", ds);
@@ -300,6 +301,7 @@
     hide(s, !items.some((i) => i.src));
   }
   async function renderWishes(s, p) {
+    hide(s, !d().wishesEnabled);
     const form = q("form", s);
     if (!form) return;
     const input = q("input", form),
@@ -386,6 +388,7 @@
     };
   }
   function renderRsvp(s, p) {
+    hide(s, !d().rsvp?.enabled);
     const form = q("form", s);
     if (!form) return;
     put(q("h2", s), c().rsvp);

@@ -188,7 +188,7 @@
       article.append(number, time, title, description); timeline.append(article);
     });
     if (data.programHeading) text(".events-section .section-title", data.programHeading);
-    show(".events-section", data.program.length > 0 || !!data.message);
+    show(".events-section", data.program.length > 0);
     text(".events-section .section-lede", data.message); show(".events-section .section-lede", !!data.message);
     show(".wishes-section, .invite-rsvp", data.wishesEnabled);
     text(".wishes-section .section-lede", ui().wish);

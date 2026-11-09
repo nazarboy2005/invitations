@@ -316,6 +316,9 @@ export async function mount(id, motion) {
     const people = [data.groom, data.bride].filter(Boolean);
     const computed = { ...data, empty: '', date: { ...data.date, monthYear: [data.date?.month, data.date?.year].filter(Boolean).join(', ') }, pair: people.join(' & '), child: (data.people || [data.groom, data.bride]).filter(Boolean).join(' & '), groomInitial: data.groom?.trim()[0] || '', brideInitial: data.bride?.trim()[0] || '', initials: people.map(p => p.trim()[0]).join('&'), hostInitial: data.hosts?.trim()[0] || '', deadline: data.rsvp?.deadline || '' };
     qa('[data-e-field]').forEach(e => { const value = read(computed, e.dataset.eField); e.textContent = value ?? ''; e.hidden = !value; });
+    qa('.section-family,.section-closing').forEach(section => {
+      if (section.querySelector('[data-e-field="hosts"]')) section.hidden = !data.hosts?.trim();
+    });
     q('.section-hero__date')?.setAttribute('aria-label', data.date?.long || '');
     // The source animates each greeting character. Build the same letter spans from authored content.
     motionApi.text?.();

@@ -16,6 +16,7 @@ import { randomUUID } from "node:crypto";
 import { templateVisitorFeatures } from "@taklifnoma/contracts/capabilities";
 import { enqueueGuestNotification } from "@/server/guest-notifications";
 import { scheduleGuestNotification } from "@/server/schedule-guest-notification";
+import { verifyTurnstile } from "@/server/turnstile";
 type Context = { params: Promise<{ id: string }> };
 export const runtime = "nodejs";
 export const maxDuration = 60;
@@ -36,6 +37,8 @@ export async function POST(request: Request, { params }: Context) {
       (invitation.rsvp.deadline && invitation.rsvp.deadline < today)
     )
       throw new ApiError(403, "RSVP_CLOSED", "Javob yuborish muddati tugagan.");
+    await submissionLimit(request, invitationId, "rsvp");
+    await verifyTurnstile(request, "guest_rsvp");
     const input = z
       .object({
         name: z.string().trim().min(1).max(100),
@@ -45,7 +48,6 @@ export async function POST(request: Request, { params }: Context) {
         guestToken: z.string().max(128).optional(),
       })
       .parse(await readJson(request, 5000));
-    await submissionLimit(request, invitationId, "rsvp");
     const guest = await resolveGuest(invitationId, input.guestToken);
     const previousToken = publicVisitorToken(request);
     const responseToken = previousToken ?? newPublicVisitorToken();

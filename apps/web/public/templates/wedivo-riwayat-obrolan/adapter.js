@@ -129,7 +129,7 @@
       all('[id]',sw).forEach(n=>{n.id=n.id.replace('bs-sw-1',sw.id);});
       sw.querySelector('.sw-n').textContent=c.name || c.hex;sw.querySelector('.sw-n').dataset.authored='';$('bs-sw').append(sw);
     });
-    section('galeri',gallery.length>0 || p.preview);
+    section('galeri',gallery.length>0);
     const rd=document.createElement('script');rd.type='application/json';rd.id='wedivo-rundown-data';
     rd.textContent=JSON.stringify(d.program.map(item=>({id:item.id,title:item.title,description:item.description || '',startTime:item.time,date:p.dateISO})));
     document.body.append(rd);
@@ -228,12 +228,6 @@
     });
     observe.observe(document.body,{childList:true,subtree:true,characterData:true});
     localize();
-    // The source's data initialization may hide empty galleries; the canonical preview
-    // keeps its source section with an empty album, without synthesizing photo content.
-    if(current.preview && !current.data.gallery.some(i=>i.src)){
-      $('sec-galeri').style.removeProperty('display');
-      all('[data-nav-target="galeri"],[data-go="galeri"]').forEach(n=>n.style.removeProperty('display'));
-    }
     window.__RIWAYAT_READY=true;
     if(window.__RIWAYAT.resumeOpen)requestAnimationFrame(()=>window.scrollTo(0,window.__RIWAYAT.resumeScroll || 0));
   }

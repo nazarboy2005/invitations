@@ -101,8 +101,7 @@
     swatches.forEach((node,i)=>{const color=d.dressCode.colors[i];node.hidden=!color;if(color){node.dataset.color=color.hex;node.style.setProperty('--sw',color.hex);node.querySelector('.swatch-fab')?.style.setProperty('--sw',color.hex);node.style.setProperty('--c',color.hex);node.setAttribute('aria-label',color.name);text('dc-sw-'+(i+1)+'-name',color.name);}});
     $('bgm').setAttribute('data-src',d.music.enabled?safeUrl(d.music.url):'');
     show('btn-sound',d.music.enabled && !!safeUrl(d.music.url));
-    section('gallery',window.PULAU.gallery.length>0 || p.preview);
-    if(p.preview && !window.PULAU.gallery.length)for(let i=0;i<d.gallery.length;i++){const cell=document.createElement('div');cell.className='gal-cell';cell.setAttribute('aria-hidden','true');cell.style.background='var(--cream)';$('gal-grid').append(cell);}
+    section('gallery',window.PULAU.gallery.length>0);
     const picker=document.createElement('div');picker.className='platform-locales';picker.setAttribute('aria-label',({en:'Language',ru:'Язык','uz-Latn':'Til','uz-Cyrl':'Тил'}[p.locale]));
     const labels={'uz-Latn':'Uz','uz-Cyrl':'Уз',en:'En',ru:'Ru'};
     for(const locale of p.enabledLocales){const b=document.createElement('button');b.type='button';b.textContent=labels[locale];b.setAttribute('aria-pressed',String(locale===p.locale));b.addEventListener('click',()=>parent.postMessage({type:ID+':locale',locale},location.origin));picker.append(b);}

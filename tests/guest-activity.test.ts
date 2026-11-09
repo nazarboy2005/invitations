@@ -2,6 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { PGlite } from "@electric-sql/pglite";
+import templateRenames from "../packages/contracts/src/template-renames.json";
 import {
   createInvitation,
   TEMPLATES,
@@ -22,6 +23,16 @@ import {
 test("every template has explicit visitor metadata; migration persists the same support without changing publication", async () => {
   assert.equal(new Set(TEMPLATES.map((t) => t.id)).size, TEMPLATES.length);
   const db = new PGlite();
+  // Migration 0226 ran before canonical identities were introduced in 0229.
+  const previousIds = new Map(
+    templateRenames.map((row) => [row.id, row.previousId]),
+  );
+  const historicalTemplates = new Map(
+    TEMPLATES.map((template) => [
+      previousIds.get(template.id) ?? template.id,
+      template,
+    ]),
+  );
   try {
     await db.exec(
       "CREATE TABLE templates(id text PRIMARY KEY,published boolean NOT NULL DEFAULT false)",
@@ -33,7 +44,7 @@ test("every template has explicit visitor metadata; migration persists the same 
         templateVisitorFeatures(t.id),
       );
       await db.query("INSERT INTO templates(id,published) VALUES ($1,$2)", [
-        t.id,
+        previousIds.get(t.id) ?? t.id,
         t.published,
       ]);
     }
@@ -51,13 +62,10 @@ test("every template has explicit visitor metadata; migration persists the same 
     for (const row of result.rows) {
       assert.deepEqual(
         row.visitor_features,
-        templateVisitorFeatures(row.id),
+        templateVisitorFeatures(historicalTemplates.get(row.id)!.id),
         row.id,
       );
-      assert.equal(
-        row.published,
-        TEMPLATES.find((t) => t.id === row.id)!.published,
-      );
+      assert.equal(row.published, historicalTemplates.get(row.id)!.published);
     }
     await db.exec("INSERT INTO templates(id) VALUES ('future-unverified')");
     const future = await db.query<{ visitor_features: unknown }>(
@@ -106,15 +114,13 @@ test("RSVP note support follows the template form independently of public wishes
 });
 
 test("activity sections follow actual forms, owner toggles and retained history", () => {
-  assert.deepEqual(
-    invitationActivityFeatures(createInvitation("oq-atirgul")),
-    { responses: false, wishes: false, receipts: false, intentions: false },
-  );
-  for (const id of [
-    "muhrli-maktub",
-    "tovus",
-    "asalari",
-  ]) {
+  assert.deepEqual(invitationActivityFeatures(createInvitation("oq-atirgul")), {
+    responses: false,
+    wishes: false,
+    receipts: false,
+    intentions: false,
+  });
+  for (const id of ["muhrli-maktub", "tovus", "asalari"]) {
     const features = invitationActivityFeatures(createInvitation(id));
     assert.equal(features.responses, false, id);
     assert.equal(features.wishes, true, id);
@@ -175,7 +181,7 @@ test("Telegram messages are short, escaped, sticker-free and link to private act
   );
   assert.equal(
     response.text,
-    "<b>Yangi javob</b> · A &amp; B\nAli &lt;b&gt;&amp;\nKelaman\nVegetarian",
+    "💌 <b>Taklifnomangizga yangi javob!</b>\n\n🎉 <b>A &amp; B</b>\n👤 Mehmon: <b>Ali &lt;b&gt;&amp;</b>\n✅ Javob: <b>Kelaman</b>",
   );
   const wish = guestTelegramMessage(
     { ...shared, kind: "wish", message: "<script>".repeat(300) },
@@ -185,15 +191,44 @@ test("Telegram messages are short, escaped, sticker-free and link to private act
   assert.ok(wish.text.length < 4096);
   assert.ok(!wish.text.includes("<script>"));
   assert.equal(wish.reply_markup.inline_keyboard.length, 2);
-  assert.equal(
-    guestTelegramMessage(
+  for (const [status, description] of [
+    ["pending", "❓Bu tilakni"],
+    ["approved", "✅ Tilak veb-sahifada ko‘rsatiladi."],
+    ["hidden", "🗑 Tilak veb-sahifada ko‘rsatilmaydi."],
+    ["deleted", "🗑 Tilak veb-sahifada ko‘rsatilmaydi."],
+  ] as const) {
+    const notification = guestTelegramMessage(
       { ...shared, kind: "wish", message: "Nice" },
       "Wedding",
       "https://fotiha.example",
-      false,
-    ).reply_markup.inline_keyboard.length,
-    1,
-  );
+      status,
+    );
+    assert.ok(notification.text.includes(description), status);
+    assert.deepEqual(
+      notification.reply_markup.inline_keyboard,
+      [
+        [
+          {
+            text: "✅ Ha, ko‘rsatilsin",
+            callback_data: `wish_approve:${shared.recordId}`,
+          },
+          {
+            text: "🗑 Yo‘q, o‘chirilsin",
+            callback_data: `wish_hide:${shared.recordId}`,
+          },
+        ],
+        [
+          {
+            text: "Faollik",
+            web_app: {
+              url: `https://fotiha.example/dashboard/${shared.invitationId}/activity`,
+            },
+          },
+        ],
+      ],
+      status,
+    );
+  }
   const receipt = guestTelegramMessage(
     { ...shared, kind: "receipt" },
     "Wedding",

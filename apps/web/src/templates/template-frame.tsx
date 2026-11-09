@@ -4,6 +4,7 @@ import { forwardRef, useCallback, useEffect, useRef, type ComponentProps } from 
 import { isTemplateDocument } from "../lib/public-asset";
 import { TEMPLATE_READY_EVENT } from "./observe-template-documents";
 import { pauseOffscreenEffects } from "./pause-offscreen-effects";
+import { installTurnstileFetch } from "../lib/turnstile-client";
 
 type Props = Omit<ComponentProps<"iframe">, "onLoad" | "ref"> & {
   onReady: (frame: HTMLIFrameElement) => void;
@@ -32,6 +33,13 @@ export const TemplateFrame = forwardRef<HTMLIFrameElement, Props>(function Templ
     const initialize = (doc: Document) => {
       if (!active || frame.contentDocument !== doc || initialized.has(doc)) return;
       initialized.add(doc);
+      // Captured designs can set display:flex/grid on optional containers,
+      // overriding the browser's default [hidden] rule. Honor the adapters'
+      // visibility decisions consistently in Studio and public invitations.
+      const visibilityStyle = doc.createElement("style");
+      visibilityStyle.dataset.fotihaVisibility = "";
+      visibilityStyle.textContent = '[hidden]:not([hidden="until-found"]){display:none!important}';
+      doc.head.append(visibilityStyle);
       cleanups.push(pauseOffscreenEffects(doc));
       // Template previews run outside the public invitation route. Keep a
       // frame-level safety net so a template form cannot post visitor data if
@@ -119,6 +127,9 @@ export const TemplateFrame = forwardRef<HTMLIFrameElement, Props>(function Templ
             return nativeFetch(input, init);
           };
         }
+      }
+      if (/^\/i\/[^/]+\/?$/.test(window.location.pathname) && doc.defaultView) {
+        cleanups.push(installTurnstileFetch(doc.defaultView, doc.baseURI));
       }
       latest.current(frame);
       const injectVisitorControls = () => {

@@ -4,6 +4,7 @@
   const root = document.querySelector('[data-chorlove-template="oq-yasmin"]');
   if (!root) return;
   const sections = [...root.querySelectorAll("section")];
+  const galleryCard = sections[1]?.querySelector(".grid.grid-cols-2 > div")?.cloneNode(true);
   const copy = {
     "uz-Latn": {
       title: "Taklifnoma", welcome: "Assalomu alaykum, aziz mehmon", couple: "Kuyov & Kelin",
@@ -411,7 +412,7 @@
   function renderGallery(gallery, p, c) {
     const node = sections[1], grid = node?.querySelector(".grid.grid-cols-2");
     if (!grid) return;
-    const original = grid.querySelector("div.group") || grid.firstElementChild;
+    const original = galleryCard;
     if (!original) return;
     const photos = p.preview ? gallery : gallery.filter((item) => item.src);
     grid.replaceChildren();
@@ -431,7 +432,7 @@
       }
       grid.append(card);
     }
-    hide(node, !p.preview && photos.length === 0);
+    hide(node, photos.length === 0);
   }
 
   function openLightbox(items, start, c) {
@@ -517,6 +518,7 @@
 
   async function renderWishes(wishes, p, c) {
     const node = sections[5], list = node?.querySelector("ul"), form = node?.querySelector("form");
+    hide(node, !p.data?.wishesEnabled);
     if (!node || !list || !form) return;
     tx(node.querySelector("h2"), c.wishes);
     const input = form.querySelector("input"), area = form.querySelector("textarea"), button = form.querySelector('button[type="submit"]');
@@ -535,7 +537,7 @@
       name.className = "font-semibold"; name.textContent = wish.name || ""; message.className = "mt-2 leading-relaxed"; message.textContent = wish.text || wish.message || "";
       item.append(name, message); list.append(item);
     }
-    hide(node, !p.preview && !p.data?.wishesEnabled);
+    hide(node, !p.data?.wishesEnabled);
     form.onsubmit = async (event) => {
       event.preventDefault();
       if (p.preview) { tx(status, c.preview); return; }
@@ -554,6 +556,7 @@
 
   function wireRsvp(c) {
     const node = sections[6], form = node?.querySelector("form"); if (!form) return;
+    hide(node, !payload.data?.rsvp?.enabled);
     tx(node.querySelector("h2"), c.rsvp);
     const intro = [...node.querySelectorAll("p")].find((p) => !p.closest("form")); tx(intro, c.rsvpHint);
     const input = form.querySelector("input"), submit = form.querySelector('button[type="submit"]');

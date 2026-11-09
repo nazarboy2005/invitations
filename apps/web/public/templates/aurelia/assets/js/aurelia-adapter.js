@@ -76,6 +76,7 @@
     const form = $("#rsvpForm");
     if (form) {
       form.hidden = !data.rsvp?.enabled;
+      const section = form.closest(".rsvp"); if (section) section.hidden = !data.rsvp?.enabled;
       const name = $("#rsvpName"); if (name) name.value = data.guestName || name.value || "";
       const wish = $("#rsvpWish"); if (wish) wish.hidden = !data.wishesEnabled;
       const yes = $("#rsvpYes"), no = $("#rsvpNo"); if (yes) yes.required = true; if (no) no.required = true;
