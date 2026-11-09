@@ -1,0 +1,24 @@
+{
+  "tool": "Built-in image_gen",
+  "revision": 2,
+  "assets": [
+    {
+      "path": "apps/web/public/images/activity/romantic-desktop.webp",
+      "initialPrompt": "Use case: photorealistic-natural. Create a production website BACKGROUND ONLY, landscape 16:9, 1920x1080 feel. Match the newly attached Fotiha Tilaklar wedding dashboard reference: lush natural cream and soft coral-pink garden roses with tiny white baby's breath and muted olive leaves, a large detailed bouquet cropped by upper-right edge and small floral arrangements in bottom-left and bottom-right corners. Rich natural peach/champagne silk surface with flowing soft folds across bottom edge, a few rose petals floating at outer edges. Warm flattering rosy light, realistic delicate petal textures, editorial wedding photography. Main color peach blush with golden warm undertones, richer coral rose detail; avoid washed-out almost-white pink, avoid gray, avoid magenta. Keep broad calm subtle peach negative space across left 55% and central 75% for dark text and glass UI panels, flowers confined to corners. Background is one continuous full-screen scene, no architectural arches. Absolutely no text, UI, panels, borders, logos, envelopes, devices or watermark.",
+      "finalEditPrompt": "Edit target Image 1, using Image 2 strictly as COLOR and floral styling reference. Keep Image 1's landscape background-only composition and negative space. Match the soft natural colors of Image 2 EXACTLY: muted dusty rose/peach blush background, creamy ivory roses and light blush-pink roses, muted olive leaves. Remove Image 1's orange cast and deep coral flowers; this is not orange, gold, yellow, salmon, or washed-out white. Soft romantic diffused light and depth like reference, gentle pink silk draping bottom corners and subtle sparse petals. Reference UI must NEVER appear. Pure background, no text, panels, envelope, icons, logos or watermark. Landscape 16:9.",
+      "source": "C:/Users/Asus/.codex/generated_images/01a1bfd3-a065-7810-b059-4daf79799885/exec-7c718304-a9b5-4306-aa74-f9c7ac894d77.png"
+    },
+    {
+      "path": "apps/web/public/images/activity/romantic-mobile.webp",
+      "prompt": "Recompose Image 1 into a portrait 9:19 FULL VIEWPORT website background, same exact muted dusty rose/peach blush colors, ivory and soft natural pink roses and tiny white baby's breath, realistic wedding editorial photo. Large bouquet cropped on upper-right edge only, concentrated in rightmost 35% from 12% to 40% of image height. Keep left 65% of upper half calm and empty for dark heading and navbar. Small cream/pink floral arrangements in bottom corners, silky pale rose drape along very bottom, only a few delicate petals at edges. Broad soft peach-rose negative space center for translucent cards. Floral details visible and dimensional, no white wash, no orange cast, no architecture. Preserve Image 1 palette precisely. Background only: NO text, UI, devices, panels, envelope, logos, borders or watermark. Portrait 9:19.",
+      "source": "C:/Users/Asus/.codex/generated_images/01a1bfd3-a065-7810-b059-4daf79799885/exec-0fc13261-d842-47ff-9cc9-a28e37cf4e27.png"
+    },
+    {
+      "path": "apps/web/public/images/activity/sealed-envelope.webp",
+      "prompt": "Use case: product-mockup. Website decorative asset, a single luxury ivory paper envelope with triangular folded flap and a glossy deep burgundy wax seal embossed with a small heart. Envelope viewed slightly from above, tilted counterclockwise 8 degrees, front flap facing viewer, tactile cream paper with delicate blush reflections. Detailed photorealistic 3D stationery render. Entire object in frame with generous transparent margin, very soft contact shadow only beneath envelope. No text, lettering, logos, flowers, background scene or watermark. Genuine transparent background, horizontal envelope occupying a square canvas.",
+      "source": "C:/Users/Asus/.codex/generated_images/01a1bfd3-a065-7810-b059-4daf79799885/exec-8b623a55-2e5f-4c52-9009-63e19c00d7e9.png",
+      "transparentBackground": true
+    }
+  ],
+  "processing": "Backgrounds converted to WebP quality 90; transparent envelope resized to 460px and converted to WebP quality 90. Generated PNG originals and user reference captures remain untouched. No external runtime service dependencies."
+}

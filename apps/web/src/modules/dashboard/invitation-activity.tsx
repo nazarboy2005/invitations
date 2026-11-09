@@ -71,6 +71,7 @@ type Activity = {
     createdAt: string;
   }>;
   totals: {
+    wishes: number;
     responses: number;
     guests: number;
     pending: number;
@@ -222,8 +223,21 @@ export function InvitationActivity({
   return (
     <main
       id="main"
+      data-activity-background={adminContext ? undefined : "roses"}
       className={`${styles.page} ${script.variable} ${activityDisplay.variable} ${adminContext ? "" : styles.ownerPage}`}
     >
+      {!adminContext && (
+        <style>{`
+          html:has([data-activity-background="roses"]) {
+            background: #efd1c8 url("${publicAsset("/images/activity/romantic-desktop.webp")}") center top / cover fixed no-repeat;
+          }
+          @media (max-width: 700px) {
+            html:has([data-activity-background="roses"]) {
+              background-image: url("${publicAsset("/images/activity/romantic-mobile.webp")}");
+            }
+          }
+        `}</style>
+      )}
       {!adminContext && (
         <picture className={styles.background} aria-hidden="true">
           <source
@@ -690,11 +704,49 @@ export function InvitationActivity({
             )}
             {activeSection === "wishes" && (
               <section
-                className={styles.sectionPanel}
+                className={`${styles.sectionPanel} ${styles.wishesPanel}`}
                 role="tabpanel"
                 id={`activity-panel-wishes-${invitation.id}`}
                 aria-labelledby={`activity-tab-wishes-${invitation.id}`}
               >
+                <div className={styles.wishesHero}>
+                  <img
+                    className={styles.wishesFlowers}
+                    src={publicAsset("/images/activity/romantic-desktop.webp")}
+                    alt=""
+                    aria-hidden="true"
+                  />
+                  <div className={styles.wishesSummary}>
+                    <img
+                      src={publicAsset("/images/activity/sealed-envelope.webp")}
+                      alt=""
+                      aria-hidden="true"
+                    />
+                    <div>
+                      <strong>
+                        {data.totals.wishes ?? data.wishes.length}
+                      </strong>
+                      <span>Jami tilaklar</span>
+                    </div>
+                  </div>
+                  <div className={styles.wishesGreeting}>
+                    <div className={styles.wishFlourish} aria-hidden="true">
+                      <span />
+                      <Heart />
+                      <span />
+                    </div>
+                    <p>
+                      “Baxtingiz doim
+                      <br />
+                      bardavom bo‘lsin!”
+                    </p>
+                    <div className={styles.wishFlourish} aria-hidden="true">
+                      <span />
+                      <Heart />
+                      <span />
+                    </div>
+                  </div>
+                </div>
                 <div className={styles.sectionHeading}>
                   <div className={styles.panelHeading}>
                     <div>
@@ -745,31 +797,38 @@ export function InvitationActivity({
                   )
                   .map((item) => (
                     <article className={styles.wishCard} key={item.id}>
-                      <Heart
-                        className={styles.wishHeart}
-                        size={28}
-                        aria-hidden="true"
-                      />
+                      <span className={styles.wishAvatar} aria-hidden="true">
+                        {item.name
+                          .trim()
+                          .split(/\s+/)
+                          .filter(Boolean)
+                          .slice(0, 2)
+                          .map((part) => Array.from(part)[0])
+                          .join("")
+                          .toLocaleUpperCase("uz-Latn")}
+                      </span>
                       <div className={styles.wishMessage}>
                         <div className={styles.wishMessageHeading}>
                           <span className={styles.wishAuthor}>{item.name}</span>
-                          <time dateTime={item.createdAt}>
-                            <Clock3 size={14} />
-                            {formatDate(
-                              item.createdAt,
-                              "uz-Latn",
-                              invitation.timezone,
-                              {
-                                day: "numeric",
-                                month: "short",
-                                hour: "2-digit",
-                                minute: "2-digit",
-                              },
-                            )}
-                          </time>
                         </div>
                         <p className={styles.message}>{item.message}</p>
                       </div>
+                      <time
+                        className={styles.wishTime}
+                        dateTime={item.createdAt}
+                      >
+                        {formatDate(
+                          item.createdAt,
+                          "uz-Latn",
+                          invitation.timezone,
+                          {
+                            day: "numeric",
+                            month: "short",
+                            hour: "2-digit",
+                            minute: "2-digit",
+                          },
+                        )}
+                      </time>
                       <span
                         className={`${styles.wishStatus} ${item.status === "pending" ? styles.pending : styles.approved}`}
                       >
@@ -805,7 +864,6 @@ export function InvitationActivity({
                             title="O‘chirish"
                           >
                             <Trash2 size={17} />
-                            O‘chirish
                           </button>
                         )}
                       </div>
@@ -983,8 +1041,14 @@ export function InvitationActivity({
             busy={busy}
           />
         )}
-        <footer className={styles.footer}>
-          <span>Baxt ulashish — eng go‘zal an’ana</span>
+        <footer
+          className={`${styles.footer} ${activeSection === "wishes" ? styles.wishesFooter : ""}`}
+        >
+          <span>
+            {activeSection === "wishes"
+              ? "Har bir tilak — biz uchun muhim"
+              : "Baxt ulashish — eng go‘zal an’ana"}
+          </span>
           <Heart size={25} strokeWidth={1.2} aria-hidden="true" />
         </footer>
       </div>

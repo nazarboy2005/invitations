@@ -50,7 +50,7 @@ export async function GET(request: Request, { params }: Context) {
         wishes: wishes.slice(0, 50),
         receipts: receipts.slice(0, 50),
         giftIntentions: giftIntentions.slice(0, 50),
-        totals,
+        totals: { ...totals, wishes: counts.wishes },
         responseHasMore: responses.length > 50,
         sectionHasMore: { responses: responses.length > 50, wishes: wishes.length > 50, receipts: receipts.length > 50, intentions: giftIntentions.length > 50 },
         hasMore:

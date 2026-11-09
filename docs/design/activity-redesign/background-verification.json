@@ -1,0 +1,11 @@
+{
+  "checks": [
+    "total wish count independent of current page",
+    "fixed viewport artwork at desktop and two phone widths",
+    "same background element and source across tabs",
+    "3px scrollbars with transparent track and image beneath gutter",
+    "existing navbar retains backdrop blur"
+  ],
+  "passed": 5,
+  "syntheticDataOnly": true
+}
