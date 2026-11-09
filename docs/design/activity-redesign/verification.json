@@ -1,0 +1,25 @@
+{
+  "checks": [
+    "server search",
+    "stat-card filtering",
+    "filter control",
+    "clipboard and feedback",
+    "keyboard tabs",
+    "wish status filter",
+    "wish approval",
+    "delete confirmation and cancellation",
+    "receipt moderation",
+    "gift intentions",
+    "zero and empty state",
+    "refresh error and recovery",
+    "template-aware sections",
+    "no supported features",
+    "all four sections at eight widths, including RSVP notes",
+    "admin moderation headers",
+    "reduced motion",
+    "long content and safe text rendering"
+  ],
+  "passed": 18,
+  "pageErrors": [],
+  "syntheticDataOnly": true
+}
