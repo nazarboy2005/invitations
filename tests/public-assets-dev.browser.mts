@@ -23,6 +23,7 @@ try {
     await cdp.send("Network.enable");
     await cdp.send("Network.setBlockedURLs", { urls: ["*telegram.org/*"] });
     const failures: string[] = [];
+    page.on("pageerror", (error) => failures.push(error.message));
     page.on("response", (response) => {
       const url = new URL(response.url());
       if (
@@ -36,9 +37,11 @@ try {
     for (const mode of ["navigation", "refresh", "uncached refresh"]) {
       if (mode === "uncached refresh")
         await cdp.send("Network.setCacheDisabled", { cacheDisabled: true });
-      if (mode === "navigation")
-        await page.goto(origin, { waitUntil: "domcontentloaded" });
-      else await page.reload({ waitUntil: "domcontentloaded" });
+      const response =
+        mode === "navigation"
+          ? await page.goto(origin, { waitUntil: "domcontentloaded" })
+          : await page.reload({ waitUntil: "domcontentloaded" });
+      assert.equal(response?.status(), 200, `${mode} must render successfully`);
       await page.waitForFunction(() => {
         const image = document.querySelector<HTMLImageElement>(
           'img[src*="invitation-scene"]',
@@ -60,6 +63,40 @@ try {
         await page.locator(selector).first().scrollIntoViewIfNeeded();
         await page.waitForTimeout(150);
       }
+      await page.waitForFunction(
+        () => {
+          const images = [
+            ...document.querySelectorAll<HTMLImageElement>("main img"),
+          ];
+          return (
+            images.length > 20 &&
+            images.every((image) => image.complete && image.naturalWidth > 0)
+          );
+        },
+        null,
+        { timeout: 60_000 },
+      );
+      assert.equal(
+        await page.evaluate(
+          () => document.documentElement.scrollWidth > innerWidth,
+        ),
+        false,
+        "landing page must fit the viewport",
+      );
+      assert.deepEqual(
+        await page
+          .locator('a[href^="#"]')
+          .evaluateAll((links) =>
+            links
+              .map((link) => link.getAttribute("href")!)
+              .filter(
+                (href) =>
+                  href.length > 1 && !document.getElementById(href.slice(1)),
+              ),
+          ),
+        [],
+        "section links must target existing sections",
+      );
       results.push({ width: viewport.width, mode, heroLoaded: true });
     }
     await page.goto(origin + "/templates", { waitUntil: "domcontentloaded" });

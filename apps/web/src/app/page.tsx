@@ -27,11 +27,11 @@ export default async function Home() {
   );
   const featuredTemplates = selectFeaturedTemplates(visibleTemplates);
   const showcasePapers = [
-    "anor",
-    "bulutlar-qasri",
-    "kuzgi-chinor",
-    "bogi-eram",
-  ].flatMap((id) => {
+    { id: "anor", artwork: "anor" },
+    { id: "bulutlar-qasri", artwork: "cloud-castle" },
+    { id: "kuzgi-chinor", artwork: "kuzgi-chinor" },
+    { id: "bogi-eram", artwork: "bogi-eram-cover" },
+  ].flatMap(({ id, artwork }) => {
     const template = visibleTemplates.find((template) => template.id === id);
     return template
       ? [
@@ -39,7 +39,7 @@ export default async function Home() {
             id,
             name: template.name,
             description: template.description,
-            image: publicAsset(`/images/home/paper/${id === "bogi-eram" ? "bogi-eram-cover" : id}.webp`),
+            image: publicAsset(`/images/home/paper/${artwork}.webp`),
             href: `/preview?template=${encodeURIComponent(publicTemplateId(id))}`,
           },
         ]

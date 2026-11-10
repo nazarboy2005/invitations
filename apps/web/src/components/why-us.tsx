@@ -98,6 +98,7 @@ function InvitationPhone({ previewImage }: { previewImage: string }) {
           fill
           sizes="(max-width: 700px) 220px, 310px"
           className={styles.poster}
+          unoptimized
         />
         <span className={styles.phoneIsland} />
       </div>
@@ -140,6 +141,7 @@ function SceneDetail({
               alt=""
               fill
               sizes="(max-width: 700px) 250px, 380px"
+              unoptimized
             />
           </div>
         </div>
