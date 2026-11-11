@@ -17,4 +17,5 @@ export const CATALOG_COVERS: Readonly<Record<string, string>> = {
     ].map((id) => [id, `/images/catalog/${id}-cover.webp`]),
   ),
   "umr-bahori": "/templates/umr-bahori/preview.webp",
+  "osmon": "/images/catalog/osmon-cover.webp",
 };

@@ -138,7 +138,7 @@ export function StudioTemplatePicker({
               {studioTemplateDescription(template)}
             </span>
             <span className={styles.templatePrice}>
-              {template.format === "image" ? "Rasm · 5:7" : formatPrice(template.priceMinor)}
+              {formatPrice(template.priceMinor)}
             </span>
           </span>
         </button>
@@ -165,12 +165,12 @@ export function StudioTemplatePicker({
   return (
     <div className={styles.designPicker}>
       {selected ? (
-        <div className={styles.designSummary}>
+        <div className={styles.designSummary} data-format={selected.format}>
           <img src={templatePoster(selected)} alt="" />
           <div>
             <small>Tanlangan dizayn</small>
             <strong>{selected.name}</strong>
-            <span>{selected.format === "image" ? "Rasm · 5:7" : formatPrice(selected.priceMinor)}</span>
+            <span>{formatPrice(selected.priceMinor)}</span>
           </div>
           <button
             ref={changeButton}

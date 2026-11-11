@@ -2782,6 +2782,10 @@
   object-position: top;
   border-radius: 7px;
 }
+.designSummary[data-format="image"] > img {
+  aspect-ratio: auto;
+  height: auto;
+}
 .designSummary > div {
   display: grid;
   gap: 8px;

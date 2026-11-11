@@ -23,6 +23,31 @@ const order: TelegramPaymentOrder = {
 };
 process.env.APP_URL = "https://invitation.example";
 
+test("image payment confirmations offer PNG download without promising website publication", () => {
+  const imageOrder = {
+    ...order,
+    invitation_status: "draft",
+    slug: null,
+    amount_minor: "500000",
+    data: { ...data, templateId: "oq-atirgul" },
+  };
+  const message = paymentTelegramMessage(imageOrder);
+  assert.match(message.text, /PNG rasmni/);
+  assert.match(message.text, /5\s*000/);
+  assert.doesNotMatch(message.text, /nashr|\/i\//);
+  assert.equal(
+    message.reply_markup.inline_keyboard[0][0].text,
+    "📱 PNG yuklab olish",
+  );
+  const pending = paymentTelegramMessage({
+    ...imageOrder,
+    status: "PENDING",
+    verified_at: null,
+  });
+  assert.match(pending.text, /tasdiq kelgach, PNG/);
+  assert.doesNotMatch(pending.text, /nashr/);
+});
+
 test("verified, published payment has an escaped formatted receipt, amount and usable invitation URL", () => {
   const message = paymentTelegramMessage(order);
   assert.equal(message.parse_mode, "HTML");

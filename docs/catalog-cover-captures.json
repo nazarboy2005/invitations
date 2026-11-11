@@ -173,6 +173,22 @@
       "captureSha256": "adfd12191cccdda2630eead59c8930cf5b2e7461d016088b5c5329b73ad2cb83",
       "action": "none; first page, fonts settled, local framework indicator hidden",
       "source": "Local real-renderer preview screenshot; current canonical corporate fixture"
+    },
+    {
+      "id": "osmon",
+      "captured": "2026-11-11",
+      "route": "/preview?template=osmon&poster=1&qaSilent=1",
+      "scene": "Opened sky hero, names above card caption, floating cottage visible",
+      "viewport": {
+        "width": 480,
+        "height": 800
+      },
+      "file": "apps/web/public/images/catalog/osmon-cover.webp",
+      "bytes": 27856,
+      "sha256": "fa67ff3d5bfe99fc69575446cde7062c3345aec7a6ea77071778723f1aa3e49c",
+      "captureSha256": "d59b0a04f182cb9732f6554264083857419f824efd4367495a9a5c52ab9a5c54",
+      "action": "Click #os-open; wait for splash dismissal and fonts; scroll source document 180px to keep names above the listing caption; reduced-motion capture; Next dev indicator excluded",
+      "scrollY": 180
     }
   ]
 }

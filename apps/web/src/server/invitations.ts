@@ -110,6 +110,7 @@ export async function saveInvitation(
       const previous = stored!;
       if (
         rows[0].status === "draft" &&
+        !previous.imageExportedAt &&
         paymentIdentity(previous) !== paymentIdentity(invitation)
       ) {
         const [order] =

@@ -26,6 +26,7 @@ import {
 import styles from "./full-template-preview.module.css";
 import { observeTemplateDocuments } from "../../templates/observe-template-documents";
 import { prepareTemplateOpening } from "../../templates/prepare-template-opening";
+import { isTemplateDocument } from "../../lib/public-asset";
 
 // Load only the renderer selected by this preview, rather than every design.
 const AnorInvitation = dynamic(() => import("@/templates/anor/renderer").then((module) => module.AnorInvitation));
@@ -205,7 +206,7 @@ export function FullTemplatePreview({
     function start(frame: HTMLIFrameElement) {
       timers.push(setTimeout(() => {
         const doc = frame.contentDocument;
-        if (!doc || !doc.URL.startsWith(`${window.location.origin}/templates/`) || doc.readyState !== "complete" || opened.has(doc)) return;
+        if (!doc || !isTemplateDocument(doc.URL, window.location.origin) || doc.readyState !== "complete" || opened.has(doc)) return;
         opened.add(doc);
         // Only catalog embeds hide scrollbar chrome; full previews remain scrollable.
         const scrollbarStyle = doc.createElement("style");

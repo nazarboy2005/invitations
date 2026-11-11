@@ -55,6 +55,8 @@ export function PaymentReturn({
   const inFlight = useRef(false);
   const order = context?.order;
   const invitation = context?.invitation;
+  const isImage =
+    templateById(invitation?.templateId ?? "")?.format === "image";
   const paid = order?.status === "SUCCEEDED";
   const pending = !!order && pendingStates.includes(order.status);
   const retryable = !!order && retryableStates.includes(order.status);
@@ -263,9 +265,13 @@ export function PaymentReturn({
         : published
           ? "Taklifnomangiz tayyor"
           : paid
-            ? "Nashrni yakunlang"
+            ? isImage
+              ? "Rasmni yuklab oling"
+              : "Nashrni yakunlang"
             : context?.publishingMode === "free" && !order
-              ? "Taklifnomani nashr qiling"
+              ? isImage
+                ? "Rasmni yuklab oling"
+                : "Taklifnomani nashr qiling"
               : order?.status === "PROCESSING" || order?.status === "REJECTED"
                 ? "To‘lov tasdiqlanmoqda"
                 : order && !pending && !retryable
@@ -399,8 +405,9 @@ export function PaymentReturn({
                     <Check size={17} aria-hidden="true" /> To‘langan
                   </p>
                   <p>
-                    To‘lov qabul qilindi. Taklifnoma ma’lumotlarini tekshirib,
-                    nashrni yakunlang. Qo‘shimcha to‘lov talab qilinmaydi.
+                    {isImage
+                      ? "To‘lov qabul qilindi. PNG rasmni Studio orqali yuklab oling. Qo‘shimcha to‘lov talab qilinmaydi."
+                      : "To‘lov qabul qilindi. Taklifnoma ma’lumotlarini tekshirib, nashrni yakunlang. Qo‘shimcha to‘lov talab qilinmaydi."}
                   </p>
                   {order?.publicationError && (
                     <p className={styles.alert} role="alert">
@@ -408,7 +415,7 @@ export function PaymentReturn({
                     </p>
                   )}
                   <Link className="button" href={editUrl}>
-                    Nashrni yakunlash{" "}
+                    {isImage ? "PNG yuklab olish" : "Nashrni yakunlash"}{" "}
                     <ArrowRight size={16} aria-hidden="true" />
                   </Link>
                 </>
@@ -418,9 +425,14 @@ export function PaymentReturn({
                 </p>
               ) : context.publishingMode === "free" && !order ? (
                 <>
-                  <p>Ma’lumotlarni tekshirib, taklifnomani nashr qiling.</p>
+                  <p>
+                    {isImage
+                      ? "Ma’lumotlarni tekshirib, PNG rasmni yuklab oling."
+                      : "Ma’lumotlarni tekshirib, taklifnomani nashr qiling."}
+                  </p>
                   <Link className="button" href={editUrl}>
-                    Nashr qilish <ArrowRight size={16} aria-hidden="true" />
+                    {isImage ? "PNG yuklab olish" : "Nashr qilish"}{" "}
+                    <ArrowRight size={16} aria-hidden="true" />
                   </Link>
                 </>
               ) : (
@@ -433,9 +445,11 @@ export function PaymentReturn({
                   <p>
                     {retryable
                       ? "Avvalgi to‘lov yakunlanmagan. Shu taklifnoma uchun qayta to‘lov boshlashingiz mumkin."
-                      : pending
-                        ? "To‘lov tasdiqlangach, taklifnomangiz avtomatik nashr qilinadi."
-                        : "Bir martalik to‘lov. Tasdiqlangach, taklifnomangiz nashr qilinadi."}
+                      : isImage
+                        ? "Bir martalik to‘lov. Tasdiqlangach, PNG rasmni yuklab olishingiz mumkin."
+                        : pending
+                          ? "To‘lov tasdiqlangach, taklifnomangiz avtomatik nashr qilinadi."
+                          : "Bir martalik to‘lov. Tasdiqlangach, taklifnomangiz nashr qilinadi."}
                   </p>
                   {order?.checkoutUrl && pending && (
                     <CheckoutActions

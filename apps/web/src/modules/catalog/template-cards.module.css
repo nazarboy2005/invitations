@@ -22,7 +22,15 @@
   pointer-events: none;
   cursor: inherit;
 }
-.art[data-format="image"] .poster{object-fit:contain}
+.art[data-format="image"] {
+  aspect-ratio: auto;
+}
+.art[data-format="image"] .poster {
+  position: relative;
+  display: block;
+  height: auto;
+  object-fit: contain;
+}
 .poster {
   position: absolute;
   inset: 0;

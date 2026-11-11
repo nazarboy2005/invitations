@@ -13,6 +13,7 @@ import { renderStaticImage } from "./static-image-renderer";
 import { staticInvitationQrUrl } from "./static-location-links";
 import { invitationImageFilename } from "@/modules/static-images/filename";
 import { clientAddress, enforceRateLimit } from "./rate-limit";
+import { assertStaticImageEntitlement } from "./static-image-entitlement";
 
 export async function staticImageLimit(
   request: Request,
@@ -28,7 +29,7 @@ export async function staticImageLimit(
   });
 }
 
-/** Free testing only: deliberately separate from Click and web publication. */
+/** Verified download entitlement is separate from website publication. */
 export async function downloadStaticImage(
   id: string,
   revision: number,
@@ -49,9 +50,11 @@ export async function downloadStaticImage(
   if (!invitation.enabledLocales.includes(locale))
     throw new ApiError(400, "INVALID_LOCALE", "Bu til yoqilmagan.");
   assertPublishable(invitation);
+  const sql = getDb();
+  // Reject unpaid requests before QR allocation or expensive PNG rendering.
+  await assertStaticImageEntitlement(sql, invitation, owner.id);
   const qrUrl = await staticInvitationQrUrl(invitation, locale);
   const bytes = await renderStaticImage(invitation, locale, false, qrUrl);
-  const sql = getDb();
   let exportedAt = stored.imageExportedAt;
   await sql.begin(async (tx) => {
     const [row] =
@@ -78,6 +81,8 @@ export async function downloadStaticImage(
         "TEMPLATE_UNAVAILABLE",
         "Dizayn hozir mavjud emas.",
       );
+    // Recheck under the invitation lock: payment/content may change while rendering.
+    await assertStaticImageEntitlement(tx, current, owner.id);
     const [event] =
       await tx`SELECT now() AS exported_at,((${invitation.startsAt}::timestamp)::date+1)::timestamp AT TIME ZONE ${invitation.timezone} AS deadline`;
     if (!current.imageExportedAt) {
@@ -85,7 +90,8 @@ export async function downloadStaticImage(
         throw new ApiError(400, "EVENT_ENDED", "Tadbir sanasini tekshiring.");
       exportedAt = new Date(event.exported_at).toISOString();
       await tx`UPDATE invitations SET data=${tx.json({ ...current, imageExportedAt: exportedAt })},identity_locked_at=COALESCE(identity_locked_at,${event.exported_at}),edit_deadline_at=COALESCE(edit_deadline_at,${event.deadline}),approved_event_date=COALESCE(approved_event_date,${invitation.startsAt.slice(0,10)}),updated_at=now() WHERE id=${id}`;
-      await tx`INSERT INTO invitation_audit_log(invitation_id,actor_id,action,previous_values,new_values) VALUES(${id},${owner.id},'image_finalized_free',${tx.json({ revision })},${tx.json({ revision, locale, exportedAt })})`;
+      const action = process.env.PUBLISHING_MODE === "paid" ? "image_finalized_paid" : "image_finalized_free";
+      await tx`INSERT INTO invitation_audit_log(invitation_id,actor_id,action,previous_values,new_values) VALUES(${id},${owner.id},${action},${tx.json({ revision })},${tx.json({ revision, locale, exportedAt })})`;
     } else exportedAt = current.imageExportedAt;
   });
   return { bytes, exportedAt: exportedAt!, filename: invitationImageFilename(invitation, locale) };

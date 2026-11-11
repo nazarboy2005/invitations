@@ -1266,12 +1266,50 @@ export function Studio({
       (paymentOrder?.invitationId === current.id &&
         paymentOrder.status === "SUCCEEDED");
     if (
-      action === "publish" &&
+      (action === "publish" || (action === "download" && !current.imageExportedAt && !!selectedTemplate?.priceMinor)) &&
       publishingMode === "paid" &&
       !adminContext &&
       !paymentAlreadyVerified
     )
       checkoutWindow = window.open("about:blank", "_blank");
+    async function startSavedCheckout(saved: Invitation) {
+      if (adminContext)
+        throw new Error(
+          "To‘lovni taklifnoma egasi o‘z hisobidan yakunlashi kerak.",
+        );
+      if (!selectedTemplate)
+        throw new Error("Narxni tekshirish uchun dizaynni qayta tanlang.");
+      const checkout = await studioFetch(
+        `/api/invitations/${saved.id}/checkout`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            revision: saved.revision,
+            expectedAmountMinor: selectedTemplate.priceMinor,
+          }),
+        },
+      );
+      const result = await checkout.json();
+      if (!checkout.ok)
+        throw new Error(
+          result.error?.message ??
+            "To‘lovni boshlab bo‘lmadi. Qoralamangiz saqlangan.",
+        );
+      const order = result.order as PaymentOrderView;
+      setPaymentOrder(order);
+      setManualPaymentLink(false);
+      setPaymentLinkNotice("");
+      if (order.status === "SUCCEEDED") setPaidInvitationId(saved.id);
+      if (order.checkoutUrl) {
+        openCheckout(order.checkoutUrl, checkoutWindow);
+        checkoutWindow = null;
+        setNotice("To‘lov oynasi ochildi. Holat shu sahifada tekshiriladi.");
+      } else {
+        checkoutWindow?.close();
+        checkoutWindow = null;
+      }
+    }
     pendingAction.current = action;
     operationInFlight.current = true;
     setBusy(true);
@@ -1410,6 +1448,10 @@ export function Studio({
       }
       if (action === "download") {
         const saved = invitationSchema.parse(result.invitation);
+        if (publishingMode === "paid" && selectedTemplate?.priceMinor && !saved.imageExportedAt && !paymentAlreadyVerified) {
+          await startSavedCheckout(saved);
+          return;
+        }
         const imageExportedAt = await downloadInvitationImage(saved, locale, studioFetch);
         const finalized = { ...saved, imageExportedAt };
         lastCloudSnapshot.current = JSON.stringify(finalized);
@@ -1439,42 +1481,7 @@ export function Studio({
           publishedResponse.status === 402 &&
           published.error?.code === "PAYMENT_REQUIRED"
         ) {
-          if (adminContext)
-            throw new Error(
-              "To‘lovni taklifnoma egasi o‘z hisobidan yakunlashi kerak.",
-            );
-          if (!selectedTemplate)
-            throw new Error("Narxni tekshirish uchun dizaynni qayta tanlang.");
-          const checkout = await studioFetch(
-            `/api/invitations/${saved.id}/checkout`,
-            {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({
-                revision: saved.revision,
-                expectedAmountMinor: selectedTemplate.priceMinor,
-              }),
-            },
-          );
-          const result = await checkout.json();
-          if (!checkout.ok)
-            throw new Error(
-              result.error?.message ??
-                "To‘lovni boshlab bo‘lmadi. Qoralamangiz saqlangan.",
-            );
-          const order = result.order as PaymentOrderView;
-          setPaymentOrder(order);
-          setManualPaymentLink(false);
-          setPaymentLinkNotice("");
-          if (order.status === "SUCCEEDED") setPaidInvitationId(saved.id);
-          if (order.checkoutUrl) {
-            openCheckout(order.checkoutUrl, checkoutWindow);
-            checkoutWindow = null;
-            setNotice("To‘lov oynasi ochildi. Holat shu sahifada tekshiriladi.");
-          } else {
-            checkoutWindow?.close();
-            checkoutWindow = null;
-          }
+          await startSavedCheckout(saved);
           return;
         }
         if (!publishedResponse.ok) {
@@ -4030,7 +4037,7 @@ export function Studio({
                           {paymentOrder?.invitationId === invitation.id && paymentOrder.url
                             ? "Nashr qilingan"
                             : isImage
-                              ? "PNG · 1500 × 2100"
+                              ? `PNG · 1500 × 2100${paidInvitationId === invitation.id ? " · To‘langan" : publishingMode === "paid" && selectedTemplate ? ` · ${formatPrice(selectedTemplate.priceMinor)}` : ""}`
                               : paidInvitationId === invitation.id
                                 ? "To‘lov qabul qilingan"
                                 : publishingMode === "paid"
@@ -4091,7 +4098,9 @@ export function Studio({
                         <p>
                           {paymentOrder.url
                             ? "To‘lov qabul qilindi va taklifnomangiz nashr qilindi."
-                            : "To‘lov tasdiqlandi. Nashr hali yakunlanmagan; pastdagi tugma orqali davom eting."}
+                            : isImage
+                              ? "To‘lov tasdiqlandi. Pastdagi tugma orqali PNG rasmni yuklab oling."
+                              : "To‘lov tasdiqlandi. Nashr hali yakunlanmagan; pastdagi tugma orqali davom eting."}
                         </p>
                       ) : ["CREATED", "PENDING", "PROCESSING", "REJECTED"].includes(paymentOrder.status) ? (
                         <>
@@ -4187,7 +4196,13 @@ export function Studio({
                     <Send size={16} />
                     {publishing
                       ? "Tayyorlanmoqda…"
-                      : isImage ? "PNG yuklab olish · Bepul" : paidInvitationId === invitation.id
+                      : isImage
+                        ? invitation.imageExportedAt || paidInvitationId === invitation.id
+                          ? "PNG yuklab olish"
+                          : publishingMode === "paid" && selectedTemplate?.priceMinor
+                            ? `To‘lash va PNG yuklab olish · ${formatPrice(selectedTemplate.priceMinor)}`
+                            : "PNG yuklab olish · Bepul"
+                        : paidInvitationId === invitation.id
                         ? "Nashrni yakunlash"
                         : paymentOrder?.invitationId === invitation.id &&
                             ["CREATED", "PENDING", "PROCESSING", "REJECTED"].includes(paymentOrder.status)

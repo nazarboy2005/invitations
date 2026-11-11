@@ -4,6 +4,7 @@ import {
   formatPrice,
   getContent,
   invitationSchema,
+  templateById,
 } from "@taklifnoma/contracts";
 import {
   paymentStateLabels,
@@ -44,6 +45,8 @@ export function paymentTelegramMessage(
     order.invitation_status === "published" &&
     /^[A-Za-z0-9]{6}$/.test(order.slug ?? "");
   const parsed = invitationSchema.safeParse(order?.data);
+  const image =
+    parsed.success && templateById(parsed.data.templateId)?.format === "image";
   const title = parsed.success
     ? getContent(parsed.data).people.join(" & ").slice(0, 180)
     : "Taklifnoma";
@@ -53,21 +56,25 @@ export function paymentTelegramMessage(
   const publicUrl = ready ? new URL(`/i/${order!.slug}`, appUrl).href : null;
   const text = ready
     ? `✅ <b>To‘lov muvaffaqiyatli tasdiqlandi!</b>${details}\n\n🎉 Taklifnomangiz nashr qilindi va mehmonlar uchun tayyor.\n\n🔗 <b>Taklifnoma havolasi:</b>\n<a href="${escapeHtml(publicUrl!)}">${escapeHtml(publicUrl!)}</a>\n\n<i>Ushbu havolani yaqinlaringizga yuborishingiz mumkin.</i>`
-    : paid
-      ? `✅ <b>To‘lov qabul qilindi</b>${details}\n\nTaklifnomani nashr qilishni yakunlash kerak. Mini App’da tafsilotlarni tekshiring. Taklifnoma tayyor bo‘lgach, havolasini shu yerga yuboramiz.\n\n<b>Qayta to‘lov qilish shart emas.</b>`
-      : order && ["FAILED", "CANCELLED", "EXPIRED"].includes(order.status)
-        ? `ℹ️ <b>To‘lov yakunlanmagan</b>${details}\n\nTo‘lov tasdiqlanmadi. Buyurtmangizni Mini App’da ko‘rib chiqing.`
-        : order &&
-            [
-              "REJECTED",
-              "REFUNDED",
-              "PARTIALLY_REFUNDED",
-              "REFUND_PENDING",
-            ].includes(order.status)
-          ? `ℹ️ <b>To‘lov holati</b>${details}\n\nHolat: <b>${escapeHtml(paymentStateLabels[order.status as PaymentState])}</b>\n\nTafsilotlarni Mini App’da ko‘rishingiz mumkin.`
-          : order
-            ? `⏳ <b>To‘lov tasdig‘i kutilmoqda</b>${details}\n\nClick’dan tasdiq kelgach, taklifnomangizni nashr qilib, havolasini shu chatga yuboramiz.\n\n<i>To‘lov qilgan bo‘lsangiz, qayta to‘lamang.</i>`
-            : "💌 <b>Taklifnomalaringiz</b>\n\nBu hisobda tanlangan to‘lov buyurtmasi topilmadi. Mini App’da taklifnomalaringizni ko‘rishingiz mumkin.";
+    : paid && image
+      ? `✅ <b>To‘lov qabul qilindi</b>${details}\n\nPNG rasmni Mini App’da yuklab olishingiz mumkin.\n\n<b>Qayta to‘lov qilish shart emas.</b>`
+      : paid
+        ? `✅ <b>To‘lov qabul qilindi</b>${details}\n\nTaklifnomani nashr qilishni yakunlash kerak. Mini App’da tafsilotlarni tekshiring. Taklifnoma tayyor bo‘lgach, havolasini shu yerga yuboramiz.\n\n<b>Qayta to‘lov qilish shart emas.</b>`
+        : order && ["FAILED", "CANCELLED", "EXPIRED"].includes(order.status)
+          ? `ℹ️ <b>To‘lov yakunlanmagan</b>${details}\n\nTo‘lov tasdiqlanmadi. Buyurtmangizni Mini App’da ko‘rib chiqing.`
+          : order &&
+              [
+                "REJECTED",
+                "REFUNDED",
+                "PARTIALLY_REFUNDED",
+                "REFUND_PENDING",
+              ].includes(order.status)
+            ? `ℹ️ <b>To‘lov holati</b>${details}\n\nHolat: <b>${escapeHtml(paymentStateLabels[order.status as PaymentState])}</b>\n\nTafsilotlarni Mini App’da ko‘rishingiz mumkin.`
+            : order && image
+              ? `⏳ <b>To‘lov tasdig‘i kutilmoqda</b>${details}\n\nClick’dan tasdiq kelgach, PNG rasmni Mini App’da yuklab olishingiz mumkin.\n\n<i>To‘lov qilgan bo‘lsangiz, qayta to‘lamang.</i>`
+              : order
+                ? `⏳ <b>To‘lov tasdig‘i kutilmoqda</b>${details}\n\nClick’dan tasdiq kelgach, taklifnomangizni nashr qilib, havolasini shu chatga yuboramiz.\n\n<i>To‘lov qilgan bo‘lsangiz, qayta to‘lamang.</i>`
+                : "💌 <b>Taklifnomalaringiz</b>\n\nBu hisobda tanlangan to‘lov buyurtmasi topilmadi. Mini App’da taklifnomalaringizni ko‘rishingiz mumkin.";
   return {
     parse_mode: "HTML" as const,
     text,
@@ -82,7 +89,9 @@ export function paymentTelegramMessage(
             text: publicUrl
               ? "📱 Taklifnomalarim"
               : paid
-                ? "📱 Nashrni yakunlash"
+                ? image
+                  ? "📱 PNG yuklab olish"
+                  : "📱 Nashrni yakunlash"
                 : "📱 Buyurtmani ko‘rish",
             web_app: {
               url: new URL(

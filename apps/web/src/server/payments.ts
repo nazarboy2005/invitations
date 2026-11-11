@@ -94,12 +94,6 @@ export async function createCheckout(
         "To‘lovni faqat qoralama uchun boshlash mumkin.",
       );
     const invitation = invitationSchema.parse(row.data);
-    if (templateById(invitation.templateId)?.format === "image")
-      throw new ApiError(
-        400,
-        "IMAGE_FREE_TEST",
-        "Rasm taklifnomani PNG sifatida yuklab oling.",
-      );
     if (invitation.revision !== revision)
       throw new ApiError(
         409,
@@ -252,12 +246,16 @@ export async function applyPayment(
               "ORDER_MISMATCH",
               "To‘langan dizayn yoki tadbir almashtirilgan.",
             );
-          await publishInvitationInTransaction(
-            savepoint,
-            data.id,
-            data.revision,
-            toSessionUser(owner),
-          );
+          // Image purchases grant download access; the first actual download
+          // locks the event. They never publish a website or allocate a URL.
+          if (templateById(data.templateId)?.format !== "image") {
+            await publishInvitationInTransaction(
+              savepoint,
+              data.id,
+              data.revision,
+              toSessionUser(owner),
+            );
+          }
           await savepoint`UPDATE payment_orders SET fulfilled_at=now(),publication_error=NULL WHERE id=${order.id}`;
         });
       } catch (error) {
