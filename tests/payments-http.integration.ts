@@ -38,7 +38,7 @@ const mock = createServer(async (req, res) => {
   res.setHeader("Content-Type", "application/json");
   if (req.method === "POST" && req.url === "/api/v1/payments") {
     const input = JSON.parse(data);
-    assert.equal(input.amount, 1000);
+    assert.equal(input.amount, 49000);
     assert.equal(input.successUrl, origin + "/payment/return");
     let payment = [...payments.values()].find(
       (p) => p.orderId === input.orderId,
@@ -87,7 +87,7 @@ before(async () => {
         NODE_ENV: "development",
         TELEGRAM_BOT_TOKEN: "http-fixture-telegram-token",
         APP_URL: origin,
-        PUBLISHING_MODE: "paid",
+
         NODZE_API_BASE_URL: `http://127.0.0.1:${port}/api/v1`,
         NODZE_API_KEY: "http-fixture-project-key",
         NODZE_WEBHOOK_SECRET: secret,
@@ -214,7 +214,7 @@ test("HTTP checkout requires login/origin, verified webhook publishes, return pa
     (
       await req(
         `/api/invitations/${invitation.id}/checkout`,
-        { revision: 1, expectedAmountMinor: 100000 },
+        { revision: 1, expectedAmountMinor: 4900000 },
         false,
       )
     ).status,
@@ -224,7 +224,7 @@ test("HTTP checkout requires login/origin, verified webhook publishes, return pa
     (
       await req(
         `/api/invitations/${invitation.id}/checkout`,
-        { revision: 1, expectedAmountMinor: 100000 },
+        { revision: 1, expectedAmountMinor: 4900000 },
         true,
         "https://attacker.example",
       )
@@ -266,14 +266,14 @@ test("HTTP checkout requires login/origin, verified webhook publishes, return pa
   assert.equal((await tampered.json()).error.code, "PRICE_CHANGED");
   const checkout = await req(`/api/invitations/${saved.id}/checkout`, {
     revision: saved.revision,
-    expectedAmountMinor: 100000,
+    expectedAmountMinor: 4900000,
   });
   assert.equal(checkout.status, 200, await checkout.clone().text());
   assert.match(checkout.headers.get("cache-control")!, /no-store/);
   const order = (await checkout.json()).order;
   const repeatedCheckout = await req(`/api/invitations/${saved.id}/checkout`, {
     revision: saved.revision,
-    expectedAmountMinor: 100000,
+    expectedAmountMinor: 4900000,
   });
   assert.equal(repeatedCheckout.status, 200);
   assert.equal((await repeatedCheckout.json()).order.id, order.id);
@@ -316,7 +316,7 @@ test("HTTP checkout requires login/origin, verified webhook publishes, return pa
     data: {
       paymentId: payment.id,
       orderId: order.id,
-      amount: 1000,
+      amount: 49000,
       currency: "UZS",
       status: "SUCCEEDED",
     },

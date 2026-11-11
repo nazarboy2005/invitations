@@ -71,8 +71,6 @@ export async function createCheckout(
   expectedAmountMinor: number,
   user: SessionUser,
 ) {
-  if (process.env.PUBLISHING_MODE !== "paid")
-    throw new ApiError(409, "CHECKOUT_DISABLED", "To‘lov hozir yoqilmagan.");
   const config = nodzeConfig();
   const order = await getDb().begin(async (tx) => {
     const [row] =
@@ -136,6 +134,12 @@ export async function createCheckout(
         );
       return existing;
     }
+    if (Number(template.price_minor) <= 0)
+      throw new ApiError(
+        503,
+        "PRICE_UNAVAILABLE",
+        "Dizayn narxi sozlanmagan. Keyinroq qayta urinib ko‘ring.",
+      );
     if (
       template.currency !== "UZS" ||
       Number(template.price_minor) !== expectedAmountMinor
@@ -395,7 +399,6 @@ export async function getInvitationPayment(
           priceMinor: Number(template.price_minor),
         }
       : null,
-    publishingMode: process.env.PUBLISHING_MODE === "paid" ? "paid" : "free",
   };
 }
 export async function reconcilePayments() {

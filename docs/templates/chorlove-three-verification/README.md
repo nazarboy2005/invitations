@@ -1,5 +1,7 @@
 # Chorlove: Stained Glass, Sunset and Swan Garden
 
+> Update (2026-11-11): free publication/download behavior described below is superseded. All new website publication and clean PNG downloads require verified payment; no publishing-mode setting exists. QA now uses disposable paid order fixtures. See [payments](../../PAYMENTS.md).
+
 Checked 8 November 2026. These are three additive website integrations, registered by `0222_register_chorlove_three.sql` and published by `0223_publish_chorlove_three.sql`. The configured database and `/api/catalog` confirm all three are published, selectable web designs with wedding category/event support. Each uses `price_minor=15000000`, UZS, matching the existing Chorlove release convention. All 131 other database template rows were unchanged by each migration.
 
 The previous inventory is updated at `D:/Projects/Fotiha/output/provider-template-inventory.md` and its JSON counterpart. Chorlove now has **28 saved previews, 18 website source packages, 18 typed catalog entries and 15 local published flags**. These fallback counts are distinct from the targeted database confirmation for these three releases.

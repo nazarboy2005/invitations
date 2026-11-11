@@ -1,30 +1,37 @@
-# Click publication payments through Nodze
+# Invitation payments through Nodze
 
 The customer selects a design, edits, authenticates with Telegram, saves, and
 presses **To‘lash va nashr qilish**. The backend reads the database price,
 reserves one invitation/event, persists an immutable order/request, and calls
 Nodze. The customer follows the returned Click checkout URL. Verified success
 automatically publishes and exposes the existing six-character invitation link.
+For image invitations, verified success instead grants clean PNG downloads for
+the purchased event; it does not publish a website.
 No card information enters this application. Guest to‘yona remains separate.
 
 ## Deployment configuration
 
 Apply `pnpm db:migrate` against the intended database. Migrations 0160/0161 add
-online orders/webhook deduplication and set existing template prices to 1,000
-UZS. Fallback catalog prices match. This is intentionally test pricing; adjust
-prices through platform administration later. Existing orders keep their price.
+online orders/webhook deduplication. Migrations 0231/0232 set launch prices:
+39,000/49,000/99,000 UZS for websites and 5,000 UZS for image invitations.
+Fallback catalog prices match. Existing orders keep their price.
 
 Set these server environment variables privately in Vercel (and locally when
 using a publicly reachable HTTPS development deployment):
 
 ```dotenv
 APP_URL=https://invitations-wk6h.vercel.app
-PUBLISHING_MODE=paid
 NODZE_API_BASE_URL=https://payments.nodze.org/api/v1
 NODZE_API_KEY=<project key>
 NODZE_WEBHOOK_SECRET=<registered endpoint secret>
 CRON_SECRET=<random secret of at least 32 characters>
 ```
+
+Payment is mandatory; there is no publishing-mode setting or free-price bypass.
+Missing provider configuration blocks checkout rather than allowing free access.
+Image previews are watermarked; clean PNG downloads require a verified purchase
+even if the card was previously exported during free testing. Purchased events
+keep repeat downloads and the approved practical editing rules.
 
 Keep the existing authentication/database/media configuration. There are no
 `NEXT_PUBLIC_` payment secrets. Missing credentials deny checkout and preserve
@@ -40,7 +47,7 @@ In the Nodze project register:
 | Backend webhook | `https://invitations-wk6h.vercel.app/api/webhooks/nodze` |
 | Frontend origin, if requested | `https://invitations-wk6h.vercel.app` |
 
-Enable the project and Click, ensure 1,000 UZS is within its amount limits, and
+Enable the project and Click, ensure the launch prices are within its amount limits, and
 deploy this application before customer testing. The webhook must be reachable
 without deployment-protection/login redirects. Click's own callbacks remain on
 Nodze, not this app. No real checkout is needed to deploy the code.

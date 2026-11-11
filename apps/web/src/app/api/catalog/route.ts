@@ -5,10 +5,7 @@ export const dynamic = "force-dynamic";
 export async function GET() {
   try {
     return NextResponse.json(
-      {
-        ...(await getCatalog()),
-        publishingMode: process.env.PUBLISHING_MODE ?? "free",
-      },
+      await getCatalog(),
       {
         headers: { "Cache-Control": "no-store" },
       },

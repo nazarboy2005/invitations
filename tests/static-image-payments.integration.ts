@@ -35,13 +35,11 @@ test("5,000 UZS image checkout grants one-event PNG downloads without website pu
   let provider: Record<string, unknown> | undefined;
   let providerRequests = 0;
   const originalEnv = {
-    mode: process.env.PUBLISHING_MODE,
     key: process.env.NODZE_API_KEY,
     secret: process.env.NODZE_WEBHOOK_SECRET,
     base: process.env.NODZE_API_BASE_URL,
     url: process.env.APP_URL,
   };
-  process.env.PUBLISHING_MODE = "paid";
   process.env.NODZE_API_KEY = "mock-no-live-credentials";
   process.env.NODZE_WEBHOOK_SECRET = secret;
   process.env.NODZE_API_BASE_URL = "https://payments.nodze.org/api/v1";
@@ -73,6 +71,22 @@ test("5,000 UZS image checkout grants one-event PNG downloads without website pu
       downloadStaticImage(invitation.id, invitation.revision, "uz-Latn", owner),
       "PAYMENT_REQUIRED",
     );
+    // Neither a prior free-testing export nor a zero catalog price grants access.
+    await rejected(
+      assertStaticImageEntitlement(sql, {
+        ...invitation,
+        imageExportedAt: new Date().toISOString(),
+      }, owner.id),
+      "PAYMENT_REQUIRED",
+    );
+    await sql.begin(async (tx) => {
+      await tx`UPDATE templates SET price_minor=0 WHERE id=${invitation.templateId}`;
+      await rejected(assertStaticImageEntitlement(tx, invitation, owner.id), "PAYMENT_REQUIRED");
+      // Roll back the temporary catalog change even if the assertion fails.
+      throw new Error("rollback-zero-price-fixture");
+    }).catch((error) => {
+      if (error.message !== "rollback-zero-price-fixture") throw error;
+    });
     await rejected(
       createCheckout(invitation.id, invitation.revision, 1, owner),
       "PRICE_CHANGED",
@@ -166,6 +180,13 @@ test("5,000 UZS image checkout grants one-event PNG downloads without website pu
       owner,
     );
     assert.equal(repeat.exportedAt, image.exportedAt);
+    await rejected(
+      assertStaticImageEntitlement(sql, invitation, randomUUID()),
+      "PAYMENT_REQUIRED",
+    );
+    const swapped = structuredClone(invitation);
+    swapped.content["uz-Latn"].people[0] = "Unpaid different event";
+    await rejected(assertStaticImageEntitlement(sql, swapped, owner.id), "PAYMENT_REQUIRED");
     assert.equal(providerRequests, 1);
     assert.equal(
       (
@@ -177,7 +198,6 @@ test("5,000 UZS image checkout grants one-event PNG downloads without website pu
     process.chdir(originalCwd);
     globalThis.fetch = originalFetch;
     for (const [key, value] of Object.entries({
-      PUBLISHING_MODE: originalEnv.mode,
       NODZE_API_KEY: originalEnv.key,
       NODZE_WEBHOOK_SECRET: originalEnv.secret,
       NODZE_API_BASE_URL: originalEnv.base,

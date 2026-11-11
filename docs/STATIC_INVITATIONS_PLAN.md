@@ -1,5 +1,7 @@
 # Static image invitations plan
 
+> Update (2026-11-11): free publication/download behavior described below is superseded. All new website publication and clean PNG downloads require verified payment; no publishing-mode setting exists. QA now uses disposable paid order fixtures. See [payments](PAYMENTS.md).
+
 Date: 2026-11-03. Status: initial implementation authorized for one original 5:7
 image, free testing without Click, on Templates/Studio/Taklifnomalarim only.
 The first design is Oq atirgul (`ivory-rose-card`), exporting 1500 x 2100 PNGs.

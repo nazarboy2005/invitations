@@ -445,7 +445,6 @@ export function Studio({
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
   const [publishing, setPublishing] = useState(false);
-  const [publishingMode, setPublishingMode] = useState("free");
   const [paidInvitationId, setPaidInvitationId] = useState("");
   const [paymentOrder, setPaymentOrder] = useState<PaymentOrderView | null>(null);
   const [checkingPayment, setCheckingPayment] = useState(false);
@@ -871,7 +870,6 @@ export function Studio({
       .then((result) => {
         if (alive && Array.isArray(result.templates)) {
           setTemplates(result.templates);
-          setPublishingMode(result.publishingMode ?? "free");
           if (Array.isArray(result.categories))
             setCategories(
               [...result.categories].sort(
@@ -1266,8 +1264,7 @@ export function Studio({
       (paymentOrder?.invitationId === current.id &&
         paymentOrder.status === "SUCCEEDED");
     if (
-      (action === "publish" || (action === "download" && !current.imageExportedAt && !!selectedTemplate?.priceMinor)) &&
-      publishingMode === "paid" &&
+      (action === "publish" || action === "download") &&
       !adminContext &&
       !paymentAlreadyVerified
     )
@@ -1448,7 +1445,7 @@ export function Studio({
       }
       if (action === "download") {
         const saved = invitationSchema.parse(result.invitation);
-        if (publishingMode === "paid" && selectedTemplate?.priceMinor && !saved.imageExportedAt && !paymentAlreadyVerified) {
+        if (!paymentAlreadyVerified) {
           await startSavedCheckout(saved);
           return;
         }
@@ -4037,14 +4034,12 @@ export function Studio({
                           {paymentOrder?.invitationId === invitation.id && paymentOrder.url
                             ? "Nashr qilingan"
                             : isImage
-                              ? `PNG · 1500 × 2100${paidInvitationId === invitation.id ? " · To‘langan" : publishingMode === "paid" && selectedTemplate ? ` · ${formatPrice(selectedTemplate.priceMinor)}` : ""}`
+                              ? `PNG · 1500 × 2100${paidInvitationId === invitation.id ? " · To‘langan" : selectedTemplate ? ` · ${formatPrice(selectedTemplate.priceMinor)}` : ""}`
                               : paidInvitationId === invitation.id
                                 ? "To‘lov qabul qilingan"
-                                : publishingMode === "paid"
-                                  ? selectedTemplate
-                                    ? formatPrice(selectedTemplate.priceMinor)
-                                    : "Dizayn tanlang"
-                                  : "Bepul"}
+                                : selectedTemplate
+                                  ? formatPrice(selectedTemplate.priceMinor)
+                                  : "Dizayn tanlang"}
                         </dd>
                       </div>
                     </dl>
@@ -4064,13 +4059,11 @@ export function Studio({
                           to‘lov talab qilinmaydi.
                         </li>
                       ) : (
-                        publishingMode === "paid" && (
-                          <li>
-                            Click to‘lovi tasdiqlangach, taklifnoma nashr
-                            qilinadi. To‘lov boshlanganidan keyin ismlar, sana
-                            va dizayn qulflanadi.
-                          </li>
-                        )
+                        <li>
+                          Click to‘lovi tasdiqlangach, taklifnoma nashr
+                          qilinadi. To‘lov boshlanganidan keyin ismlar, sana
+                          va dizayn qulflanadi.
+                        </li>
                       )}
                       <li>
                         Nashrdan so‘ng ismlar, mezbon, tadbir turi va dizayn himoyalanadi. Sana ko‘chishi uchun so‘rov yuboring; shu kundagi vaqt tahrirlanadi.
@@ -4197,19 +4190,15 @@ export function Studio({
                     {publishing
                       ? "Tayyorlanmoqda…"
                       : isImage
-                        ? invitation.imageExportedAt || paidInvitationId === invitation.id
+                        ? paidInvitationId === invitation.id
                           ? "PNG yuklab olish"
-                          : publishingMode === "paid" && selectedTemplate?.priceMinor
-                            ? `To‘lash va PNG yuklab olish · ${formatPrice(selectedTemplate.priceMinor)}`
-                            : "PNG yuklab olish · Bepul"
+                          : `To‘lash va PNG yuklab olish${selectedTemplate ? ` · ${formatPrice(selectedTemplate.priceMinor)}` : ""}`
                         : paidInvitationId === invitation.id
                         ? "Nashrni yakunlash"
                         : paymentOrder?.invitationId === invitation.id &&
                             ["CREATED", "PENDING", "PROCESSING", "REJECTED"].includes(paymentOrder.status)
                           ? "To‘lov kutilmoqda"
-                          : publishingMode === "paid"
-                          ? `To‘lash va nashr qilish${selectedTemplate ? ` · ${formatPrice(selectedTemplate.priceMinor)}` : ""}`
-                          : "Nashr qilish"}
+                          : `To‘lash va nashr qilish${selectedTemplate ? ` · ${formatPrice(selectedTemplate.priceMinor)}` : ""}`}
                   </button>
                   )}
                 </section>

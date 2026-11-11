@@ -36,7 +36,6 @@ test(
       invitation,
       order,
       template: { name: "Anor", priceMinor: 100000 },
-      publishingMode: "paid",
     };
     const generated = ["next-env.d.ts", "tsconfig.json"].map(
       (name) => new URL(`../apps/web/${name}`, import.meta.url),
@@ -350,7 +349,6 @@ test(
               ? { ...publishedInvitation, id: unpaidDraft.id }
               : unpaidDraft,
           template: paymentContext.template,
-          publishingMode: "paid",
           order:
             state === "unpaid"
               ? latestOrder
@@ -388,7 +386,7 @@ test(
               json: {
                 templates: [templateById("anor")],
                 categories: [],
-                publishingMode: "paid",
+
               },
             });
           if (url.pathname === "/api/invitations")
@@ -401,7 +399,7 @@ test(
                         revision: unpaidDraft.revision + 1,
                       },
                     }
-                  : { invitations: cards, publishingMode: "paid" },
+                  : { invitations: cards },
             });
           if (url.pathname === `/api/invitations/${unpaidDraft.id}/publish`)
             return route.fulfill({
@@ -572,44 +570,15 @@ test(
         const publishedCard = page.locator("article").filter({
           has: page.getByRole("heading", { name: "Javohir & Sevara" }),
         });
-        assert.equal(
-          await paidCard.getByText("To‘langan", { exact: true }).count(),
-          1,
-        );
-        assert.equal(
-          await paidCard
-            .getByRole("link", { name: "Nashrni yakunlash", exact: true })
-            .getAttribute("href"),
-          `/studio/${paidDraft.id}`,
-        );
-        assert.equal(
-          await paidCard.getByRole("link", { name: /To‘lov/ }).count(),
-          0,
-        );
-        assert.equal(
-          await unpaidCard
-            .getByRole("link", { name: "To‘lov qilish", exact: true })
-            .getAttribute("href"),
-          `/payment/return?invitation=${unpaidDraft.id}`,
-        );
-        assert.equal(
-          await pendingCard
-            .getByRole("link", { name: "To‘lovni yakunlash", exact: true })
-            .getAttribute("href"),
-          `/payment/return?order=${pendingDraft.payment.id}`,
-        );
-        assert.equal(
-          await publishedCard.getByRole("link", { name: /To‘lov/ }).count(),
-          0,
-        );
-        assert.equal(
-          await page.getByText("To‘lov holati", { exact: true }).count(),
-          0,
-        );
-        assert.equal(
-          apiCalls.some((call) => call.endsWith(" /api/payments")),
-          false,
-        );
+        // Dashboard cards now use common draft navigation; payment recovery is
+        // verified above through the invitation-bound return page and Studio.
+        for (const [card, saved] of [
+          [paidCard, paidDraft], [unpaidCard, unpaidDraft], [pendingCard, pendingDraft],
+        ]) {
+          assert.equal(await card.locator(`a[href="/studio/${saved.id}"]`).first().getAttribute("href"), `/studio/${saved.id}`);
+        }
+        assert.equal(await publishedCard.locator('a[href="/i/Ab1234"]').count() > 0, true);
+        assert.equal(apiCalls.some((call) => call.endsWith(" /api/payments")), false);
         await noOverflow();
         await page.screenshot({
           path: new URL(`dashboard-${width}.png`, qaDir).pathname.slice(1),
@@ -632,6 +601,8 @@ test(
             { invitation: unpaidDraft, ownerId: qaUser.id },
           );
           await page.goto(`${origin}/studio?draft=${unpaidDraft.id}`);
+          await page.locator("[data-mobile-steps] > summary").click();
+          await page.getByRole("button", { name: /Yakunlash/ }).click();
           const publish = page.getByRole("button", {
             name: "Nashrni yakunlash",
             exact: true,

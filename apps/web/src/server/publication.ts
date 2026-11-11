@@ -177,14 +177,7 @@ export async function publishInvitationInTransaction(
       "STALE_REVISION",
       "Taklifnoma boshqa oynada o‘zgargan. Yangilangan nusxani oching.",
     );
-  const mode = process.env.PUBLISHING_MODE ?? "free";
-  if (!["free", "paid"].includes(mode))
-    throw new ApiError(
-      503,
-      "PUBLISHING_UNAVAILABLE",
-      "Nashr qilish vaqtincha mavjud emas.",
-    );
-  if (mode === "paid" && !republishing) {
+  if (!republishing) {
     const entitlements =
       await tx`SELECT identity_snapshot FROM payment_orders WHERE invitation_id=${id} AND owner_id=${user.id} AND template_id=${previous.templateId} AND status='SUCCEEDED' AND verified_at IS NOT NULL FOR SHARE`;
     if (!entitlements.some((order) => paymentIdentityMatches(previous, order.identity_snapshot)))
@@ -264,11 +257,9 @@ export async function publishInvitationInTransaction(
         continue;
       throw error;
     }
-    await tx`INSERT INTO invitation_audit_log(invitation_id,actor_id,action,previous_values,new_values) VALUES(${id},${admin?.actorId ?? user.id},${mode === "paid" ? "published_paid" : "published_free"},${tx.json(previous)},${tx.json({ ...invitation, publication: { mode, firstPublishedAt: event.published_at, editDeadlineAt: event.deadline } })})`;
-    if (mode === "paid") {
-      await tx`UPDATE payment_orders SET fulfilled_at=COALESCE(fulfilled_at,now()),publication_error=NULL WHERE invitation_id=${id} AND status='SUCCEEDED'`;
-      await enqueuePaymentNotifications(tx, id);
-    }
+    await tx`INSERT INTO invitation_audit_log(invitation_id,actor_id,action,previous_values,new_values) VALUES(${id},${admin?.actorId ?? user.id},'published_paid',${tx.json(previous)},${tx.json({ ...invitation, publication: { firstPublishedAt: event.published_at, editDeadlineAt: event.deadline } })})`;
+    await tx`UPDATE payment_orders SET fulfilled_at=COALESCE(fulfilled_at,now()),publication_error=NULL WHERE invitation_id=${id} AND status='SUCCEEDED'`;
+    await enqueuePaymentNotifications(tx, id);
     if (admin)
       await recordAdminChange(
         tx,

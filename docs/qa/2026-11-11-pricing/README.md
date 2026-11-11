@@ -1,5 +1,7 @@
 # Launch pricing and catalog artwork
 
+> Update (2026-11-11): free publication/download behavior described below is superseded. All new website publication and clean PNG downloads require verified payment; no publishing-mode setting exists. QA now uses disposable paid order fixtures. See [payments](../../PAYMENTS.md).
+
 Website prices: Osmon, Ganch and Baxmal saroy are 99,000 UZS; Palov, Xatna and
 Shirin Bayram are 39,000 UZS; remaining website templates are 49,000 UZS.
 Static image invitations are 5,000 UZS. Local definitions and the configured

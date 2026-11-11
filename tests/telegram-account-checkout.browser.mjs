@@ -110,7 +110,7 @@ test(
           return route.fulfill({
             json: {
               invitation,
-              publishingMode: "paid",
+
               order: null,
               template: { name: "Anor", priceMinor: 100000 },
             },

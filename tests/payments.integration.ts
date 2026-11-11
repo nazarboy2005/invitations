@@ -16,7 +16,6 @@ import {
 } from "../apps/web/src/server/payments";
 import {
   saveInvitation,
-  listInvitations,
 } from "../apps/web/src/server/invitations";
 import { publishInvitation } from "../apps/web/src/server/publication";
 import { type NodzePayment } from "../apps/web/src/server/nodze";
@@ -36,7 +35,7 @@ const requests: Array<{ body: string; key: string }> = [];
 let loseNextResponse = false;
 const secret = "mock-payment-webhook-secret-only";
 before(async () => {
-  process.env.PUBLISHING_MODE = "paid";
+
   process.env.APP_URL = "https://invitations.example";
   process.env.NODZE_API_BASE_URL = "https://payments.nodze.org/api/v1";
   process.env.NODZE_API_KEY = "mock-project-key-no-live-credentials";
@@ -56,8 +55,8 @@ before(async () => {
       const body = String(init.body),
         data = JSON.parse(body),
         key = new Headers(init.headers).get("idempotency-key")!;
-      assert.equal(data.amount, 1000);
-      assert.match(body, /"amount":1000\.00/);
+      assert.equal(data.amount, 49000);
+      assert.match(body, /"amount":49000\.00/);
       assert.equal(
         data.successUrl,
         "https://invitations.example/payment/return",
@@ -71,7 +70,7 @@ before(async () => {
         payment = {
           id: randomUUID(),
           orderId: data.orderId,
-          amount: "1000.00",
+          amount: "49000.00",
           currency: "UZS",
           provider: "click",
           status: "PENDING",
@@ -151,26 +150,26 @@ async function paymentFor(id: string) {
   const [row] = await sql`SELECT payment_id FROM payment_orders WHERE id=${id}`;
   return remote.get(row.payment_id)!;
 }
-test("payment context and dashboard summaries stay bound to one owned invitation", async () => {
+test("payment context and order lists stay bound to one owned invitation", async () => {
   const first = await draft(),
     second = await draft(),
     unpaid = await draft();
   const firstOrder = await createCheckout(
     first.id,
     first.revision,
-    100000,
+    4900000,
     owner,
   );
   const secondOrder = await createCheckout(
     second.id,
     second.revision,
-    100000,
+    4900000,
     owner,
   );
   const firstContext = await getInvitationPayment(first.id, owner.id);
   assert.equal(firstContext.invitation.id, first.id);
   assert.equal(firstContext.order?.id, firstOrder.id);
-  assert.equal(firstContext.template?.priceMinor, 100000);
+  assert.equal(firstContext.template?.priceMinor, 4900000);
   assert.equal(
     (await getInvitationPayment(second.id, owner.id)).order?.id,
     secondOrder.id,
@@ -182,40 +181,41 @@ test("payment context and dashboard summaries stay bound to one owned invitation
     "NOT_FOUND",
   );
   await fails(getPaymentOrder(randomUUID(), owner.id), "NOT_FOUND");
-  const list = await listInvitations(owner.id);
+  const list = await listPaymentOrders(owner.id);
   assert.equal(
-    list.find((item) => item.id === first.id)?.payment?.id,
+    list.find((item) => item.invitationId === first.id)?.id,
     firstOrder.id,
   );
   assert.equal(
-    list.find((item) => item.id === second.id)?.payment?.id,
+    list.find((item) => item.invitationId === second.id)?.id,
     secondOrder.id,
   );
-  assert.equal(list.find((item) => item.id === unpaid.id)?.payment, null);
-  assert.equal((await listInvitations(stranger.id)).length, 0);
+  assert.equal(list.find((item) => item.invitationId === unpaid.id), undefined);
+  assert.equal((await listPaymentOrders(stranger.id)).length, 0);
 
-  // A valid older return link resolves the current attempt for this same
-  // invitation, so a cancelled attempt cannot hide its subsequent payment.
+  // An explicit return link stays bound to its immutable original order.
+  // A bare invitation link resolves its latest attempt.
   const cancelled = await paymentFor(firstOrder.id);
   await applyPayment({ ...cancelled, status: "CANCELLED" });
   const replacement = await createCheckout(
     first.id,
     first.revision,
-    100000,
+    4900000,
     owner,
   );
   assert.notEqual(replacement.id, firstOrder.id);
   const recovered = await getInvitationPayment(first.id, owner.id, firstOrder);
   assert.equal(recovered.invitation.id, first.id);
-  assert.equal(recovered.order?.id, replacement.id);
+  assert.equal(recovered.order?.id, firstOrder.id);
+  assert.equal((await getInvitationPayment(first.id, owner.id)).order?.id, replacement.id);
 });
 test("unpaid direct publish, wrong owner, stale revision and tampered price fail before creating checkout", async () => {
   const d = await draft(),
     before = requests.length;
   await fails(publishInvitation(d.id, d.revision, owner), "PAYMENT_REQUIRED");
-  await fails(createCheckout(d.id, d.revision, 100000, stranger), "NOT_FOUND");
+  await fails(createCheckout(d.id, d.revision, 4900000, stranger), "NOT_FOUND");
   await fails(
-    createCheckout(d.id, d.revision + 1, 100000, owner),
+    createCheckout(d.id, d.revision + 1, 4900000, owner),
     "STALE_REVISION",
   );
   await fails(createCheckout(d.id, d.revision, 1, owner), "PRICE_CHANGED");
@@ -224,11 +224,11 @@ test("unpaid direct publish, wrong owner, stale revision and tampered price fail
 test("double submission shares one order/payment and reserves its event identity", async () => {
   const d = await draft();
   const [a, b] = await Promise.all([
-    createCheckout(d.id, d.revision, 100000, owner),
-    createCheckout(d.id, d.revision, 100000, owner),
+    createCheckout(d.id, d.revision, 4900000, owner),
+    createCheckout(d.id, d.revision, 4900000, owner),
   ]);
   assert.equal(a.id, b.id);
-  assert.equal(a.amountMinor, 100000);
+  assert.equal(a.amountMinor, 4900000);
   assert.equal(a.status, "PENDING");
   assert.equal(
     [...remote.values()].filter((p) => p.orderId === a.id).length,
@@ -250,11 +250,11 @@ test("a lost create response retries identical body/key and recovers the same pr
   const d = await draft();
   loseNextResponse = true;
   await fails(
-    createCheckout(d.id, d.revision, 100000, owner),
+    createCheckout(d.id, d.revision, 4900000, owner),
     "PAYMENT_UNCERTAIN",
   );
   const original = requests.at(-1)!;
-  const order = await createCheckout(d.id, d.revision, 100000, owner);
+  const order = await createCheckout(d.id, d.revision, 4900000, owner);
   assert.deepEqual(requests.at(-1), original);
   assert.equal(
     [...remote.values()].filter((p) => p.orderId === order.id).length,
@@ -263,7 +263,7 @@ test("a lost create response retries identical body/key and recovers the same pr
 });
 test("signed success publishes once, concurrent redelivery keeps the link/deadline, stale state cannot downgrade", async () => {
   const d = await draft(),
-    order = await createCheckout(d.id, d.revision, 100000, owner),
+    order = await createCheckout(d.id, d.revision, 4900000, owner),
     p = await paymentFor(order.id);
   p.status = "SUCCEEDED";
   const e = event(p);
@@ -290,9 +290,9 @@ test("signed success publishes once, concurrent redelivery keeps the link/deadli
 });
 test("wrong amount, payment ID and mutated duplicate event cannot grant publication", async () => {
   const d = await draft(),
-    order = await createCheckout(d.id, d.revision, 100000, owner),
+    order = await createCheckout(d.id, d.revision, 4900000, owner),
     p = await paymentFor(order.id);
-  const bad = event({ ...p, status: "SUCCEEDED", amount: "1000.01" });
+  const bad = event({ ...p, status: "SUCCEEDED", amount: "49000.01" });
   await fails(consumeWebhook(bad.body, bad.headers), "PAYMENT_MISMATCH");
   // Even an authentic provider notification must not fulfill an underpaid link.
   for (const amount of ["0.01", "1.00", "999.99"]) {
@@ -323,7 +323,7 @@ test("wrong amount, payment ID and mutated duplicate event cannot grant publicat
 });
 test("REJECTED can later succeed; stale cancelled events consult authenticated current state", async () => {
   const d = await draft(),
-    order = await createCheckout(d.id, d.revision, 100000, owner),
+    order = await createCheckout(d.id, d.revision, 4900000, owner),
     p = await paymentFor(order.id);
   p.status = "REJECTED";
   const rejected = event(p, "payment.rejected");
@@ -336,7 +336,7 @@ test("REJECTED can later succeed; stale cancelled events consult authenticated c
 });
 test("status lookup recovers success without a webhook; rapid lookups are throttled", async () => {
   const d = await draft(),
-    order = await createCheckout(d.id, d.revision, 100000, owner),
+    order = await createCheckout(d.id, d.revision, 4900000, owner),
     p = await paymentFor(order.id);
   p.status = "SUCCEEDED";
   await refreshPayment(order.id, owner.id);
@@ -347,7 +347,7 @@ test("status lookup recovers success without a webhook; rapid lookups are thrott
 });
 test("publication validation failure preserves verified payment and can be corrected without charging again", async () => {
   const d = await draft(),
-    order = await createCheckout(d.id, d.revision, 100000, owner),
+    order = await createCheckout(d.id, d.revision, 4900000, owner),
     p = await paymentFor(order.id);
   d.content["uz-Latn"].venueName = "";
   const saved = await saveInvitation(d, owner);
@@ -364,12 +364,12 @@ test("publication validation failure preserves verified payment and can be corre
 });
 test("cancellation preserves the draft and permits an explicitly retried new order", async () => {
   const d = await draft(),
-    order = await createCheckout(d.id, d.revision, 100000, owner),
+    order = await createCheckout(d.id, d.revision, 4900000, owner),
     p = await paymentFor(order.id);
   p.status = "CANCELLED";
   const cancelled = event(p, "payment.cancelled");
   await consumeWebhook(cancelled.body, cancelled.headers);
   assert.equal((await getPaymentOrder(order.id, owner.id)).url, null);
-  const retry = await createCheckout(d.id, d.revision, 100000, owner);
+  const retry = await createCheckout(d.id, d.revision, 4900000, owner);
   assert.notEqual(retry.id, order.id);
 });

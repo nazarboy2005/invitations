@@ -31,7 +31,7 @@ test("verified payment delivers one formatted invitation confirmation, with safe
   const messages: any[] = [],
     updates: number[] = [];
   process.env.APP_URL = "https://invitations.example";
-  process.env.PUBLISHING_MODE = "paid";
+
   process.env.NODZE_API_KEY = "fixture-project-key";
   process.env.NODZE_WEBHOOK_SECRET = "fixture-webhook-secret";
   process.env.TELEGRAM_BOT_TOKEN = "fixture-bot-token";
@@ -55,7 +55,7 @@ test("verified payment delivers one formatted invitation confirmation, with safe
     const payment: NodzePayment = {
       id: randomUUID(),
       orderId: body.orderId,
-      amount: "1000.00",
+      amount: "49000.00",
       currency: "UZS",
       provider: "click",
       status: "PENDING",
@@ -67,7 +67,7 @@ test("verified payment delivers one formatted invitation confirmation, with safe
   async function draft() {
     const data = completeInvitation();
     await sql`INSERT INTO invitations(id,owner_id,template_id,data) VALUES(${data.id},${userId},${data.templateId},${sql.json(data)})`;
-    const order = await createCheckout(data.id, data.revision, 100000, owner);
+    const order = await createCheckout(data.id, data.revision, 4900000, owner);
     return { data, order, payment: provider.get(order.id)! };
   }
   async function returnToBot(orderId: string) {

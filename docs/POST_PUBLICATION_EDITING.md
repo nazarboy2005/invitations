@@ -1,5 +1,7 @@
 # Post-publication editing — 2026-11-03
 
+> Update (2026-11-11): free publication/download behavior described below is superseded. All new website publication and clean PNG downloads require verified payment; no publishing-mode setting exists. QA now uses disposable paid order fixtures. See [payments](PAYMENTS.md).
+
 ## Implementation plan
 
 1. Share a server-enforced editing policy and authoritative editing metadata with

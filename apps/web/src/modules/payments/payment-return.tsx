@@ -268,15 +268,11 @@ export function PaymentReturn({
             ? isImage
               ? "Rasmni yuklab oling"
               : "Nashrni yakunlang"
-            : context?.publishingMode === "free" && !order
-              ? isImage
-                ? "Rasmni yuklab oling"
-                : "Taklifnomani nashr qiling"
-              : order?.status === "PROCESSING" || order?.status === "REJECTED"
-                ? "To‘lov tasdiqlanmoqda"
-                : order && !pending && !retryable
-                  ? "To‘lov bo‘yicha ma’lumot"
-                  : "To‘lov qilish";
+            : order?.status === "PROCESSING" || order?.status === "REJECTED"
+              ? "To‘lov tasdiqlanmoqda"
+              : order && !pending && !retryable
+                ? "To‘lov bo‘yicha ma’lumot"
+                : "To‘lov qilish";
   const content = invitation ? getContent(invitation) : null;
   const templateName =
     (order && !retryable ? order.templateName : undefined) ??
@@ -351,7 +347,7 @@ export function PaymentReturn({
                       <dt>
                         {paid
                           ? "To‘langan summa"
-                          : published || context.publishingMode === "free"
+                          : published
                             ? "Narx"
                             : "Jami to‘lov"}
                       </dt>
@@ -423,18 +419,6 @@ export function PaymentReturn({
                 <p role="status">
                   {paymentStateLabels[order.status]}. Taklifnomangiz saqlangan.
                 </p>
-              ) : context.publishingMode === "free" && !order ? (
-                <>
-                  <p>
-                    {isImage
-                      ? "Ma’lumotlarni tekshirib, PNG rasmni yuklab oling."
-                      : "Ma’lumotlarni tekshirib, taklifnomani nashr qiling."}
-                  </p>
-                  <Link className="button" href={editUrl}>
-                    {isImage ? "PNG yuklab olish" : "Nashr qilish"}{" "}
-                    <ArrowRight size={16} aria-hidden="true" />
-                  </Link>
-                </>
               ) : (
                 <>
                   {order && (

@@ -1,3 +1,4 @@
+import { grantTestPurchase, deleteTestPurchases } from "../../tests/fixtures/payment";
 // Disposable creator/media/guest records. Local HTTP only; no messaging or payments.
 import assert from "node:assert/strict";
 import { randomUUID } from "node:crypto";
@@ -283,21 +284,14 @@ try {
           (await publicationResponse.json()).error.code,
           "PAYMENT_REQUIRED",
         );
-        // Exercise the shared publication transaction for disposable QA data in
-        // this test process only. Leave the running app's paid mode untouched.
-        const mode = process.env.PUBLISHING_MODE;
-        try {
-          process.env.PUBLISHING_MODE = "free";
-          published = await publishInvitation(i.id, saved.revision, {
-            id: owner,
-            telegramUserId: "",
-            displayName: "Disposable QA",
-            isAdmin: false,
-          });
-        } finally {
-          if (mode === undefined) delete process.env.PUBLISHING_MODE;
-          else process.env.PUBLISHING_MODE = mode;
-        }
+        // Seed only the disposable test event's verified purchase; no provider call.
+        await grantTestPurchase(sql, saved, owner);
+        published = await publishInvitation(i.id, saved.revision, {
+          id: owner,
+          telegramUserId: "",
+          displayName: "Disposable QA",
+          isAdmin: false,
+        });
       } else published = await json(publicationResponse);
       const publicResponse = await fetch(
         `${origin}/i/${published.invitation.slug}`,
@@ -415,6 +409,7 @@ try {
       await tx`DELETE FROM invitation_viewers WHERE invitation_id IN ${sql(invitationIds)}`;
       await tx`DELETE FROM invitation_audit_log WHERE invitation_id IN ${sql(invitationIds)}`;
     }
+    await deleteTestPurchases(tx, invitationIds);
     await tx`DELETE FROM invitations WHERE owner_id=${owner}`;
     await tx`DELETE FROM media_assets WHERE owner_id=${owner}`;
     await tx`DELETE FROM sessions WHERE user_id=${owner}`;

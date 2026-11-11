@@ -1,3 +1,4 @@
+import { grantTestPurchase, deleteTestPurchases } from "./fixtures/payment";
 // Explicit opt-in against the local app and configured database. All invitation,
 // account and submission records are disposable; no Telegram processor runs.
 import assert from "node:assert/strict";
@@ -15,7 +16,6 @@ const { chromium } = createRequire(new URL("../apps/web/package.json", import.me
 test("Velvet Royale saves, publishes, renders all locales and persists real guest responses", { timeout: 150000 }, async () => {
   const origin = process.env.APP_URL!;
   assert.ok(["localhost", "127.0.0.1"].includes(new URL(origin).hostname));
-  assert.equal(process.env.PUBLISHING_MODE || "free", "free", "This check never starts a payment.");
   const db = getDb(), token = randomToken(), guestToken = randomToken();
   const owner: SessionUser = { id: randomUUID(), telegramUserId: "", displayName: "Disposable Royale verification", isAdmin: false };
   let invitation = createInvitation("baxmal-saroy");
@@ -57,6 +57,7 @@ test("Velvet Royale saves, publishes, renders all locales and persists real gues
       const [template] = await tx`SELECT published FROM templates WHERE id='royal-burgundy-edition' FOR UPDATE`;
       assert.ok(template);
       await tx`UPDATE templates SET published=true WHERE id='royal-burgundy-edition'`;
+      await grantTestPurchase(tx, invitation, owner.id);
       const result = await publishInvitationInTransaction(tx, invitation.id, invitation.revision, owner);
       await tx`UPDATE templates SET published=${template.published} WHERE id='royal-burgundy-edition'`;
       return result;
@@ -113,6 +114,7 @@ test("Velvet Royale saves, publishes, renders all locales and persists real gues
       await tx`DELETE FROM invitation_viewers WHERE invitation_id=${invitation.id}`;
       await tx`DELETE FROM invitation_guests WHERE invitation_id=${invitation.id}`;
       await tx`DELETE FROM invitation_audit_log WHERE invitation_id=${invitation.id}`;
+      await deleteTestPurchases(tx, [invitation.id]);
       await tx`DELETE FROM invitations WHERE id=${invitation.id} AND owner_id=${owner.id}`;
       await tx`DELETE FROM sessions WHERE user_id=${owner.id}`;
       await tx`DELETE FROM users WHERE id=${owner.id}`;

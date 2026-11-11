@@ -1,5 +1,7 @@
 # Publishing verification — 2026-10-22
 
+> Update (2026-11-11): free publication/download behavior described below is superseded. All new website publication and clean PNG downloads require verified payment; no publishing-mode setting exists. QA now uses disposable paid order fixtures. See [payments](PAYMENTS.md).
+
 ## Implemented flow
 
 1. The creator edits privately and clicks **Nashr qilish**.

@@ -19,6 +19,7 @@ import {
 } from "../apps/web/src/server/publication";
 import { digest, randomToken } from "../apps/web/src/server/auth/crypto";
 import { completeInvitation } from "./fixtures/publication";
+import { grantTestPurchase, deleteTestPurchases } from "./fixtures/payment";
 import { removeMedia } from "../apps/web/src/server/storage";
 
 const sql = getDb();
@@ -65,6 +66,8 @@ after(async () => {
     await tx`DELETE FROM wishes WHERE invitation_id IN (SELECT id FROM invitations WHERE owner_id IN (${owner.id},${stranger.id}))`;
     await tx`DELETE FROM rsvp_responses WHERE invitation_id IN (SELECT id FROM invitations WHERE owner_id IN (${owner.id},${stranger.id}))`;
     await tx`DELETE FROM invitation_audit_log WHERE invitation_id IN (SELECT id FROM invitations WHERE owner_id IN (${owner.id},${stranger.id}))`;
+    const invitations = await tx`SELECT id FROM invitations WHERE owner_id IN (${owner.id},${stranger.id})`;
+    await deleteTestPurchases(tx, invitations.map((row) => row.id));
     await tx`DELETE FROM platform_payments WHERE owner_id IN (${owner.id},${stranger.id})`;
     await tx`DELETE FROM invitations WHERE owner_id IN (${owner.id},${stranger.id})`;
     await tx`DELETE FROM media_assets WHERE owner_id IN (${owner.id},${stranger.id})`;
@@ -73,9 +76,10 @@ after(async () => {
   });
   await closeDb();
 });
-async function draft(patch: Partial<Invitation> = {}) {
+async function draft(patch: Partial<Invitation> = {}, paid = true) {
   const invitation = { ...completeInvitation(), ...patch };
   await sql`INSERT INTO invitations(id,owner_id,template_id,status,data) VALUES(${invitation.id},${owner.id},${invitation.templateId},'draft',${sql.json(invitation)})`;
+  if (paid) await grantTestPurchase(sql, invitation, owner.id);
   return invitation;
 }
 async function request(
@@ -121,7 +125,7 @@ test("publication endpoint protects sessions, origin, ownership, revisions and r
   assert.equal(unchanged.status, "draft");
   assert.equal(unchanged.slug, null);
 });
-test("first publish is atomic, free, stable, concurrent-safe and uses event-local end of day", async () => {
+test("first paid publish is atomic, stable, concurrent-safe and uses event-local end of day", async () => {
   const invitation = await draft();
   const results = await Promise.all(
     Array.from({ length: 3 }, () => publishInvitation(invitation.id, 1, owner)),
@@ -144,19 +148,12 @@ test("first publish is atomic, free, stable, concurrent-safe and uses event-loca
     await sql`SELECT action FROM invitation_audit_log WHERE invitation_id=${invitation.id}`;
   assert.deepEqual(
     audits.map((audit) => audit.action),
-    ["published_free"],
+    ["published_paid"],
   );
-  const mode = process.env.PUBLISHING_MODE;
-  process.env.PUBLISHING_MODE = "paid";
-  try {
-    assert.equal(
-      (await publishInvitation(invitation.id, 1, owner)).url,
-      results[0].url,
-    );
-  } finally {
-    if (mode === undefined) delete process.env.PUBLISHING_MODE;
-    else process.env.PUBLISHING_MODE = mode;
-  }
+  assert.equal(
+    (await publishInvitation(invitation.id, 1, owner)).url,
+    results[0].url,
+  );
 });
 
 test("deleting a publication removes owner/public access and preserves payment history", async () => {
@@ -232,24 +229,17 @@ test("publishing a migrated draft restores the same link and preserves locks, de
   );
   assert.equal((await request(path, { revision: revision + 1 })).status, 409);
 
-  const mode = process.env.PUBLISHING_MODE;
-  process.env.PUBLISHING_MODE = "paid";
-  try {
-    const results = await Promise.all(
-      Array.from({ length: 3 }, () =>
-        publishInvitation(invitation.id, revision, owner, () => {
-          throw new Error("Must reuse the existing code");
-        }),
-      ),
-    );
-    for (const result of results) {
-      assert.equal(result.url, published.url);
-      assert.equal(result.invitation.status, "published");
-      assert.equal(result.invitation.revision, revision + 1);
-    }
-  } finally {
-    if (mode === undefined) delete process.env.PUBLISHING_MODE;
-    else process.env.PUBLISHING_MODE = mode;
+  const results = await Promise.all(
+    Array.from({ length: 3 }, () =>
+      publishInvitation(invitation.id, revision, owner, () => {
+        throw new Error("Must reuse the existing code");
+      }),
+    ),
+  );
+  for (const result of results) {
+    assert.equal(result.url, published.url);
+    assert.equal(result.invitation.status, "published");
+    assert.equal(result.invitation.revision, revision + 1);
   }
   // The dashboard's HTTP action returns the same canonical state on retries.
   const response = await request(path, { revision });
@@ -267,7 +257,7 @@ test("publishing a migrated draft restores the same link and preserves locks, de
     await sql`SELECT action FROM invitation_audit_log WHERE invitation_id=${invitation.id} ORDER BY created_at`;
   assert.deepEqual(
     audits.map((audit) => audit.action),
-    ["published_free", "republished"],
+    ["published_paid", "republished"],
   );
   const owned = await request(`/api/invitations/${invitation.id}`);
   assert.equal((await owned.json()).invitation.status, "published");
@@ -378,7 +368,7 @@ test("editing deadlines follow DST in the event timezone", async () => {
     assert.equal(row.edit_deadline_at.toISOString(), deadline);
   }
 });
-test("incomplete content, unsupported/retired templates, past days and paid mode cannot publish", async () => {
+test("incomplete content, unsupported/retired templates, past days and unpaid drafts cannot publish", async () => {
   const empty = await draft({ startsAt: "" });
   await rejectsCode(
     publishInvitation(empty.id, 1, owner),
@@ -406,18 +396,11 @@ test("incomplete content, unsupported/retired templates, past days and paid mode
     publishInvitation(incompatible.id, 1, owner),
     "TEMPLATE_EVENT_MISMATCH",
   );
-  const free = await draft();
-  const mode = process.env.PUBLISHING_MODE;
-  process.env.PUBLISHING_MODE = "paid";
-  try {
-    await rejectsCode(
-      publishInvitation(free.id, 1, owner),
-      "PUBLISHING_UNAVAILABLE",
-    );
-  } finally {
-    if (mode === undefined) delete process.env.PUBLISHING_MODE;
-    else process.env.PUBLISHING_MODE = mode;
-  }
+  const unpaid = await draft({}, false);
+  await rejectsCode(
+    publishInvitation(unpaid.id, 1, owner),
+    "PAYMENT_REQUIRED",
+  );
 });
 test("unready or foreign media cannot become public", async () => {
   const assetId = randomUUID();
