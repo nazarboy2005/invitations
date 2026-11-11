@@ -184,11 +184,15 @@
         "height": 800
       },
       "file": "apps/web/public/images/catalog/osmon-cover.webp",
-      "bytes": 27856,
-      "sha256": "fa67ff3d5bfe99fc69575446cde7062c3345aec7a6ea77071778723f1aa3e49c",
-      "captureSha256": "d59b0a04f182cb9732f6554264083857419f824efd4367495a9a5c52ab9a5c54",
-      "action": "Click #os-open; wait for splash dismissal and fonts; scroll source document 180px to keep names above the listing caption; reduced-motion capture; Next dev indicator excluded",
-      "scrollY": 180
+      "bytes": 26916,
+      "sha256": "4d29acde32fd45525b2583b469eee3e3474a9cf4ea87132f89506c1b565f9666",
+      "captureSha256": "fb0e6657b69d565a5f0423156baa87535bf30ca3ffb296398a297c90a89995e1",
+      "action": "Real renderer captured at native 430px column width without outside blue gutters; click #os-open; fonts settled; scroll 130px; reduced motion; resize complete viewport to catalog 480x800.",
+      "scrollY": 130,
+      "captureViewport": {
+        "width": 430,
+        "height": 717
+      }
     }
   ]
 }

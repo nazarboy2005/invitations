@@ -23,7 +23,7 @@ test("studio choices contain exactly the published designs compatible with each 
   }
 });
 
-test("studio Nikoh choices retain the full curated ranking before other compatible categories", () => {
+test("studio choices put premium designs first and preserve curation within each price", () => {
   const input = TEMPLATES.map((template) => ({
     ...template,
     published: true,
@@ -31,12 +31,14 @@ test("studio Nikoh choices retain the full curated ranking before other compatib
   const originalIds = input.map((template) => template.id);
   const result = orderEventTemplates(input, "wedding");
   assert.deepEqual(
-    result.slice(0, 11).map((template) => template.id),
+    result.slice(0, 13).map((template) => template.id),
     [
+      "ganch",
+      "baxmal-saroy",
+      "osmon",
       "anor",
       "bulutlar-qasri",
       "bogi-eram",
-      "ganch",
       "yashil-makon",
       "kuzgi-chinor",
       "muhr",
@@ -46,6 +48,7 @@ test("studio Nikoh choices retain the full curated ranking before other compatib
       "kozgu",
     ],
   );
+  assert.ok(result.every((template, index) => index === 0 || result[index - 1].priceMinor >= template.priceMinor));
   assert.deepEqual(
     input.map((template) => template.id),
     originalIds,

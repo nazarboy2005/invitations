@@ -38,6 +38,8 @@ This file records durable, user-approved product requirements and a small number
 
 ## Template catalog and switching
 
+- User requirement: show higher-priced templates first in discovery and template selection; preserve curated ordering within a price tier.
+
 - User requirement: Taklifnomalarim cards and payment-result artwork use the same static template cover and exact versioned image URL as the template catalog, sharing the browser cache in both directions. Sample names inside this artwork are acceptable; show the creator's actual names in the card text. Do not generate personalized dashboard screenshots or schedule cover generation after saving, publication, or payment.
 
 - Catalog categories organize discovery and are independent of event types. A template may belong to multiple shared categories. Event compatibility is separately declared per template, managed in the database, checked when saving, and used to filter creator choices.

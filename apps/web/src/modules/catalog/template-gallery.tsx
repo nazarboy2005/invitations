@@ -109,7 +109,7 @@ export function TemplateGallery({
   const visibleTemplates = useMemo(() => {
     const filtered = (
       featured
-        ? templates
+        ? [...templates].sort((a, b) => b.priceMinor - a.priceMinor)
         : orderCatalogTemplates(templates, format === "image" ? "all" : renderedCategoryId)
     ).filter((template) =>
       (featured || (template.format ?? "web") === format) && matchesTemplateSearch(template, categories, searchQuery),

@@ -21,7 +21,10 @@ export function useCardPlayback(
       setActiveId(null);
       return;
     }
-    hovered.current = null;
+    // Filters/dialogs can remount playback while the pointer stays over a card.
+    hovered.current = element.querySelector<HTMLElement>(
+      "[data-template-id]:hover, [data-template-id]:focus-within",
+    )?.dataset.templateId ?? null;
     setActiveId(null);
     const motion = matchMedia("(prefers-reduced-motion: reduce)");
     const touch = matchMedia("(hover: none), (pointer: coarse)");
@@ -135,7 +138,7 @@ export function useCardPlayback(
     activeId: !paused && templateIds.includes(activeId ?? "") ? activeId : null,
     start(id: string) {
       hovered.current = id;
-      if (allowed.current && !paused) hoverChanged.current();
+      if (!paused) hoverChanged.current();
     },
     stop(id: string) {
       if (hovered.current === id) hovered.current = null;

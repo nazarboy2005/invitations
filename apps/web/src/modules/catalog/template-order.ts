@@ -17,7 +17,7 @@ const NIKOH_TEMPLATE_IDS = [
 const nikohRank = new Map(NIKOH_TEMPLATE_IDS.map((id, index) => [id, index]));
 
 /** Catalog and studio share this ranking; homepage selections stay separate. */
-export function orderCatalogTemplates(
+function editorialCatalogTemplates(
   templates: TemplateDefinition[],
   categoryId: string,
 ): TemplateDefinition[] {
@@ -58,6 +58,16 @@ export function orderCatalogTemplates(
   return ordered;
 }
 
+/** Higher prices lead; stable sorting preserves curation within each tier. */
+export function orderCatalogTemplates(
+  templates: TemplateDefinition[],
+  categoryId: string,
+): TemplateDefinition[] {
+  return editorialCatalogTemplates(templates, categoryId).sort(
+    (a, b) => b.priceMinor - a.priceMinor,
+  );
+}
+
 /** Event compatibility is independent of the admin-managed catalog categories. */
 export function orderEventTemplates(
   templates: TemplateDefinition[],
@@ -73,5 +83,5 @@ export function orderEventTemplates(
     ...compatible.filter(
       (template) => !template.categoryIds.includes("wedding"),
     ),
-  ];
+  ].sort((a, b) => b.priceMinor - a.priceMinor);
 }
