@@ -31,6 +31,23 @@ export async function getPublishedInvitationCount(): Promise<number | null> {
   }
 }
 
+/** Latest catalog update that can change the published template listings. */
+export async function getPublishedCatalogLastModified(): Promise<Date | null> {
+  if (!process.env.DATABASE_URL) return null;
+  try {
+    const [row] = await getDb()`
+      SELECT max(updated_at) AS last_modified
+      FROM templates
+      WHERE published = true
+    `;
+    if (!row?.last_modified) return null;
+    const date = new Date(row.last_modified);
+    return Number.isNaN(date.getTime()) ? null : date;
+  } catch {
+    return null;
+  }
+}
+
 export async function getCatalog(includeUnpublished = false): Promise<{
   templates: TemplateDefinition[];
   categories: TemplateCategory[];
