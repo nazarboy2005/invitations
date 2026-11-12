@@ -17,10 +17,10 @@ const assetBackgrounds = Object.fromEntries(
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.APP_URL || "https://fotiha.uz"),
   title: {
-    default: `${BRAND_NAME} — Yaxshi kunlar birga`,
+    default: `${BRAND_NAME} — Yaxshi kunlarda birga`,
     template: `%s | ${BRAND_NAME}`,
   },
-  description: "Unutilmas kuningiz uchun shaxsiy elektron taklifnoma yarating.",
+  description: "Unutilmas kuningiz uchun onlayn taklifnoma yarating.",
   openGraph: {
     type: "website",
     siteName: BRAND_NAME,
