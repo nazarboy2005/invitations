@@ -34,7 +34,6 @@ const questions = [
     title: "Taklifnoma yaratish va nashr qilish qancha turadi?",
     answer:
       "Sayt taklifnomalari asosan 49 000 so‘m turadi. Narx dizaynga qarab farq qilishi mumkin. Har bir dizaynni tanlashdan oldin to‘liq ko‘rib, narxini bilib olasiz.",
-    linkText: "Dizaynlarni ko‘rish",
   },
 ];
 
@@ -108,12 +107,7 @@ export function HomeHelp() {
                 </span>
               </summary>
               <div className={styles.answer}>
-                <p>
-                  {question.answer}{" "}
-                  {question.linkText && (
-                    <Link href="/templates">{question.linkText}</Link>
-                  )}
-                </p>
+                <p>{question.answer}</p>
               </div>
             </details>
           ))}
