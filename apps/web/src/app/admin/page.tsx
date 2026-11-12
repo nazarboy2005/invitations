@@ -20,6 +20,12 @@ import { listAdminBroadcasts } from "@/server/admin-broadcasts";
 import { z } from "zod";
 import { AdminChangeRequests } from "@/modules/admin/admin-change-requests";
 import { listInvitationChanges } from "@/server/invitation-changes";
+import {
+  getPaymentAnalytics,
+  paymentAnalyticsPeriods,
+  type PaymentAnalyticsPeriod,
+} from "@/server/payment-analytics";
+import { AdminPaymentAnalytics } from "@/modules/admin/admin-analytics-payments";
 export const dynamic = "force-dynamic";
 export const metadata = {
   title: "Boshqaruv",
@@ -35,6 +41,7 @@ export default async function AdminPage({
     status?: string;
     userId?: string;
     invitationId?: string;
+    period?: string;
   }>;
 }) {
   const user = await requireAdminPage();
@@ -51,6 +58,7 @@ export default async function AdminPage({
     "invitations",
     "requests",
     "payments",
+    "analytics",
     "broadcasts",
     "templates",
     "categories",
@@ -67,7 +75,9 @@ export default async function AdminPage({
     throw new Error("Admin catalog unavailable");
   return (
     <AdminShell user={user} view={view}>
-      {view === "requests" && <AdminChangeRequests items={await listInvitationChanges()} />}
+      {view === "requests" && (
+        <AdminChangeRequests items={await listInvitationChanges()} />
+      )}
       {view === "users" && (
         <AdminUsers data={await listAdminUsers(filters)} filters={filters} />
       )}
@@ -86,6 +96,17 @@ export default async function AdminPage({
               ? query.invitationId
               : undefined
           }
+        />
+      )}
+      {view === "analytics" && (
+        <AdminPaymentAnalytics
+          data={await getPaymentAnalytics(
+            paymentAnalyticsPeriods.includes(
+              query.period as PaymentAnalyticsPeriod,
+            )
+              ? (query.period as PaymentAnalyticsPeriod)
+              : "month",
+          )}
         />
       )}
       {view === "broadcasts" && (

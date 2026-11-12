@@ -1,0 +1,249 @@
+.page {
+  --analytics-online: #b8324a;
+  --analytics-manual: #d7a867;
+  --analytics-muted: #827981;
+  --analytics-grid: #ece7e9;
+  --analytics-hover: #f7f2f3;
+  display: grid;
+  gap: 22px;
+  color: var(--ink);
+}
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+}
+.toolbar h2 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 650;
+}
+.toolbar p,
+.panelHeading p {
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-size: 11px;
+}
+.periods {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 4px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+}
+.periods a {
+  display: inline-flex;
+  min-height: 36px;
+  align-items: center;
+  justify-content: center;
+  padding: 0 12px;
+  border-radius: 5px;
+  color: var(--muted);
+  font-size: 11px;
+  white-space: nowrap;
+  text-decoration: none;
+  transition:
+    background 140ms ease,
+    color 140ms ease;
+}
+.periods a:hover {
+  color: var(--ink);
+  background: #f8f6f7;
+}
+.periods a[data-active="true"] {
+  color: var(--ink);
+  background: #f1edef;
+  font-weight: 650;
+}
+.periods a:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+.metric {
+  position: relative;
+  display: grid;
+  min-width: 0;
+  gap: 9px;
+  padding: 19px 20px 18px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: #fff;
+}
+.metricIcon {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  margin-bottom: 3px;
+  border-radius: 8px;
+  color: var(--primary);
+  background: #faf0f2;
+}
+.metricLabel {
+  color: var(--muted);
+  font-size: 11px;
+}
+.metric strong {
+  overflow-wrap: anywhere;
+  font-size: clamp(19px, 2vw, 25px);
+  font-weight: 620;
+  line-height: 1.2;
+  font-variant-numeric: tabular-nums;
+}
+.metric small {
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.5;
+}
+.panel {
+  min-width: 0;
+  padding: 22px 24px 18px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: #fff;
+}
+.panelHeading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
+}
+.panelHeading h3 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 650;
+}
+.updated {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--muted);
+  font-size: 10px;
+  white-space: nowrap;
+}
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  margin: 20px 0 8px;
+  color: var(--muted);
+  font-size: 10px;
+}
+.legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+.onlineDot,
+.manualDot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: var(--analytics-online);
+}
+.manualDot {
+  background: var(--analytics-manual);
+}
+.chart {
+  width: 100%;
+  height: 300px;
+  min-width: 0;
+  color: var(--ink);
+}
+.chart :global(.recharts-wrapper),
+.chart :global(.recharts-surface) {
+  overflow: visible;
+}
+.chart :global(.recharts-tooltip-wrapper) {
+  outline: 0;
+}
+.tooltip {
+  display: grid;
+  min-width: 190px;
+  gap: 9px;
+  padding: 12px 13px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 8px 24px #29252a14;
+  font-size: 10px;
+}
+.tooltip > strong {
+  margin-bottom: 2px;
+  font-size: 11px;
+}
+.tooltip > span {
+  display: grid;
+  grid-template-columns: 8px 1fr auto;
+  align-items: center;
+  gap: 8px;
+  color: var(--muted);
+}
+.tooltip b {
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+.tooltipTotal {
+  padding-top: 8px;
+  border-top: 1px solid var(--line);
+}
+.note {
+  margin: -5px 0 0;
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.7;
+}
+@media (max-width: 1050px) {
+  .metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 760px) {
+  .page {
+    gap: 15px;
+  }
+  .toolbar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .periods {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .periods a {
+    flex: 1;
+    padding-inline: 6px;
+    font-size: 10px;
+  }
+  .metrics {
+    gap: 9px;
+  }
+  .metric {
+    gap: 7px;
+    padding: 14px;
+  }
+  .metric strong {
+    font-size: 18px;
+  }
+  .metricIcon {
+    width: 30px;
+    height: 30px;
+  }
+  .panel {
+    padding: 18px 14px 12px;
+  }
+  .chart {
+    height: 235px;
+  }
+}

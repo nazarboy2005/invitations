@@ -374,7 +374,8 @@
   display: grid;
   gap: 7px;
 }
-.nav a {
+.nav a,
+.navToggle {
   display: flex;
   align-items: center;
   gap: 12px;
@@ -385,12 +386,53 @@
   font-weight: 600;
   color: #655c64;
 }
-.nav a:hover {
+.nav a:hover,
+.navToggle:hover {
   background: #f8f6f7;
 }
-.nav a[aria-current="page"] {
+.nav a[aria-current="page"],
+.navToggle[data-active="true"] {
   color: var(--primary-hover);
   background: var(--accent-soft);
+}
+.navToggle {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+  font-family: inherit;
+}
+.navToggle > span {
+  flex: 1;
+}
+.navChevron {
+  transition: transform 160ms ease;
+}
+.navToggle[aria-expanded="true"] .navChevron {
+  transform: rotate(180deg);
+}
+.navGroup {
+  display: grid;
+  gap: 4px;
+}
+.navChildren {
+  display: grid;
+  gap: 4px;
+  margin-left: 15px;
+  padding-left: 9px;
+  border-left: 1px solid var(--line);
+}
+.navChildren a {
+  min-height: 40px;
+  padding: 9px 12px;
+  gap: 10px;
+  font-size: 12px;
+}
+.navChildren a:focus-visible,
+.navToggle:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
 }
 .sidebarFoot {
   margin-top: auto;
@@ -934,14 +976,27 @@
     gap: 6px;
     padding: 20px 0 14px;
   }
-  .nav a {
+  .nav a,
+  .navToggle {
     white-space: nowrap;
     padding: 11px;
     gap: 7px;
     font-size: 11px;
   }
-  .nav a svg {
+  .nav a svg,
+  .navToggle svg {
     width: 16px;
+  }
+  .navGroup {
+    min-width: 0;
+    grid-column: 1 / -1;
+  }
+  .navChildren {
+    grid-column: 1 / -1;
+    margin-left: 8px;
+  }
+  .navChildren a {
+    white-space: normal;
   }
   .sidebarFoot {
     display: none;

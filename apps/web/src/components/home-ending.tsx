@@ -31,9 +31,10 @@ const questions = [
       "Taklifnomani nashr qilganingizdan so‘ng uning havolasini ulashasiz. Uni Telegram, WhatsApp yoki o‘zingizga qulay boshqa messenjer orqali yuborish mumkin. Mehmon havolani telefon yoki kompyuter brauzerida ochadi; alohida ilova o‘rnatishi shart emas.",
   },
   {
-    title: "Yuborgandan keyin ma’lumotlarni o‘zgartirsam-chi?",
+    title: "Taklifnoma yaratish va nashr qilish qancha turadi?",
     answer:
-      "Nashrdan keyin belgilangan tahrirlash muddati ichida manzil, dastur, matn, surat va musiqa kabi tafsilotlarni yangilashingiz mumkin. Havola o‘sha holicha qoladi. Asosiy ismlarni tuzatish yoki sanani ko‘chirish uchun shaxsiy kabinetingizdan so‘rov yuboriladi.",
+      "Sayt taklifnomalari asosan 49 000 so‘m turadi. Narx dizaynga qarab farq qilishi mumkin. Har bir dizaynni tanlashdan oldin to‘liq ko‘rib, narxini bilib olasiz.",
+    linkText: "Dizaynlarni ko‘rish",
   },
 ];
 
@@ -107,7 +108,12 @@ export function HomeHelp() {
                 </span>
               </summary>
               <div className={styles.answer}>
-                <p>{question.answer}</p>
+                <p>
+                  {question.answer}{" "}
+                  {question.linkText && (
+                    <Link href="/templates">{question.linkText}</Link>
+                  )}
+                </p>
               </div>
             </details>
           ))}
