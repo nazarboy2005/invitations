@@ -1,4 +1,5 @@
 import { BRAND_NAME } from "@/lib/brand";
+import { Analytics } from "@vercel/analytics/next";
 import type { Metadata } from "next";
 import type { CSSProperties } from "react";
 import { publicAsset } from "../lib/public-asset";
@@ -45,6 +46,7 @@ export default function RootLayout({
       <body style={assetBackgrounds}>
         <TelegramWebAppScript />
         {children}
+        <Analytics />
       </body>
     </html>
   );

@@ -116,8 +116,8 @@
 .calendarMonth { min-width: 0; flex: 1; }
 .calendarCaption { position: relative; display: flex; height: 32px; align-items: center; justify-content: center; }
 .calendarCaptionLabel { font-size: 11px; font-weight: 650; }
-.calendarNav { position: absolute; inset: 0; display: flex; align-items: center; justify-content: space-between; }
-.calendarNavButton { display: grid; width: 27px; height: 27px; place-items: center; border: 1px solid var(--line); border-radius: 5px; color: var(--ink); background: #fff; cursor: pointer; }
+.calendarNav { position: absolute; inset: 0 0 auto; display: flex; height: 32px; align-items: center; justify-content: space-between; pointer-events: none; }
+.calendarNavButton { position: relative; z-index: 1; display: grid; width: 27px; height: 27px; place-items: center; border: 1px solid var(--line); border-radius: 5px; color: var(--ink); background: #fff; cursor: pointer; pointer-events: auto; }
 .calendarNavButton:hover { background: #f8f6f7; }
 .calendarGrid { width: 100%; border-collapse: collapse; }
 .calendarWeekdays { height: 27px; }
