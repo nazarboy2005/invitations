@@ -1,4 +1,3 @@
-import Link from "next/link";
 import {
   ArrowDownLeft,
   Banknote,
@@ -9,22 +8,12 @@ import {
 import { formatPrice } from "@taklifnoma/contracts";
 import type {
   PaymentAnalytics,
-  PaymentAnalyticsPeriod,
 } from "@/server/payment-analytics";
 import { AdminPaymentRevenueChart } from "./admin-analytics-chart";
+import { AdminAnalyticsDateRange } from "./admin-analytics-date-range";
 import styles from "./payment-analytics.module.css";
 
-const periods: Array<{ id: PaymentAnalyticsPeriod; label: string }> = [
-  { id: "week", label: "Bu hafta" },
-  { id: "month", label: "Bu oy" },
-  { id: "30days", label: "Oxirgi 30 kun" },
-];
-
 const countFormat = new Intl.NumberFormat("uz-UZ");
-
-function rangeLabel(period: PaymentAnalyticsPeriod) {
-  return periods.find((item) => item.id === period)?.label ?? "Bu oy";
-}
 
 export function AdminPaymentAnalytics({ data }: { data: PaymentAnalytics }) {
   return (
@@ -33,21 +22,10 @@ export function AdminPaymentAnalytics({ data }: { data: PaymentAnalytics }) {
         <div>
           <h2>To‘lovlar tahlili</h2>
           <p>
-            {rangeLabel(data.period)} · Sana Toshkent vaqti bilan hisoblanadi
+            {data.from} – {data.to} · Sana Toshkent vaqti bilan hisoblanadi
           </p>
         </div>
-        <nav className={styles.periods} aria-label="Tahlil davri">
-          {periods.map((item) => (
-            <Link
-              key={item.id}
-              href={`/admin?view=analytics&period=${item.id}`}
-              aria-current={data.period === item.id ? "page" : undefined}
-              data-active={data.period === item.id}
-            >
-              {item.label}
-            </Link>
-          ))}
-        </nav>
+        <AdminAnalyticsDateRange period={data.period} from={data.from} to={data.to} />
       </div>
 
       <section
@@ -95,7 +73,7 @@ export function AdminPaymentAnalytics({ data }: { data: PaymentAnalytics }) {
             <p>Click va administrator qayd etgan to‘lovlar</p>
           </div>
           <span className={styles.updated}>
-            <CalendarDays size={15} /> {rangeLabel(data.period)}
+            <CalendarDays size={15} /> {data.from} – {data.to}
           </span>
         </div>
         <div className={styles.legend}>

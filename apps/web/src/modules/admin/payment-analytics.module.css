@@ -25,43 +25,120 @@
   color: var(--muted);
   font-size: 11px;
 }
-.periods {
+.rangeTrigger {
   display: inline-flex;
+  min-height: 40px;
   align-items: center;
-  gap: 3px;
-  padding: 4px;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: #fff;
-}
-.periods a {
-  display: inline-flex;
-  min-height: 36px;
-  align-items: center;
-  justify-content: center;
+  gap: 9px;
   padding: 0 12px;
-  border-radius: 5px;
-  color: var(--muted);
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  color: var(--ink);
+  background: #fff;
+  font: inherit;
   font-size: 11px;
+  cursor: pointer;
+}
+.rangeTrigger span {
+  font-weight: 580;
   white-space: nowrap;
-  text-decoration: none;
-  transition:
-    background 140ms ease,
-    color 140ms ease;
 }
-.periods a:hover {
-  color: var(--ink);
-  background: #f8f6f7;
+.rangeTrigger > svg:first-child {
+  color: var(--primary);
 }
-.periods a[data-active="true"] {
-  color: var(--ink);
-  background: #f1edef;
-  font-weight: 650;
+.rangeTrigger:hover {
+  background: #faf8f9;
 }
-.periods a:focus-visible {
+.rangeTrigger:focus-visible,
+.rangePresets button:focus-visible,
+.rangeReset:focus-visible,
+.rangeApplyRow button:focus-visible {
   outline: 3px solid var(--focus);
   outline-offset: 2px;
 }
+.rangePopover {
+  z-index: 100;
+  display: grid;
+  grid-template-columns: 144px minmax(0, 1fr);
+  width: min(648px, calc(100vw - 24px));
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 14px 44px #29252a20;
+  animation: range-enter 120ms ease-out;
+}
+@keyframes range-enter {
+  from { opacity: 0; transform: translateY(-3px) scale(.99); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.rangePresets {
+  display: grid;
+  align-content: start;
+  gap: 2px;
+  padding: 14px 10px;
+  border-right: 1px solid var(--line);
+  background: #fcfbfb;
+}
+.rangePresets p {
+  margin: 0 8px 7px;
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 650;
+}
+.rangePresets button {
+  min-height: 32px;
+  padding: 0 9px;
+  border: 0;
+  border-radius: 5px;
+  color: var(--muted);
+  background: transparent;
+  text-align: left;
+  font: inherit;
+  font-size: 11px;
+  cursor: pointer;
+}
+.rangePresets button:hover,
+.rangePresets button[data-active="true"] {
+  color: var(--ink);
+  background: #f1edef;
+}
+.rangePresets button[data-active="true"] { font-weight: 650; }
+.rangeCalendar { min-width: 0; padding: 14px 16px 12px; }
+.rangeCalendarHeading { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 10px; }
+.rangeCalendarHeading div { display: grid; gap: 3px; }
+.rangeCalendarHeading strong { font-size: 12px; font-weight: 650; }
+.rangeCalendarHeading span { color: var(--muted); font-size: 10px; }
+.rangeReset { display: grid; width: 30px; height: 30px; place-items: center; border: 1px solid var(--line); border-radius: 6px; color: var(--muted); background: #fff; cursor: pointer; }
+.rangeReset:hover { color: var(--ink); background: #f8f6f7; }
+.calendar { --rdp-accent-color: var(--primary); --rdp-accent-background-color: #f8e9ed; --rdp-day-height: 32px; --rdp-day-width: 32px; --rdp-day_button-height: 30px; --rdp-day_button-width: 30px; --rdp-nav-height: 30px; --rdp-outside-opacity: .42; width: 100%; color: var(--ink); font-size: 11px; }
+.calendarMonths { display: flex; justify-content: space-between; gap: 16px; }
+.calendarMonth { min-width: 0; flex: 1; }
+.calendarCaption { position: relative; display: flex; height: 32px; align-items: center; justify-content: center; }
+.calendarCaptionLabel { font-size: 11px; font-weight: 650; }
+.calendarNav { position: absolute; inset: 0; display: flex; align-items: center; justify-content: space-between; }
+.calendarNavButton { display: grid; width: 27px; height: 27px; place-items: center; border: 1px solid var(--line); border-radius: 5px; color: var(--ink); background: #fff; cursor: pointer; }
+.calendarNavButton:hover { background: #f8f6f7; }
+.calendarGrid { width: 100%; border-collapse: collapse; }
+.calendarWeekdays { height: 27px; }
+.calendarWeekday { color: var(--muted); font-size: 9px; font-weight: 500; }
+.calendarWeek { height: 32px; }
+.calendarDay { padding: 0; text-align: center; }
+.calendarDayButton { display: inline-grid; width: 30px; height: 30px; place-items: center; border: 0; border-radius: 6px; color: var(--ink); background: transparent; font: inherit; font-size: 10px; cursor: pointer; }
+.calendarDayButton:hover { background: #f5f1f2; }
+.calendarSelected .calendarDayButton,
+.calendarRangeStart .calendarDayButton,
+.calendarRangeEnd .calendarDayButton { color: #fff; background: var(--primary); }
+.calendarRangeStart { border-radius: 6px 0 0 6px; background: #f8e9ed; }
+.calendarRangeEnd { border-radius: 0 6px 6px 0; background: #f8e9ed; }
+.calendarRangeMiddle { background: #f8e9ed; }
+.calendarToday .calendarDayButton { box-shadow: inset 0 0 0 1px var(--primary); }
+.calendarOutside .calendarDayButton { color: var(--muted); opacity: .5; }
+.calendarDisabled .calendarDayButton { cursor: not-allowed; opacity: .35; }
+.rangeApplyRow { display: flex; min-height: 42px; align-items: center; justify-content: space-between; gap: 12px; margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--line); }
+.rangeApplyRow span { overflow: hidden; color: var(--muted); font-size: 10px; text-overflow: ellipsis; white-space: nowrap; }
+.rangeApplyRow button { min-height: 32px; padding: 0 14px; border: 0; border-radius: 6px; color: #fff; background: var(--primary); font: inherit; font-size: 11px; font-weight: 600; cursor: pointer; }
+.rangeApplyRow button:disabled { cursor: not-allowed; opacity: .45; }
 .metrics {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -217,14 +294,12 @@
     align-items: flex-start;
     flex-direction: column;
   }
-  .periods {
-    width: 100%;
-    justify-content: space-between;
+  .rangeTrigger {
+    max-width: 100%;
   }
-  .periods a {
-    flex: 1;
-    padding-inline: 6px;
-    font-size: 10px;
+  .rangeTrigger span {
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .metrics {
     gap: 9px;
@@ -246,4 +321,14 @@
   .chart {
     height: 235px;
   }
+}
+@media (max-width: 620px) {
+  .rangePopover { grid-template-columns: 112px minmax(0, 1fr); }
+  .rangePresets { padding-inline: 6px; }
+  .rangeCalendar { padding-inline: 10px; }
+  .calendarMonths { justify-content: center; }
+  .calendarMonth + .calendarMonth { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .rangePopover { animation: none; }
 }

@@ -1,7 +1,18 @@
 import { getDb } from "@taklifnoma/database";
 import { requireAdmin } from "./admin";
 
-export const paymentAnalyticsPeriods = ["week", "month", "30days"] as const;
+export const paymentAnalyticsPeriods = [
+  "today",
+  "yesterday",
+  "week",
+  "lastWeek",
+  "month",
+  "lastMonth",
+  "7days",
+  "30days",
+  "90days",
+  "custom",
+] as const;
 export type PaymentAnalyticsPeriod = (typeof paymentAnalyticsPeriods)[number];
 
 const TASHKENT_TIME_ZONE = "Asia/Tashkent";
@@ -44,16 +55,67 @@ function startOfTashkentDay(date: {
   );
 }
 
+function parseDate(value: string | undefined) {
+  if (!value || !/^\d{4}-\d{2}-\d{2}$/.test(value)) return null;
+  const [year, month, day] = value.split("-").map(Number);
+  const date = new Date(Date.UTC(year, month - 1, day));
+  if (
+    date.getUTCFullYear() !== year ||
+    date.getUTCMonth() !== month - 1 ||
+    date.getUTCDate() !== day
+  ) return null;
+  return { year, month, day };
+}
+
+function compareDates(
+  a: { year: number; month: number; day: number },
+  b: { year: number; month: number; day: number },
+) {
+  return Date.UTC(a.year, a.month - 1, a.day) - Date.UTC(b.year, b.month - 1, b.day);
+}
+
+function formatDateKey(date: { year: number; month: number; day: number }) {
+  return `${date.year}-${String(date.month).padStart(2, "0")}-${String(date.day).padStart(2, "0")}`;
+}
+
 function dateKey(value: unknown) {
   return String(value).slice(0, 10);
 }
 
-export async function getPaymentAnalytics(period: PaymentAnalyticsPeriod) {
+export async function getPaymentAnalytics(
+  period: PaymentAnalyticsPeriod,
+  customFrom?: string,
+  customTo?: string,
+) {
   await requireAdmin();
 
   const today = tashkentToday();
   let firstDay: { year: number; month: number; day: number };
-  if (period === "month") {
+  let lastDay = today;
+  const from = parseDate(customFrom);
+  const to = parseDate(customTo);
+  if (period === "custom" && from && to && compareDates(from, to) <= 0 && compareDates(to, today) <= 0) {
+    firstDay = from;
+    lastDay = to;
+  } else if (period === "today") {
+    firstDay = today;
+  } else if (period === "yesterday") {
+    firstDay = lastDay = addDays(today, -1);
+  } else if (period === "lastWeek") {
+    const weekday = new Date(Date.UTC(today.year, today.month - 1, today.day)).getUTCDay();
+    lastDay = addDays(today, -((weekday + 6) % 7) - 1);
+    firstDay = addDays(lastDay, -6);
+  } else if (period === "lastMonth") {
+    lastDay = addDays({ ...today, day: 1 }, -1);
+    firstDay = { ...lastDay, day: 1 };
+  } else if (period === "7days") {
+    firstDay = addDays(today, -6);
+  } else if (period === "90days") {
+    firstDay = addDays(today, -89);
+  } else if (period === "custom") {
+    firstDay = { ...today, day: 1 };
+    period = "month";
+  } else if (period === "month") {
     firstDay = { ...today, day: 1 };
   } else if (period === "week") {
     const weekday = new Date(
@@ -65,7 +127,9 @@ export async function getPaymentAnalytics(period: PaymentAnalyticsPeriod) {
   }
 
   const start = startOfTashkentDay(firstDay);
-  const end = new Date();
+  const end = compareDates(lastDay, today) === 0
+    ? new Date()
+    : startOfTashkentDay(addDays(lastDay, 1));
   const [summary] = await getDb() /* sql */ `
     WITH payments AS (
       SELECT amount_minor, status, created_at, verified_at AS paid_at, 'click'::text AS method
@@ -108,16 +172,11 @@ export async function getPaymentAnalytics(period: PaymentAnalyticsPeriod) {
     FROM payments WHERE paid_at >= ${start} AND paid_at < ${end}
     GROUP BY day ORDER BY day`;
 
-  const dayCount = Math.max(
-    1,
-    Math.ceil(
-      (startOfTashkentDay(today).getTime() - start.getTime()) / 86_400_000,
-    ) + 1,
-  );
+  const dayCount = Math.max(1, (Date.UTC(lastDay.year, lastDay.month - 1, lastDay.day) - Date.UTC(firstDay.year, firstDay.month - 1, firstDay.day)) / 86_400_000 + 1);
   const totalsByDay = new Map(dailyRows.map((row) => [dateKey(row.day), row]));
   const chart = Array.from({ length: dayCount }, (_, index) => {
     const date = addDays(firstDay, index);
-    const key = `${date.year}-${String(date.month).padStart(2, "0")}-${String(date.day).padStart(2, "0")}`;
+    const key = formatDateKey(date);
     const row = totalsByDay.get(key);
     return {
       day: key,
@@ -130,6 +189,8 @@ export async function getPaymentAnalytics(period: PaymentAnalyticsPeriod) {
 
   return {
     period,
+    from: formatDateKey(firstDay),
+    to: formatDateKey(lastDay),
     start: start.toISOString(),
     end: end.toISOString(),
     paidCount: Number(summary.paid_count),

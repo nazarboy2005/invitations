@@ -42,6 +42,8 @@ export default async function AdminPage({
     userId?: string;
     invitationId?: string;
     period?: string;
+    from?: string;
+    to?: string;
   }>;
 }) {
   const user = await requireAdminPage();
@@ -106,6 +108,8 @@ export default async function AdminPage({
             )
               ? (query.period as PaymentAnalyticsPeriod)
               : "month",
+            query.from,
+            query.to,
           )}
         />
       )}
