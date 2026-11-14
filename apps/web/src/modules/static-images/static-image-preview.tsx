@@ -109,13 +109,21 @@ export function StaticImagePreview({
 }
 
 export function StaticImageFullPreview({
-  invitation,
+  posterUrl,
 }: {
-  invitation: Invitation;
+  posterUrl: string;
 }) {
   return (
     <section className={styles.fullPreview}>
-      <StaticImagePreview invitation={invitation} locale={invitation.defaultLocale} />
+      <div className={styles.preview}>
+        <img
+          src={posterUrl}
+          width={750}
+          height={1050}
+          alt="Taklifnoma namunasi"
+          draggable={false}
+        />
+      </div>
     </section>
   );
 }
