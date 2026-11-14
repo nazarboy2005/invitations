@@ -27,6 +27,7 @@ import styles from "./full-template-preview.module.css";
 import { observeTemplateDocuments } from "../../templates/observe-template-documents";
 import { prepareTemplateOpening } from "../../templates/prepare-template-opening";
 import { isTemplateDocument } from "../../lib/public-asset";
+import { StaticImageFullPreview } from "@/modules/static-images/static-image-preview";
 
 // Load only the renderer selected by this preview, rather than every design.
 const AnorInvitation = dynamic(() => import("@/templates/anor/renderer").then((module) => module.AnorInvitation));
@@ -366,6 +367,8 @@ export function FullTemplatePreview({
       </nav>}
       {!invitation || invitation.templateId !== template.id ? (
         <div className={styles.loading}>Dizayn ochilmoqda…</div>
+      ) : template.format === "image" ? (
+        <StaticImageFullPreview invitation={invitation} />
       ) : template.id === "baxt-darvozasi" ? (
         <OltinDarvozaInvitation invitation={invitation} invitationId={invitation.id} locale={invitation.defaultLocale} preview fullPreview catalogMusic={catalogPreview} sampleWishes={catalogPreview} silentPlayback={silentPlayback} />
       ) : template.id === "gulli-darvoza" ? (
