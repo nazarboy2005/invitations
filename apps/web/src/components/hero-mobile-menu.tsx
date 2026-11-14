@@ -59,7 +59,7 @@ export function HeroMobileMenu({
           onClick={() => setOpen(false)}
         >
           <Link href="/templates">Shablonlar</Link>
-          <a href="https://t.me/HyperLean">Bog‘lanish</a>
+          <a href="https://t.me/fotiha_support_bot">Bog‘lanish</a>
           <Link href="/#why-us">Biz haqimizda</Link>
           <FavoritesLink />
           {accountLink}

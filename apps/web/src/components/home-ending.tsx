@@ -86,7 +86,7 @@ export function HomeHelp() {
             Iltimos, eng ko‘p beriladigan savollarga javoblarni quyidagi
             ro‘yxatdan toping.
           </p>
-          <a href="https://t.me/HyperLean" className={styles.note}>
+          <a href="https://t.me/fotiha_support_bot" className={styles.note}>
             <Headset size={42} strokeWidth={1} aria-hidden="true" />
             <span>
               Siz qidirgan javobni topa olmasangiz,

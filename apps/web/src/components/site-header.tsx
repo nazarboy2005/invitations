@@ -53,7 +53,7 @@ export async function SiteHeader({
         )}
         <nav className={styles.heroNav} aria-label="Asosiy menyu">
           <Link href="/templates">Shablonlar</Link>
-          <a href="https://t.me/HyperLean">Bog‘lanish</a>
+          <a href="https://t.me/fotiha_support_bot">Bog‘lanish</a>
           <Link href="/#why-us">Biz haqimizda</Link>
         </nav>
         <SiteSounds />
