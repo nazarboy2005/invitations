@@ -324,7 +324,7 @@ export function FullTemplatePreview({
   }, [cardPreview, invitation]);
 
   return (
-    <main className={styles.fullPreview} ref={previewRef} data-card-preview={cardPreview || undefined}>
+    <main className={styles.fullPreview} ref={previewRef} data-card-preview={cardPreview || undefined} data-format={template.format}>
       {!cardPreview && !posterCapture && template.format !== "image" && readyTemplate !== template.id && (
         <div className={styles.previewLoader} role="status">
           <span className={styles.spinner} aria-hidden="true" />

@@ -114,13 +114,7 @@ export function StaticImageFullPreview({
   invitation: Invitation;
 }) {
   return (
-    <section
-      style={{
-        padding: "80px 16px 24px",
-        minHeight: "100dvh",
-        background: "#e9e3d8",
-      }}
-    >
+    <section className={styles.fullPreview}>
       <StaticImagePreview invitation={invitation} locale={invitation.defaultLocale} />
     </section>
   );

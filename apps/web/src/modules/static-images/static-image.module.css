@@ -12,6 +12,14 @@
   -webkit-touch-callout: none;
   isolation: isolate;
 }
+.fullPreview {
+  min-height: 100dvh;
+  padding: 0 16px 24px;
+  background: #e9e3d8;
+}
+.fullPreview .preview {
+  margin-top: 0;
+}
 .preview img {
   display: block;
   width: 100%;

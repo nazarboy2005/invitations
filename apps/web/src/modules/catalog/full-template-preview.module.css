@@ -152,4 +152,9 @@
 }
 
 @media(min-width:601px){.leftLanguageClearance{left:max(96px,calc(env(safe-area-inset-left) + 96px))}}
-.fullPreview[data-format="image"]{overflow:auto;background:#e9e3d8}
+.fullPreview[data-format="image"]{
+  height: auto;
+  min-height: 100dvh;
+  overflow: visible;
+  background: #e9e3d8;
+}
