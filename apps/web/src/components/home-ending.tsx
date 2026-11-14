@@ -33,7 +33,7 @@ const questions = [
   {
     title: "Taklifnoma yaratish va nashr qilish qancha turadi?",
     answer:
-      "Sayt taklifnomalari asosan 49 000 so‘m turadi. Narx dizaynga qarab farq qilishi mumkin. Har bir dizaynni tanlashdan oldin to‘liq ko‘rib, narxini bilib olasiz.",
+      "Veb-taklifnomalar narxi 39 000 so‘mdan boshlanadi va dizaynga qarab farq qiladi. Rasmli taklifnomalarning har biri 5 000 so‘m. Dizaynni tanlashdan oldin uning to‘liq ko‘rinishi va aniq narxini ko‘rib olishingiz mumkin.",
   },
 ];
 
