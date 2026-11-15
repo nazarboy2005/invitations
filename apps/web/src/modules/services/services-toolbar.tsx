@@ -3,7 +3,13 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ArrowLeft, ArrowRight, MapPin, Search, X } from "lucide-react";
-import { useLayoutEffect, useRef, useState, useTransition } from "react";
+import {
+  useLayoutEffect,
+  useRef,
+  useState,
+  useTransition,
+  type ReactNode,
+} from "react";
 import { SoftSelect } from "@/components/soft-select";
 import { ServiceCategoryIcon } from "./service-category-icon";
 import styles from "./services.module.css";
@@ -11,6 +17,7 @@ import styles from "./services.module.css";
 type ToolbarProps = {
   category?: string;
   title: string;
+  mobileCategories: ReactNode;
   query: string;
   region: string;
   regions: string[];
@@ -24,6 +31,7 @@ type ToolbarProps = {
 export function ServicesToolbar({
   category,
   title,
+  mobileCategories,
   query,
   region,
   regions,
@@ -35,6 +43,18 @@ export function ServicesToolbar({
 }: ToolbarProps) {
   const router = useRouter();
   const [searchOpen, setSearchOpen] = useState(Boolean(query));
+  const [mobileSearchExpanded, setMobileSearchExpanded] = useState(
+    Boolean(query),
+  );
+  const searchTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const closingSearch = useRef(false);
+  useLayoutEffect(
+    () => () => {
+      if (searchTimer.current) clearTimeout(searchTimer.current);
+      animation.current?.cancel();
+    },
+    [],
+  );
   const [selectedRegion, setSelectedRegion] = useState(region);
   const [draftQuery, setDraftQuery] = useState(query);
   const [pending, startTransition] = useTransition();
@@ -86,10 +106,40 @@ export function ServicesToolbar({
         { duration: 520, easing: "cubic-bezier(0.22, 1, 0.36, 1)" },
       );
     }
-    if (searchOpen) input.current?.focus({ preventScroll: true });
+    if (searchOpen) {
+      if (
+        window.matchMedia("(max-width: 650px)").matches &&
+        !window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      ) {
+        searchTimer.current = setTimeout(() => {
+          setMobileSearchExpanded(true);
+          input.current?.focus({ preventScroll: true });
+        }, 520);
+      } else {
+        setMobileSearchExpanded(true);
+        input.current?.focus({ preventScroll: true });
+      }
+    }
   }, [searchOpen]);
 
   function toggleSearch() {
+    if (closingSearch.current) return;
+    if (searchTimer.current) clearTimeout(searchTimer.current);
+    const mobileMotion =
+      window.matchMedia("(max-width: 650px)").matches &&
+      !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (searchOpen && mobileMotion) {
+      setMobileSearchExpanded(false);
+      closingSearch.current = true;
+      searchTimer.current = setTimeout(() => {
+        previousButtonBounds.current =
+          searchButton.current?.getBoundingClientRect() ?? null;
+        setSearchOpen(false);
+        closingSearch.current = false;
+      }, 480);
+      return;
+    }
+    setMobileSearchExpanded(false);
     previousButtonBounds.current =
       searchButton.current?.getBoundingClientRect() ?? null;
     setSearchOpen((open) => !open);
@@ -123,7 +173,9 @@ export function ServicesToolbar({
   return (
     <div
       className={styles.toolbar}
+      data-services-mobile-pin
       data-search-open={searchOpen}
+      data-mobile-search-expanded={mobileSearchExpanded}
       aria-busy={pending}
     >
       <form
@@ -136,6 +188,7 @@ export function ServicesToolbar({
           applyFilters();
         }}
       >
+        <div className={styles.mobileCategories}>{mobileCategories}</div>
         <div className={styles.toolbarHeading}>
           <h2>
             <ServiceCategoryIcon category={category} size={27} />

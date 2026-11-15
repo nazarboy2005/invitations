@@ -3,7 +3,6 @@ import {
   ArrowLeft,
   ArrowUpRight,
   ChevronRight,
-  Globe,
   Heart,
   Mail,
   MapPin,
@@ -66,9 +65,6 @@ export function ServiceDetail({ listing }: { listing: ServiceListing }) {
           <ArrowLeft size={17} />
           {category?.name ?? "Servislar"}
         </Link>
-        <div className={styles.mobileOnly}>
-          <ServiceShare name={listing.name} />
-        </div>
       </div>
       <div className={styles.detailHeading}>
         <p className={styles.eyebrow}>
@@ -94,11 +90,7 @@ export function ServiceDetail({ listing }: { listing: ServiceListing }) {
           <div className={styles.contactInner}>
             <p className={styles.sectionLabel}>XIZMAT NARXI</p>
             <p className={styles.detailPrice}>{servicePrice(listing.price)}</p>
-            <p className={`${styles.contactHint} ${styles.mobileOnly}`}>
-              Batafsil ma’lumot va buyurtma uchun xizmat ko‘rsatuvchi bilan
-              bog‘laning.
-            </p>
-            <p className={`${styles.contactHint} ${styles.desktopOnly}`}>
+            <p className={styles.contactHint}>
               Ma’lumot va buyurtma uchun bog‘laning.
             </p>
             <div className={styles.contactButtons}>
@@ -114,53 +106,21 @@ export function ServiceDetail({ listing }: { listing: ServiceListing }) {
                 >
                   <Phone size={18} />
                   <span>
-                    <small>
-                      {index === 0
-                        ? "Qo‘ng‘iroq qilish"
-                        : phone.label || "Qo‘shimcha telefon"}
-                    </small>
-                    <span className={styles.mobileOnly}>{phone.value}</span>
-                    <span className={styles.desktopOnly}>
-                      {phone.value.replace(
-                        /^(\+998)(\d{2})(\d{3})(\d{2})(\d{2})$/,
-                        "$1 $2 $3 $4 $5",
-                      )}
-                    </span>
+                    {phone.value.replace(
+                      /^(\+998)(\d{2})(\d{3})(\d{2})(\d{2})$/,
+                      "$1 $2 $3 $4 $5",
+                    )}
                   </span>
                   <ArrowUpRight size={16} />
                 </a>
               ))}
-              {links.map((link, index) => (
-                <a
-                  key={`${link.href}-${index}`}
-                  href={link.href!}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`${styles.externalContact} ${styles.mobileOnly}`}
-                >
-                  <Globe size={17} />
-                  <span>{link.label}</span>
-                  <ArrowUpRight size={15} />
-                </a>
-              ))}
-              {listing.email &&
-                /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(listing.email) && (
-                  <a
-                    href={`mailto:${encodeURIComponent(listing.email)}`}
-                    className={`${styles.externalContact} ${styles.mobileOnly}`}
-                  >
-                    <Mail size={17} />
-                    <span>{listing.email}</span>
-                    <ArrowUpRight size={15} />
-                  </a>
-                )}
               {phones.length === 0 && links.length === 0 && !listing.email && (
                 <p className={styles.contactHint}>
                   Aloqa ma’lumotlari hozircha kiritilmagan.
                 </p>
               )}
             </div>
-            <div className={styles.desktopContacts}>
+            <div className={styles.compactContacts}>
               <ServiceShare name={listing.name} compact />
               <div className={styles.contactDivider} aria-hidden="true">
                 <Heart size={16} fill="currentColor" />
@@ -207,18 +167,6 @@ export function ServiceDetail({ listing }: { listing: ServiceListing }) {
                 </a>
               )}
             </div>
-            <p className={`${styles.contactNote} ${styles.mobileOnly}`}>
-              Xorijiy valyutadagi narxlar so‘mga taxminan hisoblangan. Narxlar
-              va mavjudlikni buyurtma berishdan oldin aniqlashtiring.
-            </p>
-            <a
-              className={`${styles.correctionLink} ${styles.mobileOnly}`}
-              href="https://t.me/fotiha_support_bot"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Ma’lumotni yangilash
-            </a>
           </div>
         </aside>
         <div className={styles.detailContent}>
@@ -230,24 +178,6 @@ export function ServiceDetail({ listing }: { listing: ServiceListing }) {
                 {paragraphs.map((paragraph, index) => (
                   <p key={index}>{paragraph}</p>
                 ))}
-              </div>
-            </section>
-          )}
-          {(listing.address || listing.latitude !== null) && (
-            <section className={`${styles.detailSection} ${styles.mobileOnly}`}>
-              <p className={styles.sectionLabel}>MANZIL</p>
-              <h2>Bizni qanday topasiz?</h2>
-              <div className={styles.addressCard}>
-                <span className={styles.addressIcon}>
-                  <MapPin size={26} strokeWidth={1.3} />
-                </span>
-                <div>
-                  <h3>{listing.name}</h3>
-                  <p>{listing.address || serviceLocation(listing)}</p>
-                  <a href={mapUrl} target="_blank" rel="noopener noreferrer">
-                    Yandex Maps’da ochish <ArrowUpRight size={15} />
-                  </a>
-                </div>
               </div>
             </section>
           )}

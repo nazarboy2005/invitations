@@ -135,6 +135,8 @@
   margin: 6px 0 17px 14px;
 }
 .categories {
+  position: relative;
+  isolation: isolate;
   display: grid;
   gap: 3px;
   max-height: calc(100dvh - 200px);
@@ -144,6 +146,8 @@
   scrollbar-color: #c5a28d transparent;
 }
 .categories a {
+  position: relative;
+  z-index: 1;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -162,7 +166,7 @@
   background: #f3e9e1;
   color: #76253b;
 }
-.categories a[aria-current="page"] {
+.categories a[data-selected="true"] {
   color: #fff9f5;
   background: #873c4d;
   box-shadow: 0 4px 12px #873c4d15;
@@ -181,12 +185,32 @@
 .categoryName svg {
   flex-shrink: 0;
   color: #bd8b78;
+  transition: color 180ms;
 }
-.categories a[aria-current="page"] svg {
+.categories a[data-selected="true"] svg {
   color: inherit;
 }
-.categories a[aria-current="page"] small {
+.categories a[data-selected="true"] small {
   color: #f1d1d7;
+}
+.categoryIndicator {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  border-radius: 9px;
+  background: #873c4d;
+  box-shadow: 0 4px 12px #873c4d15;
+}
+.categories[data-animated="true"] a[data-selected="true"] {
+  background: transparent;
+  box-shadow: none;
+}
+.resultsContent {
+  transition: opacity 120ms ease;
+}
+.navigation[data-category-pending="true"] .resultsContent {
+  opacity: 0.45;
 }
 .results {
   min-width: 0;
@@ -207,6 +231,9 @@
   box-shadow:
     inset 0 1px 0 rgb(255 255 255 / 35%),
     0 5px 18px #73493608;
+}
+.mobileCategories {
+  display: none;
 }
 .toolbarRow {
   display: flex;
@@ -745,6 +772,7 @@
   padding: 0;
   border: 0;
   background: none;
+  touch-action: pan-y;
 }
 .galleryTrack {
   position: absolute;
@@ -803,32 +831,6 @@
   background: #2e252ca0;
   color: white;
   font-size: 11px;
-}
-.thumbnails {
-  display: flex;
-  gap: 9px;
-  overflow-x: auto;
-  padding: 12px 1px 6px;
-  scrollbar-width: thin;
-  scrollbar-color: #c8af91 transparent;
-}
-.thumbnails button {
-  position: relative;
-  flex: 0 0 72px;
-  height: 64px;
-  padding: 0;
-  overflow: hidden;
-  border: 2px solid transparent;
-  border-radius: 8px;
-  background: #eee5da;
-  opacity: 0.65;
-}
-.thumbnails button[aria-pressed="true"] {
-  border-color: #9b4252;
-  opacity: 1;
-}
-.thumbnails img {
-  object-fit: cover;
 }
 .galleryEmpty {
   display: grid;
@@ -1071,22 +1073,10 @@
   font-size: 12px;
 }
 
-.desktopOnly,
-.desktopContacts,
-.galleryDots {
-  display: none;
-}
-
 /* Laptop profiles keep the gallery and contact details in one compact row. */
 @media (min-width: 901px) {
   .detail {
     padding-top: 96px;
-  }
-  .detail .mobileOnly {
-    display: none;
-  }
-  .detail .desktopOnly {
-    display: block;
   }
   .detailHeading {
     padding: 6px 0 18px;
@@ -1100,214 +1090,217 @@
   .detailColumns {
     gap: 24px 28px;
   }
-  .galleryMain,
-  .galleryEmpty {
-    aspect-ratio: 2 / 1;
-  }
-  .galleryMain {
-    border: 3px solid #fff4ea;
-    box-shadow: 0 8px 24px #704b3b16;
-  }
-  .gallerySlide img {
-    object-fit: cover;
-    object-position: center;
-  }
-  .expandIcon {
-    inset: auto auto 12px 12px;
-    width: 32px;
-    height: 32px;
-  }
-  .galleryMain .galleryCount {
-    top: 12px;
-    right: 12px;
-    bottom: auto;
-    border-radius: 999px;
-  }
-  .thumbnails {
-    display: none;
-  }
-  .galleryDots {
-    position: absolute;
-    z-index: 1;
-    bottom: 9px;
-    left: 50%;
-    display: flex;
-    align-items: center;
-    max-width: calc(100% - 112px);
-    padding: 0 5px;
-    overflow-x: auto;
-    transform: translateX(-50%);
-    border-radius: 999px;
-    background: #211b2266;
-    scrollbar-width: thin;
-    scrollbar-color: #ffffff80 transparent;
-  }
-  .galleryDots button {
-    display: grid;
-    place-items: center;
-    flex: 0 0 22px;
-    width: 22px;
-    height: 26px;
-    padding: 0;
-    border: 0;
-    background: none;
-  }
-  .galleryDots button::after {
-    content: "";
-    width: 7px;
-    height: 7px;
-    border-radius: 999px;
-    background: #ffffff8c;
-  }
-  .galleryDots button[aria-pressed="true"]::after {
-    width: 17px;
-    background: #b63d60;
-  }
-  .galleryDots button:focus-visible {
-    outline-offset: -2px;
-    border-radius: 999px;
-  }
-  .contactInner {
-    padding: 22px;
-    border: 1px solid #fff5ed;
-    border-radius: 20px;
-    background: linear-gradient(135deg, #fff4eceb, #f7e4d9e8);
-    backdrop-filter: blur(18px);
-    box-shadow:
-      inset 0 1px 0 #ffffffb3,
-      0 8px 28px #704b3b12;
-  }
-  .contactInner .sectionLabel {
-    gap: 10px;
-    margin-bottom: 12px;
-    color: #97435a;
-  }
-  .contactInner .sectionLabel::after {
-    content: "";
-    flex: 1;
-    height: 1px;
-    background: #bf8e7d40;
-  }
-  .detailPrice {
-    color: #342e2d;
-    font-size: clamp(27px, 2.5vw, 35px);
-    line-height: 1.15;
-    overflow-wrap: anywhere;
-  }
-  .contactHint {
-    margin: 12px 0 19px;
-    color: #89756c;
-    font-size: 12px;
-    line-height: 1.65;
-  }
-  .primaryContact,
-  .secondaryContact {
-    min-height: 50px;
-    padding: 12px 16px;
-    border-radius: 18px;
-    font-size: 13px;
-  }
-  .primaryContact {
-    border-color: transparent;
-    background: linear-gradient(110deg, #a42b50, #7c3049);
-    box-shadow: 0 5px 16px #873c4d16;
-  }
-  .primaryContact:hover {
-    background: #76253b;
-  }
-  .primaryContact small,
-  .secondaryContact small {
-    display: none;
-  }
-  .desktopContacts {
-    display: grid;
-    justify-items: center;
-    gap: 13px;
-    margin-top: 16px;
-  }
-  .compactShare .shareButton {
-    flex-direction: column;
-    gap: 5px;
-    padding: 0;
-    border: 0;
-    color: #624f48;
-    background: none;
-    font-size: 10px;
-  }
-  .actionIcon,
-  .socialContacts a {
-    display: grid;
-    place-items: center;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    color: #a03454;
-    background: #fff8f0b8;
-    box-shadow: 0 3px 10px #873c4d08;
-  }
-  .compactShare .shareButton:hover .actionIcon,
-  .socialContacts a:hover {
-    background: #fffaf6;
-    color: #76253b;
-  }
-  .compactShare .shareStatus {
-    top: auto;
-    bottom: calc(100% + 6px);
-    right: 50%;
-    transform: translateX(50%);
-    min-width: 220px;
-    text-align: center;
-    border-radius: 8px;
-    background: #fff5ed;
-  }
-  .compactShare .shareStatus:empty {
-    display: none;
-  }
-  .contactDivider {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    width: 100%;
-    color: #a03454;
-  }
-  .contactDivider::before,
-  .contactDivider::after {
-    content: "";
-    flex: 1;
-    height: 1px;
-    background: #bf8e7d4d;
-  }
-  .socialContacts {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 9px;
-    width: 100%;
-  }
-  .mapContact {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    width: 100%;
-    min-height: 40px;
-    padding: 8px 14px;
-    border: 1px solid #b9857d66;
-    border-radius: 999px;
-    color: #a03454;
-    font-size: 12px;
-    font-weight: 500;
-  }
-  .mapContact > svg:last-child {
-    margin-left: auto;
-  }
-  .mapContact:hover {
-    background: #fff8f080;
-  }
   .detailSection {
     margin-top: 0;
     padding-top: 22px;
   }
+}
+
+/* Shared compact service gallery and contact card. */
+.galleryMain,
+.galleryEmpty {
+  aspect-ratio: 2 / 1;
+}
+.galleryMain {
+  border: 3px solid #fff4ea;
+  box-shadow: 0 8px 24px #704b3b16;
+}
+.gallerySlide img {
+  object-fit: cover;
+  object-position: center;
+}
+.expandIcon {
+  inset: auto auto 12px 12px;
+  width: 32px;
+  height: 32px;
+}
+.galleryMain .galleryCount {
+  top: 12px;
+  right: 12px;
+  bottom: auto;
+  border-radius: 999px;
+}
+.galleryDots {
+  position: absolute;
+  z-index: 1;
+  bottom: 9px;
+  left: 50%;
+  display: flex;
+  align-items: center;
+  max-width: calc(100% - 112px);
+  padding: 0 4px;
+  overflow-x: auto;
+  transform: translateX(-50%);
+  border-radius: 999px;
+  background: #211b2238;
+  backdrop-filter: blur(8px);
+  scrollbar-width: none;
+}
+.galleryDots button {
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: 14px;
+  height: 18px;
+  color: white;
+  padding: 0;
+  border: 0;
+  background: none;
+}
+.galleryDots button::after {
+  content: "";
+  width: 4px;
+  height: 4px;
+  border-radius: 999px;
+  background: #ffffff80;
+  transition:
+    width 300ms ease,
+    background 300ms ease;
+}
+.galleryDots button[aria-pressed="true"]::after {
+  width: 10px;
+  background: #fff;
+}
+.galleryDots button:focus-visible {
+  outline-offset: -2px;
+  border-radius: 999px;
+}
+.contactInner {
+  padding: 22px;
+  border: 1px solid #fff5ed;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #fff4eceb, #f7e4d9e8);
+  backdrop-filter: blur(18px);
+  box-shadow:
+    inset 0 1px 0 #ffffffb3,
+    0 8px 28px #704b3b12;
+}
+.contactInner .sectionLabel {
+  gap: 10px;
+  margin-bottom: 12px;
+  color: #97435a;
+}
+.contactInner .sectionLabel::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #bf8e7d40;
+}
+.detailPrice {
+  color: #342e2d;
+  font-size: clamp(27px, 2.5vw, 35px);
+  line-height: 1.15;
+  overflow-wrap: anywhere;
+}
+.contactHint {
+  margin: 12px 0 19px;
+  color: #89756c;
+  font-size: 12px;
+  line-height: 1.65;
+}
+.primaryContact,
+.secondaryContact {
+  min-height: 50px;
+  padding: 12px 16px;
+  border-radius: 18px;
+  font-size: 13px;
+}
+.primaryContact {
+  border-color: transparent;
+  background: linear-gradient(110deg, #a42b50, #7c3049);
+  box-shadow: 0 5px 16px #873c4d16;
+}
+.primaryContact:hover {
+  background: #76253b;
+}
+.primaryContact small,
+.secondaryContact small {
+  display: none;
+}
+.compactContacts {
+  display: grid;
+  justify-items: center;
+  gap: 13px;
+  margin-top: 16px;
+}
+.compactShare .shareButton {
+  flex-direction: column;
+  gap: 5px;
+  padding: 0;
+  border: 0;
+  color: #624f48;
+  background: none;
+  font-size: 10px;
+}
+.actionIcon,
+.socialContacts a {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  color: #a03454;
+  background: #fff8f0b8;
+  box-shadow: 0 3px 10px #873c4d08;
+}
+.compactShare .shareButton:hover .actionIcon,
+.socialContacts a:hover {
+  background: #fffaf6;
+  color: #76253b;
+}
+.compactShare .shareStatus {
+  top: auto;
+  bottom: calc(100% + 6px);
+  right: 50%;
+  transform: translateX(50%);
+  min-width: 220px;
+  text-align: center;
+  border-radius: 8px;
+  background: #fff5ed;
+}
+.compactShare .shareStatus:empty {
+  display: none;
+}
+.contactDivider {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  color: #a03454;
+}
+.contactDivider::before,
+.contactDivider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #bf8e7d4d;
+}
+.socialContacts {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 9px;
+  width: 100%;
+}
+.mapContact {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  min-height: 40px;
+  padding: 8px 14px;
+  border: 1px solid #b9857d66;
+  border-radius: 999px;
+  color: #a03454;
+  font-size: 12px;
+  font-weight: 500;
+}
+.mapContact > svg:last-child {
+  margin-left: auto;
+}
+.mapContact:hover {
+  background: #fff8f080;
 }
 
 @media (max-width: 1150px) {
@@ -1404,7 +1397,7 @@
     background: #fffcf8;
     font-size: 11px;
   }
-  .categories a[aria-current="page"] {
+  .categories a[data-selected="true"] {
     border-color: #873c4d;
   }
   .toolbar {
@@ -1437,9 +1430,7 @@
     grid-row: 3;
   }
   .contactInner {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    column-gap: 30px;
+    display: block;
     padding: 24px;
   }
   .contactInner > .sectionLabel,
@@ -1448,8 +1439,6 @@
     grid-column: 1;
   }
   .contactButtons {
-    grid-column: 2;
-    grid-row: 1 / 6;
     align-content: start;
   }
   .contactNote,
@@ -1463,10 +1452,83 @@
     font-size: 48px;
   }
   .galleryMain {
-    aspect-ratio: 1.4;
+    aspect-ratio: 2 / 1;
   }
 }
 @media (max-width: 650px) {
+  .sidebar {
+    display: none;
+  }
+  .toolbar {
+    top: 0;
+  }
+  .results {
+    scroll-margin-top: 0;
+  }
+  .toolbarHeading {
+    display: none;
+  }
+  .mobileCategories {
+    display: block;
+    min-width: 0;
+    grid-column: 1 / -1;
+    grid-row: 1;
+  }
+  .mobileCategories .categories {
+    scrollbar-width: none;
+    gap: 8px;
+    padding: 2px 0 8px;
+  }
+  .mobileCategories .categories::-webkit-scrollbar {
+    display: none;
+  }
+  .mobileCategories .categories a {
+    position: relative;
+    justify-content: center;
+    gap: 5px;
+    min-width: 76px;
+    padding: 9px 10px;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+    font-size: 10px;
+  }
+  .mobileCategories .categories a + a::before {
+    content: "";
+    position: absolute;
+    left: -5px;
+    top: 22px;
+    width: 1px;
+    height: 20px;
+    background: #b98b7440;
+  }
+  .mobileCategories .categoryName {
+    flex-direction: column;
+    gap: 7px;
+    text-align: center;
+    white-space: nowrap;
+  }
+  .mobileCategories .categoryName svg {
+    width: 21px;
+    height: 21px;
+  }
+  .mobileCategories .categories small {
+    display: none;
+  }
+  .mobileCategories .categories a[data-selected="true"] {
+    background: #f3d5db;
+    color: #a23652;
+  }
+  .mobileCategories .categories a[data-selected="true"] svg {
+    color: #a23652;
+  }
+  .mobileCategories .categoryIndicator {
+    background: #f3d5db;
+    box-shadow: none;
+  }
+  .mobileCategories .categories[data-animated="true"] a[data-selected="true"] {
+    background: transparent;
+  }
   .grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 17px 12px;
@@ -1545,6 +1607,36 @@
       inset 0 0 0 1px #e6cfc0,
       0 6px 18px #73493618;
   }
+  .toolbar[data-search-open="true"] .searchGroup {
+    background: transparent;
+    box-shadow: none;
+    backdrop-filter: none;
+  }
+  .toolbar[data-search-open="true"] .searchGroup::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 999px;
+    background: #fff8f1f5;
+    backdrop-filter: blur(24px);
+    box-shadow:
+      inset 0 0 0 1px #e6cfc0,
+      0 6px 18px #73493618;
+    clip-path: inset(0 calc(100% - 40px) 0 0 round 999px);
+    transition: clip-path 480ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .toolbar[data-search-open="true"] .searchField {
+    position: relative;
+    opacity: 1;
+    clip-path: inset(0 100% 0 0);
+    pointer-events: none;
+    transition: clip-path 480ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .toolbar[data-mobile-search-expanded="true"] .searchGroup::before,
+  .toolbar[data-mobile-search-expanded="true"] .searchField {
+    clip-path: inset(0 0 0 0 round 999px);
+    pointer-events: auto;
+  }
   .card {
     border-radius: 13px;
   }
@@ -1556,7 +1648,7 @@
     border-radius: 11px 11px 0 0;
   }
   .card h2 {
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 1;
     font-size: 12px;
     line-height: 1.4;
     margin-bottom: 5px;
@@ -1594,8 +1686,8 @@
     padding-block: 24px;
   }
   .detailHeading h1 {
-    font-size: 42px;
-    line-height: 1.05;
+    font-size: 32px;
+    line-height: 1.12;
   }
   .detailHeading > p:last-child:not(.eyebrow) {
     font-size: 10px;
@@ -1632,7 +1724,7 @@
     margin-top: 0;
   }
   .galleryMain {
-    aspect-ratio: 1.1;
+    aspect-ratio: 2 / 1;
     border-radius: 12px;
   }
   .galleryPrevious,
@@ -1646,10 +1738,6 @@
   }
   .galleryNext {
     right: 10px;
-  }
-  .thumbnails button {
-    flex-basis: 62px;
-    height: 56px;
   }
   .detailSection {
     margin-top: 27px;
@@ -1710,6 +1798,9 @@
   .gallerySlide {
     transition: none;
   }
+  .searchGroup::before,
+  .resultsContent,
+  .categoryName svg,
   .searchField,
   .searchGroup,
   .card,
@@ -1717,8 +1808,17 @@
   .categories a {
     transition: none;
   }
+  .navigation[data-category-pending="true"] .resultsContent {
+    opacity: 1;
+  }
   .card:hover,
   .card:hover .cardImage img {
     transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .galleryDots button::after {
+    transition: none;
   }
 }

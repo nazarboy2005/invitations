@@ -33,11 +33,11 @@ export function ScrollHeader({
       if (!header.current) return;
       const y = Math.max(0, window.scrollY);
       if (mobile.matches) {
-        const servicesBoundary = document.querySelector<HTMLElement>(
-          "[data-services-mobile-pin]",
-        );
+        const servicesBoundary = Array.from(
+          document.querySelectorAll<HTMLElement>("[data-services-mobile-pin]"),
+        ).find((element) => element.getClientRects().length > 0);
         header.current.dataset.servicesPinned = String(
-          servicesBoundary !== null &&
+          servicesBoundary !== undefined &&
             servicesBoundary.getBoundingClientRect().top <= 0,
         );
         lastY = y;

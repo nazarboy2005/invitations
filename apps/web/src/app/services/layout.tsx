@@ -2,6 +2,7 @@ import { publicAsset } from "@/lib/public-asset";
 import { SiteHeader } from "@/components/site-header";
 import { display, sans } from "@/app/platform-fonts";
 import styles from "@/modules/services/services.module.css";
+import { ServicesNavigationProvider } from "@/modules/services/services-category-navigation";
 
 export default function ServicesLayout({
   children,
@@ -42,7 +43,7 @@ export default function ServicesLayout({
       </picture>
       <SiteHeader catalog />
       <main id="main" className={styles.shell}>
-        {children}
+        <ServicesNavigationProvider>{children}</ServicesNavigationProvider>
       </main>
     </div>
   );
