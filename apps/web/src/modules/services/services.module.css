@@ -1477,17 +1477,19 @@
   .mobileCategories .categories {
     scrollbar-width: none;
     gap: 8px;
-    padding: 2px 0 8px;
+    padding: 2px 0;
   }
   .mobileCategories .categories::-webkit-scrollbar {
     display: none;
   }
   .mobileCategories .categories a {
     position: relative;
+    align-self: flex-start;
     justify-content: center;
     gap: 5px;
-    min-width: 76px;
-    padding: 9px 10px;
+    width: 96px;
+    min-width: 96px;
+    padding: 7px 8px;
     border: 0;
     background: transparent;
     box-shadow: none;
@@ -1504,9 +1506,18 @@
   }
   .mobileCategories .categoryName {
     flex-direction: column;
-    gap: 7px;
+    width: 100%;
+    gap: 5px;
     text-align: center;
-    white-space: nowrap;
+    white-space: normal;
+  }
+  .mobileCategories .categoryLabel {
+    display: -webkit-box;
+    width: 100%;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-height: 13px;
   }
   .mobileCategories .categoryName svg {
     width: 21px;
@@ -1516,14 +1527,14 @@
     display: none;
   }
   .mobileCategories .categories a[data-selected="true"] {
-    background: #f3d5db;
+    background: #efb9bd;
     color: #a23652;
   }
   .mobileCategories .categories a[data-selected="true"] svg {
     color: #a23652;
   }
   .mobileCategories .categoryIndicator {
-    background: #f3d5db;
+    background: #efb9bd;
     box-shadow: none;
   }
   .mobileCategories .categories[data-animated="true"] a[data-selected="true"] {
@@ -1551,7 +1562,7 @@
   .toolbarRow {
     display: grid;
     grid-template-columns: 38px minmax(0, 1fr) 84px;
-    gap: 10px 8px;
+    gap: 4px 8px;
   }
   .toolbarHeading {
     grid-column: 1 / -1;

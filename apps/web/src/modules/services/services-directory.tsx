@@ -49,7 +49,8 @@ export async function ServicesDirectory({
         prefetch={false}
       >
         <span className={styles.categoryName}>
-          <ServiceCategoryIcon /> Barchasi
+          <ServiceCategoryIcon />
+          <span className={styles.categoryLabel}>Barchasi</span>
         </span>
         <small>{serviceListings.length}</small>
       </ServiceCategoryLink>
@@ -67,7 +68,7 @@ export async function ServicesDirectory({
         >
           <span className={styles.categoryName}>
             <ServiceCategoryIcon category={category.id} />
-            {category.name}
+            <span className={styles.categoryLabel}>{category.name}</span>
           </span>
           <small>
             {category.id === "invitation"
