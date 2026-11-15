@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import {
   createContext,
   useContext,
@@ -77,11 +77,17 @@ export function ServicesNavigationProvider({
 
 export function ServiceCategoryLink(props: ComponentProps<typeof Link>) {
   const navigation = useContext(NavigationContext)!;
-  const href = String(props.href);
+  const search = useSearchParams();
+  const originalHref = String(props.href);
+  const url = new URL(originalHref, "https://fotiha.local");
+  if (url.pathname.startsWith("/services") && search.get("favorites") === "1")
+    url.searchParams.set("favorites", "1");
+  const href = url.pathname + url.search;
   const isDirectory = href.split("?")[0].startsWith("/services");
   return (
     <Link
       {...props}
+      href={href}
       data-selected={
         isDirectory && href.split("?")[0] === navigation.selectedPath
       }

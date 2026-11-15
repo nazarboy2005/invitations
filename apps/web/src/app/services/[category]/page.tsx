@@ -5,7 +5,7 @@ import { serviceCategories } from "@/modules/services/services-data";
 
 type Props = {
   params: Promise<{ category: string }>;
-  searchParams: Promise<{ q?: string; region?: string; page?: string }>;
+  searchParams: Promise<{ q?: string; region?: string; page?: string; favorites?: string }>;
 };
 export const dynamic = "force-dynamic";
 export async function generateMetadata({
@@ -21,7 +21,7 @@ export async function generateMetadata({
     title: `${selected.name} — to‘y xizmatlari`,
     description: `${selected.name}: xizmatlar, rasmlar, manzillar va aloqa ma’lumotlari. O‘zingizga mos xizmatni Fotiha’da toping.`,
     alternates: { canonical: `/services/${selected.id}` },
-    ...(query.q || query.region || query.page
+    ...(query.q || query.region || query.page || query.favorites
       ? { robots: { index: false, follow: true } }
       : {}),
   };

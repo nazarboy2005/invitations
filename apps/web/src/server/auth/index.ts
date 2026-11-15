@@ -1,3 +1,4 @@
+import { allowedRequestOrigin } from "./request-origin";
 import { cookies, headers } from "next/headers";
 import { NextResponse } from "next/server";
 import { getDb } from "@taklifnoma/database";
@@ -60,7 +61,13 @@ export function verifySameOrigin(request: Request) {
   const expected = process.env.APP_URL;
   if (!expected)
     throw new AuthError("NOT_CONFIGURED", "APP_URL is not configured", 503);
-  if (request.headers.get("origin") !== new URL(expected).origin)
+  if (
+    !allowedRequestOrigin(
+      request.headers.get("origin"),
+      expected,
+      process.env.NODE_ENV === "production",
+    )
+  )
     throw new AuthError("INVALID_ORIGIN", "Request origin is not allowed", 403);
 }
 export const cookieOptions = (maxAge: number) => ({

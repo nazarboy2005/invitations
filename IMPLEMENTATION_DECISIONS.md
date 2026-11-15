@@ -92,6 +92,8 @@ This file records durable, user-approved product requirements and a small number
 - User requirement: “Taklifnomalar” in the services categories opens Fotiha's template catalog and displays its published template count.
 - User requirement: desktop navigation places “Servislar” after “Shablonlar” and before “Bog‘lanish”. Mobile bottom navigation replaces Favorites with “Servislar”; Favorites remains available at the top right as a heart icon without visible text.
 
+- User requirement: services favorites work for guests in browser storage and merge into account saves after sign-in. The navbar heart filters services within the existing directory only on services routes, retaining desktop sidebar/mobile categories; on all other routes it continues opening template favorites. Desktop services sidebar has a heart beside “Yo‘nalishlar”. Service cards expose save at top right; detail save/share actions have a vertical separator and move beside “Xizmat narxi” on phones.
+
 ## Record maintenance
 
 - Add only durable, confirmed product requirements or corrections likely to guide future work. Distinguish user requirements, recommendations, and unresolved questions when those distinctions matter.

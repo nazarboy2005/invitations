@@ -3,7 +3,7 @@ import { ServicesDirectory } from "@/modules/services/services-directory";
 
 export const dynamic = "force-dynamic";
 
-type Query = { q?: string; region?: string; page?: string };
+type Query = { q?: string; region?: string; page?: string; favorites?: string };
 export async function generateMetadata({
   searchParams,
 }: {
@@ -15,7 +15,7 @@ export async function generateMetadata({
     description:
       "To‘yxonalar, foto va video, boshlovchilar, dekoratsiya va boshqa to‘y xizmatlari. Xizmatlarni ko‘ring va bevosita bog‘laning.",
     alternates: { canonical: "/services" },
-    ...(query.q || query.region || query.page
+    ...(query.q || query.region || query.page || query.favorites
       ? { robots: { index: false, follow: true } }
       : {}),
   };

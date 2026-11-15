@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { ArrowLeft, ArrowRight, MapPin, Search, X } from "lucide-react";
 import {
   useLayoutEffect,
@@ -42,6 +42,7 @@ export function ServicesToolbar({
   nextHref,
 }: ToolbarProps) {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [searchOpen, setSearchOpen] = useState(Boolean(query));
   const [mobileSearchExpanded, setMobileSearchExpanded] = useState(
     Boolean(query),
@@ -149,6 +150,7 @@ export function ServicesToolbar({
     if (!form.current) return;
     const fields = new FormData(form.current);
     const params = new URLSearchParams();
+    if (searchParams.get("favorites") === "1") params.set("favorites", "1");
     const q = (nextQuery ?? String(fields.get("q") ?? "")).trim();
     if (q) params.set("q", q);
     if (nextRegion) params.set("region", nextRegion);

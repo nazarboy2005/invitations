@@ -260,9 +260,9 @@ function start() {
       void refreshFavorites();
   });
   window.addEventListener("session-changed", (event) => {
-    const userId = (event as CustomEvent<{ userId: string | null }>).detail
-      .userId;
-    if (state.ready && state.userId === userId) return;
+    const userId = (event as CustomEvent<{ userId: string | null } | undefined>)
+      .detail?.userId;
+    if (userId !== undefined && state.ready && state.userId === userId) return;
     revision++;
     publish({ ...initial });
     announce();

@@ -73,7 +73,10 @@ export function AccountNavLink({
         } catch {
           /* A completed browser login is sufficient without storage. */
         }
-        window.dispatchEvent(new CustomEvent("session-changed"));
+        const session = await complete.json();
+        window.dispatchEvent(new CustomEvent("session-changed", {
+          detail: { userId: session.user?.id ?? null },
+        }));
         window.location.assign("/dashboard");
         return;
       }

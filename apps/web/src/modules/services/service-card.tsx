@@ -6,7 +6,8 @@ import {
   serviceLocation,
   servicePrice,
   type ServiceListing,
-} from "./services-data";
+} from "./services-utils";
+import { ServiceFavoriteButton } from "./service-favorite";
 import styles from "./services.module.css";
 
 export function ServiceCard({
@@ -54,6 +55,7 @@ export function ServiceCard({
           </span>
         </div>
       </Link>
+      <ServiceFavoriteButton slug={listing.slug} name={listing.name} overlay />
     </article>
   );
 }

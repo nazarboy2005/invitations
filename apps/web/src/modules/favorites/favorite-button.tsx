@@ -1,5 +1,8 @@
 "use client";
 
+import { usePathname } from "next/navigation";
+import { useFavorites as useServiceFavorites } from "./service-favorites-store";
+import { ServiceFavoritesFilter } from "@/modules/services/service-favorite";
 import { Heart } from "lucide-react";
 import Link from "next/link";
 import {
@@ -51,7 +54,12 @@ export function FavoritesLink({
   className?: string;
   iconOnly?: boolean;
 }) {
+  // Run both sync lifecycles so guest service saves merge on any sign-in page.
+  useServiceFavorites();
+  const path = usePathname();
   const { favorites, ready } = useFavorites();
+  if (path === "/services" || path.startsWith("/services/"))
+    return <ServiceFavoritesFilter className={className} iconOnly={iconOnly} />;
   if (!iconOnly && ready && favorites.length === 0) return null;
   return (
     <Link

@@ -9,6 +9,7 @@ import {
   Phone,
 } from "lucide-react";
 import { ServiceGallery } from "./service-gallery";
+import { ServiceFavoriteButton } from "./service-favorite";
 import { ServiceShare } from "./service-share";
 import { ServiceContactIcon } from "./service-contact-icon";
 import { ServiceCard } from "./service-card";
@@ -88,7 +89,19 @@ export function ServiceDetail({ listing }: { listing: ServiceListing }) {
           aria-label="Xizmat bilan bog‘lanish"
         >
           <div className={styles.contactInner}>
-            <p className={styles.sectionLabel}>XIZMAT NARXI</p>
+            <div className={styles.priceHeading}>
+              <p className={styles.sectionLabel}>XIZMAT NARXI</p>
+              <div className={styles.serviceActionsMobile}>
+                <ServiceFavoriteButton
+                  slug={listing.slug}
+                  name={listing.name}
+                />
+                <span className={styles.actionSeparator} aria-hidden="true">
+                  |
+                </span>
+                <ServiceShare name={listing.name} compact />
+              </div>
+            </div>
             <p className={styles.detailPrice}>{servicePrice(listing.price)}</p>
             <p className={styles.contactHint}>
               Ma’lumot va buyurtma uchun bog‘laning.
@@ -121,7 +134,16 @@ export function ServiceDetail({ listing }: { listing: ServiceListing }) {
               )}
             </div>
             <div className={styles.compactContacts}>
-              <ServiceShare name={listing.name} compact />
+              <div className={styles.serviceActionsDesktop}>
+                <ServiceFavoriteButton
+                  slug={listing.slug}
+                  name={listing.name}
+                />
+                <span className={styles.actionSeparator} aria-hidden="true">
+                  |
+                </span>
+                <ServiceShare name={listing.name} compact />
+              </div>
               <div className={styles.contactDivider} aria-hidden="true">
                 <Heart size={16} fill="currentColor" />
               </div>
