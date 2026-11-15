@@ -1,0 +1,1416 @@
+{
+  "schemaVersion": 1,
+  "publishedAt": "2026-11-15T17:41:40.412Z",
+  "originalListings": 277,
+  "originalWeddingHalls": 20,
+  "publishedListings": 30,
+  "weddingHalls": 50,
+  "imageCount": 153,
+  "listings": [
+    {
+      "slug": "diamond-hall",
+      "name": "Diamond Hall",
+      "yandexId": "118915160419",
+      "sources": [
+        {
+          "provider": "yandex",
+          "url": "https://yandex.uz/maps/org/diamond_hall/118915160419/"
+        },
+        {
+          "provider": "google",
+          "url": "https://www.google.com/maps/search/Diamond%20Hall%20Tashkent/?hl=en"
+        }
+      ],
+      "imageSource": "yandex",
+      "images": [
+        {
+          "src": "/images/services/diamond-hall/f5b1e8b3ad219964dc4d793a.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/6264381/2a0000018f1a496390e984804b0aaaa9358b/XXXL",
+          "sha256": "f5b1e8b3ad219964dc4d793aaa71277f42d97e268610539ecb29e1a6784099f9"
+        },
+        {
+          "src": "/images/services/diamond-hall/26134f99d07590480bfa2612.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/12548008/2a0000018f1a4963f2f61c9bd236bec1e9d6/XXXL",
+          "sha256": "26134f99d07590480bfa2612b86bc793899db8186c2bca452854730f6d3c9bfe"
+        },
+        {
+          "src": "/images/services/diamond-hall/d9aeca3eb6314447d2aebaef.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/15544497/2a00000198186701bc6b4ceb77c8be51cab5/XXXL",
+          "sha256": "d9aeca3eb6314447d2aebaefa44f976ff743812c9aff8d4d8f9220d71395f3d8"
+        },
+        {
+          "src": "/images/services/diamond-hall/5a04252f189af8e442dc7ce7.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/14398723/2a000001958c28252632c26c85c4cd116d34/XXXL",
+          "sha256": "5a04252f189af8e442dc7ce79864d5ecf663ffc628f2ac1115f11c1adb9aa556"
+        }
+      ],
+      "contactPolicy": "Yandex anchor phones and one usable link per contact type; uncertain Google candidates and conflicting extra phone values excluded.",
+      "pricePolicy": "Negotiable; no inferred wedding price from food items, unspecified event services or 1-so'm placeholders.",
+      "collectionStatus": "complete",
+      "directoryApprovedByUser": true
+    },
+    {
+      "slug": "tabassum-toyxonasi",
+      "name": "Tabassum to'yxonasi",
+      "yandexId": "194411559933",
+      "sources": [
+        {
+          "provider": "yandex",
+          "url": "https://yandex.uz/maps/org/tabassum_restaurant/194411559933/"
+        },
+        {
+          "provider": "google",
+          "url": "https://www.google.com/maps/place/Tabassum+Restaurant/data=!4m7!3m6!1s0x38ae8af01f5509f3:0x7c8e3f3dd0f79227!8m2!3d41.290853!4d69.2516324!16s%2Fg%2F11gb41mqnm!19sChIJ8wlVH_CKrjgRJ5L30D0_jnw?authuser=0&hl=en&g_ep=EgoyMDI2MTExMC4wIJJjKgBIAVAD&rclk=1"
+        }
+      ],
+      "imageSource": "yandex",
+      "images": [
+        {
+          "src": "/images/services/tabassum-toyxonasi/1aa7dd81ad4ada5179df845f.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/16749408/2a000001992460225e34bb8006c1543c0122/XXXL",
+          "sha256": "1aa7dd81ad4ada5179df845f5a95907386ed1d6012b85e038b39c50ac0c86912"
+        },
+        {
+          "src": "/images/services/tabassum-toyxonasi/1a8d63a61960fbd795d770d1.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/19300673/2a0000019ee9c482f9f1f174f6520b166c37/XXXL",
+          "sha256": "1a8d63a61960fbd795d770d1cae2d49d7d64fdf7a21850ec2313df771c017e30"
+        },
+        {
+          "src": "/images/services/tabassum-toyxonasi/8ec0d8e9813e012df464d8d4.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/17743308/2a0000019e98ed659560d2475ed15c83b504/XXXL",
+          "sha256": "8ec0d8e9813e012df464d8d4616e8a52f786e6447c5ba1eeea793dcf0ae4e7ff"
+        },
+        {
+          "src": "/images/services/tabassum-toyxonasi/5a2944d28d58f55a65871bbc.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/18140291/2a0000019de8d32421793260a41bf15df0d9/XXXL",
+          "sha256": "5a2944d28d58f55a65871bbc594d986d219629274d4a0924ff7780ab2b5343a3"
+        },
+        {
+          "src": "/images/services/tabassum-toyxonasi/67f4fb1e21f3aa6c270ca8ac.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/17651669/2a0000019c3b3719347a163fe9d57f3fd49b/XXXL",
+          "sha256": "67f4fb1e21f3aa6c270ca8ac427d313280c7c1535397081b6ac71694d3d97791"
+        },
+        {
+          "src": "/images/services/tabassum-toyxonasi/043c45e5737332bbf64cd317.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/18005133/2a00000199f79a758dbeab25df89803bc77c/XXXL",
+          "sha256": "043c45e5737332bbf64cd3173a303d9bbd6d99c548583d55d24cbdc81af9c22d"
+        }
+      ],
+      "contactPolicy": "Yandex anchor phones and one usable link per contact type; uncertain Google candidates and conflicting extra phone values excluded.",
+      "pricePolicy": "Negotiable; no inferred wedding price from food items, unspecified event services or 1-so'm placeholders.",
+      "collectionStatus": "complete",
+      "directoryApprovedByUser": true
+    },
+    {
+      "slug": "bahor-istiqbol",
+      "name": "Bahor",
+      "yandexId": "40237624367",
+      "sources": [
+        {
+          "provider": "yandex",
+          "url": "https://yandex.uz/maps/org/bahor/40237624367/"
+        },
+        {
+          "provider": "google",
+          "url": "https://www.google.com/maps/place/Bakhor/data=!4m7!3m6!1s0x38ae8b2a0f114a89:0x881e1cec6949997a!8m2!3d41.3075101!4d69.2828931!16s%2Fg%2F1vlz8q_t!19sChIJiUoRDyqLrjgReplJaewcHog?authuser=0&hl=en&g_ep=EgoyMDI2MTExMC4wIJJjKgBIAVAD&rclk=1"
+        }
+      ],
+      "imageSource": "yandex",
+      "images": [
+        {
+          "src": "/images/services/bahor-istiqbol/0e6d168854e9c2620981dd62.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/6222916/2a00000180f507e6aac9131c9d5223693cc9/XXXL",
+          "sha256": "0e6d168854e9c2620981dd62afcd14597436aad4d05a72ac146dc1e0a4ed99bd"
+        },
+        {
+          "src": "/images/services/bahor-istiqbol/93bb99d4a053285c7f8f591a.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/4280929/2a0000017a75ee035185436c7fdc34bdbd38/XXXL",
+          "sha256": "93bb99d4a053285c7f8f591a06bd919bc60be20759a089caaa9bcdf53e02013c"
+        },
+        {
+          "src": "/images/services/bahor-istiqbol/ab02cc284170f4f28ff85668.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/4565742/2a00000179493ea11845fa516e56561dbe44/XXXL",
+          "sha256": "ab02cc284170f4f28ff856685999d0d27954187fc7bc2e31424bd549e2c37014"
+        },
+        {
+          "src": "/images/services/bahor-istiqbol/512032b70a2d85e7397c2eab.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/2094876/2a0000016be5834c58ef3f514d53445b37a2/XXXL",
+          "sha256": "512032b70a2d85e7397c2eaba1883329eab6f8473c1fe88b389b4ff1deee3e60"
+        },
+        {
+          "src": "/images/services/bahor-istiqbol/53254a998280d81ad2369490.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/1923723/2a000001700bd5e821075eb1b3acf9b75533/XXXL",
+          "sha256": "53254a998280d81ad2369490e44ad707cc4e833ce37e9e0ef97ef86901d614ca"
+        }
+      ],
+      "contactPolicy": "Yandex anchor phones and one usable link per contact type; uncertain Google candidates and conflicting extra phone values excluded.",
+      "pricePolicy": "Negotiable; no inferred wedding price from food items, unspecified event services or 1-so'm placeholders.",
+      "collectionStatus": "complete",
+      "directoryApprovedByUser": true
+    },
+    {
+      "slug": "osiyo-grand",
+      "name": "Osiyo Grand",
+      "yandexId": "120468512829",
+      "sources": [
+        {
+          "provider": "yandex",
+          "url": "https://yandex.uz/maps/org/osiyo_grand/120468512829/"
+        }
+      ],
+      "imageSource": "yandex",
+      "images": [
+        {
+          "src": "/images/services/osiyo-grand/7a12149a393351889517adbe.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/14451083/2a000001930a14f59c74a5749e9b8dba38c1/XXXL",
+          "sha256": "7a12149a393351889517adbec930719a04154d849964a845a4ef59a5a970229c"
+        },
+        {
+          "src": "/images/services/osiyo-grand/81a98c7fe05ef98d4b7d59ba.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/15416268/2a00000198ad40af92096dc17b092a91934f/XXXL",
+          "sha256": "81a98c7fe05ef98d4b7d59ba9b47442a3d3c1bf601c5180de117c660c4d31bed"
+        },
+        {
+          "src": "/images/services/osiyo-grand/7fed130b74560f2f30413f8e.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/19547275/2a0000019e30bc974b91aca445cf02247867/XXXL",
+          "sha256": "7fed130b74560f2f30413f8e1b68ede0f79d37e8c09e001d98d139eef024e885"
+        },
+        {
+          "src": "/images/services/osiyo-grand/dc0cd0e9360b1d567c26be27.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/19521209/2a0000019bec3825263e8e75f61d52630790/XXXL",
+          "sha256": "dc0cd0e9360b1d567c26be27f90a68251c38ee9b22176ad0bbcbd7d3430397e5"
+        },
+        {
+          "src": "/images/services/osiyo-grand/da133dfccd73195c70fd0922.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/14451083/2a000001926f9ddfc18e8064c99694dd952c/XXXL",
+          "sha256": "da133dfccd73195c70fd0922c0c03eb8daeb6c8cd5b15a4af881ab46b25f7b7f"
+        },
+        {
+          "src": "/images/services/osiyo-grand/75d81e1434dd130b690dcf56.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/18748915/2a0000019e30bd4d2d4cd4d8e98b715d62fb/XXXL",
+          "sha256": "75d81e1434dd130b690dcf56049245b4d9c0988d19f0c042dad7aa1e91781d90"
+        }
+      ],
+      "contactPolicy": "Yandex anchor phones and one usable link per contact type; uncertain Google candidates and conflicting extra phone values excluded.",
+      "pricePolicy": "Negotiable; no inferred wedding price from food items, unspecified event services or 1-so'm placeholders.",
+      "collectionStatus": "needs_review",
+      "directoryApprovedByUser": true
+    },
+    {
+      "slug": "versal-banquet-hall",
+      "name": "Версаль",
+      "yandexId": "178096015422",
+      "sources": [
+        {
+          "provider": "yandex",
+          "url": "https://yandex.uz/maps/org/versal_milliy_uyg_ur_taomlari/178096015422/"
+        },
+        {
+          "provider": "google",
+          "url": "https://www.google.com/maps/place/Versal+Banquet+Hall/data=!4m7!3m6!1s0x38ae8b8efc7297ff:0x2b25a59e558906f4!8m2!3d41.3282599!4d69.2248441!16s%2Fg%2F11b7kjrljy!19sChIJ_5dy_I6LrjgR9AaJVZ6lJSs?authuser=0&hl=en&g_ep=EgoyMDI2MTExMC4wIJJjKgBIAVAD&rclk=1"
+        }
+      ],
+      "imageSource": "yandex",
+      "images": [
+        {
+          "src": "/images/services/versal-banquet-hall/d11372dd0fa69daf589c8145.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/18140291/2a0000019ed8e3384ed98d8539c084b5d927/XXXL",
+          "sha256": "d11372dd0fa69daf589c8145457d3ff06997f04b775803a58f00f8424f478bb4"
+        },
+        {
+          "src": "/images/services/versal-banquet-hall/15e7eae9d792a76f54de5f54.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/19672327/2a0000019ed8e3326964bc8303615ab0f434/XXXL",
+          "sha256": "15e7eae9d792a76f54de5f54036019e8f29b0a8052b3ae26167f427958e9594a"
+        },
+        {
+          "src": "/images/services/versal-banquet-hall/5a1e61553faf44ceb0052c67.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/15257527/2a000001970bf5cec5ccf08a961166306934/XXXL",
+          "sha256": "5a1e61553faf44ceb0052c679053d9239029cecdeff119edd5b866e9517cc19d"
+        },
+        {
+          "src": "/images/services/versal-banquet-hall/32fc18ec18f9fc92f4ee85c7.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/16312016/2a0000019d3aa39bbaf97340d9770eab87e4/XXXL",
+          "sha256": "32fc18ec18f9fc92f4ee85c796335863c9fab1bb631562acda0233d326af5f4d"
+        },
+        {
+          "src": "/images/services/versal-banquet-hall/9479edf13a8917b4bcb5f871.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/1583511/2a0000016c5b6d585de1f2224b1a4e2e0bac/XXXL",
+          "sha256": "9479edf13a8917b4bcb5f871a5998f214c6d42efb194f52e1672e1d6f2d1ff06"
+        }
+      ],
+      "contactPolicy": "Yandex anchor phones and one usable link per contact type; uncertain Google candidates and conflicting extra phone values excluded.",
+      "pricePolicy": "Negotiable; no inferred wedding price from food items, unspecified event services or 1-so'm placeholders.",
+      "collectionStatus": "complete",
+      "directoryApprovedByUser": true
+    },
+    {
+      "slug": "oqshom",
+      "name": "Oqshom",
+      "yandexId": "95863422120",
+      "sources": [
+        {
+          "provider": "yandex",
+          "url": "https://yandex.uz/maps/org/oqshom/95863422120/"
+        },
+        {
+          "provider": "google",
+          "url": "https://www.google.com/maps/search/Oqshom%20Tashkent/?hl=en"
+        }
+      ],
+      "imageSource": "yandex",
+      "images": [
+        {
+          "src": "/images/services/oqshom/cf59ba4e765ce9f95c0c6d2c.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/1778671/2a0000016ca246b47b150c0f8a28a98fcec5/XXXL",
+          "sha256": "cf59ba4e765ce9f95c0c6d2c597836d92a3c211b91df46b259b6dd62c0b9a2d4"
+        },
+        {
+          "src": "/images/services/oqshom/8414fcc5134744225543f507.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/17700564/2a0000019d8d36ee535ca92771ee434444a3/XXXL",
+          "sha256": "8414fcc5134744225543f50744981fd6c6d1d850a974838d7a3b2bdb37c1a821"
+        },
+        {
+          "src": "/images/services/oqshom/6aa63da0cf02ad1cab7ac00a.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/16243748/2a000001970d7dd6b2b0d22abee5b5c95d27/XXXL",
+          "sha256": "6aa63da0cf02ad1cab7ac00a33cbf85f50b2e0db49b5af15b7beae4085915cdc"
+        },
+        {
+          "src": "/images/services/oqshom/5d16d680ed2f85e9de559632.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/18754568/2a0000019d8d36f588a151847ea911a092af/XXXL",
+          "sha256": "5d16d680ed2f85e9de55963209400304a6caa621a03fa969f9d6eebc2b7a9bc8"
+        }
+      ],
+      "contactPolicy": "Yandex anchor phones and one usable link per contact type; uncertain Google candidates and conflicting extra phone values excluded.",
+      "pricePolicy": "Negotiable; no inferred wedding price from food items, unspecified event services or 1-so'm placeholders.",
+      "collectionStatus": "complete",
+      "directoryApprovedByUser": true
+    },
+    {
+      "slug": "bisyor",
+      "name": "Bisyor",
+      "yandexId": "45954988821",
+      "sources": [
+        {
+          "provider": "yandex",
+          "url": "https://yandex.uz/maps/org/bisyor/45954988821/"
+        },
+        {
+          "provider": "google",
+          "url": "https://www.google.com/maps/place/Bisyor+restaurant/data=!4m7!3m6!1s0x38ae8900543adf57:0x3549a5e75fac1aec!8m2!3d41.2590112!4d69.1568579!16s%2Fg%2F11wfvlkj2k!19sChIJV986VACJrjgR7BqsX-elSTU?authuser=0&hl=en&g_ep=EgoyMDI2MTExMC4wIJJjKgBIAVAD&rclk=1"
+        }
+      ],
+      "imageSource": "yandex",
+      "images": [
+        {
+          "src": "/images/services/bisyor/f98df1213556c9d28736eff0.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/16437561/2a0000019908d980fab0ffd12af9a7b0841e/XXXL",
+          "sha256": "f98df1213556c9d28736eff0b68a20817f56f160f96e684fe7ed94446e5e3528"
+        },
+        {
+          "src": "/images/services/bisyor/c5b8ad12010e48885aef8646.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/5111241/2a00000182959fd5f1c08ec7fde35d01365b/XXXL",
+          "sha256": "c5b8ad12010e48885aef864644aeed208de940bc744f6fba15e2804ec2c0ccad"
+        },
+        {
+          "src": "/images/services/bisyor/69a094f2974d4aa1333b120f.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/9709178/2a0000018944de88805bc5ac269f3a83850f/XXXL",
+          "sha256": "69a094f2974d4aa1333b120f267b72b84f49bed6777996449e66f8d8a8fb188f"
+        },
+        {
+          "src": "/images/services/bisyor/b68638160a6b7be84bcedf6c.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/9717139/2a0000018944de9bd9058ce562ce3045d46d/XXXL",
+          "sha256": "b68638160a6b7be84bcedf6cfc047158a10b00c12e6a10f2bcabf2290d7e97f2"
+        },
+        {
+          "src": "/images/services/bisyor/45f700f3728082eda3fdb885.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/14193233/2a000001937ce489f44335f27f274d8484f3/XXXL",
+          "sha256": "45f700f3728082eda3fdb8852f84cb403d5498de7e43df2d5eb5de64cc344ffa"
+        },
+        {
+          "src": "/images/services/bisyor/7b68bb58572f0cb5879fe850.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/1860543/2a0000016f2b7a1fb9c0bd2f23e95b216c6a/XXXL",
+          "sha256": "7b68bb58572f0cb5879fe8508987743835560488a3d1d2c35f0d6f0c2ad0d7ce"
+        }
+      ],
+      "contactPolicy": "Yandex anchor phones and one usable link per contact type; uncertain Google candidates and conflicting extra phone values excluded.",
+      "pricePolicy": "Negotiable; no inferred wedding price from food items, unspecified event services or 1-so'm placeholders.",
+      "collectionStatus": "complete",
+      "directoryApprovedByUser": true
+    },
+    {
+      "slug": "parvoz",
+      "name": "Parvoz",
+      "yandexId": "28785477820",
+      "sources": [
+        {
+          "provider": "yandex",
+          "url": "https://yandex.uz/maps/org/parvoz/28785477820/"
+        },
+        {
+          "provider": "google",
+          "url": "https://www.google.com/maps/place/Parvoz+Restaurant/data=!4m7!3m6!1s0x38aef59d26f7ec5b:0x8ad7c1cdfe20e5fa!8m2!3d41.2898235!4d69.3381758!16s%2Fg%2F11cncn4n1p!19sChIJW-z3Jp31rjgR-uUg_s3B14o?authuser=0&hl=en&g_ep=EgoyMDI2MTExMC4wIJJjKgBIAVAD&rclk=1"
+        }
+      ],
+      "imageSource": "yandex",
+      "images": [
+        {
+          "src": "/images/services/parvoz/85d959914681d87cbe3da854.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/11873493/2a00000192cfa36e37ddad77c106f48fc99c/XXXL",
+          "sha256": "85d959914681d87cbe3da854bd12e97abc71c3c96a697458a174efd9a383ff28"
+        },
+        {
+          "src": "/images/services/parvoz/3abcda5af58e019b394bfafa.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/14092818/2a00000192b3afc33988cc2385d79d177db0/XXXL",
+          "sha256": "3abcda5af58e019b394bfafa1b4692d438cdcc5f3950733fc25667cb9abc2d01"
+        },
+        {
+          "src": "/images/services/parvoz/95576afbe604dbfa8833a76f.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/9709783/2a00000189f94a0c0ad65eb7f2cc8c29c819/XXXL",
+          "sha256": "95576afbe604dbfa8833a76f14c8f24b4d80467a5a13feb3d22903d0ceda7186"
+        },
+        {
+          "src": "/images/services/parvoz/9d4bc6773ae408160192a882.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/14090927/2a00000192cfa2b9c7eece47de38657092f3/XXXL",
+          "sha256": "9d4bc6773ae408160192a882f6b8985c3a5b048a9c405018ebd2a44bed23f8a5"
+        }
+      ],
+      "contactPolicy": "Yandex anchor phones and one usable link per contact type; uncertain Google candidates and conflicting extra phone values excluded.",
+      "pricePolicy": "Negotiable; no inferred wedding price from food items, unspecified event services or 1-so'm placeholders.",
+      "collectionStatus": "complete",
+      "directoryApprovedByUser": true
+    },
+    {
+      "slug": "zamin",
+      "name": "Zamin",
+      "yandexId": "152583066399",
+      "sources": [
+        {
+          "provider": "yandex",
+          "url": "https://yandex.uz/maps/org/zamin/152583066399/"
+        },
+        {
+          "provider": "google",
+          "url": "https://www.google.com/maps/place/Zamin/data=!4m7!3m6!1s0x38ae8a5425ebcbcb:0xb1e994b0165a10e5!8m2!3d41.2943326!4d69.236268!16s%2Fg%2F11g8bv45cs!19sChIJy8vrJVSKrjgR5RBaFrCU6bE?authuser=0&hl=en&g_ep=EgoyMDI2MTExMC4wIJJjKgBIAVAD&rclk=1"
+        }
+      ],
+      "imageSource": "yandex",
+      "images": [
+        {
+          "src": "/images/services/zamin/b7a91710f1884ee910523959.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/1880524/2a0000016e10b3dd968db751c5e651df351b/XXXL",
+          "sha256": "b7a91710f1884ee910523959566c4d2e6d071f25dba193c061819dd4b2dc1d29"
+        },
+        {
+          "src": "/images/services/zamin/be7d789af6978ff72c7ca7ad.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/15434007/2a000001992f03425e7c5e2beb24cb99d46a/XXXL",
+          "sha256": "be7d789af6978ff72c7ca7adac8e5cb674b0a930c7a31b44df393dfd3abd1753"
+        },
+        {
+          "src": "/images/services/zamin/242fa763f849dc7ef3b3e6dc.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/16158716/2a00000197024adc3371d4394a5fdb948816/XXXL",
+          "sha256": "242fa763f849dc7ef3b3e6dc788c62d4b232831ae04d8f73722a4d6b48263c1f"
+        },
+        {
+          "src": "/images/services/zamin/062d05e09958fdebab7a62a6.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/14296532/2a00000199f1d1947d380b300ff4d93893c6/XXXL",
+          "sha256": "062d05e09958fdebab7a62a64adef5ff306ba7cc2bc5cbec11be0e2238dd3df8"
+        },
+        {
+          "src": "/images/services/zamin/9aad1b51611c1474cc84c5ba.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/13668123/2a00000197024ada2a6d28caea788e8b629b/XXXL",
+          "sha256": "9aad1b51611c1474cc84c5ba425c93bc1ad8da04a3edcfcf1fd7995ff657e5a1"
+        }
+      ],
+      "contactPolicy": "Yandex anchor phones and one usable link per contact type; uncertain Google candidates and conflicting extra phone values excluded.",
+      "pricePolicy": "Negotiable; no inferred wedding price from food items, unspecified event services or 1-so'm placeholders.",
+      "collectionStatus": "complete",
+      "directoryApprovedByUser": true
+    },
+    {
+      "slug": "sadaf",
+      "name": "Sadaf",
+      "yandexId": "23753168484",
+      "sources": [
+        {
+          "provider": "yandex",
+          "url": "https://yandex.uz/maps/org/sadaf/23753168484/"
+        }
+      ],
+      "imageSource": "yandex",
+      "images": [
+        {
+          "src": "/images/services/sadaf/edf9508217b8aa72c57e7683.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/6334827/2a0000017f9d2ee0146c49bbe9bdf4cdfa59/XXXL",
+          "sha256": "edf9508217b8aa72c57e768317445012c65602c14fe54fd58ae192dd57fdca03"
+        },
+        {
+          "src": "/images/services/sadaf/3b736626c5619631e414c924.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/1923723/2a0000016c14413d0dfb2d8d48810111be95/XXXL",
+          "sha256": "3b736626c5619631e414c924518e3d263faba52fa32e59f907193b11d9089a4a"
+        },
+        {
+          "src": "/images/services/sadaf/67c6ea2e8d7fbb08d63c8c72.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/19555618/2a0000019ed6d73b322d096f39bfc2b04d4b/XXXL",
+          "sha256": "67c6ea2e8d7fbb08d63c8c72fec9488c065a5ab42817fb8c2dcd2d3c2af19560"
+        },
+        {
+          "src": "/images/services/sadaf/10216a0e696da8474d1ddc18.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/11244149/2a0000018c4fcde7ef2111b336d31aa8bdba/XXXL",
+          "sha256": "10216a0e696da8474d1ddc180386287fa733e393ba072516327409640f32d83e"
+        },
+        {
+          "src": "/images/services/sadaf/e92a93c8c078d61e250e943c.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/10637174/2a0000018c4fcdde5cda098214ff94f29d6c/XXXL",
+          "sha256": "e92a93c8c078d61e250e943cb32d05a4cf44c36b5a8d22ae31d0c2d2bc0a549c"
+        }
+      ],
+      "contactPolicy": "Yandex anchor phones and one usable link per contact type; uncertain Google candidates and conflicting extra phone values excluded.",
+      "pricePolicy": "Negotiable; no inferred wedding price from food items, unspecified event services or 1-so'm placeholders.",
+      "collectionStatus": "needs_review",
+      "directoryApprovedByUser": true
+    },
+    {
+      "slug": "ummon",
+      "name": "Ummon",
+      "yandexId": "159854474854",
+      "sources": [
+        {
+          "provider": "yandex",
+          "url": "https://yandex.uz/maps/org/ummon_to_y_xona/159854474854/"
+        },
+        {
+          "provider": "google",
+          "url": "https://www.google.com/maps/place/Restaurant+%22Ummon%22/data=!4m7!3m6!1s0x38aef503ffc8e71f:0x57c9581caf5935a5!8m2!3d41.3115567!4d69.3293956!16s%2Fg%2F11c0qg_42p!19sChIJH-fI_wP1rjgRpTVZrxxYyVc?authuser=0&hl=en&g_ep=EgoyMDI2MTExMC4wIJJjKgBIAVAD&rclk=1"
+        }
+      ],
+      "imageSource": "yandex",
+      "images": [
+        {
+          "src": "/images/services/ummon/cc9cbbb120de2f111ce67737.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/11299266/2a0000018fdf498dc1ac0aaa6f95c1118966/XXXL",
+          "sha256": "cc9cbbb120de2f111ce677373f55ec05b2d0465e59d26310c2832d6ab444d2c5"
+        },
+        {
+          "src": "/images/services/ummon/70c6bef99db8ef3fa5e3d1e8.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/6527792/2a0000018fdf487ef9b184934c00d1543c27/XXXL",
+          "sha256": "70c6bef99db8ef3fa5e3d1e81e45e49b2c8ebebf3088bc95ba560212bf740b56"
+        },
+        {
+          "src": "/images/services/ummon/96b6d1900ca3351fda2606cf.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/12595784/2a0000018fddfa425bc220c94ebc104fb52d/XXXL",
+          "sha256": "96b6d1900ca3351fda2606cf06b6e0370995f4ddfff317125bddb721a73f58d2"
+        },
+        {
+          "src": "/images/services/ummon/7fa033854605d7c9cc86f057.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/16823151/2a0000019804e90207901c7f6dfead65997d/XXXL",
+          "sha256": "7fa033854605d7c9cc86f0570cf83d7976afadff2ee8bfac80253f03d5836a2d"
+        },
+        {
+          "src": "/images/services/ummon/904f561b4ba116313d7c9925.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/16113897/2a0000019804e9019b43d3f8557c3e29a7d9/XXXL",
+          "sha256": "904f561b4ba116313d7c99255921e697049e54c0f2ca9377ce8484947f36a856"
+        }
+      ],
+      "contactPolicy": "Yandex anchor phones and one usable link per contact type; uncertain Google candidates and conflicting extra phone values excluded.",
+      "pricePolicy": "Negotiable; no inferred wedding price from food items, unspecified event services or 1-so'm placeholders.",
+      "collectionStatus": "complete",
+      "directoryApprovedByUser": true
+    },
+    {
+      "slug": "ofarin",
+      "name": "Ofarin",
+      "yandexId": "93825624678",
+      "sources": [
+        {
+          "provider": "yandex",
+          "url": "https://yandex.uz/maps/org/ofarin/93825624678/"
+        },
+        {
+          "provider": "google",
+          "url": "https://www.google.com/maps/search/Ofarin%20Tashkent/?hl=en"
+        }
+      ],
+      "imageSource": "yandex",
+      "images": [
+        {
+          "src": "/images/services/ofarin/bdc96a048299e9b7af725e8f.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/1429587/2a0000016959fb76d9f49fb8a7f0dcf8d8e0/XXXL",
+          "sha256": "bdc96a048299e9b7af725e8f6ae8d59a94c611364eda457ec0f6239612d82c6b"
+        },
+        {
+          "src": "/images/services/ofarin/e3e62fbc034e6e93e417cfc0.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/11383855/2a0000018c7e22d78b7f7b1e37ccd4fe13da/XXXL",
+          "sha256": "e3e62fbc034e6e93e417cfc0b8cc4208c66e456651f65348221bb3d814514eac"
+        },
+        {
+          "src": "/images/services/ofarin/3687711d627cddde56509f6c.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/10830675/2a0000018c635c4e398851037507bb20900b/XXXL",
+          "sha256": "3687711d627cddde56509f6c258bd23b0e3bda0c5a5e13d17593aa20ec3057eb"
+        },
+        {
+          "src": "/images/services/ofarin/bedb75a65b94629e5358f33f.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/1938795/2a0000016ff05242aee0139b8e4a7894a841/XXXL",
+          "sha256": "bedb75a65b94629e5358f33faea9032d857349d5291edaf63f3d432ec8874606"
+        },
+        {
+          "src": "/images/services/ofarin/259bc0e8b9f1a47f4112043f.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/18111128/2a0000019b7fc594a995b8bb0cc7f5b53204/XXXL",
+          "sha256": "259bc0e8b9f1a47f4112043f1c8825b96c7fb48eb01c4e8fc7dbf310a68d51a9"
+        },
+        {
+          "src": "/images/services/ofarin/3bc40727c303b8188866d1ec.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/1678797/2a000001695b51ca8058d0614150201edc94/XXXL",
+          "sha256": "3bc40727c303b8188866d1ec1c893a3876160b3514de88f7b5448ef2f68770d5"
+        }
+      ],
+      "contactPolicy": "Yandex anchor phones and one usable link per contact type; uncertain Google candidates and conflicting extra phone values excluded.",
+      "pricePolicy": "Negotiable; no inferred wedding price from food items, unspecified event services or 1-so'm placeholders.",
+      "collectionStatus": "complete",
+      "directoryApprovedByUser": true
+    },
+    {
+      "slug": "dunyo-saroyi",
+      "name": "Dunyo Saroyi",
+      "yandexId": "177628008540",
+      "sources": [
+        {
+          "provider": "yandex",
+          "url": "https://yandex.uz/maps/org/dunyo_saroyi/177628008540/"
+        },
+        {
+          "provider": "google",
+          "url": "https://www.google.com/maps/place/Dunyo+Restaurant/data=!4m7!3m6!1s0x38aef43acfb02be3:0x8a74f6ec1dc252e0!8m2!3d41.3351447!4d69.3706544!16s%2Fg%2F1tr9ltbp!19sChIJ4yuwzzr0rjgR4FLCHez2dIo?authuser=0&hl=en&g_ep=EgoyMDI2MTExMC4wIJJjKgBIAVAD&rclk=1"
+        }
+      ],
+      "imageSource": "yandex",
+      "images": [
+        {
+          "src": "/images/services/dunyo-saroyi/8eb9334b19bf057559fff454.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/13206104/2a000001952e11a9756c0d4cf3d31ef8828d/XXXL",
+          "sha256": "8eb9334b19bf057559fff454a1e85e441e8443788e7c04597f081ace7cea586d"
+        },
+        {
+          "src": "/images/services/dunyo-saroyi/530866dc0f6405ed450151b4.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/19647201/2a0000019b73486e24262de985cb99c0e943/XXXL",
+          "sha256": "530866dc0f6405ed450151b4dc942e780d6af650b4cce1d76084dbad09aea742"
+        },
+        {
+          "src": "/images/services/dunyo-saroyi/f9a85f19516ffc58d1ac2216.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/19662431/2a0000019b73486d2a1cd5d569d4976bfdcc/XXXL",
+          "sha256": "f9a85f19516ffc58d1ac22162cba7529258eac083a9fc968ecf0e0dc0d9d2b77"
+        },
+        {
+          "src": "/images/services/dunyo-saroyi/3c10ab36f7f66835fa7a7f89.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/16069310/2a0000019af104a1c2172eb97a3637dcefbf/XXXL",
+          "sha256": "3c10ab36f7f66835fa7a7f891d4712b9ef9f7235d372ae2257e9cd16b36ba0f9"
+        }
+      ],
+      "contactPolicy": "Yandex anchor phones and one usable link per contact type; uncertain Google candidates and conflicting extra phone values excluded.",
+      "pricePolicy": "Negotiable; no inferred wedding price from food items, unspecified event services or 1-so'm placeholders.",
+      "collectionStatus": "complete",
+      "directoryApprovedByUser": true
+    },
+    {
+      "slug": "huvaydo",
+      "name": "Huvaydo",
+      "yandexId": "92649672731",
+      "sources": [
+        {
+          "provider": "yandex",
+          "url": "https://yandex.uz/maps/org/huvaydo/92649672731/"
+        },
+        {
+          "provider": "google",
+          "url": "https://www.google.com/maps/place/Huvaydo+restorani/data=!4m7!3m6!1s0x38ae8c0fdd5f799f:0x2bbbd0e9761328f4!8m2!3d41.3405784!4d69.2058045!16s%2Fg%2F12hq1blpq!19sChIJn3lf3Q-MrjgR9CgTdunQuys?authuser=0&hl=en&g_ep=EgoyMDI2MTExMC4wIJJjKgBIAVAD&rclk=1"
+        }
+      ],
+      "imageSource": "yandex",
+      "images": [
+        {
+          "src": "/images/services/huvaydo/d0bbce0378f92df86cc09da8.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/2755030/2a00000170482b0c1cfae860feba4143b2be/XXXL",
+          "sha256": "d0bbce0378f92df86cc09da861618744268ec08252707bb721648067e28a720b"
+        },
+        {
+          "src": "/images/services/huvaydo/93630879088a8432d77db8ba.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/14540206/2a0000019354e36877eaa4f2f7ddab61ddf8/XXXL",
+          "sha256": "93630879088a8432d77db8bae011eed772043a95ee284e3e43704e82b0835ba3"
+        },
+        {
+          "src": "/images/services/huvaydo/d14ceece37fce931c45a40aa.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/16915650/2a0000019a07f2d59966dde15dbc9a9cb2fd/XXXL",
+          "sha256": "d14ceece37fce931c45a40aa94cbb080a20ade6095d2ec61e80d02805aefe62f"
+        },
+        {
+          "src": "/images/services/huvaydo/7cb2282149f08783a5dcfaee.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/14761495/2a00000199344459ea903520efdb024004f2/XXXL",
+          "sha256": "7cb2282149f08783a5dcfaee8ef9ebce9f938db0454222ccaaa6baaeb33a1a17"
+        },
+        {
+          "src": "/images/services/huvaydo/3edf07adc1fe9090e4143c5c.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/1583613/2a0000016e48f5af0e400c458bd74f3edff6/XXXL",
+          "sha256": "3edf07adc1fe9090e4143c5c9a990922e1aea30d50ac694e869ee114e614fc7d"
+        },
+        {
+          "src": "/images/services/huvaydo/4c2922d4c34c210fe50cc111.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/1651981/2a0000016ba79a7feffe4a78dad139728ea3/XXXL",
+          "sha256": "4c2922d4c34c210fe50cc111d176f54ab7c2f35015cd1453db4b6b0b73a983ee"
+        }
+      ],
+      "contactPolicy": "Yandex anchor phones and one usable link per contact type; uncertain Google candidates and conflicting extra phone values excluded.",
+      "pricePolicy": "Negotiable; no inferred wedding price from food items, unspecified event services or 1-so'm placeholders.",
+      "collectionStatus": "needs_review",
+      "directoryApprovedByUser": true
+    },
+    {
+      "slug": "alo-toyxonasi",
+      "name": "A'lo",
+      "yandexId": "80963179501",
+      "sources": [
+        {
+          "provider": "yandex",
+          "url": "https://yandex.uz/maps/org/a_lo/80963179501/"
+        },
+        {
+          "provider": "google",
+          "url": "https://www.google.com/maps/place/%22A%27lo%22+to%E2%80%98yxonasi/data=!4m7!3m6!1s0x38ae8c38ee274abf:0xcd44b4cbe1a84616!8m2!3d41.3589134!4d69.2142534!16s%2Fg%2F1jkvw6fd3!19sChIJv0on7jiMrjgRFkao4cu0RM0?authuser=0&hl=en&g_ep=EgoyMDI2MTExMC4wIJJjKgBIAVAD&rclk=1"
+        }
+      ],
+      "imageSource": "yandex",
+      "images": [
+        {
+          "src": "/images/services/alo-toyxonasi/dc68dc170ecbca470ca195b2.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/10647561/2a0000018d1cc69a447dbc94a2a2bb01aa03/XXXL",
+          "sha256": "dc68dc170ecbca470ca195b28ee41677769cb4c7f313d8212e8d96cb2e7497ac"
+        },
+        {
+          "src": "/images/services/alo-toyxonasi/50c4689c3ea2dd8e05b3f0d9.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/1545421/2a0000016e8bc7b1e0de2cb0c55c56972eb8/XXXL",
+          "sha256": "50c4689c3ea2dd8e05b3f0d92daad4098a86d2755e61bdd020968dd690fc4b0c"
+        },
+        {
+          "src": "/images/services/alo-toyxonasi/6c6e808660df6e3aace2faf7.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/16478002/2a0000019a3eb6cc1dfcc06cfc801c81798c/XXXL",
+          "sha256": "6c6e808660df6e3aace2faf7dd1b7291b2041ceeb7ba60e5d78b5ddbd769c63c"
+        },
+        {
+          "src": "/images/services/alo-toyxonasi/7861302409caa113f7945223.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/4437253/2a0000017b71ec43f4819203e47653c7233b/XXXL",
+          "sha256": "7861302409caa113f794522365f17af4dc62de0c8d2acf161e0128dce166ebbf"
+        },
+        {
+          "src": "/images/services/alo-toyxonasi/ef758d52164872f0c3ddb260.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/4341149/2a0000017b71ebe050c8d7dc1e042a69b259/XXXL",
+          "sha256": "ef758d52164872f0c3ddb2606589dcbfe8c5831df57abe658e73e8fe7763356e"
+        }
+      ],
+      "contactPolicy": "Yandex anchor phones and one usable link per contact type; uncertain Google candidates and conflicting extra phone values excluded.",
+      "pricePolicy": "Negotiable; no inferred wedding price from food items, unspecified event services or 1-so'm placeholders.",
+      "collectionStatus": "complete",
+      "directoryApprovedByUser": true
+    },
+    {
+      "slug": "yakka-saroy",
+      "name": "Yakka Saroy",
+      "yandexId": "183122456222",
+      "sources": [
+        {
+          "provider": "yandex",
+          "url": "https://yandex.uz/maps/org/yakka_saroy/183122456222/"
+        },
+        {
+          "provider": "google",
+          "url": "https://www.google.com/maps/place/Yakka+Saroy+(+%D0%91%D0%B0%D0%BD%D0%BA%D0%B5%D1%82%D0%BD%D1%8B%D0%B9+%D0%B7%D0%B0%D0%BB+%D0%AF%D0%BA%D0%BA%D0%B0%D1%81%D0%B0%D1%80%D0%B0%D0%B9)/@41.2794957,69.2604311,17z/data=!3m1!4b1!4m6!3m5!1s0x38ae8a9438721fc7:0xef64b91e3caf8304!8m2!3d41.2794957!4d69.2604311!16s%2Fg%2F11c1qmjj8j?hl=en&entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D"
+        }
+      ],
+      "imageSource": "yandex",
+      "images": [
+        {
+          "src": "/images/services/yakka-saroy/18152d059fa780382c0e3c9d.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/4562719/2a0000017c502116c548c3b96d2d4ac70e76/XXXL",
+          "sha256": "18152d059fa780382c0e3c9d33bab900a2ad391a7a6cd9cef6eeb6417cde705d"
+        },
+        {
+          "src": "/images/services/yakka-saroy/e037f5bd1970f4ca3c5e5b54.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/4598810/2a0000017c5020893b396339c25bb35a9e9e/XXXL",
+          "sha256": "e037f5bd1970f4ca3c5e5b54e434f19bb0c1a0d1cda3730f34c3304a192014a3"
+        },
+        {
+          "src": "/images/services/yakka-saroy/85741dd37e958e342f80f1e7.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/5104421/2a0000017c5020c27f5ad94a73eb4bcf1896/XXXL",
+          "sha256": "85741dd37e958e342f80f1e70b3cd88ff6779bde67f99a456770542208e7a282"
+        },
+        {
+          "src": "/images/services/yakka-saroy/5db8e2813d7ae1937946b3f8.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/5097872/2a000001816762813f40b933d23d873f0098/XXXL",
+          "sha256": "5db8e2813d7ae1937946b3f80476833287c7605952309108c93ec05ac919ef07"
+        },
+        {
+          "src": "/images/services/yakka-saroy/1f63a00e73fbfb8b1b0a93d6.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/4547379/2a00000183d5c71b3907a92967625edd5fea/XXXL",
+          "sha256": "1f63a00e73fbfb8b1b0a93d6464f2aa71559e78c1790ab02f4f7ae240506d3fe"
+        },
+        {
+          "src": "/images/services/yakka-saroy/d61bae6ea6966d46632f4de5.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/18781639/2a0000019ecc7a07b01372e33d4293a44677/XXXL",
+          "sha256": "d61bae6ea6966d46632f4de5062fe36ba3db04461a1512a4308cbc5b83bed49c"
+        }
+      ],
+      "contactPolicy": "Yandex anchor phones and one usable link per contact type; uncertain Google candidates and conflicting extra phone values excluded.",
+      "pricePolicy": "Negotiable; no inferred wedding price from food items, unspecified event services or 1-so'm placeholders.",
+      "collectionStatus": "complete",
+      "directoryApprovedByUser": true
+    },
+    {
+      "slug": "royal-rose",
+      "name": "Royal rose",
+      "yandexId": "146726530783",
+      "sources": [
+        {
+          "provider": "yandex",
+          "url": "https://yandex.uz/maps/org/royal_rose/146726530783/"
+        },
+        {
+          "provider": "google",
+          "url": "https://www.google.com/maps/search/Royal%20rose%20Tashkent/?hl=en"
+        }
+      ],
+      "imageSource": "yandex",
+      "images": [
+        {
+          "src": "/images/services/royal-rose/e722606f2a1c5604a677ec55.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/4396925/2a000001774d7c22538b7ef66325668d7709/XXXL",
+          "sha256": "e722606f2a1c5604a677ec55beecefdb18345c2bf1db1488df3e09ed28ce7a4e"
+        },
+        {
+          "src": "/images/services/royal-rose/99ce21855ad00ac961bb7855.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/5110793/2a000001814f5d2373120745d46744bafd22/XXXL",
+          "sha256": "99ce21855ad00ac961bb78555ce67663fad1c3fffa59aedfab49c618a4e8c158"
+        },
+        {
+          "src": "/images/services/royal-rose/e5895cbaf2cdb014581a003f.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/5479384/2a0000017e53a68b53f1a060d2c7cf028f3c/XXXL",
+          "sha256": "e5895cbaf2cdb014581a003f4b88bb235b4459b280be9a659812fc589b23a5ca"
+        },
+        {
+          "src": "/images/services/royal-rose/e5b6e4a45c431a59e0ff2c84.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/11093519/2a0000018b157ff53c94ca504848430d6850/XXXL",
+          "sha256": "e5b6e4a45c431a59e0ff2c84bf41c5eb0f001bd062bedb82fa0fcb26f210f74b"
+        },
+        {
+          "src": "/images/services/royal-rose/53673e4a0d9d2f2b5ca56975.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/3717246/2a000001774d7c25b2a80036f0ca78fc5c0b/XXXL",
+          "sha256": "53673e4a0d9d2f2b5ca5697573f43e773053b0f2dad228e49fc1b9a9f4caa809"
+        },
+        {
+          "src": "/images/services/royal-rose/f67b6f58f52c9358bfc3466b.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/15282671/2a000001970aee5a7fb2387ddc57885828cd/XXXL",
+          "sha256": "f67b6f58f52c9358bfc3466b3d90a3e6c76d12b799854527600e925f64eea46e"
+        }
+      ],
+      "contactPolicy": "Yandex anchor phones and one usable link per contact type; uncertain Google candidates and conflicting extra phone values excluded.",
+      "pricePolicy": "Negotiable; no inferred wedding price from food items, unspecified event services or 1-so'm placeholders.",
+      "collectionStatus": "complete",
+      "directoryApprovedByUser": true
+    },
+    {
+      "slug": "zebu-zar",
+      "name": "Зебу зар",
+      "yandexId": "86143385650",
+      "sources": [
+        {
+          "provider": "yandex",
+          "url": "https://yandex.uz/maps/org/zebu_zar/86143385650/"
+        },
+        {
+          "provider": "google",
+          "url": "https://www.google.com/maps/place/Zebu+Zar/@41.3334079,69.2926199,17z/data=!3m1!4b1!4m6!3m5!1s0x38aef576dad04f73:0xb48ad0436cdf95!8m2!3d41.3334079!4d69.2926199!16s%2Fg%2F11jf_1kpyx?hl=en&entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D"
+        }
+      ],
+      "imageSource": "yandex",
+      "images": [
+        {
+          "src": "/images/services/zebu-zar/17cf102991289893f6063fbe.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/16470051/2a0000019e123d0f4a4b520b1ec3e96802bb/XXXL",
+          "sha256": "17cf102991289893f6063fbe5521d5962edc8666e01f1ca3e2a18e02a3ed0698"
+        },
+        {
+          "src": "/images/services/zebu-zar/32d55233f6dce3e3dd3c9ab0.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/5272526/2a0000017c5da6fa0b44b2c0317c970b39a6/XXXL",
+          "sha256": "32d55233f6dce3e3dd3c9ab05b352990529f31af6ad702b22c10b800d0bb9478"
+        },
+        {
+          "src": "/images/services/zebu-zar/6b252019b2562c904a7e8d25.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/10963815/2a0000018d35592516dbcae8b7ce06ba646f/XXXL",
+          "sha256": "6b252019b2562c904a7e8d25b9b876bb27621a0ee6b3cd14e1ac7dd246f70704"
+        },
+        {
+          "src": "/images/services/zebu-zar/a984289be763c1bc9ca2aea1.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/11383572/2a0000018d355954b27830fd259a42094b1a/XXXL",
+          "sha256": "a984289be763c1bc9ca2aea152fa60e12b9a88ee514dd3c204ece0a236360d8f"
+        },
+        {
+          "src": "/images/services/zebu-zar/0ed2f94b20b448487acf0d15.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/15311720/2a00000197465352668bbecea834b90698e9/XXXL",
+          "sha256": "0ed2f94b20b448487acf0d1597bf28b5cf89e8241ea31704a7c86dc7305a288c"
+        },
+        {
+          "src": "/images/services/zebu-zar/6f98e5ec1a66195c79ccc56a.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/15232415/2a00000198b057b8e030b7839364fe39add5/XXXL",
+          "sha256": "6f98e5ec1a66195c79ccc56af4da976759b2c6524c1441b799c98904d2290be0"
+        }
+      ],
+      "contactPolicy": "Yandex anchor phones and one usable link per contact type; uncertain Google candidates and conflicting extra phone values excluded.",
+      "pricePolicy": "Negotiable; no inferred wedding price from food items, unspecified event services or 1-so'm placeholders.",
+      "collectionStatus": "complete",
+      "directoryApprovedByUser": true
+    },
+    {
+      "slug": "yashnobod-toyxonasi",
+      "name": "Яшнабад",
+      "yandexId": "202378568823",
+      "sources": [
+        {
+          "provider": "yandex",
+          "url": "https://yandex.uz/maps/org/yashnobod/202378568823/"
+        }
+      ],
+      "imageSource": "yandex",
+      "images": [
+        {
+          "src": "/images/services/yashnobod-toyxonasi/186c9d17f910b13017246f5f.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/5234013/2a00000181d8457dc09a2656c0d80324efde/XXXL",
+          "sha256": "186c9d17f910b13017246f5f3f1a0aecf54532cbe131d9fd0a9f31e32a7dfca6"
+        },
+        {
+          "src": "/images/services/yashnobod-toyxonasi/ff445b906055def2f2de335e.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/5098140/2a00000181d85309dd769ecaea677feb864f/XXXL",
+          "sha256": "ff445b906055def2f2de335ee88ac5f8b69e657767558377df840c4aac5d311c"
+        },
+        {
+          "src": "/images/services/yashnobod-toyxonasi/ead8b303f8ea1cdcb5336d10.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/4286041/2a00000181d853249a74569bbb3124531598/XXXL",
+          "sha256": "ead8b303f8ea1cdcb5336d105a57a6a0ac8b4b5ce159aec77d27975ae8335970"
+        },
+        {
+          "src": "/images/services/yashnobod-toyxonasi/ed55d46d617e2f1441a1190d.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/4335885/2a00000181d853f31d3fc8ced1298e7d2ba2/XXXL",
+          "sha256": "ed55d46d617e2f1441a1190dd66e21af53f9874126264ee404fc8633530cd5a6"
+        },
+        {
+          "src": "/images/services/yashnobod-toyxonasi/723df44e4cfb53cdad6e6d3c.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/6310045/2a00000181d853ca0d6c54393770ec0de939/XXXL",
+          "sha256": "723df44e4cfb53cdad6e6d3cf46059303cba61550625d77c78a829e3b755b0f2"
+        },
+        {
+          "src": "/images/services/yashnobod-toyxonasi/d73ca4f17f7d581bdf90e332.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/6514890/2a00000181d85fd6d464db51596b476070d0/XXXL",
+          "sha256": "d73ca4f17f7d581bdf90e332a8d739e1573537636e32aacace23863b49397a70"
+        }
+      ],
+      "contactPolicy": "Yandex anchor phones and one usable link per contact type; uncertain Google candidates and conflicting extra phone values excluded.",
+      "pricePolicy": "Negotiable; no inferred wedding price from food items, unspecified event services or 1-so'm placeholders.",
+      "collectionStatus": "complete",
+      "directoryApprovedByUser": true
+    },
+    {
+      "slug": "ezidyor-gold",
+      "name": "Ezidyor Gold",
+      "yandexId": "126362460906",
+      "sources": [
+        {
+          "provider": "yandex",
+          "url": "https://yandex.uz/maps/org/ezidyor/126362460906/"
+        },
+        {
+          "provider": "google",
+          "url": "https://www.google.com/maps/place/EZIDYOR+GOLD/@41.3274205,69.3357136,17z/data=!3m1!4b1!4m6!3m5!1s0x38aef56c6978a32d:0x14db9331bf54bc2a!8m2!3d41.3274205!4d69.3357136!16s%2Fg%2F11kpqtggpr?hl=en&entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D"
+        }
+      ],
+      "imageSource": "yandex",
+      "images": [
+        {
+          "src": "/images/services/ezidyor-gold/54c67af8697c7d37a847da6f.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/5456504/2a0000017cd58558ff36560071e6a8819e7b/XXXL",
+          "sha256": "54c67af8697c7d37a847da6fef937324c0cca78b2f83c9fa1cea56917e90e6df"
+        },
+        {
+          "src": "/images/services/ezidyor-gold/02d6067356f81593eebf9dc9.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/16378552/2a00000197ff9ed55bda3411f6da478d5277/XXXL",
+          "sha256": "02d6067356f81593eebf9dc936618ec416d9378c285adbd4639c8e029f111761"
+        },
+        {
+          "src": "/images/services/ezidyor-gold/1d62bed0559082e2dd91bfdb.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/219656/2a00000187db6ee986efc0759fb4ae8c70a4/XXXL",
+          "sha256": "1d62bed0559082e2dd91bfdbfd401c90aff81a1450c518fe6f7cdcfa26ed2b32"
+        },
+        {
+          "src": "/images/services/ezidyor-gold/244dd46fb364ba4c3442c489.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/19883212/2a0000019d408fe84d6e130208ab79e1cc6e/XXXL",
+          "sha256": "244dd46fb364ba4c3442c489060288842a107902c470261ae30993f0594574f3"
+        },
+        {
+          "src": "/images/services/ezidyor-gold/f348bbf84d9bd88bfe43f104.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/16399547/2a0000019a4afac3128276ece8ac7617c3ff/XXXL",
+          "sha256": "f348bbf84d9bd88bfe43f104d3a2fe04cb14b103861ff6bfde0147b5b40cff75"
+        },
+        {
+          "src": "/images/services/ezidyor-gold/f95b59107e6ab10c4623677e.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/16157592/2a0000019baba4c7f5fd76dce23626e3d304/XXXL",
+          "sha256": "f95b59107e6ab10c4623677e07e508acd72f2600e11178de5e1656a16cd58fa7"
+        }
+      ],
+      "contactPolicy": "Yandex anchor phones and one usable link per contact type; uncertain Google candidates and conflicting extra phone values excluded.",
+      "pricePolicy": "Negotiable; no inferred wedding price from food items, unspecified event services or 1-so'm placeholders.",
+      "collectionStatus": "complete",
+      "directoryApprovedByUser": true
+    },
+    {
+      "slug": "afruz",
+      "name": "Афруз",
+      "yandexId": "34629296303",
+      "sources": [
+        {
+          "provider": "yandex",
+          "url": "https://yandex.uz/maps/org/afruz/34629296303/"
+        },
+        {
+          "provider": "google",
+          "url": "https://www.google.com/maps/place/Afruz/@41.2918788,69.1946998,17z/data=!3m1!4b1!4m6!3m5!1s0x38ae8bd5235c1cc3:0xcf58a2f08100f7dd!8m2!3d41.2918788!4d69.1946998!16s%2Fg%2F11csrqwd29?hl=en&entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D"
+        }
+      ],
+      "imageSource": "yandex",
+      "images": [
+        {
+          "src": "/images/services/afruz/be66de8ad348bb617472e2df.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/1811309/2a0000016e79b836489d2b024d7641309bd4/XXXL",
+          "sha256": "be66de8ad348bb617472e2dfa263ff1807afa2ee9761bf685918eac7a3525c02"
+        },
+        {
+          "src": "/images/services/afruz/f051acdfba0c2caba6f27106.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/14761495/2a00000197c6c94c590c88b1951e93ddbba4/XXXL",
+          "sha256": "f051acdfba0c2caba6f27106553d830f437ec0b2ee334f952052561cf228289e"
+        },
+        {
+          "src": "/images/services/afruz/7b8dfc50bb4a427d1d515e38.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/927916/2a000001878593e7593219fde65ded41159f/XXXL",
+          "sha256": "7b8dfc50bb4a427d1d515e3814b91b6c08fef689391b234bb867a2e814f06ecd"
+        },
+        {
+          "src": "/images/services/afruz/c3fb0781b303a117fcab3228.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/1871013/2a00000185735b45ceae0e39eba0ed06dd92/XXXL",
+          "sha256": "c3fb0781b303a117fcab3228036a31d70304fd68d75b5f5751409ddf2587886e"
+        },
+        {
+          "src": "/images/services/afruz/56cd618ff4e5982de8781e7d.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/8128315/2a0000019091d846361752fd8b5b1c81e05b/XXXL",
+          "sha256": "56cd618ff4e5982de8781e7daca0793c5a0f4fe2f0ea6d87ac631a1f752d3130"
+        }
+      ],
+      "contactPolicy": "Yandex anchor phones and one usable link per contact type; uncertain Google candidates and conflicting extra phone values excluded.",
+      "pricePolicy": "Negotiable; no inferred wedding price from food items, unspecified event services or 1-so'm placeholders.",
+      "collectionStatus": "complete",
+      "directoryApprovedByUser": true
+    },
+    {
+      "slug": "toyxonachi-saroy",
+      "name": "Toyxonachi Saroy",
+      "yandexId": "235022140032",
+      "sources": [
+        {
+          "provider": "yandex",
+          "url": "https://yandex.uz/maps/org/saroy_banquet_hall/235022140032/"
+        },
+        {
+          "provider": "google",
+          "url": "https://www.google.com/maps/place/Saroy+Event+Hall/data=!4m7!3m6!1s0x38ae89c7c62b09a3:0xf362d4449d9a76de!8m2!3d41.2896024!4d69.1819944!16s%2Fg%2F11tmn79k5_!19sChIJowkrxseJrjgR3naanUTUYvM?authuser=0&hl=en&g_ep=EgoyMDI2MTExMC4wIJJjKgBIAVAD&rclk=1"
+        }
+      ],
+      "imageSource": "yandex",
+      "images": [
+        {
+          "src": "/images/services/toyxonachi-saroy/7d525cc723f772ff89ad6a49.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/19521209/2a0000019daf4facf90e81aacbe82063b9ba/XXXL",
+          "sha256": "7d525cc723f772ff89ad6a49ce53790025223dd0c3e125a81ee03fe236737ce0"
+        },
+        {
+          "src": "/images/services/toyxonachi-saroy/1da8e4053166f6e427b24148.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/17673063/2a000001a09478985e98ca97276a914e9b3b/XXXL",
+          "sha256": "1da8e4053166f6e427b24148a97a0bdb76465ab6c46b9ac732e90492f9556213"
+        },
+        {
+          "src": "/images/services/toyxonachi-saroy/34dfd8c62dcb82df4b08d464.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/20244164/2a0000019fcd9360860cb19939bd4093b95f/XXXL",
+          "sha256": "34dfd8c62dcb82df4b08d4643cfcea3aa02ae4c4b4eabf49e3ad367831e0f466"
+        }
+      ],
+      "contactPolicy": "Yandex anchor phones and one usable link per contact type; uncertain Google candidates and conflicting extra phone values excluded.",
+      "pricePolicy": "Negotiable; no inferred wedding price from food items, unspecified event services or 1-so'm placeholders.",
+      "collectionStatus": "complete",
+      "directoryApprovedByUser": true
+    },
+    {
+      "slug": "seoul",
+      "name": "Seoul",
+      "yandexId": "91538804082",
+      "sources": [
+        {
+          "provider": "yandex",
+          "url": "https://yandex.uz/maps/org/seoul/91538804082/"
+        },
+        {
+          "provider": "google",
+          "url": "https://www.google.com/maps/place/Seoul+Banquette+Hall/@41.2817349,69.3616282,17z/data=!3m1!4b1!4m6!3m5!1s0x38ae5f6b2c560f33:0x5d6a31b05f53ea6b!8m2!3d41.2817349!4d69.3616282!16s%2Fg%2F11l23vh2r5?hl=en&entry=ttu&g_ep=EgoyMDI2MTExMC4wIKXMDSoASAFQAw%3D%3D"
+        }
+      ],
+      "imageSource": "yandex",
+      "images": [
+        {
+          "src": "/images/services/seoul/3a175057ed7cd6b0efd3734a.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/15381861/2a0000019782ba3a758f3b082a544323869d/XXXL",
+          "sha256": "3a175057ed7cd6b0efd3734afba93283c3f09c62aaf5136655cad38e00ee08b9"
+        },
+        {
+          "src": "/images/services/seoul/4b67c9dcdab33bfb4575bb91.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/15586709/2a0000019782bbd318fa07a2714db187a685/XXXL",
+          "sha256": "4b67c9dcdab33bfb4575bb91dbf71ca3aac0072bf6fef4472e4658fdec303667"
+        },
+        {
+          "src": "/images/services/seoul/7e02fc911765a7c64007a5aa.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/16403814/2a0000019782b9b55c52a1c121bac6b6a9b3/XXXL",
+          "sha256": "7e02fc911765a7c64007a5aa6ac95c2b3c99a58059c1675720fee8ab06c4d490"
+        },
+        {
+          "src": "/images/services/seoul/c4f208e7ff5200498881d842.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/16451941/2a0000019782b9de078819ca076d5cc421b4/XXXL",
+          "sha256": "c4f208e7ff5200498881d84236a77a71175a112c645ed9b6d7a3c43a4f0da072"
+        },
+        {
+          "src": "/images/services/seoul/2343ac32e79533424da1c71f.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/16451941/2a0000019782bc67ba7fde2b46a36cfa95be/XXXL",
+          "sha256": "2343ac32e79533424da1c71f2a1c580583215e1941bbcf39078e570930591932"
+        },
+        {
+          "src": "/images/services/seoul/11338189c6143ba86d40e4e5.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/19521209/2a0000019e01667dd695ea5d5794b2e784d9/XXXL",
+          "sha256": "11338189c6143ba86d40e4e5368a2f53e99a06e9500313b626a90325477940bb"
+        }
+      ],
+      "contactPolicy": "Yandex anchor phones and one usable link per contact type; uncertain Google candidates and conflicting extra phone values excluded.",
+      "pricePolicy": "Explicit per-person wedding packages; rental kept in description, not mixed into package range.",
+      "collectionStatus": "complete",
+      "directoryApprovedByUser": true
+    },
+    {
+      "slug": "sarbon",
+      "name": "Sarbon",
+      "yandexId": "44492959675",
+      "sources": [
+        {
+          "provider": "yandex",
+          "url": "https://yandex.uz/maps/org/sarbon/44492959675/"
+        },
+        {
+          "provider": "google",
+          "url": "https://www.google.com/maps/search/Sarbon%20Tashkent/?hl=en"
+        }
+      ],
+      "imageSource": "yandex",
+      "images": [
+        {
+          "src": "/images/services/sarbon/17e6d169b605957392399f8f.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/18806283/2a0000019dce6d5c193c90c084fb62c18ded/XXXL",
+          "sha256": "17e6d169b605957392399f8f9a16318c2659483a2789c4e953cbd6119de484bd"
+        },
+        {
+          "src": "/images/services/sarbon/d37afef3b74940050749d578.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/19555209/2a0000019dce6ca4565bd469564fb02ef725/XXXL",
+          "sha256": "d37afef3b74940050749d5783443639a349ba600f35bc5e2ddf3414593b90db7"
+        },
+        {
+          "src": "/images/services/sarbon/14b9537f04e7e1774c7091d5.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/19883212/2a0000019dce6c36b9c3ca149e5914952696/XXXL",
+          "sha256": "14b9537f04e7e1774c7091d5949f1342a75a46520b3d30302441ff32941b5aa2"
+        },
+        {
+          "src": "/images/services/sarbon/10febe144acfa91269e8bc97.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/16915650/2a0000019c46805fad1ca916ee9ee6e9fb4c/XXXL",
+          "sha256": "10febe144acfa91269e8bc976d398558d2923e90e3b420618b242926d3804e61"
+        }
+      ],
+      "contactPolicy": "Yandex anchor phones and one usable link per contact type; uncertain Google candidates and conflicting extra phone values excluded.",
+      "pricePolicy": "Negotiable; no inferred wedding price from food items, unspecified event services or 1-so'm placeholders.",
+      "collectionStatus": "complete",
+      "directoryApprovedByUser": true
+    },
+    {
+      "slug": "ozbegim-restaurant",
+      "name": "Узбегим ресторан",
+      "yandexId": "112875747745",
+      "sources": [
+        {
+          "provider": "yandex",
+          "url": "https://yandex.uz/maps/org/o_zbegim_restoran/112875747745/"
+        },
+        {
+          "provider": "google",
+          "url": "https://www.google.com/maps/search/%D0%A3%D0%B7%D0%B1%D0%B5%D0%B3%D0%B8%D0%BC%20%D1%80%D0%B5%D1%81%D1%82%D0%BE%D1%80%D0%B0%D0%BD%20Tashkent/?hl=en"
+        }
+      ],
+      "imageSource": "yandex",
+      "images": [
+        {
+          "src": "/images/services/ozbegim-restaurant/00b9c5e806579baae871dfa0.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/5298780/2a00000181f6bd1ce56adfa3f0d551f4af45/XXXL",
+          "sha256": "00b9c5e806579baae871dfa0c3c0ba8305152f01e4a08763ac3926cdc33e3ab4"
+        },
+        {
+          "src": "/images/services/ozbegim-restaurant/63eb3ff6bbc027e518b4d7fc.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/9728306/2a00000189ea09f1c9953caa10f9d9f8c7b5/XXXL",
+          "sha256": "63eb3ff6bbc027e518b4d7fc4df0fef780fa5babb436918054e2626fd31c75e0"
+        },
+        {
+          "src": "/images/services/ozbegim-restaurant/cd84b9f35f045d58727083d3.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/5098810/2a00000181f6bd11ea9f20e438be5b66aeac/XXXL",
+          "sha256": "cd84b9f35f045d58727083d3d483de9cb51c24ea8c78fedc5fdc4b7d89115f0e"
+        },
+        {
+          "src": "/images/services/ozbegim-restaurant/82f21c88aec4d0b1f5e2c15b.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/18376122/2a00000199ab41fe12e2d688f9831274b4de/XXXL",
+          "sha256": "82f21c88aec4d0b1f5e2c15ba2f44c295611b65d692f92bca20ab08dc1a5493c"
+        },
+        {
+          "src": "/images/services/ozbegim-restaurant/47a862988e8f16dd36b70ced.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/11381866/2a0000018c10ccd07e4aa3d0eb3db0becffa/XXXL",
+          "sha256": "47a862988e8f16dd36b70ced71b3f04c91142508c3407c43140d1d26a9d41355"
+        },
+        {
+          "src": "/images/services/ozbegim-restaurant/5217353fbc2f96a8577c737d.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/6310045/2a000001908e02b53df4f7a645056604af30/XXXL",
+          "sha256": "5217353fbc2f96a8577c737dddf66e781cca65dd600241c7dbfd67f8a434db48"
+        }
+      ],
+      "contactPolicy": "Yandex anchor phones and one usable link per contact type; uncertain Google candidates and conflicting extra phone values excluded.",
+      "pricePolicy": "Negotiable; no inferred wedding price from food items, unspecified event services or 1-so'm placeholders.",
+      "collectionStatus": "complete",
+      "directoryApprovedByUser": true
+    },
+    {
+      "slug": "olmos-toyxonasi",
+      "name": "Olmos",
+      "yandexId": "10222877799",
+      "sources": [
+        {
+          "provider": "yandex",
+          "url": "https://yandex.uz/maps/org/olmos/10222877799/"
+        },
+        {
+          "provider": "google",
+          "url": "https://www.google.com/maps/place/Olmos+Restaurant/data=!4m7!3m6!1s0x38ae8998fc23618d:0x21148b31cc4785ff!8m2!3d41.2796609!4d69.1712737!16s%2Fg%2F11r902kx2!19sChIJjWEj_JiJrjgR_4VHzDGLFCE?authuser=0&hl=en&g_ep=EgoyMDI2MTExMC4wIJJjKgBIAVAD&rclk=1"
+        }
+      ],
+      "imageSource": "yandex",
+      "images": [
+        {
+          "src": "/images/services/olmos-toyxonasi/6efa7ac83125a5ba59285313.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/2029876/2a0000016d6f6fe946be6ee3212a1f29300b/XXXL",
+          "sha256": "6efa7ac83125a5ba59285313edb5483486643905695dd36573376269466bd81b"
+        },
+        {
+          "src": "/images/services/olmos-toyxonasi/b89c55ce49d5ab8b9bad9d79.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/16312016/2a0000019b63faacffb1594fcf80de1c15db/XXXL",
+          "sha256": "b89c55ce49d5ab8b9bad9d7905de77006127a61dcc34430bca10f808b04adbfa"
+        },
+        {
+          "src": "/images/services/olmos-toyxonasi/9b9df7df0d02ef629bcb3a23.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/1938605/2a0000016d6f6fee8a5477791a734fa78741/XXXL",
+          "sha256": "9b9df7df0d02ef629bcb3a23141dee8658a98a7781fb760c1e3cc3c122fb59de"
+        },
+        {
+          "src": "/images/services/olmos-toyxonasi/8b2381102525492d7c7435a7.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/16136925/2a0000019847291917871efed2e80c56dcc2/XXXL",
+          "sha256": "8b2381102525492d7c7435a763bb12bef6b6f81f58c35e56503eaff84d9bef5a"
+        },
+        {
+          "src": "/images/services/olmos-toyxonasi/97758f85a24942679f362c55.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/15266990/2a00000198827ac9b3fc18d882b18733e042/XXXL",
+          "sha256": "97758f85a24942679f362c5501bce421f4404cd06311197e675cce2448836f9d"
+        },
+        {
+          "src": "/images/services/olmos-toyxonasi/b5bcc6505bb1ea65d772fbff.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/16318204/2a00000199d42f5442d4c85d5929d961f3cc/XXXL",
+          "sha256": "b5bcc6505bb1ea65d772fbff94b0d000d6ae87a521ac256bb3f1eade72a32ce3"
+        }
+      ],
+      "contactPolicy": "Yandex anchor phones and one usable link per contact type; uncertain Google candidates and conflicting extra phone values excluded.",
+      "pricePolicy": "Negotiable; no inferred wedding price from food items, unspecified event services or 1-so'm placeholders.",
+      "collectionStatus": "complete",
+      "directoryApprovedByUser": true
+    },
+    {
+      "slug": "dilorom",
+      "name": "Дилором",
+      "yandexId": "124968386728",
+      "sources": [
+        {
+          "provider": "yandex",
+          "url": "https://yandex.uz/maps/org/dilorom/124968386728/"
+        },
+        {
+          "provider": "google",
+          "url": "https://www.google.com/maps/place/Dilorom+to%27yxona/data=!4m7!3m6!1s0x38ae899c4b1646ff:0xaea9d77bc3869cc1!8m2!3d41.2853804!4d69.1762415!16s%2Fg%2F11dxqjy1qx!19sChIJ_0YWS5yJrjgRwZyGw3vXqa4?authuser=0&hl=en&g_ep=EgoyMDI2MTExMC4wIJJjKgBIAVAD&rclk=1"
+        }
+      ],
+      "imageSource": "yandex",
+      "images": [
+        {
+          "src": "/images/services/dilorom/892d5a4ba27aa338329cbd3f.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/11409713/2a0000018e8b1ddd0db8bd68c86c10d4b048/XXXL",
+          "sha256": "892d5a4ba27aa338329cbd3ff1c87a1975dffde191f9f29dba6dee089c5b9534"
+        },
+        {
+          "src": "/images/services/dilorom/900741ff67e93a3d5fd84cc4.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/14010724/2a000001946a730d5fef967f094ea99fbe89/XXXL",
+          "sha256": "900741ff67e93a3d5fd84cc47328c1f5a74e1f098f9cf7fc95c178c69d002952"
+        },
+        {
+          "src": "/images/services/dilorom/f63a83f43b043456d36906e5.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/20858623/2a000001a0831b7648ca184dee2a94635407/XXXL",
+          "sha256": "f63a83f43b043456d36906e5e5cb945cb8e5ee38b308c6b71688f46aeb30c5e5"
+        }
+      ],
+      "contactPolicy": "Yandex anchor phones and one usable link per contact type; uncertain Google candidates and conflicting extra phone values excluded.",
+      "pricePolicy": "Negotiable; no inferred wedding price from food items, unspecified event services or 1-so'm placeholders.",
+      "collectionStatus": "complete",
+      "directoryApprovedByUser": true
+    },
+    {
+      "slug": "kokcha-koshonasi",
+      "name": "Ko‘kcha koshonasi",
+      "yandexId": "109043324004",
+      "sources": [
+        {
+          "provider": "yandex",
+          "url": "https://yandex.uz/maps/org/ko_kcha_koshonasi/109043324004/"
+        }
+      ],
+      "imageSource": "yandex",
+      "images": [
+        {
+          "src": "/images/services/kokcha-koshonasi/48d20ff4b9973af7bdb0951f.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/15416336/2a0000019a6c550ad406bf2d2abfc217623a/XXXL",
+          "sha256": "48d20ff4b9973af7bdb0951fa83078c7b5ad389e508e1f8cf9bf63aa1e721c56"
+        },
+        {
+          "src": "/images/services/kokcha-koshonasi/5f3e7b552dc5e49cbaed31b5.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/15074774/2a00000195a9c00fb5bb4d530802d9ce7f7f/XXXL",
+          "sha256": "5f3e7b552dc5e49cbaed31b5d1295535687283bfa98bbafad28098d6c649b548"
+        },
+        {
+          "src": "/images/services/kokcha-koshonasi/bad1d02ee6c8fe2251896138.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/15126910/2a00000195a9c008d841769e3ce9de089b5d/XXXL",
+          "sha256": "bad1d02ee6c8fe2251896138954200db4a7ff3d6dc9a667040874748e2e72f8c"
+        },
+        {
+          "src": "/images/services/kokcha-koshonasi/af66dde8ef3d1c5992b5b3fe.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/9720991/2a00000189d8f58c05fe8c0a69ffec603aec/XXXL",
+          "sha256": "af66dde8ef3d1c5992b5b3fe881c4f016d5d08b4606c32b2ed8c90fac073dee9"
+        },
+        {
+          "src": "/images/services/kokcha-koshonasi/621b246979098e7de7d3f599.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/14910910/2a000001971cb838bbcfeedd0e560bae91f5/XXXL",
+          "sha256": "621b246979098e7de7d3f5995b462c8b5322de79b1be105cc6788aed872134a6"
+        },
+        {
+          "src": "/images/services/kokcha-koshonasi/50ef5695c5dfc3af2bb9c987.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/16474107/2a0000019830ded1028d18099dace6e346e3/XXXL",
+          "sha256": "50ef5695c5dfc3af2bb9c9878168ec12b71eb223c1aae1f5fe983ffe7bb0e94e"
+        }
+      ],
+      "contactPolicy": "Yandex anchor phones and one usable link per contact type; uncertain Google candidates and conflicting extra phone values excluded.",
+      "pricePolicy": "Negotiable; no inferred wedding price from food items, unspecified event services or 1-so'm placeholders.",
+      "collectionStatus": "needs_review",
+      "directoryApprovedByUser": true
+    },
+    {
+      "slug": "bahor-yunusota",
+      "name": "Бахор",
+      "yandexId": "84058887277",
+      "sources": [
+        {
+          "provider": "yandex",
+          "url": "https://yandex.uz/maps/org/bahor/84058887277/"
+        }
+      ],
+      "imageSource": "yandex",
+      "images": [
+        {
+          "src": "/images/services/bahor-yunusota/b1184a6036c92f3a961c63f1.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/4439632/2a0000017762481c058ccf623180679288fd/XXXL",
+          "sha256": "b1184a6036c92f3a961c63f1ef630355f873130e43b6fc195763ed3108bf2873"
+        },
+        {
+          "src": "/images/services/bahor-yunusota/5b786801e7ccdb06c08ad17c.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/14317263/2a00000192c490942a2aafc7715595b6b3f1/XXXL",
+          "sha256": "5b786801e7ccdb06c08ad17c536013cb98461f119403876ddbf4736dc3627ca7"
+        },
+        {
+          "src": "/images/services/bahor-yunusota/891a24731508a49c1c5dce49.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/16390227/2a00000197733d27a40d56e8cccccdf7b672/XXXL",
+          "sha256": "891a24731508a49c1c5dce491a0a049696e380305c8419d7b6dfa2a79d671e94"
+        },
+        {
+          "src": "/images/services/bahor-yunusota/047fde10e9fcf677ede30e1d.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/1018548/2a0000018664384bde0915d210108ec7c542/XXXL",
+          "sha256": "047fde10e9fcf677ede30e1d28f91cb7694e67ccd324e125e482151e3d55d90e"
+        },
+        {
+          "src": "/images/services/bahor-yunusota/878be2d63423c285b9c7255c.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/14246212/2a0000019a6a3adffbcfe9b75c6fdaf74b6b/XXXL",
+          "sha256": "878be2d63423c285b9c7255cd5add32ee303710cc978451d4940abe0323f540e"
+        }
+      ],
+      "contactPolicy": "Yandex anchor phones and one usable link per contact type; uncertain Google candidates and conflicting extra phone values excluded.",
+      "pricePolicy": "Negotiable; no inferred wedding price from food items, unspecified event services or 1-so'm placeholders.",
+      "collectionStatus": "complete",
+      "directoryApprovedByUser": true
+    },
+    {
+      "slug": "zuhriniso",
+      "name": "Зухринисо",
+      "yandexId": "143922975954",
+      "sources": [
+        {
+          "provider": "yandex",
+          "url": "https://yandex.uz/maps/org/zuhriniso/143922975954/"
+        },
+        {
+          "provider": "google",
+          "url": "https://www.google.com/maps/search/%D0%97%D1%83%D1%85%D1%80%D0%B8%D0%BD%D0%B8%D1%81%D0%BE%20Tashkent/?hl=en"
+        }
+      ],
+      "imageSource": "yandex",
+      "images": [
+        {
+          "src": "/images/services/zuhriniso/8b1ac449a0aa77fe8b6f11a1.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/4412404/2a000001791dbdff14621324311ffb701bd0/XXXL",
+          "sha256": "8b1ac449a0aa77fe8b6f11a15b15b19d4758795dacda639829a6886d0b2b739e"
+        },
+        {
+          "src": "/images/services/zuhriniso/30b735aa0b8bd2bb3284c190.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/1909414/2a0000016b46357765370332994d43f74fda/XXXL",
+          "sha256": "30b735aa0b8bd2bb3284c1903883b95bf643655e0792e52502c954615fbae311"
+        },
+        {
+          "src": "/images/services/zuhriniso/239cc597d7647bc87bd945db.webp",
+          "sourceUrl": "https://avatars.mds.yandex.net/get-altay/5448678/2a0000017e10dbd679dcae684a6bdac183f4/XXXL",
+          "sha256": "239cc597d7647bc87bd945db49bc371184e556e0325fc48bbb9ec2199c1ab960"
+        }
+      ],
+      "contactPolicy": "Yandex anchor phones and one usable link per contact type; uncertain Google candidates and conflicting extra phone values excluded.",
+      "pricePolicy": "Negotiable; no inferred wedding price from food items, unspecified event services or 1-so'm placeholders.",
+      "collectionStatus": "complete",
+      "directoryApprovedByUser": true
+    }
+  ]
+}

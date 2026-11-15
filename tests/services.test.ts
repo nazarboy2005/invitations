@@ -165,6 +165,15 @@ test("price display converts dollars to saved-rate UZS and never relabels raw do
   }
   assert.match(servicePrice({ ...range, kind: "from" }), / dan$/);
   assert.equal(
+    servicePrice({
+      ...range,
+      min: 390000,
+      max: 450000,
+      unit: "person",
+    }).replace(/\s/g, ""),
+    "400000–500000so‘m/kishi",
+  );
+  assert.equal(
     servicePrice({ ...range, kind: "negotiable" }),
     "Kelishuv asosida",
   );

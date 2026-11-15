@@ -30,6 +30,7 @@ export type ServiceListing = {
     max: number | null;
     currency: string;
     sourceText: string;
+    unit?: "person";
   };
   images: ServiceImage[];
   importedAt: string;
@@ -55,9 +56,10 @@ export function servicePrice(price: ServiceListing["price"]): string {
   if (rate === null) return "Narxni aniqlashtiring";
   const min = roundServicePrice(price.min * rate);
   const max = price.max === null ? null : roundServicePrice(price.max * rate);
+  const unit = price.unit === "person" ? " / kishi" : "";
   if (price.kind === "range" && max !== null && max > min)
-    return `${number.format(min)} – ${number.format(max)} so‘m`;
-  return `${number.format(min)} so‘m${price.kind === "from" ? " dan" : ""}`;
+    return `${number.format(min)} – ${number.format(max)} so‘m${unit}`;
+  return `${number.format(min)} so‘m${price.kind === "from" ? " dan" : ""}${unit}`;
 }
 
 /** Keep estimates easy to scan without rounding small prices down to zero. */

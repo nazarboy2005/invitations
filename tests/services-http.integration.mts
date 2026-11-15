@@ -56,10 +56,10 @@ for (const category of serviceCategories) {
   ).length;
   const html = await page(`/services/${category.id}`);
   assert.equal(cardCount(html), Math.min(12, count), category.id);
-  if (count > 12)
+  for (let pageNumber = 2; pageNumber <= Math.ceil(count / 12); pageNumber++)
     assert.equal(
-      cardCount(await page(`/services/${category.id}?page=2`)),
-      count - 12,
+      cardCount(await page(`/services/${category.id}?page=${pageNumber}`)),
+      Math.min(12, count - (pageNumber - 1) * 12),
       category.id,
     );
 }

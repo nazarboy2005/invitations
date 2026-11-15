@@ -23045,5 +23045,2327 @@
     ],
     "importedAt": "2026-11-15T06:25:22.904Z",
     "featured": false
+  },
+  {
+    "slug": "diamond-hall",
+    "name": "Diamond Hall",
+    "categoryIds": [
+      "restaurant"
+    ],
+    "categoryLabel": "To‘yxonalar va Restoranlar",
+    "description": "",
+    "region": "Toshkent shahri",
+    "district": "",
+    "address": "Tashkent, Samarqand Darvoza Street, 203",
+    "phones": [
+      {
+        "label": "Asosiy",
+        "value": "+998978944444"
+      },
+      {
+        "label": "Qo‘shimcha",
+        "value": "+998331213333"
+      }
+    ],
+    "links": [
+      {
+        "label": "Instagram",
+        "url": "https://www.instagram.com/diamondhall.uz/"
+      },
+      {
+        "label": "Telegram",
+        "url": "https://t.me/diamond_hall"
+      },
+      {
+        "label": "Facebook",
+        "url": "https://www.facebook.com/252101861323980"
+      }
+    ],
+    "email": null,
+    "latitude": 41.305599,
+    "longitude": 69.216661,
+    "price": {
+      "kind": "negotiable",
+      "min": null,
+      "max": null,
+      "currency": "UZS",
+      "sourceText": ""
+    },
+    "images": [
+      {
+        "src": "/images/services/diamond-hall/f5b1e8b3ad219964dc4d793a.webp",
+        "width": 960,
+        "height": 1280,
+        "alt": "Diamond Hall — 1"
+      },
+      {
+        "src": "/images/services/diamond-hall/26134f99d07590480bfa2612.webp",
+        "width": 960,
+        "height": 1280,
+        "alt": "Diamond Hall — 2"
+      },
+      {
+        "src": "/images/services/diamond-hall/d9aeca3eb6314447d2aebaef.webp",
+        "width": 1280,
+        "height": 960,
+        "alt": "Diamond Hall — 3"
+      },
+      {
+        "src": "/images/services/diamond-hall/5a04252f189af8e442dc7ce7.webp",
+        "width": 1080,
+        "height": 1080,
+        "alt": "Diamond Hall — 4"
+      }
+    ],
+    "importedAt": "2026-11-15T16:30:27.243Z",
+    "featured": false
+  },
+  {
+    "slug": "tabassum-toyxonasi",
+    "name": "Tabassum to'yxonasi",
+    "categoryIds": [
+      "restaurant"
+    ],
+    "categoryLabel": "To‘yxonalar va Restoranlar",
+    "description": "",
+    "region": "Toshkent shahri",
+    "district": "",
+    "address": "Ташкент, улица Бабура, 23",
+    "phones": [
+      {
+        "label": "Asosiy",
+        "value": "+998971861111"
+      },
+      {
+        "label": "Qo‘shimcha",
+        "value": "+998974644446"
+      }
+    ],
+    "links": [
+      {
+        "label": "Facebook",
+        "url": "https://www.facebook.com/1781076848789455"
+      },
+      {
+        "label": "Telegram",
+        "url": "https://t.me/+998971861111"
+      }
+    ],
+    "email": null,
+    "latitude": 41.290841,
+    "longitude": 69.251503,
+    "price": {
+      "kind": "negotiable",
+      "min": null,
+      "max": null,
+      "currency": "UZS",
+      "sourceText": ""
+    },
+    "images": [
+      {
+        "src": "/images/services/tabassum-toyxonasi/1aa7dd81ad4ada5179df845f.webp",
+        "width": 1280,
+        "height": 720,
+        "alt": "Tabassum to'yxonasi — 1"
+      },
+      {
+        "src": "/images/services/tabassum-toyxonasi/1a8d63a61960fbd795d770d1.webp",
+        "width": 1280,
+        "height": 960,
+        "alt": "Tabassum to'yxonasi — 2"
+      },
+      {
+        "src": "/images/services/tabassum-toyxonasi/8ec0d8e9813e012df464d8d4.webp",
+        "width": 722,
+        "height": 1280,
+        "alt": "Tabassum to'yxonasi — 3"
+      },
+      {
+        "src": "/images/services/tabassum-toyxonasi/5a2944d28d58f55a65871bbc.webp",
+        "width": 960,
+        "height": 1280,
+        "alt": "Tabassum to'yxonasi — 4"
+      },
+      {
+        "src": "/images/services/tabassum-toyxonasi/67f4fb1e21f3aa6c270ca8ac.webp",
+        "width": 720,
+        "height": 1280,
+        "alt": "Tabassum to'yxonasi — 5"
+      },
+      {
+        "src": "/images/services/tabassum-toyxonasi/043c45e5737332bbf64cd317.webp",
+        "width": 1280,
+        "height": 963,
+        "alt": "Tabassum to'yxonasi — 6"
+      }
+    ],
+    "importedAt": "2026-11-15T16:30:22.869Z",
+    "featured": false
+  },
+  {
+    "slug": "bahor-istiqbol",
+    "name": "Bahor",
+    "categoryIds": [
+      "restaurant"
+    ],
+    "categoryLabel": "To‘yxonalar va Restoranlar",
+    "description": "",
+    "region": "Toshkent shahri",
+    "district": "",
+    "address": "Ташкент, улица Истикбол, 8",
+    "phones": [
+      {
+        "label": "Asosiy",
+        "value": "+998983647575"
+      },
+      {
+        "label": "Qo‘shimcha",
+        "value": "+998901853576"
+      }
+    ],
+    "links": [
+      {
+        "label": "Veb-sayt",
+        "url": "http://restaurantbahor.uz/"
+      },
+      {
+        "label": "Telegram",
+        "url": "https://t.me/Bahor_restaurant"
+      },
+      {
+        "label": "YouTube",
+        "url": "https://www.youtube.com/@restaurantbahor"
+      },
+      {
+        "label": "Instagram",
+        "url": "https://www.instagram.com/bahor_restaurant__"
+      },
+      {
+        "label": "Facebook",
+        "url": "https://www.facebook.com/profile.php?id=100087484185999"
+      },
+      {
+        "label": "WhatsApp",
+        "url": "https://wa.me/998901853576"
+      }
+    ],
+    "email": null,
+    "latitude": 41.307876,
+    "longitude": 69.282652,
+    "price": {
+      "kind": "negotiable",
+      "min": null,
+      "max": null,
+      "currency": "UZS",
+      "sourceText": ""
+    },
+    "images": [
+      {
+        "src": "/images/services/bahor-istiqbol/0e6d168854e9c2620981dd62.webp",
+        "width": 800,
+        "height": 400,
+        "alt": "Bahor — 1"
+      },
+      {
+        "src": "/images/services/bahor-istiqbol/93bb99d4a053285c7f8f591a.webp",
+        "width": 1280,
+        "height": 960,
+        "alt": "Bahor — 2"
+      },
+      {
+        "src": "/images/services/bahor-istiqbol/ab02cc284170f4f28ff85668.webp",
+        "width": 1280,
+        "height": 720,
+        "alt": "Bahor — 3"
+      },
+      {
+        "src": "/images/services/bahor-istiqbol/512032b70a2d85e7397c2eab.webp",
+        "width": 1280,
+        "height": 720,
+        "alt": "Bahor — 4"
+      },
+      {
+        "src": "/images/services/bahor-istiqbol/53254a998280d81ad2369490.webp",
+        "width": 1280,
+        "height": 960,
+        "alt": "Bahor — 5"
+      }
+    ],
+    "importedAt": "2026-11-15T16:31:23.049Z",
+    "featured": false
+  },
+  {
+    "slug": "osiyo-grand",
+    "name": "Osiyo Grand",
+    "categoryIds": [
+      "restaurant"
+    ],
+    "categoryLabel": "To‘yxonalar va Restoranlar",
+    "description": "",
+    "region": "Toshkent shahri",
+    "district": "",
+    "address": "Ташкент, улица Лабзак, 5",
+    "phones": [
+      {
+        "label": "Asosiy",
+        "value": "+998981280009"
+      },
+      {
+        "label": "Qo‘shimcha",
+        "value": "+998974024444"
+      }
+    ],
+    "links": [
+      {
+        "label": "Facebook",
+        "url": "https://facebook.com/osiyograndrest"
+      },
+      {
+        "label": "Instagram",
+        "url": "https://www.instagram.com/osiyo_grand/"
+      }
+    ],
+    "email": null,
+    "latitude": 41.325027,
+    "longitude": 69.263568,
+    "price": {
+      "kind": "negotiable",
+      "min": null,
+      "max": null,
+      "currency": "UZS",
+      "sourceText": ""
+    },
+    "images": [
+      {
+        "src": "/images/services/osiyo-grand/7a12149a393351889517adbe.webp",
+        "width": 1280,
+        "height": 960,
+        "alt": "Osiyo Grand — 1"
+      },
+      {
+        "src": "/images/services/osiyo-grand/81a98c7fe05ef98d4b7d59ba.webp",
+        "width": 1280,
+        "height": 960,
+        "alt": "Osiyo Grand — 2"
+      },
+      {
+        "src": "/images/services/osiyo-grand/7fed130b74560f2f30413f8e.webp",
+        "width": 720,
+        "height": 1280,
+        "alt": "Osiyo Grand — 3"
+      },
+      {
+        "src": "/images/services/osiyo-grand/dc0cd0e9360b1d567c26be27.webp",
+        "width": 1280,
+        "height": 960,
+        "alt": "Osiyo Grand — 4"
+      },
+      {
+        "src": "/images/services/osiyo-grand/da133dfccd73195c70fd0922.webp",
+        "width": 960,
+        "height": 1280,
+        "alt": "Osiyo Grand — 5"
+      },
+      {
+        "src": "/images/services/osiyo-grand/75d81e1434dd130b690dcf56.webp",
+        "width": 720,
+        "height": 1280,
+        "alt": "Osiyo Grand — 6"
+      }
+    ],
+    "importedAt": "2026-11-15T16:30:50.138Z",
+    "featured": false
+  },
+  {
+    "slug": "versal-banquet-hall",
+    "name": "Версаль",
+    "categoryIds": [
+      "restaurant"
+    ],
+    "categoryLabel": "To‘yxonalar va Restoranlar",
+    "description": "",
+    "region": "Toshkent shahri",
+    "district": "Shayxontohur tumani",
+    "address": "Ташкент, Шайхантахурский район, массив Гульабад, 8А",
+    "phones": [
+      {
+        "label": "Asosiy",
+        "value": "+998990062244"
+      },
+      {
+        "label": "Qo‘shimcha",
+        "value": "+998994447447"
+      },
+      {
+        "label": "Qo‘shimcha",
+        "value": "+998990100080"
+      },
+      {
+        "label": "Qo‘shimcha",
+        "value": "+998712422164"
+      },
+      {
+        "label": "Qo‘shimcha",
+        "value": "+998712491555"
+      },
+      {
+        "label": "Qo‘shimcha",
+        "value": "+998983146050"
+      },
+      {
+        "label": "Qo‘shimcha",
+        "value": "+998980013333"
+      },
+      {
+        "label": "Qo‘shimcha",
+        "value": "+998977768487"
+      }
+    ],
+    "links": [],
+    "email": null,
+    "latitude": 41.328372,
+    "longitude": 69.224814,
+    "price": {
+      "kind": "negotiable",
+      "min": null,
+      "max": null,
+      "currency": "UZS",
+      "sourceText": ""
+    },
+    "images": [
+      {
+        "src": "/images/services/versal-banquet-hall/d11372dd0fa69daf589c8145.webp",
+        "width": 1280,
+        "height": 964,
+        "alt": "Версаль — 1"
+      },
+      {
+        "src": "/images/services/versal-banquet-hall/15e7eae9d792a76f54de5f54.webp",
+        "width": 964,
+        "height": 1280,
+        "alt": "Версаль — 2"
+      },
+      {
+        "src": "/images/services/versal-banquet-hall/5a1e61553faf44ceb0052c67.webp",
+        "width": 960,
+        "height": 1280,
+        "alt": "Версаль — 3"
+      },
+      {
+        "src": "/images/services/versal-banquet-hall/32fc18ec18f9fc92f4ee85c7.webp",
+        "width": 960,
+        "height": 1280,
+        "alt": "Версаль — 4"
+      },
+      {
+        "src": "/images/services/versal-banquet-hall/9479edf13a8917b4bcb5f871.webp",
+        "width": 1280,
+        "height": 960,
+        "alt": "Версаль — 5"
+      }
+    ],
+    "importedAt": "2026-11-15T16:31:05.256Z",
+    "featured": false
+  },
+  {
+    "slug": "oqshom",
+    "name": "Oqshom",
+    "categoryIds": [
+      "restaurant"
+    ],
+    "categoryLabel": "To‘yxonalar va Restoranlar",
+    "description": "",
+    "region": "Toshkent shahri",
+    "district": "",
+    "address": "Ташкент, улица Мехр, 19/1",
+    "phones": [
+      {
+        "label": "Asosiy",
+        "value": "+998712765468"
+      },
+      {
+        "label": "Qo‘shimcha",
+        "value": "+998903510000"
+      }
+    ],
+    "links": [
+      {
+        "label": "Telegram",
+        "url": "https://t.me/+998903510000"
+      },
+      {
+        "label": "WhatsApp",
+        "url": "https://wa.me/998903510000"
+      }
+    ],
+    "email": null,
+    "latitude": 41.282182,
+    "longitude": 69.202829,
+    "price": {
+      "kind": "negotiable",
+      "min": null,
+      "max": null,
+      "currency": "UZS",
+      "sourceText": ""
+    },
+    "images": [
+      {
+        "src": "/images/services/oqshom/cf59ba4e765ce9f95c0c6d2c.webp",
+        "width": 1280,
+        "height": 720,
+        "alt": "Oqshom — 1"
+      },
+      {
+        "src": "/images/services/oqshom/8414fcc5134744225543f507.webp",
+        "width": 960,
+        "height": 1280,
+        "alt": "Oqshom — 2"
+      },
+      {
+        "src": "/images/services/oqshom/6aa63da0cf02ad1cab7ac00a.webp",
+        "width": 960,
+        "height": 1280,
+        "alt": "Oqshom — 3"
+      },
+      {
+        "src": "/images/services/oqshom/5d16d680ed2f85e9de559632.webp",
+        "width": 960,
+        "height": 1280,
+        "alt": "Oqshom — 4"
+      }
+    ],
+    "importedAt": "2026-11-15T16:31:27.177Z",
+    "featured": false
+  },
+  {
+    "slug": "bisyor",
+    "name": "Bisyor",
+    "categoryIds": [
+      "restaurant"
+    ],
+    "categoryLabel": "To‘yxonalar va Restoranlar",
+    "description": "",
+    "region": "Toshkent shahri",
+    "district": "",
+    "address": "Ташкент, улица Ковунчи, 3Б",
+    "phones": [
+      {
+        "label": "Asosiy",
+        "value": "+998983002080"
+      },
+      {
+        "label": "Qo‘shimcha",
+        "value": "+998946133424"
+      },
+      {
+        "label": "Qo‘shimcha",
+        "value": "+998712701177"
+      }
+    ],
+    "links": [],
+    "email": null,
+    "latitude": 41.258975,
+    "longitude": 69.156474,
+    "price": {
+      "kind": "negotiable",
+      "min": null,
+      "max": null,
+      "currency": "UZS",
+      "sourceText": ""
+    },
+    "images": [
+      {
+        "src": "/images/services/bisyor/f98df1213556c9d28736eff0.webp",
+        "width": 931,
+        "height": 834,
+        "alt": "Bisyor — 1"
+      },
+      {
+        "src": "/images/services/bisyor/c5b8ad12010e48885aef8646.webp",
+        "width": 1280,
+        "height": 1276,
+        "alt": "Bisyor — 2"
+      },
+      {
+        "src": "/images/services/bisyor/69a094f2974d4aa1333b120f.webp",
+        "width": 576,
+        "height": 1280,
+        "alt": "Bisyor — 3"
+      },
+      {
+        "src": "/images/services/bisyor/b68638160a6b7be84bcedf6c.webp",
+        "width": 1280,
+        "height": 576,
+        "alt": "Bisyor — 4"
+      },
+      {
+        "src": "/images/services/bisyor/45f700f3728082eda3fdb885.webp",
+        "width": 577,
+        "height": 1280,
+        "alt": "Bisyor — 5"
+      },
+      {
+        "src": "/images/services/bisyor/7b68bb58572f0cb5879fe850.webp",
+        "width": 1280,
+        "height": 960,
+        "alt": "Bisyor — 6"
+      }
+    ],
+    "importedAt": "2026-11-15T16:31:43.191Z",
+    "featured": false
+  },
+  {
+    "slug": "parvoz",
+    "name": "Parvoz",
+    "categoryIds": [
+      "restaurant"
+    ],
+    "categoryLabel": "To‘yxonalar va Restoranlar",
+    "description": "",
+    "region": "Toshkent shahri",
+    "district": "",
+    "address": "Ташкент, улица Мухтара Ашрафи, 15",
+    "phones": [
+      {
+        "label": "Asosiy",
+        "value": "+998909141991"
+      }
+    ],
+    "links": [
+      {
+        "label": "Telegram",
+        "url": "https://t.me/+998909141991"
+      }
+    ],
+    "email": null,
+    "latitude": 41.289792,
+    "longitude": 69.338259,
+    "price": {
+      "kind": "negotiable",
+      "min": null,
+      "max": null,
+      "currency": "UZS",
+      "sourceText": ""
+    },
+    "images": [
+      {
+        "src": "/images/services/parvoz/85d959914681d87cbe3da854.webp",
+        "width": 1280,
+        "height": 720,
+        "alt": "Parvoz — 1"
+      },
+      {
+        "src": "/images/services/parvoz/3abcda5af58e019b394bfafa.webp",
+        "width": 1280,
+        "height": 960,
+        "alt": "Parvoz — 2"
+      },
+      {
+        "src": "/images/services/parvoz/95576afbe604dbfa8833a76f.webp",
+        "width": 960,
+        "height": 1280,
+        "alt": "Parvoz — 3"
+      },
+      {
+        "src": "/images/services/parvoz/9d4bc6773ae408160192a882.webp",
+        "width": 1280,
+        "height": 720,
+        "alt": "Parvoz — 4"
+      }
+    ],
+    "importedAt": "2026-11-15T16:31:46.951Z",
+    "featured": false
+  },
+  {
+    "slug": "zamin",
+    "name": "Zamin",
+    "categoryIds": [
+      "restaurant"
+    ],
+    "categoryLabel": "To‘yxonalar va Restoranlar",
+    "description": "",
+    "region": "Toshkent shahri",
+    "district": "Chilonzor tumani",
+    "address": "Ташкент, Чиланзарский район, улица Чиланзар, 1/1",
+    "phones": [
+      {
+        "label": "Asosiy",
+        "value": "+998977357200"
+      }
+    ],
+    "links": [
+      {
+        "label": "Telegram",
+        "url": "https://t.me/+998977357200"
+      },
+      {
+        "label": "WhatsApp",
+        "url": "https://wa.me/998977357200"
+      }
+    ],
+    "email": null,
+    "latitude": 41.294332,
+    "longitude": 69.236146,
+    "price": {
+      "kind": "negotiable",
+      "min": null,
+      "max": null,
+      "currency": "UZS",
+      "sourceText": ""
+    },
+    "images": [
+      {
+        "src": "/images/services/zamin/b7a91710f1884ee910523959.webp",
+        "width": 1280,
+        "height": 960,
+        "alt": "Zamin — 1"
+      },
+      {
+        "src": "/images/services/zamin/be7d789af6978ff72c7ca7ad.webp",
+        "width": 1280,
+        "height": 597,
+        "alt": "Zamin — 2"
+      },
+      {
+        "src": "/images/services/zamin/242fa763f849dc7ef3b3e6dc.webp",
+        "width": 960,
+        "height": 1280,
+        "alt": "Zamin — 3"
+      },
+      {
+        "src": "/images/services/zamin/062d05e09958fdebab7a62a6.webp",
+        "width": 576,
+        "height": 1280,
+        "alt": "Zamin — 4"
+      },
+      {
+        "src": "/images/services/zamin/9aad1b51611c1474cc84c5ba.webp",
+        "width": 591,
+        "height": 1280,
+        "alt": "Zamin — 5"
+      }
+    ],
+    "importedAt": "2026-11-15T16:32:03.619Z",
+    "featured": false
+  },
+  {
+    "slug": "sadaf",
+    "name": "Sadaf",
+    "categoryIds": [
+      "restaurant"
+    ],
+    "categoryLabel": "To‘yxonalar va Restoranlar",
+    "description": "",
+    "region": "Toshkent shahri",
+    "district": "Mirzo Ulug‘bek tumani",
+    "address": "Ташкент, Мирзо-Улугбекский район, улица Шукура Бурханова",
+    "phones": [
+      {
+        "label": "Asosiy",
+        "value": "+998909442222"
+      },
+      {
+        "label": "Qo‘shimcha",
+        "value": "+998909371600"
+      }
+    ],
+    "links": [],
+    "email": null,
+    "latitude": 41.331731,
+    "longitude": 69.36478,
+    "price": {
+      "kind": "negotiable",
+      "min": null,
+      "max": null,
+      "currency": "UZS",
+      "sourceText": ""
+    },
+    "images": [
+      {
+        "src": "/images/services/sadaf/edf9508217b8aa72c57e7683.webp",
+        "width": 576,
+        "height": 768,
+        "alt": "Sadaf — 1"
+      },
+      {
+        "src": "/images/services/sadaf/3b736626c5619631e414c924.webp",
+        "width": 1280,
+        "height": 960,
+        "alt": "Sadaf — 2"
+      },
+      {
+        "src": "/images/services/sadaf/67c6ea2e8d7fbb08d63c8c72.webp",
+        "width": 722,
+        "height": 1280,
+        "alt": "Sadaf — 3"
+      },
+      {
+        "src": "/images/services/sadaf/10216a0e696da8474d1ddc18.webp",
+        "width": 1280,
+        "height": 960,
+        "alt": "Sadaf — 4"
+      },
+      {
+        "src": "/images/services/sadaf/e92a93c8c078d61e250e943c.webp",
+        "width": 960,
+        "height": 1280,
+        "alt": "Sadaf — 5"
+      }
+    ],
+    "importedAt": "2026-11-15T16:32:09.258Z",
+    "featured": false
+  },
+  {
+    "slug": "ummon",
+    "name": "Ummon",
+    "categoryIds": [
+      "restaurant"
+    ],
+    "categoryLabel": "To‘yxonalar va Restoranlar",
+    "description": "",
+    "region": "Toshkent shahri",
+    "district": "",
+    "address": "Ташкент, улица Олтинтепа, 19",
+    "phones": [
+      {
+        "label": "Asosiy",
+        "value": "+998933883344"
+      },
+      {
+        "label": "Qo‘shimcha",
+        "value": "+998974417855"
+      }
+    ],
+    "links": [
+      {
+        "label": "Facebook",
+        "url": "https://www.facebook.com/1732752070180991"
+      },
+      {
+        "label": "Telegram",
+        "url": "http://t.me/restoran_ummon"
+      },
+      {
+        "label": "Instagram",
+        "url": "https://www.instagram.com/restoran_ummon"
+      }
+    ],
+    "email": null,
+    "latitude": 41.311591,
+    "longitude": 69.329336,
+    "price": {
+      "kind": "negotiable",
+      "min": null,
+      "max": null,
+      "currency": "UZS",
+      "sourceText": ""
+    },
+    "images": [
+      {
+        "src": "/images/services/ummon/cc9cbbb120de2f111ce67737.webp",
+        "width": 1080,
+        "height": 563,
+        "alt": "Ummon — 1"
+      },
+      {
+        "src": "/images/services/ummon/70c6bef99db8ef3fa5e3d1e8.webp",
+        "width": 960,
+        "height": 1280,
+        "alt": "Ummon — 2"
+      },
+      {
+        "src": "/images/services/ummon/96b6d1900ca3351fda2606cf.webp",
+        "width": 1280,
+        "height": 960,
+        "alt": "Ummon — 3"
+      },
+      {
+        "src": "/images/services/ummon/7fa033854605d7c9cc86f057.webp",
+        "width": 1280,
+        "height": 853,
+        "alt": "Ummon — 4"
+      },
+      {
+        "src": "/images/services/ummon/904f561b4ba116313d7c9925.webp",
+        "width": 853,
+        "height": 1280,
+        "alt": "Ummon — 5"
+      }
+    ],
+    "importedAt": "2026-11-15T16:32:22.957Z",
+    "featured": false
+  },
+  {
+    "slug": "ofarin",
+    "name": "Ofarin",
+    "categoryIds": [
+      "restaurant"
+    ],
+    "categoryLabel": "To‘yxonalar va Restoranlar",
+    "description": "",
+    "region": "Toshkent shahri",
+    "district": "Olmazor tumani",
+    "address": "Ташкент, Алмазарский район, махаллинский сход граждан Жийдали",
+    "phones": [
+      {
+        "label": "Asosiy",
+        "value": "+998900000446"
+      },
+      {
+        "label": "Qo‘shimcha",
+        "value": "+998993624494"
+      },
+      {
+        "label": "Qo‘shimcha",
+        "value": "+998997227778"
+      },
+      {
+        "label": "Qo‘shimcha",
+        "value": "+998909461727"
+      }
+    ],
+    "links": [
+      {
+        "label": "Telegram",
+        "url": "https://t.me/ofarinrestaurant"
+      },
+      {
+        "label": "YouTube",
+        "url": "https://www.youtube.com/channel/UCMOolXMRxK7ThwcvjeIF5zg/featured"
+      },
+      {
+        "label": "Instagram",
+        "url": "https://www.instagram.com/ofarinrestaurant/"
+      },
+      {
+        "label": "Facebook",
+        "url": "https://www.facebook.com/1205220759571469"
+      }
+    ],
+    "email": null,
+    "latitude": 41.363809,
+    "longitude": 69.186906,
+    "price": {
+      "kind": "negotiable",
+      "min": null,
+      "max": null,
+      "currency": "UZS",
+      "sourceText": ""
+    },
+    "images": [
+      {
+        "src": "/images/services/ofarin/bdc96a048299e9b7af725e8f.webp",
+        "width": 1280,
+        "height": 960,
+        "alt": "Ofarin — 1"
+      },
+      {
+        "src": "/images/services/ofarin/e3e62fbc034e6e93e417cfc0.webp",
+        "width": 1280,
+        "height": 720,
+        "alt": "Ofarin — 2"
+      },
+      {
+        "src": "/images/services/ofarin/3687711d627cddde56509f6c.webp",
+        "width": 1280,
+        "height": 1280,
+        "alt": "Ofarin — 3"
+      },
+      {
+        "src": "/images/services/ofarin/bedb75a65b94629e5358f33f.webp",
+        "width": 1280,
+        "height": 853,
+        "alt": "Ofarin — 4"
+      },
+      {
+        "src": "/images/services/ofarin/259bc0e8b9f1a47f4112043f.webp",
+        "width": 720,
+        "height": 737,
+        "alt": "Ofarin — 5"
+      },
+      {
+        "src": "/images/services/ofarin/3bc40727c303b8188866d1ec.webp",
+        "width": 1280,
+        "height": 960,
+        "alt": "Ofarin — 6"
+      }
+    ],
+    "importedAt": "2026-11-15T16:32:31.569Z",
+    "featured": false
+  },
+  {
+    "slug": "dunyo-saroyi",
+    "name": "Dunyo Saroyi",
+    "categoryIds": [
+      "restaurant"
+    ],
+    "categoryLabel": "To‘yxonalar va Restoranlar",
+    "description": "",
+    "region": "Toshkent shahri",
+    "district": "Mirzo Ulug‘bek tumani",
+    "address": "Ташкент, Мирзо-Улугбекский район, махаллинский сход граждан Султония",
+    "phones": [
+      {
+        "label": "Asosiy",
+        "value": "+998971255999"
+      },
+      {
+        "label": "Qo‘shimcha",
+        "value": "+998951990020"
+      },
+      {
+        "label": "Qo‘shimcha",
+        "value": "+998971555999"
+      }
+    ],
+    "links": [
+      {
+        "label": "Instagram",
+        "url": "https://instagram.com/dunyosaroyi"
+      }
+    ],
+    "email": null,
+    "latitude": 41.335219,
+    "longitude": 69.370703,
+    "price": {
+      "kind": "negotiable",
+      "min": null,
+      "max": null,
+      "currency": "UZS",
+      "sourceText": ""
+    },
+    "images": [
+      {
+        "src": "/images/services/dunyo-saroyi/8eb9334b19bf057559fff454.webp",
+        "width": 960,
+        "height": 1280,
+        "alt": "Dunyo Saroyi — 1"
+      },
+      {
+        "src": "/images/services/dunyo-saroyi/530866dc0f6405ed450151b4.webp",
+        "width": 960,
+        "height": 1280,
+        "alt": "Dunyo Saroyi — 2"
+      },
+      {
+        "src": "/images/services/dunyo-saroyi/f9a85f19516ffc58d1ac2216.webp",
+        "width": 960,
+        "height": 1280,
+        "alt": "Dunyo Saroyi — 3"
+      },
+      {
+        "src": "/images/services/dunyo-saroyi/3c10ab36f7f66835fa7a7f89.webp",
+        "width": 500,
+        "height": 375,
+        "alt": "Dunyo Saroyi — 4"
+      }
+    ],
+    "importedAt": "2026-11-15T16:32:46.186Z",
+    "featured": false
+  },
+  {
+    "slug": "huvaydo",
+    "name": "Huvaydo",
+    "categoryIds": [
+      "restaurant"
+    ],
+    "categoryLabel": "To‘yxonalar va Restoranlar",
+    "description": "",
+    "region": "Toshkent shahri",
+    "district": "",
+    "address": "Ташкент, улица Беруни, 24",
+    "phones": [
+      {
+        "label": "Asosiy",
+        "value": "+998983001689"
+      }
+    ],
+    "links": [
+      {
+        "label": "Facebook",
+        "url": "https://www.facebook.com/huvaydorestorani/"
+      },
+      {
+        "label": "WhatsApp",
+        "url": "https://wa.me/998983001689"
+      },
+      {
+        "label": "Telegram",
+        "url": "https://t.me/+998983001689"
+      }
+    ],
+    "email": null,
+    "latitude": 41.340637,
+    "longitude": 69.205643,
+    "price": {
+      "kind": "negotiable",
+      "min": null,
+      "max": null,
+      "currency": "UZS",
+      "sourceText": ""
+    },
+    "images": [
+      {
+        "src": "/images/services/huvaydo/d0bbce0378f92df86cc09da8.webp",
+        "width": 1280,
+        "height": 960,
+        "alt": "Huvaydo — 1"
+      },
+      {
+        "src": "/images/services/huvaydo/93630879088a8432d77db8ba.webp",
+        "width": 960,
+        "height": 1280,
+        "alt": "Huvaydo — 2"
+      },
+      {
+        "src": "/images/services/huvaydo/d14ceece37fce931c45a40aa.webp",
+        "width": 447,
+        "height": 447,
+        "alt": "Huvaydo — 3"
+      },
+      {
+        "src": "/images/services/huvaydo/7cb2282149f08783a5dcfaee.webp",
+        "width": 1280,
+        "height": 960,
+        "alt": "Huvaydo — 4"
+      },
+      {
+        "src": "/images/services/huvaydo/3edf07adc1fe9090e4143c5c.webp",
+        "width": 1279,
+        "height": 1280,
+        "alt": "Huvaydo — 5"
+      },
+      {
+        "src": "/images/services/huvaydo/4c2922d4c34c210fe50cc111.webp",
+        "width": 1280,
+        "height": 960,
+        "alt": "Huvaydo — 6"
+      }
+    ],
+    "importedAt": "2026-11-15T16:50:30.754Z",
+    "featured": false
+  },
+  {
+    "slug": "alo-toyxonasi",
+    "name": "A'lo",
+    "categoryIds": [
+      "restaurant"
+    ],
+    "categoryLabel": "To‘yxonalar va Restoranlar",
+    "description": "",
+    "region": "Toshkent shahri",
+    "district": "Olmazor tumani",
+    "address": "Ташкент, Алмазарский район, массив Каракамыш, квартал 2/5, 16А",
+    "phones": [
+      {
+        "label": "Asosiy",
+        "value": "+998956424242"
+      },
+      {
+        "label": "Qo‘shimcha",
+        "value": "+998909456869"
+      }
+    ],
+    "links": [
+      {
+        "label": "Telegram",
+        "url": "https://t.me/+998909456869"
+      }
+    ],
+    "email": null,
+    "latitude": 41.358918,
+    "longitude": 69.214337,
+    "price": {
+      "kind": "negotiable",
+      "min": null,
+      "max": null,
+      "currency": "UZS",
+      "sourceText": ""
+    },
+    "images": [
+      {
+        "src": "/images/services/alo-toyxonasi/dc68dc170ecbca470ca195b2.webp",
+        "width": 1151,
+        "height": 768,
+        "alt": "A'lo — 1"
+      },
+      {
+        "src": "/images/services/alo-toyxonasi/50c4689c3ea2dd8e05b3f0d9.webp",
+        "width": 1280,
+        "height": 960,
+        "alt": "A'lo — 2"
+      },
+      {
+        "src": "/images/services/alo-toyxonasi/6c6e808660df6e3aace2faf7.webp",
+        "width": 1280,
+        "height": 721,
+        "alt": "A'lo — 3"
+      },
+      {
+        "src": "/images/services/alo-toyxonasi/7861302409caa113f7945223.webp",
+        "width": 1280,
+        "height": 960,
+        "alt": "A'lo — 4"
+      },
+      {
+        "src": "/images/services/alo-toyxonasi/ef758d52164872f0c3ddb260.webp",
+        "width": 1280,
+        "height": 960,
+        "alt": "A'lo — 5"
+      }
+    ],
+    "importedAt": "2026-11-15T16:50:36.629Z",
+    "featured": false
+  },
+  {
+    "slug": "yakka-saroy",
+    "name": "Yakka Saroy",
+    "categoryIds": [
+      "restaurant"
+    ],
+    "categoryLabel": "To‘yxonalar va Restoranlar",
+    "description": "",
+    "region": "Toshkent shahri",
+    "district": "",
+    "address": "Ташкент, улица Абдуллы Каххара, 40",
+    "phones": [
+      {
+        "label": "Asosiy",
+        "value": "+998970400404"
+      },
+      {
+        "label": "Qo‘shimcha",
+        "value": "+998990339090"
+      },
+      {
+        "label": "Qo‘shimcha",
+        "value": "+998991504444"
+      }
+    ],
+    "links": [
+      {
+        "label": "Veb-sayt",
+        "url": "http://yakkasaroy.com/"
+      },
+      {
+        "label": "Instagram",
+        "url": "https://www.instagram.com/yakkasaroy.uz/"
+      },
+      {
+        "label": "Facebook",
+        "url": "https://www.facebook.com/pages/%D0%AF%D0%BA%D0%BA%D0%B0%D1%81%D0%B0%D1%80%D0%BE%D0%B9%20%D0%A0%D0%B5%D1%81%D1%82%D0%BE%D1%80%D0%B0%D0%BD/378973378971598/"
+      }
+    ],
+    "email": null,
+    "latitude": 41.279427,
+    "longitude": 69.260928,
+    "price": {
+      "kind": "negotiable",
+      "min": null,
+      "max": null,
+      "currency": "UZS",
+      "sourceText": ""
+    },
+    "images": [
+      {
+        "src": "/images/services/yakka-saroy/18152d059fa780382c0e3c9d.webp",
+        "width": 800,
+        "height": 533,
+        "alt": "Yakka Saroy — 1"
+      },
+      {
+        "src": "/images/services/yakka-saroy/e037f5bd1970f4ca3c5e5b54.webp",
+        "width": 800,
+        "height": 533,
+        "alt": "Yakka Saroy — 2"
+      },
+      {
+        "src": "/images/services/yakka-saroy/85741dd37e958e342f80f1e7.webp",
+        "width": 800,
+        "height": 533,
+        "alt": "Yakka Saroy — 3"
+      },
+      {
+        "src": "/images/services/yakka-saroy/5db8e2813d7ae1937946b3f8.webp",
+        "width": 800,
+        "height": 533,
+        "alt": "Yakka Saroy — 4"
+      },
+      {
+        "src": "/images/services/yakka-saroy/1f63a00e73fbfb8b1b0a93d6.webp",
+        "width": 1280,
+        "height": 959,
+        "alt": "Yakka Saroy — 5"
+      },
+      {
+        "src": "/images/services/yakka-saroy/d61bae6ea6966d46632f4de5.webp",
+        "width": 691,
+        "height": 800,
+        "alt": "Yakka Saroy — 6"
+      }
+    ],
+    "importedAt": "2026-11-15T16:34:44.101Z",
+    "featured": false
+  },
+  {
+    "slug": "royal-rose",
+    "name": "Royal rose",
+    "categoryIds": [
+      "restaurant"
+    ],
+    "categoryLabel": "To‘yxonalar va Restoranlar",
+    "description": "",
+    "region": "Toshkent shahri",
+    "district": "",
+    "address": "Ташкент, улица Исмаилата, 39",
+    "phones": [
+      {
+        "label": "Asosiy",
+        "value": "+998997453333"
+      },
+      {
+        "label": "Qo‘shimcha",
+        "value": "+998971453333"
+      },
+      {
+        "label": "Qo‘shimcha",
+        "value": "+998991453333"
+      }
+    ],
+    "links": [
+      {
+        "label": "Telegram",
+        "url": "https://t.me/royalrosetashkent"
+      },
+      {
+        "label": "Facebook",
+        "url": "https://www.facebook.com/royal_roseuz-325748632174054/"
+      },
+      {
+        "label": "Instagram",
+        "url": "https://www.instagram.com/royal_rose.uz/"
+      },
+      {
+        "label": "WhatsApp",
+        "url": "https://wa.me/998991453333"
+      }
+    ],
+    "email": null,
+    "latitude": 41.336959,
+    "longitude": 69.321963,
+    "price": {
+      "kind": "negotiable",
+      "min": null,
+      "max": null,
+      "currency": "UZS",
+      "sourceText": ""
+    },
+    "images": [
+      {
+        "src": "/images/services/royal-rose/e722606f2a1c5604a677ec55.webp",
+        "width": 1280,
+        "height": 591,
+        "alt": "Royal rose — 1"
+      },
+      {
+        "src": "/images/services/royal-rose/99ce21855ad00ac961bb7855.webp",
+        "width": 576,
+        "height": 768,
+        "alt": "Royal rose — 2"
+      },
+      {
+        "src": "/images/services/royal-rose/e5895cbaf2cdb014581a003f.webp",
+        "width": 1280,
+        "height": 960,
+        "alt": "Royal rose — 3"
+      },
+      {
+        "src": "/images/services/royal-rose/e5b6e4a45c431a59e0ff2c84.webp",
+        "width": 1280,
+        "height": 960,
+        "alt": "Royal rose — 4"
+      },
+      {
+        "src": "/images/services/royal-rose/53673e4a0d9d2f2b5ca56975.webp",
+        "width": 591,
+        "height": 1280,
+        "alt": "Royal rose — 5"
+      },
+      {
+        "src": "/images/services/royal-rose/f67b6f58f52c9358bfc3466b.webp",
+        "width": 960,
+        "height": 1280,
+        "alt": "Royal rose — 6"
+      }
+    ],
+    "importedAt": "2026-11-15T16:34:58.412Z",
+    "featured": false
+  },
+  {
+    "slug": "zebu-zar",
+    "name": "Зебу зар",
+    "categoryIds": [
+      "restaurant"
+    ],
+    "categoryLabel": "To‘yxonalar va Restoranlar",
+    "description": "",
+    "region": "Toshkent shahri",
+    "district": "",
+    "address": "Ташкент, улица Чингиза Айтматова, 52/7",
+    "phones": [
+      {
+        "label": "Asosiy",
+        "value": "+998909016900"
+      },
+      {
+        "label": "Qo‘shimcha",
+        "value": "+998909010240"
+      }
+    ],
+    "links": [],
+    "email": null,
+    "latitude": 41.333471,
+    "longitude": 69.292638,
+    "price": {
+      "kind": "negotiable",
+      "min": null,
+      "max": null,
+      "currency": "UZS",
+      "sourceText": ""
+    },
+    "images": [
+      {
+        "src": "/images/services/zebu-zar/17cf102991289893f6063fbe.webp",
+        "width": 640,
+        "height": 640,
+        "alt": "Зебу зар — 1"
+      },
+      {
+        "src": "/images/services/zebu-zar/32d55233f6dce3e3dd3c9ab0.webp",
+        "width": 960,
+        "height": 1280,
+        "alt": "Зебу зар — 2"
+      },
+      {
+        "src": "/images/services/zebu-zar/6b252019b2562c904a7e8d25.webp",
+        "width": 1280,
+        "height": 964,
+        "alt": "Зебу зар — 3"
+      },
+      {
+        "src": "/images/services/zebu-zar/a984289be763c1bc9ca2aea1.webp",
+        "width": 1280,
+        "height": 964,
+        "alt": "Зебу зар — 4"
+      },
+      {
+        "src": "/images/services/zebu-zar/0ed2f94b20b448487acf0d15.webp",
+        "width": 1280,
+        "height": 721,
+        "alt": "Зебу зар — 5"
+      },
+      {
+        "src": "/images/services/zebu-zar/6f98e5ec1a66195c79ccc56a.webp",
+        "width": 960,
+        "height": 1280,
+        "alt": "Зебу зар — 6"
+      }
+    ],
+    "importedAt": "2026-11-15T16:35:42.522Z",
+    "featured": false
+  },
+  {
+    "slug": "yashnobod-toyxonasi",
+    "name": "Яшнабад",
+    "categoryIds": [
+      "restaurant"
+    ],
+    "categoryLabel": "To‘yxonalar va Restoranlar",
+    "description": "",
+    "region": "Toshkent shahri",
+    "district": "Yashnobod tumani",
+    "address": "Ташкент, Яшнабадский район, махаллинский сход граждан Бешарик",
+    "phones": [
+      {
+        "label": "Asosiy",
+        "value": "+998951940003"
+      },
+      {
+        "label": "Qo‘shimcha",
+        "value": "+998935350240"
+      },
+      {
+        "label": "Qo‘shimcha",
+        "value": "+998332320200"
+      }
+    ],
+    "links": [
+      {
+        "label": "Telegram",
+        "url": "https://t.me/+998935350240"
+      },
+      {
+        "label": "Instagram",
+        "url": "https://www.instagram.com/yashnobod.restaurant"
+      }
+    ],
+    "email": null,
+    "latitude": 41.284425,
+    "longitude": 69.343557,
+    "price": {
+      "kind": "negotiable",
+      "min": null,
+      "max": null,
+      "currency": "UZS",
+      "sourceText": ""
+    },
+    "images": [
+      {
+        "src": "/images/services/yashnobod-toyxonasi/186c9d17f910b13017246f5f.webp",
+        "width": 1024,
+        "height": 1280,
+        "alt": "Яшнабад — 1"
+      },
+      {
+        "src": "/images/services/yashnobod-toyxonasi/ff445b906055def2f2de335e.webp",
+        "width": 1280,
+        "height": 960,
+        "alt": "Яшнабад — 2"
+      },
+      {
+        "src": "/images/services/yashnobod-toyxonasi/ead8b303f8ea1cdcb5336d10.webp",
+        "width": 720,
+        "height": 1280,
+        "alt": "Яшнабад — 3"
+      },
+      {
+        "src": "/images/services/yashnobod-toyxonasi/ed55d46d617e2f1441a1190d.webp",
+        "width": 720,
+        "height": 1280,
+        "alt": "Яшнабад — 4"
+      },
+      {
+        "src": "/images/services/yashnobod-toyxonasi/723df44e4cfb53cdad6e6d3c.webp",
+        "width": 720,
+        "height": 1280,
+        "alt": "Яшнабад — 5"
+      },
+      {
+        "src": "/images/services/yashnobod-toyxonasi/d73ca4f17f7d581bdf90e332.webp",
+        "width": 720,
+        "height": 1280,
+        "alt": "Яшнабад — 6"
+      }
+    ],
+    "importedAt": "2026-11-15T16:35:42.757Z",
+    "featured": false
+  },
+  {
+    "slug": "ezidyor-gold",
+    "name": "Ezidyor Gold",
+    "categoryIds": [
+      "restaurant"
+    ],
+    "categoryLabel": "To‘yxonalar va Restoranlar",
+    "description": "",
+    "region": "Toshkent shahri",
+    "district": "",
+    "address": "Ташкент, улица Буюк Ипак Йули, 115А",
+    "phones": [
+      {
+        "label": "Asosiy",
+        "value": "+998983310000"
+      },
+      {
+        "label": "Qo‘shimcha",
+        "value": "+998998260101"
+      }
+    ],
+    "links": [],
+    "email": null,
+    "latitude": 41.327411,
+    "longitude": 69.33556,
+    "price": {
+      "kind": "negotiable",
+      "min": null,
+      "max": null,
+      "currency": "UZS",
+      "sourceText": ""
+    },
+    "images": [
+      {
+        "src": "/images/services/ezidyor-gold/54c67af8697c7d37a847da6f.webp",
+        "width": 1280,
+        "height": 720,
+        "alt": "Ezidyor Gold — 1"
+      },
+      {
+        "src": "/images/services/ezidyor-gold/02d6067356f81593eebf9dc9.webp",
+        "width": 1280,
+        "height": 960,
+        "alt": "Ezidyor Gold — 2"
+      },
+      {
+        "src": "/images/services/ezidyor-gold/1d62bed0559082e2dd91bfdb.webp",
+        "width": 960,
+        "height": 1280,
+        "alt": "Ezidyor Gold — 3"
+      },
+      {
+        "src": "/images/services/ezidyor-gold/244dd46fb364ba4c3442c489.webp",
+        "width": 960,
+        "height": 1280,
+        "alt": "Ezidyor Gold — 4"
+      },
+      {
+        "src": "/images/services/ezidyor-gold/f348bbf84d9bd88bfe43f104.webp",
+        "width": 1280,
+        "height": 960,
+        "alt": "Ezidyor Gold — 5"
+      },
+      {
+        "src": "/images/services/ezidyor-gold/f95b59107e6ab10c4623677e.webp",
+        "width": 824,
+        "height": 1280,
+        "alt": "Ezidyor Gold — 6"
+      }
+    ],
+    "importedAt": "2026-11-15T16:36:20.261Z",
+    "featured": false
+  },
+  {
+    "slug": "afruz",
+    "name": "Афруз",
+    "categoryIds": [
+      "restaurant"
+    ],
+    "categoryLabel": "To‘yxonalar va Restoranlar",
+    "description": "",
+    "region": "Toshkent shahri",
+    "district": "Chilonzor tumani",
+    "address": "Ташкент, Чиланзарский район, массив Чиланзар, махаллинский сход граждан Чапан-Ата",
+    "phones": [
+      {
+        "label": "Asosiy",
+        "value": "+998971552201"
+      }
+    ],
+    "links": [
+      {
+        "label": "Telegram",
+        "url": "https://t.me/SarvarAfruz"
+      },
+      {
+        "label": "Instagram",
+        "url": "https://www.instagram.com/afruz.restaurant_/"
+      },
+      {
+        "label": "WhatsApp",
+        "url": "https://wa.me/998971552201"
+      }
+    ],
+    "email": null,
+    "latitude": 41.291748,
+    "longitude": 69.195093,
+    "price": {
+      "kind": "negotiable",
+      "min": null,
+      "max": null,
+      "currency": "UZS",
+      "sourceText": ""
+    },
+    "images": [
+      {
+        "src": "/images/services/afruz/be66de8ad348bb617472e2df.webp",
+        "width": 1280,
+        "height": 720,
+        "alt": "Афруз — 1"
+      },
+      {
+        "src": "/images/services/afruz/f051acdfba0c2caba6f27106.webp",
+        "width": 1280,
+        "height": 960,
+        "alt": "Афруз — 2"
+      },
+      {
+        "src": "/images/services/afruz/7b8dfc50bb4a427d1d515e38.webp",
+        "width": 960,
+        "height": 1280,
+        "alt": "Афруз — 3"
+      },
+      {
+        "src": "/images/services/afruz/c3fb0781b303a117fcab3228.webp",
+        "width": 949,
+        "height": 1280,
+        "alt": "Афруз — 4"
+      },
+      {
+        "src": "/images/services/afruz/56cd618ff4e5982de8781e7d.webp",
+        "width": 960,
+        "height": 1280,
+        "alt": "Афруз — 5"
+      }
+    ],
+    "importedAt": "2026-11-15T16:36:25.913Z",
+    "featured": false
+  },
+  {
+    "slug": "toyxonachi-saroy",
+    "name": "Toyxonachi Saroy",
+    "categoryIds": [
+      "restaurant"
+    ],
+    "categoryLabel": "To‘yxonalar va Restoranlar",
+    "description": "",
+    "region": "Toshkent shahri",
+    "district": "",
+    "address": "Ташкент, Фархадская улица, 1Б",
+    "phones": [
+      {
+        "label": "Asosiy",
+        "value": "+998555000520"
+      },
+      {
+        "label": "Qo‘shimcha",
+        "value": "+998958647070"
+      },
+      {
+        "label": "Qo‘shimcha",
+        "value": "+998908055160"
+      },
+      {
+        "label": "Qo‘shimcha",
+        "value": "+998917910010"
+      }
+    ],
+    "links": [],
+    "email": null,
+    "latitude": 41.289549,
+    "longitude": 69.181976,
+    "price": {
+      "kind": "negotiable",
+      "min": null,
+      "max": null,
+      "currency": "UZS",
+      "sourceText": ""
+    },
+    "images": [
+      {
+        "src": "/images/services/toyxonachi-saroy/7d525cc723f772ff89ad6a49.webp",
+        "width": 960,
+        "height": 1280,
+        "alt": "Toyxonachi Saroy — 1"
+      },
+      {
+        "src": "/images/services/toyxonachi-saroy/1da8e4053166f6e427b24148.webp",
+        "width": 720,
+        "height": 1280,
+        "alt": "Toyxonachi Saroy — 2"
+      },
+      {
+        "src": "/images/services/toyxonachi-saroy/34dfd8c62dcb82df4b08d464.webp",
+        "width": 1280,
+        "height": 960,
+        "alt": "Toyxonachi Saroy — 3"
+      }
+    ],
+    "importedAt": "2026-11-15T17:03:05.932Z",
+    "featured": false
+  },
+  {
+    "slug": "seoul",
+    "name": "Seoul",
+    "categoryIds": [
+      "restaurant"
+    ],
+    "categoryLabel": "To‘yxonalar va Restoranlar",
+    "description": "Banket paketlari: bir mehmon uchun 390 000 yoki 450 000 so‘m. Zal ijarasi 25 000 000 so‘mdan boshlanadi. Narx va shartlarni to‘yxona bilan aniqlashtiring.",
+    "region": "Toshkent shahri",
+    "district": "",
+    "address": "Ташкент, Ахангаранский проспект, 11",
+    "phones": [
+      {
+        "label": "Asosiy",
+        "value": "+998974556006"
+      },
+      {
+        "label": "Qo‘shimcha",
+        "value": "+998983316006"
+      }
+    ],
+    "links": [
+      {
+        "label": "Veb-sayt",
+        "url": "https://seoulhall.uz/"
+      },
+      {
+        "label": "Facebook",
+        "url": "https://facebook.com/seoulbanquethall"
+      },
+      {
+        "label": "Instagram",
+        "url": "https://instagram.com/seoul.banquet.hall"
+      },
+      {
+        "label": "Telegram",
+        "url": "https://t.me/+998974556006"
+      },
+      {
+        "label": "YouTube",
+        "url": "https://www.youtube.com/@SeoulBanquetHall"
+      },
+      {
+        "label": "WhatsApp",
+        "url": "https://wa.me/998974556006"
+      }
+    ],
+    "email": null,
+    "latitude": 41.281546,
+    "longitude": 69.361661,
+    "price": {
+      "kind": "range",
+      "min": 390000,
+      "max": 450000,
+      "currency": "UZS",
+      "sourceText": "Банкет «всё включено» — на 1 гостя: 390000 / 450000 UZS",
+      "unit": "person"
+    },
+    "images": [
+      {
+        "src": "/images/services/seoul/3a175057ed7cd6b0efd3734a.webp",
+        "width": 1280,
+        "height": 853,
+        "alt": "Seoul — 1"
+      },
+      {
+        "src": "/images/services/seoul/4b67c9dcdab33bfb4575bb91.webp",
+        "width": 1280,
+        "height": 853,
+        "alt": "Seoul — 2"
+      },
+      {
+        "src": "/images/services/seoul/7e02fc911765a7c64007a5aa.webp",
+        "width": 853,
+        "height": 1280,
+        "alt": "Seoul — 3"
+      },
+      {
+        "src": "/images/services/seoul/c4f208e7ff5200498881d842.webp",
+        "width": 1280,
+        "height": 853,
+        "alt": "Seoul — 4"
+      },
+      {
+        "src": "/images/services/seoul/2343ac32e79533424da1c71f.webp",
+        "width": 1280,
+        "height": 853,
+        "alt": "Seoul — 5"
+      },
+      {
+        "src": "/images/services/seoul/11338189c6143ba86d40e4e5.webp",
+        "width": 960,
+        "height": 1280,
+        "alt": "Seoul — 6"
+      }
+    ],
+    "importedAt": "2026-11-15T16:36:53.490Z",
+    "featured": false
+  },
+  {
+    "slug": "sarbon",
+    "name": "Sarbon",
+    "categoryIds": [
+      "restaurant"
+    ],
+    "categoryLabel": "To‘yxonalar va Restoranlar",
+    "description": "",
+    "region": "Toshkent shahri",
+    "district": "",
+    "address": "Ташкент, улица Буюк Ипак Йули, 368Б",
+    "phones": [
+      {
+        "label": "Asosiy",
+        "value": "+998555153535"
+      },
+      {
+        "label": "Qo‘shimcha",
+        "value": "+998909931133"
+      }
+    ],
+    "links": [
+      {
+        "label": "Veb-sayt",
+        "url": "https://sarbon-restaurant.uz/"
+      },
+      {
+        "label": "Telegram",
+        "url": "https://t.me/sarbon_wedding"
+      },
+      {
+        "label": "Instagram",
+        "url": "https://instagram.com/sarbon_banquet_hall"
+      }
+    ],
+    "email": null,
+    "latitude": 41.346936,
+    "longitude": 69.366529,
+    "price": {
+      "kind": "negotiable",
+      "min": null,
+      "max": null,
+      "currency": "UZS",
+      "sourceText": ""
+    },
+    "images": [
+      {
+        "src": "/images/services/sarbon/17e6d169b605957392399f8f.webp",
+        "width": 1280,
+        "height": 853,
+        "alt": "Sarbon — 1"
+      },
+      {
+        "src": "/images/services/sarbon/d37afef3b74940050749d578.webp",
+        "width": 1280,
+        "height": 853,
+        "alt": "Sarbon — 2"
+      },
+      {
+        "src": "/images/services/sarbon/14b9537f04e7e1774c7091d5.webp",
+        "width": 1280,
+        "height": 853,
+        "alt": "Sarbon — 3"
+      },
+      {
+        "src": "/images/services/sarbon/10febe144acfa91269e8bc97.webp",
+        "width": 1280,
+        "height": 853,
+        "alt": "Sarbon — 4"
+      }
+    ],
+    "importedAt": "2026-11-15T16:37:34.901Z",
+    "featured": false
+  },
+  {
+    "slug": "ozbegim-restaurant",
+    "name": "Узбегим ресторан",
+    "categoryIds": [
+      "restaurant"
+    ],
+    "categoryLabel": "To‘yxonalar va Restoranlar",
+    "description": "",
+    "region": "Toshkent shahri",
+    "district": "Olmazor tumani",
+    "address": "Ташкент, Алмазарский район, махаллинский сход граждан Жийдали",
+    "phones": [
+      {
+        "label": "Asosiy",
+        "value": "+998977718485"
+      },
+      {
+        "label": "Qo‘shimcha",
+        "value": "+998996503333"
+      }
+    ],
+    "links": [
+      {
+        "label": "Telegram",
+        "url": "https://t.me/ozbegim_restaurant"
+      },
+      {
+        "label": "YouTube",
+        "url": "https://www.youtube.com/channel/UCMyndvfySH-DoRXBQIswq0g"
+      },
+      {
+        "label": "Facebook",
+        "url": "https://www.facebook.com/103807835700393"
+      }
+    ],
+    "email": null,
+    "latitude": 41.365267,
+    "longitude": 69.182498,
+    "price": {
+      "kind": "negotiable",
+      "min": null,
+      "max": null,
+      "currency": "UZS",
+      "sourceText": ""
+    },
+    "images": [
+      {
+        "src": "/images/services/ozbegim-restaurant/00b9c5e806579baae871dfa0.webp",
+        "width": 1080,
+        "height": 719,
+        "alt": "Узбегим ресторан — 1"
+      },
+      {
+        "src": "/images/services/ozbegim-restaurant/63eb3ff6bbc027e518b4d7fc.webp",
+        "width": 960,
+        "height": 1280,
+        "alt": "Узбегим ресторан — 2"
+      },
+      {
+        "src": "/images/services/ozbegim-restaurant/cd84b9f35f045d58727083d3.webp",
+        "width": 880,
+        "height": 1280,
+        "alt": "Узбегим ресторан — 3"
+      },
+      {
+        "src": "/images/services/ozbegim-restaurant/82f21c88aec4d0b1f5e2c15b.webp",
+        "width": 960,
+        "height": 1280,
+        "alt": "Узбегим ресторан — 4"
+      },
+      {
+        "src": "/images/services/ozbegim-restaurant/47a862988e8f16dd36b70ced.webp",
+        "width": 1280,
+        "height": 853,
+        "alt": "Узбегим ресторан — 5"
+      },
+      {
+        "src": "/images/services/ozbegim-restaurant/5217353fbc2f96a8577c737d.webp",
+        "width": 960,
+        "height": 1280,
+        "alt": "Узбегим ресторан — 6"
+      }
+    ],
+    "importedAt": "2026-11-15T16:50:44.901Z",
+    "featured": false
+  },
+  {
+    "slug": "olmos-toyxonasi",
+    "name": "Olmos",
+    "categoryIds": [
+      "restaurant"
+    ],
+    "categoryLabel": "To‘yxonalar va Restoranlar",
+    "description": "",
+    "region": "Toshkent shahri",
+    "district": "Uchtepa tumani",
+    "address": "Ташкент, Учтепинский район, массив Чиланзар, 24-й квартал, 31А",
+    "phones": [
+      {
+        "label": "Asosiy",
+        "value": "+998909002324"
+      },
+      {
+        "label": "Qo‘shimcha",
+        "value": "+998946027272"
+      }
+    ],
+    "links": [],
+    "email": null,
+    "latitude": 41.279688,
+    "longitude": 69.171328,
+    "price": {
+      "kind": "negotiable",
+      "min": null,
+      "max": null,
+      "currency": "UZS",
+      "sourceText": ""
+    },
+    "images": [
+      {
+        "src": "/images/services/olmos-toyxonasi/6efa7ac83125a5ba59285313.webp",
+        "width": 1280,
+        "height": 960,
+        "alt": "Olmos — 1"
+      },
+      {
+        "src": "/images/services/olmos-toyxonasi/b89c55ce49d5ab8b9bad9d79.webp",
+        "width": 366,
+        "height": 203,
+        "alt": "Olmos — 2"
+      },
+      {
+        "src": "/images/services/olmos-toyxonasi/9b9df7df0d02ef629bcb3a23.webp",
+        "width": 1280,
+        "height": 960,
+        "alt": "Olmos — 3"
+      },
+      {
+        "src": "/images/services/olmos-toyxonasi/8b2381102525492d7c7435a7.webp",
+        "width": 960,
+        "height": 1280,
+        "alt": "Olmos — 4"
+      },
+      {
+        "src": "/images/services/olmos-toyxonasi/97758f85a24942679f362c55.webp",
+        "width": 1024,
+        "height": 1280,
+        "alt": "Olmos — 5"
+      },
+      {
+        "src": "/images/services/olmos-toyxonasi/b5bcc6505bb1ea65d772fbff.webp",
+        "width": 960,
+        "height": 1280,
+        "alt": "Olmos — 6"
+      }
+    ],
+    "importedAt": "2026-11-15T16:38:01.236Z",
+    "featured": false
+  },
+  {
+    "slug": "dilorom",
+    "name": "Дилором",
+    "categoryIds": [
+      "restaurant"
+    ],
+    "categoryLabel": "To‘yxonalar va Restoranlar",
+    "description": "",
+    "region": "Toshkent shahri",
+    "district": "Uchtepa tumani",
+    "address": "Ташкент, Учтепинский район, массив Чиланзар, 23-й квартал, 17Б",
+    "phones": [
+      {
+        "label": "Asosiy",
+        "value": "+998874981616"
+      }
+    ],
+    "links": [],
+    "email": null,
+    "latitude": 41.285552,
+    "longitude": 69.17618,
+    "price": {
+      "kind": "negotiable",
+      "min": null,
+      "max": null,
+      "currency": "UZS",
+      "sourceText": ""
+    },
+    "images": [
+      {
+        "src": "/images/services/dilorom/892d5a4ba27aa338329cbd3f.webp",
+        "width": 1280,
+        "height": 576,
+        "alt": "Дилором — 1"
+      },
+      {
+        "src": "/images/services/dilorom/900741ff67e93a3d5fd84cc4.webp",
+        "width": 720,
+        "height": 1280,
+        "alt": "Дилором — 2"
+      },
+      {
+        "src": "/images/services/dilorom/f63a83f43b043456d36906e5.webp",
+        "width": 960,
+        "height": 720,
+        "alt": "Дилором — 3"
+      }
+    ],
+    "importedAt": "2026-11-15T16:50:50.887Z",
+    "featured": false
+  },
+  {
+    "slug": "kokcha-koshonasi",
+    "name": "Ko‘kcha koshonasi",
+    "categoryIds": [
+      "restaurant"
+    ],
+    "categoryLabel": "To‘yxonalar va Restoranlar",
+    "description": "",
+    "region": "Toshkent shahri",
+    "district": "",
+    "address": "Ташкент, улица Курганча, 50",
+    "phones": [
+      {
+        "label": "Asosiy",
+        "value": "+998909407760"
+      },
+      {
+        "label": "Qo‘shimcha",
+        "value": "+998908084325"
+      }
+    ],
+    "links": [],
+    "email": null,
+    "latitude": 41.327579,
+    "longitude": 69.198867,
+    "price": {
+      "kind": "negotiable",
+      "min": null,
+      "max": null,
+      "currency": "UZS",
+      "sourceText": ""
+    },
+    "images": [
+      {
+        "src": "/images/services/kokcha-koshonasi/48d20ff4b9973af7bdb0951f.webp",
+        "width": 590,
+        "height": 447,
+        "alt": "Ko‘kcha koshonasi — 1"
+      },
+      {
+        "src": "/images/services/kokcha-koshonasi/5f3e7b552dc5e49cbaed31b5.webp",
+        "width": 856,
+        "height": 642,
+        "alt": "Ko‘kcha koshonasi — 2"
+      },
+      {
+        "src": "/images/services/kokcha-koshonasi/bad1d02ee6c8fe2251896138.webp",
+        "width": 856,
+        "height": 1141,
+        "alt": "Ko‘kcha koshonasi — 3"
+      },
+      {
+        "src": "/images/services/kokcha-koshonasi/af66dde8ef3d1c5992b5b3fe.webp",
+        "width": 960,
+        "height": 1280,
+        "alt": "Ko‘kcha koshonasi — 4"
+      },
+      {
+        "src": "/images/services/kokcha-koshonasi/621b246979098e7de7d3f599.webp",
+        "width": 960,
+        "height": 1280,
+        "alt": "Ko‘kcha koshonasi — 5"
+      },
+      {
+        "src": "/images/services/kokcha-koshonasi/50ef5695c5dfc3af2bb9c987.webp",
+        "width": 960,
+        "height": 1280,
+        "alt": "Ko‘kcha koshonasi — 6"
+      }
+    ],
+    "importedAt": "2026-11-15T16:51:03.834Z",
+    "featured": false
+  },
+  {
+    "slug": "bahor-yunusota",
+    "name": "Бахор",
+    "categoryIds": [
+      "restaurant"
+    ],
+    "categoryLabel": "To‘yxonalar va Restoranlar",
+    "description": "",
+    "region": "Toshkent shahri",
+    "district": "",
+    "address": "Ташкент, улица Юнусата, 6А",
+    "phones": [
+      {
+        "label": "Asosiy",
+        "value": "+998880077008"
+      },
+      {
+        "label": "Qo‘shimcha",
+        "value": "+998983681911"
+      }
+    ],
+    "links": [
+      {
+        "label": "Veb-sayt",
+        "url": "https://restaurantbahor.uz/"
+      },
+      {
+        "label": "Instagram",
+        "url": "https://instagram.com/bahor.restaurant"
+      }
+    ],
+    "email": null,
+    "latitude": 41.37448,
+    "longitude": 69.305992,
+    "price": {
+      "kind": "negotiable",
+      "min": null,
+      "max": null,
+      "currency": "UZS",
+      "sourceText": ""
+    },
+    "images": [
+      {
+        "src": "/images/services/bahor-yunusota/b1184a6036c92f3a961c63f1.webp",
+        "width": 1280,
+        "height": 960,
+        "alt": "Бахор — 1"
+      },
+      {
+        "src": "/images/services/bahor-yunusota/5b786801e7ccdb06c08ad17c.webp",
+        "width": 1280,
+        "height": 720,
+        "alt": "Бахор — 2"
+      },
+      {
+        "src": "/images/services/bahor-yunusota/891a24731508a49c1c5dce49.webp",
+        "width": 720,
+        "height": 1280,
+        "alt": "Бахор — 3"
+      },
+      {
+        "src": "/images/services/bahor-yunusota/047fde10e9fcf677ede30e1d.webp",
+        "width": 1280,
+        "height": 720,
+        "alt": "Бахор — 4"
+      },
+      {
+        "src": "/images/services/bahor-yunusota/878be2d63423c285b9c7255c.webp",
+        "width": 335,
+        "height": 597,
+        "alt": "Бахор — 5"
+      }
+    ],
+    "importedAt": "2026-11-15T16:51:12.333Z",
+    "featured": false
+  },
+  {
+    "slug": "zuhriniso",
+    "name": "Зухринисо",
+    "categoryIds": [
+      "restaurant"
+    ],
+    "categoryLabel": "To‘yxonalar va Restoranlar",
+    "description": "",
+    "region": "Toshkent viloyati",
+    "district": "Toshkent tumani",
+    "address": "Ташкентский район, махаллинский сход граждан Икбол, улица ТХАЙ Ёкаси, 64",
+    "phones": [
+      {
+        "label": "Asosiy",
+        "value": "+998908100009"
+      },
+      {
+        "label": "Qo‘shimcha",
+        "value": "+998983085292"
+      }
+    ],
+    "links": [
+      {
+        "label": "Instagram",
+        "url": "https://instagram.com/zuhriniso.restorani"
+      },
+      {
+        "label": "Telegram",
+        "url": "https://t.me/+998983085292"
+      }
+    ],
+    "email": null,
+    "latitude": 41.373177,
+    "longitude": 69.323302,
+    "price": {
+      "kind": "negotiable",
+      "min": null,
+      "max": null,
+      "currency": "UZS",
+      "sourceText": ""
+    },
+    "images": [
+      {
+        "src": "/images/services/zuhriniso/8b1ac449a0aa77fe8b6f11a1.webp",
+        "width": 1280,
+        "height": 720,
+        "alt": "Зухринисо — 1"
+      },
+      {
+        "src": "/images/services/zuhriniso/30b735aa0b8bd2bb3284c190.webp",
+        "width": 1280,
+        "height": 1280,
+        "alt": "Зухринисо — 2"
+      },
+      {
+        "src": "/images/services/zuhriniso/239cc597d7647bc87bd945db.webp",
+        "width": 768,
+        "height": 576,
+        "alt": "Зухринисо — 3"
+      }
+    ],
+    "importedAt": "2026-11-15T16:51:20.736Z",
+    "featured": false
   }
 ]

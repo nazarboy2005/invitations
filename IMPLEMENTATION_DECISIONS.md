@@ -87,6 +87,7 @@ This file records durable, user-approved product requirements and a small number
 ## Services directory and partnerships
 
 - User requirement: the services directory supports reciprocal promotion with wedding halls; featured partner placement is for agreed partnerships. Imported listings do not establish a partnership or Fotiha verification.
+- User requirement: use a standalone scraper combining available Google Maps and Yandex Maps information field by field, preserving sources and flagging uncertain business matches and conflicts for review. Support link imports and practical name/location discovery, with configurable batches beyond the original 20-per-category seed target. Validate the scraper independently before separately authorized admin integration or public directory expansion.
 - User requirement: seed the 15 service categories from Chorlove's public listings, targeting 20 per category where available, and display 12 results per page. Save listing content and media with Fotiha so ordinary visits do not query the source site or a business-data API.
 - User requirement: display services prices in UZS, converting foreign-currency amounts rather than showing USD or relabeling the original number. Round estimates coarsely for readability (317,848 → 300,000 so‘m); use finer steps for amounts below 100,000 so‘m.
 - User requirement: “Taklifnomalar” in the services categories opens Fotiha's template catalog and displays its published template count.

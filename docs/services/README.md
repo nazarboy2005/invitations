@@ -2,6 +2,10 @@
 
 The initial directory is a local snapshot of the public Chorlove services pages, imported at the user's request. Public profiles and gallery files are delivered by Fotiha; viewing them does not fetch Chorlove pages, photographs, or Yandex business data.
 
+The user-approved Maps batch adds 30 regular wedding-hall profiles to that snapshot, bringing the category to 50. Its 153 selected photos are packaged locally, using one provider (Yandex) per hall. [maps-additions-selection.json](maps-additions-selection.json) records the approved slugs; [maps-additions-publication.json](maps-additions-publication.json) preserves source/media provenance separately from public listing data. Uncertain Google candidates were excluded; publication uses each hall's Yandex identity and contacts. Missing descriptions/emails stay empty, with only Seoul's explicit package/rental details added as factual price text. Food menus, unspecified event services and placeholder values do not establish wedding prices. Seoul's explicit per-person packages carry a `person` price unit and display `/ kishi`.
+
+`node scripts/publish-reviewed-map-services.mjs` applies that reviewed batch without replacing existing profiles. It uses the scraper's local output; it never scrapes at runtime. Re-runs preserve already published records. `node scripts/publish-reviewed-map-services.mjs --check` independently verifies all 30 published entries and their saved image hashes/dimensions from tracked publication evidence, without needing the ignored scraper output.
+
 ## Import
 
 Run from the repository root:
