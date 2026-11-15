@@ -1,9 +1,7 @@
 import type { MetadataRoute } from "next";
 import { getPublishedCatalogLastModified } from "@/server/catalog";
-import {
-  serviceCategories,
-  serviceListings,
-} from "@/modules/services/services-data";
+import { serviceCategories } from "@/modules/services/services-data";
+import { getPublishedServices } from "@/server/services";
 
 const CANONICAL_ORIGIN = "https://fotiha.uz";
 
@@ -11,6 +9,7 @@ export const dynamic = "force-dynamic";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const lastModified = await getPublishedCatalogLastModified();
+  const serviceListings = await getPublishedServices();
   const catalogPages: MetadataRoute.Sitemap = [
     { url: `${CANONICAL_ORIGIN}/` },
     { url: `${CANONICAL_ORIGIN}/templates` },

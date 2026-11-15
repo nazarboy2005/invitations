@@ -29,6 +29,7 @@ export function ServiceCard({
           {cover ? (
             <Image
               src={publicAsset(cover.src)}
+              unoptimized={cover.src.startsWith("/api/")}
               alt={cover.alt || listing.name}
               fill
               sizes="(max-width: 600px) 45vw, (max-width: 1050px) 43vw, 25vw"

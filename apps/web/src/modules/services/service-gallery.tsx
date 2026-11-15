@@ -181,6 +181,7 @@ export function ServiceGallery({
                 >
                   <Image
                     src={publicAsset(item.src)}
+                    unoptimized={item.src.startsWith("/api/")}
                     alt={item.alt || name}
                     fill
                     style={{ objectFit: "cover", objectPosition: "center" }}
@@ -249,6 +250,7 @@ export function ServiceGallery({
         <div className={styles.lightboxImage}>
           <Image
             src={publicAsset(image.src)}
+            unoptimized={image.src.startsWith("/api/")}
             alt={image.alt || name}
             fill
             sizes="95vw"

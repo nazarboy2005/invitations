@@ -1,5 +1,5 @@
 import { getDb } from "@taklifnoma/database";
-import { serviceListings } from "@/modules/services/services-data";
+import { getPublishedServices } from "./services";
 export async function listFavorites(userId: string, db = getDb()) {
   const rows =
     await db`SELECT service_slug,saved_at FROM service_favorites WHERE user_id=${userId} ORDER BY saved_at DESC,service_slug`;
@@ -14,7 +14,7 @@ export async function mergeFavorites(
   savedAt: Record<string, string> = {},
   db = getDb(),
 ) {
-  const known = new Set(serviceListings.map((item) => item.slug));
+  const known = new Set((await getPublishedServices()).map((item) => item.slug));
   const entries = [...new Set(ids)]
     .filter((id) => known.has(id))
     .map((id, index) => ({

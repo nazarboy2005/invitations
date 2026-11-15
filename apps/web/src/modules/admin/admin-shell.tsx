@@ -11,6 +11,8 @@ import {
   AdminTopbarActions,
 } from "./admin-sidebar-navigation";
 const descriptions: Record<string, string> = {
+  services:
+    "Servislar, hamkorlar va import qilingan ma’lumotlarni ko‘rib chiqing va nashr qiling.",
   requests:
     "Ism tuzatishlari va sana ko‘chirish so‘rovlarini tekshiring va qarorni tarixga yozing.",
   users:
@@ -29,6 +31,7 @@ const descriptions: Record<string, string> = {
   activity: "Kim, qachon va nimani o‘zgartirganini ko‘ring.",
 };
 const headings: Record<string, string> = {
+  services: "Servislar",
   requests: "Tuzatish so‘rovlari",
   users: "Foydalanuvchilar",
   invitations: "Taklifnomalar",

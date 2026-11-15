@@ -26,6 +26,8 @@ import {
   type PaymentAnalyticsPeriod,
 } from "@/server/payment-analytics";
 import { AdminPaymentAnalytics } from "@/modules/admin/admin-analytics-payments";
+import { AdminServices } from "@/modules/admin/admin-services";
+import { listAdminServices } from "@/server/admin-services";
 export const dynamic = "force-dynamic";
 export const metadata = {
   title: "Boshqaruv",
@@ -63,6 +65,7 @@ export default async function AdminPage({
     "analytics",
     "broadcasts",
     "templates",
+    "services",
     "categories",
     "music",
     "activity",
@@ -128,6 +131,9 @@ export default async function AdminPage({
         />
       )}
       {view === "music" && <AdminMusicLibrary />}
+      {view === "services" && (
+        <AdminServices initialItems={await listAdminServices()} />
+      )}
       {view === "activity" && <AdminAudit entries={await getAdminAudit()} />}
     </AdminShell>
   );

@@ -54,6 +54,12 @@ export function adminError(error: unknown) {
 }
 
 type AdminAction =
+  | "service.create"
+  | "service.update"
+  | "service.publish"
+  | "service.unpublish"
+  | "service.archive"
+  | "service.import"
   | "template.update"
   | "category.create"
   | "category.update"

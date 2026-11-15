@@ -1,6 +1,12 @@
 import type { getAdminAudit } from "@/server/admin";
 import styles from "./admin.module.css";
 const actions: Record<string, string> = {
+  "service.create": "Servis qo‘shildi",
+  "service.update": "Servis qoralamasi yangilandi",
+  "service.publish": "Servis nashr qilindi",
+  "service.unpublish": "Servis nashrdan olindi",
+  "service.archive": "Servis arxivlandi",
+  "service.import": "Servis importi boshqarildi",
   "invitation.review_correction": "Tuzatish so‘rovi ko‘rib chiqildi",
   "template.update": "Dizayn yangilandi",
   "category.create": "Kategoriya yaratildi",

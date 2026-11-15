@@ -1,0 +1,857 @@
+"use client";
+
+import { useEffect, useRef, useState, type FormEvent } from "react";
+import {
+  ArrowDown,
+  ArrowLeft,
+  ArrowUp,
+  Eye,
+  Plus,
+  Save,
+  Star,
+  Trash2,
+  Upload,
+  X,
+} from "lucide-react";
+import { ConfirmationDialog } from "@/components/confirmation-dialog";
+import { publicAsset } from "@/lib/public-asset";
+import { ServiceDetail } from "@/modules/services/service-detail";
+import {
+  serviceCategoryChoices,
+  serviceEditorSchema,
+  type ServiceEditor,
+  type ServiceRecord,
+} from "@/modules/services/service-editor-contract";
+import { useAdminDirty } from "./admin-navigation-guard";
+import { servicesRequest } from "./service-admin-request";
+import { ServiceImportEvidence } from "./service-imports";
+import styles from "./admin-services.module.css";
+
+export function ServiceEditorPanel({
+  initial,
+  onSaved,
+  onClose,
+}: {
+  initial: ServiceRecord;
+  onSaved: (item: ServiceRecord) => void;
+  onClose: () => void;
+}) {
+  const [record, setRecord] = useState(initial);
+  const [draft, setDraft] = useState<ServiceEditor>(initial.draft);
+  const [busy, setBusy] = useState(false),
+    [error, setError] = useState(""),
+    [notice, setNotice] = useState("");
+  const [reviewed, setReviewed] = useState(false),
+    [preview, setPreview] = useState(false);
+  const [confirm, setConfirm] = useState<"unpublish" | "archive" | null>(null);
+  const dirty = JSON.stringify(draft) !== JSON.stringify(record.draft);
+  const leave = useAdminDirty(dirty);
+  useEffect(() => {
+    if (!dirty) return;
+    const unload = (e: BeforeUnloadEvent) => {
+      e.preventDefault();
+      e.returnValue = "";
+    };
+    window.addEventListener("beforeunload", unload);
+    return () => window.removeEventListener("beforeunload", unload);
+  }, [dirty]);
+  function patch<K extends keyof ServiceEditor>(
+    key: K,
+    value: ServiceEditor[K],
+  ) {
+    setDraft((d) => ({ ...d, [key]: value }));
+  }
+  async function save(intent: "save" | "publish" | "unpublish" | "archive") {
+    setError("");
+    setNotice("");
+    const parsed = serviceEditorSchema.safeParse(draft);
+    if (!parsed.success) {
+      setError(
+        parsed.error.issues
+          .map((i) => `${i.path.join(".")}: ${i.message}`)
+          .join(" "),
+      );
+      return;
+    }
+    setBusy(true);
+    try {
+      const { item } = await servicesRequest(
+        record.revision
+          ? `/api/admin/services/${record.slug}`
+          : "/api/admin/services",
+        { revision: record.revision, intent, listing: parsed.data, reviewed },
+        record.revision ? "PATCH" : "POST",
+      );
+      setRecord(item);
+      setDraft(item.draft);
+      setReviewed(false);
+      onSaved(item);
+      setNotice(
+        intent === "publish"
+          ? "Servis nashr qilindi. Saytda hozir ko‘rinadi."
+          : intent === "unpublish"
+            ? "Servis nashrdan olindi."
+            : intent === "archive"
+              ? "Servis arxivlandi."
+              : "Qoralama saqlandi. Nashr qilingan versiya o‘zgarmadi.",
+      );
+    } catch (e) {
+      setError((e as Error).message);
+    } finally {
+      setBusy(false);
+    }
+  }
+  function submit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const intent = (e.nativeEvent as SubmitEvent).submitter?.getAttribute(
+      "value",
+    );
+    void save(intent === "publish" ? "publish" : "save");
+  }
+  async function upload(files: FileList | null) {
+    if (!files?.length) return;
+    if (files.length + draft.images.length > 20) {
+      setError("Ko‘pi bilan 20 rasm tanlang.");
+      return;
+    }
+    setBusy(true);
+    setError("");
+    try {
+      for (const file of Array.from(files)) {
+        if (file.size > 12 * 1024 * 1024)
+          throw new Error("Har bir rasm 12 MB dan kichik bo‘lsin.");
+        const response = await fetch("/api/admin/services/images", {
+          method: "POST",
+          headers: { "Content-Type": file.type || "application/octet-stream" },
+          body: file,
+        });
+        const data = await response.json();
+        if (!response.ok)
+          throw new Error(data.error?.message ?? "Rasm yuklanmadi.");
+        setDraft((d) => ({
+          ...d,
+          images: [...d.images, { ...data.image, alt: d.name }],
+        }));
+      }
+    } catch (e) {
+      setError((e as Error).message);
+    } finally {
+      setBusy(false);
+    }
+  }
+  function moveImage(index: number, step: number) {
+    const images = [...draft.images],
+      other = index + step;
+    [images[index], images[other]] = [images[other], images[index]];
+    patch("images", images);
+  }
+  return (
+    <div className={styles.root}>
+      <div className={styles.editorHeading}>
+        <button
+          type="button"
+          className={styles.back}
+          disabled={busy}
+          onClick={() => leave(onClose)}
+        >
+          <ArrowLeft size={17} /> Servislarga qaytish
+        </button>
+        <span className={styles.badge} data-status={record.status}>
+          {record.status === "published"
+            ? "Nashr qilingan"
+            : record.status === "archived"
+              ? "Arxiv"
+              : "Qoralama"}
+          {dirty ? " · saqlanmagan" : ""}
+        </span>
+      </div>
+      <form onSubmit={submit}>
+        <div className={styles.editorTitle}>
+          <div>
+            <h2>{record.revision ? record.draft.name : "Yangi servis"}</h2>
+            <p>
+              {record.published
+                ? "Saqlash qoralamani yangilaydi. O‘zgarishlarni saytda ko‘rsatish uchun nashr qiling."
+                : "Ma’lumotlarni to‘ldiring va nashrdan oldin tekshiring."}
+            </p>
+          </div>
+          <button
+            type="button"
+            onClick={() => setPreview(true)}
+            className={styles.secondary}
+          >
+            <Eye size={16} /> Ko‘rib chiqish
+          </button>
+        </div>
+        {error && (
+          <p className={styles.error} role="alert">
+            {error}
+          </p>
+        )}
+        {notice && (
+          <p className={styles.success} role="status">
+            {notice}
+          </p>
+        )}
+        {record.evidence && (
+          <ServiceImportEvidence evidence={record.evidence} />
+        )}
+        <fieldset disabled={busy} className={styles.editorFields}>
+          <div className={styles.editorColumns}>
+            <div className={styles.sections}>
+              <section className={styles.panel}>
+                <h3>Asosiy ma’lumotlar</h3>
+                <div className={styles.fieldGrid}>
+                  <label className={styles.wide}>
+                    Servis nomi
+                    <input
+                      required
+                      maxLength={180}
+                      value={draft.name}
+                      onChange={(e) => {
+                        const name = e.target.value;
+                        setDraft((d) => ({
+                          ...d,
+                          name,
+                          ...(!record.revision &&
+                          (!d.slug ||
+                            d.slug ===
+                              d.name
+                                .normalize("NFKD")
+                                .toLowerCase()
+                                .replace(/[^a-z0-9]+/g, "-")
+                                .replace(/^-|-$/g, "")
+                                .slice(0, 100))
+                            ? {
+                                slug: name
+                                  .normalize("NFKD")
+                                  .toLowerCase()
+                                  .replace(/[^a-z0-9]+/g, "-")
+                                  .replace(/^-|-$/g, "")
+                                  .slice(0, 100),
+                              }
+                            : {}),
+                        }));
+                      }}
+                    />
+                  </label>
+                  <label className={styles.wide}>
+                    Havola nomi
+                    <input
+                      required
+                      pattern="[a-z0-9]+(-[a-z0-9]+)*"
+                      maxLength={100}
+                      readOnly={record.revision > 0}
+                      value={draft.slug}
+                      onChange={(e) => patch("slug", e.target.value)}
+                    />
+                    <small>
+                      /services/b/{draft.slug || "servis-nomi"}
+                      {record.revision > 0 && " · doimiy havola"}
+                    </small>
+                  </label>
+                  <div className={styles.wide}>
+                    <span className={styles.fieldLabel}>Kategoriyalar</span>
+                    <div className={styles.categoryChecks}>
+                      {serviceCategoryChoices.map((c) => (
+                        <label key={c.id}>
+                          <input
+                            type="checkbox"
+                            checked={draft.categoryIds.includes(c.id)}
+                            onChange={(e) => {
+                              const ids = e.target.checked
+                                ? [...draft.categoryIds, c.id]
+                                : draft.categoryIds.filter((id) => id !== c.id);
+                              patch("categoryIds", ids);
+                              patch(
+                                "categoryLabel",
+                                serviceCategoryChoices
+                                  .filter((c) => ids.includes(c.id))
+                                  .map((c) => c.name)
+                                  .join(", "),
+                              );
+                            }}
+                          />
+                          {c.name}
+                        </label>
+                      ))}
+                    </div>
+                  </div>
+                  <label className={styles.wide}>
+                    Kategoriya tavsifi
+                    <input
+                      value={draft.categoryLabel}
+                      maxLength={180}
+                      onChange={(e) => patch("categoryLabel", e.target.value)}
+                    />
+                  </label>
+                  <label className={styles.wide}>
+                    Tavsif
+                    <textarea
+                      rows={7}
+                      maxLength={12000}
+                      value={draft.description}
+                      onChange={(e) => patch("description", e.target.value)}
+                      placeholder="Tashkilot haqida tekshirilgan ma’lumotlar…"
+                    />
+                  </label>
+                </div>
+              </section>
+              <section className={styles.panel}>
+                <h3>Manzil va joylashuv</h3>
+                <div className={styles.fieldGrid}>
+                  <label>
+                    Viloyat / shahar
+                    <input
+                      value={draft.region}
+                      maxLength={120}
+                      onChange={(e) => patch("region", e.target.value)}
+                      placeholder="Toshkent shahri"
+                    />
+                  </label>
+                  <label>
+                    Tuman
+                    <input
+                      value={draft.district}
+                      maxLength={120}
+                      onChange={(e) => patch("district", e.target.value)}
+                    />
+                  </label>
+                  <label className={styles.wide}>
+                    To‘liq manzil
+                    <textarea
+                      rows={2}
+                      value={draft.address}
+                      maxLength={600}
+                      onChange={(e) => patch("address", e.target.value)}
+                    />
+                  </label>
+                  <label>
+                    Kenglik (latitude)
+                    <input
+                      type="number"
+                      min={-90}
+                      max={90}
+                      step="any"
+                      value={draft.latitude ?? ""}
+                      onChange={(e) =>
+                        patch(
+                          "latitude",
+                          e.target.value === "" ? null : Number(e.target.value),
+                        )
+                      }
+                    />
+                  </label>
+                  <label>
+                    Uzunlik (longitude)
+                    <input
+                      type="number"
+                      min={-180}
+                      max={180}
+                      step="any"
+                      value={draft.longitude ?? ""}
+                      onChange={(e) =>
+                        patch(
+                          "longitude",
+                          e.target.value === "" ? null : Number(e.target.value),
+                        )
+                      }
+                    />
+                  </label>
+                </div>
+              </section>
+              <section className={styles.panel}>
+                <h3>Aloqa ma’lumotlari</h3>
+                <div className={styles.dynamicFields}>
+                  <span className={styles.fieldLabel}>Telefonlar</span>
+                  {draft.phones.map((phone, index) => (
+                    <div className={styles.contactRow} key={index}>
+                      <input
+                        aria-label={`Telefon ${index + 1} nomi`}
+                        value={phone.label}
+                        placeholder="Nomi"
+                        maxLength={80}
+                        onChange={(e) =>
+                          patch(
+                            "phones",
+                            draft.phones.map((p, i) =>
+                              i === index ? { ...p, label: e.target.value } : p,
+                            ),
+                          )
+                        }
+                      />
+                      <input
+                        type="tel"
+                        aria-label={`Telefon ${index + 1}`}
+                        value={phone.value}
+                        placeholder="+998…"
+                        maxLength={50}
+                        onChange={(e) =>
+                          patch(
+                            "phones",
+                            draft.phones.map((p, i) =>
+                              i === index ? { ...p, value: e.target.value } : p,
+                            ),
+                          )
+                        }
+                      />
+                      <button
+                        type="button"
+                        aria-label={`Telefon ${index + 1} ni olib tashlash`}
+                        onClick={() =>
+                          patch(
+                            "phones",
+                            draft.phones.filter((_, i) => i !== index),
+                          )
+                        }
+                      >
+                        <X size={16} />
+                      </button>
+                    </div>
+                  ))}
+                  <button
+                    type="button"
+                    className={styles.add}
+                    disabled={draft.phones.length >= 10}
+                    onClick={() =>
+                      patch("phones", [
+                        ...draft.phones,
+                        { label: "Telefon", value: "" },
+                      ])
+                    }
+                  >
+                    <Plus size={15} /> Telefon qo‘shish
+                  </button>
+                  <label>
+                    Email
+                    <input
+                      type="email"
+                      value={draft.email ?? ""}
+                      maxLength={254}
+                      onChange={(e) => patch("email", e.target.value || null)}
+                    />
+                  </label>
+                  <span className={styles.fieldLabel}>
+                    Sayt va ijtimoiy tarmoqlar
+                  </span>
+                  {draft.links.map((link, index) => (
+                    <div className={styles.contactRow} key={index}>
+                      <input
+                        aria-label={`Havola ${index + 1} nomi`}
+                        value={link.label}
+                        placeholder="Instagram"
+                        maxLength={80}
+                        onChange={(e) =>
+                          patch(
+                            "links",
+                            draft.links.map((p, i) =>
+                              i === index ? { ...p, label: e.target.value } : p,
+                            ),
+                          )
+                        }
+                      />
+                      <input
+                        type="url"
+                        aria-label={`Havola ${index + 1}`}
+                        value={link.url}
+                        placeholder="https://…"
+                        maxLength={2000}
+                        onChange={(e) =>
+                          patch(
+                            "links",
+                            draft.links.map((p, i) =>
+                              i === index ? { ...p, url: e.target.value } : p,
+                            ),
+                          )
+                        }
+                      />
+                      <button
+                        type="button"
+                        aria-label={`Havola ${index + 1} ni olib tashlash`}
+                        onClick={() =>
+                          patch(
+                            "links",
+                            draft.links.filter((_, i) => i !== index),
+                          )
+                        }
+                      >
+                        <X size={16} />
+                      </button>
+                    </div>
+                  ))}
+                  <button
+                    type="button"
+                    className={styles.add}
+                    disabled={draft.links.length >= 15}
+                    onClick={() =>
+                      patch("links", [...draft.links, { label: "", url: "" }])
+                    }
+                  >
+                    <Plus size={15} /> Havola qo‘shish
+                  </button>
+                </div>
+              </section>
+              <section className={styles.panel}>
+                <div className={styles.sectionHeading}>
+                  <div>
+                    <h3>Rasmlar</h3>
+                    <p>
+                      Birinchi rasm muqova bo‘ladi. {draft.images.length} / 20
+                    </p>
+                  </div>
+                  <label className={styles.upload}>
+                    <Upload size={16} /> Rasm yuklash
+                    <input
+                      type="file"
+                      accept="image/jpeg,image/png,image/webp,image/avif"
+                      multiple
+                      onChange={(e) => {
+                        void upload(e.target.files);
+                        e.target.value = "";
+                      }}
+                    />
+                  </label>
+                </div>
+                <div className={styles.gallery}>
+                  {draft.images.map((image, index) => (
+                    <div className={styles.galleryItem} key={image.src + index}>
+                      <div className={styles.galleryPhoto}>
+                        <img
+                          src={publicAsset(image.src)}
+                          alt={image.alt || draft.name}
+                          width={image.width}
+                          height={image.height}
+                        />
+                        {index === 0 && <span>Muqova</span>}
+                      </div>
+                      <input
+                        aria-label={`Rasm ${index + 1} tavsifi`}
+                        value={image.alt}
+                        maxLength={300}
+                        placeholder="Rasm tavsifi"
+                        onChange={(e) =>
+                          patch(
+                            "images",
+                            draft.images.map((p, i) =>
+                              i === index ? { ...p, alt: e.target.value } : p,
+                            ),
+                          )
+                        }
+                      />
+                      <div className={styles.imageActions}>
+                        <button
+                          type="button"
+                          aria-label={`Rasm ${index + 1} oldinga`}
+                          disabled={index === 0}
+                          onClick={() => moveImage(index, -1)}
+                        >
+                          <ArrowUp size={15} />
+                        </button>
+                        <button
+                          type="button"
+                          aria-label={`Rasm ${index + 1} orqaga`}
+                          disabled={index === draft.images.length - 1}
+                          onClick={() => moveImage(index, 1)}
+                        >
+                          <ArrowDown size={15} />
+                        </button>
+                        <button
+                          type="button"
+                          aria-label={`Rasm ${index + 1} ni olib tashlash`}
+                          onClick={() =>
+                            patch(
+                              "images",
+                              draft.images.filter((_, i) => i !== index),
+                            )
+                          }
+                        >
+                          <Trash2 size={15} />
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                {!draft.images.length && (
+                  <p className={styles.hint}>
+                    Nashr qilish uchun kamida bitta rasm yuklang.
+                  </p>
+                )}
+              </section>
+            </div>
+            <aside className={styles.sections}>
+              <section className={styles.panel}>
+                <h3>
+                  <Star size={17} /> Katalogdagi joylashuv
+                </h3>
+                <label className={styles.checkbox}>
+                  <input
+                    type="checkbox"
+                    checked={draft.featured}
+                    onChange={(e) => patch("featured", e.target.checked)}
+                  />{" "}
+                  Hamkor sifatida ajratish
+                </label>
+                <p className={styles.hint}>
+                  Faqat hamkorlik kelishuvi bor servisni belgilang. Hamkorlar
+                  birinchi chiqadi va “Hamkor” belgisi ko‘rinadi.
+                </p>
+                {draft.featured && (
+                  <label>
+                    Hamkorlar orasidagi ustuvorlik
+                    <input
+                      type="number"
+                      min={0}
+                      max={100000}
+                      value={draft.featuredOrder ?? 0}
+                      onChange={(e) =>
+                        patch("featuredOrder", Number(e.target.value))
+                      }
+                    />
+                    <small>
+                      Kichik son oldin chiqadi. Teng bo‘lsa katalog tartibi
+                      saqlanadi.
+                    </small>
+                  </label>
+                )}
+                <p className={styles.hint}>
+                  Oddiy yangi servis o‘z kategoriyasi oxiriga qo‘shiladi.
+                </p>
+              </section>
+              <section className={styles.panel}>
+                <h3>Narx</h3>
+                <div className={styles.dynamicFields}>
+                  <label>
+                    Narx turi
+                    <select
+                      value={draft.price.kind}
+                      onChange={(e) =>
+                        patch("price", {
+                          ...draft.price,
+                          kind: e.target
+                            .value as ServiceEditor["price"]["kind"],
+                        })
+                      }
+                    >
+                      <option value="negotiable">Kelishuv asosida</option>
+                      <option value="fixed">Aniq narx</option>
+                      <option value="from">Boshlang‘ich narx</option>
+                      <option value="range">Narx oralig‘i</option>
+                    </select>
+                  </label>
+                  {draft.price.kind !== "negotiable" && (
+                    <>
+                      <label>
+                        {draft.price.kind === "range"
+                          ? "Eng past narx"
+                          : "Narx"}
+                        <input
+                          type="number"
+                          min={1}
+                          max={1e12}
+                          step="any"
+                          value={draft.price.min ?? ""}
+                          onChange={(e) =>
+                            patch("price", {
+                              ...draft.price,
+                              min:
+                                e.target.value === ""
+                                  ? null
+                                  : Number(e.target.value),
+                            })
+                          }
+                        />
+                      </label>
+                      {draft.price.kind === "range" && (
+                        <label>
+                          Eng yuqori narx
+                          <input
+                            type="number"
+                            min={1}
+                            max={1e12}
+                            step="any"
+                            value={draft.price.max ?? ""}
+                            onChange={(e) =>
+                              patch("price", {
+                                ...draft.price,
+                                max:
+                                  e.target.value === ""
+                                    ? null
+                                    : Number(e.target.value),
+                              })
+                            }
+                          />
+                        </label>
+                      )}
+                      <label>
+                        Valyuta
+                        <select
+                          value={draft.price.currency}
+                          onChange={(e) =>
+                            patch("price", {
+                              ...draft.price,
+                              currency: e.target.value as "UZS" | "USD",
+                            })
+                          }
+                        >
+                          <option value="UZS">UZS — so‘m</option>
+                          <option value="USD">USD — dollardan hisoblash</option>
+                        </select>
+                      </label>
+                      <label className={styles.checkbox}>
+                        <input
+                          type="checkbox"
+                          checked={draft.price.unit === "person"}
+                          onChange={(e) => {
+                            const { unit: _, ...price } = draft.price;
+                            patch(
+                              "price",
+                              e.target.checked
+                                ? { ...price, unit: "person" }
+                                : price,
+                            );
+                          }}
+                        />{" "}
+                        Bir kishi uchun
+                      </label>
+                    </>
+                  )}
+                  <label>
+                    Narx manbasi / shartlari
+                    <textarea
+                      rows={3}
+                      value={draft.price.sourceText}
+                      maxLength={2000}
+                      onChange={(e) =>
+                        patch("price", {
+                          ...draft.price,
+                          sourceText: e.target.value,
+                        })
+                      }
+                    />
+                  </label>
+                  <p className={styles.hint}>
+                    Saytda UZS va yaxlitlangan qiymat ko‘rinadi. Taomlar
+                    menyusidan to‘y narxini hisoblamang.
+                  </p>
+                </div>
+              </section>
+              {record.revision > 0 && (
+                <section className={styles.panel}>
+                  <h3>Nashr holati</h3>
+                  <p className={styles.hint}>
+                    Yangilangan:{" "}
+                    {new Date(record.updatedAt).toLocaleString("uz-UZ")}
+                  </p>
+                  {record.published && (
+                    <button
+                      type="button"
+                      className={styles.secondary}
+                      onClick={() => setConfirm("unpublish")}
+                    >
+                      Nashrdan olish
+                    </button>
+                  )}
+                  {record.status !== "archived" && (
+                    <button
+                      type="button"
+                      className={styles.danger}
+                      onClick={() => setConfirm("archive")}
+                    >
+                      Arxivlash
+                    </button>
+                  )}
+                </section>
+              )}
+            </aside>
+          </div>
+          <div className={styles.savebar}>
+            <div>
+              {record.reviewRequired && (
+                <label className={styles.checkbox}>
+                  <input
+                    type="checkbox"
+                    checked={reviewed}
+                    onChange={(e) => setReviewed(e.target.checked)}
+                  />{" "}
+                  Manbalar, kontaktlar, narx va rasmlarni tekshirdim
+                </label>
+              )}
+              {busy && <span role="status">Saqlanmoqda…</span>}
+            </div>
+            <div>
+              <button type="submit" value="save" className={styles.secondary}>
+                <Save size={16} /> Qoralamani saqlash
+              </button>
+              <button
+                type="submit"
+                value="publish"
+                className={styles.primary}
+                disabled={record.reviewRequired && !reviewed}
+              >
+                Nashr qilish
+              </button>
+            </div>
+          </div>
+        </fieldset>
+      </form>
+      {preview && (
+        <ServicePreview listing={draft} onClose={() => setPreview(false)} />
+      )}
+      {confirm && (
+        <ConfirmationDialog
+          title={
+            confirm === "archive"
+              ? "Servisni arxivlash"
+              : "Servisni nashrdan olish"
+          }
+          description="Servis saytdan olinadi. Saqlangan ma’lumotlarni keyin tahrirlash va qayta nashr qilish mumkin."
+          confirmLabel={confirm === "archive" ? "Arxivlash" : "Nashrdan olish"}
+          cancelLabel="Bekor qilish"
+          onCancel={() => setConfirm(null)}
+          onConfirm={() => {
+            const intent = confirm;
+            setConfirm(null);
+            void save(intent);
+          }}
+        />
+      )}
+    </div>
+  );
+}
+function ServicePreview({
+  listing,
+  onClose,
+}: {
+  listing: ServiceEditor;
+  onClose: () => void;
+}) {
+  const dialog = useRef<HTMLDialogElement>(null);
+  useEffect(() => {
+    const el = dialog.current!;
+    el.showModal();
+    return () => el.close();
+  }, []);
+  return (
+    <dialog
+      className={styles.preview}
+      ref={dialog}
+      onCancel={(e) => {
+        e.preventDefault();
+        onClose();
+      }}
+      aria-label="Servisning nashrdan oldingi ko‘rinishi"
+    >
+      <div className={styles.previewBar}>
+        <span>Nashrdan oldingi ko‘rinish · qoralama</span>
+        <button
+          autoFocus
+          onClick={onClose}
+          aria-label="Ko‘rib chiqishni yopish"
+        >
+          <X size={20} />
+        </button>
+      </div>
+      <ServiceDetail listing={listing} />
+    </dialog>
+  );
+}

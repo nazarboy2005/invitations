@@ -35,7 +35,9 @@ const templateCount = templatesHtml.match(
 assert.ok(templateCount, "template catalog exposes its published count");
 assert.match(
   directoryHtml,
-  new RegExp(`Taklifnomalar</span><small>${templateCount}</small>`),
+  new RegExp(
+    `Taklifnomalar</span>(?:</span>)?<small>(?:<!--.*?-->)*${templateCount}</small>`,
+  ),
 );
 assert.match(
   directoryHtml,

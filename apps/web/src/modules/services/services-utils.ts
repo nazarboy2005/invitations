@@ -35,6 +35,7 @@ export type ServiceListing = {
   images: ServiceImage[];
   importedAt: string;
   featured: boolean;
+  featuredOrder?: number;
 };
 
 export const SERVICES_PAGE_SIZE = 12;
@@ -151,6 +152,9 @@ export function serviceDirectory(
     .sort(
       (a, b) =>
         Number(b.listing.featured) - Number(a.listing.featured) ||
+        (a.listing.featured && b.listing.featured
+          ? (a.listing.featuredOrder ?? 0) - (b.listing.featuredOrder ?? 0)
+          : 0) ||
         (category ? a.index - b.index : a.rank - b.rank),
     );
   const pages = Math.max(1, Math.ceil(ranked.length / SERVICES_PAGE_SIZE));

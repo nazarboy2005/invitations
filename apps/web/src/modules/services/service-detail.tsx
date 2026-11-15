@@ -16,7 +16,6 @@ import { ServiceCard } from "./service-card";
 import {
   serviceCategories,
   serviceExternalUrl,
-  serviceListings,
   serviceLocation,
   serviceMapUrl,
   servicePhoneUrl,
@@ -25,7 +24,13 @@ import {
 } from "./services-data";
 import styles from "./services.module.css";
 
-export function ServiceDetail({ listing }: { listing: ServiceListing }) {
+export function ServiceDetail({
+  listing,
+  serviceListings = [],
+}: {
+  listing: ServiceListing;
+  serviceListings?: ServiceListing[];
+}) {
   const category = serviceCategories.find((item) =>
     listing.categoryIds.includes(item.id),
   );

@@ -16,6 +16,7 @@ import {
   ShieldCheck,
   Users,
   Wallet,
+  Store,
 } from "lucide-react";
 import styles from "./admin.module.css";
 
@@ -26,6 +27,7 @@ const sections = [
   { id: "payments", label: "To‘lovlar registri", icon: Wallet },
   { id: "broadcasts", label: "Xabarlar", icon: Send },
   { id: "templates", label: "Dizaynlar", icon: LayoutGrid },
+  { id: "services", label: "Servislar", icon: Store },
   { id: "categories", label: "Kategoriyalar", icon: ListFilter },
   { id: "music", label: "Musiqa", icon: Music2 },
   { id: "activity", label: "O‘zgarishlar tarixi", icon: History },
