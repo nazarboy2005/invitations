@@ -84,6 +84,14 @@ This file records durable, user-approved product requirements and a small number
 - Keep the Step 4 music picker compact and unified: search opens one list containing bundled and creator-uploaded tracks, with preview controls beside each title and no separate player after selection. Keep chooser details to title, creator, and duration; show a scrubber instead of creator/duration while a track plays. Keep source and license records with the library and public credits rather than in the picker.
 - Preserve each track's source record and required attribution. Composition status alone does not establish recording rights; exclude recordings whose source permissions are unclear. Track-level metadata and assets live with the music library rather than in this decision record.
 
+## Services directory and partnerships
+
+- User requirement: the services directory supports reciprocal promotion with wedding halls; featured partner placement is for agreed partnerships. Imported listings do not establish a partnership or Fotiha verification.
+- User requirement: seed the 15 service categories from Chorlove's public listings, targeting 20 per category where available, and display 12 results per page. Save listing content and media with Fotiha so ordinary visits do not query the source site or a business-data API.
+- User requirement: display services prices in UZS, converting foreign-currency amounts rather than showing USD or relabeling the original number. Round estimates coarsely for readability (317,848 → 300,000 so‘m); use finer steps for amounts below 100,000 so‘m.
+- User requirement: “Taklifnomalar” in the services categories opens Fotiha's template catalog and displays its published template count.
+- User requirement: desktop navigation places “Servislar” after “Shablonlar” and before “Bog‘lanish”. Mobile bottom navigation replaces Favorites with “Servislar”; Favorites remains available at the top right as a heart icon without visible text.
+
 ## Record maintenance
 
 - Add only durable, confirmed product requirements or corrections likely to guide future work. Distinguish user requirements, recommendations, and unresolved questions when those distinctions matter.

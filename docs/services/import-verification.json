@@ -1,0 +1,37 @@
+{
+  "profiles": 277,
+  "galleryImages": 1844,
+  "uniqueImagePaths": 1839,
+  "errors": [],
+  "unusedImporterDirectories": [],
+  "unusedFilesInRetainedDirectories": [],
+  "cleanup": {
+    "removedImporterDirectories": [
+      "D:\\Projects\\Fotiha\\Website\\apps\\web\\public\\images\\services\\abu-catering",
+      "D:\\Projects\\Fotiha\\Website\\apps\\web\\public\\images\\services\\ark-osiyo-toy-va-banket-keytering-xizmati",
+      "D:\\Projects\\Fotiha\\Website\\apps\\web\\public\\images\\services\\catering-city",
+      "D:\\Projects\\Fotiha\\Website\\apps\\web\\public\\images\\services\\cheff-jam-toy-va-banket-keytering-xizmati",
+      "D:\\Projects\\Fotiha\\Website\\apps\\web\\public\\images\\services\\eveca-catering",
+      "D:\\Projects\\Fotiha\\Website\\apps\\web\\public\\images\\services\\ideal-catering",
+      "D:\\Projects\\Fotiha\\Website\\apps\\web\\public\\images\\services\\ideal-prokat-uz-toy-va-banket-keytering-xizmati",
+      "D:\\Projects\\Fotiha\\Website\\apps\\web\\public\\images\\services\\jafar-catering",
+      "D:\\Projects\\Fotiha\\Website\\apps\\web\\public\\images\\services\\kamron077-toy-va-banket-keytering-xizmati",
+      "D:\\Projects\\Fotiha\\Website\\apps\\web\\public\\images\\services\\luna-catering",
+      "D:\\Projects\\Fotiha\\Website\\apps\\web\\public\\images\\services\\marosim-catering",
+      "D:\\Projects\\Fotiha\\Website\\apps\\web\\public\\images\\services\\million-servis-toy-va-banket-keytering-xizmati",
+      "D:\\Projects\\Fotiha\\Website\\apps\\web\\public\\images\\services\\ozbegim-catering-services",
+      "D:\\Projects\\Fotiha\\Website\\apps\\web\\public\\images\\services\\premium-catering-service",
+      "D:\\Projects\\Fotiha\\Website\\apps\\web\\public\\images\\services\\rental-uz-toy-va-banket-keytering-xizmati",
+      "D:\\Projects\\Fotiha\\Website\\apps\\web\\public\\images\\services\\shoxona-catering",
+      "D:\\Projects\\Fotiha\\Website\\apps\\web\\public\\images\\services\\sulaymon-catering",
+      "D:\\Projects\\Fotiha\\Website\\apps\\web\\public\\images\\services\\suzane-catering",
+      "D:\\Projects\\Fotiha\\Website\\apps\\web\\public\\images\\services\\toshkent-ketring-toy-va-banket-keytering-xizmati",
+      "D:\\Projects\\Fotiha\\Website\\apps\\web\\public\\images\\services\\yigin-uz-toy-va-banket-keytering-xizmati"
+    ],
+    "removedDirectoryCount": 20,
+    "removedFiles": 144,
+    "remainingUniqueFiles": 1839,
+    "remainingBytes": 95650872,
+    "listingsSha256": "c4e3adcc5c49e6462d1b8d0d454b07fbc04a17212619d20ebd4df893b05ecc96"
+  }
+}

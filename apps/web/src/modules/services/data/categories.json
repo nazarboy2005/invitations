@@ -1,0 +1,62 @@
+[
+  {
+    "id": "restaurant",
+    "name": "To‘yxonalar"
+  },
+  {
+    "id": "photo-video",
+    "name": "Foto va Video"
+  },
+  {
+    "id": "wedding",
+    "name": "To‘y xizmatlari"
+  },
+  {
+    "id": "invitation",
+    "name": "Taklifnomalar"
+  },
+  {
+    "id": "toastmaster",
+    "name": "Boshlovchilar"
+  },
+  {
+    "id": "singer",
+    "name": "Xonandalar"
+  },
+  {
+    "id": "dj",
+    "name": "DJ xizmati"
+  },
+  {
+    "id": "decor",
+    "name": "Dekoratsiya"
+  },
+  {
+    "id": "florist",
+    "name": "Floristika"
+  },
+  {
+    "id": "dress",
+    "name": "Kelin-kuyov liboslari"
+  },
+  {
+    "id": "rings",
+    "name": "Uzuk va taqinchoqlar"
+  },
+  {
+    "id": "car",
+    "name": "Avto kortej"
+  },
+  {
+    "id": "makeup",
+    "name": "Vizajist va stilist"
+  },
+  {
+    "id": "cakes",
+    "name": "To‘y tortlari"
+  },
+  {
+    "id": "caravan",
+    "name": "Karvon va shoudastur"
+  }
+]

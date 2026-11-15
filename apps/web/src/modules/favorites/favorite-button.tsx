@@ -44,23 +44,30 @@ export function FavoriteButton({
   );
 }
 
-export function FavoritesLink({ className }: { className?: string }) {
+export function FavoritesLink({
+  className,
+  iconOnly = false,
+}: {
+  className?: string;
+  iconOnly?: boolean;
+}) {
   const { favorites, ready } = useFavorites();
-  if (ready && favorites.length === 0) return null;
+  if (!iconOnly && ready && favorites.length === 0) return null;
   return (
-    <Link href="/templates?favorites=1" className={className ?? styles.link}>
-      <Heart size={17} aria-hidden="true" /> Saralanganlar
-      {ready && favorites.length > 0 ? ` · ${favorites.length}` : ""}
-    </Link>
-  );
-}
-
-export function MobileFavoritesLink() {
-  const { favorites, ready } = useFavorites();
-  if (ready && favorites.length === 0) return null;
-  return (
-    <Link href="/templates?favorites=1" aria-label={`Saqlangan: ${favorites.length}`}>
-      <Heart size={21} aria-hidden="true" />Saqlangan
+    <Link
+      href="/templates?favorites=1"
+      className={className ?? styles.link}
+      aria-label={`Saralanganlar${ready ? `: ${favorites.length}` : ""}`}
+      title="Saralanganlar"
+    >
+      <Heart size={iconOnly ? 21 : 17} aria-hidden="true" />
+      {!iconOnly && (
+        <>
+          {" "}
+          Saralanganlar
+          {ready && favorites.length > 0 ? ` · ${favorites.length}` : ""}
+        </>
+      )}
     </Link>
   );
 }

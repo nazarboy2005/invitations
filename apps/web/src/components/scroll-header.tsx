@@ -33,6 +33,13 @@ export function ScrollHeader({
       if (!header.current) return;
       const y = Math.max(0, window.scrollY);
       if (mobile.matches) {
+        const servicesBoundary = document.querySelector<HTMLElement>(
+          "[data-services-mobile-pin]",
+        );
+        header.current.dataset.servicesPinned = String(
+          servicesBoundary !== null &&
+            servicesBoundary.getBoundingClientRect().top <= 0,
+        );
         lastY = y;
         return;
       }
@@ -108,8 +115,10 @@ export function ScrollHeader({
     }
     update();
     window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", update);
     return () => {
       window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", update);
       cancelAnimationFrame(frame);
       clearTimeout(idleTimer);
     };

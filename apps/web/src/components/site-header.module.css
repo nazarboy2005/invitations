@@ -141,7 +141,12 @@
   color: var(--hero-ink);
   font-size: 14px;
   white-space: nowrap;
+  justify-content: center;
+  width: 44px;
 }
+.mobileFavorites { display: none; }
+.mobileActions { display: none; }
+.heroNav a[aria-current="page"] { color: #76253b; }
 .heroFavorites:hover { color: #ff0000; }
 .heroAccount:hover {
   background: rgb(255 255 255 / 20%);
@@ -650,7 +655,21 @@
 @media (max-width: 900px) {
   .heroInner .mobileMenu { display: none; }
   .bottomNav { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-  .bottomNav:not(:has(> a[href="/templates?favorites=1"])) { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .mobileFavorites {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 44px;
+    width: 44px;
+    height: 44px;
+    color: #76253b;
+  }
+  .mobileActions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: auto;
+  }
   .bottomNav a, .bottomNav button { font-size: 10px; }
   .header.heroHeader {
     transform: translateY(0);
@@ -658,6 +677,9 @@
   }
   .bottomNav { transition: transform 200ms ease; }
   .header.heroHeader[data-mobile-scrolling="true"]:not(:focus-within) {
+    transform: translateY(-100%);
+  }
+  .header.heroHeader[data-services-pinned="true"]:not(:focus-within) {
     transform: translateY(-100%);
   }
   .header[data-mobile-scrolling="true"] ~ .bottomNav:not(:focus-within) {
