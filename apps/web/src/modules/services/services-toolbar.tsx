@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { ArrowLeft, ArrowRight, MapPin, Search } from "lucide-react";
+import { ArrowLeft, ArrowRight, MapPin, Search, X } from "lucide-react";
 import { useLayoutEffect, useRef, useState, useTransition } from "react";
 import { SoftSelect } from "@/components/soft-select";
 import { ServiceCategoryIcon } from "./service-category-icon";
@@ -36,12 +36,36 @@ export function ServicesToolbar({
   const router = useRouter();
   const [searchOpen, setSearchOpen] = useState(Boolean(query));
   const [selectedRegion, setSelectedRegion] = useState(region);
+  const [draftQuery, setDraftQuery] = useState(query);
   const [pending, startTransition] = useTransition();
   const form = useRef<HTMLFormElement>(null);
   const input = useRef<HTMLInputElement>(null);
   const searchButton = useRef<HTMLButtonElement>(null);
   const previousButtonBounds = useRef<DOMRect | null>(null);
   const animation = useRef<Animation | null>(null);
+  const heading = useRef<HTMLSpanElement>(null);
+
+  useLayoutEffect(() => {
+    setSelectedRegion(region);
+    setDraftQuery(query);
+  }, [query, region]);
+
+  useLayoutEffect(() => {
+    const text = heading.current;
+    if (!text) return;
+    const fit = () => {
+      text.style.fontSize = "";
+      const size = parseFloat(getComputedStyle(text).fontSize);
+      if (text.scrollWidth > text.clientWidth) {
+        text.style.fontSize = `${(size * text.clientWidth) / text.scrollWidth}px`;
+      }
+    };
+    const observer = new ResizeObserver(fit);
+    observer.observe(text.parentElement!);
+    document.fonts.ready.then(fit);
+    fit();
+    return () => observer.disconnect();
+  }, [title]);
 
   // Animate the same icon between its two layout positions, including on phones.
   useLayoutEffect(() => {
@@ -71,19 +95,26 @@ export function ServicesToolbar({
     setSearchOpen((open) => !open);
   }
 
-  function applyFilters(nextRegion = selectedRegion) {
+  function applyFilters(nextRegion = selectedRegion, nextQuery?: string) {
     if (!form.current) return;
     const fields = new FormData(form.current);
     const params = new URLSearchParams();
-    const q = String(fields.get("q") ?? "").trim();
+    const q = (nextQuery ?? String(fields.get("q") ?? "")).trim();
     if (q) params.set("q", q);
     if (nextRegion) params.set("region", nextRegion);
     const path = category
       ? `/services/${encodeURIComponent(category)}`
       : "/services";
     const search = params.toString();
+    // Keep enough document height for the current viewport when results shrink.
+    // Otherwise the browser clamps scrollY even with Next's scroll: false.
+    const results = form.current.closest<HTMLElement>("#results");
+    if (results) {
+      const top = results.getBoundingClientRect().top + window.scrollY;
+      results.style.minHeight = `${Math.max(0, window.scrollY + window.innerHeight - top)}px`;
+    }
     startTransition(() => {
-      router.push(`${path}${search ? `?${search}` : ""}#results`, {
+      router.push(`${path}${search ? `?${search}` : ""}`, {
         scroll: false,
       });
     });
@@ -108,7 +139,7 @@ export function ServicesToolbar({
         <div className={styles.toolbarHeading}>
           <h2>
             <ServiceCategoryIcon category={category} size={27} />
-            <span title={title}>{title}</span>
+            <span ref={heading}>{title}</span>
           </h2>
           <span className={styles.srOnly} role="status">
             {total} xizmat, {page} / {pages} sahifa
@@ -142,8 +173,14 @@ export function ServicesToolbar({
                 name="q"
                 type="search"
                 placeholder="Xizmat yoki biznes nomi…"
-                defaultValue={query}
+                value={draftQuery}
                 maxLength={120}
+                onChange={(event) => {
+                  setDraftQuery(event.currentTarget.value);
+                  // Removing all typed text clears the applied search too.
+                  if (!event.currentTarget.value && query)
+                    applyFilters(selectedRegion, "");
+                }}
                 onKeyDown={(event) => {
                   if (event.key === "Escape") {
                     toggleSearch();
@@ -151,6 +188,20 @@ export function ServicesToolbar({
                   }
                 }}
               />
+              {draftQuery && (
+                <button
+                  type="button"
+                  className={styles.clearSearch}
+                  aria-label="Qidiruvni tozalash"
+                  onClick={() => {
+                    setDraftQuery("");
+                    applyFilters(selectedRegion, "");
+                    input.current?.focus({ preventScroll: true });
+                  }}
+                >
+                  <X size={14} aria-hidden="true" />
+                </button>
+              )}
               <button
                 type="submit"
                 className={styles.searchButton}
@@ -164,6 +215,7 @@ export function ServicesToolbar({
         <div className={styles.region}>
           <MapPin size={17} aria-hidden="true" />
           <SoftSelect
+            preventScrollOnFocus
             value={selectedRegion}
             label="Hudud"
             options={[

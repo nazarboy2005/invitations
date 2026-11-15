@@ -4,7 +4,13 @@ import { Check, Share2 } from "lucide-react";
 import { useState } from "react";
 import styles from "./services.module.css";
 
-export function ServiceShare({ name }: { name: string }) {
+export function ServiceShare({
+  name,
+  compact = false,
+}: {
+  name: string;
+  compact?: boolean;
+}) {
   const [message, setMessage] = useState("");
   async function share() {
     const url = `${window.location.origin}${window.location.pathname}`;
@@ -21,18 +27,22 @@ export function ServiceShare({ name }: { name: string }) {
     }
   }
   return (
-    <div className={styles.shareWrap}>
+    <div
+      className={`${styles.shareWrap} ${compact ? styles.compactShare : ""}`}
+    >
       <button
         type="button"
         className={styles.shareButton}
         onClick={() => void share()}
       >
-        {message === "Havola nusxalandi" ? (
-          <Check size={17} />
-        ) : (
-          <Share2 size={17} />
-        )}
-        Ulashish
+        <span className={compact ? styles.actionIcon : undefined}>
+          {message === "Havola nusxalandi" ? (
+            <Check size={17} />
+          ) : (
+            <Share2 size={17} />
+          )}
+        </span>
+        <span>Ulashish</span>
       </button>
       <span role="status" className={styles.shareStatus}>
         {message}

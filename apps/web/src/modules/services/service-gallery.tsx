@@ -55,13 +55,25 @@ export function ServiceGallery({
           aria-label="Rasmni kattalashtirish"
           onClick={() => dialog.current?.showModal()}
         >
-          <Image
-            src={publicAsset(image.src)}
-            alt={image.alt || name}
-            fill
-            sizes="(max-width: 900px) 92vw, 60vw"
-            loading="eager"
-          />
+          <span className={styles.galleryTrack}>
+            {images.map((item, index) => (
+              <span
+                key={`${item.src}-${index}`}
+                className={styles.gallerySlide}
+                style={{ transform: `translateX(${(index - active) * 100}%)` }}
+                aria-hidden={index !== active}
+              >
+                <Image
+                  src={publicAsset(item.src)}
+                  alt={item.alt || name}
+                  fill
+                  style={{ objectFit: "cover", objectPosition: "center" }}
+                  sizes="(max-width: 900px) 92vw, 60vw"
+                  loading="eager"
+                />
+              </span>
+            ))}
+          </span>
           <span className={styles.expandIcon}>
             <Expand size={18} />
           </span>
@@ -74,6 +86,19 @@ export function ServiceGallery({
         >
           {active + 1} / {images.length}
         </span>
+        {images.length > 1 && (
+          <div className={styles.galleryDots} aria-label="Rasm tanlash">
+            {images.map((item, index) => (
+              <button
+                type="button"
+                key={`${item.src}-${index}`}
+                aria-label={`${index + 1}-rasm`}
+                aria-pressed={index === active}
+                onClick={() => setActive(index)}
+              />
+            ))}
+          </div>
+        )}
       </div>
       {images.length > 1 && (
         <div className={styles.thumbnails} aria-label="Rasm tanlash">

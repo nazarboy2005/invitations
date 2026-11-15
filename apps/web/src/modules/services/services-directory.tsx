@@ -42,10 +42,7 @@ export async function ServicesDirectory({
           <p className={styles.sectionLabel}>YO‘NALISHLAR</p>
           <nav className={styles.categories} aria-label="Xizmat yo‘nalishlari">
             <Link
-              href={serviceDirectoryUrl({
-                q: result.query,
-                region: result.region,
-              })}
+              href={serviceDirectoryUrl({ region: result.region })}
               aria-current={!result.category ? "page" : undefined}
               prefetch={false}
             >
@@ -58,7 +55,7 @@ export async function ServicesDirectory({
               <Link
                 key={category.id}
                 href={serviceDirectoryUrl({
-                  ...baseFilters,
+                  region: result.region,
                   category: category.id,
                 })}
                 aria-current={
@@ -95,17 +92,6 @@ export async function ServicesDirectory({
                 To‘yxonadan guldastagacha — kuningizni yanada go‘zal qiladigan
                 xizmatlarni toping.
               </p>
-              <div className={styles.introStats}>
-                <span>
-                  <strong>{serviceListings.length}</strong> xizmat
-                </span>
-                <span>
-                  <strong>{serviceCategories.length}</strong> yo‘nalish
-                </span>
-                <span>
-                  Bevosita bog‘lanish <ArrowUpRightIcon />
-                </span>
-              </div>
             </div>
           </section>
           <div
@@ -114,7 +100,7 @@ export async function ServicesDirectory({
             data-catalog-pin-boundary
           >
             <ServicesToolbar
-              key={`${result.category?.id ?? "all"}:${result.query}:${result.region}:${result.page}`}
+              key={result.category?.id ?? "all"}
               category={result.category?.id}
               title={result.category?.name ?? "Barcha servislar"}
               query={result.query}
@@ -140,6 +126,7 @@ export async function ServicesDirectory({
                 {result.region && <>{result.region} · </>}
                 <Link
                   href={serviceDirectoryUrl({ category: result.category?.id })}
+                  scroll={false}
                 >
                   Filtrlarni tozalash
                 </Link>
@@ -162,6 +149,7 @@ export async function ServicesDirectory({
                 <p>Boshqa nom yoki hudud bilan qidirib ko‘ring.</p>
                 <Link
                   href={serviceDirectoryUrl({ category: result.category?.id })}
+                  scroll={false}
                 >
                   Barcha natijalarni ko‘rish <ArrowRight size={16} />
                 </Link>
@@ -171,15 +159,5 @@ export async function ServicesDirectory({
         </div>
       </section>
     </>
-  );
-}
-
-function ArrowUpRightIcon() {
-  return (
-    <ArrowRight
-      size={13}
-      aria-hidden="true"
-      style={{ transform: "rotate(-45deg)" }}
-    />
   );
 }

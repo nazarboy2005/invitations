@@ -4,12 +4,14 @@ import {
   ArrowUpRight,
   ChevronRight,
   Globe,
+  Heart,
   Mail,
   MapPin,
   Phone,
 } from "lucide-react";
 import { ServiceGallery } from "./service-gallery";
 import { ServiceShare } from "./service-share";
+import { ServiceContactIcon } from "./service-contact-icon";
 import { ServiceCard } from "./service-card";
 import {
   serviceCategories,
@@ -38,13 +40,22 @@ export function ServiceDetail({ listing }: { listing: ServiceListing }) {
     .map((phone) => ({ ...phone, href: servicePhoneUrl(phone.value) }))
     .filter((phone) => phone.href);
   const links = listing.links
-    .map((link) => ({ ...link, href: serviceExternalUrl(link.url) }))
-    .filter((link) => link.href);
+    .map((link) => ({
+      ...link,
+      href: serviceExternalUrl(link.url.replace(/&amp;/g, "&")),
+    }))
+    .filter(
+      (link, index, all) =>
+        link.href && all.findIndex((item) => item.href === link.href) === index,
+    );
   const paragraphs = listing.description
     .split(/\n\s*\n/)
     .map((paragraph) => paragraph.trim())
     .filter(Boolean);
   const mapUrl = serviceMapUrl(listing);
+  const hasMap =
+    Boolean(listing.address) ||
+    (listing.latitude !== null && listing.longitude !== null);
   return (
     <div className={styles.detail}>
       <div className={styles.detailTop}>
@@ -55,7 +66,9 @@ export function ServiceDetail({ listing }: { listing: ServiceListing }) {
           <ArrowLeft size={17} />
           {category?.name ?? "Servislar"}
         </Link>
-        <ServiceShare name={listing.name} />
+        <div className={styles.mobileOnly}>
+          <ServiceShare name={listing.name} />
+        </div>
       </div>
       <div className={styles.detailHeading}>
         <p className={styles.eyebrow}>
@@ -81,9 +94,12 @@ export function ServiceDetail({ listing }: { listing: ServiceListing }) {
           <div className={styles.contactInner}>
             <p className={styles.sectionLabel}>XIZMAT NARXI</p>
             <p className={styles.detailPrice}>{servicePrice(listing.price)}</p>
-            <p className={styles.contactHint}>
+            <p className={`${styles.contactHint} ${styles.mobileOnly}`}>
               Batafsil ma’lumot va buyurtma uchun xizmat ko‘rsatuvchi bilan
               bog‘laning.
+            </p>
+            <p className={`${styles.contactHint} ${styles.desktopOnly}`}>
+              Ma’lumot va buyurtma uchun bog‘laning.
             </p>
             <div className={styles.contactButtons}>
               {phones.map((phone, index) => (
@@ -103,7 +119,13 @@ export function ServiceDetail({ listing }: { listing: ServiceListing }) {
                         ? "Qo‘ng‘iroq qilish"
                         : phone.label || "Qo‘shimcha telefon"}
                     </small>
-                    {phone.value}
+                    <span className={styles.mobileOnly}>{phone.value}</span>
+                    <span className={styles.desktopOnly}>
+                      {phone.value.replace(
+                        /^(\+998)(\d{2})(\d{3})(\d{2})(\d{2})$/,
+                        "$1 $2 $3 $4 $5",
+                      )}
+                    </span>
                   </span>
                   <ArrowUpRight size={16} />
                 </a>
@@ -114,7 +136,7 @@ export function ServiceDetail({ listing }: { listing: ServiceListing }) {
                   href={link.href!}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={styles.externalContact}
+                  className={`${styles.externalContact} ${styles.mobileOnly}`}
                 >
                   <Globe size={17} />
                   <span>{link.label}</span>
@@ -125,7 +147,7 @@ export function ServiceDetail({ listing }: { listing: ServiceListing }) {
                 /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(listing.email) && (
                   <a
                     href={`mailto:${encodeURIComponent(listing.email)}`}
-                    className={styles.externalContact}
+                    className={`${styles.externalContact} ${styles.mobileOnly}`}
                   >
                     <Mail size={17} />
                     <span>{listing.email}</span>
@@ -138,12 +160,59 @@ export function ServiceDetail({ listing }: { listing: ServiceListing }) {
                 </p>
               )}
             </div>
-            <p className={styles.contactNote}>
+            <div className={styles.desktopContacts}>
+              <ServiceShare name={listing.name} compact />
+              <div className={styles.contactDivider} aria-hidden="true">
+                <Heart size={16} fill="currentColor" />
+              </div>
+              {(links.length > 0 || listing.email) && (
+                <div
+                  className={styles.socialContacts}
+                  aria-label="Ijtimoiy tarmoqlar va aloqa"
+                >
+                  {links.map((link) => (
+                    <a
+                      key={link.href}
+                      href={link.href!}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={link.label}
+                      title={link.label}
+                    >
+                      <ServiceContactIcon href={link.href!} />
+                    </a>
+                  ))}
+                  {listing.email &&
+                    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(listing.email) && (
+                      <a
+                        href={`mailto:${encodeURIComponent(listing.email)}`}
+                        aria-label="Elektron pochta"
+                        title={listing.email}
+                      >
+                        <Mail size={19} />
+                      </a>
+                    )}
+                </div>
+              )}
+              {hasMap && (
+                <a
+                  className={styles.mapContact}
+                  href={mapUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <MapPin size={18} />
+                  <span>Yandex Maps</span>
+                  <ArrowUpRight size={17} />
+                </a>
+              )}
+            </div>
+            <p className={`${styles.contactNote} ${styles.mobileOnly}`}>
               Xorijiy valyutadagi narxlar so‘mga taxminan hisoblangan. Narxlar
               va mavjudlikni buyurtma berishdan oldin aniqlashtiring.
             </p>
             <a
-              className={styles.correctionLink}
+              className={`${styles.correctionLink} ${styles.mobileOnly}`}
               href="https://t.me/fotiha_support_bot"
               target="_blank"
               rel="noopener noreferrer"
@@ -165,7 +234,7 @@ export function ServiceDetail({ listing }: { listing: ServiceListing }) {
             </section>
           )}
           {(listing.address || listing.latitude !== null) && (
-            <section className={styles.detailSection}>
+            <section className={`${styles.detailSection} ${styles.mobileOnly}`}>
               <p className={styles.sectionLabel}>MANZIL</p>
               <h2>Bizni qanday topasiz?</h2>
               <div className={styles.addressCard}>

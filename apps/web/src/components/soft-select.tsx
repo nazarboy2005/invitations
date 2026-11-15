@@ -17,6 +17,7 @@ export function SoftSelect({
   menuPlacement = "default",
   showSelectedCheck = true,
   showChevron = true,
+  preventScrollOnFocus = false,
 }: {
   value: string;
   options: SelectOption[];
@@ -28,6 +29,7 @@ export function SoftSelect({
   menuPlacement?: "default" | "aboveOnMobile";
   showSelectedCheck?: boolean;
   showChevron?: boolean;
+  preventScrollOnFocus?: boolean;
 }) {
   const id = useId();
   const root = useRef<HTMLDivElement>(null);
@@ -43,8 +45,11 @@ export function SoftSelect({
     const optionIndex = options[activeIndex]?.disabled
       ? options.findIndex((option) => !option.disabled)
       : activeIndex;
-    if (optionIndex >= 0) optionRefs.current[optionIndex]?.focus();
-  }, [activeIndex, open, options]);
+    if (optionIndex >= 0)
+      optionRefs.current[optionIndex]?.focus({
+        preventScroll: preventScrollOnFocus,
+      });
+  }, [activeIndex, open, options, preventScrollOnFocus]);
 
   useEffect(() => {
     if (!open) return;
@@ -54,7 +59,7 @@ export function SoftSelect({
     const closeEscape = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         setOpen(false);
-        trigger.current?.focus();
+        trigger.current?.focus({ preventScroll: preventScrollOnFocus });
       }
     };
     document.addEventListener("pointerdown", closeOutside);
@@ -63,7 +68,7 @@ export function SoftSelect({
       document.removeEventListener("pointerdown", closeOutside);
       document.removeEventListener("keydown", closeEscape);
     };
-  }, [open]);
+  }, [open, preventScrollOnFocus]);
 
   function moveActive(start: number, direction: number) {
     if (!options.length) return;
@@ -148,7 +153,7 @@ export function SoftSelect({
               onClick={() => {
                 onChange(option.value);
                 setOpen(false);
-                trigger.current?.focus();
+                trigger.current?.focus({ preventScroll: preventScrollOnFocus });
               }}
               onKeyDown={(event) => {
                 if (event.key === "ArrowDown" || event.key === "ArrowUp") {
