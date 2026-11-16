@@ -156,6 +156,49 @@ try {
     );
     await page.waitForURL(/region=nearby/);
     await checkCards(page, { region: "nearby", origin: position });
+    assert.equal(
+      await page.getByRole("link", { name: "Filtrlarni tozalash" }).count(),
+      0,
+    );
+    // Switching tabs and acquiring a fresh position must not introduce a filter summary.
+    await page.evaluate(() => (window as any).locationHarness.permit("granted"));
+    await page.evaluate(() => (window as any).locationHarness.visibility(true));
+    assert.equal(
+      await page.getByRole("link", { name: "Filtrlarni tozalash" }).count(),
+      0,
+    );
+    await page.evaluate(() =>
+      (window as any).locationHarness.visibility(false),
+    );
+    await page.waitForFunction(
+      () => (window as any).locationHarness.calls.length >= 2,
+    );
+    await page.evaluate(
+      (p: any) => (window as any).locationHarness.push(p.latitude, p.longitude),
+      position,
+    );
+    await checkCards(page, { region: "nearby", origin: position });
+    assert.equal(
+      await page.getByRole("link", { name: "Filtrlarni tozalash" }).count(),
+      0,
+    );
+    // A real text filter still has a reset, which retains the nearby sort.
+    await page.evaluate(() => {
+      const url = new URL(window.location.href);
+      url.searchParams.set("q", "test");
+      window.history.pushState(null, "", url.pathname + url.search);
+    });
+    const clearFilters = page.getByRole("link", {
+      name: "Filtrlarni tozalash",
+    });
+    await clearFilters.waitFor();
+    assert.match(await clearFilters.getAttribute("href"), /region=nearby/);
+    await clearFilters.click();
+    await page.waitForFunction(
+      () => !new URL(location.href).searchParams.has("q"),
+    );
+    await checkCards(page, { region: "nearby", origin: position });
+    assert.equal(await clearFilters.count(), 0);
     assert.ok(
       (await page.locator("[data-service-distance]").allTextContents()).some(
         (text: string) => /\d m$/.test(text.trim()),

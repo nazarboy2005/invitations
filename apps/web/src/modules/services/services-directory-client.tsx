@@ -88,6 +88,8 @@ export function ServicesDirectoryClient({
     q: result.query,
     region: result.region,
   };
+  const regionFilter =
+    result.region === CURRENT_LOCATION_REGION ? "" : result.region;
   const categories = (
     <>
       <ServiceCategoryLink
@@ -212,21 +214,18 @@ export function ServicesDirectoryClient({
                     tanlang.
                   </p>
                 )}
-              {(result.query || result.region) && (
+              {(result.query || regionFilter) && (
                 <p className={styles.activeFilters}>
                   {result.query && <>“{result.query}” bo‘yicha </>}
-                  {result.region && (
-                    <>
-                      {result.region === CURRENT_LOCATION_REGION
-                        ? CURRENT_LOCATION_LABEL
-                        : result.region}{" "}
-                      ·{" "}
-                    </>
-                  )}
+                  {regionFilter && <>{regionFilter} · </>}
                   <Link
                     href={serviceDirectoryUrl({
                       category: result.category?.id,
                       favorites: favoritesOnly,
+                      region:
+                        result.region === CURRENT_LOCATION_REGION
+                          ? CURRENT_LOCATION_REGION
+                          : undefined,
                     })}
                     scroll={false}
                   >

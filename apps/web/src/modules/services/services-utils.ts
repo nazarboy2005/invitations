@@ -44,6 +44,8 @@ export type ServiceListing = {
 };
 
 export const SERVICES_PAGE_SIZE = 12;
+const NEARBY_PARTNER_RADIUS_METERS = 5_000;
+const NEARBY_PARTNER_NEAREST_COUNT = 5;
 // Keep SSR and browser output identical across ICU locale versions.
 const number = {
   format: (value: number) =>
@@ -144,35 +146,54 @@ export function serviceDirectory(
     serviceCategories.map((item, index) => [item.id, index]),
   );
   const positions = new Map<string, number>();
-  const ranked = matches
-    .map((listing, index) => {
-      const categoryId = listing.categoryIds[0];
-      const position = positions.get(categoryId) ?? 0;
-      positions.set(categoryId, position + 1);
-      return {
-        listing,
-        distance: serviceDistance(filters.origin, listing) ?? Infinity,
-        rank:
-          position * serviceCategories.length +
-          (categoryOrder.get(categoryId) ?? index),
-        index,
-      };
-    })
-    .sort(
-      (a, b) =>
-        (region === CURRENT_LOCATION_REGION && filters.origin
-          ? a.distance < b.distance
-            ? -1
-            : a.distance > b.distance
-              ? 1
-              : 0
-          : 0) ||
-        Number(b.listing.featured) - Number(a.listing.featured) ||
-        (a.listing.featured && b.listing.featured
-          ? (a.listing.featuredOrder ?? 0) - (b.listing.featuredOrder ?? 0)
-          : 0) ||
-        (category ? a.index - b.index : a.rank - b.rank),
+  const nearby = region === CURRENT_LOCATION_REGION && Boolean(filters.origin);
+  const ranked = matches.map((listing, index) => {
+    const categoryId = listing.categoryIds[0];
+    const position = positions.get(categoryId) ?? 0;
+    positions.set(categoryId, position + 1);
+    return {
+      listing,
+      distance: serviceDistance(filters.origin, listing) ?? Infinity,
+      rank:
+        position * serviceCategories.length +
+        (categoryOrder.get(categoryId) ?? index),
+      index,
+    };
+  });
+  // Determine eligibility from the filtered, unboosted results before pagination.
+  // Missing coordinates cannot qualify a partner for nearby promotion.
+  const nearest = new Set(
+    nearby
+      ? ranked
+          .filter((item) => Number.isFinite(item.distance))
+          .sort((a, b) => a.distance - b.distance || a.index - b.index)
+          .slice(0, NEARBY_PARTNER_NEAREST_COUNT)
+          .map((item) => item.index)
+      : [],
+  );
+  const promoted = (item: (typeof ranked)[number]) =>
+    item.listing.featured &&
+    (!nearby ||
+      item.distance <= NEARBY_PARTNER_RADIUS_METERS ||
+      nearest.has(item.index));
+  ranked.sort((a, b) => {
+    const aPromoted = promoted(a);
+    const bPromoted = promoted(b);
+    return (
+      Number(bPromoted) - Number(aPromoted) ||
+      (aPromoted && bPromoted
+        ? (a.listing.featuredOrder ?? 0) - (b.listing.featuredOrder ?? 0) ||
+          // Input follows insertion order; newest partners win equal priorities.
+          b.index - a.index
+        : 0) ||
+      (nearby
+        ? (a.distance < b.distance ? -1 : a.distance > b.distance ? 1 : 0) ||
+          a.index - b.index
+        : category
+          ? a.index - b.index
+          : a.rank - b.rank)
     );
+  });
   const pages = Math.max(1, Math.ceil(ranked.length / SERVICES_PAGE_SIZE));
   const requestedPage = Number(filters.page ?? 1);
   const page = Math.min(

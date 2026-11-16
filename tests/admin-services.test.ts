@@ -120,3 +120,49 @@ test("featured partners sort before regular listings, by priority, without distu
     ["partner-one", "partner-two", "old", "new"],
   );
 });
+
+test("equal-priority partners show newest first across directory and category views", () => {
+  const seed = serviceListings.find((s) =>
+    s.categoryIds.includes("restaurant"),
+  )!;
+  const listings = [
+    { ...seed, slug: "regular-old", featured: false },
+    { ...seed, slug: "partner-old", featured: true, featuredOrder: 0 },
+    {
+      ...seed,
+      slug: "partner-middle",
+      featured: true,
+      featuredOrder: undefined,
+    },
+    { ...seed, slug: "regular-new", featured: false },
+    { ...seed, slug: "partner-new", featured: true, featuredOrder: 0 },
+    {
+      ...seed,
+      slug: "partner-lower-priority",
+      featured: true,
+      featuredOrder: 1,
+    },
+  ];
+  for (const filters of [{}, { category: "restaurant" }, { q: seed.name }]) {
+    assert.deepEqual(
+      serviceDirectory(filters, listings, serviceCategories).listings.map(
+        (s) => s.slug,
+      ),
+      [
+        "partner-new",
+        "partner-middle",
+        "partner-old",
+        "partner-lower-priority",
+        "regular-old",
+        "regular-new",
+      ],
+    );
+  }
+  // Category interleaving must not override the newest partner's placement.
+  const otherCategory = serviceCategories.find((c) => c.id !== "restaurant")!;
+  listings[4] = { ...listings[4], categoryIds: [otherCategory.id] };
+  assert.equal(
+    serviceDirectory({}, listings, serviceCategories).listings[0].slug,
+    "partner-new",
+  );
+});

@@ -55,7 +55,7 @@ test("distance labels use meters below a kilometer and up to two kilometer decim
   assert.equal(formatServiceDistance(123456.78), "123.46 km");
 });
 
-test("nearby searches all regions and sorts before pagination, ahead of featured placement", () => {
+test("nearby searches all regions before pagination and leaves ineligible partners in distance order", () => {
   const listings: ServiceListing[] = Array.from({ length: 26 }, (_, index) => ({
     ...serviceListings[0],
     slug: `distance-${26 - index}`,
@@ -132,5 +132,110 @@ test("nearby searches all regions and sorts before pagination, ahead of featured
   assert.equal(
     serviceDirectoryUrl({ ...filters, page: 2 }),
     "/services?region=nearby&page=2",
+  );
+});
+
+const nearbyFilters = {
+  region: CURRENT_LOCATION_REGION,
+  origin: { latitude: 0, longitude: 0 },
+};
+
+function nearbyListing(
+  slug: string,
+  meters: number | null,
+  featured = false,
+  featuredOrder = 0,
+): ServiceListing {
+  return {
+    ...serviceListings[0],
+    slug,
+    name: slug,
+    description: "",
+    categoryIds: ["restaurant"],
+    latitude: meters === null ? null : 0,
+    longitude: meters === null ? null : meters / 111_195.0802335329,
+    featured,
+    featuredOrder,
+  };
+}
+
+test("nearby promotes radius-qualified partners beyond fifth place, preserving priority and newest ties", () => {
+  const regular = Array.from({ length: 15 }, (_, i) =>
+    nearbyListing(`regular-${i}`, (i + 1) * 100),
+  );
+  const listings = [
+    ...regular,
+    nearbyListing("partner-old", 4_999, true, 1),
+    nearbyListing("partner-priority", 4_500, true, 0),
+    nearbyListing("partner-new", 4_800, true, 1),
+    nearbyListing("partner-outside", 5_001, true),
+    nearbyListing("unknown", null, true),
+  ];
+  const all = [1, 2].flatMap((page) =>
+    serviceDirectory(
+      { ...nearbyFilters, page },
+      listings,
+      serviceCategories,
+    ).listings.map((item) => item.slug),
+  );
+  assert.deepEqual(all, [
+    "partner-priority",
+    "partner-new",
+    "partner-old",
+    ...regular.map((item) => item.slug),
+    "partner-outside",
+    "unknown",
+  ]);
+  assert.equal(new Set(all).size, listings.length);
+});
+
+test("nearby promotes the fifth nearest partner beyond 5 km but not the sixth", () => {
+  const listings = [
+    nearbyListing("sixth", 60_000, true),
+    nearbyListing("regular-one", 10_000),
+    nearbyListing("fifth", 50_000, true),
+    nearbyListing("regular-two", 20_000),
+    nearbyListing("regular-three", 30_000),
+    nearbyListing("regular-four", 40_000),
+  ];
+  assert.deepEqual(
+    serviceDirectory(nearbyFilters, listings, serviceCategories).listings.map(
+      (s) => s.slug,
+    ),
+    [
+      "fifth",
+      "regular-one",
+      "regular-two",
+      "regular-three",
+      "regular-four",
+      "sixth",
+    ],
+  );
+});
+
+test("nearest-five eligibility uses matching category/search and excludes unknown coordinates even in sparse results", () => {
+  const listings = Array.from({ length: 6 }, (_, i) => ({
+    ...nearbyListing(`other-${i}`, (i + 1) * 1_000),
+    categoryIds: ["photo"],
+  }));
+  listings.push(
+    nearbyListing("match-regular", 40_000),
+    nearbyListing("match-partner", 50_000, true),
+    nearbyListing("match-unknown", null, true),
+  );
+  for (const filters of [{ category: "restaurant" }, { q: "match-" }]) {
+    assert.deepEqual(
+      serviceDirectory(
+        { ...nearbyFilters, ...filters },
+        listings,
+        serviceCategories,
+      ).listings.map((s) => s.slug),
+      ["match-partner", "match-regular", "match-unknown"],
+    );
+  }
+  assert.equal(
+    serviceDirectory(nearbyFilters, listings, serviceCategories).listings[0]
+      .slug,
+    "other-0",
   );
 });
