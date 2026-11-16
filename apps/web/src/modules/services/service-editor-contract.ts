@@ -104,6 +104,8 @@ export const serviceEditorSchema = z
     importedAt: z.iso.datetime(),
     featured: z.boolean(),
     featuredOrder: z.number().int().min(0).max(100000).optional(),
+    // Set by the database; accepted here so editor round trips preserve metadata.
+    featuredSince: z.iso.datetime().optional(),
   })
   .strict()
   .superRefine((s, ctx) => {

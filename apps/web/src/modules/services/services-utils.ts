@@ -41,6 +41,7 @@ export type ServiceListing = {
   importedAt: string;
   featured: boolean;
   featuredOrder?: number;
+  featuredSince?: string;
 };
 
 export const SERVICES_PAGE_SIZE = 12;
@@ -183,7 +184,9 @@ export function serviceDirectory(
       Number(bPromoted) - Number(aPromoted) ||
       (aPromoted && bPromoted
         ? (a.listing.featuredOrder ?? 0) - (b.listing.featuredOrder ?? 0) ||
-          // Input follows insertion order; newest partners win equal priorities.
+          (Date.parse(b.listing.featuredSince ?? "") || 0) -
+            (Date.parse(a.listing.featuredSince ?? "") || 0) ||
+          // Legacy/bundled listings retain insertion order as a final tie-breaker.
           b.index - a.index
         : 0) ||
       (nearby
