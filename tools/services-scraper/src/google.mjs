@@ -10,6 +10,7 @@ import {
   webUrl,
 } from "./core.mjs";
 import { contactLinks, schemaObjects, schemaProducts } from "./schema.mjs";
+import { normalizeContactLinks } from "./contacts.mjs";
 
 export function googleSearchUrl(query) {
   return `https://www.google.com/maps/search/${encodeURIComponent(query)}/?hl=en`;
@@ -66,15 +67,12 @@ export function parseGoogle(html, url) {
   const contacts = contactLinks(html, url);
   record.emails = contacts.emails;
   const website = $('[data-item-id="authority"]').attr("href");
-  record.links = unique(
-    [
-      ...(website && webUrl(website)
-        ? [{ url: webUrl(website), type: "website", label: "Website" }]
-        : []),
-      ...contacts.links.map((x) => ({ ...x, type: linkKind(x.url) })),
-    ],
-    (x) => x.url,
-  );
+  record.links = normalizeContactLinks([
+    ...(website && webUrl(website)
+      ? [{ url: webUrl(website), type: "website", label: "Website" }]
+      : []),
+    ...contacts.links.map((x) => ({ ...x, type: linkKind(x.url) })),
+  ]);
   const texts = $(
     '.PYvSYb, .WeS02d, [data-item-id="description"], [data-attrid="kc:/local:merchant_description"]',
   )

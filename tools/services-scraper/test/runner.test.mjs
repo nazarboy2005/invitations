@@ -59,6 +59,54 @@ function setup(out) {
   };
   return { options, calls };
 }
+
+test("social authority links are never crawled and older completed caches are reprocessed", async (t) => {
+  const out = await temporary(t),
+    { options, calls } = setup(out);
+  options.website = true;
+  options.scrapers.yandex = async (url) => (
+    calls.yandex++,
+    makeRecord("yandex", url, {
+      links: [
+        {
+          url: "https://www.instagram.com/parvoz_restaurant/",
+          type: "website",
+        },
+        { url: "https://instagram.com/parvoz_restaurant", type: "instagram" },
+        { url: "http://instagram.com/broken", type: "website" },
+      ],
+    })
+  );
+  const input = { url: "https://yandex.uz/maps/org/123/" };
+  const first = await scrapeBusiness(input, options);
+  assert.equal(first.result.errors.length, 0);
+  assert.equal(
+    first.result.sources.some((s) => s.provider === "website"),
+    false,
+  );
+  assert.deepEqual(
+    first.result.merged.links.map((l) => l.url),
+    ["https://www.instagram.com/parvoz_restaurant"],
+  );
+  const old = { ...first.result };
+  delete old.contactPolicyVersion;
+  old.merged = {
+    ...old.merged,
+    links: [{ url: "https://instagram.com/reels/" }],
+  };
+  await writeFile(
+    path.join(out, first.directoryName, "result.json"),
+    JSON.stringify(old),
+  );
+  const before = { ...calls };
+  const resumed = await scrapeBusiness(input, options);
+  assert.equal(calls.yandex, before.yandex);
+  assert.equal(calls.google, before.google);
+  assert.deepEqual(
+    resumed.result.merged.links.map((l) => l.url),
+    ["https://www.instagram.com/parvoz_restaurant"],
+  );
+});
 test("full pipeline writes reports, matches providers and resumes without scraping completed jobs", async (t) => {
   const out = await temporary(t),
     { options, calls } = setup(out),

@@ -1,4 +1,5 @@
 import { load } from "cheerio";
+import { normalizeContactLinks } from "./contacts.mjs";
 import {
   clean,
   linkKind,
@@ -170,7 +171,7 @@ export function parseYandex(html, url, requestedId = null) {
     .map((x) => clean(x.name))
     .filter(Boolean);
   result.hours = clean(org.workingTimeText);
-  result.links = unique(
+  result.links = normalizeContactLinks(
     [
       ...(org.urls ?? []).map((url) => ({ url })),
       ...(org.socialLinks ?? []),
@@ -187,7 +188,6 @@ export function parseYandex(html, url, requestedId = null) {
           ]
         : [];
     }),
-    (x) => x.url,
   );
   result.emails = unique(
     [

@@ -3,13 +3,18 @@ import sharp from "sharp";
 import { getDb } from "@taklifnoma/database";
 import { mediaObjectKey, putMedia, removeMedia } from "./storage";
 import { ApiError } from "./api";
+import {
+  SERVICE_IMAGE_MAX_DIMENSION,
+  SERVICE_IMAGE_MAX_PIXELS,
+  SERVICE_IMAGE_SOURCE_MAX_BYTES,
+} from "@/modules/services/service-image-policy";
 
 export async function saveServiceImage(
   ownerId: string,
   bytes: Buffer,
   alt = "",
 ) {
-  if (bytes.length > 12 * 1024 * 1024)
+  if (bytes.length > SERVICE_IMAGE_SOURCE_MAX_BYTES)
     throw new ApiError(
       413,
       "IMAGE_TOO_LARGE",
@@ -18,7 +23,7 @@ export async function saveServiceImage(
   let output;
   try {
     const source = sharp(bytes, {
-      limitInputPixels: 40_000_000,
+      limitInputPixels: SERVICE_IMAGE_MAX_PIXELS,
       animated: false,
     });
     const metadata = await source.metadata();
@@ -29,8 +34,8 @@ export async function saveServiceImage(
     output = await source
       .rotate()
       .resize({
-        width: 1600,
-        height: 1600,
+        width: SERVICE_IMAGE_MAX_DIMENSION,
+        height: SERVICE_IMAGE_MAX_DIMENSION,
         fit: "inside",
         withoutEnlargement: true,
       })

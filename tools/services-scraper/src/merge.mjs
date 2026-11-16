@@ -1,4 +1,5 @@
 import { haversine, normalize, unique } from "./core.mjs";
+import { normalizeContactLinks } from "./contacts.mjs";
 
 const cyrillic = {
   а: "a",
@@ -254,10 +255,7 @@ export function combineSources(records, { overrides = {} } = {}) {
     location: scalar("location"),
     description: descriptions[0]?.text ?? "",
     phones: unique(records.flatMap((r) => r.phones)),
-    links: unique(
-      records.flatMap((r) => r.links),
-      (x) => x.url,
-    ),
+    links: normalizeContactLinks(records.flatMap((r) => r.links)),
     emails: unique(records.flatMap((r) => r.emails)),
     categories: unique(records.flatMap((r) => r.categories)),
     hours: records.find((r) => r.hours)?.hours ?? "",
@@ -296,6 +294,7 @@ export function combineSources(records, { overrides = {} } = {}) {
       merged[key] = value;
       provenance[key] = [{ value, source: "manual" }];
     }
+  merged.links = normalizeContactLinks(merged.links);
   const missing = [
     "description",
     "phones",

@@ -25,6 +25,7 @@ import {
 import { useAdminDirty } from "./admin-navigation-guard";
 import { servicesRequest } from "./service-admin-request";
 import { ServiceImportEvidence } from "./service-imports";
+import { uploadServiceImage } from "./service-image-upload";
 import styles from "./admin-services.module.css";
 
 export function ServiceEditorPanel({
@@ -118,19 +119,10 @@ export function ServiceEditorPanel({
     setError("");
     try {
       for (const file of Array.from(files)) {
-        if (file.size > 12 * 1024 * 1024)
-          throw new Error("Har bir rasm 12 MB dan kichik bo‘lsin.");
-        const response = await fetch("/api/admin/services/images", {
-          method: "POST",
-          headers: { "Content-Type": file.type || "application/octet-stream" },
-          body: file,
-        });
-        const data = await response.json();
-        if (!response.ok)
-          throw new Error(data.error?.message ?? "Rasm yuklanmadi.");
+        const image = await uploadServiceImage(file);
         setDraft((d) => ({
           ...d,
-          images: [...d.images, { ...data.image, alt: d.name }],
+          images: [...d.images, { ...image, alt: d.name }],
         }));
       }
     } catch (e) {

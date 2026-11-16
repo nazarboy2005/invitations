@@ -23,6 +23,8 @@ Jobs progress through queued, running, review, failed or cancelled. The UI polls
 
 Observed product ranges are grouped by currency, category and unit. They are presented for review, without converting a restaurant menu or a placeholder into a wedding package price. The administrator enters the appropriate reviewed headline price in the editor; default pricing remains negotiable. Existing UZS conversion/rounding and `/ kishi` display continue to apply.
 
+Imported Instagram contacts are HTTPS account URLs only. Profile spelling/host/trailing-slash variants are normalized and deduplicated; HTTP Instagram links, stories, reels/posts, platform navigation, login and signup links are excluded. Maps sometimes labels a social profile as its website; these are kept as contacts rather than crawled as business websites. Older collector checkpoints are reprocessed through the current contact policy. These rules affect collected drafts, not previously published administrator content.
+
 ## Storage and migration
 
 `0234_services_admin.sql` creates service profiles, media, durable import jobs and worker heartbeat storage, and adds service audit actions. `0235_services_seed.sql` preserves the approved 307 profiles, including 50 wedding halls, as both editable drafts and published snapshots in their existing order. Both migrations are additive to invitation/catalog data.
@@ -30,6 +32,8 @@ Observed product ranges are grouped by currency, category and unit. They are pre
 `service_listings` is the runtime source of truth once a database is configured. Directory pages, detail metadata, related profiles, the sitemap and account favorite validation all read published database snapshots. Database errors do not fall back to bundled records and accidentally resurrect removed profiles. Bundled JSON remains a development fallback only when `DATABASE_URL` is absent; snapshot import scripts must not be used to replace admin edits.
 
 Existing packaged images remain unchanged. New uploads/imports use the configured application media storage (R2 or explicitly persistent local disk). Images are decoded, rotated, resized to 1600px maximum, stripped of metadata and stored as WebP. The image route serves a file publicly only while a published snapshot references it; other files require a fresh admin session. Responses are not cached, so removing a listing also withdraws anonymous image access. Normal visits do not scrape Maps or load remote source photos.
+
+Manual photo selection accepts JPEG, PNG, WebP and AVIF files up to 12 MiB. The browser decodes and resizes them to at most 1600px, preserving orientation/transparency, and encodes a request of at most 4 MiB before uploading. The API independently enforces that request limit and still decodes/re-encodes the uploaded bytes. Hosting error pages are handled with a readable error instead of a JSON parsing failure. The worker's direct-to-storage import path does not use this browser upload limit.
 
 ## Running the background worker
 

@@ -1,12 +1,19 @@
 import { load } from "cheerio";
 import { clean, linkKind, sourceRecord, unique } from "./core.mjs";
 import { contactLinks } from "./schema.mjs";
+import { isSocialPlatformUrl, normalizeContactLinks } from "./contacts.mjs";
 
 // Optional and bounded: homepage + up to two same-origin contact/about pages.
 export async function enrichWebsite(url, { fetcher }) {
+  if (isSocialPlatformUrl(url))
+    throw new Error(
+      "Social accounts are contacts, not business websites to crawl.",
+    );
   const record = sourceRecord("website", url),
     origin = new URL(url).origin;
   const home = await fetcher.get(url);
+  if (isSocialPlatformUrl(home.url))
+    throw new Error("Business website redirected to a social platform.");
   if (
     new URL(home.url).origin !== origin &&
     new URL(home.url).hostname.replace(/^www\./, "") !==
@@ -52,7 +59,7 @@ export async function enrichWebsite(url, { fetcher }) {
     );
   }
   record.emails = unique(record.emails);
-  record.links = unique(record.links, (x) => x.url);
+  record.links = normalizeContactLinks(record.links);
   // Website contacts are enrichment evidence, never a separate business match.
   record.name = "";
   record.warnings.push(

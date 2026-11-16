@@ -8,6 +8,9 @@ import { combineSources, matchBusinesses, nameSimilarity } from "./merge.mjs";
 import { downloadMedia, verifyMedia } from "./media.mjs";
 import { writeBusinessReport, writeRunReport } from "./report.mjs";
 import { readOverrides } from "./review.mjs";
+import { normalizeContactLinks } from "./contacts.mjs";
+
+const CONTACT_POLICY_VERSION = 1;
 
 export const searchProvider = (provider, query, options) =>
   (
@@ -72,6 +75,7 @@ export async function scrapeBusiness(input, options) {
   const overridesHash = hash(JSON.stringify(overrides));
   if (
     existing &&
+    existing.contactPolicyVersion === CONTACT_POLICY_VERSION &&
     existing.overridesHash === overridesHash &&
     !options.refresh &&
     ["complete", "needs_review"].includes(existing.status)
@@ -105,11 +109,13 @@ export async function scrapeBusiness(input, options) {
       `${provider}-${hash(url).slice(0, 12)}.json`,
     );
     const cached = !options.refresh && (await readJson(cacheFile));
-    if (cached?.name && cached.url) return cached;
+    if (cached?.name && cached.url)
+      return { ...cached, links: normalizeContactLinks(cached.links) };
     const record = await (
       options.scrapers?.[provider] ??
       (provider === "yandex" ? scrapeYandex : scrapeGoogle)
     )(url, context);
+    record.links = normalizeContactLinks(record.links);
     await atomicJson(cacheFile, record);
     return record;
   };
@@ -287,6 +293,7 @@ export async function scrapeBusiness(input, options) {
     (!sources.length && candidates.length > 0);
   const result = {
     schemaVersion: 1,
+    contactPolicyVersion: CONTACT_POLICY_VERSION,
     input,
     overridesHash,
     completedAt: new Date().toISOString(),

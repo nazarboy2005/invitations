@@ -1,3 +1,5 @@
+import { normalizeContactLinks } from "./contacts.mjs";
+
 // Mapping only. Downloading, storage and publication belong to their separate layers.
 export function toFotihaDraft(result, input, slug, images, categoryName) {
   const m = result.merged;
@@ -23,15 +25,7 @@ export function toFotihaDraft(result, input, slug, images, categoryName) {
       .filter((p) => /^\+?[\d\s()-]{7,50}$/.test(p))
       .slice(0, 10)
       .map((value) => ({ label: "Telefon", value })),
-    links: (m.links ?? [])
-      .filter((l) => {
-        try {
-          const u = new URL(l.url);
-          return /^https?:$/.test(u.protocol) && !u.username && !u.password;
-        } catch {
-          return false;
-        }
-      })
+    links: normalizeContactLinks(m.links)
       .slice(0, 15)
       .map((l) => ({
         label: clean(l.type || l.label || "Veb-sayt", 80),

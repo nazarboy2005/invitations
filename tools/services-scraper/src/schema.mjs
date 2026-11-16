@@ -1,12 +1,6 @@
 import { load } from "cheerio";
-import {
-  clean,
-  parseMoney,
-  priceUnit,
-  unique,
-  visit,
-  webUrl,
-} from "./core.mjs";
+import { contactUrl, isSocialPlatformUrl } from "./contacts.mjs";
+import { clean, parseMoney, priceUnit, unique, visit } from "./core.mjs";
 
 // Parse data embedded in public HTML; never evaluate source scripts.
 export function schemaObjects(html) {
@@ -66,14 +60,8 @@ export function contactLinks(html, base, { scoped = false } = {}) {
         emails.push(email.toLowerCase());
       return;
     }
-    const url = webUrl(href, base);
-    if (
-      url &&
-      (scoped ||
-        /(?:instagram\.com|facebook\.com|t\.me|telegram\.me|wa\.me|youtube\.com|vk\.com|tiktok\.com)\//i.test(
-          url,
-        ))
-    )
+    const url = contactUrl(href, base);
+    if (url && (scoped || isSocialPlatformUrl(url)))
       links.push({ url, label: clean($(el).text()) });
   });
   return { links: unique(links, (x) => x.url), emails: unique(emails) };
