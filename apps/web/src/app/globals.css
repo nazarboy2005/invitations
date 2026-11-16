@@ -27,6 +27,13 @@
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
+  /* Keep the browsing caret off ordinary page text. */
+  caret-color: transparent;
+}
+input,
+textarea,
+[contenteditable]:not([contenteditable="false"]) {
+  caret-color: auto;
 }
 * {
   box-sizing: border-box;

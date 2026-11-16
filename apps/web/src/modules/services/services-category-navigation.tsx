@@ -29,7 +29,6 @@ const NavigationContext = createContext<{
   selectedPath: string;
   navigate: (href: string) => void;
   positions: Map<string, NavPosition>;
-  lastResultsPath: { current: string };
 } | null>(null);
 
 let categoryScroll: { path: string; y: number } | null = null;
@@ -47,7 +46,6 @@ export function ServicesNavigationProvider({
   const [target, setTarget] = useState(pathname);
   const [pending, startTransition] = useTransition();
   const positions = useRef(new Map<string, NavPosition>());
-  const lastResultsPath = useRef(pathname);
 
   function navigate(href: string) {
     const path = href.split("?")[0];
@@ -62,7 +60,6 @@ export function ServicesNavigationProvider({
         selectedPath: pending ? target : pathname,
         navigate,
         positions: positions.current,
-        lastResultsPath,
       }}
     >
       <div
@@ -225,31 +222,9 @@ export function ServiceCategories({
   );
 }
 
-/** Animate just the results; the sticky controls never enter or leave. */
+/** Keep the result surface steady; individual cards handle their own reveal. */
 export function ServiceResults({ children }: { children: ReactNode }) {
-  const pathname = usePathname();
-  const navigation = useContext(NavigationContext)!;
-  const results = useRef<HTMLDivElement>(null);
-  useLayoutEffect(() => {
-    const changed = navigation.lastResultsPath.current !== pathname;
-    navigation.lastResultsPath.current = pathname;
-    if (!changed || pathname !== navigation.selectedPath || reducedMotion())
-      return;
-    // Finite animations finish themselves, including through Strict Mode's
-    // setup/cleanup replay. A subsequent category replaces this whole surface.
-    results.current!.animate(
-      [
-        { opacity: 0, transform: "translateY(6px)" },
-        { opacity: 1, transform: "translateY(0)" },
-      ],
-      { duration: 240, easing: "cubic-bezier(0.22, 1, 0.36, 1)" },
-    );
-  }, [pathname, navigation.selectedPath, navigation.lastResultsPath]);
-  return (
-    <div ref={results} className={styles.resultsContent}>
-      {children}
-    </div>
-  );
+  return <div className={styles.resultsContent}>{children}</div>;
 }
 
 /** Restore before paint, including when a new category has fewer cards. */

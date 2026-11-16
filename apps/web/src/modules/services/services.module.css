@@ -2017,8 +2017,9 @@
   cursor: pointer;
 }
 .serviceFavoriteButton:disabled {
-  opacity: 0.55;
-  cursor: wait;
+  /* Saving is optimistic; keep every heart visually steady during sync. */
+  opacity: 1;
+  cursor: pointer;
 }
 .serviceFavoriteButton:focus-visible,
 .serviceFavoritesFilter:focus-visible {

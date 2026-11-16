@@ -22,8 +22,11 @@ export default function ServicesLayout({
         }
         @media (max-width: 900px) {
           html:has([data-page-scrollbar="services"]) {
-            background-image: linear-gradient(rgb(255 248 240 / 18%), rgb(255 248 240 / 18%)),
-              url("${publicAsset("/images/services/backdrops/wedding-mobile.webp")}");
+            background: #f5e2d3;
+            overscroll-behavior-y: none;
+          }
+          body:has([data-page-scrollbar="services"]) {
+            overscroll-behavior-y: none;
           }
         }
       `}</style>

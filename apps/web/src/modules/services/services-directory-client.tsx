@@ -14,6 +14,7 @@ import {
   ServicesScrollPosition,
 } from "./services-category-navigation";
 import { ServiceCard } from "./service-card";
+import { ServiceCardGrid } from "./service-card-grid";
 import { ServicesToolbar } from "./services-toolbar";
 import { ServiceCategoryIcon } from "./service-category-icon";
 import {
@@ -196,7 +197,9 @@ export function ServicesDirectoryClient({
               {favoritesOnly && !saved.ready ? (
                 <p role="status">Saralanganlar yuklanmoqda…</p>
               ) : result.listings.length ? (
-                <div className={styles.grid}>
+                <ServiceCardGrid
+                  key={`${result.category?.id ?? "all"}:${result.query}:${result.region}:${result.page}:${favoritesOnly}`}
+                >
                   {result.listings.map((listing, index) => (
                     <ServiceCard
                       key={listing.slug}
@@ -204,7 +207,7 @@ export function ServicesDirectoryClient({
                       priority={index < 3}
                     />
                   ))}
-                </div>
+                </ServiceCardGrid>
               ) : (
                 <div className={styles.empty}>
                   <Search size={32} strokeWidth={1.2} />
