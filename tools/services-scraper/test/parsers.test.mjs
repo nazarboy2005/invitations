@@ -6,12 +6,76 @@ import {
   yandexItems,
   yandexState,
   yandexProducts,
+  yandexBusinessId,
+  scrapeYandex,
 } from "../src/yandex.mjs";
 import { parseGoogle, googleIdentity } from "../src/google.mjs";
 import { parseMoney, priceUnit, readJsonArray } from "../src/core.mjs";
 
 const fixture = (name) =>
   readFile(new URL(`fixtures/${name}.html`, import.meta.url), "utf8");
+
+test("Yandex identifies shared business points without guessing from coordinates", () => {
+  const url = new URL("https://yandex.uz/maps/10335/tashkent/");
+  url.searchParams.set("poi[point]", "69.338259,41.289793");
+  url.searchParams.set("poi[uri]", "ymapsbm1://org?oid=28785477820");
+  assert.equal(yandexBusinessId(url.href), "28785477820");
+  assert.equal(
+    yandexBusinessId("https://yandex.uz/maps/org/test/123/menu/"),
+    "123",
+  );
+  assert.equal(yandexBusinessId("https://yandex.uz/maps/-/CXSBfFON"), null);
+  for (const uri of [
+    "",
+    "https://evil.example/?oid=123",
+    "ymapsbm1://house?oid=123",
+    "ymapsbm1://org?oid=123/../../",
+    "ymapsbm1://user@org?oid=123",
+  ]) {
+    url.searchParams.set("poi[uri]", uri);
+    assert.equal(yandexBusinessId(url.href), null);
+  }
+  assert.equal(
+    yandexBusinessId("https://yandex.uz/maps/?ll=69.338259,41.289793"),
+    null,
+  );
+  assert.throws(() => yandexBusinessId("https://evil.example/maps/?oid=123"));
+});
+
+test("Yandex shared map points fetch the exact business page before extracting details", async () => {
+  const resolved = new URL("https://yandex.uz/maps/10335/tashkent/");
+  resolved.searchParams.set("poi[uri]", "ymapsbm1://org?oid=178096015422");
+  const calls = [];
+  const html = await fixture("yandex-versal");
+  const record = await scrapeYandex("https://yandex.uz/maps/-/share", {
+    fetcher: {
+      get: async (url, options) => {
+        calls.push(url);
+        assert.equal(options.maps, true);
+        return calls.length === 1
+          ? { url: resolved.href, text: awaitNever() }
+          : { url, text: html };
+      },
+    },
+  });
+  assert.equal(record.id, "178096015422");
+  assert.equal(calls[1], "https://yandex.uz/maps/org/178096015422/");
+  assert.ok(record.name.includes("Versal"));
+  assert.ok(record.phones.length);
+  assert.ok(record.images.length);
+});
+
+test("Yandex shared business identity cannot silently switch to another business", async () => {
+  const url = new URL("https://yandex.uz/maps/10335/tashkent/");
+  url.searchParams.set("poi[uri]", "ymapsbm1://org?oid=999");
+  const html = await fixture("yandex-versal");
+  await assert.rejects(
+    scrapeYandex(url.href, {
+      fetcher: { get: async (value) => ({ url: value, text: html }) },
+    }),
+    /Exact Yandex business/,
+  );
+});
 test("captured Yandex detail yields identity, contacts and photos without treating its address as a description", async () => {
   const r = parseYandex(
     await fixture("yandex-versal"),

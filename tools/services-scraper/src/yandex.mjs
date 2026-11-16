@@ -11,6 +11,34 @@ import {
   webUrl,
 } from "./core.mjs";
 import { schemaObjects, schemaProducts } from "./schema.mjs";
+import { providerForUrl, validateMapsUrl } from "./network.mjs";
+
+export function yandexBusinessId(value) {
+  const url = new URL(validateMapsUrl(value));
+  if (providerForUrl(url.href) !== "yandex")
+    throw new Error("Use a Yandex Maps URL.");
+  const pathId = url.pathname.match(
+    /^\/maps\/org\/(?:[^/]+\/)?(\d+)(?:\/|$)/,
+  )?.[1];
+  if (pathId) return pathId;
+  // Mobile Share links can redirect to a map point instead of an /org/ page.
+  // Only an explicit organization URI identifies a business; coordinates do not.
+  try {
+    const poi = new URL(url.searchParams.get("poi[uri]"));
+    const id = poi.searchParams.get("oid");
+    return poi.protocol === "ymapsbm1:" &&
+      poi.hostname === "org" &&
+      !poi.username &&
+      !poi.password &&
+      !poi.port &&
+      ["", "/"].includes(poi.pathname) &&
+      /^[1-9]\d*$/.test(id ?? "")
+      ? id
+      : null;
+  } catch {
+    return null;
+  }
+}
 
 export function yandexState(html) {
   const $ = load(html);
@@ -122,9 +150,7 @@ export function yandexProducts(html, org) {
 }
 export function parseYandex(html, url, requestedId = null) {
   const items = yandexItems(yandexState(html));
-  const id =
-    requestedId ??
-    new URL(url).pathname.match(/\/(\d+)\/?(?:prices\/?)?$/)?.[1];
+  const id = requestedId ?? yandexBusinessId(url);
   const org = id
     ? items.find((x) => x.id === id)
     : items.length === 1
@@ -276,8 +302,13 @@ export async function scrapeYandex(
   url,
   { fetcher, browser, evidenceDir, maxImages = 8, logger = () => {} },
 ) {
-  const response = await fetcher.get(url, { maps: true });
-  const record = parseYandex(response.text, response.url);
+  let response = await fetcher.get(url, { maps: true });
+  const requestedId = yandexBusinessId(response.url);
+  if (requestedId && !new URL(response.url).pathname.startsWith("/maps/org/")) {
+    const businessUrl = new URL(`/maps/org/${requestedId}/`, response.url).href;
+    response = await fetcher.get(businessUrl, { maps: true });
+  }
+  const record = parseYandex(response.text, response.url, requestedId);
   const $ = load(response.text);
   const menuHref = $("a[href]")
     .toArray()

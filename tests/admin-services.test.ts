@@ -51,6 +51,7 @@ test("service edits reject invalid prices, categories, contact schemes, location
 test("Maps imports accept business links or names and reject arbitrary fetch targets", () => {
   const base = { city: "Tashkent", categoryId: "restaurant" };
   for (const urls of [
+    ["https://yandex.uz/maps/-/CXSBfFON"],
     ["https://yandex.uz/maps/org/versal/178096015422/"],
     ["https://maps.app.goo.gl/example"],
     ["https://www.google.com/maps/place/example"],

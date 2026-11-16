@@ -22,7 +22,13 @@ const labels: Record<string, string> = {
   failed: "Xatolik",
   cancelled: "Bekor qilingan",
 };
-export function ServiceImports({ onOpen }: { onOpen: (slug: string) => void }) {
+export function ServiceImports({
+  onOpen,
+  showForm,
+}: {
+  onOpen: (slug: string) => Promise<void>;
+  showForm: boolean;
+}) {
   const [jobs, setJobs] = useState<Job[]>([]),
     [online, setOnline] = useState<boolean | null>(null);
   const [error, setError] = useState(""),
@@ -103,15 +109,27 @@ export function ServiceImports({ onOpen }: { onOpen: (slug: string) => void }) {
       setBusy(false);
     }
   }
+  async function openDraft(slug: string) {
+    setBusy(true);
+    setError("");
+    try {
+      await onOpen(slug);
+    } catch (e) {
+      setError((e as Error).message);
+    } finally {
+      setBusy(false);
+    }
+  }
   return (
     <div className={styles.sections}>
       <section className={styles.panel}>
         <div className={styles.sectionHeading}>
           <div>
-            <h2>Maps’dan servis qo‘shish</h2>
+            <h3>{showForm ? "Google va Yandex Maps" : "Import holati"}</h3>
             <p>
-              Google va Yandex ma’lumotlari birlashtiriladi. Natija tekshirish
-              uchun qoralama bo‘lib saqlanadi.
+              {showForm
+                ? "Mavjud ma’lumotlar birlashtiriladi. Natija tekshirish uchun qoralama bo‘lib saqlanadi."
+                : "Bu sahifani yopishingiz mumkin. Noutbukdagi import dasturi ishlayotgan bo‘lsa, yig‘ish davom etadi."}
             </p>
           </div>
           <span
@@ -122,13 +140,14 @@ export function ServiceImports({ onOpen }: { onOpen: (slug: string) => void }) {
               ? "Tekshirilmoqda…"
               : online
                 ? "Import xizmati faol"
-                : "Import xizmati ulanmagan"}
+                : "Importchi kutilmoqda"}
           </span>
         </div>
         {online === false && (
           <p className={styles.warning}>
-            Import navbatda saqlanadi. Yig‘ishni boshlash uchun serverdagi
-            Services import worker ishga tushirilishi kerak.
+            So‘rovlar navbatda saqlanadi. Yig‘ishni boshlash uchun noutbukdagi
+            import dasturini ishga tushiring. Noutbukni yoqilgan va internetga
+            ulangan holda qoldiring.
           </p>
         )}
         {error && (
@@ -141,103 +160,109 @@ export function ServiceImports({ onOpen }: { onOpen: (slug: string) => void }) {
             {notice}
           </p>
         )}
-        <form onSubmit={submit}>
-          <fieldset disabled={busy} className={styles.editorFields}>
-            <div className={styles.fieldGrid}>
-              <label>
-                Google yoki Yandex biznes havolasi
-                <input
-                  type="url"
-                  placeholder="https://yandex.uz/maps/org/…"
-                  maxLength={2000}
-                  value={url}
-                  onChange={(e) => setUrl(e.target.value)}
-                />
-              </label>
-              <label>
-                Ikkinchi manba havolasi (ixtiyoriy)
-                <input
-                  type="url"
-                  placeholder="https://www.google.com/maps/place/…"
-                  maxLength={2000}
-                  value={otherUrl}
-                  onChange={(e) => setOtherUrl(e.target.value)}
-                />
-              </label>
-              <label>
-                Tashkilot nomi (havola bo‘lmasa)
-                <input
-                  placeholder="Aniq to‘yxona nomi"
-                  value={query}
-                  maxLength={180}
-                  onChange={(e) => setQuery(e.target.value)}
-                />
-                <small>
-                  Umumiy qidiruv o‘rniga bitta tashkilotning aniq nomini
-                  kiriting.
-                </small>
-              </label>
-              <label>
-                Qidiruv shahri
-                <input
-                  required
-                  value={city}
-                  maxLength={120}
-                  onChange={(e) => setCity(e.target.value)}
-                />
-              </label>
-              <label>
-                Kategoriya
-                <select
-                  value={categoryId}
-                  onChange={(e) => setCategoryId(e.target.value)}
-                >
-                  {serviceCategoryChoices.map((c) => (
-                    <option key={c.id} value={c.id}>
-                      {c.name}
-                    </option>
-                  ))}
-                </select>
-              </label>
-              <label>
-                Katalogdagi viloyat / shahar
-                <input
-                  value={region}
-                  maxLength={120}
-                  onChange={(e) => setRegion(e.target.value)}
-                />
-              </label>
-              <label>
-                Rasm manbasi
-                <select
-                  value={imageSource}
-                  onChange={(e) => setImageSource(e.target.value)}
-                >
-                  <option value="single">
-                    Bitta manbadan — tavsiya qilinadi
-                  </option>
-                  <option value="mixed">Ikki manbadan</option>
-                </select>
-              </label>
-              <div className={styles.formAction}>
-                <button
-                  className={styles.primary}
-                  disabled={
-                    !url.trim() && !otherUrl.trim() && query.trim().length < 2
-                  }
-                >
-                  <Upload size={16} />{" "}
-                  {busy ? "Yuborilmoqda…" : "Ma’lumotlarni yig‘ish"}
-                </button>
-              </div>
-            </div>
-          </fieldset>
-        </form>
-        <p className={styles.hint}>
-          Mavjud bo‘lmagan tavsif, email yoki narx o‘ylab topilmaydi. Noaniq
-          filiallar birlashtirilmaydi. Rasmlar va kontaktlarni nashrdan oldin
-          tekshiring.
-        </p>
+        {showForm && (
+          <>
+            <form onSubmit={submit}>
+              <fieldset disabled={busy} className={styles.editorFields}>
+                <div className={styles.fieldGrid}>
+                  <label>
+                    Google yoki Yandex biznes havolasi
+                    <input
+                      type="url"
+                      placeholder="https://yandex.uz/maps/org/…"
+                      maxLength={2000}
+                      value={url}
+                      onChange={(e) => setUrl(e.target.value)}
+                    />
+                  </label>
+                  <label>
+                    Ikkinchi manba havolasi (ixtiyoriy)
+                    <input
+                      type="url"
+                      placeholder="https://www.google.com/maps/place/…"
+                      maxLength={2000}
+                      value={otherUrl}
+                      onChange={(e) => setOtherUrl(e.target.value)}
+                    />
+                  </label>
+                  <label>
+                    Tashkilot nomi (havola bo‘lmasa)
+                    <input
+                      placeholder="Aniq to‘yxona nomi"
+                      value={query}
+                      maxLength={180}
+                      onChange={(e) => setQuery(e.target.value)}
+                    />
+                    <small>
+                      Umumiy qidiruv o‘rniga bitta tashkilotning aniq nomini
+                      kiriting.
+                    </small>
+                  </label>
+                  <label>
+                    Qidiruv shahri
+                    <input
+                      required
+                      value={city}
+                      maxLength={120}
+                      onChange={(e) => setCity(e.target.value)}
+                    />
+                  </label>
+                  <label>
+                    Kategoriya
+                    <select
+                      value={categoryId}
+                      onChange={(e) => setCategoryId(e.target.value)}
+                    >
+                      {serviceCategoryChoices.map((c) => (
+                        <option key={c.id} value={c.id}>
+                          {c.name}
+                        </option>
+                      ))}
+                    </select>
+                  </label>
+                  <label>
+                    Katalogdagi viloyat / shahar
+                    <input
+                      value={region}
+                      maxLength={120}
+                      onChange={(e) => setRegion(e.target.value)}
+                    />
+                  </label>
+                  <label>
+                    Rasm manbasi
+                    <select
+                      value={imageSource}
+                      onChange={(e) => setImageSource(e.target.value)}
+                    >
+                      <option value="single">
+                        Bitta manbadan — tavsiya qilinadi
+                      </option>
+                      <option value="mixed">Ikki manbadan</option>
+                    </select>
+                  </label>
+                  <div className={styles.formAction}>
+                    <button
+                      className={styles.primary}
+                      disabled={
+                        !url.trim() &&
+                        !otherUrl.trim() &&
+                        query.trim().length < 2
+                      }
+                    >
+                      <Upload size={16} />{" "}
+                      {busy ? "Yuborilmoqda…" : "Ma’lumotlarni yig‘ish"}
+                    </button>
+                  </div>
+                </div>
+              </fieldset>
+            </form>
+            <p className={styles.hint}>
+              Mavjud bo‘lmagan tavsif, email yoki narx o‘ylab topilmaydi. Noaniq
+              filiallar birlashtirilmaydi. Rasmlar va kontaktlarni nashrdan
+              oldin tekshiring.
+            </p>
+          </>
+        )}
       </section>
       <section className={styles.panel}>
         <div className={styles.sectionHeading}>
@@ -280,7 +305,8 @@ export function ServiceImports({ onOpen }: { onOpen: (slug: string) => void }) {
                     <button
                       type="button"
                       className={styles.secondary}
-                      onClick={() => onOpen(job.service_slug!)}
+                      disabled={busy}
+                      onClick={() => void openDraft(job.service_slug!)}
                     >
                       Qoralamani ochish
                     </button>

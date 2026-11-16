@@ -70,7 +70,9 @@ export async function processNextServiceImport() {
   try {
     const [actor] = await db`SELECT * FROM users WHERE id=${job.created_by}`;
     if (!actor || !hasAdminRole(actor))
-      throw new Error("Import creator no longer has admin access.");
+      throw new Error(
+        "Importchi administrator huquqini tasdiqlay olmadi. Noutbukdagi administrator sozlamasi sayt bilan mos ekanini tekshiring va import dasturini qayta ishga tushiring.",
+      );
     const input = serviceImportSchema.parse(job.input),
       directory = path.join(output, job.id);
     await mkdir(directory, { recursive: true });
@@ -168,7 +170,9 @@ export async function processNextServiceImport() {
         const [freshActor] =
           await tx`SELECT * FROM users WHERE id=${job.created_by}`;
         if (!freshActor || !hasAdminRole(freshActor))
-          throw new Error("Administrator access was revoked.");
+          throw new Error(
+            "Importchi administrator huquqini tasdiqlay olmadi. Administrator huquqi va noutbukdagi sozlamani tekshiring.",
+          );
         await tx`INSERT INTO service_listings(slug,draft,evidence,review_required,created_by,updated_by) VALUES(${slug},${tx.json(draft as unknown as JSONValue)},${tx.json(evidence as JSONValue)},true,${job.created_by},${job.created_by})`;
         await tx`UPDATE service_import_jobs SET status='review',service_slug=${slug},result=${tx.json({ photos: images.length, sources: result.sources.map((s: { provider: string }) => s.provider), duplicates: existing.length, collectionStatus: result.status })},error=NULL,lease_token=NULL,updated_at=now() WHERE id=${job.id}`;
         await recordAdminChange(
