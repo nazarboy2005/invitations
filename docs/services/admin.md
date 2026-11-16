@@ -4,16 +4,16 @@ Open `/admin?view=services` using an administrator account with a fresh verified
 
 ## Managing a profile
 
-The list includes all existing profiles, with name/phone/address search, category and status filters, pagination, partner placement and unpublished-change indicators. **Servis qo‘shish** is the single entry point for creation: choose **Qo‘lda qo‘shish** for an empty editor or **Maps’dan import** for a collected review draft. **Import tarixi** provides access to progress and completed drafts from both the list and creation flow; it is not a separate creation tab. Edit name, permanent slug on creation, categories, description, region/district/address, coordinates, phone numbers, email, website/social links, pricing, photo descriptions, cover and photo order.
+The list includes all existing profiles, with name/phone/address search, category and status filters, pagination, partner placement and Active/Hidden visibility. **Servis qo‘shish** is the single entry point for creation: choose **Qo‘lda qo‘shish** for an empty editor or **Maps’dan import** for a collected review draft. **Import tarixi** provides access to progress and completed drafts from both the list and creation flow; it is not a separate creation tab. Edit name, URL slug, categories, description, region/district/address, coordinates, phone numbers, email, website/social links, pricing, photo descriptions, cover and photo order.
 
-- **Qoralamani saqlash** saves a private draft. For a published profile, the previous public snapshot stays visible.
-- **Nashr qilish** atomically publishes the editor's contents. A name, category, valid phone, address and at least one saved photo are required. Imported drafts also require explicit review acknowledgement. Missing descriptions and emails may remain empty.
-- **Nashrdan olish** removes the public snapshot and preserves an editable draft. **Arxivlash** keeps the record in the archive; it can be edited and republished later.
+- Choose **Faol** (Active) or **Yashirin** (Hidden), then **Saqlash**. Active saves update public content immediately; Hidden saves keep the editable record private. Existing drafts and archives appear as Hidden. There is no archive or separate unpublish action.
+- Active services require a name, category, valid phone, address and at least one saved photo. Imported services also require explicit review acknowledgement before activation. Missing descriptions and emails may remain empty.
+- **Servisni o‘chirish** asks for confirmation, then permanently deletes the service and its account favorites. Its import history remains, with the service reference cleared. Unshared uploaded photos are removed from storage; shared photos and packaged seed assets are retained. A temporary storage cleanup failure is reported without restoring the deleted service. The audit history retains the deletion record.
 - **Ko‘rib chiqish** renders the current, even unsaved draft using the public detail component in a private modal. No public preview URL is created.
 
-Featured means an agreed Fotiha partnership, not a source-site badge. Published featured profiles sort first and display “Hamkor”. Smaller priority numbers sort first among partners; equal priorities preserve directory order. Regular new profiles append to their category. The all-services view retains its category interleaving. Saving changes to featured status does not change public placement until publication.
+Featured means an agreed Fotiha partnership, not a source-site badge. Published featured profiles sort first and display “Hamkor”. Smaller priority numbers sort first among partners; equal priorities preserve directory order. Regular new profiles append to their category. The all-services view retains its category interleaving. Saving an Active service updates its partner placement immediately.
 
-Slugs remain stable after creation, preserving favorites and incoming links. Revision checks reject stale edits from another tab instead of overwriting them. Browser navigation and refresh protect unsaved editor changes. Services changes appear in the existing admin audit log.
+URL slugs are editable. A cancellable availability request runs 500ms after typing stops; invalid/occupied URLs cannot be saved. The server also checks uniqueness transactionally. Renaming updates both content snapshots, linked import history and account favorites; old public URLs stop working. Guest favorites and previously shared external links cannot be rewritten. System API names are reserved. Revision checks reject stale edits from another tab instead of overwriting them. Browser navigation and refresh protect unsaved editor changes. Services changes appear in the existing admin audit log.
 
 ## Import review
 
@@ -27,7 +27,7 @@ Imported Instagram contacts are HTTPS account URLs only. Profile spelling/host/t
 
 ## Storage and migration
 
-`0234_services_admin.sql` creates service profiles, media, durable import jobs and worker heartbeat storage, and adds service audit actions. `0235_services_seed.sql` preserves the approved 307 profiles, including 50 wedding halls, as both editable drafts and published snapshots in their existing order. Both migrations are additive to invitation/catalog data.
+`0234_services_admin.sql` creates service profiles, media, durable import jobs and worker heartbeat storage, and adds service audit actions. `0235_services_seed.sql` preserves the approved 307 profiles, including 50 wedding halls, as both editable drafts and published snapshots in their existing order. `0236_service_deletion_and_urls.sql` adds the deletion audit action and makes import references follow renamed URLs and clear on deletion. These migrations leave invitation/catalog data unchanged. Admin visibility maps the existing internal published/draft/archive storage to Active/Hidden, so the laptop worker remains compatible.
 
 `service_listings` is the runtime source of truth once a database is configured. Directory pages, detail metadata, related profiles, the sitemap and account favorite validation all read published database snapshots. Database errors do not fall back to bundled records and accidentally resurrect removed profiles. Bundled JSON remains a development fallback only when `DATABASE_URL` is absent; snapshot import scripts must not be used to replace admin edits.
 
@@ -60,7 +60,7 @@ Claims use row locks and lease tokens. Workers heartbeat every ten seconds durin
 
 - TypeScript and isolated production build passed.
 - 22 focused Services/admin security tests and 27 scraper tests passed.
-- The local HTTP integration test covers draft and media privacy, publication, public snapshot isolation, later edits, stale revision rejection, unpublishing, archiving, sitemap changes, import cancellation/retry, same-origin/session protections and durable audit entries.
+- The local HTTP integration test covers draft and media privacy, publication, active edits, hidden-service privacy, stale revision rejection, URL availability/rename/collisions, favorites/history preservation, permanent deletion, shared-photo cleanup, sitemap changes, import cancellation/retry, same-origin/session protections and durable audit entries.
 - All 40 public-directory HTTP checks passed against the final production build, including the 50-hall pagination, category redirects, profiles, sitemap and immutable packaged images.
 - Browser QA exercised manual creation, photo upload, partner priority, preview, save/publish, unsaved-change protection and import submission. Phone layouts were checked for document overflow.
 - A fresh live Seoul import combined Google and Yandex, produced eight saved photo candidates, three products and two separate observed price groups, and flagged the existing Seoul profile as a possible duplicate. The imported copy remained private and required review. Disposable test records were removed afterward.

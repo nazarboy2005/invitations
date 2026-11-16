@@ -308,7 +308,7 @@ export function ServiceImports({
                       disabled={busy}
                       onClick={() => void openDraft(job.service_slug!)}
                     >
-                      Qoralamani ochish
+                      Servisni ochish
                     </button>
                   )}
                   {["failed", "cancelled"].includes(job.status) && (

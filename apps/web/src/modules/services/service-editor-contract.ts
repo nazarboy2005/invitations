@@ -8,7 +8,11 @@ export const serviceCategoryChoices = categories.map((c) =>
 export const serviceSlug = z
   .string()
   .regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/)
-  .max(100);
+  .max(100)
+  .refine(
+    (value) => !["images", "imports", "slug-availability"].includes(value),
+    "Bu havola tizim uchun ajratilgan. Boshqa nom tanlang.",
+  );
 const text = (max: number) => z.string().trim().max(max);
 const number = z.number().finite().nonnegative().max(1e12).nullable();
 export const serviceImageSchema = z
@@ -115,7 +119,7 @@ export type ServiceRecord = {
   slug: string;
   draft: ServiceEditor;
   published: ServiceEditor | null;
-  status: "draft" | "published" | "archived";
+  status: "active" | "hidden";
   revision: number;
   updatedAt: string;
   evidence: Record<string, unknown> | null;
@@ -124,9 +128,15 @@ export type ServiceRecord = {
 export const serviceWriteSchema = z
   .object({
     revision: z.number().int().nonnegative(),
-    intent: z.enum(["save", "publish", "unpublish", "archive"]),
+    intent: z.enum(["active", "hidden"]),
     listing: serviceEditorSchema,
     reviewed: z.boolean().default(false),
+  })
+  .strict();
+
+export const serviceDeleteSchema = z
+  .object({
+    revision: z.number().int().positive(),
   })
   .strict();
 

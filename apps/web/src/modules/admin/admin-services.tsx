@@ -41,7 +41,7 @@ export function AdminServices({
   const [error, setError] = useState("");
   const counts = {
     published: items.filter((i) => i.published).length,
-    drafts: items.filter((i) => i.status === "draft").length,
+    hidden: items.filter((i) => !i.published).length,
     featured: items.filter((i) => i.published?.featured).length,
   };
   const filtered = useMemo(
@@ -60,23 +60,19 @@ export function AdminServices({
             .split(" ")
             .every((word) => text.includes(word)) &&
           (!category || i.draft.categoryIds.includes(category)) &&
-          (!status ||
-            (status === "featured"
-              ? i.published?.featured
-              : status === "changes"
-                ? i.published &&
-                  JSON.stringify(i.draft) !== JSON.stringify(i.published)
-                : i.status === status))
+          (!status || i.status === status)
         );
       }),
     [items, q, status, category],
   );
   const pages = Math.max(1, Math.ceil(filtered.length / 20)),
     currentPage = Math.min(page, pages);
-  function saved(item: ServiceRecord) {
+  function saved(item: ServiceRecord, previousSlug = item.slug) {
     setItems((all) =>
-      all.some((i) => i.slug === item.slug)
-        ? all.map((i) => (i.slug === item.slug ? item : i))
+      all.some((i) => i.slug === previousSlug || i.slug === item.slug)
+        ? all.map((i) =>
+            i.slug === previousSlug || i.slug === item.slug ? item : i,
+          )
         : [...all, item],
     );
     setEditing(item);
@@ -104,7 +100,7 @@ export function AdminServices({
                 slug: "",
                 draft: emptyService(),
                 published: null,
-                status: "draft",
+                status: "hidden",
                 revision: 0,
                 updatedAt: "",
                 evidence: null,
@@ -113,6 +109,15 @@ export function AdminServices({
             : editing
         }
         onSaved={saved}
+        onDeleted={(slug, cleanupPending) => {
+          setItems((all) => all.filter((item) => item.slug !== slug));
+          setEditing(null);
+          setError(
+            cleanupPending
+              ? "Servis o‘chirildi. Ayrim rasmlarni saqlash joyidan tozalash bajarilmadi."
+              : "",
+          );
+        }}
         onClose={() => setEditing(null)}
       />
     );
@@ -143,13 +148,13 @@ export function AdminServices({
         <div>
           <Check size={19} />
           <span>
-            Nashr qilingan<strong>{counts.published}</strong>
+            Faol<strong>{counts.published}</strong>
           </span>
         </div>
         <div>
           <ImageIcon size={19} />
           <span>
-            Qoralamalar<strong>{counts.drafts}</strong>
+            Yashirin<strong>{counts.hidden}</strong>
           </span>
         </div>
         <div>
@@ -225,11 +230,8 @@ export function AdminServices({
           }}
         >
           <option value="">Barcha holatlar</option>
-          <option value="published">Nashr qilingan</option>
-          <option value="draft">Qoralamalar</option>
-          <option value="changes">Nashr qilinmagan o‘zgarishlar</option>
-          <option value="featured">Hamkorlar</option>
-          <option value="archived">Arxiv</option>
+          <option value="active">Faol</option>
+          <option value="hidden">Yashirin</option>
         </select>
       </div>
       <div className={styles.tableWrap}>
@@ -285,18 +287,9 @@ export function AdminServices({
                   </td>
                   <td>
                     <span className={styles.badge} data-status={item.status}>
-                      {item.status === "published"
-                        ? "Nashr qilingan"
-                        : item.status === "archived"
-                          ? "Arxiv"
-                          : "Qoralama"}
+                      {item.status === "active" ? "Faol" : "Yashirin"}
                     </span>
                     {item.reviewRequired && <small>Tekshirish kerak</small>}
-                    {item.published &&
-                      JSON.stringify(item.draft) !==
-                        JSON.stringify(item.published) && (
-                        <small>Yangi o‘zgarishlar bor</small>
-                      )}
                   </td>
                   <td>
                     {item.published?.featured ? (

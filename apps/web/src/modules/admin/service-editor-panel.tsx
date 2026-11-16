@@ -19,6 +19,7 @@ import { ServiceDetail } from "@/modules/services/service-detail";
 import {
   serviceCategoryChoices,
   serviceEditorSchema,
+  serviceSlug,
   type ServiceEditor,
   type ServiceRecord,
 } from "@/modules/services/service-editor-contract";
@@ -31,10 +32,12 @@ import styles from "./admin-services.module.css";
 export function ServiceEditorPanel({
   initial,
   onSaved,
+  onDeleted,
   onClose,
 }: {
   initial: ServiceRecord;
-  onSaved: (item: ServiceRecord) => void;
+  onSaved: (item: ServiceRecord, previousSlug: string) => void;
+  onDeleted: (slug: string, cleanupPending: boolean) => void;
   onClose: () => void;
 }) {
   const [record, setRecord] = useState(initial);
@@ -44,8 +47,61 @@ export function ServiceEditorPanel({
     [notice, setNotice] = useState("");
   const [reviewed, setReviewed] = useState(false),
     [preview, setPreview] = useState(false);
-  const [confirm, setConfirm] = useState<"unpublish" | "archive" | null>(null);
-  const dirty = JSON.stringify(draft) !== JSON.stringify(record.draft);
+  const [confirmDelete, setConfirmDelete] = useState(false);
+  const [visibility, setVisibility] = useState<ServiceRecord["status"]>(
+    initial.status,
+  );
+  const [slugRetry, setSlugRetry] = useState(0);
+  const [slugCheck, setSlugCheck] = useState<{
+    slug: string;
+    state: "available" | "taken" | "error";
+  } | null>(null);
+  const slugValid = serviceSlug.safeParse(draft.slug).success;
+  const unchangedSlug = record.revision > 0 && draft.slug === record.slug;
+  const slugState = !slugValid
+    ? "invalid"
+    : unchangedSlug
+      ? "available"
+      : slugCheck?.slug === draft.slug
+        ? slugCheck.state
+        : "checking";
+  useEffect(() => {
+    if (!slugValid || unchangedSlug) return;
+    setSlugCheck(null);
+    const controller = new AbortController();
+    const timer = setTimeout(async () => {
+      try {
+        const query = new URLSearchParams({
+          slug: draft.slug,
+          current: record.slug,
+        });
+        const response = await fetch(
+          `/api/admin/services/slug-availability?${query}`,
+          {
+            cache: "no-store",
+            signal: controller.signal,
+          },
+        );
+        if (!response.ok) throw new Error("Availability check failed");
+        const result = await response.json();
+        if (!controller.signal.aborted)
+          setSlugCheck({
+            slug: draft.slug,
+            state: result.available ? "available" : "taken",
+          });
+      } catch {
+        if (!controller.signal.aborted)
+          setSlugCheck({ slug: draft.slug, state: "error" });
+      }
+    }, 500);
+    return () => {
+      clearTimeout(timer);
+      controller.abort();
+    };
+  }, [draft.slug, record.slug, slugValid, unchangedSlug, slugRetry]);
+  const dirty =
+    JSON.stringify(draft) !== JSON.stringify(record.draft) ||
+    visibility !== record.status;
   const leave = useAdminDirty(dirty);
   useEffect(() => {
     if (!dirty) return;
@@ -62,7 +118,8 @@ export function ServiceEditorPanel({
   ) {
     setDraft((d) => ({ ...d, [key]: value }));
   }
-  async function save(intent: "save" | "publish" | "unpublish" | "archive") {
+  async function save() {
+    if (slugState !== "available") return;
     setError("");
     setNotice("");
     const parsed = serviceEditorSchema.safeParse(draft);
@@ -80,21 +137,23 @@ export function ServiceEditorPanel({
         record.revision
           ? `/api/admin/services/${record.slug}`
           : "/api/admin/services",
-        { revision: record.revision, intent, listing: parsed.data, reviewed },
+        {
+          revision: record.revision,
+          intent: visibility,
+          listing: parsed.data,
+          reviewed,
+        },
         record.revision ? "PATCH" : "POST",
       );
       setRecord(item);
       setDraft(item.draft);
       setReviewed(false);
-      onSaved(item);
+      setVisibility(item.status);
+      onSaved(item, record.slug);
       setNotice(
-        intent === "publish"
-          ? "Servis nashr qilindi. Saytda hozir ko‘rinadi."
-          : intent === "unpublish"
-            ? "Servis nashrdan olindi."
-            : intent === "archive"
-              ? "Servis arxivlandi."
-              : "Qoralama saqlandi. Nashr qilingan versiya o‘zgarmadi.",
+        item.status === "active"
+          ? "Saqlandi. Servis saytda ko‘rinadi."
+          : "Saqlandi. Servis saytda yashirilgan.",
       );
     } catch (e) {
       setError((e as Error).message);
@@ -104,10 +163,24 @@ export function ServiceEditorPanel({
   }
   function submit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const intent = (e.nativeEvent as SubmitEvent).submitter?.getAttribute(
-      "value",
-    );
-    void save(intent === "publish" ? "publish" : "save");
+    void save();
+  }
+  async function deleteService() {
+    setBusy(true);
+    setError("");
+    try {
+      const result = await servicesRequest(
+        `/api/admin/services/${record.slug}`,
+        { revision: record.revision },
+        "DELETE",
+      );
+      onDeleted(record.slug, result.cleanupPending === true);
+    } catch (e) {
+      setError((e as Error).message);
+    } finally {
+      setBusy(false);
+      setConfirmDelete(false);
+    }
   }
   async function upload(files: FileList | null) {
     if (!files?.length) return;
@@ -149,11 +222,7 @@ export function ServiceEditorPanel({
           <ArrowLeft size={17} /> Servislarga qaytish
         </button>
         <span className={styles.badge} data-status={record.status}>
-          {record.status === "published"
-            ? "Nashr qilingan"
-            : record.status === "archived"
-              ? "Arxiv"
-              : "Qoralama"}
+          {record.status === "active" ? "Faol" : "Yashirin"}
           {dirty ? " · saqlanmagan" : ""}
         </span>
       </div>
@@ -162,9 +231,8 @@ export function ServiceEditorPanel({
           <div>
             <h2>{record.revision ? record.draft.name : "Yangi servis"}</h2>
             <p>
-              {record.published
-                ? "Saqlash qoralamani yangilaydi. O‘zgarishlarni saytda ko‘rsatish uchun nashr qiling."
-                : "Ma’lumotlarni to‘ldiring va nashrdan oldin tekshiring."}
+              Faol servis saytda ko‘rinadi. Yashirin servis faqat adminda
+              qoladi.
             </p>
           </div>
           <button
@@ -233,14 +301,41 @@ export function ServiceEditorPanel({
                       required
                       pattern="[a-z0-9]+(-[a-z0-9]+)*"
                       maxLength={100}
-                      readOnly={record.revision > 0}
+                      aria-describedby="service-slug-status"
+                      aria-invalid={
+                        slugState === "taken" || slugState === "invalid"
+                      }
                       value={draft.slug}
                       onChange={(e) => patch("slug", e.target.value)}
                     />
-                    <small>
-                      /services/b/{draft.slug || "servis-nomi"}
-                      {record.revision > 0 && " · doimiy havola"}
+                    <small>/services/b/{draft.slug || "servis-nomi"}</small>
+                    <small
+                      id="service-slug-status"
+                      role="status"
+                      aria-live="polite"
+                    >
+                      {slugState === "available"
+                        ? "Havola bo‘sh — foydalanish mumkin."
+                        : slugState === "checking"
+                          ? "Havola tekshirilmoqda…"
+                          : slugState === "taken"
+                            ? "Bu havola band. Boshqa nom tanlang."
+                            : slugState === "error"
+                              ? "Havolani tekshirib bo‘lmadi. Qayta tekshiring."
+                              : "Faqat kichik lotin harflari, raqam va chiziqcha kiriting."}
                     </small>
+                    {slugState === "error" && (
+                      <button
+                        type="button"
+                        className={styles.secondary}
+                        onClick={() => setSlugRetry((value) => value + 1)}
+                      >
+                        Qayta tekshirish
+                      </button>
+                    )}
+                    {record.revision > 0 && draft.slug !== record.slug && (
+                      <small>Saqlangandan so‘ng eski havola ishlamaydi.</small>
+                    )}
                   </label>
                   <div className={styles.wide}>
                     <span className={styles.fieldLabel}>Kategoriyalar</span>
@@ -727,33 +822,37 @@ export function ServiceEditorPanel({
                   </p>
                 </div>
               </section>
-              {record.revision > 0 && (
-                <section className={styles.panel}>
-                  <h3>Nashr holati</h3>
-                  <p className={styles.hint}>
-                    Yangilangan:{" "}
-                    {new Date(record.updatedAt).toLocaleString("uz-UZ")}
-                  </p>
-                  {record.published && (
-                    <button
-                      type="button"
-                      className={styles.secondary}
-                      onClick={() => setConfirm("unpublish")}
-                    >
-                      Nashrdan olish
-                    </button>
-                  )}
-                  {record.status !== "archived" && (
+              <section className={styles.panel}>
+                <h3>Ko‘rinish</h3>
+                <label>
+                  Holat
+                  <select
+                    aria-label="Servis holati"
+                    value={visibility}
+                    onChange={(e) =>
+                      setVisibility(e.target.value as ServiceRecord["status"])
+                    }
+                  >
+                    <option value="active">Faol</option>
+                    <option value="hidden">Yashirin</option>
+                  </select>
+                </label>
+                {record.revision > 0 && (
+                  <>
+                    <p className={styles.hint}>
+                      Yangilangan:{" "}
+                      {new Date(record.updatedAt).toLocaleString("uz-UZ")}
+                    </p>
                     <button
                       type="button"
                       className={styles.danger}
-                      onClick={() => setConfirm("archive")}
+                      onClick={() => setConfirmDelete(true)}
                     >
-                      Arxivlash
+                      <Trash2 size={16} /> Servisni o‘chirish
                     </button>
-                  )}
-                </section>
-              )}
+                  </>
+                )}
+              </section>
             </aside>
           </div>
           <div className={styles.savebar}>
@@ -771,16 +870,17 @@ export function ServiceEditorPanel({
               {busy && <span role="status">Saqlanmoqda…</span>}
             </div>
             <div>
-              <button type="submit" value="save" className={styles.secondary}>
-                <Save size={16} /> Qoralamani saqlash
-              </button>
               <button
                 type="submit"
-                value="publish"
                 className={styles.primary}
-                disabled={record.reviewRequired && !reviewed}
+                disabled={
+                  slugState !== "available" ||
+                  (visibility === "active" &&
+                    record.reviewRequired &&
+                    !reviewed)
+                }
               >
-                Nashr qilish
+                <Save size={16} /> Saqlash
               </button>
             </div>
           </div>
@@ -789,22 +889,14 @@ export function ServiceEditorPanel({
       {preview && (
         <ServicePreview listing={draft} onClose={() => setPreview(false)} />
       )}
-      {confirm && (
+      {confirmDelete && (
         <ConfirmationDialog
-          title={
-            confirm === "archive"
-              ? "Servisni arxivlash"
-              : "Servisni nashrdan olish"
-          }
-          description="Servis saytdan olinadi. Saqlangan ma’lumotlarni keyin tahrirlash va qayta nashr qilish mumkin."
-          confirmLabel={confirm === "archive" ? "Arxivlash" : "Nashrdan olish"}
-          cancelLabel="Bekor qilish"
-          onCancel={() => setConfirm(null)}
-          onConfirm={() => {
-            const intent = confirm;
-            setConfirm(null);
-            void save(intent);
-          }}
+          title="Servisni butunlay o‘chirish"
+          description={`“${record.draft.name}” va uning ma’lumotlari butunlay o‘chiriladi. Bu amalni qaytarib bo‘lmaydi.`}
+          confirmLabel="Butunlay o‘chirish"
+          busy={busy}
+          onCancel={() => setConfirmDelete(false)}
+          onConfirm={() => void deleteService()}
         />
       )}
     </div>
@@ -831,10 +923,10 @@ function ServicePreview({
         e.preventDefault();
         onClose();
       }}
-      aria-label="Servisning nashrdan oldingi ko‘rinishi"
+      aria-label="Servis ko‘rinishi"
     >
       <div className={styles.previewBar}>
-        <span>Nashrdan oldingi ko‘rinish · qoralama</span>
+        <span>Servis ko‘rinishi</span>
         <button
           autoFocus
           onClick={onClose}

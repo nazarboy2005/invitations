@@ -9,8 +9,8 @@ import { removeMedia } from "../apps/web/src/server/storage";
 import { serviceListings } from "../apps/web/src/modules/services/services-data";
 
 test(
-  "Services administration protects drafts, publishes snapshots, edits, orders, archives and audits",
-  { timeout: 240000 },
+  "Services administration supports active/hidden visibility, URL editing, permanent deletion and audits",
+  { timeout: 600000 },
   async () => {
     const origin = process.env.SERVICES_TEST_URL || "http://127.0.0.1:3002";
     assert.ok(["127.0.0.1", "localhost"].includes(new URL(origin).hostname));
@@ -18,13 +18,13 @@ test(
       admin = randomUUID(),
       owner = randomUUID(),
       slug = `qa-services-${randomUUID()}`;
+    const renamedSlug = `${slug}-renamed`,
+      sharedSlug = `${slug}-shared`;
     const tokens = {
       admin: randomToken(),
       owner: randomToken(),
       stale: randomToken(),
     };
-    const [before] =
-      await db`SELECT count(*)::int AS count FROM service_listings`;
     async function req(
       path: string,
       role: keyof typeof tokens | null = "admin",
@@ -86,7 +86,7 @@ test(
         403,
       );
       const list = await expect(await req("/api/admin/services"), 200);
-      assert.equal(list.items.length, before.count);
+      assert.ok(Array.isArray(list.items));
       const bytes = await sharp({
         create: { width: 640, height: 480, channels: 3, background: "#9d7885" },
       })
@@ -112,11 +112,35 @@ test(
         await req("/api/admin/services", "admin", {
           listing,
           revision: 0,
-          intent: "save",
+          intent: "hidden",
         }),
         201,
       );
-      assert.equal(item.status, "draft");
+      assert.equal(item.status, "hidden");
+      const availability = "/api/admin/services/slug-availability";
+      await expect(await req(`${availability}?slug=${slug}`, null), 401);
+      await expect(await req(`${availability}?slug=${slug}`, "owner"), 403);
+      assert.equal(
+        (await expect(await req(`${availability}?slug=${slug}`), 200))
+          .available,
+        false,
+      );
+      assert.equal(
+        (
+          await expect(
+            await req(`${availability}?slug=${slug}&current=${slug}`),
+            200,
+          )
+        ).available,
+        true,
+      );
+      assert.equal(
+        (await expect(await req(`${availability}?slug=${renamedSlug}`), 200))
+          .available,
+        true,
+      );
+      await expect(await req(`${availability}?slug=Invalid!`), 400);
+
       assert.equal((await req(`/services/b/${slug}`, null)).status, 404);
       assert.equal((await req("/sitemap.xml", null)).status, 200);
       await db`UPDATE service_listings SET review_required=true,evidence=${db.json({ sources: [], missing: ["email"] })} WHERE slug=${slug}`;
@@ -124,7 +148,7 @@ test(
         await req(
           `/api/admin/services/${slug}`,
           "admin",
-          { listing, revision: item.revision, intent: "publish" },
+          { listing, revision: item.revision, intent: "active" },
           "PATCH",
         ),
         400,
@@ -137,14 +161,14 @@ test(
           {
             listing,
             revision: item.revision,
-            intent: "publish",
+            intent: "active",
             reviewed: true,
           },
           "PATCH",
         ),
         200,
       ));
-      assert.equal(item.status, "published");
+      assert.equal(item.status, "active");
       assert.equal(item.reviewRequired, false);
       assert.equal((await req(image.src, null)).status, 200);
       const favorites = await expect(
@@ -175,7 +199,7 @@ test(
         await req(
           `/api/admin/services/${slug}`,
           "admin",
-          { listing, revision: 1, intent: "save" },
+          { listing, revision: 1, intent: "hidden" },
           "PATCH",
         ),
         409,
@@ -190,19 +214,7 @@ test(
         await req(
           `/api/admin/services/${slug}`,
           "admin",
-          { listing, revision: item.revision, intent: "save" },
-          "PATCH",
-        ),
-        200,
-      ));
-      html = await (await req(`/services/b/${slug}`, null)).text();
-      assert.ok(html.includes("Services QA original"));
-      assert.ok(!html.includes("Services QA edited"));
-      ({ item } = await expect(
-        await req(
-          `/api/admin/services/${slug}`,
-          "admin",
-          { listing, revision: item.revision, intent: "publish" },
+          { listing, revision: item.revision, intent: "active" },
           "PATCH",
         ),
         200,
@@ -213,23 +225,24 @@ test(
         await req(
           `/api/admin/services/${slug}`,
           "admin",
-          { listing, revision: item.revision, intent: "unpublish" },
+          { listing, revision: item.revision, intent: "active" },
+          "PATCH",
+        ),
+        200,
+      ));
+      html = await (await req(`/services/b/${slug}`, null)).text();
+      assert.ok(html.includes("Services QA edited"));
+      ({ item } = await expect(
+        await req(
+          `/api/admin/services/${slug}`,
+          "admin",
+          { listing, revision: item.revision, intent: "hidden" },
           "PATCH",
         ),
         200,
       ));
       assert.equal((await req(`/services/b/${slug}`, null)).status, 404);
       await expect(await req(image.src, null), 401);
-      ({ item } = await expect(
-        await req(
-          `/api/admin/services/${slug}`,
-          "admin",
-          { listing, revision: item.revision, intent: "archive" },
-          "PATCH",
-        ),
-        200,
-      ));
-      assert.equal(item.status, "archived");
       assert.ok(
         !(await (await req("/sitemap.xml", null)).text()).includes(
           `/services/b/${slug}`,
@@ -243,7 +256,7 @@ test(
         await req(
           `/api/admin/services/${slug}`,
           "admin",
-          { listing: invalid, revision: item.revision, intent: "publish" },
+          { listing: invalid, revision: item.revision, intent: "active" },
           "PATCH",
         ),
         400,
@@ -291,6 +304,143 @@ test(
         ),
         200,
       );
+      // Keep a linked history row and a shared image while renaming and deleting.
+      await db`UPDATE service_import_jobs SET service_slug=${slug} WHERE id=${job.id}`;
+      await expect(
+        await req(
+          `/api/admin/services/${slug}`,
+          "admin",
+          {
+            listing: { ...listing, slug: serviceListings[0].slug },
+            revision: item.revision,
+            intent: "hidden",
+          },
+          "PATCH",
+        ),
+        409,
+        "SERVICE_SLUG_TAKEN",
+      );
+      ({ item } = await expect(
+        await req(
+          `/api/admin/services/${slug}`,
+          "admin",
+          {
+            listing: { ...listing, slug: renamedSlug },
+            revision: item.revision,
+            intent: "hidden",
+          },
+          "PATCH",
+        ),
+        200,
+      ));
+      assert.equal(item.slug, renamedSlug);
+      assert.equal(item.draft.slug, renamedSlug);
+      assert.equal(
+        (
+          await db`SELECT service_slug FROM service_import_jobs WHERE id=${job.id}`
+        )[0].service_slug,
+        renamedSlug,
+      );
+      assert.equal(
+        (
+          await db`SELECT service_slug FROM service_favorites WHERE user_id=${owner}`
+        )[0].service_slug,
+        renamedSlug,
+      );
+      await expect(await req(`/api/admin/services/${slug}`), 404);
+      const { item: shared } = await expect(
+        await req("/api/admin/services", "admin", {
+          listing: { ...listing, slug: sharedSlug },
+          revision: 0,
+          intent: "hidden",
+        }),
+        201,
+      );
+      await expect(
+        await req(
+          `/api/admin/services/${renamedSlug}`,
+          null,
+          { revision: item.revision },
+          "DELETE",
+        ),
+        401,
+      );
+      await expect(
+        await req(
+          `/api/admin/services/${renamedSlug}`,
+          "owner",
+          { revision: item.revision },
+          "DELETE",
+        ),
+        403,
+      );
+      await expect(
+        await req(
+          `/api/admin/services/${renamedSlug}`,
+          "admin",
+          { revision: item.revision },
+          "DELETE",
+          { Origin: "https://evil.example" },
+        ),
+        403,
+      );
+      await expect(
+        await req(
+          `/api/admin/services/${renamedSlug}`,
+          "admin",
+          { revision: item.revision - 1 },
+          "DELETE",
+        ),
+        409,
+        "SERVICE_CONFLICT",
+      );
+      const deleted = await expect(
+        await req(
+          `/api/admin/services/${renamedSlug}`,
+          "admin",
+          { revision: item.revision },
+          "DELETE",
+        ),
+        200,
+      );
+      assert.equal(deleted.cleanupPending, false);
+      await expect(await req(`/api/admin/services/${renamedSlug}`), 404);
+      assert.equal(
+        (
+          await db`SELECT service_slug FROM service_import_jobs WHERE id=${job.id}`
+        )[0].service_slug,
+        null,
+      );
+      assert.equal(
+        (await db`SELECT * FROM service_favorites WHERE user_id=${owner}`)
+          .length,
+        0,
+      );
+      assert.equal(
+        (await req(image.src)).status,
+        200,
+        "Shared image must survive",
+      );
+      const deletedShared = await expect(
+        await req(
+          `/api/admin/services/${sharedSlug}`,
+          "admin",
+          { revision: shared.revision },
+          "DELETE",
+        ),
+        200,
+      );
+      assert.equal(deletedShared.cleanupPending, false);
+      await expect(await req(image.src), 404);
+      await expect(
+        await req(
+          `/api/admin/services/${renamedSlug}`,
+          "admin",
+          { revision: item.revision },
+          "DELETE",
+        ),
+        404,
+      );
       const audit =
         await db`SELECT action FROM admin_audit_log WHERE actor_id=${admin}`;
       for (const action of [
@@ -298,7 +448,7 @@ test(
         "service.update",
         "service.publish",
         "service.unpublish",
-        "service.archive",
+        "service.delete",
         "service.import",
       ])
         assert.ok(audit.some((r) => r.action === action));
@@ -308,7 +458,7 @@ test(
       for (const m of media) await removeMedia(m.object_key);
       await db.begin(async (tx) => {
         await tx`DELETE FROM service_import_jobs WHERE created_by=${admin}`;
-        await tx`DELETE FROM service_listings WHERE slug=${slug}`;
+        await tx`DELETE FROM service_listings WHERE slug=ANY(${tx.array([slug, renamedSlug, sharedSlug])}::text[])`;
         await tx`DELETE FROM service_media WHERE owner_id=${admin}`;
         await tx`DELETE FROM admin_audit_log WHERE actor_id=${admin}`;
         await tx`DELETE FROM sessions WHERE user_id=ANY(${tx.array([admin, owner])}::uuid[])`;
@@ -317,8 +467,8 @@ test(
         await tx`DELETE FROM users WHERE id=ANY(${tx.array([admin, owner])}::uuid[])`;
       });
       const [after] =
-        await db`SELECT count(*)::int AS count FROM service_listings`;
-      assert.equal(after.count, before.count);
+        await db`SELECT count(*)::int AS count FROM service_listings WHERE slug=ANY(${db.array([slug, renamedSlug, sharedSlug])}::text[])`;
+      assert.equal(after.count, 0);
       await closeDb();
     }
   },

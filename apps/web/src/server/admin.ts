@@ -59,6 +59,7 @@ type AdminAction =
   | "service.publish"
   | "service.unpublish"
   | "service.archive"
+  | "service.delete"
   | "service.import"
   | "template.update"
   | "category.create"

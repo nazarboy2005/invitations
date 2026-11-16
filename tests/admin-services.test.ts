@@ -4,12 +4,40 @@ import {
   emptyService,
   serviceEditorSchema,
   serviceImportSchema,
+  serviceWriteSchema,
+  serviceDeleteSchema,
 } from "../apps/web/src/modules/services/service-editor-contract";
 import { serviceDirectory } from "../apps/web/src/modules/services/services-utils";
 import {
   serviceListings,
   serviceCategories,
 } from "../apps/web/src/modules/services/services-data";
+
+test("service writes expose only active/hidden and deletes require a saved revision", () => {
+  const listing = { ...emptyService(), slug: "qa-hall", name: "QA Hall" };
+  for (const intent of ["active", "hidden"])
+    assert.ok(
+      serviceWriteSchema.safeParse({ listing, intent, revision: 0 }).success,
+    );
+  for (const intent of ["save", "publish", "unpublish", "archive"])
+    assert.equal(
+      serviceWriteSchema.safeParse({ listing, intent, revision: 0 }).success,
+      false,
+    );
+  for (const slug of ["imports", "images", "slug-availability"])
+    assert.equal(
+      serviceEditorSchema.safeParse({ ...listing, slug }).success,
+      false,
+    );
+  assert.ok(serviceDeleteSchema.safeParse({ revision: 1 }).success);
+  for (const value of [
+    {},
+    { revision: 0 },
+    { revision: -1 },
+    { revision: 1, force: true },
+  ])
+    assert.equal(serviceDeleteSchema.safeParse(value).success, false);
+});
 
 test("all existing services remain editable without losing their content", () => {
   for (const listing of serviceListings) {
