@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { ArrowLeft, ArrowRight, MapPin, Search, X } from "lucide-react";
 import {
   useLayoutEffect,
@@ -12,6 +12,11 @@ import {
 } from "react";
 import { SoftSelect } from "@/components/soft-select";
 import { ServiceCategoryIcon } from "./service-category-icon";
+import { useServicesLocation } from "./services-location";
+import {
+  CURRENT_LOCATION_LABEL,
+  CURRENT_LOCATION_REGION,
+} from "./service-distance";
 import styles from "./services.module.css";
 
 type ToolbarProps = {
@@ -42,7 +47,8 @@ export function ServicesToolbar({
   nextHref,
 }: ToolbarProps) {
   const router = useRouter();
-  const searchParams = useSearchParams();
+  const location = useServicesLocation();
+  const regionRequest = useRef(0);
   const [searchOpen, setSearchOpen] = useState(Boolean(query));
   const [mobileSearchExpanded, setMobileSearchExpanded] = useState(
     Boolean(query),
@@ -51,6 +57,7 @@ export function ServicesToolbar({
   const closingSearch = useRef(false);
   useLayoutEffect(
     () => () => {
+      regionRequest.current++;
       if (searchTimer.current) clearTimeout(searchTimer.current);
       animation.current?.cancel();
     },
@@ -150,7 +157,8 @@ export function ServicesToolbar({
     if (!form.current) return;
     const fields = new FormData(form.current);
     const params = new URLSearchParams();
-    if (searchParams.get("favorites") === "1") params.set("favorites", "1");
+    if (new URL(window.location.href).searchParams.get("favorites") === "1")
+      params.set("favorites", "1");
     const q = (nextQuery ?? String(fields.get("q") ?? "")).trim();
     if (q) params.set("q", q);
     if (nextRegion) params.set("region", nextRegion);
@@ -184,7 +192,9 @@ export function ServicesToolbar({
     // preceding click's results. Rapid direction changes must not use old props.
     const url = new URL(window.location.href);
     const value = Number(url.searchParams.get("page") ?? "1");
-    const current = Number.isInteger(value) ? Math.min(pages, Math.max(1, value)) : 1;
+    const current = Number.isInteger(value)
+      ? Math.min(pages, Math.max(1, value))
+      : 1;
     const next = Math.min(pages, Math.max(1, current + direction));
     if (next === current) return;
     if (next === 1) url.searchParams.delete("page");
@@ -296,9 +306,20 @@ export function ServicesToolbar({
             label="Hudud"
             options={[
               { value: "", label: "Barcha hududlar" },
+              {
+                value: CURRENT_LOCATION_REGION,
+                label: CURRENT_LOCATION_LABEL,
+                disabled: location.loading,
+              },
               ...regions.map((item) => ({ value: item, label: item })),
             ]}
-            onChange={(value) => {
+            onChange={async (value) => {
+              const request = ++regionRequest.current;
+              if (value === CURRENT_LOCATION_REGION) {
+                const found = await location.requestLocation();
+                // Keep the old region/results on failure or a newer selection.
+                if (!found || request !== regionRequest.current) return;
+              }
               setSelectedRegion(value);
               applyFilters(value);
             }}

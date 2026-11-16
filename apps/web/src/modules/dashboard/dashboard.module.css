@@ -99,14 +99,6 @@
   gap: 10px;
   max-width: 46%;
 }
-.adminButton {
-  background: #ffffff80;
-  color: var(--primary);
-  border-color: var(--line);
-}
-.adminButton:hover {
-  background: var(--accent-soft);
-}
 .createPanel {
   display: flex;
   align-items: center;

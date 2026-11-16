@@ -1,4 +1,9 @@
 import exchangeRate from "./data/exchange-rate.json";
+import {
+  CURRENT_LOCATION_REGION,
+  serviceDistance,
+  type ServiceCoordinates,
+} from "./service-distance";
 export type ServiceImage = {
   src: string;
   width: number;
@@ -101,6 +106,7 @@ export type ServiceFilters = {
   region?: string;
   page?: string | number;
   favorites?: boolean;
+  origin?: ServiceCoordinates | null;
 };
 
 export function serviceDirectory(
@@ -117,7 +123,9 @@ export function serviceDirectory(
   const matches = serviceListings.filter(
     (listing) =>
       (!category || listing.categoryIds.includes(category.id)) &&
-      (!region || listing.region === region) &&
+      (!region ||
+        region === CURRENT_LOCATION_REGION ||
+        listing.region === region) &&
       terms.every((term) =>
         normalizeServiceSearch(
           [
@@ -143,6 +151,7 @@ export function serviceDirectory(
       positions.set(categoryId, position + 1);
       return {
         listing,
+        distance: serviceDistance(filters.origin, listing) ?? Infinity,
         rank:
           position * serviceCategories.length +
           (categoryOrder.get(categoryId) ?? index),
@@ -151,6 +160,13 @@ export function serviceDirectory(
     })
     .sort(
       (a, b) =>
+        (region === CURRENT_LOCATION_REGION && filters.origin
+          ? a.distance < b.distance
+            ? -1
+            : a.distance > b.distance
+              ? 1
+              : 0
+          : 0) ||
         Number(b.listing.featured) - Number(a.listing.featured) ||
         (a.listing.featured && b.listing.featured
           ? (a.listing.featuredOrder ?? 0) - (b.listing.featuredOrder ?? 0)

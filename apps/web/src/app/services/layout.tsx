@@ -3,6 +3,7 @@ import { SiteHeader } from "@/components/site-header";
 import { display, sans } from "@/app/platform-fonts";
 import styles from "@/modules/services/services.module.css";
 import { ServicesNavigationProvider } from "@/modules/services/services-category-navigation";
+import { ServicesLocationProvider } from "@/modules/services/services-location";
 
 export default function ServicesLayout({
   children,
@@ -46,7 +47,9 @@ export default function ServicesLayout({
       </picture>
       <SiteHeader catalog />
       <main id="main" className={styles.shell}>
-        <ServicesNavigationProvider>{children}</ServicesNavigationProvider>
+        <ServicesLocationProvider>
+          <ServicesNavigationProvider>{children}</ServicesNavigationProvider>
+        </ServicesLocationProvider>
       </main>
     </div>
   );

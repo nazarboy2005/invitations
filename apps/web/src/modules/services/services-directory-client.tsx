@@ -2,6 +2,12 @@
 import Link from "next/link";
 import { ArrowRight, Flower2, Search } from "lucide-react";
 import { useSearchParams } from "next/navigation";
+import { useEffect } from "react";
+import { useServicesLocation } from "./services-location";
+import {
+  CURRENT_LOCATION_LABEL,
+  CURRENT_LOCATION_REGION,
+} from "./service-distance";
 import { useFavorites } from "@/modules/favorites/service-favorites-store";
 import {
   ServiceFavoritesStatus,
@@ -39,6 +45,16 @@ export function ServicesDirectoryClient({
 }) {
   const search = useSearchParams();
   const saved = useFavorites();
+  const location = useServicesLocation();
+  // A revoked/unavailable location must never leave a misleading nearby sort.
+  useEffect(() => {
+    if (!location.error) return;
+    const url = new URL(window.location.href);
+    if (url.searchParams.get("region") !== CURRENT_LOCATION_REGION) return;
+    url.searchParams.delete("region");
+    url.searchParams.delete("page");
+    window.history.replaceState(null, "", url.pathname + url.search + url.hash);
+  }, [location.error]);
   const favoritesOnly = search.get("favorites") === "1";
   const savedIds = new Set(saved.favorites.map((item) => item.serviceSlug));
   const result = serviceDirectory(
@@ -49,6 +65,7 @@ export function ServicesDirectoryClient({
       q: search.get("q") ?? "",
       region: search.get("region") ?? "",
       page: search.get("page") ?? "1",
+      origin: location.position,
     },
     favoritesOnly
       ? serviceListings.filter((item) => savedIds.has(item.slug))
@@ -179,10 +196,33 @@ export function ServicesDirectoryClient({
             />
             <ServiceResults>
               <ServiceFavoritesStatus guestHint={favoritesOnly} />
+              {(location.loading || location.error) && (
+                <p className={styles.locationStatus} role="status">
+                  {location.loading
+                    ? "Joylashuvingiz aniqlanmoqda…"
+                    : location.error}
+                </p>
+              )}
+              {result.region === CURRENT_LOCATION_REGION &&
+                !location.position &&
+                !location.loading &&
+                !location.error && (
+                  <p className={styles.locationStatus} role="status">
+                    Yaqin xizmatlarni ko‘rish uchun “{CURRENT_LOCATION_LABEL}”ni
+                    tanlang.
+                  </p>
+                )}
               {(result.query || result.region) && (
                 <p className={styles.activeFilters}>
                   {result.query && <>“{result.query}” bo‘yicha </>}
-                  {result.region && <>{result.region} · </>}
+                  {result.region && (
+                    <>
+                      {result.region === CURRENT_LOCATION_REGION
+                        ? CURRENT_LOCATION_LABEL
+                        : result.region}{" "}
+                      ·{" "}
+                    </>
+                  )}
                   <Link
                     href={serviceDirectoryUrl({
                       category: result.category?.id,

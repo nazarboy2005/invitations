@@ -571,16 +571,36 @@
   font-size: 11px;
   line-height: 1.5;
 }
+.locationStatus {
+  margin: 0 0 16px;
+  color: var(--service-muted);
+  font-size: 12px;
+  line-height: 1.6;
+}
 .cardLocation svg {
   flex: 0 0 auto;
   margin-top: 2px;
   color: #aa6c69;
 }
-.cardLocation span {
+.cardLocation .cardAddress {
+  min-width: 0;
   display: -webkit-box;
   overflow: hidden;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
+}
+.cardLocation .cardDistance {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  align-self: flex-start;
+  gap: 3px;
+  margin-left: auto;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+.cardDistance svg {
+  margin-top: 0;
 }
 .cardBottom {
   margin-top: auto;
@@ -1783,7 +1803,7 @@
     padding-right: 0;
     margin-bottom: 6px;
   }
-  .cardLocation span {
+  .cardLocation .cardAddress {
     -webkit-line-clamp: 2;
   }
   .cardLocation svg {

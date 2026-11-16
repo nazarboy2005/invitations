@@ -9,6 +9,7 @@ import {
 } from "./services-utils";
 import { ServiceFavoriteButton } from "./service-favorite";
 import { ServicePartnerBadge } from "./service-partner-badge";
+import { ServiceCardDistance } from "./service-card-distance";
 import { ServicePhoto } from "./service-photo";
 import styles from "./services.module.css";
 
@@ -49,7 +50,13 @@ export function ServiceCard({
           <h2 title={listing.name}>{listing.name}</h2>
           <p className={styles.cardLocation}>
             <MapPin size={13} aria-hidden="true" />
-            <span>{serviceLocation(listing) || "Manzil uchun bog‘laning"}</span>
+            <span className={styles.cardAddress}>
+              {serviceLocation(listing) || "Manzil uchun bog‘laning"}
+            </span>
+            <ServiceCardDistance
+              latitude={listing.latitude}
+              longitude={listing.longitude}
+            />
           </p>
           <div className={styles.cardBottom}>
             <span>{servicePrice(listing.price)}</span>

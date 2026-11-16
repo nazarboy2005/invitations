@@ -818,15 +818,6 @@ export function Dashboard() {
             <span>Yaratgan taklifnomalaringiz shu yerda saqlanadi.</span>
           </div>
           <div className={styles.headingActions}>
-            {session?.user?.isAdmin && (
-              <a
-                href="/admin"
-                className={`${styles.primaryButton} ${styles.adminButton}`}
-              >
-                <ShieldCheck size={18} aria-hidden="true" />
-                Boshqaruv
-              </a>
-            )}
             <div className={styles.createPanel}>
               <div>
                 <strong>
