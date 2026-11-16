@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" preserveAspectRatio="none" fill="none">
+  <defs>
+    <linearGradient id="gold" x1="0" y1="0" x2="85" y2="75" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#fff3cc"/>
+      <stop offset=".19" stop-color="#b78036"/>
+      <stop offset=".35" stop-color="#e4bc78"/>
+      <stop offset=".48" stop-color="#fff4ce"/>
+      <stop offset=".54" stop-color="#fffaf0"/>
+      <stop offset=".6" stop-color="#b77b2c"/>
+      <stop offset=".75" stop-color="#e8bd74"/>
+      <stop offset="1" stop-color="#98601e"/>
+    </linearGradient>
+    <linearGradient id="light" x1="4" y1="107" x2="101" y2="0" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#fffaf0"/>
+      <stop offset=".45" stop-color="#fff6db"/>
+      <stop offset="1" stop-color="#e4b868"/>
+    </linearGradient>
+  </defs>
+  <path d="M0 120C1 65 55 1 120 0H29C13 0 0 13 0 29Z" fill="url(#gold)"/>
+  <path d="M0 120C1 65 55 1 120 0" stroke="#a16a28" stroke-width="1.8"/>
+  <path d="M2 116C6 62 57 3 118 1" stroke="url(#light)" stroke-width="2"/>
+  <path d="M1 106C5 54 35 15 78 1" stroke="#fff2cc" stroke-opacity=".85" stroke-width="1.2"/>
+</svg>

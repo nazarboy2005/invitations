@@ -8,6 +8,7 @@ import {
   type ServiceListing,
 } from "./services-utils";
 import { ServiceFavoriteButton } from "./service-favorite";
+import { ServicePartnerBadge } from "./service-partner-badge";
 import styles from "./services.module.css";
 
 export function ServiceCard({
@@ -19,7 +20,11 @@ export function ServiceCard({
 }) {
   const cover = listing.images[0];
   return (
-    <article className={styles.card} data-service-card>
+    <article
+      className={`${styles.card}${listing.featured ? ` ${styles.partnerCard}` : ""}`}
+      data-service-card
+      data-service-partner={listing.featured || undefined}
+    >
       <Link
         href={`/services/b/${listing.slug}`}
         className={styles.cardLink}
@@ -38,9 +43,7 @@ export function ServiceCard({
           ) : (
             <ImageIcon size={32} aria-hidden="true" />
           )}
-          {listing.featured && (
-            <span className={styles.partnerBadge}>Hamkor</span>
-          )}
+          {listing.featured && <ServicePartnerBadge overlay />}
         </div>
         <div className={styles.cardBody}>
           <h2 title={listing.name}>{listing.name}</h2>
@@ -56,6 +59,26 @@ export function ServiceCard({
           </span>
         </div>
       </Link>
+      {listing.featured && (
+        <span className={styles.partnerFrame} aria-hidden="true">
+          <Image
+            src={publicAsset("/images/services/partner-corner.svg")}
+            alt=""
+            width={120}
+            height={120}
+            unoptimized
+            className={styles.partnerCornerTop}
+          />
+          <Image
+            src={publicAsset("/images/services/partner-corner.svg")}
+            alt=""
+            width={120}
+            height={120}
+            unoptimized
+            className={styles.partnerCornerBottom}
+          />
+        </span>
+      )}
       <ServiceFavoriteButton slug={listing.slug} name={listing.name} overlay />
     </article>
   );

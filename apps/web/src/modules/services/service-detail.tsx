@@ -13,6 +13,7 @@ import { ServiceFavoriteButton } from "./service-favorite";
 import { ServiceShare } from "./service-share";
 import { ServiceContactIcon } from "./service-contact-icon";
 import { ServiceCard } from "./service-card";
+import { ServicePartnerBadge } from "./service-partner-badge";
 import {
   serviceCategories,
   serviceExternalUrl,
@@ -75,9 +76,7 @@ export function ServiceDetail({
       <div className={styles.detailHeading}>
         <p className={styles.eyebrow}>
           {listing.categoryLabel}
-          {listing.featured && (
-            <span className={styles.inlinePartner}>Hamkor</span>
-          )}
+          {listing.featured && <ServicePartnerBadge />}
         </p>
         <h1>{listing.name}</h1>
         {serviceLocation(listing) && (
