@@ -81,6 +81,10 @@ Re-run the same command and output directory to resume. Successful source extrac
 
 Optional `--website` follows the listed business website's homepage and at most two same-site contact/about pages for public email and social links. It does not guess email addresses or crawl social profiles. Maps/contact links are validated, redirects are checked, local/private addresses are rejected, and downloads have size limits. Access challenges produce errors rather than attempts to bypass them.
 
+Outgoing HTTP downloads pin each connection to its validated DNS answers, including redirects and retries. The browser uses an automatically started, authenticated loopback proxy that enforces the same address rules for HTTP and HTTPS tunnels; it closes with the browser. HTTPS certificate verification stays enabled. Chromium sandboxing is required, WebSockets are blocked, and non-proxied WebRTC/QUIC traffic is disabled. No separate proxy installation or configuration is required. If the browser cannot run sandboxed, fix its installation/host configuration rather than disabling the sandbox.
+
+The Services worker passes only basic operating-system/browser settings to the collector. Database, R2, Telegram and application authorization secrets remain in the parent worker, and the browser receives a filtered environment too. This is process/environment hardening, not a separate OS account or filesystem sandbox for the Node collector; keep local environment files private.
+
 ## Matching and review
 
 Counterpart discovery tries the business name/city and, if necessary, a listed phone. Matching uses phone overlap, distance, name similarity, transliteration, and website evidence. Small spelling/spacing differences are tolerated. A name alone does not confirm identity, and a shared phone does not override a distant branch. Ambiguous matches remain separate candidates. A manually supplied pair is not silently merged when those checks fail.

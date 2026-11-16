@@ -9,6 +9,7 @@ import { getDb, closeDb } from "../packages/database/src/index";
 import { saveServiceImage } from "../apps/web/src/server/service-media";
 import { removeMedia } from "../apps/web/src/server/storage";
 import { hasAdminRole } from "../apps/web/src/server/auth/admin-role";
+import { scraperEnvironment } from "../tools/services-scraper/src/environment.mjs";
 import { recordAdminChange } from "../apps/web/src/server/admin";
 import {
   serviceEditorSchema,
@@ -100,6 +101,7 @@ export async function processNextServiceImport() {
         maxBuffer: 256 * 1024,
         windowsHide: true,
         signal: controller.signal,
+        env: scraperEnvironment(),
       });
     } catch (e) {
       // Partial jobs retain usable results and explicit source errors.

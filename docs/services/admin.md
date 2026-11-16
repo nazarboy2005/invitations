@@ -42,6 +42,8 @@ pnpm db:migrate
 pnpm services:worker
 ```
 
+The importer starts its own private local outbound proxy, pins connections to validated public IP addresses, and requires Chromium sandboxing. It does not need a separately deployed proxy or extra environment variables. The collector/browser receive a filtered environment; database/R2 secrets stay in the parent worker. After updating the worker or scraper code, stop the existing laptop importer with Ctrl+C and run `pnpm services:worker` again. These worker-only security changes do not require a Vercel deployment.
+
 `pnpm services:worker --once` processes at most one job. Use a process supervisor for a persistent deployment; a serverless web function alone does not run this worker. `SERVICES_IMPORT_DIR` optionally chooses its private checkpoints directory; `SERVICES_SCRAPER_CHANNEL` optionally selects `chrome` or `msedge`. No paid Maps API credentials are needed.
 
 For the on-demand laptop setup, copy the website's `PLATFORM_ADMIN_TELEGRAM_IDS` into the laptop's `apps/web/.env.local` along with the shared database and R2 settings. Restart the importer after editing its environment. An online heartbeat confirms that the process can connect, but does not confirm that its admin allowlist matches the website. Environment-based admin access is not persisted into `users.is_admin`; never work around a mismatch by disabling the worker's role checks or promoting an account in the database.

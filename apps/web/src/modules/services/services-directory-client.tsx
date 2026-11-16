@@ -41,7 +41,14 @@ export function ServicesDirectoryClient({
   const favoritesOnly = search.get("favorites") === "1";
   const savedIds = new Set(saved.favorites.map((item) => item.serviceSlug));
   const result = serviceDirectory(
-    filters,
+    {
+      ...filters,
+      // Native history updates keep pagination local to the loaded directory.
+      // Read all query filters here so Back/Forward restores the same results.
+      q: search.get("q") ?? "",
+      region: search.get("region") ?? "",
+      page: search.get("page") ?? "1",
+    },
     favoritesOnly
       ? serviceListings.filter((item) => savedIds.has(item.slug))
       : serviceListings,

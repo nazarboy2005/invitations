@@ -172,6 +172,27 @@ export function ServicesToolbar({
     });
   }
 
+  function changePage(direction: -1 | 1) {
+    // All listings are already loaded. Avoid a server navigation (and stale
+    // next/previous targets while it is in flight) for each page change.
+    const results = form.current?.closest<HTMLElement>("#results");
+    if (results) {
+      const top = results.getBoundingClientRect().top + window.scrollY;
+      results.style.minHeight = `${Math.max(0, window.scrollY + window.innerHeight - top)}px`;
+    }
+    // Read the current URL at click time, even before React has painted the
+    // preceding click's results. Rapid direction changes must not use old props.
+    const url = new URL(window.location.href);
+    const value = Number(url.searchParams.get("page") ?? "1");
+    const current = Number.isInteger(value) ? Math.min(pages, Math.max(1, value)) : 1;
+    const next = Math.min(pages, Math.max(1, current + direction));
+    if (next === current) return;
+    if (next === 1) url.searchParams.delete("page");
+    else url.searchParams.set("page", String(next));
+    url.hash = "results";
+    window.history.pushState(null, "", url.pathname + url.search + url.hash);
+  }
+
   return (
     <div
       className={styles.toolbar}
@@ -288,6 +309,11 @@ export function ServicesToolbar({
             <Link
               href={previousHref}
               prefetch={false}
+              scroll={false}
+              onNavigate={(event) => {
+                event.preventDefault();
+                changePage(-1);
+              }}
               aria-label="Oldingi sahifa"
             >
               <ArrowLeft size={18} aria-hidden="true" />
@@ -298,7 +324,16 @@ export function ServicesToolbar({
             </span>
           )}
           {nextHref ? (
-            <Link href={nextHref} prefetch={false} aria-label="Keyingi sahifa">
+            <Link
+              href={nextHref}
+              prefetch={false}
+              scroll={false}
+              onNavigate={(event) => {
+                event.preventDefault();
+                changePage(1);
+              }}
+              aria-label="Keyingi sahifa"
+            >
               <ArrowRight size={18} aria-hidden="true" />
             </Link>
           ) : (
