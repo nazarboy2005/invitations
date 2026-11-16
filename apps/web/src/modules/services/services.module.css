@@ -39,6 +39,7 @@
 }
 @supports selector(::-webkit-scrollbar) {
   .sidebar,
+  .categories,
   :global(html):has(.page) {
     scrollbar-width: auto;
     scrollbar-color: auto;
@@ -2001,6 +2002,32 @@
 }
 .sidebarHeading .sectionLabel {
   margin: 0;
+}
+@media (min-width: 901px) {
+  .sidebarHeading {
+    padding-left: 14px;
+  }
+  .sidebar .categories {
+    --category-fade-top: 0px;
+    --category-fade-bottom: 0px;
+    scrollbar-width: none;
+    mask-image: linear-gradient(
+      to bottom,
+      transparent,
+      #000 var(--category-fade-top),
+      #000 calc(100% - var(--category-fade-bottom)),
+      transparent
+    );
+  }
+  .sidebar .categories::-webkit-scrollbar {
+    display: none;
+  }
+  .sidebar .categories[data-scroll-above="true"] {
+    --category-fade-top: 28px;
+  }
+  .sidebar .categories[data-scroll-below="true"] {
+    --category-fade-bottom: 28px;
+  }
 }
 .serviceFavoritesFilter {
   display: inline-flex;

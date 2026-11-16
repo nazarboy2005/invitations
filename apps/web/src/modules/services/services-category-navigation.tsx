@@ -111,6 +111,26 @@ export function ServiceCategories({
 
   useLayoutEffect(() => {
     const container = nav.current!;
+    const updateScrollHints = () => {
+      container.dataset.scrollAbove = String(container.scrollTop > 1);
+      container.dataset.scrollBelow = String(
+        container.scrollHeight - container.clientHeight - container.scrollTop >
+          1,
+      );
+    };
+    updateScrollHints();
+    container.addEventListener("scroll", updateScrollHints, { passive: true });
+    const resize = new ResizeObserver(updateScrollHints);
+    resize.observe(container);
+    for (const link of container.querySelectorAll("a")) resize.observe(link);
+    return () => {
+      container.removeEventListener("scroll", updateScrollHints);
+      resize.disconnect();
+    };
+  }, [children]);
+
+  useLayoutEffect(() => {
+    const container = nav.current!;
     const highlight = indicator.current!;
     const saved = navigation.positions.get(variant);
     if (saved) {
