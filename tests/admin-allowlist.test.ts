@@ -88,7 +88,7 @@ test("allowlisted admins still require active accounts and fresh sessions", () =
       () =>
         assertAdminSession({
           ...account,
-          authenticated_at: new Date(Date.now() - 13 * 3600000).toISOString(),
+          authenticated_at: new Date(Date.now() - 8 * 24 * 3600000).toISOString(),
         }),
       { code: "ADMIN_REAUTH_REQUIRED" },
     );

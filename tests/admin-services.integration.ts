@@ -68,7 +68,7 @@ test(
     try {
       await db`INSERT INTO users(id,telegram_user_id,display_name,is_admin) VALUES(${admin},${Math.floor(Math.random() * 1e12) + 1},'Services QA admin',true),(${owner},${Math.floor(Math.random() * 1e12) + 1},'Services QA creator',false)`;
       for (const [role, token] of Object.entries(tokens))
-        await db`INSERT INTO sessions(user_id,token_hash,created_at,expires_at,absolute_expires_at) VALUES(${role === "owner" ? owner : admin},${digest(token)},now()-${role === "stale" ? "13 hours" : "0 hours"}::interval,now()+interval '1 hour',now()+interval '1 hour')`;
+        await db`INSERT INTO sessions(user_id,token_hash,created_at,expires_at,absolute_expires_at) VALUES(${role === "owner" ? owner : admin},${digest(token)},now()-${role === "stale" ? "8 days" : "0 hours"}::interval,now()+interval '1 hour',now()+interval '1 hour')`;
       for (const path of [
         "/api/admin/services",
         "/api/admin/services/imports",

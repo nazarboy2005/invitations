@@ -101,7 +101,7 @@ export function AdminSidebarFooter({ userName }: { userName: string }) {
         Administrator
       </p>
       <strong>{userName}</strong>
-      <Link href="/dashboard?mode=personal">
+      <Link href="/dashboard">
         <ArrowLeft size={16} aria-hidden="true" />
         Hisobga qaytish
       </Link>
@@ -112,7 +112,7 @@ export function AdminSidebarFooter({ userName }: { userName: string }) {
 export function AdminTopbarActions() {
   return (
     <nav className={styles.topbarActions} aria-label="Hisob va katalog">
-      <Link href="/dashboard?mode=personal" className={styles.mobileAccount}>
+      <Link href="/dashboard" className={styles.mobileAccount}>
         Shaxsiy hisob
       </Link>
       <Link href="/templates" target="_blank" rel="noopener noreferrer">

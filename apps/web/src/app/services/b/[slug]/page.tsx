@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { ServiceDetail } from "@/modules/services/service-detail";
 import { serviceLocation } from "@/modules/services/services-data";
 import { getPublishedServices } from "@/server/services";
+import { servicePhotoUrl } from "@/modules/services/service-photo-url";
 
 export const dynamic = "force-dynamic";
 
@@ -25,7 +26,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       images: listing.images[0]
         ? [
             {
-              url: listing.images[0].src,
+              url: servicePhotoUrl(listing.slug, listing.images[0].src),
               width: listing.images[0].width,
               height: listing.images[0].height,
               alt: listing.name,

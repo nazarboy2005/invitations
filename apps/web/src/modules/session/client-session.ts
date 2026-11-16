@@ -76,13 +76,3 @@ export function currentTelegramLaunchData(): string {
     window.location.hash,
   );
 }
-
-export function miniAppAdminDestination(
-  pathname: string,
-  search: string,
-  user: SessionResponse["user"],
-): "/admin" | null {
-  if (pathname !== "/" && pathname !== "/dashboard") return null;
-  if (new URLSearchParams(search).get("mode") === "personal") return null;
-  return user?.isAdmin === true ? "/admin" : null;
-}

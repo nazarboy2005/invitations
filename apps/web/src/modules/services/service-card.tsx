@@ -9,6 +9,7 @@ import {
 } from "./services-utils";
 import { ServiceFavoriteButton } from "./service-favorite";
 import { ServicePartnerBadge } from "./service-partner-badge";
+import { ServicePhoto } from "./service-photo";
 import styles from "./services.module.css";
 
 export function ServiceCard({
@@ -32,11 +33,10 @@ export function ServiceCard({
       >
         <div className={styles.cardImage}>
           {cover ? (
-            <Image
-              src={publicAsset(cover.src)}
-              unoptimized={cover.src.startsWith("/api/")}
-              alt={cover.alt || listing.name}
-              fill
+            <ServicePhoto
+              slug={listing.slug}
+              image={cover}
+              name={listing.name}
               sizes="(max-width: 600px) 45vw, (max-width: 1050px) 43vw, 25vw"
               loading={priority ? "eager" : "lazy"}
             />

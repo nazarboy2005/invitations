@@ -1,18 +1,17 @@
 "use client";
 
-import Image from "next/image";
-import {
-  ChevronLeft, ChevronRight, Expand, ImageIcon, X,
-} from "lucide-react";
+import { ChevronLeft, ChevronRight, Expand, ImageIcon, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { publicAsset } from "@/lib/public-asset";
+import { ServicePhoto } from "./service-photo";
 import type { ServiceImage } from "./services-data";
 import styles from "./services.module.css";
 
 export function ServiceGallery({
+  slug,
   images,
   name,
 }: {
+  slug: string;
   images: ServiceImage[];
   name: string;
 }) {
@@ -51,15 +50,31 @@ export function ServiceGallery({
     };
   }, []);
   useEffect(() => {
-    if (images.length < 2 || interacting || expanded || !visible || reducedMotion)
+    if (
+      images.length < 2 ||
+      interacting ||
+      expanded ||
+      !visible ||
+      reducedMotion
+    )
       return;
     const timer = window.setTimeout(() => {
       setAnimate(true);
       setActive((index) => index + 1);
     }, 5000);
     return () => window.clearTimeout(timer);
-  }, [active, images.length, interacting, expanded, visible, reducedMotion, interaction]);
-  const activeIndex = images.length ? (active + images.length) % images.length : 0;
+  }, [
+    active,
+    images.length,
+    interacting,
+    expanded,
+    visible,
+    reducedMotion,
+    interaction,
+  ]);
+  const activeIndex = images.length
+    ? (active + images.length) % images.length
+    : 0;
   const image = images[activeIndex];
   const move = (direction: number) => {
     setAnimate(true);
@@ -133,7 +148,11 @@ export function ServiceGallery({
             if (dragStart.current !== null) {
               const distance = event.clientX - dragStart.current.x;
               const vertical = event.clientY - dragStart.current.y;
-              if (Math.abs(distance) > 40 && Math.abs(distance) > Math.abs(vertical) && images.length > 1) {
+              if (
+                Math.abs(distance) > 40 &&
+                Math.abs(distance) > Math.abs(vertical) &&
+                images.length > 1
+              ) {
                 swiped.current = true;
                 move(distance < 0 ? 1 : -1);
               }
@@ -161,13 +180,19 @@ export function ServiceGallery({
             className={styles.galleryTrack}
             onTransitionEnd={(event) => {
               // Reset the cloned edge slide without animating to keep looping seamless.
-              if (event.propertyName === "transform" && active !== activeIndex) {
+              if (
+                event.propertyName === "transform" &&
+                active !== activeIndex
+              ) {
                 setAnimate(false);
                 setActive(activeIndex);
               }
             }}
           >
-            {(images.length > 1 ? [images[images.length - 1], ...images, images[0]] : images).map((item, slideIndex) => {
+            {(images.length > 1
+              ? [images[images.length - 1], ...images, images[0]]
+              : images
+            ).map((item, slideIndex) => {
               const index = slideIndex - (images.length > 1 ? 1 : 0);
               return (
                 <span
@@ -179,16 +204,17 @@ export function ServiceGallery({
                   }}
                   aria-hidden={index !== active}
                 >
-                  <Image
-                    src={publicAsset(item.src)}
-                    unoptimized={item.src.startsWith("/api/")}
-                    alt={item.alt || name}
-                    fill
-                    style={{ objectFit: "cover", objectPosition: "center" }}
-                    sizes="(max-width: 900px) 92vw, 60vw"
-                    loading="eager"
-                    draggable={false}
-                  />
+                  {Math.abs(index - active) <= 1 && (
+                    <ServicePhoto
+                      slug={slug}
+                      image={item}
+                      name={name}
+                      style={{ objectFit: "cover", objectPosition: "center" }}
+                      sizes="(max-width: 900px) 92vw, 60vw"
+                      loading="eager"
+                      draggable={false}
+                    />
+                  )}
                 </span>
               );
             })}
@@ -213,7 +239,11 @@ export function ServiceGallery({
                 key={`${item.src}-${index}`}
                 aria-label={`${index + 1}-rasm`}
                 aria-pressed={index === activeIndex}
-                onClick={() => { setAnimate(true); setActive(index); setInteraction((value) => value + 1); }}
+                onClick={() => {
+                  setAnimate(true);
+                  setActive(index);
+                  setInteraction((value) => value + 1);
+                }}
               />
             ))}
           </div>
@@ -223,7 +253,10 @@ export function ServiceGallery({
         ref={dialog}
         className={styles.lightbox}
         aria-label={`${name}: kattalashtirilgan rasm`}
-        onClose={() => { setExpanded(false); setInteracting(false); }}
+        onClose={() => {
+          setExpanded(false);
+          setInteracting(false);
+        }}
         onClick={(event) => {
           if (event.target === event.currentTarget) dialog.current?.close();
         }}
@@ -248,13 +281,9 @@ export function ServiceGallery({
           <X size={24} />
         </button>
         <div className={styles.lightboxImage}>
-          <Image
-            src={publicAsset(image.src)}
-            unoptimized={image.src.startsWith("/api/")}
-            alt={image.alt || name}
-            fill
-            sizes="95vw"
-          />
+          {expanded && (
+            <ServicePhoto slug={slug} image={image} name={name} sizes="95vw" />
+          )}
         </div>
         {images.length > 1 && controls}
         <span className={styles.galleryCount}>

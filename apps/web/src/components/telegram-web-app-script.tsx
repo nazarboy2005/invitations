@@ -4,7 +4,6 @@ import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import {
   loadClientSession,
-  miniAppAdminDestination,
   currentTelegramLaunchData,
 } from "@/modules/session/client-session";
 import { miniAppPaymentDestination } from "@/modules/payments/payment-navigation";
@@ -33,7 +32,7 @@ export function TelegramWebAppScript() {
       .then((session) => {
         if (!active) return;
         handled.current = key;
-        // An explicit payment launch takes precedence over the admin home entry.
+        // An explicit payment launch keeps its requested destination.
         // The launch has been verified; ownership is checked again by payment APIs.
         // Consume the launch destination only on document entry. Telegram keeps
         // start_param for the app's lifetime; later dashboard/home navigation
@@ -44,16 +43,6 @@ export function TelegramWebAppScript() {
             : null;
         if (paymentDestination) {
           window.location.replace(paymentDestination + window.location.hash);
-          return;
-        }
-        const destination = miniAppAdminDestination(
-          pathname,
-          window.location.search,
-          session.user,
-        );
-        if (destination) {
-          // Load a fresh privileged document with its own CSP and no Telegram SDK.
-          window.location.replace(destination);
           return;
         }
         if (!session.user && initData && pathname === "/") {

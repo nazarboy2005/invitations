@@ -81,7 +81,7 @@ before(async () => {
       await db`INSERT INTO telegram_connections(user_id,telegram_chat_id,status) SELECT id,telegram_user_id,'active' FROM users WHERE id=${id}`;
   }
   tokens.stale = randomToken();
-  await db`INSERT INTO sessions(user_id,token_hash,created_at,expires_at,absolute_expires_at) VALUES(${ids.admin},${digest(tokens.stale)},now()-interval '13 hours',now()+interval '1 hour',now()+interval '1 hour')`;
+  await db`INSERT INTO sessions(user_id,token_hash,created_at,expires_at,absolute_expires_at) VALUES(${ids.admin},${digest(tokens.stale)},now()-interval '8 days',now()+interval '1 hour',now()+interval '1 hour')`;
   await db`INSERT INTO invitations(id,owner_id,template_id,status,data) VALUES(${invitation.id},${ids.owner},${invitation.templateId},'draft',${db.json(invitation)})`;
 });
 after(async () => {

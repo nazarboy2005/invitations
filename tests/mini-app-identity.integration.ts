@@ -110,7 +110,7 @@ test("signed launch switches an unrelated browser account to the verified Telegr
   assert.equal(current.user.isAdmin, true);
 });
 test("matching older signed launch retains the original session and cannot bypass admin reconfirmation", async () => {
-  const token = await session(admin, 13),
+  const token = await session(admin, 8 * 24),
     raw = signed(admin, 600),
     count = await total(admin);
   for (let index = 0; index < 2; index++) {

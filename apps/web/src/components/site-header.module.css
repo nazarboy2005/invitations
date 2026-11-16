@@ -148,6 +148,17 @@
 .mobileActions { display: none; }
 .heroNav a[aria-current="page"] { color: #76253b; }
 .heroFavorites:hover { color: #ff0000; }
+.adminLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 44px;
+  color: #76253b;
+  font-size: 13px;
+  white-space: nowrap;
+}
+.adminLink:hover { text-decoration: underline; }
 .heroAccount:hover {
   background: rgb(255 255 255 / 20%);
 }

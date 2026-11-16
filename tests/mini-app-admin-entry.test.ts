@@ -3,7 +3,6 @@ import assert from "node:assert/strict";
 import type { SessionResponse } from "@taklifnoma/contracts";
 import {
   loadClientSession,
-  miniAppAdminDestination,
   telegramLaunchData,
 } from "../apps/web/src/modules/session/client-session";
 
@@ -15,36 +14,6 @@ const admin = {
 };
 const authenticated: SessionResponse = { user: admin, configured: true };
 const anonymous: SessionResponse = { user: null, configured: true };
-
-test("Mini App admin entry requires a verified server role and preserves personal/deep-link navigation", () => {
-  for (const path of ["/", "/dashboard"]) {
-    assert.equal(miniAppAdminDestination(path, "", admin), "/admin");
-    assert.equal(miniAppAdminDestination(path, "", null), null);
-    assert.equal(
-      miniAppAdminDestination(path, "", { ...admin, isAdmin: false }),
-      null,
-    );
-    assert.equal(miniAppAdminDestination(path, "?mode=personal", admin), null);
-  }
-  for (const path of [
-    "/admin",
-    "/admin/verify",
-    "/templates",
-    "/studio",
-    "/studio/fixture",
-    "/i/Ab1234",
-    "/dashboard/fixture/activity",
-  ])
-    assert.equal(miniAppAdminDestination(path, "", admin), null);
-  assert.equal(
-    miniAppAdminDestination(
-      "/dashboard",
-      "?next=https://attacker.example",
-      admin,
-    ),
-    "/admin",
-  );
-});
 
 test("Mini App entry always checks signed identity before using a browser session; ordinary browser access still reads its session", async () => {
   const original = globalThis.fetch,
@@ -85,7 +54,7 @@ test("concurrent Mini App bootstraps exchange a launch only once and use the res
       initData: "single-use-launch",
     });
     signedIn = true;
-    return Response.json({ user: { isAdmin: false } }); // The exchange payload never chooses the redirect role.
+    return Response.json({ user: { isAdmin: false } }); // Role comes from the verified session.
   };
   try {
     const first = loadClientSession("single-use-launch"),
@@ -101,7 +70,7 @@ test("concurrent Mini App bootstraps exchange a launch only once and use the res
   }
 });
 
-test("blocked accounts never gain an admin redirect", async () => {
+test("blocked accounts never gain an authenticated session", async () => {
   const original = globalThis.fetch;
   globalThis.fetch = async (input) =>
     String(input) === "/api/auth/session"

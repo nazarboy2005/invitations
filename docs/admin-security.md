@@ -4,7 +4,8 @@
 through Telegram. Admin access comes from a trusted `users.is_admin` database
 grant or the server-side `PLATFORM_ADMIN_TELEGRAM_IDS` allowlist for new and
 existing accounts. Users cannot grant themselves that role through a request.
-Authorized accounts see **Boshqaruv** in the account navigation.
+Authorized accounts see **Admin** in the site header on desktop and phones,
+and **Boshqaruv** in their account. These links load a fresh admin document.
 
 ## Assigning administrator access
 
@@ -26,7 +27,7 @@ or expose it through client configuration.
 Restart/redeploy **every web, Telegram and broadcast worker process** after an
 environment change. Existing signed-in accounts are checked on subsequent
 requests, so an existing account does not need to be recreated. Suspension and
-12-hour admin reconfirmation rules still apply. Account phone numbers are not
+seven-day admin reconfirmation rules still apply. Account phone numbers are not
 collected or required.
 
 Environment grants are not copied into `users.is_admin`. Removing an ID removes
@@ -60,10 +61,12 @@ without the SDK. For Telegram launches, the client passes the SDK's opaque signe
 data, or recovers the same payload from `tgWebAppData` in the URL fragment. The
 server validates the signature and reconciles it with the current browser
 session: a different Telegram account cannot inherit another account's cookie
-or server-rendered navigation. Verified admins enter `/admin`
-using a full document navigation, so the privileged page loads its own CSP and
-excludes the remote SDK. Existing sessions are not silently renewed: an admin
-session older than 12 hours still goes to `/admin/verify`. Login exchanges share
+or server-rendered navigation. Authentication keeps administrators on their
+requested public or personal page. Clicking **Admin** or **Boshqaruv** enters
+`/admin` using a full document navigation, so the privileged page loads its own
+CSP and excludes the remote SDK. Existing sessions are not silently renewed:
+administrative access after seven days goes to `/admin/verify`; ordinary
+browsing does not require admin reconfirmation. Login exchanges share
 in-flight work to avoid consuming the same launch twice when the SDK and account
 page initialize together. Server role checks remain required; unsigned Mini App
 identity fields never grant access. Older signed
@@ -76,14 +79,14 @@ the original session and authentication time.
 In the bot, `/admin` replies privately with **Boshqaruvga kirish** for an active,
 administrator. Recognized admins also receive the Mini App button after
 `/start`. These buttons open `/dashboard`, where authentication precedes the
-admin redirect. Ordinary accounts receive a permission denial with only their
+workspace button. Ordinary accounts receive a permission denial with only their
 own Telegram ID. The command grants no roles and sends nothing until a user
 invokes it.
 
-The account heading and mobile homepage menu show **Boshqaruv** for recognized
-admins. **Hisobga qaytish** opens `/dashboard?mode=personal`, allowing admins to
-use their own creator account without immediately redirecting back. Invitation,
-editor, catalog and guest-response deep links retain their intended destination.
+The site header and account heading offer explicit admin entry for recognized
+admins. **Hisobga qaytish** opens `/dashboard`, allowing admins to use their own
+creator account. Invitation, editor, catalog and guest-response deep links
+retain their intended destination.
 On phones, the admin top bar also offers **Shaxsiy hisob** for this return.
 
 ## Management tools
@@ -167,7 +170,7 @@ relying on delivery continuing after closing the admin page.
   identity/role and server allowlist are evaluated each time. Removing a
   database-only grant or revoking a session applies to the next request;
   environment changes take effect once all processes reload configuration.
-- Admin authentication lasts 12 hours from session creation. Sliding creator
+- Admin authentication lasts seven days from session creation. Sliding creator
   renewal does not extend this window. `/admin/verify` reuses browser-bound
   Telegram confirmation; the final exchange validates the same user and current
   role transactionally, consumes confirmation once, revokes the old session and

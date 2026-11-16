@@ -64,6 +64,7 @@ const config: NextConfig = {
     "sharp",
   ],
   outputFileTracingIncludes: {
+    "/api/services/photos/*": ["./public/images/services/*/*.webp"],
     "/api/public/invitations/*/receipts": pdfWorkerFiles,
     "/api/static-images/preview": [
       "./src/templates/oq-atirgul/assets/**",

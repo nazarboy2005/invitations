@@ -87,7 +87,12 @@ export function ServiceDetail({
         )}
       </div>
       <div className={styles.detailColumns}>
-        <ServiceGallery images={listing.images} name={listing.name} />
+        <ServiceGallery
+          key={listing.slug}
+          slug={listing.slug}
+          images={listing.images}
+          name={listing.name}
+        />
         <aside
           className={styles.contactPanel}
           aria-label="Xizmat bilan bog‘lanish"

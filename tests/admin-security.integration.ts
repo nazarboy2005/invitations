@@ -91,7 +91,8 @@ before(async () => {
     await db`INSERT INTO users(id,telegram_user_id,display_name,is_admin) VALUES(${id},${-Math.floor(Math.random() * 1e12) - 1},${"Disposable admin QA " + role},${role !== "creator"})`;
     await session(role, id);
   }
-  await session("stale", users.admin, "13 hours");
+  await session("dayOld", users.admin, "1 day");
+  await session("stale", users.admin, "8 days");
   await session("expired", users.admin, "2 days", "-1 hour");
   await session("revoked", users.admin, "0 hours", "1 day", true);
   tokens.forged = randomToken();
@@ -212,6 +213,14 @@ test("all admin reads and writes enforce live roles before parsing body or resou
   await code(await request("/api/admin/templates", "otherAdmin"), 200);
 });
 test("stale admin sessions redirect to verification and creator-session renewal cannot restore admin access", async () => {
+  // Reconfirmation must never interrupt the public site or personal account.
+  for (const path of ["/", "/dashboard", "/templates", "/services"])
+    assert.equal((await request(path, "stale")).status, 200, path);
+  assert.equal((await request("/admin", "dayOld")).status, 200);
+  assert.equal(
+    (await code(await request("/api/admin/reauth", "dayOld"), 200)).verified,
+    true,
+  );
   const page = await request("/admin", "stale");
   assert.equal(page.status, 307);
   assert.equal(page.headers.get("Location"), "/admin/verify");

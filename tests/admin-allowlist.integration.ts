@@ -55,7 +55,7 @@ test(
       await db`INSERT INTO users(id,telegram_user_id,display_name,is_admin) VALUES(${userId},${telegramId!},'Allowlist QA admin',false),(${ordinary},${Math.floor(Math.random() * 1e12) + 1},'Allowlist QA creator',false)`;
       for (const [value, age] of [
         [token, "0 hours"],
-        [stale, "13 hours"],
+        [stale, "8 days"],
       ])
         await db`INSERT INTO sessions(user_id,token_hash,created_at,expires_at,absolute_expires_at) VALUES(${userId},${digest(value)},now()-${age}::interval,now()+interval '1 hour',now()+interval '1 hour')`;
       const session = await request("/api/auth/session");

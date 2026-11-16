@@ -28,7 +28,19 @@ test("administration requires a verified server role, not truthy client metadata
     );
   assert.equal(assertAdminSession(admin, true, now), admin);
 });
-test("admin access expires at twelve hours regardless of creator session renewal", () => {
+test("admin access lasts seven days regardless of creator session renewal", () => {
+  assert.equal(ADMIN_AUTH_MAX_AGE_MS, 7 * 24 * 60 * 60 * 1000);
+  for (const hours of [12, 13, 24, 6 * 24])
+    assert.ok(
+      assertAdminSession(
+        {
+          ...admin,
+          authenticated_at: new Date(now - hours * 3600000).toISOString(),
+        },
+        true,
+        now,
+      ),
+    );
   for (const authenticated_at of [
     undefined,
     "invalid",

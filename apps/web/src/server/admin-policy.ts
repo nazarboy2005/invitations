@@ -2,7 +2,7 @@ import { ApiError } from "./api";
 import { hasAdminRole } from "./auth/admin-role";
 
 // A sliding creator session must never silently extend administrative access.
-export const ADMIN_AUTH_MAX_AGE_MS = 12 * 60 * 60 * 1000;
+export const ADMIN_AUTH_MAX_AGE_MS = 7 * 24 * 60 * 60 * 1000;
 
 export function isAdminSessionFresh(
   session: Record<string, unknown>,

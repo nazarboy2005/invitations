@@ -1,7 +1,7 @@
 import { BRAND_NAME } from "@/lib/brand";
 import Link from "next/link";
 import Image from "next/image";
-import { Home, LayoutGrid, Store } from "lucide-react";
+import { Home, LayoutGrid, ShieldCheck, Store } from "lucide-react";
 import { getSessionUser } from "@/server/auth";
 import styles from "./site-header.module.css";
 import { ScrollHeader } from "./scroll-header";
@@ -59,6 +59,12 @@ export async function SiteHeader({
           </nav>
           <SiteSounds />
           <div className={styles.heroActions}>
+            {user?.isAdmin && (
+              <a href="/admin" className={styles.adminLink}>
+                <ShieldCheck size={19} aria-hidden="true" />
+                Admin
+              </a>
+            )}
             <FavoritesLink className={styles.heroFavorites} iconOnly />
             <AccountNavLink
               signedIn={Boolean(user)}
@@ -71,6 +77,12 @@ export async function SiteHeader({
             )}
           </div>
           <div className={styles.mobileActions}>
+            {user?.isAdmin && (
+              <a href="/admin" className={styles.adminLink}>
+                <ShieldCheck size={19} aria-hidden="true" />
+                Admin
+              </a>
+            )}
             {dashboard && user && <SignOutControl enabled placement="phone" />}
             <FavoritesLink className={styles.mobileFavorites} iconOnly />
           </div>

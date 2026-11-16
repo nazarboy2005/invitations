@@ -27,6 +27,7 @@ This file records durable, user-approved product requirements and a small number
 - Authenticate and authorize protected actions on the server. Do not trust client-supplied user IDs, public invitation links, Telegram usernames, or callback data as proof of ownership.
 - User requirement: public invitation responses, rendered payloads, and media URLs must exclude credentials and creator account identifiers. Keep secrets and private invitation/account data out of application logs and unexpected error responses.
 - Keep creator sessions persistent across ordinary browser restarts while valid, server-managed, revocable, and separate per browser/device. Preserve recoverable drafts through login recovery. Exact session lifetime and sensitive-action reauthentication rules remain implementation choices.
+- User requirement: administrators browse public pages and their personal account without automatic redirects into administration. Enter the admin workspace through an explicit Admin/Boshqaruv button. Admin confirmation lasts seven days; require reconfirmation only for administrative access and actions, without interrupting ordinary browsing. Keep admin entry, controls, and reconfirmation prompts hidden from anonymous visitors and non-admin accounts.
 
 ## Editing and publication
 
@@ -86,6 +87,7 @@ This file records durable, user-approved product requirements and a small number
 
 ## Services directory and partnerships
 
+- User requirement: services photo caching must revalidate current image existence and public attachment. Removed, replaced, deleted, or hidden photos must not be returned from stale caches on subsequent requests.
 - User requirement: the services directory supports reciprocal promotion with wedding halls; featured partner placement is for agreed partnerships. Imported listings do not establish a partnership or Fotiha verification.
 - User requirement: use a standalone scraper combining available Google Maps and Yandex Maps information field by field, preserving sources and flagging uncertain business matches and conflicts for review. Support link imports and practical name/location discovery, with configurable batches beyond the original 20-per-category seed target. Validate the scraper independently before separately authorized admin integration or public directory expansion.
 - User requirement: administer services in the dashboard: create, review, publish and later edit profiles, including regular or featured partner placement. Manual entry and Maps import belong under one Add Service entry point, with import history accessible separately. Scraped content remains a private draft until an administrator reviews it and publishes; missing source content must not be invented. Preserve the existing public directory when moving it to editable storage.

@@ -83,7 +83,7 @@ before(async () => {
     await db`INSERT INTO sessions(user_id,token_hash,expires_at,absolute_expires_at) VALUES(${id},${digest(tokens[role])},now()+interval '1 hour',now()+interval '1 hour')`;
   }
   tokens.stale = randomToken();
-  await db`INSERT INTO sessions(user_id,token_hash,created_at,expires_at,absolute_expires_at) VALUES(${ids.admin},${digest(tokens.stale)},now()-interval '13 hours',now()+interval '1 hour',now()+interval '1 hour')`;
+  await db`INSERT INTO sessions(user_id,token_hash,created_at,expires_at,absolute_expires_at) VALUES(${ids.admin},${digest(tokens.stale)},now()-interval '8 days',now()+interval '1 hour',now()+interval '1 hour')`;
 });
 after(async () => {
   await db.begin(async (tx) => {

@@ -189,7 +189,7 @@ export function AdminVerify({
       <h1>Hisobingizni tasdiqlang</h1>
       <p>
         <strong>{displayName}</strong>, boshqaruvga kirish uchun Telegram
-        hisobingizdan tasdiqlang. Tasdiq 12 soat amal qiladi.
+        hisobingizdan tasdiqlang. Tasdiq 7 kun amal qiladi.
       </p>
       {error && (
         <p role="alert" className={styles.error}>
