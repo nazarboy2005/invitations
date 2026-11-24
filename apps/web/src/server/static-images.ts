@@ -14,6 +14,7 @@ import { staticInvitationQrUrl } from "./static-location-links";
 import { invitationImageFilename } from "@/modules/static-images/filename";
 import { clientAddress, enforceRateLimit } from "./rate-limit";
 import { assertStaticImageEntitlement } from "./static-image-entitlement";
+import { grantAdminInvitationAccess, hasInvitationEntitlement, findAdminInvitationGrant } from "./invitation-entitlements";
 
 export async function staticImageLimit(
   request: Request,
@@ -88,9 +89,13 @@ export async function downloadStaticImage(
     if (!current.imageExportedAt) {
       if (new Date(event.deadline) <= new Date(event.exported_at))
         throw new ApiError(400, "EVENT_ENDED", "Tadbir sanasini tekshiring.");
+      if (!await hasInvitationEntitlement(tx, current, owner.id) &&
+        !await grantAdminInvitationAccess(tx, current, owner.id))
+        throw new ApiError(402, "PAYMENT_REQUIRED", "PNG rasmni yuklab olish uchun to‘lovni yakunlang.");
       exportedAt = new Date(event.exported_at).toISOString();
       await tx`UPDATE invitations SET data=${tx.json({ ...current, imageExportedAt: exportedAt })},identity_locked_at=COALESCE(identity_locked_at,${event.exported_at}),edit_deadline_at=COALESCE(edit_deadline_at,${event.deadline}),approved_event_date=COALESCE(approved_event_date,${invitation.startsAt.slice(0,10)}),updated_at=now() WHERE id=${id}`;
-      const action = "image_finalized_paid";
+      const action = await findAdminInvitationGrant(tx, current, owner.id)
+        ? "image_finalized_admin" : "image_finalized_paid";
       await tx`INSERT INTO invitation_audit_log(invitation_id,actor_id,action,previous_values,new_values) VALUES(${id},${owner.id},${action},${tx.json({ revision })},${tx.json({ revision, locale, exportedAt })})`;
     } else exportedAt = current.imageExportedAt;
   });

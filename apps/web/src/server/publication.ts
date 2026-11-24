@@ -17,8 +17,8 @@ import { DEFAULT_INVITATION_MUSIC } from "@taklifnoma/contracts/music";
 import { inspectMedia, storageProvider } from "./storage";
 import { requireAdmin, recordAdminChange } from "./admin";
 import type { AdminInvitationAction } from "./admin-invitation-access";
-import { paymentIdentityMatches } from "@taklifnoma/contracts/payment";
 import { enqueuePaymentNotifications } from "./payment-notifications";
+import { grantAdminInvitationAccess, hasInvitationEntitlement, findAdminInvitationGrant } from "./invitation-entitlements";
 
 const BASE62 = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 export function generatePublicCode() {
@@ -178,9 +178,8 @@ export async function publishInvitationInTransaction(
       "Taklifnoma boshqa oynada o‘zgargan. Yangilangan nusxani oching.",
     );
   if (!republishing) {
-    const entitlements =
-      await tx`SELECT identity_snapshot FROM payment_orders WHERE invitation_id=${id} AND owner_id=${user.id} AND template_id=${previous.templateId} AND status='SUCCEEDED' AND verified_at IS NOT NULL FOR SHARE`;
-    if (!entitlements.some((order) => paymentIdentityMatches(previous, order.identity_snapshot)))
+    if (!await hasInvitationEntitlement(tx, previous, user.id) &&
+      !await grantAdminInvitationAccess(tx, previous, user.id))
       throw new ApiError(
         402,
         "PAYMENT_REQUIRED",
@@ -257,7 +256,8 @@ export async function publishInvitationInTransaction(
         continue;
       throw error;
     }
-    await tx`INSERT INTO invitation_audit_log(invitation_id,actor_id,action,previous_values,new_values) VALUES(${id},${admin?.actorId ?? user.id},'published_paid',${tx.json(previous)},${tx.json({ ...invitation, publication: { firstPublishedAt: event.published_at, editDeadlineAt: event.deadline } })})`;
+    const action = await findAdminInvitationGrant(tx, previous, user.id) ? "published_admin" : "published_paid";
+    await tx`INSERT INTO invitation_audit_log(invitation_id,actor_id,action,previous_values,new_values) VALUES(${id},${admin?.actorId ?? user.id},${action},${tx.json(previous)},${tx.json({ ...invitation, publication: { firstPublishedAt: event.published_at, editDeadlineAt: event.deadline } })})`;
     await tx`UPDATE payment_orders SET fulfilled_at=COALESCE(fulfilled_at,now()),publication_error=NULL WHERE invitation_id=${id} AND status='SUCCEEDED'`;
     await enqueuePaymentNotifications(tx, id);
     if (admin)

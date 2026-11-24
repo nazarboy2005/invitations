@@ -115,7 +115,8 @@ export async function saveInvitation(
       ) {
         const [order] =
           await tx`SELECT id FROM payment_orders WHERE invitation_id=${invitation.id} AND status NOT IN ('FAILED','CANCELLED','EXPIRED') LIMIT 1`;
-        if (order)
+        const [grant] = await tx`SELECT id FROM admin_invitation_grants WHERE invitation_id=${invitation.id} AND owner_id=${user.id} LIMIT 1`;
+        if (order || grant)
           throw new ApiError(
             409,
             "CHECKOUT_IDENTITY_LOCKED",

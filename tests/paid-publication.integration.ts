@@ -7,7 +7,7 @@ import { publishInvitationInTransaction } from "../apps/web/src/server/publicati
 import { completeInvitation } from "./fixtures/publication";
 import { grantTestPurchase, deleteTestPurchases } from "./fixtures/payment";
 
-test("publication always needs a verified event purchase, including administrator actions", async () => {
+test("publication needs a verified event purchase when only the caller's client flag claims admin", async () => {
   const sql = getDb();
   const appUrl = process.env.APP_URL;
   process.env.APP_URL = "https://invitations.example";

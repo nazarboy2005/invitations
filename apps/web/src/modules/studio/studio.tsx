@@ -446,6 +446,8 @@ export function Studio({
   const [busy, setBusy] = useState(false);
   const [publishing, setPublishing] = useState(false);
   const [paidInvitationId, setPaidInvitationId] = useState("");
+  // UI hint only: the server independently checks current database authority.
+  const adminOwner = useRef(false);
   const [paymentOrder, setPaymentOrder] = useState<PaymentOrderView | null>(null);
   const [checkingPayment, setCheckingPayment] = useState(false);
   const [manualPaymentLink, setManualPaymentLink] = useState(false);
@@ -720,6 +722,7 @@ export function Studio({
         });
         if (response.ok) {
           const session: SessionResponse = await response.json();
+          adminOwner.current = session.user?.isAdmin === true;
           ownerId.current =
             session.user?.id ??
             (initialInvitation ? "unavailable-private-owner" : null);
@@ -1266,6 +1269,7 @@ export function Studio({
     if (
       (action === "publish" || action === "download") &&
       !adminContext &&
+      !adminOwner.current &&
       !paymentAlreadyVerified
     )
       checkoutWindow = window.open("about:blank", "_blank");
@@ -1330,6 +1334,11 @@ export function Studio({
           "Hisobni tekshirib bo‘lmadi. Qoralamangiz brauzerda saqlanmoqda.",
         );
       const session: SessionResponse = await sessionResponse.json();
+      adminOwner.current = session.user?.isAdmin === true;
+      if (adminOwner.current) {
+        checkoutWindow?.close();
+        checkoutWindow = null;
+      }
       window.dispatchEvent(new CustomEvent("session-changed", { detail: { userId: session.user?.id ?? null } }));
       if (!session.user) {
         if (!session.configured) {
@@ -1445,10 +1454,11 @@ export function Studio({
       }
       if (action === "download") {
         const saved = invitationSchema.parse(result.invitation);
-        if (!paymentAlreadyVerified) {
+        if (!paymentAlreadyVerified && (adminContext || !session.user.isAdmin)) {
           await startSavedCheckout(saved);
           return;
         }
+        // The session flag only skips the checkout UI; download authorization is server-side.
         const imageExportedAt = await downloadInvitationImage(saved, locale, studioFetch);
         const finalized = { ...saved, imageExportedAt };
         lastCloudSnapshot.current = JSON.stringify(finalized);
@@ -1557,6 +1567,8 @@ export function Studio({
         throw new Error(
           "Kirish yakunlanmadi. Telegram botidagi tasdiqlashni tekshiring.",
         );
+      const completed = await response.json();
+      adminOwner.current = completed.user?.isAdmin === true;
       void refreshFavorites();
       setAuth(null);
       setAuthIdentity(null);

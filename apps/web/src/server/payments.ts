@@ -32,6 +32,7 @@ import {
 import { toSessionUser } from "./auth";
 import { getOwnedInvitation } from "./invitations";
 import { enqueuePaymentNotifications } from "./payment-notifications";
+import { adminGrantOrderView, findAdminInvitationGrant, grantAdminInvitationAccess, isAdminInvitationOwner } from "./invitation-entitlements";
 
 type Order = {
   id: string;
@@ -71,8 +72,7 @@ export async function createCheckout(
   expectedAmountMinor: number,
   user: SessionUser,
 ) {
-  const config = nodzeConfig();
-  const order = await getDb().begin(async (tx) => {
+  const result = await getDb().begin(async (tx) => {
     const [row] =
       await tx`SELECT * FROM invitations WHERE id=${id} AND owner_id=${user.id} FOR UPDATE`;
     if (!row || row.status === "deleted")
@@ -85,13 +85,19 @@ export async function createCheckout(
         "ACCOUNT_UNAVAILABLE",
         "Hisobga kirish cheklangan.",
       );
+    const saved = invitationSchema.parse(row.data);
+    const granted = await findAdminInvitationGrant(tx, saved, user.id, {
+      allowStartTimeChange: !!saved.imageExportedAt,
+    });
+    if (granted && row.status === "published")
+      return { kind: "grant" as const, id: String(granted.id) };
     if (row.status !== "draft")
       throw new ApiError(
         409,
         "NOT_DRAFT",
         "To‘lovni faqat qoralama uchun boshlash mumkin.",
       );
-    const invitation = invitationSchema.parse(row.data);
+    const invitation = saved;
     if (invitation.revision !== revision)
       throw new ApiError(
         409,
@@ -116,6 +122,18 @@ export async function createCheckout(
         "TEMPLATE_UNAVAILABLE",
         "Dizayn mavjud emas yoki tadbirga mos emas.",
       );
+    // This branch uses the account read from the database, never user.isAdmin.
+    // Keep provider orders/verification/revenue entirely separate.
+    if (granted || await isAdminInvitationOwner(tx, user.id)) {
+      if (!granted && (template.currency !== "UZS" || Number(template.price_minor) !== expectedAmountMinor))
+        throw new ApiError(409, "PRICE_CHANGED", "Dizayn narxi o‘zgardi. Sahifani yangilang va yangi narxni tekshiring.");
+      const grant = granted ?? await grantAdminInvitationAccess(tx, invitation, user.id);
+      if (!grant)
+        throw new ApiError(503, "PRICE_UNAVAILABLE", "Dizayn narxi sozlanmagan. Keyinroq qayta urinib ko‘ring.");
+      if (templateById(invitation.templateId)?.format !== "image")
+        await publishInvitationInTransaction(tx, id, revision, user);
+      return { kind: "grant" as const, id: String(grant.id) };
+    }
     const [existing] = await tx<
       Order[]
     >`SELECT * FROM payment_orders WHERE invitation_id=${id} AND status NOT IN ('FAILED','CANCELLED','EXPIRED') FOR UPDATE`;
@@ -132,7 +150,7 @@ export async function createCheckout(
           "PRICE_CHANGED",
           `Avvalgi buyurtma narxi ${minorToDecimal(BigInt(existing.amount_minor))} so‘m. To‘lov sahifasida davom eting.`,
         );
-      return existing;
+      return { kind: "payment" as const, order: existing };
     }
     if (Number(template.price_minor) <= 0)
       throw new ApiError(
@@ -150,6 +168,7 @@ export async function createCheckout(
         "Dizayn narxi o‘zgardi. Sahifani yangilang va yangi narxni tekshiring.",
       );
     const orderId = randomUUID();
+    const config = nodzeConfig();
     const decimal = minorToDecimal(BigInt(template.price_minor));
     // Serialize decimal as a JSON number literal without binary floating point.
     const requestBody = JSON.stringify({
@@ -165,8 +184,10 @@ export async function createCheckout(
       Order[]
     >`INSERT INTO payment_orders(id,invitation_id,owner_id,template_id,template_name,identity_snapshot,amount_minor,currency,request_body,idempotency_key)
       VALUES(${orderId},${id},${user.id},${invitation.templateId},${template.name},${paymentIdentity(invitation)},${template.price_minor},'UZS',${requestBody},${"create:" + orderId}) RETURNING *`;
-    return created;
+    return { kind: "payment" as const, order: created };
   });
+  if (result.kind === "grant") return getPaymentOrder(result.id, user.id);
+  const order = result.order;
   if (!order.payment_id) {
     await paymentBudget();
     const payment = await nodzeRequest(
@@ -356,8 +377,12 @@ export async function getPaymentOrder(id: string, userId: string) {
   const [row] = await getDb()<
     Order[]
   >`SELECT p.*,CASE WHEN i.status='published' THEN i.slug END AS slug FROM payment_orders p JOIN invitations i ON i.id=p.invitation_id WHERE p.id=${id} AND p.owner_id=${userId}`;
-  if (!row) throw new ApiError(404, "NOT_FOUND", "Buyurtma topilmadi.");
-  return orderView(row);
+  if (row) return orderView(row);
+  const [grant] = await getDb()`SELECT g.*,CASE WHEN i.status='published' THEN i.slug END AS slug
+    FROM admin_invitation_grants g JOIN invitations i ON i.id=g.invitation_id AND i.owner_id=g.owner_id
+    WHERE g.id=${id} AND g.owner_id=${userId} AND i.status<>'deleted'`;
+  if (!grant) throw new ApiError(404, "NOT_FOUND", "Buyurtma topilmadi.");
+  return adminGrantOrderView(grant, grant.slug ? publicInvitationUrl(grant.slug) : null);
 }
 export async function listPaymentOrders(userId: string) {
   const rows = await getDb()<
@@ -381,6 +406,14 @@ export async function getInvitationPayment(
   const [template] =
     await getDb()`SELECT name,price_minor FROM templates WHERE id=${invitation.templateId}`;
   let order = explicitOrder ?? null;
+  if (!order) {
+    const grant = await findAdminInvitationGrant(getDb(), invitation, userId, {
+      allowStartTimeChange: !!invitation.imageExportedAt,
+    });
+    if (grant)
+      order = adminGrantOrderView(grant, invitation.status === "published" && invitation.slug
+        ? publicInvitationUrl(invitation.slug) : null);
+  }
   if (!order) {
     const [row] = await getDb()<
       Order[]
