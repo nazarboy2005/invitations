@@ -39,7 +39,7 @@ This file records durable, user-approved product requirements and a small number
 
 ## Template catalog and switching
 
-- User requirement: show higher-priced templates first in discovery and template selection; preserve curated ordering within a price tier.
+- User requirement: administrators pin and unpin templates from the admin dashboard's templates page. In discovery and template selection, pinned templates lead in latest-pin-first order regardless of price; unpinning and pinning again moves a template to the front. Unpinned templates remain ordered from highest to lowest price, preserving curation within a price tier. Do not add public pin controls or filters.
 
 - User requirement: Taklifnomalarim cards and payment-result artwork use the same static template cover and exact versioned image URL as the template catalog, sharing the browser cache in both directions. Sample names inside this artwork are acceptable; show the creator's actual names in the card text. Do not generate personalized dashboard screenshots or schedule cover generation after saving, publication, or payment.
 

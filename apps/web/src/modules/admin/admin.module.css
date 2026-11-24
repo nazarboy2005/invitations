@@ -712,6 +712,36 @@
   font-size: 12px;
   font-variant-numeric: tabular-nums;
 }
+.pinButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 44px;
+  min-width: 44px;
+  padding: 8px 10px;
+  flex-shrink: 0;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--muted);
+  font: inherit;
+  font-size: 11px;
+  cursor: pointer;
+}
+.pinButton[aria-pressed="true"] {
+  color: var(--primary);
+  background: var(--accent-soft);
+  border-color: currentColor;
+}
+.pinButton:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+.pinButton:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
 .expandIcon {
   flex-shrink: 0;
   color: var(--muted);
@@ -1052,7 +1082,16 @@
     grid-row: span 2;
   }
   .templateName {
-    grid-column: 2 / 4;
+    grid-column: 2;
+    grid-row: 1;
+  }
+  .pinButton {
+    grid-column: 3;
+    grid-row: 1;
+    padding: 8px;
+  }
+  .pinButton span {
+    display: none;
   }
   .expandIcon {
     grid-column: 4;

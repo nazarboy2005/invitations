@@ -8,9 +8,11 @@ import {
   adminError,
 } from "@/server/admin";
 import { ApiError, privateHeaders, readJson } from "@/server/api";
+import { updateTemplatePin } from "@/server/template-pinning";
 const inputSchema = z
   .object({
     published: z.boolean().optional(),
+    pinned: z.boolean().optional(),
     priceMinor: z.number().int().min(0).max(1_000_000_000_000).optional(),
     replacementTemplateId: templateIdSchema.optional(),
     categoryIds: z
@@ -35,6 +37,7 @@ const inputSchema = z
   .refine(
     (value) =>
       value.published !== undefined ||
+      value.pinned !== undefined ||
       value.priceMinor !== undefined ||
       value.categoryIds !== undefined ||
       value.supportedEventTypes !== undefined,
@@ -139,6 +142,12 @@ export async function PATCH(
         }
       }
       await tx`UPDATE templates SET published=${input.published ?? template.published},price_minor=${input.priceMinor ?? Number(template.price_minor)},replacement_template_id=${input.published === undefined ? template.replacement_template_id : input.published === false ? (input.replacementTemplateId ?? null) : null},updated_at=now() WHERE id=${id}`;
+      const pinnedOrder =
+        input.pinned === undefined
+          ? template.pinned_order == null
+            ? null
+            : String(template.pinned_order)
+          : await updateTemplatePin(tx, id, input.pinned);
       await recordAdminChange(
         tx,
         user.id,
@@ -147,11 +156,15 @@ export async function PATCH(
         {
           published: template.published,
           priceMinor: Number(template.price_minor),
+          pinnedOrder:
+            template.pinned_order == null
+              ? null
+              : String(template.pinned_order),
           categoryIds: oldCategories.map((row) => row.category_id),
           supportedEventTypes: oldEvents.map((row) => row.event_type),
           replacementTemplateId: template.replacement_template_id,
         },
-        { ...input, replaced },
+        { ...input, pinnedOrder, replaced },
       );
     });
     return NextResponse.json(

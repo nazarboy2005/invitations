@@ -9,12 +9,20 @@ import {
   type TemplateCategory,
   type TemplateDefinition,
 } from "@taklifnoma/contracts";
-import { Search, ChevronDown, ExternalLink, ImageOff } from "lucide-react";
+import {
+  Search,
+  ChevronDown,
+  ExternalLink,
+  ImageOff,
+  Pin,
+  PinOff,
+} from "lucide-react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { SoftSelect } from "@/components/soft-select";
 import { ConfirmationDialog } from "@/components/confirmation-dialog";
 import { templatePoster } from "@/modules/catalog/template-poster";
+import { orderCatalogTemplates } from "@/modules/catalog/template-order";
 import styles from "./admin.module.css";
 import { useAdminDirty } from "./admin-navigation-guard";
 
@@ -152,7 +160,7 @@ export function AdminTemplates({
     }
   }
   const unavailable = busy || !configured;
-  const filtered = templates.filter(
+  const filtered = orderCatalogTemplates(templates, "all").filter(
     (template) =>
       (status === "all" || template.published === (status === "published")) &&
       `${template.name} ${publicTemplateId(template.id)} ${template.id}`
@@ -392,6 +400,41 @@ export function AdminTemplates({
                 <span className={styles.price}>
                   {formatPrice(template.priceMinor)}
                 </span>
+                <button
+                  type="button"
+                  className={styles.pinButton}
+                  aria-pressed={template.pinnedOrder != null}
+                  aria-label={`${template.name}: ${template.pinnedOrder != null ? "mahkamlashni bekor qilish" : "boshiga mahkamlash"}`}
+                  title={
+                    template.pinnedOrder != null
+                      ? "Mahkamlashni bekor qilish"
+                      : "Boshiga mahkamlash"
+                  }
+                  disabled={unavailable}
+                  onClick={(event) => {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    void mutate(
+                      `/api/admin/templates/${encodeURIComponent(template.id)}`,
+                      "PATCH",
+                      { pinned: template.pinnedOrder == null },
+                      template.pinnedOrder != null
+                        ? "Dizayn mahkamlashdan olindi."
+                        : "Dizayn ro‘yxat boshiga mahkamlandi.",
+                    );
+                  }}
+                >
+                  {template.pinnedOrder != null ? (
+                    <PinOff size={16} aria-hidden="true" />
+                  ) : (
+                    <Pin size={16} aria-hidden="true" />
+                  )}
+                  <span>
+                    {template.pinnedOrder != null
+                      ? "Mahkamlangan"
+                      : "Mahkamlash"}
+                  </span>
+                </button>
                 <ChevronDown
                   size={18}
                   aria-hidden="true"

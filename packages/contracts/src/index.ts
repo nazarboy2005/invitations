@@ -464,6 +464,8 @@ export type TemplateDefinition = {
   categoryIds: string[];
   supportedEventTypes: EventType[];
   priceMinor: number;
+  /** Server-assigned pin sequence; newest pins lead regardless of price. */
+  pinnedOrder?: string | null;
   currency: "UZS";
   accent: string;
   /** Image templates are registered in the database; local definitions default to web. */

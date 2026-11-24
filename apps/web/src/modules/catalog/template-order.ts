@@ -58,13 +58,27 @@ function editorialCatalogTemplates(
   return ordered;
 }
 
-/** Higher prices lead; stable sorting preserves curation within each tier. */
+/** Latest pins lead; unpinned designs retain their price and curated ordering. */
+export function compareCatalogTemplates(
+  a: TemplateDefinition,
+  b: TemplateDefinition,
+): number {
+  if (a.pinnedOrder != null || b.pinnedOrder != null) {
+    if (a.pinnedOrder == null) return 1;
+    if (b.pinnedOrder == null) return -1;
+    const aOrder = BigInt(a.pinnedOrder);
+    const bOrder = BigInt(b.pinnedOrder);
+    return aOrder > bOrder ? -1 : aOrder < bOrder ? 1 : 0;
+  }
+  return b.priceMinor - a.priceMinor;
+}
+
 export function orderCatalogTemplates(
   templates: TemplateDefinition[],
   categoryId: string,
 ): TemplateDefinition[] {
   return editorialCatalogTemplates(templates, categoryId).sort(
-    (a, b) => b.priceMinor - a.priceMinor,
+    compareCatalogTemplates,
   );
 }
 
@@ -83,5 +97,5 @@ export function orderEventTemplates(
     ...compatible.filter(
       (template) => !template.categoryIds.includes("wedding"),
     ),
-  ].sort((a, b) => b.priceMinor - a.priceMinor);
+  ].sort(compareCatalogTemplates);
 }
